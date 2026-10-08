@@ -1,1 +1,1 @@
-remoteMETAFILEPICT
+typedef _remoteMETAFILEPICT remoteMETAFILEPICT;

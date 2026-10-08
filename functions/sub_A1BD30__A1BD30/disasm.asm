@@ -1,5 +1,5 @@
-0xA1BD30: push    esi
-0xA1BD31: mov     esi, dword_B36088
+0xA1BD30: push    esi; Verified module cleanup releases the shared odd-Z PathGrid point marker-template reference with InterlockedDecrement.
+0xA1BD31: mov     esi, g_PathGridPointMarkerTemplateOddZ
 0xA1BD37: test    esi, esi
 0xA1BD39: jz      short loc_A1BD57
 0xA1BD3B: lea     eax, [esi+4]

@@ -12,32 +12,31 @@ bool __usercall sub_5074F0@<al>(
         UInt32 *a3)
 {
   bool result; // al
-  float *ContainerChanges; // eax
+  ExtraContainerChanges_Data *ContainerChanges; // eax
   double v13; // st7
-  int v14; // edx
-  int v15; // [esp+4h] [ebp-Ch] BYREF
-  int v16; // [esp+8h] [ebp-8h]
-  UInt16 v17[2]; // [esp+Ch] [ebp-4h] BYREF
+  int v14; // [esp+4h] [ebp-Ch] BYREF
+  int v15; // [esp+8h] [ebp-8h]
+  UInt16 v16[2]; // [esp+Ch] [ebp-4h] BYREF
 
-  *(_DWORD *)v17 = 0;
-  v15 = 0;
-  result = Script_ExtractArgs(a1, a5, a3, a4, a7, a8, l, v17, &v15);
-  if ( result )
+  *(_DWORD *)v16 = 0; /*0x507521*/
+  v14 = 0; /*0x507529*/
+  result = Script_ExtractArgs(a1, a5, a3, a4, a7, a8, l, v16, &v14); /*0x507531*/
+  if ( result ) /*0x50753b*/
   {
-    LOBYTE(v16) = v15 != 0;
-    if ( a4 )
+    LOBYTE(v15) = v14 != 0; /*0x50754e*/
+    if ( a4 ) /*0x507555*/
     {
-      if ( a4 != (TESObjectREFR *)0xFFFFFFBC )
+      if ( a4 != (TESObjectREFR *)0xFFFFFFBC ) /*0x50755c*/
       {
-        ContainerChanges = (float *)ExtraDataList_GetContainerChanges(&a4->member.baseExtraList);
-        if ( ContainerChanges )
+        ContainerChanges = ExtraDataList_GetContainerChanges(&a4->member.baseExtraList); /*0x50755e*/
+        if ( ContainerChanges ) /*0x507565*/
         {
-          v13 = sub_492E70(ContainerChanges, st5_0, st7_0, a2, a4, *(TESForm **)v17, 0, v16, 0);
-          sub_665260((TESObjectREFR *)TESDataHandler_g_PlayerRef, v13, v14, (PlayerCharacter *)a4);
+          v13 = sub_492E70(ContainerChanges, st5_0, st7_0, a2, a4, *(TESForm **)v16, 0, v15, 0); /*0x507578*/
+          sub_665260((TESObjectREFR *)reference, v13, (PlayerCharacter *)a4); /*0x507586*/
         }
       }
     }
-    return 1;
+    return 1; /*0x50758b*/
   }
-  return result;
+  return result; /*0x50753d*/
 }

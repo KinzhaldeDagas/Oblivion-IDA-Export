@@ -72,14 +72,14 @@
 0x75DD6C: lea     ecx, [esp+20h+var_4]
 0x75DD70: push    ecx
 0x75DD71: push    4
-0x75DD73: lea     edx, [esp+28h+var_8]
+0x75DD73: lea     edx, [esp+28h+capacity]
 0x75DD77: push    edx
 0x75DD78: push    eax
 0x75DD79: mov     eax, [eax+4]
 0x75DD7C: mov     [esp+30h+var_4], 4
 0x75DD84: call    eax
 0x75DD86: add     esp, 14h
-0x75DD89: cmp     [esp+1Ch+var_8], ebx
+0x75DD89: cmp     [esp+1Ch+capacity], ebx
 0x75DD8D: jbe     short loc_75DDD9
 0x75DD8F: push    10h; Size
 0x75DD91: call    FormHeapAlloc
@@ -94,11 +94,11 @@
 0x75DDB5: mov     [eax+4], ebx
 0x75DDB8: jmp     short loc_75DDBC
 0x75DDBA: xor     eax, eax
-0x75DDBC: mov     ecx, [esp+1Ch+var_8]
-0x75DDC0: push    ecx
-0x75DDC1: mov     ecx, eax
+0x75DDBC: mov     ecx, [esp+1Ch+capacity]
+0x75DDC0: push    ecx; capacity
+0x75DDC1: mov     ecx, eax; self
 0x75DDC3: mov     [esp+20h+var_4], eax
-0x75DDC7: call    sub_523B10
+0x75DDC7: call    NiTObjectArray_Resize16
 0x75DDCC: lea     edx, [esp+1Ch+var_4]
 0x75DDD0: push    edx
 0x75DDD1: push    esi

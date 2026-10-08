@@ -9,11 +9,11 @@ void __thiscall AbsorbEffect::AbsorbEffect(
         int a8,
         int a9,
         int a10,
-        int a11,
-        int a12,
-        int a13)
+        MagicCaster *a11,
+        MagicItem *a12,
+        EffectItem *a13)
 {
-  ValueModifierEffect_constr(this, a11, a12, a13);
-  this->vtbl = (ActiveEffectVtbl *)&AbsorbEffect::`vftable';
-  JUMPOUT(0x68CDDD);
+  ValueModifierEffect_constr(this, a11, a12, a13); /*0x68cdcc*/
+  this->vtbl = (ActiveEffectVtbl *)&AbsorbEffect::`vftable'; /*0x68cdd3*/
+  JUMPOUT(0x68CDDD); /*0x68cddd*/
 }

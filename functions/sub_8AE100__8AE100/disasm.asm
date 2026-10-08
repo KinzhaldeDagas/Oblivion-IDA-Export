@@ -1,4 +1,4 @@
-0x8AE100: push    ebp
+0x8AE100: push    ebp; TES4 authoritative: character support check. Builds support/contact candidates, classifies support against up direction/slope tolerance, and writes support status/normal data to output block.
 0x8AE101: mov     ebp, esp
 0x8AE103: and     esp, 0FFFFFFF0h
 0x8AE106: sub     esp, 0D4h
@@ -14,7 +14,7 @@
 0x8AE12D: jnb     short loc_8AE153
 0x8AE12F: mov     edi, eax
 0x8AE131: mov     ecx, [edi+1A4h]
-0x8AE137: mov     dword ptr [ecx], offset aTtchecksupport; "TtcheckSupport"
+0x8AE137: mov     dword ptr [ecx], offset aTtchecksupport; Profiler label 'TtcheckSupport'; confirms this routine is the controller support-ground classification pass.
 0x8AE13D: rdtsc
 0x8AE13F: mov     [esp+0E0h+var_CC], eax
 0x8AE143: mov     eax, [esp+0E0h+var_CC]
@@ -24,7 +24,7 @@
 0x8AE153: mov     ecx, [ebp+arg_8]
 0x8AE156: push    ecx
 0x8AE157: mov     ecx, esi
-0x8AE159: call    sub_8AD070
+0x8AE159: call    hkpCharacterProxy_CollectSupportContacts; TES4 authoritative: collects support contacts for 0x8AE100. Temporarily offsets the low-level collision object by wrapper vertical adjustment (+0x58 + +0x5C), calls object vfunc +0x34 and then all-contact collection, then restores the old value.
 0x8AE15E: mov     edx, [esi+64h]
 0x8AE161: mov     eax, [esi+78h]
 0x8AE164: mov     ecx, ds:0BA9DE4h
@@ -83,7 +83,7 @@
 0x8AE20B: push    edx; float
 0x8AE20C: lea     edi, [esp+0E8h+var_C4]
 0x8AE210: mov     eax, ebx
-0x8AE212: call    sub_8AC3C0
+0x8AE212: call    hkpCharacterProxy_ProjectManifoldContactToSurfaceConstraint; TES4 authoritative: converts a 0x40-byte manifold/contact surface into a support surface constraint when its dot against the up/support basis is between 0.01 and the proxy slope limit.
 0x8AE217: mov     edx, [esp+0E8h+var_C8]
 0x8AE21B: mov     ecx, [esp+0E8h+var_CC]
 0x8AE21F: mov     eax, [esi+78h]
@@ -283,14 +283,14 @@
 0x8AE4B3: push    ecx
 0x8AE4B4: lea     edx, [esp+0E4h+var_88+8]
 0x8AE4B8: push    edx
-0x8AE4B9: call    sub_8EC790
+0x8AE4B9: call    hkSurfaceConstraintUtil_CalcSupportMotion; Runs active-surface solver over projected support constraints; result is used only for support status 0/1/2 classification, not a mantle snap.
 0x8AE4BE: mov     edx, [ebp+arg_4]
 0x8AE4C1: movaps  xmm0, [esp+0E8h+var_98+8]
 0x8AE4C6: mov     eax, [ebp+arg_0]
 0x8AE4C9: movaps  xmm2, [esp+0E8h+var_20]
-0x8AE4D1: movaps  xmmword ptr [edx+20h], xmm0
+0x8AE4D1: movaps  xmmword ptr [edx+20h], xmm0; Initializes output support vectors: out+0x20 and out+0x10 start as zero before support classification.
 0x8AE4D5: movaps  xmmword ptr [edx+10h], xmm0
-0x8AE4D9: movaps  xmm3, xmmword ptr [eax]
+0x8AE4D9: movaps  xmm3, xmmword ptr [eax]; Begin support-motion classification: a2 is the up/support basis vector passed by the controller; v104 is the surface-constraint solver output.
 0x8AE4DC: movaps  xmm0, xmmword ptr ds:0A372D0h
 0x8AE4E3: movaps  xmm1, xmm2
 0x8AE4E6: subps   xmm1, xmm3
@@ -302,7 +302,7 @@
 0x8AE502: add     esp, 8
 0x8AE505: movmskps ecx, xmm0
 0x8AE508: test    cl, 7
-0x8AE50B: jz      loc_8AE74D
+0x8AE50B: jz      loc_8AE74D; If the support-motion vector is effectively unchanged from the up vector (all xyz deltas <= 0.001), no usable support is reported.
 0x8AE511: movaps  xmm0, xmm2
 0x8AE514: mulps   xmm0, xmm2
 0x8AE517: movaps  xmm1, xmm0
@@ -317,9 +317,9 @@
 0x8AE539: fcomp   dword ptr ds:0A37080h
 0x8AE53F: fnstsw  ax
 0x8AE541: test    ah, 5
-0x8AE544: jnp     loc_8AE608
+0x8AE544: jnp     loc_8AE608; If the support-motion vector length squared is below 0.001, treat support as accepted status 2 without slope rejection.
 0x8AE54A: movaps  xmm1, xmm0
-0x8AE54D: fld     dword ptr [esi+0A4h]
+0x8AE54D: fld     dword ptr [esi+0A4h]; Loads proxy+0xA4 max-slope cosine, computed as cos(cinfo+0x64) by 0x8AC1E0.
 0x8AE553: shufps  xmm1, xmm0, 55h ; 'U'
 0x8AE557: addss   xmm1, xmm0
 0x8AE55B: movaps  xmm4, xmm0
@@ -362,10 +362,10 @@
 0x8AE5F7: fnstsw  ax
 0x8AE5F9: fstp    st
 0x8AE5FB: test    ah, 41h
-0x8AE5FE: jnz     short loc_8AE608
-0x8AE600: mov     dword ptr [edx], 1
+0x8AE5FE: jnz     short loc_8AE608; Support status slope decision: accepts status 2 when cos(maxSlope)^2 <= 1 - dot(normalizedSupportMotion, up)^2; otherwise status 1. Equivalent to support-motion tilt staying within the configured max slope relation.
+0x8AE600: mov     dword ptr [edx], 1; Support status 1: contact/support motion exists but fails the max-slope acceptance test.
 0x8AE606: jmp     short loc_8AE60E
-0x8AE608: mov     dword ptr [edx], 2
+0x8AE608: mov     dword ptr [edx], 2; Support status 2: accepted support/ground result. 0x896000 can turn this into flag 0x100 when byte +0x250 is clear.
 0x8AE60E: mov     eax, dword ptr [esp+0E0h+var_40+0Ch]
 0x8AE615: test    eax, eax
 0x8AE617: mov     [esp+0E0h+var_C8], 0
@@ -375,7 +375,7 @@
 0x8AE62D: mov     esi, dword ptr [esp+0E0h+var_C4]
 0x8AE631: sub     ebx, ecx
 0x8AE633: mov     edi, eax
-0x8AE635: cmp     byte ptr [ebx+ecx], 0
+0x8AE635: cmp     byte ptr [ebx+ecx], 0; Per-contact accumulation loop only considers contacts marked usable by the support solver.
 0x8AE639: jz      short loc_8AE69B
 0x8AE63B: mov     eax, [ebp+arg_0]
 0x8AE63E: movaps  xmm2, xmmword ptr [eax]
@@ -394,16 +394,16 @@
 0x8AE66C: fcomp   dword ptr ds:0A97C9Ch
 0x8AE672: fnstsw  ax
 0x8AE674: test    ah, 5
-0x8AE677: jp      short loc_8AE69B
+0x8AE677: jp      short loc_8AE69B; Only contacts whose normal has dot(contactNormal, up) < -0.08 are accumulated into output support normal/point. Havok contact normal orientation is opposite the controller up for supporting contacts.
 0x8AE679: movaps  xmm0, xmmword ptr [edx+10h]
 0x8AE67D: mov     eax, [esp+0E0h+var_C8]
 0x8AE681: addps   xmm0, xmm1
-0x8AE684: movaps  xmmword ptr [edx+10h], xmm0
+0x8AE684: movaps  xmmword ptr [edx+10h], xmm0; Accumulates support normal into out+0x10 for accepted support candidates.
 0x8AE688: movaps  xmm0, xmmword ptr [ecx]
 0x8AE68B: movaps  xmm1, xmmword ptr [edx+20h]
 0x8AE68F: inc     eax
 0x8AE690: addps   xmm1, xmm0
-0x8AE693: movaps  xmmword ptr [edx+20h], xmm1
+0x8AE693: movaps  xmmword ptr [edx+20h], xmm1; Accumulates support point/vector into out+0x20 for accepted support candidates.
 0x8AE697: mov     [esp+0E0h+var_C8], eax
 0x8AE69B: add     esi, 40h ; '@'
 0x8AE69E: add     ecx, 10h
@@ -440,16 +440,16 @@
 0x8AE721: movaps  xmm2, xmm0
 0x8AE724: shufps  xmm2, xmm0, 0
 0x8AE728: mulps   xmm2, xmm1
-0x8AE72B: movaps  xmmword ptr [edx+10h], xmm2
+0x8AE72B: movaps  xmmword ptr [edx+10h], xmm2; Normalizes accumulated support normal at out+0x10.
 0x8AE72F: movaps  xmm1, xmmword ptr [edx+20h]
 0x8AE733: fstp    [esp+0E0h+var_CC]
 0x8AE737: movss   xmm0, [esp+0E0h+var_CC]
 0x8AE73D: movaps  xmm2, xmm0
 0x8AE740: shufps  xmm2, xmm0, 0
 0x8AE744: mulps   xmm2, xmm1
-0x8AE747: movaps  xmmword ptr [edx+20h], xmm2
+0x8AE747: movaps  xmmword ptr [edx+20h], xmm2; Averages accumulated support point/vector at out+0x20 by accepted contact count.
 0x8AE74B: jmp     short loc_8AE753
-0x8AE74D: mov     dword ptr [edx], 0
+0x8AE74D: mov     dword ptr [edx], 0; Writes support status 0: no usable support contact.
 0x8AE753: mov     ecx, large fs:2Ch
 0x8AE75A: mov     edx, ds:0BA9DE4h
 0x8AE760: mov     eax, [ecx+edx*4]

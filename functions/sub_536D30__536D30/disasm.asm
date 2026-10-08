@@ -25,7 +25,7 @@
 0x536D68: mov     ecx, esi
 0x536D6A: call    sub_5369D0
 0x536D6F: push    esi
-0x536D70: call    FormHeapFree
+0x536D70: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x536D75: add     esp, 4
 0x536D78: pop     edi
 0x536D79: pop     esi

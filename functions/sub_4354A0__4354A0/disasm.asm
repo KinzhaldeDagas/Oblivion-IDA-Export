@@ -1,9 +1,9 @@
 0x4354A0: push    esi
 0x4354A1: mov     esi, ecx
-0x4354A3: mov     ecx, [esi+20h]
+0x4354A3: mov     ecx, [esi+20h]; this
 0x4354A6: test    ecx, ecx
 0x4354A8: jz      short loc_4354D6
-0x4354AA: call    sub_4D6FD0
+0x4354AA: call    TESObjectREFR_HasVisibleDistantFlag; Verified local operation: returns whether TESForm flags at +0x08 contain bit 0x8000. Probable role: visible-distant flag, corroborated by the identical local bit check in Fallout's named TESObjectREFR::GetVisibleDistant and by Oblivion's distant model queue callers. Divergence: Fallout also falls back to the base form's bit when the reference bit is clear; this Oblivion helper checks only the reference's own flags.
 0x4354AF: test    al, al
 0x4354B1: jz      short loc_4354D6
 0x4354B3: mov     ecx, [esi+20h]

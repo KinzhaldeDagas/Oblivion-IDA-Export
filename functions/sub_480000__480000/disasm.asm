@@ -15,16 +15,16 @@
 0x480027: mov     eax, [esp+84h+arg_4]
 0x48002E: mov     edi, ds:0B3F928h
 0x480034: push    eax
-0x480035: lea     ecx, [esp+88h+var_50]
+0x480035: lea     ecx, [esp+88h+pixelFormat]
 0x480039: call    sub_70F010
 0x48003E: mov     esi, [esp+84h+arg_0]
 0x480045: test    esi, esi
 0x480047: jz      loc_4802C9
 0x48004D: test    edi, edi
 0x48004F: jz      loc_4802C9
-0x480055: lea     ecx, [esp+84h+var_50]
-0x480059: push    ecx
-0x48005A: call    sub_76BEF0
+0x480055: lea     ecx, [esp+84h+pixelFormat]
+0x480059: push    ecx; pixelFormat
+0x48005A: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x48005F: add     esp, 4
 0x480062: cmp     eax, 31545844h
 0x480067: mov     [esp+84h+var_6C], eax
@@ -92,7 +92,7 @@
 0x48012E: jz      short loc_480143
 0x480130: push    1
 0x480132: push    esi
-0x480133: lea     edx, [esp+8Ch+var_50]
+0x480133: lea     edx, [esp+8Ch+pixelFormat]
 0x480137: push    edx
 0x480138: push    ebp
 0x480139: push    ebx
@@ -148,12 +148,12 @@
 0x4801C2: imul    edx, [esp+84h+var_58]
 0x4801C7: mov     ecx, [edi+5Ch]
 0x4801CA: mov     eax, [esp+84h+Src]
-0x4801CE: push    edx; Size
+0x4801CE: push    edx; byteCount
 0x4801CF: mov     edx, [ecx+esi*4]
 0x4801D2: add     edx, [edi+50h]
-0x4801D5: push    eax; Src
-0x4801D6: push    edx; Dst
-0x4801D7: call    _memcpy
+0x4801D5: push    eax; source
+0x4801D6: push    edx; destination
+0x4801D7: call    _memcpy;
 0x4801DC: mov     ecx, [edi+54h]
 0x4801DF: mov     ecx, [ecx+esi*4]
 0x4801E2: mov     edx, [edi+58h]
@@ -193,11 +193,11 @@
 0x480244: mov     eax, 4
 0x480249: imul    eax, [esp+84h+var_58]
 0x48024E: shr     eax, 2
-0x480251: push    eax; Size
+0x480251: push    eax; byteCount
 0x480252: mov     eax, [esp+88h+Src]
-0x480256: push    eax; Src
-0x480257: push    ecx; Dst
-0x480258: call    _memcpy
+0x480256: push    eax; source
+0x480257: push    ecx; destination
+0x480258: call    _memcpy;
 0x48025D: add     esp, 0Ch
 0x480260: mov     eax, [esp+84h+var_70]
 0x480264: mov     ecx, [eax]
@@ -222,7 +222,7 @@
 0x480295: mov     edx, [ecx+8]
 0x480298: push    eax
 0x480299: call    edx
-0x48029B: push    offset dword_B256D0; a2
+0x48029B: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x4802A0: push    edi; a1
 0x4802A1: call    NiSourceTexture__LoadTexturePixelData
 0x4802A6: add     esp, 8
@@ -248,3 +248,15 @@
 0x4802DA: pop     ebx
 0x4802DB: add     esp, 70h
 0x4802DE: retn
+0x9AF5D0: mov     eax, [ebp-5Ch]
+0x9AF5D3: push    eax
+0x9AF5D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF5D9: pop     ecx
+0x9AF5DA: retn
+0x9AF5DB: mov     edx, [esp+arg_4]
+0x9AF5DF: lea     eax, [edx-74h]
+0x9AF5E2: mov     ecx, [edx-78h]
+0x9AF5E5: xor     ecx, eax
+0x9AF5E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF5EC: mov     eax, offset stru_ADBB74
+0x9AF5F1: jmp     ___CxxFrameHandler3

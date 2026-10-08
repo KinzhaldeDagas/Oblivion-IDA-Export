@@ -1,16 +1,36 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "__m256d",
+  "definition": "union __declspec(align(32)) __m256d\n{\ndouble m256d_f64[4];\n}\n",
   "id": 18374686479672025411,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m256d_f64",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "double[4]"
     }
   ],
   "name": "__m256d",
+  "ordinal": 761,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 32
 }

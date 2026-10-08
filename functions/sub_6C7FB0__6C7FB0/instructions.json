@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x6C809F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x6C816E",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1240,5 +1240,155 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C7590",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7593",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7598",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C759B",
+    "line": "add     ecx, 20h ; ' '; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C759E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C75A3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C75A6",
+    "line": "add     ecx, 64h ; 'd'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C75A9",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C75AE",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C75B1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C75B2",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C75B7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C75B8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C75B9",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C75BC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C75BD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C75C2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C75C3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C75C4",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C75C8",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C75CB",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C75CE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C75D0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C75D5",
+    "line": "mov     eax, offset stru_AEF9D0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C75DA",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

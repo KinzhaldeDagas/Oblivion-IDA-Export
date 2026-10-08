@@ -1,15 +1,15 @@
 0x4F47B0: fldz
-0x4F47B2: mov     ecx, [esp+arg_0]
+0x4F47B2: mov     ecx, [esp+arg_0]; this
 0x4F47B6: test    ecx, ecx
 0x4F47B8: push    esi
 0x4F47B9: mov     esi, [esp+4+arg_C]
 0x4F47BD: fstp    qword ptr [esi]
 0x4F47BF: jz      short loc_4F47DB
-0x4F47C1: call    sub_4D7740
+0x4F47C1: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x4F47C6: test    eax, eax
 0x4F47C8: jz      short loc_4F47DB
-0x4F47CA: mov     ecx, eax
-0x4F47CC: call    sub_429990
+0x4F47CA: mov     ecx, eax; this
+0x4F47CC: call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.
 0x4F47D1: mov     [esp+4+arg_C], eax
 0x4F47D5: fild    [esp+4+arg_C]
 0x4F47D9: fstp    qword ptr [esi]

@@ -1,4 +1,4 @@
-0x7655F0: sub     esp, 0E8h
+0x7655F0: sub     esp, 0E8h; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.
 0x7655F6: push    ebp
 0x7655F7: mov     ebp, [esp+0ECh+arg_0]
 0x7655FE: push    esi
@@ -7,12 +7,12 @@
 0x765607: push    edi
 0x765608: mov     edi, [ebp+18h]
 0x76560B: mov     [esp+0F4h+var_D4], esi
-0x76560F: call    TESObjectREFR_GetNiNode
+0x76560F: call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.
 0x765614: cmp     edi, eax
 0x765616: jz      loc_765984
 0x76561C: mov     ecx, [esi+8B0h]; this
 0x765622: push    ebx
-0x765623: call    TESObjectREFR_GetNiNode
+0x765623: call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.
 0x765628: mov     esi, [esp+0F8h+arg_C]
 0x76562F: cmp     esi, 3
 0x765632: mov     ecx, [ebp+20h]
@@ -31,7 +31,7 @@
 0x76565E: cmp     esi, edx
 0x765660: jz      loc_765703
 0x765666: push    ecx
-0x765667: call    FormHeapFree
+0x765667: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76566C: add     esp, 4
 0x76566F: xor     ecx, ecx
 0x765671: cmp     esi, 4
@@ -89,29 +89,29 @@
 0x7656FD: mov     [ebp+24h], esi
 0x765700: mov     [ebp+20h], edx
 0x765703: mov     ecx, [ebp+10h]
-0x765706: lea     eax, [esp+0F8h+var_D0]
+0x765706: lea     eax, [esp+0F8h+local]
 0x76570A: push    eax
 0x76570B: add     ecx, 64h ; 'd'
-0x76570E: call    sub_718A80
+0x76570E: call    sub_718A80;
 0x765713: mov     eax, [ebp+8]
-0x765716: lea     ecx, [esp+0F8h+var_D0]
-0x76571A: push    ecx
-0x76571B: lea     edx, [esp+0FCh+var_34]
-0x765722: push    edx
-0x765723: lea     ecx, [eax+0Ch]
-0x765726: call    sub_53D7A0
+0x765716: lea     ecx, [esp+0F8h+local]
+0x76571A: push    ecx; local
+0x76571B: lea     edx, [esp+0FCh+out]
+0x765722: push    edx; out
+0x765723: lea     ecx, [eax+0Ch]; parent
+0x765726: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x76572B: mov     esi, eax
 0x76572D: mov     ecx, 0Dh
 0x765732: lea     edi, [esp+0F8h+var_68]
 0x765739: rep movsd
 0x76573B: lea     eax, [esp+0F8h+var_68]
-0x765742: push    eax
-0x765743: lea     ecx, [esp+0FCh+var_34]
-0x76574A: push    ecx
-0x76574B: mov     ecx, [esp+100h+arg_4]
-0x765752: call    sub_53D7A0
+0x765742: push    eax; local
+0x765743: lea     ecx, [esp+0FCh+out]
+0x76574A: push    ecx; out
+0x76574B: mov     ecx, [esp+100h+parent]; parent
+0x765752: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x765757: mov     esi, eax
-0x765759: fld     [esp+0F8h+var_38]
+0x765759: fld     [esp+0F8h+var_68.scale]
 0x765760: mov     ecx, 0Dh
 0x765765: fcom    qword ptr ds:0A88D40h
 0x76576B: lea     edi, [esp+0F8h+var_9C]
@@ -142,15 +142,15 @@
 0x7657B9: fstp    dword ptr [eax+2Ch]
 0x7657BC: fld1
 0x7657BE: fstp    dword ptr [eax+3Ch]
-0x7657C1: fld     [esp+0F8h+var_6C]
+0x7657C1: fld     [esp+0F8h+var_9C.scale]
 0x7657C8: push    ecx
 0x7657C9: fstp    [esp+0FCh+var_FC]; float
-0x7657CC: lea     edx, [esp+0FCh+var_78]
+0x7657CC: lea     edx, [esp+0FCh+var_9C.pos]
 0x7657D3: push    edx; int
 0x7657D4: lea     ecx, [esp+100h+var_9C]
 0x7657D8: push    ecx; int
 0x7657D9: push    eax; int
-0x7657DA: call    sub_761BE0
+0x7657DA: call    sub_761BE0; MoonSugarEffect decode: matrix packer without camera-relative translation subtraction. Used for cached skin/world transforms that should keep raw translation.
 0x7657DF: add     esp, 10h
 0x7657E2: mov     esi, [ebp+14h]
 0x7657E5: mov     edx, [esp+0F8h+var_E4]
@@ -165,14 +165,13 @@
 0x765804: mov     [esp+0F8h+var_E8], eax
 0x765808: add     ebx, 20h ; ' '
 0x76580B: jmp     short loc_765810
-0x76580D: align 10h
 0x765810: mov     eax, [esp+0F8h+var_E8]
-0x765814: push    eax
-0x765815: lea     ecx, [esp+0FCh+var_D0]
-0x765819: push    ecx
+0x765814: push    eax; local
+0x765815: lea     ecx, [esp+0FCh+local]
+0x765819: push    ecx; out
 0x76581A: mov     ecx, [esi+ebp*4]
-0x76581D: add     ecx, 64h ; 'd'
-0x765820: call    sub_53D7A0
+0x76581D: add     ecx, 64h ; 'd'; parent
+0x765820: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x765825: mov     ecx, [esi+ebp*4]
 0x765828: fld     dword ptr [ecx+94h]
 0x76582E: fcomp   qword ptr ds:0A88D40h
@@ -187,77 +186,77 @@
 0x76584E: mov     byte ptr [esp+0F8h+var_E0], 1
 0x765853: cmp     [esp+0F8h+arg_10], 0
 0x76585B: jnz     short loc_765888
-0x76585D: lea     edx, [esp+0F8h+var_D0]
-0x765861: push    edx
-0x765862: lea     eax, [esp+0FCh+var_34]
-0x765869: push    eax
-0x76586A: lea     ecx, [esp+100h+var_9C]
-0x76586E: call    sub_53D7A0
+0x76585D: lea     edx, [esp+0F8h+local]
+0x765861: push    edx; local
+0x765862: lea     eax, [esp+0FCh+out]
+0x765869: push    eax; out
+0x76586A: lea     ecx, [esp+100h+var_9C]; parent
+0x76586E: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x765873: mov     ecx, 0Dh
 0x765878: mov     esi, eax
-0x76587A: lea     edi, [esp+0F8h+var_D0]
+0x76587A: lea     edi, [esp+0F8h+local]
 0x76587E: rep movsd
 0x765880: mov     edi, [esp+0F8h+var_E4]
 0x765884: mov     esi, [esp+0F8h+var_D8]
 0x765888: cmp     [esp+0F8h+arg_C], 4
 0x765890: jnz     short loc_7658D1
 0x765892: cmp     [esp+0F8h+arg_8], 0
-0x76589A: fld     [esp+0F8h+var_A0]
+0x76589A: fld     [esp+0F8h+local.scale]
 0x76589E: push    ecx
 0x76589F: fstp    [esp+0FCh+var_FC]; float
 0x7658A2: jz      short loc_7658BC
-0x7658A4: lea     ecx, [esp+0FCh+var_AC]
+0x7658A4: lea     ecx, [esp+0FCh+local.pos]
 0x7658A8: push    ecx; int
-0x7658A9: lea     edx, [esp+100h+var_D0]
+0x7658A9: lea     edx, [esp+100h+local]
 0x7658AD: push    edx; int
 0x7658AE: push    edi; int
-0x7658AF: call    sub_761B60
+0x7658AF: call    sub_761B60; MoonSugarEffect decode: alternate D3D matrix packer with translation in slots 3/7/11, still camera-relative. Used by some skin matrix formats.
 0x7658B4: add     esp, 10h
 0x7658B7: jmp     loc_76594E
-0x7658BC: lea     eax, [esp+0FCh+var_AC]
+0x7658BC: lea     eax, [esp+0FCh+local.pos]
 0x7658C0: push    eax; int
-0x7658C1: lea     ecx, [esp+100h+var_D0]
+0x7658C1: lea     ecx, [esp+100h+local]
 0x7658C5: push    ecx; int
 0x7658C6: push    edi; int
-0x7658C7: call    sub_761AE0
+0x7658C7: call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.
 0x7658CC: add     esp, 10h
 0x7658CF: jmp     short loc_76594E
-0x7658D1: fld     [esp+0F8h+var_D0]
-0x7658D5: fld     [esp+0F8h+var_A0]
+0x7658D1: fld     [esp+0F8h+local.rot.data]
+0x7658D5: fld     [esp+0F8h+local.scale]
 0x7658D9: fld     st
 0x7658DB: fmulp   st(2), st
 0x7658DD: fxch    st(1)
 0x7658DF: fstp    dword ptr [ebx-20h]
-0x7658E2: fld     [esp+0F8h+var_C4]
+0x7658E2: fld     [esp+0F8h+local.rot.data+0Ch]
 0x7658E6: fmul    st, st(1)
 0x7658E8: fstp    dword ptr [ebx-10h]
-0x7658EB: fld     [esp+0F8h+var_B8]
+0x7658EB: fld     [esp+0F8h+local.rot.data+18h]
 0x7658EF: fmul    st, st(1)
 0x7658F1: fstp    dword ptr [ebx]
-0x7658F3: fld     [esp+0F8h+var_CC]
+0x7658F3: fld     [esp+0F8h+local.rot.data+4]
 0x7658F7: fmul    st, st(1)
 0x7658F9: fstp    dword ptr [ebx-1Ch]
-0x7658FC: fld     [esp+0F8h+var_C0]
+0x7658FC: fld     [esp+0F8h+local.rot.data+10h]
 0x765900: fmul    st, st(1)
 0x765902: fstp    dword ptr [ebx-0Ch]
-0x765905: fld     [esp+0F8h+var_B4]
+0x765905: fld     [esp+0F8h+local.rot.data+1Ch]
 0x765909: fmul    st, st(1)
 0x76590B: fstp    dword ptr [ebx+4]
-0x76590E: fld     [esp+0F8h+var_C8]
+0x76590E: fld     [esp+0F8h+local.rot.data+8]
 0x765912: fmul    st, st(1)
 0x765914: fstp    dword ptr [ebx-18h]
-0x765917: fld     [esp+0F8h+var_BC]
+0x765917: fld     [esp+0F8h+local.rot.data+14h]
 0x76591B: fmul    st, st(1)
 0x76591D: fstp    dword ptr [ebx-8]
-0x765920: fmul    [esp+0F8h+var_B0]
+0x765920: fmul    [esp+0F8h+local.rot.data+20h]
 0x765924: fstp    dword ptr [ebx+8]
-0x765927: fld     [esp+0F8h+var_AC]
+0x765927: fld     [esp+0F8h+local.pos.x]
 0x76592B: fsub    dword ptr ds:0B3F92Ch
 0x765931: fstp    dword ptr [ebx-14h]
-0x765934: fld     [esp+0F8h+var_A8]
+0x765934: fld     [esp+0F8h+local.pos.y]
 0x765938: fsub    dword ptr ds:0B3F930h
 0x76593E: fstp    dword ptr [ebx-4]
-0x765941: fld     [esp+0F8h+var_A4]
+0x765941: fld     [esp+0F8h+local.pos.z]
 0x765945: fsub    dword ptr ds:0B3F934h
 0x76594B: fstp    dword ptr [ebx+0Ch]
 0x76594E: add     [esp+0F8h+var_E8], 4Ch ; 'L'

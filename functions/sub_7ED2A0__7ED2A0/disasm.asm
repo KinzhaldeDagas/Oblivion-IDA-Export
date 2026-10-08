@@ -1,4 +1,4 @@
-0x7ED2A0: sub     esp, 8
+0x7ED2A0: sub     esp, 8; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.
 0x7ED2A3: push    ebp
 0x7ED2A4: mov     ebp, ecx
 0x7ED2A6: mov     eax, [ebp+70h]
@@ -24,7 +24,7 @@
 0x7ED2DB: lea     edx, [esp+18h+var_4]
 0x7ED2DF: push    edx
 0x7ED2E0: mov     ecx, edi
-0x7ED2E2: call    sub_405AD0
+0x7ED2E2: call    ShadowSceneLight_GetLightRef
 0x7ED2E7: mov     eax, [eax]
 0x7ED2E9: or      [esp+18h+var_8], 1
 0x7ED2EE: test    byte ptr [eax+18h], 1
@@ -63,7 +63,7 @@
 0x7ED34B: lea     edx, [esp+18h+var_4]
 0x7ED34F: push    edx
 0x7ED350: mov     ecx, edi
-0x7ED352: call    sub_405AD0
+0x7ED352: call    ShadowSceneLight_GetLightRef
 0x7ED357: mov     eax, [eax]
 0x7ED359: or      [esp+18h+var_8], 2
 0x7ED35E: test    byte ptr [eax+18h], 1

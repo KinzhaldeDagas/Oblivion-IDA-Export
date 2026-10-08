@@ -42,7 +42,7 @@
 0x43D7DF: mov     edx, [esi+14h]
 0x43D7E2: mov     cl, 10h
 0x43D7E4: call    __allshr
-0x43D7E9: mov     ecx, ModelLoaderPtr
+0x43D7E9: mov     ecx, ds:0B33A1Ch
 0x43D7EF: push    0
 0x43D7F1: push    1
 0x43D7F3: push    0
@@ -70,30 +70,30 @@
 0x43D827: push    1
 0x43D829: mov     ecx, edi
 0x43D82B: call    eax
-0x43D82D: mov     [esp+4Ch+var_35], 1
+0x43D82D: mov     [esp+50h+var_39], 1
 0x43D832: mov     ecx, [esi+24h]
 0x43D835: call    sub_415EB0
 0x43D83A: mov     eax, [esi+20h]
 0x43D83D: test    eax, eax
 0x43D83F: jz      short loc_43D84A
 0x43D841: add     eax, 0Ch
-0x43D844: mov     [esp+4Ch+var_34], eax
+0x43D844: mov     [esp+18h], eax
 0x43D848: jmp     short loc_43D852
-0x43D84A: mov     [esp+4Ch+var_34], 0
-0x43D852: mov     eax, [esp+4Ch+var_34]
+0x43D84A: mov     dword ptr [esp+18h], 0
+0x43D852: mov     eax, [esp+18h]
 0x43D856: cmp     dword ptr [eax+8], 0
 0x43D85A: jnz     short loc_43D866
 0x43D85C: cmp     dword ptr [eax+4], 0
 0x43D860: jz      loc_43DBDB
 0x43D866: test    eax, eax
 0x43D868: jz      loc_43DBDB
-0x43D86E: mov     ecx, [esp+4Ch+var_34]
+0x43D86E: mov     ecx, [esp+18h]
 0x43D872: mov     eax, [ecx+4]
 0x43D875: mov     ebp, [eax+1Ch]
 0x43D878: test    dword ptr [ebp+58h], 70000h
-0x43D87F: mov     [esp+4Ch+var_30], ebp
+0x43D87F: mov     [esp+50h+var_34], ebp
 0x43D883: jz      loc_43DBC3
-0x43D889: cmp     [esp+4Ch+var_35], 0
+0x43D889: cmp     [esp+50h+var_39], 0
 0x43D88E: jz      short loc_43D89F
 0x43D890: mov     ecx, ebp
 0x43D892: call    EffectSetting_IsUnkA4Negative
@@ -101,7 +101,7 @@
 0x43D899: jnz     loc_43DBC3
 0x43D89F: mov     eax, [ebp+60h]
 0x43D8A2: push    eax; a1
-0x43D8A3: call    TESForm_LookupByFormID
+0x43D8A3: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x43D8A8: mov     edi, eax
 0x43D8AA: add     esp, 4
 0x43D8AD: test    edi, edi
@@ -134,20 +134,20 @@
 0x43D905: push    0
 0x43D907: push    1
 0x43D909: push    0
-0x43D90B: push    edi
+0x43D90B: push    edi; form
 0x43D90C: movzx   ebx, al
-0x43D90F: call    sub_4A2A30
-0x43D914: mov     ecx, ModelLoaderPtr
+0x43D90F: call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.
+0x43D914: mov     ecx, ds:0B33A1Ch
 0x43D91A: add     esp, 4
 0x43D91D: push    eax
 0x43D91E: push    esi
 0x43D91F: push    ebx
 0x43D920: add     edi, 30h ; '0'
 0x43D923: push    edi
-0x43D924: lea     eax, [esp+68h+var_2C]
+0x43D924: lea     eax, [esp+6Ch+var_30]
 0x43D928: push    eax
 0x43D929: call    sub_43B280
-0x43D92E: mov     eax, [esp+4Ch+var_2C]
+0x43D92E: mov     eax, [esp+50h+var_30]
 0x43D932: test    eax, eax
 0x43D934: jz      loc_43DB95
 0x43D93A: mov     edi, eax
@@ -177,10 +177,10 @@
 0x43D98A: push    0
 0x43D98C: push    1
 0x43D98E: push    0
-0x43D990: push    edi
+0x43D990: push    edi; form
 0x43D991: movzx   ebx, al
 0x43D994: lea     ebp, [edi+64h]
-0x43D997: call    sub_4A2A30
+0x43D997: call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.
 0x43D99C: add     esp, 4
 0x43D99F: push    eax
 0x43D9A0: push    esi
@@ -188,12 +188,12 @@
 0x43D9A2: push    0
 0x43D9A4: mov     ecx, ebp
 0x43D9A6: call    TESBipedModelForm_GetBipedModel
-0x43D9AB: mov     ecx, ModelLoaderPtr
+0x43D9AB: mov     ecx, ds:0B33A1Ch
 0x43D9B1: push    eax
-0x43D9B2: lea     edx, [esp+68h+var_28]
+0x43D9B2: lea     edx, [esp+6Ch+var_2C]
 0x43D9B6: push    edx
 0x43D9B7: call    sub_43B280
-0x43D9BC: mov     eax, [esp+4Ch+var_28]
+0x43D9BC: mov     eax, [esp+50h+var_2C]
 0x43D9C0: test    eax, eax
 0x43D9C2: jz      short loc_43D9E2
 0x43D9C4: mov     ebx, eax
@@ -216,9 +216,9 @@
 0x43D9EF: push    0
 0x43D9F1: push    1
 0x43D9F3: push    0
-0x43D9F5: push    edi
+0x43D9F5: push    edi; form
 0x43D9F6: movzx   ebx, al
-0x43D9F9: call    sub_4A2A30
+0x43D9F9: call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.
 0x43D9FE: add     esp, 4
 0x43DA01: push    eax
 0x43DA02: push    esi
@@ -226,12 +226,12 @@
 0x43DA04: push    1
 0x43DA06: mov     ecx, ebp
 0x43DA08: call    TESBipedModelForm_GetBipedModel
-0x43DA0D: mov     ecx, ModelLoaderPtr
+0x43DA0D: mov     ecx, ds:0B33A1Ch
 0x43DA13: push    eax
-0x43DA14: lea     eax, [esp+68h+var_24]
+0x43DA14: lea     eax, [esp+70h+var_2C]
 0x43DA18: push    eax
 0x43DA19: call    sub_43B280
-0x43DA1E: mov     eax, [esp+4Ch+var_24]
+0x43DA1E: mov     eax, [esp+54h+var_2C]
 0x43DA22: test    eax, eax
 0x43DA24: jz      loc_43DB91
 0x43DA2A: mov     edi, eax
@@ -253,23 +253,23 @@
 0x43DA5A: jz      loc_43DB95
 0x43DA60: cmp     byte ptr [edi+4], 25h ; '%'
 0x43DA64: jnz     short loc_43DAB0
-0x43DA66: lea     ecx, [esp+4Ch+var_1C]
+0x43DA66: lea     ecx, [esp+50h+var_20]
 0x43DA6A: call    TESContainer_constr
-0x43DA6F: lea     ecx, [esp+4Ch+var_1C]
+0x43DA6F: lea     ecx, [esp+50h+var_20]
 0x43DA73: push    ecx; int
-0x43DA74: mov     ecx, TESDataHandler_g_PlayerRef
-0x43DA7A: push    1
-0x43DA7C: mov     [esp+54h+var_4], 0
+0x43DA74: mov     ecx, dword ptr reference
+0x43DA7A: push    1; int
+0x43DA7C: mov     [esp+58h+var_8], 0
 0x43DA84: call    Actor_GetLevel
 0x43DA89: lea     ecx, [edi+24h]; this
 0x43DA8C: push    eax; int
-0x43DA8D: call    TESLeveledList_CalcLeveledForm
+0x43DA8D: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x43DA92: push    0
-0x43DA94: lea     ecx, [esp+50h+var_1C]
+0x43DA94: lea     ecx, [esp+58h+var_24]
 0x43DA98: call    TESContainer_GetNthForm
-0x43DA9D: lea     ecx, [esp+4Ch+var_1C]
+0x43DA9D: lea     ecx, [esp+54h+var_24]
 0x43DAA1: mov     edi, eax
-0x43DAA3: mov     [esp+4Ch+var_4], 0FFFFFFFFh
+0x43DAA3: mov     dword ptr [esp+54h+var_C], 0FFFFFFFFh
 0x43DAAB: call    TESContainer_destr
 0x43DAB0: test    edi, edi
 0x43DAB2: jz      loc_43DB95
@@ -287,16 +287,16 @@
 0x43DAD4: push    esi
 0x43DAD5: mov     cl, 10h
 0x43DAD7: call    __allshr
-0x43DADC: mov     ecx, ModelLoaderPtr
+0x43DADC: mov     ecx, ds:0B33A1Ch
 0x43DAE2: movzx   edx, al
 0x43DAE5: push    edx
 0x43DAE6: push    0
 0x43DAE8: push    edi
 0x43DAE9: call    sub_43BC20
 0x43DAEE: mov     ecx, edi
-0x43DAF0: call    BSSimpleList_Clear
+0x43DAF0: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x43DAF5: push    edi
-0x43DAF6: call    FormHeapFree
+0x43DAF6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43DAFB: add     esp, 4
 0x43DAFE: jmp     loc_43DB95
 0x43DB03: cmp     al, 24h ; '$'
@@ -310,7 +310,7 @@
 0x43DB18: mov     cl, 10h
 0x43DB1A: lea     ebp, [edi+0ACh]
 0x43DB20: call    __allshr
-0x43DB25: mov     ecx, ModelLoaderPtr
+0x43DB25: mov     ecx, ds:0B33A1Ch
 0x43DB2B: movzx   eax, al
 0x43DB2E: push    eax
 0x43DB2F: push    ebp
@@ -322,19 +322,19 @@
 0x43DB42: push    0
 0x43DB44: push    1
 0x43DB46: push    1
-0x43DB48: push    edi
+0x43DB48: push    edi; form
 0x43DB49: movzx   ebx, al
-0x43DB4C: call    sub_4A2A30
+0x43DB4C: call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.
 0x43DB51: add     esp, 4
 0x43DB54: push    eax
 0x43DB55: push    esi
 0x43DB56: push    ebx
 0x43DB57: push    ebp
-0x43DB58: lea     ecx, [esp+68h+var_20]
+0x43DB58: lea     ecx, [esp+70h+var_28]
 0x43DB5C: push    ecx
-0x43DB5D: mov     ecx, ModelLoaderPtr
+0x43DB5D: mov     ecx, ds:0B33A1Ch
 0x43DB63: call    sub_43B280
-0x43DB68: lea     ecx, [esp+4Ch+var_20]; void *
+0x43DB68: lea     ecx, [esp+54h+var_28]; void *
 0x43DB6C: call    sub_4BDDC0
 0x43DB71: mov     eax, [esi+10h]
 0x43DB74: mov     edx, [esi+14h]
@@ -342,12 +342,12 @@
 0x43DB79: push    esi
 0x43DB7A: mov     cl, 10h
 0x43DB7C: call    __allshr
-0x43DB81: mov     ecx, ModelLoaderPtr
+0x43DB81: mov     ecx, ds:0B33A1Ch
 0x43DB87: movzx   edx, al
 0x43DB8A: push    edx
 0x43DB8B: push    ebp
 0x43DB8C: call    sub_43CDE0
-0x43DB91: mov     ebp, [esp+4Ch+var_30]
+0x43DB91: mov     ebp, [esp+1Ch]
 0x43DB95: mov     ecx, ebp
 0x43DB97: call    EffectSetting_IsUnkA4Positive
 0x43DB9C: test    al, al
@@ -360,22 +360,22 @@
 0x43DBAE: shr     eax, 12h
 0x43DBB1: test    al, 1
 0x43DBB3: jz      short loc_43DBBC
-0x43DBB5: add     dword_B33518, 1
+0x43DBB5: add     dword ptr unk_B33518, 1
 0x43DBBC: mov     ecx, ebp
 0x43DBBE: call    sub_415E50
-0x43DBC3: mov     ecx, [esp+4Ch+var_34]
+0x43DBC3: mov     ecx, [esp+18h]
 0x43DBC7: mov     eax, [ecx+8]
 0x43DBCA: test    eax, eax
 0x43DBCC: jz      short loc_43DBDB
 0x43DBCE: add     eax, 0FFFFFFFCh
-0x43DBD1: mov     [esp+4Ch+var_34], eax
+0x43DBD1: mov     [esp+18h], eax
 0x43DBD5: jnz     loc_43D86E
 0x43DBDB: mov     edx, [esi]
 0x43DBDD: mov     eax, [edx+28h]
 0x43DBE0: mov     ecx, esi
 0x43DBE2: mov     dword ptr [esi+0Ch], 5
 0x43DBE9: call    eax
-0x43DBEB: mov     ecx, dword ptr [esp+4Ch+var_C]
+0x43DBEB: mov     ecx, [esp+54h+var_1C+8]
 0x43DBEF: mov     large fs:0, ecx
 0x43DBF6: pop     ecx
 0x43DBF7: pop     edi
@@ -384,3 +384,12 @@
 0x43DBFA: pop     ebx
 0x43DBFB: add     esp, 38h
 0x43DBFE: retn
+0x9ACD10: lea     ecx, [ebp-1Ch]
+0x9ACD13: jmp     TESContainer_destr
+0x9ACD18: mov     edx, [esp+arg_4]
+0x9ACD1C: lea     eax, [edx-3Ch]
+0x9ACD1F: mov     ecx, [edx-40h]
+0x9ACD22: xor     ecx, eax
+0x9ACD24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACD29: mov     eax, offset stru_AD9974
+0x9ACD2E: jmp     ___CxxFrameHandler3

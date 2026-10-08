@@ -12,15 +12,15 @@
 0x57D863: call    sub_57D330
 0x57D868: push    ecx
 0x57D869: mov     ecx, [esi+68h]; this
-0x57D86C: fstp    [esp+8+a2]; a3
-0x57D86F: push    0FDAh; a2
-0x57D874: call    Tile_SetFloat
+0x57D86C: fstp    [esp+8+a2]; value
+0x57D86F: push    0FDAh; propertyCode
+0x57D874: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57D879: call    sub_57D390
 0x57D87E: push    ecx
 0x57D87F: mov     ecx, [esi+68h]; this
-0x57D882: fstp    [esp+8+a2]; a3
-0x57D885: push    0FD9h; a2
-0x57D88A: call    Tile_SetFloat
+0x57D882: fstp    [esp+8+a2]; value
+0x57D885: push    0FD9h; propertyCode
+0x57D88A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57D88F: fild    dword ptr ds:0B06C4Ch
 0x57D895: fstp    [esp+4+arg_0]
 0x57D899: fild    dword ptr ds:0B06C50h
@@ -41,9 +41,9 @@
 0x57D8CC: push    ecx
 0x57D8CD: fld     [esp+8+arg_0]
 0x57D8D1: mov     ecx, [esi+68h]; this
-0x57D8D4: fstp    [esp+8+a2]; a3
-0x57D8D7: push    0FCBh; a2
-0x57D8DC: call    Tile_SetFloat
+0x57D8D4: fstp    [esp+8+a2]; value
+0x57D8D7: push    0FCBh; propertyCode
+0x57D8DC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57D8E1: fild    dword ptr ds:0B06C4Ch
 0x57D8E7: fstp    [esp+4+arg_4]
 0x57D8EB: fild    dword ptr ds:0B06C50h
@@ -64,8 +64,8 @@
 0x57D91E: push    ecx
 0x57D91F: fld     [esp+8+arg_0]
 0x57D923: mov     ecx, [esi+68h]; this
-0x57D926: fstp    [esp+8+a2]; a3
-0x57D929: push    0FCAh; a2
-0x57D92E: call    Tile_SetFloat
+0x57D926: fstp    [esp+8+a2]; value
+0x57D929: push    0FCAh; propertyCode
+0x57D92E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57D933: pop     esi
 0x57D934: retn    8

@@ -1,1 +1,5 @@
-tagITEM_ID
+struct tagITEM_ID
+{
+UINT id;
+HDPA item;
+};

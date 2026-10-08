@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79B770",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Checked/STL trampoline around backward SFrondTexture range assignment; returns destination begin.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x79B773",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79B778",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79B77D",
-    "line": "mov     esi, [esp+10h+arg_4]",
+    "line": "mov     esi, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79B782",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, [esp+14h+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,25 +97,25 @@
   },
   {
     "ea": "0x79B79B",
-    "line": "push    edi",
+    "line": "push    edi; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B79C",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B79D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B79E",
-    "line": "call    sub_79B510",
+    "line": "call    OB_SFrondTexture_CopyAssignRangeBackward_010201A0; Overlap-safe backward copy-assignment for 0x2C-byte SFrondTexture records; deep-assigns filename plus the four scalar floats and returns destination begin.",
     "mnemonic": "call",
     "size": 5
   },

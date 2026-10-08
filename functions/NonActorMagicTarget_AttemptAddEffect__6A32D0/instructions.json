@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x6A32FA",
-    "line": "fstp    [esp+0Ch+var_C]",
+    "line": "fstp    [esp+0Ch+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A32FD",
-    "line": "call    MagicTarget_ProcessEffects",
+    "line": "call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.",
     "mnemonic": "call",
     "size": 5
   },

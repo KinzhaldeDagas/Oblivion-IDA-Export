@@ -1,4 +1,4 @@
-0x4F1E70: push    ebp
+0x4F1E70: push    ebp; Verified local WRLD Load does not read the runtime TESRoad* field at WorldSpace+0x54; ROAD is a separate form/group relationship. The neighboring WorldSpace words +0x4C and +0x50 remain Unknown.
 0x4F1E71: mov     ebp, esp
 0x4F1E73: push    0FFFFFFFFh
 0x4F1E75: push    offset SEH_4F1E70
@@ -30,7 +30,7 @@
 0x4F1EC3: mov     [esi+0BCh], eax
 0x4F1EC9: push    esi
 0x4F1ECA: mov     ecx, edi
-0x4F1ECC: call    TESFile_InitializeFormFromRecord
+0x4F1ECC: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4F1ED1: xor     ebx, ebx
 0x4F1ED3: push    ebx; a2
 0x4F1ED4: mov     ecx, esi; this
@@ -56,7 +56,7 @@
 0x4F1F35: lea     eax, [ebp+Dst]
 0x4F1F38: push    eax; Dst
 0x4F1F39: mov     ecx, edi; a1
-0x4F1F3B: call    TESFile_GetChunkData
+0x4F1F3B: call    TESFile_GetChunkData; NAM9 maximum-axis replay uses bounded GetChunkData(maxSize=8) into an uninitialized local pair, then compares/stores both axes. Widths 0..7 retain stack bytes and may change bounds; >8 deterministically reads first 7 bytes and a forced zero. x87 ordered/unordered branch behavior must be preserved for NaNs; the TESCS WRLD reader does not dispatch NAM9.
 0x4F1F40: fld     dword ptr [esi+0A0h]
 0x4F1F46: fld     dword ptr [ebp+Dst]
 0x4F1F49: fcom    st(1)
@@ -93,16 +93,16 @@
 0x4F1FB6: lea     eax, [ebp+var_14]
 0x4F1FB9: push    eax
 0x4F1FBA: mov     ecx, edi
-0x4F1FBC: mov     [ebp+var_14], ebx
-0x4F1FBF: call    TESFile_GetChunkData4
+0x4F1FBC: mov     [ebp+var_14], ebx; WRLD u32 reader semantics: fresh zero-init then cap/copy up to all 4 bytes; overlong chunks keep the first four bytes. Later NAM2 replaces/clears earlier water state.
+0x4F1FBF: call    TESFile_GetChunkData4; NAM2 freshzero u32 through0x4510E0 max4: overlong candidate copies3+zero. Every candidate replaces previous WaterForm includingzero.
 0x4F1FC4: mov     ecx, [ebp+var_14]
-0x4F1FC7: mov     [esi+80h], ecx
+0x4F1FC7: mov     [esi+80h], ecx; Verified WRLD load: NAM2 chunk reads WaterForm FormID; TESWorldSpace_DoPostFixups resolves it later.
 0x4F1FCD: jmp     loc_4F21B6
 0x4F1FD2: push    8; a4
 0x4F1FD4: lea     edx, [ebp+var_24]
 0x4F1FD7: push    edx; Dst
 0x4F1FD8: mov     ecx, edi; a1
-0x4F1FDA: call    TESFile_GetChunkData
+0x4F1FDA: call    TESFile_GetChunkData; NAM0 minimum-axis replay: 0x4F1FD2..0x4F1FDA calls bounded GetChunkData with maxSize 8 into local bytes [ebp-0x24..-0x1D] without prior initialization, then both axes are compared/stored at 0x4F1FDF..0x4F202B. Widths 0..7 retain stack bytes and may change state; >8 copies 7 payload bytes and forces the last local byte to zero. x87 test at 0x4F1FEE selects the new candidate on unordered/NaN comparisons.
 0x4F1FDF: fld     dword ptr [esi+98h]
 0x4F1FE5: fld     dword ptr [ebp+var_24]
 0x4F1FE8: fcom    st(1)
@@ -141,7 +141,7 @@
 0x4F205A: push    edx; Dst
 0x4F205B: push    edi; a2
 0x4F205C: mov     ecx, esi; this
-0x4F205E: call    TESForm_LoadGenericComponents
+0x4F205E: call    TESForm_LoadGenericComponents; Authoritative WRLD DATA replay: every occurrence calls the generic prefix-overlay helper. Zero length is a no-op; any nonempty DATA deterministically replaces worldFlags with payload[0], including overlong chunks. Repeated nonempty chunks are stream-order last-wins; deleted WRLD payload still replays.
 0x4F2063: jmp     loc_4F21B6
 0x4F2068: cmp     eax, 44494445h
 0x4F206D: jz      short loc_4F209B
@@ -152,12 +152,12 @@
 0x4F207E: lea     eax, [esi+18h]
 0x4F2081: push    edi
 0x4F2082: push    eax
-0x4F2083: call    TESFullname_Load
+0x4F2083: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4F2088: jmp     loc_4F21B3
 0x4F208D: xor     eax, eax
 0x4F208F: push    edi
 0x4F2090: push    eax
-0x4F2091: call    TESFullname_Load
+0x4F2091: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4F2096: jmp     loc_4F21B3
 0x4F209B: mov     eax, [edi+254h]
 0x4F20A1: call    __alloca?
@@ -165,7 +165,7 @@
 0x4F20A8: push    200h; a4
 0x4F20AD: push    ebx; Dst
 0x4F20AE: mov     ecx, edi; a1
-0x4F20B0: call    TESFile_GetChunkData
+0x4F20B0: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4F20B5: mov     eax, [esi]
 0x4F20B7: mov     edx, [eax+0D8h]
 0x4F20BD: push    ebx
@@ -176,10 +176,10 @@
 0x4F20C9: lea     eax, [ebp+var_14]
 0x4F20CC: push    eax
 0x4F20CD: mov     ecx, edi
-0x4F20CF: mov     [ebp+var_14], ebx
-0x4F20D2: call    TESFile_GetChunkData4
+0x4F20CF: mov     [ebp+var_14], ebx; WRLD u32 reader semantics: fresh zero-init then cap/copy up to all 4 bytes; overlong chunks keep the first four bytes (no ExtraDataList max-1 terminator rule). Later CNAM replaces/clears earlier climate state.
+0x4F20D2: call    TESFile_GetChunkData4; CNAM freshzero u32 through0x4510E0 max4: overlong candidate is low24 plus zero highbyte; highbyte-only oversized input becomeszero.
 0x4F20D7: mov     ecx, [ebp+var_14]
-0x4F20DA: mov     [esi+58h], ecx
+0x4F20DA: mov     [esi+58h], ecx; Verified WRLD load: CNAM chunk reads Climate FormID into unresolved TESWorldSpace.climate field; TESWorldSpace_DoPostFixups resolves it later.
 0x4F20DD: jmp     loc_4F21B6
 0x4F20E2: cmp     eax, 4D414E57h
 0x4F20E7: jg      short loc_4F2142
@@ -191,30 +191,30 @@
 0x4F20FB: lea     edx, [ebp+var_14]
 0x4F20FE: push    edx
 0x4F20FF: mov     ecx, edi
-0x4F2101: mov     [ebp+var_14], ebx
-0x4F2104: call    TESFile_GetChunkData4
+0x4F2101: mov     [ebp+var_14], ebx; SNAM authoritative replay: initialize fresh u32=0 for every occurrence, bounded-read max 4, then store the complete dword (zero is a stored/default value; last occurrence wins).
+0x4F2104: call    TESFile_GetChunkData4; WRLD SNAM reader assignment reviewed 2026-10-01: fresh-zero bounded U32 read at0x4F2104->0x4510E0->0x450C20 assigns the destination U32, including zero, at0x4F210C. Full-object initial state is zero from TESWorldSpace::SetDefault0x4F1E00/0x4F1E53; omitted partial SNAM retains its prior object value. The semantic fold now distinguishes those cases.
 0x4F2109: mov     eax, [ebp+var_14]
-0x4F210C: mov     [esi+94h], eax
+0x4F210C: mov     [esi+94h], eax; Oblivion WRLD SNAM assignment: fresh zeroed bounded-u32 scratch is read through0x4510E0->0x450C20 and always copied into music field unk084[4] here, including effective zero. New full objects initialize this field to zero atSetDefault0x4F1E53. Semantic replay now distinguishes absent full default-zero from absent partial inherited-unknown state.
 0x4F2112: jmp     loc_4F21B6
 0x4F2117: push    10h; a4
 0x4F2119: lea     ecx, [esi+84h]
 0x4F211F: push    ecx; Dst
 0x4F2120: mov     ecx, edi; a1
-0x4F2122: call    TESFile_GetChunkData
+0x4F2122: call    TESFile_GetChunkData; Authoritative WRLD MNAM replay into existing field with cap16. Zero length retains. Lengths1..16 overlay that prefix; length>16 copies payload[0:15] and writes byte15=0. Fresh full forms start with 16 zero bytes in SetDefault; partial records inherit unknown prior bytes.
 0x4F2127: jmp     loc_4F21B6
 0x4F212C: lea     edx, [ebp+var_14]
 0x4F212F: push    edx
 0x4F2130: mov     ecx, edi
-0x4F2132: mov     [ebp+var_14], ebx
-0x4F2135: call    TESFile_GetChunkData4
+0x4F2132: mov     [ebp+var_14], ebx; WRLD u32 reader semantics: fresh zero-init then cap/copy up to all 4 bytes; overlong chunks keep the first four bytes. Later WNAM replaces/clears earlier parent state.
+0x4F2135: call    TESFile_GetChunkData4; WNAM freshzero u32 through0x4510E0 max4: overlong candidate copies3+zero. Every candidate replaces parentWorldspace includingzero.
 0x4F213A: mov     eax, [ebp+var_14]
-0x4F213D: mov     [esi+7Ch], eax
+0x4F213D: mov     [esi+7Ch], eax; Verified WRLD load: WNAM chunk reads parent worldspace FormID; TESWorldSpace_DoPostFixups resolves it later.
 0x4F2140: jmp     short loc_4F21B6
 0x4F2142: cmp     eax, 4E4F4349h
 0x4F2147: jz      short loc_4F21A1
 0x4F2149: cmp     eax, 5453464Fh
 0x4F214E: jnz     short loc_4F21B6
-0x4F2150: mov     eax, [edi+254h]
+0x4F2150: mov     eax, [edi+254h]; Authoritative WRLD OFST replay: every nonempty OFST occurrence frees any prior cellOffsetsArray, allocates floor(length/4) DWORD storage, then reads the chunk; a later nonempty OFST replaces the earlier array. Zero-length OFST takes no mutation branch and retains inherited/prior state.
 0x4F2156: cmp     eax, ebx
 0x4F2158: jz      short loc_4F21B6
 0x4F215A: shr     eax, 2
@@ -223,7 +223,7 @@
 0x4F2165: test    eax, eax
 0x4F2167: jz      short loc_4F2172
 0x4F2169: push    eax
-0x4F216A: call    FormHeapFree
+0x4F216A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4F216F: add     esp, 4
 0x4F2172: xor     ecx, ecx
 0x4F2174: mov     eax, ebx
@@ -239,7 +239,7 @@
 0x4F218F: push    eax; Dst
 0x4F2190: mov     ecx, edi; a1
 0x4F2192: mov     [esi+0A8h], eax
-0x4F2198: call    TESFile_GetChunkData
+0x4F2198: call    TESFile_GetChunkData; MEF decode 2026-05-30: GetChunkData is called with a4=0 after allocating only 4*floor(length/4); faithful fix must bound/pad the read and preserve element count.
 0x4F219D: xor     ebx, ebx
 0x4F219F: jmp     short loc_4F21B6
 0x4F21A1: cmp     esi, ebx
@@ -271,7 +271,7 @@
 0x4F21E6: push    1
 0x4F21E8: call    edx
 0x4F21EA: mov     ecx, esi
-0x4F21EC: call    sub_46B660
+0x4F21EC: call    TESForm_HasBuiltinFormID; Returns true when this TESForm has a built-in FormID in the reserved range 0x00000001..0x000007FF.
 0x4F21F1: test    al, al
 0x4F21F3: push    10h; Size
 0x4F21F5: jz      short loc_4F2217
@@ -311,3 +311,23 @@
 0x4F225D: mov     esp, ebp
 0x4F225F: pop     ebp
 0x4F2260: retn    4
+0x9B68B0: mov     eax, [ebp+var_14]
+0x9B68B3: push    eax
+0x9B68B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B68B9: pop     ecx
+0x9B68BA: retn
+0x9B68BB: mov     eax, [ebp+var_14]
+0x9B68BE: push    eax
+0x9B68BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B68C4: pop     ecx
+0x9B68C5: retn
+0x9B68C6: mov     edx, [esp-4+arg_4]
+0x9B68CA: lea     eax, [edx+0Ch]
+0x9B68CD: mov     ecx, [edx-28h]
+0x9B68D0: xor     ecx, eax
+0x9B68D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B68D7: mov     ecx, [edx-4]
+0x9B68DA: xor     ecx, eax
+0x9B68DC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B68E1: mov     eax, offset stru_AE16B4
+0x9B68E6: jmp     ___CxxFrameHandler3

@@ -1,15 +1,16 @@
-void __userpurge sub_478D70(char *a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>, int a6)
+// Installs only form type 0x22 (AMMO) into ActorSkinInfo AmmoForm at +0x10C after clearing prior state; AmmoModel at +0x110 points to the form's embedded TESModel at form+0x30.
+void __thiscall ActorSkinInfo_SetAmmoSlotForm(ActorSkinInfo *this, TESForm *ammoForm)
 {
-  char *v7; // edi
+  TESForm **p_AmmoForm; // edi
 
-  if ( a6 )
+  if ( ammoForm ) /*0x478d7a*/
   {
-    if ( *(_BYTE *)(a6 + 4) == 0x22 )
+    if ( ammoForm->member.type == kFormType_Ammo ) /*0x478d80*/
     {
-      v7 = a1 + 0x10C;
-      sub_478780(a1, a2, a3, a4, a5, (int)(a1 + 0x10C), 1, 0);
-      *(_DWORD *)v7 = a6;
-      *((_DWORD *)a1 + 0x44) = a6 + 0x30;
+      p_AmmoForm = &this->AmmoForm; /*0x478d87*/
+      ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->AmmoForm, 1, 0); /*0x478d8e*/
+      *p_AmmoForm = ammoForm; /*0x478d93*/
+      this->AmmoModel = (TESModel *)&ammoForm[2]; /*0x478d98*/
     }
   }
 }

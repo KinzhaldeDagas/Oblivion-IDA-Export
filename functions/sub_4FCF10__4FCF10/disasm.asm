@@ -38,7 +38,6 @@
 0x4FCF81: mov     [edx+esi+4], bl
 0x4FCF85: add     dword ptr [esi+204h], 1
 0x4FCF8C: jmp     short loc_4FCF30
-0x4FCF8E: align 10h
 0x4FCF90: cmp     bl, 0Ah
 0x4FCF93: jz      short loc_4FCFA1
 0x4FCF95: mov     bl, [edi+ebp]

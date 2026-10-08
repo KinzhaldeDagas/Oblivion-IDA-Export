@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_478070",
+  "chunks": [
+    [
+      "0x478070",
+      "0x478175"
+    ],
+    [
+      "0x9AEFA0",
+      "0x9AEFC3"
+    ]
+  ],
+  "chunks_sha256": "a3516d59054d7e9d40eaa9c9fd4a6ee610d8b55a12fbbb89808804226fd4aed0",
+  "comment_regular": "Caches ActorSkinInfo nodes by exact name. +0 is Bip01. Node indices 0..8 are Bip01 Head, Bip01 R Finger1, Bip01 L Finger1, Weapon, BackWeapon, SideWeapon, Quiver, Bip01 L ForearmTwist, Torch. Each indexed entry uses an 8-byte {flags,node} layout; node is at +8+index*8.",
+  "comment_repeatable": "Caches ActorSkinInfo nodes by exact name. +0 is Bip01. Node indices 0..8 are Bip01 Head, Bip01 R Finger1, Bip01 L Finger1, Weapon, BackWeapon, SideWeapon, Quiver, Bip01 L ForearmTwist, Torch. Each indexed entry uses an 8-byte {flags,node} layout; node is at +8+index*8.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "ActorSkinInfo_CacheNamedNodes",
   "end_ea": "0x478175",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_478070",
+  "name": "ActorSkinInfo_CacheNamedNodes",
   "segment": ".text",
   "sha256": "fe2161eadb23b08ed37b9c3c7bffdf89c1686019d75a3bc77b0149329f28b24d",
   "size": 261,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x478070",
-  "type": "int __thiscall(int *this, _DWORD *)",
-  "xrefs_from_count": 106,
+  "total_chunk_size": 296,
+  "type": "void __thiscall(ActorSkinInfo *this, NiNode *rootNode)",
+  "xrefs_from_count": 117,
   "xrefs_to_count": 2
 }

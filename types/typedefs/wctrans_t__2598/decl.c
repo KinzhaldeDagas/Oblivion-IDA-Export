@@ -1,1 +1,1 @@
-wctrans_t
+typedef wchar_t wctrans_t;

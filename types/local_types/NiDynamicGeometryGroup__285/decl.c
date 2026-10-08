@@ -1,1 +1,1 @@
-NiDynamicGeometryGroup
+struct NiDynamicGeometryGroup;

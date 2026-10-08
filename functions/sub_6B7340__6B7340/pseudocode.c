@@ -1,7 +1,7 @@
 int __thiscall sub_6B7340(int *this)
 {
-  if ( dword_B3C214 )
-    return (unsigned __int16)sub_6ACA70((_DWORD *)dword_B3C214, *this);
+  if ( unk_B3C214 ) /*0x6b7342*/
+    return (unsigned __int16)sub_6ACA70((_DWORD *)unk_B3C214, *this); /*0x6b7354*/
   else
-    return 0;
+    return 0; /*0x6b7358*/
 }

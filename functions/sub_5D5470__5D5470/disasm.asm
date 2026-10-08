@@ -33,7 +33,7 @@
 0x5D54CA: push    0
 0x5D54CC: push    0
 0x5D54CE: push    6
-0x5D54D0: call    sub_5D2070
+0x5D54D0: call    RepairMenu_Create
 0x5D54D5: mov     ecx, [esp+18h+arg_4]
 0x5D54D9: mov     eax, [esi]
 0x5D54DB: mov     edx, [eax+14h]

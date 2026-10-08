@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F6CF0",
-    "line": "fldz",
+    "line": "fldz; GetInSameCell checks pointer identity of both resolved cell objects. This differs from GetInCell's case-insensitive editor-name prefix comparison; Fallout's analogous handler x4y6:0x823B61A0 also uses parent-cell pointer equality.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4F6D1B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4F6D2C",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },

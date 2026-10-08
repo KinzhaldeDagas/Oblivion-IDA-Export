@@ -25,35 +25,35 @@ double __usercall sub_93D820@<st0>(
   float v25; // [esp+8h] [ebp-4h]
   unsigned int v26; // [esp+8h] [ebp-4h]
 
-  v7 = _mm_mul_ps(_mm_xor_ps(*a6, (__m128)xmmword_A965C0), *a5);
-  v25 = _mm_shuffle_ps(v7, v7, 0xAA).m128_f32[0] + (float)(_mm_shuffle_ps(v7, v7, 0x55).m128_f32[0] + v7.m128_f32[0]);
-  *(float *)&v24 = (a7 - a1[4].m128_f32[3]) * a1[5].m128_f32[3];
-  v8 = _mm_shuffle_ps((__m128)v24, (__m128)v24, 0);
-  v9 = _mm_sub_ps(*a4, _mm_add_ps(_mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v8), a1[4]), _mm_mul_ps(v8, a1[5])));
-  v10 = _mm_mul_ps(
+  v7 = _mm_mul_ps(_mm_xor_ps(*a6, (__m128)xmmword_A965C0), *a5); /*0x93d84d*/
+  v25 = _mm_shuffle_ps(v7, v7, 0xAA).m128_f32[0] + (float)(_mm_shuffle_ps(v7, v7, 0x55).m128_f32[0] + v7.m128_f32[0]); /*0x93d871*/
+  *(float *)&v24 = (a7 - a1[4].m128_f32[3]) * a1[5].m128_f32[3]; /*0x93d878*/
+  v8 = _mm_shuffle_ps((__m128)v24, (__m128)v24, 0); /*0x93d885*/
+  v9 = _mm_sub_ps(*a4, _mm_add_ps(_mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v8), a1[4]), _mm_mul_ps(v8, a1[5]))); /*0x93d8ab*/
+  v10 = _mm_mul_ps( /*0x93d8d3*/
           _mm_sub_ps(
             _mm_mul_ps(_mm_shuffle_ps(*a3, *a3, 0xC9), _mm_shuffle_ps(v9, v9, 0xD2)),
             _mm_mul_ps(_mm_shuffle_ps(*a3, *a3, 0xD2), _mm_shuffle_ps(v9, v9, 0xC9))),
           *a5);
-  v12 = (float)(_mm_shuffle_ps(v10, v10, 0xAA).m128_f32[0]
+  v12 = (float)(_mm_shuffle_ps(v10, v10, 0xAA).m128_f32[0] /*0x93d8fe*/
               + (float)(_mm_shuffle_ps(v10, v10, 0x55).m128_f32[0] + v10.m128_f32[0]));
-  if ( v13 | v14 )
-    v15 = v12 * flt_A57414;
+  if ( v13 | v14 ) /*0x93d904*/
+    v15 = v12 * flt_A57414; /*0x93d909*/
   else
-    v15 = v12 * flt_AA1DD4;
-  v16 = v15 + v25;
-  *(float *)&v26 = (a7 - a2[4].m128_f32[3]) * a2[5].m128_f32[3];
-  v17 = _mm_shuffle_ps((__m128)v26, (__m128)v26, 0);
-  v18 = _mm_sub_ps(*a4, _mm_add_ps(_mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v17), a2[4]), _mm_mul_ps(v17, a2[5])));
-  v19 = _mm_mul_ps(
+    v15 = v12 * flt_AA1DD4; /*0x93d911*/
+  v16 = v15 + v25; /*0x93d917*/
+  *(float *)&v26 = (a7 - a2[4].m128_f32[3]) * a2[5].m128_f32[3]; /*0x93d928*/
+  v17 = _mm_shuffle_ps((__m128)v26, (__m128)v26, 0); /*0x93d932*/
+  v18 = _mm_sub_ps(*a4, _mm_add_ps(_mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v17), a2[4]), _mm_mul_ps(v17, a2[5]))); /*0x93d94d*/
+  v19 = _mm_mul_ps( /*0x93d978*/
           _mm_sub_ps(
             _mm_mul_ps(_mm_shuffle_ps(a3[1], a3[1], 0xC9), _mm_shuffle_ps(v18, v18, 0xD2)),
             _mm_mul_ps(_mm_shuffle_ps(a3[1], a3[1], 0xD2), _mm_shuffle_ps(v18, v18, 0xC9))),
           *a5);
-  v21 = (float)(_mm_shuffle_ps(v19, v19, 0xAA).m128_f32[0]
+  v21 = (float)(_mm_shuffle_ps(v19, v19, 0xAA).m128_f32[0] /*0x93d9a3*/
               + (float)(_mm_shuffle_ps(v19, v19, 0x55).m128_f32[0] + v19.m128_f32[0]));
-  if ( v22 )
-    return v16 - v21 * flt_AA1DD4;
+  if ( v22 ) /*0x93d9ac*/
+    return v16 - v21 * flt_AA1DD4; /*0x93d9c2*/
   else
-    return v16 - v21 * flt_A57414;
+    return v16 - v21 * flt_A57414; /*0x93d9b4*/
 }

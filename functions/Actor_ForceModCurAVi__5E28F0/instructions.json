@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5E28F2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5E2924",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5E295B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5E296A",
-    "line": "push    1",
+    "line": "push    1; allowPositive",
     "mnemonic": "push",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x5E296D",
-    "line": "lea     ecx, [esi+88h]",
+    "line": "lea     ecx, [esi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x5E297B",
-    "line": "fstp    [esp+14h+var_14]",
+    "line": "fstp    [esp+14h+delta]; delta",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5E297E",
-    "line": "push    edi",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E297F",
-    "line": "call    AVCollection_ModAVLimited",
+    "line": "call    AVCollection_AdjustValue",
     "mnemonic": "call",
     "size": 5
   },

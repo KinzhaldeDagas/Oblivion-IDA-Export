@@ -13,7 +13,7 @@
 0x52A541: mov     ecx, edi
 0x52A543: call    ScriptEventList_destr??
 0x52A548: push    edi
-0x52A549: call    FormHeapFree
+0x52A549: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52A54E: add     esp, 4
 0x52A551: mov     dword ptr [esi+58h], 0
 0x52A558: pop     edi

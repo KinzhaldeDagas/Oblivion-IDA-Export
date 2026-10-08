@@ -1,19 +1,36 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_851E70",
+  "chunks": [
+    [
+      "0x851E70",
+      "0x85202A"
+    ],
+    [
+      "0x9D3360",
+      "0x9D3383"
+    ]
+  ],
+  "chunks_sha256": "93e11cb88a577aba1418fa4d7c8e5d47bb10a0cce77a833470daa13749804624",
+  "comment_regular": "Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18D. It binds the same effect-data fields as 0x18C; the active shader's owned pixel/vertex maps are applied afterward by NiD3DShader_SetupShaderPrograms. The selector is passInfo bit 0x02-dependent.",
+  "comment_repeatable": "Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18D. It binds the same effect-data fields as 0x18C; the active shader's owned pixel/vertex maps are applied afterward by NiD3DShader_SetupShaderPrograms. The selector is passInfo bit 0x02-dependent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiD3DPassArray_AddTextureEffectPass1xS",
   "end_ea": "0x85202A",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_851E70",
+  "name": "NiD3DPassArray_AddTextureEffectPass1xS",
   "segment": ".text",
   "sha256": "ebedf0ef6c13b94ed05d717af89d15c86ebfb86714501b62b2db7f3bcddcf393",
   "size": 442,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x851E70",
-  "type": "void __thiscall(NiTArray_NiD3DPass *this, NiGeometry *, int, int, NiD3DPass *)",
-  "xrefs_from_count": 175,
+  "total_chunk_size": 477,
+  "type": "void __thiscall(NiTArray_NiD3DPass *this, NiGeometry *geometry, int arg3, int arg4, BSShaderProperty *shaderProperty)",
+  "xrefs_from_count": 186,
   "xrefs_to_count": 3
 }

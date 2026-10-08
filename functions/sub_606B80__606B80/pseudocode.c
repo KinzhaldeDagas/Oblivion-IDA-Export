@@ -1,50 +1,51 @@
-unsigned __int16 __thiscall sub_606B80(_DWORD *this)
+// Verified package persistence virtual GetSaveSize from vtable slot DC, matching paired implementations, package source-file diagnostics and BaseProcess dispatch. ECX object, no stack arguments. Previous indexed-vtable casts into TESForm components were caused by missing package-tail type.
+unsigned __int16 __thiscall AlarmPackage_GetSaveSize(AlarmPackage *self)
 {
-  unsigned __int16 v3; // di
-  unsigned __int16 v4; // bx
-  _DWORD *v5; // eax
+  unsigned __int16 SaveSize; // di
+  unsigned __int16 v3; // bx
+  CrimeListNode *crimes; // eax
   __int16 i; // cx
-  unsigned __int16 v7; // di
-  UInt32 *v8; // esi
-  TESForm *v9; // eax
-  const char *v10; // eax
-  int v12; // [esp-Ch] [ebp-18h]
-  int v13; // [esp-8h] [ebp-14h]
-  const char *v14; // [esp-4h] [ebp-10h]
+  unsigned __int16 v6; // di
+  UInt32 *currentlySavingFormHeader; // esi
+  TESForm *v8; // eax
+  const char *v9; // eax
+  int v11; // [esp-Ch] [ebp-18h]
+  int v12; // [esp-8h] [ebp-14h]
+  const char *v13; // [esp-4h] [ebp-10h]
 
-  v3 = sub_567D20(this);
-  v4 = v3;
-  if ( sub_45A170() )
-    v3 += 6;
-  v5 = (_DWORD *)*(this + 0xF);
-  for ( i = 0; v5; v5 = (_DWORD *)v5[1] )
+  SaveSize = TESPackage_GetSaveSize(&self->base); /*0x606b90*/
+  v3 = SaveSize; /*0x606b93*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x606b96*/
+    SaveSize += 6; /*0x606b9f*/
+  crimes = self->crimes; /*0x606ba2*/
+  for ( i = 0; crimes; crimes = crimes->next ) /*0x606ba9*/
   {
-    if ( *v5 )
-      ++i;
+    if ( crimes->crime ) /*0x606bb0*/
+      ++i; /*0x606bb5*/
   }
-  v7 = i + v3 + 2 * i + 2;
+  v6 = i + SaveSize + 2 * i + 2; /*0x606bc9*/
   if ( Global_DebugSaveBuffer )
   {
-    v8 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    if ( v8 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x606bd5*/
+    if ( currentlySavingFormHeader )
     {
-      v9 = TESForm_LookupByFormID(*v8);
-      v10 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v9->vtbl->GetEditorName)(
-                            v9,
-                            *(UInt32 *)((char *)v8 + 5),
-                            0x1F3,
-                            ".\\AI\\AlarmPackage.cpp");
+      v8 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x606be2*/
+      v9 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v8->vtbl->GetEditorName)( /*0x606c02*/
+                           v8,
+                           *(UInt32 *)((char *)currentlySavingFormHeader + 5),
+                           0x1F3,
+                           ".\\AI\\AlarmPackage.cpp");
       sub_40FEC0(
         "GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v7 - v4,
-        *v8,
-        v10,
+        v6 - v3,
+        *currentlySavingFormHeader,
+        v9,
+        v11,
         v12,
-        v13,
-        v14);
-      return v7;
+        v13);
+      return v6; /*0x606c24*/
     }
-    sub_40FEC0("GetSaveSize(): %-5i ending at line %i in file %s", v7 - v4, 0x1F3, ".\\AI\\AlarmPackage.cpp");
+    sub_40FEC0("GetSaveSize(): %-5i ending at line %i in file %s", v6 - v3, 0x1F3, ".\\AI\\AlarmPackage.cpp");
   }
-  return v7;
+  return v6; /*0x606c21*/
 }

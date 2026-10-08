@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x795D20",
+      "0x795D46"
+    ]
+  ],
+  "chunks_sha256": "3fd03457ae97712eb447a2cb18e1ab8e48fde26c54e16e31eb0ee628f04a2300",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<unsigned short> value across an initialized owner range by repeated deep copy assignment.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<unsigned short> value across an initialized owner range by repeated deep copy assignment.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_795D20",
+  "display_name": "OB_stVector_stVectorUShort_CopyAssignFillRange_010201A0",
   "end_ea": "0x795D46",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_795D20",
+  "name": "OB_stVector_stVectorUShort_CopyAssignFillRange_010201A0",
   "segment": ".text",
   "sha256": "3fd03457ae97712eb447a2cb18e1ab8e48fde26c54e16e31eb0ee628f04a2300",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795D20",
-  "type": "_DWORD *__usercall@<eax>(int@<ebp>, _DWORD *, _DWORD *, int)",
+  "total_chunk_size": 38,
+  "type": "OB_stVectorUShort_010201A0 *__cdecl(OB_stVectorUShort_010201A0 *first, OB_stVectorUShort_010201A0 *last, const OB_stVectorUShort_010201A0 *value)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

@@ -2,13 +2,13 @@
 0x4106C4: push    ebp
 0x4106C5: push    eax
 0x4106C6: mov     ebp, ecx
-0x4106C8: call    sub_410390
+0x4106C8: call    Input_CheckLoadPumpControls; ModernWindowsCompatible decode: message/input pump called as sub_410390(1) during loading texture wait; preserved by patch helper.
 0x4106CD: add     esp, 4
 0x4106D0: test    al, al
 0x4106D2: jnz     short loc_4106D8
 0x4106D4: pop     ebp
 0x4106D5: retn    8
-0x4106D8: cmp     byte_B33424, 0
+0x4106D8: cmp     byte ptr unk_B33424, 0
 0x4106DF: push    esi
 0x4106E0: jnz     short loc_410730
 0x4106E2: mov     ecx, [ebp+0]
@@ -41,7 +41,7 @@
 0x410733: fld1
 0x410735: mov     ecx, [eax]
 0x410737: mov     edx, [ecx+0ACh]
-0x41073D: mov     esi, dword_B350D8
+0x41073D: mov     esi, ds:0B350D8h
 0x410743: push    0
 0x410745: push    ecx
 0x410746: fstp    [esp+10h+var_10]

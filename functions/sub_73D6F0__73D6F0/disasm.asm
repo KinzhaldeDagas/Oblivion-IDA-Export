@@ -1,6 +1,6 @@
 0x73D6F0: push    ebx
 0x73D6F1: push    esi
-0x73D6F2: mov     esi, dword ptr [esp+8+arg_0]
+0x73D6F2: mov     esi, [esp+8+arg_0]
 0x73D6F6: push    edi
 0x73D6F7: push    esi
 0x73D6F8: mov     ebx, ecx
@@ -12,7 +12,7 @@
 0x73D70E: movzx   ecx, word ptr [esi+8]
 0x73D712: add     esp, 4
 0x73D715: cmp     edi, ecx
-0x73D717: mov     dword ptr [esp+0Ch+arg_0], eax
+0x73D717: mov     [esp+0Ch+arg_0], eax
 0x73D71B: jb      short loc_73D72B
 0x73D71D: movzx   edx, word ptr [esi+0Eh]
 0x73D721: add     edx, edi
@@ -26,13 +26,13 @@
 0x73D733: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x73D738: mov     cl, [ebx+18h]
 0x73D73B: and     cl, 1
-0x73D73E: mov     [esp+0Ch+arg_0], cl
-0x73D742: mov     edx, dword ptr [esp+0Ch+arg_0]
+0x73D73E: mov     byte ptr [esp+0Ch+arg_0], cl
+0x73D742: mov     edx, [esp+0Ch+arg_0]
 0x73D746: push    edx; char
 0x73D747: push    offset aM_bspec; "m_bSpec"
 0x73D74C: call    TESOutput_PrintLabeledBool
 0x73D751: movzx   edi, word ptr [esi+0Ah]
-0x73D755: mov     dword ptr [esp+14h+arg_0], eax
+0x73D755: mov     [esp+14h+arg_0], eax
 0x73D759: movzx   eax, word ptr [esi+8]
 0x73D75D: add     esp, 8
 0x73D760: cmp     edi, eax

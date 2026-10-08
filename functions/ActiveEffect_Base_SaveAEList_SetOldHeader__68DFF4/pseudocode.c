@@ -1,13 +1,13 @@
-int __cdecl ActiveEffect_Base_SaveAEList_::SetOldHeader(int a1, int a2, int a3, int a4, _WORD *a5)
+void __cdecl ActiveEffect_Base_SaveAEList_::SetOldHeader(int a1, int a2, int a3, int a4, unsigned __int8 *a5)
 {
-  UInt32 v5; // esi
+  unsigned __int8 *bufferCursor; // esi
 
-  v5 = SaveLoad_CurrentSavegame->unk000[5];
-  if ( v5 > (unsigned int)a5 + 0xFFFF )
-    PrintError(
+  bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x68dffe*/
+  if ( bufferCursor > a5 + 0xFFFF ) /*0x68e009*/
+    PrintError( /*0x68e01a*/
       "Save Game Block in file %s on line %i is greater than maximum short size",
       ".\\Magic\\ActiveEffect.cpp",
       0x36B);
-  *a5 = v5 - (_WORD)a5;
-  return ActiveEffect_Base_SaveAEList_::Epilogue();
+  *(_WORD *)a5 = (_WORD)bufferCursor - (_WORD)a5; /*0x68e024*/
+  ActiveEffect_Base_SaveAEList_::Epilogue(); /*0x68e025*/
 }

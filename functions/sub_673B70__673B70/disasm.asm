@@ -1,6 +1,6 @@
-0x673B70: sub     esp, 8
+0x673B70: sub     esp, 8; MEF LARGE PERF 2026-09-08: PERF-7 distance comparator calls GetDistance twice per comparison and returns signed-1/0/+1. Both distance results are rounded tofloat locals before x87 comparison. Corrected prior unsigned prototype to signed int. Avoid precomputed/squared-distance replacement without worldspace/sentinel/virtual GetPos and NaN/rounding proof.
 0x673B73: mov     eax, ds:0B333C4h
-0x673B78: mov     ecx, [esp+8+arg_0]
+0x673B78: mov     ecx, [esp+8+left]
 0x673B7C: push    0
 0x673B7E: push    eax
 0x673B7F: call    TesObjectREF_GetDistance
@@ -8,7 +8,7 @@
 0x673B87: mov     ecx, ds:0B333C4h
 0x673B8D: push    0
 0x673B8F: push    ecx
-0x673B90: mov     ecx, [esp+10h+arg_4]
+0x673B90: mov     ecx, [esp+10h+right]
 0x673B94: call    TesObjectREF_GetDistance
 0x673B99: fstp    [esp+8+var_4]
 0x673B9D: fld     [esp+8+var_8]

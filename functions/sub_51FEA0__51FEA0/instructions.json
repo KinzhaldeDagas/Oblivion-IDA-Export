@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x51FECC",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x51FF17",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x51FF34",
-    "line": "call    TESForm_LoadGenericComponents",
+    "line": "call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x51FF93",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },

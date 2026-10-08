@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F3C30",
-    "line": "push    esi",
+    "line": "push    esi; ODismemberment combat decode: block stagger perk chance helper using shield/weapon/hand-to-hand state, mastery gate, and iPerkBlockStaggerChance.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x5F3C62",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F3C63",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x5F3C7D",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F3C7E",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5F3CA0",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },

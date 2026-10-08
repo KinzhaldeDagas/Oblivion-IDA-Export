@@ -1,9 +1,11 @@
-NiTMap_Entry_TESCELL *__thiscall InteriorCellNewReferencesMap::`scalar deleting destructor'(
-        NiTMap_Entry_TESCELL *this,
-        char a2)
+//
+// Verified: calls 45A990; frees self only when deleteFlags bit 0 is set.
+InteriorCellNewReferencesMap *__thiscall InteriorCellNewReferencesMap_scalar_dtor(
+        InteriorCellNewReferencesMap *self,
+        unsigned int deleteFlags)
 {
-  InteriorCellNewReferencesMap::~InteriorCellNewReferencesMap(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  InteriorCellNewReferencesMap_dtor(self); /*0x45f093*/
+  if ( (deleteFlags & 1) != 0 ) /*0x45f09d*/
+    FormHeapFree((unsigned int)self); /*0x45f0a0*/
+  return self; /*0x45f0aa*/
 }

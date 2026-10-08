@@ -1,20 +1,21 @@
 errno_t __cdecl fopen_s(FILE **File, const char *Filename, const char *Mode)
 {
-  FILE *v4; // eax
+  int v3; // ebx
+  FILE *v5; // eax
 
-  if ( File )
+  if ( File ) /*0x98245d*/
   {
-    v4 = _fsopen(Filename, Mode, 0x80);
-    *File = v4;
-    if ( v4 )
-      return 0;
+    v5 = _fsopen(Filename, Mode, 0x80); /*0x982487*/
+    *File = v5; /*0x982491*/
+    if ( v5 ) /*0x982493*/
+      return 0; /*0x982495*/
     else
-      return *_errno();
+      return *_errno(); /*0x98249e*/
   }
   else
   {
-    *_errno() = 0x16;
-    _invalid_parameter(0, 0, 0, 0, 0);
-    return 0x16;
+    *_errno() = 0x16; /*0x98246c*/
+    _invalid_parameter(v3, 0x16, 0); /*0x98246e*/
+    return 0x16; /*0x982476*/
   }
 }

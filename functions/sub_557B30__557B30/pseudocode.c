@@ -1,14 +1,15 @@
-void __thiscall sub_557B30(int *this)
+// Destroy all 64-byte records in an EGT basis bank, free its storage, and reset the range.
+void __thiscall FaceGenEgtBasisBank_Destruct(FaceGenEgtBasisBank *self)
 {
-  int v2; // eax
+  void *begin; // eax
 
-  v2 = *(this + 1);
-  if ( v2 )
+  begin = self->begin; /*0x557b33*/
+  if ( begin ) /*0x557b38*/
   {
-    sub_557740(v2, *(this + 2));
-    FormHeapFree(*(this + 1));
+    FaceGenEgtBasisRecordArray_Destruct(begin, self->end); /*0x557b41*/
+    FormHeapFree((unsigned int)self->begin); /*0x557b4a*/
   }
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = 0;
+  self->begin = 0; /*0x557b52*/
+  self->end = 0; /*0x557b59*/
+  self->capacityEnd = 0; /*0x557b60*/
 }

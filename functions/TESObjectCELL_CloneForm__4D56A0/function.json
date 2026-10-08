@@ -1,19 +1,32 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 8,
+  "chunks": [
+    [
+      "0x4D56A0",
+      "0x4D58A2"
+    ]
+  ],
+  "chunks_sha256": "ff71a1273b65b4e0f3fe6b6fef7c64a840b5c7b50bc9fe7a3a1e9dc4a145d4c4",
+  "comment_regular": "Verified: TESObjectCELL_CloneForm clones the CELL via TESForm_Clone, then clones associated LAND and TESPathGrid through vtable slot +0x38 and duplicates eligible child references through the same slot before adding them to the destination cell. This shows +0x38 is the CreateDuplicateForm virtual family.",
+  "comment_repeatable": "Verified: TESObjectCELL_CloneForm clones the CELL via TESForm_Clone, then clones associated LAND and TESPathGrid through vtable slot +0x38 and duplicates eligible child references through the same slot before adding them to the destination cell. This shows +0x38 is the CreateDuplicateForm virtual family.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
   "display_name": "TESObjectCELL_CloneForm",
   "end_ea": "0x4D58A2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectCELL_CloneForm",
   "segment": ".text",
   "sha256": "ff71a1273b65b4e0f3fe6b6fef7c64a840b5c7b50bc9fe7a3a1e9dc4a145d4c4",
   "size": 514,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D56A0",
-  "type": "_DWORD *__userpurge@<eax>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, int, void *cloneMap)",
+  "total_chunk_size": 514,
+  "type": "_DWORD *__userpurge@<eax>(int@<ecx>, double@<st2>, double@<st1>, int, void *cloneMap)",
   "xrefs_from_count": 233,
   "xrefs_to_count": 1
 }

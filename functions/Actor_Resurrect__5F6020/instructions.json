@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5F6053",
-    "line": "call    sub_4212E0",
+    "line": "call    ExtraDataList_RemoveSavedMovementData; Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5F6080",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5F6091",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5F60AE",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x5F6105",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5F610C",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x5F6160",
-    "line": "call    sub_4728C0",
+    "line": "call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x5F6179",
-    "line": "lea     ecx, [esi+88h]",
+    "line": "lea     ecx, [esi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x5F6188",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x5F61AC",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x5F61E4",
-    "line": "call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)",
+    "line": "call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x5F621B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,37 +1363,37 @@
   },
   {
     "ea": "0x5F62F5",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F62F7",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F62F9",
-    "line": "push    3",
+    "line": "push    3; processLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F62FB",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F62FC",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5F6301",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1438,5 +1438,77 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2980",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2983",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2984",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2989",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C298A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C298B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C298F",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2992",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2995",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2997",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C299C",
+    "line": "mov     eax, offset stru_AEB758",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C29A1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

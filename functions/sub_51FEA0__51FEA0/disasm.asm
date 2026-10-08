@@ -17,7 +17,7 @@
 0x51FEC4: jmp     loc_51FFB7
 0x51FEC9: push    edi
 0x51FECA: mov     ecx, ebx
-0x51FECC: call    TESFile_InitializeFormFromRecord
+0x51FECC: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x51FED1: mov     ecx, ebx
 0x51FED3: call    TESFile_GetChunkType
 0x51FED8: test    eax, eax
@@ -37,7 +37,7 @@
 0x51FF0F: push    200h; a4
 0x51FF14: push    esi; Dst
 0x51FF15: mov     ecx, ebx; a1
-0x51FF17: call    TESFile_GetChunkData
+0x51FF17: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51FF1C: mov     eax, [edi]
 0x51FF1E: mov     edx, [eax+0D8h]
 0x51FF24: push    esi
@@ -49,7 +49,7 @@
 0x51FF30: push    eax; Dst
 0x51FF31: push    ebx; a2
 0x51FF32: mov     ecx, edi; this
-0x51FF34: call    TESForm_LoadGenericComponents
+0x51FF34: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x51FF39: jmp     short loc_51FF9B
 0x51FF3B: cmp     eax, 4C4C5546h
 0x51FF40: jz      short loc_51FF86
@@ -88,7 +88,7 @@
 0x51FF8F: xor     eax, eax
 0x51FF91: push    ebx
 0x51FF92: push    eax
-0x51FF93: call    TESFullname_Load
+0x51FF93: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51FF98: add     esp, 8
 0x51FF9B: mov     ecx, ebx
 0x51FF9D: call    TESFile_GetNextChunk

@@ -1,15 +1,16 @@
-void sub_67FCF0()
+// Verified lazy initialization of LowPathSearchGlobals.doorLinkMap: if null, allocates a 0x10-byte outer NiTPointerMap<TESForm*,NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>*> with 0xBF buckets. Called from WinMain and after map teardown during save/load reconciliation.
+void __cdecl TravelPath_EnsureDoorLinkMapInitialized()
 {
-  NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *> *v0; // eax
+  LowPathWorldDoorLinkMap *v0; // eax
 
-  if ( !lowPathWorld_ptr )
+  if ( !MEMORY[0xB3BE00].doorLinkMap ) /*0x67fd11*/
   {
-    v0 = (NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *> *)FormHeapAlloc(0x10u);
-    if ( v0 )
-      lowPathWorld_ptr = NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *>::NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *>(
-                           v0,
-                           0xBFu);
+    v0 = (LowPathWorldDoorLinkMap *)FormHeapAlloc(0x10u); /*0x67fd1c*/
+    if ( v0 ) /*0x67fd32*/
+      MEMORY[0xB3BE00].doorLinkMap = NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *>::NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *>( /*0x67fd40*/
+                                       v0,
+                                       0xBFu);
     else
-      lowPathWorld_ptr = 0;
+      MEMORY[0xB3BE00].doorLinkMap = 0; /*0x67fd57*/
   }
 }

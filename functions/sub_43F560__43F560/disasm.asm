@@ -103,12 +103,12 @@
 0x43F6A9: jz      short loc_43F6C8
 0x43F6AB: cmp     dword ptr ds:0B42F48h, 2
 0x43F6B2: jl      short loc_43F6C8
-0x43F6B4: push    1
-0x43F6B6: push    0
-0x43F6B8: push    11h
+0x43F6B4: push    1; arg3
+0x43F6B6: push    0; normalMapBypass
+0x43F6B8: push    11h; shaderId
 0x43F6BA: call    sub_49A140
-0x43F6BF: push    eax
-0x43F6C0: call    sub_7B8940
+0x43F6BF: push    eax; root
+0x43F6C0: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x43F6C5: add     esp, 10h
 0x43F6C8: mov     ecx, [esp+24h+var_C]
 0x43F6CC: mov     large fs:0, ecx
@@ -119,3 +119,25 @@
 0x43F6D7: pop     ebx
 0x43F6D8: add     esp, 10h
 0x43F6DB: retn
+0x9AD040: mov     eax, [ebp-10h]
+0x9AD043: push    eax
+0x9AD044: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD049: pop     ecx
+0x9AD04A: retn
+0x9AD04B: mov     eax, [ebp-10h]
+0x9AD04E: push    eax
+0x9AD04F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD054: pop     ecx
+0x9AD055: retn
+0x9AD056: mov     eax, [ebp-10h]
+0x9AD059: push    eax
+0x9AD05A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD05F: pop     ecx
+0x9AD060: retn
+0x9AD061: mov     edx, [esp+arg_4]
+0x9AD065: lea     eax, [edx-14h]
+0x9AD068: mov     ecx, [edx-18h]
+0x9AD06B: xor     ecx, eax
+0x9AD06D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD072: mov     eax, offset stru_AD9C7C
+0x9AD077: jmp     ___CxxFrameHandler3

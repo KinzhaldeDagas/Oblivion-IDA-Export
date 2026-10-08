@@ -40,15 +40,15 @@
 0x7561BC: test    ah, 44h
 0x7561BF: jp      short loc_7561E8
 0x7561C1: lea     ecx, [edi+38h]
-0x7561C4: push    ecx
-0x7561C5: lea     ecx, [esi+38h]
-0x7561C8: call    sub_8AA390
+0x7561C4: push    ecx; other
+0x7561C5: lea     ecx, [esi+38h]; this
+0x7561C8: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x7561CD: test    al, al
 0x7561CF: jnz     short loc_7561E8
 0x7561D1: add     edi, 44h ; 'D'
-0x7561D4: push    edi
-0x7561D5: lea     ecx, [esi+44h]
-0x7561D8: call    sub_8AA390
+0x7561D4: push    edi; other
+0x7561D5: lea     ecx, [esi+44h]; this
+0x7561D8: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x7561DD: test    al, al
 0x7561DF: jnz     short loc_7561E8
 0x7561E1: pop     edi

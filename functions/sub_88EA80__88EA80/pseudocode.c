@@ -1,4 +1,4 @@
-char *sub_88EA80()
+NiRTTI *sub_88EA80()
 {
-  return dword_BA7A20;
+  return &MEMORY[0xBA7A20]; /*0x88ea85*/
 }

@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5AC64A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x5AC652",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },

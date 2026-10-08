@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x558840",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Native EGM lock defects, statically verified: early failures after stream acquisition can return false without unlock; failed acquisition can still continue via cached base-vertex branch then success unlocks preexisting stream. Preconditions matter; runtime/shipped-asset reachability not established. IDA range +0x944 matches deployed EXE hash 33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0. PF guards source versions 1.19.11, but local PF DLL removed 2026-10-01 at user request. OCO LoadGame root cause remains unresolved.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x55886D",
-    "line": "mov     ebx, [esp+88h+arg_4]",
+    "line": "mov     ebx, [esp+88h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x558874",
-    "line": "push    ebx",
+    "line": "push    ebx; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x558875",
-    "line": "call    sub_5508A0",
+    "line": "call    NiObjectNET_FindFaceGenBaseVertexData; Scan NiObjectNET extra data and return the FaceGen base-vertex data object used to restore authored positions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x55888A",
-    "line": "cmp     [esp+88h+arg_0], ebp",
+    "line": "cmp     [esp+88h+parameters], ebp",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x558893",
-    "line": "call    sub_5538D0",
+    "line": "call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x55889A",
-    "line": "mov     [esp+88h+arg_0], eax",
+    "line": "mov     [esp+88h+parameters], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x5588A9",
-    "line": "mov     [esp+88h+var_30], ebp",
+    "line": "mov     [esp+88h+outVertices.data], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5588AD",
-    "line": "mov     [esp+88h+var_2C], ebp",
+    "line": "mov     [esp+88h+outVertices.stride], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5588B1",
-    "line": "mov     [esp+88h+var_28], 0",
+    "line": "mov     [esp+88h+outVertices.unknown08], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5588B8",
-    "line": "mov     ecx, [ebx+0B4h]",
+    "line": "mov     ecx, [ebx+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x5588C2",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5588C4",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Acquire the target geometry's vertex-stream lock before EGM loading, model serialization, and basis validation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x5588CD",
-    "line": "mov     ecx, [ebx+0B4h]",
+    "line": "mov     ecx, [ebx+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5588D3",
-    "line": "lea     eax, [esp+88h+var_30]",
+    "line": "lea     eax, [esp+88h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5588D7",
-    "line": "push    eax",
+    "line": "push    eax; outVertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5588D8",
-    "line": "call    sub_728B60",
+    "line": "call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x55890B",
-    "line": "cmp     [esp+88h+var_30], ebp",
+    "line": "cmp     [esp+88h+outVertices.data], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
   {
     "ea": "0x55890F",
-    "line": "jz      loc_558AFB",
+    "line": "jz      loc_558AFB; Failure after lock acquisition: a missing writable stream returns without NiGeometryData_UnlockVertexStream, leaving m_bVertexStreamLocked set when this call acquired it.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x558932",
-    "line": "call    sub_551930",
+    "line": "call    sub_551930; Lazily load/parse the model's EGM basis data before deformation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x55894D",
-    "line": "jz      loc_558AFB",
+    "line": "jz      loc_558AFB; Failure after lock acquisition: empty EGM path returns without unlocking the target vertex stream.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x558994",
-    "line": "jz      loc_558AFB",
+    "line": "jz      loc_558AFB; Failure after lock acquisition: EGM load/parse failure returns without unlocking the target vertex stream.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x5589AA",
-    "line": "call    dword ptr ds:0A2813Ch",
+    "line": "call    dword ptr ds:0A2813Ch; Model-data serialization is attempted only after the geometry vertex stream is locked. Contention falls through to false without unlocking that stream.",
     "mnemonic": "call",
     "size": 6
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x5589CC",
-    "line": "mov     ecx, [esp+88h+arg_0]",
+    "line": "mov     ecx, [esp+88h+parameters]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -738,12 +738,6 @@
     "size": 2
   },
   {
-    "ea": "0x5589DF",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
-  },
-  {
     "ea": "0x5589E0",
     "line": "mov     ebp, [esp+88h+Destination]",
     "mnemonic": "mov",
@@ -757,7 +751,7 @@
   },
   {
     "ea": "0x5589E7",
-    "line": "mov     eax, [edx+8]",
+    "line": "mov     eax, [edx+8]; Validate geometry parameter bank 0 against the first EGM coordinate basis.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1093,7 +1087,7 @@
   },
   {
     "ea": "0x558A8B",
-    "line": "jb      loc_558B13",
+    "line": "jb      loc_558B13; Reject an EGM basis whose vertex count does not match the target geometry/model data.",
     "mnemonic": "jb",
     "size": 6
   },
@@ -1261,7 +1255,7 @@
   },
   {
     "ea": "0x558AE8",
-    "line": "call    PrintError",
+    "line": "call    PrintError; Validate geometry parameter bank 1 against the second EGM coordinate basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1297,7 @@
   },
   {
     "ea": "0x558AFD",
-    "line": "mov     ecx, [esp+88h+var_C]",
+    "line": "mov     ecx, [esp+88h+var_C]; Common false return. Native cleanup releases the model-data interlock on validation failures but does not release a vertex-stream lock acquired earlier.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1399,7 +1393,7 @@
   },
   {
     "ea": "0x558B29",
-    "line": "jmp     short loc_558AF5",
+    "line": "jmp     short loc_558AF5; Release the model-data interlock after basis/model mismatch; the target geometry vertex stream remains locked.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -1483,7 +1477,7 @@
   },
   {
     "ea": "0x558B53",
-    "line": "mov     eax, [esp+88h+arg_0]",
+    "line": "mov     eax, [esp+88h+parameters]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1516,12 +1510,6 @@
     "line": "jmp     short loc_558B70",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x558B68",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x558B70",
@@ -1729,7 +1717,7 @@
   },
   {
     "ea": "0x558BD3",
-    "line": "fmul    [esp+88h+arg_8]",
+    "line": "fmul    [esp+88h+morphScale]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -1765,7 +1753,7 @@
   },
   {
     "ea": "0x558BE9",
-    "line": "fstp    [esp+88h+var_74]",
+    "line": "fstp    [esp+88h+var_74]; Effective morph weight = FaceGen coefficient * caller morphScale * per-basis-entry scale.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1957,7 +1945,7 @@
   },
   {
     "ea": "0x558C51",
-    "line": "mov     ecx, [esp+88h+arg_4]",
+    "line": "mov     ecx, [esp+88h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1981,7 +1969,7 @@
   },
   {
     "ea": "0x558C64",
-    "line": "cmp     [esp+88h+arg_C], ecx",
+    "line": "cmp     [esp+88h+basePositions], ecx",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2083,7 +2071,7 @@
   },
   {
     "ea": "0x558CAC",
-    "line": "mov     ecx, [esp+88h+arg_C]",
+    "line": "mov     ecx, [esp+88h+basePositions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2113,7 +2101,7 @@
   },
   {
     "ea": "0x558CC1",
-    "line": "fstp    dword ptr [edi]",
+    "line": "fstp    dword ptr [edi]; Accumulate signed int16 EGM XYZ deltas into float vertex positions using the effective morph weight.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -2143,7 +2131,7 @@
   },
   {
     "ea": "0x558CD1",
-    "line": "mov     eax, [esp+88h+arg_C]",
+    "line": "mov     eax, [esp+88h+basePositions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2203,7 +2191,7 @@
   },
   {
     "ea": "0x558CF8",
-    "line": "mov     edx, [esp+88h+arg_C]",
+    "line": "mov     edx, [esp+88h+basePositions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2245,7 +2233,7 @@
   },
   {
     "ea": "0x558D14",
-    "line": "mov     eax, [esp+88h+var_2C]",
+    "line": "mov     eax, [esp+88h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2257,7 +2245,7 @@
   },
   {
     "ea": "0x558D1D",
-    "line": "add     eax, [esp+88h+var_30]",
+    "line": "add     eax, [esp+88h+outVertices.data]",
     "mnemonic": "add",
     "size": 4
   },
@@ -2437,7 +2425,7 @@
   },
   {
     "ea": "0x558D87",
-    "line": "mov     edx, [esp+88h+arg_C]",
+    "line": "mov     edx, [esp+88h+basePositions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2503,7 +2491,7 @@
   },
   {
     "ea": "0x558DB0",
-    "line": "mov     edx, [esp+88h+arg_C]",
+    "line": "mov     edx, [esp+88h+basePositions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2569,7 +2557,7 @@
   },
   {
     "ea": "0x558DDB",
-    "line": "mov     edx, [esp+88h+arg_C]",
+    "line": "mov     edx, [esp+88h+basePositions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2677,7 +2665,7 @@
   },
   {
     "ea": "0x558E22",
-    "line": "mov     edi, [esp+88h+arg_C]",
+    "line": "mov     edi, [esp+88h+basePositions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2857,7 +2845,7 @@
   },
   {
     "ea": "0x558E93",
-    "line": "mov     eax, [esp+88h+var_2C]",
+    "line": "mov     eax, [esp+88h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2893,7 +2881,7 @@
   },
   {
     "ea": "0x558EA8",
-    "line": "add     eax, [esp+88h+var_30]",
+    "line": "add     eax, [esp+88h+outVertices.data]",
     "mnemonic": "add",
     "size": 4
   },
@@ -3199,7 +3187,7 @@
   },
   {
     "ea": "0x558F5E",
-    "line": "mov     eax, [esp+88h+var_2C]",
+    "line": "mov     eax, [esp+88h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3211,7 +3199,7 @@
   },
   {
     "ea": "0x558F67",
-    "line": "add     eax, [esp+88h+var_30]",
+    "line": "add     eax, [esp+88h+outVertices.data]",
     "mnemonic": "add",
     "size": 4
   },
@@ -3619,7 +3607,7 @@
   },
   {
     "ea": "0x55905B",
-    "line": "mov     eax, [esp+88h+var_2C]",
+    "line": "mov     eax, [esp+88h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3631,7 +3619,7 @@
   },
   {
     "ea": "0x559062",
-    "line": "add     eax, [esp+88h+var_30]",
+    "line": "add     eax, [esp+88h+outVertices.data]",
     "mnemonic": "add",
     "size": 4
   },
@@ -3823,7 +3811,7 @@
   },
   {
     "ea": "0x5590D7",
-    "line": "mov     eax, [esp+88h+var_2C]",
+    "line": "mov     eax, [esp+88h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3841,7 +3829,7 @@
   },
   {
     "ea": "0x5590E2",
-    "line": "add     eax, [esp+88h+var_30]",
+    "line": "add     eax, [esp+88h+outVertices.data]",
     "mnemonic": "add",
     "size": 4
   },
@@ -4003,13 +3991,13 @@
   },
   {
     "ea": "0x559145",
-    "line": "jb      loc_558AC0",
+    "line": "jb      loc_558AC0; EGM geometry deformation consumes exactly FaceGen matrices 0 and 1; matrices 2 and 3 are never vertex inputs.",
     "mnemonic": "jb",
     "size": 6
   },
   {
     "ea": "0x55914B",
-    "line": "mov     ecx, [esp+88h+arg_4]",
+    "line": "mov     ecx, [esp+88h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4033,19 +4021,19 @@
   },
   {
     "ea": "0x55915E",
-    "line": "or      word ptr [eax+2Eh], 1",
+    "line": "or      word ptr [eax+2Eh], 1; After EGM position writes, mark only the vertex channel dirty. The local NiGeometryData bounding sphere is not recomputed.",
     "mnemonic": "or",
     "size": 5
   },
   {
     "ea": "0x559163",
-    "line": "mov     ecx, [ecx+0B4h]",
+    "line": "mov     ecx, [ecx+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x559169",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; The sole successful-path vertex-stream unlock in ApplyEGMMorph.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4088,6 +4076,90 @@
   {
     "ea": "0x55917F",
     "line": "jmp     loc_558AFD",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC7E0",
+    "line": "mov     eax, [ebp-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC7E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC7E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC7E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC7EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC7EB",
+    "line": "lea     ecx, [ebp-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC7EE",
+    "line": "jmp     sub_5563B0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC7F3",
+    "line": "mov     edx, [esp+geometry]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BC7F7",
+    "line": "lea     eax, [edx-78h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC7FA",
+    "line": "mov     ecx, [edx-7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC7FD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC7FF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC804",
+    "line": "mov     eax, offset stru_AE6410",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC809",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -1,1 +1,1 @@
-BSCubeMapCamera
+struct BSCubeMapCamera;

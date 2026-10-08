@@ -3,7 +3,7 @@
 0x41E162: push    edi
 0x41E163: mov     esi, ecx
 0x41E165: push    offset aBaseextralistR; lpCriticalSection
-0x41E16A: mov     ecx, offset BSExtraDataCS
+0x41E16A: mov     ecx, 0B33800h
 0x41E16F: call    NiEnterCriticalSection
 0x41E174: mov     ecx, [esi+4]
 0x41E177: mov     bl, [esp+0Ch+arg_0]
@@ -43,7 +43,7 @@
 0x41E1C9: shl     dl, cl
 0x41E1CB: not     dl
 0x41E1CD: and     [eax+esi+8], dl
-0x41E1D1: mov     eax, TlsIndex
+0x41E1D1: mov     eax, dword ptr byte_BA9DCC+18h
 0x41E1D6: mov     ecx, large fs:2Ch
 0x41E1DD: mov     eax, [ecx+eax*4]
 0x41E1E0: cmp     esi, [eax+8]
@@ -51,7 +51,7 @@
 0x41E1E8: cmp     edi, 5Ch ; '\'
 0x41E1EB: ja      short loc_41E1F8
 0x41E1ED: mov     dword ptr [eax+edi*4+10h], 0
-0x41E1F8: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x41E1F8: mov     ecx, 0B33800h; lpCriticalSection
 0x41E1FD: call    NiLeaveCriticalSection_0
 0x41E202: pop     edi
 0x41E203: pop     esi

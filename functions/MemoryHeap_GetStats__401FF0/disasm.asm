@@ -94,20 +94,19 @@
 0x402103: jnz     short loc_40215C
 0x402105: xor     eax, eax
 0x402107: jmp     short loc_402110
-0x402109: align 10h
-0x402110: mov     ecx, g_HeapPoolsBySize[eax]
+0x402110: mov     ecx, [eax+0B33080h]
 0x402116: test    ecx, ecx
 0x402118: jz      short loc_402126
 0x40211A: mov     ecx, [ecx+118h]
 0x402120: shl     ecx, 0Ch
 0x402123: add     [esi+4Ch], ecx
-0x402126: mov     ecx, dword_B33084[eax]
+0x402126: mov     ecx, dword ptr unk_B33084[eax]
 0x40212C: test    ecx, ecx
 0x40212E: jz      short loc_40213C
 0x402130: mov     edx, [ecx+118h]
 0x402136: shl     edx, 0Ch
 0x402139: add     [esi+4Ch], edx
-0x40213C: mov     ecx, dword_B33088[eax]
+0x40213C: mov     ecx, dword ptr unk_B33088[eax]
 0x402142: test    ecx, ecx
 0x402144: jz      short loc_402152
 0x402146: mov     ecx, [ecx+118h]

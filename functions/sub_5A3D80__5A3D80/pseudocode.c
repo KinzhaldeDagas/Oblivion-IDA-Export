@@ -1,39 +1,39 @@
-void __userpurge sub_5A3D80(int a1@<ecx>, double a2@<st1>, int a3, int a4)
+void __userpurge sub_5A3D80(int a1@<ecx>, double a2@<st2>, int a3, int a4)
 {
   int i; // esi
-  double Float; // st5
-  _DWORD v9[21]; // [esp+8h] [ebp-54h]
+  double Float; // st6
+  _DWORD v8[21]; // [esp+8h] [ebp-54h]
 
-  if ( a3 > 0 )
+  if ( a3 > 0 ) /*0x5a3d8d*/
   {
-    v9[0] = 0xFAE;
-    v9[1] = 0xFAF;
-    v9[2] = 0xFB0;
-    v9[3] = 0xFB1;
-    v9[4] = 0xFB2;
-    v9[5] = 0xFB3;
-    v9[6] = 0xFB4;
-    v9[7] = 0xFB5;
-    v9[8] = 0xFB6;
-    v9[9] = 0xFB7;
-    v9[0xA] = 0xFB8;
-    v9[0xB] = 0xFB9;
-    v9[0xC] = 0xFBA;
-    v9[0xD] = 0xFBB;
-    v9[0xE] = 0xFBC;
-    v9[0xF] = 0xFBD;
-    v9[0x10] = 0xFBE;
-    v9[0x11] = 0xFBF;
-    v9[0x12] = 0xFC0;
-    v9[0x13] = 0xFC1;
-    v9[0x14] = 0xFC2;
-    for ( i = 0; i < 0x15; ++i )
+    v8[0] = 0xFAE; /*0x5a3d94*/
+    v8[1] = 0xFAF; /*0x5a3d9c*/
+    v8[2] = 0xFB0; /*0x5a3da4*/
+    v8[3] = 0xFB1; /*0x5a3dac*/
+    v8[4] = 0xFB2; /*0x5a3db4*/
+    v8[5] = 0xFB3; /*0x5a3dbc*/
+    v8[6] = 0xFB4; /*0x5a3dc4*/
+    v8[7] = 0xFB5; /*0x5a3dcc*/
+    v8[8] = 0xFB6; /*0x5a3dd4*/
+    v8[9] = 0xFB7; /*0x5a3ddc*/
+    v8[0xA] = 0xFB8; /*0x5a3de4*/
+    v8[0xB] = 0xFB9; /*0x5a3dec*/
+    v8[0xC] = 0xFBA; /*0x5a3df4*/
+    v8[0xD] = 0xFBB; /*0x5a3dfc*/
+    v8[0xE] = 0xFBC; /*0x5a3e04*/
+    v8[0xF] = 0xFBD; /*0x5a3e0c*/
+    v8[0x10] = 0xFBE; /*0x5a3e14*/
+    v8[0x11] = 0xFBF; /*0x5a3e1c*/
+    v8[0x12] = 0xFC0; /*0x5a3e24*/
+    v8[0x13] = 0xFC1; /*0x5a3e2c*/
+    v8[0x14] = 0xFC2; /*0x5a3e34*/
+    for ( i = 0; i < 0x15; ++i ) /*0x5a3e3c*/
     {
-      Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 4), v9[i]);
-      *(float *)(i * 4 + 0xB3B2E0) = Float;
+      Float = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 4), v8[i]); /*0x5a3e48*/
+      *(float *)(i * 4 + 0xB3B2E0) = Float; /*0x5a3e4d*/
     }
-    dword_B3B2D8 = *(_DWORD *)(a1 + 0x34);
-    dword_B3B2DC = a3;
-    sub_5A3D00(Float, a2, a3);
+    dword_B3B0B4[0x89] = *(_DWORD *)(a1 + 0x34); /*0x5a3e5f*/
+    dword_B3B0B4[0x8A] = a3; /*0x5a3e65*/
+    sub_5A3D00(a2, Float, a3); /*0x5a3e6b*/
   }
 }

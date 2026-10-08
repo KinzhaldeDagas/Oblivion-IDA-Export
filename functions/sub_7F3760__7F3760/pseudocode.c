@@ -2,11 +2,11 @@ int sub_7F3760()
 {
   int result; // eax
 
-  result = dword_B468FC;
-  if ( !dword_B468FC )
+  result = unk_B468FC; /*0x7f3760*/
+  if ( !unk_B468FC )
   {
-    result = ShaderPackage < 2 ? 0x4B : 0xEB;
-    dword_B468FC = result;
+    result = *(_DWORD *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le < 2 ? 0x4B : 0xEB;
+    unk_B468FC = result; /*0x7f377e*/
   }
-  return result;
+  return result; /*0x7f3783*/
 }

@@ -1,1 +1,1 @@
-ept_entry_t
+typedef __WIDL_epm_generated_name_0000000F ept_entry_t;

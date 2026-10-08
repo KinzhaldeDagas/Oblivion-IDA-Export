@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6330FD",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,25 +247,25 @@
   },
   {
     "ea": "0x633107",
-    "line": "fst     [esp+10h+var_C]; int",
+    "line": "fst     [esp+10h+arg1]; arg1",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x63310B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63310D",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+arg0]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x633110",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "call",
     "size": 5
   },

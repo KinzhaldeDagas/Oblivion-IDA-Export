@@ -1,4 +1,4 @@
 double sub_625BB0()
 {
-  return fAIDefaultRushingAttackDistanceMult;
+  return MEMORY[0xB35780]; /*0x625bb6*/
 }

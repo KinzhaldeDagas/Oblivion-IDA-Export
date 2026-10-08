@@ -95,7 +95,7 @@
 0x65501E: push    ecx
 0x65501F: mov     ecx, ds:0B362C0h
 0x655025: push    edi
-0x655026: call    sub_521450
+0x655026: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x65502B: test    eax, eax
 0x65502D: mov     [esp+18h+arg_0], eax
 0x655031: jnz     loc_6551E7
@@ -180,8 +180,8 @@
 0x655147: test    al, 1
 0x655149: jz      short loc_655150
 0x65514B: mov     byte ptr [esp+18h+arg_0], 0
-0x655150: mov     ecx, edi
-0x655152: call    sub_5E32D0
+0x655150: mov     ecx, edi; this
+0x655152: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x655157: test    al, al
 0x655159: push    0; int
 0x65515B: mov     ecx, edi
@@ -240,12 +240,12 @@
 0x6551E1: add     esp, 8
 0x6551E4: retn    4
 0x6551E7: mov     ecx, eax
-0x6551E9: call    sub_520200
+0x6551E9: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x6551EE: push    eax
 0x6551EF: mov     eax, [esp+1Ch+arg_0]
 0x6551F3: push    eax
 0x6551F4: mov     ecx, ebp
-0x6551F6: call    sub_475300
+0x6551F6: call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.
 0x6551FB: pop     ebx
 0x6551FC: pop     edi
 0x6551FD: pop     esi
@@ -254,17 +254,17 @@
 0x655201: add     esp, 8
 0x655204: retn    4
 0x655207: mov     ecx, ebp; jumptable 00654FB4 cases 5,10
-0x655209: call    sub_4711F0
+0x655209: call    ActorAnimData_IsCurrentIdleReady; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.
 0x65520E: test    al, al
 0x655210: jz      loc_6552C6
-0x655216: push    0
-0x655218: mov     ecx, ebp
-0x65521A: call    sub_4706E0
+0x655216: push    0; slotSelector
+0x655218: mov     ecx, ebp; this
+0x65521A: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x65521F: test    eax, eax
 0x655221: jz      short loc_655236
-0x655223: push    0
-0x655225: mov     ecx, ebp
-0x655227: call    sub_4706E0
+0x655223: push    0; slotSelector
+0x655225: mov     ecx, ebp; this
+0x655227: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x65522C: cmp     dword ptr [eax+44h], 1
 0x655230: jnz     loc_6552C6
 0x655236: mov     byte ptr [ebp+0C4h], 1
@@ -304,7 +304,7 @@
 0x6552A9: call    eax
 0x6552AB: push    edi
 0x6552AC: mov     ecx, ebp
-0x6552AE: call    sub_477E50
+0x6552AE: call    ActorAnimData_StartQueuedIdleAction; Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.
 0x6552B3: pop     ebx
 0x6552B4: pop     edi
 0x6552B5: pop     esi
@@ -314,7 +314,7 @@
 0x6552C0: add     esp, 8
 0x6552C3: retn    4
 0x6552C6: mov     ecx, ebp
-0x6552C8: call    sub_472EA0
+0x6552C8: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x6552CD: test    al, al
 0x6552CF: jz      loc_6553BB
 0x6552D5: movzx   ecx, byte ptr [esi+124h]
@@ -365,19 +365,19 @@
 0x65536F: call    sub_65AC20
 0x655374: mov     edx, [esi]
 0x655376: mov     edx, [edx+18Ch]
-0x65537C: lea     eax, [esp+18h+var_4]
+0x65537C: lea     eax, [esp+18h+slot]
 0x655380: push    eax
 0x655381: mov     ecx, esi
 0x655383: call    edx
 0x655385: mov     esi, [eax]
-0x655387: lea     ecx, [esp+18h+var_4]; this
-0x65538B: call    sub_7016A0
+0x655387: lea     ecx, [esp+18h+slot]; slot
+0x65538B: call    NiPointerSlot_Release
 0x655390: test    esi, esi
 0x655392: jz      short loc_6553BB
 0x655394: add     edi, 2Ch ; ','
 0x655397: push    edi; a2
 0x655398: mov     ecx, esi; this
-0x65539A: call    sub_452A10
+0x65539A: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x65539F: pop     ebx
 0x6553A0: pop     edi
 0x6553A1: pop     esi

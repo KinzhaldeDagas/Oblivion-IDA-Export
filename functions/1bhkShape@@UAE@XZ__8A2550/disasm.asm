@@ -24,3 +24,12 @@
 0x8A25AD: pop     esi
 0x8A25AE: add     esp, 10h
 0x8A25B1: retn
+0x9D68E0: mov     ecx, [ebp-10h]; this
+0x9D68E3: jmp     ??1bhkSerializable@@UAE@XZ; bhkSerializable::~bhkSerializable(void)
+0x9D68E8: mov     edx, [esp+arg_4]
+0x9D68EC: lea     eax, [edx-8]
+0x9D68EF: mov     ecx, [edx-0Ch]
+0x9D68F2: xor     ecx, eax
+0x9D68F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D68F9: mov     eax, offset stru_AFE69C
+0x9D68FE: jmp     ___CxxFrameHandler3

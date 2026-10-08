@@ -55,7 +55,7 @@
 0x99E6BE: add     esp, 14h
 0x99E6C1: call    ____lc_codepage_func
 0x99E6C6: mov     [ebp+CodePage], eax
-0x99E6C9: mov     dword_BAA86C, ebx
+0x99E6C9: mov     dword_BA9E10+0A5Ch, ebx
 0x99E6CF: or      edi, 0FFFFFFFFh
 0x99E6D2: mov     dword_B31FDC, edi
 0x99E6D8: mov     dword_B31FD0, edi
@@ -68,7 +68,7 @@
 0x99E6F0: jz      short loc_99E76E
 0x99E6F2: cmp     [esi], bl
 0x99E6F4: jz      short loc_99E76E
-0x99E6F6: mov     eax, dword_BAA870
+0x99E6F6: mov     eax, dword_BA9E10+0A60h
 0x99E6FB: cmp     eax, ebx
 0x99E6FD: jz      short loc_99E720
 0x99E6FF: push    eax; Str2
@@ -78,7 +78,7 @@
 0x99E707: pop     ecx
 0x99E708: test    eax, eax
 0x99E70A: jz      loc_99E859
-0x99E710: mov     eax, dword_BAA870
+0x99E710: mov     eax, dword_BA9E10+0A60h
 0x99E715: cmp     eax, ebx
 0x99E717: jz      short loc_99E720
 0x99E719: push    eax; Memory
@@ -91,7 +91,7 @@
 0x99E728: call    unknown_libname_72
 0x99E72D: pop     ecx
 0x99E72E: pop     ecx
-0x99E72F: mov     dword_BAA870, eax
+0x99E72F: mov     dword_BA9E10+0A60h, eax
 0x99E734: cmp     eax, ebx
 0x99E736: jz      loc_99E859
 0x99E73C: push    esi; Src
@@ -100,7 +100,7 @@
 0x99E743: pop     ecx
 0x99E744: inc     eax
 0x99E745: push    eax; SizeInBytes
-0x99E746: push    dword_BAA870; Dst
+0x99E746: push    dword_BA9E10+0A60h; Dst
 0x99E74C: call    _strcpy_s
 0x99E751: add     esp, 0Ch
 0x99E754: cmp     eax, ebx
@@ -113,36 +113,36 @@
 0x99E761: call    __invoke_watson
 0x99E766: add     esp, 14h
 0x99E769: jmp     loc_99E860
-0x99E76E: mov     eax, dword_BAA870
+0x99E76E: mov     eax, dword_BA9E10+0A60h
 0x99E773: cmp     eax, ebx
 0x99E775: jz      short loc_99E784
 0x99E777: push    eax; Memory
 0x99E778: call    _free
 0x99E77D: pop     ecx
-0x99E77E: mov     dword_BAA870, ebx
-0x99E784: push    offset TimeZoneInformation; lpTimeZoneInformation
+0x99E77E: mov     dword_BA9E10+0A60h, ebx
+0x99E784: push    (offset dword_BA9E10+9B0h); lpTimeZoneInformation
 0x99E789: call    ds:GetTimeZoneInformation
 0x99E78F: cmp     eax, edi
 0x99E791: jz      loc_99E859
 0x99E797: xor     ecx, ecx
 0x99E799: inc     ecx
-0x99E79A: mov     dword_BAA86C, ecx
-0x99E7A0: mov     eax, TimeZoneInformation.Bias
+0x99E79A: mov     dword_BA9E10+0A5Ch, ecx
+0x99E7A0: mov     eax, dword_BA9E10+9B0h
 0x99E7A5: imul    eax, 3Ch ; '<'
 0x99E7A8: mov     [ebp+var_1C], eax
-0x99E7AB: cmp     TimeZoneInformation.StandardDate.wMonth, bx
+0x99E7AB: cmp     word ptr dword_BA9E10+9F6h, bx
 0x99E7B2: jz      short loc_99E7C2
-0x99E7B4: mov     edx, TimeZoneInformation.StandardBias
+0x99E7B4: mov     edx, dword_BA9E10+0A04h
 0x99E7BA: imul    edx, 3Ch ; '<'
 0x99E7BD: add     eax, edx
 0x99E7BF: mov     [ebp+var_1C], eax
-0x99E7C2: cmp     TimeZoneInformation.DaylightDate.wMonth, bx
+0x99E7C2: cmp     word ptr dword_BA9E10+0A4Ah, bx
 0x99E7C9: jz      short loc_99E7E5
-0x99E7CB: mov     eax, TimeZoneInformation.DaylightBias
+0x99E7CB: mov     eax, dword_BA9E10+0A58h
 0x99E7D0: cmp     eax, ebx
 0x99E7D2: jz      short loc_99E7E5
 0x99E7D4: mov     [ebp+var_24], ecx
-0x99E7D7: sub     eax, TimeZoneInformation.StandardBias
+0x99E7D7: sub     eax, dword_BA9E10+0A04h
 0x99E7DD: imul    eax, 3Ch ; '<'
 0x99E7E0: mov     [ebp+var_28], eax
 0x99E7E3: jmp     short loc_99E7EB
@@ -155,7 +155,7 @@
 0x99E7F2: mov     eax, [ebp+var_20]
 0x99E7F5: push    dword ptr [eax]; lpMultiByteStr
 0x99E7F7: push    edi; cchWideChar
-0x99E7F8: push    offset TimeZoneInformation.StandardName; lpWideCharStr
+0x99E7F8: push    (offset dword_BA9E10+9B4h); lpWideCharStr
 0x99E7FD: push    ebx; dwFlags
 0x99E7FE: push    [ebp+CodePage]; CodePage
 0x99E801: mov     edi, ds:WideCharToMultiByte
@@ -178,7 +178,7 @@
 0x99E82A: mov     eax, [ebp+var_20]
 0x99E82D: push    dword ptr [eax+4]; lpMultiByteStr
 0x99E830: push    0FFFFFFFFh; cchWideChar
-0x99E832: push    offset TimeZoneInformation.DaylightName; lpWideCharStr
+0x99E832: push    (offset dword_BA9E10+0A08h); lpWideCharStr
 0x99E837: push    ebx; dwFlags
 0x99E838: push    [ebp+CodePage]; CodePage
 0x99E83B: call    edi ; WideCharToMultiByte
@@ -205,3 +205,9 @@
 0x99E87C: mov     [eax], edi
 0x99E87E: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x99E885: call    __tzset_nolock___$LN38_1
+0x99E8E7: xor     ebx, ebx
+0x99E8E9: mov     esi, [ebp+var_3C]
+0x99E8EC: push    7
+0x99E8EE: call    __unlock
+0x99E8F3: pop     ecx
+0x99E8F4: retn

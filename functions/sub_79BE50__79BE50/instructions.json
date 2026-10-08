@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79BE50",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<float> value into every initialized element in [first,last), advancing by one 0x10-byte vector owner per iteration.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BE51",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79BE56",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,25 +43,25 @@
   },
   {
     "ea": "0x79BE5F",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79BE63",
-    "line": "push    ebx",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BE64",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79BE66",
-    "line": "call    sub_79B2F0",
+    "line": "call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.",
     "mnemonic": "call",
     "size": 5
   },

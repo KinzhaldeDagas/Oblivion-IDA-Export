@@ -14,7 +14,7 @@
 0x4344AA: push    12h; a4
 0x4344AC: push    1; a3
 0x4344AE: push    2; a2
-0x4344B0: call    BSTaskManager__BSTaskManager
+0x4344B0: call    BSTaskManager__BSTaskManager; IOManager constructs its BSTaskManager with one worker thread (numThreads = 1).
 0x4344B5: push    1Ch; Size
 0x4344B7: mov     [esp+20h+var_4], 0
 0x4344BF: mov     dword ptr [esi], offset ??_7IOManager@@6B@; const IOManager::`vftable'
@@ -31,7 +31,7 @@
 0x4344E7: call    ??0?$LockFreeQueue@V?$NiPointer@VIOTask@@@@@@QAE@XZ; LockFreeQueue<NiPointer<IOTask>>::LockFreeQueue<NiPointer<IOTask>>(void)
 0x4344EC: jmp     short loc_4344F0
 0x4344EE: xor     eax, eax
-0x4344F0: push    offset Frequency; lpFrequency
+0x4344F0: push    0B33A08h; lpFrequency
 0x4344F5: mov     [esi+34h], eax
 0x4344F8: call    ds:QueryPerformanceFrequency
 0x4344FE: mov     eax, [esi+28h]
@@ -45,3 +45,17 @@
 0x434517: pop     esi
 0x434518: add     esp, 14h
 0x43451B: retn
+0x9AC0D0: mov     ecx, [ebp-14h]
+0x9AC0D3: jmp     sub_4343C0
+0x9AC0D8: mov     eax, [ebp-10h]
+0x9AC0DB: push    eax
+0x9AC0DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC0E1: pop     ecx
+0x9AC0E2: retn
+0x9AC0E3: mov     edx, [esp+arg_4]
+0x9AC0E7: lea     eax, [edx-0Ch]
+0x9AC0EA: mov     ecx, [edx-10h]
+0x9AC0ED: xor     ecx, eax
+0x9AC0EF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC0F4: mov     eax, offset stru_AD8DFC
+0x9AC0F9: jmp     ___CxxFrameHandler3

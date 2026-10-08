@@ -10,7 +10,6 @@
 0x91B5F4: test    eax, eax
 0x91B5F6: jle     short loc_91B61D
 0x91B5F8: jmp     short loc_91B600
-0x91B5FA: align 10h
 0x91B600: mov     eax, ds:0BA842Ch
 0x91B605: mov     ecx, [ebx+18h]
 0x91B608: mov     edx, [ecx]

@@ -1,1 +1,1 @@
-LITEM
+typedef tagLITEM LITEM;

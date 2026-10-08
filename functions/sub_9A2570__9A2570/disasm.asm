@@ -29,10 +29,10 @@
 0x9A25D4: mov     edi, offset unk_B32460
 0x9A25D9: lea     esp, [esp+0]
 0x9A25E0: mov     edx, [edi+4]
-0x9A25E3: push    edx; Str2
+0x9A25E3: push    edx; right
 0x9A25E4: lea     eax, [esp+118h+Str1]
-0x9A25E8: push    eax; Str1
-0x9A25E9: call    __strcmp
+0x9A25E8: push    eax; left
+0x9A25E9: call    CRT_StricmpLocaleDispatch
 0x9A25EE: add     esp, 8
 0x9A25F1: test    eax, eax
 0x9A25F3: jz      short loc_9A261D

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7C7EF0",
-    "line": "push    ebx",
+    "line": "push    ebx; Recursively traverse NiNode children. For each object matching the retail point-light RTTI target, either remove its full-list entry or register it with trackBackingPosition=true.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7EF1",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+root]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7C7F04",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+root], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -70,12 +70,6 @@
     "line": "jmp     short loc_7C7F10",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7C7F0D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x7C7F10",
@@ -157,7 +151,7 @@
   },
   {
     "ea": "0x7C7F35",
-    "line": "cmp     eax, offset dword_B3FD14",
+    "line": "cmp     eax, offset stru_B3FD14",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -223,31 +217,31 @@
   },
   {
     "ea": "0x7C7F50",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+10h+removeExisting]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C7F54",
-    "line": "push    ecx",
+    "line": "push    ecx; removeExisting",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7F55",
-    "line": "push    esi",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7F56",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C7F58",
-    "line": "call    sub_7C7EF0",
+    "line": "call    ShadowSceneNode_RegisterOrRemovePointLightsRecursive; Recursively traverse NiNode children. For each object matching the retail point-light RTTI target, either remove its full-list entry or register it with trackBackingPosition=true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +253,7 @@
   },
   {
     "ea": "0x7C7F60",
-    "line": "cmp     edi, [esp+10h+arg_0]",
+    "line": "cmp     edi, [esp+10h+root]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -301,31 +295,31 @@
   },
   {
     "ea": "0x7C7F6D",
-    "line": "cmp     byte ptr [esp+10h+arg_4], 0",
+    "line": "cmp     [esp+10h+removeExisting], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x7C7F72",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C7F74",
-    "line": "jz      short loc_7C7F7E",
+    "line": "jz      short loc_7C7F7E; removeExisting=true selects removal by source; false registers the scene-graph point light with trackBackingPosition=true.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x7C7F76",
-    "line": "push    esi",
+    "line": "push    esi; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7F77",
-    "line": "call    sub_7C7DC0",
+    "line": "call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,19 +331,19 @@
   },
   {
     "ea": "0x7C7F7E",
-    "line": "push    1",
+    "line": "push    1; trackBackingPosition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7C7F80",
-    "line": "push    esi",
+    "line": "push    esi; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7F81",
-    "line": "call    sub_7C6AE0",
+    "line": "call    ShadowSceneNode_FindOrCreateFullLightForSource; Scene-graph point lights register with trackBackingPosition=true.",
     "mnemonic": "call",
     "size": 5
   },

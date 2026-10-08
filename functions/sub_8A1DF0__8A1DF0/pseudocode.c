@@ -1,19 +1,19 @@
-int __thiscall sub_8A1DF0(void *this, _DWORD *a2)
+int __thiscall sub_8A1DF0(_DWORD *this, _DWORD *a2)
 {
-  int v2; // edi
-  int v3; // eax
-  char v5; // [esp+Fh] [ebp-1h] BYREF
+  int v3; // edi
+  int v4; // eax
+  char v6; // [esp+Fh] [ebp-1h] BYREF
 
-  v2 = (*(int (__thiscall **)(void *, char *))(*(_DWORD *)this + 0x74))(this, &v5);
-  if ( v2 )
+  v3 = (*(int (__thiscall **)(_DWORD *, char *))(*this + 0x74))(this, &v6); /*0x8a1e08*/
+  if ( v3 ) /*0x8a1e0c*/
   {
-    v3 = sub_7124A0(a2);
-    if ( v3 )
+    v4 = sub_7124A0(a2); /*0x8a1e10*/
+    if ( v4 ) /*0x8a1e17*/
     {
-      *(_DWORD *)(v2 + 4) = *(_DWORD *)(v3 + 8);
-      return sub_8A2600(a2);
+      *(_DWORD *)(v3 + 4) = *(_DWORD *)(v4 + 8); /*0x8a1e1f*/
+      return sub_8A2600(this, (int)a2); /*0x8a1e2b*/
     }
-    *(_DWORD *)(v2 + 4) = 0;
+    *(_DWORD *)(v3 + 4) = 0; /*0x8a1e30*/
   }
-  return sub_8A2600(a2);
+  return sub_8A2600(this, (int)a2); /*0x8a1e27*/
 }

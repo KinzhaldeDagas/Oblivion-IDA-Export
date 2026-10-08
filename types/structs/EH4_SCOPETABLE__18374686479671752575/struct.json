@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_EH4_SCOPETABLE",
+  "definition": "struct _EH4_SCOPETABLE\n{\nDWORD GSCookieOffset;\nDWORD GSCookieXOROffset;\nDWORD EHCookieOffset;\nDWORD EHCookieXOROffset;\nstruct _EH4_SCOPETABLE_RECORD ScopeRecord[];\n}\n",
   "id": 18374686479671752575,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GSCookieOffset",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GSCookieXOROffset",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EHCookieOffset",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EHCookieXOROffset",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ScopeRecord",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 0
+      "size": 0,
+      "type": "struct _EH4_SCOPETABLE_RECORD[]"
     }
   ],
   "name": "_EH4_SCOPETABLE",
+  "ordinal": 10,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

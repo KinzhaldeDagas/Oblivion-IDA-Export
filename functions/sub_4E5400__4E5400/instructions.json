@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5400",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4E541D",
-    "line": "mov     ecx, [ecx+esi*4]",
+    "line": "mov     ecx, [ecx+esi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4E5424",
-    "line": "call    sub_4E8190",
+    "line": "call    TESPathGridPoint_ClearRenderNode; Verified rendered-graph teardown calls TESPathGridPoint_ClearRenderNode for every non-null point before detaching and releasing the pathgrid root NiNode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4E5480",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4E549E",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

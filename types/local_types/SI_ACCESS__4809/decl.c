@@ -1,1 +1,1 @@
-SI_ACCESS
+typedef _SI_ACCESS SI_ACCESS;

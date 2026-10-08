@@ -1,1 +1,1 @@
-ahkWorld
+struct ahkWorld;

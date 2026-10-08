@@ -11,19 +11,19 @@ int __thiscall sub_96C4C0(float *this, int a2, NiTransform *a3)
   float v13; // [esp+20h] [ebp-4h]
   float scale; // [esp+28h] [ebp+4h]
 
-  v5 = sub_7101F0(a3, (NiTransform *)&v11, (NiPoint3 *)(a2 + 4));
-  scale = a3->scale;
-  v8 = scale * v5->rot.data[0][0];
-  v9 = v5->rot.data[0][1] * scale;
-  v10 = scale * v5->rot.data[0][2];
-  v11 = a3->pos.x + v8;
-  *(float *)&v12 = a3->pos.y + v9;
-  result = v12;
-  z = a3->pos.z;
-  *(this + 1) = v11;
-  *((_DWORD *)this + 2) = result;
-  v13 = z + v10;
-  *(this + 3) = v13;
-  *(this + 4) = *(float *)(a2 + 0x10) * a3->scale;
-  return result;
+  v5 = sub_7101F0(a3, (NiTransform *)&v11, (NiPoint3 *)(a2 + 4)); /*0x96c4db*/
+  scale = a3->scale; /*0x96c4e3*/
+  v8 = scale * v5->rot.data[0][0]; /*0x96c4ef*/
+  v9 = v5->rot.data[0][1] * scale; /*0x96c4f8*/
+  v10 = scale * v5->rot.data[0][2]; /*0x96c4ff*/
+  v11 = a3->pos.x + v8; /*0x96c50a*/
+  *(float *)&v12 = a3->pos.y + v9; /*0x96c519*/
+  result = v12; /*0x96c51d*/
+  z = a3->pos.z; /*0x96c521*/
+  *(this + 1) = v11; /*0x96c524*/
+  *((_DWORD *)this + 2) = result; /*0x96c52b*/
+  v13 = z + v10; /*0x96c52e*/
+  *(this + 3) = v13; /*0x96c536*/
+  *(this + 4) = *(float *)(a2 + 0x10) * a3->scale; /*0x96c53f*/
+  return result; /*0x96c542*/
 }

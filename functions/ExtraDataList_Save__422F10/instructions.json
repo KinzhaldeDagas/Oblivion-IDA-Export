@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x422F10",
-    "line": "sub     esp, 54h",
+    "line": "sub     esp, 54h; Authoritative extra-data writer. Requested canonical widths: XLOC12, XTEL28, XMRK0+FNAM1+FULL(strlen/known length + NUL)+TNAM2, XSED1, XCHG4(float), XHLT4(SInt32 converted from runtime float), XLCM4, XACT4(zero-extended flag byte), XCNT4(sign-extended SInt16), XSOL1. Iterates singleton extra list; REFR emits ONAM separately afterward.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x422F1D",
-    "line": "mov     ecx, offset BSExtraDataCS",
+    "line": "mov     ecx, 0B33800h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -94,12 +94,6 @@
     "line": "jmp     short loc_422F40",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x422F3D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x422F40",
@@ -181,7 +175,7 @@
   },
   {
     "ea": "0x422F76",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +193,7 @@
   },
   {
     "ea": "0x422F83",
-    "line": "mov     eax, [esi+0Ch]; jumptable 00422F5B case 49",
+    "line": "mov     eax, [esi+0Ch]; Write XLOC exactly 12 bytes: level byte, three stack padding bytes, key FormID dword (0 if null), flags byte, three stack padding bytes. Only the two meaningful bytes and key dword are initialized here; padding is not normalized/zeroed. Writer never emits legacy 16-byte XLOC.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -229,7 +223,7 @@
   },
   {
     "ea": "0x422F97",
-    "line": "mov     byte ptr [esp+64h+var_24], cl",
+    "line": "mov     byte ptr [esp+64h+var_24], cl; The XLOC writer serializes the current lock flags byte+8 unchanged at0x422F97 into byte8 of the canonical12-byte output at0x422FC1. Immediately after plugin load this byte includes the forced locked-state bit0 set at0x425B0D, if the node survives linking. Source-compatible parsing retains the original byte; loaded semantic flags expose the runtime name is_locked.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +307,7 @@
   },
   {
     "ea": "0x422FC1",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified canonical XLOC serialization: emits exactly 12 bytes containing the level byte, TESKey refID at +4 (zero when no key), and current flags byte at +8; it serializes the key's FormID rather than its pointer. Load forces runtime locked bit 0x01; LockEffect may leave marker bit 0x02, and the writer serializes current flags unchanged. Padding bytes are not explicitly initialized by this branch and remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,13 +325,13 @@
   },
   {
     "ea": "0x422FCE",
-    "line": "mov     ecx, [esi+0Ch]; jumptable 00422F5B case 50",
+    "line": "mov     ecx, [esi+0Ch]; Write XTEL through TeleportData_SaveXTEL: exact 28 bytes only when linkedDoor is non-null; first dword is linked door FormID, followed by six transform floats. A loaded zero/empty XTEL can leave a singleton that this writer omits.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x422FD1",
-    "line": "call    sub_42B9A0",
+    "line": "call    TeleportData_SaveXTEL; XTEL writer: if linkedDoor is non-null, writes exact 28 bytes as linked door FormID plus six floats; if null, emits nothing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,19 +343,19 @@
   },
   {
     "ea": "0x422FDB",
-    "line": "push    4B524D58h; jumptable 00422F5B case 51",
+    "line": "push    4B524D58h; Write map marker as adjacent canonical XMRK(empty), FNAM(1), FULL(NUL-terminated length+1), TNAM(2).",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x422FE0",
-    "line": "call    sub_46BA10",
+    "line": "call    TESForm_AddChunk; Appends a six-byte empty CHUNK header (four-byte chunk ID plus zero 16-bit payload length) to the global TESForm save buffer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x422FE5",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -373,7 +367,7 @@
   },
   {
     "ea": "0x422FEB",
-    "line": "call    sub_42B380",
+    "line": "call    MapMarkerData_SaveFNAM_FULL_TNAM; Map marker writer emits FNAM exactly 1 byte, FULL as known length/strlen + 1 including terminal NUL, and TNAM exactly 2 bytes; caller emits empty XMRK first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,19 +409,19 @@
   },
   {
     "ea": "0x423002",
-    "line": "push    4E574F58h; int",
+    "line": "push    4E574F58h; Verified XOWN file writer: dereferences ExtraOwnership.ownerForm and copies the owned TESForm's 32-bit refID at TESForm+0x0C into a canonical 4-byte XOWN chunk. This is a FormID value, not the runtime pointer. TESForm_PutFormRecordChunkData then writes the supplied 4-byte payload unchanged.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x423007",
-    "line": "mov     [esp+70h+var_48], eax",
+    "line": "mov     [esp+70h+var_48], eax; Canonical XOWN writer: extant nonzero ownership emits exact 4 bytes; zero input removed the node and is omitted.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x42300B",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XOWN writer: extant nonzero owner emits exactly 4-byte FormID; zero input removes/omits the singleton.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +439,7 @@
   },
   {
     "ea": "0x423018",
-    "line": "mov     edx, [esi+0Ch]; jumptable 00422F5B case 40",
+    "line": "mov     edx, [esi+0Ch]; Verified XGLB file writer: reads ExtraGlobal.global, dereferences the TESGlobal*, and copies that form's 32-bit refID from TESForm+0x0C into a canonical 4-byte XGLB chunk; the chunk helper itself copies raw bytes.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -481,13 +475,13 @@
   },
   {
     "ea": "0x42302A",
-    "line": "mov     [esp+70h+var_44], eax",
+    "line": "mov     [esp+70h+var_44], eax; Canonical XGLB writer: extant nonzero global emits exact 4 bytes; zero input removed the node and is omitted.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x42302E",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XGLB writer: extant nonzero global emits exactly 4-byte FormID; zero input removes/omits the singleton.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x42303B",
-    "line": "mov     edx, [esi+0Ch]; jumptable 00422F5B case 41",
+    "line": "mov     edx, [esi+0Ch]; Write XCNT exactly 4 bytes by sign-extending the stored SInt16 count.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -529,19 +523,19 @@
   },
   {
     "ea": "0x423045",
-    "line": "push    4B4E5258h; int",
+    "line": "push    4B4E5258h; Verified XRNK file writer: emits the ExtraRank signed 32-bit rank as exactly four bytes. ExtraDataList_SetRank removes rank -1, so extant nodes serialize all other values, including zero.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x42304A",
-    "line": "mov     [esp+70h+Src], edx",
+    "line": "mov     [esp+70h+Src], edx; Canonical XRNK writer: extant rank emits exact 4-byte signed value; -1 removes/omits, while 0 is retained.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x42304E",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XRNK writer: extant rank emits exactly 4 bytes; signed -1 is the removal sentinel and cannot remain.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x42306F",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +607,13 @@
   },
   {
     "ea": "0x42307C",
-    "line": "fld     dword ptr [esi+0Ch]; jumptable 00422F5B case 43",
+    "line": "fld     dword ptr [esi+0Ch]; Write XHLT exactly 4 bytes: runtime float health is converted/truncated to SInt32 before serialization.",
     "mnemonic": "fld",
     "size": 3
   },
   {
     "ea": "0x42307F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +649,7 @@
   },
   {
     "ea": "0x423094",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +667,7 @@
   },
   {
     "ea": "0x4230A1",
-    "line": "movzx   ecx, byte ptr [esi+0Ch]; jumptable 00422F5B case 44",
+    "line": "movzx   ecx, byte ptr [esi+0Ch]; Canonical XUSE writer (not XACT): zero-extends stored ExtraUses u8 and emits exact size4 for every extant node.",
     "mnemonic": "movzx",
     "size": 4
   },
@@ -709,7 +703,7 @@
   },
   {
     "ea": "0x4230B5",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XUSE writer emits exact size4 with stored u8 zero-extended; malformed serialized input normalizes to bounded low byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +757,7 @@
   },
   {
     "ea": "0x4230D5",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XTIM writer emits exact size4 with runtime ExtraTimeLeft float32 bits, including zero/NaN.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +775,7 @@
   },
   {
     "ea": "0x4230E2",
-    "line": "fld     dword ptr [esi+0Ch]; jumptable 00422F5B case 46",
+    "line": "fld     dword ptr [esi+0Ch]; Write XCHG exactly 4 bytes as the stored float bit pattern.",
     "mnemonic": "fld",
     "size": 3
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x4230F5",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +829,7 @@
   },
   {
     "ea": "0x423102",
-    "line": "push    1; jumptable 00422F5B case 47",
+    "line": "push    1; Write XSOL exactly 1 byte.",
     "mnemonic": "push",
     "size": 2
   },
@@ -919,7 +913,7 @@
   },
   {
     "ea": "0x423130",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XPSN writer: after successful AlchemyItem link resolution, emits exact 4-byte FormID. Invalid targets were removed during post-load resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +931,7 @@
   },
   {
     "ea": "0x42313D",
-    "line": "push    38h ; '8'; jumptable 00422F5B case 56",
+    "line": "push    38h ; '8'; Write XSED exactly 1 byte from ExtraSeed; 0xFF is the loader's remove sentinel. This extra is the per-reference TREE/SpeedTree seed selected by TESObjectREFR_SetTreeSeedByValue 0x4D7880.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1015,7 +1009,7 @@
   },
   {
     "ea": "0x423161",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1224,12 +1218,6 @@
     "size": 2
   },
   {
-    "ea": "0x4231BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4231C0",
     "line": "mov     ecx, [edi]",
     "mnemonic": "mov",
@@ -1297,7 +1285,7 @@
   },
   {
     "ea": "0x4231DF",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1297,7 @@
   },
   {
     "ea": "0x4231E5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1357,7 @@
   },
   {
     "ea": "0x423207",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1417,7 @@
   },
   {
     "ea": "0x42322A",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1477,7 @@
   },
   {
     "ea": "0x42324D",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1615,7 @@
   },
   {
     "ea": "0x42329D",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; XPSL plugin writer emits exact size20 but initializes only FormID + XYZ (first16); fifth dword is indeterminate stack data. Stored runtime rotZ is never serialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,7 +1639,7 @@
   },
   {
     "ea": "0x4232AD",
-    "line": "call    sub_497240",
+    "line": "call    ExtraRagDollDataArray_SaveXRGD",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1657,7 @@
   },
   {
     "ea": "0x4232BA",
-    "line": "mov     ecx, [esi+10h]",
+    "line": "mov     ecx, [esi+10h]; Canonical XLOD writer: extant distant-data singleton always emits exact 12 bytes, including defaults created by empty input.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1723,7 +1711,7 @@
   },
   {
     "ea": "0x4232D8",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified Oblivion plugin writer emits ExtraDistantData as a 12-byte XLOD chunk from normal_00C (+0x0C..+0x17), including default values. Fallout stores the same three-float LandNormal at +0x0C but uses EType 0x13.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,7 +1729,7 @@
   },
   {
     "ea": "0x4232E5",
-    "line": "mov     eax, [esi+0Ch]; jumptable 00422F5B case 63",
+    "line": "mov     eax, [esi+0Ch]; Canonical XESP writer: exact 8 bytes for extant nonzero parent; byte4 preserves stored u8 flags. Bytes5..7 are indeterminate stack data.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1807,7 +1795,7 @@
   },
   {
     "ea": "0x42330A",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XESP writer: extant nonzero parent emits exactly 8 bytes. Parent FormID and flags byte are meaningful; bytes5..7 are uninitialized stack padding, not preserved input.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1813,7 @@
   },
   {
     "ea": "0x423317",
-    "line": "mov     eax, [esi+0Ch]; jumptable 00422F5B case 67",
+    "line": "mov     eax, [esi+0Ch]; Canonical XRTM writer: exact 4 bytes only for nonzero extant reference; zero removes/omits.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1879,7 +1867,7 @@
   },
   {
     "ea": "0x423335",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XRTM writer: extant nonzero random teleport marker emits exactly 4-byte FormID; zero removes/omits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1885,7 @@
   },
   {
     "ea": "0x42333F",
-    "line": "mov     eax, [esi+0Ch]; jumptable 00422F5B case 68",
+    "line": "mov     eax, [esi+0Ch]; Canonical XMRC writer: exact 4 bytes only for nonzero extant reference; zero removes/omits.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1951,7 +1939,7 @@
   },
   {
     "ea": "0x423359",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XMRC writer: extant nonzero merchant container emits exactly 4-byte FormID; zero removes/omits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1957,7 @@
   },
   {
     "ea": "0x423363",
-    "line": "mov     eax, [esi+0Ch]; jumptable 00422F5B case 88",
+    "line": "mov     eax, [esi+0Ch]; Canonical XHRS writer: exact 4 bytes only for nonzero extant reference; zero removes/omits.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2023,7 +2011,7 @@
   },
   {
     "ea": "0x42337D",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XHRS writer: extant nonzero travel horse emits exactly 4-byte FormID; zero removes/omits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,7 +2029,7 @@
   },
   {
     "ea": "0x423387",
-    "line": "mov     eax, [esi+0Ch]; jumptable 00422F5B case 77",
+    "line": "mov     eax, [esi+0Ch]; Canonical XTRG writer: exact 4 bytes only for nonzero extant reference; zero removes/omits.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2095,7 +2083,7 @@
   },
   {
     "ea": "0x4233A1",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Canonical XTRG writer: extant nonzero target emits exactly 4-byte FormID; zero removes/omits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,7 +2101,7 @@
   },
   {
     "ea": "0x4233AB",
-    "line": "mov     eax, [esi+0Ch]; jumptable 00422F5B case 36",
+    "line": "mov     eax, [esi+0Ch]; Write XLCM exactly 4 bytes from ExtraLevCreaModifier.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2179,7 +2167,7 @@
   },
   {
     "ea": "0x4233CA",
-    "line": "mov     ecx, offset BSExtraDataCS; lpCriticalSection",
+    "line": "mov     ecx, 0B33800h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

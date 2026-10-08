@@ -6,7 +6,7 @@
 0x65D62A: jnz     short loc_65D645
 0x65D62C: mov     eax, [esi+5B0h]
 0x65D632: push    eax
-0x65D633: call    FormHeapFree
+0x65D633: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65D638: add     esp, 4
 0x65D63B: mov     dword ptr [esi+5B0h], 0
 0x65D645: mov     [esi+6E5h], bl

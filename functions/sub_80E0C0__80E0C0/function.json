@@ -1,18 +1,31 @@
 {
-  "callees_count": 52,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 11,
-  "display_name": "sub_80E0C0",
+  "chunks": [
+    [
+      "0x80E0C0",
+      "0x80E4FB"
+    ]
+  ],
+  "chunks_sha256": "ad0e8207423f54721508731266ae9142ee354339cff613d2c76b52a7681c099b",
+  "comment_regular": "\n[2026-10-03 render-state distinction] Pixel program family tests DWORD 0xB42F48 against2 at 0x80E314 (legacy STFROND/ps_1_3 versus STFROND2/ps_2_0). This is distinct from render-mode WORD 0xB42EAC used for pass lists and stencil modes; the prior plugin reused that render-mode value as shaderPackage and incorrectly suppressed ordinary fog. Exact broader hardware/package semantics of B42F48 remain unnamed here.\n\n[2026-10-03 shader provenance audit] Parsed installed SDP tables and September05 baseline: 226 frond records, 14 unique bytecodes; 42 additional July backup records had no new variants. Current PS bytecode is plugin-mutated (lighting chains replaced with MOV/NOP; fog chains NOPed). VS001/003 emit lit color oT1 and fog oT2 while modern PS declarations expect v0 color and t1 fog; HDR PS also declares v1. VS002/003 have no c8 directional-dot consumer and reuse the point Lambert value for the c6 contribution. These are verified observations of local asset bytecode, not claims about pristine retail assets. Evidence inventory/disassembly: SpeedTreeOBSE/out/frond_shader_audit_2026-10-03. No shader package writes were made during this audit.\n\n[2026-10-03 program implementation] Complete embedded replacement set now implemented in SpeedTreeOBSE: 4 VS variants x HDR on/off, 2 PS legacy, 2 PS modern. VS preserves native declaration, c18 matrix-index/weight wind and clip-XYZ fog distance; fixes independent sun/point dot products and applies HDR TreeDimmer exactly once. Sample alpha survives lighting/fog. A separate hidden D3D9 HAL fixture created all12 programs and passed60 rendered cases on Parallels WDDM. This proves isolated shader math/interface on that device, not in-game loader hooks or scene lifetime. Current game packages remain untouched; native package lookup hooks supply the records.\n[2026-10-03 ABI re-audit] Actual exit80E4FA is RET(no immediate), no stack arguments; nativefactory setsECX=this before virtual+A8. Diagnostic wrapper preserves pointer result and logs program wrapper/GPU-handle presence after this function returns. Existing supplied-record logs alone do not prove completion of this call.\n\nSpeedTreeFrondShader program loader. Loads four vs_1_1 STFROND vertex variants from speedtree\\frond.v.hlsl into +0x7C..+0x88 and two pixel variants from speedtree\\frond.p.hlsl into +0x8C/+0x90; ShaderPackage>=2 uses ps_2_0 STFROND2 names.",
+  "comment_repeatable": "SpeedTreeFrondShader program loader. Loads four vs_1_1 STFROND vertex variants from speedtree\\frond.v.hlsl into +0x7C..+0x88 and two pixel variants from speedtree\\frond.p.hlsl into +0x8C/+0x90; ShaderPackage>=2 uses ps_2_0 STFROND2 names.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "OB_SpeedTreeFrondShader_LoadPrograms_010201A0",
   "end_ea": "0x80E4FB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80E0C0",
+  "name": "OB_SpeedTreeFrondShader_LoadPrograms_010201A0",
   "segment": ".text",
   "sha256": "ad0e8207423f54721508731266ae9142ee354339cff613d2c76b52a7681c099b",
   "size": 1083,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80E0C0",
+  "total_chunk_size": 1083,
   "type": "NiD3DShaderProgram *__thiscall(char *this)",
   "xrefs_from_count": 382,
   "xrefs_to_count": 1

@@ -1,4 +1,4 @@
-0x79A000: push    0FFFFFFFFh
+0x79A000: push    0FFFFFFFFh; SpeedTree decode: stock CFrondEngine::EndGuide. Computes guide length from vertex positions, selects frond texture/aspect/size/angle, writes map index/radius/offset, and stores surface area as lodSizeScalar * length.
 0x79A002: push    offset SEH_79A000
 0x79A007: mov     eax, large fs:0
 0x79A00D: push    eax
@@ -45,8 +45,8 @@
 0x79A075: lea     esi, [esi+esi*2]
 0x79A078: shl     esi, 4
 0x79A07B: add     esi, [edi+0Ch]
-0x79A07E: mov     ecx, esi
-0x79A080: call    sub_799EE0
+0x79A07E: mov     ecx, esi; this
+0x79A080: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79A085: sub     eax, 1
 0x79A088: jz      loc_79A14D
 0x79A08E: mov     [esp+30h+var_18], ebx
@@ -108,15 +108,15 @@
 0x79A12D: fld     [esp+30h+var_18]
 0x79A131: mov     [esp+30h+var_18], ecx
 0x79A135: fadd    dword ptr [esi+10h]
-0x79A138: mov     ecx, esi
+0x79A138: mov     ecx, esi; this
 0x79A13A: fstp    dword ptr [esi+10h]
-0x79A13D: call    sub_799EE0
+0x79A13D: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79A142: sub     eax, 1
 0x79A145: cmp     ebx, eax
 0x79A147: jb      loc_79A092
-0x79A14D: lea     ecx, [esp+30h+var_19]
-0x79A151: call    sub_78EAF0
-0x79A156: mov     eax, [edi+44h]
+0x79A14D: lea     ecx, [esp+30h+var_19]; this
+0x79A151: call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).
+0x79A156: mov     eax, [edi+44h]; CFrondEngine::EndGuide reads the decoded SFrondTexture vector at +0x40; each 0x2C-byte entry supplies aspect ratio, size scale, and angle-offset limits for the chosen map index.
 0x79A159: test    eax, eax
 0x79A15B: mov     [esp+30h+var_4], 0
 0x79A163: jz      short loc_79A17D
@@ -168,11 +168,11 @@
 0x79A1E6: add     ebx, edx
 0x79A1E8: fld     dword ptr ds:0A3F3D8h
 0x79A1EE: sub     esp, 8
-0x79A1F1: fstp    [esp+38h+var_34]; float
-0x79A1F5: lea     ecx, [esp+38h+var_19]
+0x79A1F1: fstp    [esp+38h+maxValue]; maxValue
+0x79A1F5: lea     ecx, [esp+38h+var_19]; this
 0x79A1F9: fldz
-0x79A1FB: fstp    [esp+38h+var_38]; float
-0x79A1FE: call    sub_78EA00
+0x79A1FB: fstp    [esp+38h+minValue]; minValue
+0x79A1FE: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x79A203: fnstcw  word ptr [esp+30h+var_18]
 0x79A207: xor     edx, edx
 0x79A209: movzx   eax, word ptr [esp+30h+var_18]
@@ -262,11 +262,11 @@
 0x79A304: imul    ebx, 2Ch ; ','
 0x79A307: add     ebx, [edi+44h]
 0x79A30A: sub     esp, 8
-0x79A30D: lea     ecx, [esp+38h+var_19]
-0x79A311: fstp    [esp+38h+var_34]; float
+0x79A30D: lea     ecx, [esp+38h+var_19]; this
+0x79A311: fstp    [esp+38h+maxValue]; maxValue
 0x79A315: fld     dword ptr [ebx+24h]
-0x79A318: fstp    [esp+38h+var_38]; float
-0x79A31B: call    sub_78EA00
+0x79A318: fstp    [esp+38h+minValue]; minValue
+0x79A31B: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x79A320: fstp    dword ptr [esp+30h+var_14]
 0x79A324: fld     dword ptr [esp+30h+var_14]
 0x79A328: fst     dword ptr [esi+1Ch]
@@ -287,12 +287,12 @@
 0x79A352: fstp    dword ptr [esi+1Ch]
 0x79A355: jmp     short loc_79A359
 0x79A357: fstp    st
-0x79A359: fld     [esp+30h+arg_0]
-0x79A35D: lea     ecx, [esp+30h+var_19]; void *
+0x79A359: fld     [esp+30h+lodSizeScalar]
+0x79A35D: lea     ecx, [esp+30h+var_19]; this
 0x79A361: fmul    dword ptr [esi+10h]
 0x79A364: mov     [esp+30h+var_4], 0FFFFFFFFh
 0x79A36C: fstp    dword ptr [esi+20h]
-0x79A36F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x79A36F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x79A374: mov     ecx, [esp+30h+var_C]
 0x79A378: mov     large fs:0, ecx
 0x79A37F: pop     ecx
@@ -302,3 +302,12 @@
 0x79A383: pop     ebx
 0x79A384: add     esp, 1Ch
 0x79A387: retn    4
+0x9CC1C0: lea     ecx, [ebp-19h]; this
+0x9CC1C3: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC1C8: mov     edx, [esp+arg_4]
+0x9CC1CC: lea     eax, [edx-20h]
+0x9CC1CF: mov     ecx, [edx-24h]
+0x9CC1D2: xor     ecx, eax
+0x9CC1D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC1D9: mov     eax, offset stru_AF5214
+0x9CC1DE: jmp     ___CxxFrameHandler3

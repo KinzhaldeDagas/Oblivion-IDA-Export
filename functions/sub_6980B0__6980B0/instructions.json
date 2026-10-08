@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x69814F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x698161",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x698166",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; object",
     "mnemonic": "mov",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x69816B",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x6982D7",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x6982E3",
-    "line": "call    sub_891440",
+    "line": "call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x6982F2",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1432,5 +1432,101 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5AA0",
+    "line": "mov     eax, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5AA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5AA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5AAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5AAB",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5AAF",
+    "line": "lea     eax, [edx-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AB2",
+    "line": "mov     ecx, [edx-58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AB5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5AB7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5ABC",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5ABF",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AC2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5AC4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5AC9",
+    "line": "mov     eax, offset stru_AEE1D0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5ACE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,4 @@
-0x6747C0: push    esi
+0x6747C0: push    esi; ShadowPass-only candidate-list limiter. Operates on the BSSimpleList at ProcessLists +0x60, repeatedly removes the last non-null actor until the count is <= g_uMaxShadowActorCandidates, and returns the list head used for shadow admission.
 0x6747C1: lea     esi, [ecx+60h]
 0x6747C4: mov     eax, esi
 0x6747C6: xor     ecx, ecx

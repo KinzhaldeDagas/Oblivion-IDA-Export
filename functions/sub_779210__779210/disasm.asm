@@ -54,11 +54,11 @@
 0x7792A2: call    edx
 0x7792A4: test    eax, eax
 0x7792A6: jge     short loc_7792CE
-0x7792A8: push    eax
-0x7792A9: call    sub_7736F0
+0x7792A8: push    eax; hresult
+0x7792A9: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x7792AE: push    eax
 0x7792AF: push    offset aNidx9renderedc; "NiDX9RenderedCubeMapData::CreateSurf> F"...
-0x7792B4: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7792B4: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7792B9: add     esp, 0Ch
 0x7792BC: pop     ebp
 0x7792BD: mov     dword ptr [edi+50h], 0

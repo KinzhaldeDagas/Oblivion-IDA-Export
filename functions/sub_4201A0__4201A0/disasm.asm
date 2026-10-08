@@ -1,4 +1,4 @@
-0x4201A0: push    0FFFFFFFFh
+0x4201A0: push    0FFFFFFFFh; Creates/updates ExtraOblivionEntry from a reference position plus entry reference; removes type 0x3E when either required input is null.
 0x4201A2: push    offset SEH_8094D0
 0x4201A7: mov     eax, large fs:0
 0x4201AD: push    eax
@@ -64,3 +64,15 @@
 0x420254: pop     ebx
 0x420255: add     esp, 0Ch
 0x420258: retn    8
+0x9C6200: mov     eax, [ebp+4]
+0x9C6203: push    eax
+0x9C6204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6209: pop     ecx
+0x9C620A: retn
+0x9C620B: mov     edx, [esp+arg_4]
+0x9C620F: lea     eax, [edx-10h]
+0x9C6212: mov     ecx, [edx-14h]
+0x9C6215: xor     ecx, eax
+0x9C6217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C621C: mov     eax, offset stru_AEE7E8
+0x9C6221: jmp     ___CxxFrameHandler3

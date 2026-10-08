@@ -2,7 +2,7 @@
 0x709E61: push    esi
 0x709E62: mov     esi, ecx
 0x709E64: xor     ebx, ebx
-0x709E66: push    offset NiRefObject_objcount; lpAddend
+0x709E66: push    0B3FD64h; lpAddend
 0x709E6B: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x709E71: mov     [esi+4], ebx
 0x709E74: call    dword ptr ds:0A28078h

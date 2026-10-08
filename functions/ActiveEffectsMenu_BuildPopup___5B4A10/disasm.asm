@@ -77,9 +77,9 @@
 0x5B4B26: call    EffectItem_GetName
 0x5B4B2B: mov     ebx, [ebx]
 0x5B4B2D: mov     eax, [eax]
-0x5B4B2F: push    ebx; Str2
-0x5B4B30: push    eax; Str1
-0x5B4B31: call    __strcmp
+0x5B4B2F: push    ebx; right
+0x5B4B30: push    eax; left
+0x5B4B31: call    CRT_StricmpLocaleDispatch
 0x5B4B36: add     esp, 8
 0x5B4B39: lea     ecx, [esp+134h+var_EC]; void *
 0x5B4B3D: mov     ebx, eax
@@ -174,9 +174,9 @@
 0x5B4C69: mov     ecx, [edi]; this
 0x5B4C6B: fld     dword ptr ds:0A379B4h
 0x5B4C71: push    ecx
-0x5B4C72: fstp    [esp+138h+a2]; a3
-0x5B4C75: push    0FA1h; a2
-0x5B4C7A: call    Tile_SetFloat
+0x5B4C72: fstp    [esp+138h+a2]; value
+0x5B4C75: push    0FA1h; propertyCode
+0x5B4C7A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4C7F: mov     ecx, [edi]
 0x5B4C81: lea     eax, [esp+134h+var_D8]
 0x5B4C85: push    eax
@@ -190,30 +190,30 @@
 0x5B4CA1: fld     dword ptr ds:0A30634h
 0x5B4CA7: mov     ecx, [edi]; this
 0x5B4CA9: push    ecx
-0x5B4CAA: fstp    [esp+138h+a2]; a3
-0x5B4CAD: push    0FB0h; a2
-0x5B4CB2: call    Tile_SetFloat
-0x5B4CB7: mov     [esp+134h+var_108], esi
+0x5B4CAA: fstp    [esp+138h+a2]; value
+0x5B4CAD: push    0FB0h; propertyCode
+0x5B4CB2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5B4CB7: mov     [esp+134h+name], esi
 0x5B4CBB: mov     [esp+134h+var_104], si
 0x5B4CC0: mov     [esp+134h+var_102], si
 0x5B4CC5: lea     esi, [ebx+1]
 0x5B4CC8: push    esi; ArgList
-0x5B4CC9: lea     edx, [esp+138h+var_108]
+0x5B4CC9: lea     edx, [esp+138h+name]
 0x5B4CCD: push    offset aMagicpop_effec; "magicpop_effect_%d_icon"
 0x5B4CD2: push    edx; int
 0x5B4CD3: mov     byte ptr [esp+140h+arg_3C], 2
 0x5B4CDB: call    BSStringT_Static_Format
-0x5B4CE0: mov     eax, [esp+140h+var_108]
-0x5B4CE4: mov     ecx, [edi]
+0x5B4CE0: mov     eax, [esp+140h+name]
+0x5B4CE4: mov     ecx, [edi]; this
 0x5B4CE6: add     esp, 0Ch
-0x5B4CE9: push    eax; unsigned __int8 *
-0x5B4CEA: call    sub_589930
+0x5B4CE9: push    eax; name
+0x5B4CEA: call    Tile_FindDescendantByName
 0x5B4CEF: test    eax, eax
 0x5B4CF1: jz      short loc_5B4CFC
 0x5B4CF3: mov     ecx, [eax+2Ch]
 0x5B4CF6: or      ecx, 10h
 0x5B4CF9: mov     [eax+2Ch], ecx
-0x5B4CFC: lea     ecx, [esp+134h+var_108]; void *
+0x5B4CFC: lea     ecx, [esp+134h+name]; void *
 0x5B4D00: mov     [esp+134h+var_120], esi
 0x5B4D04: add     edi, 4
 0x5B4D07: mov     byte ptr [esp+134h+arg_3C], 1
@@ -236,46 +236,46 @@
 0x5B4D51: mov     ecx, [esi]; this
 0x5B4D53: fld1
 0x5B4D55: push    ecx
-0x5B4D56: fstp    [esp+138h+a2]; a3
-0x5B4D59: push    0FA1h; a2
+0x5B4D56: fstp    [esp+138h+a2]; value
+0x5B4D59: push    0FA1h; propertyCode
 0x5B4D5E: add     esi, 4
-0x5B4D61: call    Tile_SetFloat
+0x5B4D61: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4D66: sub     edi, 1
 0x5B4D69: jnz     short loc_5B4D51
 0x5B4D6B: fld     [ebp+arg_8]
 0x5B4D6E: mov     edi, [esp+134h+var_FC]
 0x5B4D72: push    ecx
-0x5B4D73: fstp    [esp+138h+a2]; a3
-0x5B4D76: push    0FAEh; a2
+0x5B4D73: fstp    [esp+138h+a2]; value
+0x5B4D76: push    0FAEh; propertyCode
 0x5B4D7B: mov     ecx, edi; this
-0x5B4D7D: call    Tile_SetFloat
+0x5B4D7D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4D82: fld     [ebp+arg_C]
 0x5B4D85: push    ecx
-0x5B4D86: fstp    [esp+138h+a2]; a3
-0x5B4D89: push    0FAFh; a2
+0x5B4D86: fstp    [esp+138h+a2]; value
+0x5B4D89: push    0FAFh; propertyCode
 0x5B4D8E: mov     ecx, edi; this
-0x5B4D90: call    Tile_SetFloat
+0x5B4D90: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4D95: fld     [ebp+arg_10]
 0x5B4D98: push    ecx
-0x5B4D99: fstp    [esp+138h+a2]; a3
-0x5B4D9C: push    0FB1h; a2
+0x5B4D99: fstp    [esp+138h+a2]; value
+0x5B4D9C: push    0FB1h; propertyCode
 0x5B4DA1: mov     ecx, edi; this
-0x5B4DA3: call    Tile_SetFloat
+0x5B4DA3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4DA8: fld     [ebp+arg_4]
 0x5B4DAB: mov     esi, [esp+134h+var_100]
 0x5B4DAF: mov     ecx, [esi+28h]
 0x5B4DB2: fst     dword ptr [esi+50h]
 0x5B4DB5: push    0FCBh
-0x5B4DBA: fstp    qword ptr [esp+138h+var_F8]
+0x5B4DBA: fstp    [esp+138h+var_F8]
 0x5B4DBE: call    Tile_GetFloat
-0x5B4DC3: fsubr   qword ptr [esp+134h+var_F8]
+0x5B4DC3: fsubr   [esp+134h+var_F8]
 0x5B4DC7: push    ecx
 0x5B4DC8: mov     ecx, [esi+4Ch]; this
 0x5B4DCB: fstp    dword ptr [esi+54h]
 0x5B4DCE: fld1
-0x5B4DD0: fstp    [esp+138h+a2]; a3
-0x5B4DD3: push    0FA1h; a2
-0x5B4DD8: call    Tile_SetFloat
+0x5B4DD0: fstp    [esp+138h+a2]; value
+0x5B4DD3: push    0FA1h; propertyCode
+0x5B4DD8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4DDD: push    0; float
 0x5B4DDF: mov     ecx, edi
 0x5B4DE1: call    sub_58FBA0
@@ -291,3 +291,20 @@
 0x5B4E06: mov     esp, ebp
 0x5B4E08: pop     ebp
 0x5B4E09: retn
+0x9C0A10: lea     ecx, [ebp+var_140]; void *
+0x9C0A16: jmp     BSStringT_Clear
+0x9C0A1B: lea     ecx, [ebp+var_15C]; void *
+0x9C0A21: jmp     BSStringT_Clear
+0x9C0A26: lea     ecx, [ebp+var_150]; void *
+0x9C0A2C: jmp     BSStringT_Clear
+0x9C0A31: mov     edx, [esp-4+arg_4]
+0x9C0A35: lea     eax, [edx-16Ch]
+0x9C0A3B: mov     ecx, [edx-170h]
+0x9C0A41: xor     ecx, eax
+0x9C0A43: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0A48: add     eax, 0Ch
+0x9C0A4B: mov     ecx, [edx-8]
+0x9C0A4E: xor     ecx, eax
+0x9C0A50: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0A55: mov     eax, offset stru_AE9C10
+0x9C0A5A: jmp     ___CxxFrameHandler3

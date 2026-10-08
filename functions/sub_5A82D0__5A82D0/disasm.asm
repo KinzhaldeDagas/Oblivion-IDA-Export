@@ -6,10 +6,10 @@
 0x5A82E2: cmp     ds:0B3B354h, ebx
 0x5A82E8: jz      loc_5A83E5
 0x5A82EE: mov     ecx, ds:0B333C4h
-0x5A82F4: call    Actor_IsSneaking
+0x5A82F4: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5A82F9: test    al, al
 0x5A82FB: jz      loc_5A83A1
-0x5A8301: call    InterfaceManager_IsMenuMode
+0x5A8301: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5A8306: test    al, al
 0x5A8308: jnz     loc_5A83A1
 0x5A830E: mov     eax, ds:0B333C4h
@@ -67,7 +67,7 @@
 0x5A83F1: cmp     ds:0B14E90h, bl
 0x5A83F7: jnz     loc_5A86FA
 0x5A83FD: mov     [esp+18h+var_11], bl
-0x5A8401: call    InterfaceManager_IsMenuMode
+0x5A8401: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5A8406: test    al, al
 0x5A8408: jnz     loc_5A86A7
 0x5A840E: mov     ecx, ds:0B3B358h
@@ -256,7 +256,7 @@
 0x5A8696: push    0FB6h; int
 0x5A869B: call    sub_589980
 0x5A86A0: mov     byte ptr ds:0B3B362h, 1
-0x5A86A7: call    InterfaceManager_IsMenuMode
+0x5A86A7: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5A86AC: test    al, al
 0x5A86AE: jnz     short loc_5A86B6
 0x5A86B0: cmp     [esp+18h+var_11], bl

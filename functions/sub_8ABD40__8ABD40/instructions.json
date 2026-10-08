@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8ABD40",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: for each 0x30-byte hit, copies original entry+0x1C cast fraction into entry+0x0C, then rewrites entry+0x1C as -dot(moveDir, normal) * originalFraction.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x8ABD49",
-    "line": "mov     ecx, [ebp+arg_4]",
+    "line": "mov     ecx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x8ABD50",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+entries]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8ABD53",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+moveDir]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x8ABD66",
-    "line": "fst     dword ptr [eax-10h]",
+    "line": "fst     dword ptr [eax-10h]; Preserves original hit fraction/distance from entry+0x1C into point.w at entry+0x0C before rewriting the sort key.",
     "mnemonic": "fst",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x8ABD99",
-    "line": "fstp    dword ptr [eax-30h]",
+    "line": "fstp    dword ptr [eax-30h]; Rewrites entry+0x1C as movement-relative priority; do not treat cached +0x1C as a pure geometric ledge/clearance distance.",
     "mnemonic": "fstp",
     "size": 3
   },

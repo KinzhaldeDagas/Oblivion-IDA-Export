@@ -1,4 +1,4 @@
-0x669D30: mov     eax, [esp+arg_4]
+0x669D30: mov     eax, [esp+arg_4]; Verified Player_LinkModifiedForm also invokes ActiveEffect_Base_LinkAEList on PlayerCharacter's active-effect list, passing the PlayerCharacter pointer as linkContext before continuing other post-link rebuilds.
 0x669D34: sub     esp, 0Ch
 0x669D37: push    ebx
 0x669D38: push    ebp
@@ -19,7 +19,7 @@
 0x669D5C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669D61: push    ebx; int
 0x669D62: push    eax; a1
-0x669D63: call    TESForm_LookupByFormID
+0x669D63: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669D68: add     esp, 4
 0x669D6B: push    eax; void *
 0x669D6C: call    OblivionDynamicCast
@@ -33,7 +33,7 @@
 0x669D8A: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669D8F: push    ebx; int
 0x669D90: push    eax; a1
-0x669D91: call    TESForm_LookupByFormID
+0x669D91: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669D96: add     esp, 4
 0x669D99: push    eax; void *
 0x669D9A: call    OblivionDynamicCast
@@ -47,7 +47,7 @@
 0x669DB7: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669DBC: push    ebx; int
 0x669DBD: push    eax; a1
-0x669DBE: call    TESForm_LookupByFormID
+0x669DBE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669DC3: add     esp, 4
 0x669DC6: push    eax; void *
 0x669DC7: call    OblivionDynamicCast
@@ -58,7 +58,7 @@
 0x669DDC: mov     [esi+624h], ebx
 0x669DE2: jz      short loc_669E2E
 0x669DE4: push    eax; a1
-0x669DE5: call    TESForm_LookupByFormID
+0x669DE5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669DEA: push    ebx; int
 0x669DEB: push    offset ??_R0?AVMagicItemForm@@@8; struct TypeDescriptor *
 0x669DF0: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -107,7 +107,7 @@
 0x669E70: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669E75: push    ebx; int
 0x669E76: push    eax; a1
-0x669E77: call    TESForm_LookupByFormID
+0x669E77: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669E7C: add     esp, 4
 0x669E7F: push    eax; void *
 0x669E80: call    OblivionDynamicCast
@@ -121,7 +121,7 @@
 0x669E9E: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669EA3: push    ebx; int
 0x669EA4: push    eax; a1
-0x669EA5: call    TESForm_LookupByFormID
+0x669EA5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669EAA: add     esp, 4
 0x669EAD: push    eax; void *
 0x669EAE: call    OblivionDynamicCast
@@ -137,7 +137,7 @@
 0x669ECE: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669ED3: push    ebx; int
 0x669ED4: push    eax; a1
-0x669ED5: call    TESForm_LookupByFormID
+0x669ED5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669EDA: add     esp, 4
 0x669EDD: push    eax; void *
 0x669EDE: call    OblivionDynamicCast
@@ -151,7 +151,7 @@
 0x669EFC: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669F01: push    ebx; int
 0x669F02: push    eax; a1
-0x669F03: call    TESForm_LookupByFormID
+0x669F03: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669F08: add     esp, 4
 0x669F0B: push    eax; void *
 0x669F0C: call    OblivionDynamicCast
@@ -168,7 +168,7 @@
 0x669F36: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669F3B: push    ebx; int
 0x669F3C: push    eax; a1
-0x669F3D: call    TESForm_LookupByFormID
+0x669F3D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669F42: add     esp, 4
 0x669F45: push    eax; void *
 0x669F46: call    OblivionDynamicCast
@@ -185,7 +185,7 @@
 0x669F6E: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669F73: push    ebx; int
 0x669F74: push    eax; a1
-0x669F75: call    TESForm_LookupByFormID
+0x669F75: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669F7A: add     esp, 4
 0x669F7D: push    eax; void *
 0x669F7E: call    OblivionDynamicCast
@@ -209,7 +209,7 @@
 0x669FBD: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x669FC2: push    0; int
 0x669FC4: push    ebp; a1
-0x669FC5: call    TESForm_LookupByFormID
+0x669FC5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x669FCA: add     esp, 4
 0x669FCD: push    eax; void *
 0x669FCE: call    OblivionDynamicCast
@@ -224,7 +224,7 @@
 0x669FE9: mov     edx, ds:0B33B00h
 0x669FEF: cmp     byte ptr [edx+7Ch], 73h ; 's'
 0x669FF3: jb      short loc_66A048
-0x669FF5: mov     edi, offset dword_B3BB44
+0x669FF5: mov     edi, (offset qword_B3BB2C+18h)
 0x669FFA: xor     ebx, ebx
 0x669FFC: lea     esp, [esp+0]
 0x66A000: cmp     dword ptr [edi+4], 0
@@ -239,7 +239,7 @@
 0x66A01C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x66A021: push    0; int
 0x66A023: push    ebp; a1
-0x66A024: call    TESForm_LookupByFormID
+0x66A024: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x66A029: add     esp, 4
 0x66A02C: push    eax; void *
 0x66A02D: call    OblivionDynamicCast
@@ -247,14 +247,14 @@
 0x66A035: test    eax, eax
 0x66A037: jz      loc_66A0D6
 0x66A03D: mov     [edi], eax
-0x66A03F: mov     ebx, edi
+0x66A03F: mov     ebx, edi; targetReference
 0x66A041: mov     edi, [edi+4]
 0x66A044: test    edi, edi
 0x66A046: jnz     short loc_66A000
 0x66A048: mov     eax, [esi+1E4h]
-0x66A04E: push    esi
-0x66A04F: push    eax
-0x66A050: call    ActiveEffect_Base_LinkAEList
+0x66A04E: push    esi; linkContext
+0x66A04F: push    eax; activeEffectList
+0x66A050: call    ActiveEffect_Base_LinkAEList; Verified Player_LinkModifiedForm passes the player pointer as explicit linkContext, but EBX at this call still holds the predecessor node from the preceding saved-reference list walk. Therefore the hidden EBX target-reference role is not verified for this caller; effect hit-node presence/cleanup conditions need further tracing.
 0x66A055: mov     ecx, [esi+58h]
 0x66A058: mov     edx, [ecx]
 0x66A05A: mov     eax, [edx+5Ch]
@@ -285,7 +285,7 @@
 0x66A0A9: mov     ecx, [eax]
 0x66A0AB: push    eax
 0x66A0AC: mov     [edi], ecx
-0x66A0AE: call    FormHeapFree
+0x66A0AE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66A0B3: add     esp, 4
 0x66A0B6: jmp     loc_669FE5
 0x66A0BB: mov     dword ptr [edi], 0
@@ -305,7 +305,7 @@
 0x66A0E7: mov     edx, [eax]
 0x66A0E9: push    eax
 0x66A0EA: mov     [edi], edx
-0x66A0EC: call    FormHeapFree
+0x66A0EC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66A0F1: add     esp, 4
 0x66A0F4: jmp     loc_66A044
 0x66A0F9: mov     dword ptr [edi], 0
@@ -350,7 +350,7 @@
 0x66A180: fstp    [esp+1Ch+arg_4]
 0x66A184: fld     [esp+1Ch+arg_4]
 0x66A188: fld     st
-0x66A18A: call    Double_To_SInt32
+0x66A18A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x66A18F: mov     [esp+1Ch+arg_4], eax
 0x66A193: fild    [esp+1Ch+arg_4]
 0x66A197: fstp    [esp+1Ch+arg_4]
@@ -411,7 +411,7 @@
 0x66A240: fstp    [esp+1Ch+arg_4]
 0x66A244: fld     [esp+1Ch+arg_4]
 0x66A248: fld     st
-0x66A24A: call    Double_To_SInt32
+0x66A24A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x66A24F: mov     [esp+1Ch+arg_4], eax
 0x66A253: fild    [esp+1Ch+arg_4]
 0x66A257: fstp    [esp+1Ch+arg_4]
@@ -472,7 +472,7 @@
 0x66A300: fstp    [esp+1Ch+arg_4]
 0x66A304: fld     [esp+1Ch+arg_4]
 0x66A308: fld     st
-0x66A30A: call    Double_To_SInt32
+0x66A30A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x66A30F: mov     [esp+1Ch+arg_4], eax
 0x66A313: fild    [esp+1Ch+arg_4]
 0x66A317: fstp    [esp+1Ch+arg_4]
@@ -521,14 +521,14 @@
 0x66A39B: mov     eax, [edx+130h]
 0x66A3A1: push    0Bh
 0x66A3A3: call    eax
-0x66A3A5: xor     edi, edi
+0x66A3A5: xor     edi, edi; Post-link rebuild: iterate all 21 skill group offsets, map each to AV 0x0C..0x20, and recalculate requiredSkillExp from the loaded base skill, specialization, and seven-major class membership.
 0x66A3A7: push    edi
 0x66A3A8: push    2
-0x66A3AA: call    ActorValue_GetAVFromGroupOffset
+0x66A3AA: call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
 0x66A3AF: add     esp, 8
-0x66A3B2: push    eax; float
-0x66A3B3: mov     ecx, esi
-0x66A3B5: call    sub_663C50
+0x66A3B2: push    eax; actorValue
+0x66A3B3: mov     ecx, esi; this
+0x66A3B5: call    Player_RecalculateRequiredSkillExperience; Skill-use requirement recalculation evaluates the curve with the raw skill level, including level 0; only an exactly-zero computed result is replaced with 1.
 0x66A3BA: add     edi, 1
 0x66A3BD: cmp     edi, 15h
 0x66A3C0: jl      short loc_66A3A7

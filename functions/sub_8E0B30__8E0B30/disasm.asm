@@ -41,7 +41,6 @@
 0x8E0BCD: mov     word ptr [esp+30h+var_30+4], dx
 0x8E0BD2: mov     word ptr [esp+30h+var_30+6], dx
 0x8E0BD7: jmp     short loc_8E0BE0
-0x8E0BD9: align 10h
 0x8E0BE0: movq    mm0, qword ptr [ecx+8]
 0x8E0BE4: movq    mm1, mm0
 0x8E0BE7: pcmpgtw mm1, mm4

@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x50D939",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x50D963",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D964",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,13 +577,13 @@
   },
   {
     "ea": "0x50DA06",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DA07",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x50DA71",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x50DAAA",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DAAB",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x50DB4C",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DB4D",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,13 +1417,13 @@
   },
   {
     "ea": "0x50DBF0",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DBF1",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,13 +1633,13 @@
   },
   {
     "ea": "0x50DC60",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DC61",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,13 +1849,13 @@
   },
   {
     "ea": "0x50DCD0",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DCD1",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x50DD0D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,13 +2071,13 @@
   },
   {
     "ea": "0x50DD46",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DD47",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x50DD7F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2305,13 +2305,13 @@
   },
   {
     "ea": "0x50DDB8",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DDB9",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -2521,13 +2521,13 @@
   },
   {
     "ea": "0x50DE28",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DE29",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -2737,13 +2737,13 @@
   },
   {
     "ea": "0x50DE98",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DE99",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -2959,19 +2959,19 @@
   },
   {
     "ea": "0x50DF27",
-    "line": "push    offset aOff_0; Str2",
+    "line": "push    offset aOff_0; right",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x50DF2C",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DF2D",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -3073,13 +3073,13 @@
   },
   {
     "ea": "0x50DF5E",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DF5F",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -3259,13 +3259,13 @@
   },
   {
     "ea": "0x50DFBB",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50DFBC",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -3445,13 +3445,13 @@
   },
   {
     "ea": "0x50E018",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50E019",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -3631,13 +3631,13 @@
   },
   {
     "ea": "0x50E075",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50E076",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -3817,13 +3817,13 @@
   },
   {
     "ea": "0x50E0D6",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50E0D7",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -4003,13 +4003,13 @@
   },
   {
     "ea": "0x50E133",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50E134",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -4189,13 +4189,13 @@
   },
   {
     "ea": "0x50E190",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50E191",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -4375,13 +4375,13 @@
   },
   {
     "ea": "0x50E1E9",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50E1EA",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

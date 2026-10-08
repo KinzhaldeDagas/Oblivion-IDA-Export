@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68E92B",
-    "line": "mov     eax, [esi+28h]",
+    "line": "mov     eax, [esi+28h]; Verified expiration path: if duration reaches timeElapsed and spell/effect flags do not suppress expiration, sets bTerminated=1 and proceeds to target-death/termination handling.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x68E931",
-    "line": "jz      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "line": "jz      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath; Verified target-death path: for actor targets, marks bTerminated unless the EffectSetting flag 0x10000000 suppresses death termination; then runs the common termination check.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x68E936",
-    "line": "jz      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "line": "jz      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath; Verified target-death path: for actor targets, marks bTerminated unless the EffectSetting flag 0x10000000 suppresses death termination; then runs the common termination check.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x68E941",
-    "line": "jnz     short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "line": "jnz     short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath; Verified target-death path: for actor targets, marks bTerminated unless the EffectSetting flag 0x10000000 suppresses death termination; then runs the common termination check.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x68E960",
-    "line": "jp      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath",
+    "line": "jp      short ActiveEffect_Base_ProcessEffect___CheckForTargetDeath; Verified target-death path: for actor targets, marks bTerminated unless the EffectSetting flag 0x10000000 suppresses death termination; then runs the common termination check.",
     "mnemonic": "jp",
     "size": 2
   },

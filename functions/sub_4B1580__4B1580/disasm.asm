@@ -24,7 +24,7 @@
 0x4B15BB: jmp     short loc_4B15E9
 0x4B15BD: push    2
 0x4B15BF: mov     ecx, esi
-0x4B15C1: call    NiNode_GetNiPropertyByID
+0x4B15C1: call    NiNode_GetNiPropertyByID;
 0x4B15C6: test    eax, eax
 0x4B15C8: jz      short loc_4B15E9
 0x4B15CA: mov     ecx, ds:0B3FA90h

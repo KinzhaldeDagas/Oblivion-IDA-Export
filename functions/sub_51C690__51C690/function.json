@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51C690",
+      "0x51C6A1"
+    ]
+  ],
+  "chunks_sha256": "3f2795d71b06394f61379f40590568d5ede85e0ea5a2b08a85d8422fc8dcde43",
+  "comment_regular": "Verified: component vslot +0x44 tail-forwards path to bloodSpray TESModel.SetModelPath(+0x18), adjusting ECX by +0xF8 (complete creature +0x11C). Path argument remains on the stack; previous no-argument prototype was incomplete.\n\nVerified TESCreature virtual +0x44 setter: forwards supplied path to bloodSpray TESModel::SetModelPath. Path is stored in the creature's TESModel subobject.",
+  "comment_repeatable": "Verified TESCreature virtual +0x44 setter: forwards supplied path to bloodSpray TESModel::SetModelPath. Path is stored in the creature's TESModel subobject.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_51C690",
+  "display_name": "TESCreature_SetBloodParticlePath",
   "end_ea": "0x51C6A1",
-  "flags": 5120,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51C690",
+  "name": "TESCreature_SetBloodParticlePath",
   "segment": ".text",
   "sha256": "3f2795d71b06394f61379f40590568d5ede85e0ea5a2b08a85d8422fc8dcde43",
   "size": 17,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51C690",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 17,
+  "type": "void __thiscall(TESActorBaseData *__shifted(TESCreature,0x24) self, const char *path)",
   "xrefs_from_count": 3,
   "xrefs_to_count": 1
 }

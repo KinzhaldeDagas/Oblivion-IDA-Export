@@ -13,22 +13,22 @@
 0x439DDE: mov     large fs:0, eax
 0x439DE4: mov     esi, ecx
 0x439DE6: xor     ebx, ebx
-0x439DE8: mov     [esp+20h+var_10], ebx
+0x439DE8: mov     [esp+20h+task], ebx
 0x439DEC: mov     ecx, [esi+8]
 0x439DEF: mov     eax, [ecx]
 0x439DF1: mov     edi, [esp+20h+arg_0]
 0x439DF5: mov     eax, [eax+4]
-0x439DF8: lea     edx, [esp+20h+var_10]
+0x439DF8: lea     edx, [esp+20h+task]
 0x439DFC: push    edx
 0x439DFD: push    edi
 0x439DFE: mov     [esp+28h+var_4], ebx
 0x439E02: call    eax
 0x439E04: test    al, al
 0x439E06: jz      short loc_439E18
-0x439E08: mov     ecx, [esp+20h+var_10]
-0x439E0C: push    ecx
-0x439E0D: mov     ecx, ioManager
-0x439E13: call    sub_432130
+0x439E08: mov     ecx, [esp+20h+task]
+0x439E0C: push    ecx; task
+0x439E0D: mov     ecx, ds:0B33A10h
+0x439E13: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
 0x439E18: mov     [esp+20h+arg_0], ebx
 0x439E1C: mov     ecx, [esi+10h]
 0x439E1F: mov     edx, [ecx]
@@ -41,9 +41,9 @@
 0x439E31: test    al, al
 0x439E33: jz      short loc_439E45
 0x439E35: mov     eax, [esp+20h+arg_0]
-0x439E39: mov     ecx, ioManager
-0x439E3F: push    eax
-0x439E40: call    sub_432130
+0x439E39: mov     ecx, ds:0B33A10h
+0x439E3F: push    eax; task
+0x439E40: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
 0x439E45: mov     esi, [esp+20h+arg_0]
 0x439E49: cmp     esi, ebx
 0x439E4B: mov     edi, ds:InterlockedDecrement
@@ -61,7 +61,7 @@
 0x439E69: push    1
 0x439E6B: mov     ecx, esi
 0x439E6D: call    eax
-0x439E6F: mov     esi, [esp+20h+var_10]
+0x439E6F: mov     esi, [esp+20h+task]
 0x439E73: cmp     esi, ebx
 0x439E75: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x439E7D: jz      short loc_439E97
@@ -85,3 +85,14 @@
 0x439EA5: pop     ebx
 0x439EA6: add     esp, 10h
 0x439EA9: retn    4
+0x9AC8D0: lea     ecx, [ebp-10h]; void *
+0x9AC8D3: jmp     sub_4BDDC0
+0x9AC8D8: lea     ecx, [ebp+4]; void *
+0x9AC8DB: jmp     sub_4BDDC0
+0x9AC8E0: mov     edx, [esp+arg_4]
+0x9AC8E4: lea     eax, [edx-10h]
+0x9AC8E7: mov     ecx, [edx-14h]
+0x9AC8EA: xor     ecx, eax
+0x9AC8EC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC8F1: mov     eax, offset stru_AD9564
+0x9AC8F6: jmp     ___CxxFrameHandler3

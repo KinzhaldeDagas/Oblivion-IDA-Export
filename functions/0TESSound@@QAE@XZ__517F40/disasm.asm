@@ -41,3 +41,18 @@
 0x517FD2: pop     esi
 0x517FD3: add     esp, 10h
 0x517FD6: retn
+0x9B7460: mov     ecx, [ebp-10h]
+0x9B7463: jmp     TESObject_destr
+0x9B7468: mov     ecx, [ebp-10h]
+0x9B746B: add     ecx, 24h ; '$'
+0x9B746E: jmp     TESFullName_Initialize
+0x9B7473: mov     ecx, [ebp-10h]
+0x9B7476: add     ecx, 30h ; '0'; void *
+0x9B7479: jmp     BSStringT_Clear
+0x9B747E: mov     edx, [esp+arg_4]
+0x9B7482: lea     eax, [edx-8]
+0x9B7485: mov     ecx, [edx-0Ch]
+0x9B7488: xor     ecx, eax
+0x9B748A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B748F: mov     eax, offset stru_AE2034
+0x9B7494: jmp     ___CxxFrameHandler3

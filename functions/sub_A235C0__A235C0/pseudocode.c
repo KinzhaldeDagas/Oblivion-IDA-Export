@@ -1,4 +1,4 @@
-void __cdecl sub_A235C0()
+void __cdecl GameSetting_fLeafRockSpeedSwayInfluence_atexit()
 {
-  GameSetting_destr((int *)&flt_B39E38);
+  GameSetting_destr((int *)flt_B39E38); /*0xa235c5*/
 }

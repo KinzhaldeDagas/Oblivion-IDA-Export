@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7077D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Fog property propagation decode: NiAVObject local-property merge helper; property kind 1 writes BSFogProperty/NiFogProperty to NiPropertyState +0x0C.",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x70782F",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x707874",
-    "line": "call    sub_731620",
+    "line": "call    sub_731620; Fog property propagation decode: NiPropertyState copy constructor preserves all ten slots, including inherited fog slot +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x7078B8",
-    "line": "cmp     eax, 0Ah",
+    "line": "cmp     eax, 0Ah; Pass222: Real property-kind guard cmp kind,0x0A before NiPropertyState slot write.",
     "mnemonic": "cmp",
     "size": 3
   },
   {
     "ea": "0x7078BB",
-    "line": "jg      short loc_707902",
+    "line": "jg      short loc_707902; Fog property propagation decode: GetPropertyType guard before state slot write; fog kind 1 is accepted.",
     "mnemonic": "jg",
     "size": 2
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x7078CA",
-    "line": "mov     edi, [ecx+eax*4+8]",
+    "line": "mov     edi, [ecx+eax*4+8]; Fog property propagation decode: old slot read uses state +0x08 + 4*kind; fog kind 1 reads state +0x0C.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x7078D0",
-    "line": "lea     ebx, [ecx+eax*4+8]",
+    "line": "lea     ebx, [ecx+eax*4+8]; Fog property propagation decode: target slot formula state +0x08 + 4*kind; BSFogProperty kind 1 lands at state +0x0C.",
     "mnemonic": "lea",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x70791D",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -850,5 +850,131 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C96A0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C96A3",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C96A6",
+    "line": "jz      locret_9C96B8",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C96AC",
+    "line": "and     dword ptr [ebp-10h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C96B0",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C96B3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C96B8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C96B9",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C96BC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C96C1",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C96C4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C96C5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C96CA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C96CB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C96CC",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C96D0",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C96D3",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C96D6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C96D8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C96DD",
+    "line": "mov     eax, offset stru_AF1F60",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C96E2",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

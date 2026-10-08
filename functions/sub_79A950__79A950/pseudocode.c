@@ -1,16 +1,20 @@
-int __cdecl sub_79A950(char *a1, char *a2, int a3)
+// Forward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into destinationFirst; returns destination end.
+OB_SFrondVertex_010201A0 *__cdecl OB_SFrondVertex_CopyForward_010201A0(
+        OB_SFrondVertex_010201A0 *first,
+        OB_SFrondVertex_010201A0 *last,
+        OB_SFrondVertex_010201A0 *destinationFirst)
 {
-  int result; // eax
-  char *i; // edx
+  OB_SFrondVertex_010201A0 *result; // eax
+  OB_SFrondVertex_010201A0 *i; // edx
   char *v5; // edi
-  char *v6; // esi
+  OB_SFrondVertex_010201A0 *v6; // esi
 
-  result = a3 + 0x38 * ((a2 - a1) / 0x38);
-  for ( i = a1; i != a2; i += 0x38 )
+  result = &destinationFirst[last - first]; /*0x79a981*/
+  for ( i = first; i != last; ++i ) /*0x79a985*/
   {
-    v5 = &i[a3 - (_DWORD)a1];
-    v6 = i;
-    qmemcpy(v5, v6, 0x38u);
+    v5 = (char *)i + (char *)destinationFirst - (char *)first; /*0x79a990*/
+    v6 = i; /*0x79a993*/
+    qmemcpy(v5, v6, 0x38u); /*0x79a99f*/
   }
-  return result;
+  return result; /*0x79a9a4*/
 }

@@ -1,4 +1,4 @@
-0x803690: push    0FFFFFFFFh
+0x803690: push    0FFFFFFFFh; MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.
 0x803692: push    offset SEH_803A30
 0x803697: mov     eax, large fs:0
 0x80369D: push    eax
@@ -15,7 +15,7 @@
 0x8036B5: mov     esi, ecx
 0x8036B7: mov     [esp+24h+var_10], esi
 0x8036BB: mov     [esp+24h+var_4], 2
-0x8036C3: call    NiTPointerList__FreeAllNodes
+0x8036C3: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x8036C8: mov     edi, [esi+14h]
 0x8036CB: mov     ebp, ds:0A2807Ch
 0x8036D1: xor     ebx, ebx
@@ -95,3 +95,18 @@
 0x80377C: pop     ebx
 0x80377D: add     esp, 10h
 0x803780: retn
+0x9D0930: mov     ecx, [ebp-10h]
+0x9D0933: jmp     j_??1?$NiTPointerList@PAVBSImageSpaceShader@@@@UAE@XZ; NiTPointerList<BSImageSpaceShader *>::~NiTPointerList<BSImageSpaceShader *>(void)
+0x9D0938: mov     ecx, [ebp-10h]
+0x9D093B: add     ecx, 10h; slot
+0x9D093E: jmp     NiPointerSlot_Release
+0x9D0943: mov     ecx, [ebp-10h]
+0x9D0946: add     ecx, 14h; slot
+0x9D0949: jmp     NiPointerSlot_Release
+0x9D094E: mov     edx, [esp+arg_4]
+0x9D0952: lea     eax, [edx-14h]
+0x9D0955: mov     ecx, [edx-18h]
+0x9D0958: xor     ecx, eax
+0x9D095A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D095F: mov     eax, offset stru_AF9230
+0x9D0964: jmp     ___CxxFrameHandler3

@@ -6,10 +6,10 @@ int __cdecl sub_40F6A0(int a1, int a2, int a3, int a4, int a5, int a6)
   int v10; // [esp+64h] [ebp-Ch] BYREF
   _DWORD v11[2]; // [esp+68h] [ebp-8h] BYREF
 
-  v6 = a6;
-  v7 = *(int (__stdcall **)(int, int, int, int, int, int, _DWORD, int *, _DWORD))(*(_DWORD *)a1 + 0x5C);
-  v10 = 0;
-  if ( (v7(a1, a5, a6, 1, 0x200, a2, 0, &v10, 0) >= 0
+  v6 = a6; /*0x40f6a4*/
+  v7 = *(int (__stdcall **)(int, int, int, int, int, int, _DWORD, int *, _DWORD))(*(_DWORD *)a1 + 0x5C); /*0x40f6b4*/
+  v10 = 0; /*0x40f6d0*/
+  if ( (v7(a1, a5, a6, 1, 0x200, a2, 0, &v10, 0) >= 0 /*0x40f713*/
      || (*(int (__stdcall **)(int, int, int, int, _DWORD, int, int, int *, _DWORD))(*(_DWORD *)a1 + 0x5C))(
           a1,
           a5,
@@ -22,18 +22,18 @@ int __cdecl sub_40F6A0(int a1, int a2, int a3, int a4, int a5, int a6)
           0) >= 0)
     && (*(int (__stdcall **)(int, _DWORD, _DWORD *, _DWORD, _DWORD))(*(_DWORD *)v10 + 0x4C))(v10, 0, v11, 0, 0) >= 0 )
   {
-    v8 = v11[1];
-    if ( a6 )
+    v8 = v11[1]; /*0x40f719*/
+    if ( a6 ) /*0x40f722*/
     {
-      do
+      do /*0x40f737*/
       {
-        _memset(v8, 0, a5 * a4);
-        v8 += v11[0];
-        --v6;
+        _memset(v8, 0, a5 * a4); /*0x40f728*/
+        v8 += v11[0]; /*0x40f72d*/
+        --v6; /*0x40f734*/
       }
-      while ( v6 );
+      while ( v6 ); /*0x40f737*/
     }
-    (*(void (__stdcall **)(int, _DWORD))(*(_DWORD *)v10 + 0x50))(v10, 0);
+    (*(void (__stdcall **)(int, _DWORD))(*(_DWORD *)v10 + 0x50))(v10, 0); /*0x40f745*/
   }
-  return v10;
+  return v10; /*0x40f74b*/
 }

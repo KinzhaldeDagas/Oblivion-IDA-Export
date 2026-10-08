@@ -1,9 +1,9 @@
-0x548C00: push    ecx
-0x548C01: mov     eax, [esp+4+arg_8]
-0x548C05: mov     ecx, [esp+4+arg_4]
-0x548C09: push    eax
-0x548C0A: push    ecx
-0x548C0B: call    Calc_LuckModifiedSkill
+0x548C00: push    ecx; Spell magicka cost uses luck-modified magic skill. AVU replacement must preserve vanilla lower clamp and fractional precision before configurable cap/DR handling.
+0x548C01: mov     eax, [esp+4+luckValue]
+0x548C05: mov     ecx, [esp+4+skillValue]
+0x548C09: push    eax; luckValue
+0x548C0A: push    ecx; skillValue
+0x548C0B: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x548C10: fdiv    qword ptr ds:0A309F0h
 0x548C16: fstp    [esp+0Ch+var_4]
 0x548C1A: fld     [esp+0Ch+var_4]

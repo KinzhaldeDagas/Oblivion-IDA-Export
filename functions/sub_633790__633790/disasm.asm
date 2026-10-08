@@ -58,7 +58,7 @@
 0x633835: push    1
 0x633837: push    0Ch
 0x633839: push    eax
-0x63383A: mov     ecx, offset ActorProcessManager_ptr
+0x63383A: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x63383F: call    sub_6758E0
 0x633844: mov     ebp, eax
 0x633846: test    ebp, ebp
@@ -76,7 +76,7 @@
 0x63386E: test    edi, edi
 0x633870: jz      short loc_6338AB
 0x633872: push    edi
-0x633873: mov     ecx, offset dword_B3BDB0
+0x633873: mov     ecx, (offset qword_B3BB2C+284h)
 0x633878: mov     byte ptr [esp+14h+arg_0], 1
 0x63387D: call    sub_67CB50
 0x633882: test    al, al

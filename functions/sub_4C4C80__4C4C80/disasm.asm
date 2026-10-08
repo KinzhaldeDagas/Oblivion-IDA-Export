@@ -25,9 +25,9 @@
 0x4C4CD0: jz      loc_4C5625
 0x4C4CD6: push    ecx; a2
 0x4C4CD7: mov     ecx, esi; this
-0x4C4CD9: call    TESForm_GetOverrideFile
+0x4C4CD9: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4C4CDE: mov     ecx, eax
-0x4C4CE0: call    sub_4520F0
+0x4C4CE0: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x4C4CE5: push    esi
 0x4C4CE6: mov     ecx, eax
 0x4C4CE8: mov     [esp+15C4h+a2], eax
@@ -70,7 +70,7 @@
 0x4C4D89: push    eax; Dst
 0x4C4D8A: mov     ecx, edi; a1
 0x4C4D8C: mov     [esp+15C8h+a4], eax
-0x4C4D90: call    TESFile_GetChunkData
+0x4C4D90: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C4D95: mov     ecx, [esi+24h]
 0x4C4D98: mov     ecx, [ecx+50h]
 0x4C4D9B: test    ecx, ecx
@@ -105,7 +105,7 @@
 0x4C4DF0: or      dword ptr [esi+1Ch], 800h
 0x4C4DF7: mov     edx, [esp+15C0h+a4]
 0x4C4DFB: push    edx
-0x4C4DFC: call    FormHeapFree
+0x4C4DFC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4C4E01: add     esp, 4
 0x4C4E04: jmp     loc_4C55B5
 0x4C4E09: mov     ecx, [esi+20h]; this
@@ -188,7 +188,7 @@
 0x4C4EFB: lea     eax, [esp+15C4h+Dst]
 0x4C4EFF: push    eax; Dst
 0x4C4F00: mov     ecx, edi; a1
-0x4C4F02: call    TESFile_GetChunkData
+0x4C4F02: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C4F07: mov     eax, dword ptr [esp+15C0h+Dst]
 0x4C4F0B: mov     ecx, [esi+1Ch]
 0x4C4F0E: and     eax, 7
@@ -203,7 +203,7 @@
 0x4C4F31: lea     edx, [esp+15C4h+var_1558]
 0x4C4F35: push    edx; Dst
 0x4C4F36: mov     ecx, edi; a1
-0x4C4F38: call    TESFile_GetChunkData
+0x4C4F38: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C4F3D: xor     ebx, ebx
 0x4C4F3F: nop
 0x4C4F40: mov     eax, ebx
@@ -225,7 +225,6 @@
 0x4C4F63: mov     [esp+15C0h+var_15A8], ecx
 0x4C4F67: mov     [esp+15C0h+a4], edi
 0x4C4F6B: jmp     short loc_4C4F70
-0x4C4F6D: align 10h
 0x4C4F70: mov     ecx, [esp+15C0h+a4]
 0x4C4F74: mov     eax, 78787879h
 0x4C4F79: imul    ecx
@@ -272,7 +271,7 @@
 0x4C5005: mov     edx, [ecx+8]
 0x4C5008: mov     ecx, [edx+ebx*4]
 0x4C500B: add     ecx, edi
-0x4C500D: call    sub_43F350
+0x4C500D: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4C5012: fstp    st
 0x4C5014: add     [esp+15C0h+a4], 1
 0x4C5019: add     edi, 0Ch
@@ -292,7 +291,7 @@
 0x4C505C: lea     eax, [esp+15C4h+var_1558]
 0x4C5060: push    eax; Dst
 0x4C5061: mov     ecx, edi; a1
-0x4C5063: call    TESFile_GetChunkData
+0x4C5063: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C5068: fld1
 0x4C506A: fstp    [esp+15C0h+var_155C]
 0x4C506E: mov     [esp+15C0h+a4], 0
@@ -370,7 +369,7 @@
 0x4C5162: lea     eax, [esp+15C4h+var_450]
 0x4C5169: push    eax; Dst
 0x4C516A: mov     ecx, edi; a1
-0x4C516C: call    TESFile_GetChunkData
+0x4C516C: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C5171: fld     dword ptr ds:0A32048h
 0x4C5177: mov     eax, [esi+24h]
 0x4C517A: fstp    [esp+15C0h+var_1570]
@@ -528,7 +527,7 @@
 0x4C5386: add     esp, 4
 0x4C5389: push    eax; a4
 0x4C538A: push    ebx; Dst
-0x4C538B: call    TESFile_GetChunkData
+0x4C538B: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C5390: mov     eax, [esp+15C0h+a4]
 0x4C5394: shr     eax, 3
 0x4C5397: mov     [esp+15C0h+var_1578], eax
@@ -579,11 +578,11 @@
 0x4C5428: mov     ecx, edi; a1
 0x4C542A: mov     [esp+15C8h+a1], eax
 0x4C542E: mov     [esp+15C8h+var_157C], eax
-0x4C5432: call    TESFile_GetChunkData
+0x4C5432: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C5437: lea     edx, [esp+15C0h+a1]
 0x4C543B: push    edi; a2
 0x4C543C: push    edx; a1
-0x4C543D: call    TESForm_ResolveFormID
+0x4C543D: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4C5442: mov     eax, [esp+15C8h+a1]
 0x4C5446: add     esp, 8
 0x4C5449: push    0; int
@@ -591,7 +590,7 @@
 0x4C5450: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4C5455: push    0; int
 0x4C5457: push    eax; a1
-0x4C5458: call    TESForm_LookupByFormID
+0x4C5458: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4C545D: add     esp, 4
 0x4C5460: push    eax; void *
 0x4C5461: call    OblivionDynamicCast
@@ -629,7 +628,7 @@
 0x4C54D0: lea     eax, [esp+15C4h+var_159C]
 0x4C54D4: push    eax; Dst
 0x4C54D5: mov     ecx, edi; a1
-0x4C54D7: call    TESFile_GetChunkData
+0x4C54D7: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4C54DC: mov     ax, word ptr [esp+15C0h+var_159C.member.pad+1]
 0x4C54E1: cmp     ax, 7
 0x4C54E5: jbe     short loc_4C5515
@@ -652,7 +651,7 @@
 0x4C551C: lea     eax, [esp+15C0h+var_159C]
 0x4C5520: push    edi; a2
 0x4C5521: push    eax; a1
-0x4C5522: call    TESForm_ResolveFormID
+0x4C5522: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4C5527: mov     ecx, [esp+15C8h+var_159C.vtbl]
 0x4C552B: add     esp, 8
 0x4C552E: push    0; int
@@ -660,7 +659,7 @@
 0x4C5535: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4C553A: push    0; int
 0x4C553C: push    ecx; a1
-0x4C553D: call    TESForm_LookupByFormID
+0x4C553D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4C5542: add     esp, 4
 0x4C5545: push    eax; void *
 0x4C5546: call    OblivionDynamicCast

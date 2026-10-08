@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x447050",
-    "line": "push    ebx",
+    "line": "push    ebx; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x447069",
-    "line": "call    edx",
+    "line": "call    edx; Pass273 crash context: 0x000104A1 startup capture ended at null EIP before PreLoadGame/PostLoadGame; recovered stack returned through TESDataHandler_LoadForm's virtual LoadForm call with an EngineBugFixes frame. All native SimpleShadow/shadow producer counters were zero, so this artifact is not evidence of a ShadowPass mutation.",
     "mnemonic": "call",
     "size": 2
   },

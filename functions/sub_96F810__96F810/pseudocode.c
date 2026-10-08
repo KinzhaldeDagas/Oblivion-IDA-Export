@@ -24,35 +24,35 @@ double __thiscall sub_96F810(float *this, float *a2, float *a3, float a4)
   int v27; // [esp+38h] [ebp-8h]
   int v28; // [esp+3Ch] [ebp-4h]
 
-  v5 = *((_DWORD *)this + 0xE);
-  v6 = *(float *)(v5 + 0x20);
-  v5 += 0x20;
-  v23 = v6;
-  v24 = *(float *)(v5 + 4);
-  v25 = *(float *)(v5 + 8);
-  v26 = *(_DWORD *)(v5 + 0xC);
-  v27 = *(_DWORD *)(v5 + 0x10);
-  v7 = *(_DWORD *)(v5 + 0x14);
-  v8 = *((_DWORD *)this + 0xF) + 0x20;
-  v28 = v7;
-  v17 = *(float *)v8;
-  v18 = *(float *)(v8 + 4);
-  v19 = *(float *)(v8 + 8);
-  v20 = *(_DWORD *)(v8 + 0xC);
-  v21 = *(_DWORD *)(v8 + 0x10);
-  v9 = *a2;
-  v22 = *(_DWORD *)(v8 + 0x14);
-  v11 = v9 * a4;
-  v13 = a2[1] * a4;
-  v15 = a2[2] * a4;
-  v23 = v11 + v6;
-  v24 = v24 + v13;
-  v25 = v25 + v15;
-  v12 = *a3 * a4;
-  v14 = a3[1] * a4;
-  v16 = a4 * a3[2];
-  v17 = v12 + v17;
-  v18 = v18 + v14;
-  v19 = v19 + v16;
-  return (float)(sub_96FCD0(&v23, &v17, this + 0x11, this + 0x12) * *(this + 0x10) - dbl_A2F928);
+  v5 = *((_DWORD *)this + 0xE); /*0x96f816*/
+  v6 = *(float *)(v5 + 0x20); /*0x96f819*/
+  v5 += 0x20; /*0x96f81c*/
+  v23 = v6; /*0x96f81f*/
+  v24 = *(float *)(v5 + 4); /*0x96f826*/
+  v25 = *(float *)(v5 + 8); /*0x96f82d*/
+  v26 = *(_DWORD *)(v5 + 0xC); /*0x96f834*/
+  v27 = *(_DWORD *)(v5 + 0x10); /*0x96f83b*/
+  v7 = *(_DWORD *)(v5 + 0x14); /*0x96f83f*/
+  v8 = *((_DWORD *)this + 0xF) + 0x20; /*0x96f845*/
+  v28 = v7; /*0x96f848*/
+  v17 = *(float *)v8; /*0x96f84e*/
+  v18 = *(float *)(v8 + 4); /*0x96f855*/
+  v19 = *(float *)(v8 + 8); /*0x96f85c*/
+  v20 = *(_DWORD *)(v8 + 0xC); /*0x96f863*/
+  v21 = *(_DWORD *)(v8 + 0x10); /*0x96f86a*/
+  v9 = *a2; /*0x96f875*/
+  v22 = *(_DWORD *)(v8 + 0x14); /*0x96f87e*/
+  v11 = v9 * a4; /*0x96f88c*/
+  v13 = a2[1] * a4; /*0x96f895*/
+  v15 = a2[2] * a4; /*0x96f8a2*/
+  v23 = v11 + v6; /*0x96f8ae*/
+  v24 = v24 + v13; /*0x96f8ba*/
+  v25 = v25 + v15; /*0x96f8c6*/
+  v12 = *a3 * a4; /*0x96f8ce*/
+  v14 = a3[1] * a4; /*0x96f8d7*/
+  v16 = a4 * a3[2]; /*0x96f8e3*/
+  v17 = v12 + v17; /*0x96f8f5*/
+  v18 = v18 + v14; /*0x96f901*/
+  v19 = v19 + v16; /*0x96f90d*/
+  return (float)(sub_96FCD0(&v23, &v17, this + 0x11, this + 0x12) * *(this + 0x10) - dbl_A2F928); /*0x96f92b*/
 }

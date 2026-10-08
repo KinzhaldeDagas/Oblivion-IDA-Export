@@ -568,5 +568,197 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x4341F0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4341F1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4341F2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4341F4",
+    "line": "push    1; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4341F6",
+    "line": "mov     dword ptr [esi], offset ??_7?$LockFreeMap@_JV?$NiPointer@V?$BSTask@_J@@@@@@6B@; const LockFreeMap<__int64,NiPointer<BSTask<__int64>>>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4341FC",
+    "line": "call    sub_433D70; Or LockFreeQueue",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x434201",
+    "line": "mov     eax, [esi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x434204",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434205",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x43420A",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x43420D",
+    "line": "mov     [esp+0Ch+var_4], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x434211",
+    "line": "mov     edx, [esp+0Ch+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x434215",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x434216",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x43421B",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x43421E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x43421F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x434220",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC070",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC073",
+    "line": "jmp     loc_4341F0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC078",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC07B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC07C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC081",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC082",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC083",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC087",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC08A",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC08D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC08F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC094",
+    "line": "mov     eax, offset stru_AD8D9C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC099",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

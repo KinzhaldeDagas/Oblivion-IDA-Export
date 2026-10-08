@@ -27,10 +27,10 @@
 0x983EAB: jz      short loc_983EC3
 0x983EAD: cmp     [ebp+DstSize], esi
 0x983EB0: jb      short loc_983EC3
-0x983EB2: push    esi; Size
-0x983EB3: push    [ebp+Src]; Src
-0x983EB6: push    [ebp+Dst]; Dst
-0x983EB9: call    _memcpy
+0x983EB2: push    esi; byteCount
+0x983EB3: push    [ebp+Src]; source
+0x983EB6: push    [ebp+Dst]; destination
+0x983EB9: call    _memcpy;
 0x983EBE: add     esp, 0Ch
 0x983EC1: jmp     short loc_983E84
 0x983EC3: push    [ebp+DstSize]

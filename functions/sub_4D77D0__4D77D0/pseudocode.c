@@ -1,21 +1,22 @@
-BSExtraData *__fastcall sub_4D77D0(BSExtraDataVtbl *a1)
+// Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.
+ExtraLock *__fastcall TESObjectREFR_FindLockExtraOnLinkedDoorChain(TESObjectREFR *doorReference)
 {
-  ExtraDataList *p_CompareTo; // esi
-  BSExtraData *result; // eax
-  BSExtraData *Teleport; // eax
-  BSExtraData *v4; // esi
+  ExtraDataList *p_baseExtraList; // esi
+  ExtraLock *result; // eax
+  TeleportData *Teleport; // eax
+  TeleportData *v4; // esi
 
-  while ( 1 )
+  while ( 1 ) /*0x4d77d2*/
   {
-    p_CompareTo = (ExtraDataList *)&a1[8].CompareTo;
-    result = BaseExtraList_GetExtraData((ExtraDataList *)&a1[8].CompareTo, kExtraData_Lock);
-    if ( result )
-      break;
-    Teleport = (BSExtraData *)ExtraDataList_GetTeleport(p_CompareTo);
-    v4 = Teleport;
-    if ( !Teleport || !sub_42B410(Teleport) )
-      return 0;
-    a1 = sub_42B410(v4);
+    p_baseExtraList = &doorReference->member.baseExtraList; /*0x4d77d2*/
+    result = (ExtraLock *)BaseExtraList_GetExtraData(&doorReference->member.baseExtraList, kExtraData_Lock); /*0x4d77d9*/
+    if ( result ) /*0x4d77e2*/
+      break; /*0x4d77e2*/
+    Teleport = ExtraDataList_GetTeleport(p_baseExtraList); /*0x4d77e6*/
+    v4 = Teleport; /*0x4d77eb*/
+    if ( !Teleport || !TeleportData_GetLinkedDoor(Teleport) ) /*0x4d77f3*/
+      return 0; /*0x4d780c*/
+    doorReference = TeleportData_GetLinkedDoor(v4); /*0x4d7804*/
   }
-  return result;
+  return result; /*0x4d780e*/
 }

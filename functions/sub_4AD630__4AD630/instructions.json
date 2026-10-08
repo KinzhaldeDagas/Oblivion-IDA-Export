@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4AD630",
-    "line": "sub     esp, 40h",
+    "line": "sub     esp, 40h; Verified (Oblivion): maps TESEffectShaderData fields into ParticleShaderProperty parameters and retains a NiSourceTexture*. The member labels in TESEffectShaderData are Probable correspondences to Fallout's named fields, corroborated by these direct Oblivion copies and the initializer.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4AD635",
-    "line": "mov     ebp, [esp+48h+arg_4]",
+    "line": "mov     ebp, [esp+48h+sourceTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4AD63A",
-    "line": "mov     esi, [esp+4Ch+arg_0]",
+    "line": "mov     esi, [esp+4Ch+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4AD685",
-    "line": "fstp    dword ptr [esi+84h]",
+    "line": "fstp    dword ptr [esi+84h]; Verified (Oblivion data flow): words from TESEffectShader::Data +0x84..+0xB8 are copied into the ParticleShaderProperty parameter block. Probable semantic names from the aligned Fallout EffectShaderData layout are fParticleLifetime, fParticleLifeVar, fParticleNormalSpeed, fParticleNormalAcc, ParticleVelocity, ParticleAcceleration, fParticleScale1/2 and fParticleScale1/2Time.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -325,25 +325,25 @@
   },
   {
     "ea": "0x4AD70C",
-    "line": "mov     [esp+50h+arg_0], ecx",
+    "line": "mov     [esp+50h+property], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4AD710",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4AD714",
-    "line": "mov     [esp+50h+arg_0], edx",
+    "line": "mov     [esp+50h+property], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4AD718",
-    "line": "fstp    [esp+50h+var_20]",
+    "line": "fstp    [esp+50h+var_20]; Verified (Oblivion data flow): low RGB bytes from Data.iParticleColor1/2/3 are divided by 255 and copied to ParticleShaderProperty colors. The Fallout field names are Probable correspondences, corroborated by the same packed-color defaults and direct Oblivion conversions; high bytes are not consumed here.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x4AD720",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4AD724",
-    "line": "mov     [esp+50h+arg_0], eax",
+    "line": "mov     [esp+50h+property], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x4AD734",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x4AD743",
-    "line": "mov     [esp+50h+arg_0], edx",
+    "line": "mov     [esp+50h+property], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,13 +529,13 @@
   },
   {
     "ea": "0x4AD795",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4AD799",
-    "line": "mov     [esp+50h+arg_0], eax",
+    "line": "mov     [esp+50h+property], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x4AD7A5",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4AD7A9",
-    "line": "mov     [esp+50h+arg_0], ecx",
+    "line": "mov     [esp+50h+property], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x4AD7B9",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x4AD80A",
-    "line": "mov     [esp+50h+arg_0], eax",
+    "line": "mov     [esp+50h+property], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x4AD812",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4AD816",
-    "line": "mov     [esp+50h+arg_0], ecx",
+    "line": "mov     [esp+50h+property], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x4AD822",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4AD826",
-    "line": "mov     [esp+50h+arg_0], edx",
+    "line": "mov     [esp+50h+property], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x4AD836",
-    "line": "fild    [esp+50h+arg_0]",
+    "line": "fild    [esp+50h+property]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x4AD884",
-    "line": "fstp    [esp+50h+var_34]",
+    "line": "fstp    [esp+50h+var_34]; Verified (Oblivion data flow): Data floats at +0xC8..+0xDC are copied into ParticleShaderProperty alpha/time parameters. Probable field names, aligned with Fallout EffectShaderData, are fParticleColor1/2/3Alpha and fParticleColor1/2/3Time.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x4AD90E",
-    "line": "fstp    dword ptr [esi+0ACh]",
+    "line": "fstp    dword ptr [esi+0ACh]; Verified (Oblivion data flow): TESEffectShader::Data.fParticleColor1Time/2Time/3Time at +0xD4/+0xD8/+0xDC are copied into ParticleShaderProperty timing slots. Names are Probable cross-version mappings supported by the aligned offsets and initializer defaults.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x4AD95F",
-    "line": "mov     [esi+0FCh], ecx",
+    "line": "mov     [esi+0FCh], ecx; Verified (Oblivion data flow): TESEffectShader::Data fields at +0x60/+0x6C/+0x64/+0x68 copy to ParticleShaderProperty blend/Z-test slots. Probable Fallout-correlated names are eParticleBlendModeSource, eParticleBlendModeDest, eParticleBlendOperation, and eParticleZTestFunction.",
     "mnemonic": "mov",
     "size": 6
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x418E50",
-    "line": "mov     ecx, offset EffectSettingCollection",
+    "line": "mov     ecx, 0B33508h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x418E5A",
-    "line": "mov     ecx, offset EffectSettingCollection",
+    "line": "mov     ecx, 0B33508h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x418E5F",
-    "line": "jmp     EffectSettingCollection_InitAllEffects",
+    "line": "jmp     EffectSettingCollection_InitAllEffects; TES4 effect table initialization has Water Breathing/Walking and many magic effects, but no observed Slowfall or Climbing effect in this table. Movement discipline implementation must add behavior outside the vanilla effect state table.",
     "mnemonic": "jmp",
     "size": 5
   }

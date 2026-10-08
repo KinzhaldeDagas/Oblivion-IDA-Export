@@ -1,1 +1,1 @@
-NiStencilProperty
+struct NiStencilProperty;

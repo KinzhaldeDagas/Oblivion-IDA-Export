@@ -90,12 +90,6 @@
     "size": 2
   },
   {
-    "ea": "0x57CCED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x57CCF0",
     "line": "mov     edi, [esp+14h+var_8]",
     "mnemonic": "mov",
@@ -247,7 +241,7 @@
   },
   {
     "ea": "0x57CD40",
-    "line": "lea     ecx, [edi+30h]",
+    "line": "lea     ecx, [edi+30h]; list",
     "mnemonic": "lea",
     "size": 3
   },
@@ -313,7 +307,7 @@
   },
   {
     "ea": "0x57CD59",
-    "line": "mov     [esp+14h+var_4], edi",
+    "line": "mov     [esp+14h+node], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,19 +319,19 @@
   },
   {
     "ea": "0x57CD5F",
-    "line": "lea     edx, [esp+14h+var_4]",
+    "line": "lea     edx, [esp+14h+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x57CD63",
-    "line": "push    edx",
+    "line": "push    edx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57CD64",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },

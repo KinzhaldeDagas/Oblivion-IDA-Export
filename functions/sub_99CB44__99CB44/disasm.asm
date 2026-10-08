@@ -6,7 +6,7 @@
 0x99CB4C: push    edi
 0x99CB4D: call    __encoded_null
 0x99CB52: xor     ebx, ebx
-0x99CB54: cmp     dword_BAA760, ebx
+0x99CB54: cmp     dword_BA9E10+950h, ebx
 0x99CB5A: mov     [ebp+var_10], eax
 0x99CB5D: mov     [ebp+var_4], ebx
 0x99CB60: mov     [ebp+var_8], ebx
@@ -29,17 +29,17 @@
 0x99CB97: call    __encode_pointer
 0x99CB9C: mov     [esp+30h+lpProcName], offset aGetactivewindo; "GetActiveWindow"
 0x99CBA3: push    edi; hModule
-0x99CBA4: mov     dword_BAA760, eax
+0x99CBA4: mov     dword_BA9E10+950h, eax
 0x99CBA9: call    esi ; GetProcAddress
 0x99CBAB: push    eax
 0x99CBAC: call    __encode_pointer
 0x99CBB1: mov     [esp+30h+lpProcName], offset aGetlastactivep; "GetLastActivePopup"
 0x99CBB8: push    edi; hModule
-0x99CBB9: mov     dword_BAA764, eax
+0x99CBB9: mov     dword_BA9E10+954h, eax
 0x99CBBE: call    esi ; GetProcAddress
 0x99CBC0: push    eax
 0x99CBC1: call    __encode_pointer
-0x99CBC6: mov     dword_BAA768, eax
+0x99CBC6: mov     dword_BA9E10+958h, eax
 0x99CBCB: lea     eax, [ebp+var_8]
 0x99CBCE: push    eax
 0x99CBCF: call    sub_981BF8
@@ -63,7 +63,7 @@
 0x99CBF6: call    __encode_pointer
 0x99CBFB: cmp     eax, ebx
 0x99CBFD: pop     ecx
-0x99CBFE: mov     dword_BAA770, eax
+0x99CBFE: mov     dword_BA9E10+960h, eax
 0x99CC03: jz      short loc_99CC19
 0x99CC05: push    offset aGetprocesswind; "GetProcessWindowStation"
 0x99CC0A: push    edi; hModule
@@ -71,12 +71,12 @@
 0x99CC0D: push    eax
 0x99CC0E: call    __encode_pointer
 0x99CC13: pop     ecx
-0x99CC14: mov     dword_BAA76C, eax
-0x99CC19: mov     eax, dword_BAA76C
+0x99CC14: mov     dword_BA9E10+95Ch, eax
+0x99CC19: mov     eax, dword_BA9E10+95Ch
 0x99CC1E: mov     esi, [ebp+var_10]
 0x99CC21: cmp     eax, esi
 0x99CC23: jz      short loc_99CC92
-0x99CC25: cmp     dword_BAA770, esi
+0x99CC25: cmp     dword_BA9E10+960h, esi
 0x99CC2B: jz      short loc_99CC92
 0x99CC2D: push    eax
 0x99CC2E: call    __decode_pointer
@@ -91,7 +91,7 @@
 0x99CC43: push    ecx
 0x99CC44: push    1
 0x99CC46: push    eax
-0x99CC47: push    dword_BAA770
+0x99CC47: push    dword_BA9E10+960h
 0x99CC4D: call    __decode_pointer
 0x99CC52: pop     ecx
 0x99CC53: call    eax
@@ -118,7 +118,7 @@
 0x99CC87: jmp     short loc_99CCC3
 0x99CC89: or      [ebp+arg_8], 40000h
 0x99CC90: jmp     short loc_99CCC3
-0x99CC92: mov     eax, dword_BAA764
+0x99CC92: mov     eax, dword_BA9E10+954h
 0x99CC97: cmp     eax, esi
 0x99CC99: jz      short loc_99CCC3
 0x99CC9B: push    eax
@@ -128,7 +128,7 @@
 0x99CCA4: cmp     eax, ebx
 0x99CCA6: mov     [ebp+var_4], eax
 0x99CCA9: jz      short loc_99CCC3
-0x99CCAB: mov     eax, dword_BAA768
+0x99CCAB: mov     eax, dword_BA9E10+958h
 0x99CCB0: cmp     eax, esi
 0x99CCB2: jz      short loc_99CCC3
 0x99CCB4: push    [ebp+var_4]
@@ -141,7 +141,7 @@
 0x99CCC6: push    [ebp+arg_4]
 0x99CCC9: push    [ebp+arg_0]
 0x99CCCC: push    [ebp+var_4]
-0x99CCCF: push    dword_BAA760
+0x99CCCF: push    dword_BA9E10+950h
 0x99CCD5: call    __decode_pointer
 0x99CCDA: pop     ecx
 0x99CCDB: call    eax

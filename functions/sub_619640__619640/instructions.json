@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x61965C",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x619665",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x619668",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x61966A",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x619686",
-    "line": "call    sub_520200",
+    "line": "call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x6196A2",
-    "line": "call    sub_477DB0",
+    "line": "call    ActorAnimData_QueueIdle; Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6196BA",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x6196D6",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6196E8",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x619726",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x619739",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x619744",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x61975C",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,19 +571,19 @@
   },
   {
     "ea": "0x619765",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x619768",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x61976A",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x619778",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },

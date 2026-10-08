@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x719AD0",
+      "0x719AEE"
+    ]
+  ],
+  "chunks_sha256": "741d0bc18b1ca43121468d3ff869fbb071cf8b27b491f21c142c8da87a3c0c27",
+  "comment_regular": "\n\n[2026-10-03 frond scene tracking] Verified NiTriShape vtable 0xA7ED5C slot0 uses this folded scalar deleting destructor (existing TallGrass symbol is not exclusive identity). ECX=this, DWORD flags, EAX=this, RET4; calls 0x7226E0 then FormHeapFree if flags bit0. Plugin-created frond shapes use a private vtable copying all 39 entries and preserving COL at -4, with only slot0 replaced to retire borrowed scene metadata before forwarding here once. Global NiTriShape vtable is untouched. Fallout NiTriShape deleting destructor 0x82BFB4B8 corroborates lifetime role, not platform size/ABI.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TallGrassTriShape::`scalar deleting destructor'(uint)",
   "end_ea": "0x719AEE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??_GTallGrassTriShape@@UAEPAXI@Z",
   "segment": ".text",
   "sha256": "741d0bc18b1ca43121468d3ff869fbb071cf8b27b491f21c142c8da87a3c0c27",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x719AD0",
+  "total_chunk_size": 30,
   "type": "TallGrassTriShape *__thiscall(TallGrassTriShape *this, char)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 4

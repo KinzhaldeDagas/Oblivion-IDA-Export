@@ -1,4 +1,4 @@
-0x69EC30: mov     eax, ds:0B333C4h
+0x69EC30: mov     eax, ds:0B333C4h; Verified MagicModelHitEffect UpdateVisualPlacement recalculates the attached NiNode transform from target perspective/node state and calls the target-specific detach/rebind helper as needed.
 0x69EC35: sub     esp, 0Ch
 0x69EC38: push    esi
 0x69EC39: push    edi
@@ -7,10 +7,10 @@
 0x69EC3F: cmp     ecx, eax
 0x69EC41: jnz     short loc_69EC5B
 0x69EC43: mov     al, [eax+588h]
-0x69EC49: mov     [edi+29h], al
-0x69EC4C: mov     ecx, ds:0B333C4h
-0x69EC52: push    0
-0x69EC54: call    PlayerCharacter_GetPlayerNode
+0x69EC49: mov     [edi+29h], al; Verified (Oblivion): model field +0x29 is assigned PlayerCharacter::isThirdPerson when target is the player; the same byte is also consumed in model initialization. Semantic label isThirdPerson is directly supported.
+0x69EC4C: mov     ecx, ds:0B333C4h; this
+0x69EC52: push    0; firstPerson
+0x69EC54: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x69EC59: jmp     short loc_69EC65
 0x69EC5B: mov     edx, [ecx]
 0x69EC5D: mov     eax, [edx+154h]
@@ -62,9 +62,9 @@
 0x69ECE2: jz      short loc_69ED1B
 0x69ECE4: cmp     word ptr [eax+0B6h], 0
 0x69ECEC: jbe     short loc_69ED1B
-0x69ECEE: push    0
-0x69ECF0: mov     ecx, eax
-0x69ECF2: call    sub_405790
+0x69ECEE: push    0; index
+0x69ECF0: mov     ecx, eax; this
+0x69ECF2: call    NiNode_GetChildAtIndex
 0x69ECF7: test    eax, eax
 0x69ECF9: jz      short loc_69ED1B
 0x69ECFB: mov     edx, [eax]
@@ -73,9 +73,9 @@
 0x69ED02: call    eax
 0x69ED04: test    eax, eax
 0x69ED06: jz      short loc_69ED1B
-0x69ED08: push    offset Vector3_InitValue?
-0x69ED0D: lea     ecx, [eax+54h]
-0x69ED10: call    sub_8AA390
+0x69ED08: push    offset g_zeroNiPoint3; other
+0x69ED0D: lea     ecx, [eax+54h]; this
+0x69ED10: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x69ED15: test    al, al
 0x69ED17: jz      short loc_69ED1B
 0x69ED19: xor     bl, bl

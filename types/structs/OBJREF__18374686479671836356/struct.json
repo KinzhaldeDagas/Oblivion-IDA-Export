@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "OBJREF",
+  "definition": "typedef tagOBJREF OBJREF\n",
   "id": 18374686479671836356,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "signature",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iid",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u_objref",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 64
+      "size": 64,
+      "type": "$BD4304A28B36BA5843979B84A73A6E63"
     }
   ],
   "name": "OBJREF",
+  "ordinal": 4484,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 88
 }

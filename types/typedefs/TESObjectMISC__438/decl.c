@@ -1,1 +1,1 @@
-TESObjectMISC
+struct TESObjectMISC;

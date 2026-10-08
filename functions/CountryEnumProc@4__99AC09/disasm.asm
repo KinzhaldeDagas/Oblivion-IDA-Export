@@ -30,9 +30,9 @@
 0x99AC5A: inc     eax
 0x99AC5B: jmp     short loc_99AC8F
 0x99AC5D: lea     eax, [ebp+LCData]
-0x99AC60: push    eax; Str2
-0x99AC61: push    dword ptr [esi+4]; Str1
-0x99AC64: call    __strcmp
+0x99AC60: push    eax; right
+0x99AC61: push    dword ptr [esi+4]; left
+0x99AC64: call    CRT_StricmpLocaleDispatch
 0x99AC69: test    eax, eax
 0x99AC6B: pop     ecx
 0x99AC6C: pop     ecx

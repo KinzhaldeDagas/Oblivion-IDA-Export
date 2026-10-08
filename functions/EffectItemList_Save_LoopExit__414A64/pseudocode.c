@@ -1,4 +1,4 @@
-int EffectItemList_Save_::LoopExit()
+void EffectItemList_Save_::LoopExit()
 {
-  return EffectItemList_Save_::Done();
+  EffectItemList_Save_::Done(); /*0x414a64*/
 }

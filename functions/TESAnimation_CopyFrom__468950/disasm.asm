@@ -1,4 +1,4 @@
-0x468950: mov     eax, [esp+arg_0]
+0x468950: mov     eax, [esp+arg_0]; CustomAnimSupport decode: TESAnimation copy; clears destination and re-adds source strings through normal deduping append.
 0x468954: push    esi
 0x468955: push    edi
 0x468956: push    0; int
@@ -23,7 +23,7 @@
 0x468987: jz      short loc_468991
 0x468989: push    eax
 0x46898A: mov     ecx, edi
-0x46898C: call    TESAnimation_AddAnimation
+0x46898C: call    TESAnimation_AddAnimation; CustomAnimSupport decode: append KFFZ string if absent; heap-copies strlen+1 bytes.
 0x468991: mov     esi, [esi+4]
 0x468994: test    esi, esi
 0x468996: jnz     short loc_468983

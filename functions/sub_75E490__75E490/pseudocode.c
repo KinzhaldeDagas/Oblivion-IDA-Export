@@ -1,35 +1,35 @@
-bool __thiscall sub_75E490(const char **this, int a2)
+bool __thiscall sub_75E490(NiTriBasedGeomData *this, int a2)
 {
   const char *v4; // eax
   const char *v5; // ecx
 
-  if ( !sub_6CE3A0(this, a2) )
-    return 0;
-  if ( *(this + 0x11) )
+  if ( !NiSingleInterpController_IsEqual(this, a2) ) /*0x75e499*/
+    return 0; /*0x75e4a0*/
+  if ( *((_DWORD *)this + 0x11) ) /*0x75e4a9*/
   {
-    if ( !*(_DWORD *)(a2 + 0x44)
+    if ( !*(_DWORD *)(a2 + 0x44) /*0x75e4d4*/
       || *(_DWORD *)(a2 + 0x44)
-      && !(*(unsigned __int8 (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)*(this + 0x11) + 0x2C))(
-            *(this + 0x11),
+      && !(*(unsigned __int8 (__thiscall **)(_DWORD, _DWORD))(**((_DWORD **)this + 0x11) + 0x2C))(
+            *((_DWORD *)this + 0x11),
             *(_DWORD *)(a2 + 0x44)) )
     {
-      return 0;
+      return 0; /*0x75e4d8*/
     }
   }
-  else if ( *(_DWORD *)(a2 + 0x44) )
+  else if ( *(_DWORD *)(a2 + 0x44) ) /*0x75e4ba*/
   {
-    return 0;
+    return 0; /*0x75e4be*/
   }
-  v4 = *(this + 0x10);
-  if ( v4 )
+  v4 = *(const char **)&this->members.m_usTriangles; /*0x75e4da*/
+  if ( v4 ) /*0x75e4df*/
   {
-    if ( *(_DWORD *)(a2 + 0x40) )
+    if ( *(_DWORD *)(a2 + 0x40) ) /*0x75e4e1*/
     {
-      v5 = *(const char **)(a2 + 0x40);
-      if ( !v5 || !strcmp(v4, v5) )
-        return 1;
+      v5 = *(const char **)(a2 + 0x40); /*0x75e4f5*/
+      if ( !v5 || !strcmp(v4, v5) ) /*0x75e504*/
+        return 1; /*0x75e527*/
     }
-    return 0;
+    return 0; /*0x75e4a6*/
   }
-  return !*(_DWORD *)(a2 + 0x40);
+  return !*(_DWORD *)(a2 + 0x40); /*0x75e4eb*/
 }

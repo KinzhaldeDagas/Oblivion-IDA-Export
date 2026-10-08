@@ -403,91 +403,91 @@
   },
   {
     "ea": "0x545537",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+triangleIndices]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x54553B",
-    "line": "mov     edx, [esp+0Ch+arg_10]",
+    "line": "mov     edx, [esp+0Ch+textureCoordinates]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x54553F",
-    "line": "push    ecx",
+    "line": "push    ecx; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545540",
-    "line": "mov     ecx, [esp+10h+arg_14]",
+    "line": "mov     ecx, [esp+10h+normals]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x545544",
-    "line": "push    ebp",
+    "line": "push    ebp; triangleCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545545",
-    "line": "push    0",
+    "line": "push    0; dataFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x545547",
-    "line": "push    1",
+    "line": "push    1; hasVertexColors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x545549",
-    "line": "push    edx",
+    "line": "push    edx; textureCoordinates",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54554A",
-    "line": "mov     edx, [esp+20h+arg_18]",
+    "line": "mov     edx, [esp+20h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x54554E",
-    "line": "push    edi",
+    "line": "push    edi; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54554F",
-    "line": "push    ecx",
+    "line": "push    ecx; normals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545550",
-    "line": "push    edx",
+    "line": "push    edx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545551",
-    "line": "push    4",
+    "line": "push    4; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x545553",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x545555",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x5457B6",
-    "line": "mov     [esp+30h+arg_18], eax",
+    "line": "mov     [esp+30h+vertices], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x5457BC",
-    "line": "mov     [esp+30h+arg_10], 7",
+    "line": "mov     [esp+30h+textureCoordinates], 7",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x5457C8",
-    "line": "call    sub_959BC0",
+    "line": "call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,13 +1657,13 @@
   },
   {
     "ea": "0x5457E6",
-    "line": "push    ebp",
+    "line": "push    ebp; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5457E7",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
@@ -1681,25 +1681,25 @@
   },
   {
     "ea": "0x5457F0",
-    "line": "push    0Ah",
+    "line": "push    0Ah; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5457F2",
-    "line": "push    ecx",
+    "line": "push    ecx; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5457F3",
-    "line": "mov     [esp+40h+arg_10], 0FFFFFFFFh",
+    "line": "mov     [esp+40h+textureCoordinates], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5457FB",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,31 +1711,31 @@
   },
   {
     "ea": "0x545803",
-    "line": "push    ebp",
+    "line": "push    ebp; arg3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545804",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x545806",
-    "line": "push    0Ah",
+    "line": "push    0Ah; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x545808",
-    "line": "push    edx",
+    "line": "push    edx; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545809",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },

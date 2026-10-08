@@ -16,12 +16,12 @@
 0x4FA042: mov     edx, [ecx]
 0x4FA044: push    ecx
 0x4FA045: mov     [eax], edx
-0x4FA047: call    FormHeapFree
+0x4FA047: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FA04C: add     esp, 4
 0x4FA04F: jmp     short loc_4FA057
 0x4FA051: mov     dword ptr [eax], 0
 0x4FA057: push    edi
-0x4FA058: call    FormHeapFree
+0x4FA058: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FA05D: mov     eax, [esi+8]
 0x4FA060: add     esp, 4
 0x4FA063: cmp     dword ptr [eax], 0
@@ -29,7 +29,7 @@
 0x4FA068: pop     edi
 0x4FA069: mov     ecx, [esi+8]
 0x4FA06C: push    ecx
-0x4FA06D: call    FormHeapFree
+0x4FA06D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FA072: add     esp, 4
 0x4FA075: mov     dword ptr [esi+8], 0
 0x4FA07C: pop     esi

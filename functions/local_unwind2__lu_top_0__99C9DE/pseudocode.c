@@ -1,4 +1,4 @@
-int __cdecl _local_unwind2_::_lu_top_0(
+void __cdecl _local_unwind2_::_lu_top_0(
         int a1,
         int a2,
         int a3,
@@ -13,9 +13,9 @@ int __cdecl _local_unwind2_::_lu_top_0(
 {
   unsigned int v11; // esi
 
-  v11 = *(_DWORD *)(a10 + 0xC);
-  if ( v11 == 0xFFFFFFFF || a11 != 0xFFFFFFFF && v11 <= a11 )
-    return _local_unwind2_::_lu_done_0(a1);
+  v11 = *(_DWORD *)(a10 + 0xC); /*0x99c9e5*/
+  if ( v11 == 0xFFFFFFFF || a11 != 0xFFFFFFFF && v11 <= a11 ) /*0x99c9f8*/
+    _local_unwind2_::_lu_done_0(); /*0x99c9eb*/
   else
-    return _local_unwind2_::_continue_(a1, a2, a3);
+    _local_unwind2_::_continue_(a10, *(_DWORD *)(a10 + 8), v11, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); /*0x99c9f9*/
 }

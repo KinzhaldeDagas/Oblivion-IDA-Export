@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x499140",
-    "line": "push    ecx",
+    "line": "push    ecx; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x49914B",
-    "line": "jz      short loc_499174",
+    "line": "jz      short loc_499174; Fog time-boundary decode: sunrise helper refreshes cached boundary only when Sky Flags0FC bit 0x100 marks it dirty.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x499164",
-    "line": "fstp    dword ptr ds:0B35238h",
+    "line": "fstp    dword ptr ds:0B35238h; Fog time-boundary decode: climate byte +0x50 / 24.0-style divisor -> cached sunrise time B33E90+0x13A8.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x49916A",
-    "line": "and     dword ptr [ecx+0FCh], 0FFFFFEFFh",
+    "line": "and     dword ptr [ecx+0FCh], 0FFFFFEFFh; Fog time-boundary decode: clears sunrise dirty bit after cache refresh.",
     "mnemonic": "and",
     "size": 10
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x49917B",
-    "line": "retn",
+    "line": "retn; Fog time-boundary decode: returns cached normalized sunrise boundary used by weather fog day/night interpolation.",
     "mnemonic": "retn",
     "size": 1
   }

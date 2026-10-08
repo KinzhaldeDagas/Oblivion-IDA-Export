@@ -1,13 +1,13 @@
-0x609DF0: push    ebp
+0x609DF0: push    ebp; Recursively searches an Actor scene subtree for an admissible collision-backed embed node. It filters collision layer/body groups, ray-tests the supplied start/direction against each candidate, updates inOutDistance to the accepted fraction, and returns the selected NiAVObject; no bone name is hard-coded.
 0x609DF1: mov     ebp, esp
 0x609DF3: and     esp, 0FFFFFFF0h
 0x609DF6: sub     esp, 174h
 0x609DFC: mov     eax, ds:0B30AACh
 0x609E01: xor     eax, esp
 0x609E03: mov     [esp+174h+var_4], eax
-0x609E0A: mov     eax, [ebp+arg_1C]
+0x609E0A: mov     eax, [ebp+inOutDistance]
 0x609E0D: push    ebx
-0x609E0E: mov     ebx, [ebp+arg_0]
+0x609E0E: mov     ebx, [ebp+candidate]
 0x609E11: test    ebx, ebx
 0x609E13: push    esi
 0x609E14: push    edi
@@ -17,7 +17,7 @@
 0x609E21: mov     [esp+180h+var_165], 0
 0x609E26: jz      loc_60A1F4
 0x609E2C: push    ebx
-0x609E2D: call    sub_47FAC0
+0x609E2D: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x609E32: mov     edi, eax
 0x609E34: add     esp, 4
 0x609E37: test    edi, edi
@@ -89,7 +89,7 @@
 0x609F13: and     ecx, 1F00h
 0x609F19: cmp     ecx, 1500h
 0x609F1F: jz      loc_60A128
-0x609F25: cmp     byte ptr [ebp+arg_20], 0
+0x609F25: cmp     [ebp+excludeGroup0100], 0
 0x609F29: jz      short loc_609F49
 0x609F2B: lea     edx, [esp+180h+var_164]
 0x609F2F: push    edx
@@ -98,8 +98,8 @@
 0x609F37: mov     eax, [eax]
 0x609F39: and     eax, 1F00h
 0x609F3E: cmp     eax, 100h
-0x609F43: jz      loc_60A128
-0x609F49: lea     ecx, [ebp+arg_4]
+0x609F43: jz      loc_60A128; Accept actor embed candidate only for collision filter category 8, excluding several high-word body/material groups and optionally group 0x0100.
+0x609F49: lea     ecx, [ebp+startX]
 0x609F4C: push    ecx
 0x609F4D: lea     edx, [esp+184h+var_D0]
 0x609F54: push    edx
@@ -109,7 +109,7 @@
 0x609F60: lea     ecx, [esp+188h+var_14C]
 0x609F64: fstp    [esp+188h+var_164]
 0x609F68: push    ecx
-0x609F69: fld     [ebp+arg_10]
+0x609F69: fld     [ebp+directionX]
 0x609F6C: lea     edx, [esp+18Ch+var_140]
 0x609F70: fld     [esp+18Ch+var_164]
 0x609F74: push    edx
@@ -117,18 +117,18 @@
 0x609F77: fmulp   st(2), st
 0x609F79: fxch    st(1)
 0x609F7B: fstp    [esp+190h+var_140]
-0x609F7F: fld     [ebp+arg_14]
+0x609F7F: fld     [ebp+directionY]
 0x609F82: fmul    st, st(1)
 0x609F84: fstp    [esp+190h+var_13C]
-0x609F88: fmul    [ebp+arg_18]
+0x609F88: fmul    [ebp+directionZ]
 0x609F8B: fstp    [esp+190h+var_138]
-0x609F8F: fld     [ebp+arg_4]
+0x609F8F: fld     [ebp+startX]
 0x609F92: fadd    [esp+190h+var_140]
 0x609F96: fstp    [esp+190h+var_14C]
-0x609F9A: fld     [ebp+arg_8]
+0x609F9A: fld     [ebp+startY]
 0x609F9D: fadd    [esp+190h+var_13C]
 0x609FA1: fstp    [esp+190h+var_148]
-0x609FA5: fld     [ebp+arg_C]
+0x609FA5: fld     [ebp+startZ]
 0x609FA8: fadd    [esp+190h+var_138]
 0x609FAC: fstp    [esp+190h+var_144]
 0x609FB0: call    sub_4529E0
@@ -136,7 +136,7 @@
 0x609FB7: xor     eax, eax
 0x609FB9: push    edi
 0x609FBA: fstp    [esp+194h+var_DC]
-0x609FC1: push    offset dword_BA7A20
+0x609FC1: push    0BA7A20h
 0x609FC6: mov     [esp+198h+var_A0], eax
 0x609FCD: mov     [esp+198h+var_9C], eax
 0x609FD4: call    NiRTTI__IsObjectOfRTTIType
@@ -165,7 +165,7 @@
 0x60A01B: push    ecx
 0x60A01C: call    sub_5398E0
 0x60A021: push    esi
-0x60A022: push    offset dword_BA8018
+0x60A022: push    offset stru_BA8018
 0x60A027: call    NiRTTI__IsObjectOfRTTIType
 0x60A02C: add     esp, 10h
 0x60A02F: test    al, al
@@ -181,7 +181,7 @@
 0x60A065: push    edx
 0x60A066: lea     ecx, [esp+184h+var_50]
 0x60A06D: movaps  [esp+184h+var_60], xmm0
-0x60A075: call    sub_8B1DD0
+0x60A075: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x60A07A: movaps  xmm0, xmmword ptr [esi+30h]
 0x60A07E: lea     eax, [esp+180h+var_50]
 0x60A085: push    eax
@@ -217,7 +217,7 @@
 0x60A0F6: push    eax
 0x60A0F7: lea     eax, [esp+188h+var_160+3]
 0x60A0FB: push    eax
-0x60A0FC: call    edx
+0x60A0FC: call    edx; Ray/shape query against candidate collision object; update caller distance by hit fraction when accepted.
 0x60A0FE: lea     eax, [esp+180h+var_160+3]
 0x60A102: push    eax
 0x60A103: lea     ecx, [esp+184h+var_F0]
@@ -243,9 +243,9 @@
 0x60A14C: test    eax, eax
 0x60A14E: mov     [esp+180h+var_154], ecx
 0x60A152: jbe     loc_60A1D4
-0x60A158: mov     esi, [ebp+arg_18]
-0x60A15B: mov     edi, [ebp+arg_14]
-0x60A15E: mov     ebx, [ebp+arg_10]
+0x60A158: mov     esi, [ebp+directionZ]
+0x60A15B: mov     edi, [ebp+directionY]
+0x60A15E: mov     ebx, [ebp+directionX]
 0x60A161: jmp     short loc_60A16B
 0x60A163: mov     ecx, [esp+180h+var_154]
 0x60A167: mov     edx, [esp+180h+var_164]
@@ -255,11 +255,11 @@
 0x60A171: jmp     short loc_60A17C
 0x60A173: mov     edx, [edx+0B0h]
 0x60A179: mov     ecx, [edx+ecx*4]
-0x60A17C: mov     eax, [ebp+arg_20]
+0x60A17C: mov     eax, dword ptr [ebp+excludeGroup0100]
 0x60A17F: mov     edx, [esp+180h+var_158]
-0x60A183: push    eax; int
-0x60A184: push    edx; int
-0x60A185: mov     edx, [ebp+arg_4]
+0x60A183: push    eax; excludeGroup0100
+0x60A184: push    edx; inOutDistance
+0x60A185: mov     edx, [ebp+startX]
 0x60A188: sub     esp, 0Ch
 0x60A18B: mov     eax, esp
 0x60A18D: mov     [eax], ebx
@@ -268,13 +268,13 @@
 0x60A195: sub     esp, 0Ch
 0x60A198: mov     eax, esp
 0x60A19A: mov     [eax], edx
-0x60A19C: mov     edx, [ebp+arg_8]
+0x60A19C: mov     edx, [ebp+startY]
 0x60A19F: mov     [eax+4], edx
-0x60A1A2: mov     edx, [ebp+arg_C]
-0x60A1A5: push    ecx; int
-0x60A1A6: mov     ecx, [esp+1A4h+var_150]
+0x60A1A2: mov     edx, [ebp+startZ]
+0x60A1A5: push    ecx; candidate
+0x60A1A6: mov     ecx, [esp+1A4h+var_150]; this
 0x60A1AA: mov     [eax+8], edx
-0x60A1AD: call    sub_609DF0
+0x60A1AD: call    ArrowProjectile_FindActorEmbedCollisionNode; Recursively traverse NiNode children until a collision-backed embed candidate is found; selection is geometry/collision driven, not hard-coded bone-name lookup.
 0x60A1B2: test    eax, eax
 0x60A1B4: jnz     short loc_60A1F6
 0x60A1B6: mov     eax, [esp+180h+var_164]

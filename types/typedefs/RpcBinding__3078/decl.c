@@ -1,1 +1,1 @@
-RpcBinding
+typedef _RpcBinding RpcBinding;

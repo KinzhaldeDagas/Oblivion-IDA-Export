@@ -10,17 +10,17 @@
 0x622E4B: test    ah, 41h
 0x622E4E: jnz     short loc_622E6A
 0x622E50: mov     edi, [esi+3Ch]; a1
-0x622E53: push    0; a4
-0x622E55: call    sub_6135F0
-0x622E5A: push    eax; a3
-0x622E5B: push    edi; a2
-0x622E5C: call    TESObjectREFR_GetDistanceBetween?
+0x622E53: push    0; useActorProjection
+0x622E55: call    CombatController_GetCurrentTarget
+0x622E5A: push    eax; to
+0x622E5B: push    edi; from
+0x622E5C: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x622E61: fstp    dword ptr [esi+184h]
 0x622E67: add     esp, 0Ch
 0x622E6A: fld     dword ptr [esi+184h]
-0x622E70: mov     ecx, esi
+0x622E70: mov     ecx, esi; this
 0x622E72: fstp    [esp+1Ch+var_10]
-0x622E76: call    sub_615520
+0x622E76: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x622E7B: cmp     byte ptr [esi+49h], 0
 0x622E7F: fstp    [esp+1Ch+var_14]
 0x622E83: jnz     loc_6231CB
@@ -32,18 +32,18 @@
 0x622E9C: test    al, al
 0x622E9E: jz      loc_622F26
 0x622EA4: mov     ecx, esi
-0x622EA6: call    sub_614290
+0x622EA6: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x622EAB: test    al, al
 0x622EAD: setz    al
 0x622EB0: mov     ecx, esi
 0x622EB2: mov     [esi+116h], al
-0x622EB8: call    sub_6135F0
+0x622EB8: call    CombatController_GetCurrentTarget
 0x622EBD: test    eax, eax
 0x622EBF: jz      short loc_622EEE
 0x622EC1: mov     ecx, esi
-0x622EC3: call    sub_6135F0
-0x622EC8: mov     ecx, eax
-0x622ECA: call    Actor_IsSwimming
+0x622EC3: call    CombatController_GetCurrentTarget
+0x622EC8: mov     ecx, eax; this
+0x622ECA: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x622ECF: test    al, al
 0x622ED1: jz      short loc_622EEE
 0x622ED3: cmp     byte ptr [esi+116h], 0
@@ -62,7 +62,7 @@
 0x622F09: mov     edi, [ebx]
 0x622F0B: mov     ecx, esi
 0x622F0D: add     edi, 340h
-0x622F13: call    sub_6135F0
+0x622F13: call    CombatController_GetCurrentTarget
 0x622F18: mov     edx, [edi]
 0x622F1A: push    eax
 0x622F1B: mov     ecx, ebx
@@ -77,17 +77,17 @@
 0x622F2E: test    al, al
 0x622F30: jnz     short loc_622F77
 0x622F32: mov     ecx, esi
-0x622F34: call    sub_6135F0
+0x622F34: call    CombatController_GetCurrentTarget
 0x622F39: test    eax, eax
 0x622F3B: jz      short loc_622F77
 0x622F3D: mov     ecx, esi
-0x622F3F: call    sub_6135F0
-0x622F44: mov     ecx, eax
-0x622F46: call    Actor_IsSwimming
+0x622F3F: call    CombatController_GetCurrentTarget
+0x622F44: mov     ecx, eax; this
+0x622F46: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x622F4B: test    al, al
 0x622F4D: jnz     short loc_622F77
 0x622F4F: mov     ecx, esi
-0x622F51: call    sub_614290
+0x622F51: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x622F56: test    al, al
 0x622F58: setz    al
 0x622F5B: test    al, al
@@ -97,13 +97,13 @@
 0x622F6B: cmp     eax, ds:0B372F0h
 0x622F71: jge     loc_623006
 0x622F77: fld     [esp+20h+var_14]
-0x622F7B: push    0; int
+0x622F7B: push    0; unused
 0x622F7D: sub     esp, 8
-0x622F80: fstp    [esp+2Ch+var_28]; float
-0x622F84: mov     ecx, esi
+0x622F80: fstp    [esp+2Ch+maximumDistance]; maximumDistance
+0x622F84: mov     ecx, esi; this
 0x622F86: fld     [esp+2Ch+var_10]
-0x622F8A: fstp    [esp+2Ch+var_2C]; float
-0x622F8D: call    sub_613440
+0x622F8A: fstp    [esp+2Ch+surfaceDistance]; surfaceDistance
+0x622F8D: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x622F92: test    al, al
 0x622F94: jz      short loc_622FAD
 0x622F96: cmp     byte ptr [esi+116h], 0
@@ -112,7 +112,7 @@
 0x622FA5: cmp     ecx, ds:0B372F0h
 0x622FAB: jge     short loc_623006
 0x622FAD: mov     ecx, esi
-0x622FAF: call    sub_6135F0
+0x622FAF: call    CombatController_GetCurrentTarget
 0x622FB4: test    eax, eax
 0x622FB6: jz      loc_622F1F
 0x622FBC: fld     dword ptr [esi+44h]
@@ -125,7 +125,7 @@
 0x622FD8: cmp     dword ptr [esi+74h], 0
 0x622FDC: jz      loc_622F1F
 0x622FE2: mov     ecx, esi
-0x622FE4: call    sub_614290
+0x622FE4: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x622FE9: test    al, al
 0x622FEB: jnz     short loc_622FF8
 0x622FED: mov     ecx, esi
@@ -155,8 +155,8 @@
 0x623028: add     esp, 14h
 0x62302B: jmp     sub_61D320
 0x623030: mov     edi, [esi+70h]
-0x623033: push    edi
-0x623034: call    sub_612690
+0x623033: push    edi; mode
+0x623034: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x623039: mov     bl, al
 0x62303B: add     esp, 4
 0x62303E: test    bl, bl
@@ -177,8 +177,8 @@
 0x623076: mov     cl, 1
 0x623078: jmp     short loc_62307C
 0x62307A: xor     cl, cl
-0x62307C: push    edi
-0x62307D: call    sub_612670
+0x62307C: push    edi; mode
+0x62307D: call    CombatMode_IsNonRangedMode; Returns true for native combat modes 0, 1, or 3; returns false for ranged weapon modes 2 and 4 and for values above 3.
 0x623082: add     esp, 4
 0x623085: test    al, al
 0x623087: jz      short loc_62308D
@@ -205,7 +205,7 @@
 0x6230CB: cmp     dword ptr [edi], 0
 0x6230CE: jz      short loc_62311A
 0x6230D0: mov     ecx, esi
-0x6230D2: call    sub_6135F0
+0x6230D2: call    CombatController_GetCurrentTarget
 0x6230D7: mov     ecx, [edi]
 0x6230D9: mov     edx, [eax]
 0x6230DB: push    ecx
@@ -217,7 +217,7 @@
 0x6230EB: mov     ecx, eax
 0x6230ED: call    sub_4121A0
 0x6230F2: lea     ecx, [esp+20h+var_C]
-0x6230F6: call    sub_404C90
+0x6230F6: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6230FB: fstp    [esp+20h+var_10]
 0x6230FF: fld     [esp+20h+var_10]
 0x623103: fld     [esp+20h+var_14]
@@ -243,7 +243,7 @@
 0x623139: call    BSSimpleList_Count
 0x62313E: push    0; Seed
 0x623140: mov     ebx, eax
-0x623142: call    GetRandomLargeInteger?
+0x623142: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x623147: xor     edx, edx
 0x623149: div     ebx
 0x62314B: add     esp, 4
@@ -267,7 +267,7 @@
 0x623177: mov     ecx, eax
 0x623179: call    sub_4121A0
 0x62317E: lea     ecx, [esp+20h+var_C]
-0x623182: call    sub_404C90
+0x623182: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x623187: fcomp   qword ptr ds:0A309F0h
 0x62318D: fnstsw  ax
 0x62318F: test    ah, 41h

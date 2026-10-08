@@ -1,4 +1,4 @@
-0x5EF930: push    esi
+0x5EF930: push    esi; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x5EF931: push    edi
 0x5EF932: mov     edi, ecx
 0x5EF934: mov     esi, [edi+58h]

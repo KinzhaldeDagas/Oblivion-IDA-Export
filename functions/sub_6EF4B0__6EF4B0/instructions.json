@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EF4B0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6EF4C9",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x6EF4EA",
-    "line": "lea     eax, [esp+18h+arg_4]",
+    "line": "lea     eax, [esp+18h+fillValue]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EF4EE",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6EF4F1",
-    "line": "push    edi; int",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x6EF4F3",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF4F4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EF4F6",
-    "line": "call    sub_6EF2F0",
+    "line": "call    OB_stVectorByte_InsertFill_010201A0; Oblivion body: checked byte-vector insert-fill. Handles alias-safe in-place insertion and reallocation, uses 1.5x growth, and updates begin/end/capacity. Called by byte insert-one and resize; RT4.1 st_vector_byte corroborates the element role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x6EF52F",
-    "line": "mov     [esp+18h+var_4], ebx",
+    "line": "mov     [esp+18h+result.current], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6EF540",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -385,31 +385,31 @@
   },
   {
     "ea": "0x6EF542",
-    "line": "push    esi; int",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF543",
-    "line": "lea     ecx, [esp+28h+var_8]",
+    "line": "lea     ecx, [esp+28h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EF547",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EF548",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EF54A",
-    "line": "call    sub_788B10",
+    "line": "call    OB_stVectorByte_EraseRange_010201A0; Oblivion checked byte-vector erase-range: verifies both iterators belong to this vector, overlap-moves the suffix, updates end, and returns the resulting checked iterator.",
     "mnemonic": "call",
     "size": 5
   },

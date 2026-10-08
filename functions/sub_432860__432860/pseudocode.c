@@ -4,14 +4,14 @@ char __thiscall sub_432860(volatile LONG *this)
   int v2; // esi
   int v3; // edi
 
-  LOBYTE(CurrentThreadId) = sub_4322B0(this);
-  if ( (_BYTE)CurrentThreadId )
+  LOBYTE(CurrentThreadId) = sub_4322B0(this); /*0x432860*/
+  if ( (_BYTE)CurrentThreadId ) /*0x432867*/
   {
-    v2 = *((_DWORD *)ModelLoaderPtr + 6);
-    v3 = *(_DWORD *)(v2 + 8);
-    CurrentThreadId = GetCurrentThreadId();
-    if ( v3 != CurrentThreadId )
-      LOBYTE(CurrentThreadId) = sub_431F50((volatile LONG *)v2);
+    v2 = *((_DWORD *)MEMORY[0xB33A1C] + 6); /*0x43286f*/
+    v3 = *(_DWORD *)(v2 + 8); /*0x432873*/
+    CurrentThreadId = GetCurrentThreadId(); /*0x432876*/
+    if ( v3 != CurrentThreadId ) /*0x43287f*/
+      LOBYTE(CurrentThreadId) = sub_431F50((volatile LONG *)v2); /*0x432884*/
   }
-  return CurrentThreadId;
+  return CurrentThreadId; /*0x43288a*/
 }

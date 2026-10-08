@@ -1,10 +1,9 @@
 0x961510: push    esi
 0x961511: push    edi
-0x961512: mov     edi, dword ptr [esp+8+ArgList]
+0x961512: mov     edi, [esp+8+ArgList]
 0x961516: mov     eax, edi
 0x961518: lea     edx, [eax+1]
 0x96151B: jmp     short loc_961520
-0x96151D: align 10h
 0x961520: mov     cl, [eax]
 0x961522: add     eax, 1
 0x961525: test    cl, cl
@@ -17,7 +16,7 @@
 0x961535: push    offset aSCapsule_bv; "%s = CAPSULE_BV"
 0x96153A: push    esi; SizeInBytes
 0x96153B: push    eax; DstBuf
-0x96153C: mov     dword ptr [esp+1Ch+ArgList], eax
+0x96153C: mov     [esp+1Ch+ArgList], eax
 0x961540: call    sub_6C5D40
 0x961545: mov     esi, [esp+1Ch+arg_4]
 0x961549: movzx   edi, word ptr [esi+0Ah]

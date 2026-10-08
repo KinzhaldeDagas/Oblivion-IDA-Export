@@ -1,4 +1,4 @@
-0x441EF0: sub     esp, 8
+0x441EF0: sub     esp, 8;
 0x441EF3: push    ebx
 0x441EF4: push    ebp
 0x441EF5: push    esi
@@ -67,7 +67,7 @@
 0x441FA4: mov     ebx, [eax+24h]
 0x441FA7: lea     edi, [esi+44h]
 0x441FAA: mov     ecx, edi
-0x441FAC: call    sub_41E960
+0x441FAC: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x441FB1: test    eax, eax
 0x441FB3: jz      short loc_441FC0
 0x441FB5: push    1
@@ -126,7 +126,7 @@
 0x442052: mov     ebx, [eax+24h]
 0x442055: lea     ebp, [esi+44h]
 0x442058: mov     ecx, ebp
-0x44205A: call    sub_41E960
+0x44205A: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x44205F: test    eax, eax
 0x442061: jz      short loc_44206E
 0x442063: push    1
@@ -185,7 +185,7 @@
 0x442107: mov     ebx, [eax+24h]
 0x44210A: lea     ebp, [esi+44h]
 0x44210D: mov     ecx, ebp
-0x44210F: call    sub_41E960
+0x44210F: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x442114: test    eax, eax
 0x442116: jz      short loc_442123
 0x442118: push    1
@@ -236,9 +236,9 @@
 0x442199: jz      short loc_4421AB
 0x44219B: cmp     dword ptr [esi+3Ch], 0
 0x44219F: jnz     short loc_4421B9
-0x4421A1: push    edi
-0x4421A2: mov     ecx, esi
-0x4421A4: call    sub_4D7D10
+0x4421A1: push    edi; node
+0x4421A2: mov     ecx, esi; this
+0x4421A4: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
 0x4421A9: jmp     short loc_4421B9
 0x4421AB: mov     edx, [esi]
 0x4421AD: mov     eax, [edx+14Ch]
@@ -259,8 +259,8 @@
 0x4421E0: lea     eax, [esp+1Ch+a8]
 0x4421E4: push    eax
 0x4421E5: call    edx
-0x4421E7: lea     ecx, [esp+18h+a8]; this
-0x4421EB: call    sub_7016A0
+0x4421E7: lea     ecx, [esp+18h+a8]; slot
+0x4421EB: call    NiPointerSlot_Release
 0x4421F0: jmp     loc_4422BE
 0x4421F5: mov     ecx, ebp
 0x4421F7: call    sub_4D58B0
@@ -283,7 +283,7 @@
 0x442230: jnz     short loc_442251
 0x442232: push    0
 0x442234: push    3EFh
-0x442239: call    sub_5790E0
+0x442239: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x44223E: add     esp, 8
 0x442241: test    al, al
 0x442243: jnz     short loc_442251
@@ -307,12 +307,12 @@
 0x44227B: mov     ecx, esi
 0x44227D: call    eax
 0x44227F: mov     ecx, eax
-0x442281: call    nullsub_returnvVoid_1arg
+0x442281: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x442286: jmp     short loc_4422BE
 0x442288: xor     bl, bl
 0x44228A: cmp     ds:0B43384h, bl
 0x442290: jz      short loc_44229E
-0x442292: mov     ecx, offset stru_B43400; lpCriticalSection
+0x442292: mov     ecx, offset unk_B43400; lpCriticalSection
 0x442297: call    sub_43F2E0
 0x44229C: mov     bl, 1
 0x44229E: push    0
@@ -323,7 +323,7 @@
 0x4422AD: add     esp, 0Ch
 0x4422B0: test    bl, bl
 0x4422B2: jz      short loc_4422BE
-0x4422B4: mov     ecx, offset stru_B43400; lpCriticalSection
+0x4422B4: mov     ecx, offset unk_B43400; lpCriticalSection
 0x4422B9: call    sub_43F300
 0x4422BE: mov     ecx, esi
 0x4422C0: call    sub_4D70E0
@@ -408,7 +408,7 @@
 0x4423BF: mov     [eax+4], edx
 0x4423C2: mov     [eax+8], ecx
 0x4423C5: mov     ecx, ebp
-0x4423C7: call    sub_4CE610
+0x4423C7: call    sub_4CE610; Per-cell canopy shadow mask updater; ensures global canopy shadow texture via 0x55FDF0 then paints mask pixels across current/neighbor cells.
 0x4423CC: jmp     short loc_4423D0
 0x4423CE: fstp    st
 0x4423D0: mov     edx, [esi]

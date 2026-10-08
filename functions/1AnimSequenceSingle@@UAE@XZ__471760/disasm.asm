@@ -45,9 +45,9 @@
 0x4717E3: mov     ecx, ds:0B33A1Ch
 0x4717E9: push    1
 0x4717EB: push    esi
-0x4717EC: call    sub_438540
+0x4717EC: call    ModelLoader_ReleaseModelPath; Releases a model-loader path reference. Used by AnimIdle/queued-loader cleanup when a KF/model reference is no longer needed.
 0x4717F1: push    esi
-0x4717F2: call    FormHeapFree
+0x4717F2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4717F7: add     esp, 4
 0x4717FA: mov     dword ptr [edi], offset ??_7AnimSequenceBase@@6B@; const AnimSequenceBase::`vftable'
 0x471800: mov     ecx, dword ptr [esp+28h+var_C]
@@ -58,3 +58,16 @@
 0x47180E: pop     ebx
 0x47180F: add     esp, 18h
 0x471812: retn
+0x470B70: mov     dword ptr [ecx], offset ??_7AnimSequenceBase@@6B@; const AnimSequenceBase::`vftable'
+0x470B76: retn
+0x9AEBF0: mov     ecx, [ebp-18h]
+0x9AEBF3: jmp     loc_470B70
+0x9AEBF8: lea     ecx, [ebp-14h]; void *
+0x9AEBFB: jmp     BSStringT_Clear
+0x9AEC00: mov     edx, [esp+arg_4]
+0x9AEC04: lea     eax, [edx-18h]
+0x9AEC07: mov     ecx, [edx-1Ch]
+0x9AEC0A: xor     ecx, eax
+0x9AEC0C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEC11: mov     eax, offset stru_ADB2F8
+0x9AEC16: jmp     ___CxxFrameHandler3

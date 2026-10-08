@@ -1,20 +1,20 @@
 Clouds *__thiscall Clouds::Clouds(Clouds *this)
 {
-  SkyObject::SkyObject((SkyObject *)this);
-  this->__vftbl = (SkyObjectVtbl *)&Clouds::`vftable';
-  ArrayConstructor(
-    &this->unk08,
+  SkyObject::SkyObject((SkyObject *)this); /*0x53bca8*/
+  this->__vftbl = (SkyObjectVtbl *)&Clouds::`vftable'; /*0x53bcc7*/
+  ArrayConstructor( /*0x53bccd*/
+    (char *)&this->unk08,
     4u,
     2,
-    (int)Concurrency::details::_NonReentrantLock::_Release,
-    (void (__thiscall *)(void *))sub_7016A0);
-  ArrayConstructor(
-    &this->unk10,
+    (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+    (void (__thiscall *)(void *))NiPointerSlot_Release);
+  ArrayConstructor( /*0x53bce9*/
+    (char *)&this->unk10,
     4u,
     2,
-    (int)Concurrency::details::_NonReentrantLock::_Release,
-    (void (__thiscall *)(void *))sub_7016A0);
-  sub_53B6E0(this);
-  sub_53BBC0(this);
-  return this;
+    (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+    (void (__thiscall *)(void *))NiPointerSlot_Release);
+  sub_53B6E0(this); /*0x53bcf5*/
+  sub_53BBC0(this); /*0x53bcfc*/
+  return this; /*0x53bd03*/
 }

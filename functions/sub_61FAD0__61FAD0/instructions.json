@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x61FB07",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x61FB0E",
-    "line": "call    sub_61DDF0",
+    "line": "call    Actor_CalculateAimAnglesToTarget; Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x61FB86",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x61FBD8",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -652,5 +652,227 @@
     "line": "jmp     loc_615050",
     "mnemonic": "jmp",
     "size": 5
+  },
+  {
+    "ea": "0x615050",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x615051",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x615053",
+    "line": "cmp     byte ptr [esi+17Dh], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x61505A",
+    "line": "jz      short loc_61507F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x61505C",
+    "line": "mov     eax, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x61505F",
+    "line": "mov     ecx, [eax+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615062",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x615064",
+    "line": "mov     eax, [edx+0C4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x61506A",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x61506C",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x61506E",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615071",
+    "line": "push    30h ; '0'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x615073",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x615078",
+    "line": "mov     byte ptr [esi+17Dh], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x61507F",
+    "line": "mov     ecx, [esi+1A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x615085",
+    "line": "cmp     ecx, ds:0B372F0h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x61508B",
+    "line": "jge     short loc_6150BD",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x61508D",
+    "line": "mov     edx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615090",
+    "line": "mov     ecx, [edx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615093",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x615095",
+    "line": "mov     edx, [eax+4CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x61509B",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x61509C",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x61509E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6150A0",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6150A2",
+    "line": "call    CombatController_GetCurrentTarget",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6150A7",
+    "line": "cmp     edi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6150A9",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6150AA",
+    "line": "jnz     short loc_6150BD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6150AC",
+    "line": "mov     eax, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6150AF",
+    "line": "mov     ecx, [eax+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6150B2",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6150B4",
+    "line": "mov     eax, [edx+4A4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6150BA",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6150BB",
+    "line": "jmp     eax",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6150BD",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6150BE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

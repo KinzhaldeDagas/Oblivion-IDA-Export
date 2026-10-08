@@ -13,7 +13,6 @@
 0x71E3B4: test    ebp, ebp
 0x71E3B6: jbe     short loc_71E419
 0x71E3B8: jmp     short loc_71E3C0
-0x71E3BA: align 10h
 0x71E3C0: mov     dl, [esi]
 0x71E3C2: movzx   ecx, byte ptr [eax+14h]
 0x71E3C6: mov     bl, [esi+1]

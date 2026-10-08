@@ -1,4 +1,5 @@
-BOOL __thiscall sub_8AA390(float *this, float *a2)
+// Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
+bool __thiscall NiPoint3__NotEqual(const NiPoint3 *this, const NiPoint3 *other)
 {
-  return *a2 != *this || a2[1] != *(this + 1) || a2[2] != *(this + 2);
+  return other->x != this->x || other->y != this->y || other->z != this->z; /*0x8aa3cd*/
 }

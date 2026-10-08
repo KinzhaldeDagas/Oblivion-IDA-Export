@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4E7DC3",
-    "line": "call    ??1TESPathGrid@@UAE@XZ; TESPathGrid::~TESPathGrid(void)",
+    "line": "call    TESPathGrid_dtor; Verified TESPathGrid destruction order: clear rendered geometry; clear point array/backlinks; free PGRI rows; clear every pointsByCell (+0x44) bucket list (512-unit X/Y spatial buckets); release component references; release shared point-marker/render resources on the last instance; destroy both pointer-map containers and render node; then destroy TESForm base.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4E7DD0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

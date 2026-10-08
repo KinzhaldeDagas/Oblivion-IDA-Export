@@ -6,8 +6,8 @@ Actor *__userpurge sub_5FA300@<eax>(
         double a5@<st0>,
         char a6)
 {
-  sub_5F13D0(a1, a2, a3, a4, a5);
-  if ( (a6 & 1) != 0 )
-    FormHeapFree((unsigned int)a1);
-  return a1;
+  sub_5F13D0(a1, a2, a3, a4, a5); /*0x5fa303*/
+  if ( (a6 & 1) != 0 ) /*0x5fa30d*/
+    FormHeapFree((unsigned int)a1); /*0x5fa310*/
+  return a1; /*0x5fa31a*/
 }

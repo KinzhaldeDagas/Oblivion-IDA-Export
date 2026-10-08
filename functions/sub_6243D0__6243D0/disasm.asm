@@ -7,7 +7,7 @@
 0x6243E0: push    ebp
 0x6243E1: push    esi
 0x6243E2: mov     esi, [edi+40h]
-0x6243E5: call    sub_6135F0
+0x6243E5: call    CombatController_GetCurrentTarget
 0x6243EA: mov     ebp, eax
 0x6243EC: mov     eax, [esi]
 0x6243EE: test    eax, eax
@@ -53,14 +53,14 @@
 0x62444A: jz      short loc_624456
 0x62444C: mov     ecx, edi
 0x62444E: mov     [esi+4], eax
-0x624451: call    sub_619C90
+0x624451: call    CombatController_UpdateTargetRetentionAndSort
 0x624456: mov     ecx, edi
-0x624458: call    sub_6135F0
+0x624458: call    CombatController_GetCurrentTarget
 0x62445D: cmp     ebp, eax
 0x62445F: jz      short loc_62446A
 0x624461: push    1
 0x624463: mov     ecx, edi
-0x624465: call    sub_624030
+0x624465: call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.
 0x62446A: pop     esi
 0x62446B: pop     ebp
 0x62446C: pop     edi

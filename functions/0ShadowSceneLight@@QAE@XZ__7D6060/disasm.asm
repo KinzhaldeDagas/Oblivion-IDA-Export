@@ -1,4 +1,4 @@
-0x7D6060: push    0FFFFFFFFh
+0x7D6060: push    0FFFFFFFFh; ShadowSceneLight constructor. Initializes projection/transition/status fields, object/receiver list ownership, map/camera state, and source pointers.
 0x7D6062: push    offset ??0ShadowSceneLight@@QAE@XZ_SEH
 0x7D6067: mov     eax, large fs:0
 0x7D606D: push    eax
@@ -15,7 +15,7 @@
 0x7D6085: mov     esi, ecx
 0x7D6087: mov     [esp+24h+var_10], esi
 0x7D608B: xor     ebx, ebx
-0x7D608D: push    offset NiRefObject_objcount; lpAddend
+0x7D608D: push    0B3FD64h; lpAddend
 0x7D6092: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7D6098: mov     [esi+4], ebx
 0x7D609B: call    dword ptr ds:0A28078h
@@ -25,7 +25,7 @@
 0x7D60B1: mov     [esi+0E8h], ebx
 0x7D60B7: mov     [esi+0ECh], ebx
 0x7D60BD: mov     dword ptr [esi+0E4h], offset ??_7?$NiTPointerList@V?$NiPointer@VNiTriBasedGeom@@@@@@6B@; const NiTPointerList<NiPointer<NiTriBasedGeom>>::`vftable'
-0x7D60C7: mov     [esi+0F8h], ebx
+0x7D60C7: mov     [esi+0F8h], ebx; Initialize the auxiliary strong-owned pointer at ShadowSceneLight+0xF8 to null. The bounded native shadow-range scan found lifecycle init/release but no direct producer.
 0x7D60CD: mov     [esi+100h], ebx
 0x7D60D3: mov     [esi+114h], ebx
 0x7D60D9: mov     [esi+11Ch], ebx
@@ -50,11 +50,11 @@
 0x7D6137: mov     dword ptr [esi+1B0h], 3Fh ; '?'
 0x7D6141: fst     dword ptr [esi+0D0h]
 0x7D6147: fst     dword ptr [esi+0D4h]
-0x7D614D: mov     byte ptr [esi+0F5h], 1
+0x7D614D: mov     byte ptr [esi+0F5h], 1; Constructor transiently sets specialCubeDispatch (+0xF5) while initializing, but this value does not survive construction.
 0x7D6154: fst     dword ptr [esi+0D8h]
 0x7D615A: mov     [esi+0F4h], bl
-0x7D6160: mov     [esi+0FCh], bl
-0x7D6166: mov     [esi+104h], bl
+0x7D6160: mov     [esi+0FCh], bl; OBLIVION AUTHORITY (2026-08-24): ShadowSceneLight constructor initializes byte +0xFC to 0. SetBackingLight 0x7D3400 later sets it iff the backing light RTTI-walk reaches NiPointLight; UpdateLightColorConstant uses it to choose directional versus point semantics.
+0x7D6166: mov     [esi+104h], bl; Initialize trackBackingPosition +0x104 to false. Full-list creation later stores the caller-selected tracking mode before binding the backing light.
 0x7D616C: mov     eax, ds:0B3F9A8h
 0x7D6171: mov     [esi+108h], eax
 0x7D6177: mov     ecx, ds:0B3F9ACh
@@ -152,11 +152,11 @@
 0x7D6272: fst     dword ptr [esi+24h]
 0x7D6275: fst     dword ptr [esi+10h]
 0x7D6278: fld     dword ptr ds:0A430CCh
-0x7D627E: mov     [esi+0F5h], bl
-0x7D6284: fstp    dword ptr [esi+124h]
-0x7D628A: mov     [esi+120h], bl
-0x7D6290: mov     [esi+12Ch], bl
-0x7D6296: fst     dword ptr [esi+128h]
+0x7D627E: mov     [esi+0F5h], bl; Constructor final state clears specialCubeDispatch (+0xF5). New native ShadowSceneLight instances return in normal-dispatch state.
+0x7D6284: fstp    dword ptr [esi+124h]; Initialize ShadowSceneLight projector FOV +0x124 to the retail default 90.0 degrees.
+0x7D628A: mov     [esi+120h], bl; Clear +0x120 render-gate override. Attached-reference light registration also clears it at 0x004D8129; no retail true producer is proved.
+0x7D6290: mov     [esi+12Ch], bl; Clear +0x12C. Its sole decoded ShadowSceneLight consumer binds the generated map's inner texture to shader definition 9; no direct native shadow-range setter was found.
+0x7D6296: fst     dword ptr [esi+128h]; Initialize ShadowSceneLight falloffExponent_128 to 1.0. Attached-reference registration later copies TESObjectLIGH DATA falloff exponent +0x80; no ShadowSceneLight renderer-side consumer is proved.
 0x7D629C: mov     edi, [esi+130h]
 0x7D62A2: cmp     edi, ebx
 0x7D62A4: jz      short loc_7D62CC
@@ -221,11 +221,11 @@
 0x7D6332: push    60h ; '`'
 0x7D6334: fxch    st(1)
 0x7D6336: fstp    dword ptr [esi+0E0h]
-0x7D633C: lea     ecx, [esi+1B4h]
+0x7D633C: lea     ecx, [esi+1B4h]; Zero the 0x60-byte reserved tail block at ShadowSceneLight+0x1B4..+0x213; no direct core shadow consumer was found.
 0x7D6342: push    ebx
 0x7D6343: push    ecx
 0x7D6344: fstp    dword ptr [esi+0DCh]
-0x7D634A: mov     [esi+214h], bl
+0x7D634A: mov     [esi+214h], bl; Initialize ShadowSceneLight+0x214 to zero; the per-source renderer also clears it after map rendering.
 0x7D6350: call    __memset
 0x7D6355: add     esp, 0Ch
 0x7D6358: mov     eax, esi
@@ -238,3 +238,39 @@
 0x7D6369: pop     ebx
 0x7D636A: add     esp, 10h
 0x7D636D: retn
+0x9CEC50: mov     ecx, [ebp-10h]
+0x9CEC53: jmp     NiRefObject_destr
+0x9CEC58: mov     ecx, [ebp-10h]
+0x9CEC5B: add     ecx, 0E4h ; 'ä'
+0x9CEC61: jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiTriBasedGeom@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiTriBasedGeom>>::~NiTPointerList<NiPointer<NiTriBasedGeom>>(void)
+0x9CEC66: mov     ecx, [ebp-10h]
+0x9CEC69: add     ecx, 0F8h ; 'ø'; slot
+0x9CEC6F: jmp     NiPointerSlot_Release
+0x9CEC74: mov     ecx, [ebp-10h]
+0x9CEC77: add     ecx, 100h; slot
+0x9CEC7D: jmp     NiPointerSlot_Release
+0x9CEC82: mov     ecx, [ebp-10h]
+0x9CEC85: add     ecx, 114h; slot
+0x9CEC8B: jmp     NiPointerSlot_Release
+0x9CEC90: mov     ecx, [ebp-10h]
+0x9CEC93: add     ecx, 11Ch; slot
+0x9CEC99: jmp     NiPointerSlot_Release
+0x9CEC9E: mov     ecx, [ebp-10h]
+0x9CECA1: add     ecx, 130h; slot
+0x9CECA7: jmp     NiPointerSlot_Release
+0x9CECAC: mov     ecx, [ebp-10h]
+0x9CECAF: add     ecx, 134h
+0x9CECB5: jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiAVObject@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiAVObject>>::~NiTPointerList<NiPointer<NiAVObject>>(void)
+0x9CECBA: mov     ecx, [ebp-10h]
+0x9CECBD: add     ecx, 148h; slot
+0x9CECC3: jmp     NiPointerSlot_Release
+0x9CECC8: mov     ecx, [ebp-10h]
+0x9CECCB: add     ecx, 14Ch; slot
+0x9CECD1: jmp     NiPointerSlot_Release
+0x9CECD6: mov     edx, [esp+arg_4]
+0x9CECDA: lea     eax, [edx-14h]
+0x9CECDD: mov     ecx, [edx-18h]
+0x9CECE0: xor     ecx, eax
+0x9CECE2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CECE7: mov     eax, offset stru_AF7AC8
+0x9CECEC: jmp     ___CxxFrameHandler3

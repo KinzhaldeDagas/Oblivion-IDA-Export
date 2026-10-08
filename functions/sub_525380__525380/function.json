@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x525380",
+      "0x5253FD"
+    ]
+  ],
+  "chunks_sha256": "c0c0fdfd566f05015ecd222076648141fc15847104cdeb71a48c089ab43eccc0",
+  "comment_regular": "Verified: mask 0x200 loads 21 skills at +0xEC; mask 0x400 loads/resolves FormID, RTTI-casts to TESCombatStyle and unconditionally stores result at +0x1E4. Unlike creature load 0x51C710, failure clears the pointer. Recomputes base vampirism except for formID 7.\nProbable parameter naming: currentFlags is the second forwarded load argument (Oblivion calling convention verified; meaning suggested by Fallout aiCurrentFlags and matching parent/component chain). Higher-level policy remains Unknown.\n\nTESNPC vtable+0x54 modified-save loader. Calls TESActorBase_LoadModified; mask 0x200 reads 21 bytes to NPC+0xEC; mask 0x400 resolves combat style to +0x1E4. FormID 7 skips 0x5239C0 recomputation. No direct FaceGen matrix restoration or cache clear in this short wrapper; does NOT prove appearance state is omitted globally (player/special save paths must be traced).",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_525380",
+  "display_name": "TESNPC_LoadModifiedForm",
   "end_ea": "0x5253FD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "sub_525380",
+  "has_pseudocode": true,
+  "name": "TESNPC_LoadModifiedForm",
   "segment": ".text",
   "sha256": "c0c0fdfd566f05015ecd222076648141fc15847104cdeb71a48c089ab43eccc0",
   "size": 125,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x525380",
-  "type": "int __stdcall(void *, size_t Size)",
+  "total_chunk_size": 125,
+  "type": "void __thiscall(TESNPC *self, ActorBaseSaveChangeMask changeMask, unsigned int currentFlags)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 5
 }

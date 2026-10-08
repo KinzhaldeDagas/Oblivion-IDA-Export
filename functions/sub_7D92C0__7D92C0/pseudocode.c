@@ -1,4 +1,10 @@
-void __cdecl sub_7D92C0(NiNode *a1, int a2, float a3, int a4, float a5)
+// Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
+void __cdecl NiAVObject_SetShaderRefractionStateRecursive(
+        NiNode *root,
+        int enabled,
+        float power,
+        int useRefractF,
+        float period)
 {
   NiProperty *NiPropertyByID; // esi
   int v6; // eax
@@ -8,43 +14,43 @@ void __cdecl sub_7D92C0(NiNode *a1, int a2, float a3, int a4, float a5)
   unsigned int i; // esi
   NiNode *v11; // eax
 
-  if ( a1 )
+  if ( root )
   {
-    if ( a1->vtbl->super.super.Unk_04((NiObject *)a1) )
+    if ( root->vtbl->super.super.Unk_04((NiObject *)root) )
     {
-      NiPropertyByID = NiNode_GetNiPropertyByID(a1, 4);
+      NiPropertyByID = NiNode_GetNiPropertyByID(root, 4); /*0x7d92e7*/
       if ( NiPropertyByID )
       {
         if ( (*((int (__thiscall **)(NiProperty *))NiPropertyByID->vtbl + 0x15))(NiPropertyByID) >= 5
           && (*((int (__thiscall **)(NiProperty *))NiPropertyByID->vtbl + 0x15))(NiPropertyByID) <= 0xA )
         {
-          LOBYTE(NiPropertyByID[9].members.m_controller) = 0;
-          v6 = (_BYTE)a4 != 0 ? 0x10000 : 0x8000;
-          if ( (_BYTE)a2 )
-            NiPropertyByID[1].members.super.m_uiRefCount |= v6;
+          LOBYTE(NiPropertyByID[9].members.m_controller) = 0; /*0x7d931d*/
+          v6 = (_BYTE)useRefractF != 0 ? 0x10000 : 0x8000;
+          if ( (_BYTE)enabled ) /*0x7d9335*/
+            NiPropertyByID[1].members.super.m_uiRefCount |= v6; /*0x7d9337*/
           else
-            NiPropertyByID[1].members.super.m_uiRefCount &= ~v6;
-          *(float *)&NiPropertyByID[9].members.m_extraDataList = a3;
-          NiPropertyByID[1].members.m_controller = 0;
-          if ( (_BYTE)a4 )
-            *(_DWORD *)&NiPropertyByID[9].members.m_extraDataListLen = Double_To_SInt32(a5);
+            NiPropertyByID[1].members.super.m_uiRefCount &= ~v6; /*0x7d933e*/
+          *(float *)&NiPropertyByID[9].members.m_extraDataList = power; /*0x7d9347*/
+          NiPropertyByID[1].members.m_controller = 0; /*0x7d934d*/
+          if ( (_BYTE)useRefractF ) /*0x7d9354*/
+            *(_DWORD *)&NiPropertyByID[9].members.m_extraDataListLen = Double_To_SInt32(period); /*0x7d935f*/
         }
       }
     }
     else
     {
-      v7 = a1->vtbl->super.super.Unk_02(a1);
-      v8 = v7;
-      if ( v7 )
+      v7 = root->vtbl->super.super.Unk_02(root); /*0x7d936d*/
+      v8 = v7; /*0x7d936f*/
+      if ( v7 ) /*0x7d9373*/
       {
-        m_uiRefCount_high = HIWORD(v7[0x16].members.m_uiRefCount);
-        for ( i = 0; i < m_uiRefCount_high; ++i )
+        m_uiRefCount_high = HIWORD(v7[0x16].members.m_uiRefCount); /*0x7d9376*/
+        for ( i = 0; i < m_uiRefCount_high; ++i ) /*0x7d9376*/
         {
-          if ( HIWORD(v8[0x16].members.m_uiRefCount) > i )
+          if ( HIWORD(v8[0x16].members.m_uiRefCount) > i ) /*0x7d9399*/
           {
-            v11 = *((NiNode **)&v8[0x16].__vftable->super.Destructor + i);
-            if ( v11 )
-              sub_7D92C0(v11, a2, a3, a4, a5);
+            v11 = *((NiNode **)&v8[0x16].__vftable->super.Destructor + i); /*0x7d93a1*/
+            if ( v11 ) /*0x7d93a6*/
+              NiAVObject_SetShaderRefractionStateRecursive(v11, enabled, power, useRefractF, period); /*0x7d93bf*/
           }
         }
       }

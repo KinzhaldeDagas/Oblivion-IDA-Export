@@ -2,7 +2,7 @@ signed int sub_A0E8B0()
 {
   signed int result; // eax
 
-  result = sub_6BB550();
-  dword_B41794 = result;
-  return result;
+  result = sub_6BB550(); /*0xa0e8b0*/
+  unk_B41794 = result; /*0xa0e8b5*/
+  return result; /*0xa0e8ba*/
 }

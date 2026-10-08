@@ -16,7 +16,7 @@
 0x66A769: mov     [esp+28h+var_10], esi
 0x66A76D: call    Character_constr
 0x66A772: xor     ebx, ebx
-0x66A774: mov     dword ptr [esi], offset ??_7PlayerCharacter@@6BPlayerCharacter@@@; const PlayerCharacter::`vftable'{for `PlayerCharacter'}
+0x66A774: mov     dword ptr [esi], offset ??_7PlayerCharacter@@6BPlayerCharacter@@@; PlayerCharacter constructor installs the primary PlayerCharacter vtable at this+0. The primary vtable starts at 0xA73A0C; the Player_OnInput/update slot used for next-frame scheduling is entry 0xA73C34 -> 0x671620.
 0x66A77A: mov     dword ptr [esi+18h], offset ??_7PlayerCharacter@@6BTESChildCell@@@; const PlayerCharacter::`vftable'{for `TESChildCell'}
 0x66A781: mov     dword ptr [esi+5Ch], offset ??_7PlayerCharacter@@6BMagicCaster@@@; const PlayerCharacter::`vftable'{for `MagicCaster'}
 0x66A788: mov     dword ptr [esi+68h], offset ??_7PlayerCharacter@@6BMagicTarget@@@; const PlayerCharacter::`vftable'{for `MagicTarget'}
@@ -155,7 +155,7 @@
 0x66A9C3: mov     byte ptr [esp+28h+var_4], 7
 0x66A9C8: jz      short loc_66A9D5
 0x66A9CA: mov     ecx, eax; this
-0x66A9CC: call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)
+0x66A9CC: call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.
 0x66A9D1: mov     edi, eax
 0x66A9D3: jmp     short loc_66A9D7
 0x66A9D5: xor     edi, edi
@@ -167,10 +167,10 @@
 0x66A9E2: mov     byte ptr [esp+2Ch+var_4], 6
 0x66A9E7: call    edx
 0x66A9E9: mov     ecx, esi; this
-0x66A9EB: call    Actor__GetProcessLevel
+0x66A9EB: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x66A9F0: push    eax
 0x66A9F1: push    esi
-0x66A9F2: mov     ecx, offset ActorProcessManager_ptr
+0x66A9F2: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x66A9F7: call    sub_674550
 0x66A9FC: mov     ecx, [esi+58h]
 0x66A9FF: cmp     ecx, ebx
@@ -181,10 +181,10 @@
 0x66AA09: call    edx
 0x66AA0B: mov     ecx, esi; this
 0x66AA0D: mov     [esi+58h], edi
-0x66AA10: call    Actor__GetProcessLevel
+0x66AA10: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x66AA15: push    eax
 0x66AA16: push    esi
-0x66AA17: mov     ecx, offset ActorProcessManager_ptr
+0x66AA17: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x66AA1C: call    sub_674550
 0x66AA21: push    8; Size
 0x66AA23: mov     [esi+1E8h], ebx
@@ -199,9 +199,9 @@
 0x66AA42: xor     eax, eax
 0x66AA44: mov     ecx, esi; int
 0x66AA46: mov     [esi+1E4h], eax
-0x66AA4C: call    sub_65B750
+0x66AA4C: call    MobileObject_EnsureActorCharacterController
 0x66AA51: mov     ecx, esi; this
-0x66AA53: call    MobileObject_GetCharProxy
+0x66AA53: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x66AA58: mov     edi, eax
 0x66AA5A: cmp     edi, ebx
 0x66AA5C: jz      loc_66AB21
@@ -232,7 +232,7 @@
 0x66AABC: push    ecx
 0x66AABD: mov     ecx, eax
 0x66AABF: fstp    [esp+30h+a2]; float
-0x66AAC2: call    sub_532BC0
+0x66AAC2: call    PlayerCameraCollisionPhantomPair_Init
 0x66AAC7: jmp     short loc_66AACB
 0x66AAC9: xor     eax, eax
 0x66AACB: push    1
@@ -274,7 +274,7 @@
 0x66AB5D: fld     dword ptr [esi+598h]
 0x66AB63: mov     ecx, ds:0B333CCh; this
 0x66AB69: fstp    [esp+30h+a2]; a2
-0x66AB6C: call    SetCameraFOV_0
+0x66AB6C: call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.
 0x66AB71: fld     [esp+28h+var_14]
 0x66AB75: push    ecx
 0x66AB76: fstp    [esp+2Ch+var_2C]; float
@@ -329,16 +329,16 @@
 0x66AC20: mov     ds:0B3BB40h, eax
 0x66AC25: mov     byte ptr ds:0B14E4Dh, 1
 0x66AC2C: fstp    dword ptr [esi+700h]
-0x66AC32: mov     ecx, esi
+0x66AC32: mov     ecx, esi; this
 0x66AC34: mov     [esi+6FCh], ebx
-0x66AC3A: call    sub_668030
-0x66AC3F: mov     ecx, esi
+0x66AC3A: call    Player_ClearAllSkillProgress; Clears the 21-entry PlayerCharacter skill-use progress array for native skill AVs 0x0C..0x20.
+0x66AC3F: mov     ecx, esi; this
 0x66AC41: mov     [esi+5B4h], ebx
-0x66AC47: call    sub_65FBB0
+0x66AC47: call    Player_ConsumeOldestAttributeBonusBucket; Consumes and frees the oldest (tail) attribute-bonus bucket after a player level-up, then ensures a current bucket remains available. New buckets are pushed at the front, so pending levels are resolved FIFO.
 0x66AC4C: mov     [esi+5B8h], bx
-0x66AC53: mov     ecx, esi
+0x66AC53: mov     ecx, esi; this
 0x66AC55: mov     [esi+5BAh], bl
-0x66AC5B: call    sub_65D560
+0x66AC5B: call    Player_ClearSkillAdvanceCounts; Clear all 21 per-skill advance counters for both major and non-major skills. Raw skillExp[21], requiredSkillExp[21], lifetime skill-increase statistics, and majorSkillAdvances are separate and are not cleared here.
 0x66AC60: fldz
 0x66AC62: fstp    dword ptr [esi+61Ch]
 0x66AC68: mov     [esi+184h], ebx
@@ -532,7 +532,7 @@
 0x66B017: mov     eax, [esi+784h]
 0x66B01D: mov     edi, [eax+4]
 0x66B020: push    eax
-0x66B021: call    FormHeapFree
+0x66B021: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B026: add     esp, 4
 0x66B029: cmp     edi, ebx
 0x66B02B: mov     [esi+784h], edi
@@ -558,3 +558,45 @@
 0x66B083: pop     ebx
 0x66B084: add     esp, 14h
 0x66B087: retn
+0x9C4020: mov     ecx, [ebp-10h]; int
+0x9C4023: jmp     sub_612150
+0x9C4028: mov     ecx, [ebp-10h]
+0x9C402B: add     ecx, 574h; slot
+0x9C4031: jmp     NiPointerSlot_Release
+0x9C4036: mov     ecx, [ebp-10h]
+0x9C4039: add     ecx, 5D0h; slot
+0x9C403F: jmp     NiPointerSlot_Release
+0x9C4044: mov     ecx, [ebp-10h]
+0x9C4047: add     ecx, 5D8h; slot
+0x9C404D: jmp     NiPointerSlot_Release
+0x9C4052: mov     ecx, [ebp-10h]
+0x9C4055: add     ecx, 788h
+0x9C405B: jmp     ??1?$NiTMap@IE@@UAE@XZ; NiTMap<uint,uchar>::~NiTMap<uint,uchar>(void)
+0x9C4060: mov     ecx, [ebp-10h]
+0x9C4063: add     ecx, 798h; slot
+0x9C4069: jmp     NiPointerSlot_Release
+0x9C406E: mov     ecx, [ebp-10h]
+0x9C4071: add     ecx, 79Ch; slot
+0x9C4077: jmp     NiPointerSlot_Release
+0x9C407C: mov     eax, [ebp-14h]
+0x9C407F: push    eax
+0x9C4080: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4085: pop     ecx
+0x9C4086: retn
+0x9C4087: mov     eax, [ebp-14h]
+0x9C408A: push    eax
+0x9C408B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4090: pop     ecx
+0x9C4091: retn
+0x9C4092: mov     eax, [ebp-14h]
+0x9C4095: push    eax
+0x9C4096: call    sub_6078C0
+0x9C409B: pop     ecx
+0x9C409C: retn
+0x9C409D: mov     edx, [esp+arg_4]
+0x9C40A1: lea     eax, [edx-18h]
+0x9C40A4: mov     ecx, [edx-1Ch]
+0x9C40A7: xor     ecx, eax
+0x9C40A9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C40AE: mov     eax, offset stru_AECAA4
+0x9C40B3: jmp     ___CxxFrameHandler3

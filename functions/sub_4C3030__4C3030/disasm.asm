@@ -95,11 +95,11 @@
 0x4C314B: fld     qword ptr ds:0A3F408h
 0x4C3151: fmul    st(1), st
 0x4C3153: fxch    st(1)
-0x4C3155: call    Double_To_SInt32
+0x4C3155: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C315A: fld     dword ptr [esi]
 0x4C315C: mov     ebp, eax
 0x4C315E: mov     [esi+10h], ebp
-0x4C3161: call    Double_To_SInt32
+0x4C3161: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C3166: mov     edx, eax
 0x4C3168: and     edx, 800007FFh
 0x4C316E: jns     short loc_4C3178
@@ -112,11 +112,11 @@
 0x4C317E: add     ebp, 0FFFFFFFFh
 0x4C3181: mov     [esi+10h], ebp
 0x4C3184: fmul    dword ptr [esi+4]
-0x4C3187: call    Double_To_SInt32
+0x4C3187: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C318C: fld     dword ptr [esi+4]
 0x4C318F: mov     ebp, eax
 0x4C3191: mov     [esi+14h], ebp
-0x4C3194: call    Double_To_SInt32
+0x4C3194: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C3199: mov     ecx, eax
 0x4C319B: and     ecx, 800007FFh
 0x4C31A1: jns     short loc_4C31AB
@@ -158,11 +158,11 @@
 0x4C3219: fld     qword ptr ds:0A46050h
 0x4C321F: fmul    st(1), st
 0x4C3221: fxch    st(1)
-0x4C3223: call    Double_To_SInt32
+0x4C3223: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C3228: fld     dword ptr [esi+8]
 0x4C322B: mov     ebp, eax
 0x4C322D: mov     [esi+24h], ebp
-0x4C3230: call    Double_To_SInt32
+0x4C3230: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C3235: mov     ecx, eax
 0x4C3237: and     ecx, 8000007Fh
 0x4C323D: mov     [esp+4Ch+var_24], eax
@@ -176,11 +176,11 @@
 0x4C324E: add     ebp, 0FFFFFFFFh
 0x4C3251: mov     [esi+24h], ebp
 0x4C3254: fmul    dword ptr [esi+0Ch]
-0x4C3257: call    Double_To_SInt32
+0x4C3257: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C325C: fld     dword ptr [esi+0Ch]
 0x4C325F: mov     ebp, eax
 0x4C3261: mov     [esi+28h], ebp
-0x4C3264: call    Double_To_SInt32
+0x4C3264: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C3269: mov     edx, eax
 0x4C326B: and     edx, 8000007Fh
 0x4C3271: mov     [esp+4Ch+var_3C], eax
@@ -241,7 +241,7 @@
 0x4C3317: mov     byte ptr [esi+4Dh], 0
 0x4C331B: mov     [ebp+0], ecx
 0x4C331E: fld     dword ptr [edi]
-0x4C3320: call    Double_To_SInt32
+0x4C3320: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C3325: and     eax, 8000007Fh
 0x4C332A: jns     short loc_4C3331
 0x4C332C: dec     eax
@@ -249,7 +249,7 @@
 0x4C3330: inc     eax
 0x4C3331: jnz     loc_4C33D8
 0x4C3337: fld     dword ptr [edi+4]
-0x4C333A: call    Double_To_SInt32
+0x4C333A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C333F: and     eax, 8000007Fh
 0x4C3344: jns     short loc_4C334B
 0x4C3346: dec     eax

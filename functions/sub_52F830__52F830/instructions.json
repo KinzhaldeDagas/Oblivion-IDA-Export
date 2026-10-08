@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52F830",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Build an ambient NPC Conversation (maximum 100 DialogueItems). Null start resolves HELLO D2. INFO selection uses conversation links/ANY D3 and Random rules; selected linkedTo topics drive continuation. GOODBYE D4 is only a recovery topic after two failed item creations. NoRumors, INFOGENERAL caching, RunForRumors, and player-menu Goodbye closure are not consulted.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x52F834",
-    "line": "mov     ebp, [esp+10h+arg_8]",
+    "line": "mov     ebp, [esp+10h+conversation]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x52F856",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F858",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x52F85E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x52F879",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x52F88C",
-    "line": "mov     esi, [esp+14h+arg_0]",
+    "line": "mov     esi, [esp+14h+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x52F898",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x52F8A5",
-    "line": "mov     ebx, [esp+18h+arg_C]",
+    "line": "mov     ebx, [esp+18h+startingTopic]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x52F8B4",
-    "line": "mov     [esp+1Ch+var_8], 0",
+    "line": "mov     [esp+1Ch+previousTopic], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x52F8C4",
-    "line": "push    0D2h ; 'Ò'",
+    "line": "push    0D2h ; 'Ò'; formID",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x52F8C9",
-    "line": "call    sub_447440",
+    "line": "call    LookupTopicByFormID; Default random-conversation root lookup: stock DIAL 000000D2 / HELLO. Null takes the native zero-item exit before a conversation package is allocated.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x52F8D2",
-    "line": "jz      loc_52FA20",
+    "line": "jz      loc_52FA20; Native no-conversation branch when the implicit HELLO topic lookup returns null.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -334,12 +334,6 @@
     "line": "jmp     short loc_52F8E4",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x52F8DA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x52F8E0",
@@ -355,7 +349,7 @@
   },
   {
     "ea": "0x52F8E6",
-    "line": "call    BSSimpleList_Count",
+    "line": "call    BSSimpleList_Count; Hard generation cap is 100 DialogueItems. Reaching the cap ends construction successfully at the 100th item; no synthetic GOODBYE is appended and any further linkedTo continuation is discarded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +367,7 @@
   },
   {
     "ea": "0x52F8F4",
-    "line": "mov     eax, [esp+1Ch+var_8]",
+    "line": "mov     eax, [esp+1Ch+previousTopic]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,43 +379,43 @@
   },
   {
     "ea": "0x52F8FC",
-    "line": "push    ebp",
+    "line": "push    ebp; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F8FD",
-    "line": "push    eax",
+    "line": "push    eax; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F8FE",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F8FF",
-    "line": "push    esi",
+    "line": "push    esi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F900",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F902",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52F907",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; First attempt to select/create the current ambient DialogueItem. On failure the identical selection is retried once, allowing nondeterministic condition/random state to change before falling back to GOODBYE.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -439,7 +433,7 @@
   },
   {
     "ea": "0x52F90D",
-    "line": "mov     edx, [esp+1Ch+var_8]",
+    "line": "mov     edx, [esp+1Ch+previousTopic]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,43 +445,43 @@
   },
   {
     "ea": "0x52F915",
-    "line": "push    ebp",
+    "line": "push    ebp; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F916",
-    "line": "push    edx",
+    "line": "push    edx; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F917",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F918",
-    "line": "push    esi",
+    "line": "push    esi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F919",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F91B",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52F920",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; The repeated CreateDialogueItem attempt reevaluates its current topic's conditions. If they include GetRandomPercent (index 77), the retry consumes another RNG value; if they include GetNoRumors, the handler reads Actor::IsNoRumor on the routed condition subject.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -511,19 +505,19 @@
   },
   {
     "ea": "0x52F92C",
-    "line": "push    0D4h ; 'Ô'",
+    "line": "push    0D4h ; 'Ô'; formID",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x52F931",
-    "line": "call    sub_447440",
+    "line": "call    LookupTopicByFormID; Conversation fallback lookup: stock DIAL 000000D4 / GOODBYE after the current topic yields no DialogueItem.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52F936",
-    "line": "mov     ecx, [esp+1Ch+var_8]",
+    "line": "mov     ecx, [esp+1Ch+previousTopic]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,43 +529,43 @@
   },
   {
     "ea": "0x52F93E",
-    "line": "push    ebp",
+    "line": "push    ebp; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F93F",
-    "line": "push    ecx",
+    "line": "push    ecx; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F940",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; Recovery lookup for stock GOODBYE D4 after two failed current-topic attempts. Unlike the initial HELLO D2 lookup, this pointer is not null-checked before CreateDialogueItem; the runtime assumes the stock GOODBYE record exists.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F942",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F943",
-    "line": "push    esi",
+    "line": "push    esi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F944",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F946",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x52F955",
-    "line": "mov     ecx, [edi+0Ch]",
+    "line": "mov     ecx, [edi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -631,37 +625,37 @@
   },
   {
     "ea": "0x52F965",
-    "line": "jz      short loc_52F979",
+    "line": "jz      short loc_52F979; ImmediateResult (0x08) is the only INFO flag tested by ambient conversation construction here. Goodbye (0x01) and RunForRumors (0x40) do not alter construction or result handling.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x52F967",
-    "line": "mov     edx, [esp+1Ch+arg_0]",
+    "line": "mov     edx, [esp+1Ch+speaker]; ImmediateResult asymmetry observed in Oblivion: execute on CreateConversation's original initiating speaker argument, even for a later DialogueItem whose nextSpeaker routing assigned the other actor. Deferred completion instead uses DialogueItem.speaker.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52F96B",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F96C",
-    "line": "call    sub_531470",
+    "line": "call    TESTopicInfo__RunResult; ImmediateResult executes now on CreateConversation's original initiating speaker, even if nextSpeaker routing assigned this later item to the other participant. Ordering is RunResult first, then AddTopicList.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52F971",
-    "line": "mov     ecx, [edi+0Ch]; int",
+    "line": "mov     ecx, [edi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x52F974",
-    "line": "call    sub_5308D0",
+    "line": "call    TESTopicInfo__AddTopicList; ImmediateResult exposes addedTopics after running the result and before the DialogueItem is spoken. DialogueItem::RunResult later skips flag 0x08, preventing a second commit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +685,13 @@
   },
   {
     "ea": "0x52F984",
-    "line": "mov     esi, [eax+30h]",
+    "line": "mov     esi, [eax+30h]; Ambient continuation is governed by the selected INFO's links object, not its Goodbye flag. A Goodbye INFO can continue when authored with linkedTo entries; an ordinary INFO with no links ends the generated chain.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x52F987",
-    "line": "mov     [esp+1Ch+var_8], ebx",
+    "line": "mov     [esp+1Ch+previousTopic], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,13 +709,13 @@
   },
   {
     "ea": "0x52F98F",
-    "line": "jz      loc_52FA20",
+    "line": "jz      loc_52FA20; A selected INFO with no links object terminates the conversation successfully at this item. Normal chain termination does not automatically append GOODBYE.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x52F995",
-    "line": "add     esi, 8",
+    "line": "add     esi, 8; Choose among nonnull linkedTo TESTopics without INFOGENERAL/D7 filtering or NoRumors/cache logic. The chosen topic's INFO conditions and Random group are evaluated on the next CreateDialogueItem iteration.",
     "mnemonic": "add",
     "size": 3
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x52F9BD",
-    "line": "add     edx, 1",
+    "line": "add     edx, 1; Select one nonnull linkedTo topic uniformly using rand()%count. The chosen link is not condition-filtered here; its INFO selection occurs on the next CreateDialogueItem iteration.",
     "mnemonic": "add",
     "size": 3
   },
@@ -925,7 +919,7 @@
   },
   {
     "ea": "0x52F9E3",
-    "line": "movsx   eax, byte ptr [ecx+24h]",
+    "line": "movsx   eax, byte ptr [ecx+24h]; TESTopicInfo+0x24 nextSpeaker: 0 swaps to the target, 1 keeps the current speaker, 2 randomly chooses whether to swap.",
     "mnemonic": "movsx",
     "size": 4
   },
@@ -1027,13 +1021,13 @@
   },
   {
     "ea": "0x52FA16",
-    "line": "mov     ebp, [esp+1Ch+arg_8]",
+    "line": "mov     ebp, [esp+1Ch+conversation]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52FA1A",
-    "line": "jnz     loc_52F8E0",
+    "line": "jnz     loc_52F8E0; A null/empty linkedTo choice ends the chain normally. No automatic GOODBYE is appended; D4 is used only after a nonnull requested topic fails both normal creation attempts.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x52FA43",
-    "line": "mov     eax, [esp+1Ch+arg_8]",
+    "line": "mov     eax, [esp+1Ch+conversation]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1117,19 +1111,19 @@
   },
   {
     "ea": "0x52FA50",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52FA52",
-    "line": "mov     [esp+1Ch+arg_8], eax",
+    "line": "mov     [esp+1Ch+conversation], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52FA56",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,13 +1147,13 @@
   },
   {
     "ea": "0x52FA62",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52FA64",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1309,7 @@
   },
   {
     "ea": "0x52FAAE",
-    "line": "cmp     [esp+1Ch+arg_8], 0",
+    "line": "cmp     [esp+1Ch+conversation], 0",
     "mnemonic": "cmp",
     "size": 5
   },

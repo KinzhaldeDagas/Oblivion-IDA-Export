@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6836E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified: path request/cache builder resolves a containing TESSubSpace candidate by interior cell list or WorldSpace +0x60 coordinate lookup, compares candidate identity with the current choice, and rebuilds the path request when it changes.",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x68373A",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x683749",
-    "line": "mov     ecx, offset stru_B3C000",
+    "line": "mov     ecx, offset unk_B3C000",
     "mnemonic": "mov",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x6837A4",
-    "line": "lea     eax, [esp+24h+arg_C]",
+    "line": "lea     eax, [esp+24h+worldPosition]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x6837FB",
-    "line": "mov     ecx, [esp+20h+arg_C]",
+    "line": "mov     ecx, [esp+20h+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x68381A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x68381F",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x683830",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,25 +685,25 @@
   },
   {
     "ea": "0x683839",
-    "line": "lea     ecx, [esp+20h+arg_C]",
+    "line": "lea     ecx, [esp+20h+worldPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68383D",
-    "line": "push    ecx",
+    "line": "push    ecx; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68383E",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+arg_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x683842",
-    "line": "call    sub_4CBBB0",
+    "line": "call    TESObjectCELL_FindSmallestSubSpaceContainingPosition; Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x683851",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+arg_8]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -751,19 +751,19 @@
   },
   {
     "ea": "0x683859",
-    "line": "lea     edx, [esp+20h+arg_C]",
+    "line": "lea     edx, [esp+20h+worldPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68385D",
-    "line": "push    edx",
+    "line": "push    edx; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68385E",
-    "line": "call    sub_4F0600",
+    "line": "call    TESWorldSpace_FindSmallestSubSpaceContainingPosition; Verified: queries the SubSpace candidate list for the position-derived cell key, then returns the smallest-radius TESSubSpace whose exact scaled local bounds contain the point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,13 +865,13 @@
   },
   {
     "ea": "0x683895",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x683897",
-    "line": "call    sub_68A9F0",
+    "line": "call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,37 +901,37 @@
   },
   {
     "ea": "0x6838AB",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6838AE",
-    "line": "call    sub_689A00",
+    "line": "call    TravelPath_ClearNodes; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6838B3",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6838B6",
-    "line": "lea     eax, [esp+20h+arg_C]",
+    "line": "lea     eax, [esp+20h+worldPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6838BA",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6838BB",
-    "line": "call    sub_68A280",
+    "line": "call    TravelPath_AppendDestinationPosition; Verified appends the final destination as a kind-1 TravelPathNode with its own copied NiPoint3 payload, even if low-path A* produced no reference nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,19 +943,19 @@
   },
   {
     "ea": "0x6838C3",
-    "line": "push    ecx",
+    "line": "push    ecx; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6838C4",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6838C7",
-    "line": "call    sub_689DC0",
+    "line": "call    TravelPath_AddRoadSegmentsForPath; Verified post-A* road augmentation. It walks TravelPath nodes, switches to the linked door's WorldSpace and TeleportData marker position on teleport transitions, then asks that world's TESRoad to add surface-derived position nodes for applicable segments. TravelPath_ComputeDistance subsequently sums the added node segments, so road data changes the measured travel distance; this is route measurement/surface sampling, not the A* route search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x6838DA",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x683956",
-    "line": "mov     ecx, offset stru_B3C000",
+    "line": "mov     ecx, offset unk_B3C000",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1306,5 +1306,77 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFB50",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB54",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB59",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5B",
+    "line": "mov     edx, [esp+referenceFormIDOrZero]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFB5F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB62",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB65",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFB67",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB6C",
+    "line": "mov     eax, offset stru_ADC04C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB71",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

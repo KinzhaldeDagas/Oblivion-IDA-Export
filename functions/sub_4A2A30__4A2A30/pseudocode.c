@@ -1,30 +1,31 @@
-signed int __cdecl sub_4A2A30(int a1)
+// Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.
+int __cdecl TESForm_GetLODMult(TESForm *form)
 {
-  signed int result; // eax
+  int result; // eax
 
-  switch ( *(_BYTE *)(a1 + 4) )
+  switch ( form->member.type ) /*0x4a2a47*/
   {
-    case 0x13:
-    case 0x14:
-    case 0x15:
-    case 0x16:
-    case 0x19:
-    case 0x1B:
-    case 0x21:
-    case 0x22:
-    case 0x26:
-    case 0x27:
-    case 0x28:
-    case 0x2A:
-      result = 2;
-      break;
-    case 0x23:
-    case 0x24:
-      result = 3;
-      break;
+    case kFormType_Apparatus: /*0x4a2a47*/
+    case kFormType_Armor: /*0x4a2a47*/
+    case kFormType_Book: /*0x4a2a47*/
+    case kFormType_Clothing: /*0x4a2a47*/
+    case kFormType_Ingredient: /*0x4a2a47*/
+    case kFormType_Misc: /*0x4a2a47*/
+    case kFormType_Weapon: /*0x4a2a47*/
+    case kFormType_Ammo: /*0x4a2a47*/
+    case kFormType_SoulGem: /*0x4a2a47*/
+    case kFormType_Key: /*0x4a2a47*/
+    case kFormType_AlchemyItem: /*0x4a2a47*/
+    case kFormType_SigilStone: /*0x4a2a47*/
+      result = 2; /*0x4a2a54*/
+      break; /*0x4a2a59*/
+    case kFormType_NPC: /*0x4a2a47*/
+    case kFormType_Creature: /*0x4a2a47*/
+      result = 3; /*0x4a2a4e*/
+      break; /*0x4a2a53*/
     default:
-      result = 1;
-      break;
+      result = 1; /*0x4a2a5a*/
+      break; /*0x4a2a5a*/
   }
-  return result;
+  return result; /*0x4a2a53*/
 }

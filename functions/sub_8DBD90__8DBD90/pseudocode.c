@@ -3,18 +3,18 @@ char *__thiscall sub_8DBD90(char *this, int a2, _WORD *a3, int a4)
   char *v5; // edi
   char *v6; // ebx
 
-  v5 = this + 0x74;
-  v6 = this + 0x10;
-  *((_WORD *)this + 3) = 1;
-  *(_DWORD *)this = &off_A9A430;
-  sub_925DA0((_WORD *)this + 8, (int)(this + 0x74));
-  sub_8D99A0(v5, a3, a4, (int)v6, 1, 0);
-  *((_WORD *)this + 7) = 0;
-  *((_WORD *)this + 6) = 0;
-  *((_WORD *)this + 0xA) = 0;
-  *((_WORD *)this + 0x3C) = 0;
-  *((_DWORD *)this + 2) = a2;
-  sub_8D9A10(
+  v5 = this + 0x74; /*0x8dbd96*/
+  v6 = this + 0x10; /*0x8dbd99*/
+  *((_WORD *)this + 3) = 1; /*0x8dbd9f*/
+  *(_DWORD *)this = &off_A9A430; /*0x8dbda5*/
+  sub_925DA0((_WORD *)this + 8, (int)(this + 0x74)); /*0x8dbdab*/
+  sub_8D99A0(v5, a3, a4, (int)v6, 1, 0); /*0x8dbdc1*/
+  *((_WORD *)this + 7) = 0; /*0x8dbdcc*/
+  *((_WORD *)this + 6) = 0; /*0x8dbdd0*/
+  *((_WORD *)this + 0xA) = 0; /*0x8dbdd4*/
+  *((_WORD *)this + 0x3C) = 0; /*0x8dbdd8*/
+  *((_DWORD *)this + 2) = a2; /*0x8dbddc*/
+  sub_8D9A10( /*0x8dbe02*/
     (int)v5,
     *(_WORD *)(0x3C
              * *(char *)(*(_DWORD *)(a2 + 0x7C)
@@ -23,5 +23,5 @@ char *__thiscall sub_8DBD90(char *this, int a2, _WORD *a3, int a4)
                        + 0x19D4)
              + *(_DWORD *)(a2 + 0x7C)
              + 0x1A4C));
-  return this;
+  return this; /*0x8dbe07*/
 }

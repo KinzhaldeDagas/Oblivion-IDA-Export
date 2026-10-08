@@ -1,1 +1,1 @@
-0x6C3680: jmp     sub_6CE350
+0x6C3680: jmp     NiSingleInterpController_RegisterStreamables; Oblivion NiTransformController stream-registration thunk to the generic single-interpolator controller registration path.

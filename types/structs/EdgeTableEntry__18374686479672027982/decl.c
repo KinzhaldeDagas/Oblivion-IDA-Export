@@ -1,1 +1,1 @@
-EdgeTableEntry
+typedef edge_table_entry EdgeTableEntry;

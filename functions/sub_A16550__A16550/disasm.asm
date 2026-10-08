@@ -1,5 +1,5 @@
 0xA16550: push    esi
-0xA16551: mov     esi, g_InterfaceScenegraph
+0xA16551: mov     esi, ds:0B333D0h
 0xA16557: test    esi, esi
 0xA16559: jz      short loc_A16577
 0xA1655B: lea     eax, [esi+4]

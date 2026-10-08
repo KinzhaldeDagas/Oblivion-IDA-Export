@@ -1,5 +1,5 @@
 0x96D6C0: push    ebx
-0x96D6C1: mov     ebx, dword ptr [esp+4+ArgList]
+0x96D6C1: mov     ebx, [esp+4+ArgList]
 0x96D6C5: push    ebp
 0x96D6C6: push    esi
 0x96D6C7: mov     eax, ebx
@@ -19,7 +19,7 @@
 0x96D6E5: push    offset aSSphere_bv; "%s = SPHERE_BV"
 0x96D6EA: push    esi; SizeInBytes
 0x96D6EB: push    eax; DstBuf
-0x96D6EC: mov     dword ptr [esp+24h+ArgList], eax
+0x96D6EC: mov     [esp+24h+ArgList], eax
 0x96D6F0: call    sub_6C5D40
 0x96D6F5: mov     esi, [esp+24h+arg_4]
 0x96D6F9: movzx   edi, word ptr [esi+0Ah]
@@ -41,7 +41,7 @@
 0x96D728: lea     ecx, [ebp+4]
 0x96D72B: call    sub_707280
 0x96D730: movzx   edi, word ptr [esi+0Ah]
-0x96D734: mov     dword ptr [esp+10h+ArgList], eax
+0x96D734: mov     [esp+10h+ArgList], eax
 0x96D738: movzx   eax, word ptr [esi+8]
 0x96D73C: cmp     edi, eax
 0x96D73E: jb      short loc_96D74E
@@ -69,9 +69,9 @@
 0x96D777: fld     qword ptr ds:0A309F0h
 0x96D77D: mov     ebx, eax
 0x96D77F: fmul    st(1), st
-0x96D781: mov     dword ptr [esp+14h+ArgList], ebx
+0x96D781: mov     [esp+14h+ArgList], ebx
 0x96D785: fxch    st(1)
-0x96D787: call    Double_To_SInt32
+0x96D787: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x96D78C: mov     [esp+14h+arg_4], eax
 0x96D790: fidivr  [esp+14h+arg_4]
 0x96D794: push    ecx

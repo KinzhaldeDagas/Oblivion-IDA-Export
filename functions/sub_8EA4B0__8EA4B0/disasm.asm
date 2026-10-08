@@ -140,7 +140,7 @@
 0x8EA6A0: fstp    dword ptr [esp+48h+var_10+0Ch]
 0x8EA6A4: call    sub_889470
 0x8EA6A9: lea     ecx, [esp+40h+var_20]
-0x8EA6AD: call    sub_4D6830
+0x8EA6AD: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
 0x8EA6B2: fld     [esp+40h+var_2C]
 0x8EA6B6: fsqrt
 0x8EA6B8: movaps  xmm0, [esp+40h+var_10]
@@ -154,7 +154,7 @@
 0x8EA6D5: fmul    dword ptr ds:0A9AEA0h
 0x8EA6DB: fstp    dword ptr [esi+9Ch]
 0x8EA6E1: movaps  xmmword ptr [edi], xmm0
-0x8EA6E4: call    sub_8B1DD0
+0x8EA6E4: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8EA6E9: movaps  xmm0, xmmword ptr [esi+80h]
 0x8EA6F0: movaps  xmm2, xmmword ptr [esi+20h]
 0x8EA6F4: movaps  xmm3, xmmword ptr [esi+10h]

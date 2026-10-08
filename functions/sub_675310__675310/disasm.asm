@@ -3,7 +3,7 @@
 0x675312: lea     ebp, [ecx+18h]
 0x675315: push    edi
 0x675316: mov     ecx, ebp; this
-0x675318: call    sub_7616D0
+0x675318: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67531D: mov     edi, eax
 0x67531F: xor     ebx, ebx
 0x675321: test    edi, edi
@@ -74,7 +74,7 @@
 0x6753C1: jg      short loc_6753CC
 0x6753C3: push    2; newDeadState
 0x6753C5: mov     ecx, esi; this
-0x6753C7: call    Actor_HandleDeathSTate????
+0x6753C7: call    Actor_HandleDeathState
 0x6753CC: cmp     dword ptr [esi+58h], 0
 0x6753D0: jz      short loc_675388
 0x6753D2: push    ebx
@@ -86,6 +86,6 @@
 0x6753DF: mov     edi, [ebx+4]
 0x6753E2: jmp     short loc_67538D
 0x6753E4: mov     ecx, ebp; this
-0x6753E6: call    sub_7616D0
+0x6753E6: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6753EB: mov     edi, eax
 0x6753ED: jmp     short loc_67538D

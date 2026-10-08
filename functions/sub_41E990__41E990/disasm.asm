@@ -1,4 +1,4 @@
-0x41E990: push    38h ; '8'; a2
+0x41E990: push    38h ; '8'; Returns the byte stored in ExtraSeed, or 0xFF when no seed extra exists.
 0x41E992: call    BaseExtraList_GetExtraData
 0x41E997: test    eax, eax
 0x41E999: jnz     short loc_41E99E

@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6E1B00",
+      "0x6E1C00"
+    ]
+  ],
+  "chunks_sha256": "eddaa5afae721af350cb1dc8e1d6452e102922157701de54361345829591db6b",
+  "comment_regular": "Mutates every nonempty transform channel to guarantee keys at start/end: rotation content 2, translation content 1, scale content 0. Euler rotation is handled recursively by the generic key helper.",
+  "comment_repeatable": "Mutates every nonempty transform channel to guarantee keys at start/end: rotation content 2, translation content 1, scale content 0. Euler rotation is handled recursively by the generic key helper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6E1B00",
+  "display_name": "NiTransformData_GuaranteeTimeRange",
   "end_ea": "0x6E1C00",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6E1B00",
+  "name": "NiTransformData_GuaranteeTimeRange",
   "segment": ".text",
   "sha256": "eddaa5afae721af350cb1dc8e1d6452e102922157701de54361345829591db6b",
   "size": 256,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6E1B00",
+  "total_chunk_size": 256,
   "type": "void __thiscall(int this, float, float)",
   "xrefs_from_count": 86,
   "xrefs_to_count": 1

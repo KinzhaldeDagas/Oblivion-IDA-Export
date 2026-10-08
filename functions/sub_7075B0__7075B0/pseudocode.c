@@ -1,12 +1,9 @@
-_DWORD *__thiscall sub_7075B0(_BYTE *this, float a2)
+void __thiscall sub_7075B0(NiAVObject *this, float applicationTime)
 {
-  _DWORD *result; // eax
-
-  result = sub_47C930(this, a2, (*(this + 0x18) & 8) != 0);
-  if ( (*(this + 0x18) & 4) != 0 )
+  NiAVObject_UpdatePropertiesAndControllers(this, applicationTime, (this->members.m_flags & 8) != 0); /*0x7075c8*/
+  if ( (this->members.m_flags & 4) != 0 ) /*0x7075d6*/
   {
-    (*(void (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x74))(this);
-    return (_DWORD *)(*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x78))(this);
+    this->vtbl->UpdateWorldData(this); /*0x7075df*/
+    this->vtbl->UpdateWorldBound(this); /*0x7075e8*/
   }
-  return result;
 }

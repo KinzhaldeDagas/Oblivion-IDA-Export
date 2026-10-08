@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79AB00",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79AB0D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

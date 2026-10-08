@@ -1,1 +1,1 @@
-SecHandle
+typedef _SecHandle SecHandle;

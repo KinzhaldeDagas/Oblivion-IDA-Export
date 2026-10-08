@@ -1,4 +1,4 @@
-0x70DFB0: push    ecx
+0x70DFB0: push    ecx; Oblivion NiCullingProcess process-cull entry for native scene traversal.
 0x70DFB1: push    ebp
 0x70DFB2: mov     ebp, ecx
 0x70DFB4: mov     eax, [ebp+8Ch]
@@ -19,16 +19,15 @@
 0x70DFD6: xor     edi, edi
 0x70DFD8: lea     ebx, [ebp+2Ch]
 0x70DFDB: jmp     short loc_70DFE0
-0x70DFDD: align 10h
 0x70DFE0: mov     esi, 1
 0x70DFE5: mov     ecx, edi
 0x70DFE7: shl     esi, cl
 0x70DFE9: test    [ebp+8Ch], esi
 0x70DFEF: jz      short loc_70E010
 0x70DFF1: mov     ecx, [esp+14h+a2]
-0x70DFF5: push    ebx; a2
-0x70DFF6: add     ecx, 20h ; ' '; this
-0x70DFF9: call    sub_47DA70
+0x70DFF5: push    ebx; plane
+0x70DFF6: add     ecx, 20h ; ' '; self
+0x70DFF9: call    NiBound_ClassifyAgainstPlane
 0x70DFFE: cmp     eax, 2
 0x70E001: jz      short loc_70E01B
 0x70E003: cmp     eax, 1

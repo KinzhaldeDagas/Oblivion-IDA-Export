@@ -1,10 +1,10 @@
-0x6B75B0: push    ecx
+0x6B75B0: push    ecx; Conversation save-size calculation includes every DialogueItem plus the saved current-item index.
 0x6B75B1: push    esi
 0x6B75B2: mov     esi, ecx
 0x6B75B4: mov     ecx, ds:0B33B00h
 0x6B75BA: push    edi
 0x6B75BB: xor     edi, edi
-0x6B75BD: call    sub_45A170
+0x6B75BD: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6B75C2: test    al, al
 0x6B75C4: jz      short loc_6B75CB
 0x6B75C6: mov     edi, 6
@@ -16,8 +16,8 @@
 0x6B75DA: jnz     short loc_6B75E1
 0x6B75DC: cmp     dword ptr [esi], 0
 0x6B75DF: jz      short loc_6B75F4
-0x6B75E1: mov     ecx, [esi]
-0x6B75E3: call    sub_6B7CF0
+0x6B75E1: mov     ecx, [esi]; this
+0x6B75E3: call    DialogueItem__GetSaveSize
 0x6B75E8: mov     esi, [esi+4]
 0x6B75EB: add     word ptr [esp+0Ch+var_4], ax
 0x6B75F0: test    esi, esi
@@ -31,7 +31,7 @@
 0x6B760F: jz      short loc_6B7657
 0x6B7611: mov     ecx, [esi]
 0x6B7613: push    ecx; a1
-0x6B7614: call    TESForm_LookupByFormID
+0x6B7614: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6B7619: mov     edx, [esi+5]
 0x6B761C: add     esp, 4
 0x6B761F: push    offset a_DialogueConve; ".\\Dialogue\\Conversation.cpp"

@@ -57,3 +57,15 @@
 0x437FD8: pop     ebx
 0x437FD9: add     esp, 10h
 0x437FDC: retn
+0x9AC5E0: mov     ecx, [ebp-10h]; this
+0x9AC5E3: jmp     j_??1QueuedCreature@@UAE@XZ; QueuedCreature::~QueuedCreature(void)
+0x9AC5E8: mov     ecx, [ebp-10h]
+0x9AC5EB: add     ecx, 38h ; '8'; void *
+0x9AC5EE: jmp     sub_4BDDC0
+0x9AC5F3: mov     edx, [esp+arg_4]
+0x9AC5F7: lea     eax, [edx-10h]
+0x9AC5FA: mov     ecx, [edx-14h]
+0x9AC5FD: xor     ecx, eax
+0x9AC5FF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC604: mov     eax, offset stru_AD92AC
+0x9AC609: jmp     ___CxxFrameHandler3

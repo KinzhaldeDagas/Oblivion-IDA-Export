@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
-  "callers_count": 119,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 220,
+  "chunks": [
+    [
+      "0x707530",
+      "0x70757D"
+    ]
+  ],
+  "chunks_sha256": "418f9ef1b9641a16507beced8818ed2c983c0552c122d1e2184490d7d4206e28",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nDX11 generic-bank audit 2026-10-01: local first-match property lookup. Reads object+9C list head; next=node+0, data=node+8; skips null data and compares virtual+4C to requested ID. Does not read the stored list count or search ancestors. Returns first matching property even if its shader subtype later fails caller7A9820 type1..10 admission.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiNode_GetNiPropertyByID",
   "end_ea": "0x70757D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiNode_GetNiPropertyByID",
   "segment": ".text",
   "sha256": "418f9ef1b9641a16507beced8818ed2c983c0552c122d1e2184490d7d4206e28",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x707530",
+  "total_chunk_size": 77,
   "type": "NiProperty *__thiscall(NiNode *this, signed int)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 220

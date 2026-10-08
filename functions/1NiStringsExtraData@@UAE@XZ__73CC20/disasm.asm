@@ -8,14 +8,14 @@
 0x73CC31: mov     eax, [esi+10h]
 0x73CC34: mov     ecx, [eax+edi*4]
 0x73CC37: push    ecx
-0x73CC38: call    FormHeapFree
+0x73CC38: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73CC3D: add     edi, 1
 0x73CC40: add     esp, 4
 0x73CC43: cmp     edi, [esi+0Ch]
 0x73CC46: jb      short loc_73CC31
 0x73CC48: mov     edx, [esi+10h]
 0x73CC4B: push    edx
-0x73CC4C: call    FormHeapFree
+0x73CC4C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73CC51: add     esp, 4
 0x73CC54: pop     edi
 0x73CC55: mov     dword ptr [esi+10h], 0

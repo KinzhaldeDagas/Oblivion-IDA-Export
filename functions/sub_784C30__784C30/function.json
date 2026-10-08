@@ -1,19 +1,36 @@
 {
-  "callees_count": 59,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_784C30",
+  "chunks": [
+    [
+      "0x784C30",
+      "0x784F14"
+    ],
+    [
+      "0x9CAFA0",
+      "0x9CAFC3"
+    ]
+  ],
+  "chunks_sha256": "95fe3729b5101444460e36124f6d5ed74e608ed965b706c6f0cc54b72db6b6ea",
+  "comment_regular": "Erases one spline-cache map node. Validates the iterator, computes its successor, unlinks/transplants the node, performs red-black deletion fixup with the two rotations, destroys any heap-backed key storage, frees the 0x30-byte node, and decrements map size.",
+  "comment_repeatable": "Erases one spline-cache map node. Validates the iterator, computes its successor, unlinks/transplants the node, performs red-black deletion fixup with the two rotations, destroys any heap-backed key storage, frees the 0x30-byte node, and decrements map size.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_stBezierSplineCacheMap_EraseNode_010201A0",
   "end_ea": "0x784F14",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_784C30",
+  "name": "OB_stBezierSplineCacheMap_EraseNode_010201A0",
   "segment": ".text",
   "sha256": "85146d6cbcfb1c197c10355a3ebf6fa288a072250d8727882273673a533ed74c",
   "size": 740,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x784C30",
-  "type": "_DWORD *__userpurge@<eax>(_DWORD *this@<ecx>, int@<edi>, _DWORD *, int, int)",
-  "xrefs_from_count": 295,
+  "total_chunk_size": 775,
+  "type": "OB_stBezierSplineCacheIterator_010201A0 *__thiscall(OB_stBezierSplineCacheMap_010201A0 *this, OB_stBezierSplineCacheIterator_010201A0 *result, OB_stBezierSplineCacheMap_010201A0 *iteratorOwner, OB_stBezierSplineCacheNode_010201A0 *iteratorNode)",
+  "xrefs_from_count": 310,
   "xrefs_to_count": 1
 }

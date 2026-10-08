@@ -18,13 +18,13 @@
 0x6D111D: jz      short loc_6D113C
 0x6D111F: mov     ecx, [eax-4]
 0x6D1122: lea     edi, [eax-4]
-0x6D1125: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6D1125: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6D112A: push    ecx; int
 0x6D112B: push    4; unsigned int
 0x6D112D: push    eax; void *
 0x6D112E: call    $LN21
 0x6D1133: push    edi
-0x6D1134: call    FormHeapFree
+0x6D1134: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D1139: add     esp, 4
 0x6D113C: mov     si, word ptr [esp+20h+arg_0]
 0x6D1141: cmp     si, bx
@@ -49,7 +49,7 @@
 0x6D1174: cmp     eax, ebx
 0x6D1176: mov     [esp+20h+var_4], ebx
 0x6D117A: jz      short loc_6D1194
-0x6D117C: push    offset sub_7016A0; a5
+0x6D117C: push    offset NiPointerSlot_Release; a5
 0x6D1181: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x6D1186: push    edi; size
 0x6D1187: lea     ebx, [eax+4]
@@ -87,3 +87,15 @@
 0x6D11E3: pop     ebx
 0x6D11E4: add     esp, 0Ch
 0x6D11E7: retn    4
+0x9C6200: mov     eax, [ebp+4]
+0x9C6203: push    eax
+0x9C6204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6209: pop     ecx
+0x9C620A: retn
+0x9C620B: mov     edx, [esp+arg_4]
+0x9C620F: lea     eax, [edx-10h]
+0x9C6212: mov     ecx, [edx-14h]
+0x9C6215: xor     ecx, eax
+0x9C6217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C621C: mov     eax, offset stru_AEE7E8
+0x9C6221: jmp     ___CxxFrameHandler3

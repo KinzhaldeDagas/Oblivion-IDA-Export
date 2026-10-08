@@ -1,1 +1,1 @@
-LoadingMenu
+struct LoadingMenu;

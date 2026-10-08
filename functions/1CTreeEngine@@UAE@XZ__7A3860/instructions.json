@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A3860",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion compact CTreeEngine destructor. Destroys embedded SIdvLeafInfo, releases generated billboard-leaf and branch-info vector storage, clears the branch-texture small string/random state, and then runs the shared base destructor. No later root-support storage exists in this build.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7A3889",
-    "line": "lea     ecx, [esi+84h]",
+    "line": "lea     ecx, [esi+84h]; this",
     "mnemonic": "lea",
     "size": 6
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A3897",
-    "line": "call    sub_7A5B70",
+    "line": "call    OB_SIdvLeafInfo_dtor_010201A0; SIdvLeafInfo destruction frees rocking/vertex/texcoord tables, then destroys and frees the typed compact leaf-texture vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7A38A6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7A38C2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7A38DD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7A38EF",
-    "line": "lea     ecx, [esi+20h]; void *",
+    "line": "lea     ecx, [esi+20h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7A38F9",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7A3908",
-    "line": "call    ??1CBillboardLeaf@@UAE@XZ; CBillboardLeaf::~CBillboardLeaf(void)",
+    "line": "call    OB_CIdvCamera_dtor_010201A0; Oblivion CIdvCamera base destructor. Restores the CIdvCamera vftable; both CTreeEngine and CBillboardLeaf destructors call this shared base cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -346,5 +346,131 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC920",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC923",
+    "line": "jmp     OB_CIdvCamera_dtor_010201A0; Oblivion CIdvCamera base destructor. Restores the CIdvCamera vftable; both CTreeEngine and CBillboardLeaf destructors call this shared base cleanup.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC928",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC92B",
+    "line": "add     ecx, 20h ; ' '; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC92E",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC933",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC936",
+    "line": "add     ecx, 24h ; '$'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC939",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC93E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC941",
+    "line": "add     ecx, 60h ; '`'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC944",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC949",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC94C",
+    "line": "add     ecx, 74h ; 't'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC94F",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC954",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC958",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC95B",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC95E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC960",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC965",
+    "line": "mov     eax, offset stru_AF5CA4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC96A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

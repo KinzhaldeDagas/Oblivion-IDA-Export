@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4A320A",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -220,12 +220,6 @@
     "line": "jmp     short loc_4A3230",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4A3228",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x4A3230",
@@ -373,7 +367,7 @@
   },
   {
     "ea": "0x4A3296",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +481,7 @@
   },
   {
     "ea": "0x4A32DA",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +643,7 @@
   },
   {
     "ea": "0x4A332C",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1033,7 @@
   },
   {
     "ea": "0x4A33EF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1162,5 +1156,95 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B2680",
+    "line": "mov     eax, [ebp+var_14]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2683",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2684",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2689",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B268A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B268B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B268F",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2692",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2695",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2697",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B269C",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B269F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B26A1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B26A6",
+    "line": "mov     eax, offset stru_ADE62C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B26AB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

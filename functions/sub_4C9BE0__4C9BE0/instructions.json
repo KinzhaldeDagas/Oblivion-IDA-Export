@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4C9BF2",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4C9BFD",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4C9C29",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4C9C61",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

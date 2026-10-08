@@ -18,7 +18,6 @@
 0x7107D1: lea     ecx, [ebp+4]
 0x7107D4: lea     edi, ds:0[esi*4]
 0x7107DB: jmp     short loc_7107E0
-0x7107DD: align 10h
 0x7107E0: fld     dword ptr [ecx-4]
 0x7107E3: mov     ebp, [esp+10h+arg_4]
 0x7107E7: fmul    dword ptr [eax]

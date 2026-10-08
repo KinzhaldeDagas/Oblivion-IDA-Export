@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x71AC10",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; MoonSugarEffect decode: BSShaderAccumulator visible-array consumer (+0x54). Iterates {data,count}; direct-renders disallowed/flagged geometry, otherwise appends geometry into accumulator group list for normal material-owned flush.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x71AC1C",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+visibleArray]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x71AC37",
-    "line": "mov     edx, [esp+18h+arg_0]",
+    "line": "mov     edx, [esp+18h+visibleArray]",
     "mnemonic": "mov",
     "size": 4
   },

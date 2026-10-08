@@ -1,1 +1,1 @@
-LPWSADATA
+typedef struct WSAData *LPWSADATA;

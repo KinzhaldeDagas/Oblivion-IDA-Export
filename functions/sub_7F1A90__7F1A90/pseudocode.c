@@ -1,10 +1,12 @@
-int __thiscall sub_7F1A90(_DWORD *this)
+// Lighting-property virtual +0x70. Returns the 16-bit STSPData vertex count from property +0xA4 or zero.
+int __thiscall OB_SpeedTreeShaderLightingProperty_GetSTSPCount_010201A0(
+        OB_SpeedTreeShaderLightingProperty_010201A0 *this)
 {
-  int v1; // eax
+  int stspData; // eax
 
-  v1 = *(this + 0x29);
-  if ( v1 )
-    return *(unsigned __int16 *)(v1 + 0xC);
+  stspData = this->stspData; /*0x7f1a90*/
+  if ( stspData ) /*0x7f1a98*/
+    return *(unsigned __int16 *)(stspData + 0xC); /*0x7f1a9a*/
   else
-    return 0;
+    return 0; /*0x7f1a9f*/
 }

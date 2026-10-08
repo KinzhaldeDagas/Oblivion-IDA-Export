@@ -23,7 +23,7 @@
 0x68E2DA: mov     ecx, edi; this
 0x68E2DC: call    sub_6B73E0
 0x68E2E1: push    edi
-0x68E2E2: call    FormHeapFree
+0x68E2E2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68E2E7: add     esp, 4
 0x68E2EA: mov     dword ptr [esi+2Ch], 0
 0x68E2F1: pop     edi
@@ -83,5 +83,5 @@
 0x68E385: mov     ecx, ebp; this
 0x68E387: call    sub_6B73E0
 0x68E38C: push    ebp
-0x68E38D: call    FormHeapFree
+0x68E38D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68E392: add     esp, 4

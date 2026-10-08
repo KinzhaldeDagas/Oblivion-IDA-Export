@@ -1,4 +1,4 @@
-0x46DDC0: mov     eax, [esp+arg_0]
+0x46DDC0: mov     eax, [esp+arg_0]; MEF v57 IMPLEMENTED 2026-10-08: PERF-2 copy wrapper creates an invocation-local membership/tail scope then executes native virtual copy body; SEH finally restores parent scope and frees auxiliary table. No persistent model-path index.
 0x46DDC4: push    esi
 0x46DDC5: push    edi
 0x46DDC6: push    0; int
@@ -23,7 +23,7 @@
 0x46DDF7: jz      short loc_46DE01
 0x46DDF9: push    eax
 0x46DDFA: mov     ecx, edi
-0x46DDFC: call    sub_46DD70
+0x46DDFC: call    TESModelList_AddUniqueModelPath; MEF PERF 2026-09-07: PERF-2 second producer: virtual model-list copy clears destination then invokes AddUnique once per nonnull source node. Source ownership remains borrowed; do not assume arbitrary plugin-mutated source lists are already unique, and do not bypass comparison semantics merely because this is a copy.
 0x46DE01: mov     esi, [esi+4]
 0x46DE04: test    esi, esi
 0x46DE06: jnz     short loc_46DDF3

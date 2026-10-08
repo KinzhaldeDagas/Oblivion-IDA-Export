@@ -1,1 +1,1 @@
-STRING
+typedef _STRING STRING;

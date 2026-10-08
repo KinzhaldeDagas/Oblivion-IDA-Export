@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x800B30",
-    "line": "mov     eax, ds:0B474ACh",
+    "line": "mov     eax, ds:0B474ACh; MoonSugarEffect decode: allocates dword_B474AC refraction render target type 0x14 only when requested and not already present.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x800B4D",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x800B53",
-    "line": "mov     ecx, offset dword_B474AC; this",
+    "line": "mov     ecx, offset unk_B474AC; this",
     "mnemonic": "mov",
     "size": 5
   },

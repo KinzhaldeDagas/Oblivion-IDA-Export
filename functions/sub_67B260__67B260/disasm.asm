@@ -1,15 +1,15 @@
-0x67B260: push    esi
+0x67B260: push    esi; TES4 authoritative helper for inserting a non-player MobileObject into a process-level BSSimpleList. Supports front/back insertion and placement relative to another object; advances the list cursor after insertion.
 0x67B261: push    edi
-0x67B262: mov     edi, [esp+8+arg_0]
+0x67B262: mov     edi, [esp+8+object]
 0x67B266: cmp     edi, ds:0B333C4h
 0x67B26C: mov     esi, ecx
 0x67B26E: jz      loc_67B30A
-0x67B274: cmp     [esp+8+arg_8], 0
+0x67B274: cmp     [esp+8+insertRelative], 0
 0x67B279: jnz     short loc_67B2CB
-0x67B27B: cmp     [esp+8+arg_4], 0
+0x67B27B: cmp     [esp+8+append], 0
 0x67B280: push    edi
 0x67B281: jnz     short loc_67B2A7
-0x67B283: call    BSSimpleList_PushFront
+0x67B283: call    BSSimpleList_PushFront; Release/front-insertion path uses BSSimpleList_PushFront. If the list is nonempty and its 8-byte node allocation fails, native code null-dereferences rather than returning an insertion failure.
 0x67B288: mov     ecx, [edi+58h]
 0x67B28B: mov     eax, [ecx]
 0x67B28D: mov     edx, [eax+28h]
@@ -39,7 +39,7 @@
 0x67B2C9: jmp     short loc_67B2FD
 0x67B2CB: test    esi, esi
 0x67B2CD: jz      short loc_67B2FD
-0x67B2CF: mov     edx, [esp+8+arg_C]
+0x67B2CF: mov     edx, [esp+8+relativeTo]
 0x67B2D3: mov     eax, [ecx+4]
 0x67B2D6: test    eax, eax
 0x67B2D8: jnz     short loc_67B2DE
@@ -51,7 +51,7 @@
 0x67B2E4: test    ecx, ecx
 0x67B2E6: jnz     short loc_67B2D3
 0x67B2E8: jmp     short loc_67B2FD
-0x67B2EA: cmp     [esp+8+arg_4], 0
+0x67B2EA: cmp     [esp+8+append], 0
 0x67B2EF: push    edi
 0x67B2F0: jz      short loc_67B2F8
 0x67B2F2: test    eax, eax

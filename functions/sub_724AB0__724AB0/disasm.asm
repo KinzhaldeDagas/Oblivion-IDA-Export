@@ -8,7 +8,7 @@
 0x724ABF: jnz     short loc_724AD8
 0x724AC1: mov     eax, [esi+24h]
 0x724AC4: push    eax
-0x724AC5: call    FormHeapFree
+0x724AC5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x724ACA: add     esp, 4
 0x724ACD: mov     [esi+24h], edi
 0x724AD0: mov     [esi+20h], edi
@@ -35,14 +35,14 @@
 0x724B02: jl      short loc_724B06
 0x724B04: mov     eax, edi
 0x724B06: shl     eax, 4
-0x724B09: push    eax; Size
-0x724B0A: push    ecx; Src
-0x724B0B: push    ebx; Dst
-0x724B0C: call    _memcpy
+0x724B09: push    eax; byteCount
+0x724B0A: push    ecx; source
+0x724B0B: push    ebx; destination
+0x724B0C: call    _memcpy;
 0x724B11: add     esp, 0Ch
 0x724B14: mov     eax, [esi+24h]
 0x724B17: push    eax
-0x724B18: call    FormHeapFree
+0x724B18: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x724B1D: add     esp, 4
 0x724B20: mov     [esi+24h], ebx
 0x724B23: mov     [esi+20h], edi

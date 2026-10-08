@@ -2,9 +2,9 @@ void __fastcall ContainerEntryExtraData_DestroyDataTable(unsigned int *this, int
 {
   _DWORD *v3; // ecx
 
-  v3 = (_DWORD *)*this;
-  if ( v3 )
-    BSSimpleList_Clear(v3);
-  FormHeapFree(*this);
-  *this = 0;
+  v3 = (_DWORD *)*this; /*0x484473*/
+  if ( v3 ) /*0x484477*/
+    BSSimpleList_Clear(v3); /*0x484479*/
+  FormHeapFree(*this); /*0x484481*/
+  *this = 0; /*0x484489*/
 }

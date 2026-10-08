@@ -1,1 +1,1 @@
-FOURCC
+typedef DWORD FOURCC;

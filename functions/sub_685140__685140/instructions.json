@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6851A2",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x6851C7",
-    "line": "call    sub_5E65B0",
+    "line": "call    sub_5E65B0; Authoritative actor movement speed selector: process flags +0x2C0 choose run (0x200), swim (0x800), fly-speed (0x2000); when those are absent it falls through to ordinary walk speed. AI callers may supply a movement vector without direction bits.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6851CC",
-    "line": "fstp    [esp+48h+var_34]",
+    "line": "fstp    [esp+48h+var_34]; AI path interpolation uses sub_5E65B0(actor) as movement speed for segment timing, so no run/swim/fly flags means walk speed even when no direction bits are set.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6851F3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x6851FD",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x68520E",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x68528D",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x6852AE",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6852B0",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x6852D3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6852D5",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x685326",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x685386",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x6853AF",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x685451",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x6854C5",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x6854D5",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x6854DC",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x6854EC",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },

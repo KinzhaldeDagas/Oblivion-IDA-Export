@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirectSoundFullDuplexImpl",
+  "definition": "struct IDirectSoundFullDuplexImpl\n{\nIUnknown_0 IUnknown_iface;\nIDirectSoundFullDuplex_0 IDirectSoundFullDuplex_iface;\nLONG ref;\nLONG refdsfd;\nLONG numIfaces;\nIUnknown_0 *ds8_unk;\nIUnknown_0 *dsc8_unk;\n}\n",
   "id": 18374686479672034958,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IUnknown_iface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IDirectSoundFullDuplex_iface",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "IDirectSoundFullDuplex_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refdsfd",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "numIfaces",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ds8_unk",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dsc8_unk",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown_0 *"
     }
   ],
   "name": "IDirectSoundFullDuplexImpl",
+  "ordinal": 3958,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 28
 }

@@ -28,7 +28,7 @@
 0x53DA7D: call    edx
 0x53DA7F: cmp     eax, ebp
 0x53DA81: jz      short loc_53DA91
-0x53DA83: cmp     eax, offset dword_B40BCC
+0x53DA83: cmp     eax, offset stru_B40BCC
 0x53DA88: jz      short loc_53DA9D
 0x53DA8A: mov     eax, [eax+4]
 0x53DA8D: cmp     eax, ebp
@@ -39,7 +39,7 @@
 0x53DA98: jmp     loc_53F1C7
 0x53DA9D: mov     eax, [esi+44h]
 0x53DAA0: push    eax
-0x53DAA1: push    offset dword_B40B50
+0x53DAA1: push    offset stru_B40B50
 0x53DAA6: call    NiRTTI_Cast
 0x53DAAB: mov     edi, eax
 0x53DAAD: add     esp, 8
@@ -57,19 +57,19 @@
 0x53DACF: fstp    [esp+2CCh+var_2CC]
 0x53DAD2: call    edx
 0x53DAD4: fld     dword ptr [edi+48h]
-0x53DAD7: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53DAD7: fstp    [esp+2C0h+data]
 0x53DADB: mov     edx, [ebx]
-0x53DADD: fld     dword ptr [esp+2C0h+var_2A0]
+0x53DADD: fld     [esp+2C0h+data]
 0x53DAE1: fmul    [esp+2C0h+var_268]
 0x53DAE5: fnstcw  word ptr [esp+2C0h+var_278]
 0x53DAE9: movzx   eax, word ptr [esp+2C0h+var_278]
 0x53DAEE: fstp    [esp+2C0h+var_268]
 0x53DAF2: or      eax, 0C00h
 0x53DAF7: fld     [esp+2C0h+var_268]
-0x53DAFB: mov     dword ptr [esp+2C0h+var_2A0], eax
-0x53DAFF: fldcw   word ptr [esp+2C0h+var_2A0]
-0x53DB03: fistp   dword ptr [esp+2C0h+var_2A0]
-0x53DB07: mov     ax, word ptr [esp+2C0h+var_2A0]
+0x53DAFB: mov     [esp+2C0h+data], eax
+0x53DAFF: fldcw   word ptr [esp+2C0h+data]
+0x53DB03: fistp   [esp+2C0h+data]
+0x53DB07: mov     ax, word ptr [esp+2C0h+data]
 0x53DB0C: movzx   ecx, ax
 0x53DB0F: mov     eax, [edx+4]
 0x53DB12: fldcw   word ptr [esp+2C0h+var_278]
@@ -81,8 +81,7 @@
 0x53DB27: test    eax, eax
 0x53DB29: jz      short loc_53DB3E
 0x53DB2B: jmp     short loc_53DB30
-0x53DB2D: align 10h
-0x53DB30: cmp     eax, offset dword_B40B1C
+0x53DB30: cmp     eax, offset stru_B40B1C
 0x53DB35: jz      short loc_53DBA4
 0x53DB37: mov     eax, [eax+4]
 0x53DB3A: test    eax, eax
@@ -114,8 +113,7 @@
 0x53DB82: test    eax, eax
 0x53DB84: jz      short loc_53DB40
 0x53DB86: jmp     short loc_53DB90
-0x53DB88: align 10h
-0x53DB90: cmp     eax, offset dword_B40AA4
+0x53DB90: cmp     eax, offset stru_B40AA4
 0x53DB95: jz      loc_53DF1C
 0x53DB9B: mov     eax, [eax+4]
 0x53DB9E: test    eax, eax
@@ -150,7 +148,7 @@
 0x53DBEA: call    eax
 0x53DBEC: test    eax, eax
 0x53DBEE: jz      short loc_53DC08
-0x53DBF0: cmp     eax, offset dword_B40A28
+0x53DBF0: cmp     eax, offset stru_B40A28
 0x53DBF5: jz      short loc_53DC04
 0x53DBF7: mov     eax, [eax+4]
 0x53DBFA: test    eax, eax
@@ -168,8 +166,7 @@
 0x53DC17: test    eax, eax
 0x53DC19: jz      short loc_53DBA6
 0x53DC1B: jmp     short loc_53DC20
-0x53DC1D: align 10h
-0x53DC20: cmp     eax, offset dword_B40AA4
+0x53DC20: cmp     eax, offset stru_B40AA4
 0x53DC25: jz      short loc_53DC33
 0x53DC27: mov     eax, [eax+4]
 0x53DC2A: test    eax, eax
@@ -187,16 +184,16 @@
 0x53DC51: jmp     short loc_53DC55
 0x53DC53: xor     eax, eax
 0x53DC55: push    eax
-0x53DC56: push    offset dword_B3FAB0
+0x53DC56: push    offset parent
 0x53DC5B: call    NiRTTI_Cast
 0x53DC60: add     esp, 8
 0x53DC63: test    eax, eax
 0x53DC65: jz      short loc_53DC87
-0x53DC67: push    0
-0x53DC69: mov     ecx, eax
-0x53DC6B: call    sub_405790
+0x53DC67: push    0; index
+0x53DC69: mov     ecx, eax; this
+0x53DC6B: call    NiNode_GetChildAtIndex
 0x53DC70: push    eax
-0x53DC71: push    offset dword_B3FD5C
+0x53DC71: push    offset stru_B3FD5C
 0x53DC76: call    NiRTTI_Cast
 0x53DC7B: add     esp, 8
 0x53DC7E: mov     ebp, eax
@@ -207,14 +204,14 @@
 0x53DC8F: fld     dword ptr [eax+18h]
 0x53DC92: fstp    [esp+2C0h+var_1D4]
 0x53DC99: push    ebp
-0x53DC9A: push    offset dword_B3FD04
+0x53DC9A: push    offset stru_B3FD04
 0x53DC9F: call    NiRTTI_Cast
 0x53DCA4: add     esp, 8
 0x53DCA7: test    eax, eax
 0x53DCA9: jnz     loc_53F1C7
 0x53DCAF: mov     eax, [ebp+0B4h]
 0x53DCB5: push    eax
-0x53DCB6: push    offset dword_B3FD2C
+0x53DCB6: push    offset stru_B3FD2C
 0x53DCBB: call    NiRTTI_Cast
 0x53DCC0: mov     edx, [eax+1Ch]
 0x53DCC3: movzx   ecx, word ptr [eax+8]
@@ -223,7 +220,7 @@
 0x53DCCE: mov     edx, [eax+28h]
 0x53DCD1: mov     eax, [eax+48h]
 0x53DCD4: mov     [esp+2C8h+var_2AC], eax
-0x53DCD8: mov     dword ptr [esp+2C8h+var_2A0], edx
+0x53DCD8: mov     [esp+2C8h+data], edx
 0x53DCDC: mov     eax, 0FFFFh
 0x53DCE1: movzx   edi, cx
 0x53DCE4: cdq
@@ -291,7 +288,7 @@
 0x53DDAC: mov     dword ptr [esp+2C0h+var_21C+4], ebp
 0x53DDB3: test    edi, edi
 0x53DDB5: jle     short loc_53DE00
-0x53DDB7: mov     esi, dword ptr [esp+2C0h+var_2A0]
+0x53DDB7: mov     esi, [esp+2C0h+data]
 0x53DDBB: mov     ecx, [esp+2C0h+var_298]
 0x53DDBF: mov     edx, [esp+2C0h+var_274]
 0x53DDC3: mov     ebp, edi
@@ -375,18 +372,18 @@
 0x53DECA: push    edx
 0x53DECB: push    eax
 0x53DECC: call    sub_72AB00
-0x53DED1: push    eax; a2
+0x53DED1: push    eax; data
 0x53DED2: mov     ecx, edi; this
 0x53DED4: mov     byte ptr [esp+2C4h+var_4], 0
-0x53DEDC: call    NiTriShape_NiTriShape
+0x53DEDC: call    OB_NiTriShape_ctorWithData_010201A0
 0x53DEE1: mov     edi, eax
 0x53DEE3: mov     [esp+2C0h+var_24C], edi
 0x53DEE7: jmp     loc_53E272
 0x53DEEC: xor     eax, eax
-0x53DEEE: push    eax; a2
+0x53DEEE: push    eax; data
 0x53DEEF: mov     ecx, edi; this
 0x53DEF1: mov     byte ptr [esp+2C4h+var_4], al
-0x53DEF8: call    NiTriShape_NiTriShape
+0x53DEF8: call    OB_NiTriShape_ctorWithData_010201A0
 0x53DEFD: mov     edi, eax
 0x53DEFF: mov     [esp+2C0h+var_24C], edi
 0x53DF03: jmp     loc_53E272
@@ -469,7 +466,7 @@
 0x53E01F: fmul    st, st(3)
 0x53E021: fstp    [esp+2C0h+var_2AC]
 0x53E025: fld     [esp+2C0h+var_2AC]
-0x53E029: fst     dword ptr [esp+2C0h+var_2A0]
+0x53E029: fst     [esp+2C0h+data]
 0x53E02D: fld     st(1)
 0x53E02F: fmul    st, st(3)
 0x53E031: fstp    [esp+2C0h+var_2AC]
@@ -477,7 +474,7 @@
 0x53E039: fst     [esp+2C0h+var_2AC]
 0x53E03D: fxch    st(1)
 0x53E03F: fst     [esp+2C0h+var_298]
-0x53E043: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E043: fld     [esp+2C0h+data]
 0x53E047: fstp    [esp+2C0h+var_284]
 0x53E04B: mov     edi, [esp+2C0h+var_284]
 0x53E04F: fld     [esp+2C0h+var_2AC]
@@ -494,13 +491,13 @@
 0x53E076: fld     [esp+2C0h+var_2AC]
 0x53E07A: fst     [esp+2C0h+var_2AC]
 0x53E07E: fxch    st(1)
-0x53E080: fst     dword ptr [esp+2C0h+var_2A0]
+0x53E080: fst     [esp+2C0h+data]
 0x53E084: fxch    st(2)
 0x53E086: fst     [esp+2C0h+var_298]
 0x53E08A: fld     [esp+2C0h+var_2AC]
 0x53E08E: fstp    [esp+2C0h+var_1EC]
 0x53E095: mov     edi, [esp+2C0h+var_1EC]
-0x53E09C: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E09C: fld     [esp+2C0h+data]
 0x53E0A0: mov     [eax-0Ch], edi
 0x53E0A3: fstp    [esp+2C0h+var_1E8]
 0x53E0AA: mov     edi, [esp+2C0h+var_1E8]
@@ -513,11 +510,11 @@
 0x53E0CB: fst     [esp+2C0h+var_2AC]
 0x53E0CF: fst     [esp+2C0h+var_298]
 0x53E0D3: fxch    st(2)
-0x53E0D5: fst     dword ptr [esp+2C0h+var_2A0]
+0x53E0D5: fst     [esp+2C0h+data]
 0x53E0D9: fld     [esp+2C0h+var_2AC]
 0x53E0DD: fstp    [esp+2C0h+var_1E0]
 0x53E0E4: mov     edi, [esp+2C0h+var_1E0]
-0x53E0EB: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E0EB: fld     [esp+2C0h+data]
 0x53E0EF: mov     [eax], edi
 0x53E0F1: fstp    [esp+2C0h+var_1DC]
 0x53E0F8: mov     edi, [esp+2C0h+var_1DC]
@@ -528,15 +525,15 @@
 0x53E114: fxch    st(1)
 0x53E116: mov     [eax+8], edi
 0x53E119: fstp    [esp+2C0h+var_2AC]
-0x53E11D: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E11D: fstp    [esp+2C0h+data]
 0x53E121: fstp    [esp+2C0h+var_298]
 0x53E125: fld     [esp+2C0h+var_2AC]
-0x53E129: fstp    [esp+2C0h+var_290]
-0x53E12D: mov     edi, [esp+2C0h+var_290]
-0x53E131: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E129: fstp    dword ptr [esp+2C0h+var_290]
+0x53E12D: mov     edi, dword ptr [esp+2C0h+var_290]
+0x53E131: fld     [esp+2C0h+data]
 0x53E135: mov     [eax+0Ch], edi
-0x53E138: fstp    [esp+2C0h+var_28C]
-0x53E13C: mov     edi, [esp+2C0h+var_28C]
+0x53E138: fstp    dword ptr [esp+2C0h+var_290+4]
+0x53E13C: mov     edi, dword ptr [esp+2C0h+var_290+4]
 0x53E140: fld     [esp+2C0h+var_298]
 0x53E144: mov     [eax+10h], edi
 0x53E147: fstp    [esp+2C0h+var_288]
@@ -609,16 +606,16 @@
 0x53E23A: push    edx
 0x53E23B: mov     ecx, eax
 0x53E23D: call    sub_72AB00
-0x53E242: push    eax; a2
+0x53E242: push    eax; data
 0x53E243: mov     ecx, esi; this
 0x53E245: mov     byte ptr [esp+2C4h+var_4], 2
-0x53E24D: call    NiTriShape_NiTriShape
+0x53E24D: call    OB_NiTriShape_ctorWithData_010201A0
 0x53E252: jmp     short loc_53E26A
 0x53E254: xor     eax, eax
-0x53E256: push    eax; a2
+0x53E256: push    eax; data
 0x53E257: mov     ecx, esi; this
 0x53E259: mov     byte ptr [esp+2C4h+var_4], 2
-0x53E261: call    NiTriShape_NiTriShape
+0x53E261: call    OB_NiTriShape_ctorWithData_010201A0
 0x53E266: jmp     short loc_53E26A
 0x53E268: xor     eax, eax
 0x53E26A: mov     [esp+2C0h+var_24C], eax
@@ -631,7 +628,7 @@
 0x53E28C: fld     dword ptr [esi+18h]
 0x53E28F: fstp    [esp+2C0h+var_298]
 0x53E293: fld     dword ptr [esi+1Ch]
-0x53E296: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E296: fstp    [esp+2C0h+data]
 0x53E29A: call    _rand
 0x53E29F: mov     [esp+2C0h+var_2AC], eax
 0x53E2A3: fild    [esp+2C0h+var_2AC]
@@ -639,13 +636,13 @@
 0x53E2AD: fstp    [esp+2C0h+var_2AC]
 0x53E2B1: fld     [esp+2C0h+var_2AC]
 0x53E2B5: fsub    qword ptr ds:0A2FAA0h
-0x53E2BB: fmul    dword ptr [esp+2C0h+var_2A0]
+0x53E2BB: fmul    [esp+2C0h+data]
 0x53E2BF: fadd    [esp+2C0h+var_298]
 0x53E2C3: fstp    [esp+2C0h+var_264]
 0x53E2C7: fld     dword ptr [esi+20h]
 0x53E2CA: fstp    [esp+2C0h+var_298]
 0x53E2CE: fld     dword ptr [esi+24h]
-0x53E2D1: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E2D1: fstp    [esp+2C0h+data]
 0x53E2D5: call    _rand
 0x53E2DA: mov     [esp+2C0h+var_2AC], eax
 0x53E2DE: fild    [esp+2C0h+var_2AC]
@@ -654,13 +651,13 @@
 0x53E2EA: fsub    qword ptr ds:0A2F928h
 0x53E2F0: fstp    [esp+2C0h+var_2AC]
 0x53E2F4: fld     [esp+2C0h+var_2AC]
-0x53E2F8: fmul    dword ptr [esp+2C0h+var_2A0]
+0x53E2F8: fmul    [esp+2C0h+data]
 0x53E2FC: fadd    [esp+2C0h+var_298]
 0x53E300: fstp    [esp+2C0h+var_26C]
 0x53E304: fld     dword ptr [esi+28h]
 0x53E307: fstp    [esp+2C0h+var_298]
 0x53E30B: fld     dword ptr [esi+2Ch]
-0x53E30E: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E30E: fstp    [esp+2C0h+data]
 0x53E312: call    _rand
 0x53E317: mov     [esp+2C0h+var_2AC], eax
 0x53E31B: fild    [esp+2C0h+var_2AC]
@@ -669,9 +666,9 @@
 0x53E327: fsub    qword ptr ds:0A2F928h
 0x53E32D: fstp    [esp+2C0h+var_2AC]
 0x53E331: fld     [esp+2C0h+var_2AC]
-0x53E335: fmul    dword ptr [esp+2C0h+var_2A0]
+0x53E335: fmul    [esp+2C0h+data]
 0x53E339: fadd    [esp+2C0h+var_298]
-0x53E33D: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E33D: fstp    [esp+2C0h+data]
 0x53E341: fld     [esp+2C0h+var_26C]
 0x53E345: fst     qword ptr [esp+2C0h+var_220]
 0x53E34C: call    __CIsin
@@ -683,12 +680,12 @@
 0x53E369: fstp    [esp+2C0h+var_2AC]
 0x53E36D: fld     [esp+2C0h+var_2AC]
 0x53E371: fstp    [esp+2C0h+var_26C]
-0x53E375: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E375: fld     [esp+2C0h+data]
 0x53E379: fst     qword ptr [esp+2C0h+var_220]
 0x53E380: call    __CIsin
 0x53E385: fstp    [esp+2C0h+var_2AC]
 0x53E389: fld     [esp+2C0h+var_2AC]
-0x53E38D: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E38D: fstp    [esp+2C0h+data]
 0x53E391: fld     [esp+2C0h+var_298]
 0x53E395: fstp    [esp+2C0h+var_20C+4]
 0x53E39C: fld     qword ptr [esp+2C0h+var_220]
@@ -699,7 +696,7 @@
 0x53E3B7: fmul    st(1), st
 0x53E3B9: fxch    st(1)
 0x53E3BB: fstp    [esp+2C0h+var_244]
-0x53E3BF: fmul    dword ptr [esp+2C0h+var_2A0]
+0x53E3BF: fmul    [esp+2C0h+data]
 0x53E3C3: fstp    [esp+2C0h+var_240]
 0x53E3CA: fld     [esp+2C0h+var_264]
 0x53E3CE: fld     [esp+2C0h+var_244]
@@ -707,7 +704,7 @@
 0x53E3D4: fstp    [esp+2C0h+var_2AC]
 0x53E3D8: fld     [esp+2C0h+var_240]
 0x53E3DF: fmul    st, st(1)
-0x53E3E1: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E3E1: fstp    [esp+2C0h+data]
 0x53E3E5: fmul    [esp+2C0h+var_26C]
 0x53E3E9: mov     eax, [esi]
 0x53E3EB: mov     edx, [eax+4]
@@ -718,7 +715,7 @@
 0x53E3FC: mov     [esp+2C0h+var_248], ebp
 0x53E400: fstp    [esp+2C0h+var_1F8]
 0x53E407: mov     dword ptr [esp+2C0h+var_214+4], ebp
-0x53E40E: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E40E: fld     [esp+2C0h+data]
 0x53E412: mov     [esp+2C0h+var_26C], ebp
 0x53E416: fstp    [esp+2C0h+var_1F4]
 0x53E41D: fld     [esp+2C0h+var_298]
@@ -728,7 +725,7 @@
 0x53E42F: call    edx
 0x53E431: cmp     eax, ebp
 0x53E433: jz      short loc_53E447
-0x53E435: cmp     eax, offset dword_B409EC
+0x53E435: cmp     eax, offset stru_B409EC
 0x53E43A: jz      loc_53E4C3
 0x53E440: mov     eax, [eax+4]
 0x53E443: cmp     eax, ebp
@@ -739,7 +736,7 @@
 0x53E44E: call    edx
 0x53E450: cmp     eax, ebp
 0x53E452: jz      short loc_53E466
-0x53E454: cmp     eax, offset dword_B40968
+0x53E454: cmp     eax, offset stru_B40968
 0x53E459: jz      loc_53E61C
 0x53E45F: mov     eax, [eax+4]
 0x53E462: cmp     eax, ebp
@@ -750,19 +747,19 @@
 0x53E46D: call    edx
 0x53E46F: cmp     eax, ebp
 0x53E471: jz      short loc_53E485
-0x53E473: cmp     eax, offset dword_B40944
+0x53E473: cmp     eax, offset stru_B40944
 0x53E478: jz      loc_53E632
 0x53E47E: mov     eax, [eax+4]
 0x53E481: cmp     eax, ebp
 0x53E483: jnz     short loc_53E473
 0x53E485: push    esi
-0x53E486: push    offset dword_B408C8
+0x53E486: push    offset stru_B408C8
 0x53E48B: call    NiRTTI__IsObjectOfRTTIType
 0x53E490: add     esp, 8
 0x53E493: test    al, al
 0x53E495: jz      loc_53F1BD
 0x53E49B: push    esi
-0x53E49C: push    offset dword_B408C8
+0x53E49C: push    offset stru_B408C8
 0x53E4A1: call    NiRTTI_Cast
 0x53E4A6: mov     ebx, eax
 0x53E4A8: add     esp, 8
@@ -773,31 +770,31 @@
 0x53E4BC: mov     eax, [eax]
 0x53E4BE: jmp     loc_53E79F
 0x53E4C3: push    esi
-0x53E4C4: push    offset dword_B409EC
+0x53E4C4: push    offset stru_B409EC
 0x53E4C9: call    NiRTTI_Cast
 0x53E4CE: mov     ebx, eax
 0x53E4D0: mov     eax, [ebx+50h]
 0x53E4D3: lea     esi, [eax+64h]
 0x53E4D6: mov     ecx, 0Dh
-0x53E4DB: lea     edi, [esp+2C8h+var_E8]
+0x53E4DB: lea     edi, [esp+2C8h+local]
 0x53E4E2: rep movsd
 0x53E4E4: mov     eax, [ebx+10h]
 0x53E4E7: lea     esi, [eax+64h]
 0x53E4EA: add     esp, 8
 0x53E4ED: mov     ecx, 0Dh
 0x53E4F2: lea     edi, [esp+2C0h+var_11C]
-0x53E4F9: lea     eax, [esp+2C0h+var_150]
+0x53E4F9: lea     eax, [esp+2C0h+parent]
 0x53E500: rep movsd
 0x53E502: push    eax
 0x53E503: lea     ecx, [esp+2C4h+var_11C]
 0x53E50A: mov     [esp+2C4h+var_274], ebx
-0x53E50E: call    sub_718A80
-0x53E513: lea     ecx, [esp+2C0h+var_E8]
-0x53E51A: push    ecx
-0x53E51B: lea     edx, [esp+2C4h+var_B4]
-0x53E522: push    edx
-0x53E523: lea     ecx, [esp+2C8h+var_150]
-0x53E52A: call    sub_53D7A0
+0x53E50E: call    sub_718A80;
+0x53E513: lea     ecx, [esp+2C0h+local]
+0x53E51A: push    ecx; local
+0x53E51B: lea     edx, [esp+2C4h+out]
+0x53E522: push    edx; out
+0x53E523: lea     ecx, [esp+2C8h+parent]; parent
+0x53E52A: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x53E52F: mov     esi, eax
 0x53E531: mov     ecx, 0Dh
 0x53E536: lea     edi, [esp+2C0h+var_194]
@@ -828,7 +825,7 @@
 0x53E591: jmp     short loc_53E595
 0x53E593: fld     st(1)
 0x53E595: fld     dword ptr [ebx+58h]
-0x53E598: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E598: fstp    [esp+2C0h+data]
 0x53E59C: fld     dword ptr [ebx+54h]
 0x53E59F: fstp    [esp+2C0h+var_2AC]
 0x53E5A3: fld     [esp+2C0h+var_2AC]
@@ -836,14 +833,14 @@
 0x53E5AD: fmul    st(1), st
 0x53E5AF: fxch    st(1)
 0x53E5B1: fchs
-0x53E5B3: fstp    [esp+2C0h+var_290]
-0x53E5B7: mov     eax, [esp+2C0h+var_290]
-0x53E5BB: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E5B3: fstp    dword ptr [esp+2C0h+var_290]
+0x53E5B7: mov     eax, dword ptr [esp+2C0h+var_290]
+0x53E5BB: fld     [esp+2C0h+data]
 0x53E5BF: mov     [esp+2C0h+var_238], eax
 0x53E5C6: fmul    st, st(1)
 0x53E5C8: fchs
-0x53E5CA: fstp    [esp+2C0h+var_28C]
-0x53E5CE: mov     ecx, [esp+2C0h+var_28C]
+0x53E5CA: fstp    dword ptr [esp+2C0h+var_290+4]
+0x53E5CE: mov     ecx, dword ptr [esp+2C0h+var_290+4]
 0x53E5D2: fxch    st(1)
 0x53E5D4: mov     dword ptr [esp+2C0h+var_234], ecx
 0x53E5DB: fstp    [esp+2C0h+var_288]
@@ -858,46 +855,46 @@
 0x53E5F7: jmp     short loc_53E5FB
 0x53E5F9: fstp    st
 0x53E5FB: fld     dword ptr [ebx+58h]
-0x53E5FE: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E5FE: fstp    [esp+2C0h+data]
 0x53E602: fld     dword ptr [ebx+54h]
 0x53E605: fstp    [esp+2C0h+var_2AC]
 0x53E609: fld     [esp+2C0h+var_2AC]
 0x53E60D: fmul    st, st(1)
-0x53E60F: fstp    [esp+2C0h+var_290]
-0x53E613: fmul    dword ptr [esp+2C0h+var_2A0]
+0x53E60F: fstp    dword ptr [esp+2C0h+var_290]
+0x53E613: fmul    [esp+2C0h+data]
 0x53E617: jmp     loc_53E76F
 0x53E61C: push    esi
-0x53E61D: push    offset dword_B40968
+0x53E61D: push    offset stru_B40968
 0x53E622: call    NiRTTI_Cast
 0x53E627: mov     ebx, eax
 0x53E629: mov     dword ptr [esp+2C8h+var_214+4], ebx
 0x53E630: jmp     short loc_53E646
 0x53E632: push    esi
-0x53E633: push    offset dword_B40944
+0x53E633: push    offset stru_B40944
 0x53E638: call    NiRTTI_Cast
 0x53E63D: mov     ebx, eax
 0x53E63F: mov     [esp+2C8h+var_248], ebx
 0x53E646: mov     eax, [ebx+50h]
 0x53E649: lea     esi, [eax+64h]
 0x53E64C: mov     ecx, 0Dh
-0x53E651: lea     edi, [esp+2C8h+var_E8]
+0x53E651: lea     edi, [esp+2C8h+local]
 0x53E658: rep movsd
 0x53E65A: mov     eax, [ebx+10h]
 0x53E65D: lea     esi, [eax+64h]
 0x53E660: add     esp, 8
 0x53E663: mov     ecx, 0Dh
-0x53E668: lea     edi, [esp+2C0h+var_150]
+0x53E668: lea     edi, [esp+2C0h+parent]
 0x53E66F: lea     eax, [esp+2C0h+var_11C]
 0x53E676: rep movsd
 0x53E678: push    eax
-0x53E679: lea     ecx, [esp+2C4h+var_150]
-0x53E680: call    sub_718A80
-0x53E685: lea     ecx, [esp+2C0h+var_E8]
-0x53E68C: push    ecx
-0x53E68D: lea     edx, [esp+2C4h+var_B4]
-0x53E694: push    edx
-0x53E695: lea     ecx, [esp+2C8h+var_11C]
-0x53E69C: call    sub_53D7A0
+0x53E679: lea     ecx, [esp+2C4h+parent]
+0x53E680: call    sub_718A80;
+0x53E685: lea     ecx, [esp+2C0h+local]
+0x53E68C: push    ecx; local
+0x53E68D: lea     edx, [esp+2C4h+out]
+0x53E694: push    edx; out
+0x53E695: lea     ecx, [esp+2C8h+var_11C]; parent
+0x53E69C: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x53E6A1: mov     esi, eax
 0x53E6A3: mov     ecx, 0Dh
 0x53E6A8: lea     edi, [esp+2C0h+var_194]
@@ -928,18 +925,18 @@
 0x53E703: jmp     short loc_53E707
 0x53E705: fld     st(1)
 0x53E707: fld     dword ptr [ebx+54h]
-0x53E70A: fstp    dword ptr [esp+2C0h+var_2A0]
+0x53E70A: fstp    [esp+2C0h+data]
 0x53E70E: fld     dword ptr [ebx+54h]
 0x53E711: fstp    [esp+2C0h+var_2AC]
 0x53E715: fld     [esp+2C0h+var_2AC]
 0x53E719: fchs
-0x53E71B: fstp    [esp+2C0h+var_290]
-0x53E71F: mov     eax, [esp+2C0h+var_290]
-0x53E723: fld     dword ptr [esp+2C0h+var_2A0]
+0x53E71B: fstp    dword ptr [esp+2C0h+var_290]
+0x53E71F: mov     eax, dword ptr [esp+2C0h+var_290]
+0x53E723: fld     [esp+2C0h+data]
 0x53E727: mov     [esp+2C0h+var_238], eax
 0x53E72E: fchs
-0x53E730: fstp    [esp+2C0h+var_28C]
-0x53E734: mov     ecx, [esp+2C0h+var_28C]
+0x53E730: fstp    dword ptr [esp+2C0h+var_290+4]
+0x53E734: mov     ecx, dword ptr [esp+2C0h+var_290+4]
 0x53E738: mov     dword ptr [esp+2C0h+var_234], ecx
 0x53E73F: fstp    [esp+2C0h+var_288]
 0x53E743: mov     edx, [esp+2C0h+var_288]
@@ -954,11 +951,11 @@
 0x53E75D: fld     dword ptr [ebx+54h]
 0x53E760: fstp    [esp+2C0h+var_2AC]
 0x53E764: fld     dword ptr [ebx+54h]
-0x53E767: fstp    [esp+2C0h+var_290]
+0x53E767: fstp    dword ptr [esp+2C0h+var_290]
 0x53E76B: fld     [esp+2C0h+var_2AC]
-0x53E76F: mov     eax, [esp+2C0h+var_290]
-0x53E773: fstp    [esp+2C0h+var_28C]
-0x53E777: mov     ecx, [esp+2C0h+var_28C]
+0x53E76F: mov     eax, dword ptr [esp+2C0h+var_290]
+0x53E773: fstp    dword ptr [esp+2C0h+var_290+4]
+0x53E777: mov     ecx, dword ptr [esp+2C0h+var_290+4]
 0x53E77B: fstp    [esp+2C0h+var_288]
 0x53E77F: mov     edx, [esp+2C0h+var_288]
 0x53E783: mov     dword ptr [esp+2C0h+var_22C], eax
@@ -975,16 +972,16 @@
 0x53E7BA: mov     ecx, 0Dh
 0x53E7BF: lea     edi, [esp+2C0h+var_40]
 0x53E7C6: rep movsd
-0x53E7C8: lea     ecx, [esp+2C0h+var_B4]
+0x53E7C8: lea     ecx, [esp+2C0h+out]
 0x53E7CF: push    ecx
 0x53E7D0: lea     ecx, [esp+2C4h+var_40]
-0x53E7D7: call    sub_718A80
+0x53E7D7: call    sub_718A80;
 0x53E7DC: lea     edx, [esp+2C0h+var_74]
-0x53E7E3: push    edx
-0x53E7E4: lea     eax, [esp+2C4h+var_150]
-0x53E7EB: push    eax
-0x53E7EC: lea     ecx, [esp+2C8h+var_B4]
-0x53E7F3: call    sub_53D7A0
+0x53E7E3: push    edx; local
+0x53E7E4: lea     eax, [esp+2C4h+parent]
+0x53E7EB: push    eax; out
+0x53E7EC: lea     ecx, [esp+2C8h+out]; parent
+0x53E7F3: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x53E7F8: mov     esi, eax
 0x53E7FA: mov     ecx, 0Dh
 0x53E7FF: lea     edi, [esp+2C0h+var_194]
@@ -1033,14 +1030,14 @@
 0x53E8A2: fld     [esp+2C0h+var_1A4]
 0x53E8A9: fld     st(1)
 0x53E8AB: fsub    st, st(1)
-0x53E8AD: fstp    [esp+2C0h+var_290]
-0x53E8B1: mov     ecx, [esp+2C0h+var_290]
+0x53E8AD: fstp    dword ptr [esp+2C0h+var_290]
+0x53E8B1: mov     ecx, dword ptr [esp+2C0h+var_290]
 0x53E8B5: fld     [esp+2C0h+var_1AC]
 0x53E8BC: mov     [esp+2C0h+var_238], ecx
 0x53E8C3: fld     st
 0x53E8C5: fsub    st, st(2)
-0x53E8C7: fstp    [esp+2C0h+var_28C]
-0x53E8CB: mov     edx, [esp+2C0h+var_28C]
+0x53E8C7: fstp    dword ptr [esp+2C0h+var_290+4]
+0x53E8CB: mov     edx, dword ptr [esp+2C0h+var_290+4]
 0x53E8CF: fxch    st(3)
 0x53E8D1: mov     dword ptr [esp+2C0h+var_234], edx
 0x53E8D8: fstp    [esp+2C0h+var_288]
@@ -1055,12 +1052,12 @@
 0x53E8F4: jmp     short loc_53E8F8
 0x53E8F6: fstp    st
 0x53E8F8: fadd    st, st(2)
-0x53E8FA: fstp    [esp+2C0h+var_290]
-0x53E8FE: mov     ecx, [esp+2C0h+var_290]
+0x53E8FA: fstp    dword ptr [esp+2C0h+var_290]
+0x53E8FE: mov     ecx, dword ptr [esp+2C0h+var_290]
 0x53E902: mov     dword ptr [esp+2C0h+var_22C], ecx
 0x53E909: faddp   st(1), st
-0x53E90B: fstp    [esp+2C0h+var_28C]
-0x53E90F: mov     edx, [esp+2C0h+var_28C]
+0x53E90B: fstp    dword ptr [esp+2C0h+var_290+4]
+0x53E90F: mov     edx, dword ptr [esp+2C0h+var_290+4]
 0x53E913: mov     dword ptr [esp+2C0h+var_22C+4], edx
 0x53E91A: fstp    [esp+2C0h+var_288]
 0x53E91E: mov     eax, [esp+2C0h+var_288]
@@ -1085,7 +1082,7 @@
 0x53E95E: test    esi, esi
 0x53E960: fmul    st(1), st
 0x53E962: fxch    st(1)
-0x53E964: mov     dword ptr [esp+2C0h+var_2A0], eax
+0x53E964: mov     [esp+2C0h+data], eax
 0x53E968: fstp    [esp+2C0h+var_2AC]
 0x53E96C: fld     [esp+2C0h+var_25C]
 0x53E970: fmul    st, st(1)
@@ -1095,7 +1092,7 @@
 0x53E97E: jle     loc_53EFB5
 0x53E984: mov     eax, [esp+2C0h+var_254]
 0x53E988: fld     [esp+2C0h+var_2AC]
-0x53E98C: mov     ebx, dword ptr [esp+2C0h+var_2A0]
+0x53E98C: mov     ebx, [esp+2C0h+data]
 0x53E990: fstp    qword ptr [esp+2C0h+var_200]
 0x53E997: fld     [esp+2C0h+var_298]
 0x53E99B: mov     edi, [esp+2C0h+var_274]
@@ -1132,16 +1129,16 @@
 0x53EA20: fld     [esp+2C0h+var_294]
 0x53EA24: fmulp   st(2), st
 0x53EA26: fxch    st(1)
-0x53EA28: fstp    [esp+2C0h+var_290]
-0x53EA2C: mov     ecx, [esp+2C0h+var_290]
+0x53EA28: fstp    dword ptr [esp+2C0h+var_290]
+0x53EA2C: mov     ecx, dword ptr [esp+2C0h+var_290]
 0x53EA30: mov     [esp+2C0h+var_284], ecx
 0x53EA34: fsubr   [esp+2C0h+var_29C]
 0x53EA38: lea     ecx, [esp+2C0h+var_284]
 0x53EA3C: push    ecx
 0x53EA3D: lea     ecx, [esp+2C4h+var_194]
 0x53EA44: fmul    [esp+2C4h+var_2A8]
-0x53EA48: fstp    [esp+2C4h+var_28C]
-0x53EA4C: mov     edx, [esp+2C4h+var_28C]
+0x53EA48: fstp    dword ptr [esp+2C4h+var_290+4]
+0x53EA4C: mov     edx, dword ptr [esp+2C4h+var_290+4]
 0x53EA50: fldz
 0x53EA52: mov     [esp+2C4h+var_280], edx
 0x53EA56: fstp    [esp+2C4h+var_288]
@@ -1261,7 +1258,7 @@
 0x53EC5B: fsub    qword ptr ds:0A2FAA0h
 0x53EC61: fmul    [esp+2C8h+var_29C]
 0x53EC65: fstp    [esp+2C8h+var_27C]
-0x53EC69: call    sub_53D4B0
+0x53EC69: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x53EC6E: mov     edx, [eax]
 0x53EC70: mov     [esp+2C0h+var_284], edx
 0x53EC74: mov     ecx, [eax+4]
@@ -1353,7 +1350,7 @@
 0x53EDF8: fstp    [esp+2C8h+var_280]
 0x53EDFC: fmul    [esp+2C8h+var_264]
 0x53EE00: fstp    [esp+2C8h+var_27C]
-0x53EE04: call    sub_53D4B0
+0x53EE04: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x53EE09: mov     edx, [eax]
 0x53EE0B: mov     [esp+2C0h+var_284], edx
 0x53EE0F: mov     ecx, [eax+4]
@@ -1472,29 +1469,29 @@
 0x53EFE7: push    1
 0x53EFE9: mov     ecx, esi
 0x53EFEB: mov     [esp+2C4h+var_4], ebx
-0x53EFF2: call    sub_7263B0
-0x53EFF7: mov     edi, dword ptr [esp+2C0h+var_2A0]
+0x53EFF2: call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0
+0x53EFF7: mov     edi, [esp+2C0h+data]
 0x53EFFB: lea     ecx, [ebp+ebp*2+0]
 0x53EFFF: add     ecx, ecx
-0x53F001: push    1; char
+0x53F001: push    1; copyData
 0x53F003: add     ecx, ecx
-0x53F005: push    ecx; Src
-0x53F006: push    edi; char
-0x53F007: push    0; int
-0x53F009: mov     ecx, esi
-0x53F00B: call    sub_7260B0
+0x53F005: push    ecx; byteCount
+0x53F006: push    edi; data
+0x53F007: push    0; blockIndex
+0x53F009: mov     ecx, esi; this
+0x53F00B: call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0
 0x53F010: push    edi
-0x53F011: call    FormHeapFree
+0x53F011: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53F016: add     esp, 4
-0x53F019: push    0Ch
-0x53F01B: push    0Ch
-0x53F01D: push    ebp
-0x53F01E: push    3
-0x53F020: push    0
-0x53F022: push    0
-0x53F024: push    0
-0x53F026: mov     ecx, esi
-0x53F028: call    sub_7262A0
+0x53F019: push    0Ch; stride
+0x53F01B: push    0Ch; elementSize
+0x53F01D: push    ebp; vertexCount
+0x53F01E: push    3; type
+0x53F020: push    0; blockOffset
+0x53F022: push    0; blockIndex
+0x53F024: push    0; streamIndex
+0x53F026: mov     ecx, esi; this
+0x53F028: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
 0x53F02D: mov     edi, [esp+2C0h+var_24C]
 0x53F031: mov     ecx, [edi+0B4h]
 0x53F037: push    esi
@@ -1532,7 +1529,7 @@
 0x53F0D2: mov     eax, [ecx]
 0x53F0D4: mov     edx, [eax+4]
 0x53F0D7: call    edx
-0x53F0D9: cmp     eax, offset dword_B3FD4C
+0x53F0D9: cmp     eax, offset stru_B3FD4C
 0x53F0DE: setz    al
 0x53F0E1: test    al, al
 0x53F0E3: jz      short loc_53F0F4
@@ -1571,35 +1568,35 @@
 0x53F154: push    eax; a2
 0x53F155: mov     ecx, edi; this
 0x53F157: mov     [esp+2C4h+var_4], ebx
-0x53F15E: call    sub_405680
+0x53F15E: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x53F163: mov     esi, [esp+2C0h+var_1CC]
 0x53F16A: push    6
 0x53F16C: mov     ecx, esi
-0x53F16E: call    NiNode_GetNiPropertyByID
+0x53F16E: call    NiNode_GetNiPropertyByID;
 0x53F173: test    eax, eax
 0x53F175: jz      short loc_53F188
 0x53F177: push    6
 0x53F179: mov     ecx, esi
-0x53F17B: call    NiNode_GetNiPropertyByID
+0x53F17B: call    NiNode_GetNiPropertyByID;
 0x53F180: push    eax; a2
 0x53F181: mov     ecx, edi; this
-0x53F183: call    sub_405680
+0x53F183: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x53F188: push    0
 0x53F18A: mov     ecx, esi
-0x53F18C: call    NiNode_GetNiPropertyByID
+0x53F18C: call    NiNode_GetNiPropertyByID;
 0x53F191: test    eax, eax
 0x53F193: jz      short loc_53F1A6
 0x53F195: push    0
 0x53F197: mov     ecx, esi
-0x53F199: call    NiNode_GetNiPropertyByID
+0x53F199: call    NiNode_GetNiPropertyByID;
 0x53F19E: push    eax; a2
 0x53F19F: mov     ecx, edi; this
-0x53F1A1: call    sub_405680
-0x53F1A6: push    1
-0x53F1A8: push    0
-0x53F1AA: push    1Bh
-0x53F1AC: push    edi
-0x53F1AD: call    sub_7B8940
+0x53F1A1: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x53F1A6: push    1; arg3
+0x53F1A8: push    0; normalMapBypass
+0x53F1AA: push    1Bh; shaderId
+0x53F1AC: push    edi; root
+0x53F1AD: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x53F1B2: add     esp, 10h
 0x53F1B5: test    al, al
 0x53F1B7: jz      short loc_53F1BD
@@ -1620,3 +1617,40 @@
 0x53F1DB: pop     ebx
 0x53F1DC: add     esp, 2ACh
 0x53F1E2: retn    0Ch
+0x9BA4D0: mov     eax, [ebp-2A8h]
+0x9BA4D6: push    eax
+0x9BA4D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA4DC: pop     ecx
+0x9BA4DD: retn
+0x9BA4DE: mov     eax, [ebp-29Ch]
+0x9BA4E4: push    eax
+0x9BA4E5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA4EA: pop     ecx
+0x9BA4EB: retn
+0x9BA4EC: mov     eax, [ebp-2A8h]
+0x9BA4F2: push    eax
+0x9BA4F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA4F8: pop     ecx
+0x9BA4F9: retn
+0x9BA4FA: mov     eax, [ebp-29Ch]
+0x9BA500: push    eax
+0x9BA501: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA506: pop     ecx
+0x9BA507: retn
+0x9BA508: mov     eax, [ebp-2A8h]
+0x9BA50E: push    eax
+0x9BA50F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA514: pop     ecx
+0x9BA515: retn
+0x9BA516: mov     eax, [ebp-2A8h]
+0x9BA51C: push    eax
+0x9BA51D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA522: pop     ecx
+0x9BA523: retn
+0x9BA524: mov     edx, [esp+arg_4]
+0x9BA528: lea     eax, [edx-2B0h]
+0x9BA52E: mov     ecx, [edx-2B4h]
+0x9BA534: xor     ecx, eax
+0x9BA536: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA53B: mov     eax, offset stru_AE4648
+0x9BA540: jmp     ___CxxFrameHandler3

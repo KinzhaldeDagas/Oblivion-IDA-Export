@@ -26,8 +26,8 @@ int __usercall Actor_AttackHandling_::RunProjectileOnHitScript_@<eax>(
         int a25,
         int a26)
 {
-  if ( ebp0 )
-    return Actor_AttackHandling_::RunProjectileOnHitScript(
+  if ( ebp0 ) /*0x5ff6e7*/
+    return Actor_AttackHandling_::RunProjectileOnHitScript( /*0x5ff6e8*/
              a3,
              a4,
              a5,
@@ -52,7 +52,7 @@ int __usercall Actor_AttackHandling_::RunProjectileOnHitScript_@<eax>(
              a25,
              a26);
   else
-    return Actor_AttackHandling_::RunOnHitByScript(
+    return Actor_AttackHandling_::RunOnHitByScript( /*0x5ff6e7*/
              a1,
              a2,
              a3,

@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x590117",
-    "line": "mov     [esp+arg_8], 0",
+    "line": "mov     [esp+sibling], 0; sibling",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x59011F",
-    "line": "jmp     sub_58DA00",
+    "line": "jmp     Tile__Init; Verified: initializes base Tile, optionally attaches to supplied parent via 0x58D1C0, then optionally names it. First argument after receiver is Tile* parent, not float; disassembly uses integer pointer test and push.",
     "mnemonic": "jmp",
     "size": 5
   }

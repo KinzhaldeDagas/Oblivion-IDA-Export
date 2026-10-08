@@ -5,7 +5,7 @@
 0x64F2DE: push    esi
 0x64F2DF: push    edi; int
 0x64F2E0: mov     ebx, ecx
-0x64F2E2: call    Double_To_SInt32
+0x64F2E2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64F2E7: cmp     dword ptr [ebx+2Ch], 0
 0x64F2EB: mov     edi, [esp+10h+arg_0]
 0x64F2EF: mov     ebp, eax
@@ -46,7 +46,6 @@
 0x64F357: test    ebp, ebp
 0x64F359: jz      short loc_64F3B7
 0x64F35B: jmp     short loc_64F360
-0x64F35D: align 10h
 0x64F360: mov     edx, [edi]
 0x64F362: mov     eax, [edx+198h]
 0x64F368: push    0
@@ -78,7 +77,7 @@
 0x64F3AC: fstp    [esp+18h+var_18]
 0x64F3AF: push    edi
 0x64F3B0: mov     ecx, ebx
-0x64F3B2: call    sub_64EC50
+0x64F3B2: call    sub_64EC50; 3DTheft decode 2026-05-16: Follow procedure execution reads its target ref from procedure state +0x2C/+0xB and drives movement toward that target's cell/worldspace; no plugin-owned actor/package memory is dereferenced at the later 0x0040DECF crash site.
 0x64F3B7: test    esi, esi
 0x64F3B9: jz      short loc_64F3F4
 0x64F3BB: mov     edx, [esi]
@@ -104,7 +103,7 @@
 0x64F3E9: mov     ecx, edi
 0x64F3EB: call    eax
 0x64F3ED: mov     ecx, edi; int
-0x64F3EF: call    sub_5EAE70
+0x64F3EF: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x64F3F4: pop     edi
 0x64F3F5: pop     esi
 0x64F3F6: pop     ebp

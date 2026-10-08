@@ -12,11 +12,11 @@
 0x50CFCF: test    esi, esi
 0x50CFD1: jz      short loc_50D017
 0x50CFD3: mov     ecx, esi; this
-0x50CFD5: call    MobileObject_GetCharProxy
+0x50CFD5: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x50CFDA: test    eax, eax
 0x50CFDC: jz      short loc_50D017
 0x50CFDE: mov     ecx, esi; this
-0x50CFE0: call    MobileObject_GetCharProxy
+0x50CFE0: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x50CFE5: fld     dword ptr [eax+320h]
 0x50CFEB: fstp    [esp+8+var_4]
 0x50CFEF: fldz

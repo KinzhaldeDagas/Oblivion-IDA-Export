@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4ADC00",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): constructs the 0x110-byte TESEffectShader. Its 0xE0-byte Data member begins at +0x18 and is followed by TESTexture TextureShaderTexture (+0xF8) and ParticleShaderTexture (+0x104). Fallout's layout is 0x170 bytes with a larger EffectShaderData block and a third texture; this is a confirmed layout divergence.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4ADC31",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4ADC41",
-    "line": "call    sub_4AC9C0",
+    "line": "call    TESEffectShaderData_InitializeDefaults; Verified (Oblivion): constructor initializes TESEffectShaderData at +0x18, then constructs TextureShaderTexture at +0xF8 and ParticleShaderTexture at +0x104. The data layout ends at +0xF8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4ADC61",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4ADC6C",
-    "line": "call    sub_4AC9C0",
+    "line": "call    TESEffectShaderData_InitializeDefaults; Verified (Oblivion): initializes the 0xE0-byte TESEffectShaderData block at TESEffectShader+0x18, including cFlags, blend defaults, particle lifetimes/velocity/scale/colors, and the byte/float values copied by TESEffectShader_ConfigureVisualProperty. Probable member names come from the matching Fallout EffectShaderData layout; the defaults and offsets are directly corroborated in Oblivion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -232,5 +232,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B2BE0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2BE3",
+    "line": "jmp     TESForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2BE8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2BEB",
+    "line": "add     ecx, 0F8h ; 'ø'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2BF1",
+    "line": "jmp     TESTexture_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2BF6",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2BF9",
+    "line": "add     ecx, 104h; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2BFF",
+    "line": "jmp     TESTexture_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2C04",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B2C08",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2C0B",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2C0E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2C10",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2C15",
+    "line": "mov     eax, offset stru_ADEA94",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2C1A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

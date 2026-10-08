@@ -11,7 +11,7 @@
 0x6E2D35: test    eax, eax
 0x6E2D37: jz      short loc_6E2D4E
 0x6E2D39: lea     esp, [esp+0]
-0x6E2D40: cmp     eax, offset dword_B3CFBC
+0x6E2D40: cmp     eax, offset stru_B3CFBC
 0x6E2D45: jz      short loc_6E2D74
 0x6E2D47: mov     eax, [eax+4]
 0x6E2D4A: test    eax, eax

@@ -1,1 +1,5 @@
-_D3DRASTER_STATUS
+struct _D3DRASTER_STATUS
+{
+BOOL InVBlank;
+UINT ScanLine;
+};

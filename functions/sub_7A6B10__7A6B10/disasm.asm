@@ -1,12 +1,12 @@
-0x7A6B10: push    ecx
-0x7A6B11: mov     edx, [esp+4+arg_0]
+0x7A6B10: push    ecx; Oblivion stRegion point-union operator (source spelling operator^). Copies the 0x30-byte region, then clamps min.xyz downward and max.xyz upward to include one stVec3 point; unused stVec slots and size fields are preserved.
+0x7A6B11: mov     edx, [esp+4+outRegion]
 0x7A6B15: push    esi
 0x7A6B16: push    edi
 0x7A6B17: mov     esi, ecx
 0x7A6B19: mov     ecx, 0Ch
 0x7A6B1E: mov     edi, edx
 0x7A6B20: rep movsd
-0x7A6B22: mov     ecx, [esp+0Ch+arg_4]
+0x7A6B22: mov     ecx, [esp+0Ch+point]
 0x7A6B26: pop     edi
 0x7A6B27: mov     [esp+8+var_4], 0
 0x7A6B2F: fld     dword ptr [ecx]

@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x450F88",
-    "line": "call    TESFile_GetDecompressedRecordData",
+    "line": "call    TESFile_GetDecompressedRecordData; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x450F97",
-    "line": "cmp     edi, [esi+418h]",
+    "line": "cmp     edi, [esi+418h]; MEF v20 fix: compressed TES chunk header tail guard. Validate currentChunkOffset + 6 <= currentRecordDCLength before reading type/length; invalid data uses existing chunk-header fail path 0x450F65.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x450F9F",
-    "line": "mov     ecx, [eax+edi]",
+    "line": "mov     ecx, [eax+edi]; EngineIssues review: compressed chunk header path checks currentChunkOffset < decompressed length but then reads 6 bytes; verify offset+6 <= length.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x450FDC",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },

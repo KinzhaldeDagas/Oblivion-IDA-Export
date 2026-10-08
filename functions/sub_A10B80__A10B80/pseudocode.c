@@ -1,4 +1,4 @@
-BSStringT *sub_A10B80()
+NiRTTI *sub_A10B80()
 {
-  return sub_70E220(&stru_B42850, "NiD3DController", (int)dword_B3FC98);
+  return NiRTTI_Constructor(&stru_B42850, "NiD3DController", &stru_B3FC98); /*0xa10b94*/
 }

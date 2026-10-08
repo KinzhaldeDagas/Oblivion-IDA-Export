@@ -17,7 +17,7 @@
 0x4EDF43: jmp     loc_4EE106
 0x4EDF48: push    edi
 0x4EDF49: mov     ecx, esi
-0x4EDF4B: call    TESFile_InitializeFormFromRecord
+0x4EDF4B: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4EDF50: push    0; a2
 0x4EDF52: mov     ecx, edi; this
 0x4EDF54: call    TESForm_SetIsLinked
@@ -26,7 +26,6 @@
 0x4EDF60: test    eax, eax
 0x4EDF62: jz      loc_4EE104
 0x4EDF68: jmp     short loc_4EDF70
-0x4EDF6A: align 10h
 0x4EDF70: cmp     eax, 4D414E43h
 0x4EDF75: jg      loc_4EE067
 0x4EDF7B: jz      loc_4EE055
@@ -44,7 +43,7 @@
 0x4EDFAC: lea     eax, [edi+48h]
 0x4EDFAF: push    eax; Dst
 0x4EDFB0: mov     ecx, esi; a1
-0x4EDFB2: call    TESFile_GetChunkData
+0x4EDFB2: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EDFB7: jmp     def_4EE078; jumptable 004EE078 default case, cases 1296125509,1296125511,1296125513-1296125522
 0x4EDFBC: cmp     eax, 0Ch
 0x4EDFBF: jnz     def_4EE078; jumptable 004EE078 default case, cases 1296125509,1296125511,1296125513-1296125522
@@ -52,7 +51,7 @@
 0x4EDFC6: lea     ecx, [edi+48h]
 0x4EDFC9: push    ecx; Dst
 0x4EDFCA: mov     ecx, esi; a1
-0x4EDFCC: call    TESFile_GetChunkData
+0x4EDFCC: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EDFD1: or      eax, 0FFFFFFFFh
 0x4EDFD4: mov     [edi+54h], ax
 0x4EDFD8: mov     [edi+56h], al
@@ -63,7 +62,7 @@
 0x4EDFF5: lea     edx, [edi+68h]
 0x4EDFF8: push    edx; Dst
 0x4EDFF9: mov     ecx, esi; a1
-0x4EDFFB: call    TESFile_GetChunkData
+0x4EDFFB: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EE000: jmp     def_4EE078; jumptable 004EE078 default case, cases 1296125509,1296125511,1296125513-1296125522
 0x4EE005: cmp     eax, 44494445h
 0x4EE00A: jz      short loc_4EE029
@@ -81,7 +80,7 @@
 0x4EE036: push    200h; a4
 0x4EE03B: push    ebx; Dst
 0x4EE03C: mov     ecx, esi; a1
-0x4EE03E: call    TESFile_GetChunkData
+0x4EE03E: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EE043: mov     edx, [edi]
 0x4EE045: mov     eax, [edx+0D8h]
 0x4EE04B: push    ebx
@@ -109,13 +108,13 @@
 0x4EE090: lea     ecx, [edi+58h]
 0x4EE093: push    ecx; Dst
 0x4EE094: mov     ecx, esi; a1
-0x4EE096: call    TESFile_GetChunkData
+0x4EE096: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EE09B: jmp     short def_4EE078; jumptable 004EE078 default case, cases 1296125509,1296125511,1296125513-1296125522
 0x4EE09D: push    38h ; '8'; jumptable 004EE078 case 1296125512
 0x4EE09F: lea     edx, [edi+110h]
 0x4EE0A5: push    edx; Dst
 0x4EE0A6: mov     ecx, esi; a1
-0x4EE0A8: call    TESFile_GetChunkData
+0x4EE0A8: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EE0AD: jmp     short def_4EE078; jumptable 004EE078 default case, cases 1296125509,1296125511,1296125513-1296125522
 0x4EE0AF: push    8; jumptable 004EE078 case 1296125523
 0x4EE0B1: call    FormHeapAlloc
@@ -131,10 +130,10 @@
 0x4EE0CA: push    8; a4
 0x4EE0CC: push    ebx; Dst
 0x4EE0CD: mov     ecx, esi; a1
-0x4EE0CF: call    TESFile_GetChunkData
+0x4EE0CF: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EE0D4: push    esi; a2
 0x4EE0D5: push    ebx; a1
-0x4EE0D6: call    TESForm_ResolveFormID
+0x4EE0D6: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4EE0DB: add     esp, 8
 0x4EE0DE: push    ebx
 0x4EE0DF: lea     ecx, [edi+108h]

@@ -132,12 +132,6 @@
     "size": 2
   },
   {
-    "ea": "0x6B9E4D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x6B9E50",
     "line": "mov     ecx, [esi+8]",
     "mnemonic": "mov",
@@ -436,5 +430,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C7140",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7143",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C7144",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7149",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C714A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C714B",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C714E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7153",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C7157",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C715A",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C715D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C715F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7164",
+    "line": "mov     eax, offset stru_AEF5B8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7169",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

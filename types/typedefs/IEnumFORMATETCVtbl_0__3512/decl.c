@@ -1,1 +1,1 @@
-IEnumFORMATETCVtbl_0
+typedef IEnumFORMATETCVtbl IEnumFORMATETCVtbl_0;

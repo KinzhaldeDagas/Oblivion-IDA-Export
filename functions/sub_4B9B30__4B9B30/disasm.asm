@@ -1,4 +1,4 @@
-0x4B9B30: push    ebp
+0x4B9B30: push    ebp; Verified Oblivion TREE record dispatch: accepts TREE record type 0x1C, initializes the base form, and handles MODL/MODB, MODT, EDID, and DMTL (texture-hash cache) chunks. Unlike Fallout TESObjectTREE::Load/Save, this dispatcher has no SNAM seed-array or BNAM billboard-size case. The loader's complete switch and the Fallout routines establish this as a schema divergence; the source of Oblivion seed-array population outside this loader remains Unknown.
 0x4B9B31: mov     ebp, esp
 0x4B9B33: push    ecx
 0x4B9B34: mov     eax, ds:0B30AACh
@@ -17,11 +17,11 @@
 0x4B9B53: jmp     loc_4B9C03
 0x4B9B58: push    ebx
 0x4B9B59: mov     ecx, edi
-0x4B9B5B: call    TESFile_InitializeFormFromRecord
+0x4B9B5B: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4B9B60: mov     ecx, edi
 0x4B9B62: call    TESFile_GetChunkType
 0x4B9B67: test    eax, eax
-0x4B9B69: jz      loc_4B9C01
+0x4B9B69: jz      loc_4B9C01; Verified chunk dispatch loop. The local switch branches to TESModel_Load for MODL/MODB and MODT, EDID uses the TESObjectTREE vtable setter, and DMTL is handled by TESObjectTREE_LoadTextureHashChunk. No local SNAM or BNAM branch exists in the complete dispatch.
 0x4B9B6F: nop
 0x4B9B70: cmp     eax, 4C444F4Dh
 0x4B9B75: jg      short loc_4B9BB0
@@ -29,14 +29,14 @@
 0x4B9B79: cmp     eax, 42444F4Dh
 0x4B9B7E: jz      short loc_4B9BBE
 0x4B9B80: cmp     eax, 44494445h
-0x4B9B85: jnz     short loc_4B9BE7
+0x4B9B85: jnz     short loc_4B9BE7; Verified EDID branch: reads the form editor ID and passes it through TESObjectTREE vtable slot +0xD8. Chunk code is EDID (little-endian immediate 0x44494445), not DEDI.
 0x4B9B87: mov     eax, [edi+254h]
 0x4B9B8D: call    __alloca?
 0x4B9B92: mov     esi, esp
 0x4B9B94: push    200h; a4
 0x4B9B99: push    esi; Dst
 0x4B9B9A: mov     ecx, edi; a1
-0x4B9B9C: call    TESFile_GetChunkData
+0x4B9B9C: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B9BA1: mov     eax, [ebx]
 0x4B9BA3: mov     edx, [eax+0D8h]
 0x4B9BA9: push    esi
@@ -44,7 +44,7 @@
 0x4B9BAC: call    edx
 0x4B9BAE: jmp     short loc_4B9BE7
 0x4B9BB0: cmp     eax, 4C544D44h
-0x4B9BB5: jz      short loc_4B9BDF
+0x4B9BB5: jz      short loc_4B9BDF; Verified DMTL record branch: delegates the TREE DMTL chunk to TESObjectTREE_LoadTextureHashChunk. Fallout TREE load has no matching DMTL branch in its inspected chunk switch.
 0x4B9BB7: cmp     eax, 54444F4Dh
 0x4B9BBC: jnz     short loc_4B9BE7
 0x4B9BBE: test    ebx, ebx
@@ -61,9 +61,9 @@
 0x4B9BD5: call    TESModel_Load
 0x4B9BDA: add     esp, 8
 0x4B9BDD: jmp     short loc_4B9BE7
-0x4B9BDF: push    edi; int
-0x4B9BE0: mov     ecx, ebx; int
-0x4B9BE2: call    sub_4B3460
+0x4B9BDF: push    edi; file
+0x4B9BE0: mov     ecx, ebx; this
+0x4B9BE2: call    TESObjectTREE_LoadTextureHashChunk; Verified DMTL load path: allocates a TESTextureList header, derives model path, parses texture-hash entries, and replaces the global cache entry keyed by form ID. Paired Oblivion save handler invokes a writer whose terminal thunk is a no-op.
 0x4B9BE7: mov     ecx, edi
 0x4B9BE9: call    TESFile_GetNextChunk
 0x4B9BEE: test    al, al

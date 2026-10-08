@@ -1,10 +1,10 @@
-0x5E0270: push    esi
+0x5E0270: push    esi; Writes LowProcess.procedureCompleted through the process vtable, then requests process reevaluation. DialoguePackage construction passes false; exhaustion passes true for both participants.
 0x5E0271: mov     esi, ecx
 0x5E0273: cmp     dword ptr [esi+58h], 0
 0x5E0277: jz      short loc_5E02A4
 0x5E0279: mov     ecx, [esi+58h]
 0x5E027C: mov     eax, [ecx]
-0x5E027E: mov     edx, [esp+4+arg_0]
+0x5E027E: mov     edx, dword ptr [esp+4+completed]
 0x5E0282: mov     eax, [eax+0BCh]
 0x5E0288: push    edx
 0x5E0289: call    eax

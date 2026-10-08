@@ -21,7 +21,7 @@
 0x4CE024: call    BaseExtraList_Copy
 0x4CE029: mov     edx, [esi+3Ch]
 0x4CE02C: push    edx
-0x4CE02D: call    FormHeapFree
+0x4CE02D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CE032: mov     dword ptr [esi+3Ch], 0
 0x4CE039: mov     al, [ebx+24h]
 0x4CE03C: add     esp, 4

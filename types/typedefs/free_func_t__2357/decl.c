@@ -1,1 +1,1 @@
-free_func_t
+typedef void (*free_func_t)(void *);

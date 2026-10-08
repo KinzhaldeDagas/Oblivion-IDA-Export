@@ -214,3 +214,14 @@
 0x576930: mov     al, 27h ; '''; jumptable 00576929 cases 145,146
 0x576932: jmp     short def_576929
 0x576934: mov     al, 22h ; '"'; jumptable 00576929 cases 147,148
+0x9BE3F0: lea     ecx, [ebp-5Ch]; void *
+0x9BE3F3: jmp     BSStringT_Clear
+0x9BE3F8: lea     ecx, [ebp-34h]
+0x9BE3FB: jmp     sub_5756A0
+0x9BE400: mov     edx, [esp+arg_4]
+0x9BE404: lea     eax, [edx-60h]
+0x9BE407: mov     ecx, [edx-64h]
+0x9BE40A: xor     ecx, eax
+0x9BE40C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE411: mov     eax, offset stru_AE7B50
+0x9BE416: jmp     ___CxxFrameHandler3

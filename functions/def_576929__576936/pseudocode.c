@@ -18,16 +18,16 @@ int __userpurge def_576929@<eax>(
   unsigned int v15; // [esp-34h] [ebp-34h] BYREF
   char v16; // [esp-4h] [ebp-4h]
 
-  sub_573F10((float *)(*(_DWORD *)(a3 + 0x38) + 0x38 * a1 + 0x128), a12, a2, &v14, a11);
-  *a5 = Double_To_SInt32(v14);
+  sub_573F10((float *)(*(_DWORD *)(a3 + 0x38) + 0x38 * a1 + 0x128), a12, a2, &v14, a11); /*0x576972*/
+  *a5 = Double_To_SInt32(v14); /*0x5769ab*/
   if ( *(_BYTE *)((v13 != 0 ? a4 + 1 : 0) + v13) )
-    JUMPOUT(0x576816);
-  sub_72A0F0(
-    (float *)(*(_DWORD *)(a2 + 0xB4) + 0xC),
+    JUMPOUT(0x576816); /*0x576816*/
+  NiSphere_ComputeFromVertices( /*0x5769e6*/
+    (NiSphere *)(*(_DWORD *)(a2 + 0xB4) + 0xC),
     *(unsigned __int16 *)(*(_DWORD *)(a2 + 0xB4) + 8),
-    *(float **)(*(_DWORD *)(a2 + 0xB4) + 0x1C));
-  v16 = 0;
-  sub_5756A0(&v15);
-  FormHeapFree(v13);
-  return a2;
+    *(const NiPoint3 **)(*(_DWORD *)(a2 + 0xB4) + 0x1C));
+  v16 = 0; /*0x5769ef*/
+  sub_5756A0(&v15); /*0x5769f4*/
+  FormHeapFree(v13); /*0x5769fa*/
+  return a2; /*0x576a17*/
 }

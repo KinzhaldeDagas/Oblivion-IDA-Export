@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65C8F0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x65C8FA",
-    "line": "mov     byte ptr [esp+arg_0], dl",
+    "line": "mov     byte ptr [esp+entry], dl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x65C91E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -94,5 +94,95 @@
     "line": "add     esp, 4",
     "mnemonic": "add",
     "size": 3
+  },
+  {
+    "ea": "0x65C926",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x65C929",
+    "line": "mov     edx, [ecx+0Ch]; jumptable 0065C90D case 10",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x65C92C",
+    "line": "fld     dword ptr [eax+4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x65C92F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x65C930",
+    "line": "fstp    dword ptr [edx+4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x65C933",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x65C938",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x65C93B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x65C93E",
+    "line": "push    eax; jumptable 0065C90D cases 0,4-8,11,13,26,33,36,40,41,46-49,56",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x65C93F",
+    "line": "mov     eax, [esp+4+entry]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x65C943",
+    "line": "push    eax; actorValue",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x65C944",
+    "line": "call    AVCollection_AddToArray",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x65C949",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x65C94C",
+    "line": "mov     [esp+entry], eax; jumptable 0065C90D default case, cases 1-3,12,14-25,27-32,34,35,37-39,42-45,50-55",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x65C950",
+    "line": "jmp     BSSimpleList_PushFront",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

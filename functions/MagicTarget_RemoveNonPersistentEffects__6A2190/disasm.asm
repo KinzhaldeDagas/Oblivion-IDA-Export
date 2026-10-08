@@ -63,7 +63,7 @@
 0x6A222E: jnz     short loc_6A2238
 0x6A2230: push    ebp
 0x6A2231: mov     ecx, edi
-0x6A2233: call    ActiveEffect_Base_Remove
+0x6A2233: call    ActiveEffect_Base_Remove; Verified nonpersistent-effect sweep uses the same EffectNode traversal but only requests termination for selected magic item categories/unenchantable enchantments; list unlink and ActiveEffect destruction are deferred to MagicTarget_ProcessEffects.
 0x6A2238: test    ebx, ebx
 0x6A223A: jnz     loc_6A21B0
 0x6A2240: pop     edi

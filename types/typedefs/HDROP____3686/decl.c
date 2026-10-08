@@ -1,1 +1,4 @@
-HDROP__
+struct HDROP__
+{
+int unused;
+};

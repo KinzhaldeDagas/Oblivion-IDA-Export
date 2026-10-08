@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x795C30",
+      "0x795C99"
+    ]
+  ],
+  "chunks_sha256": "8e48c23b4e1243a8c5ce88efa8d84849c12aec2604fc91739736ce93587e77b8",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): push_back for vector<unsigned int>; appends directly when capacity remains or uses the checked insert-one path. Its observed caller is CIndexedGeometry vertex-color storage.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): push_back for vector<unsigned int>; appends directly when capacity remains or uses the checked insert-one path. Its observed caller is CIndexedGeometry vertex-color storage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_795C30",
+  "display_name": "OB_stVectorUInt32_PushBack_010201A0",
   "end_ea": "0x795C99",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_795C30",
+  "name": "OB_stVectorUInt32_PushBack_010201A0",
   "segment": ".text",
   "sha256": "8e48c23b4e1243a8c5ce88efa8d84849c12aec2604fc91739736ce93587e77b8",
   "size": 105,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795C30",
-  "type": "unsigned int **__thiscall(unsigned int *this, int *)",
+  "total_chunk_size": 105,
+  "type": "void __thiscall(OB_stVectorUInt32_010201A0 *this, const unsigned int *value)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 1
 }

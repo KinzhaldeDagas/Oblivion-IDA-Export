@@ -1,11 +1,11 @@
-0x7A8980: sub     esp, 10h
+0x7A8980: sub     esp, 10h; OBLIVION AUTHORITY (2026-08-30): Resizes the 0x14-byte vector<bool>: logicalSize is followed by a 0x10-byte vector<unsigned int> word store; unused high bits in the last word are cleared.
 0x7A8983: push    ebx
-0x7A8984: mov     ebx, [esp+14h+arg_0]
+0x7A8984: mov     ebx, [esp+14h+newSize]
 0x7A8988: cmp     ebx, 0FFFFFFFFh
 0x7A898B: mov     edx, ecx
 0x7A898D: mov     [esp+14h+var_C], edx
 0x7A8991: jbe     short loc_7A8998
-0x7A8993: call    sub_7A8900
+0x7A8993: call    OB_stVectorBool_ThrowLengthError_010201A0; OBLIVION AUTHORITY (2026-08-30): Constructs and throws std::length_error("vector<bool> too long") for packed-pairing-bitset overflow.
 0x7A8998: mov     ecx, [edx+8]
 0x7A899B: push    esi
 0x7A899C: push    edi
@@ -28,23 +28,23 @@
 0x7A89C6: cmp     ebx, [esi+8]
 0x7A89C9: jbe     short loc_7A89D0
 0x7A89CB: call    __invalid_parameter_noinfo
-0x7A89D0: mov     [esp+20h+var_4], ebx
+0x7A89D0: mov     [esp+20h+result.current], ebx
 0x7A89D4: lea     ebx, [ebx+edi*4]
 0x7A89D7: cmp     ebx, [esi+8]
 0x7A89DA: ja      short loc_7A89E1
 0x7A89DC: cmp     ebx, [esi+4]
 0x7A89DF: jnb     short loc_7A89E6
 0x7A89E1: call    __invalid_parameter_noinfo
-0x7A89E6: push    ebp; Src
-0x7A89E7: push    esi; int
-0x7A89E8: push    ebx; Dst
-0x7A89E9: push    esi; int
-0x7A89EA: lea     eax, [esp+30h+var_8]
-0x7A89EE: push    eax; int
-0x7A89EF: mov     ecx, esi
-0x7A89F1: call    sub_439050
+0x7A89E6: push    ebp; last
+0x7A89E7: push    esi; last
+0x7A89E8: push    ebx; first
+0x7A89E9: push    esi; first
+0x7A89EA: lea     eax, [esp+30h+result]
+0x7A89EE: push    eax; result
+0x7A89EF: mov     ecx, esi; this
+0x7A89F1: call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.
 0x7A89F6: mov     edx, [esp+20h+var_C]
-0x7A89FA: mov     ebx, [esp+20h+arg_0]
+0x7A89FA: mov     ebx, [esp+20h+newSize]
 0x7A89FE: pop     ebp
 0x7A89FF: mov     [edx], ebx
 0x7A8A01: and     ebx, 1Fh

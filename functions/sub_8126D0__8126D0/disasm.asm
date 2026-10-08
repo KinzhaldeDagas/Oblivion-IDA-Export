@@ -164,7 +164,7 @@
 0x8128C2: call    edx
 0x8128C4: test    eax, eax
 0x8128C6: jz      short loc_8128D6
-0x8128C8: cmp     eax, offset unk_B47878
+0x8128C8: cmp     eax, offset stru_B47878
 0x8128CD: jz      short loc_812923
 0x8128CF: mov     eax, [eax+4]
 0x8128D2: test    eax, eax

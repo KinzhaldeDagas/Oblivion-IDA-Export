@@ -63,6 +63,6 @@ void __userpurge sub_622B72(
         int a62,
         int a63)
 {
-  BYTE1(a1) *= 2;
-  --*(_DWORD *)(a1 - 0x17AE8FB2);
+  BYTE1(a1) *= 2; /*0x622b72*/
+  --*(_DWORD *)(a1 - 0x17AE8FB2); /*0x622b74*/
 }

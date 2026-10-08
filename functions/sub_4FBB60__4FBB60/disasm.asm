@@ -14,7 +14,7 @@
 0x4FBB84: push    0FFFFFFFFh; a2
 0x4FBB86: lea     esi, [edi+40h]
 0x4FBB89: mov     [esp+18h+var_8], ebx
-0x4FBB8D: call    TESForm_GetOverrideFile
+0x4FBB8D: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4FBB92: cmp     esi, ebx
 0x4FBB94: mov     [esp+14h+a2], eax
 0x4FBB98: jz      loc_4FBC71
@@ -34,10 +34,10 @@
 0x4FBBC3: push    ecx; a2
 0x4FBBC4: lea     edx, [esp+1Ch+a1]
 0x4FBBC8: push    edx; a1
-0x4FBBC9: call    TESForm_ResolveFormID
+0x4FBBC9: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4FBBCE: mov     eax, [esp+20h+a1]
 0x4FBBD2: push    eax; a1
-0x4FBBD3: call    TESForm_LookupByFormID
+0x4FBBD3: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4FBBD8: add     esp, 0Ch
 0x4FBBDB: mov     [ebp+8], eax
 0x4FBBDE: test    eax, eax
@@ -64,7 +64,7 @@
 0x4FBC13: mov     ecx, [eax]
 0x4FBC15: push    eax
 0x4FBC16: mov     [esi], ecx
-0x4FBC18: call    FormHeapFree
+0x4FBC18: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FBC1D: add     esp, 4
 0x4FBC20: jmp     short loc_4FBC28
 0x4FBC22: mov     dword ptr [esi], 0
@@ -126,11 +126,11 @@
 0x4FBCD1: test    ecx, ecx
 0x4FBCD3: jnz     short loc_4FBCFF
 0x4FBCD5: fld     qword ptr ds:0A2FAA0h
-0x4FBCDB: mov     eax, offset unk_B361D4
+0x4FBCDB: mov     eax, (offset dword_B361CC+8)
 0x4FBCE0: fld     [esp+10h+a1]
 0x4FBCE4: fmul    st, st(1)
 0x4FBCE6: add     eax, 4
-0x4FBCE9: cmp     eax, offset dword_B361F4
+0x4FBCE9: cmp     eax, (offset dword_B361CC+28h)
 0x4FBCEE: fstp    [esp+10h+a1]
 0x4FBCF2: fld     [esp+10h+a1]
 0x4FBCF6: fst     dword ptr [eax-4]
@@ -168,7 +168,7 @@
 0x4FBD57: pop     edi
 0x4FBD58: add     esp, 8
 0x4FBD5B: retn    4
-0x4FBD5E: mov     eax, offset unk_B361D4
+0x4FBD5E: mov     eax, (offset dword_B361CC+8)
 0x4FBD63: test    bl, 1
 0x4FBD66: jz      short loc_4FBD70
 0x4FBD68: fld     dword ptr [eax]

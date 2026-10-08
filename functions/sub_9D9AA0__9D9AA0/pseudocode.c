@@ -1,4 +1,4 @@
-BSStringT *sub_9D9AA0()
+NiRTTI *sub_9D9AA0()
 {
-  return sub_70E220(&stru_B33454, "SceneGraph", (int)dword_B3FAB0);
+  return NiRTTI_Constructor(&stru_B33454, "SceneGraph", &parent); /*0x9d9ab4*/
 }

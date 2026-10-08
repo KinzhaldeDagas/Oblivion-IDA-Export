@@ -1,4 +1,4 @@
-0x4D56A0: sub     esp, 0Ch
+0x4D56A0: sub     esp, 0Ch; Verified: TESObjectCELL_CloneForm clones the CELL via TESForm_Clone, then clones associated LAND and TESPathGrid through vtable slot +0x38 and duplicates eligible child references through the same slot before adding them to the destination cell. This shows +0x38 is the CreateDuplicateForm virtual family.
 0x4D56A3: push    ebx
 0x4D56A4: mov     ebx, ecx
 0x4D56A6: xor     eax, eax
@@ -14,7 +14,7 @@
 0x4D56C4: push    eax; int
 0x4D56C5: push    edi; cloneMap
 0x4D56C6: push    eax; a2
-0x4D56C7: call    TESForm_Clone
+0x4D56C7: call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.
 0x4D56CC: push    eax; void *
 0x4D56CD: call    OblivionDynamicCast
 0x4D56D2: mov     ecx, [ebx+40h]
@@ -86,7 +86,7 @@
 0x4D577E: mov     ecx, esi
 0x4D5780: call    edx
 0x4D5782: push    ebx; a2
-0x4D5783: mov     ecx, offset stru_B35C80; this
+0x4D5783: mov     ecx, offset unk_B35C80; this
 0x4D5788: call    sub_496EA0
 0x4D578D: xor     edi, edi
 0x4D578F: lea     esi, [ebx+48h]
@@ -109,7 +109,7 @@
 0x4D57BD: test    dword ptr [ebx+8], 400h
 0x4D57C4: jnz     short loc_4D57D1
 0x4D57C6: mov     ecx, ebp; this
-0x4D57C8: call    TESObjectREFR_IsPersistent?
+0x4D57C8: call    TESObjectREFR_IsPersistent
 0x4D57CD: test    al, al
 0x4D57CF: jnz     short loc_4D57FD
 0x4D57D1: test    edi, edi
@@ -133,11 +133,10 @@
 0x4D5806: jnz     short loc_4D57A0
 0x4D5808: mov     [esp+1Ch+var_8], edi
 0x4D580C: push    ebx; a2
-0x4D580D: mov     ecx, offset stru_B35C80; this
+0x4D580D: mov     ecx, offset unk_B35C80; this
 0x4D5812: call    sub_496F50
 0x4D5817: lea     edi, [esp+1Ch+var_8]
 0x4D581B: jmp     short loc_4D5820
-0x4D581D: align 10h
 0x4D5820: cmp     dword ptr [edi+4], 0
 0x4D5824: jnz     short loc_4D582B
 0x4D5826: cmp     dword ptr [edi], 0
@@ -167,9 +166,9 @@
 0x4D5868: push    ecx
 0x4D5869: mov     ecx, esi
 0x4D586B: call    TESObjectREFR_SetPersistance
-0x4D5870: push    esi; Concurrency::details::SchedulerBase *
-0x4D5871: mov     ecx, ebp
-0x4D5873: call    sub_4D35D0
+0x4D5870: push    esi; reference
+0x4D5871: mov     ecx, ebp; this
+0x4D5873: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x4D5878: mov     edx, [esi]
 0x4D587A: mov     eax, [edx+90h]
 0x4D5880: push    1
@@ -179,7 +178,7 @@
 0x4D5889: test    edi, edi
 0x4D588B: jnz     short loc_4D5820
 0x4D588D: lea     ecx, [esp+1Ch+var_8]
-0x4D5891: call    BSSimpleList_Clear
+0x4D5891: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4D5896: pop     edi
 0x4D5897: pop     esi
 0x4D5898: mov     eax, ebp

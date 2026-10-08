@@ -1,1 +1,1 @@
-BSShaderPPLightingProperty::TextureEffectData
+struct BSShaderPPLightingProperty::TextureEffectData;

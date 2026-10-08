@@ -11,7 +11,6 @@
 0x91FB39: lea     esi, [esp+2E0h+var_1E0]
 0x91FB40: mov     [esp+2E0h+var_2C4], 2
 0x91FB48: jmp     short loc_91FB50
-0x91FB4A: align 10h
 0x91FB50: mov     ecx, [eax+3Ch]
 0x91FB53: movaps  xmm0, xmmword ptr [eax+40h]
 0x91FB57: movaps  xmm1, xmmword ptr [edi]

@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x59EB9A",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x59EBA0",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59EBA5",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EBAA",
-    "line": "call    sub_6B8660",
+    "line": "call    MenuTopicManager__GetSingleton",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x59EBB1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EBB3",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x59EBC2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EBC4",
-    "line": "call    sub_6B85B0",
+    "line": "call    MenuTopic__GetCurrentResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x59EC00",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x59EC04",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x59EC10",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC12",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,25 +277,25 @@
   },
   {
     "ea": "0x59EC1B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC1D",
-    "line": "call    sub_6B85F0",
+    "line": "call    MenuTopicManager__NextTopic",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EC22",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC24",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x59EC2D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC2F",
-    "line": "call    sub_6B8560",
+    "line": "call    MenuTopic__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EC34",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC36",
-    "line": "call    sub_6B85B0",
+    "line": "call    MenuTopic__GetCurrentResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x59EC40",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC42",
-    "line": "call    sub_6B85B0",
+    "line": "call    MenuTopic__GetCurrentResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,25 +379,25 @@
   },
   {
     "ea": "0x59EC4B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC4D",
-    "line": "call    sub_6B8580",
+    "line": "call    MenuTopic__NextResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EC52",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC54",
-    "line": "call    sub_6B85B0",
+    "line": "call    MenuTopic__GetCurrentResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,19 +463,19 @@
   },
   {
     "ea": "0x59EC77",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59EC7A",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59EC7F",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,13 +511,13 @@
   },
   {
     "ea": "0x59EC95",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EC97",
-    "line": "call    sub_6B8580",
+    "line": "call    MenuTopic__NextResponse; After starting/displaying the current DialogueResponse, advance the MenuTopic cursor immediately. The next DoIdle completion callback therefore selects the following response; a null cursor means the just-finished response was final.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x59EC9F",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x59ECA5",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59ECAA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,19 +613,19 @@
   },
   {
     "ea": "0x59ECBF",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59ECC2",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59ECC7",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,25 +685,25 @@
   },
   {
     "ea": "0x59ECE1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59ECE3",
-    "line": "push    eax",
+    "line": "push    eax; enableActions",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59ECE4",
-    "line": "call    sub_59E2B0",
+    "line": "call    DialogMenu__RefreshActionAvailability; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59ECE9",
-    "line": "call    sub_6B8660",
+    "line": "call    MenuTopicManager__GetSingleton",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x59ECF9",
-    "line": "push    1",
+    "line": "push    1; enableActions",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59ECFB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -745,31 +745,31 @@
   },
   {
     "ea": "0x59ED03",
-    "line": "call    sub_59E2B0",
+    "line": "call    DialogMenu__RefreshActionAvailability; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59ED08",
-    "line": "push    0",
+    "line": "push    0; clearAll",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59ED0A",
-    "line": "push    1",
+    "line": "push    1; processCurrentInfo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59ED0C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59ED0E",
-    "line": "call    sub_6B92C0",
+    "line": "call    MenuTopicManager__LoadNextTopicList; Player-menu post-response transition. AddTopicList is unconditional for a processed INFO. Only INFOGENERAL/D7 without RunForRumors skips Goodbye handling and RunResult; INFOGENERAL always rebuilds from player known topics instead of following INFO links. The 0x40 flag has no effect on ordinary topics.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x59ED14",
-    "line": "mov     [esi+88h], al",
+    "line": "mov     [esi+88h], al; Overwrite closePending with LoadNextTopicList's result after response exhaustion. INFOGENERAL without RunForRumors returns false even when Goodbye is set, so the menu stays open while the parked Goodbye INFO survives for a later manual/other close.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x59ED21",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x59ED29",
-    "line": "jmp     sub_59E680",
+    "line": "jmp     DialogMenu__LoadTopicsList; Verified: tail JMP to bool DialogMenu::LoadTopicsList, not CALL. Replacement wrapper must preserve caller return stack and AL semantics, including the close path.",
     "mnemonic": "jmp",
     "size": 5
   }

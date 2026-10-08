@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79A810",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; CFrondEngine::SetTextureCoords per local 4.1: optionally flip T coordinates, reset vertex counter, ChangeTexCoord for every vertex.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x79A813",
-    "line": "cmp     [esp+20h+arg_C], 0",
+    "line": "cmp     [esp+20h+flipT], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79A819",
-    "line": "mov     esi, [esp+24h+arg_8]",
+    "line": "mov     esi, [esp+24h+texcoordBlock]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79A823",
-    "line": "lea     edi, [esp+28h+var_20]",
+    "line": "lea     edi, [esp+28h+newTexCoords]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x79A830",
-    "line": "fld     [esp+eax*4+28h+var_20]",
+    "line": "fld     [esp+eax*4+28h+newTexCoords]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x79A841",
-    "line": "mov     esi, [esp+28h+arg_0]",
+    "line": "mov     esi, [esp+28h+frondGeometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79A845",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x79A84F",
-    "line": "call    sub_7877B0",
+    "line": "call    OB_CIndexedGeometry_GetVertexCount_010201A0; Returns the number of indexed vertices as vertexCoords.floatCount / 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x79A85A",
-    "line": "mov     ebx, [esp+2Ch+arg_4]",
+    "line": "mov     ebx, [esp+2Ch+frondMapIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,31 +157,31 @@
   },
   {
     "ea": "0x79A860",
-    "line": "lea     eax, [esp+2Ch+var_20]",
+    "line": "lea     eax, [esp+2Ch+newTexCoords]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79A864",
-    "line": "push    eax; int",
+    "line": "push    eax; newTexCoords",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A865",
-    "line": "push    ebx; float",
+    "line": "push    ebx; changedMapIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A866",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79A868",
-    "line": "call    sub_796630",
+    "line": "call    OB_CIndexedGeometry_ChangeTexCoord_010201A0; Oblivion CIndexedGeometry::ChangeTexCoord. For the current vertex, remaps retained diffuse UVs only when its saved map index matches changedMapIndex; applies the global T sign flip before appending.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x79A872",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x79A877",
-    "line": "call    sub_7877B0",
+    "line": "call    OB_CIndexedGeometry_GetVertexCount_010201A0; Returns the number of indexed vertices as vertexCoords.floatCount / 3.",
     "mnemonic": "call",
     "size": 5
   },

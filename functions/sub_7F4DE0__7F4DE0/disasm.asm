@@ -1,4 +1,4 @@
-0x7F4DE0: fld     [esp+arg_0]
+0x7F4DE0: fld     [esp+arg_0]; MoonSugarEffect decode: NightEye shader setter clamps flt_B46914 and writes NightEye shader constants; owned by NightEye actor-value path.
 0x7F4DE4: fldz
 0x7F4DE6: fcom    st(1)
 0x7F4DE8: fnstsw  ax

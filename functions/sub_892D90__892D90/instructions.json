@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x892DDA",
-    "line": "call    sub_8913C0",
+    "line": "call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x892E09",
-    "line": "call    sub_6848D0",
+    "line": "call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x892E1D",
-    "line": "call    sub_88FE00",
+    "line": "call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x892E29",
-    "line": "call    sub_891440",
+    "line": "call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.",
     "mnemonic": "call",
     "size": 5
   },

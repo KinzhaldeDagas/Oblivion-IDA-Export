@@ -9,7 +9,7 @@
 0x682833: cmp     dword ptr [edi+58h], 0
 0x682837: jz      loc_682943
 0x68283D: push    esi
-0x68283E: mov     ecx, offset stru_B3C000
+0x68283E: mov     ecx, offset unk_B3C000
 0x682843: call    sub_49F470
 0x682848: lea     eax, [esp+10h+arg_0]
 0x68284C: push    eax
@@ -70,9 +70,9 @@
 0x6828E8: push    1
 0x6828EA: call    eax
 0x6828EC: push    esi
-0x6828ED: call    FormHeapFree
+0x6828ED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6828F2: add     esp, 4
-0x6828F5: mov     ecx, offset stru_B3C000
+0x6828F5: mov     ecx, offset unk_B3C000
 0x6828FA: mov     bl, 1
 0x6828FC: call    j_NiLeaveCriticalSection_0
 0x682901: pop     esi
@@ -83,7 +83,7 @@
 0x682907: retn    8
 0x68290A: mov     esi, [edi+58h]
 0x68290D: mov     ecx, edi; this
-0x68290F: call    Actor__GetProcessLevel
+0x68290F: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x682914: test    eax, eax
 0x682916: jnz     short loc_682938
 0x682918: push    eax; int
@@ -97,7 +97,7 @@
 0x68292F: jz      short loc_682938
 0x682931: mov     ecx, eax
 0x682933: call    sub_628590
-0x682938: mov     ecx, offset stru_B3C000
+0x682938: mov     ecx, offset unk_B3C000
 0x68293D: call    j_NiLeaveCriticalSection_0
 0x682942: pop     esi
 0x682943: pop     edi

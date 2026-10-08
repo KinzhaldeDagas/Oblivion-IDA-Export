@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x8C66E4",
-    "line": "mov     ebx, offset dword_BA8138",
+    "line": "mov     ebx, offset unk_BA8138",
     "mnemonic": "mov",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x8C6700",
-    "line": "cmp     eax, offset dword_B3FD0C",
+    "line": "cmp     eax, offset stru_B3FD0C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x8C6787",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -820,5 +820,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C26D0",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26DB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C26DF",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26E2",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26E5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C26E7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26EC",
+    "line": "mov     eax, offset stru_AEB550",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26F1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

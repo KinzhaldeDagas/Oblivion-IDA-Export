@@ -1,20 +1,23 @@
-int __thiscall sub_785CB0(int this, char **a2)
+// stBezierSpline/profile copy constructor wrapper: zeroes vector/storage fields, then copies from an existing parsed profile.
+OB_stBezierSpline_010201A0 *__thiscall OB_StBezierSpline_CopyCtor_010201A0(
+        OB_stBezierSpline_010201A0 *this,
+        const OB_stBezierSpline_010201A0 *source)
 {
-  *(_DWORD *)(this + 0x10) = 0;
-  *(_DWORD *)(this + 0x14) = 0;
-  *(_DWORD *)(this + 0x18) = 0;
-  *(_DWORD *)(this + 0x20) = 0;
-  *(_DWORD *)(this + 0x24) = 0;
-  *(_DWORD *)(this + 0x28) = 0;
-  *(_DWORD *)(this + 0x30) = 0;
-  *(_DWORD *)(this + 0x34) = 0;
-  *(_DWORD *)(this + 0x38) = 0;
-  *(_DWORD *)(this + 0x40) = 0;
-  *(_DWORD *)(this + 0x44) = 0;
-  *(_DWORD *)(this + 0x48) = 0;
-  *(_DWORD *)(this + 0x50) = 0;
-  *(_DWORD *)(this + 0x54) = 0;
-  *(_DWORD *)(this + 0x58) = 0;
-  sub_785C50((char **)this, a2);
-  return this;
+  this->controlPoints.begin = 0; /*0x785cda*/
+  this->controlPoints.end = 0; /*0x785cdd*/
+  this->controlPoints.capacityEnd = 0; /*0x785ce0*/
+  this->controlPointTangents.begin = 0; /*0x785ce7*/
+  this->controlPointTangents.end = 0; /*0x785cea*/
+  this->controlPointTangents.capacityEnd = 0; /*0x785ced*/
+  this->controlPointTangentLengths.begin = 0; /*0x785cf0*/
+  this->controlPointTangentLengths.end = 0; /*0x785cf3*/
+  this->controlPointTangentLengths.capacity = 0; /*0x785cf6*/
+  this->evenlySpacedPoints.begin = 0; /*0x785cf9*/
+  this->evenlySpacedPoints.end = 0; /*0x785cfc*/
+  this->evenlySpacedPoints.capacityEnd = 0; /*0x785cff*/
+  this->splinePoints.begin = 0; /*0x785d02*/
+  this->splinePoints.end = 0; /*0x785d05*/
+  this->splinePoints.capacityEnd = 0; /*0x785d08*/
+  OB_StBezierSpline_CopyFrom_010201A0(this, source); /*0x785d15*/
+  return this; /*0x785d1c*/
 }

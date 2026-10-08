@@ -41,12 +41,12 @@
 0x46B8D8: mov     ecx, esi
 0x46B8DA: call    eax
 0x46B8DC: mov     edx, [edi]
-0x46B8DE: push    eax; Str2
+0x46B8DE: push    eax; right
 0x46B8DF: mov     eax, [edx+0D4h]
 0x46B8E5: mov     ecx, edi
 0x46B8E7: call    eax
-0x46B8E9: push    eax; Str1
-0x46B8EA: call    __strcmp
+0x46B8E9: push    eax; left
+0x46B8EA: call    CRT_StricmpLocaleDispatch
 0x46B8EF: add     esp, 8
 0x46B8F2: test    eax, eax
 0x46B8F4: jnz     short loc_46B895

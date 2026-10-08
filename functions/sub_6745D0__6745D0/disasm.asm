@@ -50,7 +50,6 @@
 0x674650: jz      loc_674780
 0x674656: mov     bl, 2
 0x674658: jmp     short loc_674660
-0x67465A: align 10h
 0x674660: mov     edi, [esi]
 0x674662: test    edi, edi
 0x674664: jz      loc_674780
@@ -76,7 +75,7 @@
 0x6746B2: mov     ecx, edi; this
 0x6746B4: call    sub_6599B0; Noope the struct asosciated to the this pointer is bigger
 0x6746B9: fstp    [esp+10h+var_4]
-0x6746BD: mov     ecx, offset TimeGlobals
+0x6746BD: mov     ecx, 0B332E0h
 0x6746C2: call    TimeGlobals_GetGameHour
 0x6746C7: fstp    [esp+10h+arg_0]
 0x6746CB: fld     [esp+10h+arg_0]
@@ -135,7 +134,7 @@
 0x674763: mov     edx, [eax]
 0x674765: push    eax
 0x674766: mov     [esi], edx
-0x674768: call    FormHeapFree
+0x674768: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67476D: add     esp, 4
 0x674770: jmp     loc_674660
 0x674775: mov     dword ptr [esi], 0
@@ -146,14 +145,14 @@
 0x674787: mov     eax, [esi+4]
 0x67478A: mov     edi, [eax+4]
 0x67478D: push    eax
-0x67478E: call    FormHeapFree
+0x67478E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x674793: add     esp, 4
 0x674796: test    edi, edi
 0x674798: mov     [esi+4], edi
 0x67479B: jnz     short loc_674787
 0x67479D: push    esi
 0x67479E: mov     dword ptr [esi], 0
-0x6747A4: call    FormHeapFree
+0x6747A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6747A9: add     esp, 4
 0x6747AC: pop     edi
 0x6747AD: pop     esi

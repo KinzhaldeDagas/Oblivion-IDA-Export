@@ -1,4 +1,4 @@
-0x62EF80: sub     esp, 8
+0x62EF80: sub     esp, 8; RadiantAI: action code 3 handler target. Hex-Rays decompile failed; disassembly shows current package/target handling. Needs manual decode before any hook.
 0x62EF83: push    ebp
 0x62EF84: push    esi
 0x62EF85: mov     esi, ecx
@@ -36,11 +36,11 @@
 0x62EFEE: mov     ecx, [ebp+28h]
 0x62EFF1: test    ecx, ecx
 0x62EFF3: jz      short loc_62F00A
-0x62EFF5: call    sub_452A60
+0x62EFF5: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62EFFA: test    eax, eax
 0x62EFFC: jz      short loc_62F00A
 0x62EFFE: mov     ecx, [ebp+28h]
-0x62F001: call    sub_452A60
+0x62F001: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x62F006: mov     [esp+14h+var_8], eax
 0x62F00A: mov     ecx, [esp+14h+var_8]
 0x62F00E: mov     eax, [esi]
@@ -150,8 +150,8 @@
 0x62F13B: test    al, 1
 0x62F13D: jz      short loc_62F144
 0x62F13F: mov     byte ptr [esp+18h+arg_0], 0
-0x62F144: mov     ecx, edi
-0x62F146: call    sub_5E32D0
+0x62F144: mov     ecx, edi; this
+0x62F146: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x62F14B: test    al, al
 0x62F14D: mov     ecx, edi; this
 0x62F14F: jz      short loc_62F177
@@ -209,12 +209,12 @@
 0x62F1F8: push    0
 0x62F1FA: push    1
 0x62F1FC: push    0
-0x62F1FE: mov     ecx, eax
-0x62F200: call    TESHealthForm_GetHealth
+0x62F1FE: mov     ecx, eax; this
+0x62F200: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x62F205: push    eax
 0x62F206: push    esi
 0x62F207: mov     ecx, edi
-0x62F209: call    Actor_EquipItem
+0x62F209: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x62F20E: pop     ebx
 0x62F20F: pop     edi
 0x62F210: pop     esi

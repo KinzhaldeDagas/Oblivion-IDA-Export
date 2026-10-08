@@ -1,4 +1,4 @@
-0x5400E0: mov     eax, [esp+arg_4]
+0x5400E0: mov     eax, [esp+arg_4]; Exterior fog-color decode: blends up to four packed weather RGB colors and weights into a Sky RGB vector; caller 0x5418F0 uses colorSlot 1 for active exterior fog color.
 0x5400E4: mov     edx, ecx
 0x5400E6: movzx   ecx, byte ptr [eax]
 0x5400E9: mov     [esp+arg_4], ecx
@@ -9,33 +9,33 @@
 0x5400F9: fldz
 0x5400FB: fadd    st(1), st
 0x5400FD: fxch    st(1)
-0x5400FF: fstp    [esp+4+arg_4]
+0x5400FF: fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper accumulates packed color[0].r * weight[0]; caller 0x5418F0 supplies weather color slots including fog slot 1.
 0x540103: fld     [esp+4+arg_4]
 0x540107: mov     [esp+4+arg_4], ecx
 0x54010B: fild    [esp+4+arg_4]
 0x54010F: movzx   ecx, byte ptr [eax+8]
 0x540113: fmul    dword ptr [eax+14h]
 0x540116: faddp   st(1), st
-0x540118: fstp    [esp+4+arg_4]
+0x540118: fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper adds packed color[1].r * weight[1] for adjacent phase or second-weather blend.
 0x54011C: fld     [esp+4+arg_4]
 0x540120: mov     [esp+4+arg_4], ecx
 0x540124: fild    [esp+4+arg_4]
 0x540128: movzx   ecx, byte ptr [eax+0Ch]
 0x54012C: fmul    dword ptr [eax+18h]
 0x54012F: faddp   st(1), st
-0x540131: fstp    [esp+4+arg_4]
+0x540131: fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper adds packed color[2].r * weight[2] when transition contributes a second weather.
 0x540135: fld     [esp+4+arg_4]
 0x540139: mov     [esp+4+arg_4], ecx
 0x54013D: fild    [esp+4+arg_4]
 0x540141: mov     ecx, [esp+4+arg_0]
 0x540145: fmul    dword ptr [eax+1Ch]
 0x540148: faddp   st(1), st
-0x54014A: fstp    [esp+4+arg_4]
+0x54014A: fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper adds packed color[3].r * weight[3] before 1/255 normalization.
 0x54014E: fld     [esp+4+arg_4]
 0x540152: fld     qword ptr ds:0A3F398h
 0x540158: fmul    st(1), st
 0x54015A: fxch    st(1)
-0x54015C: fstp    dword ptr [ecx]
+0x54015C: fstp    dword ptr [ecx]; Exterior fog-color decode: writes blended RGB.r to caller-provided Sky color vector; for colorSlot 1 this is Sky+0x48 fogColor.r.
 0x54015E: movzx   esi, byte ptr [eax+1]
 0x540162: mov     [esp+4+arg_4], esi
 0x540166: movzx   esi, byte ptr [eax+5]
@@ -65,7 +65,7 @@
 0x5401BA: fstp    [esp+4+arg_4]
 0x5401BE: fld     [esp+4+arg_4]
 0x5401C2: fmul    st, st(1)
-0x5401C4: fstp    dword ptr [ecx+4]
+0x5401C4: fstp    dword ptr [ecx+4]; Exterior fog-color decode: writes blended RGB.g to caller-provided Sky color vector; for colorSlot 1 this is Sky+0x4C fogColor.g.
 0x5401C7: movzx   esi, byte ptr [eax+2]
 0x5401CB: mov     [esp+4+arg_4], esi
 0x5401CF: movzx   esi, byte ptr [eax+6]
@@ -98,7 +98,7 @@
 0x54022C: fmul    st, st(1)
 0x54022E: fstp    [esp+arg_4]
 0x540232: fld     [esp+arg_4]
-0x540236: fst     dword ptr [ecx+8]
+0x540236: fst     dword ptr [ecx+8]; Exterior fog-color decode: writes blended RGB.b to caller-provided Sky color vector; for colorSlot 1 this is Sky+0x50 fogColor.b.
 0x540239: fld     [esp+arg_8]
 0x54023D: fld1
 0x54023F: fcom    st(1)
@@ -127,7 +127,7 @@
 0x54027D: fxch    st(4)
 0x54027F: faddp   st(1), st
 0x540281: fstp    dword ptr [ecx+8]
-0x540284: mov     eax, [edx+10h]
+0x540284: mov     eax, [edx+10h]; Fog weather-field decode: RGB helper optionally clamps blended color against firstWeather +0x54/+0x55/+0x56 per-channel caps after additive weather contribution.
 0x540287: test    eax, eax
 0x540289: jz      loc_540353
 0x54028F: movzx   eax, byte ptr [eax+54h]
@@ -137,7 +137,7 @@
 0x54029D: fmul    st, st(4)
 0x54029F: fmul    st, st(1)
 0x5402A1: fadd    st, st(5)
-0x5402A3: fstp    [esp+arg_8]
+0x5402A3: fstp    [esp+arg_8]; Fog weather-field decode: red channel cap uses firstWeather byte +0x54 scaled by 1/255; cap applies to caller target including fog color slot 1.
 0x5402A7: fld     [esp+arg_8]
 0x5402AB: fcom    st(3)
 0x5402AD: fnstsw  ax
@@ -161,7 +161,7 @@
 0x5402DA: fmul    st, st(3)
 0x5402DC: fmul    st, st(2)
 0x5402DE: fadd    st, st(4)
-0x5402E0: fstp    [esp+arg_8]
+0x5402E0: fstp    [esp+arg_8]; Fog weather-field decode: green channel cap uses firstWeather byte +0x55 scaled by 1/255; cap applies to caller target including fog color slot 1.
 0x5402E4: fld     dword ptr [ecx+4]
 0x5402E7: fld     [esp+arg_8]
 0x5402EB: fcom    st(1)
@@ -186,7 +186,7 @@
 0x54031D: fmulp   st(1), st
 0x54031F: faddp   st(2), st
 0x540321: fxch    st(1)
-0x540323: fstp    [esp+arg_8]
+0x540323: fstp    [esp+arg_8]; Fog weather-field decode: blue channel cap uses firstWeather byte +0x56 scaled by 1/255; cap applies to caller target including fog color slot 1.
 0x540327: fld     dword ptr [ecx+8]
 0x54032A: fld     [esp+arg_8]
 0x54032E: fcom    st(1)

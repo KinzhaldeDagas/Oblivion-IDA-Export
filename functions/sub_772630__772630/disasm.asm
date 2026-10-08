@@ -1,4 +1,4 @@
-0x772630: mov     ecx, ds:0B4275Ch
+0x772630: mov     ecx, ds:0B4275Ch; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x772636: mov     eax, [ecx+8]
 0x772639: test    eax, eax
 0x77263B: push    esi

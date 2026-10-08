@@ -1,5 +1,5 @@
-0x76BEF0: push    esi
-0x76BEF1: mov     esi, [esp+4+arg_0]
+0x76BEF0: push    esi; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
+0x76BEF1: mov     esi, [esp+4+pixelFormat]
 0x76BEF5: mov     eax, [esi+0Ch]
 0x76BEF8: cmp     eax, 0FFFFFFFFh
 0x76BEFB: mov     cl, [esi+1]

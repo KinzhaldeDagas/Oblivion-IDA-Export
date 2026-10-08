@@ -25,9 +25,9 @@
 0x635F53: push    ecx
 0x635F54: mov     ecx, ebx
 0x635F56: call    sub_566B30
-0x635F5B: push    eax
-0x635F5C: mov     ecx, edi
-0x635F5E: call    sub_4D7E30
+0x635F5B: push    eax; pointXYZ
+0x635F5C: mov     ecx, edi; this
+0x635F5E: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x635F63: fstp    [esp+3Ch+var_20]
 0x635F67: mov     ecx, [ebx+24h]
 0x635F6A: xor     ebp, ebp
@@ -186,10 +186,10 @@
 0x63613C: cmp     byte ptr [esi+124h], 7Fh
 0x636143: jnz     loc_636219
 0x636149: mov     ecx, edi; this
-0x63614B: call    TESObjectREFR_GetParentCell
+0x63614B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x636150: mov     ecx, [esi+120h]; this
 0x636156: mov     ebp, eax
-0x636158: call    TESObjectREFR_GetParentCell
+0x636158: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63615D: cmp     ebp, eax
 0x63615F: jnz     loc_636219
 0x636165: mov     edx, [edi]
@@ -236,7 +236,7 @@
 0x6361F9: call    eax
 0x6361FB: mov     ecx, ds:0B333C4h
 0x636201: push    0
-0x636203: call    sub_5E0610
+0x636203: call    sub_5E0610; 3DTheft decode: Actor_SetMovementFlag wrapper calls process vfunc +0x2C4 with enabled=true.
 0x636208: mov     cl, byte ptr [esp+48h+var_C]
 0x63620C: mov     [esi+124h], cl
 0x636212: mov     byte ptr [esi+0D0h], 0
@@ -254,7 +254,7 @@
 0x636243: call    TESObjectREFR_GetWorldSpace
 0x636248: mov     ecx, [esi+120h]; this
 0x63624E: push    eax
-0x63624F: call    TESObjectREFR_GetParentCell
+0x63624F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x636254: mov     ecx, [ebp+0]
 0x636257: mov     edx, [ebp+4]
 0x63625A: push    eax
@@ -301,7 +301,7 @@
 0x6362E1: call    TESObjectREFR_GetWorldSpace
 0x6362E6: mov     ecx, [esi+120h]; this
 0x6362EC: push    eax
-0x6362ED: call    TESObjectREFR_GetParentCell
+0x6362ED: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6362F2: mov     ecx, [ebx]
 0x6362F4: mov     edx, [ebx+4]
 0x6362F7: push    eax
@@ -419,7 +419,7 @@
 0x636461: push    edi
 0x636462: mov     ecx, ebx
 0x636464: call    sub_5677B0
-0x636469: call    Double_To_SInt32
+0x636469: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x63646E: cmp     byte ptr [ebx+20h], 5
 0x636472: mov     [esp+48h+var_34], eax
 0x636476: jnz     short loc_63649F
@@ -432,7 +432,7 @@
 0x636485: mov     ecx, ebx
 0x636487: call    sub_566A40
 0x63648C: mov     ecx, eax; this
-0x63648E: call    TESObjectCELL_IsInterior
+0x63648E: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x636493: test    al, al
 0x636495: jz      short loc_63649F
 0x636497: mov     [esp+48h+var_34], 14h
@@ -567,7 +567,7 @@
 0x63663A: mov     ebx, [ebx+18h]
 0x63663D: mov     edi, [esi]
 0x63663F: push    ebx
-0x636640: call    sub_673980
+0x636640: call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x636645: sub     eax, 1
 0x636648: add     esp, 4
 0x63664B: push    eax
@@ -586,3 +586,266 @@
 0x63666A: jnz     short loc_6366B8
 0x63666C: mov     edx, [edi]
 0x63666E: mov     eax, [edx+380h]
+0x636A55: cmp     byte ptr [ebx+20h], 3
+0x636A59: mov     ebp, [esp+48h+var_38]
+0x636A5D: jnz     short loc_636AA6
+0x636A5F: test    ebp, ebp
+0x636A61: jz      short loc_636AA6
+0x636A63: mov     ecx, ebp
+0x636A65: call    sub_4D74B0
+0x636A6A: test    al, al
+0x636A6C: jz      short loc_636AA6
+0x636A6E: cmp     byte ptr [esp+48h+var_C], 0
+0x636A73: jz      short loc_636AA6
+0x636A75: mov     ecx, edi
+0x636A77: call    sub_5E4400
+0x636A7C: test    eax, eax
+0x636A7E: jnz     short loc_636AA6
+0x636A80: mov     eax, [esi]
+0x636A82: mov     edx, [eax+188h]
+0x636A88: push    1
+0x636A8A: push    edi
+0x636A8B: mov     ecx, esi
+0x636A8D: call    edx
+0x636A8F: mov     eax, [esi]
+0x636A91: mov     edx, [eax+194h]
+0x636A97: push    edi
+0x636A98: mov     ecx, esi
+0x636A9A: call    edx
+0x636A9C: pop     edi
+0x636A9D: pop     esi
+0x636A9E: pop     ebp
+0x636A9F: pop     ebx
+0x636AA0: add     esp, 28h
+0x636AA3: retn    10h
+0x636AA6: cmp     dword ptr [esi+1CCh], 0
+0x636AAD: jz      short loc_636AC4
+0x636AAF: push    1
+0x636AB1: push    ebp
+0x636AB2: call    sub_607B90
+0x636AB7: add     esp, 8
+0x636ABA: mov     dword ptr [esi+1CCh], 0
+0x636AC4: test    ebp, ebp
+0x636AC6: jz      loc_636BC3
+0x636ACC: mov     ecx, ebp
+0x636ACE: call    sub_4D74B0
+0x636AD3: test    al, al
+0x636AD5: jz      loc_636BC3
+0x636ADB: cmp     byte ptr [ebx+20h], 5
+0x636ADF: jz      loc_636BC3
+0x636AE5: cmp     byte ptr [esp+48h+var_C], 0
+0x636AEA: jz      loc_636BC3
+0x636AF0: cmp     dword ptr [esi+120h], 0
+0x636AF7: jnz     short loc_636AFF
+0x636AF9: mov     [esi+120h], ebp
+0x636AFF: mov     ecx, edi; this
+0x636B01: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x636B06: mov     ecx, [esi+120h]; this
+0x636B0C: mov     ebp, eax
+0x636B0E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x636B13: cmp     ebp, eax
+0x636B15: jnz     loc_636FBE
+0x636B1B: mov     eax, [esi]
+0x636B1D: mov     edx, [eax+36Ch]
+0x636B23: mov     ecx, esi
+0x636B25: call    edx
+0x636B27: cmp     eax, 4
+0x636B2A: jz      short loc_636B7F
+0x636B2C: mov     eax, [esi]
+0x636B2E: mov     edx, [eax+36Ch]
+0x636B34: mov     ecx, esi
+0x636B36: call    edx
+0x636B38: cmp     eax, 9
+0x636B3B: jz      short loc_636B7F
+0x636B3D: mov     eax, [esi]
+0x636B3F: mov     edx, [eax+1B4h]
+0x636B45: push    edi
+0x636B46: mov     ecx, esi
+0x636B48: call    edx
+0x636B4A: test    al, al
+0x636B4C: jnz     loc_636FBE
+0x636B52: mov     eax, [esi]
+0x636B54: mov     edx, [eax+188h]
+0x636B5A: push    1
+0x636B5C: push    edi
+0x636B5D: mov     ecx, esi
+0x636B5F: call    edx
+0x636B61: mov     eax, [esi]
+0x636B63: mov     edx, [eax+194h]
+0x636B69: push    edi
+0x636B6A: mov     ecx, esi
+0x636B6C: mov     dword ptr [esi+30h], 0
+0x636B73: call    edx
+0x636B75: pop     edi
+0x636B76: pop     esi
+0x636B77: pop     ebp
+0x636B78: pop     ebx
+0x636B79: add     esp, 28h
+0x636B7C: retn    10h
+0x636B7F: mov     eax, [ebx+1Ch]
+0x636B82: shr     eax, 1
+0x636B84: test    al, 1
+0x636B86: jz      short loc_636B96
+0x636B88: cmp     dword ptr [ebx+28h], 0
+0x636B8C: jnz     short loc_636B96
+0x636B8E: fldz
+0x636B90: fstp    dword ptr [esi+1ACh]
+0x636B96: cmp     byte ptr [esp+48h+var_4], 0
+0x636B9B: jz      short loc_636BAC
+0x636B9D: mov     edx, [esi]
+0x636B9F: mov     eax, [edx+188h]
+0x636BA5: push    1
+0x636BA7: push    edi
+0x636BA8: mov     ecx, esi
+0x636BAA: call    eax
+0x636BAC: mov     edx, [esi]
+0x636BAE: mov     eax, [edx+194h]
+0x636BB4: push    edi
+0x636BB5: mov     ecx, esi
+0x636BB7: call    eax
+0x636BB9: pop     edi
+0x636BBA: pop     esi
+0x636BBB: pop     ebp
+0x636BBC: pop     ebx
+0x636BBD: add     esp, 28h
+0x636BC0: retn    10h
+0x636BC3: mov     ecx, esi
+0x636BC5: call    sub_64ADA0
+0x636BCA: mov     edx, [esi]
+0x636BCC: mov     byte ptr [esp+48h+var_8], al
+0x636BD0: mov     eax, [edx+194h]
+0x636BD6: push    edi
+0x636BD7: mov     ecx, esi
+0x636BD9: call    eax
+0x636BDB: cmp     byte ptr [esp+4Ch+var_C], 0
+0x636BE0: jnz     loc_636D33
+0x636BE6: test    ebp, ebp
+0x636BE8: jz      short loc_636BFF
+0x636BEA: mov     edx, [ebp+0]
+0x636BED: mov     eax, [edx+170h]
+0x636BF3: mov     ecx, ebp
+0x636BF5: call    eax
+0x636BF7: cmp     eax, ds:0B35EB0h
+0x636BFD: jz      short loc_636C18
+0x636BFF: mov     ecx, [ebx+24h]
+0x636C02: test    ecx, ecx
+0x636C04: jz      loc_636D33
+0x636C0A: call    sub_569740
+0x636C0F: cmp     eax, 3
+0x636C12: jnz     loc_636D33
+0x636C18: mov     ecx, esi
+0x636C1A: call    sub_64ADA0
+0x636C1F: test    al, al
+0x636C21: jnz     loc_636D33
+0x636C27: mov     edx, [edi]
+0x636C29: mov     eax, [edx+18Ch]
+0x636C2F: mov     ecx, edi
+0x636C31: call    eax
+0x636C33: test    eax, eax
+0x636C35: jnz     loc_636D33
+0x636C3B: mov     edx, [esi]
+0x636C3D: mov     eax, [edx+4DCh]
+0x636C43: mov     ecx, esi
+0x636C45: call    eax
+0x636C47: test    al, al
+0x636C49: jnz     loc_636D33
+0x636C4F: test    ebp, ebp
+0x636C51: jz      short loc_636C58
+0x636C53: fld     dword ptr [ebp+28h]
+0x636C56: jmp     short loc_636C6C
+0x636C58: mov     edx, [edi]
+0x636C5A: mov     edx, [edx+0F0h]
+0x636C60: lea     eax, [esp+4Ch+var_20]
+0x636C64: push    eax
+0x636C65: mov     ecx, edi
+0x636C67: call    edx
+0x636C69: fld     dword ptr [eax+8]
+0x636C6C: fstp    [esp+4Ch+var_C]
+0x636C70: fldz
+0x636C72: fld     [esp+4Ch+var_C]
+0x636C76: fcom    st(1)
+0x636C78: fnstsw  ax
+0x636C7A: fstp    st(1)
+0x636C7C: test    ah, 5
+0x636C7F: fld     qword ptr ds:0A3D5B0h
+0x636C85: jp      short loc_636CA4
+0x636C87: call    unknown_libname_14
+0x636C8C: fstp    [esp+4Ch+var_C]
+0x636C90: fld     [esp+4Ch+var_C]
+0x636C94: fadd    qword ptr ds:0A3D5B0h
+0x636C9A: fstp    [esp+4Ch+var_C]
+0x636C9E: fld     [esp+4Ch+var_C]
+0x636CA2: jmp     short loc_636CC6
+0x636CA4: fcom    st(1)
+0x636CA6: fnstsw  ax
+0x636CA8: test    ah, 41h
+0x636CAB: jp      short loc_636CC4
+0x636CAD: call    unknown_libname_14
+0x636CB2: fstp    [esp+4Ch+var_C]
+0x636CB6: fld     [esp+4Ch+var_C]
+0x636CBA: fstp    [esp+4Ch+var_C]
+0x636CBE: fld     [esp+4Ch+var_C]
+0x636CC2: jmp     short loc_636CC6
+0x636CC4: fstp    st
+0x636CC6: fldz
+0x636CC8: lea     eax, [esp+4Ch+var_10]
+0x636CCC: push    eax; int
+0x636CCD: fstp    [esp+50h+var_10]
+0x636CD1: push    ecx
+0x636CD2: fstp    [esp+54h+var_54]; float
+0x636CD5: push    edi; int
+0x636CD6: call    sub_683D80
+0x636CDB: fstp    [esp+58h+var_4]
+0x636CDF: fld     [esp+58h+var_4]
+0x636CE3: add     esp, 0Ch
+0x636CE6: fabs
+0x636CE8: fstp    [esp+4Ch+var_4]
+0x636CEC: fld     [esp+4Ch+var_4]
+0x636CF0: fild    dword ptr ds:0B36C18h
+0x636CF6: fmul    qword ptr ds:0A31C78h
+0x636CFC: fstp    [esp+4Ch+var_4]
+0x636D00: fld     [esp+4Ch+var_4]
+0x636D04: fcompp
+0x636D06: fnstsw  ax
+0x636D08: test    ah, 5
+0x636D0B: jp      short loc_636D2A
+0x636D0D: fld     [esp+4Ch+var_C]
+0x636D11: push    1; char
+0x636D13: push    ecx
+0x636D14: fstp    [esp+54h+var_54]; float
+0x636D17: push    edi; Concurrency::details::SchedulerBase *
+0x636D18: call    sub_685530
+0x636D1D: add     esp, 0Ch
+0x636D20: pop     edi
+0x636D21: pop     esi
+0x636D22: pop     ebp
+0x636D23: pop     ebx
+0x636D24: add     esp, 28h
+0x636D27: retn    10h
+0x636D2A: push    30h ; '0'
+0x636D2C: mov     ecx, edi
+0x636D2E: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
+0x636D33: mov     ecx, esi
+0x636D35: call    sub_64ADA0
+0x636D3A: test    al, al
+0x636D3C: jz      short loc_636D57
+0x636D3E: mov     eax, [ebx+1Ch]
+0x636D41: mov     ecx, eax
+0x636D43: shr     ecx, 1
+0x636D45: test    cl, 1
+0x636D48: jnz     short loc_636D6D
+0x636D4A: shr     eax, 2
+0x636D4D: test    al, 1
+0x636D4F: jz      short loc_636D57
+0x636D51: cmp     byte ptr [ebx+20h], 6
+0x636D55: jz      short loc_636D6D
+0x636D57: cmp     byte ptr [esp+4Ch+var_8], 0
+0x636D5C: jz      short loc_636D6D
+0x636D5E: mov     edx, [esi]
+0x636D60: mov     eax, [edx+188h]
+0x636D66: push    1
+0x636D68: push    edi
+0x636D69: mov     ecx, esi
+0x636D6B: call    eax
+0x636D6D: mov     ecx, [ebx+1Ch]
+0x636D70: shr     ecx, 1

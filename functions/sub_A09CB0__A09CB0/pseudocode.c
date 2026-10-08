@@ -1,4 +1,4 @@
-BSStringT *sub_A09CB0()
+NiRTTI *sub_A09CB0()
 {
-  return sub_70E220(&stru_B3FAC0, "NiDepthStencilBuffer", (int)dword_B3FFC0);
+  return NiRTTI_Constructor(&stru_B3FAC0, "NiDepthStencilBuffer", &stru_B3FFC0); /*0xa09cc4*/
 }

@@ -1,4 +1,4 @@
 void __cdecl sub_A1FBA0()
 {
-  GameSetting_destr((int *)&fPotionT3AleMagMult);
+  GameSetting_destr((int *)&MEMORY[0xB37998][0x2A]); /*0xa1fba5*/
 }

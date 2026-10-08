@@ -1,67 +1,68 @@
-NiNode *__thiscall sub_4A9560(void *this, int a2, int a3)
+// TESAmmo 3D creator. Builds the generic bound-object clone, reads ExtraCount, and removes ArrowQuiver/ArrowN children so visible quiver arrows match the represented stack count.
+NiNode *__thiscall TESAmmo_CreateQuiver3D(TESBoundObject *this, TESObjectREFR *reference, int arg1)
 {
-  int v3; // edi
+  TESObjectREFR *v3; // edi
   NiNode *v4; // ebp
   int ExtraCount; // ebx
   int v6; // eax
   int v8; // eax
-  void (__thiscall ***v9)(_DWORD, int); // edi
+  TESObjectREFR *v9; // edi
   BSStringT v10; // [esp+18h] [ebp-14h] BYREF
   unsigned int v11; // [esp+28h] [ebp-4h]
 
-  v3 = a2;
-  v4 = sub_4B3750((int)this, a2, a3);
-  if ( v3 )
-    ExtraCount = ExtraDataList_GetExtraCount((ExtraDataList *)(v3 + 0x44));
+  v3 = reference; /*0x4a958b*/
+  v4 = TESBoundObject_Create3DImpl(this, reference, arg1); /*0x4a959a*/
+  if ( v3 ) /*0x4a959c*/
+    ExtraCount = ExtraDataList_GetExtraCount(&v3->member.baseExtraList); /*0x4a95a6*/
   else
-    ExtraCount = 1;
-  if ( v4 )
+    ExtraCount = 1; /*0x4a95ab*/
+  if ( v4 ) /*0x4a95b2*/
   {
-    if ( ExtraCount < iMaxArrowsInQuiver )
+    if ( ExtraCount < MEMORY[0xB35588] ) /*0x4a95ba*/
     {
-      if ( ExtraCount == 1 )
+      if ( ExtraCount == 1 ) /*0x4a95bf*/
       {
-        v6 = (int)v4->vtbl->super.GetObjectByName((NiAVObject *)v4, "ArrowQuiver");
-        if ( v6 )
+        v6 = (int)v4->vtbl->super.GetObjectByName((NiAVObject *)v4, "ArrowQuiver"); /*0x4a95ce*/
+        if ( v6 ) /*0x4a95d2*/
         {
-          (*(void (__thiscall **)(_DWORD, int *, int))(**(_DWORD **)(v6 + 0x1C) + 0x88))(
+          (*(void (__thiscall **)(_DWORD, int *, int))(**(_DWORD **)(v6 + 0x1C) + 0x88))( /*0x4a95e5*/
             *(_DWORD *)(v6 + 0x1C),
-            &a3,
+            &arg1,
             v6);
-          sub_7016A0((NiD3DVertexShader *)&a3);
+          NiPointerSlot_Release((NiD3DVertexShader *)&arg1); /*0x4a95eb*/
         }
-        sub_8A5720((int)v4);
+        sub_8A5720((int)v4); /*0x4a95f1*/
       }
       else
       {
-        while ( ExtraCount < iMaxArrowsInQuiver )
+        while ( ExtraCount < MEMORY[0xB35588] ) /*0x4a9617*/
         {
-          v10.m_data = 0;
-          *(_DWORD *)&v10.m_dataLen = 0;
-          v11 = 0;
-          BSStringT_Static_Format(&v10, "Arrow%d", ExtraCount);
-          v8 = (int)v4->vtbl->super.GetObjectByName((NiAVObject *)v4, v10.m_data);
-          if ( v8 )
+          v10.m_data = 0; /*0x4a9619*/
+          *(_DWORD *)&v10.m_dataLen = 0; /*0x4a961d*/
+          v11 = 0; /*0x4a9632*/
+          BSStringT_Static_Format(&v10, "Arrow%d", ExtraCount); /*0x4a9636*/
+          v8 = (int)v4->vtbl->super.GetObjectByName((NiAVObject *)v4, v10.m_data); /*0x4a964b*/
+          if ( v8 ) /*0x4a964f*/
           {
-            (*(void (__thiscall **)(_DWORD, int *, int))(**(_DWORD **)(v8 + 0x1C) + 0x88))(
+            (*(void (__thiscall **)(_DWORD, TESObjectREFR **, int))(**(_DWORD **)(v8 + 0x1C) + 0x88))( /*0x4a9662*/
               *(_DWORD *)(v8 + 0x1C),
-              &a2,
+              &reference,
               v8);
-            if ( a2 )
+            if ( reference ) /*0x4a966a*/
             {
-              v9 = (void (__thiscall ***)(_DWORD, int))a2;
-              if ( !InterlockedDecrement((volatile LONG *)(a2 + 4)) )
-                (**v9)(v9, 1);
+              v9 = reference; /*0x4a966c*/
+              if ( !InterlockedDecrement((volatile LONG *)&reference->member) ) /*0x4a9672*/
+                ((void (__thiscall *)(TESObjectREFR *, int))v9->vtbl->super.super.InitializeComponent)(v9, 1); /*0x4a9688*/
             }
           }
-          v11 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)v10.m_data);
-          v10.m_data = 0;
-          *(_DWORD *)&v10.m_dataLen = 0;
-          ++ExtraCount;
+          v11 = 0xFFFFFFFF; /*0x4a968f*/
+          FormHeapFree((unsigned int)v10.m_data); /*0x4a9697*/
+          v10.m_data = 0; /*0x4a969f*/
+          *(_DWORD *)&v10.m_dataLen = 0; /*0x4a96a8*/
+          ++ExtraCount; /*0x4a96ad*/
         }
       }
     }
   }
-  return v4;
+  return v4; /*0x4a95fb*/
 }

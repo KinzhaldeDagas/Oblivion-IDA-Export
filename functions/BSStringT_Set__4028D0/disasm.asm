@@ -16,7 +16,7 @@
 0x4028F0: sub     eax, edx
 0x4028F2: mov     esi, eax
 0x4028F4: cmp     esi, ebx
-0x4028F6: ja      short loc_4028FA
+0x4028F6: ja      short loc_4028FA; CNAM/SNAM callers pass a3=0, so BSStringT_Set computes strlen(a2). Payloads lacking an embedded NUL at sizes <=0x200 can read stack bytes past the chunk; native assignment is not deterministically bounded by currentChunk.length.
 0x4028F8: mov     esi, ebx
 0x4028FA: movzx   eax, word ptr [edi+6]
 0x4028FE: cmp     esi, eax
@@ -36,7 +36,7 @@
 0x40291D: jmp     short loc_40298F
 0x40291F: mov     eax, [edi]
 0x402921: push    eax
-0x402922: call    FormHeapFree
+0x402922: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x402927: xor     esi, esi
 0x402929: movzx   eax, si
 0x40292C: add     esp, 4
@@ -70,7 +70,7 @@
 0x40296E: jmp     short loc_402972
 0x402970: xor     esi, esi
 0x402972: push    ebx
-0x402973: call    FormHeapFree
+0x402973: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x402978: add     esp, 4
 0x40297B: cmp     esi, 0FFFFh
 0x402981: movzx   eax, si

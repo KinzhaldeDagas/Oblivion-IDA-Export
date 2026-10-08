@@ -1,7 +1,7 @@
 0x80CEF0: push    esi
 0x80CEF1: push    edi
 0x80CEF2: mov     edi, ecx
-0x80CEF4: mov     esi, offset dword_B455A0
+0x80CEF4: mov     esi, offset g_ShadowLightPassBySelector
 0x80CEF9: lea     esp, [esp+0]
 0x80CF00: mov     ecx, [esi]
 0x80CF02: mov     eax, [edi]

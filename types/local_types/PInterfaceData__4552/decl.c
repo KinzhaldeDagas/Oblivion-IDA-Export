@@ -1,1 +1,1 @@
-PInterfaceData
+typedef InterfaceData *PInterfaceData;

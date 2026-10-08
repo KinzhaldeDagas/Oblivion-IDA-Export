@@ -1,1 +1,1 @@
-bhkSpringAction
+struct bhkSpringAction;

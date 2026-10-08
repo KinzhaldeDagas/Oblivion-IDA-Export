@@ -1,19 +1,19 @@
-0x7609C0: sub     esp, 64h
+0x7609C0: sub     esp, 64h; DX10OBSE resource decode: initializes NiDX9SourceTextureData from existing D3D resource descriptions; rejects P8/A8P8, records dimensions, levels, and D3DFORMAT-derived NiSurfaceData.
 0x7609C3: push    ebx
 0x7609C4: push    ebp
 0x7609C5: push    esi
-0x7609C6: mov     esi, [esp+70h+arg_0]
+0x7609C6: mov     esi, [esp+70h+resource]
 0x7609CA: mov     eax, [esi]
 0x7609CC: push    edi
 0x7609CD: mov     ebx, ecx
 0x7609CF: mov     ecx, [eax+34h]
 0x7609D2: push    esi
-0x7609D3: call    ecx
+0x7609D3: call    ecx; Calls IDirect3DBaseTexture9::GetLevelCount on the created resource and records the actual runtime level count. For the persistent D3DX fast path this observes the complete chain synthesized from a one-level input.
 0x7609D5: cmp     eax, 1
 0x7609D8: setnz   dl
 0x7609DB: xor     ebp, ebp
 0x7609DD: mov     [ebx+5Ch], eax
-0x7609E0: mov     [ebx+65h], dl
+0x7609E0: mov     [ebx+65h], dl; Derived hasMultipleMipLevels byte is true whenever actual D3D GetLevelCount()!=1; leaf draw-time resolver uses this to retain or disable MIPFILTER.
 0x7609E3: mov     [ebx+68h], ebp
 0x7609E6: mov     eax, [esi]
 0x7609E8: mov     ecx, [eax+28h]
@@ -53,8 +53,8 @@
 0x760A49: mov     ecx, [esp+74h+a1]
 0x760A4D: push    edx; a2
 0x760A4E: push    ecx; a1
-0x760A4F: call    D3DFMTToTextureFormat
-0x760A54: mov     esi, [esp+7Ch+arg_0]
+0x760A4F: call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
+0x760A54: mov     esi, [esp+7Ch+resource]
 0x760A5B: add     esp, 8
 0x760A5E: movzx   edx, byte ptr [ebx+0Dh]
 0x760A62: imul    edx, [esp+74h+var_48]
@@ -113,8 +113,8 @@
 0x760AEE: mov     ecx, 11h
 0x760AF3: push    edx; a1
 0x760AF4: rep movsd
-0x760AF6: call    D3DFMTToTextureFormat
-0x760AFB: mov     esi, [esp+7Ch+arg_0]
+0x760AF6: call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
+0x760AFB: mov     esi, [esp+7Ch+resource]
 0x760B02: add     esp, 8
 0x760B05: movzx   eax, byte ptr [ebx+0Dh]
 0x760B09: imul    eax, [esp+74h+var_48]
@@ -171,8 +171,8 @@
 0x760BA5: mov     ecx, [esp+74h+a1]
 0x760BA9: push    edx; a2
 0x760BAA: push    ecx; a1
-0x760BAB: call    D3DFMTToTextureFormat
-0x760BB0: mov     esi, [esp+7Ch+arg_0]
+0x760BAB: call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
+0x760BB0: mov     esi, [esp+7Ch+resource]
 0x760BB7: add     esp, 8
 0x760BBA: movzx   edx, byte ptr [ebx+0Dh]
 0x760BBE: imul    edx, [esp+74h+var_4C]

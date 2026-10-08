@@ -25,7 +25,7 @@
 0x89361A: cmp     ecx, esi
 0x89361C: jz      loc_893939
 0x893622: push    esi
-0x893623: call    sub_89F6B0
+0x893623: call    sub_89F6B0; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.
 0x893628: cmp     eax, esi
 0x89362A: jz      loc_893939
 0x893630: mov     edx, [eax]
@@ -37,11 +37,11 @@
 0x89363D: jz      loc_893939
 0x893643: cmp     [edi+0B6h], si
 0x89364A: jz      short loc_893664
-0x89364C: push    esi
-0x89364D: mov     ecx, edi
-0x89364F: call    sub_405790
+0x89364C: push    esi; index
+0x89364D: mov     ecx, edi; this
+0x89364F: call    NiNode_GetChildAtIndex
 0x893654: push    eax
-0x893655: push    offset dword_B3FAB0
+0x893655: push    offset parent
 0x89365A: call    NiRTTI_Cast
 0x89365F: add     esp, 8
 0x893662: mov     edi, eax
@@ -83,7 +83,7 @@
 0x8936DB: fdivrp  st(1), st
 0x8936DD: push    ecx
 0x8936DE: fstp    [esp+58h+arg_0]
-0x8936E2: call    sub_43F3E0
+0x8936E2: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8936E7: fld     dword ptr [eax]
 0x8936E9: fld     [esp+58h+arg_0]
 0x8936ED: add     esp, 8
@@ -145,7 +145,7 @@
 0x8937B0: push    eax; a2
 0x8937B1: mov     ecx, esi; this
 0x8937B3: mov     [esp+54h+var_4], ebp
-0x8937B7: call    sub_405680
+0x8937B7: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x8937BC: push    1Ch; Size
 0x8937BE: call    FormHeapAlloc
 0x8937C3: mov     edi, eax
@@ -166,7 +166,7 @@
 0x8937FA: push    eax; a2
 0x8937FB: mov     ecx, esi; this
 0x8937FD: mov     [esp+54h+var_4], ebp
-0x893801: call    sub_405680
+0x893801: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x893806: push    1Ch; Size
 0x893808: call    FormHeapAlloc
 0x89380D: mov     edi, eax
@@ -187,7 +187,7 @@
 0x893840: push    eax; a2
 0x893841: mov     ecx, esi; this
 0x893843: mov     [esp+54h+var_4], ebp
-0x893847: call    sub_405680
+0x893847: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x89384C: fldz
 0x89384E: mov     edi, [esp+50h+var_34]
 0x893852: fst     [esp+50h+var_30]
@@ -196,7 +196,7 @@
 0x89385E: push    edx
 0x89385F: fstp    [esp+54h+var_28]
 0x893863: mov     ecx, edi
-0x893865: call    sub_57E270
+0x893865: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x89386A: mov     edx, [eax]
 0x89386C: lea     ecx, [esp+50h+var_30]
 0x893870: push    ecx
@@ -240,7 +240,7 @@
 0x8938F7: mov     ecx, esi; this
 0x8938F9: mov     [esp+54h+var_4], ebp
 0x8938FD: mov     [eax+48h], edx
-0x893900: call    sub_405680
+0x893900: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x893905: mov     ecx, edi
 0x893907: call    sub_890BA0
 0x89390C: mov     edx, [eax]
@@ -249,12 +249,12 @@
 0x893916: push    esi
 0x893917: call    eax
 0x893919: mov     ecx, esi; this
-0x89391B: call    NiAVObject_InitializePropertyState
+0x89391B: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x893920: mov     eax, ds:0BA7A84h
 0x893925: test    eax, eax
 0x893927: jz      short loc_89392F
 0x893929: push    esi; _DWORD
-0x89392A: call    eax ; dword_BA7A84
+0x89392A: call    eax ; unk_BA7A84
 0x89392C: add     esp, 4
 0x89392F: or      dword ptr [edi+1F4h], 8000h
 0x893939: mov     ecx, [esp+50h+var_C]
@@ -266,3 +266,35 @@
 0x893948: pop     ebx
 0x893949: add     esp, 3Ch
 0x89394C: retn    4
+0x9D6470: mov     eax, [ebp+4]
+0x9D6473: push    eax
+0x9D6474: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D6479: pop     ecx
+0x9D647A: retn
+0x9D647B: mov     eax, [ebp+4]
+0x9D647E: push    eax
+0x9D647F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D6484: pop     ecx
+0x9D6485: retn
+0x9D6486: mov     eax, [ebp+4]
+0x9D6489: push    eax
+0x9D648A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D648F: pop     ecx
+0x9D6490: retn
+0x9D6491: mov     eax, [ebp+4]
+0x9D6494: push    eax
+0x9D6495: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D649A: pop     ecx
+0x9D649B: retn
+0x9D649C: mov     eax, [ebp-34h]
+0x9D649F: push    eax
+0x9D64A0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D64A5: pop     ecx
+0x9D64A6: retn
+0x9D64A7: mov     edx, [esp+arg_4]
+0x9D64AB: lea     eax, [edx-40h]
+0x9D64AE: mov     ecx, [edx-44h]
+0x9D64B1: xor     ecx, eax
+0x9D64B3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D64B8: mov     eax, offset stru_AFE320
+0x9D64BD: jmp     ___CxxFrameHandler3

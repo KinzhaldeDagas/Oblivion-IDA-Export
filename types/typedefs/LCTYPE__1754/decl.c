@@ -1,1 +1,1 @@
-LCTYPE
+typedef DWORD LCTYPE;

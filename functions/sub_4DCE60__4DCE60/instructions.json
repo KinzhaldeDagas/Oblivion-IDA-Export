@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4DCE90",
-    "line": "mov     ebp, [esp+10h+arg_0]",
+    "line": "mov     ebp, [esp+10h+firstPerson]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4DCE96",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,25 +145,25 @@
   },
   {
     "ea": "0x4DCEAB",
-    "line": "mov     byte ptr [esp+10h+arg_0], al",
+    "line": "mov     byte ptr [esp+10h+firstPerson], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DCEAF",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+firstPerson]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DCEB3",
-    "line": "push    edx",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DCEB4",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },

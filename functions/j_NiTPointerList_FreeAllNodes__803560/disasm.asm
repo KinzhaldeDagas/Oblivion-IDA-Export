@@ -1,1 +1,1 @@
-0x803560: jmp     NiTPointerList__FreeAllNodes
+0x803560: jmp     NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.

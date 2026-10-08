@@ -1,4 +1,5 @@
-double __userpurge sub_6C6B30@<st0>(float *this@<ecx>, int a2@<edi>, int a3, float a4)
+// Maps one sequence time into a partner sequence by matching case-insensitive m: text keys. Computes source local time without committing it, brackets the previous/next source morph keys with cycle wrap, finds identical full key strings in the partner, linearly interpolates between partner key times, then wraps the result to the partner start/end range. Used only by the native morph/transition update path.
+double __userpurge NiControllerSequence_MapTimeByMorphKeys@<st0>(float *this@<ecx>, int a2@<edi>, int a3, float a4)
 {
   float *v5; // ebx
   float *v6; // esi
@@ -43,160 +44,160 @@ double __userpurge sub_6C6B30@<st0>(float *this@<ecx>, int a2@<edi>, int a3, flo
   float v46; // [esp+38h] [ebp+8h]
   float v47; // [esp+38h] [ebp+8h]
 
-  HIDWORD(v31) = a2;
-  v5 = 0;
-  v6 = this;
-  v42 = sub_6C5FC0(a3, a4, 0);
-  v7 = *(_DWORD *)(a3 + 0x20);
-  v8 = v42;
-  v9 = *(_DWORD *)(v7 + 0xC);
-  v10 = *(_DWORD *)(v7 + 0x10);
-  v11 = 0;
-  v12 = 0;
-  v33 = 0;
-  v37 = 0;
-  if ( v9 )
+  HIDWORD(v31) = a2; /*0x6c6b3a*/
+  v5 = 0; /*0x6c6b3f*/
+  v6 = this; /*0x6c6b42*/
+  v42 = NiControllerSequence_AdvanceTime(a3, a4, 0); /*0x6c6b53*/
+  v7 = *(_DWORD *)(a3 + 0x20); /*0x6c6b57*/
+  v8 = v42; /*0x6c6b5a*/
+  v9 = *(_DWORD *)(v7 + 0xC); /*0x6c6b5e*/
+  v10 = *(_DWORD *)(v7 + 0x10); /*0x6c6b61*/
+  v11 = 0; /*0x6c6b64*/
+  v12 = 0; /*0x6c6b66*/
+  v33 = 0; /*0x6c6b6a*/
+  v37 = 0; /*0x6c6b6e*/
+  if ( v9 ) /*0x6c6b72*/
   {
-    v13 = v10;
-    v39 = v9;
-    do
+    v13 = v10; /*0x6c6b76*/
+    v39 = v9; /*0x6c6b78*/
+    do /*0x6c6bcf*/
     {
-      v14 = *(const char **)(v13 + 4);
-      if ( v14 )
+      v14 = *(const char **)(v13 + 4); /*0x6c6b80*/
+      if ( v14 ) /*0x6c6b85*/
       {
-        LODWORD(v31) = MaxCount;
-        if ( !_strnicmp(v14, off_B241C4, v31) )
+        LODWORD(v31) = MaxCount; /*0x6c6b93*/
+        if ( !_strnicmp(v14, off_B241C4, v31) ) /*0x6c6b96*/
         {
-          v37 = (float *)v13;
-          if ( !v12 )
-            v12 = (float *)v13;
-          if ( v42 <= (double)*(float *)v13 )
+          v37 = (float *)v13; /*0x6c6ba4*/
+          if ( !v12 ) /*0x6c6ba8*/
+            v12 = (float *)v13; /*0x6c6baa*/
+          if ( v42 <= (double)*(float *)v13 ) /*0x6c6bb9*/
           {
-            if ( !v5 )
-              v5 = (float *)v13;
+            if ( !v5 ) /*0x6c6bc3*/
+              v5 = (float *)v13; /*0x6c6bc5*/
           }
           else
           {
-            v33 = (float *)v13;
+            v33 = (float *)v13; /*0x6c6bbb*/
           }
         }
       }
-      v13 += 8;
-      --v39;
+      v13 += 8; /*0x6c6bc7*/
+      --v39; /*0x6c6bca*/
     }
-    while ( v39 );
-    v8 = v42;
-    v6 = this;
-    v11 = v37;
+    while ( v39 ); /*0x6c6bcf*/
+    v8 = v42; /*0x6c6bd1*/
+    v6 = this; /*0x6c6bd5*/
+    v11 = v37; /*0x6c6bd9*/
   }
-  v32 = 0;
-  if ( v5 )
+  v32 = 0; /*0x6c6be3*/
+  if ( v5 ) /*0x6c6be8*/
   {
-    if ( v33 )
+    if ( v33 ) /*0x6c6bec*/
     {
-      v15 = *v33;
+      v15 = *v33; /*0x6c6bee*/
     }
     else
     {
-      v33 = v11;
-      v15 = *(float *)(a3 + 0x2C) - *(float *)(a3 + 0x30) + *v11;
+      v33 = v11; /*0x6c6c1d*/
+      v15 = *(float *)(a3 + 0x2C) - *(float *)(a3 + 0x30) + *v11; /*0x6c6c24*/
     }
-    v44 = v15;
-    v17 = v8 - v44;
-    v18 = *v5 - v44;
+    v44 = v15; /*0x6c6c26*/
+    v17 = v8 - v44; /*0x6c6c30*/
+    v18 = *v5 - v44; /*0x6c6c32*/
   }
   else
   {
-    v5 = v12;
-    v32 = 1;
-    v16 = *v33;
-    v17 = v8 - v16;
-    v43 = *(float *)(a3 + 0x30) - *(float *)(a3 + 0x2C) + *v12;
-    v18 = v43 - v16;
+    v5 = v12; /*0x6c6bf4*/
+    v32 = 1; /*0x6c6bfa*/
+    v16 = *v33; /*0x6c6bff*/
+    v17 = v8 - v16; /*0x6c6c05*/
+    v43 = *(float *)(a3 + 0x30) - *(float *)(a3 + 0x2C) + *v12; /*0x6c6c10*/
+    v18 = v43 - v16; /*0x6c6c14*/
   }
-  v19 = *((_DWORD *)v6 + 8);
-  v20 = *(_DWORD *)(v19 + 0xC);
-  v21 = *(_DWORD *)(v19 + 0x10);
-  v40 = v33 == 0;
-  v45 = v5 == 0;
-  v22 = 0;
-  v23 = 0;
-  v24 = 0;
-  v35 = 0;
-  v36 = 0;
-  if ( v20 )
+  v19 = *((_DWORD *)v6 + 8); /*0x6c6c3b*/
+  v20 = *(_DWORD *)(v19 + 0xC); /*0x6c6c3e*/
+  v21 = *(_DWORD *)(v19 + 0x10); /*0x6c6c41*/
+  v40 = v33 == 0; /*0x6c6c44*/
+  v45 = v5 == 0; /*0x6c6c4b*/
+  v22 = 0; /*0x6c6c50*/
+  v23 = 0; /*0x6c6c52*/
+  v24 = 0; /*0x6c6c54*/
+  v35 = 0; /*0x6c6c58*/
+  v36 = 0; /*0x6c6c5c*/
+  if ( v20 ) /*0x6c6c64*/
   {
-    v25 = v21;
-    while ( 1 )
+    v25 = v21; /*0x6c6c66*/
+    while ( 1 ) /*0x6c6c68*/
     {
-      if ( v40 )
+      if ( v40 ) /*0x6c6c6d*/
       {
-        if ( v45 )
-          goto LABEL_30;
+        if ( v45 ) /*0x6c6c74*/
+          goto LABEL_30; /*0x6c6c74*/
       }
       else
       {
-        if ( !_strcmp(*(char **)(v25 + 4), *((char **)v33 + 1)) )
+        if ( !CRT_StricmpLocaleDispatch(*(unsigned __int8 **)(v25 + 4), *((unsigned __int8 **)v33 + 1)) ) /*0x6c6c84*/
         {
-          v35 = (float *)v25;
-          v40 = 1;
+          v35 = (float *)v25; /*0x6c6c90*/
+          v40 = 1; /*0x6c6c94*/
         }
-        if ( v45 )
-          goto LABEL_29;
+        if ( v45 ) /*0x6c6c9e*/
+          goto LABEL_29; /*0x6c6c9e*/
       }
-      if ( !_strcmp(*(char **)(v25 + 4), *((char **)v5 + 1)) )
+      if ( !CRT_StricmpLocaleDispatch(*(unsigned __int8 **)(v25 + 4), *((unsigned __int8 **)v5 + 1)) ) /*0x6c6ca8*/
       {
-        v36 = (float *)v25;
-        v45 = 1;
+        v36 = (float *)v25; /*0x6c6cb4*/
+        v45 = 1; /*0x6c6cb8*/
       }
 LABEL_29:
-      v22 = v35;
-      v23 = v36;
-      ++v24;
-      v25 += 8;
-      if ( v24 >= v20 )
+      v22 = v35; /*0x6c6cbd*/
+      v23 = v36; /*0x6c6cc1*/
+      ++v24; /*0x6c6cc5*/
+      v25 += 8; /*0x6c6cc8*/
+      if ( v24 >= v20 ) /*0x6c6ccd*/
       {
 LABEL_30:
-        v6 = this;
-        break;
+        v6 = this; /*0x6c6ccf*/
+        break; /*0x6c6ccf*/
       }
     }
   }
-  v46 = 0.0;
-  *(float *)&v41 = 0.0;
-  if ( v22 == v23 )
+  v46 = 0.0; /*0x6c6cd3*/
+  *(float *)&v41 = 0.0; /*0x6c6cdb*/
+  if ( v22 == v23 ) /*0x6c6cdf*/
   {
-    v41 = *(int *)v22;
-    v46 = *v23;
-    if ( v32 )
-      v46 = v6[0xC] - v6[0xB] + v46;
+    v41 = *(int *)v22; /*0x6c6ce8*/
+    v46 = *v23; /*0x6c6cee*/
+    if ( v32 ) /*0x6c6cf2*/
+      v46 = v6[0xC] - v6[0xB] + v46; /*0x6c6cfe*/
     else
-      *(float *)&v41 = *(float *)&v41 - (v6[0xC] - v6[0xB]);
+      *(float *)&v41 = *(float *)&v41 - (v6[0xC] - v6[0xB]); /*0x6c6d10*/
   }
   else
   {
-    if ( v23 )
-      v46 = *v23;
-    if ( v22 )
-      v41 = *(int *)v22;
-    if ( v46 < (double)*(float *)&v41 )
-      v46 = v46 + v6[0xC] - v6[0xB];
+    if ( v23 ) /*0x6c6d18*/
+      v46 = *v23; /*0x6c6d1c*/
+    if ( v22 ) /*0x6c6d22*/
+      v41 = *(int *)v22; /*0x6c6d26*/
+    if ( v46 < (double)*(float *)&v41 ) /*0x6c6d3b*/
+      v46 = v46 + v6[0xC] - v6[0xB]; /*0x6c6d45*/
   }
-  v38 = v17 / v18;
-  v47 = (v46 - *(float *)&v41) * v38 + *(float *)&v41;
-  result = v47;
-  v27 = v6[0xB];
-  v28 = v27 < v47;
-  v29 = v27 == v47;
-  v30 = v6[0xC];
-  if ( v28 || v29 )
+  v38 = v17 / v18; /*0x6c6c60*/
+  v47 = (v46 - *(float *)&v41) * v38 + *(float *)&v41; /*0x6c6d61*/
+  result = v47; /*0x6c6d65*/
+  v27 = v6[0xB]; /*0x6c6d69*/
+  v28 = v27 < v47; /*0x6c6d6c*/
+  v29 = v27 == v47; /*0x6c6d6c*/
+  v30 = v6[0xC]; /*0x6c6d70*/
+  if ( v28 || v29 ) /*0x6c6d73*/
   {
-    if ( v30 < result )
-      return (float)(result - (v6[0xC] - v6[0xB]));
+    if ( v30 < result ) /*0x6c6d96*/
+      return (float)(result - (v6[0xC] - v6[0xB])); /*0x6c6da4*/
   }
   else
   {
-    return (float)(result + v30 - v6[0xB]);
+    return (float)(result + v30 - v6[0xB]); /*0x6c6d85*/
   }
-  return result;
+  return result; /*0x6c6d89*/
 }

@@ -15,7 +15,7 @@
 0x6D8635: mov     esi, ecx
 0x6D8637: mov     edi, [esp+24h+arg_0]
 0x6D863B: push    edi
-0x6D863C: call    nullsub_returnvVoid_1arg
+0x6D863C: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6D8641: mov     ecx, edi
 0x6D8643: call    sub_7124A0
 0x6D8648: mov     edi, [esi+2Ch]
@@ -90,3 +90,12 @@
 0x6D8703: pop     ebx
 0x6D8704: add     esp, 10h
 0x6D8707: retn    4
+0x9C7C90: lea     ecx, [ebp-10h]; slot
+0x9C7C93: jmp     NiPointerSlot_Release
+0x9C7C98: mov     edx, [esp+arg_4]
+0x9C7C9C: lea     eax, [edx-14h]
+0x9C7C9F: mov     ecx, [edx-18h]
+0x9C7CA2: xor     ecx, eax
+0x9C7CA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7CA9: mov     eax, offset stru_AF0030
+0x9C7CAE: jmp     ___CxxFrameHandler3

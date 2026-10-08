@@ -1,4 +1,4 @@
-0x5465B5: fld     dword ptr ds:0B36700h
+0x5465B5: fld     dword ptr ds:0B36700h; Final Oblivion aggregation: adds fSneakBaseValue and the accumulated distance/sound/light/skill/context contributions, converts to an integer detection score, and preserves a minimum positive result of 1 where required.
 0x5465BB: fadd    [esp+arg_1C]
 0x5465BF: fadd    [esp+arg_4C]
 0x5465C3: fadd    [esp+arg_4]
@@ -20,4 +20,4 @@
 0x5465F1: retn
 0x5465F2: fstp    st
 0x5465F4: add     esp, 10h
-0x5465F7: jmp     Double_To_SInt32
+0x5465F7: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

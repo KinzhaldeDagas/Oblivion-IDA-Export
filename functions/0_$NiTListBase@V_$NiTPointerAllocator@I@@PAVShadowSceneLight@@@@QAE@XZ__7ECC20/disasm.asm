@@ -4,7 +4,7 @@
 0x7ECC28: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVShadowSceneLight@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,ShadowSceneLight *>::`vftable'
 0x7ECC2E: jz      short loc_7ECC39
 0x7ECC30: push    esi
-0x7ECC31: call    FormHeapFree
+0x7ECC31: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7ECC36: add     esp, 4
 0x7ECC39: mov     eax, esi
 0x7ECC3B: pop     esi

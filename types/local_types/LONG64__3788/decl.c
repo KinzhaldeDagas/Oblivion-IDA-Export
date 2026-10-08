@@ -1,1 +1,1 @@
-LONG64
+typedef __int64 LONG64;

@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x65BC41",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x65BC50",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

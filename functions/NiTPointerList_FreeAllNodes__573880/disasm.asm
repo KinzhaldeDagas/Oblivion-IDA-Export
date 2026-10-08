@@ -1,11 +1,10 @@
-0x573880: push    esi
+0x573880: push    esi; MEF v57 IMPLEMENTED 2026-10-08: v57 clear observer invalidates matching indices and receiver scopes before native destruction. Full-list dtor7C69C0 calls here7C69F6; receiver-list dtor7D5390 calls here7D53C6, including changed base vtables. No engine callbacks occur under private index lock.
 0x573881: push    edi
 0x573882: mov     edi, ecx
 0x573884: mov     esi, [edi+4]
 0x573887: test    esi, esi
 0x573889: jz      short loc_5738A2
 0x57388B: jmp     short loc_573890
-0x57388D: align 10h
 0x573890: mov     edx, [edi]
 0x573892: mov     eax, esi
 0x573894: mov     esi, [esi]

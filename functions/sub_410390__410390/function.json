@@ -1,18 +1,31 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 13,
-  "display_name": "sub_410390",
+  "chunks": [
+    [
+      "0x410390",
+      "0x4104BA"
+    ]
+  ],
+  "chunks_sha256": "2314c6d11a2acb64d4a67ba28dff726c4b5b3847220cf763955caa834d2fdcbf",
+  "comment_regular": "[Controller decode 2026-07-09] Non-player QueryControlState consumer: Activate control 5 and Escape control 29 during load/message pumping.\n\nModernWindowsCompatible decode: message/input pump called as sub_410390(1) during loading texture wait; preserved by patch helper.\n\n[Controller decode 2026-07-09] Non-player QueryControlState consumer: Activate control 5 and Escape control 29 during load/message pumping.",
+  "comment_repeatable": "ModernWindowsCompatible decode: message/input pump called as sub_410390(1) during loading texture wait; preserved by patch helper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 16,
+  "display_name": "Input_CheckLoadPumpControls",
   "end_ea": "0x4104BA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_410390",
+  "name": "Input_CheckLoadPumpControls",
   "segment": ".text",
   "sha256": "2314c6d11a2acb64d4a67ba28dff726c4b5b3847220cf763955caa834d2fdcbf",
   "size": 298,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x410390",
+  "total_chunk_size": 298,
   "type": "char __cdecl(char)",
   "xrefs_from_count": 136,
   "xrefs_to_count": 3

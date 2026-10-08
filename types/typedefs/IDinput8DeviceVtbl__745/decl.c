@@ -1,1 +1,35 @@
-IDinput8DeviceVtbl
+struct __declspec(align(4)) IDinput8DeviceVtbl
+{
+HRESULT (__stdcall *IDirectInputDevice2Impl_QueryInterface)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_AddRef)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_Release)(void *);
+void (__stdcall *SysKeyboardImpl_GetCapabilities)(IDirectInputDevice8 *, Unk1AF4 *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_EnumObjects)(void *);
+HRESULT (__stdcall *SysKeyboardImpl_GetProperty)(void *);
+void (__stdcall *IDirectInputDevice2Impl_SetProperty)(IDirectInputDevice8 *, signed int, int *);
+int (__cdecl *SysKeyboardImpl_Acquire)(IDirectInputDevice8 *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_Unacquire)(void *);
+HRESULT (__stdcall *SysKeyboardImpl_GetDeviceState)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_GetDeviceData)(IDirectInputDevice8 *this, DWORD cbObjectData, DIDEVICEOBJECTDATA *rgdod, DWORD *pdwInOut, DWORD dwFlags);
+void (__stdcall *IDirectInputDevice2Impl_SetDataFormat)(IDirectInputDevice8 *, void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_SetEventNotification)(void *);
+void (__stdcall *IDirectInputDevice2Impl_SetCooperativeLevel)(IDirectInputDevice8 *, HWND, signed int);
+HRESULT (__stdcall *SysKeyboardImpl_GetObjectInfo)(void *);
+HRESULT (__stdcall *SysKeyboardImpl_GetDeviceInfo)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_RunControlPanel)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_Initialize)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_CreateEffect)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_EnumEffects)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_GetEffectInfo)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_GetForceFeedbackState)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_SendForceFeedbackCommand)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_EnumCreatedEffectObjects)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_Escape)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_Poll)(void *);
+HRESULT (__stdcall *IDirectInputDevice2Impl_SendDeviceData)(void *);
+HRESULT (__stdcall *IDirectInputDevice7Impl_EnumEffectsInFile)(void *);
+HRESULT (__stdcall *IDirectInputDevice7Impl_WriteEffectToFile)(void *);
+HRESULT (__stdcall *SysKeyboardImpl_BuildActionMap)(void *);
+HRESULT (__stdcall *SysKeyboardImpl_SetActionMap)(void *);
+HRESULT (__stdcall *IDirectInputDevice8Impl_GetImageInfo)(void *);
+};

@@ -11,32 +11,32 @@ int __userpurge sub_9123C0@<eax>(double st7_0@<st0>, int **a2, float **a3, int a
   int v16; // [esp+24h] [ebp-Ch]
   float v17; // [esp+28h] [ebp-8h]
 
-  v7 = *a2 + 1;
-  *a2 = v7;
-  v8 = *v7;
-  v14 = *(__m128 *)(0x10 * (*v7 + 5) + a5);
-  sub_912140(a5, v8);
-  v17 = st7_0;
-  v10 = *a3;
-  *a3 += 4;
-  v15 = *v10;
-  v16 = *((_DWORD *)v10 + 1);
-  if ( v11 | v12 )
+  v7 = *a2 + 1; /*0x9123ce*/
+  *a2 = v7; /*0x9123d1*/
+  v8 = *v7; /*0x9123d6*/
+  v14 = *(__m128 *)(0x10 * (*v7 + 5) + a5); /*0x9123e8*/
+  sub_912140(a5, v8); /*0x9123ed*/
+  v17 = st7_0; /*0x9123fb*/
+  v10 = *a3; /*0x9123ff*/
+  *a3 += 4; /*0x912404*/
+  v15 = *v10; /*0x912408*/
+  v16 = *((_DWORD *)v10 + 1); /*0x912414*/
+  if ( v11 | v12 ) /*0x912411*/
   {
-    if ( v10[2] > (double)*(float *)&SrcStr && v10[2] - st7_0 > flt_A9CD64 )
+    if ( v10[2] > (double)*(float *)&SrcStr && v10[2] - st7_0 > flt_A9CD64 ) /*0x91243a*/
     {
-      st7_0 = st7_0 + flt_A46B14;
-      v17 = st7_0;
+      st7_0 = st7_0 + flt_A46B14; /*0x91243c*/
+      v17 = st7_0; /*0x912442*/
     }
   }
-  if ( st7_0 > *(float *)&SrcStr && v10[2] < (double)*(float *)&SrcStr && st7_0 - v10[2] > flt_A9CD64 )
+  if ( st7_0 > *(float *)&SrcStr && v10[2] < (double)*(float *)&SrcStr && st7_0 - v10[2] > flt_A9CD64 ) /*0x912473*/
   {
-    st7_0 = st7_0 - flt_A46B14;
-    v17 = st7_0;
+    st7_0 = st7_0 - flt_A46B14; /*0x912475*/
+    v17 = st7_0; /*0x91247b*/
   }
-  v10[2] = st7_0;
-  sub_8F1B60(&v14, a6, a7);
-  result = *(_DWORD *)(a5 + 0xB8) + 1;
-  *(_DWORD *)(a5 + 0xB8) = result;
-  return result;
+  v10[2] = st7_0; /*0x912482*/
+  sub_8F1B60(&v14, a6, a7); /*0x91248f*/
+  result = *(_DWORD *)(a5 + 0xB8) + 1; /*0x91249d*/
+  *(_DWORD *)(a5 + 0xB8) = result; /*0x91249e*/
+  return result; /*0x9124a4*/
 }

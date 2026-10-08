@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x470FC0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+slot]; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x470FDB",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x470FDE",
-    "line": "push    4; int",
+    "line": "push    4; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x470FE0",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x470FEA",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x470FED",
-    "line": "push    0; int",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x470FEF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x470FF1",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,25 +139,25 @@
   },
   {
     "ea": "0x470FFB",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x470FFE",
-    "line": "push    1; int",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x471000",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x471002",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,25 +175,25 @@
   },
   {
     "ea": "0x47100C",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x47100F",
-    "line": "push    2; int",
+    "line": "push    2; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x471011",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x471013",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x471049",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x47104C",
-    "line": "push    eax; int",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47104D",
-    "line": "call    sub_470B50",
+    "line": "call    BSAnimGroupSequence_Deactivate; BSAnimGroupSequence deactivation wrapper. Delegates to NiControllerSequence_Deactivate with the secondary stop flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x47106A",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+easeOutTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x47106D",
-    "line": "call    sub_6C4480",
+    "line": "call    NiControllerManager_DeactivateTransitionSources; Walks the controller manager's active sequence list and deactivates every sequence in native state 4 (transition source) using the caller-supplied ease-out time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x471076",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x471079",
-    "line": "mov     ecx, [esi+edi*4+0A0h]",
+    "line": "mov     ecx, [esi+edi*4+0A0h]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x471080",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+var_10]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x471083",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4710A2",
-    "line": "mov     dword ptr [esi+edi*4+48h], 0FFFFFFFFh",
+    "line": "mov     dword ptr [esi+edi*4+48h], 0FFFFFFFFh; ActorAnimData_ClearSlot sets the per-slot note/action state to -1, distinct from HighProcess.currentAction; clearing a sequence slot alone is not proof that process action 3 was cleared.",
     "mnemonic": "mov",
     "size": 8
   },

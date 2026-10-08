@@ -19,7 +19,7 @@
 0x648A0C: mov     [esp+24h+var_15], 1
 0x648A11: lea     ecx, [esi+44h]
 0x648A14: mov     [esp+24h+var_8], ecx
-0x648A18: call    GetExtraDataFollower
+0x648A18: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x648A1D: mov     edi, eax
 0x648A1F: cmp     edi, ebp
 0x648A21: mov     [esp+24h+var_4], edi
@@ -125,8 +125,8 @@
 0x648B48: test    esi, esi
 0x648B4A: mov     ebp, eax
 0x648B4C: jz      short loc_648B59
-0x648B4E: mov     ecx, esi
-0x648B50: call    sub_567770
+0x648B4E: mov     ecx, esi; this
+0x648B50: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x648B55: test    al, al
 0x648B57: jz      short loc_648B5F
 0x648B59: test    ebp, ebp
@@ -145,8 +145,8 @@
 0x648B7C: test    esi, esi
 0x648B7E: mov     ebp, eax
 0x648B80: jz      short loc_648B91
-0x648B82: mov     ecx, esi
-0x648B84: call    sub_567770
+0x648B82: mov     ecx, esi; this
+0x648B84: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x648B89: test    al, al
 0x648B8B: jz      short loc_648B93
 0x648B8D: test    ebp, ebp
@@ -166,7 +166,7 @@
 0x648BAB: call    BSSimpleList_PushFront
 0x648BB0: jmp     short loc_648BD8
 0x648BB2: mov     ecx, edi; this
-0x648BB4: call    Actor__GetProcessLevel
+0x648BB4: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x648BB9: test    eax, eax
 0x648BBB: jz      short loc_648BD8
 0x648BBD: mov     edx, [edi]
@@ -195,20 +195,20 @@
 0x648C04: jz      short loc_648C17
 0x648C06: mov     ecx, [esp+24h+var_8]
 0x648C0A: push    eax
-0x648C0B: call    sub_424D00
+0x648C0B: call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.
 0x648C10: mov     esi, [esi+4]
 0x648C13: cmp     esi, ebp
 0x648C15: jnz     short loc_648C00
 0x648C17: mov     ecx, [esp+24h+var_10]
-0x648C1B: call    BSSimpleList_Clear
+0x648C1B: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x648C20: mov     edx, [esp+24h+var_10]
 0x648C24: push    edx
-0x648C25: call    FormHeapFree
+0x648C25: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648C2A: add     esp, 4
 0x648C2D: mov     ecx, edi
-0x648C2F: call    BSSimpleList_Clear
+0x648C2F: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x648C34: push    edi
-0x648C35: call    FormHeapFree
+0x648C35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648C3A: mov     eax, [esp+28h+var_4]
 0x648C3E: mov     eax, [eax+0Ch]
 0x648C41: add     esp, 4
@@ -217,7 +217,7 @@
 0x648C49: cmp     [eax], ebp
 0x648C4B: jnz     short loc_648C56
 0x648C4D: mov     ecx, [esp+24h+var_8]
-0x648C51: call    sub_420F00
+0x648C51: call    ExtraDataList_RemoveFollowerExtra; Removes ExtraFollower (type 0x23) when present.
 0x648C56: pop     edi
 0x648C57: pop     esi
 0x648C58: pop     ebp

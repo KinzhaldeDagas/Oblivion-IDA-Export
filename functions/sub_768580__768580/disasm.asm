@@ -16,8 +16,8 @@
 0x7685AC: mov     [esp+24h+var_C], eax
 0x7685B0: push    edi
 0x7685B1: mov     edi, [esi+0Ch]
-0x7685B4: mov     ecx, edi
-0x7685B6: call    sub_777F10
+0x7685B4: mov     ecx, edi; this
+0x7685B6: call    NiGeometryBufferData_HasLiveStreams; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.
 0x7685BB: test    al, al
 0x7685BD: jnz     loc_7686D0
 0x7685C3: movzx   eax, word ptr [esi]

@@ -1,1 +1,1 @@
-SpectatorPackage
+struct SpectatorPackage;

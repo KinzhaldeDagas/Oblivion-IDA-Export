@@ -1,1 +1,6 @@
-NiTMap_Entry_TESCELL
+struct NiTMap_Entry_TESCELL
+{
+void *next;
+void *key;
+TESObjectCELL *data;
+};

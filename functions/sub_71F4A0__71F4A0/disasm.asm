@@ -36,7 +36,7 @@
 0x71F505: call    eax
 0x71F507: test    al, al
 0x71F509: jz      loc_71F665
-0x71F50F: cmp     dword ptr [esp+78h+var_60], 1
+0x71F50F: cmp     [esp+78h+var_60], 1
 0x71F514: jnz     loc_71F665
 0x71F51A: push    70h ; 'p'; Size
 0x71F51C: call    FormHeapAlloc
@@ -74,7 +74,6 @@
 0x71F585: pop     ebx
 0x71F586: add     esp, 68h
 0x71F589: retn    0Ch
-0x71F58C: align 10h
 0x71F590: mov     ebx, [esp+78h+arg_0]
 0x71F594: mov     eax, [ebx+esi*4]
 0x71F597: test    eax, eax
@@ -115,10 +114,10 @@
 0x71F605: mov     edx, [edi+5Ch]
 0x71F608: mov     edx, [edx+esi*4]
 0x71F60B: add     edx, [edi+50h]
-0x71F60E: push    eax; Size
-0x71F60F: push    ecx; Src
-0x71F610: push    edx; Dst
-0x71F611: call    _memcpy
+0x71F60E: push    eax; byteCount
+0x71F60F: push    ecx; source
+0x71F610: push    edx; destination
+0x71F611: call    _memcpy;
 0x71F616: add     esp, 0Ch
 0x71F619: test    esi, esi
 0x71F61B: jnz     short loc_71F635
@@ -130,9 +129,9 @@
 0x71F62D: push    ebx
 0x71F62E: mov     ecx, edi
 0x71F630: call    sub_71B140
-0x71F635: lea     ecx, [esp+78h+var_64]; this
+0x71F635: lea     ecx, [esp+78h+var_64]; slot
 0x71F639: mov     [esp+78h+var_4], 0FFFFFFFFh
-0x71F641: call    sub_7016A0
+0x71F641: call    NiPointerSlot_Release
 0x71F646: add     esi, 1
 0x71F649: cmp     esi, [esp+78h+arg_4]
 0x71F650: jb      loc_71F590
@@ -156,7 +155,21 @@
 0x71F680: push    1
 0x71F682: mov     ecx, edi
 0x71F684: call    edx
-0x71F686: lea     ecx, [esp+78h+var_64]; this
+0x71F686: lea     ecx, [esp+78h+var_64]; slot
 0x71F68A: mov     [esp+78h+var_4], 0FFFFFFFFh
-0x71F692: call    sub_7016A0
+0x71F692: call    NiPointerSlot_Release
 0x71F697: jmp     short loc_71F665
+0x9CA090: mov     eax, [ebp-64h]
+0x9CA093: push    eax
+0x9CA094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA099: pop     ecx
+0x9CA09A: retn
+0x9CA09B: lea     ecx, [ebp-64h]; slot
+0x9CA09E: jmp     NiPointerSlot_Release
+0x9CA0A3: mov     edx, [esp+arg_4]
+0x9CA0A7: lea     eax, [edx-68h]
+0x9CA0AA: mov     ecx, [edx-6Ch]
+0x9CA0AD: xor     ecx, eax
+0x9CA0AF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA0B4: mov     eax, offset stru_AF2840
+0x9CA0B9: jmp     ___CxxFrameHandler3

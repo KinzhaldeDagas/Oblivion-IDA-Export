@@ -1,4 +1,5 @@
-double __thiscall sub_4B9EC0(float *this)
+// Verified: getter for the TESObjectTREE minimum leaf/bud angle. BSTreeModel_ApplyBaseObject uses it as the lower bound passed to CSpeedTreeRT_SetMinimumBudAngle; Fallout's named homolog is GetMinimumLeafAngle.
+float __thiscall TESObjectTREE_GetMinimumLeafAngle(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this)
 {
-  return *(this + 0x17);
+  return this->minimumLeafAngle; /*0x4b9ec3*/
 }

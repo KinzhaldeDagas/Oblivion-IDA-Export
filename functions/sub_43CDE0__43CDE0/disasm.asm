@@ -22,7 +22,7 @@
 0x43CE2E: test    esi, esi
 0x43CE30: jz      loc_43CFE5
 0x43CE36: lea     ecx, [esi+0ECh]
-0x43CE3C: call    sub_6899C0
+0x43CE3C: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x43CE41: mov     [esp+130h+var_11C], eax
 0x43CE45: mov     eax, [edi]
 0x43CE47: mov     edx, [eax+14h]
@@ -66,7 +66,7 @@
 0x43CEB3: push    esi
 0x43CEB4: mov     ecx, eax
 0x43CEB6: mov     [esp+13Ch+var_11C], eax
-0x43CEBA: call    sub_48C870
+0x43CEBA: call    ContainerChanges_SelectBestArmorForSlot
 0x43CEBF: mov     edi, eax
 0x43CEC1: test    edi, edi
 0x43CEC3: jz      short loc_43CF18
@@ -99,7 +99,7 @@
 0x43CF08: mov     ecx, edi
 0x43CF0A: call    ContainerEntryExtraData_DestroyDataTable
 0x43CF0F: push    edi
-0x43CF10: call    FormHeapFree
+0x43CF10: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43CF15: add     esp, 4
 0x43CF18: push    0
 0x43CF1A: push    0FFFFFFFFh
@@ -107,7 +107,7 @@
 0x43CF20: push    ecx
 0x43CF21: mov     ecx, [esp+13Ch+var_11C]
 0x43CF25: push    esi
-0x43CF26: call    sub_48BDA0
+0x43CF26: call    sub_48BDA0; Sidecar NPC decode: deeper equippable-item selector carries actor/base interface context used by weapon rating paths. Wrapper must forward four stack args unchanged while pushing/popping owner context.
 0x43CF2B: mov     edi, eax
 0x43CF2D: test    edi, edi
 0x43CF2F: jz      short loc_43CF84
@@ -140,7 +140,7 @@
 0x43CF74: mov     ecx, edi
 0x43CF76: call    ContainerEntryExtraData_DestroyDataTable
 0x43CF7B: push    edi
-0x43CF7C: call    FormHeapFree
+0x43CF7C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43CF81: add     esp, 4
 0x43CF84: mov     ecx, [esp+130h+var_11C]
 0x43CF88: push    0
@@ -178,7 +178,7 @@
 0x43CFD5: mov     ecx, esi
 0x43CFD7: call    ContainerEntryExtraData_DestroyDataTable
 0x43CFDC: push    esi
-0x43CFDD: call    FormHeapFree
+0x43CFDD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43CFE2: add     esp, 4
 0x43CFE5: mov     ecx, [esp+130h+var_4]
 0x43CFEC: pop     edi

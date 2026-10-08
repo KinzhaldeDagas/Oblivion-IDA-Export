@@ -1,1 +1,1 @@
-HSPFILEQ
+typedef PVOID HSPFILEQ;

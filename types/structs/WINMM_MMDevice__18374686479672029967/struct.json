@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_WINMM_MMDevice",
+  "definition": "struct _WINMM_MMDevice\n{\nWAVEOUTCAPSW out_caps;\nWAVEINCAPSW in_caps;\nWCHAR_0 *dev_id;\nEDataFlow dataflow;\nISimpleAudioVolume_0 *volume;\nGUID session;\nUINT index;\nUINT mixer_count;\nCRITICAL_SECTION lock;\nWINMM_Device *devices[256];\n}\n",
   "id": 18374686479672029967,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "out_caps",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 84
+      "size": 84,
+      "type": "WAVEOUTCAPSW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "in_caps",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 80
+      "size": 80,
+      "type": "WAVEINCAPSW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dev_id",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dataflow",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "EDataFlow"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "volume",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "ISimpleAudioVolume_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "session",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 16
+      "offset_hex": "0xB0",
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "index",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mixer_count",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lock",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 32
+      "offset_hex": "0xC8",
+      "size": 32,
+      "type": "CRITICAL_SECTION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "devices",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 1024
+      "offset_hex": "0xE8",
+      "size": 1024,
+      "type": "WINMM_Device *[256]"
     }
   ],
   "name": "_WINMM_MMDevice",
+  "ordinal": 2257,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1256
 }

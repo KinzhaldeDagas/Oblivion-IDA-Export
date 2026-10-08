@@ -1,34 +1,36 @@
-char __thiscall sub_69EB60(_DWORD *this, float a2)
+// Verified MagicModelHitEffect_Update calls base lifetime/target checks, uses bFinished to stop the SpecialIdle_HitEffect controller sequence, and returns false after the visual is done so ActorProcessManager_UpdateTempEffects can remove it.
+bool __thiscall MagicModelHitEffect_Update(MagicHitEffect *this, float deltaSeconds)
 {
-  int v3; // ecx
-  NiObject *v4; // eax
-  int v5; // eax
+  TESObjectREFR *targetReference; // ecx
+  NiControllerManager *v4; // eax
+  NiControllerSequence *SequenceByName; // eax
 
-  v3 = *(this + 7);
-  if ( v3 && (*(int (__thiscall **)(int))(*(_DWORD *)v3 + 0x154))(v3) && sub_69D9A0((int)this, a2) )
+  targetReference = this->targetReference; /*0x69eb63*/
+  if ( targetReference && targetReference->vtbl->GetNiNode(targetReference) && MagicHitEffect_Update(this, deltaSeconds) ) /*0x69eb8a*/
   {
-    if ( *(this + 0xC) )
+    if ( *((_DWORD *)this + 0xC) ) /*0x69eb97*/
     {
-      (*(void (__thiscall **)(_DWORD *))(*this + 0x70))(this);
-      v4 = NiRTTI_Cast(&stru_B3CAC0, *(NiObject **)(*(this + 0xC) + 0xC));
-      if ( v4 )
+      this->super.vtable[1].super.Unk_02((NiObject *)this); /*0x69eba4*/
+      v4 = (NiControllerManager *)NiRTTI_Cast((BSStringT *)&stru_B3CAC0, *(NiObject **)(*((_DWORD *)this + 0xC) + 0xC)); /*0x69ebb2*/
+      if ( v4 ) /*0x69ebbc*/
       {
-        v5 = sub_4715A0(v4, (int)"SpecialIdle_HitEffect");
-        if ( v5 )
+        SequenceByName = NiControllerManager_FindSequenceByName(v4, "SpecialIdle_HitEffect"); /*0x69ebc5*/
+        if ( SequenceByName ) /*0x69ebce*/
         {
-          if ( *(float *)(v5 + 0x30) < (double)*(float *)(v5 + 0x34) && *(_DWORD *)(v5 + 0x44) )
+          if ( *((float *)SequenceByName + 0xC) < (double)*((float *)SequenceByName + 0xD) /*0x69ebdf*/
+            && *((_DWORD *)SequenceByName + 0x11) )
           {
-            if ( *(_DWORD *)(v5 + 0x24) != 2 && !*((_BYTE *)this + 0x24) )
-              return 1;
-            *((_BYTE *)this + 0x24) = 1;
-            sub_6C9CB0(v5, 0.0, 0);
-            *((float *)this + 2) = *((float *)this + 8);
+            if ( *((_DWORD *)SequenceByName + 9) != 2 && !this->bFinished ) /*0x69ebef*/
+              return 1; /*0x69ebef*/
+            this->bFinished = 1; /*0x69ebf9*/
+            NiControllerSequence_Deactivate(SequenceByName, 0.0, 0); /*0x69ebfd*/
+            this->super.durationSeconds = this->elapsedSeconds; /*0x69ec05*/
           }
         }
       }
     }
-    if ( !*((_BYTE *)this + 0x24) || *((float *)this + 2) + dbl_A3D0C0 >= *((float *)this + 8) )
-      return 1;
+    if ( !this->bFinished || this->super.durationSeconds + dbl_A3D0C0 >= this->elapsedSeconds ) /*0x69ec21*/
+      return 1; /*0x69ec26*/
   }
-  return 0;
+  return 0; /*0x69ec25*/
 }

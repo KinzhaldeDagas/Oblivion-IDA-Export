@@ -1,23 +1,26 @@
-_DWORD *__thiscall sub_452670(_DWORD *this, unsigned int a2, int a3)
+OblivionPostLoadFormArray *__thiscall OblivionPostLoadFormArray_Initialize(
+        OblivionPostLoadFormArray *self,
+        unsigned int capacity,
+        unsigned int growBy)
 {
   int v4; // ecx
   __int64 v5; // rax
 
-  *(this + 5) = a3;
-  v4 = 0;
-  *this = &NiTLargeArray<FormAndFlags *>::`vftable';
-  *(this + 2) = a2;
-  *(this + 3) = 0;
-  *(this + 4) = 0;
-  if ( a2 )
+  self->growBy = growBy; /*0x45267b*/
+  v4 = 0; /*0x45267e*/
+  self->vtable = &NiTLargeArray<FormAndFlags *>::`vftable'; /*0x452682*/
+  self->capacity = capacity; /*0x452688*/
+  self->count = 0; /*0x45268b*/
+  self->nonzeroCount = 0; /*0x45268e*/
+  if ( capacity ) /*0x452691*/
   {
-    v5 = 4LL * a2;
-    LOBYTE(v4) = HIDWORD(v5) != 0;
-    *(this + 1) = FormHeapAlloc(v5 | -v4);
+    v5 = 4LL * capacity; /*0x452698*/
+    LOBYTE(v4) = HIDWORD(v5) != 0; /*0x45269a*/
+    self->data = (OblivionPostLoadFormRecord **)FormHeapAlloc(v5 | -v4); /*0x4526a7*/
   }
   else
   {
-    *(this + 1) = 0;
+    self->data = 0; /*0x4526b3*/
   }
-  return this;
+  return self; /*0x4526af*/
 }

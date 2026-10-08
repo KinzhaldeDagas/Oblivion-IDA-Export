@@ -1,19 +1,32 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x45F180",
+      "0x45F2DE"
+    ]
+  ],
+  "chunks_sha256": "6b30a119b5594aa80b6d9f947083918ff74a350ba6b266a075b9ed6cdd2f7aa1",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: consumes form plus its 8-byte ChangeData entry. Uses form-type-specific masks (0xFFF generally, 0x7FF for REFR), deletes disallowed created forms, calls SaveLoad_NormalizeFormChangeFlags, invokes the form change callback, reloads the winning override through TESSaveLoadGame_ResetObject, runs DoPostFixup, then uses 45C020 to reconnect process/cell state. Called during TESSaveLoadGame_ReconcileExistingChanges (464790). Probable Fallout comparison: BGSSaveLoadGame::RevertCurrentChanges; implementation and flag policy differ.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_45F180",
+  "display_name": "TESSaveLoadGame_ResetFormForLoad",
   "end_ea": "0x45F2DE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45F180",
+  "name": "TESSaveLoadGame_ResetFormForLoad",
   "segment": ".text",
   "sha256": "6b30a119b5594aa80b6d9f947083918ff74a350ba6b266a075b9ed6cdd2f7aa1",
   "size": 350,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45F180",
-  "type": "void __userpurge(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, TESForm *, TESChildCELL *)",
+  "total_chunk_size": 350,
+  "type": "void __userpurge(TESSaveLoadGame_SerializationView *self@<ecx>, double arg2@<st2>, double arg3@<st1>, double arg4@<st0>, TESForm *form, OblivionChangeData *savedData)",
   "xrefs_from_count": 148,
   "xrefs_to_count": 1
 }

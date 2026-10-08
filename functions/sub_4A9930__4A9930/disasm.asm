@@ -1,4 +1,4 @@
-0x4A9930: cmp     ecx, offset dword_B35788
+0x4A9930: cmp     ecx, offset unk_B35788
 0x4A9936: mov     eax, [esp+arg_4]
 0x4A993A: jz      short loc_4A995B
 0x4A993C: mov     ecx, [esp+arg_8]

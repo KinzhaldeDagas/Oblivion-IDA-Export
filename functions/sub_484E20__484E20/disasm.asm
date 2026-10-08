@@ -12,7 +12,7 @@
 0x484E38: mov     eax, [esp+4+arg_0]
 0x484E3C: push    eax
 0x484E3D: mov     ecx, esi
-0x484E3F: call    sub_41EFD0
+0x484E3F: call    ExtraDataList_SetPoison; ExtraPoison setter always creates/updates raw serialized FormID, including zero. Post-load resolution removes zero/unresolved/non-AlchemyItem targets.
 0x484E44: call    sub_57B230
 0x484E49: pop     esi
 0x484E4A: retn    4

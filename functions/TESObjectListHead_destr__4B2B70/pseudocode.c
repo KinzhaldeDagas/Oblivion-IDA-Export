@@ -1,5 +1,5 @@
 // attributes: thunk
-int __thiscall TESObjectListHead_destr(_DWORD *this)
+void __thiscall TESObjectListHead_destr(_DWORD *this)
 {
-  return TESObjectListHead_Clear(this);
+  TESObjectListHead_Clear(this); /*0x4b2b70*/
 }

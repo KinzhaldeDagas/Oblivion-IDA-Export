@@ -10,10 +10,10 @@
 0x748C9F: call    FormHeapAlloc
 0x748CA4: mov     esi, eax
 0x748CA6: mov     eax, [esp+0Ch+Src]
-0x748CAA: push    edi; Size
-0x748CAB: push    eax; Src
-0x748CAC: push    esi; Dst
-0x748CAD: call    _memcpy
+0x748CAA: push    edi; byteCount
+0x748CAB: push    eax; source
+0x748CAC: push    esi; destination
+0x748CAD: call    _memcpy;
 0x748CB2: mov     ecx, [esp+18h+arg_10]
 0x748CB6: mov     edx, [esp+18h+arg_C]
 0x748CBA: push    ecx
@@ -28,7 +28,7 @@
 0x748CCC: call    sub_748920
 0x748CD1: push    esi
 0x748CD2: mov     edi, eax
-0x748CD4: call    FormHeapFree
+0x748CD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x748CD9: add     esp, 4
 0x748CDC: pop     esi
 0x748CDD: mov     eax, edi

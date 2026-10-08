@@ -17,11 +17,11 @@
 0x513632: push    eax
 0x513633: lea     eax, [esp+2C4h+var_C]
 0x51363A: mov     large fs:0, eax
-0x513640: mov     esi, [ebp+18h]
-0x513643: mov     edx, [ebp+arg_C]
+0x513640: mov     esi, dword ptr [ebp+arg_C+4]
+0x513643: mov     edx, dword ptr [ebp+arg_C]
 0x513646: mov     ecx, [ebp+a4]
-0x513649: mov     edi, [ebp+0Ch]
-0x51364C: mov     eax, [ebp+a1]
+0x513649: mov     edi, dword ptr [ebp+a1+4]
+0x51364C: mov     eax, dword ptr [ebp+a1]
 0x51364F: mov     [esp+2C4h+var_2A4], esi
 0x513653: mov     esi, [ebp+arg_14]
 0x513656: lea     ebx, [esp+2C4h+Format]
@@ -39,7 +39,7 @@
 0x513670: push    eax; a1
 0x513671: mov     [esp+2E4h+string], ecx
 0x513675: mov     [esp+2E4h+var_29C], edx
-0x513679: call    Script_ExtractArgs
+0x513679: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x51367E: add     esp, 20h
 0x513681: test    al, al
 0x513683: jnz     short loc_51368C
@@ -147,7 +147,7 @@
 0x5137D8: call    GameUI_QueueMessage
 0x5137DD: add     esp, 10h
 0x5137E0: push    esi
-0x5137E1: call    FormHeapFree
+0x5137E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5137E6: add     esp, 4
 0x5137E9: mov     al, 1
 0x5137EB: mov     ecx, [esp+2C4h+var_C]
@@ -162,3 +162,16 @@
 0x51380B: mov     esp, ebp
 0x51380D: pop     ebp
 0x51380E: retn
+0x9B7080: lea     ecx, [ebp+string]; void *
+0x9B7086: jmp     BSStringT_Clear
+0x9B708B: mov     edx, dword ptr [esp-4+a1+4]
+0x9B708F: lea     eax, [edx-2B4h]
+0x9B7095: mov     ecx, [edx-2B8h]
+0x9B709B: xor     ecx, eax
+0x9B709D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B70A2: add     eax, 0Ch
+0x9B70A5: mov     ecx, [edx-38h]
+0x9B70A8: xor     ecx, eax
+0x9B70AA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B70AF: mov     eax, offset stru_AE1D30
+0x9B70B4: jmp     ___CxxFrameHandler3

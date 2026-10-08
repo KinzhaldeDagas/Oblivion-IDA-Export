@@ -14,7 +14,7 @@
 0x6CA8FC: call    edx
 0x6CA8FE: test    eax, eax
 0x6CA900: jz      short loc_6CA910
-0x6CA902: cmp     eax, offset dword_B3CDF8
+0x6CA902: cmp     eax, offset stru_B3CDF8
 0x6CA907: jz      short loc_6CA918
 0x6CA909: mov     eax, [eax+4]
 0x6CA90C: test    eax, eax

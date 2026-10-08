@@ -10,9 +10,9 @@
 0x5AEEEB: jz      short loc_5AEEFD
 0x5AEEED: fld1
 0x5AEEEF: push    ecx
-0x5AEEF0: fstp    [esp+8+a2]; a3
-0x5AEEF3: push    0FA1h; a2
-0x5AEEF8: call    Tile_SetFloat
+0x5AEEF0: fstp    [esp+8+a2]; value
+0x5AEEF3: push    0FA1h; propertyCode
+0x5AEEF8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AEEFD: call    sub_5AE080
 0x5AEF02: call    sub_5BDA20
 0x5AEF07: mov     eax, ds:0B33B00h
@@ -46,11 +46,11 @@
 0x5AEF60: push    ebx
 0x5AEF61: mov     ebx, [esp+8+arg_4]
 0x5AEF65: push    esi
-0x5AEF66: mov     esi, [edi+54h]
+0x5AEF66: mov     esi, [edi+54h]; LoadgameMenu+0x54 points at the save-file BSSimpleList. Click user1 selects the corresponding node into +0x4C.
 0x5AEF69: push    0FAEh
 0x5AEF6E: mov     ecx, ebx
 0x5AEF70: call    Tile_GetFloat
-0x5AEF75: call    Double_To_SInt32
+0x5AEF75: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AEF7A: xor     ecx, ecx
 0x5AEF7C: test    esi, esi
 0x5AEF7E: jz      loc_5AF069

@@ -8,23 +8,23 @@ _DWORD *__thiscall sub_6AF660(_DWORD *this)
   _DWORD *v7; // ecx
   int v8; // edx
 
-  v2 = 1;
-  *this = 0;
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = FormHeapAlloc(0x4000u);
-  *(this + 4) = 8;
-  v3 = (_DWORD *)FormHeapAlloc(0x80u);
-  *(this + 5) = v3;
-  *v3 = 0;
-  for ( i = 4; i < 0x80; i += 4 )
+  v2 = 1; /*0x6af669*/
+  *this = 0; /*0x6af66e*/
+  *(this + 1) = 0; /*0x6af674*/
+  *(this + 2) = 0; /*0x6af67b*/
+  *(this + 3) = FormHeapAlloc(0x4000u); /*0x6af68c*/
+  *(this + 4) = 8; /*0x6af68f*/
+  v3 = (_DWORD *)FormHeapAlloc(0x80u); /*0x6af696*/
+  *(this + 5) = v3; /*0x6af69b*/
+  *v3 = 0; /*0x6af69e*/
+  for ( i = 4; i < 0x80; i += 4 ) /*0x6af6a7*/
   {
-    v5 = *(this + 5);
-    v6 = *(_DWORD *)(v5 + i - 4);
-    v7 = (_DWORD *)(i + v5);
-    v8 = v2 + v6;
-    v2 *= 2;
-    *v7 = v8;
+    v5 = *(this + 5); /*0x6af6b0*/
+    v6 = *(_DWORD *)(v5 + i - 4); /*0x6af6b3*/
+    v7 = (_DWORD *)(i + v5); /*0x6af6b7*/
+    v8 = v2 + v6; /*0x6af6b9*/
+    v2 *= 2; /*0x6af6be*/
+    *v7 = v8; /*0x6af6c5*/
   }
-  return this;
+  return this; /*0x6af6c9*/
 }

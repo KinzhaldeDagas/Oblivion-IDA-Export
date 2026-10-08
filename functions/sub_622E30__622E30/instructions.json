@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x622E53",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x622E55",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x622E5A",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622E5B",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622E5C",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x622E70",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x622E76",
-    "line": "call    sub_615520",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x622EA6",
-    "line": "call    sub_614290",
+    "line": "call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x622EB8",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x622EC3",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x622EC8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x622ECA",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x622F13",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x622F34",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x622F3F",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x622F44",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x622F46",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x622F51",
-    "line": "call    sub_614290",
+    "line": "call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x622F7B",
-    "line": "push    0; int",
+    "line": "push    0; unused",
     "mnemonic": "push",
     "size": 2
   },
@@ -607,13 +607,13 @@
   },
   {
     "ea": "0x622F80",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+maximumDistance]; maximumDistance",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x622F84",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x622F8A",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+surfaceDistance]; surfaceDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x622F8D",
-    "line": "call    sub_613440",
+    "line": "call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x622FAF",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x622FE4",
-    "line": "call    sub_614290",
+    "line": "call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x623033",
-    "line": "push    edi",
+    "line": "push    edi; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x623034",
-    "line": "call    sub_612690",
+    "line": "call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x62307C",
-    "line": "push    edi",
+    "line": "push    edi; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62307D",
-    "line": "call    sub_612670",
+    "line": "call    CombatMode_IsNonRangedMode; Returns true for native combat modes 0, 1, or 3; returns false for ranged weapon modes 2 and 4 and for values above 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x6230D2",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x6230F6",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x623142",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x623182",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },

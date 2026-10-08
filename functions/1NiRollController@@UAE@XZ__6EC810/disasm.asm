@@ -59,3 +59,15 @@
 0x6EC8B5: pop     ebp
 0x6EC8B6: add     esp, 10h
 0x6EC8B9: retn
+0x9C82C0: mov     ecx, [ebp-10h]; this
+0x9C82C3: jmp     ??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C82C8: mov     ecx, [ebp-10h]
+0x9C82CB: add     ecx, 40h ; '@'; slot
+0x9C82CE: jmp     NiPointerSlot_Release
+0x9C82D3: mov     edx, [esp+arg_4]
+0x9C82D7: lea     eax, [edx-10h]
+0x9C82DA: mov     ecx, [edx-14h]
+0x9C82DD: xor     ecx, eax
+0x9C82DF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82E4: mov     eax, offset stru_AF0588
+0x9C82E9: jmp     ___CxxFrameHandler3

@@ -19,9 +19,9 @@
 0x5AF46D: mov     edi, eax
 0x5AF46F: call    InterfaceManager_GetDepth
 0x5AF474: fstp    [esp+18h+var_C]
-0x5AF478: mov     ecx, [edi+68h]; TileWindow *
+0x5AF478: mov     ecx, [edi+68h]; this
 0x5AF47B: push    offset aDataMenusLockp; "Data\\Menus\\lockpick_menu.xml"
-0x5AF480: call    Menu_LoadXML
+0x5AF480: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5AF485: mov     ebx, eax
 0x5AF487: mov     ecx, ebx
 0x5AF489: mov     [esp+18h+var_4], ebx
@@ -76,10 +76,10 @@
 0x5AF524: jp      short loc_5AF53A
 0x5AF526: fld     [esp+18h+var_C]
 0x5AF52A: push    ecx
-0x5AF52B: fstp    [esp+1Ch+var_1C]; a3
-0x5AF52E: push    0FABh; a2
+0x5AF52B: fstp    [esp+1Ch+var_1C]; value
+0x5AF52E: push    0FABh; propertyCode
 0x5AF533: mov     ecx, ebx; this
-0x5AF535: call    Tile_SetFloat
+0x5AF535: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AF53A: xor     ecx, ecx
 0x5AF53C: cmp     byte ptr [edi+8], 1
 0x5AF540: setnz   cl
@@ -87,33 +87,33 @@
 0x5AF547: fild    [esp+18h+var_C]
 0x5AF54B: push    ecx
 0x5AF54C: mov     ecx, ebx; this
-0x5AF54E: fstp    [esp+1Ch+var_1C]; a3
-0x5AF551: push    0FAEh; a2
-0x5AF556: call    Tile_SetFloat
+0x5AF54E: fstp    [esp+1Ch+var_1C]; value
+0x5AF551: push    0FAEh; propertyCode
+0x5AF556: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AF55B: mov     edi, [esp+18h+arg_0]
 0x5AF55F: mov     [esi+38h], edi
 0x5AF562: mov     edx, ds:0B35EC8h
-0x5AF568: mov     ecx, ds:0B333C4h
-0x5AF56E: push    edx
-0x5AF56F: call    TESObjectREF_GetItemCount
+0x5AF568: mov     ecx, ds:0B333C4h; this
+0x5AF56E: push    edx; item
+0x5AF56F: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5AF574: mov     [esi+3Ch], eax
 0x5AF577: mov     eax, ds:0B35ECCh
-0x5AF57C: mov     ecx, ds:0B333C4h
-0x5AF582: push    eax
-0x5AF583: call    TESObjectREF_GetItemCount
+0x5AF57C: mov     ecx, ds:0B333C4h; this
+0x5AF582: push    eax; item
+0x5AF583: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5AF588: add     [esi+3Ch], eax
-0x5AF58B: mov     ecx, edi
-0x5AF58D: call    sub_4D7780
+0x5AF58B: mov     ecx, edi; this
+0x5AF58D: call    TESObjectREFR_GetEffectiveDoorLockLevel; Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.
 0x5AF592: fild    dword ptr [esi+3Ch]
 0x5AF595: push    ecx
 0x5AF596: mov     ecx, [esi+28h]; this
-0x5AF599: fstp    [esp+1Ch+var_1C]; a3
-0x5AF59C: push    0FB1h; a2
+0x5AF599: fstp    [esp+1Ch+var_1C]; value
+0x5AF59C: push    0FB1h; propertyCode
 0x5AF5A1: mov     [esi+48h], eax
-0x5AF5A4: call    Tile_SetFloat
+0x5AF5A4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AF5A9: mov     ecx, [esi+48h]
-0x5AF5AC: push    ecx
-0x5AF5AD: call    GetLockLevel
+0x5AF5AC: push    ecx; numericLockMagnitude
+0x5AF5AD: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5AF5B2: mov     eax, ds:0B03E1Ch[eax*4]
 0x5AF5B9: add     esp, 4
 0x5AF5BC: test    eax, eax
@@ -143,36 +143,36 @@
 0x5AF60B: fild    [esp+18h+var_C]
 0x5AF60F: push    ecx
 0x5AF610: mov     ecx, [esi+28h]; this
-0x5AF613: fstp    [esp+1Ch+var_1C]; a3
-0x5AF616: push    0FB2h; a2
-0x5AF61B: call    Tile_SetFloat
+0x5AF613: fstp    [esp+1Ch+var_1C]; value
+0x5AF616: push    0FB2h; propertyCode
+0x5AF61B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AF620: mov     ecx, [esi+48h]
-0x5AF623: push    ecx
-0x5AF624: call    GetLockLevel
+0x5AF623: push    ecx; numericLockMagnitude
+0x5AF624: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5AF629: add     esp, 4
 0x5AF62C: test    eax, eax
 0x5AF62E: jnz     short loc_5AF639
 0x5AF630: mov     dword ptr [esi+4Ch], 1
 0x5AF637: jmp     short loc_5AF68E
 0x5AF639: mov     edx, [esi+48h]
-0x5AF63C: push    edx
-0x5AF63D: call    GetLockLevel
+0x5AF63C: push    edx; numericLockMagnitude
+0x5AF63D: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5AF642: add     esp, 4
 0x5AF645: cmp     eax, 1
 0x5AF648: jnz     short loc_5AF653
 0x5AF64A: mov     dword ptr [esi+4Ch], 2
 0x5AF651: jmp     short loc_5AF68E
 0x5AF653: mov     eax, [esi+48h]
-0x5AF656: push    eax
-0x5AF657: call    GetLockLevel
+0x5AF656: push    eax; numericLockMagnitude
+0x5AF657: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5AF65C: add     esp, 4
 0x5AF65F: cmp     eax, 2
 0x5AF662: jnz     short loc_5AF66D
 0x5AF664: mov     dword ptr [esi+4Ch], 3
 0x5AF66B: jmp     short loc_5AF68E
 0x5AF66D: mov     ecx, [esi+48h]
-0x5AF670: push    ecx
-0x5AF671: call    GetLockLevel
+0x5AF670: push    ecx; numericLockMagnitude
+0x5AF671: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5AF676: add     esp, 4
 0x5AF679: cmp     eax, 3
 0x5AF67C: jnz     short loc_5AF687
@@ -269,27 +269,27 @@
 0x5AF795: mov     ecx, [esi+178h]
 0x5AF79B: push    0FB9h
 0x5AF7A0: call    Tile_GetFloat
-0x5AF7A5: call    Double_To_SInt32
+0x5AF7A5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AF7AA: mov     ecx, [esi+178h]
 0x5AF7B0: push    0FBAh
 0x5AF7B5: mov     [esi+98h], eax
 0x5AF7BB: call    Tile_GetFloat
-0x5AF7C0: call    Double_To_SInt32
+0x5AF7C0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AF7C5: mov     ecx, [esi+178h]
 0x5AF7CB: push    0FBBh
 0x5AF7D0: mov     [esi+0C0h], eax
 0x5AF7D6: call    Tile_GetFloat
-0x5AF7DB: call    Double_To_SInt32
+0x5AF7DB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AF7E0: mov     ecx, [esi+178h]
 0x5AF7E6: push    0FBCh
 0x5AF7EB: mov     [esi+0E8h], eax
 0x5AF7F1: call    Tile_GetFloat
-0x5AF7F6: call    Double_To_SInt32
+0x5AF7F6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AF7FB: mov     ecx, [esi+178h]
 0x5AF801: push    0FBDh
 0x5AF806: mov     [esi+110h], eax
 0x5AF80C: call    Tile_GetFloat
-0x5AF811: call    Double_To_SInt32
+0x5AF811: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AF816: fld     dword ptr ds:0A5ACDCh
 0x5AF81C: fstp    dword ptr [esi+64h]
 0x5AF81F: mov     [esi+138h], eax
@@ -339,10 +339,10 @@
 0x5AF8DE: call    sub_579320
 0x5AF8E3: mov     ecx, ds:0B35ECCh
 0x5AF8E9: add     esp, 8
-0x5AF8EC: push    ecx
-0x5AF8ED: mov     ecx, ds:0B333C4h
+0x5AF8EC: push    ecx; item
+0x5AF8ED: mov     ecx, ds:0B333C4h; this
 0x5AF8F3: mov     byte ptr ds:0B3B3F4h, 1
-0x5AF8FA: call    TESObjectREF_GetItemCount
+0x5AF8FA: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5AF8FF: test    eax, eax
 0x5AF901: mov     ecx, [esi+178h]
 0x5AF907: pop     ebp

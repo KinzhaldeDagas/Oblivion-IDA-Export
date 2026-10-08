@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x728B20",
+      "0x728B54"
+    ]
+  ],
+  "chunks_sha256": "cd65ef0d85008545f9068a703099b4fe646b7c0833175a0e5451dfffec8d79ab",
+  "comment_regular": "Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
+  "comment_repeatable": "Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_728B20",
+  "display_name": "NiGeometryData_UnlockVertexStream",
   "end_ea": "0x728B54",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_728B20",
+  "name": "NiGeometryData_UnlockVertexStream",
   "segment": ".text",
   "sha256": "cd65ef0d85008545f9068a703099b4fe646b7c0833175a0e5451dfffec8d79ab",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x728B20",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 52,
+  "type": "void __thiscall(NiGeometryData *self)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 14
 }

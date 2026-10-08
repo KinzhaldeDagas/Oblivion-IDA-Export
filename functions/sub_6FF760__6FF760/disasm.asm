@@ -8,7 +8,7 @@
 0x6FF76F: xor     al, al
 0x6FF771: pop     esi
 0x6FF772: retn    4
-0x6FF775: push    offset stru_B3F600; lpCriticalSection
+0x6FF775: push    offset unk_B3F600; lpCriticalSection
 0x6FF77A: call    dword ptr ds:0A2806Ch
 0x6FF780: call    dword ptr ds:0A2808Ch
 0x6FF786: add     dword ptr ds:0B3F67Ch, 1
@@ -40,19 +40,19 @@
 0x6FF7D7: movzx   eax, word ptr [esi+14h]
 0x6FF7DB: add     eax, eax
 0x6FF7DD: add     eax, eax
-0x6FF7DF: push    eax; Size
-0x6FF7E0: push    ecx; Src
-0x6FF7E1: push    edi; Dst
-0x6FF7E2: call    _memcpy
+0x6FF7DF: push    eax; byteCount
+0x6FF7E0: push    ecx; source
+0x6FF7E1: push    edi; destination
+0x6FF7E2: call    _memcpy;
 0x6FF7E7: mov     edx, [esi+10h]
 0x6FF7EA: push    edx
-0x6FF7EB: call    FormHeapFree
+0x6FF7EB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6FF7F0: add     esp, 14h
 0x6FF7F3: mov     [esi+10h], edi
 0x6FF7F6: sub     dword ptr ds:0B3F67Ch, 1
 0x6FF7FD: jnz     short loc_6FF809
 0x6FF7FF: mov     dword ptr ds:0B3F678h, 0
-0x6FF809: push    offset stru_B3F600; lpCriticalSection
+0x6FF809: push    offset unk_B3F600; lpCriticalSection
 0x6FF80E: call    dword ptr ds:0A28074h
 0x6FF814: pop     edi
 0x6FF815: mov     al, 1

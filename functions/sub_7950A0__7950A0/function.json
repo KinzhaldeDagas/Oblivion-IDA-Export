@@ -1,19 +1,32 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7950A0",
+  "chunks": [
+    [
+      "0x7950A0",
+      "0x795254"
+    ]
+  ],
+  "chunks_sha256": "d3c3c00d2798b0128c13323745755ed6dd5d157fb576a5e9a72a3ec67e2524f8",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): vector<unsigned int> insert-fill core. Handles in-place overlap and 1.5x geometric reallocation while preserving the checked insertion position.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): vector<unsigned int> insert-fill core. Handles in-place overlap and 1.5x geometric reallocation while preserving the checked insertion position.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_stVectorUInt32_InsertFill_010201A0",
   "end_ea": "0x795254",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7950A0",
+  "name": "OB_stVectorUInt32_InsertFill_010201A0",
   "segment": ".text",
   "sha256": "d3c3c00d2798b0128c13323745755ed6dd5d157fb576a5e9a72a3ec67e2524f8",
   "size": 436,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7950A0",
-  "type": "unsigned int __thiscall(_DWORD *this, int, _DWORD *Src, unsigned int, int *)",
-  "xrefs_from_count": 205,
+  "total_chunk_size": 436,
+  "type": "void __thiscall(OB_stVectorUInt32_010201A0 *this, OB_stVector4Iterator_010201A0 position, unsigned int count, const unsigned int *value)",
+  "xrefs_from_count": 207,
   "xrefs_to_count": 2
 }

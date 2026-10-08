@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F5120",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; MoonSugarEffect decode: NightEye active pass; one source texture, ratio/texel constants, +0x7C source ownership, direct begin/setup camera/draw/end cadence.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x7F52C8",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7F52D7",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x7F52E3",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x7F52F2",
-    "line": "call    NiRenderer_BeginScene1",
+    "line": "call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x7F5332",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x7F5340",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },

@@ -8,7 +8,7 @@
 0x597181: call    sub_596BC0
 0x597186: push    eax
 0x597187: mov     ecx, esi
-0x597189: call    sub_596CF0
+0x597189: call    ClassMenu_RefreshClassDetails; Morrowind Leveling hook: refresh extended ClassMenu minor skill traits after vanilla class display update.
 0x59718E: push    4; int
 0x597190: call    sub_57DE50
 0x597195: add     esp, 4

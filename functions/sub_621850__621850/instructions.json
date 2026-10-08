@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x62187A",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x621885",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x62188C",
-    "line": "call    sub_5E5640",
+    "line": "call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6218A8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x6218B4",
-    "line": "call    sub_6213D0",
+    "line": "call    CombatController_UpdateCombatModeState",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6218BC",
-    "line": "jmp     sub_61CE40",
+    "line": "jmp     sub_61CE40; Combat dodge selection consumes Actor_GetFatigueFraction; SmartAI reads the same resource without changing actions.",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -25,9 +25,9 @@
 0x521DDF: mov     ecx, esi
 0x521DE1: call    eax
 0x521DE3: mov     dword ptr [edi], 0
-0x521DE9: push    edi
-0x521DEA: lea     ecx, [ebx+1D8h]
-0x521DF0: call    sub_55E2A0
+0x521DE9: push    edi; incoming
+0x521DEA: lea     ecx, [ebx+1D8h]; this
+0x521DF0: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x521DF5: mov     esi, [ebx+1DCh]
 0x521DFB: test    esi, esi
 0x521DFD: jz      short loc_521E21

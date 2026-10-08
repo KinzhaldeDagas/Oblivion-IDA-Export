@@ -1,4 +1,4 @@
-0x50ED50: push    0FFFFFFFFh
+0x50ED50: push    0FFFFFFFFh; Verified registration as the TestSeenData script command. The callback creates a temporary NiNode using DebugRender_GetOrCreateVertexColorProperty, builds seen-data visualization from the current reference/cell state, updates it, and attaches it to the scene. Its precise rendering data format remains partly Unknown.
 0x50ED52: push    offset SEH_50ED50
 0x50ED57: mov     eax, large fs:0
 0x50ED5D: push    eax
@@ -26,15 +26,15 @@
 0x50ED9F: jmp     short loc_50EDA3
 0x50EDA1: xor     ebp, ebp
 0x50EDA3: mov     [esp+6Ch+var_4], 0FFFFFFFFh
-0x50EDAB: call    sub_4E70B0
+0x50EDAB: call    DebugRender_GetOrCreateVertexColorProperty; Verified TestSeenData command handler requests DebugRender_GetOrCreateVertexColorProperty. Its table row at B0C028 points to TestSeenData (A508CC) with description "Visually displays the current seen data" (A508A0), confirming the vertex-color property is shared beyond PathGrid debug rendering.
 0x50EDB0: push    eax; a2
 0x50EDB1: mov     ecx, ebp; this
-0x50EDB3: call    sub_405680
+0x50EDB3: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x50EDB8: mov     ecx, ds:0B333C4h; this
-0x50EDBE: call    TESObjectREFR_GetParentCell
+0x50EDBE: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x50EDC3: mov     edi, eax
 0x50EDC5: mov     ecx, edi; this
-0x50EDC7: call    TESObjectCELL_IsInterior
+0x50EDC7: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x50EDCC: test    al, al
 0x50EDCE: jz      loc_50EE75
 0x50EDD4: mov     ecx, edi
@@ -77,9 +77,9 @@
 0x50EE4F: lea     edi, [esp+6Ch+var_30]
 0x50EE53: rep movsd
 0x50EE55: push    ecx
-0x50EE56: lea     ecx, [esp+70h+var_30]
-0x50EE5A: fstp    [esp+70h+var_70]; float
-0x50EE5D: call    NiMatrix33_InitRotationTransform
+0x50EE56: lea     ecx, [esp+70h+var_30]; this
+0x50EE5A: fstp    [esp+70h+angleZ]; angleZ
+0x50EE5D: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x50EE62: lea     edi, [ebp+30h]
 0x50EE65: mov     ecx, 9
 0x50EE6A: lea     esi, [esp+6Ch+var_30]
@@ -151,13 +151,13 @@
 0x50EF45: push    ecx
 0x50EF46: fstp    [esp+74h+a2]; a2
 0x50EF49: mov     ecx, ebp; this
-0x50EF4B: call    NiAVObject_UpdateNiAVObject
+0x50EF4B: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x50EF50: mov     ecx, ebp; this
-0x50EF52: call    NiAVObject_InitializePropertyState
+0x50EF52: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x50EF57: fld     dword ptr ds:0A37CC8h
 0x50EF5D: push    ecx
 0x50EF5E: mov     ecx, ds:0B333A0h
-0x50EF64: fstp    [esp+70h+var_70]; float
+0x50EF64: fstp    [esp+70h+angleZ]; float
 0x50EF67: push    ebp; int
 0x50EF68: call    sub_440E60
 0x50EF6D: mov     al, 1
@@ -170,3 +170,15 @@
 0x50EF7E: pop     ebx
 0x50EF7F: add     esp, 58h
 0x50EF82: retn
+0x9B6E90: mov     eax, [ebp-4Ch]
+0x9B6E93: push    eax
+0x9B6E94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6E99: pop     ecx
+0x9B6E9A: retn
+0x9B6E9B: mov     edx, [esp+arg_4]
+0x9B6E9F: lea     eax, [edx-5Ch]
+0x9B6EA2: mov     ecx, [edx-60h]
+0x9B6EA5: xor     ecx, eax
+0x9B6EA7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6EAC: mov     eax, offset stru_AE1BA4
+0x9B6EB1: jmp     ___CxxFrameHandler3

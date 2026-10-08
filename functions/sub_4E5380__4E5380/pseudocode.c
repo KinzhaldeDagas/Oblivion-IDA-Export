@@ -1,36 +1,37 @@
-void __thiscall sub_4E5380(char *this, char *a2)
+// Verified insertion into TESPathGrid.pointsByCell (+0x44), which is a per-PathGrid 512-unit X/Y spatial-bucket map despite the legacy member/type spelling. It derives the packed key from the node's NiPoint3, finds or creates a BSSimpleList header, then pushes the point pointer. The graph-chunk loader calls this for each loaded point; FindPointByPositionInCell uses the same key.
+void __thiscall TESPathGrid_AddPointToSpatialBucket(TESPathGrid *this, TESPathGridPoint *point)
 {
-  char *v2; // ebp
-  float *v4; // eax
-  int v5; // esi
-  char *v6; // edi
-  char *v7; // ebx
-  char *v8; // eax
+  TESPathGridPoint *v2; // ebp
+  NiPoint3 *Position; // eax
+  unsigned int v5; // esi
+  TESPathGridCellPointMap *p_pointsByCell; // edi
+  TESPathGridPoint *v7; // ebx
+  TESPathGridPoint *v8; // eax
 
-  v2 = a2;
-  if ( a2 )
+  v2 = point; /*0x4e5381*/
+  if ( point ) /*0x4e538a*/
   {
-    v4 = (float *)sub_4BEF40(a2);
-    v5 = sub_4E5320(v4);
-    v6 = this + 0x44;
-    a2 = 0;
-    NiTMap_GetAt(v6, v5, &a2);
-    v7 = a2;
-    if ( !a2 )
+    Position = PathGraphNode_GetPosition(point); /*0x4e5390*/
+    v5 = TESPathGrid_PackSpatialBucketKey(Position); /*0x4e539b*/
+    p_pointsByCell = &this->pointsByCell; /*0x4e53a5*/
+    point = 0; /*0x4e53ab*/
+    NiTMap_GetAt(p_pointsByCell, v5, &point); /*0x4e53b3*/
+    v7 = point; /*0x4e53b8*/
+    if ( !point ) /*0x4e53be*/
     {
-      v8 = (char *)FormHeapAlloc(8u);
-      if ( v8 )
+      v8 = (TESPathGridPoint *)FormHeapAlloc(8u); /*0x4e53c2*/
+      if ( v8 ) /*0x4e53cc*/
       {
-        *(_DWORD *)v8 = 0;
-        *((_DWORD *)v8 + 1) = 0;
+        v8->totalEstimateCost = 0.0; /*0x4e53ce*/
+        v8->pathCost = 0.0; /*0x4e53d0*/
       }
       else
       {
-        v8 = 0;
+        v8 = 0; /*0x4e53d5*/
       }
-      v7 = v8;
-      NiTMap_SetAt(v6, v5, (int)v8);
+      v7 = v8; /*0x4e53db*/
+      NiTMap_SetAt(p_pointsByCell, v5, (int)v8); /*0x4e53dd*/
     }
-    BSSimpleList_PushFront(v7, (int)v2);
+    BSSimpleList_PushFront(v7, (int)v2); /*0x4e53e5*/
   }
 }

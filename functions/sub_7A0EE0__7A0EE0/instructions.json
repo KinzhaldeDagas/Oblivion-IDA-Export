@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A0EE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion CFrondEngine::StartGuide constructs one zeroed compact 0x30 SFrondGuide and deep-pushes it into CFrondEngine+0x08. Unlike published RT 4.1, the shipped ABI has no vertex-count argument or stack-vertex selection.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A0EE2",
-    "line": "push    offset SEH_7A0EE0",
+    "line": "push    offset OB_CFrondEngine_StartGuide_010201A0_SEH",
     "mnemonic": "push",
     "size": 5
   },
@@ -79,85 +79,85 @@
   },
   {
     "ea": "0x7A0F08",
-    "line": "fst     [esp+44h+var_2C]",
+    "line": "fst     [esp+44h+value.guideLength]; Computed centerline length.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A0F0C",
-    "line": "mov     [esp+44h+var_38], ebx",
+    "line": "mov     [esp+44h+value.vertexVector.begin], ebx; Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0F10",
-    "line": "fst     [esp+44h+var_28]",
+    "line": "fst     [esp+44h+value.radius]; Frond radius.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A0F14",
-    "line": "mov     [esp+44h+var_34], ebx",
+    "line": "mov     [esp+44h+value.vertexVector.end], ebx; Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0F18",
-    "line": "fst     [esp+44h+var_20]",
+    "line": "fst     [esp+44h+value.offsetAngle]; Rotation offset around the guide centerline.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A0F1C",
-    "line": "mov     [esp+44h+var_30], ebx",
+    "line": "mov     [esp+44h+value.vertexVector.capacityEnd], ebx; Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0F20",
-    "line": "fst     [esp+44h+var_1C]",
+    "line": "fst     [esp+44h+value.surfaceArea]; Computed surface area used for LOD.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A0F24",
-    "line": "mov     [esp+44h+var_24], bl",
+    "line": "mov     [esp+44h+value.frondMapIndex], bl; Selected frond texture/map index.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0F28",
-    "line": "fstp    [esp+44h+var_18]",
+    "line": "fstp    [esp+44h+value.fuzzySurfaceArea]; Randomized surface-area key used for guide LOD ordering.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A0F2C",
-    "line": "mov     [esp+44h+var_14], ebx",
+    "line": "mov     [esp+44h+value.sharedVertexStartIndex], ebx; Start index in shared indexed geometry.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0F30",
-    "line": "mov     [esp+44h+var_10], ebx",
+    "line": "mov     [esp+44h+value.verticesPerGuideVertex], ebx; Generated geometry vertices associated with each guide vertex.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0F34",
-    "line": "lea     eax, [esp+44h+var_3C]",
+    "line": "lea     eax, [esp+44h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A0F38",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0F39",
-    "line": "add     ecx, 8",
+    "line": "add     ecx, 8; this",
     "mnemonic": "add",
     "size": 3
   },
@@ -169,8 +169,134 @@
   },
   {
     "ea": "0x7A0F40",
-    "line": "call    sub_7A0B50",
+    "line": "call    OB_stVector_SFrondGuide_PushBack_010201A0; Appends the zeroed compact guide through the decoded st_vector<SFrondGuide> push_back and then releases only the temporary guide's owned vertex allocation.",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A0F45",
+    "line": "mov     eax, [esp+44h+value.vertexVector.begin]; Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A0F49",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7A0F4B",
+    "line": "jz      short loc_7A0F56",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7A0F4D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0F4E",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A0F53",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0F56",
+    "line": "mov     ecx, [esp+44h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A0F5A",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A0F61",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0F62",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A0F63",
+    "line": "add     esp, 3Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A0F66",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC620",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC623",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC628",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC62C",
+    "line": "lea     eax, [edx-34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC62F",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC632",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC634",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC639",
+    "line": "mov     eax, offset stru_AF59A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC63E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

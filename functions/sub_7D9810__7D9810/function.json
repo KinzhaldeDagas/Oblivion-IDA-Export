@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7D9810",
+  "chunks": [
+    [
+      "0x7D9810",
+      "0x7D9884"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "c1ba57a5592544fbe2a77b4f3de9a70fb5f39aa2bb2a6a223b7a62cc795d42d1",
+  "comment_regular": "[Verified] BSShaderPPLightingProperty vtable slot +0x18 (slot 6) CreateClone. Allocates/constructs 0xF0 bytes, then delegates to BSShaderPPLightingProperty_CopyCloneMembers. The derived copier calls the base copier and copies the PP-lighting fields, but neither it nor the base copier copies the inherited DECAL_DATA* list at +0x80. Whether a later path rebuilds that list is Unknown.",
+  "comment_repeatable": "[Verified] BSShaderPPLightingProperty vtable slot +0x18 (slot 6) CreateClone. Allocates/constructs 0xF0 bytes, then delegates to BSShaderPPLightingProperty_CopyCloneMembers. The derived copier calls the base copier and copies the PP-lighting fields, but neither it nor the base copier copies the inherited DECAL_DATA* list at +0x80. Whether a later path rebuilds that list is Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "BSShaderPPLightingProperty_CreateClone",
   "end_ea": "0x7D9884",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D9810",
+  "name": "BSShaderPPLightingProperty_CreateClone",
   "segment": ".text",
   "sha256": "72e090254bf104d0640a400df735dfd17ca2545ba80d8c1957808a6e2d0aedc2",
   "size": 116,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7D9810",
-  "type": "BSShaderPPLightingProperty *__thiscall(_WORD *this, int)",
-  "xrefs_from_count": 42,
+  "total_chunk_size": 154,
+  "type": "BSShaderPPLightingProperty *__thiscall(BSShaderPPLightingProperty *this, void *cloneProcess)",
+  "xrefs_from_count": 56,
   "xrefs_to_count": 2
 }

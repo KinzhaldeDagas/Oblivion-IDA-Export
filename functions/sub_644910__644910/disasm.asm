@@ -46,9 +46,9 @@
 0x644986: test    al, al
 0x644988: jz      loc_644A5A
 0x64498E: push    3Ah ; ':'; a1
-0x644990: call    TESForm_LookupByFormID
+0x644990: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x644995: add     esp, 4
-0x644998: mov     ecx, offset TimeGlobals
+0x644998: mov     ecx, 0B332E0h
 0x64499D: mov     ebx, eax
 0x64499F: call    TimeGlobals_GetGameHour
 0x6449A4: fstp    [esp+28h+arg_0]
@@ -109,7 +109,7 @@
 0x644A4D: add     esp, 18h
 0x644A50: retn    4
 0x644A53: mov     ecx, edi; int
-0x644A55: call    sub_5EAE70
+0x644A55: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x644A5A: pop     edi
 0x644A5B: pop     esi
 0x644A5C: pop     ebp

@@ -1,4 +1,4 @@
-int __cdecl _cftoe(_DWORD *a1, _BYTE *a2, unsigned int a3, int a4, int a5)
+int __cdecl _cftoe(int *a1, _BYTE *a2, unsigned int a3, int a4, int a5)
 {
-  return _cftoe_l(a1, a2, a3, a4, a5, 0);
+  return _cftoe_l(a1, a2, a3, a4, a5, 0); /*0x990094*/
 }

@@ -1,1 +1,1 @@
-IProgressNotify_0
+typedef IProgressNotify IProgressNotify_0;

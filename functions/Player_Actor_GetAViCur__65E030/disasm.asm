@@ -15,7 +15,7 @@
 0x65E063: fadd    [esp+14h+arg_0]
 0x65E067: fadd    [esp+14h+var_C]
 0x65E06B: fadd    [esp+14h+var_8]
-0x65E06F: call    Double_To_SInt32
+0x65E06F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x65E074: pop     edi
 0x65E075: pop     esi
 0x65E076: add     esp, 0Ch
@@ -51,7 +51,7 @@
 0x65E0E1: fadd    [esp+14h+var_C]
 0x65E0E5: fadd    [esp+14h+var_4]
 0x65E0E9: fadd    [esp+14h+arg_0]
-0x65E0ED: call    Double_To_SInt32
+0x65E0ED: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x65E0F2: pop     edi
 0x65E0F3: pop     esi
 0x65E0F4: add     esp, 0Ch

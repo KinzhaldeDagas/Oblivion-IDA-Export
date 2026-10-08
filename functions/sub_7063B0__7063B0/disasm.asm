@@ -1,5 +1,5 @@
 0x7063B0: push    ebx
-0x7063B1: mov     ebx, dword ptr [esp+4+ArgList]
+0x7063B1: mov     ebx, [esp+4+ArgList]
 0x7063B5: push    esi
 0x7063B6: mov     eax, ebx
 0x7063B8: push    edi

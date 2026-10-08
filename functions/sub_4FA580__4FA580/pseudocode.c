@@ -9,27 +9,27 @@ unsigned int __usercall sub_4FA580@<eax>(
   unsigned int result; // eax
   int v7; // esi
 
-  v5 = &dword_B361CC;
-  do
+  v5 = dword_B361CC; /*0x4fa581*/
+  do /*0x4fa59d*/
   {
-    if ( !v5[1] && !*v5 )
-      break;
-    sub_4E4690(*v5, a1, a2, (int)v5, a4, a5, a3);
-    v5 = (int *)v5[1];
+    if ( !v5[1] && !*v5 ) /*0x4fa58c*/
+      break; /*0x4fa58f*/
+    sub_4E4690(*v5, a1, a2, (int)v5, a4, a5, a3); /*0x4fa593*/
+    v5 = (int *)v5[1]; /*0x4fa598*/
   }
-  while ( v5 );
-  result = dword_B361D0;
-  if ( dword_B361D0 )
+  while ( v5 ); /*0x4fa59d*/
+  result = dword_B361CC[1]; /*0x4fa59f*/
+  if ( dword_B361CC[1] ) /*0x4fa59f*/
   {
-    do
+    do /*0x4fa5c5*/
     {
-      v7 = *(_DWORD *)(result + 4);
-      FormHeapFree(result);
-      result = v7;
-      dword_B361D0 = v7;
+      v7 = *(_DWORD *)(result + 4); /*0x4fa5b0*/
+      FormHeapFree(result); /*0x4fa5b4*/
+      result = v7; /*0x4fa5be*/
+      dword_B361CC[1] = v7; /*0x4fa5c0*/
     }
-    while ( v7 );
+    while ( v7 ); /*0x4fa5c5*/
   }
-  dword_B361CC = 0;
-  return result;
+  dword_B361CC[0] = 0; /*0x4fa5c7*/
+  return result; /*0x4fa5d1*/
 }

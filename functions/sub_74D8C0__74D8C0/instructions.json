@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x74D8C1",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+index]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x74D8EA",
-    "line": "mov     edi, [esp+10h+arg_8]",
+    "line": "mov     edi, [esp+10h+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x74D8F0",
-    "line": "mov     [esp+10h+arg_8], edi",
+    "line": "mov     [esp+10h+element], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,31 +139,31 @@
   },
   {
     "ea": "0x74D900",
-    "line": "lea     ecx, [esp+10h+arg_8]",
+    "line": "lea     ecx, [esp+10h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x74D904",
-    "line": "push    ecx",
+    "line": "push    ecx; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74D905",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74D906",
-    "line": "lea     ecx, [ebp+18h]",
+    "line": "lea     ecx, [ebp+18h]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x74D909",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x74D95B",
-    "line": "mov     edi, [esp+10h+arg_8]",
+    "line": "mov     edi, [esp+10h+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x74D961",
-    "line": "mov     [esp+10h+arg_8], edi",
+    "line": "mov     [esp+10h+element], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,49 +457,49 @@
   },
   {
     "ea": "0x74D982",
-    "line": "push    edx",
+    "line": "push    edx; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74D983",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x74D985",
-    "line": "call    sub_523B10",
+    "line": "call    NiTObjectArray_Resize16",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x74D98A",
-    "line": "lea     eax, [esp+10h+arg_8]",
+    "line": "lea     eax, [esp+10h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x74D98E",
-    "line": "push    eax",
+    "line": "push    eax; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74D98F",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74D990",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x74D992",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6F6A10",
-    "line": "push    ebp",
+    "line": "push    ebp; Returns a pseudo-random unit-interval value assembled from four CRT rand() draws; lazily seeds rand() from time.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6F6A19",
-    "line": "cmp     byte ptr ds:0B3F058h, 0",
+    "line": "cmp     byte ptr ds:0B3F058h, 0; BUG: FaceGen tracks seeding separately from Game_RandomLargeInteger even though both use the same process-global CRT rand/srand state.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6F6A25",
-    "line": "call    __time64",
+    "line": "call    __time64; BUG: time64 is truncated to a 32-bit seconds seed, so processes first using FaceGen within the same second receive identical streams.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6F6A2B",
-    "line": "call    _srand",
+    "line": "call    _srand; BUG: reseeds process-global CRT randomness, perturbing unrelated Oblivion systems with direct rand() calls.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6F6A3C",
-    "line": "mov     esi, 4",
+    "line": "mov     esi, 4; Build one unit sample from exactly four CRT rand() digits in radix 32768.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6F6A49",
-    "line": "call    _rand",
+    "line": "call    _rand; Digit recurrence: accumulator = accumulator * 32768.0 + rand().",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6F6A6B",
-    "line": "fmul    qword ptr ds:0A7CDD8h",
+    "line": "fmul    qword ptr ds:0A7CDD8h; Scale the four-digit integer by 2^-60, producing the exact grid k/2^60 in [0,1).",
     "mnemonic": "fmul",
     "size": 6
   },

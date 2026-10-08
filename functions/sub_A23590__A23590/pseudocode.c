@@ -1,4 +1,5 @@
-void __cdecl sub_A23590()
+// Verified atexit cleanup calls GameSetting_destr on fTreeWindVariance.
+void __cdecl GameSetting_fTreeWindVariance_atexit()
 {
-  GameSetting_destr((int *)flt_B39E20);
+  GameSetting_destr((int *)fTreeWindVariance); /*0xa23595*/
 }

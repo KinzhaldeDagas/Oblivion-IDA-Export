@@ -28,107 +28,107 @@ __m128 *__thiscall sub_93B7D0(__m128 *this)
   __m128 v27[2]; // [esp+50h] [ebp-30h] BYREF
   float v28; // [esp+70h] [ebp-10h]
 
-  if ( this->m128_i32[1] == 3 && (v2 = 0, this->m128_i32[0] > 0) )
+  if ( this->m128_i32[1] == 3 && (v2 = 0, this->m128_i32[0] > 0) ) /*0x93b7ea*/
   {
-    v3 = this + 2;
-    while ( 1 )
+    v3 = this + 2; /*0x93b7ec*/
+    while ( 1 ) /*0x93b7fc*/
     {
-      result = (__m128 *)sub_93B000(this, v3, this + 0xA, 0);
-      if ( result == (__m128 *)7 )
-        break;
-      ++v2;
-      ++v3;
-      if ( v2 >= this->m128_i32[0] )
-        goto LABEL_6;
+      result = (__m128 *)sub_93B000(this, v3, this + 0xA, 0); /*0x93b7fc*/
+      if ( result == (__m128 *)7 ) /*0x93b804*/
+        break; /*0x93b804*/
+      ++v2; /*0x93b80c*/
+      ++v3; /*0x93b80d*/
+      if ( v2 >= this->m128_i32[0] ) /*0x93b812*/
+        goto LABEL_6; /*0x93b812*/
     }
-    *(this + 2) = *(this + v2 + 2);
-    this->m128_i32[0] = 1;
+    *(this + 2) = *(this + v2 + 2); /*0x93b9d3*/
+    this->m128_i32[0] = 1; /*0x93b9d7*/
   }
   else
   {
 LABEL_6:
-    if ( this->m128_i32[0] == 3 && (v5 = 0, this->m128_i32[1] > 0) )
+    if ( this->m128_i32[0] == 3 && (v5 = 0, this->m128_i32[1] > 0) ) /*0x93b820*/
     {
-      v6 = this + 0xA;
-      while ( sub_93B000(this, v6, this + 2, 0) != 7 )
+      v6 = this + 0xA; /*0x93b822*/
+      while ( sub_93B000(this, v6, this + 2, 0) != 7 ) /*0x93b839*/
       {
-        ++v5;
-        ++v6;
-        if ( v5 >= this->m128_i32[1] )
-          goto LABEL_11;
+        ++v5; /*0x93b842*/
+        ++v6; /*0x93b843*/
+        if ( v5 >= this->m128_i32[1] ) /*0x93b848*/
+          goto LABEL_11; /*0x93b848*/
       }
-      result = (__m128 *)(0x10 * (v5 + 0xE));
-      *(this + 0xE) = *(__m128 *)((char *)this + (_DWORD)result);
-      *(this + 0xA) = *(this + v5 + 0xA);
-      this->m128_i32[1] = 1;
+      result = (__m128 *)(0x10 * (v5 + 0xE)); /*0x93b9e7*/
+      *(this + 0xE) = *(__m128 *)((char *)this + (_DWORD)result); /*0x93b9f1*/
+      *(this + 0xA) = *(this + v5 + 0xA); /*0x93ba00*/
+      this->m128_i32[1] = 1; /*0x93ba07*/
     }
     else
     {
 LABEL_11:
-      result = 0;
-      v20 = 3.4028235e38;
-      v22 = 0;
-      v7 = 2 * (this->m128_i32[0] == 3) + 1;
-      v24 = v7;
-      v8 = 2 * (this->m128_i32[1] == 3) + 1;
-      v21 = v8;
-      v23 = 0;
-      v18 = 0;
-      if ( v7 > 0 )
+      result = 0; /*0x93b84a*/
+      v20 = 3.4028235e38; /*0x93b861*/
+      v22 = 0; /*0x93b869*/
+      v7 = 2 * (this->m128_i32[0] == 3) + 1; /*0x93b86d*/
+      v24 = v7; /*0x93b873*/
+      v8 = 2 * (this->m128_i32[1] == 3) + 1; /*0x93b877*/
+      v21 = v8; /*0x93b87b*/
+      v23 = 0; /*0x93b87f*/
+      v18 = 0; /*0x93b883*/
+      if ( v7 > 0 ) /*0x93b887*/
       {
-        result = this + 2;
-        v19 = this + 2;
-        do
+        result = this + 2; /*0x93b88d*/
+        v19 = this + 2; /*0x93b890*/
+        do /*0x93b94d*/
         {
-          v9 = 0;
-          if ( v8 > 0 )
+          v9 = 0; /*0x93b894*/
+          if ( v8 > 0 ) /*0x93b898*/
           {
-            v10 = this + 0xA;
-            do
+            v10 = this + 0xA; /*0x93b89e*/
+            do /*0x93b92d*/
             {
-              v11 = *v10;
-              v12 = 0x10 * (byte_A99F0E[v9] + 0xA);
-              v26 = _mm_sub_ps(*(this + byte_A99F0E[v18] + 2), *result);
-              v25 = _mm_sub_ps(*(__m128 *)((char *)this + v12), v11);
-              sub_8D1A30(result, &v26, v10, &v25, v27);
-              if ( v28 < (double)v20 )
+              v11 = *v10; /*0x93b8c6*/
+              v12 = 0x10 * (byte_A99F0E[v9] + 0xA); /*0x93b8cc*/
+              v26 = _mm_sub_ps(*(this + byte_A99F0E[v18] + 2), *result); /*0x93b8cf*/
+              v25 = _mm_sub_ps(*(__m128 *)((char *)this + v12), v11); /*0x93b8ec*/
+              sub_8D1A30(result, &v26, v10, &v25, v27); /*0x93b8f1*/
+              if ( v28 < (double)v20 ) /*0x93b909*/
               {
-                v20 = v28;
-                v22 = v18;
-                v23 = v9;
+                v20 = v28; /*0x93b913*/
+                v22 = v18; /*0x93b917*/
+                v23 = v9; /*0x93b91b*/
               }
-              ++v9;
-              ++v10;
-              result = v19;
+              ++v9; /*0x93b923*/
+              ++v10; /*0x93b924*/
+              result = v19; /*0x93b929*/
             }
-            while ( v9 < v21 );
-            v8 = v21;
-            v7 = v24;
+            while ( v9 < v21 ); /*0x93b92d*/
+            v8 = v21; /*0x93b933*/
+            v7 = v24; /*0x93b937*/
           }
-          ++result;
-          v13 = ++v18 < v7;
-          v19 = result;
+          ++result; /*0x93b940*/
+          v13 = ++v18 < v7; /*0x93b943*/
+          v19 = result; /*0x93b949*/
         }
-        while ( v13 );
+        while ( v13 ); /*0x93b94d*/
       }
-      if ( v7 == 3 )
+      if ( v7 == 3 ) /*0x93b956*/
       {
-        v14 = this->m128_i32[0] - 1;
-        this->m128_i32[0] = v14;
-        result = (__m128 *)(0x10 * (v14 + 2));
-        *(this + byte_A99F0C[v22] + 2) = *(__m128 *)((char *)this + (_DWORD)result);
+        v14 = this->m128_i32[0] - 1; /*0x93b95e*/
+        this->m128_i32[0] = v14; /*0x93b95f*/
+        result = (__m128 *)(0x10 * (v14 + 2)); /*0x93b96d*/
+        *(this + byte_A99F0C[v22] + 2) = *(__m128 *)((char *)this + (_DWORD)result); /*0x93b97a*/
       }
-      if ( v8 == 3 )
+      if ( v8 == 3 ) /*0x93b981*/
       {
-        v15 = this->m128_i32[1] - 1;
-        this->m128_i32[1] = v15;
-        v16 = v15;
-        v17 = byte_A99F0C[v23];
-        *(this + v17 + 0xE) = *(this + v16 + 0xE);
-        result = (__m128 *)(0x10 * (v17 + 0xA));
-        *(__m128 *)((char *)this + (_DWORD)result) = *(this + this->m128_i32[1] + 0xA);
+        v15 = this->m128_i32[1] - 1; /*0x93b98a*/
+        this->m128_i32[1] = v15; /*0x93b98b*/
+        v16 = v15; /*0x93b98e*/
+        v17 = byte_A99F0C[v23]; /*0x93b990*/
+        *(this + v17 + 0xE) = *(this + v16 + 0xE); /*0x93b9a7*/
+        result = (__m128 *)(0x10 * (v17 + 0xA)); /*0x93b9bb*/
+        *(__m128 *)((char *)this + (_DWORD)result) = *(this + this->m128_i32[1] + 0xA); /*0x93b9be*/
       }
     }
   }
-  return result;
+  return result; /*0x93b9c2*/
 }

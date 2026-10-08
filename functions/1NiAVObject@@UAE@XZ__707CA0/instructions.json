@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x707CE1",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -412,5 +412,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C9720",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9723",
+    "line": "jmp     ??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9728",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C972B",
+    "line": "add     ecx, 98h ; '˜'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C9731",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiProperty@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiProperty>>::~NiTPointerList<NiPointer<NiProperty>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9736",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9739",
+    "line": "add     ecx, 0A8h ; '¨'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C973F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9744",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C9748",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C974B",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C974E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C9750",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9755",
+    "line": "mov     eax, offset stru_AF1FC8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C975A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

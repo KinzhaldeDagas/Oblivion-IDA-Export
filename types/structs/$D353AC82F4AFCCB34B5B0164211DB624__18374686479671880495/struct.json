@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$D353AC82F4AFCCB34B5B0164211DB624",
+  "definition": "union $D353AC82F4AFCCB34B5B0164211DB624\n{\nXMM_SAVE_AREA32 FltSave;\n$5DF16254768D0A7F4201DEC858FAFA9B s;\n}\n",
   "id": 18374686479671880495,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FltSave",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 512
+      "size": 512,
+      "type": "XMM_SAVE_AREA32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "s",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 416
+      "size": 416,
+      "type": "$5DF16254768D0A7F4201DEC858FAFA9B"
     }
   ],
   "name": "$D353AC82F4AFCCB34B5B0164211DB624",
+  "ordinal": 1811,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 512
 }

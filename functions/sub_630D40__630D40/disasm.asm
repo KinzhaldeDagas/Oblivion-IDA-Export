@@ -101,8 +101,8 @@
 0x630E6F: push    edi
 0x630E70: mov     ecx, esi
 0x630E72: call    edx
-0x630E74: mov     ecx, ebp
-0x630E76: call    sub_5660A0
+0x630E74: mov     ecx, ebp; self
+0x630E76: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x630E7B: test    al, al
 0x630E7D: jz      loc_630F1C
 0x630E83: mov     eax, [ebp+0]
@@ -158,8 +158,8 @@
 0x630F16: xor     al, al
 0x630F18: pop     ebp
 0x630F19: retn    0Ch
-0x630F1C: mov     ecx, ebp
-0x630F1E: call    sub_5660A0
+0x630F1C: mov     ecx, ebp; self
+0x630F1E: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x630F23: test    al, al
 0x630F25: jz      short loc_630F89
 0x630F27: mov     eax, [esi+8]
@@ -172,14 +172,14 @@
 0x630F39: test    byte ptr [eax+1Ch], 1
 0x630F3D: jz      short loc_630F89
 0x630F3F: mov     ecx, edi; this
-0x630F41: call    TESObjectREFR_GetParentCell
+0x630F41: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x630F46: test    eax, eax
 0x630F48: jz      short loc_630F89
-0x630F4A: push    edi
+0x630F4A: push    edi; actor
 0x630F4B: mov     ecx, edi; this
-0x630F4D: call    TESObjectREFR_GetParentCell
-0x630F52: mov     ecx, eax
-0x630F54: call    sub_4CAAC0
+0x630F4D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x630F52: mov     ecx, eax; cell
+0x630F54: call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.
 0x630F59: test    al, al
 0x630F5B: jz      short loc_630F89
 0x630F5D: mov     edx, [esi+2Ch]
@@ -189,7 +189,7 @@
 0x630F66: push    edx; int
 0x630F67: push    0; int
 0x630F69: mov     ecx, edi; int
-0x630F6B: call    sub_5F2820
+0x630F6B: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x630F70: test    al, al
 0x630F72: jz      short loc_630F89
 0x630F74: mov     eax, [esi]
@@ -206,7 +206,7 @@
 0x630F8B: push    edi
 0x630F8C: mov     ecx, ebp
 0x630F8E: call    sub_5677B0
-0x630F93: call    Double_To_SInt32
+0x630F93: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x630F98: mov     [esp+0Ch+arg_8], eax
 0x630F9C: mov     eax, [esi+2Ch]
 0x630F9F: test    eax, eax
@@ -231,13 +231,13 @@
 0x630FD6: sub     esp, 8
 0x630FD9: fstp    [esp+18h+var_14]
 0x630FDD: mov     ebx, eax
-0x630FDF: fld     dword ptr [esp+18h+arg_4]
+0x630FDF: fld     [esp+18h+arg_4]
 0x630FE3: mov     ecx, ebx; this
 0x630FE5: fstp    [esp+18h+var_18]
 0x630FE8: call    TESObjectREFR_GetWorldSpace
 0x630FED: mov     ecx, [esi+2Ch]; this
 0x630FF0: push    eax
-0x630FF1: call    TESObjectREFR_GetParentCell
+0x630FF1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x630FF6: push    eax
 0x630FF7: mov     eax, [ebx]
 0x630FF9: mov     edx, [eax+174h]

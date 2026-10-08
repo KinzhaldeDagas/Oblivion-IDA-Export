@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x8A1170",
+      "0x8A131B"
+    ],
+    [
+      "0x9D6980",
+      "0x9D69B1"
+    ]
+  ],
+  "chunks_sha256": "5fc72c122f7ca754ac13cae4d9a469be02979f275034d656ece03e12e3126e9d",
+  "comment_regular": "\n[Collision v143 2026-10-07] Verified list cinfo is 1C bytes: +04 raw hkShape* array, +08 count, +0C capacity flags; +10 filters pointer, +14 count, +18 capacity flags. Each hkShape+08 back-pointer identifies its bhk wrapper for RTTI. Native8E88A0 retains hk children;8A1390/8A13E0 retain/release Ni wrappers. Temporary arrays are borrowed for synchronous construction. Plugin v143 uses this constructor for mixed authored spheres, capsules and boxes.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_8A1170",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "OB_bhkListShape_BuildFromCinfo_010201A0",
   "end_ea": "0x8A131B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_8A1170",
+  "name": "OB_bhkListShape_BuildFromCinfo_010201A0",
   "segment": ".text",
   "sha256": "bbdf7675927ddec558e9f9ea2dba0174ece3ae8dbd2b35277d3c513a85a57237",
   "size": 427,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8A1170",
-  "type": "void __thiscall(void *this, _DWORD *)",
-  "xrefs_from_count": 169,
+  "total_chunk_size": 476,
+  "type": "void __thiscall(bhkRefObject *self, const OB_CollisionListCinfo_010201A0 *info)",
+  "xrefs_from_count": 188,
   "xrefs_to_count": 2
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FD260",
-    "line": "push    ecx",
+    "line": "push    ecx; Lighting30 selector-state dispatcher. Concrete shader definition ID is 0x1A. Route group 7 covers selectors 0x12B..0x15F; inherited 0x177..0x17A selectors fall outside that family.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7FD267",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7FD287",
-    "line": "ja      short loc_7FD2A9",
+    "line": "ja      short loc_7FD2A9; Fog decode: Lighting30 selector route takes the alternate map branch for TexEffect selectors 0x15E..0x15F; those variants consume FogParam c12/FogColor c13.",
     "mnemonic": "ja",
     "size": 2
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x7FD28C",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FD28D",
-    "line": "lea     ecx, [esi+2Ch]",
+    "line": "lea     ecx, [esi+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7FD290",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; Fog decode: selector 0x15E..0x15F copies alternate pixel map this+0x1F to active pixel map this+0x0B for TexEffect HQ.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x7FD29B",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FD29C",
-    "line": "lea     ecx, [esi+30h]",
+    "line": "lea     ecx, [esi+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7FD29F",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; Fog decode: selector 0x15E..0x15F copies alternate vertex map this+0x20 to active vertex map this+0x0C; this is the map with FogParam c12/FogColor c13.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x7FD34A",
-    "line": "sub     edx, 12Ah",
+    "line": "sub     edx, 12Ah; selectorRow = selector - 0x12A. Stock one-light selectors 0x177..0x17A produce rows 0x4D..0x50; selector activation does not reject them.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7FD355",
-    "line": "mov     ecx, offset dword_B46964",
+    "line": "mov     ecx, offset unk_B46964; GPU frame decode: var_4 becomes B46964-1 = B46963. Vertex mask bit k writes byte B46963+k for k>=6; k=16 therefore writes fog producer byte B46973.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x7FD380",
-    "line": "test    ds:0B46988h[edx*4], ebx",
+    "line": "test    ds:0B46988h[edx*4], ebx; Read the vertex automatic-constant enable mask at B46988[selectorRow]. The valid Lighting30 table ends at selector 0x15F/row 0x35; inherited 0x177..0x17A index beyond that decoded family, but no pass will later be queued.",
     "mnemonic": "test",
     "size": 7
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x7FD3AA",
-    "line": "mov     [esi+ebp], cl",
+    "line": "mov     [esi+ebp], cl; For loop iteration esi=16, this writes B46973 from (B46988[selector-12A] & 0x10000)!=0. Frame refresh must use the target selector row rather than the byte left by an earlier pass.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x7FD3EC",
-    "line": "mov     byte ptr ds:dword_B46964[esi], cl",
+    "line": "mov     byte ptr ds:unk_B46964[esi], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x7FD433",
-    "line": "mov     byte ptr ds:dword_B46964[eax], cl",
+    "line": "mov     byte ptr ds:unk_B46964[eax], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x7FD44B",
-    "line": "mov     edi, ds:0B46A60h[edx*4]",
+    "line": "mov     edi, ds:0B46A60h[edx*4]; Read B46A60[selectorRow] and rewrite all pixel automatic-constant enable flags. These flags are selector bookkeeping, not a draw; the next selector activation rewrites them deterministically.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x7FD459",
-    "line": "sub     esi, offset byte_B46930",
+    "line": "sub     esi, offset unk_B46930",
     "mnemonic": "sub",
     "size": 6
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x7FD460",
-    "line": "lea     ecx, byte_B46930[esi+eax]",
+    "line": "lea     ecx, unk_B46930[esi+eax]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x7FD473",
-    "line": "mov     ds:byte_B46930[eax], cl",
+    "line": "mov     byte ptr ds:unk_B46930[eax], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x7FD4CC",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x7FD4E0",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7FD4EB",
-    "line": "lea     ecx, [ebx-12Bh]",
+    "line": "lea     ecx, [ebx-12Bh]; Lighting30 route-family test begins at selector 0x12B and ends at 0x15F (delta <=0x34).",
     "mnemonic": "lea",
     "size": 6
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x7FD4F5",
-    "line": "ja      short loc_7FD526",
+    "line": "ja      short loc_7FD526; Only selectors 0x12B..0x15F use Lighting30 route group 7. Stock 0x177..0x17A fall through.",
     "mnemonic": "ja",
     "size": 2
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x7FD507",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x7FD51B",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,13 +1309,13 @@
   },
   {
     "ea": "0x7FD526",
-    "line": "movzx   eax, bx",
+    "line": "movzx   eax, bx; Out-of-family selectors use the generic route-group-0 table path; this does not create a Lighting30 stage pass, and the later Lighting30 resolver returns null for 0x177..0x17A.",
     "mnemonic": "movzx",
     "size": 3
   },
   {
     "ea": "0x7FD529",
-    "line": "mov     esi, ds:0B46F28h[eax*4]",
+    "line": "mov     esi, ds:0B46F28h[eax*4]; Out-of-family 0x177..0x17A take the generic route-group-0 render-state path. Return value is ignored by FlushPassBucket; per-geometry pass resolution is the later no-draw gate.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x7FD53F",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7FD553",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },

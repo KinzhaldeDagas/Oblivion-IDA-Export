@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E50E0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified — PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4E50E9",
-    "line": "cmp     [esp+4+arg_4], 0",
+    "line": "cmp     [esp+4+point], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4E5148",
-    "line": "cmp     ecx, [esp+0Ch+arg_4]",
+    "line": "cmp     ecx, [esp+0Ch+point]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4E5155",
-    "line": "mov     edx, [esp+0Ch+arg_4]",
+    "line": "mov     edx, [esp+0Ch+point]",
     "mnemonic": "mov",
     "size": 4
   },

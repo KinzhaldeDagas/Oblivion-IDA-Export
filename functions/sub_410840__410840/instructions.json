@@ -78,12 +78,6 @@
     "size": 2
   },
   {
-    "ea": "0x41087D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x410880",
     "line": "mov     cl, [eax]",
     "mnemonic": "mov",
@@ -181,7 +175,7 @@
   },
   {
     "ea": "0x4108A5",
-    "line": "mov     edx, dword_B350D8",
+    "line": "mov     edx, ds:0B350D8h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -679,7 +673,7 @@
   },
   {
     "ea": "0x4109AC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x4109EB",
-    "line": "mov     esi, ds:GetTickCount",
+    "line": "mov     esi, ds:GetTickCount; ModernWindowsCompatible patch site: loading texture wait computes future GetTickCount target through signed x87 conversion, then compares target > now.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -925,7 +919,7 @@
   },
   {
     "ea": "0x410A35",
-    "line": "call    esi ; GetTickCount",
+    "line": "call    esi ; GetTickCount; ModernWindowsCompatible decode: vanilla wait loop calls GetTickCount and exits on unsigned target <= now; replaced by wrap-safe elapsed tick wait.",
     "mnemonic": "call",
     "size": 2
   },
@@ -949,7 +943,7 @@
   },
   {
     "ea": "0x410A3D",
-    "line": "call    sub_410390",
+    "line": "call    Input_CheckLoadPumpControls; ModernWindowsCompatible decode: message/input pump called as sub_410390(1) during loading texture wait; preserved by patch helper.",
     "mnemonic": "call",
     "size": 5
   },

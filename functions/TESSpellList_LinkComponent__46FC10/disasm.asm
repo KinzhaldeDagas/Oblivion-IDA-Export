@@ -11,7 +11,7 @@
 0x46FC29: jz      short loc_46FC3A
 0x46FC2B: push    0FFFFFFFFh; a2
 0x46FC2D: mov     ecx, edi; this
-0x46FC2F: call    TESForm_GetOverrideFile
+0x46FC2F: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x46FC34: mov     [esp+1Ch+a2], eax
 0x46FC38: jmp     short loc_46FC3E
 0x46FC3A: mov     [esp+1Ch+a2], ebx
@@ -19,7 +19,6 @@
 0x46FC40: jz      loc_46FE23
 0x46FC46: push    esi
 0x46FC47: jmp     short loc_46FC50
-0x46FC49: align 10h
 0x46FC50: mov     eax, [ebp+0]
 0x46FC53: cmp     eax, ebx
 0x46FC55: jz      loc_46FE22
@@ -28,10 +27,10 @@
 0x46FC63: push    eax; a2
 0x46FC64: lea     ecx, [esp+24h+ArgList]
 0x46FC68: push    ecx; a1
-0x46FC69: call    TESForm_ResolveFormID
+0x46FC69: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x46FC6E: mov     edx, [esp+28h+ArgList]
 0x46FC72: push    edx; a1
-0x46FC73: call    TESForm_LookupByFormID
+0x46FC73: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x46FC78: mov     esi, eax
 0x46FC7A: add     esp, 0Ch
 0x46FC7D: cmp     esi, ebx
@@ -55,7 +54,7 @@
 0x46FCAF: mov     edx, [eax]
 0x46FCB1: push    eax
 0x46FCB2: mov     [ebp+0], edx
-0x46FCB5: call    FormHeapFree
+0x46FCB5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46FCBA: add     esp, 4
 0x46FCBD: jmp     short loc_46FCC2
 0x46FCBF: mov     [ebp+0], ebx
@@ -164,7 +163,7 @@
 0x46FDF5: mov     edx, [eax]
 0x46FDF7: push    eax
 0x46FDF8: mov     [ebp+0], edx
-0x46FDFB: call    FormHeapFree
+0x46FDFB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46FE00: add     esp, 4
 0x46FE03: jmp     short loc_46FE08
 0x46FE05: mov     [ebp+0], ebx

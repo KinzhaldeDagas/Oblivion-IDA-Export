@@ -7,7 +7,7 @@ void __usercall SaveLoad_OverwriteSavegameCallback(
         double a6@<st2>,
         double a7@<st1>)
 {
-  UInt8 v7; // bl
+  unsigned __int8 v7; // bl
   _DWORD *OpenMenuTile; // eax
   void *ParentMenu; // eax
   _DWORD *v10; // eax
@@ -19,36 +19,36 @@ void __usercall SaveLoad_OverwriteSavegameCallback(
   int v16; // ecx
   float v17; // [esp+10h] [ebp-4h]
 
-  v7 = sub_578D70();
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40F);
-  ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-  v10 = OblivionDynamicCast(
+  v7 = InterfaceManager_ConsumeMessageButton(); /*0x5d339d*/
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40F); /*0x5d339f*/
+  ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x5d33a9*/
+  v10 = OblivionDynamicCast( /*0x5d33bd*/
           ParentMenu,
           0,
           (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
           &SaveMenu `RTTI Type Descriptor',
           0);
-  v11 = v10;
-  if ( v7 == 2 )
+  v11 = v10; /*0x5d33c8*/
+  if ( v7 == 2 ) /*0x5d33ca*/
   {
-    v12 = (_DWORD *)v10[0x16];
-    v13 = v10[0x13];
-    if ( v12 )
-      Float = Tile_GetFloat(v12, 0xFAE);
+    v12 = (_DWORD *)v10[0x16]; /*0x5d33d0*/
+    v13 = v10[0x13]; /*0x5d33d6*/
+    if ( v12 ) /*0x5d33d9*/
+      Float = Tile_GetFloat(v12, 0xFAE); /*0x5d33e0*/
     else
-      Float = flt_A30634;
-    v17 = Float;
-    v15 = Double_To_SInt32(v17);
-    v16 = 1;
-    if ( v13 )
+      Float = kTerrainLODQuadRayDirectionZ; /*0x5d33e7*/
+    v17 = Float; /*0x5d33ed*/
+    v15 = Double_To_SInt32(v17); /*0x5d33f5*/
+    v16 = 1; /*0x5d33fc*/
+    if ( v13 ) /*0x5d3401*/
     {
-      while ( *(_DWORD *)v13 )
+      while ( *(_DWORD *)v13 ) /*0x5d3406*/
       {
-        if ( v15 == v16 )
+        if ( v15 == v16 ) /*0x5d340a*/
         {
-          Tile_SetFloat((Tile *)v11[0x10], (_DWORD *)0xFA1, 1.0);
-          TESSaveLoadGame_SaveGame_(
-            (NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *> *)SaveLoad_CurrentSavegame,
+          Tile_SetFloat((Tile *)v11[0x10], 0xFA1u, 1.0); /*0x5d3426*/
+          TESSaveLoadGame_SaveGame_( /*0x5d3438*/
+            (NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *> *)g_TESSaveLoadGame,
             a1,
             a2,
             a3,
@@ -60,17 +60,17 @@ void __usercall SaveLoad_OverwriteSavegameCallback(
             *(Data **)v13,
             0,
             0);
-          break;
+          break; /*0x5d3438*/
         }
-        v13 = *(_DWORD *)(v13 + 4);
-        ++v16;
-        if ( !v13 )
-          break;
+        v13 = *(_DWORD *)(v13 + 4); /*0x5d340c*/
+        ++v16; /*0x5d340f*/
+        if ( !v13 ) /*0x5d3414*/
+          break; /*0x5d3414*/
       }
     }
-    GameUI_QueueMessage((const char *)dword_B387D0, 0, 1u, flt_A30634);
-    sub_5D2CF0(a6, a7);
-    sub_5BDA20();
+    GameUI_QueueMessage(stru_B387D0.value, 0, 1u, kTerrainLODQuadRayDirectionZ); /*0x5d343d*/
+    sub_5D2CF0(a7); /*0x5d345a*/
+    sub_5BDA20(); /*0x5d345f*/
   }
-  *((_BYTE *)v11 + 0x5C) = 0;
+  *((_BYTE *)v11 + 0x5C) = 0; /*0x5d3465*/
 }

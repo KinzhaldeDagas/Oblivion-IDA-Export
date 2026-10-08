@@ -64,3 +64,20 @@
 0x68FBBA: pop     ebp
 0x68FBBB: add     esp, 10h
 0x68FBBE: retn    0Ch
+0x4CA290: mov     dword ptr [ecx], offset ??_7hkEntityListener@@6B@; const hkEntityListener::`vftable'
+0x4CA296: retn
+0x9C5620: mov     ecx, [ebp-10h]
+0x9C5623: jmp     sub_404F60
+0x9C5628: mov     ecx, [ebp-10h]
+0x9C562B: add     ecx, 4
+0x9C562E: jmp     loc_4CA290
+0x9C5633: mov     ecx, [ebp-10h]
+0x9C5636: add     ecx, 8
+0x9C5639: jmp     sub_68F980
+0x9C563E: mov     edx, [esp+arg_4]
+0x9C5642: lea     eax, [edx-10h]
+0x9C5645: mov     ecx, [edx-14h]
+0x9C5648: xor     ecx, eax
+0x9C564A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C564F: mov     eax, offset stru_AEDDF0
+0x9C5654: jmp     ___CxxFrameHandler3

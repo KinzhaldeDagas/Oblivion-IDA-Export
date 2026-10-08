@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x61D7F3",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x61D835",
-    "line": "push    1",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x61D839",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61D83B",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x61D841",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x61D8A4",
-    "line": "call    sub_615980",
+    "line": "call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x61D8CA",
-    "line": "call    sub_617340",
+    "line": "call    CombatController_TryUseMagicItem",
     "mnemonic": "call",
     "size": 5
   },

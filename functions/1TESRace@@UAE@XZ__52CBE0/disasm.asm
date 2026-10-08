@@ -25,9 +25,9 @@
 0x52CC3F: mov     eax, [esi+30Ch]
 0x52CC45: push    eax
 0x52CC46: mov     dword ptr [esi+308h], offset ??_7?$NiTArray@PAUFaceGenUndo@@@@6B@; const NiTArray<FaceGenUndo *>::`vftable'
-0x52CC50: call    FormHeapFree
+0x52CC50: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52CC55: add     esp, 4
-0x52CC58: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x52CC58: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x52CC5D: push    4; int
 0x52CC5F: push    18h; unsigned int
 0x52CC61: lea     eax, [esi+29Ch]
@@ -76,7 +76,7 @@
 0x52CD0A: call    TESSpellList_destr?
 0x52CD0F: mov     eax, [esi+1Ch]
 0x52CD12: push    eax
-0x52CD13: call    FormHeapFree
+0x52CD13: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52CD18: add     esp, 4
 0x52CD1B: xor     eax, eax
 0x52CD1D: mov     [esi+1Ch], eax
@@ -93,3 +93,94 @@
 0x52CD45: pop     ebx
 0x52CD46: add     esp, 1Ch
 0x52CD49: retn
+0x521CF0: mov     eax, [ecx+4]
+0x521CF3: push    eax
+0x521CF4: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAUFaceGenUndo@@@@6B@; const NiTArray<FaceGenUndo *>::`vftable'
+0x521CFA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x521CFF: pop     ecx
+0x521D00: retn
+0x9B85E0: mov     ecx, [ebp-10h]; this
+0x9B85E3: jmp     TESForm_destr
+0x9B85E8: cmp     dword ptr [ebp-10h], 0
+0x9B85EC: jz      loc_9B8600
+0x9B85F2: mov     eax, [ebp-10h]
+0x9B85F5: add     eax, 18h
+0x9B85F8: mov     [ebp-14h], eax
+0x9B85FB: jmp     loc_9B8607
+0x9B8600: mov     dword ptr [ebp-14h], 0
+0x9B8607: mov     ecx, [ebp-14h]
+0x9B860A: jmp     TESFullName_Initialize
+0x9B860F: cmp     dword ptr [ebp-10h], 0
+0x9B8613: jz      loc_9B8627
+0x9B8619: mov     eax, [ebp-10h]
+0x9B861C: add     eax, 2Ch ; ','
+0x9B861F: mov     [ebp-18h], eax
+0x9B8622: jmp     loc_9B862E
+0x9B8627: mov     dword ptr [ebp-18h], 0
+0x9B862E: mov     ecx, [ebp-18h]
+0x9B8631: jmp     TESSpellList_destr?
+0x9B8636: cmp     dword ptr [ebp-10h], 0
+0x9B863A: jz      loc_9B864E
+0x9B8640: mov     eax, [ebp-10h]
+0x9B8643: add     eax, 40h ; '@'
+0x9B8646: mov     [ebp-1Ch], eax
+0x9B8649: jmp     loc_9B8655
+0x9B864E: mov     dword ptr [ebp-1Ch], 0
+0x9B8655: mov     ecx, [ebp-1Ch]
+0x9B8658: jmp     sub_46E5C0
+0x9B865D: mov     ecx, [ebp-10h]
+0x9B8660: add     ecx, 74h ; 't'
+0x9B8663: jmp     TESAttributes_destr
+0x9B8668: mov     ecx, [ebp-10h]
+0x9B866B: add     ecx, 80h ; '€'
+0x9B8671: jmp     TESAttributes_destr
+0x9B8676: push    offset ??1TESModel@@UAE@XZ; void (__thiscall *)(void *)
+0x9B867B: push    2; int
+0x9B867D: push    18h; unsigned int
+0x9B867F: mov     eax, [ebp-10h]
+0x9B8682: add     eax, 0B0h ; '°'
+0x9B8687: push    eax; void *
+0x9B8688: call    $LN21
+0x9B868D: retn
+0x9B868E: push    offset ??1TESModel@@UAE@XZ; void (__thiscall *)(void *)
+0x9B8693: push    9; int
+0x9B8695: push    18h; unsigned int
+0x9B8697: mov     eax, [ebp-10h]
+0x9B869A: add     eax, 0E0h ; 'à'
+0x9B869F: push    eax; void *
+0x9B86A0: call    $LN21
+0x9B86A5: retn
+0x9B86A6: push    offset TESTexture_destr; void (__thiscall *)(void *)
+0x9B86AB: push    9; int
+0x9B86AD: push    0Ch; unsigned int
+0x9B86AF: mov     eax, [ebp-10h]
+0x9B86B2: add     eax, 1B8h
+0x9B86B7: push    eax; void *
+0x9B86B8: call    $LN21
+0x9B86BD: retn
+0x9B86BE: push    offset TESTexture_destr; void (__thiscall *)(void *)
+0x9B86C3: push    0Ah; int
+0x9B86C5: push    0Ch; unsigned int
+0x9B86C7: mov     eax, [ebp-10h]
+0x9B86CA: add     eax, 224h
+0x9B86CF: push    eax; void *
+0x9B86D0: call    $LN21
+0x9B86D5: retn
+0x9B86D6: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9B86DB: push    4; int
+0x9B86DD: push    18h; unsigned int
+0x9B86DF: mov     eax, [ebp-10h]
+0x9B86E2: add     eax, 29Ch
+0x9B86E7: push    eax; void *
+0x9B86E8: call    $LN21
+0x9B86ED: retn
+0x9B86EE: mov     ecx, [ebp-10h]
+0x9B86F1: add     ecx, 308h
+0x9B86F7: jmp     loc_521CF0
+0x9B86FC: mov     edx, [esp+arg_4]
+0x9B8700: lea     eax, [edx-1Ch]
+0x9B8703: mov     ecx, [edx-20h]
+0x9B8706: xor     ecx, eax
+0x9B8708: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B870D: mov     eax, offset stru_AE2C38
+0x9B8712: jmp     ___CxxFrameHandler3

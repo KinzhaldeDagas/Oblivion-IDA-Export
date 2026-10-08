@@ -1,3 +1,4 @@
+// Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).
 int __thiscall sub_7F86C0(int *this, _DWORD *a2, int a3)
 {
   _DWORD *v3; // eax
@@ -21,7 +22,7 @@ int __thiscall sub_7F86C0(int *this, _DWORD *a2, int a3)
   NiGeometry **v21; // eax
   void (__thiscall *v22)(_DWORD **, int, _DWORD, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *); // edx
   volatile LONG *v23; // esi
-  int v24; // edx
+  unsigned int v24; // edx
   _DWORD *v25; // eax
   NiDynamicEffectState *v26; // edx
   int v27; // eax
@@ -74,223 +75,223 @@ int __thiscall sub_7F86C0(int *this, _DWORD *a2, int a3)
   NiPoint3 v75[5]; // [esp+15Ch] [ebp-4Ch] BYREF
   int v76; // [esp+1A4h] [ebp-4h]
 
-  v61 = this;
-  v60 = g_Renderer;
-  v3 = (_DWORD *)a2[1];
-  v4 = (_DWORD *)*v3;
-  v5 = v3[2];
-  v6 = *(_DWORD *)v5;
-  v7 = *(_DWORD *)(*(_DWORD *)v5 + 0xB4);
-  v58 = (NiDynamicEffectState *)v5;
-  qmemcpy(v74, (const void *)(v6 + 0x64), sizeof(v74));
-  v66 = *(_DWORD *)(v6 + 0x20);
-  v64 = v4;
-  v67 = *(_DWORD *)(v6 + 0x24);
-  v63 = v7;
-  v68 = *(_DWORD *)(v6 + 0x28);
-  v69 = *(_DWORD *)(v6 + 0x2C);
-  v8 = *sub_405760((NiGeometry *)v6, &v59);
-  if ( v59 )
+  v61 = this; /*0x7f86ed*/
+  v60 = renderer; /*0x7f86fd*/
+  v3 = (_DWORD *)a2[1]; /*0x7f8701*/
+  v4 = (_DWORD *)*v3; /*0x7f8704*/
+  v5 = v3[2]; /*0x7f8709*/
+  v6 = *(_DWORD *)v5; /*0x7f870b*/
+  v7 = *(_DWORD *)(*(_DWORD *)v5 + 0xB4); /*0x7f870d*/
+  v58 = (NiDynamicEffectState *)v5; /*0x7f8713*/
+  qmemcpy(v74, (const void *)(v6 + 0x64), sizeof(v74)); /*0x7f8723*/
+  v66 = *(_DWORD *)(v6 + 0x20); /*0x7f8728*/
+  v64 = v4; /*0x7f872c*/
+  v67 = *(_DWORD *)(v6 + 0x24); /*0x7f8733*/
+  v63 = v7; /*0x7f8737*/
+  v68 = *(_DWORD *)(v6 + 0x28); /*0x7f873e*/
+  v69 = *(_DWORD *)(v6 + 0x2C); /*0x7f8749*/
+  v8 = *NiGeometry_GetPropertyState((NiGeometry *)v6, &v59); /*0x7f8755*/
+  if ( v59 ) /*0x7f875d*/
   {
-    v9 = v59;
-    if ( !InterlockedDecrement(v59 + 1) )
-      (**(void (__thiscall ***)(volatile LONG *, int))v9)(v9, 1);
+    v9 = v59; /*0x7f875f*/
+    if ( !InterlockedDecrement(v59 + 1) ) /*0x7f8765*/
+      (**(void (__thiscall ***)(volatile LONG *, int))v9)(v9, 1); /*0x7f877b*/
   }
-  v10 = *(_DWORD ***)(v6 + 0xBC);
-  v11 = *((_DWORD *)v8 + 6);
-  dword_B42E90 = (unsigned __int16)a3;
-  dword_B42EB8 = (int)v58;
-  sub_7ECB20();
-  sub_7F60F0(a3, (int)v58, v11, 0);
-  sub_7F6A30((NiGeometry *)v6);
-  v70 = *(_DWORD *)(v63 + 0x38);
-  v12 = v70;
-  v13 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56);
-  v14 = (void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xA];
-  v49 = *v13;
-  v76 = 0;
-  v14(v10, v6, 0, v12, v8, v49, v74, &v66);
-  v76 = 0xFFFFFFFF;
-  if ( v56 )
+  v10 = *(_DWORD ***)(v6 + 0xBC); /*0x7f8785*/
+  v11 = *((_DWORD *)v8 + 6); /*0x7f878b*/
+  LODWORD(unk_B42E90) = (unsigned __int16)a3; /*0x7f878e*/
+  *(_DWORD *)&OB_RendererGlobalState_010201A0[0x1F] = v58; /*0x7f8797*/
+  OB_BSShader_ResetLightConstantSlots_010201A0(); /*0x7f879c*/
+  OB_BSShader_RebuildRenderEntryLightConstants_010201A0(a3, (int)v58, v11, 0); /*0x7f87b7*/
+  sub_7F6A30((NiGeometry *)v6); /*0x7f87bf*/
+  v70 = *(_DWORD *)(v63 + 0x38); /*0x7f87d2*/
+  v12 = v70; /*0x7f87c8*/
+  v13 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56); /*0x7f87d6*/
+  v14 = (void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xA]; /*0x7f87df*/
+  v49 = *v13; /*0x7f87ec*/
+  v76 = 0; /*0x7f87f4*/
+  v14(v10, v6, 0, v12, v8, v49, v74, &v66); /*0x7f87ff*/
+  v76 = 0xFFFFFFFF; /*0x7f8807*/
+  if ( v56 ) /*0x7f8812*/
   {
-    v57 = (int)v56;
-    if ( !InterlockedDecrement(v56 + 1) )
+    v57 = (int)v56; /*0x7f8814*/
+    if ( !InterlockedDecrement(v56 + 1) ) /*0x7f881c*/
     {
-      if ( v57 )
-        (**(void (__thiscall ***)(int, int))v57)(v57, 1);
+      if ( v57 ) /*0x7f882c*/
+        (**(void (__thiscall ***)(int, int))v57)(v57, 1); /*0x7f8834*/
     }
   }
-  v15 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56);
-  v16 = (void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xB];
-  v50 = *v15;
-  v76 = 1;
-  v16(v10, v6, 0, v12, v8, v50, v74, &v66);
-  v76 = 0xFFFFFFFF;
-  if ( v56 )
+  v15 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56); /*0x7f883d*/
+  v16 = (void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xB]; /*0x7f8846*/
+  v50 = *v15; /*0x7f8853*/
+  v76 = 1; /*0x7f885b*/
+  v16(v10, v6, 0, v12, v8, v50, v74, &v66); /*0x7f8866*/
+  v76 = 0xFFFFFFFF; /*0x7f886e*/
+  if ( v56 ) /*0x7f8879*/
   {
-    v57 = (int)v56;
-    if ( !InterlockedDecrement(v56 + 1) )
+    v57 = (int)v56; /*0x7f887b*/
+    if ( !InterlockedDecrement(v56 + 1) ) /*0x7f8883*/
     {
-      if ( v57 )
-        (**(void (__thiscall ***)(int, int))v57)(v57, 1);
+      if ( v57 ) /*0x7f8893*/
+        (**(void (__thiscall ***)(int, int))v57)(v57, 1); /*0x7f889b*/
     }
   }
-  ((void (__thiscall *)(_DWORD **))(*v10)[0x12])(v10);
-  v62 = v10[0xF];
-  v17 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56);
-  v18 = (void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xC];
-  v51 = *v17;
-  v76 = 2;
-  v18(v10, v6, 0, v12, v8, v51, v74, &v66);
-  v76 = 0xFFFFFFFF;
-  if ( v56 )
+  ((void (__thiscall *)(_DWORD **))(*v10)[0x12])(v10); /*0x7f88a4*/
+  v62 = v10[0xF]; /*0x7f88b0*/
+  v17 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56); /*0x7f88b4*/
+  v18 = (void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xC]; /*0x7f88bd*/
+  v51 = *v17; /*0x7f88ca*/
+  v76 = 2; /*0x7f88d2*/
+  v18(v10, v6, 0, v12, v8, v51, v74, &v66); /*0x7f88dd*/
+  v76 = 0xFFFFFFFF; /*0x7f88e5*/
+  if ( v56 ) /*0x7f88f0*/
   {
-    v57 = (int)v56;
-    if ( !InterlockedDecrement(v56 + 1) )
+    v57 = (int)v56; /*0x7f88f2*/
+    if ( !InterlockedDecrement(v56 + 1) ) /*0x7f88fa*/
     {
-      if ( v57 )
-        (**(void (__thiscall ***)(int, int))v57)(v57, 1);
+      if ( v57 ) /*0x7f890a*/
+        (**(void (__thiscall ***)(int, int))v57)(v57, 1); /*0x7f8912*/
     }
   }
-  v19 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56);
-  v20 = (void (__thiscall *)(_DWORD **, int, _DWORD, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xD];
-  v52 = *v19;
-  v76 = 3;
-  v20(v10, v6, 0, 0, v12, v8, v52, v74, &v66);
-  v76 = 0xFFFFFFFF;
-  if ( v56 )
+  v19 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56); /*0x7f891b*/
+  v20 = (void (__thiscall *)(_DWORD **, int, _DWORD, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xD]; /*0x7f8924*/
+  v52 = *v19; /*0x7f8931*/
+  v76 = 3; /*0x7f893b*/
+  v20(v10, v6, 0, 0, v12, v8, v52, v74, &v66); /*0x7f8946*/
+  v76 = 0xFFFFFFFF; /*0x7f894e*/
+  if ( v56 ) /*0x7f8959*/
   {
-    v57 = (int)v56;
-    if ( !InterlockedDecrement(v56 + 1) )
+    v57 = (int)v56; /*0x7f895b*/
+    if ( !InterlockedDecrement(v56 + 1) ) /*0x7f8963*/
     {
-      if ( v57 )
-        (**(void (__thiscall ***)(int, int))v57)(v57, 1);
+      if ( v57 ) /*0x7f8973*/
+        (**(void (__thiscall ***)(int, int))v57)(v57, 1); /*0x7f897b*/
     }
   }
-  ((void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *))(*v10)[0xF])(v10, v6, 0, v12, v8);
-  v21 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56);
-  v22 = (void (__thiscall *)(_DWORD **, int, _DWORD, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xE];
-  v53 = *v21;
-  v76 = 4;
-  v22(v10, v6, 0, 0, v12, v8, v53, v74, &v66);
-  v76 = 0xFFFFFFFF;
-  if ( v56 )
+  ((void (__thiscall *)(_DWORD **, int, _DWORD, int, volatile LONG *))(*v10)[0xF])(v10, v6, 0, v12, v8); /*0x7f8989*/
+  v21 = sub_7016D0((NiGeometry *)v6, (NiDynamicEffectState **)&v56); /*0x7f8992*/
+  v22 = (void (__thiscall *)(_DWORD **, int, _DWORD, _DWORD, int, volatile LONG *, NiGeometry *, int *, int *))(*v10)[0xE]; /*0x7f899b*/
+  v53 = *v21; /*0x7f89a8*/
+  v76 = 4; /*0x7f89b2*/
+  v22(v10, v6, 0, 0, v12, v8, v53, v74, &v66); /*0x7f89bd*/
+  v76 = 0xFFFFFFFF; /*0x7f89c5*/
+  if ( v56 ) /*0x7f89d0*/
   {
-    v23 = v56;
-    if ( !InterlockedDecrement(v56 + 1) )
-      (**(void (__thiscall ***)(volatile LONG *, int))v23)(v23, 1);
+    v23 = v56; /*0x7f89d2*/
+    if ( !InterlockedDecrement(v56 + 1) ) /*0x7f89d8*/
+      (**(void (__thiscall ***)(volatile LONG *, int))v23)(v23, 1); /*0x7f89ee*/
   }
-  (*(void (__thiscall **)(int, NiDX9Renderer *))(*(_DWORD *)v6 + 0x88))(v6, g_Renderer);
-  v24 = 4 * dword_B28CB0;
-  v59 = (volatile LONG *)v63;
-  _memset(*v61, 0, v24);
-  v25 = v64;
-  if ( v64 )
+  (*(void (__thiscall **)(int, NiDX9Renderer *))(*(_DWORD *)v6 + 0x88))(v6, renderer); /*0x7f8a02*/
+  v24 = 4 * dword_B28CB0; /*0x7f8a0e*/
+  v59 = (volatile LONG *)v63; /*0x7f8a15*/
+  _memset(*v61, 0, v24); /*0x7f8a23*/
+  v25 = v64; /*0x7f8a28*/
+  if ( v64 ) /*0x7f8a31*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x7f8a44*/
     {
-      v26 = v58;
-      v64 = (_DWORD *)*v25;
-      v27 = v25[2];
-      dword_B42E90 = (unsigned __int16)a3;
-      dword_B42EB8 = v27;
-      v28 = *(float *)v27;
-      v29 = *(_DWORD *)(*(_DWORD *)v27 + 0xB4);
-      v56 = (volatile LONG *)v26;
-      v63 = v29;
-      v58 = (NiDynamicEffectState *)v27;
-      v30 = *sub_405760((NiGeometry *)LODWORD(v28), &v71);
-      v65 = (int)v30;
-      if ( v71 )
+      v26 = v58; /*0x7f8a44*/
+      v64 = (_DWORD *)*v25; /*0x7f8a4d*/
+      v27 = v25[2]; /*0x7f8a51*/
+      LODWORD(unk_B42E90) = (unsigned __int16)a3; /*0x7f8a5b*/
+      *(_DWORD *)&OB_RendererGlobalState_010201A0[0x1F] = v27; /*0x7f8a61*/
+      v28 = *(float *)v27; /*0x7f8a66*/
+      v29 = *(_DWORD *)(*(_DWORD *)v27 + 0xB4); /*0x7f8a68*/
+      v56 = (volatile LONG *)v26; /*0x7f8a6e*/
+      v63 = v29; /*0x7f8a76*/
+      v58 = (NiDynamicEffectState *)v27; /*0x7f8a7d*/
+      v30 = *NiGeometry_GetPropertyState((NiGeometry *)LODWORD(v28), &v71); /*0x7f8a86*/
+      v65 = (int)v30; /*0x7f8a8e*/
+      if ( v71 ) /*0x7f8a92*/
       {
-        v31 = v71;
-        if ( !InterlockedDecrement(v71 + 1) )
-          (**(void (__thiscall ***)(volatile LONG *, int))v31)(v31, 1);
+        v31 = v71; /*0x7f8a94*/
+        if ( !InterlockedDecrement(v71 + 1) ) /*0x7f8a9a*/
+          (**(void (__thiscall ***)(volatile LONG *, int))v31)(v31, 1); /*0x7f8ab0*/
       }
-      v32 = *((_DWORD *)v30 + 6);
-      qmemcpy(v74, (const void *)(LODWORD(v28) + 0x64), sizeof(v74));
-      v33 = v63;
-      v66 = *(_DWORD *)(LODWORD(v28) + 0x20);
-      v67 = *(_DWORD *)(LODWORD(v28) + 0x24);
-      v68 = *(_DWORD *)(LODWORD(v28) + 0x28);
-      v34 = *(_DWORD *)(LODWORD(v28) + 0x2C);
-      v57 = v32;
-      v69 = v34;
-      if ( v59 == (volatile LONG *)v63 )
+      v32 = *((_DWORD *)v30 + 6); /*0x7f8ab2*/
+      qmemcpy(v74, (const void *)(LODWORD(v28) + 0x64), sizeof(v74)); /*0x7f8ac1*/
+      v33 = v63; /*0x7f8ac6*/
+      v66 = *(_DWORD *)(LODWORD(v28) + 0x20); /*0x7f8ace*/
+      v67 = *(_DWORD *)(LODWORD(v28) + 0x24); /*0x7f8ad5*/
+      v68 = *(_DWORD *)(LODWORD(v28) + 0x28); /*0x7f8adc*/
+      v34 = *(_DWORD *)(LODWORD(v28) + 0x2C); /*0x7f8ae0*/
+      v57 = v32; /*0x7f8ae3*/
+      v69 = v34; /*0x7f8ae7*/
+      if ( v59 == (volatile LONG *)v63 ) /*0x7f8aeb*/
       {
-        sub_7F60F0(a3, (int)v58, v32, (int)v56);
-        v55 = *sub_7016D0((NiGeometry *)LODWORD(v28), (NiDynamicEffectState **)&v73);
-        v76 = 6;
-        sub_7F0BC0(v10, v28, 0, v70, (_DWORD *)v65, (int)v55, (int)v74, (int)&v66);
-        v76 = 0xFFFFFFFF;
-        if ( v73 )
+        OB_BSShader_RebuildRenderEntryLightConstants_010201A0(a3, (int)v58, v32, (int)v56); /*0x7f8c2e*/
+        v55 = *sub_7016D0((NiGeometry *)LODWORD(v28), (NiDynamicEffectState **)&v73); /*0x7f8c4f*/
+        v76 = 6; /*0x7f8c5b*/
+        OB_SpeedTreeLeafShader_SetupPass_010201A0(v10, v28, 0, v70, (_DWORD *)v65, (int)v55, (int)v74, (int)&v66); /*0x7f8c66*/
+        v76 = 0xFFFFFFFF; /*0x7f8c71*/
+        if ( v73 ) /*0x7f8c7c*/
         {
-          v40 = v73;
-          if ( !InterlockedDecrement(v73 + 1) )
-            (**(void (__thiscall ***)(volatile LONG *, int))v40)(v40, 1);
+          v40 = v73; /*0x7f8c7e*/
+          if ( !InterlockedDecrement(v73 + 1) ) /*0x7f8c84*/
+            (**(void (__thiscall ***)(volatile LONG *, int))v40)(v40, 1); /*0x7f8c9a*/
         }
-        v41 = v60;
-        sub_765480(v60, (float *)v74, 0);
-        sub_7F5B80((float *)v74, v75);
-        sub_7F0100((_DWORD *)v57, (int)v75, *(float *)&v74[0xC]);
-        renderState = v41->member.renderState;
-        p_SetVertexShader = (void (__thiscall **)(NiDX9RenderState *, int))&renderState->vtbl->SetVertexShader;
-        v44 = (*(int (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)v62[0x16] + 0x40))(v62[0x16], 0);
-        (*p_SetVertexShader)(renderState, v44);
-        v39 = v62[0x11];
+        v41 = v60; /*0x7f8c9c*/
+        NiDX9Renderer_SetModelTransform(v60, (float *)v74, 0); /*0x7f8ca9*/
+        sub_7F5B80((float *)v74, v75); /*0x7f8cbd*/
+        OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0((_DWORD *)v57, (int)v75, *(float *)&v74[0xC]); /*0x7f8cdc*/
+        renderState = v41->member.renderState; /*0x7f8ce8*/
+        p_SetVertexShader = (void (__thiscall **)(NiDX9RenderState *, int))&renderState->vtbl->SetVertexShader; /*0x7f8cf7*/
+        v44 = (*(int (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)v62[0x16] + 0x40))(v62[0x16], 0); /*0x7f8cfd*/
+        (*p_SetVertexShader)(renderState, v44); /*0x7f8d04*/
+        v39 = v62[0x11]; /*0x7f8d0a*/
       }
       else
       {
-        sub_7F6A30((NiGeometry *)LODWORD(v28));
-        v35 = *(_DWORD *)(v33 + 0x38);
-        v70 = v35;
-        sub_7F60F0(a3, (int)v58, v57, (int)v56);
-        v54 = *sub_7016D0((NiGeometry *)LODWORD(v28), (NiDynamicEffectState **)&v72);
-        v76 = 5;
-        sub_7F0BC0(v10, v28, 0, v35, (_DWORD *)v65, (int)v54, (int)v74, (int)&v66);
-        v76 = 0xFFFFFFFF;
-        if ( v72 )
+        sub_7F6A30((NiGeometry *)LODWORD(v28)); /*0x7f8af8*/
+        v35 = *(_DWORD *)(v33 + 0x38); /*0x7f8b09*/
+        v70 = v35; /*0x7f8b19*/
+        OB_BSShader_RebuildRenderEntryLightConstants_010201A0(a3, (int)v58, v57, (int)v56); /*0x7f8b1d*/
+        v54 = *sub_7016D0((NiGeometry *)LODWORD(v28), (NiDynamicEffectState **)&v72); /*0x7f8b3e*/
+        v76 = 5; /*0x7f8b46*/
+        OB_SpeedTreeLeafShader_SetupPass_010201A0(v10, v28, 0, v35, (_DWORD *)v65, (int)v54, (int)v74, (int)&v66); /*0x7f8b51*/
+        v76 = 0xFFFFFFFF; /*0x7f8b5c*/
+        if ( v72 ) /*0x7f8b67*/
         {
-          v59 = v72;
-          if ( !InterlockedDecrement(v72 + 1) )
+          v59 = v72; /*0x7f8b69*/
+          if ( !InterlockedDecrement(v72 + 1) ) /*0x7f8b71*/
           {
-            if ( v59 )
-              (**(void (__thiscall ***)(volatile LONG *, int))v59)(v59, 1);
+            if ( v59 ) /*0x7f8b81*/
+              (**(void (__thiscall ***)(volatile LONG *, int))v59)(v59, 1); /*0x7f8b89*/
           }
         }
-        sub_765480(v60, (float *)v74, 0);
-        sub_7F5B80((float *)v74, v75);
-        sub_7F0100((_DWORD *)v57, (int)v75, *(float *)&v74[0xC]);
-        ((void (__thiscall *)(_DWORD **, float, _DWORD, int, int))(*v10)[0xF])(
+        NiDX9Renderer_SetModelTransform(v60, (float *)v74, 0); /*0x7f8b96*/
+        sub_7F5B80((float *)v74, v75); /*0x7f8baa*/
+        OB_SpeedTreeLeafShader_UpdateObjectSpaceLightConstants_010201A0((_DWORD *)v57, (int)v75, *(float *)&v74[0xC]); /*0x7f8bc9*/
+        ((void (__thiscall *)(_DWORD **, float, _DWORD, int, int))(*v10)[0xF])( /*0x7f8bde*/
           v10,
           COERCE_FLOAT(LODWORD(v28)),
           0,
           v35,
           v65);
-        v36 = v60->member.renderState;
-        v37 = (void (__thiscall **)(NiDX9RenderState *, int))&v36->vtbl->SetVertexShader;
-        v38 = (*(int (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)v62[0x16] + 0x40))(v62[0x16], 0);
-        (*v37)(v36, v38);
-        v39 = v62[0x11];
+        v36 = v60->member.renderState; /*0x7f8beb*/
+        v37 = (void (__thiscall **)(NiDX9RenderState *, int))&v36->vtbl->SetVertexShader; /*0x7f8bfa*/
+        v38 = (*(int (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)v62[0x16] + 0x40))(v62[0x16], 0); /*0x7f8c00*/
+        (*v37)(v36, v38); /*0x7f8c07*/
+        v39 = v62[0x11]; /*0x7f8c0d*/
       }
-      v45 = v60->member.renderState;
-      p_SetPixelShader = (void (__thiscall **)(NiDX9RenderState *, int))&v45->vtbl->SetPixelShader;
-      v47 = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v39 + 0x38))(v39, 0);
-      (*p_SetPixelShader)(v45, v47);
-      sub_7F6BF0(v61, (NiGeometry *)LODWORD(v28), (int)v10, (int)v62, 1);
-      v59 = (volatile LONG *)v63;
-      if ( !v64 )
-        break;
-      v25 = v64;
+      v45 = v60->member.renderState; /*0x7f8d11*/
+      p_SetPixelShader = (void (__thiscall **)(NiDX9RenderState *, int))&v45->vtbl->SetPixelShader; /*0x7f8d20*/
+      v47 = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v39 + 0x38))(v39, 0); /*0x7f8d23*/
+      (*p_SetPixelShader)(v45, v47); /*0x7f8d2a*/
+      sub_7F6BF0(v61, (NiGeometry *)LODWORD(v28), (int)v10, (int)v62, 1); /*0x7f8d39*/
+      v59 = (volatile LONG *)v63; /*0x7f8d47*/
+      if ( !v64 ) /*0x7f8d4b*/
+        break; /*0x7f8d4b*/
+      v25 = v64; /*0x7f8a40*/
     }
   }
-  sub_7A9C30((int)a2);
-  a2[3] = a2[1];
-  a2[1] = 0;
-  a2[2] = 0;
-  a2[4] = 0;
-  ((void (__thiscall *)(_DWORD **))(*v10)[0x13])(v10);
-  return ((int (__thiscall *)(NiDX9RenderState *, _DWORD))v60->member.renderState->vtbl->SetVar_0FF5)(
+  BSTPersistentList_ReleaseFreeNodesToGlobalPool((int)a2); /*0x7f8d5a*/
+  a2[3] = a2[1]; /*0x7f8d64*/
+  a2[1] = 0; /*0x7f8d67*/
+  a2[2] = 0; /*0x7f8d6a*/
+  a2[4] = 0; /*0x7f8d6d*/
+  ((void (__thiscall *)(_DWORD **))(*v10)[0x13])(v10); /*0x7f8d77*/
+  return ((int (__thiscall *)(NiDX9RenderState *, _DWORD))v60->member.renderState->vtbl->SetVar_0FF5)( /*0x7f8d8e*/
            v60->member.renderState,
            0);
 }

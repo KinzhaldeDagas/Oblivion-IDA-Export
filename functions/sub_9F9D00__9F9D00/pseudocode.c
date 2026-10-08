@@ -1,5 +1,5 @@
 int sub_9F9D00()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A1DC, (int)"sSkillDescAthletics", (int)"Athletics Description");
-  return atexit(sub_A23BF0);
+  GameSetting_ConstrAndReg(&stru_B3A1DC, "sSkillDescAthletics", "Athletics Description"); /*0x9f9d0f*/
+  return atexit(sub_A23BF0); /*0x9f9d1f*/
 }

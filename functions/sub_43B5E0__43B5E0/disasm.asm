@@ -140,3 +140,26 @@
 0x43B76F: pop     ebx
 0x43B770: add     esp, 14h
 0x43B773: retn    24h ; '$'
+0x9ACAA0: lea     ecx, [ebp+24h]; void *
+0x9ACAA3: jmp     sub_4BDDC0
+0x9ACAA8: mov     eax, [ebp-10h]
+0x9ACAAB: and     eax, 1
+0x9ACAAE: jz      locret_9ACAC0
+0x9ACAB4: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9ACAB8: mov     ecx, [ebp+4]; void *
+0x9ACABB: jmp     sub_4BDDC0
+0x9ACAC0: retn
+0x9ACAC1: mov     eax, [ebp+8]
+0x9ACAC4: push    eax
+0x9ACAC5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ACACA: pop     ecx
+0x9ACACB: retn
+0x9ACACC: lea     ecx, [ebp+24h]; void *
+0x9ACACF: jmp     sub_4BDDC0
+0x9ACAD4: mov     edx, [esp+arg_4]
+0x9ACAD8: lea     eax, [edx-18h]
+0x9ACADB: mov     ecx, [edx-1Ch]
+0x9ACADE: xor     ecx, eax
+0x9ACAE0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACAE5: mov     eax, offset stru_AD9724
+0x9ACAEA: jmp     ___CxxFrameHandler3

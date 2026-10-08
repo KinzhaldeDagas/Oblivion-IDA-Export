@@ -1,4 +1,4 @@
-0x7F1B70: push    0FFFFFFFFh
+0x7F1B70: push    0FFFFFFFFh; SpeedTreeLeafShaderProperty dtor: releases STLSPData +0xA8 then SpeedTreeShaderLightingProperty base.
 0x7F1B72: push    offset ??1SpeedTreeLeafShaderProperty@@UAE@XZ_SEH
 0x7F1B77: mov     eax, large fs:0
 0x7F1B7D: push    eax
@@ -59,3 +59,15 @@
 0x7F1C1E: pop     ebp
 0x7F1C1F: add     esp, 10h
 0x7F1C22: retn
+0x9CFE00: mov     ecx, [ebp-10h]; this
+0x9CFE03: jmp     ??1SpeedTreeShaderLightingProperty@@UAE@XZ; SpeedTreeShaderLightingProperty::~SpeedTreeShaderLightingProperty(void)
+0x9CFE08: mov     ecx, [ebp-10h]
+0x9CFE0B: add     ecx, 0A8h ; '¨'; slot
+0x9CFE11: jmp     NiPointerSlot_Release
+0x9CFE16: mov     edx, [esp+stspData]
+0x9CFE1A: lea     eax, [edx-10h]
+0x9CFE1D: mov     ecx, [edx-14h]
+0x9CFE20: xor     ecx, eax
+0x9CFE22: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFE27: mov     eax, offset stru_AF8900
+0x9CFE2C: jmp     ___CxxFrameHandler3

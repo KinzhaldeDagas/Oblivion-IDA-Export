@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52EC30",
-    "line": "push    esi",
+    "line": "push    esi; Runtime TESTopic XIDX writer initializes/finalizes a DIAL record chunk and emits four bytes from the field at TESTopic+0x30 under XIDX. This confirms XIDX is a persisted raw U32 field in Oblivion.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x52EC43",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },

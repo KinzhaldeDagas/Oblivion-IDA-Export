@@ -10,8 +10,8 @@
 0x4CFB06: push    edi
 0x4CFB07: mov     [esp+34h+var_1C], ebx
 0x4CFB0B: jnz     loc_4CFE58
-0x4CFB11: lea     ecx, [ebx+28h]
-0x4CFB14: call    ExtraDataList?_GetDetachTime
+0x4CFB11: lea     ecx, [ebx+28h]; this
+0x4CFB14: call    ExtraDataList_GetDetachTime; Returns the uint32 payload of ExtraDetachTime (type 0x10), or zero when absent.
 0x4CFB19: mov     edi, eax
 0x4CFB1B: test    edi, edi
 0x4CFB1D: jz      loc_4CFE58
@@ -20,12 +20,12 @@
 0x4CFB2B: jnz     short loc_4CFB34
 0x4CFB2D: mov     byte ptr [esp+34h+var_24+3], 1
 0x4CFB32: jmp     short loc_4CFB83
-0x4CFB34: mov     ecx, offset TimeGlobals
+0x4CFB34: mov     ecx, 0B332E0h
 0x4CFB39: call    TimeGlobals_GetGameDaysPassed
 0x4CFB3E: lea     esi, [eax+eax*2]
 0x4CFB41: add     esi, esi
 0x4CFB43: add     esi, esi
-0x4CFB45: mov     ecx, offset TimeGlobals
+0x4CFB45: mov     ecx, 0B332E0h
 0x4CFB4A: add     esi, esi
 0x4CFB4C: call    TimeGlobals_GetGameHour
 0x4CFB51: fnstcw  word ptr [esp+34h+var_20]
@@ -43,7 +43,7 @@
 0x4CFB83: mov     ecx, ebx
 0x4CFB85: call    sub_4CC660
 0x4CFB8A: push    ebx; a2
-0x4CFB8B: mov     ecx, offset stru_B35C80; this
+0x4CFB8B: mov     ecx, offset unk_B35C80; this
 0x4CFB90: call    sub_496EA0
 0x4CFB95: lea     ebp, [ebx+48h]
 0x4CFB98: test    ebp, ebp
@@ -104,7 +104,7 @@
 0x4CFC47: push    1; a2
 0x4CFC49: call    eax
 0x4CFC4B: lea     ecx, [esi+44h]
-0x4CFC4E: call    sub_420480
+0x4CFC4E: call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.
 0x4CFC53: mov     ebp, eax
 0x4CFC55: test    ebp, ebp
 0x4CFC57: jz      short loc_4CFCC2
@@ -116,7 +116,7 @@
 0x4CFC6B: mov     ebx, [ebp+0]
 0x4CFC6E: push    0
 0x4CFC70: lea     ecx, [ebx+44h]
-0x4CFC73: call    sub_4203E0
+0x4CFC73: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x4CFC78: mov     edx, [ebx]
 0x4CFC7A: mov     eax, [edx+78h]
 0x4CFC7D: mov     ecx, ebx
@@ -133,7 +133,7 @@
 0x4CFC99: mov     edx, [eax]
 0x4CFC9B: push    eax
 0x4CFC9C: mov     [ebp+0], edx
-0x4CFC9F: call    FormHeapFree
+0x4CFC9F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CFCA4: mov     ebx, [esp+38h+var_1C]
 0x4CFCA8: add     esp, 4
 0x4CFCAB: jmp     short loc_4CFC60
@@ -141,7 +141,7 @@
 0x4CFCB1: mov     dword ptr [ebp+0], 0
 0x4CFCB8: jmp     short loc_4CFC60
 0x4CFCBA: lea     ecx, [esi+44h]
-0x4CFCBD: call    sub_4204A0
+0x4CFCBD: call    ExtraDataList_RemoveDroppedItemList; Removes ExtraDroppedItemList type 0x42 when present.
 0x4CFCC2: mov     eax, [esi]
 0x4CFCC4: mov     edx, [eax+0F4h]
 0x4CFCCA: lea     ecx, [esp+34h+a4]
@@ -209,7 +209,7 @@
 0x4CFD84: call    sub_4D6640
 0x4CFD89: lea     ebx, [esi+44h]
 0x4CFD8C: mov     ecx, ebx
-0x4CFD8E: call    sub_420480
+0x4CFD8E: call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.
 0x4CFD93: mov     esi, eax
 0x4CFD95: test    esi, esi
 0x4CFD97: jz      short loc_4CFDF7
@@ -221,7 +221,7 @@
 0x4CFDAB: mov     ebp, [esi]
 0x4CFDAD: push    0
 0x4CFDAF: lea     ecx, [ebp+44h]
-0x4CFDB2: call    sub_4203E0
+0x4CFDB2: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x4CFDB7: mov     edx, [ebp+0]
 0x4CFDBA: mov     eax, [edx+78h]
 0x4CFDBD: mov     ecx, ebp
@@ -238,13 +238,13 @@
 0x4CFDD9: mov     edx, [eax]
 0x4CFDDB: push    eax
 0x4CFDDC: mov     [esi], edx
-0x4CFDDE: call    FormHeapFree
+0x4CFDDE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CFDE3: add     esp, 4
 0x4CFDE6: jmp     short loc_4CFDA0
 0x4CFDE8: mov     dword ptr [esi], 0
 0x4CFDEE: jmp     short loc_4CFDA0
 0x4CFDF0: mov     ecx, ebx
-0x4CFDF2: call    sub_4204A0
+0x4CFDF2: call    ExtraDataList_RemoveDroppedItemList; Removes ExtraDroppedItemList type 0x42 when present.
 0x4CFDF7: mov     ebx, [esp+34h+var_1C]
 0x4CFDFB: mov     ebp, [esp+34h+var_20]
 0x4CFDFF: lea     esi, [edi+44h]
@@ -261,13 +261,13 @@
 0x4CFE1F: cmp     [esp+34h+var_20], 0
 0x4CFE24: jnz     loc_4CFBA6
 0x4CFE2A: push    ebx; a2
-0x4CFE2B: mov     ecx, offset stru_B35C80; this
+0x4CFE2B: mov     ecx, offset unk_B35C80; this
 0x4CFE30: call    sub_496F50
 0x4CFE35: mov     ecx, ds:0B33B00h
 0x4CFE3B: call    sub_45A500
-0x4CFE40: push    0
-0x4CFE42: lea     ecx, [ebx+28h]
-0x4CFE45: call    ExtraDataList?_SetDetachTime
+0x4CFE40: push    0; detachTime
+0x4CFE42: lea     ecx, [ebx+28h]; this
+0x4CFE45: call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.
 0x4CFE4A: mov     edx, [ebx]
 0x4CFE4C: mov     eax, [edx+44h]
 0x4CFE4F: push    0E000000h
@@ -299,7 +299,7 @@
 0x4CFE9B: test    al, 1
 0x4CFE9D: jz      loc_4CFF3C
 0x4CFEA3: mov     ecx, edi; this
-0x4CFEA5: call    TESForm_GetQuestItem
+0x4CFEA5: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x4CFEAA: test    al, al
 0x4CFEAC: jnz     loc_4CFF3C
 0x4CFEB2: mov     edx, [edi]
@@ -349,8 +349,8 @@
 0x4CFF2C: call    sub_4491B0
 0x4CFF31: test    al, al
 0x4CFF33: jnz     short loc_4CFF3C
-0x4CFF35: mov     ecx, edi
-0x4CFF37: call    sub_4DBE40
+0x4CFF35: mov     ecx, edi; this
+0x4CFF37: call    TESObjectREFR_SetLockedFlagOnSelfOrLinkedDoor; Verified lock-state propagation helper: if this reference has an ExtraLock wrapper, sets its locked bit; otherwise follows its linked-door reference and sets that wrapper's locked bit. It then calls TESObjectREFR_MarkLockDataAsModified so the owning reference or linked door records change mask 0x40.
 0x4CFF3C: mov     ecx, ds:0B33B00h
 0x4CFF42: push    0
 0x4CFF44: push    edi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68F3C0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x68F3C8",
-    "line": "call    ActiveEffect_Base_SaveEffect",
+    "line": "call    ActiveEffect_Base_SaveEffect; Verified base save payload includes the HitEffectNode chain at ActiveEffect+0x34 for version >=0x2A: writes a count byte, then each hit effect's virtual type ID (+0x54) and per-type payload (+0x78). Earlier versions skip that list and use the older +0x14 payload branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x68F3D2",
-    "line": "mov     [esp+4+arg_0], 0",
+    "line": "mov     [esp+4+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -61,37 +61,37 @@
   },
   {
     "ea": "0x68F3DF",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+source], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68F3E3",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x68F3E9",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x68F3EB",
-    "line": "lea     edx, [esp+8+arg_0]",
+    "line": "lea     edx, [esp+8+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68F3EF",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68F3F0",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },

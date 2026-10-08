@@ -1,1 +1,1 @@
-std::_Mutex
+struct std::_Mutex;

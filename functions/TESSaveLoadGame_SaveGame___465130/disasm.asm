@@ -59,7 +59,7 @@
 0x4651DA: push    ebx
 0x4651DB: push    edx
 0x4651DC: mov     ecx, ebp
-0x4651DE: call    Savegame_Rename
+0x4651DE: call    TESSaveLoadGame_ResolveSaveFile; Save path resolver call. CharacterSpecificSaves qualifies quicksave/autosave stems with the active character name and hash.
 0x4651E3: mov     esi, eax
 0x4651E5: cmp     byte ptr [esp+68h+arg_8], 0
 0x4651EA: jz      short loc_465218
@@ -142,7 +142,6 @@
 0x4652D6: mov     edi, [edx+8]
 0x4652D9: mov     edx, edi
 0x4652DB: jmp     short loc_4652E0
-0x4652DD: align 10h
 0x4652E0: cmp     dword ptr [edx], 0
 0x4652E3: jnz     loc_46539B
 0x4652E9: add     eax, 1
@@ -152,30 +151,30 @@
 0x4652F3: xor     edi, edi
 0x4652F5: xor     eax, eax
 0x4652F7: cmp     eax, edi
-0x4652F9: mov     [esp+68h+var_3C], eax
+0x4652F9: mov     [esp+68h+position], eax
 0x4652FD: jz      loc_465717
-0x465303: lea     eax, [esp+68h+var_40]
-0x465307: push    eax
+0x465303: lea     eax, [esp+68h+valueOut]
+0x465307: push    eax; valueOut
 0x465308: lea     ecx, [esp+6Ch+a1]
-0x46530C: push    ecx
-0x46530D: mov     ecx, [ebp+0]
-0x465310: lea     edx, [esp+70h+var_3C]
+0x46530C: push    ecx; keyOut
+0x46530D: mov     ecx, [ebp+0]; self
+0x465310: lea     edx, [esp+70h+position]
 0x465314: xor     edi, edi
-0x465316: push    edx
-0x465317: mov     [esp+74h+var_40], edi
+0x465316: push    edx; position
+0x465317: mov     [esp+74h+valueOut], edi
 0x46531B: mov     [esp+74h+a1], edi
-0x46531F: call    sub_452600
+0x46531F: call    NiTMap_U32Pointer_GetNextEntry
 0x465324: mov     ecx, [esp+68h+a1]
 0x465328: cmp     ecx, edi
 0x46532A: jz      loc_46570C
-0x465330: mov     eax, [esp+68h+var_40]
+0x465330: mov     eax, [esp+68h+valueOut]
 0x465334: test    eax, eax
 0x465336: jz      loc_46570C
 0x46533C: mov     edx, [eax+4]
 0x46533F: test    edx, edx
 0x465341: mov     [ebp+14h], edx
 0x465344: mov     eax, [eax]
-0x465346: mov     [esp+68h+var_2B], eax
+0x465346: mov     [esp+68h+changeFlags], eax
 0x46534A: mov     al, [ebp+7Ch]
 0x46534D: mov     [esp+68h+var_30], ecx
 0x465351: mov     [esp+68h+var_27], al
@@ -202,13 +201,13 @@
 0x4653A0: jmp     loc_4652F7
 0x4653A5: mov     edx, [esi+8]
 0x4653A8: push    edi
-0x4653A9: lea     eax, [esp+6Ch+var_40]
+0x4653A9: lea     eax, [esp+6Ch+valueOut]
 0x4653AD: push    eax
 0x4653AE: push    0Ah
 0x4653B0: lea     ecx, [esp+74h+var_30]
 0x4653B4: push    ecx
 0x4653B5: push    esi
-0x4653B6: mov     [esp+7Ch+var_40], edi
+0x4653B6: mov     [esp+7Ch+valueOut], edi
 0x4653BA: call    edx
 0x4653BC: add     esp, 14h
 0x4653BF: mov     eax, [ebp+18h]
@@ -220,13 +219,13 @@
 0x4653D4: jmp     short loc_4653F0
 0x4653D6: mov     eax, [esi+8]
 0x4653D9: push    edi
-0x4653DA: lea     ecx, [esp+6Ch+var_40]
+0x4653DA: lea     ecx, [esp+6Ch+valueOut]
 0x4653DE: push    ecx
 0x4653DF: push    2
 0x4653E1: lea     edx, [esp+74h+arg_0]
 0x4653E5: push    edx
 0x4653E6: push    esi
-0x4653E7: mov     [esp+7Ch+var_40], edi
+0x4653E7: mov     [esp+7Ch+valueOut], edi
 0x4653EB: call    eax
 0x4653ED: add     esp, 14h
 0x4653F0: mov     edx, [esp+68h+arg_0]
@@ -241,20 +240,20 @@
 0x46540D: jmp     short loc_46542E
 0x46540F: mov     ecx, [esi+8]
 0x465412: push    edi
-0x465413: lea     edx, [esp+6Ch+var_40]
+0x465413: lea     edx, [esp+6Ch+valueOut]
 0x465417: push    edx
 0x465418: push    eax
 0x465419: mov     eax, [ebp+14h]
 0x46541C: push    eax
 0x46541D: push    esi
-0x46541E: mov     [esp+7Ch+var_40], edi
+0x46541E: mov     [esp+7Ch+valueOut], edi
 0x465422: call    ecx
 0x465424: mov     edx, [esp+7Ch+arg_0]
 0x46542B: add     esp, 14h
 0x46542E: mov     ecx, [ebp+40h]
 0x465431: test    ecx, ecx
 0x465433: jz      short loc_465466
-0x465435: mov     eax, [esp+68h+var_2B]
+0x465435: mov     eax, [esp+68h+changeFlags]
 0x465439: mov     [esp+68h+var_1F], eax
 0x46543D: mov     eax, [esp+68h+var_30]
 0x465441: mov     [esp+68h+var_24], eax
@@ -269,19 +268,19 @@
 0x465466: mov     dword ptr [ebp+14h], 0
 0x46546D: jmp     loc_46570C
 0x465472: push    ecx; a1
-0x465473: call    TESForm_LookupByFormID
+0x465473: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x465478: mov     edi, eax
 0x46547A: add     esp, 4
 0x46547D: test    edi, edi
 0x46547F: jz      loc_465611
-0x465485: mov     ecx, [esp+68h+var_2B]
+0x465485: mov     ecx, [esp+68h+changeFlags]
 0x465489: mov     al, [edi+4]
-0x46548C: push    ecx
-0x46548D: push    edi
+0x46548C: push    ecx; changeFlags
+0x46548D: push    edi; form
 0x46548E: mov     ecx, ebp
 0x465490: mov     [esp+70h+var_2C], al
-0x465494: call    sub_4535A0
-0x465499: mov     [esp+68h+var_2B], eax
+0x465494: call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.
+0x465499: mov     [esp+68h+changeFlags], eax
 0x46549D: mov     eax, ds:0B33B00h
 0x4654A2: mov     edx, [eax+18h]
 0x4654A5: shr     edx, 9
@@ -292,25 +291,25 @@
 0x4654B8: jmp     short TESSaveLoadGame_SaveGame?___GetFormSaveSize
 0x4654BA: mov     edx, [esi+8]
 0x4654BD: push    ebx
-0x4654BE: lea     eax, [esp+6Ch+var_40]
+0x4654BE: lea     eax, [esp+6Ch+valueOut]
 0x4654C2: push    eax
 0x4654C3: push    0Ah
 0x4654C5: lea     ecx, [esp+74h+var_30]
 0x4654C9: push    ecx
 0x4654CA: push    esi
-0x4654CB: mov     [esp+7Ch+var_40], ebx
+0x4654CB: mov     [esp+7Ch+valueOut], ebx
 0x4654CF: call    edx
 0x4654D1: add     esp, 14h
 0x4654D4: add     [esp+68h+var_54], ebx
 0x4654D8: lea     eax, [esp+68h+var_30]
 0x4654DC: mov     [ebp+84h], eax
 0x4654E2: mov     edx, [edi]
-0x4654E4: mov     eax, [esp+68h+var_2B]
+0x4654E4: mov     eax, [esp+68h+changeFlags]
 0x4654E8: mov     edx, [edx+4Ch]
 0x4654EB: push    eax
 0x4654EC: mov     ecx, edi
 0x4654EE: call    edx
-0x4654F0: mov     ecx, [esp+68h+var_2B]
+0x4654F0: mov     ecx, [esp+68h+changeFlags]
 0x4654F4: movzx   eax, ax
 0x4654F7: push    ecx
 0x4654F8: push    edi
@@ -326,13 +325,13 @@
 0x46551B: jmp     short loc_465537
 0x46551D: mov     edx, [esi+8]
 0x465520: push    ebx
-0x465521: lea     eax, [esp+6Ch+var_40]
+0x465521: lea     eax, [esp+6Ch+valueOut]
 0x465525: push    eax
 0x465526: push    2
 0x465528: lea     ecx, [esp+74h+arg_4]
 0x46552C: push    ecx
 0x46552D: push    esi
-0x46552E: mov     [esp+7Ch+var_40], ebx
+0x46552E: mov     [esp+7Ch+valueOut], ebx
 0x465532: call    edx
 0x465534: add     esp, 14h
 0x465537: mov     ax, word ptr [esp+68h+arg_4]
@@ -349,14 +348,14 @@
 0x46555B: push    offset aCouldNotCreate; "Could not create save buffer, out of me"...
 0x465560: call    sub_404EC0
 0x465565: add     esp, 4
-0x465568: mov     eax, [esp+68h+var_2B]
+0x465568: mov     eax, [esp+68h+changeFlags]
 0x46556C: mov     ebx, [ebp+14h]
 0x46556F: push    eax
 0x465570: push    edi
 0x465571: mov     ecx, ebp
-0x465573: call    SaveLoad_SaveFormModifiedFlags??
+0x465573: call    SaveLoad_SaveFormModifiedFlags??; Main savegame form-save caller of SaveLoad_SaveFormModifiedFlags??. Provenance capture runs here before OBSE plugin co-save callbacks write SPFX.
 0x465578: mov     edx, [edi]
-0x46557A: mov     eax, [esp+68h+var_2B]
+0x46557A: mov     eax, [esp+68h+changeFlags]
 0x46557E: mov     edx, [edx+50h]
 0x465581: push    eax
 0x465582: mov     ecx, edi
@@ -386,7 +385,7 @@
 0x4655CF: mov     dword ptr [ebp+84h], 0
 0x4655D9: jz      short loc_465616
 0x4655DB: mov     eax, [esp+68h+var_30]
-0x4655DF: mov     edx, [esp+68h+var_2B]
+0x4655DF: mov     edx, [esp+68h+changeFlags]
 0x4655E3: mov     [esp+68h+var_18], eax
 0x4655E7: mov     al, [esp+68h+var_27]
 0x4655EB: mov     [esp+68h+var_13], edx
@@ -412,13 +411,13 @@
 0x465641: jmp     short loc_46565D
 0x465643: mov     ecx, [esi+8]
 0x465646: push    ebx
-0x465647: lea     edx, [esp+6Ch+var_40]
+0x465647: lea     edx, [esp+6Ch+valueOut]
 0x46564B: push    edx
 0x46564C: push    0Ah
 0x46564E: lea     eax, [esp+74h+var_30]
 0x465652: push    eax
 0x465653: push    esi
-0x465654: mov     [esp+7Ch+var_40], ebx
+0x465654: mov     [esp+7Ch+valueOut], ebx
 0x465658: call    ecx
 0x46565A: add     esp, 14h
 0x46565D: mov     edx, [ebp+18h]
@@ -431,13 +430,13 @@
 0x46567B: jmp     short loc_465697
 0x46567D: mov     edx, [esi+8]
 0x465680: push    ebx
-0x465681: lea     eax, [esp+6Ch+var_40]
+0x465681: lea     eax, [esp+6Ch+valueOut]
 0x465685: push    eax
 0x465686: push    2
 0x465688: lea     ecx, [esp+74h+var_38]
 0x46568C: push    ecx
 0x46568D: push    esi
-0x46568E: mov     [esp+7Ch+var_40], ebx
+0x46568E: mov     [esp+7Ch+valueOut], ebx
 0x465692: call    edx
 0x465694: add     esp, 14h
 0x465697: mov     eax, ds:0B333C4h
@@ -453,13 +452,13 @@
 0x4656C1: jmp     short loc_4656DF
 0x4656C3: mov     edx, [esi+8]
 0x4656C6: push    ebx
-0x4656C7: lea     eax, [esp+6Ch+var_40]
+0x4656C7: lea     eax, [esp+6Ch+valueOut]
 0x4656CB: push    eax
 0x4656CC: push    ebx
 0x4656CD: lea     ecx, [esp+74h+arg_8]
 0x4656D4: push    ecx
 0x4656D5: push    esi
-0x4656D6: mov     [esp+7Ch+var_40], ebx
+0x4656D6: mov     [esp+7Ch+valueOut], ebx
 0x4656DA: call    edx
 0x4656DC: add     esp, 14h
 0x4656DF: mov     eax, [ebp+18h]
@@ -470,20 +469,20 @@
 0x4656F0: jmp     short loc_46570C
 0x4656F2: mov     eax, [esi+8]
 0x4656F5: push    ebx
-0x4656F6: lea     ecx, [esp+6Ch+var_40]
+0x4656F6: lea     ecx, [esp+6Ch+valueOut]
 0x4656FA: push    ecx
 0x4656FB: push    4
 0x4656FD: lea     edx, [esp+74h+var_34]
 0x465701: push    edx
 0x465702: push    esi
-0x465703: mov     [esp+7Ch+var_40], ebx
+0x465703: mov     [esp+7Ch+valueOut], ebx
 0x465707: call    eax
 0x465709: add     esp, 14h
-0x46570C: cmp     [esp+68h+var_3C], 0
+0x46570C: cmp     [esp+68h+position], 0
 0x465711: jnz     loc_465303
 0x465717: push    esi
 0x465718: mov     ecx, ebp
-0x46571A: call    sub_45FB50
+0x46571A: call    TESSaveLoadGame_SaveTempEffectsList; [Verified] TESSaveLoadGame_SaveTempEffectsList obtains the actor process manager's temp-effect save size, writes a bounded Temp Effects List chunk, calls ActorProcessManager_SaveTempEffects, checks full-buffer consumption, and frees the temporary buffer.
 0x46571F: mov     ecx, [ebp+18h]
 0x465722: xor     ebx, ebx
 0x465724: shr     ecx, 9
@@ -499,7 +498,7 @@
 0x465744: mov     [esp+68h+var_4C], edx
 0x465748: push    esi
 0x465749: mov     ecx, ebp
-0x46574B: call    sub_45E220
+0x46574B: call    SaveLoad_SaveIDArrays; MEF SAVE AUDIT 2026-10-08: PERF-19 save orchestration: SaveGame emits ID arrays here after change records and temp effects. Native/v57 slot order remains save-format authority. Suggested growth change belongs in existing checked PerfLookupIDCore, not a global resize policy patch.
 0x465750: mov     eax, [ebp+18h]
 0x465753: shr     eax, 9
 0x465756: test    al, 1
@@ -555,10 +554,10 @@
 0x4657E6: mov     edi, [ebp+40h]
 0x4657E9: cmp     edi, ebx
 0x4657EB: jz      short loc_4657FD
-0x4657ED: mov     ecx, edi
-0x4657EF: call    sub_4530A0
+0x4657ED: mov     ecx, edi; owner
+0x4657EF: call    SaveLoad_ClearReferenceMapState; Verified: SaveGame clears and frees the same transient reference-map owner as LoadGame, establishing a shared lifecycle.
 0x4657F4: push    edi
-0x4657F5: call    FormHeapFree
+0x4657F5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4657FA: add     esp, 4
 0x4657FD: mov     [ebp+40h], ebx
 0x465800: mov     eax, [ebp+18h]
@@ -595,3 +594,15 @@
 0x465852: pop     ebx
 0x465853: add     esp, 54h
 0x465856: retn    0Ch
+0x9AE740: mov     eax, [ebp+0Ch]
+0x9AE743: push    eax
+0x9AE744: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE749: pop     ecx
+0x9AE74A: retn
+0x9AE74B: mov     edx, [esp+arg_4]
+0x9AE74F: lea     eax, [edx-58h]
+0x9AE752: mov     ecx, [edx-5Ch]
+0x9AE755: xor     ecx, eax
+0x9AE757: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE75C: mov     eax, offset stru_ADAF0C
+0x9AE761: jmp     ___CxxFrameHandler3

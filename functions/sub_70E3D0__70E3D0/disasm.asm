@@ -64,7 +64,7 @@
 0x70E4AE: mov     esi, [ebx+58h]
 0x70E4B1: mov     ecx, eax
 0x70E4B3: shr     ecx, 2
-0x70E4B6: lea     edi, [esp+0E8h+var_4C]
+0x70E4B6: lea     edi, [esp+0E8h+source]
 0x70E4BD: rep movsd
 0x70E4BF: mov     esi, [ebx+54h]
 0x70E4C2: mov     ecx, eax
@@ -84,31 +84,31 @@
 0x70E4E7: mov     eax, [ebp+54h]
 0x70E4EA: add     esi, esi
 0x70E4EC: add     esi, esi
-0x70E4EE: push    esi; Size
+0x70E4EE: push    esi; byteCount
 0x70E4EF: lea     edx, [esp+0ECh+Src]
-0x70E4F3: push    edx; Src
-0x70E4F4: push    eax; Dst
-0x70E4F5: call    _memcpy
+0x70E4F3: push    edx; source
+0x70E4F4: push    eax; destination
+0x70E4F5: call    _memcpy;
 0x70E4FA: mov     edx, [ebp+58h]
-0x70E4FD: push    esi; Size
-0x70E4FE: lea     ecx, [esp+0F8h+var_4C]
-0x70E505: push    ecx; Src
-0x70E506: push    edx; Dst
-0x70E507: call    _memcpy
+0x70E4FD: push    esi; byteCount
+0x70E4FE: lea     ecx, [esp+0F8h+source]
+0x70E505: push    ecx; source
+0x70E506: push    edx; destination
+0x70E507: call    _memcpy;
 0x70E50C: mov     eax, [ebp+60h]
 0x70E50F: lea     ecx, ds:4[eax*4]
 0x70E516: mov     eax, [ebp+5Ch]
-0x70E519: push    ecx; Size
+0x70E519: push    ecx; byteCount
 0x70E51A: lea     edx, [esp+104h+var_CC]
-0x70E51E: push    edx; Src
-0x70E51F: push    eax; Dst
-0x70E520: call    _memcpy
+0x70E51E: push    edx; source
+0x70E51F: push    eax; destination
+0x70E520: call    _memcpy;
 0x70E525: mov     ecx, [ebx+50h]
 0x70E528: mov     edx, [ebp+50h]
-0x70E52B: push    edi; Size
-0x70E52C: push    ecx; Src
-0x70E52D: push    edx; Dst
-0x70E52E: call    _memcpy
+0x70E52B: push    edi; byteCount
+0x70E52C: push    ecx; source
+0x70E52D: push    edx; destination
+0x70E52E: call    _memcpy;
 0x70E533: add     esp, 30h
 0x70E536: mov     dword ptr [ebp+68h], 1
 0x70E53D: mov     eax, ebp
@@ -121,3 +121,20 @@
 0x70E551: pop     ebx
 0x70E552: add     esp, 0D4h
 0x70E558: retn    4
+0x9C9AB0: mov     ecx, [ebp-0D4h]
+0x9C9AB6: jmp     NiRefObject_destr
+0x9C9ABB: mov     ecx, [ebp-0D4h]
+0x9C9AC1: add     ecx, 4Ch ; 'L'; slot
+0x9C9AC4: jmp     NiPointerSlot_Release
+0x9C9AC9: mov     eax, [ebp-0D0h]
+0x9C9ACF: push    eax
+0x9C9AD0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C9AD5: pop     ecx
+0x9C9AD6: retn
+0x9C9AD7: mov     edx, [esp+arg_4]
+0x9C9ADB: lea     eax, [edx-0D8h]
+0x9C9AE1: mov     ecx, [edx-0DCh]
+0x9C9AE7: xor     ecx, eax
+0x9C9AE9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9AEE: mov     eax, offset stru_AF22FC
+0x9C9AF3: jmp     ___CxxFrameHandler3

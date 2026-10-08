@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x80FCE0",
-    "line": "sub     esp, 0A68h",
+    "line": "sub     esp, 0A68h; SpeedTreeBranchShader 1x/2x vertex program loader: fills +0x9C..+0xC3 with ten STB1 vs_1_1 programs and, for ShaderPackage>=2, +0xC4..+0x10B with eighteen STB2 vs_2_0 programs.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -2034,12 +2034,6 @@
     "size": 2
   },
   {
-    "ea": "0x81046A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x810470",
     "line": "mov     eax, [esi]",
     "mnemonic": "mov",
@@ -2179,7 +2173,7 @@
   },
   {
     "ea": "0x8104BD",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2647,7 @@
   },
   {
     "ea": "0x8105AC",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },

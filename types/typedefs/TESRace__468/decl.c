@@ -1,1 +1,36 @@
-TESRace
+struct TESRace
+{
+TESFormVtbl *vtbl;
+TESFormMembr super;
+TESFullName name;
+TESDescription desc;
+TESSpellList spells;
+TESReactionForm reaction;
+BonusSkillInfo bonusSkills[7];
+UInt16 pad0;
+float maleScale;
+float femaleScale;
+float maleWeight;
+float femaleWeight;
+UInt8 isPlayable;
+UInt8 unk1[3];
+TESAttributes maleAttr;
+TESAttributes femaleAttr;
+tListHair hairs;
+TESHair *defaultHair[2];
+UInt32 unk09C[3];
+tListEyes eyes;
+TESModel tails[2];
+TESModel unk9[9];
+TESTexture unk10[9];
+TESTexture unk11[10];
+Unk unk12[4];
+UInt32 unk13;
+TESRace *voiceRaces[2];
+UInt32 unk13_2;
+UInt32 unk14;
+UInt16 unk15;
+UInt16 unk16;
+UInt16 unk17;
+UInt16 pad;
+};

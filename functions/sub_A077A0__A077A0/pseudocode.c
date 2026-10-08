@@ -1,4 +1,4 @@
-BSStringT *sub_A077A0()
+NiRTTI *sub_A077A0()
 {
-  return sub_70E220((BSStringT *)dword_B3E6F0, "NiBSplineData", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_B3E6F0, "NiBSplineData", &stru_B3F684); /*0xa077b4*/
 }

@@ -1,1 +1,1 @@
-CACY
+typedef tagCACY CACY;

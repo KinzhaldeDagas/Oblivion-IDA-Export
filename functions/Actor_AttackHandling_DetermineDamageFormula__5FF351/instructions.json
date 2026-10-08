@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x5FF363",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x5FF377",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FF379",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5FF382",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },

@@ -6,7 +6,7 @@
 0x4677FB: shr     ecx, 7
 0x4677FE: test    cl, 1
 0x467801: mov     [esp+8+var_4], eax
-0x467805: jz      short TESActorBaseData_GetLevel___Return
+0x467805: jz      short TESActorBaseData_GetLevel___Return; 3DTheft decode 2026-05-13: TESActorBaseData::GetLevel tests kFlag_PCLevelOffset (0x80) in flags +0x04, confirming actor-base flag field semantics.
 0x467807: mov     ecx, ds:0B333C4h
 0x46780D: mov     edx, [ecx]
 0x46780F: mov     eax, [edx+170h]

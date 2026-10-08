@@ -23,7 +23,7 @@
 0x75D4B9: test    eax, eax
 0x75D4BB: jz      short loc_75D4CE
 0x75D4BD: lea     ecx, [ecx+0]
-0x75D4C0: cmp     eax, offset dword_B41B38
+0x75D4C0: cmp     eax, offset stru_B41B38
 0x75D4C5: jz      short loc_75D4D5
 0x75D4C7: mov     eax, [eax+4]
 0x75D4CA: test    eax, eax

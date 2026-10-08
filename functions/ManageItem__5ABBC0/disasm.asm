@@ -37,7 +37,7 @@
 0x5ABC35: mov     ecx, [esp+1Ch+arg_4]
 0x5ABC39: push    0FB9h
 0x5ABC3E: call    Tile_GetFloat
-0x5ABC43: call    Double_To_SInt32
+0x5ABC43: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5ABC48: mov     ecx, ds:0B333C4h; this
 0x5ABC4E: push    0; a3
 0x5ABC50: push    eax; a2
@@ -57,7 +57,7 @@
 0x5ABC7C: push    eax
 0x5ABC7D: mov     ecx, esi
 0x5ABC7F: call    sub_484BC0
-0x5ABC84: call    sub_5C1900
+0x5ABC84: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5ABC89: jmp     loc_5AC219
 0x5ABC8E: mov     ecx, ds:0B333C4h; this
 0x5ABC94: call    TESObjectREFR_GetContainer
@@ -89,7 +89,7 @@
 0x5ABCE2: lea     eax, [edi-0Eh]
 0x5ABCE5: and     edx, 7Fh
 0x5ABCE8: cmp     edx, eax
-0x5ABCEA: mov     ecx, offset byte_B3B3DB
+0x5ABCEA: mov     ecx, (offset dword_B3B0B4+327h)
 0x5ABCEF: jnz     short loc_5ABD05
 0x5ABCF1: call    sub_597A60
 0x5ABCF6: call    InventoryMenu_InitializeOrUpdate
@@ -115,7 +115,7 @@
 0x5ABD31: push    0FB9h
 0x5ABD36: mov     ecx, ebp
 0x5ABD38: call    Tile_GetFloat
-0x5ABD3D: call    Double_To_SInt32
+0x5ABD3D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5ABD42: mov     ecx, ds:0B333C4h; this
 0x5ABD48: push    0; a3
 0x5ABD4A: push    eax; a2
@@ -162,7 +162,7 @@
 0x5ABDD6: add     esp, 0Ch
 0x5ABDD9: retn    8
 0x5ABDDC: mov     ecx, ds:0B333C4h
-0x5ABDE2: call    Actor_GetCurrentAction
+0x5ABDE2: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5ABDE7: cmp     eax, 0FFFFFFFFh
 0x5ABDEA: jz      short loc_5ABE10
 0x5ABDEC: push    0
@@ -212,8 +212,8 @@
 0x5ABE6E: jmp     loc_5ABDC0
 0x5ABE73: cmp     dword ptr ds:0B140E4h, 0FFFFFFFFh
 0x5ABE7A: jnz     loc_5ABF4B
-0x5ABE80: mov     ecx, esi
-0x5ABE82: call    TESHealthForm_GetHealth
+0x5ABE80: mov     ecx, esi; this
+0x5ABE82: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5ABE87: cmp     eax, 1
 0x5ABE8A: jle     loc_5ABF38
 0x5ABE90: mov     ecx, [esi+8]
@@ -228,9 +228,9 @@
 0x5ABEAE: test    dl, 1
 0x5ABEB1: jz      loc_5ABF41
 0x5ABEB7: push    0
-0x5ABEB9: mov     ecx, esi
+0x5ABEB9: mov     ecx, esi; this
 0x5ABEBB: mov     byte ptr ds:0B3B3D8h, 1
-0x5ABEC2: call    TESHealthForm_GetHealth
+0x5ABEC2: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5ABEC7: push    eax
 0x5ABEC8: push    ebp
 0x5ABEC9: push    edi
@@ -243,8 +243,8 @@
 0x5ABEDA: pop     ebx
 0x5ABEDB: add     esp, 0Ch
 0x5ABEDE: retn    8
-0x5ABEE1: mov     ecx, esi
-0x5ABEE3: call    TESHealthForm_GetHealth
+0x5ABEE1: mov     ecx, esi; this
+0x5ABEE3: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5ABEE8: cmp     eax, ds:0B38688h
 0x5ABEEE: jl      short loc_5ABF09
 0x5ABEF0: push    1; arg1
@@ -265,8 +265,8 @@
 0x5ABF21: jnz     short loc_5ABF41
 0x5ABF23: cmp     byte ptr ds:0B3B3D8h, 0
 0x5ABF2A: jnz     short loc_5ABF41
-0x5ABF2C: mov     ecx, esi
-0x5ABF2E: call    TESHealthForm_GetHealth
+0x5ABF2C: mov     ecx, esi; this
+0x5ABF2E: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5ABF33: mov     ds:0B140E4h, eax
 0x5ABF38: cmp     dword ptr ds:0B140E4h, 0FFFFFFFFh
 0x5ABF3F: jnz     short loc_5ABF4B
@@ -321,7 +321,7 @@
 0x5ABFE4: cmp     byte ptr [ecx+4], 21h ; '!'
 0x5ABFE8: jnz     short loc_5AC014
 0x5ABFEA: mov     ecx, ds:0B333C4h
-0x5ABFF0: call    Actor_GetCurrentAction
+0x5ABFF0: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5ABFF5: cmp     eax, 0FFFFFFFFh
 0x5ABFF8: jz      short loc_5AC014
 0x5ABFFA: fld     dword ptr ds:0A30634h
@@ -350,9 +350,9 @@
 0x5AC041: fild    [esp+1Ch+arg_4]
 0x5AC045: push    ecx
 0x5AC046: mov     ecx, ebp; this
-0x5AC048: fstp    [esp+20h+a2]; a3
-0x5AC04B: push    0FB8h; a2
-0x5AC050: call    Tile_SetFloat
+0x5AC048: fstp    [esp+20h+a2]; value
+0x5AC04B: push    0FB8h; propertyCode
+0x5AC050: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AC055: mov     edi, [esi]
 0x5AC057: test    edi, edi
 0x5AC059: jz      short loc_5AC0BE
@@ -374,10 +374,10 @@
 0x5AC086: call    GameUI_QueueMessage
 0x5AC08B: fld1
 0x5AC08D: add     esp, 0Ch
-0x5AC090: fstp    [esp+20h+a2]; a3
-0x5AC093: push    0FB8h; a2
+0x5AC090: fstp    [esp+20h+a2]; value
+0x5AC093: push    0FB8h; propertyCode
 0x5AC098: mov     ecx, ebp; this
-0x5AC09A: call    Tile_SetFloat
+0x5AC09A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AC09F: mov     dword ptr ds:0B140E4h, 0FFFFFFFFh
 0x5AC0A9: pop     edi
 0x5AC0AA: pop     esi
@@ -411,7 +411,7 @@
 0x5AC0EC: mov     ecx, ds:0B333C4h
 0x5AC0F2: push    edx
 0x5AC0F3: push    eax
-0x5AC0F4: call    Actor_EquipItem
+0x5AC0F4: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5AC0F9: jmp     loc_5AC1CF
 0x5AC0FE: mov     ecx, [esi+8]
 0x5AC101: push    0
@@ -427,7 +427,7 @@
 0x5AC120: movzx   eax, ds:byte_5AC380[eax]
 0x5AC127: jmp     ds:jpt_5AC127[eax*4]; switch jump
 0x5AC12E: mov     ecx, ds:0B333C4h; jumptable 005AC127 cases 20,22,33,34
-0x5AC134: call    Actor_GetCurrentAction
+0x5AC134: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5AC139: cmp     eax, 0FFFFFFFFh
 0x5AC13C: jz      short ManageItem___def_5AC127; jumptable 005AC127 default case, cases 21,23-32
 0x5AC13E: push    ecx
@@ -451,9 +451,9 @@
 0x5AC173: add     edx, 1
 0x5AC176: mov     [esp+20h+arg_4], edx
 0x5AC17A: fild    [esp+20h+arg_4]
-0x5AC17E: fstp    [esp+20h+a2]; a3
-0x5AC181: push    0FB8h; a2
-0x5AC186: call    Tile_SetFloat
+0x5AC17E: fstp    [esp+20h+a2]; value
+0x5AC181: push    0FB8h; propertyCode
+0x5AC186: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AC18B: mov     eax, [esi]
 0x5AC18D: test    eax, eax
 0x5AC18F: push    0
@@ -500,7 +500,7 @@
 0x5AC219: mov     ecx, esi
 0x5AC21B: call    ContainerEntryExtraData_DestroyDataTable
 0x5AC220: push    esi
-0x5AC221: call    FormHeapFree
+0x5AC221: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AC226: add     esp, 4
 0x5AC229: pop     edi
 0x5AC22A: pop     esi
@@ -584,7 +584,7 @@
 0x5AC30D: mov     ecx, [ebx+4]
 0x5AC310: push    0FAEh
 0x5AC315: call    Tile_GetFloat
-0x5AC31A: call    Double_To_SInt32
+0x5AC31A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AC31F: cmp     edi, 7
 0x5AC322: mov     esi, eax
 0x5AC324: jnz     short loc_5AC32B
@@ -603,9 +603,9 @@
 0x5AC34C: fild    [esp+1Ch+arg_4]
 0x5AC350: push    ecx
 0x5AC351: mov     ecx, [ebx+4]; this
-0x5AC354: fstp    [esp+20h+a2]; a3
-0x5AC357: push    0FAEh; a2
-0x5AC35C: call    Tile_SetFloat
+0x5AC354: fstp    [esp+20h+a2]; value
+0x5AC357: push    0FAEh; propertyCode
+0x5AC35C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AC361: push    0
 0x5AC363: push    esi
 0x5AC364: mov     ecx, ebx

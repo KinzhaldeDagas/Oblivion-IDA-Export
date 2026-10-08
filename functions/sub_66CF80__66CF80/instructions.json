@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x66CFF4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x66D030",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x66D03C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x66D058",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x66D079",
-    "line": "call    ActiveEffect_Base_PreLoadAEList",
+    "line": "call    ActiveEffect_Base_PreLoadAEList; Verified pre-load lifecycle hook: before list restoration, iterates current ActiveEffects and calls vtable slot +0x20 with the supplied load context. This is the preLoad slot in ActiveEffectVtbl; LockEffect and OpenEffect use the shared no-op.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x66D094",
-    "line": "call    sub_473AA0",
+    "line": "call    ActorAnimData_ResetAllSequences; Whole ActorAnimData sequence reset. Clears all active slots, deactivates current/controller sequences, restores current and queued key sentinels, resets root motion and idle ownership, clears controlled-block links, then runs the controller-sequence reset/rebind phase. Not safe as scoped replacement cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x66D0BE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,19 +649,19 @@
   },
   {
     "ea": "0x66D10C",
-    "line": "push    ebx",
+    "line": "push    ebx; playable",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66D10D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66D10F",
-    "line": "call    sub_51BED0",
+    "line": "call    TESClass_SetPlayable; Sets or clears the TESClass playable flag; ClassMenu custom-class commit forces the chosen custom class playable.",
     "mnemonic": "call",
     "size": 5
   },

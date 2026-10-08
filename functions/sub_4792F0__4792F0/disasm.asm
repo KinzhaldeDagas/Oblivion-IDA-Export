@@ -20,8 +20,8 @@
 0x47932C: mov     esi, [esp+3Ch+arg_4]
 0x479330: cmp     esi, ebx
 0x479332: jz      loc_47942C
-0x479338: lea     ecx, [esp+3Ch+var_28]
-0x47933C: call    sub_478B90
+0x479338: lea     ecx, [esp+3Ch+var_28]; this
+0x47933C: call    OB_NiCloningProcess_ctor
 0x479341: fld1
 0x479343: fst     [esp+3Ch+var_10]
 0x479347: fst     [esp+3Ch+var_14]
@@ -52,7 +52,7 @@
 0x479398: cmp     ebp, ebx
 0x47939A: jz      short loc_47940E
 0x47939C: push    ebp
-0x47939D: push    offset dword_B35288
+0x47939D: push    0B35288h
 0x4793A2: call    NiRTTI__IsObjectOfRTTIType
 0x4793A7: add     esp, 8
 0x4793AA: test    al, al
@@ -73,17 +73,17 @@
 0x4793E0: mov     ecx, 9
 0x4793E5: mov     esi, (offset stru_B26AF0.unk2C+2A8h)
 0x4793EA: rep movsd
-0x4793EC: lea     ecx, [esp+3Ch+arg_0]; this
+0x4793EC: lea     ecx, [esp+3Ch+arg_0]; slot
 0x4793F0: mov     byte ptr [esp+3Ch+var_4], bl
-0x4793F4: call    sub_7016A0
+0x4793F4: call    NiPointerSlot_Release
 0x4793F9: lea     ecx, [esp+3Ch+var_28]
 0x4793FD: mov     [esp+3Ch+var_4], 0FFFFFFFFh
 0x479405: call    sub_4781A0
 0x47940A: mov     eax, ebp
 0x47940C: jmp     short loc_47942E
-0x47940E: lea     ecx, [esp+3Ch+arg_0]; this
+0x47940E: lea     ecx, [esp+3Ch+arg_0]; slot
 0x479412: mov     byte ptr [esp+3Ch+var_4], bl
-0x479416: call    sub_7016A0
+0x479416: call    NiPointerSlot_Release
 0x47941B: lea     ecx, [esp+3Ch+var_28]
 0x47941F: mov     [esp+3Ch+var_4], 0FFFFFFFFh
 0x479427: call    sub_4781A0
@@ -97,3 +97,14 @@
 0x47943D: pop     ebx
 0x47943E: add     esp, 28h
 0x479441: retn    8
+0x9AF0B0: lea     ecx, [ebp-28h]
+0x9AF0B3: jmp     sub_4781A0
+0x9AF0B8: lea     ecx, [ebp+4]; slot
+0x9AF0BB: jmp     NiPointerSlot_Release
+0x9AF0C0: mov     edx, [esp+arg_4]
+0x9AF0C4: lea     eax, [edx-2Ch]
+0x9AF0C7: mov     ecx, [edx-30h]
+0x9AF0CA: xor     ecx, eax
+0x9AF0CC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF0D1: mov     eax, offset stru_ADB73C
+0x9AF0D6: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x9E0E60: fld     ds:flt_A3D65C
+0x9E0E60: fld     ds:kHeadBodyNormalMatchRadius
 0x9E0E66: push    ecx
 0x9E0E67: fstp    [esp+4+var_4]; float
 0x9E0E6A: push    offset aFaidefaultd_14; "fAIDefaultDodgeForwardNotAttackingMult"

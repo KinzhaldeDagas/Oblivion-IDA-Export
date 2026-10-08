@@ -61,12 +61,12 @@
 0x6951F4: jnz     short loc_695233
 0x6951F6: fldz
 0x6951F8: push    ecx
-0x6951F9: mov     ecx, edi
-0x6951FB: fstp    [esp+48h+var_48]; float
-0x6951FE: call    sub_4715C0
-0x695203: push    1; a2
+0x6951F9: mov     ecx, edi; this
+0x6951FB: fstp    [esp+48h+easeOutTime]; easeOutTime
+0x6951FE: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
+0x695203: push    1; disabled
 0x695205: mov     ecx, esi; this
-0x695207: call    TESForm_SetEnabled?
+0x695207: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
 0x69520C: mov     edx, [esi]
 0x69520E: mov     eax, [edx+8Ch]
 0x695214: push    1
@@ -78,9 +78,9 @@
 0x695224: push    1
 0x695226: mov     ecx, esi
 0x695228: call    eax
-0x69522A: push    1; a2
+0x69522A: push    1; disabled
 0x69522C: mov     ecx, esi; this
-0x69522E: call    TESForm_SetEnabled?
+0x69522E: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
 0x695233: mov     esi, [esi+8Ch]
 0x695239: test    esi, esi
 0x69523B: jz      loc_6953F0
@@ -93,7 +93,7 @@
 0x695259: test    cl, 1
 0x69525C: jnz     loc_6953F0
 0x695262: mov     ecx, esi; this
-0x695264: call    MobileObject_GetCharProxy
+0x695264: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x695269: fld     dword ptr [eax+318h]
 0x69526F: mov     edx, [esi]
 0x695271: fstp    [esp+44h+var_34]
@@ -195,7 +195,7 @@
 0x69539D: fld     [esp+44h+var_28]
 0x6953A1: fsub    [esp+44h+var_1C]
 0x6953A5: fstp    [esp+44h+var_4]
-0x6953A9: call    sub_404C90
+0x6953A9: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x6953AE: fadd    dword ptr [esi+60h]
 0x6953B1: fstp    [esp+44h+var_34]
 0x6953B5: fld     [esp+44h+var_34]
@@ -215,7 +215,7 @@
 0x6953E1: jz      short loc_6953F0
 0x6953E3: push    ecx
 0x6953E4: fld     [esp+48h+arg_0]
-0x6953E8: fstp    [esp+48h+var_48]; float
+0x6953E8: fstp    [esp+48h+easeOutTime]; float
 0x6953EB: call    MagicCaster_CastingVFX_UpdateTimes?
 0x6953F0: pop     edi
 0x6953F1: pop     esi

@@ -1,14 +1,15 @@
-void __thiscall ExtraInfoGeneralTopic::~ExtraInfoGeneralTopic(ExtraInfoGeneralTopic *this)
+// ExtraInfoGeneralTopic destructor clears the cached MenuTopic's isInfoGeneralTopic ownership marker, destroys its responses/display name, then frees the MenuTopic allocation.
+void __thiscall ExtraInfoGeneralTopic::Destructor(ExtraInfoGeneralTopicView *this)
 {
-  UInt32 *GeneralTopicData; // edi
+  MenuTopicView *menuTopic; // edi
 
-  this->super.vtbl = (BSExtraDataVtbl *)&ExtraInfoGeneralTopic::`vftable';
-  this->GeneralTopicData->isInfoGeneralTopic = 0;
-  GeneralTopicData = (UInt32 *)this->GeneralTopicData;
-  if ( GeneralTopicData )
+  this->super.vtbl = (BSExtraDataVtbl *)&ExtraInfoGeneralTopic::`vftable'; /*0x42a0d9*/
+  this->menuTopic->isInfoGeneralTopic = 0; /*0x42a0e4*/
+  menuTopic = this->menuTopic; /*0x42a0e7*/
+  if ( menuTopic ) /*0x42a0f0*/
   {
-    sub_6B8F50(GeneralTopicData);
-    FormHeapFree((unsigned int)GeneralTopicData);
+    MenuTopic::Destroy(menuTopic); /*0x42a0f4*/
+    FormHeapFree((unsigned int)menuTopic); /*0x42a0fa*/
   }
-  this->super.vtbl = (BSExtraDataVtbl *)&BSExtraData::`vftable';
+  this->super.vtbl = (BSExtraDataVtbl *)&BSExtraData::`vftable'; /*0x42a102*/
 }

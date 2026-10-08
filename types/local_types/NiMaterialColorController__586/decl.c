@@ -1,1 +1,1 @@
-NiMaterialColorController
+struct NiMaterialColorController;

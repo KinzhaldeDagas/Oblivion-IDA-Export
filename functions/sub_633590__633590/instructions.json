@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6335E4",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x633610",
-    "line": "mov     [esp+2Ch+var_18], eax",
+    "line": "mov     [esp+2Ch+pointXYZ], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x633624",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x633629",
-    "line": "lea     ecx, [esp+30h+var_18]",
+    "line": "lea     ecx, [esp+30h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x63364F",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x63366A",
-    "line": "mov     [esp+40h+var_18], ecx",
+    "line": "mov     [esp+40h+pointXYZ], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,25 +535,25 @@
   },
   {
     "ea": "0x633698",
-    "line": "lea     ecx, [esp+2Ch+var_18]",
+    "line": "lea     ecx, [esp+2Ch+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x63369C",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63369D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63369F",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x633702",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x63371B",
-    "line": "mov     ecx, [esp+2Ch+var_18]",
+    "line": "mov     ecx, [esp+2Ch+pointXYZ]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x633777",
-    "line": "lea     ecx, [esp+38h+var_18]",
+    "line": "lea     ecx, [esp+38h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },

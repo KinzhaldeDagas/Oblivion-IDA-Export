@@ -1,4 +1,4 @@
-0x7D73D0: mov     eax, [esp+arg_0]
+0x7D73D0: mov     eax, [esp+mode]; Shader-property vtable slot +0x7C: writes mode field +0xDC as 3 for argument 0 and 1 for arguments 1..3; returns the argument.
 0x7D73D4: test    eax, eax
 0x7D73D6: jz      short loc_7D73EC
 0x7D73D8: jle     short locret_7D73F6

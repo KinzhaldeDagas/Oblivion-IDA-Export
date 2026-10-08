@@ -42,7 +42,7 @@
 0x8918C6: mov     edx, [edx+50h]
 0x8918C9: add     edx, 0D0h ; 'Ð'
 0x8918CF: jmp     short loc_8918D6
-0x8918D1: mov     edx, offset stru_BA7A40
+0x8918D1: mov     edx, offset unk_BA7A40
 0x8918D6: movaps  xmm0, xmmword ptr [edx]
 0x8918D9: mov     edx, [esp+10h+var_4]
 0x8918DD: movaps  xmmword ptr [edx+220h], xmm0

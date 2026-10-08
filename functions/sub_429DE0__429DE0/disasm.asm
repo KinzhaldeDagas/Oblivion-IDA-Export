@@ -1,5 +1,5 @@
-0x429DE0: mov     eax, ecx
-0x429DE2: mov     ecx, [esp+arg_0]
+0x429DE0: mov     eax, ecx; Construct 0x10-byte ExtraOriginalReference: BSExtraData header/type 0x26 plus original TESObjectREFR pointer at +0x0C.
+0x429DE2: mov     ecx, [esp+originalReference]
 0x429DE6: mov     byte ptr [eax+4], 26h ; '&'
 0x429DEA: mov     dword ptr [eax+8], 0
 0x429DF1: mov     dword ptr [eax], offset ??_7ExtraOriginalReference@@6B@; const ExtraOriginalReference::`vftable'

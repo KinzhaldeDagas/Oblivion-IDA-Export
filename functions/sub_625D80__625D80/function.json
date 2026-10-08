@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_625D80",
+  "chunks": [
+    [
+      "0x625D80",
+      "0x625E6D"
+    ],
+    [
+      "0x9C2ED0",
+      "0x9C2EF3"
+    ]
+  ],
+  "chunks_sha256": "7c0354f8e9947d08ce2babec6140f96f042beb0aa114dda5bc89dd7be75b66b4",
+  "comment_regular": "Constructs the dynamic 0x64-byte DialoguePackage and takes ownership of the prepared Conversation. Runtime fields at +0x50/+0x54/+0x58 are the conversation/item/response cursors.",
+  "comment_repeatable": "Constructs the dynamic 0x64-byte DialoguePackage and takes ownership of the prepared Conversation. Runtime fields at +0x50/+0x54/+0x58 are the conversation/item/response cursors.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "DialoguePackage::DialoguePackage",
   "end_ea": "0x625E6D",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_625D80",
+  "name": "DialoguePackage::DialoguePackage",
   "segment": ".text",
   "sha256": "171a8fe1580017de4f401e5b591801d87254dbf207a84079708803957df5dd39",
   "size": 237,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x625D80",
-  "type": "TESPackage *__thiscall(TESPackage *this, _DWORD *, TESObjectREFR *, int)",
-  "xrefs_from_count": 85,
+  "total_chunk_size": 272,
+  "type": "DialoguePackageRuntimeView *__thiscall(DialoguePackageRuntimeView *this, ConversationView *conversation, Actor *speaker, Actor *target)",
+  "xrefs_from_count": 96,
   "xrefs_to_count": 1
 }

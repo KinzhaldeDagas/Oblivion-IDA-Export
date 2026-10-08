@@ -1,32 +1,32 @@
-0x66C200: sub     esp, 0Ch
+0x66C200: sub     esp, 0Ch; Reinitializes post-character-generation skill progression: resets skill-increase statistics/buckets, recomputes required progress for all 21 skills, clears native skill progress and specialization counters, then replays deferred chargen usage. Major/minor behavior during replay comes from the same TESClass seven-slot predicate.
 0x66C203: push    ebx
 0x66C204: push    ebp
 0x66C205: push    esi
 0x66C206: mov     esi, ecx
 0x66C208: push    edi
-0x66C209: mov     dword ptr [esi+660h], 0
-0x66C213: call    sub_65FBB0
-0x66C218: xor     edi, edi
+0x66C209: mov     dword ptr [esi+660h], 0; Start chargen reclassification: reset the skill-increase misc statistic and current attribute-bonus bucket before replay.
+0x66C213: call    Player_ConsumeOldestAttributeBonusBucket; Consumes and frees the oldest (tail) attribute-bonus bucket after a player level-up, then ensures a current bucket remains available. New buckets are pushed at the front, so pending levels are resolved FIFO.
+0x66C218: xor     edi, edi; Rebuild requiredSkillExp for all 21 native skills using the final class's specialization and seven-major membership.
 0x66C21A: lea     ebx, [ebx+0]
 0x66C220: push    edi
 0x66C221: push    2
-0x66C223: call    ActorValue_GetAVFromGroupOffset
+0x66C223: call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
 0x66C228: add     esp, 8
-0x66C22B: push    eax; float
-0x66C22C: mov     ecx, esi
-0x66C22E: call    sub_663C50
+0x66C22B: push    eax; actorValue
+0x66C22C: mov     ecx, esi; this
+0x66C22E: call    Player_RecalculateRequiredSkillExperience; Skill-use requirement recalculation evaluates the curve with the raw skill level, including level 0; only an exactly-zero computed result is replaced with 1.
 0x66C233: add     edi, 1
 0x66C236: cmp     edi, 15h
 0x66C239: jl      short loc_66C220
-0x66C23B: mov     ecx, esi
-0x66C23D: call    sub_668030
+0x66C23B: mov     ecx, esi; this
+0x66C23D: call    Player_ClearAllSkillProgress; Clear all accumulated skillExp[21] before replaying the deferred chargen-use totals under the final class.
 0x66C242: xor     eax, eax
-0x66C244: mov     [esi+5B8h], ax
+0x66C244: mov     [esi+5B8h], ax; Reset the packed Combat and Magic specialization advance counters before replaying deferred chargen skill use; Stealth is reset separately at 0x66C24B.
 0x66C24B: mov     [esi+5BAh], al
-0x66C251: mov     edi, 0Ch
+0x66C251: mov     edi, 0Ch; Replay each of the 21 deferred chargen progress totals from PlayerCharacter::deferredCharGenSkillUsage.
 0x66C256: push    edi
 0x66C257: push    2
-0x66C259: call    ActorValue_GetGroupOffsetFromAV
+0x66C259: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x66C25E: mov     ecx, [esi+5B0h]
 0x66C264: movsx   eax, al
 0x66C267: add     esp, 8
@@ -42,7 +42,7 @@
 0x66C286: fcom    st(1)
 0x66C288: fnstsw  ax
 0x66C28A: test    ah, 5
-0x66C28D: jp      short loc_66C29F
+0x66C28D: jp      short loc_66C29F; Replay in chunks no larger than 1.0 progress. This permits repeated threshold checks and skill-level side effects for large deferred totals.
 0x66C28F: fstp    st(2)
 0x66C291: fxch    st(1)
 0x66C293: fstp    [esp+1Ch+var_4]
@@ -58,11 +58,11 @@
 0x66C2B4: jge     loc_66C3B2
 0x66C2BA: push    edi
 0x66C2BB: push    2
-0x66C2BD: call    ActorValue_GetGroupOffsetFromAV
-0x66C2C2: mov     ecx, ds:0B33A98h
+0x66C2BD: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
+0x66C2C2: mov     ecx, ds:0B33A98h; this
 0x66C2C8: add     esp, 8
-0x66C2CB: push    eax
-0x66C2CC: call    TESDataHandler_GetTESSkillByCode
+0x66C2CB: push    eax; skillIndex
+0x66C2CC: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x66C2D1: mov     ebp, eax
 0x66C2D3: test    ebp, ebp
 0x66C2D5: jz      loc_66C3A9
@@ -74,7 +74,7 @@
 0x66C2E9: push    edi
 0x66C2EA: fstp    st
 0x66C2EC: push    2
-0x66C2EE: call    ActorValue_GetGroupOffsetFromAV
+0x66C2EE: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x66C2F3: movsx   edx, al
 0x66C2F6: add     esp, 8
 0x66C2F9: fld     dword ptr [esi+edx*4+130h]
@@ -96,7 +96,7 @@
 0x66C32E: ja      short loc_66C349
 0x66C330: push    edi
 0x66C331: push    2
-0x66C333: call    ActorValue_GetGroupOffsetFromAV
+0x66C333: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x66C338: fld     [esp+24h+var_4]
 0x66C33C: movsx   eax, al
 0x66C33F: add     esp, 8
@@ -104,10 +104,10 @@
 0x66C349: fld1
 0x66C34B: mov     ecx, esi
 0x66C34D: fstp    [esp+1Ch+var_4]
-0x66C351: call    Actor_GetBaseClass
+0x66C351: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x66C356: test    eax, eax
 0x66C358: jz      short loc_66C38C
-0x66C35A: mov     eax, [ebp+2Ch]
+0x66C35A: mov     eax, [ebp+2Ch]; Use TESSkill_Data::actorValue to fetch the rebuilt requirement belonging to this skill.
 0x66C35D: fld1
 0x66C35F: lea     ecx, [eax-0Ch]
 0x66C362: fstp    [esp+1Ch+var_4]
@@ -115,7 +115,7 @@
 0x66C369: ja      short loc_66C384
 0x66C36B: push    eax
 0x66C36C: push    2
-0x66C36E: call    ActorValue_GetGroupOffsetFromAV
+0x66C36E: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x66C373: movsx   edx, al
 0x66C376: add     esp, 8
 0x66C379: fld     dword ptr [esi+edx*4+7A4h]
@@ -127,14 +127,14 @@
 0x66C394: fcompp
 0x66C396: fnstsw  ax
 0x66C398: test    ah, 5
-0x66C39B: jp      short loc_66C3A9
-0x66C39D: push    0
-0x66C39F: push    0
-0x66C3A1: push    ebp
-0x66C3A2: mov     ecx, esi
-0x66C3A4: call    Player_SkillLevelIncrease
-0x66C3A9: push    edi; a2
-0x66C3AA: call    sub_57A6F0
+0x66C39B: jp      short loc_66C3A9; The replay uses the same strict accumulated-progress > required test as live skill use; any resulting major/non-major accounting occurs in Player_SkillLevelIncrease.
+0x66C39D: push    0; showFeedback
+0x66C39F: push    0; skipProgressConsumption
+0x66C3A1: push    ebp; skill
+0x66C3A2: mov     ecx, esi; this
+0x66C3A4: call    Player_SkillLevelIncrease; Single Oblivion skill-level increase. Optionally consume exactly one old requirement, increment the base skill, recalculate its next requirement, update universal counters/buckets, and enter the level-progress branch only for a strict TESClass major match.
+0x66C3A9: push    edi; actorValue
+0x66C3AA: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
 0x66C3AF: add     esp, 4
 0x66C3B2: fldz
 0x66C3B4: fld     [esp+1Ch+var_C]

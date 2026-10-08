@@ -42,16 +42,16 @@
 0x6633DC: call    edx
 0x6633DE: mov     ecx, ds:0B33B00h
 0x6633E4: mov     eax, [esi+70Ch]
-0x6633EA: push    4; a2
-0x6633EC: lea     edx, [esp+18h+var_8]
+0x6633EA: push    4; byteCount
+0x6633EC: lea     edx, [esp+18h+destination]
 0x6633F0: mov     [ecx+14h], eax
-0x6633F3: push    edx; a1
-0x6633F4: mov     ecx, esi
-0x6633F6: call    TESForm_LoadDataFromCurrentSaveGame
+0x6633F3: push    edx; destination
+0x6633F4: mov     ecx, esi; self
+0x6633F6: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x6633FB: mov     eax, ds:0B33B00h
 0x663400: mov     byte ptr [eax+7Dh], 0
 0x663404: mov     edx, [esi]
-0x663406: mov     eax, [esp+14h+var_8]
+0x663406: mov     eax, [esp+14h+destination]
 0x66340A: mov     edx, [edx+54h]
 0x66340D: push    edi
 0x66340E: push    eax
@@ -72,14 +72,14 @@
 0x663443: push    ebp
 0x663444: push    esi
 0x663445: call    sub_45A020
-0x66344A: mov     ecx, [esp+14h+var_8]
+0x66344A: mov     ecx, [esp+14h+destination]
 0x66344E: mov     eax, [esi]
 0x663450: mov     edx, [eax+58h]
 0x663453: push    edi
 0x663454: push    ecx
 0x663455: mov     ecx, esi
 0x663457: call    edx
-0x663459: mov     ecx, [esp+14h+var_8]
+0x663459: mov     ecx, [esp+14h+destination]
 0x66345D: mov     eax, [esi]
 0x66345F: mov     edx, [eax+5Ch]
 0x663462: push    edi
@@ -92,19 +92,19 @@
 0x663475: mov     eax, ds:0B33B00h
 0x66347A: mov     byte ptr [eax+7Dh], 1
 0x66347E: mov     edx, [esi]
-0x663480: mov     eax, [esp+14h+var_8]
+0x663480: mov     eax, [esp+14h+destination]
 0x663484: mov     edx, [edx+48h]
 0x663487: push    eax
 0x663488: mov     ecx, esi
 0x66348A: call    edx
-0x66348C: push    0FFFFFFFFh; a2
-0x66348E: call    sub_57A6F0
-0x663493: push    0Ah; a2
-0x663495: call    sub_57A6F0
-0x66349A: push    8; a2
-0x66349C: call    sub_57A6F0
-0x6634A1: push    9; a2
-0x6634A3: call    sub_57A6F0
+0x66348C: push    0FFFFFFFFh; actorValue
+0x66348E: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
+0x663493: push    0Ah; actorValue
+0x663495: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
+0x66349A: push    8; actorValue
+0x66349C: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
+0x6634A1: push    9; actorValue
+0x6634A3: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
 0x6634A8: mov     eax, dword ptr [esp+24h+var_4]
 0x6634AC: mov     ecx, ds:0B33B00h
 0x6634B2: add     esp, 10h

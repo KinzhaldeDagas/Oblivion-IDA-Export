@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x791140",
-    "line": "push    ebp",
+    "line": "push    ebp; Fixed-stride 0x18 vector insert/fill machinery for OB_CBranchFlareEntry records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791510 always requests count=1.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x79116D",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x791175",
-    "line": "mov     [ebp+var_28], ecx",
+    "line": "mov     dword ptr [ebp+var_28], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7911B4",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7911E8",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x79124E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x791250",
-    "line": "call    sub_783FE0",
+    "line": "call    OB_stVector24_Size_010201A0; Oblivion 1.2.0.416: returns (end-begin)/0x18 for a compiler-folded 24-byte vector specialization; xrefs show both stVec and branch-flare records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,13 +643,13 @@
   },
   {
     "ea": "0x79125B",
-    "line": "push    ebx; char *",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79125C",
-    "line": "call    sub_78FB00",
+    "line": "call    OB_stVectorBranchFlareEntry_Allocate_010201A0; Allocates count contiguous 0x18-byte OB_CBranchFlareEntry records from FormHeap. Checks count*24 overflow and throws std::bad_alloc before allocation on overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x791264",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791268",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x79126C",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79126F",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -703,25 +703,25 @@
   },
   {
     "ea": "0x791274",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791275",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x791278",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791279",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x791281",
-    "line": "call    sub_7847F0",
+    "line": "call    OB_stVector24_UninitializedCopyRange_010201A0; Oblivion 1.2.0.416: placement/uninitialized copy of six-dword records; shared by stVec and branch-flare vector paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,19 +751,19 @@
   },
   {
     "ea": "0x79128C",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79128D",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79128E",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x791291",
-    "line": "call    sub_790A70",
+    "line": "call    OB_stVector24_UninitializedFillNThunk_010201A0; Oblivion 1.2.0.416: stdcall checked-template thunk to the shared 24-byte uninitialized-fill primitive; returns destination plus count*0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x791299",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79129D",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x7912A1",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -823,31 +823,31 @@
   },
   {
     "ea": "0x7912A6",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7912A7",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7912AA",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7912AB",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7912AC",
-    "line": "call    sub_7847F0",
+    "line": "call    OB_stVector24_UninitializedCopyRange_010201A0; Oblivion 1.2.0.416: placement/uninitialized copy of six-dword records; shared by stVec and branch-flare vector paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x7912DC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x7912E4",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x791310",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x791314",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x791328",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x791342",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x791350",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1231,19 +1231,19 @@
   },
   {
     "ea": "0x791355",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791356",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791357",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x79135A",
-    "line": "call    sub_7849C0",
+    "line": "call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x791365",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x79137D",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79137E",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1357,13 +1357,13 @@
   },
   {
     "ea": "0x791388",
-    "line": "call    sub_790A70",
+    "line": "call    OB_stVector24_UninitializedFillNThunk_010201A0; Oblivion 1.2.0.416: stdcall checked-template thunk to the shared 24-byte uninitialized-fill primitive; returns destination plus count*0x18.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79138D",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x791399",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1399,19 +1399,19 @@
   },
   {
     "ea": "0x79139C",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79139D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79139E",
-    "line": "call    sub_784140",
+    "line": "call    OB_stVector24_CopyFillRange_010201A0; Oblivion 1.2.0.416: assigns one six-dword value across [first,last); shared 0x18-byte vector primitive.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x7913BF",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1519,13 +1519,13 @@
   },
   {
     "ea": "0x7913C8",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7913C9",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1537,19 +1537,19 @@
   },
   {
     "ea": "0x7913CC",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+count], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7913CF",
-    "line": "call    sub_7849C0",
+    "line": "call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7913D4",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1561,31 +1561,31 @@
   },
   {
     "ea": "0x7913DA",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7913DD",
-    "line": "push    edx",
+    "line": "push    edx; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7913DE",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7913DF",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7913E0",
-    "line": "call    sub_7905A0",
+    "line": "call    OB_stVector24_CopyBackwardRangeThunk_010201A0; Oblivion 1.2.0.416: checked-template thunk to the shared 24-byte copy-backward adapter; used by both vector<stVec> and branch-flare insert-fill paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x7913E8",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1609,19 +1609,19 @@
   },
   {
     "ea": "0x7913EB",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7913EC",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7913ED",
-    "line": "call    sub_784140",
+    "line": "call    OB_stVector24_CopyFillRange_010201A0; Oblivion 1.2.0.416: assigns one six-dword value across [first,last); shared 0x18-byte vector primitive.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1684,5 +1684,47 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBC30",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBC34",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC37",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC3A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBC3C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC41",
+    "line": "mov     eax, offset stru_AF4B60",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC46",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

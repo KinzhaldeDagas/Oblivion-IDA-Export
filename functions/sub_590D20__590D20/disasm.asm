@@ -35,9 +35,9 @@
 0x590D86: mov     eax, [edi]
 0x590D88: cmp     eax, ebx
 0x590D8A: jz      short loc_590D98
-0x590D8C: push    ebp; Str2
-0x590D8D: push    eax; Str1
-0x590D8E: call    __strcmp
+0x590D8C: push    ebp; right
+0x590D8D: push    eax; left
+0x590D8E: call    CRT_StricmpLocaleDispatch
 0x590D93: add     esp, 8
 0x590D96: jmp     short loc_590DA3
 0x590D98: xor     eax, eax
@@ -73,7 +73,7 @@
 0x590DE0: jnz     short loc_590DF7
 0x590DE2: mov     eax, [edi]
 0x590DE4: push    eax
-0x590DE5: call    FormHeapFree
+0x590DE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x590DEA: add     esp, 4
 0x590DED: mov     [edi], ebx
 0x590DEF: mov     [edi+6], bx
@@ -115,9 +115,9 @@
 0x590E72: push    ecx
 0x590E73: mov     ecx, [esi+24h]; this
 0x590E76: fstp    [esp+34h+a2]; a2
-0x590E79: call    NiAVObject_UpdateNiAVObject
+0x590E79: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x590E7E: push    ebp
-0x590E7F: call    FormHeapFree
+0x590E7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x590E84: add     esp, 4
 0x590E87: mov     al, 1
 0x590E89: jmp     loc_590F10
@@ -139,7 +139,7 @@
 0x590EBC: fstp    [esp+34h+arg_0]
 0x590EC0: fld     [esp+34h+arg_0]
 0x590EC4: fstp    [esp+34h+a2]; a2
-0x590EC7: call    NiAVObject_UpdateNiAVObject
+0x590EC7: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x590ECC: mov     eax, [esi+44h]
 0x590ECF: push    ebx
 0x590ED0: push    eax
@@ -147,22 +147,22 @@
 0x590ED6: add     esp, 8
 0x590ED9: test    al, al
 0x590EDB: jz      short loc_590E7E
-0x590EDD: mov     ecx, [esi+44h]
+0x590EDD: mov     ecx, [esi+44h]; this
 0x590EE0: fldz
-0x590EE2: push    ebx; char
+0x590EE2: push    ebx; transition
 0x590EE3: push    ecx
-0x590EE4: fstp    [esp+34h+a2]; float
-0x590EE7: call    sub_6C9CB0
+0x590EE4: fstp    [esp+34h+a2]; easeOutTime
+0x590EE7: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x590EEC: mov     [esi+44h], ebx
 0x590EEF: mov     esi, [esi+40h]
 0x590EF2: and     word ptr [esi+8], 0FFF7h
 0x590EF8: push    ebp
-0x590EF9: call    FormHeapFree
+0x590EF9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x590EFE: add     esp, 4
 0x590F01: mov     al, 1
 0x590F03: jmp     short loc_590F10
 0x590F05: push    ebp
-0x590F06: call    FormHeapFree
+0x590F06: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x590F0B: add     esp, 4
 0x590F0E: xor     al, al
 0x590F10: mov     ecx, [esp+2Ch+var_C]
@@ -174,3 +174,12 @@
 0x590F1F: pop     ebx
 0x590F20: add     esp, 18h
 0x590F23: retn    4
+0x9C2A40: lea     ecx, [ebp-14h]; void *
+0x9C2A43: jmp     BSStringT_Clear
+0x9C2A48: mov     edx, [esp+arg_4]
+0x9C2A4C: lea     eax, [edx-1Ch]
+0x9C2A4F: mov     ecx, [edx-20h]
+0x9C2A52: xor     ecx, eax
+0x9C2A54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2A59: mov     eax, offset stru_AEB7F4
+0x9C2A5E: jmp     ___CxxFrameHandler3

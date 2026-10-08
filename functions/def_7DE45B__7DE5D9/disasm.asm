@@ -18,7 +18,7 @@
 0x7DE614: add     [edi+5Ch], ebx
 0x7DE617: jnz     short loc_7DE620
 0x7DE619: mov     ecx, edi
-0x7DE61B: call    sub_772560
+0x7DE61B: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7DE620: mov     edi, [esi+0F8h]
 0x7DE626: mov     edx, [esi+0F4h]
 0x7DE62C: mov     ebx, [esi+edx*4+0B4h]
@@ -74,11 +74,11 @@
 0x7DE6B5: push    ebx; lpAddend
 0x7DE6B6: call    dword ptr ds:0A28078h
 0x7DE6BC: lea     eax, [esi+0F8h]
-0x7DE6C2: push    eax
+0x7DE6C2: push    eax; value
 0x7DE6C3: mov     eax, [esi+38h]
-0x7DE6C6: push    eax
-0x7DE6C7: lea     ecx, [esi+40h]
-0x7DE6CA: call    sub_76CE40
+0x7DE6C6: push    eax; index
+0x7DE6C7: lea     ecx, [esi+40h]; this
+0x7DE6CA: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7DE6CF: add     dword ptr [esi+38h], 1
 0x7DE6D3: xor     eax, eax
 0x7DE6D5: mov     ecx, [esp+8+arg_C]

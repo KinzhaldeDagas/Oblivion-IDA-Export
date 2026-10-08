@@ -1,4 +1,4 @@
-0x715820: push    esi
+0x715820: push    esi; NiTimeController equality compares NiObject state, flags +0x08, frequency/phase/low/high key times +0x0C..+0x18, and only target nullness at +0x30. It excludes target identity, next-controller chain, and runtime time/update caches.
 0x715821: push    edi
 0x715822: mov     edi, [esp+8+a2]
 0x715826: push    edi; a2

@@ -61,27 +61,27 @@ void __usercall sub_502500(
   int v58; // [esp+C8h] [ebp-258h]
   char Str[512]; // [esp+11Ch] [ebp-204h] BYREF
 
-  HIBYTE(a3) = BYTE1(a16);
-  v24 = 0;
-  if ( Script_ExtractArgs(a1, a10, a16, a4, a12, a13, l, Str, &v24) )
+  HIBYTE(a3) = BYTE1(a16); /*0x502549*/
+  v24 = 0; /*0x502565*/
+  if ( Script_ExtractArgs(a1, a10, a16, a4, a12, a13, l, Str, &v24) ) /*0x50256d*/
   {
-    lstrcpyA((LPSTR)String1, EmptyString);
-    v16 = strchr(Str, 0x2E);
-    if ( v16 )
+    lstrcpyA((LPSTR)String1, EmptyString); /*0x502587*/
+    v16 = strchr(Str, 0x2E); /*0x50259f*/
+    if ( v16 ) /*0x5025b0*/
     {
-      v17 = (void (__stdcall *)(LPSTR, LPCSTR))lstrcatA;
-      *v16 = 0;
-      v17((LPSTR)String1, Str);
-      v17((LPSTR)String1, ".ess");
-      *v16 = 0x2E;
+      v17 = (void (__stdcall *)(LPSTR, LPCSTR))lstrcatA; /*0x5025b2*/
+      *v16 = 0; /*0x5025b8*/
+      v17((LPSTR)String1, Str); /*0x5025bb*/
+      v17((LPSTR)String1, ".ess"); /*0x5025c7*/
+      *v16 = 0x2E; /*0x5025c9*/
     }
     else
     {
-      lstrcatA((LPSTR)String1, Str);
+      lstrcatA((LPSTR)String1, Str); /*0x5025ce*/
     }
-    LOBYTE(a3) = v24 != 0;
-    TESSaveLoadGame_LoadGame(
-      SaveLoad_CurrentSavegame,
+    LOBYTE(a3) = v24 != 0; /*0x5025e0*/
+    TESSaveLoadGame_LoadGame( /*0x5025f7*/
+      (TESSaveLoad *)g_TESSaveLoadGame,
       st0_0,
       a2,
       st2_0,
@@ -144,9 +144,9 @@ void __usercall sub_502500(
       v56,
       v57,
       v58);
-    if ( v18 )
-      Interface_ConsolePrint("Game Loaded");
+    if ( v18 ) /*0x5025fe*/
+      Interface_ConsolePrint("Game Loaded"); /*0x502605*/
     else
-      Interface_ConsolePrint("File not found.");
+      Interface_ConsolePrint("File not found."); /*0x50260c*/
   }
 }

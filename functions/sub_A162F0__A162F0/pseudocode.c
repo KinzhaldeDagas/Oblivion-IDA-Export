@@ -1,4 +1,4 @@
 void *sub_A162F0()
 {
-  return sub_980D25(&unk_BA9C48);
+  return sub_980D25(&byte_BA9BB4[0x94]);
 }

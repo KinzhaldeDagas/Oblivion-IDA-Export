@@ -125,7 +125,6 @@
 0x906B92: mov     [esp+4E0h+var_4C8], ebx
 0x906B96: jz      short loc_906BB9
 0x906B98: jmp     short loc_906BA0
-0x906B9A: align 10h
 0x906BA0: mov     eax, [edi]
 0x906BA2: cmp     eax, [ebx]
 0x906BA4: jz      loc_906CE2

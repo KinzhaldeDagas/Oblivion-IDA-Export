@@ -1,4 +1,4 @@
-0x778CF0: push    ebx
+0x778CF0: push    ebx; Pass225: NiD3DGeometryGroupManager constructor; stores D3D device and vertex-buffer manager used for screen-texture +0x1C admission.
 0x778CF1: push    esi
 0x778CF2: push    1Ch; Size
 0x778CF4: call    FormHeapAlloc
@@ -18,13 +18,13 @@
 0x778D20: mov     [esi+18h], bl
 0x778D23: jmp     short loc_778D27
 0x778D25: xor     esi, esi
-0x778D27: mov     eax, [esp+8+arg_0]
+0x778D27: mov     eax, [esp+8+device]
 0x778D2B: mov     [esi+10h], eax
 0x778D2E: mov     ecx, [eax]
 0x778D30: mov     edx, [ecx+4]
 0x778D33: push    eax
 0x778D34: call    edx
-0x778D36: mov     eax, [esp+8+arg_4]
+0x778D36: mov     eax, [esp+8+vertexBufferManager]
 0x778D3A: mov     [esi+14h], eax
 0x778D3D: mov     eax, esi
 0x778D3F: pop     esi

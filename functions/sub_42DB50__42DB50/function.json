@@ -1,19 +1,36 @@
 {
-  "callees_count": 41,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x42DB50",
+      "0x42DDEA"
+    ],
+    [
+      "0x9B1C00",
+      "0x9B1C26"
+    ]
+  ],
+  "chunks_sha256": "e2ae9ce2dee066e5fd193f7d262d77b938b3d4842ef821be99d24eae9b3d90dd",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "comment_repeatable": "MEF PERF 2026-09-07: Verified caller ties PERF-1 to real enumeration: enters archive+200h lock42DB8C, loops files in increasing v28, requests names42DD1C for accepted candidates, unlocks42DDCD. Same-extension valid candidates with no exclusions can all match. Proposed full scoped enumeration replacement must preserve seven cdecl args, returned caller-owned filter array, hash filters, result order and every lock/SEH exit.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-1 implemented: native enumerator/filter/exclusion/lock body retained via prolog trampoline, with invocation-local filename cursor and nested-scope restoration. Selected-name bridge42DD0E uses bounded cache/offset/stream variants. Unknown custom stream contract retains native getter. Stream EOF/unterminated or >255-byte streamed names are refused, not truncated.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "sub_42DB50",
   "end_ea": "0x42DDEA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_42DB50",
   "segment": ".text",
   "sha256": "55b3144302852a1b207c7a7ce645e5fc507fb585ebe7d594c25f5e56c99cbecc",
   "size": 666,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42DB50",
+  "total_chunk_size": 704,
   "type": "_DWORD *__cdecl(int, unsigned int, _DWORD *, unsigned int *, _BYTE *, char **, const char *)",
-  "xrefs_from_count": 258,
+  "xrefs_from_count": 272,
   "xrefs_to_count": 1
 }

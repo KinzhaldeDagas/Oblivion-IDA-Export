@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x769B60",
-    "line": "push    ecx",
+    "line": "push    ecx; Pass224/226: Prepares NiScreenTexture +0x1C geometry buffer and rebuilds from records when pending/update flags require it.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x769B74",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x769B76",
-    "line": "call    sub_777F10",
+    "line": "call    NiGeometryBufferData_HasLiveStreams; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x769B87",
-    "line": "call    sub_777F70",
+    "line": "call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x769BC3",
-    "line": "call    sub_767EA0",
+    "line": "call    sub_767EA0; Pass224/226: Packs NiScreenTexture records into screen vertices/indices; uses NiScreenTexture +0x14 first texture for dimensions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x769BCA",
-    "line": "mov     word ptr [edi+18h], 0",
+    "line": "mov     word ptr [edi+18h], 0; Pass226: Render preparation clears NiScreenTexture +0x18 pending update mask after consuming or observing it.",
     "mnemonic": "mov",
     "size": 6
   },

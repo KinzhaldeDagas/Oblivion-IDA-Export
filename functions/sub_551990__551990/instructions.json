@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x551990",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+left]; Exact four-matrix difference test for non-null inputs. BUG: null handling is inverted: (null,null) returns true/different, while exactly one null returns false/equal. All three known Oblivion callers supply inline/concrete FaceGen matrices, so this is a latent defect and Prettier Faces does not patch unrelated comparison behavior.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x551998",
-    "line": "cmp     [esp+arg_4], eax",
+    "line": "cmp     [esp+right], eax; BUG detail: when left is null, comparison against right branches so null/null returns true and null/non-null returns false.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x5519A1",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5519B0",
-    "line": "mov     [esp+0Ch+arg_0], ecx",
+    "line": "mov     [esp+0Ch+left], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -126,14 +126,8 @@
     "size": 2
   },
   {
-    "ea": "0x5519BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5519C0",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+left]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,19 +139,19 @@
   },
   {
     "ea": "0x5519C6",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5519C7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5519C9",
-    "line": "call    sub_550330",
+    "line": "call    FaceGenMatrix_Equals; Exact FaceGen matrix equality: dimensions must match and all coefficient bytes are compared.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x530410",
-    "line": "push    esi",
+    "line": "push    esi; Clears TESTopicInfo runtime spoken state when kTopicInfoModified_Spoken is being reverted/cleared.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x530412",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+modifiedFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x530419",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x530424",
-    "line": "jz      short loc_53042A",
+    "line": "jz      short loc_53042A; Only modified flag 0x10000000 affects the TESTopicInfo-specific runtime state in this clear hook.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x530426",
-    "line": "mov     byte ptr [esi+22h], 0",
+    "line": "mov     byte ptr [esi+22h], 0; Clear OblivionTopicInfo.spoken at +0x22, making a SayOnce INFO eligible again if all other conditions pass.",
     "mnemonic": "mov",
     "size": 4
   },

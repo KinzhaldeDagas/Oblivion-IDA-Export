@@ -1,1 +1,1 @@
-IInternetSecurityMgrSiteVtbl_0
+typedef IInternetSecurityMgrSiteVtbl IInternetSecurityMgrSiteVtbl_0;

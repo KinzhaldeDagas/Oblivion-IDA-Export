@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C6230",
+      "0x7C62C3"
+    ]
+  ],
+  "chunks_sha256": "7223b27bbdfafe0c9cbe369cb6b57d8d29f9356f6b566a0877a7ee692257a9d7",
+  "comment_regular": "Search the native ShadowSceneNode full-light list for a ShadowSceneLight whose backing NiLight identity matches the supplied source.",
+  "comment_repeatable": "Search the native ShadowSceneNode full-light list for a ShadowSceneLight whose backing NiLight identity matches the supplied source.\n\nMEF PERF 2026-10-02: PERF-9 verified: each call restarts at owner+E8, follows node+0, checks payload+8 and returns the FIRST matching backing source. N distinct absent-source admissions through7C6B10 cost N*(N-1)/2 visits from empty; querying all N resident sources once costs N*(N+1)/2 visits. These are static counts, not measured FPS. A source index requires complete mutation/lifetime coverage and preserved first-match behavior.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-9 implemented by perf_light_lists.h: bounded payload/source indices for known full-list vtable on verified engine main thread. Unique sources with positive native ownership permit lookup; duplicates/unknownshape/privateOOM/writers go native. Index owns no wrapper/source. Mutation hooks maintain or discard entries; no raw engine field changes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C6230",
+  "display_name": "ShadowSceneNode_FindFullLightBySource",
   "end_ea": "0x7C62C3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C6230",
+  "name": "ShadowSceneNode_FindFullLightBySource",
   "segment": ".text",
   "sha256": "7223b27bbdfafe0c9cbe369cb6b57d8d29f9356f6b566a0877a7ee692257a9d7",
   "size": 147,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C6230",
-  "type": "_DWORD *__thiscall(_DWORD *this, int)",
+  "total_chunk_size": 147,
+  "type": "ShadowSceneLight_DecodedLayout *__thiscall(ShadowSceneNode_DecodedLayout *self, void *backingLight)",
   "xrefs_from_count": 69,
   "xrefs_to_count": 4
 }

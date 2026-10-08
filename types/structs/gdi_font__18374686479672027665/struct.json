@@ -1,244 +1,378 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "gdi_font",
+  "definition": "struct __declspec(align(8)) gdi_font\n{\nlist entry;\nlist unused_entry;\nDWORD refcount;\nDWORD gm_size;\nglyph_metrics **gm;\nOUTLINETEXTMETRICW otm;\nKERNINGPAIR *kern_pairs;\nint kern_count;\nvoid *private;\nlist child_fonts;\nDWORD handle;\nDWORD cache_num;\nDWORD hash;\nUINT charset;\nUINT codepage;\nFONTSIGNATURE fs;\nLOGFONTW lf;\nFMAT2 matrix;\nUINT face_index;\nINT scale_y;\nINT aveWidth;\nINT ppem;\nSHORT yMax;\nSHORT yMin;\nUINT ntmFlags;\nUINT ntmAvgWidth;\nUINT aa_flags;\nULONG ttc_item_offset;\n__int32 can_use_bitmap : 1;\n__int32 fake_italic : 1;\n__int32 fake_bold : 1;\n__int32 scalable : 1;\ngdi_font *base_font;\nvoid *gsub_table;\nvoid *vert_feature;\nvoid *data_ptr;\nSIZE_T data_size;\nFILETIME writetime;\nWCHAR_0 file[1];\n}\n",
   "id": 18374686479672027665,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unused_entry",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refcount",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "gm_size",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "gm",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "glyph_metrics **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "otm",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 216
+      "offset_hex": "0x1C",
+      "size": 216,
+      "type": "OUTLINETEXTMETRICW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "kern_pairs",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "KERNINGPAIR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "kern_count",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "private",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "child_fonts",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle",
       "offset": 264,
       "offset_hex": "0x108",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cache_num",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 4
+      "offset_hex": "0x10C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hash",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "charset",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "codepage",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fs",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 24
+      "offset_hex": "0x11C",
+      "size": 24,
+      "type": "FONTSIGNATURE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lf",
       "offset": 308,
       "offset_hex": "0x134",
-      "size": 92
+      "size": 92,
+      "type": "LOGFONTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "matrix",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 16
+      "size": 16,
+      "type": "FMAT2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "face_index",
       "offset": 416,
-      "offset_hex": "0x1a0",
-      "size": 4
+      "offset_hex": "0x1A0",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scale_y",
       "offset": 420,
-      "offset_hex": "0x1a4",
-      "size": 4
+      "offset_hex": "0x1A4",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "aveWidth",
       "offset": 424,
-      "offset_hex": "0x1a8",
-      "size": 4
+      "offset_hex": "0x1A8",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ppem",
       "offset": 428,
-      "offset_hex": "0x1ac",
-      "size": 4
+      "offset_hex": "0x1AC",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "yMax",
       "offset": 432,
-      "offset_hex": "0x1b0",
-      "size": 2
+      "offset_hex": "0x1B0",
+      "size": 2,
+      "type": "SHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "yMin",
       "offset": 434,
-      "offset_hex": "0x1b2",
-      "size": 2
+      "offset_hex": "0x1B2",
+      "size": 2,
+      "type": "SHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ntmFlags",
       "offset": 436,
-      "offset_hex": "0x1b4",
-      "size": 4
+      "offset_hex": "0x1B4",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ntmAvgWidth",
       "offset": 440,
-      "offset_hex": "0x1b8",
-      "size": 4
+      "offset_hex": "0x1B8",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "aa_flags",
       "offset": 444,
-      "offset_hex": "0x1bc",
-      "size": 4
+      "offset_hex": "0x1BC",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ttc_item_offset",
       "offset": 448,
-      "offset_hex": "0x1c0",
-      "size": 4
+      "offset_hex": "0x1C0",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "can_use_bitmap",
       "offset": 452,
-      "offset_hex": "0x1c4",
-      "size": 0
+      "offset_hex": "0x1C4",
+      "size": 0.125,
+      "type": "__int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fake_italic",
-      "offset": 452,
-      "offset_hex": "0x1c4",
-      "size": 0
+      "offset": 452.125,
+      "offset_hex": "0x1C4",
+      "size": 0.125,
+      "type": "__int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fake_bold",
-      "offset": 452,
-      "offset_hex": "0x1c4",
-      "size": 0
+      "offset": 452.25,
+      "offset_hex": "0x1C4",
+      "size": 0.125,
+      "type": "__int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scalable",
-      "offset": 452,
-      "offset_hex": "0x1c4",
-      "size": 0
+      "offset": 452.375,
+      "offset_hex": "0x1C4",
+      "size": 0.125,
+      "type": "__int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "base_font",
       "offset": 456,
-      "offset_hex": "0x1c8",
-      "size": 4
+      "offset_hex": "0x1C8",
+      "size": 4,
+      "type": "gdi_font *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "gsub_table",
       "offset": 460,
-      "offset_hex": "0x1cc",
-      "size": 4
+      "offset_hex": "0x1CC",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vert_feature",
       "offset": 464,
-      "offset_hex": "0x1d0",
-      "size": 4
+      "offset_hex": "0x1D0",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data_ptr",
       "offset": 468,
-      "offset_hex": "0x1d4",
-      "size": 4
+      "offset_hex": "0x1D4",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data_size",
       "offset": 472,
-      "offset_hex": "0x1d8",
-      "size": 8
+      "offset_hex": "0x1D8",
+      "size": 8,
+      "type": "SIZE_T"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "writetime",
       "offset": 480,
-      "offset_hex": "0x1e0",
-      "size": 8
+      "offset_hex": "0x1E0",
+      "size": 8,
+      "type": "FILETIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "file",
       "offset": 488,
-      "offset_hex": "0x1e8",
-      "size": 2
+      "offset_hex": "0x1E8",
+      "size": 2,
+      "type": "WCHAR_0[1]"
     }
   ],
   "name": "gdi_font",
+  "ordinal": 1507,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 496
 }

@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x5F1468",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x5F1479",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x5F147F",
-    "line": "mov     ecx, offset unk_B3BD7C",
+    "line": "mov     ecx, (offset qword_B3BB2C+250h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x5F148B",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5F14BA",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x5F14C5",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -457,19 +457,19 @@
   },
   {
     "ea": "0x5F14CF",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F14D0",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5F14D5",
-    "line": "call    sub_676F90",
+    "line": "call    ActorProcessManager_RemoveActorFromCrimes",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x5F14FB",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x5F151E",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x5F152F",
-    "line": "lea     ecx, [esi+88h]",
+    "line": "lea     ecx, [esi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x5F1543",
-    "line": "lea     ecx, [esi+88h]",
+    "line": "lea     ecx, [esi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x5F1553",
-    "line": "lea     ecx, [esi+68h]",
+    "line": "lea     ecx, [esi+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -808,5 +808,185 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C27D0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C27D3",
+    "line": "jmp     MobileObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C27D8",
+    "line": "cmp     dword ptr [ebp-10h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x9C27DC",
+    "line": "jz      loc_9C27F0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C27E2",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C27E5",
+    "line": "add     eax, 5Ch ; '\\'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C27E8",
+    "line": "mov     [ebp-14h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C27EB",
+    "line": "jmp     loc_9C27F7",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C27F0",
+    "line": "mov     dword ptr [ebp-14h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x9C27F7",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C27FA",
+    "line": "jmp     MagicCaster_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C27FF",
+    "line": "cmp     dword ptr [ebp-10h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2803",
+    "line": "jz      loc_9C2817",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2809",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C280C",
+    "line": "add     eax, 68h ; 'h'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C280F",
+    "line": "mov     [ebp-18h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2812",
+    "line": "jmp     loc_9C281E",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2817",
+    "line": "mov     dword ptr [ebp-18h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x9C281E",
+    "line": "mov     ecx, [ebp-18h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2821",
+    "line": "jmp     MagicTarget_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2826",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2829",
+    "line": "add     ecx, 88h ; 'ˆ'; self",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C282F",
+    "line": "jmp     AVCollection_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2834",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2838",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C283B",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C283E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2840",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2845",
+    "line": "mov     eax, offset stru_AEB630",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C284A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -3,7 +3,7 @@
 0x738633: mov     eax, [ebx+8]
 0x738636: push    ebp
 0x738637: push    eax
-0x738638: call    FormHeapFree
+0x738638: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73863D: mov     ebp, [esp+0Ch+Src]
 0x738641: add     esp, 4
 0x738644: test    ebp, ebp

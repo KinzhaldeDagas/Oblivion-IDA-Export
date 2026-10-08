@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x507DC0",
-    "line": "cmp     byte ptr ds:0B125E8h, 0",
+    "line": "cmp     byte ptr ds:0B125E8h, 0; Console toggle for SpeedTree leaves; flips singleton +0x21 and prints Leaves on/off.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x507DC9",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x507DCB",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x507DD9",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x507DDB",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x507DF5",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x507DFA",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x507E18",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x507E1A",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x507E28",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x507E2A",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x507E36",
-    "line": "mov     eax, offset aOn_0",
+    "line": "mov     eax, offset aOn_0; \"On\"",
     "mnemonic": "mov",
     "size": 5
   },

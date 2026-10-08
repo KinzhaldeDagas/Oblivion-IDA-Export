@@ -1,25 +1,25 @@
-0x472D10: sub     esp, 10h
+0x472D10: sub     esp, 10h; Serializes current or queued AnimIdle state with debug size accounting; form references remain subject to native save/load resolution.
 0x472D13: mov     ecx, ds:0B33B00h
 0x472D19: push    ebp
 0x472D1A: push    esi
-0x472D1B: mov     [esp+18h+var_4], 0
+0x472D1B: mov     [esp+18h+source], 0
 0x472D23: mov     ebp, [ecx+14h]
 0x472D26: push    edi
 0x472D27: mov     [esp+1Ch+var_C], 0
-0x472D2F: call    sub_45A170
+0x472D2F: call    TESSaveLoadGame_UseSaveGameBlocks
 0x472D34: test    al, al
 0x472D36: jz      short loc_472D6B
-0x472D38: mov     ecx, ds:0B33B00h
-0x472D3E: push    4; Size
+0x472D38: mov     ecx, ds:0B33B00h; self
+0x472D3E: push    4; byteCount
 0x472D40: lea     eax, [esp+20h+Src]
-0x472D44: push    eax; Src
+0x472D44: push    eax; source
 0x472D45: mov     [esp+24h+Src], 4B4F4C42h
 0x472D4D: call    SaveLoad_SaveData
-0x472D52: mov     ecx, ds:0B33B00h
+0x472D52: mov     ecx, ds:0B33B00h; self
 0x472D58: mov     edx, [ecx+14h]
-0x472D5B: push    2; Size
-0x472D5D: lea     eax, [esp+20h+var_4]
-0x472D61: push    eax; Src
+0x472D5B: push    2; byteCount
+0x472D5D: lea     eax, [esp+20h+source]
+0x472D61: push    eax; source
 0x472D62: mov     [esp+24h+var_C], edx
 0x472D66: call    SaveLoad_SaveData
 0x472D6B: mov     esi, [esp+1Ch+arg_4]
@@ -31,25 +31,25 @@
 0x472D80: jz      short loc_472D89
 0x472D82: mov     ecx, [eax+0Ch]
 0x472D85: mov     [esp+1Ch+var_10], ecx
-0x472D89: mov     ecx, ds:0B33B00h
-0x472D8F: push    4
+0x472D89: mov     ecx, ds:0B33B00h; self
+0x472D8F: push    4; byteCount
 0x472D91: lea     edx, [esp+20h+var_10]
-0x472D95: push    edx
-0x472D96: call    SaveLoad_SaveFormID
+0x472D95: push    edx; source
+0x472D96: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
 0x472D9B: cmp     [esp+1Ch+var_10], 0
 0x472DA0: jz      short loc_472DE7
 0x472DA2: mov     ecx, [esi+10h]
 0x472DA5: test    ecx, ecx
 0x472DA7: mov     eax, 0Dh
 0x472DAC: jz      short loc_472DBA
-0x472DAE: call    sub_49F550
+0x472DAE: call    BSAnimGroupSequence_GetSaveStateSize; Returns native serialized BSAnimGroupSequence state size: 20 bytes for save versions >= 0x71, otherwise 24 bytes.
 0x472DB3: add     ax, 0Eh
 0x472DB7: movzx   eax, ax
 0x472DBA: movzx   eax, ax
-0x472DBD: push    2; Size
+0x472DBD: push    2; byteCount
 0x472DBF: lea     ecx, [esp+20h+arg_4]
-0x472DC3: push    ecx; Src
-0x472DC4: mov     ecx, ds:0B33B00h
+0x472DC3: push    ecx; source
+0x472DC4: mov     ecx, ds:0B33B00h; self
 0x472DCA: mov     [esp+24h+arg_4], eax
 0x472DCE: call    SaveLoad_SaveData
 0x472DD3: mov     edx, [esp+1Ch+arg_8]
@@ -58,7 +58,7 @@
 0x472DDC: push    ecx
 0x472DDD: mov     ecx, esi; Src
 0x472DDF: fstp    [esp+24h+var_24]; float
-0x472DE2: call    sub_472C40
+0x472DE2: call    AnimIdle_SaveSlotState; Writes one AnimIdle slot state: presence/state metadata, idle form reference, optional loaded sequence marker, and nested BSAnimGroupSequence state.
 0x472DE7: cmp     byte ptr ds:0B05BACh, 0
 0x472DEE: jz      short loc_472E57
 0x472DF0: mov     eax, ds:0B33B00h
@@ -68,7 +68,7 @@
 0x472E00: jz      short loc_472E3D
 0x472E02: mov     eax, [edi]
 0x472E04: push    eax; a1
-0x472E05: call    TESForm_LookupByFormID
+0x472E05: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x472E0A: mov     ecx, [edi+5]
 0x472E0D: mov     edx, [eax]
 0x472E0F: add     esp, 4
@@ -95,7 +95,7 @@
 0x472E4F: call    sub_40FEC0
 0x472E54: add     esp, 10h
 0x472E57: mov     ecx, ds:0B33B00h
-0x472E5D: call    sub_45A170
+0x472E5D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x472E62: test    al, al
 0x472E64: jz      short loc_472E99
 0x472E66: mov     edx, ds:0B33B00h

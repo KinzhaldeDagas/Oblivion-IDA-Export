@@ -1,11 +1,11 @@
-0x563CC0: push    esi
+0x563CC0: push    esi; BSTreeNode leaf child getter: returns leaf LOD node pointer from +0x39 array.
 0x563CC1: mov     esi, ecx
-0x563CC3: mov     ecx, [esi+0DCh]
+0x563CC3: mov     ecx, [esi+0DCh]; this
 0x563CC9: test    ecx, ecx
 0x563CCB: jz      short loc_563CF5
 0x563CCD: cmp     dword ptr [esi+0E4h], 0
 0x563CD4: jz      short loc_563CF5
-0x563CD6: call    sub_560200
+0x563CD6: call    BSTreeModel_GetNumLeafLODLevels
 0x563CDB: mov     cx, [esp+4+arg_0]
 0x563CE0: cmp     cx, ax
 0x563CE3: jnb     short loc_563CF5

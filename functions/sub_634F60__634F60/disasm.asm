@@ -1,4 +1,4 @@
-0x634F60: sub     esp, 38h
+0x634F60: sub     esp, 38h; HighProcess FLEE procedure: accepts current package type 0x10 FleePackage, resolves target/point away from target, and submits pathing. Calls movement helper with 0x201 for flee; helper preserves sneak/swim flags 0x0C00.
 0x634F63: push    ebx
 0x634F64: push    ebp
 0x634F65: mov     ebp, ecx
@@ -38,7 +38,7 @@
 0x634FBB: mov     ecx, ebp
 0x634FBD: call    edx
 0x634FBF: mov     ecx, eax
-0x634FC1: call    sub_419F10
+0x634FC1: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x634FC6: mov     eax, [ebp+0]
 0x634FC9: mov     edx, [eax+54h]
 0x634FCC: push    0; int
@@ -137,7 +137,7 @@
 0x6350D2: mov     ecx, ebp
 0x6350D4: call    edx
 0x6350D6: mov     ecx, eax
-0x6350D8: call    sub_41A610
+0x6350D8: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x6350DD: pop     edi
 0x6350DE: pop     esi
 0x6350DF: pop     ebp
@@ -193,7 +193,7 @@
 0x63515D: mov     eax, [edi+5Ch]
 0x635160: mov     ecx, esi; this
 0x635162: mov     [esp+48h+var_28+4], eax
-0x635166: call    TESObjectREFR_GetParentCell
+0x635166: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63516B: mov     ecx, esi; this
 0x63516D: mov     [esp+48h+var_34], eax
 0x635171: call    TESObjectREFR_GetWorldSpace
@@ -303,14 +303,14 @@
 0x63529F: call    TesObjectREF_GetDistance
 0x6352A4: fstp    [esp+48h+var_1C]
 0x6352A8: mov     ecx, [esp+48h+var_34]; this
-0x6352AC: call    TESObjectCELL_IsInterior
+0x6352AC: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6352B1: test    al, al
 0x6352B3: jz      short loc_6352C6
-0x6352B5: mov     ecx, offset flt_B37030
+0x6352B5: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+358h)
 0x6352BA: call    GameSetting_GetSafeFloatPointer
 0x6352BF: mov     byte ptr [esp+48h+arg_0], 1
 0x6352C4: jmp     short loc_6352D0
-0x6352C6: mov     ecx, offset flt_B37028
+0x6352C6: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+350h)
 0x6352CB: call    GameSetting_GetSafeFloatPointer
 0x6352D0: mov     ebx, [edi+60h]
 0x6352D3: fld     dword ptr [eax]
@@ -423,13 +423,13 @@
 0x635425: mov     eax, [eax+8]
 0x635428: mov     ecx, ebx; this
 0x63542A: mov     [esp+48h+var_4], eax
-0x63542E: call    TESObjectREFR_GetParentCell
+0x63542E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635433: mov     ecx, ebx; this
 0x635435: mov     [esp+48h+var_34], eax
 0x635439: call    TESObjectREFR_GetWorldSpace
 0x63543E: mov     [esp+48h+var_30], eax
 0x635442: mov     ecx, esi; this
-0x635444: call    TESObjectREFR_GetParentCell
+0x635444: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635449: mov     ebx, [esp+48h+var_34]
 0x63544D: cmp     eax, ebx
 0x63544F: jz      short loc_635458
@@ -462,7 +462,7 @@
 0x6354A3: mov     byte ptr [edi+50h], 0
 0x6354A7: fstp    dword ptr [edi+4Ch]
 0x6354AA: jmp     loc_6355DF
-0x6354AF: call    sub_5EAE70
+0x6354AF: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x6354B4: pop     edi
 0x6354B5: pop     esi
 0x6354B6: pop     ebp
@@ -498,7 +498,7 @@
 0x635514: mov     eax, [eax+8]
 0x635517: mov     ecx, ebx; this
 0x635519: mov     [esp+48h+var_4], eax
-0x63551D: call    TESObjectREFR_GetParentCell
+0x63551D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635522: mov     ecx, ebx; this
 0x635524: mov     [esp+48h+var_34], eax
 0x635528: call    TESObjectREFR_GetWorldSpace
@@ -517,7 +517,7 @@
 0x635553: mov     eax, [eax+8]
 0x635556: mov     ecx, ebx; this
 0x635558: mov     [esp+48h+var_4], eax
-0x63555C: call    TESObjectREFR_GetParentCell
+0x63555C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635561: mov     ecx, ebx; this
 0x635563: mov     [esp+48h+var_34], eax
 0x635567: call    TESObjectREFR_GetWorldSpace
@@ -527,15 +527,15 @@
 0x635574: jz      short loc_6355CA
 0x635576: mov     ebx, [esp+48h+var_28+4]
 0x63557A: mov     ecx, ebx; this
-0x63557C: call    GetTeleportExtraData
+0x63557C: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x635581: test    eax, eax
 0x635583: jz      short loc_6355AC
-0x635585: mov     ecx, eax
-0x635587: call    sub_42B410
+0x635585: mov     ecx, eax; this
+0x635587: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x63558C: mov     ecx, eax; this
-0x63558E: call    GetTeleportExtraData
+0x63558E: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x635593: mov     ecx, eax
-0x635595: call    sub_6899C0
+0x635595: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x63559A: mov     ecx, [eax]
 0x63559C: mov     [esp+48h+var_C], ecx
 0x6355A0: mov     edx, [eax+4]
@@ -573,7 +573,7 @@
 0x63560F: fld     dword ptr ds:0A5A04Ch
 0x635615: mov     ecx, ebx; this
 0x635617: fstp    [esp+48h+arg_0]
-0x63561B: call    GetTeleportExtraData
+0x63561B: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x635620: test    eax, eax
 0x635622: mov     [esp+48h+var_20], eax
 0x635626: jz      short loc_635663
@@ -584,16 +584,16 @@
 0x635634: push    eax
 0x635635: lea     ecx, [esp+4Ch+var_18]
 0x635639: push    ecx
-0x63563A: mov     ecx, [esp+50h+var_20]
-0x63563E: call    sub_42B410
+0x63563A: mov     ecx, [esp+50h+var_20]; this
+0x63563E: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x635643: mov     ecx, eax; this
-0x635645: call    GetTeleportExtraData
+0x635645: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x63564A: mov     ecx, eax
-0x63564C: call    sub_6899C0
+0x63564C: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x635651: mov     ecx, eax
 0x635653: call    sub_4121A0
 0x635658: mov     ecx, eax
-0x63565A: call    sub_404C90
+0x63565A: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x63565F: fstp    [esp+48h+arg_0]
 0x635663: fld     [esp+48h+arg_0]
 0x635667: push    0
@@ -639,12 +639,12 @@
 0x6356DB: retn    4
 0x6356DE: cmp     [esp+48h+var_20], 0
 0x6356E3: jz      short loc_6356FE
-0x6356E5: mov     ecx, [esp+48h+var_20]
-0x6356E9: call    sub_42B410
+0x6356E5: mov     ecx, [esp+48h+var_20]; this
+0x6356E9: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x6356EE: mov     ecx, eax; this
-0x6356F0: call    GetTeleportExtraData
+0x6356F0: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x6356F5: mov     ecx, eax
-0x6356F7: call    sub_6899C0
+0x6356F7: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6356FC: jmp     short loc_63570A
 0x6356FE: mov     edx, [ebx]
 0x635700: mov     eax, [edx+174h]
@@ -657,7 +657,7 @@
 0x635716: mov     ecx, ebx; this
 0x635718: mov     [esp+48h+var_10], eax
 0x63571C: mov     [esp+48h+var_14], edx
-0x635720: call    TESObjectREFR_GetParentCell
+0x635720: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635725: mov     ecx, ebx; this
 0x635727: mov     [esp+48h+var_34], eax
 0x63572B: call    TESObjectREFR_GetWorldSpace
@@ -685,13 +685,13 @@
 0x635775: mov     ecx, ebx; this
 0x635777: mov     [esp+48h+var_14], edx
 0x63577B: mov     [esp+48h+var_10], eax
-0x63577F: call    TESObjectREFR_GetParentCell
+0x63577F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635784: mov     ecx, ebx; this
 0x635786: mov     [esp+48h+var_34], eax
 0x63578A: call    TESObjectREFR_GetWorldSpace
 0x63578F: mov     ecx, esi; this
 0x635791: mov     ebx, eax
-0x635793: call    TESObjectREFR_GetParentCell
+0x635793: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x635798: cmp     eax, [esp+48h+var_34]
 0x63579C: jz      short loc_6357A5
 0x63579E: mov     ecx, esi; this
@@ -728,7 +728,7 @@
 0x6357F7: test    eax, eax
 0x6357F9: jz      short loc_635811
 0x6357FB: mov     ecx, eax
-0x6357FD: call    sub_472EA0
+0x6357FD: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x635802: test    al, al
 0x635804: jz      short loc_635811
 0x635806: mov     eax, [ebp+0]
@@ -753,7 +753,7 @@
 0x635837: test    eax, eax
 0x635839: jz      short loc_635854
 0x63583B: mov     ecx, eax
-0x63583D: call    sub_472EA0
+0x63583D: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x635842: test    al, al
 0x635844: jnz     short loc_635854
 0x635846: mov     eax, [ebp+0]

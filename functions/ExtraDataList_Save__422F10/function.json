@@ -1,18 +1,31 @@
 {
-  "callees_count": 88,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 35,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
+  "chunks": [
+    [
+      "0x422F10",
+      "0x4233D8"
+    ]
+  ],
+  "chunks_sha256": "7f2e93d820877bc36179590bf3cce961d3f718b59e51414da85193576fa7f46d",
+  "comment_regular": "Authoritative extra-data writer. Requested canonical widths: XLOC12, XTEL28, XMRK0+FNAM1+FULL(strlen/known length + NUL)+TNAM2, XSED1, XCHG4(float), XHLT4(SInt32 converted from runtime float), XLCM4, XACT4(zero-extended flag byte), XCNT4(sign-extended SInt16), XSOL1. Iterates singleton extra list; REFR emits ONAM separately afterward.\nCELL shares this writer via0x4CA421. Audited reference cases: XLOC0x422FC1 width12; XTEL0x422FD1 helper width28; XPSN0x423130 width4; XPSL0x42329D width20 (lastdword uninitialized); XESP0x42330A width8; XRTM0x423335/XMRC0x423359/XHRS0x42337D/XTRG0x4233A1 width4. No owner-kind filtering here. Runtime may retain CELL XLOC/XTEL after link; TESCS rejects them earlier. XESP cannot survive CELL linking in either executable.",
+  "comment_repeatable": "Authoritative extra-data writer. Requested canonical widths: XLOC12, XTEL28, XMRK0+FNAM1+FULL(strlen/known length + NUL)+TNAM2, XSED1, XCHG4(float), XHLT4(SInt32 converted from runtime float), XLCM4, XACT4(zero-extended flag byte), XCNT4(sign-extended SInt16), XSOL1. Iterates singleton extra list; REFR emits ONAM separately afterward.\n\n0x422F10: CELL shares this writer via0x4CA421. Audited reference cases: XLOC0x422FC1 width12; XTEL0x422FD1 helper width28; XPSN0x423130 width4; XPSL0x42329D width20 (lastdword uninitialized); XESP0x42330A width8; XRTM0x423335/XMRC0x423359/XHRS0x42337D/XTRG0x4233A1 width4. No owner-kind filtering here. Runtime may retain CELL XLOC/XTEL after link; TESCS rejects them earlier. XESP cannot survive CELL linking in either executable.\n\n0x422F97: The XLOC writer serializes the current lock flags byte+8 unchanged at0x422F97 into byte8 of the canonical12-byte output at0x422FC1. Immediately after plugin load this byte includes the forced locked-state bit0 set at0x425B0D, if the node survives linking. Source-compatible parsing retains the original byte; loaded semantic flags expose the runtime name is_locked.\n\n0x422F10: ExtraDataList_Save traverses the same extras regardless of owner: type4 XCLW exact4 float, type5 XCWT exact4, type8 XCLR resolved nonempty form array, type0x0B XCMT exact1, type0x0C XCCM exact4. This follows the shared loader's zero-removal and LinkFormIDs outcomes, not the record's xEdit schema declaration.\n\n0x422F10: ExtraDataList_Save traverses the shared extra list without owner-kind filtering. Relevant writes: type4 XCLW exact4; type5 XCWT exact4; type8 XCLR resolved nonempty array; type0x0B XCMT one byte; type0x0C XCCM exact4. The newly modeled REFR/ACHR/ACRE candidates therefore share the ordinary field-specific writer paths with CELL.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
   "display_name": "ExtraDataList_Save",
   "end_ea": "0x4233D8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ExtraDataList_Save",
   "segment": ".text",
   "sha256": "7f2e93d820877bc36179590bf3cce961d3f718b59e51414da85193576fa7f46d",
   "size": 1224,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x422F10",
+  "total_chunk_size": 1224,
   "type": "int __usercall@<eax>(ExtraDataList *this@<ecx>, int@<ebx>)",
   "xrefs_from_count": 451,
   "xrefs_to_count": 2

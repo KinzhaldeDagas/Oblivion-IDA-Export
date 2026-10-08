@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$6755D7271A681E90454AB1583A43C093",
+  "definition": "struct $6755D7271A681E90454AB1583A43C093\n{\nunsigned __int64 PreservedDuringStandby : 1;\nunsigned __int64 PreservedDuringHibernate : 1;\nunsigned __int64 PartiallyPreservedDuringHibernate : 1;\nunsigned __int64 Reserved : 61;\n}\n",
   "id": 18374686479672026909,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PreservedDuringStandby",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int64 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PreservedDuringHibernate",
-      "offset": 0,
+      "offset": 0.125,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int64 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PartiallyPreservedDuringHibernate",
-      "offset": 0,
+      "offset": 0.25,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int64 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
-      "offset": 0,
+      "offset": 0.375,
       "offset_hex": "0x0",
-      "size": 7
+      "size": 7.625,
+      "type": "unsigned __int64 : 61"
     }
   ],
   "name": "$6755D7271A681E90454AB1583A43C093",
+  "ordinal": 1267,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

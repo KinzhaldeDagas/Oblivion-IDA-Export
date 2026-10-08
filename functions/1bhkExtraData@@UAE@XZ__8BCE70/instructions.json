@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x8BCEC7",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x8BCED9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -274,5 +274,179 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x8BCA00",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8BCA03",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8BCA05",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTLargeArray@V?$NiPointer@VNiTimeController@@@@@@6B@; const NiTLargeArray<NiPointer<NiTimeController>>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8BCA0B",
+    "line": "jz      short locret_8BCA2C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8BCA0D",
+    "line": "mov     ecx, [eax-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8BCA10",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BCA11",
+    "line": "lea     esi, [eax-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x8BCA14",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x8BCA19",
+    "line": "push    ecx; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BCA1A",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x8BCA1C",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BCA1D",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8BCA22",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8BCA23",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8BCA28",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8BCA2B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8BCA2C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D7220",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7223",
+    "line": "jmp     NiExtraData_dtor",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7228",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D722B",
+    "line": "add     ecx, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D722E",
+    "line": "jmp     loc_8BCA00",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7233",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D7237",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D723A",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D723D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D723F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7244",
+    "line": "mov     eax, offset stru_AFEEB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7249",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

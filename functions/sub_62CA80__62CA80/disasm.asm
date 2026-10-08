@@ -9,7 +9,7 @@
 0x62CA91: call    edx
 0x62CA93: mov     ebx, eax
 0x62CA95: test    ebx, ebx
-0x62CA97: mov     [esp+54h+var_30], ebx
+0x62CA97: mov     [esp+54h+self], ebx
 0x62CA9B: jz      short loc_62CAA7
 0x62CA9D: test    byte ptr [ebx+1Eh], 1
 0x62CAA1: jnz     loc_62D73F
@@ -53,7 +53,7 @@
 0x62CB10: mov     ecx, edi
 0x62CB12: call    eax
 0x62CB14: mov     ecx, eax
-0x62CB16: call    sub_6135F0
+0x62CB16: call    CombatController_GetCurrentTarget
 0x62CB1B: mov     [esi+2Ch], eax
 0x62CB1E: jmp     short loc_62CB2D
 0x62CB20: mov     edx, [esi]
@@ -144,8 +144,8 @@
 0x62CC0B: call    sub_683AA0
 0x62CC10: test    al, al
 0x62CC12: jz      short loc_62CC55
-0x62CC14: mov     ecx, ebp
-0x62CC16: call    Actor_IsSwimming
+0x62CC14: mov     ecx, ebp; this
+0x62CC16: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x62CC1B: test    al, al
 0x62CC1D: mov     ecx, edi; this
 0x62CC1F: jz      short loc_62CC4C
@@ -170,9 +170,9 @@
 0x62CC4C: call    sub_5E1E90
 0x62CC51: test    al, al
 0x62CC53: jnz     short loc_62CC35
-0x62CC55: mov     ecx, ebx
+0x62CC55: mov     ecx, ebx; self
 0x62CC57: mov     byte ptr [esp+54h+var_44+3], 0
-0x62CC5C: call    sub_5660A0
+0x62CC5C: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x62CC61: test    al, al
 0x62CC63: jz      short loc_62CCD3
 0x62CC65: mov     eax, [esi+8]
@@ -185,14 +185,14 @@
 0x62CC77: test    byte ptr [eax+1Ch], 1
 0x62CC7B: jz      short loc_62CCD3
 0x62CC7D: mov     ecx, edi; this
-0x62CC7F: call    TESObjectREFR_GetParentCell
+0x62CC7F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62CC84: test    eax, eax
 0x62CC86: jz      short loc_62CCD3
-0x62CC88: push    edi
+0x62CC88: push    edi; actor
 0x62CC89: mov     ecx, edi; this
-0x62CC8B: call    TESObjectREFR_GetParentCell
-0x62CC90: mov     ecx, eax
-0x62CC92: call    sub_4CAAC0
+0x62CC8B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x62CC90: mov     ecx, eax; cell
+0x62CC92: call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.
 0x62CC97: test    al, al
 0x62CC99: jz      short loc_62CCD3
 0x62CC9B: mov     edx, [esi+2Ch]
@@ -202,7 +202,7 @@
 0x62CCA4: push    edx; int
 0x62CCA5: push    0; int
 0x62CCA7: mov     ecx, edi; int
-0x62CCA9: call    sub_5F2820
+0x62CCA9: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x62CCAE: test    al, al
 0x62CCB0: jnz     loc_62CED5
 0x62CCB6: mov     ecx, [esi+2Ch]
@@ -240,9 +240,9 @@
 0x62CD17: jz      short loc_62CD2D
 0x62CD19: mov     ecx, [esi+34h]
 0x62CD1C: call    sub_68A160
-0x62CD21: push    eax
-0x62CD22: mov     ecx, edi
-0x62CD24: call    sub_4D7E30
+0x62CD21: push    eax; pointXYZ
+0x62CD22: mov     ecx, edi; this
+0x62CD24: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x62CD29: fstp    [esp+54h+var_3C]
 0x62CD2D: mov     ebp, [esp+54h+arg_0]
 0x62CD31: test    ebp, ebp
@@ -251,11 +251,11 @@
 0x62CD3A: cmp     ebp, ds:0B333C4h
 0x62CD40: jz      short loc_62CD5D
 0x62CD42: mov     ecx, ebp
-0x62CD44: call    sub_5E05B0
+0x62CD44: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x62CD49: test    al, al
 0x62CD4B: jz      short loc_62CD5D
 0x62CD4D: mov     ecx, edi
-0x62CD4F: call    sub_5E05B0
+0x62CD4F: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x62CD54: test    al, al
 0x62CD56: jz      short loc_62CD5D
 0x62CD58: mov     byte ptr [esp+54h+arg_0], 1
@@ -274,7 +274,7 @@
 0x62CD81: push    edi
 0x62CD82: mov     ecx, ebx
 0x62CD84: call    sub_5677B0
-0x62CD89: call    Double_To_SInt32
+0x62CD89: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x62CD8E: cmp     eax, 1
 0x62CD91: mov     [esp+54h+var_40], eax
 0x62CD95: jge     short loc_62CDA0
@@ -311,7 +311,7 @@
 0x62CDF6: mov     ecx, ebp
 0x62CDF8: call    sub_4121A0
 0x62CDFD: mov     ecx, eax
-0x62CDFF: call    sub_404C90
+0x62CDFF: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x62CE04: fstp    [esp+54h+var_2C]
 0x62CE08: mov     ecx, [esi+2Ch]
 0x62CE0B: mov     edx, [ecx]
@@ -393,7 +393,7 @@
 0x62CF0F: call    sub_4121A0
 0x62CF14: lea     ecx, [esp+54h+var_C]
 0x62CF18: push    ecx
-0x62CF19: call    sub_683CB0
+0x62CF19: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x62CF1E: fstp    [esp+58h+arg_C]
 0x62CF22: fldz
 0x62CF24: add     esp, 4
@@ -538,7 +538,7 @@
 0x62D0DF: call    sub_684EC0
 0x62D0E4: cmp     byte ptr [esp+54h+arg_C], 0
 0x62D0E9: jz      loc_62D1C4
-0x62D0EF: mov     ecx, offset unk_B36A90
+0x62D0EF: mov     ecx, (offset flt_B36A88+8)
 0x62D0F4: call    GameSetting_GetSafeFloatPointer
 0x62D0F9: fld     [esp+54h+var_3C]
 0x62D0FD: fld     dword ptr [eax]
@@ -553,7 +553,7 @@
 0x62D115: push    ecx; int
 0x62D116: push    0; int
 0x62D118: mov     ecx, edi; int
-0x62D11A: call    sub_5F2820
+0x62D11A: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x62D11F: test    al, al
 0x62D121: jnz     loc_62D1BC
 0x62D127: fld     dword ptr [esi+0B8h]
@@ -645,7 +645,7 @@
 0x62D220: push    ecx; int
 0x62D221: push    0; int
 0x62D223: mov     ecx, edi; int
-0x62D225: call    sub_5F2820
+0x62D225: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x62D22A: test    al, al
 0x62D22C: jz      short loc_62D270
 0x62D22E: cmp     dword ptr [esi+34h], 0
@@ -675,7 +675,7 @@
 0x62D275: call    TESObjectREFR_GetWorldSpace
 0x62D27A: mov     ecx, [esi+2Ch]; this
 0x62D27D: push    eax
-0x62D27E: call    TESObjectREFR_GetParentCell
+0x62D27E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62D283: mov     ecx, [esp+58h+var_18]
 0x62D287: mov     edx, [esp+58h+var_14]
 0x62D28B: push    eax
@@ -706,7 +706,7 @@
 0x62D2E4: mov     eax, [esp+54h+arg_8]
 0x62D2E8: cmp     eax, 0FFFFFFFFh
 0x62D2EB: jnz     loc_62D3B6
-0x62D2F1: mov     ecx, [esp+54h+var_30]
+0x62D2F1: mov     ecx, [esp+54h+self]
 0x62D2F5: mov     al, [ecx+20h]
 0x62D2F8: cmp     al, 0Fh
 0x62D2FA: mov     byte ptr [esp+54h+arg_C], 0
@@ -718,11 +718,11 @@
 0x62D30C: push    edi
 0x62D30D: mov     ebx, ecx
 0x62D30F: call    sub_5677B0
-0x62D314: call    Double_To_SInt32
+0x62D314: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x62D319: mov     ebp, eax
-0x62D31B: mov     ecx, ebx
+0x62D31B: mov     ecx, ebx; self
 0x62D31D: mov     [esp+54h+arg_8], ebp
-0x62D321: call    sub_5660A0
+0x62D321: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x62D326: test    al, al
 0x62D328: jz      short loc_62D375
 0x62D32A: mov     eax, [esi+8]
@@ -735,14 +735,14 @@
 0x62D33C: test    byte ptr [eax+1Ch], 1
 0x62D340: jz      short loc_62D375
 0x62D342: mov     ecx, edi; this
-0x62D344: call    TESObjectREFR_GetParentCell
+0x62D344: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62D349: test    eax, eax
 0x62D34B: jz      short loc_62D375
-0x62D34D: push    edi
+0x62D34D: push    edi; actor
 0x62D34E: mov     ecx, edi; this
-0x62D350: call    TESObjectREFR_GetParentCell
-0x62D355: mov     ecx, eax
-0x62D357: call    sub_4CAAC0
+0x62D350: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x62D355: mov     ecx, eax; cell
+0x62D357: call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.
 0x62D35C: test    al, al
 0x62D35E: jz      short loc_62D375
 0x62D360: mov     edx, [esi]
@@ -781,7 +781,7 @@
 0x62D3BF: push    edi
 0x62D3C0: mov     ecx, esi
 0x62D3C2: call    eax
-0x62D3C4: mov     ebx, [esp+54h+var_30]
+0x62D3C4: mov     ebx, [esp+54h+self]
 0x62D3C8: cmp     byte ptr [esp+54h+arg_0], 0
 0x62D3CD: jz      short loc_62D3D7
 0x62D3CF: fld     dword ptr ds:0A31C80h
@@ -803,7 +803,7 @@
 0x62D3FF: call    TESObjectREFR_GetWorldSpace
 0x62D404: mov     ecx, [esi+2Ch]; this
 0x62D407: push    eax
-0x62D408: call    TESObjectREFR_GetParentCell
+0x62D408: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62D40D: mov     edx, [ebp+414h]
 0x62D413: push    eax
 0x62D414: lea     ecx, [esp+60h+var_18]
@@ -820,8 +820,8 @@
 0x62D438: push    edi
 0x62D439: mov     ecx, esi
 0x62D43B: call    edx
-0x62D43D: mov     ecx, ebx
-0x62D43F: call    sub_5660A0
+0x62D43D: mov     ecx, ebx; self
+0x62D43F: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x62D444: test    al, al
 0x62D446: jz      loc_62D4F1
 0x62D44C: cmp     [esi+0C0h], ebp
@@ -916,7 +916,7 @@
 0x62D550: push    eax; int
 0x62D551: push    ebp; int
 0x62D552: mov     ecx, edi; int
-0x62D554: call    sub_5F2820
+0x62D554: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x62D559: test    al, al
 0x62D55B: jz      loc_62D73F
 0x62D561: mov     edx, [edi]
@@ -957,9 +957,9 @@
 0x62D5C9: jz      short loc_62D61A
 0x62D5CB: test    ebp, ebp
 0x62D5CD: jz      short loc_62D61A
-0x62D5CF: push    4
-0x62D5D1: push    6
-0x62D5D3: call    TESTopic__GEtTopic
+0x62D5CF: push    4; index
+0x62D5D1: push    6; topicType
+0x62D5D3: call    TESTopic__GetTopic; Hardcoded miscellaneous topic bucket 6 index 4: stock 0000011C / TimeToGo. Null suppresses this ambient SayTopic branch.
 0x62D5D8: mov     ecx, ds:0B333C4h
 0x62D5DE: add     esp, 8
 0x62D5E1: test    eax, eax
@@ -1014,7 +1014,7 @@
 0x62D66F: call    sub_4121A0
 0x62D674: lea     ecx, [esp+54h+var_C]
 0x62D678: push    ecx
-0x62D679: call    sub_683CB0
+0x62D679: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x62D67E: fstp    [esp+58h+arg_C]
 0x62D682: fldz
 0x62D684: add     esp, 4
@@ -1062,7 +1062,7 @@
 0x62D705: retn    10h
 0x62D708: push    30h ; '0'
 0x62D70A: mov     ecx, edi
-0x62D70C: call    sub_5E05F0
+0x62D70C: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62D711: pop     edi
 0x62D712: pop     esi
 0x62D713: pop     ebp

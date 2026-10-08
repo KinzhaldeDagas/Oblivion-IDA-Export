@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795990",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): Resizes vector<unsigned short> with 2-byte arithmetic; grows through insert-fill and shrinks through checked erase.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7959AB",
-    "line": "mov     ebx, [esp+18h+arg_0]",
+    "line": "mov     ebx, [esp+18h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x7959CE",
-    "line": "lea     eax, [esp+18h+arg_4]",
+    "line": "lea     eax, [esp+18h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7959D2",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,31 +187,31 @@
   },
   {
     "ea": "0x7959D5",
-    "line": "push    ebx; int",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7959D6",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7959D7",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7959D8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7959DA",
-    "line": "call    sub_7952B0",
+    "line": "call    OB_stVectorUShort_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): vector<unsigned short> insert-fill core. Uses 2-byte element arithmetic, overlap-safe moves, and 1.5x growth.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x795A10",
-    "line": "mov     [esp+18h+var_4], edi",
+    "line": "mov     [esp+18h+result.current], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,49 +385,49 @@
   },
   {
     "ea": "0x795A26",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A27",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A28",
-    "line": "push    edi; Dst",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A29",
-    "line": "push    esi; int",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A2A",
-    "line": "lea     ecx, [esp+28h+var_8]",
+    "line": "lea     ecx, [esp+28h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x795A2E",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A2F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x795A31",
-    "line": "call    sub_794EE0",
+    "line": "call    OB_stVectorUShort_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked vector<unsigned short>::erase(first,last). Validates both iterator owners, shifts the suffix by 2-byte elements, updates end, and returns the resulting checked iterator.",
     "mnemonic": "call",
     "size": 5
   },

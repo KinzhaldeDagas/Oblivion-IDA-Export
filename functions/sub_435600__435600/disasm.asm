@@ -11,7 +11,7 @@
 0x435622: mov     edi, [esp+410h+arg_4]
 0x435629: mov     eax, [edi]
 0x43562B: mov     [esp+410h+var_400], ecx
-0x43562F: mov     ecx, ioManager
+0x43562F: mov     ecx, ds:0B33A10h
 0x435635: mov     edx, [ecx]
 0x435637: mov     [esp+410h+var_3F8], eax
 0x43563B: mov     eax, [edx+38h]
@@ -66,7 +66,7 @@
 0x4356E5: fstp    [esp+420h+var_420]; float
 0x4356E8: push    eax; int
 0x4356E9: call    InterfaceMgr_DebugTextLine
-0x4356EE: mov     ecx, Addend
+0x4356EE: mov     ecx, ds:0B33A20h
 0x4356F4: push    ecx
 0x4356F5: lea     edx, [esp+428h+var_3EC]
 0x4356F9: push    offset aTotalBstaskCou; "Total BSTask Count: %d"
@@ -99,19 +99,18 @@
 0x435760: fmul    ds:dbl_A368A0
 0x435766: mov     [esp+410h+var_3F8], ebp
 0x43576A: xor     edi, edi
-0x43576C: call    Double_To_SInt32
+0x43576C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x435771: mov     [esp+410h+var_400], eax
 0x435775: xor     esi, esi
 0x435777: jmp     short loc_435780
-0x435779: align 10h
-0x435780: mov     ecx, ioManager
+0x435780: mov     ecx, ds:0B33A10h
 0x435786: mov     edx, [ecx+2Ch]
 0x435789: mov     eax, [edx+esi+8]
-0x43578D: mov     ecx, ioManager
+0x43578D: mov     ecx, ds:0B33A10h
 0x435793: mov     edx, [ecx+2Ch]
 0x435796: mov     ecx, [edx+esi+4]
 0x43579A: push    eax
-0x43579B: mov     eax, ioManager
+0x43579B: mov     eax, ds:0B33A10h
 0x4357A0: push    ecx
 0x4357A1: mov     ecx, [eax+2Ch]
 0x4357A4: mov     edx, [ecx+esi]

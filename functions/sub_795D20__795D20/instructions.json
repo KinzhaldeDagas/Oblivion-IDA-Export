@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x795D20",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY (2026-08-30): Assigns the same vector<unsigned short> value across an initialized owner range by repeated deep copy assignment.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795D21",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x795D26",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,25 +43,25 @@
   },
   {
     "ea": "0x795D2F",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795D33",
-    "line": "push    ebx",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795D34",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x795D36",
-    "line": "call    sub_795510",
+    "line": "call    OB_stVectorUShort_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned short>, with self/empty/reuse/reallocate paths and exact end repair.",
     "mnemonic": "call",
     "size": 5
   },

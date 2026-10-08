@@ -16,7 +16,7 @@
 0x506BA8: push    eax; a2
 0x506BA9: push    ecx; a1
 0x506BAA: mov     dword ptr [esp+40h+var_20], 0
-0x506BB2: call    Script_ExtractArgs
+0x506BB2: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x506BB7: add     esp, 20h
 0x506BBA: test    al, al
 0x506BBC: jnz     short loc_506BC2
@@ -25,7 +25,7 @@
 0x506BC2: mov     ecx, dword ptr [esp+20h+var_20]
 0x506BC5: cmp     ecx, 6
 0x506BC8: ja      loc_506C59
-0x506BCE: mov     edx, ds:0B2C678h
+0x506BCE: mov     edx, ds:0B2C678h; ToggleCastShadows console command updates one category bit in the native caster-category mask.
 0x506BD4: mov     eax, 1
 0x506BD9: shl     eax, cl
 0x506BDB: test    edx, eax
@@ -49,7 +49,7 @@
 0x506C2A: mov     [esp+20h+var_4], offset aOther; "Other"
 0x506C32: mov     ecx, [esp+ecx*4+20h+var_1C]
 0x506C36: test    edx, eax
-0x506C38: mov     eax, offset aOn_0
+0x506C38: mov     eax, offset aOn_0; "On"
 0x506C3D: jnz     short loc_506C44
 0x506C3F: mov     eax, offset aOff
 0x506C44: push    eax

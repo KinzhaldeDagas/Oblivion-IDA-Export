@@ -1,4 +1,4 @@
-0x452F10: push    ebx
+0x452F10: push    ebx; MEF SAVE AUDIT 2026-10-08: PERF-18 producer: worldspace-keyed list prepends distinct allocated12-byte tuples {referenceID,signedcellX,signedcellY}. UnloadForm463C71 and LoadGame4660A2/4662C7 are observed producers. Preserve newest-first sequence and all ownership. Existing v57 PERF11 indexes different raw blob maps, not this coordinate list.
 0x452F11: mov     ebx, [esp+4+a2]
 0x452F15: push    esi
 0x452F16: push    edi
@@ -32,16 +32,16 @@
 0x452F5F: mov     esi, [esp+0Ch+a2]
 0x452F63: push    0Ch; Size
 0x452F65: call    FormHeapAlloc
-0x452F6A: mov     ecx, [esp+10h+arg_4]
+0x452F6A: mov     ecx, [esp+10h+referenceID]
 0x452F6E: mov     edi, eax
 0x452F70: add     esp, 4
 0x452F73: mov     [edi], ecx
-0x452F75: fld     [esp+0Ch+arg_8]
+0x452F75: fld     [esp+0Ch+worldX]; MEF SAVE AUDIT 2026-10-08: PERF-18 coordinate fidelity: FLD worldX; FISTP DWORD; SAR12, repeated forY at452F87. FISTP obeys the current x87 rounding mode; a decompiler integer cast is not proof of truncation. Index exact stored tuple coordinates instead of recomputing with C++ cast/floor.
 0x452F79: fistp   [esp+0Ch+a2]
 0x452F7D: mov     edx, [esp+0Ch+a2]
 0x452F81: sar     edx, 0Ch
 0x452F84: mov     [edi+4], edx
-0x452F87: fld     [esp+0Ch+arg_C]
+0x452F87: fld     [esp+0Ch+worldY]
 0x452F8B: fistp   [esp+0Ch+a2]
 0x452F8F: mov     eax, [esp+0Ch+a2]
 0x452F93: sar     eax, 0Ch

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x664A20",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+attributeAV]; Player_GetAttributeLevelingBonus: for attribute AV 0..7, read the attribute's skill-increase count and convert it through LevelUp_GetAttributeMultiplierFromCount; otherwise return 1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,25 +25,25 @@
   },
   {
     "ea": "0x664A2E",
-    "line": "push    edx",
+    "line": "push    edx; attributeAV",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664A2F",
-    "line": "call    sub_664970",
+    "line": "call    Player_GetAttributeBonusSkillIncreaseCount; Returns the selected attribute's skill-increase count from the oldest queued eight-byte attribute-bonus bucket. The queue preserves separate bonus sets when multiple player levels are pending.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x664A34",
-    "line": "push    eax",
+    "line": "push    eax; skillIncreaseCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664A35",
-    "line": "call    sub_5480A0",
+    "line": "call    LevelUp_GetAttributeMultiplierFromCount; Oblivion native attribute-bonus lookup. skillIncreaseCount <= 0 returns 1; values >= 10 use iLevelUp10Mult. Constructor defaults: counts 1-4 => x2, 5-7 => x3, 8-9 => x4, 10+ => x5.",
     "mnemonic": "call",
     "size": 5
   },

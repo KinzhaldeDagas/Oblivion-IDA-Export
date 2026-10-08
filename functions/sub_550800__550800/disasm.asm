@@ -24,7 +24,7 @@
 0x550837: pop     esi
 0x550838: retn
 0x550839: push    eax
-0x55083A: push    offset unk_B39DA0
+0x55083A: push    offset stru_B39DA0
 0x55083F: call    NiRTTI_Cast
 0x550844: add     esp, 8
 0x550847: pop     esi

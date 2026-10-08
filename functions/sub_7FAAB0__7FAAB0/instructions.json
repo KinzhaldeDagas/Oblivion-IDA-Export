@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FAAB0",
-    "line": "push    esi",
+    "line": "push    esi; Reloads Oblivion Lighting30Shader by invoking the shared vertex/pixel loader and then rebuilding/presetting the SM3 stage configuration.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7FAAC0",
-    "line": "jmp     sub_85E660",
+    "line": "jmp     Lighting30Shader_InitializePassPool; Oblivion Lighting30 pass-pool initializer. SimpleShadow pool rows 36..39/selectors 0x14E..0x151 use SM3013..SM3016 with SM3023, seven stages, Z test LESS_EQUAL with no Z write, alpha blend DESTCOLOR/ZERO, stencil disabled, and six clip planes enabled. Mode-5 pool rows 42/43/selectors 0x154/0x155 use SM3018/SM3019 with SM3026, one BaseMap stage, alpha blending and stencil disabled, and Z test/write LESS_EQUAL. Alpha-test state is supplied by Lighting30 geometry-state preparation, not these pass groups.",
     "mnemonic": "jmp",
     "size": 5
   }

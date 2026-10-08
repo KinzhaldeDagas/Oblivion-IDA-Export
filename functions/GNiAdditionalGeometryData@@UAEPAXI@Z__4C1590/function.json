@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x4C1590",
+      "0x4C15AE"
+    ]
+  ],
+  "chunks_sha256": "6a0c54f0683abcdcfa92af6efefaa2833a71f5be398767c16b1b73035559c305",
+  "comment_regular": "\n\n[2026-10-03 native lifetime validation] Scalar deleting destructor calls726AE0 then FormHeapFree(this) only if flags&1. Native-code fixture covers both flags0/1, owned stream data, borrowed data, missing block, and registered block with failed raw-copy allocation. Return value remains original this pointer; flags0 leaves only object allocation for caller release.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiAdditionalGeometryData::`scalar deleting destructor'(uint)",
   "end_ea": "0x4C15AE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??_GNiAdditionalGeometryData@@UAEPAXI@Z",
   "segment": ".text",
   "sha256": "6a0c54f0683abcdcfa92af6efefaa2833a71f5be398767c16b1b73035559c305",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4C1590",
+  "total_chunk_size": 30,
   "type": "NiAdditionalGeometryData *__thiscall(NiAdditionalGeometryData *this, char)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 1

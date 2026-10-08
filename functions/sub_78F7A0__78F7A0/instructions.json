@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78F7A0",
-    "line": "sub     esp, 34h",
+    "line": "sub     esp, 34h; Stock CBranch::ComputeBranchNormals uses fixed CBranch cross-section segment count argument, not a per-vertex m_nCrossSegments tail field.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x78F7B7",
-    "line": "movzx   eax, [esp+38h+arg_4]",
+    "line": "movzx   eax, [esp+38h+crossSectionSegments]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x78F7C2",
-    "line": "mov     esi, [esp+44h+arg_0]",
+    "line": "mov     esi, [esp+44h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x78F7D4",
-    "line": "movzx   edx, [esp+44h+arg_4]",
+    "line": "movzx   edx, [esp+44h+crossSectionSegments]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x78F7E0",
-    "line": "mov     [esp+44h+arg_0], eax",
+    "line": "mov     [esp+44h+geometry], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -138,14 +138,8 @@
     "size": 2
   },
   {
-    "ea": "0x78F7EC",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
-  },
-  {
     "ea": "0x78F7F0",
-    "line": "mov     eax, [esp+44h+arg_0]",
+    "line": "mov     eax, [esp+44h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +157,7 @@
   },
   {
     "ea": "0x78F7F8",
-    "line": "movzx   edx, [esp+44h+arg_4]",
+    "line": "movzx   edx, [esp+44h+crossSectionSegments]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -187,7 +181,7 @@
   },
   {
     "ea": "0x78F807",
-    "line": "movzx   edi, [esp+44h+arg_4]",
+    "line": "movzx   edi, [esp+44h+crossSectionSegments]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -229,13 +223,13 @@
   },
   {
     "ea": "0x78F81A",
-    "line": "push    edx",
+    "line": "push    edx; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78F81B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -247,19 +241,19 @@
   },
   {
     "ea": "0x78F81F",
-    "line": "call    sub_794730",
+    "line": "call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78F824",
-    "line": "push    ebx",
+    "line": "push    ebx; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78F825",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -271,7 +265,7 @@
   },
   {
     "ea": "0x78F829",
-    "line": "call    sub_794730",
+    "line": "call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +511,7 @@
   },
   {
     "ea": "0x78F8AB",
-    "line": "mov     eax, [esp+44h+arg_0]",
+    "line": "mov     eax, [esp+44h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,7 +571,7 @@
   },
   {
     "ea": "0x78F8C9",
-    "line": "mov     edx, [esp+44h+arg_0]",
+    "line": "mov     edx, [esp+44h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,31 +625,31 @@
   },
   {
     "ea": "0x78F8E3",
-    "line": "push    eax",
+    "line": "push    eax; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78F8E4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78F8E6",
-    "line": "call    sub_794730",
+    "line": "call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78F8EB",
-    "line": "push    edi",
+    "line": "push    edi; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78F8EC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -667,7 +661,7 @@
   },
   {
     "ea": "0x78F8F0",
-    "line": "call    sub_794730",
+    "line": "call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x78F942",
-    "line": "lea     eax, [esp+44h+var_C]",
+    "line": "lea     eax, [esp+44h+normal]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -835,7 +829,7 @@
   },
   {
     "ea": "0x78F948",
-    "line": "push    eax",
+    "line": "push    eax; normal",
     "mnemonic": "push",
     "size": 1
   },
@@ -847,7 +841,7 @@
   },
   {
     "ea": "0x78F94B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -985,7 +979,7 @@
   },
   {
     "ea": "0x78F991",
-    "line": "fstp    [esp+48h+var_C]",
+    "line": "fstp    [esp+48h+normal]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1075,7 +1069,7 @@
   },
   {
     "ea": "0x78F9B9",
-    "line": "call    sub_7962F0",
+    "line": "call    OB_CIndexedGeometry_AddVertexNormal_010201A0; Oblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x78F9C3",
-    "line": "movzx   eax, [esp+44h+arg_4]",
+    "line": "movzx   eax, [esp+44h+crossSectionSegments]",
     "mnemonic": "movzx",
     "size": 5
   },

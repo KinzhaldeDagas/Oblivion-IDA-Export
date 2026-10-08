@@ -1,5 +1,5 @@
 0x732370: push    esi
-0x732371: push    offset stru_B40080; lpCriticalSection
+0x732371: push    offset unk_B40080; lpCriticalSection
 0x732376: mov     esi, ecx
 0x732378: call    dword ptr ds:0A2806Ch
 0x73237E: call    dword ptr ds:0A2808Ch
@@ -28,6 +28,6 @@
 0x7323D5: pop     esi
 0x7323D6: jnz     short loc_7323E2
 0x7323D8: mov     dword ptr ds:0B400F8h, 0
-0x7323E2: push    offset stru_B40080; lpCriticalSection
+0x7323E2: push    offset unk_B40080; lpCriticalSection
 0x7323E7: call    dword ptr ds:0A28074h
 0x7323ED: retn

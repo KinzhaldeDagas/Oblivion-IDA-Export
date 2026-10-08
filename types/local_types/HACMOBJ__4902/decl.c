@@ -1,1 +1,1 @@
-HACMOBJ
+typedef HACMOBJ__ *HACMOBJ;

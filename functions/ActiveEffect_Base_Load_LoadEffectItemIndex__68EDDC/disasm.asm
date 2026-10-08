@@ -1,7 +1,7 @@
-0x68EDDC: push    1; Size
+0x68EDDC: push    1; Verified per-effect restoration: loads MagicItem FormID and EffectItem index, resolves both to current forms, recreates the concrete subclass through ActiveEffect_Base_CreateDynamic(null caster, magicItem, effectItem, null source), calls its vtable LoadEffect slot (+0x14), then advances to the serialized record boundary.
 0x68EDDE: lea     eax, [esp+4+Dst]
-0x68EDE2: push    eax; Dst
-0x68EDE3: call    SaveLoad_LoadData
+0x68EDE2: push    eax; destination
+0x68EDE3: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x68EDE8: mov     edx, [esp+arg_C]
 0x68EDEC: mov     ecx, ds:0B33B00h
 0x68EDF2: mov     ebx, [ecx+14h]
@@ -18,11 +18,11 @@
 0x68EE11: test    eax, eax
 0x68EE13: jz      short ActiveEffect_Base_Load___Error_BadEffectSource
 0x68EE15: push    edi
-0x68EE16: push    0
-0x68EE18: push    eax
-0x68EE19: push    esi
-0x68EE1A: push    0
-0x68EE1C: call    ActiveEffect_Base_CreateDynamic
+0x68EE16: push    0; sourceObject
+0x68EE18: push    eax; effectItem
+0x68EE19: push    esi; magicItem
+0x68EE1A: push    0; caster
+0x68EE1C: call    ActiveEffect_Base_CreateDynamic; Verified save restoration path: ActiveEffect_Base_Load reads MagicItem and EffectItem index, calls ActiveEffect_Base_CreateDynamic with null caster/source, then loads the serialized effect state into the created subclass before adding it to the target list.
 0x68EE21: mov     esi, eax
 0x68EE23: mov     edx, [esi]
 0x68EE25: mov     eax, [esp+14h+arg_14]

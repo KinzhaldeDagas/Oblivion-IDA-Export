@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C1B50",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; DX10OBSE resource decode: BSTextureManager rendered-surface cache reuses or allocates BSRenderedTexture wrappers by size/format/depth/usage, moving them to the in-use list.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7C1B9D",
-    "line": "mov     [esp+20h+var_8], eax",
+    "line": "mov     [esp+20h+height], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x7C1D03",
-    "line": "cmp     eax, [esp+20h+var_8]",
+    "line": "cmp     eax, [esp+20h+height]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x7C1DA4",
-    "line": "push    ecx",
+    "line": "push    ecx; targetFlags",
     "mnemonic": "push",
     "size": 1
   },
@@ -1147,49 +1147,49 @@
   },
   {
     "ea": "0x7C1DA9",
-    "line": "push    eax",
+    "line": "push    eax; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1DAA",
-    "line": "mov     eax, [esp+28h+var_8]",
+    "line": "mov     eax, [esp+28h+height]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C1DAE",
-    "line": "push    edx",
+    "line": "push    edx; d3dFormat",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1DAF",
-    "line": "push    eax",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1DB0",
-    "line": "push    ecx",
+    "line": "push    ecx; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1DB1",
-    "line": "mov     ecx, [esp+34h+var_C]",
+    "line": "mov     ecx, [esp+34h+var_C]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C1DB5",
-    "line": "push    ebp",
+    "line": "push    ebp; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1DB6",
-    "line": "call    sub_7C1430",
+    "line": "call    BSTextureManager_CreateRenderedTexture; Oblivion BSTextureManager rendered-texture creator. Builds a BSRenderedTexture for the requested dimensions, D3D format override, auxiliary value, and target flags; eligible targets receive the manager depth-stencil unless flags suppress it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x7C1DC9",
-    "line": "mov     ecx, [esp+20h+var_C]",
+    "line": "mov     ecx, [esp+20h+var_C]; list",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1237,13 +1237,13 @@
   },
   {
     "ea": "0x7C1DD1",
-    "line": "push    edx",
+    "line": "push    edx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1DD2",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },

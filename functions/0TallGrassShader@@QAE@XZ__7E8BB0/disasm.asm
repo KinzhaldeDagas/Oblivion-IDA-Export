@@ -24,7 +24,7 @@
 0x7E8BF4: mov     [esp+3Ch+var_4], 0
 0x7E8BFC: mov     dword ptr [esi], offset ??_7TallGrassShader@@6B@; const TallGrassShader::`vftable'
 0x7E8C02: call    ArrayConstructor
-0x7E8C07: push    offset sub_7016A0; a5
+0x7E8C07: push    offset NiPointerSlot_Release; a5
 0x7E8C0C: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7E8C11: push    28h ; '('; size
 0x7E8C13: push    4; a2
@@ -32,7 +32,7 @@
 0x7E8C1B: push    edi; a1
 0x7E8C1C: mov     byte ptr [esp+3Ch+var_4], 1
 0x7E8C21: call    ArrayConstructor
-0x7E8C26: push    offset sub_7016A0; a5
+0x7E8C26: push    offset NiPointerSlot_Release; a5
 0x7E8C2B: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7E8C30: push    9; size
 0x7E8C32: push    4; a2
@@ -163,3 +163,36 @@
 0x7E8DE6: pop     ebx
 0x7E8DE7: add     esp, 14h
 0x7E8DEA: retn    4
+0x9CF830: mov     ecx, [ebp-10h]; this
+0x9CF833: jmp     ??1BSShader@@UAE@XZ;
+0x9CF838: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9CF83D: push    3; int
+0x9CF83F: push    4; unsigned int
+0x9CF841: mov     eax, [ebp-10h]
+0x9CF844: add     eax, 7Ch ; '|'
+0x9CF847: push    eax; void *
+0x9CF848: call    $LN21
+0x9CF84D: retn
+0x9CF84E: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF853: push    28h ; '('; int
+0x9CF855: push    4; unsigned int
+0x9CF857: mov     eax, [ebp-10h]
+0x9CF85A: add     eax, 94h ; '”'
+0x9CF85F: push    eax; void *
+0x9CF860: call    $LN21
+0x9CF865: retn
+0x9CF866: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF86B: push    9; int
+0x9CF86D: push    4; unsigned int
+0x9CF86F: mov     eax, [ebp-10h]
+0x9CF872: add     eax, 134h
+0x9CF877: push    eax; void *
+0x9CF878: call    $LN21
+0x9CF87D: retn
+0x9CF87E: mov     edx, [esp+arg_4]
+0x9CF882: lea     eax, [edx-18h]
+0x9CF885: mov     ecx, [edx-1Ch]
+0x9CF888: xor     ecx, eax
+0x9CF88A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF88F: mov     eax, offset stru_AF8458
+0x9CF894: jmp     ___CxxFrameHandler3

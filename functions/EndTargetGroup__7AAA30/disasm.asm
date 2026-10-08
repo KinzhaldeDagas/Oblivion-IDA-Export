@@ -1,4 +1,4 @@
-0x7AAA30: push    0FFFFFFFFh
+0x7AAA30: push    0FFFFFFFFh; MoonSugarEffect build 24: EndTargetGroup xref to Lighting30 selector. Calls 0x007FD260 for 0x159+ and 0x156+ special routes after setting up render targets; used only to label selector routes, not as plugin-owned rendering.
 0x7AAA32: push    offset EndTargetGroup_SEH
 0x7AAA37: mov     eax, large fs:0
 0x7AAA3D: push    eax
@@ -60,19 +60,19 @@
 0x7AAAE2: mov     byte ptr [esp+78h+var_4], 1
 0x7AAAE7: jz      short loc_7AAAFE
 0x7AAAE9: push    ebp
-0x7AAAEA: push    ebp
-0x7AAAEB: push    1
-0x7AAAED: push    ebp
-0x7AAAEE: push    ebp
-0x7AAAEF: push    eax
-0x7AAAF0: call    sub_7E2370
+0x7AAAEA: push    ebp; lightCount
+0x7AAAEB: push    1; byte6
+0x7AAAED: push    ebp; selector
+0x7AAAEE: push    ebp; geometry
+0x7AAAEF: push    eax; outPass
+0x7AAAF0: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x7AAAF5: add     esp, 18h
 0x7AAAF8: mov     [esp+78h+var_5C], eax
 0x7AAAFC: jmp     short loc_7AAB02
 0x7AAAFE: mov     [esp+78h+var_5C], ebp
 0x7AAB02: push    ebp
 0x7AAB03: mov     byte ptr [esp+7Ch+var_4], 0
-0x7AAB08: call    sub_800B30
+0x7AAB08: call    sub_800B30; MoonSugarEffect decode: allocates dword_B474AC refraction render target type 0x14 only when requested and not already present.
 0x7AAB0D: mov     ebp, eax
 0x7AAB0F: add     esp, 4
 0x7AAB12: test    ebp, ebp
@@ -81,7 +81,7 @@
 0x7AAB1E: cmp     dword ptr [ebx+2224h], 0
 0x7AAB25: jbe     loc_7AAD86
 0x7AAB2B: mov     ecx, ebp; this
-0x7AAB2D: call    BSRenderedTexture__UseTextureToRender
+0x7AAB2D: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7AAB32: mov     ebx, [esp+78h+arg_4]
 0x7AAB39: mov     ebp, eax
 0x7AAB3B: mov     eax, [ebx]
@@ -113,7 +113,7 @@
 0x7AAB7F: fstp    [esp+7Ch+var_20]
 0x7AAB83: call    edx
 0x7AAB85: mov     [esp+78h+var_61], 1
-0x7AAB8A: call    NiRenderer_EndScene
+0x7AAB8A: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7AAB8F: cmp     dword ptr ds:0B34FC0h, 2
 0x7AAB96: jl      short loc_7AABE4
 0x7AAB98: mov     ecx, ds:0B3F928h
@@ -143,10 +143,10 @@
 0x7AABE1: push    ecx
 0x7AABE2: call    eax
 0x7AABE4: mov     ecx, [esp+78h+arg_0]; this
-0x7AABE8: call    BSRenderedTexture__UseTextureToRender
+0x7AABE8: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7AABED: push    eax; a2
 0x7AABEE: push    0; a1
-0x7AABF0: call    NiRenderer_BeginScene
+0x7AABF0: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7AABF5: mov     esi, [esp+80h+var_60]
 0x7AABF9: mov     eax, [esi+8]
 0x7AABFC: fld     dword ptr [eax+6Ch]
@@ -195,7 +195,6 @@
 0x7AAC94: test    eax, eax
 0x7AAC96: jz      loc_7AAD7B
 0x7AAC9C: jmp     short loc_7AACA4
-0x7AAC9E: align 10h
 0x7AACA0: mov     eax, [esp+78h+var_58]
 0x7AACA4: mov     ebp, [eax+8]
 0x7AACA7: mov     esi, [ebp+0BCh]
@@ -206,7 +205,7 @@
 0x7AACB8: jz      loc_7AAD70
 0x7AACBE: push    4
 0x7AACC0: mov     ecx, ebp
-0x7AACC2: call    NiNode_GetNiPropertyByID
+0x7AACC2: call    NiNode_GetNiPropertyByID;
 0x7AACC7: test    byte ptr [eax+1Ch], 2
 0x7AACCB: mov     edx, [esi]
 0x7AACCD: mov     eax, [edx+1Ch]
@@ -228,7 +227,7 @@
 0x7AACF3: add     ecx, 163h
 0x7AACF9: mov     edi, ecx
 0x7AACFB: push    edi
-0x7AACFC: call    sub_7D1320
+0x7AACFC: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7AAD01: jmp     short loc_7AAD28
 0x7AAD03: mov     edx, [esi]
 0x7AAD05: mov     eax, [edx+1Ch]
@@ -243,7 +242,7 @@
 0x7AAD1A: add     ecx, 159h
 0x7AAD20: mov     edi, ecx
 0x7AAD22: push    edi
-0x7AAD23: call    sub_7FD260
+0x7AAD23: call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.
 0x7AAD28: mov     ecx, [esi+30h]
 0x7AAD2B: mov     edx, [ecx]
 0x7AAD2D: mov     eax, [edx+48h]
@@ -273,8 +272,8 @@
 0x7AAD86: mov     ebx, [esp+78h+arg_4]
 0x7AAD8D: mov     esi, [esp+78h+var_60]
 0x7AAD91: add     esi, 2214h
-0x7AAD97: mov     ecx, esi
-0x7AAD99: call    sub_7A9C30
+0x7AAD97: mov     ecx, esi; this
+0x7AAD99: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AAD9E: mov     eax, [esi+4]
 0x7AADA1: mov     ecx, [esp+78h+var_60]
 0x7AADA5: mov     [esi+0Ch], eax
@@ -292,13 +291,13 @@
 0x7AADD1: mov     byte ptr [esp+78h+arg_4], al
 0x7AADD8: jnz     short loc_7AADF2
 0x7AADDA: push    1
-0x7AADDC: call    sub_800B30
+0x7AADDC: call    sub_800B30; MoonSugarEffect decode: EndTargetGroup path lazily allocates dword_B474AC and renders queued refractive geometry into it.
 0x7AADE1: add     esp, 4
 0x7AADE4: mov     [esp+78h+arg_0], eax
 0x7AADE8: mov     byte ptr [esp+78h+arg_4], 1
 0x7AADF0: mov     ebp, eax
 0x7AADF2: mov     ecx, ebp; this
-0x7AADF4: call    BSRenderedTexture__UseTextureToRender
+0x7AADF4: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7AADF9: mov     edx, [ebx]
 0x7AADFB: mov     ebp, eax
 0x7AADFD: mov     esi, [ebp+0]
@@ -329,7 +328,7 @@
 0x7AAE3F: fstp    [esp+7Ch+var_20]
 0x7AAE43: call    edx
 0x7AAE45: mov     [esp+78h+var_61], 1
-0x7AAE4A: call    NiRenderer_EndScene
+0x7AAE4A: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7AAE4F: cmp     dword ptr ds:0B34FC0h, 2
 0x7AAE56: jl      short loc_7AAEA4
 0x7AAE58: mov     ecx, ds:0B3F928h
@@ -359,13 +358,13 @@
 0x7AAEA1: push    ecx
 0x7AAEA2: call    eax
 0x7AAEA4: mov     ecx, [esp+78h+arg_0]; this
-0x7AAEA8: call    BSRenderedTexture__UseTextureToRender
+0x7AAEA8: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7AAEAD: xor     ecx, ecx
 0x7AAEAF: cmp     byte ptr [esp+78h+arg_4], cl
 0x7AAEB6: push    eax; a2
 0x7AAEB7: setnz   cl
 0x7AAEBA: push    ecx; a1
-0x7AAEBB: call    NiRenderer_BeginScene
+0x7AAEBB: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7AAEC0: mov     edx, [esp+80h+var_60]
 0x7AAEC4: mov     eax, [edx+8]
 0x7AAEC7: fld     dword ptr [eax+6Ch]
@@ -418,7 +417,6 @@
 0x7AAF6F: test    eax, eax
 0x7AAF71: jz      loc_7AB095
 0x7AAF77: jmp     short loc_7AAF84
-0x7AAF79: align 10h
 0x7AAF80: mov     eax, [esp+78h+var_58]
 0x7AAF84: mov     ebp, [eax+8]
 0x7AAF87: mov     esi, [ebp+0BCh]
@@ -429,7 +427,7 @@
 0x7AAF98: jz      loc_7AB082
 0x7AAF9E: push    4
 0x7AAFA0: mov     ecx, ebp
-0x7AAFA2: call    NiNode_GetNiPropertyByID
+0x7AAFA2: call    NiNode_GetNiPropertyByID;
 0x7AAFA7: mov     eax, [eax+1Ch]
 0x7AAFAA: test    al, 2
 0x7AAFAC: setnbe  bl
@@ -452,7 +450,7 @@
 0x7AAFE2: mov     edi, 162h
 0x7AAFE7: push    0
 0x7AAFE9: push    edi
-0x7AAFEA: call    sub_7D1320
+0x7AAFEA: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7AAFEF: jmp     short loc_7AB03F
 0x7AAFF1: xor     eax, eax
 0x7AAFF3: test    bl, bl
@@ -461,7 +459,7 @@
 0x7AAFFA: add     eax, 160h
 0x7AAFFF: mov     edi, eax
 0x7AB001: push    edi
-0x7AB002: call    sub_7D1320
+0x7AB002: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7AB007: jmp     short loc_7AB03F
 0x7AB009: mov     edx, [esi]
 0x7AB00B: mov     eax, [edx+1Ch]
@@ -480,7 +478,7 @@
 0x7AB035: mov     edi, ecx
 0x7AB037: push    0
 0x7AB039: push    edi
-0x7AB03A: call    sub_7FD260
+0x7AB03A: call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.
 0x7AB03F: mov     ecx, [esi+30h]
 0x7AB042: mov     edx, [ecx]
 0x7AB044: mov     eax, [edx+48h]
@@ -508,8 +506,8 @@
 0x7AB091: mov     ebx, [esp+78h+var_5C]
 0x7AB095: mov     esi, [esp+78h+var_60]
 0x7AB099: add     esi, 2200h
-0x7AB09F: mov     ecx, esi
-0x7AB0A1: call    sub_7A9C30
+0x7AB09F: mov     ecx, esi; this
+0x7AB0A1: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AB0A6: mov     eax, [esi+4]
 0x7AB0A9: mov     [esi+0Ch], eax
 0x7AB0AC: xor     eax, eax
@@ -522,13 +520,13 @@
 0x7AB0C1: call    BSRenderedTexture__GetInnerTexture
 0x7AB0C6: push    9; a1
 0x7AB0C8: mov     esi, eax
-0x7AB0CA: call    GetShaderDefinition
+0x7AB0CA: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x7AB0CF: add     eax, 4
 0x7AB0D2: mov     eax, [eax]
 0x7AB0D4: add     esp, 4
-0x7AB0D7: push    esi; a2
-0x7AB0D8: mov     ecx, eax; this
-0x7AB0DA: call    sub_7FA470
+0x7AB0D7: push    esi; renderedTexture
+0x7AB0D8: mov     ecx, eax; imageSpaceShader
+0x7AB0DA: call    BSImageSpaceShader_BindFirstFreeRenderedTexture; Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.
 0x7AB0DF: mov     esi, [esp+78h+var_50]
 0x7AB0E3: jmp     short loc_7AB0E9
 0x7AB0E5: mov     ebx, [esp+78h+var_5C]
@@ -536,11 +534,11 @@
 0x7AB0EE: jnz     short loc_7AB0F4
 0x7AB0F0: test    esi, esi
 0x7AB0F2: jbe     short loc_7AB0F9
-0x7AB0F4: call    NiRenderer_EndScene
+0x7AB0F4: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7AB0F9: test    ebp, ebp
 0x7AB0FB: jz      short loc_7AB10F
 0x7AB0FD: mov     ecx, ebp; this
-0x7AB0FF: call    BSRenderedTexture__UseTextureToRender
+0x7AB0FF: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7AB104: mov     edx, [eax]
 0x7AB106: mov     ecx, eax
 0x7AB108: mov     eax, [edx+6Ch]
@@ -548,10 +546,10 @@
 0x7AB10D: call    eax
 0x7AB10F: test    ebx, ebx
 0x7AB111: jz      short loc_7AB123
-0x7AB113: mov     ecx, ebx
-0x7AB115: call    sub_7E2400
+0x7AB113: mov     ecx, ebx; this
+0x7AB115: call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.
 0x7AB11A: push    ebx
-0x7AB11B: call    FormHeapFree
+0x7AB11B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AB120: add     esp, 4
 0x7AB123: mov     ebx, [edi+8]
 0x7AB126: mov     ebp, [esp+78h+var_4C]
@@ -613,3 +611,17 @@
 0x7AB1BA: pop     ebx
 0x7AB1BB: add     esp, 64h
 0x7AB1BE: retn    8
+0x9CD190: lea     ecx, [ebp-4Ch]; slot
+0x9CD193: jmp     NiPointerSlot_Release
+0x9CD198: mov     eax, [ebp+4]
+0x9CD19B: push    eax
+0x9CD19C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD1A1: pop     ecx
+0x9CD1A2: retn
+0x9CD1A3: mov     edx, [esp+arg_4]
+0x9CD1A7: lea     eax, [edx-68h]
+0x9CD1AA: mov     ecx, [edx-6Ch]
+0x9CD1AD: xor     ecx, eax
+0x9CD1AF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD1B4: mov     eax, offset stru_AF655C
+0x9CD1B9: jmp     ___CxxFrameHandler3

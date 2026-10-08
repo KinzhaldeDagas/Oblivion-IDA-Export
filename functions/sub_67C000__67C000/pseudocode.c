@@ -1,59 +1,59 @@
 unsigned __int16 __thiscall sub_67C000(int *this)
 {
-  __int16 v3; // si
-  int v4; // esi
-  bool v5; // zf
-  unsigned __int16 v6; // di
-  unsigned __int16 v7; // ax
-  UInt32 *v8; // esi
-  TESForm *v9; // eax
-  const char *v10; // eax
-  int v12; // [esp-Ch] [ebp-18h]
-  int v13; // [esp-8h] [ebp-14h]
-  const char *v14; // [esp-4h] [ebp-10h]
-  unsigned __int16 v15; // [esp+8h] [ebp-4h]
+  __int16 v2; // si
+  int v3; // esi
+  bool v4; // zf
+  unsigned __int16 v5; // di
+  unsigned __int16 v6; // ax
+  UInt32 *currentlySavingFormHeader; // esi
+  TESForm *v8; // eax
+  const char *v9; // eax
+  int v11; // [esp-Ch] [ebp-18h]
+  int v12; // [esp-8h] [ebp-14h]
+  const char *v13; // [esp-4h] [ebp-10h]
+  unsigned __int16 v14; // [esp+8h] [ebp-4h]
 
-  v3 = 0;
-  if ( sub_45A170() )
-    v3 = 6;
-  v15 = v3 + 2;
-  v4 = *this;
-  v5 = *this == 0;
-  v6 = v15;
-  if ( !v5 )
+  v2 = 0; /*0x67c00b*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x67c00d*/
+    v2 = 6; /*0x67c016*/
+  v14 = v2 + 2; /*0x67c01e*/
+  v3 = *this; /*0x67c022*/
+  v4 = *this == 0; /*0x67c024*/
+  v5 = v14; /*0x67c026*/
+  if ( !v4 ) /*0x67c02b*/
   {
-    do
+    do /*0x67c04a*/
     {
-      if ( !*(_DWORD *)(v4 + 4) && !*(_DWORD *)v4 )
-        break;
-      v7 = sub_67B730(*(_DWORD ***)v4);
-      v4 = *(_DWORD *)(v4 + 4);
-      v6 += v7;
+      if ( !*(_DWORD *)(v3 + 4) && !*(_DWORD *)v3 ) /*0x67c036*/
+        break; /*0x67c039*/
+      v6 = sub_67B730(*(_DWORD ***)v3); /*0x67c03d*/
+      v3 = *(_DWORD *)(v3 + 4); /*0x67c042*/
+      v5 += v6; /*0x67c045*/
     }
-    while ( v4 );
+    while ( v3 ); /*0x67c04a*/
   }
   if ( Global_DebugSaveBuffer )
   {
-    v8 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    if ( v8 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x67c05a*/
+    if ( currentlySavingFormHeader )
     {
-      v9 = TESForm_LookupByFormID(*v8);
-      v10 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v9->vtbl->GetEditorName)(
-                            v9,
-                            *(UInt32 *)((char *)v8 + 5),
-                            0x218,
-                            ".\\AI\\SpectatorPackage.cpp");
+      v8 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x67c067*/
+      v9 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v8->vtbl->GetEditorName)( /*0x67c087*/
+                           v8,
+                           *(UInt32 *)((char *)currentlySavingFormHeader + 5),
+                           0x218,
+                           ".\\AI\\SpectatorPackage.cpp");
       sub_40FEC0(
         "GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v6,
-        *v8,
-        v10,
+        v5,
+        *currentlySavingFormHeader,
+        v9,
+        v11,
         v12,
-        v13,
-        v14);
-      return v6;
+        v13);
+      return v5; /*0x67c0a4*/
     }
-    sub_40FEC0("GetSaveSize(): %-5i ending at line %i in file %s", v6, 0x218, ".\\AI\\SpectatorPackage.cpp");
+    sub_40FEC0("GetSaveSize(): %-5i ending at line %i in file %s", v5, 0x218, ".\\AI\\SpectatorPackage.cpp");
   }
-  return v6;
+  return v5; /*0x67c0a1*/
 }

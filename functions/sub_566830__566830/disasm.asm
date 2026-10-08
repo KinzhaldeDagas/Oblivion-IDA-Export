@@ -1,4 +1,4 @@
-0x566830: push    esi
+0x566830: push    esi; 3DTheft decode: dynamic package marker only sets packageFlags bit 0x800 when TESDataHandler_IsFormIDCreated_(formID) returns true. Do not force 0x800 on arbitrary heap packages before Actor_AddPackage_.
 0x566831: mov     esi, ecx
 0x566833: mov     eax, [esi+0Ch]
 0x566836: mov     ecx, ds:0B33A98h

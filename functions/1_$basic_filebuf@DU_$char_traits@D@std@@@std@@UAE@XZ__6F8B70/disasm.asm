@@ -25,3 +25,12 @@
 0x6F8BCC: pop     esi
 0x6F8BCD: add     esp, 10h
 0x6F8BD0: retn
+0x9C8FF0: mov     ecx, [ebp-10h]
+0x9C8FF3: jmp     ??1?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAE@XZ; std::streambuf::~streambuf<char,std::char_traits<char>>(void)
+0x9C8FF8: mov     edx, [esp+arg_4]
+0x9C8FFC: lea     eax, [edx-8]
+0x9C8FFF: mov     ecx, [edx-0Ch]
+0x9C9002: xor     ecx, eax
+0x9C9004: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9009: mov     eax, offset stru_AF1920
+0x9C900E: jmp     ___CxxFrameHandler3

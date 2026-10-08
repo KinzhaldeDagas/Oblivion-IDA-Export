@@ -1,5 +1,5 @@
-0x429000: push    ebx
-0x429001: mov     ebx, [esp+4+arg_0]
+0x429000: push    ebx; Verified ExtraOwnership comparison: requires the other payload to RTTI-cast to ExtraOwnership, compares BSExtraData base state, then compares ownerForm pointers.
+0x429001: mov     ebx, [esp+4+other]
 0x429005: push    esi
 0x429006: push    edi
 0x429007: push    0; int

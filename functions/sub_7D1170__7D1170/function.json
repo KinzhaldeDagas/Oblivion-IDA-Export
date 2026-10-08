@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7D1170",
+  "chunks": [
+    [
+      "0x7D1170",
+      "0x7D1313"
+    ],
+    [
+      "0x9D0AC0",
+      "0x9D0AE3"
+    ]
+  ],
+  "chunks_sha256": "b086a795fa9a76a8e9b37ae88da9b29e0e9d29a96602cac51b6c622185ee6e7a",
+  "comment_regular": "Creates and stores 419 Oblivion ShadowLightShader passes and assigns their constant maps. Pool[6..9] are the mode-5 rigid opaque, rigid alpha-tested, skinned opaque, and skinned alpha-tested caster passes initialized by the native stage/pass table.\n\nVerified (Oblivion): ShadowLightShader__LoadStagesAndPasses acquires and stores NiD3DPass pool objects into g_ShadowLightPassBySelector[0..0x1A2], AddRefs each stored pass, then installs the shared vertex shader in each pass at +0x58 before building the pass families. The four texture-effect template slots line up exactly with selector indices 0x18C..0x18F.",
+  "comment_repeatable": "Verified (Oblivion): ShadowLightShader__LoadStagesAndPasses acquires and stores NiD3DPass pool objects into g_ShadowLightPassBySelector[0..0x1A2], AddRefs each stored pass, then installs the shared vertex shader in each pass at +0x58 before building the pass families. The four texture-effect template slots line up exactly with selector indices 0x18C..0x18F.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "ShadowLightShader__LoadStagesAndPasses",
   "end_ea": "0x7D1313",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D1170",
+  "name": "ShadowLightShader__LoadStagesAndPasses",
   "segment": ".text",
   "sha256": "58aa409807c2138523bb77288341852e419e1478ecda74a4ae801e366aafcebe",
   "size": 419,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D1170",
-  "type": "char __thiscall(NiD3DPass *this)",
-  "xrefs_from_count": 173,
+  "total_chunk_size": 454,
+  "type": "bool __thiscall(void *this)",
+  "xrefs_from_count": 184,
   "xrefs_to_count": 1
 }

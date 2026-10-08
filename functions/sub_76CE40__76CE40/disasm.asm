@@ -6,14 +6,14 @@
 0x76CE4E: mov     esi, ecx
 0x76CE50: jnz     short loc_76CE6F
 0x76CE52: or      ds:0B42578h, ebx
-0x76CE58: push    offset sub_A26DC0; void (__cdecl *)()
+0x76CE58: push    offset NiD3DPassArray_DestroyEmptySentinel; void (__cdecl *)()
 0x76CE5D: mov     dword ptr ds:0B42574h, 0
 0x76CE67: call    _atexit
 0x76CE6C: add     esp, 4
 0x76CE6F: movzx   ecx, word ptr [esi+0Ah]
-0x76CE73: mov     eax, [esp+0Ch+arg_0]
+0x76CE73: mov     eax, [esp+0Ch+index]
 0x76CE77: cmp     eax, ecx
-0x76CE79: mov     edi, [esp+0Ch+arg_4]
+0x76CE79: mov     edi, [esp+0Ch+value]
 0x76CE7D: jb      short loc_76CE96
 0x76CE7F: lea     edx, [eax+1]
 0x76CE82: mov     [esi+0Ah], dx
@@ -42,7 +42,7 @@
 0x76CEC7: jz      short loc_76CED4
 0x76CEC9: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76CECD: jnz     short loc_76CED4
-0x76CECF: call    sub_7604D0
+0x76CECF: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76CED4: mov     eax, [edi]
 0x76CED6: test    eax, eax
 0x76CED8: mov     [esi], eax

@@ -39,7 +39,6 @@
 0x91BB32: mov     ebx, [edi+44h]
 0x91BB35: mov     edx, ebx
 0x91BB37: jmp     short loc_91BB40
-0x91BB39: align 10h
 0x91BB40: cmp     dword ptr [edx], 1134h
 0x91BB46: jz      loc_91BBD1
 0x91BB4C: inc     eax

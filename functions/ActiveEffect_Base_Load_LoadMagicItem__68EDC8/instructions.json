@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x68EDCA",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x68EDD0",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68EDD1",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },

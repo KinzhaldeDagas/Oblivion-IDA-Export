@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A9740",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): CLeafLodEngine::ComputeNextLevel contract recovered from caller/order: prepare/copy source vector, FindPairs at 0x7A979D, then BuildNewLeaves at 0x7A97A9 into the output leaf vector.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A976E",
-    "line": "mov     esi, [esp+34h+arg_0]",
+    "line": "mov     esi, [esp+34h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x7A978B",
-    "line": "lea     eax, [esp+44h+arg_4]",
+    "line": "lea     eax, [esp+44h+originalLeaves]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A978F",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x7A9795",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A9796",
-    "line": "call    sub_7A3580",
+    "line": "call    OB_stVector4_CopyCtor_010201A0; ComputeNextLevel copies the current four-byte pointer vector shallowly before selecting/cloning leaf objects; pointed leaf lifetime is handled separately.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A979B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A979D",
-    "line": "call    sub_7A9240",
+    "line": "call    OB_CLeafLodEngine_FindPairs_010201A0; OBLIVION AUTHORITY 2026-08-27: CLeafLodEngine::FindPairs accepts a 16-byte leaf-vector value. For each primary leaf in source order, it scans a contiguous following prefix only until end or the first already-marked candidate, chooses the nearest position within spacing tolerance, and marks only that chosen match. A leaf already used as a match may later be a primary. It never compares textureIndexByte, colorScaleByte, packedColor, or texture record, so pairs may cross leaf textures/layers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,31 +193,31 @@
   },
   {
     "ea": "0x7A97A6",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A97A7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A97A9",
-    "line": "call    sub_7A8FC0",
+    "line": "call    OB_CLeafLodEngine_BuildNewLeaves_010201A0; OBLIVION AUTHORITY (2026-08-24): Calls BuildNewLeaves after pair construction. CTreeEngine_BuildLeafLods invokes this once for each generated LOD after LOD0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A97AE",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A97AF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x7A97B6",
-    "line": "call    sub_79B2F0",
+    "line": "call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A97BB",
-    "line": "mov     eax, [esp+34h+var_18]",
+    "line": "mov     eax, [esp+34h+var_1C.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7A97C4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7A97CC",
-    "line": "mov     eax, [esp+34h+arg_8]",
+    "line": "mov     eax, [esp+34h+originalLeaves.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x7A97D5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -358,5 +358,113 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CCF70",
+    "line": "lea     ecx, [ebp+8]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF73",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF78",
+    "line": "mov     eax, [ebp-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF7B",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF7E",
+    "line": "jz      locret_9CCF90",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCF84",
+    "line": "and     dword ptr [ebp-24h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCF88",
+    "line": "mov     ecx, [ebp+4]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF8B",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF90",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCF91",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCF94",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCF99",
+    "line": "mov     edx, [esp+originalLeaves.allocatorState]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCF9D",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCFA0",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCFA3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCFA5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCFAA",
+    "line": "mov     eax, offset stru_AF63A8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCFAF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

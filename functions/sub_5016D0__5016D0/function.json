@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5016D0",
+      "0x50175A"
+    ]
+  ],
+  "chunks_sha256": "e43581551bc6f8b3e67a01daadc38c77469c9830a233abd3bda64a655df2c37d",
+  "comment_regular": "SetAV / SetActorValue execute callback. On PlayerCharacter this dispatches to Player_Actor_SetAViBase: direct base-value mutation, UI refresh, and base-change notification; it does not run skill-use or skill-level advancement.",
+  "comment_repeatable": "SetAV / SetActorValue execute callback. On PlayerCharacter this dispatches to Player_Actor_SetAViBase: direct base-value mutation, UI refresh, and base-change notification; it does not run skill-use or skill-level advancement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_5016D0",
+  "display_name": "Cmd_SetAV_Execute",
   "end_ea": "0x50175A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5016D0",
+  "name": "Cmd_SetAV_Execute",
   "segment": ".text",
   "sha256": "e43581551bc6f8b3e67a01daadc38c77469c9830a233abd3bda64a655df2c37d",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5016D0",
+  "total_chunk_size": 138,
   "type": "bool __cdecl(ParamInfo *, UInt8 *, TESObjectREFR *, TESObjectREFR *argC, Script *, ScriptEventList *l, int, UInt32 *)",
   "xrefs_from_count": 54,
   "xrefs_to_count": 1

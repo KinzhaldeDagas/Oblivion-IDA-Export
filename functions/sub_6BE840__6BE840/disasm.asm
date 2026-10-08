@@ -15,7 +15,7 @@
 0x6BE862: push    edx
 0x6BE863: push    eax
 0x6BE864: mov     eax, ds:0B3D410h[ecx*4]
-0x6BE86B: call    eax ; dword_B3D410
+0x6BE86B: call    eax ; unk_B3D410
 0x6BE86D: add     esp, 0Ch
 0x6BE870: add     edi, 1
 0x6BE873: add     esi, 4

@@ -1,6 +1,6 @@
-0x680620: mov     ax, ds:0B3BF04h
+0x680620: mov     ax, ds:0B3BF04h; Verified reallocation helper: grows the table to the requested capacity, allocates and zeroes capacity*0x10 bytes, copies old entries, frees the old allocation, and records the new capacity.
 0x680626: push    edi
-0x680627: mov     di, [esp+4+arg_0]
+0x680627: mov     di, [esp+4+newCapacity]
 0x68062C: cmp     di, ax
 0x68062F: jbe     short loc_6806AA
 0x680631: push    ebx
@@ -38,13 +38,13 @@
 0x68068B: jz      short loc_68069E
 0x68068D: movzx   ecx, bx
 0x680690: shl     ecx, 4
-0x680693: push    ecx; Size
-0x680694: push    ebp; Src
-0x680695: push    eax; Dst
-0x680696: call    _memcpy
+0x680693: push    ecx; byteCount
+0x680694: push    ebp; source
+0x680695: push    eax; destination
+0x680696: call    _memcpy;
 0x68069B: add     esp, 0Ch
 0x68069E: push    ebp
-0x68069F: call    FormHeapFree
+0x68069F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6806A4: add     esp, 4
 0x6806A7: pop     esi
 0x6806A8: pop     ebp

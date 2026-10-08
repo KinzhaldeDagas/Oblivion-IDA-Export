@@ -1,4 +1,4 @@
-0x7F1200: push    0FFFFFFFFh
+0x7F1200: push    0FFFFFFFFh; SpeedTreeLeafShader ctor: BSShader base, four vertex-shader refs at +0x37C, two pixel-shader refs at +0x38C, pass +0x394, clears 0x300-byte leaf constant block and initializes global leaf wind/color scalars.
 0x7F1202: push    offset ??0SpeedTreeLeafShader@@QAE@XZ_SEH
 0x7F1207: mov     eax, large fs:0
 0x7F120D: push    eax
@@ -12,7 +12,7 @@
 0x7F1224: mov     esi, ecx
 0x7F1226: mov     [esp+28h+var_20], esi
 0x7F122A: call    ??0BSShader@@QAE@XZ; BSShader::BSShader(void)
-0x7F122F: push    offset sub_7016A0; a5
+0x7F122F: push    offset NiPointerSlot_Release; a5
 0x7F1234: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7F1239: push    4; size
 0x7F123B: push    4; a2
@@ -21,7 +21,7 @@
 0x7F1244: mov     [esp+3Ch+var_4], 0
 0x7F124C: mov     dword ptr [esi], offset ??_7SpeedTreeLeafShader@@6B@; const SpeedTreeLeafShader::`vftable'
 0x7F1252: call    ArrayConstructor
-0x7F1257: push    offset sub_7016A0; a5
+0x7F1257: push    offset NiPointerSlot_Release; a5
 0x7F125C: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7F1261: push    2; size
 0x7F1263: push    4; a2
@@ -93,3 +93,20 @@
 0x7F137F: pop     esi
 0x7F1380: add     esp, 20h
 0x7F1383: retn
+0x9CFD90: mov     ecx, [ebp-20h]; this
+0x9CFD93: jmp     ??1BSShader@@UAE@XZ;
+0x9CFD98: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CFD9D: push    4; int
+0x9CFD9F: push    4; unsigned int
+0x9CFDA1: mov     eax, [ebp-20h]
+0x9CFDA4: add     eax, 37Ch
+0x9CFDA9: push    eax; void *
+0x9CFDAA: call    $LN21
+0x9CFDAF: retn
+0x9CFDB0: mov     edx, [esp+arg_4]
+0x9CFDB4: lea     eax, [edx-18h]
+0x9CFDB7: mov     ecx, [edx-1Ch]
+0x9CFDBA: xor     ecx, eax
+0x9CFDBC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDC1: mov     eax, offset stru_AF88A0
+0x9CFDC6: jmp     ___CxxFrameHandler3

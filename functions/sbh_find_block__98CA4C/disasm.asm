@@ -1,5 +1,5 @@
-0x98CA4C: mov     ecx, dword_BAABC4
-0x98CA52: mov     eax, lpMem
+0x98CA4C: mov     ecx, dword ptr unk_BAABC4
+0x98CA52: mov     eax, ds:0BAABC8h
 0x98CA57: imul    ecx, 14h
 0x98CA5A: add     ecx, eax
 0x98CA5C: jmp     short loc_98CA70

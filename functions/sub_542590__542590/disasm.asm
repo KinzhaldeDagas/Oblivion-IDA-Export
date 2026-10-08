@@ -1,4 +1,4 @@
-0x542590: sub     esp, 18h
+0x542590: sub     esp, 18h; Pass231: Updates sky weather side lists/effects before Atmosphere virtual update.
 0x542593: cmp     byte ptr ds:0B3667Ch, 0
 0x54259A: push    ebx
 0x54259B: push    ebp
@@ -50,7 +50,7 @@
 0x542631: mov     [esp+28h+var_4], eax
 0x542635: mov     ebx, esi
 0x542637: push    edi
-0x542638: call    FormHeapFree
+0x542638: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x54263D: mov     esi, [esp+2Ch+var_18]
 0x542641: add     esp, 4
 0x542644: jmp     short loc_542676
@@ -108,18 +108,18 @@
 0x5426D0: mov     ecx, esi; this
 0x5426D2: call    sub_6B73E0
 0x5426D7: push    esi
-0x5426D8: call    FormHeapFree
+0x5426D8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5426DD: add     esp, 4
 0x5426E0: test    edi, edi
 0x5426E2: jnz     short loc_542690
 0x5426E4: lea     ecx, [esp+28h+var_8]
-0x5426E8: call    BSSimpleList_Clear
+0x5426E8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5426ED: mov     esi, [esp+28h+var_C]
 0x5426F1: mov     ecx, [esi+0E0h]
-0x5426F7: call    BSSimpleList_Clear
+0x5426F7: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5426FC: mov     edx, [esi+0E0h]
 0x542702: push    edx
-0x542703: call    FormHeapFree
+0x542703: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x542708: mov     ecx, [esp+2Ch+var_C]
 0x54270C: mov     [esi+0E0h], ebp
 0x542712: add     esp, 4
@@ -140,7 +140,7 @@
 0x54274A: mov     esi, [ecx]
 0x54274C: test    esi, esi
 0x54274E: jz      loc_542B00
-0x542754: mov     ecx, [esi]
+0x542754: mov     ecx, [esi]; this
 0x542756: test    ecx, ecx
 0x542758: jz      loc_542AED
 0x54275E: mov     ebp, [esp+28h+var_C]
@@ -158,7 +158,7 @@
 0x542781: fstp    st(2)
 0x542783: fstp    st
 0x542785: fstp    st
-0x542787: call    sub_6B7260
+0x542787: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x54278C: test    al, al
 0x54278E: jz      short loc_5427B3
 0x542790: mov     eax, [ebp+10h]
@@ -185,7 +185,7 @@
 0x5427D4: fstp    st(2)
 0x5427D6: fstp    st
 0x5427D8: fstp    st
-0x5427DA: call    sub_6B7260
+0x5427DA: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5427DF: test    al, al
 0x5427E1: jnz     short loc_5427C1
 0x5427E3: call    dword ptr ds:0A280D0h
@@ -205,7 +205,7 @@
 0x542814: mov     [esi+0Ch], eax
 0x542817: mov     bl, [ecx+52h]
 0x54281A: push    0; Seed
-0x54281C: call    GetRandomLargeInteger?
+0x54281C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x542821: movzx   edx, byte ptr ds:0B365C0h
 0x542828: movzx   ecx, bl
 0x54282B: imul    ecx, edx

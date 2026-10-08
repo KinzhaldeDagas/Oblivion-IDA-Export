@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x768D60",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; End the current target group without unbinding it. Color buffers whose class predicate at vtable+0x24 is true are queued once for PresentScene vtable+0x28 processing. NiDX9TextureBufferData returns false, so the R32F shadow map is neither queued, copied, nor resolved.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -90,12 +90,6 @@
     "size": 2
   },
   {
-    "ea": "0x768D86",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x768D90",
     "line": "mov     ecx, [ebp+87Ch]",
     "mnemonic": "mov",
@@ -181,7 +175,7 @@
   },
   {
     "ea": "0x768DB4",
-    "line": "cmp     eax, offset unk_B42654",
+    "line": "cmp     eax, offset stru_B42654",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -259,7 +253,7 @@
   },
   {
     "ea": "0x768DD7",
-    "line": "call    edx",
+    "line": "call    edx; Ask this color-buffer class whether it requires deferred presentation-boundary processing.",
     "mnemonic": "call",
     "size": 2
   },
@@ -475,7 +469,7 @@
   },
   {
     "ea": "0x768E37",
-    "line": "call    sub_7C16B0",
+    "line": "call    NiTRefPointerList__AddTail; Queue a qualifying buffer once with strong-reference ownership for PresentScene processing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +595,7 @@
   },
   {
     "ea": "0x768E73",
-    "line": "pop     esi",
+    "line": "pop     esi; Target end returns after deferred-list bookkeeping; it does not unbind color/depth surfaces, clear currentRTGroup, or restore viewport/scissor state.",
     "mnemonic": "pop",
     "size": 1
   },

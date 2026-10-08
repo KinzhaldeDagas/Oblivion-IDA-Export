@@ -62,7 +62,7 @@
 0x4DF75F: mov     [esp+320h+var_310], bl
 0x4DF763: jz      short loc_4DF7C6
 0x4DF765: mov     ecx, edi; this
-0x4DF767: call    TESObjectCELL_IsInterior
+0x4DF767: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4DF76C: test    al, al
 0x4DF76E: mov     ecx, edi; this
 0x4DF770: jz      short loc_4DF795

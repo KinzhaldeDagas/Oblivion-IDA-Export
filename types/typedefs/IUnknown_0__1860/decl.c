@@ -1,1 +1,1 @@
-IUnknown_0
+typedef IUnknown IUnknown_0;

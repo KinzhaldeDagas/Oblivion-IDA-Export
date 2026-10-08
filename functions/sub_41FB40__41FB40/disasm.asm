@@ -1,4 +1,4 @@
-0x41FB40: push    1Fh; a2
+0x41FB40: push    1Fh; Returns ExtraPackage's package index field, or zero when absent.
 0x41FB42: call    BaseExtraList_GetExtraData
 0x41FB47: test    eax, eax
 0x41FB49: jz      short loc_41FB4F

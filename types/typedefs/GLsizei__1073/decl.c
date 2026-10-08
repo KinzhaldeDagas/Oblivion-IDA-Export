@@ -1,1 +1,1 @@
-GLsizei
+typedef int GLsizei;

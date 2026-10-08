@@ -10,7 +10,7 @@
 0x5AF1AB: fmul    qword ptr ds:0A2FAA0h
 0x5AF1B1: fstp    [esp+0Ch+var_4]
 0x5AF1B5: fld     [esp+0Ch+var_4]
-0x5AF1B9: call    Double_To_SInt32
+0x5AF1B9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AF1BE: mov     edx, [esp+0Ch+arg_0]
 0x5AF1C2: mov     ecx, edi
 0x5AF1C4: mov     edi, [ecx]

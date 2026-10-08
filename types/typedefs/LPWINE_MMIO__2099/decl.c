@@ -1,1 +1,1 @@
-LPWINE_MMIO
+typedef tagWINE_MMIO *LPWINE_MMIO;

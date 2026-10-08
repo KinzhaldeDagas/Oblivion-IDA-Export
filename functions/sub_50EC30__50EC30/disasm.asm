@@ -11,16 +11,15 @@
 0x50EC48: push    edi
 0x50EC49: jz      short loc_50EC75
 0x50EC4B: jmp     short loc_50EC50
-0x50EC4D: align 10h
 0x50EC50: cmp     dword ptr [esi+4], 0
 0x50EC54: jnz     short loc_50EC5B
 0x50EC56: cmp     dword ptr [esi], 0
 0x50EC59: jz      short loc_50EC75
 0x50EC5B: mov     edi, [esi]
 0x50EC5D: mov     eax, [edi+4]
-0x50EC60: push    ebx; Str2
-0x50EC61: push    eax; Str1
-0x50EC62: call    __strcmp
+0x50EC60: push    ebx; right
+0x50EC61: push    eax; left
+0x50EC62: call    CRT_StricmpLocaleDispatch
 0x50EC67: add     esp, 8
 0x50EC6A: test    eax, eax
 0x50EC6C: jz      short loc_50EC7D

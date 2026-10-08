@@ -23,88 +23,88 @@ _DWORD *__thiscall MemoryHeap_GetStats(_DWORD *this, _DWORD *a2, char a3)
   int v24; // ecx
   struct _MEMORYSTATUS Buffer; // [esp+8h] [ebp-20h] BYREF
 
-  _memset(a2, 0, 0x54);
-  NiEnterCriticalSection((struct _RTL_CRITICAL_SECTION *)&HeapCriticalSection, (int)&aMemoryheapGets);
-  if ( a3 )
+  _memset((int)a2, 0, 0x54u); /*0x402000*/
+  NiEnterCriticalSection((struct _RTL_CRITICAL_SECTION *)&HeapCriticalSection, (int)&aMemoryheapGets); /*0x402012*/
+  if ( a3 ) /*0x40201c*/
   {
-    v4 = *(this + 8);
-    if ( v4 )
+    v4 = *(this + 8); /*0x40201e*/
+    if ( v4 ) /*0x402023*/
     {
-      v5 = *(this + 9);
-      do
+      v5 = *(this + 9); /*0x402026*/
+      do /*0x40206c*/
       {
-        v6 = *(_DWORD *)(v4 + 4) & 0xFFFFFFF;
-        v7 = v6 + 8;
-        if ( (*(_DWORD *)(v4 + 4) & 0x40000000) != 0 )
+        v6 = *(_DWORD *)(v4 + 4) & 0xFFFFFFF; /*0x402038*/
+        v7 = v6 + 8; /*0x40203f*/
+        if ( (*(_DWORD *)(v4 + 4) & 0x40000000) != 0 ) /*0x402042*/
         {
-          a2[9] += v7;
-          if ( v6 > a2[0xB] )
-            a2[0xB] = v6;
-          ++a2[4];
+          a2[9] += v7; /*0x402044*/
+          if ( v6 > a2[0xB] ) /*0x40204a*/
+            a2[0xB] = v6; /*0x40204c*/
+          ++a2[4]; /*0x40204f*/
         }
         else
         {
-          a2[0xA] += v7;
-          if ( v6 > a2[0xC] )
-            a2[0xC] = v6;
+          a2[0xA] += v7; /*0x402054*/
+          if ( v6 > a2[0xC] ) /*0x40205a*/
+            a2[0xC] = v6; /*0x40205c*/
         }
-        ++a2[3];
-        if ( v4 == v5 )
-          break;
-        v4 += v6 + 8;
+        ++a2[3]; /*0x40205f*/
+        if ( v4 == v5 ) /*0x402064*/
+          break; /*0x402064*/
+        v4 += v6 + 8; /*0x402066*/
       }
-      while ( v4 );
+      while ( v4 ); /*0x40206c*/
     }
-    a2[0xF] = 0;
+    a2[0xF] = 0; /*0x402070*/
   }
   else
   {
-    v8 = *(this + 7);
-    a2[4] = *(this + 0xA);
-    a2[3] = v8;
+    v8 = *(this + 7); /*0x40207c*/
+    a2[4] = *(this + 0xA); /*0x40207f*/
+    a2[3] = v8; /*0x402082*/
   }
-  v9 = *(this + 3);
-  v10 = 4 * a2[3];
-  a2[5] = *(this + 0xB);
-  v11 = *(this + 4);
-  *a2 = v9;
-  v12 = *(this + 0x13);
-  a2[0xD] = 2 * v10;
-  v13 = *(this + 5);
-  a2[1] = v11;
-  v14 = *(this + 0x14);
-  a2[7] = v12;
-  v15 = *(this + 0xC);
-  a2[2] = v13;
-  v16 = *(this + 0x12);
-  a2[8] = v14;
-  a2[6] = v16;
-  a2[0xE] = 8 * v15 + 0x80;
-  NiLeaveCriticalSection_0(&HeapCriticalSection);
-  GlobalMemoryStatus((LPMEMORYSTATUS)&Buffer);
-  dwAvailPhys = Buffer.dwAvailPhys;
-  if ( Buffer.dwAvailPhys < *(this + 0x15) )
-    *(this + 0x15) = Buffer.dwAvailPhys;
-  dwTotalPhys = Buffer.dwTotalPhys;
-  a2[0x11] = Buffer.dwTotalPhys;
-  v19 = dwTotalPhys - *(this + 0x15);
-  v20 = *((_BYTE *)this + 0x16C) == 0;
-  a2[0x10] = dwTotalPhys - dwAvailPhys;
-  a2[0x12] = v19;
-  if ( v20 )
+  v9 = *(this + 3); /*0x40208b*/
+  v10 = 4 * a2[3]; /*0x402090*/
+  a2[5] = *(this + 0xB); /*0x402092*/
+  v11 = *(this + 4); /*0x402095*/
+  *a2 = v9; /*0x40209a*/
+  v12 = *(this + 0x13); /*0x40209c*/
+  a2[0xD] = 2 * v10; /*0x40209f*/
+  v13 = *(this + 5); /*0x4020a2*/
+  a2[1] = v11; /*0x4020a5*/
+  v14 = *(this + 0x14); /*0x4020a8*/
+  a2[7] = v12; /*0x4020ab*/
+  v15 = *(this + 0xC); /*0x4020ae*/
+  a2[2] = v13; /*0x4020b1*/
+  v16 = *(this + 0x12); /*0x4020b4*/
+  a2[8] = v14; /*0x4020b7*/
+  a2[6] = v16; /*0x4020c6*/
+  a2[0xE] = 8 * v15 + 0x80; /*0x4020c9*/
+  NiLeaveCriticalSection_0(&HeapCriticalSection); /*0x4020cc*/
+  GlobalMemoryStatus((LPMEMORYSTATUS)&Buffer); /*0x4020d6*/
+  dwAvailPhys = Buffer.dwAvailPhys; /*0x4020dc*/
+  if ( Buffer.dwAvailPhys < *(this + 0x15) ) /*0x4020e3*/
+    *(this + 0x15) = Buffer.dwAvailPhys; /*0x4020e5*/
+  dwTotalPhys = Buffer.dwTotalPhys; /*0x4020ec*/
+  a2[0x11] = Buffer.dwTotalPhys; /*0x4020ee*/
+  v19 = dwTotalPhys - *(this + 0x15); /*0x4020f1*/
+  v20 = *((_BYTE *)this + 0x16C) == 0; /*0x4020f6*/
+  a2[0x10] = dwTotalPhys - dwAvailPhys; /*0x4020fd*/
+  a2[0x12] = v19; /*0x402100*/
+  if ( v20 ) /*0x402103*/
   {
-    for ( i = 0; i < 0x81; i += 3 )
+    for ( i = 0; i < 0x81; i += 3 ) /*0x402105*/
     {
-      v22 = g_HeapPoolsBySize[i];
-      if ( v22 )
-        a2[0x13] += *(_DWORD *)(v22 + 0x118) << 0xC;
-      v23 = dword_B33084[i];
-      if ( v23 )
-        a2[0x13] += *(_DWORD *)(v23 + 0x118) << 0xC;
-      v24 = dword_B33088[i];
-      if ( v24 )
-        a2[0x13] += *(_DWORD *)(v24 + 0x118) << 0xC;
+      v22 = MEMORY[0xB33080][i]; /*0x402110*/
+      if ( v22 ) /*0x402118*/
+        a2[0x13] += *(_DWORD *)(v22 + 0x118) << 0xC; /*0x402123*/
+      v23 = unk_B33084[i]; /*0x402126*/
+      if ( v23 ) /*0x40212e*/
+        a2[0x13] += *(_DWORD *)(v23 + 0x118) << 0xC; /*0x402139*/
+      v24 = unk_B33088[i]; /*0x40213c*/
+      if ( v24 ) /*0x402144*/
+        a2[0x13] += *(_DWORD *)(v24 + 0x118) << 0xC; /*0x40214f*/
     }
   }
-  return a2;
+  return a2; /*0x40215c*/
 }

@@ -1,288 +1,303 @@
-char __thiscall sub_5630A0(_DWORD *this, Ni2DBuffer *a2)
+// Verified instance copy path: shares the base model at +0x10, copies/refcounts +0x14/+0x18 geometry data and +0x2C/+0x30 cached property slots, while deep-cloning per-LOD shader-property objects at +0x24/+0x28. The leaf cached-property source remains Unknown because no stock writer was found.
+bool __thiscall BSTreeModel_InitAsInstance(
+        BSTreeModel_OblivionLayout_058 *this,
+        BSTreeModel_OblivionLayout_058 *baseModel)
 {
-  void *height; // ecx
-  _DWORD *v5; // eax
-  void *m_uiRefCount; // ecx
+  OB_CSpeedTreeRT_010201A0 *v4; // ecx
+  OB_CSpeedTreeRT_010201A0 *Instance; // eax
+  bhkRefObject *collisionShape; // ecx
   Ni2DBuffer *v7; // eax
-  unsigned __int16 v8; // ax
+  unsigned __int16 NumBranchLODLevels; // ax
   int v9; // ebx
   unsigned int v10; // ecx
-  int *v11; // eax
-  _DWORD *v12; // edi
-  _DWORD *v13; // eax
+  int v11; // eax
+  NiScreenElementsData **v12; // edi
+  NiScreenElementsData **v13; // eax
   unsigned int v14; // ecx
-  int *v15; // eax
-  _DWORD *v16; // edi
+  int v15; // eax
+  BSShaderProperty **v16; // edi
   unsigned int v17; // ecx
-  int *v18; // eax
-  _DWORD *v19; // edi
+  int v18; // eax
+  NiProperty **v19; // edi
   int v20; // edi
-  void *v21; // ecx
-  void *v22; // ecx
-  unsigned __int16 v23; // ax
+  NiObject *v21; // ecx
+  OB_CSpeedTreeRT_010201A0 *speedTree; // ecx
+  unsigned __int16 NumLeafLodLevels; // ax
   int v24; // ebx
   unsigned int v25; // ecx
-  int *v26; // eax
-  _DWORD *v27; // edi
+  int v26; // eax
+  NiTriShapeData **v27; // edi
   unsigned int v28; // ecx
-  int *v29; // eax
-  _DWORD *v30; // edi
+  int v29; // eax
+  BSShaderProperty **v30; // edi
   unsigned int v31; // ecx
-  int *v32; // eax
-  _DWORD *v33; // edi
+  int v32; // eax
+  BSShaderProperty **v33; // edi
   int v34; // edi
-  void *v35; // ecx
-  void *width; // ebp
+  NiObject *v35; // ecx
+  NiObject *billboardShape_STBB; // ebp
   Ni2DBuffer *v37; // eax
   Ni2DBuffer *v39; // [esp+4h] [ebp-44h]
   Ni2DBuffer *v40; // [esp+4h] [ebp-44h]
   int (__stdcall ***v41[7])(signed int); // [esp+20h] [ebp-28h] BYREF
   int v42; // [esp+44h] [ebp-4h]
+  unsigned __int16 a2; // [esp+4Ch] [ebp+4h]
   unsigned __int16 a2a; // [esp+4Ch] [ebp+4h]
-  unsigned __int16 a2b; // [esp+4Ch] [ebp+4h]
 
-  NiEnterCriticalSection((struct _RTL_CRITICAL_SECTION *)&stru_B39F80, (int)&unk_A2F830);
-  if ( a2
-    && (height = (void *)a2->members.height) != 0
-    && a2->members.width != 2
-    && !*(this + 2)
-    && (v5 = sub_78DC10(height), (*(this + 3) = v5) != 0) )
+  NiEnterCriticalSection( /*0x5630d3*/
+    (struct _RTL_CRITICAL_SECTION *)&OB_BSTreeModel_MakeInstanceCriticalSection_010201A0,
+    (int)&unk_A2F830);
+  if ( baseModel
+    && (v4 = baseModel->speedTree) != 0
+    && baseModel->modelState_0_uninit_1_base_2_instance != 2
+    && !this->modelState_0_uninit_1_base_2_instance
+    && (Instance = CSpeedTreeRT__MakeInstance(v4), (this->speedTree = Instance) != 0) )
   {
-    NiSmartPointer_Set__((Ni2DBuffer **)this + 4, a2);
-    *(this + 2) = 2;
-    sub_55E2A0(this + 0xD, (int *)&a2[2].members.height);
-    sub_55E2A0(this + 0xE, (int *)&a2[2].members.data);
-    sub_55E2A0(this + 0xF, (int *)&a2[3]);
-    sub_55E2A0(this + 8, (int *)&a2[1].members.height);
-    *((float *)this + 0x11) = *(float *)&a2[3].members.width;
-    *(this + 0x12) = a2[3].members.height;
-    *((float *)this + 0x14) = *(float *)&a2[4].__vftable;
-    *((float *)this + 0x15) = *(float *)&a2[4].members.super.m_uiRefCount;
-    if ( a2[3].members.super.m_uiRefCount )
+    NiSmartPointer_Set__((Ni2DBuffer **)&this->baseModel, (Ni2DBuffer *)baseModel); /*0x56311b*/
+    this->modelState_0_uninit_1_base_2_instance = 2; /*0x563127*/
+    OB_NiSmartPointer_Assign_010201A0((int *)&this->branchTexturingProperty, (int *)&baseModel->branchTexturingProperty); /*0x56312a*/
+    OB_NiSmartPointer_Assign_010201A0((int *)&this->leafTexture, (int *)&baseModel->leafTexture); /*0x563136*/
+    OB_NiSmartPointer_Assign_010201A0( /*0x563142*/
+      (int *)&this->billboardTexturingProperty,
+      (int *)&baseModel->billboardTexturingProperty);
+    OB_NiSmartPointer_Assign_010201A0((int *)&this->leafShaderStreamData, (int *)&baseModel->leafShaderStreamData); /*0x56314e*/
+    this->curveScalar = baseModel->curveScalar; /*0x563156*/
+    this->seed = baseModel->seed; /*0x56315c*/
+    this->trunkLength = baseModel->trunkLength; /*0x563162*/
+    this->trunkWidth = baseModel->trunkWidth; /*0x563168*/
+    if ( baseModel->collisionShape ) /*0x56316b*/
     {
-      sub_478C80((NiTPointerMap<NiObject *,NiObject *> **)v41, 1.0);
-      m_uiRefCount = (void *)a2[3].members.super.m_uiRefCount;
-      v42 = 0;
-      v7 = (Ni2DBuffer *)sub_700610(m_uiRefCount, (int)v41);
-      NiSmartPointer_Set__((Ni2DBuffer **)this + 0x10, v7);
-      v42 = 0xFFFFFFFF;
-      sub_4781A0(v41);
+      sub_478C80((NiTPointerMap<NiObject *,NiObject *> **)v41, 1.0); /*0x56317c*/
+      collisionShape = baseModel->collisionShape; /*0x563181*/
+      v42 = 0; /*0x563189*/
+      v7 = (Ni2DBuffer *)sub_700610(collisionShape, (int)v41); /*0x563191*/
+      NiSmartPointer_Set__((Ni2DBuffer **)&this->collisionShape, v7); /*0x56319a*/
+      v42 = 0xFFFFFFFF; /*0x5631a3*/
+      sub_4781A0(v41); /*0x5631ab*/
     }
     else
     {
-      NiSmartPointer_Set__((Ni2DBuffer **)this + 0x10, 0);
+      NiSmartPointer_Set__((Ni2DBuffer **)&this->collisionShape, 0); /*0x5631b7*/
     }
-    v8 = sub_5601E0(this);
-    a2a = v8;
-    if ( v8 )
+    NumBranchLODLevels = BSTreeModel_GetNumBranchLODLevels(this); /*0x5631be*/
+    a2 = NumBranchLODLevels; /*0x5631c9*/
+    if ( NumBranchLODLevels )
     {
-      if ( a2[1].__vftable )
+      if ( baseModel->branchGeometryDataByLOD )
       {
-        if ( a2[1].members.data )
+        if ( baseModel->branchShaderPropertiesByLOD )
         {
-          if ( a2[2].members.super.m_uiRefCount )
+          if ( baseModel->branchCachedPropertiesByLOD )
           {
-            v9 = v8;
-            v10 = (unsigned __int64)v8 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * v8;
-            v11 = (int *)FormHeapAlloc(__CFADD__(v10, 4) ? 0xFFFFFFFF : v10 + 4);
-            v42 = 1;
-            if ( v11 )
+            v9 = NumBranchLODLevels; /*0x5631f1*/
+            v10 = (unsigned __int64)NumBranchLODLevels >> 0x1E != 0 ? 0xFFFFFFFF : 4 * NumBranchLODLevels;
+            v11 = FormHeapAlloc(__CFADD__(v10, 4) ? 0xFFFFFFFF : v10 + 4);
+            v42 = 1; /*0x563221*/
+            if ( v11 ) /*0x563229*/
             {
-              v12 = v11 + 1;
-              *v11 = v9;
-              ArrayConstructor(
-                v11 + 1,
+              v12 = (NiScreenElementsData **)(v11 + 4); /*0x563236*/
+              *(_DWORD *)v11 = v9; /*0x56323c*/
+              ArrayConstructor( /*0x56323e*/
+                (char *)(v11 + 4),
                 4u,
                 v9,
-                (int)Concurrency::details::_NonReentrantLock::_Release,
-                (void (__thiscall *)(void *))sub_7016A0);
-              v13 = v12;
+                (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+                (void (__thiscall *)(void *))NiPointerSlot_Release);
+              v13 = v12; /*0x563243*/
             }
             else
             {
-              v13 = 0;
+              v13 = 0; /*0x56324c*/
             }
-            *(this + 5) = v13;
-            v42 = 0xFFFFFFFF;
+            this->branchGeometryDataByLOD = v13; /*0x56324e*/
+            v42 = 0xFFFFFFFF; /*0x56325f*/
             v14 = (unsigned __int64)(unsigned int)v9 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * v9;
-            v15 = (int *)FormHeapAlloc(__CFADD__(v14, 4) ? 0xFFFFFFFF : v14 + 4);
-            v42 = 2;
-            if ( v15 )
+            v15 = FormHeapAlloc(__CFADD__(v14, 4) ? 0xFFFFFFFF : v14 + 4);
+            v42 = 2; /*0x563286*/
+            if ( v15 ) /*0x56328a*/
             {
-              v16 = v15 + 1;
-              *v15 = v9;
-              ArrayConstructor(
-                v15 + 1,
+              v16 = (BSShaderProperty **)(v15 + 4); /*0x563297*/
+              *(_DWORD *)v15 = v9; /*0x56329d*/
+              ArrayConstructor( /*0x56329f*/
+                (char *)(v15 + 4),
                 4u,
                 v9,
-                (int)Concurrency::details::_NonReentrantLock::_Release,
-                (void (__thiscall *)(void *))sub_7016A0);
+                (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+                (void (__thiscall *)(void *))NiPointerSlot_Release);
             }
             else
             {
-              v16 = 0;
+              v16 = 0; /*0x5632a6*/
             }
-            v42 = 0xFFFFFFFF;
-            *(this + 9) = v16;
+            v42 = 0xFFFFFFFF; /*0x5632b6*/
+            this->branchShaderPropertiesByLOD = v16; /*0x5632be*/
             v17 = (unsigned __int64)(unsigned int)v9 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * v9;
-            v18 = (int *)FormHeapAlloc(__CFADD__(v17, 4) ? 0xFFFFFFFF : v17 + 4);
-            v42 = 3;
-            if ( v18 )
+            v18 = FormHeapAlloc(__CFADD__(v17, 4) ? 0xFFFFFFFF : v17 + 4);
+            v42 = 3; /*0x5632e0*/
+            if ( v18 ) /*0x5632e8*/
             {
-              v19 = v18 + 1;
-              *v18 = v9;
-              ArrayConstructor(
-                v18 + 1,
+              v19 = (NiProperty **)(v18 + 4); /*0x5632f5*/
+              *(_DWORD *)v18 = v9; /*0x5632fb*/
+              ArrayConstructor( /*0x5632fd*/
+                (char *)(v18 + 4),
                 4u,
                 v9,
-                (int)Concurrency::details::_NonReentrantLock::_Release,
-                (void (__thiscall *)(void *))sub_7016A0);
+                (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+                (void (__thiscall *)(void *))NiPointerSlot_Release);
             }
             else
             {
-              v19 = 0;
+              v19 = 0; /*0x563304*/
             }
-            v42 = 0xFFFFFFFF;
-            *(this + 0xB) = v19;
-            if ( a2a )
+            v42 = 0xFFFFFFFF; /*0x56330c*/
+            this->branchCachedPropertiesByLOD = v19; /*0x563314*/
+            if ( a2 ) /*0x563317*/
             {
-              v20 = 0;
-              do
+              v20 = 0; /*0x563319*/
+              do /*0x563364*/
               {
-                sub_55E2A0((int *)(v20 + *(this + 5)), (int *)((char *)a2[1].__vftable + v20));
-                v21 = *(NiDX92DBufferDataVtbl **)((char *)&a2[1].members.data->__vftable + v20);
-                if ( v21 )
+                OB_NiSmartPointer_Assign_010201A0( /*0x56332b*/
+                  (int *)&this->branchGeometryDataByLOD[v20],
+                  (int *)&baseModel->branchGeometryDataByLOD[v20]);
+                v21 = (NiObject *)baseModel->branchShaderPropertiesByLOD[v20]; /*0x563333*/
+                if ( v21 ) /*0x563338*/
                 {
-                  v39 = (Ni2DBuffer *)sub_700900(v21);
-                  NiSmartPointer_Set__((Ni2DBuffer **)(v20 + *(this + 9)), v39);
+                  v39 = (Ni2DBuffer *)NiObject_CloneWithPointerMap(v21); /*0x56333f*/
+                  NiSmartPointer_Set__((Ni2DBuffer **)&this->branchShaderPropertiesByLOD[v20], v39); /*0x563340*/
                 }
                 else
                 {
-                  NiSmartPointer_Set__((Ni2DBuffer **)(v20 + *(this + 9)), 0);
+                  NiSmartPointer_Set__((Ni2DBuffer **)&this->branchShaderPropertiesByLOD[v20], 0); /*0x563349*/
                 }
-                sub_55E2A0((int *)(v20 + *(this + 0xB)), (int *)(v20 + a2[2].members.super.m_uiRefCount));
-                v20 += 4;
-                --v9;
+                OB_NiSmartPointer_Assign_010201A0( /*0x563359*/
+                  (int *)&this->branchCachedPropertiesByLOD[v20],
+                  (int *)&baseModel->branchCachedPropertiesByLOD[v20]);
+                ++v20; /*0x56335e*/
+                --v9; /*0x563361*/
               }
-              while ( v9 );
+              while ( v9 ); /*0x563364*/
             }
           }
         }
       }
     }
-    v22 = (void *)*(this + 3);
-    if ( v22 )
+    speedTree = this->speedTree; /*0x563366*/
+    if ( speedTree )
     {
-      v23 = sub_787200(v22);
-      a2b = v23;
-      if ( v23 )
+      NumLeafLodLevels = CSpeedTreeRT__GetNumLeafLodLevels(speedTree); /*0x563371*/
+      a2a = NumLeafLodLevels; /*0x56337c*/
+      if ( NumLeafLodLevels )
       {
-        if ( a2[1].members.super.m_uiRefCount )
+        if ( baseModel->leafGeometryDataByLOD )
         {
-          if ( a2[2].__vftable )
+          if ( baseModel->leafShaderPropertiesByLOD )
           {
-            if ( a2[2].members.width )
+            if ( baseModel->leafCachedPropertiesByLOD )
             {
-              v24 = v23;
-              v25 = (unsigned __int64)v23 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * v23;
-              v26 = (int *)FormHeapAlloc(__CFADD__(v25, 4) ? 0xFFFFFFFF : v25 + 4);
-              v42 = 4;
-              if ( v26 )
+              v24 = NumLeafLodLevels; /*0x5633a4*/
+              v25 = (unsigned __int64)NumLeafLodLevels >> 0x1E != 0 ? 0xFFFFFFFF : 4 * NumLeafLodLevels;
+              v26 = FormHeapAlloc(__CFADD__(v25, 4) ? 0xFFFFFFFF : v25 + 4);
+              v42 = 4; /*0x5633d4*/
+              if ( v26 ) /*0x5633dc*/
               {
-                v27 = v26 + 1;
-                *v26 = v24;
-                ArrayConstructor(
-                  v26 + 1,
+                v27 = (NiTriShapeData **)(v26 + 4); /*0x5633e9*/
+                *(_DWORD *)v26 = v24; /*0x5633ef*/
+                ArrayConstructor( /*0x5633f1*/
+                  (char *)(v26 + 4),
                   4u,
                   v24,
-                  (int)Concurrency::details::_NonReentrantLock::_Release,
-                  (void (__thiscall *)(void *))sub_7016A0);
+                  (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+                  (void (__thiscall *)(void *))NiPointerSlot_Release);
               }
               else
               {
-                v27 = 0;
+                v27 = 0; /*0x5633f8*/
               }
-              v42 = 0xFFFFFFFF;
-              *(this + 6) = v27;
+              v42 = 0xFFFFFFFF; /*0x563408*/
+              this->leafGeometryDataByLOD = v27; /*0x563410*/
               v28 = (unsigned __int64)(unsigned int)v24 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * v24;
-              v29 = (int *)FormHeapAlloc(__CFADD__(v28, 4) ? 0xFFFFFFFF : v28 + 4);
-              v42 = 5;
-              if ( v29 )
+              v29 = FormHeapAlloc(__CFADD__(v28, 4) ? 0xFFFFFFFF : v28 + 4);
+              v42 = 5; /*0x563432*/
+              if ( v29 ) /*0x56343a*/
               {
-                v30 = v29 + 1;
-                *v29 = v24;
-                ArrayConstructor(
-                  v29 + 1,
+                v30 = (BSShaderProperty **)(v29 + 4); /*0x563447*/
+                *(_DWORD *)v29 = v24; /*0x56344d*/
+                ArrayConstructor( /*0x56344f*/
+                  (char *)(v29 + 4),
                   4u,
                   v24,
-                  (int)Concurrency::details::_NonReentrantLock::_Release,
-                  (void (__thiscall *)(void *))sub_7016A0);
+                  (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+                  (void (__thiscall *)(void *))NiPointerSlot_Release);
               }
               else
               {
-                v30 = 0;
+                v30 = 0; /*0x563456*/
               }
-              v42 = 0xFFFFFFFF;
-              *(this + 0xA) = v30;
+              v42 = 0xFFFFFFFF; /*0x563466*/
+              this->leafShaderPropertiesByLOD = v30; /*0x56346e*/
               v31 = (unsigned __int64)(unsigned int)v24 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * v24;
-              v32 = (int *)FormHeapAlloc(__CFADD__(v31, 4) ? 0xFFFFFFFF : v31 + 4);
-              v42 = 6;
-              if ( v32 )
+              v32 = FormHeapAlloc(__CFADD__(v31, 4) ? 0xFFFFFFFF : v31 + 4);
+              v42 = 6; /*0x563490*/
+              if ( v32 ) /*0x563498*/
               {
-                v33 = v32 + 1;
-                *v32 = v24;
-                ArrayConstructor(
-                  v32 + 1,
+                v33 = (BSShaderProperty **)(v32 + 4); /*0x5634a5*/
+                *(_DWORD *)v32 = v24; /*0x5634ab*/
+                ArrayConstructor( /*0x5634ad*/
+                  (char *)(v32 + 4),
                   4u,
                   v24,
-                  (int)Concurrency::details::_NonReentrantLock::_Release,
-                  (void (__thiscall *)(void *))sub_7016A0);
+                  (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+                  (void (__thiscall *)(void *))NiPointerSlot_Release);
               }
               else
               {
-                v33 = 0;
+                v33 = 0; /*0x5634b4*/
               }
-              v42 = 0xFFFFFFFF;
-              *(this + 0xC) = v33;
-              if ( a2b )
+              v42 = 0xFFFFFFFF; /*0x5634bc*/
+              this->leafCachedPropertiesByLOD = v33; /*0x5634c4*/
+              if ( a2a ) /*0x5634c7*/
               {
-                v34 = 0;
-                do
+                v34 = 0; /*0x5634c9*/
+                do /*0x563514*/
                 {
-                  sub_55E2A0((int *)(v34 + *(this + 6)), (int *)(v34 + a2[1].members.super.m_uiRefCount));
-                  v35 = *(void **)((char *)a2[2].__vftable + v34);
-                  if ( v35 )
+                  OB_NiSmartPointer_Assign_010201A0( /*0x5634db*/
+                    (int *)&this->leafGeometryDataByLOD[v34],
+                    (int *)&baseModel->leafGeometryDataByLOD[v34]);
+                  v35 = (NiObject *)baseModel->leafShaderPropertiesByLOD[v34]; /*0x5634e3*/
+                  if ( v35 ) /*0x5634e8*/
                   {
-                    v40 = (Ni2DBuffer *)sub_700900(v35);
-                    NiSmartPointer_Set__((Ni2DBuffer **)(v34 + *(this + 0xA)), v40);
+                    v40 = (Ni2DBuffer *)NiObject_CloneWithPointerMap(v35); /*0x5634ef*/
+                    NiSmartPointer_Set__((Ni2DBuffer **)&this->leafShaderPropertiesByLOD[v34], v40); /*0x5634f0*/
                   }
                   else
                   {
-                    NiSmartPointer_Set__((Ni2DBuffer **)(v34 + *(this + 0xA)), 0);
+                    NiSmartPointer_Set__((Ni2DBuffer **)&this->leafShaderPropertiesByLOD[v34], 0); /*0x5634f9*/
                   }
-                  sub_55E2A0((int *)(v34 + *(this + 0xC)), (int *)(v34 + a2[2].members.width));
-                  v34 += 4;
-                  --v24;
+                  OB_NiSmartPointer_Assign_010201A0( /*0x563509*/
+                    (int *)&this->leafCachedPropertiesByLOD[v34],
+                    (int *)&baseModel->leafCachedPropertiesByLOD[v34]);
+                  ++v34; /*0x56350e*/
+                  --v24; /*0x563511*/
                 }
-                while ( v24 );
+                while ( v24 ); /*0x563514*/
               }
             }
           }
         }
       }
     }
-    width = (void *)a2[1].members.width;
-    if ( width )
+    billboardShape_STBB = (NiObject *)baseModel->billboardShape_STBB;// Verified: InitAsInstance clones billboardShape_STBB (+0x1C) with NiObject_CloneWithPointerMap; its local producer is the NiTriShape named STBB. /*0x563516*/
+    if ( billboardShape_STBB ) /*0x56351b*/
     {
-      v37 = (Ni2DBuffer *)sub_700900(width);
-      NiSmartPointer_Set__((Ni2DBuffer **)this + 7, v37);
+      v37 = (Ni2DBuffer *)NiObject_CloneWithPointerMap(billboardShape_STBB); /*0x56351f*/
+      NiSmartPointer_Set__((Ni2DBuffer **)&this->billboardShape_STBB, v37); /*0x563528*/
     }
-    NiLeaveCriticalSection_0(&stru_B39F80);
-    return 1;
+    NiLeaveCriticalSection_0(&OB_BSTreeModel_MakeInstanceCriticalSection_010201A0); /*0x563532*/
+    return 1; /*0x563537*/
   }
   else
   {
-    NiLeaveCriticalSection_0(&stru_B39F80);
-    return 0;
+    NiLeaveCriticalSection_0(&OB_BSTreeModel_MakeInstanceCriticalSection_010201A0); /*0x563540*/
+    return 0; /*0x563545*/
   }
 }

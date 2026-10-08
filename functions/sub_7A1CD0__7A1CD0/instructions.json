@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A1CD0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; SpeedTree decode: stock CFrondEngine::Compute. Builds guide LODs, verifies the shared highest-LOD vertex count <= USHRT_MAX, sets frond geometry LOD count, emits either blade or extrusion vertices once, then emits per-LOD strips using compact guides.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x7A1CFF",
-    "line": "mov     ecx, [esp+0B4h+arg_4]",
+    "line": "mov     ecx, [esp+0B4h+lightingEngine]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A1D06",
-    "line": "mov     eax, [esp+0B4h+arg_0]",
+    "line": "mov     eax, [esp+0B4h+frondGeometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7A1D12",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7A1D1A",
-    "line": "call    sub_7A1660",
+    "line": "call    OB_CFrondEngine_BuildGuideLods_010201A0; Oblivion-authoritative CFrondEngine::BuildGuideLods. Computes total/largest surface area, writes fuzzySurfaceArea at SFrondGuide+0x24, preserves large fronds, invokes the typed descending introsort twice, reinserts retained guides first, and builds per-LOD vectors of 0x30 guide copies. Unlike RT 4.1 source, this executable sorts/moves complete compact SFrondGuide records rather than a vector of SFrondGuide* pointers; no later segment-override/prohibit-reduction field participates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x7A1E9B",
-    "line": "push    2Ah ; '*'; MaxCount",
+    "line": "push    2Ah ; '*'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -937,55 +937,55 @@
   },
   {
     "ea": "0x7A1EA2",
-    "line": "lea     ecx, [esp+0BCh+var_94]",
+    "line": "lea     ecx, [esp+0BCh+result]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1EA6",
-    "line": "mov     [esp+0BCh+var_7C], 0Fh",
+    "line": "mov     [esp+0BCh+result.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A1EAE",
-    "line": "mov     [esp+0BCh+var_80], edi",
+    "line": "mov     [esp+0BCh+result.size], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1EB2",
-    "line": "mov     [esp+0BCh+var_90], 0",
+    "line": "mov     byte ptr [esp+0BCh+result.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A1EB7",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A1EBC",
-    "line": "push    edi",
+    "line": "push    edi; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1EBD",
-    "line": "lea     ecx, [esp+0B8h+var_94]",
+    "line": "lea     ecx, [esp+0B8h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1EC1",
-    "line": "push    ecx",
+    "line": "push    ecx; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1EC2",
-    "line": "lea     ecx, [esp+0BCh+var_5C]",
+    "line": "lea     ecx, [esp+0BCh+var_5C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x7A1ECD",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x7A1EF5",
-    "line": "lea     esi, [esp+0BCh+var_94]",
+    "line": "lea     esi, [esp+0BCh+result]; result",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1EF9",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,13 +1069,13 @@
   },
   {
     "ea": "0x7A1F01",
-    "line": "push    eax",
+    "line": "push    eax; message",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1F02",
-    "line": "lea     ecx, [esp+0B8h+var_5C]",
+    "line": "lea     ecx, [esp+0B8h+var_5C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x7A1F11",
-    "line": "call    sub_6F7DD0",
+    "line": "call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,19 +1123,19 @@
   },
   {
     "ea": "0x7A1F29",
-    "line": "push    ecx",
+    "line": "push    ecx; lodCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1F2A",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A1F2C",
-    "line": "call    sub_798090",
+    "line": "call    OB_CIndexedGeometry_SetNumLodLevels_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::SetNumLodLevels clears the nested unsigned-short length and unsigned-short-pointer containers plus 32-bit triangle totals, records the unsigned-short LOD count, resizes both outer vectors with empty inner values, and zeroes totals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x7A1F41",
-    "line": "push    2Ah ; '*'; MaxCount",
+    "line": "push    2Ah ; '*'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -1183,55 +1183,55 @@
   },
   {
     "ea": "0x7A1F48",
-    "line": "lea     ecx, [esp+0BCh+var_78]",
+    "line": "lea     ecx, [esp+0BCh+details]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1F4C",
-    "line": "mov     [esp+0BCh+var_60], 0Fh",
+    "line": "mov     [esp+0BCh+details.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A1F54",
-    "line": "mov     [esp+0BCh+var_64], edi",
+    "line": "mov     [esp+0BCh+details.size], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1F58",
-    "line": "mov     [esp+0BCh+var_74], 0",
+    "line": "mov     byte ptr [esp+0BCh+details.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A1F5D",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A1F62",
-    "line": "push    edi",
+    "line": "push    edi; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1F63",
-    "line": "lea     edx, [esp+0B8h+var_78]",
+    "line": "lea     edx, [esp+0B8h+details]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A1F67",
-    "line": "push    edx",
+    "line": "push    edx; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1F68",
-    "line": "lea     ecx, [esp+0BCh+var_34]",
+    "line": "lea     ecx, [esp+0BCh+var_34]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x7A1F7A",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,19 +1567,19 @@
   },
   {
     "ea": "0x7A2013",
-    "line": "push    eax",
+    "line": "push    eax; guide",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A2014",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A2016",
-    "line": "call    sub_79FD10",
+    "line": "call    OB_CFrondEngine_BuildExtrusionVertices_010201A0; Source-match: CFrondEngine::BuildExtrusionVertices. Builds extrusion profile vertices along each guide using profile/normal/tangent vectors, lighting, wind weights, and running-length T-coordinate adjustment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,19 +1681,19 @@
   },
   {
     "ea": "0x7A204A",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A204C",
-    "line": "push    edi",
+    "line": "push    edi; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A204D",
-    "line": "call    sub_794A90",
+    "line": "call    OB_CIndexedGeometry_ResetStripCounter_010201A0; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2563,7 +2563,7 @@
   },
   {
     "ea": "0x7A21F0",
-    "line": "call    sub_79A450",
+    "line": "call    OB_CFrondEngine_ComputeExtrusion_010201A0; SpeedTree decode: stock CFrondEngine::ComputeExtrusion. Builds a reduced zig-zag strip for one extrusion LOD using min length/cross segment fields and guide vertex counts. Stock 0x6C CFrondEngine has no bProhibitSegmentReduction field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x7A2293",
-    "line": "call    sub_79C540",
+    "line": "call    OB_CFrondEngine_BuildBladeVertices_010201A0; Source-match: CFrondEngine::BuildBladeVertices. Builds shared highest-LOD blade vertices for each guide/blade, with diffuse texcoords, static/dynamic lighting data, tangents/binormals, wind weights, and length-adjusted T coords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3019,19 +3019,19 @@
   },
   {
     "ea": "0x7A22C9",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A22CB",
-    "line": "push    ebp",
+    "line": "push    ebp; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A22CC",
-    "line": "call    sub_794A90",
+    "line": "call    OB_CIndexedGeometry_ResetStripCounter_010201A0; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3553,7 +3553,7 @@
   },
   {
     "ea": "0x7A23C3",
-    "line": "call    sub_79A390",
+    "line": "call    OB_CFrondEngine_ComputeBlade_010201A0; SpeedTree decode: stock CFrondEngine::ComputeBlade. For each blade, emits one strip over the shared highest-LOD vertices for the requested LOD. Fade-hint storage from later 4.1 is not visible in this compact stock writer path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3646,5 +3646,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC760",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC766",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC76B",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC771",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC776",
+    "line": "lea     ecx, [ebp-78h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC779",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC77E",
+    "line": "mov     edx, [esp+lightingEngine]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC782",
+    "line": "lea     eax, [edx-0A4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC788",
+    "line": "mov     ecx, [edx-0A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC78E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC790",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC795",
+    "line": "mov     eax, offset stru_AF5B40",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC79A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

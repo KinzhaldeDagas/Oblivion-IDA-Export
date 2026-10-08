@@ -1,4 +1,4 @@
-0x7D34C0: push    ebp
+0x7D34C0: push    ebp; Test overlap between two camera/frustum volumes using corners, planes, and edge intersections.
 0x7D34C1: mov     ebp, esp
 0x7D34C3: and     esp, 0FFFFFFF8h
 0x7D34C6: push    0FFFFFFFFh
@@ -621,7 +621,7 @@
 0x7D3F05: mov     edx, [esp+314h+var_29C]
 0x7D3F09: mov     [esp+314h+var_23C], edx
 0x7D3F10: fxch    st(5)
-0x7D3F12: push    0
+0x7D3F12: push    0; visibleArray
 0x7D3F14: fstp    dword ptr [esp+318h+var_2B8]
 0x7D3F18: fxch    st(2)
 0x7D3F1A: fstp    dword ptr [esp+318h+var_290]
@@ -678,26 +678,26 @@
 0x7D3FEE: mov     [esp+318h+var_234], ecx
 0x7D3FF5: fstp    [esp+318h+var_29C]
 0x7D3FF9: mov     edx, [esp+318h+var_29C]
-0x7D3FFD: lea     ecx, [esp+318h+var_188]
+0x7D3FFD: lea     ecx, [esp+318h+self]; self
 0x7D4004: mov     [esp+318h+var_230], edx
-0x7D400B: call    NiCullingProcess_NiCullingProcess
-0x7D4010: mov     [esp+314h+var_188.Camera], esi
+0x7D400B: call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
+0x7D4010: mov     [esp+314h+self.Camera], esi
 0x7D4017: add     esi, 0ECh ; 'ì'
 0x7D401D: push    esi; a2
-0x7D401E: lea     ecx, [esp+318h+var_188]; this
+0x7D401E: lea     ecx, [esp+318h+self]; this
 0x7D4025: mov     [esp+318h+var_4], 0
-0x7D4030: call    NiCullingProcess__SetFrustum
+0x7D4030: call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.
 0x7D4035: mov     ecx, 19h
-0x7D403A: lea     esi, [esp+314h+var_188.Planes]
+0x7D403A: lea     esi, [esp+314h+self.Planes]
 0x7D4041: lea     edi, [esp+314h+var_F8]
 0x7D4048: rep movsd
-0x7D404A: mov     [esp+314h+var_188.Camera], ebx
+0x7D404A: mov     [esp+314h+self.Camera], ebx
 0x7D4051: add     ebx, 0ECh ; 'ì'
 0x7D4057: push    ebx; a2
-0x7D4058: lea     ecx, [esp+318h+var_188]; this
-0x7D405F: call    NiCullingProcess__SetFrustum
+0x7D4058: lea     ecx, [esp+318h+self]; this
+0x7D405F: call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.
 0x7D4064: mov     ecx, 19h
-0x7D4069: lea     esi, [esp+314h+var_188.Planes]
+0x7D4069: lea     esi, [esp+314h+self.Planes]
 0x7D4070: lea     edi, [esp+314h+var_90]
 0x7D4077: rep movsd
 0x7D4079: lea     esi, [esp+314h+var_1F0]
@@ -758,12 +758,12 @@
 0x7D4136: cmp     ecx, 6
 0x7D4139: jl      short loc_7D4101
 0x7D413B: fstp    st(2)
-0x7D413D: lea     ecx, [esp+314h+var_188]; this
+0x7D413D: lea     ecx, [esp+314h+self]; this
 0x7D4144: fstp    st
 0x7D4146: mov     [esp+314h+var_4], 0FFFFFFFFh
 0x7D4151: fstp    st
 0x7D4153: fstp    st
-0x7D4155: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x7D4155: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x7D415A: mov     al, 1
 0x7D415C: jmp     loc_7D4546
 0x7D4161: fstp    st
@@ -1018,11 +1018,11 @@
 0x7D44C1: fstp    st(1)
 0x7D44C3: fstp    st
 0x7D44C5: fstp    st(2)
-0x7D44C7: lea     ecx, [esp+314h+var_188]; this
+0x7D44C7: lea     ecx, [esp+314h+self]; this
 0x7D44CE: fstp    st
 0x7D44D0: mov     [esp+314h+var_4], 0FFFFFFFFh
 0x7D44DB: fstp    st
-0x7D44DD: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x7D44DD: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x7D44E2: mov     al, 1
 0x7D44E4: jmp     short loc_7D4546
 0x7D44E6: test    ecx, ecx
@@ -1048,10 +1048,10 @@
 0x7D451E: cmp     eax, 2
 0x7D4521: mov     [esp+314h+var_2BC], eax
 0x7D4525: jl      loc_7D418A
-0x7D452B: lea     ecx, [esp+314h+var_188]; this
+0x7D452B: lea     ecx, [esp+314h+self]; this
 0x7D4532: fstp    st
 0x7D4534: mov     [esp+314h+var_4], 0FFFFFFFFh
-0x7D453F: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x7D453F: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x7D4544: xor     al, al
 0x7D4546: mov     ecx, [esp+314h+var_C]
 0x7D454D: mov     large fs:0, ecx
@@ -1065,3 +1065,16 @@
 0x7D4566: mov     esp, ebp
 0x7D4568: pop     ebp
 0x7D4569: retn    8
+0x9CEAC0: lea     ecx, [ebp+self]; this
+0x9CEAC6: jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
+0x9CEACB: mov     edx, [esp-4+arg_4]
+0x9CEACF: lea     eax, [edx-304h]
+0x9CEAD5: mov     ecx, [edx-308h]
+0x9CEADB: xor     ecx, eax
+0x9CEADD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEAE2: add     eax, 0Ch
+0x9CEAE5: mov     ecx, [edx-8]
+0x9CEAE8: xor     ecx, eax
+0x9CEAEA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEAEF: mov     eax, offset stru_AF7984
+0x9CEAF4: jmp     ___CxxFrameHandler3

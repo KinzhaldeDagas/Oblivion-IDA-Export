@@ -2,12 +2,12 @@
 0x7E61C3: push    esi
 0x7E61C4: push    edi
 0x7E61C5: mov     edi, ecx
-0x7E61C7: mov     ecx, [esp+3Ch+arg_0]
-0x7E61CB: call    sub_7ED2A0
+0x7E61C7: mov     ecx, [esp+3Ch+arg_0]; this
+0x7E61CB: call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.
 0x7E61D0: lea     ecx, [esp+3Ch+arg_0]
 0x7E61D4: push    ecx
 0x7E61D5: mov     ecx, eax
-0x7E61D7: call    sub_405AD0
+0x7E61D7: call    ShadowSceneLight_GetLightRef
 0x7E61DC: mov     esi, [eax]
 0x7E61DE: mov     eax, [esp+3Ch+arg_0]
 0x7E61E2: test    eax, eax

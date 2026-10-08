@@ -1,4 +1,4 @@
-0x55F4C0: push    ebx
+0x55F4C0: push    ebx; LockFreeMap vtable slot +0x0C: computes bucket/hash then inserts or updates key/value through 0x55F120.
 0x55F4C1: push    esi
 0x55F4C2: push    edi
 0x55F4C3: mov     edi, ecx
@@ -25,7 +25,7 @@
 0x55F4F7: call    eax
 0x55F4F9: push    eax; LONG
 0x55F4FA: mov     ecx, esi
-0x55F4FC: call    sub_55F120
+0x55F4FC: call    sub_55F120; LockFreeMap insert/update core: insert new 12-byte node or update existing value when replace flag is set.
 0x55F501: pop     edi
 0x55F502: pop     esi
 0x55F503: pop     ebx

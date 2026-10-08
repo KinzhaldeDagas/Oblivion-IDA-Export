@@ -45,7 +45,7 @@
 0x546236: fadd    [esp+0Ch+var_4]
 0x54623A: fadd    [esp+0Ch+aggressionStat]
 0x54623E: fadd    [esp+0Ch+var_C]
-0x546241: call    Double_To_SInt32
+0x546241: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x546246: cmp     eax, 64h ; 'd'
 0x546249: jle     short loc_546250
 0x54624B: mov     eax, 64h ; 'd'

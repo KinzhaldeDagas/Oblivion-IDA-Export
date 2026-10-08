@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4D391E",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4D3932",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4D3976",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x4D397F",
-    "line": "push    edi",
+    "line": "push    edi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D3980",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D3982",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4D3988",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4D39A9",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x4D39BF",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x4D39EF",
-    "line": "push    0",
+    "line": "push    0; useSpellEffectExtraLight",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D39F1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D39F3",
-    "line": "call    sub_4D80C0",
+    "line": "call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.",
     "mnemonic": "call",
     "size": 5
   },

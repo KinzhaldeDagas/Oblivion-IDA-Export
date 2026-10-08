@@ -1,4 +1,4 @@
-0x41FB00: push    22h ; '"'; a2
+0x41FB00: push    22h ; '"'; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x41FB02: call    BaseExtraList_GetExtraData
 0x41FB07: test    eax, eax
 0x41FB09: jz      short loc_41FB0F

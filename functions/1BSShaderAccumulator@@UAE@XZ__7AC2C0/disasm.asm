@@ -19,8 +19,8 @@
 0x7AC2FB: lea     edi, [ebx+108h]
 0x7AC301: mov     ebp, 1A3h
 0x7AC306: xor     esi, esi
-0x7AC308: lea     ecx, [edi-4]
-0x7AC30B: call    sub_7A9C30
+0x7AC308: lea     ecx, [edi-4]; this
+0x7AC30B: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC310: mov     eax, [edi]
 0x7AC312: mov     [edi+8], eax
 0x7AC315: mov     [edi], esi
@@ -30,16 +30,16 @@
 0x7AC320: sub     ebp, 1
 0x7AC323: jnz     short loc_7AC308
 0x7AC325: lea     edi, [ebx+2200h]
-0x7AC32B: mov     ecx, edi
-0x7AC32D: call    sub_7A9C30
+0x7AC32B: mov     ecx, edi; this
+0x7AC32D: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC332: mov     ecx, [edi+4]
 0x7AC335: mov     [edi+0Ch], ecx
 0x7AC338: mov     [edi+4], esi
 0x7AC33B: mov     [edi+8], esi
 0x7AC33E: mov     [edi+10h], esi
 0x7AC341: lea     edi, [ebx+2214h]
-0x7AC347: mov     ecx, edi
-0x7AC349: call    sub_7A9C30
+0x7AC347: mov     ecx, edi; this
+0x7AC349: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC34E: mov     edx, [edi+4]
 0x7AC351: mov     [edi+0Ch], edx
 0x7AC354: mov     [edi+4], esi
@@ -65,8 +65,8 @@
 0x7AC387: add     dword ptr [ebp+0Ch], 0FFFFFFFFh
 0x7AC38B: cmp     edi, esi
 0x7AC38D: jz      short loc_7AC3B4
-0x7AC38F: mov     ecx, edi
-0x7AC391: call    sub_7A9C30
+0x7AC38F: mov     ecx, edi; this
+0x7AC391: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC396: mov     ecx, [edi+4]
 0x7AC399: mov     [edi+0Ch], ecx
 0x7AC39C: mov     [edi+4], esi
@@ -74,7 +74,7 @@
 0x7AC3A2: mov     [edi+10h], esi
 0x7AC3A5: push    edi
 0x7AC3A6: mov     dword ptr [edi], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
-0x7AC3AC: call    FormHeapFree
+0x7AC3AC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC3B1: add     esp, 4
 0x7AC3B4: cmp     [ebx+48h], esi
 0x7AC3B7: jnz     short loc_7AC365
@@ -100,8 +100,8 @@
 0x7AC3E9: add     dword ptr [ebp+0Ch], 0FFFFFFFFh
 0x7AC3ED: cmp     edi, esi
 0x7AC3EF: jz      short loc_7AC416
-0x7AC3F1: mov     ecx, edi
-0x7AC3F3: call    sub_7A9C30
+0x7AC3F1: mov     ecx, edi; this
+0x7AC3F3: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC3F8: mov     ecx, [edi+4]
 0x7AC3FB: mov     [edi+0Ch], ecx
 0x7AC3FE: mov     [edi+4], esi
@@ -109,7 +109,7 @@
 0x7AC404: mov     [edi+10h], esi
 0x7AC407: push    edi
 0x7AC408: mov     dword ptr [edi], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
-0x7AC40E: call    FormHeapFree
+0x7AC40E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC413: add     esp, 4
 0x7AC416: cmp     [ebx+58h], esi
 0x7AC419: jnz     short loc_7AC3C7
@@ -174,16 +174,16 @@
 0x7AC4C5: add     dword ptr [ebp+0Ch], 0FFFFFFFFh
 0x7AC4C9: cmp     edi, esi
 0x7AC4CB: jz      short loc_7AC512
-0x7AC4CD: mov     ecx, edi
-0x7AC4CF: call    sub_7A9C30
+0x7AC4CD: mov     ecx, edi; this
+0x7AC4CF: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC4D4: mov     ecx, [edi+4]
 0x7AC4D7: mov     [edi+0Ch], ecx
 0x7AC4DA: lea     ebp, [edi+14h]
-0x7AC4DD: mov     ecx, ebp
+0x7AC4DD: mov     ecx, ebp; this
 0x7AC4DF: mov     [edi+4], esi
 0x7AC4E2: mov     [edi+8], esi
 0x7AC4E5: mov     [edi+10h], esi
-0x7AC4E8: call    sub_7A9C30
+0x7AC4E8: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC4ED: mov     edx, [ebp+4]
 0x7AC4F0: mov     [ebp+0Ch], edx
 0x7AC4F3: mov     [ebp+4], esi
@@ -192,15 +192,15 @@
 0x7AC4FC: push    edi
 0x7AC4FD: mov     dword ptr [ebp+0], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
 0x7AC504: mov     dword ptr [edi], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVNiGeometry@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,NiGeometry *>::`vftable'
-0x7AC50A: call    FormHeapFree
+0x7AC50A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC50F: add     esp, 4
 0x7AC512: cmp     [ebx+70h], esi
 0x7AC515: jnz     short loc_7AC4A0
 0x7AC517: mov     edi, [ebx+78h]
 0x7AC51A: cmp     edi, esi
 0x7AC51C: jz      short loc_7AC54A
-0x7AC51E: mov     ecx, edi
-0x7AC520: call    sub_7A9C30
+0x7AC51E: mov     ecx, edi; this
+0x7AC520: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC525: mov     eax, [edi+4]
 0x7AC528: mov     [edi+0Ch], eax
 0x7AC52B: mov     [edi+4], esi
@@ -211,27 +211,27 @@
 0x7AC539: jz      short loc_7AC54A
 0x7AC53B: push    eax
 0x7AC53C: mov     dword ptr [eax], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
-0x7AC542: call    FormHeapFree
+0x7AC542: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC547: add     esp, 4
 0x7AC54A: lea     edi, [ebx+90h]
-0x7AC550: mov     ecx, edi
-0x7AC552: call    sub_7A9C30
+0x7AC550: mov     ecx, edi; this
+0x7AC552: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC557: mov     ecx, [edi+4]
 0x7AC55A: mov     [edi+0Ch], ecx
 0x7AC55D: mov     [edi+4], esi
 0x7AC560: mov     [edi+8], esi
 0x7AC563: mov     [edi+10h], esi
 0x7AC566: lea     edi, [ebx+7Ch]
-0x7AC569: mov     ecx, edi
-0x7AC56B: call    sub_7A9C30
+0x7AC569: mov     ecx, edi; this
+0x7AC56B: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC570: mov     edx, [edi+4]
 0x7AC573: mov     [edi+0Ch], edx
 0x7AC576: mov     [edi+4], esi
 0x7AC579: mov     [edi+8], esi
 0x7AC57C: mov     [edi+10h], esi
 0x7AC57F: lea     edi, [ebx+0A4h]
-0x7AC585: mov     ecx, edi
-0x7AC587: call    sub_7A9C30
+0x7AC585: mov     ecx, edi; this
+0x7AC587: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC58C: mov     eax, [edi+4]
 0x7AC58F: mov     [edi+0Ch], eax
 0x7AC592: mov     [edi+4], esi
@@ -249,8 +249,8 @@
 0x7AC5B5: mov     edi, [eax+4]
 0x7AC5B8: cmp     edi, esi
 0x7AC5BA: jz      short loc_7AC5E9
-0x7AC5BC: mov     ecx, edi
-0x7AC5BE: call    sub_7A9C30
+0x7AC5BC: mov     ecx, edi; this
+0x7AC5BE: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AC5C3: mov     ecx, [edi+4]
 0x7AC5C6: mov     edx, [esp+28h+var_14]
 0x7AC5CA: mov     [edi+0Ch], ecx
@@ -266,7 +266,7 @@
 0x7AC5E3: call    edx
 0x7AC5E5: mov     eax, [esp+28h+var_14]
 0x7AC5E9: push    eax
-0x7AC5EA: call    FormHeapFree
+0x7AC5EA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC5EF: add     esp, 4
 0x7AC5F2: cmp     ebp, esi
 0x7AC5F4: jnz     short loc_7AC5A5
@@ -288,7 +288,7 @@
 0x7AC61F: mov     [ebp+8], esi
 0x7AC622: mov     eax, [ebx+21E8h]
 0x7AC628: push    eax
-0x7AC629: call    FormHeapFree
+0x7AC629: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC62E: add     esp, 4
 0x7AC631: cmp     [ebx+2238h], esi
 0x7AC637: jz      short loc_7AC692
@@ -307,7 +307,7 @@
 0x7AC65A: call    eax
 0x7AC65C: mov     [ebp+14h], esi
 0x7AC65F: push    ebp
-0x7AC660: call    FormHeapFree
+0x7AC660: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC665: add     esp, 4
 0x7AC668: mov     ecx, [edi+4]
 0x7AC66B: mov     eax, [ecx]
@@ -361,7 +361,7 @@
 0x7AC6F2: mov     ecx, edi; void *
 0x7AC6F4: call    sub_6C4090
 0x7AC6F9: push    edi
-0x7AC6FA: call    FormHeapFree
+0x7AC6FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AC6FF: add     esp, 4
 0x7AC702: mov     [ebx+2264h], esi
 0x7AC708: lea     edi, [ebx+2254h]
@@ -479,7 +479,7 @@
 0x7AC872: call    eax
 0x7AC874: cmp     ebp, esi
 0x7AC876: jnz     short loc_7AC865
-0x7AC878: push    offset sub_7A9AE0; void (__thiscall *)(void *)
+0x7AC878: push    offset BSTPersistentRenderPassList_Destructor; void (__thiscall *)(void *)
 0x7AC87D: push    1A3h; int
 0x7AC882: push    14h; unsigned int
 0x7AC884: lea     ecx, [ebx+104h]
@@ -566,3 +566,95 @@
 0x7AC990: pop     ebx
 0x7AC991: add     esp, 14h
 0x7AC994: retn
+0x7332B0: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVNiGeometry@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiGeometry *>::`vftable'
+0x7332B6: retn
+0x7A9AF0: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
+0x7A9AF6: retn
+0x7A9B00: mov     dword ptr [ecx], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVNiGeometry@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,NiGeometry *>::`vftable'
+0x7A9B06: retn
+0x7A9B10: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAUGeometryGroup@BSShaderAccumulator@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,BSShaderAccumulator::GeometryGroup *>::`vftable'
+0x7A9B16: retn
+0x7A9B20: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAUImmediateGeometryGroup@BSShaderAccumulator@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,BSShaderAccumulator::ImmediateGeometryGroup *>::`vftable'
+0x7A9B26: retn
+0x7A9B30: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVShadowVolumeRPList@BSShaderAccumulator@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,BSShaderAccumulator::ShadowVolumeRPList *>::`vftable'
+0x7A9B36: retn
+0x7A9B40: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAUReferenceVolume@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,ReferenceVolume *>::`vftable'
+0x7A9B46: retn
+0x9CD370: mov     ecx, [ebp-10h]
+0x9CD373: jmp     sub_71A910
+0x9CD378: mov     ecx, [ebp-10h]
+0x9CD37B: add     ecx, 3Ch ; '<'
+0x9CD37E: jmp     j_??1?$NiTPointerList@PAUGeometryGroup@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::GeometryGroup *>::~NiTPointerList<BSShaderAccumulator::GeometryGroup *>(void)
+0x9CD383: mov     ecx, [ebp-10h]
+0x9CD386: add     ecx, 4Ch ; 'L'
+0x9CD389: jmp     j_??1?$NiTPointerList@PAUGeometryGroup@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::GeometryGroup *>::~NiTPointerList<BSShaderAccumulator::GeometryGroup *>(void)
+0x9CD38E: mov     ecx, [ebp-10h]
+0x9CD391: add     ecx, 64h ; 'd'
+0x9CD394: jmp     j_??1?$NiTPointerList@PAUImmediateGeometryGroup@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::ImmediateGeometryGroup *>::~NiTPointerList<BSShaderAccumulator::ImmediateGeometryGroup *>(void)
+0x9CD399: mov     ecx, [ebp-10h]
+0x9CD39C: add     ecx, 7Ch ; '|'; void *
+0x9CD39F: jmp     BSTPersistentRenderPassList_Destructor; ArrayConstructor element destructor callback for BSShaderAccumulator selector buckets. Restores the BSTPersistentList<...,BSShaderProperty::RenderPass *> vtable; accumulator cleanup owns node recycling and never destroys borrowed property RenderPass payloads here.
+0x9CD3A4: mov     ecx, [ebp-10h]
+0x9CD3A7: add     ecx, 90h; void *
+0x9CD3AD: jmp     BSTPersistentRenderPassList_Destructor; ArrayConstructor element destructor callback for BSShaderAccumulator selector buckets. Restores the BSTPersistentList<...,BSShaderProperty::RenderPass *> vtable; accumulator cleanup owns node recycling and never destroys borrowed property RenderPass payloads here.
+0x9CD3B2: mov     ecx, [ebp-10h]
+0x9CD3B5: add     ecx, 0A4h ; '¤'; void *
+0x9CD3BB: jmp     BSTPersistentRenderPassList_Destructor; ArrayConstructor element destructor callback for BSShaderAccumulator selector buckets. Restores the BSTPersistentList<...,BSShaderProperty::RenderPass *> vtable; accumulator cleanup owns node recycling and never destroys borrowed property RenderPass payloads here.
+0x9CD3C0: push    offset BSTPersistentRenderPassList_Destructor; void (__thiscall *)(void *)
+0x9CD3C5: push    1A3h; int
+0x9CD3CA: push    14h; unsigned int
+0x9CD3CC: mov     eax, [ebp-10h]
+0x9CD3CF: add     eax, 104h
+0x9CD3D4: push    eax; void *
+0x9CD3D5: call    $LN21
+0x9CD3DA: retn
+0x9CD3DB: mov     ecx, [ebp-10h]
+0x9CD3DE: add     ecx, 21C0h
+0x9CD3E4: jmp     j_??1?$NiTPointerList@PAVRenderPass@BSShaderProperty@@@@UAE@XZ; NiTPointerList<BSShaderProperty::RenderPass *>::~NiTPointerList<BSShaderProperty::RenderPass *>(void)
+0x9CD3E9: mov     ecx, [ebp-10h]
+0x9CD3EC: add     ecx, 21D0h
+0x9CD3F2: jmp     j_??1?$NiTPointerList@PAVShadowVolumeRPList@BSShaderAccumulator@@@@UAE@XZ; NiTPointerList<BSShaderAccumulator::ShadowVolumeRPList *>::~NiTPointerList<BSShaderAccumulator::ShadowVolumeRPList *>(void)
+0x9CD3F7: mov     ecx, [ebp-10h]
+0x9CD3FA: add     ecx, 21ECh
+0x9CD400: jmp     loc_7A9B00
+0x9CD405: mov     ecx, [ebp-10h]
+0x9CD408: add     ecx, 2200h
+0x9CD40E: jmp     loc_7A9B00
+0x9CD413: mov     ecx, [ebp-10h]
+0x9CD416: add     ecx, 2214h
+0x9CD41C: jmp     loc_7A9B00
+0x9CD421: mov     ecx, [ebp-10h]
+0x9CD424: add     ecx, 2228h; slot
+0x9CD42A: jmp     NiPointerSlot_Release
+0x9CD42F: mov     ecx, [ebp-10h]
+0x9CD432: add     ecx, 222Ch
+0x9CD438: jmp     j_??1?$NiTPointerList@PAUReferenceVolume@@@@UAE@XZ; NiTPointerList<ReferenceVolume *>::~NiTPointerList<ReferenceVolume *>(void)
+0x9CD43D: mov     ecx, [ebp-10h]
+0x9CD440: add     ecx, 2244h
+0x9CD446: jmp     j_??1?$NiTPointerList@PAVNiGeometry@@@@UAE@XZ; NiTPointerList<NiGeometry *>::~NiTPointerList<NiGeometry *>(void)
+0x9CD44B: mov     ecx, [ebp-10h]
+0x9CD44E: add     ecx, 2254h
+0x9CD454: jmp     j_??1?$NiTPointerList@PAVNiGeometry@@@@UAE@XZ; NiTPointerList<NiGeometry *>::~NiTPointerList<NiGeometry *>(void)
+0x9CD459: mov     ecx, [ebp-14h]
+0x9CD45C: jmp     loc_7332B0
+0x9CD461: mov     ecx, [ebp-14h]
+0x9CD464: jmp     loc_7332B0
+0x9CD469: mov     ecx, [ebp-14h]
+0x9CD46C: jmp     loc_7A9B40
+0x9CD471: mov     ecx, [ebp-14h]
+0x9CD474: jmp     loc_7A9B30
+0x9CD479: mov     ecx, [ebp-14h]
+0x9CD47C: jmp     loc_7A9AF0
+0x9CD481: mov     ecx, [ebp-14h]
+0x9CD484: jmp     loc_7A9B20
+0x9CD489: mov     ecx, [ebp-14h]
+0x9CD48C: jmp     loc_7A9B10
+0x9CD491: mov     ecx, [ebp-14h]
+0x9CD494: jmp     loc_7A9B10
+0x9CD499: mov     edx, [esp+arg_4]
+0x9CD49D: lea     eax, [edx-18h]
+0x9CD4A0: mov     ecx, [edx-1Ch]
+0x9CD4A3: xor     ecx, eax
+0x9CD4A5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD4AA: mov     eax, offset stru_AF66C0
+0x9CD4AF: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x656C90",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+currentFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x656C9B",
-    "line": "mov     ebx, [esp+8Ch+arg_8]",
+    "line": "mov     ebx, [esp+8Ch+owner]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x656CA4",
-    "line": "push    ebx",
+    "line": "push    ebx; owner",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,31 +49,31 @@
   },
   {
     "ea": "0x656CA7",
-    "line": "mov     ecx, [esp+98h+arg_0]",
+    "line": "mov     ecx, [esp+98h+changeMask]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x656CAE",
-    "line": "push    eax",
+    "line": "push    eax; currentFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x656CAF",
-    "line": "push    ecx",
+    "line": "push    ecx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x656CB0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x656CB2",
-    "line": "call    sub_60CF80",
+    "line": "call    BaseProcess_FinishInitLoadGame",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x656D1E",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x656D20",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x656D25",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x656D2C",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x656D2E",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,19 +391,19 @@
   },
   {
     "ea": "0x656D4F",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x656D51",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x656D56",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x656D5D",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x656D5F",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x656DCD",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x656DD7",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x656DD9",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x656E22",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x656E2B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x6570A9",
-    "line": "fstp    [esp+9Ch+var_9C]; float",
+    "line": "fstp    [esp+9Ch+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x6570C9",
-    "line": "fstp    [esp+9Ch+var_9C]; float",
+    "line": "fstp    [esp+9Ch+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x6570E3",
-    "line": "lea     ecx, [esp+9Ch+var_48]",
+    "line": "lea     ecx, [esp+9Ch+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1963,13 +1963,13 @@
   },
   {
     "ea": "0x6570F9",
-    "line": "fstp    [esp+9Ch+var_9C]; float",
+    "line": "fstp    [esp+9Ch+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6570FC",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x6571A0",
-    "line": "fstp    [esp+9Ch+var_9C]",
+    "line": "fstp    [esp+9Ch+angleZ]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x6571B9",
-    "line": "fstp    [esp+9Ch+var_9C]; float",
+    "line": "fstp    [esp+9Ch+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2299,7 +2299,7 @@
   },
   {
     "ea": "0x6571C9",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x6571D5",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x6571DC",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x65721E",
-    "line": "mov     ebx, [esp+98h+arg_8]",
+    "line": "mov     ebx, [esp+98h+owner]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2659,7 +2659,7 @@
   },
   {
     "ea": "0x65727E",
-    "line": "call    sub_88D070",
+    "line": "call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,7 +2701,7 @@
   },
   {
     "ea": "0x657290",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2713,19 +2713,19 @@
   },
   {
     "ea": "0x65729B",
-    "line": "push    edi",
+    "line": "push    edi; linkContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65729C",
-    "line": "push    ecx",
+    "line": "push    ecx; activeEffectList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65729D",
-    "line": "call    ActiveEffect_Base_PostLinkAEList",
+    "line": "call    ActiveEffect_Base_PostLinkAEList; Verified post-link entry iterates the target ActiveEffect EffectNode list and dispatches each ActiveEffect virtual +0x1C with the target/reference linkContext. TESObjectREFR_PostLinkModifiedExtraList calls this for a linked NonActorMagicTarget list (null context); actor/player post-link paths pass their reference context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2833,19 +2833,19 @@
   },
   {
     "ea": "0x6572D6",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6572DC",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6572DD",
-    "line": "call    sub_453910",
+    "line": "call    TESSaveLoadGame_QueueDeferredDeletion",
     "mnemonic": "call",
     "size": 5
   },

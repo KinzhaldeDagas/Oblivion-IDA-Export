@@ -10,7 +10,6 @@
 0x903232: push    ebp
 0x903233: mov     ebp, [esp+10h+arg_4]
 0x903237: jmp     short loc_903240
-0x903239: align 10h
 0x903240: mov     eax, [edi+0Ch]
 0x903243: mov     ecx, [eax+esi*4]
 0x903246: mov     eax, [esp+10h+arg_0]

@@ -56,10 +56,10 @@
 0x5FE424: jmp     short loc_5FE428
 0x5FE426: xor     eax, eax
 0x5FE428: push    ebp
-0x5FE429: push    eax
-0x5FE42A: push    4D524843h
-0x5FE42F: lea     ecx, [esi+68h]
-0x5FE432: call    sub_6A24B0
+0x5FE429: push    eax; casterFilterOrNull
+0x5FE42A: push    4D524843h; effectCode
+0x5FE42F: lea     ecx, [esi+68h]; this
+0x5FE432: call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.
 0x5FE437: mov     eax, [esi]
 0x5FE439: mov     edx, [eax+330h]
 0x5FE43F: mov     ecx, esi
@@ -122,10 +122,10 @@
 0x5FE4E8: lea     ebx, [esi+44h]
 0x5FE4EB: push    edi
 0x5FE4EC: mov     ecx, ebx
-0x5FE4EE: call    sub_420E00
-0x5FE4F3: push    edi
-0x5FE4F4: mov     ecx, ebx
-0x5FE4F6: call    sub_420ED0
+0x5FE4EE: call    ExtraDataList_AddFriendHit; Oblivion-specific friend-hit behavior: gets/creates ExtraFriendHitList and increments the hit count for the supplied actor, creating a {actor,count,timer} entry if needed.
+0x5FE4F3: push    edi; actor
+0x5FE4F4: mov     ecx, ebx; this
+0x5FE4F6: call    ExtraDataList_GetFriendHitCount; Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.
 0x5FE4FB: cmp     eax, ds:0B368A8h
 0x5FE501: jge     loc_5FE5C4
 0x5FE507: pop     ebp
@@ -175,7 +175,7 @@
 0x5FE584: jz      loc_5FE6EF
 0x5FE58A: push    edi
 0x5FE58B: lea     ecx, [esi+44h]
-0x5FE58E: call    sub_420EB0
+0x5FE58E: call    ExtraDataList_RemoveFriendHit; Removes the friend-hit list entry whose actor pointer matches the supplied actor.
 0x5FE593: test    bl, bl
 0x5FE595: jnz     short loc_5FE5A8
 0x5FE597: test    ebp, ebp
@@ -202,7 +202,7 @@
 0x5FE5CF: push    edi; int
 0x5FE5D0: push    0; int
 0x5FE5D2: mov     ecx, esi; int
-0x5FE5D4: call    Actor_GetDetectionLevel
+0x5FE5D4: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x5FE5D9: push    0; int
 0x5FE5DB: push    1; int
 0x5FE5DD: push    1; int
@@ -212,7 +212,7 @@
 0x5FE5E8: push    edi; int
 0x5FE5E9: push    1; int
 0x5FE5EB: mov     ecx, esi; int
-0x5FE5ED: call    Actor_GetDetectionLevel
+0x5FE5ED: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x5FE5F2: mov     ebx, eax
 0x5FE5F4: mov     dword ptr [esp+30h+a7], ebx
 0x5FE5F8: fild    dword ptr [esp+30h+a7]
@@ -252,7 +252,7 @@
 0x5FE654: test    ebx, ebx
 0x5FE656: mov     ecx, esi; this
 0x5FE658: jle     loc_5FEA7C
-0x5FE65E: call    sub_5E6C60
+0x5FE65E: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x5FE663: test    al, al
 0x5FE665: jz      loc_5FE7A0
 0x5FE66B: cmp     [esp+44h+var_34], 0
@@ -304,21 +304,21 @@
 0x5FE704: jnz     short loc_5FE76F
 0x5FE706: push    edi
 0x5FE707: lea     ecx, [esi+44h]
-0x5FE70A: call    sub_420E00
+0x5FE70A: call    ExtraDataList_AddFriendHit; Oblivion-specific friend-hit behavior: gets/creates ExtraFriendHitList and increments the hit count for the supplied actor, creating a {actor,count,timer} entry if needed.
 0x5FE70F: test    ebp, ebp
 0x5FE711: mov     edx, ds:0B368A8h
 0x5FE717: mov     [esp+30h+var_1C], edx
 0x5FE71B: jz      short loc_5FE736
-0x5FE71D: push    edi
-0x5FE71E: lea     ecx, [ebp+15Ch]
-0x5FE724: call    sub_446C30
+0x5FE71D: push    edi; item
+0x5FE71E: lea     ecx, [ebp+15Ch]; this
+0x5FE724: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x5FE729: test    al, al
 0x5FE72B: jz      short loc_5FE736
 0x5FE72D: mov     eax, ds:0B368E0h
 0x5FE732: mov     [esp+30h+var_1C], eax
-0x5FE736: push    edi
-0x5FE737: lea     ecx, [esi+44h]
-0x5FE73A: call    sub_420ED0
+0x5FE736: push    edi; actor
+0x5FE737: lea     ecx, [esi+44h]; this
+0x5FE73A: call    ExtraDataList_GetFriendHitCount; Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.
 0x5FE73F: cmp     eax, [esp+30h+var_1C]
 0x5FE743: setnle  al
 0x5FE746: test    al, al
@@ -333,7 +333,7 @@
 0x5FE760: push    0; float
 0x5FE762: push    0; char
 0x5FE764: push    edi; int
-0x5FE765: call    sub_616190
+0x5FE765: call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x5FE76A: jmp     loc_5FE593
 0x5FE76F: mov     edx, [esi]
 0x5FE771: mov     eax, [edx+308h]
@@ -426,7 +426,7 @@
 0x5FE879: mov     ecx, eax
 0x5FE87B: call    sub_624C90
 0x5FE880: mov     ecx, edi; this
-0x5FE882: call    sub_5E6C60
+0x5FE882: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x5FE887: test    al, al
 0x5FE889: jnz     loc_5FE92C
 0x5FE88F: mov     edx, [esi]
@@ -444,20 +444,20 @@
 0x5FE8AD: call    Actor_IsCreature
 0x5FE8B2: test    al, al
 0x5FE8B4: jz      short loc_5FE8F1
-0x5FE8B6: lea     ecx, [esi+44h]
-0x5FE8B9: call    ExtraDataList_GetOwner
+0x5FE8B6: lea     ecx, [esi+44h]; this
+0x5FE8B9: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x5FE8BE: test    eax, eax
 0x5FE8C0: jz      short loc_5FE92C
-0x5FE8C2: push    1
-0x5FE8C4: push    edi
-0x5FE8C5: mov     ecx, esi
-0x5FE8C7: call    TESOBjectREFR_IsOwnedBy
+0x5FE8C2: push    1; useFactionOwnership
+0x5FE8C4: push    edi; actorReference
+0x5FE8C5: mov     ecx, esi; reference
+0x5FE8C7: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x5FE8CC: test    al, al
 0x5FE8CE: jnz     short loc_5FE92C
 0x5FE8D0: mov     ebp, [edi]
-0x5FE8D2: lea     ecx, [esi+44h]
+0x5FE8D2: lea     ecx, [esi+44h]; this
 0x5FE8D5: add     ebp, 238h
-0x5FE8DB: call    ExtraDataList_GetOwner
+0x5FE8DB: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x5FE8E0: mov     edx, [ebp+0]
 0x5FE8E3: push    eax
 0x5FE8E4: push    0
@@ -474,7 +474,7 @@
 0x5FE8FC: mov     ecx, esi
 0x5FE8FE: call    edx
 0x5FE900: jmp     short loc_5FE92C
-0x5FE902: mov     ecx, offset fCrimeDispAttack
+0x5FE902: mov     ecx, offset g_fCrimeDispAttack_Value; Verified crime setting value used by605F60/606140; registration 0x9ebc20 contains matching GMST key. This is value storage, not a complete Setting object declaration.
 0x5FE907: call    GameSetting_GetSafeFloatPointer
 0x5FE90C: fld     dword ptr [eax]
 0x5FE90E: mov     eax, [esi]
@@ -520,7 +520,7 @@
 0x5FE982: push    1
 0x5FE984: lea     ecx, [ebx+24h]
 0x5FE987: call    TESActorBaseData_SetSharedPlayerFactionFlags
-0x5FE98C: cmp     byte ptr [esp+8Ch+var_64], 0
+0x5FE98C: cmp     [esp+8Ch+var_64], 0
 0x5FE991: jz      loc_5FEBDF
 0x5FE997: mov     ecx, edi; this
 0x5FE999: call    Actor_IsNPC
@@ -543,12 +543,12 @@
 0x5FE9D6: jz      loc_5FEB86
 0x5FE9DC: push    edi
 0x5FE9DD: push    0Ch
-0x5FE9DF: mov     ecx, offset dword_B3BDB0
+0x5FE9DF: mov     ecx, (offset qword_B3BB2C+284h)
 0x5FE9E4: call    sub_67CF50
 0x5FE9E9: mov     ebx, eax
 0x5FE9EB: test    ebx, ebx
 0x5FE9ED: mov     ebp, ebx
-0x5FE9EF: mov     [esp+90h+var_64], ebp
+0x5FE9EF: mov     dword ptr [esp+90h+var_64], ebp
 0x5FE9F3: jz      loc_5FEB6C
 0x5FE9F9: lea     esp, [esp+0]
 0x5FEA00: mov     ecx, [ebx]
@@ -575,8 +575,8 @@
 0x5FEA43: call    Actor_IsNPC
 0x5FEA48: test    al, al
 0x5FEA4A: jz      loc_5FEB60
-0x5FEA50: mov     ecx, esi; this
-0x5FEA52: call    TESObjectREFR_GetOwner
+0x5FEA50: mov     ecx, esi; reference
+0x5FEA52: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5FEA57: mov     ecx, esi; this
 0x5FEA59: mov     ebp, eax
 0x5FEA5B: call    Actor_IsNPC
@@ -652,15 +652,15 @@
 0x5FEB26: cmp     al, 23h ; '#'
 0x5FEB28: jnz     short loc_5FEB37
 0x5FEB2A: push    ebp
-0x5FEB2B: mov     ecx, offset ActorProcessManager_ptr
+0x5FEB2B: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5FEB30: call    sub_675220
 0x5FEB35: jmp     short loc_5FEB4D
 0x5FEB37: cmp     al, 6
 0x5FEB39: jnz     short loc_5FEB60
-0x5FEB3B: mov     ecx, esi; this
-0x5FEB3D: call    TESObjectREFR_GetOwner
+0x5FEB3B: mov     ecx, esi; reference
+0x5FEB3D: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5FEB42: push    eax
-0x5FEB43: mov     ecx, offset ActorProcessManager_ptr
+0x5FEB43: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5FEB48: call    sub_675290
 0x5FEB4D: test    eax, eax
 0x5FEB4F: jz      short loc_5FEB60
@@ -674,9 +674,9 @@
 0x5FEB62: jnz     loc_5FEA00
 0x5FEB68: mov     ebp, [esp+98h+var_6C]
 0x5FEB6C: mov     ecx, ebp
-0x5FEB6E: call    BSSimpleList_Clear
+0x5FEB6E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5FEB73: push    ebp
-0x5FEB74: call    FormHeapFree
+0x5FEB74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FEB79: add     esp, 4
 0x5FEB7C: pop     ebp
 0x5FEB7D: pop     edi
@@ -689,15 +689,15 @@
 0x5FEB8D: test    al, al
 0x5FEB8F: jz      short loc_5FEBD0
 0x5FEB91: lea     ebx, [esi+44h]
-0x5FEB94: mov     ecx, ebx
-0x5FEB96: call    ExtraDataList_GetOwner
+0x5FEB94: mov     ecx, ebx; this
+0x5FEB96: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x5FEB9B: test    eax, eax
 0x5FEB9D: jz      short loc_5FEBDF
 0x5FEB9F: mov     ecx, ds:0B333C4h
 0x5FEBA5: mov     edi, [ecx]
-0x5FEBA7: mov     ecx, ebx
+0x5FEBA7: mov     ecx, ebx; this
 0x5FEBA9: add     edi, 238h
-0x5FEBAF: call    ExtraDataList_GetOwner
+0x5FEBAF: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x5FEBB4: mov     ecx, ds:0B333C4h
 0x5FEBBA: mov     edx, [edi]
 0x5FEBBC: push    eax

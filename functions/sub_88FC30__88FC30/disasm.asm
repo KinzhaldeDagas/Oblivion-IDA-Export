@@ -4,7 +4,6 @@
 0x88FC36: sub     esp, 10h
 0x88FC39: xor     edx, edx
 0x88FC3B: jmp     short loc_88FC40
-0x88FC3D: align 10h
 0x88FC40: fld     dword ptr [ecx+edx*4]
 0x88FC43: fld     st
 0x88FC45: fxch    st(1)

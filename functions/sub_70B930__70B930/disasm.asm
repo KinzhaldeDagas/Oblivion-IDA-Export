@@ -4,7 +4,7 @@
 0x70B939: test    eax, eax
 0x70B93B: jz      short loc_70B974
 0x70B93D: push    esi
-0x70B93E: mov     esi, [esp+8+arg_0]
+0x70B93E: mov     esi, [esp+8+data]
 0x70B942: cmp     esi, [eax+8]
 0x70B945: lea     ecx, [eax+8]
 0x70B948: mov     edx, eax
@@ -17,10 +17,10 @@
 0x70B954: retn    4
 0x70B957: test    edx, edx
 0x70B959: jz      short loc_70B973
-0x70B95B: lea     eax, [esp+8+arg_0]
-0x70B95F: push    eax
-0x70B960: lea     ecx, [edi+0BCh]
-0x70B966: call    sub_776690
+0x70B95B: lea     eax, [esp+8+data]
+0x70B95F: push    eax; data
+0x70B960: lea     ecx, [edi+0BCh]; list
+0x70B966: call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.
 0x70B96B: push    edi
 0x70B96C: mov     ecx, esi
 0x70B96E: call    sub_70B930

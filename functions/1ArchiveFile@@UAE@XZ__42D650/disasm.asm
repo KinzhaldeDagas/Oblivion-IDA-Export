@@ -21,7 +21,7 @@
 0x42D693: cmp     eax, ebx
 0x42D695: jz      short loc_42D6A0
 0x42D697: push    eax
-0x42D698: call    FormHeapFree
+0x42D698: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42D69D: add     esp, 4
 0x42D6A0: mov     ecx, esi; this
 0x42D6A2: mov     [esi+18h], ebx
@@ -36,3 +36,12 @@
 0x42D6C5: pop     ebx
 0x42D6C6: add     esp, 10h
 0x42D6C9: retn
+0x9ABAE0: mov     ecx, [ebp-10h]; this
+0x9ABAE3: jmp     ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)
+0x9ABAE8: mov     edx, [esp+arg_4]
+0x9ABAEC: lea     eax, [edx-0Ch]
+0x9ABAEF: mov     ecx, [edx-10h]
+0x9ABAF2: xor     ecx, eax
+0x9ABAF4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABAF9: mov     eax, offset stru_AD88CC
+0x9ABAFE: jmp     ___CxxFrameHandler3

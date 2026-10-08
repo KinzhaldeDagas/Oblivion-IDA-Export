@@ -1,7 +1,7 @@
 int __userpurge EffectItem_BuildDisplayString_::CheckMagnitudeType@<eax>(
         int a1@<ebx>,
         _DWORD *a2@<esi>,
-        int a3,
+        int a3@<edi>,
         int a4,
         int a5,
         int a6,
@@ -9,11 +9,11 @@ int __userpurge EffectItem_BuildDisplayString_::CheckMagnitudeType@<eax>(
         int a8,
         int a9,
         int a10,
-        char a11,
+        int a11,
         int a12,
         int a13,
         int a14,
-        char a15,
+        int a15,
         int a16,
         int a17,
         int a18,
@@ -40,20 +40,72 @@ int __userpurge EffectItem_BuildDisplayString_::CheckMagnitudeType@<eax>(
         int a39,
         int a40,
         int a41,
-        int a42)
+        int a42,
+        int a43,
+        int a44,
+        char a45,
+        char a46,
+        char a47)
 {
-  int v42; // eax
-  int v44; // [esp+14h] [ebp+14h]
+  int v47; // eax
+  int v49; // [esp+14h] [ebp+14h]
 
-  if ( a42 == 8 )
-    return EffectItem_BuildDisplayString_::Done(a3, a4, a5, a6, a7, a8);
-  v42 = a2[7];
-  if ( (*(_DWORD *)(v42 + 0x58) & 0x100) != 0 || a2[1] == a1 )
-    return EffectItem_BuildDisplayString_::CheckArea(a3, a4, a5, a6, a7, a8);
-  v44 = a2[1];
-  if ( *a2 == 0x4E45504F || *a2 == 0x4B434F4C )
-    return EffectItem_BuildDisplayString_::LockMagnitude(a3, a4, a5, a6, v44, a8, a9, a10, a11);
-  if ( (*(_DWORD *)(v42 + 0x58) & 8) != 0 )
-    return EffectItem_BuildDisplayString_::PercentMagnitude(a3, a4, a5, a6, v44, a8, a9, a10, a11, a12, a13, a14, a15);
-  return EffectItem_BuildDisplayString_::LevelMagnitude(v42, a3, a4, a5, a6, v44, a8, a9, a10, a11, a12, a13, a14, a15);
+  if ( a43 == 8 ) /*0x413d4b*/
+    return EffectItem_BuildDisplayString_::Done(a3, a4, a5, a6, a7, a8, a9); /*0x413d4b*/
+  v47 = a2[7]; /*0x413d51*/
+  if ( (*(_DWORD *)(v47 + 0x58) & 0x100) != 0 || a2[1] == a1 ) /*0x413d77*/
+    return EffectItem_BuildDisplayString_::CheckArea( /*0x413d5d*/
+             a1,
+             a43,
+             a2,
+             a4,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24,
+             a25,
+             a26,
+             a27,
+             a28,
+             a29,
+             a30,
+             a31,
+             a32,
+             a33,
+             a34,
+             a35,
+             a36,
+             a37,
+             a38,
+             a39,
+             a40,
+             a41,
+             a42,
+             a43,
+             a44,
+             a45,
+             a46,
+             a47);
+  v49 = a2[1]; /*0x413d87*/
+  if ( *a2 == 0x4E45504F || *a2 == 0x4B434F4C ) /*0x413d97*/
+    return EffectItem_BuildDisplayString_::LockMagnitude(a4, a5, a6, a7, v49, a9, a10, a11, a12); /*0x413d8b*/
+  if ( (*(_DWORD *)(v47 + 0x58) & 8) != 0 ) /*0x413da6*/
+    return EffectItem_BuildDisplayString_::PercentMagnitude(a4, a5, a6, a7, v49, a9, a10, a11, a12, a13, a14, a15, a16); /*0x413da7*/
+  return EffectItem_BuildDisplayString_::LevelMagnitude(v47, a4, a5, a6, a7, v49, a9, a10, a11, a12, a13, a14, a15, a16);
 }

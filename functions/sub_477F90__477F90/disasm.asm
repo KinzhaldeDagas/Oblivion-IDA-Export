@@ -3,7 +3,6 @@
 0x477F97: push    esi
 0x477F98: mov     esi, [ecx+4]
 0x477F9B: jmp     short loc_477FA0
-0x477F9D: align 10h
 0x477FA0: movzx   eax, word ptr [ecx+0Ah]
 0x477FA4: movzx   edx, ax
 0x477FA7: cmp     dword ptr [esi+edx*4-4], 0

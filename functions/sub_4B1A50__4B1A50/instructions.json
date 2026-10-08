@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4B1A79",
-    "line": "mov     ecx, [edi+7Ch]",
+    "line": "mov     ecx, [edi+7Ch]; Read TESObjectLIGH_DecodedLayout::lightFlags_7C; these bits select native source-light flicker/pulse behavior.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4B1A8D",
-    "line": "jnz     loc_4B1BE1",
+    "line": "jnz     loc_4B1BE1; Flicker-family selector: lightFlags_7C bit 0x08 ('Flicker') or 0x40 ('Flicker Slow') enters randomized native point-light position/dimmer animation.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4B1A97",
-    "line": "mov     edx, [esp+4Ch+arg_8]",
+    "line": "mov     edx, [esp+4Ch+optionalContext]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4B1AB5",
-    "line": "jp      loc_4B1F52",
+    "line": "jp      loc_4B1F52; Pulse-family selector: the signed low-byte test is bit 0x80 ('Pulse'); the adjacent 0x100 test is 'Pulse Slow'. Both drive dimmer interpolation, not shadow-caster admission.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x4B1AC1",
-    "line": "fld     dword ptr [esi+0DCh]",
+    "line": "fld     dword ptr [esi+0DCh]; Load NiLight::m_fDimmer (+0xDC), the current dimmer that converges toward *targetDimmer.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x4B1AC7",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4B1AD5",
-    "line": "jz      short loc_4B1AE1",
+    "line": "jz      short loc_4B1AE1; lightFlags_7C bit 0x100 ('Pulse Slow') selects the slower native dimmer interpolation step.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4B1AE7",
-    "line": "mov     ebp, [esp+4Ch+arg_4]",
+    "line": "mov     ebp, [esp+4Ch+targetDimmer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4B1AEF",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x4B1B09",
-    "line": "jnz     short loc_4B1B13",
+    "line": "jnz     short loc_4B1B13; Compare current NiLight::m_fDimmer with AttachedLightPayload_Decoded::targetDimmer_04.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x4B1B1E",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1B22",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x4B1B2F",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1B33",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x4B1B39",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1B3D",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x4B1B97",
-    "line": "fstp    dword ptr [ebp+0]",
+    "line": "fstp    dword ptr [ebp+0]; Retarget the payload dimmer to half of TESObjectLIGH::fade_88 for the alternating native pulse state.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x4B1BA5",
-    "line": "fstp    dword ptr [ebp+0]",
+    "line": "fstp    dword ptr [ebp+0]; Retarget the payload dimmer to TESObjectLIGH::fade_88 for the full native pulse state.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x4B1BAF",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x4B1BFE",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x4B1C08",
-    "line": "fstp    [esp+4Ch+arg_4]",
+    "line": "fstp    [esp+4Ch+targetDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1C0C",
-    "line": "jz      short loc_4B1C1C",
+    "line": "jz      short loc_4B1C1C; lightFlags_7C bit 0x40 ('Flicker Slow') scales down the flicker phase step.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x4B1C1E",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x4B1C45",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,19 +871,19 @@
   },
   {
     "ea": "0x4B1C64",
-    "line": "fadd    [esp+58h+arg_8]",
+    "line": "fadd    [esp+58h+optionalContext]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x4B1C68",
-    "line": "fstp    [esp+58h+arg_8]",
+    "line": "fstp    [esp+58h+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1C6C",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x4B1C8C",
-    "line": "fadd    [esp+4Ch+arg_4]",
+    "line": "fadd    [esp+4Ch+targetDimmer]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x4B1C90",
-    "line": "fstp    [esp+4Ch+arg_4]",
+    "line": "fstp    [esp+4Ch+targetDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x4B1CB5",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1039,19 +1039,19 @@
   },
   {
     "ea": "0x4B1CC4",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1CC8",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4B1CCC",
-    "line": "fld     [esp+4Ch+arg_4]",
+    "line": "fld     [esp+4Ch+targetDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1093,13 +1093,13 @@
   },
   {
     "ea": "0x4B1CE1",
-    "line": "fstp    [esp+4Ch+arg_4]",
+    "line": "fstp    [esp+4Ch+targetDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1CE5",
-    "line": "fld     [esp+4Ch+arg_4]",
+    "line": "fld     [esp+4Ch+targetDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x4B1D3D",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1243,13 +1243,13 @@
   },
   {
     "ea": "0x4B1D51",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1D55",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1261,13 +1261,13 @@
   },
   {
     "ea": "0x4B1D5E",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1D62",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x4B1D6A",
-    "line": "fld     [esp+4Ch+arg_4]",
+    "line": "fld     [esp+4Ch+targetDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1303,13 +1303,13 @@
   },
   {
     "ea": "0x4B1D7E",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1D82",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1321,19 +1321,19 @@
   },
   {
     "ea": "0x4B1D8B",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1D8F",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4B1D93",
-    "line": "fstp    [esp+4Ch+arg_4]",
+    "line": "fstp    [esp+4Ch+targetDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1399,13 +1399,13 @@
   },
   {
     "ea": "0x4B1DB7",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4B1DBB",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x4B1DD6",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x4B1DE7",
-    "line": "fst     [esp+4Ch+arg_8]",
+    "line": "fst     [esp+4Ch+optionalContext]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x4B1DED",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x4B1E14",
-    "line": "fmul    [esp+50h+arg_4]",
+    "line": "fmul    [esp+50h+targetDimmer]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x4B1E29",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x4B1E4D",
-    "line": "fstp    [esp+4Ch+arg_4]",
+    "line": "fstp    [esp+4Ch+targetDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x4B1E70",
-    "line": "fstp    [esp+4Ch+arg_8]",
+    "line": "fstp    [esp+4Ch+optionalContext]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x4B1E97",
-    "line": "fld     [esp+4Ch+arg_8]",
+    "line": "fld     [esp+4Ch+optionalContext]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x4B1EB1",
-    "line": "fld     [esp+4Ch+arg_4]",
+    "line": "fld     [esp+4Ch+targetDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x4B1F36",
-    "line": "fmul    dword ptr [edi+88h]",
+    "line": "fmul    dword ptr [edi+88h]; Scale the native flicker dimmer by TESObjectLIGH::fade_88.",
     "mnemonic": "fmul",
     "size": 6
   },
@@ -2278,5 +2278,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3000",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3003",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3008",
+    "line": "mov     edx, [esp+targetDimmer]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B300C",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B300F",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3012",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3014",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3019",
+    "line": "mov     eax, offset stru_ADED90",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B301E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

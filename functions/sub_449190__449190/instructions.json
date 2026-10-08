@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x449190",
-    "line": "movzx   eax, word ptr [ecx+8]",
+    "line": "movzx   eax, word ptr [ecx+8]; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
     "mnemonic": "movzx",
     "size": 4
   },

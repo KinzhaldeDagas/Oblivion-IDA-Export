@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F13B0",
-    "line": "push    esi",
+    "line": "push    esi; SpeedTreeLeafShader render/setup virtual: calls vtable +0x80 pre-pass, then leaf setup 0x7F0BC0, appends pass +0x394 to the current pass list.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x7F13BD",
-    "line": "mov     eax, [esp+4+arg_18]",
+    "line": "mov     eax, [esp+4+bound]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7F13C1",
-    "line": "mov     ecx, [esp+4+arg_14]",
+    "line": "mov     ecx, [esp+4+world]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7F13C5",
-    "line": "mov     edx, [esp+4+arg_10]",
+    "line": "mov     edx, [esp+4+effects]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7F13CA",
-    "line": "mov     eax, [esp+8+arg_C]",
+    "line": "mov     eax, [esp+8+propertyArray]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7F13CF",
-    "line": "mov     ecx, [esp+0Ch+arg_8]",
+    "line": "mov     ecx, [esp+0Ch+rendererData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7F13D4",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+skin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7F13D9",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7F13E2",
-    "line": "call    sub_7F0BC0",
+    "line": "call    OB_SpeedTreeLeafShader_SetupPass_010201A0; OBLIVION AUTHORITY (2026-08-24): SpeedTree leaf SetupPass. Full-bright forces VS0; otherwise marker count selects base versus point-light VS and active fog selects the fog variant. Selector inputs do not encode leaf layer/card/LOD. The routine uploads transform/light constants, binds the property texture, and uploads fog constants only for an active fog property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,25 +139,25 @@
   },
   {
     "ea": "0x7F13F0",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F13F1",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F13F2",
-    "line": "lea     ecx, [esi+40h]",
+    "line": "lea     ecx, [esi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7F13F5",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },

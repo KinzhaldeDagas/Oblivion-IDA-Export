@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x568BB0",
-    "line": "push    ebx",
+    "line": "push    ebx; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.",
     "mnemonic": "push",
     "size": 1
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x568C1F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x568CCE",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x568D0E",
-    "line": "lea     ecx, [edi+44h]",
+    "line": "lea     ecx, [edi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x568D15",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x568D5F",
-    "line": "call    sub_424C50",
+    "line": "call    sub_424C50; 3DTheft decode: Add/link ExtraFollower entry on target ExtraDataList; creates ExtraFollower if absent and pushes follower actor pointer if not already listed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x568D67",
-    "line": "call    sub_5E03C0",
+    "line": "call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x568D7B",
-    "line": "call    GetExtraDataFollower",
+    "line": "call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x568DEC",
-    "line": "call    sub_5E03C0",
+    "line": "call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x568DFB",
-    "line": "call    sub_424C50",
+    "line": "call    sub_424C50; 3DTheft decode 2026-05-17: Follow/Escort target resolver links the package owner actor into the target actor's ExtraFollower list when package flag 0x800 is clear.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x568E03",
-    "line": "call    sub_5E03C0",
+    "line": "call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.",
     "mnemonic": "call",
     "size": 5
   },

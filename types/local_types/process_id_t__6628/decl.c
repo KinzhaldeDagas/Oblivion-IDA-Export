@@ -1,1 +1,1 @@
-process_id_t
+typedef unsigned int process_id_t;

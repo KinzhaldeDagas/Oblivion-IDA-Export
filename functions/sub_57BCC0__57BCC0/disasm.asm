@@ -1,4 +1,4 @@
-0x57BCC0: push    esi; a3
+0x57BCC0: push    esi; AchievementsNative evidence: armor/soul/sigil popup wrapper. Args observed from InventoryMenu hover: inventory entry, exposed popup X, source row Y, bottom margin, popup depth; opens/validates MagicPopupMenu then forwards to 0x5B4E10.
 0x57BCC1: push    1; arg1
 0x57BCC3: push    0; canCreate
 0x57BCC5: call    InterfaceManager_GetSingleton
@@ -38,10 +38,10 @@
 0x57BD34: jz      short loc_57BD7B
 0x57BD36: fldz
 0x57BD38: push    ecx
-0x57BD39: fstp    [esp+8+a2]; a3
+0x57BD39: fstp    [esp+8+a2]; value
 0x57BD3C: mov     ecx, esi; this
-0x57BD3E: push    0FABh; a2
-0x57BD43: call    Tile_SetFloat
+0x57BD3E: push    0FABh; propertyCode
+0x57BD43: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57BD48: fld     [esp+4+arg_10]
 0x57BD4C: mov     eax, [esp+4+arg_0]
 0x57BD50: sub     esp, 10h
@@ -53,7 +53,7 @@
 0x57BD67: fld     [esp+14h+arg_4]
 0x57BD6B: fstp    [esp+14h+var_14]; float
 0x57BD6E: push    eax; int
-0x57BD6F: call    sub_5B4E10
+0x57BD6F: call    sub_5B4E10; AchievementsNative evidence: MagicPopupMenu builder for armor/soul/sigil/simple item popups. Same position semantics as 0x5B4230 where observed: root user0/source Y, user1/bottom margin, user3/depth, exposed-X-driven background slide.
 0x57BD74: add     esp, 14h
 0x57BD77: mov     al, 1
 0x57BD79: pop     esi

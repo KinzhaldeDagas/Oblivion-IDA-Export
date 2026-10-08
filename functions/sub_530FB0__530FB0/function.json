@@ -1,19 +1,32 @@
 {
-  "callees_count": 55,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x530FB0",
+      "0x5311FB"
+    ]
+  ],
+  "chunks_sha256": "622878fee245360752ac753714652bb34e8df874825cf0f29202204e1f6fe30e",
+  "comment_regular": "Oblivion main INFO loader stores the winning record offset for lazy response/result-script reconstruction, but does not consume SCHR, SCHD, SCDA, SCTX, or SCRO here. Result scripts are reconstructed later by TESTopicInfo::GetResultScript from that winning serialized INFO record.",
+  "comment_repeatable": "Oblivion main INFO loader stores the winning record offset for lazy response/result-script reconstruction, but does not consume SCHR, SCHD, SCDA, SCTX, or SCRO here. Result scripts are reconstructed later by TESTopicInfo::GetResultScript from that winning serialized INFO record.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_530FB0",
+  "display_name": "TESTopicInfo_LoadForm",
   "end_ea": "0x5311FB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_530FB0",
+  "name": "TESTopicInfo_LoadForm",
   "segment": ".text",
   "sha256": "622878fee245360752ac753714652bb34e8df874825cf0f29202204e1f6fe30e",
   "size": 587,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x530FB0",
-  "type": "char __userpurge@<al>(unsigned int@<ecx>, int@<ebp>, TESForm ArgList)",
+  "total_chunk_size": 587,
+  "type": "bool __thiscall(TESTopicInfo *this, Data *file)",
   "xrefs_from_count": 238,
   "xrefs_to_count": 1
 }

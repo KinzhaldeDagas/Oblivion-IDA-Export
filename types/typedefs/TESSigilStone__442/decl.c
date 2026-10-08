@@ -1,1 +1,1 @@
-TESSigilStone
+struct TESSigilStone;

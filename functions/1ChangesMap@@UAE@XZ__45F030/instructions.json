@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x45F058",
-    "line": "mov     dword ptr [esi], offset ??_7ChangesMap@@6B@; const ChangesMap::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7ChangesMap@@6B@; Verified: ChangesMap vtable (RTTI COL AB7C90 -> TypeDescriptor B05A38 -> .?AVChangesMap@@). Slots +0 deleting dtor 462260, +4 hash, +8 key equality, +C set node key/value, +10 no-op clear value, +14 allocate node, +18 release node. Owned ChangeData/buffers are freed by 45A8B0, not ClearValue.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x45F066",
-    "line": "call    sub_45A8B0",
+    "line": "call    ChangesMap_RemoveAllChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -148,5 +148,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AE4E0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE4E3",
+    "line": "jmp     ??1?$NiTPointerMap@IPAVChangeData@@@@UAE@XZ; NiTPointerMap<uint,ChangeData *>::~NiTPointerMap<uint,ChangeData *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE4E8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE4EC",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE4EF",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE4F2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE4F4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE4F9",
+    "line": "mov     eax, offset stru_ADAD18",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE4FE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

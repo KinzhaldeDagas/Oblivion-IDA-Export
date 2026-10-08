@@ -16,4 +16,4 @@
 0x4D790C: retn
 0x4D790D: lea     ecx, [esi+44h]
 0x4D7910: pop     esi
-0x4D7911: jmp     ExtraDataList__GetExtraXTarget
+0x4D7911: jmp     ExtraDataList_GetXTarget; Returns the TESObjectREFR target stored by ExtraXTarget (type 0x4D), or null.

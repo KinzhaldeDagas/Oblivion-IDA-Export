@@ -1,7 +1,7 @@
 0x9EEEC0: fld1
 0x9EEEC2: push    ecx
 0x9EEEC3: fstp    [esp+4+var_4]; float
-0x9EEEC6: mov     ecx, offset fMagicSunDamageScreenGlowRateDown
+0x9EEEC6: mov     ecx, (offset flt_B37ED0+0F8h)
 0x9EEECB: push    offset aFmagicsundam_5; "fMagicSunDamageScreenGlowRateDown"
 0x9EEED0: call    GameSetting_ConstrAndReg_float
 0x9EEED5: push    offset sub_A206B0; void (__cdecl *)()

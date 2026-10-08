@@ -1,1 +1,1 @@
-CAH
+typedef tagCAH CAH;

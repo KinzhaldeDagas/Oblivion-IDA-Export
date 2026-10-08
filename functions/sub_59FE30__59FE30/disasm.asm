@@ -17,7 +17,7 @@
 0x59FE58: mov     ecx, esi
 0x59FE5A: call    EffectItem_destr
 0x59FE5F: push    esi
-0x59FE60: call    FormHeapFree
+0x59FE60: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59FE65: add     esp, 4
 0x59FE68: pop     esi
 0x59FE69: retn    4

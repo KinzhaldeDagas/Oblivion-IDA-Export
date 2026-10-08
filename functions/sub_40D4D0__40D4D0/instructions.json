@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x40D4D0",
-    "line": "sub     esp, 10Ch",
+    "line": "sub     esp, 10Ch; [Controller decode 2026-07-09] Non-player QueryControlState consumer: special control 31 SysRq/PrintScreen screenshot edge.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x40D4EB",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x40D4F8",
-    "line": "mov     edi, g_Renderer",
+    "line": "mov     edi, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x40D500",
-    "line": "cmp     byte_B34FA4, bl",
+    "line": "cmp     ds:0B34FA4h, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x40D508",
-    "line": "call    sub_497C30",
+    "line": "call    Renderer_ApplyPendingGammaRamp; Verified in OblivionNew 2026-09-26: copies requested gamma B06C2C to fGamma INI value B06F64, clears B34FA4, builds 256 identical RGB WORD entries round(pow(i/255,gamma)*65535), then calls device vtable +54 (IDirect3DDevice9::SetGammaRamp slot21), swapchain0, flags1 (D3DSGR_CALIBRATE). Device is loaded from renderer +280; renderer pointer at B350D8. Constants: A3DDD8=255, A3DDD0=65535, A2FAA0=0.5. EAX return in decompiler is not an API HRESULT: SetGammaRamp is void.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D50D",
-    "line": "mov     ecx, dword_B3A6B0",
+    "line": "mov     ecx, dword ptr unk_B3A6B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x40D522",
-    "line": "mov     eax, dword_B33418",
+    "line": "mov     eax, dword ptr unk_B33418",
     "mnemonic": "mov",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x40D52A",
-    "line": "mov     dword_B33418, eax",
+    "line": "mov     dword ptr unk_B33418, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x40D541",
-    "line": "mov     ecx, dword_B3A6B0",
+    "line": "mov     ecx, dword ptr unk_B3A6B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x40D54F",
-    "line": "mov     eax, SaveLoad_CurrentSavegame",
+    "line": "mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x40D55B",
-    "line": "mov     eax, SaveLoad_CurrentSavegame",
+    "line": "mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x40D572",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x40D57D",
-    "line": "mov     eax, menuRenderedTexture",
+    "line": "mov     eax, dword ptr texture",
     "mnemonic": "mov",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x40D586",
-    "line": "mov     ecx, g_textureManager; this",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x40D58D",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40D58E",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D593",
-    "line": "mov     esi, menuRenderedTexture",
+    "line": "mov     esi, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x40D5B9",
-    "line": "mov     menuRenderedTexture, ebx",
+    "line": "mov     dword ptr texture, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D5BF",
-    "line": "cmp     byte_B42D54, bl",
+    "line": "cmp     byte ptr unk_B42D54, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -421,19 +421,19 @@
   },
   {
     "ea": "0x40D5CA",
-    "line": "fstp    flt_B42D50",
+    "line": "fstp    dword ptr unk_B42D50",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x40D5D0",
-    "line": "mov     byte_B42D54, bl",
+    "line": "mov     byte ptr unk_B42D54, bl",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D5D6",
-    "line": "mov     byte_B33397, bl",
+    "line": "mov     byte ptr unk_B33397, bl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x40D5DE",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x40D5EC",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x40D5F8",
-    "line": "mov     dword_B33418, ebx",
+    "line": "mov     dword ptr unk_B33418, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D5FE",
-    "line": "cmp     byte_B33397, bl",
+    "line": "cmp     byte ptr unk_B33397, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x40D612",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x40D626",
-    "line": "mov     ecx, dword_B3A6B0",
+    "line": "mov     ecx, dword ptr unk_B3A6B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x40D637",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x40D648",
-    "line": "cmp     byte_B06A28, bl",
+    "line": "cmp     g_bCanopyShadowMapPending, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x40D650",
-    "line": "call    ShadowCanopyPass",
+    "line": "call    ShadowCanopyPass; Outer frame path invokes ShadowCanopyPass when the native canopy shadow-map latch is pending.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x40D658",
-    "line": "call    NiRenderer_Render",
+    "line": "call    NiRenderer_Render; MoonSugarEffect decode: normal gameplay calls NiRenderer_Render(..., 0) before later interface/menu/cursor MiscPass work.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x40D662",
-    "line": "cmp     menuRenderedTexture, ebx",
+    "line": "cmp     dword ptr texture, ebx",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x40D66E",
-    "line": "cmp     ImageSpaceEffectEnabled, bl",
+    "line": "cmp     OB_RendererGlobalState_010201A0.pad_00D+98h, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x40D676",
-    "line": "mov     ecx, dword_B3A6B0",
+    "line": "mov     ecx, dword ptr unk_B3A6B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x40D68D",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x40D699",
-    "line": "mov     ecx, menuRenderedTexture",
+    "line": "mov     ecx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x40D6A6",
-    "line": "call    sub_7B4900",
+    "line": "call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x40D6B3",
-    "line": "call    NiRenderer_BeginScene1",
+    "line": "call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x40D6E5",
-    "line": "mov     ecx, ScreenElementsRoot?; this",
+    "line": "mov     ecx, ds:0B333ECh; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x40D6EC",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x40D706",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x40D71C",
-    "line": "call    InputGlobals__QueryKeyboardState",
+    "line": "call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x40D723",
-    "line": "mov     al, byte_B333B9",
+    "line": "mov     al, byte ptr unk_B333B9",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x40D72F",
-    "line": "call    TakeScreenshot",
+    "line": "call    TakeScreenshot;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x40D743",
-    "line": "mov     byte_B333B9, al",
+    "line": "mov     byte ptr unk_B333B9, al",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x40D768",
-    "line": "mov     dword_B333C8, ebx",
+    "line": "mov     dword ptr unk_B333C8, ebx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x40D7A3",
-    "line": "fstp    g_FPSGlobal",
+    "line": "fstp    dword ptr ds:0B33E94h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x40D7AD",
-    "line": "fstp    g_FPSGlobal",
+    "line": "fstp    dword ptr ds:0B33E94h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x40D7B7",
-    "line": "fstp    g_FPSGlobal",
+    "line": "fstp    dword ptr ds:0B33E94h",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x40D7D3",
-    "line": "mov     ecx, g_worldScenegraph",
+    "line": "mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x40D7E0",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-ITERATOR
+typedef tagITERATOR ITERATOR;

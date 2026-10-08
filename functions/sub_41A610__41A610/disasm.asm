@@ -1,4 +1,4 @@
-0x41A610: push    0FFFFFFFFh
+0x41A610: push    0FFFFFFFFh; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x41A612: push    offset SEH_41A610
 0x41A617: mov     eax, large fs:0
 0x41A61D: push    eax
@@ -15,9 +15,9 @@
 0x41A63D: push    eax; int
 0x41A63E: lea     eax, [esp+14Ch+var_C]
 0x41A645: mov     large fs:0, eax
-0x41A64B: push    0
+0x41A64B: push    0; effectIndex
 0x41A64D: mov     edi, ecx
-0x41A64F: call    MagicItem_GetFXEffect
+0x41A64F: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x41A654: cmp     [esp+14Ch+arg_0], 0
 0x41A65C: mov     esi, eax
 0x41A65E: jnz     short loc_41A6A3
@@ -47,7 +47,7 @@
 0x41A6A1: jmp     short loc_41A6C1
 0x41A6A3: mov     byte ptr [esp+14Ch+var_138+3], 1
 0x41A6A8: jmp     short loc_41A67B
-0x41A6AA: mov     ecx, ModelLoaderPtr
+0x41A6AA: mov     ecx, ds:0B33A1Ch
 0x41A6B0: push    0
 0x41A6B2: push    esi
 0x41A6B3: push    edi
@@ -63,9 +63,9 @@
 0x41A6D0: push    0
 0x41A6D2: push    0
 0x41A6D4: call    edx
-0x41A6D6: mov     ecx, ModelLoaderPtr
+0x41A6D6: mov     ecx, ds:0B33A1Ch
 0x41A6DC: push    eax
-0x41A6DD: call    sub_439EB0
+0x41A6DD: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x41A6E2: mov     ecx, esi
 0x41A6E4: call    EffectSetting_ExtendUnkA0
 0x41A6E9: test    edi, edi
@@ -89,7 +89,7 @@
 0x41A72C: jz      loc_41AB15
 0x41A732: mov     eax, [eax+60h]
 0x41A735: push    eax; a1
-0x41A736: call    TESForm_LookupByFormID
+0x41A736: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x41A73B: mov     edi, eax
 0x41A73D: add     esp, 4
 0x41A740: test    edi, edi
@@ -110,8 +110,8 @@
 0x41A770: test    eax, eax
 0x41A772: jz      loc_41AB15
 0x41A778: lea     esi, [eax+30h]
-0x41A77B: mov     ecx, esi
-0x41A77D: call    sub_449190
+0x41A77B: mov     ecx, esi; compactString
+0x41A77D: call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.
 0x41A782: test    eax, eax
 0x41A784: jbe     loc_41AB15
 0x41A78A: mov     eax, [esi]
@@ -121,9 +121,9 @@
 0x41A793: push    0
 0x41A795: mov     ecx, esi
 0x41A797: call    edx
-0x41A799: mov     ecx, ModelLoaderPtr
+0x41A799: mov     ecx, ds:0B33A1Ch
 0x41A79F: push    eax
-0x41A7A0: call    sub_439EB0
+0x41A7A0: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x41A7A5: jmp     loc_41AB15
 0x41A7AA: mov     ecx, eax
 0x41A7AC: shr     ecx, 11h
@@ -145,18 +145,18 @@
 0x41A7DC: push    0
 0x41A7DE: mov     ecx, esi
 0x41A7E0: call    TESBipedModelForm_GetModelPath
-0x41A7E5: mov     ecx, ModelLoaderPtr
+0x41A7E5: mov     ecx, ds:0B33A1Ch
 0x41A7EB: push    eax
-0x41A7EC: call    sub_439EB0
+0x41A7EC: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x41A7F1: push    1
 0x41A7F3: push    0
 0x41A7F5: push    0
 0x41A7F7: push    1
 0x41A7F9: mov     ecx, esi
 0x41A7FB: call    TESBipedModelForm_GetModelPath
-0x41A800: mov     ecx, ModelLoaderPtr
+0x41A800: mov     ecx, ds:0B33A1Ch
 0x41A806: push    eax
-0x41A807: call    sub_439EB0
+0x41A807: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x41A80C: jmp     loc_41AB15
 0x41A811: shr     eax, 12h
 0x41A814: test    al, 1
@@ -165,21 +165,21 @@
 0x41A820: jnz     short loc_41A872
 0x41A822: lea     ecx, [esp+14Ch+var_124]
 0x41A826: call    TESContainer_constr
-0x41A82B: mov     ecx, TESDataHandler_g_PlayerRef
+0x41A82B: mov     ecx, dword ptr reference
 0x41A831: lea     edx, [esp+14Ch+var_124]
 0x41A835: push    edx
-0x41A836: push    1
+0x41A836: push    1; int
 0x41A838: mov     [esp+154h+var_4], 0
 0x41A843: call    Actor_GetLevel
 0x41A848: lea     ecx, [edi+24h]; this
 0x41A84B: push    eax; int
-0x41A84C: call    TESLeveledList_CalcLeveledForm
+0x41A84C: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x41A851: push    0
-0x41A853: lea     ecx, [esp+14Ch+anonymous_0]
+0x41A853: lea     ecx, [esp+154h+var_128]
 0x41A857: call    TESContainer_GetNthForm
-0x41A85C: lea     ecx, [esp+148h+anonymous_0]
+0x41A85C: lea     ecx, [esp+150h+var_128]
 0x41A860: mov     edi, eax
-0x41A862: mov     dword ptr [esp+148h], 0FFFFFFFFh
+0x41A862: mov     [esp+150h+var_8], 0FFFFFFFFh
 0x41A86D: call    TESContainer_destr
 0x41A872: push    0; int
 0x41A874: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
@@ -203,19 +203,19 @@
 0x41A8A6: cmp     dword ptr [esi], 0
 0x41A8A9: jz      short loc_41A8C6
 0x41A8AB: mov     eax, [esi]
-0x41A8AD: mov     ecx, ModelLoaderPtr
+0x41A8AD: mov     ecx, ds:0B33A1Ch
 0x41A8B3: push    1
 0x41A8B5: push    0
 0x41A8B7: push    0
 0x41A8B9: push    eax
-0x41A8BA: call    sub_439EB0
+0x41A8BA: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x41A8BF: mov     esi, [esi+4]
 0x41A8C2: test    esi, esi
 0x41A8C4: jnz     short loc_41A8A0
 0x41A8C6: mov     ecx, ebp
-0x41A8C8: call    BSSimpleList_Clear
+0x41A8C8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x41A8CD: push    ebp
-0x41A8CE: call    FormHeapFree
+0x41A8CE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41A8D3: add     esp, 4
 0x41A8D6: push    0; int
 0x41A8D8: push    offset ??_R0?AVTESCreature@@@8; struct TypeDescriptor *
@@ -225,7 +225,7 @@
 0x41A8E5: call    OblivionDynamicCast
 0x41A8EA: add     esp, 14h
 0x41A8ED: test    eax, eax
-0x41A8EF: mov     [esp+148h+var_128], eax
+0x41A8EF: mov     [esp+150h+var_130], eax
 0x41A8F3: jz      loc_41AB15
 0x41A8F9: mov     edi, eax
 0x41A8FB: mov     edx, [edi+0ACh]
@@ -236,17 +236,17 @@
 0x41A90E: push    0
 0x41A910: mov     ecx, esi
 0x41A912: call    eax
-0x41A914: mov     ecx, ModelLoaderPtr
+0x41A914: mov     ecx, ds:0B33A1Ch
 0x41A91A: push    eax
-0x41A91B: call    sub_439EB0
+0x41A91B: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x41A920: mov     edx, [esi]
 0x41A922: mov     eax, [edx+14h]
 0x41A925: mov     ecx, esi
 0x41A927: call    eax
 0x41A929: lea     ecx, [edi+0ECh]
 0x41A92F: mov     ebx, eax
-0x41A931: call    sub_6899C0
-0x41A936: lea     edx, [esp+148h+var_110]
+0x41A931: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
+0x41A936: lea     edx, [esp+150h+var_118]
 0x41A93A: mov     esi, eax
 0x41A93C: mov     eax, ebx
 0x41A93E: sub     edx, ebx
@@ -255,14 +255,14 @@
 0x41A945: add     eax, 1
 0x41A948: test    cl, cl
 0x41A94A: jnz     short loc_41A940
-0x41A94C: lea     ecx, [esp+148h+var_110]
+0x41A94C: lea     ecx, [esp+150h+var_118]
 0x41A950: push    5Ch ; '\'; Ch
 0x41A952: push    ecx; Str
 0x41A953: call    _strrchr
 0x41A958: mov     ecx, eax
 0x41A95A: add     esp, 8
 0x41A95D: test    ecx, ecx
-0x41A95F: mov     [esp+148h+var_124], ecx
+0x41A95F: mov     [esp+150h+var_12C], ecx
 0x41A963: mov     ebp, esi
 0x41A965: jz      short loc_41A9C9
 0x41A967: test    ebp, ebp
@@ -276,7 +276,7 @@
 0x41A97A: add     eax, 1
 0x41A97D: test    cl, cl
 0x41A97F: jnz     short loc_41A978
-0x41A981: lea     edi, [esp+148h+var_110]
+0x41A981: lea     edi, [esp+150h+var_118]
 0x41A985: sub     eax, edx
 0x41A987: add     edi, 0FFFFFFFFh
 0x41A98A: lea     ebx, [ebx+0]
@@ -293,12 +293,12 @@
 0x41A9A7: push    0
 0x41A9A9: and     ecx, 3
 0x41A9AC: push    0
-0x41A9AE: lea     edx, [esp+154h+var_110]
+0x41A9AE: lea     edx, [esp+15Ch+var_118]
 0x41A9B2: rep movsb
-0x41A9B4: mov     ecx, ModelLoaderPtr
+0x41A9B4: mov     ecx, ds:0B33A1Ch
 0x41A9BA: push    edx
-0x41A9BB: call    sub_439EB0
-0x41A9C0: mov     ecx, [esp+148h+var_124]
+0x41A9BB: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
+0x41A9C0: mov     ecx, [esp+150h+var_12C]
 0x41A9C4: mov     ebp, [ebp+4]
 0x41A9C7: jmp     short loc_41A967
 0x41A9C9: push    5Ch ; '\'; Ch
@@ -315,10 +315,10 @@
 0x41A9E8: add     esp, 0Ch
 0x41A9EB: test    eax, eax
 0x41A9ED: jnz     short loc_41AA36
-0x41A9EF: mov     ecx, ModelLoaderPtr
+0x41A9EF: mov     ecx, ds:0B33A1Ch
 0x41A9F5: push    eax; int
 0x41A9F6: push    ebx; char *
-0x41A9F7: call    sub_435830
+0x41A9F7: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x41A9FC: mov     ebp, eax
 0x41A9FE: test    ebp, ebp
 0x41AA00: mov     esi, ebp
@@ -326,42 +326,42 @@
 0x41AA04: mov     edi, [esi]
 0x41AA06: test    edi, edi
 0x41AA08: jz      short loc_41AA16
-0x41AA0A: mov     ecx, ModelLoaderPtr
+0x41AA0A: mov     ecx, ds:0B33A1Ch
 0x41AA10: push    edi
-0x41AA11: call    sub_439FF0
+0x41AA11: call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.
 0x41AA16: push    edi
-0x41AA17: call    FormHeapFree
+0x41AA17: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41AA1C: mov     esi, [esi+4]
 0x41AA1F: add     esp, 4
 0x41AA22: test    esi, esi
 0x41AA24: jnz     short loc_41AA04
 0x41AA26: mov     ecx, ebp
-0x41AA28: call    BSSimpleList_Clear
+0x41AA28: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x41AA2D: push    ebp
-0x41AA2E: call    FormHeapFree
+0x41AA2E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41AA33: add     esp, 4
-0x41AA36: mov     esi, [esp+148h+var_128]
+0x41AA36: mov     esi, [esp+150h+var_130]
 0x41AA3A: add     esi, 94h ; '”'
 0x41AA40: mov     ecx, esi
-0x41AA42: call    TESAnimation_HasAnimations
+0x41AA42: call    TESAnimation_HasAnimations; TESAnimation has any entries: returns embedded list first data pointer nonzero.
 0x41AA47: test    al, al
 0x41AA49: jz      loc_41AB15
-0x41AA4F: mov     eax, [esp+148h+var_124]
+0x41AA4F: mov     eax, [esp+150h+var_12C]
 0x41AA53: mov     byte ptr [eax+1], 0
-0x41AA57: lea     eax, [esp+148h+var_110]
+0x41AA57: lea     eax, [esp+150h+var_118]
 0x41AA5B: add     eax, 0FFFFFFFFh
 0x41AA5E: mov     edi, edi
 0x41AA60: mov     cl, [eax+1]
 0x41AA63: add     eax, 1
 0x41AA66: test    cl, cl
 0x41AA68: jnz     short loc_41AA60
-0x41AA6A: mov     ecx, ds:dword_A3407C
+0x41AA6A: mov     ecx, ds:dword_A3407C; CustomAnimSupport decode: SpecialAnims string use in magic/effect VFX path; not a native actor animation override map.
 0x41AA70: mov     edx, ds:dword_A34080
 0x41AA76: mov     [eax], ecx
 0x41AA78: mov     ecx, ds:dword_A34084
 0x41AA7E: mov     [eax+4], edx
 0x41AA81: mov     dl, ds:byte_A34088
-0x41AA87: lea     edi, [esp+148h+var_110]
+0x41AA87: lea     edi, [esp+150h+var_118]
 0x41AA8B: mov     [eax+8], ecx
 0x41AA8E: mov     [eax+0Ch], dl
 0x41AA91: add     edi, 0FFFFFFFFh
@@ -370,7 +370,7 @@
 0x41AA9A: test    al, al
 0x41AA9C: jnz     short loc_41AA94
 0x41AA9E: mov     ax, ds:SubStr
-0x41AAA4: lea     ecx, [esp+148h+var_110]
+0x41AAA4: lea     ecx, [esp+150h+var_118]
 0x41AAA8: push    5Ch ; '\'; Ch
 0x41AAAA: push    ecx; Str
 0x41AAAB: mov     [edi], ax
@@ -378,7 +378,7 @@
 0x41AAB3: add     esp, 8
 0x41AAB6: mov     ecx, esi
 0x41AAB8: mov     ebx, eax
-0x41AABA: call    sub_6899C0
+0x41AABA: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x41AABF: mov     ebp, eax
 0x41AAC1: test    ebp, ebp
 0x41AAC3: jz      short loc_41AB15
@@ -391,7 +391,7 @@
 0x41AAD4: add     eax, 1
 0x41AAD7: test    cl, cl
 0x41AAD9: jnz     short loc_41AAD2
-0x41AADB: lea     edi, [esp+148h+var_110]
+0x41AADB: lea     edi, [esp+150h+var_118]
 0x41AADF: sub     eax, edx
 0x41AAE1: add     edi, 0FFFFFFFFh
 0x41AAE4: mov     cl, [edi+1]
@@ -404,15 +404,15 @@
 0x41AAF5: rep movsd
 0x41AAF7: mov     ecx, eax
 0x41AAF9: and     ecx, 3
-0x41AAFC: lea     edx, [esp+148h+var_110]
+0x41AAFC: lea     edx, [esp+150h+var_118]
 0x41AB00: rep movsb
-0x41AB02: mov     ecx, ModelLoaderPtr
+0x41AB02: mov     ecx, ds:0B33A1Ch
 0x41AB08: push    edx
-0x41AB09: call    sub_439FF0
+0x41AB09: call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.
 0x41AB0E: mov     ebp, [ebp+4]
 0x41AB11: test    ebp, ebp
 0x41AB13: jnz     short loc_41AAC5
-0x41AB15: mov     esi, [esp+148h+var_130]
+0x41AB15: mov     esi, [esp+14Ch+var_134]
 0x41AB19: mov     ecx, esi
 0x41AB1B: call    EffectSetting_IsUnkA4Positive
 0x41AB20: test    al, al
@@ -425,26 +425,39 @@
 0x41AB32: shr     eax, 12h
 0x41AB35: test    al, 1
 0x41AB37: jz      short loc_41AB40
-0x41AB39: add     dword_B33518, 1
+0x41AB39: add     dword ptr unk_B33518, 1
 0x41AB40: mov     ecx, esi
 0x41AB42: call    EffectSetting_ExtendUnkA4
-0x41AB47: mov     edi, [esp+148h+var_12C]
+0x41AB47: mov     edi, [esp+14Ch+var_130]
 0x41AB4B: mov     eax, [edi+8]
 0x41AB4E: test    eax, eax
 0x41AB50: jz      short loc_41AB61
 0x41AB52: lea     edi, [eax-4]
 0x41AB55: test    edi, edi
-0x41AB57: mov     [esp+148h+var_12C], edi
+0x41AB57: mov     [esp+14Ch+var_130], edi
 0x41AB5B: jnz     loc_41A710
-0x41AB61: mov     ecx, [esp+140h]
+0x41AB61: mov     ecx, dword ptr [esp+14Ch+var_C]
 0x41AB68: mov     large fs:0, ecx
 0x41AB6F: pop     ecx
 0x41AB70: pop     edi
 0x41AB71: pop     esi
 0x41AB72: pop     ebp
 0x41AB73: pop     ebx
-0x41AB74: mov     ecx, dword ptr [esp+134h+var_C]
+0x41AB74: mov     ecx, [esp+138h+var_10]
 0x41AB7B: xor     ecx, esp
 0x41AB7D: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x41AB82: add     esp, 138h
 0x41AB88: retn    4
+0x9AB5D0: lea     ecx, [ebp-124h]
+0x9AB5D6: jmp     TESContainer_destr
+0x9AB5DB: mov     edx, [esp+arg_4]
+0x9AB5DF: lea     eax, [edx-13Ch]
+0x9AB5E5: mov     ecx, [edx-140h]
+0x9AB5EB: xor     ecx, eax
+0x9AB5ED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB5F2: add     eax, 10h
+0x9AB5F5: mov     ecx, [edx-4]
+0x9AB5F8: xor     ecx, eax
+0x9AB5FA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB5FF: mov     eax, offset stru_AD849C
+0x9AB604: jmp     ___CxxFrameHandler3

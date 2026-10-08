@@ -5,11 +5,11 @@ int __userpurge sub_730A50@<eax>(NiRenderer *this@<ecx>, size_t Size)
   int v6; // [esp-14h] [ebp-1Ch]
   size_t v7; // [esp-4h] [ebp-Ch]
 
-  v2 = Size;
-  LODWORD(v7) = Size;
-  sub_721610(this, v7);
-  v4 = *(int (__cdecl **)(int, NiPropertyState **, int, size_t *, int))(*(_DWORD *)(v2 + 0x21C) + 4);
-  v6 = *(_DWORD *)(v2 + 0x21C);
-  LODWORD(Size) = 4;
-  return v4(v6, &this->members.propertyState, 4, &Size, 1);
+  v2 = Size; /*0x730a52*/
+  LODWORD(v7) = Size; /*0x730a56*/
+  sub_721610(this, v7); /*0x730a59*/
+  v4 = *(int (__cdecl **)(int, NiPropertyState **, int, size_t *, int))(*(_DWORD *)(v2 + 0x21C) + 4); /*0x730a64*/
+  v6 = *(_DWORD *)(v2 + 0x21C); /*0x730a74*/
+  LODWORD(Size) = 4; /*0x730a75*/
+  return v4(v6, &this->members.propertyState, 4, &Size, 1); /*0x730a82*/
 }

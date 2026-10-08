@@ -8,7 +8,7 @@ void __usercall MagicItemObject_LoadForm_::LoadBaseData(
 {
   int v6; // eax
 
-  (*(void (__thiscall **)(int, int *, int))(*(_DWORD *)a3 + 0x3C))(a3, a2, a1);
-  v6 = (*(int (__thiscall **)(int))(*(_DWORD *)a3 + 0x24))(a3);
-  MagicItemObject_LoadForm_::LoadAdditionalData(v6, a2, a4, a5, a3, a6);
+  (*(void (__thiscall **)(int, int *, int))(*(_DWORD *)a3 + 0x3C))(a3, a2, a1); /*0x41b6aa*/
+  v6 = (*(int (__thiscall **)(int))(*(_DWORD *)a3 + 0x24))(a3); /*0x41b6b3*/
+  MagicItemObject_LoadForm_::LoadAdditionalData(v6, a2, a4, a5, a3, a6); /*0x41b6b4*/
 }

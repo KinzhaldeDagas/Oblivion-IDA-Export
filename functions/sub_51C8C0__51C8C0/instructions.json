@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x51C8D5",
-    "line": "mov     ebx, [esp+10Ch+arg_0]",
+    "line": "mov     ebx, [esp+10Ch+reference]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x51C95B",
-    "line": "push    ebx",
+    "line": "push    ebx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51C95C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51C95E",
-    "line": "call    sub_4B3210",
+    "line": "call    TESBoundObject_ReleaseReferenceModel; Verified: releases model-loader usage for a bound object/reference. For scaled refs, removes the scale-specific key and may also remove the base key depending on load state.",
     "mnemonic": "call",
     "size": 5
   },

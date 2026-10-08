@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F1AE0",
+      "0x7F1B2D"
+    ]
+  ],
+  "chunks_sha256": "bd0942bc9d0686a3d16e837d133103cbb44f7187cfe62b0c696ff6143d8966bb",
+  "comment_regular": "Lighting/leaf property virtual +0x7C. Ref-counts and stores texture/ref pointer at property +0x9C.\n\nSpeedTreeOBSE 2026-07-14: leaf property texture setter at +0x9C has the same release/store/AddRef semantics; retain old property textures before transactional replacement.",
+  "comment_repeatable": "SpeedTreeOBSE 2026-07-14: leaf property texture setter at +0x9C has the same release/store/AddRef semantics; retain old property textures before transactional replacement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F1AE0",
+  "display_name": "OB_SpeedTreeShaderLightingProperty_SetTextureRef_010201A0",
   "end_ea": "0x7F1B2D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1AE0",
+  "name": "OB_SpeedTreeShaderLightingProperty_SetTextureRef_010201A0",
   "segment": ".text",
   "sha256": "bd0942bc9d0686a3d16e837d133103cbb44f7187cfe62b0c696ff6143d8966bb",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1AE0",
-  "type": "void __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 77,
+  "type": "void __thiscall(OB_SpeedTreeShaderLightingProperty_010201A0 *this, int textureRef)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 2
 }

@@ -1,148 +1,234 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TRACKBAR_INFO",
+  "definition": "struct TRACKBAR_INFO\n{\nHWND hwndSelf;\nDWORD dwStyle;\nLONG lRangeMin;\nLONG lRangeMax;\nLONG lLineSize;\nLONG lPageSize;\nLONG lSelMin;\nLONG lSelMax;\nLONG lPos;\nUINT uThumbLen;\nUINT uNumTics;\nUINT uTicFreq;\nHWND hwndNotify;\nHWND hwndToolTip;\nHWND hwndBuddyLA;\nHWND hwndBuddyRB;\nINT fLocation;\nDWORD flags;\nBOOL bUnicode;\nRECT rcChannel;\nRECT rcSelection;\nRECT rcThumb;\nLPLONG tics;\n}\n",
   "id": 18374686479672042349,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndSelf",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwStyle",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lRangeMin",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lRangeMax",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lLineSize",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lPageSize",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lSelMin",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lSelMax",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lPos",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uThumbLen",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uNumTics",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uTicFreq",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndNotify",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndToolTip",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndBuddyLA",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndBuddyRB",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fLocation",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bUnicode",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcChannel",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 16
+      "offset_hex": "0x4C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcSelection",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 16
+      "offset_hex": "0x5C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcThumb",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 16
+      "offset_hex": "0x6C",
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tics",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "LPLONG"
     }
   ],
   "name": "TRACKBAR_INFO",
+  "ordinal": 6578,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 128
 }

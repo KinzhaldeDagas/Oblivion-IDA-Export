@@ -1,4 +1,4 @@
-0x73E2B0: sub     esp, 24h
+0x73E2B0: sub     esp, 24h; Pass225/226: NiScreenTexture stream load; loads 0x1C-byte records and queues one object reference for +0x14 texturing property. Does not set +0x18 dirty mask.
 0x73E2B3: push    ebx
 0x73E2B4: mov     ebx, [esp+28h+a2]
 0x73E2B8: push    ebp
@@ -111,7 +111,7 @@
 0x73E3E5: mov     eax, 1
 0x73E3EA: push    eax
 0x73E3EB: mov     ecx, ebp
-0x73E3ED: call    sub_73DD70
+0x73E3ED: call    sub_73DD70; Pass226: NiScreenTexture record capacity helper; reallocates/copies 0x1C-byte records. Stock xrefs are load/copy only and do not set +0x18.
 0x73E3F2: mov     eax, [ebp+8]
 0x73E3F5: mov     edx, [ebp+0]
 0x73E3F8: lea     ecx, ds:0[eax*8]

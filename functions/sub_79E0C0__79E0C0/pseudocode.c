@@ -1,4 +1,8 @@
-int __cdecl sub_79E0C0(int a1, int a2, int a3)
+// Checked/STL trampoline for forward SFrondGuide copy-assignment; delegates to 0x79BE80 and returns destination end.
+OB_SFrondGuide_010201A0 *__cdecl OB_SFrondGuide_CopyAssignRangeForwardCheckedThunk_010201A0(
+        const OB_SFrondGuide_010201A0 *first,
+        const OB_SFrondGuide_010201A0 *last,
+        OB_SFrondGuide_010201A0 *destinationFirst)
 {
-  return sub_79BE80(a1, a2, a3);
+  return OB_SFrondGuide_CopyAssignRangeForwardThunk_010201A0(first, last, destinationFirst); /*0x79e0ea*/
 }

@@ -1,24 +1,24 @@
-UnkBohBoh *sub_6B8660()
+MenuTopicManagerView *__cdecl MenuTopicManager::GetSingleton()
 {
   UnkBohBoh *result; // eax
 
-  result = dword_B3C218;
-  if ( !dword_B3C218 )
+  result = unk_B3C218; /*0x6b8660*/
+  if ( !unk_B3C218 ) /*0x6b8660*/
   {
-    result = (UnkBohBoh *)FormHeapAlloc(0x10u);
-    if ( result )
+    result = (UnkBohBoh *)FormHeapAlloc(0x10u); /*0x6b866b*/
+    if ( result ) /*0x6b8675*/
     {
-      result->unk04 = 0;
-      result->unk08 = 0;
-      result->unk00 = 0;
-      result->unk10 = 0;
-      dword_B3C218 = result;
+      result->unk04 = 0; /*0x6b8677*/
+      result->unk08 = 0; /*0x6b867e*/
+      result->unk00 = 0; /*0x6b8685*/
+      result->unk10 = 0; /*0x6b868b*/
+      unk_B3C218 = result; /*0x6b8692*/
     }
     else
     {
-      dword_B3C218 = 0;
-      return 0;
+      unk_B3C218 = 0; /*0x6b869a*/
+      return 0; /*0x6b8698*/
     }
   }
-  return result;
+  return (MenuTopicManagerView *)result; /*0x6b8697*/
 }

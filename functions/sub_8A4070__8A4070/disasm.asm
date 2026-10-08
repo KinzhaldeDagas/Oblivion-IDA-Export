@@ -12,7 +12,7 @@
 0x8A408C: lea     eax, [esp+24h+var_C]
 0x8A4090: mov     large fs:0, eax
 0x8A4096: mov     esi, ecx
-0x8A4098: mov     ebp, [esp+24h+arg_0]
+0x8A4098: mov     ebp, [esp+24h+incoming]
 0x8A409C: test    ebp, ebp
 0x8A409E: mov     [esp+24h+var_4], 0
 0x8A40A6: jz      loc_8A4130
@@ -41,16 +41,16 @@
 0x8A40EA: jmp     short loc_8A40EE
 0x8A40EC: xor     eax, eax
 0x8A40EE: mov     ecx, [esi+4]
-0x8A40F1: lea     edx, [esp+24h+arg_0]
+0x8A40F1: lea     edx, [esp+24h+incoming]
 0x8A40F5: mov     [eax+4], ecx
 0x8A40F8: mov     byte ptr [esp+24h+var_4], 0
 0x8A40FD: mov     [esi+4], eax
 0x8A4100: push    edx
 0x8A4101: jmp     short loc_8A4108
-0x8A4103: lea     eax, [esp+24h+arg_0]
-0x8A4107: push    eax
-0x8A4108: mov     ecx, esi
-0x8A410A: call    sub_55E2A0
+0x8A4103: lea     eax, [esp+24h+incoming]
+0x8A4107: push    eax; incoming
+0x8A4108: mov     ecx, esi; this
+0x8A410A: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x8A410F: lea     ecx, [ebp+4]
 0x8A4112: push    ecx; lpAddend
 0x8A4113: mov     [esp+28h+var_4], 0FFFFFFFFh
@@ -70,3 +70,17 @@
 0x8A413E: pop     ebp
 0x8A413F: add     esp, 14h
 0x8A4142: retn    4
+0x9C4820: lea     ecx, [ebp+4]; slot
+0x9C4823: jmp     NiPointerSlot_Release
+0x9C4828: mov     eax, [ebp-14h]
+0x9C482B: push    eax
+0x9C482C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4831: pop     ecx
+0x9C4832: retn
+0x9C4833: mov     edx, [esp+arg_4]
+0x9C4837: lea     eax, [edx-14h]
+0x9C483A: mov     ecx, [edx-18h]
+0x9C483D: xor     ecx, eax
+0x9C483F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4844: mov     eax, offset stru_AED194
+0x9C4849: jmp     ___CxxFrameHandler3

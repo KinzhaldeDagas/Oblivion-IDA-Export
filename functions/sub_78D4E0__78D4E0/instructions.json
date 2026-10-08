@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78D4E0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion byte-vector push_back: appends in available capacity or delegates to checked insert-one at end. Called by CIndexedGeometry::AddVertexWind for matrix indices.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x78D506",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x78D528",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78D52C",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -199,31 +199,31 @@
   },
   {
     "ea": "0x78D52E",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D52F",
-    "line": "lea     ecx, [esp+1Ch+var_8]",
+    "line": "lea     ecx, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78D533",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D534",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78D536",
-    "line": "call    sub_78C860",
+    "line": "call    OB_stVectorByte_InsertOne_010201A0; Oblivion byte-vector insert-one wrapper: converts a checked iterator to an offset, inserts one byte through byte insert-fill, and returns the relocated checked iterator.",
     "mnemonic": "call",
     "size": 5
   },

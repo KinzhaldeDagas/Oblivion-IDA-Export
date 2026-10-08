@@ -1,4 +1,4 @@
-int __thiscall sub_526C20(char *this, int a2)
+unsigned __int16 __thiscall sub_526C20(char *this, ActorBaseSaveChangeMask a2)
 {
-  return sub_521BA0(this + 0xFFFFFF98, a2);
+  return TESNPC_GetModifiedSize((TESNPC *)(this + 0xFFFFFF98), a2);
 }

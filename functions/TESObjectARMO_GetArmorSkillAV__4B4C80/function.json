@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x4B4C80",
+      "0x4B4C90"
+    ]
+  ],
+  "chunks_sha256": "a75a260d53838984387348a4b768e83fc5efe934ea00abb1ac3e5bfd73b2eed8",
+  "comment_regular": "Oblivion authoritative armor-skill selector: native flags+0x6A bit 0x80 maps Heavy AV 0x12, otherwise Light AV 0x1B. MWMediumArmor detours here and gives precedence to plugin-owned memory flag 0x0004 (file BMDT 0x00040000) for Medium and 0x0008 (file BMDT 0x00080000) for explicit Light; native Heavy remains 0x0080 (file 0x00800000). Untagged records may then use weight inference.",
+  "comment_repeatable": "Oblivion authoritative armor-skill selector: native flags+0x6A bit 0x80 maps Heavy AV 0x12, otherwise Light AV 0x1B. MWMediumArmor detours here and gives precedence to plugin-owned memory flag 0x0004 (file BMDT 0x00040000) for Medium and 0x0008 (file BMDT 0x00080000) for explicit Light; native Heavy remains 0x0080 (file 0x00800000). Untagged records may then use weight inference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESObjectARMO_GetArmorSkillAV",
   "end_ea": "0x4B4C90",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectARMO_GetArmorSkillAV",
   "segment": ".text",
   "sha256": "a75a260d53838984387348a4b768e83fc5efe934ea00abb1ac3e5bfd73b2eed8",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B4C80",
+  "total_chunk_size": 16,
   "type": "signed int __thiscall(_BYTE *this)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 7

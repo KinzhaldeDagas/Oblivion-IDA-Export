@@ -1,4 +1,4 @@
-0x6CF780: push    ecx
+0x6CF780: push    ecx; NiBlendAccumTransformInterpolator virtual transform update (+0x4C). One item uses the accumulation fast path. With multiple items, normalizes blend state, updates each nonzero-weight 0x18-byte item using either caller time or its per-item time +0x14, then evaluates the accumulated transform. Caches requested time at +0x08.
 0x6CF781: push    esi
 0x6CF782: mov     esi, ecx
 0x6CF784: mov     cl, [esi+0Eh]
@@ -13,7 +13,7 @@
 0x6CF79C: push    ecx
 0x6CF79D: mov     ecx, esi
 0x6CF79F: fstp    [esp+14h+var_14]; float
-0x6CF7A2: call    sub_6CF630
+0x6CF7A2: call    NiBlendAccumTransformInterpolator_UpdateSingle; Oblivion: single-active-item accumulated-transform path. Prepares the selected item's accumulation state, evaluates/composes its cached transform relative to the item reference, and returns the composed transform when valid.
 0x6CF7A7: fld     [esp+8+arg_0]
 0x6CF7AB: fstp    dword ptr [esi+8]
 0x6CF7AE: pop     esi
@@ -24,7 +24,7 @@
 0x6CF7BB: push    ebx
 0x6CF7BC: push    edi
 0x6CF7BD: mov     ecx, esi
-0x6CF7BF: call    sub_6CD0F0
+0x6CF7BF: call    NiBlendInterpolator_RecomputeNormalizedWeights; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.
 0x6CF7C4: mov     edi, [esp+10h+arg_4]
 0x6CF7C8: xor     bl, bl
 0x6CF7CA: cmp     [esi+0Dh], bl
@@ -60,7 +60,7 @@
 0x6CF821: fstp    [esp+18h+var_18]; float
 0x6CF824: push    ecx; char
 0x6CF825: mov     ecx, esi
-0x6CF827: call    sub_6CEF80
+0x6CF827: call    NiBlendAccumTransformInterpolator_UpdateItemAccumulation; Oblivion: updates one accumulation item's 0x68-byte state (cached time, current transform, accumulated delta/reference state). Evaluates virtual +0x4C and handles forward time versus backward/wrap time using the interpolator range from virtual +0x80.
 0x6CF82C: jmp     short loc_6CF830
 0x6CF82E: fstp    st
 0x6CF830: add     bl, 1
@@ -74,7 +74,7 @@
 0x6CF846: push    ecx
 0x6CF847: mov     ecx, esi
 0x6CF849: fstp    [esp+1Ch+var_1C]
-0x6CF84C: call    sub_6CE840
+0x6CF84C: call    NiBlendAccumTransformInterpolator_UpdateMultiple; Oblivion: blends accumulated transforms from each active item's 0x68-byte state record using item+8 normalized weight. Chooses current sample or accumulated delta state, preserves TRS channel validity independently, hemisphere-corrects/normalizes rotation, composes with the cached blend transform at +0x30, and returns false only when every channel remains invalid.
 0x6CF851: pop     edi
 0x6CF852: pop     ebx
 0x6CF853: fld     [esp+8+arg_0]

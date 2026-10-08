@@ -39,7 +39,7 @@
 0x6D8FCA: mov     [esi+14h], cl
 0x6D8FCD: mov     eax, ds:0B3D0B8h[edi*4]
 0x6D8FD4: push    ebx
-0x6D8FD5: call    eax ; dword_B3D0B8
+0x6D8FD5: call    eax ; unk_B3D0B8
 0x6D8FD7: mov     ecx, [esp+30h+a2]
 0x6D8FDB: mov     edx, ds:0B3D440h[edi*4]
 0x6D8FE2: mov     ebx, eax
@@ -47,7 +47,7 @@
 0x6D8FE8: push    eax
 0x6D8FE9: push    ecx
 0x6D8FEA: push    ebx
-0x6D8FEB: call    edx ; dword_B3D440
+0x6D8FEB: call    edx ; unk_B3D440
 0x6D8FED: mov     eax, [esp+3Ch+a2]
 0x6D8FF1: add     esp, 28h
 0x6D8FF4: push    edi

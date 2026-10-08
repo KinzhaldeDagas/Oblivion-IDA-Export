@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_786D60",
+  "chunks": [
+    [
+      "0x786D60",
+      "0x786E3D"
+    ],
+    [
+      "0x9CB1F0",
+      "0x9CB24D"
+    ]
+  ],
+  "chunks_sha256": "f80dd5992e10a26e3d7249024e5464cbcf29042d029cbae2485ff312fa81622a",
+  "comment_regular": "Oblivion cached-string stBezierSpline constructor. Initializes five compact 16-byte vectors, performs cache lookup/copy or parse/build/cache, and allocates exactly 0x5C bytes for cached copies. Confirms the shipped vector-only layout; RT4.1 source is corroborative, not layout-authoritative.",
+  "comment_repeatable": "Oblivion cached-string stBezierSpline constructor. Initializes five compact 16-byte vectors, performs cache lookup/copy or parse/build/cache, and allocates exactly 0x5C bytes for cached copies. Confirms the shipped vector-only layout; RT4.1 source is corroborative, not layout-authoritative.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "OB_StBezierSpline_ctor_cachedFromString_010201A0",
   "end_ea": "0x786E3D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_786D60",
+  "name": "OB_StBezierSpline_ctor_cachedFromString_010201A0",
   "segment": ".text",
   "sha256": "da8ce09355aa274926a97445ee390f7ed72797a1c6126548964d3280273916c6",
   "size": 221,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x786D60",
-  "type": "char **__thiscall(char **this, _DWORD *)",
-  "xrefs_from_count": 85,
+  "total_chunk_size": 314,
+  "type": "OB_stBezierSpline_010201A0 *__thiscall(OB_stBezierSpline_010201A0 *this, const void *stringObject)",
+  "xrefs_from_count": 114,
   "xrefs_to_count": 2
 }

@@ -3,6 +3,6 @@
 0x414C9C: mov     edx, [eax]
 0x414C9E: push    eax
 0x414C9F: mov     [esi+4], edx
-0x414CA2: call    FormHeapFree
+0x414CA2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x414CA7: add     esp, 4
 0x414CAA: jmp     short EffectItemList_Clear___LoopContinue

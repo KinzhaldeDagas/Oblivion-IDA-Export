@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D5DB0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Oblivion NiTransformInterpolator time-range query. Aggregates first/last timestamps from translation (data count +0x0A, keys +0x24, stride +0x1D), rotation (count +8, keys +0x20, type +0x10, stride +0x1C), and scale (count +0x0C, keys +0x28, stride +0x1E). Rotation type 4 scans three independent scalar-axis subtracks. Returns [0,0] when no authored track contributes.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -364,12 +364,6 @@
     "line": "jmp     short loc_6D5E70",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6D5E6D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6D5E70",

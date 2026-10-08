@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA184D0",
-    "line": "mov     eax, TESDescription_CachedDesc.m_data",
+    "line": "mov     eax, ds:0B33C08h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0xA184D6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0xA184E0",
-    "line": "mov     TESDescription_CachedDesc.m_data, eax",
+    "line": "mov     ds:0B33C08h, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA184E5",
-    "line": "mov     TESDescription_CachedDesc.m_bufLen, ax",
+    "line": "mov     word_B33C0E, ax",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0xA184EB",
-    "line": "mov     TESDescription_CachedDesc.m_dataLen, ax",
+    "line": "mov     word_B33C0C, ax",
     "mnemonic": "mov",
     "size": 6
   },

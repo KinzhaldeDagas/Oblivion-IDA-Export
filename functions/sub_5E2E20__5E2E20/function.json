@@ -1,19 +1,32 @@
 {
-  "callees_count": 32,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
+  "callers_count": 20,
+  "chunks": [
+    [
+      "0x5E2E20",
+      "0x5E309B"
+    ]
+  ],
+  "chunks_sha256": "5a665acd0f9aeb681f9025cf78b70bf7e32579e1878a9d2543318755e2d794c0",
+  "comment_regular": "Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
+  "comment_repeatable": "Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5E2E20",
+  "display_name": "Actor_ChoosePathGridSteeringPosition",
   "end_ea": "0x5E309B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5E2E20",
+  "name": "Actor_ChoosePathGridSteeringPosition",
   "segment": ".text",
   "sha256": "5a665acd0f9aeb681f9025cf78b70bf7e32579e1878a9d2543318755e2d794c0",
   "size": 635,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E2E20",
-  "type": "int *__thiscall(TESObjectREFR *this, int *arg0, int, int, float, TESObjectCELL *, float, int, char)",
+  "total_chunk_size": 635,
+  "type": "float *__thiscall(TESObjectREFR *this, float *arg0, NiPoint3, TESObjectCELL *, float, float, bool pathMode)",
   "xrefs_from_count": 223,
   "xrefs_to_count": 20
 }

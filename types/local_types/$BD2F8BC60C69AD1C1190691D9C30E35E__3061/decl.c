@@ -1,1 +1,5 @@
-$BD2F8BC60C69AD1C1190691D9C30E35E
+struct $BD2F8BC60C69AD1C1190691D9C30E35E
+{
+unsigned __int8 rpc_ver;
+unsigned __int8 rpc_ver_minor;
+};

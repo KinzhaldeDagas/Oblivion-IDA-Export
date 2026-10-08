@@ -13,8 +13,8 @@
 0x4C2320: jz      loc_4C23F4
 0x4C2326: mov     ecx, ds:0B333A0h
 0x4C232C: call    TES__GetCurrentWorldspace
-0x4C2331: mov     ecx, eax
-0x4C2333: call    sub_4EF7E0
+0x4C2331: mov     ecx, eax; worldspace
+0x4C2333: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4C2338: test    eax, eax
 0x4C233A: jz      loc_4C23F4
 0x4C2340: mov     eax, ds:0B3F9A8h
@@ -39,8 +39,8 @@
 0x4C238E: fmulp   st(1), st
 0x4C2390: fstp    dword ptr [esp+6Ch+var_1C+4]
 0x4C2394: call    TES__GetCurrentWorldspace
-0x4C2399: mov     ecx, eax
-0x4C239B: call    sub_4EF7E0
+0x4C2399: mov     ecx, eax; worldspace
+0x4C239B: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4C23A0: mov     ecx, eax
 0x4C23A2: call    sub_4EA670
 0x4C23A7: cmp     eax, ebx
@@ -72,7 +72,7 @@
 0x4C23E7: jz      short loc_4C23F4
 0x4C23E9: push    4
 0x4C23EB: mov     ecx, edi
-0x4C23ED: call    NiNode_GetNiPropertyByID
+0x4C23ED: call    NiNode_GetNiPropertyByID;
 0x4C23F2: mov     ebx, eax
 0x4C23F4: xor     ebp, ebp
 0x4C23F6: mov     ecx, [esp+68h+var_58]
@@ -98,7 +98,7 @@
 0x4C244A: mov     edx, ecx
 0x4C244C: mov     ecx, [edx]
 0x4C244E: push    4
-0x4C2450: call    NiNode_GetNiPropertyByID
+0x4C2450: call    NiNode_GetNiPropertyByID;
 0x4C2455: mov     edi, eax
 0x4C2457: test    edi, edi
 0x4C2459: jz      short loc_4C247E

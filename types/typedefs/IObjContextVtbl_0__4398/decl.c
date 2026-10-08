@@ -1,1 +1,1 @@
-IObjContextVtbl_0
+typedef IObjContextVtbl IObjContextVtbl_0;

@@ -1,19 +1,32 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x67F5D0",
+      "0x67F68E"
+    ]
+  ],
+  "chunks_sha256": "f70746cb717865b706e98733a92dffe7f9222c3da47c2b2595bf20a57c7c71ff",
+  "comment_regular": "Verified duplicate test: finds the two endpoint spaces from the door reference and linked door, looks up that pair in the nested map, and checks whether any AStarWorldNode in the list contains this reference at either endpoint. TESObjectREFR::AddToLowPathWorld skips construction/insertion when this returns true.",
+  "comment_repeatable": "Verified duplicate test: finds the two endpoint spaces from the door reference and linked door, looks up that pair in the nested map, and checks whether any AStarWorldNode in the list contains this reference at either endpoint. TESObjectREFR::AddToLowPathWorld skips construction/insertion when this returns true.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67F5D0",
+  "display_name": "TravelPath_HasAStarWorldNodeForDoor",
   "end_ea": "0x67F68E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67F5D0",
+  "name": "TravelPath_HasAStarWorldNodeForDoor",
   "segment": ".text",
   "sha256": "f70746cb717865b706e98733a92dffe7f9222c3da47c2b2595bf20a57c7c71ff",
   "size": 190,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67F5D0",
-  "type": "char __cdecl(TESObjectREFR *a1)",
+  "total_chunk_size": 190,
+  "type": "bool __cdecl(TESObjectREFR *doorReference)",
   "xrefs_from_count": 94,
   "xrefs_to_count": 1
 }

@@ -14,7 +14,7 @@
 0x71AA26: jle     short loc_71AA78
 0x71AA28: mov     edx, [esi+28h]
 0x71AA2B: push    edx
-0x71AA2C: call    FormHeapFree
+0x71AA2C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71AA31: mov     eax, [esi+20h]
 0x71AA34: xor     ecx, ecx
 0x71AA36: mov     [esi+24h], eax
@@ -28,7 +28,7 @@
 0x71AA4D: mov     [esi+28h], eax
 0x71AA50: mov     eax, [esi+2Ch]
 0x71AA53: push    eax
-0x71AA54: call    FormHeapFree
+0x71AA54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71AA59: mov     eax, [esi+24h]
 0x71AA5C: xor     ecx, ecx
 0x71AA5E: mov     edx, 4

@@ -1,39 +1,40 @@
-int __thiscall sub_749800(_DWORD *this, int *a2)
+// Pass221: Refcounted NiTPointerList head-insert helper; node+0x08 owns the payload reference.
+MEF_RefListNode32 *__thiscall NiTRefPointerList__AddHead(MEF_RefList32 *self, void **payload)
 {
-  _DWORD *v3; // edi
-  int v4; // ebx
-  int v5; // eax
+  struct MEF_RefListNode32 *v3; // edi
+  volatile LONG *v4; // ebx
+  volatile LONG *v5; // eax
   bool v6; // zf
-  int result; // eax
+  MEF_RefListNode32 *result; // eax
 
-  v3 = (_DWORD *)(*(int (__thiscall **)(_DWORD *))(*this + 4))(this);
-  v4 = v3[2];
-  if ( v4 != *a2 )
+  v3 = (struct MEF_RefListNode32 *)(*((int (__thiscall **)(MEF_RefList32 *))self->vtable + 1))(self); /*0x749811*/
+  v4 = (volatile LONG *)v3->payload; /*0x749813*/
+  if ( v4 != *payload ) /*0x749819*/
   {
-    if ( v4 )
+    if ( v4 ) /*0x74981d*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v4 + 4)) )
-        (**(void (__thiscall ***)(int, int))v4)(v4, 1);
+      if ( !InterlockedDecrement(v4 + 1) ) /*0x749823*/
+        (**(void (__thiscall ***)(void *, int))v4)((void *)v4, 1); /*0x749839*/
     }
-    v5 = *a2;
-    v6 = *a2 == 0;
-    v3[2] = *a2;
-    if ( !v6 )
-      InterlockedIncrement((volatile LONG *)(v5 + 4));
+    v5 = (volatile LONG *)*payload; /*0x74983b*/
+    v6 = *payload == 0; /*0x74983e*/
+    v3->payload = *payload; /*0x749840*/
+    if ( !v6 ) /*0x749843*/
+      InterlockedIncrement(v5 + 1); /*0x749849*/
   }
-  v3[1] = 0;
-  *v3 = *(this + 1);
-  result = *(this + 1);
-  if ( result )
+  v3->previous = 0; /*0x74984f*/
+  v3->next = self->head; /*0x749859*/
+  result = self->head; /*0x74985b*/
+  if ( result ) /*0x749860*/
   {
-    *(_DWORD *)(result + 4) = v3;
-    ++*(this + 3);
+    result->previous = v3; /*0x749862*/
+    ++self->count; /*0x749865*/
   }
   else
   {
-    ++*(this + 3);
-    *(this + 2) = v3;
+    ++self->count; /*0x749873*/
+    self->tail = v3; /*0x749877*/
   }
-  *(this + 1) = v3;
-  return result;
+  self->head = v3; /*0x749869*/
+  return result; /*0x74986c*/
 }

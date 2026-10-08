@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7538C6",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x753927",
-    "line": "lea     edi, [esp+130h+var_9C]",
+    "line": "lea     edi, [esp+130h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x753944",
-    "line": "lea     ecx, [esp+130h+var_34]",
+    "line": "lea     ecx, [esp+130h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -385,61 +385,61 @@
   },
   {
     "ea": "0x753953",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x753958",
-    "line": "lea     edx, [esp+130h+var_9C]",
+    "line": "lea     edx, [esp+130h+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x75395F",
-    "line": "push    edx",
+    "line": "push    edx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x753960",
-    "line": "lea     eax, [esp+134h+var_D0]",
+    "line": "lea     eax, [esp+134h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x753964",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x753965",
-    "line": "lea     ecx, [esp+138h+var_34]",
+    "line": "lea     ecx, [esp+138h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x75396C",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x753971",
-    "line": "mov     eax, [esp+130h+var_A4]",
+    "line": "mov     eax, [esp+130h+out.pos.z]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x753978",
-    "line": "mov     ecx, [esp+130h+var_AC]",
+    "line": "mov     ecx, [esp+130h+out.pos.x]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x75397F",
-    "line": "mov     edx, [esp+130h+var_A8]",
+    "line": "mov     edx, [esp+130h+out.pos.y]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x75399B",
-    "line": "lea     ecx, [esp+138h+var_D0]",
+    "line": "lea     ecx, [esp+138h+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x7539AC",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x753A37",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },

@@ -22,9 +22,9 @@
 0x573EC6: call    sub_573950
 0x573ECB: mov     eax, [esi+4]
 0x573ECE: push    eax
-0x573ECF: call    FormHeapFree
+0x573ECF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x573ED4: add     esp, 4
-0x573ED7: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x573ED7: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x573EDC: push    8; int
 0x573EDE: push    4; unsigned int
 0x573EE0: add     esi, 0Ch
@@ -37,3 +37,18 @@
 0x573EFD: pop     esi
 0x573EFE: add     esp, 10h
 0x573F01: retn
+0x9BE1B0: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9BE1B5: push    8; int
+0x9BE1B7: push    4; unsigned int
+0x9BE1B9: mov     eax, [ebp-10h]
+0x9BE1BC: add     eax, 0Ch
+0x9BE1BF: push    eax; void *
+0x9BE1C0: call    $LN21
+0x9BE1C5: retn
+0x9BE1C6: mov     edx, [esp+arg_4]
+0x9BE1CA: lea     eax, [edx-8]
+0x9BE1CD: mov     ecx, [edx-0Ch]
+0x9BE1D0: xor     ecx, eax
+0x9BE1D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE1D7: mov     eax, offset stru_AE7998
+0x9BE1DC: jmp     ___CxxFrameHandler3

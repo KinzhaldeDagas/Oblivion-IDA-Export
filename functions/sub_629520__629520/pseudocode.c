@@ -1,4 +1,4 @@
 char __thiscall sub_629520(_BYTE *this)
 {
-  return *(this + 0xC8);
+  return *(this + 0xC8); /*0x629526*/
 }

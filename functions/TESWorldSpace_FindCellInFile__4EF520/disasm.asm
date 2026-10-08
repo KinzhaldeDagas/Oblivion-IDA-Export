@@ -21,10 +21,10 @@
 0x4EF550: push    eax; a3
 0x4EF551: push    ecx; a2
 0x4EF552: mov     ecx, ebx; this
-0x4EF554: call    TESWorldSpace__GetIndexForCellCoord
+0x4EF554: call    TESWorldSpace__GetIndexForCellCoord; EngineFix trace 2026-05-11: GetIndexForCellCoord validates coordinates against worldspace [0xAC..0xB8] bounds. DoPostFixups offset-table allocation is based on [0x98..0xA4], so callers that write into rebuilt tables must separately check index against the allocation rectangle.
 0x4EF559: cmp     eax, 0FFFFFFFFh
 0x4EF55C: jz      short loc_4EF580
-0x4EF55E: mov     eax, [edi+eax*4]
+0x4EF55E: mov     eax, [edi+eax*4]; MEF v21 implementation target: guarded exterior-cell offset fast path. Requires tracked OFST/rebuilt-table count, validates index and base+offset target, falls back to 0x4EF58B for non-authoritative cache misses.
 0x4EF561: test    eax, eax
 0x4EF563: jz      short loc_4EF580
 0x4EF565: mov     edx, [ebx+0BCh]
@@ -46,7 +46,7 @@
 0x4EF585: mov     esp, ebp
 0x4EF587: pop     ebp
 0x4EF588: retn    0Ch
-0x4EF58B: mov     edi, [ebp+a3]
+0x4EF58B: mov     edi, [ebp+a3]; MEF v21 fallback target: existing GRUP/CELL scan remains the fallback for untracked or out-of-range OFST cache data.
 0x4EF58E: mov     eax, [ebp+a2]
 0x4EF591: push    edi
 0x4EF592: push    eax
@@ -99,7 +99,7 @@
 0x4EF634: mov     [esp+20h+var_12], 0
 0x4EF639: jz      loc_4EF6F7
 0x4EF63F: mov     ecx, esi
-0x4EF641: call    TESFile__NextGroup
+0x4EF641: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x4EF646: jmp     short def_4EF613; jumptable 004EF613 default case, cases 2,3,7
 0x4EF648: cmp     eax, ds:0B06048h
 0x4EF64E: jnz     loc_4EF6D9
@@ -124,7 +124,7 @@
 0x4EF68D: lea     eax, [esp+24h+Dst]
 0x4EF691: push    eax; Dst
 0x4EF692: mov     ecx, esi; a1
-0x4EF694: call    TESFile_GetChunkData
+0x4EF694: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4EF699: mov     bl, 1
 0x4EF69B: mov     ecx, esi
 0x4EF69D: call    TESFile_GetNextChunk

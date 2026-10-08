@@ -17,7 +17,7 @@
 0x4BBA55: jmp     TESSigilStone_LoadForm___Done
 0x4BBA5A: push    esi
 0x4BBA5B: mov     ecx, ebx; this
-0x4BBA5D: call    TESFile_InitializeFormFromRecord
+0x4BBA5D: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4BBA62: push    0; a2
 0x4BBA64: mov     ecx, esi; this
 0x4BBA66: call    TESForm_SetIsLinked

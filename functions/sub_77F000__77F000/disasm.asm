@@ -55,9 +55,9 @@
 0x77F0A7: mov     esi, [esi]
 0x77F0A9: jz      short loc_77F0BD
 0x77F0AB: lea     ecx, [esp+118h+Dst]
-0x77F0AF: push    ecx; Str2
-0x77F0B0: push    eax; Str1
-0x77F0B1: call    __strcmp
+0x77F0AF: push    ecx; right
+0x77F0B0: push    eax; left
+0x77F0B1: call    CRT_StricmpLocaleDispatch
 0x77F0B6: add     esp, 8
 0x77F0B9: test    eax, eax
 0x77F0BB: jz      short loc_77F11F

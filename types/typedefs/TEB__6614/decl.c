@@ -1,1 +1,1 @@
-TEB
+typedef _TEB TEB;

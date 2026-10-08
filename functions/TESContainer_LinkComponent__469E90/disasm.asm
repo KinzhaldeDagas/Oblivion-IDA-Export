@@ -26,7 +26,7 @@
 0x469ECF: call    BSSimpleList_Remove
 0x469ED4: mov     esi, [ebp+4]
 0x469ED7: push    edi
-0x469ED8: call    FormHeapFree
+0x469ED8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x469EDD: add     esp, 4
 0x469EE0: jmp     short loc_469F1D
 0x469EE2: mov     eax, [esi+4]
@@ -37,15 +37,15 @@
 0x469EEF: mov     edx, [eax]
 0x469EF1: push    eax
 0x469EF2: mov     [esi], edx
-0x469EF4: call    FormHeapFree
+0x469EF4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x469EF9: add     esp, 4
 0x469EFC: push    edi
-0x469EFD: call    FormHeapFree
+0x469EFD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x469F02: add     esp, 4
 0x469F05: jmp     short loc_469F1D
 0x469F07: push    edi
 0x469F08: mov     dword ptr [esi], 0
-0x469F0E: call    FormHeapFree
+0x469F0E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x469F13: add     esp, 4
 0x469F16: jmp     short loc_469F1D
 0x469F18: mov     ebp, esi

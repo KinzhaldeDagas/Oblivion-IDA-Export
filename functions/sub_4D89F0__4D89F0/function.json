@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D89F0",
+      "0x4D8A06"
+    ]
+  ],
+  "chunks_sha256": "ee051f3da35b05bda589a065db09d7e77be1b91d08fe4a5303be09001b52c032",
+  "comment_regular": "TES4 authoritative: write reference rotation Y at TESObjectREFR+0x24, then notify the reference through virtual slot +0x40 with change mask 4.",
+  "comment_repeatable": "TES4 authoritative: write reference rotation Y at TESObjectREFR+0x24, then notify the reference through virtual slot +0x40 with change mask 4.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D89F0",
+  "display_name": "TESObjectREFR_SetRotationY",
   "end_ea": "0x4D8A06",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D89F0",
+  "name": "TESObjectREFR_SetRotationY",
   "segment": ".text",
   "sha256": "ee051f3da35b05bda589a065db09d7e77be1b91d08fe4a5303be09001b52c032",
   "size": 22,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D89F0",
-  "type": "int __cdecl(float)",
+  "total_chunk_size": 22,
+  "type": "int __thiscall(TESObjectREFR *this, float radians)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 3
 }

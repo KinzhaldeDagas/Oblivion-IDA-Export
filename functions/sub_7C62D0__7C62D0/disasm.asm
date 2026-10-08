@@ -1,5 +1,5 @@
 0x7C62D0: push    esi
-0x7C62D1: movzx   esi, [esp+4+arg_0]
+0x7C62D1: movzx   esi, [esp+4+index]
 0x7C62D6: cmp     esi, [ecx+0F0h]
 0x7C62DC: jb      short loc_7C62E4
 0x7C62DE: xor     eax, eax

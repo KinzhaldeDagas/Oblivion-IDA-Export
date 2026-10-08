@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x64AC25",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x64AC35",
-    "line": "call    sub_4D7A20",
+    "line": "call    TESObjectREFR_SetStartLocation; TESObjectREFR wrapper records package start location from worldspace/cell, position XYZ, and rotZ into ExtraPackageStartLocation.",
     "mnemonic": "call",
     "size": 5
   },

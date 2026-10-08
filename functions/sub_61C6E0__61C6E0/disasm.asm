@@ -1,4 +1,4 @@
-0x61C6E0: push    0FFFFFFFFh
+0x61C6E0: push    0FFFFFFFFh; Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.
 0x61C6E2: push    offset SEH_6E16A0
 0x61C6E7: mov     eax, large fs:0
 0x61C6ED: push    eax
@@ -21,19 +21,19 @@
 0x61C724: mov     ecx, [ebx+3Ch]
 0x61C727: mov     eax, [ecx]
 0x61C729: mov     edx, [eax+174h]
-0x61C72F: push    0
-0x61C731: push    1
-0x61C733: push    ecx
+0x61C72F: push    0; excludedPoints
+0x61C731: push    1; pathMode
+0x61C733: push    ecx; actor
 0x61C734: call    edx
-0x61C736: push    eax
-0x61C737: call    sub_67D820
+0x61C736: push    eax; position
+0x61C737: call    TESPathGrid_FindNearestReachablePointForActor; Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.
 0x61C73C: mov     ebp, eax
 0x61C73E: add     esp, 10h
 0x61C741: test    ebp, ebp
 0x61C743: jz      loc_61C907
 0x61C749: mov     edi, [ebx+3Ch]
-0x61C74C: mov     ecx, ebp
-0x61C74E: call    sub_4BEF40
+0x61C74C: mov     ecx, ebp; this
+0x61C74E: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x61C753: mov     esi, eax
 0x61C755: mov     eax, [edi]
 0x61C757: mov     edx, [eax+174h]
@@ -69,8 +69,8 @@
 0x61C7B6: test    ah, 41h
 0x61C7B9: jp      loc_61C907
 0x61C7BF: mov     esi, [ebx+3Ch]
-0x61C7C2: mov     ecx, ebp
-0x61C7C4: call    sub_4BEF40
+0x61C7C2: mov     ecx, ebp; this
+0x61C7C4: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x61C7C9: push    eax
 0x61C7CA: mov     eax, [esi]
 0x61C7CC: mov     edx, [eax+174h]
@@ -123,10 +123,10 @@
 0x61C854: jnz     short loc_61C860
 0x61C856: cmp     dword ptr [ebp+0], 0
 0x61C85A: jz      loc_61C8F7
-0x61C860: mov     ecx, [ebp+0]
+0x61C860: mov     ecx, [ebp+0]; this
 0x61C863: test    ecx, ecx
 0x61C865: jz      loc_61C8EC
-0x61C86B: call    sub_67ED70
+0x61C86B: call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.
 0x61C870: test    al, al
 0x61C872: jnz     short loc_61C8EC
 0x61C874: push    0Ch; Size
@@ -138,16 +138,16 @@
 0x61C886: mov     [esp+30h+var_4], 0
 0x61C88E: jz      short loc_61C8D6
 0x61C890: mov     edi, [ebp+0]
-0x61C893: mov     ecx, edi
-0x61C895: call    sub_4BEF40
+0x61C893: mov     ecx, edi; this
+0x61C895: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x61C89A: fld     dword ptr [eax]
-0x61C89C: mov     ecx, edi
+0x61C89C: mov     ecx, edi; this
 0x61C89E: fstp    [esp+30h+var_14]
-0x61C8A2: call    sub_4BEF40
+0x61C8A2: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x61C8A7: fld     dword ptr [eax+4]
-0x61C8AA: mov     ecx, edi
+0x61C8AA: mov     ecx, edi; this
 0x61C8AC: fstp    [esp+30h+var_18]
-0x61C8B0: call    sub_4BEF40
+0x61C8B0: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x61C8B5: fld     dword ptr [eax+8]
 0x61C8B8: mov     edi, [esp+30h+var_1C]
 0x61C8BC: fstp    [esp+30h+var_10]
@@ -167,9 +167,9 @@
 0x61C8EF: test    ebp, ebp
 0x61C8F1: jnz     loc_61C850
 0x61C8F7: mov     ecx, edi
-0x61C8F9: call    BSSimpleList_Clear
+0x61C8F9: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x61C8FE: push    edi
-0x61C8FF: call    FormHeapFree
+0x61C8FF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C904: add     esp, 4
 0x61C907: cmp     dword ptr [ebx+118h], 0
 0x61C90E: jnz     short loc_61C936
@@ -216,3 +216,15 @@
 0x61C994: pop     ebx
 0x61C995: add     esp, 1Ch
 0x61C998: retn
+0x9C33E0: mov     eax, [ebp-10h]
+0x9C33E3: push    eax
+0x9C33E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C33E9: pop     ecx
+0x9C33EA: retn
+0x9C33EB: mov     edx, [esp+arg_4]
+0x9C33EF: lea     eax, [edx-20h]
+0x9C33F2: mov     ecx, [edx-24h]
+0x9C33F5: xor     ecx, eax
+0x9C33F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C33FC: mov     eax, offset stru_AEC000
+0x9C3401: jmp     ___CxxFrameHandler3

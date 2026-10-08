@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x5475D0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; ODismemberment combat decode: knockdown chance formula. Combines luck-modified skill, fatigue factor, incoming damage, and fKnockdown* settings, clamped by fKnockdownChance.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x5475D3",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+luckValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5475D7",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x5475DC",
-    "line": "push    eax",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5475DD",
-    "line": "push    ecx",
+    "line": "push    ecx; skillValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x5475E0",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x54765E",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },

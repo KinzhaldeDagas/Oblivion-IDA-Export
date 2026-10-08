@@ -85,37 +85,37 @@
   },
   {
     "ea": "0x487C56",
-    "line": "mov     edi, [esp+20h+arg_4]",
+    "line": "mov     edi, [esp+20h+referenceFormIDOrZero]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x487C5A",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, [esp+20h+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x487C5E",
-    "line": "push    edi",
+    "line": "push    edi; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x487C5F",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x487C61",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x487C62",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x487C9D",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x487CB2",
-    "line": "mov     [esp+20h+arg_4], esi",
+    "line": "mov     [esp+20h+referenceFormIDOrZero], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x487CBE",
-    "line": "mov     edx, [esp+20h+arg_0]",
+    "line": "mov     edx, [esp+20h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -514,5 +514,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFB50",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB54",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB59",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5B",
+    "line": "mov     edx, [esp+referenceFormIDOrZero]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFB5F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB62",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB65",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFB67",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB6C",
+    "line": "mov     eax, offset stru_ADC04C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB71",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

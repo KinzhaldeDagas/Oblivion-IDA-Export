@@ -1,9 +1,9 @@
 _DWORD *sub_A15A80()
 {
-  return sub_90D190(
-           dword_BA953C,
+  return sub_90D190( /*0xa15aaa*/
+           unk_BA953C,
            (int)"hkMotion",
-           (int)dword_BA94C0,
+           (int)unk_BA94C0,
            0xC,
            0,
            0,

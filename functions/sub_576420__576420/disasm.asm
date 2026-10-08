@@ -23,7 +23,7 @@
 0x576467: push    ecx
 0x576468: push    1
 0x57646A: mov     ecx, eax
-0x57646C: call    FonrManager_FontInfo_Load
+0x57646C: call    FontInfo_Construct
 0x576471: jmp     short loc_576475
 0x576473: xor     eax, eax
 0x576475: or      edi, 0FFFFFFFFh
@@ -41,7 +41,7 @@
 0x5764A0: push    edx
 0x5764A1: push    2
 0x5764A3: mov     ecx, eax
-0x5764A5: call    FonrManager_FontInfo_Load
+0x5764A5: call    FontInfo_Construct
 0x5764AA: jmp     short loc_5764AE
 0x5764AC: xor     eax, eax
 0x5764AE: push    3Ch ; '<'; Size
@@ -58,7 +58,7 @@
 0x5764D7: push    ecx
 0x5764D8: push    3
 0x5764DA: mov     ecx, eax
-0x5764DC: call    FonrManager_FontInfo_Load
+0x5764DC: call    FontInfo_Construct
 0x5764E1: jmp     short loc_5764E5
 0x5764E3: xor     eax, eax
 0x5764E5: push    3Ch ; '<'; Size
@@ -75,7 +75,7 @@
 0x57650E: push    edx
 0x57650F: push    4
 0x576511: mov     ecx, eax
-0x576513: call    FonrManager_FontInfo_Load
+0x576513: call    FontInfo_Construct
 0x576518: jmp     short loc_57651C
 0x57651A: xor     eax, eax
 0x57651C: push    3Ch ; '<'; Size
@@ -92,7 +92,7 @@
 0x576545: push    ecx
 0x576546: push    5
 0x576548: mov     ecx, eax
-0x57654A: call    FonrManager_FontInfo_Load
+0x57654A: call    FontInfo_Construct
 0x57654F: jmp     short loc_576553
 0x576551: xor     eax, eax
 0x576553: mov     [esi+10h], eax
@@ -105,3 +105,35 @@
 0x576569: pop     esi
 0x57656A: add     esp, 10h
 0x57656D: retn
+0x9BE390: mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime
+0x9BE393: push    eax
+0x9BE394: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE399: pop     ecx
+0x9BE39A: retn
+0x9BE39B: mov     eax, [ebp-10h]
+0x9BE39E: push    eax
+0x9BE39F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE3A4: pop     ecx
+0x9BE3A5: retn
+0x9BE3A6: mov     eax, [ebp-10h]
+0x9BE3A9: push    eax
+0x9BE3AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE3AF: pop     ecx
+0x9BE3B0: retn
+0x9BE3B1: mov     eax, [ebp-10h]
+0x9BE3B4: push    eax
+0x9BE3B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE3BA: pop     ecx
+0x9BE3BB: retn
+0x9BE3BC: mov     eax, [ebp-10h]
+0x9BE3BF: push    eax
+0x9BE3C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE3C5: pop     ecx
+0x9BE3C6: retn
+0x9BE3C7: mov     edx, [esp+arg_4]
+0x9BE3CB: lea     eax, [edx-0Ch]
+0x9BE3CE: mov     ecx, [edx-10h]
+0x9BE3D1: xor     ecx, eax
+0x9BE3D3: call    @__security_check_cookie@4
+0x9BE3D8: mov     eax, offset stru_AE7AF4
+0x9BE3DD: jmp     ___CxxFrameHandler3

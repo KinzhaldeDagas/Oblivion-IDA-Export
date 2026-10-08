@@ -1,5 +1,6 @@
-int sub_9E3360()
+// Verified PathGrid startup initializer: calls InitializeCriticalSection(&g_PathGridCriticalSection) and registers TESPathGrid_DeleteCriticalSectionAtExit with atexit.
+int TESPathGrid_InitializeCriticalSection()
 {
-  InitializeCriticalSection(&stru_B36000);
-  return atexit(sub_A1BCC0);
+  InitializeCriticalSection(&g_PathGridCriticalSection); /*0x9e3365*/
+  return atexit(TESPathGrid_DeleteCriticalSectionAtExit); /*0x9e3376*/
 }

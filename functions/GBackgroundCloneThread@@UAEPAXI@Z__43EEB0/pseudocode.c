@@ -2,8 +2,8 @@ BackgroundCloneThread *__thiscall BackgroundCloneThread::`scalar deleting destru
         BackgroundCloneThread *this,
         char a2)
 {
-  BackgroundCloneThread::~BackgroundCloneThread(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  BackgroundCloneThread::~BackgroundCloneThread(this); /*0x43eeb3*/
+  if ( (a2 & 1) != 0 ) /*0x43eebd*/
+    FormHeapFree((unsigned int)this); /*0x43eec0*/
+  return this; /*0x43eeca*/
 }

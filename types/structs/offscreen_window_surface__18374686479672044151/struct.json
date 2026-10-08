@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "offscreen_window_surface",
+  "definition": "struct __declspec(align(8)) offscreen_window_surface\n{\nwindow_surface header;\nCRITICAL_SECTION cs;\nRECT bounds;\nchar *bits;\nBITMAPINFO info;\n}\n",
   "id": 18374686479672044151,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "window_surface"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cs",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 32
+      "size": 32,
+      "type": "CRITICAL_SECTION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bounds",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bits",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "info",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 44
+      "size": 44,
+      "type": "BITMAPINFO"
     }
   ],
   "name": "offscreen_window_surface",
+  "ordinal": 7733,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 128
 }

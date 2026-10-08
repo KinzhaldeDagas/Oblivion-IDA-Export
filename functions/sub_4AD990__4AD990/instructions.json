@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4AD990",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified (Oblivion): constructs a ParticleShaderProperty from the TESEffectShader and selected visual nodes, configures it with a NiSourceTexture*, initializes its animation time, and returns the property retained by MagicShaderHitEffect +0x3C.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4AD991",
-    "line": "mov     ebx, [esp+4+arg_8]",
+    "line": "mov     ebx, [esp+4+sourceTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x4AD99C",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+secondaryNode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4AD9A0",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+targetNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x4AD9A5",
-    "line": "push    eax",
+    "line": "push    eax; secondaryNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4AD9A6",
-    "line": "push    ecx",
+    "line": "push    ecx; targetNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4AD9A7",
-    "line": "call    sub_7E45F0",
+    "line": "call    NiNode_CreateAttachedParticleShaderProperty; Verified (Oblivion): clones and attaches the effect's scenegraph property, then returns it only when it is ParticleShaderProperty (virtual subtype ID 0xE). This supplies the concrete type stored at MagicShaderHitEffect +0x3C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,31 +85,31 @@
   },
   {
     "ea": "0x4AD9B1",
-    "line": "push    ebx",
+    "line": "push    ebx; sourceTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4AD9B2",
-    "line": "push    esi",
+    "line": "push    esi; property",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4AD9B3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4AD9B5",
-    "line": "call    sub_4AD630",
+    "line": "call    TESEffectShader_ConfigureVisualProperty; Verified (Oblivion): maps TESEffectShaderData fields into ParticleShaderProperty parameters and retains a NiSourceTexture*. The member labels in TESEffectShaderData are Probable correspondences to Fallout's named fields, corroborated by these direct Oblivion copies and the initializer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4AD9BA",
-    "line": "fld     [esp+0Ch+arg_C]",
+    "line": "fld     [esp+0Ch+elapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x4AD9BF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4AD9C1",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+newTime]; newTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4AD9C4",
-    "line": "call    sub_7E4800",
+    "line": "call    ParticleShaderProperty_ResetParticleStateAtTime; Verified (Oblivion): resets every 0x20-byte particle slot to the inactive sentinel, seeds per-slot lifetime factors from fParticleLifetime_84/fParticleLifeVar_88, sets activeParticleCount_7C to zero, and initializes simulationTime_F8 to newTime. Fallout's RewindTimer instead shifts birth times of already active particles; the lifecycle behavior diverges.",
     "mnemonic": "call",
     "size": 5
   },

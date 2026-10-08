@@ -116,7 +116,7 @@
 0x4D5A24: push    ecx
 0x4D5A25: fstp    [esp+30h+a2]; a2
 0x4D5A28: mov     ecx, ebp; this
-0x4D5A2A: call    NiAVObject_UpdateNiAVObject
+0x4D5A2A: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4D5A2F: mov     esi, [ebx+54h]
 0x4D5A32: cmp     esi, ebp
 0x4D5A34: jz      short loc_4D5A63
@@ -151,3 +151,25 @@
 0x4D5A7F: pop     ebx
 0x4D5A80: add     esp, 14h
 0x4D5A83: retn
+0x9B58B0: mov     eax, [ebp-10h]
+0x9B58B3: push    eax
+0x9B58B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B58B9: pop     ecx
+0x9B58BA: retn
+0x9B58BB: mov     eax, [ebp-10h]
+0x9B58BE: push    eax
+0x9B58BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B58C4: pop     ecx
+0x9B58C5: retn
+0x9B58C6: mov     eax, [ebp-10h]
+0x9B58C9: push    eax
+0x9B58CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B58CF: pop     ecx
+0x9B58D0: retn
+0x9B58D1: mov     edx, [esp+arg_4]
+0x9B58D5: lea     eax, [edx-18h]
+0x9B58D8: mov     ecx, [edx-1Ch]
+0x9B58DB: xor     ecx, eax
+0x9B58DD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B58E2: mov     eax, offset stru_AE08F0
+0x9B58E7: jmp     ___CxxFrameHandler3

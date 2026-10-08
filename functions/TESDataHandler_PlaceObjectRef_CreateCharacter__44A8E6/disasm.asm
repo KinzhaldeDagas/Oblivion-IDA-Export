@@ -1,4 +1,4 @@
-0x44A8E6: push    10Ch; Size
+0x44A8E6: push    10Ch; PlaceObjectRef Character allocation branch: base form type 0x23 allocates 0x10C bytes and calls Character_constr.
 0x44A8EB: call    FormHeapAlloc
 0x44A8F0: add     esp, 4
 0x44A8F3: mov     [esp+arg_54], eax
@@ -10,7 +10,7 @@
 0x44A90A: jmp     short loc_44A90E
 0x44A90C: xor     eax, eax
 0x44A90E: mov     ebp, eax
-0x44A910: push    esi; a2
+0x44A910: push    esi; PlaceObjectRef new-ref common initialization begins here: set base form, tree/light special cases, dynamic form handling, then write requested pos/rot and insert into resolved target cell.
 0x44A911: mov     ecx, ebp; this
 0x44A913: mov     [esp+4+arg_3C], 0FFFFFFFFh
 0x44A91B: call    TESObjectREFR_SetBaseForm
@@ -56,7 +56,7 @@
 0x44A995: mov     [eax+4], edx
 0x44A998: mov     [eax+8], ecx
 0x44A99B: mov     ecx, ebp; this
-0x44A99D: call    TESObjectREFR_SetPosition
+0x44A99D: call    TESObjectREFR_SetPosition; PlaceObjectRef writes requested position with TESObjectREFR_SetPosition before resolving/inserting into the target cell.
 0x44A9A2: mov     ecx, [esp+4+arg_48]
 0x44A9A6: mov     edx, [ecx]
 0x44A9A8: sub     esp, 0Ch
@@ -67,7 +67,7 @@
 0x44A9B5: mov     [eax+4], edx
 0x44A9B8: mov     [eax+8], ecx
 0x44A9BB: mov     ecx, ebp
-0x44A9BD: call    sub_4D89A0
+0x44A9BD: call    sub_4D89A0; PlaceObjectRef writes requested rotation via sub_4D89A0 after position is set.
 0x44A9C2: test    edi, edi
 0x44A9C4: jz      short loc_44A9FC
 0x44A9C6: fld     dword ptr [esi]
@@ -77,15 +77,15 @@
 0x44A9D4: mov     eax, dword ptr [esp+4+a2]
 0x44A9D8: fld     dword ptr [esi+4]
 0x44A9DB: fstp    [esp+4+arg_44]
-0x44A9DF: sar     eax, 0Ch
+0x44A9DF: sar     eax, 0Ch; PlaceObjectRef uses the same exterior cell conversion as fast-travel relocation: int(pos.x) >> 12 and int(pos.y) >> 12 against the target worldspace.
 0x44A9E2: fld     [esp+4+arg_44]
 0x44A9E6: fistp   dword ptr [esp+4+a2]
 0x44A9EA: mov     ecx, dword ptr [esp+4+a2]
 0x44A9EE: sar     ecx, 0Ch
-0x44A9F1: push    ecx; signed int
-0x44A9F2: push    eax; signed int
+0x44A9F1: push    ecx; cellY
+0x44A9F2: push    eax; cellX
 0x44A9F3: mov     ecx, edi; this
-0x44A9F5: call    TESWorldSpace__GetCellAtCellCoord
+0x44A9F5: call    TESWorldSpace__GetCellAtCellCoord; Exterior target path resolves target cell from requested pos through worldspace GetCellAtCellCoord using x/y >> 12 cell coords.
 0x44A9FA: mov     ebx, eax
 0x44A9FC: test    ebx, ebx
 0x44A9FE: push    0; a2
@@ -178,9 +178,9 @@
 0x44AB1F: push    1
 0x44AB21: mov     ecx, ebp
 0x44AB23: call    sub_4D6F00
-0x44AB28: push    ebp; Concurrency::details::SchedulerBase *
-0x44AB29: mov     ecx, ebx
-0x44AB2B: call    sub_4D35D0
+0x44AB28: push    ebp; Resolved target cell insertion: sub_4D35D0(cell, ref) links the placed ref into the cell before actor/post-place initialization.
+0x44AB29: mov     ecx, ebx; this
+0x44AB2B: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x44AB30: mov     ecx, dword ptr [esp+8+a2]
 0x44AB34: push    ecx; a2
 0x44AB35: mov     ecx, ebp; this
@@ -221,7 +221,7 @@
 0x44AB9B: mov     ecx, eax
 0x44AB9D: call    sub_7C5D00
 0x44ABA2: mov     ecx, ebx; this
-0x44ABA4: call    NiAVObject_InitializePropertyState
+0x44ABA4: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x44ABA9: mov     ecx, ebx
 0x44ABAB: call    NiNode_UpdateDynamicEffectState
 0x44ABB0: fldz
@@ -229,13 +229,13 @@
 0x44ABB4: push    ecx
 0x44ABB5: mov     ecx, ebx; this
 0x44ABB7: fstp    [esp+10h+var_10]; a2
-0x44ABBA: call    NiAVObject_UpdateNiAVObject
+0x44ABBA: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x44ABBF: push    0; int
 0x44ABC1: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x44ABC6: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
 0x44ABCB: push    0; int
 0x44ABCD: push    ebp; void *
-0x44ABCE: call    OblivionDynamicCast
+0x44ABCE: call    OblivionDynamicCast; After insertion, placed refs are dynamic-cast to Actor; actor refs get additional post-place initialization before returning EAX=ref.
 0x44ABD3: mov     esi, eax
 0x44ABD5: add     esp, 14h
 0x44ABD8: test    esi, esi
@@ -262,4 +262,4 @@
 0x44AC15: pop     ebp
 0x44AC16: pop     ebx
 0x44AC17: add     esp, 30h
-0x44AC1A: retn    18h
+0x44AC1A: retn    18h; 3DTheft decode 2026-05-16: PlaceObjectRef returns the placed ref in EAX and uses retn 0x18. The OBSE call boundary is thiscall DataHandler + six stack args: baseForm, pos, rot, cell, worldspace, existingRef.

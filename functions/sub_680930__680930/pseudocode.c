@@ -1,21 +1,27 @@
-float *__thiscall sub_680930(unsigned __int16 *this, float a2)
+// Verified: writes fitness at +0 of the 0x10-byte TravelPathSearchState selected by the link's 16-bit searchNodeIndex. Non-finite/NaN fitness is logged and clamped to 0.
+TravelPathSearchState *__thiscall TravelPath_SearchState_SetFitness(TravelPathSpaceDoorLink *node, float fitness)
 {
-  float *result; // eax
+  TravelPathSearchState *result; // eax
 
-  if ( !_finite(a2) || !_finite(a2) || !_finite(a2) || _isnan(a2) || _isnan(a2) || _isnan(a2) )
+  if ( !_finite(fitness) /*0x6809ab*/
+    || !_finite(fitness)
+    || !_finite(fitness)
+    || _isnan(fitness)
+    || _isnan(fitness)
+    || _isnan(fitness) )
   {
-    PrintError("Corrupt goal, setting to 0.");
-    a2 = 0.0;
+    PrintError("Corrupt goal, setting to 0."); /*0x6809bc*/
+    fitness = 0.0; /*0x6809c3*/
   }
-  result = (float *)*this;
-  if ( (unsigned __int16)result >= (unsigned __int16)word_B3BF04 )
+  result = (TravelPathSearchState *)node->searchNodeIndex; /*0x6809ca*/
+  if ( (unsigned __int16)result >= LOWORD(qword_B3BB2C[0xF6]) ) /*0x6809db*/
   {
-    *(float *)0 = a2;
+    *(float *)0 = fitness; /*0x6809ee*/
   }
   else
   {
-    result = (float *)((char *)dword_B3BF00 + 0x10 * (unsigned __int16)result);
-    *result = a2;
+    result = (TravelPathSearchState *)(LODWORD(qword_B3BB2C[0xF5]) + 0x10 * (unsigned __int16)result); /*0x6809e3*/
+    result->fitness = fitness; /*0x6809e9*/
   }
-  return result;
+  return result; /*0x6809eb*/
 }

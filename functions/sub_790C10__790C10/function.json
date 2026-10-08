@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x790C10",
+      "0x790CFE"
+    ]
+  ],
+  "chunks_sha256": "fc41122941798cc15e6fd7535f4878ad6a524375b73e1d162131d224a22239b2",
+  "comment_regular": "Compiler introsort loop for the compact OB_CBranch* vector. Uses 0x7905D0's fuzzyBranchVolume partition, insertion sort for small ranges, and heap-sort fallback when the depth limit expires; branch LOD policy remains in the 0x791410 wrapper/callers.",
+  "comment_repeatable": "Compiler introsort loop for the compact OB_CBranch* vector. Uses 0x7905D0's fuzzyBranchVolume partition, insertion sort for small ranges, and heap-sort fallback when the depth limit expires; branch LOD policy remains in the 0x791410 wrapper/callers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_790C10",
+  "display_name": "OB_BranchPtrVector_IntrosortByFuzzyVolume_010201A0",
   "end_ea": "0x790CFE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_790C10",
+  "name": "OB_BranchPtrVector_IntrosortByFuzzyVolume_010201A0",
   "segment": ".text",
   "sha256": "fc41122941798cc15e6fd7535f4878ad6a524375b73e1d162131d224a22239b2",
   "size": 238,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x790C10",
-  "type": "void __cdecl(char *, char *, int, int)",
+  "total_chunk_size": 238,
+  "type": "void __cdecl(OB_CBranch_010201A0 **begin, OB_CBranch_010201A0 **end, int depthLimit, int comparatorState)",
   "xrefs_from_count": 116,
   "xrefs_to_count": 3
 }

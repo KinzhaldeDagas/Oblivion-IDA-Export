@@ -1,1 +1,1 @@
-IPropertyBagVtbl_0
+typedef IPropertyBagVtbl IPropertyBagVtbl_0;

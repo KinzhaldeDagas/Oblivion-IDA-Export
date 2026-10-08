@@ -1,19 +1,32 @@
 {
-  "callees_count": 59,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 30,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B7B40",
+      "0x4B7DA9"
+    ]
+  ],
+  "chunks_sha256": "065e4ea690877b810c6142f9940276e3ed315dead9150ba9152e592226663a67",
+  "comment_regular": "Verified: player transition helper for a reference using a linked door. Confirms the supplied TESObjectDOOR matches the reference's base form, obtains its TeleportData target, resolves/loads the destination cell when needed, then calls PlayerCharacter_ChangeCellAndPosition with linked destination position/rotation and handles arrival sound/cell cleanup. Called from TESObjectDOOR_Activate and a route-following script-command wrapper; that wrapper's exact command identity remains Unknown.",
+  "comment_repeatable": "Verified: player transition helper for a reference using a linked door. Confirms the supplied TESObjectDOOR matches the reference's base form, obtains its TeleportData target, resolves/loads the destination cell when needed, then calls PlayerCharacter_ChangeCellAndPosition with linked destination position/rotation and handles arrival sound/cell cleanup. Called from TESObjectDOOR_Activate and a route-following script-command wrapper; that wrapper's exact command identity remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B7B40",
+  "display_name": "TESObjectDOOR_TransitionPlayerThroughLinkedDoor",
   "end_ea": "0x4B7DA9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B7B40",
+  "name": "TESObjectDOOR_TransitionPlayerThroughLinkedDoor",
   "segment": ".text",
   "sha256": "065e4ea690877b810c6142f9940276e3ed315dead9150ba9152e592226663a67",
   "size": 617,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B7B40",
-  "type": "void __userpurge(int@<ecx>, double@<st7>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>, double@<st6>, double@<st5>, _BYTE *)",
+  "total_chunk_size": 617,
+  "type": "void __userpurge(TESForm *@<ecx>, double@<st7>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>, double@<st6>, double@<st5>, TESObjectREFR *)",
   "xrefs_from_count": 252,
   "xrefs_to_count": 2
 }

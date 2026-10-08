@@ -2,8 +2,8 @@ DistantLODLoaderTask *__thiscall DistantLODLoaderTask::`scalar deleting destruct
         DistantLODLoaderTask *this,
         char a2)
 {
-  DistantLODLoaderTask::~DistantLODLoaderTask(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  DistantLODLoaderTask::~DistantLODLoaderTask(this); /*0x4bd8a3*/
+  if ( (a2 & 1) != 0 ) /*0x4bd8ad*/
+    FormHeapFree((unsigned int)this); /*0x4bd8b0*/
+  return this; /*0x4bd8ba*/
 }

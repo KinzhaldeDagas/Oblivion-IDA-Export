@@ -8,12 +8,12 @@ int __userpurge EffectSetting_SetCounterEffects_::CopyCounterEffects@<eax>(
 {
   int v6; // ebx
 
-  do
+  do /*0x415db4*/
   {
-    v6 = *(_DWORD *)(a2 + 4);
-    a2 += 4;
-    *(_DWORD *)(*(_DWORD *)(a4 + 0x9C) + 4 * a1++) = v6;
+    v6 = *(_DWORD *)(a2 + 4); /*0x415da6*/
+    a2 += 4; /*0x415da9*/
+    *(_DWORD *)(*(_DWORD *)(a4 + 0x9C) + 4 * a1++) = v6; /*0x415dac*/
   }
-  while ( a1 < a3 );
+  while ( a1 < a3 ); /*0x415db4*/
   return EffectSetting_SetCounterEffects_::Done_(a5, a6);
 }

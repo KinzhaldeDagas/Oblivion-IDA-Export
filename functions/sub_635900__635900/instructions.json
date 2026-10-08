@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x635900",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; RadiantAI: HighProcess acquire/crime candidate scorer. Consumes candidate list at process+0x54 and promotes accepted entries to process+0x3C; calls Calc_AIAquireForStealing/Pickpocketing and shouldActorFight.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x63593E",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x635945",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,25 +157,25 @@
   },
   {
     "ea": "0x63594E",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x635950",
-    "line": "push    esi",
+    "line": "push    esi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x635951",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x635953",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x635999",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63599B",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6359B3",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x6359FC",
-    "line": "push    edx",
+    "line": "push    edx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6359FD",
-    "line": "call    sub_470520",
+    "line": "call    TESForm_GetValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x635A24",
-    "line": "mov     dword ptr [ebp+1Ch], 2",
+    "line": "mov     dword ptr [ebp+1Ch], 2; RadiantAI: sub_635900 sets acquire response 2 when owner/service provider offers item and actor can pay; project label ServicePurchase.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x635A35",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x635A57",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; RadiantAI 2026-07-12: vtable +0x284(0x24) obtains acquiring actor Responsibility. It remains on stack while Actor_GetLuckModifiedBaseAV(0x1F Sneak) returns the first steal-score argument.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -709,25 +709,25 @@
   },
   {
     "ea": "0x635A66",
-    "line": "push    1Fh",
+    "line": "push    1Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x635A68",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x635A6A",
-    "line": "call    Actor_GetLuckModifiedBaseAV",
+    "line": "call    Actor_GetLuckModifiedBaseAV; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x635A6F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x635A75",
-    "line": "call    Calc_AIAquireForStealing?",
+    "line": "call    Calc_AIAquireForStealing?; RadiantAI: owned non-actor candidate path uses Calc_AIAquireForStealing; called from sub_62DA10 via vtable +0x568 after food scan.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x635ABD",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; RadiantAI 2026-07-12: pickpocket branch uses the same Responsibility AV 0x24 plus luck-modified Sneak AV 0x1F input pair.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -895,25 +895,25 @@
   },
   {
     "ea": "0x635ACC",
-    "line": "push    1Fh",
+    "line": "push    1Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x635ACE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x635AD0",
-    "line": "call    Actor_GetLuckModifiedBaseAV",
+    "line": "call    Actor_GetLuckModifiedBaseAV; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x635AD5",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x635ADB",
-    "line": "call    Calc_AIAquireForPickpocketing?",
+    "line": "call    Calc_AIAquireForPickpocketing?; RadiantAI: actor/NPC candidate path uses Calc_AIAquireForPickpocketing before fight/alarm scoring.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x635B50",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; RadiantAI 2026-07-12: kill branch passes raw Responsibility AV 0x24 as second arg to acquire kill formula.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x635B60",
-    "line": "call    sub_546640",
+    "line": "call    sub_546640; RadiantAI 2026-07-12: acquire kill score. Callers pass shouldActorFight result as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=50, mult=-1 => score = fightScore + 50 - responsibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x635BB9",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x635BBD",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x635BCA",
-    "line": "mov     dword ptr [ebp+1Ch], 5",
+    "line": "mov     dword ptr [ebp+1Ch], 5; RadiantAI: sub_635900 fallback sets acquire response 5 for non-creature actor targeting creature-owned actor/object case; project label KillForItem.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x635BFD",
-    "line": "mov     dword ptr [ebp+1Ch], 4",
+    "line": "mov     dword ptr [ebp+1Ch], 4; RadiantAI: sub_635900 sets acquire response 4 for owned container/inventory candidate after positive steal score; lockpick/Skeleton Key gate can reject locked refs.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1615,13 +1615,13 @@
   },
   {
     "ea": "0x635C3C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x635C3E",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1722,12 +1722,6 @@
     "size": 2
   },
   {
-    "ea": "0x635C7A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x635C80",
     "line": "mov     edi, [edi+4]",
     "mnemonic": "mov",
@@ -1813,7 +1807,7 @@
   },
   {
     "ea": "0x635CAA",
-    "line": "mov     dword ptr [ebp+1Ch], 3",
+    "line": "mov     dword ptr [ebp+1Ch], 3; RadiantAI: sub_635900 sets acquire response 3 for owned loose/non-container candidate after positive stealing score; project label StealLoose.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1879,7 +1873,7 @@
   },
   {
     "ea": "0x635CCF",
-    "line": "mov     dword ptr [ebp+1Ch], 5",
+    "line": "mov     dword ptr [ebp+1Ch], 5; RadiantAI: sub_635900 sets acquire response 5 when fight/kill score wins; project label KillForItem.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1903,7 +1897,7 @@
   },
   {
     "ea": "0x635CE3",
-    "line": "mov     dword ptr [ebp+1Ch], 4",
+    "line": "mov     dword ptr [ebp+1Ch], 4; RadiantAI: sub_635900 sets acquire response 4 for actor/pickpocket-style candidate when non-kill score wins; project label StealInventoryOrPickpocket.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1951,7 +1945,7 @@
   },
   {
     "ea": "0x635CFB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2017,7 +2011,7 @@
   },
   {
     "ea": "0x635D21",
-    "line": "call    sub_64E240",
+    "line": "call    sub_64E240; RadiantAI: sorts accepted acquire candidates by entry+0x1C response code ascending; response code acts as priority bucket before distance sort.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,7 +2023,7 @@
   },
   {
     "ea": "0x635D28",
-    "line": "call    sub_64E2B0",
+    "line": "call    sub_64E2B0; RadiantAI: sorts accepted acquire candidates by entry+0x14 distance ascending after response-code sort.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2065,7 +2059,7 @@
   },
   {
     "ea": "0x635D3A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

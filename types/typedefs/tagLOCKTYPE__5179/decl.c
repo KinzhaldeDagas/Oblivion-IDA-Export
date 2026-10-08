@@ -1,1 +1,6 @@
-tagLOCKTYPE
+enum tagLOCKTYPE : __int32
+{
+LOCK_WRITE = 0x1,
+LOCK_EXCLUSIVE = 0x2,
+LOCK_ONLYONCE = 0x4,
+};

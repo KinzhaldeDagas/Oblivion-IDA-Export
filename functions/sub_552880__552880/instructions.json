@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x552880",
-    "line": "push    esi",
+    "line": "push    esi; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x552881",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x5528A1",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x5528BF",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5528DD",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },

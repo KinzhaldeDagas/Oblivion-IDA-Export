@@ -1,1 +1,1 @@
-TVSORTCB
+typedef tagTVSORTCB TVSORTCB;

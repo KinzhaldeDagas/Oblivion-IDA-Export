@@ -1,4 +1,4 @@
-0x801430: mov     eax, [esp+arg_0]
+0x801430: mov     eax, [esp+arg_0]; MoonSugarEffect decode: pass texture-stage cleanup helper used as shader vtable +0x94. For each pass stage, gets stage texture, preserves global dword_B43110, otherwise releases and clears stage texture ref.
 0x801434: sub     esp, 8
 0x801437: test    eax, eax
 0x801439: jz      loc_8014D8
@@ -18,7 +18,7 @@
 0x801460: lea     ecx, [esp+18h+var_8]
 0x801464: push    ecx
 0x801465: mov     ecx, edi
-0x801467: call    sub_75FB10
+0x801467: call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.
 0x80146C: mov     edx, [eax]
 0x80146E: cmp     edx, ds:0B43110h
 0x801474: mov     eax, [esp+18h+var_8]

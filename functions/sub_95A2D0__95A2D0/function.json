@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x95A2D0",
+      "0x95A35C"
+    ]
+  ],
+  "chunks_sha256": "2dec66a50cbf79f30f83c65bc6c6188228607276926536d132efc6e52ff2fb3f",
+  "comment_regular": "Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
+  "comment_repeatable": "Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_95A2D0",
+  "display_name": "NiPickRecord_Initialize",
   "end_ea": "0x95A35C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_95A2D0",
+  "name": "NiPickRecord_Initialize",
   "segment": ".text",
   "sha256": "2dec66a50cbf79f30f83c65bc6c6188228607276926536d132efc6e52ff2fb3f",
   "size": 140,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x95A2D0",
-  "type": "float *__thiscall(float *this, int)",
+  "total_chunk_size": 140,
+  "type": "NiPickRecord_Oblivion_044Verified *__thiscall(NiPickRecord_Oblivion_044Verified *this, NiRefObject *pickedObject)",
   "xrefs_from_count": 63,
   "xrefs_to_count": 7
 }

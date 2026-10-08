@@ -1,4 +1,4 @@
-bool __cdecl sub_503B60(
+bool __cdecl Cmd_AddTopic_Execute(
         ParamInfo *a1,
         UInt8 *a2,
         TESObjectREFR *a4,
@@ -11,12 +11,12 @@ bool __cdecl sub_503B60(
   bool result; // al
   UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
-  if ( result )
+  *(_DWORD *)v9 = 0; /*0x503b88*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x503b90*/
+  if ( result ) /*0x503b9a*/
   {
-    sub_669690(TESDataHandler_g_PlayerRef, *(TESTopic **)v9, 1, 0);
-    return 1;
+    PlayerCharacter::AddKnownTopic(reference, *(TESTopic **)v9, 1, 0); /*0x503bac*/
+    return 1; /*0x503bb1*/
   }
-  return result;
+  return result; /*0x503b9d*/
 }

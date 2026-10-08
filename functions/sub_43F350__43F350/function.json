@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 112,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 160,
+  "chunks": [
+    [
+      "0x43F350",
+      "0x43F3D9"
+    ]
+  ],
+  "chunks_sha256": "264e24539fe70221494f5fa580d9643ca03346a6ef289fb8b05ba7ce53e39c73",
+  "comment_regular": "Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
+  "comment_repeatable": "Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_43F350",
+  "display_name": "Vector3_NormalizeInPlace",
   "end_ea": "0x43F3D9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43F350",
+  "name": "Vector3_NormalizeInPlace",
   "segment": ".text",
   "sha256": "264e24539fe70221494f5fa580d9643ca03346a6ef289fb8b05ba7ce53e39c73",
   "size": 137,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43F350",
+  "total_chunk_size": 137,
   "type": "double __thiscall(float *this)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 160

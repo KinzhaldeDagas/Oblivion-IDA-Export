@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DFF40",
-    "line": "push    ebx",
+    "line": "push    ebx; Runtime corroboration of TESCS 0x545820: TESObjectREFR/ACHR/ACRE group matcher accepts owning CELL group type 6 as an ancestor, or strict direct role type 8 when reference flag 0x400 (Persistent), else type 10 when flag 0x8000 (Visible When Distant), else type 9. Persistent is tested first; labels match the owning CELL FormID in the low 24 bits.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x4DFF71",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DFF73",
-    "line": "jz      short loc_4DFFA0",
+    "line": "jz      short loc_4DFFA0; GRUP type 6 is the owning-CELL ancestor and requires include_parent.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x4DFFB4",
-    "line": "push    edx",
+    "line": "push    edx; candidate_form_id",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DFFB5",
-    "line": "call    sub_46AF50",
+    "line": "call    TESForm_FormIDMatchesObjectID24; Compares only the low 24-bit object-ID portions of this form's FormID and a serialized group label; load-order/master byte is intentionally ignored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4DFFC9",
-    "line": "jz      short loc_4DFFF1",
+    "line": "jz      short loc_4DFFF1; In strict mode, owning type 6 remains an accepted ancestor; direct child classification follows.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4DFFCD",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x4DFFD6",
-    "line": "cmp     dword ptr [esi+0Ch], 8",
+    "line": "cmp     dword ptr [esi+0Ch], 8; Persistent reference is tested first and requires direct role GRUP type 8. Dual Persistent+VWD references therefore use type 8.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4DFFDC",
-    "line": "test    dword ptr [edi+8], 8000h",
+    "line": "test    dword ptr [edi+8], 8000h; Only when the reference is not Persistent, test Visible When Distant (formFlags 0x8000).",
     "mnemonic": "test",
     "size": 7
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x4DFFE5",
-    "line": "cmp     dword ptr [esi+0Ch], 0Ah",
+    "line": "cmp     dword ptr [esi+0Ch], 0Ah; Visible When Distant and non-persistent => direct role GRUP type 10; otherwise the following comparison requires type 9.",
     "mnemonic": "cmp",
     "size": 4
   },

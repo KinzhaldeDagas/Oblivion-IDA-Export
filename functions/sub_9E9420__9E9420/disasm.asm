@@ -2,7 +2,7 @@
 0x9E9426: push    ecx
 0x9E9427: fstp    [esp+4+var_4]; float
 0x9E942A: push    offset aFcombatadvance; "fCombatAdvanceNormalAttackChance"
-0x9E942F: mov     ecx, offset unk_B36F68
+0x9E942F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+290h)
 0x9E9434: call    GameSetting_ConstrAndReg_float
 0x9E9439: push    offset sub_A1E5F0; void (__cdecl *)()
 0x9E943E: call    _atexit

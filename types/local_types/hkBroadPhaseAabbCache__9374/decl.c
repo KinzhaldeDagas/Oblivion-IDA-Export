@@ -1,1 +1,1 @@
-hkBroadPhaseAabbCache
+struct hkBroadPhaseAabbCache;

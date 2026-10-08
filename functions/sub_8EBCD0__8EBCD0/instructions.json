@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8EBCD0",
-    "line": "push    ebp",
+    "line": "push    ebp; Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x8EBCDA",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+surfaceB]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x8EBCE1",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+surfaceA]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x8EBEA6",
-    "line": "call    sub_8EB7E0",
+    "line": "call    hkSurfaceConstraintUtil_SortActiveConstraints; Sorts active surface constraints before recomputing the active-set solution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x8EBEE8",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+outPoint]; outPoint",
     "mnemonic": "mov",
     "size": 3
   },
@@ -925,55 +925,55 @@
   },
   {
     "ea": "0x8EBEF2",
-    "line": "push    esi",
+    "line": "push    esi; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBEF3",
-    "line": "push    edi",
+    "line": "push    edi; solverState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBEF4",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; surface",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EBEF6",
-    "line": "call    sub_8EB970",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8EBEFB",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+inputPoint]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8EBEFE",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+surfaceA]; surface",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8EBF01",
-    "line": "push    eax",
+    "line": "push    eax; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBF02",
-    "line": "push    edi",
+    "line": "push    edi; solverState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBF03",
-    "line": "call    sub_8EB970",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,61 +1015,61 @@
   },
   {
     "ea": "0x8EBF11",
-    "line": "mov     ecx, [ebp+arg_8]",
+    "line": "mov     ecx, [ebp+inputPoint]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8EBF14",
-    "line": "push    ecx",
+    "line": "push    ecx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBF15",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+surfaceA]; surface",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8EBF18",
-    "line": "push    edi",
+    "line": "push    edi; solverState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBF19",
-    "line": "call    sub_8EB970",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8EBF1E",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+outPoint]; outPoint",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8EBF21",
-    "line": "push    esi",
+    "line": "push    esi; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBF22",
-    "line": "push    edi",
+    "line": "push    edi; solverState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EBF23",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; surface",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EBF25",
-    "line": "call    sub_8EB970",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x8EBF33",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+inputPoint]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x8EC014",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+outPoint]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x8EC076",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+outPoint]",
     "mnemonic": "mov",
     "size": 3
   },

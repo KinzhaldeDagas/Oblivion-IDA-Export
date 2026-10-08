@@ -4,15 +4,15 @@
 0x8A83C3: push    edi
 0x8A83C4: push    80h ; '€'
 0x8A83C9: push    0
-0x8A83CB: push    offset dword_BA7E30
+0x8A83CB: push    offset unk_BA7E30
 0x8A83D0: call    __memset
 0x8A83D5: push    80h ; '€'
 0x8A83DA: push    0FFh
-0x8A83DF: push    offset dword_BA7DB0
+0x8A83DF: push    offset unk_BA7DB0
 0x8A83E4: call    __memset
 0x8A83E9: push    80h ; '€'
 0x8A83EE: push    0
-0x8A83F0: push    offset dword_BA7EB0
+0x8A83F0: push    offset unk_BA7EB0
 0x8A83F5: call    __memset
 0x8A83FA: mov     eax, ds:0BA7E34h
 0x8A83FF: or      eax, 40h

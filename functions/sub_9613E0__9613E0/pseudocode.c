@@ -2,18 +2,18 @@ int sub_9613E0()
 {
   int v0; // eax
 
-  v0 = FormHeapAlloc(0x3Cu);
-  if ( v0 )
-    return sub_9604C0(
+  v0 = FormHeapAlloc(0x3Cu); /*0x9613e2*/
+  if ( v0 ) /*0x9613ec*/
+    return sub_9604C0( /*0x96143a*/
              v0,
              1.0,
              1.0,
-             LODWORD(Vector3_InitValue_),
-             *((_DWORD *)&Vector3_InitValue_ + 1),
-             LODWORD(dword_B3F9B0),
-             dword_B258D0,
-             dword_B258D4,
-             dword_B258D8);
+             LODWORD(g_zeroNiPoint3.x),
+             LODWORD(g_zeroNiPoint3.y),
+             LODWORD(g_zeroNiPoint3.z),
+             LODWORD(stru_B258D0.x),
+             LODWORD(stru_B258D0.y),
+             LODWORD(stru_B258D0.z));
   else
-    return 0;
+    return 0; /*0x961440*/
 }

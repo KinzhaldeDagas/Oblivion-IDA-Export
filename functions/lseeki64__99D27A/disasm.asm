@@ -17,7 +17,7 @@
 0x99D2B3: xor     edi, edi
 0x99D2B5: cmp     eax, edi
 0x99D2B7: jl      short loc_99D2C1
-0x99D2B9: cmp     eax, uNumber
+0x99D2B9: cmp     eax, ds:0BAAAA0h
 0x99D2BF: jb      short loc_99D2E2
 0x99D2C1: call    ___doserrno
 0x99D2C6: mov     [eax], edi
@@ -79,3 +79,7 @@
 0x99D36D: or      [ebp+var_20], 0FFFFFFFFh
 0x99D371: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x99D378: call    __lseeki64___$LN14_10
+0x99D389: push    [ebp+arg_0]
+0x99D38C: call    __unlock_fhandle
+0x99D391: pop     ecx
+0x99D392: retn

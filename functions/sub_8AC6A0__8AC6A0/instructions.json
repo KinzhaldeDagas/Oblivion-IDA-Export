@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AC6A0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: applies entity/contact interaction callbacks and impulses for current manifold entries; entry+0x28 is treated as collidable/contact data, not a TESObjectREFR.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x8AC6AC",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+moveInput]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x8AC6D3",
-    "line": "mov     ecx, [ebx+edx+28h]",
+    "line": "mov     ecx, [ebx+edx+28h]; Reads manifold entry+0x28 hit collidable/contact reference and walks Havok entity data from it.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -166,12 +166,6 @@
     "line": "jmp     short loc_8AC6F0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8AC6ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x8AC6F0",
@@ -313,7 +307,7 @@
   },
   {
     "ea": "0x8AC735",
-    "line": "js      short loc_8AC761",
+    "line": "js      short loc_8AC761; Invokes registered character proxy listeners before entity interaction resolution.",
     "mnemonic": "js",
     "size": 2
   },
@@ -322,12 +316,6 @@
     "line": "jmp     short loc_8AC740",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8AC739",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x8AC740",
@@ -643,7 +631,7 @@
   },
   {
     "ea": "0x8AC7F5",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+moveInput]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1021,7 +1009,7 @@
   },
   {
     "ea": "0x8AC8EB",
-    "line": "call    sub_88FE00",
+    "line": "call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1315,7 @@
   },
   {
     "ea": "0x8AC9B6",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+surfaceMotion]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1579,7 +1567,7 @@
   },
   {
     "ea": "0x8ACA4D",
-    "line": "js      short loc_8ACA73",
+    "line": "js      short loc_8ACA73; Invokes registered character proxy listeners after computing contact/entity impulse.",
     "mnemonic": "js",
     "size": 2
   },

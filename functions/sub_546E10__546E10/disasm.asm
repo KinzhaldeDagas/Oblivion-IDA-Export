@@ -12,7 +12,7 @@
 0x546E2C: call    sub_4A9E70
 0x546E31: push    0; Seed
 0x546E33: fstp    [esp+18h+arg_8]
-0x546E37: call    GetRandomLargeInteger?
+0x546E37: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x546E3C: cdq
 0x546E3D: mov     ecx, 5
 0x546E42: idiv    ecx
@@ -33,7 +33,7 @@
 0x546E73: call    sub_4A9EF0
 0x546E78: push    0; Seed
 0x546E7A: fstp    [esp+18h+arg_4]
-0x546E7E: call    GetRandomLargeInteger?
+0x546E7E: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x546E83: cdq
 0x546E84: mov     ecx, 5
 0x546E89: idiv    ecx
@@ -72,7 +72,7 @@
 0x546EF7: fld1
 0x546EF9: push    0; Seed
 0x546EFB: fstp    [esp+18h+arg_14]
-0x546EFF: call    GetRandomLargeInteger?
+0x546EFF: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x546F04: cdq
 0x546F05: mov     ecx, 5
 0x546F0A: idiv    ecx
@@ -152,7 +152,7 @@
 0x546FC3: fstp    st
 0x546FC5: fstp    st
 0x546FC7: push    0; Seed
-0x546FC9: call    GetRandomLargeInteger?
+0x546FC9: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x546FCE: cdq
 0x546FCF: mov     ecx, 64h ; 'd'
 0x546FD4: idiv    ecx
@@ -174,7 +174,7 @@
 0x54700A: test    ah, 1
 0x54700D: jnz     short loc_547058
 0x54700F: push    0; Seed
-0x547011: call    GetRandomLargeInteger?
+0x547011: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x547016: cdq
 0x547017: mov     ecx, 64h ; 'd'
 0x54701C: idiv    ecx

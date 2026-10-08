@@ -1,1 +1,36 @@
-ParticleShaderProperty
+struct ParticleShaderProperty
+{
+BSShaderProperty super;
+ParticleShaderInstanceData *particleInstanceBuffer_6C;
+ParticleShaderEmitterType emitterType_70;
+float rayLength_74;
+bool bWorldspace_78;
+unsigned __int8 padding_79[3];
+unsigned int activeParticleCount_7C;
+float currentParticleLevel_80;
+float fParticleLifetime_84;
+float fParticleLifeVar_88;
+float fParticleNormalSpeed_8C;
+float fParticleNormalAcc_90;
+NiPoint3 particleVelocity_94;
+NiPoint3 particleAcceleration_A0;
+float fParticleColor1Time_AC;
+float fParticleColor2Time_B0;
+float fParticleColor3Time_B4;
+ParticleShaderColorA Color1_B8;
+ParticleShaderColorA Color2_C8;
+ParticleShaderColorA Color3_D8;
+float fParticleScale1_E8;
+float fParticleScale2_EC;
+float fParticleScale1Time_F0;
+float fParticleScale2Time_F4;
+float simulationTime_F8;
+unsigned int eParticleBlendModeSource_FC;
+unsigned int eParticleBlendModeDest_100;
+unsigned int eParticleBlendOperation_104;
+unsigned int eParticleZTestFunction_108;
+NiSourceTexture *spBaseTexture_10C;
+ParticleShaderTargetArray TargetArray_110;
+NiObjectNET *geometry_120;
+float targetScaleRatio_124;
+};

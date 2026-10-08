@@ -1,4 +1,4 @@
-BSStringT *sub_A11DD0()
+NiRTTI *sub_A11DD0()
 {
-  return sub_70E220((BSStringT *)&unk_B475FC, "GeometryDecalShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor(&stru_B475FC, "GeometryDecalShader", &MEMORY[0xB4257C]); /*0xa11de4*/
 }

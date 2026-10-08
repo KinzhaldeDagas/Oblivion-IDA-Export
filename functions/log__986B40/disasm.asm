@@ -6,8 +6,8 @@
 0x986B59: and     eax, 1F80h
 0x986B5E: cmp     eax, 1F80h
 0x986B63: jnz     short loc_986B74
-0x986B65: fnstcw  [esp+8+var_8]
-0x986B68: mov     ax, [esp+8+var_8]
+0x986B65: fnstcw  word ptr [esp+8+var_8]
+0x986B68: mov     ax, word ptr [esp+8+var_8]
 0x986B6C: and     ax, 7Fh
 0x986B70: cmp     ax, 7Fh
 0x986B74: lea     esp, [esp+8]

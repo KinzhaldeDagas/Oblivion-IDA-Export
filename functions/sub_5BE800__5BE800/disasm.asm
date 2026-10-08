@@ -14,7 +14,7 @@
 0x5BE82F: jmp     short loc_5BE837
 0x5BE831: fld     dword ptr ds:0A46B10h; jumptable 005BE816 case 3
 0x5BE837: push    ecx
-0x5BE838: fstp    [esp+8+a2]; a3
-0x5BE83B: push    0FAEh; a2
+0x5BE838: fstp    [esp+8+a2]; value
+0x5BE83B: push    0FAEh; propertyCode
 0x5BE840: mov     ecx, esi; this
-0x5BE842: call    Tile_SetFloat
+0x5BE842: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.

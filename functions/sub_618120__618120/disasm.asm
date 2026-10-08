@@ -41,12 +41,12 @@
 0x6181A0: jnz     short loc_6181C0
 0x6181A2: push    edi; a5
 0x6181A3: mov     edi, [esi+3Ch]; a1
-0x6181A6: push    0; a4
+0x6181A6: push    0; useActorProjection
 0x6181A8: mov     ecx, esi
-0x6181AA: call    sub_6135F0
-0x6181AF: push    eax; a3
-0x6181B0: push    edi; a2
-0x6181B1: call    TESObjectREFR_GetDistanceBetween?
+0x6181AA: call    CombatController_GetCurrentTarget
+0x6181AF: push    eax; to
+0x6181B0: push    edi; from
+0x6181B1: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x6181B6: fstp    dword ptr [esi+184h]
 0x6181BC: add     esp, 0Ch
 0x6181BF: pop     edi

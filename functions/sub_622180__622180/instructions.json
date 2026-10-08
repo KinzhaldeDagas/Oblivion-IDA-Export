@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x622180",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.",
     "mnemonic": "push",
     "size": 2
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x622263",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x622270",
-    "line": "call    sub_521450",
+    "line": "call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x62227E",
-    "line": "call    sub_612DE0",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,49 +553,49 @@
   },
   {
     "ea": "0x6222C7",
-    "line": "push    edx",
+    "line": "push    edx; allowYieldEvaluation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6222C8",
-    "line": "push    eax",
+    "line": "push    eax; skipFleeAndYieldEvaluation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6222C9",
-    "line": "push    0",
+    "line": "push    0; outScore",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6222CB",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6222D0",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6222D1",
-    "line": "push    edi",
+    "line": "push    edi; equippedEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6222D2",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6222D3",
-    "line": "call    sub_621B40",
+    "line": "call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6222E7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x62231B",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x62237B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x622380",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x6223E7",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x6223F4",
-    "line": "call    sub_521450",
+    "line": "call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x622402",
-    "line": "call    sub_612DE0",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,19 +1141,19 @@
   },
   {
     "ea": "0x622418",
-    "line": "push    ecx",
+    "line": "push    ecx; allowYieldEvaluation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622419",
-    "line": "push    edx",
+    "line": "push    edx; skipFleeAndYieldEvaluation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62241A",
-    "line": "push    0",
+    "line": "push    0; outScore",
     "mnemonic": "push",
     "size": 2
   },
@@ -1165,31 +1165,31 @@
   },
   {
     "ea": "0x62241E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x622423",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622424",
-    "line": "push    edi",
+    "line": "push    edi; equippedEntry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622425",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622426",
-    "line": "call    sub_621B40",
+    "line": "call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x622438",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x62244D",
-    "line": "call    sub_612DE0",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2437,13 +2437,13 @@
   },
   {
     "ea": "0x6226B0",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6226B2",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2809,7 +2809,7 @@
   },
   {
     "ea": "0x622765",
-    "line": "call    sub_613BB0",
+    "line": "call    CombatController_CanUseSpellAgainstCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2881,13 +2881,13 @@
   },
   {
     "ea": "0x62278E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x622790",
-    "line": "call    sub_6213D0",
+    "line": "call    CombatController_UpdateCombatModeState",
     "mnemonic": "call",
     "size": 5
   },
@@ -2995,7 +2995,7 @@
   },
   {
     "ea": "0x6227C0",
-    "line": "call    sub_613BB0",
+    "line": "call    CombatController_CanUseSpellAgainstCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -3106,5 +3106,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5200",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5203",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5204",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B520A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B520B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B520F",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5212",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5215",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5217",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B521C",
+    "line": "mov     eax, offset stru_AE03C0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5221",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

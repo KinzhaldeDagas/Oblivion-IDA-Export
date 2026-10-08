@@ -69,14 +69,14 @@
 0x5E7B15: mov     eax, [esi+4]
 0x5E7B18: mov     edi, [eax+4]
 0x5E7B1B: push    eax
-0x5E7B1C: call    FormHeapFree
+0x5E7B1C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E7B21: add     esp, 4
 0x5E7B24: test    edi, edi
 0x5E7B26: mov     [esi+4], edi
 0x5E7B29: jnz     short loc_5E7B15
 0x5E7B2B: push    esi
 0x5E7B2C: mov     dword ptr [esi], 0
-0x5E7B32: call    FormHeapFree
+0x5E7B32: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E7B37: add     esp, 4
 0x5E7B3A: pop     edi
 0x5E7B3B: pop     esi

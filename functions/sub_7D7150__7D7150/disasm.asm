@@ -1,4 +1,4 @@
-0x7D7150: mov     eax, ds:0B45D74h
+0x7D7150: mov     eax, ds:0B45D74h; Drain and release every render-target stack entry, then end the active group. This path does not rebind a previous/default target or restore viewport/scissor state.
 0x7D7155: test    eax, eax
 0x7D7157: jz      short loc_7D71A6
 0x7D7159: push    ebx
@@ -30,8 +30,8 @@
 0x7D71A3: pop     edi
 0x7D71A4: pop     esi
 0x7D71A5: pop     ebx
-0x7D71A6: mov     ecx, ds:0B3F928h
+0x7D71A6: mov     ecx, ds:0B3F928h; this
 0x7D71AC: cmp     byte ptr [ecx+20Ch], 0
 0x7D71B3: jz      short locret_7D71BA
-0x7D71B5: jmp     sub_7D6B00
+0x7D71B5: jmp     NiDX9Renderer_EndRenderTargetGroupLocked; After releasing all stack references, end the active group; no replacement target is bound here.
 0x7D71BA: retn

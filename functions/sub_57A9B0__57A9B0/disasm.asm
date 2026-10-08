@@ -30,7 +30,7 @@
 0x57AA0A: jp      short loc_57AA19
 0x57AA0C: push    3
 0x57AA0E: push    0
-0x57AA10: call    sub_5D6390
+0x57AA10: call    SkillsMenu_Create; Creates the shared SkillsMenu. In class-skill mode (mode 0), associates the open ClassMenu, sets selectionCap=7 at SkillsMenu+0x44, populates all 21 native skills, and preselects the seven staged ClassMenu major AVs.
 0x57AA15: add     esp, 8
 0x57AA18: retn
 0x57AA19: xor     eax, eax

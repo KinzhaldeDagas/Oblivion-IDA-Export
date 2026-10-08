@@ -1,4 +1,4 @@
-void *sub_7BA950()
+__int64 *sub_7BA950()
 {
-  return &unk_B431D8;
+  return &qword_B43178[0xC]; /*0x7ba955*/
 }

@@ -43,31 +43,31 @@
   },
   {
     "ea": "0x6BC277",
-    "line": "mov     dword ptr ds:0B3D0A0h, offset nullsub_return0_0arg",
+    "line": "mov     dword ptr ds:0B3D0A0h, offset nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BC281",
-    "line": "mov     dword ptr ds:0B3D5D8h, offset ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "mov     dword ptr ds:0B3D5D8h, offset Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BC28B",
-    "line": "mov     dword ptr ds:0B3D548h, offset ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "mov     dword ptr ds:0B3D548h, offset Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BC295",
-    "line": "mov     dword ptr ds:0B3D370h, offset nullsub_return0_0arg",
+    "line": "mov     dword ptr ds:0B3D370h, offset nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x6BC29F",
-    "line": "mov     dword ptr ds:0B3D2E0h, offset ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "mov     dword ptr ds:0B3D2E0h, offset Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "mov",
     "size": 10
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6BC2B0",
-    "line": "call    sub_6BC200",
+    "line": "call    NiPosKey_RegisterEvaluatorType0; Position type 0 registers no boundary-insertion callback in the GuaranteeTimeRange dispatch table.",
     "mnemonic": "call",
     "size": 5
   },

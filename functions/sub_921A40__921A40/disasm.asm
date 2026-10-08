@@ -40,7 +40,6 @@
 0x921AA5: jmp     short loc_921A96
 0x921AA7: add     eax, 80h ; '€'
 0x921AAC: jmp     short loc_921A96
-0x921AAE: align 10h
 0x921AB0: movaps  xmm1, xmmword ptr [eax+10h]
 0x921AB4: movaps  xmm0, xmmword ptr [edx+10h]
 0x921AB8: addps   xmm1, xmm0
@@ -63,7 +62,6 @@
 0x921AF1: mov     [esp+110h+var_FC], eax
 0x921AF5: add     ebx, 18h
 0x921AF8: jmp     short loc_921B00
-0x921AFA: align 10h
 0x921B00: lea     ecx, [esi+50h]
 0x921B03: movsx   eax, byte ptr [ebx]
 0x921B06: cmp     eax, 10h; switch 17 cases
@@ -1187,7 +1185,6 @@
 0x922A40: mov     [esp+110h+var_F8], ecx
 0x922A44: lea     ecx, [eax+20h]
 0x922A47: jmp     short loc_922A50
-0x922A49: align 10h
 0x922A50: movaps  xmm1, xmmword ptr [esi]
 0x922A53: fld     dword ptr [esi+1Ch]
 0x922A56: movaps  xmm0, xmmword ptr [edx+20h]
@@ -1279,7 +1276,6 @@
 0x922B74: lea     eax, [edx+20h]
 0x922B77: mov     [esp+110h+var_F0], ecx
 0x922B7B: jmp     short loc_922B80
-0x922B7D: align 10h
 0x922B80: movaps  xmm2, xmmword ptr [esi]
 0x922B83: fld     dword ptr [esi+0Ch]
 0x922B86: movaps  xmm3, xmmword ptr [esi+10h]
@@ -1342,7 +1338,6 @@
 0x922C50: lea     eax, [edx+10h]
 0x922C53: mov     [esp+110h+var_F0], ecx
 0x922C57: jmp     short loc_922C60
-0x922C59: align 10h
 0x922C60: movaps  xmm1, xmmword ptr [edx+10h]
 0x922C64: fld     dword ptr [esi+1Ch]
 0x922C67: movaps  xmm2, xmmword ptr [esi+10h]
@@ -1513,7 +1508,6 @@
 0x922E92: cmp     al, 6
 0x922E94: jz      loc_922D80
 0x922E9A: jmp     loc_921B00
-0x922E9F: align 10h
 0x922EA0: mov     edx, [esp+110h+var_FC]; jumptable 00921B0F case 11
 0x922EA4: mov     ecx, [esp+110h+var_E4]
 0x922EA8: movaps  xmm0, xmmword ptr [edx+10h]
@@ -1881,7 +1875,6 @@
 0x923382: test    cl, cl
 0x923384: jz      loc_923260
 0x92338A: jmp     loc_923223
-0x92338F: align 10h
 0x923390: movzx   ecx, byte ptr [eax]
 0x923393: sub     ecx, 0
 0x923396: jz      short loc_9233B0
@@ -1892,7 +1885,6 @@
 0x92339E: jmp     loc_923231
 0x9233A3: add     eax, 80h ; '€'
 0x9233A8: jmp     short loc_923390
-0x9233AA: align 10h
 0x9233B0: mov     edx, [eax+8]
 0x9233B3: movaps  xmm0, xmmword ptr ds:0A372D0h
 0x9233BA: movaps  xmm3, xmmword ptr [eax+20h]

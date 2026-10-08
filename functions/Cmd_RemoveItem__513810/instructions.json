@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x51389F",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,43 +463,43 @@
   },
   {
     "ea": "0x513919",
-    "line": "lea     ecx, [esp+140h+var_11C]",
+    "line": "lea     ecx, [esp+140h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x51391D",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x51391E",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x513920",
-    "line": "fstp    [esp+148h+var_11C]",
+    "line": "fstp    [esp+148h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x513924",
-    "line": "push    edx",
+    "line": "push    edx; objectID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x513925",
-    "line": "push    edi",
+    "line": "push    edi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x513926",
-    "line": "call    Cmd_GetItemCount",
+    "line": "call    GetItemCount_Eval; GetItemCount_Eval (index 47 / opcode 0x102F), used 54 times in vanilla core dialogue. Requires a valid item form, a container subject, and ContainerChanges data; returns abs(base TESContainer count plus EntryData.countDelta). If no ContainerChanges data exists it returns 0. Fallout's analogue x4y6:0x823BCE90 also has a special form-type-85 leveled-list expansion loop; this Oblivion handler performs only a single lookup for the supplied ObjectID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x51392F",
-    "line": "fld     [esp+150h+var_11C]",
+    "line": "fld     [esp+150h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x513941",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x513999",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x513A25",
-    "line": "call    TESFullName_GetNameForForm",
+    "line": "call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x513A53",
-    "line": "call    TESFullName_GetNameForForm",
+    "line": "call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1654,5 +1654,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B70C0",
+    "line": "lea     ecx, [ebp-124h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B70C6",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B70CB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B70CF",
+    "line": "lea     eax, [edx-130h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B70D5",
+    "line": "mov     ecx, [edx-134h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B70DB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B70DD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B70E2",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B70E5",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B70E8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B70EA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B70EF",
+    "line": "mov     eax, offset stru_AE1D5C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B70F4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

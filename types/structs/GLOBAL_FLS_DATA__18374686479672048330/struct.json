@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_GLOBAL_FLS_DATA",
+  "definition": "struct __declspec(align(8)) _GLOBAL_FLS_DATA\n{\nFLS_INFO_CHUNK *fls_callback_chunks[8];\nLIST_ENTRY fls_list_head;\nULONG fls_high_index;\n}\n",
   "id": 18374686479672048330,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fls_callback_chunks",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "FLS_INFO_CHUNK *[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fls_list_head",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "LIST_ENTRY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fls_high_index",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     }
   ],
   "name": "_GLOBAL_FLS_DATA",
+  "ordinal": 9029,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

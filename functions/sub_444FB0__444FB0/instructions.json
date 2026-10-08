@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x444FC7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -778,12 +778,6 @@
     "line": "jmp     short loc_445160",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x44515D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x445160",
@@ -1795,7 +1789,7 @@
   },
   {
     "ea": "0x445371",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,7 +2209,7 @@
   },
   {
     "ea": "0x445458",
-    "line": "push    edi",
+    "line": "push    edi; a3",
     "mnemonic": "push",
     "size": 1
   },
@@ -2509,7 +2503,7 @@
   },
   {
     "ea": "0x4454EF",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,7 +2533,7 @@
   },
   {
     "ea": "0x445501",
-    "line": "call    sub_499E40",
+    "line": "call    sub_499E40; Pass205: Water-related callsite included in pass-data producer verification; cross-check before naming high-level field semantics.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2569,7 @@
   },
   {
     "ea": "0x445518",
-    "line": "call    WaterSurfaceLoop",
+    "line": "call    WaterSurfaceLoop; Pass202/205: WaterSurfaceLoop. Native producer for persistent water height/depth target and updater of WaterShaderProperty pass-data fields for water grid cells.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2617,7 +2611,7 @@
   },
   {
     "ea": "0x445534",
-    "line": "push    0",
+    "line": "push    0; a4",
     "mnemonic": "push",
     "size": 2
   },
@@ -2665,7 +2659,7 @@
   },
   {
     "ea": "0x445549",
-    "line": "call    sub_4EA6E0",
+    "line": "call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.",
     "mnemonic": "call",
     "size": 5
   },

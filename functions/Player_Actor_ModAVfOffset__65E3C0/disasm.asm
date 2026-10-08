@@ -1,4 +1,4 @@
-0x65E3C0: cmp     byte ptr ds:0B3BB06h, 0
+0x65E3C0: cmp     byte ptr ds:0B3BB06h, 0; Player float script-offset modifier. Store a current-value modifier, refresh UI, and notify with rebuild=false; this does not perform skill advancement.
 0x65E3C7: fld     [esp+arg_4]
 0x65E3CB: push    esi
 0x65E3CC: mov     esi, [esp+4+a2]
@@ -33,8 +33,8 @@
 0x65E41E: call    Player_ModAVNode
 0x65E423: fstp    dword ptr [edi+esi*4+324h]
 0x65E42A: add     esp, 0Ch
-0x65E42D: push    esi; a2
-0x65E42E: call    sub_57A6F0
+0x65E42D: push    esi; actorValue
+0x65E42E: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
 0x65E433: add     esp, 4
 0x65E436: cmp     esi, 8
 0x65E439: jnz     short loc_65E46F
@@ -52,19 +52,19 @@
 0x65E458: push    ebx
 0x65E459: mov     ecx, edi
 0x65E45B: call    edx
-0x65E45D: push    0
-0x65E45F: push    esi
-0x65E460: mov     ecx, edi
-0x65E462: call    sub_5E2670
+0x65E45D: push    0; updatePlayerUI
+0x65E45F: push    esi; actorValue
+0x65E460: mov     ecx, edi; this
+0x65E462: call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x65E467: pop     ebx
 0x65E468: pop     edi
 0x65E469: pop     esi
 0x65E46A: retn    0Ch
 0x65E46D: fstp    st
-0x65E46F: push    0
-0x65E471: push    esi
-0x65E472: mov     ecx, edi
-0x65E474: call    sub_5E2670
+0x65E46F: push    0; updatePlayerUI
+0x65E471: push    esi; actorValue
+0x65E472: mov     ecx, edi; this
+0x65E474: call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x65E479: pop     ebx
 0x65E47A: pop     edi
 0x65E47B: pop     esi

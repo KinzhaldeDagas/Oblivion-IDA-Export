@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B6EA0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified TESObjectDOOR LoadForm vtable override (TESObjectDOOR vtable slot +0x1C at 0xA44A70). Checks record type 0x18, loads standard door subrecords, and for TNAM (record chunk code 0x4D414E54) reads each 4-byte FormID and pushes it into super.randomTeleport. This loader stores unresolved IDs; TESObjectDOOR_DoPostFixup performs the resolution.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B6ECD",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -172,12 +172,6 @@
     "line": "jmp     short loc_4B6EF0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4B6EED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4B6EF0",
@@ -277,7 +271,7 @@
   },
   {
     "ea": "0x4B6F35",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +343,7 @@
   },
   {
     "ea": "0x4B6F57",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +439,7 @@
   },
   {
     "ea": "0x4B6F8F",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +475,7 @@
   },
   {
     "ea": "0x4B6FA0",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +517,7 @@
   },
   {
     "ea": "0x4B6FB6",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x4B6FC0",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x4B6FD8",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x4B7016",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +733,7 @@
   },
   {
     "ea": "0x4B7029",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +757,7 @@
   },
   {
     "ea": "0x4B7033",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +805,7 @@
   },
   {
     "ea": "0x4B704B",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +871,7 @@
   },
   {
     "ea": "0x4B706D",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +895,7 @@
   },
   {
     "ea": "0x4B7077",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +943,7 @@
   },
   {
     "ea": "0x4B708F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +991,7 @@
   },
   {
     "ea": "0x4B70AA",
-    "line": "jz      short loc_4B70D4",
+    "line": "jz      short loc_4B70D4; Verified TNAM list load branch (chunk code 0x4D414E54): reads one 32-bit serialized FormID with TESFile_GetChunkData4 and pushes that raw value into TESObjectDOORMembr.randomTeleport. It does not resolve the FormID here.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1123,7 +1117,7 @@
   },
   {
     "ea": "0x4B70DD",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },

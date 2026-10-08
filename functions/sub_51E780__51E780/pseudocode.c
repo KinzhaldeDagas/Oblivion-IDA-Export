@@ -1,5 +1,7 @@
-// local variable allocation has failed, the output may be wrong!
-char __userpurge sub_51E780@<al>(int a1@<ecx>, int a2@<ebx>, int a3)
+// Verified: component vtable serialization thunk subtracts 0x24 from ECX and tail-jumps to TESActorBase_SaveModified. Full-object dispatch; not the nonvirtual TESActorBaseData component serializer.
+void __thiscall TESActorBase_SaveModified_ActorBaseDataThunk(
+        TESActorBaseData *__shifted(TESActorBase,0x24) self,
+        ActorBaseSaveChangeMask changeMask)
 {
-  return TESActorBase_SaveModified((TESForm *)(a1 - 0x24), a2, *(TESForm *)&a3);
+  TESActorBase_SaveModified(ADJ(self), changeMask); /*0x51e783*/
 }

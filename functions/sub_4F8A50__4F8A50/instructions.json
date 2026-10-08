@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4F8A6E",
-    "line": "call    edx",
+    "line": "call    edx; CanHaveFlames virtual call may return a null NiObjectNET*. Vanilla immediately forwards EAX as ECX to NiObjectNET::GetExtraData at 0x4F8A72.",
     "mnemonic": "call",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4F8A72",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; MEF v31 verified guard site: return null/0 without calling NiObjectNET::GetExtraData when ECX is null; preserve native RET 4 name-argument cleanup and resume at 0x4F8A77.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4F8A7C",
-    "line": "push    offset dword_B3F484",
+    "line": "push    offset stru_B3F484",
     "mnemonic": "push",
     "size": 5
   },

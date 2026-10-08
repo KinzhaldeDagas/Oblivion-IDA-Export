@@ -6,7 +6,7 @@
 0x55CC6D: jz      short loc_55CC76
 0x55CC6F: add     eax, 88h ; 'ˆ'
 0x55CC74: jmp     short loc_55CC7B
-0x55CC76: mov     eax, offset Vector3_InitValue?
+0x55CC76: mov     eax, offset g_zeroNiPoint3
 0x55CC7B: mov     ecx, [eax]
 0x55CC7D: mov     edx, [eax+4]
 0x55CC80: mov     eax, [eax+8]

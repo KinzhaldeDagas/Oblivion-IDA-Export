@@ -1,19 +1,36 @@
 {
-  "callees_count": 54,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_55E850",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x55E850",
+      "0x55EC18"
+    ],
+    [
+      "0x9BCB70",
+      "0x9BCC0F"
+    ]
+  ],
+  "chunks_sha256": "6c06e26e3f76da4ce0219062eff48d2f15bd55040a97428e2496868b2cec48fd",
+  "comment_regular": "Verified Oblivion manager layout is 0x28 bytes with modelCacheByTree at +0 and pendingReferenceNodes at +0x24; constructor initializes shared Ni properties and the TESObjectREFR* -> BSTreeNode* map. Fallout's manager size/field offsets differ. Confidence applies to these local offsets and constructor stores.",
+  "comment_repeatable": "Verified Oblivion manager layout is 0x28 bytes with modelCacheByTree at +0 and pendingReferenceNodes at +0x24; constructor initializes shared Ni properties and the TESObjectREFR* -> BSTreeNode* map. Fallout's manager size/field offsets differ. Confidence applies to these local offsets and constructor stores.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "BSTreeManager_ctor",
   "end_ea": "0x55EC18",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55E850",
+  "name": "BSTreeManager_ctor",
   "segment": ".text",
   "sha256": "d34eac9f2967bc3dee1acf943d63b06808ffab84e9a05ad2c65ad399986b5ed7",
   "size": 968,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55E850",
-  "type": "float *__thiscall(float *this)",
-  "xrefs_from_count": 369,
+  "total_chunk_size": 1127,
+  "type": "BSTreeManager_OblivionVerifiedLayout *__thiscall(BSTreeManager_OblivionVerifiedLayout *this)",
+  "xrefs_from_count": 426,
   "xrefs_to_count": 5
 }

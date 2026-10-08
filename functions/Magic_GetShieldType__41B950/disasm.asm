@@ -8,3 +8,7 @@
 0x41B969: jz      short Magic_GetShieldType___Shield_ReflDmg_ResNmlWeap
 0x41B96B: cmp     eax, 48534946h
 0x41B970: jnz     short Magic_GetShieldType___Return_0
+0x41B97E: cmp     eax, 48535246h
+0x41B983: jz      short Magic_GetShieldType___FrostShield
+0x41B985: cmp     eax, 574E5352h
+0x41B98A: jz      short Magic_GetShieldType___Shield_ReflDmg_ResNmlWeap

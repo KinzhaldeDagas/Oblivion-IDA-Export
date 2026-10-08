@@ -1,196 +1,306 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "unix_funcs",
+  "definition": "struct unix_funcs\n{\nNTSTATUS (*DbgUiIssueRemoteBreakin)(HANDLE);\nLONGLONG (*RtlGetSystemTimePrecise)(void);\nNTSTATUS (*RtlWaitOnAddress)(const void *, const void *, SIZE_T, const LARGE_INTEGER_0 *);\nvoid (*RtlWakeAddressAll)(const void *);\nvoid (*RtlWakeAddressSingle)(const void *);\nNTSTATUS (*fast_RtlpWaitForCriticalSection)(RTL_CRITICAL_SECTION *, int);\nNTSTATUS (*fast_RtlpUnWaitCriticalSection)(RTL_CRITICAL_SECTION *);\nNTSTATUS (*fast_RtlDeleteCriticalSection)(RTL_CRITICAL_SECTION *);\nNTSTATUS (*fast_RtlTryAcquireSRWLockExclusive)(RTL_SRWLOCK *);\nNTSTATUS (*fast_RtlAcquireSRWLockExclusive)(RTL_SRWLOCK *);\nNTSTATUS (*fast_RtlTryAcquireSRWLockShared)(RTL_SRWLOCK *);\nNTSTATUS (*fast_RtlAcquireSRWLockShared)(RTL_SRWLOCK *);\nNTSTATUS (*fast_RtlReleaseSRWLockExclusive)(RTL_SRWLOCK *);\nNTSTATUS (*fast_RtlReleaseSRWLockShared)(RTL_SRWLOCK *);\nNTSTATUS (*fast_RtlWakeConditionVariable)(RTL_CONDITION_VARIABLE *, int);\nNTSTATUS (*fast_wait_cv)(RTL_CONDITION_VARIABLE *, const void *, const LARGE_INTEGER_0 *);\ndouble (*atan)(double);\ndouble (*ceil)(double);\ndouble (*cos)(double);\ndouble (*fabs)(double);\ndouble (*floor)(double);\ndouble (*log)(double);\ndouble (*pow)(double, double);\ndouble (*sin)(double);\ndouble (*sqrt)(double);\ndouble (*tan)(double);\nvoid (*virtual_release_address_space)(void);\nNTSTATUS (*load_so_dll)(UNICODE_STRING *, void **);\nvoid (*init_builtin_dll)(void *);\nNTSTATUS (*init_unix_lib)(void *, DWORD, const void *, void *);\nNTSTATUS (*unwind_builtin_dll)(ULONG, _DISPATCHER_CONTEXT *, CONTEXT_0 *);\n}\n",
   "id": 18374686479672030773,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DbgUiIssueRemoteBreakin",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(HANDLE)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RtlGetSystemTimePrecise",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LONGLONG (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RtlWaitOnAddress",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(const void *, const void *, SIZE_T, const LARGE_INTEGER_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RtlWakeAddressAll",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "void (*)(const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RtlWakeAddressSingle",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlpWaitForCriticalSection",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_CRITICAL_SECTION *, int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlpUnWaitCriticalSection",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_CRITICAL_SECTION *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlDeleteCriticalSection",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_CRITICAL_SECTION *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlTryAcquireSRWLockExclusive",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_SRWLOCK *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlAcquireSRWLockExclusive",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_SRWLOCK *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlTryAcquireSRWLockShared",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_SRWLOCK *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlAcquireSRWLockShared",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_SRWLOCK *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlReleaseSRWLockExclusive",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_SRWLOCK *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlReleaseSRWLockShared",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_SRWLOCK *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_RtlWakeConditionVariable",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_CONDITION_VARIABLE *, int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fast_wait_cv",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "NTSTATUS (*)(RTL_CONDITION_VARIABLE *, const void *, const LARGE_INTEGER_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "atan",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ceil",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cos",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fabs",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "floor",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "log",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pow",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double, double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sin",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sqrt",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tan",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "double (*)(double)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "virtual_release_address_space",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "load_so_dll",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "NTSTATUS (*)(UNICODE_STRING *, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "init_builtin_dll",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "init_unix_lib",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(void *, DWORD, const void *, void *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unwind_builtin_dll",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "NTSTATUS (*)(ULONG, _DISPATCHER_CONTEXT *, CONTEXT_0 *)"
     }
   ],
   "name": "unix_funcs",
+  "ordinal": 2513,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 124
 }

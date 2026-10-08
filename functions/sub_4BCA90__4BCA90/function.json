@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BCA90",
+      "0x4BCAB7"
+    ]
+  ],
+  "chunks_sha256": "edd8ae26599ec3cb3f631590e3f4165f6b0283b7ea1fe0e43dddcced18d7138d",
+  "comment_regular": "Verified task constructor for the embedded-record source path: initializes IOTask, sets DistantLODLoaderTask vtable, stores owner map and DistantLODLoaderTaskData, and carries no external .lod path.",
+  "comment_repeatable": "Verified task constructor for the embedded-record source path: initializes IOTask, sets DistantLODLoaderTask vtable, stores owner map and DistantLODLoaderTaskData, and carries no external .lod path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4BCA90",
+  "display_name": "DistantLODLoaderTask_ctorEmbeddedRecordSource",
   "end_ea": "0x4BCAB7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BCA90",
+  "name": "DistantLODLoaderTask_ctorEmbeddedRecordSource",
   "segment": ".text",
   "sha256": "edd8ae26599ec3cb3f631590e3f4165f6b0283b7ea1fe0e43dddcced18d7138d",
   "size": 39,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BCA90",
-  "type": "IOTask *__thiscall(IOTask *this, unsigned __int8, int, int)",
+  "total_chunk_size": 39,
+  "type": "IOTask *__thiscall(IOTask *this, unsigned __int8 priority, LockFreeMap *ownerMap, DistantLODLoaderTaskData *taskData)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 1
 }

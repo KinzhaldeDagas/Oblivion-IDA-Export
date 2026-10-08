@@ -16,7 +16,7 @@
 0x506946: push    eax; a2
 0x506947: push    ecx; a1
 0x506948: mov     dword ptr [esp+24h+var_4], 0
-0x506950: call    Script_ExtractArgs
+0x506950: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x506955: add     esp, 20h
 0x506958: test    al, al
 0x50695A: jnz     short loc_50695E
@@ -24,8 +24,8 @@
 0x50695D: retn
 0x50695E: mov     edx, dword ptr [esp+4+var_4]
 0x506961: push    edx
-0x506962: mov     ecx, offset ActorProcessManager_ptr
-0x506967: call    nullsub_returnvVoid_1arg
+0x506962: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x506967: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x50696C: cmp     byte ptr ds:0B361ACh, 0
 0x506973: jz      short loc_506982
 0x506975: push    offset aDeletedAllNonP; "Deleted all non persistent actors in hi"...

@@ -49,12 +49,12 @@
 0x4C22B9: push    edi
 0x4C22BA: call    sub_8A6E40
 0x4C22BF: add     esp, 0Ch
-0x4C22C2: push    esi; Size
+0x4C22C2: push    esi; byteCount
 0x4C22C3: mov     [edi+4], esi
 0x4C22C6: mov     eax, [edi]
-0x4C22C8: push    ebx; Src
-0x4C22C9: push    eax; Dst
-0x4C22CA: call    _memcpy
+0x4C22C8: push    ebx; source
+0x4C22C9: push    eax; destination
+0x4C22CA: call    _memcpy;
 0x4C22CF: add     esp, 0Ch
 0x4C22D2: pop     ebx
 0x4C22D3: pop     ebp

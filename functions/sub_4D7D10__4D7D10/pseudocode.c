@@ -1,20 +1,21 @@
-void __thiscall sub_4D7D10(MobileObject *this, volatile LONG *a2)
+// Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
+void __thiscall MobileObject_SetNiNode(MobileObject *this, NiAVObject *node)
 {
-  volatile LONG *niNode; // esi
+  NiAVObject *niNode; // esi
 
-  this->vtbl->super.Unk_51((TESObjectREFR *)this);
-  nullsub_returnTrue_0arg();
-  niNode = (volatile LONG *)this->super.niNode;
-  if ( niNode != a2 )
+  this->vtbl->super.Unk_51((TESObjectREFR *)this); /*0x4d7d1d*/
+  Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x4d7d21*/
+  niNode = (NiAVObject *)this->super.niNode; /*0x4d7d26*/
+  if ( niNode != node ) /*0x4d7d32*/
   {
-    if ( niNode )
+    if ( niNode ) /*0x4d7d36*/
     {
-      if ( !InterlockedDecrement(niNode + 1) )
-        (**(void (__thiscall ***)(volatile LONG *, int))niNode)(niNode, 1);
+      if ( !InterlockedDecrement((volatile LONG *)&niNode->members) ) /*0x4d7d3c*/
+        niNode->vtbl->super.super.Destructor((NiRefObject *)niNode, 1); /*0x4d7d52*/
     }
-    this->super.niNode = (void *)a2;
-    if ( a2 )
-      InterlockedIncrement(a2 + 1);
+    this->super.niNode = node; /*0x4d7d56*/
+    if ( node ) /*0x4d7d59*/
+      InterlockedIncrement((volatile LONG *)&node->members); /*0x4d7d5f*/
   }
-  nullsub_returnTrue_0arg();
+  Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x4d7d67*/
 }

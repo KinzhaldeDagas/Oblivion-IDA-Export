@@ -16,8 +16,8 @@
 0x5965E6: mov     eax, [eax+68h]
 0x5965E9: add     esp, 8
 0x5965EC: push    offset aDataMenusBreat; "Data\\Menus\\breath_meter_menu.xml"
-0x5965F1: mov     ecx, eax; TileWindow *
-0x5965F3: call    Menu_LoadXML
+0x5965F1: mov     ecx, eax; this
+0x5965F3: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5965F8: mov     edi, eax
 0x5965FA: mov     ecx, edi
 0x5965FC: call    Tile_GetParentMenu

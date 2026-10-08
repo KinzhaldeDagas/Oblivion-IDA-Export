@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8112A0",
-    "line": "sub     esp, 0ACh",
+    "line": "sub     esp, 0ACh; MoonSugarEffect decode: DistantLODShader transform slot (+0x34). Calls sub_765480 with passed NiTransform, sets shadow/lighting constants, then falls through to base transform handling.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x8112B8",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x8113A4",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x8113FE",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x8115AE",
-    "line": "call    sub_779710",
+    "line": "call    sub_779710; MoonSugar build 39: base shader +0x34 transform slot branches skinned partition to CalculateBoneMatrixes/sub_765560, otherwise pass-0 non-skinned to sub_765480. Confirms hardware skin needs separate post-flush hook.",
     "mnemonic": "call",
     "size": 5
   },

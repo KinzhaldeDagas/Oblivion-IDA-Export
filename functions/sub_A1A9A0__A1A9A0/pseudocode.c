@@ -1,14 +1,14 @@
 void __cdecl sub_A1A9A0()
 {
-  void (__thiscall ***v0)(_DWORD, int); // esi
+  NiObjectNET *v0; // esi
 
-  v0 = (void (__thiscall ***)(_DWORD, int))dword_B35414;
-  if ( dword_B35414 )
+  v0 = g_FallbackCanopyShadowTextureProperty; /*0xa1a9a1*/
+  if ( g_FallbackCanopyShadowTextureProperty ) /*0xa1a9a9*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(dword_B35414 + 4)) )
+    if ( !InterlockedDecrement((volatile LONG *)&g_FallbackCanopyShadowTextureProperty->members) ) /*0xa1a9af*/
     {
-      if ( v0 )
-        (**v0)(v0, 1);
+      if ( v0 ) /*0xa1a9bb*/
+        (*(void (__thiscall **)(NiObjectNET *, int))v0->vtbl)(v0, 1); /*0xa1a9c5*/
     }
   }
 }

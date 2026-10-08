@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7839C0",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion-authoritative: uploads vertex-shader constant arrays through D3DX handles or indexed array elements. Matrix transpose is selected from the observed D3DX parameter type.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7839F4",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x783A15",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x783A2E",
-    "line": "cmp     [ebp+arg_4], 0",
+    "line": "cmp     [ebp+constantData], 0",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x783A37",
-    "line": "mov     [ebp+arg_4], eax",
+    "line": "mov     [ebp+constantData], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x783AF9",
-    "line": "mov     edx, [esp+90h+var_64]",
+    "line": "mov     edx, [esp+90h+vector4Count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x783B08",
-    "line": "add     edx, [ebp+arg_4]",
+    "line": "add     edx, [ebp+constantData]",
     "mnemonic": "add",
     "size": 3
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x783B17",
-    "line": "add     ecx, [ebp+arg_4]",
+    "line": "add     ecx, [ebp+constantData]",
     "mnemonic": "add",
     "size": 3
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x783B25",
-    "line": "mov     edx, [esp+90h+var_64]",
+    "line": "mov     edx, [esp+90h+vector4Count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x783B3A",
-    "line": "mov     edx, [esp+98h+var_68]",
+    "line": "mov     edx, [esp+98h+startRegister]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -841,55 +841,55 @@
   },
   {
     "ea": "0x783B73",
-    "line": "mov     ecx, [esp+90h+var_64]",
+    "line": "mov     ecx, [esp+90h+vector4Count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x783B77",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+constantData]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x783B7A",
-    "line": "mov     eax, [esp+90h+var_68]",
+    "line": "mov     eax, [esp+90h+startRegister]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x783B7E",
-    "line": "push    0",
+    "line": "push    0; unused",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x783B80",
-    "line": "push    ecx",
+    "line": "push    ecx; vector4Count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x783B81",
-    "line": "mov     ecx, [esi+24h]",
+    "line": "mov     ecx, [esi+24h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x783B84",
-    "line": "push    edx",
+    "line": "push    edx; constantData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x783B85",
-    "line": "push    eax",
+    "line": "push    eax; startRegister",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x783B86",
-    "line": "call    sub_783010",
+    "line": "call    NiDX9RenderState__SetVertexShaderConstantF; Thin Direct3D9 render-state wrapper for IDirect3DDevice9::SetVertexShaderConstantF (device vtable slot +0x178).",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x783BAA",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+constantData]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x783BCB",
-    "line": "mov     ecx, [esi+8]; void *",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x783BD5",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

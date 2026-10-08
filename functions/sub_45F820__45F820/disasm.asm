@@ -33,10 +33,10 @@
 0x45F87C: call    sub_404EC0
 0x45F881: add     esp, 4
 0x45F884: mov     edi, [esi+14h]
-0x45F887: push    2; Size
+0x45F887: push    2; byteCount
 0x45F889: lea     eax, [esp+20h+Src]
-0x45F88D: push    eax; Src
-0x45F88E: mov     ecx, esi
+0x45F88D: push    eax; source
+0x45F88E: mov     ecx, esi; self
 0x45F890: mov     [esp+24h+var_4], edi
 0x45F894: call    SaveLoad_SaveData
 0x45F899: test    ebx, ebx
@@ -47,13 +47,13 @@
 0x45F8A4: jz      short loc_45F904
 0x45F8A6: mov     ecx, [eax+0Ch]
 0x45F8A9: fld     dword ptr [eax+24h]
-0x45F8AC: push    4
+0x45F8AC: push    4; byteCount
 0x45F8AE: fstp    [esp+20h+var_8]
 0x45F8B2: lea     edx, [esp+20h+Src]
 0x45F8B6: mov     [esp+20h+Src], ecx
-0x45F8BA: push    edx
-0x45F8BB: mov     ecx, esi
-0x45F8BD: call    SaveLoad_SaveFormID
+0x45F8BA: push    edx; source
+0x45F8BB: mov     ecx, esi; self
+0x45F8BD: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
 0x45F8C2: mov     eax, ds:0B33398h
 0x45F8C7: mov     edi, [eax+10h]
 0x45F8CA: call    dword ptr ds:0A2808Ch

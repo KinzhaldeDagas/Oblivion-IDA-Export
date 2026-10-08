@@ -1,1 +1,1 @@
-ControlsMenu
+struct ControlsMenu;

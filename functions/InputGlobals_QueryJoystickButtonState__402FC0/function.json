@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x402FC0",
+      "0x403053"
+    ]
+  ],
+  "chunks_sha256": "80ddca06452a98264fe997e935d64e168ed80f143d1d3b059bdcee3b5404c688",
+  "comment_regular": "[Controller decode 2026-07-09] Queries cached joystick physical button state. queryMode 0 held, 1 newly pressed, 2 released, 3 changed. Current button byte at +0x60+n*0xA0; previous at +0xB0+n*0xA0.\n\nTES4 authoritative joystick button query modes mirror keyboard: held/pressed/released/changed.\n\n[Controller decode 2026-07-09] Queries cached joystick physical button state. queryMode 0 held, 1 newly pressed, 2 released, 3 changed. Current button byte at +0x60+n*0xA0; previous at +0xB0+n*0xA0.",
+  "comment_repeatable": "TES4 authoritative joystick button query modes mirror keyboard: held/pressed/released/changed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "InputGlobals::QueryJoystickButtonState",
   "end_ea": "0x403053",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobals::QueryJoystickButtonState",
   "segment": ".text",
   "sha256": "80ddca06452a98264fe997e935d64e168ed80f143d1d3b059bdcee3b5404c688",
   "size": 147,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x402FC0",
+  "total_chunk_size": 147,
   "type": "signed int __thiscall(InputGlobal *this, int a2, int a3, int a4)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 2

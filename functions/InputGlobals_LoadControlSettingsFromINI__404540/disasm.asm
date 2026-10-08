@@ -1,4 +1,4 @@
-0x404540: sub     esp, 14Ch
+0x404540: sub     esp, 14Ch; [Controller decode 2026-07-09] Loads [Controls] binding rows after version gate around 1.8, unpacking keyboard=(packed>>16), mouse=(packed>>8), joystick=packed. Joystick axis/invert settings are separate setting objects.
 0x404546: mov     eax, ___security_cookie
 0x40454B: xor     eax, esp
 0x40454D: mov     [esp+14Ch+var_4], eax
@@ -8,8 +8,7 @@
 0x404557: mov     ebx, ecx
 0x404559: xor     eax, eax
 0x40455B: jmp     short loc_404560
-0x40455D: align 10h
-0x404560: mov     cl, byte ptr word_B3F280[eax]
+0x404560: mov     cl, byte ptr unk_B3F280[eax]
 0x404566: mov     [esp+eax+158h+FileName], cl
 0x40456A: add     eax, 1
 0x40456D: test    cl, cl

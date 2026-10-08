@@ -8,7 +8,7 @@
 0x507C80: cmp     byte ptr ds:0B361ACh, 0
 0x507C87: jz      short loc_507CAA
 0x507C89: cmp     byte ptr ds:0B361FCh, 0
-0x507C90: mov     eax, offset aOn_0
+0x507C90: mov     eax, offset aOn_0; "On"
 0x507C95: jnz     short loc_507C9C
 0x507C97: mov     eax, offset aOff
 0x507C9C: push    eax

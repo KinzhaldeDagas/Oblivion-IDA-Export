@@ -1,4 +1,4 @@
-0x778BE0: mov     ecx, [esp+arg_0]
+0x778BE0: mov     ecx, [esp+arg_0]; Pass225: NiD3DGeometryGroupManager purge dispatcher; removes object's +0x1C geometry buffer through owning group.
 0x778BE4: mov     eax, [ecx+1Ch]
 0x778BE7: test    eax, eax
 0x778BE9: jnz     short loc_778BF0

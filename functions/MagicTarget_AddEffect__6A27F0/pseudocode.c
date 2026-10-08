@@ -15,11 +15,11 @@ int __usercall MagicTarget_AddEffect@<eax>(
 {
   TESObjectREFR *v14; // ebx
 
-  v14 = (TESObjectREFR *)(*(int (__thiscall **)(int))(*(_DWORD *)this + 4))(this);
-  if ( v14 )
-    return MagicTarget_AddEffect_::ModifyExtraData_(v14, a5, a4, this, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+  v14 = (TESObjectREFR *)(*(int (__thiscall **)(int))(*(_DWORD *)this + 4))(this); /*0x6a2851*/
+  if ( v14 ) /*0x6a2859*/
+    return MagicTarget_AddEffect_::ModifyExtraData_(v14, a5, a4, this, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13); /*0x6a285a*/
   else
-    return MagicTarget_AddEffect_::GetSEFFAlwaysApplies(
+    return MagicTarget_AddEffect_::GetSEFFAlwaysApplies( /*0x6a2859*/
              0,
              a5,
              a4,

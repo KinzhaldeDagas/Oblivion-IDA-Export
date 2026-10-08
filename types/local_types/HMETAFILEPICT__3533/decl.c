@@ -1,1 +1,1 @@
-HMETAFILEPICT
+typedef void *HMETAFILEPICT;

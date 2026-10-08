@@ -1,1 +1,6 @@
-BGTYPE
+enum BGTYPE : __int32
+{
+BT_IMAGEFILE = 0x0,
+BT_BORDERFILL = 0x1,
+BT_NONE = 0x2,
+};

@@ -1,1 +1,1 @@
-hkPhantomListener
+struct hkPhantomListener;

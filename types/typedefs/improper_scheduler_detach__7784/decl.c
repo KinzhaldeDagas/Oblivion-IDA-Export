@@ -1,1 +1,1 @@
-improper_scheduler_detach
+typedef exception improper_scheduler_detach;

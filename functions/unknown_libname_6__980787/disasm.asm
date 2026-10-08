@@ -3,7 +3,7 @@
 0x980792: test    eax, eax
 0x980794: jge     short locret_9807AF
 0x980796: push    esi
-0x980797: mov     esi, offset stru_BA9AF0
+0x980797: mov     esi, offset unk_BA9AF0
 0x98079C: push    esi; lpCriticalSection
 0x98079D: call    sub_980D64
 0x9807A2: add     esi, 18h

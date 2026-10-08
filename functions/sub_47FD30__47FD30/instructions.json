@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x47FD30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x47FD6E",
-    "line": "fld     [esp+30h+arg_0]",
+    "line": "fld     [esp+30h+scale]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x47FD98",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+scale]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x47FD9C",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+scale]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x47FE63",
-    "line": "mov     [esp+2Ch+arg_0], edi",
+    "line": "mov     [esp+2Ch+scale], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x47FE86",
-    "line": "mov     eax, [esp+2Ch+arg_4]",
+    "line": "mov     eax, [esp+2Ch+vertexColor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x47FFB1",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+scale], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1177,67 +1177,67 @@
   },
   {
     "ea": "0x47FFBD",
-    "line": "push    esi",
+    "line": "push    esi; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47FFBE",
-    "line": "push    8",
+    "line": "push    8; triangleCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47FFC0",
-    "line": "push    0",
+    "line": "push    0; dataFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47FFC2",
-    "line": "push    0",
+    "line": "push    0; hasVertexColors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47FFC4",
-    "line": "push    0",
+    "line": "push    0; textureCoordinates",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47FFC6",
-    "line": "push    edi",
+    "line": "push    edi; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47FFC7",
-    "line": "push    0",
+    "line": "push    0; normals",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47FFC9",
-    "line": "push    ebx",
+    "line": "push    ebx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47FFCA",
-    "line": "push    6",
+    "line": "push    6; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47FFCC",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47FFCE",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1354,5 +1354,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AF4B0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4BB",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4BE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4BF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4C4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4C6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF4CA",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4CD",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4D0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF4D2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4D7",
+    "line": "mov     eax, offset stru_ADBA88",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4DC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

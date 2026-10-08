@@ -1,11 +1,11 @@
-0x769030: sub     esp, 20h
+0x769030: sub     esp, 20h; MoonSugarEffect decode: BeginScene prepack flush. Iterates renderer PrePackObjects, locks/stages shared VB ranges, uses declaration/default/skinned packers, rebuilds IBs, unlocks, clears the map, and heap-frees temporary entries. Plugin mask passes should not borrow this renderer-owned queue/lifetime.
 0x769033: push    ebx
 0x769034: push    ebp
 0x769035: push    esi
 0x769036: mov     ebp, ecx
 0x769038: push    edi; int
 0x769039: mov     [esp+30h+var_1C], ebp
-0x76903D: call    sub_763FE0
+0x76903D: call    NiDX9Renderer_EnterRendererAndPrecache
 0x769042: mov     ecx, [ebp+608h]
 0x769048: xor     eax, eax
 0x76904A: test    ecx, ecx
@@ -21,28 +21,27 @@
 0x769065: xor     eax, eax
 0x769067: xor     ebx, ebx
 0x769069: test    eax, eax
-0x76906B: mov     [esp+30h+var_14], eax
+0x76906B: mov     [esp+30h+position], eax
 0x76906F: mov     [esp+30h+var_20], ebx
 0x769073: jz      loc_76927A
 0x769079: lea     esp, [esp+0]
 0x769080: lea     eax, [esp+30h+var_10]
-0x769084: push    eax
-0x769085: lea     ecx, [esp+34h+var_C]
-0x769089: push    ecx
-0x76908A: lea     edx, [esp+38h+var_14]
-0x76908E: push    edx
-0x76908F: lea     ecx, [ebp+604h]
-0x769095: call    sub_452600
+0x769084: push    eax; valueOut
+0x769085: lea     ecx, [esp+34h+keyOut]
+0x769089: push    ecx; keyOut
+0x76908A: lea     edx, [esp+38h+position]
+0x76908E: push    edx; position
+0x76908F: lea     ecx, [ebp+604h]; self
+0x769095: call    NiTMap_U32Pointer_GetNextEntry
 0x76909A: mov     edi, [esp+30h+var_10]
 0x76909E: test    edi, edi
 0x7690A0: jz      loc_76926F
-0x7690A6: cmp     [esp+30h+var_C], 0
+0x7690A6: cmp     [esp+30h+keyOut], 0
 0x7690AB: jz      loc_769294
 0x7690B1: or      ebx, 0FFFFFFFFh
 0x7690B4: xor     edx, edx
 0x7690B6: mov     eax, edi
 0x7690B8: jmp     short loc_7690C0
-0x7690BA: align 10h
 0x7690C0: mov     ecx, [eax+1Ch]
 0x7690C3: mov     esi, [eax+20h]
 0x7690C6: mov     eax, [eax+18h]
@@ -70,14 +69,14 @@
 0x7690F9: jbe     loc_769267
 0x7690FF: mov     eax, [ecx+10h]
 0x769102: mov     ecx, [ecx+8]
-0x769105: push    eax; int
+0x769105: push    eax; flags
 0x769106: sub     edx, ebx
-0x769108: push    edx; Size
-0x769109: push    ebx; int
-0x76910A: push    ecx; int
+0x769108: push    edx; byteCount
+0x769109: push    ebx; offsetBytes
+0x76910A: push    ecx; buffer
 0x76910B: mov     ecx, [esp+40h+var_1C]
-0x76910F: mov     ecx, [ecx+8B0h]
-0x769115: call    sub_776C90
+0x76910F: mov     ecx, [ecx+8B0h]; self
+0x769115: call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
 0x76911A: mov     [esp+30h+var_8], eax
 0x76911E: mov     edi, edi
 0x769120: mov     esi, [edi+18h]
@@ -123,13 +122,13 @@
 0x769180: push    eax
 0x769181: push    ecx
 0x769182: mov     ecx, [edx+8B0h]
-0x769188: call    sub_7774C0
+0x769188: call    sub_7774C0; MoonSugarEffect decode: fallback skinned vertex packer. Uses skin partition remap/weights/bone data, refreshes VB chips if stale/too small, writes packed partition vertices, and unlocks owned VB.
 0x76918D: jmp     short loc_76919F
 0x76918F: mov     eax, [edi+4]
 0x769192: push    eax
 0x769193: push    ecx
 0x769194: mov     ecx, [edx+8B0h]
-0x76919A: call    sub_776E90
+0x76919A: call    sub_776E90; MoonSugarEffect decode: fallback FVF/one-stream non-skinned vertex packer. Position begins at stream offset 0, then optional normals/color/UVs. A pack-time wobble here would persist in the geometry VB until a later clean repack.
 0x76919F: cmp     dword ptr [edi+1Ch], 0
 0x7691A3: jnz     loc_76923D
 0x7691A9: cmp     dword ptr [esi+4Ch], 0
@@ -166,23 +165,23 @@
 0x7691FE: mov     al, [esi+10h]
 0x769201: mov     edx, [esi+2Ch]
 0x769204: neg     al
-0x769206: mov     [esp+30h+var_18], edx
+0x769206: mov     [esp+30h+bufferBytes], edx
 0x76920A: mov     edx, [esi+30h]
 0x76920D: sbb     eax, eax
 0x76920F: and     eax, 10h
-0x769212: push    eax; Dst
-0x769213: push    1; int
-0x769215: lea     eax, [esp+38h+var_18]
-0x769219: push    eax; int
+0x769212: push    eax; usage
+0x769213: push    1; pool
+0x769215: lea     eax, [esp+38h+bufferBytes]
+0x769219: push    eax; bufferBytes
 0x76921A: mov     eax, [esi+4Ch]
-0x76921D: push    edx; int
-0x76921E: push    ecx; int
+0x76921D: push    edx; existing
+0x76921E: push    ecx; capacityIndices
 0x76921F: mov     ecx, [esp+44h+var_1C]
-0x769223: mov     ecx, [ecx+8B4h]
-0x769229: push    ebx; Src
-0x76922A: push    eax; int
-0x76922B: call    sub_7781F0
-0x769230: mov     edx, [esp+30h+var_18]
+0x769223: mov     ecx, [ecx+8B4h]; this
+0x769229: push    ebx; indexCount
+0x76922A: push    eax; indices
+0x76922B: call    NiDX9IndexBufferManager_PackBuffer; Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.
+0x769230: mov     edx, [esp+30h+bufferBytes]
 0x769234: mov     [esi+30h], eax
 0x769237: mov     [esi+28h], ebx
 0x76923A: mov     [esi+2Ch], edx
@@ -196,10 +195,10 @@
 0x769257: mov     edx, [esp+30h+var_1C]
 0x76925B: push    ecx
 0x76925C: mov     ecx, [edx+8B0h]
-0x769262: call    sub_776D80
+0x769262: call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.
 0x769267: mov     ebp, [esp+30h+var_1C]
 0x76926B: mov     ebx, [esp+30h+var_20]
-0x76926F: cmp     [esp+30h+var_14], 0
+0x76926F: cmp     [esp+30h+position], 0
 0x769274: jnz     loc_769080
 0x76927A: lea     ecx, [ebp+604h]
 0x769280: call    NiTMap_Clear
@@ -225,7 +224,7 @@
 0x7692B6: push    eax; a3
 0x7692B7: push    ecx; a2
 0x7692B8: mov     ecx, ebp; this
-0x7692BA: call    NiDX9Renderer__PackSkinnedGeometryBuffer
+0x7692BA: call    NiDX9Renderer__PackSkinnedGeometryBuffer; MoonSugarEffect decode: NiDX9Renderer::PackSkinnedGeometryBuffer. Same ownership as non-skinned packer but uses skin partition data for vertex/index counts, stream repacking, and optional software-VP index-buffer usage.
 0x7692BF: jmp     short loc_7692D7
 0x7692C1: mov     edx, [esi+0Ch]
 0x7692C4: mov     eax, [esi+4]
@@ -236,7 +235,7 @@
 0x7692CE: push    ecx
 0x7692CF: push    edx
 0x7692D0: mov     ecx, ebp
-0x7692D2: call    NiDX9Renderer__PackGeometryBuffers
+0x7692D2: call    NiDX9Renderer__PackGeometryBuffers; MoonSugarEffect decode: NiDX9Renderer::PackGeometryBuffers for non-skinned geometry. Validates/reuses BuffData when streams are live and not force-dirty; otherwise resizes streams, repacks vertices via NiD3DShaderDeclaration +0x6C or default packer, rebuilds IB through 0x7781F0, and clears low dirty flags.
 0x7692D7: test    edi, edi
 0x7692D9: mov     [esp+30h+var_20], esi
 0x7692DD: mov     [esi+20h], ebx
@@ -244,7 +243,6 @@
 0x7692E4: mov     esi, edi
 0x7692E6: jnz     short loc_769296
 0x7692E8: jmp     short loc_76926F
-0x7692EA: align 10h
 0x7692F0: mov     ebx, [esp+30h+var_20]
 0x7692F4: mov     eax, [ebx]
 0x7692F6: mov     cx, [eax+2Eh]
@@ -261,9 +259,9 @@
 0x769318: push    ecx
 0x769319: push    eax
 0x76931A: mov     ecx, ebp
-0x76931C: call    sub_765370
+0x76931C: call    sub_765370;
 0x769321: push    ebx
-0x769322: call    FormHeapFree
+0x769322: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x769327: add     esp, 4
 0x76932A: test    esi, esi
 0x76932C: mov     [esp+30h+var_20], esi
@@ -274,4 +272,4 @@
 0x769336: pop     ebp
 0x769337: pop     ebx
 0x769338: add     esp, 20h
-0x76933B: jmp     sub_764040
+0x76933B: jmp     NiDX9Renderer_LeavePrecacheAndRenderer

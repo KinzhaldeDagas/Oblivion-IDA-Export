@@ -19,3 +19,21 @@
 0x9D8F9F: pop     ecx
 0x9D8FA0: add     esp, 0Ch
 0x9D8FA3: retn
+0x403BC0: mov     eax, [ecx+4]
+0x403BC3: test    eax, eax
+0x403BC5: jz      short locret_403BD3
+0x403BC7: cmp     byte ptr [eax], 53h ; 'S'
+0x403BCA: jnz     short locret_403BD3
+0x403BCC: push    eax
+0x403BCD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x403BD2: pop     ecx
+0x403BD3: retn
+0x9AA7E0: mov     ecx, offset flt_B02DA0
+0x9AA7E5: jmp     loc_403BC0
+0x9AA7EA: mov     edx, [esp+arg_4]
+0x9AA7EE: lea     eax, [edx]
+0x9AA7F0: mov     ecx, [edx-4]
+0x9AA7F3: xor     ecx, eax
+0x9AA7F5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AA7FA: mov     eax, offset stru_AD777C
+0x9AA7FF: jmp     ___CxxFrameHandler3

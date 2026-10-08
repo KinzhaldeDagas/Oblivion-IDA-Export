@@ -22,7 +22,7 @@
 0x8443B0: push    0
 0x8443B2: push    eax
 0x8443B3: call    edx
-0x8443B5: mov     ecx, [esp+20h+arg_C]
+0x8443B5: mov     ecx, [esp+20h+value]
 0x8443B9: mov     eax, [edi+24h]
 0x8443BC: mov     ebp, [eax]
 0x8443BE: push    0
@@ -54,7 +54,7 @@
 0x8443FE: add     eax, 4
 0x844401: push    eax; lpAddend
 0x844402: call    dword ptr ds:0A28078h
-0x844408: mov     eax, [esp+20h+arg_C]
+0x844408: mov     eax, [esp+20h+value]
 0x84440C: push    eax
 0x84440D: push    ebp
 0x84440E: mov     ecx, esi
@@ -65,7 +65,7 @@
 0x844420: mov     ebp, [ebx+4]
 0x844423: add     ebx, 4
 0x844426: cmp     ebp, eax
-0x844428: mov     [esp+20h+arg_C], eax
+0x844428: mov     [esp+20h+value], eax
 0x84442C: jz      short loc_844463
 0x84442E: test    ebp, ebp
 0x844430: jz      short loc_844453
@@ -81,7 +81,7 @@
 0x844449: push    1
 0x84444B: mov     ecx, ebp
 0x84444D: call    edx
-0x84444F: mov     eax, [esp+20h+arg_C]
+0x84444F: mov     eax, [esp+20h+value]
 0x844453: test    eax, eax
 0x844455: mov     [ebx], eax
 0x844457: jz      short loc_844463
@@ -94,7 +94,7 @@
 0x84446E: mov     ebx, [ebp+4]
 0x844471: cmp     ebx, eax
 0x844473: mov     ecx, eax
-0x844475: mov     [esp+20h+arg_C], ecx
+0x844475: mov     [esp+20h+value], ecx
 0x844479: jz      short loc_8444B0
 0x84447B: test    ebx, ebx
 0x84447D: jz      short loc_84449F
@@ -110,7 +110,7 @@
 0x844495: push    1
 0x844497: mov     ecx, ebx
 0x844499: call    eax
-0x84449B: mov     ecx, [esp+20h+arg_C]
+0x84449B: mov     ecx, [esp+20h+value]
 0x84449F: test    ecx, ecx
 0x8444A1: mov     [ebp+4], ecx
 0x8444A4: jz      short loc_8444B0
@@ -119,20 +119,20 @@
 0x8444AA: call    dword ptr ds:0A28078h
 0x8444B0: mov     ebx, 1
 0x8444B5: add     [edi+60h], ebx
-0x8444B8: mov     [esp+20h+arg_C], edi
+0x8444B8: mov     [esp+20h+value], edi
 0x8444BC: mov     edx, [esi+38h]
-0x8444BF: lea     ecx, [esp+20h+arg_C]
-0x8444C3: push    ecx
-0x8444C4: push    edx
-0x8444C5: lea     ecx, [esi+40h]
+0x8444BF: lea     ecx, [esp+20h+value]
+0x8444C3: push    ecx; value
+0x8444C4: push    edx; index
+0x8444C5: lea     ecx, [esi+40h]; this
 0x8444C8: mov     [esp+28h+var_4], 0
-0x8444D0: call    sub_76CE40
+0x8444D0: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x8444D5: or      eax, 0FFFFFFFFh
 0x8444D8: add     [edi+60h], eax
 0x8444DB: mov     [esp+20h+var_4], eax
 0x8444DF: jnz     short loc_8444E8
 0x8444E1: mov     ecx, edi
-0x8444E3: call    sub_7604D0
+0x8444E3: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8444E8: add     [esi+38h], ebx
 0x8444EB: mov     ecx, dword ptr [esp+20h+var_C]
 0x8444EF: mov     large fs:0, ecx
@@ -143,3 +143,12 @@
 0x8444FA: pop     ebx
 0x8444FB: add     esp, 0Ch
 0x8444FE: retn    10h
+0x9D3390: lea     ecx, [ebp+10h]; void *
+0x9D3393: jmp     sub_4027D0
+0x9D3398: mov     edx, [esp+arg_4]
+0x9D339C: lea     eax, [edx-10h]
+0x9D339F: mov     ecx, [edx-14h]
+0x9D33A2: xor     ecx, eax
+0x9D33A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D33A9: mov     eax, offset stru_AFB7C0
+0x9D33AE: jmp     ___CxxFrameHandler3

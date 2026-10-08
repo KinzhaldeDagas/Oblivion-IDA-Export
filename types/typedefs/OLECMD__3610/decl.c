@@ -1,1 +1,1 @@
-OLECMD
+typedef _tagOLECMD OLECMD;

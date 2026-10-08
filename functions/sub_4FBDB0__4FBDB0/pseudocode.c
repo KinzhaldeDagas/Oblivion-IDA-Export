@@ -1,4 +1,4 @@
 void __thiscall sub_4FBDB0(TESForm *this)
 {
-  sub_4FBB60(this, *(float *)&this);
+  sub_4FBB60(this, *(float *)&this); /*0x4fbdb1*/
 }

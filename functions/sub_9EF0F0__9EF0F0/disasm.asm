@@ -2,7 +2,7 @@
 0x9EF0F6: push    ecx
 0x9EF0F7: fstp    [esp+4+var_4]; float
 0x9EF0FA: push    offset aFmagictelekine; "fMagicTelekinesisMoveBase"
-0x9EF0FF: mov     ecx, offset fMagicTelekinesisMoveBase
+0x9EF0FF: mov     ecx, (offset flt_B37ED0+158h)
 0x9EF104: call    GameSetting_ConstrAndReg_float
 0x9EF109: push    offset sub_A20770; void (__cdecl *)()
 0x9EF10E: call    _atexit

@@ -25,3 +25,12 @@
 0x70969A: pop     esi
 0x70969B: add     esp, 10h
 0x70969E: retn
+0x9C9840: mov     ecx, [ebp-10h]; this
+0x9C9843: jmp     j_??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C9848: mov     edx, [esp+arg_4]
+0x9C984C: lea     eax, [edx-8]
+0x9C984F: mov     ecx, [edx-0Ch]
+0x9C9852: xor     ecx, eax
+0x9C9854: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9859: mov     eax, offset stru_AF20CC
+0x9C985E: jmp     ___CxxFrameHandler3

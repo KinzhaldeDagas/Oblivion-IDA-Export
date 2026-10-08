@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x68EC58",
+      "0x68EC63"
+    ]
+  ],
+  "chunks_sha256": "b3cac312ef5875e71c4faa58a4b45b0922bfae8f9ead8bdf07053e45d29eabfc",
+  "comment_regular": "Verified generic effect fallback: EffectSetting flag 0x40000 selects SummonCreatureEffect; otherwise dispatch continues through weapon/value-modifier handling. Other bits remain Unknown.",
+  "comment_repeatable": "Verified generic effect fallback: EffectSetting flag 0x40000 selects SummonCreatureEffect; otherwise dispatch continues through weapon/value-modifier handling. Other bits remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_CreateDynamic:::CheckUseCreature",
   "end_ea": "0x68EC63",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_CreateDynamic:::CheckUseCreature",
   "segment": ".text",
   "sha256": "b3cac312ef5875e71c4faa58a4b45b0922bfae8f9ead8bdf07053e45d29eabfc",
   "size": 11,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68EC58",
-  "type": "int __usercall@<eax>(int@<esi>, int ecx0@<ecx>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
+  "total_chunk_size": 11,
+  "type": "void __usercall(EffectItem *@<esi>, int ecx0@<ecx>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, MagicCaster *, MagicItem *, int, int)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 3
 }

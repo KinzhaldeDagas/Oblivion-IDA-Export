@@ -1,1 +1,1 @@
-TESObjectWEAP
+struct TESObjectWEAP;

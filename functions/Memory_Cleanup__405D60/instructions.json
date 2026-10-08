@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x405D60",
-    "line": "sub     esp, 78h",
+    "line": "sub     esp, 78h; Verified memory-pressure dispatcher cases 9-11 and 13-15 call TES_RemoveTreeModelsByTrunkLength with BSTreeModel.trunkLength buckets [-FLT_MAX,100), [100,250), and [250,FLT_MAX). The ranges derive from CSpeedTreeRT_GetTrunkLength; the length units are Unknown.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x405DA4",
-    "line": "mov     ecx, TES; jumptable 00405D9D case 0",
+    "line": "mov     ecx, ds:0B333A0h; jumptable 00405D9D case 0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x405DAC",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x405DBB",
-    "line": "mov     ecx, TES; this",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x405DC3",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x405DED",
-    "line": "mov     ecx, ModelLoaderPtr; jumptable 00405D9D case 4",
+    "line": "mov     ecx, ds:0B33A1Ch; jumptable 00405D9D case 4",
     "mnemonic": "mov",
     "size": 6
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x405DFD",
-    "line": "mov     ecx, TES; jumptable 00405D9D case 5",
+    "line": "mov     ecx, ds:0B333A0h; jumptable 00405D9D case 5",
     "mnemonic": "mov",
     "size": 6
   },
@@ -247,25 +247,25 @@
   },
   {
     "ea": "0x405E0C",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x405E11",
-    "line": "mov     ecx, [eax+4]; void *",
+    "line": "mov     ecx, [eax+4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x405E14",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x405E19",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x405E24",
-    "line": "mov     ecx, TES; this",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x405E2C",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x405E36",
-    "line": "call    sub_785D30; jumptable 00405D9D case 6",
+    "line": "call    OB_StBezierSpline_ClearCache_010201A0; jumptable 00405D9D case 6",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x405E40",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D cases 7,8",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D cases 7,8",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x405E4D",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x405E60",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x405E6B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; worldspace",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x405E6D",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x405E7A",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x405E85",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; worldspace",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x405E87",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x405E93",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -439,31 +439,31 @@
   },
   {
     "ea": "0x405EA1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; worldspace",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x405EA3",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x405EA8",
-    "line": "mov     ecx, dword ptr Vector3_InitValue?",
+    "line": "mov     ecx, g_zeroNiPoint3.x",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x405EAE",
-    "line": "mov     edx, dword ptr Vector3_InitValue?+4",
+    "line": "mov     edx, g_zeroNiPoint3.y",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x405EB4",
-    "line": "push    0",
+    "line": "push    0; a4",
     "mnemonic": "push",
     "size": 2
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x405EBD",
-    "line": "mov     ecx, dword_B3F9B0",
+    "line": "mov     ecx, g_zeroNiPoint3.z",
     "mnemonic": "mov",
     "size": 6
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x405EC9",
-    "line": "call    sub_4EA6E0",
+    "line": "call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x405ECE",
-    "line": "mov     ecx, TES; this",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x405ED9",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x405EE3",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D case 9",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D case 9",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x405EF9",
-    "line": "fstp    [esp+84h+var_80]; float",
+    "line": "fstp    [esp+84h+maximumDistance]; upperBound",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -583,19 +583,19 @@
   },
   {
     "ea": "0x405F05",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+minimumDistance]; lowerBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x405F08",
-    "line": "push    1; char",
+    "line": "push    1; skipCurrentExteriorNeighbors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x405F0A",
-    "line": "call    sub_405090",
+    "line": "call    TES_RemoveTreeModelsByTrunkLength; Verified Memory_Cleanup case 9 releases resident TREE model 3D with trunkLength in [-FLT_MAX,100), skipping the active exterior neighborhood.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x405F17",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D case 10",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D case 10",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x405F2D",
-    "line": "fstp    [esp+84h+var_80]; float",
+    "line": "fstp    [esp+84h+maximumDistance]; upperBound",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -649,19 +649,19 @@
   },
   {
     "ea": "0x405F37",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+minimumDistance]; lowerBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x405F3A",
-    "line": "push    1; char",
+    "line": "push    1; skipCurrentExteriorNeighbors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x405F3C",
-    "line": "call    sub_405090",
+    "line": "call    TES_RemoveTreeModelsByTrunkLength; Verified Memory_Cleanup case 10 releases resident TREE model 3D with trunkLength in [100,250), skipping the active exterior neighborhood.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x405F49",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D case 11",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D case 11",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x405F5F",
-    "line": "fstp    [esp+84h+var_80]; float",
+    "line": "fstp    [esp+84h+maximumDistance]; upperBound",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x405F69",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+minimumDistance]; lowerBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x405F6C",
-    "line": "push    1; char",
+    "line": "push    1; skipCurrentExteriorNeighbors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x405F6E",
-    "line": "call    sub_405090",
+    "line": "call    TES_RemoveTreeModelsByTrunkLength; Verified Memory_Cleanup case 11 releases resident TREE model 3D with trunkLength in [250,FLT_MAX), skipping the active exterior neighborhood.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x405F7B",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D case 12",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D case 12",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x405F88",
-    "line": "mov     eax, dword_B36094",
+    "line": "mov     eax, dword ptr unk_B36094",
     "mnemonic": "mov",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x405FB0",
-    "line": "mov     ecx, TES; this",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x405FB8",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x405FC2",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D case 13",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D case 13",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x405FD8",
-    "line": "fstp    [esp+84h+var_80]; float",
+    "line": "fstp    [esp+84h+maximumDistance]; upperBound",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -871,19 +871,19 @@
   },
   {
     "ea": "0x405FE4",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+minimumDistance]; lowerBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x405FE7",
-    "line": "push    0; char",
+    "line": "push    0; skipCurrentExteriorNeighbors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x405FE9",
-    "line": "call    sub_405090",
+    "line": "call    TES_RemoveTreeModelsByTrunkLength; Verified Memory_Cleanup case 13 releases resident TREE model 3D with trunkLength in [-FLT_MAX,100) across loaded cells, including the active exterior neighborhood.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x405FF6",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D case 14",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D case 14",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x406008",
-    "line": "fstp    [esp+84h+var_80]; float",
+    "line": "fstp    [esp+84h+maximumDistance]; upperBound",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -937,19 +937,19 @@
   },
   {
     "ea": "0x406012",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+minimumDistance]; lowerBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x406015",
-    "line": "push    0; char",
+    "line": "push    0; skipCurrentExteriorNeighbors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x406017",
-    "line": "call    sub_405090",
+    "line": "call    TES_RemoveTreeModelsByTrunkLength; Verified Memory_Cleanup case 14 releases resident TREE model 3D with trunkLength in [100,250) across loaded cells, including the active exterior neighborhood.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x406021",
-    "line": "cmp     byte_B33395, 0; jumptable 00405D9D case 15",
+    "line": "cmp     byte ptr unk_B33395, 0; jumptable 00405D9D case 15",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x406033",
-    "line": "fstp    [esp+84h+var_80]; float",
+    "line": "fstp    [esp+84h+maximumDistance]; upperBound",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1003,19 +1003,19 @@
   },
   {
     "ea": "0x40603D",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+minimumDistance]; lowerBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x406040",
-    "line": "push    0; char",
+    "line": "push    0; skipCurrentExteriorNeighbors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x406042",
-    "line": "call    sub_405090",
+    "line": "call    TES_RemoveTreeModelsByTrunkLength; Verified Memory_Cleanup case 15 releases resident TREE model 3D with trunkLength in [250,FLT_MAX) across loaded cells, including the active exterior neighborhood.",
     "mnemonic": "call",
     "size": 5
   },

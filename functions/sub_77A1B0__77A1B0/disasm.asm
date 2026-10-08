@@ -1,4 +1,4 @@
-0x77A1B0: mov     edx, [esp+arg_18]
+0x77A1B0: mov     edx, [esp+arg_18]; MoonSugarEffect decode: NiD3DShader vtable +0x30 wrapper that applies the current pass render state/texture stages through NiD3DPass::ApplyPassToRender.
 0x77A1B4: mov     ecx, [ecx+3Ch]
 0x77A1B7: mov     eax, [ecx]
 0x77A1B9: mov     eax, [eax+8]

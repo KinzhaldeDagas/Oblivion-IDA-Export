@@ -1,1 +1,1 @@
-lexical_function
+typedef int (*lexical_function)(WCHAR_0);

@@ -10,7 +10,7 @@
 0x568F43: mov     eax, [edi]
 0x568F45: mov     esi, [eax+4]
 0x568F48: push    eax
-0x568F49: call    FormHeapFree
+0x568F49: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x568F4E: add     esp, 4
 0x568F51: test    esi, esi
 0x568F53: mov     [edi], esi

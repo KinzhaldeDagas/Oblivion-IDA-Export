@@ -2,7 +2,7 @@
 0x9EF786: push    ecx
 0x9EF787: fstp    [esp+4+var_4]; float
 0x9EF78A: push    offset aFshockcastvoff; "fShockCastVOffset"
-0x9EF78F: mov     ecx, offset fShockCastVOffset
+0x9EF78F: mov     ecx, (offset flt_B37ED0+280h)
 0x9EF794: call    GameSetting_ConstrAndReg_float
 0x9EF799: push    offset sub_A209C0; void (__cdecl *)()
 0x9EF79E: call    _atexit

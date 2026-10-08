@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C2100",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: BSTextureManager destructor/delete path. Releases available/in-use rendered textures, shadow maps, cached buffers, and manager lists.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,31 +133,31 @@
   },
   {
     "ea": "0x7C2141",
-    "line": "lea     eax, [esp+28h+var_14]",
+    "line": "lea     eax, [esp+28h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C2145",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2146",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C2148",
-    "line": "call    sub_7C1740",
+    "line": "call    NiTRefPointerList__RemoveHead; Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C214D",
-    "line": "mov     edi, [esp+28h+var_14]",
+    "line": "mov     edi, [esp+28h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,31 +283,31 @@
   },
   {
     "ea": "0x7C2180",
-    "line": "lea     ecx, [esp+28h+var_14]",
+    "line": "lea     ecx, [esp+28h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C2184",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2185",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C2187",
-    "line": "call    sub_7C1740",
+    "line": "call    NiTRefPointerList__RemoveHead; Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C218C",
-    "line": "mov     edi, [esp+28h+var_14]",
+    "line": "mov     edi, [esp+28h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x7C223A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x7C22C9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1594,5 +1594,149 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE270",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE273",
+    "line": "jmp     j_??1?$NiTPointerList@PAURenderedTextureData@BSTextureManager@@@@UAE@XZ",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE278",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE27B",
+    "line": "add     ecx, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE27E",
+    "line": "jmp     j_??1?$NiTPointerList@PAURenderedTextureData@BSTextureManager@@@@UAE@XZ",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE283",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE286",
+    "line": "add     ecx, 20h ; ' '",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE289",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VBSRenderedTexture@@@@@@UAE@XZ",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE28E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE291",
+    "line": "add     ecx, 30h ; '0'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE294",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VBSRenderedTexture@@@@@@UAE@XZ",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE299",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE29C",
+    "line": "add     ecx, 40h ; '@'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE29F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2A4",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2A7",
+    "line": "add     ecx, 44h ; 'D'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2AA",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2AF",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE2B3",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2B6",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2B9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE2BB",
+    "line": "call    @__security_check_cookie@4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2C0",
+    "line": "mov     eax, offset stru_AF7298",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2C5",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

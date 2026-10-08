@@ -1,6 +1,6 @@
-0x548FD0: mov     eax, [esp+arg_0]
-0x548FD4: push    eax
-0x548FD5: call    Calc_MasteryFromSkill
+0x548FD0: mov     eax, [esp+skillValue]
+0x548FD4: push    eax; skillValue
+0x548FD5: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x548FDA: add     eax, 0FFFFFFFFh; switch 4 cases
 0x548FDD: add     esp, 4
 0x548FE0: cmp     eax, 3

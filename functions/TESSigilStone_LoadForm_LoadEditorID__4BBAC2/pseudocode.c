@@ -1,9 +1,9 @@
-int __userpurge TESSigilStone_LoadForm_::LoadEditorID@<eax>(int *a1@<ebx>, int a2@<esi>, int a3)
+void __usercall TESSigilStone_LoadForm_::LoadEditorID(Data *a1@<ebx>, int a2@<esi>)
 {
   _UNKNOWN *retaddr; // [esp+0h] [ebp+0h] BYREF
 
-  _alloca_();
-  TESFile_GetChunkData((Data *)a1, (char *)&retaddr, 0x200u);
-  (*(void (__thiscall **)(int, _UNKNOWN **))(*(_DWORD *)a2 + 0xD8))(a2, &retaddr);
-  return TESSigilStone_LoadForm_::ChunkLoop_Next(a1, a3);
+  _alloca_(a1->currentChunk.length); /*0x4bbac8*/
+  TESFile_GetChunkData(a1, (char *)&retaddr, 0x200u); /*0x4bbad7*/
+  (*(void (__thiscall **)(int, _UNKNOWN **))(*(_DWORD *)a2 + 0xD8))(a2, &retaddr); /*0x4bbae7*/
+  JUMPOUT(0x4BBBA0); /*0x4bbba0*/
 }

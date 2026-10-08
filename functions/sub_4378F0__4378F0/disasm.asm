@@ -8,7 +8,7 @@
 0x4378FD: jz      short loc_437953
 0x4378FF: test    byte ptr [esi+2Ch], 1
 0x437903: jnz     short loc_437953
-0x437905: mov     ecx, ModelLoaderPtr
+0x437905: mov     ecx, ds:0B33A1Ch
 0x43790B: mov     edx, [esi+20h]
 0x43790E: mov     ecx, [ecx+4]
 0x437911: push    ebx
@@ -20,7 +20,7 @@
 0x43791B: call    edx
 0x43791D: test    al, al
 0x43791F: jnz     short loc_437952
-0x437921: mov     ecx, ModelLoaderPtr
+0x437921: mov     ecx, ds:0B33A1Ch
 0x437927: mov     eax, [esi+20h]
 0x43792A: mov     ecx, [ecx+4]
 0x43792D: lea     ebx, [esp+10h+var_4]

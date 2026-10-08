@@ -1,1 +1,1 @@
-QueuedMagicItem
+struct QueuedMagicItem;

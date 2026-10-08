@@ -1,106 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiDX92DBufferDataVtbl",
+  "definition": "struct __declspec(align(4)) NiDX92DBufferDataVtbl\n{\nNiRefObjectVtbl super;\nUInt32 (__thiscall *GetWidth)(NiDX92DBufferData *this);\nUInt32 (__thiscall *GetHeight)(NiDX92DBufferData *this);\nNiSurfaceData *(__thiscall *GetSurfaceData)(NiDX92DBufferData *this);\nvoid *(__thiscall *GetRTTI)(NiDX92DBufferData *this);\nUInt32 (__thiscall *func05)(NiDX92DBufferData *this);\nUInt32 (__thiscall *func06)(NiDX92DBufferData *this);\nUInt32 (__thiscall *func07)(NiDX92DBufferData *this);\nUInt32 (__thiscall *func08)(NiDX92DBufferData *this);\nUInt32 (__thiscall *func09)(NiDX92DBufferData *this);\nUInt32 (__thiscall *func0A)(NiDX92DBufferData *this);\nbool (__thiscall *ReleaseSurface1)(NiDX92DBufferData *this);\nbool (__thiscall *GetBufferData)(NiDX92DBufferData *this, IDirect3DDevice9 *D3DDevice);\nbool (__thiscall *SetRenderTarget)(NiDX92DBufferData *this, IDirect3DDevice9 *D3DDevice, UInt32 Index);\nbool (__thiscall *SetDepthTarget)(NiDX92DBufferData *this, IDirect3DDevice9 *D3DDevice);\nvoid (__thiscall *ReleaseSurface2)(NiDX92DBufferData *this);\n}\n",
   "id": 18374686479671984725,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiRefObjectVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetWidth",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetHeight",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSurfaceData",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "NiSurfaceData *(__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetRTTI",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void *(__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "func05",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "func06",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "func07",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "func08",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "func09",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "func0A",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReleaseSurface1",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "bool (__thiscall *)(NiDX92DBufferData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetBufferData",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiDX92DBufferData *this, IDirect3DDevice9 *D3DDevice)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetRenderTarget",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiDX92DBufferData *this, IDirect3DDevice9 *D3DDevice, UInt32 Index)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetDepthTarget",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(NiDX92DBufferData *this, IDirect3DDevice9 *D3DDevice)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReleaseSurface2",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiDX92DBufferData *this)"
     }
   ],
   "name": "NiDX92DBufferDataVtbl",
+  "ordinal": 9299,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

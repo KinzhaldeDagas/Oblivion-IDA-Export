@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6575B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): the same method is present in HighProcess and MiddleHighProcess vtable groups. It refreshes per-target enchantment shader state and the PlayerCharacter cache; the exact shared subobject interface name remains Candidate.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x6575D9",
-    "line": "cmp     [esp+28h+arg_8], 0",
+    "line": "cmp     [esp+28h+arg4], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x6575DE",
-    "line": "mov     ebp, [esp+28h+arg_0]",
+    "line": "mov     ebp, [esp+28h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x6575EB",
-    "line": "push    ebp",
+    "line": "push    ebp; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6575EC",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6575F1",
-    "line": "call    sub_679120",
+    "line": "call    ActorProcessManager_FindTargetNonWeaponShaderHitEffect; Verified (Oblivion): weapon-enchantment refresh first queries the manager for an existing non-weapon shader candidate on this target and reinitializes the returned object before handling the weapon-enchantment-specific instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x657603",
-    "line": "cmp     byte ptr [esp+28h+arg_4], 0",
+    "line": "cmp     [esp+28h+arg3], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x65767B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65767D",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,19 +475,19 @@
   },
   {
     "ea": "0x65769C",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65769E",
-    "line": "lea     ecx, [edi+18h]",
+    "line": "lea     ecx, [edi+18h]; magicItem",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6576A1",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x6576C8",
-    "line": "mov     [esp+28h+arg_8], 0",
+    "line": "mov     [esp+28h+arg4], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -583,25 +583,25 @@
   },
   {
     "ea": "0x6576CF",
-    "line": "push    eax",
+    "line": "push    eax; effectShader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6576D0",
-    "line": "push    ebp",
+    "line": "push    ebp; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6576D1",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6576D6",
-    "line": "call    sub_679240",
+    "line": "call    ActorProcessManager_FindWeaponEnchantmentShader; Verified (Oblivion): weapon-enchantment refresh first asks ActorProcessManager_FindWeaponEnchantmentShader for an active matching effect. Existing effects are reinitialized; otherwise a new effect is created, flagged bWeaponEnchantment_28, and registered.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x657709",
-    "line": "mov     [esp+28h+arg_4], edi",
+    "line": "mov     dword ptr [esp+28h+arg3], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x65772A",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+elapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -775,19 +775,19 @@
   },
   {
     "ea": "0x65772F",
-    "line": "push    eax; int",
+    "line": "push    eax; effectShader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x657730",
-    "line": "push    ebp; int",
+    "line": "push    ebp; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x657731",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x65773E",
-    "line": "mov     bl, [esp+28h+arg_C]",
+    "line": "mov     bl, [esp+28h+arg5]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x65774C",
-    "line": "mov     byte ptr [edi+28h], 1",
+    "line": "mov     byte ptr [edi+28h], 1; Verified (Oblivion): sets bWeaponEnchantment_28 immediately after constructing the shader from the equipped item's enchantment shader (EffectSetting.enchantEffect).",
     "mnemonic": "mov",
     "size": 4
   },
@@ -895,19 +895,19 @@
   },
   {
     "ea": "0x657768",
-    "line": "push    edi",
+    "line": "push    edi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x657769",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x65776E",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x657777",
-    "line": "mov     [esp+28h+arg_8], 1",
+    "line": "mov     [esp+28h+arg4], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x6577D6",
-    "line": "mov     [esp+28h+arg_4], eax",
+    "line": "mov     dword ptr [esp+28h+arg3], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1135,25 +1135,25 @@
   },
   {
     "ea": "0x6577F3",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+elapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6577F6",
-    "line": "push    edi; int",
+    "line": "push    edi; effectShader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6577F7",
-    "line": "push    ecx; int",
+    "line": "push    ecx; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6577F8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1177,13 +1177,13 @@
   },
   {
     "ea": "0x657803",
-    "line": "cmp     [esp+28h+arg_8], 0",
+    "line": "cmp     [esp+28h+arg4], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x657808",
-    "line": "mov     byte ptr [eax+28h], 1",
+    "line": "mov     byte ptr [eax+28h], 1; Verified (Oblivion): sets bWeaponEnchantment_28 on the player's cached weapon-enchantment shader before storing it in PlayerCharacter::unk5E0.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1420,5 +1420,107 @@
     "line": "jmp     short loc_657850",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9C3BA0",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3BA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3BA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3BA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3BAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3BAB",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3BAE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3BAF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3BB4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3BB5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3BB6",
+    "line": "mov     edx, dword ptr [esp+arg3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3BBA",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3BBD",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3BC0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3BC2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3BC7",
+    "line": "mov     eax, offset stru_AEC704",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3BCC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

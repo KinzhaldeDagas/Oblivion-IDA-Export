@@ -1,6 +1,6 @@
 bool __thiscall sub_756DE0(NiTriBasedGeomData *this, int a2)
 {
-  return sub_752CD0(this, a2)
+  return sub_752CD0(this, a2) /*0x756e24*/
       && *(float *)(a2 + 0x18) == this->members.super.m_kBound.Radius
       && LOWORD(this->members.super.m_pkVertex) == *(_WORD *)(a2 + 0x1C)
       && *(float *)(a2 + 0x20) == *(float *)&this->members.super.m_pkNormal

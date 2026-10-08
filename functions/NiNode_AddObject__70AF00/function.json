@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "chunks": [
+    [
+      "0x70AF00",
+      "0x70AFF1"
+    ],
+    [
+      "0x9C9930",
+      "0x9C995B"
+    ]
+  ],
+  "chunks_sha256": "e6c782fc19e5f0bac83d7e717390f56bb82e9b4119090fb8913da4b38c114459",
+  "comment_regular": "\nGPU static-world lifecycle audit 2026-09-27: AddObject calls SetParentAndDetachFromOld before inserting the child into the new parent array. Invalidate both supplied parent and child dependency keys before Original; a pre-call parent pointer alone does not prove post-call ownership.\n\n[2026-10-03 frond LOD replacement] Plugin replacement registers a newly constructed NiTriShape before this insertion so native destruction can always retire it. Replacement remains app-culled while old child is removed; array-reference ownership remains native. Registry has no fixed ring eviction. Portable transaction checks do not constitute live scene graph validation.\n\nAdds child to this NiNode after reference protection and reparent/detach. firstAvailableSlot selects hole reuse versus append/grow behavior.",
+  "comment_repeatable": "Adds child to this NiNode after reference protection and reparent/detach. firstAvailableSlot selects hole reuse versus append/grow behavior.\n\n[2026-10-03 v108 publication] Verified child is temporarily retained at 0x70AF3C, parent backlink set at 0x70AF41, another temporary retained at 0x70AF52, then AddFirstEmpty 0x4B3680 at 0x70AF67. Parent backlink alone does not establish array membership. A caught insertion fault can occur after ownership changes; callers must not directly delete the child. Frond v108 pins around the call, checks parent+array membership on normal return, hides/deactivates failure, and drops only its pin. Unknown native temporary-reference unwind is not inferred or force-balanced.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
   "display_name": "NiNode::AddObject",
   "end_ea": "0x70AFF1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiNode::AddObject",
   "segment": ".text",
   "sha256": "0b56e3d6d0d1c3021bd8a87e000051fce71abea2378374bce0b7d5777786d82d",
   "size": 241,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70AF00",
-  "type": "void __thiscall(unsigned __int16 *this, int, int)",
-  "xrefs_from_count": 95,
+  "total_chunk_size": 284,
+  "type": "void __thiscall(NiNode *this, NiAVObject *child, char firstAvailableSlot)",
+  "xrefs_from_count": 108,
   "xrefs_to_count": 16
 }

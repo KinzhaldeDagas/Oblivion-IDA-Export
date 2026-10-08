@@ -1,1 +1,35 @@
-_OUTLINETEXTMETRICW
+struct _OUTLINETEXTMETRICW
+{
+UINT otmSize;
+TEXTMETRICW otmTextMetrics;
+BYTE otmFiller;
+PANOSE otmPanoseNumber;
+UINT otmfsSelection;
+UINT otmfsType;
+INT otmsCharSlopeRise;
+INT otmsCharSlopeRun;
+INT otmItalicAngle;
+UINT otmEMSquare;
+INT otmAscent;
+INT otmDescent;
+UINT otmLineGap;
+UINT otmsCapEmHeight;
+UINT otmsXHeight;
+RECT otmrcFontBox;
+INT otmMacAscent;
+INT otmMacDescent;
+UINT otmMacLineGap;
+UINT otmusMinimumPPEM;
+POINT otmptSubscriptSize;
+POINT otmptSubscriptOffset;
+POINT otmptSuperscriptSize;
+POINT otmptSuperscriptOffset;
+UINT otmsStrikeoutSize;
+INT otmsStrikeoutPosition;
+INT otmsUnderscoreSize;
+INT otmsUnderscorePosition;
+LPSTR otmpFamilyName;
+LPSTR otmpFaceName;
+LPSTR otmpStyleName;
+LPSTR otmpFullName;
+};

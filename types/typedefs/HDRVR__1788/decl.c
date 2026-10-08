@@ -1,1 +1,1 @@
-HDRVR
+typedef HDRVR__ *HDRVR;

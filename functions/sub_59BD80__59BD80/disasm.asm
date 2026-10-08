@@ -1,4 +1,4 @@
-0x59BD80: push    ebp
+0x59BD80: push    ebp; [Controller decode 2026-07-09] Controls menu update/rebind capture. Displays current bindings, scans joystick 0 physical buttons before POV/D-pad virtual buttons, and writes joystick bindings through scheme 2.
 0x59BD81: mov     ebp, esp
 0x59BD83: and     esp, 0FFFFFFF8h
 0x59BD86: push    0FFFFFFFFh
@@ -40,7 +40,7 @@
 0x59BDF9: push    0FA8h
 0x59BDFE: mov     ecx, edi
 0x59BE00: call    Tile_GetFloat
-0x59BE05: call    Double_To_SInt32
+0x59BE05: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59BE0A: mov     edx, ds:0B33398h
 0x59BE10: mov     ecx, [edx+20h]; this
 0x59BE13: mov     edx, [esi+5Ch]
@@ -92,7 +92,7 @@
 0x59BEA3: movzx   edx, bl
 0x59BEA6: push    eax; whichJoystick
 0x59BEA7: mov     [esp+38h+var_1C], edx
-0x59BEAB: call    InputGlobals__GetJoystickButtonCount
+0x59BEAB: call    InputGlobals__GetJoystickButtonCount; [Controller decode 2026-07-09] Controls menu display path: compares joystick binding byte against DIDEVCAPS.dwButtons.
 0x59BEB0: mov     ecx, [esp+34h+var_1C]
 0x59BEB4: cmp     ecx, eax
 0x59BEB6: jge     short loc_59BED6
@@ -137,31 +137,31 @@
 0x59BF2C: call    Tile_SetString
 0x59BF31: fld     dword ptr ds:0A379B4h
 0x59BF37: push    ecx
-0x59BF38: fstp    [esp+38h+a2]; a3
-0x59BF3B: push    0FC9h; a2
+0x59BF38: fstp    [esp+38h+a2]; value
+0x59BF3B: push    0FC9h; propertyCode
 0x59BF40: mov     ecx, edi; this
-0x59BF42: call    Tile_SetFloat
+0x59BF42: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59BF47: fld     dword ptr ds:0A6B1A0h
 0x59BF4D: push    ecx
-0x59BF4E: fstp    [esp+38h+a2]; a3
-0x59BF51: push    0FCCh; a2
+0x59BF4E: fstp    [esp+38h+a2]; value
+0x59BF51: push    0FCCh; propertyCode
 0x59BF56: mov     ecx, edi; this
-0x59BF58: call    Tile_SetFloat
+0x59BF58: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59BF5D: fld     dword ptr ds:0A6B19Ch
 0x59BF63: push    ecx
-0x59BF64: fstp    [esp+38h+a2]; a3
-0x59BF67: push    0FCDh; a2
+0x59BF64: fstp    [esp+38h+a2]; value
+0x59BF67: push    0FCDh; propertyCode
 0x59BF6C: mov     ecx, edi; this
-0x59BF6E: call    Tile_SetFloat
+0x59BF6E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59BF73: fld     dword ptr ds:0A6B198h
 0x59BF79: push    ecx
-0x59BF7A: fstp    [esp+38h+a2]; a3
-0x59BF7D: push    0FCEh; a2
+0x59BF7A: fstp    [esp+38h+a2]; value
+0x59BF7D: push    0FCEh; propertyCode
 0x59BF82: mov     ecx, edi; this
-0x59BF84: call    Tile_SetFloat
+0x59BF84: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59BF89: push    ebx
 0x59BF8A: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x59BF92: call    FormHeapFree
+0x59BF92: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59BF97: xor     eax, eax
 0x59BF99: add     esp, 4
 0x59BF9C: cmp     ebp, eax
@@ -193,39 +193,39 @@
 0x59C008: fld     dword ptr ds:0A379B4h
 0x59C00E: push    ecx
 0x59C00F: mov     ecx, [esi+54h]; this
-0x59C012: fstp    [esp+38h+a2]; a3
-0x59C015: push    0FC9h; a2
-0x59C01A: call    Tile_SetFloat
+0x59C012: fstp    [esp+38h+a2]; value
+0x59C015: push    0FC9h; propertyCode
+0x59C01A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C01F: fld     dword ptr ds:0A379B4h
 0x59C025: push    ecx
 0x59C026: mov     ecx, [esi+58h]; this
-0x59C029: fstp    [esp+38h+a2]; a3
-0x59C02C: push    0FC9h; a2
-0x59C031: call    Tile_SetFloat
+0x59C029: fstp    [esp+38h+a2]; value
+0x59C02C: push    0FC9h; propertyCode
+0x59C031: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C036: fldz
 0x59C038: push    ecx
-0x59C039: fstp    [esp+38h+a2]; a3
+0x59C039: fstp    [esp+38h+a2]; value
 0x59C03C: mov     ecx, [esi+0D8h]; this
-0x59C042: push    0FDDh; a2
-0x59C047: call    Tile_SetFloat
+0x59C042: push    0FDDh; propertyCode
+0x59C047: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C04C: fld     dword ptr [esi+0DCh]
 0x59C052: push    ecx
 0x59C053: mov     ecx, [esi+2Ch]; this
-0x59C056: fstp    [esp+38h+a2]; a3
-0x59C059: push    0FB1h; a2
-0x59C05E: call    Tile_SetFloat
+0x59C056: fstp    [esp+38h+a2]; value
+0x59C059: push    0FB1h; propertyCode
+0x59C05E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C063: fld     dword ptr [esi+0E0h]
 0x59C069: push    ecx
 0x59C06A: mov     ecx, [esi+2Ch]; this
-0x59C06D: fstp    [esp+38h+a2]; a3
-0x59C070: push    0FB2h; a2
-0x59C075: call    Tile_SetFloat
+0x59C06D: fstp    [esp+38h+a2]; value
+0x59C070: push    0FB2h; propertyCode
+0x59C075: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C07A: fld     dword ptr ds:0A379B4h
 0x59C080: push    ecx
 0x59C081: mov     ecx, [esi+4]; this
-0x59C084: fstp    [esp+38h+a2]; a3
-0x59C087: push    0FB2h; a2
-0x59C08C: call    Tile_SetFloat
+0x59C084: fstp    [esp+38h+a2]; value
+0x59C087: push    0FB2h; propertyCode
+0x59C08C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C091: mov     dword ptr [esi+0D8h], 0
 0x59C09B: mov     byte ptr [esi+0D4h], 0
 0x59C0A2: jmp     short loc_59C0C1
@@ -233,7 +233,7 @@
 0x59C0AA: mov     ecx, [ecx+20h]; this
 0x59C0AD: push    2; a3
 0x59C0AF: push    0; a2
-0x59C0B1: call    InputGlobals__QueryMouseKeyState
+0x59C0B1: call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.
 0x59C0B6: test    eax, eax
 0x59C0B8: jz      short loc_59C0C1
 0x59C0BA: mov     byte ptr [esi+0E4h], 0
@@ -242,13 +242,13 @@
 0x59C0C9: jz      loc_59C3CF
 0x59C0CF: fld1
 0x59C0D1: push    ecx
-0x59C0D2: fstp    [esp+38h+a2]; a3
-0x59C0D5: push    0FDDh; a2
-0x59C0DA: call    Tile_SetFloat
+0x59C0D2: fstp    [esp+38h+a2]; value
+0x59C0D5: push    0FDDh; propertyCode
+0x59C0DA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C0DF: mov     ecx, [esi+0D8h]
 0x59C0E5: push    0FA8h
 0x59C0EA: call    Tile_GetFloat
-0x59C0EF: call    Double_To_SInt32
+0x59C0EF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59C0F4: mov     ebp, eax
 0x59C0F6: mov     eax, [esi+5Ch]
 0x59C0F9: sub     ebp, 0Eh
@@ -259,12 +259,12 @@
 0x59C10E: sub     eax, 1
 0x59C111: jnz     loc_59C3CF
 0x59C117: xor     edi, edi
-0x59C119: cmp     byte ptr [esi+0D4h], 0
+0x59C119: cmp     byte ptr [esi+0D4h], 0; [Controller decode 2026-07-09] Controls menu rebind capture: scans joystick 0 physical buttons.
 0x59C120: jnz     short loc_59C17A
 0x59C122: mov     edx, ds:0B33398h
 0x59C128: mov     ecx, [edx+20h]; this
 0x59C12B: push    0; whichJoystick
-0x59C12D: call    InputGlobals__GetJoystickButtonCount
+0x59C12D: call    InputGlobals__GetJoystickButtonCount; [Controller decode 2026-07-09] Controls menu rebind capture: physical-button scan is bounded by DIDEVCAPS.dwButtons.
 0x59C132: cmp     edi, eax
 0x59C134: jge     short loc_59C17A
 0x59C136: mov     eax, ds:0B33398h
@@ -272,7 +272,7 @@
 0x59C13E: push    1; a4
 0x59C140: push    edi; a3
 0x59C141: push    0; a2
-0x59C143: call    InputGlobals__QueryJoystickButtonState
+0x59C143: call    InputGlobals__QueryJoystickButtonState; TES4 authoritative joystick button query modes mirror keyboard: held/pressed/released/changed.
 0x59C148: test    eax, eax
 0x59C14A: jz      short loc_59C16E
 0x59C14C: mov     ecx, ds:0B33398h
@@ -292,19 +292,18 @@
 0x59C17C: cmp     [esi+0D4h], bl
 0x59C182: jnz     loc_59C21F
 0x59C188: jmp     short loc_59C190
-0x59C18A: align 10h
 0x59C190: mov     edx, ds:0B33398h
 0x59C196: mov     ecx, [edx+20h]; this
 0x59C199: push    0; a2
-0x59C19B: call    InputGlobals__GetJoystickPOVControlCount
+0x59C19B: call    InputGlobals__GetJoystickPOVControlCount; [Controller decode 2026-07-09] Controls menu rebind capture: POV/D-pad scan is bounded by DIDEVCAPS.dwPOVs.
 0x59C1A0: cmp     ebx, eax
 0x59C1A2: jge     short loc_59C21F
 0x59C1A4: mov     eax, ds:0B33398h
 0x59C1A9: mov     ecx, [eax+20h]; this
 0x59C1AC: push    ebx; a3
 0x59C1AD: push    0; a2
-0x59C1AF: call    sub_403070
-0x59C1B4: mov     edi, eax
+0x59C1AF: call    InputGlobals__GetJoystickPOVVirtualButton
+0x59C1B4: mov     edi, eax; [Controller decode 2026-07-09] Controls menu rebind capture: scans joystick 0 POV virtual buttons 0x20..0x27.
 0x59C1B6: cmp     edi, 0FFFFFFFFh
 0x59C1B9: jz      short loc_59C1E6
 0x59C1BB: call    dword ptr ds:0A280D0h
@@ -315,12 +314,12 @@
 0x59C1D2: push    edi; newButton
 0x59C1D3: push    2; whichScheme
 0x59C1D5: push    ebp; whichCtrl
-0x59C1D6: call    InputGlobal__RebindControl
+0x59C1D6: call    InputGlobal__RebindControl; [Controller decode 2026-07-09] Controls menu rebind capture: writes selected logical control using scheme 2, the first joystick/controller binding scheme.
 0x59C1DB: test    al, al
 0x59C1DD: jz      short loc_59C1E6
 0x59C1DF: mov     eax, 1
 0x59C1E4: jmp     short loc_59C1E8
-0x59C1E6: xor     eax, eax
+0x59C1E6: xor     eax, eax; [Controller decode 2026-07-09] Controls menu rebind capture: throttles held POV/D-pad rebinds with dword_B3B0B4[0x76].
 0x59C1E8: push    0Bh; int
 0x59C1EA: mov     [esi+0D4h], al
 0x59C1F0: call    sub_57DE50
@@ -337,7 +336,7 @@
 0x59C225: mov     ecx, [edx+20h]; this
 0x59C228: push    1; a3
 0x59C22A: push    1Dh; a2
-0x59C22C: call    InputGlobals__QueryControlState
+0x59C22C: call    InputGlobals__QueryControlState; [Controller decode 2026-07-09] Controls menu rebind capture: clears selected joystick/controller binding through logical control 0x1D path.
 0x59C231: test    eax, eax
 0x59C233: jz      loc_59C3CF
 0x59C239: push    0FFh; newButton
@@ -373,7 +372,7 @@
 0x59C298: mov     ecx, [edx+20h]; this
 0x59C29B: push    1; a3
 0x59C29D: push    edi; a2
-0x59C29E: call    InputGlobals__QueryMouseKeyState
+0x59C29E: call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.
 0x59C2A3: test    eax, eax
 0x59C2A5: jz      short loc_59C2C8
 0x59C2A7: push    0Bh; int
@@ -393,7 +392,7 @@
 0x59C2DA: mov     ecx, [ecx+20h]; this
 0x59C2DD: push    1; a3
 0x59C2DF: push    1Dh; a2
-0x59C2E1: call    InputGlobals__QueryControlState
+0x59C2E1: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x59C2E6: test    eax, eax
 0x59C2E8: jz      short loc_59C311
 0x59C2EA: push    0FFh; newButton
@@ -426,7 +425,7 @@
 0x59C349: mov     ecx, [eax+20h]; this
 0x59C34C: push    1; a3
 0x59C34E: push    edi; a2
-0x59C34F: call    InputGlobals__QueryKeyboardState
+0x59C34F: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x59C354: test    eax, eax
 0x59C356: jnz     short loc_59C377
 0x59C358: add     edi, 1
@@ -480,3 +479,12 @@
 0x59C3DF: mov     esp, ebp
 0x59C3E1: pop     ebp
 0x59C3E2: retn
+0x9BD870: lea     ecx, [ebp+var_18]; void *
+0x9BD873: jmp     BSStringT_Clear
+0x9BD878: mov     edx, [esp-4+arg_4]
+0x9BD87C: lea     eax, [edx-24h]
+0x9BD87F: mov     ecx, [edx-28h]
+0x9BD882: xor     ecx, eax
+0x9BD884: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD889: mov     eax, offset stru_AE71B4
+0x9BD88E: jmp     ___CxxFrameHandler3

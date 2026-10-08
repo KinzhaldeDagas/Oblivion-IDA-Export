@@ -1,1 +1,1 @@
-ITypeCompVtbl_0
+typedef ITypeCompVtbl ITypeCompVtbl_0;

@@ -1,7 +1,7 @@
 0x9F6A10: push    offset aReset; "Reset"
 0x9F6A15: push    offset aSreset; "sReset"
-0x9F6A1A: mov     ecx, offset dword_B38FF8
-0x9F6A1F: call    GameSetting_ConstrAndReg
+0x9F6A1A: mov     ecx, offset stru_B38FF8; self
+0x9F6A1F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F6A24: push    offset sub_A22710; void (__cdecl *)()
 0x9F6A29: call    _atexit
 0x9F6A2E: pop     ecx

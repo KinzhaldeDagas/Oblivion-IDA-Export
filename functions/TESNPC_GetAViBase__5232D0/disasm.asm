@@ -7,7 +7,7 @@
 0x5232DF: ja      short loc_5232FB
 0x5232E1: push    ecx
 0x5232E2: push    2
-0x5232E4: call    ActorValue_GetGroupOffsetFromAV
+0x5232E4: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x5232E9: movsx   eax, al
 0x5232EC: movzx   eax, byte ptr [eax+esi+0ECh]
 0x5232F4: add     esp, 8
@@ -18,6 +18,6 @@
 0x523301: jbe     short loc_52330B
 0x523303: push    ecx
 0x523304: mov     ecx, esi
-0x523306: call    TESActorBase_GetAViBase
+0x523306: call    TESActorBase_GetAViBase; TESActorBase base AV getter: actor value 7 reads attributes component index 7. Correlates with Luck via Actor_GetLuckModifiedBaseAV using AV 7.
 0x52330B: pop     esi
 0x52330C: retn    4

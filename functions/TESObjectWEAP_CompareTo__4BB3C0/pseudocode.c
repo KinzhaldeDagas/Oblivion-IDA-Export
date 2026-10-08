@@ -16,65 +16,65 @@ bool __thiscall TESObjectWEAP_CompareTo(TESForm *this, void *a2)
   unsigned __int8 *v17; // edx
   int v18; // eax
 
-  v3 = (TESForm *)OblivionDynamicCast(
+  v3 = (TESForm *)OblivionDynamicCast( /*0x4bb3d7*/
                     a2,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                     &TESObjectWEAP `RTTI Type Descriptor',
                     0);
-  v4 = v3;
-  if ( !v3 || TESForm_CompareAllComponentsTo(this, v3) )
-    return 1;
-  v6 = 0x10;
-  v7 = v4 + 6;
-  v8 = this + 6;
-  do
+  v4 = v3; /*0x4bb3dc*/
+  if ( !v3 || TESForm_CompareAllComponentsTo(this, v3) ) /*0x4bb3ef*/
+    return 1; /*0x4bb3e9*/
+  v6 = 0x10; /*0x4bb3f8*/
+  v7 = v4 + 6; /*0x4bb3fd*/
+  v8 = this + 6; /*0x4bb403*/
+  do /*0x4bb422*/
   {
-    if ( v8->vtbl != v7->vtbl )
-      goto LABEL_8;
-    v6 -= 4;
-    v7 = (TESForm *)((char *)v7 + 4);
-    v8 = (TESForm *)((char *)v8 + 4);
+    if ( v8->vtbl != v7->vtbl ) /*0x4bb414*/
+      goto LABEL_8; /*0x4bb414*/
+    v6 -= 4; /*0x4bb416*/
+    v7 = (TESForm *)((char *)v7 + 4); /*0x4bb419*/
+    v8 = (TESForm *)((char *)v8 + 4); /*0x4bb41c*/
   }
-  while ( v6 >= 4 );
-  if ( !v6 )
+  while ( v6 >= 4 ); /*0x4bb422*/
+  if ( !v6 ) /*0x4bb426*/
   {
 LABEL_17:
-    v18 = 0;
-    return v18 != 0;
+    v18 = 0; /*0x4bb48d*/
+    return v18 != 0; /*0x4bb48d*/
   }
 LABEL_8:
-  v9 = LOBYTE(v8->vtbl) - LOBYTE(v7->vtbl);
-  if ( !v9 )
+  v9 = LOBYTE(v8->vtbl) - LOBYTE(v7->vtbl); /*0x4bb428*/
+  if ( !v9 ) /*0x4bb430*/
   {
-    v10 = v6 - 1;
-    v11 = (unsigned __int8 *)&v7->vtbl + 1;
-    v12 = (unsigned __int8 *)&v8->vtbl + 1;
-    if ( !v10 )
-      goto LABEL_17;
-    v9 = *v12 - *v11;
-    if ( !v9 )
+    v10 = v6 - 1; /*0x4bb432*/
+    v11 = (unsigned __int8 *)&v7->vtbl + 1; /*0x4bb435*/
+    v12 = (unsigned __int8 *)&v8->vtbl + 1; /*0x4bb438*/
+    if ( !v10 ) /*0x4bb43d*/
+      goto LABEL_17; /*0x4bb43d*/
+    v9 = *v12 - *v11; /*0x4bb445*/
+    if ( !v9 ) /*0x4bb447*/
     {
-      v13 = v10 - 1;
-      v14 = v11 + 1;
-      v15 = v12 + 1;
-      if ( !v13 )
-        goto LABEL_17;
-      v9 = *v15 - *v14;
-      if ( !v9 )
+      v13 = v10 - 1; /*0x4bb449*/
+      v14 = v11 + 1; /*0x4bb44c*/
+      v15 = v12 + 1; /*0x4bb44f*/
+      if ( !v13 ) /*0x4bb454*/
+        goto LABEL_17; /*0x4bb454*/
+      v9 = *v15 - *v14; /*0x4bb45c*/
+      if ( !v9 ) /*0x4bb45e*/
       {
-        v16 = v14 + 1;
-        v17 = v15 + 1;
-        if ( v13 == 1 )
-          goto LABEL_17;
-        v9 = *v17 - *v16;
-        if ( !v9 )
-          goto LABEL_17;
+        v16 = v14 + 1; /*0x4bb463*/
+        v17 = v15 + 1; /*0x4bb466*/
+        if ( v13 == 1 ) /*0x4bb46b*/
+          goto LABEL_17; /*0x4bb46b*/
+        v9 = *v17 - *v16; /*0x4bb473*/
+        if ( !v9 ) /*0x4bb475*/
+          goto LABEL_17; /*0x4bb475*/
       }
     }
   }
-  v18 = 1;
-  if ( v9 <= 0 )
-    return 1;
-  return v18 != 0;
+  v18 = 1; /*0x4bb479*/
+  if ( v9 <= 0 ) /*0x4bb47e*/
+    return 1; /*0x4bb48a*/
+  return v18 != 0; /*0x4bb3e5*/
 }

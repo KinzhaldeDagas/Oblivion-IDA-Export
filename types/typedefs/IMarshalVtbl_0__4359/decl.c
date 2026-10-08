@@ -1,1 +1,1 @@
-IMarshalVtbl_0
+typedef IMarshalVtbl IMarshalVtbl_0;

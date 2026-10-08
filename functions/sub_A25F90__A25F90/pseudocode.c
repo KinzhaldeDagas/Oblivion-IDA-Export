@@ -1,4 +1,5 @@
-void __cdecl sub_A25F90()
+// Verified atexit cleanup: calls ActiveEffectCreatorMap_Destroy on NiTMap_AECreatorFuncs, releasing the map bucket allocation at process shutdown.
+void __cdecl ActiveEffectCreatorMap_AtexitCleanup()
 {
-  NiTPointerMap<enum MagicSystem::EffectID,ActiveEffect * (__cdecl *)(MagicCaster *,MagicItem *,EffectItem *)>::~NiTPointerMap<enum MagicSystem::EffectID,ActiveEffect * (__cdecl *)(MagicCaster *,MagicItem *,EffectItem *)>(&NiTMap_AECreatorFuncs);
+  ActiveEffectCreatorMap_Destroy(&NiTMap_AECreatorFuncs); /*0xa25f95*/
 }

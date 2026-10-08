@@ -1,25 +1,25 @@
-int *sub_4FAAF0()
+TESDataHandler *sub_4FAAF0()
 {
-  int *result; // eax
-  int v1; // ecx
+  TESDataHandler *result; // eax
+  float *objectList; // ecx
 
-  result = (int *)TESDataHandler;
-  if ( TESDataHandler )
+  result = g_TESDataHandler; /*0x4faaf0*/
+  if ( g_TESDataHandler ) /*0x4faaf0*/
   {
-    result += 0x19;
-    if ( result )
+    result = (TESDataHandler *)((char *)result + 0x64); /*0x4faaf9*/
+    if ( result ) /*0x4faafc*/
     {
-      if ( result[1] || *result )
+      if ( result->packageList.item || result->objectList ) /*0x4fab04*/
       {
-        do
+        do /*0x4fab15*/
         {
-          v1 = *result;
-          result = (int *)result[1];
-          *(float *)(v1 + 0x34) = 0.0;
+          objectList = (float *)result->objectList; /*0x4fab0b*/
+          result = (TESDataHandler *)result->packageList.item; /*0x4fab0d*/
+          objectList[0xD] = 0.0; /*0x4fab10*/
         }
-        while ( result );
+        while ( result ); /*0x4fab15*/
       }
     }
   }
-  return result;
+  return result; /*0x4fab19*/
 }

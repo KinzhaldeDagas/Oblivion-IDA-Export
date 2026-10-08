@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x4B34E0",
+      "0x4B35A3"
+    ]
+  ],
+  "chunks_sha256": "8899e9bac1dca7f2b768ffdf02a828fbe4acf52df098cbdfe482a374a73cd1ce",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-08: PERF-16 native SetAt contract: lazily initializes null sentinelB35AD4, adjusts usedEnd+A and occupiedCount+C for null/non-null transitions, releases old slot and retains new payload, writes slot. Reuse this native path; direct pointer write bypasses ownership/metadata. EAX is incidental, not a success flag.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B34E0",
+  "display_name": "NiTObjectArray_SetAt",
   "end_ea": "0x4B35A3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B34E0",
+  "name": "NiTObjectArray_SetAt",
   "segment": ".text",
   "sha256": "8899e9bac1dca7f2b768ffdf02a828fbe4acf52df098cbdfe482a374a73cd1ce",
   "size": 195,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B34E0",
-  "type": "LONG __thiscall(_DWORD *this, unsigned int, LONG *)",
+  "total_chunk_size": 195,
+  "type": "unsigned int __thiscall(MEF_RefPointerArray16 *self, unsigned int index, void **element)",
   "xrefs_from_count": 79,
   "xrefs_to_count": 11
 }

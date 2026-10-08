@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51C0F0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+actorValue]; Oblivion major-slot setter. Writes only actor values 0x0C..0x20, silently ignores other values, and does not bounds-check index; callers must constrain index to 0..6.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x51C0FA",
-    "line": "ja      short locret_51C104",
+    "line": "ja      short locret_51C104; Unsigned range test accepts exactly the 21 native skill actor values Armorer..Speechcraft (0x0C..0x20).",
     "mnemonic": "ja",
     "size": 2
   },
   {
     "ea": "0x51C0FC",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+index]",
     "mnemonic": "mov",
     "size": 4
   },

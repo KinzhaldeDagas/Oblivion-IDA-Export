@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B546D",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -172,12 +172,6 @@
     "line": "jmp     short loc_4B5490",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4B548D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4B5490",
@@ -277,7 +271,7 @@
   },
   {
     "ea": "0x4B54CD",
-    "line": "call    TESForm_LoadGenericComponents",
+    "line": "call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +397,13 @@
   },
   {
     "ea": "0x4B5513",
-    "line": "mov     [ebp+var_8], edi",
+    "line": "mov     [ebp+var_8], edi; Every SCRI starts from a fresh zeroed u32 scratch; short/empty chunks deterministically zero-fill missing bytes and overlong chunks use the bounded cap-4 policy.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4B5516",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,13 +427,13 @@
   },
   {
     "ea": "0x4B5522",
-    "line": "mov     [esi+58h], edx",
+    "line": "mov     [esi+58h], edx; Each reached SCRI overwrites the stored script candidate, so the final physical occurrence is authoritative before linking.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4B5525",
-    "line": "call    TESScriptableForm_Link",
+    "line": "call    TESScriptableForm_Link; First SCRI links and sets TESScriptableForm's guard; duplicate later SCRI values overwrite the candidate at +0x58 but TESScriptableForm_Link immediately returns, leaving the final raw candidate unlinked.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +481,7 @@
   },
   {
     "ea": "0x4B5544",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +649,7 @@
   },
   {
     "ea": "0x4B5599",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +679,7 @@
   },
   {
     "ea": "0x4B55A4",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +715,7 @@
   },
   {
     "ea": "0x4B55B4",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },

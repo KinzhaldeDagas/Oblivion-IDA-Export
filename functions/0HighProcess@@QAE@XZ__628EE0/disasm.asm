@@ -1,4 +1,4 @@
-0x628EE0: push    0FFFFFFFFh
+0x628EE0: push    0FFFFFFFFh; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.
 0x628EE2: push    offset ??1HighProcess@@UAE@XZ_SEH
 0x628EE7: mov     eax, large fs:0
 0x628EED: push    eax
@@ -14,9 +14,9 @@
 0x628F01: mov     large fs:0, eax
 0x628F07: mov     esi, ecx
 0x628F09: mov     [esp+28h+var_10], esi
-0x628F0D: call    ??0MiddleHighProcess@@QAE@XZ; MiddleHighProcess::MiddleHighProcess(void)
+0x628F0D: call    ??0MiddleHighProcess@@QAE@XZ; MiddleHighProcess constructor: derives from MiddleLowProcess, installs MiddleHighProcess vtable, initializes pathing, currentPackage +0x0C0 and currentPackProcedure. No movementFlags field is initialized here.
 0x628F12: xor     ebx, ebx
-0x628F14: mov     dword ptr [esi], offset ??_7HighProcess@@6B@; const HighProcess::`vftable'
+0x628F14: mov     dword ptr [esi], offset ??_7HighProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.
 0x628F1A: mov     [esi+190h], ebx
 0x628F20: mov     [esi+194h], ebx
 0x628F26: mov     [esp+28h+var_4], ebx
@@ -63,7 +63,7 @@
 0x62900C: mov     byte ptr [esi+23Ch], 1
 0x629013: mov     [esi+244h], bl
 0x629019: mov     [esi+250h], ebx
-0x62901F: call    GetRandomLargeInteger?
+0x62901F: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x629024: cdq
 0x629025: mov     ecx, 1388h
 0x62902A: idiv    ecx
@@ -75,7 +75,7 @@
 0x629044: fild    [esp+30h+var_14]
 0x629048: fmul    qword ptr ds:0A30E40h
 0x62904E: fadd    qword ptr ds:0A3F3E8h
-0x629054: fstp    dword ptr [esi+230h]
+0x629054: fstp    dword ptr [esi+230h]; Initialize the action-5 idle-window timer at HighProcess+0x230 to a uniform millisecond step in [1.000, 5.999] seconds.
 0x62905A: fldz
 0x62905C: fst     dword ptr [esi+248h]
 0x629062: fst     dword ptr [esi+234h]
@@ -175,3 +175,15 @@
 0x62920D: pop     ebx
 0x62920E: add     esp, 14h
 0x629211: retn
+0x9C36A0: mov     ecx, [ebp-10h]; this
+0x9C36A3: jmp     ??1MiddleHighProcess@@UAE@XZ; MiddleHighProcess::~MiddleHighProcess(void)
+0x9C36A8: mov     ecx, [ebp-10h]
+0x9C36AB: add     ecx, 268h; slot
+0x9C36B1: jmp     NiPointerSlot_Release
+0x9C36B6: mov     edx, [esp+arg_4]
+0x9C36BA: lea     eax, [edx-18h]
+0x9C36BD: mov     ecx, [edx-1Ch]
+0x9C36C0: xor     ecx, eax
+0x9C36C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C36C7: mov     eax, offset stru_AEC280
+0x9C36CC: jmp     ___CxxFrameHandler3

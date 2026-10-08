@@ -2,8 +2,8 @@
 0x439AF4: push    esi
 0x439AF5: push    eax
 0x439AF6: mov     esi, ecx
-0x439AF8: call    sub_4392E0
-0x439AFD: mov     ecx, ModelLoaderPtr
+0x439AF8: call    QueuedTreeModel_ReleaseBuildResources
+0x439AFD: mov     ecx, ds:0B33A1Ch
 0x439B03: mov     ecx, [ecx+0Ch]
 0x439B06: mov     eax, [esi+34h]
 0x439B09: mov     edx, [ecx]

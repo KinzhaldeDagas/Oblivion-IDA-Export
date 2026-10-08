@@ -1,1 +1,1 @@
-IRpcChannelBufferVtbl_0
+typedef IRpcChannelBufferVtbl IRpcChannelBufferVtbl_0;

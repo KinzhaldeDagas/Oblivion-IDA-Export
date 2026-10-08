@@ -21,7 +21,7 @@
 0x8B8F22: mov     ecx, esi
 0x8B8F24: call    sub_8A5120
 0x8B8F29: mov     edx, [esi]
-0x8B8F2B: mov     eax, dword ptr [esp+10h+var_4]
+0x8B8F2B: mov     eax, [esp+10h+var_4]
 0x8B8F2F: mov     edx, [edx+64h]
 0x8B8F32: push    eax
 0x8B8F33: mov     ecx, esi

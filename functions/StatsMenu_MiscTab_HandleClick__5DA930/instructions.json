@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5DA946",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5DA960",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5DA9E8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

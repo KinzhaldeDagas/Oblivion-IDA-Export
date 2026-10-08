@@ -1,1 +1,1 @@
-NM_UPDOWN
+typedef tagNM_UPDOWN NM_UPDOWN;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52FE90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Ensures every stock registry slot has a runtime TESTopic. Missing slots are allocated, assigned the slot's fixed FormID and name as editor ID/full name, then registered with the DataHandler and editor-ID map. Thus GREETING/HELLO/ANY/GOODBYE/INFO GENERAL and the other stock topics are synthesized from this Oblivion table when absent.",
     "mnemonic": "push",
     "size": 2
   },
@@ -154,12 +154,6 @@
     "line": "jmp     short loc_52FEF0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x52FEE7",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x52FEF0",
@@ -706,5 +700,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C33E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C33E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C33E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C33E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C33EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C33EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C33EF",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C33F2",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C33F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C33F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C33FC",
+    "line": "mov     eax, offset stru_AEC000",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3401",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

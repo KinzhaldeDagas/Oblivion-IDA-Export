@@ -1,1 +1,1 @@
-PUINT_PTR
+typedef unsigned __int64 *PUINT_PTR;

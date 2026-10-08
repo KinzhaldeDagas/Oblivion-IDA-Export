@@ -2,7 +2,7 @@
 0x9EF586: push    ecx
 0x9EF587: fstp    [esp+4+var_4]; float
 0x9EF58A: push    offset aFmagictracking; "fMagicTrackingLimit"
-0x9EF58F: mov     ecx, offset fMagicTrackingLimit
+0x9EF58F: mov     ecx, (offset flt_B37ED0+228h)
 0x9EF594: call    GameSetting_ConstrAndReg_float
 0x9EF599: push    offset sub_A20910; void (__cdecl *)()
 0x9EF59E: call    _atexit

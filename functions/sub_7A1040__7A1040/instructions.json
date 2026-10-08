@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A1040",
-    "line": "push    ebp",
+    "line": "push    ebp; Complete Oblivion insert-fill specialization for vector<st_vector<SFrondGuide>> at CFrondEngine+0x18. Uses an alias-safe deep snapshot, checked max size, 1.5x growth, ownership moves for old levels, deep fill construction, and exception cleanup.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x7A1070",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A1073",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1074",
-    "line": "lea     ecx, [ebp+var_28]",
+    "line": "lea     ecx, [ebp+var_28]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7A1077",
-    "line": "call    sub_79EE40",
+    "line": "call    OB_stVector_SFrondGuide_CopyCtor_010201A0; Oblivion st_vector<SFrondGuide> copy constructor. Allocates sourceCount*0x30 and deep-copy-constructs each compact guide, including its owned SFrondVertex vector. The executable establishes the by-value layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7A1094",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7A10B6",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x7A1115",
-    "line": "push    ebx; char *",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1116",
-    "line": "call    sub_794550",
+    "line": "call    OB_stVector16_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for arrays of 0x10-byte elements. Checks count*0x10 overflow, throws std::bad_alloc on overflow, and allocates through FormHeapAlloc; used by multiple outer-vector specializations including vector<vector<float>> and vector<vector<SFrondGuide>>.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x7A111E",
-    "line": "mov     byte ptr [ebp+var_18], 0",
+    "line": "mov     byte ptr [ebp+destinationEnd], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A1122",
-    "line": "mov     edx, [ebp+var_18]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x7A1126",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+count], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A1129",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -559,31 +559,31 @@
   },
   {
     "ea": "0x7A112E",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A112F",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A1132",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A1135",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1136",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x7A113B",
-    "line": "call    sub_7A0D40",
+    "line": "call    OB_stVector_stVector_SFrondGuide_UninitializedMove_010201A0; Exception-safe uninitialized ownership move for guide-LOD level vectors. Constructs an empty destination element, swaps its begin/end/capacity with the source, and advances at 0x10-byte stride; unwind destroys constructed destinations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,19 +613,19 @@
   },
   {
     "ea": "0x7A1146",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1147",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1148",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x7A114B",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+count], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A114E",
-    "line": "call    sub_7A0F70",
+    "line": "call    OB_stVector_stVector_SFrondGuide_UninitializedFillNThunk_010201A0; Return-value wrapper for outer-vector uninitialized_fill_n; returns destination+count after deep construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x7A1156",
-    "line": "mov     byte ptr [ebp+var_18], 0",
+    "line": "mov     byte ptr [ebp+destinationEnd], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A115A",
-    "line": "mov     edx, [ebp+var_18]",
+    "line": "mov     edx, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -673,13 +673,13 @@
   },
   {
     "ea": "0x7A115E",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+count], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A1161",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -697,31 +697,31 @@
   },
   {
     "ea": "0x7A1166",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1167",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A116A",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A116B",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A116C",
-    "line": "call    sub_7A0D40",
+    "line": "call    OB_stVector_stVector_SFrondGuide_UninitializedMove_010201A0; Exception-safe uninitialized ownership move for guide-LOD level vectors. Constructs an empty destination element, swaps its begin/end/capacity with the source, and advances at 0x10-byte stride; unwind destroys constructed destinations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x7A118D",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -823,19 +823,19 @@
   },
   {
     "ea": "0x7A1195",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1196",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1197",
-    "line": "call    sub_7A0CD0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0; Destroys [first,last) guide-LOD levels. Every 16-byte element owns a vector of 0x30 SFrondGuide copies, so each inner guide range is deep-destroyed before its allocation is freed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x7A11A0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x7A11A8",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -919,13 +919,13 @@
   },
   {
     "ea": "0x7A11C3",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A11C6",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -937,19 +937,19 @@
   },
   {
     "ea": "0x7A11CC",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A11CD",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A11CE",
-    "line": "call    sub_7A0FB0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_DestroyRangeThunk_010201A0; Outer guide-LOD vector destroy-range thunk.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x7A11D4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x7A11E8",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x7A11F4",
-    "line": "mov     [ebp+var_18], eax",
+    "line": "mov     [ebp+destinationEnd], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x7A11FE",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1063,19 +1063,19 @@
   },
   {
     "ea": "0x7A1203",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1204",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1205",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x7A1208",
-    "line": "call    sub_7A0FD0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_UninitializedMoveThunk_010201A0; Outer guide-LOD vector uninitialized ownership-move thunk; preserves the returned destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7A121A",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x7A121D",
-    "line": "push    edi",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A121E",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x7A1225",
-    "line": "call    sub_7A0F70",
+    "line": "call    OB_stVector_stVector_SFrondGuide_UninitializedFillNThunk_010201A0; Return-value wrapper for outer-vector uninitialized_fill_n; returns destination+count after deep construction.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A122A",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7A1236",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1201,13 +1201,13 @@
   },
   {
     "ea": "0x7A1239",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A123A",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x7A1242",
-    "line": "call    sub_7A0BF0",
+    "line": "call    OB_stVector_SFrondGuide_CopyAssignFillRange_010201A0; Assigns one st_vector<SFrondGuide> value over [first,last) through the decoded deep vector copy-assignment operator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x7A124F",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1267,13 +1267,13 @@
   },
   {
     "ea": "0x7A125A",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A125B",
-    "line": "mov     edx, [ebp+arg_4]",
+    "line": "mov     edx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1285,13 +1285,13 @@
   },
   {
     "ea": "0x7A1260",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1261",
-    "line": "call    sub_7A0FB0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_DestroyRangeThunk_010201A0; Outer guide-LOD vector destroy-range thunk.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x7A1274",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
@@ -1345,19 +1345,19 @@
   },
   {
     "ea": "0x7A1279",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A127A",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A127D",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x7A1280",
-    "line": "call    sub_7A0FD0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_UninitializedMoveThunk_010201A0; Outer guide-LOD vector uninitialized ownership-move thunk; preserves the returned destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,37 +1381,37 @@
   },
   {
     "ea": "0x7A1288",
-    "line": "mov     eax, [ebp+var_18]",
+    "line": "mov     eax, [ebp+destinationEnd]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A128B",
-    "line": "push    eax",
+    "line": "push    eax; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A128C",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A128D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A128E",
-    "line": "call    sub_7A1000",
+    "line": "call    OB_stVector_stVector_SFrondGuide_MoveAssignRangeBackwardThunk_010201A0; Backward ownership-move thunk for 16-byte guide-LOD level vector elements; returns the resulting destination begin.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A1293",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x7A1299",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1435,19 +1435,19 @@
   },
   {
     "ea": "0x7A129C",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A129D",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A129E",
-    "line": "call    sub_7A0BF0",
+    "line": "call    OB_stVector_SFrondGuide_CopyAssignFillRange_010201A0; Assigns one st_vector<SFrondGuide> value over [first,last) through the decoded deep vector copy-assignment operator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x7A12A6",
-    "line": "mov     esi, [ebp+var_24]",
+    "line": "mov     esi, [ebp+var_28.begin]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1477,13 +1477,13 @@
   },
   {
     "ea": "0x7A12AD",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A12B0",
-    "line": "mov     edx, [ebp+var_20]",
+    "line": "mov     edx, [ebp+var_28.end]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1507,19 +1507,19 @@
   },
   {
     "ea": "0x7A12B8",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A12B9",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A12BA",
-    "line": "call    sub_79E150",
+    "line": "call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x7A12C0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1594,5 +1594,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC650",
+    "line": "lea     ecx, [ebp+var_28]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC653",
+    "line": "jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC658",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC65C",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC65F",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC662",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC664",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC669",
+    "line": "mov     eax, offset stru_AF59E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC66E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

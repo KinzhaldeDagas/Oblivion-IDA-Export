@@ -26,7 +26,7 @@
 0x530B31: mov     ecx, esi; this
 0x530B33: mov     byte ptr [esp+1Ch+var_4], 1
 0x530B38: mov     [esi+34h], ebx
-0x530B3B: mov     [esi+22h], bl
+0x530B3B: mov     [esi+22h], bl; Constructor initializes the INFO-global spoken byte at +0x22 to false. Plugin DATA does not supply this runtime byte; modified-form loading restores it.
 0x530B3E: mov     word ptr [esi+20h], 0FFFFh
 0x530B44: mov     byte ptr [esi+4], 3Ah ; ':'
 0x530B48: mov     [esi+30h], ebx
@@ -56,3 +56,15 @@
 0x530B8F: pop     ebx
 0x530B90: add     esp, 10h
 0x530B93: retn    4
+0x9B8B60: mov     ecx, [ebp-10h]; this
+0x9B8B63: jmp     TESForm_destr
+0x9B8B68: mov     ecx, [ebp-10h]
+0x9B8B6B: add     ecx, 18h
+0x9B8B6E: jmp     sub_56A7A0
+0x9B8B73: mov     edx, [esp+arg_4]
+0x9B8B77: lea     eax, [edx-0Ch]
+0x9B8B7A: mov     ecx, [edx-10h]
+0x9B8B7D: xor     ecx, eax
+0x9B8B7F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8B84: mov     eax, offset stru_AE2FFC
+0x9B8B89: jmp     ___CxxFrameHandler3

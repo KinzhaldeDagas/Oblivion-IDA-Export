@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x66E121",
-    "line": "call    sub_46D5C0",
+    "line": "call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x66E135",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66E13A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66E13C",
-    "line": "call    sub_8913C0",
+    "line": "call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x66E1D5",
-    "line": "lea     ecx, [esp+4E8h+var_3D0]",
+    "line": "lea     ecx, [esp+4E8h+var_3D0]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66E1DC",
-    "line": "fstp    [esp+4E8h+var_4E8]; float",
+    "line": "fstp    [esp+4E8h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66E1DF",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,19 +601,19 @@
   },
   {
     "ea": "0x66E24F",
-    "line": "lea     ecx, [esp+4E8h+var_3D0]",
+    "line": "lea     ecx, [esp+4E8h+var_3D0]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66E256",
-    "line": "fstp    [esp+4E8h+var_4E8]; float",
+    "line": "fstp    [esp+4E8h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66E259",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -687,12 +687,6 @@
     "ea": "0x66E27C",
     "line": "jmp     short loc_66E284",
     "mnemonic": "jmp",
-    "size": 2
-  },
-  {
-    "ea": "0x66E27E",
-    "line": "align 10h",
-    "mnemonic": null,
     "size": 2
   },
   {
@@ -781,7 +775,7 @@
   },
   {
     "ea": "0x66E2B5",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x66E2C8",
-    "line": "lea     ecx, [esp+4E8h+var_3AC]",
+    "line": "lea     ecx, [esp+4E8h+var_3AC]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -847,13 +841,13 @@
   },
   {
     "ea": "0x66E2E1",
-    "line": "fstp    [esp+4E8h+var_4E8]; float",
+    "line": "fstp    [esp+4E8h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x66E2E4",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1003,7 @@
   },
   {
     "ea": "0x66E366",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1291,7 @@
   },
   {
     "ea": "0x66E44E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1309,7 @@
   },
   {
     "ea": "0x66E457",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2119,7 +2113,7 @@
   },
   {
     "ea": "0x66E638",
-    "line": "call    sub_532090",
+    "line": "call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2161,7 @@
   },
   {
     "ea": "0x66E658",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2191,7 +2185,7 @@
   },
   {
     "ea": "0x66E667",
-    "line": "lea     ecx, [esp+4E4h+var_450]",
+    "line": "lea     ecx, [esp+4E4h+info]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2203,7 +2197,7 @@
   },
   {
     "ea": "0x66E670",
-    "line": "call    sub_532250",
+    "line": "call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2221,7 +2215,7 @@
   },
   {
     "ea": "0x66E67F",
-    "line": "mov     [esp+4E4h+var_450], esi",
+    "line": "mov     [esp+4E4h+info.collisionFilter], esi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2239,7 +2233,7 @@
   },
   {
     "ea": "0x66E68B",
-    "line": "mov     [esp+4E4h+var_44C], ecx",
+    "line": "mov     [esp+4E4h+info.shape], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2251,7 +2245,7 @@
   },
   {
     "ea": "0x66E694",
-    "line": "mov     [esp+4E4h+var_44C], ebx",
+    "line": "mov     [esp+4E4h+info.shape], ebx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2269,7 +2263,7 @@
   },
   {
     "ea": "0x66E6A1",
-    "line": "fst     [esp+4E4h+var_42C]",
+    "line": "fst     [esp+4E4h+info.transform+4]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -2281,7 +2275,7 @@
   },
   {
     "ea": "0x66E6AF",
-    "line": "fst     [esp+4E4h+var_428]",
+    "line": "fst     [esp+4E4h+info.transform+8]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -2293,49 +2287,49 @@
   },
   {
     "ea": "0x66E6B7",
-    "line": "fst     [esp+4E8h+var_424]",
+    "line": "fst     [esp+4E8h+info.transform+0Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6BE",
-    "line": "lea     ecx, [esp+4E8h+var_400]",
+    "line": "lea     ecx, [esp+4E8h+info.transform+30h]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66E6C5",
-    "line": "fst     [esp+4E8h+var_420]",
+    "line": "fst     [esp+4E8h+info.transform+10h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6CC",
-    "line": "fst     [esp+4E8h+var_418]",
+    "line": "fst     [esp+4E8h+info.transform+18h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6D3",
-    "line": "fst     [esp+4E8h+var_414]",
+    "line": "fst     [esp+4E8h+info.transform+1Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6DA",
-    "line": "fst     [esp+4E8h+var_410]",
+    "line": "fst     [esp+4E8h+info.transform+20h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6E1",
-    "line": "fst     [esp+4E8h+var_40C]",
+    "line": "fst     [esp+4E8h+info.transform+24h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6E8",
-    "line": "fst     [esp+4E8h+var_404]",
+    "line": "fst     [esp+4E8h+info.transform+2Ch]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -2347,43 +2341,43 @@
   },
   {
     "ea": "0x66E6F1",
-    "line": "fst     [esp+4E8h+var_430]",
+    "line": "fst     [esp+4E8h+info.transform]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6F8",
-    "line": "fst     [esp+4E8h+var_41C]",
+    "line": "fst     [esp+4E8h+info.transform+14h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E6FF",
-    "line": "fstp    [esp+4E8h+var_408]",
+    "line": "fstp    [esp+4E8h+info.transform+28h]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x66E706",
-    "line": "fst     [esp+4E8h+var_400]",
+    "line": "fst     [esp+4E8h+info.transform+30h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E70D",
-    "line": "fst     [esp+4E8h+var_3FC]",
+    "line": "fst     [esp+4E8h+info.transform+34h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E714",
-    "line": "fst     [esp+4E8h+var_3F8]",
+    "line": "fst     [esp+4E8h+info.transform+38h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x66E71B",
-    "line": "fstp    [esp+4E8h+var_3F4]",
+    "line": "fstp    [esp+4E8h+info.transform+3Ch]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -2455,25 +2449,25 @@
   },
   {
     "ea": "0x66E750",
-    "line": "lea     eax, [esp+4E4h+var_450]",
+    "line": "lea     eax, [esp+4E4h+info]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66E757",
-    "line": "push    eax",
+    "line": "push    eax; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66E758",
-    "line": "lea     ecx, [esp+4E8h+var_46C]",
+    "line": "lea     ecx, [esp+4E8h+self]; self",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x66E75C",
-    "line": "call    sub_531FC0",
+    "line": "call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2491,7 +2485,7 @@
   },
   {
     "ea": "0x66E76D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2503,7 @@
   },
   {
     "ea": "0x66E776",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,7 +2551,7 @@
   },
   {
     "ea": "0x66E78F",
-    "line": "lea     ecx, [esp+4E8h+var_46C]",
+    "line": "lea     ecx, [esp+4E8h+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2593,7 +2587,7 @@
   },
   {
     "ea": "0x66E7BC",
-    "line": "mov     eax, [esp+4E4h+var_464]",
+    "line": "mov     eax, [esp+4E4h+self.hkObject]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2635,13 +2629,13 @@
   },
   {
     "ea": "0x66E7DF",
-    "line": "lea     ecx, [esp+4E4h+var_46C]",
+    "line": "lea     ecx, [esp+4E4h+self]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x66E7E3",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -2683,19 +2677,19 @@
   },
   {
     "ea": "0x66E7F9",
-    "line": "lea     ecx, [esp+4E4h+var_46C]",
+    "line": "lea     ecx, [esp+4E4h+self]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x66E7FD",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66E802",
-    "line": "lea     ecx, [esp+4E4h+var_46C]",
+    "line": "lea     ecx, [esp+4E4h+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2785,7 +2779,7 @@
   },
   {
     "ea": "0x66E83B",
-    "line": "lea     ecx, [esp+4E4h+var_46C]; this",
+    "line": "lea     ecx, [esp+4E4h+self]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2803,7 +2797,7 @@
   },
   {
     "ea": "0x66E84C",
-    "line": "mov     eax, [esp+4E4h+var_43C]",
+    "line": "mov     eax, [esp+4E4h+info.propertyCapacityFlags]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2869,7 +2863,7 @@
   },
   {
     "ea": "0x66E87E",
-    "line": "mov     edx, [esp+4E4h+var_444]",
+    "line": "mov     edx, [esp+4E4h+info.propertyData]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3208,5 +3202,149 @@
     "line": "jmp     short loc_66E8C9",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9C41F0",
+    "line": "lea     ecx, [ebp+var_1C0]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C41F6",
+    "line": "jmp     sub_538C80",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C41FB",
+    "line": "mov     eax, [ebp+var_4B8]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4201",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4202",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4207",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4208",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4209",
+    "line": "lea     ecx, [ebp+info]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C420F",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4214",
+    "line": "lea     ecx, [ebp+self]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C421A",
+    "line": "jmp     ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C421F",
+    "line": "lea     ecx, [ebp+var_388]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4225",
+    "line": "jmp     ??1hkAllCdBodyPairCollector@@UAE@XZ; hkAllCdBodyPairCollector::~hkAllCdBodyPairCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C422A",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C422E",
+    "line": "lea     eax, [edx-4D4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4234",
+    "line": "mov     ecx, [edx-4D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C423A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C423C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4241",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4244",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4247",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4249",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C424E",
+    "line": "mov     eax, offset stru_AECBF8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4253",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

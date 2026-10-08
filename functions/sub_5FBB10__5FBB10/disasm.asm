@@ -1,4 +1,4 @@
-0x5FBB10: sub     esp, 8
+0x5FBB10: sub     esp, 8; Base Actor implementation of vtable slot +0x2CC PickUpReference. Performs the general world-reference pickup/inventory transaction; PlayerCharacter overrides the same slot at 0x660910 with equipped-AMMO merge handling.
 0x5FBB13: push    ebx
 0x5FBB14: push    ebp
 0x5FBB15: push    esi
@@ -35,14 +35,14 @@
 0x5FBB6E: mov     eax, [edi+0Ch]
 0x5FBB71: push    esi
 0x5FBB72: push    eax
-0x5FBB73: mov     ecx, offset ActorProcessManager_ptr
+0x5FBB73: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5FBB78: call    sub_674E40
 0x5FBB7D: push    0
 0x5FBB7F: push    1
 0x5FBB81: mov     ebx, eax
 0x5FBB83: push    ebp
 0x5FBB84: mov     ecx, esi
-0x5FBB86: mov     [esp+24h+var_8], ebx
+0x5FBB86: mov     dword ptr [esp+24h+forceWorn], ebx
 0x5FBB8A: call    sub_5E99C0
 0x5FBB8F: test    ebx, ebx
 0x5FBB91: jz      short loc_5FBBF9
@@ -77,11 +77,11 @@
 0x5FBBDA: mov     ebx, [ebx+4]
 0x5FBBDD: test    ebx, ebx
 0x5FBBDF: jnz     short loc_5FBB93
-0x5FBBE1: mov     ebx, [esp+18h+var_8]
+0x5FBBE1: mov     ebx, dword ptr [esp+18h+forceWorn]
 0x5FBBE5: mov     ecx, ebx
-0x5FBBE7: call    BSSimpleList_Clear
+0x5FBBE7: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5FBBEC: push    ebx
-0x5FBBED: call    FormHeapFree
+0x5FBBED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FBBF2: mov     ebp, [esp+1Ch+arg_0]
 0x5FBBF6: add     esp, 4
 0x5FBBF9: mov     edx, [esi]
@@ -90,14 +90,14 @@
 0x5FBC03: call    eax
 0x5FBC05: cmp     byte ptr [eax+4], 23h ; '#'
 0x5FBC09: jnz     loc_5FBCA9
-0x5FBC0F: mov     ecx, edi; this
-0x5FBC11: call    TESObjectREFR_GetOwner
+0x5FBC0F: mov     ecx, edi; reference
+0x5FBC11: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5FBC16: test    eax, eax
 0x5FBC18: jz      loc_5FBCA1
-0x5FBC1E: push    1
-0x5FBC20: push    esi
-0x5FBC21: mov     ecx, edi
-0x5FBC23: call    TESOBjectREFR_IsOwnedBy
+0x5FBC1E: push    1; useFactionOwnership
+0x5FBC20: push    esi; actorReference
+0x5FBC21: mov     ecx, edi; reference
+0x5FBC23: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x5FBC28: test    al, al
 0x5FBC2A: jnz     short loc_5FBCA1
 0x5FBC2C: mov     ecx, [esi+58h]
@@ -107,10 +107,10 @@
 0x5FBC36: test    eax, eax
 0x5FBC38: jnz     short loc_5FBCA1
 0x5FBC3A: mov     ebp, [esi]
-0x5FBC3C: mov     ecx, edi; this
+0x5FBC3C: mov     ecx, edi; reference
 0x5FBC3E: add     ebp, 238h
-0x5FBC44: call    TESObjectREFR_GetOwner
-0x5FBC49: mov     ecx, [esp+18h+arg_4]
+0x5FBC44: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
+0x5FBC49: mov     ecx, [esp+18h+arg1]
 0x5FBC4D: mov     edx, [esp+18h+arg_0]
 0x5FBC51: push    eax
 0x5FBC52: mov     eax, [ebp+0]
@@ -137,9 +137,9 @@
 0x5FBC88: mov     eax, [edx+170h]
 0x5FBC8E: mov     ecx, edi
 0x5FBC90: call    eax
-0x5FBC92: push    eax
-0x5FBC93: lea     ecx, [edi+44h]
-0x5FBC96: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x5FBC92: push    eax; owner
+0x5FBC93: lea     ecx, [edi+44h]; this
+0x5FBC96: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x5FBC9B: mov     ebp, [esp+18h+arg_0]
 0x5FBC9F: jmp     short loc_5FBCA9
 0x5FBCA1: lea     ecx, [edi+44h]
@@ -149,7 +149,7 @@
 0x5FBCAE: mov     eax, [edx+0F4h]
 0x5FBCB4: xor     bl, bl
 0x5FBCB6: push    1
-0x5FBCB8: mov     byte ptr [esp+1Ch+var_8], bl
+0x5FBCB8: mov     [esp+1Ch+forceWorn], bl
 0x5FBCBC: call    eax
 0x5FBCBE: test    eax, eax
 0x5FBCC0: jz      short loc_5FBD1A
@@ -166,10 +166,10 @@
 0x5FBCE1: mov     edx, [ecx]
 0x5FBCE3: movsx   ebp, ax
 0x5FBCE6: mov     eax, [edx+0F4h]
-0x5FBCEC: push    1
+0x5FBCEC: push    1; value
 0x5FBCEE: call    eax
-0x5FBCF0: mov     ecx, eax
-0x5FBCF2: call    TESHealthForm_GetHealth
+0x5FBCF0: mov     ecx, eax; this
+0x5FBCF2: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5FBCF7: mov     ecx, [esi+58h]
 0x5FBCFA: mov     edx, [ecx]
 0x5FBCFC: add     ebp, eax
@@ -177,23 +177,23 @@
 0x5FBD04: push    ebp
 0x5FBD05: push    1
 0x5FBD07: call    eax
-0x5FBD09: mov     ecx, eax
-0x5FBD0B: call    sub_60D020
+0x5FBD09: mov     ecx, eax; this
+0x5FBD0B: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
 0x5FBD10: mov     ebp, [esp+18h+arg_0]
 0x5FBD14: mov     bl, 1
-0x5FBD16: mov     byte ptr [esp+18h+var_8], bl
+0x5FBD16: mov     [esp+18h+forceWorn], bl
 0x5FBD1A: cmp     byte ptr [ebp+4], 22h ; '"'
 0x5FBD1E: jnz     short loc_5FBD25
-0x5FBD20: mov     byte ptr [esp+18h+arg_8], 0
+0x5FBD20: mov     byte ptr [esp+18h+arg2], 0
 0x5FBD25: test    byte ptr [edi+8], 1
 0x5FBD29: jnz     short loc_5FBD7F
 0x5FBD2B: push    0FFFFFFFFh; a2
 0x5FBD2D: mov     ecx, edi; this
-0x5FBD2F: call    TESForm_GetOverrideFile
+0x5FBD2F: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x5FBD34: test    eax, eax
 0x5FBD36: jnz     short loc_5FBD7F
 0x5FBD38: mov     ecx, edi; this
-0x5FBD3A: call    TESObjectREFR_IsPersistent?
+0x5FBD3A: call    TESObjectREFR_IsPersistent
 0x5FBD3F: test    al, al
 0x5FBD41: jnz     short loc_5FBD7F
 0x5FBD43: push    2
@@ -201,47 +201,47 @@
 0x5FBD47: call    sub_4D8260
 0x5FBD4C: test    al, al
 0x5FBD4E: jz      short loc_5FBD5E
-0x5FBD50: mov     ecx, [esp+18h+var_8]
-0x5FBD54: mov     edx, [esp+18h+arg_4]
+0x5FBD50: mov     ecx, dword ptr [esp+18h+forceWorn]
+0x5FBD54: mov     edx, [esp+18h+arg1]
 0x5FBD58: push    ecx
 0x5FBD59: push    0
 0x5FBD5B: push    edx
 0x5FBD5C: jmp     short loc_5FBD8E
-0x5FBD5E: mov     eax, [esp+18h+var_8]
-0x5FBD62: mov     ecx, [esp+18h+arg_4]
-0x5FBD66: push    eax
-0x5FBD67: push    0
-0x5FBD69: push    ecx
-0x5FBD6A: push    edi
-0x5FBD6B: mov     ecx, esi
-0x5FBD6D: call    sub_4DDC40
+0x5FBD5E: mov     eax, dword ptr [esp+18h+forceWorn]
+0x5FBD62: mov     ecx, [esp+18h+arg1]
+0x5FBD66: push    eax; forceWorn
+0x5FBD67: push    0; unusedArg
+0x5FBD69: push    ecx; count
+0x5FBD6A: push    edi; sourceRef
+0x5FBD6B: mov     ecx, esi; this
+0x5FBD6D: call    TESObjectREFR_AddItemFromWorldReference; Actor world-pickup branch calls TESObjectREFR_AddItemFromWorldReference; it inserts the picked reference's base form and bypasses 0x48F7C0.
 0x5FBD72: mov     edx, [edi]
 0x5FBD74: mov     eax, [edx+10h]
 0x5FBD77: push    1
 0x5FBD79: mov     ecx, edi
 0x5FBD7B: call    eax
 0x5FBD7D: jmp     short loc_5FBD9D
-0x5FBD7F: mov     ecx, [esp+18h+var_8]
-0x5FBD83: mov     edx, [esp+18h+arg_8]
-0x5FBD87: mov     eax, [esp+18h+arg_4]
-0x5FBD8B: push    ecx
-0x5FBD8C: push    edx
-0x5FBD8D: push    eax
-0x5FBD8E: push    edi
-0x5FBD8F: mov     ecx, esi
-0x5FBD91: call    sub_4DDC40
+0x5FBD7F: mov     ecx, dword ptr [esp+18h+forceWorn]
+0x5FBD83: mov     edx, [esp+18h+arg2]
+0x5FBD87: mov     eax, [esp+18h+arg1]
+0x5FBD8B: push    ecx; forceWorn
+0x5FBD8C: push    edx; unusedArg
+0x5FBD8D: push    eax; count
+0x5FBD8E: push    edi; sourceRef
+0x5FBD8F: mov     ecx, esi; this
+0x5FBD91: call    TESObjectREFR_AddItemFromWorldReference; Actor world-pickup branch calls TESObjectREFR_AddItemFromWorldReference with the live source reference; proxy AMMO remains the inserted base form.
 0x5FBD96: mov     ecx, edi
 0x5FBD98: call    sub_4D7D80
 0x5FBD9D: test    bl, bl
 0x5FBD9F: jz      short loc_5FBDB7
 0x5FBDA1: mov     edx, [esi]
 0x5FBDA3: mov     eax, [edx+168h]
-0x5FBDA9: push    0
+0x5FBDA9: push    0; quiverNode
 0x5FBDAB: mov     ecx, esi
 0x5FBDAD: call    eax
-0x5FBDAF: push    eax
-0x5FBDB0: mov     ecx, esi
-0x5FBDB2: call    sub_5F8300
+0x5FBDAF: push    eax; animData
+0x5FBDB0: mov     ecx, esi; this
+0x5FBDB2: call    Actor_RefreshQuiverArrowVisibility; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.
 0x5FBDB7: cmp     [esp+18h+var_4], 21h ; '!'
 0x5FBDBC: jnz     loc_5FBEB3
 0x5FBDC2: mov     edx, [esi]
@@ -283,7 +283,7 @@
 0x5FBE22: push    1
 0x5FBE24: push    ecx
 0x5FBE25: mov     ecx, esi
-0x5FBE27: call    Actor_EquipItem
+0x5FBE27: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5FBE2C: mov     edx, [esi]
 0x5FBE2E: mov     eax, [edx+334h]
 0x5FBE34: push    1
@@ -308,14 +308,14 @@
 0x5FBE65: mov     edx, [ecx]
 0x5FBE67: mov     eax, [edx+304h]
 0x5FBE6D: call    eax
-0x5FBE6F: mov     byte ptr [esp+18h+arg_4], al
+0x5FBE6F: mov     byte ptr [esp+18h+arg1], al
 0x5FBE73: jmp     short loc_5FBE7A
-0x5FBE75: mov     byte ptr [esp+18h+arg_4], 0
+0x5FBE75: mov     byte ptr [esp+18h+arg1], 0
 0x5FBE7A: mov     ebx, [edi]
 0x5FBE7C: push    esi
-0x5FBE7D: mov     ecx, esi
+0x5FBE7D: mov     ecx, esi; this
 0x5FBE7F: add     ebx, 150h
-0x5FBE85: call    TESObjectREFR_GetAnimData
+0x5FBE85: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x5FBE8A: mov     edx, [esi]
 0x5FBE8C: push    eax
 0x5FBE8D: mov     eax, [edx+168h]
@@ -330,7 +330,7 @@
 0x5FBEA3: mov     ecx, ebp
 0x5FBEA5: call    ContainerEntryExtraData_DestroyDataTable
 0x5FBEAA: push    ebp
-0x5FBEAB: call    FormHeapFree
+0x5FBEAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FBEB0: add     esp, 4
 0x5FBEB3: pop     edi
 0x5FBEB4: pop     esi

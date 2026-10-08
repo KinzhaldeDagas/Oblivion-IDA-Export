@@ -40,20 +40,20 @@
 0x5EDE2F: jz      short loc_5EDE8E
 0x5EDE31: fldz
 0x5EDE33: push    ecx
-0x5EDE34: mov     ecx, esi
-0x5EDE36: fstp    [esp+4+var_4]; float
-0x5EDE39: call    sub_4715C0
+0x5EDE34: mov     ecx, esi; this
+0x5EDE36: fstp    [esp+4+easeOutTime]; easeOutTime
+0x5EDE39: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x5EDE3E: fldz
-0x5EDE40: push    0; int
-0x5EDE42: push    0; int
+0x5EDE40: push    0; transition
+0x5EDE42: push    0; timeSyncSequence
 0x5EDE44: sub     esp, 8
-0x5EDE47: fstp    [esp+10h+var_C]; float
-0x5EDE4B: mov     ecx, edi
+0x5EDE47: fstp    [esp+10h+easeInTime]; easeInTime
+0x5EDE4B: mov     ecx, edi; this
 0x5EDE4D: fld1
-0x5EDE4F: fstp    [esp+10h+var_10]; float
-0x5EDE52: push    0; char
-0x5EDE54: push    0; int
-0x5EDE56: call    sub_6C9BA0
+0x5EDE4F: fstp    [esp+10h+weight]; weight
+0x5EDE52: push    0; startOver
+0x5EDE54: push    0; priority
+0x5EDE56: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x5EDE5B: or      word ptr [esi+8], 8
 0x5EDE60: fld     dword ptr ds:0A7DEB4h
 0x5EDE66: fchs
@@ -66,7 +66,7 @@
 0x5EDE76: fmul    qword ptr ds:0A31C70h
 0x5EDE7C: fstp    [esp+4+arg_24]
 0x5EDE80: fld     [esp+4+arg_24]
-0x5EDE84: fstp    [esp+4+var_4]; float
+0x5EDE84: fstp    [esp+4+easeOutTime]; float
 0x5EDE87: push    1; char
 0x5EDE89: call    MagicCaster_CastingVFX_ClearSomething???
 0x5EDE8E: mov     ecx, [ebx+60h]
@@ -74,7 +74,7 @@
 0x5EDE93: jz      short loc_5EDEA0
 0x5EDE95: fldz
 0x5EDE97: push    ecx
-0x5EDE98: fstp    [esp+4+var_4]; float
+0x5EDE98: fstp    [esp+4+easeOutTime]; float
 0x5EDE9B: call    MagicCaster_CastingVFX_UpdateTimes?
 0x5EDEA0: mov     ecx, [esp+arg_14]
 0x5EDEA4: mov     large fs:0, ecx

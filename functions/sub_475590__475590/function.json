@@ -1,19 +1,32 @@
 {
-  "callees_count": 77,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 43,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 14,
-  "display_name": "sub_475590",
+  "chunks": [
+    [
+      "0x475590",
+      "0x475B37"
+    ]
+  ],
+  "chunks_sha256": "24a3cf13dc417bf641e0edaf8eb35d86e1be9173756c3eac5dc117c31ce90ae0",
+  "comment_regular": "ActorAnimData load-state routine. Active slots restore from encoded key plus one selector byte. Selector 0xFE is intercepted as the null-sequence marker; all other selectors enter the common map-entry selector virtual and then consume or skip the timing block according to restore success.",
+  "comment_repeatable": "ActorAnimData load-state routine. Active slots restore from encoded key plus one selector byte. Selector 0xFE is intercepted as the null-sequence marker; all other selectors enter the common map-entry selector virtual and then consume or skip the timing block according to restore success.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 15,
+  "display_name": "ActorAnimData_LoadState",
   "end_ea": "0x475B37",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_475590",
+  "name": "ActorAnimData_LoadState",
   "segment": ".text",
   "sha256": "24a3cf13dc417bf641e0edaf8eb35d86e1be9173756c3eac5dc117c31ce90ae0",
   "size": 1447,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x475590",
-  "type": "void __userpurge(AnimSequenceSingle *this@<ecx>, double st5_0@<st2>, double@<st1>, int@<ebp>, float)",
+  "total_chunk_size": 1447,
+  "type": "void __userpurge(AnimSequenceSingle *this@<ecx>, double@<st1>, float sequence)",
   "xrefs_from_count": 522,
   "xrefs_to_count": 1
 }

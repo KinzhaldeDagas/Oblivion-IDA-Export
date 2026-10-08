@@ -1,10 +1,10 @@
-0x8A5580: push    esi
+0x8A5580: push    esi; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x8A5581: mov     esi, [esp+4+arg_0]
 0x8A5585: test    esi, esi
 0x8A5587: jz      short loc_8A55FA
 0x8A5589: push    ebx
 0x8A558A: push    esi
-0x8A558B: call    sub_47FAC0
+0x8A558B: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x8A5590: mov     ebx, [esp+0Ch+arg_4]
 0x8A5594: add     esp, 4
 0x8A5597: test    eax, eax
@@ -37,7 +37,7 @@
 0x8A55DD: mov     eax, [eax+esi*4]
 0x8A55E0: push    ebx
 0x8A55E1: push    eax
-0x8A55E2: call    sub_8A5580
+0x8A55E2: call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x8A55E7: movzx   eax, word ptr [edi+0B6h]
 0x8A55EE: add     esi, 1
 0x8A55F1: add     esp, 8

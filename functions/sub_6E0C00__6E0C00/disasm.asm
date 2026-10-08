@@ -13,7 +13,7 @@
 0x6E0C23: mov     edi, ecx
 0x6E0C25: mov     esi, [esp+1Ch+arg_0]
 0x6E0C29: push    esi
-0x6E0C2A: call    sub_75E480
+0x6E0C2A: call    j_NiSingleInterpController_LinkObject
 0x6E0C2F: cmp     dword ptr [esi+0D8h], 0A010068h
 0x6E0C39: jnb     loc_6E0CC2
 0x6E0C3F: mov     ecx, esi
@@ -67,3 +67,17 @@
 0x6E0CCF: pop     esi
 0x6E0CD0: add     esp, 10h
 0x6E0CD3: retn    4
+0x9C7FC0: lea     ecx, [ebp+4]; slot
+0x9C7FC3: jmp     NiPointerSlot_Release
+0x9C7FC8: mov     eax, [ebp-10h]
+0x9C7FCB: push    eax
+0x9C7FCC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7FD1: pop     ecx
+0x9C7FD2: retn
+0x9C7FD3: mov     edx, [esp+arg_4]
+0x9C7FD7: lea     eax, [edx-0Ch]
+0x9C7FDA: mov     ecx, [edx-10h]
+0x9C7FDD: xor     ecx, eax
+0x9C7FDF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7FE4: mov     eax, offset stru_AF02D0
+0x9C7FE9: jmp     ___CxxFrameHandler3

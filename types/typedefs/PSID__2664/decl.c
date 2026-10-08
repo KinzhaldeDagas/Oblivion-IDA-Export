@@ -1,1 +1,1 @@
-PSID
+typedef PVOID PSID;

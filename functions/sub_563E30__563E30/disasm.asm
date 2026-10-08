@@ -1,4 +1,4 @@
-0x563E30: mov     eax, [ecx+0E8h]
+0x563E30: mov     eax, [ecx+0E8h]; BSTreeNode billboard alpha/visibility setter. 0xFF hides billboard shape; otherwise shows it and writes alpha-property byte.
 0x563E36: test    eax, eax
 0x563E38: jnz     short loc_563E3F
 0x563E3A: xor     al, al
@@ -14,7 +14,7 @@
 0x563E54: and     word ptr [eax+18h], 0FFFEh
 0x563E5A: mov     ecx, [ecx+0E8h]
 0x563E60: push    0
-0x563E62: call    NiNode_GetNiPropertyByID
+0x563E62: call    NiNode_GetNiPropertyByID;
 0x563E67: test    eax, eax
 0x563E69: jz      short loc_563E6E
 0x563E6B: mov     [eax+1Ah], bl

@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79E190",
+  "chunks": [
+    [
+      "0x79E190",
+      "0x79E220"
+    ],
+    [
+      "0x9CC400",
+      "0x9CC41B"
+    ]
+  ],
+  "chunks_sha256": "fd1be5ee31d108e9262b499c035cc19367733fadf9ee1655423a2b521e31716b",
+  "comment_regular": "Exception-safe uninitialized_fill_n for compact SFrondGuide records. Placement-copy-constructs count values; unwind cleanup destroys the constructed prefix before rethrowing.",
+  "comment_repeatable": "Exception-safe uninitialized_fill_n for compact SFrondGuide records. Placement-copy-constructs count values; unwind cleanup destroys the constructed prefix before rethrowing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_SFrondGuide_UninitializedFillN_010201A0",
   "end_ea": "0x79E220",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_79E190",
+  "name": "OB_SFrondGuide_UninitializedFillN_010201A0",
   "segment": ".text",
   "sha256": "abca4515813173e6e64bb9cd8836b72bc659a2445f07c1b88f0b4c8a41b395c4",
   "size": 144,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79E190",
-  "type": "void __cdecl __noreturn(_DWORD *, int, int)",
-  "xrefs_from_count": 61,
+  "total_chunk_size": 171,
+  "type": "OB_SFrondGuide_010201A0 *__cdecl(OB_SFrondGuide_010201A0 *destination, unsigned int count, const OB_SFrondGuide_010201A0 *value)",
+  "xrefs_from_count": 70,
   "xrefs_to_count": 2
 }

@@ -1,62 +1,53 @@
-int __thiscall sub_789610(float *this, unsigned int *a2)
+// 2026-05-24 SpeedTreeOBSE stock post-load pass: stock CSpeedTreeRT::ParseLodInfo candidate for top-level 9000. Parses 9002,9003,9004,9005,9009 until 9001; 9005 delegates to CTreeEngine LOD parser. Preserve as stock-safe payload; no 75000 supplemental LOD fields are read here.
+void __thiscall CSpeedTreeRT__ParseLodInfo(OB_CSpeedTreeRT_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)
 {
-  int result; // eax
-  rsize_t v4; // [esp-4h] [ebp-A8h]
-  int v5; // [esp+10h] [ebp-94h] BYREF
-  char v6; // [esp+14h] [ebp-90h]
-  int v7; // [esp+24h] [ebp-80h]
-  int v8; // [esp+28h] [ebp-7Ch]
-  int v9; // [esp+2Ch] [ebp-78h] BYREF
-  char v10; // [esp+30h] [ebp-74h]
-  int v11; // [esp+40h] [ebp-64h]
-  int v12; // [esp+44h] [ebp-60h]
-  _BYTE v13[40]; // [esp+48h] [ebp-5Ch] BYREF
-  _BYTE v14[40]; // [esp+70h] [ebp-34h] BYREF
-  int v15; // [esp+A0h] [ebp-4h]
+  int Dword_010201A0; // eax
+  OB_stString28_010201A0 v4; // [esp+10h] [ebp-94h] BYREF
+  OB_stString28_010201A0 details; // [esp+2Ch] [ebp-78h] BYREF
+  OB_IdvFileError_010201A0 v6; // [esp+48h] [ebp-5Ch] BYREF
+  OB_IdvFileError_010201A0 v7; // [esp+70h] [ebp-34h] BYREF
+  int v8; // [esp+A0h] [ebp-4h]
 
-  result = sub_78EB40(a2);
-  do
+  Dword_010201A0 = OB_CTreeFileAccess_ReadDword_010201A0(file);// SpeedTreeOBSE 2026-05-25 stock-tail fidelity pass: top-level 9000 LOD reads a first recognized payload token before accepting 9001; 9005 delegates to 0x7A28E0. /*0x789647*/
+  do /*0x7896b4*/
   {
-    switch ( result )
+    switch ( Dword_010201A0 ) /*0x78965e*/
     {
-      case 0x232A:
-        *((_DWORD *)this + 6) = sub_78EB40(a2);
-        break;
-      case 0x232B:
-        *(this + 7) = sub_78EB10(a2);
-        break;
-      case 0x232C:
-        *(this + 8) = sub_78EB10(a2);
-        break;
-      case 0x232D:
-        sub_7A28E0(*(float **)this, a2);
-        break;
-      case 0x2331:
-        *(this + 9) = sub_78EB10(a2);
-        break;
+      case 0x232A: /*0x78965e*/
+        this->leafLodTransitionMethod = OB_CTreeFileAccess_ReadDword_010201A0(file); /*0x78966c*/
+        break; /*0x78966f*/
+      case 0x232B: /*0x78965e*/
+        this->leafLodTransitionRadius = OB_CTreeFileAccess_ReadFloat_010201A0(file); /*0x789678*/
+        break; /*0x78967b*/
+      case 0x232C: /*0x78965e*/
+        this->leafLodCurveExponent = OB_CTreeFileAccess_ReadFloat_010201A0(file); /*0x789684*/
+        break; /*0x789687*/
+      case 0x232D: /*0x78965e*/
+        OB_CTreeEngine_ParseLodInfo_010201A0(this->treeEngine, file); /*0x789698*/
+        break; /*0x789698*/
+      case 0x2331: /*0x78965e*/
+        this->leafSizeIncreaseFactor = OB_CTreeFileAccess_ReadFloat_010201A0(file); /*0x789690*/
+        break; /*0x789693*/
       default:
-        LODWORD(v4) = 0x12;
-        v8 = 0xF;
-        v7 = 0;
-        v6 = 0;
-        sub_414500(&v5, (int)this, "malformed lod info", v4);
-        v15 = 0;
-        sub_789190((std::exception *)v14, &v5, 0);
-        ThrowException__((int)v14, &_TI3_AVIdvFileError__);
+        v4.capacity = 0xF; /*0x789729*/
+        v4.size = 0; /*0x789731*/
+        v4.storage.inlineData[0] = 0; /*0x789735*/
+        OB_stString28_AssignBytes_010201A0(&v4, "malformed lod info", 0x12u); /*0x789739*/
+        v8 = 0; /*0x789748*/
+        OB_IdvFileError_Ctor_010201A0(&v7, &v4, 0); /*0x78974f*/
+        ThrowException__((DWORD)&v7, &_TI3_AVIdvFileError__); /*0x78975e*/
     }
-    if ( sub_787810(a2) )
+    if ( OB_CTreeFileAccess_IsEOF_010201A0(file) ) /*0x78969f*/
     {
-      LODWORD(v4) = 0x32;
-      v12 = 0xF;
-      v11 = 0;
-      v10 = 0;
-      sub_414500(&v9, (int)this, "premature end of file reached parsing new lod info", v4);
-      v15 = 1;
-      sub_789190((std::exception *)v13, &v9, 0);
-      ThrowException__((int)v13, &_TI3_AVIdvFileError__);
+      details.capacity = 0xF; /*0x7896de*/
+      details.size = 0; /*0x7896e6*/
+      details.storage.inlineData[0] = 0; /*0x7896ea*/
+      OB_stString28_AssignBytes_010201A0(&details, "premature end of file reached parsing new lod info", 0x32u); /*0x7896ee*/
+      v8 = 1; /*0x7896fd*/
+      OB_IdvFileError_Ctor_010201A0(&v6, &details, 0); /*0x789708*/
+      ThrowException__((DWORD)&v6, &_TI3_AVIdvFileError__); /*0x789717*/
     }
-    result = sub_78EB40(a2);
+    Dword_010201A0 = OB_CTreeFileAccess_ReadDword_010201A0(file); /*0x7896aa*/
   }
-  while ( result != 0x2329 );
-  return result;
+  while ( Dword_010201A0 != 0x2329 ); /*0x7896b4*/
 }

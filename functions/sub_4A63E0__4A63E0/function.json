@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4A63E0",
+      "0x4A640C"
+    ]
+  ],
+  "chunks_sha256": "c15156bbe25f341a9f6ef6609bc6693ff0e7096aee2ecfb1cc97d8ac3a21fb49",
+  "comment_regular": "Verified: linear search over region list comparing TESRegion formID at object offset +0x0C.",
+  "comment_repeatable": "Verified: linear search over region list comparing TESRegion formID at object offset +0x0C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4A63E0",
+  "display_name": "TESRegionList_FindRegionByFormID",
   "end_ea": "0x4A640C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A63E0",
+  "name": "TESRegionList_FindRegionByFormID",
   "segment": ".text",
   "sha256": "c15156bbe25f341a9f6ef6609bc6693ff0e7096aee2ecfb1cc97d8ac3a21fb49",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A63E0",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 44,
+  "type": "TESRegion *__thiscall(TESRegionList *self, unsigned int formID)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 1
 }

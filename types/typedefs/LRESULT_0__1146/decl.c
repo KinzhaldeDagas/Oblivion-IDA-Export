@@ -1,1 +1,1 @@
-LRESULT_0
+typedef LONG_PTR LRESULT_0;

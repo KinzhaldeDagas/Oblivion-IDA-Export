@@ -1,1 +1,4 @@
-_CRT_DOUBLE
+struct _CRT_DOUBLE
+{
+double x;
+};

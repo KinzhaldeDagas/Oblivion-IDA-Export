@@ -8,7 +8,7 @@
 0x68119F: xor     bl, bl
 0x6811A1: mov     byte ptr [esp+arg_8+2], bl
 0x6811A5: mov     byte ptr [esp+arg_8+3], bl
-0x6811A9: call    sub_5E05B0
+0x6811A9: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x6811AE: test    al, al
 0x6811B0: jz      short loc_6811F9
 0x6811B2: mov     edx, [edi]
@@ -32,8 +32,8 @@
 0x6811F2: test    ah, 41h
 0x6811F5: jnz     short loc_6811F9
 0x6811F7: mov     bl, 1
-0x6811F9: mov     ecx, edi
-0x6811FB: call    sub_5E0380
+0x6811F9: mov     ecx, edi; this
+0x6811FB: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x681200: test    eax, eax
 0x681202: jz      short loc_68123B
 0x681204: movsx   eax, byte ptr [eax+20h]
@@ -92,7 +92,7 @@
 0x6812A1: fstp    dword ptr [esi+1Ch]
 0x6812A4: push    3Fh ; '?'
 0x6812A6: mov     ecx, edi
-0x6812A8: call    sub_5E05F0
+0x6812A8: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x6812AD: fldz
 0x6812AF: fstp    dword ptr [esi+10h]
 0x6812B2: mov     al, 1
@@ -123,7 +123,7 @@
 0x6812FD: fldz
 0x6812FF: lea     ecx, [esp+8+arg_8]
 0x681303: fstp    dword ptr [esp+8+arg_10]
-0x681307: call    sub_404C90
+0x681307: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x68130C: fcomp   qword ptr ds:0A309F0h
 0x681312: fnstsw  ax
 0x681314: test    ah, 41h
@@ -172,7 +172,7 @@
 0x68139D: call    sub_4121A0
 0x6813A2: lea     ecx, [esp+0Ch+arg_10+4]
 0x6813A6: push    ecx
-0x6813A7: call    sub_683CB0
+0x6813A7: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x6813AC: fstp    [esp+10h+arg_8]
 0x6813B0: fld     dword ptr ds:0A30634h
 0x6813B6: add     esp, 4

@@ -1,7 +1,7 @@
 0x9F1AE0: push    offset aYouMustFirstEn; "You must first enter a valid name for t"...
 0x9F1AE5: push    offset aSmissingspelln; "sMissingSpellName"
-0x9F1AEA: mov     ecx, offset dword_B389A0
-0x9F1AEF: call    GameSetting_ConstrAndReg
+0x9F1AEA: mov     ecx, offset stru_B389A0; self
+0x9F1AEF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F1AF4: push    offset sub_A21A60; void (__cdecl *)()
 0x9F1AF9: call    _atexit
 0x9F1AFE: pop     ecx

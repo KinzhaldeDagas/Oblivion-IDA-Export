@@ -10,7 +10,6 @@
 0x987316: push    edi
 0x987317: mov     [esp+10h+arg_4], eax
 0x98731B: jmp     short loc_987320
-0x98731D: align 10h
 0x987320: mov     esi, [esp+10h+arg_4]
 0x987324: cmp     esi, ebp
 0x987326: mov     edi, ecx

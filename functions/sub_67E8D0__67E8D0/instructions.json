@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67E8D0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified actor-aware A* over graph-node adjacency. It uses TESConnectedPoint_ComputeActorAwareEdgeCost, skips candidates whose PathGrid linkedPointsDisabled bit 0x20 is set, and applies an additional actor-specific path filter. Its pathgrid caller selects a reachable point for actor movement.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x67E8FE",
-    "line": "mov     ecx, [edi+1Ch]",
+    "line": "mov     ecx, [edi+1Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -151,25 +151,25 @@
   },
   {
     "ea": "0x67E91A",
-    "line": "mov     [esp+4Ch+var_14], esi",
+    "line": "mov     [esp+4Ch+var_20.itemCount], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x67E91E",
-    "line": "mov     [esp+4Ch+var_1C], esi",
+    "line": "mov     [esp+4Ch+var_20.start], esi; Verified start/head pointer: append replaces it with the newest node; Pop traverses from it through node next links.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x67E922",
-    "line": "mov     [esp+4Ch+var_18], esi",
+    "line": "mov     [esp+4Ch+var_20.end], esi; Verified end/tail pointer: initialized to the first node when the list was empty.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x67E926",
-    "line": "mov     [esp+4Ch+var_20], offset ??_7AStarNodeList@@6B@; const AStarNodeList::`vftable'",
+    "line": "mov     [esp+4Ch+var_20.vtable], offset ??_7AStarNodeList@@6B@; const AStarNodeList::`vftable' ...",
     "mnemonic": "mov",
     "size": 8
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x67E931",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x67E938",
-    "line": "call    sub_67EC70",
+    "line": "call    SetFloatAtOffset_04; Verified raw float setter at object+4. A* uses it for TESConnectedPoint G/pathCost; unrelated callers use the same helper for their own +4 float field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x67E94A",
-    "line": "fstp    [esp+54h+var_50]; float",
+    "line": "fstp    [esp+54h+value]; value",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x67E94E",
-    "line": "mov     ecx, [edi+1Ch]",
+    "line": "mov     ecx, [edi+1Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x67E954",
-    "line": "call    sub_67EC80",
+    "line": "call    TESConnectedPoint_SetHeuristicCost; Verified writes H/heuristic cost at TESConnectedPoint+8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67E959",
-    "line": "mov     ecx, [edi+1Ch]",
+    "line": "mov     ecx, [edi+1Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x67E95C",
-    "line": "call    sub_67EC50",
+    "line": "call    TESConnectedPoint_RecomputeTotalEstimateCost; Verified computes total estimate cost F at +0 as path cost G at +4 plus heuristic H at +8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x67E96A",
-    "line": "mov     ecx, [edi+1Ch]",
+    "line": "mov     ecx, [edi+1Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x67E96D",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67E96F",
-    "line": "call    sub_67ECD0",
+    "line": "call    GraphNode_SetFlag01; Verified sets/clears stateFlags bit 0x01, the graph-search discovered/open-list marker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,31 +313,31 @@
   },
   {
     "ea": "0x67E977",
-    "line": "push    edx",
+    "line": "push    edx; graphNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67E978",
-    "line": "lea     ecx, [esp+50h+var_20]",
+    "line": "lea     ecx, [esp+50h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67E97C",
-    "line": "call    sub_67EFE0",
+    "line": "call    AStarNodeList_Add; Verified Oblivion AStarNodeList append uses intrusive nodes and appends at the start/head pointer. Fallout's inspected AStarQueue stores each AStarNode in a sorted linked list within one of 20 F-cost buckets; the two layouts/algorithms are distinct.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67E981",
-    "line": "lea     ecx, [esp+4Ch+var_20]",
+    "line": "lea     ecx, [esp+4Ch+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67E985",
-    "line": "call    sub_67F030",
+    "line": "call    AStarNodeList_PopLowestTotalEstimateCost; Verified Oblivion AStarNodeList pop scans from start through each node's next link, compares F cost at graph-node+0, unlinks the lowest-F entry, and returns the generic graph-node pointer. Fallout's inspected NavMesh AStarQueue instead selects the first nonempty F bucket among 20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x67E9AE",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67E9B0",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x67E9E3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67E9E5",
-    "line": "call    sub_67ED70",
+    "line": "call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x67E9F2",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+actor]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -601,31 +601,31 @@
   },
   {
     "ea": "0x67EA21",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+actor]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x67EA24",
-    "line": "push    ecx",
+    "line": "push    ecx; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67EA25",
-    "line": "push    esi",
+    "line": "push    esi; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67EA26",
-    "line": "push    ebx",
+    "line": "push    ebx; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67EA27",
-    "line": "call    sub_67EDE0",
+    "line": "call    TESConnectedPoint_ComputeActorAwareEdgeCost; Verified actor-aware edge cost: TESObjectREFR_GetPathGraphMovementCost(from, actor) + Euclidean distance + fPathWaterExitPenalty when below-water bit 0x08 differs + fPathSpaceExitPenalty when SubSpace bit 0x40 differs. Current defaults: 20,000 for each boundary penalty; exact tuning rationale Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,13 +643,13 @@
   },
   {
     "ea": "0x67EA33",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EA35",
-    "line": "call    sub_67EC60",
+    "line": "call    TESConnectedPoint_GetPathCost; Verified returns G/path cost at TESConnectedPoint+4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x67EA3E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x67EA44",
-    "line": "call    sub_67ECC0",
+    "line": "call    GraphNode_IsFlag01Set; Verified returns stateFlags bit 0x01; graph searches use it to avoid inserting a node into the open list more than once.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x67EA4D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EA4F",
-    "line": "call    sub_67EC90",
+    "line": "call    GraphNode_IsFlag02Set; Verified returns stateFlags bit 0x02; graph searches set it after processing a node and use it to avoid reprocessing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x67EA5C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x67EA62",
-    "line": "call    sub_67EC60",
+    "line": "call    TESConnectedPoint_GetPathCost; Verified returns G/path cost at TESConnectedPoint+4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,13 +763,13 @@
   },
   {
     "ea": "0x67EA72",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EA74",
-    "line": "call    sub_67ECC0",
+    "line": "call    GraphNode_IsFlag01Set; Verified returns stateFlags bit 0x01; graph searches use it to avoid inserting a node into the open list more than once.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,37 +787,37 @@
   },
   {
     "ea": "0x67EA7D",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67EA7F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EA81",
-    "line": "call    sub_67ECD0",
+    "line": "call    GraphNode_SetFlag01; Verified sets/clears stateFlags bit 0x01, the graph-search discovered/open-list marker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67EA86",
-    "line": "push    esi",
+    "line": "push    esi; graphNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67EA87",
-    "line": "lea     ecx, [esp+50h+var_20]",
+    "line": "lea     ecx, [esp+50h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67EA8B",
-    "line": "call    sub_67EFE0",
+    "line": "call    AStarNodeList_Add; Verified Oblivion AStarNodeList append uses intrusive nodes and appends at the start/head pointer. Fallout's inspected AStarQueue stores each AStarNode in a sorted linked list within one of 20 F-cost buckets; the two layouts/algorithms are distinct.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,19 +835,19 @@
   },
   {
     "ea": "0x67EA95",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EA97",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x67EA9A",
-    "line": "call    sub_67EC70",
+    "line": "call    SetFloatAtOffset_04; Verified raw float setter at object+4. A* uses it for TESConnectedPoint G/pathCost; unrelated callers use the same helper for their own +4 float field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x67EAA9",
-    "line": "fstp    [esp+54h+var_50]; float",
+    "line": "fstp    [esp+54h+value]; value",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -889,25 +889,25 @@
   },
   {
     "ea": "0x67EAB0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EAB2",
-    "line": "call    sub_67EC80",
+    "line": "call    TESConnectedPoint_SetHeuristicCost; Verified writes H/heuristic cost at TESConnectedPoint+8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67EAB7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EAB9",
-    "line": "call    sub_67EC50",
+    "line": "call    TESConnectedPoint_RecomputeTotalEstimateCost; Verified computes total estimate cost F at +0 as path cost G at +4 plus heuristic H at +8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x67EACC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EACE",
-    "line": "call    sub_67EC40",
+    "line": "call    TESConnectedPoint_GetTotalEstimateCost; Verified returns F cost at TESConnectedPoint+0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,13 +961,13 @@
   },
   {
     "ea": "0x67EAD7",
-    "line": "mov     ecx, [edi+24h]",
+    "line": "mov     ecx, [edi+24h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x67EADA",
-    "line": "call    sub_67EC40",
+    "line": "call    TESConnectedPoint_GetTotalEstimateCost; Verified returns F cost at TESConnectedPoint+0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,31 +1057,31 @@
   },
   {
     "ea": "0x67EB10",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67EB12",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EB14",
-    "line": "call    sub_67ECA0",
+    "line": "call    GraphNode_SetFlag02; Verified sets/clears stateFlags bit 0x02, the graph-search processed/closed marker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67EB19",
-    "line": "lea     ecx, [esp+4Ch+var_20]",
+    "line": "lea     ecx, [esp+4Ch+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67EB1D",
-    "line": "call    sub_67F030",
+    "line": "call    AStarNodeList_PopLowestTotalEstimateCost; Verified Oblivion AStarNodeList pop scans from start through each node's next link, compares F cost at graph-node+0, unlinks the lowest-F entry, and returns the generic graph-node pointer. Fallout's inspected NavMesh AStarQueue instead selects the first nonempty F bucket among 20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x67EB3A",
-    "line": "call    ??1AStarNodeList@@UAE@XZ; AStarNodeList::~AStarNodeList(void)",
+    "line": "call    AStarNodeList_dtor",
     "mnemonic": "call",
     "size": 5
   },
@@ -1186,5 +1186,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C4A90",
+    "line": "lea     ecx, [ebp+var_20]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4A93",
+    "line": "jmp     j_??1AStarNodeList@@UAE@XZ; AStarNodeList::~AStarNodeList(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4A98",
+    "line": "mov     edx, [esp-4+goal]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4A9C",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4A9F",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4AA2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4AA4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4AA9",
+    "line": "mov     eax, offset stru_AED3B0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4AAE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

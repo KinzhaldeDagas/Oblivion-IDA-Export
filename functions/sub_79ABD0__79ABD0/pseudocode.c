@@ -1,14 +1,16 @@
-_DWORD *__thiscall sub_79ABD0(char **this)
+// Oblivion st_vector<SFrondVertex>::clear. Validates begin/end and erases the entire initialized range without releasing capacity.
+void __thiscall OB_stVector_SFrondVertex_Clear_010201A0(OB_stVector16_010201A0 *this)
 {
-  char *v2; // ebx
-  char *v3; // edi
-  int v5; // [esp+Ch] [ebp-8h] BYREF
+  int v1; // edi
+  OB_SFrondVertex_010201A0 *end; // ebx
+  OB_SFrondVertex_010201A0 *begin; // edi
+  OB_stVectorIterator_SFrondVertex_010201A0 result; // [esp+Ch] [ebp-8h] BYREF
 
-  v2 = *(this + 2);
-  if ( *(this + 1) > v2 )
-    _invalid_parameter_noinfo();
-  v3 = *(this + 1);
-  if ( v3 > *(this + 2) )
-    _invalid_parameter_noinfo();
-  return sub_79AB70(this, &v5, (int)this, v3, (int)this, v2);
+  end = (OB_SFrondVertex_010201A0 *)this->end; /*0x79abd7*/
+  if ( this->begin > end ) /*0x79abde*/
+    _invalid_parameter_noinfo((int)end, v1, (int)this); /*0x79abe0*/
+  begin = (OB_SFrondVertex_010201A0 *)this->begin; /*0x79abe5*/
+  if ( begin > this->end ) /*0x79abeb*/
+    _invalid_parameter_noinfo((int)end, (int)begin, (int)this); /*0x79abed*/
+  OB_stVector_SFrondVertex_EraseRange_010201A0(this, &result, this, begin, this, end); /*0x79abfd*/
 }

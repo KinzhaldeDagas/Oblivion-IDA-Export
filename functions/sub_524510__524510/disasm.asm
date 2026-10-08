@@ -70,7 +70,7 @@
 0x5245D5: mov     ecx, esi
 0x5245D7: call    ContainerEntryExtraData_DestroyDataTable
 0x5245DC: push    esi
-0x5245DD: call    FormHeapFree
+0x5245DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5245E2: add     esp, 4
 0x5245E5: jmp     short loc_5245FB
 0x5245E7: test    edi, edi
@@ -95,7 +95,7 @@
 0x524622: mov     ecx, esi
 0x524624: call    ContainerEntryExtraData_DestroyDataTable
 0x524629: push    esi
-0x52462A: call    FormHeapFree
+0x52462A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52462F: add     esp, 4
 0x524632: pop     edi
 0x524633: pop     esi

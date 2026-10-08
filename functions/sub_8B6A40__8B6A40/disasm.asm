@@ -74,3 +74,16 @@
 0x8B6B37: mov     esp, ebp
 0x8B6B39: pop     ebp
 0x8B6B3A: retn    0Ch
+0x9D6E70: mov     ecx, [ebp+var_44]; this
+0x9D6E73: jmp     ??1bhkConvexShape@@UAE@XZ; bhkConvexShape::~bhkConvexShape(void)
+0x9D6E78: mov     edx, [esp-4+arg_4]
+0x9D6E7C: lea     eax, [edx-44h]
+0x9D6E7F: mov     ecx, [edx-48h]
+0x9D6E82: xor     ecx, eax
+0x9D6E84: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6E89: add     eax, 4
+0x9D6E8C: mov     ecx, [edx-8]
+0x9D6E8F: xor     ecx, eax
+0x9D6E91: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6E96: mov     eax, offset stru_AFEB5C
+0x9D6E9B: jmp     ___CxxFrameHandler3

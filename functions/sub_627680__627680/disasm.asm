@@ -35,9 +35,9 @@
 0x6276E4: mov     edx, [eax+170h]
 0x6276EA: mov     ecx, edi
 0x6276EC: call    edx
-0x6276EE: push    eax
-0x6276EF: lea     ecx, [esi+44h]
-0x6276F2: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x6276EE: push    eax; owner
+0x6276EF: lea     ecx, [esi+44h]; this
+0x6276F2: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x6276F7: mov     ecx, esi; this
 0x6276F9: call    TESObjectREFR_GetWorldSpace
 0x6276FE: mov     ecx, edi; this
@@ -87,7 +87,7 @@
 0x627780: mov     dword ptr [ebx+5Ch], 0
 0x627787: jz      short loc_6277E8
 0x627789: mov     ecx, edi; this
-0x62778B: call    TESObjectREFR_IsPersistent?
+0x62778B: call    TESObjectREFR_IsPersistent
 0x627790: test    al, al
 0x627792: jz      short loc_6277E8
 0x627794: push    edi
@@ -114,7 +114,7 @@
 0x6277D2: call    eax
 0x6277D4: push    eax; a2
 0x6277D5: mov     ecx, edi; this
-0x6277D7: call    TESObjectREFR_GetParentCell
+0x6277D7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6277DC: mov     ecx, ds:0B33A98h
 0x6277E2: push    eax; a1
 0x6277E3: call    sub_446B90
@@ -125,7 +125,7 @@
 0x6277F7: jz      short loc_627802
 0x6277F9: mov     [ebx+5Ch], eax
 0x6277FC: mov     ds:0B3B91Ch, edx
-0x627802: mov     ecx, [ebx+5Ch]
+0x627802: mov     ecx, [ebx+5Ch]; this
 0x627805: cmp     ecx, edx
 0x627807: jnz     loc_62794D
 0x62780D: mov     edx, [ebp+0]
@@ -156,11 +156,11 @@
 0x627864: fstp    [esp+40h+var_30]
 0x627868: fld     [esp+40h+var_20]
 0x62786C: fsub    [esp+40h+var_14]
-0x627870: fstp    [esp+40h+var_2C]
+0x627870: fstp    dword ptr [esp+40h+var_2C]
 0x627874: fld     [esp+40h+var_1C]
 0x627878: fsub    [esp+40h+var_10]
-0x62787C: fstp    [esp+40h+var_28]
-0x627880: call    sub_43F350
+0x62787C: fstp    dword ptr [esp+40h+var_2C+4]
+0x627880: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x627885: fstp    st
 0x627887: fld     [esp+40h+var_30]
 0x62788B: fld     [esp+40h+arg_C]
@@ -168,10 +168,10 @@
 0x627891: fmulp   st(2), st
 0x627893: fxch    st(1)
 0x627895: fstp    [esp+40h+var_18]
-0x627899: fld     [esp+40h+var_2C]
+0x627899: fld     dword ptr [esp+40h+var_2C]
 0x62789D: fmul    st, st(1)
 0x62789F: fstp    [esp+40h+var_14]
-0x6278A3: fmul    [esp+40h+var_28]
+0x6278A3: fmul    dword ptr [esp+40h+var_2C+4]
 0x6278A7: fstp    [esp+40h+var_10]
 0x6278AB: fld     [esp+40h+var_18]
 0x6278AF: fadd    [esp+40h+var_24]
@@ -184,14 +184,14 @@
 0x6278C9: fstp    [esp+40h+var_8]
 0x6278CD: mov     edx, [esp+40h+var_8]
 0x6278D1: fld     [esp+40h+var_10]
-0x6278D5: mov     [esp+40h+var_2C], edx
+0x6278D5: mov     dword ptr [esp+40h+var_2C], edx
 0x6278D9: fadd    [esp+40h+var_1C]
 0x6278DD: fstp    [esp+40h+var_4]
 0x6278E1: mov     eax, [esp+40h+var_4]
-0x6278E5: mov     [esp+40h+var_28], eax
-0x6278E9: call    TESObjectREFR_GetParentCell
+0x6278E5: mov     dword ptr [esp+40h+var_2C+4], eax
+0x6278E9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6278EE: mov     ecx, [esp+40h+var_30]
-0x6278F2: mov     edx, [esp+40h+var_2C]
+0x6278F2: mov     edx, dword ptr [esp+40h+var_2C]
 0x6278F6: push    0; int
 0x6278F8: push    0; float
 0x6278FA: push    0; float
@@ -199,13 +199,13 @@
 0x6278FD: sub     esp, 0Ch
 0x627900: mov     eax, esp
 0x627902: mov     [eax], ecx
-0x627904: mov     ecx, [esp+5Ch+var_28]
+0x627904: mov     ecx, dword ptr [esp+5Ch+var_2C+4]
 0x627908: mov     [eax+4], edx
 0x62790B: lea     edx, [esp+5Ch+var_C]
 0x62790F: mov     [eax+8], ecx
 0x627912: push    edx; int
 0x627913: mov     ecx, edi
-0x627915: call    sub_5E2E20
+0x627915: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x62791A: mov     ecx, [eax]
 0x62791C: mov     [esi], ecx
 0x62791E: mov     edx, [eax+4]
@@ -225,7 +225,7 @@
 0x627944: mov     ecx, edi
 0x627946: call    sub_5E03E0
 0x62794B: jmp     short loc_627952
-0x62794D: call    sub_4D76F0
+0x62794D: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x627952: mov     ecx, [eax]
 0x627954: mov     [esi], ecx
 0x627956: mov     edx, [eax+4]

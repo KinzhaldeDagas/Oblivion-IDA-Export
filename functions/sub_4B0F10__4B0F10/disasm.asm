@@ -1,4 +1,4 @@
-0x4B0F10: push    ecx
+0x4B0F10: push    ecx; Save an Oblivion TESObjectLIGH record, including the exact 0x18-byte DATA block at object +0x70..+0x87.
 0x4B0F11: push    esi
 0x4B0F12: mov     esi, ecx
 0x4B0F14: call    TESForm_InitializeFormRecord
@@ -25,12 +25,12 @@
 0x4B0F65: lea     eax, [esi+70h]
 0x4B0F68: push    eax; Src
 0x4B0F69: mov     ecx, esi; this
-0x4B0F6B: call    TESForm_SaveGenericComponents
+0x4B0F6B: call    TESForm_SaveGenericComponents; Save the exact 0x18-byte Oblivion LIGH DATA payload from TESObjectLIGH+0x70..+0x87.
 0x4B0F70: push    4; Size
 0x4B0F72: lea     ecx, [esi+88h]
 0x4B0F78: push    ecx; Src
 0x4B0F79: push    4D414E46h; int
-0x4B0F7E: call    TESForm_PutFormRecordChunkData
+0x4B0F7E: call    TESForm_PutFormRecordChunkData; Save TESObjectLIGH::fade_88 as the four-byte Oblivion LIGH FNAM subrecord.
 0x4B0F83: mov     eax, [esi+8Ch]
 0x4B0F89: add     esp, 0Ch
 0x4B0F8C: test    eax, eax
@@ -41,7 +41,7 @@
 0x4B0F99: push    eax; Src
 0x4B0F9A: push    4D414E53h; int
 0x4B0F9F: mov     [esp+14h+Src], edx
-0x4B0FA3: call    TESForm_PutFormRecordChunkData
+0x4B0FA3: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4B0FA8: add     esp, 0Ch
 0x4B0FAB: mov     ecx, esi; this
 0x4B0FAD: call    TESForm_FinalizeFormRecord

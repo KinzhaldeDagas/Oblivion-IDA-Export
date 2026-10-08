@@ -5,9 +5,9 @@
 0x701847: push    edi
 0x701848: lea     eax, [esp+10h+arg_0]
 0x70184C: mov     esi, ecx
-0x70184E: push    eax
-0x70184F: mov     ecx, ebp
-0x701851: call    sub_405760
+0x70184E: push    eax; output
+0x70184F: mov     ecx, ebp; this
+0x701851: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x701856: mov     ecx, [eax]
 0x701858: mov     eax, [esp+10h+arg_0]
 0x70185C: test    eax, eax

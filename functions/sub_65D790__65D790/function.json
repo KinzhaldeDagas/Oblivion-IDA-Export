@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_65D790",
+  "chunks": [
+    [
+      "0x65D790",
+      "0x65D802"
+    ]
+  ],
+  "chunks_sha256": "811e1ed10d4a935adb4aa6b35fe13f43ac302c081ffc2e6c8fb4418c633e0d5a",
+  "comment_regular": "Player first-person synchronization caller. For groups whose fixed 0x24-byte metadata record has allow-multiple byte +0x04 set, it obtains the third-person source sequence from metadata slot +0x08 and tries ActorAnimData_PlayFirstPersonBySource. On miss or non-multiple group it falls back to key-based first-person playback.",
+  "comment_repeatable": "Player first-person synchronization caller. For groups whose fixed 0x24-byte metadata record has allow-multiple byte +0x04 set, it obtains the third-person source sequence from metadata slot +0x08 and tries ActorAnimData_PlayFirstPersonBySource. On miss or non-multiple group it falls back to key-based first-person playback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "Player_SyncFirstPersonAnimFromSource",
   "end_ea": "0x65D802",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_65D790",
+  "name": "Player_SyncFirstPersonAnimFromSource",
   "segment": ".text",
   "sha256": "811e1ed10d4a935adb4aa6b35fe13f43ac302c081ffc2e6c8fb4418c633e0d5a",
   "size": 114,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65D790",
-  "type": "void __thiscall(Actor *this, _DWORD *, int)",
+  "total_chunk_size": 114,
+  "type": "void __thiscall(Actor *this, unsigned int encodedKey, unsigned int playImmediately)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 1
 }

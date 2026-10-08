@@ -1,4 +1,4 @@
-0x7D7790: mov     eax, [ecx+0C0h]
+0x7D7790: mov     eax, [ecx+0C0h]; SpeedTreeOBSE 2026-05-31 branch normal map apply: decoded PPLighting base-normal setter writes texture ref into SpeedTreeBranchShaderProperty+0xC0[index]. The OBSE opt-in [MapBank] bApplyBranchNormalTexture uses index 0 only at the 0x563749 render boundary after stock branch/leaf resource construction.
 0x7D7796: mov     ecx, [esp+arg_0]
 0x7D779A: push    ebx
 0x7D779B: mov     ebx, [esp+4+arg_4]

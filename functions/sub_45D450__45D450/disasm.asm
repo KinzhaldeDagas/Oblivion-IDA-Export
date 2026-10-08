@@ -1,4 +1,4 @@
-0x45D450: push    0FFFFFFFFh
+0x45D450: push    0FFFFFFFFh; ContinueFromLastSave fidelity decode: enumerates GameSaveRoot+SaveSubdir+*.ess, constructs SaveGameFile objects (BSFile + vtable + flag byte), inserts into SaveLoad+0x6C list via BSSimpleList_InsertSorted comparator 0x459450.
 0x45D452: push    offset SEH_45D450
 0x45D457: mov     eax, large fs:0
 0x45D45D: push    eax
@@ -29,8 +29,8 @@
 0x45D4A9: mov     [eax+4], ebx
 0x45D4AC: jmp     short loc_45D4B0
 0x45D4AE: xor     eax, eax
-0x45D4B0: mov     [edi+6Ch], eax
-0x45D4B3: push    offset word_B3F280; lpString2
+0x45D4B0: mov     [edi+6Ch], eax; TESSaveLoadGame+0x6C owns the 8-byte BSSimpleList head of SaveGameFile objects.
+0x45D4B3: push    offset unk_B3F280; lpString2
 0x45D4B8: lea     eax, [esp+374h+String1]
 0x45D4BF: push    eax; lpString1
 0x45D4C0: call    dword ptr ds:0A28164h
@@ -61,7 +61,7 @@
 0x45D526: lea     eax, [esp+370h+FindFileData.cFileName]
 0x45D52A: push    eax
 0x45D52B: push    ecx
-0x45D52C: push    offset word_B3F280
+0x45D52C: push    offset unk_B3F280
 0x45D531: lea     edx, [esp+37Ch+var_114]
 0x45D538: push    offset aSSS; "%s%s%s"
 0x45D53D: push    edx
@@ -81,12 +81,12 @@
 0x45D56F: push    eax
 0x45D570: mov     ecx, esi
 0x45D572: call    BSFile_constr
-0x45D577: mov     dword ptr [esi], offset ??_7SaveGameFile@@6B@; const SaveGameFile::`vftable'
+0x45D577: mov     dword ptr [esi], offset ??_7SaveGameFile@@6B@; SaveGameFile is BSFile-derived; path buffer begins at +0x3C and timestamp cache begins at +0x154.
 0x45D57D: mov     [esi+154h], bl
 0x45D583: jmp     short loc_45D587
 0x45D585: xor     esi, esi
 0x45D587: mov     ecx, [edi+6Ch]
-0x45D58A: push    offset sub_459450
+0x45D58A: push    offset sub_459450; ContinueFromLastSave fidelity decode: SaveGameFile sorted-list comparator. Caches ftLastWriteTime at SaveGameFile+0x158/+0x15C and returns newest file first; vanilla Continue therefore means newest write time, not highest Save number.
 0x45D58F: push    esi
 0x45D590: mov     [esp+378h+var_4], 0FFFFFFFFh
 0x45D59B: call    BSSimpleList_InsertSorted
@@ -110,3 +110,19 @@
 0x45D5D7: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x45D5DC: add     esp, 35Ch
 0x45D5E2: retn
+0x9AE380: mov     eax, [ebp-35Ch]
+0x9AE386: push    eax
+0x9AE387: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE38C: pop     ecx
+0x9AE38D: retn
+0x9AE38E: mov     edx, [esp+arg_4]
+0x9AE392: lea     eax, [edx-360h]
+0x9AE398: mov     ecx, [edx-364h]
+0x9AE39E: xor     ecx, eax
+0x9AE3A0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE3A5: add     eax, 10h
+0x9AE3A8: mov     ecx, [edx-4]
+0x9AE3AB: xor     ecx, eax
+0x9AE3AD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE3B2: mov     eax, offset stru_ADAC08
+0x9AE3B7: jmp     ___CxxFrameHandler3

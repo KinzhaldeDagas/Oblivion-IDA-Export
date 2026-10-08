@@ -1,59 +1,65 @@
-void __userpurge sub_4D3A00(int a1@<ecx>, double a2@<st2>, double a3@<st1>, TESWorldSpace *a4)
+// Verified Oblivion clone helper: scans the persistent cell's reference list, maps each reference position to a destination exterior cell, and adds the reference there. Probable structural analogue in Fallout is TESObjectCELL::AssignPersistentRefsToCellsInWorld, called from Fallout TESWorldSpace::CreateDuplicateForm; it does not correspond to Oblivion's SubSpace spatial index.
+void __thiscall TESWorldSpace_DistributePersistentCellReferences(
+        TESObjectCELL *persistentCell,
+        TESWorldSpace *destinationWorldSpace)
 {
-  TESObjectREFR *v5; // esi
-  signed int v6; // edi
-  double v7; // st7
+  TESObjectREFR *refr; // esi
+  int v4; // edi
+  int v5; // ebx
   TESObjectCELL *CellAtCellCoord; // eax
-  int v9; // eax
-  const char *v10; // eax
-  int v11; // [esp-18h] [ebp-2Ch]
-  const char *v12; // [esp-14h] [ebp-28h]
-  int v13; // [esp-10h] [ebp-24h]
-  TESObjectREFR **v14; // [esp+4h] [ebp-10h]
-  int v15; // [esp+10h] [ebp-4h]
+  int v7; // eax
+  const char *v8; // eax
+  int v9; // [esp-18h] [ebp-2Ch]
+  const char *v10; // [esp-14h] [ebp-28h]
+  int v11; // [esp-10h] [ebp-24h]
+  ObjectListEntry *p_objectList; // [esp+4h] [ebp-10h]
+  UInt32 refID; // [esp+10h] [ebp-4h]
 
-  if ( a4 )
+  if ( destinationWorldSpace ) /*0x4d3a0b*/
   {
-    if ( (*(_DWORD *)(a1 + 8) & 0x400) != 0 )
+    if ( (persistentCell->members.super.flags & 0x400) != 0 ) /*0x4d3a18*/
     {
-      sub_496EA0((char *)&stru_B35C80, (TESObjectCELL *)a1);
-      v14 = (TESObjectREFR **)(a1 + 0x48);
-      if ( a1 != 0xFFFFFFB8 )
+      sub_496EA0((char *)&unk_B35C80, persistentCell); /*0x4d3a24*/
+      p_objectList = &persistentCell->members.objectList; /*0x4d3a2e*/
+      if ( persistentCell != (TESObjectCELL *)0xFFFFFFB8 ) /*0x4d3a32*/
       {
-        do
+        do /*0x4d3af1*/
         {
-          v5 = *v14;
-          if ( *v14 )
+          refr = p_objectList->refr; /*0x4d3a44*/
+          if ( p_objectList->refr ) /*0x4d3a44*/
           {
-            v6 = (int)*v5->vtbl->GetPos(*v14) >> 0xC;
-            v7 = v5->vtbl->GetPos(v5)[1];
-            CellAtCellCoord = (TESObjectCELL *)TESWorldSpace::GetCellAtCellCoord(a4, v6, (int)v7 >> 0xC);
-            if ( CellAtCellCoord )
+            v4 = (int)*refr->vtbl->GetPos(p_objectList->refr) >> 0xC; /*0x4d3a76*/
+            v5 = (int)refr->vtbl->GetPos(refr)[1] >> 0xC; /*0x4d3a92*/
+            CellAtCellCoord = TESWorldSpace::GetCellAtCellCoord(destinationWorldSpace, v4, v5); /*0x4d3a97*/
+            if ( CellAtCellCoord ) /*0x4d3a9e*/
             {
-              sub_4D35D0(CellAtCellCoord, a2, a3, v7, v5);
+              TESObjectCELL_AddReference(CellAtCellCoord, refr); /*0x4d3aa3*/
             }
             else
             {
-              v15 = *(_DWORD *)(a1 + 0xC);
-              v9 = ((int (__thiscall *)(TESObjectREFR *, UInt32))v5->vtbl->super.GetEditorName)(
-                     v5,
-                     v5->member.super.refID);
-              v10 = (const char *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)a1 + 0xD4))(a1, v15, v9);
-              PrintError(
+              refID = persistentCell->members.super.refID; /*0x4d3ab2*/
+              v7 = ((int (__thiscall *)(TESObjectREFR *, UInt32))refr->vtbl->super.GetEditorName)( /*0x4d3abf*/
+                     refr,
+                     refr->member.super.refID);
+              v8 = (const char *)((int (__thiscall *)(TESObjectCELL *, UInt32, int))persistentCell->vtbl->GetEditorName)( /*0x4d3ad2*/
+                                   persistentCell,
+                                   refID,
+                                   v7);
+              PrintError( /*0x4d3adc*/
                 "Could not find cell (%i, %i) in world '%s' (%08X) to add reference '%s' (%08X) to.",
-                v6,
-                (int)v7 >> 0xC,
+                v4,
+                v5,
+                v8,
+                v9,
                 v10,
-                v11,
-                v12,
-                v13);
+                v11);
             }
           }
-          v14 = (TESObjectREFR **)v14[1];
+          p_objectList = p_objectList->next; /*0x4d3aed*/
         }
-        while ( v14 );
+        while ( p_objectList ); /*0x4d3af1*/
       }
-      sub_496F50(&stru_B35C80, (TESObjectCELL *)a1);
+      sub_496F50(&unk_B35C80, persistentCell); /*0x4d3b00*/
     }
   }
 }

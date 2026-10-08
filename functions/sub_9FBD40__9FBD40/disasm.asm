@@ -2,7 +2,7 @@
 0x9FBD46: push    ecx
 0x9FBD47: fstp    [esp+4+var_4]; float
 0x9FBD4A: push    offset aFmincreatedare; "fMinCreatedArea"
-0x9FBD4F: mov     ecx, offset flt_B3B29C
+0x9FBD4F: mov     ecx, (offset dword_B3B0B4+1E8h)
 0x9FBD54: call    GameSetting_ConstrAndReg_float
 0x9FBD59: push    offset sub_A24AB0; void (__cdecl *)()
 0x9FBD5E: call    _atexit

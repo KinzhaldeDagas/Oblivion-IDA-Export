@@ -1,1 +1,1 @@
-Concurrency::details::InternalContextBase
+struct Concurrency::details::InternalContextBase;

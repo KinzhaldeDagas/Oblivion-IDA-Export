@@ -1,4 +1,4 @@
-0x700900: push    0FFFFFFFFh
+0x700900: push    0FFFFFFFFh; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x700902: push    offset SEH_700900
 0x700907: mov     eax, large fs:0
 0x70090D: push    eax
@@ -11,8 +11,8 @@
 0x70091B: lea     eax, [esp+28h+var_C]
 0x70091F: mov     large fs:0, eax
 0x700925: mov     esi, ecx
-0x700927: lea     ecx, [esp+28h+var_1C]
-0x70092B: call    sub_478B90
+0x700927: lea     ecx, [esp+28h+var_1C]; this
+0x70092B: call    OB_NiCloningProcess_ctor
 0x700930: mov     eax, [esi]
 0x700932: mov     edx, [eax+18h]
 0x700935: lea     ecx, [esp+28h+var_1C]
@@ -50,3 +50,12 @@
 0x70098D: pop     esi
 0x70098E: add     esp, 1Ch
 0x700991: retn
+0x9C93E0: lea     ecx, [ebp-1Ch]
+0x9C93E3: jmp     sub_4781A0
+0x9C93E8: mov     edx, [esp+arg_4]
+0x9C93EC: lea     eax, [edx-18h]
+0x9C93EF: mov     ecx, [edx-1Ch]
+0x9C93F2: xor     ecx, eax
+0x9C93F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C93F9: mov     eax, offset stru_AF1CBC
+0x9C93FE: jmp     ___CxxFrameHandler3

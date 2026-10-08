@@ -7,7 +7,7 @@
 0x7B8921: test    ecx, ecx
 0x7B8923: jz      short loc_7B892B
 0x7B8925: push    esi
-0x7B8926: call    ecx ; dword_B42EB4
+0x7B8926: call    ecx
 0x7B8928: add     esp, 4
 0x7B892B: push    eax
 0x7B892C: push    esi

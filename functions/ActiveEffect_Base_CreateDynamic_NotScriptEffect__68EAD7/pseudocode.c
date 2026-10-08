@@ -29,10 +29,10 @@ int __usercall ActiveEffect_Base_CreateDynamic_::NotScriptEffect@<eax>(
 {
   int v28; // [esp-8h] [ebp-8h]
 
-  v28 = *a1;
-  a26 = 0;
-  if ( NiTMap_GetAt(&NiTMap_AECreatorFuncs, v28, &a26) && a26 )
-    return ActiveEffect_Base_CreateDynamic_::TabulatedAllocator(
+  v28 = *a1; /*0x68eade*/
+  a26 = 0; /*0x68eae4*/
+  if ( NiTMap_GetAt(&NiTMap_AECreatorFuncs, v28, &a26) && a26 )// Verified (Oblivion): looks up the current EffectSetting.effectCode in NiTMap_AECreatorFuncs; a hit invokes its ActiveEffectFactory with caster, MagicItem and EffectItem. /*0x68eafb*/
+    return ActiveEffect_Base_CreateDynamic_::TabulatedAllocator( /*0x68eafc*/
              a26,
              a2,
              a3,
@@ -61,7 +61,7 @@ int __usercall ActiveEffect_Base_CreateDynamic_::NotScriptEffect@<eax>(
              (int)a26,
              a27);
   else
-    return ActiveEffect_Base_CreateDynamic_::SwitchEffectCode(
+    return ActiveEffect_Base_CreateDynamic_::SwitchEffectCode( /*0x68eaf3*/
              (int)a1,
              a2,
              a3,

@@ -1,1 +1,1 @@
-DLGDATA
+typedef tagDLGDATA DLGDATA;

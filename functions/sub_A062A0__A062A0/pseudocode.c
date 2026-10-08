@@ -1,4 +1,4 @@
-BSStringT *sub_A062A0()
+NiRTTI *sub_A062A0()
 {
-  return sub_70E220((BSStringT *)dword_B3E1AC, "NiFloatsExtraDataController", (int)dword_B3EF5C);
+  return NiRTTI_Constructor(&stru_B3E1AC, "NiFloatsExtraDataController", &stru_B3EF5C); /*0xa062b4*/
 }

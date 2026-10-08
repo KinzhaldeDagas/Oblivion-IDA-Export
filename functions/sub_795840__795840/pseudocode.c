@@ -1,31 +1,37 @@
-unsigned int **__thiscall sub_795840(unsigned int *this, unsigned int **a2, unsigned int *a3, _DWORD *Src, int *a5)
+// OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned int>; validates owner/position, delegates to insert-fill, and returns an iterator to the inserted value.
+OB_stVector4Iterator_010201A0 *__thiscall OB_stVectorUInt32_InsertOne_010201A0(
+        OB_stVectorUInt32_010201A0 *this,
+        OB_stVector4Iterator_010201A0 *result,
+        OB_stVector4Iterator_010201A0 position,
+        const unsigned int *value)
 {
-  unsigned int v6; // edi
+  int v4; // ebx
+  unsigned int *begin; // edi
   int v7; // ebx
-  unsigned int v8; // edi
-  unsigned int v9; // edi
+  unsigned int *v8; // edi
+  unsigned int *v9; // edi
 
-  v6 = *(this + 1);
-  if ( v6 && (int)(*(this + 2) - v6) >> 2 )
+  begin = this->begin; /*0x79584b*/
+  if ( begin && this->end - begin ) /*0x795859*/
   {
-    if ( v6 > *(this + 2) )
-      _invalid_parameter_noinfo();
-    if ( !a3 || a3 != this )
-      _invalid_parameter_noinfo();
-    v7 = (int)((int)Src - v6) >> 2;
+    if ( begin > this->end ) /*0x795864*/
+      _invalid_parameter_noinfo(v4, (int)begin, (int)this); /*0x795866*/
+    if ( !position.owner || (OB_stVectorUInt32_010201A0 *)position.owner != this ) /*0x795871*/
+      _invalid_parameter_noinfo(v4, (int)begin, (int)this); /*0x795873*/
+    v7 = position.current - begin; /*0x79587e*/
   }
   else
   {
-    v7 = 0;
+    v7 = 0; /*0x79585e*/
   }
-  sub_7950A0(this, (int)a3, Src, 1u, a5);
-  v8 = *(this + 1);
-  if ( v8 > *(this + 2) )
-    _invalid_parameter_noinfo();
-  v9 = v8 + 4 * v7;
-  if ( v9 > *(this + 2) || v9 < *(this + 1) )
-    _invalid_parameter_noinfo();
-  a2[1] = (unsigned int *)v9;
-  *a2 = this;
-  return a2;
+  OB_stVectorUInt32_InsertFill_010201A0(this, position, 1u, value); /*0x795890*/
+  v8 = this->begin; /*0x795895*/
+  if ( v8 > this->end ) /*0x79589b*/
+    _invalid_parameter_noinfo(v7, (int)v8, (int)this); /*0x79589d*/
+  v9 = &v8[v7]; /*0x7958a6*/
+  if ( v9 > this->end || v9 < this->begin ) /*0x7958b1*/
+    _invalid_parameter_noinfo(v7, (int)v9, (int)this); /*0x7958b3*/
+  result->current = v9; /*0x7958bc*/
+  result->owner = (OB_stVector4_010201A0 *)this; /*0x7958c0*/
+  return result; /*0x7958bf*/
 }

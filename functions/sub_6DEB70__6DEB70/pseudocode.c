@@ -1,4 +1,4 @@
-int __thiscall sub_6DEB70(int this, float a2)
+void __thiscall sub_6DEB70(int this, int a2)
 {
   int v3; // ecx
   int v4; // ecx
@@ -6,96 +6,97 @@ int __thiscall sub_6DEB70(int this, float a2)
   double v6; // st7
   double v7; // st5
   double v8; // st6
-  float v10; // [esp+8h] [ebp-24h]
-  float v11; // [esp+Ch] [ebp-20h]
-  float v12; // [esp+10h] [ebp-1Ch]
-  float v13; // [esp+14h] [ebp-18h]
-  float v14; // [esp+18h] [ebp-14h]
-  float v15; // [esp+1Ch] [ebp-10h]
-  _BYTE v16[12]; // [esp+20h] [ebp-Ch] BYREF
+  float applicationTime; // [esp+8h] [ebp-24h]
+  float v10; // [esp+Ch] [ebp-20h]
+  float v11; // [esp+10h] [ebp-1Ch]
+  float v12; // [esp+14h] [ebp-18h]
+  float v13; // [esp+18h] [ebp-14h]
+  float v14; // [esp+1Ch] [ebp-10h]
+  _BYTE v15[12]; // [esp+20h] [ebp-Ch] BYREF
 
-  if ( (*(_BYTE *)(this + 8) & 0x20) != 0 )
+  if ( (*(_BYTE *)(this + 8) & 0x20) != 0 ) /*0x6deb84*/
   {
-    *(float *)(this + 0x28) = flt_A7A164;
+    *(float *)(this + 0x28) = flt_A7A164; /*0x6deb8c*/
   }
-  else if ( sub_6C36B0((float *)this, a2) )
+  else if ( NiTimeController_IsUpdateUnchanged((NiTimeController *)this, *(float *)&a2) ) /*0x6deb99*/
   {
-    v3 = *(_DWORD *)(this + 0x3C);
-    if ( !v3 || !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v3 + 0x94))(v3) )
+    v3 = *(_DWORD *)(this + 0x3C); /*0x6deba2*/
+    if ( !v3 || !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v3 + 0x94))(v3) ) /*0x6debb5*/
 LABEL_26:
-      JUMPOUT(0x6DED05);
+      JUMPOUT(0x6DED05); /*0x6ded05*/
   }
-  v4 = *(_DWORD *)(this + 0x3C);
-  if ( v4 )
+  v4 = *(_DWORD *)(this + 0x3C); /*0x6debbf*/
+  if ( v4 ) /*0x6debc4*/
   {
-    if ( (*(unsigned __int8 (__cdecl **)(_DWORD, _DWORD, _BYTE *))(*(_DWORD *)v4 + 0x54))(
+    if ( (*(unsigned __int8 (__cdecl **)(_DWORD, _DWORD, _BYTE *))(*(_DWORD *)v4 + 0x54))( /*0x6debdf*/
            *(float *)(this + 0x28),
            *(_DWORD *)(this + 0x30),
-           v16) )
+           v15) )
     {
-      v5 = *(_DWORD *)(this + 0x30);
-      v10 = v13;
-      v11 = v14;
-      v12 = v15;
-      if ( v13 >= 0.0 )
+      v5 = *(_DWORD *)(this + 0x30); /*0x6debed*/
+      applicationTime = v12; /*0x6debf0*/
+      v10 = v13; /*0x6debf8*/
+      v11 = v14; /*0x6dec00*/
+      if ( v12 >= 0.0 ) /*0x6dec0f*/
       {
-        v6 = 1.0;
-        if ( v13 > 1.0 )
-          v10 = 1.0;
+        v6 = 1.0; /*0x6dec1d*/
+        if ( v12 > 1.0 ) /*0x6dec22*/
+          applicationTime = 1.0; /*0x6dec26*/
       }
       else
       {
-        v6 = 1.0;
-        v10 = 0.0;
+        v6 = 1.0; /*0x6dec11*/
+        applicationTime = 0.0; /*0x6dec13*/
       }
-      if ( v14 >= 0.0 )
+      if ( v13 >= 0.0 ) /*0x6dec33*/
       {
-        if ( v14 > v6 )
-          v11 = v6;
-        v7 = 0.0;
-        v8 = v15;
-      }
-      else
-      {
-        v7 = 0.0;
-        v8 = v15;
-        v11 = 0.0;
-      }
-      if ( v7 <= v8 )
-      {
-        if ( v8 > v6 )
-          v12 = v6;
+        if ( v13 > v6 ) /*0x6dec48*/
+          v10 = v6; /*0x6dec4c*/
+        v7 = 0.0; /*0x6dec52*/
+        v8 = v14; /*0x6dec52*/
       }
       else
       {
-        v12 = v7;
+        v7 = 0.0; /*0x6dec37*/
+        v8 = v14; /*0x6dec37*/
+        v10 = 0.0; /*0x6dec39*/
       }
-      switch ( *(_BYTE *)(this + 0x40) & 7 )
+      if ( v7 <= v8 ) /*0x6dec5b*/
       {
-        case 0:
-          ++*(_DWORD *)(v5 + 0x54);
-          *(float *)(v5 + 0x1C) = v10;
-          *(float *)(v5 + 0x20) = v11;
-          *(float *)(v5 + 0x24) = v12;
-          return LODWORD(v12);
-        case 1:
-          ++*(_DWORD *)(v5 + 0x54);
-          *(float *)(v5 + 0x28) = v10;
-          *(float *)(v5 + 0x2C) = v11;
-          *(float *)(v5 + 0x30) = v12;
-          return LODWORD(v11);
-        case 2:
-          ++*(_DWORD *)(v5 + 0x54);
-          *(float *)(v5 + 0x34) = v10;
-          *(float *)(v5 + 0x38) = v11;
-          *(float *)(v5 + 0x3C) = v12;
-          return LODWORD(v12);
-        case 3:
-          ++*(_DWORD *)(v5 + 0x54);
-          *(float *)(v5 + 0x40) = v10;
-          *(float *)(v5 + 0x44) = v11;
-          *(float *)(v5 + 0x48) = v12;
-          return def_6DEC86(LODWORD(a2));
+        if ( v8 > v6 ) /*0x6dec70*/
+          v11 = v6; /*0x6dec72*/
+      }
+      else
+      {
+        v11 = v7; /*0x6dec61*/
+      }
+      switch ( *(_BYTE *)(this + 0x40) & 7 ) /*0x6dec86*/
+      {
+        case 0: /*0x6dec86*/
+          ++*(_DWORD *)(v5 + 0x54); /*0x6dec95*/
+          *(float *)(v5 + 0x1C) = applicationTime; /*0x6dec98*/
+          *(float *)(v5 + 0x20) = v10; /*0x6deca0*/
+          *(float *)(v5 + 0x24) = v11; /*0x6deca3*/
+          return; /*0x6decaa*/
+        case 1: /*0x6dec86*/
+          ++*(_DWORD *)(v5 + 0x54); /*0x6decb5*/
+          *(float *)(v5 + 0x28) = applicationTime; /*0x6decb8*/
+          *(float *)(v5 + 0x2C) = v10; /*0x6decc0*/
+          *(float *)(v5 + 0x30) = v11; /*0x6decc3*/
+          return; /*0x6decca*/
+        case 2: /*0x6dec86*/
+          ++*(_DWORD *)(v5 + 0x54); /*0x6decd5*/
+          *(float *)(v5 + 0x34) = applicationTime; /*0x6decd8*/
+          *(float *)(v5 + 0x38) = v10; /*0x6dece0*/
+          *(float *)(v5 + 0x3C) = v11; /*0x6dece3*/
+          return; /*0x6decea*/
+        case 3: /*0x6dec86*/
+          ++*(_DWORD *)(v5 + 0x54); /*0x6decf5*/
+          *(float *)(v5 + 0x40) = applicationTime; /*0x6decf8*/
+          *(float *)(v5 + 0x44) = v10; /*0x6decff*/
+          *(float *)(v5 + 0x48) = v11; /*0x6ded02*/
+          def_6DEC86(a2); /*0x6ded03*/
+          return;
         default:
           goto LABEL_26;
       }

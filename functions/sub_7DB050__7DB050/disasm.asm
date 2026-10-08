@@ -1,4 +1,4 @@
-0x7DB050: push    0FFFFFFFFh
+0x7DB050: push    0FFFFFFFFh; [Verified] Initializes a NiTStringPointerMap<ShaderBufferEntry*> with 0x25 buckets and, for a positive package index, formats shaderpackage%03i.sdp. Oblivion then loads that SDP record map for shader creation. [Verified cross-build divergence] Fallout Renderer::Init exposes bCreateShaderPackage and forwards it to BSShaderManager::bCreateNewShaderPackage, while its HLSL creator resolves source files and compiles them; the current Fallout IDB does not establish a same-name Oblivion-style SDP map.
 0x7DB052: push    offset SEH_7DB050
 0x7DB057: mov     eax, large fs:0
 0x7DB05D: push    eax
@@ -37,7 +37,7 @@
 0x7DB0C4: add     esp, 10h
 0x7DB0C7: mov     byte ptr [esi+18h], 1
 0x7DB0CB: mov     dword ptr [esi+8], offset ??_7?$NiTStringPointerMap@PAVShaderBufferEntry@@@@6B@; const NiTStringPointerMap<ShaderBufferEntry *>::`vftable'
-0x7DB0D2: mov     eax, [esp+80h+arg_0]
+0x7DB0D2: mov     eax, [esp+80h+packageIndex]
 0x7DB0D9: test    eax, eax
 0x7DB0DB: mov     [esp+80h+var_4], 0
 0x7DB0E3: mov     dword ptr [esi+4], 0
@@ -81,3 +81,17 @@
 0x7DB153: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7DB158: add     esp, 78h
 0x7DB15B: retn    4
+0x9CEFC0: mov     ecx, [ebp-78h]
+0x9CEFC3: add     ecx, 8
+0x9CEFC6: jmp     j_??1?$NiTStringPointerMap@PAVShaderBufferEntry@@@@UAE@XZ; NiTStringPointerMap<ShaderBufferEntry *>::~NiTStringPointerMap<ShaderBufferEntry *>(void)
+0x9CEFCB: mov     edx, [esp+arg_4]
+0x9CEFCF: lea     eax, [edx-70h]
+0x9CEFD2: mov     ecx, [edx-74h]
+0x9CEFD5: xor     ecx, eax
+0x9CEFD7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEFDC: add     eax, 4
+0x9CEFDF: mov     ecx, [edx-4]
+0x9CEFE2: xor     ecx, eax
+0x9CEFE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEFE9: mov     eax, offset stru_AF7D70
+0x9CEFEE: jmp     ___CxxFrameHandler3

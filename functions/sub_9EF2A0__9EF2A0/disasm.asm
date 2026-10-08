@@ -2,7 +2,7 @@
 0x9EF2A6: push    ecx
 0x9EF2A7: fstp    [esp+4+var_4]; float
 0x9EF2AA: push    offset aFmagicteleki_8; "fMagicTelekinesisComplexSpringDamping"
-0x9EF2AF: mov     ecx, offset fMagicTelekinesisComplexSpringDamping
+0x9EF2AF: mov     ecx, (offset flt_B37ED0+1A0h)
 0x9EF2B4: call    GameSetting_ConstrAndReg_float
 0x9EF2B9: push    offset sub_A20800; void (__cdecl *)()
 0x9EF2BE: call    _atexit

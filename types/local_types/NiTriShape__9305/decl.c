@@ -1,1 +1,1 @@
-NiTriShape
+struct NiTriShape;

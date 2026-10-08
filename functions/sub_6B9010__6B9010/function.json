@@ -1,19 +1,36 @@
 {
-  "callees_count": 49,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_6B9010",
+  "chunks": [
+    [
+      "0x6B9010",
+      "0x6B924B"
+    ],
+    [
+      "0x9C6FC0",
+      "0x9C6FE6"
+    ]
+  ],
+  "chunks_sha256": "fc4fbfbbe008501d78a43bbe638100f9d2289fd4689096f058ed7dd1fde350a4",
+  "comment_regular": "OFE Rumors adapter verified: GetInfoGeneral cache call 6B90CC; matching 6B9128; owner 6B913A; constructor 6B91A5; cache store 6B91D8; rejected-menu destroy 6B921C. D7 role classification depends on original D7 input to constructor, but owner/response generation must use selected replacement topic. Native NoRumors checks remain intact.\nOFE 0.2.1 verified Rumors control flow (2026-10-02): call 6B90CC retrieves the actor cache; 6B9108 latches cache-present even before the unconditional GetMatchingInfo at 6B9128. At 6B9154/6B9159 a present cache prevents construction of the later matching INFO. Adapter implication: cache probing must remember both successful and failed custom selections and must not re-evaluate replacement conditions after returning a cache. Otherwise random conditions can run twice and a second successful replacement can be ignored. This is an OFE adapter invariant derived from the native branch sequence, not a change to native INFO conditions.\nOFE RC1 NoRumors offer-gate verification (2026-10-02): the D7 branch at 6B90BC bypasses GetInfoGeneralTopic/6B90CC when Actor::IsNoRumor is true. GetMatchingInfo at 6B9128 still runs unconditionally, and the later D7/NoRumors branch around 6B915F prevents fresh construction. The extension should therefore attempt custom player-Rumors selection only when this D7 iteration reached the native cache/offer gate; otherwise evaluating custom conditions would consume RNG or condition effects for a menu that native code will discard. Native stock matching remains unchanged. This gate applies to player Rumors only, not ambient linked INFOGENERAL selection.\n\nOblivion appends eligible ordinary MenuTopics in input-list order and performs no topic-priority sort here. Fallout's corresponding FillTopicList (x4y6:0x825E8740) sorts non-choice lists with PrioritySort (0x825E7390) by TESTopic priority; choice lists keep authored order. In Oblivion, the known-topic source is already sorted by display name in PlayerCharacter::AddKnownTopics, while INFO.linkedTo retains its own list order.",
+  "comment_repeatable": "Oblivion appends eligible ordinary MenuTopics in input-list order and performs no topic-priority sort here. Fallout's corresponding FillTopicList (x4y6:0x825E8740) sorts non-choice lists with PrioritySort (0x825E7390) by TESTopic priority; choice lists keep authored order. In Oblivion, the known-topic source is already sorted by display name in PlayerCharacter::AddKnownTopics, while INFO.linkedTo retains its own list order.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "MenuTopicManager::FillTopicList",
   "end_ea": "0x6B924B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B9010",
+  "name": "MenuTopicManager::FillTopicList",
   "segment": ".text",
   "sha256": "0afb317dbef22349287ffc01f4fa360df85c9b881ae776de132e5b9633d6aa72",
   "size": 571,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B9010",
-  "type": "void __thiscall(UnkBohBoh *this, tListTopic *)",
-  "xrefs_from_count": 233,
+  "total_chunk_size": 609,
+  "type": "void __thiscall(MenuTopicManagerView *this, tListTopic *topics)",
+  "xrefs_from_count": 247,
   "xrefs_to_count": 2
 }

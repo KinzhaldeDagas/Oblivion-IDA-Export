@@ -148,7 +148,7 @@
 0x68D00A: call    eax
 0x68D00C: mov     ecx, esi; this
 0x68D00E: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x68D016: call    ??1ActiveEffect@@UAE@XZ; ActiveEffect::~ActiveEffect(void)
+0x68D016: call    ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
 0x68D01B: mov     ecx, dword ptr [esp+24h+var_C]
 0x68D01F: mov     large fs:0, ecx
 0x68D026: pop     ecx
@@ -157,3 +157,24 @@
 0x68D029: pop     ebp
 0x68D02A: add     esp, 14h
 0x68D02D: retn
+0x9C5430: mov     ecx, [ebp-10h]; this
+0x9C5433: jmp     j_??1VampirismEffect@@UAE@XZ; VampirismEffect::~VampirismEffect(void)
+0x9C5438: mov     ecx, [ebp-10h]
+0x9C543B: add     ecx, 3Ch ; '<'; slot
+0x9C543E: jmp     NiPointerSlot_Release
+0x9C5443: mov     ecx, [ebp-10h]
+0x9C5446: add     ecx, 40h ; '@'; slot
+0x9C5449: jmp     NiPointerSlot_Release
+0x9C544E: mov     ecx, [ebp-10h]
+0x9C5451: add     ecx, 44h ; 'D'; slot
+0x9C5454: jmp     NiPointerSlot_Release
+0x9C5459: mov     ecx, [ebp-10h]
+0x9C545C: add     ecx, 48h ; 'H'; slot
+0x9C545F: jmp     NiPointerSlot_Release
+0x9C5464: mov     edx, [esp+arg_4]
+0x9C5468: lea     eax, [edx-14h]
+0x9C546B: mov     ecx, [edx-18h]
+0x9C546E: xor     ecx, eax
+0x9C5470: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5475: mov     eax, offset stru_AEDC08
+0x9C547A: jmp     ___CxxFrameHandler3

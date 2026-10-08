@@ -1,4 +1,4 @@
-0x70E0A0: push    0FFFFFFFFh
+0x70E0A0: push    0FFFFFFFFh; CULLING 2026-06-11 black-screen fix reference: Process wraps NiAVObject::Render; any expensive ProcessCull hot-path work stalls world load before first frame log.
 0x70E0A2: push    offset SEH_478070
 0x70E0A7: mov     eax, large fs:0
 0x70E0AD: push    eax
@@ -17,13 +17,13 @@
 0x70E0CB: xor     edi, edi
 0x70E0CD: cmp     ebx, edi
 0x70E0CF: jz      loc_70E188
-0x70E0D5: cmp     [esp+24h+arg_4], edi
+0x70E0D5: cmp     [esp+24h+root], edi
 0x70E0D9: jz      loc_70E188
 0x70E0DF: lea     eax, [ebx+0ECh]
 0x70E0E5: push    eax; a2
 0x70E0E6: mov     [esi+0Ch], ebx
-0x70E0E9: call    NiCullingProcess__SetFrustum
-0x70E0EE: mov     ebp, [esp+24h+arg_8]
+0x70E0E9: call    NiCullingProcess__SetFrustum; CULLING audit 2026-09-27: fresh camera frustum is built here; resets active mask to 0x3F even if caller set it to zero.
+0x70E0EE: mov     ebp, [esp+24h+visibleArray]
 0x70E0F2: cmp     ebp, edi
 0x70E0F4: mov     [esp+24h+var_10], edi
 0x70E0F8: jz      short loc_70E104
@@ -47,9 +47,9 @@
 0x70E136: push    ebx
 0x70E137: mov     ecx, edi
 0x70E139: call    edx
-0x70E13B: mov     ecx, [esp+24h+arg_4]; this
+0x70E13B: mov     ecx, [esp+24h+root]; this
 0x70E13F: push    esi; a2
-0x70E140: call    NiAVObject_Render
+0x70E140: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x70E145: test    edi, edi
 0x70E147: jz      short loc_70E152
 0x70E149: mov     eax, [edi]
@@ -61,7 +61,7 @@
 0x70E156: mov     eax, [esp+24h+var_10]
 0x70E15A: mov     [esi+8], eax
 0x70E15D: test    edi, edi
-0x70E15F: mov     dword ptr [esi+0Ch], 0
+0x70E15F: mov     dword ptr [esi+0Ch], 0; CULLING audit 2026-09-27: clears Camera instead of restoring a saved outer camera. Same-process recursive traversal is not made safe by restoring plugin TLS alone.
 0x70E166: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x70E16E: jz      short loc_70E188
 0x70E170: lea     ecx, [edi+4]
@@ -83,3 +83,12 @@
 0x70E197: pop     ebx
 0x70E198: add     esp, 10h
 0x70E19B: retn    0Ch
+0x9AEFA0: lea     ecx, [ebp+4]; slot
+0x9AEFA3: jmp     NiPointerSlot_Release
+0x9AEFA8: mov     edx, [esp+arg_4]
+0x9AEFAC: lea     eax, [edx-14h]
+0x9AEFAF: mov     ecx, [edx-18h]
+0x9AEFB2: xor     ecx, eax
+0x9AEFB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEFB9: mov     eax, offset stru_ADB650
+0x9AEFBE: jmp     ___CxxFrameHandler3

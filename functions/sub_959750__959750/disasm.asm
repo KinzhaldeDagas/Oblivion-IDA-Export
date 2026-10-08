@@ -60,7 +60,7 @@
 0x959833: movaps  [esp+100h+var_B0], xmm0
 0x959838: mov     eax, [esp+100h+var_E8]
 0x95983C: add     eax, 10h
-0x95983F: cmp     eax, offset unk_B2F0C0
+0x95983F: cmp     eax, offset dword_B2F0C0
 0x959844: mov     [esp+100h+var_E8], eax
 0x959848: jl      loc_959775
 0x95984E: fld     dword ptr ds:0A2F948h

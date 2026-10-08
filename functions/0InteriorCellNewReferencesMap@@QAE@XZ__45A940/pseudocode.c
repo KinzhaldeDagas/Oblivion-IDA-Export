@@ -1,16 +1,17 @@
-InteriorCellNewReferencesMap *__thiscall InteriorCellNewReferencesMap::InteriorCellNewReferencesMap(
-        InteriorCellNewReferencesMap *this)
+//
+// Verified: 37-bucket map; 0x94-byte zeroed bucket table; value type BSSimpleList<unsigned int>*. RTTI-backed vtable at A3A310. Probable Fallout homolog ctor 82601B90; shared bucket count and key/value role.
+InteriorCellNewReferencesMap *__thiscall InteriorCellNewReferencesMap_ctor(InteriorCellNewReferencesMap *self)
 {
-  int v2; // eax
-  int v4; // [esp-8h] [ebp-Ch]
+  InteriorCellNewReferencesMapEntry **v2; // eax
+  unsigned int v4; // [esp-8h] [ebp-Ch]
 
-  *((_DWORD *)this + 1) = 0x25;
-  *(_DWORD *)this = &NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,BSSimpleList<unsigned int> *>::`vftable';
-  *((_DWORD *)this + 3) = 0;
-  v2 = FormHeapAlloc(0x94u);
-  v4 = 4 * *((_DWORD *)this + 1);
-  *((_DWORD *)this + 2) = v2;
-  _memset(v2, 0, v4);
-  *(_DWORD *)this = &InteriorCellNewReferencesMap::`vftable';
-  return this;
+  self->bucketCount = 0x25; /*0x45a94a*/
+  self->vtable = (InteriorCellNewReferencesMapVtable *)&NiTMapBase<NiTPointerAllocator<unsigned int>,unsigned int,BSSimpleList<unsigned int> *>::`vftable'; /*0x45a957*/
+  self->entryCount = 0; /*0x45a95d*/
+  v2 = (InteriorCellNewReferencesMapEntry **)FormHeapAlloc(0x94u); /*0x45a969*/
+  v4 = 4 * self->bucketCount; /*0x45a975*/
+  self->buckets = v2; /*0x45a979*/
+  _memset((int)v2, 0, v4); /*0x45a97c*/
+  self->vtable = &InteriorCellNewReferencesMap::`vftable'; /*0x45a984*/
+  return self; /*0x45a98c*/
 }

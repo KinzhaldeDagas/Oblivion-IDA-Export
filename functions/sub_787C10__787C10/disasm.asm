@@ -1,6 +1,6 @@
-0x787C10: push    ecx
+0x787C10: push    ecx; Maps normalized/current tree LOD to an Oblivion discrete branch LOD; -1.0 selects instance or base-tree current LOD.
 0x787C11: fld     dword ptr ds:0A30634h
-0x787C17: fcomp   [esp+4+arg_0]
+0x787C17: fcomp   [esp+4+lod]
 0x787C1B: fnstsw  ax
 0x787C1D: test    ah, 44h
 0x787C20: jp      short loc_787C3F
@@ -11,18 +11,18 @@
 0x787C2C: jmp     short loc_787C33
 0x787C2E: mov     eax, [ecx]
 0x787C30: fld     dword ptr [eax+14h]
-0x787C33: fstp    [esp+4+arg_0]
-0x787C37: fld     [esp+4+arg_0]
-0x787C3B: fstp    [esp+4+arg_0]
+0x787C33: fstp    [esp+4+lod]
+0x787C37: fld     [esp+4+lod]
+0x787C3B: fstp    [esp+4+lod]
 0x787C3F: mov     ecx, [ecx]
-0x787C41: fld     [esp+4+arg_0]
+0x787C41: fld     [esp+4+lod]
 0x787C45: fld1
 0x787C47: push    esi
 0x787C48: movzx   esi, word ptr [ecx+70h]
 0x787C4C: fsubrp  st(1), st
 0x787C4E: mov     [esp+8+var_4], esi
 0x787C52: fimul   [esp+8+var_4]
-0x787C56: call    Double_To_SInt32
+0x787C56: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x787C5B: movzx   eax, ax
 0x787C5E: movsx   edx, ax
 0x787C61: cmp     edx, esi

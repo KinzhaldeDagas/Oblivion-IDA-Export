@@ -62,208 +62,208 @@ void __thiscall sub_72D480(
   unsigned int v60; // [esp+2Ch] [ebp+1Ch]
   unsigned int v61; // [esp+30h] [ebp+20h]
 
-  v9 = a3;
-  v10 = a3[2];
-  if ( v10 <= a8 )
-    LOWORD(v10) = a8;
-  *(_WORD *)(this + 0x20) = v10;
-  *(_WORD *)(this + 0x1E) = *(_WORD *)(a2 + 8);
+  v9 = a3; /*0x72d482*/
+  v10 = a3[2]; /*0x72d486*/
+  if ( v10 <= a8 ) /*0x72d494*/
+    LOWORD(v10) = a8; /*0x72d496*/
+  *(_WORD *)(this + 0x20) = v10; /*0x72d49c*/
+  *(_WORD *)(this + 0x1E) = *(_WORD *)(a2 + 8); /*0x72d4a4*/
   *(_DWORD *)(this + 4) = FormHeapAlloc(
                             (unsigned __int64)(unsigned __int16)v10 >> 0x1F != 0
                           ? 0xFFFFFFFF
                           : 2 * (unsigned __int16)v10);
-  for ( i = 0; i < *(unsigned __int16 *)(this + 0x20); *(_WORD *)(*(_DWORD *)(this + 4) + 2 * i++) = v13 )
+  for ( i = 0; i < *(unsigned __int16 *)(this + 0x20); *(_WORD *)(*(_DWORD *)(this + 4) + 2 * i++) = v13 ) /*0x72d4c9*/
   {
-    if ( i >= a3[2] )
-      v13 = 0;
+    if ( i >= a3[2] ) /*0x72d4d3*/
+      v13 = 0; /*0x72d4de*/
     else
-      v13 = *(_WORD *)(*a3 + 2 * i);
+      v13 = *(_WORD *)(*a3 + 2 * i); /*0x72d4d8*/
   }
-  v14 = sub_72CF50((_WORD *)this, (_DWORD *)a2, a4);
-  sub_72D090((unsigned __int16 *)this, (_DWORD *)a2, (int)a4, (int)v14);
-  FormHeapFree((unsigned int)v14);
-  v15 = *(unsigned __int16 *)(this + 0x1C);
-  v16 = 0;
+  v14 = sub_72CF50((_WORD *)this, (_DWORD *)a2, a4); /*0x72d503*/
+  sub_72D090((unsigned __int16 *)this, (_DWORD *)a2, (int)a4, (int)v14); /*0x72d50a*/
+  FormHeapFree((unsigned int)v14); /*0x72d510*/
+  v15 = *(unsigned __int16 *)(this + 0x1C); /*0x72d515*/
+  v16 = 0; /*0x72d519*/
   if ( a6 )
   {
-    *(_WORD *)(this + 0x24) = a8;
-    v17 = a8 * v15;
-    v18 = 4LL * v17;
-    LOBYTE(v16) = HIDWORD(v18) != 0;
-    *(_DWORD *)(this + 8) = FormHeapAlloc(v18 | -v16);
-    *(_DWORD *)(this + 0x10) = FormHeapAlloc(v17);
+    *(_WORD *)(this + 0x24) = a8; /*0x72d533*/
+    v17 = a8 * v15; /*0x72d53a*/
+    v18 = 4LL * v17; /*0x72d53f*/
+    LOBYTE(v16) = HIDWORD(v18) != 0; /*0x72d541*/
+    *(_DWORD *)(this + 8) = FormHeapAlloc(v18 | -v16); /*0x72d54f*/
+    *(_DWORD *)(this + 0x10) = FormHeapAlloc(v17); /*0x72d557*/
     v19 = FormHeapAlloc((unsigned __int64)a9 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * a9);
-    v20 = 0;
-    for ( j = v19; v20 < a3[2]; ++v20 )
-      *(_DWORD *)(v19 + 4 * *(unsigned __int16 *)(*(_DWORD *)(this + 4) + 2 * v20)) = v20;
-    v52 = *(float **)(this + 8);
-    v50 = *(_BYTE **)(this + 0x10);
+    v20 = 0; /*0x72d576*/
+    for ( j = v19; v20 < a3[2]; ++v20 ) /*0x72d57b*/
+      *(_DWORD *)(v19 + 4 * *(unsigned __int16 *)(*(_DWORD *)(this + 4) + 2 * v20)) = v20; /*0x72d58b*/
+    v52 = *(float **)(this + 8); /*0x72d59c*/
+    v50 = *(_BYTE **)(this + 0x10); /*0x72d5a4*/
     v21 = (float *)FormHeapAlloc(
                      (unsigned __int64)*(unsigned __int16 *)(this + 0x24) >> 0x1E != 0
                    ? 0xFFFFFFFF
                    : 4 * *(unsigned __int16 *)(this + 0x24));
-    v55 = FormHeapAlloc(*(unsigned __int16 *)(this + 0x24));
-    v59 = 0;
-    if ( *(_WORD *)(this + 0x1C) )
+    v55 = FormHeapAlloc(*(unsigned __int16 *)(this + 0x24)); /*0x72d5d2*/
+    v59 = 0; /*0x72d5d6*/
+    if ( *(_WORD *)(this + 0x1C) ) /*0x72d5cd*/
     {
-      v22 = flt_A3B888;
-      do
+      v22 = flt_A3B888; /*0x72d5e6*/
+      do /*0x72d6e3*/
       {
-        v23 = (_BYTE *)v55;
-        v24 = (_DWORD *)(a5 + 0xC * *(unsigned __int16 *)(*(_DWORD *)(this + 0xC) + 2 * v59));
-        v25 = 0;
-        v57 = v24;
-        for ( k = v21; v25 < v57[2]; ++v23 )
+        v23 = (_BYTE *)v55; /*0x72d5fb*/
+        v24 = (_DWORD *)(a5 + 0xC * *(unsigned __int16 *)(*(_DWORD *)(this + 0xC) + 2 * v59)); /*0x72d602*/
+        v25 = 0; /*0x72d605*/
+        v57 = v24; /*0x72d60a*/
+        for ( k = v21; v25 < v57[2]; ++v23 ) /*0x72d607*/
         {
-          v27 = *v24;
-          *k = *(float *)(v27 + 8 * v25 + 4);
-          *v23 = *(_BYTE *)(v19 + 4 * *(_DWORD *)(v27 + 8 * v25));
-          v24 = v57;
-          ++v25;
-          ++k;
+          v27 = *v24; /*0x72d612*/
+          *k = *(float *)(v27 + 8 * v25 + 4); /*0x72d61b*/
+          *v23 = *(_BYTE *)(v19 + 4 * *(_DWORD *)(v27 + 8 * v25)); /*0x72d622*/
+          v24 = v57; /*0x72d624*/
+          ++v25; /*0x72d628*/
+          ++k; /*0x72d62b*/
         }
-        for ( ; v25 < *(unsigned __int16 *)(this + 0x24); ++v23 )
+        for ( ; v25 < *(unsigned __int16 *)(this + 0x24); ++v23 ) /*0x72d63c*/
         {
-          ++v25;
-          *k = 0.0;
-          *v23 = 0;
-          ++k;
+          ++v25; /*0x72d640*/
+          *k = 0.0; /*0x72d643*/
+          *v23 = 0; /*0x72d645*/
+          ++k; /*0x72d64e*/
         }
-        v28 = 0;
-        if ( *(_WORD *)(this + 0x24) )
+        v28 = 0; /*0x72d658*/
+        if ( *(_WORD *)(this + 0x24) ) /*0x72d65a*/
         {
-          v29 = *(unsigned __int16 *)(this + 0x24);
-          do
+          v29 = *(unsigned __int16 *)(this + 0x24); /*0x72d660*/
+          do /*0x72d6cc*/
           {
-            v30 = 1;
-            v31 = 0;
-            v58 = *v21;
-            if ( *(_WORD *)(this + 0x24) > 1u )
+            v30 = 1; /*0x72d667*/
+            v31 = 0; /*0x72d66c*/
+            v58 = *v21; /*0x72d66e*/
+            if ( *(_WORD *)(this + 0x24) > 1u ) /*0x72d676*/
             {
-              do
+              do /*0x72d698*/
               {
-                if ( v58 < (double)v21[v30] )
+                if ( v58 < (double)v21[v30] ) /*0x72d687*/
                 {
-                  v31 = v30;
-                  v58 = v21[v30];
+                  v31 = v30; /*0x72d68d*/
+                  v58 = v21[v30]; /*0x72d68f*/
                 }
-                ++v30;
+                ++v30; /*0x72d693*/
               }
-              while ( v30 < v29 );
+              while ( v30 < v29 ); /*0x72d698*/
             }
-            *v52++ = v21[v31];
-            *v50 = *(_BYTE *)(v31 + v55);
-            v21[v31] = v22;
-            ++v50;
-            v29 = *(unsigned __int16 *)(this + 0x24);
-            ++v28;
+            *v52++ = v21[v31]; /*0x72d6a6*/
+            *v50 = *(_BYTE *)(v31 + v55); /*0x72d6b6*/
+            v21[v31] = v22; /*0x72d6b8*/
+            ++v50; /*0x72d6bf*/
+            v29 = *(unsigned __int16 *)(this + 0x24); /*0x72d6c3*/
+            ++v28; /*0x72d6c7*/
           }
-          while ( v28 < v29 );
+          while ( v28 < v29 ); /*0x72d6cc*/
         }
-        v19 = j;
-        ++v59;
+        v19 = j; /*0x72d6d6*/
+        ++v59; /*0x72d6df*/
       }
-      while ( v59 < *(unsigned __int16 *)(this + 0x1C) );
+      while ( v59 < *(unsigned __int16 *)(this + 0x1C) ); /*0x72d6e3*/
     }
-    FormHeapFree((unsigned int)v21);
-    FormHeapFree(v55);
-    FormHeapFree(v19);
+    FormHeapFree((unsigned int)v21); /*0x72d6ee*/
+    FormHeapFree(v55); /*0x72d6f8*/
+    FormHeapFree(v19); /*0x72d6fe*/
   }
   else
   {
-    v32 = *(_WORD *)(this + 0x20);
-    *(_WORD *)(this + 0x24) = v32;
-    v33 = v32 * v15;
-    v34 = 4LL * v33;
-    LOBYTE(v16) = HIDWORD(v34) != 0;
-    v61 = v33;
-    v35 = FormHeapAlloc(v34 | -v16);
-    v36 = 0;
-    v37 = *(_WORD *)(this + 0x1C) == 0;
-    v38 = (float *)v35;
-    *(_DWORD *)(this + 8) = v35;
-    v56 = (float *)v35;
-    v60 = 0;
-    if ( !v37 )
+    v32 = *(_WORD *)(this + 0x20); /*0x72d70d*/
+    *(_WORD *)(this + 0x24) = v32; /*0x72d711*/
+    v33 = v32 * v15; /*0x72d718*/
+    v34 = 4LL * v33; /*0x72d71d*/
+    LOBYTE(v16) = HIDWORD(v34) != 0; /*0x72d71f*/
+    v61 = v33; /*0x72d722*/
+    v35 = FormHeapAlloc(v34 | -v16); /*0x72d72b*/
+    v36 = 0; /*0x72d730*/
+    v37 = *(_WORD *)(this + 0x1C) == 0; /*0x72d735*/
+    v38 = (float *)v35; /*0x72d739*/
+    *(_DWORD *)(this + 8) = v35; /*0x72d73b*/
+    v56 = (float *)v35; /*0x72d73e*/
+    v60 = 0; /*0x72d742*/
+    if ( !v37 ) /*0x72d746*/
     {
-      do
+      do /*0x72d7e9*/
       {
-        v39 = (_DWORD *)(a5 + 0xC * *(unsigned __int16 *)(*(_DWORD *)(this + 0xC) + 2 * v36));
-        v40 = 0;
-        v54 = v39;
-        if ( v9[2] )
+        v39 = (_DWORD *)(a5 + 0xC * *(unsigned __int16 *)(*(_DWORD *)(this + 0xC) + 2 * v36)); /*0x72d75c*/
+        v40 = 0; /*0x72d75f*/
+        v54 = v39; /*0x72d764*/
+        if ( v9[2] ) /*0x72d761*/
         {
-          while ( 1 )
+          while ( 1 ) /*0x72d770*/
           {
-            v41 = v39[2];
-            v42 = 0;
-            if ( v41 )
+            v41 = v39[2]; /*0x72d770*/
+            v42 = 0; /*0x72d773*/
+            if ( v41 ) /*0x72d777*/
             {
-              v43 = (_DWORD *)*v39;
-              v44 = *(unsigned __int16 *)(*v9 + 2 * v40);
-              v45 = v43;
-              while ( *v45 != v44 )
+              v43 = (_DWORD *)*v39; /*0x72d77c*/
+              v44 = *(unsigned __int16 *)(*v9 + 2 * v40); /*0x72d77e*/
+              v45 = v43; /*0x72d782*/
+              while ( *v45 != v44 ) /*0x72d786*/
               {
-                ++v42;
-                v45 += 2;
-                if ( v42 >= v41 )
+                ++v42; /*0x72d78c*/
+                v45 += 2; /*0x72d78f*/
+                if ( v42 >= v41 ) /*0x72d794*/
                 {
-                  v9 = a3;
-                  v38 = v56;
-                  goto LABEL_35;
+                  v9 = a3; /*0x72d796*/
+                  v38 = v56; /*0x72d79a*/
+                  goto LABEL_35; /*0x72d79a*/
                 }
               }
-              v9 = a3;
-              v38 = v56;
-              v51 = *(float *)&v43[2 * v42 + 1];
+              v9 = a3; /*0x72d846*/
+              v38 = v56; /*0x72d84a*/
+              v51 = *(float *)&v43[2 * v42 + 1]; /*0x72d84e*/
             }
             else
             {
 LABEL_35:
-              v51 = 0.0;
+              v51 = 0.0; /*0x72d79e*/
             }
-            ++v38;
-            v38[0xFFFFFFFF] = v51;
-            ++v40;
-            v56 = v38;
-            if ( v40 >= v9[2] )
-              break;
-            v39 = v54;
+            ++v38; /*0x72d7a6*/
+            v38[0xFFFFFFFF] = v51; /*0x72d7a9*/
+            ++v40; /*0x72d7ac*/
+            v56 = v38; /*0x72d7b2*/
+            if ( v40 >= v9[2] ) /*0x72d7b6*/
+              break; /*0x72d7b6*/
+            v39 = v54; /*0x72d76c*/
           }
-          v36 = v60;
-          v33 = v61;
+          v36 = v60; /*0x72d7b8*/
+          v33 = v61; /*0x72d7bc*/
         }
-        if ( v40 < *(unsigned __int16 *)(this + 0x20) )
+        if ( v40 < *(unsigned __int16 *)(this + 0x20) ) /*0x72d7c6*/
         {
-          do
+          do /*0x72d7d6*/
           {
-            *v38 = 0.0;
-            ++v40;
-            ++v38;
+            *v38 = 0.0; /*0x72d7c8*/
+            ++v40; /*0x72d7ce*/
+            ++v38; /*0x72d7d1*/
           }
-          while ( v40 < *(unsigned __int16 *)(this + 0x20) );
-          v56 = v38;
+          while ( v40 < *(unsigned __int16 *)(this + 0x20) ); /*0x72d7d6*/
+          v56 = v38; /*0x72d7d8*/
         }
-        v60 = ++v36;
+        v60 = ++v36; /*0x72d7e5*/
       }
-      while ( v36 < *(unsigned __int16 *)(this + 0x1C) );
+      while ( v36 < *(unsigned __int16 *)(this + 0x1C) ); /*0x72d7e9*/
     }
-    if ( a7 )
+    if ( a7 ) /*0x72d7f6*/
     {
-      v46 = FormHeapAlloc(v33);
-      v47 = 0;
-      v37 = *(_WORD *)(this + 0x1C) == 0;
-      *(_DWORD *)(this + 0x10) = v46;
-      v48 = (_BYTE *)v46;
-      if ( !v37 )
+      v46 = FormHeapAlloc(v33); /*0x72d7f9*/
+      v47 = 0; /*0x72d7fe*/
+      v37 = *(_WORD *)(this + 0x1C) == 0; /*0x72d803*/
+      *(_DWORD *)(this + 0x10) = v46; /*0x72d807*/
+      v48 = (_BYTE *)v46; /*0x72d80a*/
+      if ( !v37 ) /*0x72d80c*/
       {
-        do
+        do /*0x72d839*/
         {
-          for ( m = 0; m < *(unsigned __int16 *)(this + 0x20); *v48++ = m++ )
-            ;
-          ++v47;
+          for ( m = 0; m < *(unsigned __int16 *)(this + 0x20); *v48++ = m++ ) /*0x72d812*/
+            ; /*0x72d820*/
+          ++v47; /*0x72d834*/
         }
-        while ( v47 < *(unsigned __int16 *)(this + 0x1C) );
+        while ( v47 < *(unsigned __int16 *)(this + 0x1C) ); /*0x72d839*/
       }
     }
   }

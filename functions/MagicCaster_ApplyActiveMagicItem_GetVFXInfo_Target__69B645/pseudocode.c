@@ -30,46 +30,15 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetVFXInfo_Target@<eax>(
         int a29,
         int a30,
         int a31,
-        int a32)
+        int a32,
+        int a33)
 {
-  bool v32; // al
+  bool v33; // al
 
-  v32 = a13 && *(char *)(a13 + 0x40) < 0;
-  if ( a1 || a8 && v32 )
-    return MagicCaster_ApplyActiveMagicItem_::GetVFXInfo_Position_(
-             a3,
-             a4,
-             a5,
-             a6,
-             a7,
-             a8,
-             a9,
-             a10,
-             a11,
-             a12,
-             a13,
-             a14,
-             a15,
-             a16,
-             a17,
-             LODWORD(a18),
-             HIDWORD(a18),
-             a19,
-             a20,
-             a21,
-             a22,
-             a23,
-             a24,
-             a25,
-             a26,
-             a27,
-             a28,
-             a29,
-             a30,
-             a31,
-             a32);
-  else
-    return MagicCaster_ApplyActiveMagicItem_::AfterVFX(
+  v33 = a13 && *(char *)(a13 + 0x40) < 0; /*0x69b653*/
+  if ( a1 ) /*0x69b65b*/
+    return MagicCaster_ApplyActiveMagicItem_::GetVFXInfo_Position_( /*0x69b65f*/
+             (int)a1,
              a2,
              a3,
              a4,
@@ -86,8 +55,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetVFXInfo_Target@<eax>(
              a15,
              a16,
              a17,
-             SLODWORD(a18),
-             SHIDWORD(a18),
+             a18,
              a19,
              a20,
              a21,
@@ -100,5 +68,43 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetVFXInfo_Target@<eax>(
              a28,
              a29,
              a30,
-             a31);
+             a31,
+             a32,
+             a33);
+  if ( !a8 || !v33 ) /*0x69b66e*/
+    JUMPOUT(0x69B974); /*0x69b974*/
+  return MagicCaster_ApplyActiveMagicItem_::GetVFXInfo_Position_(
+           (int)a8,
+           a2,
+           a3,
+           a4,
+           a5,
+           a6,
+           a7,
+           (int)a8,
+           a9,
+           a10,
+           a11,
+           a12,
+           a13,
+           a14,
+           a15,
+           a16,
+           a17,
+           a18,
+           a19,
+           a20,
+           a21,
+           a22,
+           a23,
+           a24,
+           a25,
+           a26,
+           a27,
+           a28,
+           a29,
+           a30,
+           a31,
+           a32,
+           a33);
 }

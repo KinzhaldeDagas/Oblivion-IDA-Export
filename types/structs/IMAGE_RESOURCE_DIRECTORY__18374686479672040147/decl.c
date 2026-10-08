@@ -1,1 +1,9 @@
-_IMAGE_RESOURCE_DIRECTORY
+struct _IMAGE_RESOURCE_DIRECTORY
+{
+DWORD Characteristics;
+DWORD TimeDateStamp;
+WORD MajorVersion;
+WORD MinorVersion;
+WORD NumberOfNamedEntries;
+WORD NumberOfIdEntries;
+};

@@ -43,7 +43,7 @@
 0x4F752C: fstp    [esp+44h+var_8]
 0x4F7530: fld     dword ptr [esp+44h+var_18]
 0x4F7534: fstp    [esp+44h+var_4]
-0x4F7538: call    sub_683CB0
+0x4F7538: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x4F753D: mov     edx, [esi]
 0x4F753F: fstp    dword ptr [esp+44h+var_18]
 0x4F7543: fld     dword ptr [esp+44h+var_18]

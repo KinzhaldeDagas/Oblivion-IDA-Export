@@ -31,7 +31,7 @@
 0x4E273D: movsx   ecx, byte ptr [esi+9]
 0x4E2741: sub     ecx, 12h
 0x4E2744: push    ecx; a1
-0x4E2745: call    TESForm_LookupByFormID
+0x4E2745: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E274A: add     esp, 4
 0x4E274D: jmp     short loc_4E2776
 0x4E274F: movsx   edx, byte ptr [esi+9]
@@ -45,7 +45,7 @@
 0x4E2765: call    _tolower
 0x4E276A: sub     eax, 39h ; '9'
 0x4E276D: push    eax; a1
-0x4E276E: call    TESForm_LookupByFormID
+0x4E276E: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E2773: add     esp, 8
 0x4E2776: mov     ebx, eax
 0x4E2778: xor     ebp, ebp
@@ -75,12 +75,12 @@
 0x4E27BF: mov     eax, [esi]
 0x4E27C1: mov     edx, [eax+8Ch]
 0x4E27C7: push    ebp
-0x4E27C8: lea     ecx, [esp+18h+var_4]
+0x4E27C8: lea     ecx, [esp+18h+slot]
 0x4E27CC: push    ecx
 0x4E27CD: mov     ecx, esi
 0x4E27CF: call    edx
-0x4E27D1: lea     ecx, [esp+14h+var_4]; this
-0x4E27D5: call    sub_7016A0
+0x4E27D1: lea     ecx, [esp+14h+slot]; slot
+0x4E27D5: call    NiPointerSlot_Release
 0x4E27DA: movzx   eax, word ptr [edi+0B6h]
 0x4E27E1: add     ebp, 1
 0x4E27E4: cmp     ebp, eax
@@ -110,7 +110,7 @@
 0x4E2824: test    esi, esi
 0x4E2826: jz      short loc_4E2887
 0x4E2828: push    0; Seed
-0x4E282A: call    GetRandomLargeInteger?
+0x4E282A: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4E282F: cdq
 0x4E2830: mov     ecx, 3E8h
 0x4E2835: idiv    ecx
@@ -132,8 +132,8 @@
 0x4E2868: mov     byte ptr [esp+14h+arg_0], 1
 0x4E286D: jmp     short loc_4E2887
 0x4E286F: push    offset aFlamecap; "FlameCap"
-0x4E2874: push    esi; Str1
-0x4E2875: call    __strcmp
+0x4E2874: push    esi; left
+0x4E2875: call    CRT_StricmpLocaleDispatch
 0x4E287A: add     esp, 8
 0x4E287D: test    eax, eax
 0x4E287F: jnz     short loc_4E2887
@@ -152,7 +152,7 @@
 0x4E28AC: mov     edx, [eax+4]
 0x4E28AF: mov     ecx, esi
 0x4E28B1: call    edx
-0x4E28B3: cmp     eax, offset dword_B3FAB0
+0x4E28B3: cmp     eax, offset parent
 0x4E28B8: setz    al
 0x4E28BB: test    al, al
 0x4E28BD: jz      short loc_4E28D1

@@ -1,4 +1,4 @@
-0x7FAC40: push    0FFFFFFFFh
+0x7FAC40: push    0FFFFFFFFh; MoonSugarEffect build 25: Lighting30 constructor clears selector-state byte arrays B46964..B46984 and pixel row bytes B46930[0..0x30] before selector population.
 0x7FAC42: push    offset ??0Lighting30Shader@@QAE@XZ_SEH
 0x7FAC47: mov     eax, large fs:0
 0x7FAC4D: push    eax
@@ -27,7 +27,7 @@
 0x7FAC9D: mov     [esi+94h], ebx
 0x7FACA3: mov     [esi+98h], ebx
 0x7FACA9: mov     edi, [esi+24h]
-0x7FACAC: mov     ebp, [esp+24h+arg_0]
+0x7FACAC: mov     ebp, [esp+24h+objectDeclaration]
 0x7FACB0: cmp     edi, ebp
 0x7FACB2: mov     byte ptr [esp+24h+var_4], 8
 0x7FACB7: jz      short loc_7FACEA
@@ -75,7 +75,7 @@
 0x7FAD21: push    ebp; lpAddend
 0x7FAD22: call    dword ptr ds:0A28078h
 0x7FAD28: mov     edi, [esi+90h]
-0x7FAD2E: mov     ebp, [esp+24h+arg_4]
+0x7FAD2E: mov     ebp, [esp+24h+skinDeclaration]
 0x7FAD32: cmp     edi, ebp
 0x7FAD34: jz      short loc_7FAD6A
 0x7FAD36: cmp     edi, ebx
@@ -99,7 +99,7 @@
 0x7FAD63: push    ebp; lpAddend
 0x7FAD64: call    dword ptr ds:0A28078h
 0x7FAD6A: mov     edi, [esi+94h]
-0x7FAD70: mov     ebp, [esp+24h+arg_8]
+0x7FAD70: mov     ebp, [esp+24h+alternate4Declaration]
 0x7FAD74: cmp     edi, ebp
 0x7FAD76: jz      short loc_7FADAC
 0x7FAD78: cmp     edi, ebx
@@ -123,7 +123,7 @@
 0x7FADA5: push    ebp; lpAddend
 0x7FADA6: call    dword ptr ds:0A28078h
 0x7FADAC: mov     edi, [esi+98h]
-0x7FADB2: mov     ebp, [esp+24h+arg_C]
+0x7FADB2: mov     ebp, [esp+24h+alternate8Declaration]
 0x7FADB6: cmp     edi, ebp
 0x7FADB8: jz      short loc_7FADEE
 0x7FADBA: cmp     edi, ebx
@@ -215,7 +215,7 @@
 0x7FAE90: mov     [esi+9Ch], ebx
 0x7FAE96: push    31h ; '1'
 0x7FAE98: push    ebx
-0x7FAE99: push    offset byte_B46930
+0x7FAE99: push    offset unk_B46930
 0x7FAE9E: mov     ds:0B46964h, eax
 0x7FAEA3: mov     ds:0B46968h, eax
 0x7FAEA8: mov     ds:0B4696Ch, eax
@@ -240,3 +240,36 @@
 0x7FAEF7: pop     ebx
 0x7FAEF8: add     esp, 10h
 0x7FAEFB: retn    10h
+0x9D0530: mov     ecx, [ebp-10h]; this
+0x9D0533: jmp     ??1BSShader@@UAE@XZ;
+0x9D0538: mov     ecx, [ebp-10h]
+0x9D053B: add     ecx, 7Ch ; '|'; slot
+0x9D053E: jmp     NiPointerSlot_Release
+0x9D0543: mov     ecx, [ebp-10h]
+0x9D0546: add     ecx, 80h ; '€'; slot
+0x9D054C: jmp     NiPointerSlot_Release
+0x9D0551: mov     ecx, [ebp-10h]
+0x9D0554: add     ecx, 84h ; '„'; slot
+0x9D055A: jmp     NiPointerSlot_Release
+0x9D055F: mov     ecx, [ebp-10h]
+0x9D0562: add     ecx, 88h ; 'ˆ'; slot
+0x9D0568: jmp     NiPointerSlot_Release
+0x9D056D: mov     ecx, [ebp-10h]
+0x9D0570: add     ecx, 8Ch ; 'Œ'; slot
+0x9D0576: jmp     NiPointerSlot_Release
+0x9D057B: mov     ecx, [ebp-10h]
+0x9D057E: add     ecx, 90h; slot
+0x9D0584: jmp     NiPointerSlot_Release
+0x9D0589: mov     ecx, [ebp-10h]
+0x9D058C: add     ecx, 94h ; '”'; slot
+0x9D0592: jmp     NiPointerSlot_Release
+0x9D0597: mov     ecx, [ebp-10h]
+0x9D059A: add     ecx, 98h ; '˜'; slot
+0x9D05A0: jmp     NiPointerSlot_Release
+0x9D05A5: mov     edx, [esp+arg_4]
+0x9D05A9: lea     eax, [edx-14h]
+0x9D05AC: mov     ecx, [edx-18h]
+0x9D05AF: xor     ecx, eax
+0x9D05B1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D05B6: mov     eax, offset stru_AF8ED8
+0x9D05BB: jmp     ___CxxFrameHandler3

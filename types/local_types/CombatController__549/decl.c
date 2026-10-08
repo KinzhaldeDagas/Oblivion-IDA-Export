@@ -1,1 +1,1 @@
-CombatController
+struct CombatController;

@@ -1,4 +1,4 @@
-0x798290: mov     edx, [esp+arg_0]
+0x798290: mov     edx, [esp+windEngine]; SpeedTree decode: CLeafGeometry ctor. Initializes compact 0x30-byte stock leaf-geometry container: manual-lighting=false, vertex-weighting=false, CWindEngine*, default 3 rocking groups, leaf vertex/texcoord/program-table/dim/origin pointers null, texture and LOD counts zero.
 0x798294: mov     eax, ecx
 0x798296: xor     ecx, ecx
 0x798298: mov     [eax], cl

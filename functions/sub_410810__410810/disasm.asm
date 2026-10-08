@@ -1,4 +1,4 @@
-0x410810: mov     ecx, ObjectPtr
+0x410810: mov     ecx, ds:0B33428h
 0x410816: test    ecx, ecx
 0x410818: jz      short loc_410830
 0x41081A: cmp     dword ptr [ecx+20h], 0

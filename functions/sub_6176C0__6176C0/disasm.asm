@@ -3,12 +3,12 @@
 0x6176C2: push    esi
 0x6176C3: push    edi
 0x6176C4: mov     edi, ecx
-0x6176C6: call    sub_567D20
+0x6176C6: call    TESPackage_GetSaveSize
 0x6176CB: mov     ecx, ds:0B33B00h
 0x6176D1: movzx   esi, ax
 0x6176D4: mov     [esp+10h+var_4], esi
 0x6176D8: movzx   ebx, si
-0x6176DB: call    sub_45A170
+0x6176DB: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6176E0: test    al, al
 0x6176E2: jz      short loc_6176E7
 0x6176E4: add     esi, 6
@@ -162,7 +162,7 @@
 0x6178BE: jz      short loc_617907
 0x6178C0: mov     eax, [esi]
 0x6178C2: push    eax; a1
-0x6178C3: call    TESForm_LookupByFormID
+0x6178C3: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6178C8: mov     ecx, [esi+5]
 0x6178CB: mov     edx, [eax]
 0x6178CD: add     esp, 4

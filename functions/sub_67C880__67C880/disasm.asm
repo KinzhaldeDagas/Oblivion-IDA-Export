@@ -1,4 +1,4 @@
-0x67C880: sub     esp, 14h
+0x67C880: sub     esp, 14h; Builds temporary BSSimpleList of combat-group friendly entry pointers: same team byte, mount/rider equivalence, and shouldActorFight<=0. arg=0 disables process-level filter.
 0x67C883: mov     eax, [esp+14h+arg_4]
 0x67C887: mov     ecx, [ecx]
 0x67C889: push    ebx

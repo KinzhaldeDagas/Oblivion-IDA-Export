@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x46B60A",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x46B610",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x46B616",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46B617",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },

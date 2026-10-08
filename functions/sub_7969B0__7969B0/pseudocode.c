@@ -1,148 +1,152 @@
-void __thiscall sub_7969B0(unsigned int *this)
+// OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::DeleteIndexData frees every owned unsigned-short strip buffer, nulls the pointer slots, clears each inner pointer vector, then empties the per-LOD strip container.
+//
+// [2026-10-03 index ownership closure] Native DeleteIndexData frees every strip allocation and nulls/clears pointer containers; CombineStrips subsequently deep-assigns replacement length/pointer/triangle vectors. The plugin bounded frond combiner follows equivalent ownership using FormHeap allocations and retains outer vector objects/allocator words while replacing validated inner POD spans. No strip buffers are reference-counted or shared by design.
+void __thiscall OB_CIndexedGeometry_DeleteIndexData_010201A0(OB_CIndexedGeometry_010201A0 *this)
 {
   unsigned int v1; // edi
   int v2; // ebp
-  unsigned int v4; // ecx
+  OB_stVectorUShortPtr_010201A0 *begin; // ecx
   unsigned int i; // ebx
-  int v6; // ecx
-  int v7; // eax
+  OB_stVectorUShortPtr_010201A0 *v6; // ecx
+  OB_stVectorUShortPtr_010201A0 *v7; // eax
   int v8; // ecx
-  int v9; // eax
-  int v10; // ecx
-  int v11; // edi
+  char *v9; // eax
+  OB_stVectorUShortPtr_010201A0 *v10; // ecx
+  OB_stVectorUShortPtr_010201A0 *v11; // edi
   int v12; // ecx
-  int v13; // edi
-  int v14; // ecx
-  int v15; // edi
+  char *v13; // edi
+  OB_stVectorUShortPtr_010201A0 *v14; // ecx
+  OB_stVectorUShortPtr_010201A0 *v15; // edi
   int v16; // ecx
-  int v17; // edi
+  char *v17; // edi
   int v18; // edx
-  int v19; // ecx
-  int v20; // edi
+  OB_stVectorUShortPtr_010201A0 *v19; // ecx
+  OB_stVectorUShortPtr_010201A0 *v20; // edi
   char *v21; // ebx
-  int v22; // edi
+  char *v22; // edi
   char *v23; // ebp
   int v24; // eax
-  unsigned int v25; // edi
-  unsigned int v26; // ebx
-  int v27; // ebp
-  unsigned int *v28; // ebx
-  unsigned int v29; // eax
-  unsigned int *v30; // ebp
-  unsigned int *v31; // edi
+  OB_stVectorUShortPtr_010201A0 *end; // edi
+  OB_stVectorUShortPtr_010201A0 *v26; // ebx
+  OB_stVectorUShortPtr_010201A0 *v27; // ebp
+  OB_stVectorUShortPtr_010201A0 *v28; // ebx
+  int v29; // eax
+  OB_stVectorUShortPtr_010201A0 *v30; // ebp
+  unsigned int *p_begin; // edi
   rsize_t v32; // [esp-Ch] [ebp-28h]
   rsize_t v33; // [esp+0h] [ebp-1Ch]
   unsigned int v34; // [esp+10h] [ebp-Ch]
   int v35; // [esp+14h] [ebp-8h]
   char *v36; // [esp+18h] [ebp-4h]
-  unsigned int v37; // [esp+18h] [ebp-4h]
-  unsigned int j; // [esp+18h] [ebp-4h]
+  OB_stVectorUShortPtr_010201A0 *v37; // [esp+18h] [ebp-4h]
+  int j; // [esp+18h] [ebp-4h]
 
-  v1 = 0;
-  v2 = 0;
-  v34 = 0;
-  v35 = 0;
-  while ( 1 )
+  v1 = 0; /*0x7969b7*/
+  v2 = 0; /*0x7969b9*/
+  v34 = 0; /*0x7969bd*/
+  v35 = 0; /*0x7969c1*/
+  while ( 1 ) /*0x7969c5*/
   {
-    v4 = *(this + 0x13);
-    if ( !v4 || v1 >= (int)(*(this + 0x14) - v4) >> 4 )
-      break;
-    for ( i = 0; ; ++i )
+    begin = this->perLodStrips.begin; /*0x7969c5*/
+    if ( !begin || v1 >= this->perLodStrips.end - begin ) /*0x7969da*/
+      break; /*0x7969da*/
+    for ( i = 0; ; ++i ) /*0x7969e0*/
     {
-      v6 = *(this + 0x13);
-      if ( !v6 || v1 >= (int)(*(this + 0x14) - v6) >> 4 )
-        _invalid_parameter_noinfo();
-      v7 = *(this + 0x13);
-      v8 = *(_DWORD *)(v7 + v2 + 4);
-      v9 = v2 + v7;
-      if ( !v8 || i >= (*(_DWORD *)(v9 + 8) - v8) >> 2 )
-        break;
-      v10 = *(this + 0x13);
-      if ( !v10 || v1 >= (int)(*(this + 0x14) - v10) >> 4 )
-        _invalid_parameter_noinfo();
-      v11 = *(this + 0x13);
-      v12 = *(_DWORD *)(v11 + v2 + 4);
-      v13 = v2 + v11;
-      if ( !v12 || i >= (*(_DWORD *)(v13 + 8) - v12) >> 2 )
-        _invalid_parameter_noinfo();
-      FormHeapFree(*(_DWORD *)(*(_DWORD *)(v13 + 4) + 4 * i));
-      v14 = *(this + 0x13);
-      if ( !v14 || v34 >= (int)(*(this + 0x14) - v14) >> 4 )
-        _invalid_parameter_noinfo();
-      v15 = *(this + 0x13);
-      v16 = *(_DWORD *)(v15 + v2 + 4);
-      v17 = v2 + v15;
-      if ( !v16 || i >= (*(_DWORD *)(v17 + 8) - v16) >> 2 )
-        _invalid_parameter_noinfo();
-      v18 = *(_DWORD *)(v17 + 4);
-      v1 = v34;
-      *(_DWORD *)(v18 + 4 * i) = 0;
+      v6 = this->perLodStrips.begin; /*0x7969e2*/
+      if ( !v6 || v1 >= this->perLodStrips.end - v6 ) /*0x7969f3*/
+        _invalid_parameter_noinfo(); /*0x7969f5*/
+      v7 = this->perLodStrips.begin; /*0x7969fa*/
+      v8 = *(int *)((char *)&v7->begin + v2); /*0x7969fd*/
+      v9 = (char *)v7 + v2; /*0x796a01*/
+      if ( !v8 || i >= (*((_DWORD *)v9 + 2) - v8) >> 2 ) /*0x796a15*/
+        break; /*0x796a15*/
+      v10 = this->perLodStrips.begin; /*0x796a1b*/
+      if ( !v10 || v1 >= this->perLodStrips.end - v10 ) /*0x796a2c*/
+        _invalid_parameter_noinfo(); /*0x796a2e*/
+      v11 = this->perLodStrips.begin; /*0x796a33*/
+      v12 = *(int *)((char *)&v11->begin + v2); /*0x796a36*/
+      v13 = (char *)v11 + v2; /*0x796a3a*/
+      if ( !v12 || i >= (*((_DWORD *)v13 + 2) - v12) >> 2 ) /*0x796a4a*/
+        _invalid_parameter_noinfo(); /*0x796a4c*/
+      FormHeapFree(*(_DWORD *)(*((_DWORD *)v13 + 1) + 4 * i)); /*0x796a58*/
+      v14 = this->perLodStrips.begin; /*0x796a5d*/
+      if ( !v14 || v34 >= this->perLodStrips.end - v14 ) /*0x796a73*/
+        _invalid_parameter_noinfo(); /*0x796a75*/
+      v15 = this->perLodStrips.begin; /*0x796a7a*/
+      v16 = *(int *)((char *)&v15->begin + v2); /*0x796a7d*/
+      v17 = (char *)v15 + v2; /*0x796a81*/
+      if ( !v16 || i >= (*((_DWORD *)v17 + 2) - v16) >> 2 ) /*0x796a91*/
+        _invalid_parameter_noinfo(); /*0x796a93*/
+      v18 = *((_DWORD *)v17 + 1); /*0x796a98*/
+      v1 = v34; /*0x796a9b*/
+      *(_DWORD *)(v18 + 4 * i) = 0; /*0x796a9f*/
     }
-    v19 = *(this + 0x13);
-    if ( !v19 || v1 >= (int)(*(this + 0x14) - v19) >> 4 )
-      _invalid_parameter_noinfo();
-    v20 = *(this + 0x13);
-    v21 = *(char **)(v20 + v2 + 8);
-    v22 = v2 + v20;
-    if ( *(_DWORD *)(v22 + 4) > (unsigned int)v21 )
-      _invalid_parameter_noinfo();
-    v23 = *(char **)(v22 + 4);
-    if ( (unsigned int)v23 > *(_DWORD *)(v22 + 8) )
-      _invalid_parameter_noinfo();
-    if ( v23 != v21 )
+    v19 = this->perLodStrips.begin; /*0x796aae*/
+    if ( !v19 || v1 >= this->perLodStrips.end - v19 ) /*0x796abf*/
+      _invalid_parameter_noinfo(); /*0x796ac1*/
+    v20 = this->perLodStrips.begin; /*0x796ac6*/
+    v21 = *(char **)((char *)&v20->end + v2); /*0x796ac9*/
+    v22 = (char *)v20 + v2; /*0x796acd*/
+    if ( *((_DWORD *)v22 + 1) > (unsigned int)v21 ) /*0x796ad2*/
+      _invalid_parameter_noinfo(); /*0x796ad4*/
+    v23 = *((char **)v22 + 1); /*0x796ad9*/
+    if ( (unsigned int)v23 > *((_DWORD *)v22 + 2) ) /*0x796adf*/
+      _invalid_parameter_noinfo(); /*0x796ae1*/
+    if ( v23 != v21 ) /*0x796ae8*/
     {
-      v24 = (*(_DWORD *)(v22 + 8) - (int)v21) >> 2;
-      v36 = &v23[4 * v24];
-      if ( v24 > 0 )
+      v24 = (*((_DWORD *)v22 + 2) - (int)v21) >> 2; /*0x796aef*/
+      v36 = &v23[4 * v24]; /*0x796afe*/
+      if ( v24 > 0 ) /*0x796b02*/
       {
-        HIDWORD(v32) = v21;
-        LODWORD(v32) = 4 * v24;
-        memmove_s(v23, v32, (const void *)(4 * v24), v33);
+        HIDWORD(v32) = v21; /*0x796b05*/
+        LODWORD(v32) = 4 * v24; /*0x796b06*/
+        memmove_s(v23, v32, (const void *)(4 * v24), v33); /*0x796b08*/
       }
-      *(_DWORD *)(v22 + 8) = v36;
+      *((_DWORD *)v22 + 2) = v36; /*0x796b14*/
     }
-    ++v34;
-    v35 += 0x10;
-    v2 = v35;
-    v1 = v34;
+    ++v34; /*0x796b17*/
+    v35 += 0x10; /*0x796b1c*/
+    v2 = v35; /*0x796b21*/
+    v1 = v34; /*0x796b25*/
   }
-  v25 = *(this + 0x14);
-  if ( v4 > v25 )
-    _invalid_parameter_noinfo();
-  v26 = *(this + 0x13);
-  v37 = v26;
-  if ( v26 > *(this + 0x14) )
-    _invalid_parameter_noinfo();
-  if ( v26 != v25 )
+  end = this->perLodStrips.end; /*0x796b2e*/
+  if ( begin > end ) /*0x796b33*/
+    _invalid_parameter_noinfo(); /*0x796b35*/
+  v26 = this->perLodStrips.begin; /*0x796b3a*/
+  v37 = v26; /*0x796b40*/
+  if ( v26 > this->perLodStrips.end ) /*0x796b44*/
+    _invalid_parameter_noinfo(); /*0x796b46*/
+  if ( v26 != end ) /*0x796b4d*/
   {
-    v27 = *(this + 0x14);
-    v28 = (unsigned int *)(v26 + 0x10 * ((int)(v27 - v25) >> 4));
-    if ( v25 != v27 )
+    v27 = this->perLodStrips.end; /*0x796b4f*/
+    v28 = &v26[v27 - end]; /*0x796b60*/
+    if ( end != v27 ) /*0x796b64*/
     {
-      v29 = v37 - v25;
-      for ( j = v37 - v25; ; v29 = j )
+      v29 = (char *)v37 - (char *)end; /*0x796b66*/
+      for ( j = (char *)v37 - (char *)end; ; v29 = j ) /*0x796b68*/
       {
-        sub_79B2F0((_DWORD *)(v29 + v25), v25);
-        v25 += 0x10;
-        if ( v25 == v27 )
-          break;
+        OB_stVector4_CopyAssign_010201A0( /*0x796b78*/
+          (OB_stVector4_010201A0 *)((char *)end + v29),
+          (const OB_stVector4_010201A0 *)end);
+        if ( ++end == v27 ) /*0x796b82*/
+          break; /*0x796b82*/
       }
     }
-    v30 = (unsigned int *)*(this + 0x14);
-    if ( v28 != v30 )
+    v30 = this->perLodStrips.end; /*0x796b84*/
+    if ( v28 != v30 ) /*0x796b89*/
     {
-      v31 = v28 + 1;
-      do
+      p_begin = (unsigned int *)&v28->begin; /*0x796b8b*/
+      do /*0x796bb1*/
       {
-        if ( *v31 )
-          FormHeapFree(*v31);
-        *v31 = 0;
-        v31[1] = 0;
-        v31[2] = 0;
-        v31 += 4;
+        if ( *p_begin ) /*0x796b90*/
+          FormHeapFree(*p_begin); /*0x796b97*/
+        *p_begin = 0; /*0x796ba1*/
+        p_begin[1] = 0; /*0x796ba3*/
+        p_begin[2] = 0; /*0x796ba6*/
+        p_begin += 4; /*0x796ba9*/
       }
-      while ( v31 + 0xFFFFFFFF != v30 );
+      while ( p_begin + 0xFFFFFFFF != (unsigned int *)v30 ); /*0x796bb1*/
     }
-    *(this + 0x14) = (unsigned int)v28;
+    this->perLodStrips.end = v28; /*0x796bb3*/
   }
 }

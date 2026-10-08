@@ -21,9 +21,9 @@
 0x6DDB8B: jz      loc_6DDC53
 0x6DDB91: fld     [esp+48h+arg_0]
 0x6DDB95: push    ecx
-0x6DDB96: mov     ecx, ebx
-0x6DDB98: fstp    [esp+4Ch+var_4C]; float
-0x6DDB9B: call    sub_6C36B0
+0x6DDB96: mov     ecx, ebx; this
+0x6DDB98: fstp    [esp+4Ch+applicationTime]; applicationTime
+0x6DDB9B: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x6DDBA0: test    al, al
 0x6DDBA2: jnz     loc_6DDC53
 0x6DDBA8: mov     edx, dword ptr [esp+48h+var_38]
@@ -36,7 +36,7 @@
 0x6DDBB6: push    esi; int
 0x6DDBB7: push    ecx
 0x6DDBB8: fstp    [esp+60h+var_60]; float
-0x6DDBBB: call    sub_6BB270
+0x6DDBBB: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6DDBC0: add     esp, 18h
 0x6DDBC3: fstp    [esp+48h+arg_0]
 0x6DDBC7: fld     [esp+48h+arg_0]
@@ -73,7 +73,7 @@
 0x6DDC1F: fld     [esp+48h+arg_0]
 0x6DDC23: push    ecx
 0x6DDC24: mov     ecx, dword ptr [esp+4Ch+var_38]
-0x6DDC28: fstp    [esp+4Ch+var_4C]; float
+0x6DDC28: fstp    [esp+4Ch+applicationTime]; float
 0x6DDC2B: push    ebp; int
 0x6DDC2C: push    ecx; int
 0x6DDC2D: lea     edx, [esp+54h+var_30]

@@ -14,7 +14,7 @@
 0x6A099F: mov     large fs:0, eax
 0x6A09A5: mov     esi, ecx
 0x6A09A7: mov     [esp+24h+var_10], esi
-0x6A09AB: mov     eax, [esp+24h+arg_0]
+0x6A09AB: mov     eax, [esp+24h+targetReference]
 0x6A09AF: xor     ebx, ebx
 0x6A09B1: push    ebx
 0x6A09B2: push    eax
@@ -25,7 +25,7 @@
 0x6A09C5: mov     [esi+40h], ebx
 0x6A09C8: mov     [esi+48h], ebx
 0x6A09CB: fldz
-0x6A09CD: mov     ecx, [esp+24h+arg_4]
+0x6A09CD: mov     ecx, [esp+24h+effectShader]
 0x6A09D1: fstp    dword ptr [esi+38h]
 0x6A09D4: mov     ebp, ds:0A2807Ch
 0x6A09DA: mov     [esi+34h], ecx
@@ -81,22 +81,22 @@
 0x6A0A48: mov     [esi+28h], bl
 0x6A0A4B: mov     dword ptr [esi+2Ch], 0FFFFFFFFh
 0x6A0A52: mov     [esi+30h], ebx
-0x6A0A55: mov     ecx, ds:0B333C4h
+0x6A0A55: mov     ecx, ds:0B333C4h; this
 0x6A0A5B: cmp     [esi+1Ch], ecx
 0x6A0A5E: jnz     short loc_6A0A81
-0x6A0A60: push    ebx
-0x6A0A61: call    PlayerCharacter_GetPlayerNode
+0x6A0A60: push    ebx; firstPerson
+0x6A0A61: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A0A66: test    eax, eax
 0x6A0A68: jz      short loc_6A0A81
-0x6A0A6A: mov     ecx, ds:0B333C4h
-0x6A0A70: push    ebx
-0x6A0A71: call    PlayerCharacter_GetPlayerNode
+0x6A0A6A: mov     ecx, ds:0B333C4h; this
+0x6A0A70: push    ebx; firstPerson
+0x6A0A71: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A0A76: test    byte ptr [eax+18h], 1
 0x6A0A7A: jnz     short loc_6A0A81
 0x6A0A7C: mov     ebx, 1
 0x6A0A81: fldz
-0x6A0A83: mov     [esi+44h], bl
-0x6A0A86: fld     [esp+24h+arg_8]
+0x6A0A83: mov     [esi+44h], bl; Verified (Oblivion): alternate shader constructor accepts an explicit effect shader at +0x34 and elapsedSeconds at base +0x08, initializes +0x2C to 0xFFFFFFFF, and derives +0x44 from the player's selected node. TESEffectShader* +0x34 is Probable as the common field type, corroborated by the owner-based constructor and the matching Fallout constructor signature.
+0x6A0A86: fld     [esp+24h+elapsedSeconds]
 0x6A0A8A: fcom    st(1)
 0x6A0A8C: fnstsw  ax
 0x6A0A8E: fstp    st(1)
@@ -115,3 +115,21 @@
 0x6A0AB1: pop     ebx
 0x6A0AB2: add     esp, 10h
 0x6A0AB5: retn    0Ch
+0x9C5ED0: mov     ecx, [ebp-10h]
+0x9C5ED3: jmp     MagicHitEffect_destr
+0x9C5ED8: mov     ecx, [ebp-10h]
+0x9C5EDB: add     ecx, 3Ch ; '<'; slot
+0x9C5EDE: jmp     NiPointerSlot_Release
+0x9C5EE3: mov     ecx, [ebp-10h]
+0x9C5EE6: add     ecx, 40h ; '@'; slot
+0x9C5EE9: jmp     NiPointerSlot_Release
+0x9C5EEE: mov     ecx, [ebp-10h]
+0x9C5EF1: add     ecx, 48h ; 'H'; slot
+0x9C5EF4: jmp     NiPointerSlot_Release
+0x9C5EF9: mov     edx, [esp+arg_4]
+0x9C5EFD: lea     eax, [edx-14h]
+0x9C5F00: mov     ecx, [edx-18h]
+0x9C5F03: xor     ecx, eax
+0x9C5F05: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5F0A: mov     eax, offset stru_AEE584
+0x9C5F0F: jmp     ___CxxFrameHandler3

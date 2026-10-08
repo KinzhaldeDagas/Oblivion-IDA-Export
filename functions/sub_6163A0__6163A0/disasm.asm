@@ -8,17 +8,17 @@
 0x6163BB: mov     ecx, esi
 0x6163BD: mov     dword ptr [esp+34h+var_24], eax
 0x6163C1: mov     [esp+34h+var_1C], edx
-0x6163C5: call    sub_6135F0
+0x6163C5: call    CombatController_GetCurrentTarget
 0x6163CA: test    eax, eax
 0x6163CC: jz      loc_61651C
 0x6163D2: mov     ecx, esi
-0x6163D4: call    sub_6135F0
+0x6163D4: call    CombatController_GetCurrentTarget
 0x6163D9: mov     ecx, eax
-0x6163DB: call    sub_5E05B0
+0x6163DB: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x6163E0: test    al, al
 0x6163E2: jz      loc_61651C
 0x6163E8: mov     ecx, esi
-0x6163EA: call    sub_6135F0
+0x6163EA: call    CombatController_GetCurrentTarget
 0x6163EF: mov     edx, [eax]
 0x6163F1: mov     edx, [edx+1D0h]
 0x6163F7: lea     ecx, [esp+34h+var_24]
@@ -28,7 +28,7 @@
 0x616400: fldz
 0x616402: mov     ecx, esi
 0x616404: fstp    [esp+34h+var_1C]
-0x616408: call    sub_6135F0
+0x616408: call    CombatController_GetCurrentTarget
 0x61640D: mov     edx, [eax]
 0x61640F: mov     ecx, eax
 0x616411: mov     eax, [edx+174h]
@@ -41,7 +41,7 @@
 0x61642B: fstp    [esp+34h+var_2C]
 0x61642F: fld     dword ptr [eax]
 0x616431: fadd    dword ptr [esp+34h+var_24]
-0x616435: fstp    [esp+34h+var_18]
+0x616435: fstp    [esp+34h+pointXYZ]
 0x616439: fld     [esp+34h+var_30]
 0x61643D: fstp    [esp+34h+var_14]
 0x616441: fld     [esp+34h+var_2C]
@@ -53,31 +53,31 @@
 0x616456: jnz     short loc_616476
 0x616458: push    edi; a5
 0x616459: mov     edi, [esi+3Ch]; a1
-0x61645C: push    0; a4
+0x61645C: push    0; useActorProjection
 0x61645E: mov     ecx, esi
-0x616460: call    sub_6135F0
-0x616465: push    eax; a3
-0x616466: push    edi; a2
-0x616467: call    TESObjectREFR_GetDistanceBetween?
+0x616460: call    CombatController_GetCurrentTarget
+0x616465: push    eax; to
+0x616466: push    edi; from
+0x616467: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x61646C: fstp    dword ptr [esi+184h]
 0x616472: add     esp, 0Ch
 0x616475: pop     edi
 0x616476: fld     dword ptr [esi+184h]
 0x61647C: mov     ecx, [esi+3Ch]
 0x61647F: fstp    [esp+34h+var_28]
-0x616483: call    sub_5E05B0
+0x616483: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x616488: test    al, al
-0x61648A: mov     ecx, [esi+3Ch]
+0x61648A: mov     ecx, [esi+3Ch]; this
 0x61648D: jnz     short loc_61649B
-0x61648F: lea     edx, [esp+34h+var_18]
-0x616493: push    edx
-0x616494: call    sub_4D7E30
+0x61648F: lea     edx, [esp+34h+pointXYZ]
+0x616493: push    edx; pointXYZ
+0x616494: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x616499: jmp     short loc_6164F6
 0x61649B: mov     eax, [ecx]
 0x61649D: mov     edx, [eax+174h]
 0x6164A3: call    edx
 0x6164A5: fld     dword ptr [eax]
-0x6164A7: fsub    [esp+34h+var_18]
+0x6164A7: fsub    [esp+34h+pointXYZ]
 0x6164AB: fstp    [esp+34h+var_C]
 0x6164AF: fld     dword ptr [eax+4]
 0x6164B2: fsub    [esp+34h+var_14]

@@ -1,4 +1,4 @@
-0x6D7890: push    ebx
+0x6D7890: push    ebx; Saves base NiExtraData, 32-bit key count, then every ordered key record as float time followed by text string.
 0x6D7891: push    ebp
 0x6D7892: mov     ebp, [esp+8+arg_0]
 0x6D7896: push    esi
@@ -25,7 +25,7 @@
 0x6D78D0: mov     eax, [edi+10h]
 0x6D78D3: push    ebp
 0x6D78D4: lea     ecx, [eax+esi*8]
-0x6D78D7: call    sub_6EC760
+0x6D78D7: call    NiTextKey_SaveBinary; Saves one NiTextKey: writes float time at +0x00 followed by text at +0x04.
 0x6D78DC: add     esi, 1
 0x6D78DF: cmp     esi, [ebx]
 0x6D78E1: jb      short loc_6D78D0

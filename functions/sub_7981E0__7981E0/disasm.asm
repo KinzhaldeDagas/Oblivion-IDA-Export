@@ -1,39 +1,39 @@
-0x7981E0: push    esi
+0x7981E0: push    esi; SpeedTree decode: stock SLodGeometry dtor. Frees all compact leaf-card arrays including map/card indices, centers, texcoord/card pointers, colors, normals/binormals/tangents, primary wind arrays, and original centers.
 0x7981E1: mov     esi, ecx
 0x7981E3: mov     eax, [esi+10h]
 0x7981E6: push    edi
 0x7981E7: push    eax
-0x7981E8: call    FormHeapFree
+0x7981E8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7981ED: mov     ecx, [esi+14h]
 0x7981F0: push    ecx
-0x7981F1: call    FormHeapFree
+0x7981F1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7981F6: mov     edx, [esi+18h]
 0x7981F9: push    edx
-0x7981FA: call    FormHeapFree
+0x7981FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7981FF: mov     eax, [esi+24h]
 0x798202: push    eax
-0x798203: call    FormHeapFree
+0x798203: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x798208: mov     ecx, [esi+28h]
 0x79820B: push    ecx
-0x79820C: call    FormHeapFree
+0x79820C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x798211: mov     edx, [esi+2Ch]
 0x798214: push    edx
-0x798215: call    FormHeapFree
+0x798215: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79821A: mov     eax, [esi+30h]
 0x79821D: push    eax
-0x79821E: call    FormHeapFree
+0x79821E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x798223: mov     ecx, [esi+1Ch]
 0x798226: push    ecx
-0x798227: call    FormHeapFree
+0x798227: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79822C: mov     edx, [esi+20h]
 0x79822F: push    edx
-0x798230: call    FormHeapFree
+0x798230: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x798235: mov     eax, [esi+34h]
 0x798238: push    eax
-0x798239: call    FormHeapFree
+0x798239: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79823E: mov     ecx, [esi+38h]
 0x798241: push    ecx
-0x798242: call    FormHeapFree
+0x798242: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x798247: mov     edx, [esi+40h]
 0x79824A: xor     edi, edi
 0x79824C: push    edx
@@ -48,10 +48,23 @@
 0x798265: mov     [esi+20h], edi
 0x798268: mov     [esi+34h], edi
 0x79826B: mov     [esi+38h], edi
-0x79826E: call    FormHeapFree
+0x79826E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x798273: add     esp, 30h
 0x798276: mov     [esi+40h], edi
 0x798279: pop     edi
 0x79827A: mov     ecx, esi
 0x79827C: pop     esi
 0x79827D: jmp     loc_786F70
+0x786F70: xor     eax, eax
+0x786F72: mov     [ecx+10h], eax
+0x786F75: mov     [ecx+14h], eax
+0x786F78: mov     [ecx+18h], eax
+0x786F7B: mov     [ecx+24h], eax
+0x786F7E: mov     [ecx+28h], eax
+0x786F81: mov     [ecx+2Ch], eax
+0x786F84: mov     [ecx+30h], eax
+0x786F87: mov     [ecx+1Ch], eax
+0x786F8A: mov     [ecx+20h], eax
+0x786F8D: mov     [ecx+34h], eax
+0x786F90: mov     [ecx+38h], eax
+0x786F93: retn

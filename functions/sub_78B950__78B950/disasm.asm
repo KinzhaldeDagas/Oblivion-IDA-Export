@@ -1,4 +1,4 @@
-0x78B950: push    ebp
+0x78B950: push    ebp; CSpeedTreeRT::SetBranchWindMethod. Before Compute, mirrors the wind method to CWindEngine and branch geometry; disables vertex weighting for WIND_NONE and invalidates prior CPU-wind geometry when switching off.
 0x78B951: mov     ebp, esp
 0x78B953: push    0FFFFFFFFh
 0x78B955: push    offset SEH_78B950
@@ -19,7 +19,7 @@
 0x78B97F: cmp     [esi+45h], cl
 0x78B982: mov     [ebp+var_4], ecx
 0x78B985: jnz     short loc_78B9D3
-0x78B987: mov     edi, [ebp+arg_0]
+0x78B987: mov     edi, [ebp+method]
 0x78B98A: cmp     edi, 2
 0x78B98D: jnz     short loc_78B9A7
 0x78B98F: mov     eax, [esi+10h]
@@ -27,9 +27,9 @@
 0x78B996: jnz     short loc_78B9A7
 0x78B998: mov     eax, [esi+4]
 0x78B99B: mov     [eax+12h], cl
-0x78B99E: push    ecx
-0x78B99F: mov     ecx, [esi+4]
-0x78B9A2: call    sub_794AE0
+0x78B99E: push    ecx; lodLevel
+0x78B99F: mov     ecx, [esi+4]; this
+0x78B9A2: call    OB_CIndexedGeometry_ComputeWindEffect_010201A0;
 0x78B9A7: mov     ecx, [esi+10h]
 0x78B9AA: mov     [ecx+8], edi
 0x78B9AD: mov     eax, [esi+4]
@@ -47,10 +47,10 @@
 0x78B9CD: mov     esp, ebp
 0x78B9CF: pop     ebp
 0x78B9D0: retn    4
-0x78B9D3: push    43h ; 'C'; MaxCount
+0x78B9D3: push    43h ; 'C'; count
 0x78B9D5: push    offset aSetbranchwindm; "SetBranchWindMethod() has no effect aft"...
-0x78B9DA: mov     ecx, offset dword_B2B614
-0x78B9DF: call    sub_414500
+0x78B9DA: mov     ecx, offset OB_g_strError_010201A0; this
+0x78B9DF: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x78B9E4: mov     ecx, [ebp+var_C]
 0x78B9E7: mov     large fs:0, ecx
 0x78B9EE: pop     ecx
@@ -67,8 +67,8 @@
 0x78BA02: push    eax
 0x78BA03: push    offset aCspeedtreert_6; "CSpeedTreeRT::SetBranchWindMethod"
 0x78BA08: push    offset aSFailedS; "%s - failed [%s]"
-0x78BA0D: lea     esi, [ebp+var_30]
-0x78BA10: call    sub_7A54A0
+0x78BA0D: lea     esi, [ebp+result]; result
+0x78BA10: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78BA15: add     esp, 0Ch
 0x78BA18: cmp     dword ptr [eax+18h], 10h
 0x78BA1C: mov     byte ptr [ebp+var_4], 2
@@ -76,11 +76,11 @@
 0x78BA22: mov     eax, [eax+4]
 0x78BA25: jmp     short loc_78BA2A
 0x78BA27: add     eax, 4
-0x78BA2A: push    eax; Src
-0x78BA2B: call    sub_7895E0
+0x78BA2A: push    eax; error
+0x78BA2B: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78BA30: add     esp, 4
-0x78BA33: lea     ecx, [ebp+var_30]
-0x78BA36: call    sub_79AB00
+0x78BA33: lea     ecx, [ebp+result]; this
+0x78BA36: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78BA3B: mov     eax, offset loc_78BA41
 0x78BA40: retn
 0x78BA41: mov     ecx, [ebp+var_C]
@@ -94,8 +94,8 @@
 0x78BA52: retn    4
 0x78BA55: push    offset aCspeedtreert_6; "CSpeedTreeRT::SetBranchWindMethod"
 0x78BA5A: push    offset aSThrewAnUnknow; "%s - threw an unknown system exception"
-0x78BA5F: lea     esi, [ebp+var_4C]
-0x78BA62: call    sub_7A54A0
+0x78BA5F: lea     esi, [ebp+var_4C]; result
+0x78BA62: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x78BA67: add     esp, 8
 0x78BA6A: cmp     dword ptr [eax+18h], 10h
 0x78BA6E: mov     byte ptr [ebp+var_4], 3
@@ -103,10 +103,21 @@
 0x78BA74: mov     eax, [eax+4]
 0x78BA77: jmp     short loc_78BA7C
 0x78BA79: add     eax, 4
-0x78BA7C: push    eax; Src
-0x78BA7D: call    sub_7895E0
+0x78BA7C: push    eax; error
+0x78BA7D: call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.
 0x78BA82: add     esp, 4
-0x78BA85: lea     ecx, [ebp+var_4C]
-0x78BA88: call    sub_79AB00
+0x78BA85: lea     ecx, [ebp+var_4C]; this
+0x78BA88: call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
 0x78BA8D: mov     eax, offset loc_78B9BF
 0x78BA92: retn
+0x9CB680: lea     ecx, [ebp+result]; this
+0x9CB683: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CB688: lea     ecx, [ebp+var_4C]; this
+0x9CB68B: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CB690: mov     edx, [esp-4+arg_4]
+0x9CB694: lea     eax, [edx+0Ch]
+0x9CB697: mov     ecx, [edx-50h]
+0x9CB69A: xor     ecx, eax
+0x9CB69C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CB6A1: mov     eax, offset stru_AF405C
+0x9CB6A6: jmp     ___CxxFrameHandler3

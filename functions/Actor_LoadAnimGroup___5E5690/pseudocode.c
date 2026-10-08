@@ -1,69 +1,73 @@
-signed __int16 __thiscall Actor_LoadAnimGroup_(TESObjectREFR *this, int a2, int a3, char a4)
+// Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
+unsigned __int16 __thiscall Actor_LoadAnimGroup_(
+        Actor *this,
+        unsigned int groupID,
+        EntryData *weaponEntryDataArg,
+        unsigned int forceWeaponPrefix)
 {
-  int v5; // ebp
-  int v7; // edi
-  __int16 v8; // ax
-  unsigned __int16 v9; // ax
-  int v10; // [esp+Ch] [ebp-8h]
-  ActorAnimData *v11; // [esp+10h] [ebp-4h]
+  int weaponPrefix; // ebp
+  EntryData *weaponEntryData; // edi
+  __int16 movementFlags; // ax
+  unsigned __int16 initialKey; // ax
+  int movementPrefix; // [esp+Ch] [ebp-8h]
+  ActorAnimData *animData; // [esp+10h] [ebp-4h]
 
-  v5 = 0;
-  v11 = this->vtbl->GetAnimData(this);
-  if ( !v11 )
-    return 0xFF;
-  v7 = a3;
-  if ( !a3 )
-    v7 = (*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 0x16) + 0xEC))(*((_DWORD *)this + 0x16), 1);
-  v8 = (*(int (__thiscall **)(_DWORD))(**((_DWORD **)this + 0x16) + 0x2C0))(*((_DWORD *)this + 0x16));
-  if ( (v8 & 0x800) != 0 )
+  weaponPrefix = 0; /*0x5e56a1*/
+  animData = this->vtbl->super.super.GetAnimData(this); /*0x5e56a5*/
+  if ( !animData ) /*0x5e56a9*/
+    return 0xFF; /*0x5e56ac*/
+  weaponEntryData = weaponEntryDataArg; /*0x5e56b8*/
+  if ( !weaponEntryDataArg ) /*0x5e56be*/
+    weaponEntryData = this->members.super.process->GetEquippedWeaponData(this->members.super.process, 1); /*0x5e56cf*/
+  movementFlags = this->members.super.process->GetMovementFlags(this->members.super.process);// Movement prefix priority from process flags: Swimming 0x0800 -> 2, else Flying 0x2000 -> 3, else Sneaking 0x0400 -> 1, otherwise 0. /*0x5e56dc*/
+  if ( (movementFlags & 0x800) != 0 )           // Swimming overrides Flying and Sneaking when building encoded animation-key movement bits. /*0x5e56ea*/
   {
-    v10 = 2;
+    movementPrefix = 2; /*0x5e56ec*/
   }
-  else if ( (v8 & 0x2000) != 0 )
+  else if ( (movementFlags & 0x2000) != 0 )     // Flying is selected only when Swimming was not set; it overrides Sneaking. /*0x5e56fb*/
   {
-    v10 = 3;
+    movementPrefix = 3; /*0x5e56fd*/
   }
   else
   {
-    v10 = (v8 & 0x400) != 0;
+    movementPrefix = (movementFlags & 0x400) != 0;// Sneaking supplies movement prefix 1 only when neither Swimming nor Flying was selected. /*0x5e570e*/
   }
-  if ( !this->vtbl[1].super.GetEditorName(this)
-    && ((unsigned __int8 (__thiscall *)(TESObjectREFR *, int))this->vtbl[1].GetSleepState)(this, 1)
-    || this->vtbl[1].super.GetEditorName(this)
-    && (*(unsigned __int8 (__thiscall **)(_DWORD))(**((_DWORD **)this + 0x16) + 0x304))(*((_DWORD *)this + 0x16))
-    || this == (TESObjectREFR *)TESDataHandler_g_PlayerRef && TESDataHandler_g_PlayerRef->defaultAnimData
-    || v7
-    && (a3
-     || (*(unsigned __int8 (__thiscall **)(_DWORD))(**((_DWORD **)this + 0x16) + 0x304))(*((_DWORD *)this + 0x16))
-     || (*(unsigned __int8 (__thiscall **)(_DWORD))(**((_DWORD **)this + 0x16) + 0x2FC))(*((_DWORD *)this + 0x16)))
-    || a4 )
+  if ( !((int (__thiscall *)(Actor *))this->vtbl->Unk_9F)(this) && this->vtbl->IsInCombat(this, 1) /*0x5e579d*/
+    || ((int (__thiscall *)(Actor *))this->vtbl->Unk_9F)(this)
+    && this->members.super.process->GetWeaponOut(this->members.super.process)
+    || this == (Actor *)reference && reference->defaultAnimData
+    || weaponEntryData
+    && (weaponEntryDataArg
+     || this->members.super.process->GetWeaponOut(this->members.super.process)
+     || this->members.super.process->GetCombatMode(this->members.super.process))
+    || (_BYTE)forceWeaponPrefix )
   {
-    if ( !v7 || a4 )
-      v5 = 1;
+    if ( !weaponEntryData || (_BYTE)forceWeaponPrefix ) /*0x5e57a5*/
+      weaponPrefix = 1; /*0x5e57ba*/
     else
-      v5 = *(_DWORD *)(4 * *(char *)(*(_DWORD *)(v7 + 8) + 0x90) + 0xB086B8);
+      weaponPrefix = *(_DWORD *)(4 * SLOBYTE(weaponEntryData->type[6].vtbl) + 0xB086B8);// For an equipped weapon entry, read TESObjectWEAP::type byte at form +0x90 and map types 0..5 through g_weaponTypeToAnimWeaponPrefix: 2,3,2,3,4,5. /*0x5e57b1*/
   }
-  if ( *((_DWORD *)this + 0x16) )
+  if ( this->members.super.process ) /*0x5e57bf*/
   {
-    if ( (*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 0x16) + 0xF8))(*((_DWORD *)this + 0x16), 1) )
-    {
-      if ( a2 >= 0x1B && a2 <= 0x1C )
-        v5 = 0;
+    if ( this->members.super.process->GetEquippedShieldData(this->members.super.process, 1) ) /*0x5e57d7*/
+    {                                           // With an equipped shield, BlockIdle (27) and BlockHit (28) force weapon prefix 0 before key construction.
+      if ( (int)groupID >= 0x1B && (int)groupID <= 0x1C ) /*0x5e57e5*/
+        weaponPrefix = 0; /*0x5e57e7*/
     }
-    if ( *((_DWORD *)this + 0x16) )
+    if ( this->members.super.process ) /*0x5e57e9*/
     {
-      if ( v5 )
-      {
-        if ( a2 >= 0x22
-          && a2 <= 0x27
-          && (!(*(unsigned __int8 (__thiscall **)(_DWORD))(**((_DWORD **)this + 0x16) + 0x304))(*((_DWORD *)this + 0x16))
-           || (*(unsigned __int8 (__thiscall **)(_DWORD))(**((_DWORD **)this + 0x16) + 0x138))(*((_DWORD *)this + 0x16))) )
+      if ( weaponPrefix ) /*0x5e57f1*/
+      {                                         // For TorchIdle through CastTouchAlt (groups 34..39), clear a nonzero weapon prefix when the weapon is not drawn or process virtual +0x138 reports true.
+        if ( (int)groupID >= 0x22 /*0x5e5819*/
+          && (int)groupID <= 0x27
+          && (!this->members.super.process->GetWeaponOut(this->members.super.process)
+           || this->members.super.process->Unk_4D(this->members.super.process)) )
         {
-          v5 = 0;
+          weaponPrefix = 0; /*0x5e581f*/
         }
       }
     }
   }
-  v9 = sub_51A9B0(v10, v5, a2);
-  return sub_470D20(v11, v9, 0);
+  initialKey = AnimKey_Make(movementPrefix, weaponPrefix, groupID);// Compose group | (weaponPrefix << 8) | (movementPrefix << 12). Movement priority is Swim > Fly > Sneak; weapon type table values are Blade1H=2, Blade2H=3, Blunt1H=2, Blunt2H=3, Staff=4, Bow=5, subject to the group/state prefix-clearing gates above. /*0x5e5828*/
+  return ActorAnimData_ResolveAnimKeyFallback(animData, initialKey, 0);// Native caller consumes the resolved fallback key, not necessarily the initially requested movement/weapon/group combination. /*0x5e56ab*/
 }

@@ -4,7 +4,7 @@ void __cdecl sub_535DD0(__int128 *a1, int a2)
   int *v3; // eax
   int *v4; // ecx
   unsigned int v5; // eax
-  int v6; // eax
+  int BhkCollisionObject; // eax
   _DWORD ***v7; // esi
   _DWORD *v8; // edx
   __m128 v9; // xmm0
@@ -35,90 +35,90 @@ void __cdecl sub_535DD0(__int128 *a1, int a2)
   __m128 v34[4]; // [esp+E0h] [ebp-90h] BYREF
   __m128 v35[4]; // [esp+120h] [ebp-50h] BYREF
 
-  v2 = 0;
-  if ( dword_B36598 || dword_B36594 )
+  v2 = 0; /*0x535dee*/
+  if ( dword_B36590[2] || dword_B36590[1] ) /*0x535dfa*/
   {
-    v3 = &dword_B36594;
-    do
+    v3 = &dword_B36590[1]; /*0x535e06*/
+    do /*0x535e30*/
     {
-      v4 = (int *)v3[1];
-      if ( !v4 && !*v3 )
-        break;
-      if ( v2 )
-        goto LABEL_12;
-      v5 = *v3;
-      if ( v5 )
+      v4 = (int *)v3[1]; /*0x535e10*/
+      if ( !v4 && !*v3 ) /*0x535e17*/
+        break; /*0x535e19*/
+      if ( v2 ) /*0x535e1d*/
+        goto LABEL_12; /*0x535e1d*/
+      v5 = *v3; /*0x535e1f*/
+      if ( v5 ) /*0x535e23*/
       {
-        if ( *(_DWORD *)(v5 + 4) == a2 )
-          v2 = v5;
+        if ( *(_DWORD *)(v5 + 4) == a2 ) /*0x535e28*/
+          v2 = v5; /*0x535e2a*/
       }
-      v3 = v4;
+      v3 = v4; /*0x535e2c*/
     }
-    while ( v4 );
-    if ( !v2 )
-      return;
+    while ( v4 ); /*0x535e30*/
+    if ( !v2 ) /*0x535e34*/
+      return; /*0x535e34*/
 LABEL_12:
-    if ( a2 )
+    if ( a2 ) /*0x535e3c*/
     {
-      v6 = sub_47FAC0(a2);
-      if ( v6 )
+      BhkCollisionObject = NiAVObject_GetBhkCollisionObject(a2); /*0x535e43*/
+      if ( BhkCollisionObject ) /*0x535e4d*/
       {
-        v7 = *(_DWORD ****)(v6 + 0x10);
-        if ( v7 )
+        v7 = *(_DWORD ****)(BhkCollisionObject + 0x10); /*0x535e53*/
+        if ( v7 ) /*0x535e58*/
         {
-          v25 = *(float *)(v2 + 8);
-          v32 = *a1;
-          sub_8B1DD0(v31[0].m128_f32, &flt_B2F080);
-          ((void (__thiscall *)(_DWORD ***, __m128 *))(*v7)[0x2B])(v7, v34);
-          sub_8B1F10(v33, v34);
-          sub_8B1F70(v35, v33, v31);
-          v8 = (*v7)[0x29];
-          v9 = 0;
-          v9.m128_f32[0] = *(float *)&dword_B370D8;
-          v29 = _mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), v35[3]);
-          ((void (__thiscall *)(_DWORD ***, __m128 *))v8)(v7, &v27);
-          v10 = 0;
-          v11 = 1.0 / (v25 - *(float *)&dword_B370D8);
-          v10.m128_f32[0] = v25;
-          v12 = 0;
-          v27 = _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), v27);
-          v26 = v11;
-          v12.m128_f32[0] = v26;
-          v30 = _mm_mul_ps(_mm_shuffle_ps(v12, v12, 0), _mm_sub_ps(v27, v29));
-          sub_8A9C60(v7[2], (int)&v30);
-          v13 = _mm_sub_ps(v27, v29);
-          v14 = _mm_mul_ps(v13, v13);
-          v14.m128_f32[0] = _mm_shuffle_ps(v14, v14, 0xAA).m128_f32[0]
+          v25 = *(float *)(v2 + 8); /*0x535e67*/
+          v32 = *a1; /*0x535e74*/
+          hkMatrix3_SetFromQuaternion(v31[0].m128_f32, &flt_B2F080); /*0x535e7c*/
+          ((void (__thiscall *)(_DWORD ***, __m128 *))(*v7)[0x2B])(v7, v34); /*0x535e93*/
+          sub_8B1F10(v33, v34); /*0x535ea4*/
+          sub_8B1F70(v35, v33, v31); /*0x535ebd*/
+          v8 = (*v7)[0x29]; /*0x535ecc*/
+          v9 = 0; /*0x535ed2*/
+          v9.m128_f32[0] = g_GameSettingStringPointers_B36CD8[0x100]; /*0x535ed5*/
+          v29 = _mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), v35[3]); /*0x535eef*/
+          ((void (__thiscall *)(_DWORD ***, __m128 *))v8)(v7, &v27); /*0x535ef4*/
+          v10 = 0; /*0x535f08*/
+          v11 = 1.0 / (v25 - g_GameSettingStringPointers_B36CD8[0x100]); /*0x535f0b*/
+          v10.m128_f32[0] = v25; /*0x535f0d*/
+          v12 = 0; /*0x535f1d*/
+          v27 = _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), v27); /*0x535f20*/
+          v26 = v11; /*0x535f2f*/
+          v12.m128_f32[0] = v26; /*0x535f39*/
+          v30 = _mm_mul_ps(_mm_shuffle_ps(v12, v12, 0), _mm_sub_ps(v27, v29)); /*0x535f47*/
+          sub_8A9C60(v7[2], (int)&v30); /*0x535f4f*/
+          v13 = _mm_sub_ps(v27, v29); /*0x535f59*/
+          v14 = _mm_mul_ps(v13, v13); /*0x535f69*/
+          v14.m128_f32[0] = _mm_shuffle_ps(v14, v14, 0xAA).m128_f32[0] /*0x535f7b*/
                           + (float)(_mm_shuffle_ps(v14, v14, 0x55).m128_f32[0] + v14.m128_f32[0]);
-          v15 = 1.0 / fsqrt(v14.m128_f32[0]);
-          v16 = *(float *)&dword_A46C30 - (float)((float)(v14.m128_f32[0] * v15) * v15);
-          v17 = 0;
-          v17.m128_f32[0] = (float)(flt_A3D65C * v15) * v16;
-          v18 = 0;
-          v18.m128_f32[0] = flt_A35AA4;
-          v19 = _mm_mul_ps(_mm_mul_ps(_mm_shuffle_ps(v17, v17, 0), v13), _mm_shuffle_ps(v18, v18, 0));
-          v28 = v19;
-          v20 = v7[2];
-          if ( v20 )
-            v21 = (__m128 *)(v20[0x14] + 0x34);
+          v15 = 1.0 / fsqrt(v14.m128_f32[0]); /*0x535f82*/
+          v16 = *(float *)&dword_A46C30 - (float)((float)(v14.m128_f32[0] * v15) * v15); /*0x535f9d*/
+          v17 = 0; /*0x535fa1*/
+          v17.m128_f32[0] = (float)(kHeadBodyNormalMatchRadius * v15) * v16; /*0x535fac*/
+          v18 = 0; /*0x535fb8*/
+          v18.m128_f32[0] = flt_A35AA4; /*0x535fbf*/
+          v19 = _mm_mul_ps(_mm_mul_ps(_mm_shuffle_ps(v17, v17, 0), v13), _mm_shuffle_ps(v18, v18, 0)); /*0x535fca*/
+          v28 = v19; /*0x535fcd*/
+          v20 = v7[2]; /*0x535fd2*/
+          if ( v20 ) /*0x535fd7*/
+            v21 = (__m128 *)(v20[0x14] + 0x34); /*0x535fdc*/
           else
-            v21 = (__m128 *)&stru_BA7A40;
-          v28 = _mm_add_ps(*v21, v19);
-          v22 = (int)v7[2];
-          if ( v22 )
+            v21 = (__m128 *)&unk_BA7A40; /*0x535fe3*/
+          v28 = _mm_add_ps(*v21, v19); /*0x535fee*/
+          v22 = (int)v7[2]; /*0x535ff3*/
+          if ( v22 ) /*0x535ff8*/
           {
-            sub_89F570(v7);
-            sub_8A6410(v22);
-            (*(void (__thiscall **)(_DWORD, __m128 *))(**(_DWORD **)(v22 + 0x50) + 0x54))(*(_DWORD *)(v22 + 0x50), &v28);
-            sub_89F570(v7);
+            bhkRefObject_UpdateHavokObject(v7); /*0x535ffc*/
+            sub_8A6410(v22); /*0x536003*/
+            (*(void (__thiscall **)(_DWORD, __m128 *))(**(_DWORD **)(v22 + 0x50) + 0x54))(*(_DWORD *)(v22 + 0x50), &v28); /*0x536017*/
+            bhkRefObject_UpdateHavokObject(v7); /*0x53601b*/
           }
-          v23 = v25 - *(float *)&dword_B370D8;
-          v24 = --*(_DWORD *)(v2 + 0xC) <= 0;
-          *(float *)(v2 + 8) = v23;
-          if ( v24 )
+          v23 = v25 - g_GameSettingStringPointers_B36CD8[0x100]; /*0x536024*/
+          v24 = --*(_DWORD *)(v2 + 0xC) <= 0; /*0x53602e*/
+          *(float *)(v2 + 8) = v23; /*0x536032*/
+          if ( v24 ) /*0x536035*/
           {
-            FormHeapFree(v2);
-            BSSimpleList_Remove(&dword_B36594, v2);
+            FormHeapFree(v2); /*0x536038*/
+            BSSimpleList_Remove(&dword_B36590[1], v2); /*0x536046*/
           }
         }
       }

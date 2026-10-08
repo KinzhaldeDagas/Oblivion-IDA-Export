@@ -11,16 +11,16 @@ bool __cdecl sub_506750(
   bool result; // al
   UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0xFFFFFFFF;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
-  if ( result )
+  *(_DWORD *)v9 = 0xFFFFFFFF; /*0x50677a*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x506782*/
+  if ( result ) /*0x50678c*/
   {
-    if ( *(_DWORD *)v9 != 0xFFFFFFFF )
+    if ( *(_DWORD *)v9 != 0xFFFFFFFF ) /*0x506798*/
     {
-      sub_46AB20(a4, *(_DWORD *)v9 != 0);
-      a4->vtbl->super.MarkAsModified((TESForm *)a4, 1);
+      sub_46AB20(a4, *(_DWORD *)v9 != 0); /*0x5067a2*/
+      a4->vtbl->super.MarkAsModified((TESForm *)a4, 1); /*0x5067b0*/
     }
-    return 1;
+    return 1; /*0x5067b2*/
   }
-  return result;
+  return result; /*0x506790*/
 }

@@ -15,12 +15,12 @@
 0x4DE48C: push    ebx
 0x4DE48D: mov     bl, byte ptr [esp+0Ch+arg_0]
 0x4DE491: test    bl, bl
-0x4DE493: push    4
-0x4DE495: mov     ecx, esi
+0x4DE493: push    4; mask
+0x4DE495: mov     ecx, esi; this
 0x4DE497: jz      short loc_4DE4A0
-0x4DE499: call    sub_4D8270
+0x4DE499: call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.
 0x4DE49E: jmp     short loc_4DE4A5
-0x4DE4A0: call    sub_4D82E0
+0x4DE4A0: call    TESObjectREFR_ClearActionFlagBits
 0x4DE4A5: mov     eax, [esi]
 0x4DE4A7: mov     edx, [eax+154h]
 0x4DE4AD: mov     ecx, esi
@@ -81,24 +81,24 @@
 0x4DE550: mov     edi, eax
 0x4DE552: fldz
 0x4DE554: or      word ptr [ebp+8], 8
-0x4DE559: push    0; char
+0x4DE559: push    0; transition
 0x4DE55B: push    ecx
-0x4DE55C: mov     ecx, ebx
-0x4DE55E: fstp    [esp+1Ch+a2]; float
-0x4DE561: call    sub_6C9CB0
+0x4DE55C: mov     ecx, ebx; this
+0x4DE55E: fstp    [esp+1Ch+a2]; easeOutTime
+0x4DE561: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x4DE566: fldz
-0x4DE568: push    0; int
+0x4DE568: push    0; timeSyncSequence
 0x4DE56A: sub     esp, 8
 0x4DE56D: cmp     [esp+20h+arg_4], 0
-0x4DE572: fstp    [esp+20h+a2]; float
+0x4DE572: fstp    [esp+20h+a2]; easeInTime
 0x4DE576: fld1
 0x4DE578: mov     ecx, ebp
-0x4DE57A: fstp    [esp+20h+var_20]; float
-0x4DE57D: push    0; int
-0x4DE57F: push    0; int
+0x4DE57A: fstp    [esp+20h+weight]; weight
+0x4DE57D: push    0; startOver
+0x4DE57F: push    0; priority
 0x4DE581: jz      short loc_4DE5F1
-0x4DE583: push    ebx; int
-0x4DE584: call    sub_470B20
+0x4DE583: push    ebx; sequence
+0x4DE584: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4DE589: fld     dword ptr ds:0A7DEB4h
 0x4DE58F: fchs
 0x4DE591: push    1; a3
@@ -113,13 +113,13 @@
 0x4DE5AC: fstp    [esp+1Ch+a2]; a2
 0x4DE5AF: call    edx
 0x4DE5B1: mov     ecx, eax; this
-0x4DE5B3: call    NiAVObject_UpdateNiAVObject
+0x4DE5B3: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DE5B8: fldz
-0x4DE5BA: push    0; char
+0x4DE5BA: push    0; transition
 0x4DE5BC: push    ecx
-0x4DE5BD: mov     ecx, ebx
-0x4DE5BF: fstp    [esp+1Ch+a2]; float
-0x4DE5C2: call    sub_6C9CB0
+0x4DE5BD: mov     ecx, ebx; this
+0x4DE5BF: fstp    [esp+1Ch+a2]; easeOutTime
+0x4DE5C2: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x4DE5C7: mov     eax, [edi+8]
 0x4DE5CA: push    eax
 0x4DE5CB: mov     ecx, esi
@@ -138,8 +138,8 @@
 0x4DE5EC: pop     esi
 0x4DE5ED: pop     ecx
 0x4DE5EE: retn    8
-0x4DE5F1: push    edi; int
-0x4DE5F2: call    sub_470B20
+0x4DE5F1: push    edi; sequence
+0x4DE5F2: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4DE5F7: fld     dword ptr ds:0A7DEB4h
 0x4DE5FD: fchs
 0x4DE5FF: push    1; a3
@@ -154,7 +154,7 @@
 0x4DE61A: fstp    [esp+1Ch+a2]; a2
 0x4DE61D: call    eax
 0x4DE61F: mov     ecx, eax; this
-0x4DE621: call    NiAVObject_UpdateNiAVObject
+0x4DE621: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DE626: pop     edi
 0x4DE627: pop     ebp
 0x4DE628: pop     ebx

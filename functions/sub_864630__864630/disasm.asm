@@ -8,5 +8,5 @@
 0x864656: mov     [ecx+28h], eax
 0x864659: mov     [ecx+2Ch], edx
 0x86465C: jbe     short locret_864663
-0x86465E: jmp     sub_717690
+0x86465E: jmp     sub_717690; MoonSugarEffect decode: NiGeometry/NiScreenElements render entry. Calls NiGeometry::Render to set renderer states, then active-scene path calls NiDX9Renderer vtable +0x160, which resolves to RenderTriGeometries, not the final DrawPrimitive shortcut.
 0x864663: retn    4

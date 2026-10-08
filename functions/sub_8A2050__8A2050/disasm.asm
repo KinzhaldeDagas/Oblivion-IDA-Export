@@ -1,4 +1,4 @@
-0x8A2050: sub     esp, 8
+0x8A2050: sub     esp, 8; 2026-05-18 73000 consumer decode: copies a full 4x4 transform matrix from cinfo into the Havok construction object; rows 0..2 via 0x8A1FB0 and row 3 here. 0x565510 stock callers leave rotation identity and write translation only.
 0x8A2053: push    esi
 0x8A2054: push    edi
 0x8A2055: mov     edi, [esp+10h+arg_0]

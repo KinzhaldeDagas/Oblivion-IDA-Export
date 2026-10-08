@@ -1,1 +1,1 @@
-ISynchronizeVtbl_0
+typedef ISynchronizeVtbl ISynchronizeVtbl_0;

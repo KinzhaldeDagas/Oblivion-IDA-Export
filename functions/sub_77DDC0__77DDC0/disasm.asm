@@ -8,7 +8,7 @@
 0x77DDE0: test    [esp+4+arg_0], 1
 0x77DDE5: jz      short loc_77DDF0
 0x77DDE7: push    esi
-0x77DDE8: call    FormHeapFree
+0x77DDE8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77DDED: add     esp, 4
 0x77DDF0: mov     eax, esi
 0x77DDF2: pop     esi

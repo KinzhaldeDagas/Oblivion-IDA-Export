@@ -1,20 +1,15 @@
-void __usercall TileImage::~TileImage(
-        TileImage *this@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>)
+void __thiscall TileImage::~TileImage(TileImage *this)
 {
   int v6; // esi
 
-  *(_DWORD *)this = &TileImage::`vftable';
-  if ( !*((_BYTE *)this + 4) )
-    sub_58DA70((int)this);
-  v6 = *((_DWORD *)this + 0x11);
-  if ( v6 )
+  *(_DWORD *)this = &TileImage::`vftable'; /*0x581919*/
+  if ( !*((_BYTE *)this + 4) ) /*0x58191f*/
+    Tile::Release(this); /*0x58192d*/
+  v6 = *((_DWORD *)this + 0x11); /*0x581932*/
+  if ( v6 ) /*0x58193c*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v6 + 4)) )
-      a5 = ((double (__thiscall *)(int, int))**(_DWORD **)v6)(v6, 1);
+    if ( !InterlockedDecrement((volatile LONG *)(v6 + 4)) ) /*0x581942*/
+      (**(void (__thiscall ***)(int, int))v6)(v6, 1); /*0x581958*/
   }
-  Tile::~Tile(this, a2, a3, a4, a5);
+  Tile::~Tile(this); /*0x581964*/
 }

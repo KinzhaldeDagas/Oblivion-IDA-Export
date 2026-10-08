@@ -1,1 +1,1 @@
-TESLevSpell
+struct TESLevSpell;

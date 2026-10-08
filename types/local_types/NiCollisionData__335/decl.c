@@ -1,1 +1,1 @@
-NiCollisionData
+struct NiCollisionData;

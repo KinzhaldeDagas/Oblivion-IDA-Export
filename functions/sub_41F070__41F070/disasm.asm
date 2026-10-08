@@ -1,4 +1,4 @@
-0x41F070: push    4Fh ; 'O'; a2
+0x41F070: push    4Fh ; 'O'; Returns the reference stored in ExtraHeadingTarget, or null.
 0x41F072: call    BaseExtraList_GetExtraData
 0x41F077: test    eax, eax
 0x41F079: jz      short loc_41F07F

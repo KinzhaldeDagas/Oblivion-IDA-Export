@@ -1,5 +1,5 @@
 0x607710: push    esi
-0x607711: call    MobileObject_GenerateNiNode
+0x607711: call    MobileObject_GenerateNiNode; MobileObject GenerateNiNode override. Calls TESObjectREFR_GenerateNiNode, forwards matching model extra data to the process when present, conditionally registers the result as a shadow caster, and returns NiNode*. Native ABI has no stack/x87 inputs.
 0x607716: mov     esi, eax
 0x607718: test    esi, esi
 0x60771A: jz      short loc_60772A

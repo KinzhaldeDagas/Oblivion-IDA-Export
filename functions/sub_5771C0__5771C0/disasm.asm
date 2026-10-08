@@ -37,12 +37,12 @@
 0x57721E: jz      short loc_57723D
 0x577220: mov     eax, [edi+1Ch]
 0x577223: push    eax
-0x577224: call    FormHeapFree
+0x577224: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x577229: push    edi
 0x57722A: mov     [edi+1Ch], ebx
 0x57722D: mov     [edi+22h], bx
 0x577231: mov     [edi+20h], bx
-0x577235: call    FormHeapFree
+0x577235: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57723A: add     esp, 8
 0x57723D: cmp     [esi+0Ch], ebx
 0x577240: jnz     short loc_5771F7
@@ -57,3 +57,12 @@
 0x57725F: pop     ebx
 0x577260: add     esp, 10h
 0x577263: retn
+0x9BE490: mov     ecx, [ebp-10h]
+0x9BE493: jmp     j_??1?$NiTList@PAVCharData@FontManager@@@@UAE@XZ; NiTList<FontManager::CharData *>::~NiTList<FontManager::CharData *>(void)
+0x9BE498: mov     edx, [esp+arg_4]
+0x9BE49C: lea     eax, [edx-10h]
+0x9BE49F: mov     ecx, [edx-14h]
+0x9BE4A2: xor     ecx, eax
+0x9BE4A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE4A9: mov     eax, offset stru_AE7BE4
+0x9BE4AE: jmp     ___CxxFrameHandler3

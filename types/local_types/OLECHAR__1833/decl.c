@@ -1,1 +1,1 @@
-OLECHAR
+typedef WCHAR_0 OLECHAR;

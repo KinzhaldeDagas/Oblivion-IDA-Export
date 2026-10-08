@@ -17,23 +17,23 @@ _BYTE *__cdecl sub_92C790(_BYTE *a1, int a2, __int16 *a3, __int16 *a4, __int16 *
   bool v24; // [esp+20h] [ebp+10h]
   char v25; // [esp+28h] [ebp+18h]
 
-  v6 = a4;
-  if ( a3 == a4
+  v6 = a4; /*0x92c796*/
+  if ( a3 == a4 /*0x92c7c2*/
     || *a3 != *a4
     || (v8 = *(_WORD *)(a2 + 8 * (unsigned __int16)a3[1]), v21 = 1, v8 == *(_WORD *)(a2 + 8 * (unsigned __int16)a4[1])) )
   {
-    v21 = 0;
+    v21 = 0; /*0x92c7c4*/
   }
-  v9 = a5;
-  if ( a5 == a6
+  v9 = a5; /*0x92c7c9*/
+  if ( a5 == a6 /*0x92c7f2*/
     || *a5 != *a6
     || (v11 = (unsigned __int16)a6[1], v25 = 1, *(_WORD *)(a2 + 8 * (unsigned __int16)a5[1]) == *(_WORD *)(a2 + 8 * v11)) )
   {
-    v25 = 0;
+    v25 = 0; /*0x92c7f4*/
   }
-  if ( v21 && v25 )
+  if ( v21 && v25 ) /*0x92c807*/
   {
-    if ( a3 != a6
+    if ( a3 != a6 /*0x92c86b*/
       && *a3 == *a6
       && (v9 = a5, *(_WORD *)(a2 + 8 * (unsigned __int16)a3[1]) == *(_WORD *)(a2 + 8 * (unsigned __int16)a6[1]))
       || v9 == a6
@@ -43,18 +43,18 @@ _BYTE *__cdecl sub_92C790(_BYTE *a1, int a2, __int16 *a3, __int16 *a4, __int16 *
           v9 = a5,
           !v14) )
     {
-      v13 = *a6;
-      v22 = (__int16 *)(a2 + 8 * (unsigned __int16)a3[1]);
-      if ( *v22 == *a6 && *(_WORD *)(a2 + 8 * (unsigned __int16)a6[1]) == *a3 && v22 != a6 )
-        goto LABEL_26;
+      v13 = *a6; /*0x92c871*/
+      v22 = (__int16 *)(a2 + 8 * (unsigned __int16)a3[1]); /*0x92c87b*/
+      if ( *v22 == *a6 && *(_WORD *)(a2 + 8 * (unsigned __int16)a6[1]) == *a3 && v22 != a6 ) /*0x92c8a3*/
+        goto LABEL_26; /*0x92c8a3*/
     }
-    v23 = (__int16 *)(a2 + 8 * (unsigned __int16)v9[1]);
-    if ( *v23 == v13 && *(_WORD *)(a2 + 8 * (unsigned __int16)a6[1]) == *v9 )
-      v24 = v23 == a6;
+    v23 = (__int16 *)(a2 + 8 * (unsigned __int16)v9[1]); /*0x92c8b0*/
+    if ( *v23 == v13 && *(_WORD *)(a2 + 8 * (unsigned __int16)a6[1]) == *v9 ) /*0x92c8c1*/
+      v24 = v23 == a6; /*0x92c8ce*/
     else
 LABEL_26:
-      v24 = 1;
-    if ( a3 != v6
+      v24 = 1; /*0x92c8d4*/
+    if ( a3 != v6 /*0x92c92a*/
       && *a3 == *v6
       && *(_WORD *)(a2 + 8 * (unsigned __int16)a3[1]) == *(_WORD *)(a2 + 8 * (unsigned __int16)v6[1])
       || v9 == v6
@@ -63,33 +63,33 @@ LABEL_26:
           v9 = a5,
           !v14) )
     {
-      v16 = (__int16 *)(a2 + 8 * (unsigned __int16)a3[1]);
-      v15 = *v6;
-      if ( *v16 == *v6 && *(_WORD *)(a2 + 8 * (unsigned __int16)v6[1]) == *a3 && v16 != v6 )
-        goto LABEL_39;
+      v16 = (__int16 *)(a2 + 8 * (unsigned __int16)a3[1]); /*0x92c930*/
+      v15 = *v6; /*0x92c933*/
+      if ( *v16 == *v6 && *(_WORD *)(a2 + 8 * (unsigned __int16)v6[1]) == *a3 && v16 != v6 ) /*0x92c952*/
+        goto LABEL_39; /*0x92c952*/
     }
-    v17 = (unsigned __int16)v9[1];
-    v14 = *(_WORD *)(a2 + 8 * v17) == (unsigned __int16)v15;
-    v18 = (__int16 *)(a2 + 8 * v17);
-    if ( v14 && *(_WORD *)(a2 + 8 * (unsigned __int16)v6[1]) == *v9 )
-      v19 = v18 == v6;
+    v17 = (unsigned __int16)v9[1]; /*0x92c954*/
+    v14 = *(_WORD *)(a2 + 8 * v17) == (unsigned __int16)v15; /*0x92c958*/
+    v18 = (__int16 *)(a2 + 8 * v17); /*0x92c95c*/
+    if ( v14 && *(_WORD *)(a2 + 8 * (unsigned __int16)v6[1]) == *v9 ) /*0x92c96c*/
+      v19 = v18 == v6; /*0x92c972*/
     else
 LABEL_39:
-      v19 = 1;
-    if ( v24 && v19 )
+      v19 = 1; /*0x92c977*/
+    if ( v24 && v19 ) /*0x92c986*/
     {
-      *a1 = 1;
-      return a1;
+      *a1 = 1; /*0x92c991*/
+      return a1; /*0x92c988*/
     }
     else
     {
-      *a1 = 0;
-      return a1;
+      *a1 = 0; /*0x92c99e*/
+      return a1; /*0x92c995*/
     }
   }
   else
   {
-    *a1 = 0;
-    return a1;
+    *a1 = 0; /*0x92c9a9*/
+    return a1; /*0x92c9a2*/
   }
 }

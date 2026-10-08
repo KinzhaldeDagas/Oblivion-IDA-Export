@@ -26,12 +26,12 @@
 0x61C183: mov     ecx, [esi+3Ch]
 0x61C186: cmp     ecx, ebp
 0x61C188: jz      short loc_61C19C
-0x61C18A: call    Actor_IsBlocking
+0x61C18A: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x61C18F: test    al, al
 0x61C191: jz      short loc_61C19C
-0x61C193: mov     ecx, [esi+3Ch]
-0x61C196: push    ebp; float
-0x61C197: call    sub_5F4AE0
+0x61C193: mov     ecx, [esi+3Ch]; this
+0x61C196: push    ebp; shouldBlock
+0x61C197: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x61C19C: mov     edi, ds:0B333C4h
 0x61C1A2: push    edi
 0x61C1A3: mov     ecx, esi
@@ -60,17 +60,17 @@
 0x61C1F4: jb      short loc_61C1E5
 0x61C1F6: xor     eax, eax
 0x61C1F8: cmp     eax, ebp
-0x61C1FA: mov     [esp+30h+var_18], eax
+0x61C1FA: mov     [esp+30h+position], eax
 0x61C1FE: jz      short loc_61C243
 0x61C200: lea     eax, [esp+30h+var_1C]
-0x61C204: push    eax
-0x61C205: lea     ecx, [esp+34h+var_10]
-0x61C209: push    ecx
-0x61C20A: mov     ecx, [esi+18Ch]
-0x61C210: lea     edx, [esp+38h+var_18]
-0x61C214: push    edx
+0x61C204: push    eax; valueOut
+0x61C205: lea     ecx, [esp+34h+keyOut]
+0x61C209: push    ecx; keyOut
+0x61C20A: mov     ecx, [esi+18Ch]; self
+0x61C210: lea     edx, [esp+38h+position]
+0x61C214: push    edx; position
 0x61C215: mov     [esp+3Ch+var_1C], ebp
-0x61C219: call    sub_452600
+0x61C219: call    NiTMap_U32Pointer_GetNextEntry
 0x61C21E: mov     edi, [esp+30h+var_1C]
 0x61C222: cmp     edi, ebp
 0x61C224: jz      short loc_61C23D
@@ -79,9 +79,9 @@
 0x61C22D: mov     ecx, edi; this
 0x61C22F: call    sub_6B73E0
 0x61C234: push    edi
-0x61C235: call    FormHeapFree
+0x61C235: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C23A: add     esp, 4
-0x61C23D: cmp     [esp+30h+var_18], ebp
+0x61C23D: cmp     [esp+30h+position], ebp
 0x61C241: jnz     short loc_61C200
 0x61C243: mov     ecx, [esi+18Ch]
 0x61C249: call    NiTMap_Clear
@@ -102,7 +102,7 @@
 0x61C270: mov     eax, [eax]
 0x61C272: push    eax
 0x61C273: mov     ecx, esi
-0x61C275: call    sub_6162D0
+0x61C275: call    CombatController_RemoveTarget
 0x61C27A: mov     eax, [edi]
 0x61C27C: cmp     eax, ebp
 0x61C27E: jnz     short loc_61C270
@@ -110,7 +110,7 @@
 0x61C283: cmp     eax, ebp
 0x61C285: jz      short loc_61C290
 0x61C287: push    eax
-0x61C288: call    FormHeapFree
+0x61C288: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C28D: add     esp, 4
 0x61C290: cmp     [esi+118h], ebp
 0x61C296: jz      short loc_61C29F
@@ -135,17 +135,17 @@
 0x61C2C4: mov     ecx, ebx
 0x61C2C6: call    ContainerEntryExtraData_DestroyDataTable
 0x61C2CB: push    ebx
-0x61C2CC: call    FormHeapFree
+0x61C2CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C2D1: add     esp, 4
 0x61C2D4: mov     eax, [edi]
 0x61C2D6: cmp     dword ptr [eax], 0
 0x61C2D9: jz      short loc_61C2E4
 0x61C2DB: mov     ecx, [eax]
 0x61C2DD: push    1
-0x61C2DF: call    sub_419F10
+0x61C2DF: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C2E4: mov     edi, [edi]
 0x61C2E6: push    edi
-0x61C2E7: call    FormHeapFree
+0x61C2E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C2EC: add     esp, 4
 0x61C2EF: test    ebp, ebp
 0x61C2F1: mov     edi, ebp
@@ -154,18 +154,18 @@
 0x61C2F7: mov     ecx, [esi+60h]
 0x61C2FA: cmp     ecx, ebp
 0x61C2FC: jz      short loc_61C30F
-0x61C2FE: call    BSSimpleList_Clear
+0x61C2FE: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x61C303: mov     eax, [esi+60h]
 0x61C306: push    eax
-0x61C307: call    FormHeapFree
+0x61C307: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C30C: add     esp, 4
 0x61C30F: mov     ecx, [esi+68h]
 0x61C312: cmp     ecx, ebp
 0x61C314: jz      short loc_61C327
-0x61C316: call    BSSimpleList_Clear
+0x61C316: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x61C31B: mov     eax, [esi+68h]
 0x61C31E: push    eax
-0x61C31F: call    FormHeapFree
+0x61C31F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C324: add     esp, 4
 0x61C327: mov     edi, [esi+64h]
 0x61C32A: cmp     edi, ebp
@@ -187,17 +187,17 @@
 0x61C34E: mov     ecx, ebx
 0x61C350: call    ContainerEntryExtraData_DestroyDataTable
 0x61C355: push    ebx
-0x61C356: call    FormHeapFree
+0x61C356: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C35B: add     esp, 4
 0x61C35E: mov     eax, [edi]
 0x61C360: cmp     dword ptr [eax], 0
 0x61C363: jz      short loc_61C36E
 0x61C365: mov     ecx, [eax]
 0x61C367: push    1
-0x61C369: call    sub_419F10
+0x61C369: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C36E: mov     edi, [edi]
 0x61C370: push    edi
-0x61C371: call    FormHeapFree
+0x61C371: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C376: add     esp, 4
 0x61C379: test    ebp, ebp
 0x61C37B: mov     edi, ebp
@@ -206,10 +206,10 @@
 0x61C381: mov     ecx, [esi+64h]
 0x61C384: cmp     ecx, ebp
 0x61C386: jz      short loc_61C399
-0x61C388: call    BSSimpleList_Clear
+0x61C388: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x61C38D: mov     eax, [esi+64h]
 0x61C390: push    eax
-0x61C391: call    FormHeapFree
+0x61C391: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C396: add     esp, 4
 0x61C399: mov     edi, [esi+5Ch]
 0x61C39C: cmp     edi, ebp
@@ -230,17 +230,17 @@
 0x61C3BE: mov     ecx, ebx
 0x61C3C0: call    ContainerEntryExtraData_DestroyDataTable
 0x61C3C5: push    ebx
-0x61C3C6: call    FormHeapFree
+0x61C3C6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C3CB: add     esp, 4
 0x61C3CE: mov     eax, [edi]
 0x61C3D0: cmp     dword ptr [eax], 0
 0x61C3D3: jz      short loc_61C3DE
 0x61C3D5: mov     ecx, [eax]
 0x61C3D7: push    1
-0x61C3D9: call    sub_419F10
+0x61C3D9: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C3DE: mov     edi, [edi]
 0x61C3E0: push    edi
-0x61C3E1: call    FormHeapFree
+0x61C3E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C3E6: add     esp, 4
 0x61C3E9: test    ebp, ebp
 0x61C3EB: mov     edi, ebp
@@ -248,18 +248,18 @@
 0x61C3EF: mov     ecx, [esi+5Ch]
 0x61C3F2: test    ecx, ecx
 0x61C3F4: jz      short loc_61C407
-0x61C3F6: call    BSSimpleList_Clear
+0x61C3F6: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x61C3FB: mov     eax, [esi+5Ch]
 0x61C3FE: push    eax
-0x61C3FF: call    FormHeapFree
+0x61C3FF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C404: add     esp, 4
 0x61C407: mov     ecx, [esi+0A4h]
 0x61C40D: test    ecx, ecx
 0x61C40F: jz      short loc_61C425
-0x61C411: call    BSSimpleList_Clear
+0x61C411: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x61C416: mov     eax, [esi+0A4h]
 0x61C41C: push    eax
-0x61C41D: call    FormHeapFree
+0x61C41D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C422: add     esp, 4
 0x61C425: mov     eax, [esi+94h]
 0x61C42B: test    eax, eax
@@ -268,10 +268,10 @@
 0x61C432: jz      short loc_61C43D
 0x61C434: mov     ecx, [eax]
 0x61C436: push    1
-0x61C438: call    sub_419F10
+0x61C438: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C43D: mov     eax, [esi+94h]
 0x61C443: push    eax
-0x61C444: call    FormHeapFree
+0x61C444: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C449: add     esp, 4
 0x61C44C: mov     eax, [esi+98h]
 0x61C452: test    eax, eax
@@ -280,10 +280,10 @@
 0x61C459: jz      short loc_61C464
 0x61C45B: mov     ecx, [eax]
 0x61C45D: push    1
-0x61C45F: call    sub_419F10
+0x61C45F: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C464: mov     eax, [esi+98h]
 0x61C46A: push    eax
-0x61C46B: call    FormHeapFree
+0x61C46B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C470: add     esp, 4
 0x61C473: mov     eax, [esi+9Ch]
 0x61C479: test    eax, eax
@@ -292,10 +292,10 @@
 0x61C480: jz      short loc_61C48B
 0x61C482: mov     ecx, [eax]
 0x61C484: push    1
-0x61C486: call    sub_419F10
+0x61C486: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C48B: mov     eax, [esi+9Ch]
 0x61C491: push    eax
-0x61C492: call    FormHeapFree
+0x61C492: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C497: add     esp, 4
 0x61C49A: mov     eax, [esi+90h]
 0x61C4A0: test    eax, eax
@@ -304,10 +304,10 @@
 0x61C4A7: jz      short loc_61C4B2
 0x61C4A9: mov     ecx, [eax]
 0x61C4AB: push    1
-0x61C4AD: call    sub_419F10
+0x61C4AD: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C4B2: mov     eax, [esi+90h]
 0x61C4B8: push    eax
-0x61C4B9: call    FormHeapFree
+0x61C4B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C4BE: add     esp, 4
 0x61C4C1: mov     eax, [esi+0A0h]
 0x61C4C7: test    eax, eax
@@ -316,17 +316,17 @@
 0x61C4CE: jz      short loc_61C4D9
 0x61C4D0: mov     ecx, [eax]
 0x61C4D2: push    1
-0x61C4D4: call    sub_419F10
+0x61C4D4: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x61C4D9: mov     eax, [esi+0A0h]
 0x61C4DF: push    eax
-0x61C4E0: call    FormHeapFree
+0x61C4E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C4E5: add     esp, 4
 0x61C4E8: cmp     dword ptr [esi+160h], 0
 0x61C4EF: jz      short loc_61C50D
 0x61C4F1: mov     eax, [esi+160h]
 0x61C4F7: mov     edi, [eax+4]
 0x61C4FA: push    eax
-0x61C4FB: call    FormHeapFree
+0x61C4FB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61C500: add     esp, 4
 0x61C503: test    edi, edi
 0x61C505: mov     [esi+160h], edi
@@ -346,3 +346,12 @@
 0x61C539: retn
 0x61C53A: mov     eax, [edi+eax*4]
 0x61C53D: jmp     loc_61C1F8
+0x9C33B0: mov     ecx, [ebp-14h]; this
+0x9C33B3: jmp     ??1TESPackage@@UAE@XZ; TESPackage::~TESPackage(void)
+0x9C33B8: mov     edx, [esp+arg_4]
+0x9C33BC: lea     eax, [edx-20h]
+0x9C33BF: mov     ecx, [edx-24h]
+0x9C33C2: xor     ecx, eax
+0x9C33C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C33C9: mov     eax, offset stru_AEBFD4
+0x9C33CE: jmp     ___CxxFrameHandler3

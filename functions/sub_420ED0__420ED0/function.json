@@ -1,19 +1,36 @@
 {
-  "callees_count": 3,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x420ED0",
+      "0x420EEC"
+    ],
+    [
+      "0x42AAE0",
+      "0x42AB0D"
+    ]
+  ],
+  "chunks_sha256": "196ce3d5bfa2500f5eec8caffcf6c1f1bd921639c95d60d22ef4c7b7f45f1452",
+  "comment_regular": "Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.",
+  "comment_repeatable": "Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_420ED0",
+  "display_name": "ExtraDataList_GetFriendHitCount",
   "end_ea": "0x420EEC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_420ED0",
+  "name": "ExtraDataList_GetFriendHitCount",
   "segment": ".text",
   "sha256": "feb888ec168d643f2931f137069f72217ae5857400ee49299c34d5477d04e567",
   "size": 28,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x420ED0",
-  "type": "int __thiscall(ExtraDataList *this, int)",
-  "xrefs_from_count": 13,
+  "total_chunk_size": 73,
+  "type": "unsigned int __thiscall(ExtraDataList *this, void *actor)",
+  "xrefs_from_count": 35,
   "xrefs_to_count": 3
 }

@@ -1,59 +1,52 @@
-int __cdecl sub_673980(int a1)
+// 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
+void __cdecl sub_673980(int a1)
 {
-  int result; // eax
-
-  switch ( a1 )
+  switch ( a1 ) /*0x67398c*/
   {
-    case 0:
-    case 7:
-    case 0xC:
-    case 0xE:
-    case 0xF:
-    case 0x10:
-    case 0x13:
-    case 0x15:
-    case 0x18:
-    case 0x19:
-    case 0x1D:
-    case 0x1F:
-    case 0x22:
-    case 0x23:
-    case 0x24:
-    case 0x25:
-    case 0x26:
-    case 0x27:
-      result = def_67398C(a1);
-      break;
-    case 1:
-    case 2:
-    case 3:
-    case 6:
-    case 9:
-    case 0xD:
-    case 0x11:
-    case 0x12:
-    case 0x14:
-    case 0x17:
-      result = 3;
-      break;
-    case 4:
-    case 5:
-    case 0xA:
-    case 0x16:
-    case 0x1A:
-    case 0x1C:
-    case 0x1E:
-    case 0x20:
-      result = 4;
-      break;
-    case 8:
-    case 0xB:
-    case 0x1B:
-    case 0x21:
-      result = 5;
-      break;
+    case 0: /*0x67398c*/
+    case 7: /*0x67398c*/
+    case 0xC: /*0x67398c*/
+    case 0xE: /*0x67398c*/
+    case 0xF: /*0x67398c*/
+    case 0x10: /*0x67398c*/
+    case 0x13: /*0x67398c*/
+    case 0x15: /*0x67398c*/
+    case 0x18: /*0x67398c*/
+    case 0x19: /*0x67398c*/
+    case 0x1D: /*0x67398c*/
+    case 0x1F: /*0x67398c*/
+    case 0x22: /*0x67398c*/
+    case 0x23: /*0x67398c*/
+    case 0x24: /*0x67398c*/
+    case 0x25: /*0x67398c*/
+    case 0x26: /*0x67398c*/
+    case 0x27: /*0x67398c*/
+      def_67398C(); /*0x6739a6*/
+      break; /*0x6739a6*/
+    case 1: /*0x67398c*/
+    case 2: /*0x67398c*/
+    case 3: /*0x67398c*/
+    case 4: /*0x67398c*/
+    case 5: /*0x67398c*/
+    case 6: /*0x67398c*/
+    case 8: /*0x67398c*/
+    case 9: /*0x67398c*/
+    case 0xA: /*0x67398c*/
+    case 0xB: /*0x67398c*/
+    case 0xD: /*0x67398c*/
+    case 0x11: /*0x67398c*/
+    case 0x12: /*0x67398c*/
+    case 0x14: /*0x67398c*/
+    case 0x16: /*0x67398c*/
+    case 0x17: /*0x67398c*/
+    case 0x1A: /*0x67398c*/
+    case 0x1B: /*0x67398c*/
+    case 0x1C: /*0x67398c*/
+    case 0x1E: /*0x67398c*/
+    case 0x20: /*0x67398c*/
+    case 0x21: /*0x67398c*/
+      return;
     default:
-      JUMPOUT(0x6739AA);
+      JUMPOUT(0x6739AA); /*0x6739aa*/
   }
-  return result;
 }

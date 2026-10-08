@@ -1489,13 +1489,13 @@
   },
   {
     "ea": "0x48A82B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48A82D",
-    "line": "call    sub_4DCCF0",
+    "line": "call    TESObjectREFR_ClearEquippedAmmo3D; AMMO form-type (0x22) unequip path: only when the selected worn ExtraDataList matches current equipped ammo, clear equipped ammo/quiver 3D before clearing process equipped-ammo data at vtable +0x10C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x48A83F",
-    "line": "call    eax",
+    "line": "call    eax; After TESObjectREFR_ClearEquippedAmmo3D, call MiddleHighProcess_SetEquippedAmmoData(NULL). Normal unequip therefore performs visual cleanup first and process-entry cleanup second.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1687,19 +1687,19 @@
   },
   {
     "ea": "0x48A89A",
-    "line": "push    esi",
+    "line": "push    esi; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48A89B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48A89D",
-    "line": "call    ExtraDataList_CompareListForContainer",
+    "line": "call    ExtraDataList_CompareListForContainer; Asymmetric container-stack compatibility check (__thiscall, retn 4). Scans only 'other'. Returns true when the lists must remain distinct: other contains Script (0x12) or Ownership (0x27), this lacks a matching extra-data type, or that type's virtual CompareTo reports a difference. Count (0x2A) is deliberately ignored because callers merge counts separately. Returns false only when every relevant node in other is compatible.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x48A98C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x48A994",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x48A9A0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x48A9BE",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

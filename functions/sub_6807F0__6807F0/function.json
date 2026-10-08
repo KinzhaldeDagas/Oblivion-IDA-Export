@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6807F0",
+  "chunks": [
+    [
+      "0x6807F0",
+      "0x680925"
+    ]
+  ],
+  "chunks_sha256": "ea4e4a5a073b0da07da5b1b3daf7528b632f1db6451db155f499112207625959",
+  "comment_regular": "Verified Oblivion route costs: after the access-policy check, a successful TESObjectDOOR_CheckActorAccess with mustLockpickOut=1 adds fPathMustLockpickPenalty (plus zero-valued dbl_A2FC68); a failed check adds fPathImpassableDoorPenalty. Separately, if either endpoint has minimal-use flag and ignore-min-use is false, adds fPathMinimalUseDoorPenalty. Fallout's search uses fixed 409600 penalties for its policy/minimal-use branches, so the numeric behavior differs.",
+  "comment_repeatable": "Verified Oblivion route costs: after the access-policy check, a successful TESObjectDOOR_CheckActorAccess with mustLockpickOut=1 adds fPathMustLockpickPenalty (plus zero-valued dbl_A2FC68); a failed check adds fPathImpassableDoorPenalty. Separately, if either endpoint has minimal-use flag and ignore-min-use is false, adds fPathMinimalUseDoorPenalty. Fallout's search uses fixed 409600 penalties for its policy/minimal-use branches, so the numeric behavior differs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TravelPath_ComputeDoorTransitionPenalty",
   "end_ea": "0x680925",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6807F0",
+  "name": "TravelPath_ComputeDoorTransitionPenalty",
   "segment": ".text",
   "sha256": "ea4e4a5a073b0da07da5b1b3daf7528b632f1db6451db155f499112207625959",
   "size": 309,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6807F0",
-  "type": "double __thiscall(TESObjectREFR **this, TESObjectREFR *)",
+  "total_chunk_size": 309,
+  "type": "double __thiscall(TravelPathSpaceDoorLink *doorLink, TESObjectREFR *sourceRefContext)",
   "xrefs_from_count": 129,
   "xrefs_to_count": 1
 }

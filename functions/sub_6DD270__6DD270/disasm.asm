@@ -4,7 +4,7 @@
 0x6DD278: push    edi
 0x6DD279: push    ebp
 0x6DD27A: mov     edi, ecx
-0x6DD27C: call    sub_715820
+0x6DD27C: call    NiTimeController_IsEqual; NiTimeController equality compares NiObject state, flags +0x08, frequency/phase/low/high key times +0x0C..+0x18, and only target nullness at +0x30. It excludes target identity, next-controller chain, and runtime time/update caches.
 0x6DD281: test    al, al
 0x6DD283: jnz     short loc_6DD28F
 0x6DD285: pop     edi
@@ -57,7 +57,7 @@
 0x6DD2F2: push    ecx
 0x6DD2F3: mov     ecx, edi
 0x6DD2F5: call    sub_6DC770
-0x6DD2FA: mov     eax, dword ptr [esp+1Ch+var_C]
+0x6DD2FA: mov     eax, [esp+1Ch+var_C]
 0x6DD2FE: mov     ecx, [ebp+50h]
 0x6DD301: add     eax, eax
 0x6DD303: add     eax, eax

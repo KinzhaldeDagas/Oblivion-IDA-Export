@@ -1,18 +1,31 @@
 {
-  "callees_count": 92,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 40,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x441EF0",
+      "0x442409"
+    ]
+  ],
+  "chunks_sha256": "9e0f84f875678037868bb4dd8b8f69eaad70aa059b26cf8bc1f23bb9a7ac3520",
+  "comment_regular": "\nGPU static-world lifecycle audit 2026-09-27: a null reference argument exits without publication. The supplied node argument may be null and GenerateNiNode supplies it inside the function. Before-write invalidation can therefore target the CELL argument even when no node identity is supplied; completion also encloses attachment and later native updates.\n\n\nV174 publication audit: complete native routine establishes/uses reference+3C, obtains cell node, adds receiver tree, attaches reference to cell quad, and performs subsequent updates before return. A completed reference-root event is separate from cell activation; later source owner qualification must still require current cell state6 and complete ancestry.",
   "comment_repeatable": "",
-  "data_refs_count": 2,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "sub_441EF0",
   "end_ea": "0x442409",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_441EF0",
   "segment": ".text",
   "sha256": "9e0f84f875678037868bb4dd8b8f69eaad70aa059b26cf8bc1f23bb9a7ac3520",
   "size": 1305,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x441EF0",
+  "total_chunk_size": 1305,
   "type": "void __thiscall(int ecx0, TESObjectREFR *a1, _DWORD *a6, volatile LONG *a7, __int16 a8)",
   "xrefs_from_count": 523,
   "xrefs_to_count": 4

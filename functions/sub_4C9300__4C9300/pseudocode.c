@@ -1,21 +1,21 @@
 char sub_4C9300()
 {
   char v0; // bl
-  int v1; // esi
+  OblivionTESFormListNode *p_landTextureList; // esi
 
-  v0 = 0;
-  v1 = TESDataHandler + 0x4C;
-  if ( TESDataHandler != 0xFFFFFFB4 )
+  v0 = 0; /*0x4c9308*/
+  p_landTextureList = &g_TESDataHandler->landTextureList; /*0x4c930a*/
+  if ( g_TESDataHandler != (TESDataHandler *)0xFFFFFFB4 ) /*0x4c930d*/
   {
-    do
+    do /*0x4c932d*/
     {
-      if ( !*(_DWORD *)(v1 + 4) && !*(_DWORD *)v1 )
-        break;
-      if ( sub_4C9230(*(int **)v1) )
-        v0 = 1;
-      v1 = *(_DWORD *)(v1 + 4);
+      if ( !p_landTextureList->next && !p_landTextureList->item ) /*0x4c9316*/
+        break; /*0x4c9319*/
+      if ( sub_4C9230((int *)p_landTextureList->item) ) /*0x4c931d*/
+        v0 = 1; /*0x4c9326*/
+      p_landTextureList = p_landTextureList->next; /*0x4c9328*/
     }
-    while ( v1 );
+    while ( p_landTextureList ); /*0x4c932d*/
   }
-  return v0;
+  return v0; /*0x4c932f*/
 }

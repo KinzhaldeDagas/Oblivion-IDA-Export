@@ -24,7 +24,7 @@
 0x56656D: jmp     loc_5667CA
 0x566572: push    esi
 0x566573: mov     ecx, edi
-0x566575: call    TESFile_InitializeFormFromRecord
+0x566575: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x56657A: lea     ebx, [ebx+0]
 0x566580: mov     ecx, edi
 0x566582: call    TESFile_GetChunkType
@@ -45,7 +45,7 @@
 0x5665C8: push    eax; Dst
 0x5665C9: mov     ecx, edi; a1
 0x5665CB: mov     dword ptr [ebp+Dst], 0
-0x5665D2: call    TESFile_GetChunkData
+0x5665D2: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x5665D7: movzx   ecx, word ptr [ebp+Dst]
 0x5665DB: movsx   edx, [ebp+Dst+2]
 0x5665DF: mov     [esi+1Ch], ecx
@@ -62,7 +62,7 @@
 0x5665FE: lea     eax, [ebp+var_1C]
 0x566601: push    eax; Dst
 0x566602: mov     ecx, edi; a1
-0x566604: call    TESFile_GetChunkData
+0x566604: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x566609: mov     ecx, dword ptr [ebp+var_1C]
 0x56660C: movsx   edx, byte ptr [ebp+var_18]
 0x566610: mov     [esi+1Ch], ecx
@@ -88,7 +88,7 @@
 0x566657: mov     [ebp+var_4], 4
 0x56665E: jz      short loc_56667A
 0x566660: mov     ecx, eax
-0x566662: call    TESPackage_TargetData_constr
+0x566662: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x566667: mov     [ebp+var_4], 0FFFFFFFFh
 0x56666E: mov     [esi+28h], eax
 0x566671: mov     byte ptr [esi+20h], 0
@@ -104,7 +104,7 @@
 0x56669C: push    200h; a4
 0x5666A1: push    ebx; Dst
 0x5666A2: mov     ecx, edi; a1
-0x5666A4: call    TESFile_GetChunkData
+0x5666A4: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x5666A9: mov     edx, [esi]
 0x5666AB: mov     eax, [edx+0D8h]
 0x5666B1: push    ebx
@@ -119,7 +119,7 @@
 0x5666C5: mov     dword ptr [ebp+var_3C], eax
 0x5666C8: mov     [ebp+var_38], eax
 0x5666CB: mov     [ebp+var_34], eax
-0x5666CE: call    TESFile_GetChunkData
+0x5666CE: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x5666D3: lea     edx, [ebp+var_3C]
 0x5666D6: push    edx
 0x5666D7: lea     ecx, [ebp+var_50]
@@ -128,7 +128,7 @@
 0x5666E2: push    eax
 0x5666E3: mov     ecx, esi
 0x5666E5: mov     [ebp+var_4], 6
-0x5666EC: call    TESPackage_SetLocation
+0x5666EC: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x5666F1: lea     ecx, [ebp+var_50]
 0x5666F4: mov     [ebp+var_4], 0FFFFFFFFh
 0x5666FB: call    TESPackage_LocationData_destr
@@ -147,7 +147,7 @@
 0x566726: mov     dword ptr [ebp+var_30], eax
 0x566729: mov     [ebp+var_2C], eax
 0x56672C: mov     [ebp+var_28], eax
-0x56672F: call    TESFile_GetChunkData
+0x56672F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x566734: lea     edx, [ebp+var_30]
 0x566737: push    edx
 0x566738: lea     ecx, [ebp+var_5C]
@@ -156,10 +156,10 @@
 0x566743: push    eax
 0x566744: mov     ecx, esi
 0x566746: mov     [ebp+var_4], 8
-0x56674D: call    TESPackage_SetTarget
-0x566752: lea     ecx, [ebp+var_5C]; void *
+0x56674D: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
+0x566752: lea     ecx, [ebp+var_5C]; this
 0x566755: mov     [ebp+var_4], 0FFFFFFFFh
-0x56675C: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x56675C: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x566761: jmp     short loc_5667B0
 0x566763: push    edi
 0x566764: lea     ecx, [esi+34h]
@@ -172,7 +172,7 @@
 0x566776: mov     ecx, edi; a1
 0x566778: mov     dword ptr [ebp+var_24], eax
 0x56677B: mov     [ebp+var_20], eax
-0x56677E: call    TESFile_GetChunkData
+0x56677E: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x566783: lea     edx, [ebp+var_24]
 0x566786: push    edx
 0x566787: lea     ecx, [ebp+var_44]
@@ -182,9 +182,9 @@
 0x566793: mov     ecx, esi
 0x566795: mov     [ebp+var_4], 7
 0x56679C: call    sub_565F80
-0x5667A1: lea     ecx, [ebp+var_44]; void *
+0x5667A1: lea     ecx, [ebp+var_44]; this
 0x5667A4: mov     [ebp+var_4], 0FFFFFFFFh
-0x5667AB: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x5667AB: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x5667B0: mov     ecx, edi
 0x5667B2: call    TESFile_GetNextChunk
 0x5667B7: test    al, al
@@ -206,3 +206,24 @@
 0x5667E5: mov     esp, ebp
 0x5667E7: pop     ebp
 0x5667E8: retn    4
+0x9BD730: mov     eax, dword ptr [ebp+Dst]
+0x9BD733: push    eax
+0x9BD734: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD739: pop     ecx
+0x9BD73A: retn
+0x9BD73B: lea     ecx, [ebp+var_50]
+0x9BD73E: jmp     TESPackage_LocationData_destr
+0x9BD743: lea     ecx, [ebp+var_5C]; this
+0x9BD746: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9BD74B: lea     ecx, [ebp+var_44]; this
+0x9BD74E: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9BD753: mov     edx, [esp-4+arg_4]
+0x9BD757: lea     eax, [edx+0Ch]
+0x9BD75A: mov     ecx, [edx-60h]
+0x9BD75D: xor     ecx, eax
+0x9BD75F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD764: mov     ecx, [edx-4]
+0x9BD767: xor     ecx, eax
+0x9BD769: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD76E: mov     eax, offset stru_AE7068
+0x9BD773: jmp     ___CxxFrameHandler3

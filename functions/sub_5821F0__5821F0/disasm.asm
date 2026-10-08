@@ -1,4 +1,4 @@
-0x5821F0: push    ebp
+0x5821F0: push    ebp; [Controller decode 2026-07-09] Non-player QueryControlState consumer: QuickSave 26, QuickLoad 27, Journal 15, Escape 29, Grave/console 30.
 0x5821F1: mov     ebp, esp
 0x5821F3: and     esp, 0FFFFFFC0h
 0x5821F6: push    0FFFFFFFFh
@@ -36,7 +36,7 @@
 0x58226A: add     esp, 4
 0x58226D: test    eax, eax
 0x58226F: jnz     short loc_582276
-0x582271: call    sub_5A6B00
+0x582271: call    HUDMainMenu_Create
 0x582276: push    3EDh
 0x58227B: call    Menu_GetOpenMenuTile
 0x582280: add     esp, 4
@@ -66,7 +66,7 @@
 0x5822E5: mov     byte ptr ds:0B3A6D0h, 0
 0x5822EC: cmp     byte ptr ds:0B3A6D1h, 0
 0x5822F3: jz      short loc_582301
-0x5822F5: call    sub_5ACE20
+0x5822F5: call    LevelUpMenu_Open
 0x5822FA: mov     byte ptr ds:0B3A6D1h, 0
 0x582301: mov     ecx, ds:0B333C4h
 0x582307: call    sub_6623A0
@@ -86,18 +86,18 @@
 0x582340: and     word ptr [eax+18h], 0FFFEh
 0x582346: mov     ecx, [esi+1Ch]; this
 0x582349: push    ecx
-0x58234A: fstp    [esp+208h+var_208.dwOfs]; a3
-0x58234D: push    0FA1h; a2
+0x58234A: fstp    [esp+208h+var_208.dwOfs]; value
+0x58234D: push    0FA1h; propertyCode
 0x582352: mov     [esp+20Ch+var_4], edi
-0x582359: call    Tile_SetFloat
+0x582359: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58235E: mov     ecx, esi
 0x582360: call    sub_57E7C0
 0x582365: cmp     byte ptr [esi+0B9h], 0
 0x58236C: jnz     short loc_5823A5
-0x58236E: mov     ecx, [esi+88h]
+0x58236E: mov     ecx, [esi+88h]; this
 0x582374: cmp     ecx, edi
 0x582376: jz      short loc_58239E
-0x582378: call    sub_5893B0
+0x582378: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x58237D: test    al, al
 0x58237F: jz      short loc_58239E
 0x582381: mov     ecx, [esi+88h]
@@ -107,22 +107,22 @@
 0x582397: fnstsw  ax
 0x582399: test    ah, 44h
 0x58239C: jnp     short loc_5823A5
-0x58239E: mov     ecx, esi
-0x5823A0: call    sub_57FD60
+0x58239E: mov     ecx, esi; this
+0x5823A0: call    InterfaceManager__GetDefaultFocus; Verified: invokes ScanForMaxFocus with INT_MIN and null root, sets selected tile via SetCurrentFocusTarget, hides cursor, clears mouse-motion byte +0xB9. Fallout named analogue 0x824F09D0.
 0x5823A5: push    1; a3
 0x5823A7: push    edi; a2
 0x5823A8: mov     ecx, ebx; this
-0x5823AA: call    InputGlobals__QueryMouseKeyState
+0x5823AA: call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.
 0x5823AF: push    2; a3
 0x5823B1: push    edi; a2
 0x5823B2: mov     ecx, ebx; this
 0x5823B4: mov     [esp+20Ch+var_1B8], eax
-0x5823B8: call    InputGlobals__QueryMouseKeyState
+0x5823B8: call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.
 0x5823BD: push    edi; a3
 0x5823BE: push    edi; a2
 0x5823BF: mov     ecx, ebx; this
 0x5823C1: mov     [esp+20Ch+var_1BC], eax
-0x5823C5: call    InputGlobals__QueryMouseKeyState
+0x5823C5: call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.
 0x5823CA: cmp     eax, edi
 0x5823CC: mov     [esp+204h+var_1B0], eax
 0x5823D0: jz      short loc_5823DD
@@ -155,9 +155,9 @@
 0x58242C: jz      short loc_582483
 0x58242E: fldz
 0x582430: push    ecx
-0x582431: fstp    [esp+208h+var_208.dwOfs]; a3
-0x582434: push    0FDDh; a2
-0x582439: call    Tile_SetFloat
+0x582431: fstp    [esp+208h+var_208.dwOfs]; value
+0x582434: push    0FDDh; propertyCode
+0x582439: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58243E: mov     ecx, [esi+88h]
 0x582444: call    Tile_GetParentMenu
 0x582449: mov     ecx, [esi+88h]
@@ -168,7 +168,7 @@
 0x58245A: push    0FA8h
 0x58245F: add     edi, 14h
 0x582462: call    Tile_GetFloat
-0x582467: call    Double_To_SInt32
+0x582467: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58246C: mov     edx, [edi]
 0x58246E: push    eax
 0x58246F: mov     ecx, ebx
@@ -193,7 +193,7 @@
 0x5824B5: push    0FA8h
 0x5824BA: add     edi, 1Ch
 0x5824BD: call    Tile_GetFloat
-0x5824C2: call    Double_To_SInt32
+0x5824C2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5824C7: mov     ecx, [esi+0A4h]
 0x5824CD: push    eax
 0x5824CE: mov     eax, [edi]
@@ -215,7 +215,7 @@
 0x5824FF: mov     ecx, ebx
 0x582501: add     edi, 18h
 0x582504: call    Tile_GetFloat
-0x582509: call    Double_To_SInt32
+0x582509: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58250E: mov     ecx, [esi+0A4h]
 0x582514: push    eax; a3
 0x582515: mov     eax, [edi]
@@ -249,7 +249,7 @@
 0x58258D: fstp    st(1)
 0x58258F: test    ah, 44h
 0x582592: jnp     short loc_5825A4
-0x582594: call    Double_To_SInt32
+0x582594: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x582599: push    eax; int
 0x58259A: call    sub_57DE50
 0x58259F: add     esp, 4
@@ -263,21 +263,21 @@
 0x5825BD: mov     ecx, [esi+98h]; this
 0x5825C3: fstp    [esp+228h+var_1F8]
 0x5825C7: fld     [esp+228h+var_1F8]
-0x5825CB: fstp    [esp+228h+a3]; a3
-0x5825CE: push    0FE3h; a2
-0x5825D3: call    Tile_SetFloat
+0x5825CB: fstp    [esp+228h+a3]; value
+0x5825CE: push    0FE3h; propertyCode
+0x5825D3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5825D8: fld1
 0x5825DA: mov     ecx, [esi+98h]; this
 0x5825E0: push    ecx
-0x5825E1: fstp    [esp+228h+a3]; a3
-0x5825E4: push    0FE1h; a2
-0x5825E9: call    Tile_SetFloat
+0x5825E1: fstp    [esp+228h+a3]; value
+0x5825E4: push    0FE1h; propertyCode
+0x5825E9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5825EE: fldz
 0x5825F0: mov     ecx, [esi+98h]; this
 0x5825F6: push    ecx
-0x5825F7: fstp    [esp+228h+a3]; a3
-0x5825FA: push    0FE1h; a2
-0x5825FF: call    Tile_SetFloat
+0x5825F7: fstp    [esp+228h+a3]; value
+0x5825FA: push    0FE1h; propertyCode
+0x5825FF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x582604: mov     ecx, [esi+98h]
 0x58260A: mov     edx, [esi+9Ch]
 0x582610: mov     edi, [edx]
@@ -285,7 +285,7 @@
 0x582613: push    0FA8h
 0x582618: add     edi, 0Ch
 0x58261B: call    Tile_GetFloat
-0x582620: call    Double_To_SInt32
+0x582620: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x582625: mov     ecx, [esi+9Ch]
 0x58262B: push    eax; a3
 0x58262C: mov     eax, [edi]
@@ -310,9 +310,9 @@
 0x582675: jnz     short loc_5826B5
 0x582677: fldz
 0x582679: push    ecx
-0x58267A: fstp    [esp+230h+var_230]; a3
-0x58267D: push    0FDDh; a2
-0x582682: call    Tile_SetFloat
+0x58267A: fstp    [esp+230h+value]; value
+0x58267D: push    0FDDh; propertyCode
+0x582682: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x582687: mov     ecx, [esi+9Ch]
 0x58268D: mov     edi, [ecx]
 0x58268F: mov     ecx, [esi+98h]
@@ -320,7 +320,7 @@
 0x582696: push    0FA8h
 0x58269B: add     edi, 14h
 0x58269E: call    Tile_GetFloat
-0x5826A3: call    Double_To_SInt32
+0x5826A3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5826A8: mov     ecx, [esi+9Ch]
 0x5826AE: mov     edx, [edi]
 0x5826B0: push    eax; a3
@@ -344,10 +344,10 @@
 0x5826ED: mov     ecx, [esi+98h]; this
 0x5826F3: fld1
 0x5826F5: push    ecx
-0x5826F6: fstp    [esp+238h+var_238]; a3
-0x5826F9: push    0FDDh; a2
+0x5826F6: fstp    [esp+238h+var_238]; value
+0x5826F9: push    0FDDh; propertyCode
 0x5826FE: mov     [esi+88h], ecx
-0x582704: call    Tile_SetFloat
+0x582704: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x582709: mov     ecx, [esi+98h]
 0x58270F: mov     eax, [esi+9Ch]
 0x582715: mov     edi, [eax]
@@ -355,7 +355,7 @@
 0x582718: push    0FA8h
 0x58271D: add     edi, 10h
 0x582720: call    Tile_GetFloat
-0x582725: call    Double_To_SInt32
+0x582725: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58272A: mov     ecx, [esi+9Ch]
 0x582730: mov     edx, [edi]
 0x582732: push    eax
@@ -381,7 +381,7 @@
 0x58277E: push    0FA8h
 0x582783: add     edi, 8
 0x582786: call    Tile_GetFloat
-0x58278B: call    Double_To_SInt32
+0x58278B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x582790: mov     ecx, [esi+9Ch]
 0x582796: push    eax
 0x582797: mov     eax, [edi]
@@ -394,7 +394,7 @@
 0x5827AE: jle     loc_5833FC
 0x5827B4: lea     ecx, [esp+23Ch+a2.dwSequence]
 0x5827B8: mov     byte ptr [esp+23Ch+var_1F8+3], 1
-0x5827BD: call    sub_959BC0
+0x5827BD: call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.
 0x5827C2: mov     ecx, ds:0B333A0h
 0x5827C8: mov     byte ptr [esp+23Ch+var_1B8+1], 1
 0x5827D0: mov     eax, [ecx+0Ch]
@@ -410,10 +410,10 @@
 0x5827FD: mov     [esp+240h+var_1C4], edi
 0x582801: mov     ebx, [edx+0DCh]
 0x582807: push    ecx
-0x582808: call    Double_To_SInt32
+0x582808: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58280D: fld     dword ptr [esi+2Ch]
 0x582810: push    eax
-0x582811: call    Double_To_SInt32
+0x582811: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x582816: push    eax
 0x582817: mov     ecx, ebx
 0x582819: call    sub_70D300
@@ -423,7 +423,7 @@
 0x582827: lea     eax, [esp+244h+var_18C]
 0x58282E: push    eax
 0x58282F: lea     ecx, [esp+248h+a2.dwSequence]
-0x582836: call    sub_959D60
+0x582836: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x58283B: test    al, al
 0x58283D: jz      loc_583399
 0x582843: mov     ecx, [esp+23Ch+var_1AC]
@@ -432,7 +432,7 @@
 0x58284E: jz      loc_583399
 0x582854: mov     eax, [eax]
 0x582856: push    eax
-0x582857: call    sub_4DC270
+0x582857: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x58285C: add     esp, 4
 0x58285F: xor     ebx, ebx
 0x582861: mov     [esp+23Ch+var_208.dwData], 1
@@ -450,7 +450,7 @@
 0x582892: jz      short loc_5828A1
 0x582894: mov     eax, [eax]
 0x582896: push    eax
-0x582897: call    sub_4DC270
+0x582897: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x58289C: add     esp, 4
 0x58289F: jmp     short loc_582869
 0x5828A1: mov     ebx, ds:0B02E1Ch
@@ -464,7 +464,7 @@
 0x5828C4: mov     ecx, [eax+edx*4]
 0x5828C7: call    sub_404FB0
 0x5828CC: fadd    qword ptr ds:0A30E48h
-0x5828D2: call    Double_To_SInt32
+0x5828D2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5828D7: test    edi, edi
 0x5828D9: mov     [esp+23Ch+var_20C], eax
 0x5828DD: jz      loc_58332A
@@ -548,15 +548,15 @@
 0x5829F3: call    sub_5723E0
 0x5829F8: add     ebx, [esp+23Ch+var_20C]
 0x5829FC: mov     [esp+23Ch+var_208.dwOfs], ebx
-0x582A00: mov     ecx, [esi+0BCh]; this
-0x582A06: call    TESObjectREFR_GetOwner
+0x582A00: mov     ecx, [esi+0BCh]; reference
+0x582A06: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x582A0B: test    eax, eax
 0x582A0D: jz      short loc_582A8C
-0x582A0F: mov     ecx, [esi+0BCh]; this
-0x582A15: call    TESObjectREFR_GetOwner
-0x582A1A: mov     ecx, [esi+0BCh]; this
+0x582A0F: mov     ecx, [esi+0BCh]; reference
+0x582A15: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
+0x582A1A: mov     ecx, [esi+0BCh]; reference
 0x582A20: mov     edi, eax
-0x582A22: call    TESObjectREFR_GetOwner
+0x582A22: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x582A27: mov     eax, [eax+0Ch]
 0x582A2A: mov     edx, [edi]
 0x582A2C: push    eax
@@ -805,7 +805,7 @@
 0x582D46: mov     eax, [esi+0BCh]
 0x582D4C: fld     dword ptr [eax+28h]
 0x582D4F: fmul    qword ptr ds:0A30DC8h
-0x582D55: call    Double_To_SInt32
+0x582D55: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x582D5A: push    eax; ArgList
 0x582D5B: lea     ecx, [esp+240h+var_208.dwTimeStamp]
 0x582D5F: push    offset aOrentationDDeg; "Orentation %d deg"
@@ -840,11 +840,10 @@
 0x582DBC: mov     word ptr [esp+244h+ArgList], di
 0x582DC1: mov     [esp+244h+ArgList+2], 0FFh
 0x582DC6: mov     [esp+244h+var_208.dwData], edi
-0x582DCA: call    sub_4DB9D0
+0x582DCA: call    sub_4DB9D0; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.
 0x582DCF: test    al, al
 0x582DD1: jz      loc_582F8D
 0x582DD7: jmp     short loc_582DE0
-0x582DD9: align 10h
 0x582DE0: mov     ecx, [esi+0BCh]
 0x582DE6: mov     edx, [ecx]
 0x582DE8: mov     eax, [edx+170h]
@@ -892,7 +891,7 @@
 0x582E87: push    edi
 0x582E88: call    sub_4AEBE0
 0x582E8D: fmul    qword ptr ds:0A30DC8h
-0x582E93: call    Double_To_SInt32
+0x582E93: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x582E98: fld     [esp+240h+a2.dwTimeStamp]
 0x582E9C: mov     ecx, [esp+240h+var_210]
 0x582EA0: push    eax
@@ -964,24 +963,24 @@
 0x582F77: push    eax
 0x582F78: mov     [esp+244h+var_208.dwOfs], ebx
 0x582F7C: mov     [esp+244h+var_208.dwData], eax
-0x582F80: call    sub_4DB9D0
+0x582F80: call    sub_4DB9D0; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.
 0x582F85: test    al, al
 0x582F87: jnz     loc_582DE0
-0x582F8D: mov     ecx, [esi+0BCh]
-0x582F93: call    sub_4D7740
+0x582F8D: mov     ecx, [esi+0BCh]; this
+0x582F93: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x582F98: test    eax, eax
 0x582F9A: jz      loc_5830A0
-0x582FA0: mov     ecx, [esi+0BCh]
-0x582FA6: call    sub_4D7740
-0x582FAB: mov     ecx, eax
+0x582FA0: mov     ecx, [esi+0BCh]; this
+0x582FA6: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
+0x582FAB: mov     ecx, eax; this
 0x582FAD: mov     [esp+23Ch+var_210], eax
-0x582FB1: call    sub_428E70
+0x582FB1: call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.
 0x582FB6: test    al, al
 0x582FB8: mov     edi, offset aLocked_0; "Locked"
 0x582FBD: jnz     short loc_582FC4
 0x582FBF: mov     edi, offset aUnlocked; "Unlocked"
-0x582FC4: mov     ecx, [esp+23Ch+var_210]
-0x582FC8: call    sub_42ACD0
+0x582FC4: mov     ecx, [esp+23Ch+var_210]; this
+0x582FC8: call    ExtraLockData_GetLockLevelCategory; Verified lock-status UI path: retrieves the effective ExtraLockData, checks ExtraLockData_IsLocked, calls ExtraLockData_GetLockLevelCategory, indexes LockLevelNames, and formats `Lock '<category>' Locked/Unlocked.` This independently confirms enum order 0=VeryEasy, 1=Easy, 2=Average, 3=Hard, 4=VeryHard, 5=Impossible.
 0x582FCD: mov     eax, ds:0B03E1Ch[eax*4]
 0x582FD4: test    eax, eax
 0x582FD6: jz      short loc_582FDC
@@ -1051,17 +1050,17 @@
 0x58309A: add     ebx, edi
 0x58309C: mov     [esp+23Ch+var_208.dwOfs], ebx
 0x5830A0: mov     ecx, [esi+0BCh]; this
-0x5830A6: call    GetTeleportExtraData
+0x5830A6: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x5830AB: test    eax, eax
 0x5830AD: jz      loc_583191
 0x5830B3: mov     ecx, [esi+0BCh]; this
-0x5830B9: call    GetTeleportExtraData
+0x5830B9: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x5830BE: mov     edi, eax
 0x5830C0: mov     ecx, edi
-0x5830C2: call    sub_42B460
-0x5830C7: mov     ecx, edi
+0x5830C2: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
+0x5830C7: mov     ecx, edi; this
 0x5830C9: mov     [esp+23Ch+var_210], eax
-0x5830CD: call    sub_42B410
+0x5830CD: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x5830D2: cmp     [esp+23Ch+var_210], 0
 0x5830D7: mov     edi, offset aUnknown_2; "Unknown"
 0x5830DC: mov     [esp+23Ch+var_208.dwData], eax
@@ -1078,7 +1077,7 @@
 0x5830FF: jz      short loc_583137
 0x583101: mov     ecx, [esp+23Ch+var_208.dwData]
 0x583105: add     ecx, 44h ; 'D'
-0x583108: call    sub_41FF80
+0x583108: call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.
 0x58310D: test    eax, eax
 0x58310F: jz      short loc_583116
 0x583111: mov     edi, offset aPersistent_0; "Persistent"
@@ -1275,7 +1274,7 @@
 0x5833E4: call    sub_5723E0
 0x5833E9: lea     ecx, [esp+23Ch+a2.dwSequence]
 0x5833ED: mov     byte ptr [esp+23Ch+var_3C], 0
-0x5833F5: call    sub_959EC0
+0x5833F5: call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
 0x5833FA: xor     edi, edi
 0x5833FC: cmp     [esp+244h+var_1F0], edi
 0x583400: jz      short loc_58346A
@@ -1288,7 +1287,7 @@
 0x583415: push    0FA8h
 0x58341A: add     edi, 20h ; ' '
 0x58341D: call    Tile_GetFloat
-0x583422: call    Double_To_SInt32
+0x583422: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x583427: mov     ecx, [esi+9Ch]
 0x58342D: mov     edx, [edi]
 0x58342F: push    eax
@@ -1305,7 +1304,7 @@
 0x58344B: push    0FA8h
 0x583450: add     edi, 24h ; '$'
 0x583453: call    Tile_GetFloat
-0x583458: call    Double_To_SInt32
+0x583458: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58345D: mov     ecx, [esi+0A4h]
 0x583463: push    eax
 0x583464: mov     eax, [edi]
@@ -1325,7 +1324,7 @@
 0x583489: push    0FA8h
 0x58348E: add     edi, 28h ; '('
 0x583491: call    Tile_GetFloat
-0x583496: call    Double_To_SInt32
+0x583496: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58349B: mov     ecx, [esi+9Ch]
 0x5834A1: mov     edx, [edi]
 0x5834A3: push    eax
@@ -1484,7 +1483,7 @@
 0x583690: push    1; a3
 0x583692: push    1Ah; a2
 0x583694: mov     ecx, edi; this
-0x583696: call    InputGlobals__QueryControlState
+0x583696: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x58369B: test    eax, eax
 0x58369D: mov     ebx, 2Bh ; '+'
 0x5836A2: jz      short loc_5836D4
@@ -1505,7 +1504,7 @@
 0x5836D4: push    1; a3
 0x5836D6: push    1Bh; a2
 0x5836D8: mov     ecx, edi; this
-0x5836DA: call    InputGlobals__QueryControlState
+0x5836DA: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5836DF: test    eax, eax
 0x5836E1: jz      short loc_583713
 0x5836E3: cmp     ds:0B1397Ah, bx
@@ -1525,13 +1524,13 @@
 0x583713: mov     ecx, [esp+258h+var_224.dwTimeStamp]
 0x583717: push    ecx
 0x583718: mov     [esp+25Ch+var_58], 0FFFFFFFFh
-0x583723: call    FormHeapFree
+0x583723: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x583728: mov     ebx, [esp+25Ch+var_208.dwOfs]
 0x58372C: add     esp, 4
 0x58372F: push    1; a3
 0x583731: push    1Eh; a2
 0x583733: mov     ecx, ebx; this
-0x583735: call    InputGlobals__QueryControlState
+0x583735: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x58373A: test    eax, eax
 0x58373C: jz      short loc_58377C
 0x58373E: call    GetOpenedMenuCode
@@ -1557,7 +1556,7 @@
 0x58377C: push    1; a3
 0x58377E: push    1Dh; a2
 0x583780: mov     ecx, ebx; this
-0x583782: call    InputGlobals__QueryControlState
+0x583782: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x583787: test    eax, eax
 0x583789: jz      loc_58383E
 0x58378F: push    414h
@@ -1609,7 +1608,7 @@
 0x58383E: push    1; a3
 0x583840: push    1Dh; a2
 0x583842: mov     ecx, ebx; this
-0x583844: call    InputGlobals__QueryControlState
+0x583844: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x583849: test    eax, eax
 0x58384B: jz      loc_58392B
 0x583851: push    40Fh
@@ -1730,7 +1729,7 @@
 0x5839AE: push    3Bh ; ';'; a2
 0x5839B0: mov     ecx, ebx; this
 0x5839B2: mov     [esp+260h+var_224.dwData], edi
-0x5839B6: call    InputGlobals__QueryKeyboardState
+0x5839B6: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x5839BB: test    eax, eax
 0x5839BD: jz      short loc_5839C6
 0x5839BF: mov     edi, 3EBh
@@ -1738,7 +1737,7 @@
 0x5839C6: push    1; a3
 0x5839C8: push    3Ch ; '<'; a2
 0x5839CA: mov     ecx, ebx; this
-0x5839CC: call    InputGlobals__QueryKeyboardState
+0x5839CC: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x5839D1: test    eax, eax
 0x5839D3: jz      short loc_5839DC
 0x5839D5: mov     edi, 3EAh
@@ -1746,7 +1745,7 @@
 0x5839DC: push    1; a3
 0x5839DE: push    3Dh ; '='; a2
 0x5839E0: mov     ecx, ebx; this
-0x5839E2: call    InputGlobals__QueryKeyboardState
+0x5839E2: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x5839E7: test    eax, eax
 0x5839E9: jz      short loc_5839F2
 0x5839EB: mov     edi, 3FEh
@@ -1754,7 +1753,7 @@
 0x5839F2: push    1; a3
 0x5839F4: push    3Eh ; '>'; a2
 0x5839F6: mov     ecx, ebx; this
-0x5839F8: call    InputGlobals__QueryKeyboardState
+0x5839F8: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x5839FD: test    eax, eax
 0x5839FF: jz      short loc_583A0A
 0x583A01: mov     edi, 3FFh
@@ -1762,9 +1761,9 @@
 0x583A0A: mov     ecx, [esi+68h]
 0x583A0D: push    1771h
 0x583A12: call    Tile_GetFloat
-0x583A17: call    Double_To_SInt32
+0x583A17: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x583A1C: test    edi, edi
-0x583A1E: mov     [esp+258h+var_230+4], eax
+0x583A1E: mov     [esp+258h+value+4], eax
 0x583A22: jz      short loc_583A95
 0x583A24: mov     ecx, esi
 0x583A26: call    InterfaceManager__GetTopVisibleMenuID
@@ -1772,7 +1771,7 @@
 0x583A2E: jz      short loc_583A36
 0x583A30: cmp     byte ptr [esi+8], 1
 0x583A34: jnz     short loc_583A95
-0x583A36: cmp     edi, [esp+258h+var_230+4]
+0x583A36: cmp     edi, [esp+258h+value+4]
 0x583A3A: jz      short loc_583A95
 0x583A3C: mov     ecx, ds:0B333C4h
 0x583A42: cmp     byte ptr [ecx+5C0h], 0
@@ -1801,7 +1800,7 @@
 0x583A95: push    1; a3
 0x583A97: push    0Fh; a2
 0x583A99: mov     ecx, ebx; this
-0x583A9B: call    InputGlobals__QueryControlState
+0x583A9B: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x583AA0: test    eax, eax
 0x583AA2: jnz     short loc_583AA8
 0x583AA4: test    edi, edi
@@ -1829,11 +1828,11 @@
 0x583AE7: fild    [esp+260h+a3]
 0x583AEB: push    ecx
 0x583AEC: mov     ecx, [esi+68h]; this
-0x583AEF: fstp    [esp+264h+var_264]; a3
-0x583AF2: push    1771h; a2
-0x583AF7: call    Tile_SetFloat
-0x583AFC: mov     ecx, ds:0B333C4h
-0x583B02: call    sub_663920
+0x583AEF: fstp    [esp+264h+var_264]; value
+0x583AF2: push    1771h; propertyCode
+0x583AF7: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x583AFC: mov     ecx, ds:0B333C4h; this
+0x583B02: call    Actor_CleanupTransferredArrowProjectilesForEquippedAmmo; For the actor's currently equipped AMMO, removes all matching transferred ArrowProjectile references (+0x95 transfer marker) by calling cleanup with INT_MAX and immediate-destroy flags.
 0x583B07: push    1
 0x583B09: mov     ecx, esi
 0x583B0B: call    sub_57D640
@@ -1842,7 +1841,7 @@
 0x583B1A: push    1; a3
 0x583B1C: push    0Fh; a2
 0x583B1E: mov     ecx, ebx; this
-0x583B20: call    InputGlobals__QueryControlState
+0x583B20: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x583B25: test    eax, eax
 0x583B27: jnz     short loc_583B37
 0x583B29: test    edi, edi
@@ -1882,12 +1881,12 @@
 0x583B95: mov     ecx, edi; this
 0x583B97: call    sub_6B73E0
 0x583B9C: push    edi
-0x583B9D: call    FormHeapFree
+0x583B9D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x583BA2: add     esp, 4
 0x583BA5: call    sub_57CC00
 0x583BAA: cmp     byte ptr [esi+8], 1
 0x583BAE: jz      short loc_583BD1
-0x583BB0: mov     ecx, ds:0B333C4h; int
+0x583BB0: mov     ecx, ds:0B333C4h; this
 0x583BB6: test    ecx, ecx
 0x583BB8: jz      short loc_583BD1
 0x583BBA: mov     eax, ds:0B3A6E0h
@@ -1896,7 +1895,7 @@
 0x583BC4: jz      short loc_583BD1
 0x583BC6: test    byte ptr [eax+18h], 1
 0x583BCA: jnz     short loc_583BD1
-0x583BCC: call    sub_664C40
+0x583BCC: call    Actor_UpdateAnimationAndFirstPerson
 0x583BD1: mov     eax, [esi+0B4h]
 0x583BD7: test    eax, eax
 0x583BD9: jz      short loc_583BE7
@@ -1914,3 +1913,18 @@
 0x583C07: mov     esp, ebp
 0x583C09: pop     ebp
 0x583C0A: retn
+0x9BED10: lea     ecx, [ebp+a2.dwSequence]; void *
+0x9BED16: jmp     BSStringT_Clear
+0x9BED1B: lea     ecx, [ebp+var_190]
+0x9BED21: jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
+0x9BED26: mov     edx, [esp-4+arg_4]
+0x9BED2A: lea     eax, [edx-1F4h]
+0x9BED30: mov     ecx, [edx-1F8h]
+0x9BED36: xor     ecx, eax
+0x9BED38: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BED3D: add     eax, 0Ch
+0x9BED40: mov     ecx, [edx-38h]
+0x9BED43: xor     ecx, eax
+0x9BED45: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BED4A: mov     eax, offset stru_AE83AC
+0x9BED4F: jmp     ___CxxFrameHandler3

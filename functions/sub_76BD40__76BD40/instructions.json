@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76BD40",
-    "line": "call    sub_761DF0",
+    "line": "call    NiDX9Renderer_CreateD3D9Instance; Oblivion-authoritative: lazily loads D3D9.DLL, resolves Direct3DCreate9, and creates the process IDirect3D9 singleton with SDK version 0x20. Returns 0 on success, -1 on failure.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x76BD59",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x76BD68",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

@@ -21,8 +21,8 @@
 0x66A42F: fldz
 0x66A431: push    ecx
 0x66A432: lea     ecx, [esi+68h]; this
-0x66A435: fstp    [esp+0Ch+var_C]
-0x66A438: call    MagicTarget_ProcessEffects
+0x66A435: fstp    [esp+0Ch+deltaTime]; deltaTime
+0x66A438: call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.
 0x66A43D: mov     eax, [esp+8+arg_0]
 0x66A441: test    eax, eax
 0x66A443: mov     [esi+644h], eax
@@ -45,11 +45,11 @@
 0x66A46E: mov     edi, edi
 0x66A470: push    edi
 0x66A471: push    2
-0x66A473: call    ActorValue_GetAVFromGroupOffset
+0x66A473: call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
 0x66A478: add     esp, 8
-0x66A47B: push    eax; float
-0x66A47C: mov     ecx, esi
-0x66A47E: call    sub_663C50
+0x66A47B: push    eax; actorValue
+0x66A47C: mov     ecx, esi; this
+0x66A47E: call    Player_RecalculateRequiredSkillExperience; Skill-use requirement recalculation evaluates the curve with the raw skill level, including level 0; only an exactly-zero computed result is replaced with 1.
 0x66A483: add     edi, 1
 0x66A486: cmp     edi, 15h
 0x66A489: jl      short loc_66A470

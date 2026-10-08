@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x6F0658",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x6F0767",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x6F079C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x6F08C3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1858,5 +1858,137 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x788FA0",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x788FA1",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x788FA3",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x788FA6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x788FA8",
+    "line": "jz      short loc_788FB3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x788FAA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x788FAB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x788FB0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x788FB3",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x788FBA",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x788FC1",
+    "line": "mov     dword ptr [esi+10h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x788FC8",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x788FC9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C86C0",
+    "line": "lea     ecx, [ebp+var_30]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C86C3",
+    "line": "jmp     loc_788FA0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C86C8",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C86CC",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C86CF",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C86D2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C86D4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C86D9",
+    "line": "mov     eax, offset stru_AF0B58",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C86DE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

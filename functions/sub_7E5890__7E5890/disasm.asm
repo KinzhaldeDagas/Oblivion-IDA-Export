@@ -22,14 +22,14 @@
 0x7E58CB: test    eax, eax
 0x7E58CD: mov     [esp+20h+var_4], 0
 0x7E58D5: jz      short loc_7E58F4
-0x7E58D7: mov     ecx, [esp+20h+arg_0]
+0x7E58D7: mov     ecx, [esp+20h+vtable]
 0x7E58DB: push    0
-0x7E58DD: push    0
-0x7E58DF: push    1
-0x7E58E1: push    17Eh
-0x7E58E6: push    ecx
-0x7E58E7: push    eax
-0x7E58E8: call    sub_7E2370
+0x7E58DD: push    0; lightCount
+0x7E58DF: push    1; byte6
+0x7E58E1: push    17Eh; selector
+0x7E58E6: push    ecx; geometry
+0x7E58E7: push    eax; outPass
+0x7E58E8: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x7E58ED: add     esp, 18h
 0x7E58F0: mov     edi, eax
 0x7E58F2: jmp     short loc_7E58F6
@@ -61,3 +61,15 @@
 0x7E5941: pop     ebx
 0x7E5942: add     esp, 10h
 0x7E5945: retn    10h
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

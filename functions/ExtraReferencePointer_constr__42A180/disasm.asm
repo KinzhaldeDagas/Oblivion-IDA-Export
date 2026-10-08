@@ -1,5 +1,5 @@
-0x42A180: mov     eax, ecx
-0x42A182: mov     ecx, [esp+arg_0]
+0x42A180: mov     eax, ecx; Construct 0x10-byte ExtraReferencePointer: BSExtraData header/type 0x22 plus TESObjectREFR pointer at +0x0C.
+0x42A182: mov     ecx, [esp+reference]
 0x42A186: mov     byte ptr [eax+4], 22h ; '"'
 0x42A18A: mov     dword ptr [eax+8], 0
 0x42A191: mov     dword ptr [eax], offset ??_7ExtraReferencePointer@@6B@; const ExtraReferencePointer::`vftable'

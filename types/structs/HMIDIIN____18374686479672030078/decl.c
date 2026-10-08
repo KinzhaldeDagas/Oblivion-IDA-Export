@@ -1,1 +1,4 @@
-HMIDIIN__
+struct HMIDIIN__
+{
+int unused;
+};

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D2FF0",
-    "line": "sub     esp, 34h",
+    "line": "sub     esp, 34h; Compute and cache the camera-relative full-list ranking value at ShadowSceneLight+0xD0.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x7D3190",
-    "line": "fstp    [esp+38h+arg_0]",
+    "line": "fstp    [esp+38h+arg_0]; MEF v57 VERIFY 2026-10-08: VERIFIED PERF-6 precision: scorer rounds product through DWORD float stack slot before caching at+ D0 and returning ST0; caller7C721D also stores to float. v57's float score callback/result locals match these observed rounding points; no extended-return precision regression established.",
     "mnemonic": "fstp",
     "size": 4
   },

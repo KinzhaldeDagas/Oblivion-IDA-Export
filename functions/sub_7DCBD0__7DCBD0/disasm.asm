@@ -1,4 +1,4 @@
-0x7DCBD0: push    0FFFFFFFFh
+0x7DCBD0: push    0FFFFFFFFh; Fog render consumer decode: WaterShader pass setup writes water pixel FogParam c9 and FogColor c10 from active fog property.
 0x7DCBD2: push    offset SEH_7DCBD0
 0x7DCBD7: mov     eax, large fs:0
 0x7DCBDD: push    eax
@@ -16,7 +16,7 @@
 0x7DCBF9: mov     eax, [edi]
 0x7DCBFB: mov     edx, [eax+80h]
 0x7DCC01: call    edx
-0x7DCC03: mov     eax, [esp+44h+arg_C]
+0x7DCC03: mov     eax, [esp+44h+value]
 0x7DCC07: mov     ebp, [eax+18h]
 0x7DCC0A: mov     eax, ds:0B42E90h
 0x7DCC0F: mov     cl, ds:0B45DC0h
@@ -210,9 +210,9 @@
 0x7DCE72: mov     ecx, ebp
 0x7DCE74: call    eax
 0x7DCE76: mov     dword ptr [ebx+4], 0
-0x7DCE7D: mov     ecx, [esp+44h+arg_C]
+0x7DCE7D: mov     ecx, [esp+44h+value]
 0x7DCE81: fldz
-0x7DCE83: mov     eax, [ecx+0Ch]
+0x7DCE83: mov     eax, [ecx+0Ch]; Fog render consumer decode: WaterShader loads active fog property from render/property state +0x0C.
 0x7DCE86: test    eax, eax
 0x7DCE88: jz      loc_7DCF3E
 0x7DCE8E: fld     dword ptr [eax+2Ch]
@@ -222,17 +222,17 @@
 0x7DCE9B: fld     dword ptr [eax+30h]
 0x7DCE9E: mov     [esp+44h+var_28], edx
 0x7DCEA2: mov     edx, [eax+28h]
-0x7DCEA5: fstp    [esp+44h+arg_C]
-0x7DCEA9: fld     [esp+44h+arg_C]
+0x7DCEA5: fstp    [esp+44h+value]
+0x7DCEA9: fld     [esp+44h+value]
 0x7DCEAD: mov     [esp+44h+var_24], ecx
 0x7DCEB1: fld     st
 0x7DCEB3: mov     [esp+44h+var_20], edx
 0x7DCEB7: fsub    [esp+44h+var_2C]
-0x7DCEBB: fstp    [esp+44h+arg_C]
+0x7DCEBB: fstp    [esp+44h+value]
 0x7DCEBF: fstp    [esp+44h+var_1C]
 0x7DCEC3: mov     eax, [esp+44h+var_1C]
-0x7DCEC7: fld     [esp+44h+arg_C]
-0x7DCECB: mov     ds:0B45E74h, eax
+0x7DCEC7: fld     [esp+44h+value]
+0x7DCECB: mov     ds:0B45E74h, eax; Fog render consumer decode: Water FogParam ps c9 B45E14[0x18..0x1B] = (fogEnd, fogEnd - fogStart, 0, 0).
 0x7DCED0: fstp    [esp+44h+var_18]
 0x7DCED4: mov     ecx, [esp+44h+var_18]
 0x7DCED8: mov     ds:0B45E78h, ecx
@@ -249,7 +249,7 @@
 0x7DCF09: fstp    [esp+44h+var_18]
 0x7DCF0D: mov     edx, [esp+44h+var_18]
 0x7DCF11: fld     [esp+44h+var_20]
-0x7DCF15: mov     ds:0B45E84h, ecx
+0x7DCF15: mov     ds:0B45E84h, ecx; Fog render consumer decode: Water FogColor ps c10 B45E14[0x1C..0x1F] = (fog.r, fog.g, fog.b, 0).
 0x7DCF1B: fstp    [esp+44h+var_14]
 0x7DCF1F: mov     eax, [esp+44h+var_14]
 0x7DCF23: mov     ds:0B45E88h, edx
@@ -266,8 +266,8 @@
 0x7DCF51: jnz     short loc_7DCF60
 0x7DCF53: mov     edx, [esi+24h]
 0x7DCF56: mov     ecx, [edx]; this
-0x7DCF58: push    eax; a2
-0x7DCF59: call    sub_76C910
+0x7DCF58: push    eax; texture
+0x7DCF59: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7DCF5E: jmp     short loc_7DCFCD
 0x7DCF60: mov     eax, [edi+110h]
 0x7DCF66: test    eax, eax
@@ -276,8 +276,8 @@
 0x7DCF71: jz      short loc_7DCF80
 0x7DCF73: mov     ecx, [esi+24h]
 0x7DCF76: mov     ecx, [ecx]; this
-0x7DCF78: push    eax; a2
-0x7DCF79: call    sub_76C910
+0x7DCF78: push    eax; texture
+0x7DCF79: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7DCF7E: jmp     short loc_7DCFCD
 0x7DCF80: mov     edx, [esi+24h]
 0x7DCF83: mov     ebx, [edx]
@@ -285,7 +285,7 @@
 0x7DCF8A: mov     ebp, [ebx+4]
 0x7DCF8D: cmp     ebp, eax
 0x7DCF8F: mov     ecx, eax
-0x7DCF91: mov     [esp+44h+arg_C], ecx
+0x7DCF91: mov     [esp+44h+value], ecx
 0x7DCF95: jz      short loc_7DCFCD
 0x7DCF97: test    ebp, ebp
 0x7DCF99: jz      short loc_7DCFBC
@@ -301,7 +301,7 @@
 0x7DCFB2: push    1
 0x7DCFB4: mov     ecx, ebp
 0x7DCFB6: call    eax
-0x7DCFB8: mov     ecx, [esp+44h+arg_C]
+0x7DCFB8: mov     ecx, [esp+44h+value]
 0x7DCFBC: test    ecx, ecx
 0x7DCFBE: mov     [ebx+4], ecx
 0x7DCFC1: jz      short loc_7DCFCD
@@ -309,37 +309,37 @@
 0x7DCFC6: push    ecx; lpAddend
 0x7DCFC7: call    dword ptr ds:0A28078h
 0x7DCFCD: mov     ebx, [esp+44h+var_30]
-0x7DCFD1: cmp     byte ptr [ebx+71h], 0
+0x7DCFD1: cmp     byte ptr [ebx+71h], 0; Pass205: WaterShader suppresses/branches stage bind when WaterShaderProperty +0x71 generated LOD-water flag is active.
 0x7DCFD5: jnz     short loc_7DCFE9
 0x7DCFD7: mov     eax, [edi+104h]
 0x7DCFDD: mov     ecx, [esi+24h]
 0x7DCFE0: mov     ecx, [ecx+4]; this
-0x7DCFE3: push    eax; a2
-0x7DCFE4: call    sub_76C910
-0x7DCFE9: mov     eax, [edi+114h]
+0x7DCFE3: push    eax; texture
+0x7DCFE4: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
+0x7DCFE9: mov     eax, [edi+114h]; Pass205: End of +0x71 generated LOD-water stage-bind suppression branch.
 0x7DCFEF: test    eax, eax
 0x7DCFF1: jz      short loc_7DCFFF
 0x7DCFF3: mov     edx, [esi+24h]
 0x7DCFF6: mov     ecx, [edx+8]; this
-0x7DCFF9: push    eax; a2
-0x7DCFFA: call    sub_76C910
+0x7DCFF9: push    eax; texture
+0x7DCFFA: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7DCFFF: cmp     byte ptr ds:0B45DB9h, 0
 0x7DD006: jz      short loc_7DD05E
 0x7DD008: cmp     byte ptr [ebx+72h], 0
 0x7DD00C: jz      short loc_7DD038
-0x7DD00E: mov     eax, [edi+10Ch]
+0x7DD00E: mov     eax, [edi+10Ch]; Pass202: WaterShader binds native WaterShader::Unk104[2] depth/height texture when pass data +0x72 path is active.
 0x7DD014: test    eax, eax
 0x7DD016: jz      short loc_7DD038
 0x7DD018: mov     ecx, [esi+24h]
 0x7DD01B: mov     ecx, [ecx+0Ch]; this
-0x7DD01E: push    eax; a2
-0x7DD01F: call    sub_76C910
+0x7DD01E: push    eax; texture
+0x7DD01F: call    NiD3DTextureStage_SetTexture; Pass202: WaterShader stage bind using native WaterShader::Unk104[2] for copied-depth state.
 0x7DD024: fild    dword ptr [ebx+74h]
 0x7DD027: fstp    dword ptr ds:0B45EE4h
 0x7DD02D: fild    dword ptr [ebx+78h]
 0x7DD030: fstp    dword ptr ds:0B45EE8h
 0x7DD036: jmp     short loc_7DD05E
-0x7DD038: mov     eax, [edi+10Ch]
+0x7DD038: mov     eax, [edi+10Ch]; Pass202: WaterShader selected Unk07C[7]/[8] path binds native WaterShader::Unk104[2].
 0x7DD03E: test    eax, eax
 0x7DD040: jz      short loc_7DD05E
 0x7DD042: cmp     esi, [edi+98h]
@@ -348,18 +348,18 @@
 0x7DD050: jnz     short loc_7DD05E
 0x7DD052: mov     edx, [esi+24h]
 0x7DD055: mov     ecx, [edx+0Ch]; this
-0x7DD058: push    eax; a2
-0x7DD059: call    sub_76C910
-0x7DD05E: cmp     byte ptr [ebx+70h], 0
+0x7DD058: push    eax; texture
+0x7DD059: call    NiD3DTextureStage_SetTexture; Pass202: End of selected Unk07C[7]/[8] native height/depth texture bind path.
+0x7DD05E: cmp     byte ptr [ebx+70h], 0; Pass205: WaterShader optional stage bind consumes WaterShaderProperty +0x6C texture when +0x70 displacement flag is active.
 0x7DD062: jz      short loc_7DD077
 0x7DD064: mov     eax, [ebx+6Ch]
 0x7DD067: test    eax, eax
 0x7DD069: jz      short loc_7DD077
 0x7DD06B: mov     ecx, [esi+24h]
 0x7DD06E: mov     ecx, [ecx+10h]; this
-0x7DD071: push    eax; a2
-0x7DD072: call    sub_76C910
-0x7DD077: cmp     dword ptr ds:0B42D78h, 0
+0x7DD071: push    eax; texture
+0x7DD072: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
+0x7DD077: cmp     dword ptr ds:0B42D78h, 0; Pass205: End of optional WaterShaderProperty +0x6C stage bind path.
 0x7DD07E: mov     ebx, 1
 0x7DD083: jz      short loc_7DD092
 0x7DD085: push    ebx; _DWORD
@@ -369,8 +369,8 @@
 0x7DD090: jmp     short loc_7DD094
 0x7DD092: fldz
 0x7DD094: cmp     dword ptr ds:0B42D78h, 0
-0x7DD09B: fstp    [esp+44h+arg_C]
-0x7DD09F: fld     [esp+44h+arg_C]
+0x7DD09B: fstp    [esp+44h+value]
+0x7DD09F: fld     [esp+44h+value]
 0x7DD0A3: fmul    dword ptr ds:0B45E54h
 0x7DD0A9: fadd    dword ptr ds:0B45E64h
 0x7DD0AF: fstp    dword ptr ds:0B45E64h
@@ -381,8 +381,8 @@
 0x7DD0BF: add     esp, 8
 0x7DD0C2: jmp     short loc_7DD0C6
 0x7DD0C4: fldz
-0x7DD0C6: fstp    [esp+44h+arg_C]
-0x7DD0CA: fld     [esp+44h+arg_C]
+0x7DD0C6: fstp    [esp+44h+value]
+0x7DD0CA: fld     [esp+44h+value]
 0x7DD0CE: fmul    dword ptr ds:0B45E58h
 0x7DD0D4: fadd    dword ptr ds:0B45E68h
 0x7DD0DA: fstp    dword ptr ds:0B45E68h
@@ -411,23 +411,23 @@
 0x7DD13B: fld     [esp+44h+var_24]
 0x7DD13F: mov     [esp+44h+var_20], ecx
 0x7DD143: fstp    dword ptr ds:0B45ED8h
-0x7DD149: mov     [esp+44h+arg_C], esi
+0x7DD149: mov     [esp+44h+value], esi
 0x7DD14D: fld     [esp+44h+var_20]
 0x7DD151: fstp    dword ptr ds:0B45EDCh
 0x7DD157: add     [esi+60h], ebx
 0x7DD15A: mov     eax, [edi+38h]
-0x7DD15D: lea     edx, [esp+44h+arg_C]
-0x7DD161: push    edx
-0x7DD162: push    eax
-0x7DD163: lea     ecx, [edi+40h]
+0x7DD15D: lea     edx, [esp+44h+value]
+0x7DD161: push    edx; value
+0x7DD162: push    eax; index
+0x7DD163: lea     ecx, [edi+40h]; this
 0x7DD166: mov     [esp+4Ch+var_4], 0
-0x7DD16E: call    sub_76CE40
+0x7DD16E: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7DD173: or      eax, 0FFFFFFFFh
 0x7DD176: add     [esi+60h], eax
 0x7DD179: mov     [esp+44h+var_4], eax
 0x7DD17D: jnz     short loc_7DD186
 0x7DD17F: mov     ecx, esi
-0x7DD181: call    sub_7604D0
+0x7DD181: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7DD186: add     [edi+38h], ebx
 0x7DD189: xor     eax, eax
 0x7DD18B: mov     ecx, dword ptr [esp+44h+var_C]
@@ -439,3 +439,12 @@
 0x7DD19A: pop     ebx
 0x7DD19B: add     esp, 30h
 0x7DD19E: retn    1Ch
+0x9CF1D0: lea     ecx, [ebp+10h]; void *
+0x9CF1D3: jmp     sub_4027D0
+0x9CF1D8: mov     edx, [esp+arg_4]
+0x9CF1DC: lea     eax, [edx-34h]
+0x9CF1DF: mov     ecx, [edx-38h]
+0x9CF1E2: xor     ecx, eax
+0x9CF1E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF1E9: mov     eax, offset stru_AF7ED8
+0x9CF1EE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x731700: push    0FFFFFFFFh
+0x731700: push    0FFFFFFFFh; Fog property propagation decode: NiPropertyState destructor releases all managed slots, including fog slot +0x0C when populated.
 0x731702: push    offset ??1NiPropertyState@@UAE@XZ_SEH
 0x731707: mov     eax, large fs:0
 0x73170D: push    eax
@@ -37,14 +37,14 @@
 0x731769: add     edi, 4
 0x73176C: sub     ebp, 1
 0x73176F: jnz     short loc_731741
-0x731771: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x731771: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x731776: push    0Ah; int
 0x731778: push    4; unsigned int
 0x73177A: lea     eax, [ebx+8]
 0x73177D: push    eax; void *
 0x73177E: mov     byte ptr [esp+34h+var_4], 0
 0x731783: call    $LN21
-0x731788: push    offset NiRefObject_objcount; lpAddend
+0x731788: push    0B3FD64h; lpAddend
 0x73178D: mov     dword ptr [ebx], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x731793: call    dword ptr ds:0A2807Ch
 0x731799: mov     ecx, dword ptr [esp+24h+var_C]
@@ -56,3 +56,20 @@
 0x7317A8: pop     ebx
 0x7317A9: add     esp, 10h
 0x7317AC: retn
+0x9CA810: mov     ecx, [ebp-10h]
+0x9CA813: jmp     NiRefObject_destr
+0x9CA818: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CA81D: push    0Ah; int
+0x9CA81F: push    4; unsigned int
+0x9CA821: mov     eax, [ebp-10h]
+0x9CA824: add     eax, 8
+0x9CA827: push    eax; void *
+0x9CA828: call    $LN21
+0x9CA82D: retn
+0x9CA82E: mov     edx, [esp+arg_4]
+0x9CA832: lea     eax, [edx-14h]
+0x9CA835: mov     ecx, [edx-18h]
+0x9CA838: xor     ecx, eax
+0x9CA83A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA83F: mov     eax, offset stru_AF2EC0
+0x9CA844: jmp     ___CxxFrameHandler3

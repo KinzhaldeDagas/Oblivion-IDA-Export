@@ -31,7 +31,7 @@
 0x6FED85: jmp     short loc_6FEDA0
 0x6FED87: push    offset off_A7D44C
 0x6FED8C: mov     ecx, esi
-0x6FED8E: call    NiObjectNET_GetExtraData
+0x6FED8E: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x6FED93: jmp     short loc_6FED9E
 0x6FED95: mov     eax, [esi]
 0x6FED97: mov     edx, [eax+0Ch]
@@ -66,7 +66,6 @@
 0x6FEDF2: test    esi, esi
 0x6FEDF4: jz      short loc_6FEE27
 0x6FEDF6: jmp     short loc_6FEE00
-0x6FEDF8: align 10h
 0x6FEE00: movzx   ecx, word ptr [ebx+0B6h]
 0x6FEE07: sub     esi, 1
 0x6FEE0A: cmp     ecx, esi
@@ -89,3 +88,12 @@
 0x6FEE36: pop     ebx
 0x6FEE37: add     esp, 0Ch
 0x6FEE3A: retn    4
+0x9CF800: lea     ecx, [ebp+4]; slot
+0x9CF803: jmp     NiPointerSlot_Release
+0x9CF808: mov     edx, [esp+arg_4]
+0x9CF80C: lea     eax, [edx-10h]
+0x9CF80F: mov     ecx, [edx-14h]
+0x9CF812: xor     ecx, eax
+0x9CF814: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF819: mov     eax, offset stru_AF8414
+0x9CF81E: jmp     ___CxxFrameHandler3

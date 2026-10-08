@@ -1,1 +1,1 @@
-0x6CFE60: jmp     sub_754EA0
+0x6CFE60: jmp     j_NiTimeController_RegisterStreamables

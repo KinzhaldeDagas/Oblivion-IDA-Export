@@ -1,1 +1,1 @@
-_HEAPINFO
+typedef _heapinfo _HEAPINFO;

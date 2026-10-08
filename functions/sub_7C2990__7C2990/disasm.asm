@@ -1,7 +1,7 @@
 0x7C2990: push    ecx
 0x7C2991: fld     [esp+4+arg_0]
 0x7C2995: fld     st
-0x7C2997: call    Double_To_SInt32
+0x7C2997: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C299C: mov     [esp+4+var_4], eax
 0x7C299F: fild    [esp+4+var_4]
 0x7C29A2: fstp    [esp+4+var_4]
@@ -20,11 +20,11 @@
 0x7C29BF: push    esi
 0x7C29C0: fstp    [esp+8+var_4]
 0x7C29C4: fld     [esp+8+var_4]
-0x7C29C8: call    Double_To_SInt32
+0x7C29C8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C29CD: fld     [esp+8+arg_4]
 0x7C29D1: fld     st
 0x7C29D3: mov     esi, eax
-0x7C29D5: call    Double_To_SInt32
+0x7C29D5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C29DA: mov     [esp+8+arg_0], eax
 0x7C29DE: fild    [esp+8+arg_0]
 0x7C29E2: fstp    [esp+8+arg_0]
@@ -42,7 +42,7 @@
 0x7C29FF: fsubp   st(1), st
 0x7C2A01: fstp    [esp+8+arg_0]
 0x7C2A05: fld     [esp+8+arg_0]
-0x7C2A09: call    Double_To_SInt32
+0x7C2A09: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C2A0E: shl     esi, 10h
 0x7C2A11: and     eax, 0FFFFh
 0x7C2A16: or      eax, esi

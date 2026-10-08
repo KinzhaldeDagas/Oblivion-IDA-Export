@@ -1,4 +1,4 @@
-0x671170: sub     esp, 0Ch
+0x671170: sub     esp, 0Ch; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Grab control 28 pressed/held starts, continues, or releases object grab.
 0x671173: mov     eax, ds:0B33398h
 0x671178: push    ebx
 0x671179: push    esi
@@ -8,13 +8,13 @@
 0x671180: mov     edi, ecx
 0x671182: push    1Ch; a2
 0x671184: mov     ecx, esi; this
-0x671186: call    InputGlobals__QueryControlState
+0x671186: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x67118B: push    0; a3
 0x67118D: test    eax, eax
 0x67118F: push    1Ch; a2
 0x671191: mov     ecx, esi; this
 0x671193: setnz   bl
-0x671196: call    InputGlobals__QueryControlState
+0x671196: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x67119B: test    eax, eax
 0x67119D: setnz   [esp+18h+var_B]
 0x6711A2: test    bl, bl
@@ -85,7 +85,7 @@
 0x671272: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
 0x671278: cmp     dword ptr [edi+57Ch], 0
 0x67127F: jnz     def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
-0x671285: call    sub_579540
+0x671285: call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.
 0x67128A: mov     esi, eax
 0x67128C: test    esi, esi
 0x67128E: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
@@ -95,8 +95,8 @@
 0x67129E: call    eax
 0x6712A0: test    eax, eax
 0x6712A2: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
-0x6712A8: push    eax
-0x6712A9: call    sub_480340
+0x6712A8: push    eax; object
+0x6712A9: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x6712AE: add     esp, 4
 0x6712B1: test    eax, eax
 0x6712B3: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
@@ -117,7 +117,7 @@
 0x6712EF: mov     ecx, edi
 0x6712F1: call    eax
 0x6712F3: fstp    [esp+18h+var_8]
-0x6712F7: mov     ecx, offset fGrabPower
+0x6712F7: mov     ecx, 0B37B58h
 0x6712FC: call    GameSetting_GetSafeFloatPointer
 0x671301: fld     dword ptr [eax]
 0x671303: fmul    [esp+18h+var_8]
@@ -140,25 +140,25 @@
 0x671335: call    eax
 0x671337: cmp     dword ptr [edi+574h], 0
 0x67133E: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
-0x671344: mov     ecx, esi; this
-0x671346: call    TESObjectREFR_GetOwner
+0x671344: mov     ecx, esi; reference
+0x671346: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x67134B: test    eax, eax
 0x67134D: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
 0x671353: mov     ecx, ds:0B333C4h
-0x671359: push    1
-0x67135B: push    ecx
-0x67135C: mov     ecx, esi
-0x67135E: call    TESOBjectREFR_IsOwnedBy
+0x671359: push    1; useFactionOwnership
+0x67135B: push    ecx; actorReference
+0x67135C: mov     ecx, esi; reference
+0x67135E: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x671363: test    al, al
 0x671365: jnz     def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
 0x67136B: mov     ecx, ds:0B333C4h; this
-0x671371: call    TESObjectREFR_GetParentCell
+0x671371: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x671376: test    eax, eax
 0x671378: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
 0x67137E: mov     ecx, ds:0B333C4h; this
-0x671384: call    TESObjectREFR_GetParentCell
+0x671384: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x671389: mov     ecx, eax; this
-0x67138B: call    TESObjectCELL_IsInterior
+0x67138B: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x671390: test    al, al
 0x671392: jz      def_6713F1; jumptable 006713F1 default case, cases 28,35-37,41
 0x671398: push    esi
@@ -189,8 +189,8 @@
 0x6713F1: jmp     ds:jpt_6713F1[ecx*4]; switch jump
 0x6713F8: mov     ebx, [edi]; jumptable 006713F1 cases 18,23,24,29-32
 0x6713FA: push    0FFFFFFFFh
-0x6713FC: mov     ecx, esi; this
-0x6713FE: call    TESObjectREFR_GetOwner
+0x6713FC: mov     ecx, esi; reference
+0x6713FE: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x671403: mov     edx, ds:0B333C4h
 0x671409: push    eax
 0x67140A: mov     eax, [ebx+248h]
@@ -210,9 +210,9 @@
 0x67142D: mov     ebx, [edi]
 0x67142F: shr     ecx, 1
 0x671431: test    cl, 1
-0x671434: mov     ecx, esi; this
+0x671434: mov     ecx, esi; reference
 0x671436: jz      short loc_671463
-0x671438: call    TESObjectREFR_GetOwner
+0x671438: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x67143D: mov     edx, [esi]
 0x67143F: push    eax
 0x671440: mov     eax, [edx+170h]
@@ -231,7 +231,7 @@
 0x67145D: add     esp, 0Ch
 0x671460: retn    4
 0x671463: push    0FFFFFFFFh
-0x671465: call    TESObjectREFR_GetOwner
+0x671465: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x67146A: mov     edx, [ebx+248h]
 0x671470: push    eax
 0x671471: mov     eax, ds:0B333C4h
@@ -244,8 +244,8 @@
 0x67147E: add     esp, 0Ch
 0x671481: retn    4
 0x671484: mov     ebx, [edi]; jumptable 006713F1 cases 19-22,25,27,33,34,38-40,42
-0x671486: mov     ecx, esi; this
-0x671488: call    TESObjectREFR_GetOwner
+0x671486: mov     ecx, esi; reference
+0x671488: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x67148D: push    eax
 0x67148E: mov     eax, [esi]
 0x671490: mov     edx, [eax+170h]

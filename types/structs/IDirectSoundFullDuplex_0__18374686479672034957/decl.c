@@ -1,1 +1,1 @@
-IDirectSoundFullDuplex_0
+typedef IDirectSoundFullDuplex IDirectSoundFullDuplex_0;

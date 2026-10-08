@@ -1,1 +1,1 @@
-SC_HANDLE
+typedef SC_HANDLE__ *SC_HANDLE;

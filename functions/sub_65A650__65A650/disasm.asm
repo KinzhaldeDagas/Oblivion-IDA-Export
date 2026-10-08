@@ -50,17 +50,17 @@
 0x65A6E3: jp      short loc_65A6F7
 0x65A6E5: push    ecx
 0x65A6E6: fstp    st(1)
-0x65A6E8: mov     ecx, edi
-0x65A6EA: fstp    [esp+0Ch+var_C]; float
-0x65A6ED: call    sub_4D89D0
+0x65A6E8: mov     ecx, edi; this
+0x65A6EA: fstp    [esp+0Ch+radians]; radians
+0x65A6ED: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x65A6F2: pop     edi
 0x65A6F3: pop     ecx
 0x65A6F4: retn    4
 0x65A6F7: push    ecx
 0x65A6F8: fstp    st
-0x65A6FA: mov     ecx, edi
-0x65A6FC: fstp    [esp+0Ch+var_C]; float
-0x65A6FF: call    sub_4D89D0
+0x65A6FA: mov     ecx, edi; this
+0x65A6FC: fstp    [esp+0Ch+radians]; radians
+0x65A6FF: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x65A704: pop     edi
 0x65A705: pop     ecx
 0x65A706: retn    4

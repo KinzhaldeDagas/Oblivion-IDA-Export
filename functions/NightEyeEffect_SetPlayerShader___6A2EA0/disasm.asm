@@ -1,4 +1,4 @@
-0x6A2EA0: mov     ecx, ds:0B333C4h
+0x6A2EA0: mov     ecx, ds:0B333C4h; MoonSugarEffect decode: NightEye player shader path sets NightEye active state from player actor value kActorVal_NightEyeBonus; do not hijack for Moon Sugar.
 0x6A2EA6: mov     eax, [ecx]
 0x6A2EA8: mov     edx, [eax+284h]
 0x6A2EAE: push    29h ; ')'
@@ -12,14 +12,14 @@
 0x6A2EC3: fstp    [esp+10h+var_C]; float
 0x6A2EC7: fld1
 0x6A2EC9: fstp    [esp+10h+var_10]; float
-0x6A2ECC: call    sub_7F4DE0
+0x6A2ECC: call    sub_7F4DE0; MoonSugarEffect decode: NightEye shader setter clamps flt_B46914 and writes NightEye shader constants; owned by NightEye actor-value path.
 0x6A2ED1: fld     dword ptr ds:0B380A0h
 0x6A2ED7: fstp    dword ptr ds:0B46924h
 0x6A2EDD: add     esp, 10h
 0x6A2EE0: retn
 0x6A2EE1: fst     [esp+10h+var_C]; float
 0x6A2EE5: fstp    [esp+10h+var_10]; float
-0x6A2EE8: call    sub_7F4DE0
+0x6A2EE8: call    sub_7F4DE0; MoonSugarEffect decode: NightEye shader setter clamps flt_B46914 and writes NightEye shader constants; owned by NightEye actor-value path.
 0x6A2EED: fldz
 0x6A2EEF: add     esp, 10h
 0x6A2EF2: fstp    dword ptr ds:0B46924h

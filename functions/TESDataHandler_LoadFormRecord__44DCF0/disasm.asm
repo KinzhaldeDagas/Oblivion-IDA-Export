@@ -1,4 +1,4 @@
-0x44DCF0: push    ebp
+0x44DCF0: push    ebp; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.
 0x44DCF1: lea     ebp, [esp-108h]
 0x44DCF8: sub     esp, 108h
 0x44DCFE: push    0FFFFFFFFh
@@ -16,12 +16,12 @@
 0x44DD20: lea     eax, [ebp+108h+var_114]
 0x44DD23: mov     large fs:0, eax
 0x44DD29: mov     edi, [ebp+108h+a1]
-0x44DD2F: mov     [ebp+108h+var_11C], ecx
+0x44DD2F: mov     [ebp+108h+self], ecx
 0x44DD32: mov     ecx, edi
 0x44DD34: mov     [ebp+108h+var_115], 1
 0x44DD38: call    TESFile_GetRecordType
 0x44DD3D: xor     esi, esi
-0x44DD3F: cmp     byte ptr [ebp+108h+arg_4], 0
+0x44DD3F: cmp     [ebp+108h+firstFileLowFormFilter], 0
 0x44DD46: mov     ebx, eax
 0x44DD48: jz      short TESDataHandler_LoadFormRecord___CheckFormIDZero
 0x44DD4A: mov     eax, [edi+248h]
@@ -36,7 +36,7 @@
 0x44DD67: xor     esi, esi
 0x44DD69: mov     eax, [edi+244h]
 0x44DD6F: test    eax, 4000h
-0x44DD74: jz      TESDataHandler_LoadFormRecord___ResetForm
+0x44DD74: jz      TESDataHandler_LoadFormRecord___ResetForm; PARTIAL 0x4000 resolves an existing form and skips full Clear/Initialize. INFO static fields can inherit, but lazy runtime responses still use the winning loader invocation's stored record offset.
 0x44DD7A: and     dword ptr [edi+244h], 0FFFFBFFFh
 0x44DD84: test    esi, esi
 0x44DD86: jnz     TESDataHandler_LoadFormRecord___SwitchFormType
@@ -77,20 +77,20 @@
 0x44DDF9: add     esp, 14h
 0x44DDFC: jmp     TESDataHandler_LoadFormRecord___Return_0
 0x44DE01: test    esi, esi
-0x44DE03: jz      short TESDataHandler_LoadFormRecord___SwitchFormType
+0x44DE03: jz      short TESDataHandler_LoadFormRecord___SwitchFormType; Only an existing non-partial, non-DELE form takes the reset path. Valid partial records skip this branch and replay their chunks over inherited in-memory state.
 0x44DE05: test    al, 20h
 0x44DE07: jnz     short TESDataHandler_LoadFormRecord___SwitchFormType
 0x44DE09: mov     edx, [esi]
 0x44DE0B: mov     eax, [edx+18h]
 0x44DE0E: mov     ecx, esi
-0x44DE10: call    eax
+0x44DE10: call    eax; Virtual +0x18 is Script_ClearDataAndComponents for SCPT: frees data/text and clears variable/reference lists before a full replacement load.
 0x44DE12: mov     edx, [esi]
 0x44DE14: mov     eax, [edx+14h]
 0x44DE17: mov     ecx, esi
-0x44DE19: call    eax
+0x44DE19: call    eax; Virtual +0x14 is Script_InitializeDataAndComponents for SCPT: zeros ScriptInfo, text/data pointers, and runtime fields after a full replacement clear. Partial loads do not call it.
 0x44DE1B: lea     eax, [ebx-1]; switch 67 cases
 0x44DE1E: cmp     eax, 42h
-0x44DE21: ja      TESDataHandler_LoadFormRecord___TESDataHandler_LoadFormRecord_LoadObject; jumptable 0044DE2E default case, cases 2,18-44,55,64
+0x44DE21: ja      TESDataHandler_LoadFormRecord___TESDataHandler_LoadFormRecord_LoadObject; Loader dispatch includes case 55/TLOD in the generic object path rather than a special constructor.
 0x44DE27: movzx   ecx, ds:byte_44E6DC[eax]
 0x44DE2E: jmp     ds:jpt_44DE2E[ecx*4]; switch jump
 0x44DE35: mov     ecx, edi; jumptable 0044DE2E case 1
@@ -110,14 +110,14 @@
 0x44DE63: push    8; a4
 0x44DE65: lea     edx, [ebp+108h+Dst]
 0x44DE68: push    edx; Dst
-0x44DE69: call    TESFile_GetChunkData
+0x44DE69: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x44DE6E: lea     eax, [ebp+108h+Dst]
 0x44DE71: push    eax
 0x44DE72: mov     ecx, edi
 0x44DE74: call    sub_44FA50
 0x44DE79: mov     eax, 1
 0x44DE7E: jmp     TESDataHandler_LoadFormRecord___Done
-0x44DE83: xor     bl, bl; jumptable 0044DE2E case 56
+0x44DE83: xor     bl, bl; Verified ROAD load path: form type 0x38 allocates 0x30 bytes and constructs TESRoad if not already present, loads its record chunks, attaches it to the current/fallback WorldSpace through TESWorldSpace_SetRoad, then sets TESRoad+0x2C to that owning WorldSpace. The form-type factory and WorldSpace ownership lifecycle corroborate the 0x54 road field.
 0x44DE85: test    esi, esi
 0x44DE87: jnz     short loc_44DEB3
 0x44DE89: push    30h ; '0'; Size
@@ -128,7 +128,7 @@
 0x44DE98: mov     [ebp+108h+var_10C], esi
 0x44DE9B: jz      short loc_44DEA6
 0x44DE9D: mov     ecx, eax; this
-0x44DE9F: call    ??0TESRoad@@QAE@XZ; TESRoad::TESRoad(void)
+0x44DE9F: call    TESRoad_ctor; Verified TESRoad constructor sets TESForm type byte to 0x38 and initializes a 37-bucket NiTPointerMap<unsigned int, BSSimpleList<TESConnectedPoint*>*> at +0x1C. Owner WorldSpace pointer is at +0x2C, confirmed by ROAD group helpers and WorldSpace clone repair. The TESConnectedPoint object layout is still Unknown.
 0x44DEA4: jmp     short loc_44DEA8
 0x44DEA6: xor     eax, eax
 0x44DEA8: mov     [ebp+108h+var_10C], 0FFFFFFFFh
@@ -136,24 +136,24 @@
 0x44DEB1: mov     bl, 1
 0x44DEB3: push    edi
 0x44DEB4: push    esi
-0x44DEB5: call    TESDataHandler_LoadForm
+0x44DEB5: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44DEBA: add     esp, 8
 0x44DEBD: test    bl, bl
 0x44DEBF: jz      short loc_44DEE6
 0x44DEC1: mov     ecx, ds:0B33AA0h
 0x44DEC7: test    ecx, ecx
 0x44DEC9: jnz     short loc_44DED7
-0x44DECB: mov     ecx, [ebp+108h+var_11C]
-0x44DECE: mov     ecx, [ecx+0Ch]
+0x44DECB: mov     ecx, [ebp+108h+self]
+0x44DECE: mov     ecx, [ecx+0Ch]; this
 0x44DED1: mov     ds:0B33AA0h, ecx
-0x44DED7: push    esi
-0x44DED8: call    sub_4EF100
+0x44DED7: push    esi; road
+0x44DED8: call    TESWorldSpace_SetRoad; Verified ownership setter used by serialized ROAD loading: releases the existing WorldSpace road, then assigns the replacement TESRoad*. The ROAD loader writes the reciprocal TESRoad+0x2C owner pointer immediately afterward.
 0x44DEDD: mov     edx, ds:0B33AA0h
 0x44DEE3: mov     [esi+2Ch], edx
 0x44DEE6: mov     eax, 1
 0x44DEEB: jmp     TESDataHandler_LoadFormRecord___Done
 0x44DEF0: xor     bl, bl; jumptable 0044DE2E case 48
-0x44DEF2: test    esi, esi
+0x44DEF2: test    esi, esi; Independent reuse precedent for MEF v32: primary TESDataHandler loader tests ESI, allocates only when absent, then calls TESDataHandler_LoadForm on the existing form.
 0x44DEF4: mov     [ebp+108h+var_124], esi
 0x44DEF7: jnz     short loc_44DF2A
 0x44DEF9: push    58h ; 'X'; Size
@@ -173,8 +173,8 @@
 0x44DF28: mov     bl, 1
 0x44DF2A: push    edi
 0x44DF2B: push    esi
-0x44DF2C: call    TESDataHandler_LoadForm
-0x44DF31: mov     eax, [ebp+108h+var_11C]
+0x44DF2C: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
+0x44DF31: mov     eax, [ebp+108h+self]
 0x44DF34: add     esp, 8
 0x44DF37: cmp     byte ptr [eax+0CD1h], 0
 0x44DF3E: jz      short loc_44DF4E
@@ -189,10 +189,10 @@
 0x44DF57: test    bl, bl
 0x44DF59: jz      loc_44DFF1
 0x44DF5F: mov     ecx, esi; this
-0x44DF61: call    TESObjectCELL_IsInterior
+0x44DF61: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44DF66: test    al, al
 0x44DF68: jz      short loc_44DF93
-0x44DF6A: mov     eax, [ebp+108h+var_11C]
+0x44DF6A: mov     eax, [ebp+108h+self]
 0x44DF6D: mov     edx, [eax+0CCh]
 0x44DF73: lea     ecx, [ebp+108h+var_124]
 0x44DF76: push    ecx
@@ -205,15 +205,15 @@
 0x44DF93: mov     ecx, ds:0B33AA0h
 0x44DF99: test    ecx, ecx
 0x44DF9B: jnz     short loc_44DFA9
-0x44DF9D: mov     eax, [ebp+108h+var_11C]
-0x44DFA0: mov     ecx, [eax+0Ch]
+0x44DF9D: mov     eax, [ebp+108h+self]
+0x44DFA0: mov     ecx, [eax+0Ch]; this
 0x44DFA3: mov     ds:0B33AA0h, ecx
-0x44DFA9: push    esi
-0x44DFAA: call    sub_4EFEF0
+0x44DFA9: push    esi; cell
+0x44DFAA: call    TESWorldSpace_RegisterExteriorCell; Verified: external cell registration separates one quest-item exterior cell into persistentCell; normal exterior cells are stored in cellMap under packed signed X/Y.
 0x44DFAF: test    al, al
 0x44DFB1: jnz     short loc_44DFF1
 0x44DFB3: mov     ecx, esi; this
-0x44DFB5: call    TESForm_GetQuestItem
+0x44DFB5: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x44DFBA: test    al, al
 0x44DFBC: mov     eax, offset aPersistent; "Persistent "
 0x44DFC1: jnz     short loc_44DFC8
@@ -237,7 +237,7 @@
 0x44DFF7: mov     eax, 1
 0x44DFFC: jmp     TESDataHandler_LoadFormRecord___Done
 0x44E001: cmp     dword ptr ds:0B33A9Ch, 0; jumptable 0044DE2E cases 49-51
-0x44E008: jz      TESDataHandler_LoadFormRecord___Return_0
+0x44E008: jz      TESDataHandler_LoadFormRecord___Return_0; Missing current CELL rejects serialized REFR/ACHR/ACRE (returns false); these records require CELL child context.
 0x44E00E: test    esi, esi
 0x44E010: jz      short loc_44E044
 0x44E012: mov     edx, [esi]
@@ -254,9 +254,9 @@
 0x44E034: jmp     short loc_44E051
 0x44E036: test    eax, eax
 0x44E038: jz      short loc_44E051
-0x44E03A: push    esi
-0x44E03B: mov     ecx, eax
-0x44E03D: call    sub_4CECD0
+0x44E03A: push    esi; reference
+0x44E03B: mov     ecx, eax; this
+0x44E03D: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x44E042: jmp     short loc_44E051
 0x44E044: push    1
 0x44E046: push    ebx
@@ -265,7 +265,7 @@
 0x44E04F: mov     esi, eax
 0x44E051: push    edi
 0x44E052: push    esi
-0x44E053: call    TESDataHandler_LoadForm
+0x44E053: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E058: add     esp, 8
 0x44E05B: test    al, al
 0x44E05D: jnz     loc_44E0F1
@@ -277,7 +277,7 @@
 0x44E071: jnz     short loc_44E076
 0x44E073: mov     [esi+4], bl
 0x44E076: mov     ecx, ds:0B33A9Ch; this
-0x44E07C: call    TESForm_GetQuestItem
+0x44E07C: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x44E081: test    al, al
 0x44E083: jz      short loc_44E096
 0x44E085: mov     ecx, ds:0B33A9Ch
@@ -291,11 +291,11 @@
 0x44E0A3: push    eax
 0x44E0A4: mov     ecx, esi
 0x44E0A6: call    edx
-0x44E0A8: mov     ebx, [ebp+108h+var_11C]
+0x44E0A8: mov     ebx, [ebp+108h+self]
 0x44E0AB: add     ebx, 8B8h
-0x44E0B1: push    esi
-0x44E0B2: mov     ecx, ebx
-0x44E0B4: call    sub_446C30
+0x44E0B1: push    esi; item
+0x44E0B2: mov     ecx, ebx; this
+0x44E0B4: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x44E0B9: test    al, al
 0x44E0BB: jnz     short loc_44E0C5
 0x44E0BD: push    esi
@@ -313,7 +313,7 @@
 0x44E0E0: jz      short loc_44E0F4
 0x44E0E2: push    3
 0x44E0E4: push    eax
-0x44E0E5: mov     ecx, offset ActorProcessManager_ptr
+0x44E0E5: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x44E0EA: call    sub_674550
 0x44E0EF: jmp     short loc_44E0F4
 0x44E0F1: mov     bl, [ebp+108h+var_115]
@@ -325,9 +325,9 @@
 0x44E102: jz      loc_44E22D
 0x44E108: test    bl, bl
 0x44E10A: jz      short loc_44E13A
-0x44E10C: mov     ecx, ds:0B33A9Ch
-0x44E112: push    esi; Concurrency::details::SchedulerBase *
-0x44E113: call    sub_4D35D0
+0x44E10C: mov     ecx, ds:0B33A9Ch; this
+0x44E112: push    esi; reference
+0x44E113: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x44E118: mov     eax, [esi+8]
 0x44E11B: shr     eax, 5
 0x44E11E: test    al, 1
@@ -367,7 +367,7 @@
 0x44E181: mov     ecx, esi
 0x44E183: call    eax
 0x44E185: mov     ecx, esi; this
-0x44E187: call    TESObjectREFR_IsPersistent?
+0x44E187: call    TESObjectREFR_IsPersistent
 0x44E18C: test    al, al
 0x44E18E: jz      loc_44E22D
 0x44E194: fld     dword ptr [edi+3D0h]
@@ -387,7 +387,7 @@
 0x44E1C7: mov     edx, [eax+0D4h]
 0x44E1CD: call    edx
 0x44E1CF: mov     edx, [ebx]
-0x44E1D1: mov     [ebp+108h+var_11C], eax
+0x44E1D1: mov     [ebp+108h+self], eax
 0x44E1D4: mov     eax, [ebx+0Ch]
 0x44E1D7: mov     [ebp+108h+var_130], eax
 0x44E1DA: mov     eax, [edx+0D4h]
@@ -408,7 +408,7 @@
 0x44E20B: mov     ecx, [ebp+108h+var_130]
 0x44E20E: mov     edx, dword ptr [ebp+108h+ArgList]
 0x44E211: push    eax
-0x44E212: mov     eax, [ebp+108h+var_11C]
+0x44E212: mov     eax, [ebp+108h+self]
 0x44E215: push    eax
 0x44E216: push    ecx
 0x44E217: push    ebx
@@ -421,7 +421,7 @@
 0x44E232: jmp     TESDataHandler_LoadFormRecord___Done
 0x44E237: mov     ecx, ds:0B33A9Ch; jumptable 0044DE2E case 54
 0x44E23D: test    ecx, ecx
-0x44E23F: jz      short loc_44E29B
+0x44E23F: jz      short loc_44E29B; Missing current CELL is non-fatal for LAND: return true immediately, skip the LAND payload, and continue loading.
 0x44E241: call    sub_4CE3C0
 0x44E246: mov     esi, eax
 0x44E248: test    esi, esi
@@ -446,13 +446,13 @@
 0x44E285: mov     ecx, ds:0B33A9Ch
 0x44E28B: push    esi
 0x44E28C: call    sub_4C9AE0
-0x44E291: push    edi
+0x44E291: push    edi; Existing generic forms including SCPT reach their LoadForm directly. When PARTIAL selected the existing form above, no derived reset occurred: omitted header/blobs inherit; present SCHR/SCDA replace/overlay; SLSD and SCRO/SCRV append.
 0x44E292: push    esi
-0x44E293: call    TESDataHandler_LoadForm
+0x44E293: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E298: add     esp, 8
 0x44E29B: mov     eax, 1
 0x44E2A0: jmp     TESDataHandler_LoadFormRecord___Done
-0x44E2A5: mov     ecx, ds:0B33A9Ch; jumptable 0044DE2E case 52
+0x44E2A5: mov     ecx, ds:0B33A9Ch; Missing current CELL is fatal for PGRD: log 'PathGrid not associated with cell.' and return false at 0x44E2BC.
 0x44E2AB: test    ecx, ecx
 0x44E2AD: jnz     short loc_44E2C1
 0x44E2AF: push    offset aPathgridNotAss; "PathGrid not associated with cell."
@@ -471,7 +471,7 @@
 0x44E2DB: mov     [ebp+108h+var_10C], 3
 0x44E2E2: jz      short loc_44E2ED
 0x44E2E4: mov     ecx, eax; this
-0x44E2E6: call    ??0TESPathGrid@@QAE@XZ; TESPathGrid::TESPathGrid(void)
+0x44E2E6: call    TESPathGrid_ctor; Verified TESPathGrid form type 0x34 constructor and 0x54-byte layout. It initializes a secondary TESChildCELL vtable at +0x18, rendered NiNode at +0x1C, parent-cell slot +0x20, point-array pointer +0x24, PGRI list header +0x28, point-count word +0x30, and two 37-bucket maps at +0x34 and +0x44.
 0x44E2EB: jmp     short loc_44E2EF
 0x44E2ED: xor     eax, eax
 0x44E2EF: mov     [ebp+108h+var_10C], 0FFFFFFFFh
@@ -485,7 +485,7 @@
 0x44E30D: call    sub_4C9B10
 0x44E312: push    edi
 0x44E313: push    esi
-0x44E314: call    TESDataHandler_LoadForm
+0x44E314: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E319: add     esp, 8
 0x44E31C: mov     eax, 1
 0x44E321: jmp     TESDataHandler_LoadFormRecord___Done
@@ -499,12 +499,12 @@
 0x44E341: push    0; a4
 0x44E343: push    esi; Dst
 0x44E344: mov     ecx, edi; a1
-0x44E346: call    TESFile_GetChunkData
+0x44E346: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x44E34B: mov     edx, ds:0B35468h
 0x44E351: mov     eax, [edx+24h]
 0x44E354: push    esi
 0x44E355: push    edi
-0x44E356: mov     ecx, offset GameSettingCollection
+0x44E356: mov     ecx, (offset flt_B35464+4)
 0x44E35B: call    eax
 0x44E35D: mov     eax, 1
 0x44E362: jmp     TESDataHandler_LoadFormRecord___Done
@@ -518,7 +518,7 @@
 0x44E386: push    0; a4
 0x44E388: push    esi; Dst
 0x44E389: mov     ecx, edi; a1
-0x44E38B: call    TESFile_GetChunkData
+0x44E38B: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x44E390: push    esi
 0x44E391: call    EffectSettingCollection_LookupByCodeString
 0x44E396: add     esp, 4
@@ -526,7 +526,7 @@
 0x44E39B: jz      short TESDataHandler_LoadFormRecord___CreateNewEffectSetting
 0x44E39D: push    edi
 0x44E39E: push    eax
-0x44E39F: call    TESDataHandler_LoadForm
+0x44E39F: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E3A4: add     esp, 8
 0x44E3A7: mov     eax, 1
 0x44E3AC: jmp     TESDataHandler_LoadFormRecord___Done
@@ -545,8 +545,8 @@
 0x44E3D9: push    esi
 0x44E3DA: mov     ecx, edi; this
 0x44E3DC: mov     [ebp+108h+var_10C], 0FFFFFFFFh
-0x44E3E3: call    TESFile_InitializeFormFromRecord
-0x44E3E8: mov     ecx, [ebp+108h+var_11C]
+0x44E3E3: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
+0x44E3E8: mov     ecx, [ebp+108h+self]
 0x44E3EB: push    esi
 0x44E3EC: add     ecx, 8B8h
 0x44E3F2: call    BSSimpleList_PushFront
@@ -562,15 +562,15 @@
 0x44E417: mov     [ebp+108h+var_10C], 5
 0x44E41E: jz      short loc_44E42B
 0x44E420: mov     ecx, eax; this
-0x44E422: call    ??0TESWorldSpace@@QAE@XZ; TESWorldSpace::TESWorldSpace(void)
+0x44E422: call    ??0TESWorldSpace@@QAE@XZ; Verified: TESWorldSpace constructor initializes road (+0x54) to null. In this Oblivion build, the field is a TESRoad* owned by WorldSpace: the destructor releases it, CreateDuplicateForm clones it and verifies the clone's TESRoad RTTI, and TESRoad grouping code uses the reciprocal owner pointer. The adjacent +0x4C and +0x50 fields remain Unknown. Fallout's TESWorldSpace has a different layout and no TESRoad-named type or function was found in the available name/type searches; no Fallout homolog is claimed.
 0x44E427: mov     esi, eax
 0x44E429: jmp     short loc_44E42D
 0x44E42B: xor     esi, esi
 0x44E42D: push    edi
 0x44E42E: push    esi
 0x44E42F: mov     [ebp+108h+var_10C], 0FFFFFFFFh
-0x44E436: call    TESDataHandler_LoadForm
-0x44E43B: mov     ecx, [ebp+108h+var_11C]
+0x44E436: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
+0x44E43B: mov     ecx, [ebp+108h+self]
 0x44E43E: add     esp, 8
 0x44E441: push    esi
 0x44E442: add     ecx, 0Ch
@@ -580,7 +580,7 @@
 0x44E455: jmp     TESDataHandler_LoadFormRecord___Done
 0x44E45A: push    edi
 0x44E45B: push    esi
-0x44E45C: call    TESDataHandler_LoadForm
+0x44E45C: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E461: add     esp, 8
 0x44E464: mov     ds:0B33AA0h, esi
 0x44E46A: mov     eax, 1
@@ -594,17 +594,17 @@
 0x44E489: test    eax, eax
 0x44E48B: mov     [ebp+108h+var_10C], 6
 0x44E492: jz      short loc_44E4A0
-0x44E494: push    esi
-0x44E495: mov     ecx, eax
-0x44E497: call    sub_52FB40
-0x44E49C: mov     esi, eax
+0x44E494: push    esi; topicType
+0x44E495: mov     ecx, eax; this
+0x44E497: call    TESTopic__TESTopic; TESTopic constructor stores the DialogueType argument in topicType. New runtime DIAL records are constructed with zero at 0x44E49C. LoadForm does not initialize a separate scratch candidate for DATA.
+0x44E49C: mov     esi, eax; The runtime DIAL/type 57 allocation path creates TESTopic with constructor argument zero. The DATA stream then writes directly into topicType through TESTopic::LoadForm 0x5301E0.
 0x44E49E: jmp     short loc_44E4A2
 0x44E4A0: xor     esi, esi
 0x44E4A2: push    edi
 0x44E4A3: push    esi
 0x44E4A4: mov     [ebp+108h+var_10C], 0FFFFFFFFh
-0x44E4AB: call    TESDataHandler_LoadForm
-0x44E4B0: mov     ecx, [ebp+108h+var_11C]
+0x44E4AB: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
+0x44E4B0: mov     ecx, [ebp+108h+self]
 0x44E4B3: add     esp, 8
 0x44E4B6: push    esi
 0x44E4B7: add     ecx, 7Ch ; '|'
@@ -612,7 +612,7 @@
 0x44E4BF: mov     eax, 1
 0x44E4C4: jmp     TESDataHandler_LoadFormRecord___Done
 0x44E4C9: test    esi, esi; jumptable 0044DE2E case 58
-0x44E4CB: jnz     short loc_44E4FA
+0x44E4CB: jnz     short loc_44E4FA; INFO dispatch reuses an existing TESTopicInfo (including a valid partial base) or allocates only when absent.
 0x44E4CD: push    38h ; '8'; Size
 0x44E4CF: call    FormHeapAlloc
 0x44E4D4: add     esp, 4
@@ -630,10 +630,10 @@
 0x44E4FA: push    edi
 0x44E4FB: push    esi
 0x44E4FC: mov     ds:0B33AA4h, esi
-0x44E502: call    TESDataHandler_LoadForm
+0x44E502: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E507: add     esp, 8
 0x44E50A: movzx   eax, al
-0x44E50D: jmp     TESDataHandler_LoadFormRecord___Done
+0x44E50D: jmp     TESDataHandler_LoadFormRecord___Done; Every INFO invocation calls TESTopicInfo_LoadForm; its +0x34 source offset is therefore updated even when a partial bypassed component reset.
 0x44E512: test    esi, esi; jumptable 0044DE2E case 11
 0x44E514: jz      loc_44E29B
 0x44E51A: push    0; int
@@ -646,50 +646,50 @@
 0x44E530: add     esp, 14h
 0x44E533: test    esi, esi
 0x44E535: jz      loc_44E29B
-0x44E53B: mov     ecx, esi
-0x44E53D: call    TESSkill_ClearTESSkill
+0x44E53B: mov     ecx, esi; this
+0x44E53D: call    TESSkill_ClearDataAndComponents; Reset TESSkill native data: actorValue=0xFFFFFFFF, governingAttribute=0, specialization=0, and both useValues=1.0; then clear descriptions/components.
 0x44E542: push    edi
 0x44E543: push    esi
-0x44E544: call    TESDataHandler_LoadForm
+0x44E544: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E549: add     esp, 8
 0x44E54C: mov     eax, 1
 0x44E551: jmp     TESDataHandler_LoadFormRecord___Done
 0x44E556: test    esi, esi; jumptable 0044DE2E case 60
 0x44E558: jnz     loc_44E291
-0x44E55E: push    ebx; a1
-0x44E55F: call    TESForm_CreateDynamic
+0x44E55E: push    ebx; formType
+0x44E55F: call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.
 0x44E564: push    edi
 0x44E565: push    eax
-0x44E566: call    TESDataHandler_LoadForm
+0x44E566: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E56B: add     esp, 0Ch
 0x44E56E: mov     eax, 1
 0x44E573: jmp     TESDataHandler_LoadFormRecord___Done
 0x44E578: test    esi, esi; jumptable 0044DE2E cases 4-10,13-17,45-47,59,61-63,65-67
 0x44E57A: jnz     loc_44E291
-0x44E580: push    ebx; a1
-0x44E581: call    TESForm_CreateDynamic
+0x44E580: push    ebx; formType
+0x44E581: call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.
 0x44E586: mov     esi, eax
 0x44E588: push    edi
 0x44E589: push    esi
-0x44E58A: call    TESDataHandler_LoadForm
-0x44E58F: mov     ecx, [ebp+108h+var_11C]
+0x44E58A: call    TESDataHandler_LoadForm; MEF v58 SR1 gate: created-object loading ultimately dispatches virtual form loaders through447050; no universal final stream position is established across every factory/partial/early-return path in44DCF0. Preflight therefore reports nonzero created tables as unsupported and restores native input position, rather than guessing20+payload advancement. This is remaining SR1 scope, not a repaired created-object loader.
+0x44E58F: mov     ecx, [ebp+108h+self]; self
 0x44E592: add     esp, 0Ch
-0x44E595: push    esi
-0x44E596: call    TESDataHandler_AddForm
+0x44E595: push    esi; form
+0x44E596: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x44E59B: mov     eax, 1
 0x44E5A0: jmp     TESDataHandler_LoadFormRecord___Done
-0x44E5A5: test    esi, esi; jumptable 0044DE2E default case, cases 2,18-44,55,64
+0x44E5A5: test    esi, esi; Generic serialized-record path includes form type 55/TLOD.
 0x44E5A7: mov     cl, ds:0B06B18h
 0x44E5AD: mov     [ebp+108h+var_11D], cl
 0x44E5B0: mov     byte ptr ds:0B06B18h, 1
 0x44E5B7: jz      short loc_44E5BF
 0x44E5B9: mov     [ebp+108h+var_115], 0
 0x44E5BD: jmp     short loc_44E5CA
-0x44E5BF: push    ebx; a1
-0x44E5C0: call    TESForm_CreateDynamic
+0x44E5BF: push    ebx; formType
+0x44E5C0: call    TESForm_CreateDynamic; TESForm_CreateDynamic returns null for TLOD/0x37 because the runtime factory explicitly defaults case 55.
 0x44E5C5: add     esp, 4
 0x44E5C8: mov     esi, eax
-0x44E5CA: test    esi, esi
+0x44E5CA: test    esi, esi; Null TLOD factory result enters the Unknown %s_ID failure path; serialized TLOD is rejected.
 0x44E5CC: jnz     short loc_44E638
 0x44E5CE: cmp     [edi+23Ch], esi
 0x44E5D4: jz      short loc_44E61C
@@ -722,13 +722,13 @@
 0x44E63B: push    edi
 0x44E63C: push    esi
 0x44E63D: mov     ds:0B06B18h, dl
-0x44E643: call    TESDataHandler_LoadForm
+0x44E643: call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x44E648: add     esp, 8
 0x44E64B: test    al, al
 0x44E64D: jz      short loc_44E667
 0x44E64F: cmp     [ebp+108h+var_115], 0
 0x44E653: jz      short loc_44E660
-0x44E655: mov     eax, [ebp+108h+var_11C]
+0x44E655: mov     eax, [ebp+108h+self]
 0x44E658: mov     ecx, [eax]
 0x44E65A: push    esi
 0x44E65B: call    TESObjectListHead_AddObject
@@ -754,3 +754,53 @@
 0x44E698: mov     esp, ebp
 0x44E69A: pop     ebp
 0x44E69B: retn    8
+0x9ADCA0: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCA3: push    eax
+0x9ADCA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCA9: pop     ecx
+0x9ADCAA: retn
+0x9ADCAB: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCAE: push    eax
+0x9ADCAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCB4: pop     ecx
+0x9ADCB5: retn
+0x9ADCB6: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCB9: push    eax
+0x9ADCBA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCBF: pop     ecx
+0x9ADCC0: retn
+0x9ADCC1: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCC4: push    eax
+0x9ADCC5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCCA: pop     ecx
+0x9ADCCB: retn
+0x9ADCCC: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCCF: push    eax
+0x9ADCD0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCD5: pop     ecx
+0x9ADCD6: retn
+0x9ADCD7: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCDA: push    eax
+0x9ADCDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCE0: pop     ecx
+0x9ADCE1: retn
+0x9ADCE2: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCE5: push    eax
+0x9ADCE6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCEB: pop     ecx
+0x9ADCEC: retn
+0x9ADCED: mov     eax, dword ptr [ebp+108h+ArgList]
+0x9ADCF0: push    eax
+0x9ADCF1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9ADCF6: pop     ecx
+0x9ADCF7: retn
+0x9ADCF8: mov     edx, dword ptr [esp-4+firstFileLowFormFilter]
+0x9ADCFC: lea     eax, [edx+0Ch]
+0x9ADCFF: mov     ecx, [edx-2Ch]
+0x9ADD02: xor     ecx, eax
+0x9ADD04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ADD09: mov     ecx, [edx+110h]
+0x9ADD0F: xor     ecx, eax
+0x9ADD11: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ADD16: mov     eax, offset stru_ADA60C
+0x9ADD1B: jmp     ___CxxFrameHandler3

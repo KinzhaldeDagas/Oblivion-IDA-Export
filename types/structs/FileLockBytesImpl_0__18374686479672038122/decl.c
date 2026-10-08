@@ -1,1 +1,1 @@
-FileLockBytesImpl_0
+typedef FileLockBytesImpl FileLockBytesImpl_0;

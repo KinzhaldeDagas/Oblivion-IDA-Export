@@ -62,9 +62,9 @@
 0x849ABA: mov     eax, [edx+78h]
 0x849ABD: mov     ecx, ebx
 0x849ABF: call    eax
-0x849AC1: push    eax
-0x849AC2: mov     ecx, edi
-0x849AC4: call    sub_7715E0
+0x849AC1: push    eax; preset
+0x849AC2: mov     ecx, edi; this
+0x849AC4: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x849AC9: mov     ecx, [esi+24h]
 0x849ACC: mov     edi, [ecx+4]
 0x849ACF: mov     edx, [ebx]
@@ -108,26 +108,26 @@
 0x849B34: mov     eax, [edx+78h]
 0x849B37: mov     ecx, ebx
 0x849B39: call    eax
-0x849B3B: push    eax
-0x849B3C: mov     ecx, edi
-0x849B3E: call    sub_7715E0
+0x849B3B: push    eax; preset
+0x849B3C: mov     ecx, edi; this
+0x849B3E: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x849B43: mov     ebx, 1
 0x849B48: add     [esi+60h], ebx
 0x849B4B: mov     [esp+24h+arg_8], esi
 0x849B4F: mov     edi, [esp+24h+var_10]
 0x849B53: mov     edx, [edi+38h]
 0x849B56: lea     ecx, [esp+24h+arg_8]
-0x849B5A: push    ecx
-0x849B5B: push    edx
-0x849B5C: lea     ecx, [edi+40h]
+0x849B5A: push    ecx; value
+0x849B5B: push    edx; index
+0x849B5C: lea     ecx, [edi+40h]; this
 0x849B5F: mov     [esp+2Ch+var_4], 0
-0x849B67: call    sub_76CE40
+0x849B67: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x849B6C: or      eax, 0FFFFFFFFh
 0x849B6F: add     [esi+60h], eax
 0x849B72: mov     [esp+24h+var_4], eax
 0x849B76: jnz     short loc_849B7F
 0x849B78: mov     ecx, esi
-0x849B7A: call    sub_7604D0
+0x849B7A: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x849B7F: add     [edi+38h], ebx
 0x849B82: mov     ecx, [esp+24h+var_C]
 0x849B86: mov     large fs:0, ecx
@@ -138,3 +138,12 @@
 0x849B91: pop     ebx
 0x849B92: add     esp, 10h
 0x849B95: retn    10h
+0x9D33F0: lea     ecx, [ebp+0Ch]; void *
+0x9D33F3: jmp     sub_4027D0
+0x9D33F8: mov     edx, [esp+arg_4]
+0x9D33FC: lea     eax, [edx-14h]
+0x9D33FF: mov     ecx, [edx-18h]
+0x9D3402: xor     ecx, eax
+0x9D3404: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3409: mov     eax, offset stru_AFB818
+0x9D340E: jmp     ___CxxFrameHandler3

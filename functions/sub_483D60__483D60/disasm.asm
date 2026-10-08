@@ -1,4 +1,4 @@
-0x483D60: push    0FFFFFFFFh
+0x483D60: push    0FFFFFFFFh; Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.
 0x483D62: push    offset SEH_483D60
 0x483D67: mov     eax, large fs:0
 0x483D6D: push    eax
@@ -32,7 +32,7 @@
 0x483DDB: jnz     short loc_483DEA
 0x483DDD: cmp     byte ptr ds:0B09AF0h, 0
 0x483DE4: jz      loc_48429A
-0x483DEA: cmp     [esp+40h+arg_0], 0
+0x483DEA: cmp     [esp+40h+worldspace], 0
 0x483DEF: jz      loc_48429A
 0x483DF5: mov     eax, ds:0B333A0h
 0x483DFA: mov     ecx, [eax+24h]
@@ -50,9 +50,9 @@
 0x483E1B: mov     ecx, ds:0B333A0h
 0x483E21: mov     eax, [ecx+10h]
 0x483E24: mov     eax, [eax+1Ch]
-0x483E27: push    1
-0x483E29: mov     ecx, eax
-0x483E2B: call    sub_405790
+0x483E27: push    1; index
+0x483E29: mov     ecx, eax; this
+0x483E2B: call    NiNode_GetChildAtIndex
 0x483E30: test    eax, eax
 0x483E32: jz      short loc_483E40
 0x483E34: mov     edx, [eax]
@@ -62,7 +62,7 @@
 0x483E3D: push    eax
 0x483E3E: jmp     short loc_483E42
 0x483E40: push    0; a2
-0x483E42: mov     ecx, offset dword_B34424; this
+0x483E42: mov     ecx, 0B34424h; this
 0x483E47: call    NiSmartPointer_Set??
 0x483E4C: mov     eax, ds:0B06A2Ch
 0x483E51: mov     ecx, ds:0B34418h
@@ -77,14 +77,12 @@
 0x483E6E: jbe     loc_4841EE
 0x483E74: mov     [esp+40h+var_24], ecx
 0x483E78: jmp     short loc_483E80
-0x483E7A: align 10h
 0x483E80: test    eax, eax
 0x483E82: mov     [esp+40h+var_2C], 0
 0x483E8A: jbe     loc_4841D3
 0x483E90: mov     edx, [esp+40h+var_14]
 0x483E94: mov     [esp+40h+var_28], edx
 0x483E98: jmp     short loc_483EA0
-0x483E9A: align 10h
 0x483EA0: mov     edx, [esp+40h+var_2C]
 0x483EA4: imul    eax, edi
 0x483EA7: mov     ecx, [esp+40h+var_20]
@@ -136,41 +134,41 @@
 0x483F2D: add     ecx, 4
 0x483F30: mov     ebp, ecx
 0x483F32: mov     byte ptr [esi+1], 1
-0x483F36: mov     ecx, [esp+40h+arg_0]
-0x483F3A: push    1
-0x483F3C: call    sub_4EF2D0
+0x483F36: mov     ecx, [esp+40h+worldspace]; this
+0x483F3A: push    1; modeBit
+0x483F3C: call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.
 0x483F41: test    al, al
 0x483F43: jnz     short loc_483F58
-0x483F45: mov     ecx, [esp+40h+arg_0]
-0x483F49: push    2
-0x483F4B: call    sub_4EF2D0
+0x483F45: mov     ecx, [esp+40h+worldspace]; this
+0x483F49: push    2; modeBit
+0x483F4B: call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.
 0x483F50: test    al, al
 0x483F52: jz      loc_4841B4
-0x483F58: mov     ecx, [esp+40h+arg_0]
-0x483F5C: push    1
-0x483F5E: call    sub_4EF2D0
+0x483F58: mov     ecx, [esp+40h+worldspace]; this
+0x483F5C: push    1; modeBit
+0x483F5E: call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.
 0x483F63: test    al, al
 0x483F65: jnz     short loc_483F70
 0x483F67: cmp     ebp, 1
 0x483F6A: jz      loc_4841B4
-0x483F70: mov     ecx, [esp+40h+arg_0]
-0x483F74: push    2
-0x483F76: call    sub_4EF2D0
+0x483F70: mov     ecx, [esp+40h+worldspace]; this
+0x483F74: push    2; modeBit
+0x483F76: call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.
 0x483F7B: test    al, al
 0x483F7D: jnz     short loc_483F88
 0x483F7F: cmp     ebp, 2
 0x483F82: jz      loc_4841B4
-0x483F88: mov     ecx, [esp+40h+arg_0]
-0x483F8C: push    1
-0x483F8E: call    sub_4EF2D0
+0x483F88: mov     ecx, [esp+40h+worldspace]; this
+0x483F8C: push    1; modeBit
+0x483F8E: call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.
 0x483F93: test    al, al
 0x483F95: jnz     short loc_483FA1
 0x483F97: cmp     ebp, 4
 0x483F9A: jnz     short loc_483FA1
 0x483F9C: mov     ebp, 2
-0x483FA1: mov     ecx, [esp+40h+arg_0]
-0x483FA5: push    2
-0x483FA7: call    sub_4EF2D0
+0x483FA1: mov     ecx, [esp+40h+worldspace]; this
+0x483FA5: push    2; modeBit
+0x483FA7: call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.
 0x483FAC: test    al, al
 0x483FAE: jnz     short loc_484023
 0x483FB0: cmp     ebp, 4
@@ -183,9 +181,9 @@
 0x483FC9: jz      loc_4841B4
 0x483FCF: movzx   eax, word ptr [esi+0Ch]
 0x483FD3: movzx   ecx, word ptr [esi+8]
-0x483FD7: push    eax
-0x483FD8: push    ecx
-0x483FD9: call    sub_4EF1D0
+0x483FD7: push    eax; group_y
+0x483FD8: push    ecx; group_x
+0x483FD9: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x483FDE: push    eax
 0x483FDF: call    sub_7B3A40
 0x483FE4: add     esp, 0Ch
@@ -197,9 +195,9 @@
 0x483FFB: jz      short loc_484019
 0x483FFD: movzx   edx, word ptr [esi+0Ch]
 0x484001: movzx   eax, word ptr [esi+8]
-0x484005: push    edx
-0x484006: push    eax
-0x484007: call    sub_4EF1D0
+0x484005: push    edx; group_y
+0x484006: push    eax; group_x
+0x484007: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x48400C: push    eax
 0x48400D: call    sub_7B3A40
 0x484012: add     esp, 0Ch
@@ -210,10 +208,10 @@
 0x484026: jnz     short loc_484052
 0x484028: movzx   ecx, word ptr [esi+0Ch]
 0x48402C: movzx   edx, word ptr [esi+8]
-0x484030: push    ecx
-0x484031: mov     ecx, [esp+44h+arg_0]
-0x484035: push    edx
-0x484036: call    sub_4F0DA0
+0x484030: push    ecx; cellY
+0x484031: mov     ecx, [esp+44h+worldspace]; this
+0x484035: push    edx; cellX
+0x484036: call    TESWorldSpace_PassesCellLODFilter; Verified DistantLOD grid update gate: in mode 2 it checks TESWorldSpace_PassesCellLODFilter for the cell before scheduling/updating DistantLOD data; independently consults WorldSpace mode-mask bits via TESWorldSpace_IsDistantLODModeEnabled.
 0x48403B: test    al, al
 0x48403D: jz      loc_4841B4
 0x484043: cmp     byte ptr ds:0B09AE8h, 0
@@ -315,27 +313,27 @@
 0x48416F: jnz     short loc_48418A
 0x484171: movzx   eax, word ptr [esi+0Ch]
 0x484175: movzx   ecx, word ptr [esi+8]
-0x484179: push    eax
-0x48417A: push    ecx
-0x48417B: mov     ecx, [esp+48h+arg_0]
-0x48417F: call    sub_4F0DA0
+0x484179: push    eax; cellY
+0x48417A: push    ecx; cellX
+0x48417B: mov     ecx, [esp+48h+worldspace]; this
+0x48417F: call    TESWorldSpace_PassesCellLODFilter; Verified cell-LOD filter: if +0xD8 cellLODMapLoaded is set, checks the +0xC8 CellsWithLODObjects map for the packed cell coordinate; otherwise returns true as a permissive fallback.
 0x484184: test    al, al
 0x484186: jz      short loc_48418A
 0x484188: xor     edi, edi
 0x48418A: mov     edx, [ebx]
 0x48418C: mov     eax, ds:0B34424h
 0x484191: mov     ecx, [esi+0Ch]
-0x484194: push    ebp
-0x484195: push    edi
-0x484196: push    edx
+0x484194: push    ebp; lodMode
+0x484195: push    edi; priorityIndex
+0x484196: push    edx; cellLODBuffer
 0x484197: mov     edx, [esi+8]
-0x48419A: push    eax
-0x48419B: mov     eax, [esp+50h+arg_0]
-0x48419F: push    ecx
-0x4841A0: mov     ecx, ds:0B35B8Ch
-0x4841A6: push    edx
-0x4841A7: push    eax
-0x4841A8: call    sub_4BD430
+0x48419A: push    eax; instancedLODNode
+0x48419B: mov     eax, [esp+50h+worldspace]
+0x48419F: push    ecx; groupY
+0x4841A0: mov     ecx, ds:0B35B8Ch; this
+0x4841A6: push    edx; groupX
+0x4841A7: push    eax; worldspace
+0x4841A8: call    DistantLOD_QueueCellLoadTask; Verified update loop queues each eligible exterior-grid cell through g_DistantLODLoaderTasksByCell; duplicate packed-cell tasks are suppressed before registration, then IOManager executes the worker.
 0x4841AD: mov     edi, [esp+40h+var_18]
 0x4841B1: mov     byte ptr [esi], 1
 0x4841B4: mov     ecx, [esp+40h+var_2C]
@@ -358,15 +356,15 @@
 0x4841F2: push    ecx
 0x4841F3: fstp    [esp+48h+a2]; a2
 0x4841F6: mov     ecx, ds:0B34424h; this
-0x4841FC: call    NiAVObject_UpdateNiAVObject
+0x4841FC: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x484201: mov     ecx, ds:0B34424h; this
-0x484207: call    NiAVObject_InitializePropertyState
+0x484207: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x48420C: mov     ecx, ds:0B34424h
 0x484212: mov     ecx, [ecx+1Ch]
 0x484215: push    1
-0x484217: call    NiNode_GetNiPropertyByID
+0x484217: call    NiNode_GetNiPropertyByID;
 0x48421C: push    eax
-0x48421D: push    offset dword_B43484
+0x48421D: push    offset stru_B43484
 0x484222: call    NiRTTI_Cast
 0x484227: add     esp, 8
 0x48422A: test    eax, eax
@@ -374,8 +372,8 @@
 0x48422E: fld     dword ptr [eax+2Ch]
 0x484231: fstp    [esp+40h+var_14]
 0x484235: fld     dword ptr [eax+30h]
-0x484238: fstp    [esp+40h+arg_0]
-0x48423C: fld     [esp+40h+arg_0]
+0x484238: fstp    [esp+40h+worldspace]
+0x48423C: fld     [esp+40h+worldspace]
 0x484240: fld     st
 0x484242: fld     [esp+40h+var_14]
 0x484246: fld     st
@@ -400,10 +398,10 @@
 0x48427C: fstp    st(1)
 0x48427E: jmp     short loc_484282
 0x484280: fstp    st
-0x484282: fstp    [esp+40h+arg_0]
+0x484282: fstp    [esp+40h+worldspace]
 0x484286: fld     [esp+40h+var_14]
 0x48428A: fst     dword ptr ds:0B2C334h
-0x484290: fsubr   [esp+40h+arg_0]
+0x484290: fsubr   [esp+40h+worldspace]
 0x484294: fstp    dword ptr ds:0B2C338h
 0x48429A: mov     ecx, [esp+40h+var_C]
 0x48429E: mov     large fs:0, ecx
@@ -414,3 +412,15 @@
 0x4842A9: pop     ebx
 0x4842AA: add     esp, 2Ch
 0x4842AD: retn    4
+0x9AF950: mov     eax, [ebp-10h]
+0x9AF953: push    eax
+0x9AF954: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF959: pop     ecx
+0x9AF95A: retn
+0x9AF95B: mov     edx, [esp+arg_4]
+0x9AF95F: lea     eax, [edx-30h]
+0x9AF962: mov     ecx, [edx-34h]
+0x9AF965: xor     ecx, eax
+0x9AF967: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF96C: mov     eax, offset stru_ADBE7C
+0x9AF971: jmp     ___CxxFrameHandler3

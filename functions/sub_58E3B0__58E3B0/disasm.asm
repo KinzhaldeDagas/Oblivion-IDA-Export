@@ -1,10 +1,10 @@
-0x58E3B0: sub     esp, 10h
+0x58E3B0: sub     esp, 10h; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.
 0x58E3B3: push    ebx
 0x58E3B4: push    ebp
 0x58E3B5: push    esi
 0x58E3B6: push    edi
 0x58E3B7: mov     esi, ecx
-0x58E3B9: mov     edi, [esp+20h+arg_0]
+0x58E3B9: mov     edi, [esp+20h+maxFocus]
 0x58E3BD: lea     ecx, [ecx+0]
 0x58E3C0: mov     eax, [esi+18h]
 0x58E3C3: test    eax, eax
@@ -38,7 +38,7 @@
 0x58E40A: mov     [esp+24h+var_C], 0
 0x58E412: mov     ebp, 7FFFFFFFh
 0x58E417: call    Tile_GetFloat
-0x58E41C: call    Double_To_SInt32
+0x58E41C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58E421: mov     esi, [esi+10h]
 0x58E424: mov     ebx, [esi+34h]
 0x58E427: test    ebx, ebx
@@ -53,7 +53,6 @@
 0x58E444: test    eax, eax
 0x58E446: jz      short loc_58E47F
 0x58E448: jmp     short loc_58E450
-0x58E44A: align 10h
 0x58E450: mov     edx, [eax+8]
 0x58E453: lea     ecx, [eax+8]
 0x58E456: movzx   ecx, word ptr [edx+18h]
@@ -87,7 +86,7 @@
 0x58E49F: push    0FAAh
 0x58E4A4: mov     ecx, esi
 0x58E4A6: call    Tile_GetFloat
-0x58E4AB: call    Double_To_SInt32
+0x58E4AB: call    Double_To_SInt32; Verified next candidate: listindex converted to integer; must be strictly > current and strictly < best. Equal-index siblings cannot be next from one another; equal-best candidates retain first encountered child-list candidate.
 0x58E4B0: cmp     eax, [esp+20h+var_4]
 0x58E4B4: jle     short loc_58E4C0
 0x58E4B6: cmp     eax, ebp
@@ -110,7 +109,7 @@
 0x58E4F6: mov     [esp+24h+var_C], 0
 0x58E4FE: mov     ebp, 80000000h
 0x58E503: call    Tile_GetFloat
-0x58E508: call    Double_To_SInt32
+0x58E508: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58E50D: mov     esi, [esi+10h]
 0x58E510: mov     ebx, [esi+34h]
 0x58E513: test    ebx, ebx
@@ -158,7 +157,7 @@
 0x58E580: push    0FAAh
 0x58E585: mov     ecx, esi
 0x58E587: call    Tile_GetFloat
-0x58E58C: call    Double_To_SInt32
+0x58E58C: call    Double_To_SInt32; Verified prev candidate: integer listindex strictly < current and > best. Gaps in engine topic ordinals do not require compacting listindex for navigation.
 0x58E591: cmp     eax, [esp+20h+var_8]
 0x58E595: jge     short loc_58E5A1
 0x58E597: cmp     eax, ebp
@@ -172,8 +171,8 @@
 0x58E5AF: mov     esi, [esp+20h+var_10]
 0x58E5B3: jmp     loc_58E3B9
 0x58E5B8: mov     esi, [esp+20h+var_C]
-0x58E5BC: mov     ecx, esi
-0x58E5BE: call    sub_58E7D0
+0x58E5BC: mov     ecx, esi; this
+0x58E5BE: call    Tile__RequestNavigationScroll; Verified descriptive name: resolves parent xscroll trait 0xFF5, then pulses resolved target user5 (0xFB3) with sentinel, selected tile xscroll value, then zero. Navigation resolution has scroll side effects; not a pure lookup.
 0x58E5C3: pop     edi
 0x58E5C4: mov     eax, esi
 0x58E5C6: pop     esi
@@ -188,7 +187,7 @@
 0x58E5DD: jp      loc_58E6B4
 0x58E5E3: mov     ebx, [esi+34h]
 0x58E5E6: test    ebx, ebx
-0x58E5E8: mov     [esp+20h+arg_0], 0
+0x58E5E8: mov     [esp+20h+maxFocus], 0
 0x58E5F0: mov     ebp, 7FFFFFFFh
 0x58E5F5: jz      short loc_58E664
 0x58E5F7: mov     edi, [ebx+8]
@@ -209,18 +208,18 @@
 0x58E628: push    0FAAh
 0x58E62D: mov     ecx, edi
 0x58E62F: call    Tile_GetFloat
-0x58E634: call    Double_To_SInt32
+0x58E634: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58E639: cmp     eax, ebp
 0x58E63B: jge     short loc_58E643
-0x58E63D: mov     [esp+20h+arg_0], edi
+0x58E63D: mov     [esp+20h+maxFocus], edi
 0x58E641: mov     ebp, eax
 0x58E643: test    ebx, ebx
 0x58E645: jnz     short loc_58E5F7
-0x58E647: cmp     [esp+20h+arg_0], ebx
+0x58E647: cmp     [esp+20h+maxFocus], ebx
 0x58E64B: jz      short loc_58E664
-0x58E64D: mov     esi, [esp+20h+arg_0]
-0x58E651: mov     ecx, esi
-0x58E653: call    sub_58E7D0
+0x58E64D: mov     esi, [esp+20h+maxFocus]
+0x58E651: mov     ecx, esi; this
+0x58E653: call    Tile__RequestNavigationScroll; Verified descriptive name: resolves parent xscroll trait 0xFF5, then pulses resolved target user5 (0xFB3) with sentinel, selected tile xscroll value, then zero. Navigation resolution has scroll side effects; not a pure lookup.
 0x58E658: pop     edi
 0x58E659: mov     eax, esi
 0x58E65B: pop     esi
@@ -238,17 +237,17 @@
 0x58E67B: mov     ecx, esi
 0x58E67D: call    sub_578ED0
 0x58E682: mov     ecx, esi
-0x58E684: mov     [esp+20h+arg_0], 80000000h
+0x58E684: mov     [esp+20h+maxFocus], 80000000h
 0x58E68C: call    sub_589390
-0x58E691: push    eax
-0x58E692: lea     eax, [esp+24h+arg_0]
-0x58E696: push    eax
+0x58E691: push    eax; root
+0x58E692: lea     eax, [esp+24h+maxFocus]
+0x58E696: push    eax; maxFocus
 0x58E697: push    1; arg1
 0x58E699: push    0; canCreate
 0x58E69B: call    InterfaceManager_GetSingleton
 0x58E6A0: add     esp, 8
-0x58E6A3: mov     ecx, eax
-0x58E6A5: call    sub_57DA90
+0x58E6A3: mov     ecx, eax; this
+0x58E6A5: call    InterfaceManager__ScanForMaxFocus; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.
 0x58E6AA: pop     edi
 0x58E6AB: pop     esi
 0x58E6AC: pop     ebp
@@ -259,10 +258,10 @@
 0x58E6B7: fcomp   qword ptr ds:0A6AE60h
 0x58E6BD: fnstsw  ax
 0x58E6BF: test    ah, 44h
-0x58E6C2: jp      loc_58E772
+0x58E6C2: jp      loc_58E772; Verified explicit navigation link: follows action opcode0x7EB and reference crosslinks to source Value, writes source trait through output pointer and returns source owner Tile. Does not reinterpret the numeric value as a Tile address.
 0x58E6C8: mov     ebx, [esi+34h]
 0x58E6CB: test    ebx, ebx
-0x58E6CD: mov     [esp+20h+arg_0], 0
+0x58E6CD: mov     [esp+20h+maxFocus], 0
 0x58E6D5: mov     ebp, 80000000h
 0x58E6DA: jz      short loc_58E73A
 0x58E6DC: lea     esp, [esp+0]
@@ -284,14 +283,14 @@
 0x58E711: push    0FAAh
 0x58E716: mov     ecx, edi
 0x58E718: call    Tile_GetFloat
-0x58E71D: call    Double_To_SInt32
+0x58E71D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58E722: cmp     eax, ebp
 0x58E724: jle     short loc_58E72C
-0x58E726: mov     [esp+20h+arg_0], edi
+0x58E726: mov     [esp+20h+maxFocus], edi
 0x58E72A: mov     ebp, eax
 0x58E72C: test    ebx, ebx
 0x58E72E: jnz     short loc_58E6E0
-0x58E730: cmp     [esp+20h+arg_0], ebx
+0x58E730: cmp     [esp+20h+maxFocus], ebx
 0x58E734: jnz     loc_58E64D
 0x58E73A: push    0FF0h
 0x58E73F: mov     ecx, esi
@@ -303,13 +302,13 @@
 0x58E751: mov     ecx, esi
 0x58E753: call    sub_578ED0
 0x58E758: mov     ecx, esi
-0x58E75A: mov     [esp+20h+arg_0], 80000000h
+0x58E75A: mov     [esp+20h+maxFocus], 80000000h
 0x58E762: call    sub_589390
 0x58E767: push    eax
-0x58E768: lea     ecx, [esp+24h+arg_0]
+0x58E768: lea     ecx, [esp+24h+maxFocus]
 0x58E76C: push    ecx
 0x58E76D: jmp     loc_58E697
-0x58E772: mov     ecx, [ecx+10h]
+0x58E772: mov     ecx, [ecx+10h]; Verified explicit navigation link: follows action opcode0x7EB and reference crosslinks to source Value, writes source trait through output pointer and returns source owner Tile. Does not reinterpret the numeric value as a Tile address.
 0x58E775: test    ecx, ecx
 0x58E777: jz      loc_58E3E3
 0x58E77D: mov     eax, 7EBh
@@ -334,7 +333,7 @@
 0x58E7A8: jnz     short loc_58E7A1
 0x58E7AA: mov     edx, [ecx+8]
 0x58E7AD: movzx   eax, word ptr [edx+18h]
-0x58E7B1: mov     edx, [esp+20h+arg_4]
+0x58E7B1: mov     edx, [esp+20h+resolvedTrait]
 0x58E7B5: pop     edi
 0x58E7B6: pop     esi
 0x58E7B7: mov     [edx], eax

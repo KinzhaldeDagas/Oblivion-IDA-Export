@@ -13,7 +13,7 @@
 0x5364CD: test    edi, edi
 0x5364CF: jz      loc_53663F
 0x5364D5: push    edi
-0x5364D6: call    sub_47FAC0
+0x5364D6: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x5364DB: add     esp, 4
 0x5364DE: test    eax, eax
 0x5364E0: jz      loc_5365F3

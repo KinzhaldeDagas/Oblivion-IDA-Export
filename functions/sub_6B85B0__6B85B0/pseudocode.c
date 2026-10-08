@@ -1,10 +1,10 @@
-int __thiscall sub_6B85B0(_DWORD *this)
+DialogueResponse *__thiscall MenuTopic::GetCurrentResponse(MenuTopicView *this)
 {
-  int v1; // eax
+  DialogueResponseNode *currentResponseNode; // eax
 
-  v1 = *(this + 7);
-  if ( v1 )
-    return *(_DWORD *)v1;
+  currentResponseNode = this->currentResponseNode; /*0x6b85b0*/
+  if ( currentResponseNode ) /*0x6b85b5*/
+    return currentResponseNode->item; /*0x6b85b7*/
   else
-    return 0;
+    return 0; /*0x6b85ba*/
 }

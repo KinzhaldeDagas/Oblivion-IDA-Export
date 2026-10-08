@@ -1,4 +1,4 @@
-0x4BC240: mov     eax, [esp+arg_0]
+0x4BC240: mov     eax, [esp+source]; Verified virtual copy routine returns void (ret 4); RTTI-casts the source TESForm to TESSubSpace, copies inherited TESForm components and then copies the three dimension fields.
 0x4BC244: push    esi
 0x4BC245: push    edi
 0x4BC246: push    0; int

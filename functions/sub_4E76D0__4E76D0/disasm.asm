@@ -1,5 +1,5 @@
-0x4E76D0: push    0FFFFFFFFh
-0x4E76D2: push    offset SEH_6E3250
+0x4E76D0: push    0FFFFFFFFh; Verified debug-render root setter. Updates g_PathGridDebugRenderingEnabled. Enabling creates a shared NiNode, attaches DebugRender_GetOrCreateVertexColorProperty, and adds the root to TES/ObjectLODRoot; disabling removes the root, clears its child objects, releases it, and nulls g_PathGridDebugRenderRoot. Called by TESPathGrid_ToggleDebugRendering before per-cell render rebuild/clear.
+0x4E76D2: push    offset ExtraDataList_SetReferencePointer_SEH
 0x4E76D7: mov     eax, large fs:0
 0x4E76DD: push    eax
 0x4E76DE: push    esi
@@ -9,7 +9,7 @@
 0x4E76E7: push    eax
 0x4E76E8: lea     eax, [esp+18h+var_C]
 0x4E76EC: mov     large fs:0, eax
-0x4E76F2: mov     al, byte ptr [esp+18h+arg_0]
+0x4E76F2: mov     al, [esp+18h+enabled]
 0x4E76F6: cmp     ds:0B35F84h, al
 0x4E76FC: jz      loc_4E7809
 0x4E7702: test    al, al
@@ -18,7 +18,7 @@
 0x4E770B: push    0DCh ; 'Ü'; Size
 0x4E7710: call    FormHeapAlloc
 0x4E7715: add     esp, 4
-0x4E7718: mov     [esp+18h+arg_0], eax
+0x4E7718: mov     dword ptr [esp+18h+enabled], eax
 0x4E771C: test    eax, eax
 0x4E771E: mov     [esp+18h+var_4], 0
 0x4E7726: jz      short loc_4E7733
@@ -28,14 +28,14 @@
 0x4E7731: jmp     short loc_4E7735
 0x4E7733: xor     eax, eax
 0x4E7735: push    eax; a2
-0x4E7736: mov     ecx, offset dword_B35F88; this
+0x4E7736: mov     ecx, offset g_PathGridDebugRenderRoot; this
 0x4E773B: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x4E7743: call    NiSmartPointer_Set??
 0x4E7748: mov     esi, ds:0B35F88h
-0x4E774E: call    sub_4E70B0
+0x4E774E: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x4E7753: push    eax; a2
 0x4E7754: mov     ecx, esi; this
-0x4E7756: call    sub_405680
+0x4E7756: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4E775B: mov     eax, ds:0B333A0h
 0x4E7760: mov     ecx, [eax+0Ch]
 0x4E7763: mov     edx, [ecx]
@@ -57,10 +57,10 @@
 0x4E7794: mov     edx, [ecx]
 0x4E7796: mov     edx, [edx+88h]
 0x4E779C: push    eax
-0x4E779D: lea     eax, [esp+1Ch+arg_0]
+0x4E779D: lea     eax, [esp+1Ch+enabled]
 0x4E77A1: push    eax
 0x4E77A2: call    edx
-0x4E77A4: mov     eax, [esp+18h+arg_0]
+0x4E77A4: mov     eax, dword ptr [esp+18h+enabled]
 0x4E77A8: test    eax, eax
 0x4E77AA: mov     edi, ds:0A2807Ch
 0x4E77B0: jz      short loc_4E77CC
@@ -78,8 +78,8 @@
 0x4E77C8: mov     ecx, esi
 0x4E77CA: call    edx
 0x4E77CC: mov     ecx, ds:0B35F88h
-0x4E77D2: add     ecx, 0ACh ; '¬'
-0x4E77D8: call    sub_477EF0
+0x4E77D2: add     ecx, 0ACh ; '¬'; this
+0x4E77D8: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x4E77DD: mov     esi, ds:0B35F88h
 0x4E77E3: test    esi, esi
 0x4E77E5: jz      short loc_4E7809
@@ -103,3 +103,15 @@
 0x4E7816: pop     esi
 0x4E7817: add     esp, 0Ch
 0x4E781A: retn
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

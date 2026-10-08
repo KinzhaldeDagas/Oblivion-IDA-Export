@@ -1,1 +1,1 @@
-RpcServerProtseq
+typedef _RpcServerProtseq RpcServerProtseq;

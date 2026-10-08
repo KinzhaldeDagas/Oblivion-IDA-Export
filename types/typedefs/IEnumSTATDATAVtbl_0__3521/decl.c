@@ -1,1 +1,1 @@
-IEnumSTATDATAVtbl_0
+typedef IEnumSTATDATAVtbl IEnumSTATDATAVtbl_0;

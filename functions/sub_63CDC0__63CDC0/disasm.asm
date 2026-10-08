@@ -1,4 +1,4 @@
-0x63CDC0: push    ecx
+0x63CDC0: push    ecx; HighProcess vtable+0x318, resolved from 0xA71814. If +0x16C and actor has 3D: removes shadow receivers, calls 0x4E1580, re-adds shadow state, calls TESNPC_RefreshFaceGenForActor3D for NPC actor, performs further actor/render updates, clears +0x16C. Missing NiNode leaves flag pending. Broader than head-only refresh. Decompiler register/x87 arguments remain unreliable; no ABI correction inferred yet. Does not prove a vanilla LoadGame bug.
 0x63CDC1: push    ebp
 0x63CDC2: mov     ebp, ecx
 0x63CDC4: cmp     byte ptr [ebp+16Ch], 0
@@ -18,12 +18,12 @@
 0x63CDF7: push    edi
 0x63CDF8: mov     ecx, esi
 0x63CDFA: call    edx
-0x63CDFC: push    eax
+0x63CDFC: push    eax; object
 0x63CDFD: push    0
 0x63CDFF: call    GetShadowSceneNode
 0x63CE04: add     esp, 4
-0x63CE07: mov     ecx, eax
-0x63CE09: call    sub_7C5E70
+0x63CE07: mov     ecx, eax; this
+0x63CE09: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
 0x63CE0E: mov     eax, [esi]
 0x63CE10: mov     edx, [eax+284h]
 0x63CE16: push    45h ; 'E'
@@ -82,7 +82,7 @@
 0x63CEAE: jz      short loc_63CEB8
 0x63CEB0: push    esi
 0x63CEB1: mov     ecx, ebx
-0x63CEB3: call    sub_528550
+0x63CEB3: call    TESNPC_RefreshFaceGenForActor3D
 0x63CEB8: mov     edx, [ebp+0]
 0x63CEBB: mov     eax, [edx+42Ch]
 0x63CEC1: push    0
@@ -103,7 +103,7 @@
 0x63CEF0: jz      short loc_63CF11
 0x63CEF2: mov     edi, [esi]
 0x63CEF4: lea     ecx, [esi+44h]; this
-0x63CEF7: call    ExtraDataList__GetRefractionProperty
+0x63CEF7: call    ExtraDataList_GetRefractionPropertyExtra; Returns ExtraRefractionProperty itself. Fallout only corroborates the class label; Oblivion type behavior is authoritative.
 0x63CEFC: fld     dword ptr [eax+0Ch]
 0x63CEFF: mov     edx, [edi+270h]
 0x63CF05: push    ecx
@@ -137,9 +137,9 @@
 0x63CF57: jnz     short loc_63CF6B
 0x63CF59: cmp     byte ptr [ecx+588h], 0
 0x63CF60: jnz     short loc_63CF6B
-0x63CF62: push    0
-0x63CF64: mov     ecx, eax
-0x63CF66: call    sub_405790
+0x63CF62: push    0; index
+0x63CF64: mov     ecx, eax; this
+0x63CF66: call    NiNode_GetChildAtIndex
 0x63CF6B: push    eax
 0x63CF6C: mov     ecx, esi
 0x63CF6E: call    sub_5EA1A0

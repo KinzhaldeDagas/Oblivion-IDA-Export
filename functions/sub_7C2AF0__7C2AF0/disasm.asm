@@ -26,11 +26,11 @@
 0x7C2B56: push    eax
 0x7C2B57: mov     ecx, esi
 0x7C2B59: mov     byte ptr [esp+20h+var_4], 1
-0x7C2B5E: call    sub_434600
+0x7C2B5E: call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.
 0x7C2B63: push    1
 0x7C2B65: push    0
 0x7C2B67: mov     ecx, esi
-0x7C2B69: call    sub_434CB0
+0x7C2B69: call    sub_434CB0; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.
 0x7C2B6E: mov     eax, esi
 0x7C2B70: mov     ecx, [esp+1Ch+var_C]
 0x7C2B74: mov     large fs:0, ecx
@@ -39,3 +39,15 @@
 0x7C2B7D: pop     esi
 0x7C2B7E: add     esp, 10h
 0x7C2B81: retn    4
+0x9CE300: mov     ecx, [ebp-10h]; this
+0x9CE303: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9CE308: mov     ecx, [ebp-10h]
+0x9CE30B: add     ecx, 28h ; '('; this
+0x9CE30E: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9CE313: mov     edx, [esp+arg_4]
+0x9CE317: lea     eax, [edx-0Ch]
+0x9CE31A: mov     ecx, [edx-10h]
+0x9CE31D: xor     ecx, eax
+0x9CE31F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE324: mov     eax, offset stru_AF7330
+0x9CE329: jmp     ___CxxFrameHandler3

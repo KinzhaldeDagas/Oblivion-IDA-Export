@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x401A30",
-    "line": "push    ebx",
+    "line": "push    ebx; Coalesces a just-freed entry with adjacent free predecessors/successors, then releases any now-free tail region.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x401A54",
-    "line": "call    sub_4018F0",
+    "line": "call    MemoryHeap_MergeFreeEntries; Merges two adjacent free blocks: unlinks both, increases the first block's size by second+header, fixes trailing/last-block links, then reinserts it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x401A62",
-    "line": "call    sub_4019A0",
+    "line": "call    MemoryHeap_ReleaseTrailingFreeEntries; Releases consecutive free blocks at the high end of the heap backing buffer, reducing committed heap usage and updating the tail pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -166,12 +166,6 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
-  },
-  {
-    "ea": "0x401A6C",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
   },
   {
     "ea": "0x401A70",
@@ -253,7 +247,7 @@
   },
   {
     "ea": "0x401A94",
-    "line": "call    sub_4018F0",
+    "line": "call    MemoryHeap_MergeFreeEntries; Merges two adjacent free blocks: unlinks both, increases the first block's size by second+header, fixes trailing/last-block links, then reinserts it.",
     "mnemonic": "call",
     "size": 5
   },

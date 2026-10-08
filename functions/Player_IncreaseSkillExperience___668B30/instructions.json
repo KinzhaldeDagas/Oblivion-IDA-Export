@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x668B30",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Normal skill-use award levels only when accumulated progress is strictly greater than the requirement, consumes at most one requirement per call, and carries all excess progress (including the 99->100 transition).",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x668B39",
-    "line": "push    ebp",
+    "line": "push    ebp; Reject all accumulation when the native base skill is already 100 or greater.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x668B4B",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, [esp+14h+skill]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x668B56",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; If no TESSkill pointer was supplied, map the native AV through Oblivion group 2 and resolve one of the 21 inline TESSkill records.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x668B5B",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x668B64",
-    "line": "push    eax",
+    "line": "push    eax; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668B65",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x668B85",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Map the native skill AV to skillExp index 0..20 before reading existing raw progress.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x668B90",
-    "line": "fld     dword ptr [esi+ecx*4+130h]",
+    "line": "fld     dword ptr [esi+ecx*4+130h]; Read the raw progress numerator; major/non-major has not changed this stored value.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x668BA0",
-    "line": "fadd    [esp+18h+arg_4]",
+    "line": "fadd    [esp+18h+progressDelta]; Add the supplied raw progressDelta to existing progress without applying class membership here.",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x668BA5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x668BAF",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+progress]; progress",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x668BB2",
-    "line": "push    ebp; int",
+    "line": "push    ebp; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668BB3",
-    "line": "call    sub_65FA40",
+    "line": "call    Player_SetSkillProgress; Store new raw progress through Player_SetSkillProgress, which clamps only negative values and preserves excess above the requirement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x668BBC",
-    "line": "push    edi",
+    "line": "push    edi; skill",
     "mnemonic": "push",
     "size": 1
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x668BC1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668BC3",
-    "line": "call    sub_65FAD0",
+    "line": "call    Player_GetRequiredSkillProgress; Fetch the precomputed requirement whose denominator already reflects specialization and strict major/non-major membership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x668BCC",
-    "line": "mov     bl, [esp+18h+arg_C]",
+    "line": "mov     bl, [esp+18h+suppressFeedbackAndDeferredTracking]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x668BD5",
-    "line": "jp      short loc_668BE7",
+    "line": "jp      short loc_668BE7; Level only when newProgress > requiredProgress. Exact equality remains pending until a later positive use call. This call can trigger at most one level even if progress exceeds several thresholds.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -343,37 +343,37 @@
   },
   {
     "ea": "0x668BDC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668BDE",
-    "line": "push    edx",
+    "line": "push    edx; showFeedback",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668BDF",
-    "line": "push    0",
+    "line": "push    0; skipProgressConsumption",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x668BE1",
-    "line": "push    edi",
+    "line": "push    edi; skill",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668BE2",
-    "line": "call    Player_SkillLevelIncrease",
+    "line": "call    Player_SkillLevelIncrease; Normal use consumes one old requirement, increases the base skill by one, recalculates the next requirement, carries excess, and applies all major/non-major advancement side effects.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x668BE7",
-    "line": "cmp     byte ptr [esi+6E5h], 0",
+    "line": "cmp     byte ptr [esi+6E5h], 0; Chargen-only deferred accounting begins after live accumulation.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x668BF2",
-    "line": "jnz     short loc_668C14",
+    "line": "jnz     short loc_668C14; Only unsuppressed chargen use is copied into deferredCharGenSkillUsage for replay after the final class is committed.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x668BF7",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Map the native skill AV to the deferred chargen progress[21] index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x668C0B",
-    "line": "fadd    [esp+20h+arg_4]",
+    "line": "fadd    [esp+20h+progressDelta]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x668C12",
-    "line": "fstp    dword ptr [eax]",
+    "line": "fstp    dword ptr [eax]; Accumulate the unsuppressed raw skill-use delta in deferredCharGenSkillUsage for replay after the final class is committed. A separated sidecar skill needs an equivalent persisted deferred ledger; reseeding its level/progress at class apply otherwise erases tutorial use.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x668C15",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668C16",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; Refresh UI actor-value displays after a sub-100 accumulation attempt, even when TESSkill resolution failed.",
     "mnemonic": "call",
     "size": 5
   },

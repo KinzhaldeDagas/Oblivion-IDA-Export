@@ -1,4 +1,4 @@
-0x700710: push    esi
+0x700710: push    esi;
 0x700711: push    edi
 0x700712: mov     edi, [esp+8+arg_0]
 0x700716: lea     eax, [esp+8+arg_0]

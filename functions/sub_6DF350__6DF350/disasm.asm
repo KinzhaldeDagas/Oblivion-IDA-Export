@@ -151,7 +151,7 @@
 0x6DF554: call    sub_70FD10
 0x6DF559: jmp     loc_6DF862
 0x6DF55E: lea     ecx, [esp+0F0h+var_C4]
-0x6DF562: call    sub_43F350
+0x6DF562: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6DF567: fstp    st
 0x6DF569: fld     dword ptr ds:0A7B17Ch
 0x6DF56F: fld     [esp+0F0h+var_BC]
@@ -215,7 +215,7 @@
 0x6DF62F: fld     [esp+0F0h+var_B0]
 0x6DF633: fsub    [esp+0F0h+var_D4]
 0x6DF637: fstp    [esp+0F0h+var_B0]
-0x6DF63B: call    sub_43F350
+0x6DF63B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6DF640: test    byte ptr [ebx+0Ch], 1
 0x6DF644: fstp    st
 0x6DF646: jnz     short loc_6DF67E
@@ -269,32 +269,32 @@
 0x6DF6DB: sub     eax, 1
 0x6DF6DE: jnz     loc_6DF7B5
 0x6DF6E4: fld     [esp+0F0h+var_D0]
-0x6DF6E8: fstp    [esp+0F0h+var_AC]
+0x6DF6E8: fstp    [esp+0F0h+var_AC.data]
 0x6DF6EC: fld     [esp+0F0h+var_CC]
-0x6DF6F0: fstp    [esp+0F0h+var_A0]
+0x6DF6F0: fstp    [esp+0F0h+var_AC.data+0Ch]
 0x6DF6F4: fld     [esp+0F0h+var_C8]
-0x6DF6F8: fstp    [esp+0F0h+var_94]
-0x6DF6FC: fstp    [esp+0F0h+var_A8]
+0x6DF6F8: fstp    [esp+0F0h+var_AC.data+18h]
+0x6DF6FC: fstp    [esp+0F0h+var_AC.data+4]
 0x6DF700: fxch    st(1)
-0x6DF702: fstp    [esp+0F0h+var_9C]
-0x6DF706: fstp    [esp+0F0h+var_90]
+0x6DF702: fstp    [esp+0F0h+var_AC.data+10h]
+0x6DF706: fstp    [esp+0F0h+var_AC.data+1Ch]
 0x6DF70A: fld     [esp+0F0h+var_C4]
-0x6DF70E: fstp    [esp+0F0h+var_A4]
-0x6DF712: fstp    [esp+0F0h+var_98]
-0x6DF716: fstp    [esp+0F0h+var_8C]
+0x6DF70E: fstp    [esp+0F0h+var_AC.data+8]
+0x6DF712: fstp    [esp+0F0h+var_AC.data+14h]
+0x6DF716: fstp    [esp+0F0h+var_AC.data+20h]
 0x6DF71A: jmp     loc_6DF7BF
 0x6DF71F: fld     [esp+0F0h+var_D0]
-0x6DF723: fstp    [esp+0F0h+var_AC]
+0x6DF723: fstp    [esp+0F0h+var_AC.data]
 0x6DF727: fld     [esp+0F0h+var_CC]
-0x6DF72B: fstp    [esp+0F0h+var_A0]
+0x6DF72B: fstp    [esp+0F0h+var_AC.data+0Ch]
 0x6DF72F: fld     [esp+0F0h+var_C8]
-0x6DF733: fstp    [esp+0F0h+var_94]
+0x6DF733: fstp    [esp+0F0h+var_AC.data+18h]
 0x6DF737: fld     [esp+0F0h+var_C4]
-0x6DF73B: fstp    [esp+0F0h+var_A8]
+0x6DF73B: fstp    [esp+0F0h+var_AC.data+4]
 0x6DF73F: fxch    st(3)
-0x6DF741: fstp    [esp+0F0h+var_9C]
+0x6DF741: fstp    [esp+0F0h+var_AC.data+10h]
 0x6DF745: fxch    st(3)
-0x6DF747: fstp    [esp+0F0h+var_90]
+0x6DF747: fstp    [esp+0F0h+var_AC.data+1Ch]
 0x6DF74B: fxch    st(1)
 0x6DF74D: fchs
 0x6DF74F: fstp    [esp+0F0h+var_DC]
@@ -303,22 +303,22 @@
 0x6DF759: fchs
 0x6DF75B: fstp    [esp+0F0h+var_D4]
 0x6DF75F: fld     [esp+0F0h+var_DC]
-0x6DF763: fstp    [esp+0F0h+var_A4]
+0x6DF763: fstp    [esp+0F0h+var_AC.data+8]
 0x6DF767: fld     [esp+0F0h+var_D8]
-0x6DF76B: fstp    [esp+0F0h+var_98]
+0x6DF76B: fstp    [esp+0F0h+var_AC.data+14h]
 0x6DF76F: fld     [esp+0F0h+var_D4]
-0x6DF773: fstp    [esp+0F0h+var_8C]
+0x6DF773: fstp    [esp+0F0h+var_AC.data+20h]
 0x6DF777: jmp     short loc_6DF7BF
 0x6DF779: fld     [esp+0F0h+var_C4]
-0x6DF77D: fstp    [esp+0F0h+var_AC]
+0x6DF77D: fstp    [esp+0F0h+var_AC.data]
 0x6DF781: fxch    st(3)
-0x6DF783: fstp    [esp+0F0h+var_A0]
+0x6DF783: fstp    [esp+0F0h+var_AC.data+0Ch]
 0x6DF787: fxch    st(3)
-0x6DF789: fstp    [esp+0F0h+var_94]
+0x6DF789: fstp    [esp+0F0h+var_AC.data+18h]
 0x6DF78D: fxch    st(1)
-0x6DF78F: fstp    [esp+0F0h+var_A8]
-0x6DF793: fstp    [esp+0F0h+var_9C]
-0x6DF797: fstp    [esp+0F0h+var_90]
+0x6DF78F: fstp    [esp+0F0h+var_AC.data+4]
+0x6DF793: fstp    [esp+0F0h+var_AC.data+10h]
+0x6DF797: fstp    [esp+0F0h+var_AC.data+1Ch]
 0x6DF79B: fld     [esp+0F0h+var_D0]
 0x6DF79F: fchs
 0x6DF7A1: fstp    [esp+0F0h+var_DC]
@@ -334,7 +334,7 @@
 0x6DF7BD: fstp    st
 0x6DF7BF: lea     edx, [esp+0F0h+var_AC]
 0x6DF7C3: push    edx
-0x6DF7C4: lea     eax, [esp+0F4h+var_48]
+0x6DF7C4: lea     eax, [esp+0F4h+right]
 0x6DF7CB: push    eax
 0x6DF7CC: lea     ecx, [esp+0F8h+var_6C]
 0x6DF7D3: call    sub_710490
@@ -369,15 +369,15 @@
 0x6DF826: fld     [esp+0F0h+var_E0]
 0x6DF82A: push    ecx
 0x6DF82B: fchs
-0x6DF82D: lea     ecx, [esp+0F4h+var_48]
-0x6DF834: fstp    [esp+0F4h+var_F4]; float
-0x6DF837: call    NiMatrix33_InitRotationTransform
-0x6DF83C: lea     eax, [esp+0F0h+var_48]
-0x6DF843: push    eax
-0x6DF844: lea     ecx, [esp+0F4h+var_24]
-0x6DF84B: push    ecx
-0x6DF84C: lea     ecx, [esp+0F8h+var_AC]
-0x6DF850: call    NiMAtrix33_Multiply
+0x6DF82D: lea     ecx, [esp+0F4h+right]; this
+0x6DF834: fstp    [esp+0F4h+angleZ]; angleZ
+0x6DF837: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x6DF83C: lea     eax, [esp+0F0h+right]
+0x6DF843: push    eax; right
+0x6DF844: lea     ecx, [esp+0F4h+out]
+0x6DF84B: push    ecx; out
+0x6DF84C: lea     ecx, [esp+0F8h+var_AC]; this
+0x6DF850: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x6DF855: mov     ecx, 9
 0x6DF85A: mov     esi, eax
 0x6DF85C: lea     edi, [esp+0F0h+var_AC]
@@ -424,10 +424,10 @@
 0x6DF8D6: fld     [esp+0F0h+var_E0]
 0x6DF8DA: push    ecx
 0x6DF8DB: mov     ecx, esi
-0x6DF8DD: fstp    [esp+0F4h+var_F4]; float
+0x6DF8DD: fstp    [esp+0F4h+angleZ]; float
 0x6DF8E0: call    sub_471560
 0x6DF8E5: mov     ecx, esi
-0x6DF8E7: call    sub_6CBC10
+0x6DF8E7: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6DF8EC: test    al, al
 0x6DF8EE: jz      short loc_6DF926
 0x6DF8F0: fld     dword ptr ds:0A7DEB4h

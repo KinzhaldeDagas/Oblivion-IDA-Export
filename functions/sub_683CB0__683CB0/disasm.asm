@@ -1,4 +1,4 @@
-0x683CB0: fldz
+0x683CB0: fldz; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x683CB2: push    esi
 0x683CB3: mov     esi, [esp+4+arg_0]
 0x683CB7: fcom    dword ptr [esi+4]

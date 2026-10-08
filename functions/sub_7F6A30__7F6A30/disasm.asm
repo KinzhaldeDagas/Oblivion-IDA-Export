@@ -5,9 +5,9 @@
 0x7F6A37: mov     esi, ds:0B3F928h
 0x7F6A3D: push    edi
 0x7F6A3E: lea     eax, [esp+10h+arg_0]
-0x7F6A42: push    eax
-0x7F6A43: mov     ecx, ebx
-0x7F6A45: call    sub_405760
+0x7F6A42: push    eax; output
+0x7F6A43: mov     ecx, ebx; this
+0x7F6A45: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F6A4A: mov     ecx, [eax]
 0x7F6A4C: mov     eax, [esp+10h+arg_0]
 0x7F6A50: test    eax, eax
@@ -58,7 +58,7 @@
 0x7F6ABE: push    eax; NiGeometryData *
 0x7F6ABF: push    ecx; NiGeometryGroup *
 0x7F6AC0: mov     ecx, [esi+8A0h]
-0x7F6AC6: call    NiGeometryGroup__AddGeometryDataToGroup
+0x7F6AC6: call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x7F6ACB: pop     edi
 0x7F6ACC: pop     esi
 0x7F6ACD: pop     ebp

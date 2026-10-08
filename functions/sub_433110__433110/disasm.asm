@@ -23,7 +23,7 @@
 0x43314C: cmp     dword ptr [esi+20h], 0
 0x433150: jnz     short loc_433145
 0x433152: push    esi
-0x433153: call    FormHeapFree
+0x433153: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x433158: add     esp, 4
 0x43315B: add     edi, 1
 0x43315E: cmp     edi, [ebx]
@@ -31,7 +31,7 @@
 0x433162: pop     esi
 0x433163: mov     ecx, [ebx+8]
 0x433166: push    ecx
-0x433167: call    FormHeapFree
+0x433167: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43316C: mov     edx, [ebx+4]
 0x43316F: add     esp, 4
 0x433172: push    edx; dwTlsIndex

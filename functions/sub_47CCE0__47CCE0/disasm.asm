@@ -36,7 +36,7 @@
 0x47CD5A: call    eax
 0x47CD5C: test    eax, eax
 0x47CD5E: jz      short loc_47CD72
-0x47CD60: cmp     eax, offset unk_B33E88
+0x47CD60: cmp     eax, offset stru_B33E88
 0x47CD65: jz      loc_47CDFC
 0x47CD6B: mov     eax, [eax+4]
 0x47CD6E: test    eax, eax
@@ -70,7 +70,7 @@
 0x47CDC3: push    eax
 0x47CDC4: mov     ecx, ebx
 0x47CDC6: call    edx
-0x47CDC8: mov     eax, dword ptr [esp+18h+var_4]
+0x47CDC8: mov     eax, [esp+18h+var_4]
 0x47CDCC: test    eax, eax
 0x47CDCE: jz      short loc_47CDEA
 0x47CDD0: mov     esi, eax

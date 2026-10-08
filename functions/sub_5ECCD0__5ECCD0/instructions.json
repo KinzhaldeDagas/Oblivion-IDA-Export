@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x5ECCF9",
-    "line": "fst     dword ptr [esp+0BCh+var_A0]",
+    "line": "fst     [esp+0BCh+variableID]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x5ECD7B",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5ECD7D",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x5ECD80",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5ECD89",
-    "line": "lea     ecx, [esp+0C0h+var_A0]",
+    "line": "lea     ecx, [esp+0C0h+variableID]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x5ECD9E",
-    "line": "mov     edx, dword ptr [esp+0C0h+var_A0]",
+    "line": "mov     edx, [esp+0C0h+variableID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5ECDA2",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5ECDA4",
-    "line": "push    edx; ArgList",
+    "line": "push    edx; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5ECDA7",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x5ECDEB",
-    "line": "mov     edx, dword ptr [esp+0C0h+var_5C]",
+    "line": "mov     edx, [esp+0C0h+var_5C]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5ECDEF",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5ECDF1",
-    "line": "push    edx; ArgList",
+    "line": "push    edx; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x5ECDF4",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,19 +595,19 @@
   },
   {
     "ea": "0x5ECE12",
-    "line": "mov     ecx, dword ptr [esp+0C0h+var_58]",
+    "line": "mov     ecx, [esp+0C0h+var_58]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5ECE16",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5ECE18",
-    "line": "push    ecx; ArgList",
+    "line": "push    ecx; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x5ECE1B",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,19 +739,19 @@
   },
   {
     "ea": "0x5ECE58",
-    "line": "mov     eax, dword ptr [esp+0C0h+var_74]",
+    "line": "mov     eax, [esp+0C0h+var_74]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5ECE5C",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5ECE5E",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x5ECE61",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,19 +847,19 @@
   },
   {
     "ea": "0x5ECE92",
-    "line": "mov     edx, dword ptr [esp+0C0h+var_B0]",
+    "line": "mov     edx, [esp+0C0h+var_B0]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5ECE96",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5ECE98",
-    "line": "push    edx; ArgList",
+    "line": "push    edx; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x5ECE9B",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5ECEA0",
-    "line": "fstp    dword ptr [esp+0C0h+var_A0]",
+    "line": "fstp    [esp+0C0h+variableID]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x5ECEB0",
-    "line": "fstp    dword ptr [esp+0C0h+var_A0]",
+    "line": "fstp    [esp+0C0h+variableID]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x5ECED0",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x5ECEE2",
-    "line": "mov     dword ptr [esp+0C0h+var_74], ecx",
+    "line": "mov     [esp+0C0h+var_74], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x5ECFA8",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x5ED027",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x5ED08F",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,13 +1681,13 @@
   },
   {
     "ea": "0x5ED09A",
-    "line": "fstp    dword ptr [esp+0C0h+var_B0]",
+    "line": "fstp    [esp+0C0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5ED09E",
-    "line": "fld     dword ptr [esp+0C0h+var_B0]",
+    "line": "fld     [esp+0C0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1699,13 +1699,13 @@
   },
   {
     "ea": "0x5ED0A8",
-    "line": "fstp    dword ptr [esp+0C0h+var_B0]",
+    "line": "fstp    [esp+0C0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5ED0AC",
-    "line": "fld     dword ptr [esp+0C0h+var_B0]",
+    "line": "fld     [esp+0C0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x5ED0FF",
-    "line": "fstp    dword ptr [esp+0C0h+var_B0]",
+    "line": "fstp    [esp+0C0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x5ED105",
-    "line": "fld     dword ptr [esp+0C0h+var_B0]",
+    "line": "fld     [esp+0C0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1939,13 +1939,13 @@
   },
   {
     "ea": "0x5ED124",
-    "line": "fstp    dword ptr [esp+0C0h+var_B0]",
+    "line": "fstp    [esp+0C0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5ED128",
-    "line": "fld     dword ptr [esp+0C0h+var_B0]",
+    "line": "fld     [esp+0C0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x5ED138",
-    "line": "fstp    dword ptr [esp+0C0h+var_B0]",
+    "line": "fstp    [esp+0C0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x5ED13E",
-    "line": "fld     dword ptr [esp+0C0h+var_B0]",
+    "line": "fld     [esp+0C0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2059,13 +2059,13 @@
   },
   {
     "ea": "0x5ED15D",
-    "line": "fstp    dword ptr [esp+0C0h+var_B0]",
+    "line": "fstp    [esp+0C0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5ED161",
-    "line": "fld     dword ptr [esp+0C0h+var_B0]",
+    "line": "fld     [esp+0C0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x5ED185",
-    "line": "jz      short loc_5ED19B",
+    "line": "jz      short loc_5ED19B; BloodOnDeath decode 2026-05-30: continuous traps scale damage by frame delta/velocity before applying damage and spawning blood. This native path produces trail-like repeated blood by calling the emitter every continuous update.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x5ED1B7",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,7 +2245,7 @@
   },
   {
     "ea": "0x5ED1CA",
-    "line": "fstp    dword ptr [esp+0C0h+var_B0]",
+    "line": "fstp    [esp+0C0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x5ED1D0",
-    "line": "fld     dword ptr [esp+0C0h+var_B0]",
+    "line": "fld     [esp+0C0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x5ED22E",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2467,13 +2467,13 @@
   },
   {
     "ea": "0x5ED258",
-    "line": "fstp    dword ptr [esp+0D0h+var_B0]",
+    "line": "fstp    [esp+0D0h+var_B0]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5ED25C",
-    "line": "fld     dword ptr [esp+0D0h+var_B0]",
+    "line": "fld     [esp+0D0h+var_B0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2617,7 +2617,7 @@
   },
   {
     "ea": "0x5ED2A9",
-    "line": "call    sub_5EC400",
+    "line": "call    Actor_SpawnTrapHitBloodDecals; Verified call-chain anchor: Actor_HandleTrapHitDamage calls Actor_SpawnTrapHitBloodDecals with computed trap-impact vector/point values and damage-scaled emission input; the callee independently checks the victim actor's blood spray/decal eligibility and resolves its particle path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2695,7 +2695,7 @@
   },
   {
     "ea": "0x5ED2E0",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x5ED3D8",
-    "line": "fld     dword ptr [esp+0C0h+var_A0]",
+    "line": "fld     [esp+0C0h+variableID]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x5ED3EF",
-    "line": "fstp    dword ptr [esp+0C0h+var_A0]",
+    "line": "fstp    [esp+0C0h+variableID]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3193,7 +3193,7 @@
   },
   {
     "ea": "0x5ED41C",
-    "line": "call    sub_88D070",
+    "line": "call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3241,7 +3241,7 @@
   },
   {
     "ea": "0x5ED436",
-    "line": "fld     dword ptr [esp+0C4h+var_A0]",
+    "line": "fld     [esp+0C4h+variableID]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3493,7 +3493,7 @@
   },
   {
     "ea": "0x5ED4E5",
-    "line": "mov     esi, dword ptr [esp+0C0h+var_74]",
+    "line": "mov     esi, [esp+0C0h+var_74]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3649,7 +3649,7 @@
   },
   {
     "ea": "0x5ED540",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -3667,7 +3667,7 @@
   },
   {
     "ea": "0x5ED54C",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3745,7 +3745,7 @@
   },
   {
     "ea": "0x5ED575",
-    "line": "call    sub_8907A0",
+    "line": "call    bhkCharacterController_SetTransientPushVector; TES4 authoritative: set transient push/knockback channel. Converts caller world vector by hkFactor, divides by duration, and if stronger than current +0x2F0 stores +0x300=duration and +0x2F0=push vector/duration. Not a generic ledge-climb impulse API.",
     "mnemonic": "call",
     "size": 5
   },

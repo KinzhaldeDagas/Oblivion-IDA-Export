@@ -1,19 +1,36 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 10,
+  "chunks": [
+    [
+      "0x7C8000",
+      "0x7C823A"
+    ],
+    [
+      "0x9CE880",
+      "0x9CE905"
+    ]
+  ],
+  "chunks_sha256": "e91f889c0b20624cf4884bc3ab17dd82f284366e5ca366b8eac1f8c00e1a0e49",
+  "comment_regular": "ShadowSceneNode destructor. Clears registration and tears down owned light lists, persistent lights, target, cube camera, and helper state.",
+  "comment_repeatable": "ShadowSceneNode destructor. Clears registration and tears down owned light lists, persistent lights, target, cube camera, and helper state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
   "display_name": "ShadowSceneNode::~ShadowSceneNode(void)",
   "end_ea": "0x7C823A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1ShadowSceneNode@@UAE@XZ",
   "segment": ".text",
   "sha256": "b0b5790f1d3c004d40e2e043c6744cef92860b685d4c75ddd5afb1cdb8acb7ca",
   "size": 570,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C8000",
+  "total_chunk_size": 703,
   "type": "void __thiscall(ShadowSceneNode *this)",
-  "xrefs_from_count": 255,
+  "xrefs_from_count": 287,
   "xrefs_to_count": 1
 }

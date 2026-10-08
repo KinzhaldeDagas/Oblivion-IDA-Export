@@ -13,9 +13,9 @@
 0x58BC9A: mov     eax, [eax]
 0x58BC9C: test    eax, eax
 0x58BC9E: jz      short loc_58BCAC
-0x58BCA0: push    edi; Str2
-0x58BCA1: push    eax; Str1
-0x58BCA2: call    __strcmp
+0x58BCA0: push    edi; right
+0x58BCA1: push    eax; left
+0x58BCA2: call    CRT_StricmpLocaleDispatch
 0x58BCA7: add     esp, 8
 0x58BCAA: jmp     short loc_58BCB7
 0x58BCAC: xor     eax, eax

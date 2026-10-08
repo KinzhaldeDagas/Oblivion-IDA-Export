@@ -1,1 +1,1 @@
-IEnumConnectionPointsVtbl_0
+typedef IEnumConnectionPointsVtbl IEnumConnectionPointsVtbl_0;

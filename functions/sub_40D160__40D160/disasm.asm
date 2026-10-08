@@ -1,40 +1,40 @@
 0x40D160: sub     esp, 18h
 0x40D163: push    ebx
 0x40D164: mov     ebx, ecx
-0x40D166: mov     ecx, TESDataHandler_g_PlayerRef; this
-0x40D16C: call    TESObjectREFR_GetParentCell
+0x40D166: mov     ecx, dword ptr reference; this
+0x40D16C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x40D171: test    eax, eax
 0x40D173: jz      loc_40D4C7
-0x40D179: mov     ecx, TESDataHandler_g_PlayerRef
+0x40D179: mov     ecx, dword ptr reference
 0x40D17F: mov     eax, [ecx]
 0x40D181: mov     edx, [eax+154h]
 0x40D187: call    edx
 0x40D189: test    eax, eax
 0x40D18B: jz      loc_40D4C7
 0x40D191: push    3
-0x40D193: call    nullsub_returnTrue_0arg
-0x40D198: mov     eax, menuRenderedTexture
+0x40D193: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
+0x40D198: mov     eax, dword ptr texture
 0x40D19D: add     esp, 4
 0x40D1A0: test    eax, eax
 0x40D1A2: jz      short loc_40D1B0
-0x40D1A4: mov     ecx, g_textureManager; this
-0x40D1AA: push    eax; a2
-0x40D1AB: call    sub_7C1EE0
-0x40D1B0: mov     eax, g_Renderer
-0x40D1B5: mov     ecx, g_textureManager; this
+0x40D1A4: mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this
+0x40D1AA: push    eax; texture
+0x40D1AB: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
+0x40D1B0: mov     eax, dword ptr renderer
+0x40D1B5: mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this
 0x40D1BB: push    esi
 0x40D1BC: push    edi
-0x40D1BD: push    5; a3
+0x40D1BD: push    5; Requests default render-target type 5 for the captured world/menu background. This is not the XML UI render surface.
 0x40D1BF: push    eax; a2
-0x40D1C0: call    BSTextureManager_GetDefaultRenderTarget
+0x40D1C0: call    BSTextureManager_GetDefaultRenderTarget; Menu rendered texture path: creates menuRenderedTexture through BSTextureManager_GetDefaultRenderTarget(..., 5), then NiRenderer_Render uses that texture.
 0x40D1C5: push    eax; a2
-0x40D1C6: mov     ecx, offset menuRenderedTexture; this
+0x40D1C6: mov     ecx, offset texture; this
 0x40D1CB: call    NiSmartPointer_Set??
-0x40D1D0: mov     ecx, g_Renderer
+0x40D1D0: mov     ecx, dword ptr renderer
 0x40D1D6: mov     edx, [ecx]
 0x40D1D8: mov     eax, [edx+7Ch]
 0x40D1DB: call    eax
-0x40D1DD: mov     ecx, menuRenderedTexture
+0x40D1DD: mov     ecx, dword ptr texture
 0x40D1E3: mov     ecx, [ecx+20h]
 0x40D1E6: test    ecx, ecx
 0x40D1E8: mov     esi, eax
@@ -52,11 +52,11 @@
 0x40D202: call    eax
 0x40D204: cmp     eax, edi
 0x40D206: jnz     short loc_40D244
-0x40D208: mov     ecx, g_Renderer
+0x40D208: mov     ecx, dword ptr renderer
 0x40D20E: mov     edx, [ecx]
 0x40D210: mov     eax, [edx+7Ch]
 0x40D213: call    eax
-0x40D215: mov     ecx, menuRenderedTexture
+0x40D215: mov     ecx, dword ptr texture
 0x40D21B: mov     ecx, [ecx+20h]
 0x40D21E: test    ecx, ecx
 0x40D220: mov     esi, eax
@@ -74,11 +74,11 @@
 0x40D23A: call    eax
 0x40D23C: cmp     eax, edi
 0x40D23E: jz      loc_40D412
-0x40D244: mov     ecx, g_Renderer
+0x40D244: mov     ecx, dword ptr renderer
 0x40D24A: mov     edx, [ecx]
 0x40D24C: mov     eax, [edx+7Ch]
 0x40D24F: call    eax
-0x40D251: mov     ecx, menuRenderedTexture
+0x40D251: mov     ecx, dword ptr texture
 0x40D257: mov     ecx, [ecx+20h]
 0x40D25A: test    ecx, ecx
 0x40D25C: mov     esi, eax
@@ -111,12 +111,12 @@
 0x40D2A4: fstp    st(1)
 0x40D2A6: test    ah, 41h
 0x40D2A9: jnz     short loc_40D307
-0x40D2AB: mov     ecx, g_Renderer
+0x40D2AB: mov     ecx, dword ptr renderer
 0x40D2B1: fstp    st
 0x40D2B3: mov     edx, [ecx]
 0x40D2B5: mov     eax, [edx+7Ch]
 0x40D2B8: call    eax
-0x40D2BA: mov     ecx, menuRenderedTexture
+0x40D2BA: mov     ecx, dword ptr texture
 0x40D2C0: mov     ecx, [ecx+20h]
 0x40D2C3: test    ecx, ecx
 0x40D2C5: mov     esi, eax
@@ -143,12 +143,12 @@
 0x40D2FD: jge     short loc_40D305
 0x40D2FF: fadd    ds:flt_A2FC78
 0x40D305: fdivp   st(1), st
-0x40D307: mov     ecx, g_Renderer
+0x40D307: mov     ecx, dword ptr renderer
 0x40D30D: fstp    [esp+20h+var_14]
 0x40D311: mov     edx, [ecx]
 0x40D313: mov     eax, [edx+7Ch]
 0x40D316: call    eax
-0x40D318: mov     ecx, menuRenderedTexture
+0x40D318: mov     ecx, dword ptr texture
 0x40D31E: mov     ecx, [ecx+20h]
 0x40D321: test    ecx, ecx
 0x40D323: mov     esi, eax
@@ -181,12 +181,12 @@
 0x40D36B: fstp    st(1)
 0x40D36D: test    ah, 41h
 0x40D370: jnz     short loc_40D3CE
-0x40D372: mov     ecx, g_Renderer
+0x40D372: mov     ecx, dword ptr renderer
 0x40D378: fstp    st
 0x40D37A: mov     edx, [ecx]
 0x40D37C: mov     eax, [edx+7Ch]
 0x40D37F: call    eax
-0x40D381: mov     ecx, menuRenderedTexture
+0x40D381: mov     ecx, dword ptr texture
 0x40D387: mov     ecx, [ecx+20h]
 0x40D38A: test    ecx, ecx
 0x40D38C: mov     esi, eax
@@ -214,10 +214,10 @@
 0x40D3C6: fadd    ds:flt_A2FC78
 0x40D3CC: fdivp   st(1), st
 0x40D3CE: fldz
-0x40D3D0: mov     ecx, g_worldScenegraph
+0x40D3D0: mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x40D3D6: mov     eax, [ecx+0DCh]
 0x40D3DC: fst     [esp+24h+var_10]
-0x40D3E0: fld     [esp+24h+var_18]
+0x40D3E0: fld     [esp+24h+output]
 0x40D3E4: mov     edx, [esp+24h+var_10]
 0x40D3E8: fstp    [esp+24h+var_C]
 0x40D3EC: add     eax, 110h
@@ -231,18 +231,18 @@
 0x40D408: mov     ecx, [esp+24h+var_4]
 0x40D40C: mov     [eax+8], edx
 0x40D40F: mov     [eax+0Ch], ecx
-0x40D412: mov     edx, menuRenderedTexture
+0x40D412: mov     edx, dword ptr texture
 0x40D418: push    edx; a2
 0x40D419: mov     ecx, ebx; this
-0x40D41B: call    NiRenderer_Render
-0x40D420: cmp     ImageSpaceEffectEnabled, 0
-0x40D427: mov     byte_B33397, 1
+0x40D41B: call    NiRenderer_Render;
+0x40D420: cmp     OB_RendererGlobalState_010201A0.pad_00D+98h, 0
+0x40D427: mov     byte ptr unk_B33397, 1
 0x40D42E: jnz     short loc_40D47C
-0x40D430: mov     ecx, ScreenElementsRoot?
-0x40D436: lea     eax, [esp+24h+var_18]
-0x40D43A: push    eax
-0x40D43B: call    sub_405760
-0x40D440: mov     esi, [esp+24h+var_18]
+0x40D430: mov     ecx, ds:0B333ECh; this
+0x40D436: lea     eax, [esp+24h+output]
+0x40D43A: push    eax; output
+0x40D43B: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
+0x40D440: mov     esi, [esp+24h+output]
 0x40D444: test    esi, esi
 0x40D446: mov     ecx, [eax]
 0x40D448: mov     edi, [ecx+20h]
@@ -259,13 +259,13 @@
 0x40D463: push    1
 0x40D465: mov     ecx, esi
 0x40D467: call    edx
-0x40D469: mov     ecx, menuRenderedTexture; this
-0x40D46F: call    BSRenderedTexture__GetInnerTexture
-0x40D474: push    eax
-0x40D475: mov     ecx, edi
-0x40D477: call    NiTexturingProperty__SetUnk08
+0x40D469: mov     ecx, dword ptr texture; this
+0x40D46F: call    BSRenderedTexture__GetInnerTexture; Gets the captured background texture's inner NiRenderedTexture before binding it to menu-background geometry.
+0x40D474: push    eax; texture
+0x40D475: mov     ecx, edi; this
+0x40D477: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x40D47C: fldz
-0x40D47E: mov     eax, g_worldScenegraph
+0x40D47E: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x40D483: mov     eax, [eax+0DCh]
 0x40D489: fst     [esp+24h+var_10]
 0x40D48D: fld1
@@ -282,7 +282,7 @@
 0x40D4B5: mov     [eax+8], ecx
 0x40D4B8: push    2
 0x40D4BA: mov     [eax+0Ch], edx
-0x40D4BD: call    nullsub_returnTrue_0arg
+0x40D4BD: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x40D4C2: add     esp, 4
 0x40D4C5: pop     edi
 0x40D4C6: pop     esi

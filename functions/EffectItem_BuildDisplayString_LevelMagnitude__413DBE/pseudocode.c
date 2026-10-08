@@ -1,4 +1,4 @@
-int __usercall EffectItem_BuildDisplayString_::LevelMagnitude@<eax>(
+void __usercall EffectItem_BuildDisplayString_::LevelMagnitude(
         int a1@<eax>,
         int a2,
         int a3,
@@ -14,11 +14,16 @@ int __usercall EffectItem_BuildDisplayString_::LevelMagnitude@<eax>(
         int a13,
         char a14)
 {
-  int *SafeFloatPointer; // eax
+  float *SafeFloatPointer; // eax
 
-  if ( (*(_DWORD *)(a1 + 0x58) & 0x40000000) == 0 )
-    return EffectItem_BuildDisplayString_::FeetMagnitude(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
-  SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)&fMagicLevelMagnitudeMult);
-  Double_To_SInt32((double)a6 * *(float *)SafeFloatPointer);
-  return EffectItem_BuildDisplayString_::ConcatMagnitude(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+  if ( (*(_DWORD *)(a1 + 0x58) & 0x40000000) != 0 ) /*0x413dc7*/
+  {
+    SafeFloatPointer = GameSetting_GetSafeFloatPointer(&flt_B37ED0[0x80]); /*0x413dce*/
+    Double_To_SInt32((double)a6 * *SafeFloatPointer); /*0x413dd9*/
+    EffectItem_BuildDisplayString_::ConcatMagnitude(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); /*0x413df0*/
+  }
+  else
+  {
+    EffectItem_BuildDisplayString_::FeetMagnitude(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); /*0x413dc7*/
+  }
 }

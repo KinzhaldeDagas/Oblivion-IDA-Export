@@ -1,4 +1,4 @@
-0x7A1CD0: push    0FFFFFFFFh
+0x7A1CD0: push    0FFFFFFFFh; SpeedTree decode: stock CFrondEngine::Compute. Builds guide LODs, verifies the shared highest-LOD vertex count <= USHRT_MAX, sets frond geometry LOD count, emits either blade or extrusion vertices once, then emits per-LOD strips using compact guides.
 0x7A1CD2: push    offset SEH_7A1CD0
 0x7A1CD7: mov     eax, large fs:0
 0x7A1CDD: push    eax
@@ -13,14 +13,14 @@
 0x7A1CF0: lea     eax, [esp+0B4h+var_C]
 0x7A1CF7: mov     large fs:0, eax
 0x7A1CFD: mov     esi, ecx
-0x7A1CFF: mov     ecx, [esp+0B4h+arg_4]
-0x7A1D06: mov     eax, [esp+0B4h+arg_0]
+0x7A1CFF: mov     ecx, [esp+0B4h+lightingEngine]
+0x7A1D06: mov     eax, [esp+0B4h+frondGeometry]
 0x7A1D0D: mov     [esi+4], ecx
 0x7A1D10: xor     edi, edi
-0x7A1D12: mov     ecx, esi
+0x7A1D12: mov     ecx, esi; this
 0x7A1D14: mov     [esi], eax
 0x7A1D16: mov     [esp+0B4h+var_A0], edi
-0x7A1D1A: call    sub_7A1660
+0x7A1D1A: call    OB_CFrondEngine_BuildGuideLods_010201A0; Oblivion-authoritative CFrondEngine::BuildGuideLods. Computes total/largest surface area, writes fuzzySurfaceArea at SFrondGuide+0x24, preserves large fronds, invokes the typed descending introsort twice, reinserts retained guides first, and builds per-LOD vectors of 0x30 guide copies. Unlike RT 4.1 source, this executable sorts/moves complete compact SFrondGuide records rather than a vector of SFrondGuide* pointers; no later segment-override/prohibit-reduction field participates.
 0x7A1D1F: xor     ebx, ebx
 0x7A1D21: xor     ebp, ebp
 0x7A1D23: mov     eax, [esi+1Ch]
@@ -152,19 +152,19 @@
 0x7A1E90: mov     [esp+0B4h+var_A0], eax
 0x7A1E94: xor     edi, edi
 0x7A1E96: jmp     loc_7A1D23
-0x7A1E9B: push    2Ah ; '*'; MaxCount
+0x7A1E9B: push    2Ah ; '*'; count
 0x7A1E9D: push    offset aDefaultReached; "default reached in CFrondEngine::Comput"...
-0x7A1EA2: lea     ecx, [esp+0BCh+var_94]
-0x7A1EA6: mov     [esp+0BCh+var_7C], 0Fh
-0x7A1EAE: mov     [esp+0BCh+var_80], edi
-0x7A1EB2: mov     [esp+0BCh+var_90], 0
-0x7A1EB7: call    sub_414500
-0x7A1EBC: push    edi
-0x7A1EBD: lea     ecx, [esp+0B8h+var_94]
-0x7A1EC1: push    ecx
-0x7A1EC2: lea     ecx, [esp+0BCh+var_5C]
+0x7A1EA2: lea     ecx, [esp+0BCh+result]; this
+0x7A1EA6: mov     [esp+0BCh+result.capacity], 0Fh
+0x7A1EAE: mov     [esp+0BCh+result.size], edi
+0x7A1EB2: mov     byte ptr [esp+0BCh+result.storage], 0
+0x7A1EB7: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
+0x7A1EBC: push    edi; appendSystemError
+0x7A1EBD: lea     ecx, [esp+0B8h+result]
+0x7A1EC1: push    ecx; details
+0x7A1EC2: lea     ecx, [esp+0BCh+var_5C]; this
 0x7A1EC6: mov     [esp+0BCh+var_4], edi
-0x7A1ECD: call    sub_789190
+0x7A1ECD: call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.
 0x7A1ED2: push    offset __TI3?AVIdvFileError@@; throw info for 'class IdvFileError'
 0x7A1ED7: lea     edx, [esp+0B8h+var_5C]
 0x7A1EDB: push    edx
@@ -173,39 +173,39 @@
 0x7A1EE9: jle     short loc_7A1F25
 0x7A1EEB: push    0FFFFh; ArgList
 0x7A1EF0: push    offset aFrondVerticesE; "frond vertices exceed %d"
-0x7A1EF5: lea     esi, [esp+0BCh+var_94]
-0x7A1EF9: call    sub_7A54A0
+0x7A1EF5: lea     esi, [esp+0BCh+result]; result
+0x7A1EF9: call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.
 0x7A1EFE: add     esp, 8
-0x7A1F01: push    eax
-0x7A1F02: lea     ecx, [esp+0B8h+var_5C]
+0x7A1F01: push    eax; message
+0x7A1F02: lea     ecx, [esp+0B8h+var_5C]; this
 0x7A1F06: mov     [esp+0B8h+var_4], 1
-0x7A1F11: call    sub_6F7DD0
+0x7A1F11: call    OB_std_runtime_error_CtorFromString_010201A0; Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.
 0x7A1F16: push    offset __TI2?AVruntime_error@std@@; throw info for 'class std::runtime_error'
 0x7A1F1B: lea     eax, [esp+0B8h+var_5C]
 0x7A1F1F: push    eax
 0x7A1F20: call    ThrowException??
 0x7A1F25: movzx   ecx, word ptr [esi+50h]
-0x7A1F29: push    ecx
-0x7A1F2A: mov     ecx, [esi]
-0x7A1F2C: call    sub_798090
+0x7A1F29: push    ecx; lodCount
+0x7A1F2A: mov     ecx, [esi]; this
+0x7A1F2C: call    OB_CIndexedGeometry_SetNumLodLevels_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::SetNumLodLevels clears the nested unsigned-short length and unsigned-short-pointer containers plus 32-bit triangle totals, records the unsigned-short LOD count, resizes both outer vectors with empty inner values, and zeroes totals.
 0x7A1F31: mov     eax, [esi+28h]
 0x7A1F34: sub     eax, edi
 0x7A1F36: jz      loc_7A220E
 0x7A1F3C: sub     eax, 1
 0x7A1F3F: jz      short loc_7A1F91
-0x7A1F41: push    2Ah ; '*'; MaxCount
+0x7A1F41: push    2Ah ; '*'; count
 0x7A1F43: push    offset aDefaultReached; "default reached in CFrondEngine::Comput"...
-0x7A1F48: lea     ecx, [esp+0BCh+var_78]
-0x7A1F4C: mov     [esp+0BCh+var_60], 0Fh
-0x7A1F54: mov     [esp+0BCh+var_64], edi
-0x7A1F58: mov     [esp+0BCh+var_74], 0
-0x7A1F5D: call    sub_414500
-0x7A1F62: push    edi
-0x7A1F63: lea     edx, [esp+0B8h+var_78]
-0x7A1F67: push    edx
-0x7A1F68: lea     ecx, [esp+0BCh+var_34]
+0x7A1F48: lea     ecx, [esp+0BCh+details]; this
+0x7A1F4C: mov     [esp+0BCh+details.capacity], 0Fh
+0x7A1F54: mov     [esp+0BCh+details.size], edi
+0x7A1F58: mov     byte ptr [esp+0BCh+details.storage], 0
+0x7A1F5D: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
+0x7A1F62: push    edi; appendSystemError
+0x7A1F63: lea     edx, [esp+0B8h+details]
+0x7A1F67: push    edx; details
+0x7A1F68: lea     ecx, [esp+0BCh+var_34]; this
 0x7A1F6F: mov     [esp+0BCh+var_4], 2
-0x7A1F7A: call    sub_789190
+0x7A1F7A: call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.
 0x7A1F7F: push    offset __TI3?AVIdvFileError@@; throw info for 'class IdvFileError'
 0x7A1F84: lea     eax, [esp+0B8h+var_34]
 0x7A1F8B: push    eax
@@ -259,9 +259,9 @@
 0x7A2009: call    __invalid_parameter_noinfo
 0x7A200E: mov     eax, [edi+4]
 0x7A2011: add     eax, ebp
-0x7A2013: push    eax
-0x7A2014: mov     ecx, esi
-0x7A2016: call    sub_79FD10
+0x7A2013: push    eax; guide
+0x7A2014: mov     ecx, esi; this
+0x7A2016: call    OB_CFrondEngine_BuildExtrusionVertices_010201A0; Source-match: CFrondEngine::BuildExtrusionVertices. Builds extrusion profile vertices along each guide using profile/normal/tangent vectors, lighting, wind weights, and running-length T-coordinate adjustment.
 0x7A201B: add     ebx, 1
 0x7A201E: add     ebp, 30h ; '0'
 0x7A2021: jmp     loc_7A1F95
@@ -278,9 +278,9 @@
 0x7A203F: movzx   ecx, di
 0x7A2042: cmp     ecx, eax
 0x7A2044: jnb     loc_7A23E1
-0x7A204A: mov     ecx, [esi]
-0x7A204C: push    edi
-0x7A204D: call    sub_794A90
+0x7A204A: mov     ecx, [esi]; this
+0x7A204C: push    edi; lodLevel
+0x7A204D: call    OB_CIndexedGeometry_ResetStripCounter_010201A0; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.
 0x7A2052: xor     ebx, ebx
 0x7A2054: mov     [esp+0B4h+var_A0], ebx
 0x7A2058: mov     ecx, [esi+1Ch]
@@ -425,7 +425,7 @@
 0x7A21EC: push    edx
 0x7A21ED: push    eax
 0x7A21EE: mov     ecx, esi
-0x7A21F0: call    sub_79A450
+0x7A21F0: call    OB_CFrondEngine_ComputeExtrusion_010201A0; SpeedTree decode: stock CFrondEngine::ComputeExtrusion. Builds a reduced zig-zag strip for one extrusion LOD using min length/cross segment fields and guide vertex counts. Stock 0x6C CFrondEngine has no bProhibitSegmentReduction field.
 0x7A21F5: mov     edi, [esp+0B4h+var_9C]
 0x7A21F9: add     ebx, 1
 0x7A21FC: add     [esp+0B4h+var_A0], 30h ; '0'
@@ -483,7 +483,7 @@
 0x7A228E: add     eax, ebp
 0x7A2290: push    eax
 0x7A2291: mov     ecx, esi
-0x7A2293: call    sub_79C540
+0x7A2293: call    OB_CFrondEngine_BuildBladeVertices_010201A0; Source-match: CFrondEngine::BuildBladeVertices. Builds shared highest-LOD blade vertices for each guide/blade, with diffuse texcoords, static/dynamic lighting data, tangents/binormals, wind weights, and length-adjusted T coords.
 0x7A2298: add     ebx, 1
 0x7A229B: add     ebp, 30h ; '0'
 0x7A229E: jmp     loc_7A2212
@@ -501,9 +501,9 @@
 0x7A22BE: movzx   ecx, bp
 0x7A22C1: cmp     ecx, eax
 0x7A22C3: jnb     loc_7A23E1
-0x7A22C9: mov     ecx, [esi]
-0x7A22CB: push    ebp
-0x7A22CC: call    sub_794A90
+0x7A22C9: mov     ecx, [esi]; this
+0x7A22CB: push    ebp; lodLevel
+0x7A22CC: call    OB_CIndexedGeometry_ResetStripCounter_010201A0; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.
 0x7A22D1: mov     [esp+0B4h+var_A0], ebx
 0x7A22D5: mov     ecx, [esi+1Ch]
 0x7A22D8: test    ecx, ecx
@@ -590,7 +590,7 @@
 0x7A23BF: push    ecx
 0x7A23C0: push    eax
 0x7A23C1: mov     ecx, esi
-0x7A23C3: call    sub_79A390
+0x7A23C3: call    OB_CFrondEngine_ComputeBlade_010201A0; SpeedTree decode: stock CFrondEngine::ComputeBlade. For each blade, emits one strip over the shared highest-LOD vertices for the requested LOD. Fade-hint storage from later 4.1 is not visible in this compact stock writer path.
 0x7A23C8: mov     ebp, [esp+0B4h+var_9C]
 0x7A23CC: add     ebx, 1
 0x7A23CF: add     [esp+0B4h+var_A0], 30h ; '0'
@@ -606,3 +606,16 @@
 0x7A23F3: pop     ebx
 0x7A23F4: add     esp, 0A0h
 0x7A23FA: retn    8
+0x9CC760: lea     ecx, [ebp-94h]; this
+0x9CC766: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CC76B: lea     ecx, [ebp-94h]; this
+0x9CC771: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CC776: lea     ecx, [ebp-78h]; this
+0x9CC779: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CC77E: mov     edx, [esp+lightingEngine]
+0x9CC782: lea     eax, [edx-0A4h]
+0x9CC788: mov     ecx, [edx-0A8h]
+0x9CC78E: xor     ecx, eax
+0x9CC790: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC795: mov     eax, offset stru_AF5B40
+0x9CC79A: jmp     ___CxxFrameHandler3

@@ -21,7 +21,7 @@
 0x585F82: mov     [esp+24h+var_4], esi
 0x585F86: call    Console_FormatPrint
 0x585F8B: push    esi
-0x585F8C: call    FormHeapFree
+0x585F8C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x585F91: add     esp, 4
 0x585F94: mov     ecx, [esp+1Ch+var_C]
 0x585F98: mov     large fs:0, ecx
@@ -29,3 +29,12 @@
 0x585FA0: pop     esi
 0x585FA1: add     esp, 14h
 0x585FA4: retn
+0x9BF2F0: lea     ecx, [ebp-14h]; void *
+0x9BF2F3: jmp     BSStringT_Clear
+0x9BF2F8: mov     edx, [esp+Format]
+0x9BF2FC: lea     eax, [edx-0Ch]
+0x9BF2FF: mov     ecx, [edx-10h]
+0x9BF302: xor     ecx, eax
+0x9BF304: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF309: mov     eax, offset stru_AE88C0
+0x9BF30E: jmp     ___CxxFrameHandler3

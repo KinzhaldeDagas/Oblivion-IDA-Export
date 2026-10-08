@@ -1,4 +1,4 @@
-0x640020: push    0FFFFFFFFh
+0x640020: push    0FFFFFFFFh; Health Bars plugin analysis: HighProcess native 3D health-bar updater. Creates a NiBillBoardNode named HealthBar, attaches it to actor 3D, and loads Data\\Textures\\Menus\\Misc\\HealthBar3DBW.dds for the bar texture.
 0x640022: push    offset SEH_640020
 0x640027: mov     eax, large fs:0
 0x64002D: push    eax
@@ -28,7 +28,7 @@
 0x640074: mov     ecx, ebx
 0x640076: fdivr   qword ptr [esp+54h+a2]
 0x64007A: fstp    dword ptr [ebp+26Ch]
-0x640080: call    sub_5F0D60
+0x640080: call    sub_5F0D60; Health Bars plugin call hook site: replaces call to 0x5F0D60 with HealthBarVisibilityHook. Hook clamps HighProcess+0x26C to 1.0, then calls the original Oblivion visibility predicate.
 0x640085: fld1
 0x640087: test    al, al
 0x640089: jnz     loc_64013E
@@ -139,20 +139,20 @@
 0x6401EE: fstp    [esp+64h+var_64]; float
 0x6401F1: call    sub_70FE20
 0x6401F6: mov     ecx, ebx
-0x6401F8: call    sub_5E0660
+0x6401F8: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x6401FD: fadd    qword ptr ds:0A3D0C0h
 0x640203: mov     eax, [edi]
 0x640205: push    offset aHealthbar; "HealthBar"
 0x64020A: fstp    [esp+58h+var_40]
 0x64020E: fldz
-0x640210: fst     [esp+58h+var_28]
-0x640214: mov     ecx, [esp+58h+var_28]
-0x640218: fstp    [esp+58h+var_24]
+0x640210: fst     [esp+58h+other.x]
+0x640214: mov     ecx, [esp+58h+other.x]
+0x640218: fstp    [esp+58h+other.y]
 0x64021C: fld     [esp+58h+var_40]
-0x640220: mov     edx, [esp+58h+var_24]
+0x640220: mov     edx, [esp+58h+other.y]
 0x640224: mov     [eax+54h], ecx
-0x640227: fstp    [esp+58h+var_20]
-0x64022B: mov     ecx, [esp+58h+var_20]
+0x640227: fstp    [esp+58h+other.z]
+0x64022B: mov     ecx, [esp+58h+other.z]
 0x64022F: mov     [eax+58h], edx
 0x640232: mov     [eax+5Ch], ecx
 0x640235: mov     ecx, [edi]
@@ -207,53 +207,53 @@
 0x6402DC: fchs
 0x6402DE: fstp    [esp+54h+Src]
 0x6402E2: fld     [esp+54h+Src]
-0x6402E6: fst     [esp+54h+var_28]
-0x6402EA: mov     ecx, [esp+54h+var_28]
+0x6402E6: fst     [esp+54h+other.x]
+0x6402EA: mov     ecx, [esp+54h+other.x]
 0x6402EE: fld     [esp+54h+a2]
 0x6402F2: mov     [esi], ecx
-0x6402F4: fst     [esp+54h+var_24]
-0x6402F8: mov     edx, [esp+54h+var_24]
+0x6402F4: fst     [esp+54h+other.y]
+0x6402F8: mov     edx, [esp+54h+other.y]
 0x6402FC: fldz
 0x6402FE: mov     [esi+4], edx
-0x640301: fst     [esp+54h+var_20]
-0x640305: mov     eax, [esp+54h+var_20]
+0x640301: fst     [esp+54h+other.z]
+0x640305: mov     eax, [esp+54h+other.z]
 0x640309: fxch    st(2)
-0x64030B: fstp    [esp+54h+var_28]
+0x64030B: fstp    [esp+54h+other.x]
 0x64030F: mov     [esi+8], eax
-0x640312: mov     ecx, [esp+54h+var_28]
+0x640312: mov     ecx, [esp+54h+other.x]
 0x640316: mov     [esi+0Ch], ecx
 0x640319: fld     st
 0x64031B: fchs
 0x64031D: fstp    [esp+54h+a2]
 0x640321: fld     [esp+54h+a2]
-0x640325: fst     [esp+54h+var_24]
-0x640329: mov     edx, [esp+54h+var_24]
+0x640325: fst     [esp+54h+other.y]
+0x640329: mov     edx, [esp+54h+other.y]
 0x64032D: fxch    st(2)
 0x64032F: mov     [esi+10h], edx
-0x640332: fst     [esp+54h+var_20]
-0x640336: mov     eax, [esp+54h+var_20]
+0x640332: fst     [esp+54h+other.z]
+0x640336: mov     eax, [esp+54h+other.z]
 0x64033A: fxch    st(3)
 0x64033C: mov     [esi+14h], eax
-0x64033F: fst     [esp+54h+var_28]
-0x640343: mov     ecx, [esp+54h+var_28]
+0x64033F: fst     [esp+54h+other.x]
+0x640343: mov     ecx, [esp+54h+other.x]
 0x640347: fxch    st(1)
 0x640349: mov     [esi+18h], ecx
-0x64034C: fstp    [esp+54h+var_24]
-0x640350: mov     edx, [esp+54h+var_24]
+0x64034C: fstp    [esp+54h+other.y]
+0x640350: mov     edx, [esp+54h+other.y]
 0x640354: fxch    st(2)
 0x640356: mov     [esi+1Ch], edx
-0x640359: fst     [esp+54h+var_20]
-0x64035D: mov     eax, [esp+54h+var_20]
+0x640359: fst     [esp+54h+other.z]
+0x64035D: mov     eax, [esp+54h+other.z]
 0x640361: fxch    st(2)
 0x640363: mov     [esi+20h], eax
-0x640366: fstp    [esp+54h+var_28]
-0x64036A: mov     ecx, [esp+54h+var_28]
+0x640366: fstp    [esp+54h+other.x]
+0x64036A: mov     ecx, [esp+54h+other.x]
 0x64036E: mov     [esi+24h], ecx
-0x640371: fstp    [esp+54h+var_24]
-0x640375: mov     edx, [esp+54h+var_24]
+0x640371: fstp    [esp+54h+other.y]
+0x640375: mov     edx, [esp+54h+other.y]
 0x640379: mov     [esi+28h], edx
-0x64037C: fst     [esp+54h+var_20]
-0x640380: mov     eax, [esp+54h+var_20]
+0x64037C: fst     [esp+54h+other.z]
+0x640380: mov     eax, [esp+54h+other.z]
 0x640384: fld1
 0x640386: mov     [esi+2Ch], eax
 0x640389: fst     [esp+54h+a2]
@@ -293,7 +293,6 @@
 0x640408: mov     word ptr [ebx+0Ah], 3
 0x64040E: mov     ecx, 4
 0x640413: jmp     short loc_640420
-0x640415: align 10h
 0x640420: mov     edx, ds:0B25AE0h
 0x640426: mov     [eax], edx
 0x640428: mov     edx, ds:0B25AE4h
@@ -324,7 +323,7 @@
 0x640489: mov     ecx, [edi]; this
 0x64048B: push    eax; a2
 0x64048C: mov     [esp+58h+var_4], 0FFFFFFFFh
-0x640494: call    sub_405680
+0x640494: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x640499: push    0C0h ; 'À'; Size
 0x64049E: call    FormHeapAlloc
 0x6404A3: add     esp, 4
@@ -333,17 +332,17 @@
 0x6404AC: mov     [esp+54h+var_4], 3
 0x6404B4: jz      short loc_6404D3
 0x6404B6: mov     ecx, [esp+54h+var_40]
-0x6404BA: push    ebx
-0x6404BB: push    2
-0x6404BD: push    0
-0x6404BF: push    1
-0x6404C1: push    ebp
-0x6404C2: push    ecx
-0x6404C3: push    0
-0x6404C5: push    esi
-0x6404C6: push    4
-0x6404C8: mov     ecx, eax
-0x6404CA: call    sub_7174B0
+0x6404BA: push    ebx; triangleIndices
+0x6404BB: push    2; triangleCount
+0x6404BD: push    0; dataFlags
+0x6404BF: push    1; hasVertexColors
+0x6404C1: push    ebp; textureCoordinates
+0x6404C2: push    ecx; colors
+0x6404C3: push    0; normals
+0x6404C5: push    esi; vertices
+0x6404C6: push    4; vertexCount
+0x6404C8: mov     ecx, eax; this
+0x6404CA: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x6404CF: mov     esi, eax
 0x6404D1: jmp     short loc_6404D5
 0x6404D3: xor     esi, esi
@@ -361,7 +360,7 @@
 0x6404FC: mov     word ptr [esp+54h+var_38], ax
 0x640501: mov     word ptr [esp+54h+var_38+2], ax
 0x640506: lea     ecx, [esp+54h+Src]
-0x64050A: push    offset aDataTexture_10; "Data\\Textures\\Menus\\Misc\\HealthBar3"...
+0x64050A: push    offset aDataTexture_10; Health Bars plugin: native HealthBar texture load site. Plugin validates this push operand and redirects it to its own lifetime-stable copy of the IDA-observed path Data\\Textures\\Menus\\Misc\\HealthBar3DBW.dds.
 0x64050F: push    ecx; int
 0x640510: mov     [esp+5Ch+var_4], 4
 0x640518: call    BSStringT_Static_Format
@@ -371,9 +370,9 @@
 0x640525: mov     ecx, esi
 0x640527: call    NiObjectNET_SetName
 0x64052C: push    1; char
-0x64052E: push    offset dword_B256D0; int
+0x64052E: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x640533: push    ebp; Src
-0x640534: call    NiSourceTexture__LoadTextureByFilename
+0x640534: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x640539: push    30h ; '0'; Size
 0x64053B: mov     ebx, eax
 0x64053D: call    FormHeapAlloc
@@ -387,14 +386,14 @@
 0x640559: mov     [esp+54h+var_40], eax
 0x64055D: jmp     short loc_640567
 0x64055F: mov     [esp+54h+var_40], 0
-0x640567: mov     ecx, [esp+54h+var_40]
-0x64056B: push    ebx
+0x640567: mov     ecx, [esp+54h+var_40]; this
+0x64056B: push    ebx; texture
 0x64056C: mov     byte ptr [esp+58h+var_4], 4
-0x640571: call    NiTexturingProperty__SetUnk08
+0x640571: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x640576: mov     edx, [esp+54h+var_40]
 0x64057A: push    edx; a2
 0x64057B: mov     ecx, esi; this
-0x64057D: call    sub_405680
+0x64057D: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x640582: push    5Ch ; '\'; Size
 0x640584: call    FormHeapAlloc
 0x640589: add     esp, 4
@@ -433,20 +432,20 @@
 0x640606: mov     ecx, esi; this
 0x640608: mov     byte ptr [esp+58h+var_4], 4
 0x64060D: mov     [eax+30h], edx
-0x640610: call    sub_405680
+0x640610: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x640615: mov     ecx, [edi]
 0x640617: call    NiNode_UpdateDynamicEffectState
 0x64061C: mov     ecx, [edi]; this
-0x64061E: call    NiAVObject_InitializePropertyState
+0x64061E: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x640623: fldz
 0x640625: mov     ecx, [edi]; this
 0x640627: push    0; a3
 0x640629: push    ecx
 0x64062A: fstp    [esp+5Ch+var_5C]; a2
-0x64062D: call    NiAVObject_UpdateNiAVObject
+0x64062D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x640632: push    ebp
 0x640633: mov     [esp+58h+var_4], 0FFFFFFFFh
-0x64063B: call    FormHeapFree
+0x64063B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x640640: mov     ebx, [esp+58h+arg_0]
 0x640644: mov     ebp, [esp+58h+var_2C]
 0x640648: add     esp, 4
@@ -477,20 +476,20 @@
 0x6406A1: mov     [esp+54h+Src], ecx
 0x6406A5: push    2
 0x6406A7: mov     ecx, edi
-0x6406A9: call    NiNode_GetNiPropertyByID
+0x6406A9: call    NiNode_GetNiPropertyByID;
 0x6406AE: fld     dword ptr ds:0A3D65Ch
 0x6406B4: fcomp   dword ptr [ebp+26Ch]
 0x6406BA: mov     edx, ds:0B25AC4h
 0x6406C0: mov     ecx, eax
 0x6406C2: mov     eax, ds:0B25AC8h
-0x6406C7: mov     [esp+54h+var_24], eax
+0x6406C7: mov     [esp+54h+other.y], eax
 0x6406CB: fnstsw  ax
-0x6406CD: mov     [esp+54h+var_28], edx
+0x6406CD: mov     [esp+54h+other.x], edx
 0x6406D1: mov     edx, ds:0B25ACCh
 0x6406D7: fld1
 0x6406D9: test    ah, 5
 0x6406DC: mov     [esp+54h+var_40], ecx
-0x6406E0: mov     [esp+54h+var_20], edx
+0x6406E0: mov     [esp+54h+other.z], edx
 0x6406E4: jp      short loc_640702
 0x6406E6: fstp    [esp+54h+var_18]
 0x6406EA: fld     dword ptr [ebp+26Ch]
@@ -547,23 +546,23 @@
 0x640799: fld     [esp+54h+arg_0]
 0x64079D: mov     ebx, [esp+54h+var_40]
 0x6407A1: fld     st
-0x6407A3: lea     eax, [esp+54h+var_28]
+0x6407A3: lea     eax, [esp+54h+other]
 0x6407A7: fmul    [esp+54h+var_1C]
 0x6407AB: add     ebx, 40h ; '@'
-0x6407AE: push    eax
-0x6407AF: mov     ecx, ebx
-0x6407B1: fstp    [esp+58h+var_28]
+0x6407AE: push    eax; other
+0x6407AF: mov     ecx, ebx; this
+0x6407B1: fstp    [esp+58h+other.x]
 0x6407B5: fld     st
 0x6407B7: fmul    [esp+58h+var_18]
-0x6407BB: fstp    [esp+58h+var_24]
+0x6407BB: fstp    [esp+58h+other.y]
 0x6407BF: fmul    qword ptr ds:0A2FC68h
-0x6407C5: fstp    [esp+58h+var_20]
-0x6407C9: call    sub_8AA390
+0x6407C5: fstp    [esp+58h+other.z]
+0x6407C9: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x6407CE: test    al, al
 0x6407D0: jz      short loc_6407EE
-0x6407D2: mov     ecx, [esp+54h+var_28]
-0x6407D6: mov     edx, [esp+54h+var_24]
-0x6407DA: mov     eax, [esp+54h+var_20]
+0x6407D2: mov     ecx, [esp+54h+other.x]
+0x6407D6: mov     edx, [esp+54h+other.y]
+0x6407DA: mov     eax, [esp+54h+other.z]
 0x6407DE: mov     [ebx], ecx
 0x6407E0: mov     [ebx+4], edx
 0x6407E3: mov     [ebx+8], eax
@@ -657,3 +656,42 @@
 0x6408EA: pop     ebx
 0x6408EB: add     esp, 40h
 0x6408EE: retn    4
+0x9C3710: mov     eax, [ebp-34h]
+0x9C3713: push    eax
+0x9C3714: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3719: pop     ecx
+0x9C371A: retn
+0x9C371B: mov     eax, [ebp-34h]
+0x9C371E: push    eax
+0x9C371F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3724: pop     ecx
+0x9C3725: retn
+0x9C3726: mov     eax, [ebp-34h]
+0x9C3729: push    eax
+0x9C372A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C372F: pop     ecx
+0x9C3730: retn
+0x9C3731: mov     eax, [ebp-34h]
+0x9C3734: push    eax
+0x9C3735: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C373A: pop     ecx
+0x9C373B: retn
+0x9C373C: lea     ecx, [ebp-3Ch]; void *
+0x9C373F: jmp     BSStringT_Clear
+0x9C3744: mov     eax, [ebp-34h]
+0x9C3747: push    eax
+0x9C3748: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C374D: pop     ecx
+0x9C374E: retn
+0x9C374F: mov     eax, [ebp-34h]
+0x9C3752: push    eax
+0x9C3753: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3758: pop     ecx
+0x9C3759: retn
+0x9C375A: mov     edx, [esp+arg_4]
+0x9C375E: lea     eax, [edx-44h]
+0x9C3761: mov     ecx, [edx-48h]
+0x9C3764: xor     ecx, eax
+0x9C3766: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C376B: mov     eax, offset stru_AEC2D0
+0x9C3770: jmp     ___CxxFrameHandler3

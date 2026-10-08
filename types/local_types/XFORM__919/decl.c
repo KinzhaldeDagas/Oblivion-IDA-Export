@@ -1,1 +1,1 @@
-XFORM
+typedef tagXFORM XFORM;

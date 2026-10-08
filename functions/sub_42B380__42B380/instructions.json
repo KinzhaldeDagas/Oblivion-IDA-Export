@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42B380",
-    "line": "push    esi",
+    "line": "push    esi; Map marker writer emits FNAM exactly 1 byte, FULL as known length/strlen + 1 including terminal NUL, and TNAM exactly 2 bytes; caller emits empty XMRK first.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x42B38E",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x42B3DC",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },

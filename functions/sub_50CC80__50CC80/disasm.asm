@@ -28,7 +28,7 @@
 0x50CCCD: push    ecx; a3
 0x50CCCE: push    edx; a2
 0x50CCCF: push    eax; a1
-0x50CCD0: call    Script_ExtractArgs
+0x50CCD0: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50CCD5: add     esp, 20h
 0x50CCD8: test    al, al
 0x50CCDA: jnz     short loc_50CCE0
@@ -40,7 +40,7 @@
 0x50CCE4: lea     edi, [esi+44h]
 0x50CCE7: push    ecx
 0x50CCE8: mov     ecx, edi
-0x50CCEA: call    sub_41F420
+0x50CCEA: call    ExtraDataList_SetInvestmentGold; Updates or creates ExtraInvestmentGold type 0x52 with the supplied integer amount.
 0x50CCEF: mov     edx, [esi]
 0x50CCF1: mov     eax, [edx+40h]
 0x50CCF4: push    2000h
@@ -49,7 +49,7 @@
 0x50CCFD: cmp     byte ptr ds:0B361ACh, 0
 0x50CD04: jz      short loc_50CD1B
 0x50CD06: mov     ecx, edi
-0x50CD08: call    sub_41E980
+0x50CD08: call    ExtraDataList_GetInvestmentGold; Returns the integer value stored in ExtraInvestmentGold type 0x52, or zero when absent.
 0x50CD0D: push    eax
 0x50CD0E: push    offset aActorSBaseInve; " Actor's base investment gold is  %d "
 0x50CD13: call    Interface_ConsolePrint

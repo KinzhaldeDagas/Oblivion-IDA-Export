@@ -1,1 +1,1 @@
-SIZE_T
+typedef ULONG_PTR SIZE_T;

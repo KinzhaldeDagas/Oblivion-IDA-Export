@@ -5,11 +5,11 @@
 0x4137BE: jz      short EffectItem_SetEffectSetting___InitEffectItemData
 0x4137C0: mov     edx, [edi+8]
 0x4137C3: push    edx
-0x4137C4: call    FormHeapFree
+0x4137C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4137C9: push    edi
 0x4137CA: mov     [edi+8], ebx
 0x4137CD: mov     [edi+0Eh], bx
 0x4137D1: mov     [edi+0Ch], bx
-0x4137D5: call    FormHeapFree
+0x4137D5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4137DA: add     esp, 8
 0x4137DD: mov     [esi+18h], ebx

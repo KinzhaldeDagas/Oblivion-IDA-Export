@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x5E141D",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x5E142C",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E142E",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x5E143E",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E1440",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x5E1447",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x5E1452",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E1454",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x5E1464",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E1466",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5E146D",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x5E1496",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },

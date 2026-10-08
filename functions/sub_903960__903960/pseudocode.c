@@ -4,8 +4,8 @@ int __thiscall sub_903960(int *this, int a2, int *a3, int a4, int a5)
   char v7; // [esp+4h] [ebp-8h]
   int v8; // [esp+8h] [ebp-4h]
 
-  v8 = a5;
-  v7 = 0;
-  v6 = &off_A9B4F0;
-  return sub_903550(this, a3, a2, a4, (int)&v6);
+  v8 = a5; /*0x903967*/
+  v7 = 0; /*0x90397e*/
+  v6 = &off_A9B4F0; /*0x903983*/
+  return sub_903550(this, a3, a2, a4, (int)&v6); /*0x903990*/
 }

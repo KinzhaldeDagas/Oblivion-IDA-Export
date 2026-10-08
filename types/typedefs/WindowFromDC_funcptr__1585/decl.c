@@ -1,1 +1,1 @@
-WindowFromDC_funcptr
+typedef HWND (*WindowFromDC_funcptr)(HDC);

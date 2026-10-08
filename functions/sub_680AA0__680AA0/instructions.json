@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x680AA0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Verified cost calculation: obtains the reference's position in the specified spatial form and adds Euclidean distance from the supplied position. When includeTransitionPenalty is true it also adds TravelPath_ComputeDoorTransitionPenalty. Sentinel/invalid-position fallback is the global float constant; broader heuristic policy is Unknown.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x680AA3",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+space]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x680AB5",
-    "line": "mov     esi, [esp+20h+arg_8]",
+    "line": "mov     esi, [esp+20h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x680ABD",
-    "line": "lea     ecx, [esp+20h+var_18]",
+    "line": "lea     ecx, [esp+20h+outPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x680AC1",
-    "line": "push    ecx",
+    "line": "push    ecx; outPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680AC2",
-    "line": "push    eax",
+    "line": "push    eax; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680AC3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x680AC5",
-    "line": "call    sub_6803A0",
+    "line": "call    TravelPathSpaceDoorLink_GetPositionInSpace; Verified: chooses the link endpoint reference matching the supplied spatial form, calls its position virtual at vtable offset +0x174, and copies the NiPoint3 to outPosition. Returns false for missing/mismatched endpoints.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x680ACE",
-    "line": "mov     ecx, [esp+20h+arg_4]",
+    "line": "mov     ecx, [esp+20h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x680AE3",
-    "line": "fsub    [esp+20h+var_18]",
+    "line": "fsub    [esp+20h+outPosition.x]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x680AEE",
-    "line": "fsub    [esp+20h+var_14]",
+    "line": "fsub    [esp+20h+outPosition.y]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x680AFD",
-    "line": "fsub    [esp+20h+var_10]",
+    "line": "fsub    [esp+20h+outPosition.z]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x680B05",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x680B0E",
-    "line": "cmp     [esp+20h+arg_10], 0",
+    "line": "cmp     [esp+20h+includeTransitionPenalty], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -235,25 +235,25 @@
   },
   {
     "ea": "0x680B19",
-    "line": "mov     edx, [esp+20h+arg_C]",
+    "line": "mov     edx, [esp+20h+sourceRef]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x680B1D",
-    "line": "push    edx",
+    "line": "push    edx; sourceRefContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680B1E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; doorLink",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x680B20",
-    "line": "call    sub_6807F0",
+    "line": "call    TravelPath_ComputeDoorTransitionPenalty; Verified Oblivion route costs: after the access-policy check, a successful TESObjectDOOR_CheckActorAccess with mustLockpickOut=1 adds fPathMustLockpickPenalty (plus zero-valued dbl_A2FC68); a failed check adds fPathImpassableDoorPenalty. Separately, if either endpoint has minimal-use flag and ignore-min-use is false, adds fPathMinimalUseDoorPenalty. Fallout's search uses fixed 409600 penalties for its policy/minimal-use branches, so the numeric behavior differs.",
     "mnemonic": "call",
     "size": 5
   },

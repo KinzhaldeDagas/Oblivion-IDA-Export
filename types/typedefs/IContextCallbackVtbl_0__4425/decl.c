@@ -1,1 +1,1 @@
-IContextCallbackVtbl_0
+typedef IContextCallbackVtbl IContextCallbackVtbl_0;

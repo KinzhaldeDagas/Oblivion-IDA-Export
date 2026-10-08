@@ -1,17 +1,15 @@
-int __usercall test_whether_TOS_is_int@<eax>(double a1@<st0>)
+void __usercall test_whether_TOS_is_int(double a1@<st0>)
 {
-  double v3; // st7
-  char v4; // cl
-
-  _ST6 = a1;
-  __asm { frndint }
-  if ( _ST6 != a1 )
-    return test_whether_TOS_is_int_::_not_int(0);
-  v3 = a1 * dbl_B30D40;
-  v4 = 1;
-  _ST6 = v3;
-  __asm { frndint }
-  if ( _ST6 == v3 )
-    v4 = 2;
-  return test_whether_TOS_is_int_::_odd(v4);
+  _ST6 = a1; /*0x985d92*/
+  __asm { frndint } /*0x985d94*/
+  if ( _ST6 == a1 ) /*0x985d9e*/
+  {
+    _ST6 = a1 * dbl_B30D40; /*0x985da8*/
+    __asm { frndint } /*0x985daa*/
+    test_whether_TOS_is_int_::_odd(); /*0x985db2*/
+  }
+  else
+  {
+    test_whether_TOS_is_int_::_not_int(); /*0x985d9e*/
+  }
 }

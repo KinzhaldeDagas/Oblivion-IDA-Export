@@ -26,8 +26,8 @@
 0x98DB17: jnz     short loc_98DB2D
 0x98DB19: or      eax, 0FFFFFFFFh
 0x98DB1C: jmp     loc_98DC82
-0x98DB21: mov     esi, offset dword_BAA5CC
-0x98DB26: mov     eax, dword_BAA5CC
+0x98DB21: mov     esi, (offset dword_BA9E10+7BCh)
+0x98DB26: mov     eax, dword_BA9E10+7BCh
 0x98DB2B: jmp     short loc_98DB8D
 0x98DB2D: push    dword ptr [edi+5Ch]
 0x98DB30: mov     edx, ebx
@@ -54,16 +54,26 @@
 0x98DB61: call    __invalid_parameter
 0x98DB66: add     esp, 14h
 0x98DB69: jmp     short loc_98DB19
-0x98DB6B: mov     esi, offset dword_BAA5D4
-0x98DB70: mov     eax, dword_BAA5D4
+0x98DB6B: mov     esi, (offset dword_BA9E10+7C4h)
+0x98DB70: mov     eax, dword_BA9E10+7C4h
 0x98DB75: jmp     short loc_98DB8D
-0x98DB77: mov     esi, offset dword_BAA5D0
-0x98DB7C: mov     eax, dword_BAA5D0
+0x98DB77: mov     esi, (offset dword_BA9E10+7C0h)
+0x98DB7C: mov     eax, dword_BA9E10+7C0h
 0x98DB81: jmp     short loc_98DB8D
-0x98DB83: mov     esi, offset dword_BAA5D8
-0x98DB88: mov     eax, dword_BAA5D8
+0x98DB83: mov     esi, (offset dword_BA9E10+7C8h)
+0x98DB88: mov     eax, dword_BA9E10+7C8h
 0x98DB8D: mov     [ebp+var_1C], 1
 0x98DB94: push    eax
 0x98DB95: call    __decode_pointer
 0x98DB9A: mov     [ebp+var_20], eax
 0x98DB9D: pop     ecx
+0x98DC46: mov     ebx, [ebp+arg_0]
+0x98DC49: mov     edi, [ebp+var_28]
+0x98DC4C: cmp     [ebp+var_1C], 0
+0x98DC50: jz      short _raise___$LN36_0
+0x98DC52: push    0
+0x98DC54: call    __unlock
+0x98DC59: pop     ecx
+0x98DC5A: retn
+0x98DC82: call    __SEH_epilog4
+0x98DC87: retn

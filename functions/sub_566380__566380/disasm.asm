@@ -18,11 +18,11 @@
 0x5663AD: mov     ecx, [esi+24h]
 0x5663B0: push    ecx
 0x5663B1: mov     ecx, edi
-0x5663B3: call    TESPackage_SetLocation
+0x5663B3: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x5663B8: mov     edx, [esi+28h]
 0x5663BB: push    edx
 0x5663BC: mov     ecx, edi
-0x5663BE: call    TESPackage_SetTarget
+0x5663BE: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x5663C3: lea     eax, [esi+2Ch]
 0x5663C6: push    eax
 0x5663C7: mov     ecx, edi

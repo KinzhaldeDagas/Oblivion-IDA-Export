@@ -1,4 +1,4 @@
-0x800B70: push    0FFFFFFFFh
+0x800B70: push    0FFFFFFFFh; MoonSugarEffect decode: RefractionShader ctor owns one vertex program, one pixel program, one pass, and extra texture slot +0xA0 used for dword_B474AC inner texture.
 0x800B72: push    offset ??0RefractionShader@@QAE@XZ_SEH
 0x800B77: mov     eax, large fs:0
 0x800B7D: push    eax
@@ -14,8 +14,8 @@
 0x800B8F: mov     large fs:0, eax
 0x800B95: mov     esi, ecx
 0x800B97: mov     [esp+24h+var_10], esi
-0x800B9B: call    ??0BSImageSpaceShader@@QAE@XZ; BSImageSpaceShader::BSImageSpaceShader(void)
-0x800BA0: push    offset sub_7016A0; a5
+0x800B9B: call    ??0BSImageSpaceShader@@QAE@XZ; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
+0x800BA0: push    offset NiPointerSlot_Release; a5
 0x800BA5: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x800BAA: push    1; size
 0x800BAC: push    4; a2
@@ -25,7 +25,7 @@
 0x800BB7: mov     [esp+38h+var_4], ebp
 0x800BBB: mov     dword ptr [esi], offset ??_7RefractionShader@@6B@; const RefractionShader::`vftable'
 0x800BC1: call    ArrayConstructor
-0x800BC6: push    offset sub_7016A0; a5
+0x800BC6: push    offset NiPointerSlot_Release; a5
 0x800BCB: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x800BD0: push    1; size
 0x800BD2: push    4; a2
@@ -81,7 +81,7 @@
 0x800C6E: jz      short loc_800C85
 0x800C70: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x800C74: jnz     short loc_800C7B
-0x800C76: call    sub_7604D0
+0x800C76: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x800C7B: mov     dword ptr [esi+9Ch], 0
 0x800C85: mov     edi, [esi+0A0h]
 0x800C8B: test    edi, edi
@@ -110,3 +110,39 @@
 0x800CCA: pop     ebx
 0x800CCB: add     esp, 10h
 0x800CCE: retn
+0x9D0670: mov     ecx, [ebp-10h]; this
+0x9D0673: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9D0678: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D067D: push    1; int
+0x9D067F: push    4; unsigned int
+0x9D0681: mov     eax, [ebp-10h]
+0x9D0684: add     eax, 90h
+0x9D0689: push    eax; void *
+0x9D068A: call    $LN21
+0x9D068F: retn
+0x9D0690: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0695: push    1; int
+0x9D0697: push    4; unsigned int
+0x9D0699: mov     eax, [ebp-10h]
+0x9D069C: add     eax, 94h ; '”'
+0x9D06A1: push    eax; void *
+0x9D06A2: call    $LN21
+0x9D06A7: retn
+0x9D06A8: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9D06AD: push    1; int
+0x9D06AF: push    4; unsigned int
+0x9D06B1: mov     eax, [ebp-10h]
+0x9D06B4: add     eax, 9Ch ; 'œ'
+0x9D06B9: push    eax; void *
+0x9D06BA: call    $LN21
+0x9D06BF: retn
+0x9D06C0: mov     ecx, [ebp-10h]
+0x9D06C3: add     ecx, 0A0h ; ' '; slot
+0x9D06C9: jmp     NiPointerSlot_Release
+0x9D06CE: mov     edx, [esp+arg_4]
+0x9D06D2: lea     eax, [edx-14h]
+0x9D06D5: mov     ecx, [edx-18h]
+0x9D06D8: xor     ecx, eax
+0x9D06DA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D06DF: mov     eax, offset stru_AF8FE0
+0x9D06E4: jmp     ___CxxFrameHandler3

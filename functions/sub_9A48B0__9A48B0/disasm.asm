@@ -1,4 +1,4 @@
-0x9A48B0: mov     eax, [esp+arg_0]
+0x9A48B0: mov     eax, [esp+arg_0]; MoonSugarEffect decode: NiD3DSCM_Vertex enum type classifier. Matrix and texture-transform constants become float3x3/float4x4 write families; material/light/time vectors become float4-style constants.
 0x9A48B4: add     eax, 0FFFFFFFFh; switch 87 cases
 0x9A48B7: cmp     eax, 56h
 0x9A48BA: ja      short def_9A48C3

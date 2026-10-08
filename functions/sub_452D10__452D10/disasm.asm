@@ -1,5 +1,5 @@
 0x452D10: push    ecx
-0x452D11: mov     edx, [esp+4+arg_0]
+0x452D11: mov     edx, [esp+4+formID]
 0x452D15: lea     eax, [esp+4+var_4]
 0x452D18: push    eax
 0x452D19: push    edx

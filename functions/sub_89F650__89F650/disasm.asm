@@ -5,9 +5,9 @@
 0x89F659: test    edi, edi
 0x89F65B: mov     esi, ecx
 0x89F65D: jnz     short loc_89F664
-0x89F65F: mov     edi, offset dword_B3FA80
+0x89F65F: mov     edi, offset stru_B3FA80
 0x89F664: push    edi
-0x89F665: call    sub_890A10
+0x89F665: call    sub_890A10; TES4 authoritative metadata contains-key helper for the same +0x44/+0x48 0x10-byte entry map.
 0x89F66A: test    al, al
 0x89F66C: jz      short loc_89F684
 0x89F66E: test    esi, esi
@@ -31,7 +31,7 @@
 0x89F699: push    eax
 0x89F69A: push    edx
 0x89F69B: push    edi
-0x89F69C: call    sub_8BC750
+0x89F69C: call    sub_8BC750; Insert helper for collision metadata key/value map. If key absent, appends 0x10-byte entry {key, unknown, valueLow, valueHigh}.
 0x89F6A1: pop     edi
 0x89F6A2: pop     esi
 0x89F6A3: add     esp, 8

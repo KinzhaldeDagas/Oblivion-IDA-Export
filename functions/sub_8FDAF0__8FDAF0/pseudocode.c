@@ -5,12 +5,12 @@ void __thiscall sub_8FDAF0(int this)
   __m128 v3; // xmm4
   __m128 v4; // xmm0
 
-  *(_OWORD *)(this + 0xC0) = *(_OWORD *)(this + 0x50);
-  v1 = *(__m128 *)(this + 0x40);
-  v2 = *(__m128 *)(this + 0x30);
-  v3 = _mm_shuffle_ps(v1, v1, 0x44);
-  v4 = _mm_shuffle_ps(*(__m128 *)(this + 0x20), v2, 0x44);
-  *(__m128 *)(this + 0xD0) = _mm_add_ps(
+  *(_OWORD *)(this + 0xC0) = *(_OWORD *)(this + 0x50); /*0x8fdaf4*/
+  v1 = *(__m128 *)(this + 0x40); /*0x8fdafb*/
+  v2 = *(__m128 *)(this + 0x30); /*0x8fdb0a*/
+  v3 = _mm_shuffle_ps(v1, v1, 0x44); /*0x8fdb11*/
+  v4 = _mm_shuffle_ps(*(__m128 *)(this + 0x20), v2, 0x44); /*0x8fdb1b*/
+  *(__m128 *)(this + 0xD0) = _mm_add_ps( /*0x8fdb5a*/
                                _mm_add_ps(
                                  _mm_mul_ps(
                                    _mm_shuffle_ps(v4, v3, 0x88),

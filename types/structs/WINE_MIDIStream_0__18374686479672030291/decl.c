@@ -1,1 +1,1 @@
-WINE_MIDIStream_0
+typedef WINE_MIDIStream WINE_MIDIStream_0;

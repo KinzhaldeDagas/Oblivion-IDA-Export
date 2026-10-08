@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D2280",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion per-source projection update: examines associated receiver geometry and property pass lists, derives projector direction/range and receiver-dependent projection data, updates light/projector transforms, and invalidates or refreshes affected receiver properties.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7D22C4",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; Native projection requests BBX extra data from the exact caster root at +0x130; the following retail path assumes the bound object is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7D22D5",
-    "line": "mov     edx, [eax+1Ch]",
+    "line": "mov     edx, [eax+1Ch]; [2026-10-03 14:22 CONFIRMED null bound] Targeted trace: caster1D6FAF18, vtableA3F944, name(00028F5E)->Daedroth(00028F5D), BBX resultEAX=0, readable0. FrondRecords=0, frondAttachments=0. Native MOV EDX,[EAX+1C] therefore dereferences001Ch. Earlier four caster samples returned valid BSBound vtableA7D2D4. Active form scan resolves base00028F5D TestCreatureGroveDaedroth to Creatures/Daedroth/Skeleton.NIF. Installed loose skeleton/body are converted Gamebryo20.0.0.5 files without BSBound/BBX bytes. Creature conversion repair is separate scope; no asset or shadow fallback changed by diagnostic.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7D2359",
-    "line": "mov     ebp, [esp+0F4h+arg_0]",
+    "line": "mov     ebp, [esp+0F4h+self]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x7D2372",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D2374",
-    "line": "call    sub_7ED1A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveNonShadowLight; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D2379",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7D237D",
-    "line": "call    sub_7ED5D0",
+    "line": "call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7D238B",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x7D2395",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; light",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D2397",
-    "line": "call    sub_7C62D0",
+    "line": "call    ShadowSceneLight_GetObjectGeometryAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7D23AB",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x7D23B5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; light",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D23B7",
-    "line": "call    sub_7C62D0",
+    "line": "call    ShadowSceneLight_GetObjectGeometryAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x7D23C4",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x7D23D2",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; light",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D23D4",
-    "line": "call    sub_7C62D0",
+    "line": "call    ShadowSceneLight_GetObjectGeometryAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x7D2413",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7D247F",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7D24F9",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x7D2559",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x7D25B5",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x7D26E3",
-    "line": "cmp     [esp+0F4h+arg_0], 0",
+    "line": "cmp     [esp+0F4h+self], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -2065,13 +2065,13 @@
   },
   {
     "ea": "0x7D26ED",
-    "line": "mov     ecx, [esp+0F4h+arg_0]",
+    "line": "mov     ecx, [esp+0F4h+self]; self",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7D26F4",
-    "line": "call    sub_7ED3B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveNonShadowLight; Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x7D2702",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -2125,13 +2125,13 @@
   },
   {
     "ea": "0x7D2711",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; light",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D2713",
-    "line": "call    sub_7C62D0",
+    "line": "call    ShadowSceneLight_GetObjectGeometryAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x7D272D",
-    "line": "cmp     [esp+0F4h+arg_0], 0",
+    "line": "cmp     [esp+0F4h+self], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -2269,13 +2269,13 @@
   },
   {
     "ea": "0x7D2777",
-    "line": "mov     ecx, [esp+0F4h+arg_0]",
+    "line": "mov     ecx, [esp+0F4h+self]; self",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7D277E",
-    "line": "call    sub_7ED1A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveNonShadowLight; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x7D2785",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
@@ -2317,13 +2317,13 @@
   },
   {
     "ea": "0x7D2799",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; light",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D279B",
-    "line": "call    sub_7C62D0",
+    "line": "call    ShadowSceneLight_GetObjectGeometryAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x7D27BA",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x7D281A",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x7D28AD",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2941,7 +2941,7 @@
   },
   {
     "ea": "0x7D2911",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -3115,7 +3115,7 @@
   },
   {
     "ea": "0x7D2984",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3499,7 +3499,7 @@
   },
   {
     "ea": "0x7D2AAF",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -4093,7 +4093,7 @@
   },
   {
     "ea": "0x7D2C67",
-    "line": "mov     ecx, [esp+0F4h+arg_0]",
+    "line": "mov     ecx, [esp+0F4h+self]; self",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4111,7 +4111,7 @@
   },
   {
     "ea": "0x7D2C72",
-    "line": "call    sub_7ED3B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveNonShadowLight; Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4135,7 +4135,7 @@
   },
   {
     "ea": "0x7D2C80",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -4165,13 +4165,13 @@
   },
   {
     "ea": "0x7D2C8F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; light",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D2C91",
-    "line": "call    sub_7C62D0",
+    "line": "call    ShadowSceneLight_GetObjectGeometryAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -4207,7 +4207,7 @@
   },
   {
     "ea": "0x7D2CA9",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4285,7 +4285,7 @@
   },
   {
     "ea": "0x7D2CD1",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4309,19 +4309,19 @@
   },
   {
     "ea": "0x7D2CE2",
-    "line": "fld     dword ptr [ecx+94h]",
+    "line": "fld     dword ptr [ecx+94h]; Load source world scale for the BBX maximum-extent calculation.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x7D2CE8",
-    "line": "fmul    [esp+0F4h+var_D0]",
+    "line": "fmul    [esp+0F4h+var_D0]; Begin scaled maximum BBX-extent calculation.",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x7D2CEC",
-    "line": "fld     qword ptr ds:0A3B1B8h",
+    "line": "fld     qword ptr ds:0A3B1B8h; Load the retail maximum projected extent constant 256.0.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -4351,7 +4351,7 @@
   },
   {
     "ea": "0x7D2CFB",
-    "line": "fstp    st(1)",
+    "line": "fstp    st(1); Clamp the scaled maximum BBX extent to 256.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -4363,7 +4363,7 @@
   },
   {
     "ea": "0x7D2CFF",
-    "line": "fstp    st",
+    "line": "fstp    st; Finish capped extent e = min(max(BBX extents) * source world scale, 256).",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -4393,7 +4393,7 @@
   },
   {
     "ea": "0x7D2D15",
-    "line": "fstp    [esp+0F4h+var_AC]",
+    "line": "fstp    [esp+0F4h+var_AC]; Compute projector offset as capped extent multiplied by 2.5.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4507,7 +4507,7 @@
   },
   {
     "ea": "0x7D2D5D",
-    "line": "mov     [eax], edx",
+    "line": "mov     [eax], edx; Commit backing projector branch local X translation; Y/Z follow at 0x007D2D78/0x007D2D91.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4537,7 +4537,7 @@
   },
   {
     "ea": "0x7D2D78",
-    "line": "mov     [eax+4], ecx",
+    "line": "mov     [eax+4], ecx; Commit backing projector branch local Y translation.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4567,13 +4567,13 @@
   },
   {
     "ea": "0x7D2D91",
-    "line": "mov     [eax+8], edx",
+    "line": "mov     [eax+8], edx; Commit backing projector branch local Z translation.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7D2D94",
-    "line": "fmul    qword ptr ds:0A3F3A0h",
+    "line": "fmul    qword ptr ds:0A3F3A0h; Compute backing point-light range from projector offset: range = 6 * offset = 15 * capped extent.",
     "mnemonic": "fmul",
     "size": 6
   },
@@ -4585,7 +4585,7 @@
   },
   {
     "ea": "0x7D2DA0",
-    "line": "fstp    [esp+0FCh+var_D8]",
+    "line": "fstp    [esp+0FCh+var_D8]; Compute projector range as offset multiplied by 6; with the 256 extent cap, native maximum is 3840.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4603,7 +4603,7 @@
   },
   {
     "ea": "0x7D2DA9",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; Update the backing NiAVObject after committing projector translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4789,7 +4789,7 @@
   },
   {
     "ea": "0x7D2E16",
-    "line": "mov     [eax+0ECh], ecx",
+    "line": "mov     [eax+0ECh], ecx; Commit native backing-light attenuation component.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4813,7 +4813,7 @@
   },
   {
     "ea": "0x7D2E28",
-    "line": "mov     [eax+0F0h], edx",
+    "line": "mov     [eax+0F0h], edx; Commit native backing-light attenuation component.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4837,7 +4837,7 @@
   },
   {
     "ea": "0x7D2E38",
-    "line": "mov     [eax+0F4h], ecx",
+    "line": "mov     [eax+0F4h], ecx; Commit native backing-light attenuation component.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4873,7 +4873,7 @@
   },
   {
     "ea": "0x7D2E56",
-    "line": "mov     [eax+0F8h], edx",
+    "line": "mov     [eax+0F8h], edx; Commit computed projector range to backing NiPointLight+0xF8.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4885,13 +4885,13 @@
   },
   {
     "ea": "0x7D2E60",
-    "line": "mov     [eax+0FCh], ecx",
+    "line": "mov     [eax+0FCh], ecx; Zero backing light field +0xFC on the sole normal projection path.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D2E66",
-    "line": "mov     [eax+100h], edx",
+    "line": "mov     [eax+100h], edx; Zero backing light field +0x100 on the sole normal projection path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4945,7 +4945,7 @@
   },
   {
     "ea": "0x7D2E85",
-    "line": "retn    10h",
+    "line": "retn    10h; Sole normal projector return; stdcall-style RET 0x10.",
     "mnemonic": "retn",
     "size": 3
   },
@@ -4988,6 +4988,144 @@
   {
     "ea": "0x7D2E99",
     "line": "jmp     loc_7D2DF2",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEA50",
+    "line": "lea     ecx, [ebp-60h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEA53",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEA58",
+    "line": "mov     eax, [ebp-0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEA5E",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEA61",
+    "line": "jz      locret_9CEA76",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEA67",
+    "line": "and     dword ptr [ebp-0DCh], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9CEA6E",
+    "line": "lea     ecx, [ebp-80h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEA71",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEA76",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEA77",
+    "line": "mov     eax, [ebp-0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEA7D",
+    "line": "and     eax, 2",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEA80",
+    "line": "jz      locret_9CEA95",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEA86",
+    "line": "and     dword ptr [ebp-0DCh], 0FFFFFFFDh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9CEA8D",
+    "line": "lea     ecx, [ebp-58h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEA90",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEA95",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEA96",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEA9A",
+    "line": "lea     eax, [edx-0E4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEAA0",
+    "line": "mov     ecx, [edx-0E8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEAA6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEAA8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEAAD",
+    "line": "mov     eax, offset stru_AF7958",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEAB2",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

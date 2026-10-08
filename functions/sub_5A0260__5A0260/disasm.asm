@@ -26,7 +26,7 @@
 0x5A02BC: fstp    dword ptr [esp+60h+var_58+4]
 0x5A02C0: push    edi; a3
 0x5A02C1: fld     dword ptr [esp+64h+var_58+4]
-0x5A02C5: call    Double_To_SInt32
+0x5A02C5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A02CA: cmp     dword ptr [esi+7Ch], 0
 0x5A02CE: mov     edi, eax
 0x5A02D0: mov     dword ptr [esp+64h+var_58+4], edi
@@ -65,7 +65,7 @@
 0x5A0339: fstp    [esp+6Ch+var_6C]; float
 0x5A033C: call    Round_Float
 0x5A0341: add     esp, 8
-0x5A0344: call    Double_To_SInt32
+0x5A0344: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A0349: mov     edi, eax
 0x5A034B: mov     dword ptr [esp+64h+var_58+4], eax
 0x5A034F: mov     ecx, [esi+94h]
@@ -87,9 +87,9 @@
 0x5A0386: fmul    dword ptr ds:0B380D0h
 0x5A038C: fstp    dword ptr [esp+68h+var_58]
 0x5A0390: fld     dword ptr [esp+68h+var_58]
-0x5A0394: fstp    [esp+68h+a2]; a3
-0x5A0397: push    0FB1h; a2
-0x5A039C: call    Tile_SetFloat
+0x5A0394: fstp    [esp+68h+a2]; value
+0x5A0397: push    0FB1h; propertyCode
+0x5A039C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A03A1: mov     ecx, [esi+58h]
 0x5A03A4: push    0FA1h
 0x5A03A9: call    Tile_GetFloat
@@ -107,7 +107,7 @@
 0x5A03D9: fild    dword ptr [esp+64h+var_58]
 0x5A03DD: fstp    dword ptr [esp+64h+var_58]
 0x5A03E1: fld     dword ptr [esp+64h+var_58]
-0x5A03E5: call    Double_To_SInt32
+0x5A03E5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A03EA: mov     ecx, [esi+94h]
 0x5A03F0: mov     edi, eax
 0x5A03F2: call    EffectItem_GetDuration
@@ -128,12 +128,12 @@
 0x5A0429: call    Tile_GetFloat
 0x5A042E: jmp     short loc_5A0443
 0x5A0430: mov     ecx, [esi+94h]
-0x5A0436: call    EffectItem_GetArea
+0x5A0436: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x5A043B: mov     dword ptr [esp+64h+var_58], eax
 0x5A043F: fild    dword ptr [esp+64h+var_58]
 0x5A0443: fstp    dword ptr [esp+64h+var_58]
 0x5A0447: fld     dword ptr [esp+64h+var_58]
-0x5A044B: call    Double_To_SInt32
+0x5A044B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A0450: mov     edi, eax
 0x5A0452: mov     dword ptr [esp+64h+var_58], edi
 0x5A0456: fild    dword ptr [esp+64h+var_58]
@@ -145,7 +145,7 @@
 0x5A0469: xor     edi, edi
 0x5A046B: mov     dword ptr [esp+64h+var_58], edi
 0x5A046F: mov     ecx, [esi+94h]
-0x5A0475: call    EffectItem_GetArea
+0x5A0475: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x5A047A: cmp     edi, eax
 0x5A047C: jz      short loc_5A049F
 0x5A047E: mov     ecx, [esi+94h]
@@ -154,9 +154,9 @@
 0x5A048A: fild    dword ptr [esp+64h+var_58]
 0x5A048E: push    ecx
 0x5A048F: mov     ecx, [esi+4Ch]; this
-0x5A0492: fstp    [esp+68h+a2]; a3
-0x5A0495: push    0FAEh; a2
-0x5A049A: call    Tile_SetFloat
+0x5A0492: fstp    [esp+68h+a2]; value
+0x5A0495: push    0FAEh; propertyCode
+0x5A049A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A049F: test    edi, edi
 0x5A04A1: jnz     short loc_5A04B5
 0x5A04A3: mov     ecx, [esi+4Ch]
@@ -173,7 +173,7 @@
 0x5A04CF: mov     eax, [esi+94h]
 0x5A04D5: mov     eax, [eax+14h]
 0x5A04D8: push    eax
-0x5A04D9: call    ActorValue_GetName
+0x5A04D9: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5A04DE: mov     ecx, [esi+34h]
 0x5A04E1: add     esp, 4
 0x5A04E4: push    eax
@@ -189,7 +189,7 @@
 0x5A0509: mov     ecx, [esi+94h]
 0x5A050F: mov     eax, [ecx+14h]
 0x5A0512: push    eax
-0x5A0513: call    ActorValue_GetName
+0x5A0513: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5A0518: mov     ecx, [esi+38h]
 0x5A051B: add     esp, 4
 0x5A051E: push    eax
@@ -207,7 +207,7 @@
 0x5A0547: call    eax
 0x5A0549: fstp    dword ptr [esp+64h+var_58+4]
 0x5A054D: fld     dword ptr [esp+64h+var_58+4]
-0x5A0551: call    Double_To_SInt32
+0x5A0551: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A0556: push    eax
 0x5A0557: lea     ecx, [esp+68h+var_48+4]
 0x5A055B: push    offset aD_0; "%d"
@@ -221,7 +221,7 @@
 0x5A0576: call    Tile_SetString
 0x5A057B: fld     dword ptr ds:0B37FE0h
 0x5A0581: fmul    dword ptr [esp+64h+var_58+4]
-0x5A0585: call    Double_To_SInt32
+0x5A0585: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A058A: push    eax
 0x5A058B: lea     eax, [esp+68h+var_48+4]
 0x5A058F: push    offset aD_0; "%d"
@@ -272,7 +272,7 @@
 0x5A062A: fimul   dword ptr [esp+64h+var_58+4]
 0x5A062E: fstp    dword ptr [esp+64h+var_58+4]
 0x5A0632: fld     dword ptr [esp+64h+var_58+4]
-0x5A0636: call    Double_To_SInt32
+0x5A0636: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A063B: push    eax
 0x5A063C: lea     ecx, [esp+68h+var_48+4]
 0x5A0640: push    offset aD_0; "%d"
@@ -322,7 +322,7 @@
 0x5A06E4: test    eax, eax
 0x5A06E6: jnz     short loc_5A06F5
 0x5A06E8: fldz
-0x5A06EA: mov     eax, offset dword_B35464
+0x5A06EA: mov     eax, offset flt_B35464
 0x5A06EF: fstp    dword ptr ds:0B35464h
 0x5A06F5: mov     edx, [esi+7Ch]
 0x5A06F8: fld     dword ptr [eax]
@@ -342,7 +342,7 @@
 0x5A072B: test    eax, eax
 0x5A072D: jnz     short loc_5A073C
 0x5A072F: fldz
-0x5A0731: mov     eax, offset dword_B35464
+0x5A0731: mov     eax, offset flt_B35464
 0x5A0736: fstp    dword ptr ds:0B35464h
 0x5A073C: fld     dword ptr [eax]
 0x5A073E: jmp     short loc_5A0753
@@ -353,11 +353,11 @@
 0x5A074F: fild    dword ptr [esp+64h+var_58+4]
 0x5A0753: fstp    dword ptr [esp+64h+var_58+4]
 0x5A0757: fld     dword ptr [esp+64h+var_58+4]
-0x5A075B: call    Double_To_SInt32
+0x5A075B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A0760: fld     dword ptr [esp+64h+var_58]
 0x5A0764: mov     ebp, eax
 0x5A0766: mov     dword ptr [esp+64h+var_50+4], ebp
-0x5A076A: call    Double_To_SInt32
+0x5A076A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A076F: push    ebp
 0x5A0770: mov     edi, eax
 0x5A0772: push    edi
@@ -373,7 +373,7 @@
 0x5A0792: call    Tile_SetString
 0x5A0797: fld     dword ptr ds:0B37FE8h
 0x5A079D: fmul    dword ptr [esp+64h+var_58]
-0x5A07A1: call    Double_To_SInt32
+0x5A07A1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A07A6: push    eax
 0x5A07A7: lea     ecx, [esp+68h+var_48+4]
 0x5A07AB: push    offset aD_0; "%d"
@@ -414,9 +414,9 @@
 0x5A0824: fild    dword ptr [esp+64h+var_58+4]
 0x5A0828: push    ecx
 0x5A0829: mov     ecx, [esi+4]; this
-0x5A082C: fstp    [esp+68h+a2]; a3
-0x5A082F: push    0FB1h; a2
-0x5A0834: call    Tile_SetFloat
+0x5A082C: fstp    [esp+68h+a2]; value
+0x5A082F: push    0FB1h; propertyCode
+0x5A0834: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A0839: fld     dword ptr [esp+64h+var_58]
 0x5A083D: fild    dword ptr [esp+64h+var_50+4]
 0x5A0841: mov     dword ptr [esp+64h+var_58+4], 2
@@ -428,9 +428,9 @@
 0x5A085A: fild    dword ptr [esp+64h+var_58+4]
 0x5A085E: push    ecx
 0x5A085F: mov     ecx, [esi+4]; this
-0x5A0862: fstp    [esp+68h+a2]; a3
-0x5A0865: push    0FB2h; a2
-0x5A086A: call    Tile_SetFloat
+0x5A0862: fstp    [esp+68h+a2]; value
+0x5A0865: push    0FB2h; propertyCode
+0x5A086A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A086F: fld     dword ptr ds:0B37FE8h
 0x5A0875: fmul    dword ptr [esp+64h+var_58]
 0x5A0879: mov     ecx, ds:0B333C4h
@@ -447,9 +447,9 @@
 0x5A08AB: fild    dword ptr [esp+64h+var_58+4]
 0x5A08AF: push    ecx
 0x5A08B0: mov     ecx, [esi+4]; this
-0x5A08B3: fstp    [esp+68h+a2]; a3
-0x5A08B6: push    0FB3h; a2
-0x5A08BB: call    Tile_SetFloat
+0x5A08B3: fstp    [esp+68h+a2]; value
+0x5A08B6: push    0FB3h; propertyCode
+0x5A08BB: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A08C0: pop     edi
 0x5A08C1: mov     ecx, [esp+60h+var_4]
 0x5A08C5: pop     esi

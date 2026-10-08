@@ -1,1 +1,1 @@
-PHYSDEV
+typedef gdi_physdev *PHYSDEV;

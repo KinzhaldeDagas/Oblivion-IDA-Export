@@ -6,7 +6,7 @@
 0x4DE10D: test    eax, eax
 0x4DE10F: jnz     short loc_4DE11D
 0x4DE111: lea     ecx, [esi+44h]
-0x4DE114: call    sub_41FFA0
+0x4DE114: call    ExtraDataList_GetRagDollData; Returns the ragdoll payload stored in ExtraRagDollData, or null.
 0x4DE119: test    eax, eax
 0x4DE11B: jz      short loc_4DE125
 0x4DE11D: push    esi

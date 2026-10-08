@@ -17,11 +17,11 @@
 0x62E8B9: cmp     byte ptr [eax+4], 18h
 0x62E8BD: jnz     short loc_62E8D5
 0x62E8BF: mov     ecx, esi; this
-0x62E8C1: call    GetTeleportExtraData
+0x62E8C1: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x62E8C6: test    eax, eax
 0x62E8C8: jz      short loc_62E8D5
 0x62E8CA: push    esi
-0x62E8CB: mov     ecx, offset dword_B3B944
+0x62E8CB: mov     ecx, offset unk_B3B944
 0x62E8D0: call    BSSimpleList_PushFront
 0x62E8D5: xor     al, al
 0x62E8D7: pop     esi

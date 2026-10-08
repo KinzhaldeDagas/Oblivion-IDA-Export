@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x475B60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x475BA2",
-    "line": "call    sub_472ED0",
+    "line": "call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x475BB8",
-    "line": "call    sub_472ED0",
+    "line": "call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x475BD7",
-    "line": "call    sub_472ED0",
+    "line": "call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x475C00",
-    "line": "mov     ecx, [eax+edi*4]",
+    "line": "mov     ecx, [eax+edi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x475C03",
-    "line": "push    ebp; char",
+    "line": "push    ebp; transition",
     "mnemonic": "push",
     "size": 1
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x475C05",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x475C08",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x475C43",
-    "line": "call    sub_6FFE90",
+    "line": "call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x475CBD",
-    "line": "call    sub_4709C0",
+    "line": "call    AnimKeyMap_GetNext; Advances an encoded-key map iterator. Returns the current UInt16 key and AnimSequenceBase payload, then moves along the collision chain or to the next non-empty bucket.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x475CEA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1052,6 +1052,66 @@
   {
     "ea": "0x475D6D",
     "line": "jmp     loc_475C9C",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE50",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE53",
+    "line": "add     ecx, 98h ; '˜'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9AEE59",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE5E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AEE62",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE65",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE68",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEE6A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE6F",
+    "line": "mov     eax, offset stru_ADB51C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE74",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

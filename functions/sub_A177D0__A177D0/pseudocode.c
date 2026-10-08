@@ -1,4 +1,4 @@
 void __cdecl sub_A177D0()
 {
-  GameSetting_destr((int *)&sMagicProjectileTypeBolt);
+  GameSetting_destr((int *)&MEMORY[0xB33674]); /*0xa177d5*/
 }

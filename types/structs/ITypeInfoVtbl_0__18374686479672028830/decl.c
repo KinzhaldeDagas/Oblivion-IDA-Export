@@ -1,1 +1,1 @@
-ITypeInfoVtbl_0
+typedef ITypeInfoVtbl ITypeInfoVtbl_0;

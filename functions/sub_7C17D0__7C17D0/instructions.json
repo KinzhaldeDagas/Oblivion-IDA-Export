@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C17D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Generic refcounted NiT pointer-list RemovePosition helper handling head, tail and middle nodes while returning a strong payload reference and preserving list links/count.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7C17FE",
-    "line": "mov     ecx, [esp+20h+arg_4]",
+    "line": "mov     ecx, [esp+20h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7C180C",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x7C1812",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1813",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C1815",
-    "line": "call    sub_7C1740",
+    "line": "call    NiTRefPointerList__RemoveHead; MEF v57 VERIFY 2026-10-08: VERIFIED native composite removal: RemovePosition has already written caller position=node.next at7C1810 before invoking RemoveHead. Both entrypoints are wrapped by v57. The isolated nested_light_removal_fixture executes that same wrapper composition and confirms outer serial mismatch discards the otherwise updated cache. Direct position->head plus a lookup after each removal:128 initial nodes/64 removals =>65 builds vs1 for middle removals. Native unlink/ref work is mocked; no game timing claim.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x7C1836",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C183A",
-    "line": "mov     dword ptr [ecx], 0",
+    "line": "mov     dword ptr [ecx], 0; MEF v57 VERIFY 2026-10-08: V57-LIST-1 corrective plan: make RemovePosition->Head/Tail observation composition-aware without weakening guards for pressure, unrelated reentry or exceptions. See analysis/2026-10-08-implemented-perf-verification/PATCH_PLAN.md. Current production unchanged.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7C1840",
-    "line": "push    edi",
+    "line": "push    edi; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1841",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C1843",
-    "line": "call    sub_7D1FD0",
+    "line": "call    NiTRefPointerList__RemoveTail; MEF v57 VERIFY 2026-10-08: VERIFIED native composite removal: RemovePosition sets caller position=NULL at7C183A then invokes RemoveTail. v57's outer and inner V57BeginListEdit increment the same cache serial; outer V57EndListEdit rejects the inner serial and drops readiness. Isolated actual-wrapper reproduction:64 tail removals from128 nodes with intervening lookup =>64 invalidations/65 builds/6240 derived build-node visits; middle=0/1/128. Return refs and links pass. Hot reverse-removal gameplay trigger remains UNKNOWN; forward orphan/stale cleanup only delegates tail on its final node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x7C1879",
-    "line": "mov     [esp+20h+arg_4], edi",
+    "line": "mov     [esp+20h+position], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7C18A1",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -616,5 +616,101 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CE1A0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1A3",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1A6",
+    "line": "jz      locret_9CE1B8",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE1AC",
+    "line": "and     dword ptr [ebp-10h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE1B0",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1B3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE1B8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE1B9",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1BC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE1C1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE1C5",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1C8",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1CB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE1CD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE1D2",
+    "line": "mov     eax, offset stru_AF71EC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE1D7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,4 @@
-unload_registry_reply
+struct unload_registry_reply
+{
+reply_header __header;
+};

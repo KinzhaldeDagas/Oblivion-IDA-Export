@@ -1,33 +1,33 @@
-int __thiscall sub_51C7B0(int this)
+// Verified blood component lifecycle: TESCreature +0x11C is TESModel bloodSpray, +0x134 is TESTexture bloodDecal; actor-base-data this is +0x24. Constructor constructs, InitializeDefaults initializes, destructor destroys these components. No Fallout member offsets imported.
+// Probable homolog: Fallout TESCreature::InitializeData 0x8240A528 shares defaults for turning speed, foot weight, scale, skills, reach, flags 0x40/0x200, health 50. Different layouts; Oblivion component initialization verified independently.
+void __thiscall TESCreature_InitializeDefaults(TESCreature *self)
 {
-  void (__thiscall ***v2)(_DWORD); // ecx
-  void (__thiscall *v3)(_DWORD); // edx
-  void (__thiscall *v4)(int, int); // edx
-  int (__thiscall *v5)(int, int); // edx
-  int result; // eax
+  TESModel *p_bloodSpray; // ecx
+  void (__thiscall *InitializeComponent)(BaseFormComponent *); // edx
+  void (__thiscall *MarkAsModified)(TESActorBaseData *, unsigned int); // edx
+  void (__thiscall *v5)(TESActorBaseData *, unsigned int); // edx
 
-  *(float *)(this + 0x10C) = 0.0;
-  v2 = (void (__thiscall ***)(_DWORD))(this + 0x11C);
-  *(float *)(this + 0x110) = *(float *)&dword_A46C30;
-  *(_BYTE *)(this + 0x104) = 0;
-  *(_DWORD *)(this + 0x100) = 0;
-  *(_DWORD *)(this + 0x118) = 0;
-  *(float *)(this + 0x114) = 1.0;
-  v3 = **v2;
-  *(_WORD *)(this + 0x108) = 3;
-  *(_BYTE *)(this + 0x105) = 0x32;
-  *(_BYTE *)(this + 0x106) = 0x32;
-  *(_BYTE *)(this + 0x107) = 0x32;
-  *(_BYTE *)(this + 0x10A) = 0x20;
-  v3(v2);
-  (**(void (__thiscall ***)(int))(this + 0x134))(this + 0x134);
-  j_TESForm_InitializeComponents((TESForm *)this);
-  v4 = *(void (__thiscall **)(int, int))(*(_DWORD *)(this + 0x24) + 0x50);
-  *(_DWORD *)(this + 0x28) |= 0x40u;
-  v4(this + 0x24, 0x10);
-  v5 = *(int (__thiscall **)(int, int))(*(_DWORD *)(this + 0x24) + 0x50);
-  *(_DWORD *)(this + 0x28) |= 0x200u;
-  result = v5(this + 0x24, 0x10);
-  *(_DWORD *)(this + 0x84) = 0x32;
-  return result;
+  self->turningSpeed = 0.0; /*0x51c7b6*/
+  p_bloodSpray = &self->bloodSpray; /*0x51c7c4*/
+  self->footWeight = *(float *)&dword_A46C30; /*0x51c7ca*/
+  self->type = 0; /*0x51c7d0*/
+  self->soundData.sounds = 0; /*0x51c7d8*/
+  self->combatStyle = 0; /*0x51c7de*/
+  self->baseScale = 1.0; /*0x51c7e4*/
+  InitializeComponent = p_bloodSpray->vtbl->super.InitializeComponent; /*0x51c7ec*/
+  *(_WORD *)&self->soulLevel = 3; /*0x51c7f4*/
+  self->combatSkill = 0x32; /*0x51c7fd*/
+  self->magicSkill = 0x32; /*0x51c803*/
+  self->stealthSkill = 0x32; /*0x51c809*/
+  self->attackReach = 0x20; /*0x51c80f*/
+  InitializeComponent((BaseFormComponent *)p_bloodSpray); /*0x51c816*/
+  self->bloodDecal.vtbl->InitializeComponent((BaseFormComponent *)&self->bloodDecal); /*0x51c826*/
+  j_TESForm_InitializeComponents((TESForm *)self); /*0x51c82a*/
+  MarkAsModified = self->super.actorBaseData.vtbl->MarkAsModified; /*0x51c832*/
+  self->super.actorBaseData.flags |= 0x40u; /*0x51c835*/
+  MarkAsModified(&self->super.actorBaseData, 0x10u); /*0x51c840*/
+  v5 = self->super.actorBaseData.vtbl->MarkAsModified; /*0x51c844*/
+  self->super.actorBaseData.flags |= 0x200u; /*0x51c847*/
+  v5(&self->super.actorBaseData, 0x10u); /*0x51c852*/
+  self->super.health.health = 0x32; /*0x51c855*/
 }

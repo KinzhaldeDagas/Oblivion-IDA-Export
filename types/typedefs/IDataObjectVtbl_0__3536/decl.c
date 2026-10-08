@@ -1,1 +1,1 @@
-IDataObjectVtbl_0
+typedef IDataObjectVtbl IDataObjectVtbl_0;

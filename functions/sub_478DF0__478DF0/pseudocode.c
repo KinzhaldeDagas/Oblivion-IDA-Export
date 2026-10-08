@@ -1,15 +1,16 @@
-void __userpurge sub_478DF0(char *a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>, int a6)
+// Set ActorSkinInfo light slot form at +0x12C after validating Oblivion form type 0x1A (LIGH).
+void __thiscall ActorSkinInfo_SetLightSlotForm(ActorSkinInfo *this, TESForm *form)
 {
-  char *v7; // edi
+  TESObjectLIGH **p_LightForm; // edi
 
-  if ( a6 )
+  if ( form ) /*0x478dfa*/
   {
-    if ( *(_BYTE *)(a6 + 4) == 0x1A )
+    if ( form->member.type == kFormType_Light ) /*0x478e00*/
     {
-      v7 = a1 + 0x12C;
-      sub_478780(a1, a2, a3, a4, a5, (int)(a1 + 0x12C), 1, 0);
-      *(_DWORD *)v7 = a6;
-      *((_DWORD *)a1 + 0x4C) = a6 + 0x30;
+      p_LightForm = &this->LightForm; /*0x478e07*/
+      ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->LightForm, 1, 0); /*0x478e0e*/
+      *p_LightForm = (TESObjectLIGH *)form; /*0x478e13*/
+      this->LightModel = (TESModel *)&form[2]; /*0x478e18*/
     }
   }
 }

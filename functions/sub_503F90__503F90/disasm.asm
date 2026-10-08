@@ -4,7 +4,7 @@
 0x503F9A: push    esi
 0x503F9B: mov     esi, [esp+4+a4]
 0x503F9F: push    edi
-0x503FA0: mov     edi, dword ptr [esp+8+arg_18]
+0x503FA0: mov     edi, [esp+8+arg_18]
 0x503FA4: lea     eax, [esp+8+arg_18]
 0x503FA8: fstp    qword ptr [edi]
 0x503FAA: push    eax; UInt16
@@ -19,8 +19,8 @@
 0x503FBF: push    ecx; a3
 0x503FC0: push    edx; a2
 0x503FC1: push    eax; a1
-0x503FC2: mov     dword ptr [esp+28h+arg_18], 0
-0x503FCA: call    Script_ExtractArgs
+0x503FC2: mov     [esp+28h+arg_18], 0
+0x503FCA: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503FCF: add     esp, 20h
 0x503FD2: test    al, al
 0x503FD4: jnz     short loc_503FD9
@@ -36,12 +36,12 @@
 0x503FE8: jz      short loc_503FEE
 0x503FEA: fld1
 0x503FEC: fstp    qword ptr [edi]
-0x503FEE: push    1
-0x503FF0: mov     ecx, esi
-0x503FF2: call    sub_4D82E0
-0x503FF7: push    2
-0x503FF9: mov     ecx, esi
-0x503FFB: call    sub_4D82E0
+0x503FEE: push    1; mask
+0x503FF0: mov     ecx, esi; this
+0x503FF2: call    TESObjectREFR_ClearActionFlagBits
+0x503FF7: push    2; mask
+0x503FF9: mov     ecx, esi; this
+0x503FFB: call    TESObjectREFR_ClearActionFlagBits
 0x504000: pop     edi
 0x504001: mov     al, 1
 0x504003: pop     esi

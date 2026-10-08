@@ -3,7 +3,7 @@
 0x961482: mov     edi, [esp+8+arg_0]
 0x961486: push    edi
 0x961487: mov     esi, ecx
-0x961489: call    nullsub_returnvVoid_1arg
+0x961489: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x96148E: push    edi
 0x96148F: lea     ecx, [esi+4]
 0x961492: call    sub_709430

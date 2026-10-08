@@ -1,1 +1,1 @@
-IRecordInfo_0
+typedef IRecordInfo IRecordInfo_0;

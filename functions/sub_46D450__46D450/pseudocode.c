@@ -1,16 +1,16 @@
-char __thiscall sub_46D450(_DWORD *this)
+char __thiscall TESTextureList_Clear(TESTextureList *this)
 {
-  unsigned int v2; // ecx
+  void **archiveEntries; // ecx
   char result; // al
 
-  v2 = *(this + 1);
-  result = 0;
-  if ( v2 )
+  archiveEntries = this->archiveEntries; /*0x46d453*/
+  result = 0; /*0x46d456*/
+  if ( archiveEntries ) /*0x46d45a*/
   {
-    FormHeapFree(v2);
-    *(this + 1) = 0;
-    result = 1;
+    FormHeapFree((unsigned int)archiveEntries); /*0x46d45d*/
+    this->archiveEntries = 0; /*0x46d465*/
+    result = 1; /*0x46d46c*/
   }
-  *(_BYTE *)this = 0;
-  return result;
+  LOBYTE(this->count) = 0; /*0x46d46e*/
+  return result; /*0x46d471*/
 }

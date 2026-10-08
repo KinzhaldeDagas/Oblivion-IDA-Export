@@ -1,12 +1,12 @@
-int __stdcall sub_563A00(int a1)
+float *__stdcall sub_563A00(float *a1)
 {
-  int v2; // edx
-  float v3; // ecx
+  float y; // edx
+  float z; // ecx
 
-  v2 = *((_DWORD *)&Vector3_InitValue_ + 1);
-  *(float *)a1 = Vector3_InitValue_;
-  v3 = dword_B3F9B0;
-  *(_DWORD *)(a1 + 4) = v2;
-  *(float *)(a1 + 8) = v3;
-  return a1;
+  y = g_zeroNiPoint3.y; /*0x563a0a*/
+  *a1 = g_zeroNiPoint3.x; /*0x563a10*/
+  z = g_zeroNiPoint3.z; /*0x563a12*/
+  a1[1] = y; /*0x563a18*/
+  a1[2] = z; /*0x563a1b*/
+  return a1; /*0x563a1e*/
 }

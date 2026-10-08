@@ -1,1 +1,4 @@
-_UNLOAD_DLL_DEBUG_INFO
+struct _UNLOAD_DLL_DEBUG_INFO
+{
+LPVOID lpBaseOfDll;
+};

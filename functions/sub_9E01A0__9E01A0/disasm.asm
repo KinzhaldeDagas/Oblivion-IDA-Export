@@ -1,4 +1,4 @@
-0x9E01A0: push    offset CriticalSection; lpCriticalSection
+0x9E01A0: push    0B35380h; lpCriticalSection
 0x9E01A5: call    ds:InitializeCriticalSection
 0x9E01AB: push    offset sub_A1A6F0; void (__cdecl *)()
 0x9E01B0: call    _atexit

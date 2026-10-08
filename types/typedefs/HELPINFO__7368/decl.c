@@ -1,1 +1,1 @@
-HELPINFO
+typedef tagHELPINFO HELPINFO;

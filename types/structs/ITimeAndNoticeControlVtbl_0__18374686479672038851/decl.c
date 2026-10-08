@@ -1,1 +1,1 @@
-ITimeAndNoticeControlVtbl_0
+typedef ITimeAndNoticeControlVtbl ITimeAndNoticeControlVtbl_0;

@@ -1,4 +1,4 @@
-0x67D4F0: call    sub_567D20
+0x67D4F0: call    TESPackage_GetSaveSize
 0x67D4F5: mov     ecx, ds:0B33B00h
 0x67D4FB: add     ax, 0Ch
 0x67D4FF: cmp     byte ptr [ecx+7Ch], 6Ch ; 'l'

@@ -1,30 +1,33 @@
-unsigned int **__thiscall sub_795C30(unsigned int *this, int *a2)
+// OBLIVION AUTHORITY (2026-08-30): push_back for vector<unsigned int>; appends directly when capacity remains or uses the checked insert-one path. Its observed caller is CIndexedGeometry vertex-color storage.
+void __thiscall OB_stVectorUInt32_PushBack_010201A0(OB_stVectorUInt32_010201A0 *this, const unsigned int *value)
 {
-  unsigned int v3; // edx
-  unsigned int v4; // ecx
-  int *v5; // eax
-  unsigned int **result; // eax
-  _DWORD *v7; // edi
-  int v8; // [esp+4h] [ebp-8h] BYREF
+  int v2; // ebx
+  unsigned int *begin; // edx
+  unsigned int v5; // ecx
+  unsigned int *end; // eax
+  unsigned int *v7; // edi
+  OB_stVector4Iterator_010201A0 result; // [esp+4h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) >> 2;
+  begin = this->begin; /*0x795c36*/
+  if ( begin ) /*0x795c3b*/
+    v5 = this->end - begin; /*0x795c46*/
   else
-    v4 = 0;
-  if ( v3 && v4 < (int)(*(this + 3) - v3) >> 2 )
+    v5 = 0; /*0x795c3d*/
+  if ( begin && v5 < this->capacity - begin ) /*0x795c57*/
   {
-    v5 = (int *)*(this + 2);
-    *v5 = *a2;
-    result = (unsigned int **)(v5 + 1);
-    *(this + 2) = (unsigned int)result;
+    end = this->end; /*0x795c59*/
+    *end = *value; /*0x795c62*/
+    this->end = end + 1; /*0x795c67*/
   }
   else
   {
-    v7 = (_DWORD *)*(this + 2);
-    if ( v3 > (unsigned int)v7 )
-      _invalid_parameter_noinfo();
-    return sub_795840(this, (unsigned int **)&v8, this, v7, a2);
+    v7 = this->end; /*0x795c72*/
+    if ( begin > v7 ) /*0x795c77*/
+      _invalid_parameter_noinfo(v2, (int)v7, (int)this); /*0x795c79*/
+    OB_stVectorUInt32_InsertOne_010201A0( /*0x795c8c*/
+      this,
+      &result,
+      (OB_stVector4Iterator_010201A0)__PAIR64__((unsigned int)v7, (unsigned int)this),
+      value);
   }
-  return result;
 }

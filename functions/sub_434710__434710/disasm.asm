@@ -4,7 +4,6 @@
 0x434717: push    edi
 0x434718: lea     edx, [eax+1]
 0x43471B: jmp     short loc_434720
-0x43471D: align 10h
 0x434720: mov     cl, [eax]
 0x434722: add     eax, 1
 0x434725: test    cl, cl
@@ -13,9 +12,9 @@
 0x43472B: cmp     eax, 3
 0x43472E: jbe     short loc_43477C
 0x434730: lea     eax, [eax+esi-3]
-0x434734: push    offset off_A366CC; Str2
-0x434739: push    eax; Str1
-0x43473A: call    __strcmp
+0x434734: push    offset off_A366CC; right
+0x434739: push    eax; left
+0x43473A: call    CRT_StricmpLocaleDispatch
 0x43473F: add     esp, 8
 0x434742: test    eax, eax
 0x434744: jnz     short loc_43477C
@@ -75,7 +74,6 @@
 0x4347D7: mov     eax, esi
 0x4347D9: sub     edx, esi
 0x4347DB: jmp     short loc_4347E0
-0x4347DD: align 10h
 0x4347E0: mov     cl, [eax]
 0x4347E2: mov     [edx+eax], cl
 0x4347E5: add     eax, 1

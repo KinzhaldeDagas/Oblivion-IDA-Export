@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6A0616",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x6A061E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A0624",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6A0627",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6A063F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6A0659",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6A0665",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,31 +205,31 @@
   },
   {
     "ea": "0x6A0672",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A0678",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A067A",
-    "line": "lea     edx, [esp+20h+var_C]",
+    "line": "lea     edx, [esp+20h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A067E",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A067F",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x6A0697",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

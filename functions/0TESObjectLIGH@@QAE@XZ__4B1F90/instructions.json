@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4B2068",
-    "line": "mov     [esi+80h], eax",
+    "line": "mov     [esi+80h], eax; TESObjectLIGH constructor clears DATA field +0x80; record load later normalizes a zero loaded value to 1.0.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4B207C",
-    "line": "fstp    dword ptr [esi+84h]",
+    "line": "fstp    dword ptr [esi+84h]; TESObjectLIGH constructor initializes DATA field +0x84 to 90.0; attached-reference shadow registration copies this field as projector FOV.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -436,5 +436,149 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B3030",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3033",
+    "line": "jmp     TESObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3038",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B303B",
+    "line": "add     ecx, 24h ; '$'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B303E",
+    "line": "jmp     TESFullName_Initialize",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3043",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3046",
+    "line": "add     ecx, 30h ; '0'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3049",
+    "line": "jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B304E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3051",
+    "line": "add     ecx, 48h ; 'H'; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3054",
+    "line": "jmp     j_TESTexture_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3059",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B305C",
+    "line": "add     ecx, 60h ; '`'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B305F",
+    "line": "jmp     TESWeightForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3064",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3067",
+    "line": "add     ecx, 68h ; 'h'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B306A",
+    "line": "jmp     TESValueForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B306F",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3073",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3076",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3079",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B307B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3080",
+    "line": "mov     eax, offset stru_ADEDB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3085",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

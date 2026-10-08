@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "condrv_input_info_params",
+  "definition": "struct condrv_input_info_params\n{\nunsigned int mask;\ncondrv_input_info info;\n}\n",
   "id": 18374686479671869813,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mask",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "info",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "condrv_input_info"
     }
   ],
   "name": "condrv_input_info_params",
+  "ordinal": 7933,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

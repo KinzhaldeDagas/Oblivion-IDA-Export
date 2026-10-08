@@ -1,4 +1,4 @@
-0x437050: push    0FFFFFFFFh
+0x437050: push    0FFFFFFFFh; Verified base initializer for QueuedTexture: initializes IOTask fields, stores normalized path and resolves archive/file entry via HashFilePath + ArchiveManager_LazyFileLookup.
 0x437052: push    offset SEH_437050
 0x437057: mov     eax, large fs:0
 0x43705D: push    eax
@@ -15,7 +15,7 @@
 0x437077: lea     eax, [esp+34h+var_C]
 0x43707B: mov     large fs:0, eax
 0x437081: mov     eax, dword ptr [esp+34h+a2]
-0x437085: mov     edi, [esp+34h+arg_0]
+0x437085: mov     edi, [esp+34h+path]
 0x437089: mov     esi, ecx
 0x43708B: push    eax; a2
 0x43708C: mov     [esp+38h+var_1C], esi
@@ -31,7 +31,7 @@
 0x4370B0: push    edi
 0x4370B1: mov     ecx, esi
 0x4370B3: mov     byte ptr [esp+38h+var_4], 1
-0x4370B8: call    sub_434600
+0x4370B8: call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.
 0x4370BD: mov     edi, [esi+20h]
 0x4370C0: cmp     edi, ebx
 0x4370C2: jz      short loc_4370EC
@@ -62,3 +62,19 @@
 0x437103: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x437108: add     esp, 24h
 0x43710B: retn    8
+0x9AC3C0: mov     ecx, [ebp-1Ch]; this
+0x9AC3C3: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9AC3C8: mov     ecx, [ebp-1Ch]
+0x9AC3CB: add     ecx, 28h ; '('; slot
+0x9AC3CE: jmp     NiPointerSlot_Release
+0x9AC3D3: mov     edx, dword ptr [esp+a2]
+0x9AC3D7: lea     eax, [edx-24h]
+0x9AC3DA: mov     ecx, [edx-28h]
+0x9AC3DD: xor     ecx, eax
+0x9AC3DF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC3E4: add     eax, 0Ch
+0x9AC3E7: mov     ecx, [edx-4]
+0x9AC3EA: xor     ecx, eax
+0x9AC3EC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC3F1: mov     eax, offset stru_AD909C
+0x9AC3F6: jmp     ___CxxFrameHandler3

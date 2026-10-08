@@ -12,22 +12,22 @@ int __userpurge sub_90EF80@<eax>(int *a1@<ecx>, int a2@<ebx>, int a3@<ebp>, int 
   void ***v16; // [esp+3Ch] [ebp-30h]
   _BYTE v17[44]; // [esp+40h] [ebp-2Ch] BYREF
 
-  sub_90D960((int *)v14, (int)a5);
-  v11 = 1;
-  v10 = (void **)&off_A9C9B0;
-  v12 = a4;
-  v6 = (*(int (__thiscall **)(int))(*(_DWORD *)a4 + 0x1C))(a4);
-  v16 = &v10;
-  v13 = v6;
-  sub_90D9C0(a1, a3, v14);
-  sub_90DA40(a2, (int)v17, (int)v16, a5 + 1, *a5, v15);
-  v7 = ((int (__thiscall *)(void ***))v10[7])(&v10);
-  ((void (__thiscall *)(void ***, int, int))v10[6])(&v10, 0x30 * v15, 1);
-  sub_90DC60(a1, v14);
-  v8 = ((int (__thiscall *)(void ***))v10[7])(&v10);
-  sub_90E860(a1, v8, (int)v14, v7);
-  ((void (__thiscall *)(void ***, int, _DWORD))v10[6])(&v10, v8, 0);
-  v10 = &hkBaseObject::`vftable';
-  sub_90DB10((int *)v14);
-  return 0;
+  sub_90D960((int *)v14, (int)a5); /*0x90ef91*/
+  v11 = 1; /*0x90ef9a*/
+  v10 = (void **)&off_A9C9B0; /*0x90efa1*/
+  v12 = a4; /*0x90efa9*/
+  v6 = (*(int (__thiscall **)(int))(*(_DWORD *)a4 + 0x1C))(a4); /*0x90efaf*/
+  v16 = &v10; /*0x90efba*/
+  v13 = v6; /*0x90efc1*/
+  sub_90D9C0(a1, a3, v14); /*0x90efc5*/
+  sub_90DA40(a2, (int)v17, (int)v16, a5 + 1, *a5, v15); /*0x90efdf*/
+  v7 = ((int (__thiscall *)(void ***))v10[7])(&v10); /*0x90eff6*/
+  ((void (__thiscall *)(void ***, int, int))v10[6])(&v10, 0x30 * v15, 1); /*0x90f009*/
+  sub_90DC60(a1, v14); /*0x90f013*/
+  v8 = ((int (__thiscall *)(void ***))v10[7])(&v10); /*0x90f023*/
+  sub_90E860(a1, v8, (int)v14, v7); /*0x90f02d*/
+  ((void (__thiscall *)(void ***, int, _DWORD))v10[6])(&v10, v8, 0); /*0x90f03d*/
+  v10 = &hkBaseObject::`vftable'; /*0x90f044*/
+  sub_90DB10((int *)v14); /*0x90f04c*/
+  return 0; /*0x90f051*/
 }

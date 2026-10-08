@@ -1,7 +1,7 @@
 // attributes: thunk
-char __stdcall sub_754EA0(int a2)
+char __stdcall j_NiTimeController_RegisterStreamables(int a1)
 {
   NiRenderTargetGroup *this; // ecx
 
-  return sub_715F10(this, a2);
+  return NiTimeController_RegisterStreamables(this, a1);
 }

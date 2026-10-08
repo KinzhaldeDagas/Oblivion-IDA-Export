@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x5FC723",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FC725",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x5FC734",
-    "line": "push    edx",
+    "line": "push    edx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FC735",
-    "line": "lea     ecx, [ebx+44h]",
+    "line": "lea     ecx, [ebx+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5FC738",
-    "line": "call    ExtraDataList_SetReferencePointer",
+    "line": "call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x5FC7D3",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5FC7E0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

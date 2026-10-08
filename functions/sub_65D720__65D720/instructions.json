@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65D720",
-    "line": "mov     eax, [ecx+5DCh]",
+    "line": "mov     eax, [ecx+5DCh]; Player active ActorAnimData selector. Prefer defaultAnimData override +0x5DC when nonnull; otherwise, when first-person is active (+0x588 == 0), prefer firstPersonAnimData +0x5CC; fall back to TESObjectREFR_GetAnimData. This is distinct from perspective-specific ActorSkinInfo.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x65D73C",
-    "line": "jmp     TESObjectREFR_GetAnimData",
+    "line": "jmp     TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "jmp",
     "size": 5
   },

@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DKMT_QUERYSTATISTICS_VIDEO_MEMORY",
+  "definition": "struct _D3DKMT_QUERYSTATISTICS_VIDEO_MEMORY\n{\nULONG AllocsCommitted;\nD3DKMT_QUERYSTATISTICS_COUNTER AllocsResidentInP[5];\nD3DKMT_QUERYSTATISTICS_COUNTER AllocsResidentInNonPreferred;\nULONGLONG TotalBytesEvictedDueToPreparation;\n}\n",
   "id": 18374686479672026885,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AllocsCommitted",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AllocsResidentInP",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 80
+      "size": 80,
+      "type": "D3DKMT_QUERYSTATISTICS_COUNTER[5]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AllocsResidentInNonPreferred",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 16
+      "size": 16,
+      "type": "D3DKMT_QUERYSTATISTICS_COUNTER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TotalBytesEvictedDueToPreparation",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     }
   ],
   "name": "_D3DKMT_QUERYSTATISTICS_VIDEO_MEMORY",
+  "ordinal": 1259,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 112
 }

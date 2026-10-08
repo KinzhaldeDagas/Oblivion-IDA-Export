@@ -1,1 +1,28 @@
-_CONTEXT
+struct _CONTEXT
+{
+DWORD ContextFlags;
+DWORD Dr0;
+DWORD Dr1;
+DWORD Dr2;
+DWORD Dr3;
+DWORD Dr6;
+DWORD Dr7;
+FLOATING_SAVE_AREA FloatSave;
+DWORD SegGs;
+DWORD SegFs;
+DWORD SegEs;
+DWORD SegDs;
+DWORD Edi;
+DWORD Esi;
+DWORD Ebx;
+DWORD Edx;
+DWORD Ecx;
+DWORD Eax;
+DWORD Ebp;
+DWORD Eip;
+DWORD SegCs;
+DWORD EFlags;
+DWORD Esp;
+DWORD SegSs;
+BYTE ExtendedRegisters[512];
+};

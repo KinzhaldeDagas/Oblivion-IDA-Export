@@ -1,6 +1,6 @@
 0xA11D80: fldz
 0xA11D82: mov     ecx, 0Fh
-0xA11D87: mov     eax, offset unk_B47500
+0xA11D87: mov     eax, (offset flt_B474CC+34h)
 0xA11D8C: fst     dword ptr [eax-8]
 0xA11D8F: add     eax, 10h
 0xA11D92: sub     ecx, 1

@@ -1,9 +1,9 @@
-char __thiscall sub_753860(float *this, int a2)
+bool __thiscall sub_753860(float *this, const NiPoint3 *a2)
 {
-  char result; // al
+  bool result; // al
 
-  result = sub_75E890(this, a2);
-  if ( result )
-    return !sub_8AA390((float *)(a2 + 0x30), this + 0xC);
-  return result;
+  result = sub_75E890((NiTriBasedGeomData *)this, (int)a2); /*0x753869*/
+  if ( result ) /*0x753870*/
+    return !NiPoint3__NotEqual(a2 + 4, (const NiPoint3 *)this + 4); /*0x753886*/
+  return result; /*0x753872*/
 }

@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x62CA97",
-    "line": "mov     [esp+54h+var_30], ebx",
+    "line": "mov     [esp+54h+self], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x62CB16",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x62CC14",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62CC16",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x62CC55",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x62CC5C",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x62CC7F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x62CC88",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1153,19 +1153,19 @@
   },
   {
     "ea": "0x62CC8B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62CC90",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62CC92",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x62CCA9",
-    "line": "call    sub_5F2820",
+    "line": "call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,19 +1453,19 @@
   },
   {
     "ea": "0x62CD21",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62CD22",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62CD24",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x62CD44",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x62CD4F",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x62CD89",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1879,7 +1879,7 @@
   },
   {
     "ea": "0x62CDFF",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x62CF19",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -3241,7 +3241,7 @@
   },
   {
     "ea": "0x62D0EF",
-    "line": "mov     ecx, offset unk_B36A90",
+    "line": "mov     ecx, (offset flt_B36A88+8)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3331,7 +3331,7 @@
   },
   {
     "ea": "0x62D11A",
-    "line": "call    sub_5F2820",
+    "line": "call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3883,7 +3883,7 @@
   },
   {
     "ea": "0x62D225",
-    "line": "call    sub_5F2820",
+    "line": "call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4063,7 +4063,7 @@
   },
   {
     "ea": "0x62D27E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4249,7 +4249,7 @@
   },
   {
     "ea": "0x62D2F1",
-    "line": "mov     ecx, [esp+54h+var_30]",
+    "line": "mov     ecx, [esp+54h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4321,7 +4321,7 @@
   },
   {
     "ea": "0x62D314",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4333,7 +4333,7 @@
   },
   {
     "ea": "0x62D31B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4345,7 +4345,7 @@
   },
   {
     "ea": "0x62D321",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4423,7 +4423,7 @@
   },
   {
     "ea": "0x62D344",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4441,7 +4441,7 @@
   },
   {
     "ea": "0x62D34D",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -4453,19 +4453,19 @@
   },
   {
     "ea": "0x62D350",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62D355",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62D357",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4699,7 +4699,7 @@
   },
   {
     "ea": "0x62D3C4",
-    "line": "mov     ebx, [esp+54h+var_30]",
+    "line": "mov     ebx, [esp+54h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4831,7 +4831,7 @@
   },
   {
     "ea": "0x62D408",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4933,13 +4933,13 @@
   },
   {
     "ea": "0x62D43D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62D43F",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -5509,7 +5509,7 @@
   },
   {
     "ea": "0x62D554",
-    "line": "call    sub_5F2820",
+    "line": "call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5755,19 +5755,19 @@
   },
   {
     "ea": "0x62D5CF",
-    "line": "push    4",
+    "line": "push    4; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62D5D1",
-    "line": "push    6",
+    "line": "push    6; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62D5D3",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Hardcoded miscellaneous topic bucket 6 index 4: stock 0000011C / TimeToGo. Null suppresses this ambient SayTopic branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6097,7 +6097,7 @@
   },
   {
     "ea": "0x62D679",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -6385,7 +6385,7 @@
   },
   {
     "ea": "0x62D70C",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7904B0",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+first]; Selects the fuzzy-volume pivot sample for branch-pointer partitioning. Sorts three candidates for ranges of at most 40 pointers; larger ranges use four three-way sorts over spaced samples (MSVC median-guess strategy).",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7904B5",
-    "line": "mov     esi, [esp+4+arg_8]",
+    "line": "mov     esi, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7904DF",
-    "line": "mov     [esp+10h+arg_8], edx",
+    "line": "mov     [esp+10h+last], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,31 +139,31 @@
   },
   {
     "ea": "0x7904F0",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7904F1",
-    "line": "push    eax",
+    "line": "push    eax; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7904F2",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7904F3",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     [esp+20h+first], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7904F7",
-    "line": "call    sub_790350",
+    "line": "call    OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0; Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7904FE",
-    "line": "mov     ebx, [esp+20h+arg_4]",
+    "line": "mov     ebx, [esp+20h+middle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x790506",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x79050B",
-    "line": "push    ebx",
+    "line": "push    ebx; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79050C",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79050D",
-    "line": "call    sub_790350",
+    "line": "call    OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0; Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,37 +253,37 @@
   },
   {
     "ea": "0x79051B",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79051C",
-    "line": "sub     esi, [esp+38h+arg_8]",
+    "line": "sub     esi, [esp+38h+last]",
     "mnemonic": "sub",
     "size": 4
   },
   {
     "ea": "0x790520",
-    "line": "push    ebp",
+    "line": "push    ebp; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790521",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790522",
-    "line": "call    sub_790350",
+    "line": "call    OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0; Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x790527",
-    "line": "mov     eax, [esp+40h+arg_0]",
+    "line": "mov     eax, [esp+40h+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,25 +295,25 @@
   },
   {
     "ea": "0x79052C",
-    "line": "push    ebp",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79052D",
-    "line": "push    ebx",
+    "line": "push    ebx; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79052E",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79052F",
-    "line": "call    sub_790350",
+    "line": "call    OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0; Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x790540",
-    "line": "mov     eax, [esp+4+arg_4]",
+    "line": "mov     eax, [esp+4+middle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,25 +373,25 @@
   },
   {
     "ea": "0x790545",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790546",
-    "line": "push    eax",
+    "line": "push    eax; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790547",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790548",
-    "line": "call    sub_790350",
+    "line": "call    OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0; Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.",
     "mnemonic": "call",
     "size": 5
   },

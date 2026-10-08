@@ -10,7 +10,7 @@
 0x5E7D16: movzx   esi, ax
 0x5E7D19: mov     [esp+10h+arg_0], esi
 0x5E7D1D: movzx   ebp, si
-0x5E7D20: call    sub_45A170
+0x5E7D20: call    TESSaveLoadGame_UseSaveGameBlocks
 0x5E7D25: test    al, al
 0x5E7D27: jz      short loc_5E7D2C
 0x5E7D29: add     esi, 6
@@ -85,7 +85,7 @@
 0x5E7DF7: jb      short loc_5E7E17
 0x5E7DF9: test    ebx, 200000h
 0x5E7DFF: jz      short loc_5E7E17
-0x5E7E01: lea     ecx, [edi+88h]
+0x5E7E01: lea     ecx, [edi+88h]; self
 0x5E7E07: call    AVCollection_GetSaveSize
 0x5E7E0C: add     word ptr [esp+10h+arg_0], ax
 0x5E7E11: mov     ecx, ds:0B33B00h
@@ -115,7 +115,7 @@
 0x5E7E65: jz      short loc_5E7EB5
 0x5E7E67: mov     ecx, [esi]
 0x5E7E69: push    ecx; a1
-0x5E7E6A: call    TESForm_LookupByFormID
+0x5E7E6A: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x5E7E6F: mov     edx, [esi+5]
 0x5E7E72: add     esp, 4
 0x5E7E75: push    offset a_AiActor_cpp; ".\\AI\\Actor.cpp"

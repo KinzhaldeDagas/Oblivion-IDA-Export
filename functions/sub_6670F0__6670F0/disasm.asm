@@ -12,7 +12,7 @@
 0x667106: retn    4
 0x667109: cmp     dword ptr ds:0B3BB88h, 0
 0x667110: jnz     short loc_66712A
-0x667112: mov     dword ptr ds:0B3BB88h, offset word_B3BB4C
+0x667112: mov     dword ptr ds:0B3BB88h, (offset qword_B3BB2C+20h)
 0x66711C: mov     byte ptr ds:0B3BB5Ch, 0
 0x667123: mov     byte ptr ds:0B3BB79h, 1
 0x66712A: mov     eax, [edi]
@@ -30,7 +30,7 @@
 0x667156: mov     [esp+4Ch+var_2C], edx
 0x66715A: fstp    [esp+4Ch+var_34]
 0x66715E: mov     [esp+4Ch+var_28], eax
-0x667162: call    sub_5E0660
+0x667162: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x667167: fmul    qword ptr ds:0A3C770h
 0x66716D: mov     ecx, ds:0B3BB88h
 0x667173: push    esi
@@ -52,7 +52,7 @@
 0x6671AB: fld     [esp+58h+var_34]
 0x6671AF: fadd    [esp+58h+var_28]
 0x6671B3: fstp    [esp+58h+var_10]
-0x6671B7: call    sub_959D60
+0x6671B7: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x6671BC: test    al, al
 0x6671BE: jz      short loc_667236
 0x6671C0: mov     eax, ds:0B3BB88h
@@ -85,7 +85,7 @@
 0x667219: mov     edx, [ecx]
 0x66721B: mov     eax, [edx+4]
 0x66721E: call    eax
-0x667220: cmp     eax, offset dword_B3FD4C
+0x667220: cmp     eax, offset stru_B3FD4C
 0x667225: setz    al
 0x667228: test    al, al
 0x66722A: jnz     short loc_667236
@@ -126,7 +126,7 @@
 0x6672A6: fstp    [esp+58h+var_44]
 0x6672AA: fld     [esp+58h+var_44]
 0x6672AE: fstp    [esp+58h+var_4]
-0x6672B2: call    sub_959D60
+0x6672B2: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x6672B7: test    al, al
 0x6672B9: jz      short loc_66732F
 0x6672BB: mov     eax, ds:0B3BB88h
@@ -159,7 +159,7 @@
 0x667318: mov     edx, [ecx]
 0x66731A: mov     eax, [edx+4]
 0x66731D: call    eax
-0x66731F: cmp     eax, offset dword_B3FD4C
+0x66731F: cmp     eax, offset stru_B3FD4C
 0x667324: setz    al
 0x667327: test    al, al
 0x667329: jz      loc_66722C
@@ -187,7 +187,7 @@
 0x66737F: fstp    [esp+58h+var_14]
 0x667383: fld     [esp+58h+var_44]
 0x667387: fstp    [esp+58h+var_10]
-0x66738B: call    sub_959D60
+0x66738B: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x667390: test    al, al
 0x667392: jz      short loc_667408
 0x667394: mov     eax, ds:0B3BB88h
@@ -220,12 +220,12 @@
 0x6673F1: mov     edx, [ecx]
 0x6673F3: mov     eax, [edx+4]
 0x6673F6: call    eax
-0x6673F8: cmp     eax, offset dword_B3FD4C
+0x6673F8: cmp     eax, offset stru_B3FD4C
 0x6673FD: setz    al
 0x667400: test    al, al
 0x667402: jz      loc_66722C
 0x667408: mov     ecx, edi; this
-0x66740A: call    MobileObject_GetCharProxy
+0x66740A: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x66740F: mov     ecx, eax
 0x667411: call    sub_892D90
 0x667416: pop     edi

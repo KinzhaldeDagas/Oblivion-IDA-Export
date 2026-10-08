@@ -18,7 +18,7 @@
 0x8AF8F2: mov     [esp+110h+var_FD], al
 0x8AF8F6: jz      loc_8AFB1C
 0x8AF8FC: push    ebx
-0x8AF8FD: call    sub_47FAC0
+0x8AF8FD: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x8AF902: add     esp, 4
 0x8AF905: test    eax, eax
 0x8AF907: mov     dword ptr [esp+110h+var_F4], eax
@@ -54,7 +54,7 @@
 0x8AF973: test    eax, eax
 0x8AF975: jz      def_8AF956; jumptable 008AF956 default case, cases 8-10
 0x8AF97B: push    eax
-0x8AF97C: push    offset dword_BA7FD8
+0x8AF97C: push    offset stru_BA7FD8
 0x8AF981: call    NiRTTI_Cast
 0x8AF986: mov     edi, eax
 0x8AF988: add     esp, 8
@@ -68,7 +68,7 @@
 0x8AF9A2: call    edx
 0x8AF9A4: mov     eax, dword ptr [esp+110h+var_F4]
 0x8AF9A8: push    eax
-0x8AF9A9: push    offset dword_BA7A20
+0x8AF9A9: push    0BA7A20h
 0x8AF9AE: call    NiRTTI__IsObjectOfRTTIType
 0x8AF9B3: add     esp, 8
 0x8AF9B6: test    al, al
@@ -89,7 +89,7 @@
 0x8AF9E5: push    eax
 0x8AF9E6: call    sub_5398E0
 0x8AF9EB: push    esi
-0x8AF9EC: push    offset dword_BA8018
+0x8AF9EC: push    offset stru_BA8018
 0x8AF9F1: call    NiRTTI__IsObjectOfRTTIType
 0x8AF9F6: add     esp, 10h
 0x8AF9F9: test    al, al
@@ -105,7 +105,7 @@
 0x8AFA2C: push    ecx
 0x8AFA2D: lea     ecx, [esp+114h+var_50]
 0x8AFA34: movaps  [esp+114h+anonymous_4], xmm0
-0x8AFA3C: call    sub_8B1DD0
+0x8AFA3C: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8AFA41: movaps  xmm0, xmmword ptr [esi+30h]
 0x8AFA45: lea     edx, [esp+110h+var_50]
 0x8AFA4C: push    edx

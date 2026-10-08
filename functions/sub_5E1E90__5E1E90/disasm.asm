@@ -55,7 +55,7 @@
 0x5E1F17: jz      short loc_5E1F1B
 0x5E1F19: mov     ebx, edi
 0x5E1F1B: mov     ecx, ebx; this
-0x5E1F1D: call    TESActorBase_CanFly
+0x5E1F1D: call    TESActorBase_CanFly; TESActorBase_CanFly: creature base flag 0x20. Actor_FallImpact skips fall damage for can-fly actors; Slowfall/climb discipline should not overwrite natural flying behavior.
 0x5E1F22: test    al, al
 0x5E1F24: jnz     short loc_5E1F2F
 0x5E1F26: pop     edi

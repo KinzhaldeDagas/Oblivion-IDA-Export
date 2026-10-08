@@ -1,18 +1,31 @@
 {
-  "callees_count": 18,
-  "callers_count": 1,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x403F50",
+      "0x40400D"
+    ]
+  ],
+  "chunks_sha256": "fb5ec866814b8d322598b2bcaee059c5faab7a7c2a85a384fc0eee04f5478907",
+  "comment_regular": "[Controller decode 2026-07-09] Full control rebind path. Applies broader reserved-key checks, clears conflicts, and writes the new keyboard/mouse/joystick binding byte.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "InputGlobal::RebindControl",
   "end_ea": "0x40400D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobal::RebindControl",
   "segment": ".text",
   "sha256": "fb5ec866814b8d322598b2bcaee059c5faab7a7c2a85a384fc0eee04f5478907",
   "size": 189,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x403F50",
+  "total_chunk_size": 189,
   "type": "bool __thiscall(InputGlobal *this, UInt8 whichCtrl, UInt8 whichScheme, UInt8 newButton)",
   "xrefs_from_count": 87,
   "xrefs_to_count": 4

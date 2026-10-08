@@ -60,7 +60,7 @@
 0x959D3F: mov     ecx, esi
 0x959D41: call    eax
 0x959D43: push    ebx
-0x959D44: call    FormHeapFree
+0x959D44: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x959D49: add     esp, 4
 0x959D4C: movzx   ecx, word ptr [edi+22h]
 0x959D50: add     ebp, 1

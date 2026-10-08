@@ -1,4 +1,4 @@
-0x46AED0: mov     edx, [esp+arg_4]
+0x46AED0: mov     edx, [esp+arg_4]; Expands an existing record CHUNK by up to 0xFFFF bytes: increases its 16-bit length, grows the global TESForm save buffer, and leaves the appended range ready for the caller to fill.
 0x46AED4: push    esi
 0x46AED5: mov     esi, [esp+4+arg_0]
 0x46AED9: movzx   eax, word ptr [esi+4]

@@ -29,19 +29,19 @@
 0x5F8838: mov     ecx, esi
 0x5F883A: call    sub_5E13D0
 0x5F883F: mov     ecx, esi; this
-0x5F8841: call    MobileObject_GetCharProxy
+0x5F8841: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5F8846: mov     edi, eax
 0x5F8848: test    edi, edi
 0x5F884A: jz      short loc_5F888B
 0x5F884C: mov     ecx, esi; this
-0x5F884E: call    TESObjectREFR_GetParentCell
+0x5F884E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F8853: test    eax, eax
 0x5F8855: jz      short loc_5F888B
 0x5F8857: mov     ecx, esi; this
-0x5F8859: call    TESObjectREFR_GetParentCell
+0x5F8859: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F885E: mov     esi, eax
 0x5F8860: mov     ecx, esi; this
-0x5F8862: call    TESObjectCELL_IsInterior
+0x5F8862: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5F8867: test    al, al
 0x5F8869: jz      short loc_5F887E
 0x5F886B: lea     ecx, [esi+28h]

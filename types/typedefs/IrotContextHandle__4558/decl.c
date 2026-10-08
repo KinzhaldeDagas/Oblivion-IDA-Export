@@ -1,1 +1,1 @@
-IrotContextHandle
+typedef void *IrotContextHandle;

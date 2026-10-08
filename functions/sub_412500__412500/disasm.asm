@@ -41,7 +41,7 @@
 0x412582: fadd    [esp+44h+var_28]
 0x412586: add     esp, 8
 0x412589: lea     eax, [esp+3Ch+var_10]
-0x41258D: push    eax; int
+0x41258D: push    eax; color
 0x41258E: fstp    [esp+40h+var_28]
 0x412592: push    ecx
 0x412593: fld     dword ptr [ebx+4]
@@ -51,8 +51,8 @@
 0x4125A1: fadd    [esp+44h+var_20]
 0x4125A5: fstp    [esp+44h+var_20]
 0x4125A9: fld     flt_B03174
-0x4125AF: fstp    [esp+44h+var_44]; float
-0x4125B2: call    sub_47F1A0
+0x4125AF: fstp    [esp+44h+halfExtent]; halfExtent
+0x4125B2: call    NiLines_CreateSquareOutline; Verified generic NiLines square-outline factory: four XY-plane corner vertices from the supplied half-extent, one repeated color, and four enabled line flags; returns NiLines geometry.
 0x4125B7: mov     edx, [ebp+0]
 0x4125BA: add     esp, 8
 0x4125BD: mov     esi, eax

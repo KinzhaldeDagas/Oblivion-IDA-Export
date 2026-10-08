@@ -1,10 +1,10 @@
 double __thiscall sub_593020(float *this)
 {
   double result; // st7
-  double v3; // [esp+4h] [ebp-8h]
+  double VirtualScreenHeight; // [esp+4h] [ebp-8h]
 
-  v3 = sub_57D7F0();
-  result = v3 - (sub_57D7F0() * dbl_A2FAA0 + *(this + 0xA));
-  Double_To_SInt32(result);
-  return result;
+  VirtualScreenHeight = UI_GetVirtualScreenHeight(); /*0x59302b*/
+  result = VirtualScreenHeight - (UI_GetVirtualScreenHeight() * dbl_A2FAA0 + *(this + 0xA)); /*0x59303e*/
+  Double_To_SInt32(result); /*0x593044*/
+  return result; /*0x593041*/
 }

@@ -1,1 +1,1 @@
-NonActorMagicCaster
+struct NonActorMagicCaster;

@@ -1,4 +1,4 @@
-void __cdecl sub_A240A0()
+void __cdecl GameSettings_Unregister_fPathMustLockpickPenalty()
 {
-  GameSetting_destr((int *)flt_B3A438);
+  GameSetting_destr((int *)unk_B3A438); /*0xa240a5*/
 }

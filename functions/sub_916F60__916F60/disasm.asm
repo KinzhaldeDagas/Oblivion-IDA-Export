@@ -38,7 +38,6 @@
 0x916FE6: shl     ebx, 4
 0x916FE9: add     ebx, eax
 0x916FEB: jmp     short loc_916FF0
-0x916FED: align 10h
 0x916FF0: movaps  xmm1, xmmword ptr [ebx]
 0x916FF3: movaps  xmm0, xmm1
 0x916FF6: mulps   xmm0, xmm3

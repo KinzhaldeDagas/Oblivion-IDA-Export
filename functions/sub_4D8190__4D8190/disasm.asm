@@ -1,14 +1,14 @@
-0x4D8190: push    ebx
-0x4D8191: mov     bl, [esp+4+arg_0]
+0x4D8190: push    ebx; Remove/release/clear ordinary type 0x30 or spell-effect type 0x49 attached light. The LightEffect teardown path actively calls this with useSpellEffectExtraLight=true.
+0x4D8191: mov     bl, [esp+4+useSpellEffectExtraLight]
 0x4D8195: test    bl, bl
 0x4D8197: push    ebp
 0x4D8198: lea     ebp, [ecx+44h]
 0x4D819B: push    esi
 0x4D819C: mov     ecx, ebp
 0x4D819E: jz      short loc_4D81A7
-0x4D81A0: call    sub_41E670
+0x4D81A0: call    ExtraDataList_GetSpellEffectLight; Returns the secondary/spell-effect REFR_LIGHT payload from extra type 0x49; TESObjectREF_UpdateLights processes it separately from normal ExtraLight.
 0x4D81A5: jmp     short loc_4D81AC
-0x4D81A7: call    sub_41E650
+0x4D81A7: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x4D81AC: mov     esi, eax
 0x4D81AE: test    esi, esi
 0x4D81B0: jz      short loc_4D820A
@@ -16,12 +16,12 @@
 0x4D81B4: test    eax, eax
 0x4D81B6: jz      short loc_4D81F4
 0x4D81B8: push    edi
-0x4D81B9: push    eax
+0x4D81B9: push    eax; backingLight
 0x4D81BA: push    0
 0x4D81BC: call    GetShadowSceneNode
 0x4D81C1: add     esp, 4
-0x4D81C4: mov     ecx, eax
-0x4D81C6: call    sub_7C7DC0
+0x4D81C4: mov     ecx, eax; self
+0x4D81C6: call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
 0x4D81CB: mov     edi, [esi]
 0x4D81CD: test    edi, edi
 0x4D81CF: jz      short loc_4D81F3
@@ -40,14 +40,14 @@
 0x4D81ED: mov     dword ptr [esi], 0
 0x4D81F3: pop     edi
 0x4D81F4: test    bl, bl
-0x4D81F6: mov     ecx, ebp
+0x4D81F6: mov     ecx, ebp; self
 0x4D81F8: jz      short loc_4D8205
-0x4D81FA: call    sub_41F5C0
+0x4D81FA: call    ExtraDataList_RemoveSpellEffectLight; Remove spell-effect attached-light extra-data type 0x49 from this reference extra-data list.
 0x4D81FF: pop     esi
 0x4D8200: pop     ebp
 0x4D8201: pop     ebx
 0x4D8202: retn    4
-0x4D8205: call    sub_41F5B0
+0x4D8205: call    ExtraDataList_RemoveExtraLight; Remove ordinary attached-light extra-data type 0x30 from this reference extra-data list.
 0x4D820A: pop     esi
 0x4D820B: pop     ebp
 0x4D820C: pop     ebx

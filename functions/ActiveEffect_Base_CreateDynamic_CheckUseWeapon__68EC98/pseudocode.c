@@ -1,6 +1,8 @@
-int __usercall ActiveEffect_Base_CreateDynamic_::CheckUseWeapon@<eax>(
-        int a1@<esi>,
+// Verified fallback: BoundItemEffect is selected when the effect setting's low flag byte bit 0 or flags word bit 0x20000 is set; otherwise valid value-modifier flags route to ValueModifierEffect. Semantics of the remaining masks are Unknown.
+void __usercall ActiveEffect_Base_CreateDynamic_::CheckUseWeapon(
+        EffectItem *a1@<esi>,
         int ecx0@<ecx>,
+        int a2,
         int a3,
         int a4,
         int a5,
@@ -22,43 +24,16 @@ int __usercall ActiveEffect_Base_CreateDynamic_::CheckUseWeapon@<eax>(
         int a21,
         int a22,
         int a23,
-        int a24,
-        int a25,
+        MagicCaster *a24,
+        MagicItem *a25,
         int a26,
-        int a27,
-        int a28)
-{
-  if ( (*(_BYTE *)(ecx0 + 0x5A) & 1) != 0 || (*(_DWORD *)(ecx0 + 0x58) & 0x20000) != 0 )
-    return ActiveEffect_Base_CreateDynamic_::Alloc_BoundItem(
-             a1,
-             a3,
-             a4,
-             a5,
-             a6,
-             a7,
-             a8,
-             a9,
-             a10,
-             a11,
-             a12,
-             a13,
-             a14,
-             a15,
-             a16,
-             a17,
-             a18,
-             a19,
-             a20,
-             a21,
-             a22,
-             a23,
-             a24,
-             a25,
-             a26,
-             a27,
-             a28);
-  if ( (*(_DWORD *)(ecx0 + 0x58) & 0x1180000) == 0 )
-    ActiveEffect_Base_CreateDynamic_::BadEffect_Error(
+        int a27)
+{                                               // Verified (Oblivion): EffectSetting.effectFlags byte bit 0 or dword mask 0x20000 selects BoundItemEffect; other accepted values continue to ValueModifierEffect. Symbolic flag names remain Unknown.
+  if ( (*(_BYTE *)(ecx0 + 0x5A) & 1) != 0 || (*(_DWORD *)(ecx0 + 0x58) & 0x20000) != 0 ) /*0x68eca6*/
+  {
+    ActiveEffect_Base_CreateDynamic_::Alloc_BoundItem( /*0x68ec9c*/
+      a1,
+      a2,
       a3,
       a4,
       a5,
@@ -79,33 +54,64 @@ int __usercall ActiveEffect_Base_CreateDynamic_::CheckUseWeapon@<eax>(
       a20,
       a21,
       a22,
-      a23);
-  return ActiveEffect_Base_CreateDynamic_::Alloc_ModAV(
-           a1,
-           a3,
-           a4,
-           a5,
-           a6,
-           a7,
-           a8,
-           a9,
-           a10,
-           a11,
-           a12,
-           a13,
-           a14,
-           a15,
-           a16,
-           a17,
-           a18,
-           a19,
-           a20,
-           a21,
-           a22,
-           a23,
-           a24,
-           a25,
-           a26,
-           a27,
-           a28);
+      a23,
+      a24,
+      a25,
+      a26,
+      a27);
+  }
+  else
+  {
+    if ( (*(_DWORD *)(ecx0 + 0x58) & 0x1180000) == 0 ) /*0x68ecaf*/
+      ActiveEffect_Base_CreateDynamic_::BadEffect_Error( /*0x68ecaf*/
+        a2,
+        a3,
+        a4,
+        a5,
+        a6,
+        a7,
+        a8,
+        a9,
+        a10,
+        a11,
+        a12,
+        a13,
+        a14,
+        a15,
+        a16,
+        a17,
+        a18,
+        a19,
+        a20,
+        a21,
+        a22);
+    ActiveEffect_Base_CreateDynamic_::Alloc_ModAV( /*0x68ecb0*/
+      a1,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+      a11,
+      a12,
+      a13,
+      a14,
+      a15,
+      a16,
+      a17,
+      a18,
+      a19,
+      a20,
+      a21,
+      a22,
+      a23,
+      a24,
+      a25,
+      a26,
+      a27);
+  }
 }

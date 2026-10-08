@@ -1,1 +1,6 @@
-create_class_reply
+struct create_class_reply
+{
+reply_header __header;
+atom_t atom;
+char __pad_12[4];
+};

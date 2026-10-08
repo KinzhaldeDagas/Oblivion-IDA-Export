@@ -1,4 +1,4 @@
-0x7014E0: mov     ecx, ds:0B3F928h
+0x7014E0: mov     ecx, ds:0B3F928h; Pass225: Dispatches live renderer vtable +0xC0 purge for NiScreenTexture before object teardown.
 0x7014E6: test    ecx, ecx
 0x7014E8: jz      short locret_7014F9
 0x7014EA: mov     eax, [ecx]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7732B0",
+      "0x773323"
+    ]
+  ],
+  "chunks_sha256": "545999f60eca054e0c106f2804c4541797a47acb34ab8f0065a0a2829ffac0be",
+  "comment_regular": "Oblivion draw-time texture-stage application: exactly eight tracked D3DTSS slots; no sampler LOD or texture-factor state.",
+  "comment_repeatable": "Oblivion draw-time texture-stage application: exactly eight tracked D3DTSS slots; no sampler LOD or texture-factor state.\nGPU-world authored-state capture: eight entries. Override flag group+5C+i selects DWORD group+3C+4*i before base flag group+2C+i / value group+C+4*i. Unflagged fields do not write. State IDs come from WORD table B42824; setter inverse mapping is B427E0. This precedes texture binding/transform overrides and is not final draw state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7732B0",
+  "display_name": "OB_NiD3DTextureStageStateGroup_ApplyStageStates_010201A0",
   "end_ea": "0x773323",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7732B0",
+  "name": "OB_NiD3DTextureStageStateGroup_ApplyStageStates_010201A0",
   "segment": ".text",
   "sha256": "545999f60eca054e0c106f2804c4541797a47acb34ab8f0065a0a2829ffac0be",
   "size": 115,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7732B0",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 115,
+  "type": "int __thiscall(void *this, unsigned int stage)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 1
 }

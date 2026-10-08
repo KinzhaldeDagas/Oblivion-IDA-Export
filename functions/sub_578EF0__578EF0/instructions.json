@@ -82,5 +82,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x583E30",
+    "line": "mov     ecx, ds:0B3A6E0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x583E36",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x583E38",
+    "line": "jz      short locret_583E56",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x583E3A",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x583E3B",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x583E3D",
+    "line": "call    sub_581A50",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x583E42",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x583E43",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x583E48",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x583E4B",
+    "line": "mov     dword ptr ds:0B3A6E0h, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x583E55",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x583E56",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

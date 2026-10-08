@@ -1,4 +1,4 @@
-0x41FC70: push    20h ; ' '; a2
+0x41FC70: push    20h ; ' '; Returns the TrespassPackage stored in ExtraTresPassPackage, or null.
 0x41FC72: call    BaseExtraList_GetExtraData
 0x41FC77: test    eax, eax
 0x41FC79: jz      short loc_41FC7F

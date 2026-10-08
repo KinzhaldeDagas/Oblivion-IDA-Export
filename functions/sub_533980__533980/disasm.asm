@@ -38,3 +38,12 @@
 0x5339F3: pop     esi
 0x5339F4: add     esp, 10h
 0x5339F7: retn
+0x9B9040: mov     ecx, [ebp-10h]; this
+0x9B9043: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9B9048: mov     edx, [esp+arg_4]
+0x9B904C: lea     eax, [edx-0Ch]
+0x9B904F: mov     ecx, [edx-10h]
+0x9B9052: xor     ecx, eax
+0x9B9054: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9059: mov     eax, offset stru_AE343C
+0x9B905E: jmp     ___CxxFrameHandler3

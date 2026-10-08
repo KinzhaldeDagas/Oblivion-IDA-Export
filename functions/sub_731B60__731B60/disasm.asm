@@ -9,7 +9,7 @@
 0x731B70: add     esp, 4
 0x731B73: cmp     esi, ebx
 0x731B75: jz      short loc_731BA5
-0x731B77: push    offset NiRefObject_objcount; lpAddend
+0x731B77: push    0B3FD64h; lpAddend
 0x731B7C: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x731B82: mov     [esi+4], ebx
 0x731B85: call    dword ptr ds:0A28078h

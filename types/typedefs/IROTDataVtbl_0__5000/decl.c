@@ -1,1 +1,1 @@
-IROTDataVtbl_0
+typedef IROTDataVtbl IROTDataVtbl_0;

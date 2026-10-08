@@ -1,4 +1,7 @@
-void __stdcall sub_79BDD0(_DWORD *a1, _DWORD *a2)
+// Thin checked/STL trampoline for destruction of an SFrondTexture range.
+void __stdcall OB_SFrondTexture_DestroyRangeThunk_010201A0(
+        OB_SFrondTexture_010201A0 *first,
+        OB_SFrondTexture_010201A0 *last)
 {
-  sub_79B120(a1, a2);
+  OB_SFrondTexture_DestroyRange_010201A0(first, last); /*0x79bde0*/
 }

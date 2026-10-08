@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x5EDC58",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x5EDC65",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EDC67",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,19 +109,19 @@
   },
   {
     "ea": "0x5EDC70",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5EDC76",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EDC78",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x5EDC89",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EDC8B",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },

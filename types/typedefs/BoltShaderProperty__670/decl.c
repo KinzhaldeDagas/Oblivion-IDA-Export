@@ -1,1 +1,1 @@
-BoltShaderProperty
+struct BoltShaderProperty;

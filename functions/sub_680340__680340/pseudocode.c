@@ -1,14 +1,15 @@
-int __thiscall sub_680340(unsigned __int16 *this)
+// Verified: clears allocation flag 0x04 for this AStarWorldNode's table slot and rewinds LowPathSearchGlobals.nextFreeStateIndex when the released slot is lower.
+unsigned __int16 __thiscall AStarWorldNode_ReleaseSearchStateSlot(AStarWorldNode *this)
 {
-  int result; // eax
+  unsigned __int16 result; // ax
 
-  result = *this;
-  if ( (unsigned __int16)result < (unsigned __int16)word_B3BF04 )
+  result = this->searchNodeIndex; /*0x680340*/
+  if ( this->searchNodeIndex < MEMORY[0xB3BE00].stateCapacity ) /*0x68034a*/
   {
-    *((_BYTE *)dword_B3BF00 + 0x10 * (unsigned __int16)result + 0xC) &= ~4u;
-    result = *this;
-    if ( (unsigned __int16)result < (unsigned __int16)word_B3BF08 )
-      word_B3BF08 = result;
+    MEMORY[0xB3BE00].states[result].flags &= ~4u; /*0x680358*/
+    result = this->searchNodeIndex; /*0x680361*/
+    if ( this->searchNodeIndex < MEMORY[0xB3BE00].nextFreeStateIndex ) /*0x68036b*/
+      MEMORY[0xB3BE00].nextFreeStateIndex = result; /*0x68036d*/
   }
-  return result;
+  return result; /*0x680373*/
 }

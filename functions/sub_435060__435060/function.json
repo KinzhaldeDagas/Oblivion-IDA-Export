@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_435060",
+  "chunks": [
+    [
+      "0x435060",
+      "0x4351DB"
+    ]
+  ],
+  "chunks_sha256": "1295dbd55834a9c34d046aeb358f6e318d0c1fa8fc7f78781c20c81edfd4ca2d",
+  "comment_regular": "Verified queued distant-model transform: writes position at NiAVObject+0x54, abs(scale) at +0x60, and builds rotation from rotationAnglesXYZ using X, then Y, then Z axis matrices. NiMatrix33_Multiply is row-major left*right; composition is BaseRotation * RxTransposed(angleX) * Ry(angleY) * Rz(angleZ). The resulting 3x3 matrix is stored at NiAVObject+0x30.",
+  "comment_repeatable": "Verified queued distant-model transform: writes position at NiAVObject+0x54, abs(scale) at +0x60, and builds rotation from rotationAnglesXYZ using X, then Y, then Z axis matrices. NiMatrix33_Multiply is row-major left*right; composition is BaseRotation * RxTransposed(angleX) * Ry(angleY) * Rz(angleZ). The resulting 3x3 matrix is stored at NiAVObject+0x30.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "QueuedDistantLOD_ApplyTransform",
   "end_ea": "0x4351DB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_435060",
+  "name": "QueuedDistantLOD_ApplyTransform",
   "segment": ".text",
   "sha256": "1295dbd55834a9c34d046aeb358f6e318d0c1fa8fc7f78781c20c81edfd4ca2d",
   "size": 379,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x435060",
-  "type": "LONG __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 379,
+  "type": "LONG __thiscall(QueuedDistantLOD *this, NiAVObject *loadedModelRoot, DistantLODQueuedInstanceData *instanceData)",
   "xrefs_from_count": 149,
   "xrefs_to_count": 1
 }

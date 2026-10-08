@@ -16,7 +16,7 @@
 0x502B46: push    eax; a2
 0x502B47: push    ecx; a1
 0x502B48: mov     dword ptr [esp+24h+var_4], 0
-0x502B50: call    Script_ExtractArgs
+0x502B50: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502B55: add     esp, 20h
 0x502B58: test    al, al
 0x502B5A: jnz     short loc_502B5E
@@ -28,7 +28,7 @@
 0x502B66: push    0
 0x502B68: push    eax
 0x502B69: push    0
-0x502B6B: call    sub_4F4B10
+0x502B6B: call    GetTalkedToPC_Eval; Shared GetTalkedToPC callback backs GetTalkedToPC and GetTalkedToPCParam; the vanilla-master scan found 540 condition rows for the former. The former requires a subject and has no params; the Param variant permits no subject and declares an Actor param.
 0x502B70: add     esp, 10h
 0x502B73: pop     ecx
 0x502B74: retn

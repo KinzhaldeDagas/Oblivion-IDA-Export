@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x656270",
-    "line": "sub     esp, 30h",
+    "line": "sub     esp, 30h; MiddleHighProcess vtable +0x150 weapon attachment update. Reparents weapon 3D between drawn/sheathed attachment nodes, applies Oblivion staff/bow transforms, rebuilds or removes power-attack groups, and updates actor weapon state.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x65628E",
-    "line": "mov     edi, [esp+40h+arg_4]",
+    "line": "mov     edi, [esp+40h+sourceAnimData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6562B6",
-    "line": "mov     [esp+40h+arg_4], ebx",
+    "line": "mov     [esp+40h+sourceAnimData], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x6562DC",
-    "line": "cmp     byte ptr [esp+40h+arg_0], 0",
+    "line": "cmp     [esp+40h+weaponDrawn], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x6562E1",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x6562E7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6562E9",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x65630C",
-    "line": "cmp     byte ptr [esp+40h+arg_0], 0",
+    "line": "cmp     [esp+40h+weaponDrawn], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x656320",
-    "line": "call    edx",
+    "line": "call    edx; Draw transition: move generated model child 0 from BackWeapon/SideWeapon storage to the permanent Weapon anchor. A model-local ArrowBone moves with that subtree.",
     "mnemonic": "call",
     "size": 2
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x656324",
-    "line": "mov     ecx, [esp+48h+arg_4]",
+    "line": "mov     ecx, [esp+48h+sourceAnimData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x656330",
-    "line": "call    edx",
+    "line": "call    edx; Sheath transition: move generated model child 0 from Weapon back to its Prn-selected BackWeapon/SideWeapon storage anchor.",
     "mnemonic": "call",
     "size": 2
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x656334",
-    "line": "cmp     byte ptr [esp+40h+arg_0], 0",
+    "line": "cmp     [esp+40h+weaponDrawn], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x656339",
-    "line": "mov     ecx, [esp+40h+arg_4]",
+    "line": "mov     ecx, [esp+40h+sourceAnimData]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x65633D",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x656341",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x656343",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x656399",
-    "line": "cmp     byte ptr [esp+40h+arg_0], 0",
+    "line": "cmp     [esp+40h+weaponDrawn], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -577,19 +577,19 @@
   },
   {
     "ea": "0x6563A7",
-    "line": "lea     ecx, [esp+44h+var_24]",
+    "line": "lea     ecx, [esp+44h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6563AB",
-    "line": "fstp    [esp+44h+var_44]; float",
+    "line": "fstp    [esp+44h+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6563AE",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x6563BF",
-    "line": "cmp     byte ptr [esp+40h+arg_0], 0",
+    "line": "cmp     [esp+40h+weaponDrawn], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x6563CD",
-    "line": "lea     ecx, [esp+44h+var_24]",
+    "line": "lea     ecx, [esp+44h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6563D1",
-    "line": "fstp    [esp+44h+var_44]; float",
+    "line": "fstp    [esp+44h+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6563D4",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x6563FC",
-    "line": "mov     esi, [esp+40h+arg_C]",
+    "line": "mov     esi, [esp+40h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x656400",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x656402",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x65640F",
-    "line": "mov     edi, [esp+40h+arg_8]",
+    "line": "mov     edi, [esp+40h+targetAnimData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x65642C",
-    "line": "cmp     byte ptr [esp+40h+arg_0], al",
+    "line": "cmp     [esp+40h+weaponDrawn], al",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x656436",
-    "line": "call    sub_476410",
+    "line": "call    ActorAnimData_RebuildPowerAttackKFList; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x65643D",
-    "line": "cmp     byte ptr [esp+40h+arg_0], 0",
+    "line": "cmp     [esp+40h+weaponDrawn], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x656457",
-    "line": "lea     eax, [esp+44h+arg_4]",
+    "line": "lea     eax, [esp+44h+sourceAnimData]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -901,13 +901,13 @@
   },
   {
     "ea": "0x656460",
-    "line": "lea     ecx, [esp+40h+arg_4]; this",
+    "line": "lea     ecx, [esp+40h+sourceAnimData]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x656464",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x656481",
-    "line": "mov     esi, [esp+40h+arg_C]",
+    "line": "mov     esi, [esp+40h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x65649C",
-    "line": "call    sub_471990",
+    "line": "call    ActorAnimData_RemovePowerAttackGroups; Remove all power-attack animation groups (0x16-0x1A) across movement 0-3 and weapon 0-5 from ActorAnimData before rebuilding the dynamic power-attack list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6564A1",
-    "line": "mov     edx, [esp+40h+arg_0]",
+    "line": "mov     edx, dword ptr [esp+40h+weaponDrawn]",
     "mnemonic": "mov",
     "size": 4
   },

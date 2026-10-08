@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4F1990",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified source selection: externalLodFiles uses the parsed external .lod stream exclusively; otherwise the loader searches this WorldSpace's override files, parses matching cell records, and follows parentWorldspace until a contributing file is found. Callers include DistantLODLoaderTask_LoadCellData.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1991",
-    "line": "cmp     [esp+4+arg_8], 0",
+    "line": "cmp     [esp+4+outMap], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -67,43 +67,43 @@
   },
   {
     "ea": "0x4F19B0",
-    "line": "mov     eax, [esp+14h+arg_C]",
+    "line": "mov     eax, [esp+14h+lodMode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F19B4",
-    "line": "mov     ecx, [esp+14h+arg_8]",
+    "line": "mov     ecx, [esp+14h+outMap]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F19B8",
-    "line": "mov     edx, [esp+14h+arg_10]",
+    "line": "mov     edx, [esp+14h+externalFile]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F19BC",
-    "line": "push    eax",
+    "line": "push    eax; lodMode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F19BD",
-    "line": "push    ecx",
+    "line": "push    ecx; outMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F19BE",
-    "line": "push    edx",
+    "line": "push    edx; bsFile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F19BF",
-    "line": "call    sub_4D16D0",
+    "line": "call    DistantLOD_ParseExternalCellFile; Verified external .lod parser format: each record has a TESBoundObject FormID, count N, then rotationAnglesXYZ (3N floats), positions (3N floats), and scalePercent (N floats). The base-object transform applies rotation components as X, Y, Z radians and scale as abs(floor(scalePercent)/100).",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4F19EA",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4F19F1",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x4F19FC",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F1A00",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+cellX]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,55 +301,55 @@
   },
   {
     "ea": "0x4F1A12",
-    "line": "mov     edx, [esp+14h+arg_8]",
+    "line": "mov     edx, [esp+14h+outMap]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F1A16",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+cellY]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F1A1A",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+cellX]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F1A1E",
-    "line": "push    edx",
+    "line": "push    edx; outMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1A1F",
-    "line": "push    eax",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1A20",
-    "line": "push    ecx",
+    "line": "push    ecx; cellX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1A21",
-    "line": "push    edi",
+    "line": "push    edi; worldSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1A22",
-    "line": "push    esi",
+    "line": "push    esi; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1A23",
-    "line": "call    sub_4D43F0",
+    "line": "call    TESWorldSpace_ParseCellDistantLODRecords; Verified embedded CELL/REFR parser resolves NAME FormIDs to TESForm* keys, skips disabled refs, converts positions through the root terrain-LOD map, and appends position/rotation/scale arrays. The embedded path does not RTTI-cast the NAME result. Probable: the TESForm key is a TESBoundObject because local REFR save writes NAME from baseForm->refID, external .lod loading explicitly RTTI-casts to TESBoundObject, and cleanup dispatches through the bound-object vtable +0x11C. For triangle hits, the second terrain-pick vector is Probable surface-normal data; the 0.97 cap rationale remains Unknown. It returns 0 after accumulation so override/parent searches continue.",
     "mnemonic": "call",
     "size": 5
   },

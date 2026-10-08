@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A3940",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): Builds generated explicit leaf LODs. Copies highest leaf vector into LOD0, then loops LOD index 1..numLeafLodLevels-1 and calls CLeafLodEngine::ComputeNextLevel on the immediately preceding LOD.",
     "mnemonic": "push",
     "size": 2
   },
@@ -118,12 +118,6 @@
     "line": "jmp     short loc_7A3980",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7A3979",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x7A3980",
@@ -493,7 +487,7 @@
   },
   {
     "ea": "0x7A3A4D",
-    "line": "mov     ecx, [esi+0D4h]",
+    "line": "mov     ecx, [esi+0D4h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -517,13 +511,13 @@
   },
   {
     "ea": "0x7A3A5E",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3A5F",
-    "line": "call    sub_79B2F0",
+    "line": "call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x7A3A99",
-    "line": "lea     ecx, [esp+64h+var_2C]",
+    "line": "lea     ecx, [esp+64h+var_2C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -625,7 +619,7 @@
   },
   {
     "ea": "0x7A3AAF",
-    "line": "fstp    [esp+64h+var_5C]; float",
+    "line": "fstp    [esp+64h+leafSizeIncreaseFactor]; leafSizeIncreaseFactor",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -637,7 +631,7 @@
   },
   {
     "ea": "0x7A3AB9",
-    "line": "fstp    [esp+64h+var_60]; float",
+    "line": "fstp    [esp+64h+leafReductionPercentage]; leafReductionPercentage",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -649,19 +643,19 @@
   },
   {
     "ea": "0x7A3AC1",
-    "line": "fstp    [esp+64h+var_64]; float",
+    "line": "fstp    [esp+64h+spacingTolerance]; spacingTolerance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A3AC4",
-    "line": "push    ebx; int",
+    "line": "push    ebx; originalLeaves",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3AC5",
-    "line": "call    sub_7A8F00",
+    "line": "call    OB_CLeafLodEngine_ctor_010201A0; OBLIVION AUTHORITY (2026-08-30): Constructs exact 0x20-byte CLeafLodEngine: vector<SLodEntry> at +0x00, spacing +0x10, reduction +0x14, SIdvLeafInfo reference pointer +0x18, size-increase factor +0x1C. RT 4.1 corroborates member names after this layout was recovered from Oblivion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +679,7 @@
   },
   {
     "ea": "0x7A3AD7",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -697,7 +691,7 @@
   },
   {
     "ea": "0x7A3ADD",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -709,31 +703,31 @@
   },
   {
     "ea": "0x7A3AE6",
-    "line": "call    sub_7A3580",
+    "line": "call    OB_stVector4_CopyCtor_010201A0; BuildLeafLods copies a four-byte pointer vector with the folded shallow vector copy constructor. This does not duplicate or rewrite leaf texture objects.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A3AEB",
-    "line": "lea     eax, [esp+68h+var_3C]",
+    "line": "lea     eax, [esp+68h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A3AEF",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3AF0",
-    "line": "lea     ecx, [esp+6Ch+var_2C]",
+    "line": "lea     ecx, [esp+6Ch+var_2C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A3AF4",
-    "line": "call    sub_7A9740",
+    "line": "call    OB_CLeafLodEngine_ComputeNextLevel_010201A0; OBLIVION AUTHORITY (2026-08-24): Per-lower-LOD call: input is prior explicit LOD, output becomes the current LOD. Thus BuildNewLeaves color averaging is applied at every generated lower level, not merely one special layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,13 +739,13 @@
   },
   {
     "ea": "0x7A3AFF",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A3B00",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
@@ -763,13 +757,13 @@
   },
   {
     "ea": "0x7A3B07",
-    "line": "call    sub_79B2F0",
+    "line": "call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A3B0C",
-    "line": "mov     eax, [esp+58h+var_38]",
+    "line": "mov     eax, [esp+58h+result.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,7 +793,7 @@
   },
   {
     "ea": "0x7A3B17",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x7A3B21",
-    "line": "mov     eax, [esp+58h+var_28]",
+    "line": "mov     eax, [esp+58h+var_2C.m_vPairs.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -829,19 +823,19 @@
   },
   {
     "ea": "0x7A3B27",
-    "line": "mov     [esp+58h+var_38], ecx",
+    "line": "mov     [esp+58h+result.begin], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3B2B",
-    "line": "mov     [esp+58h+var_34], ecx",
+    "line": "mov     [esp+58h+result.end], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A3B2F",
-    "line": "mov     [esp+58h+var_30], ecx",
+    "line": "mov     [esp+58h+result.capacityEnd], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x7A3B3E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -958,5 +952,71 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC970",
+    "line": "lea     ecx, [ebp-2Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC973",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC978",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC97B",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC980",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC984",
+    "line": "lea     eax, [edx-48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC987",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC98A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC98C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC991",
+    "line": "mov     eax, offset stru_AF5D00",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC996",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

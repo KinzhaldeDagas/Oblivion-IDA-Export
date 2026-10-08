@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x6FEE43",
-    "line": "lea     ecx, [ebx+58h]",
+    "line": "lea     ecx, [ebx+58h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6FEE46",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6FEE6B",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -148,12 +148,6 @@
     "line": "jmp     short loc_6FEE80",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6FEE7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6FEE80",

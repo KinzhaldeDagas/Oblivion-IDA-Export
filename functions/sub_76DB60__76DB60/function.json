@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_76DB60",
+  "chunks": [
+    [
+      "0x76DB60",
+      "0x76DBC5"
+    ]
+  ],
+  "chunks_sha256": "ece31b48388ec3082cf5f47093747643caa4cf9daef0d1aa5bc1c362a9564460",
+  "comment_regular": "Global NiDX9 device-resource registry reconstruction pass. Under its critical section, invokes virtual slot 0x30 on every registered resource with the reset IDirect3DDevice9.",
+  "comment_repeatable": "Global NiDX9 device-resource registry reconstruction pass. Under its critical section, invokes virtual slot 0x30 on every registered resource with the reset IDirect3DDevice9.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiDX9ResourceRegistry_RecreateAll",
   "end_ea": "0x76DBC5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76DB60",
+  "name": "NiDX9ResourceRegistry_RecreateAll",
   "segment": ".text",
   "sha256": "ece31b48388ec3082cf5f47093747643caa4cf9daef0d1aa5bc1c362a9564460",
   "size": 101,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76DB60",
-  "type": "void __cdecl(int)",
+  "total_chunk_size": 101,
+  "type": "void __cdecl(IDirect3DDevice9 *device)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 1
 }

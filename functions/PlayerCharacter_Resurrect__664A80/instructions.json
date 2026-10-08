@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x664AA7",
-    "line": "push    0Ah; a2",
+    "line": "push    0Ah; actorValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x664ABB",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x664AC0",
-    "line": "push    8; a2",
+    "line": "push    8; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664AC2",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x664AC7",
-    "line": "push    9; a2",
+    "line": "push    9; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664AC9",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x664AFF",
-    "line": "call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)",
+    "line": "call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x664B32",
-    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)",
+    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x664B54",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x664B5B",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x664B79",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x664B80",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x664B98",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x664BA8",
-    "line": "call    sub_57E270",
+    "line": "call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x664BDB",
-    "line": "call    sub_532BC0",
+    "line": "call    PlayerCameraCollisionPhantomPair_Init",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x664C1B",
-    "line": "call    sub_4E3490",
+    "line": "call    Actor_SetupAnimationData; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\\SpecialAnims.",
     "mnemonic": "call",
     "size": 5
   },
@@ -790,5 +790,137 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3DE0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3DE3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3DE4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3DE9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3DEA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3DEB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3DEE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3DEF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3DF4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3DF5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3DF6",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3DF9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3DFA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3DFF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3E00",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3E01",
+    "line": "mov     edx, [esp+a9]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3E05",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E08",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3E0B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3E0D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3E12",
+    "line": "mov     eax, offset stru_AEC900",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3E17",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

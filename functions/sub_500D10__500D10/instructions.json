@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x500D10",
-    "line": "call    GetGodMode",
+    "line": "call    GetGodMode; Console command handler: toggles g_godModeEnabled through SetGodMode and prints the resulting God Mode enabled/disabled state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x500D1A",
-    "line": "push    eax",
+    "line": "push    eax; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x500D1B",
-    "line": "call    sub_65D810",
+    "line": "call    SetGodMode; Sets and returns g_godModeEnabled (0x00B3BB06).",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x500D23",
-    "line": "call    GetGodMode",
+    "line": "call    GetGodMode; Returns g_godModeEnabled (0x00B3BB06).",
     "mnemonic": "call",
     "size": 5
   },

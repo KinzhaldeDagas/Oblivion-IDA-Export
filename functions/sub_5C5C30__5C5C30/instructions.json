@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x5C5C6F",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x5C5CA5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5C5CAB",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x5C5CCF",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5C5D06",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x5C5D0C",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x5C5D2F",
-    "line": "push    ebx; a3",
+    "line": "push    ebx; controlName",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C5D30",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x5C5D67",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x5C5D6D",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x5C5E87",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x5C5EBE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x5C5EC4",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1240,5 +1240,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C12F0",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C12F3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C12F8",
+    "line": "mov     ecx, [ebp-14h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C12FB",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1300",
+    "line": "mov     ecx, [ebp-18h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1303",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1308",
+    "line": "mov     ecx, [ebp+4]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C130B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1310",
+    "line": "mov     ecx, [ebp+4]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1313",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1318",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C131C",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C131F",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1322",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1324",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1329",
+    "line": "mov     eax, offset stru_AEA3C0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C132E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

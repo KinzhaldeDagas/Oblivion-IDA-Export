@@ -1,19 +1,32 @@
 {
-  "callees_count": 56,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 29,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x60D3C0",
+      "0x60D77F"
+    ]
+  ],
+  "chunks_sha256": "46e881e5f29f4f56e5e8bde78d5cb0360c69634e5a203dcc3e37779a51e4e198",
+  "comment_regular": "Verified 2026-10-04: BaseProcess load role from Oblivion process vtable slot +0x3F8, parent call chain and matching serialization/reset behavior. ECX receiver and RET12 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). Probable: currentFlags semantic name follows matching Fallout and forwarded extra load word; broader policy unverified.\nVerified package lifecycle: reads encoded package FormID; created package with mask20000+10000 is held as raw FormID for later init, otherwise may load package body. Noncreated references resolve to TESPackage. Package lookup failure sets procedure=-1; InitLoad/FinishInit later resolve or select package. Unknown internal helper463EC0 complete factory policy.\nVerified continuation: CreatePackage463EC0 factory now typed TESPackage*, requested FormID, opaque combatContext, TESPackageType; handles collision retirement and concrete subclass allocation. Vtable DC/E0/E4/E8 now properly typed; original casts into TESForm components were artifacts.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 19,
-  "display_name": "sub_60D3C0",
+  "display_name": "BaseProcess_LoadGame",
   "end_ea": "0x60D77F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60D3C0",
+  "name": "BaseProcess_LoadGame",
   "segment": ".text",
   "sha256": "46e881e5f29f4f56e5e8bde78d5cb0360c69634e5a203dcc3e37779a51e4e198",
   "size": 959,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60D3C0",
-  "type": "char __userpurge@<al>(TESForm **ecx0@<ecx>, int@<ebx>, int *, int, int)",
+  "total_chunk_size": 959,
+  "type": "void __thiscall(BaseProcess *self, ProcessSaveChangeMask changeMask, unsigned int currentFlags, MobileObject *owner)",
   "xrefs_from_count": 365,
   "xrefs_to_count": 2
 }

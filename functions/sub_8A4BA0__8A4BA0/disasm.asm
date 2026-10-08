@@ -34,14 +34,13 @@
 0x8A4C06: add     edi, 10h
 0x8A4C09: mov     [esp+3Ch+var_24], edi
 0x8A4C0D: jmp     short loc_8A4C14
-0x8A4C0F: align 10h
 0x8A4C10: mov     edi, [esp+3Ch+var_24]
 0x8A4C14: cmp     edi, ebp
 0x8A4C16: jz      short loc_8A4C31
-0x8A4C18: lea     edx, [esp+3Ch+var_14]
-0x8A4C1C: push    edx
-0x8A4C1D: mov     ecx, edi
-0x8A4C1F: call    sub_677C70
+0x8A4C18: lea     edx, [esp+3Ch+outData]
+0x8A4C1C: push    edx; outData
+0x8A4C1D: mov     ecx, edi; this
+0x8A4C1F: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A4C24: or      [esp+3Ch+var_28], 1
 0x8A4C29: cmp     [eax], ebp
 0x8A4C2B: jz      short loc_8A4C31
@@ -50,7 +49,7 @@
 0x8A4C31: xor     bl, bl
 0x8A4C33: test    byte ptr [esp+3Ch+var_28], 1
 0x8A4C38: jz      short loc_8A4C63
-0x8A4C3A: mov     esi, [esp+3Ch+var_14]
+0x8A4C3A: mov     esi, [esp+3Ch+outData]
 0x8A4C3E: and     [esp+3Ch+var_28], 0FFFFFFFEh
 0x8A4C43: cmp     esi, ebp
 0x8A4C45: jz      short loc_8A4C63
@@ -69,9 +68,9 @@
 0x8A4C63: test    bl, bl
 0x8A4C65: jz      loc_8A4D7D
 0x8A4C6B: lea     ecx, [esp+3Ch+var_10]
-0x8A4C6F: push    ecx
-0x8A4C70: mov     ecx, edi
-0x8A4C72: call    sub_677C70
+0x8A4C6F: push    ecx; outData
+0x8A4C70: mov     ecx, edi; this
+0x8A4C72: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A4C77: mov     esi, [eax]
 0x8A4C79: cmp     esi, ebp
 0x8A4C7B: mov     [esp+3Ch+var_4], ebp
@@ -84,7 +83,7 @@
 0x8A4C8C: call    eax
 0x8A4C8E: cmp     eax, ebp
 0x8A4C90: jz      short loc_8A4CA0
-0x8A4C92: cmp     eax, offset stru_BA7D50
+0x8A4C92: cmp     eax, 0BA7D50h
 0x8A4C97: jz      short loc_8A4D06
 0x8A4C99: mov     eax, [eax+4]
 0x8A4C9C: cmp     eax, ebp
@@ -176,3 +175,12 @@
 0x8A4D94: pop     ebx
 0x8A4D95: add     esp, 28h
 0x8A4D98: retn
+0x9D6B60: lea     ecx, [ebp-10h]; slot
+0x9D6B63: jmp     NiPointerSlot_Release
+0x9D6B68: mov     edx, [esp+arg_4]
+0x9D6B6C: lea     eax, [edx-2Ch]
+0x9D6B6F: mov     ecx, [edx-30h]
+0x9D6B72: xor     ecx, eax
+0x9D6B74: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6B79: mov     eax, offset stru_AFE8BC
+0x9D6B7E: jmp     ___CxxFrameHandler3

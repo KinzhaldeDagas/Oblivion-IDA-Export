@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59DCA0",
-    "line": "cmp     [esp+arg_0], 64h ; 'd'",
+    "line": "cmp     [esp+tileID], 64h ; 'd'; Verified +0x38 bound tile is topic highlight from paired enter/leave callbacks; this refines earlier generic tile_id5 interpretation.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x59DCAD",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59DCB0",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59DCB5",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x59DCBD",
-    "line": "mov     ecx, [esp+arg_4]; this",
+    "line": "mov     ecx, [esp+tile]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,19 +85,19 @@
   },
   {
     "ea": "0x59DCC8",
-    "line": "fstp    [esp+4+a2]; a3",
+    "line": "fstp    [esp+4+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59DCCB",
-    "line": "push    0FDDh; a2",
+    "line": "push    0FDDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59DCD0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-BSStringT *sub_A10BA0()
+NiRTTI *sub_A10BA0()
 {
-  return sub_70E220(&NiD3DShaderInterfaceString, "NiD3DShaderInterface", (int)&stru_B40124);
+  return NiRTTI_Constructor(&MEMORY[0xB42858], "NiD3DShaderInterface", &stru_B40124); /*0xa10bb4*/
 }

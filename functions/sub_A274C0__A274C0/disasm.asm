@@ -1,5 +1,5 @@
 0xA274C0: push    esi
-0xA274C1: mov     esi, CanopySadowMap
+0xA274C1: mov     esi, g_CanopyShadowMap
 0xA274C7: test    esi, esi
 0xA274C9: jz      short loc_A274E7
 0xA274CB: lea     eax, [esi+4]

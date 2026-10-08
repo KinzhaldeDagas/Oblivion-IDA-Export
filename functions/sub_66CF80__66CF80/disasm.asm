@@ -27,7 +27,7 @@
 0x66CFEB: mov     [esi+116h], bl
 0x66CFF1: jz      short loc_66D026
 0x66CFF3: push    eax
-0x66CFF4: call    FormHeapFree
+0x66CFF4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66CFF9: push    54h ; 'T'; Size
 0x66CFFB: mov     [esi+5B0h], ebx
 0x66D001: call    FormHeapAlloc
@@ -44,10 +44,10 @@
 0x66D026: mov     ecx, [esi+5ACh]
 0x66D02C: cmp     ecx, ebx
 0x66D02E: jz      short loc_66D04A
-0x66D030: call    BSSimpleList_Clear
+0x66D030: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x66D035: mov     edx, [esi+5ACh]
 0x66D03B: push    edx
-0x66D03C: call    FormHeapFree
+0x66D03C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66D041: add     esp, 4
 0x66D044: mov     [esi+5ACh], ebx
 0x66D04A: mov     eax, ds:0B3BB48h
@@ -56,7 +56,7 @@
 0x66D052: jz      short loc_66D06B
 0x66D054: mov     edi, [eax+4]
 0x66D057: push    eax
-0x66D058: call    FormHeapFree
+0x66D058: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66D05D: add     esp, 4
 0x66D060: cmp     edi, ebx
 0x66D062: mov     eax, edi
@@ -66,7 +66,7 @@
 0x66D071: mov     eax, [esi+1E4h]
 0x66D077: push    esi
 0x66D078: push    eax
-0x66D079: call    ActiveEffect_Base_PreLoadAEList
+0x66D079: call    ActiveEffect_Base_PreLoadAEList; Verified pre-load lifecycle hook: before list restoration, iterates current ActiveEffects and calls vtable slot +0x20 with the supplied load context. This is the preLoad slot in ActiveEffectVtbl; LockEffect and OpenEffect use the shared no-op.
 0x66D07E: add     esp, 8
 0x66D081: test    ebp, 2000000h
 0x66D087: jz      short loc_66D099
@@ -74,7 +74,7 @@
 0x66D08F: cmp     ecx, ebx
 0x66D091: jz      short loc_66D099
 0x66D093: push    esi
-0x66D094: call    sub_473AA0
+0x66D094: call    ActorAnimData_ResetAllSequences; Whole ActorAnimData sequence reset. Clears all active slots, deactivates current/controller sequences, restores current and queued key sentinels, resets root motion and idle ownership, clears controlled-block links, then runs the controller-sequence reset/rebind phase. Not safe as scoped replacement cleanup.
 0x66D099: call    dword ptr ds:0A280D0h
 0x66D09F: mov     ecx, esi
 0x66D0A1: mov     [esi+710h], eax
@@ -84,7 +84,7 @@
 0x66D0B4: mov     eax, [esi+784h]
 0x66D0BA: mov     edi, [eax+4]
 0x66D0BD: push    eax
-0x66D0BE: call    FormHeapFree
+0x66D0BE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66D0C3: add     esp, 4
 0x66D0C6: cmp     edi, ebx
 0x66D0C8: mov     [esi+784h], edi
@@ -106,9 +106,9 @@
 0x66D107: cmp     eax, ebx
 0x66D109: pop     edi
 0x66D10A: jz      short loc_66D114
-0x66D10C: push    ebx
-0x66D10D: mov     ecx, eax
-0x66D10F: call    sub_51BED0
+0x66D10C: push    ebx; playable
+0x66D10D: mov     ecx, eax; this
+0x66D10F: call    TESClass_SetPlayable; Sets or clears the TESClass playable flag; ClassMenu custom-class commit forces the chosen custom class playable.
 0x66D114: pop     ebx
 0x66D115: pop     esi
 0x66D116: pop     ebp

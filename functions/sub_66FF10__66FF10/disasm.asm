@@ -1,4 +1,4 @@
-0x66FF10: sub     esp, 8
+0x66FF10: sub     esp, 8; Queued worldspace move processor. It consumes PlayerCharacter queued position/worldspace fields at +0x720/+0x72C for queued moves, separate from the synchronous world-map fast-travel relocation at 0x66FAFA.
 0x66FF13: push    ebx
 0x66FF14: push    ebp
 0x66FF15: push    esi
@@ -43,7 +43,7 @@
 0x66FF9C: mov     [eax+4], edx
 0x66FF9F: mov     [eax+8], ecx
 0x66FFA2: mov     ecx, esi
-0x66FFA4: call    sub_66F370
+0x66FFA4: call    PlayerCharacter_RelocateToFastTravelTarget; Direct relocation helper call from queued PlayerCharacter position/worldspace state at +0x720/+0x72C. Not the world-map fast-travel core call at 0x66FAFA.
 0x66FFA9: pop     edi
 0x66FFAA: pop     esi
 0x66FFAB: pop     ebp
@@ -69,7 +69,7 @@
 0x66FFE5: mov     [eax+4], edx
 0x66FFE8: mov     [eax+8], ecx
 0x66FFEB: mov     ecx, esi; int
-0x66FFED: call    sub_66EAF0
+0x66FFED: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x66FFF2: pop     edi
 0x66FFF3: pop     esi
 0x66FFF4: pop     ebp
@@ -91,7 +91,7 @@
 0x67001F: call    GameUI_QueueMessage
 0x670024: add     esp, 10h
 0x670027: mov     ecx, ebp; this
-0x670029: call    MobileObject_GetCharProxy
+0x670029: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x67002E: mov     ebx, eax
 0x670030: test    ebx, ebx
 0x670032: jz      short loc_67004A
@@ -116,7 +116,7 @@
 0x670075: jz      short loc_67007F
 0x670077: push    edi; a2
 0x670078: mov     ecx, ebx; this
-0x67007A: call    sub_452A10
+0x67007A: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x67007F: mov     ebx, [esi+72Ch]
 0x670085: test    ebx, ebx
 0x670087: jz      short loc_6700F6
@@ -157,7 +157,7 @@
 0x6700F2: mov     ecx, esi
 0x6700F4: call    eax
 0x6700F6: mov     ecx, esi; this
-0x6700F8: call    TESObjectREFR__GetNiNode
+0x6700F8: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x6700FD: mov     ecx, [edi]
 0x6700FF: mov     ebp, [esi+5D0h]
 0x670105: mov     ebx, eax
@@ -184,13 +184,13 @@
 0x67013E: push    ecx
 0x67013F: mov     ecx, ebx; this
 0x670141: fstp    [esp+20h+a2]; a2
-0x670144: call    NiAVObject_UpdateNiAVObject
+0x670144: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x670149: fldz
 0x67014B: push    0; a3
 0x67014D: push    ecx
 0x67014E: mov     ecx, ebp; this
 0x670150: fstp    [esp+20h+a2]; a2
-0x670153: call    NiAVObject_UpdateNiAVObject
+0x670153: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x670158: mov     esi, [esi+0D4h]
 0x67015E: test    esi, esi
 0x670160: jz      short loc_67019B
@@ -214,7 +214,7 @@
 0x670190: push    ecx
 0x670191: mov     ecx, esi; this
 0x670193: fstp    [esp+20h+a2]; a2
-0x670196: call    NiAVObject_UpdateNiAVObject
+0x670196: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x67019B: pop     edi
 0x67019C: pop     esi
 0x67019D: pop     ebp

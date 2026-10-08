@@ -1,4 +1,4 @@
-0x803E40: sub     esp, 18h
+0x803E40: sub     esp, 18h; MoonSugarEffect decode: CopyShader render computes ratios/texels, handles global override modes +0xA4, stores normal source at BSImageSpaceShader +0x7C, begins dest/default, draws screen quad.
 0x803E43: push    ebx
 0x803E44: push    ebp
 0x803E45: mov     ebp, [esp+20h+arg_4]
@@ -204,14 +204,14 @@
 0x8040C8: test    ecx, ecx
 0x8040CA: mov     [esp+28h+arg_C], bl
 0x8040CE: jz      short loc_8040DE
-0x8040D0: call    BSRenderedTexture__UseTextureToRender
+0x8040D0: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x8040D5: push    eax; a2
 0x8040D6: push    ebx; a1
-0x8040D7: call    NiRenderer_BeginScene
+0x8040D7: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x8040DC: jmp     short loc_8040E6
 0x8040DE: push    0; a2
 0x8040E0: push    ebx; a1
-0x8040E1: call    NiRenderer_BeginScene1
+0x8040E1: call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.
 0x8040E6: add     esp, 8
 0x8040E9: cmp     dword ptr ds:0B474ECh, 0
 0x8040F0: jz      short loc_8040FE
@@ -237,7 +237,7 @@
 0x804146: mov     ecx, [ebp+0]
 0x804149: push    ecx; a2
 0x80414A: mov     ecx, esi; this
-0x80414C: call    sub_802890
+0x80414C: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x804151: mov     ecx, ds:0B3F928h
 0x804157: cmp     [ecx+200h], ebx
 0x80415D: jz      short loc_804167
@@ -253,12 +253,12 @@
 0x80417E: mov     ecx, ds:0B3F928h
 0x804184: push    ecx
 0x804185: mov     ecx, [esp+2Ch+arg_0]; this
-0x804189: call    sub_709C60
+0x804189: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x80418E: cmp     [esp+28h+arg_C], 0
 0x804193: jz      short loc_80419F
 0x804195: cmp     dword ptr [edi], 0
 0x804198: jz      short loc_80419F
-0x80419A: call    NiRenderer_EndScene
+0x80419A: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x80419F: pop     edi
 0x8041A0: pop     esi
 0x8041A1: pop     ebp

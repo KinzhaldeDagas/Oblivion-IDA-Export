@@ -1,19 +1,36 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6C5860",
+  "chunks": [
+    [
+      "0x6C5860",
+      "0x6C5A01"
+    ],
+    [
+      "0x9C74A0",
+      "0x9C74CE"
+    ]
+  ],
+  "chunks_sha256": "5280175f6b4ae975eb136f52430fe68c16cad51677ff60048c16fd5f51c3c2d4",
+  "comment_regular": "Obtains an inactive __TempBlendSequence__ with enough controlled blocks or allocates one, rebuilds it from the destination/optional source pose, resets it, and registers it with the controller manager. This temporary sequence is manager-owned transition scaffolding.",
+  "comment_repeatable": "Obtains an inactive __TempBlendSequence__ with enough controlled blocks or allocates one, rebuilds it from the destination/optional source pose, resets it, and registers it with the controller manager. This temporary sequence is manager-owned transition scaffolding.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiControllerManager_GetOrCreateTempBlendSequence",
   "end_ea": "0x6C5A01",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C5860",
+  "name": "NiControllerManager_GetOrCreateTempBlendSequence",
   "segment": ".text",
   "sha256": "1abf0211bafe3ae5b80817ebd3acdccd3cae66e38211aa666dda89dd7c6e7950",
   "size": 417,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C5860",
+  "total_chunk_size": 463,
   "type": "volatile LONG *__thiscall(int **this, int, int)",
-  "xrefs_from_count": 169,
+  "xrefs_from_count": 185,
   "xrefs_to_count": 1
 }

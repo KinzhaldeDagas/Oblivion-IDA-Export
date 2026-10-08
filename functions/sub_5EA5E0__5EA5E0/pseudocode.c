@@ -1,15 +1,16 @@
-BOOL __thiscall sub_5EA5E0(_BYTE *this)
+// Oblivion actor prefilter used only by ShadowPass before mounted/sitting, refraction, invisibility, and map-budget checks. Requires the actor/process-derived state predicate to be clear and rejects ExtraGhost. Name intentionally describes observed shadow-pass use without importing later-version behavior.
+bool __thiscall Actor__PassesBaseShadowEligibility(Actor *this)
 {
-  int v2; // ebx
-  int v3; // edi
+  TESForm *v2; // ebx
+  TESForm *v3; // edi
 
-  v2 = 0;
-  v3 = (*(int (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x170))(this);
-  if ( v3 )
+  v2 = 0; /*0x5ea5ed*/
+  v3 = this->vtbl->super.super.GetBaseForm(this); /*0x5ea5f1*/
+  if ( v3 ) /*0x5ea5f5*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(_BYTE *))(*(_DWORD *)this + 0x190))(this) )
-      v2 = v3;
+    if ( this->vtbl->super.super.IsActor((TESObjectREFR *)this) ) /*0x5ea601*/
+      v2 = v3; /*0x5ea607*/
   }
-  return !(*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)(v2 + 0x24) + 0x24))(v2 + 0x24)
-      && !BaseExtraList_HasGhost(this + 0x44);
+  return !(*(unsigned __int8 (__thiscall **)(UInt32 *))(v2[1].member.refID + 0x24))(&v2[1].member.refID) /*0x5ea624*/
+      && !BaseExtraList_HasGhost(&this->members.super.super.baseExtraList);
 }

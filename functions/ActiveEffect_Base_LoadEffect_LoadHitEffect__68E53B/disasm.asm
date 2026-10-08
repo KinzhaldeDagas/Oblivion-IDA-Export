@@ -1,4 +1,4 @@
-0x68E53B: mov     eax, [esp+arg_38]
+0x68E53B: mov     eax, [esp+arg_38]; Verified ActiveEffect LoadEffect reconstructs type 5 MagicModelHitEffect or type 6 MagicShaderHitEffect, invokes the per-object load callback, and attaches each pointer in an allocated 8-byte HitEffectNode at ActiveEffect+0x34.
 0x68E53F: mov     edx, [edi]
 0x68E541: mov     edx, [edx+7Ch]
 0x68E544: push    eax

@@ -2,11 +2,11 @@ int __cdecl sub_90C440(int a1)
 {
   int result; // eax
 
-  result = a1;
-  if ( a1 )
+  result = a1; /*0x90c440*/
+  if ( a1 ) /*0x90c446*/
   {
-    *(_WORD *)(a1 + 6) = 1;
-    *(_DWORD *)a1 = &off_A9C324;
+    *(_WORD *)(a1 + 6) = 1; /*0x90c448*/
+    *(_DWORD *)a1 = &off_A9C324; /*0x90c44e*/
   }
-  return result;
+  return result; /*0x90c454*/
 }

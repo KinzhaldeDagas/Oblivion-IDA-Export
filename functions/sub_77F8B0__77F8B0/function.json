@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x77F8B0",
+      "0x77F966"
+    ]
+  ],
+  "chunks_sha256": "bb7fa62d983208051e4d4951d2c8739ae5a7b07c3b7fd1b3150f6c7efee1a943",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nGPU-world state audit 2026-09-30: disabled blend writes only ALPHABLENDENABLE=0; SRCBLEND/DESTBLEND are retained. Disabled alpha test writes only ALPHATESTENABLE=0; ALPHAFUNC/ALPHAREF are retained. Enabled paths resolve selectors through this render-state instance tables (+20 blend, +4C compare). A resident pass must preserve partial-write semantics and any later shader/pass overrides; property flags alone do not prove final draw state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77F8B0",
+  "display_name": "OB_NiD3DRenderState_ApplyAlphaProperty_010201A0",
   "end_ea": "0x77F966",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77F8B0",
+  "name": "OB_NiD3DRenderState_ApplyAlphaProperty_010201A0",
   "segment": ".text",
   "sha256": "bb7fa62d983208051e4d4951d2c8739ae5a7b07c3b7fd1b3150f6c7efee1a943",
   "size": 182,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77F8B0",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 182,
+  "type": "int __thiscall(void *renderState, const void *alphaProperty)",
   "xrefs_from_count": 78,
   "xrefs_to_count": 2
 }

@@ -1,1 +1,1 @@
-MMRESULT
+typedef UINT MMRESULT;

@@ -23,3 +23,14 @@
 0x521A06: pop     esi
 0x521A07: add     esp, 10h
 0x521A0A: retn
+0x521580: mov     dword ptr [ecx], offset ??_7?$BSTCaseInsensitiveStringMap@PAUIDLE_ANIM_ROOT@@@@6B@; const BSTCaseInsensitiveStringMap<IDLE_ANIM_ROOT *>::`vftable'
+0x521586: jmp     ??1?$NiTStringTemplateMap@V?$NiTMap@PBDPAUIDLE_ANIM_ROOT@@@@PAUIDLE_ANIM_ROOT@@@@UAE@XZ; NiTStringTemplateMap<NiTMap<char const *,IDLE_ANIM_ROOT *>,IDLE_ANIM_ROOT *>::~NiTStringTemplateMap<NiTMap<char const *,IDLE_ANIM_ROOT *>,IDLE_ANIM_ROOT *>(void)
+0x9B7ED0: mov     ecx, [ebp-10h]
+0x9B7ED3: jmp     loc_521580
+0x9B7ED8: mov     edx, [esp+arg_4]
+0x9B7EDC: lea     eax, [edx-8]
+0x9B7EDF: mov     ecx, [edx-0Ch]
+0x9B7EE2: xor     ecx, eax
+0x9B7EE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7EE9: mov     eax, offset stru_AE26F0
+0x9B7EEE: jmp     ___CxxFrameHandler3

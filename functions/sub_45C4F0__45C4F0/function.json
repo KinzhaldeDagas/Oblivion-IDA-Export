@@ -1,19 +1,32 @@
 {
-  "callees_count": 45,
-  "callers_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x45C4F0",
+      "0x45C79D"
+    ]
+  ],
+  "chunks_sha256": "ad2d7a352dfd572304aca0529482c4a349480fab5c3fcf1bdc6343c998b6db74",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": " Verified: moved-reference rebuild. Resolves primary location ID at +0 (fallback ID +0x10 when zero), casts it to TESObjectCELL or TESWorldSpace, scans its override files for the requested referenceID, loads matching reference records, runs PostFixup, and restores actor/REFR starting location data. Worldspace path quantizes X/Y by >>12 to find the owning cell. Probable role homolog: Fallout ReferenceInitialData::GetOriginalLocationCellAndWorld / LoadChangedReference; Oblivion implementation searches local override files directly. Verified: a2 uses 44-byte moved-reference payload; +0 and +0x10 are remapped FormIDs before call. X/Y at +4/+8 are consumed on the worldspace path. Remaining fields Unknown. Verified cross-reference divergence: Fallout MovedReferenceInitialData is 34 bytes (27-byte location data + compact original-location index and int16 cell XY); Oblivion restore reads 44 bytes and supports primary/fallback full FormIDs at +0/+0x10 plus world XY at +4/+8. Confidence label Probable applies only to s",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 8,
-  "display_name": "sub_45C4F0",
+  "display_name": "TESSaveLoadGame_RebuildReferenceFromLocationOverrides",
   "end_ea": "0x45C79D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45C4F0",
+  "name": "TESSaveLoadGame_RebuildReferenceFromLocationOverrides",
   "segment": ".text",
   "sha256": "ad2d7a352dfd572304aca0529482c4a349480fab5c3fcf1bdc6343c998b6db74",
   "size": 685,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45C4F0",
-  "type": "TESObjectREFR *__stdcall(int ArgList, int)",
+  "total_chunk_size": 685,
+  "type": "TESObjectREFR *__stdcall(unsigned int referenceID, OblivionMovedReferenceInitialData *data)",
   "xrefs_from_count": 296,
   "xrefs_to_count": 4
 }

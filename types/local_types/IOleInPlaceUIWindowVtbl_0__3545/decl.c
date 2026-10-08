@@ -1,1 +1,1 @@
-IOleInPlaceUIWindowVtbl_0
+typedef IOleInPlaceUIWindowVtbl IOleInPlaceUIWindowVtbl_0;

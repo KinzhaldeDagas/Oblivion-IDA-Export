@@ -1,19 +1,36 @@
 {
-  "callees_count": 65,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "TESRace_GetFaceGenHeadParameters",
+  "chunks": [
+    [
+      "0x52CD50",
+      "0x52D0D6"
+    ],
+    [
+      "0x9D6B00",
+      "0x9D6B23"
+    ]
+  ],
+  "chunks_sha256": "61ff242da9fb94ec6a27c6f3b8a10c4c3714d1d9712fb1b8af5b9bd847ef30ed",
+  "comment_regular": "Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.",
+  "comment_repeatable": "Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESRace_BuildFaceGenRenderState",
   "end_ea": "0x52D0D6",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "TESRace_GetFaceGenHeadParameters",
+  "name": "TESRace_BuildFaceGenRenderState",
   "segment": ".text",
   "sha256": "30be114b148abf68e0e246768ded09d95ff4448c6822b780f08648cb8d2bd8a3",
   "size": 902,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52CD50",
-  "type": "_DWORD *__thiscall(int *this, int, int)",
-  "xrefs_from_count": 330,
+  "total_chunk_size": 937,
+  "type": "FaceGenRenderState *__thiscall(TESRace *this, TESNPC *npc, FaceGenRenderState *outState)",
+  "xrefs_from_count": 341,
   "xrefs_to_count": 7
 }

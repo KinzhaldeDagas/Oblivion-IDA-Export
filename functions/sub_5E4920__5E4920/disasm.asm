@@ -18,8 +18,8 @@
 0x5E4951: xor     esi, esi
 0x5E4953: test    esi, esi
 0x5E4955: jz      loc_5E49F6
-0x5E495B: mov     ecx, ebp
-0x5E495D: call    sub_4849C0
+0x5E495B: mov     ecx, ebp; this
+0x5E495D: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5E4962: fstp    [esp+10h+arg_0]
 0x5E4966: mov     eax, [esi+24h]
 0x5E4969: mov     edx, [eax]
@@ -57,18 +57,18 @@
 0x5E49B6: jz      short loc_5E49E2
 0x5E49B8: mov     eax, [ebp+0]
 0x5E49BB: mov     eax, [eax]
-0x5E49BD: push    eax; int
+0x5E49BD: push    eax; targetStack
 0x5E49BE: lea     ecx, [ebx+44h]; this
 0x5E49C1: call    ExtraDataList_GetContainerChanges
 0x5E49C6: fld     [esp+14h+arg_4]
 0x5E49CA: fsub    dword ptr [esp+14h]
-0x5E49CE: push    eax; int
+0x5E49CE: push    eax; containerChanges
 0x5E49CF: push    ecx
-0x5E49D0: mov     ecx, ebp
+0x5E49D0: mov     ecx, ebp; this
 0x5E49D2: fstp    [esp+1Ch+arg_4]
 0x5E49D6: fld     [esp+1Ch+arg_4]
-0x5E49DA: fstp    [esp+1Ch+var_1C]; float
-0x5E49DD: call    sub_488AA0
+0x5E49DA: fstp    [esp+1Ch+newCharge]; newCharge
+0x5E49DD: call    EquippedEntryData_SetCharge; Set per-instance charge for a specific EntryData stack. Creates ExtraDataList/ExtraCharge as needed, or removes redundant charge data when newCharge exceeds the base maximum. containerChanges identifies the owning inventory; targetStack selects the equipped instance.
 0x5E49E2: mov     edx, [esi]
 0x5E49E4: mov     eax, [edx+34h]
 0x5E49E7: push    edi

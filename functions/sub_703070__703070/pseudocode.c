@@ -1,5 +1,5 @@
 // attributes: thunk
-int __stdcall sub_703070(int a1)
+void __stdcall sub_703070(_DWORD *a1)
 {
-  return sub_71FDC0(a1);
+  sub_71FDC0(a1); /*0x703070*/
 }

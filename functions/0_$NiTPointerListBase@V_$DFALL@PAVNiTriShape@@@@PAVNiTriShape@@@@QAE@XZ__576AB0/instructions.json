@@ -1447,25 +1447,25 @@
   },
   {
     "ea": "0x576DD9",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x576DDA",
-    "line": "push    edx",
+    "line": "push    edx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x576DDB",
-    "line": "lea     ecx, [eax+0Ch]",
+    "line": "lea     ecx, [eax+0Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x576DDE",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x576DFF",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x576E15",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1636,12 +1636,6 @@
     "line": "jmp     short loc_576E40",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x576E3D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x576E40",
@@ -1753,7 +1747,7 @@
   },
   {
     "ea": "0x576E7A",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
@@ -1765,19 +1759,19 @@
   },
   {
     "ea": "0x576E7E",
-    "line": "push    ecx",
+    "line": "push    ecx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x576E7F",
-    "line": "lea     ecx, [eax+0Ch]",
+    "line": "lea     ecx, [eax+0Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x576E82",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1819,7 @@
   },
   {
     "ea": "0x576EA3",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,7 +1867,7 @@
   },
   {
     "ea": "0x576EB9",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2062,5 +2056,95 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x573850",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$DFALL@PAVNiTriShape@@@@PAVNiTriShape@@@@6B@; const NiTListBase<DFALL<NiTriShape *>,NiTriShape *>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x573856",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE420",
+    "line": "lea     ecx, [ebp-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE423",
+    "line": "jmp     j_??1?$NiTList@PAVNiTriShape@@@@UAE@XZ; NiTList<NiTriShape *>::~NiTList<NiTriShape *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE428",
+    "line": "mov     ecx, [ebp-70h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE42B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE430",
+    "line": "lea     ecx, [ebp-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE433",
+    "line": "jmp     loc_573850",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE438",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BE43C",
+    "line": "lea     eax, [edx-7Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE43F",
+    "line": "mov     ecx, [edx-80h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE442",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BE444",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE449",
+    "line": "mov     eax, offset stru_AE7B8C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE44E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

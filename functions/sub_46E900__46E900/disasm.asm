@@ -38,7 +38,7 @@
 0x46E953: mov     ecx, edi
 0x46E955: call    BSSimpleList_Remove
 0x46E95A: push    esi
-0x46E95B: call    FormHeapFree
+0x46E95B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46E960: add     esp, 4
 0x46E963: pop     edi
 0x46E964: pop     esi

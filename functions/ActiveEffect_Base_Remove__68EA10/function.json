@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 28,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 30,
+  "chunks": [
+    [
+      "0x68EA10",
+      "0x68EA29"
+    ]
+  ],
+  "chunks_sha256": "efee403025de44d6923c23dbde9ab2eb59aa46dbe3e9dbe068e0fda31808f3e7",
+  "comment_regular": "Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
+  "comment_repeatable": "Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_Remove",
   "end_ea": "0x68EA29",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_Remove",
   "segment": ".text",
   "sha256": "efee403025de44d6923c23dbde9ab2eb59aa46dbe3e9dbe068e0fda31808f3e7",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68EA10",
+  "total_chunk_size": 25,
   "type": "double __userpurge@<st0>(ActiveEffect *this@<ecx>, char bp0@<bpl>, double result@<st0>, char)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 30

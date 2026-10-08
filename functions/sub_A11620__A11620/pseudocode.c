@@ -1,4 +1,4 @@
-BSStringT *sub_A11620()
+NiRTTI *sub_A11620()
 {
-  return sub_70E220((BSStringT *)&unk_B46018, "ParticleShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor((NiRTTI *)&unk_B46018, "ParticleShader", &MEMORY[0xB4257C]); /*0xa11634*/
 }

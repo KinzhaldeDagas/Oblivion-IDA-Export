@@ -23,7 +23,7 @@
 0x650A35: mov     [esi+148h], ebx
 0x650A3B: jz      short loc_650A46
 0x650A3D: push    eax
-0x650A3E: call    FormHeapFree
+0x650A3E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650A43: add     esp, 4
 0x650A46: mov     [esi+44h], ebx
 0x650A49: mov     [esi+169h], bl
@@ -36,7 +36,7 @@
 0x650A5D: cmp     ebp, ebx
 0x650A5F: jz      short loc_650A6A
 0x650A61: push    ebp
-0x650A62: call    FormHeapFree
+0x650A62: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650A67: add     esp, 4
 0x650A6A: push    ebp
 0x650A6B: mov     ecx, edi
@@ -54,7 +54,7 @@
 0x650A90: mov     eax, [esi+0B4h]
 0x650A96: mov     edi, [eax+4]
 0x650A99: push    eax
-0x650A9A: call    FormHeapFree
+0x650A9A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650A9F: add     esp, 4
 0x650AA2: cmp     edi, ebx
 0x650AA4: mov     [esi+0B4h], edi
@@ -65,7 +65,7 @@
 0x650AB7: mov     eax, [esi+50h]
 0x650ABA: mov     edi, [eax+4]
 0x650ABD: push    eax
-0x650ABE: call    FormHeapFree
+0x650ABE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650AC3: add     esp, 4
 0x650AC6: cmp     edi, ebx
 0x650AC8: mov     [esi+50h], edi

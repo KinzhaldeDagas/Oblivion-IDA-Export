@@ -1,4 +1,4 @@
-0x7948C0: sub     esp, 24h
+0x7948C0: sub     esp, 24h; Oblivion CIndexedGeometry::Transform. Applies the 4x4 stTransform to current and CPU-wind source coordinates, and rotates the normal/tangent/binormal streams with the transform's rotational portion.
 0x7948C3: push    edi
 0x7948C4: mov     edi, ecx
 0x7948C6: mov     eax, [edi+6Ch]
@@ -19,11 +19,10 @@
 0x7948F0: push    ebx
 0x7948F1: push    ebp
 0x7948F2: push    esi
-0x7948F3: mov     esi, [esp+34h+arg_0]
+0x7948F3: mov     esi, [esp+34h+transform4x4]
 0x7948F7: xor     ebx, ebx
 0x7948F9: mov     ebp, eax
 0x7948FB: jmp     short loc_794900
-0x7948FD: align 10h
 0x794900: mov     eax, [edi+6Ch]
 0x794903: test    eax, eax
 0x794905: jz      short loc_794911

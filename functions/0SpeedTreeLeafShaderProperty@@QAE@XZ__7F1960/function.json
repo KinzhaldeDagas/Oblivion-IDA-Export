@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x7F1960",
+      "0x7F1A32"
+    ],
+    [
+      "0x9CFE00",
+      "0x9CFE31"
+    ]
+  ],
+  "chunks_sha256": "2904272838b466e846ee21ad6c12951a640b9b19b0bcf3647e0ef2dd9b381387",
+  "comment_regular": "\n\n[2026-10-02 Fallout comparative pass]\nVerified 0xB0-byte leaf property layout: base constructor receives STSPData; retains STLSPData at +0xA8 and stores unsigned leaf LOD at +0xAC. Fallout constructor 0x828CDD50 corroborates parameter roles; platform-specific property offsets and calling convention remain Oblivion-derived.\n\nSpeedTreeLeafShaderProperty ctor: LightingProperty base with STSPData, then stores STLSPData ref at +0xA8 and leaf LOD index word at +0xAC.",
+  "comment_repeatable": "SpeedTreeLeafShaderProperty ctor: LightingProperty base with STSPData, then stores STLSPData ref at +0xA8 and leaf LOD index word at +0xAC.\n\n[2026-10-03 constructor audit] Direct body retains STLSP at +A8 only after calling the base SpeedTreeShaderLightingProperty constructor. Full construction-failure coverage requires that base chain as well as the caller wrapper; successful destructor fixtures alone do not prove constructor rollback.\n[constructor audit completed] Base chain7F25A0->7EE440->7E27F0->6FFD30->7005D0 contains no suballocation; empty-list cleanup cannot iterate. STSP retained in base, STLSP at+ A8 retained here, then field/vtable writes. This rules out ordinary allocation failure after input acquisition on the native path; it does not claim recovery from arbitrary faults or third-party hook exceptions.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "SpeedTreeLeafShaderProperty::SpeedTreeLeafShaderProperty(void)",
   "end_ea": "0x7F1A32",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0SpeedTreeLeafShaderProperty@@QAE@XZ",
   "segment": ".text",
   "sha256": "3a26f3fe48c75ae23848f6b6f4343bc724a5699b46cf4b6b5d7fe4883300052f",
   "size": 210,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1960",
-  "type": "SpeedTreeLeafShaderProperty *__thiscall(SpeedTreeLeafShaderProperty *this, __int16, int, int)",
-  "xrefs_from_count": 70,
+  "total_chunk_size": 259,
+  "type": "OB_SpeedTreeLeafShaderProperty_010201A0 *__thiscall(OB_SpeedTreeLeafShaderProperty_010201A0 *this, unsigned __int16 leafLodIndex, OB_STSPData_010201A0 *stspData, OB_STLSPData_010201A0 *stlspData)",
+  "xrefs_from_count": 84,
   "xrefs_to_count": 3
 }

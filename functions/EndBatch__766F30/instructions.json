@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x766F30",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; DX10 bridge note: EndBatch reaches D3D9 DrawIndexedPrimitive/DrawPrimitive only after shader pass setup, stream/index binding via shader vtable +0x3C, and NiDX9ShaderConstantManager flush. The D3D9 draw hook is therefore the authoritative boundary for loading captured DX10 state; companion SM4 shaders are preferred, with generated fallback DX10 shaders only as a diagnostic path when companions are missing.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x767067",
-    "line": "mov     ecx, [esi+624h]; void *",
+    "line": "mov     ecx, [esi+624h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x767092",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x76711A",
-    "line": "cmp     [edi+30h], eax",
+    "line": "cmp     [edi+30h], eax; Comparative family verified with Fallout NiXenonRenderer::Do_EndBatch 0x827A7C88: both use shader pass loop -> buffer preparation -> IB/null branch -> per-array indexed loop or one non-indexed draw -> finish/next geometry/pass -> clear dirty low nibble -> shader release and batch-list cleanup. Fallout Xenon descriptor IB/base/type/primitiveCount/arrayCount/lengths are +0x34/+0x38/+0x3C/+0x40/+0x48/+0x4C, versus Oblivion +0x30/+0x34/+0x38/+0x3C/+0x44/+0x48. Xenon converts primitive count through D3DPRIMITIVEVERTEXCOUNT before DrawVertices; Oblivion passes primitive count to D3D9. Do not transplant Xenon offsets, API counts, or decompiler mis-typed virtual member names.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x7671A9",
-    "line": "call    edx",
+    "line": "call    edx; Verified Oblivion batch non-indexed draw: descriptor IndexBuffer+0x30 is null; DrawPrimitive(Type=+0x38, unsigned StartVertex bits=+0x34, PrimitiveCount=+0x3C). This is a distinct geometry submission path, not an indexed-template requirement. DX11 integration (2026-10-01): first-use observation can own vertex publications and generate sequential R32 indices for triangle list/strip indirect draws; preserve start/count and vertex order. This backend representation does not prove native traversal suppression is enabled.",
     "mnemonic": "call",
     "size": 2
   },

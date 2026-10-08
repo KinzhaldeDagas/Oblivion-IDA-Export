@@ -16,12 +16,12 @@
 0x69B198: push    0
 0x69B19A: mov     ecx, ebp
 0x69B19C: mov     dword ptr [esp+8+arg_3C], eax
-0x69B1A0: call    EffectItemList_GetStrongestItem
+0x69B1A0: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x69B1A5: push    0
 0x69B1A7: push    1
 0x69B1A9: mov     ecx, ebp
 0x69B1AB: mov     [esp+8+arg_34], eax
-0x69B1AF: call    EffectItemList_GetStrongestItem
+0x69B1AF: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x69B1B4: mov     edx, [esi]
 0x69B1B6: xor     ebp, ebp
 0x69B1B8: push    ebp; int
@@ -39,4 +39,4 @@
 0x69B1DC: mov     [esp+arg_28], eax
 0x69B1E0: mov     [esp+arg_44], ebp
 0x69B1E4: mov     [esp+arg_48], ebp
-0x69B1E8: call    BSSimpleList_Clear
+0x69B1E8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.

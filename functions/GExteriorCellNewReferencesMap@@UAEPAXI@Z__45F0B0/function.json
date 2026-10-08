@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x45F0B0",
+      "0x45F0CE"
+    ]
+  ],
+  "chunks_sha256": "250482fc7eb7326551764a940defa568fd07aa8c051f47d8de12a6e1c0ef0893",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: calls 45AAD0; frees self only when deleteFlags bit 0 is set.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "ExteriorCellNewReferencesMap::`scalar deleting destructor'(uint)",
+  "display_name": "ExteriorCellNewReferencesMap_scalar_dtor",
   "end_ea": "0x45F0CE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??_GExteriorCellNewReferencesMap@@UAEPAXI@Z",
+  "name": "ExteriorCellNewReferencesMap_scalar_dtor",
   "segment": ".text",
   "sha256": "250482fc7eb7326551764a940defa568fd07aa8c051f47d8de12a6e1c0ef0893",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45F0B0",
-  "type": "NiTMap_Entry_TESCELL *__thiscall(NiTMap_Entry_TESCELL *this, char)",
+  "total_chunk_size": 30,
+  "type": "ExteriorCellNewReferencesMap *__thiscall(ExteriorCellNewReferencesMap *self, unsigned int deleteFlags)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 1
 }

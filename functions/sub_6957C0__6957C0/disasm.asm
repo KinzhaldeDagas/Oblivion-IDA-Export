@@ -36,7 +36,7 @@
 0x695828: fld     dword ptr [esi+60h]
 0x69582B: mov     ecx, [ebx+70h]
 0x69582E: fstp    [esp+3Ch+var_24]
-0x695832: call    EffectItem_GetArea
+0x695832: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x695837: mov     [esp+3Ch+var_28], eax
 0x69583B: fild    [esp+3Ch+var_28]
 0x69583F: push    0; int
@@ -79,7 +79,7 @@
 0x6958C7: push    edi; a2
 0x6958C8: mov     ecx, esi; this
 0x6958CA: mov     [esp+40h+var_4], ebp
-0x6958CE: call    sub_405680
+0x6958CE: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x6958D3: push    1Ch; Size
 0x6958D5: call    FormHeapAlloc
 0x6958DA: mov     edi, eax
@@ -99,7 +99,7 @@
 0x69590D: push    eax; a2
 0x69590E: mov     ecx, esi; this
 0x695910: mov     [esp+40h+var_4], ebp
-0x695914: call    sub_405680
+0x695914: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x695919: push    1Ch; Size
 0x69591B: call    FormHeapAlloc
 0x695920: mov     edi, eax
@@ -120,7 +120,7 @@
 0x695957: push    eax; a2
 0x695958: mov     ecx, esi; this
 0x69595A: mov     [esp+40h+var_4], ebp
-0x69595E: call    sub_405680
+0x69595E: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x695963: fldz
 0x695965: fst     [esp+3Ch+var_18]
 0x695969: lea     eax, [esp+3Ch+var_1C]
@@ -128,7 +128,7 @@
 0x695971: push    eax
 0x695972: mov     ecx, ebx
 0x695974: fstp    [esp+40h+var_10]
-0x695978: call    sub_65ABE0
+0x695978: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x69597D: mov     edx, [eax]
 0x69597F: lea     ecx, [esp+3Ch+var_18]
 0x695983: push    ecx
@@ -172,7 +172,7 @@
 0x695A0A: mov     ecx, esi; this
 0x695A0C: mov     [esp+40h+var_4], ebp
 0x695A10: mov     [eax+48h], edx
-0x695A13: call    sub_405680
+0x695A13: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x695A18: mov     edi, [esp+3Ch+var_20]
 0x695A1C: mov     eax, [edi]
 0x695A1E: mov     edx, [eax+84h]
@@ -181,7 +181,7 @@
 0x695A27: mov     ecx, edi
 0x695A29: call    edx
 0x695A2B: mov     ecx, edi; this
-0x695A2D: call    NiAVObject_InitializePropertyState
+0x695A2D: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x695A32: mov     ecx, dword ptr [esp+3Ch+var_C]
 0x695A36: mov     large fs:0, ecx
 0x695A3D: pop     ecx
@@ -191,3 +191,30 @@
 0x695A41: pop     ebx
 0x695A42: add     esp, 28h
 0x695A45: retn
+0x9C58A0: mov     eax, [ebp-24h]
+0x9C58A3: push    eax
+0x9C58A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C58A9: pop     ecx
+0x9C58AA: retn
+0x9C58AB: mov     eax, [ebp-24h]
+0x9C58AE: push    eax
+0x9C58AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C58B4: pop     ecx
+0x9C58B5: retn
+0x9C58B6: mov     eax, [ebp-24h]
+0x9C58B9: push    eax
+0x9C58BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C58BF: pop     ecx
+0x9C58C0: retn
+0x9C58C1: mov     eax, [ebp-24h]
+0x9C58C4: push    eax
+0x9C58C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C58CA: pop     ecx
+0x9C58CB: retn
+0x9C58CC: mov     edx, [esp+arg_4]
+0x9C58D0: lea     eax, [edx-2Ch]
+0x9C58D3: mov     ecx, [edx-30h]
+0x9C58D6: xor     ecx, eax
+0x9C58D8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C58DD: mov     eax, offset stru_AEE044
+0x9C58E2: jmp     ___CxxFrameHandler3

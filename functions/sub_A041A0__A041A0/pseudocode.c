@@ -1,4 +1,4 @@
-BSStringT *sub_A041A0()
+NiRTTI *sub_A041A0()
 {
-  return sub_70E220((BSStringT *)dword_B3D91C, "NiTransformInterpolator", (int)dword_B3ED80);
+  return NiRTTI_Constructor(&stru_B3D91C, "NiTransformInterpolator", &stru_B3ED80); /*0xa041b4*/
 }

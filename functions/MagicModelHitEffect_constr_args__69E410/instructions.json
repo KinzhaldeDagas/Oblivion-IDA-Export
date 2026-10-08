@@ -367,25 +367,25 @@
   },
   {
     "ea": "0x69E4B3",
-    "line": "mov     ecx, [ebp+8]",
+    "line": "mov     ecx, [ebp+8]; magicItem",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x69E4B6",
-    "line": "push    ebx",
+    "line": "push    ebx; effectIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69E4B7",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; OBMEFix 2026-06-01 verification: MagicModelHitEffect pushes minRange=0, calls MagicItem_GetFXEffect with ECX=MagicItem, then dereferences EAX at 0x0069E4BC. OBMEFix chains this call through a null guard and falls back to SEFF only on null.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x69E4BC",
-    "line": "mov     edx, [eax+18h]",
+    "line": "mov     edx, [eax+18h]; OBMEFix implementation 2026-05-30: authoritative null-deref site noted by OBME source. EAX from MagicItem_GetFXEffect is dereferenced at [eax+18h] with no null check. OBMEFix substitutes SEFF default VFX only when the chained call returns null.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -478,5 +478,95 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5D00",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D03",
+    "line": "jmp     MagicHitEffect_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D08",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D0B",
+    "line": "add     ecx, 30h ; '0'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D0E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D13",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D16",
+    "line": "add     ecx, 34h ; '4'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D19",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D1E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5D22",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D25",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5D28",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5D2A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D2F",
+    "line": "mov     eax, offset stru_AEE3DC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5D34",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

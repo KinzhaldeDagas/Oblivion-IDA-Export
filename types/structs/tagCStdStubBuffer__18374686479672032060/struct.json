@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagCStdStubBuffer",
+  "definition": "struct tagCStdStubBuffer\n{\nconst IRpcStubBufferVtbl_0 *lpVtbl;\nLONG RefCount;\nIUnknown *pvServerObject;\nconst ICallFactoryVtbl *pCallFactoryVtbl;\nconst IID *pAsyncIID;\nIPSFactoryBuffer *pPSFactory;\n}\n",
   "id": 18374686479672032060,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpVtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "const IRpcStubBufferVtbl_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RefCount",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pvServerObject",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCallFactoryVtbl",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "const ICallFactoryVtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pAsyncIID",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "const IID *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPSFactory",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "IPSFactoryBuffer *"
     }
   ],
   "name": "tagCStdStubBuffer",
+  "ordinal": 3016,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

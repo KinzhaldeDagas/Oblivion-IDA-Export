@@ -1,1 +1,1 @@
-__msvcrt_long
+typedef int __msvcrt_long;

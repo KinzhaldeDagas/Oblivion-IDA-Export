@@ -26,10 +26,10 @@
 0x51258C: jz      short loc_51259B
 0x51258E: push    0; a4
 0x512590: push    ebp; a3
-0x512591: mov     ecx, offset ActorProcessManager_ptr
+0x512591: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x512596: call    sub_675D50
 0x51259B: mov     ecx, esi; this
-0x51259D: call    TESObjectREFR_GetParentCell
+0x51259D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5125A2: mov     ecx, esi; this
 0x5125A4: mov     edi, eax
 0x5125A6: call    TESObjectREFR_GetWorldSpace
@@ -83,8 +83,8 @@
 0x512657: mov     ebx, [esp+30h+a2]
 0x51265B: mov     ecx, [esp+30h]; this
 0x51265F: sar     ebx, 0Ch
-0x512662: push    ebx; signed int
-0x512663: push    esi; signed int
+0x512662: push    ebx; cellY
+0x512663: push    esi; cellX
 0x512664: call    TESWorldSpace__GetCellAtCellCoord
 0x512669: mov     edi, eax
 0x51266B: test    edi, edi
@@ -92,7 +92,7 @@
 0x51266F: mov     ecx, [esp+30h]
 0x512673: push    ebx; int
 0x512674: push    esi; ArgList
-0x512675: call    sub_4F1630
+0x512675: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x51267A: mov     edi, eax
 0x51267C: test    edi, edi
 0x51267E: jnz     short loc_512695
@@ -145,7 +145,7 @@
 0x512711: mov     [eax+4], ecx
 0x512714: mov     ecx, ds:0B333C4h; int
 0x51271A: mov     [eax+8], edx
-0x51271D: call    sub_66EAF0
+0x51271D: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x512722: mov     eax, [ebp+0]
 0x512725: mov     edx, [eax+178h]
 0x51272B: push    0
@@ -184,13 +184,13 @@
 0x51278D: test    al, al
 0x51278F: jz      short loc_5127A8
 0x512791: mov     ecx, ebp; this
-0x512793: call    MobileObject_GetCharProxy
+0x512793: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x512798: test    eax, eax
 0x51279A: jz      short loc_5127A8
 0x51279C: lea     ecx, [esp+34h+a2]
 0x5127A0: push    ecx; a2
 0x5127A1: mov     ecx, eax; this
-0x5127A3: call    sub_452A10
+0x5127A3: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x5127A8: test    edi, edi
 0x5127AA: jz      short loc_5127D1
 0x5127AC: mov     ecx, ds:0B333A0h
@@ -201,18 +201,18 @@
 0x5127BC: jz      short loc_5127D1
 0x5127BE: fld     [esp+34h+var_C]
 0x5127C2: push    ecx
-0x5127C3: mov     ecx, ebp
-0x5127C5: fstp    [esp+38h+var_38]; float
-0x5127C8: call    sub_4D8A10
+0x5127C3: mov     ecx, ebp; this
+0x5127C5: fstp    [esp+38h+radians]; radians
+0x5127C8: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5127CD: fldz
 0x5127CF: jmp     short loc_5127DF
 0x5127D1: cmp     ebp, ds:0B333C4h
 0x5127D7: jz      short loc_5127EA
 0x5127D9: fld     dword ptr ds:0A32048h
 0x5127DF: push    ecx
-0x5127E0: mov     ecx, ebp
-0x5127E2: fstp    [esp+3Ch+var_3C]; float
-0x5127E5: call    sub_4D89D0
+0x5127E0: mov     ecx, ebp; this
+0x5127E2: fstp    [esp+3Ch+var_3C]; radians
+0x5127E5: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5127EA: push    ebx; int
 0x5127EB: push    edi; int
 0x5127EC: push    ebp; Concurrency::details::SchedulerBase *
@@ -234,7 +234,7 @@
 0x512818: mov     eax, [edx+20h]
 0x51281B: call    eax
 0x51281D: mov     ecx, esi; int
-0x51281F: call    EvaluatePackage
+0x51281F: call    EvaluatePackage; Actor::EvaluatePackage. After current package changes, resets/evaluates actor AI state through sub_5EAE70 and process callbacks; plugin calls this after assigning runtime packages.
 0x512824: mov     ecx, [esi+58h]
 0x512827: mov     edx, [ecx]
 0x512829: mov     eax, [edx+0B8h]

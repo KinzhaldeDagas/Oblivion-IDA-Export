@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55ED30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified one-slot base model cache. For each TESObjectTREE, compares requested seed against BSTreeModel.seed at +0x48; same seed returns the cached model, different seed replaces the only slot. Cache operation is protected by g_BSTreeManager_TreeCriticalSection.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x55ED5E",
-    "line": "mov     ecx, offset stru_B39E80",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x55ED6B",
-    "line": "call    NiEnterCriticalSection",
+    "line": "call    NiEnterCriticalSection; Verified: serializes the one-slot TESObjectTREE* -> BSTreeModel* seed cache with the tree critical section. Cache hits compare requested seed with BSTreeModel.seed (+0x48); a miss replaces the lone cached model. Fallout has matching one-entry-per-tree cache behavior, but its BSTreeModel and BSTreeManager layouts differ; do not transplant offsets.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55ED70",
-    "line": "mov     ebx, [esp+24h+arg_0]",
+    "line": "mov     ebx, [esp+24h+treeObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x55ED76",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+seed]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,25 +169,25 @@
   },
   {
     "ea": "0x55ED8E",
-    "line": "push    eax",
+    "line": "push    eax; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55ED8F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55ED91",
-    "line": "call    sub_55EC20",
+    "line": "call    BSTreeManager_GetModelArray; Verified BSTreeManager.modelCacheByTree at +0: lazily creates a 37-bucket NiTPointerMap<TESObjectTREE*, NiPointer<BSTreeModel>*> and gives each tree form a one-element smart-pointer array.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55ED96",
-    "line": "mov     ecx, [esp+24h+arg_8]",
+    "line": "mov     ecx, [esp+24h+modelOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x55ED9F",
-    "line": "mov     [esp+24h+arg_4], edx",
+    "line": "mov     [esp+24h+seed], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x55EDEE",
-    "line": "cmp     [esp+24h+arg_4], esi",
+    "line": "cmp     [esp+24h+seed], esi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x55EE27",
-    "line": "cmp     [esp+24h+arg_4], edx",
+    "line": "cmp     [esp+24h+seed], edx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x55EE2D",
-    "line": "mov     [esp+24h+arg_4], eax",
+    "line": "mov     [esp+24h+seed], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x55EE49",
-    "line": "mov     [esp+24h+arg_8], eax",
+    "line": "mov     [esp+24h+modelOut], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x55EE5B",
-    "line": "call    ??0BSTreeModel@@QAE@XZ; BSTreeModel::BSTreeModel(void)",
+    "line": "call    BSTreeModel_ctor; Verified current STBB layout view: BSTreeModel_OblivionLayout_058_STBBVerified refines model+0x1C to NiTriShape* billboardShape_STBB. This supersedes the earlier partial +0x1C NiStream view; the ctor initializes the shape pointer null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x55EEA1",
-    "line": "mov     edi, [esp+24h+arg_4]",
+    "line": "mov     edi, [esp+24h+seed]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x55EEE1",
-    "line": "mov     ecx, offset stru_B39E80; lpCriticalSection",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -994,5 +994,119 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BCC10",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCC13",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCC16",
+    "line": "jz      locret_9BCC28",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9BCC1C",
+    "line": "and     dword ptr [ebp-10h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9BCC20",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCC23",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCC28",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCC29",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCC2C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCC2D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCC32",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCC33",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCC34",
+    "line": "mov     edx, [esp+seed]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BCC38",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCC3B",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCC3E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCC40",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCC45",
+    "line": "mov     eax, offset stru_AE6780",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCC4A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -312,7 +312,7 @@
 0x912F33: push    eax
 0x912F34: push    ecx
 0x912F35: lea     ecx, [esp+0E8h+var_C0]
-0x912F39: call    sub_88FCC0
+0x912F39: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x912F3E: mov     eax, [esp+0E0h+var_D4]
 0x912F42: mov     edx, [esp+0E0h+var_D0]
 0x912F46: mov     ecx, [esp+0E0h+var_C8]
@@ -325,7 +325,7 @@
 0x912F64: push    edx
 0x912F65: push    eax
 0x912F66: lea     ecx, [esp+0E8h+var_B0]
-0x912F6A: call    sub_88FCC0
+0x912F6A: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x912F6F: mov     eax, [esp+0E0h+var_D4]
 0x912F73: mov     edx, [esp+0E0h+var_D0]
 0x912F77: mov     ecx, [esp+0E0h+var_C8]
@@ -385,3 +385,9 @@
 0x913014: call    sub_8F0EF0
 0x913019: add     esp, 10h
 0x91301C: add     [esp+0E8h+var_D4], 4
+0x913031: pop     edi; jumptable 00912B8B case 0
+0x913032: pop     esi
+0x913033: pop     ebx
+0x913034: mov     esp, ebp
+0x913036: pop     ebp
+0x913037: retn    0Ch

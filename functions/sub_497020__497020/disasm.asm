@@ -4,6 +4,6 @@
 0x497028: push    eax
 0x497029: mov     [eax+8], ecx
 0x49702C: mov     [eax+0Ch], edx
-0x49702F: call    FormHeapFree
+0x49702F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x497034: pop     ecx
 0x497035: retn    4

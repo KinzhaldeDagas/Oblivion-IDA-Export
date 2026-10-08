@@ -1,1 +1,1 @@
-PM_CLOSE_PROC
+typedef DWORD PM_CLOSE_PROC(void);

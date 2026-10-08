@@ -1,4 +1,4 @@
-0x424C50: push    0FFFFFFFFh
+0x424C50: push    0FFFFFFFFh; 3DTheft decode: Add/link ExtraFollower entry on target ExtraDataList; creates ExtraFollower if absent and pushes follower actor pointer if not already listed.
 0x424C52: push    offset SEH_8C8970
 0x424C57: mov     eax, large fs:0
 0x424C5D: push    eax
@@ -44,7 +44,7 @@
 0x424CCB: jnz     short loc_424CC2
 0x424CCD: push    edx
 0x424CCE: call    BSSimpleList_PushFront
-0x424CD3: mov     ecx, SaveLoad_CurrentSavegame
+0x424CD3: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424CD9: call    sub_45A500
 0x424CDE: mov     ecx, [esp+1Ch+var_C]
 0x424CE2: mov     large fs:0, ecx
@@ -53,3 +53,15 @@
 0x424CEB: pop     esi
 0x424CEC: add     esp, 10h
 0x424CEF: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

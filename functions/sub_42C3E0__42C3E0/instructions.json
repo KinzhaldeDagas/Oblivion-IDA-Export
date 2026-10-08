@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42C3E0",
-    "line": "push    ebx",
+    "line": "push    ebx; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x42C3EF",
-    "line": "mov     edi, [esi+158h]",
+    "line": "mov     edi, [esi+158h]; MEF decode: raw archive member read target guard. Validate current <= memberSize, relative <= remaining, base+current+relative does not wrap and does not equal 0xFFFFFFFF sentinel before entering archive critical section.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x42C439",
-    "line": "mov     edx, [esi+148h]",
+    "line": "mov     edx, [esi+148h]; MEF decode: raw archive member read count clamp. Compute remaining as memberSize - current - relative after bounds checks; clamp requested count or force zero on invalid state before raw fread.",
     "mnemonic": "mov",
     "size": 6
   },

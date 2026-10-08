@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E24C0",
-    "line": "push    ebx",
+    "line": "push    ebx; Clear all BSShaderProperty-owned RenderPass lists and destroy their embedded pass records; shared shader-property cleanup, not SpeedTree-only.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7E24E9",
-    "line": "mov     edi, [eax+8]",
+    "line": "mov     edi, [eax+8]; Capture the property-list node's RenderPass payload before releasing the node.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7E24F2",
-    "line": "call    eax",
+    "line": "call    eax; Release only the NiTList node through the list allocator virtual; the payload is destroyed separately below.",
     "mnemonic": "call",
     "size": 2
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7E2508",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Owner cleanup frees this RenderPass's light-pointer array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x7E2517",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Owner cleanup frees the 0x10-byte RenderPass after destroying its owned array. The same pattern is repeated for all four property pass lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x7E2565",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7E2574",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x7E25C5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x7E25D4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x7E2625",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x7E2634",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

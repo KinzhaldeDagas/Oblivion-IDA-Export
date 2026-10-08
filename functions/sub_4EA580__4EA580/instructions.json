@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EA580",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified quad-root lookup/creation: accepts signed 16-bit quadX/quadY, packs them as (quadX << 16) | uint16(quadY), and optionally allocates/inserts a TESTerrainLODQuadRoot containing quad data, owner map, and coordinates.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4EA5A6",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, [esp+20h+quadX]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4EA5BC",
-    "line": "mov     ebx, [esp+20h+arg_4]",
+    "line": "mov     ebx, [esp+20h+quadY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x4EA5D7",
-    "line": "or      esi, eax",
+    "line": "or      esi, eax; Verified map key packing: signed quadX occupies the high 16 bits and unsigned quadY the low 16 bits.",
     "mnemonic": "or",
     "size": 2
   },
   {
     "ea": "0x4EA5D9",
-    "line": "lea     eax, [esp+20h+arg_4]",
+    "line": "lea     eax, [esp+20h+quadY]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4EA5E1",
-    "line": "mov     [esp+28h+arg_4], 0",
+    "line": "mov     [esp+28h+quadY], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4EA5EE",
-    "line": "mov     ebp, [esp+20h+arg_4]",
+    "line": "mov     ebp, [esp+20h+quadY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4EA5F6",
-    "line": "cmp     byte ptr [esp+20h+arg_8], 0",
+    "line": "cmp     [esp+20h+createIfMissing], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4EA607",
-    "line": "mov     [esp+20h+arg_8], eax",
+    "line": "mov     dword ptr [esp+20h+createIfMissing], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,19 +265,19 @@
   },
   {
     "ea": "0x4EA613",
-    "line": "push    edi",
+    "line": "push    edi; ownerMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA614",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA616",
-    "line": "call    sub_4EA3A0",
+    "line": "call    TESTerrainLODQuadRoot_ctor; Verified TESTerrainLODQuadRoot constructor: stores its owner map at +4 and initializes the 0x60-byte quad-data object at +0; caller stores signed quadX/quadY at +8/+0xA.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4EA61F",
-    "line": "mov     cx, word ptr [esp+20h+arg_0]",
+    "line": "mov     cx, word ptr [esp+20h+quadX]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -436,5 +436,77 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA5A0",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA5A3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA5A4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA5A9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA5AA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA5AB",
+    "line": "mov     edx, [esp+quadY]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA5AF",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA5B2",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA5B5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA5B7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA5BC",
+    "line": "mov     eax, offset stru_AF2C94",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA5C1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

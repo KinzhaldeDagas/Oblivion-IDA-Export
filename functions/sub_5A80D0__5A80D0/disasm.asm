@@ -1,7 +1,7 @@
 0x5A80D0: mov     eax, ds:0B333C4h
 0x5A80D5: push    0
 0x5A80D7: push    eax
-0x5A80D8: mov     ecx, offset ActorProcessManager_ptr
+0x5A80D8: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5A80DD: call    sub_6762B0
 0x5A80E2: cmp     eax, 3; switch 4 cases
 0x5A80E5: ja      def_5A80EB

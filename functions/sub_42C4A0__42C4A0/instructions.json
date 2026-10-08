@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x42C4C3",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,19 +109,19 @@
   },
   {
     "ea": "0x42C4C6",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C4C7",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C4C8",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x42C4F2",
-    "line": "call    sub_42C3E0",
+    "line": "call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x42C505",
-    "line": "call    sub_42C3E0",
+    "line": "call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,25 +331,25 @@
   },
   {
     "ea": "0x42C51D",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C51E",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C51F",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C520",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E7D10",
+      "0x4E7DB4"
+    ]
+  ],
+  "chunks_sha256": "330d5ed0341e5dac1d677a2f47248767d259b16d4947de1a5c53f9cc54d1b768",
+  "comment_regular": "Verified `TogglePathGrid` action: flips g_PathGridDebugRenderingEnabled, updates the shared debug root, then rebuilds or clears the PathGrid visuals for the current interior grid or every loaded exterior grid cell. It is reached by ScriptCommand_TogglePathGrid. Fallout comparison: Script::ToggleNavMeshFunction (Fallout 0x823CED68) handles selectable draw modes, cover/connection overlays and transparency, and adds per-cell navmesh draws; Oblivion exposes one PathGrid display toggle and updates loaded PathGrid roots. This is a directly observed subsystem divergence.",
+  "comment_repeatable": "Verified `TogglePathGrid` action: flips g_PathGridDebugRenderingEnabled, updates the shared debug root, then rebuilds or clears the PathGrid visuals for the current interior grid or every loaded exterior grid cell. It is reached by ScriptCommand_TogglePathGrid. Fallout comparison: Script::ToggleNavMeshFunction (Fallout 0x823CED68) handles selectable draw modes, cover/connection overlays and transparency, and adds per-cell navmesh draws; Oblivion exposes one PathGrid display toggle and updates loaded PathGrid roots. This is a directly observed subsystem divergence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E7D10",
+  "display_name": "TESPathGrid_ToggleDebugRendering",
   "end_ea": "0x4E7DB4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E7D10",
+  "name": "TESPathGrid_ToggleDebugRendering",
   "segment": ".text",
   "sha256": "330d5ed0341e5dac1d677a2f47248767d259b16d4947de1a5c53f9cc54d1b768",
   "size": 164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E7D10",
-  "type": "void __usercall(NiNode *@<eax>)",
+  "total_chunk_size": 164,
+  "type": "void __cdecl()",
   "xrefs_from_count": 67,
   "xrefs_to_count": 1
 }

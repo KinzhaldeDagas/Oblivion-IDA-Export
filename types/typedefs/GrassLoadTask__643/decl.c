@@ -1,1 +1,1 @@
-GrassLoadTask
+struct GrassLoadTask;

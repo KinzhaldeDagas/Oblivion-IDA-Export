@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x5285F5",
-    "line": "mov     [esp+0F4h+var_D8], eax",
+    "line": "mov     [esp+0F4h+targetGeometry], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,19 +439,19 @@
   },
   {
     "ea": "0x528644",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x528646",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x528648",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,19 +547,19 @@
   },
   {
     "ea": "0x528680",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528681",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x528683",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x52869F",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x5286A5",
-    "line": "push    offset dword_B3FA9C",
+    "line": "push    offset stru_B3FA9C",
     "mnemonic": "push",
     "size": 5
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x5286D7",
-    "line": "push    eax; char",
+    "line": "push    eax; offsetVerticesAlongNormals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5286D8",
-    "line": "push    1; int",
+    "line": "push    1; unused",
     "mnemonic": "push",
     "size": 2
   },
@@ -757,31 +757,31 @@
   },
   {
     "ea": "0x5286DB",
-    "line": "mov     ecx, [esp+100h+var_D8]",
+    "line": "mov     ecx, [esp+100h+targetGeometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5286DF",
-    "line": "fstp    [esp+100h+var_100]; float",
+    "line": "fstp    [esp+100h+maxDistance]; maxDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5286E2",
-    "line": "push    ecx; int",
+    "line": "push    ecx; targetGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5286E3",
-    "line": "push    esi; int",
+    "line": "push    esi; sourceGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5286E4",
-    "line": "call    ??0?$NiTMap@IUVertexDist@@@@QAE@XZ; NiTMap<uint,VertexDist>::NiTMap<uint,VertexDist>(void)",
+    "line": "call    NiGeometry_CopyNearestVertexNormals; Actor-3D seam repair variant: copy normals from an UpperBody geometry whose material name starts with Skin to the named head geometry, using Oblivion's wider 0.50-unit radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,19 +889,19 @@
   },
   {
     "ea": "0x528724",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528725",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x528727",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x528743",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x528749",
-    "line": "push    offset dword_B3FA9C",
+    "line": "push    offset stru_B3FA9C",
     "mnemonic": "push",
     "size": 5
   },
@@ -1081,13 +1081,13 @@
   },
   {
     "ea": "0x52877B",
-    "line": "push    eax; char",
+    "line": "push    eax; offsetVerticesAlongNormals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52877C",
-    "line": "push    1; int",
+    "line": "push    1; unused",
     "mnemonic": "push",
     "size": 2
   },
@@ -1099,31 +1099,31 @@
   },
   {
     "ea": "0x52877F",
-    "line": "mov     ecx, [esp+100h+var_D8]",
+    "line": "mov     ecx, [esp+100h+targetGeometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x528783",
-    "line": "fstp    [esp+100h+var_100]; float",
+    "line": "fstp    [esp+100h+maxDistance]; maxDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x528786",
-    "line": "push    ecx; int",
+    "line": "push    ecx; targetGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528787",
-    "line": "push    esi; int",
+    "line": "push    esi; sourceGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528788",
-    "line": "call    ??0?$NiTMap@IUVertexDist@@@@QAE@XZ; NiTMap<uint,VertexDist>::NiTMap<uint,VertexDist>(void)",
+    "line": "call    NiGeometry_CopyNearestVertexNormals; Fallback UpperBody traversal performs the same Skin-to-head normal copy at 0.50 units when the nested child layout is absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,13 +1219,13 @@
   },
   {
     "ea": "0x5287BE",
-    "line": "lea     ecx, [esp+0F4h+var_D0]",
+    "line": "lea     ecx, [esp+0F4h+outAbsolute]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5287C2",
-    "line": "call    FaceGenHeadParameters_Ctor",
+    "line": "call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x528800",
-    "line": "lea     ecx, [esp+0F4h+var_D0]",
+    "line": "lea     ecx, [esp+0F4h+outAbsolute]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1303,13 +1303,13 @@
   },
   {
     "ea": "0x528811",
-    "line": "push    ecx",
+    "line": "push    ecx; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528812",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x52881B",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x52894C",
-    "line": "lea     edx, [esp+0F8h+var_D8]",
+    "line": "lea     edx, [esp+0F8h+targetGeometry]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x52896D",
-    "line": "mov     eax, [esp+0F4h+var_D8]",
+    "line": "mov     eax, [esp+0F4h+targetGeometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x5289A8",
-    "line": "lea     ecx, [esp+0F4h+var_D0]",
+    "line": "lea     ecx, [esp+0F4h+outAbsolute]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1939,19 +1939,19 @@
   },
   {
     "ea": "0x5289B9",
-    "line": "push    ecx",
+    "line": "push    ecx; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5289BA",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5289BB",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,25 +1969,25 @@
   },
   {
     "ea": "0x5289C6",
-    "line": "lea     ecx, [esp+0FCh+var_D0]",
+    "line": "lea     ecx, [esp+0FCh+outAbsolute]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5289CA",
-    "line": "push    ecx",
+    "line": "push    ecx; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5289CB",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5289CC",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x5289D4",
-    "line": "lea     ecx, [esp+0F4h+var_D0]",
+    "line": "lea     ecx, [esp+0F4h+outAbsolute]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x5289E3",
-    "line": "call    FaceGenHeadParameters_Dtor",
+    "line": "call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2068,5 +2068,71 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B82D0",
+    "line": "lea     ecx, [ebp-0D0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B82D6",
+    "line": "jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B82DB",
+    "line": "lea     ecx, [ebp-0D8h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B82E1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B82E6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B82EA",
+    "line": "lea     eax, [edx-0E4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B82F0",
+    "line": "mov     ecx, [edx-0E8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B82F6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B82F8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B82FD",
+    "line": "mov     eax, offset stru_AE29E4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8302",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

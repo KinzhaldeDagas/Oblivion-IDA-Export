@@ -19,7 +19,7 @@ int __thiscall sub_5B7550(_DWORD *this)
   int v19; // ecx
   int v20; // edx
   int v21; // eax
-  NiNode *v22; // ecx
+  int v22; // ecx
   int v23; // edx
   int v24; // ebp
   char v25; // al
@@ -36,7 +36,7 @@ int __thiscall sub_5B7550(_DWORD *this)
   unsigned int v36; // eax
   unsigned int v37; // et2
   unsigned int v38; // ebx
-  int v39; // edx
+  float v39; // edx
   float v40; // eax
   TESObjectREFR *v41; // ecx
   bool v42; // al
@@ -233,515 +233,515 @@ int __thiscall sub_5B7550(_DWORD *this)
   int v233[4]; // [esp+1B0h] [ebp-1Ch] BYREF
   int v234; // [esp+1C8h] [ebp-4h]
 
-  v185 = this;
-  v2 = (_DWORD *)*(this + 0x32);
-  if ( v2[1] )
+  v185 = this; /*0x5b7585*/
+  v2 = (_DWORD *)*(this + 0x32); /*0x5b758c*/
+  if ( v2[1] ) /*0x5b7592*/
   {
-    do
+    do /*0x5b75ac*/
     {
-      v3 = *(_DWORD *)(v2[1] + 4);
-      FormHeapFree(v2[1]);
-      v2[1] = v3;
+      v3 = *(_DWORD *)(v2[1] + 4); /*0x5b759b*/
+      FormHeapFree(v2[1]); /*0x5b759f*/
+      v2[1] = v3; /*0x5b75a9*/
     }
-    while ( v3 );
+    while ( v3 ); /*0x5b75ac*/
   }
-  *v2 = 0;
-  v4 = *(_DWORD *)(*(this + 0x19) + 0x24);
-  v173 = v4;
-  if ( !v4 )
-    return 0;
-  nullsub_returnTrue_0arg();
-  v6 = InterlockedDecrement;
-  for ( i = 0; *(unsigned __int16 *)(v4 + 0xB6) > i; ++i )
+  *v2 = 0; /*0x5b75ae*/
+  v4 = *(_DWORD *)(*(this + 0x19) + 0x24); /*0x5b75b7*/
+  v173 = v4; /*0x5b75bc*/
+  if ( !v4 ) /*0x5b75c0*/
+    return 0; /*0x5b75c2*/
+  Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x5b75dd*/
+  v6 = InterlockedDecrement; /*0x5b75e9*/
+  for ( i = 0; *(unsigned __int16 *)(v4 + 0xB6) > i; ++i ) /*0x5b75e2*/
   {
-    v8 = *(_DWORD *)(v4 + 0xB0);
-    if ( *(_DWORD *)(v8 + 4 * i) )
+    v8 = *(_DWORD *)(v4 + 0xB0); /*0x5b75fc*/
+    if ( *(_DWORD *)(v8 + 4 * i) ) /*0x5b7602*/
     {
-      (*(void (__thiscall **)(int, void **, _DWORD))(*(_DWORD *)v4 + 0x88))(v4, &v175, *(_DWORD *)(v8 + 4 * i));
-      if ( v175 )
+      (*(void (__thiscall **)(int, void **, _DWORD))(*(_DWORD *)v4 + 0x88))(v4, &v175, *(_DWORD *)(v8 + 4 * i)); /*0x5b761a*/
+      if ( v175 ) /*0x5b7622*/
       {
-        v9 = (void (__thiscall ***)(void *, int))v175;
-        if ( !v6((volatile LONG *)v175 + 1) )
-          (**v9)(v9, 1);
+        v9 = (void (__thiscall ***)(void *, int))v175; /*0x5b7624*/
+        if ( !v6((volatile LONG *)v175 + 1) ) /*0x5b762a*/
+          (**v9)(v9, 1); /*0x5b763c*/
       }
     }
   }
-  nullsub_returnTrue_0arg();
-  v10 = TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetPos(TESDataHandler_g_PlayerRef);
-  v11 = uGridsToLoad;
-  v176 = *(int *)v10;
-  v177 = v10[1];
-  v178 = *((void **)v10 + 2);
-  *(float *)&v178 = *(float *)&v178 + dbl_A3F3E8;
-  v12 = byte_B42D40 == 0;
-  v172 = v11;
-  v163 = v11 * v11;
-  v175 = (void *)(v11 << 9);
-  if ( v12 || !ImageSpaceEffectEnabled || (v145 = 1, ShaderPackage < 2) )
-    v145 = 0;
-  v148 = 1;
-  v191 = sub_411F00();
-  if ( v145 )
+  Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x5b764e*/
+  v10 = reference->vtbl->super.super.super.GetPos(reference); /*0x5b7664*/
+  v11 = uGridsToLoad; /*0x5b7668*/
+  v176 = *(int *)v10; /*0x5b766e*/
+  v177 = v10[1]; /*0x5b7675*/
+  v178 = *((void **)v10 + 2); /*0x5b767c*/
+  *(float *)&v178 = *(float *)&v178 + dbl_A3F3E8; /*0x5b768f*/
+  v12 = unk_B42D40 == 0; /*0x5b7698*/
+  v172 = v11; /*0x5b769f*/
+  v163 = v11 * v11; /*0x5b76a3*/
+  v175 = (void *)(v11 << 9); /*0x5b76a7*/
+  if ( v12 || !OB_RendererGlobalState_010201A0[0xA5] || (v145 = 1, *(int *)&OB_RendererGlobalState_010201A0[0xAF] < 2) ) /*0x5b76c2*/
+    v145 = 0; /*0x5b76c4*/
+  v148 = 1; /*0x5b76c9*/
+  v191 = sub_411F00(); /*0x5b76d3*/
+  if ( v145 ) /*0x5b76df*/
   {
-    v13 = sub_7B8200(&v174, "Data\\Textures\\Menus\\Map\\local\\MapPaper01.dds", 1, 0);
-    v14 = dword_B42D44;
-    v12 = dword_B42D44 == *v13;
-    v234 = 0;
-    if ( !v12 )
+    v13 = NiSourceTexture_LoadChecked(&v174, "Data\\Textures\\Menus\\Map\\local\\MapPaper01.dds", 1, 0); /*0x5b76fb*/
+    v14 = unk_B42D44; /*0x5b76fd*/
+    v12 = unk_B42D44 == *v13; /*0x5b7703*/
+    v234 = 0; /*0x5b7706*/
+    if ( !v12 ) /*0x5b7711*/
     {
-      if ( v14 )
+      if ( v14 ) /*0x5b7715*/
       {
-        if ( !v6((volatile LONG *)(v14 + 4)) )
-          (**(void (__thiscall ***)(int, int))v14)(v14, 1);
+        if ( !v6((volatile LONG *)(v14 + 4)) ) /*0x5b771b*/
+          (**(void (__thiscall ***)(int, int))v14)(v14, 1); /*0x5b772d*/
       }
-      v15 = *v13;
-      dword_B42D44 = v15;
-      if ( v15 )
-        InterlockedIncrement((volatile LONG *)(v15 + 4));
+      v15 = *v13; /*0x5b772f*/
+      unk_B42D44 = v15; /*0x5b7734*/
+      if ( v15 ) /*0x5b773a*/
+        InterlockedIncrement((volatile LONG *)(v15 + 4)); /*0x5b7740*/
     }
-    v16 = (void (__thiscall ***)(_DWORD, int))v174;
-    v234 = 0xFFFFFFFF;
-    if ( v174 )
+    v16 = (void (__thiscall ***)(_DWORD, int))v174; /*0x5b7746*/
+    v234 = 0xFFFFFFFF; /*0x5b774c*/
+    if ( v174 ) /*0x5b7757*/
     {
-      if ( !v6((volatile LONG *)(v174 + 4)) )
+      if ( !v6((volatile LONG *)(v174 + 4)) ) /*0x5b775d*/
       {
-        if ( v16 )
-          (**v16)(v16, 1);
+        if ( v16 ) /*0x5b7765*/
+          (**v16)(v16, 1); /*0x5b776f*/
       }
     }
   }
-  v17 = flt_B45E08;
-  v18 = flt_B45E0C;
-  v225 = flt_B45E04;
-  v228 = flt_B45E10;
-  v19 = dword_B25AD8;
-  v226 = v17;
-  v20 = dword_B25AD0;
-  v227 = v18;
-  v21 = dword_B25AD4;
-  LODWORD(flt_B45E0C) = v19;
-  v22 = LodWaterRoot;
-  LODWORD(flt_B45E04) = v20;
-  v23 = dword_B25ADC;
-  LODWORD(flt_B45E08) = v21;
-  LOBYTE(v21) = byte_B45DC0;
-  v24 = 0;
-  LODWORD(flt_B45E10) = v23;
-  v165 = v21;
-  byte_B45DC0 = 1;
-  v149 = 1;
-  if ( v22 )
+  v17 = unk_B45E08; /*0x5b7777*/
+  v18 = unk_B45E0C; /*0x5b777d*/
+  v225 = unk_B45E04; /*0x5b7782*/
+  v228 = unk_B45E10; /*0x5b778f*/
+  v19 = dword_B25AD8; /*0x5b7796*/
+  v226 = v17; /*0x5b779c*/
+  v20 = dword_B25AD0; /*0x5b77a3*/
+  v227 = v18; /*0x5b77a9*/
+  v21 = dword_B25AD4; /*0x5b77b0*/
+  LODWORD(unk_B45E0C) = v19; /*0x5b77b5*/
+  v22 = *(_DWORD *)&MEMORY[0xB33E90][0x13A4]; /*0x5b77bb*/
+  LODWORD(unk_B45E04) = v20; /*0x5b77c1*/
+  v23 = dword_B25ADC; /*0x5b77c7*/
+  LODWORD(unk_B45E08) = v21; /*0x5b77cd*/
+  LOBYTE(v21) = unk_B45DC0; /*0x5b77d2*/
+  v24 = 0; /*0x5b77d7*/
+  LODWORD(unk_B45E10) = v23; /*0x5b77db*/
+  v165 = v21; /*0x5b77e1*/
+  unk_B45DC0 = 1; /*0x5b77e5*/
+  v149 = 1; /*0x5b77ec*/
+  if ( v22 ) /*0x5b77f1*/
   {
-    v25 = v22->members.super.m_flags & 1;
-    v22->members.super.m_flags |= 1u;
-    v149 = v25;
+    v25 = *(_BYTE *)(v22 + 0x18) & 1; /*0x5b77f6*/
+    *(_WORD *)(v22 + 0x18) |= 1u; /*0x5b77f8*/
+    v149 = v25; /*0x5b77fd*/
   }
-  v26 = LODRoot;
-  v27 = LODRoot->members.super.m_flags & 1;
-  v188 = LODRoot;
-  v166 = v27;
-  if ( !v27 )
-    v26->members.super.m_flags |= 1u;
-  v169 = 0;
-  if ( !TES->currentInteriorCell )
+  v26 = MEMORY[0xB333A8]; /*0x5b7801*/
+  v27 = MEMORY[0xB333A8]->members.super.m_flags & 1; /*0x5b780a*/
+  v188 = MEMORY[0xB333A8]; /*0x5b780c*/
+  v166 = v27; /*0x5b7813*/
+  if ( !v27 ) /*0x5b7817*/
+    v26->members.super.m_flags |= 1u; /*0x5b7819*/
+  v169 = 0; /*0x5b7829*/
+  if ( !MEMORY[0xB333A0]->currentInteriorCell ) /*0x5b7824*/
   {
-    *(_DWORD *)&v141[4] = 1;
-    *(_DWORD *)v141 = 4 * v163;
-    v169 = j_MemoryHeap_Alloc(&FormHeap, 0, *(size_t *)v141, *(int *)&v141[8]);
-    v159 = 0;
-    if ( v11 > 0 )
+    *(_DWORD *)&v141[4] = 1; /*0x5b7837*/
+    *(_DWORD *)v141 = 4 * v163; /*0x5b7840*/
+    v169 = j_MemoryHeap_Alloc(&FormHeap, 0, *(size_t *)v141, *(int *)&v141[8]); /*0x5b784d*/
+    v159 = 0; /*0x5b7851*/
+    if ( v11 > 0 ) /*0x5b7855*/
     {
-      do
+      do /*0x5b7930*/
       {
-        v157 = 0;
-        do
+        v157 = 0; /*0x5b7860*/
+        do /*0x5b791d*/
         {
-          GridEntry = GetGridEntry(TES->gridCellArray, v159, v157);
-          p_cell = &GridEntry->cell;
-          if ( GridEntry )
+          GridEntry = GetGridEntry(MEMORY[0xB333A0]->gridCellArray, v159, v157); /*0x5b7882*/
+          p_cell = &GridEntry->cell; /*0x5b7887*/
+          if ( GridEntry ) /*0x5b788b*/
           {
-            if ( GridEntry->cell )
+            if ( GridEntry->cell ) /*0x5b788d*/
             {
-              v30 = 0;
-              for ( j = 8; j < 0x18; j += 4 )
+              v30 = 0; /*0x5b7892*/
+              for ( j = 8; j < 0x18; j += 4 ) /*0x5b7894*/
               {
-                NiNode = TESObjectCELL_GetNiNode_(*p_cell);
-                if ( NiNode
+                NiNode = GetObjectPointerAt_054(*p_cell); /*0x5b78a2*/
+                if ( NiNode /*0x5b78c6*/
                   && NiNode->members.children.end > (unsigned int)(v30 + 2)
                   && (v33 = *(int *)((char *)&NiNode->members.children.data->vtbl + j)) != 0
                   && *(_WORD *)(v33 + 0xB6) )
                 {
-                  v34 = **(_DWORD **)(v33 + 0xB0);
+                  v34 = **(_DWORD **)(v33 + 0xB0); /*0x5b78d6*/
                 }
                 else
                 {
-                  v34 = 0;
+                  v34 = 0; /*0x5b78da*/
                 }
-                if ( v34 && (*(_BYTE *)(v34 + 0x18) & 1) != 0 )
+                if ( v34 && (*(_BYTE *)(v34 + 0x18) & 1) != 0 ) /*0x5b78e4*/
                 {
-                  *(_WORD *)(v34 + 0x18) &= ~1u;
-                  *((_BYTE *)&v169->prev + v24) = 1;
+                  *(_WORD *)(v34 + 0x18) &= ~1u; /*0x5b78ea*/
+                  *((_BYTE *)&v169->prev + v24) = 1; /*0x5b78f0*/
                 }
                 else
                 {
-                  *((_BYTE *)&v169->prev + v24) = 0;
+                  *((_BYTE *)&v169->prev + v24) = 0; /*0x5b78fa*/
                 }
-                ++v24;
-                ++v30;
+                ++v24; /*0x5b7901*/
+                ++v30; /*0x5b7904*/
               }
             }
           }
-          ++v157;
+          ++v157; /*0x5b7919*/
         }
-        while ( v157 < v172 );
-        ++v159;
+        while ( v157 < v172 ); /*0x5b791d*/
+        ++v159; /*0x5b792c*/
       }
-      while ( v159 < v172 );
-      v26 = v188;
+      while ( v159 < v172 ); /*0x5b7930*/
+      v26 = v188; /*0x5b7936*/
     }
   }
-  v35 = 0;
-  v174 = 0;
-  if ( v163 <= 0 )
+  v35 = 0; /*0x5b793d*/
+  v174 = 0; /*0x5b7943*/
+  if ( v163 <= 0 ) /*0x5b7947*/
   {
-    v124 = v173;
+    v124 = v173; /*0x5b85ae*/
   }
   else
   {
-    v201 = 0.0;
-    v203 = 0.0;
-    v204 = 1.0;
-    v205 = 0.0;
-    v217 = v191;
-    v170 = (float)(int)v175;
-    v213 = flt_A58DA8;
-    do
+    v201 = 0.0; /*0x5b794f*/
+    v203 = 0.0; /*0x5b7956*/
+    v204 = 1.0; /*0x5b795f*/
+    v205 = 0.0; /*0x5b7966*/
+    v217 = v191; /*0x5b7974*/
+    v170 = (float)(int)v175; /*0x5b797f*/
+    v213 = flt_A58DA8; /*0x5b7989*/
+    do /*0x5b859f*/
     {
-      v37 = v35 % uGridsToLoad;
-      v36 = v35 / uGridsToLoad;
-      v160 = 0;
-      v38 = v37;
-      v192 = v37;
-      v158 = v36;
-      v39 = *((_DWORD *)&Vector3_InitValue_ + 1);
-      v40 = dword_B3F9B0;
-      *(float *)&v181 = Vector3_InitValue_;
-      v41 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-      v234 = 1;
-      HIDWORD(v181) = v39;
-      v182 = v40;
-      v42 = sub_4D8B90(v41);
-      v43 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-      if ( v42 )
+      v37 = v35 % uGridsToLoad; /*0x5b7992*/
+      v36 = v35 / uGridsToLoad; /*0x5b7992*/
+      v160 = 0; /*0x5b7998*/
+      v38 = v37; /*0x5b79a0*/
+      v192 = v37; /*0x5b79a2*/
+      v158 = v36; /*0x5b79a9*/
+      v39 = MEMORY[0xB3F9AC]; /*0x5b79b3*/
+      v40 = MEMORY[0xB3F9B0][0]; /*0x5b79b9*/
+      *(float *)&v181 = g_zeroNiPoint3; /*0x5b79be*/
+      v41 = (TESObjectREFR *)reference; /*0x5b79c2*/
+      v234 = 1; /*0x5b79c8*/
+      *((float *)&v181 + 1) = v39; /*0x5b79d3*/
+      v182 = v40; /*0x5b79d7*/
+      v42 = sub_4D8B90(v41); /*0x5b79db*/
+      v43 = (TESObjectREFR *)reference; /*0x5b79e2*/
+      if ( v42 ) /*0x5b79e8*/
       {
-        ParentCell = TESObjectREFR_GetParentCell(v43);
-        v45 = (ExtraDataList *)ParentCell;
-        if ( ParentCell )
+        ParentCell = Shared_GetDwordAtOffset40(v43); /*0x5b79ee*/
+        v45 = (ExtraDataList *)ParentCell; /*0x5b79f3*/
+        if ( ParentCell ) /*0x5b79f7*/
         {
-          sub_4CCE20((ExtraDataList *)ParentCell, (float *)&v176, v233, COERCE_FLOAT(1));
-          v193 = (int)*(float *)v233;
-          v198 = (int)*(float *)&v233[1];
-          v46 = v38 + ((v193 - 0x800) >> 0xC) - (v172 >> 1);
-          v47 = v158 + ((v198 - 0x800) >> 0xC) - (v172 >> 1);
-          *(float *)&v219 = (float)((v46 << 0xC) + 0x800);
-          *((float *)&v219 + 1) = (float)((v47 << 0xC) + 0x800);
-          v181 = v219;
-          v220 = 0.0;
-          v182 = 0.0;
-          sub_4CCEE0(v45, v46, v47, 0);
-          v48 = *sub_4D4250((TESObjectCELL *)v45, &v206, v46, (BSRenderedTexture *)v47);
-          if ( v48 )
+          sub_4CCE20((ExtraDataList *)ParentCell, (float *)&v176, v233, COERCE_FLOAT(1)); /*0x5b7a0e*/
+          v193 = (int)*(float *)v233; /*0x5b7a1a*/
+          v198 = (int)*(float *)&v233[1]; /*0x5b7a37*/
+          v46 = v38 + ((v193 - 0x800) >> 0xC) - (v172 >> 1); /*0x5b7a5e*/
+          v47 = v158 + ((v198 - 0x800) >> 0xC) - (v172 >> 1); /*0x5b7a63*/
+          *(float *)&v219 = (float)((v46 << 0xC) + 0x800); /*0x5b7a7f*/
+          *((float *)&v219 + 1) = (float)((v47 << 0xC) + 0x800); /*0x5b7a95*/
+          v181 = v219; /*0x5b7aa5*/
+          v220 = 0.0; /*0x5b7aac*/
+          v182 = 0.0; /*0x5b7ac1*/
+          sub_4CCEE0(v45, v46, v47, 0); /*0x5b7aca*/
+          v48 = *sub_4D4250((TESObjectCELL *)v45, &v206, v46, (BSRenderedTexture *)v47); /*0x5b7ae0*/
+          if ( v48 ) /*0x5b7ae4*/
           {
-            v160 = (NiRenderedTexture *)v48;
-            InterlockedIncrement((volatile LONG *)&v48->members);
+            v160 = (NiRenderedTexture *)v48; /*0x5b7ae6*/
+            InterlockedIncrement((volatile LONG *)&v48->members); /*0x5b7aee*/
           }
-          v49 = v206;
-          LOBYTE(v234) = 1;
-          if ( v206 )
+          v49 = v206; /*0x5b7af4*/
+          LOBYTE(v234) = 1; /*0x5b7afd*/
+          if ( v206 ) /*0x5b7b05*/
           {
-            if ( !InterlockedDecrement((volatile LONG *)&v206->members) )
+            if ( !InterlockedDecrement((volatile LONG *)&v206->members) ) /*0x5b7b0b*/
             {
-              if ( v49 )
-                (*(void (__thiscall **)(Ni2DBuffer *, int))v49->__vftable)(v49, 1);
+              if ( v49 ) /*0x5b7b17*/
+                (*(void (__thiscall **)(Ni2DBuffer *, int))v49->__vftable)(v49, 1); /*0x5b7b21*/
             }
           }
-          if ( v148 )
+          if ( v148 ) /*0x5b7b28*/
           {
-            sub_4CBDB0((TESObjectCELL *)v45, (_DWORD *)v185[0x32]);
-            v148 = 0;
+            TESObjectCELL_CollectDoorsForTeleportProcessing((TESObjectCELL *)v45, (_DWORD *)v185[0x32]); /*0x5b7b3e*/
+            v148 = 0; /*0x5b7b43*/
           }
         }
       }
       else
       {
-        WorldSpace = TESObjectREFR_GetWorldSpace(v43);
-        v197 = (int)*(float *)&v176;
-        v195 = (int)v177;
-        *(float *)&v215 = (float)(int)((v38 + (v197 >> 0xC) - (v172 >> 1)) << 0xC);
-        *((float *)&v215 + 1) = (float)(int)((v158 + (v195 >> 0xC) - (v172 >> 1)) << 0xC);
-        v181 = v215;
-        v216 = 0.0;
-        v182 = 0.0;
-        if ( WorldSpace )
+        WorldSpace = TESObjectREFR_GetWorldSpace(v43); /*0x5b7b4d*/
+        v197 = (int)*(float *)&v176; /*0x5b7b56*/
+        v195 = (int)v177; /*0x5b7b6b*/
+        *(float *)&v215 = (float)(int)((v38 + (v197 >> 0xC) - (v172 >> 1)) << 0xC); /*0x5b7ba0*/
+        *((float *)&v215 + 1) = (float)(int)((v158 + (v195 >> 0xC) - (v172 >> 1)) << 0xC); /*0x5b7bba*/
+        v181 = v215; /*0x5b7bca*/
+        v216 = 0.0; /*0x5b7bce*/
+        v182 = 0.0; /*0x5b7bdc*/
+        if ( WorldSpace ) /*0x5b7be0*/
         {
-          CellAtCellCoord = (ExtraDataList *)TESWorldSpace::GetCellAtCellCoord(
+          CellAtCellCoord = (ExtraDataList *)TESWorldSpace::GetCellAtCellCoord( /*0x5b7be6*/
                                                WorldSpace,
                                                v38 + ((int)*(float *)&v176 >> 0xC) - (v172 >> 1),
                                                v158 + ((int)v177 >> 0xC) - (v172 >> 1));
-          v52 = (TESObjectCELL *)CellAtCellCoord;
-          if ( CellAtCellCoord )
+          v52 = (TESObjectCELL *)CellAtCellCoord; /*0x5b7beb*/
+          if ( CellAtCellCoord ) /*0x5b7bef*/
           {
-            sub_4CCED0(CellAtCellCoord);
-            v53 = *sub_4D41A0(v52, &v218);
-            if ( v53 )
+            sub_4CCED0(CellAtCellCoord); /*0x5b7bf3*/
+            v53 = *sub_4D41A0(v52, &v218); /*0x5b7c07*/
+            if ( v53 ) /*0x5b7c0b*/
             {
-              v160 = (NiRenderedTexture *)v53;
-              InterlockedIncrement((volatile LONG *)&v53->members);
+              v160 = (NiRenderedTexture *)v53; /*0x5b7c0d*/
+              InterlockedIncrement((volatile LONG *)&v53->members); /*0x5b7c15*/
             }
-            v54 = v218;
-            LOBYTE(v234) = 1;
-            if ( v218 )
+            v54 = v218; /*0x5b7c1b*/
+            LOBYTE(v234) = 1; /*0x5b7c24*/
+            if ( v218 ) /*0x5b7c2c*/
             {
-              if ( !InterlockedDecrement((volatile LONG *)&v218->members) )
+              if ( !InterlockedDecrement((volatile LONG *)&v218->members) ) /*0x5b7c32*/
               {
-                if ( v54 )
-                  (*(void (__thiscall **)(Ni2DBuffer *, int))v54->__vftable)(v54, 1);
+                if ( v54 ) /*0x5b7c3e*/
+                  (*(void (__thiscall **)(Ni2DBuffer *, int))v54->__vftable)(v54, 1); /*0x5b7c48*/
               }
             }
-            sub_4CBDB0(v52, (_DWORD *)v185[0x32]);
+            TESObjectCELL_CollectDoorsForTeleportProcessing(v52, (_DWORD *)v185[0x32]); /*0x5b7c5a*/
           }
         }
       }
-      v55 = FormHeapAlloc(0xD8Cu);
-      Src = (void *)v55;
-      v161 = (float *)FormHeapAlloc(0xD8Cu);
-      v187 = (void *)FormHeapAlloc(0x908u);
-      v56 = FormHeapAlloc(0x1210u);
-      if ( v56 )
+      v55 = FormHeapAlloc(0xD8Cu); /*0x5b7c7a*/
+      Src = (void *)v55; /*0x5b7c8d*/
+      v161 = (float *)FormHeapAlloc(0xD8Cu); /*0x5b7c9b*/
+      v187 = (void *)FormHeapAlloc(0x908u); /*0x5b7cba*/
+      v56 = FormHeapAlloc(0x1210u); /*0x5b7cd7*/
+      if ( v56 ) /*0x5b7ce3*/
       {
-        v57 = 0x120;
-        v58 = v56 + 8;
-        do
+        v57 = 0x120; /*0x5b7ce7*/
+        v58 = v56 + 8; /*0x5b7cec*/
+        do /*0x5b7d01*/
         {
-          *(float *)(v58 - 8) = 0.0;
-          v58 += 0x10;
-          --v57;
-          *(float *)(v58 - 0x14) = 0.0;
-          *(float *)(v58 - 0x10) = 0.0;
-          *(float *)(v58 - 0xC) = 0.0;
+          *(float *)(v58 - 8) = 0.0; /*0x5b7cef*/
+          v58 += 0x10; /*0x5b7cf2*/
+          --v57; /*0x5b7cf5*/
+          *(float *)(v58 - 0x14) = 0.0; /*0x5b7cf8*/
+          *(float *)(v58 - 0x10) = 0.0; /*0x5b7cfb*/
+          *(float *)(v58 - 0xC) = 0.0; /*0x5b7cfe*/
         }
-        while ( v57 >= 0 );
-        v180 = v56;
+        while ( v57 >= 0 ); /*0x5b7d01*/
+        v180 = v56; /*0x5b7d05*/
       }
       else
       {
-        v180 = 0;
+        v180 = 0; /*0x5b7d0b*/
       }
-      v59 = (_WORD *)FormHeapAlloc(0xC00u);
-      Dst = 0;
-      v186 = 0;
-      v179 = 0;
-      v196 = 0;
-      if ( v145 )
+      v59 = (_WORD *)FormHeapAlloc(0xC00u); /*0x5b7d32*/
+      Dst = 0; /*0x5b7d34*/
+      v186 = 0; /*0x5b7d3b*/
+      v179 = 0; /*0x5b7d42*/
+      v196 = 0; /*0x5b7d46*/
+      if ( v145 ) /*0x5b7d4d*/
       {
-        Dst = (void *)FormHeapAlloc(0xD8Cu);
-        v186 = (void *)FormHeapAlloc(0xD8Cu);
-        v179 = (void *)FormHeapAlloc(0x908u);
-        v196 = (void *)FormHeapAlloc(0xC00u);
+        Dst = (void *)FormHeapAlloc(0xD8Cu); /*0x5b7d6e*/
+        v186 = (void *)FormHeapAlloc(0xD8Cu); /*0x5b7d90*/
+        v179 = (void *)FormHeapAlloc(0x908u); /*0x5b7db2*/
+        v196 = (void *)FormHeapAlloc(0xC00u); /*0x5b7dd4*/
       }
-      v60 = dbl_A3B1B8;
-      v61 = v201;
-      for ( k = 0; k < 0x220; k += 0x20 )
+      v60 = dbl_A3B1B8; /*0x5b7ddb*/
+      v61 = v201; /*0x5b7de1*/
+      for ( k = 0; k < 0x220; k += 0x20 ) /*0x5b7de8*/
       {
-        v62 = 0;
-        v63 = v55;
-        v167 = 0;
-        v55 += 0xCC;
-        v202 = (double)k - v60;
-        v64 = v202;
-        do
+        v62 = 0; /*0x5b7df4*/
+        v63 = v55; /*0x5b7df6*/
+        v167 = 0; /*0x5b7df8*/
+        v55 += 0xCC; /*0x5b7dfe*/
+        v202 = (double)k - v60; /*0x5b7e04*/
+        v64 = v202; /*0x5b7e0b*/
+        do /*0x5b7e3f*/
         {
-          v62 += 0x20;
-          v63 += 0xC;
-          v65 = (double)v167 - v60;
-          v167 = v62;
-          v200 = v65;
-          *(float *)(v63 - 0xC) = v200;
-          *(float *)(v63 - 8) = v61;
-          *(float *)(v63 - 4) = v64;
+          v62 += 0x20; /*0x5b7e16*/
+          v63 += 0xC; /*0x5b7e19*/
+          v65 = (double)v167 - v60; /*0x5b7e22*/
+          v167 = v62; /*0x5b7e24*/
+          v200 = v65; /*0x5b7e28*/
+          *(float *)(v63 - 0xC) = v200; /*0x5b7e36*/
+          *(float *)(v63 - 8) = v61; /*0x5b7e39*/
+          *(float *)(v63 - 4) = v64; /*0x5b7e3c*/
         }
-        while ( v62 < 0x220 );
+        while ( v62 < 0x220 ); /*0x5b7e3f*/
       }
-      if ( v145 )
+      if ( v145 ) /*0x5b7e5a*/
       {
-        *(_DWORD *)&v141[4] = 0xD8C;
-        memcpy(Dst, Src, *(size_t *)&v141[4]);
+        *(_DWORD *)&v141[4] = 0xD8C; /*0x5b7e67*/
+        memcpy(Dst, Src, *(size_t *)&v141[4]); /*0x5b7e6e*/
       }
-      v151 = 0;
-      v146 = v182 + dbl_A2FC68;
-      v190 = v161;
-      v66 = dbl_A3C770;
-      v194 = (char *)v187;
-      v67 = dbl_A492E0;
-      v189 = v180;
-      v68 = 1.0;
-      v69 = v217;
-      while ( 1 )
+      v151 = 0; /*0x5b7e8f*/
+      v146 = v182 + dbl_A2FC68; /*0x5b7e97*/
+      v190 = v161; /*0x5b7e9b*/
+      v66 = dbl_A3C770; /*0x5b7ea2*/
+      v194 = (char *)v187; /*0x5b7ea8*/
+      v67 = dbl_A492E0; /*0x5b7eaf*/
+      v189 = v180; /*0x5b7eb5*/
+      v68 = 1.0; /*0x5b7ebc*/
+      v69 = v217; /*0x5b7ebe*/
+      while ( 1 ) /*0x5b7ec9*/
       {
-        v71 = (double)v151;
-        v72 = v189;
-        v73 = *(float *)&v194;
-        v74 = v190;
-        v168 = 0;
-        v189 += 0x110;
-        v194 += 0x88;
-        v190 += 0x33;
-        v211 = 1.0 - v71 / v67;
-        *(float *)&v184 = v69 * v71;
-        while ( 1 )
+        v71 = (double)v151; /*0x5b7ec9*/
+        v72 = v189; /*0x5b7ee4*/
+        v73 = *(float *)&v194; /*0x5b7ee8*/
+        v74 = v190; /*0x5b7ef5*/
+        v168 = 0; /*0x5b7efd*/
+        v189 += 0x110; /*0x5b7f05*/
+        v194 += 0x88; /*0x5b7f0c*/
+        v190 += 0x33; /*0x5b7f13*/
+        v211 = 1.0 - v71 / v67; /*0x5b7f1e*/
+        *(float *)&v184 = v69 * v71; /*0x5b7f27*/
+        while ( 1 ) /*0x5b7f3d*/
         {
-          v75 = v204;
-          v76 = v205;
-          v154 = (float)v168;
-          *v74 = v203;
-          v74[1] = v75;
-          v77 = v211;
-          v74[2] = v76;
-          *(float *)(LODWORD(v73) + 4) = v77;
-          v210 = v154 / v67;
-          v78 = v191;
-          v217 = v191;
-          v79 = v154 * v191;
-          *(float *)LODWORD(v73) = v210;
-          v12 = byte_B1437C == 0;
-          v80 = v78;
-          v81 = v79;
-          v82 = v80;
-          v199[0] = v81;
-          v199[0] = v199[0] + *(float *)&v181;
-          v199[1] = *((float *)&v181 + 1) + *(float *)&v184;
-          v199[2] = v146;
-          v155 = flt_A46B10;
-          if ( !v12 )
+          v75 = v204; /*0x5b7f3d*/
+          v76 = v205; /*0x5b7f44*/
+          v154 = (float)v168; /*0x5b7f4b*/
+          *v74 = v203; /*0x5b7f4f*/
+          v74[1] = v75; /*0x5b7f55*/
+          v77 = v211; /*0x5b7f5a*/
+          v74[2] = v76; /*0x5b7f63*/
+          *(float *)(LODWORD(v73) + 4) = v77; /*0x5b7f66*/
+          v210 = v154 / v67; /*0x5b7f69*/
+          v78 = v191; /*0x5b7f70*/
+          v217 = v191; /*0x5b7f77*/
+          v79 = v154 * v191; /*0x5b7f85*/
+          *(float *)LODWORD(v73) = v210; /*0x5b7f87*/
+          v12 = byte_B1437C == 0; /*0x5b7f8a*/
+          v80 = v78; /*0x5b7f91*/
+          v81 = v79; /*0x5b7f91*/
+          v82 = v80; /*0x5b7f91*/
+          v199[0] = v81; /*0x5b7f93*/
+          v199[0] = v199[0] + *(float *)&v181; /*0x5b7fb3*/
+          v199[1] = *((float *)&v181 + 1) + *(float *)&v184; /*0x5b7fc5*/
+          v199[2] = v146; /*0x5b7fd0*/
+          v155 = flt_A46B10; /*0x5b7fdd*/
+          if ( !v12 ) /*0x5b7fe1*/
           {
-            v155 = (float)sub_4D2D00(v199);
-            v66 = dbl_A3C770;
-            v67 = dbl_A492E0;
-            v68 = 1.0;
-            v82 = v217;
+            v155 = (float)sub_4D2D00(v199); /*0x5b8003*/
+            v66 = dbl_A3C770; /*0x5b8007*/
+            v67 = dbl_A492E0; /*0x5b800d*/
+            v68 = 1.0; /*0x5b8013*/
+            v82 = v217; /*0x5b8015*/
           }
-          if ( v145 )
+          if ( v145 ) /*0x5b8021*/
           {
-            v83 = v82;
-            v84 = v68;
-            v85 = v83;
-            v221 = v84;
-            v222 = v84;
-            v86 = v222;
-            v223 = v84;
-            v87 = v223;
-            *(float *)v72 = v221;
-            *(float *)(v72 + 4) = v86;
-            *(float *)(v72 + 8) = v87;
-            v224 = v155 * v66;
-            *(float *)(v72 + 0xC) = v224;
+            v83 = v82; /*0x5b8023*/
+            v84 = v68; /*0x5b8023*/
+            v85 = v83; /*0x5b8023*/
+            v221 = v84; /*0x5b8025*/
+            v222 = v84; /*0x5b8033*/
+            v86 = v222; /*0x5b803a*/
+            v223 = v84; /*0x5b8041*/
+            v87 = v223; /*0x5b8048*/
+            *(float *)v72 = v221; /*0x5b8053*/
+            *(float *)(v72 + 4) = v86; /*0x5b8057*/
+            *(float *)(v72 + 8) = v87; /*0x5b805a*/
+            v224 = v155 * v66; /*0x5b805d*/
+            *(float *)(v72 + 0xC) = v224; /*0x5b806b*/
           }
           else
           {
-            v156 = v155 * v66;
-            v229 = v156;
-            v230 = v156;
-            v231 = v156;
-            *(float *)v72 = v156;
-            v88 = v82;
-            v84 = v68;
-            v85 = v88;
-            v232 = v84;
-            v89 = v232;
-            *(float *)(v72 + 4) = v156;
-            *(float *)(v72 + 8) = v156;
-            *(float *)(v72 + 0xC) = v89;
+            v156 = v155 * v66; /*0x5b8076*/
+            v229 = v156; /*0x5b807e*/
+            v230 = v156; /*0x5b808c*/
+            v231 = v156; /*0x5b809a*/
+            *(float *)v72 = v156; /*0x5b80a8*/
+            v88 = v82; /*0x5b80aa*/
+            v84 = v68; /*0x5b80aa*/
+            v85 = v88; /*0x5b80aa*/
+            v232 = v84; /*0x5b80ac*/
+            v89 = v232; /*0x5b80b3*/
+            *(float *)(v72 + 4) = v156; /*0x5b80ba*/
+            *(float *)(v72 + 8) = v156; /*0x5b80bd*/
+            *(float *)(v72 + 0xC) = v89; /*0x5b80c0*/
           }
-          v74 += 3;
-          LODWORD(v73) += 8;
-          v72 += 0x10;
-          if ( ++v168 >= 0x11 )
-            break;
-          v68 = v84;
+          v74 += 3; /*0x5b80ca*/
+          LODWORD(v73) += 8; /*0x5b80cd*/
+          v72 += 0x10; /*0x5b80d0*/
+          if ( ++v168 >= 0x11 ) /*0x5b80da*/
+            break; /*0x5b80da*/
+          v68 = v84; /*0x5b7f30*/
         }
-        if ( ++v151 >= 0x11 )
-          break;
-        v70 = v84;
-        v69 = v85;
-        v68 = v70;
+        if ( ++v151 >= 0x11 ) /*0x5b80ee*/
+          break; /*0x5b80ee*/
+        v70 = v84; /*0x5b7ec7*/
+        v69 = v85; /*0x5b7ec7*/
+        v68 = v70; /*0x5b7ec7*/
       }
-      if ( v145 )
+      if ( v145 ) /*0x5b8101*/
       {
-        *(_DWORD *)&v141[4] = 0xD8C;
-        memcpy(v186, v161, *(size_t *)&v141[4]);
-        LODWORD(v140) = 0x908;
-        memcpy(v179, v187, v140);
+        *(_DWORD *)&v141[4] = 0xD8C; /*0x5b810e*/
+        memcpy(v186, v161, *(size_t *)&v141[4]); /*0x5b8115*/
+        LODWORD(v140) = 0x908; /*0x5b8125*/
+        memcpy(v179, v187, v140); /*0x5b812c*/
       }
-      v90 = 0;
-      v91 = 0;
-      for ( m = 0; m < 0x10; ++m )
+      v90 = 0; /*0x5b8134*/
+      v91 = 0; /*0x5b8136*/
+      for ( m = 0; m < 0x10; ++m ) /*0x5b8138*/
       {
-        v92 = 0;
-        v93 = v91 % 2;
-        v94 = 0x11 * v91;
-        v147 = v91 % 2;
-        v95 = 0x11 * ((unsigned __int16)v91 + 1);
-        while ( 1 )
+        v92 = 0; /*0x5b813e*/
+        v93 = v91 % 2; /*0x5b814c*/
+        v94 = 0x11 * v91; /*0x5b8155*/
+        v147 = v91 % 2; /*0x5b815f*/
+        v95 = 0x11 * ((unsigned __int16)v91 + 1); /*0x5b8163*/
+        while ( 1 ) /*0x5b8185*/
         {
-          if ( v93 != v92 % 2 )
+          if ( v93 != v92 % 2 ) /*0x5b8183*/
           {
-            v96 = v95 + v92;
-            v59[v90] = v95 + v92;
-            v97 = v90 + 1;
-            v59[v97] = v94 + v92;
-            v98 = v94 + v92 + 1;
-            ++v97;
-            v59[v97++] = v98;
-            v59[v97] = v98;
-            v99 = v97 + 1;
-            v59[v99] = v95 + v92 + 1;
+            v96 = v95 + v92; /*0x5b818a*/
+            v59[v90] = v95 + v92; /*0x5b818d*/
+            v97 = v90 + 1; /*0x5b8191*/
+            v59[v97] = v94 + v92; /*0x5b8196*/
+            v98 = v94 + v92 + 1; /*0x5b819a*/
+            ++v97; /*0x5b819d*/
+            v59[v97++] = v98; /*0x5b81a0*/
+            v59[v97] = v98; /*0x5b81a7*/
+            v99 = v97 + 1; /*0x5b81ab*/
+            v59[v99] = v95 + v92 + 1; /*0x5b81b1*/
           }
           else
           {
-            v59[v90] = v95 + v92 + 1;
-            v100 = v90 + 1;
-            v184 = v95 + (unsigned __int16)v92 + 1;
-            v59[v100++] = v95 + v92;
-            v59[v100++] = v94 + v92;
-            v59[v100] = v94 + v92;
-            v99 = v100 + 1;
-            v59[v99] = v94 + v92 + 1;
-            v96 = v184;
+            v59[v90] = v95 + v92 + 1; /*0x5b81be*/
+            v100 = v90 + 1; /*0x5b81c2*/
+            v184 = v95 + (unsigned __int16)v92 + 1; /*0x5b81c5*/
+            v59[v100++] = v95 + v92; /*0x5b81cf*/
+            v59[v100++] = v94 + v92; /*0x5b81d8*/
+            v59[v100] = v94 + v92; /*0x5b81df*/
+            v99 = v100 + 1; /*0x5b81e3*/
+            v59[v99] = v94 + v92 + 1; /*0x5b81e9*/
+            v96 = v184; /*0x5b81ed*/
           }
-          v101 = v99 + 1;
-          v59[v101] = v96;
-          ++v92;
-          v90 = v101 + 1;
-          if ( v92 >= 0x10 )
-            break;
-          v93 = v147;
+          v101 = v99 + 1; /*0x5b81f5*/
+          v59[v101] = v96; /*0x5b81f8*/
+          ++v92; /*0x5b81fc*/
+          v90 = v101 + 1; /*0x5b81ff*/
+          if ( v92 >= 0x10 ) /*0x5b8205*/
+            break; /*0x5b8205*/
+          v93 = v147; /*0x5b8170*/
         }
-        v91 = m + 1;
+        v91 = m + 1; /*0x5b820f*/
       }
-      if ( v145 )
+      if ( v145 ) /*0x5b8224*/
       {
-        v102 = v196;
-        *(_DWORD *)&v141[4] = 0xC00;
-        memcpy(v196, v59, *(size_t *)&v141[4]);
-        v103 = (NiAVObject *)FormHeapAlloc(0xD0u);
-        LOBYTE(v234) = 4;
-        if ( v103 )
+        v102 = v196; /*0x5b822a*/
+        *(_DWORD *)&v141[4] = 0xC00; /*0x5b8231*/
+        memcpy(v196, v59, *(size_t *)&v141[4]); /*0x5b8238*/
+        v103 = (NiAVObject *)FormHeapAlloc(0xD0u); /*0x5b8247*/
+        LOBYTE(v234) = 4; /*0x5b8252*/
+        if ( v103 ) /*0x5b825a*/
         {
-          v104 = sub_57D7F0();
-          a3 = Double_To_SInt32(v104);
-          v105 = sub_57D7A0();
-          v106 = Double_To_SInt32(v105);
-          v107 = (NiNode *)sub_4A1780(
+          v104 = UI_GetVirtualScreenHeight(); /*0x5b825c*/
+          a3 = Double_To_SInt32(v104); /*0x5b8266*/
+          v105 = UI_GetVirtualScreenWidth(); /*0x5b8267*/
+          v106 = Double_To_SInt32(v105); /*0x5b826c*/
+          v107 = (NiNode *)sub_4A1780( /*0x5b82a3*/
                              v103,
                              0x121,
                              (int)Dst,
@@ -759,187 +759,187 @@ int __thiscall sub_5B7550(_DWORD *this)
         }
         else
         {
-          v107 = 0;
+          v107 = 0; /*0x5b82a7*/
         }
-        LOBYTE(v234) = 1;
-        v108 = (NiTexturingProperty *)FormHeapAlloc(0x30u);
-        LOBYTE(v234) = 5;
-        if ( v108 )
-          v109 = NiTexturingProperty::NiTexturingProperty(v108);
+        LOBYTE(v234) = 1; /*0x5b82ab*/
+        v108 = (NiTexturingProperty *)FormHeapAlloc(0x30u); /*0x5b82b3*/
+        LOBYTE(v234) = 5; /*0x5b82c1*/
+        if ( v108 ) /*0x5b82c9*/
+          v109 = NiTexturingProperty::NiTexturingProperty(v108); /*0x5b82d2*/
         else
-          v109 = 0;
-        a3a = (NiRenderedTexture *)dword_B42D44;
-        LOBYTE(v234) = 1;
-        NiTexturingProperty::SetUnk08(v109, a3a);
-        sub_405870(v109, 0);
-        v109->unk018 &= 0xFFF1u;
-        sub_405680(v107, (BSShaderProperty *)v109);
-        NiAVObject_InitializePropertyState((NiAVObject *)v107);
-        v110 = v192;
-        v111 = dbl_A3B1B8;
-        v207 = (double)(int)(v192 << 9) + v111;
-        v107->members.super.m_localTransform.pos.x = v207;
-        v208 = 0.0;
-        v107->members.super.m_localTransform.pos.y = 0.0;
-        v209 = v111 + (double)(int)(v158 << 9) - v170;
-        v107->members.super.m_localTransform.pos.z = v209;
-        (*(void (__thiscall **)(int, NiNode *, int))(*(_DWORD *)v173 + 0x84))(v173, v107, 1);
+          v109 = 0; /*0x5b82d6*/
+        a3a = (NiRenderedTexture *)unk_B42D44; /*0x5b82de*/
+        LOBYTE(v234) = 1; /*0x5b82e1*/
+        OB_NiTexturingProperty_SetBaseTexture_010201A0(v109, a3a); /*0x5b82e9*/
+        OB_NiTexturingProperty_SetClampMode_010201A0(v109, 0); /*0x5b82f2*/
+        v109->unk018 &= 0xFFF1u; /*0x5b82f7*/
+        sub_405680(v107, (BSShaderProperty *)v109); /*0x5b8300*/
+        NiAVObject_InitializePropertyState((NiAVObject *)v107); /*0x5b8307*/
+        v110 = v192; /*0x5b830c*/
+        v111 = dbl_A3B1B8; /*0x5b8335*/
+        v207 = (double)(int)(v192 << 9) + v111; /*0x5b8338*/
+        v107->members.super.m_localTransform.pos.x = v207; /*0x5b8348*/
+        v208 = 0.0; /*0x5b834b*/
+        v107->members.super.m_localTransform.pos.y = 0.0; /*0x5b8359*/
+        v209 = v111 + (double)(int)(v158 << 9) - v170; /*0x5b8364*/
+        v107->members.super.m_localTransform.pos.z = v209; /*0x5b8372*/
+        (*(void (__thiscall **)(int, NiNode *, int))(*(_DWORD *)v173 + 0x84))(v173, v107, 1); /*0x5b8381*/
       }
       else
       {
-        v110 = v192;
+        v110 = v192; /*0x5b8385*/
       }
-      v112 = (NiAVObject *)FormHeapAlloc(0xD0u);
-      LOBYTE(v234) = 6;
-      if ( v112 )
+      v112 = (NiAVObject *)FormHeapAlloc(0xD0u); /*0x5b8396*/
+      LOBYTE(v234) = 6; /*0x5b83a1*/
+      if ( v112 ) /*0x5b83a9*/
       {
-        v113 = sub_57D7F0();
-        a3b = Double_To_SInt32(v113);
-        v114 = sub_57D7A0();
-        v115 = Double_To_SInt32(v114);
-        v116 = sub_4A1780(v112, 0x121, (int)Src, (int)v161, v180, (int)v187, 1, 0, 0x200, (int)v59, 0, 0, v115, a3b);
+        v113 = UI_GetVirtualScreenHeight(); /*0x5b83ab*/
+        a3b = Double_To_SInt32(v113); /*0x5b83b5*/
+        v114 = UI_GetVirtualScreenWidth(); /*0x5b83b6*/
+        v115 = Double_To_SInt32(v114); /*0x5b83bb*/
+        v116 = sub_4A1780(v112, 0x121, (int)Src, (int)v161, v180, (int)v187, 1, 0, 0x200, (int)v59, 0, 0, v115, a3b); /*0x5b83f2*/
       }
       else
       {
-        v116 = 0;
+        v116 = 0; /*0x5b83f6*/
       }
-      v117 = v160;
-      LOBYTE(v234) = 1;
-      if ( v160 )
+      v117 = v160; /*0x5b83f8*/
+      LOBYTE(v234) = 1; /*0x5b83fe*/
+      if ( v160 ) /*0x5b8406*/
       {
-        v118 = (NiTexturingProperty *)FormHeapAlloc(0x30u);
-        LOBYTE(v234) = 7;
-        if ( v118 )
-          v119 = NiTexturingProperty::NiTexturingProperty(v118);
+        v118 = (NiTexturingProperty *)FormHeapAlloc(0x30u); /*0x5b840a*/
+        LOBYTE(v234) = 7; /*0x5b8418*/
+        if ( v118 ) /*0x5b8420*/
+          v119 = NiTexturingProperty::NiTexturingProperty(v118); /*0x5b8429*/
         else
-          v119 = 0;
-        LOBYTE(v234) = 1;
-        NiTexturingProperty::SetUnk08(v119, v160);
-        sub_405870(v119, 0);
-        v119->unk018 = v119->unk018 & 0xFFF1 | 4;
-        sub_405680((NiNode *)v116, (BSShaderProperty *)v119);
-        if ( !InterlockedDecrement((volatile LONG *)&v160->member) )
-          v160->__vftable->super.super.super.Destructor((NiRefObject *)v160, 1);
-        v117 = 0;
+          v119 = 0; /*0x5b842d*/
+        LOBYTE(v234) = 1; /*0x5b8432*/
+        OB_NiTexturingProperty_SetBaseTexture_010201A0(v119, v160); /*0x5b843a*/
+        OB_NiTexturingProperty_SetClampMode_010201A0(v119, 0); /*0x5b8443*/
+        v119->unk018 = v119->unk018 & 0xFFF1 | 4; /*0x5b8458*/
+        sub_405680((NiNode *)v116, (BSShaderProperty *)v119); /*0x5b845c*/
+        if ( !InterlockedDecrement((volatile LONG *)&v160->member) ) /*0x5b8465*/
+          v160->__vftable->super.super.super.Destructor((NiRefObject *)v160, 1); /*0x5b8478*/
+        v117 = 0; /*0x5b847a*/
       }
-      if ( !NiNode_GetNiPropertyByID((NiNode *)v116, 7) )
+      if ( !NiNode_GetNiPropertyByID((NiNode *)v116, 7) ) /*0x5b8484*/
       {
-        v120 = (BSShaderProperty *)sub_4E70B0();
-        sub_405680((NiNode *)v116, v120);
+        v120 = (BSShaderProperty *)DebugRender_GetOrCreateVertexColorProperty(); /*0x5b848d*/
+        sub_405680((NiNode *)v116, v120); /*0x5b8495*/
       }
-      if ( v145 )
+      if ( v145 ) /*0x5b849f*/
       {
-        v121 = (NiObjectNET *)FormHeapAlloc(0x1Cu);
-        v122 = (BSShaderProperty *)v121;
-        LOBYTE(v234) = 8;
-        if ( v121 )
+        v121 = (NiObjectNET *)FormHeapAlloc(0x1Cu); /*0x5b84a3*/
+        v122 = (BSShaderProperty *)v121; /*0x5b84a8*/
+        LOBYTE(v234) = 8; /*0x5b84b3*/
+        if ( v121 ) /*0x5b84bb*/
         {
-          NiObjectNET::NiObjectNET(v121);
-          v122->vtbl = &NiAlphaProperty::`vftable';
-          v122->member.super.flags = 0xEC;
-          v122->member.super.pad01A[0] = 0;
+          NiObjectNET::NiObjectNET(v121); /*0x5b84bf*/
+          v122->vtbl = &NiAlphaProperty::`vftable'; /*0x5b84c4*/
+          v122->member.super.flags = 0xEC; /*0x5b84ca*/
+          v122->member.super.pad01A[0] = 0; /*0x5b84d0*/
         }
         else
         {
-          v122 = 0;
+          v122 = 0; /*0x5b84d6*/
         }
-        v122->member.super.flags = v122->member.super.flags & 0xFE00 | 0xED;
-        LOBYTE(v234) = 1;
-        sub_405680((NiNode *)v116, v122);
+        v122->member.super.flags = v122->member.super.flags & 0xFE00 | 0xED; /*0x5b84e6*/
+        LOBYTE(v234) = 1; /*0x5b84ed*/
+        sub_405680((NiNode *)v116, v122); /*0x5b84f5*/
       }
-      NiAVObject_InitializePropertyState(v116);
-      v123 = (double)(int)(v110 << 9);
-      v124 = v173;
-      v125 = v213;
-      v126 = dbl_A3B1B8;
-      v212 = v123 + v126;
-      v116->members.m_localTransform.pos.x = v212;
-      v116->members.m_localTransform.pos.y = v125;
-      v214 = v126 + (double)(int)(v158 << 9) - v170;
-      v116->members.m_localTransform.pos.z = v214;
-      (*(void (__thiscall **)(int, NiAVObject *, int))(*(_DWORD *)v173 + 0x84))(v173, v116, 1);
-      v234 = 0xFFFFFFFF;
-      if ( v117 )
+      NiAVObject_InitializePropertyState(v116); /*0x5b84fc*/
+      v123 = (double)(int)(v110 << 9); /*0x5b850c*/
+      v124 = v173; /*0x5b8516*/
+      v125 = v213; /*0x5b8523*/
+      v126 = dbl_A3B1B8; /*0x5b852a*/
+      v212 = v123 + v126; /*0x5b852e*/
+      v116->members.m_localTransform.pos.x = v212; /*0x5b853c*/
+      v116->members.m_localTransform.pos.y = v125; /*0x5b8543*/
+      v214 = v126 + (double)(int)(v158 << 9) - v170; /*0x5b854b*/
+      v116->members.m_localTransform.pos.z = v214; /*0x5b8559*/
+      (*(void (__thiscall **)(int, NiAVObject *, int))(*(_DWORD *)v173 + 0x84))(v173, v116, 1); /*0x5b8566*/
+      v234 = 0xFFFFFFFF; /*0x5b856a*/
+      if ( v117 ) /*0x5b8575*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)&v117->member) )
-          v117->__vftable->super.super.super.Destructor((NiRefObject *)v117, 1);
+        if ( !InterlockedDecrement((volatile LONG *)&v117->member) ) /*0x5b857b*/
+          v117->__vftable->super.super.super.Destructor((NiRefObject *)v117, 1); /*0x5b858e*/
       }
-      v35 = ++v174;
+      v35 = ++v174; /*0x5b8594*/
     }
-    while ( v174 < v163 );
-    v26 = v188;
+    while ( v174 < v163 ); /*0x5b859f*/
+    v26 = v188; /*0x5b85a5*/
   }
-  v127 = 0;
-  if ( !TES->currentInteriorCell )
+  v127 = 0; /*0x5b85b8*/
+  if ( !MEMORY[0xB333A0]->currentInteriorCell ) /*0x5b85ba*/
   {
-    for ( n = 0; (int)n < v172; ++n )
+    for ( n = 0; (int)n < v172; ++n ) /*0x5b85cb*/
     {
-      for ( ii = 0; ii < v172; ++ii )
+      for ( ii = 0; ii < v172; ++ii ) /*0x5b85d1*/
       {
-        v128 = GetGridEntry(TES->gridCellArray, (int)n, ii);
-        v129 = &v128->cell;
-        if ( v128 )
+        v128 = GetGridEntry(MEMORY[0xB333A0]->gridCellArray, (int)n, ii); /*0x5b85ec*/
+        v129 = &v128->cell; /*0x5b85f1*/
+        if ( v128 ) /*0x5b85f5*/
         {
-          if ( v128->cell )
+          if ( v128->cell ) /*0x5b85f7*/
           {
-            v130 = 0;
-            for ( jj = 8; jj < 0x18; jj += 4 )
+            v130 = 0; /*0x5b85fd*/
+            for ( jj = 8; jj < 0x18; jj += 4 ) /*0x5b85ff*/
             {
-              if ( *((_BYTE *)&v169->prev + v127) )
+              if ( *((_BYTE *)&v169->prev + v127) ) /*0x5b8608*/
               {
-                v132 = TESObjectCELL_GetNiNode_(*v129);
-                if ( v132
+                v132 = GetObjectPointerAt_054(*v129); /*0x5b8611*/
+                if ( v132 /*0x5b8635*/
                   && v132->members.children.end > (unsigned int)(v130 + 2)
                   && (v133 = *(int *)((char *)&v132->members.children.data->vtbl + jj)) != 0
                   && *(_WORD *)(v133 + 0xB6) )
                 {
-                  v134 = **(_DWORD **)(v133 + 0xB0);
+                  v134 = **(_DWORD **)(v133 + 0xB0); /*0x5b8645*/
                 }
                 else
                 {
-                  v134 = 0;
+                  v134 = 0; /*0x5b8649*/
                 }
-                if ( v134 )
-                  *(_WORD *)(v134 + 0x18) |= 1u;
+                if ( v134 ) /*0x5b864d*/
+                  *(_WORD *)(v134 + 0x18) |= 1u; /*0x5b864f*/
               }
-              ++v127;
-              ++v130;
+              ++v127; /*0x5b8657*/
+              ++v130; /*0x5b865a*/
             }
           }
         }
       }
     }
-    MemoryHeap_Free_checked(v169);
-    v124 = v173;
-    v26 = v188;
+    MemoryHeap_Free_checked(v169); /*0x5b8696*/
+    v124 = v173; /*0x5b869b*/
+    v26 = v188; /*0x5b869f*/
   }
-  v135 = v226;
-  v136 = v227;
-  flt_B45E04 = v225;
-  v137 = v228;
-  flt_B45E08 = v135;
-  flt_B45E0C = v136;
-  flt_B45E10 = v137;
-  byte_B45DC0 = v165;
-  if ( !v149 )
-    LodWaterRoot->members.super.m_flags &= ~1u;
-  if ( !v166 )
-    v26->members.super.m_flags &= ~1u;
-  v138 = dword_B42D44;
-  if ( dword_B42D44 )
+  v135 = v226; /*0x5b86b2*/
+  v136 = v227; /*0x5b86b9*/
+  unk_B45E04 = v225; /*0x5b86c0*/
+  v137 = v228; /*0x5b86c5*/
+  unk_B45E08 = v135; /*0x5b86cc*/
+  unk_B45E0C = v136; /*0x5b86d6*/
+  unk_B45E10 = v137; /*0x5b86dc*/
+  unk_B45DC0 = v165; /*0x5b86e1*/
+  if ( !v149 ) /*0x5b86e7*/
+    *(_WORD *)(*(_DWORD *)&MEMORY[0xB33E90][0x13A4] + 0x18) &= ~1u; /*0x5b86ee*/
+  if ( !v166 ) /*0x5b86f9*/
+    v26->members.super.m_flags &= ~1u; /*0x5b86fb*/
+  v138 = unk_B42D44; /*0x5b8701*/
+  if ( unk_B42D44 ) /*0x5b8701*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v138 + 4)) )
+    if ( !InterlockedDecrement((volatile LONG *)(v138 + 4)) ) /*0x5b870f*/
     {
-      if ( v138 )
-        (**(void (__thiscall ***)(int, int))v138)(v138, 1);
+      if ( v138 ) /*0x5b871b*/
+        (**(void (__thiscall ***)(int, int))v138)(v138, 1); /*0x5b8725*/
     }
-    dword_B42D44 = 0;
+    unk_B42D44 = 0; /*0x5b8727*/
   }
-  v139 = v185;
-  Tile_SetFloat((Tile *)v185[0x19], (_DWORD *)0xFC8, 1.0);
-  Tile_SetFloat((Tile *)v139[0x19], (_DWORD *)0xFC8, fConstant_2);
-  v171 = (float)(int)v175;
-  Tile_SetFloat((Tile *)v139[0x19], (_DWORD *)0xFAE, v171);
-  Tile_SetFloat((Tile *)v139[0x19], (_DWORD *)0xFAF, v171);
-  return v124;
+  v139 = v185; /*0x5b8733*/
+  Tile_SetFloat((Tile *)v185[0x19], (_DWORD *)0xFC8, 1.0); /*0x5b8746*/
+  Tile_SetFloat((Tile *)v139[0x19], (_DWORD *)0xFC8, fConstant_2); /*0x5b875d*/
+  v171 = (float)(int)v175; /*0x5b876a*/
+  Tile_SetFloat((Tile *)v139[0x19], (_DWORD *)0xFAE, v171); /*0x5b877a*/
+  Tile_SetFloat((Tile *)v139[0x19], (_DWORD *)0xFAF, v171); /*0x5b878f*/
+  return v124; /*0x5b75c4*/
 }

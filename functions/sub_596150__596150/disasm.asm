@@ -48,7 +48,7 @@
 0x5961F9: call    Interface_ConsolePrint
 0x5961FE: mov     ecx, [esp+190h+var_174]
 0x596202: push    ecx
-0x596203: call    FormHeapFree
+0x596203: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x596208: add     esp, 10h
 0x59620B: jmp     short loc_596266
 0x59620D: push    0FFFFFFFFh
@@ -64,18 +64,18 @@
 0x59622F: fld     dword ptr ds:0A6B328h
 0x596235: mov     ecx, [esi+4]; this
 0x596238: push    ecx
-0x596239: fstp    [esp+188h+a2]; a3
-0x59623C: push    0FB4h; a2
-0x596241: call    Tile_SetFloat
+0x596239: fstp    [esp+188h+a2]; value
+0x59623C: push    0FB4h; propertyCode
+0x596241: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x596246: fldz
 0x596248: mov     ecx, [esi+4]; this
 0x59624B: push    ecx
-0x59624C: fstp    [esp+188h+a2]; a3
-0x59624F: push    0FB4h; a2
-0x596254: call    Tile_SetFloat
+0x59624C: fstp    [esp+188h+a2]; value
+0x59624F: push    0FB4h; propertyCode
+0x596254: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x596259: mov     ecx, [esp+184h+var_174]
 0x59625D: push    ecx
-0x59625E: call    FormHeapFree
+0x59625E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x596263: add     esp, 4
 0x596266: lea     ecx, [esp+184h+var_164]; this
 0x59626A: mov     [esp+184h+var_174], ebx
@@ -84,7 +84,7 @@
 0x596278: mov     byte ptr [esp+184h+var_4], bl
 0x59627F: call    ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)
 0x596284: push    edi
-0x596285: call    FormHeapFree
+0x596285: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59628A: add     esp, 4
 0x59628D: mov     ecx, [esp+184h+var_C]
 0x596294: mov     large fs:0, ecx
@@ -97,3 +97,20 @@
 0x5962A8: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5962AD: add     esp, 174h
 0x5962B3: retn
+0x9BFE40: lea     ecx, [ebp-16Ch]; void *
+0x9BFE46: jmp     BSStringT_Clear
+0x9BFE4B: lea     ecx, [ebp-164h]; this
+0x9BFE51: jmp     ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)
+0x9BFE56: lea     ecx, [ebp-174h]; void *
+0x9BFE5C: jmp     BSStringT_Clear
+0x9BFE61: mov     edx, [esp+arg_4]
+0x9BFE65: lea     eax, [edx-174h]
+0x9BFE6B: mov     ecx, [edx-178h]
+0x9BFE71: xor     ecx, eax
+0x9BFE73: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFE78: add     eax, 0Ch
+0x9BFE7B: mov     ecx, [edx-4]
+0x9BFE7E: xor     ecx, eax
+0x9BFE80: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFE85: mov     eax, offset stru_AE9228
+0x9BFE8A: jmp     ___CxxFrameHandler3

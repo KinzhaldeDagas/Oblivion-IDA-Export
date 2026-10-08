@@ -1,4 +1,4 @@
-0x420050: push    edi
+0x420050: push    edi; Prunes ExtraRunOncePacks entries that do not match the requested state byte or whose package scheduling data has expired/passed its threshold.
 0x420051: push    21h ; '!'; a2
 0x420053: call    BaseExtraList_GetExtraData
 0x420058: mov     edi, eax
@@ -34,7 +34,7 @@
 0x42009E: push    esi
 0x42009F: call    BSSimpleList_Remove
 0x4200A4: push    esi
-0x4200A5: call    FormHeapFree
+0x4200A5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4200AA: mov     ecx, [edi+0Ch]
 0x4200AD: add     esp, 4
 0x4200B0: mov     edx, ecx

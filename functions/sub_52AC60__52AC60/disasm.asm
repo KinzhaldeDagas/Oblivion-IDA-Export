@@ -15,7 +15,7 @@
 0x52AC88: push    8; a4
 0x52AC8A: lea     eax, [esp+14h+Dst]
 0x52AC8E: push    eax; Dst
-0x52AC8F: call    TESFile_GetChunkData
+0x52AC8F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52AC94: mov     cl, [esp+10h+var_7]
 0x52AC98: mov     dl, [esp+10h+Dst]
 0x52AC9C: mov     [edi+1], cl
@@ -26,7 +26,7 @@
 0x52ACA6: retn    4
 0x52ACA9: push    2; a4
 0x52ACAB: push    edi; Dst
-0x52ACAC: call    TESFile_GetChunkData
+0x52ACAC: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52ACB1: pop     edi
 0x52ACB2: pop     esi
 0x52ACB3: add     esp, 8

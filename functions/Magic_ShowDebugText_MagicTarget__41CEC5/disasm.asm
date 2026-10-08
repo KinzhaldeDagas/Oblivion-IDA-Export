@@ -158,7 +158,7 @@
 0x41D0B8: call    eax
 0x41D0BA: push    eax
 0x41D0BB: push    edi
-0x41D0BC: call    ActorValue_GetName
+0x41D0BC: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x41D0C1: fld     [esp+14h+arg_30]
 0x41D0C5: add     esp, 4
 0x41D0C8: push    eax

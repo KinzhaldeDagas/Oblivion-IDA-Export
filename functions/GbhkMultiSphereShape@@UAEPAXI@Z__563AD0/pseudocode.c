@@ -1,7 +1,7 @@
-bhkMultiSphereShape *__thiscall bhkMultiSphereShape::`scalar deleting destructor'(bhkMultiSphereShape *this, char a2)
+bhkShape *__thiscall bhkMultiSphereShape::`scalar deleting destructor'(bhkShape *this, char a2)
 {
-  bhkMultiSphereShape::~bhkMultiSphereShape(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  bhkMultiSphereShape::~bhkMultiSphereShape(this); /*0x563ad3*/
+  if ( (a2 & 1) != 0 ) /*0x563add*/
+    FormHeapFree((unsigned int)this); /*0x563ae0*/
+  return this; /*0x563aea*/
 }

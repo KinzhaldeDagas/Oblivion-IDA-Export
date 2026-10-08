@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 17,
-  "display_name": "sub_7F07D0",
+  "chunks": [
+    [
+      "0x7F07D0",
+      "0x7F09D0"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "6c79572d80d11c3c8b01442af497c7637d70f415d6484b2a881acd4d1cd522d6",
+  "comment_regular": "\n\n[v151 normal-card shader] Verified native leaf constant map retained by isolated normal-map shader. New VS2 programs derive from installed STLEAF000..003 in packages001/019; original VS1 integer addressing is preserved with floor before MOVA and EXPP.y fractions with FRC. 514 offscreen native/new comparisons passed coverage, missing-map lighting/fog, flat-normal point lighting (inside/outside radius), HDR and reset. This establishes tested shader behavior, not in-game pass integration.\n\nSpeedTreeOBSE v157: leaf authored30004/global30005/ambient30006 adapter validates this shader object vertex map and scopes native B46498/B464A8/B464B8 RGBs around setup-program virtual A9287C->77A1F0. Exact bindings here are VS c5 ambient,c6 directional diffuse,c7 point diffuse; flags10000007,size16,stride4,one register,borrowed sources. NiD3DSCM_Vertex ctor9A8490 installs vtableAB2BAC with Apply slot+40=9A8E30. Game execution remains UNVERIFIED.\n\nPass230: SpeedTree leaf vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.\nSpeedTreeOBSE v167 paired leaf shader reuses native constant-map setup and wind bank c18..c33 plus LeafBase c34..c81. New vertex programs move leaf centers with both matrices and add saved local card offsets afterward, matching the permitted RT4.1 CPU center-wind ordering. Exact RT4.1 standard GPU-renderer equivalence is UNVERIFIED; native rocking/rustling polynomial logic is retained. Shader2 is required for the expanded vertex programs.",
+  "comment_repeatable": "Pass230: SpeedTree leaf vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 26,
+  "display_name": "OB_SpeedTreeLeafShader_BuildConstantMap_010201A0",
   "end_ea": "0x7F09D0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F07D0",
+  "name": "OB_SpeedTreeLeafShader_BuildConstantMap_010201A0",
   "segment": ".text",
   "sha256": "93a2b9528faf093c966b2eccb63f061c4389c05524a600f9bcb590ead4aaa03f",
   "size": 512,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F07D0",
+  "total_chunk_size": 550,
   "type": "void __thiscall(int *this)",
-  "xrefs_from_count": 205,
+  "xrefs_from_count": 220,
   "xrefs_to_count": 1
 }

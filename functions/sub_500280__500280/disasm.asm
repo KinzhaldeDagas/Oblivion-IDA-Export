@@ -105,3 +105,12 @@
 0x5003D7: pop     ebx
 0x5003D8: add     esp, 64h
 0x5003DB: retn    0Ch
+0x9B6D60: lea     ecx, [ebp-64h]
+0x9B6D63: jmp     sub_4FF440
+0x9B6D68: mov     edx, [esp+arg_4]
+0x9B6D6C: lea     eax, [edx-68h]
+0x9B6D6F: mov     ecx, [edx-6Ch]
+0x9B6D72: xor     ecx, eax
+0x9B6D74: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6D79: mov     eax, offset stru_AE1A8C
+0x9B6D7E: jmp     ___CxxFrameHandler3

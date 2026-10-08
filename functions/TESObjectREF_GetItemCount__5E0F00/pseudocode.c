@@ -1,11 +1,15 @@
-void __userpurge TESObjectREF_GetItemCount(TESObjectREFR *this@<ecx>, TESForm *a2, int a3, int a4, int a5)
+// TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
+int __thiscall TESObjectREFR_GetItemCount(TESObjectREFR *this, TESForm *item)
 {
   ExtraContainerChanges_Data *ContainerExtraDataForRef; // eax
 
-  if ( TESObjectREFR_GetContainer(this) )
+  if ( TESObjectREFR_GetContainer(this) /*0x5e0f1b*/
+    && (ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef(this)) != 0 )
   {
-    ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef(this);
-    if ( ContainerExtraDataForRef )
-      ContainerExtraData_GetItemCount(ContainerExtraDataForRef, a2);
+    return ContainerExtraData_GetItemCount(ContainerExtraDataForRef, item); /*0x5e0f21*/
+  }
+  else
+  {
+    return 0; /*0x5e0f26*/
   }
 }

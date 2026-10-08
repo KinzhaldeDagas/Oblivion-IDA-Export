@@ -1,7 +1,7 @@
-0x5EA800: sub     esp, 14h
+0x5EA800: sub     esp, 14h; 3DTheft pass 166 crash decode: returns clamped SInt32 in EAX. Hybrid ABI uses ECX=this, entry [ESP+4]=with Actor, entry [ESP+8]=withBase TESForm; every exit is RET 4, so caller must discard the residual withBase dword.
 0x5EA803: push    ebx
 0x5EA804: push    esi
-0x5EA805: mov     esi, [esp+1Ch+a2]
+0x5EA805: mov     esi, [esp+1Ch+a2]; Decoded fixed stack input: with Actor* at entry ESP+4.
 0x5EA809: xor     ebx, ebx
 0x5EA80B: cmp     esi, ebx
 0x5EA80D: push    edi
@@ -13,7 +13,7 @@
 0x5EA818: xor     eax, eax
 0x5EA81A: pop     ebx
 0x5EA81B: add     esp, 14h
-0x5EA81E: retn    4
+0x5EA81E: retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.
 0x5EA821: mov     ecx, [edi+58h]
 0x5EA824: cmp     ecx, ebx
 0x5EA826: jz      short loc_5EA834
@@ -22,8 +22,8 @@
 0x5EA830: call    edx
 0x5EA832: mov     ebx, eax
 0x5EA834: push    ebp
-0x5EA835: mov     ecx, edi; this
-0x5EA837: call    TESObjectREFR_GetOwner
+0x5EA835: mov     ecx, edi; reference
+0x5EA837: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5EA83C: mov     ebp, eax
 0x5EA83E: mov     eax, [edi]
 0x5EA840: mov     edx, [eax+170h]
@@ -172,13 +172,13 @@
 0x5EA9F8: mov     eax, [edx+170h]
 0x5EA9FE: xor     ebx, ebx
 0x5EAA00: call    eax
-0x5EAA02: mov     ecx, [esp+20h+a3]
+0x5EAA02: mov     ecx, [esp+20h+a3]; Decoded second stack input: withBase TESForm* at entry ESP+8. This input is read even though the function returns with RET 4.
 0x5EAA06: cmp     ecx, eax
 0x5EAA08: jnz     short loc_5EAA11
 0x5EAA0A: mov     eax, ds:0B333C4h
 0x5EAA0F: jmp     short loc_5EAA1C
 0x5EAA11: push    ecx
-0x5EAA12: mov     ecx, offset ActorProcessManager_ptr
+0x5EAA12: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5EAA17: call    sub_675220
 0x5EAA1C: test    eax, eax
 0x5EAA1E: jz      short loc_5EAA34
@@ -187,7 +187,7 @@
 0x5EAA24: mov     eax, [edx+378h]
 0x5EAA2A: push    esi
 0x5EAA2B: call    eax
-0x5EAA2D: call    Double_To_SInt32
+0x5EAA2D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5EAA32: mov     ebx, eax
 0x5EAA34: mov     ecx, edi; this
 0x5EAA36: call    Actor_IsCreature
@@ -206,7 +206,7 @@
 0x5EAA5A: push    ecx
 0x5EAA5B: mov     ecx, esi
 0x5EAA5D: call    eax
-0x5EAA5F: call    Double_To_SInt32
+0x5EAA5F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5EAA64: mov     ecx, [esp+34h+a3]
 0x5EAA68: push    eax
 0x5EAA69: push    ebp
@@ -239,7 +239,7 @@
 0x5EAAB1: mov     eax, 64h ; 'd'
 0x5EAAB6: pop     ebx
 0x5EAAB7: add     esp, 14h
-0x5EAABA: retn    4
+0x5EAABA: retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.
 0x5EAABD: mov     edx, [esi]
 0x5EAABF: mov     eax, [edx+128h]
 0x5EAAC5: mov     ecx, esi
@@ -375,7 +375,7 @@
 0x5EAC38: push    esi
 0x5EAC39: mov     ecx, edi
 0x5EAC3B: call    eax
-0x5EAC3D: call    Double_To_SInt32
+0x5EAC3D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5EAC42: mov     edx, [edi]
 0x5EAC44: mov     [esp+18h+a2], eax
 0x5EAC48: mov     eax, [edx+170h]
@@ -399,7 +399,7 @@
 0x5EAC77: mov     edx, [eax+250h]
 0x5EAC7D: mov     ecx, esi
 0x5EAC7F: call    edx
-0x5EAC81: call    Double_To_SInt32
+0x5EAC81: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5EAC86: mov     ecx, [esp+34h+var_8]
 0x5EAC8A: push    eax; int
 0x5EAC8B: mov     eax, [esp+38h+var_4]
@@ -435,7 +435,7 @@
 0x5EACDD: pop     esi
 0x5EACDE: pop     ebx
 0x5EACDF: add     esp, 14h
-0x5EACE2: retn    4
+0x5EACE2: retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.
 0x5EACE5: test    eax, eax
 0x5EACE7: jge     short loc_5EACF1
 0x5EACE9: mov     [esp+24h+var_14], 0
@@ -445,4 +445,4 @@
 0x5EACF7: pop     esi
 0x5EACF8: pop     ebx
 0x5EACF9: add     esp, 14h
-0x5EACFC: retn    4
+0x5EACFC: retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.

@@ -1,9 +1,9 @@
-0x78FA40: push    esi
+0x78FA40: push    esi; SpeedTreeRT 4.1 source match: leaf texture vector accessor, indexing records with 0x54-byte stride.
 0x78FA41: mov     esi, ecx
 0x78FA43: mov     eax, [esi+4]
 0x78FA46: test    eax, eax
 0x78FA48: push    edi
-0x78FA49: mov     edi, [esp+8+arg_0]
+0x78FA49: mov     edi, [esp+8+index]
 0x78FA4D: jz      short loc_78FA69
 0x78FA4F: mov     ecx, [esi+8]
 0x78FA52: sub     ecx, eax

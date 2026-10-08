@@ -1,4 +1,4 @@
-char *sub_73D5C0()
+NiRTTI *sub_73D5C0()
 {
-  return dword_B40198;
+  return &stru_B40198; /*0x73d5c5*/
 }

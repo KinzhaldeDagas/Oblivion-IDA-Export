@@ -23,3 +23,12 @@
 0x7C2BE3: pop     esi
 0x7C2BE4: add     esp, 10h
 0x7C2BE7: retn
+0x9C38F0: mov     ecx, [ebp-10h]; this
+0x9C38F3: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9C38F8: mov     edx, dword ptr [esp+priority]
+0x9C38FC: lea     eax, [edx-8]
+0x9C38FF: mov     ecx, [edx-0Ch]
+0x9C3902: xor     ecx, eax
+0x9C3904: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3909: mov     eax, offset stru_AEC470
+0x9C390E: jmp     ___CxxFrameHandler3

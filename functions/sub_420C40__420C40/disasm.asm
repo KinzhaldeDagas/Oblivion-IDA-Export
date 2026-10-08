@@ -1,4 +1,4 @@
-0x420C40: push    4Ch ; 'L'; a2
+0x420C40: push    4Ch ; 'L'; Returns ExtraNorthRotation's float payload (type 0x4C), or 0.0.
 0x420C42: call    BaseExtraList_GetExtraData
 0x420C47: test    eax, eax
 0x420C49: jz      short loc_420C4F

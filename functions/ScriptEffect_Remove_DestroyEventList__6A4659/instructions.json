@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A4659",
-    "line": "mov     edi, [esi+3Ch]",
+    "line": "mov     edi, [esi+3Ch]; DestroyEventList chunk: destruct and FormHeapFree the ScriptEventList at +0x3C, then null the field.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6A4668",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

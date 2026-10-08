@@ -1,4 +1,4 @@
-void *sub_738780()
+NiRTTI *sub_738780()
 {
-  return &unk_B4012C;
+  return &stru_B4012C; /*0x738785*/
 }

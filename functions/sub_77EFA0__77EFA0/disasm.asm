@@ -1,4 +1,4 @@
-0x77EFA0: cmp     dword ptr ds:0B428A8h, 0
+0x77EFA0: cmp     dword ptr ds:0B428A8h, 0; MoonSugarEffect decode: removes a vertex shader wrapper from shaderProgramFactory+0x18 by key from wrapper base vtable +0x04. Destructor bookkeeping only; pass refs are still handled separately.
 0x77EFA7: jz      short locret_77EFCF
 0x77EFA9: mov     ecx, [esp+arg_0]
 0x77EFAD: test    ecx, ecx

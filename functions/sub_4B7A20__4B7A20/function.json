@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B7A20",
+      "0x4B7A56"
+    ]
+  ],
+  "chunks_sha256": "0443c6ea44c0ebd07584f48689bc0809e2cfe843f9d94120f9945023c64011db",
+  "comment_regular": "Verified TESObjectDOOR destructor helper calls TESObjectDOOR_ClearRandomTeleportSpaceList, then clears TESForm component references.",
+  "comment_repeatable": "Verified TESObjectDOOR destructor helper calls TESObjectDOOR_ClearRandomTeleportSpaceList, then clears TESForm component references.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B7A20",
+  "display_name": "TESObjectDOOR_ClearRandomTeleportSpacesAndComponents",
   "end_ea": "0x4B7A56",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B7A20",
+  "name": "TESObjectDOOR_ClearRandomTeleportSpacesAndComponents",
   "segment": ".text",
   "sha256": "0443c6ea44c0ebd07584f48689bc0809e2cfe843f9d94120f9945023c64011db",
   "size": 54,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B7A20",
-  "type": "void __thiscall(TESForm *this)",
+  "total_chunk_size": 54,
+  "type": "void __thiscall(TESObjectDOOR *this)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 2
 }

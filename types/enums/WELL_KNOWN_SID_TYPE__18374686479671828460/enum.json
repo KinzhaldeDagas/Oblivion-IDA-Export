@@ -1,0 +1,675 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "WELL_KNOWN_SID_TYPE",
+  "definition": "enum WELL_KNOWN_SID_TYPE : __int32\n{\nWinNullSid = 0x0,\nWinWorldSid = 0x1,\nWinLocalSid = 0x2,\nWinCreatorOwnerSid = 0x3,\nWinCreatorGroupSid = 0x4,\nWinCreatorOwnerServerSid = 0x5,\nWinCreatorGroupServerSid = 0x6,\nWinNtAuthoritySid = 0x7,\nWinDialupSid = 0x8,\nWinNetworkSid = 0x9,\nWinBatchSid = 0xA,\nWinInteractiveSid = 0xB,\nWinServiceSid = 0xC,\nWinAnonymousSid = 0xD,\nWinProxySid = 0xE,\nWinEnterpriseControllersSid = 0xF,\nWinSelfSid = 0x10,\nWinAuthenticatedUserSid = 0x11,\nWinRestrictedCodeSid = 0x12,\nWinTerminalServerSid = 0x13,\nWinRemoteLogonIdSid = 0x14,\nWinLogonIdsSid = 0x15,\nWinLocalSystemSid = 0x16,\nWinLocalServiceSid = 0x17,\nWinNetworkServiceSid = 0x18,\nWinBuiltinDomainSid = 0x19,\nWinBuiltinAdministratorsSid = 0x1A,\nWinBuiltinUsersSid = 0x1B,\nWinBuiltinGuestsSid = 0x1C,\nWinBuiltinPowerUsersSid = 0x1D,\nWinBuiltinAccountOperatorsSid = 0x1E,\nWinBuiltinSystemOperatorsSid = 0x1F,\nWinBuiltinPrintOperatorsSid = 0x20,\nWinBuiltinBackupOperatorsSid = 0x21,\nWinBuiltinReplicatorSid = 0x22,\nWinBuiltinPreWindows2000CompatibleAccessSid = 0x23,\nWinBuiltinRemoteDesktopUsersSid = 0x24,\nWinBuiltinNetworkConfigurationOperatorsSid = 0x25,\nWinAccountAdministratorSid = 0x26,\nWinAccountGuestSid = 0x27,\nWinAccountKrbtgtSid = 0x28,\nWinAccountDomainAdminsSid = 0x29,\nWinAccountDomainUsersSid = 0x2A,\nWinAccountDomainGuestsSid = 0x2B,\nWinAccountComputersSid = 0x2C,\nWinAccountControllersSid = 0x2D,\nWinAccountCertAdminsSid = 0x2E,\nWinAccountSchemaAdminsSid = 0x2F,\nWinAccountEnterpriseAdminsSid = 0x30,\nWinAccountPolicyAdminsSid = 0x31,\nWinAccountRasAndIasServersSid = 0x32,\nWinNTLMAuthenticationSid = 0x33,\nWinDigestAuthenticationSid = 0x34,\nWinSChannelAuthenticationSid = 0x35,\nWinThisOrganizationSid = 0x36,\nWinOtherOrganizationSid = 0x37,\nWinBuiltinIncomingForestTrustBuildersSid = 0x38,\nWinBuiltinPerfMonitoringUsersSid = 0x39,\nWinBuiltinPerfLoggingUsersSid = 0x3A,\nWinBuiltinAuthorizationAccessSid = 0x3B,\nWinBuiltinTerminalServerLicenseServersSid = 0x3C,\nWinBuiltinDCOMUsersSid = 0x3D,\nWinBuiltinIUsersSid = 0x3E,\nWinIUserSid = 0x3F,\nWinBuiltinCryptoOperatorsSid = 0x40,\nWinUntrustedLabelSid = 0x41,\nWinLowLabelSid = 0x42,\nWinMediumLabelSid = 0x43,\nWinHighLabelSid = 0x44,\nWinSystemLabelSid = 0x45,\nWinWriteRestrictedCodeSid = 0x46,\nWinCreatorOwnerRightsSid = 0x47,\nWinCacheablePrincipalsGroupSid = 0x48,\nWinNonCacheablePrincipalsGroupSid = 0x49,\nWinEnterpriseReadonlyControllersSid = 0x4A,\nWinAccountReadonlyControllersSid = 0x4B,\nWinBuiltinEventLogReadersGroup = 0x4C,\nWinNewEnterpriseReadonlyControllersSid = 0x4D,\nWinBuiltinCertSvcDComAccessGroup = 0x4E,\nWinMediumPlusLabelSid = 0x4F,\nWinLocalLogonSid = 0x50,\nWinConsoleLogonSid = 0x51,\nWinThisOrganizationCertificateSid = 0x52,\nWinApplicationPackageAuthoritySid = 0x53,\nWinBuiltinAnyPackageSid = 0x54,\nWinCapabilityInternetClientSid = 0x55,\nWinCapabilityInternetClientServerSid = 0x56,\nWinCapabilityPrivateNetworkClientServerSid = 0x57,\nWinCapabilityPicturesLibrarySid = 0x58,\nWinCapabilityVideosLibrarySid = 0x59,\nWinCapabilityMusicLibrarySid = 0x5A,\nWinCapabilityDocumentsLibrarySid = 0x5B,\nWinCapabilitySharedUserCertificatesSid = 0x5C,\nWinCapabilityEnterpriseAuthenticationSid = 0x5D,\nWinCapabilityRemovableStorageSid = 0x5E,\nWinBuiltinRDSRemoteAccessServersSid = 0x5F,\nWinBuiltinRDSEndpointServersSid = 0x60,\nWinBuiltinRDSManagementServersSid = 0x61,\nWinUserModeDriversSid = 0x62,\nWinBuiltinHyperVAdminsSid = 0x63,\nWinAccountCloneableControllersSid = 0x64,\nWinBuiltinAccessControlAssistanceOperatorsSid = 0x65,\nWinBuiltinRemoteManagementUsersSid = 0x66,\nWinAuthenticationAuthorityAssertedSid = 0x67,\nWinAuthenticationServiceAssertedSid = 0x68,\nWinLocalAccountSid = 0x69,\nWinLocalAccountAndAdministratorSid = 0x6A,\nWinAccountProtectedUsersSid = 0x6B,\n}\n",
+  "id": 18374686479671828460,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinNullSid",
+      "value": 0
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinWorldSid",
+      "value": 1
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLocalSid",
+      "value": 2
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCreatorOwnerSid",
+      "value": 3
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCreatorGroupSid",
+      "value": 4
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCreatorOwnerServerSid",
+      "value": 5
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCreatorGroupServerSid",
+      "value": 6
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinNtAuthoritySid",
+      "value": 7
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinDialupSid",
+      "value": 8
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinNetworkSid",
+      "value": 9
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBatchSid",
+      "value": 10
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinInteractiveSid",
+      "value": 11
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinServiceSid",
+      "value": 12
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAnonymousSid",
+      "value": 13
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinProxySid",
+      "value": 14
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinEnterpriseControllersSid",
+      "value": 15
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinSelfSid",
+      "value": 16
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAuthenticatedUserSid",
+      "value": 17
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinRestrictedCodeSid",
+      "value": 18
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinTerminalServerSid",
+      "value": 19
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinRemoteLogonIdSid",
+      "value": 20
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLogonIdsSid",
+      "value": 21
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLocalSystemSid",
+      "value": 22
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLocalServiceSid",
+      "value": 23
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinNetworkServiceSid",
+      "value": 24
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinDomainSid",
+      "value": 25
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinAdministratorsSid",
+      "value": 26
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinUsersSid",
+      "value": 27
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinGuestsSid",
+      "value": 28
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinPowerUsersSid",
+      "value": 29
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinAccountOperatorsSid",
+      "value": 30
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinSystemOperatorsSid",
+      "value": 31
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinPrintOperatorsSid",
+      "value": 32
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinBackupOperatorsSid",
+      "value": 33
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinReplicatorSid",
+      "value": 34
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinPreWindows2000CompatibleAccessSid",
+      "value": 35
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinRemoteDesktopUsersSid",
+      "value": 36
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinNetworkConfigurationOperatorsSid",
+      "value": 37
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountAdministratorSid",
+      "value": 38
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountGuestSid",
+      "value": 39
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountKrbtgtSid",
+      "value": 40
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountDomainAdminsSid",
+      "value": 41
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountDomainUsersSid",
+      "value": 42
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountDomainGuestsSid",
+      "value": 43
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountComputersSid",
+      "value": 44
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountControllersSid",
+      "value": 45
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountCertAdminsSid",
+      "value": 46
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountSchemaAdminsSid",
+      "value": 47
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountEnterpriseAdminsSid",
+      "value": 48
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountPolicyAdminsSid",
+      "value": 49
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountRasAndIasServersSid",
+      "value": 50
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinNTLMAuthenticationSid",
+      "value": 51
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinDigestAuthenticationSid",
+      "value": 52
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinSChannelAuthenticationSid",
+      "value": 53
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinThisOrganizationSid",
+      "value": 54
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinOtherOrganizationSid",
+      "value": 55
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinIncomingForestTrustBuildersSid",
+      "value": 56
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinPerfMonitoringUsersSid",
+      "value": 57
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinPerfLoggingUsersSid",
+      "value": 58
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinAuthorizationAccessSid",
+      "value": 59
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinTerminalServerLicenseServersSid",
+      "value": 60
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinDCOMUsersSid",
+      "value": 61
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinIUsersSid",
+      "value": 62
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinIUserSid",
+      "value": 63
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinCryptoOperatorsSid",
+      "value": 64
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinUntrustedLabelSid",
+      "value": 65
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLowLabelSid",
+      "value": 66
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinMediumLabelSid",
+      "value": 67
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinHighLabelSid",
+      "value": 68
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinSystemLabelSid",
+      "value": 69
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinWriteRestrictedCodeSid",
+      "value": 70
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCreatorOwnerRightsSid",
+      "value": 71
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCacheablePrincipalsGroupSid",
+      "value": 72
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinNonCacheablePrincipalsGroupSid",
+      "value": 73
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinEnterpriseReadonlyControllersSid",
+      "value": 74
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountReadonlyControllersSid",
+      "value": 75
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinEventLogReadersGroup",
+      "value": 76
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinNewEnterpriseReadonlyControllersSid",
+      "value": 77
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinCertSvcDComAccessGroup",
+      "value": 78
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinMediumPlusLabelSid",
+      "value": 79
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLocalLogonSid",
+      "value": 80
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinConsoleLogonSid",
+      "value": 81
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinThisOrganizationCertificateSid",
+      "value": 82
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinApplicationPackageAuthoritySid",
+      "value": 83
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinAnyPackageSid",
+      "value": 84
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityInternetClientSid",
+      "value": 85
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityInternetClientServerSid",
+      "value": 86
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityPrivateNetworkClientServerSid",
+      "value": 87
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityPicturesLibrarySid",
+      "value": 88
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityVideosLibrarySid",
+      "value": 89
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityMusicLibrarySid",
+      "value": 90
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityDocumentsLibrarySid",
+      "value": 91
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilitySharedUserCertificatesSid",
+      "value": 92
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityEnterpriseAuthenticationSid",
+      "value": 93
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinCapabilityRemovableStorageSid",
+      "value": 94
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinRDSRemoteAccessServersSid",
+      "value": 95
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinRDSEndpointServersSid",
+      "value": 96
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinRDSManagementServersSid",
+      "value": 97
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinUserModeDriversSid",
+      "value": 98
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinHyperVAdminsSid",
+      "value": 99
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountCloneableControllersSid",
+      "value": 100
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinAccessControlAssistanceOperatorsSid",
+      "value": 101
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinBuiltinRemoteManagementUsersSid",
+      "value": 102
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAuthenticationAuthorityAssertedSid",
+      "value": 103
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAuthenticationServiceAssertedSid",
+      "value": 104
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLocalAccountSid",
+      "value": 105
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinLocalAccountAndAdministratorSid",
+      "value": 106
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WinAccountProtectedUsersSid",
+      "value": 107
+    }
+  ],
+  "name": "WELL_KNOWN_SID_TYPE",
+  "ordinal": 2778,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

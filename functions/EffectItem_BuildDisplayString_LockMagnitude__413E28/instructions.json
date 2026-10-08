@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x413E28",
-    "line": "push    edx",
+    "line": "push    edx; numericLockMagnitude",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x413E29",
-    "line": "call    GetLockLevel",
+    "line": "call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x413E42",
-    "line": "mov     ecx, sMagicEffectItemLock",
+    "line": "mov     ecx, ds:0B334A8h",
     "mnemonic": "mov",
     "size": 6
   },

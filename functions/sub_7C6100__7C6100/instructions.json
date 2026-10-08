@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6100",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Test one incoming geometry against full-list lights and associate it with each eligible native receiver path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7C612C",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7C6132",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7C6169",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7C61AB",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x7C61B3",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7C61C2",
-    "line": "call    sub_7D2EA0",
+    "line": "call    ShadowSceneLight_TestReceiverEligibility; Receiver eligibility: test geometry bound against active projector planes when +0x14C is present, otherwise source-to-bound surface range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,25 +553,25 @@
   },
   {
     "ea": "0x7C61FB",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C61FF",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C6200",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C6202",
-    "line": "call    sub_7D5790",
+    "line": "call    ShadowSceneLight_AssociateReceiverGeometry; Associate receiver geometry only after BSShaderProperty RTTI, NiPropertyState+0x18 property-kind-4 lookup, and shader subtype 1..10. Existing links reorder; new links are inserted into both light-local and property-side ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -646,5 +646,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE670",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE673",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE678",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE67C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE67F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE682",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE684",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE689",
+    "line": "mov     eax, offset stru_AF7610",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE68E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

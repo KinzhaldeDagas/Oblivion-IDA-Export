@@ -4,7 +4,7 @@
 0x61E8A5: mov     esi, ecx
 0x61E8A7: mov     ecx, [esi+3Ch]
 0x61E8AA: push    edi
-0x61E8AB: call    sub_5E0F50
+0x61E8AB: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61E8B0: mov     edx, [eax]
 0x61E8B2: mov     ecx, eax
 0x61E8B4: mov     eax, [edx+11Ch]

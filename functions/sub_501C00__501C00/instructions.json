@@ -1,37 +1,37 @@
 [
   {
     "ea": "0x501C00",
-    "line": "mov     eax, [esp+arg_18]",
+    "line": "mov     eax, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x501C04",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x501C05",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x501C07",
-    "line": "push    0",
+    "line": "push    0; param1",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x501C09",
-    "line": "push    0",
+    "line": "push    0; subject",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x501C0B",
-    "line": "call    sub_4F46E0",
+    "line": "call    GetCurrentTime_Eval; GetCurrentTime_Eval reads TimeGlobals::GameHour and returns the numeric hour for the enclosing CTDA comparison; it has no parameters or subject requirement. Vanilla core dialogue uses it 23 times. Fallout's later counterpart x4y6:0x823B4BC8 reads Calendar::GetHour, so the owning time subsystem differs.",
     "mnemonic": "call",
     "size": 5
   },

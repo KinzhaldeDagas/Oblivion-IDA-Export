@@ -1,22 +1,22 @@
-0x5F70F0: sub     esp, 21Ch
+0x5F70F0: sub     esp, 21Ch; Actor single-topic speech path. Selects one INFO with ambient conversation rules, immediately runs AddTopicList/result on this actor, then plays only the first decoded response and destroys the temporary DialogueItem. Named from observed Oblivion behavior.
 0x5F70F6: mov     eax, ds:0B30AACh
 0x5F70FB: xor     eax, esp
 0x5F70FD: mov     [esp+21Ch+var_4], eax
-0x5F7104: mov     eax, [esp+21Ch+arg_4]
+0x5F7104: mov     eax, [esp+21Ch+target]
 0x5F710B: push    ebx
 0x5F710C: push    edi
-0x5F710D: push    0
-0x5F710F: push    0
+0x5F710D: push    0; conversation
+0x5F710F: push    0; previousTopic
 0x5F7111: mov     edi, ecx
-0x5F7113: mov     ecx, [esp+22Ch+arg_0]
-0x5F711A: push    eax
-0x5F711B: push    edi
-0x5F711C: call    TESTopic__CreateDialogueInfo
+0x5F7113: mov     ecx, [esp+22Ch+arg_0]; this
+0x5F711A: push    eax; target
+0x5F711B: push    edi; speaker
+0x5F711C: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x5F7121: fldz
-0x5F7123: mov     ecx, edi
+0x5F7123: mov     ecx, edi; this
 0x5F7125: fstp    [esp+224h+var_21C]
 0x5F7129: mov     ebx, eax
-0x5F712B: call    sub_5EF930
+0x5F712B: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x5F7130: test    ebx, ebx
 0x5F7132: jz      loc_5F72E9
 0x5F7138: push    ebp
@@ -24,19 +24,19 @@
 0x5F713A: mov     esi, [ebx+0Ch]
 0x5F713D: test    esi, esi
 0x5F713F: jz      short loc_5F7150
-0x5F7141: mov     ecx, esi; int
-0x5F7143: call    sub_5308D0
-0x5F7148: push    edi
-0x5F7149: mov     ecx, esi
-0x5F714B: call    sub_531470
+0x5F7141: mov     ecx, esi; this
+0x5F7143: call    TESTopicInfo__AddTopicList; Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.
+0x5F7148: push    edi; speaker
+0x5F7149: mov     ecx, esi; this
+0x5F714B: call    TESTopicInfo__RunResult; Single-topic speech commits the selected INFO before starting its first response. Unlike generated Conversation playback, this path does not defer result execution until response exhaustion.
 0x5F7150: mov     eax, ds:0B33398h
 0x5F7155: mov     ebp, [eax+24h]
 0x5F7158: test    ebp, ebp
 0x5F715A: jz      loc_5F72D7
-0x5F7160: mov     ecx, ebx
-0x5F7162: call    sub_6B7BA0
-0x5F7167: mov     ecx, ebx
-0x5F7169: call    sub_6B7C20
+0x5F7160: mov     ecx, ebx; this
+0x5F7162: call    DialogueItem__FirstResponse
+0x5F7167: mov     ecx, ebx; this
+0x5F7169: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x5F716E: test    eax, eax
 0x5F7170: mov     [esp+22Ch+var_214], eax
 0x5F7174: jz      loc_5F72D7
@@ -144,10 +144,10 @@
 0x5F72CE: push    eax; string
 0x5F72CF: call    GameUI_QueueMessage
 0x5F72D4: add     esp, 10h
-0x5F72D7: mov     ecx, ebx
-0x5F72D9: call    sub_6B81D0
+0x5F72D7: mov     ecx, ebx; this
+0x5F72D9: call    DialogueItem__Destroy
 0x5F72DE: push    ebx
-0x5F72DF: call    FormHeapFree
+0x5F72DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F72E4: add     esp, 4
 0x5F72E7: pop     esi
 0x5F72E8: pop     ebp

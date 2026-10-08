@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B80D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Ambient DialogueItem constructor. Unlike player MenuTopic::FillResponseList, this path appends every collected TESResponse without filtering empty display text and without INFOGENERAL/D7's first-nonempty-response limit. An ambient RUMOR item can therefore retain all authored responses.",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6B813A",
-    "line": "mov     [esp+28h+var_14], eax",
+    "line": "mov     [esp+28h+responseList], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,19 +217,19 @@
   },
   {
     "ea": "0x6B8142",
-    "line": "lea     edx, [esp+28h+var_14]",
+    "line": "lea     edx, [esp+28h+responseList]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B8146",
-    "line": "push    edx",
+    "line": "push    edx; outResponses",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8147",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x6B814D",
-    "line": "call    sub_531270",
+    "line": "call    TESTopicInfo__CollectResponses; DialogueItem construction also consumes an independent TESResponseList snapshot. Ambient items therefore remain valid after the one-entry shared INFO response cache is switched to a different TESTopicInfo.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6B8152",
-    "line": "lea     edi, [esp+28h+var_14]",
+    "line": "lea     edi, [esp+28h+responseList]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B8156",
-    "line": "mov     ebp, [edi]",
+    "line": "mov     ebp, [edi]; Ambient response enumeration has no NAM1/text-length test. Each collected TESResponse is converted to a DialogueResponse, including empty-text entries; voice-path generation and normal cursor/result timing still apply.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x6B817E",
-    "line": "push    ebp; a6",
+    "line": "push    ebp; responseData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B817F",
-    "line": "push    ecx; a5",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x6B8184",
-    "line": "push    ebx; a4",
+    "line": "push    ebx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8185",
-    "line": "push    edx; a3",
+    "line": "push    edx; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8186",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; ownerQuest",
     "mnemonic": "push",
     "size": 1
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6B8189",
-    "line": "call    sub_6B83B0",
+    "line": "call    DialogueResponse__DialogueResponse; MorrowindDialogueText hook site: verified response constructor call to sub_6B83B0. Hook aliases legacy &sUActnQuick1;/2 before DialogMenu tile string assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x6B81A3",
-    "line": "lea     ecx, [esp+28h+var_14]",
+    "line": "lea     ecx, [esp+28h+responseList]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x6B81AF",
-    "line": "call    sub_5308E0",
+    "line": "call    TESResponseList__Clear; Destroy every TESResponse and responseText owned by this list. CollectResponses creates a clone first, so this cleanup releases the caller's temporary snapshot without clearing the shared global cache.",
     "mnemonic": "call",
     "size": 5
   },
@@ -502,5 +502,89 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6EA0",
+    "line": "lea     ecx, [ebp-14h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6EA3",
+    "line": "jmp     j_TESResponseList__Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6EA8",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6EAB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6EAC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6EB1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6EB2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6EB3",
+    "line": "mov     edx, [esp+a3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C6EB7",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6EBA",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6EBD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6EBF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6EC4",
+    "line": "mov     eax, offset stru_AEF334",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6EC9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

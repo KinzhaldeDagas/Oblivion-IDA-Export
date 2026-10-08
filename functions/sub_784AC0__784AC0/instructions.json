@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x784AC0",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion 1.2.0.416: checked erase(first,last) for 0x18-byte records; compacts the tail, destroys remnants, updates end, and returns an iterator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x784AC2",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+first.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x784ACC",
-    "line": "cmp     esi, [esp+8+arg_C]",
+    "line": "cmp     esi, [esp+8+last.owner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x784AD7",
-    "line": "mov     eax, [esp+8+arg_10]",
+    "line": "mov     eax, [esp+8+last.current]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784ADB",
-    "line": "mov     ecx, [esp+8+arg_8]",
+    "line": "mov     ecx, [esp+8+first.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x784AE5",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x784AE9",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784AEA",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784AEB",
-    "line": "call    sub_784880",
+    "line": "call    OB_stVector24_CopyRangeAdapter_010201A0; Oblivion 1.2.0.416: copy-range adapter for 0x18-byte records; returns destination advanced by the source count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x784B00",
-    "line": "mov     ecx, esi; void *",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x784B02",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x784B0E",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, [esp+10h+first.current]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784B12",
-    "line": "mov     esi, [esp+10h+arg_4]",
+    "line": "mov     esi, [esp+10h+first.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x784B1B",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+result]",
     "mnemonic": "mov",
     "size": 4
   },

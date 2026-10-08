@@ -1,1 +1,7 @@
-caret_state
+enum caret_state : __int32
+{
+CARET_STATE_OFF = 0x0,
+CARET_STATE_ON = 0x1,
+CARET_STATE_TOGGLE = 0x2,
+CARET_STATE_ON_IF_MOVED = 0x3,
+};

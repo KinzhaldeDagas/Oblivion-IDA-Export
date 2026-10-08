@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E8060",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified preferred-node setter: sets/clears the least-significant bit of the Z float at graph-node+0x1C while preserving the remaining position bits. PathGrid candidate search temporarily clears/restores it around actor-aware cost evaluation.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4E8071",
-    "line": "cmp     byte ptr [esp+8+arg_0], 0",
+    "line": "cmp     [esp+8+preferred], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x4E807E",
-    "line": "mov     [esp+8+arg_0], eax",
+    "line": "mov     dword ptr [esp+8+preferred], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E8082",
-    "line": "fild    [esp+8+arg_0]",
+    "line": "fild    dword ptr [esp+8+preferred]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x4E8095",
-    "line": "mov     [esp+8+arg_0], edx",
+    "line": "mov     dword ptr [esp+8+preferred], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E8099",
-    "line": "fild    [esp+8+arg_0]",
+    "line": "fild    dword ptr [esp+8+preferred]",
     "mnemonic": "fild",
     "size": 4
   },

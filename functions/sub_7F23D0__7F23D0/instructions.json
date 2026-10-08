@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F23D0",
-    "line": "push    esi",
+    "line": "push    esi; STSPData scalar dtor: frees data pointer +0x08 only when count/ownership word +0x0C is nonzero, then NiRefObject cleanup.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7F23E8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7F23F0",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7F2401",
-    "line": "test    [esp+4+arg_0], 1",
+    "line": "test    [esp+4+freeMemory], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7F2409",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

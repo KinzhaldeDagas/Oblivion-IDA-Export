@@ -8,7 +8,7 @@
 0x423E5F: movzx   ebx, byte ptr [eax+0Ch]
 0x423E63: jmp     short loc_423E6A
 0x423E65: mov     ebx, 1
-0x423E6A: mov     eax, [esp+8+arg_0]
+0x423E6A: mov     eax, [esp+8+mask]
 0x423E6E: not     eax
 0x423E70: push    13h; a2
 0x423E72: mov     ecx, esi; this
@@ -19,7 +19,7 @@
 0x423E7F: cmp     ebx, 1
 0x423E82: jz      short loc_423E92
 0x423E84: mov     ecx, esi
-0x423E86: call    sub_41EB90
+0x423E86: call    ExtraDataList_GetOrCreateAction; Returns existing ExtraAction type 0x13, or creates one with default action flag byte 1 and null action reference.
 0x423E8B: test    eax, eax
 0x423E8D: jz      short loc_423E92
 0x423E8F: mov     [eax+0Ch], bl

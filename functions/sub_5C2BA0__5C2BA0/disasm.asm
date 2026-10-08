@@ -14,8 +14,8 @@
 0x5C2BCC: add     esp, 14h
 0x5C2BCF: test    eax, eax
 0x5C2BD1: jz      short locret_5C2BE1
-0x5C2BD3: call    sub_578D70
+0x5C2BD3: call    InterfaceManager_ConsumeMessageButton
 0x5C2BD8: cmp     al, 2
 0x5C2BDA: jnz     short locret_5C2BE1
-0x5C2BDC: jmp     sub_5C28F0
+0x5C2BDC: jmp     RaceSexMenu_ApplyPlayerChangesAndClose
 0x5C2BE1: retn

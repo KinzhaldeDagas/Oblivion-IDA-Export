@@ -18,7 +18,7 @@
 0x5C6306: xor     edi, edi
 0x5C6308: mov     [esp+2Ch+var_14], esp
 0x5C630C: push    edi; a3
-0x5C630D: push    eax; a2
+0x5C630D: push    eax; categoryName
 0x5C630E: mov     [ecx], edi
 0x5C6310: mov     [ecx+4], di
 0x5C6314: mov     [ecx+6], di
@@ -34,19 +34,19 @@
 0x5C6333: mov     [ecx+4], di
 0x5C6337: mov     [ecx+6], di
 0x5C633B: call    BSStringT_Set
-0x5C6340: mov     ecx, esi
+0x5C6340: mov     ecx, esi; this
 0x5C6342: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x5C634A: call    sub_5C3440
+0x5C634A: call    RaceSexMenu_FindControlTile; Resolve the localized Hair > Length control Tile.
 0x5C634F: mov     ecx, eax
 0x5C6351: call    Tile_GetFloat
-0x5C6356: fstp    [esp+20h+var_14]
+0x5C6356: fstp    [esp+20h+var_14]; Hair > Length commit reads Tile user0 (0xFAE), not TESNPC+0x1CC, and immediately writes that value back to NPC+0x1CC at 0x5C636F. If Randomize Face left the Tile stale, a subsequent commit can overwrite the generated hair length. Native source path verified, runtime UI event ordering pending.
 0x5C635A: mov     ecx, ds:0B333C4h
 0x5C6360: mov     eax, [ecx]
 0x5C6362: mov     edx, [eax+170h]
 0x5C6368: call    edx
 0x5C636A: fld     [esp+20h+var_14]
 0x5C636E: push    edi
-0x5C636F: fstp    dword ptr [eax+1CCh]
+0x5C636F: fstp    dword ptr [eax+1CCh]; Commit the slider value to TESNPC::hairLength (+0x1CC).
 0x5C6375: mov     ecx, esi
 0x5C6377: call    sub_5C50A0
 0x5C637C: mov     ecx, [esp+20h+var_C]
@@ -56,3 +56,12 @@
 0x5C6389: pop     esi
 0x5C638A: add     esp, 14h
 0x5C638D: retn
+0x9C13A0: mov     ecx, [ebp-14h]; void *
+0x9C13A3: jmp     BSStringT_Clear
+0x9C13A8: mov     edx, [esp+arg_4]
+0x9C13AC: lea     eax, [edx-10h]
+0x9C13AF: mov     ecx, [edx-14h]
+0x9C13B2: xor     ecx, eax
+0x9C13B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C13B9: mov     eax, offset stru_AEA470
+0x9C13BE: jmp     ___CxxFrameHandler3

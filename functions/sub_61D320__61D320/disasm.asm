@@ -23,7 +23,7 @@
 0x61D36A: test    ah, 5
 0x61D36D: jp      short loc_61D3BF
 0x61D36F: mov     ecx, [esi+3Ch]
-0x61D372: call    sub_5E05B0
+0x61D372: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x61D377: test    al, al
 0x61D379: jnz     short loc_61D3BF
 0x61D37B: mov     ecx, [esi+3Ch]

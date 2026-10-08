@@ -1,12 +1,13 @@
-int __cdecl Calc_DetectionLevel_::CalcLightFactor(
+// Computes the target-light contribution using light level, detector visual penalties/bonuses (including Blindness/Night Eye inputs), distance normalization, and fSneakLightMult; preserves the stronger accumulated contribution.
+int __cdecl Calc_DetectionLevel_ApplyLightFactor(
         int a1,
         float a2,
-        int a3,
+        float a3,
         int a4,
         int a5,
         int a6,
         int a7,
-        int a8,
+        float a8,
         int a9,
         int a10,
         int a11,
@@ -21,9 +22,9 @@ int __cdecl Calc_DetectionLevel_::CalcLightFactor(
 {
   float v21; // [esp+50h] [ebp+50h]
 
-  __asm
+  __asm /*0x5464e6*/
   {
-    fild    [esp+arg_24]
+    fild    [esp+arg_24]; Computes the target-light contribution using light level, detector visual penalties/bonuses (including Blindness/Night Eye inputs), distance normalization, and fSneakLightMult; preserves the stronger accumulated contribution.
     fadd    dword ptr ds:0B36CB8h
     fld     [esp+arg_4]
     fmul    st, st(3)
@@ -44,9 +45,9 @@ int __cdecl Calc_DetectionLevel_::CalcLightFactor(
     fcom    [esp+arg_4C]
     fnstsw  ax
   }
-  if ( (_AX & 0x4100) == 0 )
-    __asm { fst     [esp+arg_4C] }
-  return Calc_DetectionLevel_::CalcSneakFactor(
+  if ( (_AX & 0x4100) == 0 ) /*0x546529*/
+    __asm { fst     [esp+arg_4C] } /*0x54652b*/
+  return Calc_DetectionLevel_SelectSneakFactor(
            a1,
            a2,
            a3,

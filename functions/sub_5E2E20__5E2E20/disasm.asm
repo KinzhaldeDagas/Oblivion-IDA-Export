@@ -1,4 +1,4 @@
-0x5E2E20: sub     esp, 18h
+0x5E2E20: sub     esp, 18h; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x5E2E23: push    ebx
 0x5E2E24: push    ebp
 0x5E2E25: push    esi
@@ -11,19 +11,19 @@
 0x5E2E37: call    sub_4AF170
 0x5E2E3C: test    eax, eax
 0x5E2E3E: jz      loc_5E302B
-0x5E2E44: mov     eax, [esp+28h+arg_1C]
-0x5E2E48: push    0
-0x5E2E4A: push    eax
+0x5E2E44: mov     eax, dword ptr [esp+28h+pathMode]
+0x5E2E48: push    0; excludedPoints
+0x5E2E4A: push    eax; pathMode
 0x5E2E4B: lea     ecx, [esp+30h+a2]
-0x5E2E4F: push    ebx
-0x5E2E50: push    ecx
-0x5E2E51: call    sub_67D820
+0x5E2E4F: push    ebx; actor
+0x5E2E50: push    ecx; position
+0x5E2E51: call    TESPathGrid_FindNearestReachablePointForActor; Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.
 0x5E2E56: mov     esi, eax
 0x5E2E58: add     esp, 10h
 0x5E2E5B: test    esi, esi
 0x5E2E5D: jz      loc_5E300D
-0x5E2E63: mov     ecx, esi
-0x5E2E65: call    sub_4E7DE0
+0x5E2E63: mov     ecx, esi; this
+0x5E2E65: call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.
 0x5E2E6A: test    eax, eax
 0x5E2E6C: jz      loc_5E2FC3
 0x5E2E72: cmp     dword ptr [eax+4], 0
@@ -35,8 +35,8 @@
 0x5E2E85: jz      loc_5E300D
 0x5E2E8B: cmp     byte ptr [esp+28h+a3], 0
 0x5E2E90: jz      short loc_5E2ED6
-0x5E2E92: mov     ecx, edi
-0x5E2E94: call    sub_4BEF40
+0x5E2E92: mov     ecx, edi; this
+0x5E2E94: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5E2E99: fld     dword ptr [eax+8]
 0x5E2E9C: mov     edx, [ebx]
 0x5E2E9E: fstp    [esp+28h+var_18]
@@ -54,16 +54,16 @@
 0x5E2ECB: fnstsw  ax
 0x5E2ECD: test    ah, 5
 0x5E2ED0: jp      loc_5E300D
-0x5E2ED6: mov     ecx, edi
-0x5E2ED8: call    sub_4BEF40
+0x5E2ED6: mov     ecx, edi; this
+0x5E2ED8: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5E2EDD: mov     edi, [eax]
 0x5E2EDF: mov     ebx, [eax+4]
 0x5E2EE2: mov     ebp, [eax+8]
-0x5E2EE5: mov     ecx, esi
+0x5E2EE5: mov     ecx, esi; this
 0x5E2EE7: mov     [esp+28h+var_C], edi
 0x5E2EEB: mov     [esp+28h+var_8], ebx
 0x5E2EEF: mov     [esp+28h+var_4], ebp
-0x5E2EF3: call    sub_4BEF40
+0x5E2EF3: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5E2EF8: fld     [esp+28h+var_C]
 0x5E2EFC: fsub    dword ptr [eax]
 0x5E2EFE: lea     ecx, [esp+28h+var_18]
@@ -74,10 +74,10 @@
 0x5E2F11: fld     [esp+28h+var_4]
 0x5E2F15: fsub    dword ptr [eax+8]
 0x5E2F18: fstp    [esp+28h+var_10]
-0x5E2F1C: call    sub_43F350
+0x5E2F1C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5E2F21: push    0; Seed
 0x5E2F23: fstp    [esp+2Ch+arg_14]
-0x5E2F27: call    GetRandomLargeInteger?
+0x5E2F27: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5E2F2C: cdq
 0x5E2F2D: mov     ecx, 3E8h
 0x5E2F32: idiv    ecx
@@ -102,7 +102,7 @@
 0x5E2F68: mov     ecx, ebp
 0x5E2F6A: jmp     loc_5E3085
 0x5E2F6F: fld     dword ptr [esp+28h+var_18]
-0x5E2F73: mov     ecx, esi
+0x5E2F73: mov     ecx, esi; this
 0x5E2F75: fmul    st, st(1)
 0x5E2F77: fstp    [esp+28h+var_C]
 0x5E2F7B: fld     dword ptr [esp+28h+var_18+4]
@@ -110,7 +110,7 @@
 0x5E2F81: fstp    [esp+28h+var_8]
 0x5E2F85: fmul    [esp+28h+var_10]
 0x5E2F89: fstp    [esp+28h+var_4]
-0x5E2F8D: call    sub_4BEF40
+0x5E2F8D: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5E2F92: fld     dword ptr [eax]
 0x5E2F94: fadd    [esp+28h+var_C]
 0x5E2F98: fstp    dword ptr [esp+28h+var_18]
@@ -126,8 +126,8 @@
 0x5E2FBE: jmp     loc_5E3085
 0x5E2FC3: cmp     byte ptr [esp+28h+a3], 0
 0x5E2FC8: jz      short loc_5E2FF2
-0x5E2FCA: mov     ecx, esi
-0x5E2FCC: call    sub_4BEF40
+0x5E2FCA: mov     ecx, esi; this
+0x5E2FCC: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5E2FD1: fld     dword ptr [eax+8]
 0x5E2FD4: mov     edx, [ebx]
 0x5E2FD6: fstp    [esp+28h+var_18]
@@ -139,8 +139,8 @@
 0x5E2FEB: fnstsw  ax
 0x5E2FED: test    ah, 44h
 0x5E2FF0: jp      short loc_5E300D
-0x5E2FF2: mov     ecx, esi
-0x5E2FF4: call    sub_4BEF40
+0x5E2FF2: mov     ecx, esi; this
+0x5E2FF4: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5E2FF9: mov     ecx, [eax]
 0x5E2FFB: mov     [esp+28h+a2], ecx
 0x5E2FFF: mov     edx, [eax+4]
@@ -158,7 +158,7 @@
 0x5E3026: mov     ecx, [eax+8]
 0x5E3029: jmp     short loc_5E3085
 0x5E302B: mov     ecx, esi; this
-0x5E302D: call    TESObjectCELL_IsInterior
+0x5E302D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5E3032: test    al, al
 0x5E3034: jnz     short loc_5E3079
 0x5E3036: lea     ecx, [esp+28h+a3]

@@ -1,6 +1,8 @@
-void __thiscall ChangesMap::~ChangesMap(NiTMap_TESCELL *this)
+//
+// Verified: installs ChangesMap vtable, calls RemoveAllChanges 45A8B0, then pointer-map base destructor 45A620; owned values/buffers released before bucket storage.
+void __thiscall ChangesMap::~ChangesMap(ChangesMap *self)
 {
-  this->vtbl = &ChangesMap::`vftable';
-  sub_45A8B0(this);
-  NiTPointerMap<unsigned int,ChangeData *>::~NiTPointerMap<unsigned int,ChangeData *>((unsigned int *)this);
+  self->vtbl = &ChangesMap::`vftable'; /*0x45f058*/
+  ChangesMap_RemoveAllChanges(self); /*0x45f066*/
+  NiTPointerMap<unsigned int,ChangeData *>::~NiTPointerMap<unsigned int,ChangeData *>((unsigned int *)self); /*0x45f075*/
 }

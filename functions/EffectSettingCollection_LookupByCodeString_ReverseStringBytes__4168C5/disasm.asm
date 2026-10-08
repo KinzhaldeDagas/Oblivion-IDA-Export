@@ -11,7 +11,7 @@
 0x4168E2: shl     ecx, 8
 0x4168E5: or      ecx, edx
 0x4168E7: push    ecx
-0x4168E8: mov     ecx, offset EffectSettingCollection
+0x4168E8: mov     ecx, 0B33508h
 0x4168ED: mov     dword ptr [esp+8], 0
 0x4168F5: call    NiTMap_GetAt
 0x4168FA: mov     eax, [esp+0]

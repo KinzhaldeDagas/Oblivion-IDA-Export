@@ -55,23 +55,23 @@
 0x755256: fstp    st
 0x755258: lea     esi, [ecx+64h]
 0x75525B: mov     ecx, 0Dh
-0x755260: lea     edi, [esp+130h+var_9C]
+0x755260: lea     edi, [esp+130h+local]
 0x755267: rep movsd
 0x755269: mov     esi, [ebx+10h]
 0x75526C: add     esi, 64h ; 'd'
 0x75526F: mov     ecx, 0Dh
 0x755274: lea     edi, [esp+130h+var_68]
-0x75527B: lea     eax, [esp+130h+var_34]
+0x75527B: lea     eax, [esp+130h+parent]
 0x755282: rep movsd
 0x755284: push    eax
 0x755285: lea     ecx, [esp+134h+var_68]
-0x75528C: call    sub_718A80
-0x755291: lea     ecx, [esp+130h+var_9C]
-0x755298: push    ecx
-0x755299: lea     edx, [esp+134h+var_D0]
-0x75529D: push    edx
-0x75529E: lea     ecx, [esp+138h+var_34]
-0x7552A5: call    sub_53D7A0
+0x75528C: call    sub_718A80;
+0x755291: lea     ecx, [esp+130h+local]
+0x755298: push    ecx; local
+0x755299: lea     edx, [esp+134h+out]
+0x75529D: push    edx; out
+0x75529E: lea     ecx, [esp+138h+parent]; parent
+0x7552A5: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x7552AA: fld     dword ptr [ebx+20h]
 0x7552AD: mov     esi, [ebp+arg_4]
 0x7552B0: fmul    qword ptr ds:0A2FAA0h
@@ -103,17 +103,17 @@
 0x75530E: mov     ecx, [eax]
 0x755310: mov     [esp+130h+var_100], ecx
 0x755314: fld     [esp+130h+var_100]
-0x755318: fsub    [esp+130h+var_AC]
+0x755318: fsub    [esp+130h+out.pos.x]
 0x75531F: mov     ecx, [eax+4]
 0x755322: mov     eax, [eax+8]
 0x755325: mov     [esp+130h+var_FC], ecx
 0x755329: fstp    [esp+130h+var_11C]
 0x75532D: mov     [esp+130h+var_F8], eax
 0x755331: fld     [esp+130h+var_FC]
-0x755335: fsub    [esp+130h+var_A8]
+0x755335: fsub    [esp+130h+out.pos.y]
 0x75533C: fstp    [esp+130h+var_118]
 0x755340: fld     [esp+130h+var_F8]
-0x755344: fsub    [esp+130h+var_A4]
+0x755344: fsub    [esp+130h+out.pos.z]
 0x75534B: fstp    [esp+130h+var_114]
 0x75534F: fld     [esp+130h+var_118]
 0x755353: fld     st

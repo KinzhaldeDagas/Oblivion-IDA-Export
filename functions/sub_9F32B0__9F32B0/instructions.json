@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F32B0",
-    "line": "push    offset aXbox360Control; \"Xbox 360 Controller\"",
+    "line": "push    offset aXbox360Control; [Controller decode 2026-07-09] Initializes game setting sXBox360Controller = Xbox 360 Controller. UI label only; not evidence of XInput polling and not related to IsXBox.",
     "mnemonic": "push",
     "size": 5
   },
@@ -13,19 +13,19 @@
   },
   {
     "ea": "0x9F32BA",
-    "line": "mov     ecx, offset unk_B38F00",
+    "line": "mov     ecx, offset stru_B38F00; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9F32BF",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x9F32C4",
-    "line": "push    offset sub_A22520; void (__cdecl *)()",
+    "line": "push    offset GameSetting_Destroy_sXBox360Controller; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

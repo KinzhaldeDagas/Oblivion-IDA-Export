@@ -6,22 +6,22 @@
 0x98D56E: push    eax; flOptions
 0x98D56F: call    ds:HeapCreate
 0x98D575: test    eax, eax
-0x98D577: mov     hHeap, eax
+0x98D577: mov     dword_BA9E10+49Ch, eax
 0x98D57C: jnz     short loc_98D581
 0x98D57E: xor     eax, eax
 0x98D580: retn
 0x98D581: call    ___heap_select
 0x98D586: cmp     eax, 3
-0x98D589: mov     dword_BAABC0, eax
+0x98D589: mov     dword ptr unk_BAABC0, eax
 0x98D58E: jnz     short loc_98D5B4
 0x98D590: push    3F8h
 0x98D595: call    ___sbh_heap_init
 0x98D59A: test    eax, eax
 0x98D59C: pop     ecx
 0x98D59D: jnz     short loc_98D5B4
-0x98D59F: push    hHeap; hHeap
+0x98D59F: push    dword_BA9E10+49Ch; hHeap
 0x98D5A5: call    ds:HeapDestroy
-0x98D5AB: and     hHeap, 0
+0x98D5AB: and     dword_BA9E10+49Ch, 0
 0x98D5B2: jmp     short loc_98D57E
 0x98D5B4: xor     eax, eax
 0x98D5B6: inc     eax

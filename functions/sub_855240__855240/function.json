@@ -1,19 +1,32 @@
 {
-  "callees_count": 192,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 71,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_855240",
+  "chunks": [
+    [
+      "0x855240",
+      "0x855E79"
+    ]
+  ],
+  "chunks_sha256": "24c362007b8340363d07a6a27b7fb888d7753a87620b1ea9c8e197aa98853a80",
+  "comment_regular": "ShaderPackage class-1 PP-lighting producer at vtable +0x98. Refract/RefractF emits selector 0x160/0x161/0x162, then continues class-1 material/light pass production. This function contains no 0x177..0x17A high-selector construction.",
+  "comment_repeatable": "ShaderPackage class-1 PP-lighting producer at vtable +0x98. Refract/RefractF emits selector 0x160/0x161/0x162, then continues class-1 material/light pass production. This function contains no 0x177..0x17A high-selector construction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "BSShaderPPLightingProperty_BuildClass1Passes",
   "end_ea": "0x855E79",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_855240",
+  "name": "BSShaderPPLightingProperty_BuildClass1Passes",
   "segment": ".text",
   "sha256": "24c362007b8340363d07a6a27b7fb888d7753a87620b1ea9c8e197aa98853a80",
   "size": 3129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x855240",
-  "type": "void __fastcall(int, int, NiNode *, int, NiTPointerList_Node_void *, int)",
+  "total_chunk_size": 3129,
+  "type": "void __thiscall(BSShaderProperty *this, NiGeometry *geometry, int rendererState, unsigned __int16 *outContext, int emit)",
   "xrefs_from_count": 1228,
   "xrefs_to_count": 5
 }

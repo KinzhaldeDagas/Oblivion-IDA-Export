@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
-  "callers_count": 19,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_478780",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
+  "callers_count": 24,
+  "chunks": [
+    [
+      "0x478780",
+      "0x4788D8"
+    ]
+  ],
+  "chunks_sha256": "f821016b5677918f77a7322f76d1bd2764001f173708121d7682a18eaf2676be",
+  "comment_regular": "ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
+  "comment_repeatable": "ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ActorSkinInfo_ClearOrReplaceEquipmentSlot",
   "end_ea": "0x4788D8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_478780",
+  "name": "ActorSkinInfo_ClearOrReplaceEquipmentSlot",
   "segment": ".text",
   "sha256": "f821016b5677918f77a7322f76d1bd2764001f173708121d7682a18eaf2676be",
   "size": 344,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x478780",
-  "type": "void __userpurge(char *this@<ecx>, char bp0@<bpl>, double st5_0@<st2>, double st6_0@<st1>, double@<st0>, int, char, int)",
+  "total_chunk_size": 344,
+  "type": "void __thiscall(ActorSkinInfo *this, ActorSkinInfoEquipmentSlot *slot, bool replaceMetadata, TESModel *newModelData)",
   "xrefs_from_count": 141,
   "xrefs_to_count": 24
 }

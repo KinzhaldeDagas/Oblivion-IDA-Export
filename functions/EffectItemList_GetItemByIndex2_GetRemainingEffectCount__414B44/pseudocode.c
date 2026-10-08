@@ -1,35 +1,41 @@
-int __usercall EffectItemList_GetItemByIndex2_::GetRemainingEffectCount@<eax>(
+int __userpurge EffectItemList_GetItemByIndex2_::GetRemainingEffectCount@<eax>(
         int a1@<eax>,
         int a2@<ebx>,
         int a3@<ebp>,
-        _DWORD *a4@<edi>,
-        int a5@<esi>)
+        int *a4@<edi>,
+        int a5@<esi>,
+        int a6)
 {
-  _DWORD *v5; // ecx
-  int v6; // edx
-  int v7; // ecx
+  int *v6; // ecx
+  int v7; // edx
+  int v8; // ecx
 
-  v5 = a4;
-  v6 = 0;
-  if ( !a4 )
-    return EffectItemList_GetItemByIndex2_::Done____();
-  do
+  v6 = a4; /*0x414b44*/
+  v7 = 0; /*0x414b46*/
+  if ( !a4 ) /*0x414b4a*/
+    return EffectItemList_GetItemByIndex2_::Done____(a6); /*0x414b4a*/
+  do /*0x414b5d*/
   {
-    if ( *v5 )
-      ++v6;
-    v5 = (_DWORD *)v5[1];
+    if ( *v6 ) /*0x414b50*/
+      ++v7; /*0x414b55*/
+    v6 = (int *)v6[1]; /*0x414b58*/
   }
-  while ( v5 );
-  if ( !v6 || a2 > a3 || a1 )
-    return EffectItemList_GetItemByIndex2_::Done____();
-  if ( a2 != a3 )
+  while ( v6 ); /*0x414b5d*/
+  if ( !v7 || a2 > a3 || a1 ) /*0x414b69*/
+    return EffectItemList_GetItemByIndex2_::Done____(a6); /*0x414b69*/
+  if ( a2 == a3 ) /*0x414b6d*/
   {
-    v7 = *(_DWORD *)(a5 + 8);
-    if ( !v7 )
-      return EffectItemList_GetItemByIndex2_::Done____();
-    a5 = v7 - 4;
+    a1 = *a4; /*0x414b6f*/
   }
-  if ( !a5 )
-    return EffectItemList_GetItemByIndex2_::Done____();
-  return EffectItemList_GetItemByIndex2_::EffectLoop();
+  else
+  {
+    v8 = *(_DWORD *)(a5 + 8); /*0x414b73*/
+    ++a2; /*0x414b76*/
+    if ( !v8 ) /*0x414b7b*/
+      return EffectItemList_GetItemByIndex2_::Done____(a6); /*0x414b7b*/
+    a5 = v8 - 4; /*0x414b7d*/
+  }
+  if ( !a5 ) /*0x414b82*/
+    return EffectItemList_GetItemByIndex2_::Done____(a6); /*0x414b83*/
+  return EffectItemList_GetItemByIndex2_::EffectLoop(a1, a2, a3, a5);
 }

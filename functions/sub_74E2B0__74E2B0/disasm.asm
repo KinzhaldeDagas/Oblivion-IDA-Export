@@ -3,7 +3,7 @@
 0x74E2B2: mov     edi, [esp+8+arg_0]
 0x74E2B6: push    edi
 0x74E2B7: mov     esi, ecx
-0x74E2B9: call    nullsub_returnvVoid_1arg
+0x74E2B9: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x74E2BE: cmp     dword ptr [edi+0D8h], 14000002h
 0x74E2C8: jnb     short loc_74E2FD
 0x74E2CA: mov     eax, [esi+10h]

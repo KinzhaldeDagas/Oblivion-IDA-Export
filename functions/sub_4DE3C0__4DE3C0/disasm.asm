@@ -13,7 +13,7 @@
 0x4DE3E2: push    6
 0x4DE3E4: fstp    st
 0x4DE3E6: mov     ecx, esi
-0x4DE3E8: call    NiNode_GetNiPropertyByID
+0x4DE3E8: call    NiNode_GetNiPropertyByID;
 0x4DE3ED: test    eax, eax
 0x4DE3EF: jz      short loc_4DE408
 0x4DE3F1: mov     eax, [eax+0Ch]

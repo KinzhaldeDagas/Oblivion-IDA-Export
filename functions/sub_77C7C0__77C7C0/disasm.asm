@@ -11,7 +11,7 @@
 0x77C7DA: mov     edi, ecx
 0x77C7DC: mov     ecx, esi
 0x77C7DE: mov     [esp+38h+var_28], eax
-0x77C7E2: call    sub_452A60
+0x77C7E2: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77C7E7: mov     ebx, eax
 0x77C7E9: test    ebx, ebx
 0x77C7EB: jnz     short loc_77C826
@@ -31,7 +31,7 @@
 0x77C816: mov     ecx, esi
 0x77C818: call    sub_738630
 0x77C81D: mov     ecx, esi
-0x77C81F: call    sub_452A60
+0x77C81F: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77C824: mov     ebx, eax
 0x77C826: mov     ecx, esi
 0x77C828: call    TESEnchantableForm_GetCastingType

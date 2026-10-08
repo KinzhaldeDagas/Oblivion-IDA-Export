@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x779596",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x779597",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x7795A2",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x7795EE",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7795EF",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x7795FA",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

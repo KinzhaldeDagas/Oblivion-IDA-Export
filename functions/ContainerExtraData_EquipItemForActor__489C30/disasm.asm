@@ -1,4 +1,4 @@
-0x489C30: push    0FFFFFFFFh
+0x489C30: push    0FFFFFFFFh; UCWUS pipeline note: container equip/inventory reference path is relevant to token persistence and recharge menu movement; current UCWUS bridge leaves recharge shuttling scripted.
 0x489C32: push    offset ContainerExtraData_EquipItemForActor_SEH
 0x489C37: mov     eax, large fs:0
 0x489C3D: push    eax
@@ -58,7 +58,7 @@
 0x489CCD: call    TESBipedModelForm_CoversSlot
 0x489CD2: test    al, al
 0x489CD4: jnz     short loc_489D0D
-0x489CD6: mov     ecx, [esp+2Ch+arg_C]
+0x489CD6: mov     ecx, [esp+2Ch+item]
 0x489CDA: test    ecx, ecx
 0x489CDC: jz      short loc_489CF8
 0x489CDE: call    sub_41DEF0
@@ -142,13 +142,13 @@
 0x489DA0: jz      short loc_489DA8
 0x489DA2: sub     ebp, edi
 0x489DA4: mov     [esp+2Ch+var_14], ebp
-0x489DA8: mov     edi, [esp+2Ch+arg_C]
+0x489DA8: mov     edi, [esp+2Ch+item]
 0x489DAC: test    edi, edi
 0x489DAE: jz      short loc_489DE8
 0x489DB0: mov     ebp, [ebx]
-0x489DB2: push    edi
-0x489DB3: mov     ecx, ebp
-0x489DB5: call    sub_446C30
+0x489DB2: push    edi; item
+0x489DB3: mov     ecx, ebp; this
+0x489DB5: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x489DBA: test    al, al
 0x489DBC: jnz     short loc_489DE8
 0x489DBE: test    ebp, ebp
@@ -164,8 +164,8 @@
 0x489DD9: mov     ebp, [ebp+4]
 0x489DDC: test    ebp, ebp
 0x489DDE: jnz     short loc_489DC2
-0x489DE0: mov     [esp+2Ch+arg_C], 0
-0x489DE8: mov     ebp, [esp+2Ch+arg_C]
+0x489DE0: mov     [esp+2Ch+item], 0
+0x489DE8: mov     ebp, [esp+2Ch+item]
 0x489DEC: xor     esi, esi
 0x489DEE: test    ebp, ebp
 0x489DF0: mov     bl, 1
@@ -182,7 +182,7 @@
 0x489E15: jnz     loc_48A4F5
 0x489E1B: mov     eax, [edi]
 0x489E1D: test    eax, eax
-0x489E1F: mov     [esp+2Ch+arg_C], eax
+0x489E1F: mov     [esp+2Ch+item], eax
 0x489E23: jz      loc_489F64
 0x489E29: lea     esp, [esp+0]
 0x489E30: test    bl, bl
@@ -210,7 +210,7 @@
 0x489E85: call    ExtraDataList_constr
 0x489E8A: mov     edi, eax
 0x489E8C: jmp     short loc_489EEC
-0x489E8E: mov     [esp+2Ch+arg_C], esi
+0x489E8E: mov     [esp+2Ch+item], esi
 0x489E92: jmp     loc_489DE8
 0x489E97: mov     edi, [esp+2Ch+var_18]
 0x489E9B: test    edi, edi
@@ -218,7 +218,7 @@
 0x489EA3: push    0Ch; Size
 0x489EA5: call    FormHeapAlloc
 0x489EAA: add     esp, 4
-0x489EAD: mov     [esp+2Ch+arg_C], eax
+0x489EAD: mov     [esp+2Ch+item], eax
 0x489EB1: test    eax, eax
 0x489EB3: mov     [esp+2Ch+var_4], 0
 0x489EBB: jz      short loc_489ECD
@@ -252,7 +252,7 @@
 0x489F14: push    eax
 0x489F15: call    ExtraDataList_SetExtraCount
 0x489F1A: mov     edi, [esp+2Ch+var_18]
-0x489F1E: mov     eax, [esp+2Ch+arg_C]
+0x489F1E: mov     eax, [esp+2Ch+item]
 0x489F22: xor     bl, bl
 0x489F24: jmp     short loc_489F5C
 0x489F26: mov     ecx, [esp+2Ch+arg_10]
@@ -264,7 +264,7 @@
 0x489F37: push    eax
 0x489F38: mov     ecx, esi
 0x489F3A: call    ExtraDataList_SetExtraCount
-0x489F3F: mov     eax, [esp+2Ch+arg_C]
+0x489F3F: mov     eax, [esp+2Ch+item]
 0x489F43: xor     bl, bl
 0x489F45: jmp     short loc_489F5C
 0x489F47: test    esi, esi
@@ -275,7 +275,7 @@
 0x489F51: xor     bl, bl
 0x489F53: jmp     short loc_489F5C
 0x489F55: mov     eax, [eax+4]
-0x489F58: mov     [esp+2Ch+arg_C], eax
+0x489F58: mov     [esp+2Ch+item], eax
 0x489F5C: test    eax, eax
 0x489F5E: jnz     loc_489E30
 0x489F64: test    ebp, ebp
@@ -310,7 +310,6 @@
 0x489FB7: test    eax, eax
 0x489FB9: jz      short loc_489FCB
 0x489FBB: jmp     short loc_489FC0
-0x489FBD: align 10h
 0x489FC0: cmp     [eax], ebp
 0x489FC2: jz      short loc_489FD1
 0x489FC4: mov     eax, [eax+4]
@@ -325,7 +324,7 @@
 0x489FE0: push    14h; Size
 0x489FE2: call    FormHeapAlloc
 0x489FE7: add     esp, 4
-0x489FEA: mov     [esp+2Ch+arg_C], eax
+0x489FEA: mov     [esp+2Ch+item], eax
 0x489FEE: test    eax, eax
 0x489FF0: mov     [esp+2Ch+var_4], 2
 0x489FF8: jz      short loc_48A005
@@ -375,7 +374,7 @@
 0x48A075: mov     edx, [esp+2Ch+arg_14]
 0x48A079: push    edx
 0x48A07A: mov     ecx, esi
-0x48A07C: call    sub_41F370
+0x48A07C: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x48A081: mov     edi, [esp+2Ch+arg_8]
 0x48A085: cmp     dword ptr [edi+58h], 0
 0x48A089: jz      loc_48A4F5
@@ -448,7 +447,7 @@
 0x48A161: call    eax
 0x48A163: mov     ecx, [ebp+0]
 0x48A166: mov     bl, al
-0x48A168: call    BSSimpleList_Clear
+0x48A168: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A16D: mov     ecx, [ebp+0]
 0x48A170: push    esi
 0x48A171: call    BSSimpleList_PushFront
@@ -496,18 +495,18 @@
 0x48A1F4: mov     ecx, [ebp+0]
 0x48A1F7: test    ecx, ecx
 0x48A1F9: jz      short loc_48A200
-0x48A1FB: call    BSSimpleList_Clear
+0x48A1FB: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A200: mov     ecx, [ebp+0]
 0x48A203: push    ecx
-0x48A204: call    FormHeapFree
+0x48A204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A209: push    ebp
 0x48A20A: mov     dword ptr [ebp+0], 0
-0x48A211: call    FormHeapFree
+0x48A211: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A216: add     esp, 8
 0x48A219: xor     ebp, ebp
 0x48A21B: jmp     short loc_48A237
-0x48A21D: mov     ecx, edi
-0x48A21F: call    TESObjectREFR_GetAnimData
+0x48A21D: mov     ecx, edi; this
+0x48A21F: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x48A224: test    eax, eax
 0x48A226: jz      short loc_48A237
 0x48A228: mov     edx, [ebp+8]
@@ -522,9 +521,9 @@
 0x48A24C: test    ebp, ebp
 0x48A24E: jz      ContainerExtraData_EquipItemForActor___def_48A0B5; jumptable 0048A0B5 default case, cases 21,23-25,27-32
 0x48A254: mov     eax, [ebp+8]
-0x48A257: push    eax
-0x48A258: mov     ecx, edi
-0x48A25A: call    EquipWeapon
+0x48A257: push    eax; weapon
+0x48A258: mov     ecx, edi; this
+0x48A25A: call    EquipWeapon; Equips the supplied form on this reference. The native ABI has one stack argument: the weapon/form pointer.
 0x48A25F: jmp     ContainerExtraData_EquipItemForActor___def_48A0B5; jumptable 0048A0B5 default case, cases 21,23-25,27-32
 0x48A264: mov     ecx, [edi+58h]; jumptable 0048A0B5 case 26
 0x48A267: mov     edx, [ecx]
@@ -535,7 +534,7 @@
 0x48A275: test    ebp, ebp
 0x48A277: jz      short loc_48A28F
 0x48A279: mov     ecx, [ebp+0]
-0x48A27C: call    BSSimpleList_Clear
+0x48A27C: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A281: mov     ecx, [ebp+0]
 0x48A284: push    esi
 0x48A285: call    BSSimpleList_PushFront
@@ -570,13 +569,13 @@
 0x48A2DF: mov     ecx, [ebp+0]
 0x48A2E2: test    ecx, ecx
 0x48A2E4: jz      short loc_48A2EB
-0x48A2E6: call    BSSimpleList_Clear
+0x48A2E6: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A2EB: mov     ecx, [ebp+0]
 0x48A2EE: push    ecx
-0x48A2EF: call    FormHeapFree
+0x48A2EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A2F4: push    ebp
 0x48A2F5: mov     dword ptr [ebp+0], 0
-0x48A2FC: call    FormHeapFree
+0x48A2FC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A301: add     esp, 8
 0x48A304: xor     ebp, ebp
 0x48A306: mov     ecx, [edi+58h]
@@ -607,7 +606,7 @@
 0x48A357: test    ebp, ebp
 0x48A359: jz      short loc_48A371
 0x48A35B: mov     ecx, [ebp+0]
-0x48A35E: call    BSSimpleList_Clear
+0x48A35E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A363: mov     ecx, [ebp+0]
 0x48A366: push    esi
 0x48A367: call    BSSimpleList_PushFront
@@ -642,13 +641,13 @@
 0x48A3C1: mov     ecx, [ebp+0]
 0x48A3C4: test    ecx, ecx
 0x48A3C6: jz      short loc_48A3CD
-0x48A3C8: call    BSSimpleList_Clear
+0x48A3C8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A3CD: mov     ecx, [ebp+0]
 0x48A3D0: push    ecx
-0x48A3D1: call    FormHeapFree
+0x48A3D1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A3D6: push    ebp
 0x48A3D7: mov     dword ptr [ebp+0], 0
-0x48A3DE: call    FormHeapFree
+0x48A3DE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A3E3: add     esp, 8
 0x48A3E6: mov     ecx, [edi+58h]
 0x48A3E9: mov     edx, [ecx]
@@ -678,7 +677,7 @@
 0x48A435: test    ebp, ebp
 0x48A437: jz      short loc_48A44F
 0x48A439: mov     ecx, [ebp+0]
-0x48A43C: call    BSSimpleList_Clear
+0x48A43C: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A441: mov     ecx, [ebp+0]
 0x48A444: push    esi
 0x48A445: call    BSSimpleList_PushFront
@@ -714,13 +713,13 @@
 0x48A4A3: mov     ecx, [ebp+0]
 0x48A4A6: test    ecx, ecx
 0x48A4A8: jz      short loc_48A4AF
-0x48A4AA: call    BSSimpleList_Clear
+0x48A4AA: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48A4AF: mov     ecx, [ebp+0]
 0x48A4B2: push    ecx
-0x48A4B3: call    FormHeapFree
+0x48A4B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A4B8: push    ebp
 0x48A4B9: mov     dword ptr [ebp+0], 0
-0x48A4C0: call    FormHeapFree
+0x48A4C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48A4C5: add     esp, 8
 0x48A4C8: xor     ebp, ebp
 0x48A4CA: mov     ecx, [edi+58h]
@@ -732,9 +731,9 @@
 0x48A4DB: test    ebp, ebp
 0x48A4DD: jz      short ContainerExtraData_EquipItemForActor___def_48A0B5; jumptable 0048A0B5 default case, cases 21,23-25,27-32
 0x48A4DF: mov     ecx, [ebp+8]
-0x48A4E2: push    ecx
-0x48A4E3: mov     ecx, edi
-0x48A4E5: call    sub_4E1DF0
+0x48A4E2: push    ecx; ammo
+0x48A4E3: mov     ecx, edi; this
+0x48A4E5: call    TESObjectREFR_RefreshEquippedAmmo3D; Refreshes equipped-AMMO/quiver 3D for a reference. For PlayerCharacter it updates both relevant animation perspectives; then refreshes quiver arrow visibility and actor 3D state.
 0x48A4EA: mov     edx, [edi+3Ch]; jumptable 0048A0B5 default case, cases 21,23-25,27-32
 0x48A4ED: push    edx
 0x48A4EE: mov     ecx, edi
@@ -748,3 +747,45 @@
 0x48A504: pop     ebx
 0x48A505: add     esp, 18h
 0x48A508: retn    18h
+0x9AFCC0: mov     eax, [ebp-10h]
+0x9AFCC3: push    eax
+0x9AFCC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFCC9: pop     ecx
+0x9AFCCA: retn
+0x9AFCCB: mov     eax, [ebp+10h]
+0x9AFCCE: push    eax
+0x9AFCCF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFCD4: pop     ecx
+0x9AFCD5: retn
+0x9AFCD6: mov     eax, [ebp+10h]
+0x9AFCD9: push    eax
+0x9AFCDA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFCDF: pop     ecx
+0x9AFCE0: retn
+0x9AFCE1: mov     eax, [ebp+4]
+0x9AFCE4: push    eax
+0x9AFCE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFCEA: pop     ecx
+0x9AFCEB: retn
+0x9AFCEC: mov     eax, [ebp+4]
+0x9AFCEF: push    eax
+0x9AFCF0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFCF5: pop     ecx
+0x9AFCF6: retn
+0x9AFCF7: mov     eax, [ebp+4]
+0x9AFCFA: push    eax
+0x9AFCFB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD00: pop     ecx
+0x9AFD01: retn
+0x9AFD02: mov     eax, [ebp+4]
+0x9AFD05: push    eax
+0x9AFD06: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD0B: pop     ecx
+0x9AFD0C: retn
+0x9AFD0D: mov     edx, [esp+arg_4]
+0x9AFD11: lea     eax, [edx-1Ch]
+0x9AFD14: mov     ecx, [edx-20h]
+0x9AFD17: xor     ecx, eax
+0x9AFD19: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFD1E: mov     eax, offset stru_ADC16C
+0x9AFD23: jmp     ___CxxFrameHandler3

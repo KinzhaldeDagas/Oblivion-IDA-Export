@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A9C30",
-    "line": "push    ecx",
+    "line": "push    ecx; MEF PERF 2026-10-07 PASS5: PERF-15 cleanup cost boundary: F already-free nodes cause F critical-section acquisitions/releases while returning nodes to global pool; active payloads are never destroyed here. Ordered-list fast path must retain this. No claim that native pooling repeatedly reallocates active nodes or that batching locks is proven safe.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7A9C32",
-    "line": "mov     edi, [ecx+0Ch]",
+    "line": "mov     edi, [ecx+0Ch]; Load BSTPersistentList+0x0C free-node chain. This helper releases only already-free bucket nodes, never active RenderPass payloads.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7A9C54",
-    "line": "push    offset stru_B33F00; lpCriticalSection",
+    "line": "push    0B33F00h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7A9C8D",
-    "line": "push    offset stru_B33F00; lpCriticalSection",
+    "line": "push    0B33F00h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7A9CA3",
-    "line": "mov     dword ptr [ecx+0Ch], 0",
+    "line": "mov     dword ptr [ecx+0Ch], 0; Clear the local free-node chain after returning those nodes to the global pool.",
     "mnemonic": "mov",
     "size": 7
   },

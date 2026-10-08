@@ -11,7 +11,7 @@
 0x4B3DE7: push    edi
 0x4B3DE8: push    esi
 0x4B3DE9: mov     ecx, ebx
-0x4B3DEB: call    TESFile_InitializeFormFromRecord
+0x4B3DEB: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4B3DF0: xor     edi, edi
 0x4B3DF2: push    edi; a2
 0x4B3DF3: mov     ecx, esi; this
@@ -34,7 +34,7 @@
 0x4B3E35: push    eax
 0x4B3E36: mov     ecx, ebx
 0x4B3E38: mov     [ebp+var_8], edi
-0x4B3E3B: call    TESFile_GetChunkData4
+0x4B3E3B: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B3E40: mov     ecx, [ebp+var_8]
 0x4B3E43: mov     [esi+4Ch], ecx
 0x4B3E46: push    esi
@@ -47,7 +47,7 @@
 0x4B3E61: push    200h; a4
 0x4B3E66: push    edi; Dst
 0x4B3E67: mov     ecx, ebx; a1
-0x4B3E69: call    TESFile_GetChunkData
+0x4B3E69: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B3E6E: mov     edx, [esi]
 0x4B3E70: mov     eax, [edx+0D8h]
 0x4B3E76: push    edi
@@ -77,7 +77,7 @@
 0x4B3EB2: push    ecx
 0x4B3EB3: mov     ecx, ebx
 0x4B3EB5: mov     [ebp+var_8], edi
-0x4B3EB8: call    TESFile_GetChunkData4
+0x4B3EB8: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B3EBD: mov     edx, [ebp+var_8]
 0x4B3EC0: mov     [esi+54h], edx
 0x4B3EC3: jmp     short loc_4B3EDA
@@ -88,7 +88,7 @@
 0x4B3ECE: xor     eax, eax
 0x4B3ED0: push    ebx
 0x4B3ED1: push    eax
-0x4B3ED2: call    TESFullname_Load
+0x4B3ED2: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4B3ED7: add     esp, 8
 0x4B3EDA: mov     ecx, ebx
 0x4B3EDC: call    TESFile_GetNextChunk

@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x813243",
-    "line": "call    ImageSpaceShaderList__Destroy",
+    "line": "call    ImageSpaceShaderList__Destroy; MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x813249",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x8132A9",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -694,5 +694,143 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D11D0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D11D3",
+    "line": "jmp     DestroyNiCamera?",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D11D8",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9D11DD",
+    "line": "push    6; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9D11DF",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9D11E1",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D11E4",
+    "line": "add     eax, 128h",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9D11E9",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D11EA",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D11EF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D11F0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D11F3",
+    "line": "add     ecx, 140h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D11F9",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D11FE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1201",
+    "line": "add     ecx, 148h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1207",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D120C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D1210",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1213",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1216",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D1218",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D121D",
+    "line": "mov     eax, offset stru_AF98EC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1222",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

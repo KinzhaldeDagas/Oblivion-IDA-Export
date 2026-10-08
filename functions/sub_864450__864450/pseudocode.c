@@ -1,4 +1,4 @@
-BSStringT *sub_864450()
+BSStringT *TallGrassTriStrips__GetRTTI()
 {
-  return &stru_B4786C;
+  return (BSStringT *)&OB_ShaderConstantStorage_010201A0[0x696]; /*0x864455*/
 }

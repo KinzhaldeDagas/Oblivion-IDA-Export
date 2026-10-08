@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7780A0",
+      "0x7780C4"
+    ]
+  ],
+  "chunks_sha256": "73b747370ac28eafcba27b73e8ac88bee82ae4a153e43cb1f10144756b0bcd69",
+  "comment_regular": "MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.",
+  "comment_repeatable": "MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_7780A0",
   "end_ea": "0x7780C4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_7780A0",
   "segment": ".text",
   "sha256": "73b747370ac28eafcba27b73e8ac88bee82ae4a153e43cb1f10144756b0bcd69",
   "size": 36,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7780A0",
+  "total_chunk_size": 36,
   "type": "IDirect3DVertexDeclaration9 *__thiscall(NiGeometryBufferData *this, UInt32)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 6

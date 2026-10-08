@@ -20,7 +20,7 @@
 0x69F39B: mov     edx, [esp+1Ch+arg_C]
 0x69F39F: mov     edi, [esp+1Ch+arg_0]
 0x69F3A3: mov     [esi+70h], ecx
-0x69F3A6: mov     ecx, offset ActorProcessManager_ptr
+0x69F3A6: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x69F3AB: mov     [esp+1Ch+var_4], 0
 0x69F3B3: mov     dword ptr [esi], offset ??_7MagicProjectile@@6BMagicProjectile@@@; const MagicProjectile::`vftable'{for `MagicProjectile'}
 0x69F3B9: mov     dword ptr [esi+18h], offset ??_7MagicProjectile@@6BTESChildCell@@@; const MagicProjectile::`vftable'{for `TESChildCell'}
@@ -40,7 +40,7 @@
 0x69F3EC: mov     byte ptr [esp+1Ch+var_4], 1
 0x69F3F1: jz      short loc_69F3FC
 0x69F3F3: mov     ecx, eax; this
-0x69F3F5: call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)
+0x69F3F5: call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.
 0x69F3FA: jmp     short loc_69F3FE
 0x69F3FC: xor     eax, eax
 0x69F3FE: mov     ecx, [esp+1Ch+arg_10]
@@ -72,13 +72,13 @@
 0x69F44F: test    eax, eax
 0x69F451: jz      short loc_69F462
 0x69F453: mov     ecx, eax; this
-0x69F455: call    TESObjectREFR_GetParentCell
+0x69F455: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x69F45A: push    eax
 0x69F45B: mov     ecx, esi
 0x69F45D: call    MobileObject_ChangeCell
 0x69F462: mov     ecx, esi
 0x69F464: call    sub_69F100
-0x69F469: push    eax; a2
+0x69F469: push    eax; baseForm
 0x69F46A: mov     ecx, esi; this
 0x69F46C: call    TESObjectREFR_SetBaseForm
 0x69F471: mov     eax, esi
@@ -89,3 +89,17 @@
 0x69F480: pop     esi
 0x69F481: add     esp, 10h
 0x69F484: retn    28h ; '('
+0x9C5D80: mov     ecx, [ebp-10h]
+0x9C5D83: jmp     MobileObject_destr
+0x9C5D88: mov     eax, [ebp+4]
+0x9C5D8B: push    eax
+0x9C5D8C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5D91: pop     ecx
+0x9C5D92: retn
+0x9C5D93: mov     edx, [esp+arg_4]
+0x9C5D97: lea     eax, [edx-0Ch]
+0x9C5D9A: mov     ecx, [edx-10h]
+0x9C5D9D: xor     ecx, eax
+0x9C5D9F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5DA4: mov     eax, offset stru_AEE44C
+0x9C5DA9: jmp     ___CxxFrameHandler3

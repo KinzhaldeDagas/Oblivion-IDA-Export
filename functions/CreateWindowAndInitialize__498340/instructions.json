@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x498340",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh;",
     "mnemonic": "push",
     "size": 2
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x49849A",
-    "line": "jz      short loc_4984A0",
+    "line": "jz      short loc_4984A0; ImprovedShaders HDR+4xAA cap target: native branch jumps to iMultiSample only when bDoHighDynamicRange is false. Patch 74 04 -> EB 04 preserves iMultiSample under HDR; device creation still validates MSAA support.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x49857C",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,13 +1027,13 @@
   },
   {
     "ea": "0x49858C",
-    "line": "push    offset dword_B350DC",
+    "line": "push    0B350DCh",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x498591",
-    "line": "call    edx",
+    "line": "call    edx; Fog decode: renderer init consumes startup color vector; not the active FogParam/FogColor shader constant producer.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x4985C5",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x498607",
-    "line": "mov     ds:byte_B34FC8[eax], cl",
+    "line": "mov     [eax+0B34FC8h], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x49866C",
-    "line": "call    sub_763DE0",
+    "line": "call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x4986A6",
-    "line": "mov     ds:byte_B34FC8[eax], cl",
+    "line": "mov     [eax+0B34FC8h], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x4986E6",
-    "line": "mov     ds:byte_B34FC8[eax], cl",
+    "line": "mov     [eax+0B34FC8h], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x498721",
-    "line": "movzx   esi, word ptr [ebp+118h]",
+    "line": "movzx   esi, word ptr [ebp+118h]; [Verified] Reads D3DCAPS9.PS20Caps.NumInstructionSlots. This value is later logged as maxPS20inst and passed to SetShaderPackage(maxPS20Instructions).",
     "mnemonic": "movzx",
     "size": 7
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x498733",
-    "line": "lea     edi, [eax+204h]",
+    "line": "lea     edi, [eax+204h]; [Verified] pD3DCaps9 is D3DCAPS9*: later accesses at +0xC4/+0xCC read VertexShaderVersion/PixelShaderVersion and +0x40 reads TextureFilterCaps, matching the imported D3DCAPS9 layout.",
     "mnemonic": "lea",
     "size": 6
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x498767",
-    "line": "mov     ds:0B350D6h, al",
+    "line": "mov     ds:0B350D6h, al; [Verified] Stores the result of the device CheckDeviceFormat query for format 0x71 and usage 0x80000 in renderer capability state B33E90+0x1246; RendererInfo reports this result as FP16ARGB blending.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x498782",
-    "line": "mov     ds:0B43071h, al",
+    "line": "mov     ds:0B43071h, al; [Verified] Queries device support for format 0x71 with usage 0x20000 and stores the result in RendererGlobalState+0x1D8. The RendererInfo output labels this capability FP16ARGB filtering.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x498790",
-    "line": "mov     ds:0B43072h, cl",
+    "line": "mov     ds:0B43072h, cl; [Verified] Copies (pD3DCaps9->TextureFilterCaps & 0x400) != 0 into RendererGlobalState+0x1D9. [Probable] The D3D9 mask is D3DPTFILTERCAPS_MINFANISOTROPIC (minifying anisotropic filtering).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x4987C0",
-    "line": "cmp     byte ptr ds:0B350D6h, 0",
+    "line": "cmp     byte ptr ds:0B350D6h, 0; [Verified] HDR mode becomes active only when bIsHDR, bDoImageSpaceEffect, and the earlier FP16ARGB blending query at B33E90+0x1246 are all true; otherwise +0x1D7 is cleared.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x4987C9",
-    "line": "mov     byte ptr ds:0B43070h, 1",
+    "line": "mov     byte ptr ds:0B43070h, 1; Set HDR-enabled byte only when bDoHighDynamicRange:BlurShaderHDR, bDoImageSpaceEffects:Display, and device HDR capability are all true.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x4987D4",
-    "line": "mov     byte ptr ds:0B43070h, 0",
+    "line": "mov     byte ptr ds:0B43070h, 0; Clear HDR-enabled byte when the HDR prerequisites fail.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2029,13 +2029,13 @@
   },
   {
     "ea": "0x4987DD",
-    "line": "cmp     byte ptr ds:0B06D34h, 0",
+    "line": "cmp     byte ptr ds:0B06D34h, 0; [Verified] When HDR mode prerequisites fail but image-space effects are enabled, bUseBlurShader determines the fallback bloom path: zero clears +0x1DA; nonzero enables the Bloom lighting status.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x4987E4",
-    "line": "mov     byte ptr ds:0B43073h, 1",
+    "line": "mov     byte ptr ds:0B43073h, 1; MoonSugarEffect decode: sets byte_B43073 when Bloom Lighting is available/enabled during renderer initialization; this is not an effect-duration flag.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x4987ED",
-    "line": "mov     byte ptr ds:0B43073h, 0",
+    "line": "mov     byte ptr ds:0B43073h, 0; [Verified] Clears the bloom-lighting field at RendererGlobalState+0x1DA on the HDR path. The adjacent branch sets it from image-space-effect state and byte_B06D34.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2161,25 +2161,25 @@
   },
   {
     "ea": "0x49884C",
-    "line": "push    eax; int",
+    "line": "push    eax; maxPS20Instructions",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49884D",
-    "line": "push    ebx; Str1",
+    "line": "push    ebx; adapterVendorPrefix",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49884E",
-    "line": "push    edi; int",
+    "line": "push    edi; adapterCaps",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49884F",
-    "line": "push    ecx; char",
+    "line": "push    ecx; bForce1XShaders",
     "mnemonic": "push",
     "size": 1
   },
@@ -2197,19 +2197,19 @@
   },
   {
     "ea": "0x498859",
-    "line": "push    edx; int",
+    "line": "push    edx; shaderCapsB",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49885A",
-    "line": "push    eax; int",
+    "line": "push    eax; shaderCapsA",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49885B",
-    "line": "call    SetShaderPackage",
+    "line": "call    SetShaderPackage; [Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x498882",
-    "line": "mov     ds:0B2C67Ch, cx",
+    "line": "mov     ds:0B2C67Ch, cx; Copies iShadowMapResolution (word_B06F1C) into native ShadowSurfaceRes (B2C67C) used by shadow-target creation.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3001,7 +3001,7 @@
   },
   {
     "ea": "0x498A37",
-    "line": "mov     ds:byte_B42E98[esi], cl",
+    "line": "mov     byte ptr ds:unk_B42E98[esi], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3127,13 +3127,13 @@
   },
   {
     "ea": "0x498A7E",
-    "line": "call    sub_7B7070",
+    "line": "call    BSShaderManager_GetShaderVersionName; [Verified] BSShaderManager_GetShaderVersionName maps values 0–7 to BSSM_SV_NONE, BSSM_SV_1_X, BSSM_SV_2_0, BSSM_SV_2_A96, BSSM_SV_2_B96, BSSM_SV_2_A, BSSM_SV_2_B and BSSM_SV_3_0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x498A83",
-    "line": "push    offset word_B3F280",
+    "line": "push    offset unk_B3F280",
     "mnemonic": "push",
     "size": 5
   },
@@ -3337,7 +3337,7 @@
   },
   {
     "ea": "0x498AF8",
-    "line": "call    sub_7B47E0",
+    "line": "call    BSShaderManager_GetVertexShaderTargetName",
     "mnemonic": "call",
     "size": 5
   },
@@ -3379,7 +3379,7 @@
   },
   {
     "ea": "0x498B0E",
-    "line": "call    sub_7B4780",
+    "line": "call    BSShaderManager_GetPixelShaderTargetName",
     "mnemonic": "call",
     "size": 5
   },
@@ -3415,7 +3415,7 @@
   },
   {
     "ea": "0x498B21",
-    "line": "call    sub_7B4780",
+    "line": "call    BSShaderManager_GetPixelShaderTargetName; [Verified] RendererInfo prints maxPS20inst from v93. The same v93 value is passed as SetShaderPackage argument maxPS20Instructions at 0x49885B.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3697,7 +3697,7 @@
   },
   {
     "ea": "0x498BCB",
-    "line": "cmp     byte ptr ds:0B43071h, 0",
+    "line": "cmp     byte ptr ds:0B43071h, 0; [Verified] RendererInfo.txt labels RendererGlobalState+0x1D8 as FP16ARGB filtering.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3751,7 +3751,7 @@
   },
   {
     "ea": "0x498BED",
-    "line": "cmp     byte ptr ds:0B43070h, 0",
+    "line": "cmp     byte ptr ds:0B43070h, 0; [Verified] RendererInfo.txt labels RendererGlobalState+0x1D7 as High dynamic range.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3805,7 +3805,7 @@
   },
   {
     "ea": "0x498C0F",
-    "line": "cmp     byte ptr ds:0B43073h, 0",
+    "line": "cmp     byte ptr ds:0B43073h, 0; [Verified] RendererInfo.txt labels RendererGlobalState+0x1DA as Bloom lighting.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3835,7 +3835,7 @@
   },
   {
     "ea": "0x498C23",
-    "line": "push    offset aBloomLightingS; \"\\tBloom lighting     \\t\\t: %s\\n\"",
+    "line": "push    offset aBloomLightingS; MoonSugarEffect decode: renderer report prints byte_B43073 as \"Bloom lighting\"; confirms Blur active predicate is renderer/bloom ownership.",
     "mnemonic": "push",
     "size": 5
   },
@@ -3859,7 +3859,7 @@
   },
   {
     "ea": "0x498C31",
-    "line": "cmp     byte ptr ds:0B42E84h, 0",
+    "line": "cmp     byte ptr ds:0B42E84h, 0; [Verified] RendererInfo.txt prints OB_ShaderPassControl.refractionPassEnabled as the Refraction capability/status line.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -4279,7 +4279,7 @@
   },
   {
     "ea": "0x498D39",
-    "line": "call    sub_7DAB80",
+    "line": "call    GetShaderProgramPackageIndex; [Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0–6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4381,7 +4381,7 @@
   },
   {
     "ea": "0x498D84",
-    "line": "fstp    dword ptr ds:0B42EA8h",
+    "line": "fstp    dword ptr ds:0B42EA8h; Startup writer for rendererGlobal+0x0F (B42EA8): copy fTreeDimmer:BlurShaderHDR setting. Default setting bits are 1.2f.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -4447,7 +4447,7 @@
   },
   {
     "ea": "0x498DC6",
-    "line": "mov     ds:0B42E86h, al",
+    "line": "mov     ds:0B42E86h, al; [Verified] Writes OB_ShaderPassControl.bFullBrightLighting from OB_INI_bFullBrightLighting_Display_010201A0 during renderer initialization.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4726,5 +4726,131 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B0410",
+    "line": "mov     eax, [ebp-134h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0416",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B0417",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B041C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B041D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B041E",
+    "line": "mov     eax, [ebp-134h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0424",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B0425",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B042A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B042B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B042C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B0430",
+    "line": "lea     eax, [edx-13Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0436",
+    "line": "mov     ecx, [edx-140h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B043C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B043E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0443",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B0446",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B0449",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B044B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0450",
+    "line": "mov     eax, offset stru_ADC764",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0455",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

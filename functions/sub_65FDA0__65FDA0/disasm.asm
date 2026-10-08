@@ -31,30 +31,30 @@
 0x65FE05: add     esp, 4
 0x65FE08: test    al, al
 0x65FE0A: jnz     loc_65FE92
-0x65FE10: lea     ecx, [esp+38h+var_20]
-0x65FE14: call    sub_68A9F0
+0x65FE10: lea     ecx, [esp+38h+var_20]; this
+0x65FE14: call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.
 0x65FE19: mov     ecx, esi; this
 0x65FE1B: mov     [esp+38h+var_4], 0
 0x65FE23: call    TESObjectREFR_GetWorldSpace
-0x65FE28: push    eax
+0x65FE28: push    eax; destinationWorldspace
 0x65FE29: mov     ecx, esi; this
-0x65FE2B: call    TESObjectREFR_GetParentCell
+0x65FE2B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65FE30: mov     edx, [esi]
-0x65FE32: push    eax
+0x65FE32: push    eax; destinationCell
 0x65FE33: mov     eax, [edx+174h]
 0x65FE39: mov     ecx, esi
 0x65FE3B: call    eax
 0x65FE3D: mov     ecx, ds:0B333C4h
-0x65FE43: push    eax
-0x65FE44: push    ecx
-0x65FE45: lea     ecx, [esp+48h+var_20]
-0x65FE49: call    sub_68B030
+0x65FE43: push    eax; destinationPosition
+0x65FE44: push    ecx; sourceRef
+0x65FE45: lea     ecx, [esp+48h+var_20]; this
+0x65FE49: call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.
 0x65FE4E: test    al, al
 0x65FE50: jz      short loc_65FE81
 0x65FE52: mov     edx, ds:0B333C4h
-0x65FE58: push    edx
-0x65FE59: lea     ecx, [esp+3Ch+var_20]
-0x65FE5D: call    sub_68A760
+0x65FE58: push    edx; sourceRef
+0x65FE59: lea     ecx, [esp+3Ch+var_20]; this
+0x65FE5D: call    TravelPath_ComputeDistance; Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.
 0x65FE62: fstp    [esp+38h+var_24]
 0x65FE66: fld     [esp+38h+var_24]
 0x65FE6A: fld     [esp+38h+var_28]
@@ -66,9 +66,9 @@
 0x65FE7B: mov     ebx, esi
 0x65FE7D: jmp     short loc_65FE81
 0x65FE7F: fstp    st
-0x65FE81: lea     ecx, [esp+38h+var_20]
+0x65FE81: lea     ecx, [esp+38h+var_20]; this
 0x65FE85: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x65FE8D: call    sub_68AA10
+0x65FE8D: call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
 0x65FE92: mov     edi, [edi+4]
 0x65FE95: test    edi, edi
 0x65FE97: jnz     loc_65FDE0
@@ -76,13 +76,13 @@
 0x65FE9F: mov     ds:0B3BAD0h, ebx
 0x65FEA5: jz      short loc_65FEF2
 0x65FEA7: mov     ecx, ebx; this
-0x65FEA9: call    GetTeleportExtraData
-0x65FEAE: mov     ecx, eax
-0x65FEB0: call    sub_42B410
+0x65FEA9: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x65FEAE: mov     ecx, eax; this
+0x65FEB0: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x65FEB5: test    eax, eax
 0x65FEB7: jz      short loc_65FEF2
 0x65FEB9: mov     ecx, eax; this
-0x65FEBB: call    TESObjectREFR_GetParentCell
+0x65FEBB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65FEC0: test    eax, eax
 0x65FEC2: jz      short loc_65FEF2
 0x65FEC4: mov     ecx, ds:0B33AACh
@@ -111,3 +111,12 @@
 0x65FF02: pop     ebx
 0x65FF03: add     esp, 28h
 0x65FF06: retn
+0x9C3D50: lea     ecx, [ebp-20h]; this
+0x9C3D53: jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
+0x9C3D58: mov     edx, [esp+arg_4]
+0x9C3D5C: lea     eax, [edx-28h]
+0x9C3D5F: mov     ecx, [edx-2Ch]
+0x9C3D62: xor     ecx, eax
+0x9C3D64: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3D69: mov     eax, offset stru_AEC86C
+0x9C3D6E: jmp     ___CxxFrameHandler3

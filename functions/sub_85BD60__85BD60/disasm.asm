@@ -1,4 +1,4 @@
-0x85BD60: push    0FFFFFFFFh
+0x85BD60: push    0FFFFFFFFh; Pass205: WaterShaderProperty render-pass list producer; selects water shader selector from +0x70, lava marker, +0x71, or default.
 0x85BD62: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x85BD67: mov     eax, large fs:0
 0x85BD6D: push    eax
@@ -36,14 +36,14 @@
 0x85BDCC: test    eax, eax
 0x85BDCE: mov     [esp+20h+var_4], 0
 0x85BDD6: jz      short loc_85BDF1
-0x85BDD8: mov     ecx, [esp+20h+arg_0]
+0x85BDD8: mov     ecx, [esp+20h+vtable]
 0x85BDDC: push    0
-0x85BDDE: push    0
-0x85BDE0: push    1
-0x85BDE2: push    esi
-0x85BDE3: push    ecx
-0x85BDE4: push    eax
-0x85BDE5: call    sub_7E2370
+0x85BDDE: push    0; lightCount
+0x85BDE0: push    1; byte6
+0x85BDE2: push    esi; selector
+0x85BDE3: push    ecx; geometry
+0x85BDE4: push    eax; outPass
+0x85BDE5: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x85BDEA: add     esp, 18h
 0x85BDED: mov     edi, eax
 0x85BDEF: jmp     short loc_85BDF3
@@ -75,3 +75,15 @@
 0x85BE3E: pop     ebp
 0x85BE3F: add     esp, 10h
 0x85BE42: retn    10h
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-IPRouteEntry_0
+typedef IPRouteEntry IPRouteEntry_0;

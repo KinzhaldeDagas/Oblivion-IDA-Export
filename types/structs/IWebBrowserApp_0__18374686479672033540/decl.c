@@ -1,1 +1,1 @@
-IWebBrowserApp_0
+typedef IWebBrowserApp IWebBrowserApp_0;

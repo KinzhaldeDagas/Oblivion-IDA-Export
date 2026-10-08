@@ -1,1 +1,5 @@
-popen_handle
+struct popen_handle
+{
+FILE *f;
+HANDLE proc;
+};

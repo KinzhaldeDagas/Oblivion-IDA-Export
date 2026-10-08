@@ -1,49 +1,48 @@
-0x78F7A0: sub     esp, 34h
+0x78F7A0: sub     esp, 34h; Stock CBranch::ComputeBranchNormals uses fixed CBranch cross-section segment count argument, not a per-vertex m_nCrossSegments tail field.
 0x78F7A3: push    edi
 0x78F7A4: xor     edi, edi
 0x78F7A6: cmp     [ecx+1Ch], edi
 0x78F7A9: mov     [esp+38h+var_30], ecx
 0x78F7AD: mov     [esp+38h+var_2C], edi
 0x78F7B1: jle     loc_78F9EE
-0x78F7B7: movzx   eax, [esp+38h+arg_4]
+0x78F7B7: movzx   eax, [esp+38h+crossSectionSegments]
 0x78F7BC: push    ebx
 0x78F7BD: push    ebp
 0x78F7BE: add     eax, 1
 0x78F7C1: push    esi
-0x78F7C2: mov     esi, [esp+44h+arg_0]
+0x78F7C2: mov     esi, [esp+44h+geometry]
 0x78F7C6: mov     [esp+44h+var_34], eax
 0x78F7CA: lea     ebx, [ebx+0]
 0x78F7D0: mov     eax, [esp+44h+var_34]
-0x78F7D4: movzx   edx, [esp+44h+arg_4]
+0x78F7D4: movzx   edx, [esp+44h+crossSectionSegments]
 0x78F7D9: imul    eax, edi
 0x78F7DC: xor     ebp, ebp
 0x78F7DE: test    edx, edx
-0x78F7E0: mov     [esp+44h+arg_0], eax
+0x78F7E0: mov     [esp+44h+geometry], eax
 0x78F7E4: jl      loc_78F9DB
 0x78F7EA: jmp     short loc_78F7F4
-0x78F7EC: align 10h
-0x78F7F0: mov     eax, [esp+44h+arg_0]
+0x78F7F0: mov     eax, [esp+44h+geometry]
 0x78F7F4: test    ebp, ebp
 0x78F7F6: jnz     short loc_78F803
-0x78F7F8: movzx   edx, [esp+44h+arg_4]
+0x78F7F8: movzx   edx, [esp+44h+crossSectionSegments]
 0x78F7FD: lea     edx, [edx+eax-1]
 0x78F801: jmp     short loc_78F807
 0x78F803: lea     edx, [eax+ebp-1]
-0x78F807: movzx   edi, [esp+44h+arg_4]
+0x78F807: movzx   edi, [esp+44h+crossSectionSegments]
 0x78F80C: cmp     ebp, edi
 0x78F80E: lea     ebx, [eax+1]
 0x78F811: jz      short loc_78F815
 0x78F813: add     ebx, ebp
 0x78F815: mov     eax, [ecx+24h]
 0x78F818: add     edx, eax
-0x78F81A: push    edx
-0x78F81B: mov     ecx, esi
+0x78F81A: push    edx; vertexIndex
+0x78F81B: mov     ecx, esi; this
 0x78F81D: add     ebx, eax
-0x78F81F: call    sub_794730
-0x78F824: push    ebx
-0x78F825: mov     ecx, esi
+0x78F81F: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
+0x78F824: push    ebx; vertexIndex
+0x78F825: mov     ecx, esi; this
 0x78F827: mov     edi, eax
-0x78F829: call    sub_794730
+0x78F829: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
 0x78F82E: fld     dword ptr [eax]
 0x78F830: fsub    dword ptr [edi]
 0x78F832: fstp    [esp+44h+var_18]
@@ -84,7 +83,7 @@
 0x78F8A1: fmul    [esp+44h+var_10]
 0x78F8A5: fstp    [esp+44h+var_10]
 0x78F8A9: jnz     short loc_78F8B1
-0x78F8AB: mov     eax, [esp+44h+arg_0]
+0x78F8AB: mov     eax, [esp+44h+geometry]
 0x78F8AF: jmp     short loc_78F8B9
 0x78F8B1: lea     eax, [edi-1]
 0x78F8B4: imul    eax, [esp+44h+var_34]
@@ -94,7 +93,7 @@
 0x78F8C3: add     eax, ebp
 0x78F8C5: cmp     edi, edx
 0x78F8C7: jnz     short loc_78F8D2
-0x78F8C9: mov     edx, [esp+44h+arg_0]
+0x78F8C9: mov     edx, [esp+44h+geometry]
 0x78F8CD: lea     edi, [edx+ebp]
 0x78F8D0: jmp     short loc_78F8DC
 0x78F8D2: add     edi, 1
@@ -103,13 +102,13 @@
 0x78F8DC: mov     ecx, [ecx+24h]
 0x78F8DF: add     eax, ecx
 0x78F8E1: add     edi, ecx
-0x78F8E3: push    eax
-0x78F8E4: mov     ecx, esi
-0x78F8E6: call    sub_794730
-0x78F8EB: push    edi
-0x78F8EC: mov     ecx, esi
+0x78F8E3: push    eax; vertexIndex
+0x78F8E4: mov     ecx, esi; this
+0x78F8E6: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
+0x78F8EB: push    edi; vertexIndex
+0x78F8EC: mov     ecx, esi; this
 0x78F8EE: mov     ebx, eax
-0x78F8F0: call    sub_794730
+0x78F8F0: call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
 0x78F8F5: fld     dword ptr [eax]
 0x78F8F7: fsub    dword ptr [ebx]
 0x78F8F9: fstp    [esp+44h+var_24]
@@ -135,11 +134,11 @@
 0x78F935: call    __CIsqrt
 0x78F93A: fstp    [esp+44h+var_28]
 0x78F93E: fld     [esp+44h+var_28]
-0x78F942: lea     eax, [esp+44h+var_C]
+0x78F942: lea     eax, [esp+44h+normal]
 0x78F946: fld1
-0x78F948: push    eax
+0x78F948: push    eax; normal
 0x78F949: fdivrp  st(1), st
-0x78F94B: mov     ecx, esi
+0x78F94B: mov     ecx, esi; this
 0x78F94D: fstp    [esp+48h+var_28]
 0x78F951: fld     [esp+48h+var_28]
 0x78F955: fld     st
@@ -162,7 +161,7 @@
 0x78F98B: fmulp   st(2), st
 0x78F98D: fxch    st(4)
 0x78F98F: fsubrp  st(1), st
-0x78F991: fstp    [esp+48h+var_C]
+0x78F991: fstp    [esp+48h+normal]
 0x78F995: fld     [esp+48h+var_24]
 0x78F999: fld     st
 0x78F99B: fmulp   st(2), st
@@ -177,9 +176,9 @@
 0x78F9B1: fmulp   st(2), st
 0x78F9B3: fsubrp  st(1), st
 0x78F9B5: fstp    [esp+48h+var_4]
-0x78F9B9: call    sub_7962F0
+0x78F9B9: call    OB_CIndexedGeometry_AddVertexNormal_010201A0; Oblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.
 0x78F9BE: add     word ptr [esi+22h], 1
-0x78F9C3: movzx   eax, [esp+44h+arg_4]
+0x78F9C3: movzx   eax, [esp+44h+crossSectionSegments]
 0x78F9C8: add     ebp, 1
 0x78F9CB: cmp     ebp, eax
 0x78F9CD: mov     ecx, [esp+44h+var_30]

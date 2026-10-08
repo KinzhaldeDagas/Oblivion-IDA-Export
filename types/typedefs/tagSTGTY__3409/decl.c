@@ -1,1 +1,7 @@
-tagSTGTY
+enum tagSTGTY : __int32
+{
+STGTY_STORAGE = 0x1,
+STGTY_STREAM = 0x2,
+STGTY_LOCKBYTES = 0x3,
+STGTY_PROPERTY = 0x4,
+};

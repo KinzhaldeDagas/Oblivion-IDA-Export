@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4153F2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x415409",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x415414",
-    "line": "mov     eax, sMagicCostliestEffectSkillOf",
+    "line": "mov     eax, ds:0B334F8h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x415419",
-    "line": "mov     ecx, sMagicCostliestEffectRequires",
+    "line": "mov     ecx, ds:0B334F0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x415430",
-    "line": "push    eax",
+    "line": "push    eax; mastery",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x415431",
-    "line": "call    ActorValue_GetMasterySkill",
+    "line": "call    ActorValue_GetMinimumSkillForMastery; Return the minimum skill value for a mastery tier: Novice 0, Apprentice 25, Journeyman 50, Expert 75, Master 100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x41544D",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -441,6 +441,114 @@
     "ea": "0x415475",
     "line": "call    BSStringT_Set",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB1F0",
+    "line": "mov     eax, [ebp-80h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB1F3",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB1F6",
+    "line": "jz      locret_9AB208",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB1FC",
+    "line": "and     dword ptr [ebp-80h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9AB200",
+    "line": "mov     ecx, [ebp-78h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB203",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB208",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB209",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AB20D",
+    "line": "lea     eax, [edx-88h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB213",
+    "line": "mov     ecx, [edx-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AB219",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB21B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB220",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB223",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB226",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB228",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB22D",
+    "line": "mov     eax, offset stru_AD8168",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB232",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

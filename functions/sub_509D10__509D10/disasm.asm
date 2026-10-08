@@ -9,11 +9,11 @@
 0x509D25: jz      short loc_509D61
 0x509D27: test    byte ptr [esi+3Ch], 1
 0x509D2B: mov     edi, [edi+4]
-0x509D2E: mov     ebp, offset aOn_0
+0x509D2E: mov     ebp, offset aOn_0; "On"
 0x509D33: jnz     short loc_509D3A
 0x509D35: mov     ebp, offset aOff
-0x509D3A: mov     ecx, esi
-0x509D3C: call    sub_529750
+0x509D3A: mov     ecx, esi; this
+0x509D3C: call    TESQuest__GetCurrentStage
 0x509D41: push    eax
 0x509D42: mov     eax, [esi]
 0x509D44: mov     edx, [eax+0D4h]

@@ -17,7 +17,7 @@
 0x5037D8: push    edx; a2
 0x5037D9: push    eax; a1
 0x5037DA: mov     dword ptr [esp+28h+var_4], 0
-0x5037E2: call    Script_ExtractArgs
+0x5037E2: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5037E7: add     esp, 20h
 0x5037EA: test    al, al
 0x5037EC: jnz     short loc_5037F1
@@ -30,7 +30,7 @@
 0x5037FA: push    0
 0x5037FC: push    edx
 0x5037FD: push    esi
-0x5037FE: call    sub_4F7280
+0x5037FE: call    GetFactionRank_Eval; GetFactionRank_Eval (index 73 / opcode 0x1049): returns TESActorBaseData_GetFactionRank numerically, including -1 for a faction absent from the subject's base-data list.
 0x503803: add     esp, 10h
 0x503806: pop     esi
 0x503807: pop     ecx

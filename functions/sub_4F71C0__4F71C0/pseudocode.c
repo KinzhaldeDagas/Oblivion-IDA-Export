@@ -1,4 +1,5 @@
-char __cdecl sub_4F71C0(int a1, int a2, int a3, double *a4)
+// GetPCInFaction_Eval is explicitly player-scoped: it calls GetInFaction_Eval(reference, param1, ...), ignoring the current condition subject.
+char __cdecl GetPCInFaction_Eval(TESObjectREFR *subject, TESForm *a2, TESForm *a3, double *a4)
 {
-  return sub_4F70C0((Actor *)TESDataHandler_g_PlayerRef, a2, a3, a4);
+  return GetInFaction_Eval((TESObjectREFR *)reference, a2, a3, a4);
 }

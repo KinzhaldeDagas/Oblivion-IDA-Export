@@ -21,7 +21,7 @@
 0x45A899: mov     [esi+8], eax
 0x45A89C: call    __memset
 0x45A8A1: add     esp, 10h
-0x45A8A4: mov     dword ptr [esi], offset ??_7ChangesMap@@6B@; const ChangesMap::`vftable'
+0x45A8A4: mov     dword ptr [esi], offset ??_7ChangesMap@@6B@; Verified: ChangesMap vtable (RTTI COL AB7C90 -> TypeDescriptor B05A38 -> .?AVChangesMap@@). Slots +0 deleting dtor 462260, +4 hash, +8 key equality, +C set node key/value, +10 no-op clear value, +14 allocate node, +18 release node. Owned ChangeData/buffers are freed by 45A8B0, not ClearValue.
 0x45A8AA: mov     eax, esi
 0x45A8AC: pop     esi
 0x45A8AD: retn

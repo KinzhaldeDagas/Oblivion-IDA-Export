@@ -15,13 +15,13 @@
 0x88D83D: mov     edi, [esi+8]
 0x88D840: test    edi, edi
 0x88D842: jz      short loc_88D875
-0x88D844: call    sub_89F570
+0x88D844: call    bhkRefObject_UpdateHavokObject
 0x88D849: movaps  xmm0, xmmword ptr [edi+70h]
 0x88D84D: movaps  xmmword ptr [ebx], xmm0
 0x88D850: movaps  xmm0, xmmword ptr [edi+80h]
 0x88D857: mov     ecx, esi
 0x88D859: movaps  xmmword ptr [ebx+10h], xmm0
-0x88D85D: call    sub_89F570
+0x88D85D: call    bhkRefObject_UpdateHavokObject
 0x88D862: pop     edi
 0x88D863: pop     esi
 0x88D864: pop     ebx

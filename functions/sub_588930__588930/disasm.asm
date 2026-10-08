@@ -38,7 +38,7 @@
 0x588981: mov     [eax+4], esi
 0x588984: mov     [eax+10h], esi
 0x588987: mov     [eax+14h], esi
-0x58898A: call    FormHeapFree
+0x58898A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58898F: mov     eax, [edi+4]
 0x588992: add     esp, 4
 0x588995: cmp     eax, esi

@@ -30,18 +30,18 @@
 0x521830: jb      short loc_521820
 0x521832: xor     eax, eax
 0x521834: cmp     eax, ebp
-0x521836: mov     [esp+34h+var_18], eax
+0x521836: mov     [esp+34h+position], eax
 0x52183A: jz      loc_521935
-0x521840: lea     eax, [esp+34h+var_1C]
-0x521844: push    eax
-0x521845: lea     ecx, [esp+38h+var_10]
-0x521849: push    ecx
-0x52184A: lea     edx, [esp+3Ch+var_18]
-0x52184E: push    edx
-0x52184F: mov     ecx, edi
-0x521851: mov     [esp+40h+var_1C], ebp
-0x521855: call    sub_452600
-0x52185A: mov     esi, [esp+34h+var_1C]
+0x521840: lea     eax, [esp+34h+valueOut]
+0x521844: push    eax; valueOut
+0x521845: lea     ecx, [esp+38h+keyOut]
+0x521849: push    ecx; keyOut
+0x52184A: lea     edx, [esp+3Ch+position]
+0x52184E: push    edx; position
+0x52184F: mov     ecx, edi; self
+0x521851: mov     [esp+40h+valueOut], ebp
+0x521855: call    NiTMap_U32Pointer_GetNextEntry
+0x52185A: mov     esi, [esp+34h+valueOut]
 0x52185E: cmp     esi, ebp
 0x521860: jz      loc_52192B
 0x521866: mov     ebx, [esi+0Ch]
@@ -78,7 +78,7 @@
 0x5218B2: jz      short loc_5218EA
 0x5218B4: mov     ecx, [eax]
 0x5218B6: push    ecx
-0x5218B7: call    FormHeapFree
+0x5218B7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5218BC: mov     eax, [esi+20h]
 0x5218BF: mov     ecx, [eax+4]
 0x5218C2: add     esp, 4
@@ -89,7 +89,7 @@
 0x5218CF: mov     edx, [ecx]
 0x5218D1: push    ecx
 0x5218D2: mov     [eax], edx
-0x5218D4: call    FormHeapFree
+0x5218D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5218D9: add     esp, 4
 0x5218DC: jmp     short loc_5218A8
 0x5218DE: mov     eax, [esi+eax*4]
@@ -97,11 +97,11 @@
 0x5218E6: mov     [eax], ebp
 0x5218E8: jmp     short loc_5218A8
 0x5218EA: push    eax
-0x5218EB: call    FormHeapFree
+0x5218EB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5218F0: add     esp, 4
 0x5218F3: mov     eax, [esi+18h]
 0x5218F6: push    eax
-0x5218F7: call    FormHeapFree
+0x5218F7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5218FC: mov     [esi+18h], ebp
 0x5218FF: mov     [esi+1Eh], bp
 0x521903: mov     [esi+1Ch], bp
@@ -109,12 +109,12 @@
 0x52190A: push    eax
 0x52190B: mov     [esp+3Ch+var_4], 0FFFFFFFFh
 0x521913: mov     dword ptr [esi], offset ??_7?$NiTLargeArray@PAVTESForm@@@@6B@; const NiTLargeArray<TESForm *>::`vftable'
-0x521919: call    FormHeapFree
+0x521919: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52191E: push    esi
-0x52191F: call    FormHeapFree
+0x52191F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x521924: mov     edi, [esp+40h+var_14]
 0x521928: add     esp, 0Ch
-0x52192B: cmp     [esp+34h+var_18], ebp
+0x52192B: cmp     [esp+34h+position], ebp
 0x52192F: jnz     loc_521840
 0x521935: mov     ecx, edi
 0x521937: call    NiTMap_Clear
@@ -127,3 +127,18 @@
 0x52194B: pop     ebx
 0x52194C: add     esp, 20h
 0x52194F: retn
+0x5204D0: mov     eax, [ecx+4]
+0x5204D3: push    eax
+0x5204D4: mov     dword ptr [ecx], offset ??_7?$NiTLargeArray@PAVTESForm@@@@6B@; const NiTLargeArray<TESForm *>::`vftable'
+0x5204DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5204DF: pop     ecx
+0x5204E0: retn
+0x9B7EA0: mov     ecx, [ebp-20h]
+0x9B7EA3: jmp     loc_5204D0
+0x9B7EA8: mov     edx, [esp+arg_4]
+0x9B7EAC: lea     eax, [edx-24h]
+0x9B7EAF: mov     ecx, [edx-28h]
+0x9B7EB2: xor     ecx, eax
+0x9B7EB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7EB9: mov     eax, offset stru_AE26C4
+0x9B7EBE: jmp     ___CxxFrameHandler3

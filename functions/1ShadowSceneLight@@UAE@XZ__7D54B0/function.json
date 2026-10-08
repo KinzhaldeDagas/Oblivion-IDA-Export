@@ -1,19 +1,36 @@
 {
-  "callees_count": 48,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 18,
+  "chunks": [
+    [
+      "0x7D54B0",
+      "0x7D5782"
+    ],
+    [
+      "0x9CEC50",
+      "0x9CECF1"
+    ]
+  ],
+  "chunks_sha256": "ef6835898e351fdc652bb055d54726ead329d673592c12202c6e25fceb9da729",
+  "comment_regular": "ShadowSceneLight destructor. Clears property associations before releasing backing light, shadow map, camera, exact caster root, fence, and list storage.",
+  "comment_repeatable": "ShadowSceneLight destructor. Clears property associations before releasing backing light, shadow map, camera, exact caster root, fence, and list storage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 19,
   "display_name": "ShadowSceneLight::~ShadowSceneLight(void)",
   "end_ea": "0x7D5782",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1ShadowSceneLight@@UAE@XZ",
   "segment": ".text",
   "sha256": "a58027652eb16376225655090529706f9c068a4e14a37ef15323dbea7d000679",
   "size": 722,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D54B0",
+  "total_chunk_size": 883,
   "type": "void __thiscall(ShadowSceneLight *__hidden this)",
-  "xrefs_from_count": 336,
+  "xrefs_from_count": 374,
   "xrefs_to_count": 1
 }

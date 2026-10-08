@@ -8,7 +8,7 @@
 0x780B49: push    ecx
 0x780B4A: push    edx
 0x780B4B: mov     ecx, eax
-0x780B4D: call    sub_780A40
+0x780B4D: call    NiDX9ShaderConstantManager_Construct; Constructs the Oblivion DX9 shader constant manager. Its vtable +4 entry is Shared_NoOpVirtual_60D0A0; actual constant-map uploads occur during NiD3DShader__SetupShaderPrograms.
 0x780B52: retn
 0x780B53: xor     eax, eax
 0x780B55: retn

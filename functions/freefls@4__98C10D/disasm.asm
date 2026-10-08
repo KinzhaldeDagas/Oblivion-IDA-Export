@@ -64,3 +64,15 @@
 0x98C1B5: pop     ecx
 0x98C1B6: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98C1BD: call    __freefls@4___$LN19_4
+0x98C20E: call    __SEH_epilog4
+0x98C213: retn    4
+0x98C216: mov     esi, [ebp+arg_0]
+0x98C219: push    0Dh
+0x98C21B: call    __unlock
+0x98C220: pop     ecx
+0x98C221: retn
+0x98C222: mov     esi, [ebp+arg_0]
+0x98C225: push    0Ch
+0x98C227: call    __unlock
+0x98C22C: pop     ecx
+0x98C22D: retn

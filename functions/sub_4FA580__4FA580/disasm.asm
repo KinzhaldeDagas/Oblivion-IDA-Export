@@ -13,10 +13,9 @@
 0x4FA5A4: test    eax, eax
 0x4FA5A6: jz      short loc_4FA5C7
 0x4FA5A8: jmp     short loc_4FA5B0
-0x4FA5AA: align 10h
 0x4FA5B0: mov     esi, [eax+4]
 0x4FA5B3: push    eax
-0x4FA5B4: call    FormHeapFree
+0x4FA5B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FA5B9: add     esp, 4
 0x4FA5BC: test    esi, esi
 0x4FA5BE: mov     eax, esi

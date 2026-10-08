@@ -1,4 +1,4 @@
-0x41FBA0: push    1Fh; a2
+0x41FBA0: push    1Fh; Returns ExtraPackage's activation byte, or false.
 0x41FBA2: call    BaseExtraList_GetExtraData
 0x41FBA7: test    eax, eax
 0x41FBA9: jz      short loc_41FBAF

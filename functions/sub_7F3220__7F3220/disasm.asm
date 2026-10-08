@@ -17,7 +17,7 @@
 0x7F3259: fstp    [esp+10h+arg_0]
 0x7F325D: fld     [esp+10h+arg_0]
 0x7F3261: add     esp, 8
-0x7F3264: call    Double_To_SInt32
+0x7F3264: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7F3269: mov     edi, eax
 0x7F326B: mov     [esp+8+arg_0], edi
 0x7F326F: fild    [esp+8+arg_0]

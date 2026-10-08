@@ -1,4 +1,4 @@
-0x76FD60: mov     eax, [esp+arg_0]
+0x76FD60: mov     eax, [esp+arg_0]; MoonSugarEffect decode: disables all elements in one stream, marks declaration dirty, and releases cached IDirect3DVertexDeclaration9.
 0x76FD64: push    esi
 0x76FD65: mov     esi, ecx
 0x76FD67: cmp     eax, [esi+20h]

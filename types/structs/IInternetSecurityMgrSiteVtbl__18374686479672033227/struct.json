@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IInternetSecurityMgrSiteVtbl",
+  "definition": "struct IInternetSecurityMgrSiteVtbl\n{\nHRESULT_0 (*QueryInterface)(IInternetSecurityMgrSite_0 *, const IID *const, void **);\nULONG (*AddRef)(IInternetSecurityMgrSite_0 *);\nULONG (*Release)(IInternetSecurityMgrSite_0 *);\nHRESULT_0 (*GetWindow)(IInternetSecurityMgrSite_0 *, HWND *);\nHRESULT_0 (*EnableModeless)(IInternetSecurityMgrSite_0 *, BOOL);\n}\n",
   "id": 18374686479672033227,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IInternetSecurityMgrSite_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IInternetSecurityMgrSite_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IInternetSecurityMgrSite_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetWindow",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IInternetSecurityMgrSite_0 *, HWND *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnableModeless",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IInternetSecurityMgrSite_0 *, BOOL)"
     }
   ],
   "name": "IInternetSecurityMgrSiteVtbl",
+  "ordinal": 3421,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

@@ -65,7 +65,7 @@
 0x674A02: jz      short loc_674A0D
 0x674A04: push    ebp
 0x674A05: lea     ecx, [esi+44h]
-0x674A08: call    sub_424C50
+0x674A08: call    sub_424C50; 3DTheft decode: Add/link ExtraFollower entry on target ExtraDataList; creates ExtraFollower if absent and pushes follower actor pointer if not already listed.
 0x674A0D: mov     ebx, [ebx+4]
 0x674A10: test    ebx, ebx
 0x674A12: jnz     loc_674960

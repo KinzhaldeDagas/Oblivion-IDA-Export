@@ -1,4 +1,4 @@
-0x597340: push    ecx
+0x597340: push    ecx; Rebuilds the ClassMenu list from TESDataHandler classes, includes only playable classes, sorts/displays them by name, and optionally activates the current class row.
 0x597341: push    ebx
 0x597342: push    ebp
 0x597343: push    edi
@@ -18,7 +18,7 @@
 0x59736D: test    esi, esi
 0x59736F: jz      short loc_5973BE
 0x597371: mov     ecx, esi
-0x597373: call    TESClass_IsPlayable
+0x597373: call    TESClass_IsPlayable; TESClass_IsPlayable reads classFlags at +0x60 bit 0.
 0x597378: test    al, al
 0x59737A: jz      short loc_5973AF
 0x59737C: mov     eax, [esi+1Ch]
@@ -57,7 +57,7 @@
 0x5973D1: mov     ecx, ebp
 0x5973D3: add     esi, 0Ch
 0x5973D6: call    Tile_GetFloat
-0x5973DB: call    Double_To_SInt32
+0x5973DB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5973E0: push    eax
 0x5973E1: mov     eax, [esi]
 0x5973E3: mov     ecx, edi

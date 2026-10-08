@@ -1,15 +1,14 @@
 int __usercall ActiveEffect_Base_SaveAEList_::LoopTest@<eax>(
-        _DWORD *a1@<esi>,
-        _WORD *a2@<ebp>,
-        double a3@<st0>,
+        _DWORD *esi0@<esi>,
+        _WORD *a1@<ebp>,
+        int a2,
+        int a3,
         int a4,
         int a5,
-        int a6,
-        int a7,
-        int a8)
+        int a6)
 {
-  if ( a1[1] || *a1 )
-    return ActiveEffect_Base_SaveAEList_::LoopBody(a4, a5, a6);
+  if ( esi0[1] || *esi0 ) /*0x68df4b*/
+    return ActiveEffect_Base_SaveAEList_::LoopBody(a2, a3, a4); /*0x68df4f*/
   else
-    return ActiveEffect_Base_SaveAEList_::DoneActvEffList(a2, a3, a4, a5, a6, a7, a8);
+    return ActiveEffect_Base_SaveAEList_::DoneActvEffList(a1, a2, a3, a4, a5, a6); /*0x68df4e*/
 }

@@ -43,7 +43,7 @@
 0x6D2D03: push    eax; int
 0x6D2D04: push    ecx
 0x6D2D05: fstp    [esp+24h+var_24]; float
-0x6D2D08: call    sub_6BB270
+0x6D2D08: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6D2D0D: fstp    dword ptr [esi+0Ch]
 0x6D2D10: add     esp, 18h
 0x6D2D13: fld     [esp+0Ch+arg_0]

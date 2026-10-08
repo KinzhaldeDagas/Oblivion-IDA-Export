@@ -6,7 +6,7 @@
 0x6D0E8A: push    edi
 0x6D0E8B: push    esi
 0x6D0E8C: mov     edi, ecx
-0x6D0E8E: call    sub_754EB0
+0x6D0E8E: call    j_NiTimeController_SaveBinary
 0x6D0E93: mov     eax, [esi+220h]
 0x6D0E99: push    1
 0x6D0E9B: lea     ecx, [esp+20h+var_8]
@@ -92,7 +92,6 @@
 0x6D0F75: cmp     [esp+1Ch+var_C], ebx
 0x6D0F79: jbe     short loc_6D0FC9
 0x6D0F7B: jmp     short loc_6D0F80
-0x6D0F7D: align 10h
 0x6D0F80: movzx   eax, word ptr [edi+4Ah]
 0x6D0F84: fldz
 0x6D0F86: cmp     ebx, eax

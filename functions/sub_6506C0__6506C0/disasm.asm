@@ -32,12 +32,12 @@
 0x65071C: add     esp, 14h
 0x65071F: test    eax, eax
 0x650721: jz      short loc_650749
-0x650723: mov     ecx, [esi+2Ch]
-0x650726: call    sub_4D7740
+0x650723: mov     ecx, [esi+2Ch]; this
+0x650726: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x65072B: test    eax, eax
 0x65072D: jz      short loc_65073A
-0x65072F: mov     ecx, eax
-0x650731: call    sub_428E70
+0x65072F: mov     ecx, eax; this
+0x650731: call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.
 0x650736: test    al, al
 0x650738: jnz     short loc_650749
 0x65073A: mov     eax, [esi]
@@ -53,7 +53,7 @@
 0x650755: test    eax, eax
 0x650757: jz      short loc_65077C
 0x650759: mov     ecx, eax
-0x65075B: call    sub_472EA0
+0x65075B: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x650760: test    al, al
 0x650762: jz      short loc_65077C
 0x650764: mov     ecx, [edi+58h]
@@ -77,7 +77,7 @@
 0x65079E: test    ah, 1
 0x6507A1: jnz     short loc_6507B2
 0x6507A3: mov     ecx, edi; int
-0x6507A5: call    sub_5EAE70
+0x6507A5: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x6507AA: fldz
 0x6507AC: fstp    dword ptr [esi+0B8h]
 0x6507B2: pop     edi

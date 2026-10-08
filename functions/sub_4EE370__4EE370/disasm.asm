@@ -28,7 +28,6 @@
 0x4EE3B7: mov     eax, edi
 0x4EE3B9: jz      short loc_4EE3CF
 0x4EE3BB: jmp     short loc_4EE3C0
-0x4EE3BD: align 10h
 0x4EE3C0: cmp     dword ptr [eax], 0
 0x4EE3C3: jz      short loc_4EE3C8
 0x4EE3C5: add     edx, 1

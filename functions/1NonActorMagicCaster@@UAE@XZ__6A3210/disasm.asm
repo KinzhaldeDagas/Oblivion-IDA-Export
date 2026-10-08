@@ -37,3 +37,21 @@
 0x6A3293: pop     esi
 0x6A3294: add     esp, 14h
 0x6A3297: retn
+0x9C6080: mov     ecx, [ebp-10h]; this
+0x9C6083: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9C6088: cmp     dword ptr [ebp-10h], 0
+0x9C608C: jz      loc_9C60A0
+0x9C6092: mov     eax, [ebp-10h]
+0x9C6095: add     eax, 0Ch
+0x9C6098: mov     [ebp-14h], eax
+0x9C609B: jmp     loc_9C60A7
+0x9C60A0: mov     dword ptr [ebp-14h], 0
+0x9C60A7: mov     ecx, [ebp-14h]
+0x9C60AA: jmp     MagicCaster_destr
+0x9C60AF: mov     edx, [esp+arg_4]
+0x9C60B3: lea     eax, [edx-10h]
+0x9C60B6: mov     ecx, [edx-14h]
+0x9C60B9: xor     ecx, eax
+0x9C60BB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C60C0: mov     eax, offset stru_AEE6B0
+0x9C60C5: jmp     ___CxxFrameHandler3

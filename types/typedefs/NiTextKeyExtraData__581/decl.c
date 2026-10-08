@@ -1,1 +1,1 @@
-NiTextKeyExtraData
+struct NiTextKeyExtraData;

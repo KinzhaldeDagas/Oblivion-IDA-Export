@@ -1,4 +1,4 @@
-0x482670: push    edi
+0x482670: push    edi; Clear/release canopy shadow-map state.
 0x482671: mov     edi, ecx
 0x482673: cmp     dword ptr [edi+24h], 0
 0x482677: jz      short loc_4826EC
@@ -24,8 +24,8 @@
 0x4826A4: mov     dword ptr ds:0B4310Ch, 0
 0x4826AE: mov     eax, [edi+24h]
 0x4826B1: mov     ecx, ds:0B42F50h; this
-0x4826B7: push    eax; a2
-0x4826B8: call    sub_7C1EE0
+0x4826B7: push    eax; texture
+0x4826B8: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x4826BD: mov     esi, [edi+24h]
 0x4826C0: test    esi, esi
 0x4826C2: jz      short loc_4826E3

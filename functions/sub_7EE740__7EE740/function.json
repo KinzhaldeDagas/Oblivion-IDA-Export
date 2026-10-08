@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x7EE740",
+      "0x7EE7BB"
+    ]
+  ],
   "chunks_sha256": "a7ad2037e20391c296b0a44a9c1e7fc19eb24c4ea4e90c528e344dd5644b9b0b",
   "comment_regular": "[Verified] Finds a DECAL_DATA* by payload identity in this property's list at +0x80, removes/frees the matching list node via the generic NiTPointerList removal routine, decrements +0x8C, and resets cached render-pass state at +0x24. Uses property+0x90 as its temporary next-node cursor; no payload ownership release occurs here.",
   "comment_repeatable": "[Verified] Finds a DECAL_DATA* by payload identity in this property's list at +0x80, removes/frees the matching list node via the generic NiTPointerList removal routine, decrements +0x8C, and resets cached render-pass state at +0x24. Uses property+0x90 as its temporary next-node cursor; no payload ownership release occurs here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "BSShaderLightingProperty_RemoveDecalData",
   "end_ea": "0x7EE7BB",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "a7ad2037e20391c296b0a44a9c1e7fc19eb24c4ea4e90c528e344dd5644b9b0b",
   "size": 123,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7EE740",
   "total_chunk_size": 123,
   "type": "void __thiscall(BSShaderLightingPropertyLayout_t *this, DECAL_DATA *data)",

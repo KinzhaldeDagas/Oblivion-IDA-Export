@@ -24,15 +24,15 @@
 0x59FD8A: mov     esi, eax
 0x59FD8C: call    sub_59FA20
 0x59FD91: mov     ebx, eax
-0x59FD93: call    sub_57D7A0
+0x59FD93: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x59FD98: fmul    qword ptr ds:0A2FAA0h
 0x59FD9E: fadd    dword ptr [ebp+20h]
-0x59FDA1: call    Double_To_SInt32
+0x59FDA1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59FDA6: mov     [esp+18h+arg_0], eax
 0x59FDAA: fild    [esp+18h+arg_0]
 0x59FDAE: mov     ecx, ebx
 0x59FDB0: fstp    [esp+18h+arg_0]
-0x59FDB4: call    sub_588C50
+0x59FDB4: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
 0x59FDB9: fsubr   [esp+18h+arg_0]
 0x59FDBD: push    0FB6h
 0x59FDC2: mov     ecx, esi
@@ -44,24 +44,24 @@
 0x59FDD5: mov     ecx, esi; this
 0x59FDD7: fstp    [esp+1Ch+arg_0]
 0x59FDDB: fld     dword ptr ds:0A6B1F0h
-0x59FDE1: fstp    [esp+1Ch+a2]; a3
-0x59FDE4: push    0FB7h; a2
-0x59FDE9: call    Tile_SetFloat
+0x59FDE1: fstp    [esp+1Ch+a2]; value
+0x59FDE4: push    0FB7h; propertyCode
+0x59FDE9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59FDEE: fld     [esp+18h+arg_0]
-0x59FDF2: call    Double_To_SInt32
+0x59FDF2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59FDF7: mov     [esp+18h+arg_0], eax
 0x59FDFB: fild    [esp+18h+arg_0]
 0x59FDFF: push    ecx
 0x59FE00: mov     ecx, esi; this
-0x59FE02: fstp    [esp+1Ch+a2]; a3
-0x59FE05: push    0FB7h; a2
-0x59FE0A: call    Tile_SetFloat
+0x59FE02: fstp    [esp+1Ch+a2]; value
+0x59FE05: push    0FB7h; propertyCode
+0x59FE0A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59FE0F: fldz
 0x59FE11: push    ecx
-0x59FE12: fstp    [esp+1Ch+a2]; a3
-0x59FE15: push    0FB7h; a2
+0x59FE12: fstp    [esp+1Ch+a2]; value
+0x59FE15: push    0FB7h; propertyCode
 0x59FE1A: mov     ecx, esi; this
-0x59FE1C: call    Tile_SetFloat
+0x59FE1C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59FE21: pop     esi
 0x59FE22: pop     ebx
 0x59FE23: pop     edi

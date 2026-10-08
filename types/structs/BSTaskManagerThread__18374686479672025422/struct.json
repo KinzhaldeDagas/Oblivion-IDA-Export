@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "BSTaskManagerThread",
+  "definition": "struct BSTaskManagerThread\n{\nvoid *vtbl;\nBSTaskThreadMembr super;\nBSThread *thread;\n}\n",
   "id": 18374686479672025422,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 32
+      "size": 32,
+      "type": "BSTaskThreadMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "thread",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "BSThread *"
     }
   ],
   "name": "BSTaskManagerThread",
+  "ordinal": 764,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

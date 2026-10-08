@@ -1,1 +1,1 @@
-NiSphereBV
+struct NiSphereBV;

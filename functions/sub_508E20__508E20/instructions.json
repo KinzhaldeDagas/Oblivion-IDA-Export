@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x508E7A",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x508EB7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x508F11",
-    "line": "call    sub_66EAF0",
+    "line": "call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,19 +649,19 @@
   },
   {
     "ea": "0x508F68",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x508F6A",
-    "line": "fstp    [esp+34h+var_34]; float",
+    "line": "fstp    [esp+34h+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x508F6D",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,25 +703,25 @@
   },
   {
     "ea": "0x508F85",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x508F87",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+var_38]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x508F8A",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x508F8F",
-    "line": "mov     eax, [esp+38h+var_34]",
+    "line": "mov     eax, [esp+38h+radians]",
     "mnemonic": "mov",
     "size": 4
   },

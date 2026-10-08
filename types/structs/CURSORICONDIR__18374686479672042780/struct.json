@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "CURSORICONDIR",
+  "definition": "struct CURSORICONDIR\n{\nWORD idReserved;\nWORD idType;\nWORD idCount;\nCURSORICONDIRENTRY idEntries[1];\n}\n",
   "id": 18374686479672042780,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "idReserved",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "idType",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "idCount",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "idEntries",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 14
+      "size": 14,
+      "type": "CURSORICONDIRENTRY[1]"
     }
   ],
   "name": "CURSORICONDIR",
+  "ordinal": 7291,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

@@ -10,7 +10,7 @@
 0x5D1FDE: mov     esi, eax
 0x5D1FE0: test    esi, esi
 0x5D1FE2: jz      loc_5D2068
-0x5D1FE8: call    sub_578D70
+0x5D1FE8: call    InterfaceManager_ConsumeMessageButton
 0x5D1FED: cmp     al, 1
 0x5D1FEF: jnz     short loc_5D2064
 0x5D1FF1: mov     ecx, ds:0B333C4h
@@ -33,9 +33,9 @@
 0x5D202E: fild    [esp+0Ch+var_4]
 0x5D2032: push    ecx
 0x5D2033: mov     ecx, [esi+34h]; this
-0x5D2036: fstp    [esp+10h+a2]; a3
-0x5D2039: push    0FAEh; a2
-0x5D203E: call    Tile_SetFloat
+0x5D2036: fstp    [esp+10h+a2]; value
+0x5D2039: push    0FAEh; propertyCode
+0x5D203E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D2043: mov     ecx, ds:0B333C4h
 0x5D2049: mov     edx, [ecx]
 0x5D204B: mov     eax, [edx+2C0h]

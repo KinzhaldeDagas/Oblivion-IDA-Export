@@ -3,13 +3,13 @@
 0x6CAC62: push    edi
 0x6CAC63: mov     edi, ecx
 0x6CAC65: xor     ebx, ebx
-0x6CAC67: cmp     [edi+44h], ebx
+0x6CAC67: cmp     [edi+44h], ebx; Crash investigation 2026-05-26: WER hit-crash offset mapped here in animation/controller cleanup (sub_6CAC60 reading this+0x44). BloodOnDeath now avoids doing limb lookup/native decal projection inside Actor_Kill/death call stack to avoid interfering with this hit/death cleanup path.
 0x6CAC6A: jz      short loc_6CAC78
 0x6CAC6C: fldz
-0x6CAC6E: push    ebx; char
+0x6CAC6E: push    ebx; transition
 0x6CAC6F: push    ecx
-0x6CAC70: fstp    [esp+14h+var_14]; float
-0x6CAC73: call    sub_6C9CB0
+0x6CAC70: fstp    [esp+14h+easeOutTime]; easeOutTime
+0x6CAC73: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x6CAC78: cmp     [edi+0Ch], ebx
 0x6CAC7B: mov     [esp+0Ch+var_4], ebx
 0x6CAC7F: jbe     short loc_6CACD5

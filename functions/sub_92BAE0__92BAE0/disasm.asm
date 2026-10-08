@@ -15,9 +15,9 @@
 0x92BB04: jle     loc_92BD0B
 0x92BB0A: mov     esi, [ebp+arg_18]
 0x92BB0D: mov     [esp+50h+var_34], ebx
-0x92BB11: cmp     ebx, [ebp+arg_C]
+0x92BB11: cmp     ebx, dword ptr [ebp+arg_C]
 0x92BB14: jz      loc_92BCF0
-0x92BB1A: mov     ecx, [ebp+arg_10]
+0x92BB1A: mov     ecx, dword ptr [ebp+arg_C+4]
 0x92BB1D: cmp     ebx, ecx
 0x92BB1F: jz      loc_92BCF0
 0x92BB25: mov     eax, [ebp+arg_4]
@@ -96,7 +96,7 @@
 0x92BC22: push    eax
 0x92BC23: push    ebx
 0x92BC24: push    ecx
-0x92BC25: mov     ecx, [ebp+arg_C]
+0x92BC25: mov     ecx, dword ptr [ebp+arg_C]
 0x92BC28: push    ecx
 0x92BC29: push    edi
 0x92BC2A: call    sub_92B760

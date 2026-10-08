@@ -1,1 +1,1 @@
-NT_TIB32
+typedef _NT_TIB32 NT_TIB32;

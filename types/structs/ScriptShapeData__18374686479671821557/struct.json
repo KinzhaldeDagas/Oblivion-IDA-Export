@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ScriptShapeData",
+  "definition": "typedef ScriptShapeDataTag ScriptShapeData\n",
   "id": 18374686479671821557,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "defaultTextRange",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "TEXTRANGE_PROPERTIES"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "defaultGPOSTextRange",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "TEXTRANGE_PROPERTIES"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "requiredFeatures",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "const char *const *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "newOtTag",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "OPENTYPE_TAG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "contextProc",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "ContextualShapingProc"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "charGlyphPropProc",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "ShapeCharGlyphPropProc"
     }
   ],
   "name": "ScriptShapeData",
+  "ordinal": 1746,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

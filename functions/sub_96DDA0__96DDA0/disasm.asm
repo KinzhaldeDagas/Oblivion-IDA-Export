@@ -14,7 +14,7 @@
 0x96DDBD: call    edx
 0x96DDBF: test    eax, eax
 0x96DDC1: jz      short loc_96DDD1
-0x96DDC3: cmp     eax, offset dword_BA9AC8
+0x96DDC3: cmp     eax, offset stru_BA9AC8
 0x96DDC8: jz      short loc_96DDD8
 0x96DDCA: mov     eax, [eax+4]
 0x96DDCD: test    eax, eax

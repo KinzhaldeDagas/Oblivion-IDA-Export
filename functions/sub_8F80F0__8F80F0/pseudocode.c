@@ -46,123 +46,123 @@ int __thiscall sub_8F80F0(char *this, __m128 **a2, __m128 **a3, int a4, __m128 *
   char v50[48]; // [esp+50h] [ebp-B0h] BYREF
   char v51[128]; // [esp+80h] [ebp-80h] BYREF
 
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v6 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) )
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8f8107*/
+  v6 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8f810e*/
+  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) ) /*0x8f811f*/
   {
-    v7 = ThreadLocalStoragePointer[TlsIndex];
-    v8 = *(_DWORD **)(v6 + 0x1A4);
-    *v8 = "TtMultiSphereTri";
-    v9 = __rdtsc();
-    v8[1] = v9;
-    *(_DWORD *)(v7 + 0x1A4) = v8 + 3;
+    v7 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8f8121*/
+    v8 = *(_DWORD **)(v6 + 0x1A4); /*0x8f8123*/
+    *v8 = "TtMultiSphereTri"; /*0x8f8129*/
+    v9 = __rdtsc(); /*0x8f812f*/
+    v8[1] = v9; /*0x8f8139*/
+    *(_DWORD *)(v7 + 0x1A4) = v8 + 3; /*0x8f813f*/
   }
-  v10 = a3[2];
-  v11 = *v10;
-  v12 = v10[1];
-  v13 = v10[2];
-  v14 = v10[3];
-  v15 = *a2;
-  v46 = *a3;
-  v16 = *a3 + 1;
-  v17 = (char *)(v50 - (char *)v16);
-  v18 = 3;
-  do
+  v10 = a3[2]; /*0x8f814a*/
+  v11 = *v10; /*0x8f814d*/
+  v12 = v10[1]; /*0x8f8150*/
+  v13 = v10[2]; /*0x8f8154*/
+  v14 = v10[3]; /*0x8f8158*/
+  v15 = *a2; /*0x8f815f*/
+  v46 = *a3; /*0x8f8161*/
+  v16 = *a3 + 1; /*0x8f8165*/
+  v17 = (char *)(v50 - (char *)v16); /*0x8f816c*/
+  v18 = 3; /*0x8f816e*/
+  do /*0x8f81ae*/
   {
-    *(__m128 *)((char *)v16 + (_DWORD)v17) = _mm_add_ps(
+    *(__m128 *)((char *)v16 + (_DWORD)v17) = _mm_add_ps( /*0x8f81a6*/
                                                _mm_add_ps(
                                                  _mm_mul_ps(v11, _mm_shuffle_ps(*v16, *v16, 0)),
                                                  _mm_mul_ps(v12, _mm_shuffle_ps(*v16, *v16, 0x55))),
                                                _mm_add_ps(_mm_mul_ps(v13, _mm_shuffle_ps(*v16, *v16, 0xAA)), v14));
-    ++v16;
-    --v18;
+    ++v16; /*0x8f81aa*/
+    --v18; /*0x8f81ad*/
   }
-  while ( v18 );
-  v19 = a2[2];
-  v20 = *v19;
-  v21 = v19[1];
-  v22 = v19[2];
-  v23 = v19[3];
-  v24 = v15->m128_i32[3];
-  v25 = v15 + 1;
-  v26 = v24;
-  v27 = v25;
-  do
+  while ( v18 ); /*0x8f81ae*/
+  v19 = a2[2]; /*0x8f81b0*/
+  v20 = *v19; /*0x8f81b3*/
+  v21 = v19[1]; /*0x8f81b6*/
+  v22 = v19[2]; /*0x8f81ba*/
+  v23 = v19[3]; /*0x8f81be*/
+  v24 = v15->m128_i32[3]; /*0x8f81c2*/
+  v25 = v15 + 1; /*0x8f81c5*/
+  v26 = v24; /*0x8f81cf*/
+  v27 = v25; /*0x8f81d1*/
+  do /*0x8f8212*/
   {
-    *(__m128 *)((char *)v27 + v51 - (char *)v25) = _mm_add_ps(
+    *(__m128 *)((char *)v27 + v51 - (char *)v25) = _mm_add_ps( /*0x8f8208*/
                                                      _mm_add_ps(
                                                        _mm_mul_ps(v20, _mm_shuffle_ps(*v27, *v27, 0)),
                                                        _mm_mul_ps(v21, _mm_shuffle_ps(*v27, *v27, 0x55))),
                                                      _mm_add_ps(_mm_mul_ps(v22, _mm_shuffle_ps(*v27, *v27, 0xAA)), v23));
-    ++v27;
-    --v26;
+    ++v27; /*0x8f820c*/
+    --v26; /*0x8f820f*/
   }
-  while ( v26 > 0 );
-  v28 = v24 - 1;
-  v29 = (__m128 *)v51;
-  if ( v24 - 1 >= 0 )
+  while ( v26 > 0 ); /*0x8f8212*/
+  v28 = v24 - 1; /*0x8f8214*/
+  v29 = (__m128 *)v51; /*0x8f8219*/
+  if ( v24 - 1 >= 0 ) /*0x8f8220*/
   {
-    v30 = &v25->m128_f32[3];
-    v31 = this + 2 * v28 + 0x1C;
-    v47 = v30;
-    v42 = v28 + 1;
-    do
+    v30 = &v25->m128_f32[3]; /*0x8f822a*/
+    v31 = this + 2 * v28 + 0x1C; /*0x8f822d*/
+    v47 = v30; /*0x8f8232*/
+    v42 = v28 + 1; /*0x8f8236*/
+    do /*0x8f8256*/
     {
-      v45 = v46->m128_f32[3] + *v30;
-      sub_8D20C0(v29, (__m128 *)v50, (int)(this + 0xC), &v48);
-      if ( v45 + *(float *)(a4 + 8) <= v49 )
+      v45 = v46->m128_f32[3] + *v30; /*0x8f8256*/
+      sub_8D20C0(v29, (__m128 *)v50, (int)(this + 0xC), &v48); /*0x8f8260*/
+      if ( v45 + *(float *)(a4 + 8) <= v49 ) /*0x8f827b*/
       {
-        HIWORD(v35) = 0;
-        if ( *(_WORD *)v31 != 0xFFFF )
+        HIWORD(v35) = 0; /*0x8f82f8*/
+        if ( *(_WORD *)v31 != 0xFFFF ) /*0x8f8301*/
         {
-          LOWORD(v35) = *(_WORD *)v31;
-          (*(void (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 2) + 0x10))(*((_DWORD *)this + 2), v35);
-          *(_WORD *)v31 = 0xFFFF;
+          LOWORD(v35) = *(_WORD *)v31; /*0x8f82fa*/
+          (*(void (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 2) + 0x10))(*((_DWORD *)this + 2), v35); /*0x8f830d*/
+          *(_WORD *)v31 = 0xFFFF; /*0x8f8310*/
         }
-        goto LABEL_16;
+        goto LABEL_16; /*0x8f8310*/
       }
-      v32 = a5;
-      v33 = *a5;
-      *(float *)&v44 = v46->m128_f32[3] - v49;
-      *v33 = _mm_add_ps(*v29, _mm_mul_ps(_mm_shuffle_ps((__m128)v44, (__m128)v44, 0), v48));
-      v33[1] = v48;
-      v33[1].m128_f32[3] = v49 - v45;
-      if ( *(_WORD *)v31 != 0xFFFF )
-        goto LABEL_13;
-      v34 = (*(int (__thiscall **)(_DWORD, __m128 **, __m128 **, int, __m128 *))(**((_DWORD **)this + 2) + 8))(
+      v32 = a5; /*0x8f828d*/
+      v33 = *a5; /*0x8f8290*/
+      *(float *)&v44 = v46->m128_f32[3] - v49; /*0x8f8292*/
+      *v33 = _mm_add_ps(*v29, _mm_mul_ps(_mm_shuffle_ps((__m128)v44, (__m128)v44, 0), v48)); /*0x8f82ac*/
+      v33[1] = v48; /*0x8f82b4*/
+      v33[1].m128_f32[3] = v49 - v45; /*0x8f82c0*/
+      if ( *(_WORD *)v31 != 0xFFFF ) /*0x8f82c8*/
+        goto LABEL_13; /*0x8f82c8*/
+      v34 = (*(int (__thiscall **)(_DWORD, __m128 **, __m128 **, int, __m128 *))(**((_DWORD **)this + 2) + 8))( /*0x8f82dd*/
               *((_DWORD *)this + 2),
               a2,
               a3,
               a4,
               v33);
-      *(_WORD *)v31 = v34;
-      if ( v34 != (__int16)0xFFFF )
+      *(_WORD *)v31 = v34; /*0x8f82e4*/
+      if ( v34 != (__int16)0xFFFF ) /*0x8f82e7*/
       {
-        v32 = a5;
+        v32 = a5; /*0x8f82e9*/
 LABEL_13:
-        *v32 += 3;
-        v33[2].m128_i16[0] = *(_WORD *)v31;
+        *v32 += 3; /*0x8f82ec*/
+        v33[2].m128_i16[0] = *(_WORD *)v31; /*0x8f82f2*/
       }
 LABEL_16:
-      v30 = v47 + 4;
-      ++v29;
-      v31 += 0xFFFFFFFE;
-      v36 = v42 == 1;
-      v47 += 4;
-      --v42;
+      v30 = v47 + 4; /*0x8f8315*/
+      ++v29; /*0x8f8320*/
+      v31 += 0xFFFFFFFE; /*0x8f8323*/
+      v36 = v42 == 1; /*0x8f8326*/
+      v47 += 4; /*0x8f8327*/
+      --v42; /*0x8f832b*/
     }
-    while ( !v36 );
+    while ( !v36 ); /*0x8f8256*/
   }
-  v37 = NtCurrentTeb()->ThreadLocalStoragePointer;
-  LODWORD(v38) = v37[TlsIndex];
-  if ( *(_DWORD *)(v38 + 0x1A4) < *(_DWORD *)(v38 + 0x1A8) )
+  v37 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8f8335*/
+  LODWORD(v38) = v37[MEMORY[0xBA9DE4]]; /*0x8f8342*/
+  if ( *(_DWORD *)(v38 + 0x1A4) < *(_DWORD *)(v38 + 0x1A8) ) /*0x8f8351*/
   {
-    v39 = v37[TlsIndex];
-    v40 = *(_DWORD **)(v38 + 0x1A4);
-    *v40 = "Et";
-    v38 = __rdtsc();
-    v40[1] = v38;
-    *(_DWORD *)(v39 + 0x1A4) = v40 + 3;
+    v39 = v37[MEMORY[0xBA9DE4]]; /*0x8f8353*/
+    v40 = *(_DWORD **)(v38 + 0x1A4); /*0x8f8355*/
+    *v40 = "Et"; /*0x8f835b*/
+    v38 = __rdtsc(); /*0x8f8361*/
+    v40[1] = v38; /*0x8f836b*/
+    *(_DWORD *)(v39 + 0x1A4) = v40 + 3; /*0x8f8371*/
   }
-  return v38;
+  return v38; /*0x8f8377*/
 }

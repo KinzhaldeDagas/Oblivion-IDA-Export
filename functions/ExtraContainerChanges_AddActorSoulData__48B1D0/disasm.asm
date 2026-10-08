@@ -357,10 +357,10 @@
 0x48B5EA: mov     ecx, esi
 0x48B5EC: mov     [esi+4], eax
 0x48B5EF: call    CreateSoulExtraData
-0x48B5F4: push    1
-0x48B5F6: push    esi
-0x48B5F7: mov     ecx, edi
-0x48B5F9: call    ContainerExtraData_AddEntry
+0x48B5F4: push    1; destroyEntryIfMerged
+0x48B5F6: push    esi; entry
+0x48B5F7: mov     ecx, edi; this
+0x48B5F9: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x48B5FE: pop     edi
 0x48B5FF: pop     esi
 0x48B600: pop     ebp

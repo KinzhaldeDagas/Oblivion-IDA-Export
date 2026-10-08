@@ -1,4 +1,4 @@
-0x56A360: mov     eax, [esp+arg_0]
+0x56A360: mov     eax, [esp+mastery]; Return the minimum skill value for a mastery tier: Novice 0, Apprentice 25, Journeyman 50, Expert 75, Master 100.
 0x56A364: cmp     eax, 4; switch 5 cases
 0x56A367: ja      short ActorValue_GetMasterySkill___def_56A369
 0x56A369: jmp     ds:jpt_56A369[eax*4]; switch jump

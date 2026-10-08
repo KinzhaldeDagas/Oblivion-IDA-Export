@@ -9,7 +9,7 @@
 0x691A62: jz      short loc_691A6D
 0x691A64: push    1
 0x691A66: mov     ecx, esi
-0x691A68: call    ActiveEffect_Base_Remove
+0x691A68: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x691A6D: pop     esi
 0x691A6E: mov     al, bl
 0x691A70: pop     ebx

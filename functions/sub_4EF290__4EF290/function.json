@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4EF290",
+      "0x4EF2A0"
+    ]
+  ],
+  "chunks_sha256": "4dd246b3008ade96448441fd3a1f2e2722013594a3a02b6cdbd08f3e02358572",
+  "comment_regular": "Verified: load-time SubSpace index builder reads only this WorldSpace's persistentCell (+0x34), not regular exterior cells. Persistent-cell SubSpace refs are represented in two distinct indexes: +0x64 is populated by TESWorldSpace_IndexReference for later cell reattachment; +0x60 is populated here for spatial bounds lookup.",
+  "comment_repeatable": "Verified: load-time SubSpace index builder reads only this WorldSpace's persistentCell (+0x34), not regular exterior cells. Persistent-cell SubSpace refs are represented in two distinct indexes: +0x64 is populated by TESWorldSpace_IndexReference for later cell reattachment; +0x60 is populated here for spatial bounds lookup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EF290",
+  "display_name": "TESWorldSpace_IndexPersistentCellSubSpaces",
   "end_ea": "0x4EF2A0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EF290",
+  "name": "TESWorldSpace_IndexPersistentCellSubSpaces",
   "segment": ".text",
   "sha256": "4dd246b3008ade96448441fd3a1f2e2722013594a3a02b6cdbd08f3e02358572",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EF290",
-  "type": "void __usercall(int@<ecx>, double@<st0>)",
+  "total_chunk_size": 16,
+  "type": "double __usercall@<st0>(TESWorldSpace *this@<ecx>, double carry@<st0>)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 1
 }

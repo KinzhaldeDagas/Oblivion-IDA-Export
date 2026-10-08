@@ -1,4 +1,4 @@
-0x450C20: sub     esp, 18h
+0x450C20: sub     esp, 18h; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x450C23: mov     eax, ds:0B30AACh
 0x450C28: xor     eax, esp
 0x450C2A: mov     [esp+18h+var_4], eax
@@ -6,7 +6,7 @@
 0x450C2F: mov     ebp, [esp+1Ch+Dst]
 0x450C33: push    esi
 0x450C34: mov     esi, ecx
-0x450C36: cmp     dword ptr [esi+254h], 0
+0x450C36: cmp     dword ptr [esi+254h], 0; Generic chunk read treats length zero as successful no-op and does not initialize the destination. SCPT callers that use stack/object destinations therefore retain prior or uninitialized bytes.
 0x450C3D: jnz     short TESFile_GetChunkData___CheckField264
 0x450C3F: pop     esi
 0x450C40: mov     al, 1
@@ -41,18 +41,18 @@
 0x450CA9: test    edi, edi
 0x450CAB: jz      loc_450E0A
 0x450CB1: cmp     [esi+254h], edi
-0x450CB7: jbe     loc_450E0A
-0x450CBD: mov     byte ptr [edi+ebp-1], 0
+0x450CB7: jbe     loc_450E0A; HEDR caller TESFile_Open passes maxSize=12. Size 0 exits without touching destination; sizes 1..12 copy only that prefix, preserving prior/default suffix. Size >12 takes this branch, writes byte 11=0 and copies exactly 11 bytes. Each occurrence therefore overlays shared header storage rather than invalidating all fields.
+0x450CBD: mov     byte ptr [edi+ebp-1], 0; Oversized HEDR terminator write: maxSize 12 means destination[11]=0, followed by an 11-byte payload copy. TESFile_Open applies its minimum-next-ID clamp after each read at 0x451C36.
 0x450CC2: mov     eax, [esi+23Ch]
 0x450CC8: cmp     eax, ds:0B05E20h
 0x450CCE: jz      short TESFile_GetChunkData___FirstReadFile
 0x450CD0: test    [esi+244h], ebx
 0x450CD6: jnz     short loc_450D49
-0x450CD8: mov     ecx, [esi+10h]
+0x450CD8: mov     ecx, [esi+10h]; self
 0x450CDB: lea     ebx, [edi-1]
-0x450CDE: push    ebx
-0x450CDF: push    ebp
-0x450CE0: call    ReadFile??
+0x450CDE: push    ebx; byteCount
+0x450CDF: push    ebp; destination
+0x450CE0: call    Archive_ReadBytes
 0x450CE5: cmp     eax, ebx
 0x450CE7: mov     [esi+264h], eax
 0x450CED: jz      TESFile_GetChunkData___Error_ChunkSizeTooBig
@@ -90,14 +90,14 @@
 0x450D59: mov     [esp+28h+var_18], eax
 0x450D5D: jnz     short loc_450D66
 0x450D5F: mov     ecx, esi
-0x450D61: call    TESFile_GetDecompressedRecordData
-0x450D66: mov     ecx, [esi+414h]
+0x450D61: call    TESFile_GetDecompressedRecordData; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.
+0x450D66: mov     ecx, [esi+414h]; MEF v20 fix: bounded truncated compressed chunk copy. Clip source range to currentRecordDCLength and zero-fill missing destination bytes instead of memcpy overreading decompressed buffer.
 0x450D6C: add     ecx, [esp+28h+var_18]
 0x450D70: lea     ebx, [edi-1]
-0x450D73: push    ebx; Size
-0x450D74: push    ecx; Src
-0x450D75: push    ebp; Dst
-0x450D76: call    _memcpy
+0x450D73: push    ebx; byteCount
+0x450D74: push    ecx; source
+0x450D75: push    ebp; destination
+0x450D76: call    _memcpy;
 0x450D7B: add     esp, 0Ch
 0x450D7E: mov     [esi+264h], ebx
 0x450D84: movzx   edx, byte ptr [esi+250h]
@@ -142,7 +142,7 @@
 0x450E2D: push    1
 0x450E2F: lea     edx, [esp+2Ch+var_18]
 0x450E33: push    edx
-0x450E34: push    ecx
+0x450E34: push    ecx; With max=0 (SCHR/SCDA), GetChunkData copies the full current chunk length with no destination bound or structural-size validation.
 0x450E35: push    ebp
 0x450E36: push    eax
 0x450E37: mov     eax, [eax+4]
@@ -185,14 +185,14 @@
 0x450EB8: cmp     dword ptr [esi+414h], 0
 0x450EBF: jnz     short loc_450EC8
 0x450EC1: mov     ecx, esi
-0x450EC3: call    TESFile_GetDecompressedRecordData
-0x450EC8: mov     ecx, [esi+254h]
+0x450EC3: call    TESFile_GetDecompressedRecordData; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.
+0x450EC8: mov     ecx, [esi+254h]; MEF v20 fix: bounded full compressed chunk copy. Validate source range against currentRecordDCLength before returning through normal success path.
 0x450ECE: mov     edx, [esi+414h]
-0x450ED4: push    ecx; Size
+0x450ED4: push    ecx; byteCount
 0x450ED5: add     edx, edi
-0x450ED7: push    edx; Src
-0x450ED8: push    ebp; Dst
-0x450ED9: call    _memcpy
+0x450ED7: push    edx; source
+0x450ED8: push    ebp; destination
+0x450ED9: call    _memcpy;
 0x450EDE: mov     eax, [esi+254h]
 0x450EE4: add     esp, 0Ch
 0x450EE7: mov     [esi+264h], eax

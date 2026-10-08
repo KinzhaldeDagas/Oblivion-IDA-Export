@@ -1,4 +1,4 @@
-0x4826F0: push    0FFFFFFFFh
+0x4826F0: push    0FFFFFFFFh; Retail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.
 0x4826F2: push    offset ShadowCanopyPass_SEH
 0x4826F7: mov     eax, large fs:0
 0x4826FD: push    eax
@@ -28,7 +28,7 @@
 0x482754: call    NiFrustum__SetOrtho
 0x482759: mov     [esp+138h+var_D4], edi
 0x48275D: fldz
-0x48275F: cmp     byte ptr ds:0B06CBCh, 0
+0x48275F: cmp     byte ptr ds:0B06CBCh, 0; Native ShadowCanopyPass exits unless bDoCanopyShadowPass (B06CBC) is enabled; canopy texture ownership remains native.
 0x482766: fst     [esp+138h+var_C8]
 0x48276A: mov     ecx, [esi+0Ch]
 0x48276D: fst     [esp+138h+var_C4]
@@ -38,7 +38,7 @@
 0x482781: mov     [esp+138h+var_D0], ecx
 0x482785: mov     byte ptr [esp+138h+var_114+3], 1
 0x48278A: mov     [esp+138h+var_121], 1
-0x48278F: mov     byte ptr ds:0B06A28h, 0
+0x48278F: mov     byte ptr ds:0B06A28h, 0; Clear the pending canopy shadow-map latch after canopy pass work.
 0x482796: jz      loc_4832FF
 0x48279C: mov     eax, [esi+0Ch]
 0x48279F: shl     eax, 0Ch
@@ -248,7 +248,6 @@
 0x482A73: mov     [esp+138h+var_E8], 0
 0x482A7B: xor     ebx, ebx
 0x482A7D: jmp     short loc_482A82
-0x482A7F: align 10h
 0x482A80: fstp    st
 0x482A82: cmp     edi, ebx
 0x482A84: jz      short loc_482AA4
@@ -274,12 +273,12 @@
 0x482ABC: jz      loc_482BB0
 0x482AC2: lea     edx, [esp+138h+var_E0]
 0x482AC6: push    edx
-0x482AC7: lea     ecx, [esp+13Ch+var_E4]
+0x482AC7: lea     ecx, [esp+13Ch+texture]
 0x482ACB: push    ecx
 0x482ACC: mov     ecx, eax
-0x482ACE: call    sub_4CAFF0
+0x482ACE: call    sub_4CAFF0; Retrieve the cell canopy-shadow mask.
 0x482AD3: mov     esi, eax
-0x482AD5: mov     eax, [esp+138h+var_E4]
+0x482AD5: mov     eax, [esp+138h+texture]
 0x482AD9: cmp     eax, ebx
 0x482ADB: jz      short loc_482B08
 0x482ADD: mov     ecx, [esp+138h+var_E0]
@@ -298,7 +297,7 @@
 0x482AFB: call    edx
 0x482AFD: mov     eax, [esp+138h+var_E0]
 0x482B01: mov     [eax+4], ebx
-0x482B04: mov     eax, [esp+138h+var_E4]
+0x482B04: mov     eax, [esp+138h+texture]
 0x482B08: cmp     esi, 1
 0x482B0B: jnz     short loc_482B6B
 0x482B0D: cmp     eax, ebx
@@ -318,19 +317,19 @@
 0x482B3B: lea     ecx, [esp+13Ch+var_108]; this
 0x482B3F: mov     byte ptr [esp+13Ch+var_4], 6
 0x482B47: call    NiSmartPointer_Set??
-0x482B4C: mov     ecx, [esp+138h+var_E4]
+0x482B4C: mov     ecx, [esp+138h+texture]
 0x482B50: mov     edi, [esp+138h+var_108]
-0x482B54: push    ecx
-0x482B55: mov     ecx, edi
-0x482B57: call    NiTexturingProperty__SetUnk08
-0x482B5C: push    ebx
-0x482B5D: mov     ecx, edi
-0x482B5F: call    sub_405870
+0x482B54: push    ecx; texture
+0x482B55: mov     ecx, edi; this
+0x482B57: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x482B5C: push    ebx; value
+0x482B5D: mov     ecx, edi; this
+0x482B5F: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x482B64: mov     byte ptr [esp+138h+var_114+3], 0
 0x482B69: jmp     short loc_482BAB
 0x482B6B: cmp     esi, 2
 0x482B6E: jnz     short loc_482BB0
-0x482B70: call    sub_4A41E0
+0x482B70: call    TESRegion_CreateFallbackCanopyShadowTexture; Verified: lazily builds a 64x64 NiPixelData with per-channel random values, wraps it as NiTexturingProperty, holds a refcounted global property, and sets clamp mode.
 0x482B75: mov     esi, eax
 0x482B77: cmp     edi, esi
 0x482B79: jz      short loc_482BAB
@@ -402,7 +401,7 @@
 0x482C3C: push    edi; a2
 0x482C3D: mov     ecx, ebp; this
 0x482C3F: mov     [ebp+5Ch], edx
-0x482C42: call    sub_405680
+0x482C42: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x482C47: mov     ecx, [esp+138h+var_110]
 0x482C4B: mov     eax, [ecx]
 0x482C4D: mov     edx, [eax+84h]
@@ -431,7 +430,7 @@
 0x482C9A: jb      loc_482A6B
 0x482CA0: cmp     byte ptr [esp+138h+var_114+3], 0
 0x482CA5: jz      short loc_482D1A
-0x482CA7: call    sub_4A41E0
+0x482CA7: call    TESRegion_CreateFallbackCanopyShadowTexture; Verified: lazily builds a 64x64 NiPixelData with per-channel random values, wraps it as NiTexturingProperty, holds a refcounted global property, and sets clamp mode.
 0x482CAC: mov     eax, [eax+20h]
 0x482CAF: mov     eax, [eax]
 0x482CB1: test    eax, eax
@@ -440,7 +439,7 @@
 0x482CB8: jmp     short loc_482CBC
 0x482CBA: xor     eax, eax
 0x482CBC: push    eax
-0x482CBD: call    SetTextureCanopyShadowMap
+0x482CBD: call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.
 0x482CC2: mov     esi, [esp+13Ch+var_F0]
 0x482CC6: mov     edi, ds:0A2807Ch
 0x482CCC: add     esp, 4
@@ -570,9 +569,9 @@
 0x482E63: mov     ecx, ebp; this
 0x482E65: fstp    [esp+140h+a2]; a2
 0x482E68: mov     [ebp+5Ch], eax
-0x482E6B: call    NiAVObject_UpdateNiAVObject
-0x482E70: push    offset dword_B258DC
-0x482E75: push    offset Vector3_InitValue?
+0x482E6B: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x482E70: push    offset stru_B258DC
+0x482E75: push    offset g_zeroNiPoint3
 0x482E7A: mov     ecx, ebx
 0x482E7C: call    sub_70C340
 0x482E81: fldz
@@ -580,13 +579,13 @@
 0x482E84: push    ecx
 0x482E85: mov     ecx, ebx; this
 0x482E87: fstp    [esp+140h+a2]; a2
-0x482E8A: call    NiAVObject_UpdateNiAVObject
+0x482E8A: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x482E8F: fldz
 0x482E91: push    edi; a3
 0x482E92: push    ecx
 0x482E93: mov     ecx, ebp; this
 0x482E95: fstp    [esp+140h+a2]; a2
-0x482E98: call    NiAVObject_UpdateNiAVObject
+0x482E98: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x482E9D: fld     [esp+138h+var_EC]
 0x482EA1: fstp    [esp+138h+var_B8]
 0x482EA8: lea     ecx, [esp+138h+var_B8]
@@ -675,7 +674,7 @@
 0x483018: mov     ecx, edi; this
 0x48301A: mov     byte ptr [esp+13Ch+var_4], 6
 0x483022: mov     [eax+48h], edx
-0x483025: call    sub_405680
+0x483025: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x48302A: push    1Ch; Size
 0x48302C: call    FormHeapAlloc
 0x483031: mov     edi, eax
@@ -694,7 +693,7 @@
 0x483061: and     word ptr [edi+18h], 0FFC7h
 0x483067: push    edi; a2
 0x483068: mov     byte ptr [esp+13Ch+var_4], 6
-0x483070: call    sub_405680
+0x483070: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x483075: push    24h ; '$'; Size
 0x483077: call    FormHeapAlloc
 0x48307C: add     esp, 4
@@ -710,7 +709,7 @@
 0x48309E: or      word ptr [eax+18h], 0C00h
 0x4830A4: push    eax; a2
 0x4830A5: mov     byte ptr [esp+13Ch+var_4], 6
-0x4830AD: call    sub_405680
+0x4830AD: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4830B2: mov     edi, [esp+138h+var_CC]
 0x4830B6: add     edi, 24h ; '$'
 0x4830B9: cmp     dword ptr [edi], 0
@@ -719,7 +718,7 @@
 0x4830C3: mov     ecx, ds:0B42F50h; this
 0x4830C9: push    0Eh; a3
 0x4830CB: push    eax; a2
-0x4830CC: call    BSTextureManager_GetDefaultRenderTarget
+0x4830CC: call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.
 0x4830D1: push    eax; a2
 0x4830D2: mov     ecx, edi; this
 0x4830D4: call    NiSmartPointer_Set??
@@ -737,51 +736,51 @@
 0x4830FD: mov     ecx, [esp+138h+var_110]
 0x483101: call    NiNode_UpdateDynamicEffectState
 0x483106: mov     ecx, [esp+138h+var_110]; this
-0x48310A: call    NiAVObject_InitializePropertyState
+0x48310A: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x48310F: fldz
 0x483111: push    1; a3
 0x483113: push    ecx
 0x483114: mov     ecx, [esp+140h+var_110]; this
 0x483118: fstp    [esp+140h+a2]; a2
-0x48311B: call    NiAVObject_UpdateNiAVObject
+0x48311B: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x483120: fldz
 0x483122: push    1; a3
 0x483124: push    ecx
 0x483125: mov     ecx, ebp; this
 0x483127: fstp    [esp+140h+a2]; a2
-0x48312A: call    NiAVObject_UpdateNiAVObject
+0x48312A: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x48312F: fldz
 0x483131: push    1; a3
 0x483133: push    ecx
 0x483134: mov     ecx, ebx; this
 0x483136: fstp    [esp+140h+a2]; a2
-0x483139: call    NiAVObject_UpdateNiAVObject
-0x48313E: call    InitBSShaderAccumulator
-0x483143: push    0
-0x483145: lea     ecx, [esp+13Ch+var_9C]
+0x483139: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x48313E: call    BSShaderAccumulator_GetOrCreateGlobal
+0x483143: push    0; visibleArray
+0x483145: lea     ecx, [esp+13Ch+cullingProcess]; self
 0x48314C: mov     byte ptr [eax+21E0h], 0
-0x483153: call    NiCullingProcess_NiCullingProcess
+0x483153: call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
 0x483158: mov     ecx, [edi]
 0x48315A: mov     byte ptr [esp+138h+var_4], 11h
-0x483162: call    BSRenderedTexture__UseTextureToRender
+0x483162: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x483167: push    eax; a2
 0x483168: push    7; a1
-0x48316A: call    NiRenderer_BeginScene
+0x48316A: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x48316F: mov     ecx, [esp+140h+var_110]
-0x483173: push    0
-0x483175: lea     eax, [esp+144h+var_9C]
-0x48317C: push    eax
-0x48317D: push    ecx
-0x48317E: push    ebx
-0x48317F: call    sub_70C0B0
+0x483173: push    0; visibleArray
+0x483175: lea     eax, [esp+144h+cullingProcess]
+0x48317C: push    eax; cullingProcess
+0x48317D: push    ecx; sceneRoot
+0x48317E: push    ebx; camera
+0x48317F: call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.
 0x483184: add     esp, 18h
-0x483187: call    NiRenderer_EndScene
+0x483187: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x48318C: mov     ecx, [edi]; this
 0x48318E: call    BSRenderedTexture__GetInnerTexture
 0x483193: push    eax
-0x483194: call    SetTextureCanopyShadowMap
+0x483194: call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.
 0x483199: add     esp, 4
-0x48319C: call    InitBSShaderAccumulator
+0x48319C: call    BSShaderAccumulator_GetOrCreateGlobal
 0x4831A1: mov     byte ptr [eax+21E0h], 1
 0x4831A8: mov     ecx, ds:0B350D8h
 0x4831AE: mov     edx, [ecx]
@@ -789,9 +788,9 @@
 0x4831B3: lea     eax, [esp+138h+var_C8]
 0x4831B7: push    eax
 0x4831B8: call    edx
-0x4831BA: lea     ecx, [esp+138h+var_9C]; this
+0x4831BA: lea     ecx, [esp+138h+cullingProcess]; this
 0x4831C1: mov     byte ptr [esp+138h+var_4], 6
-0x4831C9: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x4831C9: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x4831CE: lea     eax, [esi+4]
 0x4831D1: push    eax; lpAddend
 0x4831D2: mov     byte ptr [esp+13Ch+var_4], 5
@@ -915,3 +914,76 @@
 0x483313: pop     ebx
 0x483314: add     esp, 124h
 0x48331A: retn
+0x9AF720: lea     ecx, [ebp-108h]; slot
+0x9AF726: jmp     NiPointerSlot_Release
+0x9AF72B: lea     ecx, [ebp-110h]; slot
+0x9AF731: jmp     NiPointerSlot_Release
+0x9AF736: lea     ecx, [ebp-0DCh]; slot
+0x9AF73C: jmp     NiPointerSlot_Release
+0x9AF741: lea     ecx, [ebp-0F4h]; slot
+0x9AF747: jmp     NiPointerSlot_Release
+0x9AF74C: lea     ecx, [ebp-0F0h]; slot
+0x9AF752: jmp     NiPointerSlot_Release
+0x9AF757: lea     ecx, [ebp-0D8h]; slot
+0x9AF75D: jmp     NiPointerSlot_Release
+0x9AF762: lea     ecx, [ebp-0D4h]; slot
+0x9AF768: jmp     NiPointerSlot_Release
+0x9AF76D: mov     eax, [ebp-104h]
+0x9AF773: push    eax
+0x9AF774: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF779: pop     ecx
+0x9AF77A: retn
+0x9AF77B: mov     eax, [ebp-0E8h]
+0x9AF781: push    eax
+0x9AF782: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF787: pop     ecx
+0x9AF788: retn
+0x9AF789: mov     eax, [ebp-120h]
+0x9AF78F: push    eax
+0x9AF790: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF795: pop     ecx
+0x9AF796: retn
+0x9AF797: mov     eax, [ebp-120h]
+0x9AF79D: push    eax
+0x9AF79E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF7A3: pop     ecx
+0x9AF7A4: retn
+0x9AF7A5: mov     eax, [ebp-120h]
+0x9AF7AB: push    eax
+0x9AF7AC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF7B1: pop     ecx
+0x9AF7B2: retn
+0x9AF7B3: mov     eax, [ebp-120h]
+0x9AF7B9: push    eax
+0x9AF7BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF7BF: pop     ecx
+0x9AF7C0: retn
+0x9AF7C1: mov     eax, [ebp-120h]
+0x9AF7C7: push    eax
+0x9AF7C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF7CD: pop     ecx
+0x9AF7CE: retn
+0x9AF7CF: mov     eax, [ebp-120h]
+0x9AF7D5: push    eax
+0x9AF7D6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF7DB: pop     ecx
+0x9AF7DC: retn
+0x9AF7DD: mov     eax, [ebp-120h]
+0x9AF7E3: push    eax
+0x9AF7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF7E9: pop     ecx
+0x9AF7EA: retn
+0x9AF7EB: mov     eax, [ebp-120h]
+0x9AF7F1: push    eax
+0x9AF7F2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF7F7: pop     ecx
+0x9AF7F8: retn
+0x9AF7F9: lea     ecx, [ebp-9Ch]; this
+0x9AF7FF: jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
+0x9AF804: mov     edx, [esp+arg_4]
+0x9AF808: lea     eax, [edx-128h]
+0x9AF80E: mov     ecx, [edx-12Ch]
+0x9AF814: xor     ecx, eax
+0x9AF816: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF81B: mov     eax, offset stru_ADBCA0
+0x9AF820: jmp     ___CxxFrameHandler3

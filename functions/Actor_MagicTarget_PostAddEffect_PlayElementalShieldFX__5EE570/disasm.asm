@@ -25,7 +25,7 @@
 0x5EE5AC: push    ebx
 0x5EE5AD: lea     eax, [edi-68h]
 0x5EE5B0: push    eax
-0x5EE5B1: mov     ecx, offset ActorProcessManager_ptr
+0x5EE5B1: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5EE5B6: call    TemporaryObjects_PlayMagicShieldShader
 0x5EE5BB: test    al, al
 0x5EE5BD: jz      short Actor_MagicTarget_PostAddEffect___PlayPainFX

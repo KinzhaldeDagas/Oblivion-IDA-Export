@@ -6,31 +6,31 @@
 0x7573ED: push    edi
 0x7573EE: add     esi, 64h ; 'd'
 0x7573F1: mov     ecx, 0Dh
-0x7573F6: lea     edi, [esp+0F8h+var_68]
+0x7573F6: lea     edi, [esp+0F8h+local]
 0x7573FD: rep movsd
 0x7573FF: mov     esi, [ebx+10h]
 0x757402: add     esi, 64h ; 'd'
 0x757405: mov     ecx, 0Dh
 0x75740A: lea     edi, [esp+0F8h+var_D0]
-0x75740E: lea     eax, [esp+0F8h+var_9C]
+0x75740E: lea     eax, [esp+0F8h+parent]
 0x757412: rep movsd
 0x757414: push    eax
 0x757415: lea     ecx, [esp+0FCh+var_D0]
-0x757419: call    sub_718A80
-0x75741E: lea     ecx, [esp+0F8h+var_68]
-0x757425: push    ecx
-0x757426: lea     edx, [esp+0FCh+var_34]
-0x75742D: push    edx
-0x75742E: lea     ecx, [esp+100h+var_9C]
-0x757432: call    sub_53D7A0
+0x757419: call    sub_718A80;
+0x75741E: lea     ecx, [esp+0F8h+local]
+0x757425: push    ecx; local
+0x757426: lea     edx, [esp+0FCh+out]
+0x75742D: push    edx; out
+0x75742E: lea     ecx, [esp+100h+parent]; parent
+0x757432: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x757437: lea     eax, [ebx+30h]
 0x75743A: push    eax
 0x75743B: lea     ecx, [esp+0FCh+var_E8]
 0x75743F: push    ecx
-0x757440: lea     ecx, [esp+100h+var_34]
+0x757440: lea     ecx, [esp+100h+out]
 0x757447: call    sub_7101F0
 0x75744C: lea     ecx, [esp+0F8h+var_E8]
-0x757450: call    sub_43F350
+0x757450: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x757455: fstp    st
 0x757457: fld     dword ptr [ebx+1Ch]
 0x75745A: mov     esi, [esp+0F8h+arg_4]

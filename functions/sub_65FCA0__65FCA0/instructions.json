@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65FCA0",
-    "line": "push    ecx",
+    "line": "push    ecx; Return skillExp[index] / requiredSkillExp[index] for native SkillActorValue 0x0C..0x20, else 0. There is no direct major/minor branch here because classification already changed the denominator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x65FCA3",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x65FCB4",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Map the native skill AV to the raw skillExp numerator index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x65FCC6",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+actorValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x65FCCA",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Map the same native skill AV to the requiredSkillExp denominator index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x65FCE1",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+actorValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x65FCE8",
-    "line": "fstp    [esp+4+arg_0]",
+    "line": "fstp    [esp+4+actorValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x65FCEC",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+actorValue]",
     "mnemonic": "fld",
     "size": 4
   },

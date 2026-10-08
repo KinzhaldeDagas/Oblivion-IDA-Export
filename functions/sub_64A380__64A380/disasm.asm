@@ -86,7 +86,7 @@
 0x64A479: push    ebp
 0x64A47A: push    esi
 0x64A47B: lea     ecx, [edi+34h]
-0x64A47E: call    sub_56A950
+0x64A47E: call    ConditionList_EvaluateForActor; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.
 0x64A483: test    al, al
 0x64A485: jz      loc_64A80A
 0x64A48B: cmp     byte ptr [esp+60h+arg_0], 0
@@ -217,7 +217,7 @@
 0x64A603: mov     ecx, ebp
 0x64A605: call    ActivateRef
 0x64A60A: mov     ecx, ebp; this
-0x64A60C: call    TESObjectREFR_GetParentCell
+0x64A60C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64A611: mov     ecx, ebp; this
 0x64A613: mov     ebx, eax
 0x64A615: call    TESObjectREFR_GetWorldSpace
@@ -329,7 +329,7 @@
 0x64A75F: mov     ecx, esi; this
 0x64A761: call    TESObjectREFR_SetPosition
 0x64A766: mov     ecx, ebp; this
-0x64A768: call    TESObjectREFR_GetParentCell
+0x64A768: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64A76D: mov     ecx, ebp; this
 0x64A76F: mov     ebx, eax
 0x64A771: call    TESObjectREFR_GetWorldSpace
@@ -338,28 +338,28 @@
 0x64A77F: mov     ecx, esi; jumptable 0064A4E0 default case, case 2
 0x64A781: call    sub_5E6E00
 0x64A786: mov     ecx, edi
-0x64A788: call    sub_565DF0
+0x64A788: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x64A78D: test    al, al
 0x64A78F: jz      short loc_64A7A5
-0x64A791: mov     ecx, offset TimeGlobals
+0x64A791: mov     ecx, 0B332E0h
 0x64A796: call    TimeGlobals_GetGameDay
 0x64A79B: lea     ecx, [esi+44h]
 0x64A79E: push    eax
 0x64A79F: push    edi
-0x64A7A0: call    sub_41FFC0
+0x64A7A0: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x64A7A5: mov     ecx, edi
 0x64A7A7: call    sub_565DB0
 0x64A7AC: test    al, al
 0x64A7AE: jz      short loc_64A7B8
 0x64A7B0: push    esi
-0x64A7B1: push    offset sub_645A30
+0x64A7B1: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; Verified body: rejects null/dead actor refs and non-door forms; applies only when the door is owned by the actor (using worldspace-sensitive ownership when applicable) and has an effective lock; sets locked bit on this/linked door and marks linked owner cells as not unlocked. Probable role: callback used by actor package/cell spatial queries; callers include EvaluatePackage and process movement paths.
 0x64A7B6: jmp     short loc_64A7C9
 0x64A7B8: mov     ecx, edi
 0x64A7BA: call    sub_565DC0
 0x64A7BF: test    al, al
 0x64A7C1: jz      short loc_64A80A
 0x64A7C3: push    esi; a7
-0x64A7C4: push    offset sub_645AF0; a6
+0x64A7C4: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x64A7C9: mov     edx, [esi]
 0x64A7CB: fld     dword ptr ds:0A5B6C0h
 0x64A7D1: mov     eax, [edx+174h]
@@ -377,7 +377,7 @@
 0x64A7F4: call    eax
 0x64A7F6: push    eax; a2
 0x64A7F7: mov     ecx, esi; this
-0x64A7F9: call    TESObjectREFR_GetParentCell
+0x64A7F9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64A7FE: mov     ecx, ds:0B33A98h
 0x64A804: push    eax; a1
 0x64A805: call    sub_446B90
@@ -389,9 +389,9 @@
 0x64A81B: mov     ebp, eax
 0x64A81D: jnz     loc_64A446
 0x64A823: mov     ecx, edi
-0x64A825: call    BSSimpleList_Clear
+0x64A825: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x64A82A: push    edi
-0x64A82B: call    FormHeapFree
+0x64A82B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64A830: add     esp, 4
 0x64A833: test    ebx, ebx
 0x64A835: jnz     short loc_64A83D
@@ -401,9 +401,9 @@
 0x64A842: jz      short loc_64A855
 0x64A844: fld     dword ptr ds:0A32048h
 0x64A84A: push    ecx
-0x64A84B: mov     ecx, esi
-0x64A84D: fstp    [esp+68h+var_68]; float
-0x64A850: call    sub_4D89D0
+0x64A84B: mov     ecx, esi; this
+0x64A84D: fstp    [esp+68h+radians]; radians
+0x64A850: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x64A855: mov     edx, [esp+68h+var_58]
 0x64A859: push    edx; int
 0x64A85A: push    ebx; int
@@ -413,7 +413,7 @@
 0x64A865: add     esp, 0Ch
 0x64A868: mov     dword ptr [eax+8], 0
 0x64A86F: push    ebp
-0x64A870: call    FormHeapFree
+0x64A870: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64A875: add     esp, 4
 0x64A878: mov     esi, [esi+58h]
 0x64A87B: mov     edx, [esi]

@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "rsrc_tab",
+  "definition": "struct rsrc_tab\n{\nWORD align;\n__unaligned __declspec(align(1)) ne_typeinfo fontdir_type;\n__unaligned __declspec(align(1)) ne_nameinfo fontdir_name;\n__unaligned __declspec(align(1)) ne_typeinfo scalable_type;\n__unaligned __declspec(align(1)) ne_nameinfo scalable_name;\nWORD end_of_rsrc;\nBYTE fontdir_res_name[8];\n}\n",
   "id": 18374686479672027861,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "align",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fontdir_type",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 8
+      "size": 8,
+      "type": "ne_typeinfo"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fontdir_name",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 12
+      "offset_hex": "0xA",
+      "size": 12,
+      "type": "ne_nameinfo"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scalable_type",
       "offset": 22,
       "offset_hex": "0x16",
-      "size": 8
+      "size": 8,
+      "type": "ne_typeinfo"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scalable_name",
       "offset": 30,
-      "offset_hex": "0x1e",
-      "size": 12
+      "offset_hex": "0x1E",
+      "size": 12,
+      "type": "ne_nameinfo"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "end_of_rsrc",
       "offset": 42,
-      "offset_hex": "0x2a",
-      "size": 2
+      "offset_hex": "0x2A",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fontdir_res_name",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 8
+      "offset_hex": "0x2C",
+      "size": 8,
+      "type": "BYTE[8]"
     }
   ],
   "name": "rsrc_tab",
+  "ordinal": 1548,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 52
 }

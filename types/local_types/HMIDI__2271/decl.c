@@ -1,1 +1,1 @@
-HMIDI
+typedef HMIDI__ *HMIDI;

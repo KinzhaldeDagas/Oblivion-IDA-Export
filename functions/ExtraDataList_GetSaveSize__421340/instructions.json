@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x421340",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified save-game modified-size estimator has no ExtraDistantData case. Its callers are the save-game modified-form path; this does not contradict the separate XLOD plugin-record writer. ExtraDistantData save-game policy remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x42134A",
-    "line": "mov     ecx, offset BSExtraDataCS",
+    "line": "mov     ecx, 0B33800h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x421354",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x42135C",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -136,12 +136,6 @@
     "line": "jmp     short loc_421390",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x421389",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x421390",
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x4214B9",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x4214D5",
-    "line": "mov     ecx, TESDataHandler",
+    "line": "mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1645,7 +1639,7 @@
   },
   {
     "ea": "0x421752",
-    "line": "cmp     esi, TESDataHandler_g_PlayerRef",
+    "line": "cmp     esi, dword ptr reference",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -1717,7 +1711,7 @@
   },
   {
     "ea": "0x421788",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1777,7 +1771,7 @@
   },
   {
     "ea": "0x4217A9",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1795,7 +1789,7 @@
   },
   {
     "ea": "0x4217B7",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1999,7 +1993,7 @@
   },
   {
     "ea": "0x421826",
-    "line": "mov     ecx, [eax+0Ch]",
+    "line": "mov     ecx, [eax+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2023,7 +2017,7 @@
   },
   {
     "ea": "0x421830",
-    "line": "call    sub_6B86A0",
+    "line": "call    MenuTopic__GetSaveSize; ExtraDataList save-size case 0x59: includes MenuTopic::GetSaveSize only when ExtraInfoGeneralTopic owns a non-null cached MenuTopic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,7 +2233,7 @@
   },
   {
     "ea": "0x4218A3",
-    "line": "mov     edx, SaveLoad_CurrentSavegame",
+    "line": "mov     edx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2275,7 +2269,7 @@
   },
   {
     "ea": "0x4218B6",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,7 +2377,7 @@
   },
   {
     "ea": "0x4218ED",
-    "line": "mov     ecx, offset BSExtraDataCS; lpCriticalSection",
+    "line": "mov     ecx, 0B33800h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2467,7 +2461,7 @@
   },
   {
     "ea": "0x42191B",
-    "line": "mov     ecx, offset BSExtraDataCS; lpCriticalSection",
+    "line": "mov     ecx, 0B33800h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

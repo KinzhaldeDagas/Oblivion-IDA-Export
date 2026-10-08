@@ -62,7 +62,7 @@
 0x4DDBAA: lea     ecx, [esi+44h]
 0x4DDBAD: call    ExtraDataList_RemoveContainerExtraData
 0x4DDBB2: lea     ecx, [esi+44h]
-0x4DDBB5: call    sub_420480
+0x4DDBB5: call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.
 0x4DDBBA: mov     edi, eax
 0x4DDBBC: test    edi, edi
 0x4DDBBE: jz      short loc_4DDC32
@@ -73,7 +73,7 @@
 0x4DDBCB: mov     esi, [edi]
 0x4DDBCD: push    0
 0x4DDBCF: lea     ecx, [esi+44h]
-0x4DDBD2: call    sub_4203E0
+0x4DDBD2: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x4DDBD7: mov     eax, [esi]
 0x4DDBD9: mov     edx, [eax+78h]
 0x4DDBDC: mov     ecx, esi
@@ -103,7 +103,7 @@
 0x4DDC1B: mov     edx, [eax]
 0x4DDC1D: push    eax
 0x4DDC1E: mov     [edi], edx
-0x4DDC20: call    FormHeapFree
+0x4DDC20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4DDC25: add     esp, 4
 0x4DDC28: jmp     short loc_4DDBC0
 0x4DDC2A: mov     dword ptr [edi], 0

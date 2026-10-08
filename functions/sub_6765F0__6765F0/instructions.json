@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x676718",
-    "line": "call    TESPackage_SetLocation",
+    "line": "call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x676729",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x676733",
-    "line": "call    sub_5672A0",
+    "line": "call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x676749",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x67675E",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x67679E",
-    "line": "call    sub_673A50",
+    "line": "call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x6767A5",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -832,12 +832,6 @@
     "line": "jmp     short loc_6767C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6767BA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x6767C0",
@@ -1009,7 +1003,7 @@
   },
   {
     "ea": "0x676810",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,19 +1117,19 @@
   },
   {
     "ea": "0x676847",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67684C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67684E",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1141,7 @@
   },
   {
     "ea": "0x676855",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,25 +1165,25 @@
   },
   {
     "ea": "0x676860",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x676865",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x676866",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x676868",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1324,5 +1318,107 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C47E0",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C47E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C47E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C47E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C47EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C47EB",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C47EE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C47EF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C47F4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C47F5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C47F6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C47FA",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C47FD",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4800",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4802",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4807",
+    "line": "mov     eax, offset stru_AED160",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C480C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

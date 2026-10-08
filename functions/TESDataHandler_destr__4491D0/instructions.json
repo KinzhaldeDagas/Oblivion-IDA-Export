@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x449213",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x449238",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x449259",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x449273",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x4492BA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -454,5 +454,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AD940",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD943",
+    "line": "add     ecx, 0C0h ; 'À'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9AD949",
+    "line": "jmp     sub_446D00",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD94E",
+    "line": "push    offset ??1TESSkill@@UAE@XZ; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD953",
+    "line": "push    15h; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9AD955",
+    "line": "push    60h ; '`'; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9AD957",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD95A",
+    "line": "add     eax, 0D8h ; 'Ø'",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD95F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AD960",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD965",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AD966",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AD96A",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD96D",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD970",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AD972",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD977",
+    "line": "mov     eax, offset stru_ADA3F0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD97C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,4 @@
-0x7E4D20: sub     esp, 3Ch
+0x7E4D20: sub     esp, 3Ch; Verified (Oblivion): samples a target geometry with non-null skinData and stores a transformed particle position/direction; this is emitterType_70 value 1, kParticleShaderEmitter_SkinnedGeometry. Fallout calls the analogous mode GenerateFromCollisionBones; correspondence to that exact label is Probable.
 0x7E4D23: push    ebx
 0x7E4D24: push    esi
 0x7E4D25: push    edi
@@ -91,7 +91,7 @@
 0x7E4E85: mov     dword ptr [esp+48h+var_30+4], edx
 0x7E4E89: mov     eax, [esp+48h+var_4]
 0x7E4E8D: mov     [esp+48h+var_28], eax
-0x7E4E91: call    sub_43F350
+0x7E4E91: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7E4E96: fstp    st
 0x7E4E98: lea     ecx, [esp+48h+var_30]
 0x7E4E9C: push    ecx
@@ -150,7 +150,7 @@
 0x7E4F76: mov     eax, [esp+48h+var_4]
 0x7E4F7A: mov     dword ptr [esp+48h+var_30+4], edx
 0x7E4F7E: mov     [esp+48h+var_28], eax
-0x7E4F82: call    sub_43F350
+0x7E4F82: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7E4F87: fstp    st
 0x7E4F89: jmp     short loc_7E4FB4
 0x7E4F8B: mov     eax, ds:0B3F9A8h
@@ -164,7 +164,7 @@
 0x7E4FB0: mov     [esp+48h+var_28], edx
 0x7E4FB4: mov     ecx, [edi+6Ch]
 0x7E4FB7: fld     dword ptr [esp+48h+var_24]
-0x7E4FBB: mov     eax, [esp+48h+arg_0]
+0x7E4FBB: mov     eax, [esp+48h+slotIndex]
 0x7E4FBF: shl     eax, 5
 0x7E4FC2: fstp    dword ptr [eax+ecx]
 0x7E4FC5: mov     edx, [edi+6Ch]

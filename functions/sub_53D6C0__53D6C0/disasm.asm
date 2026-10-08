@@ -14,7 +14,7 @@
 0x53D6DF: lea     eax, [esp+14h+var_4]
 0x53D6E3: push    eax
 0x53D6E4: call    edx
-0x53D6E6: mov     eax, dword ptr [esp+10h+var_4]
+0x53D6E6: mov     eax, [esp+10h+var_4]
 0x53D6EA: test    eax, eax
 0x53D6EC: jz      short loc_53D708
 0x53D6EE: mov     edi, eax
@@ -56,7 +56,7 @@
 0x53D741: lea     eax, [esp+14h+var_4]
 0x53D745: push    eax
 0x53D746: call    edx
-0x53D748: mov     eax, dword ptr [esp+10h+var_4]
+0x53D748: mov     eax, [esp+10h+var_4]
 0x53D74C: test    eax, eax
 0x53D74E: jz      short loc_53D76A
 0x53D750: mov     edi, eax

@@ -1,18 +1,31 @@
 {
-  "callees_count": 53,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_59F640",
+  "chunks": [
+    [
+      "0x59F640",
+      "0x59F967"
+    ]
+  ],
+  "chunks_sha256": "911a20be199ebe99596669bd25f49c3f1616db03ea71a544a17a649861e2dcea",
+  "comment_regular": "DialogMenu::DoIdle. Oblivion-owned timing: speechState +0x80 moves 2 -> 3 after the post-line delay at +0x84; state 3 waits for the speaker HighProcess speech/lip object to finish or disappear, then state 4 calls AdvanceTopicResponse. Fallout is used only to corroborate the DoIdle name after this Oblivion state machine was observed.",
+  "comment_repeatable": "DialogMenu::DoIdle. Oblivion-owned timing: speechState +0x80 moves 2 -> 3 after the post-line delay at +0x84; state 3 waits for the speaker HighProcess speech/lip object to finish or disappear, then state 4 calls AdvanceTopicResponse. Fallout is used only to corroborate the DoIdle name after this Oblivion state machine was observed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "DialogMenu::DoIdle",
   "end_ea": "0x59F967",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_59F640",
+  "name": "DialogMenu::DoIdle",
   "segment": ".text",
   "sha256": "911a20be199ebe99596669bd25f49c3f1616db03ea71a544a17a649861e2dcea",
   "size": 807,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x59F640",
+  "total_chunk_size": 807,
   "type": "void __usercall(int@<ecx>, const char **@<ebp>, double@<st2>, double@<st1>, double@<st0>)",
   "xrefs_from_count": 289,
   "xrefs_to_count": 1

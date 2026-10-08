@@ -1,7 +1,7 @@
-0x645280: push    ebx
+0x645280: push    ebx; 3DTheft decode 2026-05-18: process path execution helper used by Follow/travel movement. Builds path when needed, advances PathLow, and returns without invoking Actor::EvaluatePackage.
 0x645281: push    ebp
 0x645282: push    esi
-0x645283: mov     esi, [esp+0Ch+arg_0]
+0x645283: mov     esi, [esp+0Ch+sourceRef]
 0x645287: test    esi, esi
 0x645289: push    edi
 0x64528A: mov     edi, ecx
@@ -31,7 +31,7 @@
 0x6452E0: jz      short loc_645352
 0x6452E2: mov     ecx, ds:0B333C4h; this
 0x6452E8: call    PlayerCharacter__IsSleeping?
-0x6452ED: mov     ecx, [esp+10h+arg_4]
+0x6452ED: mov     ecx, [esp+10h+destinationPosition]
 0x6452F1: mov     edx, [ecx]
 0x6452F3: push    eax
 0x6452F4: sub     esp, 0Ch
@@ -40,23 +40,23 @@
 0x6452FB: mov     edx, [ecx+4]
 0x6452FE: mov     ecx, [ecx+8]
 0x645301: mov     [eax+4], edx
-0x645304: mov     edx, [esp+20h+arg_C]
+0x645304: mov     edx, [esp+20h+destinationWorldspace]
 0x645308: mov     [eax+8], ecx
-0x64530B: mov     eax, [esp+20h+arg_8]
+0x64530B: mov     eax, [esp+20h+destinationCell]
 0x64530F: mov     ecx, ds:0B3BF80h
 0x645315: push    edx
 0x645316: push    eax
 0x645317: push    esi
-0x645318: call    sub_6836E0
-0x64531D: lea     ecx, [esp+10h+arg_0]
+0x645318: call    sub_6836E0; Verified: path request/cache builder resolves a containing TESSubSpace candidate by interior cell list or WorldSpace +0x60 coordinate lookup, compares candidate identity with the current choice, and rebuilds the path request when it changes.
+0x64531D: lea     ecx, [esp+10h+sourceRef]
 0x645321: push    ecx
 0x645322: mov     ecx, ds:0B3BF80h
 0x645328: push    esi
-0x645329: mov     byte ptr [esp+18h+arg_0], 0
+0x645329: mov     byte ptr [esp+18h+sourceRef], 0
 0x64532E: call    sub_682820
 0x645333: test    al, al
 0x645335: jz      short loc_645349
-0x645337: cmp     byte ptr [esp+10h+arg_0], 0
+0x645337: cmp     byte ptr [esp+10h+sourceRef], 0
 0x64533C: push    0; int
 0x64533E: jnz     short loc_64536E
 0x645340: push    0; int
@@ -68,15 +68,15 @@
 0x64534D: pop     ebp
 0x64534E: pop     ebx
 0x64534F: retn    18h
-0x645352: mov     edx, [esp+10h+arg_C]
-0x645356: mov     eax, [esp+10h+arg_8]
-0x64535A: mov     ecx, [esp+10h+arg_4]
-0x64535E: push    edx
-0x64535F: push    eax
-0x645360: push    ecx
-0x645361: mov     ecx, [edi+34h]
-0x645364: push    esi
-0x645365: call    sub_68B030
+0x645352: mov     edx, [esp+10h+destinationWorldspace]
+0x645356: mov     eax, [esp+10h+destinationCell]
+0x64535A: mov     ecx, [esp+10h+destinationPosition]
+0x64535E: push    edx; destinationWorldspace
+0x64535F: push    eax; destinationCell
+0x645360: push    ecx; destinationPosition
+0x645361: mov     ecx, [edi+34h]; this
+0x645364: push    esi; sourceRef
+0x645365: call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.
 0x64536A: test    al, al
 0x64536C: jmp     short loc_64533C
 0x64536E: mov     edx, [edi+34h]
@@ -110,7 +110,7 @@
 0x6453B1: fstp    [esp+14h+var_14]; float
 0x6453B4: call    sub_68A9D0
 0x6453B9: fld     [esp+10h+arg_10]
-0x6453BD: fstp    [esp+10h+arg_C]
+0x6453BD: fstp    [esp+10h+destinationWorldspace]
 0x6453C1: mov     ecx, [edi+34h]
 0x6453C4: mov     edx, [ecx]
 0x6453C6: mov     eax, [edx+20h]
@@ -119,7 +119,7 @@
 0x6453CC: test    al, al
 0x6453CE: jz      short loc_645412
 0x6453D0: mov     ecx, esi; this
-0x6453D2: call    Actor__GetProcessLevel
+0x6453D2: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x6453D7: mov     ecx, [edi+34h]
 0x6453DA: push    esi
 0x6453DB: mov     ebx, eax
@@ -127,7 +127,7 @@
 0x6453E2: test    al, al
 0x6453E4: jz      loc_645349
 0x6453EA: mov     ecx, esi; this
-0x6453EC: call    Actor__GetProcessLevel
+0x6453EC: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x6453F1: cmp     ebx, eax
 0x6453F3: jnz     loc_6454EB
 0x6453F9: mov     ecx, esi
@@ -141,7 +141,7 @@
 0x64541A: test    al, al
 0x64541C: mov     ecx, esi; this
 0x64541E: jnz     loc_6454DF
-0x645424: call    Actor__GetProcessLevel
+0x645424: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x645429: mov     ecx, [edi+34h]
 0x64542C: mov     edx, [ecx]
 0x64542E: mov     ebp, eax
@@ -178,16 +178,16 @@
 0x64547C: test    al, al
 0x64547E: jnz     loc_645349
 0x645484: mov     ecx, [edi+34h]
-0x645487: fld     [esp+10h+arg_C]
+0x645487: fld     [esp+10h+destinationWorldspace]
 0x64548B: mov     eax, [ecx]
 0x64548D: mov     edx, [eax+1Ch]
 0x645490: push    ecx
 0x645491: fstp    [esp+14h+var_14]
 0x645494: push    esi
 0x645495: call    edx
-0x645497: fstp    [esp+10h+arg_C]
+0x645497: fstp    [esp+10h+destinationWorldspace]
 0x64549B: mov     ecx, esi; this
-0x64549D: call    Actor__GetProcessLevel
+0x64549D: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x6454A2: cmp     ebp, eax
 0x6454A4: jnz     short loc_6454EB
 0x6454A6: mov     ecx, esi
@@ -203,7 +203,7 @@
 0x6454C1: test    al, al
 0x6454C3: jnz     short loc_6454EB
 0x6454C5: fldz
-0x6454C7: fcomp   [esp+10h+arg_C]
+0x6454C7: fcomp   [esp+10h+destinationWorldspace]
 0x6454CB: fnstsw  ax
 0x6454CD: test    ah, 5
 0x6454D0: jnp     loc_6453C1

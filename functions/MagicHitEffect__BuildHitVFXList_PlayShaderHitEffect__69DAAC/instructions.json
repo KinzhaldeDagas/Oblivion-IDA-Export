@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69DAAC",
-    "line": "mov     ecx, [edi+14h]",
+    "line": "mov     ecx, [edi+14h]; Verified (Oblivion): shader-hit factory skips when aeFlags bit 0x2 is set; otherwise allocates 0x4C bytes, constructs from target parent reference and ActiveEffect, invokes the virtual initializer, destroys failures, and registers successes with ActorProcessManager. It also pushes each successful shader object onto the returned BSSimpleList; this list and the manager therefore hold separate references/roles.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x69DADE",
-    "line": "push    edi",
+    "line": "push    edi; ownerActiveEffect",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x69DAE1",
-    "line": "push    eax",
+    "line": "push    eax; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69DAE2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x69DB04",
-    "line": "push    esi",
+    "line": "push    esi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69DB05",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x69DB0A",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },

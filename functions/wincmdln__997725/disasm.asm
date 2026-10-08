@@ -1,10 +1,10 @@
 0x997725: push    esi
 0x997726: push    edi
 0x997727: xor     edi, edi
-0x997729: cmp     dword_BABC14, edi
+0x997729: cmp     dword ptr unk_BABC14, edi
 0x99772F: jnz     short loc_997736
 0x997731: call    ___initmbctable
-0x997736: mov     esi, dword_BABC04
+0x997736: mov     esi, dword ptr unk_BABC04
 0x99773C: test    esi, esi
 0x99773E: jnz     short loc_997745
 0x997740: mov     esi, offset EmptyString

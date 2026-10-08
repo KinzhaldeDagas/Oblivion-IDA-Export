@@ -121,7 +121,6 @@
 0x92F06E: mov     [esp+2Ch+arg_4], eax
 0x92F072: jle     loc_92F1C1
 0x92F078: jmp     short loc_92F080
-0x92F07A: align 10h
 0x92F080: mov     ecx, [edx]
 0x92F082: fld     dword ptr [ecx+eax*8+4]
 0x92F086: mov     edx, [esp+2Ch+arg_0]

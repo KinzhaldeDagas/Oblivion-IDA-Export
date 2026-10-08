@@ -1,117 +1,118 @@
-void __thiscall sub_52EE30(TESForm *this)
+// TESTopic::LinkForm resolves quest references from questInfoEntries/QSTI structures; this function does not consume TESTopic.unk30/XIDX as a FormID. Do not classify runtime XIDX as a linked FormID slot based only on its U32 shape.
+void __thiscall TESTopic::LinkForm(TESTopic *this)
 {
-  TESForm *v1; // edi
+  TESTopic *v1; // edi
   bool v2; // zf
-  TESFormVtbl *vtbl; // esi
+  QuestInfoData *data; // esi
   TESForm *v4; // eax
   Data *OverrideFile; // eax
   TESForm *v6; // eax
-  int Destroy; // ecx
+  int firstFreeEntry; // ecx
   int v8; // ebp
-  void (__thiscall *CopyFromBase)(BaseFormComponent *, BaseFormComponent *); // eax
+  OblivionTopicInfo **v9; // eax
   const char *v10; // eax
-  void (__thiscall **p_ClearComponentReferences)(BaseFormComponent *); // ebp
-  void (__thiscall *v12)(TESForm *, bool); // ebx
+  TopicInfoArray *p_infoList; // ebp
+  unsigned int v12; // ebx
   unsigned int v13; // esi
-  _WORD *v14; // edi
+  OblivionTopicInfo *v14; // edi
   int v15; // [esp-10h] [ebp-20h]
-  TESForm *v16; // [esp+4h] [ebp-Ch]
+  QuestInfoEntry *p_questInfoEntries; // [esp+4h] [ebp-Ch]
   int a1; // [esp+8h] [ebp-8h] BYREF
-  TESForm *v18; // [esp+Ch] [ebp-4h]
+  TESTopic *v18; // [esp+Ch] [ebp-4h]
 
-  v1 = this;
-  v2 = (this->member.flags & 8) == 0;
-  v18 = this;
-  if ( v2 )
+  v1 = this; /*0x52ee34*/
+  v2 = (this->super.flags & 8) == 0; /*0x52ee3c*/
+  v18 = this; /*0x52ee3e*/
+  if ( v2 ) /*0x52ee42*/
   {
-    v16 = (TESForm *)((char *)this + 0x28);
-    if ( this != (TESForm *)0xFFFFFFD8 )
+    p_questInfoEntries = &this->questInfoEntries; /*0x52ee4d*/
+    if ( this != (TESTopic *)0xFFFFFFD8 ) /*0x52ee51*/
     {
-      do
+      do /*0x52ef86*/
       {
-        vtbl = v16->vtbl;
-        if ( !v16->vtbl )
-          break;
-        if ( !LOBYTE(vtbl->Unk_08) )
+        data = p_questInfoEntries->data; /*0x52ee64*/
+        if ( !p_questInfoEntries->data ) /*0x52ee64*/
+          break; /*0x52ee68*/
+        if ( !LOBYTE(data[1].infoList._vtbl) ) /*0x52ee6e*/
         {
-          if ( vtbl->super.InitializeComponent )
+          if ( data->parentQuest ) /*0x52ee78*/
           {
-            v4 = TESForm_LookupByFormID((UInt32)vtbl->super.InitializeComponent);
-            vtbl->super.InitializeComponent = (void (__thiscall *)(BaseFormComponent *))OblivionDynamicCast(
-                                                                                          v4,
-                                                                                          0,
-                                                                                          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                                                                          &TESQuest `RTTI Type Descriptor',
-                                                                                          0);
+            v4 = TESForm_LookupByFormID((UInt32)data->parentQuest); /*0x52ee8d*/
+            data->parentQuest = (TESQuest *)OblivionDynamicCast( /*0x52ee9e*/
+                                              v4,
+                                              0,
+                                              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                              &TESQuest `RTTI Type Descriptor',
+                                              0);
           }
-          else if ( vtbl->LoadForm )
+          else if ( data[1].parentQuest ) /*0x52eea5*/
           {
-            a1 = (int)vtbl->LoadForm;
-            OverrideFile = TESForm_GetOverrideFile(v1, 0xFFFFFFFF);
-            TESForm_ResolveFormID((UInt32 *)&a1, OverrideFile);
-            v6 = TESForm_LookupByFormID(a1);
-            vtbl->LoadForm = (bool (__thiscall *)(TESForm *, void *))OblivionDynamicCast(
-                                                                       v6,
-                                                                       0,
-                                                                       (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                                                       &TESQuest `RTTI Type Descriptor',
-                                                                       0);
+            a1 = (int)data[1].parentQuest; /*0x52eeb0*/
+            OverrideFile = TESForm_GetOverrideFile((TESForm *)v1, 0xFFFFFFFF); /*0x52eeb4*/
+            TESForm_ResolveFormID((UInt32 *)&a1, OverrideFile); /*0x52eebf*/
+            v6 = TESForm_LookupByFormID(a1); /*0x52eeda*/
+            data[1].parentQuest = (TESQuest *)OblivionDynamicCast( /*0x52eeeb*/
+                                                v6,
+                                                0,
+                                                (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                                &TESQuest `RTTI Type Descriptor',
+                                                0);
           }
           else
           {
-            Destroy = 0;
-            if ( vtbl != (TESFormVtbl *)0xFFFFFFFC )
-              Destroy = (int)vtbl->Destroy;
-            v8 = 0;
-            if ( Destroy > 0 )
+            firstFreeEntry = 0; /*0x52eef3*/
+            if ( data != (QuestInfoData *)0xFFFFFFFC ) /*0x52eef7*/
+              firstFreeEntry = data->infoList.firstFreeEntry; /*0x52eef9*/
+            v8 = 0; /*0x52eefc*/
+            if ( firstFreeEntry > 0 ) /*0x52ef00*/
             {
-              CopyFromBase = vtbl->super.CopyFromBase;
-              do
+              v9 = data->infoList.data; /*0x52ef02*/
+              do /*0x52ef1b*/
               {
-                if ( (*(_DWORD *)(*(_DWORD *)CopyFromBase + 8) & 0x20) == 0 )
-                  ++v8;
-                CopyFromBase = (void (__thiscall *)(BaseFormComponent *, BaseFormComponent *))((char *)CopyFromBase + 4);
-                --Destroy;
+                if ( ((*v9)->super.member.flags & 0x20) == 0 ) /*0x52ef10*/
+                  ++v8; /*0x52ef12*/
+                ++v9; /*0x52ef15*/
+                --firstFreeEntry; /*0x52ef18*/
               }
-              while ( Destroy );
-              if ( v8 > 0 )
+              while ( firstFreeEntry ); /*0x52ef1b*/
+              if ( v8 > 0 ) /*0x52ef1f*/
               {
-                v10 = (const char *)((int (__thiscall *)(TESForm *, int))v1->vtbl->GetEditorName)(v1, v8);
-                PrintError(
+                v10 = (const char *)((int (__thiscall *)(TESTopic *, int))v1->vtbl->GetEditorName)(v1, v8); /*0x52ef2c*/
+                PrintError( /*0x52ef34*/
                   "No Quest Reference on Topic \"%s\" (%d non-deleted infos attached to this quest).",
                   v10,
                   v15);
               }
             }
           }
-          LOBYTE(vtbl->Unk_08) = 1;
+          LOBYTE(data[1].infoList._vtbl) = 1; /*0x52ef3c*/
         }
-        p_ClearComponentReferences = &vtbl->super.ClearComponentReferences;
-        if ( vtbl != (TESFormVtbl *)0xFFFFFFFC )
+        p_infoList = &data->infoList; /*0x52ef40*/
+        if ( data != (QuestInfoData *)0xFFFFFFFC ) /*0x52ef45*/
         {
-          sub_5A56F0(&vtbl->super.ClearComponentReferences);
-          v12 = vtbl->Destroy;
-          v13 = 0;
-          if ( v12 )
+          sub_5A56F0((unsigned int *)&data->infoList); /*0x52ef49*/
+          v12 = data->infoList.firstFreeEntry; /*0x52ef4e*/
+          v13 = 0; /*0x52ef51*/
+          if ( v12 ) /*0x52ef55*/
           {
-            do
+            do /*0x52ef73*/
             {
-              v14 = *((_WORD **)p_ClearComponentReferences[1] + v13);
-              if ( v14 )
+              v14 = p_infoList->data[v13]; /*0x52ef5a*/
+              if ( v14 ) /*0x52ef5f*/
               {
-                (*(void (__thiscall **)(_WORD *))(*(_DWORD *)v14 + 0x6C))(v14);
-                v14[0x10] = v13;
+                v14->super.vtbl->DoPostFixup(&v14->super); /*0x52ef68*/
+                v14->previousInfo = v13; /*0x52ef6a*/
               }
-              ++v13;
+              ++v13; /*0x52ef6e*/
             }
-            while ( v13 < (unsigned int)v12 );
-            v1 = v18;
+            while ( v13 < v12 ); /*0x52ef73*/
+            v1 = v18; /*0x52ef75*/
           }
         }
-        v16 = *(TESForm **)&v16->member.type;
+        p_questInfoEntries = p_questInfoEntries->next; /*0x52ef82*/
       }
-      while ( v16 );
+      while ( p_questInfoEntries ); /*0x52ef86*/
     }
-    TESForm_SetIsLinked(v1, 1);
+    TESForm_SetIsLinked((TESForm *)v1, 1); /*0x52ef93*/
   }
 }

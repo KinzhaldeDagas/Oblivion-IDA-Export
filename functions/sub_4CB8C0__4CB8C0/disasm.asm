@@ -3,11 +3,11 @@
 0x4CB8C4: mov     ebp, ecx
 0x4CB8C6: push    edi
 0x4CB8C7: push    ebp; a2
-0x4CB8C8: mov     ecx, offset stru_B35C80; this
+0x4CB8C8: mov     ecx, offset unk_B35C80; this
 0x4CB8CD: mov     [esp+14h+var_5], 0
 0x4CB8D2: call    sub_496EA0
 0x4CB8D7: mov     ecx, ds:0B333C4h; this
-0x4CB8DD: call    TESObjectREFR_GetParentCell
+0x4CB8DD: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4CB8E2: lea     edi, [ebp+48h]
 0x4CB8E5: test    edi, edi
 0x4CB8E7: mov     [esp+10h+var_4], eax
@@ -46,7 +46,7 @@
 0x4CB93C: test    bl, bl
 0x4CB93E: jz      short loc_4CB957
 0x4CB940: mov     ecx, ds:0B333C4h; this
-0x4CB946: call    TESObjectREFR_GetParentCell
+0x4CB946: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4CB94B: cmp     [esp+18h+var_4], eax
 0x4CB94F: jnz     short loc_4CB957
 0x4CB951: test    edi, edi
@@ -56,7 +56,7 @@
 0x4CB95C: pop     esi
 0x4CB95D: pop     ebx
 0x4CB95E: push    ebp; a2
-0x4CB95F: mov     ecx, offset stru_B35C80; this
+0x4CB95F: mov     ecx, offset unk_B35C80; this
 0x4CB964: call    sub_496F50
 0x4CB969: mov     al, [esp+10h+var_5]
 0x4CB96D: pop     edi

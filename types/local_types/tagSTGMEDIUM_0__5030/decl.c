@@ -1,1 +1,6 @@
-tagSTGMEDIUM_0
+struct tagSTGMEDIUM_0
+{
+DWORD tymed;
+$B13486314E1D1920892D8BD9AE33CEFA u;
+IUnknown_0 *pUnkForRelease;
+};

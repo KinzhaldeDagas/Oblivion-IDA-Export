@@ -1,220 +1,221 @@
-AnimSequenceSingle *__thiscall AnimSequenceSingle::AnimSequenceSingle(
-        AnimSequenceSingle *this,
-        int a2,
-        volatile LONG *ArgList)
+// CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.
+char __thiscall ActorAnimData_InstallKFModel(AnimSequenceSingle *this, int a2, volatile LONG *ArgList)
 {
   unsigned __int16 Magicka; // ax
-  int v9; // edi
-  int v10; // eax
-  _DWORD *v12; // ecx
-  _DWORD *v13; // eax
-  int v14; // esi
-  AnimSequenceMultiple *v15; // eax
-  AnimSequenceMultiple *v16; // eax
-  _DWORD *v17; // ecx
+  int v6; // edi
+  int v7; // eax
+  _DWORD *v9; // ecx
+  _DWORD *v10; // eax
+  int v11; // esi
+  AnimSequenceMultiple *v12; // eax
+  AnimSequenceMultiple *v13; // eax
+  _DWORD *v14; // ecx
+  int v15; // eax
+  TESAnimGroup *v16; // ecx
+  int v17; // eax
   int v18; // eax
-  TESAnimGroup *v19; // ecx
-  int v20; // eax
+  int v19; // eax
+  int v20; // edi
   int v21; // eax
-  int v22; // eax
-  int v23; // edi
+  int v22; // edi
+  unsigned __int16 *v23; // edi
   int v24; // eax
-  int v25; // edi
-  unsigned __int16 *v26; // edi
-  int v27; // eax
-  int v28; // eax
-  _WORD *v29; // edx
-  _DWORD *v30; // ecx
-  int v31; // edi
-  int v32; // edi
-  char *v33; // eax
-  BSAnimGroupSequence *v34; // edi
-  void (__thiscall *v35)(int, BSAnimGroupSequence *); // eax
-  unsigned int v36; // ebp
-  volatile LONG *v37; // ebp
-  volatile LONG *v38; // [esp+38h] [ebp-18h] BYREF
-  AnimSequenceMultiple *v39; // [esp+3Ch] [ebp-14h] BYREF
-  int v40; // [esp+40h] [ebp-10h]
-  unsigned int v41; // [esp+4Ch] [ebp-4h]
+  int v25; // eax
+  _WORD *v26; // edx
+  _DWORD *v27; // ecx
+  int v28; // edi
+  int v29; // edi
+  volatile LONG *v30; // eax
+  BSAnimGroupSequence *v31; // edi
+  void (__thiscall *v32)(int, BSAnimGroupSequence *); // eax
+  unsigned int v33; // ebp
+  volatile LONG *v34; // ebp
+  volatile LONG *v35; // [esp+38h] [ebp-18h] BYREF
+  AnimSequenceMultiple *v36; // [esp+3Ch] [ebp-14h] BYREF
+  int v37; // [esp+40h] [ebp-10h]
+  unsigned int v38; // [esp+4Ch] [ebp-4h]
   int AnimationGroup; // [esp+54h] [ebp+4h]
 
-  v38 = *(volatile LONG **)(a2 + 8);
-  if ( v38 )
-    InterlockedIncrement(v38 + 1);
-  v41 = 0;
-  if ( !v38 )
-    return 0;
-  AnimationGroup = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)v38);
-  Magicka = TESActorBaseData_GetMagicka(v38);
-  v9 = Magicka;
-  v40 = Magicka;
-  if ( AnimationGroup == 0xFF )
+  v35 = *(volatile LONG **)(a2 + 8); /*0x4740a2*/
+  if ( v35 ) /*0x4740a6*/
+    InterlockedIncrement(v35 + 1); /*0x4740ac*/
+  v38 = 0; /*0x4740b4*/
+  if ( !v35 ) /*0x4740bc*/
+    return 0; /*0x4740bc*/
+  AnimationGroup = TESAnimGroup_GetAnimationGroup((TESAnimGroup *)v35); /*0x4740c7*/
+  Magicka = Shared_GetWordAtOffset08(v35); /*0x4740cb*/
+  v6 = Magicka; /*0x4740d8*/
+  v37 = Magicka; /*0x4740db*/
+  if ( AnimationGroup == 0xFF ) /*0x4740df*/
   {
-    v10 = *(_DWORD *)(a2 + 4);
-    if ( v10 )
-      PrintError(
+    v7 = *(_DWORD *)(a2 + 4); /*0x4740e1*/
+    if ( v7 ) /*0x4740e6*/
+      PrintError( /*0x4740f5*/
         "Animation sequence '%s' not found in TESAnimGroup::GetSequenceType for file '%s'.",
-        *(const char **)(v10 + 8),
+        *(const char **)(v7 + 8),
         *(const char **)a2);
-    v41 = 0xFFFFFFFF;
-    if ( !InterlockedDecrement(v38 + 1) )
-      (**(void (__thiscall ***)(volatile LONG *, int))v38)(v38, 1);
-    return 0;
+    v38 = 0xFFFFFFFF; /*0x474101*/
+    if ( !InterlockedDecrement(v35 + 1) ) /*0x474109*/
+      (**(void (__thiscall ***)(volatile LONG *, int))v35)(v35, 1); /*0x47411b*/
+    return 0; /*0x47411f*/
   }
-  v12 = *((_DWORD **)this + 0x27);
-  v39 = 0;
-  if ( sub_470960(v12, Magicka, &v39) )
+  v9 = *((_DWORD **)this + 0x27); /*0x474129*/
+  v36 = 0; /*0x474132*/
+  if ( ActorAnimData_FindAnimMapEntry(v9, Magicka, &v36) ) /*0x474136*/
   {
-    v14 = (int)v39;
+    v11 = (int)v36; /*0x47417a*/
   }
   else
   {
-    v13 = (_DWORD *)FormHeapAlloc(8u);
-    if ( v13 )
+    v10 = (_DWORD *)FormHeapAlloc(8u); /*0x474141*/
+    if ( v10 ) /*0x47414b*/
     {
-      v13[1] = 0;
-      *v13 = &AnimSequenceSingle::`vftable';
-      v14 = (int)v13;
-      sub_470820(*((_DWORD **)this + 0x27), v9, (int)v13);
+      v10[1] = 0; /*0x47414d*/
+      *v10 = &AnimSequenceSingle::`vftable'; /*0x474151*/
+      v11 = (int)v10; /*0x47415e*/
+      AnimKeyMap_InsertOrAssign(*((_DWORD **)this + 0x27), v6, (int)v10); /*0x474160*/
     }
     else
     {
-      v14 = 0;
-      sub_470820(*((_DWORD **)this + 0x27), v9, 0);
+      v11 = 0; /*0x474171*/
+      AnimKeyMap_InsertOrAssign(*((_DWORD **)this + 0x27), v6, 0); /*0x474173*/
     }
   }
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v14 + 0xC))(v14)
-    && (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF) )
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v11 + 0xC))(v11) /*0x474198*/
+    && (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF) )
   {
-    if ( *(_BYTE *)(0x24 * AnimationGroup + 0xB102E4) )
+    if ( *(_BYTE *)(0x24 * AnimationGroup + 0xB102E4) ) /*0x4741a9*/
     {
-      sub_4708B0(*((_DWORD **)this + 0x27), v9);
-      v15 = (AnimSequenceMultiple *)FormHeapAlloc(8u);
-      v39 = v15;
-      LOBYTE(v41) = 1;
-      if ( v15 )
-        v16 = AnimSequenceMultiple::AnimSequenceMultiple(v15, v14);
+      ActorAnimData_RemoveAnimMapEntry(*((_DWORD **)this + 0x27), v6); /*0x4741ba*/
+      v12 = (AnimSequenceMultiple *)FormHeapAlloc(8u); /*0x4741c1*/
+      v36 = v12; /*0x4741c9*/
+      LOBYTE(v38) = 1; /*0x4741cf*/
+      if ( v12 ) /*0x4741d4*/
+        v13 = AnimSequenceMultiple_ctor(v12, v11); /*0x4741d9*/
       else
-        v16 = 0;
-      v17 = *((_DWORD **)this + 0x27);
-      LOBYTE(v41) = 0;
-      v14 = (int)v16;
-      sub_470820(v17, v9, (int)v16);
+        v13 = 0; /*0x4741e0*/
+      v14 = *((_DWORD **)this + 0x27); /*0x4741e2*/
+      LOBYTE(v38) = 0; /*0x4741ea*/
+      v11 = (int)v13; /*0x4741ef*/
+      AnimKeyMap_InsertOrAssign(v14, v6, (int)v13); /*0x4741f1*/
     }
     else
     {
-      v18 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF);
-      v19 = *(TESAnimGroup **)(a2 + 8);
-      if ( *(TESAnimGroup **)(v18 + 0x68) == v19 )
+      v15 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF); /*0x474204*/
+      v16 = *(TESAnimGroup **)(a2 + 8); /*0x474209*/
+      if ( *(TESAnimGroup **)(v15 + 0x68) == v16 ) /*0x47420e*/
       {
-        if ( TESAnimGroup_GetAnimationGroup(v19) == 1 )
-          InterlockedDecrement((volatile LONG *)(a2 + 0xC));
-        v41 = 0xFFFFFFFF;
-        sub_7016A0((NiD3DVertexShader *)&v38);
-        return (AnimSequenceSingle *)1;
+        if ( TESAnimGroup_GetAnimationGroup(v16) == 1 ) /*0x474218*/
+          InterlockedDecrement((volatile LONG *)(a2 + 0xC)); /*0x47421e*/
+        v38 = 0xFFFFFFFF; /*0x474228*/
+        NiPointerSlot_Release((NiD3DVertexShader *)&v35); /*0x474230*/
+        return 1; /*0x474235*/
       }
-      v20 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF);
-      if ( TESAnimGroup_GetAnimationGroup(*(TESAnimGroup **)(v20 + 0x68)) == 1 )
+      v17 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF); /*0x474243*/
+      if ( TESAnimGroup_GetAnimationGroup(*(TESAnimGroup **)(v17 + 0x68)) == 1 ) /*0x474250*/
       {
-        v21 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF);
-        sub_438540(ModelLoaderPtr, *(_DWORD *)(v21 + 8), 1);
+        v18 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF); /*0x47425b*/
+        ModelLoader_ReleaseModelPath(MEMORY[0xB33A1C], *(_DWORD *)(v18 + 8), 1); /*0x474269*/
       }
-      v22 = *((_DWORD *)this + 0x35);
-      if ( !v22
-        || (v23 = *(_DWORD *)(v22 + 0x10),
-            v23 != (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF)) )
+      v19 = *((_DWORD *)this + 0x35); /*0x47426e*/
+      if ( !v19 /*0x474288*/
+        || (v20 = *(_DWORD *)(v19 + 0x10),
+            v20 != (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF)) )
       {
-        v24 = *((_DWORD *)this + 0x36);
-        if ( !v24
-          || (v25 = *(_DWORD *)(v24 + 0x10),
-              v25 != (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF)) )
+        v21 = *((_DWORD *)this + 0x36); /*0x47428a*/
+        if ( !v21 /*0x4742a4*/
+          || (v22 = *(_DWORD *)(v21 + 0x10),
+              v22 != (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF)) )
         {
-          v26 = *((unsigned __int16 **)this + 0x26);
-          v27 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF);
-          sub_6C4A10(v26, (int *)&v39, v27);
-          sub_7016A0((NiD3DVertexShader *)&v39);
+          v23 = *((unsigned __int16 **)this + 0x26); /*0x4742ab*/
+          v24 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF); /*0x4742b5*/
+          KeyframeManager_RemoveSequence(v23, (int *)&v36, v24); /*0x4742bf*/
+          NiPointerSlot_Release((NiD3DVertexShader *)&v36); /*0x4742c8*/
         }
       }
-      v28 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v14 + 0x10))(v14, 0xFFFFFFFF);
-      if ( v28 )
+      v25 = (*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v11 + 0x10))(v11, 0xFFFFFFFF); /*0x4742d6*/
+      if ( v25 ) /*0x4742da*/
       {
-        v29 = (_WORD *)((char *)this + 0x3C);
-        v30 = (_DWORD *)((char *)this + 0xA0);
-        v31 = 5;
-        do
+        v26 = (_WORD *)((char *)this + 0x3C); /*0x4742dc*/
+        v27 = (_DWORD *)((char *)this + 0xA0); /*0x4742df*/
+        v28 = 5; /*0x4742e5*/
+        do /*0x474308*/
         {
-          if ( *v30 == v28 )
+          if ( *v27 == v25 ) /*0x4742f2*/
           {
-            *v30 = 0;
-            *v29 = 0;
+            *v27 = 0; /*0x4742f4*/
+            *v26 = 0; /*0x4742fa*/
           }
-          ++v30;
-          ++v29;
-          --v31;
+          ++v27; /*0x4742ff*/
+          ++v26; /*0x474302*/
+          --v28; /*0x474305*/
         }
-        while ( v31 );
+        while ( v28 ); /*0x474308*/
       }
-      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v14 + 4))(v14, 0);
+      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v11 + 4))(v11, 0); /*0x474313*/
     }
   }
-  if ( (_BYTE)ArgList && AnimationGroup && (!sub_5790E0(0x40C, 0) || AnimationGroup != 0x21) && AnimationGroup != 0x20 )
+  if ( (_BYTE)ArgList /*0x47433f*/
+    && AnimationGroup
+    && (!InterfaceManager_IsMenuVisibleByID(0x40C, 0) || AnimationGroup != 0x21)
+    && AnimationGroup != 0x20 )
   {
-    BSSimpleList_PushBack((_DWORD *)this + 0x2D, a2);
+    BSSimpleList_PushBack((_DWORD *)this + 0x2D, a2); /*0x474348*/
 LABEL_63:
-    v41 = 0xFFFFFFFF;
-    if ( !InterlockedDecrement(v38 + 1) )
-      (**(void (__thiscall ***)(volatile LONG *, int))v38)(v38, 1);
-    return (AnimSequenceSingle *)1;
+    v38 = 0xFFFFFFFF; /*0x4744c9*/
+    if ( !InterlockedDecrement(v35 + 1) ) /*0x4744d9*/
+      (**(void (__thiscall ***)(volatile LONG *, int))v35)(v35, 1); /*0x4744eb*/
+    return 1; /*0x4744ed*/
   }
-  v32 = *(_DWORD *)(a2 + 4);
-  v33 = (char *)FormHeapAlloc(0x6Cu);
-  ArgList = (volatile LONG *)v33;
-  LOBYTE(v41) = 2;
-  if ( v33 )
-    v34 = BSAnimGroupSequence::BSAnimGroupSequence((BSAnimGroupSequence *)v33, *(_DWORD *)(a2 + 8), v32);
+  v29 = *(_DWORD *)(a2 + 4); /*0x474352*/
+  v30 = (volatile LONG *)FormHeapAlloc(0x6Cu); /*0x474357*/
+  ArgList = v30; /*0x47435f*/
+  LOBYTE(v38) = 2; /*0x474365*/
+  if ( v30 ) /*0x47436a*/
+    v31 = BSAnimGroupSequence::BSAnimGroupSequence((BSAnimGroupSequence *)v30, *(_DWORD *)(a2 + 8), v29); /*0x474378*/
   else
-    v34 = 0;
-  v35 = *(void (__thiscall **)(int, BSAnimGroupSequence *))(*(_DWORD *)v14 + 4);
-  LOBYTE(v41) = 0;
-  v35(v14, v34);
-  if ( sub_6C5760(*((_DWORD **)this + 0x26), (int)v34, 0, 1) )
+    v31 = 0; /*0x47437c*/
+  v32 = *(void (__thiscall **)(int, BSAnimGroupSequence *))(*(_DWORD *)v11 + 4); /*0x474380*/
+  LOBYTE(v38) = 0; /*0x474386*/
+  v32(v11, v31); /*0x47438b*/
+  if ( NiControllerManager_AddSequence(*((_DWORD **)this + 0x26), (int)v31, 0, 1) ) /*0x474398*/
   {
-    if ( !*((_DWORD *)this + 2) )
-      *((_DWORD *)this + 2) = sub_471600(*((_DWORD *)this + 0x26));
-    sub_472640(this, *(_WORD **)(a2 + 8));
-    goto LABEL_63;
+    if ( !*((_DWORD *)this + 2) ) /*0x4744aa*/
+      *((_DWORD *)this + 2) = sub_471600(*((_DWORD *)this + 0x26)); /*0x4744bb*/
+    sub_472640(this, *(_WORD **)(a2 + 8)); /*0x4744c4*/
+    goto LABEL_63; /*0x4744c4*/
   }
-  PrintError(
+  PrintError( /*0x4743b5*/
     "Unable to add '%s' to keyframe manager on '%s'.\r\n"
     "Make sure the animation is not skinned to bones that don't exist in our skeleton.",
-    *((const char **)v34 + 2),
+    *((const char **)v31 + 2),
     *(const char **)(*((_DWORD *)this + 1) + 8));
-  v36 = 0;
-  for ( bDisableWarning_MESSAGES = 1; v36 < *((_DWORD *)v34 + 3); ++v36 )
+  v33 = 0; /*0x4743ba*/
+  for ( bDisableWarning_MESSAGES = 1; v33 < *((_DWORD *)v31 + 3); ++v33 ) /*0x4743c6*/
   {
-    sub_6C66B0(v34, v36, (char **)&ArgList);
-    if ( !(*(int (__thiscall **)(_DWORD, volatile LONG *))(**((_DWORD **)this + 1) + 0x58))(
+    sub_6C66B0(v31, v33, (char **)&ArgList); /*0x4743d8*/
+    if ( !(*(int (__thiscall **)(_DWORD, volatile LONG *))(**((_DWORD **)this + 1) + 0x58))( /*0x4743ea*/
             *((_DWORD *)this + 1),
             ArgList) )
-      PrintError("Object '%s' in sequence but not skeleton.", (const char *)ArgList);
-    FormHeapFree((unsigned int)ArgList);
+      PrintError("Object '%s' in sequence but not skeleton.", (const char *)ArgList); /*0x4743fa*/
+    FormHeapFree((unsigned int)ArgList); /*0x474407*/
   }
-  bDisableWarning_MESSAGES = 0;
-  sub_6C4A10(*((unsigned __int16 **)this + 0x26), (int *)&ArgList, (int)v34);
-  if ( ArgList )
+  bDisableWarning_MESSAGES = 0; /*0x47441c*/
+  KeyframeManager_RemoveSequence(*((unsigned __int16 **)this + 0x26), (int *)&ArgList, (int)v31); /*0x47442a*/
+  if ( ArgList ) /*0x474435*/
   {
-    v37 = ArgList;
-    if ( !InterlockedDecrement(ArgList + 1) )
-      (**(void (__thiscall ***)(volatile LONG *, int))v37)(v37, 1);
+    v34 = ArgList; /*0x474437*/
+    if ( !InterlockedDecrement(ArgList + 1) ) /*0x47443d*/
+      (**(void (__thiscall ***)(volatile LONG *, int))v34)(v34, 1); /*0x474454*/
   }
-  if ( (*(unsigned __int8 (__thiscall **)(int, BSAnimGroupSequence *))(*(_DWORD *)v14 + 8))(v14, v34) )
+  if ( (*(unsigned __int8 (__thiscall **)(int, BSAnimGroupSequence *))(*(_DWORD *)v11 + 8))(v11, v31) ) /*0x47445e*/
   {
-    sub_4708B0(*((_DWORD **)this + 0x27), v40);
-    (**(void (__thiscall ***)(int, int))v14)(v14, 1);
+    ActorAnimData_RemoveAnimMapEntry(*((_DWORD **)this + 0x27), v37); /*0x47446f*/
+    (**(void (__thiscall ***)(int, int))v11)(v11, 1); /*0x47447c*/
   }
-  v41 = 0xFFFFFFFF;
-  if ( InterlockedDecrement(v38 + 1) )
-    return 0;
-  (**(void (__thiscall ***)(volatile LONG *, int))v38)(v38, 1);
-  return 0;
+  v38 = 0xFFFFFFFF; /*0x474486*/
+  if ( InterlockedDecrement(v35 + 1) ) /*0x47448e*/
+    return 0; /*0x474496*/
+  (**(void (__thiscall ***)(volatile LONG *, int))v35)(v35, 1); /*0x4744a4*/
+  return 0; /*0x4744ef*/
 }

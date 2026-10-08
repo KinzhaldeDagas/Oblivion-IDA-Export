@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x5437ED",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5437F3",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x5437F9",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5437FA",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x543814",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x543828",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x54382A",
-    "line": "lea     ecx, [esp+24h+var_14]",
+    "line": "lea     ecx, [esp+24h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x54382E",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54382F",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x543835",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x54384F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x543863",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x543869",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x54386F",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x543870",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x54388A",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x54389E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x5438AA",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x5438B0",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5438B1",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x5438CB",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x5438DF",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5438E5",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x5438ED",
-    "line": "push    edi; Dst",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5438EE",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x54391F",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x543926",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x54392E",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54392F",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x543960",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -841,31 +841,31 @@
   },
   {
     "ea": "0x543968",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x543969",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x54396F",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x543974",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x54397A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -877,19 +877,19 @@
   },
   {
     "ea": "0x543982",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x543983",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x543988",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x543995",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x54399B",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54399C",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x5439AB",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x5439B6",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -979,13 +979,13 @@
   },
   {
     "ea": "0x5439C2",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5439C3",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,19 +1015,19 @@
   },
   {
     "ea": "0x5439D8",
-    "line": "fstp    dword ptr [esp+3Ch+var_3C]; float",
+    "line": "fstp    dword ptr [esp+3Ch+var_3C]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5439DB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5439DD",
-    "line": "call    sub_542F20",
+    "line": "call    Sky__Update; Oblivion's normal Sky frame update: determines underwater state and sky visibility, advances weather/time, calls UpdateColors and UpdateFog, updates wind/effects and every active sky child, publishes the sky vector, and clears transient flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,13 +1045,13 @@
   },
   {
     "ea": "0x5439EE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5439F0",
-    "line": "call    sub_540850",
+    "line": "call    OB_Sky_UpdateHDRWeatherAndTreeDimmerConstants_010201A0; HDR weather/global updater, not merely fog. While HDR is enabled it resolves first/second weather values, including fSunlightDimmer and fTreeDimmer, then writes direct or transitioned renderer globals.",
     "mnemonic": "call",
     "size": 5
   },

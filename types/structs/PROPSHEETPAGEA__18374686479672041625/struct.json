@@ -1,94 +1,153 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_PROPSHEETPAGEA",
+  "definition": "struct _PROPSHEETPAGEA\n{\nDWORD dwSize;\nDWORD dwFlags;\nHINSTANCE hInstance;\n$E178FAC61D97D8AEF3440E6235CD8C70 u;\n$35F39E01011596ECFEF7E871DBBD2ABD u2;\nLPCSTR pszTitle;\nDLGPROC pfnDlgProc;\nLPARAM_0 lParam;\nLPFNPSPCALLBACKA pfnCallback;\nUINT *pcRefParent;\nLPCSTR pszHeaderTitle;\nLPCSTR pszHeaderSubTitle;\nHANDLE hActCtx;\n$CB8B362CCE37CFB292864CD12B025CB1 u3;\n}\n",
   "id": 18374686479672041625,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFlags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hInstance",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HINSTANCE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "$E178FAC61D97D8AEF3440E6235CD8C70"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u2",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "$35F39E01011596ECFEF7E871DBBD2ABD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszTitle",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LPCSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pfnDlgProc",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DLGPROC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lParam",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "LPARAM_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pfnCallback",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "LPFNPSPCALLBACKA"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pcRefParent",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "UINT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszHeaderTitle",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "LPCSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszHeaderSubTitle",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "LPCSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hActCtx",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u3",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "$CB8B362CCE37CFB292864CD12B025CB1"
     }
   ],
   "name": "_PROPSHEETPAGEA",
+  "ordinal": 6403,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

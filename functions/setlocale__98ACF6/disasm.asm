@@ -40,3 +40,16 @@
 0x98AD71: call    __copytlocinfo_nolock
 0x98AD76: mov     [ebp+ms_exc.registration.TryLevel], ebx
 0x98AD79: call    _setlocale___$LN21_1
+0x98AE1C: mov     edi, [ebp+var_24]
+0x98AE1F: mov     esi, [ebp+var_1C]
+0x98AE22: xor     ebx, ebx
+0x98AE24: push    0Ch
+0x98AE26: call    __unlock
+0x98AE2B: pop     ecx
+0x98AE2C: retn
+0x98AE2D: mov     esi, [ebp+var_1C]
+0x98AE30: push    0Ch
+0x98AE32: call    __unlock
+0x98AE37: pop     ecx
+0x98AE38: retn
+0x98AE5E: mov     esi, [ebp+var_1C]

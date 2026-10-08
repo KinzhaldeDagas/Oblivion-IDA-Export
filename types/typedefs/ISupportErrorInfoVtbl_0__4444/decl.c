@@ -1,1 +1,1 @@
-ISupportErrorInfoVtbl_0
+typedef ISupportErrorInfoVtbl ISupportErrorInfoVtbl_0;

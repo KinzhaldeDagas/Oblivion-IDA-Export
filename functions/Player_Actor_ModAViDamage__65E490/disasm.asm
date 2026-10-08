@@ -1,4 +1,4 @@
-0x65E490: cmp     byte ptr ds:0B3BB06h, 0
+0x65E490: cmp     byte ptr ds:0B3BB06h, 0; Player integer damage-modifier path. Update the damage/current-value channel, refresh UI, and notify with rebuild=false. Skill progression state is not advanced.
 0x65E497: push    esi
 0x65E498: mov     esi, [esp+4+a2]
 0x65E49C: push    edi
@@ -33,8 +33,8 @@
 0x65E4E8: push    esi
 0x65E4E9: push    2
 0x65E4EB: call    Player_ModAVModifierf
-0x65E4F0: push    esi; a2
-0x65E4F1: call    sub_57A6F0
+0x65E4F0: push    esi; actorValue
+0x65E4F1: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
 0x65E4F6: add     esp, 4
 0x65E4F9: cmp     esi, 8
 0x65E4FC: jnz     short loc_65E517
@@ -48,10 +48,10 @@
 0x65E512: push    ebp
 0x65E513: mov     ecx, edi
 0x65E515: call    eax
-0x65E517: push    0
-0x65E519: push    esi
-0x65E51A: mov     ecx, edi
-0x65E51C: call    sub_5E2670
+0x65E517: push    0; updatePlayerUI
+0x65E519: push    esi; actorValue
+0x65E51A: mov     ecx, edi; this
+0x65E51C: call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x65E521: pop     ebp
 0x65E522: pop     ebx
 0x65E523: pop     edi

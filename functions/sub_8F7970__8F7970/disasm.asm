@@ -128,14 +128,14 @@
 0x8F7B3E: push    edx
 0x8F7B3F: mov     ecx, esi
 0x8F7B41: movaps  [esp+0D8h+var_10], xmm3
-0x8F7B49: call    sub_88FCC0
+0x8F7B49: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8F7B4E: mov     ecx, [ebp+arg_4]
 0x8F7B51: mov     edx, [ecx+8]
 0x8F7B54: lea     eax, [esp+0D0h+var_70]
 0x8F7B58: push    eax
 0x8F7B59: push    edx
 0x8F7B5A: lea     ecx, [esi+10h]
-0x8F7B5D: call    sub_88FE00
+0x8F7B5D: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8F7B62: fld     [esp+0D0h+var_5C]
 0x8F7B66: fsub    dword ptr ds:0A2F948h
 0x8F7B6C: mov     eax, [esp+0D0h+var_BC]

@@ -3,11 +3,11 @@
 0x467A22: mov     edi, ecx
 0x467A24: mov     ecx, ds:0B33B00h
 0x467A2A: xor     esi, esi
-0x467A2C: call    sub_45A170
+0x467A2C: call    TESSaveLoadGame_UseSaveGameBlocks
 0x467A31: test    al, al
 0x467A33: jz      short loc_467A3A
 0x467A35: mov     esi, 6
-0x467A3A: mov     al, [esp+8+arg_0]
+0x467A3A: mov     al, byte ptr [esp+8+changeMask]
 0x467A3E: test    al, 10h
 0x467A40: jz      short loc_467A45
 0x467A42: add     esi, 10h
@@ -34,7 +34,7 @@
 0x467A81: jz      short loc_467AC5
 0x467A83: mov     edx, [edi]
 0x467A85: push    edx; a1
-0x467A86: call    TESForm_LookupByFormID
+0x467A86: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x467A8B: mov     ecx, [edi+5]
 0x467A8E: mov     edx, [eax]
 0x467A90: add     esp, 4

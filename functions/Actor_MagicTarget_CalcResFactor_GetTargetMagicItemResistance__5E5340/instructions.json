@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E5340",
-    "line": "cmp     [esp+arg_14], 0",
+    "line": "cmp     [esp+arg_14], 0; AVU decode: choose target magic-item resistance AV. Uses ResistPoison (0x43) for poison path/flag, otherwise ResistMagic (0x40) when the magic item type check allows it.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x5E5353",
-    "line": "mov     ebx, 40h ; '@'",
+    "line": "mov     ebx, 40h ; '@'; Ordinary hostile magic uses actor value 0x40 ResistMagic as the item-level resistance bucket; poison uses 0x43 instead.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5E536C",
-    "line": "fstp    [esp+4+arg_C]",
+    "line": "fstp    [esp+4+arg_C]; Stores target current float magic-item resistance into the Calc_MagicTargetResistanceFactor arg_C slot (entry +0x10).",
     "mnemonic": "fstp",
     "size": 4
   }

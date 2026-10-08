@@ -1,1 +1,1 @@
-TESObjectLIGH
+struct TESObjectLIGH;

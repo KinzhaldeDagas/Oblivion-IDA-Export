@@ -1,4 +1,4 @@
-0x4CD960: sub     esp, 14h
+0x4CD960: sub     esp, 14h; Verified cell linking: calls ExtraDataList_ResolveLoadedFormIDs before ownership policy. XOWN case 0x27 rebases the stored FormID, resolves it via TESForm_LookupByFormID, and stores the TESForm*; missing owners remove the extra. For an exterior cell (interior flag bit 0 clear) with direct XOWN, LinkForm logs a removal and clears XOWN, XRNK, and XGLB. Interior cells keep those ownership fields.
 0x4CD963: push    ebx
 0x4CD964: push    ebp
 0x4CD965: push    esi
@@ -35,15 +35,15 @@
 0x4CD9C0: fld     dword ptr [ebx+28h]
 0x4CD9C3: push    ecx
 0x4CD9C4: fmul    qword ptr ds:0A3D360h
-0x4CD9CA: lea     ecx, [esi+28h]
+0x4CD9CA: lea     ecx, [esi+28h]; this
 0x4CD9CD: fstp    [esp+28h+var_8]
 0x4CD9D1: fld     [esp+28h+var_8]
-0x4CD9D5: fstp    [esp+28h+var_28]; float
-0x4CD9D8: call    sub_420C60
+0x4CD9D5: fstp    [esp+28h+northRotation]; northRotation
+0x4CD9D8: call    ExtraDataList_SetNorthRotation; Sets north rotation; 0.0 removes type 0x4C, otherwise updates or creates ExtraNorthRotation.
 0x4CD9DD: test    dword ptr [esi+8], 400h
 0x4CD9E4: jnz     short loc_4CD9FF
 0x4CD9E6: mov     ecx, ebx; this
-0x4CD9E8: call    TESObjectREFR_GetParentCell
+0x4CD9E8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4CD9ED: cmp     eax, esi
 0x4CD9EF: jz      short loc_4CD9FF
 0x4CD9F1: test    ebp, ebp
@@ -60,9 +60,9 @@
 0x4CDA12: call    sub_45A500
 0x4CDA17: test    al, al
 0x4CDA19: jz      short loc_4CDA80
-0x4CDA1B: mov     ecx, ds:0B33B00h
-0x4CDA21: push    esi
-0x4CDA22: call    sub_464910
+0x4CDA1B: mov     ecx, ds:0B33B00h; self
+0x4CDA21: push    esi; cell
+0x4CDA22: call    TESSaveLoadGame_LoadReferencesForCell; Verified: cell restore dispatcher runs after virtual LoadForm for map-selected CELL references, but before ExtraDataList_ResolveLoadedFormIDs (4CDAB7) and before TESForm_SetIsLinked (4CDB9E). Its interior/exterior map draining is part of CELL LinkForm lifecycle.
 0x4CDA27: mov     eax, ds:0B33B00h
 0x4CDA2C: mov     ebx, [eax+18h]
 0x4CDA2F: mov     ecx, ebx
@@ -79,7 +79,7 @@
 0x4CDA51: shr     ebx, 7
 0x4CDA54: push    0
 0x4CDA56: and     bl, 1
-0x4CDA59: call    sub_45FDA0
+0x4CDA59: call    TESSaveLoadGame_FinalizeLoadedForms; MEF SAVE PERF PASS2 2026-10-08: PERF-20 manager-queue drain is reached from TESObjectCELL_LinkForm with null supplied queue/player record;45FDA0 selects manager+1C. Another null-queue caller is444595; full LoadGame4668A6 instead supplies its local array and separate player record. Preserve these lifetimes and callback phase schedules; no single process-wide retained queue assumed.
 0x4CDA5E: mov     ecx, ds:0B33B00h
 0x4CDA64: push    0
 0x4CDA66: call    sub_461030
@@ -103,11 +103,11 @@
 0x4CDAA6: mov     [esp+28h+var_11], al
 0x4CDAAA: mov     byte ptr ds:0B06B18h, 1
 0x4CDAB1: mov     ds:0B34D88h, ebx
-0x4CDAB7: call    ExtraDataList_Link?
+0x4CDAB7: call    ExtraDataList_ResolveLoadedFormIDs; CELL LinkForm invokes ExtraDataList_LinkFormIDs 0x426270 with the CELL owner. Guard0x4CDA89 tests internal linked bit0x8, not deleted0x20; setter0x46AB80 corroborates. Loader resets that linked bit at0x4CD940. Deleted CELL payload may therefore replay and link. Runtime post-link differs from TESCS for XLOC/XTEL; both remove CELL XESP.
 0x4CDABC: test    byte ptr [esi+24h], 1
 0x4CDAC0: jnz     loc_4CDB98
-0x4CDAC6: mov     ecx, edi
-0x4CDAC8: call    ExtraDataList_GetOwner
+0x4CDAC6: mov     ecx, edi; this
+0x4CDAC8: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4CDACD: test    eax, eax
 0x4CDACF: jz      loc_4CDB77
 0x4CDAD5: test    byte ptr [esi+24h], 1
@@ -157,20 +157,20 @@
 0x4CDB4F: push    offset aRemovingOwners; "Removing ownership data on exterior cel"...
 0x4CDB54: call    PrintError
 0x4CDB59: add     esp, 1Ch
-0x4CDB5C: push    0
-0x4CDB5E: mov     ecx, edi
-0x4CDB60: call    ExtraDataList__SetOrRemoveExtraOwnership
-0x4CDB65: push    0FFFFFFFFh
-0x4CDB67: mov     ecx, edi
-0x4CDB69: call    sub_4237E0
-0x4CDB6E: push    0
-0x4CDB70: mov     ecx, edi
-0x4CDB72: call    sub_423720
+0x4CDB5C: push    0; owner
+0x4CDB5E: mov     ecx, edi; this
+0x4CDB60: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
+0x4CDB65: push    0FFFFFFFFh; rank
+0x4CDB67: mov     ecx, edi; this
+0x4CDB69: call    ExtraDataList_SetRank; Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.
+0x4CDB6E: push    0; global
+0x4CDB70: mov     ecx, edi; this
+0x4CDB72: call    ExtraDataList_SetGlobal; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.
 0x4CDB77: test    byte ptr [esi+24h], 1
 0x4CDB7B: jnz     short loc_4CDB98
 0x4CDB7D: mov     edx, [esi+1Ch]
 0x4CDB80: push    edx
-0x4CDB81: call    FormHeapFree
+0x4CDB81: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CDB86: add     esp, 4
 0x4CDB89: xor     ebp, ebp
 0x4CDB8B: mov     [esi+1Ch], ebp

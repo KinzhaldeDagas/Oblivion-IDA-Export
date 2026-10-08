@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F0380",
-    "line": "sub     esp, 3E0h",
+    "line": "sub     esp, 3E0h; OBLIVION AUTHORITY (2026-08-24): Declares SpeedTree leaf vertex input. v3.z carries a nonnegative packed selector: integer part = corner + 4*leafCardIndex for LeafBase addressing; fractional part = packed-color green/255 (255 forced to 0.99). VS1.1 EXPP.y extracts the fractional component; it is not exponentiation/exp2.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7F03B0",
-    "line": "mov     [esp+3FCh+var_33C], edi",
+    "line": "mov     [esp+3FCh+var_33C], edi; OBLIVION AUTHORITY (2026-08-24): Leaf shader descriptor for v3.z packing. Legacy VS1.1 EXPP.y extracts frac(v3.z), not exp/exp2. Base VS multiplies the complete ambient+directional result by that fraction; point variants add their point-light term separately. Packed green 0 therefore yields RGB black when no nonzero point term survives, while sampled alpha can remain nonzero.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7F0493",
-    "line": "mov     [esp+42Ch+var_3D4], edi",
+    "line": "mov     [esp+42Ch+var_3D4], edi; Oblivion leaf PS variants load from speedtree\\\\leaf.p.hlsl. Runtime chooses legacy STLEAF%03i.pso ps_1_3 when shader-package class <2, otherwise STLEAF2%03i.pso ps_2_0.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x7F04B3",
-    "line": "mov     [esp+438h+var_388], edi",
+    "line": "mov     [esp+438h+var_388], edi; Second fog pixel descriptor is always constructed. Installed Oblivion shaderpackage001 contains STLEAF000.pso only (no STLEAF001.pso); packages 002..019 contain both STLEAF2000/2001 and their bytecode hashes are identical across all 18 modern packages.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7F054D",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Creates one of four vs_1_1 leaf variants. Indices map to {base, fog, point, point+fog}; all emit texture UV in oT0 and lighting in oT1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -978,12 +978,6 @@
     "size": 2
   },
   {
-    "ea": "0x7F05F9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7F0600",
     "line": "mov     eax, [edi]",
     "mnemonic": "mov",
@@ -1123,7 +1117,7 @@
   },
   {
     "ea": "0x7F064D",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Creates modern STLEAF2%03i.pso (ps_2_0). Variant 0: out.rgb=sample(s0,t0).rgb*t1.rgb and out.a=sample.a. Variant 1 applies shader fog: lerp(litTexture.rgb,t2.rgb,t2.w), preserving sample alpha.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1446,12 +1440,6 @@
     "size": 2
   },
   {
-    "ea": "0x7F06DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x7F06E0",
     "line": "mov     eax, [edi]",
     "mnemonic": "mov",
@@ -1591,7 +1579,7 @@
   },
   {
     "ea": "0x7F072D",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Creates legacy STLEAF%03i.pso (ps_1_3). STLEAF000 has the same contract: r0.rgb=t0.rgb*t1.rgb; r0.a=t0.a.",
     "mnemonic": "call",
     "size": 5
   },

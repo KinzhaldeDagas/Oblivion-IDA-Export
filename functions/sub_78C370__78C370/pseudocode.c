@@ -1,39 +1,42 @@
-void __thiscall sub_78C370(int *this)
+// Computes static leaf lighting when lighting engine style at +0x38 requests it.
+void __thiscall CSpeedTreeRT__ComputeLeafStaticLighting(OB_CSpeedTreeRT_010201A0 *this)
 {
-  float *v1; // eax
+  OB_STreeExtents_010201A0 *treeSizeBounds; // eax
   double v2; // st6
-  int v3; // eax
-  int v4; // ecx
+  OB_CTreeEngine_010201A0 *treeEngine; // eax
+  OB_CLightingEngine_010201A0 *lightingEngine; // ecx
   int v5; // [esp+0h] [ebp-68h] BYREF
-  float v6; // [esp+30h] [ebp-38h]
-  float v7; // [esp+34h] [ebp-34h]
-  float v8; // [esp+38h] [ebp-30h]
-  float v9; // [esp+3Ch] [ebp-2Ch] BYREF
-  float v10; // [esp+40h] [ebp-28h]
-  float v11; // [esp+44h] [ebp-24h]
-  float v12; // [esp+4Ch] [ebp-1Ch]
-  float v13; // [esp+50h] [ebp-18h]
-  float v14; // [esp+54h] [ebp-14h]
-  int *v15; // [esp+58h] [ebp-10h]
-  int v16; // [esp+64h] [ebp-4h]
+  float x; // [esp+30h] [ebp-38h]
+  float y; // [esp+34h] [ebp-34h]
+  float z; // [esp+38h] [ebp-30h]
+  OB_stVec3_010201A0 treeCenter; // [esp+3Ch] [ebp-2Ch] BYREF
+  float v10; // [esp+4Ch] [ebp-1Ch]
+  float v11; // [esp+50h] [ebp-18h]
+  float v12; // [esp+54h] [ebp-14h]
+  int *v13; // [esp+58h] [ebp-10h]
+  int v14; // [esp+64h] [ebp-4h]
 
-  v15 = &v5;
-  v1 = (float *)*(this + 0x10);
-  v6 = *v1;
-  v7 = v1[1];
-  v8 = v1[2];
-  v9 = v1[3];
-  v2 = dbl_A2FAA0;
-  v10 = v1[4];
-  v11 = v1[5];
-  v3 = *this;
-  v14 = (v9 + v6) * v2;
-  v4 = *(this + 3);
-  v16 = 0;
-  v13 = (v10 + v7) * v2;
-  v12 = v2 * (v11 + v8);
-  v9 = v14;
-  v10 = v13;
-  v11 = v12;
-  sub_793E10(v4, (int)&v9, (int)&v9, *(_DWORD *)(v3 + 0xD4), *(unsigned __int16 *)(v3 + 0xC0));
+  v13 = &v5; /*0x78c398*/
+  treeSizeBounds = this->treeSizeBounds; /*0x78c39b*/
+  x = treeSizeBounds->min.x; /*0x78c3a0*/
+  y = treeSizeBounds->min.y; /*0x78c3a6*/
+  z = treeSizeBounds->min.z; /*0x78c3ac*/
+  treeCenter.x = treeSizeBounds->max.x; /*0x78c3b2*/
+  v2 = dbl_A2FAA0; /*0x78c3be*/
+  treeCenter.y = treeSizeBounds->max.y; /*0x78c3c4*/
+  treeCenter.z = treeSizeBounds->max.z; /*0x78c3ce*/
+  treeEngine = this->treeEngine; /*0x78c3d1*/
+  v12 = (treeCenter.x + x) * v2; /*0x78c3d3*/
+  lightingEngine = this->lightingEngine; /*0x78c3d6*/
+  v14 = 0; /*0x78c3dc*/
+  v11 = (treeCenter.y + y) * v2; /*0x78c3e8*/
+  v10 = v2 * (treeCenter.z + z); /*0x78c3f3*/
+  treeCenter.x = v12; /*0x78c3f9*/
+  treeCenter.y = v11; /*0x78c3ff*/
+  treeCenter.z = v10; /*0x78c405*/
+  OB_CLightingEngine_ComputeLeafStaticLighting_010201A0( /*0x78c41b*/
+    lightingEngine,
+    &treeCenter,
+    treeEngine->leafLodVectors,
+    LOWORD(treeEngine->?));
 }

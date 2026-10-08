@@ -1,4 +1,4 @@
-0x6D6660: mov     eax, [esp+arg_4]
+0x6D6660: mov     eax, [esp+arg_4]; Oblivion NiTransformInterpolator clone/member copy. Copies base state and cached transform, replaces destination data +0x2C with the source refcounted pointer using balanced decrement/increment, and copies all three 16-bit key cursors.
 0x6D6664: push    ebx
 0x6D6665: push    ebp
 0x6D6666: mov     ebp, [esp+8+arg_0]

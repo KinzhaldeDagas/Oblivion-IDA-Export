@@ -34,12 +34,12 @@
 0x68B6AF: test    al, al
 0x68B6B1: jz      loc_68BD1A
 0x68B6B7: mov     ecx, esi; this
-0x68B6B9: call    TESObjectREFR_GetParentCell
+0x68B6B9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x68B6BE: test    eax, eax
 0x68B6C0: jnz     short loc_68B6DA
 0x68B6C2: fld     [esp+180h+arg_4]
 0x68B6C9: push    ecx
-0x68B6CA: fstp    [esp+184h+var_184]; float
+0x68B6CA: fstp    [esp+184h+radians]; float
 0x68B6CD: push    esi; Concurrency::details::SchedulerBase *
 0x68B6CE: mov     ecx, ebp
 0x68B6D0: call    sub_68A300
@@ -61,7 +61,7 @@
 0x68B711: mov     ecx, esi
 0x68B713: fstp    [esp+180h+var_144]
 0x68B717: mov     [esp+180h+var_16A], 0
-0x68B71C: call    sub_5E65B0
+0x68B71C: call    sub_5E65B0; High-path movement uses sub_5E65B0(actor) as segment speed; direction bits are not required for the speed selector's walk fallback.
 0x68B721: fstp    [esp+180h+var_124]
 0x68B725: mov     edx, [esi]
 0x68B727: fld     [esp+180h+arg_4]
@@ -75,9 +75,9 @@
 0x68B745: mov     [esp+180h+var_164], edx
 0x68B749: mov     eax, [eax+8]
 0x68B74C: lea     ebx, [ebp+14h]
-0x68B74F: mov     ecx, ebx
+0x68B74F: mov     ecx, ebx; this
 0x68B751: mov     [esp+180h+var_160], eax
-0x68B755: call    sub_42B410
+0x68B755: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68B75A: mov     edi, eax
 0x68B75C: lea     esp, [esp+0]
 0x68B760: test    edi, edi
@@ -86,7 +86,7 @@
 0x68B76A: call    sub_68CA20
 0x68B76F: mov     ecx, edi
 0x68B771: mov     [esp+180h+var_16A], al
-0x68B775: call    sub_6899C0
+0x68B775: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68B77A: cmp     [esp+180h+var_169], 0
 0x68B77F: mov     ecx, [eax]
 0x68B781: mov     [esp+180h+var_134], ecx
@@ -97,7 +97,7 @@
 0x68B793: jz      short loc_68B804
 0x68B795: fld     dword ptr ds:0A427E4h
 0x68B79B: push    ecx
-0x68B79C: fstp    [esp+184h+var_184]; float
+0x68B79C: fstp    [esp+184h+radians]; float
 0x68B79F: lea     ecx, [esp+184h+var_114]
 0x68B7A3: push    ecx; int
 0x68B7A4: mov     ecx, ds:0B333A0h
@@ -175,8 +175,8 @@
 0x68B8AB: push    edi
 0x68B8AC: mov     ecx, ebx
 0x68B8AE: call    sub_68C170
-0x68B8B3: mov     ecx, ebx
-0x68B8B5: call    sub_42B410
+0x68B8B3: mov     ecx, ebx; this
+0x68B8B5: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68B8BA: fld     [esp+180h+var_158]
 0x68B8BE: fsub    [esp+180h+var_170]
 0x68B8C2: mov     edi, eax
@@ -201,8 +201,8 @@
 0x68B904: push    esi
 0x68B905: mov     ecx, ebp
 0x68B907: call    sub_68B4F0
-0x68B90C: mov     ecx, ebx
-0x68B90E: call    sub_42B410
+0x68B90C: mov     ecx, ebx; this
+0x68B90E: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68B913: mov     edi, eax
 0x68B915: test    edi, edi
 0x68B917: jnz     loc_68B9B1
@@ -233,12 +233,12 @@
 0x68B969: jmp     short loc_68B96D
 0x68B96B: fstp    st
 0x68B96D: lea     ecx, [esp+180h+var_154]
-0x68B971: call    sub_43F350
+0x68B971: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x68B976: fstp    st
 0x68B978: fld     [esp+180h+var_170]
 0x68B97C: push    ecx
 0x68B97D: lea     ecx, [esp+184h+var_154]
-0x68B981: fstp    [esp+184h+var_184]; float
+0x68B981: fstp    [esp+184h+radians]; float
 0x68B984: call    NiPoint3__MutliplyByValue
 0x68B989: fld     [esp+180h+var_154]
 0x68B98D: fadd    [esp+180h+var_168]
@@ -275,7 +275,7 @@
 0x68B9FB: fldz
 0x68B9FD: mov     ecx, edi
 0x68B9FF: fstp    [esp+180h+var_158]
-0x68BA03: call    sub_6899C0
+0x68BA03: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68BA08: fld     dword ptr [eax+4]
 0x68BA0B: fsub    [esp+180h+var_164]
 0x68BA0F: mov     ebp, [esi]
@@ -293,9 +293,9 @@
 0x68BA39: fstp    [esp+184h+var_13C]
 0x68BA3D: fld     [esp+184h+var_170]
 0x68BA41: fstp    [esp+184h+var_138]
-0x68BA45: call    sub_683CB0
+0x68BA45: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x68BA4A: mov     eax, [ebp+0]
-0x68BA4D: fstp    [esp+184h+var_184]
+0x68BA4D: fstp    [esp+184h+radians]
 0x68BA50: mov     ecx, esi
 0x68BA52: call    eax
 0x68BA54: jmp     loc_68BBCA
@@ -320,7 +320,7 @@
 0x68BA95: fstp    [esp+180h+var_170]
 0x68BA99: fldz
 0x68BA9B: fstp    [esp+180h+var_158]
-0x68BA9F: call    sub_6899C0
+0x68BA9F: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68BAA4: fld     dword ptr [eax+4]
 0x68BAA7: fsub    [esp+180h+var_164]
 0x68BAAB: lea     ecx, [esp+180h+var_154]
@@ -335,7 +335,7 @@
 0x68BACC: fstp    [esp+180h+var_150]
 0x68BAD0: fld     [esp+180h+var_148]
 0x68BAD4: fstp    [esp+180h+var_14C]
-0x68BAD8: call    sub_43F350
+0x68BAD8: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x68BADD: fstp    st
 0x68BADF: fld     [esp+180h+var_154]
 0x68BAE3: fld     [esp+180h+var_124]
@@ -402,15 +402,15 @@
 0x68BBB0: push    eax
 0x68BBB1: fstp    [esp+184h+var_144]
 0x68BBB5: add     ebp, 1E8h
-0x68BBBB: call    sub_683CB0
-0x68BBC0: fstp    [esp+184h+var_184]
+0x68BBBB: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
+0x68BBC0: fstp    [esp+184h+radians]
 0x68BBC3: mov     edx, [ebp+0]
 0x68BBC6: mov     ecx, esi
 0x68BBC8: call    edx
 0x68BBCA: cmp     ds:0B333B4h, esi
 0x68BBD0: jnz     short loc_68BC34
-0x68BBD2: mov     ecx, ebx
-0x68BBD4: call    sub_42B410
+0x68BBD2: mov     ecx, ebx; this
+0x68BBD4: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68BBD9: test    eax, eax
 0x68BBDB: mov     eax, offset aIncomplete; "INCOMPLETE"
 0x68BBE0: jnz     short loc_68BBE7
@@ -474,16 +474,16 @@
 0x68BCA3: jz      short loc_68BCCB
 0x68BCA5: fld     dword ptr ds:0A32048h
 0x68BCAB: push    ecx
-0x68BCAC: mov     ecx, esi
-0x68BCAE: fstp    [esp+184h+var_184]; float
-0x68BCB1: call    sub_4D89D0
+0x68BCAC: mov     ecx, esi; this
+0x68BCAE: fstp    [esp+184h+radians]; radians
+0x68BCB1: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x68BCB6: test    ebp, ebp
 0x68BCB8: jz      short loc_68BCCB
 0x68BCBA: fld     dword ptr ds:0A32048h
 0x68BCC0: push    ecx
-0x68BCC1: mov     ecx, ebp
-0x68BCC3: fstp    [esp+188h+var_188]; float
-0x68BCC6: call    sub_4D89D0
+0x68BCC1: mov     ecx, ebp; this
+0x68BCC3: fstp    [esp+188h+var_188]; radians
+0x68BCC6: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x68BCCB: test    edi, edi
 0x68BCCD: jnz     short loc_68BCDD
 0x68BCCF: mov     edx, [esi]
@@ -492,7 +492,7 @@
 0x68BCD9: mov     ecx, esi
 0x68BCDB: call    eax
 0x68BCDD: mov     ecx, esi; this
-0x68BCDF: call    TESObjectREFR_GetParentCell
+0x68BCDF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x68BCE4: mov     edi, [esp+18Ch+var_134]
 0x68BCE8: cmp     edi, eax
 0x68BCEA: jz      short loc_68BD14

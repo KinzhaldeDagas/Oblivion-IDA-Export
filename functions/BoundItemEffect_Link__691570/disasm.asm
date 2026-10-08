@@ -15,7 +15,7 @@
 0x691597: mov     ebx, ecx
 0x691599: mov     eax, [esp+2Ch+arg_0]
 0x69159D: push    eax
-0x69159E: call    AssociatedItemEffect_Link
+0x69159E: call    AssociatedItemEffect_Link; Verified AssociatedItemEffect_Link forwards its TESObjectREFR link context to ActiveEffect_Base_Link before resolving its own associated-item FormID.
 0x6915A3: mov     ecx, [ebx+20h]; this
 0x6915A6: xor     ebp, ebp
 0x6915A8: cmp     ecx, ebp
@@ -171,7 +171,7 @@
 0x691762: mov     ecx, esi
 0x691764: call    ContainerEntryExtraData_DestroyDataTable
 0x691769: push    esi
-0x69176A: call    FormHeapFree
+0x69176A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69176F: add     esp, 4
 0x691772: mov     [ebx+3Ch], edi
 0x691775: mov     edi, [esp+2Ch+arg_0]
@@ -216,7 +216,7 @@
 0x6917EF: mov     ecx, edi
 0x6917F1: call    ContainerEntryExtraData_DestroyDataTable
 0x6917F6: push    edi
-0x6917F7: call    FormHeapFree
+0x6917F7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6917FC: add     esp, 4
 0x6917FF: mov     edi, [esp+2Ch+arg_0]
 0x691803: mov     [esi], ebp
@@ -251,7 +251,7 @@
 0x69185B: jz      short loc_69188D
 0x69185D: push    esi; a2
 0x69185E: mov     ecx, edi; this
-0x691860: call    ContainerExtraData_GetItemCount
+0x691860: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
 0x691865: test    eax, eax
 0x691867: jnz     short loc_69188D
 0x691869: mov     edi, [esp+2Ch+arg_0]
@@ -268,8 +268,8 @@
 0x691883: push    1
 0x691885: push    esi
 0x691886: mov     ecx, edi
-0x691888: call    Actor_EquipItem
-0x69188D: mov     ecx, dword ptr [esp+2Ch+var_C]
+0x691888: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
+0x69188D: mov     ecx, [esp+2Ch+var_C]
 0x691891: mov     large fs:0, ecx
 0x691898: pop     ecx
 0x691899: pop     edi
@@ -278,3 +278,20 @@
 0x69189C: pop     ebx
 0x69189D: add     esp, 18h
 0x6918A0: retn    4
+0x9AD1E0: mov     eax, [ebp-18h]
+0x9AD1E3: push    eax
+0x9AD1E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD1E9: pop     ecx
+0x9AD1EA: retn
+0x9AD1EB: mov     eax, [ebp-10h]
+0x9AD1EE: push    eax
+0x9AD1EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD1F4: pop     ecx
+0x9AD1F5: retn
+0x9AD1F6: mov     edx, [esp+arg_4]
+0x9AD1FA: lea     eax, [edx-1Ch]
+0x9AD1FD: mov     ecx, [edx-20h]
+0x9AD200: xor     ecx, eax
+0x9AD202: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD207: mov     eax, offset stru_AD9DC8
+0x9AD20C: jmp     ___CxxFrameHandler3

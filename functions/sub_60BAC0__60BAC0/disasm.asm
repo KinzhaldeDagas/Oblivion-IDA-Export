@@ -1,4 +1,4 @@
-0x60BAC0: push    ebp
+0x60BAC0: push    ebp; Handle collision-filter layer/category 1 without a TESObjectREFR target. Builds state-2 world placement data from impact position/normal, records material effects, and applies all retained projectile magic items through the shooter with a null casting target.
 0x60BAC1: mov     ebp, esp
 0x60BAC3: and     esp, 0FFFFFFF0h
 0x60BAC6: sub     esp, 44h
@@ -7,7 +7,7 @@
 0x60BAD0: mov     [esp+44h+var_4], eax
 0x60BAD4: push    ebx
 0x60BAD5: push    esi
-0x60BAD6: mov     esi, [ebp+arg_0]
+0x60BAD6: mov     esi, [ebp+impactPosition]
 0x60BAD9: push    edi
 0x60BADA: push    54h ; 'T'; Size
 0x60BADC: mov     ebx, ecx
@@ -22,11 +22,11 @@
 0x60BB04: push    eax
 0x60BB05: mov     dword ptr [esp+58h+var_20+4], ecx
 0x60BB09: mov     dword ptr [esp+58h+var_20+8], edx
-0x60BB0D: call    sub_4BFAA0
+0x60BB0D: call    NiPoint3_NormalizeApproximateInPlace
 0x60BB12: fld     dword ptr [esp+58h+var_20]
 0x60BB16: mov     ecx, [ebx+5Ch]
 0x60BB19: fld     qword ptr ds:0A2F920h
-0x60BB1F: mov     dword ptr [ecx], 2
+0x60BB1F: mov     dword ptr [ecx], 2; Collision-filter layer/category 1 impact initializes state 2 with no target reference/node.
 0x60BB25: fmul    st(1), st
 0x60BB27: mov     edx, [ebx+5Ch]
 0x60BB2A: fxch    st(1)
@@ -38,7 +38,7 @@
 0x60BB3C: mov     [ecx+28h], eax
 0x60BB3F: fmul    st, st(1)
 0x60BB41: mov     eax, [ebx+5Ch]
-0x60BB44: mov     ecx, [ebp+arg_4]
+0x60BB44: mov     ecx, [ebp+impactNormal]
 0x60BB47: mov     edx, [ecx]
 0x60BB49: fstp    dword ptr [esp+58h+var_20+4]
 0x60BB4D: mov     [eax+10h], edx
@@ -81,20 +81,20 @@
 0x60BBCD: mov     ecx, ds:0B3F9B0h
 0x60BBD3: mov     [eax+8], ecx
 0x60BBD6: mov     ecx, ebx; this
-0x60BBD8: call    MobileObject_GetCharProxy
+0x60BBD8: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x60BBDD: test    eax, eax
 0x60BBDF: jz      loc_60BCB3
 0x60BBE5: mov     ecx, ebx; this
-0x60BBE7: call    MobileObject_GetCharProxy
+0x60BBE7: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x60BBEC: test    eax, eax
 0x60BBEE: jz      short loc_60BC00
 0x60BBF0: mov     eax, [eax+8]
 0x60BBF3: test    eax, eax
 0x60BBF5: jz      short loc_60BC00
 0x60BBF7: mov     ecx, eax
-0x60BBF9: call    sub_8AC0A0
+0x60BBF9: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x60BBFE: jmp     short loc_60BC05
-0x60BC00: mov     eax, offset stru_BA7A40
+0x60BC00: mov     eax, offset unk_BA7A40
 0x60BC05: movaps  xmm0, xmmword ptr [eax]
 0x60BC08: movss   [esp+50h+var_34], xmm0
 0x60BC0E: fld     [esp+50h+var_34]
@@ -148,7 +148,7 @@
 0x60BCA6: push    ecx
 0x60BCA7: add     edx, 1Ch
 0x60BCAA: push    edx
-0x60BCAB: call    sub_43F3E0
+0x60BCAB: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x60BCB0: add     esp, 8
 0x60BCB3: mov     esi, [esp+50h+var_38]
 0x60BCB7: mov     ecx, ds:0B333A0h
@@ -159,11 +159,11 @@
 0x60BCC8: ja      short def_60BCD1; jumptable 0060BCD1 default case, cases 1,2,4,6-9,12,14,16,17,19,21-24,27,29
 0x60BCCA: movzx   eax, ds:byte_60BE64[edi]
 0x60BCD1: jmp     ds:jpt_60BCD1[eax*4]; switch jump
-0x60BCD8: mov     ecx, [ebp+arg_4]; jumptable 0060BCD1 cases 0,3,5,10,11,13,15,18,20,25,26,28,30
+0x60BCD8: mov     ecx, [ebp+impactNormal]; jumptable 0060BCD1 cases 0,3,5,10,11,13,15,18,20,25,26,28,30
 0x60BCDB: push    ecx
 0x60BCDC: push    esi
 0x60BCDD: mov     ecx, ebx
-0x60BCDF: call    sub_608DA0
+0x60BCDF: call    ArrowProjectile_SetFreeImpactState3; Convert to free-impact state 3 without changing TESObjectREFR.baseForm or attaching source-WEAP identity.
 0x60BCE4: mov     eax, [ebx+5Ch]; jumptable 0060BCD1 default case, cases 1,2,4,6-9,12,14,16,17,19,21-24,27,29
 0x60BCE7: mov     dword ptr [ebx+60h], 1
 0x60BCEE: fld     dword ptr [eax+20h]
@@ -216,7 +216,7 @@
 0x60BD6E: mov     ecx, [ebx+78h]
 0x60BD71: test    ecx, ecx
 0x60BD73: jz      loc_60BE3B
-0x60BD79: mov     eax, [ebx+7Ch]
+0x60BD79: mov     eax, [ebx+7Ch]; Layer-1 impact AMMO enchantment path: ArrowProjectile+0x7C, applied through shooter MagicCaster with no reference target.
 0x60BD7C: test    eax, eax
 0x60BD7E: jz      short loc_60BDB7
 0x60BD80: mov     edx, [ecx+5Ch]
@@ -238,8 +238,8 @@
 0x60BDAB: mov     ecx, [ebx+78h]
 0x60BDAE: push    eax
 0x60BDAF: add     ecx, 5Ch ; '\'
-0x60BDB2: call    MagicCaster_UseActiveMagicItem
-0x60BDB7: mov     edx, [ebx+84h]
+0x60BDB2: call    MagicCaster_UseActiveMagicItem; Collision-layer-1 impact applies projectile-held AMMO enchantment through shooter MagicCaster.
+0x60BDB7: mov     edx, [ebx+84h]; Layer-1 impact poison path: ArrowProjectile+0x84, applied through shooter MagicCaster with no reference target.
 0x60BDBD: test    edx, edx
 0x60BDBF: jz      short loc_60BDF9
 0x60BDC1: mov     eax, [ebx+78h]
@@ -262,8 +262,8 @@
 0x60BDED: mov     ecx, [ebx+78h]
 0x60BDF0: push    eax
 0x60BDF1: add     ecx, 5Ch ; '\'
-0x60BDF4: call    MagicCaster_UseActiveMagicItem
-0x60BDF9: mov     edx, [ebx+80h]
+0x60BDF4: call    MagicCaster_UseActiveMagicItem; Collision-layer-1 impact applies projectile-held poison through shooter MagicCaster.
+0x60BDF9: mov     edx, [ebx+80h]; Layer-1 impact bow enchantment path: ArrowProjectile+0x80, applied through shooter MagicCaster with no reference target.
 0x60BDFF: test    edx, edx
 0x60BE01: jz      short loc_60BE3B
 0x60BE03: mov     eax, [ebx+78h]
@@ -286,7 +286,7 @@
 0x60BE2F: mov     ecx, [ebx+78h]
 0x60BE32: push    eax
 0x60BE33: add     ecx, 5Ch ; '\'
-0x60BE36: call    MagicCaster_UseActiveMagicItem
+0x60BE36: call    MagicCaster_UseActiveMagicItem; Collision-layer-1 impact applies projectile-held bow enchantment through shooter MagicCaster.
 0x60BE3B: cmp     dword ptr [ebx+7Ch], 0
 0x60BE3F: jz      short loc_60BE48
 0x60BE41: mov     dword ptr [ebx+60h], 3

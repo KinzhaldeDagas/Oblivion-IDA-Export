@@ -16,8 +16,8 @@
 0x4DB544: call    edx
 0x4DB546: cmp     byte ptr [eax+4], 29h ; ')'
 0x4DB54A: jnz     loc_4DB6A0
-0x4DB550: mov     ecx, offset stru_B34448; this
-0x4DB555: call    sub_7616D0
+0x4DB550: mov     ecx, 0B34448h; this
+0x4DB555: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x4DB55A: fld     [esp+0Ch+arg_0]
 0x4DB55E: sub     esp, 8
 0x4DB561: fstp    qword ptr [esp+14h+a2]
@@ -77,13 +77,13 @@
 0x4DB5FF: fstp    dword ptr [edi+60h]
 0x4DB602: fldz
 0x4DB604: fstp    [esp+14h+a2]; a2
-0x4DB607: call    NiAVObject_UpdateNiAVObject
+0x4DB607: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DB60C: fldz
 0x4DB60E: push    0; a3
 0x4DB610: push    ecx
 0x4DB611: fstp    [esp+14h+a2]; a2
 0x4DB614: mov     ecx, edi; this
-0x4DB616: call    NiAVObject_UpdateNiAVObject
+0x4DB616: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DB61B: mov     eax, [esi]
 0x4DB61D: mov     edx, [eax+190h]
 0x4DB623: mov     ecx, esi
@@ -91,7 +91,7 @@
 0x4DB627: test    al, al
 0x4DB629: jz      short loc_4DB6A0
 0x4DB62B: mov     ecx, esi; this
-0x4DB62D: call    MobileObject_GetCharProxy
+0x4DB62D: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x4DB632: fldz
 0x4DB634: test    eax, eax
 0x4DB636: fstp    [esp+0Ch+arg_0]
@@ -117,7 +117,7 @@
 0x4DB678: mov     ecx, esi
 0x4DB67A: call    edx
 0x4DB67C: mov     ecx, esi; this
-0x4DB67E: call    MobileObject_GetCharProxy
+0x4DB67E: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x4DB683: test    eax, eax
 0x4DB685: jz      short loc_4DB691
 0x4DB687: fld     [esp+0Ch+arg_0]

@@ -1,4 +1,4 @@
-0x52CD50: push    0FFFFFFFFh
+0x52CD50: push    0FFFFFFFFh; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.
 0x52CD52: push    offset SEH_6C4C20
 0x52CD57: mov     eax, large fs:0
 0x52CD5D: push    eax
@@ -14,50 +14,49 @@
 0x52CD71: mov     large fs:0, eax
 0x52CD77: mov     edi, ecx
 0x52CD79: mov     [esp+2Ch+var_14], edi
-0x52CD7D: mov     esi, [esp+2Ch+arg_0]
+0x52CD7D: mov     esi, [esp+2Ch+npc]
 0x52CD81: test    esi, esi
 0x52CD83: jz      short loc_52CDD7
-0x52CD85: mov     ebp, [esp+2Ch+arg_4]
-0x52CD89: push    ebp
-0x52CD8A: mov     ecx, esi
-0x52CD8C: call    sub_5221C0
+0x52CD85: mov     ebp, [esp+2Ch+outAbsolute]
+0x52CD89: push    ebp; outAbsolute
+0x52CD8A: mov     ecx, esi; this
+0x52CD8C: call    TESNPC_BuildAbsoluteFaceGenParameters; NPC path: build absolute FaceGen coefficients from race bases plus NPC offsets into outState->parameters.
 0x52CD91: mov     eax, [esi+1C8h]
-0x52CD97: mov     [ebp+60h], eax
+0x52CD97: mov     [ebp+60h], eax; Copy the NPC hair selection into the render state.
 0x52CD9A: fld     dword ptr [esi+1CCh]
 0x52CDA0: fstp    [esp+2Ch+var_18]
 0x52CDA4: mov     ecx, esi
 0x52CDA6: fld     [esp+2Ch+var_18]
-0x52CDAA: fstp    dword ptr [ebp+68h]
+0x52CDAA: fstp    dword ptr [ebp+68h]; Copy TESNPC hairLength (+0x1CC) into FaceGenRenderState::hairLength (+0x68).
 0x52CDAD: mov     eax, [esi+1E8h]
-0x52CDB3: mov     [ebp+64h], eax
+0x52CDB3: mov     [ebp+64h], eax; Pack the NPC hair RGB bytes into render-state hairColorRGB.
 0x52CDB6: mov     eax, [esi+1D0h]
-0x52CDBC: mov     [ebp+6Ch], eax
+0x52CDBC: mov     [ebp+6Ch], eax; Copy the NPC eye selection into the render state.
 0x52CDBF: call    TESActorBase_IsFemale
-0x52CDC4: mov     [ebp+70h], eax
+0x52CDC4: mov     [ebp+70h], eax; Record NPC sex for sex-specific head parts, age textures, and later shading.
 0x52CDC7: mov     [esp+2Ch+var_18], 0
 0x52CDCF: lea     ebx, [ebp+84h]
 0x52CDD5: jmp     short loc_52CE18
 0x52CDD7: lea     eax, [edi+29Ch]
 0x52CDDD: test    eax, eax
 0x52CDDF: jnz     short loc_52CDE6
-0x52CDE1: call    sub_5538D0
-0x52CDE6: mov     ecx, [esp+2Ch+arg_4]
-0x52CDEA: push    ecx
-0x52CDEB: push    eax
-0x52CDEC: call    sub_5528F0
-0x52CDF1: mov     ebp, [esp+34h+arg_4]
+0x52CDE1: call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.
+0x52CDE6: mov     ecx, [esp+2Ch+outAbsolute]
+0x52CDEA: push    ecx; destination
+0x52CDEB: push    eax; source
+0x52CDEC: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
+0x52CDF1: mov     ebp, [esp+34h+outAbsolute]
 0x52CDF5: add     esp, 8
 0x52CDF8: mov     [esp+2Ch+var_18], 0
 0x52CE00: lea     ebx, [ebp+84h]
 0x52CE06: jmp     short loc_52CE18
 0x52CE08: jmp     short loc_52CE10
-0x52CE0A: align 10h
-0x52CE10: mov     ebp, [esp+2Ch+arg_4]
+0x52CE10: mov     ebp, [esp+2Ch+outAbsolute]
 0x52CE14: mov     edi, [esp+2Ch+var_14]
 0x52CE18: mov     edx, [esp+2Ch+var_18]
 0x52CE1C: push    edx
 0x52CE1D: mov     ecx, edi
-0x52CE1F: call    sub_52BC50
+0x52CE1F: call    sub_52BC50; Begin resolving the nine FaceGen head-part model slots.
 0x52CE24: movzx   esi, word ptr [ebp+7Eh]
 0x52CE28: add     ebp, 74h ; 't'
 0x52CE2B: mov     edi, eax
@@ -93,7 +92,7 @@
 0x52CE83: mov     ebp, [esp+2Ch+var_18]
 0x52CE87: mov     ecx, [esp+2Ch+var_14]
 0x52CE8B: push    ebp
-0x52CE8C: mov     [eax+esi*4], edi
+0x52CE8C: mov     [eax+esi*4], edi; Append the resolved model for this head-part slot to headModels.
 0x52CE8F: call    sub_52BD00
 0x52CE94: movzx   esi, word ptr [ebx+0Ah]
 0x52CE98: movzx   ecx, word ptr [ebx+8]
@@ -126,8 +125,8 @@
 0x52CEE5: jz      short loc_52CEED
 0x52CEE7: add     word ptr [ebx+0Ch], 0FFFFh
 0x52CEED: mov     ecx, [ebx+4]
-0x52CEF0: mov     [ecx+esi*4], edi
-0x52CEF3: mov     edi, [esp+2Ch+arg_4]
+0x52CEF0: mov     [ecx+esi*4], edi; Append the resolved texture for this head-part slot to headTextures.
+0x52CEF3: mov     edi, [esp+2Ch+outAbsolute]
 0x52CEF7: movzx   esi, word ptr [edi+9Eh]
 0x52CEFE: movzx   edx, word ptr [edi+9Ch]
 0x52CF05: mov     ebp, ds:0B10CA8h[ebp*4]
@@ -159,10 +158,10 @@
 0x52CF55: cmp     dword ptr [ecx+esi*4], 0
 0x52CF59: jz      short loc_52CF61
 0x52CF5B: add     word ptr [edi+0Ch], 0FFFFh
-0x52CF61: mov     ecx, [esp+2Ch+arg_0]
+0x52CF61: mov     ecx, [esp+2Ch+npc]
 0x52CF65: test    ecx, ecx
 0x52CF67: mov     edx, [edi+4]
-0x52CF6A: mov     [edx+esi*4], ebp
+0x52CF6A: mov     [edx+esi*4], ebp; Append the engine's canonical node name for this head-part slot to nodeNames.
 0x52CF6D: jz      loc_52CFF6
 0x52CF73: cmp     byte ptr ds:0B10D3Ch, 0
 0x52CF7A: jz      short loc_52CFF6
@@ -172,7 +171,7 @@
 0x52CF85: push    edx
 0x52CF86: call    sub_524100
 0x52CF8B: mov     ebp, eax
-0x52CF8D: mov     esi, [esp+2Ch+arg_4]
+0x52CF8D: mov     esi, [esp+2Ch+outAbsolute]
 0x52CF91: movzx   edi, word ptr [esi+0AEh]
 0x52CF98: movzx   eax, word ptr [esi+0ACh]
 0x52CF9F: add     esi, 0A4h ; '¤'
@@ -181,13 +180,13 @@
 0x52CFAF: jb      short loc_52CFBF
 0x52CFB1: movzx   ecx, word ptr [esi+0Eh]
 0x52CFB5: add     ecx, edi
-0x52CFB7: push    ecx
-0x52CFB8: mov     ecx, esi
-0x52CFBA: call    sub_523B10
+0x52CFB7: push    ecx; capacity
+0x52CFB8: mov     ecx, esi; self
+0x52CFBA: call    NiTObjectArray_Resize16
 0x52CFBF: push    ebp
 0x52CFC0: push    edi
 0x52CFC1: mov     ecx, esi
-0x52CFC3: call    sub_5254D0
+0x52CFC3: call    sub_5254D0; When enabled, append this head part's NiTexture override; ApplyHeadParameters consumes the parallel override array.
 0x52CFC8: mov     eax, [esp+2Ch+var_10]
 0x52CFCC: test    eax, eax
 0x52CFCE: mov     [esp+2Ch+var_4], 0FFFFFFFFh
@@ -210,10 +209,10 @@
 0x52CFFD: cmp     eax, 9
 0x52D000: mov     [esp+2Ch+var_18], eax
 0x52D004: jl      loc_52CE10
-0x52D00A: mov     ebx, [esp+2Ch+arg_4]
+0x52D00A: mov     ebx, [esp+2Ch+outAbsolute]
 0x52D00E: cmp     dword ptr [ebx+60h], 0
 0x52D012: mov     cl, ds:0B10D3Ch
-0x52D018: mov     [ebx+0B4h], cl
+0x52D018: mov     [ebx+0B4h], cl; Persist whether textureOverrides is populated and should supersede model texture paths.
 0x52D01E: mov     edx, ds:0B120B0h
 0x52D024: mov     ecx, [esp+2Ch+var_14]
 0x52D028: mov     [ebx+0C0h], edx
@@ -255,8 +254,8 @@
 0x52D09B: jnz     short loc_52D0A2
 0x52D09D: mov     eax, offset EmptyString
 0x52D0A2: push    offset aCharactersEyes; "Characters\\Eyes\\EyeDefault.dds"
-0x52D0A7: push    eax; Str1
-0x52D0A8: call    __strcmp
+0x52D0A7: push    eax; left
+0x52D0A8: call    CRT_StricmpLocaleDispatch; Missing-eye fallback uses Characters\\Eyes\\EyeDefault.dds.
 0x52D0AD: add     esp, 8
 0x52D0B0: test    eax, eax
 0x52D0B2: jz      short loc_52D0BD
@@ -274,3 +273,12 @@
 0x52D0CF: pop     ebx
 0x52D0D0: add     esp, 18h
 0x52D0D3: retn    8
+0x9D6B00: lea     ecx, [ebp-10h]; slot
+0x9D6B03: jmp     NiPointerSlot_Release
+0x9D6B08: mov     edx, [esp+arg_4]
+0x9D6B0C: lea     eax, [edx-1Ch]
+0x9D6B0F: mov     ecx, [edx-20h]
+0x9D6B12: xor     ecx, eax
+0x9D6B14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6B19: mov     eax, offset stru_AFE864
+0x9D6B1E: jmp     ___CxxFrameHandler3

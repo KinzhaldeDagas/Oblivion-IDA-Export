@@ -1,4 +1,4 @@
-0x459570: sub     esp, 214h
+0x459570: sub     esp, 214h; ContinueFromLastSave fidelity decode: parses vanilla numbered save filename metadata: expects 'Save ' prefix, '-' separator, and 'Playing Time'; extracts save number/display text/time for UI only.
 0x459576: mov     eax, ds:0B30AACh
 0x45957B: xor     eax, esp
 0x45957D: mov     [esp+214h+var_4], eax
@@ -58,7 +58,7 @@
 0x459636: test    ebx, ebx
 0x459638: jz      loc_459761
 0x45963E: lea     edx, [esi+1]
-0x459641: push    offset byte_A319FC; SubStr
+0x459641: push    offset asc_A319FC; SubStr
 0x459646: push    edx; Str
 0x459647: xor     ebp, ebp
 0x459649: call    _strstr
@@ -69,7 +69,7 @@
 0x459660: mov     edi, ebp
 0x459662: mov     ebp, eax
 0x459664: add     eax, 1
-0x459667: push    offset byte_A319FC; SubStr
+0x459667: push    offset asc_A319FC; SubStr
 0x45966C: push    eax; Str
 0x45966D: call    _strstr
 0x459672: add     esp, 8

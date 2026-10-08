@@ -1,1 +1,1 @@
-IEnumIDList_0
+typedef IEnumIDList IEnumIDList_0;

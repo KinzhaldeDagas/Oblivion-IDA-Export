@@ -14,7 +14,6 @@
 0x483767: test    eax, eax
 0x483769: jbe     short loc_4837A3
 0x48376B: jmp     short loc_483770
-0x48376D: align 10h
 0x483770: imul    eax, esi
 0x483773: add     eax, edx
 0x483775: shl     eax, 4

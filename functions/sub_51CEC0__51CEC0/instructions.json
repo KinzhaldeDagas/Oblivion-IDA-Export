@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51CEC0",
-    "line": "mov     eax, [ecx+28h]",
+    "line": "mov     eax, [ecx+28h]; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -151,6 +151,234 @@
   },
   {
     "ea": "0x51CF0B",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x519900",
+    "line": "mov     eax, [esp+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x519904",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x519905",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x519906",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x519908",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x51990A",
+    "line": "cmp     eax, 9",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x51990D",
+    "line": "ja      short loc_519912",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x51990F",
+    "line": "mov     edi, [ecx+eax*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x519912",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x519914",
+    "line": "jz      short loc_51994F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x519916",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x519917",
+    "line": "cmp     dword ptr [edi+4], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x51991B",
+    "line": "jnz     short loc_519922",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x51991D",
+    "line": "cmp     dword ptr [edi], 0",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x519920",
+    "line": "jz      short loc_51994E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x519922",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x519924",
+    "line": "jnz     short loc_51994E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x519926",
+    "line": "mov     esi, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x519928",
+    "line": "cmp     [esi], ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x51992A",
+    "line": "jz      short loc_519947",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x51992C",
+    "line": "push    ebx; Seed",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x51992D",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x519932",
+    "line": "cdq",
+    "mnemonic": "cdq",
+    "size": 1
+  },
+  {
+    "ea": "0x519933",
+    "line": "mov     ecx, 64h ; 'd'",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x519938",
+    "line": "idiv    ecx",
+    "mnemonic": "idiv",
+    "size": 2
+  },
+  {
+    "ea": "0x51993A",
+    "line": "movzx   eax, byte ptr [esi+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x51993E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x519941",
+    "line": "cmp     edx, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x519943",
+    "line": "jge     short loc_519947",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x519945",
+    "line": "mov     ebx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x519947",
+    "line": "mov     edi, [edi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x51994A",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x51994C",
+    "line": "jnz     short loc_519917",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x51994E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x51994F",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x519950",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x519952",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x519953",
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3

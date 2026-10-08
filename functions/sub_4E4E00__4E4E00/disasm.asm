@@ -1,18 +1,18 @@
-0x4E4E00: push    ebp
+0x4E4E00: push    ebp; Verified shared LAND/PathGrid group constructor: from a matching exterior/interior CELL sub-block group type 3/5, emits CELL children group type 6 labelled with parent CELL FormID; from matching type 6, emits temporary children group type 9 with the same CELL label. This nests PGRD records under CELL temporary children.
 0x4E4E01: push    esi
-0x4E4E02: mov     esi, [esp+8+arg_0]
+0x4E4E02: mov     esi, [esp+8+out_group_header]
 0x4E4E06: xor     ebp, ebp
 0x4E4E08: cmp     esi, ebp
 0x4E4E0A: mov     edx, ecx
 0x4E4E0C: jz      short loc_4E4E7E
 0x4E4E0E: push    edi
-0x4E4E0F: mov     edi, [esp+0Ch+arg_4]
+0x4E4E0F: mov     edi, [esp+0Ch+current_group_header]
 0x4E4E13: cmp     edi, ebp
 0x4E4E15: mov     [esi], ebp
 0x4E4E17: jz      short loc_4E4E7D
 0x4E4E19: mov     eax, [edi+0Ch]
 0x4E4E1C: sub     eax, 3
-0x4E4E1F: mov     ecx, [edx+20h]
+0x4E4E1F: mov     ecx, [edx+20h]; this
 0x4E4E22: push    ebx
 0x4E4E23: mov     ebx, [ecx+0Ch]
 0x4E4E26: jz      short loc_4E4E5B
@@ -24,7 +24,7 @@
 0x4E4E35: jnz     short loc_4E4E7C
 0x4E4E37: mov     eax, ds:0B05E20h
 0x4E4E3C: mov     [esi], eax
-0x4E4E3E: mov     dword ptr [esi+0Ch], 9
+0x4E4E3E: mov     dword ptr [esi+0Ch], 9; From the owning CELL children group type 6, emit temporary children group type 9 labelled with the same CELL FormID; LAND/PGRD records are direct children of this group.
 0x4E4E45: mov     ecx, [edx+20h]
 0x4E4E48: mov     edx, [ecx+0Ch]
 0x4E4E4B: pop     ebx
@@ -35,12 +35,12 @@
 0x4E4E56: pop     esi
 0x4E4E57: pop     ebp
 0x4E4E58: retn    8
-0x4E4E5B: call    sub_4CA640
+0x4E4E5B: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4E4E60: cmp     [edi+8], eax
 0x4E4E63: jnz     short loc_4E4E7C
 0x4E4E65: mov     eax, ds:0B05E20h
 0x4E4E6A: mov     [esi], eax
-0x4E4E6C: mov     dword ptr [esi+0Ch], 6
+0x4E4E6C: mov     dword ptr [esi+0Ch], 6; From a matching interior/exterior cell sub-block group (type 3 or 5), emit CELL children group type 6 labelled with the owning CELL FormID.
 0x4E4E73: mov     [esi+8], ebx
 0x4E4E76: mov     [esi+10h], ebp
 0x4E4E79: mov     [esi+4], ebp

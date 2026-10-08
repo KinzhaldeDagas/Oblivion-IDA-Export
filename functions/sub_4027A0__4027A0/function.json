@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4027A0",
+      "0x4027CC"
+    ]
+  ],
+  "chunks_sha256": "ec28b012590ae29c27463666a82fd3ac4412d01cf6790fa8d14720508be5a7ff",
+  "comment_regular": "Destroys every registered small MemoryPool; invoked during FormHeap shutdown.",
+  "comment_repeatable": "Destroys every registered small MemoryPool; invoked during FormHeap shutdown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4027A0",
+  "display_name": "MemoryPool_DestroyAll",
   "end_ea": "0x4027CC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4027A0",
+  "name": "MemoryPool_DestroyAll",
   "segment": ".text",
   "sha256": "ec28b012590ae29c27463666a82fd3ac4412d01cf6790fa8d14720508be5a7ff",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4027A0",
+  "total_chunk_size": 44,
   "type": "void()",
   "xrefs_from_count": 21,
   "xrefs_to_count": 1

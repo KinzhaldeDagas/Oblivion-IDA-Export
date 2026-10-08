@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55F510",
-    "line": "push    ebx",
+    "line": "push    ebx; LockFreeMap vtable slot +0x10: computes bucket/hash then removes key through 0x55F270.",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x55F542",
-    "line": "call    sub_55F270",
+    "line": "call    sub_55F270; LockFreeMap remove core: finds key, atomically unlinks node, places node on retired/free list, clears thread-local traversal slots.",
     "mnemonic": "call",
     "size": 5
   },

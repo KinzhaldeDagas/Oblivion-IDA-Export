@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x679C3C",
-    "line": "call    GetExtraDataFollower",
+    "line": "call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x679C4E",
-    "line": "call    GetExtraDataFollower",
+    "line": "call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x679C62",
-    "line": "call    GetExtraDataFollower",
+    "line": "call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x679CB7",
-    "line": "call    sub_673A50",
+    "line": "call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x679CBE",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x679CCD",
-    "line": "call    sub_673A50",
+    "line": "call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x679CD4",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x679CE3",
-    "line": "call    sub_673A50",
+    "line": "call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x679CEA",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x679CF9",
-    "line": "call    sub_673A50",
+    "line": "call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x679D00",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -526,12 +526,6 @@
     "line": "jmp     short loc_679D20",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x679D1A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x679D20",
@@ -877,7 +871,7 @@
   },
   {
     "ea": "0x679DD7",
-    "line": "mov     [esp+1Ch+var_8], eax",
+    "line": "mov     [esp+1Ch+self], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -889,13 +883,13 @@
   },
   {
     "ea": "0x679DDD",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x679DDF",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +967,7 @@
   },
   {
     "ea": "0x679E02",
-    "line": "call    TESPackage_SetTarget",
+    "line": "call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,13 +1015,13 @@
   },
   {
     "ea": "0x679E17",
-    "line": "call    TESPackage_SetLocation",
+    "line": "call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x679E1C",
-    "line": "cmp     [esp+1Ch+var_8], 0",
+    "line": "cmp     [esp+1Ch+self], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1039,19 +1033,19 @@
   },
   {
     "ea": "0x679E23",
-    "line": "mov     ebp, [esp+1Ch+var_8]",
+    "line": "mov     ebp, [esp+1Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x679E27",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x679E29",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1123,7 @@
   },
   {
     "ea": "0x679E4C",
-    "line": "call    TESPackage_SetTarget",
+    "line": "call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1171,7 @@
   },
   {
     "ea": "0x679E61",
-    "line": "call    TESPackage_SetLocation",
+    "line": "call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1489,7 @@
   },
   {
     "ea": "0x679F02",
-    "line": "call    sub_5E6B40",
+    "line": "call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1501,7 @@
   },
   {
     "ea": "0x679F09",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1543,19 +1537,19 @@
   },
   {
     "ea": "0x679F19",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x679F1E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x679F20",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1573,7 @@
   },
   {
     "ea": "0x679F2B",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,13 +1837,13 @@
   },
   {
     "ea": "0x679FA6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x679FA8",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,7 +2005,7 @@
   },
   {
     "ea": "0x679FEE",
-    "line": "call    sub_6162D0",
+    "line": "call    CombatController_RemoveTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,7 +2047,7 @@
   },
   {
     "ea": "0x67A001",
-    "line": "call    sub_424D00",
+    "line": "call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,7 +2155,7 @@
   },
   {
     "ea": "0x67A031",
-    "line": "call    sub_5E03C0",
+    "line": "call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,13 +2527,13 @@
   },
   {
     "ea": "0x67A0E5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67A0E7",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },

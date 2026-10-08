@@ -1,4 +1,4 @@
-0x403F50: mov     edx, [esp+a3]
+0x403F50: mov     edx, [esp+a3]; [Controller decode 2026-07-09] Full control rebind path. Applies broader reserved-key checks, clears conflicts, and writes the new keyboard/mouse/joystick binding byte.
 0x403F54: test    edx, edx
 0x403F56: push    ebx
 0x403F57: mov     bl, [esp+4+a4]

@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B7410",
+      "0x6B7420"
+    ]
+  ],
+  "chunks_sha256": "c150a7d96cc4b9450a06d27270aafc26965a0db162adc830d54d6cdbf8b087c1",
+  "comment_regular": "Initializes an empty 0x10 ConversationView: clears item list, current-item cursor, and reserved +0x0C state. Used before modern serialized load.",
+  "comment_repeatable": "Initializes an empty 0x10 ConversationView: clears item list, current-item cursor, and reserved +0x0C state. Used before modern serialized load.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6B7410",
+  "display_name": "Conversation::InitializeEmpty",
   "end_ea": "0x6B7420",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B7410",
+  "name": "Conversation::InitializeEmpty",
   "segment": ".text",
   "sha256": "c150a7d96cc4b9450a06d27270aafc26965a0db162adc830d54d6cdbf8b087c1",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B7410",
-  "type": "_DWORD *__thiscall(_DWORD *this)",
+  "total_chunk_size": 16,
+  "type": "ConversationView *__thiscall(ConversationView *this)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 1
 }

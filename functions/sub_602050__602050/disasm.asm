@@ -20,16 +20,16 @@
 0x602086: mov     eax, [edx+164h]
 0x60208C: mov     ecx, ebp
 0x60208E: call    eax
-0x602090: mov     ecx, ds:0B333C4h
+0x602090: mov     ecx, ds:0B333C4h; this
 0x602096: cmp     ebp, ecx
 0x602098: mov     ebx, eax
 0x60209A: jnz     short loc_6020BA
-0x60209C: push    0
-0x60209E: call    PlayerCharacter_GetPlayerNode
+0x60209C: push    0; firstPerson
+0x60209E: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6020A3: mov     ecx, ds:0B333C4h; this
-0x6020A9: push    0; a2
+0x6020A9: push    0; firstPerson
 0x6020AB: mov     [esp+48h+var_34], eax
-0x6020AF: call    Player_GetAnimData
+0x6020AF: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x6020B4: mov     edi, [esp+44h+var_34]
 0x6020B8: mov     ebx, eax
 0x6020BA: mov     ecx, [esp+44h+var_30]
@@ -95,7 +95,7 @@
 0x60216F: mov     eax, [edx+1E8h]
 0x602175: push    ecx
 0x602176: mov     ecx, ebp
-0x602178: fstp    [esp+40h+var_40]
+0x602178: fstp    [esp+40h+easeOutTime]
 0x60217B: call    eax
 0x60217D: lea     ecx, [esp+3Ch+var_1C]
 0x602181: push    ecx
@@ -113,10 +113,10 @@
 0x6021A8: mov     ecx, ds:0B3F9B0h
 0x6021AE: push    ecx
 0x6021AF: mov     [ebx+14h], ecx
-0x6021B2: mov     ecx, ebx
-0x6021B4: fstp    [esp+40h+var_40]; float
-0x6021B7: push    0; int
-0x6021B9: call    sub_470FC0
+0x6021B2: mov     ecx, ebx; this
+0x6021B4: fstp    [esp+40h+easeOutTime]; easeOutTime
+0x6021B7: push    0; slot
+0x6021B9: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x6021BE: mov     ecx, [esp+3Ch+var_28]
 0x6021C2: mov     byte ptr [ebx+0C4h], 1
 0x6021C9: mov     edx, [ecx]
@@ -145,13 +145,13 @@
 0x602211: push    4
 0x602213: push    ebp
 0x602214: call    eax
-0x602216: mov     ecx, ds:0B333C4h
+0x602216: mov     ecx, ds:0B333C4h; this
 0x60221C: cmp     ebp, ecx
 0x60221E: jnz     short loc_60225A
 0x602220: mov     ebx, [esi]
 0x602222: push    1
-0x602224: push    1
-0x602226: call    PlayerCharacter_GetPlayerNode
+0x602224: push    1; firstPerson
+0x602226: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x60222B: mov     edx, [ebx+84h]
 0x602231: push    eax
 0x602232: mov     ecx, esi
@@ -159,7 +159,7 @@
 0x602236: mov     ecx, ds:0B333C4h
 0x60223C: lea     eax, [esp+44h+arg_0]
 0x602240: push    eax
-0x602241: call    sub_65ABE0
+0x602241: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x602246: mov     edx, [edi]
 0x602248: movzx   esi, word ptr [eax+2]
 0x60224C: mov     eax, [edx+154h]
@@ -170,7 +170,7 @@
 0x60225A: lea     ecx, [esp+44h+arg_0]
 0x60225E: push    ecx
 0x60225F: mov     ecx, edi
-0x602261: call    sub_65ABE0
+0x602261: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x602266: mov     edx, [ebp+0]
 0x602269: movzx   esi, word ptr [eax+2]
 0x60226D: mov     eax, [edx+154h]
@@ -178,7 +178,7 @@
 0x602275: call    eax
 0x602277: mov     ecx, ebp; this
 0x602279: mov     ebx, eax
-0x60227B: call    MobileObject_GetCharProxy
+0x60227B: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x602280: test    eax, eax
 0x602282: jz      short loc_60229E
 0x602284: test    ebx, ebx
@@ -195,10 +195,10 @@
 0x60229E: fldz
 0x6022A0: mov     esi, [esp+44h+var_2C]
 0x6022A4: push    ecx
-0x6022A5: fstp    [esp+48h+var_48]; float
-0x6022A8: push    5; int
-0x6022AA: mov     ecx, esi
-0x6022AC: call    sub_470FC0
+0x6022A5: fstp    [esp+48h+arg1]; easeOutTime
+0x6022A8: push    5; slot
+0x6022AA: mov     ecx, esi; this
+0x6022AC: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x6022B1: mov     byte ptr [esi+0C4h], 1
 0x6022B8: mov     ecx, ds:0B33B00h
 0x6022BE: call    sub_45A500
@@ -206,10 +206,10 @@
 0x6022C5: jnz     short loc_6022DA
 0x6022C7: fld1
 0x6022C9: sub     esp, 8
-0x6022CC: fst     [esp+4Ch+var_48]; int
-0x6022D0: mov     ecx, edi
-0x6022D2: fstp    [esp+4Ch+var_4C]; float
-0x6022D5: call    Actor_ProcessAction
+0x6022CC: fst     [esp+4Ch+arg1]; arg1
+0x6022D0: mov     ecx, edi; this
+0x6022D2: fstp    [esp+4Ch+arg0]; arg0
+0x6022D5: call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x6022DA: pop     edi
 0x6022DB: pop     ebx
 0x6022DC: pop     esi

@@ -1,8 +1,8 @@
 0x66C6F0: sub     esp, 18h
-0x66C6F3: push    ebp
+0x66C6F3: push    ebp; float
 0x66C6F4: mov     ebp, [esp+1Ch+arg_0]
 0x66C6F8: test    ebp, ebp
-0x66C6FA: push    esi
+0x66C6FA: push    esi; float
 0x66C6FB: mov     esi, ecx
 0x66C6FD: jz      loc_66CC2A
 0x66C703: fld1
@@ -22,22 +22,22 @@
 0x66C73E: mov     byte ptr ds:0B3BB04h, 0
 0x66C745: push    eax; a3
 0x66C746: call    ToggleBody
-0x66C74B: push    edi
+0x66C74B: push    edi; float
 0x66C74C: mov     ecx, esi; this
-0x66C74E: call    TESObjectREFR_GetParentCell
+0x66C74E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66C753: test    eax, eax
 0x66C755: jz      short loc_66C77B
 0x66C757: mov     ecx, esi; this
-0x66C759: call    TESObjectREFR_GetParentCell
+0x66C759: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66C75E: mov     ecx, eax; this
-0x66C760: call    TESObjectCELL_IsInterior
+0x66C760: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66C765: test    al, al
 0x66C767: jz      short loc_66C77B
 0x66C769: mov     ecx, ebp; this
-0x66C76B: call    TESObjectREFR_GetParentCell
+0x66C76B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66C770: mov     ecx, esi; this
 0x66C772: mov     edi, eax
-0x66C774: call    TESObjectREFR_GetParentCell
+0x66C774: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66C779: jmp     short loc_66C78B
 0x66C77B: mov     ecx, ebp; this
 0x66C77D: call    TESObjectREFR_GetWorldSpace
@@ -56,7 +56,7 @@
 0x66C7B5: mov     [esp+24h+var_4], eax
 0x66C7B9: mov     eax, [edx+154h]
 0x66C7BF: mov     ecx, ebp
-0x66C7C1: mov     byte ptr [esp+24h+arg_0], 0
+0x66C7C1: mov     byte ptr [esp+24h+arg_0], 0; float
 0x66C7C6: call    eax
 0x66C7C8: test    eax, eax
 0x66C7CA: jz      loc_66CBC4
@@ -77,7 +77,7 @@
 0x66C7FA: push    ecx
 0x66C7FB: mov     ecx, edi; this
 0x66C7FD: fstp    [esp+30h+a2]; a2
-0x66C800: call    NiAVObject_UpdateNiAVObject
+0x66C800: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x66C805: mov     edx, [edi]
 0x66C807: mov     eax, [edx+78h]
 0x66C80A: mov     ecx, edi
@@ -98,14 +98,14 @@
 0x66C83B: mov     eax, [edi+24h]
 0x66C83E: mov     ebx, ds:0B333CCh
 0x66C844: cmp     dword ptr [ebx+0DCh], 0
-0x66C84B: mov     dword ptr [esp+28h+var_1C+4], edx
+0x66C84B: mov     [esp+28h+var_1C+4], edx
 0x66C84F: mov     edx, [edi+28h]
 0x66C852: mov     [esp+28h+var_10], edx
 0x66C856: fadd    [esp+28h+var_10]
 0x66C85A: mov     [esp+28h+var_14], eax
 0x66C85E: fstp    [esp+28h+var_10]
 0x66C862: fld     [esp+28h+var_C]
-0x66C866: fsub    dword ptr [esp+28h+var_1C+4]
+0x66C866: fsub    [esp+28h+var_1C+4]
 0x66C86A: fstp    [esp+28h+var_C]
 0x66C86E: fld     [esp+28h+var_8]
 0x66C872: fsub    [esp+28h+var_14]
@@ -119,23 +119,23 @@
 0x66C893: jnz     loc_66C9D5
 0x66C899: fld     dword ptr [edi+2Ch]
 0x66C89C: mov     ecx, offset unk_B14F10
-0x66C8A1: fstp    dword ptr [esp+28h+var_1C+4]
+0x66C8A1: fstp    [esp+28h+var_1C+4]
 0x66C8A5: call    sub_404E30
-0x66C8AA: fmul    dword ptr [esp+28h+var_1C+4]
+0x66C8AA: fmul    [esp+28h+var_1C+4]
 0x66C8AE: lea     ecx, [esp+28h+var_C]
-0x66C8B2: fstp    [esp+28h+var_1C+4]
-0x66C8B6: call    sub_404C90
-0x66C8BB: fdivr   [esp+28h+var_1C+4]
-0x66C8BF: fstp    dword ptr [esp+28h+var_1C+4]
-0x66C8C3: fld     dword ptr [esp+28h+var_1C+4]
+0x66C8B2: fstp    qword ptr [esp+28h+var_1C+4]
+0x66C8B6: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
+0x66C8BB: fdivr   qword ptr [esp+28h+var_1C+4]
+0x66C8BF: fstp    [esp+28h+var_1C+4]
+0x66C8C3: fld     [esp+28h+var_1C+4]
 0x66C8C7: call    __CIatan
-0x66C8CC: fstp    dword ptr [esp+28h+var_1C+4]
-0x66C8D0: fld     dword ptr [esp+28h+var_1C+4]
+0x66C8CC: fstp    [esp+28h+var_1C+4]
+0x66C8D0: fld     [esp+28h+var_1C+4]
 0x66C8D4: mov     ecx, offset g_DefaulFOV
 0x66C8D9: fmul    qword ptr ds:0A309F0h
-0x66C8DF: fstp    dword ptr [esp+28h+var_1C+4]
+0x66C8DF: fstp    [esp+28h+var_1C+4]
 0x66C8E3: call    GameSetting_GetSafeFloatPointer
-0x66C8E8: fld     dword ptr [esp+28h+var_1C+4]
+0x66C8E8: fld     [esp+28h+var_1C+4]
 0x66C8EC: fld     dword ptr [eax]
 0x66C8EE: fcomp   st(1)
 0x66C8F0: fnstsw  ax
@@ -145,8 +145,8 @@
 0x66C8FC: fstp    st
 0x66C8FE: call    GameSetting_GetSafeFloatPointer
 0x66C903: fld     dword ptr [eax]
-0x66C905: fstp    dword ptr [esp+28h+var_1C+4]
-0x66C909: fld     dword ptr [esp+28h+var_1C+4]
+0x66C905: fstp    [esp+28h+var_1C+4]
+0x66C909: fld     [esp+28h+var_1C+4]
 0x66C90D: fld1
 0x66C90F: fld     [esp+28h+a4]
 0x66C913: fcom    st(1)
@@ -156,24 +156,24 @@
 0x66C91C: fstp    st(1)
 0x66C91E: jmp     short loc_66C922
 0x66C920: fstp    st
-0x66C922: fstp    dword ptr [esp+28h+var_1C+4]
+0x66C922: fstp    [esp+28h+var_1C+4]
 0x66C926: push    0; a3
 0x66C928: fld     dword ptr [esi+598h]
 0x66C92E: push    ecx
 0x66C92F: fsub    st, st(1)
 0x66C931: mov     ecx, ebx; this
-0x66C933: fld     dword ptr [esp+30h+var_1C+4]
+0x66C933: fld     [esp+30h+var_1C+4]
 0x66C937: fld1
 0x66C939: fsubrp  st(1), st
 0x66C93B: fmulp   st(1), st
 0x66C93D: faddp   st(1), st
-0x66C93F: fstp    dword ptr [esp+30h+var_1C+4]
-0x66C943: fld     dword ptr [esp+30h+var_1C+4]
+0x66C93F: fstp    [esp+30h+var_1C+4]
+0x66C943: fld     [esp+30h+var_1C+4]
 0x66C947: fstp    [esp+30h+a2]; a2
-0x66C94A: call    SetCameraFOV_0
-0x66C94F: fld     dword ptr [esp+28h+var_1C+4]
+0x66C94A: call    SetCameraFOV_0; MoonSugarEffect decode: dialogue camera path calls SetCameraFOV_0 during dialogue framing; reinforces FOV as shared gameplay/UI camera state.
+0x66C94F: fld     [esp+28h+var_1C+4]
 0x66C953: push    ecx
-0x66C954: fstp    [esp+2Ch+var_2C]; float
+0x66C954: fstp    [esp+2Ch+arg0]; float
 0x66C957: call    UpdateParticleShaderFOVData
 0x66C95C: fld1
 0x66C95E: add     esp, 4
@@ -192,7 +192,7 @@
 0x66C987: mov     eax, [eax+8]
 0x66C98A: mov     [esp+28h+var_14], edx
 0x66C98E: mov     edx, [ebp+0]
-0x66C991: mov     dword ptr [esp+28h+var_1C+4], ecx
+0x66C991: mov     [esp+28h+var_1C+4], ecx
 0x66C995: mov     [esp+28h+var_10], eax
 0x66C999: mov     eax, [edx+0ECh]
 0x66C99F: mov     ecx, ebp
@@ -201,35 +201,35 @@
 0x66C9A9: fadd    [esp+28h+var_10]
 0x66C9AD: fstp    [esp+28h+var_10]
 0x66C9B1: fld     [esp+28h+var_C]
-0x66C9B5: fsub    dword ptr [esp+28h+var_1C+4]
-0x66C9B9: fstp    [esp+28h+var_C]
+0x66C9B5: fsub    [esp+28h+var_1C+4]
+0x66C9B9: fstp    [esp+28h+var_C]; float
 0x66C9BD: fld     [esp+28h+var_8]
 0x66C9C1: fsub    [esp+28h+var_14]
-0x66C9C5: fstp    [esp+28h+var_8]
+0x66C9C5: fstp    [esp+28h+var_8]; float
 0x66C9C9: fld     [esp+28h+var_4]
 0x66C9CD: fsub    [esp+28h+var_10]
-0x66C9D1: fstp    [esp+28h+var_4]
+0x66C9D1: fstp    [esp+28h+var_4]; float
 0x66C9D5: cmp     byte ptr [esp+28h+a5], 0
 0x66C9DA: pop     ebx
 0x66C9DB: jnz     loc_66CBBD
 0x66C9E1: fld     [esp+24h+var_4]
 0x66C9E5: lea     ecx, [esp+24h+var_C]
-0x66C9E9: fstp    [esp+24h+var_1C+4]
-0x66C9ED: call    sub_404C90
-0x66C9F2: fdivr   [esp+24h+var_1C+4]
+0x66C9E9: fstp    qword ptr [esp+24h+var_1C+4]
+0x66C9ED: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
+0x66C9F2: fdivr   qword ptr [esp+24h+var_1C+4]
 0x66C9F6: fstp    [esp+24h+a5]
 0x66C9FA: fld     [esp+24h+a5]
 0x66C9FE: call    __CIasin
 0x66CA03: fstp    [esp+24h+a5]
 0x66CA07: fld     [esp+24h+a5]
-0x66CA0B: mov     ecx, esi
+0x66CA0B: mov     ecx, esi; this
 0x66CA0D: fstp    [esp+24h+a5]
-0x66CA11: call    sub_4A9720
+0x66CA11: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x66CA16: fsubr   [esp+24h+a5]
 0x66CA1A: fstp    [esp+24h+a5]
 0x66CA1E: fld     [esp+24h+a5]
 0x66CA22: fabs
-0x66CA24: fstp    [esp+24h+a4]
+0x66CA24: fstp    [esp+24h+a4]; float
 0x66CA28: fld     [esp+24h+a4]
 0x66CA2C: fld     dword ptr ds:0B14F18h
 0x66CA32: fmul    qword ptr ds:0A31C78h
@@ -249,7 +249,7 @@
 0x66CA64: mov     ecx, esi
 0x66CA66: fstp    [esp+28h+a5]
 0x66CA6A: fld     [esp+28h+a5]
-0x66CA6E: fstp    [esp+28h+var_28]; float
+0x66CA6E: fstp    [esp+28h+arg1]; float
 0x66CA71: call    sub_65ABC0
 0x66CA76: mov     ecx, offset dword_B14F20
 0x66CA7B: call    GameSetting_GetSafeFloatPointer
@@ -277,67 +277,67 @@
 0x66CABF: lea     ecx, [esp+24h+var_1C+4]
 0x66CAC3: fchs
 0x66CAC5: push    ecx
-0x66CAC6: fstp    dword ptr [esp+28h+var_1C+4]
+0x66CAC6: fstp    [esp+28h+var_1C+4]
 0x66CACA: fld     [esp+28h+var_8]
 0x66CACE: fchs
-0x66CAD0: fstp    [esp+28h+var_14]
+0x66CAD0: fstp    [esp+28h+var_14]; float
 0x66CAD4: fld     [esp+28h+var_4]
 0x66CAD8: fchs
-0x66CADA: fstp    [esp+28h+var_10]
-0x66CADE: call    sub_683CB0
+0x66CADA: fstp    [esp+28h+var_10]; float
+0x66CADE: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x66CAE3: fstp    [esp+28h+a5]
 0x66CAE7: add     esp, 4
 0x66CAEA: fld     [esp+24h+a5]
 0x66CAEE: mov     ecx, esi; this
-0x66CAF0: fstp    [esp+24h+var_1C+4]
-0x66CAF4: call    MobileObject_GetZRotation
-0x66CAF9: fsubr   [esp+24h+var_1C+4]
+0x66CAF0: fstp    qword ptr [esp+24h+var_1C+4]; float
+0x66CAF4: call    MobileObject_GetZRotation; Actor/MobileObject vtable +0x1E0 base implementation. Returns the single-precision reference rotation Z field at +0x28; the prior double return type was an x87 decompiler artifact.
+0x66CAF9: fsubr   qword ptr [esp+24h+var_1C+4]
 0x66CAFD: fstp    dword ptr [esi+61Ch]
 0x66CB03: mov     edx, [esi]
 0x66CB05: mov     eax, [edx+1E0h]
 0x66CB0B: mov     ecx, esi
 0x66CB0D: call    eax
 0x66CB0F: fstp    dword ptr ds:0B3BAC8h
-0x66CB15: mov     ecx, esi
-0x66CB17: call    sub_4A9720
+0x66CB15: mov     ecx, esi; this
+0x66CB17: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x66CB1C: fstp    dword ptr ds:0B3BAC4h
 0x66CB22: push    1; a1
 0x66CB24: mov     ecx, esi; this
 0x66CB26: call    TogglePOV
 0x66CB2B: push    3Fh ; '?'
 0x66CB2D: mov     ecx, esi
-0x66CB2F: call    sub_5E05F0
+0x66CB2F: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x66CB34: fld1
 0x66CB36: sub     esp, 8
-0x66CB39: fst     [esp+2Ch+var_28]; int
-0x66CB3D: mov     ecx, esi
-0x66CB3F: fstp    [esp+2Ch+var_2C]; float
+0x66CB39: fst     [esp+2Ch+arg1]; arg1
+0x66CB3D: mov     ecx, esi; this
+0x66CB3F: fstp    [esp+2Ch+arg0]; arg0
 0x66CB42: mov     byte ptr [esi+588h], 1
-0x66CB49: call    Actor_ProcessAction
+0x66CB49: call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x66CB4E: mov     byte ptr [esi+588h], 0
 0x66CB55: fld     dword ptr ds:0B33E9Ch
 0x66CB5B: mov     ecx, esi; this
-0x66CB5D: fstp    [esp+24h+a5]
-0x66CB61: call    TESObjectREFR_GetAnimData
+0x66CB5D: fstp    [esp+24h+a5]; float
+0x66CB61: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x66CB66: fld     dword ptr ds:0A30634h
 0x66CB6C: sub     esp, 8
-0x66CB6F: fstp    [esp+2Ch+var_28]; float
+0x66CB6F: fstp    [esp+2Ch+arg1]; explicitTimeOrMinusOne
 0x66CB73: mov     ecx, eax; this
 0x66CB75: fld     [esp+2Ch+a5]
-0x66CB79: fstp    [esp+2Ch+var_2C]; float
-0x66CB7C: push    esi; int
-0x66CB7D: call    sub_476D10
+0x66CB79: fstp    [esp+2Ch+arg0]; deltaTime
+0x66CB7C: push    esi; ownerActor
+0x66CB7D: call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).
 0x66CB82: fld     dword ptr ds:0A30634h
 0x66CB88: mov     ecx, [esi+5CCh]; this
 0x66CB8E: sub     esp, 8
-0x66CB91: fstp    [esp+2Ch+var_28]; float
+0x66CB91: fstp    [esp+2Ch+arg1]; explicitTimeOrMinusOne
 0x66CB95: fld     dword ptr ds:0B33E9Ch
-0x66CB9B: fstp    [esp+2Ch+var_2C]; float
-0x66CB9E: push    esi; int
-0x66CB9F: call    sub_476D10
+0x66CB9B: fstp    [esp+2Ch+arg0]; deltaTime
+0x66CB9E: push    esi; ownerActor
+0x66CB9F: call    ActorAnimData_Update; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).
 0x66CBA4: fldz
 0x66CBA6: push    ecx
-0x66CBA7: fstp    [esp+28h+var_28]; a2
+0x66CBA7: fstp    [esp+28h+arg1]; a2
 0x66CBAA: mov     ecx, esi; this
 0x66CBAC: call    sub_603CA0
 0x66CBB1: mov     edx, [esi]
@@ -367,13 +367,13 @@
 0x66CBFD: fdiv    qword ptr ds:0A309F0h
 0x66CC03: fmul    qword ptr ds:0A492B0h
 0x66CC09: fadd    qword ptr ds:0A492F0h
-0x66CC0F: call    Double_To_SInt32
+0x66CC0F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x66CC14: mov     [esp+24h+a5], eax
 0x66CC18: fild    [esp+24h+a5]
 0x66CC1C: push    ecx
 0x66CC1D: mov     ecx, esi
-0x66CC1F: fstp    [esp+28h+var_28]; float
-0x66CC22: call    SetCameraFOV
+0x66CC1F: fstp    [esp+28h+arg1]; float
+0x66CC22: call    SetCameraFOV; MoonSugarEffect decode: PlayerCharacter SetCameraFOV wrapper writes worldFoV, calls SetCameraFOV_0, then updates particle shader FOV data.
 0x66CC27: fstp    st
 0x66CC29: pop     edi
 0x66CC2A: pop     esi

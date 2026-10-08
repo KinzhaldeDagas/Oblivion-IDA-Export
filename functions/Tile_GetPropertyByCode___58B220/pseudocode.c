@@ -1,53 +1,54 @@
-_DWORD *__thiscall Tile_GetPropertyByCode_(_DWORD *this, _DWORD *a2)
+// Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.
+OblivionTileValueView *__thiscall Tile::GetOrCreateValue(Tile *this, unsigned int trait)
 {
   _DWORD *v3; // ecx
-  __int16 v4; // si
+  unsigned __int16 v4; // si
   char v5; // bl
   int v6; // edi
-  _DWORD *result; // eax
-  int v8; // edx
-  _DWORD *v9; // eax
-  _DWORD *v10; // esi
+  OblivionTileValueView *result; // eax
+  signed int v8; // edx
+  OblivionTileValueView *v9; // eax
+  OblivionTileValueView *v10; // esi
 
-  v3 = (_DWORD *)*(this + 6);
-  v4 = (__int16)a2;
-  v5 = 0;
-  v6 = (int)v3;
-  if ( v3 )
+  v3 = *((_DWORD **)this + 6); /*0x58b246*/
+  v4 = trait; /*0x58b249*/
+  v5 = 0; /*0x58b24d*/
+  v6 = (int)v3; /*0x58b251*/
+  if ( v3 ) /*0x58b253*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x58b258*/
     {
-      result = (_DWORD *)v3[2];
-      v6 = (int)v3;
-      v3 = (_DWORD *)*v3;
-      if ( result )
+      result = (OblivionTileValueView *)v3[2]; /*0x58b258*/
+      v6 = (int)v3; /*0x58b25c*/
+      v3 = (_DWORD *)*v3; /*0x58b25e*/
+      if ( result ) /*0x58b260*/
       {
-        v8 = *((unsigned __int16 *)result + 0xC);
-        if ( (_DWORD *)v8 == a2 )
-          return result;
-        if ( v8 > (int)a2 )
-          break;
+        v8 = result->trait; /*0x58b262*/
+        if ( v8 == trait ) /*0x58b268*/
+          return result; /*0x58b268*/
+        if ( v8 > (int)trait ) /*0x58b26a*/
+          break; /*0x58b26a*/
       }
-      if ( !v3 )
-        goto LABEL_8;
+      if ( !v3 ) /*0x58b26e*/
+        goto LABEL_8; /*0x58b26e*/
     }
-    v5 = 1;
+    v5 = 1; /*0x58b272*/
   }
 LABEL_8:
-  v9 = (_DWORD *)FormHeapAlloc(0x1Cu);
-  a2 = v9;
-  if ( v9 )
-    v10 = sub_589DF0(v9, v4);
+  v9 = (OblivionTileValueView *)FormHeapAlloc(0x1Cu); /*0x58b274*/
+  trait = (unsigned int)v9; /*0x58b27e*/
+  if ( v9 ) /*0x58b28c*/
+    v10 = Tile::Value::Initialize(v9, v4); /*0x58b296*/
   else
-    v10 = 0;
-  a2 = v10;
-  if ( v10 )
+    v10 = 0; /*0x58b29a*/
+  trait = (unsigned int)v10; /*0x58b2a6*/
+  if ( v10 ) /*0x58b2aa*/
   {
-    *v10 = this;
-    if ( v5 && v6 )
-      sub_589640(this + 5, v6, &a2);
+    v10->owner = this; /*0x58b2ae*/
+    if ( v5 && v6 ) /*0x58b2b4*/
+      NiTPointerList__InsertBeforePosition((_DWORD *)this + 5, v6, &trait); /*0x58b2bf*/
     else
-      sub_5B1E20((BSTextureManager *)(this + 5), (void **)&a2);
+      NiTPointerList__AddTail((BSTextureManager *)((char *)this + 0x14), (void **)&trait); /*0x58b2ce*/
   }
-  return v10;
+  return v10; /*0x58b2d5*/
 }

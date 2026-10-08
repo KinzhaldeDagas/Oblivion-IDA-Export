@@ -1,4 +1,4 @@
 const char *sub_5900E0()
 {
-  return "MENU";
+  return "MENU"; /*0x5900e5*/
 }

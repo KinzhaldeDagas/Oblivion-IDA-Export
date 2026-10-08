@@ -1,274 +1,263 @@
-int __thiscall sub_5EB520(Actor *this)
+// Verified tier-transition identity: MobileObject load dispatch for saved level3 calls this slot; body allocates 0x90 matching process constructor, copies/replaces current process, and registers level3. Success exit sets AL=1; no stack arguments (RET0 and no-argument loader call). Probable Fallout Moveto* lineage; internal animation/combat scheduling side effects not fully decoded in this pass.
+bool __thiscall Actor_MoveToLow(Actor *self)
 {
-  char v1; // bp
-  int v2; // edi
-  double v3; // st5
-  double v4; // st6
-  double v5; // st7
+  int v1; // edi
+  double v2; // st5
+  double v3; // st6
   #239 *process; // ecx
-  int result; // eax
-  #239 *v9; // ecx
-  BSShaderAccumulator *inited; // eax
-  LowProcess *v11; // ecx
-  int v12; // eax
-  LowProcess *v13; // ecx
+  #239 *v6; // ecx
+  BSShaderAccumulator *Global; // eax
+  LowProcess *v8; // ecx
+  int v9; // eax
+  LowProcess *v10; // ecx
   TESPackage *editorPackage; // eax
-  TESPackage *v15; // eax
-  TESObjectCELL *ParentCell; // eax
-  unsigned int v17; // edi
-  LowProcess *v18; // ecx
-  LowProcess *v19; // edi
-  char v20; // bl
-  TESForm *v21; // ebp
-  char *v22; // ecx
-  TESPackage *v23; // eax
-  LowProcess *v24; // eax
+  TESPackage *v12; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
+  unsigned int v14; // edi
+  double v15; // st7
+  LowProcess *v16; // ecx
+  LowProcess *v17; // edi
+  char v18; // bl
+  TESForm *v19; // ebp
+  TESPackage *v20; // ecx
+  TESPackage *v21; // eax
+  LowProcess *v22; // eax
   void (__thiscall *Copy)(BaseProcess *__hidden, BaseProcess *); // edx
-  LowProcess *v26; // ecx
-  LowProcess *v27; // ecx
-  int v28; // eax
+  LowProcess *v24; // ecx
+  LowProcess *v25; // ecx
+  int v26; // eax
+  LowProcess_vtbl *v27; // edi
+  Actor *v28; // eax
   LowProcess_vtbl *v29; // edi
-  Actor *v30; // eax
-  LowProcess_vtbl *v31; // edi
-  TESObjectREFR **p_lastActivatedLoadDoor; // edi
-  TESObjectCELL *v33; // ebx
-  float *v34; // eax
-  CombatController *v35; // eax
-  LowProcess_vtbl *v36; // edi
-  double v37; // st7
-  LowProcess *v38; // [esp+50h] [ebp-3Ch]
-  float *v39; // [esp+50h] [ebp-3Ch]
-  TESObjectREFR *v40; // [esp+50h] [ebp-3Ch]
-  int v41; // [esp+54h] [ebp-38h]
-  char v42; // [esp+6Bh] [ebp-21h]
+  void **p_lastActivatedLoadDoor; // edi
+  UInt32 v31; // ebx
+  float *v32; // eax
+  float *v33; // eax
+  LowProcess_vtbl *v34; // edi
+  LowProcess *v36; // [esp+50h] [ebp-3Ch]
+  float *v37; // [esp+50h] [ebp-3Ch]
+  TESObjectREFR *v38; // [esp+50h] [ebp-3Ch]
+  int v39; // [esp+54h] [ebp-38h]
+  char v40; // [esp+6Bh] [ebp-21h]
+  float v41; // [esp+6Ch] [ebp-20h]
+  float v42; // [esp+6Ch] [ebp-20h]
   float v43; // [esp+6Ch] [ebp-20h]
   float v44; // [esp+6Ch] [ebp-20h]
-  float v45; // [esp+6Ch] [ebp-20h]
-  float v46; // [esp+6Ch] [ebp-20h]
-  float v47[3]; // [esp+74h] [ebp-18h] BYREF
-  unsigned int v48; // [esp+88h] [ebp-4h]
+  float v45[3]; // [esp+74h] [ebp-18h] BYREF
+  unsigned int v46; // [esp+88h] [ebp-4h]
 
-  process = (#239 *)this->members.super.process;
-  if ( !process || (result = (*(UInt32 (__thiscall **)(#239 *))(*(_DWORD *)process + 8))(process), result != 3) )
+  process = (#239 *)self->members.super.process; /*0x5eb549*/
+  if ( !process || (*(UInt32 (__thiscall **)(#239 *))(*(_DWORD *)process + 8))(process) != 3 )
   {
-    v9 = (#239 *)this->members.super.process;
-    if ( v9 )
+    v6 = (#239 *)self->members.super.process; /*0x5eb560*/
+    if ( v6 ) /*0x5eb565*/
     {
-      if ( !(*(UInt32 (__thiscall **)(#239 *))(*(_DWORD *)v9 + 8))(v9) )
+      if ( !(*(UInt32 (__thiscall **)(#239 *))(*(_DWORD *)v6 + 8))(v6) ) /*0x5eb56c*/
       {
-        inited = InitBSShaderAccumulator();
-        if ( inited )
-          sub_7AD1E0(inited, this->members.super.super.super.refID);
+        Global = BSShaderAccumulator_GetOrCreateGlobal(); /*0x5eb572*/
+        if ( Global ) /*0x5eb579*/
+          sub_7AD1E0(Global, self->members.super.super.super.refID); /*0x5eb581*/
       }
     }
-    v11 = this->members.super.process;
-    if ( v11 )
+    v8 = self->members.super.process; /*0x5eb586*/
+    if ( v8 ) /*0x5eb58d*/
     {
-      v12 = (int)v11->GetCurrentPackage(v11);
-      if ( v12 )
+      v9 = (int)v8->GetCurrentPackage(v8); /*0x5eb597*/
+      if ( v9 ) /*0x5eb59b*/
       {
-        if ( *(_BYTE *)(v12 + 0x20) == 0x12 )
+        if ( *(_BYTE *)(v9 + 0x20) == 0x12 ) /*0x5eb5a0*/
         {
-          if ( ((unsigned __int8 (__thiscall *)(LowProcess *))this->members.super.process->Unk_72)(this->members.super.process) )
-            sub_5EAE70(this, 0x12, v2, v41);
+          if ( ((unsigned __int8 (__thiscall *)(LowProcess *))self->members.super.process->Unk_72)(self->members.super.process) ) /*0x5eb5ad*/
+            sub_5EAE70(self, 0x12, v1, v39); /*0x5eb5b5*/
         }
       }
     }
-    sub_674850(&ActorProcessManager_ptr, this);
-    if ( this->members.DeadState == 6 )
+    sub_674850(&qword_B3BB2C[0x75], self); /*0x5eb5c0*/
+    if ( self->members.DeadState == 6 ) /*0x5eb5cc*/
     {
-      Actor_HandleDeathSTate____(this, 0);
-      v5 = 0.0;
-      ((void (__stdcall *)(_DWORD))this->members.super.process->SetUnk088)(0.0);
+      Actor_HandleDeathState(self, 0); /*0x5eb5d2*/
+      ((void (__stdcall *)(_DWORD))self->members.super.process->SetUnk088)(0.0); /*0x5eb5e8*/
     }
-    v13 = this->members.super.process;
-    if ( v13 )
+    v10 = self->members.super.process; /*0x5eb5ea*/
+    if ( v10 ) /*0x5eb5ef*/
     {
-      editorPackage = v13->editorPackage;
-      if ( editorPackage )
+      editorPackage = v10->editorPackage; /*0x5eb5f1*/
+      if ( editorPackage ) /*0x5eb5f6*/
       {
-        if ( editorPackage->members.type == 0x12 && (PlayerCharacter *)v13->GetUnk02C(v13) != TESDataHandler_g_PlayerRef )
-          sub_5EAE70(this, 0x12, v2, v41);
+        if ( editorPackage->members.type == kPackageType_Dialogue && (PlayerCharacter *)v10->GetUnk02C(v10) != reference ) /*0x5eb60d*/
+          sub_5EAE70(self, 0x12, v1, v39); /*0x5eb611*/
       }
     }
-    v15 = this->members.super.process->editorPackage;
-    if ( v15 )
+    v12 = self->members.super.process->editorPackage; /*0x5eb619*/
+    if ( v12 ) /*0x5eb61e*/
     {
-      if ( v15->members.type == 0xF && !sub_5E6C60(this) )
+      if ( v12->members.type == kPackageType_Alarm && !Actor_IsGuardClass(self) ) /*0x5eb628*/
       {
-        if ( !TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef)
-          || (ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef),
-              !TESObjectCELL_IsInterior(ParentCell)) )
+        if ( !Shared_GetDwordAtOffset40(reference) /*0x5eb64d*/
+          || (DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(reference),
+              !TESObjectCELL_IsInterior(DwordAtOffset40)) )
         {
-          sub_5EAE70(this, 0x12, v2, v41);
+          sub_5EAE70(self, 0x12, v1, v39); /*0x5eb658*/
         }
       }
     }
-    v17 = this->members.super.process->GetProcessLevel(this->members.super.process);
-    sub_5E4B00(this);
-    if ( v17 <= 1 )
-      sub_5E4FC0(this);
-    MagicTarget_RemoveAllEffects(&this->members.magicTarget);
-    if ( !*(_BYTE *)(TESDataHandler + 0xCD4) && !sub_45A500(SaveLoad_CurrentSavegame) )
-      sub_6765A0((int)&ActorProcessManager_ptr, (int)this);
-    if ( this->vtbl->super.IsDead((MobileObject *)this) )
+    v14 = self->members.super.process->GetProcessLevel(self->members.super.process); /*0x5eb669*/
+    sub_5E4B00(self); /*0x5eb66b*/
+    if ( v14 <= 1 ) /*0x5eb673*/
+      sub_5E4FC0(self); /*0x5eb67b*/
+    MagicTarget_RemoveAllEffects(&self->members.magicTarget); /*0x5eb683*/
+    if ( !g_TESDataHandler->activeFileState.unknownAfterActiveFileState[2] && !sub_45A500(g_TESSaveLoadGame) ) /*0x5eb69d*/
+      sub_6765A0((int)&qword_B3BB2C[0x75], (int)self); /*0x5eb6ac*/
+    if ( self->vtbl->super.IsDead((MobileObject *)self) ) /*0x5eb6bb*/
     {
-      sub_5E9E70((TESObjectREFR *)this);
-      v5 = ((double (__thiscall *)(LowProcess *, Actor *))this->members.super.process->Unk_8E)(
-             this->members.super.process,
-             this);
-      RunScripts((TESObjectREFR *)this, v3, v4, v5);
+      sub_5E9E70((TESObjectREFR *)self); /*0x5eb6c3*/
+      v15 = ((double (__thiscall *)(LowProcess *, Actor *))self->members.super.process->Unk_8E)( /*0x5eb6d4*/
+              self->members.super.process,
+              self);
+      RunScripts((TESObjectREFR *)self, v2, v3, v15); /*0x5eb6d8*/
     }
-    else if ( this->vtbl->super.super.IsDead((TESObjectREFR *)this, 0)
-           && !this->members.super.process->GetProcessLevel(this->members.super.process) )
+    else if ( self->vtbl->super.super.IsDead((TESObjectREFR *)self, 0) /*0x5eb6f7*/
+           && !self->members.super.process->GetProcessLevel(self->members.super.process) )
     {
-      v5 = ((double (__thiscall *)(Actor *, int))this->vtbl->super.super.super.Unk_27)(this, 1);
+      ((void (__thiscall *)(Actor *, int))self->vtbl->super.super.super.Unk_27)(self, 1); /*0x5eb709*/
     }
-    sub_674550(v1, v3, v4, v5, (int)this, v17);
-    v18 = this->members.super.process;
-    v19 = 0;
-    v20 = 0;
-    v21 = 0;
-    v42 = v18 ? ((int (__thiscall *)(LowProcess *))v18->GetUnk25C)(v18) : 0;
-    v22 = (char *)this->members.super.process->editorPackage;
-    if ( v22 )
+    sub_674550((int)self, v14); /*0x5eb712*/
+    v16 = self->members.super.process; /*0x5eb717*/
+    v17 = 0; /*0x5eb71a*/
+    v18 = 0; /*0x5eb71c*/
+    v19 = 0; /*0x5eb71e*/
+    v40 = v16 ? ((int (__thiscall *)(LowProcess *))v16->GetUnk25C)(v16) : 0;
+    v20 = self->members.super.process->editorPackage; /*0x5eb73c*/
+    if ( v20 ) /*0x5eb746*/
     {
-      if ( sub_567770(v22) )
+      if ( TESPackage::IsTemporaryOverrideType(v20) ) /*0x5eb748*/
       {
-        if ( sub_5E6CD0((TESObjectREFR *)this, 0) )
+        if ( sub_5E6CD0((TESObjectREFR *)self, 0) ) /*0x5eb754*/
         {
-          v20 = 1;
-          v21 = this->vtbl->GetCombatTarget(this);
+          v18 = 1; /*0x5eb765*/
+          v19 = self->vtbl->GetCombatTarget(self); /*0x5eb76f*/
         }
-        v23 = this->members.super.process->editorPackage;
-        if ( (!v23 || v23->members.type != 0xF) && !this->vtbl->GetCombatController(this) )
-          sub_5EAE70(this, v20, 0, v41);
+        v21 = self->members.super.process->editorPackage; /*0x5eb774*/
+        if ( (!v21 || v21->members.type != kPackageType_Alarm) && !self->vtbl->GetCombatController(self) ) /*0x5eb78b*/
+          sub_5EAE70(self, v18, 0, v39); /*0x5eb793*/
       }
     }
-    v24 = (LowProcess *)FormHeapAlloc(0x90u);
-    v48 = 0;
-    if ( v24 )
-      v19 = LowProcess::LowProcess(v24);
-    Copy = v19->Copy;
-    v38 = this->members.super.process;
-    v48 = 0xFFFFFFFF;
-    Copy(v19, v38);
-    v26 = this->members.super.process;
-    if ( v26 )
-      ((void (__thiscall *)(LowProcess *, int))v26->Destructor)(v26, 1);
-    this->members.super.process = v19;
-    v19->Unk_2D(v19, (UInt32)this);
-    sub_673A90((int)this, 3, 1, 0, 0);
-    if ( v20 )
+    v22 = (LowProcess *)FormHeapAlloc(0x90u); /*0x5eb79d*/
+    v46 = 0; /*0x5eb7ab*/
+    if ( v22 ) /*0x5eb7af*/
+      v17 = LowProcess::LowProcess(v22); /*0x5eb7b8*/
+    Copy = v17->Copy; /*0x5eb7bf*/
+    v36 = self->members.super.process; /*0x5eb7c2*/
+    v46 = 0xFFFFFFFF; /*0x5eb7c5*/
+    Copy(v17, v36); /*0x5eb7cd*/
+    v24 = self->members.super.process; /*0x5eb7cf*/
+    if ( v24 ) /*0x5eb7d4*/
+      ((void (__thiscall *)(LowProcess *, int))v24->Destructor)(v24, 1); /*0x5eb7dc*/
+    self->members.super.process = v17; /*0x5eb7de*/
+    v17->Unk_2D(v17, (UInt32)self); /*0x5eb7ec*/
+    ActorProcessManager_AddMobileObject((ActorProcessManager *)&qword_B3BB2C[0x75], (MobileObject *)self, 3, 1, 0, 0); /*0x5eb7fc*/
+    if ( v18 ) /*0x5eb803*/
     {
-      v27 = this->members.super.process;
-      v19 = (LowProcess *)v27->__vftable;
-      v28 = ((int (__thiscall *)(LowProcess *, _DWORD, _DWORD, _DWORD, int))v27->GetUnk01E)(v27, 0, 0, 0, 1);
-      ((void (__thiscall *)(LowProcess *, Actor *, TESForm *, _DWORD, _DWORD, _DWORD, int))v19[3].avDamageModifiers.magicka)(
-        this->members.super.process,
-        this,
-        v21,
+      v25 = self->members.super.process; /*0x5eb805*/
+      v17 = (LowProcess *)v25->__vftable; /*0x5eb808*/
+      v26 = ((int (__thiscall *)(LowProcess *, _DWORD, _DWORD, _DWORD, int))v25->GetUnk01E)(v25, 0, 0, 0, 1); /*0x5eb818*/
+      ((void (__thiscall *)(LowProcess *, Actor *, TESForm *, _DWORD, _DWORD, _DWORD, int))v17[3].avDamageModifiers.magicka)( /*0x5eb82f*/
+        self->members.super.process,
+        self,
+        v19,
         0,
-        LODWORD(v47[2]),
+        LODWORD(v45[2]),
         0,
-        v28);
+        v26);
     }
-    else if ( v42 )
+    else if ( v40 ) /*0x5eb838*/
     {
-      this->members.super.process->Unk_06(this->members.super.process, (UInt32)this, 0);
+      self->members.super.process->Unk_06(self->members.super.process, (UInt32)self, 0); /*0x5eb845*/
     }
-    result = TESDataHandler;
-    if ( TESDataHandler )
+    if ( g_TESDataHandler && !g_TESDataHandler->activeFileState.unknownAfterActiveFileState[2] ) /*0x5eb854*/
     {
-      if ( !*(_BYTE *)(result + 0xCD4) )
+      if ( v40 ) /*0x5eb866*/
+        self->members.super.process->Unk_06(self->members.super.process, (UInt32)self, 0); /*0x5eb873*/
+      if ( !self->vtbl->IsInCombat(self, 1) ) /*0x5eb885*/
       {
-        if ( v42 )
-          this->members.super.process->Unk_06(this->members.super.process, (UInt32)this, 0);
-        if ( !this->vtbl->IsInCombat(this, 1) )
+        if ( ((unsigned __int8 (__thiscall *)(Actor *))self->vtbl->super.super.super.Unk_1E)(self) /*0x5ebac8*/
+          && BYTE2(self->members.unk0B4[5])
+          || (sub_5E3220(self) || sub_5E30A0((TESObjectREFR *)self))
+          && (PlayerCharacter *)self->members.super.process->GetUnk02C(self->members.super.process) == reference )
         {
-          if ( ((unsigned __int8 (__thiscall *)(Actor *))this->vtbl->super.super.super.Unk_1E)(this)
-            && BYTE2(this->members.unk0B4[5])
-            || (sub_5E3220(this) || sub_5E30A0((TESObjectREFR *)this))
-            && (result = (int)this->members.super.process->GetUnk02C(this->members.super.process),
-                (PlayerCharacter *)result == TESDataHandler_g_PlayerRef) )
+          v34 = self->members.super.process->__vftable; /*0x5ebacd*/
+          v44 = TimeGlobals_GetGameHour(&MEMORY[0xB332E0]) - dbl_A2F928; /*0x5ebae6*/
+          ((void (__thiscall *)(LowProcess *, _DWORD))v34->SetCurHour)(self->members.super.process, LODWORD(v44)); /*0x5ebaf1*/
+          sub_674550((int)self, 3); /*0x5ebafb*/
+          ActorProcessManager_AddMobileObject( /*0x5ebb0e*/
+            (ActorProcessManager *)&qword_B3BB2C[0x75],
+            (MobileObject *)self,
+            3,
+            0,
+            0,
+            0);
+        }
+        goto LABEL_83; /*0x5ebb0e*/
+      }
+      if ( (PlayerCharacter *)((int (__thiscall *)(LowProcess *))self->members.super.process->Unk_F3)(self->members.super.process) == reference ) /*0x5eb89e*/
+      {
+        v27 = self->members.super.process->__vftable; /*0x5eb8a3*/
+        v41 = TimeGlobals_GetGameHour(&MEMORY[0xB332E0]) - dbl_A2FAA0; /*0x5eb8bc*/
+        ((void (__thiscall *)(LowProcess *, _DWORD))v27->SetCurHour)(self->members.super.process, LODWORD(v41)); /*0x5eb8c7*/
+      }
+      else
+      {
+        if ( sub_5E6CD0((TESObjectREFR *)self, 0) || self->vtbl->IsYielding(self) || !self->vtbl->GetCombatTarget(self) ) /*0x5eb8fd*/
+        {
+          if ( self->vtbl->GetCombatController(self) ) /*0x5eba64*/
           {
-            v36 = this->members.super.process->__vftable;
-            v46 = TimeGlobals_GetGameHour(&TimeGlobals) - dbl_A2F928;
-            v37 = ((double (__thiscall *)(LowProcess *, _DWORD))v36->SetCurHour)(
-                    this->members.super.process,
-                    LODWORD(v46));
-            sub_674550((char)v21, v3, v4, v37, (int)this, 3);
-            sub_673A90((int)this, 3, 0, 0, 0);
+            v38 = (TESObjectREFR *)reference; /*0x5eba78*/
+            v33 = (float *)self->vtbl->GetCombatController(self); /*0x5eba7b*/
+            CombatController_RemoveTarget(v33, v38); /*0x5eba7f*/
+            goto LABEL_83; /*0x5eba84*/
           }
-          goto LABEL_83;
-        }
-        if ( (PlayerCharacter *)((int (__thiscall *)(LowProcess *))this->members.super.process->Unk_F3)(this->members.super.process) == TESDataHandler_g_PlayerRef )
-        {
-          v29 = this->members.super.process->__vftable;
-          v43 = TimeGlobals_GetGameHour(&TimeGlobals) - dbl_A2FAA0;
-          result = ((int (__thiscall *)(LowProcess *, _DWORD))v29->SetCurHour)(
-                     this->members.super.process,
-                     LODWORD(v43));
         }
         else
         {
-          if ( sub_5E6CD0((TESObjectREFR *)this, 0)
-            || this->vtbl->IsYielding(this)
-            || !this->vtbl->GetCombatTarget(this) )
+          if ( (PlayerCharacter *)self->vtbl->GetCombatTarget(self) == reference /*0x5eb934*/
+            && (signed int)reference->unk110 <= (int)stru_B37D18.value
+            && Actor::CanUSeDoor_(self) )
           {
-            if ( this->vtbl->GetCombatController(this) )
+            if ( self->vtbl->GetCombatTarget(self)[3].member.modlist.data ) /*0x5eb950*/
             {
-              v40 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-              v35 = this->vtbl->GetCombatController(this);
-              result = (int)sub_6162D0(v35, v40);
-              goto LABEL_83;
-            }
-          }
-          else
-          {
-            if ( (PlayerCharacter *)this->vtbl->GetCombatTarget(this) == TESDataHandler_g_PlayerRef
-              && (signed int)TESDataHandler_g_PlayerRef->unk110 <= dword_B37D18
-              && Actor::CanUSeDoor_(this) )
-            {
-              if ( this->vtbl->GetCombatTarget(this)[3].member.modlist.data )
+              v28 = (Actor *)self->vtbl->GetCombatTarget(self); /*0x5eb964*/
+              if ( !Actor::GetProcessLevel(v28) ) /*0x5eb968*/
               {
-                v30 = (Actor *)this->vtbl->GetCombatTarget(this);
-                if ( !Actor::GetProcessLevel(v30) )
+                v29 = self->members.super.process->__vftable; /*0x5eb978*/
+                v42 = TimeGlobals_GetGameHour(&MEMORY[0xB332E0]) - dbl_A2F928; /*0x5eb991*/
+                ((void (__thiscall *)(LowProcess *, _DWORD))v29->SetCurHour)(self->members.super.process, LODWORD(v42)); /*0x5eb99c*/
+                self->vtbl->GetCombatTarget(self); /*0x5eb9a8*/
+                v43 = *(float *)&dword_A46C30; /*0x5eb9b5*/
+                ++reference->unk110; /*0x5eb9b9*/
+                p_lastActivatedLoadDoor = (void **)&reference->lastActivatedLoadDoor; /*0x5eb9c6*/
+                if ( *p_lastActivatedLoadDoor ) /*0x5eb9cc*/
                 {
-                  v31 = this->members.super.process->__vftable;
-                  v44 = TimeGlobals_GetGameHour(&TimeGlobals) - dbl_A2F928;
-                  ((void (__thiscall *)(LowProcess *, _DWORD))v31->SetCurHour)(
-                    this->members.super.process,
-                    LODWORD(v44));
-                  this->vtbl->GetCombatTarget(this);
-                  v45 = *(float *)&dword_A46C30;
-                  ++TESDataHandler_g_PlayerRef->unk110;
-                  p_lastActivatedLoadDoor = &TESDataHandler_g_PlayerRef->lastActivatedLoadDoor;
-                  if ( *p_lastActivatedLoadDoor )
+                  v31 = Shared_GetDwordAtOffset40(self); /*0x5eb9da*/
+                  if ( v31 == Shared_GetDwordAtOffset40(*p_lastActivatedLoadDoor) ) /*0x5eb9e3*/
                   {
-                    v33 = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-                    if ( v33 == TESObjectREFR_GetParentCell(*p_lastActivatedLoadDoor) )
-                    {
-                      v39 = TESDataHandler_g_PlayerRef->lastActivatedLoadDoor->vtbl->GetPos(TESDataHandler_g_PlayerRef->lastActivatedLoadDoor);
-                      v34 = this->vtbl->super.super.GetPos(this);
-                      sub_4121A0(v34, v47, v39);
-                      v45 = sub_404C90(v47) / dbl_A3DDE0;
-                    }
+                    v37 = reference->lastActivatedLoadDoor->vtbl->GetPos(reference->lastActivatedLoadDoor); /*0x5eb9fc*/
+                    v32 = self->vtbl->super.super.GetPos(self); /*0x5eba0a*/
+                    sub_4121A0(v32, v45, v37); /*0x5eba0e*/
+                    v43 = NiPoint3_Length(v45) / dbl_A3DDE0; /*0x5eba22*/
                   }
-                  result = ((int (__stdcall *)(_DWORD))this->members.super.process->GetUnk028)(LODWORD(v45));
-                  goto LABEL_83;
                 }
+                ((void (__stdcall *)(_DWORD))self->members.super.process->GetUnk028)(LODWORD(v43)); /*0x5eba39*/
+                goto LABEL_83; /*0x5eba3b*/
               }
             }
-            ((void (__thiscall *)(Actor *, _DWORD))this->vtbl->Unk_D0)(this, 0);
           }
-          sub_5EAE70(this, v20, (int)v19, v41);
+          ((void (__thiscall *)(Actor *, _DWORD))self->vtbl->Unk_D0)(self, 0); /*0x5eba4c*/
         }
-LABEL_83:
-        BYTE2(this->members.unk0B4[5]) = 1;
+        sub_5EAE70(self, v18, (int)v17, v39); /*0x5eba50*/
       }
+LABEL_83:
+      BYTE2(self->members.unk0B4[5]) = 1; /*0x5ebb13*/
     }
   }
-  LOBYTE(result) = 1;
-  return result;
+  return 1; /*0x5ebb1c*/
 }

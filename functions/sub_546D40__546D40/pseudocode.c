@@ -1,4 +1,4 @@
-double __cdecl sub_546D40(_DWORD *a1, int a2, int a3, char a4, float a5)
+double __cdecl sub_546D40(_DWORD *a1, SInt32 skillValue, SInt32 luckValue, char a4, float a5)
 {
   double v5; // st7
   char v6; // bl
@@ -12,24 +12,24 @@ double __cdecl sub_546D40(_DWORD *a1, int a2, int a3, char a4, float a5)
   float v16; // [esp+28h] [ebp+14h]
   float v17; // [esp+28h] [ebp+14h]
 
-  v11 = Calc_LuckModifiedSkill(a2, a3) / fCostant_100;
-  v12 = (double)(*(char (__thiscall **)(_DWORD *))(*a1 + 0x108))(a1);
-  v13 = sub_4A9F70(a1) + v12;
-  v5 = sub_4A9F30(a1);
-  v6 = LOBYTE(a5);
-  *(float *)&v14 = v5 * v11 + v13;
-  if ( LOBYTE(a5) )
-    v8 = sub_4A9FB0(a1);
+  v11 = Calc_LuckModifiedSkill(skillValue, luckValue) / fCostant_100; /*0x546d6b*/
+  v12 = (double)(*(char (__thiscall **)(_DWORD *))(*a1 + 0x108))(a1); /*0x546d7e*/
+  v13 = sub_4A9F70(a1) + v12; /*0x546d8d*/
+  v5 = sub_4A9F30(a1); /*0x546d91*/
+  v6 = LOBYTE(a5); /*0x546d9a*/
+  *(float *)&v14 = v5 * v11 + v13; /*0x546da6*/
+  if ( LOBYTE(a5) ) /*0x546daa*/
+    v8 = sub_4A9FB0(a1); /*0x546dac*/
   else
-    v8 = sub_4A9FF0(a1);
-  v16 = v8;
-  *(float *)&v15 = v16 * *(float *)&v14;
-  if ( a4 )
-    return *(float *)&v15;
-  if ( v6 )
-    v10 = 1.0;
+    v8 = sub_4A9FF0(a1); /*0x546db3*/
+  v16 = v8; /*0x546dbd*/
+  *(float *)&v15 = v16 * *(float *)&v14; /*0x546dc9*/
+  if ( a4 ) /*0x546dcd*/
+    return *(float *)&v15; /*0x546dd9*/
+  if ( v6 ) /*0x546de3*/
+    v10 = 1.0; /*0x546de5*/
   else
-    v10 = flt_A41304;
-  v17 = v10;
-  return (float)(fBlockScoreNoShieldMult * *(float *)&v15 * v17);
+    v10 = flt_A41304; /*0x546de9*/
+  v17 = v10; /*0x546def*/
+  return (float)(g_GameSettingStringPointers_B36CD8[0x8E] * *(float *)&v15 * v17); /*0x546ddd*/
 }

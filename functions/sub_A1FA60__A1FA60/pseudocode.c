@@ -1,4 +1,4 @@
 void __cdecl sub_A1FA60()
 {
-  GameSetting_destr((int *)&fRepairArmorerMult);
+  GameSetting_destr((int *)&MEMORY[0xB37998][2]); /*0xa1fa65*/
 }

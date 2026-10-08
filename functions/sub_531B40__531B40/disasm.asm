@@ -70,10 +70,10 @@
 0x531C04: jnz     short loc_531BC0
 0x531C06: mov     edi, [esp+2Ch+var_18]
 0x531C0A: mov     ecx, edi
-0x531C0C: call    sub_530620
+0x531C0C: call    TESTopicInfo_ClearSharedResponseCache
 0x531C11: mov     ebx, [esp+2Ch+a2]
-0x531C15: mov     ecx, ebx
-0x531C17: call    sub_530C40
+0x531C15: mov     ecx, ebx; this
+0x531C17: call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.
 0x531C1C: cmp     eax, ebp
 0x531C1E: jz      loc_531CC3
 0x531C24: jmp     short loc_531C2A
@@ -90,17 +90,17 @@
 0x531C49: cmp     eax, ebp
 0x531C4B: mov     [esp+2Ch+var_4], ebp
 0x531C4F: jz      short loc_531C5C
-0x531C51: mov     ecx, eax
-0x531C53: call    sub_52E150
+0x531C51: mov     ecx, eax; this
+0x531C53: call    TESResponse__TESResponse; TESResponse defaults before TRDT overlay: DWORD0=0, DWORD4=50, DWORD8=0, byte12=0; bytes13..15 are not explicitly initialized. Response text starts empty.
 0x531C58: mov     edi, eax
 0x531C5A: jmp     short loc_531C5E
 0x531C5C: xor     edi, edi
-0x531C5E: push    esi
-0x531C5F: mov     ecx, edi
+0x531C5E: push    esi; source
+0x531C5F: mov     ecx, edi; this
 0x531C61: mov     [esp+30h+var_4], 0FFFFFFFFh
-0x531C69: call    sub_52E110
-0x531C6E: mov     ecx, [esp+2Ch+var_18]
-0x531C72: call    sub_530C40
+0x531C69: call    TESResponse__CopyFrom; Copy the complete 16-byte TRDT payload and deep-copy responseText into the destination TESResponse. This is the ownership boundary between the global shared INFO response cache and each caller's temporary list.
+0x531C6E: mov     ecx, [esp+2Ch+var_18]; this
+0x531C72: call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.
 0x531C77: cmp     edi, ebp
 0x531C79: jz      short loc_531CB3
 0x531C7B: mov     esi, eax
@@ -130,13 +130,13 @@
 0x531CB7: cmp     ebx, ebp
 0x531CB9: mov     ebx, [esp+2Ch+a2]
 0x531CBD: jnz     loc_531C26
-0x531CC3: mov     ecx, ebx
-0x531CC5: call    sub_531290
+0x531CC3: mov     ecx, ebx; this
+0x531CC5: call    TESTopicInfo__GetResultScript; Oblivion lazy INFO result-script loader. For a newly requested INFO, initializes a fresh shared temporary Script, opens the winning override record saved by the main INFO loader, and replays its entire chunk stream. Recognized result-script tags are SCHR, SCDA, and SCRO only. SCHD, SCTX, SLSD, SCVR, and SCRV are ignored. Repeated SCHR prefix-overlays ScriptInfo, repeated SCDA replaces compiled storage/size, and every SCRO appends in stream order. No inherited base-script state is reconstructed for a partial override.
 0x531CCA: push    eax
-0x531CCB: mov     ecx, edi
-0x531CCD: call    sub_531290
+0x531CCB: mov     ecx, edi; this
+0x531CCD: call    TESTopicInfo__GetResultScript; Oblivion lazy INFO result-script loader. For a newly requested INFO, initializes a fresh shared temporary Script, opens the winning override record saved by the main INFO loader, and replays its entire chunk stream. Recognized result-script tags are SCHR, SCDA, and SCRO only. SCHD, SCTX, SLSD, SCVR, and SCRV are ignored. Repeated SCHR prefix-overlays ScriptInfo, repeated SCDA replaces compiled storage/size, and every SCRO appends in stream order. No inherited base-script state is reconstructed for a partial override.
 0x531CD2: mov     ecx, eax
-0x531CD4: call    sub_4FC7A0
+0x531CD4: call    Script_CopyFrom; Deep-copy Script state from another Script: copy the five ScriptInfo dwords, replace compiled data through Script_SetCompiledData, copy variables/references/source text, and mirror linked state. TESTopicInfo::GetResultScript uses this to reset its shared cache from a freshly constructed default Script before scanning the winning INFO record.
 0x531CD9: mov     dx, [ebx+20h]
 0x531CDD: lea     eax, [ebx+18h]
 0x531CE0: push    eax
@@ -164,3 +164,15 @@
 0x531D1E: pop     ebx
 0x531D1F: add     esp, 18h
 0x531D22: retn    4
+0x9B8CE0: mov     eax, [ebp-10h]
+0x9B8CE3: push    eax
+0x9B8CE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8CE9: pop     ecx
+0x9B8CEA: retn
+0x9B8CEB: mov     edx, [esp+a2]
+0x9B8CEF: lea     eax, [edx-1Ch]
+0x9B8CF2: mov     ecx, [edx-20h]
+0x9B8CF5: xor     ecx, eax
+0x9B8CF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8CFC: mov     eax, offset stru_AE3140
+0x9B8D01: jmp     ___CxxFrameHandler3

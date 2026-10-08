@@ -5,683 +5,678 @@ void __usercall sub_5A6DE0(int a1@<ecx>, double st5_0@<st2>, double st6_0@<st1>,
   double v7; // st4
   double v8; // st4
   Tile *v9; // ecx
-  int v10; // eax
-  _DWORD *v11; // ecx
-  char *v12; // edx
-  _DWORD *v13; // eax
-  TESObjectREFR *v14; // ecx
-  TESObjectCELL *ParentCell; // eax
-  double v16; // st7
-  int v17; // ecx
-  Tile *v18; // ecx
-  int v19; // eax
-  TESModel **v20; // edx
-  TESModel ***v21; // ecx
-  TESModel **v22; // edi
-  TESModel *v23; // eax
-  float *v24; // eax
-  TESModel *v25; // ecx
+  int m_data; // esi
+  int v11; // eax
+  _DWORD *v12; // ecx
+  char *v13; // edx
+  _DWORD *v14; // eax
+  PlayerCharacter *v15; // ecx
+  ExtraDataList *DwordAtOffset40; // eax
+  double v17; // st7
+  int v18; // ecx
+  Tile *v19; // ecx
+  double v20; // st7
+  char *v21; // eax
+  _DWORD *v22; // ecx
+  TESModel **v23; // edi
+  TESModel *v24; // eax
+  float *v25; // eax
   TESModel *v26; // ecx
-  const char *v27; // esi
+  TESModel *v27; // ecx
+  const char *value; // esi
   const char *ModelPath; // eax
-  char *m_data; // esi
   double v30; // st6
-  BSStringT *TileFromTemplate; // esi
-  char v32; // al
-  TESModel *v33; // ecx
-  float *v34; // eax
-  const char *v35; // eax
-  double v36; // st7
-  _DWORD *v37; // eax
-  int v38; // ebp
-  _DWORD *v39; // ecx
-  int v40; // edi
-  _DWORD *v41; // edx
-  int v42; // eax
-  float *v43; // eax
-  double v44; // st4
-  unsigned int *v45; // esi
-  float *v46; // eax
-  TESObjectCELL *v47; // eax
-  double v48; // st7
-  char *v49; // edi
-  double v50; // st4
-  TESObjectREFR *v51; // edi
-  BSStringT *v52; // esi
-  unsigned int *v53; // eax
-  UInt32 refID; // ecx
-  int v55; // eax
-  _DWORD *v56; // ecx
-  _DWORD *v57; // edx
-  _DWORD *v58; // eax
-  _DWORD *v59; // eax
-  _DWORD *v60; // ecx
-  _DWORD *v61; // edx
-  TESObjectCELL *v62; // eax
-  double v63; // st7
-  double v64; // st4
-  Tile *v65; // ecx
-  _DWORD *v66; // esi
-  Tile *v67; // eax
-  unsigned int v68; // edi
-  _DWORD *v69; // ebp
-  unsigned int v70; // eax
-  _DWORD *v71; // edi
-  int i; // esi
-  Tile *v73; // eax
-  double v74; // st4
-  _DWORD *v75; // edi
+  char v31; // al
+  TESModel *v32; // ecx
+  float *v33; // eax
+  const char *v34; // eax
+  double v35; // st7
+  _DWORD *v36; // eax
+  int v37; // ebp
+  _DWORD *v38; // ecx
+  int v39; // edi
+  _DWORD *v40; // edx
+  int v41; // eax
+  float *v42; // eax
+  double v43; // st4
+  float *v44; // eax
+  ExtraDataList *v45; // eax
+  double v46; // st7
+  char *v47; // edi
+  double v48; // st4
+  PlayerCharacter *v49; // edi
+  Tile *v50; // eax
+  UInt32 unk63C; // ecx
+  int v52; // eax
+  _DWORD *v53; // ecx
+  _DWORD *v54; // edx
+  _DWORD *v55; // eax
+  _DWORD *v56; // eax
+  _DWORD *v57; // ecx
+  _DWORD *v58; // edx
+  ExtraDataList *v59; // eax
+  double v60; // st7
+  double v61; // st4
+  Tile *v62; // ecx
+  Tile *v63; // eax
+  OblivionTileTemplateList *v64; // edi
+  Menu *v65; // ebp
+  unsigned int v66; // eax
+  Menu *v67; // edi
+  Tile *v68; // eax
+  double v69; // st4
+  Menu *v70; // edi
   double AVModifierf; // st4
-  int v77; // ecx
+  int *v72; // ecx
+  int v73; // ecx
+  double v74; // st4
+  bool v75; // c0
+  bool v76; // c3
+  double v77; // st4
   double v78; // st4
-  bool v79; // c0
-  bool v80; // c3
+  int *v79; // ecx
+  int v80; // ecx
   double v81; // st4
-  double v82; // st4
-  int v83; // ecx
+  bool v82; // c0
+  bool v83; // c3
   double v84; // st4
-  bool v85; // c0
-  bool v86; // c3
-  double v87; // st4
+  double v85; // st4
+  int *v86; // ecx
+  int v87; // ecx
   double v88; // st4
-  int v89; // ecx
-  double v90; // st4
-  bool v91; // c0
-  bool v92; // c3
-  double v93; // st4
-  PlayerCharacter *v94; // eax
-  void **v95; // eax
-  int v96; // ecx
-  void **v97; // esi
-  PlayerCharacter *v98; // ecx
-  Sky *v99; // eax
-  int v100; // ecx
-  _BYTE *v101; // esi
-  PlayerCharacter *v102; // ecx
+  bool v89; // c0
+  bool v90; // c3
+  double v91; // st4
+  PlayerCharacter *v92; // eax
+  void **v93; // eax
+  int v94; // ecx
+  void **v95; // esi
+  PlayerCharacter *v96; // ecx
+  TESHealthForm *v97; // eax
+  int v98; // ecx
+  _BYTE *v99; // esi
+  PlayerCharacter *v100; // ecx
   MagicCasterVtbl *vtbl; // esi
   int CurrentMagicItem; // eax
-  bool v105; // al
-  int v106; // ecx
-  Tile *v107; // ecx
-  BSStringT v108; // [esp+38h] [ebp-84h] BYREF
-  unsigned __int8 v109; // [esp+57h] [ebp-65h]
-  _DWORD *v110; // [esp+58h] [ebp-64h]
-  _DWORD *v111; // [esp+5Ch] [ebp-60h]
-  _DWORD *a3; // [esp+60h] [ebp-5Ch]
-  _DWORD *v113; // [esp+64h] [ebp-58h]
-  _DWORD *v114; // [esp+68h] [ebp-54h]
-  _DWORD *v115; // [esp+6Ch] [ebp-50h]
-  _DWORD *v116; // [esp+70h] [ebp-4Ch]
-  _DWORD *v117; // [esp+74h] [ebp-48h]
+  bool v103; // al
+  int v104; // ecx
+  Tile *unk14; // ecx
+  BSStringT v106; // [esp+38h] [ebp-84h] BYREF
+  unsigned __int8 unk18; // [esp+57h] [ebp-65h]
+  _DWORD *v108; // [esp+58h] [ebp-64h]
+  _DWORD *v109; // [esp+5Ch] [ebp-60h]
+  Menu *a3; // [esp+60h] [ebp-5Ch]
+  _DWORD *v111; // [esp+64h] [ebp-58h]
+  Tile *parent; // [esp+68h] [ebp-54h]
+  _DWORD *v113; // [esp+6Ch] [ebp-50h]
+  _DWORD *v114; // [esp+70h] [ebp-4Ch]
+  _DWORD *v115; // [esp+74h] [ebp-48h]
   BSStringT a2; // [esp+78h] [ebp-44h] BYREF
-  _DWORD *v119; // [esp+80h] [ebp-3Ch] BYREF
-  _DWORD *v120[2]; // [esp+84h] [ebp-38h]
-  _DWORD *v121[2]; // [esp+8Ch] [ebp-30h] BYREF
-  _DWORD *v122; // [esp+9Ch] [ebp-20h] BYREF
-  char *v123; // [esp+A0h] [ebp-1Ch]
-  _DWORD *v124; // [esp+A4h] [ebp-18h]
-  _DWORD *v125; // [esp+A8h] [ebp-14h]
-  int v126; // [esp+B8h] [ebp-4h]
+  _DWORD *v117; // [esp+80h] [ebp-3Ch] BYREF
+  _DWORD *v118[2]; // [esp+84h] [ebp-38h]
+  _DWORD *v119[2]; // [esp+8Ch] [ebp-30h] BYREF
+  _DWORD *v120; // [esp+9Ch] [ebp-20h] BYREF
+  char *v121; // [esp+A0h] [ebp-1Ch]
+  _DWORD *v122; // [esp+A4h] [ebp-18h]
+  _DWORD *v123; // [esp+A8h] [ebp-14h]
+  int v124; // [esp+B8h] [ebp-4h]
 
-  a3 = (_DWORD *)a1;
-  if ( TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef) )
+  a3 = (Menu *)a1; /*0x5a6e0f*/
+  if ( Shared_GetDwordAtOffset40(reference) ) /*0x5a6e19*/
   {
-    v5 = *(Tile **)(a1 + 0x54);
-    if ( v5 )
+    v5 = *(Tile **)(a1 + 0x54); /*0x5a6e26*/
+    if ( v5 ) /*0x5a6e2d*/
     {
-      v6 = TESDataHandler_g_PlayerRef->bCanLevelUp == 0;
-      *(_DWORD *)&v108.m_dataLen = *(_DWORD *)(a1 + 0x54);
-      if ( v6 )
-        v7 = 1.0;
+      v6 = reference->bCanLevelUp == 0; /*0x5a6e34*/
+      *(_DWORD *)&v106.m_dataLen = *(_DWORD *)(a1 + 0x54); /*0x5a6e3a*/
+      if ( v6 ) /*0x5a6e3b*/
+        v7 = 1.0; /*0x5a6e45*/
       else
-        v7 = fConstant_2;
-      *(float *)&v108.m_dataLen = v7;
-      Tile_SetFloat(v5, (_DWORD *)0xFA1, *(float *)&v108.m_dataLen);
+        v7 = fConstant_2; /*0x5a6e3d*/
+      *(float *)&v106.m_dataLen = v7; /*0x5a6e47*/
+      Tile_SetFloat(v5, 0xFA1u, *(float *)&v106.m_dataLen); /*0x5a6e4f*/
     }
-    if ( *(_DWORD *)(a1 + 0x4C) )
+    if ( *(_DWORD *)(a1 + 0x4C) ) /*0x5a6e54*/
     {
-      if ( sub_5790E0(0x3EB, 0) || sub_5790E0(0x3EA, 0) || sub_5790E0(0x3FE, 0) || sub_5790E0(0x3FF, 0) )
-        v8 = fConstant_2;
+      if ( InterfaceManager_IsMenuVisibleByID(0x3EB, 0) /*0x5a6e95*/
+        || InterfaceManager_IsMenuVisibleByID(0x3EA, 0)
+        || InterfaceManager_IsMenuVisibleByID(0x3FE, 0)
+        || InterfaceManager_IsMenuVisibleByID(0x3FF, 0) )
+      {
+        v8 = fConstant_2; /*0x5a6ea5*/
+      }
       else
-        v8 = 1.0;
-      v9 = *(Tile **)(a1 + 0x4C);
-      *(float *)&v108.m_dataLen = v8;
-      Tile_SetFloat(v9, (_DWORD *)0xFA1, *(float *)&v108.m_dataLen);
+      {
+        v8 = 1.0; /*0x5a6ea1*/
+      }
+      v9 = *(Tile **)(a1 + 0x4C); /*0x5a6eab*/
+      *(float *)&v106.m_dataLen = v8; /*0x5a6eaf*/
+      Tile_SetFloat(v9, 0xFA1u, *(float *)&v106.m_dataLen); /*0x5a6eb7*/
     }
-    v114 = *(_DWORD **)(a1 + 0x44);
-    if ( v114 )
+    parent = *(Tile **)(a1 + 0x44); /*0x5a6ec1*/
+    m_data = (int)parent; /*0x5a6ebc*/
+    if ( parent ) /*0x5a6ec5*/
     {
-      v10 = ((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>, double@<st2>))TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetPos)(
-              TESDataHandler_g_PlayerRef,
+      v11 = ((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>, double@<st2>))reference->vtbl->super.super.super.GetPos)( /*0x5a6ed9*/
+              reference,
               a4,
               st6_0,
               st5_0);
-      v11 = *(_DWORD **)v10;
-      v12 = *(char **)(v10 + 4);
-      v13 = *(_DWORD **)(v10 + 8);
-      v122 = v11;
-      v14 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-      v123 = v12;
-      v124 = v13;
-      ParentCell = TESObjectREFR_GetParentCell(v14);
-      *(double *)v121 = sub_4CCE00((ExtraDataList *)ParentCell);
-      *(float *)&v115 = (((double (__thiscall *)(PlayerCharacter *))TESDataHandler_g_PlayerRef->vtbl->super.super.GetZRotation)(TESDataHandler_g_PlayerRef)
-                       + *(double *)v121)
+      v12 = *(_DWORD **)v11; /*0x5a6edb*/
+      v13 = *(char **)(v11 + 4); /*0x5a6edd*/
+      v14 = *(_DWORD **)(v11 + 8); /*0x5a6ee0*/
+      v120 = v12; /*0x5a6ee3*/
+      v15 = reference; /*0x5a6ee7*/
+      v121 = v13; /*0x5a6eed*/
+      v122 = v14; /*0x5a6ef1*/
+      DwordAtOffset40 = (ExtraDataList *)Shared_GetDwordAtOffset40(v15); /*0x5a6ef5*/
+      *(double *)v119 = sub_4CCE00(DwordAtOffset40); /*0x5a6f01*/
+      *(float *)&v113 = (((double (__thiscall *)(PlayerCharacter *))reference->vtbl->super.super.GetZRotation)(reference) /*0x5a6f1f*/
+                       + *(double *)v119)
                       * dbl_A30DC8;
-      v16 = *(float *)&v115;
-      *(float *)&v115 = fabs(*(float *)&v115);
-      st6_0 = *(float *)&v115 / dbl_A56CA0;
-      v115 = (_DWORD *)(0x168 * Double_To_SInt32(v16));
-      *(_DWORD *)&v108.m_dataLen = v17;
-      v18 = *(Tile **)(a1 + 0x40);
-      *(float *)&v115 = v16 - (double)(int)v115;
-      a4 = *(float *)&v115;
-      Tile_SetFloat(v18, (_DWORD *)0xFAE, *(float *)&v115);
-      v19 = sub_65D260((char *)TESDataHandler_g_PlayerRef);
-      v110 = *((_DWORD **)v114 + 0xD);
-      v111 = (_DWORD *)1;
-      v21 = (TESModel ***)v19;
-      if ( v19 )
+      v17 = *(float *)&v113; /*0x5a6f23*/
+      *(float *)&v113 = fabs(*(float *)&v113); /*0x5a6f2b*/
+      st6_0 = *(float *)&v113 / dbl_A56CA0; /*0x5a6f3b*/
+      v113 = (_DWORD *)(0x168 * Double_To_SInt32(v17)); /*0x5a6f4c*/
+      *(_DWORD *)&v106.m_dataLen = v18; /*0x5a6f50*/
+      v19 = *(Tile **)(a1 + 0x40); /*0x5a6f51*/
+      *(float *)&v113 = v17 - (double)(int)v113; /*0x5a6f58*/
+      v20 = *(float *)&v113; /*0x5a6f5c*/
+      Tile_SetFloat(v19, 0xFAEu, *(float *)&v113); /*0x5a6f68*/
+      v21 = sub_65D260((char *)reference); /*0x5a6f73*/
+      v108 = *((_DWORD **)parent + 0xD); /*0x5a6f7d*/
+      v109 = (_DWORD *)1; /*0x5a6f81*/
+      v22 = v21; /*0x5a6f89*/
+      if ( v21 ) /*0x5a6f8b*/
       {
-        while ( 1 )
+        while ( 1 ) /*0x5a6f97*/
         {
-          v22 = *v21;
-          if ( !*v21 )
-            goto LABEL_43;
-          v20 = v21[1];
-          v23 = v22[1];
-          v6 = (*(_DWORD *)&v23->nifModel.m_dataLen & 0x800) == 0;
-          v115 = v20;
-          if ( v6 )
-            break;
+          v23 = (TESModel **)*v22; /*0x5a6f97*/
+          if ( !*v22 ) /*0x5a6f9b*/
+            goto LABEL_43; /*0x5a6f9b*/
+          v24 = v23[1]; /*0x5a6fa4*/
+          v6 = (*(_DWORD *)&v24->nifModel.m_dataLen & 0x800) == 0; /*0x5a6fad*/
+          v113 = *((_DWORD **)v22 + 1); /*0x5a6fb0*/
+          if ( v6 ) /*0x5a6fb4*/
+            break; /*0x5a6fb4*/
 LABEL_42:
-          if ( *(float *)&v115 == 0.0 )
-            goto LABEL_43;
-          v21 = (TESModel ***)v115;
+          if ( *(float *)&v113 == 0.0 ) /*0x5a7339*/
+            goto LABEL_43; /*0x5a7339*/
+          v22 = v113; /*0x5a6f93*/
         }
-        v24 = (float *)((int (__thiscall *)(TESModel *))v23->vtbl[0xD].super.CopyFromBase)(v23);
-        *(float *)&v116 = *v24 - *(float *)&v122;
-        *(float *)&v113 = v24[1] - *(float *)&v123;
-        *(float *)&v117 = v24[2] - *(float *)&v124;
-        st5_0 = *(float *)&v116 * *(float *)&v116;
-        *(float *)&v117 = *(float *)&v113 * *(float *)&v113 + st5_0 + *(float *)&v117 * *(float *)&v117;
-        *(float *)&v117 = sqrt(*(float *)&v117);
-        v25 = *v22;
-        v109 = 0;
-        *(float *)&v117 = fabs(*(float *)&v117);
-        v113 = v117;
-        if ( !sub_42B310(v25) && (double)dword_B37BC0 > *(float *)&v113 )
+        v25 = (float *)((int (__thiscall *)(TESModel *))v24->vtbl[0xD].super.CopyFromBase)(v24); /*0x5a6fc4*/
+        *(float *)&v114 = *v25 - *(float *)&v120; /*0x5a6fcc*/
+        *(float *)&v111 = v25[1] - *(float *)&v121; /*0x5a6fd7*/
+        *(float *)&v115 = v25[2] - *(float *)&v122; /*0x5a6fe2*/
+        st5_0 = *(float *)&v114 * *(float *)&v114; /*0x5a6ffa*/
+        *(float *)&v115 = *(float *)&v111 * *(float *)&v111 + st5_0 + *(float *)&v115 * *(float *)&v115; /*0x5a7002*/
+        *(float *)&v115 = sqrt(*(float *)&v115); /*0x5a700f*/
+        v26 = *v23; /*0x5a7017*/
+        unk18 = 0; /*0x5a701d*/
+        *(float *)&v115 = fabs(*(float *)&v115); /*0x5a7027*/
+        v111 = v115; /*0x5a702f*/
+        if ( !sub_42B310(v26) && (double)SLODWORD(MEMORY[0xB37A58][0x5A]) > *(float *)&v111 ) /*0x5a704d*/
         {
-          AddMapMarker(*v22, 1);
-          v22[1]->vtbl[2].super.CopyFromBase((BaseFormComponent *)v22[1], (BaseFormComponent *)0x400);
-          v109 = 1;
+          AddMapMarker(*v23, 1); /*0x5a7053*/
+          v23[1]->vtbl[2].super.CopyFromBase((BaseFormComponent *)v23[1], (BaseFormComponent *)0x400); /*0x5a7065*/
+          unk18 = 1; /*0x5a7067*/
         }
-        if ( sub_42B340(*v22) || (double)dword_B37BC0 <= *(float *)&v113 )
+        if ( sub_42B340(*v23) || (double)SLODWORD(MEMORY[0xB37A58][0x5A]) <= *(float *)&v111 ) /*0x5a7088*/
         {
-          if ( !v109 )
-            goto LABEL_30;
+          if ( !unk18 ) /*0x5a70ad*/
+            goto LABEL_30; /*0x5a70ad*/
         }
         else
         {
-          sub_42B350(*v22, 1);
-          v22[1]->vtbl[2].super.CopyFromBase((BaseFormComponent *)v22[1], (BaseFormComponent *)0x400);
-          v109 = 1;
+          sub_42B350(*v23, 1); /*0x5a708e*/
+          v23[1]->vtbl[2].super.CopyFromBase((BaseFormComponent *)v23[1], (BaseFormComponent *)0x400); /*0x5a70a0*/
+          unk18 = 1; /*0x5a70a2*/
         }
-        if ( !TESDataHandler_g_PlayerRef->vtbl->super.super.super.IsDead((TESObjectREFR *)TESDataHandler_g_PlayerRef, 0) )
+        if ( !reference->vtbl->super.super.super.IsDead((TESObjectREFR *)reference, 0) ) /*0x5a70c2*/
         {
-          a2.m_data = 0;
-          *(_DWORD *)&a2.m_dataLen = 0;
-          v26 = *v22;
-          v27 = *(const char **)dword_B38C20;
-          v126 = 0;
-          ModelPath = TESModel_GetModelPath(v26);
-          BSStringT_Static_Format(&a2, "%s %s.", v27, ModelPath);
-          m_data = a2.m_data;
-          GameUI_QueueMessage(a2.m_data, 0, 1u, flt_A31E2C);
-          ++TESDataHandler_g_PlayerRef->miscStats[7];
-          v121[0] = v22[1];
-          LOWORD(v121[1]) = 0x100;
-          sub_5A65B0((int)v121);
-          v126 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)m_data);
-          a2.m_data = 0;
-          *(_DWORD *)&a2.m_dataLen = 0;
+          a2.m_data = 0; /*0x5a70cc*/
+          *(_DWORD *)&a2.m_dataLen = 0; /*0x5a70d0*/
+          v27 = *v23; /*0x5a70da*/
+          value = stru_B38C20.value; /*0x5a70dc*/
+          v124 = 0; /*0x5a70e2*/
+          ModelPath = TESModel_GetModelPath(v27); /*0x5a70e6*/
+          BSStringT_Static_Format(&a2, "%s %s.", value, ModelPath); /*0x5a70f7*/
+          m_data = (int)a2.m_data; /*0x5a7102*/
+          GameUI_QueueMessage(a2.m_data, 0, 1u, flt_A31E2C); /*0x5a7111*/
+          ++reference->miscStats[7]; /*0x5a711b*/
+          v119[0] = v23[1]; /*0x5a712a*/
+          LOWORD(v119[1]) = 0x100; /*0x5a712e*/
+          sub_5A65B0((int)v119); /*0x5a7137*/
+          v124 = 0xFFFFFFFF; /*0x5a713d*/
+          FormHeapFree(m_data); /*0x5a7148*/
+          a2.m_data = 0; /*0x5a7150*/
+          *(_DWORD *)&a2.m_dataLen = 0; /*0x5a7159*/
 LABEL_33:
-          a4 = *(float *)&v113;
-          st6_0 = (double)dword_B37BC8;
-          if ( st6_0 >= *(float *)&v113 )
+          v20 = *(float *)&v111; /*0x5a71b4*/
+          st6_0 = (double)SLODWORD(MEMORY[0xB37A58][0x5C]); /*0x5a71b8*/
+          if ( st6_0 >= *(float *)&v111 ) /*0x5a71c5*/
           {
-            if ( *(float *)&v110 == 0.0 )
+            if ( *(float *)&v108 == 0.0 ) /*0x5a71cf*/
             {
-              TileFromTemplate = (BSStringT *)Menu_CreateTileFromTemplate(
-                                                (_DWORD *)a1,
-                                                st5_0,
-                                                st6_0,
-                                                a4,
-                                                (TileWindow *)v114,
-                                                "hudmain_compass_icon",
-                                                0);
+              m_data = (int)Menu::RenderTemplate((Menu *)a1, parent, "hudmain_compass_icon", 0); /*0x5a71f5*/
             }
             else
             {
-              TileFromTemplate = (BSStringT *)v110[2];
-              v110 = *(_DWORD **)v110;
+              m_data = v108[2]; /*0x5a71d5*/
+              v108 = *(_DWORD **)v108; /*0x5a71dd*/
             }
-            if ( TileFromTemplate )
+            if ( m_data ) /*0x5a71f9*/
             {
-              v32 = sub_42B310(*v22);
-              v33 = v22[1];
-              v109 |= v32;
-              v34 = (float *)((int (__thiscall *)(TESModel *))v33->vtbl[0xD].super.CopyFromBase)(v33);
-              *(float *)&v117 = sub_5A62D0((float *)&v122, v34);
-              v35 = TESModel_GetModelPath(*v22);
-              BSStringT_Set(TileFromTemplate + 1, v35, 0);
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAE, *(float *)&v117);
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAF, *(float *)&v113);
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB0, fConstant_2);
-              *(float *)&v117 = COERCE_FLOAT(sub_42B370((unsigned __int16 *)*v22));
-              *(float *)&v108.m_dataLen = (float)(int)v117;
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB3, *(float *)&v108.m_dataLen);
-              if ( !sub_42B340(*v22) || (v113 = (_DWORD *)2, !v109) )
-                v113 = (_DWORD *)1;
-              *(float *)&v108.m_dataLen = (float)(int)v113;
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB4, *(float *)&v108.m_dataLen);
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB7, fConstant_2);
-              *(float *)&v108.m_dataLen = (float)(int)v111;
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAB, *(float *)&v108.m_dataLen);
-              v36 = fConstant_2;
-              v111 = (_DWORD *)((char *)v111 + 1);
-              *(float *)&v108.m_dataLen = v36;
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFA1, *(float *)&v108.m_dataLen);
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB9, 1.0);
-              a4 = 1.0;
-              Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFBA, 1.0);
+              v31 = sub_42B310(*v23); /*0x5a7201*/
+              v32 = v23[1]; /*0x5a7206*/
+              unk18 |= v31; /*0x5a7209*/
+              v33 = (float *)((int (__thiscall *)(TESModel *))v32->vtbl[0xD].super.CopyFromBase)(v32); /*0x5a7215*/
+              *(float *)&v115 = sub_5A62D0((float *)&v120, v33); /*0x5a7222*/
+              v34 = TESModel_GetModelPath(*v23); /*0x5a722b*/
+              BSStringT_Set((BSStringT *)(m_data + 8), v34, 0); /*0x5a7235*/
+              Tile_SetFloat((Tile *)m_data, 0xFAEu, *(float *)&v115); /*0x5a7249*/
+              Tile_SetFloat((Tile *)m_data, 0xFAFu, *(float *)&v111); /*0x5a725d*/
+              Tile_SetFloat((Tile *)m_data, 0xFB0u, fConstant_2); /*0x5a7273*/
+              *(float *)&v115 = COERCE_FLOAT(sub_42B370((unsigned __int16 *)*v23)); /*0x5a727f*/
+              *(float *)&v106.m_dataLen = (float)(int)v115; /*0x5a728a*/
+              Tile_SetFloat((Tile *)m_data, 0xFB3u, *(float *)&v106.m_dataLen); /*0x5a7292*/
+              if ( !sub_42B340(*v23) || (v111 = (_DWORD *)2, !unk18) ) /*0x5a72ae*/
+                v111 = (_DWORD *)1; /*0x5a72b0*/
+              *(float *)&v106.m_dataLen = (float)(int)v111; /*0x5a72bf*/
+              Tile_SetFloat((Tile *)m_data, 0xFB4u, *(float *)&v106.m_dataLen); /*0x5a72c7*/
+              Tile_SetFloat((Tile *)m_data, 0xFB7u, fConstant_2); /*0x5a72dd*/
+              *(float *)&v106.m_dataLen = (float)(int)v109; /*0x5a72e9*/
+              Tile_SetFloat((Tile *)m_data, 0xFABu, *(float *)&v106.m_dataLen); /*0x5a72f1*/
+              v35 = fConstant_2; /*0x5a72f6*/
+              v109 = (_DWORD *)((char *)v109 + 1); /*0x5a72fc*/
+              *(float *)&v106.m_dataLen = v35; /*0x5a7302*/
+              Tile_SetFloat((Tile *)m_data, 0xFA1u, *(float *)&v106.m_dataLen); /*0x5a730c*/
+              Tile_SetFloat((Tile *)m_data, 0xFB9u, 1.0); /*0x5a731e*/
+              v20 = 1.0; /*0x5a7323*/
+              Tile_SetFloat((Tile *)m_data, 0xFBAu, 1.0); /*0x5a7330*/
             }
           }
-          goto LABEL_42;
+          goto LABEL_42; /*0x5a7330*/
         }
 LABEL_30:
-        if ( sub_42B340(*v22)
-          && !TESDataHandler_g_PlayerRef->vtbl->super.super.super.IsDead((TESObjectREFR *)TESDataHandler_g_PlayerRef, 0) )
+        if ( sub_42B340(*v23) && !reference->vtbl->super.super.super.IsDead((TESObjectREFR *)reference, 0) ) /*0x5a717a*/
         {
-          v30 = (double)dword_B37BC0;
-          v119 = v22[1];
-          LOBYTE(v120[0]) = v30 > *(float *)&v113;
-          BYTE1(v120[0]) = 0;
-          sub_5A65B0((int)&v119);
+          v30 = (double)SLODWORD(MEMORY[0xB37A58][0x5A]); /*0x5a7187*/
+          v117 = v23[1]; /*0x5a718d*/
+          LOBYTE(v118[0]) = v30 > *(float *)&v111; /*0x5a719f*/
+          BYTE1(v118[0]) = 0; /*0x5a71a8*/
+          sub_5A65B0((int)&v117); /*0x5a71ac*/
         }
-        goto LABEL_33;
+        goto LABEL_33; /*0x5a71ac*/
       }
 LABEL_43:
-      v37 = sub_65D830(TESDataHandler_g_PlayerRef, a4, (int)v20);
-      v38 = 0;
-      a3[0x19] = v37;
-      if ( v37 )
+      a4 = sub_65D830(reference, v20); /*0x5a733f*/
+      v37 = 0; /*0x5a734e*/
+      a3[2].members.unk14 = (unsigned int)v36; /*0x5a7352*/
+      if ( v36 ) /*0x5a7355*/
       {
-        while ( 1 )
+        while ( 1 ) /*0x5a7364*/
         {
-          v39 = (_DWORD *)*v37;
-          if ( !*v37 )
-            break;
-          v40 = v39[4];
-          v41 = (_DWORD *)v37[1];
-          v109 = 0;
-          v115 = v41;
-          if ( v40 )
+          v38 = (_DWORD *)*v36; /*0x5a7364*/
+          if ( !*v36 ) /*0x5a7364*/
+            break; /*0x5a7364*/
+          v39 = v38[4]; /*0x5a736e*/
+          v40 = (_DWORD *)v36[1]; /*0x5a7373*/
+          unk18 = 0; /*0x5a7376*/
+          v113 = v40; /*0x5a737a*/
+          if ( v39 ) /*0x5a737e*/
           {
-            v109 = 1;
+            unk18 = 1; /*0x5a7380*/
           }
           else
           {
-            sub_52B440(v39, 1);
-            v40 = v42;
+            sub_52B440(v38, 1); /*0x5a7389*/
+            v39 = v41; /*0x5a738e*/
           }
-          if ( v40 )
+          if ( v39 ) /*0x5a7392*/
           {
-            v43 = (float *)(*(int (__thiscall **)(int))(*(_DWORD *)v40 + 0x174))(v40);
-            *(float *)&v117 = *v43 - *(float *)&v122;
-            *(float *)&v116 = v43[1] - *(float *)&v123;
-            *(float *)&v113 = v43[2] - *(float *)&v124;
-            *(float *)&v117 = *(float *)&v117 * *(float *)&v117
-                            + *(float *)&v116 * *(float *)&v116
-                            + *(float *)&v113 * *(float *)&v113;
-            *(float *)&v117 = sqrt(*(float *)&v117);
-            *(float *)&v117 = fabs(*(float *)&v117);
-            v44 = dbl_A3DDD8;
-            *(float *)&v113 = *(float *)&v117 / (double)dword_B37BC0 * v44;
-            if ( *(float *)&v113 > v44 )
-              *(float *)&v113 = flt_A40098;
-            *(float *)&v113 = v44 - *(float *)&v113 * dbl_A2FAA0;
-            if ( *(float *)&v110 == 0.0 )
+            v42 = (float *)(*(int (__thiscall **)(int))(*(_DWORD *)v39 + 0x174))(v39); /*0x5a73a2*/
+            *(float *)&v115 = *v42 - *(float *)&v120; /*0x5a73aa*/
+            *(float *)&v114 = v42[1] - *(float *)&v121; /*0x5a73b5*/
+            *(float *)&v111 = v42[2] - *(float *)&v122; /*0x5a73c0*/
+            *(float *)&v115 = *(float *)&v115 * *(float *)&v115 /*0x5a73e0*/
+                            + *(float *)&v114 * *(float *)&v114
+                            + *(float *)&v111 * *(float *)&v111;
+            *(float *)&v115 = sqrt(*(float *)&v115); /*0x5a73ed*/
+            *(float *)&v115 = fabs(*(float *)&v115); /*0x5a73ff*/
+            v43 = dbl_A3DDD8; /*0x5a741d*/
+            *(float *)&v111 = *(float *)&v115 / (double)SLODWORD(MEMORY[0xB37A58][0x5A]) * v43; /*0x5a741f*/
+            if ( *(float *)&v111 > v43 ) /*0x5a742e*/
+              *(float *)&v111 = flt_A40098; /*0x5a7436*/
+            *(float *)&v111 = v43 - *(float *)&v111 * dbl_A2FAA0; /*0x5a744a*/
+            if ( *(float *)&v108 == 0.0 ) /*0x5a744e*/
             {
-              v45 = Menu_CreateTileFromTemplate(a3, st5_0, st6_0, a4, (TileWindow *)v114, "hudmain_compass_icon", 0);
+              m_data = (int)Menu::RenderTemplate(a3, parent, "hudmain_compass_icon", 0); /*0x5a7476*/
             }
             else
             {
-              v45 = (unsigned int *)v110[2];
-              v110 = *(_DWORD **)v110;
+              m_data = v108[2]; /*0x5a7454*/
+              v108 = *(_DWORD **)v108; /*0x5a745c*/
             }
-            if ( v45 )
+            if ( m_data ) /*0x5a747a*/
             {
-              v46 = (float *)(*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>, double@<st1>, double@<st2>))(*(_DWORD *)v40 + 0x174))(
-                               v40,
+              v44 = (float *)(*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>, double@<st1>, double@<st2>))(*(_DWORD *)v39 + 0x174))( /*0x5a748a*/
+                               v39,
                                a4,
                                st6_0,
                                st5_0);
-              *(double *)v121 = sub_5A62D0((float *)&v122, v46);
-              v47 = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-              v48 = sub_4CCE00((ExtraDataList *)v47) * dbl_A30DC8;
-              a2.m_data = 0;
-              *(_DWORD *)&a2.m_dataLen = 0;
-              a4 = v48 + *(double *)v121;
-              *(float *)&v117 = a4;
-              ++v38;
-              v126 = 1;
-              BSStringT_Static_Format(&a2, "quest_%i", v38);
-              v49 = a2.m_data;
-              *(float *)&v116 = COERCE_FLOAT(&v108);
-              v108.m_data = 0;
-              *(_DWORD *)&v108.m_dataLen = 0;
-              BSStringT_Set(&v108, a2.m_data, 0);
-              sub_58A020((BSStringT *)v45, v108.m_data, *(int *)&v108.m_dataLen);
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFAE, *(float *)&v117);
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFB3, flt_A6BF7C);
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFB4, 1.0);
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFB7, 1.0);
-              *(float *)&v108.m_dataLen = (float)(int)v111;
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFAB, *(float *)&v108.m_dataLen);
-              v50 = fConstant_2;
-              v111 = (_DWORD *)((char *)v111 + 1);
-              *(float *)&v108.m_dataLen = v50;
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFA1, *(float *)&v108.m_dataLen);
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFA7, *(float *)&v113);
-              v117 = (_DWORD *)((v109 != 0) + 1);
-              *(float *)&v108.m_dataLen = (float)(int)v117;
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFB8, *(float *)&v108.m_dataLen);
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFB9, fConstant_2);
-              Tile_SetFloat((Tile *)v45, (_DWORD *)0xFBA, 1.0);
-              v126 = 0xFFFFFFFF;
-              FormHeapFree((unsigned int)v49);
-              a2.m_data = 0;
-              *(_DWORD *)&a2.m_dataLen = 0;
+              *(double *)v119 = sub_5A62D0((float *)&v120, v44); /*0x5a7497*/
+              v45 = (ExtraDataList *)Shared_GetDwordAtOffset40(reference); /*0x5a74a4*/
+              v46 = sub_4CCE00(v45) * dbl_A30DC8; /*0x5a74b0*/
+              a2.m_data = 0; /*0x5a74b6*/
+              *(_DWORD *)&a2.m_dataLen = 0; /*0x5a74ba*/
+              a4 = v46 + *(double *)v119; /*0x5a74bf*/
+              *(float *)&v115 = a4; /*0x5a74c8*/
+              ++v37; /*0x5a74cc*/
+              v124 = 1; /*0x5a74da*/
+              BSStringT_Static_Format(&a2, "quest_%i", v37); /*0x5a74e5*/
+              v47 = a2.m_data; /*0x5a74ea*/
+              *(float *)&v114 = COERCE_FLOAT(&v106); /*0x5a74f3*/
+              v106.m_data = 0; /*0x5a74f9*/
+              *(_DWORD *)&v106.m_dataLen = 0; /*0x5a74fb*/
+              BSStringT_Set(&v106, a2.m_data, 0); /*0x5a7503*/
+              sub_58A020((BSStringT *)m_data, v106.m_data, *(int *)&v106.m_dataLen); /*0x5a750a*/
+              Tile_SetFloat((Tile *)m_data, 0xFAEu, *(float *)&v115); /*0x5a751e*/
+              Tile_SetFloat((Tile *)m_data, 0xFB3u, flt_A6BF7C); /*0x5a7534*/
+              Tile_SetFloat((Tile *)m_data, 0xFB4u, 1.0); /*0x5a7546*/
+              Tile_SetFloat((Tile *)m_data, 0xFB7u, 1.0); /*0x5a7558*/
+              *(float *)&v106.m_dataLen = (float)(int)v109; /*0x5a7564*/
+              Tile_SetFloat((Tile *)m_data, 0xFABu, *(float *)&v106.m_dataLen); /*0x5a756c*/
+              v48 = fConstant_2; /*0x5a7571*/
+              v109 = (_DWORD *)((char *)v109 + 1); /*0x5a7577*/
+              *(float *)&v106.m_dataLen = v48; /*0x5a757d*/
+              Tile_SetFloat((Tile *)m_data, 0xFA1u, *(float *)&v106.m_dataLen); /*0x5a7587*/
+              Tile_SetFloat((Tile *)m_data, 0xFA7u, *(float *)&v111); /*0x5a759b*/
+              v115 = (_DWORD *)((unk18 != 0) + 1); /*0x5a75af*/
+              *(float *)&v106.m_dataLen = (float)(int)v115; /*0x5a75b7*/
+              Tile_SetFloat((Tile *)m_data, 0xFB8u, *(float *)&v106.m_dataLen); /*0x5a75bf*/
+              Tile_SetFloat((Tile *)m_data, 0xFB9u, fConstant_2); /*0x5a75d5*/
+              Tile_SetFloat((Tile *)m_data, 0xFBAu, 1.0); /*0x5a75e7*/
+              v124 = 0xFFFFFFFF; /*0x5a75ed*/
+              FormHeapFree((unsigned int)v47); /*0x5a75f5*/
+              a2.m_data = 0; /*0x5a75fd*/
+              *(_DWORD *)&a2.m_dataLen = 0; /*0x5a7606*/
             }
           }
-          if ( *(float *)&v115 == 0.0 )
-            break;
-          v37 = v115;
+          if ( *(float *)&v113 == 0.0 ) /*0x5a760f*/
+            break; /*0x5a760f*/
+          v36 = v113; /*0x5a7360*/
         }
       }
-      v51 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-      if ( TESDataHandler_g_PlayerRef->unk638 )
+      v49 = reference; /*0x5a7615*/
+      if ( reference->unk638 ) /*0x5a761b*/
       {
-        if ( *(float *)&v110 == 0.0 )
+        if ( *(float *)&v108 == 0.0 ) /*0x5a762b*/
         {
-          v53 = Menu_CreateTileFromTemplate(a3, st5_0, st6_0, a4, (TileWindow *)v114, "hudmain_compass_icon", 0);
-          v51 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-          v52 = (BSStringT *)v53;
+          v50 = Menu::RenderTemplate(a3, parent, "hudmain_compass_icon", 0); /*0x5a764e*/
+          v49 = reference; /*0x5a7653*/
+          m_data = (int)v50; /*0x5a7659*/
         }
         else
         {
-          v52 = (BSStringT *)v110[2];
-          v110 = *(_DWORD **)v110;
+          m_data = v108[2]; /*0x5a7633*/
+          v108 = *(_DWORD **)v108; /*0x5a7639*/
         }
-        if ( v52 )
+        if ( m_data ) /*0x5a765d*/
         {
-          refID = v51[0x12].member.super.refID;
-          if ( refID )
+          unk63C = v49->unk63C; /*0x5a7663*/
+          if ( unk63C ) /*0x5a766b*/
           {
-            v55 = (*(int (__usercall **)@<eax>(UInt32@<ecx>, double@<st0>, double@<st1>, double@<st2>))(*(_DWORD *)refID + 0x174))(
-                    refID,
+            v52 = (*(int (__usercall **)@<eax>(UInt32@<ecx>, double@<st0>, double@<st1>, double@<st2>))(*(_DWORD *)unk63C + 0x174))( /*0x5a7675*/
+                    unk63C,
                     a4,
                     st6_0,
                     st5_0);
-            v56 = *(_DWORD **)v55;
-            v57 = *(_DWORD **)(v55 + 4);
-            v58 = *(_DWORD **)(v55 + 8);
-            v51 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-            v119 = v56;
-            v120[0] = v57;
-            v120[1] = v58;
+            v53 = *(_DWORD **)v52; /*0x5a7677*/
+            v54 = *(_DWORD **)(v52 + 4); /*0x5a7679*/
+            v55 = *(_DWORD **)(v52 + 8); /*0x5a767c*/
+            v49 = reference; /*0x5a767f*/
+            v117 = v53; /*0x5a7685*/
+            v118[0] = v54; /*0x5a7689*/
+            v118[1] = v55; /*0x5a768d*/
           }
           else
           {
-            v59 = sub_5A5790(v51, v121);
-            v60 = (_DWORD *)v59[1];
-            v119 = (_DWORD *)*v59;
-            v61 = (_DWORD *)v59[2];
-            v120[0] = v60;
-            v120[1] = v61;
+            v56 = sub_5A5790(v49, v119); /*0x5a769a*/
+            v57 = (_DWORD *)v56[1]; /*0x5a76a1*/
+            v117 = (_DWORD *)*v56; /*0x5a76a4*/
+            v58 = (_DWORD *)v56[2]; /*0x5a76a8*/
+            v118[0] = v57; /*0x5a76ab*/
+            v118[1] = v58; /*0x5a76af*/
           }
-          v62 = TESObjectREFR_GetParentCell(v51);
-          *(double *)v121 = sub_4CCE00((ExtraDataList *)v62) * dbl_A30DC8;
-          v63 = sub_5A62D0((float *)&v122, (float *)&v119);
-          a4 = v63 + *(double *)v121;
-          a2.m_data = 0;
-          *(_DWORD *)&a2.m_dataLen = 0;
-          *(float *)&v117 = a4;
-          v126 = 2;
-          BSStringT_Static_Format(&a2, "player_target_%i", v38 + 1);
-          *(float *)&v116 = COERCE_FLOAT(&v108);
-          BSStringT_constr_BSStringT(&v108, (const char **)&a2.m_data);
-          sub_58A020(v52, v108.m_data, *(int *)&v108.m_dataLen);
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFAE, *(float *)&v117);
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFB3, flt_A6BF7C);
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFB4, fConstant_2);
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFB7, 1.0);
-          *(float *)&v108.m_dataLen = (float)(int)v111;
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFAB, *(float *)&v108.m_dataLen);
-          v64 = fConstant_2;
-          v111 = (_DWORD *)((char *)v111 + 1);
-          *(float *)&v108.m_dataLen = v64;
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFA1, *(float *)&v108.m_dataLen);
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFB9, 1.0);
-          Tile_SetFloat((Tile *)v52, (_DWORD *)0xFBA, fConstant_2);
-          v126 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)a2.m_data);
+          v59 = (ExtraDataList *)Shared_GetDwordAtOffset40(v49); /*0x5a76b5*/
+          *(double *)v119 = sub_4CCE00(v59) * dbl_A30DC8; /*0x5a76d0*/
+          v60 = sub_5A62D0((float *)&v120, (float *)&v117); /*0x5a76d5*/
+          a4 = v60 + *(double *)v119; /*0x5a76da*/
+          a2.m_data = 0; /*0x5a76de*/
+          *(_DWORD *)&a2.m_dataLen = 0; /*0x5a76e2*/
+          *(float *)&v115 = a4; /*0x5a76e7*/
+          v124 = 2; /*0x5a76fe*/
+          BSStringT_Static_Format(&a2, "player_target_%i", v37 + 1); /*0x5a7709*/
+          *(float *)&v114 = COERCE_FLOAT(&v106); /*0x5a7717*/
+          BSStringT_constr_BSStringT(&v106, (const char **)&a2.m_data); /*0x5a771c*/
+          sub_58A020((BSStringT *)m_data, v106.m_data, *(int *)&v106.m_dataLen); /*0x5a7723*/
+          Tile_SetFloat((Tile *)m_data, 0xFAEu, *(float *)&v115); /*0x5a7737*/
+          Tile_SetFloat((Tile *)m_data, 0xFB3u, flt_A6BF7C); /*0x5a774d*/
+          Tile_SetFloat((Tile *)m_data, 0xFB4u, fConstant_2); /*0x5a7763*/
+          Tile_SetFloat((Tile *)m_data, 0xFB7u, 1.0); /*0x5a7775*/
+          *(float *)&v106.m_dataLen = (float)(int)v109; /*0x5a7781*/
+          Tile_SetFloat((Tile *)m_data, 0xFABu, *(float *)&v106.m_dataLen); /*0x5a7789*/
+          v61 = fConstant_2; /*0x5a778e*/
+          v109 = (_DWORD *)((char *)v109 + 1); /*0x5a7794*/
+          *(float *)&v106.m_dataLen = v61; /*0x5a779a*/
+          Tile_SetFloat((Tile *)m_data, 0xFA1u, *(float *)&v106.m_dataLen); /*0x5a77a4*/
+          Tile_SetFloat((Tile *)m_data, 0xFB9u, 1.0); /*0x5a77b6*/
+          Tile_SetFloat((Tile *)m_data, 0xFBAu, fConstant_2); /*0x5a77cc*/
+          v124 = 0xFFFFFFFF; /*0x5a77d6*/
+          FormHeapFree((unsigned int)a2.m_data); /*0x5a77de*/
         }
       }
-      v65 = (Tile *)a3[0x11];
-      *(float *)&v108.m_dataLen = (float)(int)v111;
-      Tile_SetFloat(v65, (_DWORD *)0xFAF, *(float *)&v108.m_dataLen);
-      if ( *(float *)&v110 != 0.0 )
+      v62 = *(Tile **)&a3[1].members.ownsTemplates; /*0x5a77ee*/
+      *(float *)&v106.m_dataLen = (float)(int)v109; /*0x5a77f2*/
+      Tile_SetFloat(v62, 0xFAFu, *(float *)&v106.m_dataLen); /*0x5a77fa*/
+      if ( *(float *)&v108 != 0.0 ) /*0x5a7803*/
       {
-        v66 = v110;
-        do
+        m_data = (int)v108; /*0x5a7805*/
+        do /*0x5a782b*/
         {
-          v67 = (Tile *)v66[2];
-          v66 = (_DWORD *)*v66;
-          Tile_SetFloat(v67, (_DWORD *)0xFA1, 1.0);
+          v63 = *(Tile **)(m_data + 8); /*0x5a7815*/
+          m_data = *(_DWORD *)m_data; /*0x5a7817*/
+          Tile_SetFloat(v63, 0xFA1u, 1.0); /*0x5a7824*/
         }
-        while ( v66 );
+        while ( m_data ); /*0x5a782b*/
       }
     }
-    v109 = *((_BYTE *)a3 + 0x90);
-    if ( v109 )
+    unk18 = a3[3].members.unk18; /*0x5a7839*/
+    if ( unk18 ) /*0x5a783d*/
     {
-      v68 = 0;
-      if ( a3[0x21] )
+      v64 = 0; /*0x5a7847*/
+      if ( a3[3].members.templateNext ) /*0x5a7849*/
       {
-        v69 = a3;
-        do
+        v65 = a3; /*0x5a7851*/
+        do /*0x5a789e*/
         {
-          if ( !*((_BYTE *)v69 + 0x90) )
-            break;
-          if ( Tile_GetFloat((_DWORD *)**(_DWORD **)(v69[0x1F] + 4 * v68), 0xFA7) == *(float *)&SrcStr )
+          if ( !LOBYTE(v65[3].members.unk18) ) /*0x5a7853*/
+            break; /*0x5a7859*/
+          if ( Tile_GetFloat((_DWORD *)**((_DWORD **)v65[3].members.tile + (_DWORD)v64), 0xFA7) == *(float *)&SrcStr ) /*0x5a7878*/
           {
-            v70 = (*(int (__thiscall **)(_DWORD *, unsigned int))(v69[0x1E] + 4))(v69 + 0x1E, v68);
-            FormHeapFree(v70);
-            --*((_BYTE *)v69 + 0x90);
+            m_data = (int)&v65[3]; /*0x5a7880*/
+            v66 = ((int (__thiscall *)(Menu *, OblivionTileTemplateList *))v65[3].__vftable->AttachTileByID)( /*0x5a7886*/
+                    &v65[3],
+                    v64);
+            FormHeapFree(v66); /*0x5a7889*/
+            --LOBYTE(v65[3].members.unk18); /*0x5a7891*/
           }
-          ++v68;
+          v64 = (OblivionTileTemplateList *)((char *)v64 + 1); /*0x5a7895*/
         }
-        while ( v68 < v69[0x21] );
+        while ( v64 < v65[3].members.templateNext ); /*0x5a789e*/
       }
-      v71 = a3;
-      if ( v109 - *((unsigned __int8 *)a3 + 0x90) > 0 )
+      v67 = a3; /*0x5a78a0*/
+      if ( unk18 - LOBYTE(a3[3].members.unk18) > 0 ) /*0x5a78b4*/
       {
-        sub_5A56F0(a3 + 0x1E);
-        for ( i = 0; (unsigned int)i < v71[0x21]; ++i )
+        sub_5A56F0((unsigned int *)&a3[3]); /*0x5a78b9*/
+        for ( m_data = 0; (OblivionTileTemplateList *)m_data < v67[3].members.templateNext; ++m_data ) /*0x5a78c0*/
         {
-          v73 = **(Tile ***)(v71[0x1F] + 4 * i);
-          v117 = (_DWORD *)i;
-          v74 = (double)i;
-          if ( i < 0 )
-            v74 = v74 + flt_A2FC78;
-          *(float *)&v108.m_dataLen = v74;
-          Tile_SetFloat(v73, (_DWORD *)0xFAE, *(float *)&v108.m_dataLen);
+          v68 = **((Tile ***)v67[3].members.tile + m_data); /*0x5a78ce*/
+          v115 = (_DWORD *)m_data; /*0x5a78d4*/
+          v69 = (double)m_data; /*0x5a78d8*/
+          if ( m_data < 0 ) /*0x5a78dc*/
+            v69 = v69 + flt_A2FC78; /*0x5a78de*/
+          *(float *)&v106.m_dataLen = v69; /*0x5a78e5*/
+          Tile_SetFloat(v68, 0xFAEu, *(float *)&v106.m_dataLen); /*0x5a78ef*/
         }
       }
     }
-    v75 = a3;
-    if ( a3[0x1D] )
+    v70 = a3; /*0x5a78ff*/
+    if ( a3[2].members.fadeState ) /*0x5a7903*/
     {
-      if ( GetTickCount() >= v75[0x1D] )
+      if ( GetTickCount() >= v70[2].members.fadeState ) /*0x5a7911*/
       {
-        v126 = 3;
-        *(float *)&v122 = 0.0;
-        *(float *)&v123 = 0.0;
-        *(float *)&v124 = 0.0;
-        v125 = 0;
-        sub_5A64B0((int)&v122);
-        v126 = 0xFFFFFFFF;
-        FormHeapFree(0);
+        m_data = 0; /*0x5a7917*/
+        v124 = 3; /*0x5a791a*/
+        *(float *)&v120 = 0.0; /*0x5a7922*/
+        *(float *)&v121 = 0.0; /*0x5a7926*/
+        *(float *)&v122 = 0.0; /*0x5a792a*/
+        v123 = 0; /*0x5a792e*/
+        sub_5A64B0((int)&v120); /*0x5a7932*/
+        v124 = 0xFFFFFFFF; /*0x5a7938*/
+        FormHeapFree(0); /*0x5a7943*/
       }
     }
-    if ( Player_GetAVModifierf((float *)TESDataHandler_g_PlayerRef, 0, 8) >= dbl_A2FC68 )
-      AVModifierf = Player_GetAVModifierf((float *)TESDataHandler_g_PlayerRef, 0, 8);
+    if ( Player_GetAVModifierf((float *)reference, 0, 8) >= dbl_A2FC68 ) /*0x5a7964*/
+      AVModifierf = Player_GetAVModifierf((float *)reference, 0, 8); /*0x5a7973*/
     else
-      AVModifierf = 0.0;
-    *(float *)&v110 = AVModifierf;
-    *(float *)&v117 = COERCE_FLOAT(Actor_GetBaseCalcAVi(8));
-    v78 = (double)(int)v117 + *(float *)&v110;
-    v79 = v78 > 0.0;
-    v80 = 0.0 == v78;
-    v81 = 0.0;
-    if ( v79 || v80 )
+      AVModifierf = 0.0; /*0x5a7966*/
+    v72 = (int *)reference; /*0x5a7978*/
+    *(float *)&v108 = AVModifierf; /*0x5a797e*/
+    *(float *)&v115 = COERCE_FLOAT(Actor_GetBaseCalcAVi(v72, 0, (int)v70, m_data, 8)); /*0x5a7989*/
+    v74 = (double)(int)v115 + *(float *)&v108; /*0x5a7991*/
+    v75 = v74 > 0.0; /*0x5a7997*/
+    v76 = 0.0 == v74; /*0x5a7997*/
+    v77 = 0.0; /*0x5a799b*/
+    if ( v75 || v76 ) /*0x5a799d*/
     {
-      *(float *)&v117 = COERCE_FLOAT(Actor_GetBaseCalcAVi(8));
-      v81 = (double)(int)v117 + *(float *)&v110;
+      *(float *)&v115 = COERCE_FLOAT(Actor_GetBaseCalcAVi((int *)reference, 0, (int)v70, m_data, 8)); /*0x5a79b1*/
+      v77 = (double)(int)v115 + *(float *)&v108; /*0x5a79b9*/
     }
-    *(float *)&v110 = v81;
-    if ( 0.0 != *(float *)&v110 )
+    *(float *)&v108 = v77; /*0x5a79bd*/
+    if ( 0.0 != *(float *)&v108 ) /*0x5a79cc*/
     {
-      if ( TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue((Actor *)TESDataHandler_g_PlayerRef, kActorVal_Health) >= 0 )
-        *(float *)&v115 = COERCE_FLOAT(
-                            TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue(
-                              (Actor *)TESDataHandler_g_PlayerRef,
-                              kActorVal_Health));
+      if ( reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Health) >= 0 ) /*0x5a79e2*/
+        *(float *)&v113 = COERCE_FLOAT(reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Health)); /*0x5a79fc*/
       else
-        *(float *)&v115 = 0.0;
-      *(float *)&v110 = (double)(int)v115 / *(float *)&v110;
+        *(float *)&v113 = 0.0; /*0x5a79e4*/
+      *(float *)&v108 = (double)(int)v113 / *(float *)&v108; /*0x5a7a08*/
     }
-    *(_DWORD *)&v108.m_dataLen = v77;
-    Tile_SetFloat((Tile *)v75[0xB], (_DWORD *)0xFAE, *(float *)&v110);
-    if ( Player_GetAVModifierf((float *)TESDataHandler_g_PlayerRef, 0, 9) >= dbl_A2FC68 )
-      v82 = Player_GetAVModifierf((float *)TESDataHandler_g_PlayerRef, 0, 9);
+    *(_DWORD *)&v106.m_dataLen = v73; /*0x5a7a10*/
+    Tile_SetFloat(v70[1].members.tile, 0xFAEu, *(float *)&v108); /*0x5a7a1c*/
+    if ( Player_GetAVModifierf((float *)reference, 0, 9) >= dbl_A2FC68 ) /*0x5a7a3a*/
+      v78 = Player_GetAVModifierf((float *)reference, 0, 9); /*0x5a7a49*/
     else
-      v82 = 0.0;
-    *(float *)&v110 = v82;
-    *(float *)&v117 = COERCE_FLOAT(Actor_GetBaseCalcAVi(9));
-    v84 = (double)(int)v117 + *(float *)&v110;
-    v85 = v84 > 0.0;
-    v86 = 0.0 == v84;
-    v87 = 0.0;
-    if ( v85 || v86 )
+      v78 = 0.0; /*0x5a7a3c*/
+    v79 = (int *)reference; /*0x5a7a4e*/
+    *(float *)&v108 = v78; /*0x5a7a54*/
+    *(float *)&v115 = COERCE_FLOAT(Actor_GetBaseCalcAVi(v79, 0, (int)v70, m_data, 9)); /*0x5a7a5f*/
+    v81 = (double)(int)v115 + *(float *)&v108; /*0x5a7a67*/
+    v82 = v81 > 0.0; /*0x5a7a6d*/
+    v83 = 0.0 == v81; /*0x5a7a6d*/
+    v84 = 0.0; /*0x5a7a71*/
+    if ( v82 || v83 ) /*0x5a7a73*/
     {
-      *(float *)&v117 = COERCE_FLOAT(Actor_GetBaseCalcAVi(9));
-      v87 = (double)(int)v117 + *(float *)&v110;
+      *(float *)&v115 = COERCE_FLOAT(Actor_GetBaseCalcAVi((int *)reference, 0, (int)v70, m_data, 9)); /*0x5a7a87*/
+      v84 = (double)(int)v115 + *(float *)&v108; /*0x5a7a8f*/
     }
-    *(float *)&v110 = v87;
-    if ( 0.0 != *(float *)&v110 )
+    *(float *)&v108 = v84; /*0x5a7a93*/
+    if ( 0.0 != *(float *)&v108 ) /*0x5a7aa2*/
     {
-      if ( TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue((Actor *)TESDataHandler_g_PlayerRef, kActorVal_Magicka) >= 0 )
-        *(float *)&v115 = COERCE_FLOAT(
-                            TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue(
-                              (Actor *)TESDataHandler_g_PlayerRef,
-                              kActorVal_Magicka));
+      if ( reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Magicka) >= 0 ) /*0x5a7ab8*/
+        *(float *)&v113 = COERCE_FLOAT(reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Magicka)); /*0x5a7ad2*/
       else
-        *(float *)&v115 = 0.0;
-      *(float *)&v110 = (double)(int)v115 / *(float *)&v110;
+        *(float *)&v113 = 0.0; /*0x5a7aba*/
+      *(float *)&v108 = (double)(int)v113 / *(float *)&v108; /*0x5a7ade*/
     }
-    *(_DWORD *)&v108.m_dataLen = v83;
-    Tile_SetFloat((Tile *)v75[0xC], (_DWORD *)0xFAE, *(float *)&v110);
-    if ( Player_GetAVModifierf((float *)TESDataHandler_g_PlayerRef, 0, 0xA) >= dbl_A2FC68 )
-      v88 = Player_GetAVModifierf((float *)TESDataHandler_g_PlayerRef, 0, 0xA);
+    *(_DWORD *)&v106.m_dataLen = v80; /*0x5a7ae6*/
+    Tile_SetFloat((Tile *)v70[1].members.templateHead, 0xFAEu, *(float *)&v108); /*0x5a7af2*/
+    if ( Player_GetAVModifierf((float *)reference, 0, 0xA) >= dbl_A2FC68 ) /*0x5a7b10*/
+      v85 = Player_GetAVModifierf((float *)reference, 0, 0xA); /*0x5a7b1f*/
     else
-      v88 = 0.0;
-    *(float *)&v110 = v88;
-    *(float *)&v117 = COERCE_FLOAT(Actor_GetBaseCalcAVi(0xA));
-    v90 = (double)(int)v117 + *(float *)&v110;
-    v91 = v90 > 0.0;
-    v92 = 0.0 == v90;
-    v93 = 0.0;
-    if ( v91 || v92 )
+      v85 = 0.0; /*0x5a7b12*/
+    v86 = (int *)reference; /*0x5a7b24*/
+    *(float *)&v108 = v85; /*0x5a7b2a*/
+    *(float *)&v115 = COERCE_FLOAT(Actor_GetBaseCalcAVi(v86, 0, (int)v70, m_data, 0xA)); /*0x5a7b35*/
+    v88 = (double)(int)v115 + *(float *)&v108; /*0x5a7b3d*/
+    v89 = v88 > 0.0; /*0x5a7b43*/
+    v90 = 0.0 == v88; /*0x5a7b43*/
+    v91 = 0.0; /*0x5a7b47*/
+    if ( v89 || v90 ) /*0x5a7b49*/
     {
-      *(float *)&v117 = COERCE_FLOAT(Actor_GetBaseCalcAVi(0xA));
-      v93 = (double)(int)v117 + *(float *)&v110;
+      *(float *)&v115 = COERCE_FLOAT(Actor_GetBaseCalcAVi((int *)reference, 0, (int)v70, m_data, 0xA)); /*0x5a7b5d*/
+      v91 = (double)(int)v115 + *(float *)&v108; /*0x5a7b65*/
     }
-    *(float *)&v110 = v93;
-    if ( 0.0 != *(float *)&v110 )
+    *(float *)&v108 = v91; /*0x5a7b69*/
+    if ( 0.0 != *(float *)&v108 ) /*0x5a7b78*/
     {
-      if ( TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue((Actor *)TESDataHandler_g_PlayerRef, kActorVal_Fatigue) >= 0 )
-        *(float *)&v115 = COERCE_FLOAT(
-                            TESDataHandler_g_PlayerRef->vtbl->super.GetActorValue(
-                              (Actor *)TESDataHandler_g_PlayerRef,
-                              kActorVal_Fatigue));
+      if ( reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Fatigue) >= 0 ) /*0x5a7b8e*/
+        *(float *)&v113 = COERCE_FLOAT(reference->vtbl->super.GetActorValue((Actor *)reference, kActorVal_Fatigue)); /*0x5a7ba8*/
       else
-        *(float *)&v115 = 0.0;
-      *(float *)&v110 = (double)(int)v115 / *(float *)&v110;
+        *(float *)&v113 = 0.0; /*0x5a7b90*/
+      *(float *)&v108 = (double)(int)v113 / *(float *)&v108; /*0x5a7bb4*/
     }
-    *(_DWORD *)&v108.m_dataLen = v89;
-    Tile_SetFloat((Tile *)v75[0xD], (_DWORD *)0xFAE, *(float *)&v110);
-    v94 = TESDataHandler_g_PlayerRef;
-    *(float *)&v110 = flt_A2FE7C;
-    v95 = (void **)((int (__usercall *)@<eax>(LowProcess *@<ecx>, int, double@<st0>, double@<st1>, double@<st2>))v94->super.super.super.process->GetEquippedWeaponData)(
-                     v94->super.super.super.process,
+    *(_DWORD *)&v106.m_dataLen = v87; /*0x5a7bbc*/
+    Tile_SetFloat((Tile *)v70[1].members.templateNext, 0xFAEu, *(float *)&v108); /*0x5a7bc8*/
+    v92 = reference; /*0x5a7bd3*/
+    *(float *)&v108 = flt_A2FE7C; /*0x5a7bd8*/
+    v93 = (void **)((int (__usercall *)@<eax>(LowProcess *@<ecx>, int, double@<st0>, double@<st1>, double@<st2>))v92->super.super.super.process->GetEquippedWeaponData)( /*0x5a7be9*/
+                     v92->super.super.super.process,
                      1,
                      a4,
                      st6_0,
                      st5_0);
-    v97 = v95;
-    if ( v95 )
-      *(float *)&v110 = ContainerEntryExtraData_GetHealth(v95, 1);
-    *(_DWORD *)&v108.m_dataLen = v96;
-    Tile_SetFloat((Tile *)v75[0xE], (_DWORD *)0xFB0, *(float *)&v110);
-    v98 = TESDataHandler_g_PlayerRef;
-    *(float *)&v110 = 0.0;
-    v99 = (Sky *)v98->super.super.super.process->GetEquippedAmmoData(v98->super.super.super.process, 1);
-    if ( v99 )
+    v95 = v93; /*0x5a7beb*/
+    if ( v93 ) /*0x5a7bef*/
+      *(float *)&v108 = ContainerEntryExtraData_GetHealth(v93, 1); /*0x5a7bfa*/
+    *(_DWORD *)&v106.m_dataLen = v94; /*0x5a7c02*/
+    Tile_SetFloat(v70[1].members.templateContextTile, 0xFB0u, *(float *)&v108); /*0x5a7c0e*/
+    v96 = reference; /*0x5a7c15*/
+    *(float *)&v108 = 0.0; /*0x5a7c1b*/
+    v97 = (TESHealthForm *)v96->super.super.super.process->GetEquippedAmmoData(v96->super.super.super.process, 1); /*0x5a7c2c*/
+    if ( v97 ) /*0x5a7c30*/
     {
-      if ( v97 )
+      if ( v95 ) /*0x5a7c34*/
       {
-        v101 = v97[2];
-        if ( v101 )
+        v99 = v95[2]; /*0x5a7c36*/
+        if ( v99 ) /*0x5a7c3b*/
         {
-          if ( v101[0x90] == 5 )
+          if ( v99[0x90] == 5 ) /*0x5a7c44*/
           {
-            *(float *)&v117 = COERCE_FLOAT(TESHealthForm_GetHealth(v99));
-            *(float *)&v110 = (float)(int)v117;
+            *(float *)&v115 = COERCE_FLOAT(TESHealthForm_GetHealth(v97)); /*0x5a7c4d*/
+            *(float *)&v108 = (float)(int)v115; /*0x5a7c55*/
           }
         }
       }
     }
-    *(_DWORD *)&v108.m_dataLen = v100;
-    Tile_SetFloat((Tile *)v75[0xE], (_DWORD *)0xFB1, *(float *)&v110);
-    v102 = TESDataHandler_g_PlayerRef;
-    vtbl = TESDataHandler_g_PlayerRef->super.super.magicCaster.vtbl;
-    *(_DWORD *)&v108.m_dataLen = 0;
-    v108.m_data = 0;
-    CurrentMagicItem = Player_GetCurrentMagicItem(v102);
-    v105 = vtbl->IsMagicItemUsable(
-             &TESDataHandler_g_PlayerRef->super.super.magicCaster,
+    *(_DWORD *)&v106.m_dataLen = v98; /*0x5a7c5d*/
+    Tile_SetFloat(v70[1].members.templateContextTile, 0xFB1u, *(float *)&v108); /*0x5a7c69*/
+    v100 = reference; /*0x5a7c6e*/
+    vtbl = reference->super.super.magicCaster.vtbl; /*0x5a7c74*/
+    *(_DWORD *)&v106.m_dataLen = 0; /*0x5a7c77*/
+    v106.m_data = 0; /*0x5a7c78*/
+    CurrentMagicItem = Player_GetCurrentMagicItem(v100); /*0x5a7c7d*/
+    v103 = vtbl->IsMagicItemUsable( /*0x5a7c8e*/
+             &reference->super.super.magicCaster,
              (MagicItem *)CurrentMagicItem,
              0,
-             (UInt32 *)v108.m_data,
-             *(_DWORD *)&v108.m_dataLen);
-    *(_DWORD *)&v108.m_dataLen = v106;
-    v107 = (Tile *)v75[0xF];
-    v117 = (_DWORD *)(2 - !v105);
-    *(float *)&v108.m_dataLen = (float)(int)v117;
-    Tile_SetFloat(v107, (_DWORD *)0xFB0, *(float *)&v108.m_dataLen);
+             (UInt32 *)v106.m_data,
+             *(_DWORD *)&v106.m_dataLen);
+    *(_DWORD *)&v106.m_dataLen = v104; /*0x5a7c94*/
+    unk14 = (Tile *)v70[1].members.unk14; /*0x5a7c95*/
+    v115 = (_DWORD *)(2 - !v103); /*0x5a7c9d*/
+    *(float *)&v106.m_dataLen = (float)(int)v115; /*0x5a7ca5*/
+    Tile_SetFloat(unk14, 0xFB0u, *(float *)&v106.m_dataLen); /*0x5a7cad*/
   }
 }

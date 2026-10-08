@@ -66,10 +66,10 @@
 0x734D8D: mov     ebp, edi
 0x734D8F: nop
 0x734D90: mov     edx, [esp+1Ch+Dst]
-0x734D94: push    eax; Size
-0x734D95: push    ebx; Src
-0x734D96: push    edx; Dst
-0x734D97: call    _memcpy
+0x734D94: push    eax; byteCount
+0x734D95: push    ebx; source
+0x734D96: push    edx; destination
+0x734D97: call    _memcpy;
 0x734D9C: movzx   eax, byte ptr [esi+114h]
 0x734DA3: add     [esp+28h+Dst], eax
 0x734DA7: add     esp, 0Ch

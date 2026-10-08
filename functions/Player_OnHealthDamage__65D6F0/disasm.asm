@@ -5,7 +5,7 @@
 0x65D6FA: fstp    [esp+8+var_8]; int
 0x65D6FD: push    eax; int
 0x65D6FE: mov     esi, ecx
-0x65D700: call    Actor_OnHealthDamage
+0x65D700: call    Actor_OnHealthDamage; ODismemberment: Oblivion health-damage kill gate. xOBSE already hooks inside this function at 0x6034CB; avoid competing patch here until hook strategy is finalized.
 0x65D705: mov     edx, [esi]
 0x65D707: mov     eax, [edx+198h]
 0x65D70D: push    0

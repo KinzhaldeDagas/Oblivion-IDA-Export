@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x46DD70",
+      "0x46DDC0"
+    ]
+  ],
+  "chunks_sha256": "260be629c046e11293a0cd90026800853a6639084150ddebafd9ca68aac9c265",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-09-07: PERF-2 add-unique path first performs full duplicate scan46DD79; unique input then computes length, allocates/copies owned string, and calls67B1E0 PushBack46DDB5 which walks the list again. Preserve duplicate equality, first-occurrence order and owned-string/node destruction in any bulk optimization.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-2 implemented in perf_archive_model.h: AddUnique uses scoped NIFZ/copy membership and tail with native CRT comparison/first spelling. Default-locale hash is only an index; other locales/tableOOM use linear comparison. Snapshot/payload/node allocation failure refuses addition without partial publication; reentrant clear/add forces fresh decisions.\n\nMEF v57 VERIFY 2026-10-08: Direct xrefs46DDFC/copy and46E034/NIFZ enter v57 batch scopes. External standalone additions retain linear freshness/membership/tail scans around allocation; no universal single-add speedup is claimed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_46DD70",
+  "display_name": "TESModelList_AddUniqueModelPath",
   "end_ea": "0x46DDC0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_46DD70",
+  "name": "TESModelList_AddUniqueModelPath",
   "segment": ".text",
   "sha256": "260be629c046e11293a0cd90026800853a6639084150ddebafd9ca68aac9c265",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46DD70",
+  "total_chunk_size": 80,
   "type": "void __thiscall(char **this, char *)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 2

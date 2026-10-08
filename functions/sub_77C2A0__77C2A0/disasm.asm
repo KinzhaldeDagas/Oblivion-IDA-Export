@@ -16,7 +16,7 @@
 0x77C2C3: test    al, al
 0x77C2C5: mov     ecx, esi
 0x77C2C7: jnz     short loc_77C2FF
-0x77C2C9: call    sub_452A60
+0x77C2C9: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77C2CE: push    eax; ArgList
 0x77C2CF: push    offset aInitializeOnSF; "Initialize on %s failed\n"
 0x77C2D4: push    0; int
@@ -45,7 +45,7 @@
 0x77C30B: test    al, al
 0x77C30D: jnz     short loc_77C347
 0x77C30F: mov     ecx, esi
-0x77C311: call    sub_452A60
+0x77C311: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77C316: push    eax; ArgList
 0x77C317: push    offset aSetupgeometryO; "SetupGeometry on %s failed\n"
 0x77C31C: push    0; int
@@ -66,9 +66,9 @@
 0x77C341: xor     al, al
 0x77C343: pop     esi
 0x77C344: retn    8
-0x77C347: push    esi; a2
+0x77C347: push    esi; shader
 0x77C348: mov     ecx, edi; this
-0x77C34A: call    sub_4EC910
+0x77C34A: call    NiGeometry_SetShader; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.
 0x77C34F: lea     ecx, [esi+4]
 0x77C352: push    ecx; lpAddend
 0x77C353: call    dword ptr ds:0A2807Ch

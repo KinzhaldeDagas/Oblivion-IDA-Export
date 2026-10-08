@@ -1,4 +1,4 @@
-int __usercall ActiveEffect_Base_LoadEffect_::LoadHitEffect_@<eax>(
+int __userpurge ActiveEffect_Base_LoadEffect_::LoadHitEffect_@<eax>(
         int eax0@<eax>,
         _DWORD *ebx0@<ebx>,
         int ebp0@<ebp>,

@@ -1,4 +1,4 @@
-0x795C30: sub     esp, 8
+0x795C30: sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): push_back for vector<unsigned int>; appends directly when capacity remains or uses the checked insert-one path. Its observed caller is CIndexedGeometry vertex-color storage.
 0x795C33: push    esi
 0x795C34: mov     esi, ecx
 0x795C36: mov     edx, [esi+4]
@@ -17,7 +17,7 @@
 0x795C55: cmp     ecx, eax
 0x795C57: jnb     short loc_795C71
 0x795C59: mov     eax, [esi+8]
-0x795C5C: mov     ecx, [esp+0Ch+arg_0]
+0x795C5C: mov     ecx, [esp+0Ch+value]
 0x795C60: mov     edx, [ecx]
 0x795C62: mov     [eax], edx
 0x795C64: add     eax, 4
@@ -30,14 +30,14 @@
 0x795C75: cmp     edx, edi
 0x795C77: jbe     short loc_795C7E
 0x795C79: call    __invalid_parameter_noinfo
-0x795C7E: mov     eax, [esp+10h+arg_0]
-0x795C82: push    eax; int
-0x795C83: push    edi; Src
-0x795C84: push    esi; int
-0x795C85: lea     ecx, [esp+1Ch+var_8]
-0x795C89: push    ecx; int
-0x795C8A: mov     ecx, esi
-0x795C8C: call    sub_795840
+0x795C7E: mov     eax, [esp+10h+value]
+0x795C82: push    eax; value
+0x795C83: push    edi; position
+0x795C84: push    esi; position
+0x795C85: lea     ecx, [esp+1Ch+result]
+0x795C89: push    ecx; result
+0x795C8A: mov     ecx, esi; this
+0x795C8C: call    OB_stVectorUInt32_InsertOne_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned int>; validates owner/position, delegates to insert-fill, and returns an iterator to the inserted value.
 0x795C91: pop     edi
 0x795C92: pop     esi
 0x795C93: add     esp, 8

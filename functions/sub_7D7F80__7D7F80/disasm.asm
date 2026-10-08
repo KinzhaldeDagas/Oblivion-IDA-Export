@@ -36,7 +36,7 @@
 0x7D7FE9: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x7D7FF1: jz      short loc_7D8001
 0x7D7FF3: push    offset aTex; "tex %"
-0x7D7FF8: call    NiObjectNET_GetExtraData
+0x7D7FF8: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x7D7FFD: mov     [esp+2Ch+var_18], eax
 0x7D8001: mov     eax, [ebx+0D4h]
 0x7D8007: xor     ebp, ebp
@@ -63,7 +63,7 @@
 0x7D804B: mov     eax, ebp
 0x7D804D: push    eax
 0x7D804E: mov     ecx, esi
-0x7D8050: call    sub_7263B0
+0x7D8050: call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0
 0x7D8055: push    ebp
 0x7D8056: mov     ecx, esi
 0x7D8058: call    sub_726B80
@@ -71,41 +71,41 @@
 0x7D8061: mov     ecx, [eax+0D4h]
 0x7D8067: mov     edx, [ecx+0Ch]
 0x7D806A: lea     ebx, [edi+edi*2]
-0x7D806D: push    0; char
+0x7D806D: push    0; copyData
 0x7D806F: add     ebx, ebx
 0x7D8071: add     ebx, ebx
-0x7D8073: push    ebx; Src
-0x7D8074: push    edx; char
-0x7D8075: push    0; int
-0x7D8077: mov     ecx, esi
-0x7D8079: call    sub_7260B0
-0x7D807E: push    0Ch
-0x7D8080: push    0Ch
-0x7D8082: push    edi
-0x7D8083: push    3
-0x7D8085: push    0
-0x7D8087: push    0
-0x7D8089: push    0
-0x7D808B: mov     ecx, esi
-0x7D808D: call    sub_7262A0
+0x7D8073: push    ebx; byteCount
+0x7D8074: push    edx; data
+0x7D8075: push    0; blockIndex
+0x7D8077: mov     ecx, esi; this
+0x7D8079: call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0
+0x7D807E: push    0Ch; stride
+0x7D8080: push    0Ch; elementSize
+0x7D8082: push    edi; vertexCount
+0x7D8083: push    3; type
+0x7D8085: push    0; blockOffset
+0x7D8087: push    0; blockIndex
+0x7D8089: push    0; streamIndex
+0x7D808B: mov     ecx, esi; this
+0x7D808D: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
 0x7D8092: mov     eax, [esp+2Ch+var_14]
 0x7D8096: mov     ecx, [eax+0D4h]
 0x7D809C: mov     edx, [ecx+10h]
-0x7D809F: push    0; char
-0x7D80A1: push    ebx; Src
-0x7D80A2: push    edx; char
-0x7D80A3: push    1; int
-0x7D80A5: mov     ecx, esi
-0x7D80A7: call    sub_7260B0
-0x7D80AC: push    0Ch
-0x7D80AE: push    0Ch
-0x7D80B0: push    edi
-0x7D80B1: push    3
-0x7D80B3: push    0
-0x7D80B5: push    1
-0x7D80B7: push    1
-0x7D80B9: mov     ecx, esi
-0x7D80BB: call    sub_7262A0
+0x7D809F: push    0; copyData
+0x7D80A1: push    ebx; byteCount
+0x7D80A2: push    edx; data
+0x7D80A3: push    1; blockIndex
+0x7D80A5: mov     ecx, esi; this
+0x7D80A7: call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0
+0x7D80AC: push    0Ch; stride
+0x7D80AE: push    0Ch; elementSize
+0x7D80B0: push    edi; vertexCount
+0x7D80B1: push    3; type
+0x7D80B3: push    0; blockOffset
+0x7D80B5: push    1; blockIndex
+0x7D80B7: push    1; streamIndex
+0x7D80B9: mov     ecx, esi; this
+0x7D80BB: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
 0x7D80C0: mov     ebx, [esp+2Ch+var_14]
 0x7D80C4: mov     ecx, [esp+2Ch+var_18]
 0x7D80C8: test    ecx, ecx
@@ -117,35 +117,35 @@
 0x7D80D9: or      dword ptr [ebx+1Ch], 4000h
 0x7D80E0: jmp     short loc_7D80E9
 0x7D80E2: and     dword ptr [ebx+1Ch], 0FFFFBFFFh
-0x7D80E9: push    0; char
+0x7D80E9: push    0; copyData
 0x7D80EB: mov     ecx, edi
 0x7D80ED: shl     ecx, 5
-0x7D80F0: push    ecx; Src
+0x7D80F0: push    ecx; byteCount
 0x7D80F1: mov     dword ptr [ebx+24h], 0
-0x7D80F8: push    eax; char
+0x7D80F8: push    eax; data
 0x7D80F9: lea     ebx, [ebp-1]
-0x7D80FC: push    ebx; int
-0x7D80FD: mov     ecx, esi
-0x7D80FF: call    sub_7260B0
-0x7D8104: push    20h ; ' '
-0x7D8106: push    10h
-0x7D8108: push    edi
-0x7D8109: push    4
-0x7D810B: push    0
-0x7D810D: push    ebx
+0x7D80FC: push    ebx; blockIndex
+0x7D80FD: mov     ecx, esi; this
+0x7D80FF: call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0
+0x7D8104: push    20h ; ' '; stride
+0x7D8106: push    10h; elementSize
+0x7D8108: push    edi; vertexCount
+0x7D8109: push    4; type
+0x7D810B: push    0; blockOffset
+0x7D810D: push    ebx; blockIndex
 0x7D810E: add     ebp, 0FFFFFFFEh
-0x7D8111: push    ebp
-0x7D8112: mov     ecx, esi
-0x7D8114: call    sub_7262A0
-0x7D8119: push    20h ; ' '
-0x7D811B: push    10h
-0x7D811D: push    edi
-0x7D811E: push    4
-0x7D8120: push    10h
-0x7D8122: push    ebx
-0x7D8123: push    ebx
-0x7D8124: mov     ecx, esi
-0x7D8126: call    sub_7262A0
+0x7D8111: push    ebp; streamIndex
+0x7D8112: mov     ecx, esi; this
+0x7D8114: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
+0x7D8119: push    20h ; ' '; stride
+0x7D811B: push    10h; elementSize
+0x7D811D: push    edi; vertexCount
+0x7D811E: push    4; type
+0x7D8120: push    10h; blockOffset
+0x7D8122: push    ebx; blockIndex
+0x7D8123: push    ebx; streamIndex
+0x7D8124: mov     ecx, esi; this
+0x7D8126: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
 0x7D812B: mov     eax, [esp+2Ch+var_18]
 0x7D812F: xor     ecx, ecx
 0x7D8131: mov     [eax+10h], ecx
@@ -163,3 +163,15 @@
 0x7D8156: pop     ebx
 0x7D8157: add     esp, 18h
 0x7D815A: retn    4
+0x9B8CE0: mov     eax, [ebp-10h]
+0x9B8CE3: push    eax
+0x9B8CE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8CE9: pop     ecx
+0x9B8CEA: retn
+0x9B8CEB: mov     edx, [esp+a2]
+0x9B8CEF: lea     eax, [edx-1Ch]
+0x9B8CF2: mov     ecx, [edx-20h]
+0x9B8CF5: xor     ecx, eax
+0x9B8CF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8CFC: mov     eax, offset stru_AE3140
+0x9B8D01: jmp     ___CxxFrameHandler3

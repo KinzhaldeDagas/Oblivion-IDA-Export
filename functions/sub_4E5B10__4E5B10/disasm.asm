@@ -1,38 +1,38 @@
-0x4E5B10: sub     esp, 14h
+0x4E5B10: sub     esp, 14h; Verified save path for linked-point state: writes a u16 count followed by u16 PathGrid point indices for each non-null point whose linkedPointsDisabled bit is set; optional save-block framing surrounds this payload.
 0x4E5B13: cmp     byte ptr ds:0B05BACh, 0
 0x4E5B1A: push    ebp
 0x4E5B1B: push    esi
 0x4E5B1C: push    edi
 0x4E5B1D: mov     edi, ecx
 0x4E5B1F: mov     ecx, ds:0B33B00h
-0x4E5B25: mov     [esp+20h+var_4], 0
+0x4E5B25: mov     [esp+20h+source], 0
 0x4E5B2D: mov     eax, [ecx+14h]
 0x4E5B30: mov     [esp+20h+var_C], 0
 0x4E5B38: mov     [esp+20h+var_10], eax
 0x4E5B3C: jz      short loc_4E5B42
 0x4E5B3E: mov     [esp+20h+var_10], eax
-0x4E5B42: call    sub_45A170
+0x4E5B42: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E5B47: test    al, al
 0x4E5B49: jz      short loc_4E5B7E
-0x4E5B4B: mov     ecx, ds:0B33B00h
-0x4E5B51: push    4; Size
+0x4E5B4B: mov     ecx, ds:0B33B00h; self
+0x4E5B51: push    4; byteCount
 0x4E5B53: lea     eax, [esp+24h+Src]
-0x4E5B57: push    eax; Src
+0x4E5B57: push    eax; source
 0x4E5B58: mov     [esp+28h+Src], 4B4F4C42h
 0x4E5B60: call    SaveLoad_SaveData
-0x4E5B65: mov     ecx, ds:0B33B00h
+0x4E5B65: mov     ecx, ds:0B33B00h; self
 0x4E5B6B: mov     edx, [ecx+14h]
-0x4E5B6E: push    2; Size
-0x4E5B70: lea     eax, [esp+24h+var_4]
-0x4E5B74: push    eax; Src
+0x4E5B6E: push    2; byteCount
+0x4E5B70: lea     eax, [esp+24h+source]
+0x4E5B74: push    eax; source
 0x4E5B75: mov     [esp+28h+var_C], edx
 0x4E5B79: call    SaveLoad_SaveData
-0x4E5B7E: mov     ecx, ds:0B33B00h
-0x4E5B84: push    2; Size
+0x4E5B7E: mov     ecx, ds:0B33B00h; self
+0x4E5B84: push    2; byteCount
 0x4E5B86: lea     edx, [esp+24h+var_14]
 0x4E5B8A: mov     [esp+24h+var_14], 0
 0x4E5B92: mov     ebp, [ecx+14h]
-0x4E5B95: push    edx; Src
+0x4E5B95: push    edx; source
 0x4E5B96: call    SaveLoad_SaveData
 0x4E5B9B: mov     eax, [edi+24h]
 0x4E5B9E: test    eax, eax
@@ -42,18 +42,18 @@
 0x4E5BA8: jbe     short loc_4E5BEF
 0x4E5BAA: lea     ebx, [ebx+0]
 0x4E5BB0: mov     eax, [eax+4]
-0x4E5BB3: mov     ecx, [eax+esi*4]
+0x4E5BB3: mov     ecx, [eax+esi*4]; this
 0x4E5BB6: test    ecx, ecx
 0x4E5BB8: jz      short loc_4E5BE1
-0x4E5BBA: call    sub_67ED70
+0x4E5BBA: call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.
 0x4E5BBF: test    al, al
 0x4E5BC1: jz      short loc_4E5BE1
 0x4E5BC3: movzx   ecx, si
-0x4E5BC6: push    2; Size
+0x4E5BC6: push    2; byteCount
 0x4E5BC8: lea     edx, [esp+24h+Src]
 0x4E5BCC: mov     [esp+24h+Src], ecx
-0x4E5BD0: mov     ecx, ds:0B33B00h
-0x4E5BD6: push    edx; Src
+0x4E5BD0: mov     ecx, ds:0B33B00h; self
+0x4E5BD6: push    edx; source
 0x4E5BD7: call    SaveLoad_SaveData
 0x4E5BDC: add     [esp+20h+var_14], 1
 0x4E5BE1: mov     eax, [edi+24h]
@@ -72,7 +72,7 @@
 0x4E5C11: jz      short loc_4E5C50
 0x4E5C13: mov     eax, [edi]
 0x4E5C15: push    eax; a1
-0x4E5C16: call    TESForm_LookupByFormID
+0x4E5C16: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E5C1B: mov     ecx, [edi+5]
 0x4E5C1E: mov     edx, [eax]
 0x4E5C20: add     esp, 4
@@ -99,7 +99,7 @@
 0x4E5C64: call    sub_40FEC0
 0x4E5C69: add     esp, 10h
 0x4E5C6C: mov     ecx, ds:0B33B00h
-0x4E5C72: call    sub_45A170
+0x4E5C72: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E5C77: test    al, al
 0x4E5C79: jz      short loc_4E5CAE
 0x4E5C7B: mov     edx, ds:0B33B00h

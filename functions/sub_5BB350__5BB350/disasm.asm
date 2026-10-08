@@ -8,7 +8,7 @@
 0x5BB369: mov     ecx, eax
 0x5BB36B: call    Tile_GetParentMenu
 0x5BB370: mov     esi, eax
-0x5BB372: call    sub_578D70
+0x5BB372: call    InterfaceManager_ConsumeMessageButton
 0x5BB377: movsx   eax, al
 0x5BB37A: cmp     eax, 1
 0x5BB37D: jnz     loc_5BB626
@@ -101,27 +101,27 @@
 0x5BB4F7: mov     ecx, [esi+0E0h]; this
 0x5BB4FD: fstp    [esp+1Ch+var_8]
 0x5BB501: fld     [esp+1Ch+var_C]
-0x5BB505: fstp    [esp+1Ch+a2]; a3
-0x5BB508: push    0FAFh; a2
-0x5BB50D: call    Tile_SetFloat
+0x5BB505: fstp    [esp+1Ch+a2]; value
+0x5BB508: push    0FAFh; propertyCode
+0x5BB50D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB512: fld     [esp+18h+var_8]
 0x5BB516: push    ecx
 0x5BB517: mov     ecx, [esi+0E0h]; this
-0x5BB51D: fstp    [esp+1Ch+a2]; a3
-0x5BB520: push    0FB0h; a2
-0x5BB525: call    Tile_SetFloat
+0x5BB51D: fstp    [esp+1Ch+a2]; value
+0x5BB520: push    0FB0h; propertyCode
+0x5BB525: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB52A: fld     dword ptr ds:0A40098h
 0x5BB530: push    ecx
 0x5BB531: mov     ecx, [esi+0E0h]; this
-0x5BB537: fstp    [esp+1Ch+a2]; a3
-0x5BB53A: push    0FA7h; a2
-0x5BB53F: call    Tile_SetFloat
+0x5BB537: fstp    [esp+1Ch+a2]; value
+0x5BB53A: push    0FA7h; propertyCode
+0x5BB53F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB544: fld     dword ptr ds:0A379B4h
 0x5BB54A: push    ecx
 0x5BB54B: mov     ecx, [esi+0E0h]; this
-0x5BB551: fstp    [esp+1Ch+a2]; a3
-0x5BB554: push    0FB6h; a2
-0x5BB559: call    Tile_SetFloat
+0x5BB551: fstp    [esp+1Ch+a2]; value
+0x5BB554: push    0FB6h; propertyCode
+0x5BB559: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB55E: mov     ecx, [esi+4]
 0x5BB561: push    0; float
 0x5BB563: call    sub_58FBA0
@@ -134,7 +134,7 @@
 0x5BB579: test    al, al
 0x5BB57B: mov     ecx, ds:0B333C4h; this
 0x5BB581: jz      short loc_5BB58A
-0x5BB583: call    TESObjectREFR_GetParentCell
+0x5BB583: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5BB588: jmp     short loc_5BB58F
 0x5BB58A: call    TESObjectREFR_GetWorldSpace
 0x5BB58F: mov     edx, ds:0B3F9A8h
@@ -195,15 +195,15 @@
 0x5BB67A: jz      short loc_5BB6A2
 0x5BB67C: fldz
 0x5BB67E: push    ecx
-0x5BB67F: fstp    [esp+1Ch+a2]; a3
-0x5BB682: push    0FA7h; a2
-0x5BB687: call    Tile_SetFloat
+0x5BB67F: fstp    [esp+1Ch+a2]; value
+0x5BB682: push    0FA7h; propertyCode
+0x5BB687: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB68C: fld1
 0x5BB68E: push    ecx
-0x5BB68F: fstp    [esp+1Ch+a2]; a3
+0x5BB68F: fstp    [esp+1Ch+a2]; value
 0x5BB692: mov     ecx, [esi+0E0h]; this
-0x5BB698: push    0FB6h; a2
-0x5BB69D: call    Tile_SetFloat
+0x5BB698: push    0FB6h; propertyCode
+0x5BB69D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB6A2: cmp     byte ptr [esi+0DCh], 0
 0x5BB6A9: jz      short loc_5BB6B5
 0x5BB6AB: push    0

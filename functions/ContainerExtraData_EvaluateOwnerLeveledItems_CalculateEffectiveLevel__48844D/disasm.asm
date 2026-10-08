@@ -7,7 +7,7 @@
 0x48845D: push    7; a1
 0x48845F: lea     ebp, [eax+8]
 0x488462: xor     ebx, ebx
-0x488464: call    TESForm_LookupByFormID
+0x488464: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x488469: push    ebx; int
 0x48846A: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
 0x48846F: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *

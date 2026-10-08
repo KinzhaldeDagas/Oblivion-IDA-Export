@@ -1,12 +1,13 @@
-void __thiscall sub_78BFB0(float **this)
+// CSpeedTreeRT::ComputeLodLevel. For instances, temporarily applies instance position to the shared tree engine, computes/stores instance LOD, then restores parent position and LOD; base trees compute directly.
+void __thiscall CSpeedTreeRT__ComputeLodLevel(OB_CSpeedTreeRT_010201A0 *this)
 {
-  float *v2; // ecx
-  float *v3; // eax
+  _DWORD *instanceData; // ecx
+  _DWORD *treeEngine; // eax
   int v4; // edx
   int v5; // edi
   int v6; // ebx
   int v7; // ecx
-  float *v8; // esi
+  _DWORD *v8; // esi
   int v9; // [esp+0h] [ebp-70h] BYREF
   int v10; // [esp+50h] [ebp-20h]
   float v11; // [esp+58h] [ebp-18h]
@@ -14,31 +15,31 @@ void __thiscall sub_78BFB0(float **this)
   int *v13; // [esp+60h] [ebp-10h]
   int v14; // [esp+6Ch] [ebp-4h]
 
-  v13 = &v9;
-  v2 = *(this + 0xD);
-  v14 = 0;
-  if ( v2 )
+  v13 = &v9; /*0x78bfd8*/
+  instanceData = (_DWORD *)this->instanceData; /*0x78bfdd*/
+  v14 = 0; /*0x78bfe2*/
+  if ( instanceData ) /*0x78bfe9*/
   {
-    v3 = *this;
-    v4 = *((_DWORD *)*this + 3);
-    v5 = *((_DWORD *)*this + 1);
-    v11 = (*this)[5];
-    v6 = *((_DWORD *)v3 + 2);
-    v10 = v4;
-    v3[1] = v2[1];
-    v3[2] = v2[2];
-    v3[3] = v2[3];
-    v12 = sub_7A2440(*this);
-    v7 = v10;
-    (*(this + 0xD))[4] = v12;
-    (*this)[5] = v11;
-    v8 = *this + 1;
-    *(_DWORD *)v8 = v5;
-    *((_DWORD *)v8 + 1) = v6;
-    *((_DWORD *)v8 + 2) = v7;
+    treeEngine = (_DWORD *)this->treeEngine; /*0x78bfeb*/
+    v4 = *(_DWORD *)(this->treeEngine + 0xC); /*0x78bfed*/
+    v5 = *(_DWORD *)(this->treeEngine + 4); /*0x78bff3*/
+    v11 = *(float *)(this->treeEngine + 0x14); /*0x78bff6*/
+    v6 = treeEngine[2]; /*0x78bff9*/
+    v10 = v4; /*0x78bffc*/
+    treeEngine[1] = instanceData[1]; /*0x78c002*/
+    treeEngine[2] = instanceData[2]; /*0x78c008*/
+    treeEngine[3] = instanceData[3]; /*0x78c00e*/
+    v12 = CTreeEngine__ComputeLod((float *)this->treeEngine); /*0x78c018*/
+    v7 = v10; /*0x78c021*/
+    *(float *)(this->instanceData + 0x10) = v12; /*0x78c024*/
+    *(float *)(this->treeEngine + 0x14) = v11; /*0x78c02c*/
+    v8 = (_DWORD *)(this->treeEngine + 4); /*0x78c031*/
+    *v8 = v5; /*0x78c034*/
+    v8[1] = v6; /*0x78c036*/
+    v8[2] = v7; /*0x78c039*/
   }
   else
   {
-    sub_7A2440(*this);
+    CTreeEngine__ComputeLod((float *)this->treeEngine); /*0x78c050*/
   }
 }

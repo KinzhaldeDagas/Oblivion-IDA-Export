@@ -110,7 +110,7 @@
 0x917CBA: mov     ecx, edi
 0x917CBC: mov     [esp+68h+var_38], edx
 0x917CC0: mov     [esp+68h+var_34], eax
-0x917CC4: call    sub_88FE00
+0x917CC4: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x917CC9: mov     ecx, large fs:2Ch
 0x917CD0: mov     edx, ds:0BA9DE4h
 0x917CD6: mov     eax, [ecx+edx*4]

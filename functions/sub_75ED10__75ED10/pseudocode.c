@@ -1,4 +1,4 @@
-char *sub_75ED10()
+NiRTTI *sub_75ED10()
 {
-  return dword_B41ECC;
+  return &stru_B41ECC; /*0x75ed15*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B80E0",
-    "line": "sub     esp, 2Ch",
+    "line": "sub     esp, 2Ch; Verified lifecycle connection: after creating reciprocal ExtraTeleport records and marker transforms, LinkDoors calls TESObjectREFR::AddToLowPathWorld for a1. That creates one bidirectional AStarWorldNode for the paired doors; the nested maps index it under both endpoint spaces.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4B8168",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4B8177",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4B81A9",
-    "line": "mov     ecx, offset fRandomDoorDistance",
+    "line": "mov     ecx, 0B35B24h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x4B81B5",
-    "line": "mov     ecx, offset flt_B35B2C",
+    "line": "mov     ecx, offset unk_B35B2C",
     "mnemonic": "mov",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4B81D8",
-    "line": "mov     ecx, offset flt_B35B2C",
+    "line": "mov     ecx, offset unk_B35B2C",
     "mnemonic": "mov",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x4B81FA",
-    "line": "call    TESObjectREFR__GetRandomTeleportMarkerReference",
+    "line": "call    TESObjectREFR__GetRandomTeleportMarkerReference; Verified TESObjectREFR wrapper over ExtraDataList_GetRandomTeleportMarker; this per-reference marker pointer is distinct from the TESObjectDOOR base-form randomTeleport list of eligible space forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x4B82D2",
-    "line": "call    TESObjectREFR__GetRandomTeleportMarkerReference",
+    "line": "call    TESObjectREFR__GetRandomTeleportMarkerReference; Verified TESObjectREFR wrapper over ExtraDataList_GetRandomTeleportMarker; this per-reference marker pointer is distinct from the TESObjectDOOR base-form randomTeleport list of eligible space forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x4B839D",
-    "line": "call    TESObjectREFR__AddToLowPathWorld",
+    "line": "call    TESObjectREFR__AddToLowPathWorld; Verified `LinkDoors` creates reciprocal TeleportData and calls this hook once for a1. The resulting single AStarWorldNode stores both door refs and both spatial forms; its map entries make it reachable from either endpoint space.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,6 @@
-NDR_PARAM_OIF
+struct NDR_PARAM_OIF
+{
+PARAM_ATTRIBUTES attr;
+unsigned __int16 stack_offset;
+$0CBBE420ED8D36A3B3153776782C76E1 u;
+};

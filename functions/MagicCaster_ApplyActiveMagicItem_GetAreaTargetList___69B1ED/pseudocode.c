@@ -39,14 +39,14 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetAreaTargetList_@<eax>(
   TESObjectREFR *v36; // ecx
   int v37; // eax
 
-  if ( ebx0 != a3 )
+  if ( ebx0 != a3 ) /*0x69b1ef*/
   {
-    vtbl = ebx0->vtbl;
-    v36 = ebx0;
+    vtbl = ebx0->vtbl; /*0x69b1f1*/
+    v36 = ebx0; /*0x69b1f3*/
 LABEL_7:
-    v37 = ((int (__fastcall *)(TESObjectREFR *))vtbl->GetPos)(v36);
-    MagicCaster_GetTargetsInArea_(a1, a4, 1, *(float *)v37, *(_QWORD *)(v37 + 4), &a21);
-    return MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before(
+    v37 = ((int (__fastcall *)(TESObjectREFR *))vtbl->GetPos)(v36); /*0x69b20f*/
+    MagicCaster_GetTargetsInArea_(a1, a4, 1, *(float *)v37, *(_QWORD *)(v37 + 4), &a21); /*0x69b236*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before( /*0x69b236*/
              (int)a1,
              ebx0,
              a5,
@@ -81,11 +81,11 @@ LABEL_7:
              a34,
              a35);
   }
-  v36 = (TESObjectREFR *)a10;
-  if ( a10 && a15 && *(char *)(a15 + 0x40) < 0 )
+  v36 = (TESObjectREFR *)a10; /*0x69b1f7*/
+  if ( a10 && a15 && *(char *)(a15 + 0x40) < 0 ) /*0x69b20b*/
   {
-    vtbl = *(TESObjectREFRVtbl **)a10;
-    goto LABEL_7;
+    vtbl = *(TESObjectREFRVtbl **)a10; /*0x69b20d*/
+    goto LABEL_7; /*0x69b20d*/
   }
   return MagicCaster_ApplyActiveMagicItem_::EffectItemLoop_Before(
            (int)a1,

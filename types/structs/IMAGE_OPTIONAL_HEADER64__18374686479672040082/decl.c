@@ -1,1 +1,33 @@
-_IMAGE_OPTIONAL_HEADER64
+struct _IMAGE_OPTIONAL_HEADER64
+{
+WORD Magic;
+BYTE MajorLinkerVersion;
+BYTE MinorLinkerVersion;
+DWORD SizeOfCode;
+DWORD SizeOfInitializedData;
+DWORD SizeOfUninitializedData;
+DWORD AddressOfEntryPoint;
+DWORD BaseOfCode;
+ULONGLONG ImageBase;
+DWORD SectionAlignment;
+DWORD FileAlignment;
+WORD MajorOperatingSystemVersion;
+WORD MinorOperatingSystemVersion;
+WORD MajorImageVersion;
+WORD MinorImageVersion;
+WORD MajorSubsystemVersion;
+WORD MinorSubsystemVersion;
+DWORD Win32VersionValue;
+DWORD SizeOfImage;
+DWORD SizeOfHeaders;
+DWORD CheckSum;
+WORD Subsystem;
+WORD DllCharacteristics;
+ULONGLONG SizeOfStackReserve;
+ULONGLONG SizeOfStackCommit;
+ULONGLONG SizeOfHeapReserve;
+ULONGLONG SizeOfHeapCommit;
+DWORD LoaderFlags;
+DWORD NumberOfRvaAndSizes;
+IMAGE_DATA_DIRECTORY DataDirectory[16];
+};

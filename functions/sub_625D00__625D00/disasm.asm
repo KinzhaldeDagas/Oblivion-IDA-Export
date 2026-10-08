@@ -11,7 +11,7 @@
 0x625D1B: mov     [esi+40h], eax
 0x625D1E: mov     [esi+48h], eax
 0x625D21: mov     [esi+4Ch], al
-0x625D24: mov     dword ptr [esi], offset ??_7DialoguePackage@@6B@; const DialoguePackage::`vftable'
+0x625D24: mov     dword ptr [esi], offset ??_7DialoguePackage@@6B@; Verified complete TESPackage persistence table extentEC; tail DC/E0/E4/E8 is no-argument size/save/load/init-load virtuals. Derived vtable identity from constructor stores and RTTI names. Prior incompleteDC type corrected.
 0x625D2A: mov     eax, esi
 0x625D2C: pop     esi
 0x625D2D: retn

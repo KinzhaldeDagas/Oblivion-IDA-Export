@@ -1,11 +1,11 @@
-0x7893A0: push    esi
+0x7893A0: push    esi; Oblivion std::runtime_error destructor: destroys the embedded 28-byte SSO message, restores empty SSO state, and invokes std::exception teardown.
 0x7893A1: mov     esi, ecx
 0x7893A3: mov     dword ptr [esi], offset ??_7runtime_error@std@@6B@; const std::runtime_error::`vftable'
 0x7893A9: cmp     dword ptr [esi+24h], 10h
 0x7893AD: jb      short loc_7893BB
 0x7893AF: mov     eax, [esi+10h]
 0x7893B2: push    eax
-0x7893B3: call    FormHeapFree
+0x7893B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7893B8: add     esp, 4
 0x7893BB: xor     eax, eax
 0x7893BD: mov     dword ptr [esi+24h], 0Fh

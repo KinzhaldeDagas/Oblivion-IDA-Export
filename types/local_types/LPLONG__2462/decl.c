@@ -1,1 +1,1 @@
-LPLONG
+typedef int *LPLONG;

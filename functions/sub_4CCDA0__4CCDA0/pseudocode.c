@@ -1,25 +1,22 @@
 void __thiscall sub_4CCDA0(TESObjectCELL *this)
 {
-  char *p_objectList; // edi
-  TESObjectREFR *v3; // esi
+  ObjectListEntry *p_objectList; // edi
+  TESObjectREFR *refr; // esi
 
-  sub_496EA0((char *)&stru_B35C80, this);
-  p_objectList = (char *)&this->members.objectList;
-  if ( this != (TESObjectCELL *)0xFFFFFFB8 )
+  sub_496EA0((char *)&unk_B35C80, this); /*0x4ccdaa*/
+  p_objectList = &this->members.objectList; /*0x4ccdaf*/
+  if ( this != (TESObjectCELL *)0xFFFFFFB8 ) /*0x4ccdb4*/
   {
-    do
+    do /*0x4ccde3*/
     {
-      v3 = *(TESObjectREFR **)p_objectList;
-      if ( !*(_DWORD *)p_objectList )
-        break;
-      if ( v3 != (TESObjectREFR *)TESDataHandler_g_PlayerRef
-        && TESObjectREFR_IsPersistent_(*(TESObjectREFR **)p_objectList) )
-      {
-        ((void (__thiscall *)(TESObjectREFR *, _DWORD))v3->vtbl->Set3D)(v3, 0);
-      }
-      p_objectList = *((char **)p_objectList + 1);
+      refr = p_objectList->refr; /*0x4ccdb7*/
+      if ( !p_objectList->refr ) /*0x4ccdb7*/
+        break; /*0x4ccdbb*/
+      if ( refr != (TESObjectREFR *)reference && TESObjectREFR_IsPersistent(p_objectList->refr) ) /*0x4ccdc7*/
+        ((void (__thiscall *)(TESObjectREFR *, _DWORD))refr->vtbl->Set3D)(refr, 0); /*0x4ccddc*/
+      p_objectList = p_objectList->next; /*0x4ccdde*/
     }
-    while ( p_objectList );
+    while ( p_objectList ); /*0x4ccde3*/
   }
-  sub_496F50(&stru_B35C80, this);
+  sub_496F50(&unk_B35C80, this); /*0x4ccdec*/
 }

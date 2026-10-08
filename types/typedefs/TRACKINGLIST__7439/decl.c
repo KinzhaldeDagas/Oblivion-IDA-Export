@@ -1,1 +1,5 @@
-__TRACKINGLIST
+struct __TRACKINGLIST
+{
+TRACKMOUSEEVENT tme;
+POINT pos;
+};

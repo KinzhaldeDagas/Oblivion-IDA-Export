@@ -1,1 +1,4 @@
-HRGN__
+struct HRGN__
+{
+int unused;
+};

@@ -1,4 +1,4 @@
-0x787140: mov     eax, [ecx]
+0x787140: mov     eax, [ecx]; CSpeedTreeRT::GetTrunkLength. Returns branchGeometry+0x1C when treeEngine and branchGeometry exist, otherwise 0.0; Bethesda extension absent from the supplied 4.1 public header.
 0x787142: test    eax, eax
 0x787144: jz      short loc_787151
 0x787146: mov     eax, [eax+5Ch]

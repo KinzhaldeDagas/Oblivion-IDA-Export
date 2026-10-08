@@ -89,3 +89,27 @@
 0x7C20F7: pop     ebx
 0x7C20F8: add     esp, 10h
 0x7C20FB: retn
+0x9CE210: mov     ecx, [ebp-10h]
+0x9CE213: jmp     j_??1?$NiTPointerList@PAURenderedTextureData@BSTextureManager@@@@UAE@XZ
+0x9CE218: mov     ecx, [ebp-10h]
+0x9CE21B: add     ecx, 10h
+0x9CE21E: jmp     j_??1?$NiTPointerList@PAURenderedTextureData@BSTextureManager@@@@UAE@XZ
+0x9CE223: mov     ecx, [ebp-10h]
+0x9CE226: add     ecx, 20h ; ' '
+0x9CE229: jmp     j_??1?$NiTPointerList@V?$NiPointer@VBSRenderedTexture@@@@@@UAE@XZ
+0x9CE22E: mov     ecx, [ebp-10h]
+0x9CE231: add     ecx, 30h ; '0'
+0x9CE234: jmp     j_??1?$NiTPointerList@V?$NiPointer@VBSRenderedTexture@@@@@@UAE@XZ
+0x9CE239: mov     ecx, [ebp-10h]
+0x9CE23C: add     ecx, 40h ; '@'; slot
+0x9CE23F: jmp     NiPointerSlot_Release
+0x9CE244: mov     ecx, [ebp-10h]
+0x9CE247: add     ecx, 44h ; 'D'; slot
+0x9CE24A: jmp     NiPointerSlot_Release
+0x9CE24F: mov     edx, [esp+arg_4]
+0x9CE253: lea     eax, [edx-10h]
+0x9CE256: mov     ecx, [edx-14h]
+0x9CE259: xor     ecx, eax
+0x9CE25B: call    @__security_check_cookie@4
+0x9CE260: mov     eax, offset stru_AF7244
+0x9CE265: jmp     ___CxxFrameHandler3

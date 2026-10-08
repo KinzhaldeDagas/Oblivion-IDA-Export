@@ -1,25 +1,25 @@
-int __thiscall sub_6B7CF0(const char ***this)
+UInt16 __thiscall DialogueItem::GetSaveSize(DialogueItemView *this)
 {
-  int v1; // eax
-  const char ***v2; // esi
-  __int16 v3; // ax
-  int v5; // [esp+4h] [ebp-4h]
+  __int16 v1; // ax
+  DialogueItemView *v2; // esi
+  UInt16 SaveSize; // ax
+  __int16 v5; // [esp+4h] [ebp-4h]
 
-  v1 = 1;
-  v5 = 1;
-  v2 = this;
-  if ( this )
+  v1 = 1; /*0x6b7cf3*/
+  v5 = 1; /*0x6b7cf9*/
+  v2 = this; /*0x6b7cfd*/
+  if ( this ) /*0x6b7cff*/
   {
-    do
+    do /*0x6b7d1d*/
     {
-      if ( !v2[1] && !*v2 )
-        break;
-      v3 = sub_6B8460(*v2);
-      v2 = (const char ***)v2[1];
-      LOWORD(v5) = v3 + v5;
+      if ( !v2->nextResponseNode && !v2->firstResponse ) /*0x6b7d07*/
+        break; /*0x6b7d0a*/
+      SaveSize = DialogueResponse::GetSaveSize(v2->firstResponse); /*0x6b7d0e*/
+      v2 = (DialogueItemView *)v2->nextResponseNode; /*0x6b7d13*/
+      v5 += SaveSize; /*0x6b7d16*/
     }
-    while ( v2 );
-    v1 = v5;
+    while ( v2 ); /*0x6b7d1d*/
+    v1 = v5; /*0x6b7d1f*/
   }
-  return v1 + 0x11;
+  return v1 + 0x11; /*0x6b7d26*/
 }

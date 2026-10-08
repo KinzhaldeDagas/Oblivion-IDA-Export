@@ -154,7 +154,7 @@
 0x960992: fstp    st(1)
 0x960994: lea     ecx, [esp+90h+var_84]
 0x960998: fstp    st
-0x96099A: call    sub_43F350
+0x96099A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x96099F: fstp    st
 0x9609A1: fld     [esp+90h+var_60]
 0x9609A5: fld     [esp+90h+var_5C]

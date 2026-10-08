@@ -1,18 +1,31 @@
 {
-  "callees_count": 52,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x4CBE50",
+      "0x4CC064"
+    ]
+  ],
+  "chunks_sha256": "14d05e7313d36b8d20a20a808fc799b783ac1c688541482b05fe70e93ce76340",
+  "comment_regular": "Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.",
+  "comment_repeatable": "Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "sub_4CBE50",
   "end_ea": "0x4CC064",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_4CBE50",
   "segment": ".text",
   "sha256": "14d05e7313d36b8d20a20a808fc799b783ac1c688541482b05fe70e93ce76340",
   "size": 532,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CBE50",
+  "total_chunk_size": 532,
   "type": "void __userpurge(TESObjectCELL *@<ecx>, double@<st2>, double@<st1>, double@<st0>, _DWORD *)",
   "xrefs_from_count": 234,
   "xrefs_to_count": 7

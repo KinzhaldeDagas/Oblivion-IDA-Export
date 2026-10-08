@@ -75,7 +75,6 @@
 0x933305: mov     byte ptr [esp+40h+var_28], al
 0x933309: xor     cl, cl
 0x93330B: jmp     short loc_933310
-0x93330D: align 10h
 0x933310: test    cl, cl
 0x933312: jz      short loc_933318
 0x933314: test    al, al

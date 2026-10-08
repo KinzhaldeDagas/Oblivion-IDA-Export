@@ -18,9 +18,9 @@
 0x5CE86A: mov     esi, eax
 0x5CE86C: call    InterfaceManager_GetDepth
 0x5CE871: fstp    [esp+0Ch+var_4]; a3
-0x5CE875: mov     ecx, [esi+68h]; TileWindow *
+0x5CE875: mov     ecx, [esi+68h]; this
 0x5CE878: push    offset aDataMenusRecha; "Data\\Menus\\recharge_menu.xml"
-0x5CE87D: call    Menu_LoadXML
+0x5CE87D: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5CE882: mov     edi, eax
 0x5CE884: mov     ecx, edi
 0x5CE886: call    Tile_GetParentMenu
@@ -85,22 +85,22 @@
 0x5CE942: jp      short loc_5CE958
 0x5CE944: fld     [esp+0Ch+var_4]
 0x5CE948: push    ecx
-0x5CE949: fstp    [esp+10h+var_10]; a3
-0x5CE94C: push    0FABh; a2
+0x5CE949: fstp    [esp+10h+var_10]; value
+0x5CE94C: push    0FABh; propertyCode
 0x5CE951: mov     ecx, edi; this
-0x5CE953: call    Tile_SetFloat
+0x5CE953: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CE958: fld     dword ptr ds:0A6906Ch
 0x5CE95E: push    ecx
 0x5CE95F: mov     ecx, [esi+30h]; this
-0x5CE962: fstp    [esp+10h+var_10]; a3
-0x5CE965: push    0FB7h; a2
-0x5CE96A: call    Tile_SetFloat
+0x5CE962: fstp    [esp+10h+var_10]; value
+0x5CE965: push    0FB7h; propertyCode
+0x5CE96A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CE96F: fldz
 0x5CE971: push    ecx
-0x5CE972: fstp    [esp+10h+var_10]; a3
+0x5CE972: fstp    [esp+10h+var_10]; value
 0x5CE975: mov     ecx, [esi+30h]; this
-0x5CE978: push    0FB7h; a2
-0x5CE97D: call    Tile_SetFloat
+0x5CE978: push    0FB7h; propertyCode
+0x5CE97D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CE982: push    0; char
 0x5CE984: mov     ecx, esi; int
 0x5CE986: call    EnableMenu

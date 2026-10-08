@@ -1,44 +1,45 @@
-char __cdecl NiTMap<unsigned int,VertexDist>::NiTMap<unsigned int,VertexDist>(
-        int a1,
-        int a2,
-        float a3,
-        int a4,
-        char a5)
+// Copy normalized normals from nearest source vertices to targets in common geometry space. The internal VertexDist map is keyed by source index and retains only a primary plus one coincident secondary target (distance epsilon 0.001); third and later coincident targets are dropped. FaceGen uses this for Face-to-Ears and body-skin seam repair.
+bool __cdecl NiGeometry_CopyNearestVertexNormals(
+        NiGeometry *sourceGeometry,
+        NiGeometry *targetGeometry,
+        float maxDistance,
+        int unused,
+        bool offsetVerticesAlongNormals)
 {
   unsigned int v5; // ebx
-  int v6; // ebp
-  int v7; // eax
-  int v8; // ecx
-  int v9; // edx
-  unsigned int v10; // eax
-  int v11; // eax
-  int v12; // ecx
-  int v13; // edx
+  NiGeometry *v6; // ebp
+  NiGeometryData *geomData; // eax
+  NiPoint3 *m_pkVertex; // ecx
+  NiPoint3 *m_pkNormal; // edx
+  unsigned int m_usVertices; // eax
+  NiGeometryData *v11; // eax
+  NiPoint3 *v12; // ecx
+  NiPoint3 *v13; // edx
   unsigned int v14; // eax
-  unsigned int v15; // edi
+  unsigned int WorldVertices; // edi
   float *v17; // eax
   float *v18; // eax
   double v19; // st7
-  unsigned int v20; // ebp
-  unsigned int v21; // esi
+  unsigned int matchedSourceIndex; // ebp
+  unsigned int sourceIndex; // esi
   float *v22; // edi
   float *v23; // eax
   int v24; // ebp
   NiTransform *v25; // eax
   int v26; // edi
-  float *v27; // esi
+  float *p_x; // esi
   unsigned int v28; // ebx
   _DWORD *v29; // eax
   float *v30; // eax
-  int v31; // ebp
-  int v32; // edi
+  NiPoint3 *v31; // ebp
+  NiPoint3 *v32; // edi
   float *v33; // eax
   _DWORD *v34; // eax
-  char v35; // [esp+23h] [ebp-11Dh]
-  unsigned int v36; // [esp+24h] [ebp-11Ch]
-  float v37; // [esp+28h] [ebp-118h]
+  bool copiedAnyNormal; // [esp+23h] [ebp-11Dh]
+  unsigned int targetVertexCount; // [esp+24h] [ebp-11Ch]
+  float nearestDistance; // [esp+28h] [ebp-118h]
   float v38; // [esp+2Ch] [ebp-114h] BYREF
-  unsigned int v39; // [esp+30h] [ebp-110h]
+  unsigned int sourceVertexCount; // [esp+30h] [ebp-110h]
   unsigned int *v40[2]; // [esp+34h] [ebp-10Ch] BYREF
   int v41; // [esp+3Ch] [ebp-104h]
   int v42; // [esp+40h] [ebp-100h]
@@ -46,184 +47,184 @@ char __cdecl NiTMap<unsigned int,VertexDist>::NiTMap<unsigned int,VertexDist>(
   float *v44; // [esp+48h] [ebp-F8h]
   float *v45; // [esp+4Ch] [ebp-F4h]
   float *v46; // [esp+50h] [ebp-F0h]
-  int v47; // [esp+54h] [ebp-ECh]
-  int v48; // [esp+58h] [ebp-E8h]
+  NiPoint3 *targetNormals; // [esp+54h] [ebp-ECh]
+  NiPoint3 *sourceNormals; // [esp+58h] [ebp-E8h]
   int v49; // [esp+5Ch] [ebp-E4h] BYREF
   unsigned int v50; // [esp+60h] [ebp-E0h]
   int v51; // [esp+64h] [ebp-DCh]
-  int v52; // [esp+68h] [ebp-D8h]
-  int v53; // [esp+6Ch] [ebp-D4h]
+  NiPoint3 *targetVertices; // [esp+68h] [ebp-D8h]
+  NiPoint3 *sourceVertices; // [esp+6Ch] [ebp-D4h]
   int v54[2]; // [esp+70h] [ebp-D0h] BYREF
   float v55; // [esp+78h] [ebp-C8h]
   _BYTE v56[60]; // [esp+7Ch] [ebp-C4h] BYREF
   float v57[9]; // [esp+B8h] [ebp-88h] BYREF
   float v58[9]; // [esp+DCh] [ebp-64h] BYREF
-  float v59[13]; // [esp+100h] [ebp-40h] BYREF
+  NiTransform v59; // [esp+100h] [ebp-40h] BYREF
   unsigned int v60; // [esp+13Ch] [ebp-4h]
 
-  v40[1] = (unsigned int *)0x25;
-  v5 = 0;
-  v42 = 0;
-  v41 = FormHeapAlloc(0x94u);
-  _memset(v41, 0, 0x94);
-  v40[0] = (unsigned int *)&NiTMap<unsigned int,VertexDist>::`vftable';
-  v6 = a1;
-  v60 = 0;
-  v35 = 0;
-  if ( !a1 )
-    goto LABEL_13;
-  if ( !a2 )
-    goto LABEL_13;
-  if ( a1 == a2 )
-    goto LABEL_13;
-  v7 = *(_DWORD *)(a1 + 0xB4);
-  v8 = *(_DWORD *)(v7 + 0x1C);
-  v9 = *(_DWORD *)(v7 + 0x20);
-  v10 = *(unsigned __int16 *)(v7 + 8);
-  v53 = v8;
-  v48 = v9;
-  v39 = v10;
-  if ( !v8 )
-    goto LABEL_13;
-  if ( !v9 )
-    goto LABEL_13;
-  if ( !v10 )
-    goto LABEL_13;
-  v11 = *(_DWORD *)(a2 + 0xB4);
-  v12 = *(_DWORD *)(v11 + 0x1C);
-  v13 = *(_DWORD *)(v11 + 0x20);
-  v14 = *(unsigned __int16 *)(v11 + 8);
-  v52 = v12;
-  v47 = v13;
-  v36 = v14;
-  if ( !v12 )
-    goto LABEL_13;
-  if ( !v13 )
-    goto LABEL_13;
-  if ( !v14 )
-    goto LABEL_13;
-  v15 = sub_4802E0(a1);
-  v46 = (float *)v15;
-  if ( !v15 )
-    goto LABEL_13;
-  v45 = (float *)sub_4802E0(a2);
-  if ( !v45 )
+  v40[1] = (unsigned int *)0x25; /*0x481954*/
+  v5 = 0; /*0x481958*/
+  v42 = 0; /*0x48196c*/
+  v41 = FormHeapAlloc(0x94u); /*0x481988*/
+  _memset(v41, 0, 0x94u); /*0x48198c*/
+  v40[0] = (unsigned int *)&NiTMap<unsigned int,VertexDist>::`vftable'; /*0x481994*/
+  v6 = sourceGeometry; /*0x48199c*/
+  v60 = 0; /*0x4819a5*/
+  copiedAnyNormal = 0; /*0x4819ac*/
+  if ( !sourceGeometry ) /*0x4819b0*/
+    goto LABEL_13; /*0x4819b0*/
+  if ( !targetGeometry ) /*0x4819bf*/
+    goto LABEL_13; /*0x4819bf*/
+  if ( sourceGeometry == targetGeometry ) /*0x4819c7*/
+    goto LABEL_13; /*0x4819c7*/
+  geomData = sourceGeometry->member.geomData; /*0x4819cd*/
+  m_pkVertex = geomData->member.m_pkVertex; /*0x4819d3*/
+  m_pkNormal = geomData->member.m_pkNormal; /*0x4819d8*/
+  m_usVertices = geomData->member.m_usVertices; /*0x4819df*/
+  sourceVertices = m_pkVertex; /*0x4819e2*/
+  sourceNormals = m_pkNormal; /*0x4819e6*/
+  sourceVertexCount = m_usVertices; /*0x4819ea*/
+  if ( !m_pkVertex ) /*0x4819ee*/
+    goto LABEL_13; /*0x4819ee*/
+  if ( !m_pkNormal ) /*0x4819f2*/
+    goto LABEL_13; /*0x4819f2*/
+  if ( !m_usVertices ) /*0x4819f6*/
+    goto LABEL_13; /*0x4819f6*/
+  v11 = targetGeometry->member.geomData; /*0x4819f8*/
+  v12 = v11->member.m_pkVertex; /*0x4819fe*/
+  v13 = v11->member.m_pkNormal; /*0x481a03*/
+  v14 = v11->member.m_usVertices; /*0x481a0a*/
+  targetVertices = v12; /*0x481a0d*/
+  targetNormals = v13; /*0x481a11*/
+  targetVertexCount = v14; /*0x481a15*/
+  if ( !v12 ) /*0x481a19*/
+    goto LABEL_13; /*0x481a19*/
+  if ( !v13 ) /*0x481a1d*/
+    goto LABEL_13; /*0x481a1d*/
+  if ( !v14 ) /*0x481a21*/
+    goto LABEL_13; /*0x481a21*/
+  WorldVertices = NiGeometry_AllocateWorldVertices((int)sourceGeometry); /*0x481a29*/
+  v46 = (float *)WorldVertices; /*0x481a30*/
+  if ( !WorldVertices ) /*0x481a34*/
+    goto LABEL_13; /*0x481a34*/
+  v45 = (float *)NiGeometry_AllocateWorldVertices((int)targetGeometry); /*0x481a41*/
+  if ( !v45 ) /*0x481a45*/
   {
-    FormHeapFree(v15);
+    FormHeapFree(WorldVertices); /*0x481a48*/
 LABEL_13:
-    v60 = 0xFFFFFFFF;
-    NiTMap<unsigned int,VertexDist>::~NiTMap<unsigned int,VertexDist>((unsigned int *)v40);
-    return 0;
+    v60 = 0xFFFFFFFF; /*0x481a50*/
+    NiTMap<unsigned int,VertexDist>::~NiTMap<unsigned int,VertexDist>((unsigned int *)v40); /*0x481a5f*/
+    return 0; /*0x481a7f*/
   }
-  sub_718A80((float *)(a2 + 0x64), v59);
-  v17 = sub_7103C0((float *)(a2 + 0x64), v57);
-  v18 = NiMAtrix33_Multiply(v17, v58, (float *)(a1 + 0x64));
-  v38 = flt_A32048;
-  qmemcpy(&v56[0x18], v18, 0x24u);
-  if ( !v36 )
-    goto LABEL_33;
-  v44 = v45;
-  do
+  sub_718A80((float *)&targetGeometry->member.super.m_worldTransform, &v59); /*0x481a8d*/
+  v17 = sub_7103C0((float *)&targetGeometry->member.super.m_worldTransform, v57); /*0x481aa8*/
+  v18 = NiMAtrix33_Multiply(v17, v58, (float *)&sourceGeometry->member.super.m_worldTransform); /*0x481aaf*/
+  v38 = flt_A32048; /*0x481abe*/
+  qmemcpy(&v56[0x18], v18, 0x24u); /*0x481ad0*/
+  if ( !targetVertexCount ) /*0x481ad2*/
+    goto LABEL_33; /*0x481ad2*/
+  v44 = v45; /*0x481adc*/
+  do /*0x481bfb*/
   {
-    v19 = a3;
-    v20 = v39;
-    if ( a3 < 0.0 )
-      v19 = flt_A32048;
-    v21 = 0;
-    v37 = v19;
-    if ( v39 )
+    v19 = maxDistance; /*0x481ae0*/
+    matchedSourceIndex = sourceVertexCount; /*0x481ae7*/
+    if ( maxDistance < 0.0 ) /*0x481af4*/
+      v19 = flt_A32048; /*0x481af8*/
+    sourceIndex = 0; /*0x481afe*/
+    nearestDistance = v19; /*0x481b00*/
+    if ( sourceVertexCount ) /*0x481b06*/
     {
-      v22 = v46;
-      do
+      v22 = v46; /*0x481b0c*/
+      do /*0x481b60*/
       {
-        v23 = sub_4121A0(v44, (float *)v56, v22);
-        v43 = sub_404C90(v23);
-        if ( v37 > (double)v43 )
+        v23 = sub_4121A0(v44, (float *)v56, v22); /*0x481b1a*/
+        v43 = NiPoint3_Length(v23); /*0x481b26*/
+        if ( nearestDistance > (double)v43 ) /*0x481b39*/
         {
-          v37 = v43;
-          v20 = v21;
+          nearestDistance = v43; /*0x481b3b*/
+          matchedSourceIndex = sourceIndex; /*0x481b3f*/
         }
-        if ( v38 > (double)v43 )
-          v38 = v43;
-        ++v21;
-        v22 += 3;
+        if ( v38 > (double)v43 ) /*0x481b4c*/
+          v38 = v43; /*0x481b4e*/
+        ++sourceIndex; /*0x481b56*/
+        v22 += 3; /*0x481b59*/
       }
-      while ( v21 < v39 );
-      if ( v20 < v39 )
+      while ( sourceIndex < sourceVertexCount ); /*0x481b60*/
+      if ( matchedSourceIndex < sourceVertexCount ) /*0x481b66*/
       {
-        *(float *)&v51 = v37;
-        if ( !sub_47DB90(v40, v20, v54) )
-          goto LABEL_30;
-        if ( sub_47DF40(v37, v55, flt_A37080) )
+        *(float *)&v51 = nearestDistance; /*0x481b75*/
+        if ( !NiTMap_UInt_VertexDist_Get(v40, matchedSourceIndex, v54) ) /*0x481b7e*/
+          goto LABEL_30;                        // VertexDist map is keyed by source vertex. Each 20-byte node stores key, primary target index, one secondary target index, and nearest distance. /*0x481b7e*/
+        if ( FloatNearlyEqualAbsolute(nearestDistance, v55, flt_A37080) )// Treat target distances within 0.001 as coincident. The replacement stores the new target plus only the previous primary target; any earlier secondary target is discarded. /*0x481ba3*/
         {
-          sub_47DAD0(v40, v20, v5, v54[0], v51);
-          goto LABEL_31;
+          NiTMap_UInt_VertexDist_Set(v40, matchedSourceIndex, v5, v54[0], v51);// Equal-distance insertion rotates two target slots. Targets are visited in ascending index order, so only the final two coincident target indices survive; earlier UV-split targets are dropped. /*0x481bbd*/
+          goto LABEL_31; /*0x481bbd*/
         }
-        if ( v55 > (double)v37 )
+        if ( v55 > (double)nearestDistance ) /*0x481bce*/
 LABEL_30:
-          sub_47DAD0(v40, v20, v5, v36, v51);
+          NiTMap_UInt_VertexDist_Set(v40, matchedSourceIndex, v5, targetVertexCount, v51); /*0x481bea*/
       }
     }
 LABEL_31:
-    v44 += 3;
-    ++v5;
+    v44 += 3; /*0x481bef*/
+    ++v5; /*0x481bf4*/
   }
-  while ( v5 < v36 );
-  v6 = a1;
+  while ( v5 < targetVertexCount ); /*0x481bfb*/
+  v6 = sourceGeometry; /*0x481c01*/
 LABEL_33:
-  v38 = COERCE_FLOAT(sub_6A9030(v40));
-  if ( v38 != 0.0 )
+  v38 = COERCE_FLOAT(NiTMapBase_GetFirstNode((unsigned int *)v40)); /*0x481c08*/
+  if ( v38 != 0.0 ) /*0x481c17*/
   {
-    v35 = 1;
-    do
+    copiedAnyNormal = 1; /*0x481c1d*/
+    do /*0x481d41*/
     {
-      sub_47DBF0(v40, (unsigned int *)&v38, &v43, &v49);
-      v24 = 0xC * LODWORD(v43);
-      v25 = sub_7101F0((NiTransform *)&v56[0x18], (NiTransform *)v56, (NiPoint3 *)(v48 + 0xC * LODWORD(v43)));
-      v26 = 0xC * v49;
-      v27 = (float *)(0xC * v49 + v47);
-      *v27 = v25->rot.data[0][0];
-      v27[1] = v25->rot.data[0][1];
-      v27[2] = v25->rot.data[0][2];
-      sub_43F350(v27);
-      v28 = v50;
-      if ( v50 < v36 )
+      NiTMap_UInt_VertexDist_GetNext(v40, (unsigned int *)&v38, &v43, &v49);// Enumerate one VertexDist record: source index, primary target index, optional secondary target index, distance. /*0x481c35*/
+      v24 = LODWORD(v43); /*0x481c47*/
+      v25 = sub_7101F0((NiTransform *)&v56[0x18], (NiTransform *)v56, &sourceNormals[LODWORD(v43)]); /*0x481c59*/
+      v26 = v49; /*0x481c6d*/
+      p_x = &targetNormals[v49].x; /*0x481c6f*/
+      *p_x = v25->rot.data[0][0]; /*0x481c72*/
+      p_x[1] = v25->rot.data[0][1]; /*0x481c77*/
+      p_x[2] = v25->rot.data[0][2]; /*0x481c7f*/
+      Vector3_NormalizeInPlace(p_x); /*0x481c82*/
+      v28 = v50; /*0x481c89*/
+      if ( v50 < targetVertexCount )            // Copy the source normal to the one optional secondary target only. VertexDist cannot represent additional coincident targets. /*0x481c91*/
       {
-        v29 = (_DWORD *)(v47 + 0xC * v50);
-        *v29 = *(_DWORD *)v27;
-        v29[1] = *((_DWORD *)v27 + 1);
-        v29[2] = *((_DWORD *)v27 + 2);
+        v29 = (_DWORD *)&targetNormals[v50].x; /*0x481c9c*/
+        *v29 = *(_DWORD *)p_x; /*0x481c9f*/
+        v29[1] = *((_DWORD *)p_x + 1); /*0x481ca4*/
+        v29[2] = *((_DWORD *)p_x + 2); /*0x481caa*/
       }
-      if ( a5 )
+      if ( offsetVerticesAlongNormals ) /*0x481cb5*/
       {
-        if ( dword_B34408 != a1 )
+        if ( *(NiGeometry **)&MEMORY[0xB33E90][0x578] != sourceGeometry ) /*0x481cc8*/
         {
-          v30 = sub_47DA10((float *)v54, flt_A31C80, (float *)(v48 + v24));
-          sub_4121D0((float *)(v53 + v24), v30);
+          v30 = sub_47DA10((float *)v54, flt_A31C80, &sourceNormals[v24].x); /*0x481ce1*/
+          sub_4121D0(&sourceVertices[v24].x, v30); /*0x481cf1*/
         }
-        v31 = v52;
-        v32 = v52 + v26;
-        v33 = sub_47DA10((float *)&v56[0xC], flt_A31C80, v27);
-        sub_4121D0((float *)v32, v33);
-        if ( v28 < v36 )
+        v31 = targetVertices; /*0x481cfc*/
+        v32 = &targetVertices[v26]; /*0x481d0d*/
+        v33 = sub_47DA10((float *)&v56[0xC], flt_A31C80, p_x); /*0x481d0f*/
+        sub_4121D0(&v32->x, v33); /*0x481d1a*/
+        if ( v28 < targetVertexCount ) /*0x481d23*/
         {
-          v34 = (_DWORD *)(v31 + 0xC * v28);
-          *v34 = *(_DWORD *)v32;
-          v34[1] = *(_DWORD *)(v32 + 4);
-          v34[2] = *(_DWORD *)(v32 + 8);
+          v34 = (_DWORD *)&v31[v28].x; /*0x481d2a*/
+          *v34 = LODWORD(v32->x); /*0x481d2e*/
+          v34[1] = LODWORD(v32->y); /*0x481d33*/
+          v34[2] = LODWORD(v32->z); /*0x481d39*/
         }
       }
     }
-    while ( v38 != 0.0 );
-    if ( a5 )
-      *(_WORD *)(*(_DWORD *)(a1 + 0xB4) + 0x2E) |= 3u;
-    *(_WORD *)(*(_DWORD *)(a2 + 0xB4) + 0x2E) |= 3u;
-    v6 = a1;
+    while ( v38 != 0.0 ); /*0x481d41*/
+    if ( offsetVerticesAlongNormals ) /*0x481d54*/
+      sourceGeometry->member.geomData->member.m_usDirtyFlags |= 3u; /*0x481d63*/
+    targetGeometry->member.geomData->member.m_usDirtyFlags |= 3u; /*0x481d74*/
+    v6 = sourceGeometry; /*0x481d78*/
   }
-  FormHeapFree((unsigned int)v46);
-  FormHeapFree((unsigned int)v45);
-  dword_B34408 = v6;
-  v60 = 0xFFFFFFFF;
-  NiTMap<unsigned int,VertexDist>::~NiTMap<unsigned int,VertexDist>((unsigned int *)v40);
-  return v35;
+  FormHeapFree((unsigned int)v46); /*0x481d84*/
+  FormHeapFree((unsigned int)v45); /*0x481d8e*/
+  *(_DWORD *)&MEMORY[0xB33E90][0x578] = v6; /*0x481d9a*/
+  v60 = 0xFFFFFFFF; /*0x481da0*/
+  NiTMap<unsigned int,VertexDist>::~NiTMap<unsigned int,VertexDist>((unsigned int *)v40); /*0x481dab*/
+  return copiedAnyNormal; /*0x481a66*/
 }

@@ -69,3 +69,85 @@
 0x988DB3: jmp     short loc_988DCD
 0x988DB5: cmp     [ebp+ExtSize], edi
 0x988DB8: jnz     short loc_988D64
+0x988DC6: cmp     ecx, edi
+0x988DC8: jz      short loc_988DCD
+0x988DCA: mov     byte ptr [ecx], 0
+0x988DCD: and     [ebp+FullPath], edi
+0x988DD0: cmp     byte ptr [ebx], 0
+0x988DD3: mov     esi, ebx
+0x988DD5: jz      short loc_988E2F
+0x988DD7: movsx   eax, byte ptr [esi]
+0x988DDA: push    eax; unsigned int
+0x988DDB: call    __ismbblead
+0x988DE0: test    eax, eax
+0x988DE2: pop     ecx
+0x988DE3: jz      short loc_988DE8
+0x988DE5: inc     esi
+0x988DE6: jmp     short loc_988DFE
+0x988DE8: mov     al, [esi]
+0x988DEA: cmp     al, 2Fh ; '/'
+0x988DEC: jz      short loc_988DFB
+0x988DEE: cmp     al, 5Ch ; '\'
+0x988DF0: jz      short loc_988DFB
+0x988DF2: cmp     al, 2Eh ; '.'
+0x988DF4: jnz     short loc_988DFE
+0x988DF6: mov     [ebp+FullPath], esi
+0x988DF9: jmp     short loc_988DFE
+0x988DFB: lea     edi, [esi+1]
+0x988DFE: inc     esi
+0x988DFF: cmp     byte ptr [esi], 0
+0x988E02: jnz     short loc_988DD7
+0x988E04: test    edi, edi
+0x988E06: jz      short loc_988E2F
+0x988E08: cmp     [ebp+Dir], 0
+0x988E0C: jz      short loc_988E2B
+0x988E0E: mov     eax, edi
+0x988E10: sub     eax, ebx
+0x988E12: cmp     [ebp+DirSize], eax
+0x988E15: jbe     loc_988E9B
+0x988E1B: push    eax; Src
+0x988E1C: push    ebx; Src
+0x988E1D: push    [ebp+DirSize]; SizeInBytes
+0x988E20: push    [ebp+Dir]; Dst
+0x988E23: call    _strncpy_s
+0x988E28: add     esp, 10h
+0x988E2B: mov     ebx, edi
+0x988E2D: jmp     short loc_988E39
+0x988E2F: mov     eax, [ebp+Dir]
+0x988E32: test    eax, eax
+0x988E34: jz      short loc_988E39
+0x988E36: mov     byte ptr [eax], 0
+0x988E39: mov     eax, [ebp+FullPath]
+0x988E3C: test    eax, eax
+0x988E3E: jz      short loc_988E8A
+0x988E40: cmp     eax, ebx
+0x988E42: jb      short loc_988E8A
+0x988E44: cmp     [ebp+Filename], 0
+0x988E48: jz      short loc_988E61
+0x988E4A: sub     eax, ebx
+0x988E4C: cmp     [ebp+FilenameSize], eax
+0x988E4F: jbe     short loc_988E9B
+0x988E51: push    eax; Src
+0x988E52: push    ebx; Src
+0x988E53: push    [ebp+FilenameSize]; SizeInBytes
+0x988E56: push    [ebp+Filename]; Dst
+0x988E59: call    _strncpy_s
+0x988E5E: add     esp, 10h
+0x988E61: cmp     [ebp+Ext], 0
+0x988E65: jz      loc_988F20
+0x988E6B: sub     esi, [ebp+FullPath]
+0x988E6E: cmp     [ebp+ExtSize], esi
+0x988E71: jbe     short loc_988E9B
+0x988E73: push    esi; Src
+0x988E74: push    [ebp+FullPath]; Src
+0x988E77: push    [ebp+ExtSize]; SizeInBytes
+0x988E7A: push    [ebp+Ext]; Dst
+0x988E7D: call    _strncpy_s
+0x988E82: add     esp, 10h
+0x988E85: jmp     loc_988F20
+0x988E8A: cmp     [ebp+Filename], 0
+0x988E8E: jz      loc_988F16
+0x988E94: sub     esi, ebx
+0x988E96: cmp     [ebp+FilenameSize], esi
+0x988E99: ja      short loc_988F06
+0x988E9B: xor     edi, edi

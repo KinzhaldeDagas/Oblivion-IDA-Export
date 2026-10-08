@@ -6,8 +6,8 @@
 0x631CD0: push    esi
 0x631CD1: push    edi
 0x631CD2: mov     edi, ecx
-0x631CD4: mov     ecx, ebx
-0x631CD6: call    sub_5E32D0
+0x631CD4: mov     ecx, ebx; this
+0x631CD6: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x631CDB: test    al, al
 0x631CDD: mov     esi, [esp+10h+arg_4]
 0x631CE1: jz      short loc_631D2C

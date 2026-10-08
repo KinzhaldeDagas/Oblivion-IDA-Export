@@ -1,16 +1,16 @@
-0x7D85D0: sub     esp, 40h
+0x7D85D0: sub     esp, 40h; Base PP-lighting vtable +0x5C render-pass builder. Stock accumulator reachability: BSShaderPPLightingProperty and both SpeedTree PP-lighting owners retain this slot; Lighting30 overrides +0x5C with 0x8637D0; Hair overrides it with 0x882AE0 and calls this only for Refract/RefractF fallback.
 0x7D85D3: push    ebx
 0x7D85D4: push    ebp
 0x7D85D5: mov     ebp, [esp+48h+arg_0]
 0x7D85D9: push    esi
 0x7D85DA: push    edi
-0x7D85DB: lea     eax, [esp+50h+var_30]
+0x7D85DB: lea     eax, [esp+50h+output]
 0x7D85DF: mov     esi, ecx
-0x7D85E1: push    eax
-0x7D85E2: mov     ecx, ebp
-0x7D85E4: call    sub_405760
+0x7D85E1: push    eax; output
+0x7D85E2: mov     ecx, ebp; this
+0x7D85E4: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7D85E9: mov     ebx, [eax]
-0x7D85EB: mov     eax, [esp+50h+var_30]
+0x7D85EB: mov     eax, [esp+50h+output]
 0x7D85EF: test    eax, eax
 0x7D85F1: mov     [esp+50h+var_38], ebx
 0x7D85F5: jz      short loc_7D8615
@@ -34,8 +34,8 @@
 0x7D8626: cmp     ax, 5
 0x7D862A: mov     [esp+50h+var_34], ecx
 0x7D862E: jnz     loc_7D86C0
-0x7D8634: mov     ecx, esi
-0x7D8636: call    sub_7ED1A0
+0x7D8634: mov     ecx, esi; self
+0x7D8636: call    BSShaderLightingProperty__GetFirstActiveNonShadowLight; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.
 0x7D863B: cmp     dword ptr [esi+44h], 0
 0x7D863F: jz      short loc_7D865D
 0x7D8641: mov     ecx, [esi+3Ch]
@@ -52,10 +52,10 @@
 0x7D8664: test    ebx, ebx
 0x7D8666: jz      short loc_7D86B3
 0x7D8668: lea     ecx, [esi+38h]
-0x7D866B: call    NiTPointerList__FreeAllNodes
+0x7D866B: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7D8670: push    0
 0x7D8672: mov     ecx, ebp
-0x7D8674: call    NiNode_GetNiPropertyByID
+0x7D8674: call    NiNode_GetNiPropertyByID;
 0x7D8679: test    eax, eax
 0x7D867B: jnz     short loc_7D8684
 0x7D867D: mov     eax, [ebx+8]
@@ -74,7 +74,7 @@
 0x7D86AA: mov     ecx, esi
 0x7D86AC: push    eax
 0x7D86AD: push    ebp
-0x7D86AE: call    sub_85AAC0
+0x7D86AE: call    BSShaderLightingProperty_AppendMode5CasterPass; Oblivion mode-5 PP-lighting admission: skinData presence and NiAlphaProperty flag 0x200 select exactly one caster bucket 6..9.
 0x7D86B3: pop     edi
 0x7D86B4: lea     eax, [esi+38h]
 0x7D86B7: pop     esi
@@ -350,7 +350,7 @@
 0x7D89BA: push    ecx
 0x7D89BB: mov     ecx, esi
 0x7D89BD: fstp    [esp+54h+var_54]; float
-0x7D89C0: call    sub_7E2430
+0x7D89C0: call    sub_7E2430; Shader property LOD/alpha helper: update float +0x20 and reset dword +0x24 when crossing 1.0 threshold.
 0x7D89C5: test    dword ptr [esi+1Ch], 80000h
 0x7D89CC: jbe     short loc_7D8A35
 0x7D89CE: cmp     edi, ebx
@@ -364,7 +364,7 @@
 0x7D89E1: fld     [esp+54h+arg_0]
 0x7D89E5: mov     ecx, ebp
 0x7D89E7: fstp    [esp+54h+arg_0]
-0x7D89EB: call    NiNode_GetNiPropertyByID
+0x7D89EB: call    NiNode_GetNiPropertyByID;
 0x7D89F0: fld1
 0x7D89F2: mov     ecx, eax
 0x7D89F4: fld     [esp+50h+arg_0]
@@ -392,16 +392,16 @@
 0x7D8A2F: mov     [esi+24h], ebx
 0x7D8A32: fstp    dword ptr [esi+20h]
 0x7D8A35: mov     eax, [esp+50h+var_34]
-0x7D8A39: cmp     [esi+24h], eax
+0x7D8A39: cmp     [esi+24h], eax; Compare the cached render-pass state key at property+0x24 with (renderMode<<8)|buildFlags.
 0x7D8A3C: mov     ebx, [esp+50h+arg_C]
 0x7D8A40: jnz     short loc_7D8A4A
 0x7D8A42: test    bl, bl
-0x7D8A44: jnz     loc_7D8B32
+0x7D8A44: jnz     loc_7D8B32; Emit-mode cache hit returns the existing property-owned pass list without rebuilding or reallocating its RenderPass records.
 0x7D8A4A: cmp     bl, 1
 0x7D8A4D: mov     edi, [esp+50h+arg_8]
 0x7D8A51: jnz     short loc_7D8A73
 0x7D8A53: mov     ecx, esi
-0x7D8A55: call    sub_7E24C0
+0x7D8A55: call    BSShaderProperty_ClearRenderPassLists; Emit-mode cache miss: destroy every old property-owned RenderPass/list node before producing the replacement cached list.
 0x7D8A5A: fldz
 0x7D8A5C: fcomp   dword ptr [esi+20h]
 0x7D8A5F: fnstsw  ax
@@ -409,9 +409,9 @@
 0x7D8A64: jnp     loc_7D8B32
 0x7D8A6A: mov     ecx, [esp+50h+var_34]
 0x7D8A6E: mov     [esi+24h], ecx
-0x7D8A71: jmp     short loc_7D8A78
+0x7D8A71: jmp     short loc_7D8A78; Base-builder ShaderPackage dispatch only: class 1 calls property +0x98; class >=2 calls +0x9C. This dispatch is not an independent entry from the accumulator.
 0x7D8A73: mov     word ptr [edi], 0
-0x7D8A78: mov     eax, ds:0B42F48h
+0x7D8A78: mov     eax, ds:0B42F48h; Dispatch inherited property pass production by Oblivion ShaderPackage class: class 1 uses virtual +0x98; class >=2 uses virtual +0x9C.
 0x7D8A7D: cmp     eax, 1
 0x7D8A80: jnz     short loc_7D8A93
 0x7D8A82: mov     edx, [esi]
@@ -421,17 +421,17 @@
 0x7D8A8F: push    edi
 0x7D8A90: push    eax
 0x7D8A91: jmp     short loc_7D8AA7
-0x7D8A93: cmp     eax, 2
+0x7D8A93: cmp     eax, 2; Class >=2 dispatches +0x9C only after entering this base +0x5C builder. Exact Lighting30 never enters it; flagged Hair enters it but +0x9C returns through the earlier Refract/RefractF branch before the high-selector path.
 0x7D8A96: jl      short loc_7D8AAC
 0x7D8A98: mov     eax, [esi]
 0x7D8A9A: mov     ecx, [esp+50h+arg_4]
-0x7D8A9E: mov     edx, [eax+9Ch]
+0x7D8A9E: mov     edx, [eax+9Ch]; Closed-world Oblivion .text audit of displacement +0x9C loads followed by indirect calls found this as the sole BSShaderProperty-family +0x9C callsite and the only one with the four-stack-argument producer ABI. It is reachable only from the base +0x5C builder; Lighting30 never enters, and Hair's required refraction state short-circuits the callee.
 0x7D8AA4: push    ebx
 0x7D8AA5: push    edi
 0x7D8AA6: push    ecx
 0x7D8AA7: push    ebp
 0x7D8AA8: mov     ecx, esi
-0x7D8AAA: call    edx
+0x7D8AAA: call    edx; Sole BSShaderProperty-family virtual +0x9C invocation in Oblivion .text. Calls class-1 +0x98 or class>=2 +0x9C from the base +0x5C builder; no alternate Lighting30 rendering entry invokes the inherited slot.
 0x7D8AAC: cmp     dword ptr ds:0B42F48h, 3
 0x7D8AB3: jl      short loc_7D8B1A
 0x7D8AB5: test    byte ptr ds:0B42F40h, 10h
@@ -445,7 +445,7 @@
 0x7D8AD1: jz      short loc_7D8B1A
 0x7D8AD3: push    0
 0x7D8AD5: mov     ecx, ebp
-0x7D8AD7: call    NiNode_GetNiPropertyByID
+0x7D8AD7: call    NiNode_GetNiPropertyByID;
 0x7D8ADC: test    eax, eax
 0x7D8ADE: jnz     short loc_7D8AEB
 0x7D8AE0: mov     eax, [esp+50h+var_38]
@@ -465,7 +465,7 @@
 0x7D8B11: mov     ecx, esi
 0x7D8B13: push    eax
 0x7D8B14: push    ebp
-0x7D8B15: call    sub_85AAC0
+0x7D8B15: call    BSShaderLightingProperty_AppendMode5CasterPass; Shared Oblivion mode-5 caster-pass allocator. Maps rigid/opaque to selector 6, rigid/alpha-test to 7, skinned/opaque to 8, and skinned/alpha-test to 9. Every RenderPass carries the current ShadowSceneLight as its sole light.
 0x7D8B1A: test    bl, bl
 0x7D8B1C: jz      short loc_7D8B32
 0x7D8B1E: cmp     dword ptr [esi+34h], 0

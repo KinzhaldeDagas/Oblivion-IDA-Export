@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x46D750",
+      "0x46D7DC"
+    ]
+  ],
+  "chunks_sha256": "f66173b06350e964395b7232661116eb8c4a54dafe550016c130dfeaeb7ecea3",
+  "comment_regular": "Verified: MODT chunks are accepted only when byte length is a nonzero multiple of 24. Each valid chunk is decoded into runtime texture-hash entries and replaces the TESTextureList state; zero/invalid-width chunks leave the old state unchanged. The 24-byte field meanings remain Unknown.",
+  "comment_repeatable": "Verified: MODT chunks are accepted only when byte length is a nonzero multiple of 24. Each valid chunk is decoded into runtime texture-hash entries and replaces the TESTextureList state; zero/invalid-width chunks leave the old state unchanged. The 24-byte field meanings remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_46D750",
+  "display_name": "TESModel_ReadAndReplaceTextureHashEntries",
   "end_ea": "0x46D7DC",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_46D750",
+  "name": "TESModel_ReadAndReplaceTextureHashEntries",
   "segment": ".text",
   "sha256": "f66173b06350e964395b7232661116eb8c4a54dafe550016c130dfeaeb7ecea3",
   "size": 140,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46D750",
-  "type": "int __thiscall(_BYTE *this, Data *, _DWORD *, const char *)",
+  "total_chunk_size": 140,
+  "type": "int __thiscall(TESTextureList *this, Data *file, TESForm *form, const char *modelPath)",
   "xrefs_from_count": 64,
   "xrefs_to_count": 2
 }

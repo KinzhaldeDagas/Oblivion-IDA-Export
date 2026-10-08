@@ -66,7 +66,6 @@
 0x4AD0E2: mov     eax, [esi+0FCh]
 0x4AD0E8: lea     edx, [eax+1]
 0x4AD0EB: jmp     short loc_4AD0F0
-0x4AD0ED: align 10h
 0x4AD0F0: mov     cl, [eax]
 0x4AD0F2: add     eax, 1
 0x4AD0F5: test    cl, cl

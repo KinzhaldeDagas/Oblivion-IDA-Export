@@ -160,3 +160,15 @@
 0x6FDAE9: mov     ecx, ebx
 0x6FDAEB: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x6FDAF0: jmp     short loc_6FDA89
+0x9AC6D0: mov     eax, [ebp-1Ch]
+0x9AC6D3: push    eax
+0x9AC6D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC6D9: pop     ecx
+0x9AC6DA: retn
+0x9AC6DB: mov     edx, [esp+arg_4]
+0x9AC6DF: lea     eax, [edx-20h]
+0x9AC6E2: mov     ecx, [edx-24h]
+0x9AC6E5: xor     ecx, eax
+0x9AC6E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC6EC: mov     eax, offset stru_AD93A0
+0x9AC6F1: jmp     ___CxxFrameHandler3

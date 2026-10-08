@@ -3,7 +3,7 @@
 0x98DE17: call    __SEH_prolog4
 0x98DE1C: xor     edi, edi
 0x98DE1E: mov     [ebp+var_1C], edi
-0x98DE21: push    dword_BAA5F0
+0x98DE21: push    dword_BA9E10+7E0h
 0x98DE27: call    __decode_pointer
 0x98DE2C: pop     ecx
 0x98DE2D: mov     esi, eax
@@ -38,7 +38,7 @@
 0x98DE7A: push    esi
 0x98DE7B: call    __encode_pointer
 0x98DE80: pop     ecx
-0x98DE81: mov     dword_BAA5F0, eax
+0x98DE81: mov     dword_BA9E10+7E0h, eax
 0x98DE86: mov     [ebp+ms_exc.registration.TryLevel], edi
 0x98DE89: push    [ebp+arg_4]
 0x98DE8C: push    [ebp+arg_0]

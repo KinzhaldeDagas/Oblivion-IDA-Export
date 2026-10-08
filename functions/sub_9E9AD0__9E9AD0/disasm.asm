@@ -2,7 +2,7 @@
 0x9E9AD6: push    ecx
 0x9E9AD7: fstp    [esp+4+var_4]; float
 0x9E9ADA: push    offset aFarrowbowtim_0; "fArrowBowTimerMult"
-0x9E9ADF: mov     ecx, offset fArrowBowTimerMult
+0x9E9ADF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3B0h)
 0x9E9AE4: call    GameSetting_ConstrAndReg_float
 0x9E9AE9: push    offset sub_A1E830; void (__cdecl *)()
 0x9E9AEE: call    _atexit

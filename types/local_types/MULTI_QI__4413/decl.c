@@ -1,1 +1,1 @@
-MULTI_QI
+typedef tagMULTI_QI MULTI_QI;

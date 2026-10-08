@@ -163,31 +163,31 @@
   },
   {
     "ea": "0x469A64",
-    "line": "mov     ecx, [esp+arg_28]",
+    "line": "mov     ecx, [esp+arg_28]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x469A68",
-    "line": "push    edx",
+    "line": "push    edx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x469A69",
-    "line": "push    esi",
+    "line": "push    esi; extraList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x469A6A",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x469A6B",
-    "line": "call    ContainerExtraData_AddItem",
+    "line": "call    ContainerExtraData_AddItem; Canonical form-based container add: item, optional instance ExtraDataList, and signed count. All four external callers enter only at this head; the formerly split interior blocks are one logical routine ending in retn 0x0C. A proxy-to-source conversion hook here covers actor-hit/form adds but not ordinary world-reference pickup.",
     "mnemonic": "call",
     "size": 5
   }

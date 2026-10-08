@@ -24,7 +24,7 @@
 0x51D10F: mov     ecx, ebp
 0x51D111: call    CreatureSoundArray_ClearAllSounds
 0x51D116: push    ebp
-0x51D117: call    FormHeapFree
+0x51D117: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51D11C: add     esp, 4
 0x51D11F: pop     ebp
 0x51D120: push    ebx

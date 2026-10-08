@@ -1,13 +1,16 @@
-std::exception *__thiscall sub_7893E0(std::exception *this, char a2)
+// Oblivion std::runtime_error scalar-deleting destructor: performs runtime_error/std::exception teardown and frees this through FormHeap when deleteFlags bit 0 is set.
+OB_std_runtime_error_010201A0 *__thiscall OB_std_runtime_error_ScalarDeletingDtor_010201A0(
+        OB_std_runtime_error_010201A0 *this,
+        unsigned __int8 deleteFlags)
 {
-  *(_DWORD *)this = &std::runtime_error::`vftable';
-  if ( *((_DWORD *)this + 9) >= 0x10u )
-    FormHeapFree(*((_DWORD *)this + 4));
-  *((_DWORD *)this + 9) = 0xF;
-  *((_DWORD *)this + 8) = 0;
-  *((_BYTE *)this + 0x10) = 0;
-  std::exception::~exception(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *(_DWORD *)this->exceptionBase = &std::runtime_error::`vftable'; /*0x7893e3*/
+  if ( this->message.capacity >= 0x10 ) /*0x7893ed*/
+    FormHeapFree((unsigned int)this->message.storage.heapData); /*0x7893f3*/
+  this->message.capacity = 0xF; /*0x7893fd*/
+  this->message.size = 0; /*0x789404*/
+  this->message.storage.inlineData[0] = 0; /*0x789409*/
+  std::exception::~exception((std::exception *)this); /*0x78940c*/
+  if ( (deleteFlags & 1) != 0 ) /*0x789416*/
+    FormHeapFree((unsigned int)this); /*0x789419*/
+  return this; /*0x789423*/
 }

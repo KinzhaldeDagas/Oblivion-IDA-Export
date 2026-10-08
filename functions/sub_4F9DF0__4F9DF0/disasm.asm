@@ -1,4 +1,4 @@
-0x4F9DF0: push    ebx
+0x4F9DF0: push    ebx; Replace Script compiled data: free old pointer at Script+0x30, clear it, set ScriptInfo compiledSize at +0x20, then allocate/zero/copy exactly Size bytes when nonzero. A zero-size call clears compiled storage and size.
 0x4F9DF1: push    esi
 0x4F9DF2: mov     esi, ecx
 0x4F9DF4: mov     eax, [esi+30h]
@@ -22,11 +22,11 @@
 0x4F9E28: call    __memset
 0x4F9E2D: mov     ecx, [esi+20h]
 0x4F9E30: mov     edx, [esp+18h+Src]
-0x4F9E34: push    ecx; Size
-0x4F9E35: push    edx; Src
-0x4F9E36: push    edi; Dst
+0x4F9E34: push    ecx; byteCount
+0x4F9E35: push    edx; source
+0x4F9E36: push    edi; destination
 0x4F9E37: mov     [esi+30h], edi
-0x4F9E3A: call    _memcpy
+0x4F9E3A: call    _memcpy;
 0x4F9E3F: add     esp, 18h
 0x4F9E42: pop     edi
 0x4F9E43: pop     esi

@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x434040",
-    "line": "mov     eax, ModelLoaderPtr",
+    "line": "mov     eax, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x434099",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -414,12 +414,6 @@
     "size": 2
   },
   {
-    "ea": "0x4340DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4340E0",
     "line": "mov     ecx, [esp+1Ch+var_C]",
     "mnemonic": "mov",
@@ -469,7 +463,7 @@
   },
   {
     "ea": "0x4340FC",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x434115",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x434140",
-    "line": "call    sub_57B950",
+    "line": "call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +685,7 @@
   },
   {
     "ea": "0x43416B",
-    "line": "call    IOManager_ProcessThreads",
+    "line": "call    IOManager_ProcessThreads; MEF data-streaming pass: IOManager post-process pump uses QPC deadline and configured millisecond budget. Left unchanged; budget tuning needs runtime profiling and is not an IDA-proven engine bug.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x434191",
-    "line": "mov     eax, ModelLoaderPtr",
+    "line": "mov     eax, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 5
   },

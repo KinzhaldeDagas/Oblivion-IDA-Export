@@ -20,7 +20,7 @@
 0x6A8C05: mov     ecx, esi
 0x6A8C07: call    edx
 0x6A8C09: mov     ecx, esi; this
-0x6A8C0B: call    TESObjectREFR_GetParentCell
+0x6A8C0B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A8C10: test    eax, eax
 0x6A8C12: jz      short loc_6A8C5F
 0x6A8C14: mov     al, [eax+26h]

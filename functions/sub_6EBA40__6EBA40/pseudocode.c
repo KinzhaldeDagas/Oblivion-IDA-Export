@@ -1,6 +1,7 @@
-float *__stdcall sub_6EBA40(float *a1, float *a2)
+// Default NiInterpolator active range for a stateless/no-key interpolator is [0,0].
+float *__stdcall NiInterpolator_GetActiveTimeRangeDefault(float *a1, float *a2)
 {
-  *a1 = 0.0;
-  *a2 = 0.0;
-  return a1;
+  *a1 = 0.0; /*0x6eba4a*/
+  *a2 = 0.0; /*0x6eba4c*/
+  return a1; /*0x6eba4e*/
 }

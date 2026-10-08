@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x787060",
+      "0x787067"
+    ]
+  ],
+  "chunks_sha256": "43e6010fa83dd58566116d4f3092921caddb124e6250c0bc9df3d46dea186765",
+  "comment_regular": "CSpeedTreeRT::GetTreeSize thin wrapper. Forwards to CTreeEngine::GetSize at 0x7A2400, reading CTreeEngine+0x4C/+0x50.",
+  "comment_repeatable": "CSpeedTreeRT::GetTreeSize thin wrapper. Forwards to CTreeEngine::GetSize at 0x7A2400, reading CTreeEngine+0x4C/+0x50.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_787060",
+  "display_name": "CSpeedTreeRT__GetTreeSize",
   "end_ea": "0x787067",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787060",
+  "name": "CSpeedTreeRT__GetTreeSize",
   "segment": ".text",
   "sha256": "43e6010fa83dd58566116d4f3092921caddb124e6250c0bc9df3d46dea186765",
   "size": 7,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787060",
-  "type": "float *__thiscall(float **this, float *, float *)",
+  "total_chunk_size": 7,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, float *size, float *variance)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 1
 }

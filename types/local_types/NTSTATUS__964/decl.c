@@ -1,1 +1,1 @@
-NTSTATUS
+typedef LONG NTSTATUS;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B3460",
-    "line": "sub     esp, 108h",
+    "line": "sub     esp, 108h; Verified DMTL load path: allocates a TESTextureList header, derives model path, parses texture-hash entries, and replaces the global cache entry keyed by form ID. Paired Oblivion save handler invokes a writer whose terminal thunk is a no-op.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4B3475",
-    "line": "mov     ebx, [esp+10Ch+arg_0]",
+    "line": "mov     ebx, [esp+10Ch+file]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -151,49 +151,49 @@
   },
   {
     "ea": "0x4B34B0",
-    "line": "push    ecx",
+    "line": "push    ecx; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B34B1",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B34B2",
-    "line": "push    ebx",
+    "line": "push    ebx; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B34B3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B34B5",
-    "line": "call    sub_46D750",
+    "line": "call    TESModel_ReadAndReplaceTextureHashEntries; Verified: MODT chunks are accepted only when byte length is a nonzero multiple of 24. Each valid chunk is decoded into runtime texture-hash entries and replaces the TESTextureList state; zero/invalid-width chunks leave the old state unchanged. The 24-byte field meanings remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B34BA",
-    "line": "push    edi",
+    "line": "push    edi; newList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B34BB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B34BD",
-    "line": "call    sub_4B3400",
+    "line": "call    TESObjectTREE_ReplaceTextureHashCache; Verified: replaces global TESTextureList cache value keyed by this form's FormID; clears/frees prior value before storing new parsed list.",
     "mnemonic": "call",
     "size": 5
   },

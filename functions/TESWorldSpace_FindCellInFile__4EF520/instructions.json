@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4EF554",
-    "line": "call    TESWorldSpace__GetIndexForCellCoord",
+    "line": "call    TESWorldSpace__GetIndexForCellCoord; EngineFix trace 2026-05-11: GetIndexForCellCoord validates coordinates against worldspace [0xAC..0xB8] bounds. DoPostFixups offset-table allocation is based on [0x98..0xA4], so callers that write into rebuilt tables must separately check index against the allocation rectangle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4EF55E",
-    "line": "mov     eax, [edi+eax*4]",
+    "line": "mov     eax, [edi+eax*4]; MEF v21 implementation target: guarded exterior-cell offset fast path. Requires tracked OFST/rebuilt-table count, validates index and base+offset target, falls back to 0x4EF58B for non-authoritative cache misses.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4EF58B",
-    "line": "mov     edi, [ebp+a3]",
+    "line": "mov     edi, [ebp+a3]; MEF v21 fallback target: existing GRUP/CELL scan remains the fallback for untracked or out-of-range OFST cache data.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x4EF641",
-    "line": "call    TESFile__NextGroup",
+    "line": "call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x4EF694",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },

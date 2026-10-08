@@ -1,178 +1,279 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "taskdialog_info",
+  "definition": "struct taskdialog_info\n{\nHWND hwnd __offset(OFF64|AUTO);\nconst TASKDIALOGCONFIG *taskconfig __offset(OFF64|AUTO);\nDWORD last_timer_tick;\nHFONT font __offset(OFF64|AUTO);\nHFONT main_instruction_font __offset(OFF64|AUTO);\nHWND main_icon __offset(OFF64|AUTO);\nHWND main_instruction __offset(OFF64|AUTO);\nHWND content __offset(OFF64|AUTO);\nHWND progress_bar __offset(OFF64|AUTO);\nHWND *radio_buttons __offset(OFF64|AUTO);\nINT radio_button_count;\nHWND *command_links __offset(OFF64|AUTO);\nINT command_link_count;\nHWND expanded_info __offset(OFF64|AUTO);\nHWND expando_button __offset(OFF64|AUTO);\nHWND verification_box __offset(OFF64|AUTO);\nHWND footer_icon __offset(OFF64|AUTO);\nHWND footer_text __offset(OFF64|AUTO);\nHWND *buttons __offset(OFF64|AUTO);\nINT button_count;\nHWND default_button __offset(OFF64|AUTO);\n$C3F3D122BEE45A61D277C1802DC183C8 m;\nINT selected_radio_id;\nBOOL verification_checked;\nBOOL expanded;\nBOOL has_cancel;\nWCHAR_0 *expanded_text __offset(OFF64|AUTO);\nWCHAR_0 *collapsed_text __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671855622,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwnd",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "taskconfig",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "const TASKDIALOGCONFIG *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "last_timer_tick",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "font",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "main_instruction_font",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "main_icon",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "main_instruction",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "content",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "progress_bar",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "radio_buttons",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HWND *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "radio_button_count",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "command_links",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HWND *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "command_link_count",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "expanded_info",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "expando_button",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "verification_box",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "footer_icon",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "footer_text",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buttons",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HWND *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "button_count",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "default_button",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 16
+      "size": 16,
+      "type": "$C3F3D122BEE45A61D277C1802DC183C8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "selected_radio_id",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "verification_checked",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "expanded",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "has_cancel",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "expanded_text",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "collapsed_text",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     }
   ],
   "name": "taskdialog_info",
+  "ordinal": 6514,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 124
 }

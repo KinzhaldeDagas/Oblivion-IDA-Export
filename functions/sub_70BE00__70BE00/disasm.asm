@@ -36,7 +36,7 @@
 0x70BE46: call    sub_70BC70
 0x70BE4B: push    esi
 0x70BE4C: mov     edi, eax
-0x70BE4E: call    FormHeapFree
+0x70BE4E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x70BE53: add     esp, 14h
 0x70BE56: pop     esi
 0x70BE57: mov     eax, edi

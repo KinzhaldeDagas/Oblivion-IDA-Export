@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x680033",
-    "line": "call    ??1AStarWorldNodeList@@UAE@XZ; AStarWorldNodeList::~AStarWorldNodeList(void)",
+    "line": "call    ??1AStarWorldNodeList@@UAE@XZ; Verified AStarWorldNodeList destructor resets the NiTPointerListBase vtable, frees all list-link nodes through NiTPointerList::FreeAllNodes, then resets the base list vtable; AStarWorldNode records themselves are stored in the separate transient state table.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x680040",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

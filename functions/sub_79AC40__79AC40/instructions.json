@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79AC40",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion SFrondTexture copy constructor: deep-copies the 28-byte filename string and copies aspectRatio, sizeScale, minAngleOffset, and maxAngleOffset. The 0x2C layout is established by executable accesses; RT 4.1 FrondEngine.h corroborates the member names.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x79AC63",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+this]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AC67",
-    "line": "mov     [esp+1Ch+arg_0], esi",
+    "line": "mov     [esp+1Ch+this], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x79AC79",
-    "line": "mov     edi, [esp+1Ch+arg_4]",
+    "line": "mov     edi, [esp+1Ch+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AC7D",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79AC7F",
-    "line": "push    eax",
+    "line": "push    eax; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x79AC8A",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AC8B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x79AC90",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -256,5 +256,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC270",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC273",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC274",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC277",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC278",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC27D",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC280",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC281",
+    "line": "mov     edx, [esp+source]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC285",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC288",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC28B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC28D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC292",
+    "line": "mov     eax, offset stru_AF53D4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC297",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

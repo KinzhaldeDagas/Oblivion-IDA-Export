@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 3,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x45C320",
+      "0x45C463"
+    ]
+  ],
+  "chunks_sha256": "6985b3d37ca4893a07951b694e666623a225611561461b423ef0911eb963f51b",
+  "comment_regular": "Verified explored boundary: operates on manager+38 actor-fixup list, NOT deferred deletion list+30. RTTI-casts entries to Actor, evaluates packages and performs other actor/position callbacks; frees list nodes while draining. Full callback policy Unknown; no evidence this drains deletion queue.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "sub_45C320",
   "end_ea": "0x45C463",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_45C320",
   "segment": ".text",
   "sha256": "6985b3d37ca4893a07951b694e666623a225611561461b423ef0911eb963f51b",
   "size": 323,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45C320",
+  "total_chunk_size": 323,
   "type": "void __usercall(BSSimpleList_VoidPtr *@<ecx>, int@<ebx>, int@<ebp>, double@<st2>, double@<st1>, double x@<st0>)",
   "xrefs_from_count": 132,
   "xrefs_to_count": 3

@@ -21,9 +21,9 @@
 0x4BD8FF: mov     ebp, ds:0A2807Ch
 0x4BD905: mov     [esp+38h+var_4], ebx
 0x4BD909: lea     esp, [esp+0]
-0x4BD910: mov     [esp+38h+var_24], ebx
+0x4BD910: mov     [esp+38h+task], ebx
 0x4BD914: push    1
-0x4BD916: lea     eax, [esp+3Ch+var_24]
+0x4BD916: lea     eax, [esp+3Ch+task]
 0x4BD91A: push    eax
 0x4BD91B: lea     ecx, [esp+40h+var_20]
 0x4BD91F: push    ecx
@@ -33,11 +33,11 @@
 0x4BD927: mov     byte ptr [esp+48h+var_4], 1
 0x4BD92C: call    sub_642D90
 0x4BD931: test    al, al
-0x4BD933: mov     esi, [esp+38h+var_24]
+0x4BD933: mov     esi, [esp+38h+task]
 0x4BD937: jz      short loc_4BD945
 0x4BD939: mov     ecx, ds:0B33A10h
-0x4BD93F: push    esi
-0x4BD940: call    sub_432130
+0x4BD93F: push    esi; task
+0x4BD940: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
 0x4BD945: cmp     esi, ebx
 0x4BD947: mov     byte ptr [esp+38h+var_4], bl
 0x4BD94B: jz      short loc_4BD961
@@ -62,3 +62,16 @@
 0x4BD977: pop     ebx
 0x4BD978: add     esp, 24h
 0x4BD97B: retn
+0x4BCD60: mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@IV?$NiPointer@VDistantLODLoaderTask@@@@@@6B@; const LockFreeMap<uint,NiPointer<DistantLODLoaderTask>>::LockFreeMapIterator::`vftable'
+0x4BCD66: retn
+0x9B43C0: lea     ecx, [ebp-1Ch]
+0x9B43C3: jmp     loc_4BCD60
+0x9B43C8: lea     ecx, [ebp-24h]; void *
+0x9B43CB: jmp     sub_4BDDC0
+0x9B43D0: mov     edx, [esp+arg_4]
+0x9B43D4: lea     eax, [edx-28h]
+0x9B43D7: mov     ecx, [edx-2Ch]
+0x9B43DA: xor     ecx, eax
+0x9B43DC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B43E1: mov     eax, offset stru_ADFAAC
+0x9B43E6: jmp     ___CxxFrameHandler3

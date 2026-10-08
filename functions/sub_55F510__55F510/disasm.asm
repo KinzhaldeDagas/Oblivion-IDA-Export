@@ -1,4 +1,4 @@
-0x55F510: push    ebx
+0x55F510: push    ebx; LockFreeMap vtable slot +0x10: computes bucket/hash then removes key through 0x55F270.
 0x55F511: push    esi
 0x55F512: push    edi
 0x55F513: mov     edi, ecx
@@ -21,7 +21,7 @@
 0x55F53D: call    eax
 0x55F53F: push    eax; LONG
 0x55F540: mov     ecx, esi
-0x55F542: call    sub_55F270
+0x55F542: call    sub_55F270; LockFreeMap remove core: finds key, atomically unlinks node, places node on retired/free list, clears thread-local traversal slots.
 0x55F547: pop     edi
 0x55F548: pop     esi
 0x55F549: pop     ebx

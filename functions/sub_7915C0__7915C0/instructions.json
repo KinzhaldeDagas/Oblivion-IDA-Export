@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7915C0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Compact stock CBranch constructor. Oblivion branch object is 0x40 bytes: parent, percent, child SIdvBranch vector, vertex pointer/count, cross-section/start offsets, volume/fuzzy volume, flare vector.",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7915E3",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -202,5 +202,65 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBC50",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC53",
+    "line": "add     ecx, 8; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC56",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC5B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBC5F",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC62",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC65",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBC67",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC6C",
+    "line": "mov     eax, offset stru_AF4BB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC71",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

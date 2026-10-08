@@ -1,10 +1,10 @@
-0x662750: sub     esp, 10h
+0x662750: sub     esp, 10h; Resolve Oblivion's default/recommended class. If the actor already has a non-sentinel class, return it. Otherwise classify all 21 deferred chargen skill-use totals by TESSkill specialization, normalize the three shares to seven implied major slots, and select/cache a preset class.
 0x662753: push    ebx
 0x662754: mov     ebx, ecx
-0x662756: call    Actor_GetBaseClass
+0x662756: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x66275B: mov     ecx, ds:0B37D00h
 0x662761: cmp     ecx, [eax+0Ch]
-0x662764: jnz     Actor_GetDefaultClass___Return_CurrentClass
+0x662764: jnz     Actor_GetDefaultClass___Return_CurrentClass; A non-sentinel current class is already authoritative; skip recommendation scoring and return that TESClass.
 0x66276A: fldz
 0x66276C: push    ebp
 0x66276D: fst     [esp+18h+var_C]
@@ -12,11 +12,11 @@
 0x662772: fst     [esp+1Ch+var_10]
 0x662776: push    edi
 0x662777: fstp    [esp+20h+var_8]
-0x66277B: xor     esi, esi
+0x66277B: xor     esi, esi; Scan exactly 21 deferred chargen skill-use floats at PlayerCharacter+0x5B0, one per native TESSkill index.
 0x66277D: lea     ecx, [ecx+0]
-0x662780: mov     ecx, ds:0B33A98h
-0x662786: push    esi
-0x662787: call    TESDataHandler_GetTESSkillByCode
+0x662780: mov     ecx, ds:0B33A98h; this
+0x662786: push    esi; skillIndex
+0x662787: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x66278C: mov     edx, [ebx+5B0h]
 0x662792: fld     dword ptr [edx+esi*4]
 0x662795: mov     ecx, eax
@@ -30,7 +30,7 @@
 0x6627A9: fstp    st(1)
 0x6627AB: test    ah, 41h
 0x6627AE: jnz     short loc_6627E0
-0x6627B0: mov     eax, [ecx+34h]
+0x6627B0: mov     eax, [ecx+34h]; Bucket each positive deferred use value by TESSkill_Data::specialization: 0 Combat, 1 Magic, 2 Stealth. Major membership is unavailable and is not consulted here.
 0x6627B3: sub     eax, 0
 0x6627B6: jz      short loc_6627D6
 0x6627B8: sub     eax, 1
@@ -59,7 +59,7 @@
 0x6627FC: fld     st
 0x6627FE: faddp   st(3), st
 0x662800: fxch    st(2)
-0x662802: fstp    [esp+20h+var_4]
+0x662802: fstp    [esp+20h+var_4]; Normalize Combat/Magic/Stealth usage shares to a total of seven slots (the TESClass major count) and round each share to the nearest integer using 0.5.
 0x662806: fld     [esp+20h+var_4]
 0x66280A: fld     st
 0x66280C: fdivp   st(2), st
@@ -69,7 +69,7 @@
 0x662818: fstp    [esp+20h+var_4]
 0x66281C: fld     [esp+20h+var_4]
 0x662820: fld     st
-0x662822: call    Double_To_SInt32
+0x662822: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x662827: mov     ecx, eax
 0x662829: mov     [esp+20h+var_4], ecx
 0x66282D: fisub   [esp+20h+var_4]
@@ -85,7 +85,7 @@
 0x66284B: add     ecx, eax
 0x66284D: mov     [esp+20h+var_4], ecx
 0x662851: fild    [esp+20h+var_4]
-0x662855: call    Double_To_SInt32
+0x662855: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x66285A: fld     st(1)
 0x66285C: fdivp   st(5), st
 0x66285E: mov     edi, eax
@@ -94,7 +94,7 @@
 0x662864: fstp    [esp+20h+var_4]
 0x662868: fld     [esp+20h+var_4]
 0x66286C: fld     st
-0x66286E: call    Double_To_SInt32
+0x66286E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x662873: mov     ecx, eax
 0x662875: mov     [esp+20h+var_4], ecx
 0x662879: fisub   [esp+20h+var_4]
@@ -108,14 +108,14 @@
 0x66288F: add     ecx, eax
 0x662891: mov     [esp+20h+var_4], ecx
 0x662895: fild    [esp+20h+var_4]
-0x662899: call    Double_To_SInt32
+0x662899: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x66289E: fdivp   st(2), st
 0x6628A0: mov     ebp, eax
 0x6628A2: fmulp   st(1), st
 0x6628A4: fstp    [esp+20h+var_4]
 0x6628A8: fld     [esp+20h+var_4]
 0x6628AC: fld     st
-0x6628AE: call    Double_To_SInt32
+0x6628AE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6628B3: mov     ecx, eax
 0x6628B5: mov     [esp+20h+var_4], ecx
 0x6628B9: fisub   [esp+20h+var_4]
@@ -129,8 +129,8 @@
 0x6628CF: add     ecx, eax
 0x6628D1: mov     [esp+20h+var_4], ecx
 0x6628D5: fild    [esp+20h+var_4]
-0x6628D9: call    Double_To_SInt32
-0x6628DE: cmp     edi, 7
+0x6628D9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x6628DE: cmp     edi, 7; Pure 7-slot distributions select the corresponding specialization-pure preset; mixed distributions continue through the native preset-class decision table.
 0x6628E1: mov     esi, eax
 0x6628E3: jl      short loc_6628F0
 0x6628E5: mov     eax, ds:0B37C98h
@@ -145,7 +145,7 @@
 0x662904: jl      short loc_662911
 0x662906: mov     edx, ds:0B37CC8h
 0x66290C: jmp     loc_662A2C
-0x662911: lea     eax, [edi-3]; switch 4 cases
+0x662911: lea     eax, [edi-3]; Select a preset TESClass from the rounded seven-slot Combat/Magic/Stealth distribution. This is recommendation logic, not construction of a new majorSkills array.
 0x662914: cmp     eax, 3
 0x662917: ja      short Actor_GetDefaultClass___def_662919
 0x662919: jmp     ds:jpt_662919[eax*4]; switch jump
@@ -175,4 +175,4 @@
 0x662963: push    edx
 0x662964: mov     ecx, ds:0B33A98h
 0x66296A: call    TESDataHandler_LookupTESClassByFormID
-0x66296F: mov     [ebx+650h], eax
+0x66296F: mov     [ebx+650h], eax; Cache the selected recommended TESClass at PlayerCharacter+0x650.

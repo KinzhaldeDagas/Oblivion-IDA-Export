@@ -5,7 +5,7 @@
 0x4E8750: push    0; int
 0x4E8752: push    eax; cloneMap
 0x4E8753: push    0; a2
-0x4E8755: call    TESForm_Clone
+0x4E8755: call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.
 0x4E875A: push    eax; void *
 0x4E875B: call    OblivionDynamicCast
 0x4E8760: add     esp, 14h

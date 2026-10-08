@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4C9860",
-    "line": "cmp     byte ptr [esp+arg_0], 0",
+    "line": "cmp     [esp+unlocked], 0; Verified body and call path: sets/clears flags0 bit 0x40; TESObjectREFR_PropagateLockStateToLinkedDoorCells invokes it for linked-door owner cells on lock/unlock. Probable semantic identity: TempPublic, directly corroborated by Fallout's named SetTempPublic and Oblivion's access/load behavior; active-file retention controls whether cell load clears this bit.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4C9876",
-    "line": "mov     [esp+arg_0], 8",
+    "line": "mov     dword ptr [esp+unlocked], 8",
     "mnemonic": "mov",
     "size": 8
   },

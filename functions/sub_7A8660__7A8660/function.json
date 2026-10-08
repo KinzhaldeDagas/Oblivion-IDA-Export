@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A8660",
+      "0x7A86BA"
+    ]
+  ],
+  "chunks_sha256": "0f01154669bd8404dc66417ea52ddcf126200eb1c14176fb2d7cadb4c4b3df54",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Allocates count*8 bytes from the FormHeap for CLeafLodEngine::SLodEntry storage; each entry is {primaryLeaf, matchedLeaf}.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Allocates count*8 bytes from the FormHeap for CLeafLodEngine::SLodEntry storage; each entry is {primaryLeaf, matchedLeaf}.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_7A8660",
+  "display_name": "OB_stVectorLeafLodEntry_Allocate_010201A0",
   "end_ea": "0x7A86BA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A8660",
+  "name": "OB_stVectorLeafLodEntry_Allocate_010201A0",
   "segment": ".text",
   "sha256": "0f01154669bd8404dc66417ea52ddcf126200eb1c14176fb2d7cadb4c4b3df54",
   "size": 90,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A8660",
-  "type": "int __cdecl(char *)",
+  "total_chunk_size": 90,
+  "type": "OB_CLeafLodEngine_SLodEntry_010201A0 *__cdecl(unsigned int count)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 1
 }

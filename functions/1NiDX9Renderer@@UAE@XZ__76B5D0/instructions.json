@@ -162,12 +162,6 @@
     "size": 2
   },
   {
-    "ea": "0x76B62A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x76B630",
     "line": "mov     eax, [ebx+280h]",
     "mnemonic": "mov",
@@ -306,12 +300,6 @@
     "size": 2
   },
   {
-    "ea": "0x76B67D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x76B680",
     "line": "mov     ebp, 16h",
     "mnemonic": "mov",
@@ -331,7 +319,7 @@
   },
   {
     "ea": "0x76B688",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +571,7 @@
   },
   {
     "ea": "0x76B707",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +907,7 @@
   },
   {
     "ea": "0x76B79A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +967,7 @@
   },
   {
     "ea": "0x76B7B8",
-    "line": "call    sub_76DB00",
+    "line": "call    NiDX9ResourceRegistry_ReleaseAll; Global NiDX9 device-resource registry release pass. Under its critical section, invokes virtual slot 0x2C on every registered resource before Reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1078,12 +1066,6 @@
     "line": "jmp     short loc_76B800",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x76B7FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x76B800",
@@ -2149,7 +2131,7 @@
   },
   {
     "ea": "0x76BA00",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,7 +2155,7 @@
   },
   {
     "ea": "0x76BA10",
-    "line": "mov     esi, ss:dword_B42170[ebp]",
+    "line": "mov     esi, dword ptr ss:unk_B42170[ebp]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2263,7 +2245,7 @@
   },
   {
     "ea": "0x76BA36",
-    "line": "mov     ss:dword_B42170[ebp], edi",
+    "line": "mov     dword ptr ss:unk_B42170[ebp], edi",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2347,7 +2329,7 @@
   },
   {
     "ea": "0x76BA66",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,7 +2347,7 @@
   },
   {
     "ea": "0x76BA72",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,7 +2365,7 @@
   },
   {
     "ea": "0x76BA7E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2401,7 +2383,7 @@
   },
   {
     "ea": "0x76BA8A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2461,7 +2443,7 @@
   },
   {
     "ea": "0x76BAB2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2467,7 @@
   },
   {
     "ea": "0x76BAC8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2491,7 @@
   },
   {
     "ea": "0x76BADA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,7 +2515,7 @@
   },
   {
     "ea": "0x76BAF0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +2989,7 @@
   },
   {
     "ea": "0x76BBDB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3073,7 +3055,7 @@
   },
   {
     "ea": "0x76BC07",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3139,7 +3121,7 @@
   },
   {
     "ea": "0x76BC33",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3295,7 +3277,7 @@
   },
   {
     "ea": "0x76BC85",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3322,12 +3304,6 @@
     "line": "jmp     short loc_76BCA0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x76BC9D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x76BCA0",
@@ -3589,7 +3565,7 @@
   },
   {
     "ea": "0x76BD18",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

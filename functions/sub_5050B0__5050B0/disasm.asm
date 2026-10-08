@@ -17,7 +17,7 @@
 0x5050D8: push    edx; a2
 0x5050D9: push    eax; a1
 0x5050DA: mov     dword ptr [esp+28h+var_4], 0
-0x5050E2: call    Script_ExtractArgs
+0x5050E2: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5050E7: add     esp, 20h
 0x5050EA: test    al, al
 0x5050EC: jnz     short loc_5050F1
@@ -29,12 +29,12 @@
 0x5050F5: mov     eax, dword ptr [esp+8+var_4]
 0x5050F9: test    eax, eax
 0x5050FB: jz      short loc_505111
-0x5050FD: mov     ecx, [esp+8+arg_18]
-0x505101: push    ecx
-0x505102: push    0
-0x505104: push    eax
-0x505105: push    esi
-0x505106: call    sub_4F7FA0
+0x5050FD: mov     ecx, [esp+8+value]
+0x505101: push    ecx; value
+0x505102: push    0; param2
+0x505104: push    eax; package
+0x505105: push    esi; subject
+0x505106: call    GetIsCurrentPackage_Eval; GetIsCurrentPackage_Eval requires an actor subject and Package parameter (form type 0x3D). It reads the subject's current package; for a temporary-override package it prefers the actor's ExtraPackage when present, then pointer-compares against the parameter.
 0x50510B: add     esp, 10h
 0x50510E: pop     esi
 0x50510F: pop     ecx

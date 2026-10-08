@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_789610",
+  "chunks": [
+    [
+      "0x789610",
+      "0x789763"
+    ],
+    [
+      "0x9CB3A0",
+      "0x9CB3D4"
+    ]
+  ],
+  "chunks_sha256": "16d14f44c6fac9ecc82d4d4183f1d91fa830152d4b62cdf5486af80e5cd26078",
+  "comment_regular": "2026-05-24 SpeedTreeOBSE stock post-load pass: stock CSpeedTreeRT::ParseLodInfo candidate for top-level 9000. Parses 9002,9003,9004,9005,9009 until 9001; 9005 delegates to CTreeEngine LOD parser. Preserve as stock-safe payload; no 75000 supplemental LOD fields are read here.",
+  "comment_repeatable": "2026-05-24 SpeedTreeOBSE stock post-load pass: stock CSpeedTreeRT::ParseLodInfo candidate for top-level 9000. Parses 9002,9003,9004,9005,9009 until 9001; 9005 delegates to CTreeEngine LOD parser. Preserve as stock-safe payload; no 75000 supplemental LOD fields are read here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "CSpeedTreeRT__ParseLodInfo",
   "end_ea": "0x789763",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_789610",
+  "name": "CSpeedTreeRT__ParseLodInfo",
   "segment": ".text",
   "sha256": "9d7cfbe32a0b9b3e5726c1b654eddb1e8f1247bccdaa3ffc75f3ecb764c974ab",
   "size": 339,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x789610",
-  "type": "int __thiscall(float *this, unsigned int *)",
-  "xrefs_from_count": 118,
+  "total_chunk_size": 391,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 139,
   "xrefs_to_count": 1
 }

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x423720",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x423722",
-    "line": "push    offset SEH_6E3250",
+    "line": "push    offset ExtraDataList_SetReferencePointer_SEH",
     "mnemonic": "push",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x42374F",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+global]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x42378C",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+global]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x42379E",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+global], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x4237AE",
-    "line": "push    edi",
+    "line": "push    edi; global",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4237AF",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4237B1",
-    "line": "call    sub_429E20",
+    "line": "call    ExtraGlobal_ctor; Verified ExtraGlobal constructor: initializes BSExtraData type 0x28, clears next, installs ExtraGlobal vtable, and stores TESGlobal* at +0x0C; payload size is 16 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -382,5 +382,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3090",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3093",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3094",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3099",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C309A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C309B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C309F",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30A2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30A5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C30A7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30AC",
+    "line": "mov     eax, offset stru_AEBD48",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30B1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

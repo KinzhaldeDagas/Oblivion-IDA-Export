@@ -1,10 +1,10 @@
 int sub_A099F0()
 {
-  ArrayConstructor(
-    (char *)dword_B3F800,
+  ArrayConstructor( /*0xa09a03*/
+    (char *)unk_B3F800,
     4u,
     0xA,
     (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
-    (void (__thiscall *)(void *))sub_7016A0);
-  return atexit(sub_A26960);
+    (void (__thiscall *)(void *))NiPointerSlot_Release);
+  return atexit(sub_A26960); /*0xa09a13*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x50E340",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; MoonSugarEffect decode: SetActorRefraction command; actor/process path uses refraction plus chameleon transparency ownership.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x50E371",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x50E450",
-    "line": "fstp    [esp+14h+var_10]; float",
+    "line": "fstp    [esp+14h+b]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x50E456",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x50E45E",
-    "line": "fstp    [esp+14h+var_10]; float",
+    "line": "fstp    [esp+14h+b]; b",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x50E464",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+a]; a",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x50E467",
-    "line": "call    sub_4AC760",
+    "line": "call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x50E495",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+b]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x50E4AB",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+b]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x50E4D3",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+b]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x50E4F1",
-    "line": "fstp    [esp+18h+var_10]; float",
+    "line": "fstp    [esp+18h+b]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x50E4F7",
-    "line": "fstp    [esp+18h+var_14]; float",
+    "line": "fstp    [esp+18h+a]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x50E52A",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+b]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x50E54A",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+b]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x50E555",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+b]",
     "mnemonic": "fstp",
     "size": 3
   },

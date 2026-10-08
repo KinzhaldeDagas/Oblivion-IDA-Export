@@ -3,68 +3,68 @@ char __usercall TextMenu_Create@<al>(double a1@<st2>, double a2@<st1>, double st
   void (__thiscall ***OpenMenuTile)(_DWORD, int); // eax
   InterfaceManager *Singleton; // esi
   double Depth; // st7
-  BSStringT *XML; // ebp
+  Tile *File; // ebp
   int ParentMenu; // eax
-  Menu *v11; // esi
-  TileMenu *v12; // eax
-  char *v13; // edi
-  _DWORD **v14; // ebx
-  int v15; // eax
-  _DWORD *v16; // ecx
-  BSStringT *v17; // edi
+  Menu *v10; // esi
+  TileMenu *v11; // eax
+  char *v12; // edi
+  _DWORD **v13; // ebx
+  int v14; // eax
+  _DWORD *v15; // ecx
+  BSStringT *v16; // edi
   double Float; // st7
-  int v19; // eax
-  char *v20; // eax
-  float a3; // [esp+18h] [ebp-4h]
+  int v18; // eax
+  char *v19; // eax
+  float v21; // [esp+18h] [ebp-4h]
 
-  OpenMenuTile = (void (__thiscall ***)(_DWORD, int))Menu_GetOpenMenuTile(0x41B);
-  if ( OpenMenuTile )
-    (**OpenMenuTile)(OpenMenuTile, 1);
-  Singleton = InterfaceManager_GetSingleton(0, 1);
-  Depth = InterfaceManager_GetDepth(st7_0);
-  a3 = Depth;
-  XML = Menu_LoadXML((BSStringT *)Singleton->menuRoot, a1, a2, Depth, "Data\\Menus\\Dialog\\TextEditMenu.xml");
-  ParentMenu = Tile_GetParentMenu(XML);
-  v11 = (Menu *)ParentMenu;
-  if ( !ParentMenu )
-    return TextMenu_Create_::Return_0();
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)ParentMenu + 0x34))(ParentMenu) != 0x41B )
-    return TextMenu_Create_::DestroyBadMenu((int)v11);
-  v12 = (TileMenu *)OblivionDynamicCast(
-                      XML,
+  OpenMenuTile = (void (__thiscall ***)(_DWORD, int))Menu_GetOpenMenuTile(0x41B); /*0x5dcf26*/
+  if ( OpenMenuTile ) /*0x5dcf30*/
+    (**OpenMenuTile)(OpenMenuTile, 1); /*0x5dcf3a*/
+  Singleton = InterfaceManager_GetSingleton(0, 1); /*0x5dcf4a*/
+  Depth = InterfaceManager_GetDepth(st7_0); /*0x5dcf4c*/
+  v21 = Depth; /*0x5dcf51*/
+  File = Tile::ReadFile(Singleton->menuRoot, "Data\\Menus\\Dialog\\TextEditMenu.xml"); /*0x5dcf62*/
+  ParentMenu = Tile_GetParentMenu(File); /*0x5dcf66*/
+  v10 = (Menu *)ParentMenu; /*0x5dcf6b*/
+  if ( !ParentMenu ) /*0x5dcf6f*/
+    return TextMenu_Create_::Return_0(); /*0x5dcf6f*/
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)ParentMenu + 0x34))(ParentMenu) != 0x41B ) /*0x5dcf83*/
+    return TextMenu_Create_::DestroyBadMenu((int)v10); /*0x5dcf83*/
+  v11 = (TileMenu *)OblivionDynamicCast( /*0x5dcf9a*/
+                      File,
                       0,
                       (struct _s_RTTICompleteObjectLocator *)&Tile `RTTI Type Descriptor',
                       &TileMenu `RTTI Type Descriptor',
                       0);
-  Menu_SetTileMenu(v11, a2, Depth, v12);
-  v13 = (char *)OblivionDynamicCast(
-                  v11,
+  Menu_SetTileMenu(v10, a2, Depth, v11); /*0x5dcfa5*/
+  v12 = (char *)OblivionDynamicCast( /*0x5dcfbe*/
+                  v10,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
                   &TextEditMenu `RTTI Type Descriptor',
                   0);
-  v14 = (_DWORD **)(v13 + 0x28);
-  v15 = 0;
-  v16 = v13 + 0x28;
-  do
+  v13 = (_DWORD **)(v12 + 0x28); /*0x5dcfc0*/
+  v14 = 0; /*0x5dcfc6*/
+  v15 = v12 + 0x28; /*0x5dcfc8*/
+  do /*0x5dcfe2*/
   {
-    if ( !*v16 )
-      return TextMenu_Create_::Return_0_FailureMsg();
-    ++v15;
-    ++v16;
+    if ( !*v15 ) /*0x5dcfd3*/
+      return TextMenu_Create_::Return_0_FailureMsg(); /*0x5dcfd3*/
+    ++v14; /*0x5dcfd9*/
+    ++v15; /*0x5dcfdc*/
   }
-  while ( v15 < 3 );
-  if ( Tile_GetFloat(XML, 0xFA5) == fXMLI_StackingType6006 || Tile_GetFloat(XML, 0xFA5) == fXMLI_NoClickPast )
-    Tile_SetFloat((Tile *)XML, (_DWORD *)0xFAB, a3);
-  Tile_SetString(XML, (_DWORD *)0xFAE, a4);
-  Tile_SetString(*v14, (_DWORD *)0xFDE, a5);
-  v17 = (BSStringT *)(v13 + 0x34);
-  Float = Tile_GetFloat(*v14, 0xFD4);
-  v19 = Double_To_SInt32(Float);
-  sub_583DD0(v17, v19);
-  v20 = sub_588C10(*v14, 0xFDE);
-  sub_57FF20(v17, v20);
-  sub_57DD90(v17, 1);
-  EnableMenu(v11, a1, a2, Float, 0);
-  return 1;
+  while ( v14 < 3 ); /*0x5dcfe2*/
+  if ( Tile_GetFloat(File, 0xFA5) == fXMLI_StackingType6006 || Tile_GetFloat(File, 0xFA5) == fXMLI_NoClickPast ) /*0x5dd014*/
+    Tile_SetFloat(File, 0xFABu, v21); /*0x5dd025*/
+  Tile_SetString(File, (_DWORD *)0xFAE, a4); /*0x5dd036*/
+  Tile_SetString(*v13, (_DWORD *)0xFDE, a5); /*0x5dd047*/
+  v16 = (BSStringT *)(v12 + 0x34); /*0x5dd053*/
+  Float = Tile_GetFloat(*v13, 0xFD4); /*0x5dd056*/
+  v18 = Double_To_SInt32(Float); /*0x5dd05b*/
+  sub_583DD0(v16, v18); /*0x5dd063*/
+  v19 = sub_588C10(*v13, 0xFDE); /*0x5dd06f*/
+  sub_57FF20(v16, v19); /*0x5dd077*/
+  sub_57DD90(v16, 1); /*0x5dd080*/
+  EnableMenu(v10, a1, a2, Float, 0); /*0x5dd089*/
+  return 1; /*0x5dd095*/
 }

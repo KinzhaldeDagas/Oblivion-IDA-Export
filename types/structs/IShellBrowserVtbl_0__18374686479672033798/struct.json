@@ -1,118 +1,189 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IShellBrowserVtbl_0",
+  "definition": "typedef IShellBrowserVtbl IShellBrowserVtbl_0\n",
   "id": 18374686479672033798,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IShellBrowser_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IShellBrowser_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetWindow",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, HWND *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ContextSensitiveHelp",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InsertMenusSB",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, HMENU, LPOLEMENUGROUPWIDTHS)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetMenuSB",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, HMENU, HOLEMENU, HWND)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RemoveMenusSB",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, HMENU)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetStatusTextSB",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, LPCOLESTR)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnableModelessSB",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TranslateAcceleratorSB",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, MSG *, WORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BrowseObject",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, LPCITEMIDLIST, UINT)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetViewStateStream",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, DWORD, IStream_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetControlWindow",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, UINT, HWND *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SendControlMsg",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, UINT, UINT, WPARAM_0, LPARAM_0, LRESULT_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryActiveShellView",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, IShellView_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnViewWindowActive",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, IShellView_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetToolbarItems",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IShellBrowser_0 *, LPTBBUTTONSB, UINT, UINT)"
     }
   ],
   "name": "IShellBrowserVtbl_0",
+  "ordinal": 3647,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

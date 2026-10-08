@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C1740",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x7C1740",
+      "0x7C17CA"
+    ],
+    [
+      "0x9B21C0",
+      "0x9B21F4"
+    ]
+  ],
+  "chunks_sha256": "ffa5400516aae7fa690d49cb6c9605cfc0d78708fb8827501cd9c6f8084675ec",
+  "comment_regular": "Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.",
+  "comment_repeatable": "Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.\n\nMEF v57 IMPLEMENTED 2026-10-08: v57 head-removal observer invalidates/updates borrowed indices before native release. All-head cleanup uses native constant-time removal and does not rebuild an index per item; fixture verifies zero index builds.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTRefPointerList__RemoveHead",
   "end_ea": "0x7C17CA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C1740",
+  "name": "NiTRefPointerList__RemoveHead",
   "segment": ".text",
   "sha256": "5cd26b86392e88bb56961224e1e55e59c66b87160ce7ff3ffaa3010b713325ac",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C1740",
-  "type": "_DWORD *__thiscall(int **this, _DWORD *)",
-  "xrefs_from_count": 53,
+  "total_chunk_size": 190,
+  "type": "void **__thiscall(MEF_RefList32 *self, void **result)",
+  "xrefs_from_count": 69,
   "xrefs_to_count": 5
 }

@@ -1,5 +1,5 @@
-0x767EA0: sub     esp, 4Ch
-0x767EA3: mov     eax, [esp+4Ch+arg_0]
+0x767EA0: sub     esp, 4Ch; Pass224/226: Packs NiScreenTexture records into screen vertices/indices; uses NiScreenTexture +0x14 first texture for dimensions.
+0x767EA3: mov     eax, [esp+4Ch+bufferBytes]
 0x767EA7: push    ebx
 0x767EA8: push    ebp
 0x767EA9: push    esi
@@ -46,13 +46,13 @@
 0x767F30: jbe     loc_767FE8
 0x767F36: mov     edx, [esi+0A40h]
 0x767F3C: push    edx
-0x767F3D: call    FormHeapFree
+0x767F3D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x767F42: mov     eax, [esi+0A44h]
 0x767F48: push    eax
-0x767F49: call    FormHeapFree
+0x767F49: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x767F4E: mov     ecx, [esi+0A48h]
 0x767F54: push    ecx
-0x767F55: call    FormHeapFree
+0x767F55: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x767F5A: xor     ecx, ecx
 0x767F5C: mov     eax, ebp
 0x767F5E: mov     edx, 8
@@ -129,7 +129,7 @@
 0x76803F: mov     eax, [edx+50h]
 0x768042: push    0
 0x768044: call    eax
-0x768046: mov     ecx, [esp+5Ch+arg_0]
+0x768046: mov     ecx, [esp+5Ch+bufferBytes]
 0x76804A: mov     edx, [ecx+14h]
 0x76804D: mov     [esp+5Ch+var_2C], eax
 0x768051: mov     eax, [edx+20h]
@@ -143,7 +143,7 @@
 0x768063: mov     ecx, eax
 0x768065: mov     eax, [edx+4Ch]
 0x768068: call    eax
-0x76806A: mov     ecx, [esp+5Ch+arg_0]
+0x76806A: mov     ecx, [esp+5Ch+bufferBytes]
 0x76806E: movzx   edx, ax
 0x768071: mov     eax, [ecx+14h]
 0x768074: mov     ecx, [eax+20h]
@@ -176,7 +176,7 @@
 0x7680C6: mov     [esp+5Ch+var_3C], eax
 0x7680CA: fld     [esp+5Ch+var_20]
 0x7680CE: fld     qword ptr ds:0A2FAA0h
-0x7680D4: mov     ecx, [esp+5Ch+arg_0]
+0x7680D4: mov     ecx, [esp+5Ch+bufferBytes]
 0x7680D8: mov     ecx, [ecx+8]
 0x7680DB: add     ecx, [esp+5Ch+var_3C]
 0x7680DF: movzx   edx, word ptr [ecx+2]
@@ -362,7 +362,7 @@
 0x768327: push    edx
 0x768328: push    eax
 0x768329: push    edi
-0x76832A: call    sub_777240
+0x76832A: call    sub_777240; Pass226: Vertex-buffer upload helper; low mask bits upload screen positions, UVs, and packed colors.
 0x76832F: test    eax, eax
 0x768331: jz      loc_76845F
 0x768337: mov     dl, byte ptr [esp+5Ch+var_4C+3]
@@ -372,7 +372,7 @@
 0x768349: jbe     loc_768414
 0x76834F: mov     ecx, [esi+0A50h]
 0x768355: push    ecx
-0x768356: call    FormHeapFree
+0x768356: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76835B: xor     ecx, ecx
 0x76835D: mov     eax, ebx
 0x76835F: mov     edx, 2
@@ -427,27 +427,27 @@
 0x768414: mov     eax, [edi+2Ch]
 0x768417: mov     ebp, [edi+30h]
 0x76841A: mov     edx, [esi+0A50h]
-0x768420: mov     [esp+5Ch+arg_0], eax
+0x768420: mov     [esp+5Ch+bufferBytes], eax
 0x768424: mov     al, [edi+10h]
 0x768427: neg     al
-0x768429: lea     ecx, [esp+5Ch+arg_0]
+0x768429: lea     ecx, [esp+5Ch+bufferBytes]
 0x76842D: sbb     eax, eax
 0x76842F: and     eax, 10h
-0x768432: push    eax; Dst
-0x768433: push    1; int
-0x768435: push    ecx; int
-0x768436: mov     ecx, [esi+8B4h]
-0x76843C: push    ebp; int
-0x76843D: push    ebx; int
-0x76843E: push    ebx; Src
-0x76843F: push    edx; int
-0x768440: call    sub_7781F0
+0x768432: push    eax; usage
+0x768433: push    1; pool
+0x768435: push    ecx; bufferBytes
+0x768436: mov     ecx, [esi+8B4h]; this
+0x76843C: push    ebp; existing
+0x76843D: push    ebx; capacityIndices
+0x76843E: push    ebx; indexCount
+0x76843F: push    edx; indices
+0x768440: call    NiDX9IndexBufferManager_PackBuffer; Pass226: Index-buffer rebuild/upload helper used when NiScreenTexture mask bit 0x08 is active.
 0x768445: mov     esi, eax
 0x768447: cmp     ebp, esi
 0x768449: jz      short loc_76845F
 0x76844B: mov     ecx, edi
-0x76844D: call    sub_777F40
-0x768452: mov     eax, [esp+5Ch+arg_0]
+0x76844D: call    sub_777F40; MoonSugarEffect decode: release BuffData index buffer and reset IBSize/IB.
+0x768452: mov     eax, [esp+5Ch+bufferBytes]
 0x768456: mov     [edi+30h], esi
 0x768459: mov     [edi+28h], ebx
 0x76845C: mov     [edi+2Ch], eax

@@ -31,3 +31,12 @@
 0x6D211E: pop     esi
 0x6D211F: add     esp, 10h
 0x6D2122: retn
+0x9C79F0: mov     ecx, [ebp-10h]; this
+0x9C79F3: jmp     j_??1NiPoint3InterpController@@UAE@XZ; NiPoint3InterpController::~NiPoint3InterpController(void)
+0x9C79F8: mov     edx, [esp+arg_4]
+0x9C79FC: lea     eax, [edx-0Ch]
+0x9C79FF: mov     ecx, [edx-10h]
+0x9C7A02: xor     ecx, eax
+0x9C7A04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7A09: mov     eax, offset stru_AEFDC4
+0x9C7A0E: jmp     ___CxxFrameHandler3

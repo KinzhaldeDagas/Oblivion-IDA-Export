@@ -14,33 +14,33 @@
 0x750BE4: jz      loc_7512BB
 0x750BEA: lea     esi, [eax+64h]
 0x750BED: mov     ecx, 0Dh
-0x750BF2: lea     edi, [esp+1B0h+var_9C]
+0x750BF2: lea     edi, [esp+1B0h+local]
 0x750BF9: rep movsd
 0x750BFB: mov     esi, [ebx+10h]
 0x750BFE: add     esi, 64h ; 'd'
 0x750C01: mov     ecx, 0Dh
 0x750C06: lea     edi, [esp+1B0h+var_68]
 0x750C0D: rep movsd
-0x750C0F: lea     ecx, [esp+1B0h+var_34]
+0x750C0F: lea     ecx, [esp+1B0h+parent]
 0x750C16: push    ecx
 0x750C17: lea     ecx, [esp+1B4h+var_68]
-0x750C1E: call    sub_718A80
-0x750C23: lea     edx, [esp+1B0h+var_9C]
-0x750C2A: push    edx
-0x750C2B: lea     eax, [esp+1B4h+var_D0]
-0x750C32: push    eax
-0x750C33: lea     ecx, [esp+1B8h+var_34]
-0x750C3A: call    sub_53D7A0
-0x750C3F: mov     ecx, dword ptr [esp+1B0h+var_AC]
-0x750C46: mov     edx, dword ptr [esp+1B0h+var_AC+4]
-0x750C4D: mov     eax, [esp+1B0h+var_A4]
+0x750C1E: call    sub_718A80;
+0x750C23: lea     edx, [esp+1B0h+local]
+0x750C2A: push    edx; local
+0x750C2B: lea     eax, [esp+1B4h+out]
+0x750C32: push    eax; out
+0x750C33: lea     ecx, [esp+1B8h+parent]; parent
+0x750C3A: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x750C3F: mov     ecx, [esp+1B0h+out.pos.x]
+0x750C46: mov     edx, [esp+1B0h+out.pos.y]
+0x750C4D: mov     eax, [esp+1B0h+out.pos.z]
 0x750C54: mov     dword ptr [esp+1B0h+var_198], ecx
 0x750C58: lea     ecx, [ebx+1Ch]
 0x750C5B: mov     dword ptr [esp+1B0h+var_198+4], edx
 0x750C5F: push    ecx
 0x750C60: lea     edx, [esp+1B4h+var_100]
 0x750C67: push    edx
-0x750C68: lea     ecx, [esp+1B8h+var_D0]
+0x750C68: lea     ecx, [esp+1B8h+out]
 0x750C6F: mov     [esp+1B8h+var_190], eax
 0x750C73: call    sub_7101F0
 0x750C78: mov     ecx, [eax]
@@ -50,7 +50,7 @@
 0x750C84: lea     ecx, [esp+1B0h+var_178]
 0x750C88: mov     dword ptr [esp+1B0h+var_178+4], edx
 0x750C8C: mov     [esp+1B0h+var_170], eax
-0x750C90: call    sub_43F350
+0x750C90: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x750C95: fstp    st
 0x750C97: fld     dword ptr [ebx+2Ch]
 0x750C9A: mov     eax, [ebx+30h]
@@ -97,7 +97,7 @@
 0x750D32: fld     dword ptr [edi+8]
 0x750D35: fsubr   [esp+1B0h+var_158]
 0x750D39: fstp    [esp+1B0h+var_190]
-0x750D3D: call    sub_43F350
+0x750D3D: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x750D42: fstp    st
 0x750D44: add     esi, 1Ch
 0x750D47: fld     dword ptr [esi-8]
@@ -171,7 +171,7 @@
 0x750E31: fld     dword ptr [edi+8]
 0x750E34: fsubr   [esp+1B0h+var_158]
 0x750E38: fstp    [esp+1B0h+var_190]
-0x750E3C: call    sub_43F350
+0x750E3C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x750E41: fstp    st
 0x750E43: call    sub_53D480
 0x750E48: fmul    [esp+1B0h+var_168]
@@ -267,7 +267,7 @@
 0x750FBB: fld     dword ptr [edi+8]
 0x750FBE: fsubr   [esp+1B0h+var_158]
 0x750FC2: fstp    [esp+1B0h+var_190]
-0x750FC6: call    sub_43F350
+0x750FC6: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x750FCB: fld     dword ptr [ebx+28h]
 0x750FCE: fchs
 0x750FD0: fmulp   st(1), st
@@ -372,7 +372,7 @@
 0x751149: fld     dword ptr [edi+8]
 0x75114C: fsubr   [esp+1B0h+var_158]
 0x751150: fstp    [esp+1B0h+var_F8]
-0x751157: call    sub_43F350
+0x751157: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x75115C: fld     dword ptr [ebx+28h]
 0x75115F: fchs
 0x751161: fmulp   st(1), st

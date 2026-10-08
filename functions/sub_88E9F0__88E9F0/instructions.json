@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x88EA0B",
-    "line": "lea     edi, [esp+78h+var_6C]",
+    "line": "lea     edi, [esp+78h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x88EA13",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x88EA1C",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x88EA24",
-    "line": "lea     ecx, [esp+78h+var_6C]",
+    "line": "lea     ecx, [esp+78h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x88EA28",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x88EA2D",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,43 +139,43 @@
   },
   {
     "ea": "0x88EA31",
-    "line": "push    esi",
+    "line": "push    esi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x88EA32",
-    "line": "lea     ecx, [esp+84h+var_24]",
+    "line": "lea     ecx, [esp+84h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x88EA36",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x88EA37",
-    "line": "lea     ecx, [eax+64h]",
+    "line": "lea     ecx, [eax+64h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x88EA3A",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x88EA3F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x88EA41",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x88EA4A",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },

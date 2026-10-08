@@ -1,1 +1,1 @@
-PANOSE
+typedef tagPANOSE PANOSE;

@@ -1,43 +1,43 @@
 char __cdecl sub_4F8CF0(_DWORD *a1, int a2, int a3, double *a4)
 {
-  _DWORD *v7; // esi
+  _DWORD *v4; // esi
+  void *v5; // eax
+  const char *v6; // eax
   void *v8; // eax
   const char *v9; // eax
-  void *v11; // eax
-  const char *v12; // eax
 
-  *a4 = 0.0;
-  v7 = 0;
-  if ( a1 )
+  *a4 = 0.0; /*0x4f8cf7*/
+  v4 = 0; /*0x4f8cff*/
+  if ( a1 ) /*0x4f8d03*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(_DWORD *))(*a1 + 0x190))(a1) )
-      v7 = a1;
+    if ( (*(unsigned __int8 (__thiscall **)(_DWORD *))(*a1 + 0x190))(a1) ) /*0x4f8d0f*/
+      v4 = a1; /*0x4f8d15*/
   }
-  if ( Actor_IsSneaking(v7) )
-    *a4 = 1.0;
-  if ( !IsConsoleMode )
-    return 1;
-  if ( 0.0 == *a4 )
+  if ( Actor_IsSneaking(v4) ) /*0x4f8d19*/
+    *a4 = 1.0; /*0x4f8d24*/
+  if ( !MEMORY[0xB361AC] ) /*0x4f8d2d*/
+    return 1; /*0x4f8d2d*/
+  if ( 0.0 == *a4 ) /*0x4f8d47*/
   {
-    v11 = OblivionDynamicCast(
-            v7,
-            0,
-            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-            &TESFullName `RTTI Type Descriptor',
-            0);
-    if ( !v11 || (v12 = *((const char **)v11 + 1)) == 0 )
-      v12 = EmptyString;
-    Interface_ConsolePrint("%s is not sneaking", v12);
-    return 1;
+    v8 = OblivionDynamicCast( /*0x4f8d75*/
+           v4,
+           0,
+           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+           &TESFullName `RTTI Type Descriptor',
+           0);
+    if ( !v8 || (v9 = *((const char **)v8 + 1)) == 0 ) /*0x4f8d86*/
+      v9 = EmptyString; /*0x4f8d88*/
+    Interface_ConsolePrint("%s is not sneaking", v9); /*0x4f8d93*/
+    return 1; /*0x4f8d9d*/
   }
-  v8 = OblivionDynamicCast(
-         v7,
+  v5 = OblivionDynamicCast( /*0x4f8d49*/
+         v4,
          0,
          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
          &TESFullName `RTTI Type Descriptor',
          0);
-  if ( !v8 || (v9 = *((const char **)v8 + 1)) == 0 )
-    v9 = EmptyString;
-  Interface_ConsolePrint("%s is sneaking", v9);
-  return 1;
+  if ( !v5 || (v6 = *((const char **)v5 + 1)) == 0 ) /*0x4f8d5a*/
+    v6 = EmptyString; /*0x4f8d5c*/
+  Interface_ConsolePrint("%s is sneaking", v6); /*0x4f8d67*/
+  return 1; /*0x4f8d6f*/
 }

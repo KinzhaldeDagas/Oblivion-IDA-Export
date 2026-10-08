@@ -4,7 +4,7 @@
 0x4CA1F8: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$DFALL@PAVTESObjectREFR@@@@PAVTESObjectREFR@@@@6B@; const NiTListBase<DFALL<TESObjectREFR *>,TESObjectREFR *>::`vftable'
 0x4CA1FE: jz      short loc_4CA209
 0x4CA200: push    esi
-0x4CA201: call    FormHeapFree
+0x4CA201: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA206: add     esp, 4
 0x4CA209: mov     eax, esi
 0x4CA20B: pop     esi

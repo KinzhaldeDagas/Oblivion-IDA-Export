@@ -12,13 +12,13 @@
 0x54585E: mov     ecx, ds:0B3F9ACh
 0x545864: push    edi
 0x545865: push    ecx
-0x545866: fstp    [esp+0B8h+var_B8]
+0x545866: fstp    [esp+0B8h+angleZ]
 0x545869: mov     dword ptr [esp+0B8h+var_78+4], ecx
 0x54586D: push    ebx
 0x54586E: mov     ecx, ebp
 0x545870: mov     dword ptr [esp+0BCh+var_78], eax
 0x545874: mov     [esp+0BCh+var_70], edx
-0x545878: call    nullsub_returnVoid_2arg
+0x545878: call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.
 0x54587D: mov     eax, [ebx+0DCh]
 0x545883: test    eax, eax
 0x545885: jnz     loc_5459E6
@@ -43,11 +43,11 @@
 0x5458C6: fadd    dword ptr ds:0A2FC78h
 0x5458CC: fmul    qword ptr ds:0A31C78h
 0x5458D2: push    ecx
-0x5458D3: lea     ecx, [esp+0B8h+var_6C]
+0x5458D3: lea     ecx, [esp+0B8h+var_6C]; this
 0x5458D7: fstp    dword ptr [esp+0B8h+var_A4]
 0x5458DB: fld     dword ptr [esp+0B8h+var_A4]
-0x5458DF: fstp    [esp+0B8h+var_B8]; float
-0x5458E2: call    NiMatrix33_InitRotationTransform
+0x5458DF: fstp    [esp+0B8h+angleZ]; angleZ
+0x5458E2: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x5458E7: mov     ecx, esi
 0x5458E9: call    sub_4C99A0
 0x5458EE: test    eax, eax
@@ -57,25 +57,25 @@
 0x5458FA: fadd    dword ptr ds:0A2FC78h
 0x545900: fmul    qword ptr ds:0A31C78h
 0x545906: push    ecx
-0x545907: lea     ecx, [esp+0B8h+var_48]
+0x545907: lea     ecx, [esp+0B8h+right]; this
 0x54590B: fstp    dword ptr [esp+0B8h+var_A4]
 0x54590F: fld     dword ptr [esp+0B8h+var_A4]
-0x545913: fstp    [esp+0B8h+var_B8]; float
-0x545916: call    sub_70FD80
-0x54591B: lea     eax, [esp+0B4h+var_48]
-0x54591F: push    eax
-0x545920: lea     ecx, [esp+0B8h+var_24]
-0x545927: push    ecx
-0x545928: lea     ecx, [esp+0BCh+var_6C]
-0x54592C: call    NiMAtrix33_Multiply
+0x545913: fstp    [esp+0B8h+angleZ]; angleY
+0x545916: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
+0x54591B: lea     eax, [esp+0B4h+right]
+0x54591F: push    eax; right
+0x545920: lea     ecx, [esp+0B8h+out]
+0x545927: push    ecx; out
+0x545928: lea     ecx, [esp+0BCh+var_6C]; this
+0x54592C: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x545931: mov     ecx, 9
 0x545936: mov     esi, eax
 0x545938: lea     edi, [esp+0B4h+var_6C]
 0x54593C: rep movsd
 0x54593E: jmp     short loc_54594E
 0x545940: fld     dword ptr ds:0A57264h
-0x545946: fst     [esp+0B4h+var_60]
-0x54594A: fstp    [esp+0B4h+var_54]
+0x545946: fst     [esp+0B4h+var_6C.data+0Ch]
+0x54594A: fstp    [esp+0B4h+var_6C.data+18h]
 0x54594E: mov     edi, [ebp+1Ch]
 0x545951: add     edi, 30h ; '0'
 0x545954: mov     ecx, 9
@@ -137,11 +137,11 @@
 0x545A2E: fadd    dword ptr ds:0A2FC78h
 0x545A34: fmul    qword ptr ds:0A31C78h
 0x545A3A: push    ecx
-0x545A3B: lea     ecx, [esp+0B8h+var_6C]
+0x545A3B: lea     ecx, [esp+0B8h+var_6C]; this
 0x545A3F: fstp    dword ptr [esp+0B8h+var_A4]
 0x545A43: fld     dword ptr [esp+0B8h+var_A4]
-0x545A47: fstp    [esp+0B8h+var_B8]; float
-0x545A4A: call    NiMatrix33_InitRotationTransform
+0x545A47: fstp    [esp+0B8h+angleZ]; angleZ
+0x545A4A: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x545A4F: mov     ecx, esi
 0x545A51: call    sub_4C99A0
 0x545A56: test    eax, eax
@@ -151,17 +151,17 @@
 0x545A62: fadd    dword ptr ds:0A2FC78h
 0x545A68: fmul    qword ptr ds:0A31C78h
 0x545A6E: push    ecx
-0x545A6F: lea     ecx, [esp+0B8h+var_48]
+0x545A6F: lea     ecx, [esp+0B8h+right]; this
 0x545A73: fstp    dword ptr [esp+0B8h+var_A4]
 0x545A77: fld     dword ptr [esp+0B8h+var_A4]
-0x545A7B: fstp    [esp+0B8h+var_B8]; float
-0x545A7E: call    sub_70FD80
-0x545A83: lea     ecx, [esp+0B4h+var_48]
-0x545A87: push    ecx
-0x545A88: lea     edx, [esp+0B8h+var_24]
-0x545A8F: push    edx
-0x545A90: lea     ecx, [esp+0BCh+var_6C]
-0x545A94: call    NiMAtrix33_Multiply
+0x545A7B: fstp    [esp+0B8h+angleZ]; angleY
+0x545A7E: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
+0x545A83: lea     ecx, [esp+0B4h+right]
+0x545A87: push    ecx; right
+0x545A88: lea     edx, [esp+0B8h+out]
+0x545A8F: push    edx; out
+0x545A90: lea     ecx, [esp+0BCh+var_6C]; this
+0x545A94: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x545A99: mov     ecx, 9
 0x545A9E: mov     esi, eax
 0x545AA0: lea     edi, [esp+0B4h+var_6C]
@@ -169,8 +169,8 @@
 0x545AA6: mov     edx, 1
 0x545AAB: jmp     short loc_545ABB
 0x545AAD: fld     dword ptr ds:0A57264h
-0x545AB3: fst     [esp+0B4h+var_60]
-0x545AB7: fstp    [esp+0B4h+var_54]
+0x545AB3: fst     [esp+0B4h+var_6C.data+0Ch]
+0x545AB7: fstp    [esp+0B4h+var_6C.data+18h]
 0x545ABB: mov     edi, [ebp+1Ch]
 0x545ABE: add     edi, 30h ; '0'
 0x545AC1: mov     ecx, 9
@@ -221,10 +221,10 @@
 0x545B6F: jmp     short loc_545B77
 0x545B71: and     word ptr [eax+18h], 0FFFEh
 0x545B77: mov     ecx, ebx
-0x545B79: call    sub_499140
+0x545B79: call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.
 0x545B7E: fstp    [esp+0B4h+var_8C]
 0x545B82: mov     ecx, ebx
-0x545B84: call    sub_499200
+0x545B84: call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.
 0x545B89: fstp    [esp+0B4h+var_94]
 0x545B8D: fld     dword ptr ds:0B366C0h
 0x545B93: fmul    qword ptr ds:0A2FAA0h
@@ -372,12 +372,12 @@
 0x545D12: push    4
 0x545D14: fadd    [esp+0B8h+var_9C]
 0x545D18: fstp    [esp+0B8h+var_9C]
-0x545D1C: call    NiNode_GetNiPropertyByID
+0x545D1C: call    NiNode_GetNiPropertyByID;
 0x545D21: test    eax, eax
 0x545D23: jz      short loc_545D90
 0x545D25: mov     ecx, [ebp+10h]
 0x545D28: push    4
-0x545D2A: call    NiNode_GetNiPropertyByID
+0x545D2A: call    NiNode_GetNiPropertyByID;
 0x545D2F: mov     edx, [eax]
 0x545D31: mov     ecx, eax
 0x545D33: mov     eax, [edx+54h]
@@ -390,7 +390,7 @@
 0x545D44: jz      short loc_545D90
 0x545D46: mov     ecx, [ebp+10h]
 0x545D49: push    4
-0x545D4B: call    NiNode_GetNiPropertyByID
+0x545D4B: call    NiNode_GetNiPropertyByID;
 0x545D50: test    eax, eax
 0x545D52: jz      short loc_545D90
 0x545D54: fld     dword ptr [ebx+78h]
@@ -411,12 +411,12 @@
 0x545D8D: mov     [eax+78h], ecx
 0x545D90: mov     ecx, [ebp+14h]
 0x545D93: push    4
-0x545D95: call    NiNode_GetNiPropertyByID
+0x545D95: call    NiNode_GetNiPropertyByID;
 0x545D9A: test    eax, eax
 0x545D9C: jz      short loc_545E09
 0x545D9E: mov     ecx, [ebp+14h]
 0x545DA1: push    4
-0x545DA3: call    NiNode_GetNiPropertyByID
+0x545DA3: call    NiNode_GetNiPropertyByID;
 0x545DA8: mov     edx, [eax]
 0x545DAA: mov     ecx, eax
 0x545DAC: mov     eax, [edx+54h]
@@ -429,7 +429,7 @@
 0x545DBD: jz      short loc_545E09
 0x545DBF: mov     ecx, [ebp+14h]
 0x545DC2: push    4
-0x545DC4: call    NiNode_GetNiPropertyByID
+0x545DC4: call    NiNode_GetNiPropertyByID;
 0x545DC9: test    eax, eax
 0x545DCB: jz      short loc_545E09
 0x545DCD: fld     dword ptr [ebx+78h]
@@ -551,17 +551,17 @@
 0x545F26: mov     esi, [esp+0B4h+var_70]
 0x545F2A: mov     [eax+8], esi
 0x545F2D: mov     eax, [ebp+0Ch]
-0x545F30: fstp    [esp+0B4h+var_6C]
+0x545F30: fstp    [esp+0B4h+var_6C.data]
 0x545F34: mov     [eax+54h], ecx
 0x545F37: mov     [eax+58h], edx
 0x545F3A: mov     [eax+5Ch], esi
 0x545F3D: fld     dword ptr ds:0B366D0h
 0x545F43: mov     edi, [ebp+1Ch]
-0x545F46: fstp    [esp+0B4h+var_60]
+0x545F46: fstp    [esp+0B4h+var_6C.data+0Ch]
 0x545F4A: fld     dword ptr ds:0B366D8h
 0x545F50: add     eax, 54h ; 'T'
 0x545F53: add     edi, 30h ; '0'
-0x545F56: fstp    [esp+0B4h+var_54]
+0x545F56: fstp    [esp+0B4h+var_6C.data+18h]
 0x545F5A: mov     ecx, 9
 0x545F5F: lea     esi, [esp+0B4h+var_6C]
 0x545F63: rep movsd
@@ -598,7 +598,7 @@
 0x545FF6: fld     dword ptr ds:0B366B8h
 0x545FFC: fmul    [esp+0B4h+arg_4]
 0x546003: fstp    [esp+0B4h+var_90]
-0x546007: call    InitBSShaderAccumulator
+0x546007: call    BSShaderAccumulator_GetOrCreateGlobal
 0x54600C: test    eax, eax
 0x54600E: jz      short loc_54602B
 0x546010: fld     dword ptr [eax+0C4h]

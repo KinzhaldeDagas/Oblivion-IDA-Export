@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4A1354",
-    "line": "cmp     eax, offset dword_B3FD4C",
+    "line": "cmp     eax, offset stru_B3FD4C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x4A13E2",
-    "line": "jmp     short loc_4A144D",
+    "line": "jmp     short loc_4A144D; MEF PERF 2026-10-08: PERF-17 scoped reserve design point AFTER source-wrapper choice: source usedEnd+B6 bounds current nonnull transfers but can overestimate sparse sources and is reloaded by native loop. Fresh destination must still be empty/unchanged. Keep native growth fallback for more transfers than estimate; preserve old-parent detach lookup costs.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x4A144D",
-    "line": "movzx   eax, word ptr [ebx+0B6h]",
+    "line": "movzx   eax, word ptr [ebx+0B6h]; MEF PERF 2026-10-08: PERF-17 scoped reserve design point AFTER source-wrapper choice: source usedEnd+B6 bounds current nonnull transfers but can overestimate sparse sources and is reloaded by native loop. Fresh destination must still be empty/unchanged. Keep native growth fallback for more transfers than estimate; preserve old-parent detach lookup costs.",
     "mnemonic": "movzx",
     "size": 7
   },
@@ -751,25 +751,25 @@
   },
   {
     "ea": "0x4A146B",
-    "line": "push    1",
+    "line": "push    1; firstAvailableSlot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4A146D",
-    "line": "push    eax",
+    "line": "push    eax; child",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A146E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A1470",
-    "line": "call    NiNode__AddObject",
+    "line": "call    NiNode__AddObject; MEF PERF 2026-10-08: PERF-16/17 bulk route: fresh BSFadeNode destination constructed at4A1310, then actual source/wrapper child array iterated4A144D..1475; each nonnull child calls AddObject with firstAvailableSlot=1. N means actual successful transfers, not total NIF objects; wrapper branches can reduce source to one child. No per-frame frequency assertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x4A14A2",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x4A151A",
-    "line": "push    offset stru_B3F600; lpCriticalSection",
+    "line": "push    offset unk_B3F600; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x4A155C",
-    "line": "call    NiNode_AddNiExtraData",
+    "line": "call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x4A1585",
-    "line": "push    offset stru_B3F600; lpCriticalSection",
+    "line": "push    offset unk_B3F600; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -1426,5 +1426,131 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B2200",
+    "line": "mov     ecx, [ebp-14h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2203",
+    "line": "jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2208",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B220B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2210",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2213",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2214",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2219",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B221A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B221B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B221E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B221F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2224",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2225",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2226",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B222A",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B222D",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2230",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2232",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2237",
+    "line": "mov     eax, offset stru_ADE244",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B223C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x767520",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+arg_8]; Oblivion hardware-skinned geometry pass loop. Applies the same caster pass state, constants, buffers, and programs for every skin partition, then issues DrawIndexedPrimitive before pass finish/advance.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x767561",
-    "line": "push    offset NiD3DShaderInterfaceString",
+    "line": "push    0B42858h",
     "mnemonic": "push",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x767586",
-    "line": "mov     edx, [edx+28h]",
+    "line": "mov     edx, [edx+28h]; Skinned path NiD3DShader vtable +0x28: render preflight.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7675C6",
-    "line": "mov     edx, [eax+2Ch]",
+    "line": "mov     edx, [eax+2Ch]; Skinned geometry invokes the selected concrete NiD3DShader vtable +0x2C. Conditional Hair high selectors take Hair's reset-plus-default no-pass path; Lighting30 high selectors also queue no pass.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x7675D7",
-    "line": "mov     eax, [edx+48h]",
+    "line": "mov     eax, [edx+48h]; Skinned path vtable +0x48: begin pass loop.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7675E0",
-    "line": "call    eax",
+    "line": "call    eax; Skinned BeginPassLoop guard: PassCount zero skips every skin-partition pass and DrawIndexedPrimitive. This proves no draw for both Lighting30 high records and conditionally reachable Hair high records.",
     "mnemonic": "call",
     "size": 2
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7675F9",
-    "line": "mov     edx, [edx+30h]",
+    "line": "mov     edx, [edx+30h]; Skinned path vtable +0x30: apply current pass state/stages.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x76764D",
-    "line": "lea     ecx, [ecx+0]; void *",
+    "line": "lea     ecx, [ecx+0]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x76766A",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x767684",
-    "line": "mov     edx, [edx+34h]",
+    "line": "mov     edx, [edx+34h]; Skinned path vtable +0x34: write constants including skin/object shadow transforms.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x7676AA",
-    "line": "mov     eax, [eax+3Ch]",
+    "line": "mov     eax, [eax+3Ch]; Skinned path vtable +0x3C: bind geometry buffers.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x7676C9",
-    "line": "mov     edx, [edx+38h]",
+    "line": "mov     edx, [edx+38h]; Skinned path vtable +0x38: bind programs and apply constant maps.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x7676E4",
-    "line": "call    edx",
+    "line": "call    edx; MoonSugarEffect build 40 decode: native skinned SetupShaderPrograms call. Replacement must occur after this call and after the 0x7676F7 constant-manager flush so Oblivion bone constants/pass state remain authoritative.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1015,13 +1015,13 @@
   },
   {
     "ea": "0x7676F7",
-    "line": "call    eax",
+    "line": "call    eax; Oblivion DX9 constant-manager +4 is a no-op; uploads already occurred through constant maps.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x7676F9",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; MoonSugarEffect build 40 fidelity hook: hardware-skinned post-SetupShaderPrograms/post-constant-flush draw window. OBSE hook re-emits xor eax,eax; cmp [edi+44h],eax, then returns to 0x7676FE. Runtime args: esi=NiDX9Renderer, ebx=active NiD3DShaderInterface, [esp+0x30]=original NiGeometry*, ebp=current skin partition, edi=partition buffer data.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x767731",
-    "line": "mov     edx, [edx+148h]",
+    "line": "mov     edx, [edx+148h]; Actual D3D DrawIndexedPrimitive for a hardware-skin partition.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x76774E",
-    "line": "call    edx",
+    "line": "call    edx; Final hardware-skinned caster partition draw after the same pass-state, alpha-test, constant, stage, and program setup.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x76777A",
-    "line": "mov     eax, [eax+40h]",
+    "line": "mov     eax, [eax+40h]; Skinned path vtable +0x40: finish current pass/partition.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x7677BF",
-    "line": "mov     eax, [edx+4Ch]",
+    "line": "mov     eax, [edx+4Ch]; Skinned path vtable +0x4C: advance pass loop.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x7677D7",
-    "line": "mov     edx, [edx+44h]",
+    "line": "mov     edx, [edx+44h]; Skinned path vtable +0x44: end shader submission.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x7677EE",
-    "line": "call    edx",
+    "line": "call    edx; Skinned path always calls shader vtable +0x44 finish after setup, including the zero-pass invalid-selector path.",
     "mnemonic": "call",
     "size": 2
   },

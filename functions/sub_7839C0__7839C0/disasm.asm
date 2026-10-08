@@ -1,4 +1,4 @@
-0x7839C0: push    ebp
+0x7839C0: push    ebp; Oblivion-authoritative: uploads vertex-shader constant arrays through D3DX handles or indexed array elements. Matrix transpose is selected from the observed D3DX parameter type.
 0x7839C1: mov     ebp, esp
 0x7839C3: and     esp, 0FFFFFFF0h
 0x7839C6: sub     esp, 84h
@@ -14,21 +14,21 @@
 0x7839EC: mov     edi, [ebp+arg_0]
 0x7839EF: mov     ebx, [edi+14h]
 0x7839F2: jnz     short loc_7839F9
-0x7839F4: call    sub_783C70
+0x7839F4: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x7839F9: and     ebx, 0FFh
 0x7839FF: cmp     dword ptr ds:0B428D8h[ebx*4], 8
 0x783A07: jz      short loc_783A2E
 0x783A09: cmp     byte ptr ds:0B4295Bh, 0
 0x783A10: mov     ebx, [edi+14h]
 0x783A13: jnz     short loc_783A1A
-0x783A15: call    sub_783C70
+0x783A15: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x783A1A: and     ebx, 0FFh
 0x783A20: cmp     dword ptr ds:0B428D8h[ebx*4], 9
 0x783A28: jnz     loc_783BDD
-0x783A2E: cmp     [ebp+arg_4], 0
+0x783A2E: cmp     [ebp+constantData], 0
 0x783A32: jnz     short loc_783A3A
 0x783A34: mov     eax, [edi+30h]
-0x783A37: mov     [ebp+arg_4], eax
+0x783A37: mov     [ebp+constantData], eax
 0x783A3A: mov     ebx, [edi+24h]
 0x783A3D: test    ebx, ebx
 0x783A3F: jnz     short loc_783A44
@@ -96,29 +96,29 @@
 0x783AF0: call    eax
 0x783AF2: cmp     byte ptr [esp+90h+var_80+3], 0
 0x783AF7: jz      short loc_783B0D
-0x783AF9: mov     edx, [esp+90h+var_64]
+0x783AF9: mov     edx, [esp+90h+vector4Count]
 0x783AFD: push    edx
 0x783AFE: movzx   edx, bx
 0x783B01: imul    edx, [ebp+arg_C]
 0x783B05: shl     edx, 4
-0x783B08: add     edx, [ebp+arg_4]
+0x783B08: add     edx, [ebp+constantData]
 0x783B0B: jmp     short loc_783B2E
 0x783B0D: movzx   ecx, bx
 0x783B10: imul    ecx, [ebp+arg_C]
 0x783B14: shl     ecx, 4
-0x783B17: add     ecx, [ebp+arg_4]
+0x783B17: add     ecx, [ebp+constantData]
 0x783B1A: lea     edx, [esp+90h+var_40]
 0x783B1E: push    ecx
 0x783B1F: push    edx
 0x783B20: call    D3DXMatrixTranspose_0
-0x783B25: mov     edx, [esp+90h+var_64]
+0x783B25: mov     edx, [esp+90h+vector4Count]
 0x783B29: push    edx
 0x783B2A: lea     edx, [esp+94h+var_40]
 0x783B2E: mov     eax, [esi+24h]
 0x783B31: mov     eax, [eax+0FF8h]
 0x783B37: mov     ecx, [eax]
 0x783B39: push    edx
-0x783B3A: mov     edx, [esp+98h+var_68]
+0x783B3A: mov     edx, [esp+98h+startRegister]
 0x783B3E: push    edx
 0x783B3F: push    eax
 0x783B40: mov     eax, [ecx+178h]
@@ -138,15 +138,15 @@
 0x783B67: cmp     byte ptr [esp+90h+var_80+3], 0
 0x783B6C: mov     ebx, 80004005h
 0x783B71: jz      short loc_783BA1
-0x783B73: mov     ecx, [esp+90h+var_64]
-0x783B77: mov     edx, [ebp+arg_4]
-0x783B7A: mov     eax, [esp+90h+var_68]
-0x783B7E: push    0
-0x783B80: push    ecx
-0x783B81: mov     ecx, [esi+24h]
-0x783B84: push    edx
-0x783B85: push    eax
-0x783B86: call    sub_783010
+0x783B73: mov     ecx, [esp+90h+vector4Count]
+0x783B77: mov     edx, [ebp+constantData]
+0x783B7A: mov     eax, [esp+90h+startRegister]
+0x783B7E: push    0; unused
+0x783B80: push    ecx; vector4Count
+0x783B81: mov     ecx, [esi+24h]; this
+0x783B84: push    edx; constantData
+0x783B85: push    eax; startRegister
+0x783B86: call    NiDX9RenderState__SetVertexShaderConstantF; Thin Direct3D9 render-state wrapper for IDirect3DDevice9::SetVertexShaderConstantF (device vtable slot +0x178).
 0x783B8B: test    al, al
 0x783B8D: jz      short loc_783BBB
 0x783B8F: xor     ebx, ebx
@@ -163,7 +163,7 @@
 0x783BA4: mov     eax, [esi+40h]
 0x783BA7: mov     ecx, [eax]
 0x783BA9: push    edx
-0x783BAA: mov     edx, [ebp+arg_4]
+0x783BAA: mov     edx, [ebp+constantData]
 0x783BAD: push    edx
 0x783BAE: mov     edx, [esi+1Ch]
 0x783BB1: push    edi
@@ -181,11 +181,11 @@
 0x783BC5: mov     esp, ebp
 0x783BC7: pop     ebp
 0x783BC8: retn    14h
-0x783BCB: mov     ecx, [esi+8]; void *
+0x783BCB: mov     ecx, [esi+8]; this
 0x783BCE: push    ebx
 0x783BCF: push    ecx
 0x783BD0: push    offset aNid3dhlslver_0; "NiD3DHLSLVertexShader::SetVertexShaderC"...
-0x783BD5: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x783BD5: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x783BDA: add     esp, 0Ch
 0x783BDD: pop     edi
 0x783BDE: pop     esi

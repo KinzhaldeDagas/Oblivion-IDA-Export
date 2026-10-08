@@ -13,19 +13,19 @@
   },
   {
     "ea": "0x5508F4",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5508F8",
-    "line": "push    ebx",
+    "line": "push    ebx; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5508F9",
-    "line": "call    sub_5508A0",
+    "line": "call    NiObjectNET_FindFaceGenBaseVertexData; Scan NiObjectNET extra data and return the FaceGen base-vertex data object used to restore authored positions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x550905",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x550969",
-    "line": "or      word ptr [ebx+2Eh], 1",
+    "line": "or      word ptr [ebx+2Eh], 1; Mark only vertex positions dirty (bit 0) after restoring base vertices; normals remain unchanged.",
     "mnemonic": "or",
     "size": 5
   },

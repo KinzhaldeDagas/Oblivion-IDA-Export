@@ -1,4 +1,9 @@
-int __thiscall sub_52F770(TESTopic *this, _BYTE *a2, Actor *a3, TESObjectREFR *a4)
+// OFE RC1 verification (2026-10-02): GetMatchingInfo is a direct thiscall wrapper around SelectInfoForSpeaker(topic, lowDispositionFailure, speaker, target, false, nullptr, nullptr). No extra role/category filtering occurs in this wrapper; the OFE player Greeting/Rumors probe uses that same selector signature and arguments.
+OblivionTopicInfo *__thiscall TESTopic::GetMatchingInfo(
+        TESTopic *this,
+        bool *lowDispositionFailure,
+        Actor *speaker,
+        TESObjectREFR *target)
 {
-  return sub_52F010(this, a2, a3, a4, 0, 0, 0);
+  return TESTopic::SelectInfoForSpeaker(this, lowDispositionFailure, speaker, target, 0, 0, 0); /*0x52f78a*/
 }

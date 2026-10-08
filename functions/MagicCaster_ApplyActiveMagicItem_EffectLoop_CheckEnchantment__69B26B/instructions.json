@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69B26B",
-    "line": "mov     edx, [esi]",
+    "line": "mov     edx, [esi]; UCWUS pipeline note: effect-loop enchantment filter calls EnchantmentItem_EffectAllowedFromEnch. Keep this intact; UCWUS 0x00010009 moves selected item/spell/token charge state into a native session via bridge commands instead of bypassing the filter.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x69B293",
-    "line": "call    EnchantmentItem_EffectAllowedFromEnch??",
+    "line": "call    EnchantmentItem_EffectAllowedFromEnch??; UCWUS decode note: EnchantmentItem_EffectAllowedFromEnch applies global object/effect flag rules for weapon/apparel enchantment effects. UCWUS should not bypass this wholesale; the faithful path is a targeted apparel-cast branch patch plus plugin session/suppression commands.",
     "mnemonic": "call",
     "size": 5
   },

@@ -33,8 +33,8 @@
 0x48815D: jnz     short loc_488165
 0x48815F: cmp     dword ptr [edi+0Ch], 0Fh
 0x488163: jz      short loc_4881D1
-0x488165: push    edi
-0x488166: call    sub_470520
+0x488165: push    edi; form
+0x488166: call    TESForm_GetValue
 0x48816B: mov     ebp, eax
 0x48816D: add     esp, 4
 0x488170: cmp     ebp, 0FFFFFFFFh
@@ -120,8 +120,8 @@
 0x488239: jnz     short loc_488241
 0x48823B: cmp     dword ptr [esi+0Ch], 0Fh
 0x48823F: jz      short loc_488261
-0x488241: push    esi
-0x488242: call    sub_470520
+0x488241: push    esi; form
+0x488242: call    TESForm_GetValue
 0x488247: add     esp, 4
 0x48824A: cmp     eax, 0FFFFFFFFh
 0x48824D: jz      short loc_488261

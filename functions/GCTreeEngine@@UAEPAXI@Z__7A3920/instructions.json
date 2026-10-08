@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A3920",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion CTreeEngine scalar deleting destructor. Calls the decoded 0x110-byte CTreeEngine destructor, then frees through FormHeap only when flags bit 0 is set.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x7A3923",
-    "line": "call    ??1CTreeEngine@@UAE@XZ; CTreeEngine::~CTreeEngine(void)",
+    "line": "call    OB_CTreeEngine_dtor_010201A0; Oblivion compact CTreeEngine destructor. Destroys embedded SIdvLeafInfo, releases generated billboard-leaf and branch-info vector storage, clears the branch-texture small string/random state, and then runs the shared base destructor. No later root-support storage exists in this build.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A3928",
-    "line": "test    byte ptr [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+flags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7A3930",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

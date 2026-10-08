@@ -1,4 +1,4 @@
-0x78ED70: push    ecx
+0x78ED70: push    ecx; Normalizes one OB_stVec3 in place as v *= 1/sqrt(dot(v,v)); the binary has no zero-length guard. Used by CBranch::MakeLeaf and projected-shadow closest-point code. RT4.1 IdvVector.h corroborates stVec3::Normalize.
 0x78ED71: push    esi
 0x78ED72: mov     esi, ecx
 0x78ED74: fld     dword ptr [esi+4]

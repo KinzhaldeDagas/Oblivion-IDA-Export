@@ -35,8 +35,8 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetTouchTarget@<eax>(
 {
   int v33; // ebx
 
-  if ( a32 && *(_BYTE *)(a32 + 4) == 0x22 )
-    return MagicCaster_ApplyActiveMagicItem_::CheckTouchTargetRange(
+  if ( a32 && *(_BYTE *)(a32 + 4) == 0x22 ) /*0x69b011*/
+    return MagicCaster_ApplyActiveMagicItem_::CheckTouchTargetRange( /*0x69b011*/
              a3,
              a4,
              a5,
@@ -68,8 +68,8 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetTouchTarget@<eax>(
              a30,
              a31,
              a32);
-  if ( !a1 && (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x38))(a2) )
-    return MagicCaster_ApplyActiveMagicItem_::CheckTouchTargetRange(
+  if ( !a1 && (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0x38))(a2) ) /*0x69b01e*/
+    return MagicCaster_ApplyActiveMagicItem_::CheckTouchTargetRange( /*0x69b01e*/
              a3,
              a4,
              a5,
@@ -101,10 +101,10 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetTouchTarget@<eax>(
              a30,
              a31,
              a32);
-  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0xC))(a2);
-  a9 = v33;
-  if ( !v33 )
-    return MagicCaster_ApplyActiveMagicItem_::CheckTouchTargetRange(
+  v33 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0xC))(a2); /*0x69b02d*/
+  a9 = v33; /*0x69b031*/
+  if ( !v33 ) /*0x69b035*/
+    return MagicCaster_ApplyActiveMagicItem_::CheckTouchTargetRange( /*0x69b036*/
              a3,
              a4,
              a5,
@@ -137,7 +137,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetTouchTarget@<eax>(
              a31,
              a32);
   else
-    return MagicCaster_ApplyActiveMagicItem_::CheckCasterNiNode__(
+    return MagicCaster_ApplyActiveMagicItem_::CheckCasterNiNode__( /*0x69b035*/
              v33,
              a2,
              a3,

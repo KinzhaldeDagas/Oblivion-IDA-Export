@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x724B30",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Pass330 decode: NiRangeLODData camera selector. It projects the data center-to-camera vector on camera forward, multiplies by Camera::LODAdjust, takes absolute distance, and selects the matching authored range interval.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x724BA5",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+arg_0]; Pass332 decode: NiRangeLODData multiplies shadow-camera-relative forward distance by Camera::LODAdjust before selecting an authored interval; this can choose coarse/no caster geometry.",
     "mnemonic": "fstp",
     "size": 4
   },

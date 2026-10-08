@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x5527F8",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5527FD",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x55280C",
-    "line": "lea     ecx, [esi+30h]",
+    "line": "lea     ecx, [esi+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x552817",
-    "line": "call    sub_43EB30",
+    "line": "call    FaceGenMatrix_Construct; Constructs a 0x18-byte FaceGenMatrix. Embedded vector layout: allocator state +0x08, begin +0x0C, end +0x10, capacity end +0x14.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55281C",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x552821",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -220,5 +220,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BBCC0",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBCC5",
+    "line": "push    2; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9BBCC7",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9BBCC9",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBCCC",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBCCD",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBCD2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BBCD3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBCD6",
+    "line": "add     ecx, 30h ; '0'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBCD9",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBCDE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BBCE2",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBCE5",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BBCE8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BBCEA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBCEF",
+    "line": "mov     eax, offset stru_AE59E4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BBCF4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

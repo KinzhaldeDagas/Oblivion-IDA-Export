@@ -1,8 +1,8 @@
-0x50A050: mov     ecx, ds:0B333C4h
+0x50A050: mov     ecx, ds:0B333C4h; this
 0x50A056: cmp     byte ptr [ecx+588h], 0
 0x50A05D: jz      loc_50A0FB
-0x50A063: push    0
-0x50A065: call    PlayerCharacter_GetPlayerNode
+0x50A063: push    0; firstPerson
+0x50A065: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x50A06A: test    byte ptr [eax+18h], 1
 0x50A06E: jz      short loc_50A099
 0x50A070: mov     eax, ds:0B333C4h
@@ -14,14 +14,14 @@
 0x50A093: add     esp, 4
 0x50A096: mov     al, 1
 0x50A098: retn
-0x50A099: mov     ecx, ds:0B333C4h
-0x50A09F: push    1
-0x50A0A1: call    PlayerCharacter_GetPlayerNode
+0x50A099: mov     ecx, ds:0B333C4h; this
+0x50A09F: push    1; firstPerson
+0x50A0A1: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x50A0A6: test    byte ptr [eax+18h], 1
-0x50A0AA: mov     ecx, ds:0B333C4h
-0x50A0B0: push    1
+0x50A0AA: mov     ecx, ds:0B333C4h; this
+0x50A0B0: push    1; firstPerson
 0x50A0B2: jnz     short loc_50A0D7
-0x50A0B4: call    PlayerCharacter_GetPlayerNode
+0x50A0B4: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x50A0B9: or      word ptr [eax+18h], 1
 0x50A0BE: cmp     byte ptr ds:0B361ACh, 0
 0x50A0C5: jz      short loc_50A118
@@ -30,7 +30,7 @@
 0x50A0D1: add     esp, 4
 0x50A0D4: mov     al, 1
 0x50A0D6: retn
-0x50A0D7: call    PlayerCharacter_GetPlayerNode
+0x50A0D7: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x50A0DC: and     word ptr [eax+18h], 0FFFEh
 0x50A0E2: cmp     byte ptr ds:0B361ACh, 0
 0x50A0E9: jz      short loc_50A118

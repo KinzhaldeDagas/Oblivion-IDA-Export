@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x44FE10",
-    "line": "cmp     dword ptr [edi], 0",
+    "line": "cmp     dword ptr [edi], 0; TESFile_HaveMastersChanged walks masterList and masterlistSizeInfo in parallel by ordinal, not by neighboring TES4 subrecords. It returns the current result as soon as either list ends. Thus non-adjacent MAST/DATA can still pair natively; missing/extra occurrences truncate this dependency-change check.",
     "mnemonic": "cmp",
     "size": 3
   },

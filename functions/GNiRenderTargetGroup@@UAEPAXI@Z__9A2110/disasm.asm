@@ -4,7 +4,7 @@
 0x9A2118: test    byte ptr [esp+4+arg_0], 1
 0x9A211D: jz      short loc_9A2128
 0x9A211F: push    esi
-0x9A2120: call    FormHeapFree
+0x9A2120: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A2125: add     esp, 4
 0x9A2128: mov     eax, esi
 0x9A212A: pop     esi

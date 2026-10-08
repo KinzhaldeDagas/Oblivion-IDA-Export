@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "PARSENONCLIENTSTATE",
+  "definition": "struct PARSENONCLIENTSTATE\n{\nNONCLIENTMETRICSW metrics;\nBOOL metricsDirty;\nLOGFONTW iconTitleFont;\n}\n",
   "id": 18374686479671837843,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "metrics",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 504
+      "size": 504,
+      "type": "NONCLIENTMETRICSW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "metricsDirty",
       "offset": 504,
-      "offset_hex": "0x1f8",
-      "size": 4
+      "offset_hex": "0x1F8",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iconTitleFont",
       "offset": 508,
-      "offset_hex": "0x1fc",
-      "size": 92
+      "offset_hex": "0x1FC",
+      "size": 92,
+      "type": "LOGFONTW"
     }
   ],
   "name": "PARSENONCLIENTSTATE",
+  "ordinal": 4652,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 600
 }

@@ -40,7 +40,7 @@
 0x99D259: and     esi, 1Fh
 0x99D25C: imul    esi, 28h ; '('
 0x99D25F: sar     eax, 5
-0x99D262: mov     eax, dword_BAAAC0[eax*4]
+0x99D262: mov     eax, dword ptr unk_BAAAC0[eax*4]
 0x99D269: lea     eax, [eax+esi+4]
 0x99D26D: and     byte ptr [eax], 0FDh
 0x99D270: mov     eax, [ebp+lDistanceToMove]

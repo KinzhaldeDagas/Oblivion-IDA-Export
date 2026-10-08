@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x71FB40",
+      "0x71FB9B"
+    ]
+  ],
+  "chunks_sha256": "d1ac9fc233078da08f3038c7f79f60f5df9451792d4b71183de9bfcc6ae028d3",
+  "comment_regular": "\n\n[2026-10-03 geometry limits] Verified vertex count and m_usTriangles are unsigned WORD; constructor computes m_uiTriListLength as DWORD 3*m_usTriangles and retains supplied ushort index list. Thus source strip-index total need not fit WORD, and a full 65535-triangle output contains 196605 index entries. Plugin source-index/degenerate counters are now DWORD; conversion caps emitted nondegenerate triangles, not raw source windows. More than 65535 emitted triangles requires partitioning into multiple NiTriShapeData objects, still separate implementation work.\n\n[2026-10-03 frond material partitions] Plugin owned LOD triangle count is now DWORD; only individual NiTriShapeData parts use <=65535 triangles. Material partitioner validates a uniform map across each triangle, compacts source-vertex remap, preserves winding/attributes, and splits material groups at native triangle capacity. NiNode grouping makes replacement/retirement a single child operation. In-game validation remains pending.",
+  "comment_repeatable": "Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.\n\n[2026-10-03 constructor ownership audit] Complete construction chain 71FB40->732D70->728670->7005D0 performs no allocation. NiGeometryData adopts caller vertex/normal/color/UV pointers and reads positions for bounds; this routine adopts ushort indices at+48 and writes DWORD 3*triangleCount at+44. No owned input is freed in this constructor chain. 347-check native-byte fixture verified exact x86 call ABI, pointers, optional-null fields and 0x58 write extent for3/32768/65535 vertices and1/65535 triangles. Bounds computation was redirected; no constructor-fault injection or destructor execution claimed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_71FB40",
+  "display_name": "NiTriShapeData_ConstructWithData",
   "end_ea": "0x71FB9B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_71FB40",
+  "name": "NiTriShapeData_ConstructWithData",
   "segment": ".text",
   "sha256": "d1ac9fc233078da08f3038c7f79f60f5df9451792d4b71183de9bfcc6ae028d3",
   "size": 91,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x71FB40",
-  "type": "NiTriShapeData *__thiscall(NiTriShapeData *this, __int16, int, int, int, int, char, __int16, UInt16, UInt16 *)",
+  "total_chunk_size": 91,
+  "type": "NiTriShapeData *__thiscall(NiTriShapeData *this, UInt16, NiPoint3 *, NiPoint3 *, NiColorAlpha *, void *, char, __int16, UInt16, UInt16 *)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 8
 }

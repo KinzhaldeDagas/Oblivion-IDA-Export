@@ -4,7 +4,7 @@
 0x95A1B9: jz      loc_95A24E
 0x95A1BF: push    offset aNicollisiondat; "NiCollisionData"
 0x95A1C4: mov     ds:0BA9A65h, bl
-0x95A1CA: call    sub_7125B0
+0x95A1CA: call    sub_7125B0; Fog decode: generic NIF property factory unregister helper; shutdown uses it to unregister "NiFogProperty".
 0x95A1CF: mov     eax, ds:0BA9AA0h
 0x95A1D4: push    eax
 0x95A1D5: mov     ds:0BA9A8Ch, ebx
@@ -13,16 +13,16 @@
 0x95A1E7: mov     ds:0BA9A94h, ebx
 0x95A1ED: mov     ds:0BA9A88h, ebx
 0x95A1F3: mov     ds:0BA9A98h, ebx
-0x95A1F9: call    FormHeapFree
+0x95A1F9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x95A1FE: mov     ecx, ds:0BA9AA4h
 0x95A204: push    ecx
-0x95A205: call    FormHeapFree
+0x95A205: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x95A20A: mov     edx, ds:0BA9AA8h
 0x95A210: push    edx
-0x95A211: call    FormHeapFree
+0x95A211: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x95A216: mov     eax, ds:0BA9AACh
 0x95A21B: push    eax
-0x95A21C: call    FormHeapFree
+0x95A21C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x95A221: add     esp, 14h
 0x95A224: mov     ds:0BA9AA0h, ebx
 0x95A22A: mov     ds:0BA9AA4h, ebx

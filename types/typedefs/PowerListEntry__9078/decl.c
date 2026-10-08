@@ -1,1 +1,5 @@
-PowerListEntry
+struct PowerListEntry
+{
+PowerListData *data;
+PowerListEntry *next;
+};

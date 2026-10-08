@@ -1,1 +1,1 @@
-bhkMemory
+struct bhkMemory;

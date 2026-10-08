@@ -3,7 +3,7 @@
 0x619423: cmp     dword ptr [esi+70h], 0Ah
 0x619427: jnz     loc_61951B
 0x61942D: mov     ecx, [esi+3Ch]
-0x619430: call    Actor_GetCurrentAction
+0x619430: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x619435: cmp     eax, 1
 0x619438: jz      loc_61951B
 0x61943E: mov     ecx, [esi+3Ch]
@@ -20,7 +20,7 @@
 0x619464: push    0
 0x619466: push    1
 0x619468: push    eax
-0x619469: call    Actor_EquipItem
+0x619469: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x61946E: mov     eax, [esi+0ACh]
 0x619474: mov     al, [eax+90h]
 0x61947A: cmp     al, 5
@@ -57,8 +57,8 @@
 0x6194EF: fld     dword ptr ds:0A30634h
 0x6194F5: fstp    dword ptr [esi+188h]
 0x6194FB: mov     [esi+70h], edi
-0x6194FE: mov     ecx, esi
-0x619500: call    sub_615520
+0x6194FE: mov     ecx, esi; this
+0x619500: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x619505: push    ecx
 0x619506: mov     ecx, esi
 0x619508: fstp    [esp+0Ch+var_C]; float
@@ -68,7 +68,7 @@
 0x61951B: pop     esi
 0x61951C: retn
 0x61951D: mov     ecx, esi
-0x61951F: call    sub_612D60
+0x61951F: call    CombatController_GetEquippedWeaponForm
 0x619524: test    eax, eax
 0x619526: jz      short loc_619544
 0x619528: mov     edi, [esi+3Ch]
@@ -78,7 +78,7 @@
 0x619531: push    0
 0x619533: push    1
 0x619535: mov     ecx, esi
-0x619537: call    sub_612D60
+0x619537: call    CombatController_GetEquippedWeaponForm
 0x61953C: push    eax
 0x61953D: mov     ecx, edi
 0x61953F: call    Actor_UnequipItem
@@ -95,9 +95,9 @@
 0x61956B: add     esp, 0Ch
 0x61956E: fld     dword ptr ds:0A30634h
 0x619574: fstp    dword ptr [esi+188h]
-0x61957A: mov     ecx, esi
+0x61957A: mov     ecx, esi; this
 0x61957C: mov     dword ptr [esi+70h], 0
-0x619583: call    sub_615520
+0x619583: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x619588: push    ecx
 0x619589: mov     ecx, esi
 0x61958B: fstp    [esp+0Ch+var_C]; float

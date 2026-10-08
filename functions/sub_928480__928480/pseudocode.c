@@ -4,9 +4,9 @@ __m128 *__thiscall sub_928480(__m128 *this, int a2, int *a3)
   __m128 v6; // [esp+20h] [ebp-20h] BYREF
   __m128 v7; // [esp+30h] [ebp-10h] BYREF
 
-  sub_8F0F70(a2, a3, *(_DWORD *)(a2 + 0x28), 8);
-  sub_88FCC0(&v5, *(__m128 **)(a2 + 0x1C), this + 1);
-  sub_88FCC0(&v6, *(__m128 **)(a2 + 0x20), this + 2);
-  sub_88FE00(&v7, *(__m128 **)(a2 + 0x1C), this + 3);
-  return sub_8F1790(&v5, a2, (__m128 **)a3);
+  sub_8F0F70(a2, a3, *(_DWORD *)(a2 + 0x28), 8); /*0x92849c*/
+  hkTransform_TransformPosition(&v5, *(__m128 **)(a2 + 0x1C), this + 1); /*0x9284b0*/
+  hkTransform_TransformPosition(&v6, *(__m128 **)(a2 + 0x20), this + 2); /*0x9284c1*/
+  hkBasis_TransformVector(&v7, *(__m128 **)(a2 + 0x1C), this + 3); /*0x9284d2*/
+  return sub_8F1790(&v5, a2, (__m128 **)a3); /*0x9284e6*/
 }

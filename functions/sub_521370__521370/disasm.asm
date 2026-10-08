@@ -1,4 +1,4 @@
-0x521370: sub     esp, 108h
+0x521370: sub     esp, 108h; Builds IdleAnims lookup root from actor model path: preserves existing IdleAnims prefix or appends IdleAnims to model directory.
 0x521376: mov     eax, ds:0B30AACh
 0x52137B: xor     eax, esp
 0x52137D: mov     [esp+108h+var_4], eax
@@ -7,7 +7,7 @@
 0x521386: mov     esi, [esp+110h+arg_4]
 0x52138D: mov     eax, [esi]
 0x52138F: push    eax
-0x521390: call    FormHeapFree
+0x521390: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x521395: mov     eax, [esp+114h+arg_0]
 0x52139C: xor     ebx, ebx
 0x52139E: add     esp, 4

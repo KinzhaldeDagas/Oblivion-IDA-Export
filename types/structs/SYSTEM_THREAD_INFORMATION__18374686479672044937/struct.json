@@ -1,82 +1,135 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_SYSTEM_THREAD_INFORMATION",
+  "definition": "struct _SYSTEM_THREAD_INFORMATION\n{\nLARGE_INTEGER_0 KernelTime;\nLARGE_INTEGER_0 UserTime;\nLARGE_INTEGER_0 CreateTime;\nDWORD dwTickCount;\nLPVOID StartAddress;\nCLIENT_ID ClientId;\nDWORD dwCurrentPriority;\nDWORD dwBasePriority;\nDWORD dwContextSwitches;\nDWORD dwThreadState;\nDWORD dwWaitReason;\nDWORD dwUnknown;\n}\n",
   "id": 18374686479672044937,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "KernelTime",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "LARGE_INTEGER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UserTime",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "LARGE_INTEGER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateTime",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "LARGE_INTEGER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwTickCount",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StartAddress",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "LPVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ClientId",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "CLIENT_ID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwCurrentPriority",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwBasePriority",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwContextSwitches",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwThreadState",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwWaitReason",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwUnknown",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "_SYSTEM_THREAD_INFORMATION",
+  "ordinal": 7975,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

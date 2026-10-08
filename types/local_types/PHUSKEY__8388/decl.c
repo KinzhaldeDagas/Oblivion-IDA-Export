@@ -1,1 +1,1 @@
-PHUSKEY
+typedef HUSKEY *PHUSKEY;

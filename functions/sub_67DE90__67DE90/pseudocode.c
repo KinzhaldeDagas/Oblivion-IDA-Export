@@ -1,67 +1,65 @@
-void __thiscall sub_67DE90(char *this, Sky *a2)
+void __thiscall sub_67DE90(char *this, TESHealthForm *a2)
 {
-  Sky *v2; // edi
-  char *v4; // ecx
-  NiNode *Health; // eax
-  int v6; // eax
-  char *v7; // eax
-  char *v8; // eax
+  TESHealthForm *v2; // edi
+  void *v4; // ecx
+  NiDX92DBufferData *Health; // eax
+  char *Head; // eax
+  char *LinkedDoor; // eax
+  void *Position; // eax
   float *v9; // esi
-  NiNode *v10; // eax
+  NiDX92DBufferData *v10; // eax
   int v11; // [esp+Ch] [ebp-30h] BYREF
   float v12; // [esp+10h] [ebp-2Ch]
   float v13; // [esp+14h] [ebp-28h]
-  float v14; // [esp+18h] [ebp-24h] BYREF
-  float v15; // [esp+1Ch] [ebp-20h]
-  float v16; // [esp+20h] [ebp-1Ch]
-  int v17; // [esp+24h] [ebp-18h] BYREF
-  float v18; // [esp+28h] [ebp-14h]
-  float v19; // [esp+2Ch] [ebp-10h]
-  float v20[3]; // [esp+30h] [ebp-Ch] BYREF
+  NiPoint3 v14; // [esp+18h] [ebp-24h] BYREF
+  int v15; // [esp+24h] [ebp-18h] BYREF
+  float v16; // [esp+28h] [ebp-14h]
+  float v17; // [esp+2Ch] [ebp-10h]
+  NiPoint3 v18; // [esp+30h] [ebp-Ch] BYREF
 
-  v2 = a2;
-  if ( a2 && sub_42B410((BSExtraData *)a2) && !TES->currentInteriorCell )
+  v2 = a2; /*0x67de95*/
+  if ( a2 && TeleportData_GetLinkedDoor((TeleportData *)a2) && !MEMORY[0xB333A0]->currentInteriorCell ) /*0x67deb7*/
   {
-    v4 = *((char **)this + 9);
-    if ( v4 )
+    v4 = *((void **)this + 9); /*0x67dec1*/
+    if ( v4 ) /*0x67dec6*/
     {
-      v8 = sub_4BEF40(v4);
+      Position = PathGraphNode_GetPosition(v4); /*0x67df17*/
     }
     else
     {
-      a2 = 0;
-      Health = TESHealthForm_GetHealth(v2);
-      if ( sub_68BF60(v2, Health, &a2) && a2 )
+      a2 = 0; /*0x67dec8*/
+      Health = (NiDX92DBufferData *)TESHealthForm_GetHealth(v2); /*0x67ded3*/
+      if ( sub_68BF60((NiDX92DBufferData **)v2, Health, (NiDX92DBufferData **)&a2) && a2 ) /*0x67deea*/
       {
-        v6 = sub_6899C0((char *)a2);
-        v11 = *(int *)v6;
-        v12 = *(float *)(v6 + 4);
-        v13 = *(float *)(v6 + 8);
-        goto LABEL_11;
+        Head = EmbeddedList_GetHead((char *)a2); /*0x67deec*/
+        v11 = *(int *)Head; /*0x67def3*/
+        v12 = *((float *)Head + 1); /*0x67defa*/
+        v13 = *((float *)Head + 2); /*0x67df01*/
+        goto LABEL_11; /*0x67df05*/
       }
-      v7 = (char *)sub_42B410((BSExtraData *)v2);
-      v8 = (char *)sub_6899C0(v7);
+      LinkedDoor = (char *)TeleportData_GetLinkedDoor((TeleportData *)v2); /*0x67df09*/
+      Position = EmbeddedList_GetHead(LinkedDoor); /*0x67df10*/
     }
-    v11 = *(int *)v8;
-    v12 = *((float *)v8 + 1);
-    v13 = *((float *)v8 + 2);
+    v11 = *(int *)Position; /*0x67df1e*/
+    v12 = *((float *)Position + 1); /*0x67df25*/
+    v13 = *((float *)Position + 2); /*0x67df2c*/
 LABEL_11:
-    v9 = (float *)(this + 0xC);
-    if ( sub_43F7C0((int *)TES, (float *)&v11, v9, (float *)&v17, 1.0) )
+    v9 = (float *)(this + 0xC); /*0x67df30*/
+    if ( sub_43F7C0((int *)MEMORY[0xB333A0], (float *)&v11, v9, (float *)&v15, 1.0) ) /*0x67df4a*/
     {
-      v14 = *v9 - *(float *)&v11;
-      v15 = v9[1] - v12;
-      v16 = v9[2] - v13;
-      sub_43F350(&v14);
-      v19 = v13;
-      v20[0] = *(float *)&v17 + v14;
-      v20[1] = v18 + v15;
-      v20[2] = v16 + v13;
-      v14 = *(float *)&v17 - v14;
-      v15 = v18 - v15;
-      v16 = v13 - v16;
-      v10 = TESHealthForm_GetHealth(v2);
-      sub_68C3A0(v2, &v14, v20, v10);
+      v14.x = *v9 - *(float *)&v11; /*0x67df61*/
+      v14.y = v9[1] - v12; /*0x67df6c*/
+      v14.z = v9[2] - v13; /*0x67df77*/
+      Vector3_NormalizeInPlace(&v14.x); /*0x67df7b*/
+      v17 = v13; /*0x67df88*/
+      v18.x = *(float *)&v15 + v14.x; /*0x67df9c*/
+      v18.y = v16 + v14.y; /*0x67dfb0*/
+      v18.z = v14.z + v13; /*0x67dfbc*/
+      v14.x = *(float *)&v15 - v14.x; /*0x67dfc6*/
+      v14.y = v16 - v14.y; /*0x67dfcc*/
+      v14.z = v13 - v14.z; /*0x67dfd2*/
+      v10 = (NiDX92DBufferData *)TESHealthForm_GetHealth(v2); /*0x67dfd6*/
+      sub_68C3A0((TeleportData **)v2, &v14, &v18, v10); /*0x67dfe8*/
     }
   }
 }

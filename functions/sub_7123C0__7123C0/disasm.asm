@@ -12,7 +12,6 @@
 0x7123D7: test    edi, edi
 0x7123D9: jz      short loc_7123F8
 0x7123DB: jmp     short loc_7123E0
-0x7123DD: align 10h
 0x7123E0: mov     eax, [edi+4]
 0x7123E3: mov     edx, [esi]
 0x7123E5: mov     edx, [edx+8]

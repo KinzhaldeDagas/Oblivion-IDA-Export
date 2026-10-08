@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x863621",
-    "line": "mov     ebp, dword ptr [esp+128h+arg_4]",
+    "line": "mov     ebp, dword ptr [esp+128h+loadFromCache]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x863628",
-    "line": "mov     edi, [esp+128h+arg_0]",
+    "line": "mov     edi, [esp+128h+sourcePath]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x863642",
-    "line": "push    offset off_A7D0E8",
+    "line": "push    offset suffix; suffix",
     "mnemonic": "push",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x86364B",
-    "line": "push    edi",
+    "line": "push    edi; sourcePath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x86364C",
-    "line": "push    eax",
+    "line": "push    eax; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x86364D",
-    "line": "call    sub_7B4160",
+    "line": "call    BuildTextureVariantPath; Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\\\ for relative paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x86365C",
-    "line": "push    1; char",
+    "line": "push    1; requireMipmaps",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x86365E",
-    "line": "push    ebp; char",
+    "line": "push    ebp; loadFromCache",
     "mnemonic": "push",
     "size": 1
   },
@@ -223,25 +223,25 @@
   },
   {
     "ea": "0x863663",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x863664",
-    "line": "lea     edx, [esp+134h+var_118]",
+    "line": "lea     edx, [esp+134h+outTexture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x863668",
-    "line": "push    edx; int",
+    "line": "push    edx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x863669",
-    "line": "call    sub_7B8200",
+    "line": "call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x863671",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x863672",
-    "line": "lea     ecx, [esi+104h]",
+    "line": "lea     ecx, [esi+104h]; this",
     "mnemonic": "lea",
     "size": 6
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x863683",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x863688",
-    "line": "mov     eax, [esp+128h+var_118]",
+    "line": "mov     eax, [esp+128h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -466,5 +466,83 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D47A0",
+    "line": "lea     ecx, [ebp-118h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D47A6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D47AB",
+    "line": "mov     edx, dword ptr [esp+loadFromCache]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D47AF",
+    "line": "lea     eax, [edx-118h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D47B5",
+    "line": "mov     ecx, [edx-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D47BB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D47BD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D47C2",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D47C5",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D47C8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D47CA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D47CF",
+    "line": "mov     eax, offset stru_AFC818",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D47D4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

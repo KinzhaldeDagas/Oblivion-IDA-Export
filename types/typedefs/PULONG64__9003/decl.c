@@ -1,1 +1,1 @@
-PULONG64
+typedef unsigned __int64 *PULONG64;

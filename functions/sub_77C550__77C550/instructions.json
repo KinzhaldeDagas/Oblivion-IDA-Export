@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x77C56B",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x77C572",
-    "line": "mov     [esp+10h+var_8], eax",
+    "line": "mov     [esp+10h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,43 +97,43 @@
   },
   {
     "ea": "0x77C584",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77C585",
-    "line": "lea     ecx, [esp+18h+var_4]",
+    "line": "lea     ecx, [esp+18h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77C589",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77C58A",
-    "line": "mov     ecx, [edi+18h]",
+    "line": "mov     ecx, [edi+18h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x77C58D",
-    "line": "lea     edx, [esp+1Ch+var_8]",
+    "line": "lea     edx, [esp+1Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77C591",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77C592",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x77C5C9",
-    "line": "cmp     [esp+14h+var_8], 0",
+    "line": "cmp     [esp+14h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

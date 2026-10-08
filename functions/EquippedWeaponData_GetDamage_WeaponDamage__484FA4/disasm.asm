@@ -5,10 +5,10 @@
 0x484FB0: call    edx
 0x484FB2: fstp    dword ptr [esp+arg_C+4]
 0x484FB6: mov     ecx, esi; this
-0x484FB8: call    Actor_GetFatigueFraction
+0x484FB8: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x484FBD: fstp    dword ptr [esp+arg_C]
 0x484FC1: mov     edi, [ebx+8]
-0x484FC4: cmp     byte ptr [edi+90h], 5
+0x484FC4: cmp     byte ptr [edi+90h], 5; Weapon damage calculation selects Agility only for native weapon type Bow (5); other weapon types follow their own governing-attribute path.
 0x484FCB: mov     eax, [esi]
 0x484FCD: mov     edx, [eax+288h]
 0x484FD3: mov     ecx, esi
@@ -20,8 +20,8 @@
 0x484FDF: fstp    [esp+4+arg_20]
 0x484FE3: push    ebp
 0x484FE4: mov     ebp, [esi]
-0x484FE6: mov     ecx, edi
-0x484FE8: call    TESObjectWEAP_GetWeaponSkillAV
+0x484FE6: mov     ecx, edi; this
+0x484FE8: call    TESObjectWEAP_GetWeaponSkillAV; BladeSkillsRestored schema-4 owner decode: ECX is TESObjectWEAP and ESI is the Actor owner. Call returns at 0x484FED; the paired Calc_WeaponDamage returns at 0x485080. Patch must pass ESI and bind the resolved player/NPC sidecar level to this exact formula pair.
 0x484FED: push    eax
 0x484FEE: mov     eax, [ebp+288h]
 0x484FF4: mov     ecx, esi
@@ -57,15 +57,15 @@
 0x485059: push    ecx
 0x48505A: fstp    [esp+18h+var_18]; float
 0x48505D: fld     [esp+18h+arg_24]
-0x485061: call    Double_To_SInt32
+0x485061: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x485066: fld     dword ptr [esp+18h+arg_C+4]
 0x48506A: push    eax; int
-0x48506B: call    Double_To_SInt32
+0x48506B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x485070: fld     [esp+1Ch+arg_14]
 0x485074: push    eax; int
-0x485075: call    Double_To_SInt32
+0x485075: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48507A: push    eax; int
-0x48507B: call    Calc_WeaponDamage
+0x48507B: call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.
 0x485080: add     esp, 20h
 0x485083: pop     ebp
 0x485084: jmp     EquippedWeaponData_GetDamage___AddAttackBonus_

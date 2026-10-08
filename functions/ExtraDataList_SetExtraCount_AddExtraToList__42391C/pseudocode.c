@@ -4,5 +4,5 @@ int __userpurge ExtraDataList_SetExtraCount_::AddExtraToList@<eax>(
         ExtraDataList *a2@<edi>,
         int a3)
 {
-  return BaseExtraList_AddExtra(a2, a1);
+  return BaseExtraList_AddExtra(a2, a1); /*0x42393d*/
 }

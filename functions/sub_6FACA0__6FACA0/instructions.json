@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6FACAA",
-    "line": "lea     ecx, [esp+40h+var_24]",
+    "line": "lea     ecx, [esp+40h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x6FACC4",
-    "line": "fstp    [esp+40h+var_40]; float",
+    "line": "fstp    [esp+40h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6FACC7",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6FACDB",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },

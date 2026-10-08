@@ -1,1 +1,1 @@
-bhkUnaryAction
+struct bhkUnaryAction;

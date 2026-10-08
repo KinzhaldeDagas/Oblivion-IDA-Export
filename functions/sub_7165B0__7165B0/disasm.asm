@@ -1,4 +1,4 @@
-0x7165B0: push    esi
+0x7165B0: push    esi; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x7165B1: mov     esi, [esp+4+arg_0]
 0x7165B5: test    esi, esi
 0x7165B7: jz      short loc_71661C
@@ -35,7 +35,7 @@
 0x7165FF: mov     eax, [ecx+esi*4]
 0x716602: push    ebx
 0x716603: push    eax
-0x716604: call    sub_7165B0
+0x716604: call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x716609: movzx   eax, word ptr [edi+0B6h]
 0x716610: add     esi, 1
 0x716613: add     esp, 8

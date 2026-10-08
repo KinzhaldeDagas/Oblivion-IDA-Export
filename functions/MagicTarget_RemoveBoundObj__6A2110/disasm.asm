@@ -26,7 +26,7 @@
 0x6A2149: cmp     [ecx+30h], edi
 0x6A214C: jnz     short loc_6A2154
 0x6A214E: push    ebx
-0x6A214F: call    ActiveEffect_Base_Remove
+0x6A214F: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A2154: test    esi, esi
 0x6A2156: jnz     short loc_6A2130
 0x6A2158: pop     ebx

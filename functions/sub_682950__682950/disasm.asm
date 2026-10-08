@@ -40,7 +40,7 @@
 0x6829AB: push    1
 0x6829AD: call    edx
 0x6829AF: push    esi
-0x6829B0: call    FormHeapFree
+0x6829B0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6829B5: add     esp, 4
 0x6829B8: pop     edi
 0x6829B9: pop     esi

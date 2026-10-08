@@ -14,11 +14,11 @@
 0x42C4BA: jbe     short loc_42C4DA
 0x42C4BC: mov     ecx, [esi+18h]
 0x42C4BF: mov     ebp, [esp+10h+Dst]
-0x42C4C3: push    edi; Size
+0x42C4C3: push    edi; byteCount
 0x42C4C4: add     ecx, eax
-0x42C4C6: push    ecx; Src
-0x42C4C7: push    ebp; Dst
-0x42C4C8: call    _memcpy
+0x42C4C6: push    ecx; source
+0x42C4C7: push    ebp; destination
+0x42C4C8: call    _memcpy;
 0x42C4CD: add     ebp, edi
 0x42C4CF: add     esp, 0Ch
 0x42C4D2: mov     [esp+10h+Dst], ebp
@@ -35,7 +35,7 @@
 0x42C4EC: mov     edx, [esp+14h+Dst]
 0x42C4F0: push    ebx; Count
 0x42C4F1: push    edx; DstBuf
-0x42C4F2: call    sub_42C3E0
+0x42C4F2: call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.
 0x42C4F7: pop     edi
 0x42C4F8: pop     esi
 0x42C4F9: add     eax, ebp
@@ -45,7 +45,7 @@
 0x42C500: push    eax; Count
 0x42C501: mov     eax, [esi+18h]
 0x42C504: push    eax; DstBuf
-0x42C505: call    sub_42C3E0
+0x42C505: call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.
 0x42C50A: cmp     eax, ebx
 0x42C50C: mov     [esi+10h], eax
 0x42C50F: jnb     short loc_42C513
@@ -53,10 +53,10 @@
 0x42C513: mov     ecx, [esi+18h]
 0x42C516: add     ecx, [esi+14h]
 0x42C519: mov     edx, [esp+10h+Dst]
-0x42C51D: push    ebx; Size
-0x42C51E: push    ecx; Src
-0x42C51F: push    edx; Dst
-0x42C520: call    _memcpy
+0x42C51D: push    ebx; byteCount
+0x42C51E: push    ecx; source
+0x42C51F: push    edx; destination
+0x42C520: call    _memcpy;
 0x42C525: add     [esi+14h], ebx
 0x42C528: add     esp, 0Ch
 0x42C52B: pop     edi

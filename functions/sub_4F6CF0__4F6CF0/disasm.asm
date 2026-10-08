@@ -1,4 +1,4 @@
-0x4F6CF0: fldz
+0x4F6CF0: fldz; GetInSameCell checks pointer identity of both resolved cell objects. This differs from GetInCell's case-insensitive editor-name prefix comparison; Fallout's analogous handler x4y6:0x823B61A0 also uses parent-cell pointer equality.
 0x4F6CF2: mov     eax, [esp+arg_4]
 0x4F6CF6: push    ebx
 0x4F6CF7: mov     ebx, [esp+4+arg_C]
@@ -16,14 +16,14 @@
 0x4F6D16: test    ecx, ecx
 0x4F6D18: push    edi
 0x4F6D19: jz      short loc_4F6D24
-0x4F6D1B: call    TESObjectREFR_GetParentCell
+0x4F6D1B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F6D20: mov     edi, eax
 0x4F6D22: jmp     short loc_4F6D26
 0x4F6D24: xor     edi, edi
 0x4F6D26: test    esi, esi
 0x4F6D28: jz      short loc_4F6D33
 0x4F6D2A: mov     ecx, esi; this
-0x4F6D2C: call    TESObjectREFR_GetParentCell
+0x4F6D2C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F6D31: jmp     short loc_4F6D35
 0x4F6D33: xor     eax, eax
 0x4F6D35: test    edi, edi

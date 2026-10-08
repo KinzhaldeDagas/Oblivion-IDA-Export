@@ -13,7 +13,7 @@
 0x71FEDD: lea     eax, [esp+30h+var_C]
 0x71FEE1: mov     large fs:0, eax
 0x71FEE7: mov     ebp, ecx
-0x71FEE9: mov     ebx, [esp+30h+arg_0]
+0x71FEE9: mov     ebx, [esp+30h+stream]
 0x71FEED: push    ebx
 0x71FEEE: call    sub_732E70
 0x71FEF3: mov     eax, [ebx+21Ch]
@@ -36,14 +36,14 @@
 0x71FF30: lea     ecx, [esp+34h+var_18]
 0x71FF34: push    ecx
 0x71FF35: push    1
-0x71FF37: lea     edx, [esp+3Ch+arg_0]
+0x71FF37: lea     edx, [esp+3Ch+stream]
 0x71FF3B: push    edx
 0x71FF3C: push    eax
 0x71FF3D: mov     eax, [eax+4]
 0x71FF40: mov     [esp+44h+var_18], 1
 0x71FF48: call    eax
 0x71FF4A: add     esp, 14h
-0x71FF4D: cmp     byte ptr [esp+30h+arg_0], 0
+0x71FF4D: cmp     byte ptr [esp+30h+stream], 0
 0x71FF52: jz      short loc_71FF98
 0x71FF54: mov     eax, [esi]
 0x71FF56: test    eax, eax
@@ -80,7 +80,7 @@
 0x71FFAD: push    esi
 0x71FFAE: push    eax
 0x71FFAF: mov     [esp+44h+var_18], 2
-0x71FFB7: call    edx
+0x71FFB7: call    edx; Read the 16-bit shared-normal entry-array length.
 0x71FFB9: movzx   eax, word ptr [esi]
 0x71FFBC: add     esp, 14h
 0x71FFBF: test    ax, ax
@@ -95,35 +95,35 @@
 0x71FFDB: or      ecx, eax
 0x71FFDD: push    ecx; Size
 0x71FFDE: call    FormHeapAlloc
-0x71FFE3: mov     esi, eax
+0x71FFE3: mov     esi, eax; Allocate one 8-byte NiSharedNormalArrayEntry per serialized entry.
 0x71FFE5: add     esp, 4
 0x71FFE8: mov     [esp+30h+var_10], esi
 0x71FFEC: test    esi, esi
 0x71FFEE: mov     [esp+30h+var_4], 0
 0x71FFF6: jz      short loc_720012
-0x71FFF8: push    offset sub_71FAB0
+0x71FFF8: push    offset NiSharedNormalArrayEntry_Construct; Initialize one 8-byte shared-normal entry to an empty count and null UInt16 index list.
 0x71FFFD: push    edi
 0x71FFFE: push    8
 0x720000: push    esi
-0x720001: call    sub_401080
+0x720001: call    sub_401080; Initialize every shared-normal entry to {count=0, indices=null}.
 0x720006: jmp     short loc_720014
-0x720008: mov     byte ptr [esp+30h+arg_0], 1
+0x720008: mov     byte ptr [esp+30h+stream], 1
 0x72000D: jmp     loc_71FF54
 0x720012: xor     esi, esi
 0x720014: or      edi, 0FFFFFFFFh
 0x720017: push    14h; Size
 0x720019: mov     [esp+34h+var_4], edi
 0x72001D: mov     [ebp+4Ch], esi
-0x720020: call    FormHeapAlloc
+0x720020: call    FormHeapAlloc; Create the first linked index-pool block with capacity equal to the entry-array length.
 0x720025: add     esp, 4
 0x720028: mov     [esp+30h+var_10], eax
 0x72002C: test    eax, eax
 0x72002E: mov     [esp+30h+var_4], 1
 0x720036: jz      short loc_720046
 0x720038: movzx   ecx, word ptr [ebp+50h]
-0x72003C: push    ecx
-0x72003D: mov     ecx, eax
-0x72003F: call    sub_71FAC0
+0x72003C: push    ecx; capacity
+0x72003D: mov     ecx, eax; self
+0x72003F: call    NiSharedNormalIndexPoolBlock_Construct; Construct a 20-byte linked pool block for shared-normal UInt16 index lists.
 0x720044: jmp     short loc_720048
 0x720046: xor     eax, eax
 0x720048: cmp     word ptr [ebp+50h], 0
@@ -143,7 +143,7 @@
 0x72007D: push    eax
 0x72007E: xor     esi, esi
 0x720080: mov     [esp+44h+var_14], edi
-0x720084: call    edx
+0x720084: call    edx; Read this entry's 16-bit shared-normal index count.
 0x720086: mov     cx, [esp+44h+var_1C]
 0x72008B: add     esp, 14h
 0x72008E: test    cx, cx
@@ -197,7 +197,7 @@
 0x720121: sub     [eax+0Ch], edx
 0x720124: movzx   ecx, [esp+30h+var_1C]
 0x720129: lea     edx, [esi+ecx*2]
-0x72012C: mov     [eax+4], edx
+0x72012C: mov     [eax+4], edx; Reserve count UInt16 indices from a pool block, growing through linked blocks when necessary.
 0x72012F: movzx   edx, [esp+30h+var_1C]
 0x720134: mov     eax, [ebx+21Ch]
 0x72013A: push    1
@@ -209,14 +209,14 @@
 0x720145: push    eax
 0x720146: mov     eax, [eax+4]
 0x720149: mov     [esp+44h+var_10], edi
-0x72014D: call    eax
+0x72014D: call    eax; Read the shared vertex indices directly into the pooled slice.
 0x72014F: mov     cx, [esp+44h+var_1C]
 0x720154: add     esp, 14h
 0x720157: test    cx, cx
 0x72015A: mov     edx, [esp+30h+var_18]
 0x72015E: mov     edi, [ebp+4Ch]
 0x720161: movzx   eax, dx
-0x720164: lea     eax, [edi+eax*8]
+0x720164: lea     eax, [edi+eax*8]; Store {count, pooledIndices} in this 8-byte shared-normal entry.
 0x720167: jz      short loc_720175
 0x720169: test    esi, esi
 0x72016B: jz      short loc_720175
@@ -238,3 +238,25 @@
 0x7201A1: pop     ebx
 0x7201A2: add     esp, 1Ch
 0x7201A5: retn    4
+0x9CA1B0: mov     eax, [ebp-10h]
+0x9CA1B3: push    eax
+0x9CA1B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA1B9: pop     ecx
+0x9CA1BA: retn
+0x9CA1BB: mov     eax, [ebp-10h]
+0x9CA1BE: push    eax
+0x9CA1BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA1C4: pop     ecx
+0x9CA1C5: retn
+0x9CA1C6: mov     eax, [ebp-10h]
+0x9CA1C9: push    eax
+0x9CA1CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA1CF: pop     ecx
+0x9CA1D0: retn
+0x9CA1D1: mov     edx, [esp+arg_4]
+0x9CA1D5: lea     eax, [edx-20h]
+0x9CA1D8: mov     ecx, [edx-24h]
+0x9CA1DB: xor     ecx, eax
+0x9CA1DD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA1E2: mov     eax, offset stru_AF2948
+0x9CA1E7: jmp     ___CxxFrameHandler3

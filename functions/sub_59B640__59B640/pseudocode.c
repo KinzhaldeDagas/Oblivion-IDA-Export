@@ -1,12 +1,13 @@
-void __stdcall sub_59B640(_DWORD *a1, char a2)
+// [Controller decode 2026-07-09] Updates Controls menu invert-Y button label from bInvertYValues.
+void __stdcall ControlsMenu::SetInvertYButtonLabel(_DWORD *a1, char a2)
 {
-  char *v2; // eax
+  char *value; // eax
 
-  if ( a1 )
+  if ( a1 ) /*0x59b646*/
   {
-    v2 = (char *)sOnButtonText;
-    if ( !a2 )
-      v2 = (char *)sOffButtonText;
-    Tile_SetString(a1, (_DWORD *)0xFDE, v2);
+    value = (char *)MEMORY[0xB38DA0].value; /*0x59b64d*/
+    if ( !a2 ) /*0x59b652*/
+      value = (char *)MEMORY[0xB38DA8].value; /*0x59b654*/
+    Tile_SetString(a1, (_DWORD *)0xFDE, value); /*0x59b665*/
   }
 }

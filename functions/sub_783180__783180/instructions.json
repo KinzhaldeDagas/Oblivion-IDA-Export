@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x783180",
-    "line": "push    ecx",
+    "line": "push    ecx; MoonSugarEffect decode: NiD3DVertexShader indexed float-array setter. For entry types 8/9, writes selected matrix/vector array rows with SetVertexShaderConstantF; this is the bone/matrix-palette style path.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x783197",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7831B8",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -196,12 +196,6 @@
     "line": "jmp     short loc_7831F0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7831EA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x7831F0",

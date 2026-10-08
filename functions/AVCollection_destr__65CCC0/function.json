@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
-  "callers_count": 5,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x65CCC0",
+      "0x65CD04"
+    ]
+  ],
+  "chunks_sha256": "06152330e18c4ae6c2280a5c4248f82528a5b0bd72f8460b91058eab1e8dd3f4",
+  "comment_regular": "Verified: clears list/indexed storage and then frees/nulls both dedicated nodes at +8/+0xC. Completes constructor ownership. Probable relative of Fallout ModifierList destructor, but permanent-node layout is Oblivion-specific.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "AVCollection_destr",
   "end_ea": "0x65CD04",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AVCollection_destr",
   "segment": ".text",
   "sha256": "06152330e18c4ae6c2280a5c4248f82528a5b0bd72f8460b91058eab1e8dd3f4",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65CCC0",
-  "type": "void __thiscall(unsigned int *this)",
+  "total_chunk_size": 68,
+  "type": "void __thiscall(AVCollection *self)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 7
 }

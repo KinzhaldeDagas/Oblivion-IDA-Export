@@ -1,8 +1,9 @@
-int __thiscall Quest_CompleteQuest(_BYTE *this, char a2)
+// TESQuest completed-state setter used by CompleteQuest. Runtime bit 0x02 is saved through the same one-byte questFlags field.
+void __thiscall TESQuest::SetCompleted(TESQuest *this, bool completed)
 {
-  if ( a2 )
-    *(this + 0x3C) |= 2u;
+  if ( completed ) /*0x529845*/
+    this->questFlags |= 2u; /*0x529847*/
   else
-    *(this + 0x3C) &= ~2u;
-  return (*(int (__thiscall **)(_BYTE *, int))(*(_DWORD *)this + 0x40))(this, 4);
+    this->questFlags &= ~2u; /*0x52984d*/
+  this->vtbl->MarkAsModified((TESForm *)this, 4); /*0x52985e*/
 }

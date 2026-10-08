@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x470CB0",
-    "line": "mov     eax, [ecx+4]",
+    "line": "mov     eax, [ecx+4]; AnimSequenceMultiple vtable +0x14. Produces an 8-bit list index by incrementing AL. Indices >=256 wrap modulo 256; index 254 collides with the save format's 0xFE null marker, and index 255 collides with 0xFF random/missing.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x470CBC",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+sequence]",
     "mnemonic": "mov",
     "size": 4
   },

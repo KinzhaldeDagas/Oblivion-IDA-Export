@@ -11,7 +11,7 @@
 0x4850AF: call    eax
 0x4850B1: fstp    [esp+8+arg_C]
 0x4850B5: mov     ecx, esi; this
-0x4850B7: call    Actor_GetFatigueFraction
+0x4850B7: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x4850BC: fstp    [esp+8+arg_1C]
 0x4850C0: mov     edx, [esi]
 0x4850C2: mov     eax, [edx+288h]
@@ -35,13 +35,13 @@
 0x4850F7: push    ecx
 0x4850F8: fstp    [esp+20h+var_20]; float
 0x4850FB: fld     [esp+20h+arg_8]
-0x4850FF: call    Double_To_SInt32
+0x4850FF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x485104: fld     [esp+20h+arg_4]
 0x485108: push    eax; int
-0x485109: call    Double_To_SInt32
+0x485109: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48510E: fld     [esp+24h+arg_0]
 0x485112: push    eax; int
-0x485113: call    Double_To_SInt32
+0x485113: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x485118: push    eax; int
-0x485119: call    Calc_WeaponDamage
+0x485119: call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.
 0x48511E: add     esp, 20h

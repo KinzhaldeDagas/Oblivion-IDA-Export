@@ -189,10 +189,10 @@
 0x98CC88: mov     eax, [ebp+var_10]
 0x98CC8B: dec     dword ptr [eax]
 0x98CC8D: jnz     loc_98CD86
-0x98CC93: mov     eax, dword_BAA2A8
+0x98CC93: mov     eax, dword_BA9E10+498h
 0x98CC98: test    eax, eax
 0x98CC9A: jz      loc_98CD78
-0x98CCA0: mov     ecx, dword_BAABD8
+0x98CCA0: mov     ecx, dword ptr unk_BAABD8
 0x98CCA6: mov     esi, ds:VirtualFree
 0x98CCAC: push    4000h; dwFreeType
 0x98CCB1: shl     ecx, 0Fh
@@ -201,39 +201,39 @@
 0x98CCBC: push    ebx; dwSize
 0x98CCBD: push    ecx; lpAddress
 0x98CCBE: call    esi ; VirtualFree
-0x98CCC0: mov     ecx, dword_BAABD8
-0x98CCC6: mov     eax, dword_BAA2A8
+0x98CCC0: mov     ecx, dword ptr unk_BAABD8
+0x98CCC6: mov     eax, dword_BA9E10+498h
 0x98CCCB: mov     edx, 80000000h
 0x98CCD0: shr     edx, cl
 0x98CCD2: or      [eax+8], edx
-0x98CCD5: mov     eax, dword_BAA2A8
+0x98CCD5: mov     eax, dword_BA9E10+498h
 0x98CCDA: mov     eax, [eax+10h]
-0x98CCDD: mov     ecx, dword_BAABD8
+0x98CCDD: mov     ecx, dword ptr unk_BAABD8
 0x98CCE3: and     dword ptr [eax+ecx*4+0C4h], 0
-0x98CCEB: mov     eax, dword_BAA2A8
+0x98CCEB: mov     eax, dword_BA9E10+498h
 0x98CCF0: mov     eax, [eax+10h]
 0x98CCF3: dec     byte ptr [eax+43h]
-0x98CCF6: mov     eax, dword_BAA2A8
+0x98CCF6: mov     eax, dword_BA9E10+498h
 0x98CCFB: mov     ecx, [eax+10h]
 0x98CCFE: cmp     byte ptr [ecx+43h], 0
 0x98CD02: jnz     short loc_98CD0D
 0x98CD04: and     dword ptr [eax+4], 0FFFFFFFEh
-0x98CD08: mov     eax, dword_BAA2A8
+0x98CD08: mov     eax, dword_BA9E10+498h
 0x98CD0D: cmp     dword ptr [eax+8], 0FFFFFFFFh
 0x98CD11: jnz     short loc_98CD78
 0x98CD13: push    ebx; dwFreeType
 0x98CD14: push    0; dwSize
 0x98CD16: push    dword ptr [eax+0Ch]; lpAddress
 0x98CD19: call    esi ; VirtualFree
-0x98CD1B: mov     eax, dword_BAA2A8
+0x98CD1B: mov     eax, dword_BA9E10+498h
 0x98CD20: push    dword ptr [eax+10h]; lpMem
 0x98CD23: push    0; dwFlags
-0x98CD25: push    hHeap; hHeap
+0x98CD25: push    dword_BA9E10+49Ch; hHeap
 0x98CD2B: call    ds:HeapFree
-0x98CD31: mov     ecx, dword_BAABC4
-0x98CD37: mov     eax, dword_BAA2A8
+0x98CD31: mov     ecx, dword ptr unk_BAABC4
+0x98CD37: mov     eax, dword_BA9E10+498h
 0x98CD3C: imul    ecx, 14h
-0x98CD3F: mov     edx, lpMem
+0x98CD3F: mov     edx, ds:0BAABC8h
 0x98CD45: sub     ecx, eax
 0x98CD47: lea     ecx, [ecx+edx-14h]
 0x98CD4B: push    ecx
@@ -243,15 +243,15 @@
 0x98CD51: call    unknown_libname_16
 0x98CD56: mov     eax, [ebp+arg_0]
 0x98CD59: add     esp, 0Ch
-0x98CD5C: dec     dword_BAABC4
-0x98CD62: cmp     eax, dword_BAA2A8
+0x98CD5C: dec     dword ptr unk_BAABC4
+0x98CD62: cmp     eax, dword_BA9E10+498h
 0x98CD68: jbe     short loc_98CD6E
 0x98CD6A: sub     [ebp+arg_0], 14h
-0x98CD6E: mov     eax, lpMem
-0x98CD73: mov     dword_BAABD0, eax
+0x98CD6E: mov     eax, ds:0BAABC8h
+0x98CD73: mov     dword ptr unk_BAABD0, eax
 0x98CD78: mov     eax, [ebp+arg_0]
-0x98CD7B: mov     dword_BAA2A8, eax
-0x98CD80: mov     dword_BAABD8, edi
+0x98CD7B: mov     dword_BA9E10+498h, eax
+0x98CD80: mov     dword ptr unk_BAABD8, edi
 0x98CD86: pop     ebx
 0x98CD87: pop     edi
 0x98CD88: pop     esi

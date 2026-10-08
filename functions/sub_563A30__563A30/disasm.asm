@@ -1,4 +1,4 @@
-0x563A30: push    0FFFFFFFFh
+0x563A30: push    0FFFFFFFFh; 2026-05-18 73000 consumer decode: constructs bhkMultiSphereShape from packed 16-byte sphere vectors. Rotations are irrelevant for this stock multi-sphere path; multiple non-sphere collision records remain unsupported by stock 0x565510.
 0x563A32: push    offset ??1bhkConvexShape@@UAE@XZ_SEH
 0x563A37: mov     eax, large fs:0
 0x563A3D: push    eax
@@ -33,3 +33,12 @@
 0x563AAA: pop     esi
 0x563AAB: add     esp, 10h
 0x563AAE: retn    4
+0x9BD420: mov     ecx, [ebp-10h]; this
+0x9BD423: jmp     ??1bhkSphereRepShape@@UAE@XZ; bhkSphereRepShape::~bhkSphereRepShape(void)
+0x9BD428: mov     edx, [esp+arg_4]
+0x9BD42C: lea     eax, [edx-8]
+0x9BD42F: mov     ecx, [edx-0Ch]
+0x9BD432: xor     ecx, eax
+0x9BD434: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD439: mov     eax, offset stru_AE6DF8
+0x9BD43E: jmp     ___CxxFrameHandler3

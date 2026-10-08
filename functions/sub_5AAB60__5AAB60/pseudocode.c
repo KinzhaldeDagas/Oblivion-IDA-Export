@@ -1,5 +1,5 @@
 BSStringT *__userpurge sub_5AAB60@<eax>(
-        _DWORD *this@<ecx>,
+        Menu *this@<ecx>,
         double st5_0@<st2>,
         double st6_0@<st1>,
         double st7_0@<st0>,
@@ -10,12 +10,12 @@ BSStringT *__userpurge sub_5AAB60@<eax>(
         signed int a9)
 {
   char *m_data; // ebp
-  unsigned int *TileFromTemplate; // eax
+  Tile *v11; // eax
   BSStringT *v12; // esi
   int i; // edx
   char *v14; // eax
   char v15; // cl
-  TileWindow *v17; // [esp-8h] [ebp-140h]
+  Tile *v17; // [esp-8h] [ebp-140h]
   float v18; // [esp+0h] [ebp-138h]
   float v19; // [esp+0h] [ebp-138h]
   float v20; // [esp+0h] [ebp-138h]
@@ -25,44 +25,47 @@ BSStringT *__userpurge sub_5AAB60@<eax>(
   char v24; // [esp+127h] [ebp-11h]
   int v25; // [esp+134h] [ebp-4h]
 
-  v21.m_data = 0;
-  v21.m_dataLen = 0;
-  v21.m_bufLen = 0;
-  BSStringT_Set(&v21, a2, 0);
-  v25 = 0;
-  v22.m_data = 0;
-  v22.m_dataLen = 0;
-  v22.m_bufLen = 0;
-  BSStringT_Set(&v22, "item_template", 0);
-  m_data = v22.m_data;
-  v17 = (TileWindow *)*(this + 0xB);
-  LOBYTE(v25) = 1;
-  TileFromTemplate = Menu_CreateTileFromTemplate(this, st5_0, st6_0, st7_0, v17, v22.m_data, 0);
-  v12 = (BSStringT *)TileFromTemplate;
-  if ( TileFromTemplate )
+  v21.m_data = 0; /*0x5aabb3*/
+  v21.m_dataLen = 0; /*0x5aabb7*/
+  v21.m_bufLen = 0; /*0x5aabbc*/
+  BSStringT_Set(&v21, a2, 0); /*0x5aabc1*/
+  v25 = 0; /*0x5aabd0*/
+  v22.m_data = 0; /*0x5aabd7*/
+  v22.m_dataLen = 0; /*0x5aabdb*/
+  v22.m_bufLen = 0; /*0x5aabe0*/
+  BSStringT_Set(&v22, "item_template", 0); /*0x5aabe5*/
+  m_data = v22.m_data; /*0x5aabea*/
+  v17 = *((Tile **)this + 0xB); /*0x5aabf3*/
+  LOBYTE(v25) = 1; /*0x5aabf6*/
+  v11 = Menu::RenderTemplate(this, v17, v22.m_data, 0); /*0x5aabfe*/
+  v12 = (BSStringT *)v11; /*0x5aac03*/
+  if ( v11 ) /*0x5aac07*/
   {
-    Tile_SetString(TileFromTemplate, (_DWORD *)0xFAF, a6);
-    for ( i = 0; i < 256; ++i )
+    Tile_SetString(v11, (_DWORD *)0xFAF, a6); /*0x5aac15*/
+    for ( i = 0; i < 256; ++i ) /*0x5aac1e*/
     {
-      v14 = &v23[i];
-      v15 = v23[i + a6 - v23];
-      v23[i] = v15;
-      if ( v15 == 0x20 )
-        *v14 = 0x5F;
-      if ( !*v14 )
-        break;
+      v14 = &v23[i]; /*0x5aac22*/
+      v15 = v23[i + a6 - v23]; /*0x5aac26*/
+      v23[i] = v15; /*0x5aac2c*/
+      if ( v15 == 0x20 ) /*0x5aac2e*/
+        *v14 = 0x5F; /*0x5aac30*/
+      if ( !*v14 ) /*0x5aac33*/
+        break; /*0x5aac35*/
     }
-    v24 = 0;
-    BSStringT_Set(v12 + 1, v23, 0);
-    Tile_SetString(v12, (_DWORD *)0xFB4, v21.m_data);
-    v18 = (float)a7;
-    Tile_SetFloat((Tile *)v12, (_DWORD *)0xFB7, v18);
-    v19 = (float)a8;
-    Tile_SetFloat((Tile *)v12, (_DWORD *)0xFAA, v19);
-    v20 = (float)a9;
-    Tile_SetFloat((Tile *)v12, (_DWORD *)0xFA8, v20);
+    v24 = 0; /*0x5aac4b*/
+    BSStringT_Set(v12 + 1, v23, 0); /*0x5aac52*/
+    Tile_SetString(v12, (_DWORD *)0xFB4, v21.m_data); /*0x5aac63*/
+    __asm { fild    [esp+134h+arg_8] } /*0x5aac68*/
+    __asm { fstp    [esp+138h+var_138]; value }
+    Tile_SetFloat((Tile *)v12, 0xFB7u, v18); /*0x5aac7a*/
+    __asm { fild    [esp+134h+arg_C] } /*0x5aac7f*/
+    __asm { fstp    [esp+138h+var_138]; value }
+    Tile_SetFloat((Tile *)v12, 0xFAAu, v19); /*0x5aac91*/
+    __asm { fild    [esp+134h+arg_10] } /*0x5aac96*/
+    __asm { fstp    [esp+138h+var_138]; value }
+    Tile_SetFloat((Tile *)v12, 0xFA8u, v20); /*0x5aaca8*/
   }
-  FormHeapFree((unsigned int)m_data);
-  FormHeapFree((unsigned int)v21.m_data);
-  return v12;
+  FormHeapFree((unsigned int)m_data); /*0x5aacae*/
+  FormHeapFree((unsigned int)v21.m_data); /*0x5aacb8*/
+  return v12; /*0x5aacc2*/
 }

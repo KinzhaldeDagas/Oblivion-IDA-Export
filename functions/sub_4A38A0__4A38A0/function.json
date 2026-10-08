@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x4A38A0",
+      "0x4A39C3"
+    ],
+    [
+      "0x9BD8A0",
+      "0x9BD8C6"
+    ]
+  ],
+  "chunks_sha256": "6e1651ae30754f8edcd3a0357a66e11ac0c6e1303da3631154b7a174bf2e5562",
+  "comment_regular": "Verified: loads RDSG chunks as 8-byte pairs (Grass form ID, parent LandTexture form ID), rejects lengths not divisible by 8, constructs TESRegionGrassObject entries, and appends valid objects to TESRegionGrassObjectList.",
+  "comment_repeatable": "Verified: loads RDSG chunks as 8-byte pairs (Grass form ID, parent LandTexture form ID), rejects lengths not divisible by 8, constructs TESRegionGrassObject entries, and appends valid objects to TESRegionGrassObjectList.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "sub_4A38A0",
   "end_ea": "0x4A39C3",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "sub_4A38A0",
   "segment": ".text",
   "sha256": "9d3f18ee99bf5f5a65d86931ab68dc2e086b43cf4d48e867234ab22b968d3a6c",
   "size": 291,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A38A0",
+  "total_chunk_size": 329,
   "type": "char __thiscall(void *this, Data *)",
-  "xrefs_from_count": 124,
+  "xrefs_from_count": 138,
   "xrefs_to_count": 1
 }

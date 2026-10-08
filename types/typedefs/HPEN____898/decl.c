@@ -1,1 +1,4 @@
-HPEN__
+struct HPEN__
+{
+int unused;
+};

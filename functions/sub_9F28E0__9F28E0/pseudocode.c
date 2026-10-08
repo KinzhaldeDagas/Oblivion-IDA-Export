@@ -1,5 +1,5 @@
 int sub_9F28E0()
 {
-  GameSetting_ConstrAndReg((int *)dword_B38CC0, (int)"sGiveAway", (int)"Give away");
-  return atexit(sub_A220A0);
+  GameSetting_ConstrAndReg(&stru_B38CC0, "sGiveAway", "Give away"); /*0x9f28ef*/
+  return atexit(sub_A220A0); /*0x9f28ff*/
 }

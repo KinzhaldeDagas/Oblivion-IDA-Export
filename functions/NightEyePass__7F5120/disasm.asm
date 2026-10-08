@@ -1,4 +1,4 @@
-0x7F5120: sub     esp, 18h
+0x7F5120: sub     esp, 18h; MoonSugarEffect decode: NightEye active pass; one source texture, ratio/texel constants, +0x7C source ownership, direct begin/setup camera/draw/end cadence.
 0x7F5123: push    ebx
 0x7F5124: push    ebp
 0x7F5125: mov     ebx, ecx
@@ -140,21 +140,21 @@
 0x7F52C1: fstp    [esp+28h+var_8]
 0x7F52C5: push    eax; a2
 0x7F52C6: mov     ecx, ebx; this
-0x7F52C8: call    sub_802890
+0x7F52C8: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x7F52CD: mov     esi, [esp+28h+arg_8]
 0x7F52D1: mov     ecx, [esi]
 0x7F52D3: test    ecx, ecx
 0x7F52D5: jz      short loc_7F52EA
-0x7F52D7: call    BSRenderedTexture__UseTextureToRender
+0x7F52D7: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7F52DC: push    eax; a2
 0x7F52DD: mov     ebx, 1
 0x7F52E2: push    ebx; a1
-0x7F52E3: call    NiRenderer_BeginScene
+0x7F52E3: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7F52E8: jmp     short loc_7F52F7
 0x7F52EA: push    0; a2
 0x7F52EC: mov     ebx, 1
 0x7F52F1: push    ebx; a1
-0x7F52F2: call    NiRenderer_BeginScene1
+0x7F52F2: call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.
 0x7F52F7: mov     ecx, ds:0B3F928h
 0x7F52FD: add     esp, 8
 0x7F5300: cmp     [ecx+200h], ebx
@@ -171,13 +171,13 @@
 0x7F5327: mov     ecx, ds:0B3F928h
 0x7F532D: push    ecx
 0x7F532E: mov     ecx, [esp+2Ch+arg_0]; this
-0x7F5332: call    sub_709C60
+0x7F5332: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x7F5337: cmp     dword ptr [esi], 0
 0x7F533A: pop     edi
 0x7F533B: pop     esi
 0x7F533C: pop     ebp
 0x7F533D: pop     ebx
 0x7F533E: jz      short loc_7F5345
-0x7F5340: call    NiRenderer_EndScene
+0x7F5340: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7F5345: add     esp, 18h
 0x7F5348: retn    10h

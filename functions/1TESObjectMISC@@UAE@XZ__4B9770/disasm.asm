@@ -40,7 +40,7 @@
 0x4B980D: call    ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
 0x4B9812: mov     eax, [esi+28h]
 0x4B9815: push    eax
-0x4B9816: call    FormHeapFree
+0x4B9816: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B981B: xor     eax, eax
 0x4B981D: add     esp, 4
 0x4B9820: mov     ecx, esi
@@ -58,3 +58,57 @@
 0x4B9849: pop     ebx
 0x4B984A: add     esp, 24h
 0x4B984D: retn
+0x9B3C60: mov     ecx, [ebp-10h]
+0x9B3C63: jmp     TESObject_destr
+0x9B3C68: cmp     dword ptr [ebp-10h], 0
+0x9B3C6C: jz      loc_9B3C80
+0x9B3C72: mov     eax, [ebp-10h]
+0x9B3C75: add     eax, 24h ; '$'
+0x9B3C78: mov     [ebp-14h], eax
+0x9B3C7B: jmp     loc_9B3C87
+0x9B3C80: mov     dword ptr [ebp-14h], 0
+0x9B3C87: mov     ecx, [ebp-14h]
+0x9B3C8A: jmp     TESFullName_Initialize
+0x9B3C8F: cmp     dword ptr [ebp-10h], 0
+0x9B3C93: jz      loc_9B3CA7
+0x9B3C99: mov     eax, [ebp-10h]
+0x9B3C9C: add     eax, 30h ; '0'
+0x9B3C9F: mov     [ebp-18h], eax
+0x9B3CA2: jmp     loc_9B3CAE
+0x9B3CA7: mov     dword ptr [ebp-18h], 0
+0x9B3CAE: mov     ecx, [ebp-18h]; this
+0x9B3CB1: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B3CB6: cmp     dword ptr [ebp-10h], 0
+0x9B3CBA: jz      loc_9B3CCE
+0x9B3CC0: mov     eax, [ebp-10h]
+0x9B3CC3: add     eax, 48h ; 'H'
+0x9B3CC6: mov     [ebp-1Ch], eax
+0x9B3CC9: jmp     loc_9B3CD5
+0x9B3CCE: mov     dword ptr [ebp-1Ch], 0
+0x9B3CD5: mov     ecx, [ebp-1Ch]; void *
+0x9B3CD8: jmp     j_TESTexture_destr
+0x9B3CDD: cmp     dword ptr [ebp-10h], 0
+0x9B3CE1: jz      loc_9B3CF5
+0x9B3CE7: mov     eax, [ebp-10h]
+0x9B3CEA: add     eax, 60h ; '`'
+0x9B3CED: mov     [ebp-20h], eax
+0x9B3CF0: jmp     loc_9B3CFC
+0x9B3CF5: mov     dword ptr [ebp-20h], 0
+0x9B3CFC: mov     ecx, [ebp-20h]
+0x9B3CFF: jmp     TESValueForm_destr
+0x9B3D04: cmp     dword ptr [ebp-10h], 0
+0x9B3D08: jz      loc_9B3D1C
+0x9B3D0E: mov     eax, [ebp-10h]
+0x9B3D11: add     eax, 68h ; 'h'
+0x9B3D14: mov     [ebp-24h], eax
+0x9B3D17: jmp     loc_9B3D23
+0x9B3D1C: mov     dword ptr [ebp-24h], 0
+0x9B3D23: mov     ecx, [ebp-24h]
+0x9B3D26: jmp     TESWeightForm_destr
+0x9B3D2B: mov     edx, [esp+arg_4]
+0x9B3D2F: lea     eax, [edx-28h]
+0x9B3D32: mov     ecx, [edx-2Ch]
+0x9B3D35: xor     ecx, eax
+0x9B3D37: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3D3C: mov     eax, offset stru_ADF5D0
+0x9B3D41: jmp     ___CxxFrameHandler3

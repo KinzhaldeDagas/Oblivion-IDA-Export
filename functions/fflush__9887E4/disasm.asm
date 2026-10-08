@@ -18,3 +18,7 @@
 0x988815: mov     [ebp+var_1C], eax
 0x988818: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98881F: call    _fflush___$LN8_4
+0x98882D: push    [ebp+File]
+0x988830: call    __unlock_file
+0x988835: pop     ecx
+0x988836: retn

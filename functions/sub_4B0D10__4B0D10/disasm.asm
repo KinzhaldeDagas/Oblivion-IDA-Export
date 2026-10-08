@@ -1,4 +1,4 @@
-0x4B0D10: push    ebp
+0x4B0D10: push    ebp; Load an Oblivion TESObjectLIGH record. The DATA chunk is exactly 0x18 bytes at object +0x70..+0x87; zero +0x80 is normalized to 1.0 and zero +0x84 to 90.0.
 0x4B0D11: mov     ebp, esp
 0x4B0D13: sub     esp, 8
 0x4B0D16: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x4B0D35: jmp     loc_4B0EEE
 0x4B0D3A: push    edi
 0x4B0D3B: mov     ecx, ebx
-0x4B0D3D: call    TESFile_InitializeFormFromRecord
+0x4B0D3D: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4B0D42: push    0; a2
 0x4B0D44: mov     ecx, edi; this
 0x4B0D46: call    TESForm_SetIsLinked
@@ -31,7 +31,6 @@
 0x4B0D64: cmp     esi, ecx
 0x4B0D66: jz      loc_4B0EEC
 0x4B0D6C: jmp     short loc_4B0D72
-0x4B0D6E: align 10h
 0x4B0D70: xor     ecx, ecx
 0x4B0D72: cmp     esi, 4C4C5546h
 0x4B0D78: jg      loc_4B0E33
@@ -49,7 +48,7 @@
 0x4B0DAC: push    eax; Dst
 0x4B0DAD: push    ebx; a2
 0x4B0DAE: mov     ecx, edi; this
-0x4B0DB0: call    TESForm_LoadGenericComponents
+0x4B0DB0: call    TESForm_LoadGenericComponents; Load the Oblivion LIGH DATA chunk as exactly 0x18 bytes into TESObjectLIGH+0x70..+0x87. Shadow registration later copies object +0x80 and +0x84.
 0x4B0DB5: jmp     loc_4B0EA0
 0x4B0DBA: mov     eax, [ebx+254h]
 0x4B0DC0: call    __alloca?
@@ -57,7 +56,7 @@
 0x4B0DC7: push    200h; a4
 0x4B0DCC: push    esi; Dst
 0x4B0DCD: mov     ecx, ebx; a1
-0x4B0DCF: call    TESFile_GetChunkData
+0x4B0DCF: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B0DD4: mov     edx, [edi]
 0x4B0DD6: mov     eax, [edx+0D8h]
 0x4B0DDC: push    esi
@@ -73,7 +72,7 @@
 0x4B0E02: lea     ecx, [ebp+var_8]
 0x4B0E05: push    ecx
 0x4B0E06: mov     ecx, ebx
-0x4B0E08: call    TESFile_GetChunkData4
+0x4B0E08: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B0E0D: mov     edx, [ebp+var_8]
 0x4B0E10: push    edi
 0x4B0E11: lea     ecx, [edi+54h]
@@ -83,7 +82,7 @@
 0x4B0E21: lea     eax, [edi+24h]
 0x4B0E24: push    ebx
 0x4B0E25: push    eax
-0x4B0E26: call    TESFullname_Load
+0x4B0E26: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4B0E2B: add     esp, 8
 0x4B0E2E: jmp     loc_4B0ED0
 0x4B0E33: cmp     esi, 4E4F4349h
@@ -98,14 +97,14 @@
 0x4B0E4E: lea     ecx, [ebp+var_8]
 0x4B0E51: push    ecx
 0x4B0E52: mov     ecx, ebx
-0x4B0E54: call    TESFile_GetChunkData4
+0x4B0E54: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B0E59: mov     edx, [ebp+var_8]
 0x4B0E5C: mov     [edi+8Ch], edx
 0x4B0E62: jmp     short loc_4B0ED0
 0x4B0E64: lea     eax, [edi+88h]
 0x4B0E6A: push    eax
 0x4B0E6B: mov     ecx, ebx
-0x4B0E6D: call    TESFile_GetChunkData4
+0x4B0E6D: call    TESFile_GetChunkData4; Load the four-byte Oblivion LIGH FNAM subrecord into TESObjectLIGH::fade_88.
 0x4B0E72: jmp     short loc_4B0ED0
 0x4B0E74: lea     ecx, [edi+48h]
 0x4B0E77: push    ebx
@@ -126,13 +125,13 @@
 0x4B0EA2: fcom    dword ptr [edi+84h]
 0x4B0EA8: fnstsw  ax
 0x4B0EAA: test    ah, 44h
-0x4B0EAD: jp      short loc_4B0EBB
+0x4B0EAD: jp      short loc_4B0EBB; If the loaded TESObjectLIGH DATA value at +0x84 is zero, restore the retail 90.0 default. The shadow lifecycle copies this value to ShadowSceneLight projector FOV +0x124.
 0x4B0EAF: fld     dword ptr ds:0A430CCh
 0x4B0EB5: fstp    dword ptr [edi+84h]
 0x4B0EBB: fcomp   dword ptr [edi+80h]
 0x4B0EC1: fnstsw  ax
 0x4B0EC3: test    ah, 44h
-0x4B0EC6: jp      short loc_4B0ED0
+0x4B0EC6: jp      short loc_4B0ED0; If loaded TESObjectLIGH DATA falloff exponent +0x80 is zero, restore the retail 1.0 default. Attached-reference registration copies it to ShadowSceneLight+0x128.
 0x4B0EC8: fld1
 0x4B0ECA: fstp    dword ptr [edi+80h]
 0x4B0ED0: mov     ecx, ebx

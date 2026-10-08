@@ -1,8 +1,9 @@
-int __thiscall sub_529820(_BYTE *this, char a2)
+// TESQuest running/active setter used by StartQuest and StopQuest. Runtime bit 0x01 shares QUST DATA's editor label 'Start Game Enabled'; toggling it marks modified flag 0x04.
+void __thiscall TESQuest::SetRunning(TESQuest *this, bool running)
 {
-  if ( a2 )
-    *(this + 0x3C) |= 1u;
+  if ( running ) /*0x529825*/
+    this->questFlags |= 1u; /*0x529827*/
   else
-    *(this + 0x3C) &= ~1u;
-  return (*(int (__thiscall **)(_BYTE *, int))(*(_DWORD *)this + 0x40))(this, 4);
+    this->questFlags &= ~1u; /*0x52982d*/
+  this->vtbl->MarkAsModified((TESForm *)this, 4); /*0x52983e*/
 }

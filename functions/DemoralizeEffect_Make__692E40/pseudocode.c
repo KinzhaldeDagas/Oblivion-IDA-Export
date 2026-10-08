@@ -1,12 +1,12 @@
-ActiveEffect *__cdecl DemoralizeEffect_Make(MagicCaster *a1, MagicItem *a2, EffectItem *a3)
+ActiveEffect *__cdecl DemoralizeEffect_Make(MagicCaster *caster, MagicItem *magicItem, EffectItem *effectItem)
 {
   int v3; // esi
 
-  v3 = FormHeapAlloc(0x3Cu);
-  if ( !v3 )
-    return 0;
-  ActiveEffect::ActiveEffect((ActiveEffect *)v3, a1, a2, a3);
-  *(_DWORD *)v3 = &DemoralizeEffect::`vftable';
-  *(_BYTE *)(v3 + 0x38) = 0;
-  return (ActiveEffect *)v3;
+  v3 = FormHeapAlloc(0x3Cu); /*0x692e69*/
+  if ( !v3 ) /*0x692e7c*/
+    return 0; /*0x692eb1*/
+  ActiveEffect_Ctor((ActiveEffect *)v3, caster, magicItem, effectItem); /*0x692e8f*/
+  *(_DWORD *)v3 = &DemoralizeEffect::`vftable'; /*0x692e94*/
+  *(_BYTE *)(v3 + 0x38) = 0; /*0x692e9a*/
+  return (ActiveEffect *)v3; /*0x692ea0*/
 }

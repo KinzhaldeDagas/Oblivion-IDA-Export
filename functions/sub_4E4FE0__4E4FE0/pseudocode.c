@@ -1,21 +1,23 @@
-void __thiscall sub_4E4FE0(unsigned __int16 **this, int a2, float *a3)
+// Verified PGRI row creation writes local point index in low u16 and remote point XYZ at +4; bytes +2..+3 are left unwritten here and ignored by inspected readers, so their intended meaning remains Unknown.
+void __thiscall TESPathGrid_AddPGRICrossCellLinkRequest(
+        TESPathGrid *this,
+        TESPathGridPoint *point,
+        const NiPoint3 *neighborPosition)
 {
-  int v4; // eax
+  int PointIndex; // eax
   __int16 v5; // bx
   int v6; // eax
 
-  if ( !sub_4E4F70(this, a2, a3) )
+  if ( !TESPathGrid_HasPGRICrossCellLinkRequest(this, point, neighborPosition) ) /*0x4e4fef*/
   {
-    v4 = sub_4E4E90((int)this, a2);
-    v5 = v4;
-    if ( v4 != 0xFFFFFFFF )
+    PointIndex = TESPathGrid_GetPointIndex(this, point); /*0x4e4ffb*/
+    v5 = PointIndex; /*0x4e5000*/
+    if ( PointIndex != 0xFFFFFFFF ) /*0x4e5005*/
     {
-      v6 = FormHeapAlloc(0x10u);
-      *(_WORD *)v6 = v5;
-      *(float *)(v6 + 4) = *a3;
-      *(float *)(v6 + 8) = a3[1];
-      *(float *)(v6 + 0xC) = a3[2];
-      BSSimpleList_PushFront(this + 0xA, v6);
+      v6 = FormHeapAlloc(0x10u); /*0x4e5009*/
+      *(_WORD *)v6 = v5; /*0x4e500e*/
+      *(NiPoint3 *)(v6 + 4) = *neighborPosition; /*0x4e5013*/
+      BSSimpleList_PushFront(&this->PGRIRecords.firstNode.data, v6); /*0x4e5029*/
     }
   }
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F6710",
+      "0x4F679D"
+    ]
+  ],
+  "chunks_sha256": "fcfbacd8182d648526ac41d8514b12bcb3b90da54325717447206dcedcb359ed",
+  "comment_regular": "Shared GetScriptVariable/GetQuestVariable evaluator. For a reference-like form, obtains its ScriptEventList (using the extra reference pointer when present); for QUST, reads its quest ScriptEventList. ArgList identifies the compiled variable ID passed as Param2. Missing IDs log an error and return 0; found Var.data is returned. ScriptEventList::GetVariableValue caches the last event-list/variable-ID pair globally.",
+  "comment_repeatable": "Shared GetScriptVariable/GetQuestVariable evaluator. For a reference-like form, obtains its ScriptEventList (using the extra reference pointer when present); for QUST, reads its quest ScriptEventList. ArgList identifies the compiled variable ID passed as Param2. Missing IDs log an error and return 0; found Var.data is returned. ScriptEventList::GetVariableValue caches the last event-list/variable-ID pair globally.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_4F6710",
   "end_ea": "0x4F679D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_4F6710",
   "segment": ".text",
   "sha256": "fcfbacd8182d648526ac41d8514b12bcb3b90da54325717447206dcedcb359ed",
   "size": 141,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F6710",
+  "total_chunk_size": 141,
   "type": "char __cdecl(int, TESObjectREFR *, int ArgList, double *)",
   "xrefs_from_count": 70,
-  "xrefs_to_count": 1
+  "xrefs_to_count": 0
 }

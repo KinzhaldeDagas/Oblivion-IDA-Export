@@ -1,18 +1,31 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_95D540",
+  "chunks": [
+    [
+      "0x95D540",
+      "0x95D6B7"
+    ]
+  ],
+  "chunks_sha256": "01d0bde96f0e009eb3f906d2e1a92c0c2f257cb243b5226d143330b817a1df1f",
+  "comment_regular": "Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.",
+  "comment_repeatable": "Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiPick_ProcessSceneObject",
   "end_ea": "0x95D6B7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_95D540",
+  "name": "NiPick_ProcessSceneObject",
   "segment": ".text",
   "sha256": "01d0bde96f0e009eb3f906d2e1a92c0c2f257cb243b5226d143330b817a1df1f",
   "size": 375,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x95D540",
+  "total_chunk_size": 375,
   "type": "char __cdecl(float *, float *, int, float *)",
   "xrefs_from_count": 171,
   "xrefs_to_count": 3

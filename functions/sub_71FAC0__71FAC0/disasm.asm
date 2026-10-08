@@ -1,6 +1,6 @@
 0x71FAC0: push    esi
 0x71FAC1: push    edi
-0x71FAC2: mov     edi, [esp+8+arg_0]
+0x71FAC2: mov     edi, [esp+8+capacity]
 0x71FAC6: mov     esi, ecx
 0x71FAC8: xor     ecx, ecx
 0x71FACA: mov     eax, edi

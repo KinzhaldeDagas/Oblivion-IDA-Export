@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C2790",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Type-5 step position boundary insertion: reject duplicate time, allocate count+1 0x10-byte records, insert the clamped/held evaluated position in sorted order, free old array, and replace pointer.",
     "mnemonic": "push",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6C27D5",
-    "line": "call    sub_6D31B0",
+    "line": "call    NiAnimationKey_FindInsertionIndex; Finds the sorted insertion index for a requested key time using the registered record stride. Returns false when an exact timestamp already exists, preventing duplicate boundary insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x6C2822",
-    "line": "push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; a5",
+    "line": "push    offset Shared_NoOpVirtual_60D0A0; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6C2827",
-    "line": "push    offset sub_7616D0; a4",
+    "line": "push    offset ActorList_ReturnHead; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x6C2847",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C2848",
-    "line": "push    edi; Src",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C2849",
-    "line": "push    esi; Dst",
+    "line": "push    esi; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x6C2852",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x6C286F",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x6C2873",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x6C2878",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C2879",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x6C2897",
-    "line": "call    sub_6BBDC0",
+    "line": "call    NiPosKey_EvaluateClamped; Evaluates a position track at a requested time with endpoint clamping: returns the first/last value outside the authored range, dispatches NiPosKey_EvaluateTrack inside it, and returns the native invalid/default vector for an empty track.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x6C28CE",
-    "line": "push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; void (__thiscall *)(void *)",
+    "line": "push    offset Shared_NoOpVirtual_60D0A0; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x6C28E0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -856,5 +856,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2850",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2853",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2854",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2859",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C285A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C285B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C285F",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2862",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2865",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2867",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C286C",
+    "line": "mov     eax, offset stru_AEB65C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2871",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

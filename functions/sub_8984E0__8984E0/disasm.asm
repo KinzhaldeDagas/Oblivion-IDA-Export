@@ -21,19 +21,19 @@
 0x898529: add     ecx, 0Ch
 0x89852C: fdiv    qword ptr ds:0A96A60h
 0x898532: mov     [esp+0A0h+var_84], ecx
-0x898536: call    Double_To_SInt32
+0x898536: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x89853B: mov     ecx, 1
 0x898540: sub     ecx, eax
 0x898542: mov     [esp+0A0h+var_90], ecx
 0x898546: fild    [esp+0A0h+var_90]
 0x89854A: fstp    [esp+0A0h+var_74]
 0x89854E: mov     edi, edi
-0x898550: mov     ecx, [esp+0A0h+var_84]
+0x898550: mov     ecx, [esp+0A0h+var_84]; this
 0x898554: test    ecx, ecx
 0x898556: jz      short loc_898570
-0x898558: lea     edx, [esp+0A0h+var_78]
-0x89855C: push    edx
-0x89855D: call    sub_677C70
+0x898558: lea     edx, [esp+0A0h+outData]
+0x89855C: push    edx; outData
+0x89855D: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x898562: or      [esp+0A0h+var_88], 1
 0x898567: cmp     dword ptr [eax], 0
 0x89856A: jz      short loc_898570
@@ -42,7 +42,7 @@
 0x898570: xor     bl, bl
 0x898572: test    byte ptr [esp+0A0h+var_88], 1
 0x898577: jz      short loc_8985A2
-0x898579: mov     esi, [esp+0A0h+var_78]
+0x898579: mov     esi, [esp+0A0h+outData]
 0x89857D: and     [esp+0A0h+var_88], 0FFFFFFFEh
 0x898582: test    esi, esi
 0x898584: jz      short loc_8985A2
@@ -61,9 +61,9 @@
 0x8985A2: test    bl, bl
 0x8985A4: jz      loc_89873B
 0x8985AA: lea     ecx, [esp+0A0h+var_80]
-0x8985AE: push    ecx
-0x8985AF: mov     ecx, [esp+0A4h+var_84]
-0x8985B3: call    sub_677C70
+0x8985AE: push    ecx; outData
+0x8985AF: mov     ecx, [esp+0A4h+var_84]; this
+0x8985B3: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8985B8: mov     edi, [eax]
 0x8985BA: mov     eax, [esp+0A0h+var_80]
 0x8985BE: test    eax, eax
@@ -173,7 +173,7 @@
 0x8986F8: lea     eax, [esp+0A4h+var_40]
 0x8986FC: push    eax
 0x8986FD: lea     ecx, [esp+0A8h+var_50]
-0x898701: call    sub_88FE00
+0x898701: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x898706: test    esi, esi
 0x898708: jz      short loc_898727
 0x89870A: mov     ecx, esi

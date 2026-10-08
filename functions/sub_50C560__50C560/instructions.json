@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x50C592",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x50C5D3",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x50C5D6",
-    "line": "call    sub_4212F0",
+    "line": "call    ExtraDataList_ResetSavedAttachedAnimationData; If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x50C605",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x50C608",
-    "line": "call    sub_4212F0",
+    "line": "call    ExtraDataList_ResetSavedAttachedAnimationData; If saved-attached-animation data exists, frees it and replaces it with a six-byte initialized {4,0,0} word buffer. Observed in Oblivion door default-open/open/close paths.",
     "mnemonic": "call",
     "size": 5
   },

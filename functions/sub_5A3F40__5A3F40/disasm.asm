@@ -16,7 +16,7 @@
 0x5A3F6B: mov     [esi], edi
 0x5A3F6D: mov     [esi+4], di
 0x5A3F71: mov     [esi+6], di
-0x5A3F75: push    offset sub_589BB0; a5
+0x5A3F75: push    offset Tile__Value__Destroy; a5
 0x5A3F7A: push    offset sub_5A3E80; a4
 0x5A3F7F: push    15h; size
 0x5A3F81: push    1Ch; a2
@@ -55,3 +55,12 @@
 0x5A3FE6: pop     esi
 0x5A3FE7: add     esp, 10h
 0x5A3FEA: retn
+0x9BE320: mov     ecx, [ebp-10h]; void *
+0x9BE323: jmp     BSStringT_Clear
+0x9BE328: mov     edx, [esp+arg_4]
+0x9BE32C: lea     eax, [edx-0Ch]
+0x9BE32F: mov     ecx, [edx-10h]
+0x9BE332: xor     ecx, eax
+0x9BE334: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE339: mov     eax, offset stru_AE7AA4
+0x9BE33E: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x478730",
-    "line": "push    esi",
+    "line": "push    esi; Constructs a 0x154-byte ActorSkinInfo: clears exactly 0x154 bytes, stores the owning Actor at byte offset +0x150, and optionally caches exact-name model nodes from rootNode.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x478747",
-    "line": "push    offset dword_B33C80",
+    "line": "push    offset unk_B33C80",
     "mnemonic": "push",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x478751",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x47875B",
-    "line": "mov     eax, [esp+1Ch+arg_4]",
+    "line": "mov     eax, [esp+1Ch+rootNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x478766",
-    "line": "push    eax",
+    "line": "push    eax; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x478767",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x478769",
-    "line": "call    sub_478070",
+    "line": "call    ActorSkinInfo_CacheNamedNodes; Caches ActorSkinInfo nodes by exact name. +0 is Bip01. Node indices 0..8 are Bip01 Head, Bip01 R Finger1, Bip01 L Finger1, Weapon, BackWeapon, SideWeapon, Quiver, Bip01 L ForearmTwist, Torch. Each indexed entry uses an 8-byte {flags,node} layout; node is at +8+index*8.",
     "mnemonic": "call",
     "size": 5
   },

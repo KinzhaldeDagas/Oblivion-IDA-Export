@@ -12,14 +12,14 @@ int __usercall EffectItem_CopyFrom_::CopyArea@<eax>(
 {
   int v10; // eax
 
-  if ( (*(_DWORD *)(a2[7] + 0x58) & 0x200) != 0 || a2[4] == a1 )
-    v10 = 0;
+  if ( (*(_DWORD *)(a2[7] + 0x58) & 0x200) != 0 || a2[4] == a1 ) /*0x414036*/
+    v10 = 0; /*0x41403d*/
   else
-    v10 = a2[2];
-  if ( (*(_DWORD *)(a4 + 0x58) & 0x200) == 0 && *(_DWORD *)(a3 + 0x10) != a1 && v10 >= a1 )
+    v10 = a2[2]; /*0x414038*/
+  if ( (*(_DWORD *)(a4 + 0x58) & 0x200) == 0 && *(_DWORD *)(a3 + 0x10) != a1 && v10 >= a1 ) /*0x414051*/
   {
-    *(float *)(a3 + 0x20) = a5;
-    *(_DWORD *)(a3 + 8) = v10;
+    *(float *)(a3 + 0x20) = a5; /*0x414053*/
+    *(_DWORD *)(a3 + 8) = v10; /*0x414056*/
   }
   return EffectItem_CopyFrom_::CopyDuration(a1, (int)a2, a3, a4, a5, _4, _8, a8, a9, a10);
 }

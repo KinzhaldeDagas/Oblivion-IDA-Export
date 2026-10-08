@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x42D626",
-    "line": "call    sub_42C3E0",
+    "line": "call    sub_42C3E0; EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.",
     "mnemonic": "call",
     "size": 5
   },
@@ -520,5 +520,59 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9ABAB0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABAB3",
+    "line": "jmp     ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABAB8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABABC",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABABF",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABAC2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABAC4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABAC9",
+    "line": "mov     eax, offset stru_AD88A0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABACE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

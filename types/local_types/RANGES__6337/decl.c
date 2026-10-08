@@ -1,1 +1,1 @@
-RANGES
+typedef tagRANGES *RANGES;

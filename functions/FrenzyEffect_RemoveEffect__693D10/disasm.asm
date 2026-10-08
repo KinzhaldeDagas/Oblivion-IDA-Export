@@ -25,10 +25,10 @@
 0x693D5A: mov     ecx, edi
 0x693D5C: call    edx
 0x693D5E: push    0; a2
-0x693D60: mov     ecx, offset ActorProcessManager_ptr; this
-0x693D65: call    sub_673A50
+0x693D60: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x693D65: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x693D6A: mov     ecx, eax; this
-0x693D6C: call    sub_7616D0
+0x693D6C: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x693D71: mov     ebx, eax
 0x693D73: test    ebx, ebx
 0x693D75: jz      short loc_693DBF

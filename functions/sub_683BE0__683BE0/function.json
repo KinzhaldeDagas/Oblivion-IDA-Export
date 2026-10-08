@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x683BE0",
+      "0x683BF0"
+    ]
+  ],
+  "chunks_sha256": "6497d11945523406e0f1406e4f11017858bb475e317be798121ddbbd98e2d944",
+  "comment_regular": "Verified TogglePathLineState flips BYTE2(qword_B3BB2C[0x157]) and returns the new value. Its only direct caller is ScriptCommand_TogglePathLine; exact semantics of the packed manager field remain Unknown.",
+  "comment_repeatable": "Verified TogglePathLineState flips BYTE2(qword_B3BB2C[0x157]) and returns the new value. Its only direct caller is ScriptCommand_TogglePathLine; exact semantics of the packed manager field remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_683BE0",
+  "display_name": "TogglePathLineState",
   "end_ea": "0x683BF0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_683BE0",
+  "name": "TogglePathLineState",
   "segment": ".text",
   "sha256": "6497d11945523406e0f1406e4f11017858bb475e317be798121ddbbd98e2d944",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x683BE0",
-  "type": "bool()",
+  "total_chunk_size": 16,
+  "type": "bool __cdecl()",
   "xrefs_from_count": 3,
   "xrefs_to_count": 1
 }

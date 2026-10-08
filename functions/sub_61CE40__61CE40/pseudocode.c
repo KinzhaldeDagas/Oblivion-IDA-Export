@@ -1,213 +1,224 @@
+// Combat dodge selection consumes Actor_GetFatigueFraction; SmartAI reads the same resource without changing actions.
 void __usercall sub_61CE40(int a1@<ecx>, int a2@<ebx>, int a3@<edi>, double a4@<st0>)
 {
-  _DWORD **v7; // eax
+  _DWORD **CurrentTarget; // eax
   int CurrentAction; // eax
-  Actor *v9; // edi
-  double v10; // st7
-  int *v11; // eax
-  unsigned int v12; // eax
+  Actor *v7; // edi
+  double v8; // st7
+  int *EffectiveCombatStyle; // eax
+  unsigned int v10; // eax
+  int v11; // eax
+  float v12; // edx
   int v13; // eax
-  float v14; // edx
-  int v15; // eax
-  bool v16; // al
-  int *v17; // eax
-  unsigned __int16 v18; // ax
-  int v19; // ebx
-  void *v20; // ecx
-  int v21; // edi
+  bool v14; // al
+  int *v15; // eax
+  unsigned __int16 v16; // ax
+  int v17; // ebx
+  void *v18; // ecx
+  unsigned int v19; // edi
+  int *v20; // ebp
+  double v21; // st7
   int *v22; // ebp
-  double v23; // st7
-  int *v24; // ebp
-  int *v25; // ebp
-  int *v26; // ebx
-  double (__thiscall *v27)(int *); // eax
-  int *v28; // ebp
+  int *v23; // ebp
+  int *v24; // ebx
+  double (__thiscall *v25)(int *); // eax
+  int *v26; // ebp
   unsigned __int8 AnimGroup; // al
-  double v30; // st6
-  int v31; // eax
-  const char *v32; // eax
+  double v28; // st6
+  int v29; // eax
+  const char *v30; // eax
   char *Name; // eax
-  int *v34; // edi
-  int *v35; // ebx
-  int v36; // [esp+Ch] [ebp-28h]
-  float v37; // [esp+Ch] [ebp-28h]
-  float v38; // [esp+Ch] [ebp-28h]
-  float v39; // [esp+Ch] [ebp-28h]
-  float FatigueFraction; // [esp+10h] [ebp-24h]
-  char v41; // [esp+10h] [ebp-24h]
-  float v42; // [esp+10h] [ebp-24h]
-  float v43; // [esp+10h] [ebp-24h]
-  __int16 v44; // [esp+14h] [ebp-20h]
-  const char *v45; // [esp+14h] [ebp-20h]
-  float v46; // [esp+14h] [ebp-20h]
+  int *v32; // edi
+  int *v33; // ebx
+  int value1a; // [esp+Ch] [ebp-28h]
+  float value1b; // [esp+Ch] [ebp-28h]
+  float value1; // [esp+Ch] [ebp-28h]
+  float value1c; // [esp+Ch] [ebp-28h]
+  float value2a; // [esp+10h] [ebp-24h]
+  char value2b; // [esp+10h] [ebp-24h]
+  float value2; // [esp+10h] [ebp-24h]
+  float value2c; // [esp+10h] [ebp-24h]
+  __int16 v42; // [esp+14h] [ebp-20h]
+  const char *v43; // [esp+14h] [ebp-20h]
+  float v44; // [esp+14h] [ebp-20h]
+  float v47; // [esp+24h] [ebp-10h]
+  float CachedTargetSurfaceDistance; // [esp+24h] [ebp-10h]
   float v49; // [esp+24h] [ebp-10h]
-  float v50; // [esp+24h] [ebp-10h]
-  float v51; // [esp+24h] [ebp-10h]
+  float DesiredCombatDistance; // [esp+28h] [ebp-Ch]
+  int v51; // [esp+28h] [ebp-Ch]
   float v52; // [esp+28h] [ebp-Ch]
-  int v53; // [esp+28h] [ebp-Ch]
-  float v54; // [esp+28h] [ebp-Ch]
-  int v55; // [esp+2Ch] [ebp-8h]
-  float v56; // [esp+30h] [ebp-4h]
-  int *v57; // [esp+30h] [ebp-4h]
-  int *v58; // [esp+30h] [ebp-4h]
-  float v59; // [esp+30h] [ebp-4h]
+  int v53; // [esp+2Ch] [ebp-8h]
+  float v54; // [esp+30h] [ebp-4h]
+  int *v55; // [esp+30h] [ebp-4h]
+  int *v56; // [esp+30h] [ebp-4h]
+  float v57; // [esp+30h] [ebp-4h]
   _UNKNOWN *retaddr; // [esp+34h] [ebp+0h]
-  float v61; // [esp+38h] [ebp+4h]
+  float v59; // [esp+38h] [ebp+4h]
 
-  if ( !(*(unsigned __int8 (__usercall **)@<al>(_DWORD@<ecx>, double@<st0>))(**(_DWORD **)(a1 + 0x3C) + 0x25C))(
+  if ( !(*(unsigned __int8 (__usercall **)@<al>(_DWORD@<ecx>, double@<st0>))(**(_DWORD **)(a1 + 0x3C) + 0x25C))( /*0x61ce5d*/
           *(_DWORD *)(a1 + 0x3C),
           a4)
-    && sub_6135F0(a1) )
+    && CombatController_GetCurrentTarget(a1) )
   {
-    v7 = (_DWORD **)sub_6135F0(a1);
-    CurrentAction = Actor_GetCurrentAction(v7);
-    v9 = *(Actor **)(a1 + 0x3C);
-    LOBYTE(v55) = CurrentAction == 2;
-    FatigueFraction = Actor_GetFatigueFraction(v9, v55, (int)v9);
-    v10 = sub_5E3590(v9);
-    v36 = Double_To_SInt32(v10);
-    v11 = sub_5E0F50(v9);
-    v49 = sub_546A40(v11, v36, FatigueFraction, *(float *)&v55);
-    if ( v49 < 0.0 )
-      v49 = 0.0;
-    v12 = *(_DWORD *)(a1 + 0x70);
-    if ( (v12 == 2 || v12 == 4) && (!*(_BYTE *)(a1 + 0x158) || *(_BYTE *)(a1 + 0x159) || *(_BYTE *)(a1 + 0x15B)) )
-      v49 = v49 + dbl_A3F3D0;
-    if ( v12 < 2 || v12 == 3 )
+    CurrentTarget = (_DWORD **)CombatController_GetCurrentTarget(a1); /*0x61ce6e*/
+    CurrentAction = Actor_GetCurrentAction(CurrentTarget); /*0x61ce75*/
+    v7 = *(Actor **)(a1 + 0x3C); /*0x61ce7a*/
+    LOBYTE(v53) = CurrentAction == 2; /*0x61ce80*/
+    value2a = Actor_GetFatigueFraction(v7, v53, (int)v7);// Dodge selection reads Actor_GetFatigueFraction and feeds it into CombatStyle_CalculateDodgeScore. /*0x61ce94*/
+    v8 = sub_5E3590(v7); /*0x61ce97*/
+    value1a = Double_To_SInt32(v8); /*0x61cea1*/
+    EffectiveCombatStyle = Actor_GetEffectiveCombatStyle(v7); /*0x61cea4*/
+    v47 = CombatStyle_CalculateDodgeScore(EffectiveCombatStyle, value1a, value2a, *(float *)&v53); /*0x61ceaf*/
+    if ( v47 < 0.0 ) /*0x61cec1*/
+      v47 = 0.0; /*0x61cec3*/
+    v10 = *(_DWORD *)(a1 + 0x70); /*0x61cecb*/
+    if ( (v10 == 2 || v10 == 4) && (!*(_BYTE *)(a1 + 0x158) || *(_BYTE *)(a1 + 0x159) || *(_BYTE *)(a1 + 0x15B)) ) /*0x61ceea*/
+      v47 = v47 + dbl_A3F3D0; /*0x61cefd*/
+    if ( v10 < 2 || v10 == 3 ) /*0x61cf0d*/
     {
-      if ( *(_BYTE *)(a1 + 0x15A) )
-        v49 = v49 + dbl_A492B0;
+      if ( *(_BYTE *)(a1 + 0x15A) ) /*0x61cf0f*/
+        v47 = v47 + dbl_A492B0; /*0x61cf22*/
     }
-    if ( *(_DWORD *)(a1 + 0x74) == 2 )
-      v49 = v49 + dbl_A3F3E8;
-    if ( (v12 < 2 || v12 == 3) && (PlayerCharacter *)sub_6135F0(a1) != TESDataHandler_g_PlayerRef )
+    if ( *(_DWORD *)(a1 + 0x74) == 2 ) /*0x61cf2a*/
+      v47 = v47 + dbl_A3F3E8; /*0x61cf36*/
+    if ( (v10 < 2 || v10 == 3) && (PlayerCharacter *)CombatController_GetCurrentTarget(a1) != reference ) /*0x61cf55*/
     {
-      v13 = sub_6135F0(a1);
-      if ( !(*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v13 + 0x334))(v13, 1) )
-        v49 = v49 - fCostant_100;
+      v11 = CombatController_GetCurrentTarget(a1); /*0x61cf59*/
+      if ( !(*(unsigned __int8 (__thiscall **)(int, int))(*(_DWORD *)v11 + 0x334))(v11, 1) ) /*0x61cf6a*/
+        v47 = v47 - fCostant_100; /*0x61cf7a*/
     }
-    if ( v49 < (double)(GetRandomLargeInteger_(0) % 0x64) )
+    if ( v47 < (double)(Game_RandomLargeInteger(0) % 0x64) ) /*0x61cfa3*/
     {
-      if ( *(_DWORD *)(a1 + 0x6C) != 1 )
+      if ( *(_DWORD *)(a1 + 0x6C) != 1 ) /*0x61d2a8*/
       {
-        v34 = sub_5E0F50(*(void **)(a1 + 0x3C));
-        v35 = sub_5E0F50(*(void **)(a1 + 0x3C));
-        v46 = ((double (__thiscall *)(int *))*(_DWORD *)(*v34 + 0x104))(v34);
-        v43 = ((double (__thiscall *)(int *))*(_DWORD *)(*v35 + 0x100))(v35);
-        v59 = sub_546B20(v43, v46);
-        *(float *)(a1 + 0xD4) = *(float *)(a1 + 0x44);
-        *(float *)(a1 + 0xD8) = v59;
-        *(float *)(a1 + 0xDC) = flt_A30634;
-        sub_6160B0((Actor **)a1);
-        sub_619920(a1, 1);
+        v32 = Actor_GetEffectiveCombatStyle(*(void **)(a1 + 0x3C)); /*0x61d2b5*/
+        v33 = Actor_GetEffectiveCombatStyle(*(void **)(a1 + 0x3C)); /*0x61d2be*/
+        v44 = ((double (__thiscall *)(int *))*(_DWORD *)(*v32 + 0x104))(v32); /*0x61d2d5*/
+        value2c = ((double (__thiscall *)(int *))*(_DWORD *)(*v33 + 0x100))(v33); /*0x61d2db*/
+        v57 = RandomFloatBetween(value2c, v44); /*0x61d2e3*/
+        *(float *)(a1 + 0xD4) = *(float *)(a1 + 0x44); /*0x61d2ef*/
+        *(float *)(a1 + 0xD8) = v57; /*0x61d2f9*/
+        *(float *)(a1 + 0xDC) = kTerrainLODQuadRayDirectionZ; /*0x61d305*/
+        sub_6160B0((Actor **)a1); /*0x61d30b*/
+        sub_619920(a1, 1); /*0x61d314*/
       }
     }
     else
     {
-      LOBYTE(v56) = Actor_GetCurrentAction(*(_DWORD ***)(a1 + 0x3C)) == 2;
-      v50 = sub_615980(a1, (char)v9);
-      v52 = sub_615520(a1);
-      LOBYTE(v14) = *(_BYTE *)(a1 + 0x159) || *(_BYTE *)(a1 + 0x15A);
-      v15 = *(_DWORD *)(a1 + 0x70);
-      v16 = v15 == 2 || v15 == 4;
-      v44 = *(_WORD *)(a1 + 0x192);
-      v41 = v16;
-      v37 = v14;
-      v17 = sub_5E0F50(*(void **)(a1 + 0x3C));
-      v18 = sub_546E10(v17, v56, *(float *)&v55, v50, v52, v37, v41, v44);
-      v19 = v18;
-      v53 = v18;
-      if ( v18 && (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(a1 + 0x3C) + 0x164))(*(_DWORD *)(a1 + 0x3C)) )
+      LOBYTE(v54) = Actor_GetCurrentAction(*(_DWORD ***)(a1 + 0x3C)) == 2; /*0x61cfb9*/
+      CachedTargetSurfaceDistance = CombatController_GetCachedTargetSurfaceDistance(a1, (char)v7); /*0x61cfc2*/
+      DesiredCombatDistance = CombatController_GetDesiredCombatDistance((void *)a1); /*0x61cfcd*/
+      LOBYTE(v12) = *(_BYTE *)(a1 + 0x159) || *(_BYTE *)(a1 + 0x15A); /*0x61cfe7*/
+      v13 = *(_DWORD *)(a1 + 0x70); /*0x61cfe9*/
+      v14 = v13 == 2 || v13 == 4; /*0x61cffa*/
+      v42 = *(_WORD *)(a1 + 0x192); /*0x61d00d*/
+      value2b = v14; /*0x61d00e*/
+      value1b = v12; /*0x61d013*/
+      v15 = Actor_GetEffectiveCombatStyle(*(void **)(a1 + 0x3C)); /*0x61d024*/
+      v16 = sub_546E10( /*0x61d02a*/
+              v15,
+              v54,
+              *(float *)&v53,
+              CachedTargetSurfaceDistance,
+              DesiredCombatDistance,
+              value1b,
+              value2b,
+              v42);
+      v17 = v16; /*0x61d02f*/
+      v51 = v16; /*0x61d038*/
+      if ( v16 && (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(a1 + 0x3C) + 0x164))(*(_DWORD *)(a1 + 0x3C)) ) /*0x61d04d*/
       {
-        v20 = *(void **)(a1 + 0x3C);
-        v21 = 3;
-        if ( (v19 & 0xF) == 2 )
+        v18 = *(void **)(a1 + 0x3C); /*0x61d057*/
+        v19 = 3; /*0x61d063*/
+        if ( (v17 & 0xF) == 2 ) /*0x61d068*/
         {
-          v21 = 4;
-          v28 = sub_5E0F50(v20);
-          v26 = sub_5E0F50(*(void **)(a1 + 0x3C));
-          (*(void (__thiscall **)(int *))(*v28 + 0xFC))(v28);
-          v27 = *(double (__thiscall **)(int *))(*v26 + 0xF8);
+          v19 = 4; /*0x61d12b*/
+          v26 = Actor_GetEffectiveCombatStyle(v18); /*0x61d138*/
+          v24 = Actor_GetEffectiveCombatStyle(*(void **)(a1 + 0x3C)); /*0x61d142*/
+          (*(void (__thiscall **)(int *))(*v26 + 0xFC))(v26); /*0x61d14c*/
+          v25 = *(double (__thiscall **)(int *))(*v24 + 0xF8); /*0x61d150*/
         }
         else
         {
-          if ( (v19 & 0xF) != 4 )
+          if ( (v17 & 0xF) != 4 ) /*0x61d071*/
           {
-            if ( (v19 & 0xF) == 8 )
+            if ( (v17 & 0xF) == 8 ) /*0x61d07a*/
             {
-              v21 = 6;
-              v24 = sub_5E0F50(v20);
-              v58 = sub_5E0F50(*(void **)(a1 + 0x3C));
-              v42 = ((double (__thiscall *)(int *))*(_DWORD *)(*v24 + 0xEC))(v24);
-              v38 = ((double (__thiscall *)(int *))*(_DWORD *)(*v58 + 0xE8))(v58);
+              v19 = 6; /*0x61d0bc*/
+              v22 = Actor_GetEffectiveCombatStyle(v18); /*0x61d0c9*/
+              v56 = Actor_GetEffectiveCombatStyle(*(void **)(a1 + 0x3C)); /*0x61d0d3*/
+              value2 = ((double (__thiscall *)(int *))*(_DWORD *)(*v22 + 0xEC))(v22); /*0x61d0e6*/
+              value1 = ((double (__thiscall *)(int *))*(_DWORD *)(*v56 + 0xE8))(v56); /*0x61d0f4*/
             }
             else
             {
-              v22 = sub_5E0F50(v20);
-              v57 = sub_5E0F50(*(void **)(a1 + 0x3C));
-              v42 = ((double (__thiscall *)(int *))*(_DWORD *)(*v22 + 0xF4))(v22);
-              v38 = ((double (__thiscall *)(int *))*(_DWORD *)(*v57 + 0xF0))(v57);
+              v20 = Actor_GetEffectiveCombatStyle(v18); /*0x61d084*/
+              v55 = Actor_GetEffectiveCombatStyle(*(void **)(a1 + 0x3C)); /*0x61d08e*/
+              value2 = ((double (__thiscall *)(int *))*(_DWORD *)(*v20 + 0xF4))(v20); /*0x61d0a1*/
+              value1 = ((double (__thiscall *)(int *))*(_DWORD *)(*v55 + 0xF0))(v55); /*0x61d0af*/
             }
-            v23 = sub_546B20(v38, v42);
-            goto LABEL_42;
+            v21 = RandomFloatBetween(value1, value2); /*0x61d0b2*/
+            goto LABEL_42; /*0x61d0b7*/
           }
-          v21 = 5;
-          v25 = sub_5E0F50(v20);
-          v26 = sub_5E0F50(*(void **)(a1 + 0x3C));
-          (*(void (__thiscall **)(int *))(*v25 + 0xEC))(v25);
-          v27 = *(double (__thiscall **)(int *))(*v26 + 0xE8);
+          v19 = 5; /*0x61d0fe*/
+          v23 = Actor_GetEffectiveCombatStyle(v18); /*0x61d10b*/
+          v24 = Actor_GetEffectiveCombatStyle(*(void **)(a1 + 0x3C)); /*0x61d115*/
+          (*(void (__thiscall **)(int *))(*v23 + 0xEC))(v23); /*0x61d11f*/
+          v25 = *(double (__thiscall **)(int *))(*v24 + 0xE8); /*0x61d123*/
         }
-        v39 = v27(v26);
-        v23 = sub_546B20(v39, v50);
-        v19 = v53;
+        value1c = v25(v24); /*0x61d15f*/
+        v21 = RandomFloatBetween(value1c, CachedTargetSurfaceDistance); /*0x61d162*/
+        v17 = v51; /*0x61d167*/
 LABEL_42:
-        v51 = v23;
-        AnimGroup = Actor_LoadAnimGroup_(*(TESObjectREFR **)(a1 + 0x3C), v21, 0, 0);
-        if ( sub_51AA00(AnimGroup) == v21 )
+        v49 = v21; /*0x61d16b*/
+        AnimGroup = Actor_LoadAnimGroup_(*(Actor **)(a1 + 0x3C), v19, 0, 0); /*0x61d17a*/
+        if ( AnimKey_GetGroupID(AnimGroup) == v19 ) /*0x61d18b*/
         {
-          v54 = sub_5E5850((TESObjectREFR *)*(_DWORD *)(a1 + 0x3C), v21);
-          if ( v51 < (double)v54 )
-            v51 = v54;
-          (*(void (__thiscall **)(_DWORD, int, int, int, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0x2C4))(
+          v52 = sub_5E5850((TESObjectREFR *)*(_DWORD *)(a1 + 0x3C), v19); /*0x61d19a*/
+          if ( v49 < (double)v52 ) /*0x61d1ad*/
+            v49 = v52; /*0x61d1af*/
+          (*(void (__thiscall **)(_DWORD, int, int, int, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0x2C4))( /*0x61d1c8*/
             *(_DWORD *)(*(_DWORD *)(a1 + 0x3C) + 0x58),
-            v19,
+            v17,
             1,
             a3,
             a2);
-          v61 = (float)(GetRandomLargeInteger_(0) % 0x64);
-          if ( !(_BYTE)retaddr
-            || (v30 = *(float *)GameSetting_GetSafeFloatPointer((int *)&unk_B36D90), v31 = 0x200, v30 >= v61) )
+          v59 = (float)(Game_RandomLargeInteger(0) % 0x64); /*0x61d1e9*/
+          if ( !(_BYTE)retaddr /*0x61d20b*/
+            || (v28 = *GameSetting_GetSafeFloatPointer(&g_GameSettingStringPointers_B36CD8[0x2E]),
+                v29 = 0x200,
+                v28 >= v59) )
           {
-            v31 = 0x100;
+            v29 = 0x100; /*0x61d20d*/
           }
-          (*(void (__thiscall **)(_DWORD, int, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0x2C4))(
+          (*(void (__thiscall **)(_DWORD, int, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0x2C4))( /*0x61d223*/
             *(_DWORD *)(*(_DWORD *)(a1 + 0x3C) + 0x58),
-            v31,
+            v29,
             1);
-          *(float *)(a1 + 0xD4) = *(float *)(a1 + 0x44);
-          *(float *)(a1 + 0xD8) = v51;
-          *(float *)(a1 + 0xDC) = v54;
-          sub_619920(a1, 2);
+          *(float *)(a1 + 0xD4) = *(float *)(a1 + 0x44); /*0x61d228*/
+          *(float *)(a1 + 0xD8) = v49; /*0x61d236*/
+          *(float *)(a1 + 0xDC) = v52; /*0x61d240*/
+          sub_619920(a1, 2); /*0x61d246*/
         }
-        else if ( byte_B3B908 )
+        else if ( unk_B3B908 ) /*0x61d252*/
         {
-          if ( (v19 & 4) != 0 )
+          if ( (v17 & 4) != 0 ) /*0x61d262*/
           {
-            v32 = "LEFT";
+            v30 = "LEFT"; /*0x61d264*/
           }
-          else if ( (v19 & 8) != 0 )
+          else if ( (v17 & 8) != 0 ) /*0x61d26e*/
           {
-            v32 = "RIGHT";
+            v30 = "RIGHT"; /*0x61d270*/
           }
           else
           {
-            v32 = "FOREWARD";
-            if ( (v19 & 1) == 0 )
-              v32 = "BACK";
+            v30 = "FOREWARD"; /*0x61d27a*/
+            if ( (v17 & 1) == 0 ) /*0x61d27f*/
+              v30 = "BACK"; /*0x61d281*/
           }
-          v45 = v32;
-          Name = TESObjectREFR_GetName(*(TESObjectREFR **)(a1 + 0x3C));
-          Interface_ConsolePrint("%.20s chose to dodge %s but has no corresponding animation", Name, v45);
+          v43 = v30; /*0x61d289*/
+          Name = TESObjectREFR_GetName(*(TESObjectREFR **)(a1 + 0x3C)); /*0x61d28a*/
+          Interface_ConsolePrint("%.20s chose to dodge %s but has no corresponding animation", Name, v43); /*0x61d295*/
         }
       }
     }

@@ -1,19 +1,40 @@
 {
-  "callees_count": 1710,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1049,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_87AD10",
+  "chunks": [
+    [
+      "0x87AD10",
+      "0x87FA1F"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9D52F0",
+      "0x9D575B"
+    ]
+  ],
+  "chunks_sha256": "31f507963f89359a85615788156164a1263bfd620d769876c807656b71dbedec",
+  "comment_regular": "MoonSugarEffect decode: SkinShader detailed pass population. Binds SkinShader vertex variants from this+0x9C and pixel variants from this+0xEC into the 0x14 pooled passes with TES4 texture-stage/render-state setup.\nV177 observed interior receiver audit: B47728 VS12/PS6;B4772C VS13/PS6;B47748 VS4/PS2;B4774C VS5/PS2. Actual opaque shader hashes observed in V175. Preserve the native cubic view-dependent diffuse term for skin; local shadowing applies to each admitted point contribution, not ambient/glow or the whole final color. Complete code/chunks/tables exported for existing source/lifetime/draw proof.",
+  "comment_repeatable": "MoonSugarEffect decode: SkinShader detailed pass population. Binds SkinShader vertex variants from this+0x9C and pixel variants from this+0xEC into the 0x14 pooled passes with TES4 texture-stage/render-state setup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "SkinShader_InitializePassPool",
   "end_ea": "0x87FA1F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_87AD10",
+  "name": "SkinShader_InitializePassPool",
   "segment": ".text",
   "sha256": "58f66b18e18cbe8287b700594717e8f499d2165cf5cad234bfd276237f617db3",
   "size": 19727,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x87AD10",
+  "total_chunk_size": 20876,
   "type": "void __thiscall(int *this)",
-  "xrefs_from_count": 8066,
+  "xrefs_from_count": 8359,
   "xrefs_to_count": 1
 }

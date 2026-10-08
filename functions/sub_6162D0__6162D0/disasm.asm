@@ -26,7 +26,7 @@
 0x616308: jnz     short loc_61630F
 0x61630A: call    sub_6136E0
 0x61630F: push    edi
-0x616310: call    FormHeapFree
+0x616310: call    FormHeapFree; Frees the removed TargetInfo with FormHeapFree after unlinking it from the target list.
 0x616315: add     esp, 4
 0x616318: mov     bl, 1
 0x61631A: mov     ecx, [esi+28h]
@@ -39,13 +39,13 @@
 0x616330: jnz     short loc_616356
 0x616332: mov     edi, [esi+28h]
 0x616335: mov     ecx, esi
-0x616337: call    sub_6135F0
+0x616337: call    CombatController_GetCurrentTarget
 0x61633C: push    eax
 0x61633D: mov     ecx, edi
-0x61633F: call    TeSPackage_TargetData_SetTargetREFR
+0x61633F: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x616344: mov     edi, [esi+24h]
 0x616347: mov     ecx, esi
-0x616349: call    sub_6135F0
+0x616349: call    CombatController_GetCurrentTarget
 0x61634E: push    eax
 0x61634F: mov     ecx, edi
 0x616351: call    TESPackage_LocationData_SetReference

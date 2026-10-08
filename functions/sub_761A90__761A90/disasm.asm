@@ -4,7 +4,7 @@
 0x761A98: push    0FFh; Src
 0x761A9D: push    eax; Src
 0x761A9E: push    100h; SizeInBytes
-0x761AA3: push    offset byte_B3F828; Dst
+0x761AA3: push    offset unk_B3F828; Dst
 0x761AA8: call    _strncpy_s
 0x761AAD: add     esp, 10h
 0x761AB0: retn

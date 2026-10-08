@@ -52,7 +52,7 @@
 0x5FBA75: push    ecx
 0x5FBA76: mov     ecx, [esp+24h+var_4]
 0x5FBA7A: push    edi
-0x5FBA7B: call    sub_48BDA0
+0x5FBA7B: call    sub_48BDA0; Sidecar NPC decode: deeper equippable-item selector carries actor/base interface context used by weapon rating paths. Wrapper must forward four stack args unchanged while pushing/popping owner context.
 0x5FBA80: mov     ebp, eax
 0x5FBA82: mov     ecx, [esi+58h]
 0x5FBA85: fld     [esp+18h+var_8]
@@ -89,12 +89,12 @@
 0x5FBADF: push    0
 0x5FBAE1: push    1
 0x5FBAE3: push    0
-0x5FBAE5: mov     ecx, eax
-0x5FBAE7: call    TESHealthForm_GetHealth
+0x5FBAE5: mov     ecx, eax; this
+0x5FBAE7: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5FBAEC: push    eax
 0x5FBAED: push    edi
 0x5FBAEE: mov     ecx, esi
-0x5FBAF0: call    Actor_EquipItem
+0x5FBAF0: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5FBAF5: pop     edi
 0x5FBAF6: pop     esi
 0x5FBAF7: mov     eax, ebp

@@ -57,7 +57,7 @@
 0x619DD4: ja      short def_619DD6
 0x619DD6: jmp     ds:jpt_619DD6[eax*4]; switch jump
 0x619DDD: mov     ecx, ebp; jumptable 00619DD6 cases 0,1,3
-0x619DDF: call    sub_6135F0
+0x619DDF: call    CombatController_GetCurrentTarget
 0x619DE4: cmp     esi, eax
 0x619DE6: jnz     short loc_619DF0
 0x619DE8: fld     dword ptr ds:0A2FE7Ch
@@ -73,7 +73,7 @@
 0x619E04: push    1; char
 0x619E06: push    esi; int
 0x619E07: push    0; int
-0x619E09: call    sub_5F2820
+0x619E09: call    Actor_LineOfSight; Oblivion actor line-of-sight query used by detection, combat reach, tactical refresh, and ray-cast script paths. Performs cell/world-space and Havok visibility tests and can report the viewed actor segment through the output parameter. Fallout corroborates the Actor::LineOfSight family name only.
 0x619E0E: test    al, al
 0x619E10: mov     ecx, [ebp+3Ch]
 0x619E13: push    0

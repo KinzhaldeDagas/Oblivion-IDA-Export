@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "POLICY_DNS_DOMAIN_INFO",
+  "definition": "typedef _POLICY_DNS_DOMAIN_INFO POLICY_DNS_DOMAIN_INFO\n",
   "id": 18374686479672031359,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Name",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "LSA_UNICODE_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DnsDomainName",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "LSA_UNICODE_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DnsForestName",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "LSA_UNICODE_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DomainGuid",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Sid",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "PSID"
     }
   ],
   "name": "POLICY_DNS_DOMAIN_INFO",
+  "ordinal": 2729,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 44
 }

@@ -1,4 +1,4 @@
-0x67FB70: mov     eax, [esp+arg_0]
+0x67FB70: mov     eax, [esp+bucketCount]; Verified outer map constructor and vtable identity: NiTPointerMap<TESForm*,NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.
 0x67FB74: push    esi
 0x67FB75: mov     esi, ecx
 0x67FB77: xor     ecx, ecx

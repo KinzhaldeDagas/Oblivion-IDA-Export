@@ -43,3 +43,15 @@
 0x73BD27: pop     esi
 0x73BD28: add     esp, 10h
 0x73BD2B: retn
+0x9CAD30: mov     ecx, [ebp-10h]; this
+0x9CAD33: jmp     ??1NiDynamicEffect@@UAE@XZ; NiDynamicEffect::~NiDynamicEffect(void)
+0x9CAD38: mov     ecx, [ebp-10h]
+0x9CAD3B: add     ecx, 13Ch; slot
+0x9CAD41: jmp     NiPointerSlot_Release
+0x9CAD46: mov     edx, [esp+arg_4]
+0x9CAD4A: lea     eax, [edx-0Ch]
+0x9CAD4D: mov     ecx, [edx-10h]
+0x9CAD50: xor     ecx, eax
+0x9CAD52: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD57: mov     eax, offset stru_AF3364
+0x9CAD5C: jmp     ___CxxFrameHandler3

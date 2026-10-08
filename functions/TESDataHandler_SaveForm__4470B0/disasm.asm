@@ -9,7 +9,7 @@
 0x4470C3: mov     esi, [esp+8+arg_0]
 0x4470C7: push    0FFFFFFFFh; a2
 0x4470C9: mov     ecx, esi; this
-0x4470CB: call    TESForm_GetOverrideFile
+0x4470CB: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4470D0: mov     ecx, [edi+8C4h]
 0x4470D6: cmp     eax, ecx
 0x4470D8: jnz     short loc_4470E3

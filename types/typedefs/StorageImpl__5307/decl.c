@@ -1,1 +1,32 @@
-StorageImpl
+struct StorageImpl
+{
+StorageBaseImpl base;
+WORD bigBlockSizeBits;
+WORD smallBlockSizeBits;
+ULONG bigBlockSize;
+ULONG smallBlockSize;
+ULONG bigBlockDepotCount;
+ULONG rootStartBlock;
+ULONG smallBlockLimit;
+ULONG smallBlockDepotStart;
+ULONG extBigBlockDepotStart;
+ULONG *extBigBlockDepotLocations;
+ULONG extBigBlockDepotLocationsSize;
+ULONG extBigBlockDepotCount;
+ULONG bigBlockDepotStart[109];
+ULONG transactionSig;
+ULONG extBlockDepotCached[1024];
+ULONG indexExtBlockDepotCached;
+ULONG blockDepotCached[1024];
+ULONG indexBlockDepotCached;
+ULONG prevFreeBlock;
+ULONG firstFreeSmallBlock;
+BlockChainStream_0 *rootBlockChain;
+BlockChainStream_0 *smallBlockDepotChain;
+BlockChainStream_0 *smallBlockRootChain;
+BlockChainStream_0 *blockChainCache[4];
+UINT blockChainToEvict;
+ULONG locks_supported;
+ILockBytes_0 *lockBytes;
+ULONG locked_bytes[8];
+};

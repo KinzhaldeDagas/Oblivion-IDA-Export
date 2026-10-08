@@ -82,9 +82,9 @@
 0x64DC10: test    ecx, ecx
 0x64DC12: jz      short loc_64DC25
 0x64DC14: call    sub_68A160
-0x64DC19: push    eax
-0x64DC1A: mov     ecx, edi
-0x64DC1C: call    sub_4D7E30
+0x64DC19: push    eax; pointXYZ
+0x64DC1A: mov     ecx, edi; this
+0x64DC1C: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x64DC21: fstp    [esp+24h+arg_0]
 0x64DC25: push    2
 0x64DC27: push    edi
@@ -166,7 +166,7 @@
 0x64DD23: call    TESObjectREFR_GetWorldSpace
 0x64DD28: mov     ecx, [esi+2Ch]; this
 0x64DD2B: push    eax
-0x64DD2C: call    TESObjectREFR_GetParentCell
+0x64DD2C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64DD31: mov     ecx, [ebp+0]
 0x64DD34: mov     edx, [ebp+4]
 0x64DD37: push    eax
@@ -196,9 +196,9 @@
 0x64DD86: cmp     byte ptr [esi+0D0h], 0
 0x64DD8D: jnz     loc_64DED3
 0x64DD93: push    3Ah ; ':'; a1
-0x64DD95: call    TESForm_LookupByFormID
+0x64DD95: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x64DD9A: add     esp, 4
-0x64DD9D: mov     ecx, offset TimeGlobals
+0x64DD9D: mov     ecx, 0B332E0h
 0x64DDA2: mov     ebp, eax
 0x64DDA4: call    TimeGlobals_GetGameHour
 0x64DDA9: fstp    [esp+24h+arg_4]
@@ -240,7 +240,7 @@
 0x64DE29: call    TESObjectREFR_GetWorldSpace
 0x64DE2E: mov     ecx, [esi+2Ch]; this
 0x64DE31: push    eax
-0x64DE32: call    TESObjectREFR_GetParentCell
+0x64DE32: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64DE37: mov     edx, [ebp+0]
 0x64DE3A: push    eax
 0x64DE3B: mov     eax, [edx+174h]
@@ -261,8 +261,8 @@
 0x64DE68: push    edi
 0x64DE69: mov     ecx, esi
 0x64DE6B: call    edx
-0x64DE6D: mov     ecx, ebx
-0x64DE6F: call    sub_5660A0
+0x64DE6D: mov     ecx, ebx; self
+0x64DE6F: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x64DE74: test    al, al
 0x64DE76: jz      short loc_64DEBD
 0x64DE78: cmp     [esi+0C0h], ebp

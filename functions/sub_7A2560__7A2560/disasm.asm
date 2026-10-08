@@ -1,4 +1,4 @@
-0x7A2560: mov     ecx, [esp+arg_0]
+0x7A2560: mov     ecx, [esp+arg_0]; Oblivion leaf-texture vector allocator: rejects count*0x54 overflow, then allocates exactly count 0x54-byte records through FormHeap.
 0x7A2564: sub     esp, 0Ch
 0x7A2567: test    ecx, ecx
 0x7A2569: ja      short loc_7A257D

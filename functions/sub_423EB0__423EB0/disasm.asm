@@ -9,7 +9,7 @@
 0x423EC3: test    edi, edi
 0x423EC5: jz      short loc_423ED5
 0x423EC7: mov     ecx, esi
-0x423EC9: call    sub_41EB90
+0x423EC9: call    ExtraDataList_GetOrCreateAction; Returns existing ExtraAction type 0x13, or creates one with default action flag byte 1 and null action reference.
 0x423ECE: test    eax, eax
 0x423ED0: jz      short loc_423ED5
 0x423ED2: mov     [eax+10h], edi

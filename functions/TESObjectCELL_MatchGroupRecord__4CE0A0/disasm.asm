@@ -13,12 +13,12 @@
 0x4CE0C4: xor     ecx, ecx
 0x4CE0C6: and     al, 1
 0x4CE0C8: jnz     short loc_4CE0CD
-0x4CE0CA: mov     ecx, [esi+50h]
+0x4CE0CA: mov     ecx, [esi+50h]; this
 0x4CE0CD: mov     edx, [edi+0Ch]
 0x4CE0D0: cmp     edx, 5; switch 6 cases
 0x4CE0D3: ja      TESObjectCELL_MatchGroupRecord___def_4CE0D9
 0x4CE0D9: jmp     ds:jpt_4CE0D9[edx*4]; switch jump
-0x4CE0E0: mov     edx, dword ptr [esp+0Ch+matchAllLevels]; jumptable 004CE0D9 case 0
+0x4CE0E0: mov     edx, [esp+0Ch+matchAllLevels]; jumptable 004CE0D9 case 0
 0x4CE0E4: test    dl, dl
 0x4CE0E6: jz      TESObjectCELL_MatchGroupRecord___def_4CE0D9
 0x4CE0EC: test    al, al
@@ -49,11 +49,11 @@
 0x4CE11F: test    al, al; jumptable 004CE0D9 case 1
 0x4CE121: jnz     short TESObjectCELL_MatchGroupRecord___def_4CE0D9
 0x4CE123: mov     eax, [edi+8]
-0x4CE126: push    eax
-0x4CE127: call    sub_46AF50
+0x4CE126: push    eax; candidate_form_id
+0x4CE127: call    TESForm_FormIDMatchesObjectID24; Compares only the low 24-bit object-ID portions of this form's FormID and a serialized group label; load-order/master byte is intentionally ignored.
 0x4CE12C: test    al, al
 0x4CE12E: jz      short TESObjectCELL_MatchGroupRecord___def_4CE0D9
-0x4CE130: cmp     [esp+0Ch+matchAllLevels], 0
+0x4CE130: cmp     byte ptr [esp+0Ch+matchAllLevels], 0
 0x4CE135: jnz     short loc_4CE178
 0x4CE137: test    dword ptr [esi+8], 400h
 0x4CE13E: jz      short TESObjectCELL_MatchGroupRecord___def_4CE0D9
@@ -65,15 +65,15 @@
 0x4CE147: retn    0Ch
 0x4CE14A: test    dword ptr [esi+8], 400h; jumptable 004CE0D9 cases 2,4
 0x4CE151: jnz     short TESObjectCELL_MatchGroupRecord___def_4CE0D9
-0x4CE153: cmp     [esp+0Ch+matchAllLevels], 0
+0x4CE153: cmp     byte ptr [esp+0Ch+matchAllLevels], 0
 0x4CE158: jz      short TESObjectCELL_MatchGroupRecord___def_4CE0D9
 0x4CE15A: mov     ecx, esi
 0x4CE15C: call    sub_4CA5F0
 0x4CE161: jmp     short loc_4CE173
 0x4CE163: test    dword ptr [esi+8], 400h; jumptable 004CE0D9 cases 3,5
 0x4CE16A: jnz     short TESObjectCELL_MatchGroupRecord___def_4CE0D9
-0x4CE16C: mov     ecx, esi
-0x4CE16E: call    sub_4CA640
+0x4CE16C: mov     ecx, esi; this
+0x4CE16E: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4CE173: cmp     [edi+8], eax
 0x4CE176: jnz     short TESObjectCELL_MatchGroupRecord___def_4CE0D9
 0x4CE178: mov     bl, 1

@@ -43,9 +43,9 @@
 0x66CCCD: call    edx
 0x66CCCF: cmp     eax, 6
 0x66CCD2: jnz     short loc_66CCDC
-0x66CCD4: push    ebp; float
-0x66CCD5: mov     ecx, esi
-0x66CCD7: call    sub_5F4AE0
+0x66CCD4: push    ebp; shouldBlock
+0x66CCD5: mov     ecx, esi; this
+0x66CCD7: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x66CCDC: mov     ecx, [esi+58h]
 0x66CCDF: mov     eax, [ecx]
 0x66CCE1: mov     edx, [eax+178h]
@@ -55,14 +55,14 @@
 0x66CCED: mov     eax, [ecx]
 0x66CCEF: mov     edx, [eax+49Ch]
 0x66CCF5: call    edx
-0x66CCF7: mov     ecx, esi
-0x66CCF9: call    sub_5E0380
+0x66CCF7: mov     ecx, esi; this
+0x66CCF9: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x66CCFE: test    eax, eax
 0x66CD00: jz      short loc_66CD20
-0x66CD02: mov     ecx, esi
-0x66CD04: call    sub_5E0380
-0x66CD09: mov     ecx, eax
-0x66CD0B: call    sub_567770
+0x66CD02: mov     ecx, esi; this
+0x66CD04: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x66CD09: mov     ecx, eax; this
+0x66CD0B: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x66CD10: test    al, al
 0x66CD12: jz      short loc_66CD20
 0x66CD14: mov     eax, [esi]
@@ -106,13 +106,13 @@
 0x66CD8A: call    TESPackage_LocationData_SetReference
 0x66CD8F: push    ebp
 0x66CD90: mov     ecx, edi
-0x66CD92: call    TESPackage_SetLocation
+0x66CD92: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x66CD97: test    ebp, ebp
 0x66CD99: jz      short loc_66CDAB
 0x66CD9B: mov     ecx, ebp
 0x66CD9D: call    TESPackage_LocationData_destr
 0x66CDA2: push    ebp
-0x66CDA3: call    FormHeapFree
+0x66CDA3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66CDA8: add     esp, 4
 0x66CDAB: push    0Ch; Size
 0x66CDAD: call    FormHeapAlloc
@@ -122,29 +122,29 @@
 0x66CDBB: mov     [esp+24h+var_4], 2
 0x66CDC3: jz      short loc_66CDD0
 0x66CDC5: mov     ecx, eax
-0x66CDC7: call    TESPackage_TargetData_constr
+0x66CDC7: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x66CDCC: mov     ebp, eax
 0x66CDCE: jmp     short loc_66CDD2
 0x66CDD0: xor     ebp, ebp
 0x66CDD2: push    ebp
 0x66CDD3: mov     ecx, edi
 0x66CDD5: mov     [esp+28h+var_4], ebx
-0x66CDD9: call    TESPackage_SetTarget
+0x66CDD9: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x66CDDE: test    ebp, ebp
 0x66CDE0: jz      short loc_66CDF2
-0x66CDE2: mov     ecx, ebp; void *
-0x66CDE4: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x66CDE2: mov     ecx, ebp; this
+0x66CDE4: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x66CDE9: push    ebp
-0x66CDEA: call    FormHeapFree
+0x66CDEA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66CDEF: add     esp, 4
 0x66CDF2: mov     ecx, [edi+28h]
 0x66CDF5: push    0
 0x66CDF7: mov     dword ptr [edi+18h], 1Fh
-0x66CDFE: call    TESPackage_TargetData_SetType
+0x66CDFE: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x66CE03: mov     ebx, [esp+24h+arg_0]
 0x66CE07: mov     ecx, [edi+28h]
 0x66CE0A: push    ebx
-0x66CE0B: call    TeSPackage_TargetData_SetTargetREFR
+0x66CE0B: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x66CE10: mov     ecx, [edi+28h]
 0x66CE13: push    0
 0x66CE15: call    TESAIForm_SetServiceFlags
@@ -191,7 +191,7 @@
 0x66CE87: push    0; a3
 0x66CE89: push    edi; a2
 0x66CE8A: mov     ecx, esi; this
-0x66CE8C: call    Actor_AddPackage?
+0x66CE8C: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x66CE91: mov     ecx, ebx; this
 0x66CE93: call    sub_5F8000
 0x66CE98: mov     ecx, [esp+24h+var_C]
@@ -203,3 +203,25 @@
 0x66CEA7: pop     ebx
 0x66CEA8: add     esp, 10h
 0x66CEAB: retn    10h
+0x9AD040: mov     eax, [ebp-10h]
+0x9AD043: push    eax
+0x9AD044: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD049: pop     ecx
+0x9AD04A: retn
+0x9AD04B: mov     eax, [ebp-10h]
+0x9AD04E: push    eax
+0x9AD04F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD054: pop     ecx
+0x9AD055: retn
+0x9AD056: mov     eax, [ebp-10h]
+0x9AD059: push    eax
+0x9AD05A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD05F: pop     ecx
+0x9AD060: retn
+0x9AD061: mov     edx, [esp+arg_4]
+0x9AD065: lea     eax, [edx-14h]
+0x9AD068: mov     ecx, [edx-18h]
+0x9AD06B: xor     ecx, eax
+0x9AD06D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD072: mov     eax, offset stru_AD9C7C
+0x9AD077: jmp     ___CxxFrameHandler3

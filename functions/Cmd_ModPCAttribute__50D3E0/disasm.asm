@@ -20,7 +20,7 @@
 0x50D416: push    eax; a3
 0x50D417: push    ecx; a2
 0x50D418: push    edx; a1
-0x50D419: call    Script_ExtractArgs
+0x50D419: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50D41E: add     esp, 24h
 0x50D421: test    al, al
 0x50D423: jnz     short loc_50D429
@@ -38,7 +38,7 @@
 0x50D446: mov     ecx, ds:0B333C4h
 0x50D44C: push    eax
 0x50D44D: push    edx
-0x50D44E: call    Player_Actor_SetAViBase
+0x50D44E: call    Player_Actor_SetAViBase; Player integer base-AV setter. Write the actor-base value, refresh UI, and call Player_OnActorValueBaseChanged with rebuild=true. For skills this rebuilds all requiredSkillExp entries but bypasses normal advancement counters.
 0x50D453: mov     al, 1
 0x50D455: add     esp, 8
 0x50D458: retn

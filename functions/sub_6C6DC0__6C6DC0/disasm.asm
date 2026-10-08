@@ -1,4 +1,4 @@
-0x6C6DC0: push    ecx
+0x6C6DC0: push    ecx; Propagates a sequence update across its 0x10-byte controlled-block records. For each bound interpolator/controller it writes sample time, effective sequence weight, and transition weight into the selected blend item, invalidates cached times, and marks the blend data dirty. This consumes already-selected sequence timing; it does not select animation paths or map entries.
 0x6C6DC1: push    ebp
 0x6C6DC2: push    edi
 0x6C6DC3: xor     ebp, ebp

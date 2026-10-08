@@ -106,10 +106,10 @@
 0x6DC5B6: lea     ecx, ds:0[ebp*4]
 0x6DC5BD: mov     [esi+20h], eax
 0x6DC5C0: mov     edx, [edi+20h]
-0x6DC5C3: push    ecx; Size
-0x6DC5C4: push    edx; Src
-0x6DC5C5: push    eax; Dst
-0x6DC5C6: call    _memcpy
+0x6DC5C3: push    ecx; byteCount
+0x6DC5C4: push    edx; source
+0x6DC5C5: push    eax; destination
+0x6DC5C6: call    _memcpy;
 0x6DC5CB: add     esp, 10h
 0x6DC5CE: pop     ebp
 0x6DC5CF: fld     dword ptr [edi+24h]

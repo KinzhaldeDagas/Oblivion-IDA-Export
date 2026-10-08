@@ -1,1 +1,8 @@
-ICONEFFECT
+enum ICONEFFECT : __int32
+{
+ICE_NONE = 0x0,
+ICE_GLOW = 0x1,
+ICE_SHADOW = 0x2,
+ICE_PULSE = 0x3,
+ICE_ALPHA = 0x4,
+};

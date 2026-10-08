@@ -1,4 +1,4 @@
-0x6948B0: push    ecx
+0x6948B0: push    ecx; Tear down a LightEffect transient point light by backing-light identity: remove its full-list ShadowSceneLight, detach it from the actor scene graph, clear actor extra-data type 0x49, release the LightEffect smart pointer, and decrement the active magic-light count.
 0x6948B1: push    ebx
 0x6948B2: mov     ebx, ecx
 0x6948B4: mov     ecx, [ebx+20h]; this
@@ -17,9 +17,9 @@
 0x6948DB: test    eax, eax
 0x6948DD: jz      short loc_6948EA
 0x6948DF: mov     ecx, [ebx+38h]
-0x6948E2: push    ecx
-0x6948E3: mov     ecx, eax
-0x6948E5: call    sub_7C7DC0
+0x6948E2: push    ecx; backingLight
+0x6948E3: mov     ecx, eax; self
+0x6948E5: call    ShadowSceneNode_RemoveFullLightBySource; Remove the native full-list ShadowSceneLight whose backing-light identity is this LightEffect's transient NiPointLight.
 0x6948EA: test    edi, edi
 0x6948EC: push    ebp
 0x6948ED: mov     ebp, ds:0A2807Ch
@@ -38,8 +38,8 @@
 0x694912: lea     ecx, [esp+18h+var_4]
 0x694916: push    ecx
 0x694917: mov     ecx, eax
-0x694919: call    edx
-0x69491B: mov     eax, dword ptr [esp+14h+var_4]
+0x694919: call    edx; Find the transient point-light child in the parent actor's scene graph so the native teardown path can detach/release that child.
+0x69491B: mov     eax, [esp+14h+var_4]
 0x69491F: test    eax, eax
 0x694921: jz      short loc_69493D
 0x694923: mov     esi, eax
@@ -55,9 +55,9 @@
 0x694937: push    1
 0x694939: mov     ecx, esi
 0x69493B: call    edx
-0x69493D: push    1
-0x69493F: mov     ecx, edi
-0x694941: call    sub_4D8190
+0x69493D: push    1; useSpellEffectExtraLight
+0x69493F: mov     ecx, edi; self
+0x694941: call    TESObjectREFR_UnregisterAndClearAttachedLight; Clear the parent actor's spell-effect light extra-data type 0x49; this call selects useSpellEffectExtraLight=true.
 0x694946: mov     esi, [ebx+38h]
 0x694949: xor     edi, edi
 0x69494B: cmp     esi, edi
@@ -75,7 +75,7 @@
 0x694963: mov     ecx, esi
 0x694965: call    eax
 0x694967: mov     [ebx+38h], edi
-0x69496A: sub     dword ptr ds:0B3C0B4h, 1
+0x69496A: sub     dword ptr ds:0B3C0B4h, 1; Decrement and clamp the native active transient magic-light count.
 0x694971: pop     esi
 0x694972: pop     ebp
 0x694973: jns     short loc_69497B

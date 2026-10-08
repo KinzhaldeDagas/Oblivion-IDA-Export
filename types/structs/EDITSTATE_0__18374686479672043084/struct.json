@@ -1,274 +1,423 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "EDITSTATE_0",
+  "definition": "struct EDITSTATE_0\n{\nBOOL is_unicode;\nLPWSTR text;\nUINT text_length;\nUINT buffer_size;\nUINT buffer_limit;\nHFONT font;\nINT x_offset;\nINT line_height;\nINT char_width;\nDWORD style;\nWORD flags;\nINT undo_insert_count;\nUINT undo_position;\nLPWSTR undo_text;\nUINT undo_buffer_size;\nINT selection_start;\nINT selection_end;\nWCHAR_0 password_char;\nINT left_margin;\nINT right_margin;\nRECT format_rect;\nINT text_width;\nINT region_posx;\nINT region_posy;\nvoid *word_break_proc;\nINT line_count;\nINT y_offset;\nBOOL bCaptureState;\nBOOL bEnableState;\nHWND hwndSelf;\nHWND hwndParent;\nHWND hwndListBox;\nINT wheelDeltaRemainder;\nINT lock_count;\nINT tabs_count;\nLPINT tabs;\nLINEDEF *first_line_def;\nHLOCAL hloc32W;\nHLOCAL hloc32A;\nHLOCAL hlocapp;\nUINT composition_len;\nint composition_start;\nSCRIPT_LOGATTR *logAttr;\nSCRIPT_STRING_ANALYSIS ssa;\n}\n",
   "id": 18374686479672043084,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_unicode",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "text",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "text_length",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buffer_size",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buffer_limit",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "font",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "x_offset",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "line_height",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "char_width",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "style",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "undo_insert_count",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "undo_position",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "undo_text",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "undo_buffer_size",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "selection_start",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "selection_end",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "password_char",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 2
+      "size": 2,
+      "type": "WCHAR_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "left_margin",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "right_margin",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "format_rect",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "text_width",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "region_posx",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "region_posy",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "word_break_proc",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "line_count",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "y_offset",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bCaptureState",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bEnableState",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndSelf",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndParent",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndListBox",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wheelDeltaRemainder",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lock_count",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tabs_count",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tabs",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "LPINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "first_line_def",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "LINEDEF *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hloc32W",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "HLOCAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hloc32A",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "HLOCAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hlocapp",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "HLOCAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "composition_len",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "composition_start",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "logAttr",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "SCRIPT_LOGATTR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ssa",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "SCRIPT_STRING_ANALYSIS"
     }
   ],
   "name": "EDITSTATE_0",
+  "ordinal": 7383,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 188
 }

@@ -1,1 +1,1 @@
-NiDitherProperty
+struct NiDitherProperty;

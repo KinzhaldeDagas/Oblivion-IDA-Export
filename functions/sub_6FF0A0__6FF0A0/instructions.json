@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x6FF0D5",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6FF163",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3; other",
     "mnemonic": "push",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x6FF16C",
-    "line": "lea     ecx, [esp+4Ch+var_18]",
+    "line": "lea     ecx, [esp+4Ch+var_18]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x6FF173",
-    "line": "fstp    [esp+4Ch+var_18]",
+    "line": "fstp    [esp+4Ch+var_18.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x6FF17E",
-    "line": "fstp    [esp+4Ch+var_14]",
+    "line": "fstp    [esp+4Ch+var_18.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x6FF189",
-    "line": "fstp    [esp+4Ch+var_10]",
+    "line": "fstp    [esp+4Ch+var_18.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x6FF198",
-    "line": "fld     [esp+4Ch+var_18]",
+    "line": "fld     [esp+4Ch+var_18.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6FF1A2",
-    "line": "fld     [esp+4Ch+var_14]",
+    "line": "fld     [esp+4Ch+var_18.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x6FF1AC",
-    "line": "fmul    [esp+4Ch+var_10]",
+    "line": "fmul    [esp+4Ch+var_18.z]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x6FF1E3",
-    "line": "fstp    [esp+4Ch+var_18]",
+    "line": "fstp    [esp+4Ch+var_18.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x6FF1EE",
-    "line": "fstp    [esp+4Ch+var_14]",
+    "line": "fstp    [esp+4Ch+var_18.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -607,13 +607,13 @@
   },
   {
     "ea": "0x6FF1F9",
-    "line": "fstp    [esp+4Ch+var_10]",
+    "line": "fstp    [esp+4Ch+var_18.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6FF1FD",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x6FF211",
-    "line": "fld     [esp+48h+var_18]",
+    "line": "fld     [esp+48h+var_18.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6FF215",
-    "line": "fld     [esp+48h+var_14]",
+    "line": "fld     [esp+48h+var_18.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6FF219",
-    "line": "fld     [esp+48h+var_10]",
+    "line": "fld     [esp+48h+var_18.z]",
     "mnemonic": "fld",
     "size": 4
   },

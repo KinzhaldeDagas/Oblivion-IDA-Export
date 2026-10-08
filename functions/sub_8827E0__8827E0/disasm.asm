@@ -1,13 +1,13 @@
-0x8827E0: mov     eax, [esp+arg_4]
+0x8827E0: mov     eax, [esp+cloneProcess]
 0x8827E4: push    ebx
-0x8827E5: mov     ebx, [esp+4+arg_0]
+0x8827E5: mov     ebx, [esp+4+clone]
 0x8827E9: push    ebp
 0x8827EA: push    esi
 0x8827EB: push    edi
-0x8827EC: push    eax
-0x8827ED: push    ebx
+0x8827EC: push    eax; cloneProcess
+0x8827ED: push    ebx; clone
 0x8827EE: mov     esi, ecx
-0x8827F0: call    sub_7D7AD0
+0x8827F0: call    BSShaderPPLightingProperty_CopyCloneMembers; [Verified] BSShaderPPLightingProperty clone-field copier. Calls BSShaderProperty_CopyCloneMembers, resizes/copies the three NiPointer arrays and scalar fields in the PP-lighting extension, and retains refcounted members. It does not copy the inherited BSShaderLightingProperty decal list at +0x80.
 0x8827F5: mov     edi, [ebx+168h]
 0x8827FB: cmp     edi, [esi+168h]
 0x882801: mov     ebp, ds:0A2807Ch

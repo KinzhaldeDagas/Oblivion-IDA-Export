@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x4D77D0",
+      "0x4D7811"
+    ]
+  ],
+  "chunks_sha256": "80c35ce0502da09fa9b5dc70e4fe9b17104c63b0b27d33889a1988155909fdcf",
+  "comment_regular": "Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
+  "comment_repeatable": "Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D77D0",
+  "display_name": "TESObjectREFR_FindLockExtraOnLinkedDoorChain",
   "end_ea": "0x4D7811",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D77D0",
+  "name": "TESObjectREFR_FindLockExtraOnLinkedDoorChain",
   "segment": ".text",
   "sha256": "80c35ce0502da09fa9b5dc70e4fe9b17104c63b0b27d33889a1988155909fdcf",
   "size": 65,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D77D0",
-  "type": "BSExtraData *__fastcall(BSExtraDataVtbl *)",
+  "total_chunk_size": 65,
+  "type": "ExtraLock *__fastcall(TESObjectREFR *doorReference)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 9
 }

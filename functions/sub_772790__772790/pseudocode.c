@@ -1,20 +1,24 @@
-int __thiscall sub_772790(_DWORD *this, int a2)
+//
+// Verified 2026-10-01: unlink existing entry from saved list, update neighbor next/previous and group head+10/count+C, clear both links in removed node. No allocation, release or free occurs.
+OblivionRenderStateEntry *__thiscall NiD3DRenderStateGroup_RemoveSavedEntry(
+        OblivionRenderStateGroupPrefix *this,
+        OblivionRenderStateEntry *entry)
 {
-  int result; // eax
-  int v3; // edx
-  int v4; // esi
+  OblivionRenderStateEntry *result; // eax
+  OblivionRenderStateEntry *Next08; // edx
+  OblivionRenderStateEntry *Previous0C; // esi
 
-  result = a2;
-  v3 = *(_DWORD *)(a2 + 8);
-  v4 = *(_DWORD *)(a2 + 0xC);
-  if ( v3 )
-    *(_DWORD *)(v3 + 0xC) = v4;
-  if ( v4 )
-    *(_DWORD *)(v4 + 8) = v3;
-  if ( a2 == *(this + 4) )
-    *(this + 4) = v3;
-  --*(this + 3);
-  *(_DWORD *)(a2 + 8) = 0;
-  *(_DWORD *)(a2 + 0xC) = 0;
-  return result;
+  result = entry; /*0x772790*/
+  Next08 = entry->Next08; /*0x772794*/
+  Previous0C = entry->Previous0C; /*0x77279a*/
+  if ( Next08 ) /*0x77279d*/
+    Next08->Previous0C = Previous0C; /*0x77279f*/
+  if ( Previous0C ) /*0x7727a4*/
+    Previous0C->Next08 = Next08; /*0x7727a6*/
+  if ( entry == this->SavedHead10 ) /*0x7727ad*/
+    this->SavedHead10 = Next08; /*0x7727af*/
+  --this->SavedCount0C; /*0x7727b2*/
+  entry->Next08 = 0; /*0x7727b6*/
+  entry->Previous0C = 0; /*0x7727bd*/
+  return result; /*0x7727ac*/
 }

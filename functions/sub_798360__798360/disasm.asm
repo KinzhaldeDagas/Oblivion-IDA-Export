@@ -1,20 +1,20 @@
-0x798360: xor     edx, edx
+0x798360: xor     edx, edx; Oblivion CLeafGeometry::Transform. Applies the 4x4 stTransform to every LOD's leaf centers (including the preserved CPU-wind source centers) and transforms the per-card orientation vectors.
 0x798362: sub     esp, 34h
 0x798365: cmp     [ecx+2Ch], edx
 0x798368: jz      loc_798546
 0x79836E: cmp     [ecx+20h], edx
 0x798371: jz      loc_798546
 0x798377: cmp     [ecx+28h], dx
-0x79837B: mov     eax, [esp+34h+arg_0]
+0x79837B: mov     eax, [esp+34h+transform4x4]
 0x79837F: push    esi
 0x798380: mov     [esp+38h+var_34], edx
 0x798384: jbe     loc_798505
 0x79838A: push    ebx
 0x79838B: push    ebp
-0x79838C: mov     [esp+40h+arg_0], edx
+0x79838C: mov     [esp+40h+transform4x4], edx
 0x798390: push    edi
 0x798391: mov     esi, [ecx+2Ch]
-0x798394: add     esi, [esp+44h+arg_0]
+0x798394: add     esi, [esp+44h+transform4x4]
 0x798398: xor     ebx, ebx
 0x79839A: cmp     [esi+0Ch], bx
 0x79839E: jbe     loc_7984E6
@@ -133,7 +133,7 @@
 0x7984E0: jl      loc_7983A6
 0x7984E6: mov     edx, [esp+44h+var_34]
 0x7984EA: movzx   esi, word ptr [ecx+28h]
-0x7984EE: add     [esp+44h+arg_0], 44h ; 'D'
+0x7984EE: add     [esp+44h+transform4x4], 44h ; 'D'
 0x7984F3: add     edx, 1
 0x7984F6: cmp     edx, esi
 0x7984F8: mov     [esp+44h+var_34], edx
@@ -144,9 +144,9 @@
 0x798505: fld     dword ptr [eax]
 0x798507: xor     edx, edx
 0x798509: cmp     [ecx+1Ch], dx
-0x79850D: fstp    [esp+38h+arg_0]
+0x79850D: fstp    [esp+38h+transform4x4]
 0x798511: jbe     short loc_798545
-0x798513: fld     [esp+38h+arg_0]
+0x798513: fld     [esp+38h+transform4x4]
 0x798517: xor     esi, esi
 0x798519: mov     eax, [ecx+20h]
 0x79851C: fld     dword ptr [eax+esi]

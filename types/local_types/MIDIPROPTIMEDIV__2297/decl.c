@@ -1,1 +1,1 @@
-MIDIPROPTIMEDIV
+typedef midiproptimediv_tag MIDIPROPTIMEDIV;

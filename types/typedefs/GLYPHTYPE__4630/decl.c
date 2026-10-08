@@ -1,1 +1,6 @@
-GLYPHTYPE
+enum GLYPHTYPE : __int32
+{
+GT_NONE = 0x0,
+GT_IMAGEGLYPH = 0x1,
+GT_FONTGLYPH = 0x2,
+};

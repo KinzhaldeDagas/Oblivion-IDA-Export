@@ -1,1 +1,1 @@
-hkTypedBroadPhaseDispatcher
+struct hkTypedBroadPhaseDispatcher;

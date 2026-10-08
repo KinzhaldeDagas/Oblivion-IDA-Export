@@ -4,6 +4,6 @@ int __usercall MagicTarget_AddEffect_::DestroyClone_Return_0@<eax>(
         int a3,
         int a4)
 {
-  (**a1)(a1, 1);
+  (**a1)(a1, 1); /*0x6a2cb8*/
   return MagicTarget_AddEffect_::Return_0(a2, a3, a4);
 }

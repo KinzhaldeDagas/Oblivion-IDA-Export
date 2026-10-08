@@ -1,5 +1,5 @@
-0xA16640: push    esi
-0xA16641: mov     esi, dword_B333E4
+0xA16640: push    esi; Fog decode: secondary release edge for B333E4. Lifetime management only, not a fog payload writer.
+0xA16641: mov     esi, dword ptr unk_B333E4
 0xA16647: test    esi, esi
 0xA16649: jz      short loc_A16667
 0xA1664B: lea     eax, [esi+4]

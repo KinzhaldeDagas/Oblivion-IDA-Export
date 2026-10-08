@@ -1,1 +1,1 @@
-snapshot_0
+typedef snapshot snapshot_0;

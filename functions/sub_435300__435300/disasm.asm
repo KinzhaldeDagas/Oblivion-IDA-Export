@@ -4,7 +4,7 @@
 0x435305: push    edi
 0x435306: mov     esi, ecx
 0x435308: push    offset aQueuedheadRun; lpCriticalSection
-0x43530D: mov     ecx, offset stru_B39C80
+0x43530D: mov     ecx, offset unk_B39C80
 0x435312: call    NiEnterCriticalSection
 0x435317: lea     eax, [esp+14h+var_4]
 0x43531B: push    eax
@@ -64,7 +64,7 @@
 0x4353AB: add     ebx, 4
 0x4353AE: push    ebx; lpAddend
 0x4353AF: call    ds:InterlockedIncrement
-0x4353B5: mov     ecx, offset stru_B39C80; lpCriticalSection
+0x4353B5: mov     ecx, offset unk_B39C80; lpCriticalSection
 0x4353BA: call    NiLeaveCriticalSection_0
 0x4353BF: pop     edi
 0x4353C0: pop     esi

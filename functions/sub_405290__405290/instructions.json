@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x405297",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4052A0",
-    "line": "fld     flt_B33E9C",
+    "line": "fld     dword ptr ds:0B33E9Ch",
     "mnemonic": "fld",
     "size": 6
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4052B1",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x4052CE",
-    "line": "mov     eax, Seed",
+    "line": "mov     eax, ds:0B33EA0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4052D3",
-    "line": "fild    Seed",
+    "line": "fild    dword ptr ds:0B33EA0h",
     "mnemonic": "fild",
     "size": 6
   },

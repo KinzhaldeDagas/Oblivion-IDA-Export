@@ -53,12 +53,11 @@
 0x4EB4B3: fadd    st, st
 0x4EB4B5: fstp    [ebp+arg_28]
 0x4EB4B8: jmp     short loc_4EB4C3
-0x4EB4BA: align 10h
 0x4EB4C0: mov     edi, [ebp+arg_0]
 0x4EB4C3: push    0
 0x4EB4C5: push    esi
 0x4EB4C6: mov     ecx, edi
-0x4EB4C8: call    sub_441800
+0x4EB4C8: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x4EB4CD: mov     edi, eax
 0x4EB4CF: test    edi, edi
 0x4EB4D1: jz      loc_4EBA99
@@ -116,7 +115,6 @@
 0x4EB5A4: add     eax, ebx
 0x4EB5A6: mov     [esp+0C8h+var_74], eax
 0x4EB5AA: jmp     short loc_4EB5B4
-0x4EB5AC: align 10h
 0x4EB5B0: mov     eax, [esp+0C8h+var_74]
 0x4EB5B4: mov     ecx, [esp+0C8h+var_98]
 0x4EB5B8: add     eax, ecx
@@ -499,7 +497,7 @@
 0x4EBAA3: mov     eax, [esp+0C8h+var_58]
 0x4EBAA7: mov     edi, [eax+4]
 0x4EBAAA: push    eax
-0x4EBAAB: call    FormHeapFree
+0x4EBAAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EBAB0: add     esp, 4
 0x4EBAB3: test    edi, edi
 0x4EBAB5: mov     [esp+0C8h+var_58], edi

@@ -3,8 +3,8 @@ void *__usercall _alloca_probe_::cs10@<eax>(unsigned int a1@<eax>, unsigned int 
 {
   _UNKNOWN *retaddr; // [esp+0h] [ebp+0h]
 
-  if ( a2 < a1 )
-    return (void *)_alloca_probe_::cs20();
+  if ( a2 < a1 ) /*0x983bf6*/
+    return _alloca_probe_::cs20(a1, a2); /*0x983bf6*/
   else
-    return retaddr;
+    return retaddr; /*0x983bfc*/
 }

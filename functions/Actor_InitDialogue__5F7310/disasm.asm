@@ -55,8 +55,8 @@
 0x5F73C6: call    eax
 0x5F73C8: test    eax, eax
 0x5F73CA: jz      loc_5F78BB
-0x5F73D0: mov     ecx, esi
-0x5F73D2: call    sub_5EF930
+0x5F73D0: mov     ecx, esi; this
+0x5F73D2: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x5F73D7: fldz
 0x5F73D9: mov     ecx, ds:0B333C4h
 0x5F73DF: fstp    [esp+244h+var_224]
@@ -116,7 +116,7 @@
 0x5F74AB: mov     ecx, [esp+244h+var_218.m_data]
 0x5F74AF: push    ecx
 0x5F74B0: push    esi
-0x5F74B1: mov     ecx, offset unk_B3BD7C
+0x5F74B1: mov     ecx, (offset qword_B3BB2C+250h)
 0x5F74B6: call    sub_642A70
 0x5F74BB: lea     ecx, [esp+244h+var_218]; void *
 0x5F74BF: mov     [esp+244h+var_4], 0FFFFFFFFh
@@ -403,7 +403,7 @@
 0x5F787A: mov     ecx, ebp
 0x5F787C: call    sub_493B70
 0x5F7881: push    ebp
-0x5F7882: call    FormHeapFree
+0x5F7882: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F7887: mov     ecx, [esi+58h]
 0x5F788A: mov     eax, [ecx]
 0x5F788C: mov     edx, [eax+264h]
@@ -417,13 +417,13 @@
 0x5F78A6: call    edx
 0x5F78A8: mov     eax, [esp+244h+var_218.m_data]
 0x5F78AC: push    eax
-0x5F78AD: call    FormHeapFree
+0x5F78AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F78B2: fld     [esp+248h+var_228]
 0x5F78B6: add     esp, 4
 0x5F78B9: jmp     short loc_5F78CA
 0x5F78BB: mov     ecx, [esp+244h+var_218.m_data]
 0x5F78BF: push    ecx
-0x5F78C0: call    FormHeapFree
+0x5F78C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F78C5: add     esp, 4
 0x5F78C8: fldz
 0x5F78CA: mov     ecx, [esp+244h+var_C]
@@ -438,3 +438,21 @@
 0x5F78E6: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5F78EB: add     esp, 230h
 0x5F78F1: retn    24h ; '$'
+0x9C29B0: lea     ecx, [ebp-218h]; void *
+0x9C29B6: jmp     BSStringT_Clear
+0x9C29BB: mov     eax, [ebp-224h]
+0x9C29C1: push    eax
+0x9C29C2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C29C7: pop     ecx
+0x9C29C8: retn
+0x9C29C9: mov     edx, [esp+arg_4]
+0x9C29CD: lea     eax, [edx-234h]
+0x9C29D3: mov     ecx, [edx-238h]
+0x9C29D9: xor     ecx, eax
+0x9C29DB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C29E0: add     eax, 10h
+0x9C29E3: mov     ecx, [edx-4]
+0x9C29E6: xor     ecx, eax
+0x9C29E8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C29ED: mov     eax, offset stru_AEB78C
+0x9C29F2: jmp     ___CxxFrameHandler3

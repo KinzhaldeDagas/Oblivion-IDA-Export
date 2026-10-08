@@ -15,14 +15,14 @@
 0x5BCF4B: mov     ecx, ds:0B333C4h
 0x5BCF51: call    Player_GetActorBarterFactor?
 0x5BCF56: fmul    qword ptr ds:0A309F0h
-0x5BCF5C: call    Double_To_SInt32
+0x5BCF5C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BCF61: mov     edx, [esi+50h]
 0x5BCF64: mov     ecx, ds:0B333C4h; this
 0x5BCF6A: push    edx; targetNpc
 0x5BCF6B: mov     ebx, eax
 0x5BCF6D: call    calculateItemMultiplicationFromDisposition
 0x5BCF72: fmul    qword ptr ds:0A309F0h
-0x5BCF78: call    Double_To_SInt32
+0x5BCF78: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BCF7D: mov     edi, eax
 0x5BCF7F: mov     eax, ds:0B3B410h
 0x5BCF84: test    eax, eax

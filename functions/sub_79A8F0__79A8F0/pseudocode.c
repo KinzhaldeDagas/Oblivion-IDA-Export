@@ -1,24 +1,28 @@
-int __cdecl sub_79A8F0(int a1, int a2, int a3)
+// OBLIVION AUTHORITY (2026-08-30): Copies CBranchChildRef records backward from [first,last) into the range ending at destinationLast. Each record is exactly 0x0C bytes (three dwords: parent vertex index, interpolation fraction, child pointer); returns the first destination record. RT4.1 StructsSupport.h:131-147 corroborates the already-observed SIdvBranch layout.
+OB_CBranchChildRef_010201A0 *__cdecl OB_CBranchChildRef_CopyBackward_010201A0(
+        const OB_CBranchChildRef_010201A0 *first,
+        const OB_CBranchChildRef_010201A0 *last,
+        OB_CBranchChildRef_010201A0 *destinationLast)
 {
-  int v3; // ecx
-  int result; // eax
+  const OB_CBranchChildRef_010201A0 *v3; // ecx
+  OB_CBranchChildRef_010201A0 *result; // eax
   int v5; // edx
-  int v6; // edi
+  int parentVertexIndex; // edi
 
-  v3 = a2;
-  result = a3 - 0xC * ((a2 - a1) / 0xC);
-  if ( a1 != a2 )
+  v3 = last; /*0x79a8f0*/
+  result = &destinationLast[-(last - first)]; /*0x79a91d*/
+  if ( first != last ) /*0x79a921*/
   {
-    v5 = a3 - a2;
-    do
+    v5 = (char *)destinationLast - (char *)last; /*0x79a923*/
+    do /*0x79a93e*/
     {
-      v6 = *(_DWORD *)(v3 - 0xC);
-      v3 -= 0xC;
-      *(_DWORD *)(v5 + v3) = v6;
-      *(_DWORD *)(v5 + v3 + 4) = *(_DWORD *)(v3 + 4);
-      *(_DWORD *)(v5 + v3 + 8) = *(_DWORD *)(v3 + 8);
+      parentVertexIndex = v3[0xFFFFFFFF].parentVertexIndex; /*0x79a925*/
+      v3 += 0xFFFFFFFF; /*0x79a928*/
+      *(int *)((char *)&v3->parentVertexIndex + v5) = parentVertexIndex; /*0x79a92d*/
+      *(float *)((char *)&v3->percentBetweenParentVertices + v5) = v3->percentBetweenParentVertices; /*0x79a933*/
+      *(int *)((char *)&v3->childBranch + v5) = v3->childBranch; /*0x79a93a*/
     }
-    while ( v3 != a1 );
+    while ( v3 != first ); /*0x79a93e*/
   }
-  return result;
+  return result; /*0x79a940*/
 }

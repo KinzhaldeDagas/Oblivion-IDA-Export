@@ -48,3 +48,15 @@
 0x4AF0E4: pop     ebx
 0x4AF0E5: add     esp, 10h
 0x4AF0E8: retn
+0x9B2D10: mov     ecx, [ebp-10h]
+0x9B2D13: jmp     TESObject_destr
+0x9B2D18: mov     ecx, [ebp-10h]
+0x9B2D1B: add     ecx, 24h ; '$'; this
+0x9B2D1E: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B2D23: mov     edx, [esp+arg_4]
+0x9B2D27: lea     eax, [edx-10h]
+0x9B2D2A: mov     ecx, [edx-14h]
+0x9B2D2D: xor     ecx, eax
+0x9B2D2F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2D34: mov     eax, offset stru_ADEB88
+0x9B2D39: jmp     ___CxxFrameHandler3

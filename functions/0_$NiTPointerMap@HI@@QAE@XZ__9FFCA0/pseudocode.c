@@ -1,7 +1,7 @@
 int NiTPointerMap<int,unsigned int>::NiTPointerMap<int,unsigned int>()
 {
-  dword_B16314 = FormHeapAlloc(0x94u);
-  _memset(dword_B16314, 0, 4 * dword_B16310);
-  off_B1630C = &NiTPointerMap<int,unsigned int>::`vftable';
-  return atexit(sub_A26730);
+  self.buckets = (MEF_U32PointerMapEntry32 **)FormHeapAlloc(0x94u); /*0x9ffccc*/
+  _memset((int)self.buckets, 0, 4 * self.bucketCount); /*0x9ffcd1*/
+  self.vtable = &NiTPointerMap<int,unsigned int>::`vftable'; /*0x9ffcdb*/
+  return atexit(sub_A26730); /*0x9ffced*/
 }

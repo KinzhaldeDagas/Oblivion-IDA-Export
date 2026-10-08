@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x563E80",
-    "line": "cmp     byte ptr ds:0B125E8h, 0",
+    "line": "cmp     byte ptr ds:0B125E8h, 0; Verified visibility gate: requires both bEnableTrees:SpeedTree.value and BSTreeManager.treesVisible at +0x20 before forwarding to NiNode::OnVisible.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x563E8C",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x563E8E",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x563EA3",
-    "line": "call    NiNode__OnVisible",
+    "line": "call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6438F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x643920",
-    "line": "mov     dword ptr [esi], offset ??_7LowProcess@@6B@; const LowProcess::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7LowProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x643938",
-    "line": "lea     ecx, [esi+70h]",
+    "line": "lea     ecx, [esi+70h]; self",
     "mnemonic": "lea",
     "size": 3
   },
@@ -370,5 +370,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C39C0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C39C3",
+    "line": "jmp     sub_60CDA0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C39C8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C39CC",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C39CF",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C39D2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C39D4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C39D9",
+    "line": "mov     eax, offset stru_AEC530",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C39DE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

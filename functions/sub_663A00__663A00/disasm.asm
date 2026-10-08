@@ -2,7 +2,7 @@
 0x663A06: push    ebp
 0x663A07: add     ecx, 44h ; 'D'
 0x663A0A: xor     ebp, ebp
-0x663A0C: call    GetExtraDataFollower
+0x663A0C: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x663A11: test    eax, eax
 0x663A13: jz      short loc_663A54
 0x663A15: mov     eax, [eax+0Ch]
@@ -16,12 +16,12 @@
 0x663A24: jz      short loc_663A4E
 0x663A26: cmp     dword ptr [esi+58h], 0
 0x663A2A: jz      short loc_663A47
-0x663A2C: mov     ecx, esi
-0x663A2E: call    sub_5E0380
+0x663A2C: mov     ecx, esi; this
+0x663A2E: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x663A33: test    eax, eax
 0x663A35: jz      short loc_663A47
-0x663A37: mov     ecx, esi
-0x663A39: call    sub_5E0380
+0x663A37: mov     ecx, esi; this
+0x663A39: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x663A3E: cmp     byte ptr [eax+20h], 1
 0x663A42: jnz     short loc_663A47
 0x663A44: add     ebp, 1

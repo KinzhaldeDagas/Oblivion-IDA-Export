@@ -1,11 +1,10 @@
-0x4A6380: push    esi
+0x4A6380: push    esi; Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.
 0x4A6381: mov     esi, ecx
 0x4A6383: push    edi
 0x4A6384: mov     edi, [esi+4]
 0x4A6387: test    edi, edi
 0x4A6389: jz      short loc_4A63D0
 0x4A638B: jmp     short loc_4A6390
-0x4A638D: align 10h
 0x4A6390: mov     eax, [esi+8]
 0x4A6393: test    eax, eax
 0x4A6395: jz      short loc_4A63AD
@@ -14,7 +13,7 @@
 0x4A639D: mov     edx, [eax]
 0x4A639F: push    eax
 0x4A63A0: mov     [esi+4], edx
-0x4A63A3: call    FormHeapFree
+0x4A63A3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A63A8: add     esp, 4
 0x4A63AB: jmp     short loc_4A63B4
 0x4A63AD: mov     dword ptr [esi+4], 0

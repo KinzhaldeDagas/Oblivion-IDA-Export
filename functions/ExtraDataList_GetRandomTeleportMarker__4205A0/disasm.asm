@@ -1,4 +1,4 @@
-0x4205A0: push    43h ; 'C'; a2
+0x4205A0: push    43h ; 'C'; Verified getter: returns ExtraRandomTeleportMarker.teleportRef from this ExtraDataList, or null if the type-0x43 extra is absent.
 0x4205A2: call    BaseExtraList_GetExtraData
 0x4205A7: test    eax, eax
 0x4205A9: jz      short loc_4205AF

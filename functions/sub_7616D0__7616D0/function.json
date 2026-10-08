@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 86,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 123,
+  "chunks": [
+    [
+      "0x7616D0",
+      "0x7616D3"
+    ]
+  ],
+  "chunks_sha256": "58367ffa2a0179375018fa0f5c26da24391e42ebe0ed8fdda35a21fc7bdc396f",
+  "comment_regular": "Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
+  "comment_repeatable": "Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.\nDX11 verified shared identity alias: source data vtable+1C and rendered data vtable+18 return this (MOV EAX,ECX; RET). No unique actor type inference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7616D0",
+  "display_name": "ActorList_ReturnHead",
   "end_ea": "0x7616D3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7616D0",
+  "name": "ActorList_ReturnHead",
   "segment": ".text",
   "sha256": "58367ffa2a0179375018fa0f5c26da24391e42ebe0ed8fdda35a21fc7bdc396f",
   "size": 3,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7616D0",
+  "total_chunk_size": 3,
   "type": "Actor *__thiscall(ActorList *this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 173

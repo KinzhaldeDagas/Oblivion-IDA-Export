@@ -1,20 +1,24 @@
-int *__thiscall GameSetting_ConstrAndReg(int *this, int a2, int a3)
+// Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
+GameSettingString *__thiscall GameSetting_ConstrAndReg(
+        GameSettingString *self,
+        const char *name,
+        const char *defaultValue)
 {
-  int v4; // eax
-  int v5; // ecx
+  const char *v4; // eax
+  const char *v5; // ecx
 
-  v4 = a2;
-  v5 = a3;
-  *(this + 1) = a2;
-  *this = v5;
-  if ( v4 )
+  v4 = name; /*0x419a98*/
+  v5 = defaultValue; /*0x419a9c*/
+  self->name = name; /*0x419aa0*/
+  self->value = v5; /*0x419aa3*/
+  if ( v4 ) /*0x419aaf*/
   {
-    if ( NiTMap_GetAt(&dword_B35574, v4, &a2) )
+    if ( NiTMap_GetAt(&g_GameSettingsByName, (int)v4, &name) ) /*0x419abc*/
     {
-      PrintError("Setting key '%s' already used in map.\nSetting keys must be unique.\n", (const char *)*(this + 1));
-      return this;
+      PrintError("Setting key '%s' already used in map.\nSetting keys must be unique.\n", self->name); /*0x419ace*/
+      return self; /*0x419ae8*/
     }
-    sub_412D30(&dword_B35574, *(this + 1), (TESForm *)this);
+    sub_412D30(&g_GameSettingsByName, (int)self->name, (TESForm *)self); /*0x419af5*/
   }
-  return this;
+  return self; /*0x419ad8*/
 }

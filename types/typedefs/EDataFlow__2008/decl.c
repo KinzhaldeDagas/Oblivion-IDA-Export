@@ -1,1 +1,1 @@
-EDataFlow
+typedef _EDataFlow EDataFlow;

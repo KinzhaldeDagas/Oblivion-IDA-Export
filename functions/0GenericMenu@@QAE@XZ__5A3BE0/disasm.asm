@@ -1,6 +1,6 @@
 0x5A3BE0: push    esi
 0x5A3BE1: mov     esi, ecx
-0x5A3BE3: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5A3BE3: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5A3BE8: xor     eax, eax
 0x5A3BEA: mov     [esi+28h], eax
 0x5A3BED: mov     dword ptr [esi], offset ??_7GenericMenu@@6B@; const GenericMenu::`vftable'

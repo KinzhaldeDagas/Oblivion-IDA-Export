@@ -1,12 +1,12 @@
 0x681A60: sub     esp, 0Ch
 0x681A63: push    ebx
-0x681A64: mov     ebx, [esp+10h+arg_0]
+0x681A64: mov     ebx, [esp+10h+actor]
 0x681A68: xor     al, al
 0x681A6A: test    ebx, ebx
 0x681A6C: mov     [esp+10h+var_9], al
 0x681A70: jz      loc_681D85
 0x681A76: mov     ecx, ebx; this
-0x681A78: call    MobileObject_GetCharProxy
+0x681A78: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x681A7D: test    eax, eax
 0x681A7F: jz      loc_681D81
 0x681A85: mov     eax, [eax+368h]
@@ -30,7 +30,7 @@
 0x681ACE: push    edi
 0x681ACF: call    sub_4806E0
 0x681AD4: push    eax
-0x681AD5: call    sub_4DC270
+0x681AD5: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x681ADA: mov     esi, eax
 0x681ADC: add     esp, 8
 0x681ADF: xor     ebp, ebp
@@ -144,7 +144,7 @@
 0x681C28: test    al, al
 0x681C2A: jz      loc_681D63
 0x681C30: mov     ecx, esi; this
-0x681C32: call    GetTeleportExtraData
+0x681C32: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x681C37: test    eax, eax
 0x681C39: jnz     loc_681D63
 0x681C3F: mov     edx, [esi]
@@ -153,8 +153,8 @@
 0x681C49: call    eax
 0x681C4B: test    eax, eax
 0x681C4D: jz      loc_681D63
-0x681C53: mov     ecx, eax
-0x681C55: call    sub_4B78E0
+0x681C53: mov     ecx, eax; this
+0x681C55: call    TESObjectDOOR_HasRandomTeleportSpaces; Verified actor-door interaction branch: when the candidate is a door with no ExtraTeleport, a nonempty TESObjectDOOR.randomTeleport list causes this routine to reject it as a normal actor-openable door.
 0x681C5A: test    al, al
 0x681C5C: jnz     loc_681D63
 0x681C62: mov     edx, [esi]
@@ -162,23 +162,23 @@
 0x681C6A: mov     ecx, esi
 0x681C6C: call    eax
 0x681C6E: push    eax
-0x681C6F: push    offset dword_B3FAB0
+0x681C6F: push    offset parent
 0x681C74: call    NiRTTI_Cast
 0x681C79: add     esp, 8
 0x681C7C: mov     edi, eax
-0x681C7E: push    0
-0x681C80: mov     ecx, edi
-0x681C82: call    sub_405790
+0x681C7E: push    0; index
+0x681C80: mov     ecx, edi; this
+0x681C82: call    NiNode_GetChildAtIndex
 0x681C87: test    eax, eax
 0x681C89: jz      loc_681D63
-0x681C8F: push    0
-0x681C91: mov     ecx, edi
-0x681C93: call    sub_405790
+0x681C8F: push    0; index
+0x681C91: mov     ecx, edi; this
+0x681C93: call    NiNode_GetChildAtIndex
 0x681C98: cmp     dword ptr [eax+0Ch], 0
 0x681C9C: jz      loc_681D63
-0x681CA2: push    0
-0x681CA4: mov     ecx, edi
-0x681CA6: call    sub_405790
+0x681CA2: push    0; index
+0x681CA4: mov     ecx, edi; this
+0x681CA6: call    NiNode_GetChildAtIndex
 0x681CAB: mov     eax, [eax+0Ch]
 0x681CAE: push    eax
 0x681CAF: push    offset stru_B3CAC0
@@ -187,20 +187,20 @@
 0x681CBC: test    eax, eax
 0x681CBE: jz      loc_681D63
 0x681CC4: push    offset aOpen; "Open"
-0x681CC9: mov     ecx, eax
-0x681CCB: call    sub_4715A0
+0x681CC9: mov     ecx, eax; this
+0x681CCB: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x681CD0: test    eax, eax
 0x681CD2: jz      loc_681D63
-0x681CD8: lea     ecx, [esp+1Ch+arg_0]
-0x681CDC: push    ecx
-0x681CDD: push    ebx
-0x681CDE: push    esi
-0x681CDF: mov     byte ptr [esp+28h+arg_0], 0
-0x681CE4: call    sub_4B7490
+0x681CD8: lea     ecx, [esp+1Ch+actor]
+0x681CDC: push    ecx; mustLockpickOut
+0x681CDD: push    ebx; actor
+0x681CDE: push    esi; doorReference
+0x681CDF: mov     byte ptr [esp+28h+actor], 0
+0x681CE4: call    TESObjectDOOR_CheckActorAccess; Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.
 0x681CE9: add     esp, 0Ch
 0x681CEC: test    al, al
 0x681CEE: jz      short loc_681D0C
-0x681CF0: cmp     byte ptr [esp+1Ch+arg_0], 0
+0x681CF0: cmp     byte ptr [esp+1Ch+actor], 0
 0x681CF5: jnz     short loc_681D0C
 0x681CF7: push    ebx
 0x681CF8: call    Actor__CanUSeDoor?

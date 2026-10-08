@@ -20,7 +20,7 @@
 0x5969AE: push    0
 0x5969B0: push    5
 0x5969B2: mov     ecx, esi
-0x5969B4: call    edx
+0x5969B4: call    edx; Keyboard shortcut 0xB dispatches ClassMenu button 5, sharing the native overall-cancel/close path.
 0x5969B6: pop     edi
 0x5969B7: mov     al, 1
 0x5969B9: pop     esi

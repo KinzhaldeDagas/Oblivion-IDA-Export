@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x728890",
-    "line": "push    ebx",
+    "line": "push    ebx;",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7288A5",
-    "line": "mov     eax, [esp+10h+arg_4]",
+    "line": "mov     eax, [esp+10h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x7288C9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7288D1",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, [esp+10h+normals]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7288F2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x7288FA",
-    "line": "mov     ecx, [esp+10h+arg_C]",
+    "line": "mov     ecx, [esp+10h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x72891B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x728923",
-    "line": "mov     ebp, [esp+10h+arg_10]",
+    "line": "mov     ebp, [esp+10h+texcoords]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x728944",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x72894E",
-    "line": "cmp     [esp+10h+arg_4], eax",
+    "line": "cmp     [esp+10h+vertices], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x728955",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x728960",
-    "line": "cmp     [esp+10h+arg_8], eax",
+    "line": "cmp     [esp+10h+normals], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x728967",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x728972",
-    "line": "cmp     [esp+10h+arg_C], eax",
+    "line": "cmp     [esp+10h+colors], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x728979",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x728984",
-    "line": "mov     ebp, [esp+10h+arg_10]",
+    "line": "mov     ebp, [esp+10h+texcoords]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x72898D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,19 +577,19 @@
   },
   {
     "ea": "0x728995",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x728999",
-    "line": "mov     cx, [esp+10h+arg_0]",
+    "line": "mov     cx, [esp+10h+vertexCount]",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x72899E",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+normals]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x7289C4",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
@@ -685,19 +685,19 @@
   },
   {
     "ea": "0x7289C8",
-    "line": "push    ecx",
+    "line": "push    ecx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7289C9",
-    "line": "lea     ecx, [esi+0Ch]",
+    "line": "lea     ecx, [esi+0Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7289CC",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x7289D5",
-    "line": "movzx   ecx, [esp+10h+arg_14]",
+    "line": "movzx   ecx, [esp+10h+textureSetCount]",
     "mnemonic": "movzx",
     "size": 5
   },
   {
     "ea": "0x7289DA",
-    "line": "mov     edx, [esp+10h+arg_C]",
+    "line": "mov     edx, [esp+10h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x7289E8",
-    "line": "or      ax, [esp+10h+arg_18]",
+    "line": "or      ax, [esp+10h+dataFlags]",
     "mnemonic": "or",
     "size": 5
   },

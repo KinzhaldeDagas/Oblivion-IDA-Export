@@ -42,3 +42,12 @@
 0x55A13F: pop     esi
 0x55A140: add     esp, 10h
 0x55A143: retn    4
+0x9BC9C0: mov     ecx, [ebp-10h]
+0x9BC9C3: jmp     loc_55A000
+0x9BC9C8: mov     edx, [esp+arg_4]
+0x9BC9CC: lea     eax, [edx-8]
+0x9BC9CF: mov     ecx, [edx-0Ch]
+0x9BC9D2: xor     ecx, eax
+0x9BC9D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC9D9: mov     eax, offset stru_AE6570
+0x9BC9DE: jmp     ___CxxFrameHandler3

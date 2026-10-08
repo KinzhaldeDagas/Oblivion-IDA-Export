@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "irp_params_t",
+  "definition": "union irp_params_t\n{\nirp_type type;\n$0610DDB67140B265AC28F4D5914FC8F5 create;\n$248A552C21D06444044794EBF93359E8 close;\n$0C6C985B0F1948697CA4AD763BBA2A2A read;\n$64A03D82693F2A56EC0770D860A61509 write;\n$248A552C21D06444044794EBF93359E8 flush;\n$1CB5D5FFE536DF91C46F388D49667D43 ioctl;\n$C545E60FFEAD138B4936128095BA78C3 volume;\n$16C7E545BBBE2A96AA52D6F26AB8BE75 free;\n$9E476660DCF5E07A8F1C296A6895BE08 cancel;\n}\n",
   "id": 18374686479671859537,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "irp_type"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "$0610DDB67140B265AC28F4D5914FC8F5"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "close",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "$248A552C21D06444044794EBF93359E8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "read",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "$0C6C985B0F1948697CA4AD763BBA2A2A"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "write",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$64A03D82693F2A56EC0770D860A61509"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flush",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "$248A552C21D06444044794EBF93359E8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ioctl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$1CB5D5FFE536DF91C46F388D49667D43"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "volume",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$C545E60FFEAD138B4936128095BA78C3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "free",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "$16C7E545BBBE2A96AA52D6F26AB8BE75"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cancel",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "$9E476660DCF5E07A8F1C296A6895BE08"
     }
   ],
   "name": "irp_params_t",
+  "ordinal": 6685,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 32
 }

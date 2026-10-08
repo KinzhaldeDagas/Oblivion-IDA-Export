@@ -1,1 +1,1 @@
-hkShapeCollectionFilter
+struct hkShapeCollectionFilter;

@@ -1,1 +1,1 @@
-IInputObject_0
+typedef IInputObject IInputObject_0;

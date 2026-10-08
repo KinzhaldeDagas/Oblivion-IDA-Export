@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "source_media",
+  "definition": "struct source_media\n{\nWCHAR_0 root[260];\nWCHAR_0 *desc;\nWCHAR_0 *tag;\nBOOL resolved;\nBOOL cabinet;\n}\n",
   "id": 18374686479672040349,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "root",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR_0[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "desc",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tag",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 4
+      "offset_hex": "0x20C",
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "resolved",
       "offset": 528,
       "offset_hex": "0x210",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cabinet",
       "offset": 532,
       "offset_hex": "0x214",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     }
   ],
   "name": "source_media",
+  "ordinal": 6049,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 536
 }

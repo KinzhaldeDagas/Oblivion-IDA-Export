@@ -47,7 +47,7 @@
 0x57C1DE: jnz     short loc_57C1EC
 0x57C1E0: push    0
 0x57C1E2: push    ecx
-0x57C1E3: call    sub_5790E0
+0x57C1E3: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x57C1E8: add     esp, 8
 0x57C1EB: retn
 0x57C1EC: xor     edx, edx

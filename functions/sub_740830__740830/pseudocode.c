@@ -1,7 +1,7 @@
-int __thiscall sub_740830(_DWORD *this, _DWORD *a2)
+int __thiscall sub_740830(Ni2DBuffer **this, Ni2DBuffer *a2)
 {
-  sub_742060(this, a2);
-  return (*(int (__thiscall **)(_DWORD, _DWORD))(**(_DWORD **)(*(this + 0x2D) + 0x5C) + 0x70))(
-           *(_DWORD *)(*(this + 0x2D) + 0x5C),
+  sub_742060(this, a2); /*0x740838*/
+  return (*(int (__thiscall **)(UInt32, _DWORD))(*(_DWORD *)(*(this + 0x2D))[4].members.height + 0x70))(
+           (*(this + 0x2D))[4].members.height,
            *(this + 0x2C));
 }

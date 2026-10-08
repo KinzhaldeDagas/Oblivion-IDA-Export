@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x786FC0",
+      "0x786FEC"
+    ]
+  ],
+  "chunks_sha256": "672f08c1480a11932607b6e8579c0eebfa75b0e5d5ae513bfdd4891f84ac884f",
+  "comment_regular": "\n\n[2026-10-03 texture ownership/discovery] Plugin GetTextures consumption now uses finally cleanup so the two temporary filename arrays are freed on exceptional exits as well as success. Native strings remain borrowed and are copied into candidate-owned strings before this destructor.\n\nSpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
+  "comment_repeatable": "SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_786FC0",
+  "display_name": "CSpeedTreeRT__STextures_dtor",
   "end_ea": "0x786FEC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_786FC0",
+  "name": "CSpeedTreeRT__STextures_dtor",
   "segment": ".text",
   "sha256": "672f08c1480a11932607b6e8579c0eebfa75b0e5d5ae513bfdd4891f84ac884f",
   "size": 44,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x786FC0",
-  "type": "void __thiscall(unsigned int *this)",
+  "total_chunk_size": 44,
+  "type": "void __thiscall(OB_CSpeedTreeRT_STextures *this)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 8
 }

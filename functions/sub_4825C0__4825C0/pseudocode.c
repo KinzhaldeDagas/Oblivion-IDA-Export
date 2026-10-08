@@ -1,4 +1,4 @@
-char *sub_4825C0()
+NiRTTI *sub_4825C0()
 {
-  return dword_B3FCF0;
+  return &stru_B3FCF0; /*0x4825c5*/
 }

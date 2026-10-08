@@ -1,19 +1,36 @@
 {
-  "callees_count": 49,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 31,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 7,
-  "display_name": "sub_667BE0",
+  "chunks": [
+    [
+      "0x667BE0",
+      "0x66802C"
+    ],
+    [
+      "0x9C3EB0",
+      "0x9C3EEC"
+    ]
+  ],
+  "chunks_sha256": "51d293e76c26f34510331599fec51d57382605e345a3d4bcb1bb04e17143245c",
+  "comment_regular": "PlayerCharacter GenerateNiNode override. Builds the first-person root at +0x5D0 from Characters\\\\_1stPerson\\\\Skeleton.NIF, constructs 0x154-byte ActorSkinInfo at +0x5C8 and 0xDC-byte ActorAnimData at +0x5CC, builds/picks its KF list, generates/configures the player NiNode through the base MobileObject path, and returns NiNode*. It does not call ActorAnimData_LoadKFFZSpecialAnims. Native ABI has no stack/x87 inputs.",
+  "comment_repeatable": "PlayerCharacter GenerateNiNode override. Builds the first-person root at +0x5D0 from Characters\\\\_1stPerson\\\\Skeleton.NIF, constructs 0x154-byte ActorSkinInfo at +0x5C8 and 0xDC-byte ActorAnimData at +0x5CC, builds/picks its KF list, generates/configures the player NiNode through the base MobileObject path, and returns NiNode*. It does not call ActorAnimData_LoadKFFZSpecialAnims. Native ABI has no stack/x87 inputs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
+  "display_name": "PlayerCharacter_GenerateNiNode",
   "end_ea": "0x66802C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_667BE0",
+  "name": "PlayerCharacter_GenerateNiNode",
   "segment": ".text",
   "sha256": "8f4c98f17d1664b6446e4c80ad77e89bbe830feb230feb9626dc7994a6d3f2e2",
   "size": 1100,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x667BE0",
-  "type": "volatile LONG *__usercall@<eax>(int@<ecx>, double st5_0@<st2>, double@<st1>, double@<st0>, double@<st3>)",
-  "xrefs_from_count": 392,
+  "total_chunk_size": 1160,
+  "type": "NiNode *__thiscall(PlayerCharacter *this)",
+  "xrefs_from_count": 416,
   "xrefs_to_count": 1
 }

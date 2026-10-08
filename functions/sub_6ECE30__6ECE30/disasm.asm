@@ -11,7 +11,7 @@
 0x6ECE45: test    eax, eax
 0x6ECE47: jz      short loc_6ECE5E
 0x6ECE49: lea     esp, [esp+0]
-0x6ECE50: cmp     eax, offset dword_B3F584
+0x6ECE50: cmp     eax, offset stru_B3F584
 0x6ECE55: jz      short loc_6ECE65
 0x6ECE57: mov     eax, [eax+4]
 0x6ECE5A: test    eax, eax
@@ -29,13 +29,12 @@
 0x6ECE74: mov     ecx, [edi+10h]
 0x6ECE77: movzx   eax, si
 0x6ECE7A: mov     ecx, [ecx+eax*4]
-0x6ECE7D: call    sub_452A60
+0x6ECE7D: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6ECE82: test    eax, eax
 0x6ECE84: jz      short loc_6ECEB9
 0x6ECE86: mov     ecx, eax
 0x6ECE88: mov     eax, [ebx+40h]
 0x6ECE8B: jmp     short loc_6ECE90
-0x6ECE8D: align 10h
 0x6ECE90: mov     dl, [eax]
 0x6ECE92: cmp     dl, [ecx]
 0x6ECE94: jnz     short loc_6ECEB0

@@ -1,1 +1,5 @@
-midiproptempo_tag
+struct midiproptempo_tag
+{
+DWORD cbStruct;
+DWORD dwTempo;
+};

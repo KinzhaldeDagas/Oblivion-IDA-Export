@@ -1,4 +1,4 @@
-0x429EE0: fld     [esp+arg_0]
+0x429EE0: fld     [esp+arg_0]; Constructs ExtraCharge: type 0x2E and supplied float value.
 0x429EE4: mov     eax, ecx
 0x429EE6: fstp    dword ptr [eax+0Ch]
 0x429EE9: mov     byte ptr [eax+4], 2Eh ; '.'

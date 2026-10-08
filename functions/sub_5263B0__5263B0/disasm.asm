@@ -26,11 +26,10 @@
 0x5263FC: jz      loc_526866
 0x526402: movzx   eax, word ptr [eax+0B6h]
 0x526409: cmp     eax, ebx
-0x52640B: mov     [esp+3Ch+var_1C], eax
+0x52640B: mov     [esp+3Ch+output], eax
 0x52640F: jbe     loc_52681C
 0x526415: jmp     short loc_526424
 0x526417: jmp     short loc_526420
-0x526419: align 10h
 0x526420: mov     esi, [esp+3Ch+var_20]
 0x526424: mov     eax, [esi+1D4h]
 0x52642A: movzx   ecx, word ptr [eax+0B6h]
@@ -105,7 +104,7 @@
 0x5264E7: push    esi; lpAddend
 0x5264E8: call    dword ptr ds:0A28078h
 0x5264EE: add     ebx, 1
-0x5264F1: cmp     ebx, [esp+3Ch+var_1C]
+0x5264F1: cmp     ebx, [esp+3Ch+output]
 0x5264F5: jb      loc_526420
 0x5264FB: cmp     [esp+3Ch+var_28], 0
 0x526500: jz      loc_526810
@@ -115,7 +114,7 @@
 0x526513: mov     dword ptr [esp+3Ch+ArgList], ebp
 0x526517: mov     [esp+3Ch+var_10], bp
 0x52651C: mov     [esp+3Ch+var_E], bp
-0x526521: mov     eax, [esp+3Ch+arg_0]
+0x526521: mov     eax, [esp+3Ch+texture]
 0x526525: cmp     eax, ebp
 0x526527: mov     byte ptr [esp+3Ch+var_4], 2
 0x52652C: jz      short loc_52654F
@@ -136,24 +135,24 @@
 0x526559: call    BSStringT_Static_Format
 0x52655E: add     esp, 8
 0x526561: mov     eax, dword ptr [esp+3Ch+ArgList]
-0x526565: push    ebp; char
-0x526566: push    ebp; char
-0x526567: push    eax; ArgList
-0x526568: lea     ecx, [esp+48h+arg_0]
-0x52656C: push    ecx; int
+0x526565: push    ebp; searchArchives
+0x526566: push    ebp; allowMissing
+0x526567: push    eax; path
+0x526568: lea     ecx, [esp+48h+texture]
+0x52656C: push    ecx; outTexture
 0x52656D: mov     ecx, ds:0B333A0h
-0x526573: call    sub_442890
-0x526578: mov     eax, [esp+3Ch+arg_0]
+0x526573: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x526578: mov     eax, [esp+3Ch+texture]
 0x52657C: cmp     eax, ebp
 0x52657E: mov     byte ptr [esp+3Ch+var_4], 3
 0x526583: jz      loc_5267D7
 0x526589: mov     ebx, [esp+3Ch+var_28]
-0x52658D: lea     edx, [esp+3Ch+var_1C]
-0x526591: push    edx
-0x526592: mov     ecx, ebx
-0x526594: call    sub_405760
+0x52658D: lea     edx, [esp+3Ch+output]
+0x526591: push    edx; output
+0x526592: mov     ecx, ebx; this
+0x526594: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x526599: mov     edi, [eax]
-0x52659B: mov     eax, [esp+3Ch+var_1C]
+0x52659B: mov     eax, [esp+3Ch+output]
 0x52659F: cmp     eax, ebp
 0x5265A1: jz      short loc_5265C1
 0x5265A3: mov     esi, eax
@@ -169,10 +168,10 @@
 0x5265BB: push    1
 0x5265BD: mov     ecx, esi
 0x5265BF: call    edx
-0x5265C1: mov     ecx, [esp+3Ch+var_24]
+0x5265C1: mov     ecx, [esp+3Ch+var_24]; this
 0x5265C5: lea     eax, [esp+3Ch+var_18]
-0x5265C9: push    eax
-0x5265CA: call    sub_405760
+0x5265C9: push    eax; output
+0x5265CA: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x5265CF: mov     ebp, [eax]
 0x5265D1: mov     eax, [esp+3Ch+var_18]
 0x5265D5: test    eax, eax
@@ -252,32 +251,32 @@
 0x526688: jz      short loc_5266F4
 0x52668A: test    esi, esi
 0x52668C: jz      short loc_5266F4
-0x52668E: mov     eax, [esp+3Ch+arg_0]
+0x52668E: mov     eax, [esp+3Ch+texture]
 0x526692: mov     edx, [edi]
 0x526694: mov     edx, [edx+80h]
 0x52669A: push    eax
 0x52669B: push    0
 0x52669D: mov     ecx, edi
 0x52669F: call    edx
-0x5266A1: mov     ecx, [esp+3Ch+arg_0]
+0x5266A1: mov     ecx, [esp+3Ch+texture]
 0x5266A5: mov     eax, [esi]
 0x5266A7: mov     edx, [eax+80h]
 0x5266AD: push    ecx
 0x5266AE: push    0
 0x5266B0: mov     ecx, esi
 0x5266B2: call    edx
-0x5266B4: lea     ecx, [esp+3Ch+arg_0]; this
+0x5266B4: lea     ecx, [esp+3Ch+texture]; slot
 0x5266B8: mov     byte ptr [esp+3Ch+var_4], 2
-0x5266BD: call    sub_7016A0
+0x5266BD: call    NiPointerSlot_Release
 0x5266C2: lea     ecx, [esp+3Ch+ArgList]; void *
 0x5266C6: mov     byte ptr [esp+3Ch+var_4], 1
 0x5266CB: call    BSStringT_Clear
-0x5266D0: lea     ecx, [esp+3Ch+var_24]; this
+0x5266D0: lea     ecx, [esp+3Ch+var_24]; slot
 0x5266D4: mov     byte ptr [esp+3Ch+var_4], 0
-0x5266D9: call    sub_7016A0
-0x5266DE: lea     ecx, [esp+3Ch+var_28]; this
+0x5266D9: call    NiPointerSlot_Release
+0x5266DE: lea     ecx, [esp+3Ch+var_28]; slot
 0x5266E2: mov     [esp+3Ch+var_4], 0FFFFFFFFh
-0x5266EA: call    sub_7016A0
+0x5266EA: call    NiPointerSlot_Release
 0x5266EF: jmp     loc_5268AC
 0x5266F4: push    30h ; '0'; Size
 0x5266F6: call    FormHeapAlloc
@@ -291,20 +290,20 @@
 0x526712: mov     esi, eax
 0x526714: jmp     short loc_526718
 0x526716: xor     esi, esi
-0x526718: mov     eax, [esp+3Ch+arg_0]
-0x52671C: push    eax
-0x52671D: mov     ecx, esi
+0x526718: mov     eax, [esp+3Ch+texture]
+0x52671C: push    eax; texture
+0x52671D: mov     ecx, esi; this
 0x52671F: mov     byte ptr [esp+40h+var_4], 3
-0x526724: call    NiTexturingProperty__SetUnk08
-0x526729: push    3
-0x52672B: mov     ecx, esi
-0x52672D: call    sub_405870
+0x526724: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x526729: push    3; value
+0x52672B: mov     ecx, esi; this
+0x52672D: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x526732: push    2; a2
 0x526734: mov     ecx, esi; this
-0x526736: call    sub_405900
+0x526736: call    NiTexturingProperty_SetBaseMapFilterMode
 0x52673B: push    6
 0x52673D: mov     ecx, ebx
-0x52673F: call    NiNode_GetNiPropertyByID
+0x52673F: call    NiNode_GetNiPropertyByID;
 0x526744: test    eax, eax
 0x526746: jz      short loc_52677C
 0x526748: push    6
@@ -330,11 +329,11 @@
 0x52677A: call    eax
 0x52677C: push    esi; a2
 0x52677D: mov     ecx, ebx; this
-0x52677F: call    sub_405680
+0x52677F: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x526784: mov     ebx, [esp+3Ch+var_24]
 0x526788: push    6
 0x52678A: mov     ecx, ebx
-0x52678C: call    NiNode_GetNiPropertyByID
+0x52678C: call    NiNode_GetNiPropertyByID;
 0x526791: test    eax, eax
 0x526793: jz      short loc_5267C9
 0x526795: push    6
@@ -360,8 +359,8 @@
 0x5267C7: call    eax
 0x5267C9: push    esi; a2
 0x5267CA: mov     ecx, ebx; this
-0x5267CC: call    sub_405680
-0x5267D1: mov     eax, [esp+3Ch+arg_0]
+0x5267CC: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x5267D1: mov     eax, [esp+3Ch+texture]
 0x5267D5: xor     ebp, ebp
 0x5267D7: cmp     eax, ebp
 0x5267D9: mov     byte ptr [esp+3Ch+var_4], 2
@@ -382,7 +381,7 @@
 0x5267FE: mov     ecx, dword ptr [esp+3Ch+ArgList]
 0x526802: push    ecx
 0x526803: mov     byte ptr [esp+40h+var_4], 1
-0x526808: call    FormHeapFree
+0x526808: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52680D: add     esp, 4
 0x526810: mov     edi, [esp+3Ch+var_24]
 0x526814: mov     esi, [esp+3Ch+var_20]
@@ -394,11 +393,11 @@
 0x52682C: call    eax
 0x52682E: test    eax, eax
 0x526830: jz      short loc_526841
-0x526832: push    1
-0x526834: push    1
-0x526836: push    1
-0x526838: push    eax
-0x526839: call    sub_7B8940
+0x526832: push    1; arg3
+0x526834: push    1; normalMapBypass
+0x526836: push    1; shaderId
+0x526838: push    eax; root
+0x526839: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x52683E: add     esp, 10h
 0x526841: mov     ecx, [esi+1D4h]
 0x526847: mov     edx, [ecx]
@@ -407,11 +406,11 @@
 0x526851: call    eax
 0x526853: test    eax, eax
 0x526855: jz      short loc_526866
-0x526857: push    1
-0x526859: push    1
-0x52685B: push    1
-0x52685D: push    eax
-0x52685E: call    sub_7B8940
+0x526857: push    1; arg3
+0x526859: push    1; normalMapBypass
+0x52685B: push    1; shaderId
+0x52685D: push    eax; root
+0x52685E: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x526863: add     esp, 10h
 0x526866: test    edi, edi
 0x526868: mov     byte ptr [esp+3Ch+var_4], 0
@@ -448,3 +447,23 @@
 0x5268BB: pop     ebx
 0x5268BC: add     esp, 28h
 0x5268BF: retn    4
+0x9B7FC0: lea     ecx, [ebp-28h]; slot
+0x9B7FC3: jmp     NiPointerSlot_Release
+0x9B7FC8: lea     ecx, [ebp-24h]; slot
+0x9B7FCB: jmp     NiPointerSlot_Release
+0x9B7FD0: lea     ecx, [ebp-14h]; void *
+0x9B7FD3: jmp     BSStringT_Clear
+0x9B7FD8: lea     ecx, [ebp+4]; slot
+0x9B7FDB: jmp     NiPointerSlot_Release
+0x9B7FE0: mov     eax, [ebp-18h]
+0x9B7FE3: push    eax
+0x9B7FE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B7FE9: pop     ecx
+0x9B7FEA: retn
+0x9B7FEB: mov     edx, [esp+arg_4]
+0x9B7FEF: lea     eax, [edx-2Ch]
+0x9B7FF2: mov     ecx, [edx-30h]
+0x9B7FF5: xor     ecx, eax
+0x9B7FF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7FFC: mov     eax, offset stru_AE27A4
+0x9B8001: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-TrackerWindowInfo
+typedef tagTrackerWindowInfo TrackerWindowInfo;

@@ -13,18 +13,18 @@
 0x5F315D: lea     eax, [esp+38h+var_C]
 0x5F3161: mov     large fs:0, eax
 0x5F3167: mov     ebp, ecx
-0x5F3169: mov     ecx, ds:0B333C4h
+0x5F3169: mov     ecx, ds:0B333C4h; this
 0x5F316F: cmp     ebp, ecx
 0x5F3171: jnz     short loc_5F317C
-0x5F3173: push    0
-0x5F3175: call    sub_6600D0
+0x5F3173: push    0; firstPerson
+0x5F3175: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x5F317A: jmp     short loc_5F3189
 0x5F317C: mov     eax, [ebp+0]
 0x5F317F: mov     edx, [eax+168h]
 0x5F3185: mov     ecx, ebp
 0x5F3187: call    edx
 0x5F3189: mov     [esp+38h+var_1C], eax
-0x5F318D: mov     eax, [esp+38h+arg_0]
+0x5F318D: mov     eax, [esp+38h+form]
 0x5F3191: push    eax
 0x5F3192: call    sub_4691B0
 0x5F3197: mov     edx, [ebp+0]
@@ -210,7 +210,7 @@
 0x5F33B1: mov     ecx, esi
 0x5F33B3: call    ContainerEntryExtraData_DestroyDataTable
 0x5F33B8: push    esi
-0x5F33B9: call    FormHeapFree
+0x5F33B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F33BE: add     esp, 4
 0x5F33C1: mov     esi, [esp+38h+var_18]
 0x5F33C5: add     ebx, 10h
@@ -228,7 +228,7 @@
 0x5F33F7: jz      loc_5F3706
 0x5F33FD: cmp     dword ptr [ebp+58h], 0
 0x5F3401: jz      def_5F3422; jumptable 005F3422 default case, cases 21-25,27-32
-0x5F3407: mov     edi, [esp+38h+arg_0]
+0x5F3407: mov     edi, [esp+38h+form]
 0x5F340B: movzx   eax, byte ptr [edi+4]
 0x5F340F: add     eax, 0FFFFFFECh; switch 15 cases
 0x5F3412: cmp     eax, 0Eh
@@ -247,7 +247,7 @@
 0x5F3441: mov     eax, [ecx]
 0x5F3443: mov     edx, [eax+138h]
 0x5F3449: call    edx
-0x5F344B: mov     [esp+3Ch+var_25], al
+0x5F344B: mov     [esp+38h+var_21], al
 0x5F344F: mov     eax, edi
 0x5F3451: xor     bl, bl
 0x5F3453: cmp     [esi+8], eax
@@ -280,7 +280,7 @@
 0x5F3493: call    sub_45A500
 0x5F3498: test    al, al
 0x5F349A: jz      loc_5F3706
-0x5F34A0: cmp     [esp+3Ch+var_25], 0
+0x5F34A0: cmp     [esp+38h+var_21], 0
 0x5F34A5: jz      short loc_5F34B0
 0x5F34A7: push    0
 0x5F34A9: mov     ecx, ebp
@@ -331,7 +331,7 @@
 0x5F3530: call    Actor_UnequipItem
 0x5F3535: cmp     ebp, ds:0B333C4h
 0x5F353B: jnz     def_5F3422; jumptable 005F3422 default case, cases 21-25,27-32
-0x5F3541: mov     esi, [esp+3Ch+arg_4]
+0x5F3541: mov     esi, [esp+38h+arg_8]
 0x5F3545: test    esi, esi
 0x5F3547: jz      short loc_5F355A
 0x5F3549: push    2Dh ; '-'; a2
@@ -344,30 +344,30 @@
 0x5F3564: lea     ecx, [ebp+44h]; this
 0x5F3567: call    ExtraDataList_GetContainerChanges
 0x5F356C: test    esi, esi
-0x5F356E: mov     [esp+3Ch+var_14], eax
+0x5F356E: mov     [esp+38h+var_10], eax
 0x5F3572: jnz     loc_5F3641
 0x5F3578: push    14h; Size
 0x5F357A: call    FormHeapAlloc
 0x5F357F: add     esp, 4
-0x5F3582: mov     [esp+3Ch+arg_4], eax
+0x5F3582: mov     [esp+38h+arg_8], eax
 0x5F3586: xor     ecx, ecx
 0x5F3588: cmp     eax, ecx
-0x5F358A: mov     [esp+3Ch+var_8], ecx
+0x5F358A: mov     [esp+38h+var_4], ecx
 0x5F358E: jz      short loc_5F359D
 0x5F3590: mov     ecx, eax
 0x5F3592: call    ExtraDataList_constr
-0x5F3597: mov     [esp+3Ch+var_1C], eax
+0x5F3597: mov     [esp+38h+var_18], eax
 0x5F359B: jmp     short loc_5F35A1
-0x5F359D: mov     [esp+3Ch+var_1C], ecx
-0x5F35A1: mov     ecx, [esp+3Ch+var_1C]
-0x5F35A5: mov     edi, [esp+3Ch]
-0x5F35A9: push    0
-0x5F35AB: push    1
-0x5F35AD: mov     [esp+44h+arg_4], ecx
-0x5F35B1: mov     ecx, [esp+44h+var_14]
-0x5F35B5: push    edi
-0x5F35B6: mov     [esp+48h+var_8], 0FFFFFFFFh
-0x5F35BE: call    ContainerExtraData_GetEntryForForm
+0x5F359D: mov     [esp+38h+var_18], ecx
+0x5F35A1: mov     ecx, [esp+38h+var_18]
+0x5F35A5: mov     edi, [esp+38h+form]
+0x5F35A9: push    0; referenceFormIDOrZero
+0x5F35AB: push    1; unusedAlwaysOne
+0x5F35AD: mov     [esp+40h+arg_8], ecx
+0x5F35B1: mov     ecx, [esp+40h+var_10]; this
+0x5F35B5: push    edi; form
+0x5F35B6: mov     [esp+44h+var_4], 0FFFFFFFFh
+0x5F35BE: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x5F35C3: mov     esi, eax
 0x5F35C5: xor     bl, bl
 0x5F35C7: test    esi, esi
@@ -375,9 +375,9 @@
 0x5F35CB: push    0Ch; Size
 0x5F35CD: call    FormHeapAlloc
 0x5F35D2: add     esp, 4
-0x5F35D5: mov     [esp+44h+var_20], eax
+0x5F35D5: mov     [esp+38h+var_14], eax
 0x5F35D9: test    eax, eax
-0x5F35DB: mov     [esp+44h+var_10], 1
+0x5F35DB: mov     [esp+38h+var_4], 1
 0x5F35E3: jz      short loc_5F35F1
 0x5F35E5: push    1
 0x5F35E7: push    edi
@@ -385,7 +385,7 @@
 0x5F35EA: call    ContainerEntryExtraData_constr
 0x5F35EF: jmp     short loc_5F35F3
 0x5F35F1: xor     eax, eax
-0x5F35F3: mov     [esp+44h+var_10], 0FFFFFFFFh
+0x5F35F3: mov     [esp+38h+var_4], 0FFFFFFFFh
 0x5F35FB: mov     esi, eax
 0x5F35FD: mov     bl, 1
 0x5F35FF: cmp     dword ptr [esi], 0
@@ -400,23 +400,23 @@
 0x5F361F: jmp     short loc_5F3623
 0x5F3621: xor     eax, eax
 0x5F3623: mov     [esi], eax
-0x5F3625: mov     edx, [esp+20h]
+0x5F3625: mov     edx, [esp+38h+var_18]
 0x5F3629: mov     ecx, [esi]
 0x5F362B: push    edx
 0x5F362C: call    BSSimpleList_PushFront
 0x5F3631: test    bl, bl
 0x5F3633: jz      short loc_5F3641
-0x5F3635: mov     ecx, [esp+44h+var_1C]
-0x5F3639: push    1
-0x5F363B: push    esi
-0x5F363C: call    ContainerExtraData_AddEntry
-0x5F3641: mov     eax, [esp+30h+arg_8]
+0x5F3635: mov     ecx, [esp+38h+var_10]; this
+0x5F3639: push    1; destroyEntryIfMerged
+0x5F363B: push    esi; entry
+0x5F363C: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
+0x5F3641: mov     eax, [esp+38h+form]
 0x5F3645: fild    dword ptr [eax+70h]
 0x5F3648: push    ecx
-0x5F3649: mov     ecx, dword ptr [esp+34h+arg_C+4]
-0x5F364D: fstp    [esp+34h+var_34]; float
-0x5F3650: call    sub_41EDF0
-0x5F3655: mov     edi, [esp+44h+var_8]; jumptable 005F3422 default case, cases 21-25,27-32
+0x5F3649: mov     ecx, [esp+3Ch+arg_8]
+0x5F364D: fstp    [esp+3Ch+var_3C]; float
+0x5F3650: call    ExtraDataList_SetTimeLeft; ExtraTimeLeft singleton setter always creates/updates the supplied float32 bit pattern; no zero or NaN removal sentinel.
+0x5F3655: mov     edi, [esp+38h+form]; jumptable 005F3422 default case, cases 21-25,27-32
 0x5F3659: mov     edx, [ebp+0]
 0x5F365C: mov     eax, [edx+170h]
 0x5F3662: mov     ecx, ebp
@@ -504,19 +504,19 @@
 0x5F374B: push    eax
 0x5F374C: push    ebp; a1
 0x5F374D: call    ContainerExtraData_GetContainerExtraDataForRef
-0x5F3752: mov     ecx, [esp+4Ch+arg_0]
-0x5F3756: mov     edx, [esp+4Ch+var_2C]
+0x5F3752: mov     ecx, dword ptr [esp+40h+arg_C]
+0x5F3756: mov     edx, [esp+40h+var_20]
 0x5F375A: add     esp, 8
 0x5F375D: push    ecx
-0x5F375E: mov     ecx, [esp+48h]
+0x5F375E: mov     ecx, [esp+3Ch+arg_8]
 0x5F3762: push    edx
-0x5F3763: mov     edx, [esp+4Ch+var_4]
+0x5F3763: mov     edx, [esp+40h+arg_4]
 0x5F3767: push    ecx
 0x5F3768: push    ebp
 0x5F3769: push    edx
 0x5F376A: push    edi
 0x5F376B: mov     ecx, eax
-0x5F376D: call    ContainerExtraData_EquipItemForActor
+0x5F376D: call    ContainerExtraData_EquipItemForActor; UCWUS pipeline note: container equip/inventory reference path is relevant to token persistence and recharge menu movement; current UCWUS bridge leaves recharge shuttling scripted.
 0x5F3772: movzx   eax, byte ptr [edi+4]
 0x5F3776: cmp     eax, 14h
 0x5F3779: jz      short loc_5F3787
@@ -551,7 +551,7 @@
 0x5F37C5: jz      short loc_5F37E0
 0x5F37C7: push    0
 0x5F37C9: lea     ecx, [eax+18h]
-0x5F37CC: call    sub_41A610
+0x5F37CC: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x5F37D1: mov     ecx, ds:0B333C4h
 0x5F37D7: cmp     ebp, ecx
 0x5F37D9: jnz     short loc_5F37E0
@@ -566,21 +566,21 @@
 0x5F37FE: test    esi, esi
 0x5F3800: jz      short loc_5F382A
 0x5F3802: mov     ecx, esi; this
-0x5F3804: call    ExtraDataList__GetRefractionProperty
+0x5F3804: call    ExtraDataList_GetRefractionPropertyExtra; Returns ExtraRefractionProperty itself. Fallout only corroborates the class label; Oblivion type behavior is authoritative.
 0x5F3809: test    eax, eax
 0x5F380B: jz      short loc_5F382A
 0x5F380D: mov     edi, [ebp+0]
 0x5F3810: mov     ecx, esi; this
-0x5F3812: call    ExtraDataList__GetRefractionProperty
+0x5F3812: call    ExtraDataList_GetRefractionPropertyExtra; Returns ExtraRefractionProperty itself. Fallout only corroborates the class label; Oblivion type behavior is authoritative.
 0x5F3817: fld     dword ptr [eax+0Ch]
 0x5F381A: mov     eax, [edi+270h]
 0x5F3820: push    ecx
-0x5F3821: fstp    [esp+48h+var_48]
+0x5F3821: fstp    [esp+3Ch+var_3C]
 0x5F3824: push    1
 0x5F3826: mov     ecx, ebp
 0x5F3828: call    eax
 0x5F382A: mov     al, 1
-0x5F382C: mov     ecx, [esp+4Ch+var_20]
+0x5F382C: mov     ecx, [esp+38h+var_C]
 0x5F3830: mov     large fs:0, ecx
 0x5F3837: pop     ecx
 0x5F3838: pop     edi
@@ -589,3 +589,20 @@
 0x5F383B: pop     ebx
 0x5F383C: add     esp, 24h
 0x5F383F: retn    10h
+0x9C28C0: mov     eax, [ebp+0Ch]
+0x9C28C3: push    eax
+0x9C28C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C28C9: pop     ecx
+0x9C28CA: retn
+0x9C28CB: mov     eax, [ebp-14h]
+0x9C28CE: push    eax
+0x9C28CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C28D4: pop     ecx
+0x9C28D5: retn
+0x9C28D6: mov     edx, [esp+arg_4]
+0x9C28DA: lea     eax, [edx-28h]
+0x9C28DD: mov     ecx, [edx-2Ch]
+0x9C28E0: xor     ecx, eax
+0x9C28E2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C28E7: mov     eax, offset stru_AEB6BC
+0x9C28EC: jmp     ___CxxFrameHandler3

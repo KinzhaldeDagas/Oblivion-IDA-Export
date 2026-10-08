@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 26,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 28,
+  "chunks": [
+    [
+      "0x419B30",
+      "0x419B34"
+    ]
+  ],
+  "chunks_sha256": "a0dc839f251cebc5875d0e6e2615987c6f32740638b5a4c81f984a3ee3e7871b",
+  "comment_regular": "Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
+  "comment_repeatable": "Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "MagicItem_GetFXEffect",
   "end_ea": "0x419B34",
-  "flags": 5120,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "MagicItem_GetFXEffect",
   "segment": ".text",
   "sha256": "a0dc839f251cebc5875d0e6e2615987c6f32740638b5a4c81f984a3ee3e7871b",
   "size": 4,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x419B30",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 4,
+  "type": "EffectSetting *__thiscall(void *magicItem, unsigned int effectIndex)",
   "xrefs_from_count": 3,
   "xrefs_to_count": 28
 }

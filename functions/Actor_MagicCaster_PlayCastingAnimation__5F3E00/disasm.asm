@@ -18,8 +18,8 @@
 0x5F3E32: cmp     ebx, ecx
 0x5F3E34: mov     [esp+30h+var_14], ebx
 0x5F3E38: jnz     short loc_5F3E43
-0x5F3E3A: push    0; a2
-0x5F3E3C: call    Player_GetAnimData
+0x5F3E3A: push    0; firstPerson
+0x5F3E3C: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x5F3E41: jmp     short loc_5F3E51
 0x5F3E43: mov     eax, [edi-5Ch]
 0x5F3E46: mov     edx, [eax+164h]
@@ -40,3 +40,12 @@
 0x5F3E6D: call    eax
 0x5F3E6F: test    al, al
 0x5F3E71: jnz     Actor_MagicCaster_PlayCastingAnimation___GetCasterAnimData
+0x9C08A0: lea     ecx, [ebp-14h]; void *
+0x9C08A3: jmp     BSStringT_Clear
+0x9C08A8: mov     edx, [esp+arg_4]
+0x9C08AC: lea     eax, [edx-20h]
+0x9C08AF: mov     ecx, [edx-24h]
+0x9C08B2: xor     ecx, eax
+0x9C08B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C08B9: mov     eax, offset stru_AE9AEC
+0x9C08BE: jmp     ___CxxFrameHandler3

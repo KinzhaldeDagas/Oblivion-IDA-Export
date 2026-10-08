@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x680BB0",
+      "0x680C55"
+    ]
+  ],
+  "chunks_sha256": "34020bb9cb81555dcff8a59dcf63fbb27c2acb5fbd916a255fcb8dd53ffe8d36",
+  "comment_regular": "Verified: Inserts a search-node index into the single AStarWorldNodeList. Reads that index's fitness from the 0x10-byte transient state table and keeps the list in ascending fitness order (before first >=, otherwise tail). This differs from Fallout's TeleportDoorSearch AStarQueue: Fallout AddNode selects one of 20 buckets from normalized fitness, then sorts within that bucket.",
+  "comment_repeatable": "Verified: Inserts a search-node index into the single AStarWorldNodeList. Reads that index's fitness from the 0x10-byte transient state table and keeps the list in ascending fitness order (before first >=, otherwise tail). This differs from Fallout's TeleportDoorSearch AStarQueue: Fallout AddNode selects one of 20 buckets from normalized fitness, then sorts within that bucket.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680BB0",
+  "display_name": "AStarWorldNodeList_InsertByFitness",
   "end_ea": "0x680C55",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680BB0",
+  "name": "AStarWorldNodeList_InsertByFitness",
   "segment": ".text",
   "sha256": "34020bb9cb81555dcff8a59dcf63fbb27c2acb5fbd916a255fcb8dd53ffe8d36",
   "size": 165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680BB0",
-  "type": "void __thiscall(BSTextureManager *this, _WORD *)",
+  "total_chunk_size": 165,
+  "type": "void __thiscall(AStarWorldNodeList *this, TravelPathSpaceDoorLink *node)",
   "xrefs_from_count": 74,
   "xrefs_to_count": 3
 }

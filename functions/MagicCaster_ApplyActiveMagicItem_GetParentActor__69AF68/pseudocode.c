@@ -35,12 +35,12 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetParentActor@<eax>(
   void (__thiscall *v32)(_DWORD *); // edx
   int v33; // eax
 
-  v32 = *(void (__thiscall **)(_DWORD *))(*a1 + 0x20);
-  a1[2] = 4;
-  v32(a1);
-  v33 = (*(int (__thiscall **)(_DWORD *))(*a1 + 0x20))(a1);
-  if ( v33 && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v33 + 0x190))(v33) )
-    return MagicCaster_ApplyActiveMagicItem_::CheckIsPoison(
+  v32 = *(void (__thiscall **)(_DWORD *))(*a1 + 0x20); /*0x69af6a*/
+  a1[2] = 4; /*0x69af6f*/
+  v32(a1); /*0x69af76*/
+  v33 = (*(int (__thiscall **)(_DWORD *))(*a1 + 0x20))(a1); /*0x69af81*/
+  if ( v33 && (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v33 + 0x190))(v33) ) /*0x69af91*/
+    return MagicCaster_ApplyActiveMagicItem_::CheckIsPoison( /*0x69af9a*/
              (int)(a1 + 0xFFFFFFE9),
              (int)a1,
              a2,
@@ -75,7 +75,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::GetParentActor@<eax>(
              a31,
              a32);
   else
-    return MagicCaster_ApplyActiveMagicItem_::CheckIsPoison(
+    return MagicCaster_ApplyActiveMagicItem_::CheckIsPoison( /*0x69af9d*/
              0,
              (int)a1,
              a2,

@@ -9,7 +9,6 @@
 0x72DFBF: mov     ebp, [esp+10h+arg_8]
 0x72DFC3: mov     ebx, [esp+10h+arg_4]
 0x72DFC7: jmp     short loc_72DFD0
-0x72DFC9: align 10h
 0x72DFD0: mov     al, [esp+10h+arg_10]
 0x72DFD4: mov     ecx, [esp+10h+arg_C]
 0x72DFD8: cmp     [esi+ecx], al

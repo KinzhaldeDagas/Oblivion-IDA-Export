@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6434F0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x643502",
-    "line": "push    0",
+    "line": "push    0; allowPositive",
     "mnemonic": "push",
     "size": 2
   },
@@ -49,25 +49,25 @@
   },
   {
     "ea": "0x643505",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+8+delta]; delta",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x643508",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x643509",
-    "line": "add     ecx, 70h ; 'p'",
+    "line": "add     ecx, 70h ; 'p'; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x64350C",
-    "line": "call    AVCollection_ModAVLimited",
+    "line": "call    AVCollection_AdjustValue",
     "mnemonic": "call",
     "size": 5
   },

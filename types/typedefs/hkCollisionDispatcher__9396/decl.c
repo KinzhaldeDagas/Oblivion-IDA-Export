@@ -1,1 +1,1 @@
-hkCollisionDispatcher
+struct hkCollisionDispatcher;

@@ -16,6 +16,6 @@
 0x6A6AE1: fstp    [esp+10h+var_10]; float
 0x6A6AE4: push    ecx; int
 0x6A6AE5: push    edx; int
-0x6A6AE6: call    sub_7B4830
+0x6A6AE6: call    sub_7B4830; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.
 0x6A6AEB: add     esp, 18h
 0x6A6AEE: retn

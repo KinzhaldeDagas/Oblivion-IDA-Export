@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6CA950",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; NiControllerSequence per-frame state machine. State 0 is inactive; 1 samples at full weight; 2 eases in then becomes 1; 3 eases out then deactivates normally; 4 is a transition source and deactivates with transition semantics; 5 is a transition destination that eases in then becomes 1; 6 is a morph source that synchronizes its partner through matching m: keys and becomes state 4. Uses +0x4C/+0x50 as transition interval, +0x48 as time offset, +0x54 as optional forced time, +0x58 as partner sequence, and +0x1C as base weight. When apply is true it commits local time through NiControllerSequence_AdvanceTime and calls NiControllerSequence_UpdateControlledBlocks. IDA correction: contiguous 0x6CAB79-0x6CAC3C was merged from a false def_6CA9B5 function into this body.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6CA9AF",
-    "line": "ja      def_6CA9B5",
+    "line": "ja      def_6CA9B5; jumptable 006CA9B5 default case",
     "mnemonic": "ja",
     "size": 6
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x6CA9F6",
-    "line": "jmp     def_6CA9B5",
+    "line": "jmp     def_6CA9B5; jumptable 006CA9B5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6CAA31",
-    "line": "jmp     def_6CA9B5",
+    "line": "jmp     def_6CA9B5; jumptable 006CA9B5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x6CAA64",
-    "line": "jmp     def_6CA9B5",
+    "line": "jmp     def_6CA9B5; jumptable 006CA9B5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x6CAA9F",
-    "line": "jmp     def_6CA9B5",
+    "line": "jmp     def_6CA9B5; jumptable 006CA9B5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x6CAAA6",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -703,19 +703,19 @@
   },
   {
     "ea": "0x6CAAAB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6CAAAD",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6CAAB0",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x6CAACF",
-    "line": "call    sub_6C6B30",
+    "line": "call    NiControllerSequence_MapTimeByMorphKeys; Maps one sequence time into a partner sequence by matching case-insensitive m: text keys. Computes source local time without committing it, brackets the previous/next source morph keys with cycle wrap, finds identical full key strings in the partner, linearly interpolates between partner key times, then wraps the result to the partner start/end range. Used only by the native morph/transition update path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x6CAB59",
-    "line": "jmp     short def_6CA9B5",
+    "line": "jmp     short def_6CA9B5; jumptable 006CA9B5 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x6CAB5D",
-    "line": "push    1; char",
+    "line": "push    1; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -1081,19 +1081,19 @@
   },
   {
     "ea": "0x6CAB62",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6CAB64",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6CAB67",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1125,6 +1125,402 @@
     "ea": "0x6CAB76",
     "line": "fstp    dword ptr [esi+4Ch]",
     "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAB79",
+    "line": "cmp     byte ptr [esp+0Ch+arg_4], 0; jumptable 006CA9B5 default case",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x6CAB7E",
+    "line": "jz      loc_6CAC34",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x6CAB84",
+    "line": "fld     dword ptr [esi+54h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAB87",
+    "line": "fld     dword ptr ds:0A7DEB4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x6CAB8D",
+    "line": "fchs",
+    "mnemonic": "fchs",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAB8F",
+    "line": "fucompp",
+    "mnemonic": "fucompp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAB91",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAB93",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAB96",
+    "line": "jnp     short loc_6CAB9F",
+    "mnemonic": "jnp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAB98",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAB9A",
+    "line": "fld     dword ptr [esi+54h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAB9D",
+    "line": "jmp     short loc_6CABF0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAB9F",
+    "line": "mov     ecx, [esi+58h]; int",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABA2",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABA4",
+    "line": "jz      short loc_6CABED",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABA6",
+    "line": "fld     dword ptr [ecx+34h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABA9",
+    "line": "fld     dword ptr [ecx+48h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABAC",
+    "line": "fadd    st, st(2)",
+    "mnemonic": "fadd",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABAE",
+    "line": "fucompp",
+    "mnemonic": "fucompp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABB0",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABB2",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABB5",
+    "line": "jnp     short loc_6CABC6",
+    "mnemonic": "jnp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABB7",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABB9",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6CABBA",
+    "line": "fstp    [esp+14h+easeOutTime]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABBD",
+    "line": "call    NiControllerSequence_Update; NiControllerSequence per-frame state machine. State 0 is inactive; 1 samples at full weight; 2 eases in then becomes 1; 3 eases out then deactivates normally; 4 is a transition source and deactivates with transition semantics; 5 is a transition destination that eases in then becomes 1; 6 is a morph source that synchronizes its partner through matching m: keys and becomes state 4. Uses +0x4C/+0x50 as transition interval, +0x48 as time offset, +0x54 as optional forced time, +0x58 as partner sequence, and +0x1C as base weight. When apply is true it commits local time through NiControllerSequence_AdvanceTime and calls NiControllerSequence_UpdateControlledBlocks. IDA correction: contiguous 0x6CAB79-0x6CAC3C was merged from a false def_6CA9B5 function into this body.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6CABC2",
+    "line": "fld     [esp+0Ch+arg_0]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x6CABC6",
+    "line": "mov     eax, [esi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABC9",
+    "line": "fadd    dword ptr [eax+48h]",
+    "mnemonic": "fadd",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABCC",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6CABCD",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABCF",
+    "line": "fstp    [esp+10h+arg_4]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x6CABD3",
+    "line": "fld     [esp+10h+arg_4]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x6CABD7",
+    "line": "fstp    [esp+10h+var_10]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABDA",
+    "line": "push    eax; int",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6CABDB",
+    "line": "call    NiControllerSequence_MapTimeByMorphKeys; Maps one sequence time into a partner sequence by matching case-insensitive m: text keys. Computes source local time without committing it, brackets the previous/next source morph keys with cycle wrap, finds identical full key strings in the partner, linearly interpolates between partner key times, then wraps the result to the partner start/end range. Used only by the native morph/transition update path.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6CABE0",
+    "line": "fstp    [esp+0Ch+arg_4]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x6CABE4",
+    "line": "fld     [esp+0Ch+arg_4]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x6CABE8",
+    "line": "fdiv    dword ptr [esi+28h]",
+    "mnemonic": "fdiv",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABEB",
+    "line": "jmp     short loc_6CABF0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABED",
+    "line": "fadd    dword ptr [esi+48h]",
+    "mnemonic": "fadd",
+    "size": 3
+  },
+  {
+    "ea": "0x6CABF0",
+    "line": "fstp    [esp+0Ch+arg_4]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x6CABF4",
+    "line": "push    1; char",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABF6",
+    "line": "fld     [esp+10h+arg_4]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x6CABFA",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x6CABFB",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6CABFD",
+    "line": "fstp    [esp+14h+easeOutTime]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAC00",
+    "line": "call    NiControllerSequence_AdvanceTime; NiControllerSequence time advance. Computes scaled time from input, last input +0x34, accumulated/scaled time +0x38, and frequency +0x28; wraps cycle type 0 or clamps other cycle types to start/end +0x2C/+0x30. When commit is true, stores +0x34, +0x38, and resulting local time +0x3C; otherwise returns the computed local time without mutation.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6CAC05",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAC08",
+    "line": "fstp    [esp+18h+var_10]; float",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x6CAC0C",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAC0E",
+    "line": "fld     [esp+18h+var_8]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x6CAC12",
+    "line": "fstp    [esp+18h+easeOutTime]; float",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x6CAC16",
+    "line": "fld     dword ptr [esi+1Ch]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAC19",
+    "line": "fmul    [esp+18h+a2]",
+    "mnemonic": "fmul",
+    "size": 4
+  },
+  {
+    "ea": "0x6CAC1D",
+    "line": "fstp    [esp+18h+arg_4]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x6CAC21",
+    "line": "fld     [esp+18h+arg_4]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x6CAC25",
+    "line": "fstp    [esp+18h+var_18]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAC28",
+    "line": "call    NiControllerSequence_UpdateControlledBlocks; Propagates a sequence update across its 0x10-byte controlled-block records. For each bound interpolator/controller it writes sample time, effective sequence weight, and transition weight into the selected blend item, invalidates cached times, and marks the blend data dirty. This consumes already-selected sequence timing; it does not select animation paths or map entries.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6CAC2D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6CAC2E",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAC31",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAC34",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x6CAC36",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6CAC37",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x6CAC3A",
+    "line": "retn    8",
+    "mnemonic": "retn",
     "size": 3
   }
 ]

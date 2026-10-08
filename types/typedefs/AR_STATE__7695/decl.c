@@ -1,1 +1,1 @@
-AR_STATE
+typedef tagAR_STATE AR_STATE;

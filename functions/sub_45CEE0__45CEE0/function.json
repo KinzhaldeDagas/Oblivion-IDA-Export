@@ -1,18 +1,31 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x45CEE0",
+      "0x45D027"
+    ]
+  ],
+  "chunks_sha256": "a61baed0de3864e5f5f01d854a143e68d3309c85d1cf8ef0361ed8c7ec7d4039",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-09-08: Map tuning qualification: attached-animation drain starts at first occupied bucket, traverses through452600 and removes processed keys. Rehashing can change execution order; no order-independence proof was established. Retain existing behavior while evaluating the separately verified ID-array/master-list bottlenecks.\nMEF PERF 2026-10-02 PASS2: Verified attached-animation drain traverses bucket order via452600, looks up/dynamic-casts forms, transfers blobs to extra data for refs without +3C scene node or loads/frees them otherwise. Every normal iteration removes the key. Rehash may change callback order; no order independence established.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
-  "display_name": "sub_45CEE0",
+  "display_name": "SaveLoad_DrainAttachedAnimationBlobs",
   "end_ea": "0x45D027",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45CEE0",
+  "name": "SaveLoad_DrainAttachedAnimationBlobs",
   "segment": ".text",
   "sha256": "a61baed0de3864e5f5f01d854a143e68d3309c85d1cf8ef0361ed8c7ec7d4039",
   "size": 327,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45CEE0",
+  "total_chunk_size": 327,
   "type": "char __thiscall(_DWORD *this)",
   "xrefs_from_count": 130,
   "xrefs_to_count": 1

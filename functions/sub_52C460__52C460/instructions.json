@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x52C718",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1372,12 +1372,6 @@
     "line": "jmp     short loc_52C750",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x52C74D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x52C750",
@@ -1579,7 +1573,7 @@
   },
   {
     "ea": "0x52C7B7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,7 +1825,7 @@
   },
   {
     "ea": "0x52C83C",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1843,13 +1837,13 @@
   },
   {
     "ea": "0x52C843",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52C844",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },

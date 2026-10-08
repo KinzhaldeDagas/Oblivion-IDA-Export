@@ -28,10 +28,10 @@
 0x4CE1F4: test    dword ptr [edi+8], 400h
 0x4CE1FB: jnz     loc_4CE317
 0x4CE201: mov     eax, ds:0B05E20h
-0x4CE206: mov     ecx, edi
-0x4CE208: mov     [esi], eax
+0x4CE206: mov     ecx, edi; this
+0x4CE208: mov     [esi], eax; CELL sub-block container contract: exterior type 5 is the direct parent emitted for a non-persistent exterior CELL.
 0x4CE20A: mov     dword ptr [esi+0Ch], 5
-0x4CE211: call    sub_4CA640
+0x4CE211: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4CE216: pop     ebx
 0x4CE217: pop     edi
 0x4CE218: mov     [esi+10h], ebp
@@ -39,14 +39,14 @@
 0x4CE21E: mov     [esi+8], eax
 0x4CE221: pop     esi
 0x4CE222: pop     ebp
-0x4CE223: retn    8
+0x4CE223: retn    8; No further group descriptor is emitted for an unexpected exterior parent; paired constructor yields exact [0,1,4,5] or persistent [0,1] CELL chains.
 0x4CE226: mov     eax, [edi+50h]
 0x4CE229: mov     ecx, [ebx+8]
 0x4CE22C: cmp     ecx, [eax+0Ch]
 0x4CE22F: jnz     loc_4CE317
 0x4CE235: test    dword ptr [edi+8], 400h
 0x4CE23C: jnz     loc_4CE317
-0x4CE242: mov     edx, ds:0B05E20h
+0x4CE242: mov     edx, ds:0B05E20h; CELL block container contract: exterior type 4 emits a type-5 sub-block; records are not direct type-4 children.
 0x4CE248: mov     dword ptr [esi+0Ch], 4
 0x4CE24F: jmp     loc_4CE305
 0x4CE254: mov     eax, [ebx+8]
@@ -81,7 +81,7 @@
 0x4CE2A8: mov     [esi+8], edx
 0x4CE2AB: pop     esi
 0x4CE2AC: pop     ebp
-0x4CE2AD: retn    8
+0x4CE2AD: retn    8; Interior constructor begins at top CELL and then accepts only type 0 -> 2 -> 3 progression, yielding exact [0,2,3].
 0x4CE2B0: mov     eax, [ebx+0Ch]
 0x4CE2B3: sub     eax, ebp
 0x4CE2B5: jz      short loc_4CE2ED
@@ -92,10 +92,10 @@
 0x4CE2C3: cmp     [ebx+8], eax
 0x4CE2C6: jnz     short loc_4CE317
 0x4CE2C8: mov     eax, ds:0B05E20h
-0x4CE2CD: mov     ecx, edi
-0x4CE2CF: mov     [esi], eax
+0x4CE2CD: mov     ecx, edi; this
+0x4CE2CF: mov     [esi], eax; CELL sub-block container contract: interior type 3 is the direct parent emitted for a CELL record.
 0x4CE2D1: mov     dword ptr [esi+0Ch], 3
-0x4CE2D8: call    sub_4CA640
+0x4CE2D8: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4CE2DD: pop     ebx
 0x4CE2DE: pop     edi
 0x4CE2DF: mov     [esi+10h], ebp
@@ -107,7 +107,7 @@
 0x4CE2ED: mov     ecx, [ebx+8]
 0x4CE2F0: cmp     ecx, ds:0B06048h
 0x4CE2F6: jnz     short loc_4CE317
-0x4CE2F8: mov     edx, ds:0B05E20h
+0x4CE2F8: mov     edx, ds:0B05E20h; CELL block container contract: interior type 2 emits a type-3 sub-block; records are not direct type-2 children.
 0x4CE2FE: mov     dword ptr [esi+0Ch], 2
 0x4CE305: mov     ecx, edi
 0x4CE307: mov     [esi], edx

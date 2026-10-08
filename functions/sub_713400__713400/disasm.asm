@@ -19,7 +19,6 @@
 0x713431: mov     [esp+18h+var_8], edi
 0x713435: jbe     loc_7134C8
 0x71343B: jmp     short loc_713440
-0x71343D: align 10h
 0x713440: mov     ecx, [esi+1F0h]
 0x713446: mov     ecx, [ecx+edi*4]
 0x713449: mov     edx, [ecx]

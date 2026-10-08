@@ -164,7 +164,6 @@
 0x4AFCA3: mov     ebp, eax
 0x4AFCA5: jz      short loc_4AFCFD
 0x4AFCA7: jmp     short loc_4AFCB0
-0x4AFCA9: align 10h
 0x4AFCB0: mov     esi, [esp+2Ch+var_18]
 0x4AFCB4: mov     ecx, esi
 0x4AFCB6: call    BSSimpleList_IsEmpty
@@ -173,10 +172,10 @@
 0x4AFCBF: mov     esi, [esi]
 0x4AFCC1: test    esi, esi
 0x4AFCC3: jz      short loc_4AFCD5
-0x4AFCC5: mov     ecx, esi; void *
-0x4AFCC7: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4AFCC5: mov     ecx, esi; this
+0x4AFCC7: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4AFCCC: push    esi
-0x4AFCCD: call    FormHeapFree
+0x4AFCCD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4AFCD2: add     esp, 4
 0x4AFCD5: mov     ecx, [esp+2Ch+var_18]
 0x4AFCD9: mov     eax, [ecx+4]
@@ -187,7 +186,7 @@
 0x4AFCE6: mov     edx, [eax]
 0x4AFCE8: push    eax
 0x4AFCE9: mov     [ecx], edx
-0x4AFCEB: call    FormHeapFree
+0x4AFCEB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4AFCF0: add     esp, 4
 0x4AFCF3: jmp     short loc_4AFCB0
 0x4AFCF5: mov     dword ptr [ecx], 0
@@ -225,7 +224,7 @@
 0x4AFD50: mov     eax, [esp+2Ch+var_4]
 0x4AFD54: mov     esi, [eax+4]
 0x4AFD57: push    eax
-0x4AFD58: call    FormHeapFree
+0x4AFD58: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4AFD5D: add     esp, 4
 0x4AFD60: test    esi, esi
 0x4AFD62: mov     [esp+2Ch+var_4], esi

@@ -1,10 +1,10 @@
-0x4E4F70: push    edi
+0x4E4F70: push    edi; Verified duplicate check for a deferred cross-cell PGRI request: compares the point-array entry selected by the record's low u16 index and matches the stored neighbor NiPoint3 at +4 using fConstant_2 tolerance.
 0x4E4F71: mov     edi, ecx
 0x4E4F73: xor     al, al
 0x4E4F75: cmp     dword ptr [edi+24h], 0
 0x4E4F79: jz      short loc_4E4FD3
 0x4E4F7B: push    ebp
-0x4E4F7C: mov     ebp, [esp+8+arg_0]
+0x4E4F7C: mov     ebp, [esp+8+point]
 0x4E4F80: test    ebp, ebp
 0x4E4F82: jz      short loc_4E4FD2
 0x4E4F84: push    esi
@@ -12,7 +12,7 @@
 0x4E4F88: test    esi, esi
 0x4E4F8A: jz      short loc_4E4FD1
 0x4E4F8C: push    ebx
-0x4E4F8D: mov     ebx, [esp+10h+arg_4]
+0x4E4F8D: mov     ebx, [esp+10h+neighborPosition]
 0x4E4F91: cmp     dword ptr [esi+4], 0
 0x4E4F95: jnz     short loc_4E4F9C
 0x4E4F97: cmp     dword ptr [esi], 0

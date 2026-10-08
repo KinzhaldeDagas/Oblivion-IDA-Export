@@ -1,1 +1,5 @@
-_div_t
+struct _div_t
+{
+int quot;
+int rem;
+};

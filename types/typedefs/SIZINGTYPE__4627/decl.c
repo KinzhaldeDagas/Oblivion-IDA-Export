@@ -1,1 +1,6 @@
-SIZINGTYPE
+enum SIZINGTYPE : __int32
+{
+ST_TRUESIZE = 0x0,
+ST_STRETCH = 0x1,
+ST_TILE = 0x2,
+};

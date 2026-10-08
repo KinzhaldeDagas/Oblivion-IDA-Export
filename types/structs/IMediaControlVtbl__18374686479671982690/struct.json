@@ -1,106 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IMediaControlVtbl",
+  "definition": "struct IMediaControlVtbl\n{\nHRESULT (__stdcall *QueryInterface)(IMediaControl *This, const IID *const riid, LPVOID *ppvObj);\nULONG (__stdcall *AddRef)(IMediaControl *This);\nULONG (__stdcall *Release)(IMediaControl *This);\nHRESULT (__stdcall *GetTypeInfoCount)(IMediaControl *This, UINT *pctinfo);\nHRESULT (__stdcall *GetTypeInfo)(IMediaControl *This, UINT itinfo, LCID lcid, ITypeInfo **pptinfo);\nHRESULT (__stdcall *GetIDsOfNames)(IMediaControl *This, const IID *const riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid);\nHRESULT (__stdcall *Invoke)(IMediaControl *This, DISPID dispidMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr);\nHRESULT (__stdcall *Run)(IMediaControl *This);\nHRESULT (__stdcall *Pause)(IMediaControl *This);\nHRESULT (__stdcall *Stop)(IMediaControl *This);\nHRESULT (__stdcall *GetState)(IMediaControl *This, int msTimeout, OAFilterState *pfs);\nHRESULT (__stdcall *RenderFile)(IMediaControl *This, BSTR strFilename);\nHRESULT (__stdcall *AddSourceFilter)(IMediaControl *This, BSTR strFilename, IDispatch **ppUnk);\nHRESULT (__stdcall *get_FilterCollection)(IMediaControl *This, IDispatch **ppUnk);\nHRESULT (__stdcall *get_RegFilterCollection)(IMediaControl *This, IDispatch **ppUnk);\nHRESULT (__stdcall *StopWhenReady)(IMediaControl *This);\n}\n",
   "id": 18374686479671982690,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IMediaControl *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IMediaControl *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTypeInfoCount",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, UINT *pctinfo)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTypeInfo",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, UINT itinfo, LCID lcid, ITypeInfo **pptinfo)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetIDsOfNames",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, const IID *const riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Invoke",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, DISPID dispidMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Run",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Pause",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Stop",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetState",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, int msTimeout, OAFilterState *pfs)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RenderFile",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, BSTR strFilename)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddSourceFilter",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, BSTR strFilename, IDispatch **ppUnk)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_FilterCollection",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, IDispatch **ppUnk)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_RegFilterCollection",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This, IDispatch **ppUnk)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StopWhenReady",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaControl *This)"
     }
   ],
   "name": "IMediaControlVtbl",
+  "ordinal": 9123,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

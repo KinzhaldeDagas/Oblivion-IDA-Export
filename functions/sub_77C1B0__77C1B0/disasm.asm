@@ -2,7 +2,7 @@
 0x77C1B1: push    edi
 0x77C1B2: mov     esi, ecx
 0x77C1B4: xor     edi, edi
-0x77C1B6: push    offset NiRefObject_objcount; lpAddend
+0x77C1B6: push    0B3FD64h; lpAddend
 0x77C1BB: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x77C1C1: mov     [esi+4], edi
 0x77C1C4: call    dword ptr ds:0A28078h
@@ -18,11 +18,11 @@
 0x77C1E2: mov     [esi+14h], edi
 0x77C1E5: mov     [esi+18h], edi
 0x77C1E8: call    sub_7825F0
-0x77C1ED: mov     ecx, [esp+14h+Size]
+0x77C1ED: mov     ecx, dword ptr [esp+14h+Size]
 0x77C1F1: mov     edx, [esp+14h+arg_4]
 0x77C1F5: add     esp, 0Ch
 0x77C1F8: mov     [esi+0Ch], eax
-0x77C1FB: mov     eax, [esp+8+arg_C]
+0x77C1FB: mov     eax, dword ptr [esp+8+Size+4]
 0x77C1FF: push    eax; Src
 0x77C200: push    ecx; Size
 0x77C201: mov     ecx, esi

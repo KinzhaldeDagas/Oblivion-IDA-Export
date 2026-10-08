@@ -19,14 +19,14 @@
 0x5D1E86: add     esp, 14h
 0x5D1E89: test    ebx, ebx
 0x5D1E8B: jz      loc_5D1FB8
-0x5D1E91: call    sub_578D70
+0x5D1E91: call    InterfaceManager_ConsumeMessageButton
 0x5D1E96: cmp     al, 1
 0x5D1E98: jnz     loc_5D1FB4
 0x5D1E9E: mov     ecx, ds:0B3B710h
 0x5D1EA4: push    esi; a3
 0x5D1EA5: push    0FB9h
 0x5D1EAA: call    Tile_GetFloat
-0x5D1EAF: call    Double_To_SInt32
+0x5D1EAF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D1EB4: mov     ecx, ds:0B333C4h; this
 0x5D1EBA: push    0; a3
 0x5D1EBC: push    eax; a2
@@ -56,9 +56,9 @@
 0x5D1F11: fild    [esp+14h+var_8]
 0x5D1F15: push    ecx
 0x5D1F16: mov     ecx, [ebx+34h]; this
-0x5D1F19: fstp    [esp+18h+a2]; a3
-0x5D1F1C: push    0FAEh; a2
-0x5D1F21: call    Tile_SetFloat
+0x5D1F19: fstp    [esp+18h+a2]; value
+0x5D1F1C: push    0FAEh; propertyCode
+0x5D1F21: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D1F26: mov     ecx, ds:0B333C4h
 0x5D1F2C: add     ecx, 44h ; 'D'; this
 0x5D1F2F: call    ExtraDataList_GetContainerChanges
@@ -91,12 +91,12 @@
 0x5D1F73: mov     ecx, esi
 0x5D1F75: call    ContainerEntryExtraData_DestroyDataTable
 0x5D1F7A: push    esi
-0x5D1F7B: call    FormHeapFree
+0x5D1F7B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D1F80: fld1
 0x5D1F82: mov     ecx, [ebx+3Ch]; this
-0x5D1F85: fstp    [esp+18h+a2]; a3
-0x5D1F88: push    0FA1h; a2
-0x5D1F8D: call    Tile_SetFloat
+0x5D1F85: fstp    [esp+18h+a2]; value
+0x5D1F88: push    0FA1h; propertyCode
+0x5D1F8D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D1F92: pop     edi
 0x5D1F93: mov     ecx, ds:0B333C4h
 0x5D1F99: mov     edx, [ecx]

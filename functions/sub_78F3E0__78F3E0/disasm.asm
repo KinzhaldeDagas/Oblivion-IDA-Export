@@ -1,4 +1,4 @@
-0x78F3E0: fldz
+0x78F3E0: fldz; Stock compact SIdvBranchVertex ctor: 0x48-byte element; zeros direction/position, initializes +0x1C..+0x3C 3x3 transform to identity. Radius/running length/wind are filled by CBranch::Compute before use.
 0x78F3E2: mov     eax, ecx
 0x78F3E4: fst     dword ptr [eax+8]
 0x78F3E7: fst     dword ptr [eax+4]

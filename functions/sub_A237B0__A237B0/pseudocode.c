@@ -1,9 +1,10 @@
-void __cdecl sub_A237B0()
+// Verified INI setting cleanup removes iCanopyShadowScale from the setting list and frees a dynamically allocated name if applicable.
+void __cdecl INISetting_iCanopyShadowScale_SpeedTree_atexit()
 {
-  BSSimpleList_Remove(dword_B07CFC, (int)&dword_B12630);
-  if ( off_B12634 )
+  BSSimpleList_Remove(dword_B07CFC, (int)&iCanopyShadowScale_SpeedTree); /*0xa237ba*/
+  if ( MEMORY[0xB12634] ) /*0xa237c6*/
   {
-    if ( *off_B12634 == 0x53 )
-      FormHeapFree((unsigned int)off_B12634);
+    if ( *MEMORY[0xB12634] == 0x53 ) /*0xa237cb*/
+      FormHeapFree((unsigned int)MEMORY[0xB12634]); /*0xa237ce*/
   }
 }

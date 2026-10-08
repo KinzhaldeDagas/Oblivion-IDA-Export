@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_SP_DRVINFO_DATA_V2_A",
+  "definition": "struct _SP_DRVINFO_DATA_V2_A\n{\nDWORD cbSize;\nDWORD DriverType;\nULONG_PTR Reserved;\nCHAR Description[256];\nCHAR MfgName[256];\nCHAR ProviderName[256];\nFILETIME DriverDate;\nDWORDLONG DriverVersion;\n}\n",
   "id": 18374686479672039957,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DriverType",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "ULONG_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Description",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 256
+      "size": 256,
+      "type": "CHAR[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MfgName",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 256
+      "size": 256,
+      "type": "CHAR[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProviderName",
       "offset": 528,
       "offset_hex": "0x210",
-      "size": 256
+      "size": 256,
+      "type": "CHAR[256]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DriverDate",
       "offset": 784,
       "offset_hex": "0x310",
-      "size": 8
+      "size": 8,
+      "type": "FILETIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DriverVersion",
       "offset": 792,
       "offset_hex": "0x318",
-      "size": 8
+      "size": 8,
+      "type": "DWORDLONG"
     }
   ],
   "name": "_SP_DRVINFO_DATA_V2_A",
+  "ordinal": 5931,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 800
 }

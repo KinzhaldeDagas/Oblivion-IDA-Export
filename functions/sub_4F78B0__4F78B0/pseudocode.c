@@ -1,56 +1,56 @@
 void __cdecl sub_4F78B0(Actor *a1, int a2, int a3, double *a4)
 {
-  *a4 = 0.0;
-  if ( a1 )
+  *a4 = 0.0; /*0x4f78b7*/
+  if ( a1 ) /*0x4f78c0*/
   {
-    if ( a1->vtbl->super.super.IsActor((TESObjectREFR *)a1) )
+    if ( a1->vtbl->super.super.IsActor((TESObjectREFR *)a1) ) /*0x4f78d0*/
     {
-      if ( a1->members.super.process )
+      if ( a1->members.super.process ) /*0x4f78da*/
       {
-        if ( sub_5E0380(a1) )
+        if ( Actor::GetCurrentPackage(a1) ) /*0x4f78e6*/
         {
-          switch ( sub_5E0380(a1)->members.type )
+          switch ( Actor::GetCurrentPackage(a1)->members.type ) /*0x4f7907*/
           {
-            case 0u:
-            case 1u:
-            case 2u:
-            case 3u:
-            case 4u:
-            case 5u:
-            case 6u:
-            case 7u:
-            case 8u:
-            case 9u:
-            case 0xAu:
-            case 0xBu:
-            case 0xCu:
-            case 0xDu:
-            case 0xEu:
-            case 0xFu:
-            case 0x10u:
-            case 0x11u:
-            case 0x12u:
-            case 0x13u:
-            case 0x14u:
-            case 0x15u:
-            case 0x16u:
-            case 0x17u:
-            case 0x18u:
-            case 0x19u:
-            case 0x1Au:
-            case 0x1Bu:
-            case 0x1Cu:
-            case 0x1Du:
-            case 0x1Eu:
-            case 0x1Fu:
-            case 0x20u:
-              JUMPOUT(0x4F7A47);
+            case kPackageType_Find: /*0x4f7907*/
+            case kPackageType_Follow: /*0x4f7907*/
+            case kPackageType_Escort: /*0x4f7907*/
+            case kPackageType_Eat: /*0x4f7907*/
+            case kPackageType_Sleep: /*0x4f7907*/
+            case kPackageType_Wander: /*0x4f7907*/
+            case kPackageType_Travel: /*0x4f7907*/
+            case kPackageType_Accompany: /*0x4f7907*/
+            case kPackageType_UseItemAt: /*0x4f7907*/
+            case kPackageType_Ambush: /*0x4f7907*/
+            case kPackageType_FleeNotCombat: /*0x4f7907*/
+            case kPackageType_CastMagic: /*0x4f7907*/
+            case kPackageType_Combat: /*0x4f7907*/
+            case kPackageType_CombatLow: /*0x4f7907*/
+            case kPackageType_Activate: /*0x4f7907*/
+            case kPackageType_Alarm: /*0x4f7907*/
+            case kPackageType_Flee: /*0x4f7907*/
+            case kPackageType_Trespass: /*0x4f7907*/
+            case kPackageType_Dialogue: /*0x4f7907*/
+            case kPackageType_Spectator: /*0x4f7907*/
+            case kPackageType_ReactToDead: /*0x4f7907*/
+            case kPackageType_GetUp: /*0x4f7907*/
+            case kPackageType_MountHorse: /*0x4f7907*/
+            case kPackageType_DismountHorse: /*0x4f7907*/
+            case kPackageType_DoNothing: /*0x4f7907*/
+            case kPackageType_CastTargetSpell: /*0x4f7907*/
+            case kPackageType_CastTouchSpell: /*0x4f7907*/
+            case kPackageType_VampireFeed: /*0x4f7907*/
+            case kPackageType_Surface: /*0x4f7907*/
+            case kPackageType_SearchForAttacker: /*0x4f7907*/
+            case kPackageType_ClearMountPosition: /*0x4f7907*/
+            case kPackageType_SummonCreatureDefend: /*0x4f7907*/
+            case kPackageType_MovementBlocked: /*0x4f7907*/
+              JUMPOUT(0x4F7A47); /*0x4f7a47*/
             default:
-              JUMPOUT(0x4F7A41);
+              JUMPOUT(0x4F7A41); /*0x4f7a41*/
           }
         }
       }
     }
   }
-  JUMPOUT(0x4F7A49);
+  JUMPOUT(0x4F7A49); /*0x4f7a49*/
 }

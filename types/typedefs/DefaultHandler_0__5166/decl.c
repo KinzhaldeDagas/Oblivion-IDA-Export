@@ -1,1 +1,1 @@
-DefaultHandler_0
+typedef DefaultHandler DefaultHandler_0;

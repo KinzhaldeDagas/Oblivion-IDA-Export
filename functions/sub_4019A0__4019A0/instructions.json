@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4019A0",
-    "line": "push    esi",
+    "line": "push    esi; Releases consecutive free blocks at the high end of the heap backing buffer, reducing committed heap usage and updating the tail pointer.",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4019EA",
-    "line": "call    sub_401690",
+    "line": "call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
     "mnemonic": "call",
     "size": 5
   },

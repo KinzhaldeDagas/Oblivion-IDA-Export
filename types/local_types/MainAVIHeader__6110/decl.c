@@ -1,1 +1,1 @@
-MainAVIHeader
+typedef _MainAVIHeader MainAVIHeader;

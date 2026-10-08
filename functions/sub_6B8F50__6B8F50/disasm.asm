@@ -1,4 +1,4 @@
-0x6B8F50: push    0FFFFFFFFh
+0x6B8F50: push    0FFFFFFFFh; Ordinary MenuTopics destroy every DialogueResponse. INFOGENERAL skips response destruction here because ExtraInfoGeneralTopic owns the cached object; that owner's destructor clears isInfoGeneralTopic first, then calls this routine for full cleanup.
 0x6B8F52: push    offset SEH_6B8F50
 0x6B8F57: mov     eax, large fs:0
 0x6B8F5D: push    eax
@@ -27,10 +27,10 @@
 0x6B8F9B: mov     edi, [esi]
 0x6B8F9D: test    edi, edi
 0x6B8F9F: jz      short loc_6B8FB1
-0x6B8FA1: mov     ecx, edi
-0x6B8FA3: call    sub_6B8050
+0x6B8FA1: mov     ecx, edi; this
+0x6B8FA3: call    DialogueResponse__Destroy
 0x6B8FA8: push    edi
-0x6B8FA9: call    FormHeapFree
+0x6B8FA9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B8FAE: add     esp, 4
 0x6B8FB1: mov     eax, [esi+4]
 0x6B8FB4: test    eax, eax
@@ -40,14 +40,14 @@
 0x6B8FBE: mov     edx, [eax]
 0x6B8FC0: push    eax
 0x6B8FC1: mov     [esi], edx
-0x6B8FC3: call    FormHeapFree
+0x6B8FC3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B8FC8: add     esp, 4
 0x6B8FCB: jmp     short loc_6B8F90
 0x6B8FCD: mov     dword ptr [esi], 0
 0x6B8FD3: jmp     short loc_6B8F90
 0x6B8FD5: mov     eax, [ebp+0]
 0x6B8FD8: push    eax
-0x6B8FD9: call    FormHeapFree
+0x6B8FD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B8FDE: add     esp, 4
 0x6B8FE1: mov     dword ptr [ebp+0], 0
 0x6B8FE8: mov     word ptr [ebp+6], 0
@@ -60,3 +60,12 @@
 0x6B9002: pop     ebp
 0x6B9003: add     esp, 10h
 0x6B9006: retn
+0x9C6ED0: mov     ecx, [ebp-10h]; void *
+0x9C6ED3: jmp     BSStringT_Clear
+0x9C6ED8: mov     edx, [esp+arg_4]
+0x9C6EDC: lea     eax, [edx-10h]
+0x9C6EDF: mov     ecx, [edx-14h]
+0x9C6EE2: xor     ecx, eax
+0x9C6EE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6EE9: mov     eax, offset stru_AEF360
+0x9C6EEE: jmp     ___CxxFrameHandler3

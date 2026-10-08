@@ -10,7 +10,6 @@
 0x6DD193: mov     ebp, ecx
 0x6DD195: xor     esi, esi
 0x6DD197: jmp     short loc_6DD1A0
-0x6DD199: align 10h
 0x6DD1A0: fld     dword ptr [esi+0B24740h]
 0x6DD1A6: push    ecx
 0x6DD1A7: fmul    [esp+18h+arg_8]

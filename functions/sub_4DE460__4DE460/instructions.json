@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x4DE493",
-    "line": "push    4",
+    "line": "push    4; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DE495",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4DE499",
-    "line": "call    sub_4D8270",
+    "line": "call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4DE4A0",
-    "line": "call    sub_4D82E0",
+    "line": "call    TESObjectREFR_ClearActionFlagBits",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x4DE559",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x4DE55C",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DE55E",
-    "line": "fstp    [esp+1Ch+a2]; float",
+    "line": "fstp    [esp+1Ch+a2]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DE561",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x4DE568",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x4DE572",
-    "line": "fstp    [esp+20h+a2]; float",
+    "line": "fstp    [esp+20h+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -571,19 +571,19 @@
   },
   {
     "ea": "0x4DE57A",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DE57D",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DE57F",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x4DE583",
-    "line": "push    ebx; int",
+    "line": "push    ebx; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DE584",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x4DE5B3",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x4DE5BA",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x4DE5BD",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DE5BF",
-    "line": "fstp    [esp+1Ch+a2]; float",
+    "line": "fstp    [esp+1Ch+a2]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DE5C2",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,13 +841,13 @@
   },
   {
     "ea": "0x4DE5F1",
-    "line": "push    edi; int",
+    "line": "push    edi; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DE5F2",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x4DE621",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

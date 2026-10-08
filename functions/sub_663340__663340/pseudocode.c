@@ -1,53 +1,50 @@
-OSGlobals *__userpurge sub_663340@<eax>(_DWORD *a1@<ecx>, double a2@<st2>, double a3@<st1>, int a4@<edi>, int a5)
+OSGlobals *__userpurge sub_663340@<eax>(TESForm *a1@<ecx>, double a2@<st2>, double a3@<st1>, UInt32 a4)
 {
   OSGlobals *result; // eax
-  TESSaveLoad *v9; // ecx
-  bool v10; // al
-  TESSaveLoad *v11; // ecx
-  float *v12; // eax
-  float *v13; // ebp
-  double v14; // st7
-  size_t v15; // [esp+10h] [ebp-18h]
-  int v16; // [esp+20h] [ebp-8h] BYREF
-  char v17; // [esp+24h] [ebp-4h]
+  TESSaveLoadGame_SerializationView *v7; // ecx
+  bool v8; // al
+  TESSaveLoadGame_SerializationView *v9; // ecx
+  float *v10; // eax
+  float *v11; // ebp
+  double v12; // st7
+  UInt32 destination; // [esp+20h] [ebp-8h] BYREF
+  char v14; // [esp+24h] [ebp-4h]
 
-  result = OSGlobals;
-  if ( !OSGlobals->unk04 )
+  result = MEMORY[0xB33398]; /*0x663340*/
+  if ( !MEMORY[0xB33398]->unk04 )
   {
-    if ( a1[0x1C3] )
+    if ( *(_DWORD *)&a1[0x4B].member.type )
     {
-      HIDWORD(v15) = a4;
-      sub_4523F0(SaveLoad_CurrentSavegame);
-      LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) = BYTE1(SaveLoad_CurrentSavegame[1].unk01C[1]);
-      v9 = SaveLoad_CurrentSavegame;
-      byte_B3BB07 = 0;
-      v10 = sub_45A500(v9);
-      v11 = SaveLoad_CurrentSavegame;
-      v17 = v10;
-      sub_45A530(v11, 1);
-      v12 = sub_459FA0(a1);
-      SaveLoad_CurrentSavegame->unk030[5] = 0x1FFFF000;
-      v13 = v12;
-      (*(void (__thiscall **)(_DWORD *, int))(*a1 + 0x60))(a1, a5 & 0x1FFFF000);
-      LODWORD(v15) = 4;
-      SaveLoad_CurrentSavegame->unk000[5] = a1[0x1C3];
-      TESForm_LoadDataFromCurrentSaveGame((TESForm *)&v16, v15);
-      BYTE1(SaveLoad_CurrentSavegame[1].createdObjectList.next) = 0;
-      (*(void (__thiscall **)(_DWORD *, int, int))(*a1 + 0x54))(a1, v16, a5);
-      SaveLoad_CurrentSavegame->unk000[5] = 0;
-      SaveLoad_CurrentSavegame->unk030[5] = 0x60000000;
-      (*(void (__thiscall **)(_DWORD *, int))(*a1 + 0x60))(a1, a5 & 0x60000000);
-      sub_45A020((int)a1, a1, v13);
-      (*(void (__thiscall **)(_DWORD *, int, int))(*a1 + 0x58))(a1, v16, a5);
-      v14 = ((double (__thiscall *)(_DWORD *, int, int))*(_DWORD *)(*a1 + 0x5C))(a1, v16, a5);
-      sub_461030(SaveLoad_CurrentSavegame, a2, a3, v14, 0);
-      BYTE1(SaveLoad_CurrentSavegame[1].createdObjectList.next) = 1;
-      (*(void (__thiscall **)(_DWORD *, int))(*a1 + 0x48))(a1, v16);
-      sub_57A6F0(0xFFFFFFFF);
-      sub_57A6F0(0xA);
-      sub_57A6F0(8);
-      sub_57A6F0(9);
-      return (OSGlobals *)sub_45A530(SaveLoad_CurrentSavegame, v17);
+      sub_4523F0(g_TESSaveLoadGame); /*0x66337a*/
+      g_TESSaveLoadGame->currentVersion = g_TESSaveLoadGame->unknown48[0x29]; /*0x663387*/
+      v7 = g_TESSaveLoadGame; /*0x66338a*/
+      unk_B3BB07 = 0; /*0x663390*/
+      v8 = sub_45A500(v7); /*0x663397*/
+      v9 = g_TESSaveLoadGame; /*0x66339c*/
+      v14 = v8; /*0x6633a4*/
+      sub_45A530(v9, 1); /*0x6633a8*/
+      v10 = sub_459FA0(a1); /*0x6633b4*/
+      g_TESSaveLoadGame->resetSelector = 0x1FFFF000; /*0x6633c3*/
+      v11 = v10; /*0x6633d2*/
+      ((void (__thiscall *)(TESForm *, UInt32))a1->vtbl->Unk_18)(a1, a4 & 0x1FFFF000); /*0x6633dc*/
+      g_TESSaveLoadGame->bufferCursor = *(unsigned __int8 **)&a1[0x4B].member.type; /*0x6633f0*/
+      TESForm_LoadDataFromCurrentSaveGame(a1, &destination, 4u); /*0x6633f6*/
+      g_TESSaveLoadGame->useIrefEncoding = 0; /*0x663400*/
+      a1->vtbl->LoadGame(a1, destination, a4); /*0x663411*/
+      g_TESSaveLoadGame->bufferCursor = 0; /*0x663418*/
+      g_TESSaveLoadGame->resetSelector = 0x60000000; /*0x663425*/
+      ((void (__thiscall *)(TESForm *, UInt32))a1->vtbl->Unk_18)(a1, a4 & 0x60000000); /*0x66343b*/
+      sub_45A020((int)a1, a1, v11); /*0x663445*/
+      ((void (__thiscall *)(TESForm *, UInt32, UInt32))a1->vtbl->Unk_16)(a1, destination, a4); /*0x663457*/
+      v12 = ((double (__thiscall *)(TESForm *, UInt32, UInt32))a1->vtbl->Unk_17)(a1, destination, a4); /*0x663466*/
+      sub_461030(g_TESSaveLoadGame, a2, a3, v12, 0); /*0x663470*/
+      g_TESSaveLoadGame->useIrefEncoding = 1; /*0x66347a*/
+      ((void (__thiscall *)(TESForm *, UInt32))a1->vtbl->Unk_12)(a1, destination); /*0x66348a*/
+      UI_UpdateActorValueDisplays(0xFFFFFFFF); /*0x66348e*/
+      UI_UpdateActorValueDisplays(0xAu); /*0x663495*/
+      UI_UpdateActorValueDisplays(8u); /*0x66349c*/
+      UI_UpdateActorValueDisplays(9u); /*0x6634a3*/
+      return (OSGlobals *)sub_45A530(g_TESSaveLoadGame, v14); /*0x6634b6*/
     }
     else
     {
@@ -56,5 +53,5 @@ OSGlobals *__userpurge sub_663340@<eax>(_DWORD *a1@<ecx>, double a2@<st2>, doubl
                             "he initial state buffer is empty");
     }
   }
-  return result;
+  return result; /*0x66336b*/
 }

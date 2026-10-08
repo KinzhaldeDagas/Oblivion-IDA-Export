@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 33,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 96,
+  "chunks": [
+    [
+      "0x41E7B0",
+      "0x41E7C2"
+    ]
+  ],
+  "chunks_sha256": "c24a3f77b793bc77210f9b5f16f44ffdf821fefe1c94793e5d55f4ff3ee2684b",
+  "comment_regular": "Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
+  "comment_repeatable": "Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ExtraDataList_GetOwner",
   "end_ea": "0x41E7C2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ExtraDataList_GetOwner",
   "segment": ".text",
   "sha256": "c24a3f77b793bc77210f9b5f16f44ffdf821fefe1c94793e5d55f4ff3ee2684b",
   "size": 18,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41E7B0",
-  "type": "BSExtraDataVtbl *__thiscall(ExtraDataList *this)",
+  "total_chunk_size": 18,
+  "type": "TESForm *__thiscall(ExtraDataList *this)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 96
 }

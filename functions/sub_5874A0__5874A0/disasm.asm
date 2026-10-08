@@ -1,6 +1,6 @@
-0x5874A0: push    esi
+0x5874A0: push    esi; [Controller decode 2026-07-09] Controls menu constructor. Initializes child tile pointer block this+0x28..0x58 and controller/rebind state fields.
 0x5874A1: mov     esi, ecx
-0x5874A3: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5874A3: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5874A8: push    34h ; '4'
 0x5874AA: lea     eax, [esi+28h]
 0x5874AD: push    0

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x441EF0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8;",
     "mnemonic": "sub",
     "size": 3
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x441FAC",
-    "line": "call    sub_41E960",
+    "line": "call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x44205A",
-    "line": "call    sub_41E960",
+    "line": "call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x44210F",
-    "line": "call    sub_41E960",
+    "line": "call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,19 +1429,19 @@
   },
   {
     "ea": "0x4421A1",
-    "line": "push    edi",
+    "line": "push    edi; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4421A2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4421A4",
-    "line": "call    sub_4D7D10",
+    "line": "call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,13 +1567,13 @@
   },
   {
     "ea": "0x4421E7",
-    "line": "lea     ecx, [esp+18h+a8]; this",
+    "line": "lea     ecx, [esp+18h+a8]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4421EB",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x442239",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x442281",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x442292",
-    "line": "mov     ecx, offset stru_B43400; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B43400; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x4422B4",
-    "line": "mov     ecx, offset stru_B43400; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B43400; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2461,7 +2461,7 @@
   },
   {
     "ea": "0x4423C7",
-    "line": "call    sub_4CE610",
+    "line": "call    sub_4CE610; Per-cell canopy shadow mask updater; ensures global canopy shadow texture via 0x55FDF0 then paints mask pixels across current/neighbor cells.",
     "mnemonic": "call",
     "size": 5
   },

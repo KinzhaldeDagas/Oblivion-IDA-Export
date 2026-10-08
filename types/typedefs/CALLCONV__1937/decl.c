@@ -1,1 +1,1 @@
-CALLCONV
+typedef tagCALLCONV CALLCONV;

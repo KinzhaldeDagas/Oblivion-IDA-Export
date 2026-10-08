@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "LighteningShaders?",
+  "chunks": [
+    [
+      "0x7FC7D0",
+      "0x7FCC75"
+    ],
+    [
+      "0x9CE940",
+      "0x9CE971"
+    ]
+  ],
+  "chunks_sha256": "bed8427e8d399b07d23ec469b750862fb24b12af6ac6a24b3f8344bf6b26b018",
+  "comment_regular": "Oblivion Lighting30 shader-definition construction. Builds a one-stream six-element object declaration (POSITION float3, NORMAL float3, COLOR float4, TEXCOORD0 float2, generated TANGENT/BINORMAL float3) and a one-stream eight-element skinned declaration that inserts BLENDWEIGHT float4 and BLENDINDICES D3DCOLOR. Lighting30 stores these at +0x8C/+0x90; SetupRenderPass selects +0x90 when BSShaderProperty flags+0x1C bit 1 is set. Two additional compact/expanded declarations are also constructed for alternate routes.\n\nMoonSugarEffect decode: Lighting30 shader definition builds multiple vertex declarations: 6-slot base object layout, 8-slot variant, 4-slot variant, and another 8-slot variant. Confirms object shaders have material-specific vertex layouts.",
+  "comment_repeatable": "Oblivion Lighting30 shader-definition construction. Builds a one-stream six-element object declaration (POSITION float3, NORMAL float3, COLOR float4, TEXCOORD0 float2, generated TANGENT/BINORMAL float3) and a one-stream eight-element skinned declaration that inserts BLENDWEIGHT float4 and BLENDINDICES D3DCOLOR. Lighting30 stores these at +0x8C/+0x90; SetupRenderPass selects +0x90 when BSShaderProperty flags+0x1C bit 1 is set. Two additional compact/expanded declarations are also constructed for alternate routes.\nDX11 child-pin audit 2026-10-01: Lighting30 constructor7FAC40 and destructor7FAF20 establish +4 NiRef ownership of cached maps at shader+7C/+80/+84/+88 and declaration alternatives+8C/+90/+94/+98. Base shader owns active maps+2C/+30 and declaration+24. Definition factory7FC7D0 supplies four NiDX9ShaderDeclaration objects (six/eight/four/eight elements) to constructor call7FCBC4. Constant-map destructor9A9900 owns all capacity slots of the NiPointer entry array, not just the logical end; data+10 and capacity/end/live/grow at+14/+16/+18/+1A. Entries use+4 refs and vtableAB348C. New DX11 pin collection retains these child objects individually and seals bindings/array contents, but does NOT preserve the raw array allocation or exclude its mutation by itself. Pooled passes use a different +60 counter and remain separate.\nDX11 writer audit 2026-10-01: zero-argument cdecl factory reached from GetShaderDefinition(1A) at7B4481. It initializes shared caches, programs, passes and maps through concrete virtual slots before publishing its owned shader at definition+4. Observe whole construction, not only the final publication store.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "Lighting30ShaderDefinition_Create",
   "end_ea": "0x7FCC75",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "LighteningShaders?",
+  "name": "Lighting30ShaderDefinition_Create",
   "segment": ".text",
   "sha256": "8fc6993a3b241c4f64006128b3ee3d2e2cb47b757926974c0f532ae45d9499d0",
   "size": 1189,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FC7D0",
+  "total_chunk_size": 1238,
   "type": "ShaderDefinition *()",
-  "xrefs_from_count": 520,
+  "xrefs_from_count": 539,
   "xrefs_to_count": 1
 }

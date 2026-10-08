@@ -34,7 +34,7 @@
 0x5F3EDE: call    GameUI_QueueMessage
 0x5F3EE3: mov     eax, [esp+10h+arg_18]
 0x5F3EE7: push    eax
-0x5F3EE8: call    FormHeapFree
+0x5F3EE8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F3EED: add     esp, 14h
 0x5F3EF0: mov     ecx, [esp+arg_20]
 0x5F3EF4: mov     large fs:0, ecx

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7814C0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Creates an Oblivion NiD3DHLSLVertexShader: chooses default entry 'main' and the device vertex profile, compiles the source, creates the D3D9 shader object, and retains source/bytecode/profile/constant-table metadata.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x78150F",
-    "line": "mov     [esp+18h+var_C], edi",
+    "line": "mov     [esp+18h+bytecode], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x781549",
-    "line": "lea     ecx, [esp+20h+var_C]",
+    "line": "lea     ecx, [esp+20h+bytecode]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x781557",
-    "line": "call    sub_781170",
+    "line": "call    NiD3DShaderProgramCreatorHLSL__CompileShaderFromFile; Oblivion-authoritative HLSL compiler path: resolves the shader file, calls D3DXCompileShaderFromFileA with entry/profile and creator flags, returns a heap copy of bytecode plus the optional constant table, and reports compiler diagnostics.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x781575",
-    "line": "mov     ecx, [esp+18h+arg_14]",
+    "line": "mov     ecx, [esp+18h+unused3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781579",
-    "line": "mov     eax, [esp+18h+var_C]",
+    "line": "mov     eax, [esp+18h+bytecode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,49 +397,49 @@
   },
   {
     "ea": "0x78157E",
-    "line": "mov     ebx, [esp+1Ch+arg_18]",
+    "line": "mov     ebx, [esp+1Ch+unused6]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x781582",
-    "line": "push    ebx",
+    "line": "push    ebx; unused6",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781583",
-    "line": "push    edi",
+    "line": "push    edi; unused5",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781584",
-    "line": "push    edi",
+    "line": "push    edi; unused4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781585",
-    "line": "push    ecx",
+    "line": "push    ecx; unused3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x781586",
-    "line": "lea     edx, [esp+2Ch+arg_10]",
+    "line": "lea     edx, [esp+2Ch+unused2]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78158A",
-    "line": "push    edx",
+    "line": "push    edx; unused2",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78158B",
-    "line": "push    eax",
+    "line": "push    eax; bytecode",
     "mnemonic": "push",
     "size": 1
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x78158E",
-    "line": "call    sub_783BF0",
+    "line": "call    NiDX9Renderer__CreateVertexShader; Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x7815E0",
-    "line": "mov     ecx, [esp+1Ch+var_C]",
+    "line": "mov     ecx, [esp+1Ch+bytecode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x781609",
-    "line": "mov     eax, [esp+1Ch+arg_14]",
+    "line": "mov     eax, [esp+1Ch+unused3]",
     "mnemonic": "mov",
     "size": 4
   },

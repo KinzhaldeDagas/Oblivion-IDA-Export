@@ -1,94 +1,92 @@
 bool __usercall sub_5123A0@<al>(
-        char bp0@<bpl>,
-        double a2@<st1>,
+        double st6_0@<st1>,
         double st7_0@<st0>,
         ParamInfo *a1,
-        UInt8 *a5,
+        UInt8 *arg4,
         TESObjectREFR *a4,
-        TESObjectREFR *a7,
-        Script *a8,
+        TESObjectREFR *a6,
+        Script *a7,
         ScriptEventList *l,
-        int a10,
+        int a9,
         UInt32 *a3)
 {
   bool result; // al
-  TESObjectREFR *v15; // eax
-  TESObjectREFR *v16; // esi
+  TESObjectREFR *v12; // eax
+  TESObjectREFR *v13; // esi
   TESObjectREFRVtbl *vtbl; // eax
   void (__thiscall *CopyFromBase)(BaseFormComponent *, BaseFormComponent *); // eax
   TESWorldSpace *WorldSpace; // eax
-  TESObjectREFRVtbl *v20; // ecx
-  TESObjectREFRVtbl *v21; // ebx
-  void (__thiscall *v22)(BaseFormComponent *); // edi
-  double GameHour; // st5
-  void (__thiscall *v24)(TESObjectREFRVtbl *, _DWORD); // edx
-  double v25; // st7
-  int v26; // eax
-  int v27; // eax
+  TESObjectREFRVtbl *v17; // ecx
+  TESObjectREFRVtbl *v18; // ebx
+  void (__thiscall *v19)(BaseFormComponent *); // edi
+  void (__thiscall *v20)(TESObjectREFRVtbl *, _DWORD); // edx
+  double v21; // st7
+  int v22; // eax
+  int v23; // eax
   TESObjectCELL *ParentCell; // [esp+0h] [ebp-18h]
-  _DWORD *v29; // [esp+4h] [ebp-14h]
+  _DWORD *v25; // [esp+4h] [ebp-14h]
   float z; // [esp+8h] [ebp-10h]
-  UInt16 v31[2]; // [esp+10h] [ebp-8h] BYREF
-  float v32; // [esp+14h] [ebp-4h]
+  UInt16 v27[2]; // [esp+10h] [ebp-8h] BYREF
+  float v28; // [esp+14h] [ebp-4h]
 
-  *(_DWORD *)v31 = 0;
-  result = Script_ExtractArgs(a1, a5, a3, a4, a7, a8, l, v31);
-  if ( result )
+  *(_DWORD *)v27 = 0; /*0x5123cc*/
+  result = Script_ExtractArgs(a1, arg4, a3, a4, a6, a7, l, v27); /*0x5123d4*/
+  if ( result ) /*0x5123de*/
   {
-    v15 = (TESObjectREFR *)OblivionDynamicCast(
+    v12 = (TESObjectREFR *)OblivionDynamicCast( /*0x5123f4*/
                              a4,
                              0,
                              (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                              &Actor `RTTI Type Descriptor',
                              0);
-    v16 = v15;
-    if ( v15 )
+    v13 = v12; /*0x5123f9*/
+    if ( v12 ) /*0x512400*/
     {
-      if ( *(_DWORD *)v31 )
-      {
-        if ( !sub_5E6B40(v15) )
+      if ( *(_DWORD *)v27 ) /*0x51240b*/
+      {                                         // 3DTheft 2026-05-17: AddScriptPackage skips runtime package handoff if Actor_IsInDialoguePackage is true.
+        if ( !Actor_IsInDialogueProcedure(v12) ) /*0x512413*/
         {
-          vtbl = v16[1].vtbl;
-          if ( vtbl )
+          vtbl = v13[1].vtbl; /*0x512420*/
+          if ( vtbl ) /*0x512425*/
           {
-            CopyFromBase = vtbl->super.super.CopyFromBase;
-            if ( CopyFromBase )
-              Script_AddEventToExtraScript(CopyFromBase, &v16->member.baseExtraList, 0x800);
-            Script_AddEventToExtraScript(*(_DWORD *)v31, &v16->member.baseExtraList, 0x200);
-            if ( *(_DWORD *)(*(_DWORD *)v31 + 0x18) == 0xFFFFFFFF )
-              sub_5672A0(*(TESPackage **)v31);
-            z = v16->member.rot.z;
-            v29 = (_DWORD *)((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))v16->vtbl->GetPos)(
-                              v16,
+            CopyFromBase = vtbl->super.super.CopyFromBase; /*0x51242b*/
+            if ( CopyFromBase ) /*0x512430*/
+              Script_AddEventToExtraScript(CopyFromBase, &v13->member.baseExtraList, 0x800);// 3DTheft decode: AddScriptPackage queues event mask 0x800 for the actor's previous editor package when present. /*0x51243c*/
+            Script_AddEventToExtraScript(*(_DWORD *)v27, &v13->member.baseExtraList, 0x200);// 3DTheft decode: AddScriptPackage queues event mask 0x200 for the new script package before handoff. /*0x512452*/
+            if ( *(_DWORD *)(*(_DWORD *)v27 + 0x18) == 0xFFFFFFFF ) /*0x512462*/
+              sub_5672A0(*(TESPackage **)v27); /*0x512464*/
+            z = v13->member.rot.z; /*0x512477*/
+            v25 = (_DWORD *)((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))v13->vtbl->GetPos)( /*0x51247c*/
+                              v13,
                               st7_0,
-                              a2);
-            ParentCell = TESObjectREFR_GetParentCell(v16);
-            WorldSpace = TESObjectREFR_GetWorldSpace(v16);
-            sub_4D7A20(v16, (BSExtraDataVtbl *)WorldSpace, (BSExtraDataVtbl *)ParentCell, v29, z);
-            sub_5660C0(*(_DWORD **)v31, 1);
-            Actor_AddPackage_((Actor *)v16, *(TESPackage **)v31, 0, 0);
-            v20 = v16[1].vtbl;
-            if ( v20 )
+                              st6_0);
+            ParentCell = Shared_GetDwordAtOffset40(v13); /*0x512484*/
+            WorldSpace = TESObjectREFR_GetWorldSpace(v13); /*0x512487*/
+            TESObjectREFR_SetStartLocation(v13, (BSExtraDataVtbl *)WorldSpace, (BSExtraDataVtbl *)ParentCell, v25, z);// 3DTheft decode: AddScriptPackage records ExtraStartingPosition for the actor via TESObjectREFR::RecordStartLocation before package handoff. /*0x51248f*/
+            sub_5660C0(*(_DWORD **)v27, 1);     // 3DTheft decode: AddScriptPackage sets package flag 0x4000 through TESPackage_SetScriptPackageFlag before Actor_AddPackage_. /*0x51249a*/
+            Actor_AddPackage_((Actor *)v13, *(TESPackage **)v27, 0, 0);// 3DTheft decode: AddScriptPackage hands off with Actor_AddPackage_(actor, package, setCurrent=0, markDynamic=0). Use this for external script-style runtime package assignment. /*0x5124aa*/
+            v17 = v13[1].vtbl;                  // 3DTheft decode: after Actor_AddPackage_, AddScriptPackage only enters the time/process refresh block for non-high process levels; high process level 0 does not call Actor::EvaluatePackage here. /*0x5124af*/
+            if ( v17 ) /*0x5124b4*/
             {
-              if ( (*((int (__thiscall **)(TESObjectREFRVtbl *))v20->super.super.InitializeComponent + 2))(v20) )
+              if ( (*((int (__thiscall **)(TESObjectREFRVtbl *))v17->super.super.InitializeComponent + 2))(v17) ) /*0x5124bb*/
               {
-                v21 = v16[1].vtbl;
-                v22 = (void (__thiscall *)(BaseFormComponent *))((char *)v21->super.super.InitializeComponent + 0x1C);
-                GameHour = TimeGlobals_GetGameHour(&TimeGlobals);
-                v24 = *(void (__thiscall **)(TESObjectREFRVtbl *, _DWORD))v22;
-                v32 = st7_0 - dbl_A2F928;
-                v25 = v32;
-                v24(v21, LODWORD(v32));
-                if ( (*((int (__thiscall **)(TESObjectREFRVtbl *))v16[1].vtbl->super.super.InitializeComponent + 2))(v16[1].vtbl) == 1 )
+                v18 = v13[1].vtbl; /*0x5124c2*/
+                v19 = (void (__thiscall *)(BaseFormComponent *))((char *)v18->super.super.InitializeComponent + 0x1C); /*0x5124cd*/
+                TimeGlobals_GetGameHour(&MEMORY[0xB332E0]); /*0x5124d0*/
+                v20 = *(void (__thiscall **)(TESObjectREFRVtbl *, _DWORD))v19; /*0x5124db*/
+                v28 = st7_0 - dbl_A2F928; /*0x5124de*/
+                v21 = v28; /*0x5124e4*/
+                v20(v18, LODWORD(v28)); /*0x5124eb*/
+                if ( (*((int (__thiscall **)(TESObjectREFRVtbl *))v13[1].vtbl->super.super.InitializeComponent + 2))(v13[1].vtbl) == 1 ) /*0x5124fc*/
                 {
-                  v26 = (*((int (__usercall **)@<eax>(TESObjectREFRVtbl *@<ecx>, double@<st0>, double@<st1>))v16[1].vtbl->super.super.InitializeComponent
+                  v22 = (*((int (__usercall **)@<eax>(TESObjectREFRVtbl *@<ecx>, double@<st0>, double@<st1>))v13[1].vtbl->super.super.InitializeComponent /*0x512506*/
                          + 2))(
-                          v16[1].vtbl,
-                          v25,
-                          a2);
-                  sub_674550(bp0, GameHour, a2, v25, (int)v16, v26);
-                  v27 = (*((int (__thiscall **)(TESObjectREFRVtbl *))v16[1].vtbl->super.super.InitializeComponent + 2))(v16[1].vtbl);
-                  sub_673A90((int)v16, v27, 0, 0, 0);
+                          v13[1].vtbl,
+                          v21,
+                          st6_0);
+                  sub_674550((int)v13, v22); /*0x51250f*/
+                  v23 = (*((int (__thiscall **)(TESObjectREFRVtbl *))v13[1].vtbl->super.super.InitializeComponent + 2))(v13[1].vtbl); /*0x512522*/
+                  ActorProcessManager_AddMobileObject((int)v13, v23, 0, 0, 0); /*0x51252b*/
                 }
               }
             }
@@ -96,7 +94,7 @@ bool __usercall sub_5123A0@<al>(
         }
       }
     }
-    return 1;
+    return 1; /*0x512530*/
   }
-  return result;
+  return result; /*0x5123e0*/
 }

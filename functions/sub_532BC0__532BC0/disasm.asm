@@ -21,7 +21,7 @@
 0x532BFC: push    ecx
 0x532BFD: fstp    [esp+20h+var_20]; float
 0x532C00: mov     byte ptr [esp+20h+var_4], 1
-0x532C05: call    sub_532370
+0x532C05: call    PlayerCameraCollisionPhantomPair_Rebuild; TES4 authoritative: rebuilds the two player camera collision bhkSimpleShapePhantoms from sphere shape radius and filter layer 0x18 cinfo; only observed constructor path for the object used by 0x5326B0.
 0x532C0A: mov     eax, esi
 0x532C0C: mov     ecx, [esp+18h+var_C]
 0x532C10: mov     large fs:0, ecx
@@ -29,3 +29,15 @@
 0x532C18: pop     esi
 0x532C19: add     esp, 10h
 0x532C1C: retn    8
+0x9B8E80: mov     ecx, [ebp-10h]; slot
+0x9B8E83: jmp     NiPointerSlot_Release
+0x9B8E88: mov     ecx, [ebp-10h]
+0x9B8E8B: add     ecx, 4; slot
+0x9B8E8E: jmp     NiPointerSlot_Release
+0x9B8E93: mov     edx, [esp+arg_4]
+0x9B8E97: lea     eax, [edx-8]
+0x9B8E9A: mov     ecx, [edx-0Ch]
+0x9B8E9D: xor     ecx, eax
+0x9B8E9F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8EA4: mov     eax, offset stru_AE329C
+0x9B8EA9: jmp     ___CxxFrameHandler3

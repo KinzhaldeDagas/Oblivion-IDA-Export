@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6747C0",
+      "0x674812"
+    ]
+  ],
+  "chunks_sha256": "5465c25ec3b72c7534cff96ab1a29aa1dec492bba18580757262fd84b3c8f973",
+  "comment_regular": "ShadowPass-only candidate-list limiter. Operates on the BSSimpleList at ProcessLists +0x60, repeatedly removes the last non-null actor until the count is <= g_uMaxShadowActorCandidates, and returns the list head used for shadow admission.",
+  "comment_repeatable": "ShadowPass-only candidate-list limiter. Operates on the BSSimpleList at ProcessLists +0x60, repeatedly removes the last non-null actor until the count is <= g_uMaxShadowActorCandidates, and returns the list head used for shadow admission.\n\nMEF LARGE PERF 2026-09-08: Verified PERF-7: ShadowPass trim repeatedly counts the entire candidate list, finds its tail, then Remove(data) searches from head; repeats once per removed actor. Dense unique N>K lists require about3*sum(m=K+1..N)m+K node inspections, plus frees. Preserve cap/order and embedded head; don't equate this with a continuously over-budget per-frame population.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6747C0",
+  "display_name": "ProcessLists__TrimShadowCandidateListToLimit",
   "end_ea": "0x674812",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6747C0",
+  "name": "ProcessLists__TrimShadowCandidateListToLimit",
   "segment": ".text",
   "sha256": "5465c25ec3b72c7534cff96ab1a29aa1dec492bba18580757262fd84b3c8f973",
   "size": 82,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6747C0",
+  "total_chunk_size": 82,
   "type": "int *__thiscall(int *this)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 1

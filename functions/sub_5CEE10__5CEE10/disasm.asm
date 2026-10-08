@@ -27,12 +27,12 @@
 0x5CEE6C: mov     [esp+134h+var_118.m_bufLen], bx
 0x5CEE71: call    BSStringT_Set
 0x5CEE76: mov     eax, [ebp+38h]
-0x5CEE79: push    ebx
+0x5CEE79: push    ebx; lastTile
 0x5CEE7A: push    offset aRecharge_item_; "recharge_item_template"
-0x5CEE7F: push    eax
-0x5CEE80: mov     ecx, ebp
+0x5CEE7F: push    eax; parent
+0x5CEE80: mov     ecx, ebp; this
 0x5CEE82: mov     [esp+138h+var_4], ebx
-0x5CEE89: call    Menu_CreateTileFromTemplate
+0x5CEE89: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5CEE8E: mov     esi, eax
 0x5CEE90: cmp     esi, ebx
 0x5CEE92: jz      loc_5CEF27
@@ -69,19 +69,19 @@
 0x5CEEF6: fild    [esp+12Ch+arg_8]
 0x5CEEFD: push    ecx
 0x5CEEFE: mov     ecx, esi; this
-0x5CEF00: fstp    [esp+130h+var_130]; a3
-0x5CEF03: push    0FAEh; a2
-0x5CEF08: call    Tile_SetFloat
+0x5CEF00: fstp    [esp+130h+var_130]; value
+0x5CEF03: push    0FAEh; propertyCode
+0x5CEF08: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CEF0D: fild    [esp+12Ch+arg_C]
 0x5CEF14: push    ecx
 0x5CEF15: mov     ecx, esi; this
-0x5CEF17: fstp    [esp+130h+var_130]; a3
-0x5CEF1A: push    0FA8h; a2
-0x5CEF1F: call    Tile_SetFloat
+0x5CEF17: fstp    [esp+130h+var_130]; value
+0x5CEF1A: push    0FA8h; propertyCode
+0x5CEF1F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CEF24: mov     [ebp+10h], esi
 0x5CEF27: mov     ecx, [esp+12Ch+var_118.m_data]
 0x5CEF2B: push    ecx
-0x5CEF2C: call    FormHeapFree
+0x5CEF2C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CEF31: add     esp, 4
 0x5CEF34: mov     eax, esi
 0x5CEF36: mov     ecx, [esp+12Ch+var_C]
@@ -96,3 +96,16 @@
 0x5CEF52: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5CEF57: add     esp, 118h
 0x5CEF5D: retn    10h
+0x9C0900: lea     ecx, [ebp-118h]; void *
+0x9C0906: jmp     BSStringT_Clear
+0x9C090B: mov     edx, [esp+arg_4]
+0x9C090F: lea     eax, [edx-11Ch]
+0x9C0915: mov     ecx, [edx-120h]
+0x9C091B: xor     ecx, eax
+0x9C091D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0922: add     eax, 10h
+0x9C0925: mov     ecx, [edx-4]
+0x9C0928: xor     ecx, eax
+0x9C092A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C092F: mov     eax, offset stru_AE9B44
+0x9C0934: jmp     ___CxxFrameHandler3

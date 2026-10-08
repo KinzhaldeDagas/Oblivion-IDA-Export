@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5BA517",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5BA51B",
-    "line": "call    sub_5893B0",
+    "line": "call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5BA543",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x5BA556",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BA559",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BA55E",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x5BA56D",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BA570",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BA575",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,19 +355,19 @@
   },
   {
     "ea": "0x5BA58F",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BA592",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BA597",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,19 +391,19 @@
   },
   {
     "ea": "0x5BA5A6",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BA5A9",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BA5AE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x5BA5DE",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5BA61D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x5BA63A",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x5BA646",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x5BA658",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; worldspace",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5BA65A",
-    "line": "call    sub_4F0620",
+    "line": "call    TESWorldSpace_CollectPersistentCellReferences; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x5BA6B3",
-    "line": "mov     [esp+84h+var_70+4], ecx",
+    "line": "mov     [esp+84h+var_70.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x5BA6BC",
-    "line": "mov     [esp+88h+var_68], edx",
+    "line": "mov     [esp+88h+var_70.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x5BA6CE",
-    "line": "lea     edx, [esp+8Ch+var_70+4]",
+    "line": "lea     edx, [esp+8Ch+var_70.y]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x5BA6D7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,13 +961,13 @@
   },
   {
     "ea": "0x5BA6ED",
-    "line": "mov     [esp+88h+var_70], eax",
+    "line": "mov     [esp+88h+var_70.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BA6F1",
-    "line": "fild    [esp+88h+var_70]",
+    "line": "fild    [esp+88h+var_70.x]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x5BA704",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x5BA758",
-    "line": "fld     [esp+0A4h+var_68]",
+    "line": "fld     [esp+0A4h+var_70.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x5BA766",
-    "line": "fld     [esp+0B0h+var_70+4]",
+    "line": "fld     [esp+0B0h+var_70.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x5BA802",
-    "line": "mov     [esp+84h+var_70+4], ecx",
+    "line": "mov     [esp+84h+var_70.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x5BA80B",
-    "line": "mov     [esp+88h+var_68], edx",
+    "line": "mov     [esp+88h+var_70.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x5BA81D",
-    "line": "lea     edx, [esp+8Ch+var_70+4]",
+    "line": "lea     edx, [esp+8Ch+var_70.y]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x5BA826",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,13 +1567,13 @@
   },
   {
     "ea": "0x5BA83C",
-    "line": "mov     [esp+88h+var_70], eax",
+    "line": "mov     [esp+88h+var_70.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BA840",
-    "line": "fild    [esp+88h+var_70]",
+    "line": "fild    [esp+88h+var_70.x]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x5BA853",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x5BA860",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x5BA886",
-    "line": "call    TESFullName_GetNameForForm",
+    "line": "call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x5BA89C",
-    "line": "fld     [esp+84h+var_68]",
+    "line": "fld     [esp+84h+var_70.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x5BA8B9",
-    "line": "fld     [esp+0B0h+var_70+4]",
+    "line": "fld     [esp+0B0h+var_70.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x5BA8D3",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x5BA8FE",
-    "line": "mov     byte ptr [esp+84h+var_70], 1",
+    "line": "mov     byte ptr [esp+84h+var_70.x], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x5BA90E",
-    "line": "mov     byte ptr [esp+84h+var_70], 0",
+    "line": "mov     byte ptr [esp+84h+var_70.x], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2041,13 +2041,13 @@
   },
   {
     "ea": "0x5BA92D",
-    "line": "mov     [esp+8Ch+var_70+4], ecx",
+    "line": "mov     [esp+8Ch+var_70.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BA931",
-    "line": "mov     ecx, [esp+8Ch+var_70]",
+    "line": "mov     ecx, [esp+8Ch+var_70.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2095,13 +2095,13 @@
   },
   {
     "ea": "0x5BA945",
-    "line": "mov     [esp+0A8h+var_68], edx",
+    "line": "mov     [esp+0A8h+var_70.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BA949",
-    "line": "fld     [esp+0A8h+var_68]",
+    "line": "fld     [esp+0A8h+var_70.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x5BA956",
-    "line": "fld     [esp+0B0h+var_70+4]",
+    "line": "fld     [esp+0B0h+var_70.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2191,31 +2191,31 @@
   },
   {
     "ea": "0x5BA986",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BA98B",
-    "line": "lea     ecx, [esp+88h+var_70+4]",
+    "line": "lea     ecx, [esp+88h+var_70.y]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5BA98F",
-    "line": "mov     [esp+88h+var_70+4], edx",
+    "line": "mov     [esp+88h+var_70.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BA993",
-    "line": "mov     [esp+88h+var_68], eax",
+    "line": "mov     [esp+88h+var_70.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BA997",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,13 +2239,13 @@
   },
   {
     "ea": "0x5BA9A6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5BA9A8",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x5BA9B1",
-    "line": "fld     [esp+84h+var_68]",
+    "line": "fld     [esp+84h+var_70.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x5BA9D6",
-    "line": "fld     [esp+0B0h+var_70+4]",
+    "line": "fld     [esp+0B0h+var_70.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2461,13 +2461,13 @@
   },
   {
     "ea": "0x5BAA14",
-    "line": "mov     [esp+0A8h+var_68], edx",
+    "line": "mov     [esp+0A8h+var_70.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BAA18",
-    "line": "fld     [esp+0A8h+var_68]",
+    "line": "fld     [esp+0A8h+var_70.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2485,13 +2485,13 @@
   },
   {
     "ea": "0x5BAA23",
-    "line": "mov     [esp+0B0h+var_70+4], ecx",
+    "line": "mov     [esp+0B0h+var_70.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5BAA27",
-    "line": "fld     [esp+0B0h+var_70+4]",
+    "line": "fld     [esp+0B0h+var_70.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2617,7 +2617,7 @@
   },
   {
     "ea": "0x5BAA7B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2635,7 +2635,7 @@
   },
   {
     "ea": "0x5BAA87",
-    "line": "fstp    qword ptr [esp+84h+var_70+4]",
+    "line": "fstp    qword ptr [esp+84h+var_70.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2665,7 +2665,7 @@
   },
   {
     "ea": "0x5BAA9B",
-    "line": "fadd    qword ptr [esp+84h+var_70+4]",
+    "line": "fadd    qword ptr [esp+84h+var_70.y]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -2677,19 +2677,19 @@
   },
   {
     "ea": "0x5BAAA0",
-    "line": "lea     ecx, [esp+88h+var_30]",
+    "line": "lea     ecx, [esp+88h+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5BAAA4",
-    "line": "fstp    [esp+88h+var_70]",
+    "line": "fstp    [esp+88h+var_70.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5BAAA8",
-    "line": "fld     [esp+88h+var_70]",
+    "line": "fld     [esp+88h+var_70.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2701,13 +2701,13 @@
   },
   {
     "ea": "0x5BAAAE",
-    "line": "fstp    [esp+88h+var_88]; float",
+    "line": "fstp    [esp+88h+var_88]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BAAB1",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2749,7 +2749,7 @@
   },
   {
     "ea": "0x5BAACF",
-    "line": "fstp    [esp+88h+var_70]",
+    "line": "fstp    [esp+88h+var_70.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2785,7 +2785,7 @@
   },
   {
     "ea": "0x5BAAEB",
-    "line": "fstp    [esp+84h+var_70+4]",
+    "line": "fstp    [esp+84h+var_70.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2845,7 +2845,7 @@
   },
   {
     "ea": "0x5BAB0A",
-    "line": "push    offset dword_B3FCD4",
+    "line": "push    offset stru_B3FCD4",
     "mnemonic": "push",
     "size": 5
   },
@@ -2875,13 +2875,13 @@
   },
   {
     "ea": "0x5BAB1B",
-    "line": "fld     [esp+84h+var_70]",
+    "line": "fld     [esp+84h+var_70.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5BAB1F",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x5BAB37",
-    "line": "fld     [esp+8Ch+var_70+4]",
+    "line": "fld     [esp+8Ch+var_70.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x5BAB6E",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x5BAB96",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x5BABA5",
-    "line": "mov     [esp+88h+var_70+4], ebp",
+    "line": "mov     [esp+88h+var_70.y], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3121,13 +3121,13 @@
   },
   {
     "ea": "0x5BABAE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5BABB3",
-    "line": "fild    [esp+84h+var_70+4]",
+    "line": "fild    [esp+84h+var_70.y]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x5BABC2",
-    "line": "fstp    [esp+88h+var_70+4]",
+    "line": "fstp    [esp+88h+var_70.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3163,7 +3163,7 @@
   },
   {
     "ea": "0x5BABC8",
-    "line": "mov     [esp+88h+var_70], ebx",
+    "line": "mov     [esp+88h+var_70.x], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x5BABD1",
-    "line": "fsubr   [esp+84h+var_70+4]",
+    "line": "fsubr   [esp+84h+var_70.y]",
     "mnemonic": "fsubr",
     "size": 4
   },
@@ -3193,13 +3193,13 @@
   },
   {
     "ea": "0x5BABDC",
-    "line": "fstp    [esp+88h+var_70+4]",
+    "line": "fstp    [esp+88h+var_70.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5BABE0",
-    "line": "fild    [esp+88h+var_70]",
+    "line": "fild    [esp+88h+var_70.x]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -3247,25 +3247,25 @@
   },
   {
     "ea": "0x5BABFB",
-    "line": "fld     [esp+88h+var_70+4]",
+    "line": "fld     [esp+88h+var_70.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x5BABFF",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BAC02",
-    "line": "push    0FB8h; a2",
+    "line": "push    0FB8h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BAC07",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3283,13 +3283,13 @@
   },
   {
     "ea": "0x5BAC11",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BAC14",
-    "line": "push    0FB9h; a2",
+    "line": "push    0FB9h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -3301,7 +3301,7 @@
   },
   {
     "ea": "0x5BAC1B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3355,19 +3355,19 @@
   },
   {
     "ea": "0x5BAC33",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BAC36",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BAC3B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3427,19 +3427,19 @@
   },
   {
     "ea": "0x5BAC55",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BAC58",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BAC5D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3457,7 +3457,7 @@
   },
   {
     "ea": "0x5BAC67",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3535,19 +3535,19 @@
   },
   {
     "ea": "0x5BAC87",
-    "line": "fstp    [esp+88h+var_88]; a3",
+    "line": "fstp    [esp+88h+var_88]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BAC8A",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BAC8F",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3604,5 +3604,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C0D00",
+    "line": "lea     ecx, [ebp-5Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0D03",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0D08",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C0D0C",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0D0F",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0D12",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C0D14",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0D19",
+    "line": "mov     eax, offset stru_AE9E68",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0D1E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

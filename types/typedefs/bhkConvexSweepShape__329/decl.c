@@ -1,1 +1,1 @@
-bhkConvexSweepShape
+struct bhkConvexSweepShape;

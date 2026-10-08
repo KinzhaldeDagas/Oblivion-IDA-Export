@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "cached_face",
+  "definition": "struct __declspec(align(4)) cached_face\n{\nDWORD index;\nDWORD flags;\nDWORD ntmflags;\nDWORD version;\nbitmap_font_size size;\nFONTSIGNATURE fs;\nWCHAR_0 full_name[1];\n}\n",
   "id": 18374686479672027772,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "index",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ntmflags",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "version",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "size",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 24
+      "size": 24,
+      "type": "bitmap_font_size"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fs",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 24
+      "size": 24,
+      "type": "FONTSIGNATURE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "full_name",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 2
+      "size": 2,
+      "type": "WCHAR_0[1]"
     }
   ],
   "name": "cached_face",
+  "ordinal": 1523,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

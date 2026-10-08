@@ -1,4 +1,4 @@
-0x484E50: mov     eax, [ecx]
+0x484E50: mov     eax, [ecx]; Remove the poison extra from this equipped EntryData and notify/update inventory state. Bow-shot construction calls this at release, after retaining the AlchemyItem on ArrowProjectile.
 0x484E52: test    eax, eax
 0x484E54: jz      short locret_484E76
 0x484E56: push    esi

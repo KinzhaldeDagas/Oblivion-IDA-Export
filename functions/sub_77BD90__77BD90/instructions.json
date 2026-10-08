@@ -358,5 +358,167 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x7645C0",
+    "line": "mov     eax, ds:0B42154h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7645C5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7645C7",
+    "line": "jz      short loc_7645DB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7645C9",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7645CB",
+    "line": "mov     edx, [ecx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7645CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7645CF",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x7645D1",
+    "line": "mov     dword ptr ds:0B42154h, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x7645DB",
+    "line": "mov     ecx, ds:0B42160h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7645E1",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7645E3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7645E4",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7645E6",
+    "line": "jz      short loc_7645F6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7645E8",
+    "line": "call    sub_775F10",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7645ED",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7645EE",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7645F3",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7645F6",
+    "line": "mov     eax, ds:0B42150h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7645FB",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7645FD",
+    "line": "mov     dword ptr ds:0B42160h, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x764607",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x764608",
+    "line": "jz      short loc_764611",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x76460A",
+    "line": "push    eax; hLibModule",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x76460B",
+    "line": "call    dword ptr ds:0A28204h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x764611",
+    "line": "mov     dword ptr ds:0B42158h, 0",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x76461B",
+    "line": "mov     ecx, offset off_B28E00",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x764620",
+    "line": "jmp     NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

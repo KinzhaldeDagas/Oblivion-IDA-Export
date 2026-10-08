@@ -1,18 +1,31 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D5DB0",
+      "0x6D5FA9"
+    ]
+  ],
+  "chunks_sha256": "3077305ff977522e945e30e65ff961b76b43c26e4e5883e21d2e55e3a5253df3",
+  "comment_regular": "Oblivion NiTransformInterpolator time-range query. Aggregates first/last timestamps from translation (data count +0x0A, keys +0x24, stride +0x1D), rotation (count +8, keys +0x20, type +0x10, stride +0x1C), and scale (count +0x0C, keys +0x28, stride +0x1E). Rotation type 4 scans three independent scalar-axis subtracks. Returns [0,0] when no authored track contributes.",
+  "comment_repeatable": "Oblivion NiTransformInterpolator time-range query. Aggregates first/last timestamps from translation (data count +0x0A, keys +0x24, stride +0x1D), rotation (count +8, keys +0x20, type +0x10, stride +0x1C), and scale (count +0x0C, keys +0x28, stride +0x1E). Rotation type 4 scans three independent scalar-axis subtracks. Returns [0,0] when no authored track contributes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D5DB0",
+  "display_name": "NiTransformInterpolator_GetActiveTimeRange",
   "end_ea": "0x6D5FA9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D5DB0",
+  "name": "NiTransformInterpolator_GetActiveTimeRange",
   "segment": ".text",
   "sha256": "3077305ff977522e945e30e65ff961b76b43c26e4e5883e21d2e55e3a5253df3",
   "size": 505,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D5DB0",
+  "total_chunk_size": 505,
   "type": "void __thiscall(_DWORD *this, float *, float *)",
   "xrefs_from_count": 197,
   "xrefs_to_count": 1

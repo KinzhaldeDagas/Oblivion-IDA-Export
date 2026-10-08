@@ -11,44 +11,44 @@ int __fastcall sub_8E1310(int a1, int a2, __int16 a3, int a4, const void **a5)
   _WORD *v14; // esi
   int v15; // edx
 
-  v5 = *(_DWORD *)(a4 + 0xC);
-  if ( (v5 & 1) != 0 )
+  v5 = *(_DWORD *)(a4 + 0xC); /*0x8e1315*/
+  if ( (v5 & 1) != 0 ) /*0x8e131e*/
   {
-    v10 = v5 & 0xFFFFFFFE;
-    v11 = *(_DWORD *)(v10 + a1 + 8);
-    v12 = a1 + v10;
-    v13 = 0;
-    if ( v11 <= 0 )
+    v10 = v5 & 0xFFFFFFFE; /*0x8e135b*/
+    v11 = *(_DWORD *)(v10 + a1 + 8); /*0x8e135e*/
+    v12 = a1 + v10; /*0x8e1362*/
+    v13 = 0; /*0x8e1364*/
+    if ( v11 <= 0 ) /*0x8e1368*/
     {
 LABEL_9:
-      v13 = 0xFFFFFFFF;
+      v13 = 0xFFFFFFFF; /*0x8e137e*/
     }
     else
     {
-      v14 = *(_WORD **)(v12 + 4);
-      while ( *v14 != a3 )
+      v14 = *(_WORD **)(v12 + 4); /*0x8e136a*/
+      while ( *v14 != a3 ) /*0x8e1374*/
       {
-        ++v13;
-        ++v14;
-        if ( v13 >= v11 )
-          goto LABEL_9;
+        ++v13; /*0x8e1376*/
+        ++v14; /*0x8e1377*/
+        if ( v13 >= v11 ) /*0x8e137c*/
+          goto LABEL_9; /*0x8e137c*/
       }
     }
-    v15 = *(_DWORD *)(v12 + 8) - 1;
-    *(_DWORD *)(v12 + 8) = v15;
-    result = *(_DWORD *)(v12 + 4);
-    *(_WORD *)(result + 2 * v13) = *(_WORD *)(result + 2 * v15);
+    v15 = *(_DWORD *)(v12 + 8) - 1; /*0x8e1384*/
+    *(_DWORD *)(v12 + 8) = v15; /*0x8e1385*/
+    result = *(_DWORD *)(v12 + 4); /*0x8e1388*/
+    *(_WORD *)(result + 2 * v13) = *(_WORD *)(result + 2 * v15); /*0x8e1391*/
   }
   else
   {
-    if ( a5[1] == (const void *)((unsigned int)a5[2] & 0x3FFFFFFF) )
-      sub_8A6EE0(a5, 8);
-    v7 = a5[1];
-    v8 = (char *)*a5 + 8 * (_DWORD)v7;
-    a5[1] = (char *)v7 + 1;
-    *v8 = *(_DWORD *)(a2 + 0xC);
-    result = *(_DWORD *)(a4 + 0xC);
-    v8[1] = result;
+    if ( a5[1] == (const void *)((unsigned int)a5[2] & 0x3FFFFFFF) ) /*0x8e1331*/
+      sub_8A6EE0(a5, 8); /*0x8e1336*/
+    v7 = a5[1]; /*0x8e133e*/
+    v8 = (char *)*a5 + 8 * (_DWORD)v7; /*0x8e1343*/
+    a5[1] = (char *)v7 + 1; /*0x8e1347*/
+    *v8 = *(_DWORD *)(a2 + 0xC); /*0x8e134e*/
+    result = *(_DWORD *)(a4 + 0xC); /*0x8e1350*/
+    v8[1] = result; /*0x8e1354*/
   }
-  return result;
+  return result; /*0x8e134d*/
 }

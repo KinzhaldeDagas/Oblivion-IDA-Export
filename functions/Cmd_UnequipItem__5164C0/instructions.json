@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x51651D",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x5165BB",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x516600",
-    "line": "call    TESFullName_GetNameForForm",
+    "line": "call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x5166E4",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x516773",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1474,5 +1474,119 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B72B0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B72B3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B72B8",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B72BB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B72BC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B72C1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B72C2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B72C3",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B72C6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B72C7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B72CC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B72CD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B72CE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B72D2",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B72D5",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B72D8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B72DA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B72DF",
+    "line": "mov     eax, offset stru_AE1EF4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B72E4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

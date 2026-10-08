@@ -1,5 +1,5 @@
 0x60DDC0: push    0FFFFFFFFh
-0x60DDC2: push    offset SEH_6E3250
+0x60DDC2: push    offset ExtraDataList_SetReferencePointer_SEH
 0x60DDC7: mov     eax, large fs:0
 0x60DDCD: push    eax
 0x60DDCE: push    esi
@@ -24,7 +24,7 @@
 0x60DE09: mov     edi, eax
 0x60DE0B: test    edi, edi
 0x60DE0D: jz      short loc_60DE86
-0x60DE0F: push    offset unk_B3B808
+0x60DE0F: push    offset stru_B3B808
 0x60DE14: mov     ecx, edi
 0x60DE16: call    sub_700010
 0x60DE1B: test    eax, eax
@@ -47,7 +47,7 @@
 0x60DE4C: mov     [esp+18h+var_4], 0
 0x60DE54: jz      short loc_60DE69
 0x60DE56: mov     ecx, esi; this
-0x60DE58: call    ??0NiTimeController@@QAE@XZ; NiTimeController::NiTimeController(void)
+0x60DE58: call    ??0NiTimeController@@QAE@XZ; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x60DE5D: mov     dword ptr [esi], offset ??_7BSDoorHavokController@@6B@; const BSDoorHavokController::`vftable'
 0x60DE63: mov     byte ptr [esi+3Ch], 0
 0x60DE67: jmp     short loc_60DE6B
@@ -67,3 +67,15 @@
 0x60DE93: pop     esi
 0x60DE94: add     esp, 0Ch
 0x60DE97: retn
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

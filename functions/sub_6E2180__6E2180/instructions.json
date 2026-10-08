@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6E2180",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Oblivion NiTransformData binary load. In rotation, translation, scale order, reads a 32-bit count; for nonzero count reads numeric type, allocates through that channel/type factory, reads keys using the registered stride/reader, clamps count to 0xFFFF, and transfers the array to the corresponding ownership setter.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x6E21F9",
-    "line": "call    eax ; dword_B3D0B8",
+    "line": "call    eax ; unk_B3D0B8",
     "mnemonic": "call",
     "size": 2
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x6E220F",
-    "line": "call    edx ; dword_B3D440",
+    "line": "call    edx ; unk_B3D440",
     "mnemonic": "call",
     "size": 2
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x6E2228",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x6E223B",
-    "line": "call    sub_6E1E90",
+    "line": "call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x6E228C",
-    "line": "mov     cl, ds:byte_B3D3EE[edi]",
+    "line": "mov     cl, byte ptr ds:unk_B3D3EE[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x6E229F",
-    "line": "call    eax ; dword_B3D0A0",
+    "line": "call    eax ; unk_B3D0A0",
     "mnemonic": "call",
     "size": 2
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x6E22CE",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x6E22E1",
-    "line": "call    sub_6E1F00",
+    "line": "call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x6E2345",
-    "line": "call    eax ; dword_B3D088",
+    "line": "call    eax ; unk_B3D088",
     "mnemonic": "call",
     "size": 2
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x6E235B",
-    "line": "call    edx ; dword_B3D410",
+    "line": "call    edx ; unk_B3D410",
     "mnemonic": "call",
     "size": 2
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x6E2374",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x6E2387",
-    "line": "call    sub_6E1F60",
+    "line": "call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },

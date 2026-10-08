@@ -1,4 +1,4 @@
-0x520780: push    0FFFFFFFFh
+0x520780: push    0FFFFFFFFh; Final name: TESIdleForm_InsertChild. Maintains parent child array plus previous/next idle sibling links.
 0x520782: push    offset ??0bhkNiTriStripsShape@@QAE@XZ_SEH
 0x520787: mov     eax, large fs:0
 0x52078D: push    eax
@@ -88,3 +88,15 @@
 0x520878: pop     ebx
 0x520879: add     esp, 10h
 0x52087C: retn    8
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

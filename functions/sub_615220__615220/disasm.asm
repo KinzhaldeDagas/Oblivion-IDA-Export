@@ -1,4 +1,4 @@
-0x615220: push    ebp
+0x615220: push    ebp; Returns true to suppress the ranged attack/cast for ally safety. Optional arg is SelectedSpellInfo*; null selects equipped staff/bow enchantment or ammo effects.
 0x615221: mov     ebp, esp
 0x615223: and     esp, 0FFFFFFF8h
 0x615226: sub     esp, 14h
@@ -12,10 +12,10 @@
 0x615235: mov     ecx, [esi]
 0x615237: add     ecx, 0Ch
 0x61523A: xor     bl, bl
-0x61523C: call    EffectItemList_HasOnTarget
+0x61523C: call    EffectItemList_HasOnTarget; Selected magic must contain an effective Target-range effect (range==2; EffectSetting flag 0x400000 clear) before ally hold-fire logic applies.
 0x615241: test    al, al
 0x615243: jz      loc_6153E3
-0x615249: cmp     byte ptr [edi+159h], 0
+0x615249: cmp     byte ptr [edi+159h], 0; CombatController+0x159 is the precomputed 'ally blocks main target' flag. It immediately suppresses target spells and ranged weapon attacks.
 0x615250: jz      loc_6152F1
 0x615256: cmp     byte ptr ds:0B3B908h, 0
 0x61525D: jz      short loc_615275
@@ -53,11 +53,11 @@
 0x6152BC: cmp     dword ptr [eax+8], 0
 0x6152C0: jz      loc_6153E3
 0x6152C6: mov     ecx, edi
-0x6152C8: call    sub_612D60
-0x6152CD: cmp     byte ptr [eax+90h], 5
+0x6152C8: call    CombatController_GetEquippedWeaponForm
+0x6152CD: cmp     byte ptr [eax+90h], 5; Null selected-spell path applies only to weapon types 4 Staff and 5 Bow.
 0x6152D4: jz      short loc_6152EA
 0x6152D6: mov     ecx, edi
-0x6152D8: call    sub_612D60
+0x6152D8: call    CombatController_GetEquippedWeaponForm
 0x6152DD: cmp     byte ptr [eax+90h], 4
 0x6152E4: jnz     loc_6153E3
 0x6152EA: mov     bl, 1
@@ -67,16 +67,16 @@
 0x6152F5: mov     eax, [esi]
 0x6152F7: jmp     short loc_615318
 0x6152F9: mov     ecx, edi
-0x6152FB: call    sub_612D60
+0x6152FB: call    CombatController_GetEquippedWeaponForm
 0x615300: test    eax, eax
 0x615302: jz      short loc_61531C
 0x615304: mov     ecx, edi
-0x615306: call    sub_612D60
+0x615306: call    CombatController_GetEquippedWeaponForm
 0x61530B: add     eax, 60h ; '`'
 0x61530E: mov     eax, [eax+4]
 0x615311: test    eax, eax
 0x615313: jz      short loc_61531C
-0x615315: add     eax, 18h
+0x615315: add     eax, 18h; Weapon fallback effect source is weapon enchantment; if absent on staff/bow path, tries equipped ammo enchantment.
 0x615318: test    eax, eax
 0x61531A: jnz     short loc_615370
 0x61531C: test    bl, bl
@@ -106,14 +106,14 @@
 0x615369: jz      short loc_6153E3
 0x61536B: add     eax, 18h
 0x61536E: jz      short loc_6153E3
-0x615370: push    1
+0x615370: push    1; Resolve effect list from selected spell, weapon enchantment, or ammo enchantment, then choose highest truncated-cost effect with range filter 3 (any) and requireArea=true.
 0x615372: push    3
 0x615374: lea     ecx, [eax+0Ch]
-0x615377: call    EffectItemList_GetStrongestItem
+0x615377: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x61537C: test    eax, eax
 0x61537E: mov     dword ptr [esp+20h+var_C], eax
 0x615382: jz      short loc_6153E3
-0x615384: lea     ebx, [edi+15Ch]
+0x615384: lea     ebx, [edi+15Ch]; CombatController+0x15C is inline BSSimpleList<Actor*> cached friendly actors.
 0x61538A: test    ebx, ebx
 0x61538C: jz      short loc_6153E3
 0x61538E: mov     edi, edi; a1
@@ -123,25 +123,25 @@
 0x615397: jz      short loc_6153DF
 0x615399: cmp     esi, [edi+3Ch]
 0x61539C: jz      short loc_6153DF
-0x61539E: push    0; a4
+0x61539E: push    0; useActorProjection
 0x6153A0: mov     ecx, edi
-0x6153A2: call    sub_6135F0
-0x6153A7: push    eax; a3
-0x6153A8: push    esi; a2
-0x6153A9: call    TESObjectREFR_GetDistanceBetween?
+0x6153A2: call    CombatController_GetCurrentTarget
+0x6153A7: push    eax; to
+0x6153A8: push    esi; from
+0x6153A9: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x6153AE: fstp    [esp+2Ch+var_10]
 0x6153B2: fld     [esp+2Ch+var_10]
 0x6153B6: mov     ecx, dword ptr [esp+2Ch+var_C]
 0x6153BA: add     esp, 0Ch
 0x6153BD: fstp    [esp+20h+var_C+4]
-0x6153C1: call    EffectItem_GetArea
+0x6153C1: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x6153C6: mov     [esp+20h+var_10], eax
 0x6153CA: fild    [esp+20h+var_10]
 0x6153CE: fmul    qword ptr ds:0A563D0h
 0x6153D4: fcomp   [esp+20h+var_C+4]
 0x6153D8: fnstsw  ax
 0x6153DA: test    ah, 1
-0x6153DD: jz      short loc_6153EE
+0x6153DD: jz      short loc_6153EE; Area safety threshold: hold fire when SurfaceDistance(ally,currentTarget,false) <= 1.5 * effectiveArea. Pure 3D proximity; no LOS/raycast.
 0x6153DF: test    ebx, ebx
 0x6153E1: jnz     short loc_615390
 0x6153E3: xor     al, al

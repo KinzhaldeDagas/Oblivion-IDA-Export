@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x5D03E1",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D03E4",
-    "line": "push    1772h; a2",
+    "line": "push    1772h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5D03EB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5D0405",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x5D0457",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D045A",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5D0461",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,6 +391,90 @@
   },
   {
     "ea": "0x5D0489",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x57BDB0",
+    "line": "push    1; arg1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57BDB2",
+    "line": "push    0; canCreate",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57BDB4",
+    "line": "call    InterfaceManager_GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57BDB9",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x57BDBC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x57BDBE",
+    "line": "jz      short locret_57BDD7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x57BDC0",
+    "line": "push    1; arg1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57BDC2",
+    "line": "push    0; canCreate",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x57BDC4",
+    "line": "call    InterfaceManager_GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57BDC9",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x57BDCC",
+    "line": "cmp     dword ptr [eax+1Ch], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x57BDD0",
+    "line": "jz      short locret_57BDD7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x57BDD2",
+    "line": "jmp     sub_5B41E0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x57BDD7",
     "line": "retn",
     "mnemonic": "retn",
     "size": 1

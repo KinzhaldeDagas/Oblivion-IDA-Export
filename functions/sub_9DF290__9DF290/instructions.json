@@ -1,37 +1,37 @@
 [
   {
     "ea": "0x9DF290",
-    "line": "mov     eax, dword_B3FA90",
+    "line": "mov     eax, stru_B3FA90.x; Fog decode: copies default RGB globals into renderer startup color vector; fixed/default boundary, not dynamic world fog upload.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9DF295",
-    "line": "mov     ecx, dword_B3FA94",
+    "line": "mov     ecx, stru_B3FA90.y",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x9DF29B",
-    "line": "mov     edx, dword_B3FA98",
+    "line": "mov     edx, stru_B3FA90.z",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x9DF2A1",
-    "line": "mov     dword_B350DC, eax",
+    "line": "mov     ds:0B350DCh, eax; Fog fixed/default decode: renderer startup color vector red = B3FA90; startup/default cache only, not active B333E4 shader fog.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9DF2A6",
-    "line": "mov     dword_B350E0, ecx",
+    "line": "mov     ds:0B350E0h, ecx; Fog fixed/default decode: renderer startup color vector green = B3FA94; startup/default cache only, not active B333E4 shader fog.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x9DF2AC",
-    "line": "mov     dword_B350E4, edx",
+    "line": "mov     ds:0B350E4h, edx; Fog fixed/default decode: renderer startup color vector blue = B3FA98; startup/default cache only, not active B333E4 shader fog.",
     "mnemonic": "mov",
     "size": 6
   },

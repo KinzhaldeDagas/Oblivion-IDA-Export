@@ -7,7 +7,7 @@
 0x6D017C: push    ebp
 0x6D017D: push    ebx
 0x6D017E: mov     esi, ecx
-0x6D0180: call    sub_6D0530
+0x6D0180: call    NiInterpController_CopyMembers; NiInterpController clone-member thunk delegates to NiTimeController_CopyMembers.
 0x6D0185: movzx   eax, word ptr [esi+44h]
 0x6D0189: push    eax
 0x6D018A: mov     ecx, ebx

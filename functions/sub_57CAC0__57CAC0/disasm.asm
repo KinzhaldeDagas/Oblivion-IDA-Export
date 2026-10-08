@@ -38,7 +38,7 @@
 0x57CB3C: mov     ecx, [edi+68h]
 0x57CB3F: push    1771h
 0x57CB44: call    Tile_GetFloat
-0x57CB49: call    Double_To_SInt32
+0x57CB49: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57CB4E: mov     esi, eax
 0x57CB50: test    esi, esi
 0x57CB52: jnz     short loc_57CB6B

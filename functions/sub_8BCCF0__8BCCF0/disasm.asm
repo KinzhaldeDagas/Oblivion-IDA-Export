@@ -7,19 +7,19 @@
 0x8BCD00: mov     ecx, [eax-4]
 0x8BCD03: push    edi
 0x8BCD04: lea     edi, [eax-4]
-0x8BCD07: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x8BCD07: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x8BCD0C: push    ecx; int
 0x8BCD0D: push    4; unsigned int
 0x8BCD0F: push    eax; void *
 0x8BCD10: call    $LN21
 0x8BCD15: push    edi
-0x8BCD16: call    FormHeapFree
+0x8BCD16: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8BCD1B: add     esp, 4
 0x8BCD1E: pop     edi
 0x8BCD1F: test    [esp+4+arg_0], 1
 0x8BCD24: jz      short loc_8BCD2F
 0x8BCD26: push    esi
-0x8BCD27: call    FormHeapFree
+0x8BCD27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8BCD2C: add     esp, 4
 0x8BCD2F: mov     eax, esi
 0x8BCD31: pop     esi

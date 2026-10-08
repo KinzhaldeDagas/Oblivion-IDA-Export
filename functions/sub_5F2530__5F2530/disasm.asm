@@ -1,4 +1,4 @@
-0x5F2530: sub     esp, 0Ch
+0x5F2530: sub     esp, 0Ch; Fast-travel loop player AV update: clamps/restores health toward base+modifier over travel time.
 0x5F2533: fldz
 0x5F2535: push    esi
 0x5F2536: mov     esi, ecx

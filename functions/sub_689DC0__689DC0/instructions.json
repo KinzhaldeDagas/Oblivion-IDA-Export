@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x689DC0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified post-A* road augmentation. It walks TravelPath nodes, switches to the linked door's WorldSpace and TeleportData marker position on teleport transitions, then asks that world's TESRoad to add surface-derived position nodes for applicable segments. TravelPath_ComputeDistance subsequently sums the added node segments, so road data changes the measured travel distance; this is route measurement/surface sampling, not the A* route search.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x689DF1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689DF3",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x689E11",
-    "line": "mov     [esp+1Ch+var_C], ecx",
+    "line": "mov     [esp+1Ch+worldPosition], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x689E2A",
-    "line": "mov     [esp+1Ch+var_10], edi",
+    "line": "mov     [esp+1Ch+pathNodes], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x689E58",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689E5A",
-    "line": "call    sub_68B0F0",
+    "line": "call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x689E65",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x689E70",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; linkedDoor",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689E72",
-    "line": "call    sub_42B470",
+    "line": "call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x689E7B",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x689E84",
-    "line": "mov     [esp+20h+var_C], edx",
+    "line": "mov     [esp+20h+worldPosition], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,25 +439,25 @@
   },
   {
     "ea": "0x689E98",
-    "line": "lea     eax, [esp+20h+var_C]",
+    "line": "lea     eax, [esp+20h+worldPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x689E9C",
-    "line": "push    eax",
+    "line": "push    eax; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689E9D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689E9F",
-    "line": "call    sub_4F0600",
+    "line": "call    TESWorldSpace_FindSmallestSubSpaceContainingPosition; Verified: queries the SubSpace candidate list for the position-derived cell key, then returns the smallest-radius TESSubSpace whose exact scaled local bounds contain the point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x689EB3",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689EB5",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,73 +529,73 @@
   },
   {
     "ea": "0x689EBE",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x689EC2",
-    "line": "call    sub_68B110",
+    "line": "call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x689EC7",
-    "line": "mov     edx, [esp+20h+var_10]",
+    "line": "mov     edx, [esp+20h+pathNodes]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x689ECB",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689ECC",
-    "line": "lea     ecx, [esp+24h+var_C]",
+    "line": "lea     ecx, [esp+24h+worldPosition]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x689ED0",
-    "line": "push    ecx",
+    "line": "push    ecx; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689ED1",
-    "line": "push    ebp",
+    "line": "push    ebp; currentNodeKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689ED2",
-    "line": "push    edx",
+    "line": "push    edx; pathNodes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689ED3",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689ED5",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x689EDA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689EDC",
-    "line": "call    sub_4E97F0",
+    "line": "call    TESRoad_AddTravelSurfaceSegment; Verified called from TravelPath_AddRoadSegmentsForPath. It tests the candidate segment against nearby TESRoad connected points and surface geometry; when surface samples are available, inserts their xyz values as owned kind-1 TravelPathNode nodes. The direct caller and TravelPath_ComputeDistance establish that these samples contribute to fast-travel distance.",
     "mnemonic": "call",
     "size": 5
   },

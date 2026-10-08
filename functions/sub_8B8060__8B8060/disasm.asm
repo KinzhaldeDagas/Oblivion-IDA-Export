@@ -46,7 +46,7 @@
 0x8B80E5: pop     esi
 0x8B80E6: pop     edi
 0x8B80E7: retn    4
-0x8B80EA: mov     eax, offset stru_BA7A40
+0x8B80EA: mov     eax, offset unk_BA7A40
 0x8B80EF: push    eax
 0x8B80F0: mov     ecx, esi
 0x8B80F2: call    sub_47DCD0

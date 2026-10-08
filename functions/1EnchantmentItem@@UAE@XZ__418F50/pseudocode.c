@@ -2,11 +2,11 @@ void __thiscall EnchantmentItem::~EnchantmentItem(TESForm *this)
 {
   TESForm *v2; // ecx
 
-  v2 = (TESForm *)((char *)this + 0x24);
-  this->vtbl = (TESFormVtbl *)&EnchantmentItem::`vftable'{for `EnchantmentItem'};
-  *((_DWORD *)this + 6) = &EnchantmentItem::`vftable'{for `MagicItem'};
-  v2->vtbl = (TESFormVtbl *)&EnchantmentItem::`vftable'{for `EffectItemList'};
-  EffectItemList_Clear(v2);
-  j_TESForm_ClearComponentReferences(this);
-  MagicItemForm::~MagicItemForm(this);
+  v2 = (TESForm *)((char *)this + 0x24); /*0x418f78*/
+  this->vtbl = (TESFormVtbl *)&EnchantmentItem::`vftable'{for `EnchantmentItem'}; /*0x418f7b*/
+  *((_DWORD *)this + 6) = &EnchantmentItem::`vftable'{for `MagicItem'}; /*0x418f81*/
+  v2->vtbl = (TESFormVtbl *)&EnchantmentItem::`vftable'{for `EffectItemList'}; /*0x418f88*/
+  EffectItemList_Clear(v2); /*0x418f96*/
+  j_TESForm_ClearComponentReferences(this); /*0x418f9d*/
+  MagicItemForm::~MagicItemForm(this); /*0x418fac*/
 }

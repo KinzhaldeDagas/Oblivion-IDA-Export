@@ -9,92 +9,92 @@ char __usercall sub_511570@<al>(
         int a8,
         double *refID)
 {
-  double *v10; // ebp
+  double *v9; // ebp
   TESForm *ActorBaseForm; // ebx
-  TESForm *v12; // eax
-  TESForm *v13; // esi
+  void *v11; // eax
+  TESForm *v12; // esi
   UInt32 BaseCalcAVi; // eax
+  __int16 v14; // ax
   __int16 v15; // ax
-  __int16 v16; // ax
-  float *v17; // eax
-  TESObjectREFR *v18; // eax
-  TESObjectREFR *v19; // ebx
+  int v16; // eax
+  TESObjectREFR *v17; // eax
+  TESObjectREFR *v18; // ebx
   ExtraContainerChanges_Data *ContainerChanges; // eax
-  ExtraDataList *****v21; // eax
+  ExtraDataList *****v20; // eax
   _DWORD *EquippedInstance; // ebp
   TESObjectREFRVtbl *vtbl; // ecx
-  TESObjectREFRVtbl *v24; // edi
-  void (__thiscall **v25)(TESObjectREFRVtbl *, _DWORD *, int); // esi
-  int v26; // eax
-  TESObjectCELL *ParentCell; // [esp-18h] [ebp-1Ch]
+  TESObjectREFRVtbl *v23; // edi
+  void (__thiscall **v24)(TESObjectREFRVtbl *, _DWORD *, int); // esi
+  int v25; // eax
+  TESObjectCELL *DwordAtOffset40; // [esp-18h] [ebp-1Ch]
   TESWorldSpace *WorldSpace; // [esp-14h] [ebp-18h]
 
-  v10 = refID;
-  *refID = 0.0;
+  v9 = refID; /*0x511573*/
+  *refID = 0.0; /*0x511577*/
   if ( a5 )
   {
     if ( (*((unsigned __int8 (__thiscall **)(TESChildCELL *))a5->vtbl + 0x64))(a5) )
     {
-      ActorBaseForm = Actor_GetActorBaseForm((Actor *)a5, 0);
-      v12 = ActorBaseForm ? TESForm_CreateDynamic(ActorBaseForm->member.type) : 0;
-      v13 = (TESForm *)OblivionDynamicCast(
-                         v12,
+      ActorBaseForm = Actor_GetActorBaseForm((Actor *)a5, 0); /*0x5115a5*/
+      v11 = ActorBaseForm ? TESForm_CreateDynamic(ActorBaseForm->member.type) : 0;
+      v12 = (TESForm *)OblivionDynamicCast( /*0x5115d1*/
+                         v11,
                          0,
                          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                          &TESActorBase `RTTI Type Descriptor',
                          0);
-      if ( v13 )
+      if ( v12 ) /*0x5115d8*/
       {
-        ((void (__usercall *)(TESForm *@<ecx>, TESForm *, double@<st0>, double@<st1>))v13->vtbl->CopyFrom)(
-          v13,
+        ((void (__usercall *)(TESForm *@<ecx>, TESForm *, double@<st0>, double@<st1>))v12->vtbl->CopyFrom)( /*0x5115e9*/
+          v12,
           ActorBaseForm,
           a2,
           st6_0);
-        if ( a5 == (TESChildCELL *)TESDataHandler_g_PlayerRef )
+        if ( a5 == (TESChildCELL *)reference ) /*0x5115f3*/
         {
-          BaseCalcAVi = Actor_GetBaseCalcAVi(8);
-          TESActorBase_SetHealth(v13, BaseCalcAVi);
-          v15 = Actor_GetBaseCalcAVi(0xA);
-          TESActorBaseData_SetFatigue(&v13[1].member.refID, v15);
-          v16 = Actor_GetBaseCalcAVi(9);
-          TESActorBaseData_SetMagicka(&v13[1].member.refID, v16);
+          BaseCalcAVi = Actor_GetBaseCalcAVi((int *)reference, (int)ActorBaseForm, (int)a5, (int)v12, 8); /*0x5115f7*/
+          TESActorBase_SetHealth(v12, BaseCalcAVi); /*0x5115ff*/
+          v14 = Actor_GetBaseCalcAVi((int *)reference, (int)&v12[1].member.refID, (int)a5, (int)v12, 0xA); /*0x51160f*/
+          TESActorBaseData_SetFatigue(&v12[1].member.refID, v14); /*0x511617*/
+          v15 = Actor_GetBaseCalcAVi((int *)reference, (int)&v12[1].member.refID, (int)a5, (int)v12, 9); /*0x511624*/
+          TESActorBaseData_SetMagicka(&v12[1].member.refID, v15); /*0x51162c*/
         }
-        WorldSpace = TESObjectREFR_GetWorldSpace((TESObjectREFR *)a5);
-        ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)a5);
-        v17 = (float *)(*((int (__thiscall **)(TESChildCELL *))a5->vtbl + 0x5D))(a5);
-        TESDataHandler_PlaceObjectRef(0.0, st6_0, (int)v13, (int)v17, (int)&a5[8], ParentCell, (int)WorldSpace, 0);
-        v19 = v18;
-        if ( v18 )
+        WorldSpace = TESObjectREFR_GetWorldSpace((TESObjectREFR *)a5); /*0x51163a*/
+        DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a5); /*0x511644*/
+        v16 = (*((int (__thiscall **)(TESChildCELL *))a5->vtbl + 0x5D))(a5); /*0x511651*/
+        TESDataHandler_PlaceObjectRef(0.0, st6_0, a2, v12, v16, (int)&a5[8], DwordAtOffset40, WorldSpace, 0); /*0x51165b*/
+        v18 = v17; /*0x511660*/
+        if ( v17 ) /*0x511664*/
         {
-          refID = (double *)v18->member.super.refID;
-          sub_4F9FB0(&refID, v10);
-          TESDataHandler_AddForm((TESWorldSpace **)TESDataHandler, 0.0, st6_0, a2, (unsigned __int8 *)v13);
-          SaveLoad_AddCreatedObj((char *)SaveLoad_CurrentSavegame, (int)v13);
-          ContainerChanges = ExtraDataList_GetContainerChanges((ExtraDataList *)&a5[0x11]);
-          if ( ContainerChanges )
-            sub_48DA00(ContainerChanges, 0.0, st6_0, a2, (int)a5, v19);
-          v21 = (ExtraDataList *****)ExtraDataList_GetContainerChanges(&v19->member.baseExtraList);
-          if ( v21 )
+          refID = (double *)v17->member.super.refID; /*0x511673*/
+          sub_4F9FB0(&refID, v9); /*0x511677*/
+          TESDataHandler_AddForm(g_TESDataHandler, 0.0, st6_0, a2, v12); /*0x511686*/
+          SaveLoad_AddCreatedObj((char *)g_TESSaveLoadGame, (int)v12); /*0x511692*/
+          ContainerChanges = ExtraDataList_GetContainerChanges((ExtraDataList *)&a5[0x11]); /*0x51169a*/
+          if ( ContainerChanges ) /*0x5116a1*/
+            sub_48DA00(ContainerChanges, 0.0, st6_0, a2, (EntryData *)a5, v18); /*0x5116a7*/
+          v20 = (ExtraDataList *****)ExtraDataList_GetContainerChanges(&v18->member.baseExtraList); /*0x5116af*/
+          if ( v20 ) /*0x5116b6*/
           {
-            EquippedInstance = ContainerExtraData_GetEquippedInstance(v21, 9, 0);
-            if ( EquippedInstance )
+            EquippedInstance = ContainerExtraData_GetEquippedInstance(v20, 9, 0); /*0x5116c3*/
+            if ( EquippedInstance ) /*0x5116c7*/
             {
-              vtbl = v19[1].vtbl;
-              if ( vtbl )
+              vtbl = v18[1].vtbl; /*0x5116c9*/
+              if ( vtbl ) /*0x5116ce*/
               {
-                if ( !(*((int (__thiscall **)(TESObjectREFRVtbl *, int))vtbl->super.super.InitializeComponent + 0x3B))(
+                if ( !(*((int (__thiscall **)(TESObjectREFRVtbl *, int))vtbl->super.super.InitializeComponent + 0x3B))( /*0x5116da*/
                         vtbl,
                         1) )
                 {
-                  v24 = v19[1].vtbl;
-                  v25 = (void (__thiscall **)(TESObjectREFRVtbl *, _DWORD *, int))((char *)v24->super.super.InitializeComponent
+                  v23 = v18[1].vtbl; /*0x5116e0*/
+                  v24 = (void (__thiscall **)(TESObjectREFRVtbl *, _DWORD *, int))((char *)v23->super.super.InitializeComponent /*0x5116ef*/
                                                                                  + 0x104);
-                  v26 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))v19->vtbl->GetNiNode)(
-                          v19,
+                  v25 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))v18->vtbl->GetNiNode)( /*0x5116f5*/
+                          v18,
                           a2,
                           st6_0);
-                  (*v25)(v24, EquippedInstance, v26);
-                  return 1;
+                  (*v24)(v23, EquippedInstance, v25); /*0x5116fd*/
+                  return 1; /*0x511705*/
                 }
               }
             }
@@ -102,10 +102,10 @@ char __usercall sub_511570@<al>(
         }
         else
         {
-          v13->vtbl->Destroy(v13, 1);
+          v12->vtbl->Destroy(v12, 1); /*0x51170f*/
         }
       }
     }
   }
-  return 1;
+  return 1; /*0x511704*/
 }

@@ -11,7 +11,7 @@
 0x74FB9E: call    edx
 0x74FBA0: test    eax, eax
 0x74FBA2: jz      short loc_74FBB2
-0x74FBA4: cmp     eax, offset dword_B3CFBC
+0x74FBA4: cmp     eax, offset stru_B3CFBC
 0x74FBA9: jz      short loc_74FBD4
 0x74FBAB: mov     eax, [eax+4]
 0x74FBAE: test    eax, eax
@@ -23,7 +23,7 @@
 0x74FBBB: test    eax, eax
 0x74FBBD: jz      short loc_74FC15
 0x74FBBF: nop
-0x74FBC0: cmp     eax, offset dword_B3CF5C
+0x74FBC0: cmp     eax, offset stru_B3CF5C
 0x74FBC5: jz      short loc_74FBD4
 0x74FBC7: mov     eax, [eax+4]
 0x74FBCA: test    eax, eax
@@ -45,13 +45,13 @@
 0x74FBEF: call    edx
 0x74FBF1: test    eax, eax
 0x74FBF3: jz      short loc_74FC03
-0x74FBF5: cmp     eax, offset dword_B3E7E8
+0x74FBF5: cmp     eax, offset stru_B3E7E8
 0x74FBFA: jz      short loc_74FBD4
 0x74FBFC: mov     eax, [eax+4]
 0x74FBFF: test    eax, eax
 0x74FC01: jnz     short loc_74FBF5
 0x74FC03: push    esi
-0x74FC04: push    offset dword_B3EA50
+0x74FC04: push    offset stru_B3EA50
 0x74FC09: call    NiRTTI__IsObjectOfRTTIType
 0x74FC0E: add     esp, 8
 0x74FC11: test    al, al

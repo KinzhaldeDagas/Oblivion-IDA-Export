@@ -7,7 +7,7 @@
 0x6C5A1C: push    ebp
 0x6C5A1D: push    ebx
 0x6C5A1E: mov     esi, ecx
-0x6C5A20: call    sub_715D80
+0x6C5A20: call    NiTimeController_CopyMembers; Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.
 0x6C5A25: mov     al, [esi+6Ch]
 0x6C5A28: xor     edi, edi
 0x6C5A2A: mov     [ebx+6Ch], al
@@ -21,11 +21,11 @@
 0x6C5A3F: mov     eax, [edx+18h]
 0x6C5A42: push    ebp
 0x6C5A43: call    eax
-0x6C5A45: push    0
-0x6C5A47: push    0
-0x6C5A49: push    eax
-0x6C5A4A: mov     ecx, ebx
-0x6C5A4C: call    sub_6C5760
+0x6C5A45: push    0; validateControlledBlocks
+0x6C5A47: push    0; name
+0x6C5A49: push    eax; sequence
+0x6C5A4A: mov     ecx, ebx; this
+0x6C5A4C: call    NiControllerManager_AddSequence; Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.
 0x6C5A51: movzx   ecx, word ptr [esi+46h]
 0x6C5A55: add     edi, 1
 0x6C5A58: cmp     edi, ecx

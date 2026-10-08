@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ScriptLineBuffer",
+  "definition": "struct ScriptLineBuffer\n{\nUInt32 lineNumber;\nchar paramText[512];\nUInt32 paramTextLen;\nUInt32 lineOffset;\nUInt8 dataBuf[512];\nUInt32 dataOffset;\nUInt32 cmdOpcode;\nUInt32 callingRefIndex;\nUInt32 unk418;\n}\n",
   "id": 18374686479671993124,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lineNumber",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "paramText",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 512
+      "size": 512,
+      "type": "char[512]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "paramTextLen",
       "offset": 516,
       "offset_hex": "0x204",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lineOffset",
       "offset": 520,
       "offset_hex": "0x208",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dataBuf",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 512
+      "offset_hex": "0x20C",
+      "size": 512,
+      "type": "UInt8[512]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dataOffset",
       "offset": 1036,
-      "offset_hex": "0x40c",
-      "size": 4
+      "offset_hex": "0x40C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cmdOpcode",
       "offset": 1040,
       "offset_hex": "0x410",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "callingRefIndex",
       "offset": 1044,
       "offset_hex": "0x414",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk418",
       "offset": 1048,
       "offset_hex": "0x418",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "ScriptLineBuffer",
+  "ordinal": 9561,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1052
 }

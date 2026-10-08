@@ -1,6 +1,6 @@
-0x78EDD0: mov     edx, [esp+arg_4]
+0x78EDD0: mov     edx, [esp+rhs]; Oblivion stRotTransform 3x3 multiply (C++ operator* with an explicit hidden result pointer). Computes this*rhs into the supplied 0x24-byte output transform.
 0x78EDD4: fld     dword ptr [edx+0Ch]
-0x78EDD7: mov     eax, [esp+arg_0]
+0x78EDD7: mov     eax, [esp+outTransform]
 0x78EDDB: fmul    dword ptr [ecx+4]
 0x78EDDE: fld     dword ptr [edx]
 0x78EDE0: fmul    dword ptr [ecx]

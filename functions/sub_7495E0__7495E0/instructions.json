@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x7495E7",
-    "line": "mov     edi, [esp+1Ch+arg_0]",
+    "line": "mov     edi, [esp+1Ch+cloningProcess]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7495EB",
-    "line": "push    edi",
+    "line": "push    edi; cloningProcess",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7495EE",
-    "line": "call    sub_723050",
+    "line": "call    NiGeometry_ProcessClone; Common NiGeometry clone post-process. Resolves the destination through the clone map, handles geometry-data cloning/sharing, and rebuilds shader/property state only when the source geometry has a shader; a source-null shader leaves the clone shader/property state null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7495F5",
-    "line": "lea     eax, [esp+1Ch+arg_0]",
+    "line": "lea     eax, [esp+1Ch+cloningProcess]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x74962E",
-    "line": "mov     [esp+1Ch+var_C], eax",
+    "line": "mov     [esp+1Ch+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x749634",
-    "line": "mov     ebx, [esp+1Ch+arg_0]",
+    "line": "mov     ebx, [esp+1Ch+cloningProcess]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,61 +205,61 @@
   },
   {
     "ea": "0x749640",
-    "line": "lea     ecx, [esp+1Ch+var_8]",
+    "line": "lea     ecx, [esp+1Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x749644",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x749645",
-    "line": "lea     edx, [esp+20h+var_4]",
+    "line": "lea     edx, [esp+20h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x749649",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74964A",
-    "line": "lea     eax, [esp+24h+var_C]",
+    "line": "lea     eax, [esp+24h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x74964E",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74964F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x749651",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x749656",
-    "line": "mov     edx, [esp+1Ch+var_8]",
+    "line": "mov     edx, [esp+1Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x74965A",
-    "line": "lea     ecx, [esp+1Ch+arg_0]",
+    "line": "lea     ecx, [esp+1Ch+cloningProcess]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x749667",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+cloningProcess]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x74966B",
-    "line": "mov     ecx, [esp+1Ch+var_4]",
+    "line": "mov     ecx, [esp+1Ch+keyOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x749678",
-    "line": "cmp     [esp+1Ch+var_C], 0",
+    "line": "cmp     [esp+1Ch+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

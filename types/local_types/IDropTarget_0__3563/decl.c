@@ -1,1 +1,1 @@
-IDropTarget_0
+typedef IDropTarget IDropTarget_0;

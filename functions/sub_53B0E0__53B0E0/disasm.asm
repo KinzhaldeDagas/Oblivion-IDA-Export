@@ -1,4 +1,4 @@
-0x53B0E0: sub     esp, 1Ch
+0x53B0E0: sub     esp, 1Ch; Fog decode: Atmosphere update copies final Sky fog fields into active B333E4/Atmosphere BSFogProperty; sources include exterior weather, interior cell lighting, and water/underwater.
 0x53B0E3: push    esi
 0x53B0E4: mov     esi, [esp+20h+arg_0]
 0x53B0E8: test    esi, esi
@@ -9,7 +9,7 @@
 0x53B0F7: push    ecx
 0x53B0F8: fstp    [esp+28h+var_28]
 0x53B0FB: push    esi
-0x53B0FC: call    nullsub_returnVoid_2arg
+0x53B0FC: call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.
 0x53B101: mov     eax, [esi+0DCh]
 0x53B107: cmp     eax, 3
 0x53B10A: jz      short loc_53B115
@@ -20,7 +20,7 @@
 0x53B11F: mov     ecx, ds:0B333C4h; this
 0x53B125: test    ecx, ecx
 0x53B127: jz      loc_53B20C
-0x53B12D: call    TESObjectREFR_GetParentCell
+0x53B12D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x53B132: test    eax, eax
 0x53B134: jz      loc_53B20C
 0x53B13A: mov     ecx, ds:0B333CCh; this
@@ -29,15 +29,15 @@
 0x53B14B: mov     ecx, ds:0B333C4h; this
 0x53B151: add     eax, 88h ; 'ˆ'
 0x53B156: fstp    [esp+24h+a2]
-0x53B15A: call    TESObjectREFR_GetParentCell
+0x53B15A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x53B15F: mov     ecx, eax
 0x53B161: call    TESObjectCELL_GetWaterHeight
 0x53B166: fcomp   [esp+24h+a2]
 0x53B16A: fnstsw  ax
 0x53B16C: test    ah, 41h
-0x53B16F: jnz     loc_53B20C
+0x53B16F: jnz     loc_53B20C; Fog water decode: Atmosphere update repeats exterior water-height check before choosing underwater versus regular atmosphere color vectors.
 0x53B175: fld     dword ptr [esi+48h]
-0x53B178: fstp    dword ptr [esp+24h+a2]
+0x53B178: fstp    dword ptr [esp+24h+a2]; Fog water decode: underwater atmosphere color vectors use active Sky fog color at +0x48/+0x4C/+0x50.
 0x53B17C: mov     eax, dword ptr [esp+24h+a2]
 0x53B180: fld     dword ptr [esi+4Ch]
 0x53B183: fstp    dword ptr [esp+24h+a2+4]
@@ -74,7 +74,7 @@
 0x53B204: fld     dword ptr [esi+50h]
 0x53B207: jmp     loc_53B2B0
 0x53B20C: fld     dword ptr [esi+9Ch]
-0x53B212: fstp    dword ptr [esp+24h+a2]
+0x53B212: fstp    dword ptr [esp+24h+a2]; Fog water decode: non-underwater atmosphere color vectors use regular Sky color slots instead of active fog RGB.
 0x53B216: mov     eax, dword ptr [esp+24h+a2]
 0x53B21A: fld     dword ptr [esi+0A0h]
 0x53B220: fstp    dword ptr [esp+24h+a2+4]
@@ -132,33 +132,33 @@
 0x53B2FD: jmp     short loc_53B301
 0x53B2FF: xor     al, al
 0x53B301: test    al, al
-0x53B303: jz      short loc_53B30C
-0x53B305: or      word ptr [ecx+18h], 1
+0x53B303: jz      short loc_53B30C; Fog property decode: compare Sky fogStart/fogEnd to determine active BSFogProperty enable bit.
+0x53B305: or      word ptr [ecx+18h], 1; Fog property decode: set BSFogProperty flags bit 0 when Sky fogStart < fogEnd.
 0x53B30A: jmp     short loc_53B312
-0x53B30C: and     word ptr [ecx+18h], 0FFFEh
-0x53B312: cmp     byte ptr [edi+18h], 0
+0x53B30C: and     word ptr [ecx+18h], 0FFFEh; Fog property decode: clear BSFogProperty flags bit 0 when Sky fogStart >= fogEnd, disabling active fog.
+0x53B312: cmp     byte ptr [edi+18h], 0; Fog property decode: Atmosphere+0x18 gate for copying Sky fogStart/fogEnd into BSFogProperty and updating camera far plane.
 0x53B316: jz      short loc_53B335
 0x53B318: fld     dword ptr [esi+0CCh]
 0x53B31E: mov     eax, [edi+0Ch]
 0x53B321: fstp    [esp+24h+arg_0]
 0x53B325: fld     dword ptr [esi+0C8h]
-0x53B32B: fstp    dword ptr [eax+2Ch]
+0x53B32B: fstp    dword ptr [eax+2Ch]; Fog decode: active BSFogProperty fogStart write, B333E4+0x2C = Sky+0x0C8 produced by weather, interior, or water fog source.
 0x53B32E: fld     [esp+24h+arg_0]
-0x53B332: fstp    dword ptr [eax+30h]
+0x53B332: fstp    dword ptr [eax+30h]; Fog decode: active BSFogProperty fogEnd write, B333E4+0x30 = Sky+0x0CC produced by weather, interior, or water fog source.
 0x53B335: mov     eax, [edi+0Ch]
 0x53B338: mov     edx, [esi+48h]
 0x53B33B: lea     ecx, [esi+48h]
 0x53B33E: add     eax, 20h ; ' '
-0x53B341: mov     [eax], edx
+0x53B341: mov     [eax], edx; Fog decode: active BSFogProperty color.r = Sky+0x48 produced by interior cell fog color, exterior weather color, or water fog blend.
 0x53B343: mov     edx, [ecx+4]
-0x53B346: mov     [eax+4], edx
+0x53B346: mov     [eax+4], edx; Fog decode: active BSFogProperty color.g = Sky+0x4C produced by interior cell fog color, exterior weather color, or water fog blend.
 0x53B349: mov     ecx, [ecx+8]
-0x53B34C: mov     [eax+8], ecx
-0x53B34F: cmp     byte ptr [edi+18h], 0
+0x53B34C: mov     [eax+8], ecx; Fog decode: active BSFogProperty color.b = Sky+0x50 produced by interior cell fog color, exterior weather color, or water fog blend.
+0x53B34F: cmp     byte ptr [edi+18h], 0; Fog property decode: Atmosphere+0x18 also gates camera far-plane synchronization after fog property writes.
 0x53B353: jz      short loc_53B3BC
 0x53B355: mov     ecx, ds:0B333CCh; this
-0x53B35B: call    GetFarPlane
-0x53B360: fstp    [esp+24h+arg_0]
+0x53B35B: call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.
+0x53B360: fstp    [esp+24h+arg_0]; Fog property decode: read active GetFarPlane result for camera frustum synchronization.
 0x53B364: mov     edx, ds:0B333CCh
 0x53B36A: mov     edx, [edx+0DCh]
 0x53B370: test    edx, edx
@@ -174,12 +174,12 @@
 0x53B391: fnstsw  ax
 0x53B393: test    ah, 44h
 0x53B396: jnp     short loc_53B3BA
-0x53B398: fst     [esp+24h+var_8]
+0x53B398: fst     [esp+24h+var_8]; Fog property decode: write camera frustum far plane when it differs from active GetFarPlane.
 0x53B39C: lea     eax, [esp+24h+a2]
 0x53B3A0: fdiv    [esp+24h+var_C]
 0x53B3A4: push    eax; a2
 0x53B3A5: mov     ecx, edx; this
-0x53B3A7: fstp    dword ptr [edx+10Ch]
+0x53B3A7: fstp    dword ptr [edx+10Ch]; Fog property decode: update camera MaxFarNearRatio = FarPlane / near after far-plane change.
 0x53B3AD: call    Camera_SetFrustum
 0x53B3B2: pop     edi
 0x53B3B3: pop     esi

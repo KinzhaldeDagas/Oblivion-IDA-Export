@@ -136,11 +136,11 @@
 0x53FEC3: mov     ecx, ebp; this
 0x53FEC5: call    sub_6B73E0
 0x53FECA: push    ebp
-0x53FECB: call    FormHeapFree
+0x53FECB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53FED0: add     esp, 4
 0x53FED3: mov     eax, [esi]
 0x53FED5: push    eax
-0x53FED6: call    FormHeapFree
+0x53FED6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53FEDB: mov     esi, [esi+4]
 0x53FEDE: add     esp, 4
 0x53FEE1: test    esi, esi
@@ -151,7 +151,7 @@
 0x53FEF1: mov     eax, [esi+4]
 0x53FEF4: mov     ebp, [eax+4]
 0x53FEF7: push    eax
-0x53FEF8: call    FormHeapFree
+0x53FEF8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53FEFD: add     esp, 4
 0x53FF00: test    ebp, ebp
 0x53FF02: mov     [esi+4], ebp
@@ -159,7 +159,7 @@
 0x53FF07: mov     dword ptr [esi], 0
 0x53FF0D: mov     eax, [edi+0E0h]
 0x53FF13: push    eax
-0x53FF14: call    FormHeapFree
+0x53FF14: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53FF19: mov     esi, [edi+8]
 0x53FF1C: add     esp, 4
 0x53FF1F: test    esi, esi
@@ -201,3 +201,16 @@
 0x53FF7D: pop     ebp
 0x53FF7E: add     esp, 14h
 0x53FF81: retn
+0x9BA490: mov     ecx, [ebp-10h]
+0x9BA493: add     ecx, 4; slot
+0x9BA496: jmp     NiPointerSlot_Release
+0x9BA49B: mov     ecx, [ebp-10h]
+0x9BA49E: add     ecx, 8; slot
+0x9BA4A1: jmp     NiPointerSlot_Release
+0x9BA4A6: mov     edx, [esp+arg_4]
+0x9BA4AA: lea     eax, [edx-14h]
+0x9BA4AD: mov     ecx, [edx-18h]
+0x9BA4B0: xor     ecx, eax
+0x9BA4B2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA4B7: mov     eax, offset stru_AE4624
+0x9BA4BC: jmp     ___CxxFrameHandler3

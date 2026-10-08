@@ -26,7 +26,7 @@
 0x92A1C2: pop     edi
 0x92A1C3: pop     esi
 0x92A1C4: jnz     short locret_92A1D8
-0x92A1C6: mov     ecx, offset stru_BA7A40
+0x92A1C6: mov     ecx, offset unk_BA7A40
 0x92A1CB: mov     dword ptr [eax+2Ch], 1
 0x92A1D2: mov     [eax+24h], ecx
 0x92A1D5: mov     [eax+1Ch], ecx

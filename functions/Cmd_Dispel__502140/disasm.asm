@@ -21,7 +21,7 @@
 0x502171: push    eax; a1
 0x502172: mov     dword ptr [esp+34h+var_8], 0
 0x50217A: mov     [esp+34h+var_4], 0
-0x502182: call    Script_ExtractArgs
+0x502182: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502187: add     esp, 24h
 0x50218A: test    al, al
 0x50218C: jnz     short loc_502196
@@ -50,7 +50,7 @@
 0x5021C6: mov     ecx, dword ptr [esp+10h+var_8]
 0x5021CA: push    edi
 0x5021CB: add     ecx, 0Ch
-0x5021CE: call    EffectItemList_HasScriptEffect
+0x5021CE: call    EffectItemList_HasScriptEffect; EffectItemList_HasScriptEffect: true only when the effect item's script pointer matches and its EffectSetting flags do not include 0x400000.
 0x5021D3: test    al, al
 0x5021D5: jnz     short loc_50218E
 0x5021D7: pop     edi

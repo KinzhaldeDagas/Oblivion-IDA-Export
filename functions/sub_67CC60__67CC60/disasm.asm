@@ -78,17 +78,17 @@
 0x67CD2E: mov     ecx, [eax]
 0x67CD30: push    eax
 0x67CD31: mov     [edi], ecx
-0x67CD33: call    FormHeapFree
+0x67CD33: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67CD38: add     esp, 4
 0x67CD3B: push    ebp
-0x67CD3C: call    FormHeapFree
+0x67CD3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67CD41: mov     edx, [esp+1Ch+var_4]
 0x67CD45: mov     edi, [edx]
 0x67CD47: add     esp, 4
 0x67CD4A: jmp     short loc_67CD66
 0x67CD4C: push    ebp
 0x67CD4D: mov     dword ptr [edi], 0
-0x67CD53: call    FormHeapFree
+0x67CD53: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67CD58: mov     edx, [esp+1Ch+var_4]
 0x67CD5C: mov     edi, [edx]
 0x67CD5E: add     esp, 4

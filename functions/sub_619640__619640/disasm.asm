@@ -7,12 +7,12 @@
 0x619652: push    edi
 0x619653: jnz     loc_61970E
 0x619659: mov     ecx, [esi+3Ch]
-0x61965C: call    Actor_IsBlocking
+0x61965C: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x619661: test    al, al
 0x619663: jz      short loc_61966F
-0x619665: mov     ecx, [esi+3Ch]
-0x619668: push    0; float
-0x61966A: call    sub_5F4AE0
+0x619665: mov     ecx, [esi+3Ch]; this
+0x619668: push    0; shouldBlock
+0x61966A: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x61966F: mov     ecx, [esi+0C8h]
 0x619675: test    ecx, ecx
 0x619677: mov     byte ptr [esi+4Ah], 1
@@ -20,7 +20,7 @@
 0x61967F: jz      short loc_6196A7
 0x619681: mov     edi, [esi+3Ch]
 0x619684: push    2; int
-0x619686: call    sub_520200
+0x619686: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x61968B: mov     edx, [edi]
 0x61968D: push    eax; int
 0x61968E: mov     eax, [esi+0C8h]
@@ -30,7 +30,7 @@
 0x61969C: mov     ecx, edi
 0x61969E: call    eax
 0x6196A0: mov     ecx, eax; this
-0x6196A2: call    sub_477DB0
+0x6196A2: call    ActorAnimData_QueueIdle; Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.
 0x6196A7: push    ebp
 0x6196A8: mov     ebp, [esi+3Ch]
 0x6196AB: mov     edi, [ebp+0]
@@ -38,7 +38,7 @@
 0x6196B0: push    5
 0x6196B2: mov     ecx, esi
 0x6196B4: add     edi, 308h
-0x6196BA: call    sub_6135F0
+0x6196BA: call    CombatController_GetCurrentTarget
 0x6196BF: mov     edx, [edi]
 0x6196C1: push    eax
 0x6196C2: mov     ecx, ebp
@@ -47,12 +47,12 @@
 0x6196CD: pop     ebp
 0x6196CE: jz      loc_619809
 0x6196D4: mov     ecx, esi
-0x6196D6: call    sub_6135F0
+0x6196D6: call    CombatController_GetCurrentTarget
 0x6196DB: test    eax, eax
 0x6196DD: jz      loc_619809
 0x6196E3: mov     edi, [esi+3Ch]
 0x6196E6: mov     ecx, esi
-0x6196E8: call    sub_6135F0
+0x6196E8: call    CombatController_GetCurrentTarget
 0x6196ED: mov     ecx, eax; this
 0x6196EF: call    TESObjectREFR_GetName
 0x6196F4: push    eax
@@ -73,16 +73,16 @@
 0x61971C: mov     edx, [eax+164h]
 0x619722: call    edx
 0x619724: mov     ecx, eax
-0x619726: call    sub_472EA0
+0x619726: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x61972B: test    al, al
 0x61972D: jz      loc_619809
 0x619733: mov     ecx, esi
 0x619735: mov     byte ptr [esi+4Ah], 0
-0x619739: call    sub_6135F0
+0x619739: call    CombatController_GetCurrentTarget
 0x61973E: test    eax, eax
 0x619740: jz      short loc_619759
 0x619742: mov     ecx, esi
-0x619744: call    sub_6135F0
+0x619744: call    CombatController_GetCurrentTarget
 0x619749: mov     ecx, [esi+3Ch]
 0x61974C: mov     edx, [eax]
 0x61974E: mov     edx, [edx+36Ch]
@@ -90,16 +90,16 @@
 0x619755: mov     ecx, eax
 0x619757: call    edx
 0x619759: mov     ecx, [esi+3Ch]
-0x61975C: call    Actor_IsBlocking
+0x61975C: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x619761: test    al, al
 0x619763: jz      short loc_61976F
-0x619765: mov     ecx, [esi+3Ch]
-0x619768: push    0; float
-0x61976A: call    sub_5F4AE0
+0x619765: mov     ecx, [esi+3Ch]; this
+0x619768: push    0; shouldBlock
+0x61976A: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x61976F: mov     ecx, esi
 0x619771: call    sub_6160B0
 0x619776: push    0; Seed
-0x619778: call    GetRandomLargeInteger?
+0x619778: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61977D: cdq
 0x61977E: mov     ecx, 0Ah
 0x619783: idiv    ecx

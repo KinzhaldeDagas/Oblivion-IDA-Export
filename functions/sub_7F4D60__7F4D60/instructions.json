@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x7F4D6F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F4D71",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,31 +91,31 @@
   },
   {
     "ea": "0x7F4D87",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4D89",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4D8B",
-    "line": "push    17h",
+    "line": "push    17h; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4D8D",
-    "line": "push    esi",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F4D8E",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7F4D9A",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },

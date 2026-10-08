@@ -7,7 +7,7 @@
 0x442640: mov     eax, [esi+7Ch]
 0x442643: mov     edi, [eax+4]
 0x442646: push    eax
-0x442647: call    FormHeapFree
+0x442647: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44264C: add     esp, 4
 0x44264F: test    edi, edi
 0x442651: mov     [esi+7Ch], edi
@@ -27,7 +27,7 @@
 0x442679: call    GetShadowSceneNode
 0x44267E: add     esp, 4
 0x442681: mov     ecx, eax
-0x442683: call    sub_7C7E50
+0x442683: call    ShadowSceneNode_TeardownLightLists; When this TES lifecycle path is not retaining the current world/cell state, tear down native full and active shadow-light lists before rebuild.
 0x442688: mov     eax, ds:0B33398h
 0x44268D: mov     ecx, [eax+24h]
 0x442690: test    ecx, ecx
@@ -49,7 +49,7 @@
 0x4426B8: jnz     short loc_4426C6
 0x4426BA: mov     ecx, ds:0B33A98h
 0x4426C0: push    edi; a1
-0x4426C1: call    sub_447BA0
+0x4426C1: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x4426C6: push    ebx
 0x4426C7: mov     ecx, esi
 0x4426C9: call    sub_43FE30

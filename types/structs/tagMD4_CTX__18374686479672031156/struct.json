@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagMD4_CTX",
+  "definition": "struct tagMD4_CTX\n{\nunsigned int buf[4];\nunsigned int i[2];\nunsigned __int8 in[64];\nunsigned __int8 digest[16];\n}\n",
   "id": 18374686479672031156,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "buf",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "unsigned int[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "i",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "unsigned int[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "in",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 64
+      "size": 64,
+      "type": "unsigned __int8[64]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "digest",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 16
+      "size": 16,
+      "type": "unsigned __int8[16]"
     }
   ],
   "name": "tagMD4_CTX",
+  "ordinal": 2658,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 104
 }

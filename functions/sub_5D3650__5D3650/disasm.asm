@@ -31,12 +31,12 @@
 0x5D36C5: mov     [esp+340h+var_320.m_bufLen], bx
 0x5D36CA: call    BSStringT_Set
 0x5D36CF: mov     eax, [esp+338h+var_320.m_data]
-0x5D36D3: mov     ecx, [esp+338h+var_318]
-0x5D36D7: push    ebx
-0x5D36D8: push    eax
-0x5D36D9: push    edi
+0x5D36D3: mov     ecx, [esp+338h+var_318]; this
+0x5D36D7: push    ebx; lastTile
+0x5D36D8: push    eax; name
+0x5D36D9: push    edi; parent
 0x5D36DA: mov     [esp+344h+var_4], ebx
-0x5D36E1: call    Menu_CreateTileFromTemplate
+0x5D36E1: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5D36E6: cmp     esi, ebx
 0x5D36E8: mov     edi, eax
 0x5D36EA: jz      loc_5D3787
@@ -90,9 +90,9 @@
 0x5D378F: fild    [esp+338h+arg_4]
 0x5D3796: push    ecx
 0x5D3797: mov     ecx, edi; this
-0x5D3799: fstp    [esp+33Ch+a2]; a3
-0x5D379C: push    0FAEh; a2
-0x5D37A1: call    Tile_SetFloat
+0x5D3799: fstp    [esp+33Ch+a2]; value
+0x5D379C: push    0FAEh; propertyCode
+0x5D37A1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D37A6: mov     esi, ebp
 0x5D37A8: lea     ecx, [esp+338h+var_310]
 0x5D37AC: xor     edx, edx
@@ -124,18 +124,18 @@
 0x5D3800: fild    [esp+338h+var_324]
 0x5D3804: push    ecx
 0x5D3805: mov     ecx, edi; this
-0x5D3807: fstp    [esp+33Ch+a2]; a3
-0x5D380A: push    0FA8h; a2
-0x5D380F: call    Tile_SetFloat
+0x5D3807: fstp    [esp+33Ch+a2]; value
+0x5D380A: push    0FA8h; propertyCode
+0x5D380F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D3814: cmp     ebp, ebx
 0x5D3816: jz      short loc_5D382F
 0x5D3818: mov     ecx, [esp+338h+var_318]
 0x5D381C: mov     eax, [ecx+50h]
 0x5D381F: cmp     eax, ebx
 0x5D3821: jz      short loc_5D382F
-0x5D3823: push    ebp; Str2
-0x5D3824: push    eax; Str1
-0x5D3825: call    __strcmp
+0x5D3823: push    ebp; right
+0x5D3824: push    eax; left
+0x5D3825: call    CRT_StricmpLocaleDispatch
 0x5D382A: add     esp, 8
 0x5D382D: jmp     short loc_5D383A
 0x5D382F: xor     eax, eax
@@ -158,13 +158,13 @@
 0x5D3868: jge     short loc_5D3870
 0x5D386A: fadd    dword ptr ds:0A2FC78h
 0x5D3870: add     esp, 0Ch
-0x5D3873: fstp    [esp+33Ch+a2]; a3
-0x5D3876: push    0FF0h; a2
+0x5D3873: fstp    [esp+33Ch+a2]; value
+0x5D3876: push    0FF0h; propertyCode
 0x5D387B: mov     ecx, edi; this
-0x5D387D: call    Tile_SetFloat
+0x5D387D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D3882: mov     eax, [esp+338h+var_320.m_data]
 0x5D3886: push    eax
-0x5D3887: call    FormHeapFree
+0x5D3887: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D388C: add     esp, 4
 0x5D388F: mov     ecx, [esp+338h+var_C]
 0x5D3896: mov     large fs:0, ecx
@@ -178,3 +178,16 @@
 0x5D38AB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5D38B0: add     esp, 324h
 0x5D38B6: retn    10h
+0x9C1E70: lea     ecx, [ebp-320h]; void *
+0x9C1E76: jmp     BSStringT_Clear
+0x9C1E7B: mov     edx, [esp+arg_4]
+0x9C1E7F: lea     eax, [edx-328h]
+0x9C1E85: mov     ecx, [edx-32Ch]
+0x9C1E8B: xor     ecx, eax
+0x9C1E8D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1E92: add     eax, 10h
+0x9C1E95: mov     ecx, [edx-4]
+0x9C1E98: xor     ecx, eax
+0x9C1E9A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1E9F: mov     eax, offset stru_AEAE2C
+0x9C1EA4: jmp     ___CxxFrameHandler3

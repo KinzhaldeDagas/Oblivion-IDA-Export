@@ -1,19 +1,36 @@
 {
-  "callees_count": 62,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 37,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_67E610",
+  "chunks": [
+    [
+      "0x67E610",
+      "0x67E8CC"
+    ],
+    [
+      "0x9C4A90",
+      "0x9C4AB3"
+    ]
+  ],
+  "chunks_sha256": "d020205e6baa408cd992157c687978861c5cb2f81455f1d8b1cd178e47c9b526",
+  "comment_regular": "Verified A* route builder: F=G+H, Euclidean edge G, Euclidean H, predecessor at +0x0C. It emits a TeleportData chain from v14: the goal if found, otherwise the best candidate seen; return value v13 separately reports whether the goal was reached. Fallout's inspected Pathing uses typed AStarQueue/NavMeshSearchNode and TeleportDoorSearch instead.",
+  "comment_repeatable": "Verified A* route builder: F=G+H, Euclidean edge G, Euclidean H, predecessor at +0x0C. It emits a TeleportData chain from v14: the goal if found, otherwise the best candidate seen; return value v13 separately reports whether the goal was reached. Fallout's inspected Pathing uses typed AStarQueue/NavMeshSearchNode and TeleportDoorSearch instead.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "ConnectedPointGraph_BuildAStarRoute",
   "end_ea": "0x67E8CC",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_67E610",
+  "name": "ConnectedPointGraph_BuildAStarRoute",
   "segment": ".text",
   "sha256": "a0428bb87fd3cad6666bc79584b8a617c0197236ff36e72839497af7c3dffa01",
   "size": 700,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67E610",
-  "type": "char __stdcall(float *, char *, int *)",
-  "xrefs_from_count": 271,
+  "total_chunk_size": 735,
+  "type": "bool __stdcall(TESConnectedPoint *start, TESConnectedPoint *goal, TeleportData **outRouteNodes)",
+  "xrefs_from_count": 286,
   "xrefs_to_count": 1
 }

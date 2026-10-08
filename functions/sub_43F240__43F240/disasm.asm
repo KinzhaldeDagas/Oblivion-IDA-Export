@@ -11,7 +11,7 @@
 0x43F25D: mov     ecx, esi
 0x43F25F: call    edx
 0x43F261: push    esi
-0x43F262: mov     ecx, offset ActorProcessManager_ptr
+0x43F262: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x43F267: call    sub_674E10
 0x43F26C: pop     esi
 0x43F26D: retn    4

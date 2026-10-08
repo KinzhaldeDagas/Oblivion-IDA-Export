@@ -1,1 +1,1 @@
-GLvoid
+typedef void GLvoid;

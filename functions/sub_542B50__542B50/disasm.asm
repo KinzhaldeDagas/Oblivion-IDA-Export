@@ -4,7 +4,7 @@
 0x542B53: push    edi
 0x542B54: push    3
 0x542B56: mov     esi, ecx
-0x542B58: call    nullsub_returnTrue_0arg
+0x542B58: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x542B5D: mov     eax, [esi+30h]
 0x542B60: mov     ebx, ds:0A2807Ch
 0x542B66: add     esp, 4
@@ -33,7 +33,7 @@
 0x542B9C: call    eax
 0x542B9E: mov     ecx, [esi+30h]
 0x542BA1: mov     ecx, [ecx+10h]; this
-0x542BA4: call    NiAVObject_InitializePropertyState
+0x542BA4: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x542BA9: mov     eax, [esi+30h]
 0x542BAC: mov     ecx, [eax+14h]
 0x542BAF: push    6
@@ -58,7 +58,7 @@
 0x542BDB: call    eax
 0x542BDD: mov     ecx, [esi+30h]
 0x542BE0: mov     ecx, [ecx+14h]; this
-0x542BE3: call    NiAVObject_InitializePropertyState
+0x542BE3: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x542BE8: mov     eax, [esi+34h]
 0x542BEB: test    eax, eax
 0x542BED: jz      short loc_542C6A
@@ -85,7 +85,7 @@
 0x542C1E: call    edx
 0x542C20: mov     eax, [esi+34h]
 0x542C23: mov     ecx, [eax+10h]; this
-0x542C26: call    NiAVObject_InitializePropertyState
+0x542C26: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x542C2B: mov     edx, [esi+34h]
 0x542C2E: push    6
 0x542C30: lea     ecx, [esp+20h+var_10]
@@ -110,7 +110,7 @@
 0x542C5D: call    edx
 0x542C5F: mov     eax, [esi+34h]
 0x542C62: mov     ecx, [eax+14h]; this
-0x542C65: call    NiAVObject_InitializePropertyState
+0x542C65: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x542C6A: mov     eax, [esi+28h]
 0x542C6D: test    eax, eax
 0x542C6F: jz      loc_542D0A
@@ -137,11 +137,11 @@
 0x542CA4: call    eax
 0x542CA6: mov     ecx, [esi+28h]
 0x542CA9: mov     ecx, [ecx+8]; this
-0x542CAC: call    NiAVObject_InitializePropertyState
+0x542CAC: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x542CB1: mov     edx, [esi+28h]
 0x542CB4: mov     ecx, [edx+8]
 0x542CB7: push    4
-0x542CB9: call    NiNode_GetNiPropertyByID
+0x542CB9: call    NiNode_GetNiPropertyByID;
 0x542CBE: mov     ecx, [esi+28h]
 0x542CC1: mov     ecx, [ecx+0Ch]
 0x542CC4: push    6
@@ -166,11 +166,11 @@
 0x542CF0: call    eax
 0x542CF2: mov     ecx, [esi+28h]
 0x542CF5: mov     ecx, [ecx+0Ch]; this
-0x542CF8: call    NiAVObject_InitializePropertyState
+0x542CF8: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x542CFD: mov     edx, [esi+28h]
 0x542D00: mov     ecx, [edx+0Ch]
 0x542D03: push    4
-0x542D05: call    NiNode_GetNiPropertyByID
+0x542D05: call    NiNode_GetNiPropertyByID;
 0x542D0A: mov     ecx, [esi+24h]
 0x542D0D: test    ecx, ecx
 0x542D0F: pop     edi
@@ -179,6 +179,6 @@
 0x542D12: jz      short loc_542D19
 0x542D14: call    sub_540F50
 0x542D19: push    2
-0x542D1B: call    nullsub_returnTrue_0arg
+0x542D1B: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x542D20: add     esp, 8
 0x542D23: retn

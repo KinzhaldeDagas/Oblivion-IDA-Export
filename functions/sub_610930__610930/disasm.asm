@@ -1,4 +1,4 @@
-0x610930: push    0FFFFFFFFh
+0x610930: push    0FFFFFFFFh; RadiantAI: attack crime side-effect path. Builds crime type 3 record and witness response.
 0x610932: push    offset SEH_610930
 0x610937: mov     eax, large fs:0
 0x61093D: push    eax
@@ -33,7 +33,7 @@
 0x61099C: test    byte ptr [eax+70h], 1
 0x6109A0: jnz     short loc_6109B1
 0x6109A2: mov     ecx, ebp; this
-0x6109A4: call    sub_5E6C60
+0x6109A4: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x6109A9: test    al, al
 0x6109AB: jz      loc_610E7A
 0x6109B1: mov     ecx, ds:0B333C4h
@@ -62,7 +62,7 @@
 0x610A03: test    byte ptr [eax+70h], 1
 0x610A07: jz      loc_610E7A
 0x610A0D: mov     ecx, esi; this
-0x610A0F: call    sub_5E6C60
+0x610A0F: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x610A14: test    al, al
 0x610A16: jnz     loc_610E7A
 0x610A1C: mov     ecx, ebp
@@ -76,7 +76,7 @@
 0x610A32: test    al, al
 0x610A34: jnz     loc_610E7A
 0x610A3A: mov     ecx, esi; this
-0x610A3C: call    sub_5E6C60
+0x610A3C: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x610A41: test    al, al
 0x610A43: jnz     loc_610E7A
 0x610A49: cmp     esi, ebx
@@ -91,13 +91,13 @@
 0x610A63: cmp     eax, 64h ; 'd'
 0x610A66: jnz     short loc_610A77
 0x610A68: mov     ecx, esi
-0x610A6A: call    Actor_IsSneaking
+0x610A6A: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x610A6F: test    al, al
 0x610A71: jnz     loc_610E7A
 0x610A77: push    30h ; '0'; Size
 0x610A79: call    FormHeapAlloc
 0x610A7E: add     esp, 4
-0x610A81: mov     dword ptr [esp+29Ch+var_274], eax
+0x610A81: mov     [esp+29Ch+var_274], eax
 0x610A85: cmp     eax, ebx
 0x610A87: mov     [esp+29Ch+var_4], ebx
 0x610A8E: jz      short loc_610AA0
@@ -108,7 +108,7 @@
 0x610A94: push    ebp
 0x610A95: push    3
 0x610A97: mov     ecx, eax
-0x610A99: call    sub_6070B0
+0x610A99: call    sub_6070B0; RadiantAI: crime event record constructor. type field at +4: observed 0=steal item, 1=pickpocket, 2=trespass, 3=attack, 4=murder, 5=horse theft.
 0x610A9E: mov     ebx, eax
 0x610AA0: mov     eax, ds:0B333C4h
 0x610AA5: cmp     [ebx+0Ch], eax
@@ -116,14 +116,14 @@
 0x610AB3: jnz     short loc_610ABC
 0x610AB5: add     dword ptr [eax+6D4h], 1
 0x610ABC: push    ebx
-0x610ABD: mov     ecx, offset ActorProcessManager_ptr
+0x610ABD: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x610AC2: call    sub_67A290
 0x610AC7: mov     esi, eax
 0x610AC9: test    esi, esi
 0x610ACB: mov     dword ptr [esp+29Ch+var_288+4], esi
 0x610ACF: jnz     short loc_610B03
 0x610AD1: mov     ecx, ebp; this
-0x610AD3: call    sub_5E6C60
+0x610AD3: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x610AD8: test    al, al
 0x610ADA: jz      short loc_610B03
 0x610ADC: push    8; Size
@@ -141,7 +141,7 @@
 0x610AFA: call    BSSimpleList_PushFront
 0x610AFF: mov     esi, dword ptr [esp+29Ch+var_288+4]
 0x610B03: test    esi, esi
-0x610B05: mov     dword ptr [esp+29Ch+var_274], esi
+0x610B05: mov     [esp+29Ch+var_274], esi
 0x610B09: jz      loc_610E17
 0x610B0F: mov     byte ptr [esp+29Ch+var_288+3], 0
 0x610B14: jmp     short loc_610B1A
@@ -168,25 +168,25 @@
 0x610B51: call    sub_4DB760
 0x610B56: test    al, al
 0x610B58: jz      loc_610CE5
-0x610B5E: mov     ecx, [ebx+8]; this
+0x610B5E: mov     ecx, [ebx+8]; reference
 0x610B61: cmp     esi, ecx
-0x610B63: mov     byte ptr [esp+29Ch+var_270], 0
+0x610B63: mov     [esp+29Ch+useBase], 0
 0x610B68: jz      short loc_610B73
-0x610B6A: call    TESObjectREFR_GetOwner
+0x610B6A: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x610B6F: cmp     eax, esi
 0x610B71: jnz     short loc_610B78
-0x610B73: mov     byte ptr [esp+29Ch+var_270], 1
+0x610B73: mov     [esp+29Ch+useBase], 1
 0x610B78: cmp     byte ptr [esp+29Ch+arg_4], 0
 0x610B80: jnz     short loc_610B8D
 0x610B82: mov     ecx, esi; this
-0x610B84: call    sub_5E6C60
+0x610B84: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x610B89: test    al, al
 0x610B8B: jnz     short loc_610BBE
-0x610B8D: mov     ecx, [esp+29Ch+var_270]
-0x610B91: push    ecx
-0x610B92: push    esi
-0x610B93: mov     ecx, ebx
-0x610B95: call    sub_605F60
+0x610B8D: mov     ecx, dword ptr [esp+29Ch+useBase]
+0x610B91: push    ecx; useBase
+0x610B92: push    esi; observer
+0x610B93: mov     ecx, ebx; self
+0x610B95: call    Crime_GetDispositionPenalty
 0x610B9A: mov     edx, [esi]
 0x610B9C: mov     edx, [edx+374h]
 0x610BA2: mov     dword ptr [esp+29Ch+var_280], eax
@@ -200,7 +200,7 @@
 0x610BBB: push    eax
 0x610BBC: call    edx
 0x610BBE: mov     ecx, esi; this
-0x610BC0: call    sub_5E6C60
+0x610BC0: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x610BC5: test    al, al
 0x610BC7: jnz     short loc_610C36
 0x610BC9: mov     eax, [ebx+0Ch]
@@ -221,10 +221,10 @@
 0x610BF1: call    eax
 0x610BF3: mov     ds:0B361C4h, eax
 0x610BF8: mov     ecx, [ebx+0Ch]
-0x610BFB: push    0Bh
-0x610BFD: push    2
+0x610BFB: push    0Bh; index
+0x610BFD: push    2; topicType
 0x610BFF: mov     [esi+0E4h], ecx
-0x610C05: call    TESTopic__GEtTopic
+0x610C05: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x610C0A: mov     ecx, [esi+58h]
 0x610C0D: mov     edx, [ecx]
 0x610C0F: add     esp, 8
@@ -248,10 +248,10 @@
 0x610C50: call    eax
 0x610C52: mov     ds:0B361C4h, eax
 0x610C57: mov     ecx, [ebx+0Ch]
-0x610C5A: push    8
-0x610C5C: push    2
+0x610C5A: push    8; index
+0x610C5C: push    2; topicType
 0x610C5E: mov     [esi+0E4h], ecx
-0x610C64: call    TESTopic__GEtTopic
+0x610C64: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x610C69: mov     edi, eax
 0x610C6B: mov     eax, [ebx+0Ch]
 0x610C6E: add     esp, 8
@@ -283,9 +283,9 @@
 0x610CAE: push    edi
 0x610CAF: push    esi
 0x610CB0: call    edx
-0x610CB2: push    ebp
-0x610CB3: mov     ecx, ebx
-0x610CB5: call    sub_605F00
+0x610CB2: push    ebp; actor
+0x610CB3: mov     ecx, ebx; self
+0x610CB5: call    Crime_AddWitness
 0x610CBA: mov     edi, [esp+29Ch+var_278]
 0x610CBE: mov     dword ptr ds:0B361C4h, 0
 0x610CC8: mov     eax, [esi]
@@ -304,12 +304,12 @@
 0x610CF2: jnz     short loc_610D1C
 0x610CF4: cmp     esi, edi
 0x610CF6: jz      loc_610DA9
-0x610CFC: mov     ecx, esi
-0x610CFE: call    sub_5E0380
+0x610CFC: mov     ecx, esi; this
+0x610CFE: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x610D03: test    eax, eax
 0x610D05: jz      short loc_610D1C
-0x610D07: mov     ecx, esi
-0x610D09: call    sub_5E0380
+0x610D07: mov     ecx, esi; this
+0x610D09: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x610D0E: mov     eax, [eax+1Ch]
 0x610D11: shr     eax, 0Ch
 0x610D14: test    al, 1
@@ -328,7 +328,7 @@
 0x610D3F: jnz     short loc_610DA9
 0x610D41: push    edi
 0x610D42: push    0Ch
-0x610D44: mov     ecx, offset dword_B3BDB0
+0x610D44: mov     ecx, (offset qword_B3BB2C+284h)
 0x610D49: call    sub_67CF50
 0x610D4E: mov     edi, eax
 0x610D50: test    edi, edi
@@ -357,10 +357,10 @@
 0x610D89: jnz     short loc_610D58
 0x610D8B: mov     ebp, [esp+29Ch+var_26C]
 0x610D8F: mov     ecx, dword ptr [esp+29Ch+var_280]
-0x610D93: call    BSSimpleList_Clear
+0x610D93: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x610D98: mov     ecx, dword ptr [esp+29Ch+var_280]
 0x610D9C: push    ecx
-0x610D9D: call    FormHeapFree
+0x610D9D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x610DA2: mov     edi, [esp+2A0h+var_278]
 0x610DA6: add     esp, 4
 0x610DA9: mov     edx, dword ptr [esp+29Ch+var_288+4]
@@ -368,14 +368,14 @@
 0x610DB0: test    eax, eax
 0x610DB2: mov     dword ptr [esp+29Ch+var_288+4], eax
 0x610DB6: jnz     loc_610B16
-0x610DBC: mov     ecx, ebx
-0x610DBE: call    sub_605F30
+0x610DBC: mov     ecx, ebx; self
+0x610DBE: call    Crime_GetWitnessCount
 0x610DC3: test    eax, eax
 0x610DC5: jnz     short loc_610E06
-0x610DC7: mov     ecx, ebx
-0x610DC9: call    sub_605E80
+0x610DC7: mov     ecx, ebx; self
+0x610DC9: call    Crime_Destructor
 0x610DCE: push    ebx
-0x610DCF: call    FormHeapFree
+0x610DCF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x610DD4: add     esp, 4
 0x610DD7: mov     ecx, edi; this
 0x610DD9: call    TESObjectREFR_GetName
@@ -392,15 +392,15 @@
 0x610DFB: call    Interface_ConsolePrint
 0x610E00: mov     esi, dword ptr [esp+2B0h+var_288+4]
 0x610E04: jmp     short loc_610E56
-0x610E06: push    ebx
-0x610E07: mov     ecx, offset ActorProcessManager_ptr
-0x610E0C: call    sub_675B30
+0x610E06: push    ebx; crime
+0x610E07: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x610E0C: call    ActorProcessManager_AddCrime
 0x610E11: mov     esi, dword ptr [esp+29Ch+var_288+4]
 0x610E15: jmp     short loc_610E59
-0x610E17: mov     ecx, ebx
-0x610E19: call    sub_605E80
+0x610E17: mov     ecx, ebx; self
+0x610E19: call    Crime_Destructor
 0x610E1E: push    ebx
-0x610E1F: call    FormHeapFree
+0x610E1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x610E24: add     esp, 4
 0x610E27: mov     ecx, edi; this
 0x610E29: call    TESObjectREFR_GetName
@@ -416,16 +416,16 @@
 0x610E50: push    eax; Format
 0x610E51: call    Interface_ConsolePrint
 0x610E56: add     esp, 14h
-0x610E59: mov     edi, dword ptr [esp+29Ch+var_274]
+0x610E59: mov     edi, [esp+29Ch+var_274]
 0x610E5D: test    edi, edi
 0x610E5F: jz      short loc_610E71
 0x610E61: mov     ecx, edi
-0x610E63: call    BSSimpleList_Clear
+0x610E63: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x610E68: push    edi
-0x610E69: call    FormHeapFree
+0x610E69: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x610E6E: add     esp, 4
 0x610E71: push    esi
-0x610E72: call    FormHeapFree
+0x610E72: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x610E77: add     esp, 4
 0x610E7A: mov     ecx, dword ptr [esp+29Ch+var_C]
 0x610E81: mov     large fs:0, ecx
@@ -439,3 +439,19 @@
 0x610E96: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x610E9B: add     esp, 288h
 0x610EA1: retn    8
+0x9C31E0: mov     eax, [ebp-274h]
+0x9C31E6: push    eax
+0x9C31E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C31EC: pop     ecx
+0x9C31ED: retn
+0x9C31EE: mov     edx, [esp+arg_4]
+0x9C31F2: lea     eax, [edx-28Ch]
+0x9C31F8: mov     ecx, [edx-290h]
+0x9C31FE: xor     ecx, eax
+0x9C3200: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3205: add     eax, 10h
+0x9C3208: mov     ecx, [edx-4]
+0x9C320B: xor     ecx, eax
+0x9C320D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3212: mov     eax, offset stru_AEBE54
+0x9C3217: jmp     ___CxxFrameHandler3

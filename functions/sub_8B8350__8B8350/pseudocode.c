@@ -1,19 +1,19 @@
 char __thiscall sub_8B8350(_DWORD *this)
 {
   int v1; // ecx
-  int v2; // eax
+  NiRTTI *v2; // eax
 
-  v1 = *(this + 0xC);
-  if ( !v1 )
-    return 0;
-  v2 = (*(int (__thiscall **)(int))(*(_DWORD *)v1 + 4))(v1);
-  if ( !v2 )
-    return 0;
-  while ( (char *)v2 != dword_B3FA80 )
+  v1 = *(this + 0xC); /*0x8b8350*/
+  if ( !v1 ) /*0x8b8355*/
+    return 0; /*0x8b8355*/
+  v2 = (NiRTTI *)(*(int (__thiscall **)(int))(*(_DWORD *)v1 + 4))(v1); /*0x8b835c*/
+  if ( !v2 ) /*0x8b8360*/
+    return 0; /*0x8b8370*/
+  while ( v2 != &stru_B3FA80 ) /*0x8b8367*/
   {
-    v2 = *(_DWORD *)(v2 + 4);
-    if ( !v2 )
-      return 0;
+    v2 = v2->parent; /*0x8b8369*/
+    if ( !v2 ) /*0x8b836e*/
+      return 0; /*0x8b836e*/
   }
-  return 1;
+  return 1; /*0x8b8372*/
 }

@@ -1,8 +1,8 @@
-0x483680: push    ebx
+0x483680: push    ebx; Verified exterior-cell unload: cancels that cell's in-flight DistantLODLoaderTask, removes queued model-usage counts for its packed cell label, releases the cell slot, and clears its coordinates.
 0x483681: push    esi
 0x483682: mov     esi, [ecx+0Ch]
-0x483685: imul    esi, [esp+8+arg_0]
-0x48368A: add     esi, [esp+8+arg_4]
+0x483685: imul    esi, [esp+8+cellX]
+0x48368A: add     esi, [esp+8+cellY]
 0x48368E: xor     ebx, ebx
 0x483690: shl     esi, 4
 0x483693: add     esi, [ecx+10h]
@@ -18,10 +18,10 @@
 0x4836AC: mov     edx, [ecx]
 0x4836AE: mov     edx, [edx+88h]
 0x4836B4: push    eax
-0x4836B5: lea     eax, [esp+14h+arg_0]
+0x4836B5: lea     eax, [esp+14h+cellX]
 0x4836B9: push    eax
 0x4836BA: call    edx
-0x4836BC: mov     eax, [esp+10h+arg_0]
+0x4836BC: mov     eax, [esp+10h+cellX]
 0x4836C0: cmp     eax, ebx
 0x4836C2: jz      short loc_4836DE
 0x4836C4: mov     edi, eax
@@ -55,22 +55,22 @@
 0x4836FD: mov     [esi+4], ebx
 0x483700: movzx   ecx, word ptr [esi+0Ch]
 0x483704: movzx   edx, word ptr [esi+8]
-0x483708: push    ecx
-0x483709: push    edx
-0x48370A: call    sub_4EF1D0
-0x48370F: push    eax
-0x483710: call    sub_4B27F0
+0x483708: push    ecx; group_y
+0x483709: push    edx; group_x
+0x48370A: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
+0x48370F: push    eax; packedExteriorCellLabel
+0x483710: call    DistantLOD_RemoveCellModelUsages; Verified GridDistantArray_UnloadCell calls DistantLOD_RemoveCellModelUsages with the packed exterior-cell label before clearing the cell slot.
 0x483715: add     esp, 0Ch
 0x483718: pop     edi
 0x483719: pop     ebp
-0x48371A: mov     ecx, ds:0B35B8Ch
+0x48371A: mov     ecx, ds:0B35B8Ch; this
 0x483720: cmp     ecx, ebx
 0x483722: jz      short loc_483731
 0x483724: mov     eax, [esi+0Ch]
 0x483727: mov     edx, [esi+8]
-0x48372A: push    eax
-0x48372B: push    edx
-0x48372C: call    sub_4BD380
+0x48372A: push    eax; groupY
+0x48372B: push    edx; groupX
+0x48372C: call    DistantLODLoaderTaskMap_CancelForCell; Verified per-cell cancellation path: looks up the packed cell label in g_DistantLODLoaderTasksByCell, cancels the referenced task through generic IOTask cancellation, then releases the lookup reference. GridDistantArray_UnloadCell calls this before clearing the cell slot.
 0x483731: mov     [esi], bl
 0x483733: mov     [esi+8], ebx
 0x483736: mov     [esi+0Ch], ebx

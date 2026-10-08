@@ -1,4 +1,4 @@
-0x716E00: mov     eax, ecx
+0x716E00: mov     eax, ecx; Copies the supplied normal unchanged and stores float(normal.y*point.y + normal.x*point.x + normal.z*point.z); native sphere tests subtract this world-space constant. Do not renormalize when preserving native radius comparisons.
 0x716E02: mov     ecx, [esp+arg_0]
 0x716E06: mov     edx, [ecx]
 0x716E08: mov     [eax], edx

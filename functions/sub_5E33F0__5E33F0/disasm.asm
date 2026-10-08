@@ -1,1 +1,1 @@
-0x5E33F0: jmp     sub_65AB40
+0x5E33F0: jmp     sub_65AB40; TES4 authoritative: actor jump entry. Computes jump height from fJumpHeightMin/Max and proxy +0x310 scalar, then sub_890700 sets state=1 Jumping and jump impulse at +0x31C.

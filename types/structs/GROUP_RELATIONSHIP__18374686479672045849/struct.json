@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_GROUP_RELATIONSHIP",
+  "definition": "struct _GROUP_RELATIONSHIP\n{\nWORD MaximumGroupCount;\nWORD ActiveGroupCount;\nBYTE Reserved[20];\nPROCESSOR_GROUP_INFO GroupInfo[1];\n}\n",
   "id": 18374686479672045849,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MaximumGroupCount",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ActiveGroupCount",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 20
+      "size": 20,
+      "type": "BYTE[20]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GroupInfo",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 48
+      "size": 48,
+      "type": "PROCESSOR_GROUP_INFO[1]"
     }
   ],
   "name": "_GROUP_RELATIONSHIP",
+  "ordinal": 8271,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

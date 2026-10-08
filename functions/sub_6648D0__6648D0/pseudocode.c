@@ -1,50 +1,48 @@
-unsigned int __thiscall sub_6648D0(_DWORD *this, unsigned int a2)
+// Increment the current eight-byte governing-attribute bonus bucket for AttributeActorValue 0..7. Both major and non-major skill increases invoke this before any major-only rollover logic.
+void __thiscall Player_IncrementAttributeBonus(PlayerCharacter *this, AttributeActorValue governingAttribute)
 {
-  _DWORD *v3; // eax
-  _DWORD *v4; // eax
+  int v3; // eax
+  UInt8 **attributeBonuses; // eax
   _DWORD *v5; // eax
-  unsigned int result; // eax
-  int v7; // esi
+  UInt8 *v6; // esi
+  char GroupOffsetFromAV; // al
 
-  if ( !*(this + 0x16D) )
+  if ( !this->attributeBonuses ) /*0x6648d3*/
   {
-    v3 = (_DWORD *)FormHeapAlloc(8u);
-    if ( v3 )
+    v3 = FormHeapAlloc(8u); /*0x6648de*/
+    if ( v3 ) /*0x6648e8*/
     {
-      *v3 = 0;
-      v3[1] = 0;
+      *(_DWORD *)v3 = 0; /*0x6648ea*/
+      *(_DWORD *)(v3 + 4) = 0; /*0x6648f0*/
     }
     else
     {
-      v3 = 0;
+      v3 = 0; /*0x6648f9*/
     }
-    *(this + 0x16D) = v3;
+    this->attributeBonuses = (UInt8 **)v3; /*0x6648fb*/
   }
-  v4 = (_DWORD *)*(this + 0x16D);
-  if ( !v4[1] && !*v4 )
+  attributeBonuses = this->attributeBonuses; /*0x664901*/
+  if ( !attributeBonuses[1] && !*attributeBonuses ) /*0x66490d*/
   {
-    v5 = (_DWORD *)FormHeapAlloc(8u);
-    if ( v5 )
+    v5 = (_DWORD *)FormHeapAlloc(8u); /*0x664914*/
+    if ( v5 ) /*0x66491e*/
     {
-      *v5 = 0;
-      v5[1] = 0;
+      *v5 = 0; /*0x664922*/
+      v5[1] = 0; /*0x664924*/
     }
     else
     {
-      v5 = 0;
+      v5 = 0; /*0x664929*/
     }
-    BSSimpleList_PushFront((_DWORD *)*(this + 0x16D), (int)v5);
+    BSSimpleList_PushFront(this->attributeBonuses, (int)v5); /*0x664932*/
   }
-  result = *(this + 0x16D);
-  v7 = *(_DWORD *)result;
-  if ( *(_DWORD *)result )
+  v6 = *this->attributeBonuses; /*0x66493d*/
+  if ( v6 ) /*0x664941*/
   {
-    result = a2;
-    if ( a2 <= 7 )
+    if ( governingAttribute <= kAttribute_Luck ) /*0x66494a*/
     {
-      result = ActorValue_GetGroupOffsetFromAV(0, a2);
-      ++*(_BYTE *)((char)result + v7);
+      GroupOffsetFromAV = ActorValue_GetGroupOffsetFromAV(0, governingAttribute); /*0x66494f*/
+      ++v6[GroupOffsetFromAV]; /*0x66495a*/
     }
   }
-  return result;
 }

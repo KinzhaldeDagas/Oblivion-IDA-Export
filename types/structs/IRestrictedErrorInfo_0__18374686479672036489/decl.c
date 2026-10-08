@@ -1,1 +1,1 @@
-IRestrictedErrorInfo_0
+typedef IRestrictedErrorInfo IRestrictedErrorInfo_0;

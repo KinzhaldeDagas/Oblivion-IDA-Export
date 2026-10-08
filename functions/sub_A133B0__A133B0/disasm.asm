@@ -8,6 +8,6 @@
 0xA133C4: push    40h ; '@'
 0xA133C6: push    offset unk_BA9450
 0xA133CB: push    offset aHkmeshshape; "hkMeshShape"
-0xA133D0: mov     ecx, offset dword_BA82B4
+0xA133D0: mov     ecx, offset unk_BA82B4
 0xA133D5: call    sub_90D190
 0xA133DA: retn

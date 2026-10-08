@@ -1,50 +1,51 @@
-char __thiscall sub_7D3400(_DWORD *this, int a2)
+// Strong-own and classify the backing NiLight. When trackBackingPosition is set, seed cached source position from the NiPointLight world translation.
+int __thiscall ShadowSceneLight_SetBackingLight(ShadowSceneLight_DecodedLayout *self, void *backingLight)
 {
-  int v3; // esi
-  int v4; // eax
-  int v5; // eax
+  int result; // eax
+  volatile LONG *backingLight_100; // esi
 
-  v3 = *(this + 0x40);
-  if ( v3 != a2 )
+  backingLight_100 = (volatile LONG *)self->backingLight_100; /*0x7d3404*/
+  if ( backingLight_100 != backingLight ) /*0x7d3411*/
   {
-    if ( v3 )
+    if ( backingLight_100 ) /*0x7d3415*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v3 + 4)) )
-        (**(void (__thiscall ***)(int, int))v3)(v3, 1);
+      result = InterlockedDecrement(backingLight_100 + 1); /*0x7d341b*/
+      if ( !result ) /*0x7d3423*/
+        result = (**(int (__thiscall ***)(void *, int))backingLight_100)((void *)backingLight_100, 1); /*0x7d3431*/
     }
-    *(this + 0x40) = a2;
-    if ( !a2 )
-      goto LABEL_11;
-    InterlockedIncrement((volatile LONG *)(a2 + 4));
+    self->backingLight_100 = backingLight;      // Store and strong-own the backing NiLight at ShadowSceneLight+0x100 until replacement or destruction. /*0x7d3435*/
+    if ( !backingLight ) /*0x7d343b*/
+      goto LABEL_11; /*0x7d343b*/
+    result = InterlockedIncrement((volatile LONG *)backingLight + 1); /*0x7d3441*/
   }
-  if ( !a2 || (v4 = (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 4))(a2)) == 0 )
+  if ( !backingLight || (result = (*(int (__thiscall **)(void *))(*(_DWORD *)backingLight + 4))(backingLight)) == 0 ) /*0x7d3456*/
   {
 LABEL_11:
-    LOBYTE(v5) = 0;
-    goto LABEL_12;
+    LOBYTE(result) = 0; /*0x7d3466*/
+    goto LABEL_12; /*0x7d3466*/
   }
-  while ( (char *)v4 != dword_B3FD80 )
+  while ( (char *)result != stru_B3FD80 )       // Walk the backing object's RTTI parent chain looking for RTTI_NiPointLight; this is the producer test for ShadowSceneLight+0xFC. /*0x7d345d*/
   {
-    v4 = *(_DWORD *)(v4 + 4);
-    if ( !v4 )
-      goto LABEL_11;
+    result = *(_DWORD *)(result + 4); /*0x7d345f*/
+    if ( !result ) /*0x7d3464*/
+      goto LABEL_11; /*0x7d3464*/
   }
-  LOBYTE(v5) = 1;
+  LOBYTE(result) = 1; /*0x7d34a1*/
 LABEL_12:
-  *((_BYTE *)this + 0xFC) = v5;
-  if ( (_BYTE)v5 )
-  {
-    if ( *((_BYTE *)this + 0x104) )
+  self->backingIsNiPointLight_FC = result;      // Store backingIsNiPointLight into the byte at ShadowSceneLight+0xFC. /*0x7d3468*/
+  if ( (_BYTE)result ) /*0x7d3470*/
+  {                                             // trackBackingPosition controls whether SetBackingLight copies backing point-light world translation into +0x108..+0x110.
+    if ( self->trackBackingPosition_104 ) /*0x7d3472*/
     {
-      *(this + 0x42) = *(_DWORD *)(a2 + 0x88);
-      *(this + 0x43) = *(_DWORD *)(a2 + 0x8C);
-      v5 = *(_DWORD *)(a2 + 0x90);
-      *(this + 0x44) = v5;
+      self->cachedSourceX_108 = *((float *)backingLight + 0x22); /*0x7d348d*/
+      self->cachedSourceY_10C = *((float *)backingLight + 0x23); /*0x7d3493*/
+      result = *((_DWORD *)backingLight + 0x24); /*0x7d3496*/
+      LODWORD(self->cachedSourceZ_110) = result; /*0x7d349a*/
     }
   }
   else
   {
-    *((float *)this + 0x35) = 1.0;
+    self->cullRange_D4 = 1.0; /*0x7d34a7*/
   }
-  return v5;
+  return result; /*0x7d3492*/
 }

@@ -1,4 +1,4 @@
-0x678E70: push    ecx
+0x678E70: push    ecx; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect and marks matching targetReference/TESEffectShader effects finished.
 0x678E71: push    ebx
 0x678E72: push    esi
 0x678E73: xor     eax, eax
@@ -13,7 +13,7 @@
 0x678E8B: jnz     short loc_678E95
 0x678E8D: mov     bl, al
 0x678E8F: jmp     short loc_678E97
-0x678E91: mov     edi, [esp+10h+arg_4]
+0x678E91: mov     edi, [esp+10h+effectShader]
 0x678E95: xor     bl, bl
 0x678E97: test    al, 1
 0x678E99: jz      short loc_678EB7
@@ -35,13 +35,13 @@
 0x678EBD: test    ebx, ebx
 0x678EBF: jz      short loc_678F3A
 0x678EC1: push    ebp
-0x678EC2: mov     ebp, [esp+14h+arg_4]
-0x678EC6: lea     ecx, [esp+14h+arg_4]
-0x678ECA: push    ecx
-0x678ECB: mov     ecx, ebx
-0x678ECD: call    sub_677C70
-0x678ED2: mov     esi, [eax]
-0x678ED4: mov     eax, [esp+14h+arg_4]
+0x678EC2: mov     ebp, [esp+14h+effectShader]
+0x678EC6: lea     ecx, [esp+14h+effectShader]
+0x678ECA: push    ecx; outData
+0x678ECB: mov     ecx, ebx; this
+0x678ECD: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
+0x678ED2: mov     esi, [eax]; Verified (Oblivion): shader cleanup scan obtains a temporary AddRef for each temp-effect node and releases it after checking the effect.
+0x678ED4: mov     eax, [esp+14h+effectShader]
 0x678ED8: test    eax, eax
 0x678EDA: jz      short loc_678EFA
 0x678EDC: mov     edi, eax
@@ -66,14 +66,13 @@
 0x678F07: test    eax, eax
 0x678F09: jz      short loc_678F32
 0x678F0B: jmp     short loc_678F10
-0x678F0D: align 10h
-0x678F10: cmp     eax, offset unk_B3C0D4
+0x678F10: cmp     eax, offset NiRTTI_MagicShaderHitEffect
 0x678F15: jz      short loc_678F20
 0x678F17: mov     eax, [eax+4]
 0x678F1A: test    eax, eax
 0x678F1C: jnz     short loc_678F10
 0x678F1E: jmp     short loc_678F32
-0x678F20: mov     ecx, [esp+14h+arg_0]
+0x678F20: mov     ecx, [esp+14h+targetReference]
 0x678F24: cmp     [esi+1Ch], ecx
 0x678F27: jnz     short loc_678F32
 0x678F29: cmp     [esi+34h], ebp

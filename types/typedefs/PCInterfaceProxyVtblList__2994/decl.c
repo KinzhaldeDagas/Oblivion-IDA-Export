@@ -1,1 +1,1 @@
-PCInterfaceProxyVtblList
+typedef tagCInterfaceProxyVtbl *PCInterfaceProxyVtblList;

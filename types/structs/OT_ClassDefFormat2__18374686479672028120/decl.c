@@ -1,1 +1,6 @@
-OT_ClassDefFormat2
+struct OT_ClassDefFormat2
+{
+WORD ClassFormat;
+WORD ClassRangeCount;
+OT_ClassRangeRecord ClassRangeRecord[1];
+};

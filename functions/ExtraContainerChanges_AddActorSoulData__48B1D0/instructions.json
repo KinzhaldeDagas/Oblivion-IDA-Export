@@ -2155,25 +2155,25 @@
   },
   {
     "ea": "0x48B5F4",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48B5F6",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48B5F7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B5F9",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },

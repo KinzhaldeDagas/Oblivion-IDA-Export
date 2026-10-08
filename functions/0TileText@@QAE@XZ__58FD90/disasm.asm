@@ -28,14 +28,14 @@
 0x58FDE9: mov     [esi+10h], ebx
 0x58FDEC: mov     [esi+4], bl
 0x58FDEF: mov     [esi+6], bl
-0x58FDF2: mov     eax, [esp+1Ch+arg_0]
+0x58FDF2: mov     eax, [esp+1Ch+parent]
 0x58FDF6: cmp     eax, ebx
 0x58FDF8: mov     [esp+1Ch+var_4], ebx
 0x58FDFC: mov     dword ptr [esi], offset ??_7TileText@@6B@; const TileText::`vftable'
 0x58FE02: jz      short loc_58FE0B
-0x58FE04: push    ebx
-0x58FE05: push    eax
-0x58FE06: call    sub_58D1C0
+0x58FE04: push    ebx; sibling
+0x58FE05: push    eax; parent
+0x58FE06: call    Tile__SetParent; Verified: detaches from old parent list and decrements child-count trait 0xFD0, assigns parent +0x10, increments new parent count, inserts in new parent child list. Optional sibling argument controls placement; null uses AddHead. This is attachment, not a float-value setter.
 0x58FE0B: mov     eax, esi
 0x58FE0D: mov     [esi+50h], bl
 0x58FE10: mov     ecx, [esp+1Ch+var_C]
@@ -45,3 +45,12 @@
 0x58FE1D: pop     ebx
 0x58FE1E: add     esp, 10h
 0x58FE21: retn    4
+0x9BFA00: mov     ecx, [ebp-10h]; this
+0x9BFA03: jmp     ??1Tile@@UAE@XZ; Tile::~Tile(void)
+0x9BFA08: mov     edx, [esp+arg_4]
+0x9BFA0C: lea     eax, [edx-0Ch]
+0x9BFA0F: mov     ecx, [edx-10h]
+0x9BFA12: xor     ecx, eax
+0x9BFA14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFA19: mov     eax, offset stru_AE8EBC
+0x9BFA1E: jmp     ___CxxFrameHandler3

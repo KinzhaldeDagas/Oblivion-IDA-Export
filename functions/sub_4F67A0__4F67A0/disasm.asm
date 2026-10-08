@@ -1,7 +1,7 @@
-0x4F67A0: fldz
-0x4F67A2: mov     eax, [esp+arg_4]
+0x4F67A0: fldz; GetQuestRunning_Eval (index 56 / opcode 0x1038): tests the Quest parameter's questFlags bit 0. It does not inspect stage or completion state.
+0x4F67A2: mov     eax, [esp+quest]
 0x4F67A6: test    eax, eax
-0x4F67A8: mov     ecx, [esp+arg_C]
+0x4F67A8: mov     ecx, [esp+value]
 0x4F67AC: fstp    qword ptr [ecx]
 0x4F67AE: jz      short loc_4F67BA
 0x4F67B0: test    byte ptr [eax+3Ch], 1

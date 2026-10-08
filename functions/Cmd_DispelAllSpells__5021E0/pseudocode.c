@@ -1,17 +1,17 @@
-char __cdecl Cmd_DispelAllSpells(int a1, int a2, void *a3)
+char __usercall Cmd_DispelAllSpells@<al>(double a1@<st0>, int a2, int a3, void *a4)
 {
-  char *v3; // eax
+  char *v4; // eax
 
-  if ( a3 )
+  if ( a4 ) /*0x5021e6*/
   {
-    v3 = (char *)OblivionDynamicCast(
-                   a3,
+    v4 = (char *)OblivionDynamicCast( /*0x5021f7*/
+                   a4,
                    0,
                    (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                    &Actor `RTTI Type Descriptor',
                    0);
-    if ( v3 )
-      MagicTarget_RemoveNonPersistentEffects(v3 + 0x68, 0);
+    if ( v4 ) /*0x502201*/
+      MagicTarget_RemoveNonPersistentEffects(v4 + 0x68, a1, 0); /*0x502208*/
   }
-  return 1;
+  return 1; /*0x50220f*/
 }

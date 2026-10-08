@@ -1,1 +1,1 @@
-NCA_STATUS
+typedef unsigned int NCA_STATUS;

@@ -1,4 +1,4 @@
-0x7CEFD0: mov     eax, 2B2Ch
+0x7CEFD0: mov     eax, 2B2Ch; Loads Oblivion ShadowLightShader pixel-program variants from lighting\\1x and lighting\\2x HLSL sources. Compile macros include runtime numeric shadow parameters and material/pass feature combinations.
 0x7CEFD5: call    __alloca_probe
 0x7CEFDA: mov     eax, ds:0B30AACh
 0x7CEFDF: xor     eax, esp
@@ -1294,7 +1294,7 @@
 0x7D0C02: mov     ebp, offset aDepthbias; "DEPTHBIAS"
 0x7D0C07: mov     ebx, offset a0_1; "-0.1"
 0x7D0C0C: add     esp, 3Ch
-0x7D0C0F: mov     [esp+2B3Ch+var_1490], offset aLighting2xPSim; "lighting\\2x\\p\\SimpleShadow.p.hlsl"
+0x7D0C0F: mov     [esp+2B3Ch+var_1490], offset aLighting2xPSim; Verified (Oblivion): ShadowLightShader__LoadPixelShaders table entry v15[0x5A4] (entry index 76 = 0x5A4/0x13) uses source "lighting\\2x\\p\\SimpleShadow.p.hlsl". The loader formats the output name as SLS2%03i.pso, so this entry compiles as SLS2076.pso.
 0x7D0C1A: mov     [esp+2B3Ch+var_148C], offset aShadowmap; "SHADOWMAP"
 0x7D0C25: mov     [esp+2B3Ch+var_1488], esi
 0x7D0C2C: mov     [esp+2B3Ch+var_1484], ebp
@@ -1437,7 +1437,7 @@
 0x7D0FD8: mov     ecx, [esp+2B50h+var_2B28]
 0x7D0FDC: lea     edx, [esp+2B50h+FileName]
 0x7D0FE3: push    edx; lpFileName
-0x7D0FE4: call    CreatePixelShader
+0x7D0FE4: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7D0FE9: mov     ebp, ds:0B45088h[esi*4]
 0x7D0FF0: cmp     ebp, eax
 0x7D0FF2: mov     [esp+2B3Ch+var_2B2C], eax
@@ -1469,13 +1469,13 @@
 0x7D103B: jl      loc_7D0F96
 0x7D1041: mov     ecx, ds:0B42F48h
 0x7D1047: cmp     ecx, 2
-0x7D104A: mov     dword ptr [esp+2B3Ch+var_2B24], ecx
+0x7D104A: mov     [esp+2B3Ch+var_2B24], ecx
 0x7D104E: jl      loc_7D1151
 0x7D1054: lea     ebx, [esp+2B3Ch+var_2B20]
 0x7D1058: xor     esi, esi
 0x7D105A: mov     [esp+2B3Ch+var_2B2C], ebx
 0x7D105E: jmp     short loc_7D1064
-0x7D1060: mov     ecx, dword ptr [esp+2B3Ch+var_2B24]
+0x7D1060: mov     ecx, [esp+2B3Ch+var_2B24]
 0x7D1064: mov     eax, [ebx]
 0x7D1066: cmp     eax, edi
 0x7D1068: jnz     short loc_7D10A1
@@ -1508,7 +1508,7 @@
 0x7D10BE: lea     edx, [esp+2B48h+var_4CC]
 0x7D10C5: push    offset aSls203i_pso; "SLS2%03i.pso"
 0x7D10CA: push    edx
-0x7D10CB: call    __sprintf
+0x7D10CB: call    __sprintf; Verified (Oblivion): 2x pixel-program loader formats "SLS2%03i.pso" from v7; for entry 76, the source table is v15[0x5A4] = lighting\\2x\\p\\SimpleShadow.p.hlsl. Candidate resource association: the installed shaderpackage002.sdp contains a record named SLS2076.pso whose CTAB lists FillColor, RimColor, SourceTexture, and fVars, which conflicts with this loader table; do not use that record to infer fVars lane semantics until package-to-loader version/slot linkage is resolved.
 0x7D10D0: add     esp, 14h
 0x7D10D3: push    1; int
 0x7D10D5: push    edi; int
@@ -1520,7 +1520,7 @@
 0x7D10E7: lea     ecx, [esp+2B50h+FileName]
 0x7D10EE: push    ecx; lpFileName
 0x7D10EF: mov     ecx, [esp+2B54h+var_2B28]
-0x7D10F3: call    CreatePixelShader
+0x7D10F3: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7D10F8: mov     ebx, ds:0B45144h[esi*4]
 0x7D10FF: mov     ebp, eax
 0x7D1101: cmp     ebx, ebp

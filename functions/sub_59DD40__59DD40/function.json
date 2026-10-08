@@ -1,19 +1,32 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x59DD40",
+      "0x59DF68"
+    ]
+  ],
+  "chunks_sha256": "1257762620901d8ed13fd951df169628e04d353f770ad894b604d43e574d1485",
+  "comment_regular": "Close player dialogue and consume any globally parked clicked-Goodbye INFO with RunResult then AddTopicList. This path does not test RunForRumors. Therefore a Goodbye INFOGENERAL lacking RunForRumors can complete without closing, leave its result pending across later ordinary TOPIC choices, and commit only on a later close unless another Goodbye overwrites it.",
+  "comment_repeatable": "Close player dialogue and consume any globally parked clicked-Goodbye INFO with RunResult then AddTopicList. This path does not test RunForRumors. Therefore a Goodbye INFOGENERAL lacking RunForRumors can complete without closing, leave its result pending across later ordinary TOPIC choices, and commit only on a later close unless another Goodbye overwrites it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_59DD40",
+  "display_name": "DialogMenu::Close",
   "end_ea": "0x59DF68",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_59DD40",
+  "name": "DialogMenu::Close",
   "segment": ".text",
   "sha256": "1257762620901d8ed13fd951df169628e04d353f770ad894b604d43e574d1485",
   "size": 552,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x59DD40",
-  "type": "char __usercall@<al>(int@<esi>, double@<st2>, double@<st1>)",
+  "total_chunk_size": 552,
+  "type": "void __thiscall(DialogMenu *this)",
   "xrefs_from_count": 212,
   "xrefs_to_count": 2
 }

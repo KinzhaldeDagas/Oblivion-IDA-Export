@@ -9,462 +9,418 @@ signed int *__usercall sub_5F8890@<eax>(
 {
   int *v7; // ebx
   int v8; // edi
-  double v9; // st5
-  double v10; // st7
-  double v11; // st6
-  double v12; // st6
-  signed int v13; // edi
+  double v9; // st7
+  signed int *v10; // edi
   char *Name; // eax
-  int v15; // ecx
-  void *v16; // edx
+  int v12; // ecx
+  void *v13; // edx
   int i; // edi
-  int v18; // eax
-  double v19; // st7
-  double v20; // st7
+  int v15; // eax
+  double v16; // st7
+  double v17; // st6
+  double v18; // st7
   int j; // edi
+  double v20; // st7
+  double v21; // st6
   double v22; // st7
-  double v23; // st5
-  double v24; // st6
+  int v23; // eax
+  int v24; // edi
   double v25; // st7
-  int v26; // eax
-  int v27; // edi
-  double v28; // st7
-  double v29; // st5
-  double v30; // st6
+  double v26; // st6
+  double v27; // st7
+  int v28; // eax
+  double v29; // st7
+  int v30; // edi
   double v31; // st7
-  int v32; // eax
+  double v32; // st6
   double v33; // st7
-  int v34; // edi
+  int v34; // eax
   double v35; // st7
-  double v36; // st5
-  double v37; // st6
-  double v38; // st7
-  int v39; // eax
-  double v40; // st7
-  int v41; // edi
-  double v42; // st7
-  double v43; // st5
-  double v44; // st6
-  double v45; // st7
-  int v46; // eax
-  double v47; // st7
-  int v48; // edi
+  int v36; // edi
+  double v37; // st7
+  double v38; // st6
+  double v39; // st7
+  int v40; // eax
+  double v41; // st7
+  int v42; // edi
   int k; // edi
+  double v44; // st7
+  double v45; // st6
+  double v46; // st7
+  int v47; // eax
+  int v48; // edi
+  int v49; // ebx
   double v50; // st7
-  double v51; // st7
-  int v52; // eax
-  int v53; // edi
-  int v54; // ebx
-  double v55; // st7
-  double v56; // st5
-  double v57; // st6
-  double v58; // st7
-  int v59; // eax
-  int v60; // eax
+  double v51; // st6
+  double v52; // st7
+  int v53; // eax
+  int v54; // eax
   ExtraContainerChanges_Data *ContainerChanges; // eax
   tListEntryData *objList; // edi
   EntryData *data; // ebx
   TESForm *type; // esi
-  int v65; // eax
-  int v66; // edi
-  void *v67; // eax
-  CHAR *v68; // eax
-  const char *v69; // esi
-  double v70; // st7
-  void *v71; // eax
-  CHAR *v72; // eax
-  const char *v73; // esi
+  int v59; // eax
+  int v60; // edi
+  void *v61; // eax
+  CHAR *v62; // eax
+  const char *v63; // esi
+  double v64; // st7
+  void *v65; // eax
+  CHAR *v66; // eax
+  const char *v67; // esi
   double Health; // st7
   signed int *result; // eax
-  float v76; // [esp+14h] [ebp-150h]
-  int v77; // [esp+14h] [ebp-150h]
-  int v78; // [esp+14h] [ebp-150h]
-  float v79; // [esp+18h] [ebp-14Ch]
+  float v70; // [esp+14h] [ebp-150h]
+  int v71; // [esp+14h] [ebp-150h]
+  int v72; // [esp+14h] [ebp-150h]
+  float v73; // [esp+18h] [ebp-14Ch]
+  float v74; // [esp+18h] [ebp-14Ch]
+  float v75; // [esp+18h] [ebp-14Ch]
+  double v76; // [esp+18h] [ebp-14Ch]
+  double v77; // [esp+18h] [ebp-14Ch]
+  float v78; // [esp+18h] [ebp-14Ch]
+  double v79; // [esp+18h] [ebp-14Ch]
   float v80; // [esp+18h] [ebp-14Ch]
   float v81; // [esp+18h] [ebp-14Ch]
-  double v82; // [esp+18h] [ebp-14Ch]
+  float v82; // [esp+18h] [ebp-14Ch]
   double v83; // [esp+18h] [ebp-14Ch]
   float v84; // [esp+18h] [ebp-14Ch]
-  double v85; // [esp+18h] [ebp-14Ch]
-  float v86; // [esp+18h] [ebp-14Ch]
+  float v85; // [esp+18h] [ebp-14Ch]
+  double v86; // [esp+18h] [ebp-14Ch]
   float v87; // [esp+18h] [ebp-14Ch]
   float v88; // [esp+18h] [ebp-14Ch]
-  double v89; // [esp+18h] [ebp-14Ch]
+  float v89; // [esp+18h] [ebp-14Ch]
   float v90; // [esp+18h] [ebp-14Ch]
-  float v91; // [esp+18h] [ebp-14Ch]
-  double v92; // [esp+18h] [ebp-14Ch]
-  float v93; // [esp+18h] [ebp-14Ch]
-  float v94; // [esp+18h] [ebp-14Ch]
-  float v95; // [esp+18h] [ebp-14Ch]
-  float v96; // [esp+18h] [ebp-14Ch]
-  float v97; // [esp+1Ch] [ebp-148h]
-  float v98; // [esp+1Ch] [ebp-148h]
-  float v99; // [esp+20h] [ebp-144h]
-  int v102; // [esp+48h] [ebp-11Ch]
+  float v91; // [esp+1Ch] [ebp-148h]
+  float v92; // [esp+1Ch] [ebp-148h]
+  float v93; // [esp+20h] [ebp-144h]
+  int v96; // [esp+48h] [ebp-11Ch]
+  float v97; // [esp+48h] [ebp-11Ch]
+  float v98; // [esp+48h] [ebp-11Ch]
+  float v99; // [esp+48h] [ebp-11Ch]
+  float v100; // [esp+48h] [ebp-11Ch]
+  float v101; // [esp+48h] [ebp-11Ch]
+  float v102; // [esp+48h] [ebp-11Ch]
   float v103; // [esp+48h] [ebp-11Ch]
   float v104; // [esp+48h] [ebp-11Ch]
   float v105; // [esp+48h] [ebp-11Ch]
-  float v106; // [esp+48h] [ebp-11Ch]
-  float v107; // [esp+48h] [ebp-11Ch]
-  float v108; // [esp+48h] [ebp-11Ch]
-  float v109; // [esp+48h] [ebp-11Ch]
-  float v110; // [esp+48h] [ebp-11Ch]
-  float v111; // [esp+48h] [ebp-11Ch]
-  int v112; // [esp+4Ch] [ebp-118h]
-  float v113; // [esp+4Ch] [ebp-118h]
-  float v114; // [esp+4Ch] [ebp-118h]
-  float v115; // [esp+4Ch] [ebp-118h]
-  int v116; // [esp+4Ch] [ebp-118h]
-  int v117; // [esp+4Ch] [ebp-118h]
+  int v106; // [esp+4Ch] [ebp-118h]
+  float v107; // [esp+4Ch] [ebp-118h]
+  float v108; // [esp+4Ch] [ebp-118h]
+  float v109; // [esp+4Ch] [ebp-118h]
+  int v110; // [esp+4Ch] [ebp-118h]
+  int v111; // [esp+4Ch] [ebp-118h]
   float BaseCalcAVf; // [esp+50h] [ebp-114h]
+  float v113; // [esp+50h] [ebp-114h]
+  float v114; // [esp+50h] [ebp-114h]
+  float v115; // [esp+50h] [ebp-114h]
+  float v116; // [esp+50h] [ebp-114h]
+  float v117; // [esp+50h] [ebp-114h]
+  float v118; // [esp+50h] [ebp-114h]
   float v119; // [esp+50h] [ebp-114h]
   float v120; // [esp+50h] [ebp-114h]
-  float v121; // [esp+50h] [ebp-114h]
-  float v122; // [esp+50h] [ebp-114h]
-  float v123; // [esp+50h] [ebp-114h]
-  float v124; // [esp+50h] [ebp-114h]
-  float v125; // [esp+50h] [ebp-114h]
-  float v126; // [esp+50h] [ebp-114h]
-  int v127; // [esp+54h] [ebp-110h]
-  int v128; // [esp+54h] [ebp-110h]
-  float v129; // [esp+58h] [ebp-10Ch]
+  int v121; // [esp+54h] [ebp-110h]
+  int v122; // [esp+54h] [ebp-110h]
+  float v123; // [esp+58h] [ebp-10Ch]
   tListEntryData *next; // [esp+58h] [ebp-10Ch]
-  signed int *v131; // [esp+5Ch] [ebp-108h]
-  float v132; // [esp+60h] [ebp-104h]
-  float v133; // [esp+64h] [ebp-100h]
-  float v134[3]; // [esp+70h] [ebp-F4h]
-  float v135[3]; // [esp+7Ch] [ebp-E8h]
-  int v136; // [esp+88h] [ebp-DCh] BYREF
-  int v137; // [esp+8Ch] [ebp-D8h] BYREF
-  void *v138; // [esp+90h] [ebp-D4h] BYREF
-  int v139; // [esp+94h] [ebp-D0h] BYREF
-  int v140; // [esp+98h] [ebp-CCh] BYREF
-  char v141[196]; // [esp+9Ch] [ebp-C8h] BYREF
-  int savedregs; // [esp+164h] [ebp+0h] BYREF
+  signed int *v125; // [esp+5Ch] [ebp-108h]
+  float v126; // [esp+60h] [ebp-104h]
+  float v127; // [esp+64h] [ebp-100h]
+  float v128[3]; // [esp+70h] [ebp-F4h]
+  float v129[3]; // [esp+7Ch] [ebp-E8h]
+  int v130; // [esp+88h] [ebp-DCh] BYREF
+  int v131; // [esp+8Ch] [ebp-D8h] BYREF
+  void *v132; // [esp+90h] [ebp-D4h] BYREF
+  int v133; // [esp+94h] [ebp-D0h] BYREF
+  int v134; // [esp+98h] [ebp-CCh] BYREF
+  char v135[196]; // [esp+9Ch] [ebp-C8h] BYREF
 
-  v132 = (float)iDebugTextLeftRightOffset;
-  v7 = a6;
-  v133 = (float)(0x500 - iDebugTextLeftRightOffset);
-  v8 = *a6;
-  v9 = v132;
-  v10 = v132;
-  v112 = *a6;
-  v131 = *a7;
-  v11 = (v133 - v132) * dbl_A2FAA0 + v132;
-  v129 = v11;
-  if ( !a4 )
-    goto LABEL_4;
+  v126 = (float)iDebugTextLeftRightOffset; /*0x5f88be*/
+  v7 = a6; /*0x5f88c3*/
+  v127 = (float)(0x500 - iDebugTextLeftRightOffset); /*0x5f88d4*/
+  v8 = *a6; /*0x5f88dd*/
+  v9 = v126; /*0x5f88f1*/
+  v106 = *a6; /*0x5f88f3*/
+  v125 = *a7; /*0x5f88f7*/
+  v123 = (v127 - v126) * dbl_A2FAA0 + v126; /*0x5f8903*/
+  if ( !a4 ) /*0x5f8907*/
+    goto LABEL_4; /*0x5f8907*/
   if ( !a4->vtbl->IsActor(a4) )
   {
-    v10 = v132;
+    v9 = v126; /*0x5f891b*/
 LABEL_4:
-    v12 = (double)v112;
-    v79 = v12;
-    v76 = v10;
-    InterfaceMgr_DebugTextLine(
-      (char)&savedregs,
-      v9,
-      v12,
-      v10,
-      "ACTOR INFO: Current ref is not an actor.",
-      v76,
-      v79,
-      1,
-      0xFFFFFFFF);
-    v13 = a5 + v8;
-    goto LABEL_65;
+    v73 = (float)v106; /*0x5f891f*/
+    v70 = v9; /*0x5f892e*/
+    InterfaceMgr_DebugTextLine("ACTOR INFO: Current ref is not an actor.", v70, v73, 1, 0xFFFFFFFF);
+    v10 = (signed int *)(a5 + v8); /*0x5f893e*/
+    goto LABEL_65; /*0x5f8941*/
   }
-  Name = TESObjectREFR_GetName(a4);
-  _sprintf((char *)&v139, "ACTOR INFO: %s", Name);
-  v80 = (float)v112;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v9, v11, v132, (char *)&v139, v132, v80, 1, 0xFFFFFFFF);
-  v15 = dword_A6EAFC;
-  v16 = off_A6EB00;
-  v127 = a5 + v8;
-  v81 = (float)(a5 + v8);
-  v136 = dword_A6EAF8;
-  v137 = v15;
-  v138 = v16;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v9, v11, v132, "ATTRIBUTES", v132, v81, 1, 0xFFFFFFFF);
-  v102 = a5 + a5 + v8;
-  v113 = *(float *)&v102;
-  for ( i = 0; i < 0xC; ++i )
+  Name = TESObjectREFR_GetName(a4); /*0x5f8948*/
+  _sprintf((char *)&v133, "ACTOR INFO: %s", Name);
+  v74 = (float)v106; /*0x5f896b*/
+  InterfaceMgr_DebugTextLine((char *)&v133, v126, v74, 1, 0xFFFFFFFF); /*0x5f897e*/
+  v12 = dword_A6EAFC; /*0x5f898b*/
+  v13 = off_A6EB00; /*0x5f8991*/
+  v121 = a5 + v8; /*0x5f89ab*/
+  v75 = (float)(a5 + v8); /*0x5f89af*/
+  v130 = dword_A6EAF8; /*0x5f89b3*/
+  v131 = v12; /*0x5f89bb*/
+  v132 = v13; /*0x5f89c7*/
+  InterfaceMgr_DebugTextLine("ATTRIBUTES", v126, v75, 1, 0xFFFFFFFF); /*0x5f89ce*/
+  v96 = a5 + a5 + v8; /*0x5f89d8*/
+  v107 = *(float *)&v96; /*0x5f89dc*/
+  for ( i = 0; i < 0xC; ++i ) /*0x5f89e0*/
   {
-    if ( i == 0xB )
+    if ( i == 0xB ) /*0x5f89e7*/
     {
-      v97 = ((double (__thiscall *)(TESObjectREFR *, _DWORD))a4->vtbl[1].Unk_38)(a4, 0);
-      v113 = Calc_ActorBaseEncumbrance(v97);
-      v18 = Double_To_SInt32(v113);
-      v82 = ((double (__thiscall *)(TESObjectREFR *, int, int))a4->vtbl[1].Unk_38)(a4, 0xB, v18);
-      v77 = ActorValue_GetName(0xBu);
-      _sprintf((char *)&v139, (const char *)&v136, v77, v82);
+      v91 = ((double (__thiscall *)(TESObjectREFR *, _DWORD))a4->vtbl[1].Unk_38)(a4, 0); /*0x5f89f6*/
+      v107 = Calc_ActorBaseEncumbrance(v91); /*0x5f89fe*/
+      v15 = Double_To_SInt32(v107); /*0x5f8a09*/
+      v76 = ((double (__thiscall *)(TESObjectREFR *, int, int))a4->vtbl[1].Unk_38)(a4, 0xB, v15); /*0x5f8a1f*/
+      v71 = ActorValue_GetName(0xBu); /*0x5f8a2b*/
+      _sprintf((char *)&v133, (const char *)&v130, v71, v76); /*0x5f8a39*/
     }
     else
     {
-      BaseCalcAVf = Actor_GetBaseCalcAVf((int *)a4, a5, i, (int)a4, i);
-      v19 = BaseCalcAVf;
-      v119 = (float)Double_To_SInt32(BaseCalcAVf);
-      v9 = v119;
-      v11 = v19 - v119;
-      v20 = v119;
-      if ( v11 < dbl_A2FC68 )
-        v20 = v20 - dbl_A2F928;
-      v120 = v20;
-      Double_To_SInt32(v120);
-      v83 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, i);
-      v78 = ActorValue_GetName(i);
-      _sprintf((char *)&v139, (const char *)&v136, v78, v83);
+      BaseCalcAVf = Actor_GetBaseCalcAVf((int *)a4, a5, i, (int)a4, i); /*0x5f8a41*/
+      v16 = BaseCalcAVf; /*0x5f8a45*/
+      v113 = (float)Double_To_SInt32(BaseCalcAVf); /*0x5f8a58*/
+      v17 = v16 - v113; /*0x5f8a64*/
+      v18 = v113; /*0x5f8a64*/
+      if ( v17 < dbl_A2FC68 ) /*0x5f8a71*/
+        v18 = v18 - dbl_A2F928; /*0x5f8a73*/
+      v114 = v18; /*0x5f8a79*/
+      Double_To_SInt32(v114); /*0x5f8a81*/
+      v77 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, i); /*0x5f8a97*/
+      v72 = ActorValue_GetName(i); /*0x5f8aa3*/
+      _sprintf((char *)&v133, (const char *)&v130, v72, v77); /*0x5f8ab1*/
     }
-    v84 = (float)SLODWORD(v113);
-    InterfaceMgr_DebugTextLine((char)&savedregs, v9, v11, v132, (char *)&v139, v132, v84, 1, 0xFFFFFFFF);
-    LODWORD(v113) += a5;
+    v78 = (float)SLODWORD(v107); /*0x5f8ac4*/
+    InterfaceMgr_DebugTextLine((char *)&v133, v126, v78, 1, 0xFFFFFFFF); /*0x5f8ad7*/
+    LODWORD(v107) += a5; /*0x5f8adc*/
   }
-  for ( j = 0x21; j < 0x28; ++j )
+  for ( j = 0x21; j < 0x28; ++j ) /*0x5f8aef*/
   {
-    v121 = Actor_GetBaseCalcAVf((int *)a4, a5, j, (int)a4, j);
-    v22 = v121;
-    v122 = (float)Double_To_SInt32(v121);
-    v23 = v122;
-    v24 = v22 - v122;
-    v25 = v122;
-    if ( v24 < dbl_A2FC68 )
-      v25 = v25 - dbl_A2F928;
-    v123 = v25;
-    Double_To_SInt32(v123);
-    v85 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, j);
-    v26 = ActorValue_GetName(j);
-    _sprintf((char *)&v139, (const char *)&v136, v26, v85);
-    v86 = (float)SLODWORD(v113);
-    InterfaceMgr_DebugTextLine((char)&savedregs, v23, v24, v132, (char *)&v139, v132, v86, 1, 0xFFFFFFFF);
-    LODWORD(v113) += a5;
+    v115 = Actor_GetBaseCalcAVf((int *)a4, a5, j, (int)a4, j); /*0x5f8afc*/
+    v20 = v115; /*0x5f8b00*/
+    v116 = (float)Double_To_SInt32(v115); /*0x5f8b13*/
+    v21 = v20 - v116; /*0x5f8b1f*/
+    v22 = v116; /*0x5f8b1f*/
+    if ( v21 < dbl_A2FC68 ) /*0x5f8b2c*/
+      v22 = v22 - dbl_A2F928; /*0x5f8b2e*/
+    v117 = v22; /*0x5f8b34*/
+    Double_To_SInt32(v117); /*0x5f8b3c*/
+    v79 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, j); /*0x5f8b52*/
+    v23 = ActorValue_GetName(j); /*0x5f8b56*/
+    _sprintf((char *)&v133, (const char *)&v130, v23, v79); /*0x5f8b6c*/
+    v80 = (float)SLODWORD(v107); /*0x5f8b7f*/
+    InterfaceMgr_DebugTextLine((char *)&v133, v126, v80, 1, 0xFFFFFFFF); /*0x5f8b92*/
+    LODWORD(v107) += a5; /*0x5f8b97*/
   }
-  v87 = (float)v127;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v23, v24, v129, "SKILLS", v129, v87, 2, 0xFFFFFFFF);
-  v27 = v102;
-  v128 = v102;
-  if ( a4->vtbl->GetBaseForm(a4)->member.type == kFormType_Creature )
+  v81 = (float)v121; /*0x5f8bb5*/
+  InterfaceMgr_DebugTextLine("SKILLS", v123, v81, 2, 0xFFFFFFFF); /*0x5f8bc5*/
+  v24 = v96; /*0x5f8bcc*/
+  v122 = v96; /*0x5f8bdb*/
+  if ( a4->vtbl->GetBaseForm(a4)->member.type == kFormType_Creature ) /*0x5f8be5*/
   {
-    v103 = Actor_GetBaseCalcAVf((int *)a4, a5, v102, (int)a4, 0xC);
-    v28 = v103;
-    v104 = (float)Double_To_SInt32(v103);
-    v29 = v104;
-    v30 = v28 - v104;
-    v31 = v104;
-    if ( v30 < dbl_A2FC68 )
-      v31 = v31 - dbl_A2F928;
-    v105 = v31;
-    v32 = Double_To_SInt32(v105);
-    v33 = ((double (__thiscall *)(TESObjectREFR *, int, int, int))a4->vtbl[1].Unk_38)(a4, 0xC, v32, a1);
-    _sprintf(v141, (const char *)&v138, "COMBAT", v33, a3, a2);
-    v99 = (float)(int)v131;
-    InterfaceMgr_DebugTextLine((char)&savedregs, v29, v30, v132, v141, v132, v99, 2, 0xFFFFFFFF);
-    v34 = a5 + v27;
-    v131 = (signed int *)v34;
-    v124 = Actor_GetBaseCalcAVf((int *)a4, a5, v34, (int)a4, 0x13);
-    v35 = v124;
-    v125 = (float)Double_To_SInt32(v124);
-    v36 = v125;
-    v37 = v35 - v125;
-    v38 = v125;
-    if ( v37 < dbl_A2FC68 )
-      v38 = v38 - dbl_A2F928;
-    v126 = v38;
-    v39 = Double_To_SInt32(v126);
-    v40 = ((double (__thiscall *)(TESObjectREFR *, int, int))a4->vtbl[1].Unk_38)(a4, 0x13, v39);
-    _sprintf((char *)&v140, (const char *)&v137, "MAGIC", v40);
-    v98 = (float)SLODWORD(v129);
-    InterfaceMgr_DebugTextLine(
-      (char)&savedregs,
-      v36,
-      v37,
-      *(float *)&v34,
-      (char *)&v140,
-      *(float *)&v34,
-      v98,
-      2,
-      0xFFFFFFFF);
-    v41 = a5 + v34;
-    v129 = *(float *)&v41;
-    v114 = Actor_GetBaseCalcAVf((int *)a4, a5, v41, (int)a4, 0x1A);
-    v42 = v114;
-    v115 = (float)Double_To_SInt32(v114);
-    v43 = v115;
-    v44 = v42 - v115;
-    v45 = v115;
-    if ( v44 < dbl_A2FC68 )
-      v45 = v45 - dbl_A2F928;
-    v113 = v45;
-    v46 = Double_To_SInt32(v113);
-    v47 = ((double (__thiscall *)(TESObjectREFR *, int, int))a4->vtbl[1].Unk_38)(a4, 0x1A, v46);
-    _sprintf((char *)&v139, (const char *)&v136, "STEALTH", v47);
-    v88 = (float)v128;
-    InterfaceMgr_DebugTextLine(
-      (char)&savedregs,
-      v43,
-      v44,
-      *(float *)&v41,
-      (char *)&v139,
-      *(float *)&v41,
-      v88,
-      2,
-      0xFFFFFFFF);
-    v48 = a5 + v41;
+    v97 = Actor_GetBaseCalcAVf((int *)a4, a5, v96, (int)a4, 0xC); /*0x5f8bf4*/
+    v25 = v97; /*0x5f8bf8*/
+    v98 = (float)Double_To_SInt32(v97); /*0x5f8c0b*/
+    v26 = v25 - v98; /*0x5f8c17*/
+    v27 = v98; /*0x5f8c17*/
+    if ( v26 < dbl_A2FC68 ) /*0x5f8c24*/
+      v27 = v27 - dbl_A2F928; /*0x5f8c26*/
+    v99 = v27; /*0x5f8c2c*/
+    v28 = Double_To_SInt32(v99); /*0x5f8c34*/
+    v29 = ((double (__thiscall *)(TESObjectREFR *, int, int, int))a4->vtbl[1].Unk_38)(a4, 0xC, v28, a1); /*0x5f8c46*/
+    _sprintf(v135, (const char *)&v132, "COMBAT", v29, a3, a2); /*0x5f8c60*/
+    v93 = (float)(int)v125; /*0x5f8c73*/
+    InterfaceMgr_DebugTextLine(v135, v126, v93, 2, 0xFFFFFFFF); /*0x5f8c86*/
+    v30 = a5 + v24; /*0x5f8c8e*/
+    v125 = (signed int *)v30; /*0x5f8c94*/
+    v118 = Actor_GetBaseCalcAVf((int *)a4, a5, v30, (int)a4, 0x13); /*0x5f8c9d*/
+    v31 = v118; /*0x5f8ca1*/
+    v119 = (float)Double_To_SInt32(v118); /*0x5f8cb4*/
+    v32 = v31 - v119; /*0x5f8cc0*/
+    v33 = v119; /*0x5f8cc0*/
+    if ( v32 < dbl_A2FC68 ) /*0x5f8ccd*/
+      v33 = v33 - dbl_A2F928; /*0x5f8ccf*/
+    v120 = v33; /*0x5f8cd5*/
+    v34 = Double_To_SInt32(v120); /*0x5f8cdd*/
+    v35 = ((double (__thiscall *)(TESObjectREFR *, int, int))a4->vtbl[1].Unk_38)(a4, 0x13, v34); /*0x5f8cef*/
+    _sprintf((char *)&v134, (const char *)&v131, "MAGIC", v35); /*0x5f8d09*/
+    v92 = (float)SLODWORD(v123); /*0x5f8d1c*/
+    InterfaceMgr_DebugTextLine((char *)&v134, *(float *)&v30, v92, 2, 0xFFFFFFFF); /*0x5f8d2f*/
+    v36 = a5 + v30; /*0x5f8d37*/
+    v123 = *(float *)&v36; /*0x5f8d3d*/
+    v108 = Actor_GetBaseCalcAVf((int *)a4, a5, v36, (int)a4, 0x1A); /*0x5f8d46*/
+    v37 = v108; /*0x5f8d4a*/
+    v109 = (float)Double_To_SInt32(v108); /*0x5f8d5d*/
+    v38 = v37 - v109; /*0x5f8d69*/
+    v39 = v109; /*0x5f8d69*/
+    if ( v38 < dbl_A2FC68 ) /*0x5f8d76*/
+      v39 = v39 - dbl_A2F928; /*0x5f8d78*/
+    v107 = v39; /*0x5f8d7e*/
+    v40 = Double_To_SInt32(v107); /*0x5f8d86*/
+    v41 = ((double (__thiscall *)(TESObjectREFR *, int, int))a4->vtbl[1].Unk_38)(a4, 0x1A, v40); /*0x5f8d98*/
+    _sprintf((char *)&v133, (const char *)&v130, "STEALTH", v41); /*0x5f8db2*/
+    v82 = (float)v122; /*0x5f8dc5*/
+    InterfaceMgr_DebugTextLine((char *)&v133, *(float *)&v36, v82, 2, 0xFFFFFFFF); /*0x5f8dd8*/
+    v42 = a5 + v36; /*0x5f8de0*/
   }
   else
   {
-    for ( k = 0xC; k < 0x21; ++k )
+    for ( k = 0xC; k < 0x21; ++k ) /*0x5f8de7*/
     {
-      v106 = Actor_GetBaseCalcAVf((int *)a4, a5, k, (int)a4, k);
-      v50 = v106;
-      v107 = (float)Double_To_SInt32(v106);
-      v43 = v107;
-      v44 = v50 - v107;
-      v51 = v107;
-      if ( v44 < dbl_A2FC68 )
-        v51 = v51 - dbl_A2F928;
-      v108 = v51;
-      Double_To_SInt32(v108);
-      v89 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, k);
-      v52 = ActorValue_GetName(k);
-      _sprintf((char *)&v139, (const char *)&v136, v52, v89);
-      v90 = (float)v128;
-      InterfaceMgr_DebugTextLine((char)&savedregs, v43, v44, v129, (char *)&v139, v129, v90, 2, 0xFFFFFFFF);
-      v128 += a5;
+      v100 = Actor_GetBaseCalcAVf((int *)a4, a5, k, (int)a4, k); /*0x5f8df8*/
+      v44 = v100; /*0x5f8dfc*/
+      v101 = (float)Double_To_SInt32(v100); /*0x5f8e0f*/
+      v45 = v44 - v101; /*0x5f8e1b*/
+      v46 = v101; /*0x5f8e1b*/
+      if ( v45 < dbl_A2FC68 ) /*0x5f8e28*/
+        v46 = v46 - dbl_A2F928; /*0x5f8e2a*/
+      v102 = v46; /*0x5f8e30*/
+      Double_To_SInt32(v102); /*0x5f8e38*/
+      v83 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, k); /*0x5f8e4e*/
+      v47 = ActorValue_GetName(k); /*0x5f8e52*/
+      _sprintf((char *)&v133, (const char *)&v130, v47, v83); /*0x5f8e68*/
+      v84 = (float)v122; /*0x5f8e7b*/
+      InterfaceMgr_DebugTextLine((char *)&v133, v123, v84, 2, 0xFFFFFFFF); /*0x5f8e8e*/
+      v122 += a5; /*0x5f8e93*/
     }
-    v48 = v128;
+    v42 = v122; /*0x5f8ea6*/
   }
-  if ( v48 > SLODWORD(v113) )
-    v113 = *(float *)&v48;
-  v116 = a5 + LODWORD(v113);
-  v91 = (float)v116;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v43, v44, v129, "ACTOR VALUES", v129, v91, 2, 0xFFFFFFFF);
-  v135[0] = v132;
-  v117 = a5 + v116;
-  v135[1] = v129;
-  v53 = 0x28;
-  v135[2] = v133;
-  v134[0] = 1.0;
-  v134[1] = fConstant_2;
-  v134[2] = *(float *)&dword_A46C30;
-  do
+  if ( v42 > SLODWORD(v107) ) /*0x5f8eae*/
+    v107 = *(float *)&v42; /*0x5f8eb0*/
+  v110 = a5 + LODWORD(v107); /*0x5f8eb4*/
+  v85 = (float)v110; /*0x5f8ec3*/
+  InterfaceMgr_DebugTextLine("ACTOR VALUES", v123, v85, 2, 0xFFFFFFFF); /*0x5f8ed3*/
+  v129[0] = v126; /*0x5f8edc*/
+  v111 = a5 + v110; /*0x5f8ee7*/
+  v129[1] = v123; /*0x5f8eeb*/
+  v48 = 0x28; /*0x5f8eef*/
+  v129[2] = v127; /*0x5f8ef8*/
+  v128[0] = 1.0; /*0x5f8efe*/
+  v128[1] = fConstant_2; /*0x5f8f08*/
+  v128[2] = *(float *)&dword_A46C30; /*0x5f8f12*/
+  do /*0x5f8feb*/
   {
-    v54 = v53 % 3;
-    v109 = Actor_GetBaseCalcAVf((int *)a4, v53 % 3, v53, (int)a4, v53);
-    v55 = v109;
-    v110 = (float)Double_To_SInt32(v109);
-    v56 = v110;
-    v57 = v55 - v110;
-    v58 = v110;
-    if ( v57 < dbl_A2FC68 )
-      v58 = v58 - dbl_A2F928;
-    v111 = v58;
-    Double_To_SInt32(v111);
-    v92 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, v53);
-    v59 = ActorValue_GetName(v53);
-    _sprintf((char *)&v139, (const char *)&v136, v59, v92);
-    v60 = Double_To_SInt32(v134[v54]);
-    v93 = (float)v117;
-    InterfaceMgr_DebugTextLine((char)&savedregs, v56, v57, v135[v54], (char *)&v139, v135[v54], v93, v60, 0xFFFFFFFF);
-    if ( v54 == 2 )
-      v117 += a5;
-    ++v53;
+    v49 = v48 % 3; /*0x5f8f29*/
+    v103 = Actor_GetBaseCalcAVf((int *)a4, v48 % 3, v48, (int)a4, v48); /*0x5f8f33*/
+    v50 = v103; /*0x5f8f37*/
+    v104 = (float)Double_To_SInt32(v103); /*0x5f8f4a*/
+    v51 = v50 - v104; /*0x5f8f56*/
+    v52 = v104; /*0x5f8f56*/
+    if ( v51 < dbl_A2FC68 ) /*0x5f8f63*/
+      v52 = v52 - dbl_A2F928; /*0x5f8f65*/
+    v105 = v52; /*0x5f8f6b*/
+    Double_To_SInt32(v105); /*0x5f8f73*/
+    v86 = ((double (__thiscall *)(TESObjectREFR *, int))a4->vtbl[1].Unk_38)(a4, v48); /*0x5f8f89*/
+    v53 = ActorValue_GetName(v48); /*0x5f8f8d*/
+    _sprintf((char *)&v133, (const char *)&v130, v53, v86); /*0x5f8fa3*/
+    v54 = Double_To_SInt32(v128[v49]); /*0x5f8fb1*/
+    v87 = (float)v111; /*0x5f8fbe*/
+    InterfaceMgr_DebugTextLine((char *)&v133, v129[v49], v87, v54, 0xFFFFFFFF); /*0x5f8fd1*/
+    if ( v49 == 2 ) /*0x5f8fdc*/
+      v111 += a5; /*0x5f8fe1*/
+    ++v48; /*0x5f8fe5*/
   }
-  while ( v53 < 0x48 );
-  v94 = (float)(int)v131;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v56, v57, v133, "INVENTORY", v133, v94, 3, 0xFFFFFFFF);
-  v131 = (signed int *)((char *)v131 + a5);
-  ContainerChanges = ExtraDataList_GetContainerChanges(&a4->member.baseExtraList);
+  while ( v48 < 0x48 ); /*0x5f8feb*/
+  v88 = (float)(int)v125; /*0x5f8ffc*/
+  InterfaceMgr_DebugTextLine("INVENTORY", v127, v88, 3, 0xFFFFFFFF); /*0x5f900c*/
+  v125 = (signed int *)((char *)v125 + a5); /*0x5f9014*/
+  ContainerChanges = ExtraDataList_GetContainerChanges(&a4->member.baseExtraList); /*0x5f901e*/
   if ( ContainerChanges )
   {
-    objList = ContainerChanges->objList;
-    next = ContainerChanges->objList;
+    objList = ContainerChanges->objList; /*0x5f902b*/
+    next = ContainerChanges->objList; /*0x5f902f*/
     if ( ContainerChanges->objList )
     {
       while ( objList->node.next || objList->node.data )
       {
-        data = objList->node.data;
-        if ( objList->node.data )
-          type = data->type;
+        data = objList->node.data; /*0x5f9053*/
+        if ( objList->node.data ) /*0x5f9053*/
+          type = data->type; /*0x5f9059*/
         else
-          type = 0;
-        if ( type && (unsigned __int8)ContainerEntryExtraData_HasWorn(data, 0) )
+          type = 0; /*0x5f905e*/
+        if ( type && ContainerEntryExtraData_HasWorn(data, 0) )
         {
-          v65 = type->member.type;
-          if ( v65 == 0x14 )
+          v59 = type->member.type; /*0x5f9079*/
+          if ( v59 == 0x14 )
           {
-            v71 = OblivionDynamicCast(
+            v65 = OblivionDynamicCast( /*0x5f9131*/
                     type,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                     &TESFullName `RTTI Type Descriptor',
                     0);
-            if ( v71 )
+            if ( v65 ) /*0x5f913b*/
             {
-              v72 = *((CHAR **)v71 + 1);
-              if ( !v72 )
-                v72 = EmptyString;
-              v73 = v72;
+              v66 = *((CHAR **)v65 + 1); /*0x5f913d*/
+              if ( !v66 ) /*0x5f9142*/
+                v66 = EmptyString; /*0x5f9144*/
+              v67 = v66; /*0x5f9149*/
             }
             else
             {
-              v73 = EmptyString;
+              v67 = EmptyString; /*0x5f914d*/
             }
-            Health = ContainerEntryExtraData_GetHealth((void **)&data->extendData, 1);
-            _sprintf((char *)&v139, "%.20s: %.1f%%", v73, Health);
-            v96 = (float)(int)v131;
-            InterfaceMgr_DebugTextLine((char)&savedregs, v56, v57, v133, (char *)&v139, v133, v96, 3, 0xFFFFFFFF);
+            Health = ContainerEntryExtraData_GetHealth((void **)&data->extendData, 1); /*0x5f9156*/
+            _sprintf((char *)&v133, "%.20s: %.1f%%", v67, Health);
+            v90 = (float)(int)v125; /*0x5f917f*/
+            InterfaceMgr_DebugTextLine((char *)&v133, v127, v90, 3, 0xFFFFFFFF); /*0x5f9192*/
           }
           else
           {
-            if ( v65 != 0x21 )
-              goto LABEL_63;
-            v66 = ((unsigned __int16 (__thiscall *)(TESForm::ModReferenceList *))type[5].member.modlist.data->bsFile)(&type[5].member.modlist);
-            v67 = OblivionDynamicCast(
+            if ( v59 != 0x21 ) /*0x5f9089*/
+              goto LABEL_63; /*0x5f9089*/
+            v60 = ((unsigned __int16 (__thiscall *)(TESForm::ModReferenceList *))type[5].member.modlist.data->bsFile)(&type[5].member.modlist); /*0x5f90af*/
+            v61 = OblivionDynamicCast( /*0x5f90b2*/
                     type,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                     &TESFullName `RTTI Type Descriptor',
                     0);
-            if ( v67 )
+            if ( v61 ) /*0x5f90bc*/
             {
-              v68 = *((CHAR **)v67 + 1);
-              if ( !v68 )
-                v68 = EmptyString;
-              v69 = v68;
+              v62 = *((CHAR **)v61 + 1); /*0x5f90be*/
+              if ( !v62 ) /*0x5f90c3*/
+                v62 = EmptyString; /*0x5f90c5*/
+              v63 = v62; /*0x5f90ca*/
             }
             else
             {
-              v69 = EmptyString;
+              v63 = EmptyString; /*0x5f90ce*/
             }
-            v70 = ContainerEntryExtraData_GetHealth((void **)&data->extendData, 1);
-            _sprintf((char *)&v139, "%.20s: %ddmg %.1f%%", v69, v66, v70);
-            v95 = (float)(int)v131;
-            InterfaceMgr_DebugTextLine((char)&savedregs, v56, v57, v133, (char *)&v139, v133, v95, 3, 0xFFFFFFFF);
-            objList = next;
+            v64 = ContainerEntryExtraData_GetHealth((void **)&data->extendData, 1); /*0x5f90d7*/
+            _sprintf((char *)&v133, "%.20s: %ddmg %.1f%%", v63, v60, v64);
+            v89 = (float)(int)v125; /*0x5f9104*/
+            InterfaceMgr_DebugTextLine((char *)&v133, v127, v89, 3, 0xFFFFFFFF); /*0x5f9117*/
+            objList = next; /*0x5f911c*/
           }
-          v131 = (signed int *)((char *)v131 + a5);
+          v125 = (signed int *)((char *)v125 + a5); /*0x5f919d*/
         }
 LABEL_63:
-        next = (tListEntryData *)objList->node.next;
-        if ( !next )
-          break;
-        objList = (tListEntryData *)objList->node.next;
+        next = (tListEntryData *)objList->node.next; /*0x5f91a1*/
+        if ( !next ) /*0x5f91aa*/
+          break; /*0x5f91aa*/
+        objList = (tListEntryData *)objList->node.next; /*0x5f9040*/
       }
     }
   }
-  v7 = a6;
-  v13 = v117;
+  v7 = a6; /*0x5f91b0*/
+  v10 = (signed int *)v111; /*0x5f91b4*/
 LABEL_65:
-  result = v131;
-  *v7 = v13;
-  if ( v13 <= (int)v131 )
+  result = v125; /*0x5f91b8*/
+  *v7 = (int)v10; /*0x5f91be*/
+  if ( (int)v10 <= (int)v125 ) /*0x5f91c0*/
   {
-    *a7 = v131;
+    *a7 = v125; /*0x5f91e2*/
   }
   else
   {
-    *a7 = (signed int *)v13;
-    return (signed int *)a7;
+    *a7 = v10; /*0x5f91c6*/
+    return (signed int *)a7; /*0x5f91c2*/
   }
-  return result;
+  return result; /*0x5f91cb*/
 }

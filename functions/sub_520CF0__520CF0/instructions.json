@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x520D79",
-    "line": "call    sub_521370",
+    "line": "call    TESIdleForm_BuildIdleAnimsRoot; Builds IdleAnims lookup root from actor model path: preserves existing IdleAnims prefix or appends IdleAnims to model directory.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x520DA6",
-    "line": "call    sub_521370",
+    "line": "call    TESIdleForm_BuildIdleAnimsRoot; Builds IdleAnims lookup root from actor model path: preserves existing IdleAnims prefix or appends IdleAnims to model directory.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x520DBE",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x520DBF",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x520DC0",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x520E42",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x520E5A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -850,5 +850,71 @@
     "line": "jmp     short loc_520E64",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9B7170",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7173",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7178",
+    "line": "lea     ecx, [ebp-1Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B717B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7180",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B7184",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7187",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B718A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B718C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7191",
+    "line": "mov     eax, offset stru_AE1DE8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7196",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

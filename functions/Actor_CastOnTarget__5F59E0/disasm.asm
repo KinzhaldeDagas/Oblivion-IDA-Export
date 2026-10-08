@@ -64,13 +64,13 @@
 0x5F5AA6: call    TESPackage_LocationData_SetRadius
 0x5F5AAB: push    edi
 0x5F5AAC: mov     ecx, esi
-0x5F5AAE: call    TESPackage_SetLocation
+0x5F5AAE: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x5F5AB3: test    edi, edi
 0x5F5AB5: jz      short loc_5F5AC7
 0x5F5AB7: mov     ecx, edi
 0x5F5AB9: call    TESPackage_LocationData_destr
 0x5F5ABE: push    edi
-0x5F5ABF: call    FormHeapFree
+0x5F5ABF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F5AC4: add     esp, 4
 0x5F5AC7: push    0Ch; Size
 0x5F5AC9: call    FormHeapAlloc
@@ -80,26 +80,26 @@
 0x5F5AD7: mov     [esp+20h+var_4], 2
 0x5F5ADF: jz      short loc_5F5AEC
 0x5F5AE1: mov     ecx, eax
-0x5F5AE3: call    TESPackage_TargetData_constr
+0x5F5AE3: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x5F5AE8: mov     edi, eax
 0x5F5AEA: jmp     short loc_5F5AEE
 0x5F5AEC: xor     edi, edi
 0x5F5AEE: push    edi
 0x5F5AEF: mov     ecx, esi
 0x5F5AF1: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x5F5AF9: call    TESPackage_SetTarget
+0x5F5AF9: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x5F5AFE: test    edi, edi
 0x5F5B00: jz      short loc_5F5B12
-0x5F5B02: mov     ecx, edi; void *
-0x5F5B04: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x5F5B02: mov     ecx, edi; this
+0x5F5B04: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x5F5B09: push    edi
-0x5F5B0A: call    FormHeapFree
+0x5F5B0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F5B0F: add     esp, 4
 0x5F5B12: mov     ecx, esi
-0x5F5B14: call    sub_5672A0
+0x5F5B14: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x5F5B19: mov     ecx, [esi+28h]
 0x5F5B1C: push    1
-0x5F5B1E: call    TESPackage_TargetData_SetType
+0x5F5B1E: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x5F5B23: mov     eax, [esp+20h+arg_0]
 0x5F5B27: mov     ecx, [esi+28h]
 0x5F5B2A: push    eax
@@ -108,7 +108,7 @@
 0x5F5B32: push    1; a3
 0x5F5B34: push    esi; a2
 0x5F5B35: mov     ecx, ebp; this
-0x5F5B37: call    Actor_AddPackage?
+0x5F5B37: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x5F5B3C: cmp     [esp+20h+arg_8], 0
 0x5F5B41: jz      short loc_5F5B53
 0x5F5B43: mov     ecx, [ebp+58h]
@@ -125,3 +125,25 @@
 0x5F5B61: pop     ebp
 0x5F5B62: add     esp, 10h
 0x5F5B65: retn    0Ch
+0x9C2940: mov     eax, [ebp-10h]
+0x9C2943: push    eax
+0x9C2944: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2949: pop     ecx
+0x9C294A: retn
+0x9C294B: mov     eax, [ebp-10h]
+0x9C294E: push    eax
+0x9C294F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2954: pop     ecx
+0x9C2955: retn
+0x9C2956: mov     eax, [ebp+8]
+0x9C2959: push    eax
+0x9C295A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C295F: pop     ecx
+0x9C2960: retn
+0x9C2961: mov     edx, [esp+arg_4]
+0x9C2965: lea     eax, [edx-10h]
+0x9C2968: mov     ecx, [edx-14h]
+0x9C296B: xor     ecx, eax
+0x9C296D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2972: mov     eax, offset stru_AEB72C
+0x9C2977: jmp     ___CxxFrameHandler3

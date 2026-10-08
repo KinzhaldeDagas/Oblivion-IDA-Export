@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x6EDBE9",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDBEA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EDBEC",
-    "line": "call    sub_5520E0",
+    "line": "call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EDBF1",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6EDBF3",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x6EDBF8",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDBF9",
-    "line": "lea     ecx, [edi+18h]",
+    "line": "lea     ecx, [edi+18h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6EDBFC",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },

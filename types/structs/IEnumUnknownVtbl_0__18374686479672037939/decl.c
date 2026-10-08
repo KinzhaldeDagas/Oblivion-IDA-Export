@@ -1,1 +1,1 @@
-IEnumUnknownVtbl_0
+typedef IEnumUnknownVtbl IEnumUnknownVtbl_0;

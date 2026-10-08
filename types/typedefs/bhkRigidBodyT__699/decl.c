@@ -1,1 +1,1 @@
-bhkRigidBodyT
+struct bhkRigidBodyT;

@@ -13,15 +13,15 @@
 0x58DA1B: mov     dword ptr [esi+2Ch], 2
 0x58DA22: mov     [esi+24h], ebx
 0x58DA25: call    BSStringT_Set
-0x58DA2A: mov     eax, [esp+0Ch+arg_0]
+0x58DA2A: mov     eax, [esp+0Ch+parent]
 0x58DA2E: cmp     eax, ebx
 0x58DA30: mov     [esi+28h], ebx
 0x58DA33: jz      short loc_58DA42
-0x58DA35: mov     ecx, [esp+0Ch+arg_8]
-0x58DA39: push    ecx
-0x58DA3A: push    eax
-0x58DA3B: mov     ecx, esi
-0x58DA3D: call    sub_58D1C0
+0x58DA35: mov     ecx, [esp+0Ch+sibling]
+0x58DA39: push    ecx; sibling
+0x58DA3A: push    eax; parent
+0x58DA3B: mov     ecx, esi; this
+0x58DA3D: call    Tile__SetParent; Verified: detaches from old parent list and decrements child-count trait 0xFD0, assigns parent +0x10, increments new parent count, inserts in new parent child list. Optional sibling argument controls placement; null uses AddHead. This is attachment, not a float-value setter.
 0x58DA42: mov     eax, [esp+0Ch+a2]
 0x58DA46: cmp     eax, ebx
 0x58DA48: jz      short loc_58DA53

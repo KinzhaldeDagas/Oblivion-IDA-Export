@@ -1,30 +1,33 @@
-void __cdecl __noreturn sub_795AD0(int a1, int a2, char *a3)
+// OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized copy of inner vector<unsigned short> owners. Deep-copy-constructs the destination range, destroys only its constructed prefix on unwind, and normally returns the constructed end at 0x795B5E; prior noreturn metadata was false.
+OB_stVectorUShort_010201A0 *__cdecl OB_stVector_stVectorUShort_UninitializedCopyRange_010201A0(
+        const OB_stVectorUShort_010201A0 *first,
+        const OB_stVectorUShort_010201A0 *last,
+        OB_stVectorUShort_010201A0 *destination)
 {
-  char *v3; // esi
-  char *i; // esi
-  int v6; // [esp+0h] [ebp-28h] BYREF
-  void *v7; // [esp+10h] [ebp-18h]
-  int v8; // [esp+14h] [ebp-14h]
-  int *v9; // [esp+18h] [ebp-10h]
-  int v10; // [esp+24h] [ebp-4h]
-  int savedregs; // [esp+28h] [ebp+0h] BYREF
+  OB_stVectorUShort_010201A0 *v3; // esi
+  OB_stVector16_010201A0 *i; // esi
+  int v7; // [esp+0h] [ebp-28h] BYREF
+  void *v8; // [esp+10h] [ebp-18h]
+  OB_stVector16_010201A0 *v9; // [esp+14h] [ebp-14h]
+  int *v10; // [esp+18h] [ebp-10h]
+  int v11; // [esp+24h] [ebp-4h]
 
-  v9 = &v6;
-  v3 = a3;
-  v8 = (int)a3;
-  v10 = 0;
-  while ( a1 != a2 )
+  v10 = &v7; /*0x795af8*/
+  v3 = destination; /*0x795afb*/
+  v9 = (OB_stVector16_010201A0 *)destination; /*0x795b03*/
+  v11 = 0; /*0x795b06*/
+  while ( first != last ) /*0x795b13*/
   {
-    v7 = v3;
-    LOBYTE(v10) = 1;
-    if ( v3 )
-      sub_795480(v3, (unsigned int)&savedregs, (unsigned int)v3, a1);
-    v3 += 0x10;
-    LOBYTE(v10) = 0;
-    a3 = v3;
-    a1 += 0x10;
+    v8 = v3; /*0x795b18*/
+    LOBYTE(v11) = 1; /*0x795b1d*/
+    if ( v3 ) /*0x795b21*/
+      OB_stVectorUShort_CopyCtor_010201A0(v3, first); /*0x795b26*/
+    ++v3; /*0x795b2b*/
+    LOBYTE(v11) = 0; /*0x795b2e*/
+    destination = v3; /*0x795b31*/
+    ++first; /*0x795b34*/
   }
-  for ( i = (char *)v8; i != a3; i += 0x10 )
-    sub_79BFF0(i);
-  ThrowException__(0, 0);
+  for ( i = v9; i != (OB_stVector16_010201A0 *)destination; ++i ) /*0x795b41*/
+    OB_stVector4_DestroyStdcall_010201A0((OB_stVector4_010201A0 *)i); /*0x795b49*/
+  ThrowException__(0, 0); /*0x795b59*/
 }

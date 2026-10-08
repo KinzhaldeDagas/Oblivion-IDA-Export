@@ -36,18 +36,18 @@
 0x778FC7: test    eax, eax
 0x778FC9: jz      short loc_778FEB
 0x778FCB: mov     ecx, eax; this
-0x778FCD: call    ??0NiD3DShaderProgramFactory@@QAE@XZ; NiD3DShaderProgramFactory::NiD3DShaderProgramFactory(void)
+0x778FCD: call    ??0NiD3DShaderProgramFactory@@QAE@XZ; MoonSugarEffect decode: NiD3DShaderProgramFactory constructor. Creates string pointer maps at factory+0x18 for NiD3DVertexShader wrappers and factory+0x1C for NiD3DPixelShader wrappers. Factory maps are lookup/restore bookkeeping, not NiD3DPass ownership.
 0x778FD2: test    eax, eax
 0x778FD4: mov     ds:0B428A8h, eax
 0x778FD9: jnz     short loc_778FE8
 0x778FDB: push    offset aFailedToCreate; "Failed to create shader program factory"...
-0x778FE0: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x778FE0: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x778FE5: add     esp, 4
 0x778FE8: xor     eax, eax
 0x778FEA: retn
 0x778FEB: push    offset aFailedToCreate; "Failed to create shader program factory"...
 0x778FF0: mov     dword ptr ds:0B428A8h, 0
-0x778FFA: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x778FFA: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x778FFF: add     esp, 4
 0x779002: xor     eax, eax
 0x779004: retn

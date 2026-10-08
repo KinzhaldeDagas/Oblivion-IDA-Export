@@ -1,4 +1,4 @@
-0x7876C0: mov     eax, [ecx+4]
+0x7876C0: mov     eax, [ecx+4]; Oblivion collision-vector size helper: returns (end-begin)/0x1C. The 28-byte stride is authoritative; RT4.1's later 40-byte SShape adds Euler angles and is only a version contrast.
 0x7876C3: test    eax, eax
 0x7876C5: jnz     short loc_7876C8
 0x7876C7: retn

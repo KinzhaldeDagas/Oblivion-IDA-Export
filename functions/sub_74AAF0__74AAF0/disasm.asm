@@ -9,7 +9,7 @@
 0x74AB07: test    [esp+4+arg_0], 1
 0x74AB0C: jz      short loc_74AB17
 0x74AB0E: push    esi
-0x74AB0F: call    FormHeapFree
+0x74AB0F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x74AB14: add     esp, 4
 0x74AB17: mov     eax, esi
 0x74AB19: pop     esi

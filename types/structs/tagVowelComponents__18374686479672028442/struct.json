@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagVowelComponents",
+  "definition": "struct tagVowelComponents\n{\nWCHAR_0 base;\nWCHAR_0 parts[3];\n}\n",
   "id": 18374686479672028442,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "base",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WCHAR_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parts",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 6
+      "size": 6,
+      "type": "WCHAR_0[3]"
     }
   ],
   "name": "tagVowelComponents",
+  "ordinal": 1739,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

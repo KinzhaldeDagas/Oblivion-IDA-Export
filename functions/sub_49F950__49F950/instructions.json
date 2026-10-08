@@ -366,12 +366,6 @@
     "size": 2
   },
   {
-    "ea": "0x49FA0D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x49FA10",
     "line": "fld     [esp+54h+var_38]",
     "mnemonic": "fld",
@@ -769,7 +763,7 @@
   },
   {
     "ea": "0x49FAD7",
-    "line": "call    sub_6AC420",
+    "line": "call    SoundManager_StopRefLoopingSoundsWithFade; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +835,7 @@
   },
   {
     "ea": "0x49FB04",
-    "line": "call    sub_65DC50",
+    "line": "call    Player_UpdateSoundDistanceFromRef; Player/reference sound-distance helper. Computes distance from player to target ref and feeds the result into the sound system scaling/update path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +913,7 @@
   },
   {
     "ea": "0x49FB2C",
-    "line": "call    sub_447490",
+    "line": "call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1609,7 @@
   },
   {
     "ea": "0x49FCAB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

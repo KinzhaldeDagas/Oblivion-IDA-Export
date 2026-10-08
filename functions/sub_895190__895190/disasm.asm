@@ -1,4 +1,4 @@
-0x895190: push    ebp
+0x895190: push    ebp; TES4 authoritative: builds/updates controller collision shapes and derived geometry fields from construction info; not a per-frame climb API.
 0x895191: mov     ebp, esp
 0x895193: and     esp, 0FFFFFFF0h
 0x895196: push    0FFFFFFFFh
@@ -24,7 +24,7 @@
 0x8951DB: mov     dword ptr [ebx+370h], 2
 0x8951E5: jz      loc_895EDA
 0x8951EB: fldz
-0x8951ED: mov     eax, [edi+8Ch]
+0x8951ED: mov     eax, [edi+8Ch]; cinfo+0x8C optional prebuilt shape/wrapper; when present it is installed directly at proxy+0x374 and radius is read from it.
 0x8951F3: test    eax, eax
 0x8951F5: fst     [esp+114h+var_D4]
 0x8951F9: fst     [esp+114h+var_A0]
@@ -59,7 +59,7 @@
 0x89525B: fld     [esp+114h+var_FC]
 0x89525F: fld     qword ptr ds:0A39088h
 0x895265: jmp     loc_895CDC
-0x89526A: mov     eax, [edi+70h]
+0x89526A: mov     eax, [edi+70h]; cinfo+0x70 source object/root used to derive controller shape bounds when no prebuilt shape is supplied.
 0x89526D: test    eax, eax
 0x89526F: jz      loc_8953E2
 0x895275: cmp     byte ptr [edi+85h], 0
@@ -80,7 +80,7 @@
 0x8952AF: lea     ecx, [esi+18h]
 0x8952B2: fstp    [esp+118h+var_118]; float
 0x8952B5: push    eax; int
-0x8952B6: call    sub_4707B0
+0x8952B6: call    sub_4707B0; cinfo+0x98 scale feeds source-object bounds extraction for controller shape construction.
 0x8952BB: fld     dword ptr [edi+98h]
 0x8952C1: mov     ecx, [eax]
 0x8952C3: fstp    [esp+114h+var_100]
@@ -284,16 +284,16 @@
 0x89559B: fstp    [esp+114h+var_D8]
 0x89559F: fld     dword ptr [edi+4Ch]
 0x8955A2: fmulp   st(4), st
-0x8955A4: fxch    st(3)
+0x8955A4: fxch    st(3); cinfo+0x4C contributes to persistent active shape vertical offset proxy+0x314 in this build branch.
 0x8955A6: fstp    [esp+114h+var_100]
 0x8955AA: fld     [esp+114h+var_100]
-0x8955AE: fst     dword ptr [esi+314h]
+0x8955AE: fst     dword ptr [esi+314h]; Stores persistent active shape vertical offset at proxy+0x314 during controller shape build.
 0x8955B4: fadd    dword ptr [esi+348h]
-0x8955BA: fstp    dword ptr [esi+348h]
+0x8955BA: fstp    dword ptr [esi+348h]; Build-time writes same vertical offset into proxy+0x348; runtime update refreshes +0x348 from +0x314 before state dispatch.
 0x8955C0: fcomp   dword ptr [edi+50h]
 0x8955C3: fnstsw  ax
 0x8955C5: test    ah, 44h
-0x8955C8: jp      short loc_8955D1
+0x8955C8: jp      short loc_8955D1; cinfo+0x50 is a mutable construction field tested before being replaced by a Havok-scaled branch value; high-level name unresolved.
 0x8955CA: fmulp   st(1), st
 0x8955CC: fstp    dword ptr [edi+50h]
 0x8955CF: jmp     short loc_8955D5
@@ -301,13 +301,13 @@
 0x8955D3: fstp    st
 0x8955D5: xor     ebx, ebx
 0x8955D7: mov     eax, 80000000h
-0x8955DC: mov     [esp+114h+var_D0], ebx
-0x8955E0: mov     [esp+114h+var_CC], ebx
-0x8955E4: mov     [esp+114h+var_C8], ebx
-0x8955E8: mov     [esp+114h+var_C4], eax
-0x8955EC: mov     [esp+114h+var_C0], ebx
-0x8955F0: mov     [esp+114h+var_BC], ebx
-0x8955F4: mov     [esp+114h+var_B8], eax
+0x8955DC: mov     [esp+114h+info.material], ebx
+0x8955E0: mov     [esp+114h+info.childHkShapes], ebx
+0x8955E4: mov     [esp+114h+info.childCount], ebx
+0x8955E8: mov     [esp+114h+info.childCapacityFlags], eax
+0x8955EC: mov     [esp+114h+info.childFilters], ebx
+0x8955F0: mov     [esp+114h+info.filterCount], ebx
+0x8955F4: mov     [esp+114h+info.filterCapacityFlags], eax
 0x8955F8: push    14h; Size
 0x8955FA: mov     [esp+118h+var_4], ebx
 0x895601: call    FormHeapAlloc
@@ -354,7 +354,7 @@
 0x89569C: fstp    dword ptr [esp+114h+var_70+4]
 0x8956A3: fld     [esp+114h+var_E4]
 0x8956A7: fstp    dword ptr [esp+114h+var_70+8]
-0x8956AE: call    sub_404C90
+0x8956AE: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x8956B3: fmul    qword ptr ds:0A2FAA0h
 0x8956B9: mov     edx, dword ptr [esp+114h+var_F4]
 0x8956BD: push    14h; Size
@@ -452,100 +452,100 @@
 0x895839: mov     ebx, [eax+8]
 0x89583C: jmp     short loc_895840
 0x89583E: xor     ebx, ebx
-0x895840: mov     edx, [esp+114h+var_C4]
+0x895840: mov     edx, [esp+114h+info.childCapacityFlags]
 0x895844: and     edx, 3FFFFFFFh
-0x89584A: cmp     [esp+114h+var_C8], edx
+0x89584A: cmp     [esp+114h+info.childCount], edx
 0x89584E: jnz     short loc_89585F
-0x895850: lea     eax, [esp+114h+var_CC]
+0x895850: lea     eax, [esp+114h+info.childHkShapes]
 0x895854: push    4
 0x895856: push    eax
 0x895857: call    sub_8A6EE0
 0x89585C: add     esp, 8
-0x89585F: mov     edx, [esp+114h+var_C8]
-0x895863: mov     ecx, [esp+114h+var_CC]
+0x89585F: mov     edx, [esp+114h+info.childCount]
+0x895863: mov     ecx, [esp+114h+info.childHkShapes]
 0x895867: mov     eax, [esp+114h+var_100]
 0x89586B: mov     [ecx+edx*4], ebx
-0x89586E: add     [esp+114h+var_C8], 1
+0x89586E: add     [esp+114h+info.childCount], 1
 0x895873: test    eax, eax
 0x895875: jz      short loc_89587C
 0x895877: mov     ebx, [eax+8]
 0x89587A: jmp     short loc_89587E
 0x89587C: xor     ebx, ebx
-0x89587E: mov     eax, [esp+114h+var_C4]
+0x89587E: mov     eax, [esp+114h+info.childCapacityFlags]
 0x895882: and     eax, 3FFFFFFFh
-0x895887: cmp     [esp+114h+var_C8], eax
+0x895887: cmp     [esp+114h+info.childCount], eax
 0x89588B: jnz     short loc_89589C
-0x89588D: lea     ecx, [esp+114h+var_CC]
+0x89588D: lea     ecx, [esp+114h+info.childHkShapes]
 0x895891: push    4
 0x895893: push    ecx
 0x895894: call    sub_8A6EE0
 0x895899: add     esp, 8
-0x89589C: mov     eax, [esp+114h+var_C8]
-0x8958A0: mov     edx, [esp+114h+var_CC]
+0x89589C: mov     eax, [esp+114h+info.childCount]
+0x8958A0: mov     edx, [esp+114h+info.childHkShapes]
 0x8958A4: mov     [edx+eax*4], ebx
 0x8958A7: mov     eax, [esp+114h+var_F8]
-0x8958AB: add     [esp+114h+var_C8], 1
+0x8958AB: add     [esp+114h+info.childCount], 1
 0x8958B0: test    eax, eax
 0x8958B2: jz      short loc_8958B9
 0x8958B4: mov     ebx, [eax+8]
 0x8958B7: jmp     short loc_8958BB
 0x8958B9: xor     ebx, ebx
-0x8958BB: mov     ecx, [esp+114h+var_C4]
+0x8958BB: mov     ecx, [esp+114h+info.childCapacityFlags]
 0x8958BF: and     ecx, 3FFFFFFFh
-0x8958C5: cmp     [esp+114h+var_C8], ecx
+0x8958C5: cmp     [esp+114h+info.childCount], ecx
 0x8958C9: jnz     short loc_8958DA
-0x8958CB: lea     edx, [esp+114h+var_CC]
+0x8958CB: lea     edx, [esp+114h+info.childHkShapes]
 0x8958CF: push    4
 0x8958D1: push    edx
 0x8958D2: call    sub_8A6EE0
 0x8958D7: add     esp, 8
-0x8958DA: mov     ecx, [esp+114h+var_C8]
-0x8958DE: mov     eax, [esp+114h+var_CC]
+0x8958DA: mov     ecx, [esp+114h+info.childCount]
+0x8958DE: mov     eax, [esp+114h+info.childHkShapes]
 0x8958E2: mov     [eax+ecx*4], ebx
-0x8958E5: mov     edx, [esp+114h+var_B8]
-0x8958E9: add     [esp+114h+var_C8], 1
+0x8958E5: mov     edx, [esp+114h+info.filterCapacityFlags]
+0x8958E9: add     [esp+114h+info.childCount], 1
 0x8958EE: and     edx, 3FFFFFFFh
-0x8958F4: cmp     [esp+114h+var_BC], edx
+0x8958F4: cmp     [esp+114h+info.filterCount], edx
 0x8958F8: jnz     short loc_895909
-0x8958FA: lea     eax, [esp+114h+var_C0]
+0x8958FA: lea     eax, [esp+114h+info.childFilters]
 0x8958FE: push    4
 0x895900: push    eax
 0x895901: call    sub_8A6EE0
 0x895906: add     esp, 8
-0x895909: mov     ecx, [esp+114h+var_C0]
-0x89590D: mov     edx, [esp+114h+var_BC]
+0x895909: mov     ecx, [esp+114h+info.childFilters]
+0x89590D: mov     edx, [esp+114h+info.filterCount]
 0x895911: mov     dword ptr [ecx+edx*4], 0
-0x895918: mov     eax, [esp+114h+var_BC]
-0x89591C: mov     ecx, [esp+114h+var_B8]
+0x895918: mov     eax, [esp+114h+info.filterCount]
+0x89591C: mov     ecx, [esp+114h+info.filterCapacityFlags]
 0x895920: add     eax, 1
 0x895923: and     ecx, 3FFFFFFFh
 0x895929: cmp     eax, ecx
-0x89592B: mov     [esp+114h+var_BC], eax
+0x89592B: mov     [esp+114h+info.filterCount], eax
 0x89592F: jnz     short loc_895940
-0x895931: lea     edx, [esp+114h+var_C0]
+0x895931: lea     edx, [esp+114h+info.childFilters]
 0x895935: push    4
 0x895937: push    edx
 0x895938: call    sub_8A6EE0
 0x89593D: add     esp, 8
-0x895940: mov     eax, [esp+114h+var_C0]
-0x895944: mov     ecx, [esp+114h+var_BC]
+0x895940: mov     eax, [esp+114h+info.childFilters]
+0x895944: mov     ecx, [esp+114h+info.filterCount]
 0x895948: mov     dword ptr [eax+ecx*4], 0
-0x89594F: mov     eax, [esp+114h+var_BC]
-0x895953: mov     edx, [esp+114h+var_B8]
+0x89594F: mov     eax, [esp+114h+info.filterCount]
+0x895953: mov     edx, [esp+114h+info.filterCapacityFlags]
 0x895957: add     eax, 1
 0x89595A: and     edx, 3FFFFFFFh
 0x895960: cmp     eax, edx
-0x895962: mov     [esp+114h+var_BC], eax
+0x895962: mov     [esp+114h+info.filterCount], eax
 0x895966: jnz     short loc_895977
-0x895968: lea     eax, [esp+114h+var_C0]
+0x895968: lea     eax, [esp+114h+info.childFilters]
 0x89596C: push    4
 0x89596E: push    eax
 0x89596F: call    sub_8A6EE0
 0x895974: add     esp, 8
-0x895977: mov     edx, [esp+114h+var_BC]
-0x89597B: mov     ecx, [esp+114h+var_C0]
+0x895977: mov     edx, [esp+114h+info.filterCount]
+0x89597B: mov     ecx, [esp+114h+info.childFilters]
 0x89597F: mov     dword ptr [ecx+edx*4], 0
-0x895986: add     [esp+114h+var_BC], 1
+0x895986: add     [esp+114h+info.filterCount], 1
 0x89598B: push    14h; Size
 0x89598D: mov     dword ptr [edi+9Ch], 0
 0x895997: call    FormHeapAlloc
@@ -554,10 +554,10 @@
 0x8959A3: test    eax, eax
 0x8959A5: mov     byte ptr [esp+114h+var_4], 4
 0x8959AD: jz      short loc_8959BD
-0x8959AF: lea     ecx, [esp+114h+var_D0]
-0x8959B3: push    ecx
-0x8959B4: mov     ecx, eax
-0x8959B6: call    sub_890410
+0x8959AF: lea     ecx, [esp+114h+info]
+0x8959B3: push    ecx; info
+0x8959B4: mov     ecx, eax; self
+0x8959B6: call    OB_bhkListShape_CtorFromCinfo_010201A0
 0x8959BB: jmp     short loc_8959BF
 0x8959BD: xor     eax, eax
 0x8959BF: cmp     dword ptr [edi+8Ch], 0
@@ -569,7 +569,7 @@
 0x8959DA: push    eax; a2
 0x8959DB: lea     ecx, [esi+ecx*4+374h]; this
 0x8959E2: call    NiSmartPointer_Set??
-0x8959E7: lea     ecx, [esp+114h+var_D0]
+0x8959E7: lea     ecx, [esp+114h+info]
 0x8959EB: mov     [esp+114h+var_4], 0FFFFFFFFh
 0x8959F6: call    sub_893510
 0x8959FB: fld     [esp+114h+var_EC]
@@ -581,10 +581,10 @@
 0x895A11: fld     dword ptr [esp+114h+var_94]
 0x895A18: lea     ebx, [esi+374h]
 0x895A1E: fmul    st, st(4)
-0x895A20: fstp    dword ptr [esi+340h]
+0x895A20: fstp    dword ptr [esi+340h]; Stores shape-local horizontal offset X at proxy+0x340 in Havok units.
 0x895A26: fld     dword ptr [esp+114h+var_94+4]
 0x895A2D: fmul    st, st(4)
-0x895A2F: fstp    dword ptr [esi+344h]
+0x895A2F: fstp    dword ptr [esi+344h]; Stores shape-local horizontal offset Y at proxy+0x344 in Havok units.
 0x895A35: cmp     dword ptr [ebx], 0
 0x895A38: jnz     loc_895D1F
 0x895A3E: fstp    st(4)
@@ -599,16 +599,16 @@
 0x895A5B: fmul    st(1), st
 0x895A5D: fxch    st(1)
 0x895A5F: fadd    [esp+114h+var_100]
-0x895A63: fstp    [esp+114h+var_100]
+0x895A63: fstp    [esp+114h+var_100]; cinfo+0x4C contributes to persistent active shape vertical offset proxy+0x314 in the alternate build branch.
 0x895A67: fld     [esp+114h+var_100]
-0x895A6B: fst     dword ptr [esi+314h]
+0x895A6B: fst     dword ptr [esi+314h]; Stores persistent active shape vertical offset at proxy+0x314 for the alternate shape-build branch.
 0x895A71: fadd    dword ptr [esi+348h]
-0x895A77: fstp    dword ptr [esi+348h]
+0x895A77: fstp    dword ptr [esi+348h]; Build-time writes alternate vertical offset into proxy+0x348; runtime update refreshes +0x348 from +0x314 before state dispatch.
 0x895A7D: fxch    st(2)
 0x895A7F: fcomp   dword ptr [edi+50h]
 0x895A82: fnstsw  ax
 0x895A84: test    ah, 44h
-0x895A87: jp      short loc_895A90
+0x895A87: jp      short loc_895A90; cinfo+0x50 is a mutable construction field tested before being replaced by a Havok-scaled branch value; high-level name unresolved.
 0x895A89: fld     st
 0x895A8B: fmul    st, st(3)
 0x895A8D: fstp    dword ptr [edi+50h]
@@ -732,7 +732,7 @@
 0x895C2D: push    eax; a2
 0x895C2E: mov     ecx, ebx; this
 0x895C30: call    NiSmartPointer_Set??
-0x895C35: cmp     byte ptr [edi+85h], 0
+0x895C35: cmp     byte ptr [edi+85h], 0; cinfo+0x85 selects the shared/alternate secondary shape path; exact high-level flag name unresolved.
 0x895C3C: jz      short loc_895C92
 0x895C3E: cmp     dword ptr ds:0BA7A64h, 0
 0x895C45: jnz     short loc_895C80
@@ -750,11 +750,11 @@
 0x895C6D: call    sub_893230
 0x895C72: add     esp, 10h
 0x895C75: push    eax; a2
-0x895C76: mov     ecx, offset dword_BA7A64; this
+0x895C76: mov     ecx, offset unk_BA7A64; this
 0x895C7B: call    NiSmartPointer_Set??
-0x895C80: push    offset dword_BA7A64
-0x895C85: lea     ecx, [esi+378h]
-0x895C8B: call    sub_55E2A0
+0x895C80: push    offset unk_BA7A64; incoming
+0x895C85: lea     ecx, [esi+378h]; this
+0x895C8B: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x895C90: jmp     short loc_895CCC
 0x895C92: fld     dword ptr [esi+248h]
 0x895C98: sub     esp, 8
@@ -780,16 +780,16 @@
 0x895CDE: fmul    st, st(1)
 0x895CE0: fstp    [esp+114h+var_100]
 0x895CE4: fld     [esp+114h+var_100]
-0x895CE8: fst     dword ptr [esi+3A0h]
-0x895CEE: fstp    dword ptr [esi+3A8h]
+0x895CE8: fst     dword ptr [esi+3A0h]; Stores controller capsule radius at proxy+0x3A0 in Havok units.
+0x895CEE: fstp    dword ptr [esi+3A8h]; Stores duplicate/secondary controller capsule radius at proxy+0x3A8 in Havok units.
 0x895CF4: fld     [esp+114h+var_E8]
 0x895CF8: fmul    st, st(1)
-0x895CFA: fstp    dword ptr [esi+3A4h]
+0x895CFA: fstp    dword ptr [esi+3A4h]; Stores controller capsule height at proxy+0x3A4 in Havok units.
 0x895D00: fxch    st(1)
 0x895D02: fadd    st, st
 0x895D04: fstp    [esp+114h+var_100]
 0x895D08: fmul    [esp+114h+var_100]
-0x895D0C: fstp    dword ptr [esi+33Ch]
+0x895D0C: fstp    dword ptr [esi+33Ch]; Stores derived shape span/diameter-like scalar at proxy+0x33C in Havok units; exact high-level cinfo meaning still unresolved.
 0x895D12: cmp     dword ptr [edi+8Ch], 0
 0x895D19: jz      short loc_895D25
 0x895D1B: xor     eax, eax
@@ -800,8 +800,8 @@
 0x895D25: mov     eax, [edi+9Ch]
 0x895D2B: push    eax
 0x895D2C: mov     ecx, esi
-0x895D2E: call    sub_894940
-0x895D33: cmp     byte ptr [edi+84h], 0
+0x895D2E: call    bhkCharacterController_SetShapeType
+0x895D33: cmp     byte ptr [edi+84h], 0; cinfo+0x84 enables optional secondary shape construction using proxy+0x248 as vertical/base offset.
 0x895D3A: jz      loc_895EDA
 0x895D40: xor     eax, eax
 0x895D42: mov     [esp+114h+var_54], eax
@@ -903,3 +903,48 @@
 0x895EFA: mov     esp, ebp
 0x895EFC: pop     ebp
 0x895EFD: retn    4
+0x9D65B0: lea     ecx, [ebp+info]
+0x9D65B6: jmp     sub_893510
+0x9D65BB: mov     eax, [ebp+var_100]
+0x9D65C1: push    eax
+0x9D65C2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D65C7: pop     ecx
+0x9D65C8: retn
+0x9D65C9: mov     eax, [ebp+var_9C]
+0x9D65CF: push    eax
+0x9D65D0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D65D5: pop     ecx
+0x9D65D6: retn
+0x9D65D7: mov     eax, [ebp+var_9C]
+0x9D65DD: push    eax
+0x9D65DE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D65E3: pop     ecx
+0x9D65E4: retn
+0x9D65E5: mov     eax, [ebp+var_9C]
+0x9D65EB: push    eax
+0x9D65EC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D65F1: pop     ecx
+0x9D65F2: retn
+0x9D65F3: mov     eax, [ebp+var_9C]
+0x9D65F9: push    eax
+0x9D65FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D65FF: pop     ecx
+0x9D6600: retn
+0x9D6601: lea     ecx, [ebp+var_60]
+0x9D6604: jmp     sub_8A5090
+0x9D6609: mov     eax, [ebp+var_9C]
+0x9D660F: push    eax
+0x9D6610: call    sub_6078C0
+0x9D6615: pop     ecx
+0x9D6616: retn
+0x9D6617: mov     edx, [esp-4+arg_4]
+0x9D661B: lea     eax, [edx-104h]
+0x9D6621: mov     ecx, [edx-108h]
+0x9D6627: xor     ecx, eax
+0x9D6629: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D662E: add     eax, 0Ch
+0x9D6631: mov     ecx, [edx-8]
+0x9D6634: xor     ecx, eax
+0x9D6636: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D663B: mov     eax, offset stru_AFE400
+0x9D6640: jmp     ___CxxFrameHandler3

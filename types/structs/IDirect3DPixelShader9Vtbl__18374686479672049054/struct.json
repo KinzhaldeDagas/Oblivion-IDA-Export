@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirect3DPixelShader9Vtbl",
+  "definition": "struct IDirect3DPixelShader9Vtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirect3DPixelShader9 *This, const IID *const riid, void **ppvObj);\nULONG (__stdcall *AddRef)(IDirect3DPixelShader9 *This);\nULONG (__stdcall *Release)(IDirect3DPixelShader9 *This);\nHRESULT (__stdcall *GetDevice)(IDirect3DPixelShader9 *This, IDirect3DDevice9 **ppDevice);\nHRESULT (__stdcall *GetFunction)(IDirect3DPixelShader9 *This, void *, UINT *pSizeOfData); ///< \n                                                                                          ///< \n                                                                                          ///< [Host shader API evidence 2026-10-02; stage-shader-token-capture/native.log, not an Oblivion call-site discovery] Twelve valid VS/PS model 1/2/3 cases preserve complete original bytecode, including literal 0000FFFF words inside DEF immediate constants and COMMENT payloads. GetFunction with physically sufficient output storage returned S_OK/full exact bytecode/intact following guard for incoming sizes 0,1,required-1,required,required+4,UINT_MAX (72 reads). This local provider treats the size as output for these cases. Duplicate creations from identical words produced distinct live COM identities. Failed Reset returned INVALIDCALL for both existing VS/PS GetFunction and new creation; incoming size=777 remained unchanged. Initial hand-authored VS1 fixture without DCL was rejected INVALIDCALL; adding its input DCL made it valid. Native pointer capture was found to search raw words for END; token-length framing is required so comment/constant data cannot truncate shaders. Capturing framing is not opcode/register/capability legality validation.\n                                                                                          ///< \n                                                                                          ///< [Renderer capture fix validated 2026-10-02, stage-shader-token-capture] Raw-word END search has been replaced in source by bounded SM1 operand-count / SM2+ encoded-length / COMMENT-length framing. Capture and publication registry share this scanner. Release build plus shader publication registry CPU, actual live-hook CPU and native/DX11 pixel/recovery WARP checks passed. Exact public capture/publication comparison preserved all 569 stored shader files (corpus manifest) and 12 native-tested fixtures; truncation, trailing-program and guard-page checks passed. This is transport validation only: shader factory opcode/register/capability admission is still unfinished and native shader allocation remains active. No deployment or live Oblivion suppression/FPS claim.\n}\n",
   "id": 18374686479672049054,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DPixelShader9 *This, const IID *const riid, void **ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DPixelShader9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DPixelShader9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDevice",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DPixelShader9 *This, IDirect3DDevice9 **ppDevice)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\n\n[Host shader API evidence 2026-10-02; stage-shader-token-capture/native.log, not an Oblivion call-site discovery] Twelve valid VS/PS model 1/2/3 cases preserve complete original bytecode, including literal 0000FFFF words inside DEF immediate constants and COMMENT payloads. GetFunction with physically sufficient output storage returned S_OK/full exact bytecode/intact following guard for incoming sizes 0,1,required-1,required,required+4,UINT_MAX (72 reads). This local provider treats the size as output for these cases. Duplicate creations from identical words produced distinct live COM identities. Failed Reset returned INVALIDCALL for both existing VS/PS GetFunction and new creation; incoming size=777 remained unchanged. Initial hand-authored VS1 fixture without DCL was rejected INVALIDCALL; adding its input DCL made it valid. Native pointer capture was found to search raw words for END; token-length framing is required so comment/constant data cannot truncate shaders. Capturing framing is not opcode/register/capability legality validation.\n\n[Renderer capture fix validated 2026-10-02, stage-shader-token-capture] Raw-word END search has been replaced in source by bounded SM1 operand-count / SM2+ encoded-length / COMMENT-length framing. Capture and publication registry share this scanner. Release build plus shader publication registry CPU, actual live-hook CPU and native/DX11 pixel/recovery WARP checks passed. Exact public capture/publication comparison preserved all 569 stored shader files (corpus manifest) and 12 native-tested fixtures; truncation, trailing-program and guard-page checks passed. This is transport validation only: shader factory opcode/register/capability admission is still unfinished and native shader allocation remains active. No deployment or live Oblivion suppression/FPS claim.",
       "name": "GetFunction",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DPixelShader9 *This, void *, UINT *pSizeOfData)"
     }
   ],
   "name": "IDirect3DPixelShader9Vtbl",
+  "ordinal": 9262,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

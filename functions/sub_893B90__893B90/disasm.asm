@@ -45,7 +45,7 @@
 0x893C31: mov     ecx, [esi+8]
 0x893C34: cmp     ecx, eax
 0x893C36: jz      short loc_893C3D
-0x893C38: call    sub_8AC0A0
+0x893C38: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x893C3D: cmp     dword ptr [ebx+17Ch], 1
 0x893C44: fldz
 0x893C46: fstp    [esp+1C4h+var_16C]
@@ -63,7 +63,7 @@
 0x893C74: mov     ecx, [esi+8]
 0x893C77: test    ecx, ecx
 0x893C79: jz      loc_893E28
-0x893C7F: call    sub_8AC0C0
+0x893C7F: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x893C84: test    eax, eax
 0x893C86: mov     [esp+1C4h+var_1A4], eax
 0x893C8A: jz      loc_893E28
@@ -114,7 +114,7 @@
 0x893D35: movaps  xmm1, [esp+1CCh+var_140]
 0x893D3D: addps   xmm0, xmm1
 0x893D40: movaps  [esp+1CCh+var_F0], xmm0
-0x893D48: call    sub_88FCC0
+0x893D48: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x893D4D: mov     edx, [edi+10h]
 0x893D50: mov     esi, [edx+10h]
 0x893D53: test    esi, esi
@@ -142,7 +142,7 @@
 0x893DAE: movaps  xmm1, [esp+1CCh+var_140]
 0x893DB6: addps   xmm0, xmm1
 0x893DB9: movaps  [esp+1CCh+var_110], xmm0
-0x893DC1: call    sub_88FCC0
+0x893DC1: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x893DC6: fld     dword ptr [esi+0Ch]
 0x893DC9: fstp    [esp+1C4h+var_1A0]
 0x893DCD: push    0; int
@@ -867,3 +867,40 @@
 0x8948F8: mov     esp, ebp
 0x8948FA: pop     ebp
 0x8948FB: retn    8
+0x536DD0: mov     edx, ecx
+0x536DD2: mov     eax, [edx+8]
+0x536DD5: test    eax, eax
+0x536DD7: js      short locret_536E0F
+0x536DD9: mov     ecx, ds:0BA9DE4h
+0x536DDF: push    esi
+0x536DE0: mov     esi, large fs:2Ch
+0x536DE7: mov     ecx, [esi+ecx*4]
+0x536DEA: mov     ecx, [ecx+19Ch]
+0x536DF0: test    ecx, ecx
+0x536DF2: pop     esi
+0x536DF3: jnz     short loc_536DFB
+0x536DF5: mov     ecx, ds:0BA7D9Ch
+0x536DFB: mov     edx, [edx]
+0x536DFD: and     eax, 3FFFFFFFh
+0x536E02: add     eax, eax
+0x536E04: push    14h
+0x536E06: add     eax, eax
+0x536E08: push    eax
+0x536E09: push    edx
+0x536E0A: call    sub_8A75D0
+0x536E0F: retn
+0x9D64D0: lea     ecx, [ebp+var_60]; void *
+0x9D64D3: jmp     sub_4F5E90
+0x9D64D8: lea     ecx, [ebp+var_180]
+0x9D64DE: jmp     loc_536DD0
+0x9D64E3: mov     edx, [esp-4+arg_4]
+0x9D64E7: lea     eax, [edx-1B4h]
+0x9D64ED: mov     ecx, [edx-1B8h]
+0x9D64F3: xor     ecx, eax
+0x9D64F5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D64FA: add     eax, 0Ch
+0x9D64FD: mov     ecx, [edx-8]
+0x9D6500: xor     ecx, eax
+0x9D6502: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6507: mov     eax, offset stru_AFE37C
+0x9D650C: jmp     ___CxxFrameHandler3

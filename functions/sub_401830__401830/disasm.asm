@@ -1,7 +1,7 @@
 0x401830: push    ebx
 0x401831: push    esi
 0x401832: push    edi; lpCriticalSection
-0x401833: mov     edi, [esp+0Ch+Size]
+0x401833: mov     edi, dword ptr [esp+0Ch+Size]
 0x401837: mov     esi, ecx
 0x401839: mov     eax, [esi]
 0x40183B: mov     edx, [eax+8]
@@ -21,7 +21,7 @@
 0x401873: mov     eax, dword_B32B04
 0x401878: push    edi
 0x401879: mov     dword_B0201C, eax
-0x40187E: call    sub_4014A0
+0x40187E: call    MemoryHeap_BeginPressureRecovery
 0x401883: add     esp, 4
 0x401886: push    1; int
 0x401888: push    edi; Size

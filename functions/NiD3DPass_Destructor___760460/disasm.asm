@@ -21,7 +21,7 @@
 0x76048F: test    [esp+10h+arg_0], 1
 0x760494: jz      short loc_76049F
 0x760496: push    ebx
-0x760497: call    FormHeapFree
+0x760497: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76049C: add     esp, 4
 0x76049F: pop     edi
 0x7604A0: pop     esi
@@ -33,7 +33,7 @@
 0x7604AD: test    [esp+4+arg_0], 1
 0x7604B2: jz      short loc_7604BD
 0x7604B4: push    ebp
-0x7604B5: call    FormHeapFree
+0x7604B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7604BA: add     esp, 4
 0x7604BD: mov     eax, ebp
 0x7604BF: pop     ebp

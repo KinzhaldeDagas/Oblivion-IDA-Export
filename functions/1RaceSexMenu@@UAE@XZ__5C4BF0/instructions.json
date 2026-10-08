@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5C4C39",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5C4C48",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5C4C60",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x5C4C6F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x5C4C92",
-    "line": "call    SetCameraFOV_0",
+    "line": "call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x5C4CA1",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4CA3",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x5C4CB2",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4CB4",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5C4CC8",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5C4CCC",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x5C4CDD",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x5C4D18",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x5C4D20",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5C4D26",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x5C4D39",
-    "line": "push    offset stru_B3FCA0.SpinCount",
+    "line": "push    offset stru_B3FCB8",
     "mnemonic": "push",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x5C4D59",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4D5B",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x5C4D62",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x5C4D6F",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4D71",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x5C4D78",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x5C4D85",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4D87",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x5C4D8E",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x5C4D9B",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C4D9D",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x5C4DA4",
-    "line": "call    sub_473200",
+    "line": "call    ActorAnimData_ResetControllerSequences; Controller-sequence reset/rebind phase. Clears active slots 4/0/1/2, deactivates the queued/current blend sequence, restores key/state sentinels, removes a controller object from the actor root, then rebinds or repairs every non-__TempBlendSequence__ manager sequence according to the flag. This is whole-object reset logic, not a per-key cleanup API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x5C4DF5",
-    "line": "call    ??1Menu@@UAE@XZ; Menu::~Menu(void)",
+    "line": "call    ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -910,5 +910,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C1190",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1193",
+    "line": "jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1198",
+    "line": "push    offset BSStringT_Clear; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9C119D",
+    "line": "push    10h; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C119F",
+    "line": "push    8; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C11A1",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C11A4",
+    "line": "add     eax, 930h",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9C11A9",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C11AA",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C11AF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C11B0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C11B4",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C11B7",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C11BA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C11BC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C11C1",
+    "line": "mov     eax, offset stru_AEA2C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C11C6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,4 @@
-0x7716E0: cmp     [esp+arg_0], 0
+0x7716E0: cmp     [esp+needsNPOTFallback], 0; Conditional NPOT fallback: on the relevant renderer capability path, replace ADDRESSU/V with CLAMP and clear legacy wrap states.
 0x7716E5: push    esi
 0x7716E6: mov     esi, ecx
 0x7716E8: jz      loc_771781
@@ -23,7 +23,7 @@
 0x771727: push    3
 0x771729: push    1
 0x77172B: push    edx
-0x77172C: call    eax
+0x77172C: call    eax; NPOT fallback can replace authored ADDRESSU=WRAP with D3DTADDRESS_CLAMP(3), subject to renderer capability flags.
 0x77172E: mov     ecx, ds:0B42758h
 0x771734: mov     edx, [ecx]
 0x771736: mov     eax, [esi]
@@ -32,7 +32,7 @@
 0x771740: push    3
 0x771742: push    2
 0x771744: push    eax
-0x771745: call    edx
+0x771745: call    edx; NPOT fallback can replace authored ADDRESSV=WRAP with D3DTADDRESS_CLAMP(3), subject to renderer capability flags.
 0x771747: mov     esi, 0C6h ; 'Æ'
 0x77174C: mov     edi, 8
 0x771751: mov     ecx, ds:0B42758h

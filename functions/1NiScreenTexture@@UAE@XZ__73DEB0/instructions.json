@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x73DEB0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass225: NiScreenTexture destructor asks renderer to purge +0x1C buffer cache, then releases +0x14 texturing property and record array.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x73DEE8",
-    "line": "call    sub_7014E0",
+    "line": "call    sub_7014E0; Pass225: Dispatches live renderer vtable +0xC0 purge for NiScreenTexture before object teardown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x73DF1C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -292,5 +292,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CADD0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADD3",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CADD8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADDB",
+    "line": "add     ecx, 8; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADDE",
+    "line": "jmp     sub_6C4090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CADE3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADE6",
+    "line": "add     ecx, 14h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADE9",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CADEE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CADF2",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADF5",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADF8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CADFA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CADFF",
+    "line": "mov     eax, offset stru_AF3400",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAE04",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

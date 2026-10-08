@@ -1,4 +1,4 @@
 BOOL __stdcall sub_6E54D0(__int16 a1)
 {
-  return a1 == 0;
+  return a1 == 0; /*0x6e54da*/
 }

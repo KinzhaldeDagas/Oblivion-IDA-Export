@@ -124,7 +124,7 @@
 0x5177C2: push    edx; ArgList
 0x5177C3: push    edi; a5
 0x5177C4: mov     ecx, esi; a1
-0x5177C6: call    CommandInfo_Execute?
+0x5177C6: call    ScriptRunner_ExecuteCompiledInstruction; TES4 authoritative script instruction executor. Handles expression/control opcodes directly and dispatches ordinary CommandInfo execute callbacks for vanilla script commands.
 0x5177CB: test    al, al
 0x5177CD: jz      short loc_5177E4
 0x5177CF: mov     ebx, [esp+750h+a10]
@@ -133,11 +133,24 @@
 0x5177DA: mov     [esp+750h+a7], ebp
 0x5177DE: jb      loc_517754
 0x5177E4: xor     ebp, ebp
-0x5177E6: lea     ecx, [esp+750h+var_720]; void *
+0x5177E6: lea     ecx, [esp+750h+var_720]; this
 0x5177EA: mov     [esi+14h], ebp
 0x5177ED: mov     [esp+750h+var_4], 0FFFFFFFFh
-0x5177F8: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x5177F8: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x5177FD: mov     al, 1
 0x5177FF: jmp     loc_5176D0
 0x517804: mov     [edi+20h], ebp
 0x517807: jmp     short loc_5177E6
+0x9B7390: lea     ecx, [ebp-720h]; this
+0x9B7396: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9B739B: mov     edx, [esp+arg_4]
+0x9B739F: lea     eax, [edx-740h]
+0x9B73A5: mov     ecx, [edx-744h]
+0x9B73AB: xor     ecx, eax
+0x9B73AD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B73B2: add     eax, 10h
+0x9B73B5: mov     ecx, [edx-4]
+0x9B73B8: xor     ecx, eax
+0x9B73BA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B73BF: mov     eax, offset stru_AE1F90
+0x9B73C4: jmp     ___CxxFrameHandler3

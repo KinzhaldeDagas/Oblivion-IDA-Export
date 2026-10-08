@@ -9,7 +9,7 @@
 0x53B740: fstp    [esp+4Ch+var_4C]
 0x53B743: push    esi
 0x53B744: mov     ebp, ecx
-0x53B746: call    nullsub_returnVoid_2arg
+0x53B746: call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.
 0x53B74B: mov     edi, [esi+10h]
 0x53B74E: test    edi, edi
 0x53B750: mov     ebx, [esi+14h]
@@ -44,12 +44,12 @@
 0x53B7C0: push    4
 0x53B7C2: mov     [esp+4Ch+var_C], edx
 0x53B7C6: mov     [esp+4Ch+var_8], eax
-0x53B7CA: call    NiNode_GetNiPropertyByID
+0x53B7CA: call    NiNode_GetNiPropertyByID;
 0x53B7CF: test    eax, eax
 0x53B7D1: jz      short loc_53B83C
 0x53B7D3: mov     ecx, [ebp+8]
 0x53B7D6: push    4
-0x53B7D8: call    NiNode_GetNiPropertyByID
+0x53B7D8: call    NiNode_GetNiPropertyByID;
 0x53B7DD: mov     edx, [eax]
 0x53B7DF: mov     ecx, eax
 0x53B7E1: mov     eax, [edx+54h]
@@ -62,7 +62,7 @@
 0x53B7F2: jz      short loc_53B83C
 0x53B7F4: mov     ecx, [ebp+8]
 0x53B7F7: push    4
-0x53B7F9: call    NiNode_GetNiPropertyByID
+0x53B7F9: call    NiNode_GetNiPropertyByID;
 0x53B7FE: test    eax, eax
 0x53B800: jz      short loc_53B83C
 0x53B802: fld     [esp+48h+var_18]
@@ -83,12 +83,12 @@
 0x53B839: mov     [eax+78h], ecx
 0x53B83C: mov     ecx, [ebp+0Ch]
 0x53B83F: push    4
-0x53B841: call    NiNode_GetNiPropertyByID
+0x53B841: call    NiNode_GetNiPropertyByID;
 0x53B846: test    eax, eax
 0x53B848: jz      short loc_53B8B3
 0x53B84A: mov     ecx, [ebp+0Ch]
 0x53B84D: push    4
-0x53B84F: call    NiNode_GetNiPropertyByID
+0x53B84F: call    NiNode_GetNiPropertyByID;
 0x53B854: mov     edx, [eax]
 0x53B856: mov     ecx, eax
 0x53B858: mov     eax, [edx+54h]
@@ -101,7 +101,7 @@
 0x53B869: jz      short loc_53B8B3
 0x53B86B: mov     ecx, [ebp+0Ch]
 0x53B86E: push    4
-0x53B870: call    NiNode_GetNiPropertyByID
+0x53B870: call    NiNode_GetNiPropertyByID;
 0x53B875: test    eax, eax
 0x53B877: jz      short loc_53B8B3
 0x53B879: fld     [esp+48h+var_C]
@@ -264,7 +264,7 @@
 0x53BA75: jz      loc_53BB7F
 0x53BA7B: mov     ecx, [ebp+esi*4+8]
 0x53BA7F: push    4
-0x53BA81: call    NiNode_GetNiPropertyByID
+0x53BA81: call    NiNode_GetNiPropertyByID;
 0x53BA86: mov     edi, eax
 0x53BA88: test    edi, edi
 0x53BA8A: jnz     short loc_53BA90
@@ -277,7 +277,7 @@
 0x53BA99: test    eax, eax
 0x53BA9B: jz      short loc_53BAAE
 0x53BA9D: lea     ecx, [ecx+0]
-0x53BAA0: cmp     eax, offset dword_B4335C
+0x53BAA0: cmp     eax, offset stru_B4335C
 0x53BAA5: jz      short loc_53BACC
 0x53BAA7: mov     eax, [eax+4]
 0x53BAAA: test    eax, eax
@@ -300,7 +300,7 @@
 0x53BAD0: xor     eax, eax
 0x53BAD2: push    eax; a2
 0x53BAD3: mov     ecx, ebx; this
-0x53BAD5: call    sub_802890
+0x53BAD5: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x53BADA: mov     eax, [esp+48h+arg_0]
 0x53BADE: fld     dword ptr [eax+0D8h]
 0x53BAE4: fstp    dword ptr [ebx+80h]
@@ -330,7 +330,7 @@
 0x53BB2B: mov     ecx, [ebp+esi*4+10h]
 0x53BB2F: push    ecx; a2
 0x53BB30: mov     ecx, [ebp+esi*4+8]; this
-0x53BB34: call    sub_405680
+0x53BB34: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x53BB39: mov     edi, [ebp+esi*4+10h]
 0x53BB3D: test    edi, edi
 0x53BB3F: jz      short loc_53BB65
@@ -349,15 +349,15 @@
 0x53BB5D: mov     dword ptr [ebp+esi*4+10h], 0
 0x53BB65: push    0; a2
 0x53BB67: mov     ecx, ebx; this
-0x53BB69: call    sub_802890
+0x53BB69: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x53BB6E: fldz
 0x53BB70: fstp    dword ptr [ebx+80h]
 0x53BB76: mov     ecx, [ebp+esi*4+8]; this
-0x53BB7A: call    NiAVObject_InitializePropertyState
+0x53BB7A: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x53BB7F: mov     edi, [ebp+esi*4+8]
 0x53BB83: push    6
 0x53BB85: mov     ecx, edi
-0x53BB87: call    NiNode_GetNiPropertyByID
+0x53BB87: call    NiNode_GetNiPropertyByID;
 0x53BB8C: test    eax, eax
 0x53BB8E: jnz     short loc_53BB97
 0x53BB90: or      word ptr [edi+18h], 1

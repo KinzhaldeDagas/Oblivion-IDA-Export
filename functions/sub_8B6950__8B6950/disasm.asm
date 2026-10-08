@@ -4,7 +4,7 @@
 0x8B6958: jz      short loc_8B696D
 0x8B695A: mov     eax, [esi+0Ch]
 0x8B695D: push    eax
-0x8B695E: call    FormHeapFree
+0x8B695E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8B6963: add     esp, 4
 0x8B6966: mov     dword ptr [esi+0Ch], 0
 0x8B696D: pop     esi

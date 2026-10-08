@@ -133,3 +133,24 @@
 0x578AFC: jmp     short loc_578B00
 0x578AFE: mov     al, 22h ; '"'; jumptable 00578AF3 cases 147,148
 0x578B00: mov     byte ptr [esp+68h+arg_0], al
+0x575720: push    esi
+0x575721: mov     esi, ecx
+0x575723: mov     eax, [esi+1Ch]
+0x575726: push    eax
+0x575727: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x57572C: xor     eax, eax
+0x57572E: add     esp, 4
+0x575731: mov     [esi+1Ch], eax
+0x575734: mov     [esi+22h], ax
+0x575738: mov     [esi+20h], ax
+0x57573C: pop     esi
+0x57573D: retn
+0x9BE6A0: lea     ecx, [ebp-44h]
+0x9BE6A3: jmp     loc_575720
+0x9BE6A8: mov     edx, [esp+arg_4]
+0x9BE6AC: lea     eax, [edx-58h]
+0x9BE6AF: mov     ecx, [edx-5Ch]
+0x9BE6B2: xor     ecx, eax
+0x9BE6B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE6B9: mov     eax, offset stru_AE7DB4
+0x9BE6BE: jmp     ___CxxFrameHandler3

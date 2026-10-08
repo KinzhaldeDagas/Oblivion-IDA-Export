@@ -52,7 +52,7 @@
 0x68D407: call    dword ptr ds:0A28078h
 0x68D40D: mov     ecx, [edi+3Ch]
 0x68D410: push    offset dword_A7D0EC
-0x68D415: call    NiObjectNET_GetExtraData
+0x68D415: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x68D41A: mov     esi, eax
 0x68D41C: test    esi, esi
 0x68D41E: jnz     short loc_68D459
@@ -97,16 +97,16 @@
 0x68D495: cmp     [esp+34h+var_20], 0
 0x68D49A: jz      loc_68D6DF
 0x68D4A0: mov     ecx, ebx; this
-0x68D4A2: call    TESObjectREFR_GetParentCell
+0x68D4A2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x68D4A7: push    3
 0x68D4A9: push    ebx; TESObjectREFR *
 0x68D4AA: call    sub_4C9BE0
 0x68D4AF: add     esp, 4
 0x68D4B2: push    eax
 0x68D4B3: mov     ecx, ebx; this
-0x68D4B5: call    TESObjectREFR_GetParentCell
+0x68D4B5: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x68D4BA: mov     ecx, eax
-0x68D4BC: call    sub_441800
+0x68D4BC: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x68D4C1: mov     ecx, [edi+3Ch]
 0x68D4C4: mov     edx, [eax]
 0x68D4C6: mov     edx, [edx+84h]
@@ -267,3 +267,20 @@
 0x68D6EE: pop     ebx
 0x68D6EF: add     esp, 20h
 0x68D6F2: retn
+0x9CDE70: mov     eax, [ebp-20h]
+0x9CDE73: push    eax
+0x9CDE74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDE79: pop     ecx
+0x9CDE7A: retn
+0x9CDE7B: mov     eax, [ebp-20h]
+0x9CDE7E: push    eax
+0x9CDE7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDE84: pop     ecx
+0x9CDE85: retn
+0x9CDE86: mov     edx, [esp+arg_4]
+0x9CDE8A: lea     eax, [edx-24h]
+0x9CDE8D: mov     ecx, [edx-28h]
+0x9CDE90: xor     ecx, eax
+0x9CDE92: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDE97: mov     eax, offset stru_AF6F48
+0x9CDE9C: jmp     ___CxxFrameHandler3

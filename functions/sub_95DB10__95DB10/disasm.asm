@@ -9,9 +9,9 @@
 0x95DB25: add     esp, 8
 0x95DB28: cmp     eax, 5
 0x95DB2B: ja      short loc_95DB3D
-0x95DB2D: mov     eax, ds:funcs_95DB35[eax*4]
+0x95DB2D: mov     eax, [eax*4+0BA9A88h]
 0x95DB34: push    esi
-0x95DB35: call    eax ; funcs_95DB35
+0x95DB35: call    eax
 0x95DB37: add     esp, 4
 0x95DB3A: pop     esi
 0x95DB3B: pop     ecx

@@ -1,6 +1,6 @@
-0x4A55C0: push    esi
+0x4A55C0: push    esi; Verified: Sound region data allocation size 0x14 and constructor anchor for its Oblivion vtable; Fallout layout is larger and not transferable.
 0x4A55C1: mov     esi, ecx
-0x4A55C3: call    sub_4A34C0
+0x4A55C3: call    TESRegionData_InitializeBase
 0x4A55C8: xor     eax, eax
 0x4A55CA: mov     dword ptr [esi], offset ??_7TESRegionDataSound@@6B@; const TESRegionDataSound::`vftable'
 0x4A55D0: mov     [esi+0Ch], eax

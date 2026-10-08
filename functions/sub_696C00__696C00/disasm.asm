@@ -86,3 +86,18 @@
 0x696CD3: pop     ebx
 0x696CD4: add     esp, 10h
 0x696CD7: retn
+0x9C59F0: mov     ecx, [ebp-10h]; slot
+0x9C59F3: jmp     NiPointerSlot_Release
+0x9C59F8: mov     ecx, [ebp-10h]
+0x9C59FB: add     ecx, 4; slot
+0x9C59FE: jmp     NiPointerSlot_Release
+0x9C5A03: mov     ecx, [ebp-10h]
+0x9C5A06: add     ecx, 14h; slot
+0x9C5A09: jmp     NiPointerSlot_Release
+0x9C5A0E: mov     edx, [esp+arg_4]
+0x9C5A12: lea     eax, [edx-10h]
+0x9C5A15: mov     ecx, [edx-14h]
+0x9C5A18: xor     ecx, eax
+0x9C5A1A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5A1F: mov     eax, offset stru_AEE13C
+0x9C5A24: jmp     ___CxxFrameHandler3

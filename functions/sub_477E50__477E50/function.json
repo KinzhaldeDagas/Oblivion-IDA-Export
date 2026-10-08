@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x477E50",
+      "0x477E86"
+    ]
+  ],
+  "chunks_sha256": "ca6b120415a717cfbd1a495a653153ac6ecea2eee3f0e5685688c089e6b80612",
+  "comment_regular": "Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.",
+  "comment_repeatable": "Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_477E50",
+  "display_name": "ActorAnimData_StartQueuedIdleAction",
   "end_ea": "0x477E86",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_477E50",
+  "name": "ActorAnimData_StartQueuedIdleAction",
   "segment": ".text",
   "sha256": "ca6b120415a717cfbd1a495a653153ac6ecea2eee3f0e5685688c089e6b80612",
   "size": 54,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x477E50",
+  "total_chunk_size": 54,
   "type": "char __thiscall(ActorAnimData *this, PlayerCharacter *)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 5

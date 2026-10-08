@@ -117,7 +117,7 @@
 0x577D99: call    sub_574E00
 0x577D9E: mov     ecx, [esp+104h+var_AC]
 0x577DA2: push    ecx
-0x577DA3: call    FormHeapFree
+0x577DA3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x577DA8: mov     esi, [ebp+arg_4]
 0x577DAB: add     esp, 4
 0x577DAE: cmp     [esp+104h+var_F0], 1
@@ -166,7 +166,7 @@
 0x577E37: mov     ecx, [esp+104h+var_78]
 0x577E3E: push    ecx
 0x577E3F: mov     byte ptr [esp+108h+var_4], 5
-0x577E47: call    FormHeapFree
+0x577E47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x577E4C: mov     edi, [esp+108h+var_B4.m_data]
 0x577E50: add     esp, 4
 0x577E53: cmp     edi, ebx
@@ -255,7 +255,7 @@
 0x577F7C: mov     eax, [esp+104h+var_70]
 0x577F83: push    eax
 0x577F84: mov     byte ptr [esp+108h+var_4], 5
-0x577F8C: call    FormHeapFree
+0x577F8C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x577F91: add     esp, 4
 0x577F94: mov     [esp+104h+var_70], ebx
 0x577F9B: mov     [esp+104h+var_6A], bx
@@ -311,7 +311,7 @@
 0x57802F: call    sub_574E00
 0x578034: mov     edx, [esp+104h+var_88]
 0x578038: push    edx
-0x578039: call    FormHeapFree
+0x578039: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57803E: add     esp, 4
 0x578041: test    byte ptr [esp+104h+var_F0], 22h
 0x578046: mov     [esp+104h+var_88], ebx
@@ -342,7 +342,7 @@
 0x57809F: mov     edx, [esp+104h+var_60]
 0x5780A6: push    edx
 0x5780A7: mov     byte ptr [esp+108h+var_4], 5
-0x5780AF: call    FormHeapFree
+0x5780AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5780B4: add     esp, 4
 0x5780B7: mov     [esp+104h+var_60], ebx
 0x5780BE: mov     [esp+104h+var_5A], bx
@@ -387,9 +387,9 @@
 0x578138: mov     esi, [esp+104h+Str1]
 0x57813C: cmp     esi, ebx
 0x57813E: jz      loc_5783B1
-0x578144: push    offset off_A68AF4; Str2
-0x578149: push    esi; Str1
-0x57814A: call    __strcmp
+0x578144: push    offset off_A68AF4; right
+0x578149: push    esi; left
+0x57814A: call    CRT_StricmpLocaleDispatch
 0x57814F: add     esp, 8
 0x578152: cmp     eax, ebx
 0x578154: jnz     loc_5783B1
@@ -397,9 +397,9 @@
 0x57815E: cmp     edi, ebx
 0x578160: mov     [esp+104h+var_F1], 1
 0x578165: jz      loc_578400
-0x57816B: push    offset off_A68AF0; Str2
-0x578170: push    edi; Str1
-0x578171: call    __strcmp
+0x57816B: push    offset off_A68AF0; right
+0x578170: push    edi; left
+0x578171: call    CRT_StricmpLocaleDispatch
 0x578176: add     esp, 8
 0x578179: cmp     eax, ebx
 0x57817B: jnz     loc_57834B
@@ -425,7 +425,7 @@
 0x5781BB: call    sub_574E00
 0x5781C0: mov     edx, [esp+104h+var_68]
 0x5781C7: push    edx
-0x5781C8: call    FormHeapFree
+0x5781C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5781CD: mov     eax, [esp+108h+var_F0]
 0x5781D1: add     esp, 4
 0x5781D4: test    al, 22h
@@ -461,7 +461,7 @@
 0x578242: mov     ecx, [esp+104h+var_80]
 0x578249: push    ecx
 0x57824A: mov     byte ptr [esp+108h+var_4], 5
-0x578252: call    FormHeapFree
+0x578252: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x578257: mov     eax, [esp+108h+var_E8]
 0x57825B: mov     dl, [esi+eax]
 0x57825E: add     eax, 1
@@ -500,7 +500,7 @@
 0x5782D2: mov     eax, [esp+104h+var_AC]
 0x5782D6: push    eax
 0x5782D7: mov     byte ptr [esp+108h+var_4], 5
-0x5782DF: call    FormHeapFree
+0x5782DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5782E4: add     esp, 4
 0x5782E7: mov     [esp+104h+var_AC], ebx
 0x5782EB: mov     word ptr [esp+104h+var_A8+2], bx
@@ -535,8 +535,8 @@
 0x578346: add     edi, 1
 0x578349: jmp     short loc_5782F7
 0x57834B: push    offset aWidth; "WIDTH"
-0x578350: push    edi; Str1
-0x578351: call    __strcmp
+0x578350: push    edi; left
+0x578351: call    CRT_StricmpLocaleDispatch
 0x578356: add     esp, 8
 0x578359: cmp     eax, ebx
 0x57835B: jnz     short loc_57837C
@@ -549,8 +549,8 @@
 0x578374: add     esp, 0Ch
 0x578377: jmp     loc_578400
 0x57837C: push    offset aHeight; "HEIGHT"
-0x578381: push    edi; Str1
-0x578382: call    __strcmp
+0x578381: push    edi; left
+0x578382: call    CRT_StricmpLocaleDispatch
 0x578387: add     esp, 8
 0x57838A: cmp     eax, ebx
 0x57838C: jnz     short loc_578400
@@ -585,9 +585,9 @@
 0x5783FC: mov     edi, [esp+104h+var_C8.m_data]
 0x578400: cmp     esi, ebx
 0x578402: jz      loc_5787A4
-0x578408: push    offset off_A68ADC; Str2
-0x57840D: push    esi; Str1
-0x57840E: call    __strcmp
+0x578408: push    offset off_A68ADC; right
+0x57840D: push    esi; left
+0x57840E: call    CRT_StricmpLocaleDispatch
 0x578413: add     esp, 8
 0x578416: cmp     eax, ebx
 0x578418: jnz     loc_5784B7
@@ -595,8 +595,8 @@
 0x578423: cmp     edi, ebx
 0x578425: jz      loc_5787A4
 0x57842B: push    offset aAlign; "ALIGN"
-0x578430: push    edi; Str1
-0x578431: call    __strcmp
+0x578430: push    edi; left
+0x578431: call    CRT_StricmpLocaleDispatch
 0x578436: add     esp, 8
 0x578439: cmp     eax, ebx
 0x57843B: jnz     loc_5787A4
@@ -604,40 +604,40 @@
 0x578445: cmp     esi, ebx
 0x578447: jz      loc_5787A4
 0x57844D: push    offset aLeft; "LEFT"
-0x578452: push    esi; Str1
-0x578453: call    __strcmp
+0x578452: push    esi; left
+0x578453: call    CRT_StricmpLocaleDispatch
 0x578458: add     esp, 8
 0x57845B: cmp     eax, ebx
 0x57845D: jnz     short loc_57846F
 0x57845F: mov     [esp+104h+var_30], 1
 0x57846A: jmp     loc_5787A4
 0x57846F: push    offset aCenter; "CENTER"
-0x578474: push    esi; Str1
-0x578475: call    __strcmp
+0x578474: push    esi; left
+0x578475: call    CRT_StricmpLocaleDispatch
 0x57847A: add     esp, 8
 0x57847D: cmp     eax, ebx
 0x57847F: jnz     short loc_578491
 0x578481: mov     [esp+104h+var_30], 2
 0x57848C: jmp     loc_5787A4
 0x578491: push    offset aRight; "RIGHT"
-0x578496: push    esi; Str1
-0x578497: call    __strcmp
+0x578496: push    esi; left
+0x578497: call    CRT_StricmpLocaleDispatch
 0x57849C: add     esp, 8
 0x57849F: cmp     eax, ebx
 0x5784A1: jnz     loc_5787A4
 0x5784A7: mov     [esp+104h+var_30], 4
 0x5784B2: jmp     loc_5787A4
 0x5784B7: push    offset aFont; "FONT"
-0x5784BC: push    esi; Str1
-0x5784BD: call    __strcmp
+0x5784BC: push    esi; left
+0x5784BD: call    CRT_StricmpLocaleDispatch
 0x5784C2: add     esp, 8
 0x5784C5: cmp     eax, ebx
 0x5784C7: jnz     loc_5787A4
 0x5784CD: cmp     edi, ebx
 0x5784CF: jz      loc_5787A4
 0x5784D5: push    offset aFace; "FACE"
-0x5784DA: push    edi; Str1
-0x5784DB: call    __strcmp
+0x5784DA: push    edi; left
+0x5784DB: call    CRT_StricmpLocaleDispatch
 0x5784E0: add     esp, 8
 0x5784E3: cmp     eax, ebx
 0x5784E5: jnz     short loc_578544
@@ -646,10 +646,10 @@
 0x5784F0: mov     ecx, [esp+104h+var_D8]
 0x5784F4: mov     edx, [ecx+esi*4]
 0x5784F7: mov     eax, [edx+4]
-0x5784FA: push    eax; Str2
+0x5784FA: push    eax; right
 0x5784FB: mov     eax, [esp+108h+Src]
-0x5784FF: push    eax; Str1
-0x578500: call    __strcmp
+0x5784FF: push    eax; left
+0x578500: call    CRT_StricmpLocaleDispatch
 0x578505: add     esp, 8
 0x578508: test    eax, eax
 0x57850A: jz      short loc_578529
@@ -671,8 +671,8 @@
 0x57853F: call    sub_577120
 0x578544: mov     eax, [esp+104h+var_C8.m_data]
 0x578548: push    offset aColor; "COLOR"
-0x57854D: push    eax; Str1
-0x57854E: call    __strcmp
+0x57854D: push    eax; left
+0x57854E: call    CRT_StricmpLocaleDispatch
 0x578553: add     esp, 8
 0x578556: cmp     eax, ebx
 0x578558: jnz     loc_5787A4
@@ -856,24 +856,24 @@
 0x5787B3: jz      loc_577DF8
 0x5787B9: mov     esi, [esp+104h+Str1]
 0x5787BD: push    offset aBr; "BR"
-0x5787C2: push    esi; Str1
-0x5787C3: call    __strcmp
+0x5787C2: push    esi; left
+0x5787C3: call    CRT_StricmpLocaleDispatch
 0x5787C8: add     esp, 8
 0x5787CB: cmp     eax, ebx
 0x5787CD: jnz     short loc_5787D9
 0x5787CF: add     [esp+104h+var_EC], 1
 0x5787D4: jmp     loc_577DF8
 0x5787D9: push    offset aP; "P"
-0x5787DE: push    esi; Str1
-0x5787DF: call    __strcmp
+0x5787DE: push    esi; left
+0x5787DF: call    CRT_StricmpLocaleDispatch
 0x5787E4: add     esp, 8
 0x5787E7: cmp     eax, ebx
 0x5787E9: jnz     short loc_5787F5
 0x5787EB: add     [esp+104h+var_EC], 2
 0x5787F0: jmp     loc_577DF8
 0x5787F5: push    offset aHr; "HR"
-0x5787FA: push    esi; Str1
-0x5787FB: call    __strcmp
+0x5787FA: push    esi; left
+0x5787FB: call    CRT_StricmpLocaleDispatch
 0x578800: add     esp, 8
 0x578803: cmp     eax, ebx
 0x578805: jnz     short loc_57882B
@@ -886,8 +886,8 @@
 0x578822: mov     [esp+104h+var_EC], ebx
 0x578826: jmp     loc_577DF8
 0x57882B: push    offset aFont_0; "/FONT"
-0x578830: push    esi; Str1
-0x578831: call    __strcmp
+0x578830: push    esi; left
+0x578831: call    CRT_StricmpLocaleDispatch
 0x578836: add     esp, 8
 0x578839: cmp     eax, ebx
 0x57883B: jnz     loc_577DF8
@@ -954,25 +954,25 @@
 0x5788E9: mov     edi, [esp+104h+var_CC]
 0x5788ED: mov     eax, [esp+104h+var_2C.m_data]
 0x5788F4: push    eax
-0x5788F5: call    FormHeapFree
+0x5788F5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5788FA: mov     ecx, [esp+108h+a2]
 0x5788FE: push    ecx
 0x5788FF: mov     [esp+10Ch+var_2C.m_data], ebx
 0x578906: mov     [esp+10Ch+var_2C.m_bufLen], bx
 0x57890E: mov     [esp+10Ch+var_2C.m_dataLen], bx
-0x578916: call    FormHeapFree
+0x578916: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57891B: mov     edx, [esp+10Ch+Src]
 0x57891F: push    edx
-0x578920: call    FormHeapFree
+0x578920: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x578925: mov     eax, [esp+110h+var_C8.m_data]
 0x578929: push    eax
-0x57892A: call    FormHeapFree
+0x57892A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57892F: mov     ecx, [esp+114h+Str1]
 0x578933: push    ecx
-0x578934: call    FormHeapFree
+0x578934: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x578939: mov     edx, [esp+118h+var_B4.m_data]
 0x57893D: push    edx
-0x57893E: call    FormHeapFree
+0x57893E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x578943: add     esp, 18h
 0x578946: mov     eax, edi
 0x578948: mov     ecx, [esp+104h+var_C]
@@ -984,3 +984,44 @@
 0x57895A: mov     esp, ebp
 0x57895C: pop     ebp
 0x57895D: retn    8
+0x575720: push    esi
+0x575721: mov     esi, ecx
+0x575723: mov     eax, [esi+1Ch]
+0x575726: push    eax
+0x575727: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x57572C: xor     eax, eax
+0x57572E: add     esp, 4
+0x575731: mov     [esi+1Ch], eax
+0x575734: mov     [esi+22h], ax
+0x575738: mov     [esi+20h], ax
+0x57573C: pop     esi
+0x57573D: retn
+0x9BE610: lea     ecx, [ebp+var_B4]; void *
+0x9BE616: jmp     BSStringT_Clear
+0x9BE61B: lea     ecx, [ebp+Str1]; void *
+0x9BE621: jmp     BSStringT_Clear
+0x9BE626: lea     ecx, [ebp+var_C8]; void *
+0x9BE62C: jmp     BSStringT_Clear
+0x9BE631: lea     ecx, [ebp+Src]; void *
+0x9BE637: jmp     BSStringT_Clear
+0x9BE63C: lea     ecx, [ebp+a2]; void *
+0x9BE642: jmp     BSStringT_Clear
+0x9BE647: lea     ecx, [ebp+var_48]
+0x9BE64A: jmp     loc_575720
+0x9BE64F: lea     ecx, [ebp+var_78]; void *
+0x9BE652: jmp     BSStringT_Clear
+0x9BE657: lea     ecx, [ebp+var_70]; void *
+0x9BE65A: jmp     BSStringT_Clear
+0x9BE65F: lea     ecx, [ebp+var_60]; void *
+0x9BE662: jmp     BSStringT_Clear
+0x9BE667: lea     ecx, [ebp+var_80]; void *
+0x9BE66A: jmp     BSStringT_Clear
+0x9BE66F: lea     ecx, [ebp+var_AC]; void *
+0x9BE675: jmp     BSStringT_Clear
+0x9BE67A: mov     edx, [esp-4+arg_4]
+0x9BE67E: lea     eax, [edx-0F4h]
+0x9BE684: mov     ecx, [edx-0F8h]
+0x9BE68A: xor     ecx, eax
+0x9BE68C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE691: mov     eax, offset stru_AE7D30
+0x9BE696: jmp     ___CxxFrameHandler3

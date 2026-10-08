@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x57DA90",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x57DA94",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+root]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x57DA9C",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+maxFocus]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x57DB34",
-    "line": "mov     ecx, [esp+20h+var_4]",
+    "line": "mov     ecx, [esp+20h+var_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x57DB3F",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x57DB44",
-    "line": "push    eax",
+    "line": "push    eax; maxFocus",
     "mnemonic": "push",
     "size": 1
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x57DB4D",
-    "line": "call    sub_57DA90",
+    "line": "call    InterfaceManager__ScanForMaxFocus; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x57DB79",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x57DB90",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+maxFocus]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x57DBDA",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x57DC0F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

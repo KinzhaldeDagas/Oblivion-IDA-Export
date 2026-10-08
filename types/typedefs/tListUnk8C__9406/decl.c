@@ -1,1 +1,4 @@
-tListUnk8C
+struct tListUnk8C
+{
+NodeUnk8C node;
+};

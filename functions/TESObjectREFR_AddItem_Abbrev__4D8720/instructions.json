@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D8720",
-    "line": "push    ebx",
+    "line": "push    ebx; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4D8730",
-    "line": "mov     edi, [esp+0Ch+arg_4]",
+    "line": "mov     edi, [esp+0Ch+extraList]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x4D8744",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D8748",
-    "line": "mov     edx, [esp+20h+arg_0]",
+    "line": "mov     edx, [esp+20h+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,31 +115,31 @@
   },
   {
     "ea": "0x4D874F",
-    "line": "push    ecx",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D8750",
-    "line": "push    edi",
+    "line": "push    edi; extraList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D8751",
-    "line": "push    edx",
+    "line": "push    edx; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D8752",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D8754",
-    "line": "call    ContainerExtraData_AddItem",
+    "line": "call    ContainerExtraData_AddItem; Canonical form-based container add: item, optional instance ExtraDataList, and signed count. All four external callers enter only at this head; the formerly split interior blocks are one logical routine ending in retn 0x0C. A proxy-to-source conversion hook here covers actor-hit/form adds but not ordinary world-reference pickup.",
     "mnemonic": "call",
     "size": 5
   },

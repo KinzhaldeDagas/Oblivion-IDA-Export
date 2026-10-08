@@ -1,4 +1,4 @@
-0x69B5B2: call    TESObjectREFR_GetParentCell
+0x69B5B2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x69B5B7: mov     edx, [esi]
 0x69B5B9: push    eax; int
 0x69B5BA: mov     eax, [edx+30h]

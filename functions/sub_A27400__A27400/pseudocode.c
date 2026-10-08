@@ -1,14 +1,11 @@
 void __cdecl sub_A27400()
 {
-  void (__thiscall ***v0)(_DWORD, int); // esi
+  float v0; // esi
 
-  v0 = (void (__thiscall ***)(_DWORD, int))dword_B43114;
-  if ( dword_B43114 )
+  v0 = flt_B43110[1]; /*0xa27401*/
+  if ( LODWORD(flt_B43110[1]) ) /*0xa27409*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(dword_B43114 + 4)) )
-    {
-      if ( v0 )
-        (**v0)(v0, 1);
-    }
+    if ( !InterlockedDecrement((volatile LONG *)(LODWORD(flt_B43110[1]) + 4)) && v0 != 0.0 ) /*0xa2741b*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v0))(COERCE_FLOAT(LODWORD(v0)), 1); /*0xa27425*/
   }
 }

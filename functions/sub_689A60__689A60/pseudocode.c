@@ -1,103 +1,99 @@
-int *__thiscall sub_689A60(int *this, int *a2)
+// Verified copies low-path route entries into newly allocated TravelPathNode records. Each clone is set to kind 0 and stores the route TESObjectREFR*; these references remain non-owned.
+void __thiscall TravelPath_CopyRouteNodes(TravelPath *this, BSSimpleList_VoidPtr *sourceNodes)
 {
-  int *result; // eax
-  int *i; // ebx
-  _BYTE *v4; // eax
-  _BYTE *v5; // edi
-  int v6; // eax
-  int *v7; // esi
-  bool v8; // zf
-  _DWORD *v9; // eax
-  int *v10; // eax
-  int *v11; // esi
-  _DWORD *v12; // eax
+  BSSimpleList_VoidPtr *i; // ebx
+  TravelPathNode *v3; // eax
+  TravelPathNode *v4; // edi
+  int v5; // eax
+  _DWORD *p_data; // esi
+  bool v7; // zf
+  TravelPathNode **v8; // eax
+  BSSimpleList_VoidPtr::NodeVoid **p_next; // eax
+  BSSimpleList_VoidPtr *p_nodes; // esi
+  TravelPathNode **v11; // eax
 
-  sub_689A00(this);
-  result = a2;
-  for ( i = 0; a2; result = a2 )
+  TravelPath_ClearNodes(this); /*0x689a8b*/
+  for ( i = 0; sourceNodes; sourceNodes = (BSSimpleList_VoidPtr *)sourceNodes->firstNode.next ) /*0x689a9e*/
   {
-    if ( !a2[1] && !*a2 )
-      return result;
-    v4 = (_BYTE *)FormHeapAlloc(8u);
-    if ( v4 )
-      v5 = sub_68B0C0(v4);
+    if ( !sourceNodes->firstNode.next && !sourceNodes->firstNode.data ) /*0x689aaf*/
+      return; /*0x689aaf*/
+    v3 = (TravelPathNode *)FormHeapAlloc(8u); /*0x689ab7*/
+    if ( v3 ) /*0x689ac9*/
+      v4 = TravelPathNode_Init(v3); /*0x689ad2*/
     else
-      v5 = 0;
-    sub_68B1D0((int)v5, 0);
-    sub_68B100(v5, *a2);
-    if ( !i )
+      v4 = 0; /*0x689ad6*/
+    TravelPathNode_SetKind(v4, TravelPathNodeKind_Reference); /*0x689ae3*/
+    TravelPathNode_SetReference(v4, (TESObjectREFR *)sourceNodes->firstNode.data); /*0x689aed*/
+    if ( !i ) /*0x689af4*/
     {
-      i = this + 1;
-      if ( v5 )
+      i = &this->nodes; /*0x689b42*/
+      if ( v4 ) /*0x689b47*/
       {
-        v10 = this + 2;
-        v11 = this + 1;
-        if ( *(this + 2) )
+        p_next = &this->nodes.firstNode.next; /*0x689b4c*/
+        p_nodes = &this->nodes; /*0x689b4f*/
+        if ( this->nodes.firstNode.next ) /*0x689b49*/
         {
-          do
+          do /*0x689b5b*/
           {
-            v11 = (int *)*v10;
-            v8 = *(_DWORD *)(*v10 + 4) == 0;
-            v10 = (int *)(*v10 + 4);
+            p_nodes = (BSSimpleList_VoidPtr *)*p_next; /*0x689b53*/
+            v7 = (*p_next)->next == 0; /*0x689b55*/
+            p_next = &(*p_next)->next; /*0x689b58*/
           }
-          while ( !v8 );
+          while ( !v7 ); /*0x689b5b*/
         }
-        if ( *v11 )
+        if ( p_nodes->firstNode.data ) /*0x689b5d*/
         {
-          v12 = (_DWORD *)FormHeapAlloc(8u);
-          if ( v12 )
+          v11 = (TravelPathNode **)FormHeapAlloc(8u); /*0x689b63*/
+          if ( v11 ) /*0x689b6d*/
           {
-            *v12 = v5;
-            v12[1] = 0;
-            v11[1] = (int)v12;
+            *v11 = v4; /*0x689b6f*/
+            v11[1] = 0; /*0x689b71*/
+            p_nodes->firstNode.next = (BSSimpleList_VoidPtr::NodeVoid *)v11; /*0x689b74*/
           }
           else
           {
-            v11[1] = 0;
+            p_nodes->firstNode.next = 0; /*0x689b7b*/
           }
         }
         else
         {
-          *v11 = (int)v5;
+          p_nodes->firstNode.data = v4; /*0x689b80*/
         }
       }
-      goto LABEL_26;
+      continue; /*0x689b77*/
     }
-    if ( v5 )
+    if ( v4 ) /*0x689af8*/
     {
-      v6 = (int)(i + 1);
-      v7 = i;
-      if ( i[1] )
+      v5 = (int)&i->firstNode.next; /*0x689afd*/
+      p_data = &i->firstNode.data; /*0x689b00*/
+      if ( i->firstNode.next ) /*0x689afa*/
       {
-        do
+        do /*0x689b0c*/
         {
-          v7 = *(int **)v6;
-          v8 = *(_DWORD *)(*(_DWORD *)v6 + 4) == 0;
-          v6 = *(_DWORD *)v6 + 4;
+          p_data = *(_DWORD **)v5; /*0x689b04*/
+          v7 = *(_DWORD *)(*(_DWORD *)v5 + 4) == 0; /*0x689b06*/
+          v5 = *(_DWORD *)v5 + 4; /*0x689b09*/
         }
-        while ( !v8 );
+        while ( !v7 ); /*0x689b0c*/
       }
-      if ( *v7 )
+      if ( *p_data ) /*0x689b0e*/
       {
-        v9 = (_DWORD *)FormHeapAlloc(8u);
-        if ( v9 )
+        v8 = (TravelPathNode **)FormHeapAlloc(8u); /*0x689b14*/
+        if ( v8 ) /*0x689b1e*/
         {
-          *v9 = v5;
-          v9[1] = 0;
-          v7[1] = (int)v9;
+          *v8 = v4; /*0x689b20*/
+          v8[1] = 0; /*0x689b22*/
+          p_data[1] = v8; /*0x689b25*/
         }
         else
         {
-          v7[1] = 0;
+          p_data[1] = 0; /*0x689b2f*/
         }
-        i = (int *)i[1];
-        goto LABEL_26;
+        i = (BSSimpleList_VoidPtr *)i->firstNode.next; /*0x689b28*/
+        continue; /*0x689b2b*/
       }
-      *v7 = (int)v5;
+      *p_data = v4; /*0x689b37*/
     }
-    i = (int *)i[1];
-LABEL_26:
-    a2 = (int *)a2[1];
+    i = (BSSimpleList_VoidPtr *)i->firstNode.next; /*0x689b39*/
   }
-  return result;
 }

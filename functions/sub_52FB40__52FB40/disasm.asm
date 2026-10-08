@@ -1,4 +1,4 @@
-0x52FB40: push    esi
+0x52FB40: push    esi; TESTopic constructor stores the DialogueType argument in topicType. New runtime DIAL records are constructed with zero at 0x44E49C. LoadForm does not initialize a separate scratch candidate for DATA.
 0x52FB41: mov     esi, ecx
 0x52FB43: call    TESForm_constr
 0x52FB48: mov     dword ptr [esi+18h], offset ??_7TESFullName@@6B@; const TESFullName::`vftable'
@@ -13,8 +13,8 @@
 0x52FB6F: mov     [esi+34h], eax
 0x52FB72: mov     [esi+38h], ax
 0x52FB76: mov     [esi+3Ah], ax
-0x52FB7A: mov     [esi+30h], eax
-0x52FB7D: mov     al, [esp+4+arg_0]
+0x52FB7A: mov     [esi+30h], eax; TESTopic constructor initializes the runtime XIDX backing field unk30 to zero; topicType is a separate field assigned from the constructor argument at 0x52FB81.
+0x52FB7D: mov     al, [esp+4+topicType]
 0x52FB81: mov     [esi+24h], al
 0x52FB84: mov     byte ptr [esi+4], 39h ; '9'
 0x52FB88: mov     eax, esi

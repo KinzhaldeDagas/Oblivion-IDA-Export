@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x5FF720",
-    "line": "mov     eax, [edx+348h]",
+    "line": "mov     eax, [edx+348h]; Physical-hit armor path first calls actor vtbl+0x348 and compares armor rating against 100; if >=100, vanilla uses factor 1.0 before the later max-reduction cap. AVU replaces the call with its modified armor wrapper.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x5FF739",
-    "line": "mov     eax, [edx+348h]",
+    "line": "mov     eax, [edx+348h]; Physical-hit armor path second actor vtbl+0x348 call used when armor rating is below 100, then divided by 100 to produce damage-reduction factor. AVU replaces the call with its modified armor wrapper.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5FF75D",
-    "line": "fld     [esp+arg_34]",
+    "line": "fld     [esp+arg_34]; Physical-hit final armor-reduction cap. Vanilla caps the factor against fArmorRatingMax; AVU detours this so the final cap tracks fMaxArmorRating / 100 after its armor-rating DR/cap rewrite.",
     "mnemonic": "fld",
     "size": 4
   },

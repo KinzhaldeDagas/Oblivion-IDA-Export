@@ -1,5 +1,5 @@
 int sub_9F9E40()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A22C, (int)"sSkillDescIllusion", (int)"Illusion Description");
-  return atexit(sub_A23C90);
+  GameSetting_ConstrAndReg(&stru_B3A22C, "sSkillDescIllusion", "Illusion Description"); /*0x9f9e4f*/
+  return atexit(sub_A23C90); /*0x9f9e5f*/
 }

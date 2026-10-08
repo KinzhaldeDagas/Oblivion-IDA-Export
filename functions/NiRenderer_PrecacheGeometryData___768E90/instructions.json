@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x768EB0",
-    "line": "cmp     eax, offset dword_B3FD54",
+    "line": "cmp     eax, offset stru_B3FD54",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x768EDF",
-    "line": "call    sub_768890",
+    "line": "call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x768F1E",
-    "line": "call    sub_763FE0",
+    "line": "call    NiDX9Renderer_EnterRendererAndPrecache",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x768F36",
-    "line": "push    offset NiD3DShaderInterfaceString",
+    "line": "push    0B42858h",
     "mnemonic": "push",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x768F72",
-    "line": "call    NiGeometryGroup__AddGeometryDataToGroup",
+    "line": "call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x768F97",
-    "line": "call    sub_768580",
+    "line": "call    NiDX9Renderer_QueueSkinnedGeometryPrepack",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x768FA0",
-    "line": "call    sub_764040",
+    "line": "call    NiDX9Renderer_LeavePrecacheAndRenderer",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x768FB2",
-    "line": "push    offset dword_B3FCD4",
+    "line": "push    offset stru_B3FCD4",
     "mnemonic": "push",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x768FDB",
-    "line": "push    offset dword_B3FD04",
+    "line": "push    offset stru_B3FD04",
     "mnemonic": "push",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x769014",
-    "line": "call    sub_768470",
+    "line": "call    NiDX9Renderer_QueueStaticGeometryPrepack",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x76901D",
-    "line": "call    sub_764040",
+    "line": "call    NiDX9Renderer_LeavePrecacheAndRenderer",
     "mnemonic": "call",
     "size": 5
   },

@@ -12,7 +12,7 @@
 0x8AAD84: jz      loc_8AAE44
 0x8AAD8A: push    edi
 0x8AAD8B: push    eax
-0x8AAD8C: call    sub_497420
+0x8AAD8C: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x8AAD91: fld     [esp+14h+arg_0]
 0x8AAD95: mov     edi, eax
 0x8AAD97: add     esp, 4

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x485E80",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x485E89",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -39,6 +39,372 @@
     "ea": "0x485E8D",
     "line": "lea     ecx, [ecx+0]",
     "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x485E90",
+    "line": "test    dl, dl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485E92",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___EntryFound",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485E94",
+    "line": "mov     ecx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485E96",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485E98",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___FindEntryLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485E9A",
+    "line": "cmp     [ecx+8], esi; Exact TESForm comparison occurs before the optional ExtraReferencePointer FormID filter. Reference provenance cannot redirect an entry from proxy AMMO to source WEAP.",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x485E9D",
+    "line": "jnz     short ContainerExtraData_GetEntryForForm___FindEntryLoop_Next",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x485E9F",
+    "line": "xor     dl, dl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x485EA1",
+    "line": "jmp     short loc_485EA6",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x485EA3",
+    "line": "mov     eax, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x485EA6",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485EA8",
+    "line": "jnz     short ContainerExtraData_GetEntryForForm___FindEntryLoop",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x485EAA",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x485EAC",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485EAD",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x485EB0",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485EB2",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___Return_0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485EB4",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x485EB5",
+    "line": "mov     ebx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485EB7",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485EB9",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x485EBA",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___Return_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485EBC",
+    "line": "mov     ebp, [esp+0Ch+referenceFormIDOrZero]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x485EC0",
+    "line": "test    ebp, ebp",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485EC2",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___Return_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485EC4",
+    "line": "mov     esi, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485EC6",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485EC8",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x485EC9",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___Return_0_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485ECB",
+    "line": "jmp     short ContainerExtraData_GetEntryForForm___ExtraDataLoop",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x485ED0",
+    "line": "mov     edi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485ED2",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485ED4",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___ExtraDataLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485ED6",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485ED8",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x485EDD",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485EDF",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___ExtraDataLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485EE1",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485EE3",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x485EE8",
+    "line": "cmp     [eax+0Ch], ebp",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x485EEB",
+    "line": "jz      short ContainerExtraData_GetEntryForForm___Return",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x485EED",
+    "line": "mov     esi, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x485EF0",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x485EF2",
+    "line": "jnz     short ContainerExtraData_GetEntryForForm___ExtraDataLoop",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x485EF4",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485EF5",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485EF6",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485EF7",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x485EF9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485EFA",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x485EFD",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485EFE",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485EFF",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485F01",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485F02",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485F03",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x485F06",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485F07",
+    "line": "mov     eax, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x485F09",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485F0A",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x485F0B",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
     "size": 3
   }
 ]

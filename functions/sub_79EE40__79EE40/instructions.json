@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79EE40",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion st_vector<SFrondGuide> copy constructor. Allocates sourceCount*0x30 and deep-copy-constructs each compact guide, including its owned SFrondVertex vector. The executable establishes the by-value layout.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x79EE70",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x79EEAD",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x79EEB3",
-    "line": "push    esi; char *",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EEB4",
-    "line": "call    sub_799FA0",
+    "line": "call    OB_stVector_SFrondGuide_Allocate_010201A0; Allocates count compact 0x30-byte SFrondGuide records from FormHeap and throws std::bad_alloc on count*0x30 overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x79EEE7",
-    "line": "mov     [ebp+arg_0], ecx",
+    "line": "mov     [ebp+source], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x79EEF1",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x79EEF7",
-    "line": "mov     byte ptr [ebp+arg_0], 0",
+    "line": "mov     byte ptr [ebp+source], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79EEFB",
-    "line": "mov     edx, [ebp+arg_0]",
+    "line": "mov     edx, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x79EEFF",
-    "line": "mov     edx, [ebp+arg_0]",
+    "line": "mov     edx, [ebp+source]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -421,25 +421,25 @@
   },
   {
     "ea": "0x79EF04",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EF05",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EF06",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79EF07",
-    "line": "call    sub_79C2E0",
+    "line": "call    OB_SFrondGuide_UninitializedCopy_010201A0; Exception-safe uninitialized copy of compact SFrondGuide records. Placement-copy-constructs [first,last) into destination; unwind cleanup destroys the already constructed prefix before rethrowing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x79EF28",
-    "line": "mov     ecx, [ebp+var_14]",
+    "line": "mov     ecx, [ebp+var_14]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79EF2B",
-    "line": "call    sub_79F000",
+    "line": "call    OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
     "mnemonic": "call",
     "size": 5
   },
@@ -543,6 +543,48 @@
     "ea": "0x79EF34",
     "line": "call    ThrowException??",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC480",
+    "line": "mov     edx, [esp+8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC484",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC487",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC48A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC48C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC491",
+    "line": "mov     eax, offset stru_AF5750",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC496",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

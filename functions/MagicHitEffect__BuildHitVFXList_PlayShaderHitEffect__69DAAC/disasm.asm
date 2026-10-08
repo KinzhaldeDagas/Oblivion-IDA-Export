@@ -1,4 +1,4 @@
-0x69DAAC: mov     ecx, [edi+14h]
+0x69DAAC: mov     ecx, [edi+14h]; Verified (Oblivion): shader-hit factory skips when aeFlags bit 0x2 is set; otherwise allocates 0x4C bytes, constructs from target parent reference and ActiveEffect, invokes the virtual initializer, destroys failures, and registers successes with ActorProcessManager. It also pushes each successful shader object onto the returned BSSimpleList; this list and the manager therefore hold separate references/roles.
 0x69DAAF: shr     ecx, 1
 0x69DAB1: test    cl, 1
 0x69DAB4: jnz     loc_69DB79
@@ -13,10 +13,10 @@
 0x69DAD6: mov     ecx, [edi+20h]
 0x69DAD9: mov     edx, [ecx]
 0x69DADB: mov     eax, [edx+4]
-0x69DADE: push    edi
+0x69DADE: push    edi; ownerActiveEffect
 0x69DADF: call    eax
-0x69DAE1: push    eax
-0x69DAE2: mov     ecx, esi
+0x69DAE1: push    eax; targetReference
+0x69DAE2: mov     ecx, esi; this
 0x69DAE4: call    MagicShaderHitEffect_constr_args
 0x69DAE9: mov     esi, eax
 0x69DAEB: jmp     short loc_69DAEF
@@ -28,9 +28,9 @@
 0x69DAFE: call    eax
 0x69DB00: test    al, al
 0x69DB02: jz      short loc_69DB6F
-0x69DB04: push    esi
-0x69DB05: mov     ecx, offset ActorProcessManager_ptr
-0x69DB0A: call    sub_678D30
+0x69DB04: push    esi; effect
+0x69DB05: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x69DB0A: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x69DB0F: test    ebp, ebp
 0x69DB11: jz      short loc_69DB30
 0x69DB13: push    esi

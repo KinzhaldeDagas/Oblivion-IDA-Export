@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7D3400",
+  "chunks": [
+    [
+      "0x7D3400",
+      "0x7D34B3"
+    ]
+  ],
+  "chunks_sha256": "7e89dcff48cff89a2593003fe331887ac799944faf9db5280d1d53fdf7556044",
+  "comment_regular": "Strong-own and classify the backing NiLight. When trackBackingPosition is set, seed cached source position from the NiPointLight world translation.",
+  "comment_repeatable": "Strong-own and classify the backing NiLight. When trackBackingPosition is set, seed cached source position from the NiPointLight world translation.\n\nMEF v57 IMPLEMENTED 2026-10-08: v57 source-binding observer invalidates affected source keys BEFORE old source release/destruction. New wrappers not yet present do not flush unrelated hot full-list indices. Also advances property-order epoch and disables active receiver scopes before callback-capable work.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowSceneLight_SetBackingLight",
   "end_ea": "0x7D34B3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D3400",
+  "name": "ShadowSceneLight_SetBackingLight",
   "segment": ".text",
   "sha256": "7e89dcff48cff89a2593003fe331887ac799944faf9db5280d1d53fdf7556044",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D3400",
-  "type": "char __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 179,
+  "type": "int __thiscall(ShadowSceneLight_DecodedLayout *self, void *backingLight)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 3
 }

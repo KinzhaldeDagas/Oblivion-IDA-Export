@@ -1,1 +1,1 @@
-RPC_IF_HANDLE
+typedef void *RPC_IF_HANDLE;

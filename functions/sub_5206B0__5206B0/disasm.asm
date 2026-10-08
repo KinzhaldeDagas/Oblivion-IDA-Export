@@ -1,4 +1,4 @@
-0x5206B0: push    ecx
+0x5206B0: push    ecx; Recursive idle candidate search: a node is a fallback if ANAM high bit is set or model path is .kf; child matches override parent fallback.
 0x5206B1: push    esi
 0x5206B2: push    edi
 0x5206B3: mov     edi, ecx
@@ -14,13 +14,13 @@
 0x5206D2: push    ebp
 0x5206D3: push    ecx
 0x5206D4: lea     ecx, [edi+30h]
-0x5206D7: call    sub_56A950
+0x5206D7: call    ConditionList_EvaluateForActor; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.
 0x5206DC: test    al, al
 0x5206DE: jz      loc_52076E
 0x5206E4: test    byte ptr [edi+38h], 80h
 0x5206E8: jnz     short loc_5206F5
 0x5206EA: mov     ecx, edi
-0x5206EC: call    sub_520220
+0x5206EC: call    TESIdleForm_ModelPathIsKF; TESIdleForm model path extension test: true only when the model path extension is exactly .kf.
 0x5206F1: test    al, al
 0x5206F3: jz      short loc_5206FB
 0x5206F5: mov     [esp+10h+var_4], edi
@@ -53,7 +53,7 @@
 0x52073C: push    ebp
 0x52073D: push    edx
 0x52073E: mov     ecx, eax
-0x520740: call    sub_5206B0
+0x520740: call    TESIdleForm_FindCandidateRecursive; Recursive idle candidate search: a node is a fallback if ANAM high bit is set or model path is .kf; child matches override parent fallback.
 0x520745: test    eax, eax
 0x520747: jnz     short loc_520754
 0x520749: add     esi, 1

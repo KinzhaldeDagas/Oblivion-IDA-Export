@@ -1,114 +1,93 @@
-unsigned int __thiscall sub_657340(void *this, _DWORD *Dst)
+unsigned int __thiscall MobileObject_LoadCharacterProxyState(void *this, MobileObject *Dst)
 {
   _DWORD *v3; // esi
   unsigned int result; // eax
   int (__thiscall ***v5)(_DWORD, int); // ebx
-  _DWORD *v6; // ebx
+  MobileObject *v6; // ebx
   int v7; // eax
-  TESSaveLoad *v8; // ecx
+  TESSaveLoadGame_SerializationView *v8; // ecx
   void *v9; // edx
-  size_t v10; // [esp-4h] [ebp-30h]
-  size_t v11; // [esp-4h] [ebp-30h]
-  size_t v12; // [esp-4h] [ebp-30h]
-  size_t v13; // [esp-4h] [ebp-30h]
-  size_t v14; // [esp-4h] [ebp-30h]
-  size_t v15; // [esp-4h] [ebp-30h]
-  size_t v16; // [esp-4h] [ebp-30h]
-  size_t v17; // [esp-4h] [ebp-30h]
-  size_t v18; // [esp-4h] [ebp-30h]
-  unsigned int v19; // [esp+Ch] [ebp-20h] BYREF
-  int v20; // [esp+10h] [ebp-1Ch] BYREF
+  unsigned int v10; // [esp+Ch] [ebp-20h] BYREF
+  int destination; // [esp+10h] [ebp-1Ch] BYREF
   NiPoint3 a2; // [esp+14h] [ebp-18h] BYREF
-  float v22[3]; // [esp+20h] [ebp-Ch] BYREF
+  float v13[3]; // [esp+20h] [ebp-Ch] BYREF
 
-  v3 = *(_DWORD **)(*(int (__thiscall **)(void *, unsigned int *))(*(_DWORD *)this + 0x18C))(this, &v19);
-  result = v19;
-  if ( v19 )
+  v3 = *(_DWORD **)(*(int (__thiscall **)(void *, unsigned int *))(*(_DWORD *)this + 0x18C))(this, &v10); /*0x657359*/
+  result = v10; /*0x65735b*/
+  if ( v10 ) /*0x657361*/
   {
-    v5 = (int (__thiscall ***)(_DWORD, int))v19;
-    result = InterlockedDecrement((volatile LONG *)(v19 + 4));
-    if ( !result )
-      result = (**v5)(v5, 1);
+    v5 = (int (__thiscall ***)(_DWORD, int))v10; /*0x657363*/
+    result = InterlockedDecrement((volatile LONG *)(v10 + 4)); /*0x657369*/
+    if ( !result ) /*0x657371*/
+      result = (**v5)(v5, 1); /*0x65737f*/
   }
-  if ( v3 )
+  if ( v3 ) /*0x657383*/
   {
-    v6 = Dst;
-    result = (*(int (__thiscall **)(_DWORD *, _DWORD))(*Dst + 0x198))(Dst, 0);
-    if ( !(_BYTE)result )
+    v6 = Dst; /*0x657389*/
+    result = ((int (__thiscall *)(MobileObject *, _DWORD))Dst->vtbl->super.IsDead)(Dst, 0); /*0x657399*/
+    if ( !(_BYTE)result ) /*0x65739d*/
     {
-      LODWORD(v10) = 4;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v10);
-      LODWORD(v11) = 4;
-      v3[0x7B] = Dst;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v3 + 0xA8, v11);
-      LODWORD(v12) = 4;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v20, v12);
-      v7 = v20;
-      v3[0x7D] = 0;
-      v3[0x7D] |= v7;
-      if ( (v7 & 0x800) != 0 && LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x23u )
+      SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 4u); /*0x6573b0*/
+      v3[0x7B] = Dst; /*0x6573c1*/
+      SaveLoad_LoadData(g_TESSaveLoadGame, v3 + 0xA8, 4u); /*0x6573ce*/
+      SaveLoad_LoadData(g_TESSaveLoadGame, &destination, 4u); /*0x6573e0*/
+      v7 = destination; /*0x6573e5*/
+      v3[0x7D] = 0; /*0x6573e9*/
+      v3[0x7D] |= v7; /*0x6573f3*/
+      if ( (v7 & 0x800) != 0 && g_TESSaveLoadGame->currentVersion >= 0x23u ) /*0x65740e*/
       {
-        LODWORD(v13) = 0xC;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a2, v13);
-        if ( (*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x36C))(this) )
+        SaveLoad_LoadData(g_TESSaveLoadGame, &a2, 0xCu); /*0x657417*/
+        if ( (*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x36C))(this) ) /*0x657426*/
         {
-          if ( (*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x380))(this) )
+          if ( (*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x380))(this) ) /*0x657436*/
           {
-            if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *))(*v6 + 0x190))(v6)
-              || !(*(int (__thiscall **)(_DWORD *))(*v6 + 0x380))(v6) )
+            if ( !v6->vtbl->super.IsActor((TESObjectREFR *)v6) /*0x657456*/
+              || !((int (__thiscall *)(MobileObject *))v6->vtbl[1].super.SetProcedureCompleted)(v6) )
             {
-              a2 = *(NiPoint3 *)(*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x380))(this);
+              a2 = *(NiPoint3 *)(*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x380))(this); /*0x65746a*/
             }
           }
         }
-        sub_452A10((bhkCharacterProxy *)v3, &a2);
+        sub_452A10((bhkCharacterProxy *)v3, &a2); /*0x657483*/
       }
-      if ( !(*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x36C))(this) )
-        sub_65AC20(v6, 0);
-      LODWORD(v13) = 0x10;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v3 + 0xB8, v13);
-      LODWORD(v14) = 0x10;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v3 + 0xBC, v14);
-      LODWORD(v15) = 0xC;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v22, v15);
-      sub_64B3A0(v3, v22);
-      result = (*(int (__thiscall **)(_DWORD *))(*v6 + 0x190))(v6);
-      if ( (_BYTE)result )
+      if ( !(*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x36C))(this) ) /*0x657492*/
+        sub_65AC20(v6, 0); /*0x65749b*/
+      SaveLoad_LoadData(g_TESSaveLoadGame, v3 + 0xB8, 0x10u); /*0x6574af*/
+      SaveLoad_LoadData(g_TESSaveLoadGame, v3 + 0xBC, 0x10u); /*0x6574c3*/
+      SaveLoad_LoadData(g_TESSaveLoadGame, v13, 0xCu); /*0x6574d5*/
+      bhkCharacterController_SetObjectVelocityFromWorldVector(v3, v13);// Loads saved world-space velocity vector and restores it to the proxy collision object through 0x64B3A0. /*0x6574e1*/
+      result = ((int (__thiscall *)(MobileObject *))v6->vtbl->super.IsActor)(v6); /*0x6574f0*/
+      if ( (_BYTE)result ) /*0x6574f4*/
       {
-        LODWORD(v16) = 4;
-        SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v3 + 0xC7, v16);
-        v8 = SaveLoad_CurrentSavegame;
-        v9 = v3 + 0xC8;
+        SaveLoad_LoadData(g_TESSaveLoadGame, v3 + 0xC7, 4u); /*0x657505*/
+        v8 = g_TESSaveLoadGame; /*0x65750a*/
+        v9 = v3 + 0xC8; /*0x657510*/
       }
       else
       {
-        v8 = SaveLoad_CurrentSavegame;
-        if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x20u )
+        v8 = g_TESSaveLoadGame; /*0x657518*/
+        if ( g_TESSaveLoadGame->currentVersion < 0x20u ) /*0x657522*/
         {
 LABEL_21:
-          if ( Dst == (_DWORD *)2 )
+          if ( Dst == (MobileObject *)2 ) /*0x65754b*/
           {
-            result = v3[0x7D];
-            if ( (result & 0x100) != 0 || (result >>= 9, (result & 1) != 0) )
-              *((float *)v3 + 0xC8) = 0.0;
+            result = v3[0x7D]; /*0x65754d*/
+            if ( (result & 0x100) != 0 || (result >>= 9, (result & 1) != 0) ) /*0x657562*/
+              *((float *)v3 + 0xC8) = 0.0; /*0x657566*/
           }
-          if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x77u )
+          if ( g_TESSaveLoadGame->currentVersion >= 0x77u ) /*0x657576*/
           {
-            LODWORD(v16) = 4;
-            SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v3 + 0xCB, v16);
-            LODWORD(v18) = 4;
-            return (unsigned int)SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v3 + 0xCC, v18);
+            SaveLoad_LoadData(g_TESSaveLoadGame, v3 + 0xCB, 4u); /*0x657581*/
+            return (unsigned int)SaveLoad_LoadData(g_TESSaveLoadGame, v3 + 0xCC, 4u); /*0x657595*/
           }
-          return result;
+          return result; /*0x657595*/
         }
-        v9 = v3 + 0xCA;
+        v9 = v3 + 0xCA; /*0x657524*/
       }
-      LODWORD(v16) = 4;
-      SaveLoad_LoadData((int)v8, v9, v16);
-      LODWORD(v17) = 4;
-      result = (unsigned int)SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v3 + 0xC9, v17);
-      goto LABEL_21;
+      SaveLoad_LoadData(v8, v9, 4u); /*0x65752d*/
+      result = (unsigned int)SaveLoad_LoadData(g_TESSaveLoadGame, v3 + 0xC9, 4u); /*0x657541*/
+      goto LABEL_21; /*0x657541*/
     }
   }
-  return result;
+  return result; /*0x65759a*/
 }

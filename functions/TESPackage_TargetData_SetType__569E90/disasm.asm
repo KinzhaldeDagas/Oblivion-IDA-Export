@@ -1,4 +1,4 @@
-0x569E90: movzx   edx, byte ptr [ecx]
+0x569E90: movzx   edx, byte ptr [ecx]; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x569E93: mov     eax, [esp+arg_0]
 0x569E97: cmp     edx, eax
 0x569E99: jz      short locret_569EB3

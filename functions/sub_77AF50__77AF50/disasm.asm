@@ -1,4 +1,4 @@
-0x77AF50: movzx   edx, [esp+arg_0]
+0x77AF50: movzx   edx, [esp+arg_0]; MoonSugarEffect decode: NiDX9RenderState SetVertexBlending helper. Maps requested blend count through cached table at this+0x0C and writes D3DRS_VERTEXBLEND (0x97).
 0x77AF55: mov     edx, [ecx+edx*4+0Ch]
 0x77AF59: mov     eax, [ecx]
 0x77AF5B: mov     eax, [eax+64h]

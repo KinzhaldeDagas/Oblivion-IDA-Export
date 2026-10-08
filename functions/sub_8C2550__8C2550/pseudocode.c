@@ -1,4 +1,4 @@
-void *sub_8C2550()
+NiRTTI *sub_8C2550()
 {
-  return &unk_BA80E0;
+  return &stru_BA80E0; /*0x8c2555*/
 }

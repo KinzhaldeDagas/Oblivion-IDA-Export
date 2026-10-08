@@ -1,100 +1,88 @@
-UInt32 __usercall TESObjectREF_UpdateNiNode@<eax>(
-        TESChildCELL *this@<ecx>,
-        int a2@<edi>,
-        double a3@<st1>,
-        double a4@<st0>)
+void __usercall TESObjectREF_UpdateNiNode(TESChildCELL *this@<ecx>, double a2@<st1>, double a3@<st0>)
 {
-  UInt32 result; // eax
+  int v5; // eax
+  int v6; // eax
   int v7; // eax
-  int v8; // eax
-  unsigned int v9; // ebp
-  int v10; // eax
+  unsigned int v8; // ebp
+  int v9; // eax
+  NiObject *v10; // eax
   NiObject *v11; // eax
-  NiObject *v12; // eax
-  int v13; // edi
-  int v14; // esi
+  int v12; // edi
+  int v13; // esi
+  ActorAnimData *v14; // eax
   int v15; // edx
-  int v16; // [esp+Ch] [ebp-10h]
-  int v17; // [esp+18h] [ebp-4h]
+  int v16; // [esp+18h] [ebp-4h]
 
-  result = *((_DWORD *)this + 2);
-  if ( (result & 0x20) == 0 )
+  v5 = *((_DWORD *)this + 2); /*0x4e3f34*/
+  if ( (v5 & 0x20) == 0 && (v5 & 0x800) == 0 ) /*0x4e3f4a*/
   {
-    result >>= 0xB;
-    if ( (result & 1) == 0 )
+    v6 = *(unsigned __int8 *)(*((_DWORD *)this + 7) + 4); /*0x4e3f53*/
+    if ( v6 == 0x1A || (unsigned int)(v6 - 0x23) <= 1 ) /*0x4e3f62*/
+      (*((void (__thiscall **)(TESChildCELL *))this->vtbl + 0x3F))(this); /*0x4e3f6e*/
+    v7 = (*((int (__usercall **)@<eax>(TESChildCELL *@<ecx>, double@<st0>, double@<st1>))this->vtbl + 0x55))( /*0x4e3f7b*/
+           this,
+           a3,
+           a2);
+    v8 = 0; /*0x4e3f7d*/
+    if ( v7 ) /*0x4e3f81*/
     {
-      v7 = *(unsigned __int8 *)(*((_DWORD *)this + 7) + 4);
-      if ( v7 == 0x1A || (unsigned int)(v7 - 0x23) <= 1 )
-        (*((void (__thiscall **)(TESChildCELL *))this->vtbl + 0x3F))(this);
-      v8 = (*((int (__usercall **)@<eax>(TESChildCELL *@<ecx>, double@<st0>, double@<st1>))this->vtbl + 0x55))(
-             this,
-             a4,
-             a3);
-      v9 = 0;
-      if ( v8 )
+      if ( *(_WORD *)(v7 + 0xB6) ) /*0x4e3f87*/
       {
-        if ( *(_WORD *)(v8 + 0xB6) )
+        v9 = **(_DWORD **)(v7 + 0xB0); /*0x4e3f9a*/
+        if ( v9 ) /*0x4e3f9e*/
         {
-          v10 = **(_DWORD **)(v8 + 0xB0);
-          if ( v10 )
+          v10 = *(NiObject **)(v9 + 0xC); /*0x4e3fa4*/
+          if ( v10 ) /*0x4e3fa9*/
           {
-            v11 = *(NiObject **)(v10 + 0xC);
-            if ( v11 )
+            v11 = NiRTTI_Cast((BSStringT *)&stru_B3CAC0, v10); /*0x4e3fb6*/
+            v12 = (int)v11; /*0x4e3fbb*/
+            v16 = 0; /*0x4e3fc2*/
+            if ( v11 ) /*0x4e3fc6*/
             {
-              v16 = a2;
-              v12 = NiRTTI_Cast(&stru_B3CAC0, v11);
-              v13 = (int)v12;
-              v17 = 0;
-              if ( v12 )
+              if ( ((int)v11[1].__vftable & 8) != 0 ) /*0x4e3fd1*/
               {
-                if ( ((int)v12[1].__vftable & 8) != 0 )
+                if ( !HIWORD(v11[8].members.m_uiRefCount) ) /*0x4e3fd3*/
+                  goto LABEL_20; /*0x4e3fd3*/
+                do /*0x4e4030*/
                 {
-                  if ( !HIWORD(v12[8].members.m_uiRefCount) )
-                    goto LABEL_20;
-                  do
+                  v13 = *(_DWORD *)(*(_DWORD *)(v12 + 0x40) + 4 * v8); /*0x4e3fe3*/
+                  if ( v13 ) /*0x4e3fe8*/
                   {
-                    v14 = *(_DWORD *)(*(_DWORD *)(v13 + 0x40) + 4 * v9);
-                    if ( v14 )
+                    if ( *(_DWORD *)(v13 + 0x44) ) /*0x4e3fea*/
                     {
-                      if ( *(_DWORD *)(v14 + 0x44) )
+                      if ( sub_49F950(v12, v13, (int)this) ) /*0x4e3ff2*/
                       {
-                        if ( sub_49F950(v13, v14, (int)this) )
-                        {
-                          sub_4E0D90((ExtraDataList **)this, v14);
-                          a4 = 0.0;
-                          sub_6C9CB0(v14, 0.0, 0);
-                          sub_4D90D0(this, *(const char **)(v14 + 8));
-                        }
-                        else
-                        {
-                          ++v17;
-                        }
+                        sub_4E0D90((ExtraDataList **)this, v13); /*0x4e4001*/
+                        NiControllerSequence_Deactivate((NiControllerSequence *)v13, 0.0, 0); /*0x4e4010*/
+                        sub_4D90D0(this, *(const char **)(v13 + 8)); /*0x4e401b*/
+                      }
+                      else
+                      {
+                        ++v16; /*0x4e4022*/
                       }
                     }
-                    ++v9;
                   }
-                  while ( v9 < *(unsigned __int16 *)(v13 + 0x46) );
-                  if ( !v17 )
-LABEL_20:
-                    *(_WORD *)(v13 + 8) &= ~8u;
+                  ++v8; /*0x4e402b*/
                 }
+                while ( v8 < *(unsigned __int16 *)(v12 + 0x46) ); /*0x4e4030*/
+                if ( !v16 ) /*0x4e4038*/
+LABEL_20:
+                  *(_WORD *)(v12 + 8) &= ~8u; /*0x4e403a*/
               }
-              a2 = v16;
             }
           }
         }
       }
-      result = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x59))(this);
-      if ( result )
+    }
+    v14 = (ActorAnimData *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x59))(this); /*0x4e404b*/
+    if ( v14 ) /*0x4e4050*/
+    {
+      v15 = *((_DWORD *)this + 0xF); /*0x4e4052*/
+      if ( v15 ) /*0x4e4057*/
       {
-        v15 = *((_DWORD *)this + 0xF);
-        if ( v15 )
-        {
-          if ( *(_DWORD *)(v15 + 0x1C) )
-            return sub_476D10((AnimSequenceSingle *)result, a2, flt_B33E9C, a3, a4, (int)this, flt_B33E9C, flt_A30634);
-        }
+        if ( *(_DWORD *)(v15 + 0x1C) ) /*0x4e4059*/
+          ActorAnimData_Update(v14, (Actor *)this, *(float *)&MEMORY[0xB33E90][0xC], kTerrainLODQuadRayDirectionZ); /*0x4e4078*/
       }
     }
   }
-  return result;
 }

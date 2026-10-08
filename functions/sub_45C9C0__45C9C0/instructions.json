@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x45CA35",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x45CAC9",
-    "line": "push    edi; Str2",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CACA",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CACB",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x45CAE4",
-    "line": "push    edx; Str1",
+    "line": "push    edx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CAE5",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x45CB02",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45CB03",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x45CB0F",
-    "line": "push    edi; Str2",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x45CB15",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

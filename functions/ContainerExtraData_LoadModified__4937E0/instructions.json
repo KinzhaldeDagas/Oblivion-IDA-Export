@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4937F7",
-    "line": "mov     [esp+28h+var_14], ebp",
+    "line": "mov     [esp+28h+destination], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4937FF",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x49380C",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x493812",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x493818",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x493819",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x49383A",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x493890",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -337,19 +337,19 @@
   },
   {
     "ea": "0x493899",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x49389B",
-    "line": "lea     edx, [esp+2Ch+var_14]",
+    "line": "lea     edx, [esp+2Ch+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x49389F",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4938A4",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,13 +373,13 @@
   },
   {
     "ea": "0x4938AD",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4938B3",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -391,19 +391,19 @@
   },
   {
     "ea": "0x4938B9",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4938BA",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; EngineIssues review: ContainerExtraData_LoadModified reads save-controlled UInt16 inventory entry count before an allocation/nested-load loop.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4938BF",
-    "line": "cmp     [esp+28h+var_18], bp",
+    "line": "cmp     [esp+28h+var_18], bp; EnginePatch v3: ContainerExtraData inventory-entry count is clamped before per-entry allocation and nested load.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4938D0",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; EngineIssues review: ContainerExtraData_LoadModified per-entry loop allocates nodes and calls ContainerEntryExtraData_LoadModified; clamp count to remaining save bytes.",
     "mnemonic": "push",
     "size": 2
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4938DC",
-    "line": "jz      short loc_4938EA",
+    "line": "jz      short loc_4938EA; EnginePatch faithful-patch candidate: if FormHeapAlloc(0x0C) fails, original sets ebx=0 then calls ContainerEntryExtraData_LoadModified and dereferences [ebx+8]. This null-deref bug is assembly-confirmed.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x493900",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF v32 memory/load guard candidate confirmed: FormHeapAlloc(8) creates only the destination list-link node after EBX entry data is fully loaded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x493908",
-    "line": "cmp     eax, ebp",
+    "line": "cmp     eax, ebp; MEF v32 verified hook: on node allocation failure, route to existing cleanup at 0x49392F; non-null replays CMP/JZ/MOV and resumes at 0x49390E.",
     "mnemonic": "cmp",
     "size": 2
   },
   {
     "ea": "0x49390A",
-    "line": "jz      short loc_493920",
+    "line": "jz      short loc_493920; EnginePatch faithful-patch candidate: if FormHeapAlloc(8) for the container list node fails, original reaches mov [eax+4] with eax=0 at 0x493925. This null-deref bug is assembly-confirmed.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x49392F",
-    "line": "mov     edi, [ebx]",
+    "line": "mov     edi, [ebx]; Verified allocation-failure continuation for MEF v32: destroys EBX nested ExtraDataLists, frees EBX storage, reloads destination owner, then advances serialized-entry loop without mutating old list.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x49395F",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x493967",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x49396F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x4939A4",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x4939CB",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x4939D2",
-    "line": "movzx   eax, word ptr [esp+2Ch+var_14]",
+    "line": "movzx   eax, word ptr [esp+2Ch+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x4939F5",
-    "line": "movzx   edx, word ptr [esp+30h+var_14]",
+    "line": "movzx   edx, word ptr [esp+30h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x493A39",
-    "line": "movzx   ecx, word ptr [esp+30h+var_14]",
+    "line": "movzx   ecx, word ptr [esp+30h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x493A66",
-    "line": "movzx   eax, word ptr [esp+28h+var_14]",
+    "line": "movzx   eax, word ptr [esp+28h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },

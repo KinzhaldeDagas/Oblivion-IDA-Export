@@ -50,10 +50,10 @@
 0x771027: jbe     short loc_77107F
 0x771029: lea     esp, [esp+0]
 0x771030: mov     edx, [esp+18h+Size]
-0x771034: push    edx; Size
-0x771035: push    ebx; Src
-0x771036: push    edi; Dst
-0x771037: call    _memcpy
+0x771034: push    edx; byteCount
+0x771035: push    ebx; source
+0x771036: push    edi; destination
+0x771037: call    _memcpy;
 0x77103C: mov     eax, [esp+24h+Size]
 0x771040: mov     ecx, [esp+24h+var_8]
 0x771044: add     esp, 0Ch

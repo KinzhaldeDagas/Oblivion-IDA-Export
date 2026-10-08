@@ -11,10 +11,10 @@
 0x743A05: jz      short loc_743A3C
 0x743A07: mov     eax, [eax+10h]
 0x743A0A: mov     ecx, [esi+0Ch]
-0x743A0D: push    edi; Size
-0x743A0E: push    eax; Src
-0x743A0F: push    ecx; Dst
-0x743A10: call    _memcpy
+0x743A0D: push    edi; byteCount
+0x743A0E: push    eax; source
+0x743A0F: push    ecx; destination
+0x743A10: call    _memcpy;
 0x743A15: mov     eax, [esi+1Ch]
 0x743A18: add     [esi+0Ch], edi
 0x743A1B: add     [eax+10h], edi

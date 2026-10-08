@@ -1,7 +1,7 @@
-0x79C080: mov     ecx, [esp+arg_4]
-0x79C084: mov     eax, [esp+arg_8]
+0x79C080: mov     ecx, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Backward move-assignment for inner vector<float> owners. Transfers ownership by swapping begin/end/capacity fields from the source tail into the destination tail and returns the new destination start.
+0x79C084: mov     eax, [esp+destinationEnd]
 0x79C088: push    esi
-0x79C089: mov     esi, [esp+4+arg_0]
+0x79C089: mov     esi, [esp+4+first]
 0x79C08D: cmp     esi, ecx
 0x79C08F: jz      short loc_79C0C1
 0x79C091: push    edi

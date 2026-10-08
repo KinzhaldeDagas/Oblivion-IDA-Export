@@ -12,6 +12,6 @@
 0x69DC6F: mov     ecx, eax
 0x69DC71: call    BSSimpleList_Remove
 0x69DC76: mov     dword ptr [esi+18h], 0
-0x69DC7D: mov     ecx, esi
+0x69DC7D: mov     ecx, esi; self
 0x69DC7F: pop     esi
-0x69DC80: jmp     BSTempEffect_destr
+0x69DC80: jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.

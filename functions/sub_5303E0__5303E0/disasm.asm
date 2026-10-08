@@ -1,4 +1,4 @@
-0x5303E0: mov     eax, [esp+a3]
+0x5303E0: mov     eax, [esp+a3]; TESTopicInfo modified-form load override. The engine first loads ordinary TESForm state, then treats modified flag 0x10000000 as the entire serialized spoken=true state; there is no extra spoken payload.
 0x5303E4: push    esi
 0x5303E5: push    edi
 0x5303E6: mov     edi, [esp+8+Dst]
@@ -7,8 +7,8 @@
 0x5303EC: mov     esi, ecx
 0x5303EE: call    TESForm_LoadModifiedForm
 0x5303F3: test    edi, 10000000h
-0x5303F9: jz      short loc_5303FF
-0x5303FB: mov     byte ptr [esi+22h], 1
+0x5303F9: jz      short loc_5303FF; kTopicInfoModified_Spoken (0x10000000) is a presence bit: if present in the change mask, restore this INFO's global spoken byte.
+0x5303FB: mov     byte ptr [esi+22h], 1; Restore OblivionTopicInfo.spoken=1 at +0x22. SayOnce eligibility will subsequently reject this INFO for every speaker.
 0x5303FF: pop     edi
 0x530400: pop     esi
 0x530401: retn    8

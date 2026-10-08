@@ -1,4 +1,4 @@
-0x769340: push    ecx
+0x769340: push    ecx; Process the renderer pending-surface list at the scene presentation boundary by invoking each queued buffer's vtable+0x28 update/resolve operation. The shadow texture buffer is never queued because its predicate is false.
 0x769341: cmp     byte ptr [ecx+6F0h], 0
 0x769348: mov     [esp+4+var_4], ecx
 0x76934B: jnz     loc_7693D4
@@ -12,7 +12,6 @@
 0x769364: push    edi
 0x769365: lea     edi, [ecx+8F4h]
 0x76936B: jmp     short loc_769372
-0x76936D: align 10h
 0x769370: xor     edx, edx
 0x769372: mov     ebp, [edi+4]
 0x769375: mov     eax, [ebp+0]
@@ -37,7 +36,7 @@
 0x7693A6: mov     edx, [esi]
 0x7693A8: mov     eax, [edx+28h]
 0x7693AB: mov     ecx, esi
-0x7693AD: call    eax
+0x7693AD: call    eax; Deferred surface update/resolve dispatch for an item queued by EndUsingRenderTargetGroup.
 0x7693AF: lea     ecx, [esi+4]
 0x7693B2: push    ecx; lpAddend
 0x7693B3: call    ebx ; InterlockedDecrement

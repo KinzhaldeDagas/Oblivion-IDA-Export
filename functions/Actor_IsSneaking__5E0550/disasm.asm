@@ -1,4 +1,4 @@
-0x5E0550: push    esi
+0x5E0550: push    esi; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5E0551: mov     esi, ecx
 0x5E0553: cmp     dword ptr [esi+58h], 0
 0x5E0557: jz      short loc_5E0583

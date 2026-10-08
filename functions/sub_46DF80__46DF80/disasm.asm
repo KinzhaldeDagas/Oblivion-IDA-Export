@@ -1,4 +1,4 @@
-0x46DF80: push    esi
+0x46DF80: push    esi; MEF PERF 2026-09-07: PERF-2 destructor contract: component+4/+8 is embedded head; clear copies following node into head, frees dynamic node and old string, then frees last string. Batch index/scratch memory is separate temporary ownership; never free embedded head or retain pointers after clear. Existing partial-destination OOM semantics need explicit policy before optimization.
 0x46DF81: push    edi
 0x46DF82: mov     esi, ecx
 0x46DF84: cmp     dword ptr [esi+8], 0
@@ -14,15 +14,15 @@
 0x46DFA0: mov     edx, [eax]
 0x46DFA2: push    eax
 0x46DFA3: mov     [esi+4], edx
-0x46DFA6: call    FormHeapFree
+0x46DFA6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46DFAB: add     esp, 4
 0x46DFAE: push    edi
-0x46DFAF: call    FormHeapFree
+0x46DFAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46DFB4: add     esp, 4
 0x46DFB7: jmp     short loc_46DF84
 0x46DFB9: push    edi
 0x46DFBA: mov     dword ptr [esi+4], 0
-0x46DFC1: call    FormHeapFree
+0x46DFC1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46DFC6: add     esp, 4
 0x46DFC9: jmp     short loc_46DF84
 0x46DFCB: pop     edi

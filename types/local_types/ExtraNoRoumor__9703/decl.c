@@ -1,1 +1,5 @@
-ExtraNoRoumor
+struct ExtraNoRoumor
+{
+BSExtraData super;
+bool NoRumour;
+};

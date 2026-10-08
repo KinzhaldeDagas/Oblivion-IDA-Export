@@ -1,1 +1,5 @@
-tagTVDISPINFOEXW
+struct tagTVDISPINFOEXW
+{
+NMHDR hdr;
+TVITEMEXW item;
+};

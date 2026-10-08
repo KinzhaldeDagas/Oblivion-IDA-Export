@@ -14,7 +14,6 @@
 0x8E45AD: mov     [esp+60h+var_50], eax
 0x8E45B1: jnb     loc_8E471E
 0x8E45B7: jmp     short loc_8E45C0
-0x8E45B9: align 10h
 0x8E45C0: mov     eax, [ebp+arg_4]
 0x8E45C3: movaps  xmm5, xmmword ptr [eax]
 0x8E45C6: movaps  xmm4, xmmword ptr [esi+10h]

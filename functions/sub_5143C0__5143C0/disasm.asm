@@ -26,7 +26,7 @@
 0x514422: push    edx; a3
 0x514423: push    ecx; a2
 0x514424: push    eax; a1
-0x514425: call    Script_ExtractArgs
+0x514425: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x51442A: add     esp, 24h
 0x51442D: test    al, al
 0x51442F: jz      loc_5144CA

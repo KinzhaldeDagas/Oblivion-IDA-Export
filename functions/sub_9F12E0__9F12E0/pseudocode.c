@@ -1,5 +1,5 @@
 int sub_9F12E0()
 {
-  GameSetting_ConstrAndReg(&dword_B387A0, (int)"sCantQuickSave", (int)"You can't Quicksave while the game is paused.");
-  return atexit(sub_A21660);
+  GameSetting_ConstrAndReg(&stru_B387A0, "sCantQuickSave", "You can't Quicksave while the game is paused."); /*0x9f12ef*/
+  return atexit(sub_A21660); /*0x9f12ff*/
 }

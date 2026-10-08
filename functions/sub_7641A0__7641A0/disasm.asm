@@ -1,4 +1,4 @@
-0x7641A0: sub     esp, 8
+0x7641A0: sub     esp, 8; Initialize NiDX9Renderer state defaults, including clear depth 1.0 and clear stencil 0.
 0x7641A3: push    ebx
 0x7641A4: push    ebp
 0x7641A5: push    esi
@@ -12,7 +12,7 @@
 0x7641B8: mov     [esi+280h], ebx
 0x7641BE: call    __memset
 0x7641C3: fld1
-0x7641C5: fstp    dword ptr [esi+5D8h]
+0x7641C5: fstp    dword ptr [esi+5D8h]; Native default clear depth = 1.0.
 0x7641CB: mov     [esi+3B4h], ebx
 0x7641D1: mov     [esi+3BCh], bl
 0x7641D7: fld     dword ptr ds:0A2FAACh
@@ -33,7 +33,7 @@
 0x764231: mov     [esi+6ECh], ebx
 0x764237: mov     [esi+6F0h], bl
 0x76423D: mov     dword ptr [esi+5D4h], 0FF808080h
-0x764247: mov     [esi+5DCh], ebx
+0x764247: mov     [esi+5DCh], ebx; Native default clear stencil = 0.
 0x76424D: mov     [esi+5E0h], ebx
 0x764253: mov     [esi+5E4h], bl
 0x764259: mov     ebp, 1

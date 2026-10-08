@@ -25,8 +25,8 @@
 0x4A0D93: jmp     short loc_4A0D9D
 0x4A0D95: mov     eax, [esi+0B0h]
 0x4A0D9B: mov     eax, [eax]
-0x4A0D9D: push    eax
-0x4A0D9E: call    sub_480340
+0x4A0D9D: push    eax; object
+0x4A0D9E: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x4A0DA3: add     esp, 4
 0x4A0DA6: test    eax, eax
 0x4A0DA8: jz      short loc_4A0DAF
@@ -34,7 +34,7 @@
 0x4A0DAD: jmp     short loc_4A0DB1
 0x4A0DAF: xor     eax, eax
 0x4A0DB1: push    eax
-0x4A0DB2: push    offset dword_BA7D84
+0x4A0DB2: push    offset stru_BA7D84
 0x4A0DB7: call    NiRTTI_Cast
 0x4A0DBC: add     esp, 8
 0x4A0DBF: test    eax, eax
@@ -80,7 +80,7 @@
 0x4A0E36: push    ecx
 0x4A0E37: mov     ecx, esi
 0x4A0E39: fstp    [esp+0Ch+var_C]; float
-0x4A0E3C: call    sub_70A190
+0x4A0E3C: call    sub_70A190; NiNode selected downward: flags+18 choose controllers/world update; child flags bit1 and bit4 choose synchronous vfunc+64/+68 at 70A215/70A210. Child bounds merge before RET 4. No queue/dispatch in this body. Full-call observer may fence same-thread descendants, not asynchronous work.
 0x4A0E41: pop     esi
 0x4A0E42: pop     ecx
 0x4A0E43: retn    4

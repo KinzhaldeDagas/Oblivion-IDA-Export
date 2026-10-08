@@ -35,7 +35,7 @@
 0x4C86F7: push    4; Size
 0x4C86F9: push    edi; Src
 0x4C86FA: push    41544144h; int
-0x4C86FF: call    TESForm_PutFormRecordChunkData
+0x4C86FF: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4C8704: add     esp, 0Ch
 0x4C8707: test    byte ptr [edi], 1
 0x4C870A: jz      loc_4C8996
@@ -62,7 +62,6 @@
 0x4C8742: mov     [esp+2258h+var_2248], edi
 0x4C8746: mov     ecx, edi
 0x4C8748: jmp     short loc_4C8750
-0x4C874A: align 10h
 0x4C8750: mov     eax, 0F0F0F0F1h
 0x4C8755: mul     ecx
 0x4C8757: shr     edx, 4
@@ -103,7 +102,7 @@
 0x4C87D5: sar     edx, 3
 0x4C87D8: add     ecx, edi
 0x4C87DA: mov     [esp+esi*4+2258h+var_1558], edx
-0x4C87E1: call    sub_43F350
+0x4C87E1: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4C87E6: fstp    st
 0x4C87E8: mov     edx, [esp+2258h+var_223C]
 0x4C87EC: mov     eax, [edx+24h]
@@ -115,7 +114,7 @@
 0x4C8801: mov     [esp+2258h+var_2244], esi
 0x4C8805: fmul    st(1), st
 0x4C8807: fxch    st(1)
-0x4C8809: call    Double_To_SInt32
+0x4C8809: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C880E: mov     edx, [esp+2258h+var_223C]
 0x4C8812: mov     byte ptr [esp+esi+2258h+Src], al
 0x4C8816: mov     esi, [edx+24h]
@@ -123,13 +122,13 @@
 0x4C881C: mov     ecx, [eax+ebx*4]
 0x4C881F: fld     dword ptr [ecx+edi+4]
 0x4C8823: fmul    st, st(1)
-0x4C8825: call    Double_To_SInt32
+0x4C8825: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C882A: mov     edx, [esp+2258h+var_2244]
 0x4C882E: mov     byte ptr [esp+edx+2258h+Src+1], al
 0x4C8832: mov     eax, [esi+8]
 0x4C8835: mov     ecx, [eax+ebx*4]
 0x4C8838: fmul    dword ptr [ecx+edi+8]
-0x4C883C: call    Double_To_SInt32
+0x4C883C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C8841: mov     edx, [esp+2258h+var_2244]
 0x4C8845: mov     ecx, [esp+2258h+var_2248]
 0x4C8849: mov     [esp+edx+2258h+var_221E], al
@@ -145,7 +144,7 @@
 0x4C8874: lea     eax, [esp+225Ch+Src]
 0x4C8878: push    eax; Src
 0x4C8879: push    4C4D4E56h; int
-0x4C887E: call    TESForm_PutFormRecordChunkData
+0x4C887E: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4C8883: fild    [esp+2264h+var_1558]
 0x4C888A: mov     ebx, [esp+2264h+var_1558]
 0x4C8891: add     esp, 0Ch
@@ -194,7 +193,7 @@
 0x4C8927: lea     ecx, [esp+225Ch+var_450]
 0x4C892E: push    ecx; Src
 0x4C892F: push    54474856h; int
-0x4C8934: call    TESForm_PutFormRecordChunkData
+0x4C8934: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4C8939: add     esp, 0Ch
 0x4C893C: cmp     byte ptr [esp+2258h+var_2248], 0
 0x4C8941: jz      short loc_4C8996
@@ -335,7 +334,7 @@
 0x4C8B0D: lea     edx, [esp+225Ch+Src]
 0x4C8B11: push    edx; Src
 0x4C8B12: push    524C4356h; int
-0x4C8B17: call    TESForm_PutFormRecordChunkData
+0x4C8B17: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4C8B1C: add     esp, 0Ch
 0x4C8B1F: mov     eax, [esp+2258h+var_223C]
 0x4C8B23: add     eax, 1Ch
@@ -346,7 +345,6 @@
 0x4C8B38: mov     [esp+2258h+var_2248], 0
 0x4C8B40: mov     [esp+2258h+var_2244], 20h ; ' '
 0x4C8B48: jmp     short loc_4C8B50
-0x4C8B4A: align 10h
 0x4C8B50: mov     edi, [esp+2258h+var_223C]
 0x4C8B54: mov     eax, [edi+24h]
 0x4C8B57: mov     esi, [esp+2258h+var_2244]
@@ -366,7 +364,7 @@
 0x4C8B86: push    ecx; Src
 0x4C8B87: push    54585442h; int
 0x4C8B8C: mov     [esp+2264h+var_2230], eax
-0x4C8B90: call    TESForm_PutFormRecordChunkData
+0x4C8B90: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4C8B95: add     esp, 0Ch
 0x4C8B98: mov     edx, [edi+24h]
 0x4C8B9B: cmp     dword ptr [esi+edx+10h], 0
@@ -395,7 +393,7 @@
 0x4C8BEF: push    edx; Src
 0x4C8BF0: push    54585441h; int
 0x4C8BF5: mov     [esp+2264h+var_2228], eax
-0x4C8BF9: call    TESForm_PutFormRecordChunkData
+0x4C8BF9: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4C8BFE: fldz
 0x4C8C00: mov     eax, [esp+2264h+var_223C]
 0x4C8C04: mov     edx, [eax+24h]
@@ -450,7 +448,7 @@
 0x4C8C9D: lea     edx, [esp+225Ch+Src]
 0x4C8CA1: push    edx; Src
 0x4C8CA2: push    54585456h; int
-0x4C8CA7: call    TESForm_PutFormRecordChunkData
+0x4C8CA7: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4C8CAC: add     esp, 0Ch
 0x4C8CAF: add     ebx, 1
 0x4C8CB2: cmp     ebx, 8
@@ -464,7 +462,7 @@
 0x4C8CD2: jl      loc_4C8B50
 0x4C8CD8: mov     ecx, [esp+2258h+var_223C]; this
 0x4C8CDC: call    TESForm_FinalizeFormRecord
-0x4C8CE1: call    sub_46B370
+0x4C8CE1: call    TESForm_CompressSaveBuffer; Compresses the global TESForm record buffer with zlib when payload exists and FORM flag 0x40000 is clear. Rebuilds the record with compressed flag, original payload size, and deflated data.
 0x4C8CE6: mov     ecx, [esp+2258h+var_4]
 0x4C8CED: pop     edi
 0x4C8CEE: pop     esi

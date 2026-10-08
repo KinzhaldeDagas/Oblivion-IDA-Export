@@ -1,4 +1,4 @@
-0x77FC50: push    esi
+0x77FC50: push    esi; Apply NiStencilProperty to DX9 render state: stencil enable/ops/function/reference/mask plus D3DRS_CULLMODE selected from the native face-draw-mode table. Mode-5 caster pass groups later disable stencil but retain this property-driven cull mode.
 0x77FC51: push    edi
 0x77FC52: mov     edi, [esp+8+arg_0]
 0x77FC56: test    byte ptr [edi+18h], 1

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51C1B0",
-    "line": "push    ebx",
+    "line": "push    ebx; Initialize the fixed 0x34-byte CLAS DATA payload. Defaults: favored attributes Strength and Intelligence; specialization Combat (zeroed); majors Armorer, Athletics, Blade, Block, Blunt, HandToHand, and HeavyArmor. There is no minorSkills field.",
     "mnemonic": "push",
     "size": 1
   },
@@ -84,12 +84,6 @@
     "size": 2
   },
   {
-    "ea": "0x51C1CD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x51C1D0",
     "line": "push    esi",
     "mnemonic": "push",
@@ -103,7 +97,7 @@
   },
   {
     "ea": "0x51C1D3",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; Seed majorSkills[0..6] by converting native skill offsets 0..6 to SkillActorValue 0x0C..0x12.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +169,7 @@
   },
   {
     "ea": "0x51C1F2",
-    "line": "mov     dword ptr [ebp+0], 0",
+    "line": "mov     dword ptr [ebp+0], 0; Default favored attribute 1 is Strength.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -187,7 +181,7 @@
   },
   {
     "ea": "0x51C1FA",
-    "line": "mov     dword ptr [ebx+3Ch], 1",
+    "line": "mov     dword ptr [ebx+3Ch], 1; Default favored attribute 2 is Intelligence.",
     "mnemonic": "mov",
     "size": 7
   },

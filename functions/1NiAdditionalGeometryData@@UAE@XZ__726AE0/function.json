@@ -1,19 +1,40 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x726AE0",
+      "0x726B79"
+    ],
+    [
+      "0x4BFCA0",
+      "0x4BFCB1"
+    ],
+    [
+      "0x9CA4E0",
+      "0x9CA50E"
+    ]
+  ],
+  "chunks_sha256": "c49b9e3700d0b9ecdaeaec4e6bd5fb1158a7968f1fb9ca8d51e7c5bbfe448fe6",
+  "comment_regular": "\n\n[2026-10-03 native teardown fixture] Actual x86 SetDataBlock, block Free, RemoveDataBlock726200, this destructor and scalar-deleting destructor4C1590 executed in isolated fixture. Only CRT/heap/array/base-refcount calls and cookie-global location adapted.132checks pass across owned/borrowed/block-allocation-failure/raw-copy-failure, deleting flags0/1. Verifies stream buffer/block/descriptors/slot array release once, native descriptor clearing, and retained object for flags0. Earlier30copy checks were not rerun. Full renderer/model teardown remains outside fixture.",
   "comment_repeatable": "",
-  "data_refs_count": 2,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "NiAdditionalGeometryData::~NiAdditionalGeometryData(void)",
   "end_ea": "0x726B79",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1NiAdditionalGeometryData@@UAE@XZ",
   "segment": ".text",
   "sha256": "baecc0f07584d33f013b927e2f4b3507f3bc9916eb10e7b5c83987dafaaaa44a",
   "size": 153,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x726AE0",
+  "total_chunk_size": 216,
   "type": "void __thiscall(NiAdditionalGeometryData *__hidden this)",
-  "xrefs_from_count": 58,
+  "xrefs_from_count": 79,
   "xrefs_to_count": 2
 }

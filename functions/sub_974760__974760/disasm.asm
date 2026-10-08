@@ -134,7 +134,7 @@
 0x97491A: fstp    [esp+2Ch+var_10]
 0x97491E: mov     edx, [esp+2Ch+var_10]
 0x974922: mov     [ecx+8], edx
-0x974925: call    sub_43F350
+0x974925: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x97492A: fstp    st
 0x97492C: pop     esi
 0x97492D: add     esp, 28h
@@ -189,7 +189,7 @@
 0x9749B1: lea     ecx, [esp+30h+var_24]
 0x9749B5: mov     [esp+30h+var_20], edx
 0x9749B9: mov     [esp+30h+var_1C], eax
-0x9749BD: call    sub_43F350
+0x9749BD: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x9749C2: fstp    st
 0x9749C4: mov     edi, [esi+3Ch]
 0x9749C7: fld     dword ptr [edi+10h]
@@ -225,7 +225,7 @@
 0x974A30: fld     [esp+30h+var_4]
 0x974A34: fsub    dword ptr [edi+0Ch]
 0x974A37: fstp    [esp+30h+var_1C]
-0x974A3B: call    sub_43F350
+0x974A3B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x974A40: fstp    st
 0x974A42: fld     dword ptr [edi+10h]
 0x974A45: fstp    [esp+30h+arg_4]
@@ -397,7 +397,7 @@
 0x974C61: fstp    [esp+2Ch+var_4]
 0x974C65: mov     edx, [esp+2Ch+var_4]
 0x974C69: mov     [ecx+8], edx
-0x974C6C: call    sub_43F350
+0x974C6C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x974C71: fstp    st
 0x974C73: pop     esi
 0x974C74: add     esp, 28h

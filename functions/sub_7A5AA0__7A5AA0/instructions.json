@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A5AA0",
-    "line": "push    ecx",
+    "line": "push    ecx; Typed uninitialized-fill wrapper returning destination+count. Its former noreturn boundary omitted the real arithmetic epilogue.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5AA1",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A5AA6",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7A5AAB",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7A5AB9",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,26 +73,74 @@
   },
   {
     "ea": "0x7A5ABF",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5AC0",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5AC1",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5AC2",
-    "line": "call    sub_7A59A0",
+    "line": "call    OB_SIdvLeafTexture_UninitializedFillN_010201A0; Exception-safe uninitialized fill of count compact leaf textures. The normal path returns; the SEH landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x7A5AC7",
+    "line": "mov     eax, esi; Restored normal fill-wrapper epilogue: compute destination + count*0x54 and return with retn 0x0C.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A5AC9",
+    "line": "imul    eax, 54h ; 'T'",
+    "mnemonic": "imul",
+    "size": 3
+  },
+  {
+    "ea": "0x7A5ACC",
+    "line": "add     esp, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A5ACF",
+    "line": "add     eax, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x7A5AD1",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A5AD2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A5AD3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A5AD4",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FB6F0",
-    "line": "push    ebp",
+    "line": "push    ebp; Set Lighting30 render constants. The render-mode-5 branch consumes current ShadowSceneLight state separately from ordinary material paths.",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7FB738",
-    "line": "mov     [esp+270h+var_230], edx",
+    "line": "mov     [esp+270h+var_230], edx; Read active RenderPass selector published by BSShaderAccumulator_DrawRenderPass.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7FB76B",
-    "line": "call    NiDX9Renderer__CalculateBoneMatrixes",
+    "line": "call    NiDX9Renderer__CalculateBoneMatrixes; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7FB798",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7FB7B7",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x7FB9F6",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7FBABB",
-    "line": "cmp     byte ptr ds:0B4696Eh, 0",
+    "line": "cmp     byte ptr ds:0B4696Eh, 0; B4696E enables writing the mapped matrix group B46D68 (normally VS c10..c13). That group is not always a world matrix; qualify the branch and compare the actual mapped words before regenerating it.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x7FBADB",
-    "line": "cmp     byte ptr [eax+0F5h], 0",
+    "line": "cmp     byte ptr [eax+0F5h], 0; ShadowSceneLight +0xF5 selects the special-light shader-matrix branch; zero continues ordinary selector-specific handling.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x7FBC0E",
-    "line": "add     eax, 0FFFFFEB2h",
+    "line": "add     eax, 0FFFFFEB2h; Recognize the four native shadow selectors 0x14E..0x151.",
     "mnemonic": "add",
     "size": 5
   },
@@ -1819,13 +1819,13 @@
   },
   {
     "ea": "0x7FBC47",
-    "line": "mov     ecx, [edx+0Ch]",
+    "line": "mov     ecx, [edx+0Ch]; Retail 0x14E..0x151 consumer combines receiver/object transform with the current light matrix.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7FBC4A",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; Use current ShadowSceneLight projected-shadow transform at light+0x10.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x7FBC51",
-    "line": "mov     eax, [edx+4]",
+    "line": "mov     eax, [edx+4]; Projected branch selects light-array slot1 for selectors outside14E..151;14E..151 select slot0. Therefore ordinary-looking register locations alone cannot identify a world transform.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x7FBC65",
-    "line": "call    D3DXMatrixMultiply_0",
+    "line": "call    D3DXMatrixMultiply_0; Combine object/camera-relative transform with ShadowSceneLight+0x10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,13 +1957,13 @@
   },
   {
     "ea": "0x7FBC9B",
-    "line": "mov     edi, offset flt_B46D68",
+    "line": "mov     edi, offset unk_B46D68",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7FBCA0",
-    "line": "rep movsd",
+    "line": "rep movsd; Write ShadowSceneLight projected transform to VS c10..c13; SM3013/14 multiply original POSITION, SM3015/16 multiply the blended skinned position.",
     "mnemonic": "movsd",
     "size": 2
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x7FBCA7",
-    "line": "mov     ecx, [esp+270h+var_23C]",
+    "line": "mov     ecx, [esp+270h+var_23C]; World branch of Lighting30 mapped matrix update: copy renderer+940 and transpose into B46D68. Selected when current entry light-array pointer is null, first wrapper+F5 is nonzero, or selector is147..14D. Other enabled cases multiply the object transform by a light projection instead.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2293,13 +2293,13 @@
   },
   {
     "ea": "0x7FBDC7",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FBDCC",
-    "line": "fld     dword ptr ds:0B46FDCh",
+    "line": "fld     dword ptr ds:0B46FDCh; OblivionNew: PS c6.y at B46FDC supplies consumed point count (Double_To_SInt32 truncates); PS c6.x at B46FD8 supplies directional prefix. The entry byte count is storage coverage, not necessarily the number of slots consumed. LightData uses B47018+32*slot; LightColor uses B47008+32*slot.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x7FBDD4",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x7FBDF7",
-    "line": "jle     loc_7FBEEF",
+    "line": "jle     loc_7FBEEF; Selectors 0x14E..0x151 skip the ordinary direction-normalization block.",
     "mnemonic": "jle",
     "size": 6
   },
@@ -2641,7 +2641,7 @@
   },
   {
     "ea": "0x7FBEA2",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x7FBFAA",
-    "line": "jz      short loc_7FBFBA",
+    "line": "jz      short loc_7FBFBA; Non-skinned 0x14E/0x14F scale LightData.xyz into object space by object scale.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x7FBFB1",
-    "line": "fdiv    dword ptr [edx+30h]",
+    "line": "fdiv    dword ptr [edx+30h]; For a rigid caster outside selectors 0x14E/0x14F, divide LightData.w by object scale. This covers mode-5 selector 0x154; skinned 0x155 bypasses the correction.",
     "mnemonic": "fdiv",
     "size": 3
   },
@@ -4927,7 +4927,7 @@
   },
   {
     "ea": "0x7FC51F",
-    "line": "mov     edi, offset unk_B46E78",
+    "line": "mov     edi, (offset flt_B46DE8+90h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4975,7 +4975,7 @@
   },
   {
     "ea": "0x7FC546",
-    "line": "ja      loc_7FC7B8",
+    "line": "ja      loc_7FC7B8; Only selectors 0x14E..0x151 commit the six ShadowSceneLight clip planes.",
     "mnemonic": "ja",
     "size": 6
   },
@@ -4999,7 +4999,7 @@
   },
   {
     "ea": "0x7FC556",
-    "line": "cmp     byte ptr [eax+214h], 0",
+    "line": "cmp     byte ptr [eax+214h], 0; ShadowSceneLight+0x214 is the transformed-clip-plane cache-valid byte.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -5815,7 +5815,7 @@
   },
   {
     "ea": "0x7FC759",
-    "line": "call    eax",
+    "line": "call    eax; Commit transformed plane to IDirect3DDevice9::SetClipPlane(index 0..5).",
     "mnemonic": "call",
     "size": 2
   },
@@ -5869,7 +5869,7 @@
   },
   {
     "ea": "0x7FC783",
-    "line": "mov     byte ptr [eax+214h], 1",
+    "line": "mov     byte ptr [eax+214h], 1; Cache transformed plane at ShadowSceneLight+0x1B4 (six float4 planes).",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5923,7 +5923,7 @@
   },
   {
     "ea": "0x7FC797",
-    "line": "lea     edi, [eax+1B4h]",
+    "line": "lea     edi, [eax+1B4h]; Mark ShadowSceneLight clip-plane cache valid at +0x214.",
     "mnemonic": "lea",
     "size": 6
   },

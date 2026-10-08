@@ -1,4 +1,4 @@
-0x702FC0: cmp     dword ptr [ecx+28h], 0
+0x702FC0: cmp     dword ptr [ecx+28h], 0; MoonSugarEffect decode: sets 4-vertex screen polygon UVs for one texture set. Image-space quad uses UV rectangle 0,0 to 1,1.
 0x702FC4: push    esi
 0x702FC5: jz      short loc_703041
 0x702FC7: mov     eax, [esp+4+arg_0]

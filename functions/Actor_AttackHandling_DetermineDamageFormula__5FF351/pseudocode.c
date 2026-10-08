@@ -1,20 +1,20 @@
 void __usercall Actor_AttackHandling_::DetermineDamageFormula(
-        Actor *a1@<edi>,
-        int a2,
-        int a3,
+        TESObjectREFR *a1@<edi>,
+        char a2@<bl>,
+        int a3@<esi>,
         int a4,
         int a5,
         int a6,
-        float a7,
+        int a7,
         int a8,
-        int a9,
+        float a9,
         int a10,
         int a11,
-        int a12,
+        float *a12,
         int a13,
-        float a14,
-        int a15,
-        int a16,
+        int a14,
+        EntryData *a15,
+        float a16,
         int a17,
         int a18,
         int a19,
@@ -23,131 +23,140 @@ void __usercall Actor_AttackHandling_::DetermineDamageFormula(
         int a22,
         int a23,
         int a24,
-        int a25)
+        int a25,
+        int a26,
+        int a27)
 {
-  ActorAnimData *v25; // eax
+  ActorAnimData *v27; // eax
   unsigned __int8 AnimGroupFromField8Value; // al
-  int v27; // [esp+18h] [ebp+18h]
-  int v28; // [esp+34h] [ebp+34h]
-  int v29; // [esp+3Ch] [ebp+3Ch]
-  int v30; // [esp+50h] [ebp+50h]
+  int GroupID; // ebp
+  int v30; // [esp+18h] [ebp+18h]
+  int v31; // [esp+34h] [ebp+34h]
+  int v32; // [esp+3Ch] [ebp+3Ch]
 
-  *(float *)&v27 = 0.0;
-  *(float *)&v29 = 0.0;
-  *(float *)&v28 = 1.0;
-  v25 = a1->vtbl->super.super.GetAnimData((TESObjectREFR *)a1);
-  AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v25, 3);
-  v30 = sub_51AA00(AnimGroupFromField8Value);
-  if ( a13 )
+  *(float *)&v30 = 0.0; /*0x5ff35b*/
+  *(float *)&v32 = 0.0; /*0x5ff35f*/
+  *(float *)&v31 = 1.0; /*0x5ff369*/
+  v27 = a1->vtbl->GetAnimData(a1); /*0x5ff375*/
+  AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v27, 3); /*0x5ff379*/
+  GroupID = AnimKey_GetGroupID(AnimGroupFromField8Value); /*0x5ff38f*/
+  if ( a15 ) /*0x5ff395*/
   {
-    Actor_AttackHandling_::WeaponDamage(
+    Actor_AttackHandling_::WeaponDamage( /*0x5ff395*/
       a2,
+      (Actor *)a1,
       a3,
       a4,
       a5,
       a6,
-      v27,
+      a7,
       a8,
-      a9,
+      v30,
       a10,
       a11,
       a12,
       a13,
-      v28,
+      a14,
       a15,
-      v29,
+      v31,
       a17,
-      a18,
+      *(float *)&v32,
       a19,
       a20,
-      v30,
+      a21,
       a22,
-      a23,
+      GroupID,
       a24,
       a25,
-      0x48);
+      a26,
+      a27);
   }
-  else if ( a10 )
+  else if ( a12 ) /*0x5ff3a0*/
   {
-    Actor_AttackHandling_::WeaponDamage_(
+    Actor_AttackHandling_::WeaponDamage_( /*0x5ff3a0*/
       a2,
+      (Actor *)a1,
       a3,
       a4,
       a5,
       a6,
-      v27,
+      a7,
       a8,
-      a9,
+      v30,
       a10,
       a11,
       a12,
+      a13,
+      a14,
       0,
-      v28,
-      a15,
-      v29,
+      v31,
       a17,
-      a18,
+      *(float *)&v32,
       a19,
       a20,
-      v30,
+      a21,
       a22,
-      a23,
+      GroupID,
       a24,
       a25,
-      0x48);
+      a26,
+      a27);
   }
-  else if ( Actor_IsNPC(a1) )
+  else if ( Actor_IsNPC((Actor *)a1) ) /*0x5ff3a8*/
   {
-    Actor_AttackHandling_::HandToHandDamage(
+    Actor_AttackHandling_::HandToHandDamage( /*0x5ff3af*/
       a2,
+      GroupID,
+      (Actor *)a1,
       a3,
       a4,
       a5,
       a6,
-      v27,
+      a7,
       a8,
-      a9,
-      0,
+      *(float *)&v30,
+      a10,
       a11,
-      a12,
       0,
-      v28,
-      a15,
-      v29,
+      a13,
+      a14,
+      0,
+      v31,
       a17,
-      a18,
+      *(float *)&v32,
       a19,
       a20,
-      v30,
+      a21,
       a22,
-      a23,
+      GroupID,
       a24,
       a25,
-      0x48);
+      a26,
+      a27);
   }
   else
   {
-    Actor_AttackHandling_::CreatureDamage(
+    Actor_AttackHandling_::CreatureDamage( /*0x5ff3b0*/
       (int)a1,
-      a2,
-      a3,
       a4,
       a5,
       a6,
-      v27,
+      a7,
       a8,
-      a9,
-      0,
+      v30,
+      a10,
       a11,
-      a12,
       0,
-      v28,
-      a15,
-      v29,
+      a13,
+      a14,
+      0,
+      v31,
       a17,
-      a18,
+      v32,
       a19,
       a20,
-      v30);
+      a21,
+      a22,
+      GroupID);
   }
 }

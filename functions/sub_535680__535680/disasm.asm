@@ -58,3 +58,15 @@
 0x535728: pop     ebp
 0x535729: add     esp, 10h
 0x53572C: retn
+0x9B9260: mov     ecx, [ebp-10h]; this
+0x9B9263: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9B9268: mov     ecx, [ebp-10h]
+0x9B926B: add     ecx, 1A0h; slot
+0x9B9271: jmp     NiPointerSlot_Release
+0x9B9276: mov     edx, [esp+arg_4]
+0x9B927A: lea     eax, [edx-10h]
+0x9B927D: mov     ecx, [edx-14h]
+0x9B9280: xor     ecx, eax
+0x9B9282: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9287: mov     eax, offset stru_AE362C
+0x9B928C: jmp     ___CxxFrameHandler3

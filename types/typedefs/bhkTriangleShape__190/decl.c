@@ -1,1 +1,1 @@
-bhkTriangleShape
+struct bhkTriangleShape;

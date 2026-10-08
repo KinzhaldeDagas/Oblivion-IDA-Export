@@ -4,7 +4,7 @@
 0x900408: mov     dword ptr [esi], offset ??_7hkRayHitCollector@@6B@; const hkRayHitCollector::`vftable'
 0x90040E: jz      short loc_900419
 0x900410: push    esi
-0x900411: call    FormHeapFree
+0x900411: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x900416: add     esp, 4
 0x900419: mov     eax, esi
 0x90041B: pop     esi

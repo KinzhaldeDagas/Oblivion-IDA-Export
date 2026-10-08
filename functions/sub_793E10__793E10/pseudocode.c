@@ -1,279 +1,279 @@
-void __fastcall sub_793E10(int a1, int a2, int a3, int a4, int a5)
+// Oblivion leaf static lighting: one normal and one packed color per billboard leaf; the later four-corner SpeedTree path is not present.
+void __thiscall OB_CLightingEngine_ComputeLeafStaticLighting_010201A0(
+        OB_CLightingEngine_010201A0 *this,
+        const OB_stVec3_010201A0 *treeCenter,
+        OB_stVectorBillboardLeafPtr_010201A0 *leafLods,
+        int numLeafLods)
 {
-  bool v5; // zf
-  unsigned __int8 ***v6; // edi
-  unsigned __int8 **v7; // ebp
-  unsigned __int8 **v8; // esi
-  unsigned __int8 ***v9; // ebx
-  bool v10; // cf
-  float *v11; // edi
-  double v12; // st7
-  int v13; // ebx
-  float *v14; // esi
-  double v15; // st6
-  float *v16; // eax
-  float v17; // edx
-  float v18; // ecx
-  double v19; // st6
+  int lightIndex; // ebx
+  unsigned int v5; // esi
+  bool v6; // zf
+  OB_CBillboardLeaf_010201A0 ***lodBeginSlot; // edi
+  const OB_CBillboardLeaf_010201A0 **leafIt; // ebp
+  bool v9; // cf
+  float *v10; // edi
+  double v11; // st7
+  float *lightAttrY; // esi
+  double v13; // st6
+  OB_stVec3_010201A0 *v14; // eax
+  float y; // edx
+  float x; // ecx
+  double v17; // st6
+  double v18; // st1
+  double v19; // st3
   double v20; // st1
-  double v21; // st3
-  double v22; // st1
-  double v23; // st2
-  double v24; // st3
-  double v25; // st4
-  double v26; // st7
-  double v27; // rt2
-  double v28; // st6
-  double v29; // st7
-  double v30; // rtt
-  int v31; // esi
+  double v21; // st2
+  double v22; // st3
+  double v23; // st4
+  double v24; // st7
+  double v25; // rt2
+  double v26; // st6
+  double v27; // st7
+  double v28; // rtt
+  OB_CLightingEngine_010201A0 *lightingAfterLights; // esi
+  float v30; // [esp+14h] [ebp-B4h]
+  float v31; // [esp+14h] [ebp-B4h]
   float v32; // [esp+14h] [ebp-B4h]
   float v33; // [esp+14h] [ebp-B4h]
-  float v34; // [esp+14h] [ebp-B4h]
-  float v35; // [esp+14h] [ebp-B4h]
-  float v36; // [esp+18h] [ebp-B0h] BYREF
-  float v37; // [esp+1Ch] [ebp-ACh]
-  float v38; // [esp+20h] [ebp-A8h]
-  unsigned __int8 ***v39; // [esp+24h] [ebp-A4h]
-  float v40; // [esp+28h] [ebp-A0h]
-  float v41; // [esp+2Ch] [ebp-9Ch]
-  float v42; // [esp+30h] [ebp-98h]
-  float v43; // [esp+34h] [ebp-94h]
-  int v44; // [esp+38h] [ebp-90h] BYREF
-  float v45; // [esp+3Ch] [ebp-8Ch]
-  float v46; // [esp+40h] [ebp-88h]
-  int v47; // [esp+44h] [ebp-84h]
-  float v48; // [esp+48h] [ebp-80h]
-  int v49; // [esp+4Ch] [ebp-7Ch]
-  int v50; // [esp+50h] [ebp-78h]
-  int v51; // [esp+54h] [ebp-74h] BYREF
-  float v52; // [esp+58h] [ebp-70h]
-  float v53; // [esp+5Ch] [ebp-6Ch]
-  float v54; // [esp+60h] [ebp-68h]
-  float v55; // [esp+64h] [ebp-64h]
-  float v56; // [esp+68h] [ebp-60h]
-  float v57; // [esp+6Ch] [ebp-5Ch]
-  float v58; // [esp+70h] [ebp-58h]
-  float v59; // [esp+74h] [ebp-54h]
-  float v60; // [esp+78h] [ebp-50h]
-  float v61; // [esp+7Ch] [ebp-4Ch]
-  float v62; // [esp+80h] [ebp-48h]
-  float v63; // [esp+84h] [ebp-44h]
-  float v64; // [esp+88h] [ebp-40h]
-  float v65; // [esp+8Ch] [ebp-3Ch]
-  float v66; // [esp+90h] [ebp-38h]
-  float v67; // [esp+94h] [ebp-34h]
-  float v68; // [esp+98h] [ebp-30h]
-  float v69; // [esp+9Ch] [ebp-2Ch]
-  float v70; // [esp+A0h] [ebp-28h]
-  float v71; // [esp+A4h] [ebp-24h]
-  float v72; // [esp+A8h] [ebp-20h]
-  float *v73; // [esp+ACh] [ebp-1Ch]
-  float v74[3]; // [esp+B0h] [ebp-18h] BYREF
-  float v75[3]; // [esp+BCh] [ebp-Ch] BYREF
+  OB_stVec3_010201A0 rgb; // [esp+18h] [ebp-B0h] BYREF
+  OB_CBillboardLeaf_010201A0 ***p_begin; // [esp+24h] [ebp-A4h]
+  float v36; // [esp+28h] [ebp-A0h]
+  float v37; // [esp+2Ch] [ebp-9Ch]
+  float v38; // [esp+30h] [ebp-98h]
+  float z; // [esp+34h] [ebp-94h]
+  OB_stVec3_010201A0 v40; // [esp+38h] [ebp-90h] BYREF
+  int v41; // [esp+44h] [ebp-84h]
+  float v42; // [esp+48h] [ebp-80h]
+  OB_CLightingEngine_010201A0 *lighting; // [esp+4Ch] [ebp-7Ch]
+  int v44; // [esp+50h] [ebp-78h]
+  OB_stVec3_010201A0 lightPosition; // [esp+54h] [ebp-74h] BYREF
+  float v46; // [esp+60h] [ebp-68h]
+  float v47; // [esp+64h] [ebp-64h]
+  float v48; // [esp+68h] [ebp-60h]
+  float v49; // [esp+6Ch] [ebp-5Ch]
+  float v50; // [esp+70h] [ebp-58h]
+  float v51; // [esp+74h] [ebp-54h]
+  float v52; // [esp+78h] [ebp-50h]
+  float v53; // [esp+7Ch] [ebp-4Ch]
+  float v54; // [esp+80h] [ebp-48h]
+  float v55; // [esp+84h] [ebp-44h]
+  float v56; // [esp+88h] [ebp-40h]
+  float v57; // [esp+8Ch] [ebp-3Ch]
+  float v58; // [esp+90h] [ebp-38h]
+  float v59; // [esp+94h] [ebp-34h]
+  float v60; // [esp+98h] [ebp-30h]
+  float v61; // [esp+9Ch] [ebp-2Ch]
+  float v62; // [esp+A0h] [ebp-28h]
+  float v63; // [esp+A4h] [ebp-24h]
+  float v64; // [esp+A8h] [ebp-20h]
+  float *p_x; // [esp+ACh] [ebp-1Ch]
+  float v66[3]; // [esp+B0h] [ebp-18h] BYREF
+  OB_stVec3_010201A0 outRgb; // [esp+BCh] [ebp-Ch] BYREF
 
-  v5 = *(_DWORD *)(a1 + 0x38) == 1;
-  v49 = a1;
-  if ( v5 )
+  v6 = this->leafLightingMethod == 1; /*0x793e16*/
+  lighting = this; /*0x793e1a*/
+  if ( v6 ) /*0x793e1e*/
   {
-    if ( *(_DWORD *)(a1 + 0x74) )
+    if ( this->staticLightingStyle ) /*0x793e24*/
     {
-      if ( a5 > 0 )
+      if ( numLeafLods > 0 ) /*0x793e37*/
       {
-        v6 = (unsigned __int8 ***)(a4 + 4);
-        v39 = (unsigned __int8 ***)(a4 + 4);
-        v50 = a5;
-        do
+        lodBeginSlot = &leafLods->begin; /*0x793e48*/
+        p_begin = &leafLods->begin; /*0x793e4b*/
+        v44 = numLeafLods; /*0x793e4f*/
+        do /*0x79432b*/
         {
-          v7 = *v6;
-          if ( *v6 > v6[1] )
-            _invalid_parameter_noinfo();
-          while ( 1 )
+          leafIt = (const OB_CBillboardLeaf_010201A0 **)*lodBeginSlot; /*0x793e53*/
+          if ( *lodBeginSlot > lodBeginSlot[1] ) /*0x793e58*/
+            _invalid_parameter_noinfo(lightIndex, (int)lodBeginSlot, v5); /*0x793e5a*/
+          while ( 1 ) /*0x793e60*/
           {
-            v8 = v6[1];
-            if ( *v6 > v8 )
-              _invalid_parameter_noinfo();
-            v9 = v6 + 0xFFFFFFFF;
-            if ( v7 == v8 )
-              break;
-            if ( v7 >= v9[2] )
-              _invalid_parameter_noinfo();
-            v10 = v7 < v9[2];
-            v73 = (float *)(*v7 + 0x1C);
-            if ( !v10 )
-              _invalid_parameter_noinfo();
-            v11 = (float *)(*v7 + 4);
-            if ( v7 >= v9[2] )
-              _invalid_parameter_noinfo();
-            sub_7A7EC0(*v7, v75);
-            v12 = 0.0;
-            v53 = 0.0;
-            v13 = 0;
-            v52 = 0.0;
-            v14 = (float *)&unk_B2B7D4;
-            *(float *)&v51 = 0.0;
-            v48 = flt_A30634;
-            v38 = 0.0;
-            v37 = 0.0;
-            v36 = 0.0;
-            v15 = 1.0;
-            do
+            v5 = (unsigned int)lodBeginSlot[1]; /*0x793e60*/
+            if ( (unsigned int)*lodBeginSlot > v5 ) /*0x793e65*/
+              _invalid_parameter_noinfo(lightIndex, (int)lodBeginSlot, v5); /*0x793e6b*/
+            lightIndex = (int)(lodBeginSlot + 0xFFFFFFFF); /*0x793e70*/
+            if ( leafIt == (const OB_CBillboardLeaf_010201A0 **)v5 ) /*0x793e7e*/
+              break; /*0x793e7e*/
+            if ( (unsigned int)leafIt >= *(_DWORD *)(lightIndex + 8) ) /*0x793e87*/
+              _invalid_parameter_noinfo(lightIndex, (int)lodBeginSlot, v5); /*0x793e89*/
+            v9 = (unsigned int)leafIt < *(_DWORD *)(lightIndex + 8); /*0x793e94*/
+            p_x = &(*leafIt)->normal.x; /*0x793e97*/
+            if ( !v9 ) /*0x793e9e*/
+              _invalid_parameter_noinfo(lightIndex, (int)lodBeginSlot, v5); /*0x793ea0*/
+            v10 = &(*leafIt)->position.x; /*0x793ea8*/
+            if ( (unsigned int)leafIt >= *(_DWORD *)(lightIndex + 8) ) /*0x793eae*/
+              _invalid_parameter_noinfo(lightIndex, (int)v10, v5); /*0x793eb0*/
+            OB_CBillboardLeaf_GetColor_010201A0(*leafIt, &outRgb); /*0x793ec0*/
+            v11 = 0.0; /*0x793ec5*/
+            lightPosition.z = 0.0; /*0x793ec7*/
+            lightIndex = 0; /*0x793ecb*/
+            lightPosition.y = 0.0; /*0x793ecd*/
+            lightAttrY = &CLightingEngine__s_lightAttributes[0].position.y; /*0x793ed1*/
+            lightPosition.x = 0.0; /*0x793ed6*/
+            v42 = flt_A30634; /*0x793ee0*/
+            rgb.z = 0.0; /*0x793ee4*/
+            rgb.y = 0.0; /*0x793ee8*/
+            rgb.x = 0.0; /*0x793eec*/
+            v13 = 1.0; /*0x793ef0*/
+            do /*0x794223*/
             {
-              if ( byte_B42A18[v13] )
+              if ( CLightingEngine__s_lightEnabled[lightIndex] ) /*0x793ef2*/
               {
-                v44 = *((int *)v14 + 0xFFFFFFFF);
-                v45 = *v14;
-                v46 = v14[1];
-                if ( v12 == v14[0xB] )
+                v40.x = lightAttrY[0xFFFFFFFF]; /*0x793f04*/
+                v40.y = *lightAttrY; /*0x793f0a*/
+                v40.z = lightAttrY[1]; /*0x793f11*/
+                if ( v11 == lightAttrY[0xB] ) /*0x793f1d*/
                 {
-                  v16 = (float *)&v44;
+                  v14 = &v40; /*0x793f1f*/
                 }
                 else
                 {
-                  v16 = v74;
-                  v74[0] = *(float *)&v44 - *v11;
-                  v74[1] = v45 - v11[1];
-                  v74[2] = v46 - v11[2];
+                  v14 = (OB_stVec3_010201A0 *)v66; /*0x793f29*/
+                  v66[0] = v40.x - *v10; /*0x793f32*/
+                  v66[1] = v40.y - v10[1]; /*0x793f40*/
+                  v66[2] = v40.z - v10[2]; /*0x793f4e*/
                 }
-                v17 = v16[1];
-                v18 = *v16;
-                v43 = v16[2];
-                v32 = v17 * v17 + v18 * v18 + v43 * v43;
-                v33 = sqrt(v32);
-                v34 = 1.0 / v33;
-                v41 = v18 * v34;
-                v42 = v17 * v34;
-                v43 = v34 * v43;
-                v40 = v73[1] * v42 + v41 * *v73 + v73[2] * v43;
-                v19 = v40;
-                if ( v48 <= (double)v40 )
+                y = v14->y; /*0x793f55*/
+                x = v14->x; /*0x793f58*/
+                z = v14->z; /*0x793f6d*/
+                v30 = y * y + x * x + z * z; /*0x793f85*/
+                v31 = sqrt(v30); /*0x793f92*/
+                v32 = 1.0 / v31; /*0x793fa9*/
+                v37 = x * v32; /*0x793fbb*/
+                v38 = y * v32; /*0x793fc5*/
+                z = v32 * z; /*0x793fcd*/
+                v36 = p_x[1] * v38 + v37 * *p_x + p_x[2] * z; /*0x793fe9*/
+                v17 = v36; /*0x793fed*/
+                if ( v42 <= (double)v36 ) /*0x793ffc*/
                 {
-                  v48 = v40;
-                  v51 = v44;
-                  v52 = v45;
-                  v53 = v46;
+                  v42 = v36; /*0x794002*/
+                  lightPosition = v40; /*0x79400e*/
                 }
-                if ( v19 < 0.0 )
+                if ( v17 < 0.0 ) /*0x794023*/
                 {
-                  v40 = 0.0;
-                  v19 = (float)0.0;
+                  v36 = 0.0; /*0x794027*/
+                  v17 = (float)0.0; /*0x79402f*/
                 }
-                v5 = (*(_BYTE *)(v49 + 0x74) & 1) == 0;
-                v40 = v19 * (1.0 - *(float *)(v49 + 0x70)) + *(float *)(v49 + 0x70);
-                if ( v5 )
+                v6 = (lighting->staticLightingStyle & 1) == 0; /*0x794035*/
+                v36 = v17 * (1.0 - lighting->leafLightingAdjustmentScalar) + lighting->leafLightingAdjustmentScalar; /*0x79404e*/
+                if ( v6 ) /*0x794052*/
                 {
-                  v12 = 0.0;
-                  v15 = 1.0;
+                  v11 = 0.0; /*0x794240*/
+                  v13 = 1.0; /*0x794242*/
                 }
                 else
                 {
-                  v61 = *(float *)(v49 + 0x60);
-                  v62 = *(float *)(v49 + 0x64);
-                  v63 = *(float *)(v49 + 0x68);
-                  v64 = v14[5] * *(float *)(v49 + 0x48);
-                  v65 = v14[6] * *(float *)(v49 + 0x4C);
-                  v66 = v14[7] * *(float *)(v49 + 0x50);
-                  v35 = 1.0;
-                  if ( 0.0 == v14[0xB] )
-                    goto LABEL_29;
-                  v20 = *(float *)&v44 - *v11;
-                  v21 = v20 * v20;
-                  v22 = v45 - v11[1];
-                  v23 = v21;
-                  v24 = v46 - v11[2];
-                  *(float *)&v47 = v22 * v22 + v23 + v24 * v24;
-                  v25 = v14[0xD];
-                  LODWORD(v60) = (v47 >> 1) + 0x1FC00000;
-                  *(float *)&v47 = v25 * v60 + v14[0xC] + v60 * (v14[0xE] * v60);
-                  if ( *(float *)&v47 == 0.0 )
+                  v53 = lighting->leafMaterial.emissive[0]; /*0x79405b*/
+                  v54 = lighting->leafMaterial.emissive[1]; /*0x794062*/
+                  v55 = lighting->leafMaterial.emissive[2]; /*0x794069*/
+                  v56 = lightAttrY[5] * lighting->leafMaterial.ambient[0]; /*0x794076*/
+                  v57 = lightAttrY[6] * lighting->leafMaterial.ambient[1]; /*0x794083*/
+                  v58 = lightAttrY[7] * lighting->leafMaterial.ambient[2]; /*0x794090*/
+                  v33 = 1.0; /*0x794099*/
+                  if ( 0.0 == lightAttrY[0xB] ) /*0x7940a7*/
+                    goto LABEL_29; /*0x7940a7*/
+                  v18 = v40.x - *v10; /*0x7940bd*/
+                  v19 = v18 * v18; /*0x7940bf*/
+                  v20 = v40.y - v10[1]; /*0x7940c1*/
+                  v21 = v19; /*0x7940c5*/
+                  v22 = v40.z - v10[2]; /*0x7940c5*/
+                  *(float *)&v41 = v20 * v20 + v21 + v22 * v22; /*0x7940cd*/
+                  v23 = lightAttrY[0xD]; /*0x7940d5*/
+                  LODWORD(v52) = (v41 >> 1) + 0x1FC00000; /*0x7940e0*/
+                  *(float *)&v41 = v23 * v52 + lightAttrY[0xC] + v52 * (lightAttrY[0xE] * v52); /*0x7940fa*/
+                  if ( *(float *)&v41 == 0.0 ) /*0x79410d*/
                   {
 LABEL_29:
-                    v26 = 1.0;
+                    v24 = 1.0; /*0x79411b*/
                   }
                   else
                   {
-                    v26 = 1.0;
-                    v35 = 1.0 / *(float *)&v47;
+                    v24 = 1.0; /*0x794111*/
+                    v33 = 1.0 / *(float *)&v41; /*0x794113*/
                   }
-                  v70 = v14[2] * v40 * v75[0];
-                  v71 = v14[3] * v40 * v75[1];
-                  v72 = v40 * v14[4] * v75[2];
-                  v54 = v70 + v64;
-                  v55 = v71 + v65;
-                  v56 = v72 + v66;
-                  v57 = v54 * v35;
-                  v58 = v55 * v35;
-                  v59 = v35 * v56;
-                  v67 = v57 + v61;
-                  v68 = v58 + v62;
-                  v69 = v59 + v63;
-                  v36 = v67 + v36;
-                  v37 = v68 + v37;
-                  v38 = v69 + v38;
-                  v15 = v26;
-                  v12 = 0.0;
+                  v62 = lightAttrY[2] * v36 * outRgb.x; /*0x794133*/
+                  v63 = lightAttrY[3] * v36 * outRgb.y; /*0x794146*/
+                  v64 = v36 * lightAttrY[4] * outRgb.z; /*0x794157*/
+                  v46 = v62 + v56; /*0x79416c*/
+                  v47 = v63 + v57; /*0x79417e*/
+                  v48 = v64 + v58; /*0x794190*/
+                  v49 = v46 * v33; /*0x7941a2*/
+                  v50 = v47 * v33; /*0x7941ac*/
+                  v51 = v33 * v48; /*0x7941b4*/
+                  v59 = v49 + v53; /*0x7941c0*/
+                  v60 = v50 + v54; /*0x7941cf*/
+                  v61 = v51 + v55; /*0x7941e1*/
+                  rgb.x = v59 + rgb.x; /*0x7941f3*/
+                  rgb.y = v60 + rgb.y; /*0x794202*/
+                  rgb.z = v61 + rgb.z; /*0x794211*/
+                  v13 = v24; /*0x794215*/
+                  v11 = 0.0; /*0x794215*/
                 }
               }
-              v14 += 0x10;
-              ++v13;
+              lightAttrY += 0x10; /*0x794217*/
+              ++lightIndex; /*0x79421a*/
             }
-            while ( (int)v14 < (int)flt_B2B9D4 );
-            if ( v36 >= v12 )
+            while ( (int)lightAttrY < (int)flt_B2B9D4 ); /*0x794223*/
+            if ( rgb.x >= v11 ) /*0x794234*/
             {
-              if ( v36 > v15 )
-                v36 = v15;
-              v30 = v15;
-              v28 = v12;
-              v29 = v30;
+              if ( rgb.x > v13 ) /*0x79424d*/
+                rgb.x = v13; /*0x79424f*/
+              v28 = v13; /*0x794253*/
+              v26 = v11; /*0x794253*/
+              v27 = v28; /*0x794253*/
             }
             else
             {
-              v27 = v15;
-              v28 = v12;
-              v29 = v27;
-              v36 = v28;
+              v25 = v13; /*0x794238*/
+              v26 = v11; /*0x794238*/
+              v27 = v25; /*0x794238*/
+              rgb.x = v26; /*0x79423a*/
             }
-            if ( v37 >= v28 )
+            if ( rgb.y >= v26 ) /*0x794260*/
             {
-              if ( v37 > v29 )
-                v37 = v29;
+              if ( rgb.y > v27 ) /*0x794271*/
+                rgb.y = v27; /*0x794275*/
             }
             else
             {
-              v37 = v28;
+              rgb.y = v26; /*0x794264*/
             }
-            if ( v38 >= v28 )
+            if ( rgb.z >= v26 ) /*0x794286*/
             {
-              if ( v38 > v29 )
-                v38 = v29;
+              if ( rgb.z > v27 ) /*0x79429b*/
+                rgb.z = v27; /*0x79429d*/
             }
             else
             {
-              v38 = v28;
+              rgb.z = v26; /*0x79428c*/
             }
-            v31 = v49;
-            if ( (*(_BYTE *)(v49 + 0x74) & 1) != 0 )
+            lightingAfterLights = lighting; /*0x7942a5*/
+            if ( (lighting->staticLightingStyle & 1) != 0 ) /*0x7942ad*/
             {
-              if ( v7 >= v39[1] )
-                _invalid_parameter_noinfo();
-              sub_7A7F10((int)*v7, &v36, 0);
+              if ( leafIt >= (const OB_CBillboardLeaf_010201A0 **)p_begin[1] ) /*0x7942b9*/
+                _invalid_parameter_noinfo(lightIndex, (int)v10, (int)lighting); /*0x7942bb*/
+              OB_CBillboardLeaf_SetColor_010201A0((OB_CBillboardLeaf_010201A0 *)*leafIt, &rgb, 0);// Static style bit0 writes computed RGB with applyDimming=false: repacks but does not multiply colorScaleByte. /*0x7942ca*/
             }
-            if ( (*(_BYTE *)(v31 + 0x74) & 2) != 0 )
+            if ( (lightingAfterLights->staticLightingStyle & 2) != 0 ) /*0x7942d3*/
             {
-              if ( v7 >= v39[1] )
-                _invalid_parameter_noinfo();
-              sub_7A8090((float *)*v7, a3, (int)&v51, *(float *)(v31 + 0x70));
+              if ( leafIt >= (const OB_CBillboardLeaf_010201A0 **)p_begin[1] ) /*0x7942df*/
+                _invalid_parameter_noinfo(lightIndex, (int)v10, (int)lightingAfterLights); /*0x7942e1*/
+              OB_CBillboardLeaf_AdjustStaticLighting_010201A0( /*0x7942fd*/
+                (OB_CBillboardLeaf_010201A0 *)*leafIt,
+                treeCenter,
+                &lightPosition,
+                lightingAfterLights->leafLightingAdjustmentScalar);// Static style bit1 invokes dominant-light shadow adjustment after optional bit0 processing. That helper decodes packed RGB then calls SetColor(true).
             }
-            if ( v7 >= v39[1] )
-              _invalid_parameter_noinfo();
-            v6 = v39;
-            ++v7;
+            if ( leafIt >= (const OB_CBillboardLeaf_010201A0 **)p_begin[1] ) /*0x79430c*/
+              _invalid_parameter_noinfo(lightIndex, (int)v10, (int)lightingAfterLights); /*0x79430e*/
+            lodBeginSlot = p_begin; /*0x794313*/
+            ++leafIt; /*0x794317*/
           }
-          v6 += 4;
-          v5 = v50-- == 1;
-          v39 = v6;
+          lodBeginSlot += 4; /*0x79431f*/
+          v6 = v44-- == 1; /*0x794322*/
+          p_begin = lodBeginSlot; /*0x794327*/
         }
-        while ( !v5 );
+        while ( !v6 ); /*0x79432b*/
       }
     }
   }

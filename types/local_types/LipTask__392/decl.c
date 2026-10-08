@@ -1,1 +1,1 @@
-LipTask
+struct LipTask;

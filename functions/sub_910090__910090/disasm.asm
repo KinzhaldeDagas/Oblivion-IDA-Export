@@ -35,7 +35,7 @@
 0x910102: push    eax
 0x910103: lea     ecx, [esp+58h+var_20]
 0x910107: mov     [esp+58h+var_34], edi
-0x91010B: call    sub_88FCC0
+0x91010B: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x910110: mov     ecx, [ebx+50h]
 0x910113: mov     eax, [edi+50h]
 0x910116: lea     edx, [esi+30h]
@@ -44,7 +44,7 @@
 0x91011D: mov     [esp+54h+var_38], ecx
 0x910121: push    eax
 0x910122: lea     ecx, [esp+58h+var_30]
-0x910126: call    sub_88FCC0
+0x910126: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x91012B: fld     [esp+50h+var_3C]
 0x91012F: fmul    dword ptr [esi+40h]
 0x910132: mov     edx, [esp+50h+var_38]

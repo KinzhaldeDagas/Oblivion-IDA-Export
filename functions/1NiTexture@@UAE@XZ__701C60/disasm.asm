@@ -31,3 +31,12 @@
 0x701CC7: pop     esi
 0x701CC8: add     esp, 10h
 0x701CCB: retn
+0x9C9410: mov     ecx, [ebp-10h]; this
+0x9C9413: jmp     ??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C9418: mov     edx, [esp+arg_4]
+0x9C941C: lea     eax, [edx-8]
+0x9C941F: mov     ecx, [edx-0Ch]
+0x9C9422: xor     ecx, eax
+0x9C9424: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9429: mov     eax, offset stru_AF1CE8
+0x9C942E: jmp     ___CxxFrameHandler3

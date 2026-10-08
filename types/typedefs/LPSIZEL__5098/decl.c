@@ -1,1 +1,1 @@
-LPSIZEL
+typedef SIZE *LPSIZEL;

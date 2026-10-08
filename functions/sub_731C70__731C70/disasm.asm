@@ -13,7 +13,7 @@
 0x731C94: mov     ecx, [eax]
 0x731C96: push    eax
 0x731C97: mov     [esi], ecx
-0x731C99: call    FormHeapFree
+0x731C99: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x731C9E: add     esp, 4
 0x731CA1: pop     esi
 0x731CA2: retn
@@ -22,7 +22,6 @@
 0x731CA7: test    eax, eax
 0x731CA9: jz      short loc_731CD4
 0x731CAB: jmp     short loc_731CB0
-0x731CAD: align 10h
 0x731CB0: mov     esi, [eax+4]
 0x731CB3: cmp     ecx, [esi+0B0h]
 0x731CB9: jle     short loc_731CC5
@@ -36,7 +35,7 @@
 0x731CC7: mov     ecx, [eax]
 0x731CC9: push    eax
 0x731CCA: mov     [edx], ecx
-0x731CCC: call    FormHeapFree
+0x731CCC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x731CD1: add     esp, 4
 0x731CD4: pop     esi
 0x731CD5: retn

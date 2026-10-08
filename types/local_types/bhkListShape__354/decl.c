@@ -1,1 +1,1 @@
-bhkListShape
+struct bhkListShape;

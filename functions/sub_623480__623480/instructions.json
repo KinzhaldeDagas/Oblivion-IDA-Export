@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x6234A3",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6234A5",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6234AA",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6234AB",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6234AC",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x6234C1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6234C7",
-    "line": "call    sub_615520",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x6235BE",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,19 +547,19 @@
   },
   {
     "ea": "0x6235C9",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6235CE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6235D0",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x6235EA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6235EC",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x6236E6",
-    "line": "mov     byte ptr [esi+174h], 0",
+    "line": "mov     byte ptr [esi+174h], 0; Explicit pathing-failed branch sets CombatController+0x174 false before entering combat alert state.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x62378D",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,19 +1483,19 @@
   },
   {
     "ea": "0x623796",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x623798",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62379A",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x6237BF",
-    "line": "push    0; int",
+    "line": "push    0; unused",
     "mnemonic": "push",
     "size": 2
   },
@@ -1567,13 +1567,13 @@
   },
   {
     "ea": "0x6237C4",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+maximumDistance]; maximumDistance",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6237C8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1585,13 +1585,13 @@
   },
   {
     "ea": "0x6237CE",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+surfaceDistance]; surfaceDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6237D1",
-    "line": "call    sub_613440",
+    "line": "call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x62387F",
-    "line": "push    0; int",
+    "line": "push    0; unused",
     "mnemonic": "push",
     "size": 2
   },
@@ -1915,7 +1915,7 @@
   },
   {
     "ea": "0x623886",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x623890",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+maximumDistance]; maximumDistance",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1945,13 +1945,13 @@
   },
   {
     "ea": "0x623898",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+surfaceDistance]; surfaceDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x62389B",
-    "line": "call    sub_613440",
+    "line": "call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,13 +2011,13 @@
   },
   {
     "ea": "0x6238C8",
-    "line": "push    ecx",
+    "line": "push    ecx; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6238C9",
-    "line": "call    sub_612670",
+    "line": "call    CombatMode_IsNonRangedMode; Returns true for native combat modes 0, 1, or 3; returns false for ranged weapon modes 2 and 4 and for values above 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x6238ED",
-    "line": "push    0",
+    "line": "push    0; outAngleDegrees",
     "mnemonic": "push",
     "size": 2
   },
@@ -2089,25 +2089,25 @@
   },
   {
     "ea": "0x6238F1",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6238F6",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6238F7",
-    "line": "push    ebp",
+    "line": "push    ebp; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6238F8",
-    "line": "call    sub_6131D0",
+    "line": "call    Actor_IsFacingReferenceWithinCombatAngle; Computes the absolute XY heading difference from actor to target, normalizes across the 360-degree boundary, optionally returns degrees, and tests it against the combat-facing threshold game setting.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x62390A",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x62392D",
-    "line": "mov     ecx, offset unk_B36F68",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+290h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x62393F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,7 +2227,7 @@
   },
   {
     "ea": "0x623948",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x623978",
-    "line": "call    sub_4727E0",
+    "line": "call    ActorAnimData_GetNextTextKeySuffixChar; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with \"m:\" and compared with suffix 'l' to choose left/right attacks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,7 +2383,7 @@
   },
   {
     "ea": "0x62398E",
-    "line": "call    sub_612BD0",
+    "line": "call    CombatController_TryStartAttackAction; Attempts to start the selected attack animation group; on success it saves the prior mode, sets combat mode +0x74 to 0, and records the chosen attack group at +0x50. Private register-carried inputs are retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2467,7 +2467,7 @@
   },
   {
     "ea": "0x6239B3",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+maximumDistance]; float",
     "mnemonic": "fstp",
     "size": 3
   },

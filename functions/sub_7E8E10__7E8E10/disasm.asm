@@ -1,4 +1,4 @@
-0x7E8E10: push    0FFFFFFFFh
+0x7E8E10: push    0FFFFFFFFh; Fog render consumer decode: TallGrass/world-render fog writer reads active fog property and writes shared FogParam/FogColor vectors at B46638/B46648.
 0x7E8E12: push    offset SEH_7E8E10
 0x7E8E17: mov     eax, large fs:0
 0x7E8E1D: push    eax
@@ -49,9 +49,9 @@
 0x7E8E9D: mov     [eax+4], edx
 0x7E8EA0: mov     edx, [esp+6Ch+var_10]
 0x7E8EA4: mov     [eax+8], ecx
-0x7E8EA7: push    0
+0x7E8EA7: push    0; slot
 0x7E8EA9: mov     [eax+0Ch], edx
-0x7E8EAC: call    sub_7ECAE0
+0x7E8EAC: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x7E8EB1: fld1
 0x7E8EB3: add     esp, 14h
 0x7E8EB6: mov     eax, ds:0B43330h
@@ -93,7 +93,7 @@
 0x7E8F5C: mov     [edi+18Ch], edx
 0x7E8F62: mov     eax, ds:0B25ADCh
 0x7E8F67: mov     [edi+190h], eax
-0x7E8F6D: mov     eax, [ebp+0Ch]
+0x7E8F6D: mov     eax, [ebp+0Ch]; Fog render consumer decode: TallGrass reads active fog property from render/property state +0x0C; normally the B333E4-derived scene fog property.
 0x7E8F70: test    eax, eax
 0x7E8F72: jz      loc_7E9029
 0x7E8F78: fld     dword ptr [eax+2Ch]
@@ -113,7 +113,7 @@
 0x7E8FA9: fstp    dword ptr [esp+5Ch+var_3C]
 0x7E8FAD: mov     ecx, dword ptr [esp+5Ch+var_3C]
 0x7E8FB1: fld     [esp+5Ch+a2]
-0x7E8FB5: mov     ds:0B46638h, ecx
+0x7E8FB5: mov     ds:0B46638h, ecx; Fog render consumer decode: TallGrass shared FogParam B45E14[0x209..0x20C] = (fogEnd, fogEnd - fogStart, 0, 0).
 0x7E8FBB: fstp    dword ptr [esp+5Ch+var_3C+4]
 0x7E8FBF: mov     edx, dword ptr [esp+5Ch+var_3C+4]
 0x7E8FC3: mov     ds:0B4663Ch, edx
@@ -130,7 +130,7 @@
 0x7E8FF4: fstp    [esp+5Ch+var_28]
 0x7E8FF8: mov     eax, [esp+5Ch+var_28]
 0x7E8FFC: fld     [esp+5Ch+var_14]
-0x7E9000: mov     ds:0B46648h, edx
+0x7E9000: mov     ds:0B46648h, edx; Fog render consumer decode: TallGrass shared FogColor B45E14[0x20D..0x210] = (fog.r, fog.g, fog.b, 0).
 0x7E9006: fstp    [esp+5Ch+var_24]
 0x7E900A: mov     ecx, [esp+5Ch+var_24]
 0x7E900E: mov     ds:0B4664Ch, eax
@@ -140,9 +140,9 @@
 0x7E9021: mov     ds:0B46654h, edx
 0x7E9027: jmp     short loc_7E9093
 0x7E9029: fld     dword ptr ds:0A8C690h
-0x7E902F: fstp    [esp+5Ch+var_1C]
+0x7E902F: fstp    [esp+5Ch+var_1C]; Fog render consumer decode: TallGrass null-property fallback starts FogParam default path.
 0x7E9033: mov     eax, [esp+5Ch+var_1C]
-0x7E9037: mov     ds:0B46638h, eax
+0x7E9037: mov     ds:0B46638h, eax; Fog render consumer decode: TallGrass null-property fallback writes B45E14[0x209] = flt_A8C690 and zeroes remaining FogParam lanes.
 0x7E903C: fst     [esp+5Ch+var_18]
 0x7E9040: mov     ecx, [esp+5Ch+var_18]
 0x7E9044: fst     [esp+5Ch+var_14]
@@ -155,7 +155,7 @@
 0x7E9066: mov     edx, ds:0B25AD4h
 0x7E906C: mov     ds:0B46644h, eax
 0x7E9071: mov     eax, ds:0B25AD8h
-0x7E9076: mov     ds:0B46648h, ecx
+0x7E9076: mov     ds:0B46648h, ecx; Fog render consumer decode: TallGrass null-property fallback writes default FogColor from dword_B25AD0/B25AD4/B25AD8/B25ADC.
 0x7E907C: mov     ecx, ds:0B25ADCh
 0x7E9082: mov     ds:0B4664Ch, edx
 0x7E9088: mov     ds:0B46650h, eax
@@ -297,30 +297,30 @@
 0x7E929D: jmp     short loc_7E92A5
 0x7E929F: mov     eax, [edi+134h]
 0x7E92A5: push    eax; a2
-0x7E92A6: call    sub_7AECB0
+0x7E92A6: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7E92AB: mov     edx, ds:0B430B0h
 0x7E92B1: mov     eax, [edi+edx*4+14Ch]
-0x7E92B8: push    eax; a2
+0x7E92B8: push    eax; shader
 0x7E92B9: mov     ecx, esi; this
-0x7E92BB: call    sub_7AEC60
+0x7E92BB: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7E92C0: cmp     dword ptr [esi+30h], 0
 0x7E92C4: jnz     short loc_7E92CE
-0x7E92C6: call    sub_772DF0
+0x7E92C6: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E92CB: mov     [esi+30h], eax
 0x7E92CE: mov     ecx, [esi+30h]
 0x7E92D1: push    1
 0x7E92D3: push    3Fh ; '?'
 0x7E92D5: push    98h ; '˜'
-0x7E92DA: call    sub_772CD0
+0x7E92DA: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E92DF: mov     eax, [esi+24h]
 0x7E92E2: mov     eax, [eax]
 0x7E92E4: push    eax
 0x7E92E5: lea     ecx, [esp+60h+arg_0]
 0x7E92E9: call    sub_7AEC20
 0x7E92EE: mov     ecx, [esp+5Ch+a2]
-0x7E92F2: push    ecx; a2
+0x7E92F2: push    ecx; texture
 0x7E92F3: mov     ecx, [esp+60h+arg_0]; this
-0x7E92F7: call    sub_76C910
+0x7E92F7: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E92FC: mov     edx, [esi+24h]
 0x7E92FF: mov     eax, [edx+4]
 0x7E9302: push    eax
@@ -332,14 +332,14 @@
 0x7E9316: mov     ecx, [edx+114h]; this
 0x7E931C: call    BSRenderedTexture__GetInnerTexture
 0x7E9321: mov     ebp, [esp+5Ch+arg_0]
-0x7E9325: push    eax; a2
+0x7E9325: push    eax; texture
 0x7E9326: mov     ecx, ebp; this
-0x7E9328: call    sub_76C910
+0x7E9328: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E932D: jmp     loc_7E9618
 0x7E9332: cmp     byte ptr ds:0B43344h, 0
 0x7E9339: jz      short loc_7E934E
-0x7E933B: mov     ecx, ebx
-0x7E933D: call    sub_7ED600
+0x7E933B: mov     ecx, ebx; this
+0x7E933D: call    BSShaderLightingProperty__CountFrustumVisibleEnabledLights; Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.
 0x7E9342: movzx   eax, ax
 0x7E9345: test    ax, ax
 0x7E9348: jnz     loc_7E94B6
@@ -356,9 +356,9 @@
 0x7E9368: add     dword ptr [eax+5Ch], 1
 0x7E936C: mov     [esp+5Ch+arg_0], eax
 0x7E9370: mov     ecx, [esp+5Ch+a2]
-0x7E9374: push    ecx; a2
+0x7E9374: push    ecx; texture
 0x7E9375: mov     ecx, [esp+60h+arg_0]; this
-0x7E9379: call    sub_76C910
+0x7E9379: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E937E: mov     bl, [esp+5Ch+var_44]
 0x7E9382: test    bl, bl
 0x7E9384: jz      short loc_7E93C5
@@ -369,8 +369,8 @@
 0x7E9391: call    sub_7AEC20
 0x7E9396: mov     eax, ds:0B43108h
 0x7E939B: mov     ecx, [esp+5Ch+arg_0]; this
-0x7E939F: push    eax; a2
-0x7E93A0: call    sub_76C910
+0x7E939F: push    eax; texture
+0x7E93A0: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E93A5: mov     ecx, [esi+24h]
 0x7E93A8: mov     eax, [ecx+8]
 0x7E93AB: push    eax
@@ -378,8 +378,8 @@
 0x7E93B0: call    sub_7AEC20
 0x7E93B5: mov     edx, ds:0B4310Ch
 0x7E93BB: mov     ecx, [esp+5Ch+arg_0]; this
-0x7E93BF: push    edx; a2
-0x7E93C0: call    sub_76C910
+0x7E93BF: push    edx; texture
+0x7E93C0: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E93C5: cmp     [esp+5Ch+var_41], 0
 0x7E93CA: jz      short loc_7E9427
 0x7E93CC: cmp     [esp+5Ch+var_45], 0
@@ -390,7 +390,7 @@
 0x7E93DA: mov     eax, [edi+eax*4+0A0h]
 0x7E93E1: mov     ecx, esi; this
 0x7E93E3: push    eax; a2
-0x7E93E4: call    sub_7AECB0
+0x7E93E4: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7E93E9: movzx   ecx, word ptr [esp+5Ch+var_3C]
 0x7E93EE: mov     eax, [edi+ecx*4+134h]
 0x7E93F5: jmp     loc_7E95ED
@@ -436,7 +436,7 @@
 0x7E9488: mov     eax, [edi+eax*4+0B4h]
 0x7E948F: mov     ecx, esi; this
 0x7E9491: push    eax; a2
-0x7E9492: call    sub_7AECB0
+0x7E9492: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7E9497: test    bl, bl
 0x7E9499: jz      loc_7E93E9
 0x7E949F: cmp     word ptr [esp+5Ch+var_3C], 0
@@ -457,8 +457,8 @@
 0x7E94D7: mov     [esp+5Ch+arg_0], eax
 0x7E94DB: mov     eax, [esp+5Ch+a2]
 0x7E94DF: mov     ecx, [esp+5Ch+arg_0]; this
-0x7E94E3: push    eax; a2
-0x7E94E4: call    sub_76C910
+0x7E94E3: push    eax; texture
+0x7E94E4: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E94E9: cmp     dword ptr ds:0B42F48h, 2
 0x7E94F0: mov     ecx, [esi+24h]
 0x7E94F3: mov     eax, [ecx+4]
@@ -468,8 +468,8 @@
 0x7E94FD: call    sub_7AEC20
 0x7E9502: mov     edx, ds:0B43110h
 0x7E9508: mov     ecx, [esp+5Ch+arg_0]; this
-0x7E950C: push    edx; a2
-0x7E950D: call    sub_76C910
+0x7E950C: push    edx; texture
+0x7E950D: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E9512: mov     bl, [esp+5Ch+var_44]
 0x7E9516: test    bl, bl
 0x7E9518: jz      short loc_7E9594
@@ -479,9 +479,9 @@
 0x7E9521: lea     ecx, [esp+60h+arg_0]
 0x7E9525: call    sub_7AEC20
 0x7E952A: mov     ecx, ds:0B43108h
-0x7E9530: push    ecx; a2
+0x7E9530: push    ecx; texture
 0x7E9531: mov     ecx, [esp+60h+arg_0]; this
-0x7E9535: call    sub_76C910
+0x7E9535: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E953A: mov     edx, [esi+24h]
 0x7E953D: mov     eax, [edx+0Ch]
 0x7E9540: push    eax
@@ -489,23 +489,23 @@
 0x7E9545: call    sub_7AEC20
 0x7E954A: mov     eax, ds:0B4310Ch
 0x7E954F: mov     ecx, [esp+5Ch+arg_0]; this
-0x7E9553: push    eax; a2
-0x7E9554: call    sub_76C910
+0x7E9553: push    eax; texture
+0x7E9554: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E9559: jmp     short loc_7E9594
 0x7E955B: call    sub_7AEC20
 0x7E9560: mov     edx, ds:0B43110h
 0x7E9566: mov     ecx, [esp+5Ch+arg_0]; this
-0x7E956A: push    edx; a2
-0x7E956B: call    sub_76C910
+0x7E956A: push    edx; texture
+0x7E956B: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E9570: mov     eax, [esi+24h]
 0x7E9573: mov     eax, [eax+8]
 0x7E9576: push    eax
 0x7E9577: lea     ecx, [esp+60h+arg_0]
 0x7E957B: call    sub_7AEC20
 0x7E9580: mov     ecx, ds:0B430D4h
-0x7E9586: push    ecx; a2
+0x7E9586: push    ecx; texture
 0x7E9587: mov     ecx, [esp+60h+arg_0]; this
-0x7E958B: call    sub_76C910
+0x7E958B: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7E9590: mov     bl, [esp+5Ch+var_44]
 0x7E9594: cmp     [esp+5Ch+var_41], 0
 0x7E9599: jz      loc_7E96BB
@@ -526,63 +526,63 @@
 0x7E95D2: mov     eax, [edi+ecx*4+0A8h]
 0x7E95D9: mov     ecx, esi; this
 0x7E95DB: push    eax; a2
-0x7E95DC: call    sub_7AECB0
+0x7E95DC: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7E95E1: movzx   eax, word ptr [esp+5Ch+var_3C]
 0x7E95E6: mov     eax, [edi+eax*4+138h]
-0x7E95ED: push    eax; a2
+0x7E95ED: push    eax; shader
 0x7E95EE: mov     ecx, esi; this
-0x7E95F0: call    sub_7AEC60
+0x7E95F0: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7E95F5: cmp     dword ptr [esi+30h], 0
 0x7E95F9: jnz     short loc_7E9603
-0x7E95FB: call    sub_772DF0
+0x7E95FB: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E9600: mov     [esi+30h], eax
 0x7E9603: mov     ecx, [esi+30h]
 0x7E9606: push    0
 0x7E9608: push    0
 0x7E960A: push    98h ; '˜'
-0x7E960F: call    sub_772CD0
+0x7E960F: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E9614: mov     ebp, [esp+5Ch+arg_0]
 0x7E9618: cmp     word ptr ds:0B42EACh, 4
 0x7E9620: jnz     loc_7E9793
 0x7E9626: cmp     dword ptr [esi+30h], 0
 0x7E962A: jnz     short loc_7E9634
-0x7E962C: call    sub_772DF0
+0x7E962C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E9631: mov     [esi+30h], eax
 0x7E9634: mov     ecx, [esi+30h]
 0x7E9637: push    0
 0x7E9639: push    1
 0x7E963B: push    34h ; '4'
-0x7E963D: call    sub_772CD0
+0x7E963D: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E9642: cmp     dword ptr [esi+30h], 0
 0x7E9646: jnz     short loc_7E9650
-0x7E9648: call    sub_772DF0
+0x7E9648: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E964D: mov     [esi+30h], eax
 0x7E9650: mov     ecx, [esi+30h]
 0x7E9653: push    0
 0x7E9655: push    8
 0x7E9657: push    38h ; '8'
-0x7E9659: call    sub_772CD0
+0x7E9659: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E965E: cmp     dword ptr [esi+30h], 0
 0x7E9662: jnz     short loc_7E966C
-0x7E9664: call    sub_772DF0
+0x7E9664: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E9669: mov     [esi+30h], eax
 0x7E966C: mov     ecx, [esi+30h]
 0x7E966F: push    0
 0x7E9671: push    7
 0x7E9673: push    37h ; '7'
-0x7E9675: call    sub_772CD0
+0x7E9675: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E967A: cmp     dword ptr [esi+30h], 0
 0x7E967E: jnz     short loc_7E9688
-0x7E9680: call    sub_772DF0
+0x7E9680: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E9685: mov     [esi+30h], eax
 0x7E9688: mov     ecx, [esi+30h]
 0x7E968B: push    0
 0x7E968D: push    1
 0x7E968F: push    35h ; '5'
-0x7E9691: call    sub_772CD0
+0x7E9691: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E9696: cmp     dword ptr [esi+30h], 0
 0x7E969A: jnz     short loc_7E96A4
-0x7E969C: call    sub_772DF0
+0x7E969C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E96A1: mov     [esi+30h], eax
 0x7E96A4: push    0
 0x7E96A6: push    1
@@ -620,15 +620,15 @@
 0x7E971D: mov     eax, [edi+edx*4+0C4h]
 0x7E9724: mov     ecx, esi; this
 0x7E9726: push    eax; a2
-0x7E9727: call    sub_7AECB0
+0x7E9727: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7E972C: test    bl, bl
 0x7E972E: jz      loc_7E95E1
 0x7E9734: cmp     word ptr [esp+5Ch+var_3C], 0
 0x7E973A: jz      loc_7E95E1
 0x7E9740: mov     eax, [edi+148h]
-0x7E9746: push    eax; a2
+0x7E9746: push    eax; shader
 0x7E9747: mov     ecx, esi; this
-0x7E9749: call    sub_7AEC60
+0x7E9749: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7E974E: fld     dword ptr ds:0B44EE8h
 0x7E9754: fstp    [esp+5Ch+a2]
 0x7E9758: fld     dword ptr ds:0B44EECh
@@ -644,13 +644,13 @@
 0x7E978E: jmp     loc_7E95F5
 0x7E9793: cmp     dword ptr [esi+30h], 0
 0x7E9797: jnz     short loc_7E97A1
-0x7E9799: call    sub_772DF0
+0x7E9799: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E979E: mov     [esi+30h], eax
 0x7E97A1: push    0
 0x7E97A3: push    0
 0x7E97A5: push    34h ; '4'
 0x7E97A7: mov     ecx, [esi+30h]
-0x7E97AA: call    sub_772CD0
+0x7E97AA: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E97AF: cmp     dword ptr ds:0B42F48h, 2
 0x7E97B6: jl      short loc_7E97C1
 0x7E97B8: cmp     byte ptr ds:0B43070h, 0
@@ -660,20 +660,20 @@
 0x7E97C9: mov     eax, [ecx+8]
 0x7E97CC: mov     bl, [eax+1Ah]
 0x7E97CF: jnz     short loc_7E97D9
-0x7E97D1: call    sub_772DF0
+0x7E97D1: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7E97D6: mov     [esi+30h], eax
 0x7E97D9: mov     ecx, [esi+30h]
 0x7E97DC: movzx   edx, bl
 0x7E97DF: push    0
 0x7E97E1: push    edx
 0x7E97E2: push    18h
-0x7E97E4: call    sub_772CD0
+0x7E97E4: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7E97E9: mov     ecx, [edi+38h]
 0x7E97EC: lea     eax, [esp+5Ch+var_40]
-0x7E97F0: push    eax
-0x7E97F1: push    ecx
-0x7E97F2: lea     ecx, [edi+40h]
-0x7E97F5: call    sub_76CE40
+0x7E97F0: push    eax; value
+0x7E97F1: push    ecx; index
+0x7E97F2: lea     ecx, [edi+40h]; this
+0x7E97F5: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7E97FA: add     dword ptr [edi+38h], 1
 0x7E97FE: or      edi, 0FFFFFFFFh
 0x7E9801: test    ebp, ebp
@@ -682,12 +682,12 @@
 0x7E980A: add     [ebp+5Ch], edi
 0x7E980D: jnz     short loc_7E9816
 0x7E980F: mov     ecx, ebp
-0x7E9811: call    sub_772560
+0x7E9811: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7E9816: add     [esi+60h], edi
 0x7E9819: mov     [esp+5Ch+var_4], edi
 0x7E981D: jnz     short loc_7E9826
 0x7E981F: mov     ecx, esi
-0x7E9821: call    sub_7604D0
+0x7E9821: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7E9826: xor     eax, eax
 0x7E9828: mov     ecx, [esp+5Ch+var_C]
 0x7E982C: mov     large fs:0, ecx
@@ -698,3 +698,21 @@
 0x7E9837: pop     ebx
 0x7E9838: add     esp, 48h
 0x7E983B: retn    1Ch
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9CF920: lea     ecx, [ebp-40h]; void *
+0x9CF923: jmp     sub_4027D0
+0x9CF928: lea     ecx, [ebp+4]
+0x9CF92B: jmp     loc_75FA70
+0x9CF930: mov     edx, [esp+arg_4]
+0x9CF934: lea     eax, [edx-4Ch]
+0x9CF937: mov     ecx, [edx-50h]
+0x9CF93A: xor     ecx, eax
+0x9CF93C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF941: mov     eax, offset stru_AF8508
+0x9CF946: jmp     ___CxxFrameHandler3

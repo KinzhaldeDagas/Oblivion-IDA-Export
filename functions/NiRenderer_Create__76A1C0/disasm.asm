@@ -9,7 +9,7 @@
 0x76A1EA: push    ebp
 0x76A1EB: mov     ebp, ecx
 0x76A1ED: mov     ecx, [esp+4C8h+arg_4]
-0x76A1F4: mov     [ebp+0A58h], eax
+0x76A1F4: mov     [ebp+0A58h], eax; DeferredRendering: NiRenderer_Create stores requested width at NiDX9Renderer +0xA58 and height at +0xA5C; D3D device is later available at +0x280.
 0x76A1FA: mov     eax, [esp+4C8h+arg_18]
 0x76A201: mov     [ebp+0A5Ch], ecx
 0x76A207: mov     ecx, [esp+4C8h+arg_1C]
@@ -36,7 +36,7 @@
 0x76A282: mov     [ebp+0A84h], edx
 0x76A288: mov     [ebp+0A88h], eax
 0x76A28E: mov     [ebp+0A8Ch], ecx
-0x76A294: call    sub_763DE0
+0x76A294: call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.
 0x76A299: mov     [ebp+5BCh], ebx
 0x76A29F: mov     [ebp+3B8h], esi
 0x76A2A5: lea     ebx, [ebp+5C4h]
@@ -53,10 +53,10 @@
 0x76A2CD: push    0FFh; Src
 0x76A2D2: push    offset aCreationFail_0; "Creation failed: Invalid 3D device type"
 0x76A2D7: push    100h; SizeInBytes
-0x76A2DC: push    offset byte_B3F828; Dst
+0x76A2DC: push    offset unk_B3F828; Dst
 0x76A2E1: call    _strncpy_s
 0x76A2E6: push    offset aNidx9rendererI; "NiDX9Renderer::Initialize> Invalid devi"...
-0x76A2EB: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A2EB: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A2F0: add     esp, 14h
 0x76A2F3: jmp     loc_76A615
 0x76A2F8: mov     al, byte ptr [esp+4D0h+arg_8]
@@ -81,10 +81,10 @@
 0x76A335: push    0FFh; Src
 0x76A33A: push    offset aCreationFail_1; "Creation failed: Invalid Adapter"
 0x76A33F: push    100h; SizeInBytes
-0x76A344: push    offset byte_B3F828; Dst
+0x76A344: push    offset unk_B3F828; Dst
 0x76A349: call    _strncpy_s
 0x76A34E: push    offset aNidx9rendere_4; "NiDX9Renderer::Initialize> Invalid Adap"...
-0x76A353: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A353: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A358: add     esp, 14h
 0x76A35B: jmp     loc_76A615
 0x76A360: cmp     dword ptr [esi], 1
@@ -100,15 +100,14 @@
 0x76A37E: mov     [ebp+5D0h], eax
 0x76A384: jz      loc_76A2CD
 0x76A38A: push    38h ; '8'
-0x76A38C: lea     edx, [esp+4D4h+var_488]
+0x76A38C: lea     edx, [esp+4D4h+parameters]
 0x76A390: push    0
 0x76A392: push    edx
 0x76A393: call    __memset
 0x76A398: add     esp, 0Ch
 0x76A39B: jmp     short loc_76A3A0
-0x76A39D: align 10h
 0x76A3A0: push    offset aNidx9rendere_5; "NiDX9Renderer::Initialize> Attempting t"...
-0x76A3A5: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A3A5: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A3AA: mov     ecx, ds:0B42160h
 0x76A3B0: movzx   edx, word ptr [ecx+0Eh]
 0x76A3B4: mov     eax, [ebp+5BCh]
@@ -131,15 +130,15 @@
 0x76A3E8: push    0FFh; Src
 0x76A3ED: push    offset aCreationFail_2; "Creation failed: Requested device not v"...
 0x76A3F2: push    100h; SizeInBytes
-0x76A3F7: push    offset byte_B3F828; Dst
+0x76A3F7: push    offset unk_B3F828; Dst
 0x76A3FC: call    _strncpy_s
 0x76A401: push    offset aNidx9rendere_6; "NiDX9Renderer::Initialize> No device of"...
-0x76A406: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A406: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A40B: add     esp, 14h
 0x76A40E: jmp     loc_76A5BF
 0x76A413: mov     eax, [esp+4D0h+arg_24]
 0x76A41A: mov     ecx, [esp+4D0h+arg_34]
-0x76A421: lea     edx, [esp+4D0h+var_488]
+0x76A421: lea     edx, [esp+4D0h+parameters]
 0x76A425: push    edx
 0x76A426: mov     edx, [esp+4D4h+arg_28]
 0x76A42D: push    eax
@@ -162,11 +161,11 @@
 0x76A46D: push    eax
 0x76A46E: push    ecx
 0x76A46F: mov     ecx, ebp
-0x76A471: call    sub_761E60
+0x76A471: call    NiDX9Renderer_BuildPresentParameters; Oblivion-authoritative: builds the 0x38-byte D3DPRESENT_PARAMETERS block. Chooses framebuffer/depth formats, multisample type/quality, swap effect/backbuffer count, windowed/fullscreen mode, refresh rate, and presentation interval; degrades unsupported requests.
 0x76A476: test    al, al
 0x76A478: jz      loc_76A5BF
 0x76A47E: mov     eax, ds:0B42154h
-0x76A483: mov     edx, [esp+4D0h+var_47C]
+0x76A483: mov     edx, [esp+4D0h+parameters.BackBufferCount]
 0x76A487: mov     byte ptr ds:0B420E6h, 0
 0x76A48E: mov     ecx, [eax]
 0x76A490: mov     [esp+4D0h+arg_30], edx
@@ -177,7 +176,6 @@
 0x76A49F: test    eax, eax
 0x76A4A1: jbe     short loc_76A50C
 0x76A4A3: jmp     short loc_76A4B0
-0x76A4A5: align 10h
 0x76A4B0: mov     eax, ds:0B42154h
 0x76A4B5: mov     ecx, [eax]
 0x76A4B7: lea     edx, [esp+4D0h+var_450]
@@ -209,10 +207,10 @@
 0x76A511: mov     ecx, [eax]
 0x76A513: lea     esi, [ebp+280h]
 0x76A519: push    esi
-0x76A51A: lea     edx, [esp+4D4h+var_488]
+0x76A51A: lea     edx, [esp+4D4h+parameters]
 0x76A51E: push    edx
 0x76A51F: mov     edx, [ebp+5C4h]
-0x76A525: push    edx
+0x76A525: push    edx; DX11 backend audit 2026-09-24, OblivionNew: this push passes IDirect3D9::CreateDevice BehaviorFlags from renderer+0x5C4. Adjacent pushes supply hFocusWindow (+0x3B8), DeviceType (+0x5C0), Adapter (+0x5BC); output device is renderer+0x280. Installed V180 runtime log reports behavior=0x54 (MULTITHREADED|FPU_PRESERVE|HARDWARE_VERTEXPROCESSING); this is run evidence, not a claim that the field is statically constant.
 0x76A526: mov     edx, [ebp+3B8h]
 0x76A52C: lea     ebx, [ebp+5C4h]
 0x76A532: push    edx
@@ -221,12 +219,12 @@
 0x76A53A: mov     edx, [ebp+5BCh]
 0x76A540: push    edx
 0x76A541: push    eax
-0x76A542: mov     eax, [ecx+40h]
+0x76A542: mov     eax, [ecx+40h]; DX10OBSE deployed 2026-05-24: guarded hook config is armed locally (InstallHooks=1, validation/target-byte logging on, draw mirroring off). Log stream reopen bug is fixed; next OBSE launch should log Load/config/target validation/D3D9 CreateDevice/DX10 sidecar diagnostics from this callsite.
 0x76A545: call    eax
-0x76A547: mov     edi, [esp+4D0h+var_488]
-0x76A54B: mov     ecx, eax; void *
+0x76A547: mov     edi, [esp+4D0h+parameters.BackBufferWidth]
+0x76A54B: mov     ecx, eax; this
 0x76A54D: imul    edi, 64h ; 'd'
-0x76A550: mov     eax, [esp+4D0h+var_484]
+0x76A550: mov     eax, [esp+4D0h+parameters.BackBufferHeight]
 0x76A554: imul    eax, 64h ; 'd'
 0x76A557: xor     edx, edx
 0x76A559: div     edi
@@ -236,15 +234,15 @@
 0x76A563: mov     [ebp+0A90h], dl
 0x76A569: jge     loc_76A632
 0x76A56F: mov     eax, [esp+4D0h+arg_30]
-0x76A576: cmp     eax, [esp+4D0h+var_47C]
+0x76A576: cmp     eax, [esp+4D0h+parameters.BackBufferCount]
 0x76A57A: jz      short loc_76A5B8
 0x76A57C: push    offset aNidx9render_12; "NiDX9Renderer::Initialize> Specified nu"...
-0x76A581: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A581: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A586: mov     eax, ds:0B42154h
 0x76A58B: mov     ecx, [eax]
 0x76A58D: add     esp, 4
 0x76A590: push    esi
-0x76A591: lea     edx, [esp+4D4h+var_488]
+0x76A591: lea     edx, [esp+4D4h+parameters]
 0x76A595: push    edx
 0x76A596: mov     edx, [ebx]
 0x76A598: push    edx
@@ -267,7 +265,7 @@
 0x76A5CE: mov     [esp+4D0h+arg_18], edi
 0x76A5D5: jz      loc_76A957
 0x76A5DB: push    offset aNidx9render_13; "NiDX9Renderer::Initialize> Could not cr"...
-0x76A5E0: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A5E0: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A5E5: push    ebx
 0x76A5E6: lea     esi, [ebp+5C0h]
 0x76A5EC: push    esi
@@ -279,7 +277,7 @@
 0x76A5FE: push    offset aCreationFail_0; "Creation failed: Invalid 3D device type"
 0x76A603: call    sub_761A90
 0x76A608: push    offset aNidx9rendererI; "NiDX9Renderer::Initialize> Invalid devi"...
-0x76A60D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A60D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A612: add     esp, 8
 0x76A615: xor     al, al
 0x76A617: mov     ecx, [esp+4D0h+var_4]
@@ -296,16 +294,16 @@
 0x76A63B: push    0FFh; Src
 0x76A640: push    offset aCreationFail_6; "Creation failed: Could not create hardw"...
 0x76A645: push    100h; SizeInBytes
-0x76A64A: push    offset byte_B3F828; Dst
+0x76A64A: push    offset unk_B3F828; Dst
 0x76A64F: call    _strncpy_s
 0x76A654: push    offset aNidx9render_14; "NiDX9Renderer::Initialize> Could not cr"...
-0x76A659: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A659: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A65E: add     esp, 14h
 0x76A661: jmp     short loc_76A615
-0x76A663: lea     ecx, [esp+4D0h+var_488]
+0x76A663: lea     ecx, [esp+4D0h+parameters]
 0x76A667: push    ecx
 0x76A668: mov     ecx, ebp
-0x76A66A: call    sub_762110
+0x76A66A: call    NiDX9Renderer_InitializeDeviceStateAndSamplerPresets; Oblivion NiDX9 renderer/device setup. Among other device and capability work, runtime-initialize g_NiD3DFilterPresets_MinMagMip at 0xB420E8 and g_NiD3DAddressPresets_UV at 0xB42130. Filter rows [MIN,MAG,MIP]: 0=(POINT,POINT,NONE), 1=(LINEAR,LINEAR,NONE), 2=(LINEAR,LINEAR,LINEAR), 3=(POINT,POINT,POINT), 4=(POINT,POINT,LINEAR), 5=(LINEAR,LINEAR,POINT). Address rows [U,V]: 0=(CLAMP,CLAMP), 1=(CLAMP,WRAP), 2=(WRAP,CLAMP), 3=(WRAP,WRAP). The image defaults are -1; these values are runtime writes.
 0x76A66F: test    al, al
 0x76A671: jz      short loc_76A615
 0x76A673: mov     eax, [ebx]
@@ -317,24 +315,24 @@
 0x76A681: mov     [ebp+5C9h], al
 0x76A687: and     dl, 1
 0x76A68A: lea     eax, [esp+4D0h+a2]
-0x76A68E: push    eax; a3
-0x76A68F: lea     ecx, [esp+4D4h+var_488]; this
+0x76A68E: push    eax; parentBuffer
+0x76A68F: lea     ecx, [esp+4D4h+parameters]; this
 0x76A693: mov     [ebp+5C8h], dl
 0x76A699: mov     edx, [ebp+280h]
-0x76A69F: push    ecx; Src
-0x76A6A0: push    edx; a1
+0x76A69F: push    ecx; parameters
+0x76A6A0: push    edx; device
 0x76A6A1: mov     [esp+4DCh+a2], 0
-0x76A6A9: mov     [esp+4DCh+var_4C0], 0
-0x76A6B1: call    ??0NiDX9ImplicitBufferData@@QAE@XZ; NiDX9ImplicitBufferData::NiDX9ImplicitBufferData(void)
+0x76A6A9: mov     [esp+4DCh+parentBuffer], 0
+0x76A6B1: call    NiDX9ImplicitBufferData_Create
 0x76A6B6: mov     ecx, [ebp+280h]
 0x76A6BC: mov     edi, eax
-0x76A6BE: lea     eax, [esp+4DCh+var_4C0]
-0x76A6C2: push    eax
-0x76A6C3: push    ecx
-0x76A6C4: call    NiDX9DepthStencilBufferData_Create
-0x76A6C9: push    ebp; a2
-0x76A6CA: push    1; maxTargets
-0x76A6CC: call    CreateNewRenderTargetGroup
+0x76A6BE: lea     eax, [esp+4DCh+parentBuffer]
+0x76A6C2: push    eax; parentBuffer
+0x76A6C3: push    ecx; device
+0x76A6C4: call    NiDX9ImplicitDepthStencilBufferData__Create; Creates NiDX9ImplicitDepthStencilBufferData around IDirect3DDevice9::GetDepthStencilSurface. Reads the surface description, creates or attaches the parent Ni2DBuffer, and records the surface in the renderer's depth/stencil binding cache.
+0x76A6C9: push    ebp; renderer
+0x76A6CA: push    1; targetCount
+0x76A6CC: call    NiRenderTargetGroup__Create; Creates an empty NiRenderTargetGroup with a requested color-target count. Rejects null renderer, counts above renderer capability, and counts above Oblivion's hard MRT limit of four.
 0x76A6D1: mov     ecx, [esp+4ECh+a2]
 0x76A6D5: add     esp, 1Ch
 0x76A6D8: mov     [ebp+878h], eax
@@ -367,11 +365,11 @@
 0x76A72B: mov     ecx, ebp; this
 0x76A72D: mov     [ebp+87Ch], eax
 0x76A733: mov     [ebp+880h], eax
-0x76A739: call    sub_768C10
+0x76A739: call    NiDX9Renderer_InitializeTextureDefaults; Rebuilds NiDX9 renderer texture defaults after device creation/reset, including four default format resources and the small clipper/default source texture. Called during both initial creation and RecreateDevice.
 0x76A73E: test    al, al
 0x76A740: jnz     short loc_76A754
 0x76A742: push    offset aNidx9render_17; "NiDX9Renderer::Initialize> Could not in"...
-0x76A747: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A747: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A74C: add     esp, 4
 0x76A74F: jmp     loc_76A615
 0x76A754: push    1; char
@@ -437,9 +435,9 @@
 0x76A809: mov     ecx, [ebp+280h]; this
 0x76A80F: mov     [ebp+8B8h], eax
 0x76A815: mov     eax, [ebp+8B0h]
-0x76A81B: push    eax
-0x76A81C: push    ecx
-0x76A81D: call    ??0NiD3DGeometryGroupManager@@QAE@XZ; NiD3DGeometryGroupManager::NiD3DGeometryGroupManager(void)
+0x76A81B: push    eax; vertexBufferManager
+0x76A81C: push    ecx; device
+0x76A81D: call    NiD3DGeometryGroupManager_Create; Pass225: NiD3DGeometryGroupManager constructor; stores D3D device and vertex-buffer manager used for screen-texture +0x1C admission.
 0x76A822: mov     edx, [ebp+0]
 0x76A825: mov     [ebp+8A0h], eax
 0x76A82B: mov     eax, [edx+54h]
@@ -501,11 +499,11 @@
 0x76A8EC: fld     dword ptr ds:0A2FAACh
 0x76A8F2: push    edx
 0x76A8F3: fstp    [esp+4D8h+var_494]
-0x76A8F7: push    offset dword_B258E8
-0x76A8FC: push    offset dword_B258DC
-0x76A901: push    offset dword_B258D0
+0x76A8F7: push    offset rhs
+0x76A8FC: push    offset stru_B258DC
+0x76A901: push    offset stru_B258D0
 0x76A906: fst     [esp+4E4h+var_490]
-0x76A90A: push    offset Vector3_InitValue?
+0x76A90A: push    offset g_zeroNiPoint3
 0x76A90F: fldz
 0x76A911: mov     ecx, ebp
 0x76A913: fst     [esp+4E8h+var_4B4]
@@ -518,13 +516,13 @@
 0x76A92C: push    0FFh; Src
 0x76A931: push    offset aCreationFail_9; "Creation failed: Could not create refer"...
 0x76A936: push    100h; SizeInBytes
-0x76A93B: push    offset byte_B3F828; Dst
+0x76A93B: push    offset unk_B3F828; Dst
 0x76A940: call    _strncpy_s
 0x76A945: push    offset aNidx9render_18; "NiDX9Renderer::Initialize> Could not cr"...
-0x76A94A: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A94A: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A94F: add     esp, 14h
 0x76A952: jmp     loc_76A615
 0x76A957: push    offset aNidx9render_19; "NiDX9Renderer::Initialize> Could not cr"...
-0x76A95C: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76A95C: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76A961: add     esp, 4
 0x76A964: jmp     loc_76A615

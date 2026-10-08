@@ -1,1 +1,1 @@
-ScriptEffect
+struct ScriptEffect;

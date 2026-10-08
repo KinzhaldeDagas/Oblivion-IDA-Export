@@ -24,7 +24,7 @@
 0x6DF98E: xor     [ebx+0Ch], cx
 0x6DF992: mov     edx, [ebp+10h]
 0x6DF995: mov     [ebx+10h], edx
-0x6DF998: call    FormHeapFree
+0x6DF998: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DF99D: lea     esi, [ebp+18h]
 0x6DF9A0: lea     edi, [ebx+18h]
 0x6DF9A3: mov     ecx, 8
@@ -34,10 +34,10 @@
 0x6DF9B4: lea     edi, [ebx+38h]
 0x6DF9B7: sub     ebp, ebx
 0x6DF9B9: mov     [esp+10h+arg_4], 3
-0x6DF9C1: mov     ecx, [edi+ebp]
+0x6DF9C1: mov     ecx, [edi+ebp]; this
 0x6DF9C4: test    ecx, ecx
 0x6DF9C6: jz      short loc_6DFA05
-0x6DF9C8: call    sub_700900
+0x6DF9C8: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x6DF9CD: mov     esi, [edi]
 0x6DF9CF: mov     ebx, eax
 0x6DF9D1: cmp     esi, ebx

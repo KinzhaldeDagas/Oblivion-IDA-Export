@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x526F2E",
-    "line": "push    edx",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526F2F",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526F30",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x526F56",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x526F5A",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526F5B",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x526F87",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

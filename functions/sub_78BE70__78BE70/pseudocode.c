@@ -1,30 +1,32 @@
-_DWORD *__userpurge sub_78BE70@<eax>(int this@<ecx>, int a2@<edi>, int a3, int a4)
+// CSpeedTreeRT::SetLocalMatrices. Before Compute, forwards a validated matrix start/span to CWindEngine; after Compute reports stock no-effect error.
+void __thiscall CSpeedTreeRT__SetLocalMatrices(
+        OB_CSpeedTreeRT_010201A0 *this,
+        unsigned int startingMatrix,
+        unsigned int matrixSpan)
 {
-  bool v4; // zf
-  unsigned int v5; // edi
-  rsize_t v7; // [esp-4h] [ebp-60h] BYREF
-  char *v8; // [esp+4Ch] [ebp-10h]
-  int v9; // [esp+58h] [ebp-4h]
+  bool v3; // zf
+  int v4; // [esp+0h] [ebp-5Ch] BYREF
+  int *v5; // [esp+4Ch] [ebp-10h]
+  int v6; // [esp+58h] [ebp-4h]
 
-  v8 = (char *)&v7 + 4;
-  v4 = *(_BYTE *)(this + 0x45) == 0;
-  v9 = 0;
-  if ( v4 )
+  v5 = &v4; /*0x78be98*/
+  v3 = this->treeComputedFlag == 0; /*0x78be9b*/
+  v6 = 0; /*0x78be9f*/
+  if ( v3 ) /*0x78bea6*/
   {
-    v5 = (unsigned __int16)word_B42A10;
-    if ( a3 + a4 - 1 >= v5 )
-    {
-      LODWORD(v7) = 0x3C;
-      return sub_414500(&dword_B2B614, v5, "SetLocalMatrices() parameters exceed available wind matrices", v7);
-    }
+    if ( startingMatrix + matrixSpan - 1 >= CWindEngine__s_windMatrixContainer.matrixCount ) /*0x78bebb*/
+      OB_stString28_AssignBytes_010201A0( /*0x78bee7*/
+        &OB_g_strError_010201A0,
+        "SetLocalMatrices() parameters exceed available wind matrices",
+        0x3Cu);
     else
-    {
-      return (_DWORD *)sub_793C40(*(_DWORD **)(this + 0x10), a3, a4);
-    }
+      OB_CWindEngine_SetLocalMatrices_010201A0(this->windEngine, startingMatrix, matrixSpan); /*0x78bec2*/
   }
   else
   {
-    LODWORD(v7) = 0x40;
-    return sub_414500(&dword_B2B614, a2, "SetLocalMatrices() has no effect after Compute() has been called", v7);
+    OB_stString28_AssignBytes_010201A0( /*0x78bf07*/
+      &OB_g_strError_010201A0,
+      "SetLocalMatrices() has no effect after Compute() has been called",
+      0x40u);
   }
 }

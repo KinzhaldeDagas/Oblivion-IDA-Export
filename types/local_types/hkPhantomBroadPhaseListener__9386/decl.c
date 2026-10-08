@@ -1,1 +1,1 @@
-hkPhantomBroadPhaseListener
+struct hkPhantomBroadPhaseListener;

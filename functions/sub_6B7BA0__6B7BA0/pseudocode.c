@@ -1,5 +1,5 @@
-char __thiscall sub_6B7BA0(Unk1C *this)
+bool __thiscall DialogueItem::FirstResponse(DialogueItemView *this)
 {
-  this->unk00[2] = (UInt32)this;
-  return 1;
+  this->currentResponseNode = (DialogueResponseNode *)this; /*0x6b7ba0*/
+  return 1; /*0x6b7ba5*/
 }

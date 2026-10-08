@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FC7D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: Lighting30 shader definition builds multiple vertex declarations: 6-slot base object layout, 8-slot variant, 4-slot variant, and another 8-slot variant. Confirms object shaders have material-specific vertex layouts.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7FC801",
-    "line": "mov     [esp+28h+var_14], eax",
+    "line": "mov     [esp+28h+objectDeclaration], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x7FC823",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC825",
-    "line": "push    6; a2",
+    "line": "push    6; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC827",
-    "line": "push    eax; a1",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7FC830",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Create Lighting30 one-stream six-element object declaration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,25 +349,25 @@
   },
   {
     "ea": "0x7FC878",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC87A",
-    "line": "push    8; a2",
+    "line": "push    8; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC87C",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FC87D",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,43 +379,43 @@
   },
   {
     "ea": "0x7FC888",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC88A",
-    "line": "push    4; a2",
+    "line": "push    4; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC88C",
-    "line": "push    edx; a1",
+    "line": "push    edx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FC88D",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Create Lighting30 one-stream eight-element skinned declaration.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7FC88F",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FC894",
-    "line": "push    1; StreamCount",
+    "line": "push    1; streamCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC896",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; Create Lighting30 alternate one-stream four-element declaration.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x7FC89D",
-    "line": "push    8; a2",
+    "line": "push    8; elementCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FC89F",
-    "line": "push    eax; a1",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FC8A0",
-    "line": "call    CreateDX9ShaderDeclaration",
+    "line": "call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7FC8B5",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; Create Lighting30 alternate one-stream eight-element declaration.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x7FC8BC",
-    "line": "call    eax",
+    "line": "call    eax; Object declaration element 0: POSITION0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7FC8D0",
-    "line": "call    eax",
+    "line": "call    eax; Object declaration element 1: NORMAL0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x7FC8E4",
-    "line": "call    eax",
+    "line": "call    eax; Object declaration element 2: COLOR0, FLOAT4.",
     "mnemonic": "call",
     "size": 2
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x7FC8F8",
-    "line": "call    eax",
+    "line": "call    eax; Object declaration element 3: TEXCOORD0, FLOAT2.",
     "mnemonic": "call",
     "size": 2
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x7FC915",
-    "line": "call    eax",
+    "line": "call    eax; Object declaration element 4: generated TANGENT0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x7FC932",
-    "line": "call    eax",
+    "line": "call    eax; Object declaration element 5: generated BINORMAL0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x7FC945",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 0: POSITION0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x7FC958",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 1: BLENDWEIGHT0, FLOAT4.",
     "mnemonic": "call",
     "size": 2
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x7FC96B",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 2: BLENDINDICES0, D3DCOLOR (normalized/swizzled packed indices).",
     "mnemonic": "call",
     "size": 2
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x7FC97E",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 3: NORMAL0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x7FC991",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 4: COLOR0, FLOAT4.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x7FC9A4",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 5: TEXCOORD0, FLOAT2.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x7FC9C0",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 6: generated TANGENT0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x7FC9DC",
-    "line": "call    eax",
+    "line": "call    eax; Skinned declaration element 7: generated BINORMAL0, FLOAT3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x7FCAEB",
-    "line": "mov     [esp+28h+var_14], ecx",
+    "line": "mov     [esp+28h+objectDeclaration], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x7FCAF1",
-    "line": "mov     [esp+28h+var_14], ecx",
+    "line": "mov     [esp+28h+objectDeclaration], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x7FCB02",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2119,13 +2119,13 @@
   },
   {
     "ea": "0x7FCB1A",
-    "line": "and     eax, [esp+28h+var_14]",
+    "line": "and     eax, [esp+28h+objectDeclaration]",
     "mnemonic": "and",
     "size": 4
   },
   {
     "ea": "0x7FCB1E",
-    "line": "mov     [esp+28h+var_14], eax",
+    "line": "mov     [esp+28h+objectDeclaration], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x7FCB30",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x7FCB60",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x7FCB85",
-    "line": "cmp     eax, offset dword_B3F684",
+    "line": "cmp     eax, offset stru_B3F684",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2473,31 +2473,31 @@
   },
   {
     "ea": "0x7FCBBA",
-    "line": "mov     ecx, [esp+28h+var_14]",
+    "line": "mov     ecx, [esp+28h+objectDeclaration]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FCBBE",
-    "line": "push    edi",
+    "line": "push    edi; alternate8Declaration",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FCBBF",
-    "line": "push    ebx",
+    "line": "push    ebx; alternate4Declaration",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FCBC0",
-    "line": "push    esi",
+    "line": "push    esi; skinDeclaration",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FCBC1",
-    "line": "push    ecx",
+    "line": "push    ecx; objectDeclaration",
     "mnemonic": "push",
     "size": 1
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x7FCBC4",
-    "line": "call    ??0Lighting30Shader@@QAE@XZ; Lighting30Shader::Lighting30Shader(void)",
+    "line": "call    ??0Lighting30Shader@@QAE@XZ; Lighting30ShaderDefinition_Create constructs the concrete Lighting30Shader used by GetShaderDefinition(0x1A).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2902,5 +2902,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE940",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE943",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE944",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE949",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE94A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE94B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE94E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE94F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE954",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE955",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE956",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE95A",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE95D",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE960",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE962",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE967",
+    "line": "mov     eax, offset stru_AF7880",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE96C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

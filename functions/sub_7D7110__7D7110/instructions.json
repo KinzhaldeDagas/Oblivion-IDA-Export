@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D7110",
-    "line": "cmp     dword ptr ds:0B45D74h, 0",
+    "line": "cmp     dword ptr ds:0B45D74h, 0; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x7D711F",
-    "line": "call    sub_7D6B00",
+    "line": "call    NiDX9Renderer_EndRenderTargetGroupLocked; End the currently ready target group before changing stack ownership.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D7124",
-    "line": "call    sub_7D7030",
+    "line": "call    NiRenderer_ReleaseTopRenderTargetGroup; Release and remove the current top stack entry.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D7129",
-    "line": "call    sub_7D6B70",
+    "line": "call    NiRenderer_PeekRenderTargetGroup; Read the newly exposed previous group after the pop.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x7D7147",
-    "line": "push    eax; a2",
+    "line": "push    eax; targetGroup",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D7148",
-    "line": "call    sub_7D6A80",
+    "line": "call    NiDX9Renderer_BeginRenderTargetGroupLocked; Resume the previous or default group without clearing it.",
     "mnemonic": "call",
     "size": 5
   },

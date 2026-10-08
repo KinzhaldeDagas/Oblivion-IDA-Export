@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A9560",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; TESAmmo 3D creator. Builds the generic bound-object clone, reads ExtraCount, and removes ArrowQuiver/ArrowN children so visible quiver arrows match the represented stack count.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,31 +85,31 @@
   },
   {
     "ea": "0x4A9587",
-    "line": "mov     eax, [esp+28h+arg_4]",
+    "line": "mov     eax, [esp+28h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A958B",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A958F",
-    "line": "push    eax; int",
+    "line": "push    eax; arg1",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A9590",
-    "line": "push    edi; int",
+    "line": "push    edi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A9591",
-    "line": "call    sub_4B3750",
+    "line": "call    TESBoundObject_Create3DImpl; Generic bound-object 3D implementation used by many form classes. Obtains/caches the model, clones its NiNode tree for the reference, applies scale, and resets the clone's local transform.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4A95E0",
-    "line": "lea     eax, [esp+2Ch+arg_4]",
+    "line": "lea     eax, [esp+2Ch+arg1]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x4A95E7",
-    "line": "lea     ecx, [esp+28h+arg_4]; this",
+    "line": "lea     ecx, [esp+28h+arg1]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4A95EB",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4A965D",
-    "line": "lea     eax, [esp+2Ch+arg_0]",
+    "line": "lea     eax, [esp+2Ch+reference]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x4A9664",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4A9697",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -692,6 +692,60 @@
   {
     "ea": "0x4A96B0",
     "line": "jmp     loc_4A9611",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BD0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BD3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BD8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5BDC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BDF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BE9",
+    "line": "mov     eax, offset stru_AE0BB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BEE",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -1,6 +1,6 @@
-0x51AA10: push    esi
+0x51AA10: push    esi; Stores the encoded group key at TESAnimGroup +0x08. Using the unsigned low group byte without a bounds check, indexes the fixed 43-record table, reads noteTemplateClass at record +0x0C, counts that class in the note-major required-note matrix (max 5), writes requiredNoteCount at +0x0C, frees the old +0x10 time array, allocates count*4, and zero-fills it to +0.0f. Later KF parsing populates and validates the authored times. Corrected: this initializer does not write QNaNs.
 0x51AA11: mov     esi, ecx
-0x51AA13: mov     ecx, [esp+4+arg_0]
+0x51AA13: mov     ecx, dword ptr [esp+4+groupKey]
 0x51AA17: mov     [esi+8], cx
 0x51AA1B: movzx   ecx, cl
 0x51AA1E: lea     ecx, [ecx+ecx*8]
@@ -19,7 +19,7 @@
 0x51AA49: test    eax, eax
 0x51AA4B: jz      short loc_51AA56
 0x51AA4D: push    eax
-0x51AA4E: call    FormHeapFree
+0x51AA4E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51AA53: add     esp, 4
 0x51AA56: mov     eax, [esi+0Ch]
 0x51AA59: test    eax, eax

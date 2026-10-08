@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7E44E0",
+  "chunks": [
+    [
+      "0x7E44E0",
+      "0x7E45EA"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "9df90c4cf6c4fee04072821a2eaf9d61b4164ccd42a3f0be678150fa20764d48",
+  "comment_regular": "Verified (Oblivion): checks NiNode property ID 4, removes a non-ParticleShaderProperty occupant, allocates a 0x128-byte ParticleShaderProperty when needed, attaches it, and initializes it for the geometry.",
+  "comment_repeatable": "Verified (Oblivion): checks NiNode property ID 4, removes a non-ParticleShaderProperty occupant, allocates a 0x128-byte ParticleShaderProperty when needed, attaches it, and initializes it for the geometry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiD3DShader_EnsureParticleShaderProperty",
   "end_ea": "0x7E45EA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E44E0",
+  "name": "NiD3DShader_EnsureParticleShaderProperty",
   "segment": ".text",
   "sha256": "2334b4d048d1288190a3781b179269e6705dff21c38525538eec80162ee95a78",
   "size": 266,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E44E0",
-  "type": "char __thiscall(NiD3DShader *this, NiNode *)",
-  "xrefs_from_count": 110,
+  "total_chunk_size": 304,
+  "type": "char __thiscall(NiD3DShader *this, NiObjectNET *targetGeometry)",
+  "xrefs_from_count": 124,
   "xrefs_to_count": 1
 }

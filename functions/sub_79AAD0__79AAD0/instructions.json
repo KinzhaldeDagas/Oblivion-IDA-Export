@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79AAD0",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AAD1",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79AADD",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79AAE2",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,31 +55,31 @@
   },
   {
     "ea": "0x79AAE7",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AAEB",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AAEC",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AAED",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AAEE",
-    "line": "call    sub_79A9B0",
+    "line": "call    OB_SFrondVertex_UninitializedCopy_010201A0; Copies 0x38-byte SFrondVertex records from [first,last) into uninitialized destination storage and returns the constructed end.",
     "mnemonic": "call",
     "size": 5
   },

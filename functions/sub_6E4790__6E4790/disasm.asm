@@ -37,7 +37,7 @@
 0x6E47F3: mov     eax, ds:0B3D0D0h[ebx*4]
 0x6E47FA: push    ecx
 0x6E47FB: push    esi
-0x6E47FC: call    eax ; dword_B3D0D0
+0x6E47FC: call    eax ; unk_B3D0D0
 0x6E47FE: mov     edx, [esp+30h+a2]
 0x6E4802: add     esp, 1Ch
 0x6E4805: push    ebx

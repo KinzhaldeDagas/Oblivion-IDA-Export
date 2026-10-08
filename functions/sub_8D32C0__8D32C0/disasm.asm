@@ -26,7 +26,7 @@
 0x8D330A: lea     ecx, [eax+50h]
 0x8D330D: push    ecx
 0x8D330E: lea     ecx, [eax+20h]
-0x8D3311: call    sub_88FE00
+0x8D3311: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8D3316: mov     eax, [edi+4]
 0x8D3319: inc     esi
 0x8D331A: cmp     esi, eax

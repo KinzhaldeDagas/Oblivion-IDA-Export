@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x85AAC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Shared Oblivion mode-5 caster allocator: rigid opaque=6, rigid alpha-test=7, skinned opaque=8, skinned alpha-test=9; each pass carries the current ShadowSceneLight.",
     "mnemonic": "push",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x85AB16",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,37 +157,37 @@
   },
   {
     "ea": "0x85AB1B",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB1D",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB1F",
-    "line": "push    6",
+    "line": "push    6; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB21",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB22",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB23",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Mode-5 caster selector 6: rigid geometry without NiAlphaProperty alpha-test flag 0x200.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x85AB39",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,37 +235,37 @@
   },
   {
     "ea": "0x85AB3E",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB40",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB42",
-    "line": "push    7",
+    "line": "push    7; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB44",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB45",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB46",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Mode-5 caster selector 7: rigid geometry with NiAlphaProperty alpha-test flag 0x200.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x85AB67",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,37 +331,37 @@
   },
   {
     "ea": "0x85AB6C",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB6E",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB70",
-    "line": "push    8",
+    "line": "push    8; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB72",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB73",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB74",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Mode-5 caster selector 8: skinned geometry without NiAlphaProperty alpha-test flag 0x200.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x85AB8A",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,37 +409,37 @@
   },
   {
     "ea": "0x85AB8F",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB91",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB93",
-    "line": "push    9",
+    "line": "push    9; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85AB95",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB96",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85AB97",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Mode-5 caster selector 9: skinned geometry with NiAlphaProperty alpha-test flag 0x200.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x85ABB7",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -538,5 +538,167 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D3930",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3933",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3934",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3939",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D393A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D393B",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D393E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D393F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3944",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3945",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3946",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3949",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D394A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D394F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3950",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3951",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3954",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3955",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D395A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D395B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D395C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D3960",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3963",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3966",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D3968",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D396D",
+    "line": "mov     eax, offset stru_AFBC68",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3972",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

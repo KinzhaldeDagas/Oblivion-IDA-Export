@@ -1,1 +1,1 @@
-HEAP
+typedef tagHEAP HEAP;

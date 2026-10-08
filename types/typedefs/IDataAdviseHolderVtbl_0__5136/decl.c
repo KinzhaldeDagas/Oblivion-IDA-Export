@@ -1,1 +1,1 @@
-IDataAdviseHolderVtbl_0
+typedef IDataAdviseHolderVtbl IDataAdviseHolderVtbl_0;

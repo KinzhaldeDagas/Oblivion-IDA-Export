@@ -1,9 +1,9 @@
 _DWORD *sub_A14340()
 {
-  return sub_90D190(
-           dword_BA88A8,
+  return sub_90D190( /*0xa14367*/
+           unk_BA88A8,
            (int)"hkSerializedDisplayRbTransforms",
-           (int)&unk_BA94C0,
+           (int)unk_BA94C0,
            0x14,
            0,
            0,

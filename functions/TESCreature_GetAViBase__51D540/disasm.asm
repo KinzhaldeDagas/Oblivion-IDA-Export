@@ -18,4 +18,4 @@
 0x51D577: movzx   eax, al
 0x51D57A: retn    4
 0x51D57D: mov     [esp+arg_0], eax
-0x51D581: jmp     TESActorBase_GetAViBase
+0x51D581: jmp     TESActorBase_GetAViBase; TESActorBase base AV getter: actor value 7 reads attributes component index 7. Correlates with Luck via Actor_GetLuckModifiedBaseAV using AV 7.

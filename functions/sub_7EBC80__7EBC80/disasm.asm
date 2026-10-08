@@ -1,4 +1,4 @@
-0x7EBC80: sub     esp, 3DCh
+0x7EBC80: sub     esp, 3DCh; MoonSugarEffect decode: Hit/double-vision program loader. Loads base/copy/blur/doublevis variants and stores vertex/pixel wrappers with ref-counted replace.
 0x7EBC86: mov     eax, ds:0B30AACh
 0x7EBC8B: xor     eax, esp
 0x7EBC8D: mov     [esp+3DCh+var_4], eax
@@ -59,7 +59,6 @@
 0x7EBD73: lea     ebx, [edi+0A0h]
 0x7EBD79: jmp     short loc_7EBD84
 0x7EBD7B: jmp     short loc_7EBD80
-0x7EBD7D: align 10h
 0x7EBD80: mov     edi, [esp+3ECh+var_3D8]
 0x7EBD84: mov     eax, [esp+ebp+3ECh+FullPath]
 0x7EBD88: test    eax, eax
@@ -85,7 +84,7 @@
 0x7EBDCE: lea     eax, [esp+400h+FileName]
 0x7EBDD5: push    eax; lpFileName
 0x7EBDD6: mov     ecx, edi
-0x7EBDD8: call    CreateVertexShader
+0x7EBDD8: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7EBDDD: mov     esi, [ebx-0Ch]
 0x7EBDE0: mov     edi, eax
 0x7EBDE2: cmp     esi, edi
@@ -134,7 +133,7 @@
 0x7EBE6A: push    edx; int
 0x7EBE6B: lea     eax, [esp+400h+FileName]
 0x7EBE72: push    eax; lpFileName
-0x7EBE73: call    CreatePixelShader
+0x7EBE73: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7EBE78: mov     esi, [ebx]
 0x7EBE7A: mov     edi, eax
 0x7EBE7C: cmp     esi, edi

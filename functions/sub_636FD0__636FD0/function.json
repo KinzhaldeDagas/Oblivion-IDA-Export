@@ -1,19 +1,36 @@
 {
-  "callees_count": 56,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 113,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x636FD0",
+      "0x637345"
+    ],
+    [
+      "0x637351",
+      "0x6384AA"
+    ]
+  ],
+  "chunks_sha256": "45e7c03327336554e8007b73d8ce95bccf3fc482ded0e5482ad08f153730a29a",
+  "comment_regular": "BunkFix: shared movement/activation executor. Sleep action calls this through HighProcess vtable +0x51C with flag 0 after selecting a furniture ref; activation paths call ActivateRef once actor reaches/turns toward target.",
+  "comment_repeatable": "BunkFix: shared movement/activation executor. Sleep action calls this through HighProcess vtable +0x51C with flag 0 after selecting a furniture ref; activation paths call ActivateRef once actor reaches/turns toward target.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "sub_636FD0",
   "end_ea": "0x637345",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_636FD0",
   "segment": ".text",
   "sha256": "724894f3fc0e15d2dd0dabfc3e9750dc51a3ffcbacac79ed704a61ec0eae9de2",
   "size": 885,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x636FD0",
+  "total_chunk_size": 5326,
   "type": "char __userpurge@<al>(int *@<ecx>, double@<st1>, double Distance@<st0>, Actor *, int)",
-  "xrefs_from_count": 336,
+  "xrefs_from_count": 2071,
   "xrefs_to_count": 1
 }

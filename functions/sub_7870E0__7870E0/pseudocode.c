@@ -1,9 +1,6 @@
-int __thiscall sub_7870E0(int *this, float a2)
+// CSpeedTreeRT::SetBranchDimmingScalar. Writes CTreeEngine+0x8C when the engine exists. Fallout symbols identify the field; Oblivion layout is authoritative.
+void __thiscall CSpeedTreeRT__SetBranchDimmingScalar(OB_CSpeedTreeRT_010201A0 *this, float scalar)
 {
-  int result; // eax
-
-  result = *this;
-  if ( *this )
-    *(float *)(result + 0x8C) = a2;
-  return result;
+  if ( this->treeEngine ) /*0x7870e0*/
+    this->treeEngine->leafInfo.branchDimmingScalar = scalar; /*0x7870ea*/
 }

@@ -30,18 +30,18 @@
 0x46A642: jnz     TESDescription_LoadToCache___Done
 0x46A648: push    0; a3
 0x46A64A: push    0; a2
-0x46A64C: mov     ecx, offset TESDescription_CachedDesc; this
+0x46A64C: mov     ecx, 0B33C08h; this
 0x46A651: mov     ds:0B33C04h, edi
 0x46A657: call    BSStringT_Set
 0x46A65C: push    0FFFFFFFFh; a2
 0x46A65E: mov     ecx, ebx; this
-0x46A660: call    TESForm_GetOverrideFile
+0x46A660: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x46A665: test    eax, eax
 0x46A667: jz      short TESDescription_LoadToCache___Done
 0x46A669: cmp     dword ptr [edi+4], 0
 0x46A66D: jz      short TESDescription_LoadToCache___Done
 0x46A66F: mov     ecx, eax
-0x46A671: call    sub_4520F0
+0x46A671: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x46A676: mov     esi, eax
 0x46A678: mov     eax, [edi+4]
 0x46A67B: push    eax; Buffer
@@ -71,8 +71,8 @@
 0x46A6C6: push    0; a4
 0x46A6C8: push    edi; Dst
 0x46A6C9: mov     ecx, esi; a1
-0x46A6CB: call    TESFile_GetChunkData
+0x46A6CB: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x46A6D0: push    0; a3
 0x46A6D2: push    edi; a2
-0x46A6D3: mov     ecx, offset TESDescription_CachedDesc; this
+0x46A6D3: mov     ecx, 0B33C08h; this
 0x46A6D8: call    BSStringT_Set

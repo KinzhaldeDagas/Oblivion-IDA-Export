@@ -2,8 +2,8 @@ LockFreeMap *__thiscall LockFreeCaseInsensitiveStringMap<KFModel *>::`scalar del
         LockFreeMap *this,
         char a2)
 {
-  LockFreeCaseInsensitiveStringMap<KFModel *>::~LockFreeCaseInsensitiveStringMap<KFModel *>(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  LockFreeCaseInsensitiveStringMap<KFModel *>::~LockFreeCaseInsensitiveStringMap<KFModel *>(this); /*0x43eb13*/
+  if ( (a2 & 1) != 0 ) /*0x43eb1d*/
+    FormHeapFree((unsigned int)this); /*0x43eb20*/
+  return this; /*0x43eb2a*/
 }

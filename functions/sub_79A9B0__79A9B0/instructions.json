@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79A9B0",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+first]; Copies 0x38-byte SFrondVertex records from [first,last) into uninitialized destination storage and returns the constructed end.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79A9B4",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79A9B9",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },

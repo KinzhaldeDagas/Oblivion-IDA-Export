@@ -1,4 +1,4 @@
-0x791140: push    ebp
+0x791140: push    ebp; Fixed-stride 0x18 vector insert/fill machinery for OB_CBranchFlareEntry records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791510 always requests count=1.
 0x791141: mov     ebp, esp
 0x791143: push    0FFFFFFFFh
 0x791145: push    offset SEH_791140
@@ -15,10 +15,10 @@
 0x791162: mov     large fs:0, eax
 0x791168: mov     [ebp+var_10], esp
 0x79116B: mov     esi, ecx
-0x79116D: mov     eax, [ebp+arg_C]
+0x79116D: mov     eax, [ebp+value]
 0x791170: mov     ecx, [eax]
 0x791172: mov     edx, [eax+4]
-0x791175: mov     [ebp+var_28], ecx
+0x791175: mov     dword ptr [ebp+var_28], ecx
 0x791178: mov     ecx, [eax+8]
 0x79117B: mov     [ebp+var_20], ecx
 0x79117E: mov     ecx, [eax+10h]
@@ -41,7 +41,7 @@
 0x7911AD: mov     ebx, edx
 0x7911AF: shr     ebx, 1Fh
 0x7911B2: add     ebx, edx
-0x7911B4: mov     edi, [ebp+arg_8]
+0x7911B4: mov     edi, [ebp+count]
 0x7911B7: test    edi, edi
 0x7911B9: jz      loc_7913F5
 0x7911BF: test    ecx, ecx
@@ -60,7 +60,7 @@
 0x7911E2: sub     edx, eax
 0x7911E4: cmp     edx, edi
 0x7911E6: jnb     short loc_7911ED
-0x7911E8: call    sub_790B90
+0x7911E8: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x7911ED: test    ecx, ecx
 0x7911EF: jnz     short loc_7911F5
 0x7911F1: xor     eax, eax
@@ -100,46 +100,46 @@
 0x791248: add     eax, edi
 0x79124A: cmp     ebx, eax
 0x79124C: jnb     short loc_791259
-0x79124E: mov     ecx, esi
-0x791250: call    sub_783FE0
+0x79124E: mov     ecx, esi; this
+0x791250: call    OB_stVector24_Size_010201A0; Oblivion 1.2.0.416: returns (end-begin)/0x18 for a compiler-folded 24-byte vector specialization; xrefs show both stVec and branch-flare records.
 0x791255: mov     ebx, eax
 0x791257: add     ebx, edi
 0x791259: push    0
-0x79125B: push    ebx; char *
-0x79125C: call    sub_78FB00
+0x79125B: push    ebx; count
+0x79125C: call    OB_stVectorBranchFlareEntry_Allocate_010201A0; Allocates count contiguous 0x18-byte OB_CBranchFlareEntry records from FormHeap. Checks count*24 overflow and throws std::bad_alloc before allocation on overflow.
 0x791261: mov     ecx, [esi+4]
-0x791264: mov     byte ptr [ebp+arg_8], 0
-0x791268: mov     edx, [ebp+arg_8]
+0x791264: mov     byte ptr [ebp+count], 0
+0x791268: mov     edx, [ebp+count]
 0x79126B: push    edx
-0x79126C: mov     [ebp+arg_C], eax
-0x79126F: mov     edx, [ebp+arg_C]
+0x79126C: mov     [ebp+value], eax
+0x79126F: mov     edx, [ebp+value]
 0x791272: push    edx
 0x791273: push    esi
-0x791274: push    eax
-0x791275: mov     eax, [ebp+arg_4]
-0x791278: push    eax
-0x791279: push    ecx
+0x791274: push    eax; destination
+0x791275: mov     eax, [ebp+position]
+0x791278: push    eax; last
+0x791279: push    ecx; first
 0x79127A: mov     [ebp+var_4], 0
-0x791281: call    sub_7847F0
+0x791281: call    OB_stVector24_UninitializedCopyRange_010201A0; Oblivion 1.2.0.416: placement/uninitialized copy of six-dword records; shared by stVec and branch-flare vector paths.
 0x791286: add     esp, 20h
 0x791289: lea     ecx, [ebp+var_28]
-0x79128C: push    ecx
-0x79128D: push    edi
-0x79128E: push    eax
+0x79128C: push    ecx; value
+0x79128D: push    edi; count
+0x79128E: push    eax; destination
 0x79128F: mov     ecx, esi
-0x791291: call    sub_790A70
+0x791291: call    OB_stVector24_UninitializedFillNThunk_010201A0; Oblivion 1.2.0.416: stdcall checked-template thunk to the shared 24-byte uninitialized-fill primitive; returns destination plus count*0x18.
 0x791296: mov     ecx, [esi+8]
-0x791299: mov     byte ptr [ebp+arg_8], 0
-0x79129D: mov     edx, [ebp+arg_8]
+0x791299: mov     byte ptr [ebp+count], 0
+0x79129D: mov     edx, [ebp+count]
 0x7912A0: push    edx
-0x7912A1: mov     edx, [ebp+arg_C]
+0x7912A1: mov     edx, [ebp+value]
 0x7912A4: push    edx
 0x7912A5: push    esi
-0x7912A6: push    eax
-0x7912A7: mov     eax, [ebp+arg_4]
-0x7912AA: push    ecx
-0x7912AB: push    eax
-0x7912AC: call    sub_7847F0
+0x7912A6: push    eax; destination
+0x7912A7: mov     eax, [ebp+position]
+0x7912AA: push    ecx; last
+0x7912AB: push    eax; first
+0x7912AC: call    OB_stVector24_UninitializedCopyRange_010201A0; Oblivion 1.2.0.416: placement/uninitialized copy of six-dword records; shared by stVec and branch-flare vector paths.
 0x7912B1: mov     ecx, [esi+4]
 0x7912B4: add     esp, 18h
 0x7912B7: test    ecx, ecx
@@ -158,9 +158,9 @@
 0x7912D7: test    ecx, ecx
 0x7912D9: jz      short loc_7912E4
 0x7912DB: push    ecx
-0x7912DC: call    FormHeapFree
+0x7912DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7912E1: add     esp, 4
-0x7912E4: mov     eax, [ebp+arg_C]
+0x7912E4: mov     eax, [ebp+value]
 0x7912E7: lea     ecx, [ebx+ebx*2]
 0x7912EA: lea     edx, [eax+ecx*8]
 0x7912ED: lea     ecx, [edi+edi*2]
@@ -177,15 +177,15 @@
 0x79130A: mov     esp, ebp
 0x79130C: pop     ebp
 0x79130D: retn    10h
-0x791310: mov     eax, [ebp+arg_C]
+0x791310: mov     eax, [ebp+value]
 0x791313: push    eax
-0x791314: call    FormHeapFree
+0x791314: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x791319: add     esp, 4
 0x79131C: push    0
 0x79131E: push    0
 0x791320: call    ThrowException??
 0x791325: mov     ecx, [esi+8]
-0x791328: mov     ebx, [ebp+arg_4]
+0x791328: mov     ebx, [ebp+position]
 0x79132B: mov     edx, ecx
 0x79132D: sub     edx, ebx
 0x79132F: mov     eax, 2AAAAAABh
@@ -195,22 +195,22 @@
 0x79133B: shr     eax, 1Fh
 0x79133E: add     eax, edx
 0x791340: cmp     eax, edi
-0x791342: mov     [ebp+arg_C], ecx
+0x791342: mov     [ebp+value], ecx
 0x791345: jnb     short loc_7913BA
 0x791347: lea     eax, [edi+edi*2]
 0x79134A: add     eax, eax
 0x79134C: add     eax, eax
 0x79134E: add     eax, eax
-0x791350: mov     [ebp+arg_C], eax
+0x791350: mov     [ebp+value], eax
 0x791353: add     eax, ebx
-0x791355: push    eax
-0x791356: push    ecx
-0x791357: push    ebx
+0x791355: push    eax; destination
+0x791356: push    ecx; last
+0x791357: push    ebx; first
 0x791358: mov     ecx, esi
-0x79135A: call    sub_7849C0
+0x79135A: call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.
 0x79135F: mov     ecx, [esi+8]
 0x791362: lea     edx, [ebp+var_28]
-0x791365: push    edx
+0x791365: push    edx; value
 0x791366: mov     edx, ecx
 0x791368: sub     edx, ebx
 0x79136A: mov     eax, 2AAAAAABh
@@ -220,20 +220,20 @@
 0x791376: shr     eax, 1Fh
 0x791379: add     eax, edx
 0x79137B: sub     edi, eax
-0x79137D: push    edi
-0x79137E: push    ecx
+0x79137D: push    edi; count
+0x79137E: push    ecx; destination
 0x79137F: mov     ecx, esi
 0x791381: mov     [ebp+var_4], 2
-0x791388: call    sub_790A70
-0x79138D: mov     eax, [ebp+arg_C]
+0x791388: call    OB_stVector24_UninitializedFillNThunk_010201A0; Oblivion 1.2.0.416: stdcall checked-template thunk to the shared 24-byte uninitialized-fill primitive; returns destination plus count*0x18.
+0x79138D: mov     eax, [ebp+value]
 0x791390: add     [esi+8], eax
 0x791393: mov     esi, [esi+8]
 0x791396: lea     ecx, [ebp+var_28]
-0x791399: push    ecx
+0x791399: push    ecx; value
 0x79139A: sub     esi, eax
-0x79139C: push    esi
-0x79139D: push    ebx
-0x79139E: call    sub_784140
+0x79139C: push    esi; last
+0x79139D: push    ebx; first
+0x79139E: call    OB_stVector24_CopyFillRange_010201A0; Oblivion 1.2.0.416: assigns one six-dword value across [first,last); shared 0x18-byte vector primitive.
 0x7913A3: add     esp, 0Ch
 0x7913A6: mov     ecx, [ebp+var_C]
 0x7913A9: mov     large fs:0, ecx
@@ -246,29 +246,29 @@
 0x7913B7: retn    10h
 0x7913BA: lea     edi, [edi+edi*2]
 0x7913BD: add     edi, edi
-0x7913BF: push    ecx
+0x7913BF: push    ecx; destination
 0x7913C0: add     edi, edi
 0x7913C2: mov     eax, ecx
 0x7913C4: add     edi, edi
 0x7913C6: sub     eax, edi
-0x7913C8: push    ecx
-0x7913C9: push    eax
+0x7913C8: push    ecx; last
+0x7913C9: push    eax; first
 0x7913CA: mov     ecx, esi
-0x7913CC: mov     [ebp+arg_8], eax
-0x7913CF: call    sub_7849C0
-0x7913D4: mov     edx, [ebp+arg_C]
+0x7913CC: mov     [ebp+count], eax
+0x7913CF: call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.
+0x7913D4: mov     edx, [ebp+value]
 0x7913D7: mov     [esi+8], eax
-0x7913DA: mov     eax, [ebp+arg_8]
-0x7913DD: push    edx
-0x7913DE: push    eax
-0x7913DF: push    ebx
-0x7913E0: call    sub_7905A0
+0x7913DA: mov     eax, [ebp+count]
+0x7913DD: push    edx; destinationEnd
+0x7913DE: push    eax; last
+0x7913DF: push    ebx; first
+0x7913E0: call    OB_stVector24_CopyBackwardRangeThunk_010201A0; Oblivion 1.2.0.416: checked-template thunk to the shared 24-byte copy-backward adapter; used by both vector<stVec> and branch-flare insert-fill paths.
 0x7913E5: lea     ecx, [ebp+var_28]
-0x7913E8: push    ecx
+0x7913E8: push    ecx; value
 0x7913E9: add     edi, ebx
-0x7913EB: push    edi
-0x7913EC: push    ebx
-0x7913ED: call    sub_784140
+0x7913EB: push    edi; last
+0x7913EC: push    ebx; first
+0x7913ED: call    OB_stVector24_CopyFillRange_010201A0; Oblivion 1.2.0.416: assigns one six-dword value across [first,last); shared 0x18-byte vector primitive.
 0x7913F2: add     esp, 18h
 0x7913F5: mov     ecx, [ebp+var_C]
 0x7913F8: mov     large fs:0, ecx
@@ -279,3 +279,10 @@
 0x791403: mov     esp, ebp
 0x791405: pop     ebp
 0x791406: retn    10h
+0x9CBC30: mov     edx, [esp-4+position]
+0x9CBC34: lea     eax, [edx+0Ch]
+0x9CBC37: mov     ecx, [edx-2Ch]
+0x9CBC3A: xor     ecx, eax
+0x9CBC3C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CBC41: mov     eax, offset stru_AF4B60
+0x9CBC46: jmp     ___CxxFrameHandler3

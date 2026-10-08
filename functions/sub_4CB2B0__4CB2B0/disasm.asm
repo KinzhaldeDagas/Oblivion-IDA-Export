@@ -1,4 +1,4 @@
-0x4CB2B0: push    0FFFFFFFFh
+0x4CB2B0: push    0FFFFFFFFh; Verified barter-container sweep: iterates this cell's objectList, skips deleted/disabled refs, and calls TESObjectREFR_IsOwnedBy(reference, ownerActor, useFactionOwnership=false). It excludes the merchant container, copies supported owned item extra lists into new container entries, records the original reference, removes ownership from the copied inventory instance, and delegates owned container refs to ContainerExtraData handling. Fallout's TESObjectCELL::FillBarterContainer performs the analogous cell scan and also calls IsAnOwner(..., false); Fallout wraps the scan in its cell-reference lock, while Oblivion's caller manages its own container-change flow.
 0x4CB2B2: push    offset SEH_4CB2B0
 0x4CB2B7: mov     eax, large fs:0
 0x4CB2BD: push    eax
@@ -14,15 +14,15 @@
 0x4CB2D1: mov     large fs:0, eax
 0x4CB2D7: mov     edi, ecx
 0x4CB2D9: mov     [esp+30h+var_14], edi
-0x4CB2DD: cmp     [esp+30h+arg_4], 0
+0x4CB2DD: cmp     [esp+30h+containerChanges], 0
 0x4CB2E2: jz      loc_4CB492
-0x4CB2E8: mov     ebp, [esp+30h+arg_0]
+0x4CB2E8: mov     ebp, [esp+30h+actorReference]
 0x4CB2EC: test    ebp, ebp
 0x4CB2EE: jz      loc_4CB492
 0x4CB2F4: lea     ecx, [ebp+44h]
-0x4CB2F7: call    sub_420680
+0x4CB2F7: call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.
 0x4CB2FC: push    edi; a2
-0x4CB2FD: mov     ecx, offset stru_B35C80; this
+0x4CB2FD: mov     ecx, offset unk_B35C80; this
 0x4CB302: mov     [esp+34h+var_18], eax
 0x4CB306: call    sub_496EA0
 0x4CB30B: lea     ebx, [edi+48h]
@@ -30,7 +30,6 @@
 0x4CB310: mov     [esp+30h+var_1C], ebx
 0x4CB314: jz      loc_4CB487
 0x4CB31A: jmp     short loc_4CB324
-0x4CB31C: align 10h
 0x4CB320: mov     ebx, [esp+30h+var_1C]
 0x4CB324: mov     esi, [ebx]
 0x4CB326: test    esi, esi
@@ -43,10 +42,10 @@
 0x4CB33F: shr     eax, 5
 0x4CB342: test    al, 1
 0x4CB344: jnz     def_4CB389; jumptable 004CB389 default case, cases 24,28-32,35-37
-0x4CB34A: push    0
-0x4CB34C: push    ebp
-0x4CB34D: mov     ecx, esi
-0x4CB34F: call    TESOBjectREFR_IsOwnedBy
+0x4CB34A: push    0; useFactionOwnership
+0x4CB34C: push    ebp; actorReference
+0x4CB34D: mov     ecx, esi; reference
+0x4CB34F: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x4CB354: test    al, al
 0x4CB356: jz      def_4CB389; jumptable 004CB389 default case, cases 24,28-32,35-37
 0x4CB35C: cmp     esi, [esp+30h+var_18]
@@ -110,9 +109,9 @@
 0x4CB415: push    ebx
 0x4CB416: mov     ecx, edi
 0x4CB418: call    ExtraDataList_DuplicateListForContainer
-0x4CB41D: push    esi
-0x4CB41E: mov     ecx, edi
-0x4CB420: call    sub_41E710
+0x4CB41D: push    esi; originalReference
+0x4CB41E: mov     ecx, edi; this
+0x4CB420: call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.
 0x4CB425: mov     ecx, edi
 0x4CB427: call    ExtraDataList_RemoveOwner
 0x4CB42C: mov     ecx, [ebp+0]
@@ -121,20 +120,20 @@
 0x4CB435: mov     ecx, ebx
 0x4CB437: call    ExtraDataList_GetExtraCount
 0x4CB43C: movsx   ecx, ax
-0x4CB43F: push    ecx
-0x4CB440: mov     ecx, ebp
-0x4CB442: call    sub_60D020
-0x4CB447: mov     ecx, [esp+30h+arg_4]
-0x4CB44B: push    1
-0x4CB44D: push    ebp
-0x4CB44E: call    ContainerExtraData_AddEntry
+0x4CB43F: push    ecx; value
+0x4CB440: mov     ecx, ebp; this
+0x4CB442: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
+0x4CB447: mov     ecx, [esp+30h+containerChanges]; this
+0x4CB44B: push    1; destroyEntryIfMerged
+0x4CB44D: push    ebp; entry
+0x4CB44E: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x4CB453: mov     edi, [esp+30h+var_14]
-0x4CB457: mov     ebp, [esp+30h+arg_0]
+0x4CB457: mov     ebp, [esp+30h+actorReference]
 0x4CB45B: mov     ebx, [esp+30h+var_1C]
 0x4CB45F: jmp     short def_4CB389; jumptable 004CB389 default case, cases 24,28-32,35-37
 0x4CB461: lea     ecx, [esi+44h]; jumptable 004CB389 case 23
 0x4CB464: call    ExtraDataList_GetContainerChanges
-0x4CB469: mov     edx, [esp+30h+arg_4]
+0x4CB469: mov     edx, [esp+30h+containerChanges]
 0x4CB46D: push    0
 0x4CB46F: push    esi
 0x4CB470: push    edx
@@ -145,7 +144,7 @@
 0x4CB47D: mov     [esp+30h+var_1C], eax
 0x4CB481: jnz     loc_4CB320
 0x4CB487: push    edi; a2
-0x4CB488: mov     ecx, offset stru_B35C80; this
+0x4CB488: mov     ecx, offset unk_B35C80; this
 0x4CB48D: call    sub_496F50
 0x4CB492: mov     ecx, [esp+30h+var_C]
 0x4CB496: mov     large fs:0, ecx
@@ -156,3 +155,20 @@
 0x4CB4A1: pop     ebx
 0x4CB4A2: add     esp, 1Ch
 0x4CB4A5: retn    8
+0x9B5190: mov     eax, [ebp-10h]
+0x9B5193: push    eax
+0x9B5194: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5199: pop     ecx
+0x9B519A: retn
+0x9B519B: mov     eax, [ebp-10h]
+0x9B519E: push    eax
+0x9B519F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B51A4: pop     ecx
+0x9B51A5: retn
+0x9B51A6: mov     edx, [esp+containerChanges]
+0x9B51AA: lea     eax, [edx-20h]
+0x9B51AD: mov     ecx, [edx-24h]
+0x9B51B0: xor     ecx, eax
+0x9B51B2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B51B7: mov     eax, offset stru_AE0360
+0x9B51BC: jmp     ___CxxFrameHandler3

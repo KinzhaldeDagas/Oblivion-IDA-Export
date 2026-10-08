@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F7FA0",
-    "line": "fldz",
+    "line": "fldz; GetIsCurrentPackage_Eval requires an actor subject and Package parameter (form type 0x3D). It reads the subject's current package; for a temporary-override package it prefers the actor's ExtraPackage when present, then pointer-compares against the parameter.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F7FA3",
-    "line": "mov     ebp, [esp+4+arg_C]",
+    "line": "mov     ebp, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4F7FAB",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+subject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4F7FC8",
-    "line": "mov     eax, [esp+0Ch+arg_4]",
+    "line": "mov     eax, [esp+0Ch+package]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x4F7FF0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F7FF2",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },

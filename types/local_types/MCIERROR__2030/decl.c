@@ -1,1 +1,1 @@
-MCIERROR
+typedef DWORD MCIERROR;

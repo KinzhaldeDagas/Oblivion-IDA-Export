@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5303E0",
-    "line": "mov     eax, [esp+a3]",
+    "line": "mov     eax, [esp+a3]; TESTopicInfo modified-form load override. The engine first loads ordinary TESForm state, then treats modified flag 0x10000000 as the entire serialized spoken=true state; there is no extra spoken payload.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x5303F9",
-    "line": "jz      short loc_5303FF",
+    "line": "jz      short loc_5303FF; kTopicInfoModified_Spoken (0x10000000) is a presence bit: if present in the change mask, restore this INFO's global spoken byte.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x5303FB",
-    "line": "mov     byte ptr [esi+22h], 1",
+    "line": "mov     byte ptr [esi+22h], 1; Restore OblivionTopicInfo.spoken=1 at +0x22. SayOnce eligibility will subsequently reject this INFO for every speaker.",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46D610",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+count]; Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x46D61C",
-    "line": "mov     [ebx], al",
+    "line": "mov     [ebx], al; Oblivion runtime texture-array mutation overwrites the entry count and installs a newly allocated array for this decoded MODT. Repeated valid MODT chunks therefore replace prior runtime state (last valid wins).",
     "mnemonic": "mov",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x46D638",
-    "line": "cmp     [esp+18h+arg_4], edi",
+    "line": "cmp     [esp+18h+count], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x46D646",
-    "line": "mov     ebp, [esp+1Ch+arg_8]",
+    "line": "mov     ebp, [esp+1Ch+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x46D64B",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+entries]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x46D735",
-    "line": "cmp     edi, [esp+20h+arg_4]",
+    "line": "cmp     edi, [esp+20h+count]",
     "mnemonic": "cmp",
     "size": 4
   },

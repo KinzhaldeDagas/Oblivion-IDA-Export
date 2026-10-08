@@ -1,1 +1,1 @@
-ULONG_PTR
+typedef unsigned __int64 ULONG_PTR;

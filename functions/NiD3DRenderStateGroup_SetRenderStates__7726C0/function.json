@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x7726C0",
+      "0x772716"
+    ]
+  ],
+  "chunks_sha256": "5a2244d3fc96728070b3d90dbd203143dca640f57360adc9af014ce28aa3a8aa",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nGPU-world pass-state capture contract: ordered list head at group+8 is applied first with savePrevious=0, then head at group+10 with savePrevious=1. Nodes are {DWORD state,DWORD value,DWORD next} at+0/+4/+8. Duplicates and shared suffixes across the two lists must retain their application order. Project capture now copies/seals these authored writes; this is not final draw state or native traversal omission permission.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiD3DRenderStateGroup::SetRenderStates",
   "end_ea": "0x772716",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiD3DRenderStateGroup::SetRenderStates",
   "segment": ".text",
   "sha256": "5a2244d3fc96728070b3d90dbd203143dca640f57360adc9af014ce28aa3a8aa",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7726C0",
+  "total_chunk_size": 86,
   "type": "void __thiscall(NiD3DRenderStateGroup *this)",
   "xrefs_from_count": 41,
   "xrefs_to_count": 3

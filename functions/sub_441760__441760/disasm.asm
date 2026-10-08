@@ -1,4 +1,4 @@
-0x441760: lea     eax, [ecx+0A0h]
+0x441760: lea     eax, [ecx+0A0h]; ODismemberment: TES cached-model lookup used by BSTempEffectParticle when useTESCachedInstance is true.
 0x441766: xor     edx, edx
 0x441768: test    eax, eax
 0x44176A: push    esi

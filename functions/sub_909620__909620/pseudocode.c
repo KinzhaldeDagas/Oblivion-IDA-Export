@@ -3,10 +3,10 @@ int __thiscall sub_909620(int (__thiscall ***this)(void *, signed int))
   int i; // esi
   int (__thiscall *v3)(void *, signed int); // ecx
 
-  for ( i = 0; i < (int)*(this + 4); ++i )
+  for ( i = 0; i < (int)*(this + 4); ++i ) /*0x90962b*/
   {
-    v3 = (*(this + 3))[2 * i + 1];
-    (*(void (__thiscall **)(int (__thiscall *)(void *, signed int)))(*(_DWORD *)v3 + 0x18))(v3);
+    v3 = (*(this + 3))[2 * i + 1]; /*0x909633*/
+    (*(void (__thiscall **)(int (__thiscall *)(void *, signed int)))(*(_DWORD *)v3 + 0x18))(v3); /*0x909639*/
   }
-  return (**this)(this, 1);
+  return (**this)(this, 1); /*0x90964c*/
 }

@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7659EC",
-    "line": "mov     [esp+118h+var_98], ecx",
+    "line": "mov     [esp+118h+out.y], ecx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7659F6",
-    "line": "mov     [esp+118h+var_94], edx",
+    "line": "mov     [esp+118h+out.z], edx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x765A45",
-    "line": "call    NiGeometryGroup__AddGeometryDataToGroup",
+    "line": "call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x765A5F",
-    "line": "call    sub_777F70",
+    "line": "call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x765A97",
-    "line": "mov     edx, [esp+118h+var_98]",
+    "line": "mov     edx, [esp+118h+out.y]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x765A9E",
-    "line": "mov     ecx, [esp+118h+var_94]",
+    "line": "mov     ecx, [esp+118h+out.z]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x765B40",
-    "line": "call    sub_761AE0",
+    "line": "call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x765B91",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x765BC7",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x765BE2",
-    "line": "push    ecx",
+    "line": "push    ecx; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -943,25 +943,25 @@
   },
   {
     "ea": "0x765BE6",
-    "line": "lea     ecx, [esp+130h+var_9C]",
+    "line": "lea     ecx, [esp+130h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x765BED",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765BEE",
-    "line": "lea     ecx, [ebp+640h]",
+    "line": "lea     ecx, [ebp+640h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x765BF4",
-    "line": "call    sub_498FE0",
+    "line": "call    NiPoint3_CrossProduct",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x765C00",
-    "line": "call    sub_7780A0",
+    "line": "call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x765C1D",
-    "line": "call    NiGeometryBufferData__RefreshVBChips",
+    "line": "call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,37 +1117,37 @@
   },
   {
     "ea": "0x765C5C",
-    "line": "push    ecx; int",
+    "line": "push    ecx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765C5D",
-    "line": "mov     ecx, [ebp+8B0h]",
+    "line": "mov     ecx, [ebp+8B0h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x765C63",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765C64",
-    "line": "push    eax; int",
+    "line": "push    eax; offsetBytes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765C65",
-    "line": "push    esi; int",
+    "line": "push    esi; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x765C66",
-    "line": "call    sub_776C90",
+    "line": "call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1222,12 +1222,6 @@
     "line": "jmp     short loc_765CA0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x765C9A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x765CA0",
@@ -1993,7 +1987,7 @@
   },
   {
     "ea": "0x765E56",
-    "line": "fld     [esp+12Ch+var_9C]",
+    "line": "fld     [esp+12Ch+out.x]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2005,7 +1999,7 @@
   },
   {
     "ea": "0x765E60",
-    "line": "fld     [esp+12Ch+var_98]",
+    "line": "fld     [esp+12Ch+out.y]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2017,7 +2011,7 @@
   },
   {
     "ea": "0x765E6A",
-    "line": "fld     [esp+12Ch+var_94]",
+    "line": "fld     [esp+12Ch+out.z]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2604,12 +2598,6 @@
     "size": 2
   },
   {
-    "ea": "0x765FAA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x765FB0",
     "line": "mov     eax, [esp+12Ch+var_100]",
     "mnemonic": "mov",
@@ -3193,7 +3181,7 @@
   },
   {
     "ea": "0x7660EB",
-    "line": "fld     [esp+12Ch+var_9C]",
+    "line": "fld     [esp+12Ch+out.x]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3205,7 +3193,7 @@
   },
   {
     "ea": "0x7660F5",
-    "line": "fld     [esp+12Ch+var_98]",
+    "line": "fld     [esp+12Ch+out.y]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3217,7 +3205,7 @@
   },
   {
     "ea": "0x7660FF",
-    "line": "fld     [esp+12Ch+var_94]",
+    "line": "fld     [esp+12Ch+out.z]",
     "mnemonic": "fld",
     "size": 7
   },

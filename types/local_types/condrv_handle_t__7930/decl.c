@@ -1,1 +1,1 @@
-condrv_handle_t
+typedef unsigned int condrv_handle_t;

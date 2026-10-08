@@ -1,18 +1,31 @@
 {
-  "callees_count": 34,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6C6B30",
+      "0x6C6DB2"
+    ]
+  ],
+  "chunks_sha256": "5421ad1a9c377821e3281eba072af7d374a9e798b4ee2378fd11c94017fcf846",
+  "comment_regular": "Maps one sequence time into a partner sequence by matching case-insensitive m: text keys. Computes source local time without committing it, brackets the previous/next source morph keys with cycle wrap, finds identical full key strings in the partner, linearly interpolates between partner key times, then wraps the result to the partner start/end range. Used only by the native morph/transition update path.",
+  "comment_repeatable": "Maps one sequence time into a partner sequence by matching case-insensitive m: text keys. Computes source local time without committing it, brackets the previous/next source morph keys with cycle wrap, finds identical full key strings in the partner, linearly interpolates between partner key times, then wraps the result to the partner start/end range. Used only by the native morph/transition update path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C6B30",
+  "display_name": "NiControllerSequence_MapTimeByMorphKeys",
   "end_ea": "0x6C6DB2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C6B30",
+  "name": "NiControllerSequence_MapTimeByMorphKeys",
   "segment": ".text",
   "sha256": "5421ad1a9c377821e3281eba072af7d374a9e798b4ee2378fd11c94017fcf846",
   "size": 642,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C6B30",
+  "total_chunk_size": 642,
   "type": "double __userpurge@<st0>(float *this@<ecx>, int@<edi>, int, float)",
   "xrefs_from_count": 253,
   "xrefs_to_count": 2

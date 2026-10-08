@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x776E90",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; MoonSugarEffect decode: fallback FVF/one-stream non-skinned vertex packer. Position begins at stream offset 0, then optional normals/color/UVs. A pack-time wobble here would persist in the geometry VB until a later clean repack.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x776EA4",
-    "line": "mov     [esp+58h+var_48], edi",
+    "line": "mov     [esp+58h+self], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x776EDD",
-    "line": "mov     [esp+5Ch+var_2C], ecx",
+    "line": "mov     [esp+5Ch+source], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x776F08",
-    "line": "lea     ecx, [esp+70h+var_44]",
+    "line": "lea     ecx, [esp+70h+destinationStride]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x776F1A",
-    "line": "mov     [esp+80h+var_44], ebx",
+    "line": "mov     [esp+80h+destinationStride], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x776F1E",
-    "line": "call    sub_776DD0",
+    "line": "call    sub_776DD0; MoonSugarEffect decode: fallback non-declaration vertex layout calculator. Builds FVF-like flags, stride, and offsets: position is 12 bytes; optional skin weights/indices, normals, color, and UV sets are appended, with UV count clamped by dword_B28CB0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x776F2D",
-    "line": "call    sub_7780A0",
+    "line": "call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x776F3A",
-    "line": "mov     edx, [esp+5Ch+var_44]",
+    "line": "mov     edx, [esp+5Ch+destinationStride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x776FA1",
-    "line": "imul    ecx, [esp+5Ch+var_44]",
+    "line": "imul    ecx, [esp+5Ch+destinationStride]",
     "mnemonic": "imul",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x776FB4",
-    "line": "mov     ecx, [esp+5Ch+var_48]",
+    "line": "mov     ecx, [esp+5Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x776FBB",
-    "line": "call    NiGeometryBufferData__RefreshVBChips",
+    "line": "call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,37 +715,37 @@
   },
   {
     "ea": "0x776FF9",
-    "line": "push    ecx; int",
+    "line": "push    ecx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776FFA",
-    "line": "mov     ecx, [esp+60h+var_48]",
+    "line": "mov     ecx, [esp+60h+self]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x776FFE",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776FFF",
-    "line": "push    edi; int",
+    "line": "push    edi; offsetBytes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777000",
-    "line": "push    eax; int",
+    "line": "push    eax; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777001",
-    "line": "call    sub_776C90",
+    "line": "call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x777028",
-    "line": "cmp     [esp+5Ch+var_2C], 0",
+    "line": "cmp     [esp+5Ch+source], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x777039",
-    "line": "mov     edi, [esp+5Ch+var_44]",
+    "line": "mov     edi, [esp+5Ch+destinationStride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x77704A",
-    "line": "mov     edi, [esp+5Ch+var_48]",
+    "line": "mov     edi, [esp+5Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -964,12 +964,6 @@
     "line": "jmp     short loc_777080",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x777078",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x777080",
@@ -1159,7 +1153,7 @@
   },
   {
     "ea": "0x7770F5",
-    "line": "add     ecx, [esp+5Ch+var_44]",
+    "line": "add     ecx, [esp+5Ch+destinationStride]",
     "mnemonic": "add",
     "size": 4
   },
@@ -1183,7 +1177,7 @@
   },
   {
     "ea": "0x777102",
-    "line": "mov     edi, [esp+5Ch+var_48]",
+    "line": "mov     edi, [esp+5Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1303,7 +1297,7 @@
   },
   {
     "ea": "0x77713A",
-    "line": "add     ecx, [esp+5Ch+var_44]",
+    "line": "add     ecx, [esp+5Ch+destinationStride]",
     "mnemonic": "add",
     "size": 4
   },
@@ -1357,7 +1351,7 @@
   },
   {
     "ea": "0x777156",
-    "line": "mov     edi, [esp+5Ch+var_48]",
+    "line": "mov     edi, [esp+5Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,25 +1399,25 @@
   },
   {
     "ea": "0x777175",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777176",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777177",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777178",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,37 +1597,37 @@
   },
   {
     "ea": "0x7771CA",
-    "line": "mov     edx, [esp+5Ch+var_44]",
+    "line": "mov     edx, [esp+5Ch+destinationStride]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7771CE",
-    "line": "mov     edi, [esp+5Ch+var_48]",
+    "line": "mov     edi, [esp+5Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7771D2",
-    "line": "push    ecx; int",
+    "line": "push    ecx; elementCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7771D3",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; elementBytes",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7771D5",
-    "line": "push    edx; int",
+    "line": "push    edx; destinationStride",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7771D6",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -1651,7 +1645,7 @@
   },
   {
     "ea": "0x7771DD",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1663,7 +1657,7 @@
   },
   {
     "ea": "0x7771E0",
-    "line": "call    sub_776D40",
+    "line": "call    NiDX9VertexBufferManager_CopyStrided; MoonSugarEffect decode: strided memcpy helper used by fallback packer to copy source vertex arrays into mapped stream bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,13 +1669,13 @@
   },
   {
     "ea": "0x7771E7",
-    "line": "mov     edi, [esp+5Ch+var_48]",
+    "line": "mov     edi, [esp+5Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7771EB",
-    "line": "mov     eax, [esp+5Ch+var_2C]",
+    "line": "mov     eax, [esp+5Ch+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1717,31 +1711,31 @@
   },
   {
     "ea": "0x777207",
-    "line": "mov     edx, [esp+5Ch+var_44]",
+    "line": "mov     edx, [esp+5Ch+destinationStride]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77720B",
-    "line": "push    ecx; int",
+    "line": "push    ecx; elementCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77720C",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; elementBytes",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x77720E",
-    "line": "push    edx; int",
+    "line": "push    edx; destinationStride",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77720F",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -1759,7 +1753,7 @@
   },
   {
     "ea": "0x777216",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1771,7 +1765,7 @@
   },
   {
     "ea": "0x777219",
-    "line": "call    sub_776D40",
+    "line": "call    NiDX9VertexBufferManager_CopyStrided; MoonSugarEffect decode: strided memcpy helper used by fallback packer to copy source vertex arrays into mapped stream bytes.",
     "mnemonic": "call",
     "size": 5
   },

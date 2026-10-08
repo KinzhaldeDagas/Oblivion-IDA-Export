@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x6A235D",
-    "line": "call    ActiveEffect_Base_ProcessEffect",
+    "line": "call    ActiveEffect_Base_ProcessEffect; Verified active-effect update loop: MagicTarget_ProcessEffects walks the target's active-effect list and calls ActiveEffect_Base_ProcessEffect for each eligible ActiveEffect, passing the effect-item/magic context and frame delta. If processing marks an effect removed, the loop unlinks it and invokes its virtual destructor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A2362",
-    "line": "cmp     byte ptr [esi+11h], 0",
+    "line": "cmp     byte ptr [esi+11h], 0; Verified list lifecycle: after ActiveEffect_Base_ProcessEffect, MagicTarget_ProcessEffects checks bTerminated; terminated entries are unlinked from the active list and destroyed through their virtual destructor.",
     "mnemonic": "cmp",
     "size": 4
   },

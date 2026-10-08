@@ -17,7 +17,7 @@
 0x43C9DC: mov     eax, [ecx]
 0x43C9DE: mov     edx, [eax+170h]
 0x43C9E4: call    edx
-0x43C9E6: mov     ecx, ModelLoaderPtr
+0x43C9E6: mov     ecx, ds:0B33A1Ch
 0x43C9EC: mov     ebp, eax
 0x43C9EE: mov     eax, [esi+20h]
 0x43C9F1: push    eax
@@ -44,7 +44,7 @@
 0x43CA29: call    __allshr
 0x43CA2E: mov     ecx, [esi+20h]
 0x43CA31: push    ecx
-0x43CA32: mov     ecx, ModelLoaderPtr
+0x43CA32: mov     ecx, ds:0B33A1Ch
 0x43CA38: movzx   eax, al
 0x43CA3B: push    esi
 0x43CA3C: push    eax
@@ -80,7 +80,7 @@
 0x43CA91: mov     edx, [eax+14h]
 0x43CA94: mov     ecx, edi
 0x43CA96: call    edx
-0x43CA98: mov     ecx, ModelLoaderPtr
+0x43CA98: mov     ecx, ds:0B33A1Ch
 0x43CA9E: mov     ecx, [ecx]
 0x43CAA0: lea     edi, [esp+28h+var_14]
 0x43CAA4: mov     [esp+28h+var_14], 0
@@ -104,3 +104,12 @@
 0x43CAD5: pop     ebx
 0x43CAD6: add     esp, 14h
 0x43CAD9: retn
+0x9ACC80: lea     ecx, [ebp-10h]; void *
+0x9ACC83: jmp     sub_4BDDC0
+0x9ACC88: mov     edx, [esp+arg_4]
+0x9ACC8C: lea     eax, [edx-18h]
+0x9ACC8F: mov     ecx, [edx-1Ch]
+0x9ACC92: xor     ecx, eax
+0x9ACC94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACC99: mov     eax, offset stru_AD98A4
+0x9ACC9E: jmp     ___CxxFrameHandler3

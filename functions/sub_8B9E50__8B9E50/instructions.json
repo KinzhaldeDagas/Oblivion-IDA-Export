@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x8B9EA3",
-    "line": "call    sub_8B9CA0",
+    "line": "call    sub_8B9CA0; Initializes ahkCharacterProxy side data and default up vector to (0,0,1,0) at this+0x40. Controller states later fetch runtime up/gravity basis via vtable+0x58 and context+0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -346,5 +346,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D7120",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7123",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D7124",
+    "line": "call    sub_8903B0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7129",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D712A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D712B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D712F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7132",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7135",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D7137",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D713C",
+    "line": "mov     eax, offset stru_AFEDB0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7141",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

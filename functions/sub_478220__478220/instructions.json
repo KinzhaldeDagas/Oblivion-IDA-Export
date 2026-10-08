@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x478229",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x47823D",
-    "line": "mov     esi, [esp+4+arg_C]",
+    "line": "mov     esi, [esp+4+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x478244",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+referenceRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,25 +157,25 @@
   },
   {
     "ea": "0x47826B",
-    "line": "push    edi",
+    "line": "push    edi; referenceRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47826C",
-    "line": "lea     ecx, [eax-30h]",
+    "line": "lea     ecx, [eax-30h]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x47826F",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x478270",
-    "line": "call    sub_4B1600",
+    "line": "call    TESObjectLIGH_ConfigureReferencePointLight; Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. lightFlags_7C bit 0x20 ('Off by default') suppresses the normal non-actor path; bit 0x04 ('Negative') negates RGB. The routine registers the source with ShadowSceneNode and seeds attenuation/dimmer, but does not read editor bits 0x200/0x400 and does not admit shadow casters.",
     "mnemonic": "call",
     "size": 5
   },

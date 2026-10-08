@@ -1,22 +1,27 @@
-void __thiscall sub_798940(unsigned int *this)
+// CLeafGeometry destructor: frees texture dimension/origin arrays, invokes each 0x44-byte SLodGeometry destructor, and frees the billboard table.
+void __thiscall OB_CLeafGeometry_dtor_010201A0(OB_CLeafGeometry_010201A0 *this)
 {
-  int *v2; // eax
-  unsigned int v3; // edi
+  OB_SLodGeometry_010201A0 *lodGeometryRecords; // eax
+  unsigned int p_originalCenterCoords; // edi
 
-  FormHeapFree(*(this + 8));
-  FormHeapFree(*(this + 9));
-  v2 = (int *)*(this + 0xB);
-  if ( v2 )
+  FormHeapFree((unsigned int)this->leafTextureDimensions); /*0x798948*/
+  FormHeapFree((unsigned int)this->leafTextureOrigins); /*0x798951*/
+  lodGeometryRecords = this->lodGeometryRecords; /*0x798956*/
+  if ( lodGeometryRecords ) /*0x798960*/
   {
-    v3 = (unsigned int)(v2 + 0xFFFFFFFF);
-    _LN21(v2, 0x44u, v2[0xFFFFFFFF], (void (__thiscall *)(void *))sub_7981E0);
-    FormHeapFree(v3);
+    p_originalCenterCoords = (unsigned int)&lodGeometryRecords[0xFFFFFFFF].originalCenterCoords; /*0x798966*/
+    _LN21( /*0x798972*/
+      (char *)lodGeometryRecords,
+      0x44u,
+      (int)lodGeometryRecords[0xFFFFFFFF].originalCenterCoords,
+      (void (__thiscall *)(void *))OB_CLeafGeometry_SLodGeometry_dtor_010201A0);
+    FormHeapFree(p_originalCenterCoords); /*0x798978*/
   }
-  FormHeapFree(*(this + 6));
-  *(this + 3) = 0;
-  *(this + 5) = 0;
-  *(this + 8) = 0;
-  *(this + 9) = 0;
-  *(this + 0xB) = 0;
-  *(this + 6) = 0;
+  FormHeapFree((unsigned int)this->vertexProgramBillboardTable); /*0x798985*/
+  this->timeOffsets = 0; /*0x79898d*/
+  this->leafDiffuseTexcoords = 0; /*0x798990*/
+  this->leafTextureDimensions = 0; /*0x798993*/
+  this->leafTextureOrigins = 0; /*0x798996*/
+  this->lodGeometryRecords = 0; /*0x798999*/
+  this->vertexProgramBillboardTable = 0; /*0x79899c*/
 }

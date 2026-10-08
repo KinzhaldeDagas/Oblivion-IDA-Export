@@ -1,5 +1,5 @@
 int sub_9F2C60()
 {
-  GameSetting_ConstrAndReg(&sOnButtonText, (int)"sOnButtonText", (int)&aOn_0);
-  return atexit(sub_A22260);
+  GameSetting_ConstrAndReg(&MEMORY[0xB38DA0], "sOnButtonText", "On"); /*0x9f2c6f*/
+  return atexit(sub_A22260); /*0x9f2c7f*/
 }

@@ -1,5 +1,5 @@
-0x5022D0: push    ecx
-0x5022D1: call    InterfaceManager_IsMenuMode
+0x5022D0: push    ecx; GameMode begin-block callback: returns true when InterfaceManager_IsMenuMode() is false.
+0x5022D1: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5022D6: neg     al
 0x5022D8: sbb     eax, eax
 0x5022DA: add     eax, 1

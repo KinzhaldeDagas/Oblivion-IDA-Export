@@ -1,1 +1,1 @@
-LPUINT
+typedef UINT *LPUINT;

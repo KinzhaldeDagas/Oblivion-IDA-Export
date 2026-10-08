@@ -30,7 +30,6 @@
 0x8DCE41: mov     eax, edx
 0x8DCE43: jge     short loc_8DCE6A
 0x8DCE45: jmp     short loc_8DCE50
-0x8DCE47: align 10h
 0x8DCE50: mov     ecx, [esi+118h]
 0x8DCE56: mov     edi, [ecx+eax*4+4]
 0x8DCE5A: lea     ecx, [ecx+eax*4]

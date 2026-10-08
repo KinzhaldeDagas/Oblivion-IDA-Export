@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D0760",
-    "line": "push    esi",
+    "line": "push    esi; NiGeomMorpherController target setter. Accepts a compatible NiObjectNET target, delegates to NiTimeController::SetTarget, resets morph-controller state when morphData exists, and marks targetSetPending +0x5B; incompatible targets clear the controller target.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x6D0762",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x6D0778",
-    "line": "call    NiTimeController__SetTarget",
+    "line": "call    NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6D079A",
-    "line": "call    NiTimeController__SetTarget",
+    "line": "call    NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.",
     "mnemonic": "call",
     "size": 5
   },

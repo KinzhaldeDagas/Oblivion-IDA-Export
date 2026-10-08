@@ -29,7 +29,7 @@
 0x650BF2: cmp     dword ptr [ebp+0], 0
 0x650BF6: jnz     loc_650CE0
 0x650BFC: mov     ecx, ebx; this
-0x650BFE: call    TESObjectREFR_GetParentCell
+0x650BFE: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x650C03: mov     edx, [ebx]
 0x650C05: mov     [esp+1Ch+arg_0], eax
 0x650C09: mov     eax, [edx+174h]
@@ -95,13 +95,13 @@
 0x650CC2: mov     edx, [eax]
 0x650CC4: push    eax
 0x650CC5: mov     [esi], edx
-0x650CC7: call    FormHeapFree
+0x650CC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x650CCC: add     esp, 4
 0x650CCF: jmp     short loc_650CA7
 0x650CD1: mov     dword ptr [esi], 0
 0x650CD7: jmp     short loc_650CA7
 0x650CD9: mov     ecx, esi
-0x650CDB: call    BSSimpleList_Clear
+0x650CDB: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x650CE0: cmp     dword ptr [ebp+4], 0
 0x650CE4: jnz     short loc_650CEC
 0x650CE6: cmp     dword ptr [ebp+0], 0
@@ -109,7 +109,7 @@
 0x650CEC: mov     eax, [ebp+0]
 0x650CEF: mov     ecx, ebp
 0x650CF1: mov     [edi+30h], eax
-0x650CF4: call    sub_67F100
+0x650CF4: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x650CF9: pop     ebp
 0x650CFA: pop     ebx
 0x650CFB: pop     edi

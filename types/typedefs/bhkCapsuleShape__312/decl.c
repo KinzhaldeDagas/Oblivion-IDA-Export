@@ -1,1 +1,1 @@
-bhkCapsuleShape
+struct bhkCapsuleShape;

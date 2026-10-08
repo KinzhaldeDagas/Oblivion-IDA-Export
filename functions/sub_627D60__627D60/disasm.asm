@@ -22,13 +22,13 @@
 0x627D93: mov     eax, [edi]
 0x627D95: mov     ecx, [esi+28h]
 0x627D98: push    eax
-0x627D99: call    TeSPackage_TargetData_SetTargetREFR
+0x627D99: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x627D9E: mov     ecx, [edi]
 0x627DA0: push    ecx
 0x627DA1: jmp     short loc_627DAF
 0x627DA3: mov     ecx, [esi+28h]
 0x627DA6: push    0
-0x627DA8: call    TeSPackage_TargetData_SetTargetREFR
+0x627DA8: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x627DAD: push    0
 0x627DAF: mov     ecx, [esi+24h]
 0x627DB2: call    TESPackage_LocationData_SetReference

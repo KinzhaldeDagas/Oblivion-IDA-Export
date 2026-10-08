@@ -12,8 +12,8 @@
 0x6DEB8F: jmp     short loc_6DEBBF
 0x6DEB91: fld     [esp+20h+arg_0]
 0x6DEB95: push    ecx
-0x6DEB96: fstp    [esp+24h+var_24]; float
-0x6DEB99: call    sub_6C36B0
+0x6DEB96: fstp    [esp+24h+applicationTime]; applicationTime
+0x6DEB99: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x6DEB9E: test    al, al
 0x6DEBA0: jz      short loc_6DEBBF
 0x6DEBA2: mov     ecx, [esi+3Ch]
@@ -41,7 +41,7 @@
 0x6DEBE3: jz      def_6DEC86
 0x6DEBE9: fld     [esp+2Ch+var_18]
 0x6DEBED: mov     ecx, [esi+30h]
-0x6DEBF0: fst     [esp+2Ch+var_24]
+0x6DEBF0: fst     [esp+2Ch+applicationTime]
 0x6DEBF4: fld     [esp+2Ch+var_14]
 0x6DEBF8: fst     [esp+2Ch+var_20]
 0x6DEBFC: fld     [esp+2Ch+var_10]
@@ -53,7 +53,7 @@
 0x6DEC0C: test    ah, 41h
 0x6DEC0F: jnz     short loc_6DEC19
 0x6DEC11: fstp    st(4)
-0x6DEC13: fst     [esp+2Ch+var_24]
+0x6DEC13: fst     [esp+2Ch+applicationTime]
 0x6DEC17: jmp     short loc_6DEC2C
 0x6DEC19: fcom    st(4)
 0x6DEC1B: fnstsw  ax
@@ -61,7 +61,7 @@
 0x6DEC1F: test    ah, 5
 0x6DEC22: jp      short loc_6DEC2C
 0x6DEC24: fxch    st(3)
-0x6DEC26: fst     [esp+2Ch+var_24]
+0x6DEC26: fst     [esp+2Ch+applicationTime]
 0x6DEC2A: fxch    st(3)
 0x6DEC2C: fcom    st(2)
 0x6DEC2E: fnstsw  ax
@@ -101,7 +101,7 @@
 0x6DEC81: cmp     eax, 3; switch 4 cases
 0x6DEC84: ja      short def_6DEC86
 0x6DEC86: jmp     ds:jpt_6DEC86[eax*4]; switch jump
-0x6DEC8D: mov     eax, [esp+2Ch+var_24]; jumptable 006DEC86 case 0
+0x6DEC8D: mov     eax, [esp+2Ch+applicationTime]; jumptable 006DEC86 case 0
 0x6DEC91: mov     edx, [esp+2Ch+var_20]
 0x6DEC95: add     [ecx+54h], ebx
 0x6DEC98: mov     [ecx+1Ch], eax
@@ -112,7 +112,7 @@
 0x6DECA6: pop     ebx
 0x6DECA7: add     esp, 18h
 0x6DECAA: retn    4
-0x6DECAD: mov     edx, [esp+2Ch+var_24]; jumptable 006DEC86 case 1
+0x6DECAD: mov     edx, [esp+2Ch+applicationTime]; jumptable 006DEC86 case 1
 0x6DECB1: mov     eax, [esp+2Ch+var_20]
 0x6DECB5: add     [ecx+54h], ebx
 0x6DECB8: mov     [ecx+28h], edx
@@ -123,7 +123,7 @@
 0x6DECC6: pop     ebx
 0x6DECC7: add     esp, 18h
 0x6DECCA: retn    4
-0x6DECCD: mov     eax, [esp+2Ch+var_24]; jumptable 006DEC86 case 2
+0x6DECCD: mov     eax, [esp+2Ch+applicationTime]; jumptable 006DEC86 case 2
 0x6DECD1: mov     edx, [esp+2Ch+var_20]
 0x6DECD5: add     [ecx+54h], ebx
 0x6DECD8: mov     [ecx+34h], eax
@@ -134,7 +134,7 @@
 0x6DECE6: pop     ebx
 0x6DECE7: add     esp, 18h
 0x6DECEA: retn    4
-0x6DECED: mov     edx, [esp+2Ch+var_24]; jumptable 006DEC86 case 3
+0x6DECED: mov     edx, [esp+2Ch+applicationTime]; jumptable 006DEC86 case 3
 0x6DECF1: mov     eax, [esp+2Ch+var_20]
 0x6DECF5: add     [ecx+54h], ebx
 0x6DECF8: mov     [ecx+40h], edx

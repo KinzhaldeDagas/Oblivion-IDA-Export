@@ -6,7 +6,7 @@
 0x50497D: push    0
 0x50497F: push    0
 0x504981: push    eax
-0x504982: call    sub_4F7750
+0x504982: call    CmdHelper_GetWeaponAnimType; GetWeaponAnimType helper: derives script return from actor weapon animation state on the low/high process.
 0x504987: add     esp, 10h
 0x50498A: retn
 0x50498B: mov     al, 1

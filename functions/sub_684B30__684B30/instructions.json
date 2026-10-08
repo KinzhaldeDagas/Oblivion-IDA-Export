@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x684B8B",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x684B9C",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x684BAF",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x684C3E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x684C40",
-    "line": "call    sub_8913C0",
+    "line": "call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.",
     "mnemonic": "call",
     "size": 5
   },

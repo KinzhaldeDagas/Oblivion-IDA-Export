@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x560600",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY 2026-08-27: BSTreeModel initialization order after LoadTree: force dynamic leaf-lighting method at 0x560818, exactly one virtual ApplyBaseObject dispatch at 0x560879, Compute immediately after return at 0x560888, then render-resource/postbuild dispatch at 0x5608C3 only after Compute success.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56063B",
-    "line": "mov     ebx, [esp+154h+arg_0]",
+    "line": "mov     ebx, [esp+154h+treeObject]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x56068F",
-    "line": "mov     dword ptr [esp+154h+var_114], eax",
+    "line": "mov     dword ptr [esp+154h+path], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x5606AA",
-    "line": "lea     edi, [esp+154h+var_114]",
+    "line": "lea     edi, [esp+154h+path]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5606DA",
-    "line": "mov     [esp+154h+var_13C], eax",
+    "line": "mov     [esp+154h+size], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x5606ED",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5606EF",
-    "line": "call    sub_78D6A0",
+    "line": "call    CSpeedTreeRT__ctor; CSpeedTreeRT default constructor/init. Allocates owned engine/geometry/lighting/wind/simple-billboard/frond objects, tree sizes, shared refcount/list, registers in global tree list, and initializes base extents/horizontal coords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,19 +457,19 @@
   },
   {
     "ea": "0x5606FA",
-    "line": "lea     ecx, [esp+154h+var_114]",
+    "line": "lea     ecx, [esp+154h+path]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5606FE",
-    "line": "push    ecx; char *",
+    "line": "push    ecx; filename",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5606FF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x56070C",
-    "line": "call    sub_78E310",
+    "line": "call    CSpeedTreeRT__LoadTreeFromFile; SpeedTreeOBSE 2026-05-23 update: Bethesda BSTreeModel::MakeBase path-call context remains valid and signature-gated, but current modded runtime logs showed live tree loads can bypass this callsite and enter CSpeedTreeRT::LoadTree(path) directly. Do not rely on this callsite as the only path source; 0x78E39F recovers path from the wrapper frame.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,37 +499,37 @@
   },
   {
     "ea": "0x560719",
-    "line": "lea     ecx, [esp+154h+var_130]",
+    "line": "lea     ecx, [esp+154h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x56071D",
-    "line": "call    sub_786FA0",
+    "line": "call    CSpeedTreeRT__STextures_ctor; SpeedTreeOBSE 2026-05-30 frond restoration: initializes the 7-dword compact texture summary before optional generated-frond texture recovery calls 0x78A890.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560722",
-    "line": "lea     edx, [esp+154h+var_130]",
+    "line": "lea     edx, [esp+154h+texturesOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560726",
-    "line": "mov     edi, 1",
+    "line": "mov     edi, 1; a2",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x56072B",
-    "line": "push    edx",
+    "line": "push    edx; texturesOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56072C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -541,37 +541,37 @@
   },
   {
     "ea": "0x560735",
-    "line": "call    sub_78A890",
+    "line": "call    CSpeedTreeRT__GetTextures; SpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x56073A",
-    "line": "cmp     [esp+154h+var_12C], 3",
+    "line": "cmp     [esp+154h+texturesOut.leafTextureCount], 3",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x56073F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560741",
-    "line": "ja      short loc_56074C",
+    "line": "ja      short loc_56074C; Stock compatibility rule: use two rocking groups for <=3 compact leaf maps, otherwise one.",
     "mnemonic": "ja",
     "size": 2
   },
   {
     "ea": "0x560743",
-    "line": "push    2",
+    "line": "push    2; groupCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560745",
-    "line": "call    sub_78B700",
+    "line": "call    CSpeedTreeRT__SetNumLeafRockingGroups; CSpeedTreeRT::SetNumLeafRockingGroups. Before Compute, stores at CTreeEngine+0xBC and coerces zero to one; after Compute reports the stock no-effect error.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,25 +583,25 @@
   },
   {
     "ea": "0x56074C",
-    "line": "push    edi",
+    "line": "push    edi; groupCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56074D",
-    "line": "call    sub_78B700",
+    "line": "call    CSpeedTreeRT__SetNumLeafRockingGroups; CSpeedTreeRT::SetNumLeafRockingGroups. Before Compute, stores at CTreeEngine+0xBC and coerces zero to one; after Compute reports the stock no-effect error.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560752",
-    "line": "cmp     [esp+154h+var_12C], 6",
+    "line": "cmp     [esp+154h+texturesOut.leafTextureCount], 6",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x560757",
-    "line": "jbe     short loc_560770",
+    "line": "jbe     short loc_560770; Stock engine explicitly warns when compact leaf-map count exceeds six: leaves may not display properly.",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -655,55 +655,55 @@
   },
   {
     "ea": "0x560770",
-    "line": "push    edi",
+    "line": "push    edi; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560771",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560773",
-    "line": "call    sub_7870D0",
+    "line": "call    CSpeedTreeRT__SetLeafRockingState; CSpeedTreeRT::SetLeafRockingState thin wrapper: writes the bool to CWindEngine+0x14.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560778",
-    "line": "lea     eax, [esp+154h+var_134]",
+    "line": "lea     eax, [esp+154h+variance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x56077C",
-    "line": "push    eax",
+    "line": "push    eax; variance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56077D",
-    "line": "lea     ecx, [esp+158h+var_13C]",
+    "line": "lea     ecx, [esp+158h+size]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560781",
-    "line": "push    ecx",
+    "line": "push    ecx; size",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560782",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560784",
-    "line": "call    sub_787060",
+    "line": "call    CSpeedTreeRT__GetTreeSize; CSpeedTreeRT::GetTreeSize thin wrapper. Forwards to CTreeEngine::GetSize at 0x7A2400, reading CTreeEngine+0x4C/+0x50.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,19 +727,19 @@
   },
   {
     "ea": "0x560794",
-    "line": "fmul    [esp+15Ch+var_134]",
+    "line": "fmul    [esp+15Ch+variance]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x560798",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x56079A",
-    "line": "fstp    [esp+15Ch+var_140]",
+    "line": "fstp    [esp+15Ch+var_140]; Verified fTreeSizeConversion.value scales the second CSpeedTreeRT tree-size dimension.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -751,19 +751,19 @@
   },
   {
     "ea": "0x5607A2",
-    "line": "fstp    [esp+15Ch+var_158]; float",
+    "line": "fstp    [esp+15Ch+frequencyTimeOffset]; variance",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5607A6",
-    "line": "fmul    [esp+15Ch+var_13C]",
+    "line": "fmul    [esp+15Ch+size]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x5607AA",
-    "line": "fstp    [esp+15Ch+var_140]",
+    "line": "fstp    [esp+15Ch+var_140]; Verified fTreeSizeConversion.value scales the first CSpeedTreeRT tree-size dimension.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -775,13 +775,13 @@
   },
   {
     "ea": "0x5607B2",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+oldStrength]; size",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5607B5",
-    "line": "call    sub_78B0E0",
+    "line": "call    CSpeedTreeRT__SetTreeSize; CSpeedTreeRT::SetTreeSize. Requires intact CTreeEngine transient data and positive size, then writes CTreeEngine+0x4C/+0x50 through 0x7A2420.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,19 +799,19 @@
   },
   {
     "ea": "0x5607C3",
-    "line": "fst     [esp+160h+var_158]; float",
+    "line": "fst     [esp+160h+frequencyTimeOffset]; frequencyTimeOffset",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x5607C7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5607C9",
-    "line": "fstp    [esp+160h+var_15C]; float",
+    "line": "fstp    [esp+160h+oldStrength]; oldStrength",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x5607CF",
-    "line": "fstp    [esp+160h+var_160]; float",
+    "line": "fstp    [esp+160h+newStrength]; newStrength",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5607D2",
-    "line": "call    sub_78BBF0",
+    "line": "call    CSpeedTreeRT__SetWindStrength; CSpeedTreeRT::SetWindStrength. Accepts nonnegative strength, defaults old strength/time offset from CWindEngine on -1.0 sentinels, updates wind engine, and invalidates CPU-wind branch/frond/leaf caches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,37 +841,37 @@
   },
   {
     "ea": "0x5607D9",
-    "line": "push    4",
+    "line": "push    4; matrixSpan",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5607DB",
-    "line": "push    0",
+    "line": "push    0; startingMatrix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5607DD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5607DF",
-    "line": "call    sub_78BE70",
+    "line": "call    CSpeedTreeRT__SetLocalMatrices; Verified SetLocalMatrices(this, startingMatrix=0, matrixSpan=4) before Compute. AddVertexWind modulo therefore produces indices 0..3 for this stock initialization path; frond shader row offsets are index*4.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5607E4",
-    "line": "push    0",
+    "line": "push    0; method",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5607E6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -883,97 +883,97 @@
   },
   {
     "ea": "0x5607EB",
-    "line": "call    sub_78B950",
+    "line": "call    CSpeedTreeRT__SetBranchWindMethod; CSpeedTreeRT::SetBranchWindMethod. Before Compute, mirrors the wind method to CWindEngine and branch geometry; disables vertex weighting for WIND_NONE and invalidates prior CPU-wind geometry when switching off.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5607F0",
-    "line": "push    0",
+    "line": "push    0; method",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5607F2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5607F4",
-    "line": "call    sub_78BAA0",
+    "line": "call    CSpeedTreeRT__SetFrondWindMethod; BSTreeModel::MakeBase forces frond wind method to 0 before Compute. This configures SpeedTreeRT frond computation but no decoded stock frond geometry consumer follows.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5607F9",
-    "line": "push    0",
+    "line": "push    0; method",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5607FB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5607FD",
-    "line": "call    sub_78B820",
+    "line": "call    CSpeedTreeRT__SetLeafWindMethod; CSpeedTreeRT::SetLeafWindMethod. Before Compute, mirrors the wind method to CWindEngine and leaf geometry vertex-weighting state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560802",
-    "line": "push    0",
+    "line": "push    0; method",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560804",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560806",
-    "line": "call    sub_78B320",
+    "line": "call    CSpeedTreeRT__SetBranchLightingMethod; CSpeedTreeRT::SetBranchLightingMethod. Before Compute, mirrors lighting method to branch geometry manual-lighting state and CLightingEngine branch method.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x56080B",
-    "line": "push    0",
+    "line": "push    0; method",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x56080D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x56080F",
-    "line": "call    sub_78B560",
+    "line": "call    CSpeedTreeRT__SetFrondLightingMethod; BSTreeModel::MakeBase forces frond lighting method to 0 before Compute. Frond geometry is later deleted after branch/leaf/simple-billboard resources are built.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560814",
-    "line": "push    0",
+    "line": "push    0; method",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560816",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560818",
-    "line": "call    sub_78B440",
+    "line": "call    CSpeedTreeRT__SetLeafLightingMethod; OBLIVION AUTHORITY 2026-08-27: Normal BSTreeModel load unconditionally calls SetLeafLightingMethod(0) before ApplyBaseObject and Compute. Therefore parsed SPT method 1 is overridden to dynamic on this stock path; staticLightingStyle remains data but static post-generation leaf-color processing is not entered unless another caller later restores method 1. Corpus corroboration: 15/149 installed SPTs parse method 1, but all reach this stock override ordering when loaded through BSTreeModel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,13 +1003,13 @@
   },
   {
     "ea": "0x56082E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560830",
-    "line": "fstp    [esp+15Ch+var_140]",
+    "line": "fstp    [esp+15Ch+var_140]; Verified fTreeFarDistanceBase.value sets the far tree LOD limit after multiplication by the game tree multiplier.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x560838",
-    "line": "fstp    [esp+15Ch+var_158]; float",
+    "line": "fstp    [esp+15Ch+frequencyTimeOffset]; farDistance",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x560842",
-    "line": "fstp    [esp+15Ch+var_140]",
+    "line": "fstp    [esp+15Ch+var_140]; Verified fTreeNearDistanceBase.value sets the near tree LOD limit after multiplication by the game tree multiplier.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1045,19 +1045,19 @@
   },
   {
     "ea": "0x56084A",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+oldStrength]; nearDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x56084D",
-    "line": "call    sub_7871D0",
+    "line": "call    CSpeedTreeRT__SetLodLimits; CSpeedTreeRT::SetLodLimits thin wrapper. Forwards near/far limits to CTreeEngine::SetLodLimits at 0x7A24D0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560852",
-    "line": "lea     ecx, [esp+154h+var_130]",
+    "line": "lea     ecx, [esp+154h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1069,13 +1069,13 @@
   },
   {
     "ea": "0x560861",
-    "line": "call    sub_786FC0",
+    "line": "call    CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560866",
-    "line": "mov     edx, [ebp+0]",
+    "line": "mov     edx, [ebp+0]; Stock virtual dispatch loads BSTreeModel vtable slot +0x0C. Stock A654E0 contains 0x560AC0.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x560870",
-    "line": "push    ebx",
+    "line": "push    ebx; Exact slot +0x0C ABI: push one treeObject argument, place BSTreeModel this in ECX, then call. The void result is ignored.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1117,43 +1117,43 @@
   },
   {
     "ea": "0x560879",
-    "line": "call    eax",
+    "line": "call    eax; After LoadTree succeeds, this stock control-flow path performs exactly one virtual ApplyBaseObject dispatch before Compute; there is no bypass from the prepared state to 0x560888. If a hook wrapper catches a stock exception and returns, caller control continues to Compute.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x56087B",
-    "line": "mov     ecx, [esp+154h+arg_4]",
+    "line": "mov     ecx, [esp+154h+seed]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x560882",
-    "line": "push    edi; float",
+    "line": "push    edi; compositeStrips",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560883",
-    "line": "push    ecx; int",
+    "line": "push    ecx; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560884",
-    "line": "push    0; int",
+    "line": "push    0; transform4x4",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560886",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560888",
-    "line": "call    sub_78CCA0",
+    "line": "call    CSpeedTreeRT__Compute; Compute executes immediately after the material virtual call returns. A successful Compute is required before vtable+0x14 render-resource/postbuild dispatch at 0x5608C3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,67 +1171,67 @@
   },
   {
     "ea": "0x560895",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560897",
-    "line": "call    sub_789030",
+    "line": "call    CSpeedTreeRT__FreeProjectedShadowData; CSpeedTreeRT::FreeProjectedShadowData. Oblivion destroys CSpeedTreeRT+0x50 projected-shadow storage and clears branch/frond scratch vectors. This is a distinct post-Compute cleanup, not DeleteTransientData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x56089C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x56089E",
-    "line": "call    sub_78B220",
+    "line": "call    CSpeedTreeRT__GetSeed; CSpeedTreeRT::GetSeed. While transient data is intact, returns CTreeEngine+0x48; otherwise reports the same misleading SetTreeSize/DeleteTransientData error present in local 4.1 source.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5608A3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5608A5",
-    "line": "mov     [ebp+48h], eax",
+    "line": "mov     [ebp+48h], eax; Verified BSTreeModel.seed at +0x48 is written from CSpeedTreeRT_GetSeed after successful Compute. Meaningful layout divergence: Fallout::BSTreeModel::InitFromBase stores the corresponding seed at model+0x40.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5608A8",
-    "line": "call    sub_787140",
+    "line": "call    CSpeedTreeRT__GetTrunkLength; CSpeedTreeRT::GetTrunkLength. Returns branchGeometry+0x1C when treeEngine and branchGeometry exist, otherwise 0.0; Bethesda extension absent from the supplied 4.1 public header.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5608AD",
-    "line": "fstp    dword ptr [ebp+50h]",
+    "line": "fstp    dword ptr [ebp+50h]; Verified BSTreeModel.trunkLength at +0x50 is written from CSpeedTreeRT_GetTrunkLength after successful Compute. Fallout's named BSTreeModel homolog stores trunkLength at +0x48, so the Oblivion layout is shifted by 8 bytes at this tail.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5608B0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5608B2",
-    "line": "call    sub_787120",
+    "line": "call    CSpeedTreeRT__GetTrunkWidth; CSpeedTreeRT::GetTrunkWidth. Returns branchGeometry+0x18 when treeEngine and branchGeometry exist, otherwise 0.0; Bethesda extension absent from the supplied 4.1 public header.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5608B7",
-    "line": "fstp    dword ptr [ebp+54h]",
+    "line": "fstp    dword ptr [ebp+54h]; Verified BSTreeModel.trunkWidth at +0x54 is written from CSpeedTreeRT_GetTrunkWidth. Fallout's named homolog stores trunkWidth at +0x4C; preserve the 8-byte layout divergence.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1261,43 +1261,43 @@
   },
   {
     "ea": "0x5608C3",
-    "line": "call    eax",
+    "line": "call    eax; Called only after CSpeedTreeRT::Compute returned success. Thus every observed successful postbuild on this stock path follows one earlier material dispatch, although it does not prove the stock material target itself returned normally when a wrapper can catch.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x5608C5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5608C7",
-    "line": "call    sub_78B0C0",
+    "line": "call    CSpeedTreeRT__DeleteTransientData",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5608CC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5608CE",
-    "line": "call    sub_78C160",
+    "line": "call    CSpeedTreeRT__DeleteBranchGeometry; CSpeedTreeRT::DeleteBranchGeometry. After Compute, deletes branch geometry only for non-instance trees when the shared instance refcount is exactly one.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5608D3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5608D5",
-    "line": "call    sub_789EC0",
+    "line": "call    CSpeedTreeRT__DeleteFrondGeometry; SpeedTreeOBSE 2026-05-30: optional C:\\src\\Fronds reference layer bypasses this DeleteFrondGeometry call only when [Fronds] bEnableReferenceRestoration=1 so computed frond geometry can be exported/cached.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,13 +1393,13 @@
   },
   {
     "ea": "0x56090A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x56090C",
-    "line": "call    sub_78C9B0",
+    "line": "call    CSpeedTreeRT__dtor; One of exactly two Oblivion code xrefs to CSpeedTreeRT dtor/refcount cleanup. This is the MakeBase LoadTree failure release; the next instruction frees the 0xA0 CSpeedTreeRT wrapper, so wrapper addresses may be reused after cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x560912",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Frees the failed base CSpeedTreeRT 0xA0 wrapper immediately after stock shared-refcount cleanup. Pointer-address identity alone is ABA-prone across later FormHeapAlloc reuse.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1432,5 +1432,113 @@
     "line": "jmp     short loc_5608DC",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9BCFB0",
+    "line": "mov     eax, [ebp-13Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BCFB6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCFB7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCFBC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCFBD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCFBE",
+    "line": "lea     ecx, [ebp-130h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BCFC4",
+    "line": "jmp     CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCFC9",
+    "line": "mov     edx, [esp+seed]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BCFCD",
+    "line": "lea     eax, [edx-144h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BCFD3",
+    "line": "mov     ecx, [edx-148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BCFD9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCFDB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCFE0",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCFE3",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCFE6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCFE8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCFED",
+    "line": "mov     eax, offset stru_AE6AA8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCFF2",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

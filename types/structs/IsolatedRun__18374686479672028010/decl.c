@@ -1,1 +1,1 @@
-IsolatedRun
+typedef tagIsolatedRun IsolatedRun;

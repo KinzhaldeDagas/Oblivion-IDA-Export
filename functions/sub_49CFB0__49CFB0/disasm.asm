@@ -157,3 +157,33 @@
 0x49D135: pop     ebp
 0x49D136: add     esp, 10h
 0x49D139: retn
+0x9B1A60: mov     ecx, [ebp-10h]; slot
+0x9B1A63: jmp     NiPointerSlot_Release
+0x9B1A68: mov     ecx, [ebp-10h]
+0x9B1A6B: add     ecx, 4; slot
+0x9B1A6E: jmp     NiPointerSlot_Release
+0x9B1A73: mov     ecx, [ebp-10h]
+0x9B1A76: add     ecx, 8; slot
+0x9B1A79: jmp     NiPointerSlot_Release
+0x9B1A7E: mov     ecx, [ebp-10h]
+0x9B1A81: add     ecx, 0Ch; slot
+0x9B1A84: jmp     NiPointerSlot_Release
+0x9B1A89: mov     ecx, [ebp-10h]
+0x9B1A8C: add     ecx, 10h; slot
+0x9B1A8F: jmp     NiPointerSlot_Release
+0x9B1A94: mov     ecx, [ebp-10h]
+0x9B1A97: add     ecx, 14h; slot
+0x9B1A9A: jmp     NiPointerSlot_Release
+0x9B1A9F: mov     ecx, [ebp-10h]
+0x9B1AA2: add     ecx, 30h ; '0'
+0x9B1AA5: jmp     j_??1?$NiTPointerList@PAVWadingWaterData@@@@UAE@XZ; NiTPointerList<WadingWaterData *>::~NiTPointerList<WadingWaterData *>(void)
+0x9B1AAA: mov     ecx, [ebp-10h]
+0x9B1AAD: add     ecx, 48h ; 'H'; slot
+0x9B1AB0: jmp     NiPointerSlot_Release
+0x9B1AB5: mov     edx, [esp+arg_4]
+0x9B1AB9: lea     eax, [edx-10h]
+0x9B1ABC: mov     ecx, [edx-14h]
+0x9B1ABF: xor     ecx, eax
+0x9B1AC1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1AC6: mov     eax, offset stru_ADDB84
+0x9B1ACB: jmp     ___CxxFrameHandler3

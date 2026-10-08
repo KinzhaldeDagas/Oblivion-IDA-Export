@@ -1,5 +1,5 @@
-int sub_9F9900()
+int InitSetting_sSkillNameConjuration()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0DC, (int)"sSkillNameConjuration", (int)"Conjuration");
-  return atexit(sub_A239F0);
+  GameSetting_ConstrAndReg(&g_sSkillNameConjuration, "sSkillNameConjuration", "Conjuration"); /*0x9f990f*/
+  return atexit(sub_A239F0); /*0x9f991f*/
 }

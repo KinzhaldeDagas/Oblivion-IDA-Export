@@ -1,4 +1,4 @@
 int sub_918CF0()
 {
-  return dword_BA8410;
+  return unk_BA8410; /*0x918cf5*/
 }

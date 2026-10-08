@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x630090",
+      "0x6300E0"
+    ]
+  ],
+  "chunks_sha256": "7f130f5433364f9f284e976105841f9c8e021c63936efa137a7dd9037d7f8a3b",
+  "comment_regular": "Pushes a non-null Actor into HighProcess.recentSocialTargets. If the inline head is occupied, moves the old head into a newly allocated 8-byte node before replacing it.",
+  "comment_repeatable": "Pushes a non-null Actor into HighProcess.recentSocialTargets. If the inline head is occupied, moves the old head into a newly allocated 8-byte node before replacing it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_630090",
+  "display_name": "HighProcess::RememberSocialTarget",
   "end_ea": "0x6300E0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_630090",
+  "name": "HighProcess::RememberSocialTarget",
   "segment": ".text",
   "sha256": "7f130f5433364f9f284e976105841f9c8e021c63936efa137a7dd9037d7f8a3b",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x630090",
-  "type": "void __thiscall(HighProcess *this, void *)",
+  "total_chunk_size": 80,
+  "type": "void __thiscall(HighProcess *this, Actor *target)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 1
 }

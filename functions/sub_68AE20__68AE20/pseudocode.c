@@ -1,21 +1,21 @@
-void __thiscall sub_68AE20(_DWORD *this, _DWORD *a2)
+void __thiscall sub_68AE20(TravelPath *this, NiPoint3 *position)
 {
-  _DWORD *v3; // eax
-  _DWORD **v4; // esi
+  BSSimpleList_VoidPtr *p_nodes; // eax
+  TravelPathNode *data; // esi
 
-  v3 = this + 1;
-  if ( this == (_DWORD *)0xFFFFFFFC )
+  p_nodes = &this->nodes; /*0x68ae24*/
+  if ( this == (TravelPath *)0xFFFFFFFC ) /*0x68ae29*/
   {
-    v4 = 0;
+    data = 0; /*0x68ae45*/
   }
   else
   {
-    while ( v3[1] )
-      v3 = (_DWORD *)v3[1];
-    v4 = (_DWORD **)*v3;
+    while ( p_nodes->firstNode.next ) /*0x68ae35*/
+      p_nodes = (BSSimpleList_VoidPtr *)p_nodes->firstNode.next; /*0x68ae3f*/
+    data = (TravelPathNode *)p_nodes->firstNode.data; /*0x68ae68*/
   }
-  if ( v4 && DName::status(v4) == 1 )
-    sub_68B200(v4, a2);
+  if ( data && DName::status((char *)data) == 1 ) /*0x68ae55*/
+    TravelPathNode_SetOwnedPosition(data, position); /*0x68ae5e*/
   else
-    sub_68A280(this, a2);
+    TravelPath_AppendDestinationPosition(this, position); /*0x68ae73*/
 }

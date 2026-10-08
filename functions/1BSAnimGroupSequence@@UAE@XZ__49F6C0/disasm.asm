@@ -39,3 +39,12 @@
 0x49F736: pop     esi
 0x49F737: add     esp, 10h
 0x49F73A: retn
+0x9B2120: mov     ecx, [ebp-10h]; this
+0x9B2123: jmp     ??1NiControllerSequence@@UAE@XZ; NiControllerSequence::~NiControllerSequence(void)
+0x9B2128: mov     edx, [esp+arg_4]
+0x9B212C: lea     eax, [edx-0Ch]
+0x9B212F: mov     ecx, [edx-10h]
+0x9B2132: xor     ecx, eax
+0x9B2134: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2139: mov     eax, offset stru_ADE16C
+0x9B213E: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79FD10",
-    "line": "push    ebp",
+    "line": "push    ebp; Source-match: CFrondEngine::BuildExtrusionVertices. Builds extrusion profile vertices along each guide using profile/normal/tangent vectors, lighting, wind weights, and running-length T-coordinate adjustment.",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x79FD5B",
-    "line": "mov     [esp+134h+var_A8], esi",
+    "line": "mov     [esp+134h+var_AC.begin], esi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79FD62",
-    "line": "mov     [esp+134h+var_A4], esi",
+    "line": "mov     [esp+134h+var_AC.end], esi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79FD69",
-    "line": "mov     [esp+134h+var_A0], esi",
+    "line": "mov     [esp+134h+var_AC.capacity], esi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x79FD77",
-    "line": "mov     [esp+134h+var_98], esi",
+    "line": "mov     [esp+134h+var_9C.begin], esi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79FD7E",
-    "line": "mov     [esp+134h+var_94], esi",
+    "line": "mov     [esp+134h+var_9C.end], esi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79FD85",
-    "line": "mov     [esp+134h+var_90], esi",
+    "line": "mov     [esp+134h+var_9C.capacity], esi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x79FDAA",
-    "line": "call    sub_79DA10",
+    "line": "call    OB_CFrondEngine_BuildProfileVectors_010201A0; Source-match: CFrondEngine::BuildProfileVectors. Builds extrusion cross-section profile, mirrored profile side, normals, and tangents from the profile curve and guide radius.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79FDAF",
-    "line": "mov     eax, [esp+134h+var_A8]",
+    "line": "mov     eax, [esp+134h+var_AC.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x79FDBE",
-    "line": "mov     ecx, [esp+134h+var_A4]",
+    "line": "mov     ecx, [esp+134h+var_AC.end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x79FDE3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x79FDEC",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x79FE12",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79FE14",
-    "line": "fstp    [esp+134h+var_10C]",
+    "line": "fstp    [esp+134h+result.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79FE18",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x79FE1F",
-    "line": "mov     [esp+134h+var_100], eax",
+    "line": "mov     [esp+134h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79FE23",
-    "line": "fild    [esp+134h+var_100]",
+    "line": "fild    [esp+134h+value]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x79FE41",
-    "line": "fdivr   [esp+134h+var_10C]",
+    "line": "fdivr   [esp+134h+result.owner]",
     "mnemonic": "fdivr",
     "size": 4
   },
   {
     "ea": "0x79FE45",
-    "line": "fstp    [esp+134h+var_100]",
+    "line": "fstp    [esp+134h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x79FE66",
-    "line": "mov     [esp+134h+var_10C], 0",
+    "line": "mov     [esp+134h+result.owner], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x79FF3A",
-    "line": "lea     ecx, [esp+138h+var_80]",
+    "line": "lea     ecx, [esp+138h+var_80]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x79FF41",
-    "line": "fstp    [esp+138h+var_138]; float",
+    "line": "fstp    [esp+138h+angleDegrees]; angleDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x79FF44",
-    "line": "call    sub_793A00",
+    "line": "call    OB_stRotTransform_RotateXDegrees_010201A0; Oblivion stRotTransform::RotateX. Converts degrees to radians, builds the X-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,25 +949,25 @@
   },
   {
     "ea": "0x79FF4D",
-    "line": "lea     ecx, [esp+138h+var_50]",
+    "line": "lea     ecx, [esp+138h+var_50]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x79FF54",
-    "line": "fstp    [esp+138h+var_138]; float",
+    "line": "fstp    [esp+138h+angleDegrees]; angleDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x79FF57",
-    "line": "call    sub_793A00",
+    "line": "call    OB_stRotTransform_RotateXDegrees_010201A0; Oblivion stRotTransform::RotateX. Converts degrees to radians, builds the X-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79FF5C",
-    "line": "cmp     [esp+134h+var_A8], 0",
+    "line": "cmp     [esp+134h+var_AC.begin], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -979,13 +979,13 @@
   },
   {
     "ea": "0x79FF66",
-    "line": "mov     edi, [esp+134h+var_A4]",
+    "line": "mov     edi, [esp+134h+var_AC.end]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79FF6D",
-    "line": "mov     ecx, [esp+134h+var_A8]",
+    "line": "mov     ecx, [esp+134h+var_AC.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x79FF93",
-    "line": "mov     edi, [esp+134h+var_A4]",
+    "line": "mov     edi, [esp+134h+var_AC.end]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x79FF9A",
-    "line": "mov     ecx, [esp+134h+var_A8]",
+    "line": "mov     ecx, [esp+134h+var_AC.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x79FFA3",
-    "line": "fld     [esp+134h+var_74]",
+    "line": "fld     [esp+134h+var_80.m+0Ch]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x79FFAA",
-    "line": "mov     esi, [esp+134h+var_10C]",
+    "line": "mov     esi, [esp+134h+result.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x79FFB2",
-    "line": "fld     [esp+134h+var_80]",
+    "line": "fld     [esp+134h+var_80.m]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x79FFBE",
-    "line": "fld     [esp+134h+var_68]",
+    "line": "fld     [esp+134h+var_80.m+18h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x79FFCB",
-    "line": "fstp    [esp+134h+var_F4]",
+    "line": "fstp    [esp+134h+var_F4.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79FFCF",
-    "line": "fld     [esp+134h+var_70]",
+    "line": "fld     [esp+134h+var_80.m+10h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x79FFDA",
-    "line": "fld     [esp+134h+var_7C]",
+    "line": "fld     [esp+134h+var_80.m+4]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x79FFE6",
-    "line": "fld     [esp+134h+var_64]",
+    "line": "fld     [esp+134h+var_80.m+1Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x79FFF7",
-    "line": "fld     [esp+134h+var_6C]",
+    "line": "fld     [esp+134h+var_80.m+14h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x7A0002",
-    "line": "fld     [esp+134h+var_78]",
+    "line": "fld     [esp+134h+var_80.m+8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x7A000E",
-    "line": "fld     [esp+134h+var_60]",
+    "line": "fld     [esp+134h+var_80.m+20h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1309,13 +1309,13 @@
   },
   {
     "ea": "0x7A003E",
-    "line": "mov     ecx, [esp+134h+var_A8]",
+    "line": "mov     ecx, [esp+134h+var_AC.begin]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A0045",
-    "line": "fld     [esp+134h+var_44]",
+    "line": "fld     [esp+134h+var_50.m+0Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x7A0056",
-    "line": "fld     [esp+134h+var_50]",
+    "line": "fld     [esp+134h+var_50.m]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x7A0062",
-    "line": "fld     [esp+134h+var_38]",
+    "line": "fld     [esp+134h+var_50.m+18h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1375,13 +1375,13 @@
   },
   {
     "ea": "0x7A006D",
-    "line": "fstp    [esp+134h+var_10C]",
+    "line": "fstp    [esp+134h+result.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A0071",
-    "line": "fld     [esp+134h+var_4C]",
+    "line": "fld     [esp+134h+var_50.m+4]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x7A007B",
-    "line": "fld     [esp+134h+var_40]",
+    "line": "fld     [esp+134h+var_50.m+10h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x7A0086",
-    "line": "fld     [esp+134h+var_34]",
+    "line": "fld     [esp+134h+var_50.m+1Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x7A0095",
-    "line": "fld     [esp+134h+var_48]",
+    "line": "fld     [esp+134h+var_50.m+8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x7A009F",
-    "line": "fld     [esp+134h+var_3C]",
+    "line": "fld     [esp+134h+var_50.m+14h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x7A00AF",
-    "line": "fld     [esp+134h+var_30]",
+    "line": "fld     [esp+134h+var_50.m+20h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1501,13 +1501,13 @@
   },
   {
     "ea": "0x7A00BE",
-    "line": "fld     [esp+134h+var_10C]",
+    "line": "fld     [esp+134h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A00C2",
-    "line": "fadd    [esp+134h+var_F4]",
+    "line": "fadd    [esp+134h+var_F4.owner]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -1543,13 +1543,13 @@
   },
   {
     "ea": "0x7A00DA",
-    "line": "fstp    [esp+134h+var_F4]",
+    "line": "fstp    [esp+134h+var_F4.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A00DE",
-    "line": "fld     [esp+134h+var_F4]",
+    "line": "fld     [esp+134h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1573,13 +1573,13 @@
   },
   {
     "ea": "0x7A00EE",
-    "line": "fstp    [esp+134h+var_10C]",
+    "line": "fstp    [esp+134h+result.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A00F2",
-    "line": "fld     [esp+134h+var_10C]",
+    "line": "fld     [esp+134h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1801,7 +1801,7 @@
   },
   {
     "ea": "0x7A016E",
-    "line": "fstp    [esp+134h+var_2C]",
+    "line": "fstp    [esp+134h+coord]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -1843,31 +1843,31 @@
   },
   {
     "ea": "0x7A0193",
-    "line": "fld     [esp+134h+var_F4]",
+    "line": "fld     [esp+134h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A0197",
-    "line": "fstp    [esp+134h+var_F4]",
+    "line": "fstp    [esp+134h+var_F4.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A019B",
-    "line": "fld     [esp+134h+var_10C]",
+    "line": "fld     [esp+134h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A019F",
-    "line": "fstp    [esp+134h+var_10C]",
+    "line": "fstp    [esp+134h+result.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A01A3",
-    "line": "fld     [esp+134h+var_F4]",
+    "line": "fld     [esp+134h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1879,7 +1879,7 @@
   },
   {
     "ea": "0x7A01AB",
-    "line": "fld     [esp+134h+var_10C]",
+    "line": "fld     [esp+134h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x7A01DA",
-    "line": "lea     ecx, [esp+134h+var_2C]",
+    "line": "lea     ecx, [esp+134h+coord]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1987,13 +1987,13 @@
   },
   {
     "ea": "0x7A01E3",
-    "line": "push    ecx",
+    "line": "push    ecx; coord",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A01E4",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2035,13 +2035,13 @@
   },
   {
     "ea": "0x7A01F8",
-    "line": "fstp    [esp+138h+var_5C]",
+    "line": "fstp    [esp+138h+tangent]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x7A01FF",
-    "line": "fld     [esp+138h+var_F4]",
+    "line": "fld     [esp+138h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x7A020C",
-    "line": "fmul    [esp+138h+var_10C]",
+    "line": "fmul    [esp+138h+result.owner]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x7A0217",
-    "line": "call    sub_796260",
+    "line": "call    OB_CIndexedGeometry_AddVertexCoord_010201A0; Oblivion CIndexedGeometry::AddVertexCoord. Appends xyz; when CPU wind is active it also preserves xyz in originalVertexCoords for later deformation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2089,25 +2089,25 @@
   },
   {
     "ea": "0x7A0225",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0227",
-    "line": "fstp    [esp+134h+var_C4]",
+    "line": "fstp    [esp+134h+diffuseST]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A022B",
-    "line": "fld     [esp+134h+var_100]",
+    "line": "fld     [esp+134h+value]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A022F",
-    "line": "lea     eax, [esp+134h+var_C4]",
+    "line": "lea     eax, [esp+134h+diffuseST]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2119,25 +2119,25 @@
   },
   {
     "ea": "0x7A0237",
-    "line": "push    edx; float",
+    "line": "push    edx; mapIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0238",
-    "line": "push    eax; int",
+    "line": "push    eax; diffuseST",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0239",
-    "line": "call    sub_796320",
+    "line": "call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A023E",
-    "line": "mov     ecx, [esp+134h+var_98]",
+    "line": "mov     ecx, [esp+134h+var_9C.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x7A0249",
-    "line": "mov     edx, [esp+134h+var_94]",
+    "line": "mov     edx, [esp+134h+var_9C.end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x7A026D",
-    "line": "mov     ecx, [esp+134h+var_98]",
+    "line": "mov     ecx, [esp+134h+var_9C.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2239,13 +2239,13 @@
   },
   {
     "ea": "0x7A0279",
-    "line": "fmul    [esp+134h+var_80]",
+    "line": "fmul    [esp+134h+var_80.m]",
     "mnemonic": "fmul",
     "size": 7
   },
   {
     "ea": "0x7A0280",
-    "line": "fld     [esp+134h+var_74]",
+    "line": "fld     [esp+134h+var_80.m+0Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x7A028D",
-    "line": "fld     [esp+134h+var_68]",
+    "line": "fld     [esp+134h+var_80.m+18h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x7A029E",
-    "line": "fld     [esp+134h+var_7C]",
+    "line": "fld     [esp+134h+var_80.m+4]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2299,7 +2299,7 @@
   },
   {
     "ea": "0x7A02A8",
-    "line": "fld     [esp+134h+var_70]",
+    "line": "fld     [esp+134h+var_80.m+10h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2317,7 +2317,7 @@
   },
   {
     "ea": "0x7A02B5",
-    "line": "fld     [esp+134h+var_64]",
+    "line": "fld     [esp+134h+var_80.m+1Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x7A02C6",
-    "line": "fld     [esp+134h+var_78]",
+    "line": "fld     [esp+134h+var_80.m+8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x7A02D0",
-    "line": "fld     [esp+134h+var_6C]",
+    "line": "fld     [esp+134h+var_80.m+14h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x7A02DD",
-    "line": "fld     [esp+134h+var_60]",
+    "line": "fld     [esp+134h+var_80.m+20h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x7A02F0",
-    "line": "mov     eax, [esp+134h+var_94]",
+    "line": "mov     eax, [esp+134h+var_9C.end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2473,13 +2473,13 @@
   },
   {
     "ea": "0x7A0316",
-    "line": "mov     ecx, [esp+134h+var_98]",
+    "line": "mov     ecx, [esp+134h+var_9C.begin]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A031D",
-    "line": "fld     [esp+134h+var_44]",
+    "line": "fld     [esp+134h+var_50.m+0Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2497,7 +2497,7 @@
   },
   {
     "ea": "0x7A032C",
-    "line": "fld     [esp+134h+var_50]",
+    "line": "fld     [esp+134h+var_50.m]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2515,7 +2515,7 @@
   },
   {
     "ea": "0x7A0338",
-    "line": "fld     [esp+134h+var_38]",
+    "line": "fld     [esp+134h+var_50.m+18h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x7A0347",
-    "line": "fld     [esp+134h+var_40]",
+    "line": "fld     [esp+134h+var_50.m+10h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x7A0352",
-    "line": "fld     [esp+134h+var_4C]",
+    "line": "fld     [esp+134h+var_50.m+4]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x7A035E",
-    "line": "fld     [esp+134h+var_34]",
+    "line": "fld     [esp+134h+var_50.m+1Ch]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2593,7 +2593,7 @@
   },
   {
     "ea": "0x7A036D",
-    "line": "fld     [esp+134h+var_3C]",
+    "line": "fld     [esp+134h+var_50.m+14h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x7A0378",
-    "line": "fld     [esp+134h+var_48]",
+    "line": "fld     [esp+134h+var_50.m+8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x7A0384",
-    "line": "fld     [esp+134h+var_30]",
+    "line": "fld     [esp+134h+var_50.m+20h]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x7A03C5",
-    "line": "fstp    [esp+134h+var_10C]",
+    "line": "fstp    [esp+134h+result.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2743,7 +2743,7 @@
   },
   {
     "ea": "0x7A03CF",
-    "line": "fstp    [esp+134h+var_F4]",
+    "line": "fstp    [esp+134h+var_F4.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2761,13 +2761,13 @@
   },
   {
     "ea": "0x7A03DB",
-    "line": "fld     [esp+134h+var_F4]",
+    "line": "fld     [esp+134h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A03DF",
-    "line": "fld     [esp+134h+var_10C]",
+    "line": "fld     [esp+134h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2875,7 +2875,7 @@
   },
   {
     "ea": "0x7A0414",
-    "line": "fld     [esp+134h+var_10C]",
+    "line": "fld     [esp+134h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2905,13 +2905,13 @@
   },
   {
     "ea": "0x7A0422",
-    "line": "fstp    [esp+134h+var_8C]",
+    "line": "fstp    [esp+134h+normal]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x7A0429",
-    "line": "fld     [esp+134h+var_F4]",
+    "line": "fld     [esp+134h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2965,79 +2965,79 @@
   },
   {
     "ea": "0x7A0458",
-    "line": "lea     ecx, [esp+134h+var_20]",
+    "line": "lea     ecx, [esp+134h+rgba]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7A045F",
-    "line": "fstp    [esp+134h+var_20]",
+    "line": "fstp    [esp+134h+rgba]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x7A0466",
-    "line": "push    ecx",
+    "line": "push    ecx; rgba",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0467",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0469",
-    "line": "call    sub_796230",
+    "line": "call    OB_CIndexedGeometry_AddVertexColor_010201A0; Verified constant white RGBA, all four stack floats initialized to 1.0 before AddVertexColor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A046E",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0470",
-    "line": "lea     edx, [esp+134h+var_8C]",
+    "line": "lea     edx, [esp+134h+normal]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7A0477",
-    "line": "push    edx",
+    "line": "push    edx; normal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0478",
-    "line": "call    sub_7962F0",
+    "line": "call    OB_CIndexedGeometry_AddVertexNormal_010201A0; Oblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A047D",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A047F",
-    "line": "lea     eax, [esp+134h+var_5C]",
+    "line": "lea     eax, [esp+134h+tangent]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7A0486",
-    "line": "push    eax",
+    "line": "push    eax; tangent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0487",
-    "line": "call    sub_796590",
+    "line": "call    OB_CIndexedGeometry_AddVertexTangent_010201A0; Oblivion CIndexedGeometry::AddVertexTangent. Appends one xyz tangent to the indexed vertex stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3115,13 +3115,13 @@
   },
   {
     "ea": "0x7A04B8",
-    "line": "fstp    [esp+134h+var_10C]",
+    "line": "fstp    [esp+134h+result.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A04BC",
-    "line": "fld     [esp+134h+var_5C]",
+    "line": "fld     [esp+134h+tangent]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3139,7 +3139,7 @@
   },
   {
     "ea": "0x7A04C7",
-    "line": "fld     [esp+134h+var_8C]",
+    "line": "fld     [esp+134h+normal]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x7A04D8",
-    "line": "fstp    [esp+134h+var_F4]",
+    "line": "fstp    [esp+134h+var_F4.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3205,13 +3205,13 @@
   },
   {
     "ea": "0x7A04E6",
-    "line": "fld     [esp+134h+var_10C]",
+    "line": "fld     [esp+134h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A04EA",
-    "line": "fld     [esp+134h+var_F4]",
+    "line": "fld     [esp+134h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3301,7 +3301,7 @@
   },
   {
     "ea": "0x7A0517",
-    "line": "lea     ecx, [esp+134h+var_E4]",
+    "line": "lea     ecx, [esp+134h+binormal]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3313,7 +3313,7 @@
   },
   {
     "ea": "0x7A051D",
-    "line": "push    ecx",
+    "line": "push    ecx; binormal",
     "mnemonic": "push",
     "size": 1
   },
@@ -3325,7 +3325,7 @@
   },
   {
     "ea": "0x7A0520",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3337,7 +3337,7 @@
   },
   {
     "ea": "0x7A0526",
-    "line": "fld     [esp+138h+var_10C]",
+    "line": "fld     [esp+138h+result.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3367,13 +3367,13 @@
   },
   {
     "ea": "0x7A0534",
-    "line": "fstp    [esp+138h+var_E4]",
+    "line": "fstp    [esp+138h+binormal]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A0538",
-    "line": "fld     [esp+138h+var_F4]",
+    "line": "fld     [esp+138h+var_F4.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3403,7 +3403,7 @@
   },
   {
     "ea": "0x7A054A",
-    "line": "call    sub_7965E0",
+    "line": "call    OB_CIndexedGeometry_AddVertexBinormal_010201A0; Oblivion CIndexedGeometry::AddVertexBinormal. Appends one xyz binormal to the indexed vertex stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3529,7 +3529,7 @@
   },
   {
     "ea": "0x7A0586",
-    "line": "mov     [esp+134h+var_10C], eax",
+    "line": "mov     [esp+134h+result.owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3619,7 +3619,7 @@
   },
   {
     "ea": "0x7A05B3",
-    "line": "mov     ecx, [esp+134h+var_10C]",
+    "line": "mov     ecx, [esp+134h+result.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3637,7 +3637,7 @@
   },
   {
     "ea": "0x7A05BF",
-    "line": "push    edx",
+    "line": "push    edx; windMatrixIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -3655,19 +3655,19 @@
   },
   {
     "ea": "0x7A05C5",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A05C7",
-    "line": "fstp    [esp+13Ch+var_13C]",
+    "line": "fstp    [esp+13Ch+windWeight]; windWeight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A05CA",
-    "line": "call    sub_796540",
+    "line": "call    OB_CIndexedGeometry_AddVertexWind_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3715,7 +3715,7 @@
   },
   {
     "ea": "0x7A05E7",
-    "line": "mov     [esp+134h+var_10C], esi",
+    "line": "mov     [esp+134h+result.owner], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3739,7 +3739,7 @@
   },
   {
     "ea": "0x7A05F8",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3751,7 +3751,7 @@
   },
   {
     "ea": "0x7A05FE",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3775,37 +3775,37 @@
   },
   {
     "ea": "0x7A060D",
-    "line": "mov     [esp+134h+var_D0], eax",
+    "line": "mov     [esp+134h+var_D4.begin], eax; Initializes the local vector<float> holding total length for each extrusion-profile lane (RT4.1 m_vLengths).",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0611",
-    "line": "mov     [esp+134h+var_CC], eax",
+    "line": "mov     [esp+134h+var_D4.end], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0615",
-    "line": "mov     [esp+134h+var_C8], eax",
+    "line": "mov     [esp+134h+var_D4.capacity], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0619",
-    "line": "mov     [esp+134h+var_B8], eax",
+    "line": "mov     [esp+134h+var_BC.begin], eax; Initializes the local vector<vector<float>> holding cumulative lengths per extrusion-profile lane (RT4.1 m_vRunningLengths).",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A061D",
-    "line": "mov     [esp+134h+var_B4], eax",
+    "line": "mov     [esp+134h+var_BC.end], eax",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A0624",
-    "line": "mov     [esp+134h+var_B0], eax",
+    "line": "mov     [esp+134h+var_BC.capacityEnd], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3847,7 +3847,7 @@
   },
   {
     "ea": "0x7A0644",
-    "line": "fstp    [esp+134h+var_100]",
+    "line": "fstp    [esp+134h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3883,13 +3883,13 @@
   },
   {
     "ea": "0x7A065A",
-    "line": "lea     edx, [esp+134h+var_100]",
+    "line": "lea     edx, [esp+134h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A065E",
-    "line": "push    edx; int",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -3907,31 +3907,31 @@
   },
   {
     "ea": "0x7A0662",
-    "line": "lea     eax, [esp+13Ch+var_E4]",
+    "line": "lea     eax, [esp+13Ch+binormal]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A0666",
-    "line": "push    eax; int",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0667",
-    "line": "lea     eax, [esp+140h+var_C4]",
+    "line": "lea     eax, [esp+140h+diffuseST]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A066B",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A066C",
-    "line": "lea     ecx, [esp+144h+var_E4]",
+    "line": "lea     ecx, [esp+144h+binormal]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3943,13 +3943,13 @@
   },
   {
     "ea": "0x7A0678",
-    "line": "call    sub_7996F0",
+    "line": "call    OB_stVectorFloat_InsertOne_010201A0; Initialize/grow a frond extrusion float length vector with zero through vector<float>::insert; subsequent entries accumulate guide-vertex distances.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A067D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3961,7 +3961,7 @@
   },
   {
     "ea": "0x7A0687",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4033,7 +4033,7 @@
   },
   {
     "ea": "0x7A06B2",
-    "line": "mov     ecx, [ecx]",
+    "line": "mov     ecx, [ecx]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4057,7 +4057,7 @@
   },
   {
     "ea": "0x7A06BA",
-    "line": "push    eax",
+    "line": "push    eax; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -4069,7 +4069,7 @@
   },
   {
     "ea": "0x7A06BD",
-    "line": "call    sub_794730",
+    "line": "call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4081,13 +4081,13 @@
   },
   {
     "ea": "0x7A06C6",
-    "line": "mov     ecx, [edx]",
+    "line": "mov     ecx, [edx]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A06C8",
-    "line": "push    esi",
+    "line": "push    esi; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -4099,7 +4099,7 @@
   },
   {
     "ea": "0x7A06CB",
-    "line": "call    sub_794730",
+    "line": "call    OB_CIndexedGeometry_GetVertexCoord_010201A0; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4441,13 +4441,13 @@
   },
   {
     "ea": "0x7A077D",
-    "line": "push    ecx; int",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A077E",
-    "line": "lea     eax, [esp+138h+var_E4]",
+    "line": "lea     eax, [esp+138h+binormal]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4459,31 +4459,31 @@
   },
   {
     "ea": "0x7A0783",
-    "line": "push    eax; int",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0784",
-    "line": "lea     edx, [esp+140h+var_10C]",
+    "line": "lea     edx, [esp+140h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A0788",
-    "line": "push    edx; int",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0789",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A078B",
-    "line": "call    sub_7996F0",
+    "line": "call    OB_stVectorFloat_InsertOne_010201A0; Insert a computed running guide-vertex distance into the frond extrusion float vector used for unpinched diffuse T-coordinate normalization.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4501,7 +4501,7 @@
   },
   {
     "ea": "0x7A0797",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4513,7 +4513,7 @@
   },
   {
     "ea": "0x7A079D",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4537,31 +4537,31 @@
   },
   {
     "ea": "0x7A07AC",
-    "line": "lea     eax, [esp+134h+var_E4]",
+    "line": "lea     eax, [esp+134h+binormal]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A07B0",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A07B1",
-    "line": "lea     ecx, [esp+138h+var_BC]",
+    "line": "lea     ecx, [esp+138h+var_BC]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A07B5",
-    "line": "call    sub_79F670",
+    "line": "call    OB_stVector_stVectorFloat_PushBack_010201A0; OBLIVION AUTHORITY (2026-08-30): Appends the just-built inner vector<float> of cumulative extrusion distances to the outer vector<vector<float>>. This is the executable's m_vRunningLengths construction; RT4.1 FrondEngine.h:242 and FrondEngine.cpp:770-793 corroborate the already-observed role.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A07BA",
-    "line": "mov     edx, [esp+134h+var_D0]",
+    "line": "mov     edx, [esp+134h+var_D4.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4573,7 +4573,7 @@
   },
   {
     "ea": "0x7A07C0",
-    "line": "mov     esi, [esp+134h+var_CC]",
+    "line": "mov     esi, [esp+134h+var_D4.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4585,7 +4585,7 @@
   },
   {
     "ea": "0x7A07C6",
-    "line": "mov     ecx, [esp+134h+var_C8]",
+    "line": "mov     ecx, [esp+134h+var_D4.capacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4657,7 +4657,7 @@
   },
   {
     "ea": "0x7A07E5",
-    "line": "mov     [esp+134h+var_CC], eax",
+    "line": "mov     [esp+134h+var_D4.end], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4693,7 +4693,7 @@
   },
   {
     "ea": "0x7A07F8",
-    "line": "push    ecx; int",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -4711,7 +4711,7 @@
   },
   {
     "ea": "0x7A07FE",
-    "line": "push    eax; int",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
@@ -4723,19 +4723,19 @@
   },
   {
     "ea": "0x7A0803",
-    "line": "push    edx; int",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0804",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0806",
-    "line": "call    sub_7996F0",
+    "line": "call    OB_stVectorFloat_InsertOne_010201A0; Checked-iterator vector<float>::insert(position,value) wrapper. Converts the owner/current iterator to an index, delegates to insert-fill with count=1, then returns an iterator relocated against the possibly new begin pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4771,7 +4771,7 @@
   },
   {
     "ea": "0x7A081C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4866,14 +4866,8 @@
     "size": 2
   },
   {
-    "ea": "0x7A0859",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7A0860",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4885,7 +4879,7 @@
   },
   {
     "ea": "0x7A0867",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4915,7 +4909,7 @@
   },
   {
     "ea": "0x7A087B",
-    "line": "mov     [esp+134h+var_100], eax",
+    "line": "mov     [esp+134h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4975,19 +4969,19 @@
   },
   {
     "ea": "0x7A089D",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A089F",
-    "line": "push    edx",
+    "line": "push    edx; vertexIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A08A0",
-    "line": "call    sub_794760",
+    "line": "call    OB_CIndexedGeometry_GetVertexTexCoord0_010201A0; Oblivion CIndexedGeometry::GetVertexTexCoord0. Returns the selected vertex's two-float diffuse UV pair; projected-shadow UVs live in the separate shadowTexcoords stream.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4999,7 +4993,7 @@
   },
   {
     "ea": "0x7A08A7",
-    "line": "mov     eax, [esp+134h+var_B8]",
+    "line": "mov     eax, [esp+134h+var_BC.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5011,7 +5005,7 @@
   },
   {
     "ea": "0x7A08AD",
-    "line": "fstp    [esp+134h+var_C4]",
+    "line": "fstp    [esp+134h+diffuseST]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -5023,7 +5017,7 @@
   },
   {
     "ea": "0x7A08B3",
-    "line": "mov     ecx, [esp+134h+var_B4]",
+    "line": "mov     ecx, [esp+134h+var_BC.end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5059,13 +5053,13 @@
   },
   {
     "ea": "0x7A08CA",
-    "line": "mov     eax, [esp+134h+var_B8]",
+    "line": "mov     eax, [esp+134h+var_BC.begin]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A08CE",
-    "line": "mov     edx, [esp+134h+var_100]",
+    "line": "mov     edx, [esp+134h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5149,7 +5143,7 @@
   },
   {
     "ea": "0x7A08F8",
-    "line": "mov     eax, [esp+134h+var_D0]",
+    "line": "mov     eax, [esp+134h+var_D4.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5179,7 +5173,7 @@
   },
   {
     "ea": "0x7A0907",
-    "line": "mov     ecx, [esp+134h+var_CC]",
+    "line": "mov     ecx, [esp+134h+var_D4.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5215,7 +5209,7 @@
   },
   {
     "ea": "0x7A091B",
-    "line": "mov     eax, [esp+134h+var_D0]",
+    "line": "mov     eax, [esp+134h+var_D4.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5251,25 +5245,25 @@
   },
   {
     "ea": "0x7A0931",
-    "line": "lea     ecx, [esp+134h+var_C4]",
+    "line": "lea     ecx, [esp+134h+diffuseST]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A0935",
-    "line": "push    eax; float",
+    "line": "push    eax; mapIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0936",
-    "line": "push    ecx; int",
+    "line": "push    ecx; diffuseST",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0937",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5287,7 +5281,7 @@
   },
   {
     "ea": "0x7A0943",
-    "line": "call    sub_796320",
+    "line": "call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5305,7 +5299,7 @@
   },
   {
     "ea": "0x7A094F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5317,7 +5311,7 @@
   },
   {
     "ea": "0x7A0954",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5371,7 +5365,7 @@
   },
   {
     "ea": "0x7A0977",
-    "line": "mov     esi, [esp+134h+var_B8]",
+    "line": "mov     esi, [esp+134h+var_BC.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5389,7 +5383,7 @@
   },
   {
     "ea": "0x7A097F",
-    "line": "mov     ebx, [esp+134h+var_B4]",
+    "line": "mov     ebx, [esp+134h+var_BC.end]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5443,7 +5437,7 @@
   },
   {
     "ea": "0x7A0997",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5497,7 +5491,7 @@
   },
   {
     "ea": "0x7A09B1",
-    "line": "mov     eax, [esp+134h+var_B8]",
+    "line": "mov     eax, [esp+134h+var_BC.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5509,7 +5503,7 @@
   },
   {
     "ea": "0x7A09B6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5521,7 +5515,7 @@
   },
   {
     "ea": "0x7A09BE",
-    "line": "mov     eax, [esp+134h+var_D0]",
+    "line": "mov     eax, [esp+134h+var_D4.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5533,19 +5527,19 @@
   },
   {
     "ea": "0x7A09C4",
-    "line": "mov     [esp+134h+var_B8], edi",
+    "line": "mov     [esp+134h+var_BC.begin], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A09C8",
-    "line": "mov     [esp+134h+var_B4], edi",
+    "line": "mov     [esp+134h+var_BC.end], edi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A09CF",
-    "line": "mov     [esp+134h+var_B0], edi",
+    "line": "mov     [esp+134h+var_BC.capacityEnd], edi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5563,7 +5557,7 @@
   },
   {
     "ea": "0x7A09D9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5575,7 +5569,7 @@
   },
   {
     "ea": "0x7A09E1",
-    "line": "mov     eax, [esp+134h+var_98]",
+    "line": "mov     eax, [esp+134h+var_9C.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5587,19 +5581,19 @@
   },
   {
     "ea": "0x7A09EA",
-    "line": "mov     [esp+134h+var_D0], edi",
+    "line": "mov     [esp+134h+var_D4.begin], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A09EE",
-    "line": "mov     [esp+134h+var_CC], edi",
+    "line": "mov     [esp+134h+var_D4.end], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A09F2",
-    "line": "mov     [esp+134h+var_C8], edi",
+    "line": "mov     [esp+134h+var_D4.capacity], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5617,7 +5611,7 @@
   },
   {
     "ea": "0x7A09F9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5629,7 +5623,7 @@
   },
   {
     "ea": "0x7A0A01",
-    "line": "mov     eax, [esp+134h+var_A8]",
+    "line": "mov     eax, [esp+134h+var_AC.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5641,19 +5635,19 @@
   },
   {
     "ea": "0x7A0A0A",
-    "line": "mov     [esp+134h+var_98], edi",
+    "line": "mov     [esp+134h+var_9C.begin], edi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A0A11",
-    "line": "mov     [esp+134h+var_94], edi",
+    "line": "mov     [esp+134h+var_9C.end], edi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7A0A18",
-    "line": "mov     [esp+134h+var_90], edi",
+    "line": "mov     [esp+134h+var_9C.capacity], edi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5671,7 +5665,7 @@
   },
   {
     "ea": "0x7A0A22",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5734,5 +5728,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC530",
+    "line": "lea     ecx, [ebp+var_AC]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC536",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC53B",
+    "line": "lea     ecx, [ebp+var_9C]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC541",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC546",
+    "line": "lea     ecx, [ebp+var_D4]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC54C",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC551",
+    "line": "lea     ecx, [ebp+var_BC]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC557",
+    "line": "jmp     OB_stVector_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Full destructor for an outer vector of 0x10-byte vector owners. Destroys every inner owner, frees outer storage, and clears the triplet; structurally shared by multiple specializations.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC55C",
+    "line": "lea     ecx, [ebp+binormal]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC562",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC567",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC56B",
+    "line": "lea     eax, [edx-124h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC571",
+    "line": "mov     ecx, [edx-128h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC577",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC579",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC57E",
+    "line": "mov     eax, offset stru_AF5854",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC583",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -67,7 +67,7 @@
 0x7C2DC0: call    eax
 0x7C2DC2: mov     ecx, esi; this
 0x7C2DC4: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x7C2DCC: call    ??1BSShaderLightingProperty@@UAE@XZ; BSShaderLightingProperty::~BSShaderLightingProperty(void)
+0x7C2DCC: call    ??1BSShaderLightingProperty@@UAE@XZ; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
 0x7C2DD1: mov     ecx, dword ptr [esp+20h+var_C]
 0x7C2DD5: mov     large fs:0, ecx
 0x7C2DDC: pop     ecx
@@ -76,3 +76,18 @@
 0x7C2DDF: pop     ebp
 0x7C2DE0: add     esp, 10h
 0x7C2DE3: retn
+0x9CE330: mov     ecx, [ebp-10h]; this
+0x9CE333: jmp     ??1BSShaderLightingProperty@@UAE@XZ; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
+0x9CE338: mov     ecx, [ebp-10h]
+0x9CE33B: add     ecx, 0A0h ; ' '; slot
+0x9CE341: jmp     NiPointerSlot_Release
+0x9CE346: mov     ecx, [ebp-10h]
+0x9CE349: add     ecx, 0A4h ; '¤'; slot
+0x9CE34F: jmp     NiPointerSlot_Release
+0x9CE354: mov     edx, [esp+arg_4]
+0x9CE358: lea     eax, [edx-10h]
+0x9CE35B: mov     ecx, [edx-14h]
+0x9CE35E: xor     ecx, eax
+0x9CE360: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE365: mov     eax, offset stru_AF736C
+0x9CE36A: jmp     ___CxxFrameHandler3

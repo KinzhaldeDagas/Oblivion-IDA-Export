@@ -17,7 +17,7 @@
 0x50C648: push    edx; a2
 0x50C649: push    eax; a1
 0x50C64A: mov     dword ptr [esp+28h+var_4], 0
-0x50C652: call    Script_ExtractArgs
+0x50C652: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50C657: add     esp, 20h
 0x50C65A: test    al, al
 0x50C65C: jnz     short loc_50C661
@@ -33,12 +33,12 @@
 0x50C672: push    0; int
 0x50C674: push    esi; void *
 0x50C675: call    OblivionDynamicCast
-0x50C67A: mov     ecx, dword ptr [esp+20h+var_4]
+0x50C67A: mov     ecx, dword ptr [esp+20h+var_4]; this
 0x50C67E: add     esp, 14h
 0x50C681: test    ecx, ecx
 0x50C683: mov     edi, eax
 0x50C685: jz      short loc_50C6D1
-0x50C687: call    sub_5E0F30
+0x50C687: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x50C68C: test    al, al
 0x50C68E: jz      short loc_50C6D1
 0x50C690: mov     ecx, dword ptr [esp+0Ch+var_4]

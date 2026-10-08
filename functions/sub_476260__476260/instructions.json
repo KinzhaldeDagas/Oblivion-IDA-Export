@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x476260",
-    "line": "push    esi",
+    "line": "push    esi; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x476262",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x476275",
-    "line": "lea     eax, [esp+8+arg_0]",
+    "line": "lea     eax, [esp+8+encodedKey]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x47627B",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x476284",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,37 +109,37 @@
   },
   {
     "ea": "0x476291",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+slotSelector]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x476295",
-    "line": "push    ecx",
+    "line": "push    ecx; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x476296",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x476297",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x476298",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47629A",
-    "line": "call    sub_474530",
+    "line": "call    ActorAnimData_PlaySequence; Plays a selected BSAnimGroupSequence. Resolves default slot from fixed group metadata, maps physical slot 5->0 and 6->3 while retaining the requested alias for clear semantics, handles menu/full reset conditions, records active key +0x3C and sequence +0xA0, chooses morph only for matching nonzero morph keys and equal controller counts, otherwise cross-fades or blends from a temporary pose, applies the maximum old/new Blend byte as transition time, and initializes slot action state.",
     "mnemonic": "call",
     "size": 5
   },

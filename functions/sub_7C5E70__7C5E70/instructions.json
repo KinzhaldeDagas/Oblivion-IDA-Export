@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C5E70",
-    "line": "push    edi",
+    "line": "push    edi; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7C5E73",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+object]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7C5E94",
-    "line": "push    offset stru_B43400; lpCriticalSection",
+    "line": "push    offset unk_B43400; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x7C5EB3",
-    "line": "push    esi",
+    "line": "push    esi; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C5EB4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C5EB6",
-    "line": "call    sub_7C5D90",
+    "line": "call    ShadowSceneNode_RemoveReceiverGeometryRecursive; Recursively walks a NiNode subtree. For receiver geometry with property ID 4/type 1..10, removes it from every ShadowSceneLight receiver list. For child nodes, recurses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7C5ED5",
-    "line": "mov     [esp+arg_0], offset stru_B43400",
+    "line": "mov     [esp+object], offset unk_B43400",
     "mnemonic": "mov",
     "size": 8
   },

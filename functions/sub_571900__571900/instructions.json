@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x571983",
-    "line": "call    sub_57D7F0",
+    "line": "call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x571990",
-    "line": "call    sub_57D7F0",
+    "line": "call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x571B8B",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,13 +1195,13 @@
   },
   {
     "ea": "0x571B9E",
-    "line": "fstp    [esp+58h+var_58]; a2",
+    "line": "fstp    [esp+58h+var_5C+4]; a2",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x571BA1",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x571BAB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1288,5 +1288,89 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BDD90",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDD93",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDD94",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDD99",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDD9A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDD9B",
+    "line": "lea     ecx, [ebp-24h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDD9E",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDDA3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BDDA7",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDDAA",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BDDAD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BDDAF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDDB4",
+    "line": "mov     eax, offset stru_AE760C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDDB9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

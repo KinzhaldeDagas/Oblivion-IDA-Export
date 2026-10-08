@@ -1,52 +1,58 @@
-void __thiscall sub_848950(NiTArray_NiD3DPass *this, NiGeometry *a2, int a3, int a4, NiD3DPass *a5)
+// Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18E. It binds the effect texture and render-state fields; NiD3DShader_SetupShaderPrograms applies the active shader's owned fill/rim/fVars/U/V maps afterward.
+void __thiscall NiD3DPassArray_AddTextureEffectPass2x(
+        NiTArray_NiD3DPass *this,
+        NiGeometry *geometry,
+        int arg3,
+        int arg4,
+        BSShaderProperty *shaderProperty)
 {
-  UInt32 StageCount; // ebx
-  NiD3DPass *v7; // esi
-  _DWORD *Stage; // ebp
-  NiRenderedTexture *v9; // eax
-  NiTexture *Texture; // ebp
-  int v11; // ebp
-  int v12; // ebp
-  int v13; // ebp
-  int v14; // ebx
+  OblivionTextureEffectData *textureEffectData; // ebx
+  int v7; // esi
+  NiD3DTextureStage *v8; // ebp
+  NiTexture *v9; // eax
+  NiD3DTextureStage *v10; // ebp
+  unsigned int eTextureBlendModeSource_5C; // ebp
+  unsigned int eTextureBlendModeDest_60; // ebp
+  unsigned int eTextureBlendOperation_64; // ebp
+  unsigned int eTextureZTestFunction_68; // ebx
 
-  StageCount = a5[2].StageCount;
-  v7 = (NiD3DPass *)dword_B45BD8;
-  if ( StageCount )
+  textureEffectData = (OblivionTextureEffectData *)shaderProperty[2].member.super.super.m_pcName; /*0x84897a*/
+  v7 = unk_B45BD8; /*0x848982*/
+  if ( textureEffectData ) /*0x848988*/
   {
-    Stage = (_DWORD *)v7->Stages.data->Stage;
-    v9 = (NiRenderedTexture *)sub_848FD0(a5, 0);
-    sub_76C910(Stage, v9);
-    sub_848FA0((_DWORD **)Stage, (int)a5);
-    Texture = v7->Stages.data->Texture;
-    if ( *(_DWORD *)(StageCount + 8) )
-      sub_76C910(Texture, *(NiRenderedTexture **)(StageCount + 8));
+    v8 = **(NiD3DTextureStage ***)(v7 + 0x24); /*0x848991*/
+    v9 = (NiTexture *)sub_848FD0(shaderProperty, 0); /*0x848998*/
+    NiD3DTextureStage_SetTexture(v8, v9); /*0x8489a0*/
+    sub_848FA0(v8, (int)shaderProperty); /*0x8489ad*/
+    v10 = *(NiD3DTextureStage **)(*(_DWORD *)(v7 + 0x24) + 4); /*0x8489b5*/
+    if ( textureEffectData->sourceTexture_08 ) /*0x8489b8*/
+      NiD3DTextureStage_SetTexture(v10, (NiTexture *)textureEffectData->sourceTexture_08); /*0x8489c0*/
     else
-      sub_76C910(Texture, (NiRenderedTexture *)dword_B43120);
-    sub_7715E0(Texture, 3);
-    sub_848FA0(Texture, (int)a5);
-    v11 = *(_DWORD *)(StageCount + 0x5C);
-    if ( !v7->RenderStateGroup )
-      v7->RenderStateGroup = (NiD3DRenderStateGroup *)sub_772DF0();
-    sub_772CD0((_DWORD *)v7->RenderStateGroup, 0x13, v11, 0);
-    v12 = *(_DWORD *)(StageCount + 0x60);
-    if ( !v7->RenderStateGroup )
-      v7->RenderStateGroup = (NiD3DRenderStateGroup *)sub_772DF0();
-    sub_772CD0((_DWORD *)v7->RenderStateGroup, 0x14, v12, 0);
-    v13 = *(_DWORD *)(StageCount + 0x64);
-    if ( !v7->RenderStateGroup )
-      v7->RenderStateGroup = (NiD3DRenderStateGroup *)sub_772DF0();
-    sub_772CD0((_DWORD *)v7->RenderStateGroup, 0xAB, v13, 1u);
-    v14 = *(_DWORD *)(StageCount + 0x68);
-    if ( !v7->RenderStateGroup )
-      v7->RenderStateGroup = (NiD3DRenderStateGroup *)sub_772DF0();
-    sub_772CD0((_DWORD *)v7->RenderStateGroup, 0x17, v14, 0);
-    sub_7D1C90(a2, (int)a5);
-    ++v7->RefCount;
-    a5 = v7;
-    sub_76CE40(this + 4, *((NiD3DPass **)this + 0xE), &a5);
-    if ( v7->RefCount-- == 1 )
-      sub_7604D0(v7);
-    ++*((_DWORD *)this + 0xE);
+      NiD3DTextureStage_SetTexture(v10, (NiTexture *)unk_B43120); /*0x8489cb*/
+    NiD3DTextureStage_ApplyAddressModePreset(v10, 3u); /*0x8489d4*/
+    sub_848FA0(v10, (int)shaderProperty); /*0x8489e1*/
+    eTextureBlendModeSource_5C = textureEffectData->eTextureBlendModeSource_5C; /*0x8489ea*/
+    if ( !*(_DWORD *)(v7 + 0x30) ) /*0x8489e6*/
+      *(_DWORD *)(v7 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x8489f4*/
+    NiD3DRenderStateGroup_SetRenderState(*(_DWORD **)(v7 + 0x30), 0x13, eTextureBlendModeSource_5C, 0); /*0x8489ff*/
+    eTextureBlendModeDest_60 = textureEffectData->eTextureBlendModeDest_60; /*0x848a08*/
+    if ( !*(_DWORD *)(v7 + 0x30) ) /*0x848a04*/
+      *(_DWORD *)(v7 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x848a12*/
+    NiD3DRenderStateGroup_SetRenderState(*(_DWORD **)(v7 + 0x30), 0x14, eTextureBlendModeDest_60, 0); /*0x848a1d*/
+    eTextureBlendOperation_64 = textureEffectData->eTextureBlendOperation_64; /*0x848a26*/
+    if ( !*(_DWORD *)(v7 + 0x30) ) /*0x848a22*/
+      *(_DWORD *)(v7 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x848a30*/
+    NiD3DRenderStateGroup_SetRenderState(*(_DWORD **)(v7 + 0x30), 0xAB, eTextureBlendOperation_64, 1); /*0x848a3e*/
+    eTextureZTestFunction_68 = textureEffectData->eTextureZTestFunction_68; /*0x848a47*/
+    if ( !*(_DWORD *)(v7 + 0x30) ) /*0x848a43*/
+      *(_DWORD *)(v7 + 0x30) = NiD3DRenderStateGroupPool_Acquire(); /*0x848a51*/
+    NiD3DRenderStateGroup_SetRenderState(*(_DWORD **)(v7 + 0x30), 0x17, eTextureZTestFunction_68, 0); /*0x848a5c*/
+    BSShaderProperty_SetupTextureEffectConstants(geometry, shaderProperty); /*0x848a6d*/
+    ++*(_DWORD *)(v7 + 0x60); /*0x848a77*/
+    shaderProperty = (BSShaderProperty *)v7; /*0x848a7a*/
+    NiTArray_NiD3DPass_SetAt(this + 4, *((_DWORD *)this + 0xE), (NiD3DPass **)&shaderProperty); /*0x848a92*/
+    if ( (*(_DWORD *)(v7 + 0x60))-- == 1 ) /*0x848a9a*/
+      NiD3DPass_ReleaseToPool((NiD3DPass *)v7); /*0x848aa5*/
+    ++*((_DWORD *)this + 0xE); /*0x848aaa*/
   }
 }

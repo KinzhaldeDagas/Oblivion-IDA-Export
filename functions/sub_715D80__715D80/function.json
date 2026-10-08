@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x715D80",
+      "0x715E34"
+    ]
+  ],
+  "chunks_sha256": "e3463ad882e04c32743c8467f83b3c9c76ec429a37033de4267972d74b023b87",
+  "comment_regular": "Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.",
+  "comment_repeatable": "Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_715D80",
+  "display_name": "NiTimeController_CopyMembers",
   "end_ea": "0x715E34",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_715D80",
+  "name": "NiTimeController_CopyMembers",
   "segment": ".text",
   "sha256": "e3463ad882e04c32743c8467f83b3c9c76ec429a37033de4267972d74b023b87",
   "size": 180,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x715D80",
+  "total_chunk_size": 180,
   "type": "void __thiscall(float *this, int, int *)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 15

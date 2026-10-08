@@ -1,4 +1,4 @@
-0x59CA70: mov     eax, ds:0B33398h
+0x59CA70: mov     eax, ds:0B33398h; [Controller decode 2026-07-09] Controls menu cancel/scroll update. Escape control 29 backs out/cancels; mouse release clears rebind gate.
 0x59CA75: sub     esp, 10h
 0x59CA78: push    esi
 0x59CA79: push    edi
@@ -7,13 +7,13 @@
 0x59CA7F: mov     esi, ecx
 0x59CA81: push    0; a2
 0x59CA83: mov     ecx, edi; this
-0x59CA85: call    InputGlobals__QueryMouseKeyState
+0x59CA85: call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.
 0x59CA8A: test    eax, eax
 0x59CA8C: jnz     short loc_59CAAB
 0x59CA8E: push    1; a3
 0x59CA90: push    1Dh; a2
 0x59CA92: mov     ecx, edi; this
-0x59CA94: call    InputGlobals__QueryControlState
+0x59CA94: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x59CA99: test    eax, eax
 0x59CA9B: jnz     short loc_59CAAB
 0x59CA9D: push    9
@@ -42,7 +42,7 @@
 0x59CAE7: mov     [eax+5Ch], ecx
 0x59CAEA: fstp    [esp+20h+a2]; a2
 0x59CAED: mov     ecx, [esi+2Ch]; this
-0x59CAF0: call    NiAVObject_UpdateNiAVObject
+0x59CAF0: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x59CAF5: fld     [esp+18h+var_4]
 0x59CAF9: mov     edx, [esi+2Ch]
 0x59CAFC: fld     dword ptr [edx+2Ch]

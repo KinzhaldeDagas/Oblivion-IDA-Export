@@ -51,13 +51,13 @@
 0x8B2496: push    ebx
 0x8B2497: mov     ecx, edi
 0x8B2499: movaps  [esp+78h+var_50], xmm1
-0x8B249E: call    sub_88FD90
+0x8B249E: call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
 0x8B24A3: mov     edx, [ebp+arg_4]
 0x8B24A6: lea     ecx, [esp+70h+var_50]
 0x8B24AA: push    ecx
 0x8B24AB: push    edx
 0x8B24AC: lea     ecx, [esi+70h]
-0x8B24AF: call    sub_88FD90
+0x8B24AF: call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
 0x8B24B4: mov     eax, [ebp+arg_8]
 0x8B24B7: push    eax
 0x8B24B8: push    ebx
@@ -152,13 +152,13 @@
 0x8B25EB: subps   xmm0, xmm3
 0x8B25EE: push    ebx
 0x8B25EF: movaps  xmmword ptr [eax], xmm0
-0x8B25F2: call    sub_88FE00
+0x8B25F2: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8B25F7: mov     ecx, [ebp+arg_4]
 0x8B25FA: lea     eax, [esp+70h+var_10]
 0x8B25FE: push    eax
 0x8B25FF: push    ecx
 0x8B2600: lea     ecx, [esi+80h]
-0x8B2606: call    sub_88FD90
+0x8B2606: call    hkBasis_ProjectVector; TES4 authoritative: basis projection helper, computes local components from basis columns and source vector without translation.
 0x8B260B: mov     edx, [esi]
 0x8B260D: lea     eax, [esp+70h+var_5D]
 0x8B2611: push    eax

@@ -1,4 +1,4 @@
-0x786E40: fldz
+0x786E40: fldz; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.
 0x786E42: mov     eax, ecx
 0x786E44: fst     dword ptr [eax+8]
 0x786E47: fst     dword ptr [eax+4]

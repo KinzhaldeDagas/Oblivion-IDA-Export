@@ -1,7 +1,7 @@
 0x69F060: push    ecx
 0x69F061: push    esi
 0x69F062: mov     esi, ecx
-0x69F064: mov     ecx, offset ActorProcessManager_ptr
+0x69F064: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x69F069: call    sub_673B00
 0x69F06E: fstp    [esp+8+var_4]
 0x69F072: fld     [esp+8+var_4]

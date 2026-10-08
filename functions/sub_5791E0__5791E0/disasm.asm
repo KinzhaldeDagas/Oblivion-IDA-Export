@@ -15,5 +15,5 @@
 0x579206: call    InterfaceManager_GetSingleton
 0x57920B: add     esp, 8
 0x57920E: mov     ecx, eax
-0x579210: jmp     sub_5821F0
+0x579210: jmp     InterfaceManager_ProcessGlobalHotkeys
 0x579215: retn

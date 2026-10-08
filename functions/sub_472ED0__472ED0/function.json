@@ -1,19 +1,36 @@
 {
-  "callees_count": 29,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_472ED0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x472ED0",
+      "0x4730A6"
+    ],
+    [
+      "0x9D6B00",
+      "0x9D6B23"
+    ]
+  ],
+  "chunks_sha256": "2d8ee510fe569f28b2ae0fbcccf961c7d74b1aa649c30b4273ec57809b4d10a1",
+  "comment_regular": "Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
+  "comment_repeatable": "Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "AnimIdle_DestroyAndRelease",
   "end_ea": "0x4730A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_472ED0",
+  "name": "AnimIdle_DestroyAndRelease",
   "segment": ".text",
   "sha256": "f56ef76e53448300dd4a6eb02225abada31a7fae025e2b17dc5ffe99487485a9",
   "size": 470,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x472ED0",
-  "type": "void __thiscall(void *this, int **)",
-  "xrefs_from_count": 199,
+  "total_chunk_size": 505,
+  "type": "void __thiscall(void *this, char **)",
+  "xrefs_from_count": 210,
   "xrefs_to_count": 9
 }

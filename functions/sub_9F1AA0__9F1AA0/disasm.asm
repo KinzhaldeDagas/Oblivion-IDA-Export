@@ -1,7 +1,7 @@
 0x9F1AA0: push    offset aASpellWithThis; "A spell with this name already exists."
 0x9F1AA5: push    offset aSduplicatename; "sDuplicateName"
-0x9F1AAA: mov     ecx, offset dword_B38990
-0x9F1AAF: call    GameSetting_ConstrAndReg
+0x9F1AAA: mov     ecx, offset stru_B38990; self
+0x9F1AAF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F1AB4: push    offset sub_A21A40; void (__cdecl *)()
 0x9F1AB9: call    _atexit
 0x9F1ABE: pop     ecx

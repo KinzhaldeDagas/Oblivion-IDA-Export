@@ -1,1 +1,1 @@
-RTL_BITMAP
+typedef tagRTL_BITMAP RTL_BITMAP;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x788BE0",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Transforms compact SpeedTree collision records: transforms position by 4x4 matrix and scales radius/height/box dimensions by axis scale. No rotation storage is touched.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x788BF6",
-    "line": "mov     ebx, [esp+28h+arg_0]",
+    "line": "mov     ebx, [esp+28h+transform4x4]",
     "mnemonic": "mov",
     "size": 4
   },

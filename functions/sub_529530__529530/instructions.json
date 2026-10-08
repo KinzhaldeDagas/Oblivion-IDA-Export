@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x529573",
-    "line": "push    ebp",
+    "line": "push    ebp; parameters",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x52957A",
-    "line": "call    sub_552880",
+    "line": "call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -186,38 +186,32 @@
     "size": 2
   },
   {
-    "ea": "0x52959D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5295A0",
-    "line": "push    edi",
+    "line": "push    edi; sliderIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5295A1",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5295A3",
-    "line": "push    1",
+    "line": "push    1; matrixGroup",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5295A5",
-    "line": "push    ebx",
+    "line": "push    ebx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5295A6",
-    "line": "call    sub_5538F0",
+    "line": "call    FaceGenHeadParameters_GetSliderValue; Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,37 +277,37 @@
   },
   {
     "ea": "0x5295CA",
-    "line": "fstp    [esp+154h+var_154]; float",
+    "line": "fstp    [esp+154h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5295CD",
-    "line": "push    edi; int",
+    "line": "push    edi; sliderIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5295CE",
-    "line": "push    0; int",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5295D0",
-    "line": "push    1; int",
+    "line": "push    1; matrixGroup",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5295D2",
-    "line": "push    ebp; int",
+    "line": "push    ebp; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5295D3",
-    "line": "call    sub_5539E0",
+    "line": "call    FaceGenHeadParameters_SetSliderValue; Sets a manual FaceGen slider by projecting its current value, transposing the authored basis, scaling by target-current, and adding the adjustment into the selected parameter matrix.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,13 +337,13 @@
   },
   {
     "ea": "0x5295E3",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5295E8",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -391,13 +385,13 @@
   },
   {
     "ea": "0x5295FF",
-    "line": "push    ecx",
+    "line": "push    ecx; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x529600",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -409,13 +403,13 @@
   },
   {
     "ea": "0x52960D",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x529612",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -427,19 +421,19 @@
   },
   {
     "ea": "0x529618",
-    "line": "push    0",
+    "line": "push    0; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x52961A",
-    "line": "push    edx",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52961B",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +475,7 @@
   },
   {
     "ea": "0x52963E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,37 +499,37 @@
   },
   {
     "ea": "0x52964B",
-    "line": "lea     ecx, [esp+150h+var_D0]",
+    "line": "lea     ecx, [esp+150h+parameters]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x529652",
-    "line": "call    FaceGenHeadParameters_Ctor",
+    "line": "call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x529657",
-    "line": "mov     ecx, [esi+0E8h]",
+    "line": "mov     ecx, [esi+0E8h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x52965D",
-    "line": "lea     eax, [esp+150h+var_D0]",
+    "line": "lea     eax, [esp+150h+parameters]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x529664",
-    "line": "push    eax",
+    "line": "push    eax; outState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x529665",
-    "line": "push    esi",
+    "line": "push    esi; npc",
     "mnemonic": "push",
     "size": 1
   },
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x52966E",
-    "line": "call    TESRace_GetFaceGenHeadParameters",
+    "line": "call    TESRace_BuildFaceGenRenderState; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,25 +553,25 @@
   },
   {
     "ea": "0x529679",
-    "line": "lea     ecx, [esp+150h+var_D0]",
+    "line": "lea     ecx, [esp+150h+parameters]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x529680",
-    "line": "push    ecx",
+    "line": "push    ecx; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x529681",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x529682",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,25 +583,25 @@
   },
   {
     "ea": "0x52968D",
-    "line": "lea     edx, [esp+158h+var_D0]",
+    "line": "lea     edx, [esp+158h+parameters]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x529694",
-    "line": "push    edx",
+    "line": "push    edx; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x529695",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x529696",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +763,7 @@
   },
   {
     "ea": "0x5296F3",
-    "line": "lea     ecx, [esp+150h+var_D0]",
+    "line": "lea     ecx, [esp+150h+parameters]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -781,13 +775,13 @@
   },
   {
     "ea": "0x529702",
-    "line": "call    FaceGenHeadParameters_Dtor",
+    "line": "call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x529707",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -880,5 +874,101 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8380",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8385",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8387",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8389",
+    "line": "lea     eax, [ebp-130h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B838F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8390",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8395",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8396",
+    "line": "lea     ecx, [ebp-0D0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B839C",
+    "line": "jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B83A1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B83A5",
+    "line": "lea     eax, [edx-140h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B83AB",
+    "line": "mov     ecx, [edx-144h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B83B1",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B83B3",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B83B8",
+    "line": "mov     eax, offset stru_AE2A78",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B83BD",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -20,7 +20,7 @@
 0x6DBB3F: mov     ebx, esi
 0x6DBB41: mov     eax, [edi+20h]
 0x6DBB44: push    eax
-0x6DBB45: call    FormHeapFree
+0x6DBB45: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DBB4A: xor     ecx, ecx
 0x6DBB4C: mov     eax, ebx
 0x6DBB4E: mov     edx, 4

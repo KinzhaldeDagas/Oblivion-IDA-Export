@@ -81,3 +81,18 @@
 0x549881: lea     ecx, [esp+3Ch+var_20]; this
 0x549885: mov     [esp+3Ch+var_4], 0FFFFFFFFh
 0x54988D: call    ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB5A0: lea     ecx, [ebp-34h]; this
+0x9BB5A3: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB5A8: lea     ecx, [ebp-34h]; this
+0x9BB5AB: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB5B0: lea     ecx, [ebp-34h]; this
+0x9BB5B3: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB5B8: lea     ecx, [ebp-20h]; this
+0x9BB5BB: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB5C0: mov     edx, [esp+arg_4]
+0x9BB5C4: lea     eax, [edx-2Ch]
+0x9BB5C7: mov     ecx, [edx-30h]
+0x9BB5CA: xor     ecx, eax
+0x9BB5CC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BB5D1: mov     eax, offset stru_AE53B4
+0x9BB5D6: jmp     ___CxxFrameHandler3

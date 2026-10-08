@@ -31,3 +31,14 @@
 0x6A5CBC: add     esp, 14h
 0x6A5CBF: test    edi, edi
 0x6A5CC1: jz      short SummonCreatureEffect_PlaceSummon___CastToBoundObj
+0x9C6160: lea     ecx, [ebp-1Ch]
+0x9C6163: jmp     TESContainer_destr
+0x9C6168: lea     ecx, [ebp-1Ch]; void *
+0x9C616B: jmp     BSStringT_Clear
+0x9C6170: mov     edx, [esp+arg_4]
+0x9C6174: lea     eax, [edx-20h]
+0x9C6177: mov     ecx, [edx-24h]
+0x9C617A: xor     ecx, eax
+0x9C617C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6181: mov     eax, offset stru_AEE770
+0x9C6186: jmp     ___CxxFrameHandler3

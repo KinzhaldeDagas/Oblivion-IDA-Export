@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_EVENT_DESCRIPTOR",
+  "definition": "struct _EVENT_DESCRIPTOR\n{\nUSHORT Id;\nUCHAR Version;\nUCHAR Channel;\nUCHAR Level;\nUCHAR Opcode;\nUSHORT Task;\nULONGLONG Keyword;\n}\n",
   "id": 18374686479672048035,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Id",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Version",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Channel",
       "offset": 3,
       "offset_hex": "0x3",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Level",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Opcode",
       "offset": 5,
       "offset_hex": "0x5",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Task",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Keyword",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     }
   ],
   "name": "_EVENT_DESCRIPTOR",
+  "ordinal": 8935,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

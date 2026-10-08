@@ -1,1 +1,1 @@
-_TP_TIMER
+struct _TP_TIMER;

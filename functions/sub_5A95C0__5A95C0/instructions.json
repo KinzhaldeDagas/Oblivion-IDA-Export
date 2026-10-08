@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x5A95E4",
-    "line": "call    sub_584390",
+    "line": "call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -262,12 +262,6 @@
     "line": "jmp     short loc_5A9640",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5A963D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x5A9640",
@@ -697,19 +691,19 @@
   },
   {
     "ea": "0x5A96F7",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A96F8",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5A96F9",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,19 +895,19 @@
   },
   {
     "ea": "0x5A9760",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+var_1C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A9763",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A9768",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +991,7 @@
   },
   {
     "ea": "0x5A9794",
-    "line": "call    sub_65A970",
+    "line": "call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1033,7 @@
   },
   {
     "ea": "0x5A97A7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,19 +1081,19 @@
   },
   {
     "ea": "0x5A97BD",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+var_1C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A97C0",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A97C5",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1177,7 @@
   },
   {
     "ea": "0x5A97E9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,19 +1237,19 @@
   },
   {
     "ea": "0x5A9803",
-    "line": "fstp    [esp+1Ch+var_1C]; a3",
+    "line": "fstp    [esp+1Ch+var_1C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5A9806",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5A980B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,7 +1399,7 @@
   },
   {
     "ea": "0x5A9851",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -1417,7 +1411,7 @@
   },
   {
     "ea": "0x5A9854",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
@@ -1429,7 +1423,7 @@
   },
   {
     "ea": "0x5A9857",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1885,7 @@
   },
   {
     "ea": "0x5A992A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B2ED0",
+      "0x4B2EE7"
+    ]
+  ],
+  "chunks_sha256": "369c9af9416e1d57d4547c4f94e1ac3bc4094c57054e85fc3c39d2ca701507f5",
+  "comment_regular": "NiTPointerList free-node virtual. Clears node+0x08 payload, then returns the node to the synchronized global NiTList node pool. It does not destroy the payload.",
+  "comment_repeatable": "NiTPointerList free-node virtual. Clears node+0x08 payload, then returns the node to the synchronized global NiTList node pool. It does not destroy the payload.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B2ED0",
+  "display_name": "NiTPointerList_ReleaseNodeToPool",
   "end_ea": "0x4B2EE7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B2ED0",
+  "name": "NiTPointerList_ReleaseNodeToPool",
   "segment": ".text",
   "sha256": "369c9af9416e1d57d4547c4f94e1ac3bc4094c57054e85fc3c39d2ca701507f5",
   "size": 23,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B2ED0",
+  "total_chunk_size": 23,
   "type": "void __stdcall(_DWORD *)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 132

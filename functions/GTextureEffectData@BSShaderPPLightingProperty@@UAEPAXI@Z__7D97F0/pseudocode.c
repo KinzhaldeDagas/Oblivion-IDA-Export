@@ -2,8 +2,8 @@ BSShaderPPLightingProperty::TextureEffectData *__thiscall BSShaderPPLightingProp
         BSShaderPPLightingProperty::TextureEffectData *this,
         char a2)
 {
-  BSShaderPPLightingProperty::TextureEffectData::~TextureEffectData(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  BSShaderPPLightingProperty::TextureEffectData::~TextureEffectData(this); /*0x7d97f3*/
+  if ( (a2 & 1) != 0 ) /*0x7d97fd*/
+    FormHeapFree((unsigned int)this); /*0x7d9800*/
+  return this; /*0x7d980a*/
 }

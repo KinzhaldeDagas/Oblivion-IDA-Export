@@ -14,7 +14,7 @@
 0x69323A: mov     edi, eax
 0x69323C: test    edi, edi
 0x69323E: jz      loc_6933F4
-0x693244: mov     esi, [esp+34h+arg_0]
+0x693244: mov     esi, [esp+34h+targetReference]
 0x693248: test    esi, esi
 0x69324A: jz      loc_6933F4
 0x693250: mov     ecx, ds:0B333C4h
@@ -105,10 +105,10 @@
 0x693374: jz      short loc_69338D
 0x693376: fld     dword ptr ds:0A30634h
 0x69337C: push    ecx
-0x69337D: fstp    [esp+38h+var_38]; float
-0x693380: push    edi; int
-0x693381: push    esi; int
-0x693382: mov     ecx, eax
+0x69337D: fstp    [esp+38h+elapsedSeconds]; elapsedSeconds
+0x693380: push    edi; effectShader
+0x693381: push    esi; targetReference
+0x693382: mov     ecx, eax; this
 0x693384: call    MagicShaderHitEffect_constr_args2
 0x693389: mov     esi, eax
 0x69338B: jmp     short loc_69338F
@@ -120,9 +120,9 @@
 0x69339E: call    eax
 0x6933A0: test    al, al
 0x6933A2: jz      short loc_6933C3
-0x6933A4: push    esi
-0x6933A5: mov     ecx, offset ActorProcessManager_ptr
-0x6933AA: call    sub_678D30
+0x6933A4: push    esi; effect
+0x6933A5: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x6933AA: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x6933AF: mov     al, 1
 0x6933B1: mov     ecx, [esp+34h+var_C]
 0x6933B5: mov     large fs:0, ecx
@@ -146,10 +146,10 @@
 0x6933E0: retn
 0x6933E1: cmp     [esp+34h+arg_4], 0
 0x6933E6: jz      short loc_6933F4
-0x6933E8: push    edi
-0x6933E9: push    esi
-0x6933EA: mov     ecx, offset ActorProcessManager_ptr
-0x6933EF: call    sub_678E70
+0x6933E8: push    edi; effectShader
+0x6933E9: push    esi; targetReference
+0x6933EA: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6933EF: call    ActorProcessManager_FinishShaderEffectsForTarget; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect and marks matching targetReference/TESEffectShader effects finished.
 0x6933F4: xor     al, al
 0x6933F6: mov     ecx, [esp+34h+var_C]
 0x6933FA: mov     large fs:0, ecx
@@ -158,3 +158,15 @@
 0x693403: pop     esi
 0x693404: add     esp, 28h
 0x693407: retn
+0x9C2850: mov     eax, [ebp-1Ch]
+0x9C2853: push    eax
+0x9C2854: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2859: pop     ecx
+0x9C285A: retn
+0x9C285B: mov     edx, [esp+arg_4]
+0x9C285F: lea     eax, [edx-24h]
+0x9C2862: mov     ecx, [edx-28h]
+0x9C2865: xor     ecx, eax
+0x9C2867: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C286C: mov     eax, offset stru_AEB65C
+0x9C2871: jmp     ___CxxFrameHandler3

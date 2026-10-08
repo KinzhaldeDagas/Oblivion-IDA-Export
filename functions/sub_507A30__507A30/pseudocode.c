@@ -1,21 +1,21 @@
-char sub_507A30()
+char Sky_ReloadClimateFromOverride()
 {
   TESClimate *firstClimate; // esi
   Data *OverrideFile; // eax
-  Data *v2; // edi
+  Data *ThreadSafeFile; // edi
   Sky *GlobalObject; // eax
 
-  firstClimate = Sky_CreateOrGetGlobalObject()->firstClimate;
-  OverrideFile = TESForm_GetOverrideFile((TESForm *)firstClimate, 0xFFFFFFFF);
-  if ( OverrideFile )
+  firstClimate = Sky_CreateOrGetGlobalObject()->firstClimate; /*0x507a36*/
+  OverrideFile = TESForm_GetOverrideFile(&firstClimate->form, 0xFFFFFFFF); /*0x507a3d*/
+  if ( OverrideFile ) /*0x507a44*/
   {
-    v2 = sub_4520F0(OverrideFile);
-    TESFile_OpenBSFileWrapper__(v2, 0, 0);
-    TESFile::FindForm(v2, (TESForm *)firstClimate);
-    (*(void (__thiscall **)(TESClimate *))(*(_DWORD *)firstClimate + 0x18))(firstClimate);
-    (*(void (__thiscall **)(TESClimate *, Data *))(*(_DWORD *)firstClimate + 0x1C))(firstClimate, v2);
-    GlobalObject = Sky_CreateOrGetGlobalObject();
-    Sky_CreateChildGlobalObjects(GlobalObject, firstClimate, 1);
+    ThreadSafeFile = TESFile_GetThreadSafeFile(OverrideFile); /*0x507a4e*/
+    TESFile_OpenBSFileWrapper__(ThreadSafeFile, 0, 0); /*0x507a56*/
+    TESFile::FindForm(ThreadSafeFile, &firstClimate->form); /*0x507a5e*/
+    firstClimate->form.vtbl->Unk_06(&firstClimate->form); /*0x507a6a*/
+    firstClimate->form.vtbl->LoadForm(&firstClimate->form, ThreadSafeFile); /*0x507a74*/
+    GlobalObject = Sky_CreateOrGetGlobalObject(); /*0x507a79*/
+    Sky_SetClimateAndRefreshChildren(GlobalObject, firstClimate, 1);// Verified: climate override reload path reloads the current Sky climate form from its override file, then forces Sky_SetClimateAndRefreshChildren to rebuild dependent child objects. /*0x507a80*/
   }
-  return 1;
+  return 1; /*0x507a88*/
 }

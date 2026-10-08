@@ -1,11 +1,11 @@
-0x7F16F0: push    esi
-0x7F16F1: mov     esi, [esp+4+arg_0]
+0x7F16F0: push    esi; Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).
+0x7F16F1: mov     esi, [esp+4+constantMap]
 0x7F16F5: mov     eax, [esi]
 0x7F16F7: mov     edx, [eax+18h]
 0x7F16FA: push    edi
-0x7F16FB: mov     edi, [esp+8+arg_4]
+0x7F16FB: mov     edi, [esp+8+baseRegister]
 0x7F16FF: push    0
-0x7F1701: push    offset flt_B467A0
+0x7F1701: push    (offset flt_B46638+168h)
 0x7F1706: push    4
 0x7F1708: push    10h
 0x7F170A: push    offset EmptyString
@@ -19,7 +19,7 @@
 0x7F1722: mov     eax, [esi]
 0x7F1724: mov     edx, [eax+18h]
 0x7F1727: push    0
-0x7F1729: push    offset WindMatrixes
+0x7F1729: push    (offset flt_B46638+180h)
 0x7F172E: push    4
 0x7F1730: push    100h
 0x7F1735: push    offset EmptyString

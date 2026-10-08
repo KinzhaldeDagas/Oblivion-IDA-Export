@@ -5,7 +5,7 @@
 0x77BADE: test    byte ptr [esp+4+arg_0], 1
 0x77BAE3: jz      short loc_77BAEE
 0x77BAE5: push    esi
-0x77BAE6: call    FormHeapFree
+0x77BAE6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77BAEB: add     esp, 4
 0x77BAEE: mov     eax, esi
 0x77BAF0: pop     esi

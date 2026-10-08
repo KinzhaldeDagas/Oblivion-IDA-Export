@@ -14,6 +14,6 @@
 0x6B580A: fstp    st
 0x6B580C: mov     eax, 0FFFF8000h
 0x6B5811: retn    4
-0x6B5814: call    Double_To_SInt32
+0x6B5814: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6B5819: movsx   eax, ax
 0x6B581C: retn    4

@@ -1,1 +1,1 @@
-UINT
+typedef unsigned int UINT;

@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x5922E0",
+      "0x592368"
+    ]
+  ],
+  "chunks_sha256": "ea95ff4e8361d6b8b2272b1da22a4d1cbacc61b6330c77e3e77d634a15e35040",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified vtable +0x14 callback, counterpart of Fallout 0x822094F0. Handles string 0xFDE and text metric trait 0xFD1 by marking text dirty and returning this when handled; otherwise returns NULL, allowing FinalPostParse.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5922E0",
+  "display_name": "TileText::PostParse",
   "end_ea": "0x592368",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5922E0",
+  "name": "TileText::PostParse",
   "segment": ".text",
   "sha256": "ea95ff4e8361d6b8b2272b1da22a4d1cbacc61b6330c77e3e77d634a15e35040",
   "size": 136,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5922E0",
-  "type": "_DWORD *__thiscall(_DWORD *this, int, float, unsigned __int8 *)",
+  "total_chunk_size": 136,
+  "type": "Tile *__thiscall(TileText *this, unsigned int trait, float value, const char *text)",
   "xrefs_from_count": 60,
   "xrefs_to_count": 1
 }

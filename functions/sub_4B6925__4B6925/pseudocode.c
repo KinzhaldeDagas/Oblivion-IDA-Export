@@ -4,7 +4,7 @@ char __userpurge sub_4B6925@<al>(
         int a2@<edx>,
         char a3@<ch>,
         int a4@<ebp>,
-        _BYTE *a5@<edi>,
+        TESObjectREFR *a5@<edi>,
         int a6@<esi>,
         int a7,
         int a8,
@@ -12,25 +12,25 @@ char __userpurge sub_4B6925@<al>(
         int a10,
         int a11)
 {
-  _DWORD *v11; // eax
+  ExtraLock *LockExtraOnLinkedDoorChain; // eax
   char v13; // [esp-24h] [ebp-24h]
   char v14; // [esp-20h] [ebp-20h]
 
-  *(_BYTE *)(a4 + 0x6A0B74C0) = __ROL1__(*(_BYTE *)(a4 + 0x6A0B74C0), 1);
-  *(_BYTE *)(a2 + 1) += a3;
-  sub_475440(a1, v13, v14);
-  sub_520F00(TESDataHandler_g_Lockpick);
-  sub_520F40(1);
-  sub_520F20(1);
-  (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)(a6 + 0x58) + 0x48))(*(_DWORD *)(a6 + 0x58), a6);
-  sub_520F00(0);
-  sub_520F40(0);
-  sub_520F20(0xFFFFFFFF);
-  v11 = (_DWORD *)sub_4D77D0((int)a5);
-  if ( v11 )
+  *(_BYTE *)(a4 + 0x6A0B74C0) = __ROL1__(*(_BYTE *)(a4 + 0x6A0B74C0), 1); /*0x4b6925*/
+  *(_BYTE *)(a2 + 1) += a3; /*0x4b692b*/
+  ActorAnimData_CleanupOrPromoteQueuedIdles(a1, v13, v14); /*0x4b6930*/
+  sub_520F00((int)MEMORY[0xB35EC8]); /*0x4b693c*/
+  sub_520F40(1); /*0x4b6943*/
+  sub_520F20(1); /*0x4b694a*/
+  (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)(a6 + 0x58) + 0x48))(*(_DWORD *)(a6 + 0x58), a6); /*0x4b695b*/
+  sub_520F00(0); /*0x4b695f*/
+  sub_520F40(0); /*0x4b6966*/
+  sub_520F20(0xFFFFFFFF); /*0x4b696d*/
+  LockExtraOnLinkedDoorChain = TESObjectREFR_FindLockExtraOnLinkedDoorChain(a5); /*0x4b6977*/
+  if ( LockExtraOnLinkedDoorChain ) /*0x4b697e*/
   {
-    sub_428E90(v11);
-    sub_4D9070(a5);
+    ExtraLock_ClearLockedFlag(LockExtraOnLinkedDoorChain); /*0x4b6982*/
+    TESObjectREFR_MarkLockDataAsModified(a5); /*0x4b6989*/
   }
-  return 0;
+  return 0; /*0x4b6997*/
 }

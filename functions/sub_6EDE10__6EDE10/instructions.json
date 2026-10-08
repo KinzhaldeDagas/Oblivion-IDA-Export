@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EDE10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; SetControlPair computes clampedTarget-current projection for two controls, multiplies deltas by cached 2x2 transform at this+0xC34+0x10*(channel+2*fan), then adds two scaled basis transposes to matrix[2*channel]. Uninitialized FanControls produces no update. Fan upper-bound assertion logs/returns; this entry has no direct channel guard.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6EDE39",
-    "line": "mov     ebx, [esp+70h+arg_0]",
+    "line": "mov     ebx, [esp+70h+fanIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6EDE42",
-    "line": "push    0D9h ; 'Ù'; int",
+    "line": "push    0D9h ; 'Ù'; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6EDE4C",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x6EDE5E",
-    "line": "fld     dword ptr ds:0A468FCh",
+    "line": "fld     dword ptr ds:0A468FCh; Per-pair target clamps: age control 0 is [15,65]; absolute sex control 1 is [-4,4].",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x6EDE64",
-    "line": "mov     eax, [esp+70h+arg_8]",
+    "line": "mov     eax, [esp+70h+targetPair]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EDE68",
-    "line": "mov     edi, [esp+70h+arg_4]",
+    "line": "mov     edi, [esp+70h+matrixChannel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6EDE8C",
-    "line": "mov     [esp+70h+arg_8], eax",
+    "line": "mov     [esp+70h+targetPair], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -258,14 +258,8 @@
     "size": 2
   },
   {
-    "ea": "0x6EDEA8",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x6EDEB0",
-    "line": "mov     eax, [esp+70h+arg_8]",
+    "line": "mov     eax, [esp+70h+targetPair]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,13 +277,13 @@
   },
   {
     "ea": "0x6EDEBB",
-    "line": "fstp    [esp+70h+arg_0]",
+    "line": "fstp    [esp+70h+fanIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6EDEBF",
-    "line": "fld     [esp+70h+arg_0]",
+    "line": "fld     [esp+70h+fanIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -331,13 +325,13 @@
   },
   {
     "ea": "0x6EDED0",
-    "line": "fstp    [esp+70h+arg_0]",
+    "line": "fstp    [esp+70h+fanIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6EDED4",
-    "line": "fld     [esp+70h+arg_0]",
+    "line": "fld     [esp+70h+fanIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -379,25 +373,25 @@
   },
   {
     "ea": "0x6EDEE9",
-    "line": "fstp    [esp+70h+arg_0]",
+    "line": "fstp    [esp+70h+fanIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6EDEED",
-    "line": "mov     edx, [esp+70h+arg_C]",
+    "line": "mov     edx, [esp+70h+parameters]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6EDEF4",
-    "line": "fld     [esp+70h+arg_0]",
+    "line": "fld     [esp+70h+fanIndex]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6EDEF8",
-    "line": "push    edx",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
@@ -409,31 +403,31 @@
   },
   {
     "ea": "0x6EDEFD",
-    "line": "push    edi",
+    "line": "push    edi; matrixChannel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDEFE",
-    "line": "push    esi",
+    "line": "push    esi; controlIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDEFF",
-    "line": "push    ebx",
+    "line": "push    ebx; fanIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDF00",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EDF02",
-    "line": "call    sub_6EDD30",
+    "line": "call    FaceGenFanControls_GetControlValue; Compute each control adjustment independently as clampedTarget - currentProjectedControl.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +463,7 @@
   },
   {
     "ea": "0x6EDF17",
-    "line": "lea     eax, [edi+ebx*2]",
+    "line": "lea     eax, [edi+ebx*2]; Selects the authored 2x2 coupling transform for (fanIndex, matrixChannel).",
     "mnemonic": "lea",
     "size": 3
   },
@@ -499,7 +493,7 @@
   },
   {
     "ea": "0x6EDF2F",
-    "line": "mov     edx, [esp+70h+arg_C]",
+    "line": "mov     edx, [esp+70h+parameters]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -517,7 +511,7 @@
   },
   {
     "ea": "0x6EDF3B",
-    "line": "fmulp   st(2), st",
+    "line": "fmulp   st(2), st; Selects FaceGen matrix 2*matrixChannel: channel 0 updates matrix 0, channel 1 updates matrix 2.",
     "mnemonic": "fmulp",
     "size": 2
   },
@@ -559,7 +553,7 @@
   },
   {
     "ea": "0x6EDF4C",
-    "line": "mov     [esp+70h+arg_C], ecx",
+    "line": "mov     [esp+70h+parameters], ecx; Apply the coupled basis corrections to parameters.matrix[2 * matrixChannel].",
     "mnemonic": "mov",
     "size": 7
   },
@@ -583,7 +577,7 @@
   },
   {
     "ea": "0x6EDF59",
-    "line": "fstp    [esp+70h+var_4C]",
+    "line": "fstp    [esp+70h+var_4C]; Coupled correction scale uses cached 2x2 transform and projected deltas; no finite-value or success check before matrix updates. Prettier Faces 1.19.6 verifies coefficients after restoring control projections and rolls back the final candidate when normalization produces invalid output. Native setter returns void; checking only finite requested controls does not validate the result.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -648,32 +642,26 @@
     "size": 2
   },
   {
-    "ea": "0x6EDF7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x6EDF80",
-    "line": "lea     ecx, [esp+70h+var_24]",
+    "line": "lea     ecx, [esp+70h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EDF84",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDF85",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EDF87",
-    "line": "call    sub_552730",
+    "line": "call    FaceGenMatrix_Transpose; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +685,7 @@
   },
   {
     "ea": "0x6EDF95",
-    "line": "fstp    [esp+74h+var_74]; float",
+    "line": "fstp    [esp+74h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -709,13 +697,13 @@
   },
   {
     "ea": "0x6EDF9A",
-    "line": "push    edx; int",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDF9B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -727,19 +715,19 @@
   },
   {
     "ea": "0x6EDFA1",
-    "line": "call    sub_552310",
+    "line": "call    FaceGenMatrix_Scale; Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EDFA6",
-    "line": "mov     ecx, [esp+70h+arg_C]",
+    "line": "mov     ecx, [esp+70h+parameters]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6EDFAD",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -751,13 +739,13 @@
   },
   {
     "ea": "0x6EDFB3",
-    "line": "call    sub_551DA0",
+    "line": "call    FaceGenMatrix_AddInPlace; Dimension-checked in-place element addition: this += rhs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EDFB8",
-    "line": "mov     eax, [esp+70h+var_30]",
+    "line": "mov     eax, [esp+70h+var_3C.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -781,7 +769,7 @@
   },
   {
     "ea": "0x6EDFC1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +781,7 @@
   },
   {
     "ea": "0x6EDFC9",
-    "line": "mov     eax, [esp+70h+var_18]",
+    "line": "mov     eax, [esp+70h+out.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -805,19 +793,19 @@
   },
   {
     "ea": "0x6EDFCF",
-    "line": "mov     [esp+70h+var_30], ebx",
+    "line": "mov     [esp+70h+var_3C.begin], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EDFD3",
-    "line": "mov     [esp+70h+var_2C], ebx",
+    "line": "mov     [esp+70h+var_3C.end], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EDFD7",
-    "line": "mov     [esp+70h+var_28], ebx",
+    "line": "mov     [esp+70h+var_3C.capacityEnd], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -841,7 +829,7 @@
   },
   {
     "ea": "0x6EDFE2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -928,5 +916,71 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C8460",
+    "line": "lea     ecx, [ebp-24h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8463",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8468",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C846B",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8470",
+    "line": "mov     edx, [esp+matrixChannel]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8474",
+    "line": "lea     eax, [edx-60h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8477",
+    "line": "mov     ecx, [edx-64h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C847A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C847C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8481",
+    "line": "mov     eax, offset stru_AF0700",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8486",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

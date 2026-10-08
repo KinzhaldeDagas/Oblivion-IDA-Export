@@ -19,7 +19,7 @@
 0x67C68E: fnstsw  ax
 0x67C690: test    ah, 44h
 0x67C693: jnp     short loc_67C6A7
-0x67C695: push    offset Vector3_InitValue?
+0x67C695: push    offset g_zeroNiPoint3
 0x67C69A: call    sub_8AA350
 0x67C69F: test    al, al
 0x67C6A1: jz      short loc_67C6BA

@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x6457A8",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -364,12 +364,6 @@
     "line": "jmp     short loc_6457C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6457BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6457C0",
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x645817",
-    "line": "call    sub_5E03C0",
+    "line": "call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.",
     "mnemonic": "call",
     "size": 5
   },

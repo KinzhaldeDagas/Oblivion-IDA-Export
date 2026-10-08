@@ -1,12 +1,6 @@
-BSStringT *__userpurge sub_5B8D00@<eax>(
-        int this@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        double a4@<st0>,
-        char *a5,
-        signed int a6)
+BSStringT *__thiscall sub_5B8D00(int this, char *arg0, signed int a3)
 {
-  unsigned int *TileFromTemplate; // eax
+  Tile *v6; // eax
   BSStringT *v7; // edi
   int i; // edx
   char *v9; // eax
@@ -15,32 +9,25 @@ BSStringT *__userpurge sub_5B8D00@<eax>(
   char v13[255]; // [esp+Ch] [ebp-104h] BYREF
   char v14; // [esp+10Bh] [ebp-5h]
 
-  TileFromTemplate = Menu_CreateTileFromTemplate(
-                       (_DWORD *)this,
-                       st5_0,
-                       st6_0,
-                       a4,
-                       *(TileWindow **)(this + 0x48),
-                       "item_template",
-                       0);
-  v7 = (BSStringT *)TileFromTemplate;
-  if ( TileFromTemplate )
+  v6 = Menu::RenderTemplate((Menu *)this, *(Tile **)(this + 0x48), "item_template", 0); /*0x5b8d28*/
+  v7 = (BSStringT *)v6; /*0x5b8d2d*/
+  if ( v6 ) /*0x5b8d31*/
   {
-    Tile_SetString(TileFromTemplate, (_DWORD *)0xFAF, a5);
-    for ( i = 0; i < 0x100; ++i )
+    Tile_SetString(v6, (_DWORD *)0xFAF, arg0); /*0x5b8d3b*/
+    for ( i = 0; i < 0x100; ++i ) /*0x5b8d44*/
     {
-      v9 = &v13[i];
-      v10 = v13[i + a5 - v13];
-      v13[i] = v10;
-      if ( v10 == 0x20 )
-        *v9 = 0x5F;
-      if ( !*v9 )
-        break;
+      v9 = &v13[i]; /*0x5b8d50*/
+      v10 = v13[i + arg0 - v13]; /*0x5b8d54*/
+      v13[i] = v10; /*0x5b8d5a*/
+      if ( v10 == 0x20 ) /*0x5b8d5c*/
+        *v9 = 0x5F; /*0x5b8d5e*/
+      if ( !*v9 ) /*0x5b8d61*/
+        break; /*0x5b8d64*/
     }
-    v14 = 0;
-    BSStringT_Set(v7 + 1, v13, 0);
+    v14 = 0; /*0x5b8d7b*/
+    BSStringT_Set(v7 + 1, v13, 0); /*0x5b8d83*/
   }
-  a2 = (float)a6;
-  Tile_SetFloat((Tile *)v7, (_DWORD *)0xFA8, a2);
-  return v7;
+  a2 = (float)a3; /*0x5b8d92*/
+  Tile_SetFloat((Tile *)v7, 0xFA8u, a2); /*0x5b8d9a*/
+  return v7; /*0x5b8d9f*/
 }

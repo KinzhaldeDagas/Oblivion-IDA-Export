@@ -1,36 +1,36 @@
-TESQuest *__thiscall sub_52F570(TESTopic *this, int a2)
+TESQuest *__thiscall TESTopic::GetOwnerQuest(TESTopic *this, OblivionTopicInfo *info)
 {
-  QuestInfoData **p_firstEntry; // edi
-  QuestInfoData *v4; // esi
-  UInt32 firstFreeEntry; // edx
+  QuestInfoEntry *p_questInfoEntries; // edi
+  QuestInfoData *data; // esi
+  unsigned int firstFreeEntry; // edx
   int v6; // eax
 
-  if ( !a2 )
-    return 0;
-  p_firstEntry = &this->firstEntry;
-  if ( this != (TESTopic *)0xFFFFFFD8 )
+  if ( !info ) /*0x52f577*/
+    return 0; /*0x52f579*/
+  p_questInfoEntries = &this->questInfoEntries; /*0x52f581*/
+  if ( this != (TESTopic *)0xFFFFFFD8 ) /*0x52f586*/
   {
-    do
+    do /*0x52f588*/
     {
-      v4 = *p_firstEntry;
-      if ( !*p_firstEntry )
-        break;
-      firstFreeEntry = v4->infoList.firstFreeEntry;
-      p_firstEntry = (QuestInfoData **)p_firstEntry[1];
-      if ( firstFreeEntry )
+      data = p_questInfoEntries->data; /*0x52f588*/
+      if ( !p_questInfoEntries->data ) /*0x52f588*/
+        break; /*0x52f588*/
+      firstFreeEntry = data->infoList.firstFreeEntry; /*0x52f58e*/
+      p_questInfoEntries = p_questInfoEntries->next; /*0x52f593*/
+      if ( firstFreeEntry ) /*0x52f596*/
       {
-        v6 = 0;
-        while ( *((_DWORD *)&v4->infoList.data->conditions.data + v6) != a2 )
+        v6 = 0; /*0x52f598*/
+        while ( data->infoList.data[v6] != info ) /*0x52f5ae*/
         {
-          if ( ++v6 >= firstFreeEntry )
-            goto LABEL_9;
+          if ( ++v6 >= firstFreeEntry ) /*0x52f5b5*/
+            goto LABEL_9; /*0x52f5b5*/
         }
-        return v4->parentQuest;
+        return data->parentQuest; /*0x52f5c3*/
       }
 LABEL_9:
-      ;
+      ; /*0x52f5b9*/
     }
-    while ( p_firstEntry );
+    while ( p_questInfoEntries ); /*0x52f588*/
   }
-  return 0;
+  return 0; /*0x52f57b*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x461030",
-    "line": "mov     eax, ds:0B33398h",
+    "line": "mov     eax, ds:0B33398h; MEF PERF 2026-10-02 PASS2: Verified dispatch relationship: guarded path calls animation drain45CE00, attached-animation drain45CEE0, controller drain459140, then later Havok drain45D030. Exact subsystem timing/frequency and all producer/resize paths remain Unknown.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x46105D",
-    "line": "call    sub_45CE00",
+    "line": "call    SaveLoad_DrainAnimationBlobs",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x461064",
-    "line": "call    sub_45CEE0",
+    "line": "call    SaveLoad_DrainAttachedAnimationBlobs",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x46106B",
-    "line": "call    sub_459140",
+    "line": "call    SaveLoad_DrainCharacterControllerBlobs",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x46107F",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x461084",
-    "line": "call    sub_677EC0",
+    "line": "call    sub_677EC0; ActorProcessManager high/process list update used during fast-travel time simulation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x461095",
-    "line": "call    sub_4424D0",
+    "line": "call    sub_4424D0; ModernWindowsCompatible decode: secondary sub_4424D0 caller passes 0.0 during this flagged world/cell update path; not a fire-specific animation routine.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4610A0",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4610AD",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4610D2",
-    "line": "call    sub_45D030",
+    "line": "call    SaveLoad_DrainHavokBlobs",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-wgl_pbuffer
+struct wgl_pbuffer;

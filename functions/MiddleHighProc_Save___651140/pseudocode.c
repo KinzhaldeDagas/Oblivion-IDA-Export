@@ -1,307 +1,260 @@
-void __thiscall MiddleHighProc_Save__(_DWORD *this, int a2, int Src)
+void __thiscall MiddleHighProc_Save__(_DWORD *this, ProcessSaveChangeMask changeMask, int Src)
 {
-  int v4; // edi
-  void *v6; // eax
-  int v7; // ebp
-  bool v8; // zf
-  TESSaveLoad *v9; // ecx
-  int v10; // eax
-  TESSaveLoad *v11; // ecx
-  TESSaveLoad *v12; // ecx
-  TESSaveLoad *v13; // ecx
+  MobileObject *v3; // edi
+  void *v5; // eax
+  ProcessSaveChangeMask v6; // ebp
+  bool v7; // zf
+  TESSaveLoadGame_SerializationView *v8; // ecx
+  int bufferCursor; // eax
+  TESSaveLoadGame_SerializationView *v10; // ecx
+  TESSaveLoadGame_SerializationView *v11; // ecx
+  TESSaveLoadGame_SerializationView *v12; // ecx
+  int v13; // eax
   int v14; // eax
   int v15; // eax
-  int v16; // eax
-  char v17; // dl
-  int v18; // ecx
-  double v19; // st7
-  int v20; // edx
-  TESSaveLoad *v21; // ecx
-  void *v22; // ecx
-  _DWORD *v23; // ecx
-  TESSaveLoad *v24; // ecx
-  TESSaveLoad *v25; // ecx
-  _WORD *v26; // ebp
-  int *v27; // edi
-  int v28; // eax
-  void *v29; // esi
-  int v30; // eax
-  UInt32 *v31; // edi
-  UInt32 v32; // esi
-  TESForm *v33; // eax
-  const char *v34; // eax
-  _WORD *v35; // edi
-  unsigned int v36; // esi
-  int v37; // [esp-Ch] [ebp-50h]
-  int v38; // [esp-8h] [ebp-4Ch]
-  size_t v39; // [esp-4h] [ebp-48h]
-  size_t v40; // [esp-4h] [ebp-48h]
-  size_t v41; // [esp-4h] [ebp-48h]
-  size_t v42; // [esp-4h] [ebp-48h]
-  size_t v43; // [esp-4h] [ebp-48h]
-  size_t v44; // [esp-4h] [ebp-48h]
-  size_t v45; // [esp-4h] [ebp-48h]
-  size_t v46; // [esp-4h] [ebp-48h]
-  size_t v47; // [esp-4h] [ebp-48h]
-  size_t v48; // [esp-4h] [ebp-48h]
-  size_t v49; // [esp-4h] [ebp-48h]
-  size_t v50; // [esp-4h] [ebp-48h]
-  size_t v51; // [esp-4h] [ebp-48h]
-  size_t v52; // [esp-4h] [ebp-48h]
-  size_t v53; // [esp-4h] [ebp-48h]
-  size_t v54; // [esp-4h] [ebp-48h]
-  size_t v55; // [esp-4h] [ebp-48h]
-  size_t v56; // [esp-4h] [ebp-48h]
-  size_t v57; // [esp-4h] [ebp-48h]
-  size_t v58; // [esp-4h] [ebp-48h]
-  const char *v59; // [esp-4h] [ebp-48h]
-  int v60; // [esp+0h] [ebp-44h]
-  char v61; // [esp+4h] [ebp-40h]
-  int v62; // [esp+8h] [ebp-3Ch]
-  int v63; // [esp+Ch] [ebp-38h]
-  int v64; // [esp+10h] [ebp-34h] BYREF
-  int v65; // [esp+14h] [ebp-30h]
-  int v66; // [esp+18h] [ebp-2Ch] BYREF
-  int v67; // [esp+1Ch] [ebp-28h] BYREF
-  int FormID; // [esp+20h] [ebp-24h] BYREF
-  int ParentFormID; // [esp+24h] [ebp-20h] BYREF
-  UInt32 v70; // [esp+28h] [ebp-1Ch]
-  int v71; // [esp+2Ch] [ebp-18h] BYREF
-  float v72; // [esp+30h] [ebp-14h] BYREF
-  int v73; // [esp+34h] [ebp-10h]
-  _DWORD v74[3]; // [esp+38h] [ebp-Ch] BYREF
+  char v16; // dl
+  int v17; // ecx
+  double v18; // st7
+  int v19; // edx
+  TESSaveLoadGame_SerializationView *v20; // ecx
+  void *v21; // ecx
+  _DWORD *v22; // ecx
+  TESSaveLoadGame_SerializationView *v23; // ecx
+  TESSaveLoadGame_SerializationView *v24; // ecx
+  unsigned __int8 *v25; // ebp
+  int *v26; // edi
+  int v27; // eax
+  void *v28; // esi
+  int v29; // eax
+  UInt32 *currentlySavingFormHeader; // edi
+  unsigned __int8 *v31; // esi
+  TESForm *v32; // eax
+  const char *v33; // eax
+  unsigned __int8 *v34; // edi
+  unsigned __int8 *v35; // esi
+  int v36; // [esp-Ch] [ebp-50h]
+  int v37; // [esp-8h] [ebp-4Ch]
+  const char *v38; // [esp-4h] [ebp-48h]
+  int v39; // [esp+0h] [ebp-44h]
+  int v40; // [esp+4h] [ebp-40h]
+  int v41; // [esp+8h] [ebp-3Ch]
+  int v42; // [esp+Ch] [ebp-38h]
+  unsigned int v43; // [esp+10h] [ebp-34h] BYREF
+  int v44; // [esp+14h] [ebp-30h]
+  unsigned int v45; // [esp+18h] [ebp-2Ch] BYREF
+  unsigned int v46; // [esp+1Ch] [ebp-28h] BYREF
+  unsigned int FormID; // [esp+20h] [ebp-24h] BYREF
+  unsigned int ParentFormID; // [esp+24h] [ebp-20h] BYREF
+  unsigned __int8 *v49; // [esp+28h] [ebp-1Ch]
+  int source; // [esp+2Ch] [ebp-18h] BYREF
+  float v51; // [esp+30h] [ebp-14h] BYREF
+  int v52; // [esp+34h] [ebp-10h]
+  _DWORD v53[3]; // [esp+38h] [ebp-Ch] BYREF
 
-  v4 = Src;
-  v6 = OblivionDynamicCast(
+  v3 = (MobileObject *)Src; /*0x651147*/
+  v5 = OblivionDynamicCast( /*0x65115c*/
          (void *)Src,
          0,
          (struct _s_RTTICompleteObjectLocator *)&MobileObject `RTTI Type Descriptor',
          &Actor `RTTI Type Descriptor',
          0);
-  v7 = a2;
-  v73 = (int)v6;
-  MiddleLowProcess_Save_(this, a2, v4);
-  v8 = Global_DebugSaveBuffer == 0;
-  v9 = SaveLoad_CurrentSavegame;
-  v71 = 0;
-  v10 = v9->unk000[5];
-  v70 = 0;
-  v65 = v10;
-  if ( !v8 )
-    v65 = v10;
-  if ( sub_45A170() )
+  v6 = changeMask; /*0x651161*/
+  v52 = (int)v5; /*0x65116c*/
+  MiddleLowProcess_SaveGame((MiddleLowProcess *)this, changeMask, v3); /*0x651170*/
+  v7 = Global_DebugSaveBuffer == 0; /*0x651175*/
+  v8 = g_TESSaveLoadGame; /*0x65117b*/
+  source = 0; /*0x651181*/
+  bufferCursor = (int)v8->bufferCursor; /*0x651185*/
+  v49 = 0; /*0x651188*/
+  v44 = bufferCursor; /*0x65118c*/
+  if ( !v7 ) /*0x651190*/
+    v44 = bufferCursor; /*0x651192*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x651196*/
   {
-    v11 = SaveLoad_CurrentSavegame;
-    LODWORD(v39) = 4;
-    Src = 0x4B4F4C42;
-    SaveLoad_SaveData((int)v11, &Src, v39);
-    v12 = SaveLoad_CurrentSavegame;
-    LODWORD(v40) = 2;
-    v70 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_SaveData((int)v12, &v71, v40);
+    v10 = g_TESSaveLoadGame; /*0x65119f*/
+    Src = 0x4B4F4C42; /*0x6511ac*/
+    SaveLoad_SaveData(v10, &Src, 4u); /*0x6511b4*/
+    v11 = g_TESSaveLoadGame; /*0x6511b9*/
+    v49 = g_TESSaveLoadGame->bufferCursor; /*0x6511c9*/
+    SaveLoad_SaveData(v11, &source, 2u); /*0x6511cd*/
   }
-  LODWORD(v39) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x45, v39);
-  LODWORD(v41) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (char *)this + 0x115, v41);
-  v13 = SaveLoad_CurrentSavegame;
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x34u )
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x45, 1u); /*0x6511e1*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, (char *)this + 0x115, 1u); /*0x6511f5*/
+  v12 = g_TESSaveLoadGame; /*0x6511fa*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x34u ) /*0x651204*/
   {
-    LODWORD(v42) = 1;
-    SaveLoad_SaveData((int)v13, this + 0x53, v42);
-    LODWORD(v43) = 4;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x55, v43);
-    v13 = SaveLoad_CurrentSavegame;
+    SaveLoad_SaveData(v12, this + 0x53, 1u); /*0x65120f*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x55, 4u); /*0x651223*/
+    v12 = g_TESSaveLoadGame; /*0x651228*/
   }
-  if ( LOBYTE(v13[1].createdObjectList.next) >= 0x4Du )
+  if ( v12->currentVersion >= 0x4Du ) /*0x651232*/
   {
-    LODWORD(v42) = 4;
-    SaveLoad_SaveData((int)v13, this + 0x56, v42);
-    v13 = SaveLoad_CurrentSavegame;
+    SaveLoad_SaveData(v12, this + 0x56, 4u); /*0x65123d*/
+    v12 = g_TESSaveLoadGame; /*0x651242*/
   }
-  if ( (v7 & 0x80000) != 0 )
+  if ( (v6 & 0x80000) != 0 ) /*0x65124e*/
   {
-    v14 = *(this + 0x30);
-    v64 = 0;
-    if ( v14 )
-      v64 = *(_DWORD *)(v14 + 0xC);
-    SaveLoad_SaveFormID(v13, (int)&v64, 4u);
-    if ( v64 )
+    v13 = *(this + 0x30); /*0x651254*/
+    v43 = 0; /*0x65125c*/
+    if ( v13 ) /*0x651260*/
+      v43 = *(_DWORD *)(v13 + 0xC); /*0x651265*/
+    SaveLoad_SaveFormID(v12, &v43, 4u); /*0x651270*/
+    if ( v43 ) /*0x65127b*/
     {
-      if ( !TESDataHandler_IsFormIDCreated_(v64) )
-        (*(void (__thiscall **)(int, const char *))(*(_DWORD *)dword_B34D90 + 0x18))(
-          dword_B34D90,
+      if ( !TESDataHandler_IsFormIDCreated_(v43) ) /*0x651284*/
+        (*(void (__thiscall **)(_DWORD, const char *))(**(_DWORD **)&MEMORY[0xB33E90][0xF00] + 0x18))( /*0x65129d*/
+          *(_DWORD *)&MEMORY[0xB33E90][0xF00],
           "Uncreated run once package is being saved!");
-      LOBYTE(Src) = *(_BYTE *)(*(this + 0x30) + 0x20);
-      if ( (_BYTE)Src == 0x13 )
-        (*(void (__thiscall **)(int, const char *))(*(_DWORD *)dword_B34D90 + 0x18))(
-          dword_B34D90,
+      LOBYTE(Src) = *(_BYTE *)(*(this + 0x30) + 0x20);// RadiantAI 2026-07-12: warning checks generic MiddleHighProcess run-once package slot for type 0x13. SpectatorPackage itself is live and separately constructed/serialized; warning documents a storage invariant, not dead code. /*0x6512aa*/
+      if ( (_BYTE)Src == 0x13 ) /*0x6512ae*/
+        (*(void (__thiscall **)(_DWORD, const char *))(**(_DWORD **)&MEMORY[0xB33E90][0xF00] + 0x18))( /*0x6512c0*/
+          *(_DWORD *)&MEMORY[0xB33E90][0xF00],
           "Run once package is a Spectator Package, this shouldn't happen.");
-      LODWORD(v42) = 1;
-      SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &Src, v42);
-      (*(void (__thiscall **)(_DWORD))(*(_DWORD *)*(this + 0x30) + 0xE0))(*(this + 0x30));
-      LODWORD(v44) = 4;
-      SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x33, v44);
+      SaveLoad_SaveData(g_TESSaveLoadGame, &Src, 1u); /*0x6512cf*/
+      (*(void (__thiscall **)(_DWORD))(*(_DWORD *)*(this + 0x30) + 0xE0))(*(this + 0x30)); /*0x6512e2*/
+      SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x33, 4u); /*0x6512f3*/
     }
-    v13 = SaveLoad_CurrentSavegame;
+    v12 = g_TESSaveLoadGame; /*0x6512f8*/
   }
-  v15 = *(this + 0x4F);
-  v66 = 0;
-  if ( v15 )
-    v66 = *(_DWORD *)(v15 + 0xC);
-  SaveLoad_SaveFormID(v13, (int)&v66, 4u);
-  LODWORD(v42) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x38, v42);
-  LODWORD(v45) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x60, v45);
-  LODWORD(v46) = 0xC;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x35, v46);
-  LODWORD(v47) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x31, v47);
-  LODWORD(v48) = 2;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x4E, v48);
-  LODWORD(v49) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (char *)this + 0x11D, v49);
-  LODWORD(v50) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x49, v50);
-  v16 = *(this + 0x48);
-  v67 = 0;
-  if ( v16 )
-    v67 = *(_DWORD *)(v16 + 0xC);
-  SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v67, 4u);
-  Src = *((unsigned __int16 *)this + 0x9A);
-  v17 = *((_BYTE *)this + 0x136);
-  v18 = *(this + 0x4B);
-  v74[0] = *(this + 0x4A);
-  v19 = (double)Src / dbl_A2FC70;
-  LOBYTE(a2) = v17;
-  v20 = *(this + 0x4C);
-  LODWORD(v51) = 4;
-  v74[1] = v18;
-  v21 = SaveLoad_CurrentSavegame;
-  v74[2] = v20;
-  v72 = v19;
-  SaveLoad_SaveData((int)v21, &v72, v51);
-  LODWORD(v52) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &a2, v52);
-  LODWORD(v53) = 0xC;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, v74, v53);
-  LODWORD(v54) = 1;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x47, v54);
-  if ( (v7 & 0x2000000) != 0 )
-    sub_473C40(v4, (_DWORD *)*(this + 0x5F));
-  v22 = (void *)*(this + 0x51);
-  FormID = 0;
-  if ( v22 )
-    FormID = MagicItem_GetFormID(v22);
-  SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&FormID, 4u);
-  v23 = (_DWORD *)*(this + 0x5E);
-  ParentFormID = 0;
-  if ( v23 )
-    ParentFormID = MagicTarget_GetParentFormID(v23);
-  SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&ParentFormID, 4u);
-  ActiveEffect_Base_SaveAEList(*(this + 0x5D), v73, v60, v61, v62, v63, v64, v65, v66, v67);
-  v24 = SaveLoad_CurrentSavegame;
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x45u )
+  v14 = *(this + 0x4F); /*0x6512fe*/
+  v45 = 0; /*0x651306*/
+  if ( v14 ) /*0x65130a*/
+    v45 = *(_DWORD *)(v14 + 0xC); /*0x65130f*/
+  SaveLoad_SaveFormID(v12, &v45, 4u); /*0x65131a*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x38, 4u); /*0x65132e*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x60, 1u); /*0x651342*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x35, 0xCu); /*0x651356*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x31, 4u); /*0x65136a*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x4E, 2u); /*0x65137e*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, (char *)this + 0x11D, 1u); /*0x651392*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x49, 1u); /*0x6513a6*/
+  v15 = *(this + 0x48); /*0x6513ab*/
+  v46 = 0; /*0x6513b3*/
+  if ( v15 ) /*0x6513b7*/
+    v46 = *(_DWORD *)(v15 + 0xC); /*0x6513bc*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, &v46, 4u); /*0x6513cd*/
+  Src = *((unsigned __int16 *)this + 0x9A); /*0x6513d9*/
+  v16 = *((_BYTE *)this + 0x136); /*0x6513e7*/
+  v17 = *(this + 0x4B); /*0x6513ed*/
+  v53[0] = *(this + 0x4A); /*0x6513f3*/
+  v18 = (double)Src / dbl_A2FC70; /*0x6513f7*/
+  LOBYTE(changeMask) = v16; /*0x6513fd*/
+  v19 = *(this + 0x4C); /*0x651401*/
+  v53[1] = v17; /*0x65140d*/
+  v20 = g_TESSaveLoadGame; /*0x651411*/
+  v53[2] = v19; /*0x651418*/
+  v51 = v18; /*0x65141c*/
+  SaveLoad_SaveData(v20, &v51, 4u); /*0x651420*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &changeMask, 1u); /*0x651432*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, v53, 0xCu); /*0x651444*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x47, 1u); /*0x651458*/
+  if ( (v6 & 0x2000000) != 0 ) /*0x651463*/
+    Actor_SaveAnimationState((int)v3, (_DWORD *)*(this + 0x5F)); /*0x65146d*/
+  v21 = (void *)*(this + 0x51); /*0x651475*/
+  FormID = 0; /*0x65147d*/
+  if ( v21 ) /*0x651481*/
+    FormID = MagicItem_GetFormID(v21); /*0x651488*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, &FormID, 4u); /*0x651499*/
+  v22 = (_DWORD *)*(this + 0x5E); /*0x65149e*/
+  ParentFormID = 0; /*0x6514a6*/
+  if ( v22 ) /*0x6514aa*/
+    ParentFormID = MagicTarget_GetParentFormID(v22); /*0x6514b1*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, &ParentFormID, 4u); /*0x6514c2*/
+  ActiveEffect_Base_SaveAEList(*(this + 0x5D), v52, v39, v40, v41, v42, v43, v44, v45, v46); /*0x6514d3*/
+  v23 = g_TESSaveLoadGame; /*0x6514d8*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x45u ) /*0x6514e5*/
   {
-    LODWORD(v55) = 1;
-    SaveLoad_SaveData((int)v24, this + 0x32, v55);
-    v24 = SaveLoad_CurrentSavegame;
+    SaveLoad_SaveData(v23, this + 0x32, 1u); /*0x6514f0*/
+    v23 = g_TESSaveLoadGame; /*0x6514f5*/
   }
-  if ( LOBYTE(v24[1].createdObjectList.next) >= 0x49u )
+  if ( v23->currentVersion >= 0x49u ) /*0x6514ff*/
   {
-    LODWORD(v55) = 1;
-    SaveLoad_SaveData((int)v24, this + 0x5A, v55);
-    LODWORD(v56) = 1;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, (char *)this + 0x169, v56);
-    v24 = SaveLoad_CurrentSavegame;
+    SaveLoad_SaveData(v23, this + 0x5A, 1u); /*0x65150a*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, (char *)this + 0x169, 1u); /*0x65151e*/
+    v23 = g_TESSaveLoadGame; /*0x651523*/
   }
-  if ( LOBYTE(v24[1].createdObjectList.next) >= 0x65u )
+  if ( v23->currentVersion >= 0x65u ) /*0x65152d*/
   {
-    LODWORD(v55) = 4;
-    SaveLoad_SaveData((int)v24, this + 0x2E, v55);
-    LODWORD(v57) = 4;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 0x2F, v57);
-    v25 = SaveLoad_CurrentSavegame;
-    LODWORD(v58) = 2;
-    Src = 0;
-    v26 = (_WORD *)v25->unk000[5];
-    SaveLoad_SaveData((int)v25, &Src, v58);
-    v27 = this + 0x2A;
-    if ( this != (_DWORD *)0xFFFFFF58 )
+    SaveLoad_SaveData(v23, this + 0x2E, 4u); /*0x65153c*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, this + 0x2F, 4u); /*0x651550*/
+    v24 = g_TESSaveLoadGame; /*0x651555*/
+    Src = 0; /*0x651561*/
+    v25 = v24->bufferCursor; /*0x651565*/
+    SaveLoad_SaveData(v24, &Src, 2u); /*0x651569*/
+    v26 = this + 0x2A; /*0x65156e*/
+    if ( this != (_DWORD *)0xFFFFFF58 ) /*0x651576*/
     {
-      do
+      do /*0x6515ae*/
       {
-        if ( !v27[1] && !*v27 )
-          break;
-        v28 = *v27;
-        v8 = *v27 == 0;
-        v64 = 0;
-        if ( !v8 )
-          v64 = *(_DWORD *)(v28 + 0xC);
-        SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v64, 4u);
-        ++Src;
-        v27 = (int *)v27[1];
+        if ( !v26[1] && !*v26 ) /*0x65157d*/
+          break; /*0x65157f*/
+        v27 = *v26; /*0x651581*/
+        v7 = *v26 == 0; /*0x651583*/
+        v43 = 0; /*0x651585*/
+        if ( !v7 ) /*0x651589*/
+          v43 = *(_DWORD *)(v27 + 0xC); /*0x65158e*/
+        SaveLoad_SaveFormID(g_TESSaveLoadGame, &v43, 4u); /*0x65159f*/
+        ++Src; /*0x6515a4*/
+        v26 = (int *)v26[1]; /*0x6515a9*/
       }
-      while ( v27 );
+      while ( v26 ); /*0x6515ae*/
     }
-    *v26 = Src;
-    v24 = SaveLoad_CurrentSavegame;
+    *(_WORD *)v25 = Src; /*0x6515b5*/
+    v23 = g_TESSaveLoadGame; /*0x6515b9*/
   }
-  if ( LOBYTE(v24[1].createdObjectList.next) >= 0x6Du )
+  if ( v23->currentVersion >= 0x6Du ) /*0x6515c3*/
   {
-    LODWORD(v55) = 1;
-    SaveLoad_SaveData((int)v24, (char *)this + 0x16B, v55);
-    v24 = SaveLoad_CurrentSavegame;
+    SaveLoad_SaveData(v23, (char *)this + 0x16B, 1u); /*0x6515ce*/
+    v23 = g_TESSaveLoadGame; /*0x6515d3*/
   }
-  if ( LOBYTE(v24[1].createdObjectList.next) >= 0x71u )
+  if ( v23->currentVersion >= 0x71u ) /*0x6515dd*/
   {
-    v29 = (void *)*(this + 0x52);
-    Src = 0;
-    if ( v29 )
+    v28 = (void *)*(this + 0x52); /*0x6515df*/
+    Src = 0; /*0x6515e7*/
+    if ( v28 ) /*0x6515eb*/
     {
-      v30 = MagicItem_GetFormID(v29);
-      v24 = SaveLoad_CurrentSavegame;
-      Src = v30;
+      v29 = MagicItem_GetFormID(v28); /*0x6515ef*/
+      v23 = g_TESSaveLoadGame; /*0x6515f4*/
+      Src = v29; /*0x6515fa*/
     }
-    SaveLoad_SaveFormID(v24, (int)&Src, 4u);
-    v24 = SaveLoad_CurrentSavegame;
+    SaveLoad_SaveFormID(v23, (const unsigned int *)&Src, 4u); /*0x651605*/
+    v23 = g_TESSaveLoadGame; /*0x65160a*/
   }
   if ( Global_DebugSaveBuffer )
   {
-    v31 = (UInt32 *)v24[1].unk030[1];
-    v32 = v24->unk000[5];
-    if ( v31 )
+    currentlySavingFormHeader = (UInt32 *)v23->currentlySavingFormHeader; /*0x651618*/
+    v31 = v23->bufferCursor; /*0x651620*/
+    if ( currentlySavingFormHeader )
     {
-      v33 = TESForm_LookupByFormID(*v31);
-      v34 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v33->vtbl->GetEditorName)(
-                            v33,
-                            *(UInt32 *)((char *)v31 + 5),
+      v32 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x651628*/
+      v33 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v32->vtbl->GetEditorName)( /*0x651648*/
+                            v32,
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x1A47,
                             ".\\AI\\MiddleHighProcess.cpp");
       sub_40FEC0(
         "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v32 - v65,
-        *v31,
-        v34,
+        &v31[-v44],
+        *currentlySavingFormHeader,
+        v33,
+        v36,
         v37,
-        v38,
-        v59);
+        v38);
     }
     else
     {
-      sub_40FEC0("SaveGame(): %-5i ending at line %i in file %s", v32 - v65, 0x1A47, ".\\AI\\MiddleHighProcess.cpp");
+      sub_40FEC0("SaveGame(): %-5i ending at line %i in file %s", &v31[-v44], 0x1A47, ".\\AI\\MiddleHighProcess.cpp");
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x651684*/
   {
-    v35 = (_WORD *)v70;
-    v36 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v36 > v70 + 0xFFFF )
-      PrintError(
+    v34 = v49; /*0x651693*/
+    v35 = g_TESSaveLoadGame->bufferCursor; /*0x651697*/
+    if ( v35 > v49 + 0xFFFF ) /*0x6516a2*/
+      PrintError( /*0x6516b3*/
         "Save Game Block in file %s on line %i is greater than maximum short size",
         ".\\AI\\MiddleHighProcess.cpp",
         0x1A47);
-    *v35 = v36 - (_WORD)v35;
+    *(_WORD *)v34 = (_WORD)v35 - (_WORD)v34; /*0x6516bd*/
   }
 }

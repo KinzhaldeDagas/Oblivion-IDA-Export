@@ -1,1 +1,1 @@
-IRunningObjectTable_0
+typedef IRunningObjectTable IRunningObjectTable_0;

@@ -1,1 +1,1 @@
-NiD3DVertexShader
+struct NiD3DVertexShader;

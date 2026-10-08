@@ -1,1 +1,1 @@
-HLOCAL
+typedef HANDLE HLOCAL;

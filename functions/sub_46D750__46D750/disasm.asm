@@ -1,4 +1,4 @@
-0x46D750: push    ebp
+0x46D750: push    ebp; Verified: MODT chunks are accepted only when byte length is a nonzero multiple of 24. Each valid chunk is decoded into runtime texture-hash entries and replaces the TESTextureList state; zero/invalid-width chunks leave the old state unchanged. The 24-byte field meanings remain Unknown.
 0x46D751: mov     ebp, esp
 0x46D753: sub     esp, 8
 0x46D756: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x46D77D: add     edx, edx
 0x46D77F: add     edx, edx
 0x46D781: add     edx, edx
-0x46D783: sub     ecx, edx
+0x46D783: sub     ecx, edx; MODT acceptance gate: only nonzero payload length divisible by 24 reaches replacement. Invalid-width and zero-length MODT retain the prior runtime texture array.
 0x46D785: push    edi
 0x46D786: jnz     short loc_46D7C6
 0x46D788: lea     edi, [esi+esi*2]
@@ -37,15 +37,15 @@
 0x46D7AA: add     esp, 0Ch
 0x46D7AD: push    edi; a4
 0x46D7AE: push    ebx; Dst
-0x46D7AF: call    TESFile_GetChunkData
-0x46D7B4: mov     eax, [ebp+arg_8]
-0x46D7B7: mov     ecx, [ebp+arg_4]
-0x46D7BA: push    eax
-0x46D7BB: push    ecx
-0x46D7BC: mov     ecx, [ebp+var_8]
-0x46D7BF: push    esi
-0x46D7C0: push    ebx
-0x46D7C1: call    sub_46D610
+0x46D7AF: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
+0x46D7B4: mov     eax, [ebp+modelPath]
+0x46D7B7: mov     ecx, [ebp+form]
+0x46D7BA: push    eax; modelPath
+0x46D7BB: push    ecx; form
+0x46D7BC: mov     ecx, [ebp+var_8]; this
+0x46D7BF: push    esi; count
+0x46D7C0: push    ebx; entries
+0x46D7C1: call    TESModel_ReplaceTextureHashEntries; Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.
 0x46D7C6: lea     esp, [ebp-14h]
 0x46D7C9: pop     edi
 0x46D7CA: pop     esi

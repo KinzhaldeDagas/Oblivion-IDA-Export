@@ -27,7 +27,7 @@
 0x74028C: lea     eax, [esp+30h+var_14]
 0x740290: push    eax
 0x740291: call    edx
-0x740293: mov     eax, dword ptr [esp+2Ch+var_14]
+0x740293: mov     eax, [esp+2Ch+var_14]
 0x740297: test    eax, eax
 0x740299: jz      loc_740385
 0x74029F: mov     esi, eax
@@ -47,7 +47,7 @@
 0x7402CA: push    edx
 0x7402CB: mov     [esp+34h+var_4], 0
 0x7402D3: call    eax
-0x7402D5: mov     eax, dword ptr [esp+2Ch+var_14]
+0x7402D5: mov     eax, [esp+2Ch+var_14]
 0x7402D9: test    eax, eax
 0x7402DB: mov     ebp, ds:0A2807Ch
 0x7402E1: jz      short loc_7402FD
@@ -64,7 +64,7 @@
 0x7402F7: push    1
 0x7402F9: mov     ecx, ebx
 0x7402FB: call    eax
-0x7402FD: mov     eax, dword ptr [esp+2Ch+var_18]
+0x7402FD: mov     eax, [esp+2Ch+var_18]
 0x740301: mov     ecx, [edi+5Ch]
 0x740304: mov     edx, [ecx]
 0x740306: mov     edx, [edx+90h]
@@ -89,7 +89,7 @@
 0x740331: push    1
 0x740333: mov     ecx, esi
 0x740335: call    edx
-0x740337: mov     eax, dword ptr [esp+2Ch+var_18]
+0x740337: mov     eax, [esp+2Ch+var_18]
 0x74033B: test    eax, eax
 0x74033D: jz      short loc_74035F
 0x74033F: mov     esi, eax
@@ -106,7 +106,7 @@
 0x740355: mov     ecx, esi
 0x740357: call    edx
 0x740359: xor     eax, eax
-0x74035B: mov     dword ptr [esp+2Ch+var_18], eax
+0x74035B: mov     [esp+2Ch+var_18], eax
 0x74035F: test    eax, eax
 0x740361: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x740369: jz      short loc_740385
@@ -136,3 +136,12 @@
 0x7403A0: pop     ebx
 0x7403A1: add     esp, 18h
 0x7403A4: retn    4
+0x9B23E0: lea     ecx, [ebp-18h]; slot
+0x9B23E3: jmp     NiPointerSlot_Release
+0x9B23E8: mov     edx, [esp+arg_4]
+0x9B23EC: lea     eax, [edx-1Ch]
+0x9B23EF: mov     ecx, [edx-20h]
+0x9B23F2: xor     ecx, eax
+0x9B23F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B23F9: mov     eax, offset stru_ADE3BC
+0x9B23FE: jmp     ___CxxFrameHandler3

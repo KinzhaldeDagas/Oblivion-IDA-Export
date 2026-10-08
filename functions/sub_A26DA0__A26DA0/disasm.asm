@@ -1,5 +1,5 @@
 0xA26DA0: mov     ecx, offset off_B28E00
 0xA26DA5: mov     off_B28E00, offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@I@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,uint>::`vftable' ...
-0xA26DAF: call    NiTPointerList__FreeAllNodes
+0xA26DAF: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0xA26DB4: mov     off_B28E00, offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@I@@6B@; const NiTListBase<NiTPointerAllocator<uint>,uint>::`vftable' ...
 0xA26DBE: retn

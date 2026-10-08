@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_LARGE_INTEGER",
+  "definition": "union _LARGE_INTEGER\n{\nstruct\n{\nDWORD LowPart;\nLONG HighPart;\n};\n_LARGE_INTEGER::$837407842DC9087486FDFA5FEB63B74E u;\nLONGLONG QuadPart;\n}\n",
   "id": 18374686479672025034,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "_LARGE_INTEGER::$837407842DC9087486FDFA5FEB63B74E"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "_LARGE_INTEGER::$837407842DC9087486FDFA5FEB63B74E"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QuadPart",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     }
   ],
   "name": "_LARGE_INTEGER",
+  "ordinal": 48,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 8
 }

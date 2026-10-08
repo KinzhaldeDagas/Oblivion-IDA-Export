@@ -1,17 +1,17 @@
-0x793E10: sub     esp, 0B4h
+0x793E10: sub     esp, 0B4h; OBLIVION AUTHORITY 2026-08-27: Static leaf color processing runs only when leafLightingMethod==1 (static) and staticLightingStyle!=0. Style bit0/value1 (USE_LIGHT_SOURCES) computes material/light RGB and SetColor(false); style bit1/value2 (SIMULATE_SHADOWS) runs AdjustStaticLighting, which SetColor(true) and reapplies colorScaleByte. Value3 would execute both in order.
 0x793E16: cmp     dword ptr [ecx+38h], 1
 0x793E1A: mov     [esp+0B4h+var_7C], ecx
 0x793E1E: jnz     loc_794335
 0x793E24: cmp     dword ptr [ecx+74h], 0
 0x793E28: jz      loc_794335
-0x793E2E: mov     eax, [esp+0B4h+arg_8]
+0x793E2E: mov     eax, [esp+0B4h+numLeafLods]
 0x793E35: test    eax, eax
 0x793E37: jle     loc_794335
 0x793E3D: push    ebx
 0x793E3E: push    ebp
 0x793E3F: push    esi
 0x793E40: push    edi
-0x793E41: mov     edi, [esp+0C4h+arg_4]
+0x793E41: mov     edi, [esp+0C4h+leafLods]
 0x793E48: add     edi, 4
 0x793E4B: mov     [esp+0C4h+var_A4], edi
 0x793E4F: mov     [esp+0C4h+var_78], eax
@@ -46,23 +46,23 @@
 0x793EAB: cmp     ebp, [ebx+8]
 0x793EAE: jb      short loc_793EB5
 0x793EB0: call    __invalid_parameter_noinfo
-0x793EB5: mov     ecx, [ebp+0]
-0x793EB8: lea     eax, [esp+0C4h+var_C]
-0x793EBF: push    eax
-0x793EC0: call    sub_7A7EC0
+0x793EB5: mov     ecx, [ebp+0]; this
+0x793EB8: lea     eax, [esp+0C4h+outRgb]
+0x793EBF: push    eax; outColor
+0x793EC0: call    OB_CBillboardLeaf_GetColor_010201A0; OBLIVION AUTHORITY (2026-08-24): CBillboardLeaf::GetColor decodes packed +0x14 R/G/B bytes to float channels by dividing by 255. Used by lower-LOD pair averaging at 0x7A91A8/0x7A91AA.
 0x793EC5: fldz
-0x793EC7: fst     [esp+0C4h+var_6C]
+0x793EC7: fst     [esp+0C4h+lightPosition.z]
 0x793ECB: xor     ebx, ebx
-0x793ECD: fst     [esp+0C4h+var_70]
-0x793ED1: mov     esi, offset unk_B2B7D4
-0x793ED6: fst     [esp+0C4h+var_74]
+0x793ECD: fst     [esp+0C4h+lightPosition.y]
+0x793ED1: mov     esi, offset CLightingEngine__s_lightAttributes.position.y
+0x793ED6: fst     [esp+0C4h+lightPosition.x]
 0x793EDA: fld     dword ptr ds:0A30634h
 0x793EE0: fstp    [esp+0C4h+var_80]
 0x793EE4: fst     [esp+0C4h+var_A8]
 0x793EE8: fst     [esp+0C4h+var_AC]
-0x793EEC: fst     [esp+0C4h+var_B0]
+0x793EEC: fst     [esp+0C4h+rgb]
 0x793EF0: fld1
-0x793EF2: cmp     ds:byte_B42A18[ebx], 0
+0x793EF2: cmp     ds:CLightingEngine__s_lightEnabled[ebx], 0
 0x793EF9: jz      loc_794217
 0x793EFF: fstp    st
 0x793F01: fld     dword ptr [esi-4]
@@ -145,9 +145,9 @@
 0x794002: fst     [esp+0C4h+var_80]
 0x794006: mov     edx, [esp+0C4h+var_8C]
 0x79400A: mov     eax, [esp+0C4h+var_88]
-0x79400E: mov     [esp+0C4h+var_74], ecx
-0x794012: mov     [esp+0C4h+var_70], edx
-0x794016: mov     [esp+0C4h+var_6C], eax
+0x79400E: mov     [esp+0C4h+lightPosition.x], ecx
+0x794012: mov     [esp+0C4h+lightPosition.y], edx
+0x794016: mov     [esp+0C4h+lightPosition.z], eax
 0x79401A: fldz
 0x79401C: fcom    st(1)
 0x79401E: fnstsw  ax
@@ -238,7 +238,7 @@
 0x794120: fld     [esp+0C4h+var_A0]
 0x794124: fld     st
 0x794126: fmulp   st(2), st
-0x794128: fld     [esp+0C4h+var_C]
+0x794128: fld     [esp+0C4h+outRgb]
 0x79412F: fmulp   st(2), st
 0x794131: fxch    st(1)
 0x794133: fstp    [esp+0C4h+var_28]
@@ -279,8 +279,8 @@
 0x7941DA: fadd    [esp+0C4h+var_44]
 0x7941E1: fstp    [esp+0C4h+var_2C]
 0x7941E8: fld     [esp+0C4h+var_34]
-0x7941EF: fadd    [esp+0C4h+var_B0]
-0x7941F3: fstp    [esp+0C4h+var_B0]
+0x7941EF: fadd    [esp+0C4h+rgb]
+0x7941F3: fstp    [esp+0C4h+rgb]
 0x7941F7: fld     [esp+0C4h+var_30]
 0x7941FE: fadd    [esp+0C4h+var_AC]
 0x794202: fstp    [esp+0C4h+var_AC]
@@ -290,16 +290,16 @@
 0x794215: fxch    st(1)
 0x794217: add     esi, 40h ; '@'
 0x79421A: add     ebx, 1
-0x79421D: cmp     esi, offset unk_B2B9D4
+0x79421D: cmp     esi, offset flt_B2B9D4
 0x794223: jl      loc_793EF2
-0x794229: fld     [esp+0C4h+var_B0]
+0x794229: fld     [esp+0C4h+rgb]
 0x79422D: fcom    st(2)
 0x79422F: fnstsw  ax
 0x794231: test    ah, 5
 0x794234: jp      short loc_794246
 0x794236: fstp    st
 0x794238: fxch    st(1)
-0x79423A: fst     [esp+0C4h+var_B0]
+0x79423A: fst     [esp+0C4h+rgb]
 0x79423E: jmp     short loc_794255
 0x794240: fstp    st(1)
 0x794242: fld1
@@ -308,7 +308,7 @@
 0x794248: fnstsw  ax
 0x79424A: test    ah, 41h
 0x79424D: jnz     short loc_794253
-0x79424F: fst     [esp+0C4h+var_B0]
+0x79424F: fst     [esp+0C4h+rgb]
 0x794253: fxch    st(1)
 0x794255: fld     [esp+0C4h+var_AC]
 0x794259: fcom    st(1)
@@ -350,11 +350,11 @@
 0x7942B6: cmp     ebp, [eax+8]
 0x7942B9: jb      short loc_7942C0
 0x7942BB: call    __invalid_parameter_noinfo
-0x7942C0: mov     ecx, [ebp+0]
-0x7942C3: push    0
-0x7942C5: lea     edx, [esp+0C8h+var_B0]
-0x7942C9: push    edx
-0x7942CA: call    sub_7A7F10
+0x7942C0: mov     ecx, [ebp+0]; this
+0x7942C3: push    0; applyDimming
+0x7942C5: lea     edx, [esp+0C8h+rgb]
+0x7942C9: push    edx; color
+0x7942CA: call    OB_CBillboardLeaf_SetColor_010201A0; Static style bit0 writes computed RGB with applyDimming=false: repacks but does not multiply colorScaleByte.
 0x7942CF: test    byte ptr [esi+74h], 2
 0x7942D3: jz      short loc_794302
 0x7942D5: mov     eax, [esp+0C4h+var_A4]
@@ -364,13 +364,13 @@
 0x7942E1: call    __invalid_parameter_noinfo
 0x7942E6: fld     dword ptr [esi+70h]
 0x7942E9: push    ecx
-0x7942EA: mov     ecx, [esp+0C8h+arg_0]
-0x7942F1: fstp    [esp+0C8h+var_C8]; float
-0x7942F4: lea     eax, [esp+0C8h+var_74]
-0x7942F8: push    eax; int
-0x7942F9: push    ecx; int
-0x7942FA: mov     ecx, [ebp+0]
-0x7942FD: call    sub_7A8090
+0x7942EA: mov     ecx, [esp+0C8h+treeCenter]
+0x7942F1: fstp    [esp+0C8h+lightScalar]; lightScalar
+0x7942F4: lea     eax, [esp+0C8h+lightPosition]
+0x7942F8: push    eax; lightPosition
+0x7942F9: push    ecx; treeCenter
+0x7942FA: mov     ecx, [ebp+0]; this
+0x7942FD: call    OB_CBillboardLeaf_AdjustStaticLighting_010201A0; Static style bit1 invokes dominant-light shadow adjustment after optional bit0 processing. That helper decodes packed RGB then calls SetColor(true).
 0x794302: mov     eax, [esp+0C4h+var_A4]
 0x794306: add     eax, 0FFFFFFFCh
 0x794309: cmp     ebp, [eax+8]

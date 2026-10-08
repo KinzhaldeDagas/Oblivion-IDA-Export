@@ -1,19 +1,32 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79A450",
+      "0x79A80D"
+    ]
+  ],
+  "chunks_sha256": "6f9ea03c8a79a6b1517e461d727e6642981e8a9e2c796c3b5eb77c798803d750",
+  "comment_regular": "\n\n[2026-10-03 extrusion fade policy] Verified count at engine+50==1 selects fLodPercent=1/full spine and cross-section resolution. Geometry AddStrip still receives original lodLevel. Plugin scopes this count to1 at call7A21F0 only when retained75004 requests prohibited segment reduction, restores it in finally, and leaves the actual geometry LOD allocation/count unchanged. RT4.1 75004 only changes this topology policy: GetFrondGeometry/Reference SpeedTreeWrapper export/use75003 fade distance for both modes independently of75004. Do not treat75004=false as disabling extrusion alpha fading.\n\n[2026-10-03 capacity finding, unresolved] Native computed extrusion index count reaches the AddStrip call as a full DWORD in EBP; the native AddStrip callee reads only the low WORD. Allocation uses the full product. Example full grid5000 spine vertices x7 profile vertices uses35000 vertices (below65535) but needs74984 indices; WORD length would be9448. Correct full-strip splitting/length handling needs a further implementation pass. The current fade-policy change does not fix this existing native capacity defect.\n\n[2026-10-03 full-width strip correction] Machine-code refinement: IMUL/SUB computes full length in EBP, DWORD store79A5E0 and load79A7E6 retain it, PUSH EBP79A7F4 passes it intact. At frond-only CALL79A7F7 the plugin now receives a DWORD count and splits the exact already-generated stream. Every continuation starts at an even source offset and carries the preceding two indices, preserving oriented real triangles. Caller79A7FE still increments stripCounter once; the wrapper supplies intermediate increments for extra chunks.\n\nSpeedTree decode: stock CFrondEngine::ComputeExtrusion. Builds a reduced zig-zag strip for one extrusion LOD using min length/cross segment fields and guide vertex counts. Stock 0x6C CFrondEngine has no bProhibitSegmentReduction field.",
+  "comment_repeatable": "SpeedTree decode: stock CFrondEngine::ComputeExtrusion. Builds a reduced zig-zag strip for one extrusion LOD using min length/cross segment fields and guide vertex counts. Stock 0x6C CFrondEngine has no bProhibitSegmentReduction field.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79A450",
+  "display_name": "OB_CFrondEngine_ComputeExtrusion_010201A0",
   "end_ea": "0x79A80D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79A450",
+  "name": "OB_CFrondEngine_ComputeExtrusion_010201A0",
   "segment": ".text",
   "sha256": "6f9ea03c8a79a6b1517e461d727e6642981e8a9e2c796c3b5eb77c798803d750",
   "size": 957,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79A450",
-  "type": "void __thiscall(int *this, int, __int16, _DWORD *)",
+  "total_chunk_size": 957,
+  "type": "void __thiscall(int *this, int lodLevel, __int16, OB_stVector16_010201A0 *)",
   "xrefs_from_count": 329,
   "xrefs_to_count": 1
 }

@@ -1,1 +1,1 @@
-ClassMenu
+struct ClassMenu;

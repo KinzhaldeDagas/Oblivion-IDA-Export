@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A13B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; SpeedTree decode: compact stock CFrondEngine ctor. Object is 0x6C bytes in CSpeedTreeRT construction; initializes geometry/lighting pointers, MSVC vector containers for guides/guide-LODs/textures, stock frond fields through min cross segments, and default Bezier profile. Later 4.1 supplemental frond fields are not present in this stock allocation.",
     "mnemonic": "push",
     "size": 2
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x7A1467",
-    "line": "push    99h ; '™'; MaxCount",
+    "line": "push    99h ; '™'; count",
     "mnemonic": "push",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7A1471",
-    "line": "lea     ecx, [esp+4Ch+var_28]",
+    "line": "lea     ecx, [esp+4Ch+stringObject]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x7A1485",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A148A",
-    "line": "lea     eax, [esp+44h+var_28]",
+    "line": "lea     eax, [esp+44h+stringObject]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x7A1493",
-    "line": "push    eax",
+    "line": "push    eax; stringObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1494",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7A149F",
-    "line": "call    sub_786D60",
+    "line": "call    OB_StBezierSpline_ctor_cachedFromString_010201A0; Oblivion cached-string stBezierSpline constructor. Initializes five compact 16-byte vectors, performs cache lookup/copy or parse/build/cache, and allocates exactly 0x5C bytes for cached copies. Confirms the shipped vector-only layout; RT4.1 source is corroborative, not layout-authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x7A14BC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -532,5 +532,449 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x79DFE0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFE1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFE2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x79DFE4",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79DFE7",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x79DFE9",
+    "line": "jz      short loc_79E007",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x79DFEB",
+    "line": "mov     ecx, [esp+8+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x79DFEF",
+    "line": "mov     edx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79DFF2",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF4",
+    "line": "push    edx; last",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF5",
+    "line": "push    eax; first",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF6",
+    "line": "call    OB_SFrondTexture_DestroyRange_010201A0; Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79DFFB",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79DFFE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFFF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79E004",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x79E007",
+    "line": "mov     dword ptr [esi+4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x79E00E",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x79E015",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x79E01C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E01D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E01E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12E0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12E1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12E2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A12E4",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A12E7",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7A12E9",
+    "line": "jz      short loc_7A1307",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7A12EB",
+    "line": "mov     ecx, [esp+8+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A12EF",
+    "line": "mov     edx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A12F2",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F4",
+    "line": "push    edx; last",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F5",
+    "line": "push    eax; first",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F6",
+    "line": "call    OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0; CFrondEngine constructor cleanup destroys any partially constructed outer guide-LOD level range through the decoded nested-vector destructor.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A12FB",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A12FE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12FF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A1304",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A1307",
+    "line": "mov     dword ptr [esi+4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A130E",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A1315",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A131C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A131D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A131E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC680",
+    "line": "mov     ecx, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC683",
+    "line": "add     ecx, 8; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC686",
+    "line": "jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC68B",
+    "line": "mov     ecx, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC68E",
+    "line": "add     ecx, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC691",
+    "line": "jmp     loc_7A12E0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC696",
+    "line": "mov     ecx, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC699",
+    "line": "add     ecx, 40h ; '@'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC69C",
+    "line": "jmp     loc_79DFE0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC6A1",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6A4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC6A5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC6AA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC6AB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC6AC",
+    "line": "mov     eax, [ebp-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6AF",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6B2",
+    "line": "jz      locret_9CC6C4",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC6B8",
+    "line": "and     dword ptr [ebp-34h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC6BC",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6BF",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC6C4",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC6C5",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC6C9",
+    "line": "lea     eax, [edx-34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6CC",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6CF",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC6D1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC6D6",
+    "line": "mov     eax, offset stru_AF5A5C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC6DB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

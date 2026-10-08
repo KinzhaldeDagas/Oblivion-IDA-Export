@@ -1,5 +1,6 @@
-int __cdecl ActiveEffect_Base_LoadAEList_(
-        int a1,
+// Verified active-effect list load lifecycle: destroys current effects and clears old list nodes, reads the UInt16 effect count (and optional BLOK header), loads each record through ActiveEffect_Base_Load, then inserts valid effects sorted by MagicTarget_ActiveEffectComparisonFunc. The loop also retains save-buffer boundary checks and handles the Vampirism-effect special case.
+int __cdecl ActiveEffect_Base_LoadAEList(
+        int *a1,
         PlayerCharacter *a2,
         int a3,
         __int16 a4,
@@ -18,7 +19,7 @@ int __cdecl ActiveEffect_Base_LoadAEList_(
   _DWORD *OpenMenuTile; // eax
   void *ParentMenu; // eax
   _DWORD *v17; // ebp
-  int i; // edi
+  int *i; // edi
   int v19; // esi
   int v21; // [esp-8h] [ebp-2Ch]
   size_t v22; // [esp-4h] [ebp-28h]
@@ -29,19 +30,19 @@ int __cdecl ActiveEffect_Base_LoadAEList_(
   float v27; // [esp+1Ch] [ebp-8h]
   int Dst; // [esp+20h] [ebp-4h] BYREF
 
-  v25 = 0;
-  v26 = 0;
-  if ( sub_45A170() )
+  v25 = 0; /*0x68ee9f*/
+  v26 = 0; /*0x68eea3*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v22) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v22);
+    LODWORD(v22) = 4; /*0x68eeba*/
+    SaveLoad_LoadData((int)g_TESSaveLoadGame, &Dst, v22); /*0x68eec1*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v11 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
+      v11 = (UInt32 *)g_TESSaveLoadGame[1].unk030[0]; /*0x68eed5*/
       if ( v11 )
       {
-        v12 = TESForm_LookupByFormID(*v11);
-        v13 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)(
+        v12 = TESForm_LookupByFormID(*v11); /*0x68eee2*/
+        v13 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)( /*0x68eefd*/
                               v12,
                               *((unsigned __int8 *)v11 + 9),
                               *(UInt32 *)((char *)v11 + 5));
@@ -61,44 +62,56 @@ int __cdecl ActiveEffect_Base_LoadAEList_(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\Magic\\ActiveEffect.cpp",
           0x373,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          LOBYTE(g_TESSaveLoadGame[1].createdObjectList.next));
       }
     }
-    v14 = SaveLoad_CurrentSavegame;
-    LODWORD(v23) = 2;
-    v26 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_LoadData((int)v14, &v25, v23);
+    v14 = g_TESSaveLoadGame; /*0x68ef38*/
+    LODWORD(v23) = 2; /*0x68ef41*/
+    v26 = g_TESSaveLoadGame->unk000[5]; /*0x68ef48*/
+    SaveLoad_LoadData((int)v14, &v25, v23); /*0x68ef4c*/
   }
-  v27 = 0.0;
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3EC);
-  ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-  v17 = OblivionDynamicCast(
+  v27 = 0.0; /*0x68ef5a*/
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x3EC); /*0x68ef6a*/
+  ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x68ef74*/
+  v17 = OblivionDynamicCast( /*0x68ef88*/
           ParentMenu,
           0,
           (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
           &HUDMainMenu `RTTI Type Descriptor',
           0);
-  for ( i = a1; i; i = *(_DWORD *)(i + 4) )
+  for ( i = a1; i; i = (int *)i[1] ) /*0x68ef8c*/
   {
-    if ( !*(_DWORD *)(i + 4) && !*(_DWORD *)i )
-      break;
-    v19 = *(_DWORD *)i;
-    if ( OblivionDynamicCast(
-           *(void **)i,
+    if ( !i[1] && !*i ) /*0x68ef96*/
+      break; /*0x68ef99*/
+    v19 = *i; /*0x68ef9b*/
+    if ( OblivionDynamicCast( /*0x68efac*/
+           (void *)*i,
            0,
            (struct _s_RTTICompleteObjectLocator *)&ActiveEffect `RTTI Type Descriptor',
            &VampirismEffect `RTTI Type Descriptor',
            0) )
     {
-      v27 = *(float *)(v19 + 0x18);
+      v27 = *(float *)(v19 + 0x18); /*0x68efbb*/
     }
-    if ( a2 == TESDataHandler_g_PlayerRef )
+    if ( a2 == reference ) /*0x68efc9*/
     {
-      if ( v17 )
-        HUDMainMenu_UpdateActiveEffects(v17, v19, COERCE_FLOAT(1));
+      if ( v17 ) /*0x68efcd*/
+        HUDMainMenu_UpdateActiveEffects(v17, v19, COERCE_FLOAT(1)); /*0x68efd4*/
     }
-    if ( v19 )
-      (**(void (__thiscall ***)(int, int))v19)(v19, 1);
+    if ( v19 ) /*0x68efdb*/
+      (**(void (__thiscall ***)(int, int))v19)(v19, 1); /*0x68efe5*/
   }
-  return ActiveEffect_Base_LoadAEList__::ClearActiveEffectList(a1, a1, (int)a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+  return ActiveEffect_Base_LoadAEList__::ClearActiveEffectList( /*0x68ef83*/
+           a1,
+           (int)a1,
+           (int)a2,
+           a3,
+           a4,
+           a5,
+           a6,
+           a7,
+           a8,
+           a9,
+           a10,
+           a11);
 }

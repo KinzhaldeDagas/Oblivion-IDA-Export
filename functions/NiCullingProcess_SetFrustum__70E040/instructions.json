@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70E040",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x70E064",
-    "line": "call    sub_717A40",
+    "line": "call    NiFrustumPlanes_SetFromFrustumAndTransform; MoonSugarEffect decode: frustum-plane builder consumes NiFrustum plus NiTransform. Camera sway before NiCullingProcess::Process changes these planes for that traversal.",
     "mnemonic": "call",
     "size": 5
   },

@@ -41,7 +41,7 @@
 0x6A1D17: mov     [esp+18h+var_4], 0
 0x6A1D1F: mov     dword ptr [esi], offset ??_7MagicSprayProjectile@@6BMagicSprayProjectile@@@; const MagicSprayProjectile::`vftable'{for `MagicSprayProjectile'}
 0x6A1D25: mov     dword ptr [esi+18h], offset ??_7MagicSprayProjectile@@6BTESChildCell@@@; const MagicSprayProjectile::`vftable'{for `TESChildCell'}
-0x6A1D2C: call    sub_65B750
+0x6A1D2C: call    MobileObject_EnsureActorCharacterController
 0x6A1D31: mov     eax, esi
 0x6A1D33: mov     ecx, [esp+18h+var_C]
 0x6A1D37: mov     large fs:0, ecx
@@ -49,3 +49,12 @@
 0x6A1D3F: pop     esi
 0x6A1D40: add     esp, 10h
 0x6A1D43: retn    28h ; '('
+0x9C6000: mov     ecx, [ebp-10h]
+0x9C6003: jmp     sub_69FA60
+0x9C6008: mov     edx, [esp+arg_4]
+0x9C600C: lea     eax, [edx-8]
+0x9C600F: mov     ecx, [edx-0Ch]
+0x9C6012: xor     ecx, eax
+0x9C6014: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6019: mov     eax, offset stru_AEE640
+0x9C601E: jmp     ___CxxFrameHandler3

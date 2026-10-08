@@ -4,7 +4,7 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_GetScript@<eax>(
         double st6_0@<st1>,
         int a4@<edi>,
         int a5@<esi>,
-        int a6,
+        double a6@<st0>,
         int a7,
         int a8,
         int a9,
@@ -63,31 +63,31 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_GetScript@<eax>(
         int a62,
         int a63)
 {
-  int a64; // [esp+ECh] [ebp+ECh]
-  void *v64; // eax
-  char *v65; // ebx
-  int v66; // eax
+  int a64; // [esp+E8h] [ebp+E8h]
+  int a65; // [esp+ECh] [ebp+ECh]
+  void *v65; // eax
+  char *v66; // ebx
+  int v67; // eax
 
-  v64 = OblivionDynamicCast(
+  v65 = OblivionDynamicCast( /*0x46a0c4*/
           (void *)a1[1],
           0,
           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
           &TESScriptableForm `RTTI Type Descriptor',
           0);
-  if ( v64 )
-    v65 = *((char **)v64 + 1);
+  if ( v65 ) /*0x46a0ce*/
+    v66 = *((char **)v65 + 1); /*0x46a0d0*/
   else
-    v65 = 0;
-  v66 = *a1;
-  if ( !v65 )
-    return TESContainer_CopyContentsToRef_::ContentLoop_AddForms(
+    v66 = 0; /*0x46a0d5*/
+  v67 = *a1; /*0x46a0d9*/
+  if ( !v66 ) /*0x46a0e0*/
+    return TESContainer_CopyContentsToRef_::ContentLoop_AddForms( /*0x46a0e0*/
              a5,
-             v66,
+             v67,
              (int)a1,
              a4,
              st5_0,
              st6_0,
-             a6,
              a7,
              a8,
              a9,
@@ -95,71 +95,8 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_GetScript@<eax>(
              a11,
              a12,
              a13,
+             a14,
              (int)a1,
-             a15,
-             a16,
-             a17,
-             a18,
-             a19,
-             a20,
-             a21,
-             a22,
-             a23,
-             a24,
-             a25,
-             a26,
-             a27,
-             a28,
-             a29,
-             a30,
-             a31,
-             a32,
-             a33,
-             a34,
-             a35,
-             a36,
-             a37,
-             a38,
-             a39,
-             a40,
-             a41,
-             a42,
-             a43,
-             a44,
-             a45,
-             a46,
-             a47,
-             a48,
-             a49,
-             a50,
-             a51,
-             a52,
-             a53,
-             a54,
-             a55,
-             a56,
-             a57,
-             a58,
-             a59,
-             a60,
-             a61,
-             a62);
-  if ( v66 <= 0 )
-    return TESContainer_CopyContentsToRef_::ContentLoop_Next(
-             a5,
-             a4,
-             st5_0,
-             st6_0,
-             a6,
-             a7,
-             a8,
-             a9,
-             a10,
-             a11,
-             a12,
-             a13,
-             (int)a1,
-             a15,
              a16,
              a17,
              a18,
@@ -208,11 +145,77 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_GetScript@<eax>(
              a61,
              a62,
              a63);
+  if ( v67 <= 0 ) /*0x46a0e8*/
+    return TESContainer_CopyContentsToRef_::ContentLoop_Next( /*0x46a0e8*/
+             a5,
+             a4,
+             st5_0,
+             st6_0,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a1,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24,
+             a25,
+             a26,
+             a27,
+             a28,
+             a29,
+             a30,
+             a31,
+             a32,
+             a33,
+             a34,
+             a35,
+             a36,
+             a37,
+             a38,
+             a39,
+             a40,
+             a41,
+             a42,
+             a43,
+             a44,
+             a45,
+             a46,
+             a47,
+             a48,
+             a49,
+             a50,
+             a51,
+             a52,
+             a53,
+             a54,
+             a55,
+             a56,
+             a57,
+             a58,
+             a59,
+             a60,
+             a61,
+             a62,
+             a63,
+             a64,
+             a65);
   return TESContainer_CopyContentsToRef_::AddExtraScriptLoop(
-           v65,
+           v66,
            (int)a1,
            st5_0,
            st6_0,
+           a4,
            a6,
            a7,
            a8,
@@ -221,9 +224,9 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_GetScript@<eax>(
            a11,
            a12,
            a13,
+           a14,
            (int)a1,
-           v66,
-           a16,
+           v67,
            a17,
            a18,
            a19,
@@ -270,6 +273,5 @@ int __userpurge TESContainer_CopyContentsToRef_::ContentLoop_GetScript@<eax>(
            a60,
            a61,
            a62,
-           a63,
-           a64);
+           a63);
 }

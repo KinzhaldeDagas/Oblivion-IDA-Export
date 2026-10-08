@@ -1,4 +1,4 @@
-0x5622B0: push    0FFFFFFFFh
+0x5622B0: push    0FFFFFFFFh; Verified leaf layout: +0x18 leafGeometryDataByLOD and +0x28 leafShaderPropertiesByLOD are allocated by leaf LOD count and populated. +0x30 leafCachedPropertiesByLOD is also allocated/zeroed, but no per-slot write occurs in this stock builder; CreateArt only attaches an entry if present. Its field role is Candidate and population source is Unknown.
 0x5622B2: push    offset SEH_5622B0
 0x5622B7: mov     eax, large fs:0
 0x5622BD: push    eax
@@ -14,19 +14,19 @@
 0x5622D7: mov     large fs:0, eax
 0x5622DD: mov     esi, ecx
 0x5622DF: mov     [esp+1F8h+var_190], esi
-0x5622E3: lea     ecx, [esp+1F8h+Src]
-0x5622EA: call    sub_7879A0
+0x5622E3: lea     ecx, [esp+1F8h+Src]; this
+0x5622EA: call    OB_SpeedTreeGeometryOutput_init_010201A0; 2026-05-26 SpeedTreeOBSE: identified temporary SGeometry/output initializer used by the optional 360 diagnostic candidate export probe before stock GetGeometry(0x08). Must not be treated as live render-resource allocation.
 0x5622EF: xor     ebx, ebx
-0x5622F1: lea     ecx, [esp+1F8h+var_154]
+0x5622F1: lea     ecx, [esp+1F8h+texturesOut]; this
 0x5622F8: mov     [esp+1F8h+var_4], ebx
-0x5622FF: call    sub_786FA0
-0x562304: mov     [esp+1F8h+var_1C4], ebx
-0x562308: mov     ecx, [esi+0Ch]
+0x5622FF: call    CSpeedTreeRT__STextures_ctor; SpeedTreeOBSE 2026-05-30 frond restoration: initializes the 7-dword compact texture summary before optional generated-frond texture recovery calls 0x78A890.
+0x562304: mov     [esp+1F8h+stspData], ebx
+0x562308: mov     ecx, [esi+0Ch]; this
 0x56230B: cmp     ecx, ebx
 0x56230D: mov     byte ptr [esp+1F8h+var_4], 2
-0x562315: mov     [esp+1F8h+var_1D9], bl
+0x562315: mov     [esp+1F8h+var_1D9], bl; Initialize multi-leaf-texture-name flag false.
 0x562319: jz      loc_562DCD
-0x56231F: call    sub_78A740
+0x56231F: call    CSpeedTreeRT__GetLeafLodSizeAdjustments; CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.
 0x562324: test    eax, eax
 0x562326: jz      loc_562DCD
 0x56232C: cmp     dword ptr [esi+8], 2
@@ -36,13 +36,13 @@
 0x56233B: jz      short loc_56235D
 0x56233D: mov     ecx, [eax-4]
 0x562340: lea     edi, [eax-4]
-0x562343: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x562343: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x562348: push    ecx; int
 0x562349: push    4; unsigned int
 0x56234B: push    eax; void *
 0x56234C: call    $LN21
 0x562351: push    edi
-0x562352: call    FormHeapFree
+0x562352: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x562357: add     esp, 4
 0x56235A: mov     [esi+18h], ebx
 0x56235D: mov     eax, [esi+28h]
@@ -50,46 +50,46 @@
 0x562362: jz      short loc_562384
 0x562364: mov     edx, [eax-4]
 0x562367: lea     edi, [eax-4]
-0x56236A: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x56236A: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x56236F: push    edx; int
 0x562370: push    4; unsigned int
 0x562372: push    eax; void *
 0x562373: call    $LN21
 0x562378: push    edi
-0x562379: call    FormHeapFree
+0x562379: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56237E: add     esp, 4
 0x562381: mov     [esi+28h], ebx
-0x562384: mov     ecx, [esi+0Ch]
+0x562384: mov     ecx, [esi+0Ch]; this
 0x562387: cmp     ecx, ebx
 0x562389: jz      short loc_56239C
-0x56238B: call    sub_787200
+0x56238B: call    CSpeedTreeRT__GetNumLeafLodLevels; CSpeedTreeRT::GetNumLeafLodLevels. Returns the 16-bit leaf LOD count at CTreeEngine+0xC0.
 0x562390: movzx   eax, ax
 0x562393: cmp     ax, bx
 0x562396: mov     [esp+1F8h+var_1B0], eax
 0x56239A: ja      short loc_5623B2
-0x56239C: lea     ecx, [esp+1F8h+var_1C4]; this
+0x56239C: lea     ecx, [esp+1F8h+stspData]; slot
 0x5623A0: mov     byte ptr [esp+1F8h+var_4], 1
-0x5623A8: call    sub_7016A0
+0x5623A8: call    NiPointerSlot_Release
 0x5623AD: jmp     loc_562DCD
-0x5623B2: mov     ecx, [esi+0Ch]
-0x5623B5: lea     eax, [esp+1F8h+var_154]
-0x5623BC: push    eax
-0x5623BD: call    sub_78A890
-0x5623C2: mov     eax, [esp+1F8h+var_150]
+0x5623B2: mov     ecx, [esi+0Ch]; this
+0x5623B5: lea     eax, [esp+1F8h+texturesOut]
+0x5623BC: push    eax; texturesOut
+0x5623BD: call    CSpeedTreeRT__GetTextures; SpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.
+0x5623C2: mov     eax, [esp+1F8h+texturesOut.leafTextureCount]
 0x5623C9: cmp     ax, bx
 0x5623CC: jbe     short loc_56239C
-0x5623CE: mov     ecx, [esp+1F8h+var_14C]
+0x5623CE: mov     ecx, [esp+1F8h+texturesOut.leafTextureFilenames]
 0x5623D5: movzx   edx, ax
 0x5623D8: mov     ebp, 1
 0x5623DD: mov     [esp+1F8h+var_1E4], ecx
 0x5623E1: mov     [esp+1F8h+var_1D8], edx
-0x5623E5: cmp     bp, word ptr [esp+1F8h+var_150]
+0x5623E5: cmp     bp, word ptr [esp+1F8h+texturesOut.leafTextureCount]
 0x5623ED: jnb     short loc_56244E
 0x5623EF: mov     eax, [esp+1F8h+var_1E4]
 0x5623F3: mov     ecx, [eax]
-0x5623F5: mov     eax, [esp+1F8h+var_14C]
+0x5623F5: mov     eax, [esp+1F8h+texturesOut.leafTextureFilenames]
 0x5623FC: mov     [esp+1F8h+var_1E0], ecx
-0x562400: mov     ecx, [esp+1F8h+var_150]
+0x562400: mov     ecx, [esp+1F8h+texturesOut.leafTextureCount]
 0x562407: movzx   edx, bp
 0x56240A: sub     ecx, ebp
 0x56240C: lea     edi, [eax+edx*4]
@@ -114,7 +114,7 @@
 0x56243A: sbb     eax, 0FFFFFFFFh
 0x56243D: test    eax, eax
 0x56243F: jz      short loc_562446
-0x562441: mov     [esp+1F8h+var_1D9], 1
+0x562441: mov     [esp+1F8h+var_1D9], 1; Set multi-name flag when any two reported leaf texture filenames differ; this selects the alternate UV V-order below.
 0x562446: add     edi, 4
 0x562449: sub     ebx, 1
 0x56244C: jnz     short loc_562412
@@ -143,7 +143,7 @@
 0x56248F: cmp     eax, ebx
 0x562491: mov     byte ptr [esp+1F8h+var_4], 3
 0x562499: jz      short loc_5624B5
-0x56249B: push    offset sub_7016A0; a5
+0x56249B: push    offset NiPointerSlot_Release; a5
 0x5624A0: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x5624A5: push    edi; size
 0x5624A6: lea     ebp, [eax+4]
@@ -174,7 +174,7 @@
 0x5624ED: cmp     eax, ebx
 0x5624EF: mov     byte ptr [esp+1F8h+var_4], 4
 0x5624F7: jz      short loc_562513
-0x5624F9: push    offset sub_7016A0; a5
+0x5624F9: push    offset NiPointerSlot_Release; a5
 0x5624FE: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x562503: push    edi; size
 0x562504: lea     ebp, [eax+4]
@@ -205,7 +205,7 @@
 0x56254B: cmp     eax, ebx
 0x56254D: mov     byte ptr [esp+1F8h+var_4], 5
 0x562555: jz      short loc_562571
-0x562557: push    offset sub_7016A0; a5
+0x562557: push    offset NiPointerSlot_Release; a5
 0x56255C: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x562561: push    edi; size
 0x562562: lea     ebp, [eax+4]
@@ -286,8 +286,8 @@
 0x56263C: test    eax, eax
 0x56263E: mov     byte ptr [esp+1F8h+var_4], 6
 0x562646: jz      short loc_562653
-0x562648: mov     ecx, eax
-0x56264A: call    sub_7F1810
+0x562648: mov     ecx, eax; this
+0x56264A: call    OB_STLSPData_ctor_010201A0; STLSPData ctor: allocates 0x300-byte shared leaf shader data buffer at +0x08 and clears scalar fields +0x0C..+0x14.
 0x56264F: mov     ebp, eax
 0x562651: jmp     short loc_562655
 0x562653: xor     ebp, ebp
@@ -328,7 +328,7 @@
 0x5626B2: jz      short loc_56271B
 0x5626B4: fld     dword ptr [eax+3Ch]
 0x5626B7: mov     eax, [esi+20h]
-0x5626BA: mov     edi, [esp+1F8h+arg_0]
+0x5626BA: mov     edi, [esp+1F8h+mode]
 0x5626C1: fstp    [esp+1F8h+var_1E0]
 0x5626C5: test    edi, edi
 0x5626C7: fld     [esp+1F8h+var_1E0]
@@ -359,7 +359,7 @@
 0x562718: fstp    dword ptr [ebx+1Ch]
 0x56271B: xor     ebx, ebx
 0x56271D: cmp     word ptr [esp+1F8h+var_1B0], bx
-0x562722: mov     [esp+1F8h+var_1A8], ebx
+0x562722: mov     dword ptr [esp+1F8h+leafLodIndex], ebx
 0x562726: jbe     loc_562D9D
 0x56272C: xor     edi, edi
 0x56272E: mov     [esp+1F8h+var_1D8], edi
@@ -370,7 +370,7 @@
 0x562739: lea     ecx, [esp+208h+Src]
 0x562740: push    ecx; Src
 0x562741: mov     ecx, [esi+0Ch]
-0x562744: call    sub_78C6F0
+0x562744: call    CSpeedTreeRT__GetGeometry; Builder loops each explicit leaf LOD index 0..GetNumLeafLodLevels()-1 and fetches that LOD's own persistent record. Both/all LODs use the same v3 packing recipe but retain per-LOD packedColor arrays.
 0x562749: mov     eax, [esp+1F8h+var_B4]
 0x562750: test    ax, ax
 0x562753: lea     edx, ds:0[eax*4]
@@ -521,12 +521,12 @@
 0x56293B: mov     [esp+1F8h+var_1D0], eax
 0x56293F: fild    [esp+1F8h+var_1D0]
 0x562943: fdiv    qword ptr ds:0A3DDD8h
-0x562949: fstp    [esp+1F8h+var_1A0]
+0x562949: fstp    [esp+1F8h+var_1A0]; OBLIVION AUTHORITY (2026-08-24): Reads byte +1 of packedColors[leaf] (green channel of the per-leaf packed DWORD at SLodGeometry+0x24), then divides by 255.0. This byte is not the CBillboardLeaf colorScaleByte itself; generated leaves may already have colorScale applied when their packed color was produced.
 0x56294D: fld1
 0x56294F: fcomp   [esp+1F8h+var_1A0]
 0x562953: fnstsw  ax
 0x562955: test    ah, 41h
-0x562958: jp      short loc_562964
+0x562958: jp      short loc_562964; If green/255 reaches 1.0 (green=255), replace with 0.99f so the fractional field does not carry into the integer LeafBase selector. Green=0 remains exactly 0.
 0x56295A: fld     dword ptr ds:0A65520h
 0x562960: fstp    [esp+1F8h+var_1A0]
 0x562964: mov     eax, [esp+1F8h+var_A4]
@@ -535,7 +535,7 @@
 0x562972: mov     edi, ecx
 0x562974: shl     edi, 4
 0x562977: add     edi, [esp+1F8h+var_1E0]
-0x56297B: mov     [esp+1F8h+var_1B8], eax
+0x56297B: mov     [esp+1F8h+var_1B8], eax; Leaf-card builder consumes the already prepared direct/mirrored texcoord pointer. It reorders pairs for the multi-filename case but applies no further sign, half-texel, scale, or bias transform.
 0x56297F: lea     ecx, [edx+ecx*8]
 0x562982: add     eax, 1Ch
 0x562985: mov     [esp+1F8h+var_1C8], 2
@@ -543,7 +543,7 @@
 0x562991: mov     [esp+1F8h+var_1AC], eax
 0x562995: mov     [esp+1F8h+var_1D0], 4
 0x56299D: cmp     [esp+1F8h+var_1D9], 0
-0x5629A2: jz      short loc_5629DE
+0x5629A2: jz      short loc_5629DE; If any leaf texture filenames differ, copy four output pairs as (src0,src7),(src2,src5),(src4,src3),(src6,src1), reversing the conventional quad V order without numeric offsets.
 0x5629A4: mov     edx, [esp+1F8h+var_1B8]
 0x5629A8: fld     dword ptr [edx]
 0x5629AA: mov     eax, [esp+1F8h+var_1AC]
@@ -559,7 +559,7 @@
 0x5629DC: jmp     short loc_562A0D
 0x5629DE: mov     eax, [esp+1F8h+var_1B8]
 0x5629E2: fld     dword ptr [eax]
-0x5629E4: fstp    [esp+1F8h+var_1D4]
+0x5629E4: fstp    [esp+1F8h+var_1D4]; If all leaf texture filenames are equal, copy authored pairs verbatim: (src0,src1),(src2,src3),(src4,src5),(src6,src7).
 0x5629E8: fld     dword ptr [eax+4]
 0x5629EB: fstp    [esp+1F8h+var_1C0]
 0x5629EF: fld     [esp+1F8h+var_1D4]
@@ -569,7 +569,7 @@
 0x5629FF: fstp    [esp+1F8h+var_178]
 0x562A06: mov     edx, [esp+1F8h+var_178]
 0x562A0D: mov     eax, [esp+1F8h+var_1B4]
-0x562A11: mov     [eax], ecx
+0x562A11: mov     [eax], ecx; Store selected authored U/V floats directly. No scale, bias, atlas half-texel inset, or runtime LOD adjustment is applied.
 0x562A13: mov     [eax+4], edx
 0x562A16: mov     ecx, [esp+1F8h+var_AC]
 0x562A1D: mov     eax, [esp+1F8h+var_198]
@@ -586,19 +586,19 @@
 0x562A44: fild    [esp+1F8h+var_1D4]
 0x562A48: mov     edx, [esp+1F8h+var_1E4]
 0x562A4C: fadd    [esp+1F8h+var_1A0]
-0x562A50: fstp    [esp+1F8h+var_180]
+0x562A50: fstp    [esp+1F8h+var_180]; OBLIVION AUTHORITY (2026-08-24): Packs STSP v3.z = cornerIndex + 4*unsigned leafCardIndex + greenFraction. Integer component drives LeafBase relative-addressing; VS1.1 EXPP.y recovers the fractional dimming term. Zero fraction removes ambient+directional RGB; point-program contribution is added separately.
 0x562A54: fld     dword ptr [edx+ecx]
 0x562A57: mov     ecx, [esp+1F8h+var_88]
 0x562A5E: movzx   edx, byte ptr [eax+ecx]
 0x562A62: fstp    [esp+1F8h+var_1C0]
 0x562A66: mov     eax, [esp+1F8h+var_190]
-0x562A6A: mov     ecx, [eax+0Ch]
+0x562A6A: mov     ecx, [eax+0Ch]; this
 0x562A6D: add     edx, edx
 0x562A6F: add     edx, edx
 0x562A71: mov     [esp+1F8h+var_1D4], edx
 0x562A75: fild    [esp+1F8h+var_1D4]
 0x562A79: fstp    [esp+1F8h+var_1D4]
-0x562A7D: call    sub_78A740
+0x562A7D: call    CSpeedTreeRT__GetLeafLodSizeAdjustments; CSpeedTreeRT::GetLeafLodSizeAdjustments. Lazily allocates one float per leaf LOD and fills entry i as 1.0 + leafSizeIncreaseFactor*i. This older Bethesda API is absent from the supplied 4.1 header but is named in Oblivion diagnostics and Fallout symbols.
 0x562A82: mov     ecx, [esp+1F8h+var_1D8]
 0x562A86: fld     dword ptr [eax+ecx]
 0x562A89: add     edi, 10h
@@ -621,7 +621,7 @@
 0x562AE6: add     [esp+1F8h+var_1B8], eax
 0x562AEA: add     [esp+1F8h+var_1B4], eax
 0x562AEE: mov     edx, [esp+1F8h+var_164]
-0x562AF5: mov     [edi-8], ecx
+0x562AF5: mov     [edi-8], ecx; Store packed selector+dimmer into the third float of the 16-byte STSP vertex record, consumed as BLENDINDICES v3.z by every leaf VS variant.
 0x562AF8: mov     eax, 1
 0x562AFD: add     [esp+1F8h+var_1C8], eax
 0x562B01: sub     [esp+1F8h+var_1D0], eax
@@ -633,7 +633,7 @@
 0x562B1B: add     [esp+1F8h+var_1A4], 6
 0x562B20: add     [esp+1F8h+var_1E4], 4
 0x562B25: lea     edi, [ecx+3]
-0x562B28: mov     [edx+eax*2], di
+0x562B28: mov     [edx+eax*2], di; First leaf-card triangle indices: (base+3, base+1, base+2).
 0x562B2C: lea     edi, [ecx+1]
 0x562B2F: mov     [edx+eax*2+2], di
 0x562B34: lea     edi, [ecx+2]
@@ -641,7 +641,7 @@
 0x562B3C: lea     edi, [ecx+1]
 0x562B3F: mov     [edx+eax*2+8], di
 0x562B44: lea     edi, [ecx+3]
-0x562B47: mov     [edx+eax*2+6], cx
+0x562B47: mov     [edx+eax*2+6], cx; Second leaf-card triangle indices: (base+0, base+1, base+3).
 0x562B4C: mov     [edx+eax*2+0Ah], di
 0x562B51: mov     edi, [esp+1F8h+var_18C]
 0x562B55: mov     eax, 1
@@ -673,7 +673,7 @@
 0x562BAA: push    edi
 0x562BAB: push    edx
 0x562BAC: mov     ecx, eax
-0x562BAE: call    sub_71FB40
+0x562BAE: call    NiTriShapeData_ConstructWithData; Build NiTriShapeData with 4 vertices/card, the directly copied UV array, and 6 indices/card. Geometry was captured from this explicit leaf LOD.
 0x562BB3: mov     [esp+1F8h+var_1E4], eax
 0x562BB7: jmp     short loc_562BC5
 0x562BB9: mov     [esp+1F8h+var_1E4], 0
@@ -714,12 +714,12 @@
 0x562C24: test    eax, eax
 0x562C26: mov     byte ptr [esp+1F8h+var_4], 8
 0x562C2E: jz      short loc_562C3B
-0x562C30: mov     ecx, eax
-0x562C32: call    sub_7F2360
+0x562C30: mov     ecx, eax; this
+0x562C32: call    OB_STSPData_ctor_010201A0; STSPData ctor: NiRefObject with data pointer +0x08 null and 16-bit count/ownership gate +0x0C zero.
 0x562C37: mov     ebp, eax
 0x562C39: jmp     short loc_562C3D
 0x562C3B: xor     ebp, ebp
-0x562C3D: mov     ebx, [esp+1F8h+var_1C4]
+0x562C3D: mov     ebx, [esp+1F8h+stspData]
 0x562C41: cmp     ebx, ebp
 0x562C43: mov     byte ptr [esp+1F8h+var_4], 2
 0x562C4B: jz      short loc_562C7D
@@ -737,7 +737,7 @@
 0x562C67: call    eax
 0x562C69: test    ebp, ebp
 0x562C6B: mov     ebx, ebp
-0x562C6D: mov     [esp+1F8h+var_1C4], ebx
+0x562C6D: mov     [esp+1F8h+stspData], ebx
 0x562C71: jz      short loc_562C7D
 0x562C73: add     ebp, 4
 0x562C76: push    ebp; lpAddend
@@ -745,7 +745,7 @@
 0x562C7D: mov     ecx, [esp+1F8h+var_1E0]
 0x562C81: mov     dx, word ptr [esp+1F8h+var_19C]
 0x562C86: push    0B0h ; '°'; Size
-0x562C8B: mov     [ebx+8], ecx
+0x562C8B: mov     [ebx+8], ecx; Attach the freshly built 16-byte-per-vertex STSP float4 array to this leaf LOD property. Texture replacement does not rewrite this stream.
 0x562C8E: mov     [ebx+0Ch], dx
 0x562C92: call    FormHeapAlloc
 0x562C97: add     esp, 4
@@ -754,12 +754,12 @@
 0x562CA0: mov     byte ptr [esp+1F8h+var_4], 9
 0x562CA8: jz      short loc_562CC1
 0x562CAA: mov     ecx, [esi+20h]
-0x562CAD: push    ecx
-0x562CAE: mov     ecx, [esp+1FCh+var_1A8]
-0x562CB2: push    ebx
-0x562CB3: push    ecx
+0x562CAD: push    ecx; stlspData
+0x562CAE: mov     ecx, dword ptr [esp+1FCh+leafLodIndex]
+0x562CB2: push    ebx; stspData
+0x562CB3: push    ecx; leafLodIndex
 0x562CB4: mov     ecx, eax; this
-0x562CB6: call    ??0SpeedTreeLeafShaderProperty@@QAE@XZ; SpeedTreeLeafShaderProperty::SpeedTreeLeafShaderProperty(void)
+0x562CB6: call    ??0SpeedTreeLeafShaderProperty@@QAE@XZ; SpeedTreeLeafShaderProperty ctor: LightingProperty base with STSPData, then stores STLSPData ref at +0xA8 and leaf LOD index word at +0xAC.
 0x562CBB: mov     [esp+1F8h+var_1E4], eax
 0x562CBF: jmp     short loc_562CC9
 0x562CC1: mov     [esp+1F8h+var_1E4], 0
@@ -792,11 +792,11 @@
 0x562D0E: call    dword ptr ds:0A28078h
 0x562D14: mov     ecx, [esi+28h]
 0x562D17: mov     ecx, [edi+ecx]
-0x562D1A: mov     eax, [esi+38h]
+0x562D1A: mov     eax, [esi+38h]; SpeedTreeOBSE 2026-07-14: stock leaf-property construction propagates the model leaf texture at model+0x38 through the property setter; renderer later consumes property+0x9C.
 0x562D1D: mov     edx, [ecx]
 0x562D1F: push    eax
 0x562D20: mov     eax, [edx+7Ch]
-0x562D23: call    eax
+0x562D23: call    eax; Assign the same BSTreeModel leaf texture (+0x38) to every leaf-LOD shader property.
 0x562D25: mov     ecx, [esi+28h]
 0x562D28: mov     ecx, [edi+ecx]
 0x562D2B: mov     edx, [ecx]
@@ -817,7 +817,7 @@
 0x562D54: mov     eax, [esi+18h]
 0x562D57: mov     eax, [edi+eax]
 0x562D5A: mov     cx, [eax+2Eh]
-0x562D5E: mov     ebx, [esp+1F8h+var_1A8]
+0x562D5E: mov     ebx, dword ptr [esp+1F8h+leafLodIndex]
 0x562D62: and     cx, 0FFFh
 0x562D67: or      cx, 4000h
 0x562D6C: mov     [eax+2Eh], cx
@@ -827,15 +827,15 @@
 0x562D7A: mov     eax, [esi+18h]
 0x562D7D: mov     eax, [edi+eax]
 0x562D80: mov     byte ptr [eax+31h], 1Fh
-0x562D84: add     ebx, 1
+0x562D84: add     ebx, 1; OBLIVION AUTHORITY (2026-08-24): End of explicit leaf-LOD loop. Loop bound is CSpeedTreeRT::GetNumLeafLodLevels; therefore each persistent SLodGeometry LOD gets its own packedColors-derived STSP stream.
 0x562D87: add     edi, 4
 0x562D8A: cmp     bx, word ptr [esp+1F8h+var_1B0]
-0x562D8F: mov     [esp+1F8h+var_1A8], ebx
+0x562D8F: mov     dword ptr [esp+1F8h+leafLodIndex], ebx
 0x562D93: mov     [esp+1F8h+var_1D8], edi
 0x562D97: jb      loc_562732
-0x562D9D: mov     ecx, [esi+0Ch]
-0x562DA0: call    sub_787210
-0x562DA5: mov     esi, [esp+1F8h+var_1C4]
+0x562D9D: mov     ecx, [esi+0Ch]; this
+0x562DA0: call    CSpeedTreeRT__FreeLeafLODDataArrays; CSpeedTreeRT::FreeLeafLODDataArrays. If leaf geometry exists, delegates to CLeafGeometry::FreeLODDataArrays.
+0x562DA5: mov     esi, [esp+1F8h+stspData]
 0x562DA9: test    esi, esi
 0x562DAB: mov     byte ptr [esp+1F8h+var_4], 1
 0x562DB3: jz      short loc_562DCD
@@ -849,12 +849,12 @@
 0x562DC7: push    1
 0x562DC9: mov     ecx, esi
 0x562DCB: call    eax
-0x562DCD: lea     ecx, [esp+1F8h+var_154]
+0x562DCD: lea     ecx, [esp+1F8h+texturesOut]; this
 0x562DD4: mov     byte ptr [esp+1F8h+var_4], 0
-0x562DDC: call    sub_786FC0
-0x562DE1: lea     ecx, [esp+1F8h+Src]
+0x562DDC: call    CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.
+0x562DE1: lea     ecx, [esp+1F8h+Src]; this
 0x562DE8: mov     [esp+1F8h+var_4], 0FFFFFFFFh
-0x562DF3: call    sub_787B20
+0x562DF3: call    OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.
 0x562DF8: mov     ecx, [esp+1F8h+var_C]
 0x562DFF: mov     large fs:0, ecx
 0x562E06: pop     ecx
@@ -864,3 +864,51 @@
 0x562E0A: pop     ebx
 0x562E0B: add     esp, 1E4h
 0x562E11: retn    4
+0x9BD200: lea     ecx, [ebp-138h]; this
+0x9BD206: jmp     OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.
+0x9BD20B: lea     ecx, [ebp-154h]; this
+0x9BD211: jmp     CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.
+0x9BD216: lea     ecx, [ebp-1C4h]; slot
+0x9BD21C: jmp     NiPointerSlot_Release
+0x9BD221: mov     eax, [ebp-1CCh]
+0x9BD227: push    eax
+0x9BD228: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD22D: pop     ecx
+0x9BD22E: retn
+0x9BD22F: mov     eax, [ebp-1CCh]
+0x9BD235: push    eax
+0x9BD236: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD23B: pop     ecx
+0x9BD23C: retn
+0x9BD23D: mov     eax, [ebp-1CCh]
+0x9BD243: push    eax
+0x9BD244: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD249: pop     ecx
+0x9BD24A: retn
+0x9BD24B: mov     eax, [ebp-1CCh]
+0x9BD251: push    eax
+0x9BD252: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD257: pop     ecx
+0x9BD258: retn
+0x9BD259: mov     eax, [ebp-1CCh]
+0x9BD25F: push    eax
+0x9BD260: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD265: pop     ecx
+0x9BD266: retn
+0x9BD267: mov     eax, [ebp-1CCh]
+0x9BD26D: push    eax
+0x9BD26E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD273: pop     ecx
+0x9BD274: retn
+0x9BD275: mov     eax, [ebp-1CCh]
+0x9BD27B: push    eax
+0x9BD27C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD281: pop     ecx
+0x9BD282: retn
+0x9BD283: mov     edx, [esp+arg_4]
+0x9BD287: lea     eax, [edx-1E8h]
+0x9BD28D: mov     ecx, [edx-1ECh]
+0x9BD293: xor     ecx, eax
+0x9BD295: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD29A: mov     eax, offset stru_AE6C4C
+0x9BD29F: jmp     ___CxxFrameHandler3

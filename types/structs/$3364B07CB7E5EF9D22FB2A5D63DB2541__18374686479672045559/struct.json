@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$3364B07CB7E5EF9D22FB2A5D63DB2541",
+  "definition": "union $3364B07CB7E5EF9D22FB2A5D63DB2541\n{\n_RTL_BALANCED_NODE_0 *Children[2];\n$441ED027C95ABA6F68E940AE0255573A s;\n}\n",
   "id": 18374686479672045559,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Children",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "_RTL_BALANCED_NODE_0 *[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "s",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "$441ED027C95ABA6F68E940AE0255573A"
     }
   ],
   "name": "$3364B07CB7E5EF9D22FB2A5D63DB2541",
+  "ordinal": 8153,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 8
 }

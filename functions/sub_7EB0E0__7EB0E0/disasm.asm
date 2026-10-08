@@ -1,4 +1,4 @@
-0x7EB0E0: fldz
+0x7EB0E0: fldz; MoonSugarEffect decode: Hit/double-vision active predicate; active when flt_B46124 or flt_B46120 is positive.
 0x7EB0E2: fcom    dword ptr ds:0B46124h
 0x7EB0E8: fnstsw  ax
 0x7EB0EA: test    ah, 5

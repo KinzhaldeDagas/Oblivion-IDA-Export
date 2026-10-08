@@ -17,7 +17,7 @@
 0x4A99B6: mov     [esp+18h+var_4], 0
 0x4A99BE: jz      short loc_4A99D3
 0x4A99C0: push    eax
-0x4A99C1: call    FormHeapFree
+0x4A99C1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A99C6: add     esp, 4
 0x4A99C9: mov     dword ptr [esi+94h], 0
 0x4A99D3: mov     ecx, esi
@@ -31,3 +31,12 @@
 0x4A99F5: pop     esi
 0x4A99F6: add     esp, 10h
 0x4A99F9: retn
+0x9B2B40: mov     ecx, [ebp-10h]; this
+0x9B2B43: jmp     TESForm_destr
+0x9B2B48: mov     edx, [esp+arg_4]
+0x9B2B4C: lea     eax, [edx-8]
+0x9B2B4F: mov     ecx, [edx-0Ch]
+0x9B2B52: xor     ecx, eax
+0x9B2B54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2B59: mov     eax, offset stru_ADE9F0
+0x9B2B5E: jmp     ___CxxFrameHandler3

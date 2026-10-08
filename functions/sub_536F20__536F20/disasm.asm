@@ -4,12 +4,12 @@
 0x536F27: test    ecx, ecx
 0x536F29: jz      short loc_536F60
 0x536F2B: push    esi
-0x536F2C: call    TESObjectREFR_GetParentCell
+0x536F2C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x536F31: mov     esi, eax
 0x536F33: test    esi, esi
 0x536F35: jz      short loc_536F5B
 0x536F37: mov     ecx, esi; this
-0x536F39: call    TESObjectCELL_IsInterior
+0x536F39: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x536F3E: test    al, al
 0x536F40: jz      short loc_536F4C
 0x536F42: lea     ecx, [esi+28h]

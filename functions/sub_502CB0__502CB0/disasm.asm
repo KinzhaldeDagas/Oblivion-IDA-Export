@@ -2,8 +2,8 @@
 0x502CB1: mov     edx, [esp+4+l]
 0x502CB5: fldz
 0x502CB7: push    edi
-0x502CB8: mov     edi, dword ptr [esp+8+arg_18]
-0x502CBC: lea     eax, [esp+8+var_4]
+0x502CB8: mov     edi, [esp+8+arg_18]
+0x502CBC: lea     eax, [esp+8+stage]
 0x502CC0: fstp    qword ptr [edi]
 0x502CC2: push    eax
 0x502CC3: mov     eax, [esp+0Ch+arg_10]
@@ -21,21 +21,21 @@
 0x502CE4: push    eax; a3
 0x502CE5: push    ecx; a2
 0x502CE6: push    edx; a1
-0x502CE7: mov     dword ptr [esp+2Ch+arg_18], 0
-0x502CEF: mov     [esp+2Ch+var_4], 0
-0x502CF7: call    Script_ExtractArgs
+0x502CE7: mov     [esp+2Ch+arg_18], 0
+0x502CEF: mov     dword ptr [esp+2Ch+stage], 0
+0x502CF7: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502CFC: add     esp, 24h
 0x502CFF: test    al, al
 0x502D01: jnz     short loc_502D06
 0x502D03: pop     edi
 0x502D04: pop     ecx
 0x502D05: retn
-0x502D06: mov     ecx, dword ptr [esp+8+arg_18]
+0x502D06: mov     ecx, [esp+8+arg_18]; this
 0x502D0A: test    ecx, ecx
 0x502D0C: jz      short loc_502D20
-0x502D0E: mov     eax, [esp+8+var_4]
-0x502D12: push    eax
-0x502D13: call    sub_529AC0
+0x502D0E: mov     eax, dword ptr [esp+8+stage]
+0x502D12: push    eax; stage
+0x502D13: call    TESQuest__SetStage
 0x502D18: test    al, al
 0x502D1A: jz      short loc_502D20
 0x502D1C: fld1

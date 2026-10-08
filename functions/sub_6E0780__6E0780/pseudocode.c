@@ -1,4 +1,4 @@
-bool __stdcall sub_6E0780(int a1)
+bool __thiscall sub_6E0780(_DWORD *this, int a2)
 {
-  return (unsigned __int8)sub_6EC5C0(a1) != 0;
+  return j_NiSingleInterpController_IsEqual(this, a2); /*0x6e078f*/
 }

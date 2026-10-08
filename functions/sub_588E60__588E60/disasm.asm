@@ -22,7 +22,7 @@
 0x588E91: push    edi
 0x588E92: mov     ecx, ebx
 0x588E94: mov     edi, offset aTileptr; "Tileptr"
-0x588E99: call    sub_452A60
+0x588E99: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x588E9E: mov     esi, eax
 0x588EA0: mov     ecx, 8
 0x588EA5: xor     edx, edx

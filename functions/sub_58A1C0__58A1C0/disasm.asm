@@ -128,7 +128,7 @@
 0x58A383: mov     ecx, esi
 0x58A385: call    sub_58A0A0
 0x58A38A: push    388h
-0x58A38F: push    offset a3d_0
+0x58A38F: push    offset a3d_0; "3d"
 0x58A394: mov     ecx, esi
 0x58A396: call    sub_58A0A0
 0x58A39B: push    388h
@@ -376,7 +376,7 @@
 0x58A7A1: mov     ecx, esi
 0x58A7A3: call    sub_58A0A0
 0x58A7A8: push    7D8h
-0x58A7AD: push    offset aGt_0
+0x58A7AD: push    offset aGt_0; "gt"
 0x58A7B2: mov     ecx, esi
 0x58A7B4: call    sub_58A0A0
 0x58A7B9: push    7D9h
@@ -388,11 +388,11 @@
 0x58A7D4: mov     ecx, esi
 0x58A7D6: call    sub_58A0A0
 0x58A7DB: push    7E7h
-0x58A7E0: push    offset aLn
+0x58A7E0: push    offset aLn; "ln"
 0x58A7E5: mov     ecx, esi
 0x58A7E7: call    sub_58A0A0
 0x58A7EC: push    7DCh
-0x58A7F1: push    offset aLt_0
+0x58A7F1: push    offset aLt_0; "lt"
 0x58A7F6: mov     ecx, esi
 0x58A7F8: call    sub_58A0A0
 0x58A7FD: push    7DBh

@@ -21,7 +21,6 @@
 0x71355F: cmp     [esi+0D2h], di
 0x713566: jbe     short loc_7135B2
 0x713568: jmp     short loc_713570
-0x71356A: align 10h
 0x713570: mov     ecx, [esi+0CCh]
 0x713576: mov     edx, [ecx+edi*4]
 0x713579: mov     eax, [edx]

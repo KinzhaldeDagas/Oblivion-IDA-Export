@@ -4,7 +4,7 @@
 0x46CD60: jz      short TESLeveledList_SimpleCalcLeveledForm___Done_
 0x46CD62: cmp     edx, ebx
 0x46CD64: jnz     short TESLeveledList_SimpleCalcLeveledForm___FindRandomValidEntryLoop
-0x46CD66: mov     eax, [eax]
+0x46CD66: mov     eax, [eax]; 3DTheft decode 2026-05-14: Simple leveled-list resolver returns selected ListData.form at +0x04 and ListData.count at +0x08; nested leveled lists may recurse.
 0x46CD68: mov     esi, [eax+4]
 0x46CD6B: movzx   edi, word ptr [eax+8]
 0x46CD6F: push    ebx; int
@@ -29,7 +29,7 @@
 0x46CDA0: mov     ecx, eax
 0x46CDA2: mov     [esp+10h+arg_20], ebx
 0x46CDA6: mov     [esp+10h+arg_C], ebx
-0x46CDAA: call    TESLeveledList_SimpleCalcLeveledForm
+0x46CDAA: call    TESLeveledList_SimpleCalcLeveledForm; CustomAnimSupport decode: simple leveled-list resolver evidence; not a form-list target expansion path for animation manifests.
 0x46CDAF: mov     edx, [esp+10h]
 0x46CDB3: mov     esi, [esp+10h+arg_10]
 0x46CDB7: imul    edx, edi

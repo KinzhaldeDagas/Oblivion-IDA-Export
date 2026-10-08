@@ -3,17 +3,20 @@ char *__usercall strncpy_::main_loop@<eax>(
         int edx0@<edx>,
         int ecx0@<ecx>,
         _DWORD *edi0@<edi>,
-        int a2,
-        int a3,
-        int a4,
-        int a5)
+        int *a5@<esi>,
+        int a6,
+        int a7,
+        int a8,
+        int a9)
 {
-  int v8; // ecx
+  int *v9; // edi
+  int v10; // ecx
 
-  *edi0 = edx0;
-  v8 = ecx0 - 1;
-  if ( v8 )
-    return strncpy_::main_loop_entrance(v8);
+  *edi0 = edx0; /*0x982725*/
+  v9 = edi0 + 1; /*0x982727*/
+  v10 = ecx0 - 1; /*0x98272a*/
+  if ( v10 ) /*0x98272d*/
+    return strncpy_::main_loop_entrance(v10, a1, v9, a5, a6, a7, a8, a9); /*0x98272e*/
   else
-    return (char *)strncpy_::tail_loop_start(a1, a2, a3, a4, a5);
+    return (char *)strncpy_::tail_loop_start(a1, v9, (char *)a5, a6, a7, a8, a9); /*0x98272d*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7EDCD0",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+lightSlot]; Lighting30 type-0x1B light decode. Point/special flavor writes light world position to LightData.xyz and underlying NiLight+0xF8 range/control to .w.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7EDD11",
-    "line": "push    ecx",
+    "line": "push    ecx; lightSlot",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7EDD15",
-    "line": "call    sub_7FAB00",
+    "line": "call    Lighting30Shader_WriteLightColorConstant; Lighting30 per-light pixel constant writer. For lightSlot 0..19 writes four floats to ConstantGroup global slot 0x47D+8*slot, mapping slot 0 to pixel c9 (LightColor), slot 1 to c11, and so on.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7EDD2C",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7EDD53",
-    "line": "push    1",
+    "line": "push    1; w",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7EDD59",
-    "line": "mov     bl, [ebp+0FCh]",
+    "line": "mov     bl, [ebp+0FCh]; OblivionNew: ShadowSceneLight+0xFC is the Lighting30 emitter flavor selector. Nonzero emits underlying NiLight world position (+0x88) and radius/control (+0xF8); zero emits normalized direction (+0x108). Getter405AD0 copies +0x100 directly; +0xF4 is a separate wrapper byte, not a selector in this getter. Exact NiPointLight backing alone does not prove point emission.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7EDD93",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Lighting30 first normalizes the raw world directional vector here with43F350 before writing LightData. Later7FB6F0 negates it, applies inverse-world normal transform, D3DX normalization and43F350 normalization. GPU source publication must preserve this initial normalization too.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x7EDDD8",
-    "line": "mov     eax, [esp+58h+arg_0]",
+    "line": "mov     eax, [esp+58h+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7EDDDC",
-    "line": "push    eax",
+    "line": "push    eax; lightSlot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7EDDDD",
-    "line": "call    sub_7FAAD0",
+    "line": "call    Lighting30Shader_WriteLightDataConstant; Directional flavor writes normalized light direction and w=1 to LightData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7EDDE9",
-    "line": "cmp     byte ptr ds:0B42EA7h, 0",
+    "line": "cmp     byte ptr ds:0B42EA7h, 0; Ambient write gate: B42EA7==0 admits the directional-emitter ambient path. Otherwise RTTI test is NiAmbientLight (B40224, initialized atA0A830), not NiDirectionalLight. World-sun ambient profile must not assume this gated path always writes c0.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7EDDF2",
-    "line": "push    esi",
+    "line": "push    esi; w",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7EDDF5",
-    "line": "push    offset dword_B40224",
+    "line": "push    offset stru_B40224; z",
     "mnemonic": "push",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x7EDEBF",
-    "line": "fstp    [esp+48h+var_30]",
+    "line": "fstp    [esp+48h+var_30]; Instruction-traced ambient floor metric is float(.33 + r*.33 + g*.34 + b), after ambient RGB times effective light dimmer; it is not ordinary weighted luminance. If floor>0 and metric>0, scale max(1,floor/metric) multiplies each RGB+.1; metric<=0 yields floor RGB. Property dimmer applies afterward. Constants A924F0/A924F8/A2FC80 hold double representations of float .33/.34/.1.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1225,19 +1225,19 @@
   },
   {
     "ea": "0x7EDF93",
-    "line": "mov     eax, [esp+58h+arg_0]",
+    "line": "mov     eax, [esp+58h+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7EDF97",
-    "line": "push    eax",
+    "line": "push    eax; lightSlot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7EDF98",
-    "line": "call    sub_7FAAD0",
+    "line": "call    Lighting30Shader_WriteLightDataConstant; Point/special type-0x1B flavor writes light world position to LightData.xyz and underlying NiLight+0xF8 range/control to LightData.w.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x7EE04B",
-    "line": "call    sub_7FAB30",
+    "line": "call    Lighting30Shader_WritePixelConstantC0; Lighting30 pixel ConstantGroup c0 writer (global slots 0x459..0x45C).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x7EE069",
-    "line": "fld     [esp+48h+var_38]",
+    "line": "fld     [esp+48h+var_38]; LightColor: if byte B43070 is zero, clamp underlying NiLight+DC dimmer only when >1.0 (A2F928 is double1.0). Preserve lower/signed values. RGB multiplication stages store float intermediates.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x7EE100",
-    "line": "fstp    [esp+48h+var_30]",
+    "line": "fstp    [esp+48h+var_30]; LightColor RGB order: backing+EC diffuse * effective light dimmer, then local shader property+94 dimmer, then wrapper+D4 strength. Alpha/w is wrapper+D8, without these RGB scales.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x7EE131",
-    "line": "mov     eax, ds:0B3FA90h",
+    "line": "mov     eax, ds:0B3FA90h; For point emitter (+FC nonzero) with propertyDimmer<1, overwrite RGB with direct globals B3FA90/B3FA94/B3FA98. For directional emitter with B43070 nonzero and B43074 zero, multiply final RGB by B42F4C instead.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x7EE16A",
-    "line": "fstp    [esp+4Ch+var_4C]; float",
+    "line": "fstp    [esp+4Ch+w]; w",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2173,19 +2173,19 @@
   },
   {
     "ea": "0x7EE1B4",
-    "line": "mov     eax, [esp+58h+arg_0]",
+    "line": "mov     eax, [esp+58h+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7EE1B8",
-    "line": "push    eax",
+    "line": "push    eax; lightSlot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7EE1B9",
-    "line": "call    sub_7FAB00",
+    "line": "call    Lighting30Shader_WriteLightColorConstant; Write LightColor from underlying light RGB, dimmer/property factors, and ShadowSceneLight+0xD8 alpha/strength.",
     "mnemonic": "call",
     "size": 5
   },

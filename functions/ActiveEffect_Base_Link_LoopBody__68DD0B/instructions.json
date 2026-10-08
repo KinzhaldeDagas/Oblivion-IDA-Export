@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x68DD17",
-    "line": "call    eax",
+    "line": "call    eax; Verified ActiveEffect hit-effect relink call pushes EBX and EDI before dispatching each hit-effect vtable slot +0x80. EDI is the explicit linkContext; EBX is the third callback argument used as TESChildCELL* by MagicHitEffect_SetParentCellFromTarget. Universal EBX semantics remain Candidate because callers differ.",
     "mnemonic": "call",
     "size": 2
   },

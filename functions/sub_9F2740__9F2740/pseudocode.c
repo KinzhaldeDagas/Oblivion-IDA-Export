@@ -1,5 +1,5 @@
 int sub_9F2740()
 {
-  GameSetting_ConstrAndReg(&dword_B38C58, (int)"sExitGameAffirm", (int)"Exit Game");
-  return atexit(sub_A21FD0);
+  GameSetting_ConstrAndReg(&stru_B38C58, "sExitGameAffirm", "Exit Game"); /*0x9f274f*/
+  return atexit(sub_A21FD0); /*0x9f275f*/
 }

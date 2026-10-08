@@ -1,4 +1,4 @@
-BSStringT *sub_A09970()
+NiRTTI *sub_A09970()
 {
-  return sub_70E220((BSStringT *)dword_B3F684, "NiObject", 0);
+  return NiRTTI_Constructor(&stru_B3F684, "NiObject", 0); /*0xa09981*/
 }

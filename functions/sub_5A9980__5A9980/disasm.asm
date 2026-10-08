@@ -9,7 +9,7 @@
 0x5A9996: jz      short loc_5A99A4
 0x5A9998: sub     eax, 2
 0x5A999B: jnz     short loc_5A99A9
-0x5A999D: call    sub_584390
+0x5A999D: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5A99A2: jmp     short loc_5A99A9
 0x5A99A4: call    sub_584820
 0x5A99A9: cmp     [esp+8+arg_8], 2
@@ -34,17 +34,17 @@
 0x5A99DA: fld     dword ptr ds:0A379B4h
 0x5A99E0: push    ecx
 0x5A99E1: mov     ecx, [esi+28h]; this
-0x5A99E4: fstp    [esp+10h+a2]; a3
-0x5A99E7: push    0FA1h; a2
-0x5A99EC: call    Tile_SetFloat
+0x5A99E4: fstp    [esp+10h+a2]; value
+0x5A99E7: push    0FA1h; propertyCode
+0x5A99EC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A99F1: call    sub_5A47B0
 0x5A99F6: mov     [esp+0Ch+arg_0], eax
 0x5A99FA: fild    [esp+0Ch+arg_0]
 0x5A99FE: push    ecx
 0x5A99FF: mov     ecx, [esi+28h]; this
-0x5A9A02: fstp    [esp+10h+a2]; a3
-0x5A9A05: push    0FAFh; a2
-0x5A9A0A: call    Tile_SetFloat
+0x5A9A02: fstp    [esp+10h+a2]; value
+0x5A9A05: push    0FAFh; propertyCode
+0x5A9A0A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A9A0F: fld     dword ptr ds:0A379B4h
 0x5A9A15: mov     ebp, [esp+0Ch+arg_4]
 0x5A9A19: test    ebp, ebp

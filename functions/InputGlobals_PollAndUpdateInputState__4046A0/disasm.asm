@@ -1,4 +1,4 @@
-0x4046A0: sub     esp, 8
+0x4046A0: sub     esp, 8; [Controller decode 2026-07-09] Polls all enumerated joysticks, keyboard, and mouse. Joystick current DIJOYSTATE is copied to previous DIJOYSTATE before polling. InputGlobal+0x1B50/+0x1B58 are mouse double-click flags/timestamps, not controller state.
 0x4046A3: push    ebx
 0x4046A4: push    ebp
 0x4046A5: mov     ebx, ecx
@@ -147,3 +147,28 @@
 0x40483D: pop     ebx
 0x40483E: add     esp, 8
 0x404841: retn
+0x403C30: push    esi
+0x403C31: xor     eax, eax
+0x403C33: lea     edx, [ecx+1B58h]
+0x403C39: push    edi
+0x403C3A: lea     ebx, [ebx+0]
+0x403C40: test    byte ptr [ecx+eax+1B2Ch], 80h
+0x403C48: jz      short loc_403C78
+0x403C4A: test    byte ptr [eax+ecx+1B40h], 80h
+0x403C52: jnz     short loc_403C78
+0x403C54: mov     esi, ds:0B33EA0h
+0x403C5A: mov     edi, esi
+0x403C5C: sub     edi, [edx]
+0x403C5E: cmp     edi, [ecx+1B4Ch]
+0x403C64: ja      short loc_403C76
+0x403C66: mov     byte ptr [eax+ecx+1B50h], 1
+0x403C6E: mov     dword ptr [edx], 0
+0x403C74: jmp     short loc_403C78
+0x403C76: mov     [edx], esi
+0x403C78: add     eax, 1
+0x403C7B: add     edx, 4
+0x403C7E: cmp     eax, 7
+0x403C81: jle     short loc_403C40
+0x403C83: pop     edi
+0x403C84: pop     esi
+0x403C85: retn

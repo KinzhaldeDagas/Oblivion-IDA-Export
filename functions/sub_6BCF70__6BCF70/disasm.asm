@@ -1,4 +1,4 @@
-0x6BCF70: fld     [esp+arg_4]
+0x6BCF70: fld     [esp+arg_4]; Oblivion quaternion rotation key-track evaluator. One key/sentinel time normally returns key quaternion at +4; interpolation type 4 uses its dedicated evaluator even for that case. Otherwise performs cursor-assisted timestamp bracketing, normalized segment-time evaluation through the rotation dispatch table, and writes back the lower-key cursor.
 0x6BCF74: sub     esp, 30h
 0x6BCF77: push    ebx
 0x6BCF78: mov     ebx, [esp+34h+arg_10]
@@ -40,7 +40,7 @@
 0x6BCFD9: mov     ecx, [esp+44h+arg_C]
 0x6BCFDD: fstp    [esp+44h+var_44]
 0x6BCFE0: mov     edx, ds:0B3D028h[ecx*4]
-0x6BCFE7: call    edx
+0x6BCFE7: call    edx ; unk_B3D028
 0x6BCFE9: mov     eax, [esp+44h+arg_0]
 0x6BCFED: mov     ecx, [esp+44h+var_20]
 0x6BCFF1: mov     edx, [esp+44h+var_1C]
@@ -195,7 +195,7 @@
 0x6BD1A6: mov     ecx, [esp+50h+arg_C]
 0x6BD1AA: mov     edx, ds:0B3D028h[ecx*4]
 0x6BD1B1: fstp    [esp+50h+var_50]
-0x6BD1B4: call    edx
+0x6BD1B4: call    edx ; unk_B3D028
 0x6BD1B6: mov     eax, [esp+50h+arg_14]
 0x6BD1BA: mov     ecx, [esp+50h+var_10]
 0x6BD1BE: mov     edx, [esp+50h+var_C]

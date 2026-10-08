@@ -59,13 +59,13 @@
 0x444F75: cmp     dword ptr [esi+34h], 0
 0x444F79: pop     ebx
 0x444F7A: jnz     short loc_444F81
-0x444F7C: call    sub_499E40
+0x444F7C: call    sub_499E40; Pass205: Water-related callsite included in pass-data producer verification; cross-check before naming high-level field semantics.
 0x444F81: mov     ecx, ds:0B33B00h
 0x444F87: call    sub_45A500
 0x444F8C: test    al, al
 0x444F8E: jnz     short loc_444F98
 0x444F90: mov     ecx, [esi+54h]
-0x444F93: call    WaterSurfaceLoop
+0x444F93: call    WaterSurfaceLoop; Pass202/205: WaterSurfaceLoop. Native producer for persistent water height/depth target and updater of WaterShaderProperty pass-data fields for water grid cells.
 0x444F98: call    sub_537D40
 0x444F9D: pop     edi
 0x444F9E: pop     esi

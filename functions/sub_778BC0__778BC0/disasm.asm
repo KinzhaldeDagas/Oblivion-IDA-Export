@@ -1,4 +1,4 @@
-0x778BC0: mov     eax, [esp+arg_4]
+0x778BC0: mov     eax, [esp+arg_4]; Pass225: NiD3DGeometryGroupManager admit/add dispatcher; if object+0x1C is null, asks target group to create buffer cache.
 0x778BC4: cmp     dword ptr [eax+1Ch], 0
 0x778BC8: jz      short loc_778BCF
 0x778BCA: xor     al, al

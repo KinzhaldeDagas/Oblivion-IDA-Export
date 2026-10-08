@@ -1,62 +1,70 @@
-NiGeometryBufferData *__thiscall sub_77A310(NiD3DShader *this, int a2, int a5, NiGeometryBufferData *a4, int _1C)
+// Oblivion NiD3DShader geometry binder. Uses the currently selected ShaderDeclaration while packing normal or hardware-skinned geometry buffers, then binds every resulting vertex stream with SetStreamSource and binds the index buffer.
+NiGeometryBufferData *__thiscall NiD3DShader_BindGeometryBuffers(
+        NiD3DShader *this,
+        NiGeometry *geometry,
+        void *skinPartitionRecord,
+        NiGeometryBufferData *existingBuffer,
+        unsigned int unused)
 {
-  NiTriShapeData *v6; // eax
-  _DWORD *v7; // edx
+  NiTriShapeData *geomData; // eax
+  NiObject *skinData; // edx
   NiGeometryBufferData *BuffData; // edi
   UInt32 StreamCount; // eax
   UINT i; // esi
   NiVBChip *v11; // ecx
 
-  if ( a2 && (!this->member.CurrentPassIndex || (*(_WORD *)(*(_DWORD *)(a2 + 0xB4) + 0x2E) & 0xF000) == 0x8000 && a5) )
+  if ( geometry /*0x77a33d*/
+    && (!this->member.CurrentPassIndex
+     || (geometry->member.geomData->member.m_usDirtyFlags & 0xF000) == 0x8000 && skinPartitionRecord) )
   {
-    v6 = *(NiTriShapeData **)(a2 + 0xB4);
-    v7 = *(_DWORD **)(a2 + 0xB8);
-    if ( a5 )
+    geomData = (NiTriShapeData *)geometry->member.geomData; /*0x77a341*/
+    skinData = geometry->member.skinData; /*0x77a347*/
+    if ( skinPartitionRecord ) /*0x77a34f*/
     {
-      BuffData = *(NiGeometryBufferData **)(a5 + 0x28);
-      NiDX9Renderer::PackSkinnedGeometryBuffer(
+      BuffData = *((NiGeometryBufferData **)skinPartitionRecord + 0xA); /*0x77a354*/
+      NiDX9Renderer::PackSkinnedGeometryBuffer( /*0x77a35f*/
         this->member.super.D3DRenderer,
         (int)BuffData,
-        (int)v6,
-        (int)v7,
-        a5,
+        (int)geomData,
+        (int)skinData,
+        (int)skinPartitionRecord,
         this->member.ShaderDeclaration,
-        0);
+        0);                                     // Pack hardware-skinned geometry with the active Lighting30 ShaderDeclaration.
     }
     else
     {
-      BuffData = v6->member.super.super.BuffData;
-      NiDX9Renderer::PackGeometryBuffers(
+      BuffData = geomData->member.super.super.BuffData; /*0x77a369*/
+      NiDX9Renderer::PackGeometryBuffers( /*0x77a373*/
         this->member.super.D3DRenderer,
         BuffData,
-        v6,
-        v7,
+        geomData,
+        skinData,
         this->member.ShaderDeclaration,
-        0);
+        0);                                     // Pack non-skinned geometry with the active Lighting30 ShaderDeclaration.
     }
   }
   else
   {
-    BuffData = a4;
+    BuffData = existingBuffer; /*0x77a37a*/
   }
-  if ( BuffData )
+  if ( BuffData ) /*0x77a380*/
   {
-    StreamCount = BuffData->StreamCount;
-    for ( i = 0; i < StreamCount; ++i )
+    StreamCount = BuffData->StreamCount; /*0x77a382*/
+    for ( i = 0; i < StreamCount; ++i ) /*0x77a389*/
     {
-      if ( i >= StreamCount )
-        v11 = 0;
+      if ( i >= StreamCount ) /*0x77a39c*/
+        v11 = 0; /*0x77a3a6*/
       else
-        v11 = BuffData->VBChip[i];
-      this->member.super.D3DDevice->lpVtbl->SetStreamSource(
+        v11 = BuffData->VBChip[i]; /*0x77a3a1*/
+      this->member.super.D3DDevice->lpVtbl->SetStreamSource( /*0x77a3bc*/
         this->member.super.D3DDevice,
         i,
         v11->VB,
         0,
         BuffData->VertexStride[i]);
-      StreamCount = BuffData->StreamCount;
+      StreamCount = BuffData->StreamCount; /*0x77a3be*/
     }
-    this->member.super.D3DDevice->lpVtbl->SetIndices(this->member.super.D3DDevice, BuffData->IB);
+    this->member.super.D3DDevice->lpVtbl->SetIndices(this->member.super.D3DDevice, BuffData->IB); /*0x77a3d9*/
   }
-  return BuffData;
+  return BuffData; /*0x77a3dd*/
 }

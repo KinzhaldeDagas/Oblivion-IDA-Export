@@ -139,7 +139,7 @@
 0x464C63: mov     [esp+70h+var_54], eax
 0x464C67: jnz     short loc_464C84
 0x464C69: mov     ecx, ds:0B333C4h; this
-0x464C6F: call    TESObjectREFR_GetParentCell
+0x464C6F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x464C74: mov     edx, [eax]
 0x464C76: mov     ecx, eax
 0x464C78: mov     eax, [edx+0D4h]
@@ -156,10 +156,10 @@
 0x464C99: sub     eax, edx
 0x464C9B: add     al, 1
 0x464C9D: mov     byte ptr [esp+70h+arg_0], al
-0x464CA1: mov     ecx, offset TimeGlobals
+0x464CA1: mov     ecx, 0B332E0h
 0x464CA6: call    TimeGlobals_GetGameHour
 0x464CAB: fdiv    qword ptr ds:0A2F920h
-0x464CB1: mov     ecx, offset TimeGlobals
+0x464CB1: mov     ecx, 0B332E0h
 0x464CB6: fstp    [esp+70h+var_3C]
 0x464CBA: call    TimeGlobals_GetGameDaysPassed
 0x464CBF: test    eax, eax
@@ -183,7 +183,7 @@
 0x464D02: mov     [esp+70h+var_44], ebx
 0x464D06: jnz     short loc_464D65
 0x464D08: push    3
-0x464D0A: call    nullsub_returnTrue_0arg
+0x464D0A: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x464D0F: mov     ecx, ds:0B33A10h
 0x464D15: add     esp, 4
 0x464D18: call    sub_432890
@@ -198,7 +198,7 @@
 0x464D37: mov     [esp+70h+var_50], ebp
 0x464D3B: call    sub_432860
 0x464D40: push    2
-0x464D42: call    nullsub_returnTrue_0arg
+0x464D42: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x464D47: add     esp, 4
 0x464D4A: cmp     ebp, ebx
 0x464D4C: jz      short loc_464D91
@@ -215,7 +215,7 @@
 0x464D71: fstp    [esp+70h+var_58]
 0x464D75: fld     [esp+70h+var_58]
 0x464D79: fmul    qword ptr ds:0A3B1B8h
-0x464D7F: call    Double_To_SInt32
+0x464D7F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x464D84: lea     eax, [eax+eax*2]
 0x464D87: shl     eax, 8
 0x464D8A: add     eax, 8
@@ -518,7 +518,7 @@
 0x465101: call    sub_4531B0
 0x465106: mov     eax, [esp+70h+var_24]
 0x46510A: push    eax
-0x46510B: call    FormHeapFree
+0x46510B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x465110: add     esp, 4
 0x465113: mov     ecx, [esp+70h+var_C]
 0x465117: mov     large fs:0, ecx
@@ -529,3 +529,12 @@
 0x465122: pop     ebx
 0x465123: add     esp, 5Ch
 0x465126: retn    8
+0x9AE710: lea     ecx, [ebp-24h]; void *
+0x9AE713: jmp     BSStringT_Clear
+0x9AE718: mov     edx, [esp+Str]
+0x9AE71C: lea     eax, [edx-60h]
+0x9AE71F: mov     ecx, [edx-64h]
+0x9AE722: xor     ecx, eax
+0x9AE724: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE729: mov     eax, offset stru_ADAEE0
+0x9AE72E: jmp     ___CxxFrameHandler3

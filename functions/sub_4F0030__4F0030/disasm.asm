@@ -1,4 +1,4 @@
-0x4F0030: sub     esp, 0Ch
+0x4F0030: sub     esp, 0Ch; Verified: clears inline exterior cellMap at +0x30; iterates mapped TESObjectCELL values and destroys them unless the WorldSpace base flag 0x4000 is set, then empties the map.
 0x4F0033: push    edi
 0x4F0034: mov     edi, ecx
 0x4F0036: mov     eax, [edi+8]
@@ -21,27 +21,27 @@
 0x4F005F: jb      short loc_4F0052
 0x4F0061: xor     eax, eax
 0x4F0063: test    eax, eax
-0x4F0065: mov     [esp+14h+var_8], eax
+0x4F0065: mov     [esp+14h+position], eax
 0x4F0069: pop     esi
 0x4F006A: jz      short loc_4F00A7
 0x4F006C: lea     esp, [esp+0]
-0x4F0070: lea     ecx, [esp+10h+var_C]
-0x4F0074: push    ecx
-0x4F0075: mov     ecx, [edi+30h]
-0x4F0078: lea     edx, [esp+14h+var_4]
-0x4F007C: push    edx
-0x4F007D: lea     eax, [esp+18h+var_8]
-0x4F0081: push    eax
-0x4F0082: mov     [esp+1Ch+var_C], 0
-0x4F008A: call    sub_452600
-0x4F008F: mov     ecx, [esp+10h+var_C]
+0x4F0070: lea     ecx, [esp+10h+valueOut]
+0x4F0074: push    ecx; valueOut
+0x4F0075: mov     ecx, [edi+30h]; self
+0x4F0078: lea     edx, [esp+14h+keyOut]
+0x4F007C: push    edx; keyOut
+0x4F007D: lea     eax, [esp+18h+position]
+0x4F0081: push    eax; position
+0x4F0082: mov     [esp+1Ch+valueOut], 0
+0x4F008A: call    NiTMap_U32Pointer_GetNextEntry
+0x4F008F: mov     ecx, [esp+10h+valueOut]
 0x4F0093: test    ecx, ecx
 0x4F0095: jz      short loc_4F00A0
 0x4F0097: mov     edx, [ecx]
 0x4F0099: mov     eax, [edx+10h]
 0x4F009C: push    1
 0x4F009E: call    eax
-0x4F00A0: cmp     [esp+10h+var_8], 0
+0x4F00A0: cmp     [esp+10h+position], 0
 0x4F00A5: jnz     short loc_4F0070
 0x4F00A7: mov     ecx, [edi+30h]
 0x4F00AA: pop     edi

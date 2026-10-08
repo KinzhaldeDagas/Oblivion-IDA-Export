@@ -1,4 +1,4 @@
-BSStringT *sub_A09C40()
+NiRTTI *sub_A09C40()
 {
-  return sub_70E220((BSStringT *)dword_B3FA9C, "NiMaterialProperty", (int)dword_B3F68C);
+  return NiRTTI_Constructor(&stru_B3FA9C, "NiMaterialProperty", &stru_B3F68C); /*0xa09c54*/
 }

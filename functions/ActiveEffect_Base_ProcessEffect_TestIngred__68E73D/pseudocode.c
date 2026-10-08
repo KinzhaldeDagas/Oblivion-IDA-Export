@@ -7,13 +7,13 @@ int __usercall ActiveEffect_Base_ProcessEffect_::TestIngred@<eax>(
 {
   int v5; // eax
 
-  if ( (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(a2 + 8) + 0x18))(*(_DWORD *)(a2 + 8)) == 8
+  if ( (*(int (__thiscall **)(_DWORD))(**(_DWORD **)(a2 + 8) + 0x18))(*(_DWORD *)(a2 + 8)) == 8 /*0x68e752*/
     && (v5 = *(_DWORD *)(a2 + 8)) != 0 )
   {
-    return ActiveEffect_Base_ProcessEffect_::TestPotion(a1, v5 - 0x24, a2, a3, a4, a5);
+    return ActiveEffect_Base_ProcessEffect_::TestPotion(a1, v5 - 0x24, a2, a3, a4, a5); /*0x68e757*/
   }
   else
   {
-    return ActiveEffect_Base_ProcessEffect_::TestPotion(a1, 0, a2, a3, a4, a5);
+    return ActiveEffect_Base_ProcessEffect_::TestPotion(a1, 0, a2, a3, a4, a5); /*0x68e75a*/
   }
 }

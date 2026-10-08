@@ -8,7 +8,7 @@
 0x77D464: mov     ecx, esi
 0x77D466: call    sub_7826E0
 0x77D46B: push    esi
-0x77D46C: call    FormHeapFree
+0x77D46C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77D471: add     esp, 4
 0x77D474: test    edi, edi
 0x77D476: mov     esi, edi

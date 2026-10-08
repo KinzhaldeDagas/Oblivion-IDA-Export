@@ -8,7 +8,7 @@
 0x46CEA0: mov     ecx, ebp
 0x46CEA2: mov     [esp+10h+arg_40], ebx
 0x46CEA6: mov     [esp+10h+arg_14], ebx
-0x46CEAA: call    TESLeveledList_SimpleCalcLeveledForm
+0x46CEAA: call    TESLeveledList_SimpleCalcLeveledForm; CustomAnimSupport decode: simple leveled-list resolver evidence; not a form-list target expansion path for animation manifests.
 0x46CEAF: mov     esi, [esp-8+arg_48]
 0x46CEB3: cmp     esi, ebx
 0x46CEB5: jz      short TESLeveledList_CalcLeveledForm___CalcForEachItemInCount_Loop_next
@@ -30,7 +30,7 @@
 0x46CEE2: push    edi; int
 0x46CEE3: push    edx; int
 0x46CEE4: mov     ecx, eax; this
-0x46CEE6: call    TESLeveledList_CalcLeveledForm
+0x46CEE6: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x46CEEB: jmp     short TESLeveledList_CalcLeveledForm___CalcForEachItemInCount_Loop_next
 0x46CEED: push    ebx; int
 0x46CEEE: push    offset ??_R0?AVTESBoundObject@@@8; struct TypeDescriptor *

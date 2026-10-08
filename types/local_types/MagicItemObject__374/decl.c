@@ -1,1 +1,1 @@
-MagicItemObject
+struct MagicItemObject;

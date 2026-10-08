@@ -1,4 +1,4 @@
-0x548A10: fld     [esp+arg_0]
+0x548A10: fld     [esp+arg_0]; CustomAnimSupport evidence: HitShader Enum event support helper; scales player/reference distance for shader effect.
 0x548A14: fld     dword ptr ds:0B37DA0h
 0x548A1A: fcom    st(1)
 0x548A1C: fnstsw  ax

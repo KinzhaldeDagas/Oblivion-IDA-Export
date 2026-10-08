@@ -1,9 +1,9 @@
-0x7D3400: push    ebx
+0x7D3400: push    ebx; Strong-own and classify the backing NiLight. When trackBackingPosition is set, seed cached source position from the NiPointLight world translation.
 0x7D3401: push    esi
 0x7D3402: mov     ebx, ecx
 0x7D3404: mov     esi, [ebx+100h]
 0x7D340A: push    edi
-0x7D340B: mov     edi, [esp+0Ch+arg_0]
+0x7D340B: mov     edi, [esp+0Ch+backingLight]
 0x7D340F: cmp     esi, edi
 0x7D3411: jz      short loc_7D3447
 0x7D3413: test    esi, esi
@@ -21,7 +21,7 @@
 0x7D342F: mov     ecx, esi
 0x7D3431: call    eax
 0x7D3433: test    edi, edi
-0x7D3435: mov     [ebx+100h], edi
+0x7D3435: mov     [ebx+100h], edi; Store and strong-own the backing NiLight at ShadowSceneLight+0x100 until replacement or destruction.
 0x7D343B: jz      short loc_7D3466
 0x7D343D: lea     ecx, [edi+4]
 0x7D3440: push    ecx; lpAddend
@@ -34,16 +34,16 @@
 0x7D3452: call    eax
 0x7D3454: test    eax, eax
 0x7D3456: jz      short loc_7D3466
-0x7D3458: cmp     eax, offset dword_B3FD80
+0x7D3458: cmp     eax, offset stru_B3FD80; Walk the backing object's RTTI parent chain looking for RTTI_NiPointLight; this is the producer test for ShadowSceneLight+0xFC.
 0x7D345D: jz      short loc_7D34A1
 0x7D345F: mov     eax, [eax+4]
 0x7D3462: test    eax, eax
 0x7D3464: jnz     short loc_7D3458
 0x7D3466: xor     al, al
 0x7D3468: test    al, al
-0x7D346A: mov     [ebx+0FCh], al
+0x7D346A: mov     [ebx+0FCh], al; Store backingIsNiPointLight into the byte at ShadowSceneLight+0xFC.
 0x7D3470: jz      short loc_7D34A5
-0x7D3472: cmp     byte ptr [ebx+104h], 0
+0x7D3472: cmp     byte ptr [ebx+104h], 0; trackBackingPosition controls whether SetBackingLight copies backing point-light world translation into +0x108..+0x110.
 0x7D3479: jz      short loc_7D34AD
 0x7D347B: mov     edx, [edi+88h]
 0x7D3481: lea     eax, [edi+88h]

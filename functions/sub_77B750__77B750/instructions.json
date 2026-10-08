@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77B750",
-    "line": "push    esi",
+    "line": "push    esi; DX10OBSE target: caps-gated NiDX9RenderState software vertex-processing switch. Calls IDirect3DDevice9::SetSoftwareVertexProcessing via vtable +0x134 and rebinds current vertex shader; plugin mirrors mode into DX10 companion render-state constants.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x77B753",
-    "line": "mov     cl, [esp+4+arg_0]",
+    "line": "mov     cl, [esp+4+enabled]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x77B79A",
-    "line": "call    edx",
+    "line": "call    edx; Verified target via vtableA8A9F4+94 =77B3C0 RemoveVertexShader(current). Unbinds/nulls the cached current shader; this is not a rebind.",
     "mnemonic": "call",
     "size": 2
   },

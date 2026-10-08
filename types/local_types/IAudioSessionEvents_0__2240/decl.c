@@ -1,1 +1,1 @@
-IAudioSessionEvents_0
+typedef IAudioSessionEvents IAudioSessionEvents_0;

@@ -1,19 +1,36 @@
 {
-  "callees_count": 79,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 37,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5610C0",
+  "chunks": [
+    [
+      "0x5610C0",
+      "0x56151D"
+    ],
+    [
+      "0x9BD100",
+      "0x9BD144"
+    ]
+  ],
+  "chunks_sha256": "1106ff70b05e1c80d468997284f0ab21ad067f970713481106c528443dd2ab62",
+  "comment_regular": "\n[Mesh leaves v126] 0x561441 installs the leaf shape and 0x561476 precaches it. Mesh-leaf source capture now occurs earlier after 0x563741 native leaf build/atlas processing; runtime conversion does not borrow native CPU vertex arrays across this scene setup. Runtime array disposal is a supported hypothesis, not proven by v125 generic array-bounds logs.\n[Leaf RGB v148 2026-10-08] Hook exactCALL56144D to4EC910 after leaf property attachment, before UpdateInternalVars and renderer precache561476. Tagged STSP owns its shader; binding selects that retained shader. NiGeometry+BC takes another strong ref; ProcessClone723050 forwards same shader. Tagged STSP destructor clears weak shader cache before releasing own shader reference. No process-lifetime strong device cache. User explicitly chose opt-in LeafLighting.bUseAuthoredStaticLighting default0.\n\nVerified: CreateArt consumes branch/leaf geometry and shader-property arrays by LOD. It also reads leafCachedPropertiesByLOD (+0x30) and attaches a non-null entry; the stock leaf builder allocates this array but does not populate its slots, so that optional population remains Candidate/Unknown.",
+  "comment_repeatable": "Verified: CreateArt consumes branch/leaf geometry and shader-property arrays by LOD. It also reads leafCachedPropertiesByLOD (+0x30) and attaches a non-null entry; the stock leaf builder allocates this array but does not populate its slots, so that optional population remains Candidate/Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "BSTreeModel_CreateArt",
   "end_ea": "0x56151D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5610C0",
+  "name": "BSTreeModel_CreateArt",
   "segment": ".text",
   "sha256": "5f3d75631cc93516c54c4af1a7c3dbb943565671c7601a713a20a66e6d605bcb",
   "size": 1117,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5610C0",
-  "type": "BSTreeNode *__thiscall(int this, float)",
-  "xrefs_from_count": 429,
+  "total_chunk_size": 1185,
+  "type": "BSTreeNode_OblivionLayout_0F0 *__thiscall(BSTreeModel_OblivionLayout_058 *this, float scale)",
+  "xrefs_from_count": 455,
   "xrefs_to_count": 1
 }

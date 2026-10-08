@@ -2,8 +2,8 @@
 0x683B94: push    esi
 0x683B95: mov     esi, ecx
 0x683B97: fstp    [esp+4+arg_4]
-0x683B9B: lea     ecx, [esi+14h]
-0x683B9E: call    sub_42B410
+0x683B9B: lea     ecx, [esi+14h]; this
+0x683B9E: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x683BA3: cmp     [esp+4+arg_0], 0
 0x683BA8: jz      short loc_683BCE
 0x683BAA: test    eax, eax

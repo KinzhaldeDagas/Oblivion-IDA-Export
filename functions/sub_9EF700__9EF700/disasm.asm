@@ -2,7 +2,7 @@
 0x9EF706: push    ecx
 0x9EF707: fstp    [esp+4+var_4]; float
 0x9EF70A: push    offset aFshockboltsmal; "fShockBoltSmallWidth"
-0x9EF70F: mov     ecx, offset fShockBoltSmallWidth
+0x9EF70F: mov     ecx, (offset flt_B37ED0+268h)
 0x9EF714: call    GameSetting_ConstrAndReg_float
 0x9EF719: push    offset sub_A20990; void (__cdecl *)()
 0x9EF71E: call    _atexit

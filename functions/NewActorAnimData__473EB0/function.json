@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x473EB0",
+      "0x47406C"
+    ],
+    [
+      "0x9AED50",
+      "0x9AED84"
+    ]
+  ],
+  "chunks_sha256": "692338f53ee982199928310be8f7692b816f4b2162de0833e03228aa4035f39e",
+  "comment_regular": "Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.",
+  "comment_repeatable": "Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "NewActorAnimData",
   "end_ea": "0x47406C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NewActorAnimData",
   "segment": ".text",
   "sha256": "26fb3a01dc2f2a66652ebc1b47d308f7396929af26b46f3eaad9b83a5cf82874",
   "size": 444,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x473EB0",
+  "total_chunk_size": 496,
   "type": "ActorAnimData *__thiscall(ActorAnimData *this)",
-  "xrefs_from_count": 130,
+  "xrefs_from_count": 147,
   "xrefs_to_count": 4
 }

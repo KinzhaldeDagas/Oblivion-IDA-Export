@@ -75,14 +75,14 @@
 0x45A10C: call    eax
 0x45A10E: push    edi
 0x45A10F: mov     byte ptr ds:0B33D80h, 0
-0x45A116: call    FormHeapFree
+0x45A116: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45A11B: add     esp, 4
 0x45A11E: pop     esi
 0x45A11F: pop     edi
 0x45A120: retn    8
 0x45A123: fstp    st
 0x45A125: push    edi
-0x45A126: call    FormHeapFree
+0x45A126: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45A12B: add     esp, 4
 0x45A12E: pop     esi
 0x45A12F: pop     edi

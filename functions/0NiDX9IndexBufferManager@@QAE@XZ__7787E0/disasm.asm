@@ -4,7 +4,7 @@
 0x7787E3: push    edi
 0x7787E4: mov     esi, ecx
 0x7787E6: xor     ebx, ebx
-0x7787E8: push    offset NiRefObject_objcount; lpAddend
+0x7787E8: push    0B3FD64h; lpAddend
 0x7787ED: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7787F3: mov     [esi+4], ebx
 0x7787F6: call    dword ptr ds:0A28078h

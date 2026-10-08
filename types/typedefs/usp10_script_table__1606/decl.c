@@ -1,1 +1,6 @@
-usp10_script_table
+enum usp10_script_table : __int32
+{
+USP10_SCRIPT_TABLE_GSUB = 0x0,
+USP10_SCRIPT_TABLE_GPOS = 0x1,
+USP10_SCRIPT_TABLE_COUNT = 0x2,
+};

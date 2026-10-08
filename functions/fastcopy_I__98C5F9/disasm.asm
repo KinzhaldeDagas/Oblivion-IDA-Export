@@ -8,7 +8,6 @@
 0x98C60B: mov     ecx, [ebp+arg_8]
 0x98C60E: shr     ecx, 7
 0x98C611: jmp     short loc_98C619
-0x98C613: db 8Dh, 9Bh, 4 dup(0)
 0x98C619: movdqa  xmm0, xmmword ptr [esi]
 0x98C61D: movdqa  xmm1, xmmword ptr [esi+10h]
 0x98C622: movdqa  xmm2, xmmword ptr [esi+20h]

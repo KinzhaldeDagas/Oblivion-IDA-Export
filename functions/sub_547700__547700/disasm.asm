@@ -1,9 +1,9 @@
-0x547700: mov     eax, [esp+arg_8]
+0x547700: mov     eax, [esp+luckValue]
 0x547704: fld     [esp+arg_4]
-0x547708: push    eax
-0x547709: call    Double_To_SInt32
-0x54770E: push    eax
-0x54770F: call    Calc_LuckModifiedSkill
+0x547708: push    eax; luckValue
+0x547709: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x54770E: push    eax; skillValue
+0x54770F: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x547714: fstp    [esp+8+arg_4]
 0x547718: fld     dword ptr ds:0B37068h
 0x54771E: add     esp, 8

@@ -1,1 +1,1 @@
-IngredientItem
+struct IngredientItem;

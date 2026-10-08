@@ -7,7 +7,7 @@
 0x4433AF: push    esi
 0x4433B0: push    edi
 0x4433B1: mov     ecx, ebx; this
-0x4433B3: call    TESObjectCELL_IsInterior
+0x4433B3: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4433B8: test    al, al
 0x4433BA: mov     eax, [ebx+1Ch]
 0x4433BD: jz      short loc_4433DC
@@ -70,7 +70,7 @@
 0x44346D: shr     edx, 6
 0x443470: mov     ecx, ebx; this
 0x443472: mov     [esp+14h+arg_0], edx
-0x443476: call    TESObjectCELL_IsInterior
+0x443476: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44347B: sub     ebp, [esp+14h+var_4]
 0x44347F: test    al, al
 0x443481: jz      short loc_4434B7
@@ -113,15 +113,15 @@
 0x4434F6: add     esp, 20h
 0x4434F9: fld     dword ptr ds:0A374BCh
 0x4434FF: push    ecx
-0x443500: mov     ecx, offset TimeGlobals
+0x443500: mov     ecx, 0B332E0h
 0x443505: fstp    [esp+18h+var_18]; float
-0x443508: call    sub_4029E0
-0x44350D: mov     ecx, offset ActorProcessManager_ptr
-0x443512: call    sub_674A20
-0x443517: mov     ecx, offset ActorProcessManager_ptr
-0x44351C: call    sub_678510
-0x443521: mov     ecx, offset ActorProcessManager_ptr
-0x443526: call    sub_674A20
+0x443508: call    TimeGlobals_AdvanceGameTime; Advances GameHour by TimeScale * elapsedSeconds / 3600; rolls GameDay, GameMonth, GameYear, and DaysPassed after 24-hour boundaries.
+0x44350D: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x443512: call    sub_674A20; 3DTheft decode 2026-05-16: frame-loop actor process manager maintenance pass after process updates; removes/destroys invalid refs and refreshes process level state.
+0x443517: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x44351C: call    sub_678510; 3DTheft decode 2026-05-16: frame-loop actor process manager scheduled update dispatch before the second maintenance pass.
+0x443521: mov     ecx, (offset qword_B3BB2C+1D4h)
+0x443526: call    sub_674A20; 3DTheft decode 2026-05-16: frame-loop actor process manager maintenance pass after process updates; removes/destroys invalid refs and refreshes process level state.
 0x44352B: mov     eax, [esp+14h+arg_4]
 0x44352F: cmp     eax, 4
 0x443532: pop     edi

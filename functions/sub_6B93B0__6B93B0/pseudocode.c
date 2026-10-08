@@ -1,57 +1,58 @@
-char __userpurge sub_6B93B0@<al>(
-        UnkBohBoh *a1@<ecx>,
-        double a2@<st1>,
-        double a3@<st0>,
-        TESObjectREFR *a4,
-        UnkBohDialogueTopicBoh *a5)
+// OFE player Greeting adapter sites: 59EA74 wraps Initialize to distinguish forcedGreeting != null (must bypass replacement); 6B9419 matching; 6B942B owner quest; 6B9457 MenuTopic constructor. Replacement source topic must accompany selected INFO through owner and response construction. No suppression/no-candidate alteration is needed: failed replacement retains stock native fallback.
+bool __thiscall MenuTopicManager::Initialize(
+        MenuTopicManagerView *this,
+        TESObjectREFR *speaker,
+        TESTopic *forcedGreeting)
 {
-  TESTopic *v6; // edi
-  bool v7; // zf
-  int v8; // eax
-  UInt32 v9; // ebp
-  TESQuest *v10; // ebx
-  UnkBohDialogueTopicBoh *v11; // eax
-  UnkBohDialogueTopicBoh *v12; // edi
-  void *unk18; // ebp
-  tListTopic **p_unk5E4; // ebp
+  TESTopic *Topic; // edi
+  bool v5; // zf
+  OblivionTopicInfo *MatchingInfo; // eax
+  OblivionTopicInfo *v7; // ebp
+  TESQuest *OwnerQuest; // ebx
+  UnkBohDialogueTopicBoh *v9; // eax
+  MenuTopicView *greetingMenuTopic; // edi
+  void *greetingInfo; // ebp
+  tListTopic *choiceSource; // ebp
 
-  a1->unk10 = 0;
-  sub_6B9250((BSSimpleList_VoidPtr **)a1, 1);
-  v6 = (TESTopic *)a5;
-  v7 = a5 == 0;
-  a1->unk10 = a4;
-  if ( v7 )
+  this->speaker = 0; /*0x6b93d8*/
+  MenuTopicManager::ClearData(this, 1); /*0x6b93df*/
+  Topic = forcedGreeting; /*0x6b93e4*/
+  v5 = forcedGreeting == 0; /*0x6b93e8*/
+  this->speaker = speaker; /*0x6b93ee*/
+  if ( v5 ) /*0x6b93f1*/
   {
-    v6 = (TESTopic *)TESTopic::GEtTopic((int)v6, (int)v6);
-    if ( !v6 )
-      goto LABEL_13;
+    Topic = TESTopic::GetTopic((DialogueType)Topic, (int)Topic);// Dialog menu initialization requests Topic bucket index 0: fixed FormID 000000C8 GREETING. /*0x6b93fa*/
+    if ( !Topic ) /*0x6b9401*/
+      goto LABEL_13;                            // Null GREETING selects the nominal known-topic source later, but no seed MenuTopic was created. FillTopicList's count>=1 guard therefore leaves the manager empty; the native runtime assumes stock GREETING exists. /*0x6b9401*/
   }
-  v8 = sub_52F770(v6, &a4, (Actor *)a1->unk10, (TESObjectREFR *)TESDataHandler_g_PlayerRef);
-  v9 = v8;
-  if ( !v8 )
-    goto LABEL_13;
-  v10 = sub_52F570(v6, v8);
-  v11 = (UnkBohDialogueTopicBoh *)FormHeapAlloc(0x28u);
-  a5 = v11;
-  v12 = v11 ? sub_6B8E00(v11, v10, v6, v9, (Actor *)a1->unk10, 0) : 0;
-  BSSimpleList_PushBack(&a1->unk04, (int)v12);
-  if ( !v12 )
-    goto LABEL_13;
-  unk18 = (void *)v12->unk18;
-  if ( !unk18 )
-    goto LABEL_13;
-  if ( (*((_BYTE *)unk18 + 0x25) & 1) != 0 )
+  MatchingInfo = TESTopic::GetMatchingInfo(Topic, (bool *)&speaker, (Actor *)this->speaker, (TESObjectREFR *)reference);// GREETING selection passes a scratch pointer over the now-unused stack copy of the speaker argument. If no normal match exists, SelectInfoForSpeaker may return the last INFO rejected only by GetDisposition >/>= and set this scratch flag. /*0x6b9419*/
+  v7 = MatchingInfo; /*0x6b941e*/
+  if ( !MatchingInfo ) /*0x6b9422*/
+    goto LABEL_13;                              // No matching GREETING INFO has the same consequence as a null GREETING: no seed is pushed, so the later known-topic fallback cannot populate the empty manager. /*0x6b9422*/
+  OwnerQuest = TESTopic::GetOwnerQuest(Topic, MatchingInfo);// GREETING explicitly disables InfoRefusal substitution. Therefore a low-disposition fallback INFO returned at 6B9419 is used as the greeting itself; ordinary TOPIC choices instead pass the fallback flag into MenuTopic and substitute FormID 118 when appropriate. /*0x6b9432*/
+  v9 = (UnkBohDialogueTopicBoh *)FormHeapAlloc(0x28u); /*0x6b9434*/
+  forcedGreeting = (TESTopic *)v9; /*0x6b943c*/
+  greetingMenuTopic = v9
+                    ? MenuTopic::MenuTopic((MenuTopicView *)v9, OwnerQuest, Topic, v7, (Actor *)this->speaker, 0)
+                    : 0;
+  BSSimpleList_PushBack(&this->firstTopic, (int)greetingMenuTopic); /*0x6b946e*/
+  if ( !greetingMenuTopic ) /*0x6b9475*/
+    goto LABEL_13; /*0x6b9475*/
+  greetingInfo = greetingMenuTopic->info; /*0x6b9477*/
+  if ( !greetingInfo ) /*0x6b947c*/
+    goto LABEL_13; /*0x6b947c*/
+  if ( (*((_BYTE *)greetingInfo + 0x25) & 1) != 0 )// Goodbye GREETING is pre-committed, not skipped: AddTopicList and RunResult execute now, before speech, and Initialize returns closePending=true. DialogMenu temporarily masks that close flag while building choices, restores the head cursor, and still plays the GREETING response chain. /*0x6b9482*/
   {
-    sub_5308D0(v12->unk18);
-    sub_531470((TESForm *)unk18, a2, a3, a1->unk10);
-    return 1;
+    TESTopicInfo::AddTopicList(greetingMenuTopic->info);// Pre-speech Goodbye GREETING ordering is AddTopicList first, then RunResult. If its response chain completes normally, LoadNextTopicList reaches AddTopicList again before observing Goodbye; known-topic duplicate suppression normally makes that second acquisition idempotent. /*0x6b9486*/
+    TESTopicInfo::RunResult((OblivionTopicInfo *)greetingInfo, this->speaker);// Run the Goodbye GREETING result immediately on the dialogue speaker, before any GREETING response is played. This early commit is why the later close path does not need the clicked-Goodbye pending-INFO slot. /*0x6b9491*/
+    return 1;                                   // Return closePending=true; this is not an immediate no-speech close. DialogMenu::InitializeTopics masks the flag for its initial LoadTopicsList call, then the caller starts the head GREETING response and closes after response exhaustion. /*0x6b9498*/
   }
-  if ( v12->unk08 )
-    p_unk5E4 = (tListTopic **)(*((_DWORD *)unk18 + 0xC) + 8);
+  if ( greetingMenuTopic->hasLinkedTopics )     // GREETING linkedTo entries become the initial TOPIC choice list; without links the source is PlayerCharacter's known-topic list at +0x5E4. /*0x6b949e*/
+    choiceSource = (tListTopic *)(*((_DWORD *)greetingInfo + 0xC) + 8); /*0x6b94a7*/
   else
 LABEL_13:
-    p_unk5E4 = &TESDataHandler_g_PlayerRef->unk5E4;
-  sub_6B9010(a1, (tListTopic *)p_unk5E4);
-  a1->unk00 = (UInt32)&a1->unk04;
-  return 0;
+    choiceSource = (tListTopic *)&reference->knownTopicFirst;// Nominal fallback source is PlayerCharacter.knownTopics. It is effective only when firstTopic already has a seed; after a null/unmatched greeting, FillTopicList immediately returns. /*0x6b94b2*/
+  MenuTopicManager::FillTopicList(this, choiceSource); /*0x6b94bb*/
+  this->currentTopicNode = (MenuTopicNode *)&this->firstTopic; /*0x6b94c3*/
+  return 0; /*0x6b94c7*/
 }

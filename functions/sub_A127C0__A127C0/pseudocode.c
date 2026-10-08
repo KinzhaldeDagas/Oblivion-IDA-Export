@@ -1,4 +1,4 @@
-BSStringT *sub_A127C0()
+NiRTTI *sub_A127C0()
 {
-  return sub_70E220(&stru_BA808C, "bhkMalleableConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA808C, "bhkMalleableConstraint", &MEMORY[0xBA7D50]); /*0xa127d4*/
 }

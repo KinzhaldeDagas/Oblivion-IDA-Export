@@ -1,4 +1,4 @@
-0x7D54B0: push    0FFFFFFFFh
+0x7D54B0: push    0FFFFFFFFh; ShadowSceneLight destructor. Clears property associations before releasing backing light, shadow map, camera, exact caster root, fence, and list storage.
 0x7D54B2: push    offset ??0ShadowSceneLight@@QAE@XZ_SEH
 0x7D54B7: mov     eax, large fs:0
 0x7D54BD: push    eax
@@ -16,7 +16,7 @@
 0x7D54D7: mov     [esp+24h+var_10], esi
 0x7D54DB: mov     dword ptr [esi], offset ??_7ShadowSceneLight@@6B@; const ShadowSceneLight::`vftable'
 0x7D54E1: mov     [esp+24h+var_4], 9
-0x7D54E9: call    sub_7D21F0
+0x7D54E9: call    ShadowSceneLight_ClearReceiverAssociations; Remove property-side shadow-light links, reset shader-side state, and free this light's object/receiver list associations.
 0x7D54EE: mov     edi, [esi+0F8h]
 0x7D54F4: mov     ebp, ds:0A2807Ch
 0x7D54FA: xor     ebx, ebx
@@ -55,8 +55,8 @@
 0x7D554C: cmp     eax, ebx
 0x7D554E: jz      short loc_7D555C
 0x7D5550: mov     ecx, ds:0B42F50h; this
-0x7D5556: push    eax; a2
-0x7D5557: call    BSTextureManager_DiscardShadowMap
+0x7D5556: push    eax; texture
+0x7D5557: call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.
 0x7D555C: mov     edi, [esi+114h]
 0x7D5562: cmp     edi, ebx
 0x7D5564: jz      short loc_7D5584
@@ -257,7 +257,7 @@
 0x7D5752: lea     ecx, [esi+0E4h]
 0x7D5758: mov     byte ptr [esp+24h+var_4], bl
 0x7D575C: call    ??1?$NiTPointerList@V?$NiPointer@VNiTriBasedGeom@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiTriBasedGeom>>::~NiTPointerList<NiPointer<NiTriBasedGeom>>(void)
-0x7D5761: push    offset NiRefObject_objcount; lpAddend
+0x7D5761: push    0B3FD64h; lpAddend
 0x7D5766: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7D576C: call    ebp ; InterlockedDecrement
 0x7D576E: mov     ecx, dword ptr [esp+24h+var_C]
@@ -269,3 +269,39 @@
 0x7D577D: pop     ebx
 0x7D577E: add     esp, 10h
 0x7D5781: retn
+0x9CEC50: mov     ecx, [ebp-10h]
+0x9CEC53: jmp     NiRefObject_destr
+0x9CEC58: mov     ecx, [ebp-10h]
+0x9CEC5B: add     ecx, 0E4h ; 'ä'
+0x9CEC61: jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiTriBasedGeom@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiTriBasedGeom>>::~NiTPointerList<NiPointer<NiTriBasedGeom>>(void)
+0x9CEC66: mov     ecx, [ebp-10h]
+0x9CEC69: add     ecx, 0F8h ; 'ø'; slot
+0x9CEC6F: jmp     NiPointerSlot_Release
+0x9CEC74: mov     ecx, [ebp-10h]
+0x9CEC77: add     ecx, 100h; slot
+0x9CEC7D: jmp     NiPointerSlot_Release
+0x9CEC82: mov     ecx, [ebp-10h]
+0x9CEC85: add     ecx, 114h; slot
+0x9CEC8B: jmp     NiPointerSlot_Release
+0x9CEC90: mov     ecx, [ebp-10h]
+0x9CEC93: add     ecx, 11Ch; slot
+0x9CEC99: jmp     NiPointerSlot_Release
+0x9CEC9E: mov     ecx, [ebp-10h]
+0x9CECA1: add     ecx, 130h; slot
+0x9CECA7: jmp     NiPointerSlot_Release
+0x9CECAC: mov     ecx, [ebp-10h]
+0x9CECAF: add     ecx, 134h
+0x9CECB5: jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiAVObject@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiAVObject>>::~NiTPointerList<NiPointer<NiAVObject>>(void)
+0x9CECBA: mov     ecx, [ebp-10h]
+0x9CECBD: add     ecx, 148h; slot
+0x9CECC3: jmp     NiPointerSlot_Release
+0x9CECC8: mov     ecx, [ebp-10h]
+0x9CECCB: add     ecx, 14Ch; slot
+0x9CECD1: jmp     NiPointerSlot_Release
+0x9CECD6: mov     edx, [esp+arg_4]
+0x9CECDA: lea     eax, [edx-14h]
+0x9CECDD: mov     ecx, [edx-18h]
+0x9CECE0: xor     ecx, eax
+0x9CECE2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CECE7: mov     eax, offset stru_AF7AC8
+0x9CECEC: jmp     ___CxxFrameHandler3

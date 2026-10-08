@@ -1,4 +1,4 @@
-0x5B0A00: push    esi
+0x5B0A00: push    esi; LockPickMenu input/state handler. Auto-attempt and successful manual tumbler placement both award Security useValue0.
 0x5B0A01: push    3F6h
 0x5B0A06: mov     esi, ecx
 0x5B0A08: call    Menu_GetOpenMenuTile
@@ -39,9 +39,9 @@
 0x5B0A87: cmp     dword ptr [eax+44h], 0
 0x5B0A8B: jz      short loc_5B0AA7
 0x5B0A8D: mov     ecx, ds:0B35ECCh
-0x5B0A93: push    ecx
-0x5B0A94: mov     ecx, ds:0B333C4h
-0x5B0A9A: call    TESObjectREF_GetItemCount
+0x5B0A93: push    ecx; item
+0x5B0A94: mov     ecx, ds:0B333C4h; this
+0x5B0A9A: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
 0x5B0A9F: test    eax, eax
 0x5B0AA1: jz      loc_5B0B69
 0x5B0AA7: cmp     edi, 5
@@ -49,26 +49,26 @@
 0x5B0AB0: fld1
 0x5B0AB2: push    ecx
 0x5B0AB3: mov     ecx, [esi+178h]; this
-0x5B0AB9: fstp    [esp+10h+a2]; a3
-0x5B0ABC: push    0FAEh; a2
-0x5B0AC1: call    Tile_SetFloat
+0x5B0AB9: fstp    [esp+10h+a2]; value
+0x5B0ABC: push    0FAEh; propertyCode
+0x5B0AC1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B0AC6: mov     ecx, [esi+178h]
 0x5B0ACC: push    0; float
 0x5B0ACE: call    sub_58FBA0
 0x5B0AD3: mov     ebx, 1
 0x5B0AD8: cmp     [esi+150h], ebx
 0x5B0ADE: jz      loc_5B0CCB
-0x5B0AE4: mov     ecx, [esi+38h]; this
-0x5B0AE7: call    TESObjectREFR_GetOwner
+0x5B0AE4: mov     ecx, [esi+38h]; reference
+0x5B0AE7: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5B0AEC: test    eax, eax
 0x5B0AEE: jz      short loc_5B0B29
 0x5B0AF0: cmp     byte ptr [esi+17Ch], 0
 0x5B0AF7: jnz     short loc_5B0B29
 0x5B0AF9: mov     edx, ds:0B333C4h
-0x5B0AFF: mov     ecx, [esi+38h]; this
+0x5B0AFF: mov     ecx, [esi+38h]; reference
 0x5B0B02: mov     edi, [edx]
 0x5B0B04: push    0FFFFFFFFh
-0x5B0B06: call    TESObjectREFR_GetOwner
+0x5B0B06: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5B0B0B: mov     ecx, ds:0B333C4h
 0x5B0B11: mov     edx, [edi+248h]
 0x5B0B17: push    eax
@@ -81,7 +81,7 @@
 0x5B0B29: mov     ds:0B3B3F5h, bl
 0x5B0B2F: mov     ecx, esi
 0x5B0B31: mov     [esi+17Ch], bl
-0x5B0B37: call    sub_5B0260
+0x5B0B37: call    LockPickMenu_TryAutoAttempt
 0x5B0B3C: test    al, al
 0x5B0B3E: jz      loc_5B0CEA
 0x5B0B44: lea     eax, [esi+94h]
@@ -100,18 +100,18 @@
 0x5B0B66: retn    8
 0x5B0B69: cmp     dword ptr [esi+160h], 0
 0x5B0B70: jl      loc_5B0CCB
-0x5B0B76: mov     ecx, [esi+38h]; this
-0x5B0B79: call    TESObjectREFR_GetOwner
+0x5B0B76: mov     ecx, [esi+38h]; reference
+0x5B0B79: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5B0B7E: test    eax, eax
 0x5B0B80: mov     ebx, 1
 0x5B0B85: jz      short loc_5B0BBF
 0x5B0B87: cmp     byte ptr [esi+17Ch], 0
 0x5B0B8E: jnz     short loc_5B0BBF
 0x5B0B90: mov     eax, ds:0B333C4h
-0x5B0B95: mov     ecx, [esi+38h]; this
+0x5B0B95: mov     ecx, [esi+38h]; reference
 0x5B0B98: mov     edi, [eax]
 0x5B0B9A: push    0FFFFFFFFh
-0x5B0B9C: call    TESObjectREFR_GetOwner
+0x5B0B9C: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5B0BA1: mov     ecx, [esi+38h]
 0x5B0BA4: mov     edx, [edi+248h]
 0x5B0BAA: push    eax
@@ -143,7 +143,7 @@
 0x5B0C13: fstp    [esp+10h+a2]
 0x5B0C16: push    0
 0x5B0C18: push    1Eh
-0x5B0C1A: call    eax
+0x5B0C1A: call    eax; Successful manual tumbler set: Security (0x1E), useValue0, identity scale (0.0).
 0x5B0C1C: mov     ecx, ds:0B333C4h
 0x5B0C22: mov     edx, [ecx]
 0x5B0C24: mov     eax, [edx+284h]
@@ -162,9 +162,9 @@
 0x5B0C53: fild    [esp+0Ch+arg_0]
 0x5B0C57: push    ecx
 0x5B0C58: mov     ecx, [esi+28h]; this
-0x5B0C5B: fstp    [esp+10h+a2]; a3
-0x5B0C5E: push    0FB2h; a2
-0x5B0C63: call    Tile_SetFloat
+0x5B0C5B: fstp    [esp+10h+a2]; value
+0x5B0C5E: push    0FB2h; propertyCode
+0x5B0C63: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B0C68: mov     eax, [esi+160h]
 0x5B0C6E: lea     ecx, [eax+eax*4]
 0x5B0C71: mov     [esi+150h], ebx
@@ -175,10 +175,10 @@
 0x5B0C8F: mov     eax, [esi+160h]
 0x5B0C95: add     eax, 4
 0x5B0C98: lea     eax, [eax+eax*4]
-0x5B0C9B: mov     ecx, [esi+eax*8]
+0x5B0C9B: mov     ecx, [esi+eax*8]; this
 0x5B0C9E: test    ecx, ecx
 0x5B0CA0: jz      short loc_5B0CBF
-0x5B0CA2: call    sub_6B7260
+0x5B0CA2: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5B0CA7: test    al, al
 0x5B0CA9: jz      short loc_5B0CBF
 0x5B0CAB: mov     eax, [esi+160h]

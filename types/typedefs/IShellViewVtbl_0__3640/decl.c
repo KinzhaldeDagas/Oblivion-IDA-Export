@@ -1,1 +1,1 @@
-IShellViewVtbl_0
+typedef IShellViewVtbl IShellViewVtbl_0;

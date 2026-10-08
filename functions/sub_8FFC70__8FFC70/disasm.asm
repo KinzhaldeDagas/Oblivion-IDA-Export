@@ -53,8 +53,8 @@
 0x8FFD35: add     ecx, 0Ch
 0x8FFD38: mov     [edx+1A4h], ecx
 0x8FFD3E: mov     eax, [ebp+arg_C]
-0x8FFD41: mov     ecx, [ebp+arg_4]
-0x8FFD44: mov     edx, [ebp+arg_0]
+0x8FFD41: mov     ecx, dword ptr [ebp+arg_0+4]
+0x8FFD44: mov     edx, dword ptr [ebp+arg_0]
 0x8FFD47: push    eax
 0x8FFD48: push    ebx
 0x8FFD49: push    ecx
@@ -96,9 +96,9 @@
 0x8FFDCB: mov     [ecx+4], eax
 0x8FFDCE: add     ecx, 0Ch
 0x8FFDD1: mov     [edi+1A4h], ecx
-0x8FFDD7: mov     eax, [ebp+arg_0]
+0x8FFDD7: mov     eax, dword ptr [ebp+arg_0]
 0x8FFDDA: mov     edx, [eax]
-0x8FFDDC: mov     edi, [ebp+arg_4]
+0x8FFDDC: mov     edi, dword ptr [ebp+arg_0+4]
 0x8FFDDF: lea     ecx, [esp+380h+var_2D0]
 0x8FFDE6: mov     [esp+380h+var_358], ecx
 0x8FFDEA: mov     ecx, [eax+4]
@@ -130,7 +130,7 @@
 0x8FFE3A: call    sub_8DD150
 0x8FFE3F: mov     edx, [edi]
 0x8FFE41: movsx   eax, byte ptr [esi+14h]
-0x8FFE45: mov     ecx, [ebp+arg_0]
+0x8FFE45: mov     ecx, dword ptr [ebp+arg_0]
 0x8FFE48: mov     ecx, [ecx]
 0x8FFE4A: lea     edi, [esi+0Ch]
 0x8FFE4D: mov     dword ptr [esp+398h+var_378+0Ch], edx
@@ -201,13 +201,13 @@
 0x8FFF55: mov     ecx, ds:0BA9DE4h
 0x8FFF5B: mov     edi, large fs:2Ch
 0x8FFF62: mov     eax, [ebx+14h]
-0x8FFF65: mov     edx, [ebp+arg_0]
+0x8FFF65: mov     edx, dword ptr [ebp+arg_0]
 0x8FFF68: mov     [esi+18h], eax
 0x8FFF6B: fld     dword ptr [ebx+18h]
 0x8FFF6E: mov     eax, [edx+8]
 0x8FFF71: fld     st
 0x8FFF73: fmul    dword ptr [eax+5Ch]
-0x8FFF76: mov     edx, [ebp+arg_4]
+0x8FFF76: mov     edx, dword ptr [ebp+arg_0+4]
 0x8FFF79: mov     edx, [edx+8]
 0x8FFF7C: fxch    st(1)
 0x8FFF7E: fmul    dword ptr [edx+5Ch]
@@ -311,12 +311,12 @@
 0x9000E9: lea     edx, [eax+0Ch]
 0x9000EC: mov     eax, [edi+ecx*4]
 0x9000EF: mov     [eax+1A4h], edx
-0x9000F5: mov     edx, [ebp+arg_4]
+0x9000F5: mov     edx, dword ptr [ebp+arg_0+4]
 0x9000F8: fld     dword ptr [esi+2Ch]
-0x9000FB: mov     eax, [ebp+arg_0]
-0x9000FE: mov     [esp+380h+var_33C], edx
+0x9000FB: mov     eax, dword ptr [ebp+arg_0]
+0x9000FE: mov     dword ptr [esp+380h+var_340+4], edx
 0x900102: mov     edx, [esp+380h+var_368]
-0x900106: mov     [esp+380h+var_340], eax
+0x900106: mov     dword ptr [esp+380h+var_340], eax
 0x90010A: mov     eax, [esi+8]
 0x90010D: mov     [esp+380h+var_2F8+8], edx
 0x900114: mov     edx, [ebx+28h]
@@ -396,11 +396,11 @@
 0x9001FE: add     ecx, 0Ch
 0x900201: mov     [edi+1A4h], ecx
 0x900207: mov     ecx, [esp+380h+var_368]
-0x90020B: mov     eax, [ebp+arg_0]
+0x90020B: mov     eax, dword ptr [ebp+arg_0]
 0x90020E: mov     [esi+2Ch], ecx
 0x900211: mov     edx, [ebx+8]
 0x900214: mov     eax, [eax]
-0x900216: mov     ecx, [ebp+arg_4]
+0x900216: mov     ecx, dword ptr [ebp+arg_0+4]
 0x900219: mov     ebx, [ecx]
 0x90021B: movaps  xmm0, xmmword ptr [esi+20h]
 0x90021F: mov     [esp+380h+var_178], edx
@@ -432,7 +432,7 @@
 0x90028F: push    ecx
 0x900290: mov     ecx, eax
 0x900292: call    dword ptr [edx+28h]
-0x900295: mov     edx, [ebp+arg_0]
+0x900295: mov     edx, dword ptr [ebp+arg_0]
 0x900298: mov     eax, [edx+8]
 0x90029B: movzx   edx, byte ptr [edi]
 0x90029E: movaps  xmm1, xmmword ptr [eax]
@@ -442,7 +442,6 @@
 0x9002AD: mov     dword ptr [esp+380h+var_378+0Ch], edx
 0x9002B1: lea     ecx, [esp+380h+var_290]
 0x9002B8: jmp     short loc_9002C0
-0x9002BA: align 10h
 0x9002C0: movaps  xmm0, xmmword ptr [ecx]
 0x9002C3: mov     eax, dword ptr [esp+380h+var_378+0Ch]
 0x9002C7: movaps  xmm5, xmm0
@@ -480,7 +479,7 @@
 0x900327: push    edx
 0x900328: mov     ecx, ebx
 0x90032A: call    dword ptr [eax+28h]
-0x90032D: mov     eax, [ebp+arg_4]
+0x90032D: mov     eax, dword ptr [ebp+arg_0+4]
 0x900330: mov     eax, [eax+8]
 0x900333: movzx   edx, byte ptr [edi+1]
 0x900337: mov     ecx, dword ptr [esp+380h+var_378+0Ch]

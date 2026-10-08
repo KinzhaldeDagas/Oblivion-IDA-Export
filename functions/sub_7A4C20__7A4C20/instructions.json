@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A4C20",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Clears the leaf-texture vector through erase(begin,end), retaining allocated capacity.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,49 +79,49 @@
   },
   {
     "ea": "0x7A4C42",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C43",
-    "line": "push    esi",
+    "line": "push    esi; lastOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C44",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C45",
-    "line": "push    esi",
+    "line": "push    esi; firstOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C46",
-    "line": "lea     eax, [esp+24h+var_8]",
+    "line": "lea     eax, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A4C4A",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C4B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A4C4D",
-    "line": "call    sub_7A4B80",
+    "line": "call    OB_stVector_SIdvLeafTexture_EraseRange_010201A0; Checked leaf-texture vector erase: shifts the tail by deep assignment, destroys the vacated suffix, updates end, and returns {owner,current}.",
     "mnemonic": "call",
     "size": 5
   },

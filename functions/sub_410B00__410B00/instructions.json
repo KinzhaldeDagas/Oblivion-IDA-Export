@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x410B02",
-    "line": "mov     esi, ObjectPtr",
+    "line": "mov     esi, ds:0B33428h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x410B4D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x410B55",
-    "line": "mov     ObjectPtr, ebx",
+    "line": "mov     ds:0B33428h, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x410B5B",
-    "line": "mov     eax, dword_B3342C",
+    "line": "mov     eax, dword ptr unk_B3342C",
     "mnemonic": "mov",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x410B64",
-    "line": "mov     ObjectPtr, eax",
+    "line": "mov     ds:0B33428h, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x410B69",
-    "line": "mov     dword_B3342C, ebx",
+    "line": "mov     dword ptr unk_B3342C, ebx",
     "mnemonic": "mov",
     "size": 6
   },

@@ -51,9 +51,9 @@
 0x89F7C1: call    NiObjectNET_SetName
 0x89F7C6: test    edi, edi
 0x89F7C8: fldz
-0x89F7CA: fst     [esp+28h+var_18]
-0x89F7CE: fst     [esp+28h+var_14]
-0x89F7D2: fstp    [esp+28h+var_10]
+0x89F7CA: fst     [esp+28h+var_18.x]
+0x89F7CE: fst     [esp+28h+var_18.y]
+0x89F7D2: fstp    [esp+28h+var_18.z]
 0x89F7D6: jz      short loc_89F7E9
 0x89F7D8: mov     eax, [edi+8]
 0x89F7DB: test    eax, eax
@@ -68,9 +68,9 @@
 0x89F7F0: push    eax
 0x89F7F1: call    sub_8A8140
 0x89F7F6: add     esp, 8
-0x89F7F9: push    offset dword_B25AC4
-0x89F7FE: lea     ecx, [esp+2Ch+var_18]
-0x89F802: call    sub_8AA390
+0x89F7F9: push    offset stru_B25AC4; other
+0x89F7FE: lea     ecx, [esp+2Ch+var_18]; this
+0x89F802: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x89F807: test    al, al
 0x89F809: jz      loc_89F8A0
 0x89F80F: push    5Ch ; '\'; Size
@@ -101,18 +101,18 @@
 0x89F86E: add     ecx, edi
 0x89F870: mov     [eax+54h], ecx
 0x89F873: mov     [eax+30h], edx
-0x89F876: mov     edx, [esp+28h+var_18]
+0x89F876: mov     edx, [esp+28h+var_18.x]
 0x89F87A: mov     [eax+40h], edx
-0x89F87D: mov     edx, [esp+28h+var_14]
+0x89F87D: mov     edx, [esp+28h+var_18.y]
 0x89F881: mov     [eax+44h], edx
-0x89F884: mov     edx, [esp+28h+var_10]
+0x89F884: mov     edx, [esp+28h+var_18.z]
 0x89F888: add     ecx, edi
 0x89F88A: mov     [eax+54h], ecx
 0x89F88D: push    eax; a2
 0x89F88E: mov     ecx, esi; this
 0x89F890: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x89F898: mov     [eax+48h], edx
-0x89F89B: call    sub_405680
+0x89F89B: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x89F8A0: mov     eax, [ebp+0]
 0x89F8A3: mov     edx, [eax+90h]
 0x89F8A9: push    esi
@@ -136,3 +136,20 @@
 0x89F8D7: pop     ebp
 0x89F8D8: add     esp, 18h
 0x89F8DB: retn    4
+0x9D6840: mov     eax, [ebp+4]
+0x9D6843: push    eax
+0x9D6844: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D6849: pop     ecx
+0x9D684A: retn
+0x9D684B: mov     eax, [ebp+4]
+0x9D684E: push    eax
+0x9D684F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D6854: pop     ecx
+0x9D6855: retn
+0x9D6856: mov     edx, [esp+arg_4]
+0x9D685A: lea     eax, [edx-18h]
+0x9D685D: mov     ecx, [edx-1Ch]
+0x9D6860: xor     ecx, eax
+0x9D6862: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6867: mov     eax, offset stru_AFE618
+0x9D686C: jmp     ___CxxFrameHandler3

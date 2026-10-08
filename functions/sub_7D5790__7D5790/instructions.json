@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D5790",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Associate receiver geometry only after BSShaderProperty RTTI, NiPropertyState+0x18 property-kind-4 lookup, and shader subtype 1..10. Existing links reorder; new links are inserted into both light-local and property-side ownership.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x7D57BB",
-    "line": "mov     [esp+34h+var_20], ebx",
+    "line": "mov     [esp+34h+output], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D57BF",
-    "line": "mov     esi, [esp+34h+arg_0]",
+    "line": "mov     esi, [esp+34h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7D57C4",
-    "line": "call    sub_7B8150",
+    "line": "call    NiGeometry_GetBSShaderProperty; Native receiver pre-gate: read NiGeometry+0xBC direct shader-property slot and require BSShaderProperty RTTI/cast success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,25 +139,25 @@
   },
   {
     "ea": "0x7D57D0",
-    "line": "lea     eax, [esp+34h+var_20]",
+    "line": "lea     eax, [esp+34h+output]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D57D4",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D57D5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D57D7",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7D57E4",
-    "line": "mov     byte ptr [esp+34h+arg_0], 0",
+    "line": "mov     byte ptr [esp+34h+geometry], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7D57EB",
-    "line": "mov     byte ptr [esp+34h+arg_0], 1",
+    "line": "mov     byte ptr [esp+34h+geometry], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7D57F5",
-    "line": "mov     edi, [esp+34h+var_20]",
+    "line": "mov     edi, [esp+34h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x7D5819",
-    "line": "cmp     byte ptr [esp+34h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+34h+geometry], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7D5824",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x7D583C",
-    "line": "lea     ecx, [esp+34h+arg_0]",
+    "line": "lea     ecx, [esp+34h+geometry]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D5840",
-    "line": "push    ecx",
+    "line": "push    ecx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D5841",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7D5848",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7D5852",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x7D588B",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7D5890",
-    "line": "call    dword ptr ds:0A28074h",
+    "line": "call    dword ptr ds:0A28074h; MEF PERF 2026-10-07 PASS2: PERF-13 synchronization limit: critical section B3FA00 is LEFT here before subtype virtual calls and tail search7D58C2. Its presence does not prove mutual exclusion for receiver-list searches/index lifetime. Establish all writers/reentrancy before enabling cached node pointers.",
     "mnemonic": "call",
     "size": 6
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x7D58C2",
-    "line": "mov     ebx, [ebp+144h]",
+    "line": "mov     ebx, [ebp+144h]; MEF PERF 2026-10-07 PASS2: PERF-13 Verified search scope: reload receiverCursor+144 into EBX then scan EAX from fence at7D58D0, comparing node payload+8. Matched nodes move before fence at7D597C; new entries insert at list HEAD7D5935. Neither is searched again in this pass. A whole-list membership cache would change duplicate/repeated-visit semantics.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x7D58D0",
-    "line": "cmp     [eax+8], esi",
+    "line": "cmp     [eax+8], esi; MEF PERF 2026-10-07 PASS2: PERF-13 admission cost: if S old distinct receivers are unmatched and M distinct accepted new geometries are disjoint, each miss compares fence plus S old entries: M*(S+1). For N old receivers visited in reverse tail order, hit comparisons are N*(N+3)/2. Assumes stable links/callback behavior; no scene-size or FPS measurement.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x7D58E2",
-    "line": "jnz     short loc_7D58D0",
+    "line": "jnz     short loc_7D58D0; MEF PERF 2026-10-07 PASS2: PERF-13 admission cost: if S old distinct receivers are unmatched and M distinct accepted new geometries are disjoint, each miss compares fence plus S old entries: M*(S+1). For N old receivers visited in reverse tail order, hit comparisons are N*(N+3)/2. Assumes stable links/callback behavior; no scene-size or FPS measurement.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x7D58E4",
-    "line": "test    dword ptr [edi+1Ch], 1000h",
+    "line": "test    dword ptr [edi+1Ch], 1000h; passInfo bit 0x1000 vetoes a new receiver association for non-TallGrass shader properties; subtype 4 is the TallGrass exception.",
     "mnemonic": "test",
     "size": 7
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x7D590B",
-    "line": "call    sub_7EE330",
+    "line": "call    BSShaderProperty_AddShadowLight; Insert ShadowSceneLight into BSShaderProperty+0x6C in receiver-distance order and clear property cache/dirty state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7D5912",
-    "line": "mov     [esp+34h+arg_0], esi",
+    "line": "mov     [esp+34h+geometry], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -793,19 +793,19 @@
   },
   {
     "ea": "0x7D5922",
-    "line": "lea     ecx, [esp+34h+arg_0]",
+    "line": "lea     ecx, [esp+34h+geometry]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D5926",
-    "line": "push    ecx",
+    "line": "push    ecx; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D5927",
-    "line": "lea     ecx, [ebp+0E4h]",
+    "line": "lea     ecx, [ebp+0E4h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x7D5935",
-    "line": "call    sub_749800",
+    "line": "call    NiTRefPointerList__AddHead; Insert the accepted exact NiGeometry leaf into this ShadowSceneLight's refcounted object/receiver list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,25 +955,25 @@
   },
   {
     "ea": "0x7D5974",
-    "line": "push    ebx",
+    "line": "push    ebx; before",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D5975",
-    "line": "push    edx",
+    "line": "push    edx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D5976",
-    "line": "lea     ecx, [ebp+0E4h]",
+    "line": "lea     ecx, [ebp+0E4h]; self",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7D597C",
-    "line": "call    sub_7C58F0",
+    "line": "call    NiTPointerList_MoveNodeBefore; MEF PERF 2026-10-07 PASS2: PERF-13 hit semantics: MoveNodeBefore repositions the exact matching OLD-TAIL node immediately before fence, with no node allocation/refcount/count change. Remove that occurrence from a proposed tail index. Preserve later receiver-bound property reordering when +104 true and +F4 false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x7D599C",
-    "line": "mov     [esp+34h+var_1C], ecx",
+    "line": "mov     [esp+34h+bound.centerX], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1033,43 +1033,43 @@
   },
   {
     "ea": "0x7D59A3",
-    "line": "mov     [esp+34h+var_18], edx",
+    "line": "mov     [esp+34h+bound.centerY], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D59A7",
-    "line": "lea     edx, [esp+34h+var_1C]",
+    "line": "lea     edx, [esp+34h+bound]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D59AB",
-    "line": "mov     [esp+34h+var_10], ecx",
+    "line": "mov     [esp+34h+bound.radius], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D59AF",
-    "line": "push    edx",
+    "line": "push    edx; bound",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D59B0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D59B2",
-    "line": "mov     [esp+38h+var_14], eax",
+    "line": "mov     [esp+38h+bound.centerZ], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D59B6",
-    "line": "call    sub_7ECEC0",
+    "line": "call    BSShaderProperty_ReorderShadowLightsForReceiverBound; MEF PERF 2026-10-07 PASS3: PERF-14 sole direct caller found: receiver association HIT moved old receiver before fence, then +104 tracking enabled and +F4 projector mode clear cause whole PROPERTY light-list reorder with geometry bound copied from+20..+2C. Can repeat for multiple source reconciliations on one receiver. If Q eligible calls see unchanged N-light sorted list, score calls=Q*N*(N+1)/2; Q=N gives cubic scaling, not a proven per-frame population.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1078,5 +1078,59 @@
     "line": "jmp     short loc_7D595E",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9CEBB0",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEBB3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEBB8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEBBC",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEBBF",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEBC2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEBC4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEBC9",
+    "line": "mov     eax, offset stru_AF7A4C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEBCE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

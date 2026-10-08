@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9E9C40",
-    "line": "push    32h ; '2'",
+    "line": "push    32h ; '2'; defaultValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9E9C47",
-    "line": "mov     ecx, offset dword_B370C8",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3F0h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9E9C4C",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Register integer game setting iArrowInventoryChance with default value 50. Actor-hit recovery compares random 0..99 against this live setting.",
     "mnemonic": "call",
     "size": 5
   },

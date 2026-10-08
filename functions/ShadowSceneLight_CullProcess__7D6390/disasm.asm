@@ -1,25 +1,25 @@
-0x7D6390: sub     esp, 0A4h
+0x7D6390: sub     esp, 0A4h; Oblivion ShadowSceneLight cull/update path: tests camera/shadow-volume overlap and cube-face visibility, updates category visibility and receiver state, and returns obsolete shadow maps to BSTextureManager.
 0x7D6396: push    ebx
 0x7D6397: push    ebp
 0x7D6398: push    esi
 0x7D6399: push    edi; _DWORD
 0x7D639A: mov     ebp, ecx
-0x7D639C: call    InitBSShaderAccumulator
+0x7D639C: call    BSShaderAccumulator_GetOrCreateGlobal
 0x7D63A1: cmp     byte ptr ds:0B42CDBh, 0
 0x7D63A8: jnz     loc_7D68E6
 0x7D63AE: mov     eax, [ebp+100h]
 0x7D63B4: mov     ecx, [eax+88h]
 0x7D63BA: fld     dword ptr [eax+0F8h]
 0x7D63C0: mov     bl, [ebp+0F4h]
-0x7D63C6: fstp    [esp+0B4h+var_90.Radius]
+0x7D63C6: fstp    [esp+0B4h+self.Radius]
 0x7D63CA: test    bl, bl
 0x7D63CC: mov     edx, [eax+8Ch]
-0x7D63D2: mov     [esp+0B4h+var_90.Center.x], ecx
+0x7D63D2: mov     [esp+0B4h+self.Center.x], ecx
 0x7D63D6: mov     ecx, [eax+90h]
-0x7D63DC: mov     [esp+0B4h+var_98], 0
+0x7D63DC: mov     [esp+0B4h+var_98], 0; Initialize pending CullProcess status before camera, face, distance, and frustum tests.
 0x7D63E4: mov     [esp+0B4h+var_99], 1
-0x7D63E9: mov     [esp+0B4h+var_90.Center.y], edx
-0x7D63ED: mov     [esp+0B4h+var_90.Center.z], ecx
+0x7D63E9: mov     [esp+0B4h+self.Center.y], edx
+0x7D63ED: mov     [esp+0B4h+self.Center.z], ecx
 0x7D63F1: jz      short loc_7D6427
 0x7D63F3: mov     ecx, [ebp+14Ch]
 0x7D63F9: test    ecx, ecx
@@ -29,12 +29,12 @@
 0x7D6407: push    ecx
 0x7D6408: push    eax
 0x7D6409: mov     ecx, ebp
-0x7D640B: call    sub_7D34C0
+0x7D640B: call    ShadowCameraVolumesOverlap; Evaluate the special camera/projector overlap predicate.
 0x7D6410: neg     al
 0x7D6412: sbb     eax, eax
 0x7D6414: and     eax, 0FFFFFF01h
 0x7D6419: add     eax, 0FFh
-0x7D641E: mov     [esp+0B4h+var_98], eax
+0x7D641E: mov     [esp+0B4h+var_98], eax; Map camera/projector overlap result to pending cull status 0 or 0x00FF.
 0x7D6422: jmp     loc_7D6539
 0x7D6427: mov     esi, [esp+0B4h+arg_0]
 0x7D642E: add     esi, 2Ch ; ','
@@ -57,13 +57,13 @@
 0x7D6466: mov     edx, [edi+0Ch]
 0x7D6469: lea     eax, [esp+0B4h+a2]
 0x7D646D: mov     [esp+0B4h+a2.CullingPlanes.Normal.z], ecx
-0x7D6471: push    eax; a2
-0x7D6472: lea     ecx, [esp+0B8h+var_90]; this
+0x7D6471: push    eax; plane
+0x7D6472: lea     ecx, [esp+0B8h+self]; self
 0x7D6476: mov     [esp+0B8h+a2.CullingPlanes.Constant], edx
-0x7D647A: call    sub_47DA70
+0x7D647A: call    NiBound_ClassifyAgainstPlane
 0x7D647F: cmp     eax, 2
 0x7D6482: jz      loc_7D6635
-0x7D6488: lea     ecx, [esp+0B4h+var_90]
+0x7D6488: lea     ecx, [esp+0B4h+self]
 0x7D648C: push    ecx
 0x7D648D: lea     ecx, [esp+0B8h+a2]
 0x7D6491: call    sub_7415E0
@@ -85,33 +85,32 @@
 0x7D64CF: setnle  al
 0x7D64D2: test    al, al
 0x7D64D4: jz      short loc_7D6539
-0x7D64D6: cmp     byte ptr [ebp+0F5h], 0
+0x7D64D6: cmp     byte ptr [ebp+0F5h], 0; Only specialCubeDispatch lights enter the native six-face visibility test.
 0x7D64DD: jz      short loc_7D6539
-0x7D64DF: mov     edi, [esp+0B4h+var_90.Radius]
+0x7D64DF: mov     edi, [esp+0B4h+self.Radius]
 0x7D64E3: xor     esi, esi
 0x7D64E5: xor     ebx, ebx
 0x7D64E7: jmp     short loc_7D64F0
-0x7D64E9: align 10h
 0x7D64F0: mov     edx, [esp+0B4h+arg_0]
-0x7D64F7: mov     ecx, [esp+0B4h+var_90.Center.x]
+0x7D64F7: mov     ecx, [esp+0B4h+self.Center.x]
 0x7D64FB: push    esi
 0x7D64FC: push    edx
-0x7D64FD: mov     edx, [esp+0BCh+var_90.Center.y]
+0x7D64FD: mov     edx, [esp+0BCh+self.Center.y]
 0x7D6501: sub     esp, 10h
 0x7D6504: mov     eax, esp
 0x7D6506: mov     [eax], ecx
-0x7D6508: mov     ecx, [esp+0CCh+var_90.Center.z]
+0x7D6508: mov     ecx, [esp+0CCh+self.Center.z]
 0x7D650C: mov     [eax+4], edx
 0x7D650F: mov     [eax+8], ecx
 0x7D6512: mov     ecx, ebp
 0x7D6514: mov     [eax+0Ch], edi
-0x7D6517: call    sub_7D5B20
+0x7D6517: call    ShadowSceneLight_TestSpecialCubeFaceVisibility; Test the current cube face against the supplied camera/bound state.
 0x7D651C: test    al, al
 0x7D651E: jnz     short loc_7D652D
 0x7D6520: mov     edx, 1
 0x7D6525: mov     ecx, ebx
 0x7D6527: shl     edx, cl
-0x7D6529: or      [esp+0B4h+var_98], edx
+0x7D6529: or      [esp+0B4h+var_98], edx; A failed special-face visibility test sets that face bit in pending status; mode-0 rendering later skips matching bits.
 0x7D652D: add     esi, 1
 0x7D6530: add     ebx, 1
 0x7D6533: cmp     si, 6
@@ -127,7 +126,7 @@
 0x7D655F: mov     eax, [esp+0B4h+arg_0]
 0x7D6566: fstp    st
 0x7D6568: mov     eax, [eax+0Ch]
-0x7D656B: fld     [esp+0B4h+var_90.Center.x]
+0x7D656B: fld     [esp+0B4h+self.Center.x]
 0x7D656F: mov     ecx, [eax+88h]
 0x7D6575: mov     edx, [eax+8Ch]
 0x7D657B: mov     eax, [eax+90h]
@@ -136,13 +135,13 @@
 0x7D6589: mov     [esp+0B4h+a2.CullingPlanes.Normal.z+0Ch], edx
 0x7D658D: mov     [esp+0B4h+a2.CullingPlanes.Normal.x+18h], eax
 0x7D6591: fstp    [esp+0B4h+a2.CullingPlanes.Normal.x]
-0x7D6595: fld     [esp+0B4h+var_90.Center.y]
+0x7D6595: fld     [esp+0B4h+self.Center.y]
 0x7D6599: fsub    [esp+0B4h+a2.CullingPlanes.Normal.z+0Ch]
 0x7D659D: fstp    [esp+0B4h+a2.CullingPlanes.Normal.y]
-0x7D65A1: fld     [esp+0B4h+var_90.Center.z]
+0x7D65A1: fld     [esp+0B4h+self.Center.z]
 0x7D65A5: fsub    [esp+0B4h+a2.CullingPlanes.Normal.x+18h]
 0x7D65A9: fstp    [esp+0B4h+a2.CullingPlanes.Normal.z]
-0x7D65AD: fld     [esp+0B4h+a2.CullingPlanes.Normal.y]
+0x7D65AD: fld     [esp+0B4h+a2.CullingPlanes.Normal.y]; Begin native base receiver-surface distance calculation.
 0x7D65B1: fld     [esp+0B4h+a2.CullingPlanes.Normal.x]
 0x7D65B5: fld     [esp+0B4h+a2.CullingPlanes.Normal.z]
 0x7D65B9: fld     st(1)
@@ -158,10 +157,10 @@
 0x7D65D1: call    __CIsqrt
 0x7D65D6: fstp    [esp+0B4h+var_A4]
 0x7D65DA: fld     [esp+0B4h+var_A4]
-0x7D65DE: fsub    [esp+0B4h+var_90.Radius]
-0x7D65E2: fstp    [esp+0B4h+var_A4]
+0x7D65DE: fsub    [esp+0B4h+self.Radius]
+0x7D65E2: fstp    [esp+0B4h+var_A4]; Complete base surface-distance value used by the following fade/cull thresholds.
 0x7D65E6: fld     [esp+0B4h+var_A4]
-0x7D65EA: fld     dword ptr ds:0B4307Ch
+0x7D65EA: fld     dword ptr ds:0B4307Ch; Apply the base fade threshold.
 0x7D65F0: fcom    st(1)
 0x7D65F2: fnstsw  ax
 0x7D65F4: fld1
@@ -169,7 +168,7 @@
 0x7D65F9: jz      loc_7D66BA
 0x7D65FF: fldz
 0x7D6601: fld     st
-0x7D6603: fld     dword ptr ds:0B43080h
+0x7D6603: fld     dword ptr ds:0B43080h; Apply the base hard-cull threshold.
 0x7D6609: fucom   st(1)
 0x7D660B: fnstsw  ax
 0x7D660D: fstp    st(1)
@@ -180,13 +179,13 @@
 0x7D661C: test    ah, 5
 0x7D661F: jp      short loc_7D6642
 0x7D6621: fstp    st(4)
-0x7D6623: mov     [esp+0B4h+var_98], esi
+0x7D6623: mov     [esp+0B4h+var_98], esi; Base-distance hard reject writes pending status 0x00FF and zeros local fade values.
 0x7D6627: fstp    st(2)
 0x7D6629: fstp    st(2)
 0x7D662B: fst     [esp+0B4h+var_94]
 0x7D662F: fst     [esp+0B4h+var_A0]
 0x7D6633: jmp     short loc_7D6667
-0x7D6635: mov     [esp+0B4h+var_98], 0FFh
+0x7D6635: mov     [esp+0B4h+var_98], 0FFh; Active projector-frustum plane reject writes pending status 0x00FF.
 0x7D663D: jmp     loc_7D6539
 0x7D6642: fld     st(4)
 0x7D6644: fsub    st, st(4)
@@ -210,7 +209,7 @@
 0x7D6671: fstp    st
 0x7D6673: push    2
 0x7D6675: fstp    st
-0x7D6677: call    NiNode_GetNiPropertyByID
+0x7D6677: call    NiNode_GetNiPropertyByID;
 0x7D667C: test    eax, eax
 0x7D667E: jz      short loc_7D668B
 0x7D6680: fld     dword ptr [eax+50h]
@@ -236,15 +235,15 @@
 0x7D66C0: fld1
 0x7D66C2: fstp    [esp+0B4h+var_94]
 0x7D66C6: fxch    st(1)
-0x7D66C8: cmp     byte ptr [ebp+0F4h], 0
+0x7D66C8: cmp     byte ptr [ebp+0F4h], 0; Gate the additional fade/cull stage on per-source projector mode +0xF4.
 0x7D66CF: jz      short loc_7D6663
-0x7D66D1: fld     dword ptr ds:0B43084h
+0x7D66D1: fld     dword ptr ds:0B43084h; Read additional per-source fade parameter.
 0x7D66D7: fcom    st(3)
 0x7D66D9: fnstsw  ax
 0x7D66DB: test    ah, 41h
 0x7D66DE: jz      short loc_7D672C
 0x7D66E0: fld     st(1)
-0x7D66E2: fld     dword ptr ds:0B43088h
+0x7D66E2: fld     dword ptr ds:0B43088h; Read additional per-source cull parameter; this stage drives fade separately from the base hard-status producer.
 0x7D66E8: fucom   st(1)
 0x7D66EA: fnstsw  ax
 0x7D66EC: fstp    st(1)
@@ -373,7 +372,7 @@
 0x7D6851: mov     esi, [esi]
 0x7D6853: push    4
 0x7D6855: mov     ecx, eax
-0x7D6857: call    NiNode_GetNiPropertyByID
+0x7D6857: call    NiNode_GetNiPropertyByID;
 0x7D685C: test    eax, eax
 0x7D685E: jz      short loc_7D6867
 0x7D6860: mov     dword ptr [eax+24h], 0
@@ -388,8 +387,8 @@
 0x7D6880: test    eax, eax
 0x7D6882: jz      short loc_7D68C6
 0x7D6884: mov     ecx, ds:0B42F50h; this
-0x7D688A: push    eax; a2
-0x7D688B: call    BSTextureManager_DiscardShadowMap
+0x7D688A: push    eax; texture
+0x7D688B: call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.
 0x7D6890: mov     esi, [ebp+114h]
 0x7D6896: test    esi, esi
 0x7D6898: jz      short loc_7D68C6
@@ -411,10 +410,10 @@
 0x7D68C4: fstp    st
 0x7D68C6: fld     [esp+0B4h+var_94]
 0x7D68CA: mov     cx, word ptr [esp+0B4h+var_98]
-0x7D68CF: fstp    dword ptr [ebp+0D4h]
-0x7D68D5: mov     [ebp+118h], cx
+0x7D68CF: fstp    dword ptr [ebp+0D4h]; Commit CullProcess range/fade-distance result to ShadowSceneLight+0xD4.
+0x7D68D5: mov     [ebp+118h], cx; Commit pending cull status to ShadowSceneLight+0x118.
 0x7D68DC: fld     [esp+0B4h+var_A0]
-0x7D68E0: fstp    dword ptr [ebp+0D8h]
+0x7D68E0: fstp    dword ptr [ebp+0D8h]; Commit computed visibility/fade result to ShadowSceneLight+0xD8.
 0x7D68E6: pop     edi
 0x7D68E7: pop     esi
 0x7D68E8: pop     ebp

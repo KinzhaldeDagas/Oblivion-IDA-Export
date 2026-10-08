@@ -1,4 +1,4 @@
-0x8644B0: cmp     word ptr [ecx+0C0h], 0
+0x8644B0: cmp     word ptr [ecx+0C0h], 0; Restores the current world bound from TallGrassTriStrips' saved local bound, then invokes the first NiTriStrips immediate-render path when instanceCount != 0.
 0x8644B8: mov     eax, [ecx+0C4h]
 0x8644BE: mov     edx, [ecx+0C8h]
 0x8644C4: mov     [ecx+20h], eax

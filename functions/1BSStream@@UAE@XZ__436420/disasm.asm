@@ -48,3 +48,15 @@
 0x4364BA: pop     esi
 0x4364BB: add     esp, 10h
 0x4364BE: retn
+0x9AC260: mov     ecx, [ebp-10h]; this
+0x9AC263: jmp     ??1NiStream@@UAE@XZ; NiStream::~NiStream(void)
+0x9AC268: mov     ecx, [ebp-10h]
+0x9AC26B: add     ecx, 48Ch; slot
+0x9AC271: jmp     NiPointerSlot_Release
+0x9AC276: mov     edx, [esp+arg_4]
+0x9AC27A: lea     eax, [edx-0Ch]
+0x9AC27D: mov     ecx, [edx-10h]
+0x9AC280: xor     ecx, eax
+0x9AC282: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC287: mov     eax, offset stru_AD8F74
+0x9AC28C: jmp     ___CxxFrameHandler3

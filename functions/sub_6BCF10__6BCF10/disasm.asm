@@ -11,7 +11,7 @@
 0x6BCF45: mov     dword ptr ds:0B3D378h, offset sub_6BC900
 0x6BCF4F: mov     dword ptr ds:0B3D2E8h, offset sub_6C0FE0
 0x6BCF59: mov     byte ptr ds:0B3D3F0h, 40h ; '@'
-0x6BCF60: call    sub_6BCEB0
+0x6BCF60: call    NiPosKey_RegisterEvaluatorType2; Position type 2 registers NiPosKey_InsertType2Cubic for GuaranteeTimeRange boundary insertion.
 0x6BCF65: add     esp, 8
 0x6BCF68: mov     eax, 1
 0x6BCF6D: retn

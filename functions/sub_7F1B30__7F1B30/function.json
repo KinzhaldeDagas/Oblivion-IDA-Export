@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F1B30",
+      "0x7F1B41"
+    ]
+  ],
+  "chunks_sha256": "acd2d439cd5564b9020801f0729d141dc2c026f15942b32ddcd3e40a988ed246",
+  "comment_regular": "Leaf-property virtual +0xA0. Returns STLSPData.leafConstantTable from property +0xA8.\n\n[2026-10-02 Fallout comparative pass]\nVerified homolog of Fallout SpeedTreeLeafShaderProperty::GetLeafMaps 0x8220EDF8. Vtable +0xA0 (entry 0xA92A6C), returns float* payload+8 or null. Consumer 0x7F0BC0 copies exactly 0x300 bytes into shader object+0x7C.\n\nSpeedTreeLeafShaderProperty leaf table accessor used as virtual +0xA0; returns STLSPData+0x08 from property +0xA8.",
+  "comment_repeatable": "SpeedTreeLeafShaderProperty leaf table accessor used as virtual +0xA0; returns STLSPData+0x08 from property +0xA8.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F1B30",
+  "display_name": "OB_SpeedTreeLeafShaderProperty_GetLeafConstantTable_010201A0",
   "end_ea": "0x7F1B41",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1B30",
+  "name": "OB_SpeedTreeLeafShaderProperty_GetLeafConstantTable_010201A0",
   "segment": ".text",
   "sha256": "acd2d439cd5564b9020801f0729d141dc2c026f15942b32ddcd3e40a988ed246",
   "size": 17,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1B30",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 17,
+  "type": "float *__thiscall(const OB_SpeedTreeLeafShaderProperty_010201A0 *this)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 1
 }

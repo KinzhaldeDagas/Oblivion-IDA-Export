@@ -1,26 +1,26 @@
 char __cdecl sub_4F7B90(int a1, int a2, int a3, double *a4)
 {
-  int v7; // eax
-  TESClass *v8; // eax
+  int v4; // eax
+  TESClass *v5; // eax
 
-  *a4 = 0.0;
-  if ( a1 )
+  *a4 = 0.0; /*0x4f7b9e*/
+  if ( a1 ) /*0x4f7ba0*/
   {
-    if ( *(_BYTE *)((*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x170))(a1) + 4) == 0x23 )
+    if ( *(_BYTE *)((*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x170))(a1) + 4) == 0x23 ) /*0x4f7bb2*/
     {
-      v7 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x170))(a1);
-      if ( v7 )
+      v4 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x170))(a1); /*0x4f7bbe*/
+      if ( v4 ) /*0x4f7bc2*/
       {
-        v8 = *(TESClass **)(v7 + 0x104);
-        if ( v8 )
+        v5 = *(TESClass **)(v4 + 0x104); /*0x4f7bc4*/
+        if ( v5 ) /*0x4f7bcc*/
         {
-          if ( TESClass::IsGuardClass(v8) )
-            *a4 = 1.0;
+          if ( TESClass::IsGuardClass(v5) ) /*0x4f7bd0*/
+            *a4 = 1.0; /*0x4f7bdb*/
         }
       }
     }
   }
-  if ( IsConsoleMode )
-    Interface_ConsolePrint("Is Guard >> %0.2f", *a4);
-  return 1;
+  if ( MEMORY[0xB361AC] ) /*0x4f7bdd*/
+    Interface_ConsolePrint("Is Guard >> %0.2f", *a4); /*0x4f7bf3*/
+  return 1; /*0x4f7bfb*/
 }

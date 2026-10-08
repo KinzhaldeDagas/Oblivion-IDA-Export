@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x5E6217",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5E6232",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5E6280",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x5E6297",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5E62AF",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x5E62CE",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x5E62EF",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x5E630A",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x5E6333",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x5E6355",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x5E63CA",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x5E6461",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x5E6478",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x5E64C9",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x5E64D9",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1591,43 +1591,43 @@
   },
   {
     "ea": "0x5E64E3",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E64E5",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E64E7",
-    "line": "push    1",
+    "line": "push    1; append",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E64E9",
-    "line": "push    1",
+    "line": "push    1; processLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E64EB",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E64EC",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5E64F1",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x5E650C",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x5E6546",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },

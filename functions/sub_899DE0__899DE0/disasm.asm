@@ -65,7 +65,6 @@
 0x899E84: test    eax, eax
 0x899E86: jle     short loc_899EB3
 0x899E88: jmp     short loc_899E90
-0x899E8A: align 10h
 0x899E90: mov     eax, [edi+0B8h]
 0x899E96: mov     ecx, [eax+ebx*4]
 0x899E99: mov     edx, [esi]

@@ -1,1 +1,1 @@
-CURDIR
+typedef _CURDIR CURDIR;

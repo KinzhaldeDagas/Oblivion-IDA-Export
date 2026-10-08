@@ -69,7 +69,7 @@
 0x5F5DD5: mov     ecx, edi
 0x5F5DD7: call    ContainerEntryExtraData_DestroyDataTable
 0x5F5DDC: push    edi
-0x5F5DDD: call    FormHeapFree
+0x5F5DDD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F5DE2: add     esp, 4
 0x5F5DE5: mov     ecx, [esi+58h]
 0x5F5DE8: mov     eax, [ecx]
@@ -153,7 +153,7 @@
 0x5F5EC4: mov     ecx, ebp
 0x5F5EC6: call    ContainerEntryExtraData_DestroyDataTable
 0x5F5ECB: push    ebp
-0x5F5ECC: call    FormHeapFree
+0x5F5ECC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F5ED1: add     esp, 4
 0x5F5ED4: mov     ecx, [esi+58h]
 0x5F5ED7: mov     eax, [ecx]

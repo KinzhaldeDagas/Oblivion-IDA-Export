@@ -1,21 +1,22 @@
-char __thiscall sub_6C36B0(float *this, float a2)
+// Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
+bool __thiscall NiTimeController_IsUpdateUnchanged(NiTimeController *this, float applicationTime)
 {
-  float v4; // [esp+Ch] [ebp+4h]
+  float applicationTimea; // [esp+Ch] [ebp+4h]
 
-  if ( (*(_BYTE *)(this + 2) & 8) != 0 && (a2 != *(this + 8) || *((_BYTE *)this + 0x38)) )
+  if ( (this->members.flags & 8) != 0 && (applicationTime != this->members.m_fLastTime || this->members.forceUpdate) ) /*0x6c36d1*/
   {
-    if ( !*((_BYTE *)this + 0x2C) )
+    if ( !this->members.computeScaledTimeOnUpdate ) /*0x6c36db*/
     {
-      *((_BYTE *)this + 0x38) = 0;
-      return 0;
+      this->members.forceUpdate = 0; /*0x6c3713*/
+      return 0; /*0x6c371c*/
     }
-    v4 = ((double (__stdcall *)(_DWORD))*(_DWORD *)(*(_DWORD *)this + 0x64))(LODWORD(a2));
-    if ( v4 != *(this + 0xA) || *((_BYTE *)this + 0x38) )
+    applicationTimea = ((double (__stdcall *)(_DWORD))this->vtbl->ComputeScaledTime)(LODWORD(applicationTime)); /*0x6c36e8*/
+    if ( applicationTimea != this->members.cachedScaledTime || this->members.forceUpdate ) /*0x6c3700*/
     {
-      *(this + 0xA) = v4;
-      *((_BYTE *)this + 0x38) = 0;
-      return 0;
+      this->members.cachedScaledTime = applicationTimea; /*0x6c3706*/
+      this->members.forceUpdate = 0; /*0x6c3709*/
+      return 0; /*0x6c3710*/
     }
   }
-  return 1;
+  return 1; /*0x6c370f*/
 }

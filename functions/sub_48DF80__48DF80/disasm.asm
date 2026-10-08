@@ -23,7 +23,7 @@
 0x48DFB7: test    esi, esi
 0x48DFB9: jz      short loc_48DFF7
 0x48DFBB: mov     ecx, esi
-0x48DFBD: call    sub_41E850
+0x48DFBD: call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.
 0x48DFC2: test    eax, eax
 0x48DFC4: jz      short loc_48DFF0
 0x48DFC6: mov     ecx, esi
@@ -61,13 +61,13 @@
 0x48E01A: mov     ecx, [edi]
 0x48E01C: test    ecx, ecx
 0x48E01E: jz      short loc_48E025
-0x48E020: call    BSSimpleList_Clear
+0x48E020: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48E025: mov     eax, [edi]
 0x48E027: push    eax
-0x48E028: call    FormHeapFree
+0x48E028: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48E02D: push    edi
 0x48E02E: mov     dword ptr [edi], 0
-0x48E034: call    FormHeapFree
+0x48E034: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48E039: mov     ebp, [esi]
 0x48E03B: add     esp, 8
 0x48E03E: jmp     short loc_48E043

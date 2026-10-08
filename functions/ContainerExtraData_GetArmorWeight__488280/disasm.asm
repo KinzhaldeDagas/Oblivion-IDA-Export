@@ -1,4 +1,4 @@
-0x488280: sub     esp, 0Ch
+0x488280: sub     esp, 0Ch; ContainerExtraData_GetArmorWeight authority. After locating a worn instance, the native accumulation multiplies item weight by EntryData::countDelta; sidecar armor-weight corrections must mirror countDelta rather than counting worn ExtraDataList nodes.
 0x488283: fld     dword ptr ds:0A30634h
 0x488289: mov     [esp+0Ch+var_4], ecx
 0x48828D: fcomp   dword ptr [ecx+0Ch]
@@ -23,7 +23,6 @@
 0x4882BF: mov     edi, [ebp+8]
 0x4882C2: jz      loc_4883A2
 0x4882C8: jmp     short loc_4882D0
-0x4882CA: align 10h
 0x4882D0: mov     ecx, [esi]
 0x4882D2: test    ecx, ecx
 0x4882D4: jz      loc_4883A2
@@ -58,16 +57,16 @@
 0x488336: cmp     al, 1
 0x488338: jnz     short loc_48836A
 0x48833A: mov     esi, [esp+1Ch+arg_0]
-0x48833E: push    12h
-0x488340: mov     ecx, esi
-0x488342: call    Actor_GetSkillMasteryLevel
+0x48833E: push    12h; actorValue
+0x488340: mov     ecx, esi; this
+0x488342: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x488347: cmp     eax, 3
 0x48834A: jnz     short loc_488354
 0x48834C: fld     dword ptr ds:0B374D8h
 0x488352: jmp     short loc_48838B
-0x488354: push    12h
-0x488356: mov     ecx, esi
-0x488358: call    Actor_GetSkillMasteryLevel
+0x488354: push    12h; actorValue
+0x488356: mov     ecx, esi; this
+0x488358: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x48835D: cmp     eax, 4
 0x488360: jnz     short loc_488393
 0x488362: fld     dword ptr ds:0B374E0h
@@ -76,9 +75,9 @@
 0x48836C: call    TESObjectARMO_ISHeavyArmor
 0x488371: test    al, al
 0x488373: jnz     short loc_488393
-0x488375: mov     ecx, [esp+1Ch+arg_0]
-0x488379: push    1Bh
-0x48837B: call    Actor_GetSkillMasteryLevel
+0x488375: mov     ecx, [esp+1Ch+arg_0]; this
+0x488379: push    1Bh; actorValue
+0x48837B: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x488380: cmp     eax, 3
 0x488383: jl      short loc_488393
 0x488385: fld     dword ptr ds:0B374E8h

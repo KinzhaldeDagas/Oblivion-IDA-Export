@@ -1,1 +1,1 @@
-NiTransformData
+struct NiTransformData;

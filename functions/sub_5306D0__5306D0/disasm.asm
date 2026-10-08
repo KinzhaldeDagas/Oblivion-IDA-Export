@@ -22,8 +22,8 @@
 0x530701: mov     eax, [edx+90h]
 0x530707: push    1
 0x530709: call    eax
-0x53070B: push    ebx; a2
-0x53070C: mov     ecx, esi; this
+0x53070B: push    ebx; fromActiveFile
+0x53070C: mov     ecx, esi; self
 0x53070E: call    TESForm_SetFromActiveFile
 0x530713: pop     esi
 0x530714: pop     ebx

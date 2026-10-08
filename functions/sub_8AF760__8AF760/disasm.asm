@@ -1,13 +1,13 @@
-0x8AF760: push    ebp
+0x8AF760: push    ebp; TES4 authoritative: quicksort over 0x30-byte contact entries using float at entry+0x1C as the sort key.
 0x8AF761: mov     ebp, esp
 0x8AF763: and     esp, 0FFFFFFF0h
 0x8AF766: sub     esp, 64h
 0x8AF769: push    ebx
-0x8AF76A: mov     ebx, [ebp+arg_0]
+0x8AF76A: mov     ebx, [ebp+entries]
 0x8AF76D: push    esi
 0x8AF76E: push    edi
-0x8AF76F: mov     edi, [ebp+arg_4]
-0x8AF772: mov     edx, [ebp+arg_8]
+0x8AF76F: mov     edi, [ebp+left]
+0x8AF772: mov     edx, [ebp+right]
 0x8AF775: lea     eax, [edi+edx]
 0x8AF778: sar     eax, 1
 0x8AF77A: lea     eax, [eax+eax*2]
@@ -18,7 +18,7 @@
 0x8AF78C: lea     esp, [esp+0]
 0x8AF790: lea     ecx, [esi+esi*2]
 0x8AF793: shl     ecx, 4
-0x8AF796: lea     ecx, [ecx+ebx+1Ch]
+0x8AF796: lea     ecx, [ecx+ebx+1Ch]; TES4 authoritative: 0x30-byte contact entries are sorted by float at entry+0x1C, used as hit distance/fraction ordering.
 0x8AF79A: lea     ebx, [ebx+0]
 0x8AF7A0: fld     dword ptr [ecx]
 0x8AF7A2: fcomp   dword ptr [esp+70h+var_20+0Ch]
@@ -71,13 +71,13 @@
 0x8AF831: mov     ebx, [ecx+2Ch]
 0x8AF834: mov     [eax+2Ch], ebx
 0x8AF837: mov     eax, [esp+70h+var_3C]
-0x8AF83B: mov     ebx, [ebp+arg_0]
+0x8AF83B: mov     ebx, [ebp+entries]
 0x8AF83E: mov     [ecx+24h], eax
 0x8AF841: mov     eax, [esp+70h+var_38]
 0x8AF845: mov     [ecx+28h], eax
 0x8AF848: mov     eax, [esp+70h+var_34]
 0x8AF84C: mov     [ecx+20h], edi
-0x8AF84F: mov     edi, [ebp+arg_4]
+0x8AF84F: mov     edi, [ebp+left]
 0x8AF852: movaps  xmmword ptr [ecx], xmm0
 0x8AF855: movaps  xmmword ptr [ecx+10h], xmm1
 0x8AF859: mov     [ecx+2Ch], eax
@@ -87,17 +87,17 @@
 0x8AF860: jle     loc_8AF790
 0x8AF866: cmp     edi, edx
 0x8AF868: jge     short loc_8AF879
-0x8AF86A: mov     ecx, [ebp+arg_C]
-0x8AF86D: push    ecx
-0x8AF86E: push    edx
-0x8AF86F: push    edi
-0x8AF870: push    ebx
-0x8AF871: call    sub_8AF760
+0x8AF86A: mov     ecx, [ebp+flags]
+0x8AF86D: push    ecx; flags
+0x8AF86E: push    edx; right
+0x8AF86F: push    edi; left
+0x8AF870: push    ebx; entries
+0x8AF871: call    hkpCdPointEntry30_QuickSortByDistance; TES4 authoritative: quicksort over 0x30-byte contact entries using float at entry+0x1C as the sort key.
 0x8AF876: add     esp, 10h
-0x8AF879: cmp     esi, [ebp+arg_8]
+0x8AF879: cmp     esi, [ebp+right]
 0x8AF87C: jge     short loc_8AF888
 0x8AF87E: mov     edi, esi
-0x8AF880: mov     [ebp+arg_4], edi
+0x8AF880: mov     [ebp+left], edi
 0x8AF883: jmp     loc_8AF772
 0x8AF888: pop     edi
 0x8AF889: pop     esi

@@ -24,18 +24,18 @@
 0x4A82CD: jb      short loc_4A82C0
 0x4A82CF: xor     eax, eax
 0x4A82D1: test    eax, eax
-0x4A82D3: mov     [esp+1Ch+var_C], eax
+0x4A82D3: mov     [esp+1Ch+position], eax
 0x4A82D7: jz      short loc_4A8311
 0x4A82D9: lea     esp, [esp+0]
-0x4A82E0: lea     eax, [esp+1Ch+var_8]
-0x4A82E4: push    eax
-0x4A82E5: lea     ecx, [esp+20h+var_4]
-0x4A82E9: push    ecx
-0x4A82EA: lea     edx, [esp+24h+var_C]
-0x4A82EE: push    edx
-0x4A82EF: mov     ecx, edi
-0x4A82F1: call    sub_452600
-0x4A82F6: mov     eax, [esp+1Ch+var_8]
+0x4A82E0: lea     eax, [esp+1Ch+valueOut]
+0x4A82E4: push    eax; valueOut
+0x4A82E5: lea     ecx, [esp+20h+keyOut]
+0x4A82E9: push    ecx; keyOut
+0x4A82EA: lea     edx, [esp+24h+position]
+0x4A82EE: push    edx; position
+0x4A82EF: mov     ecx, edi; self
+0x4A82F1: call    NiTMap_U32Pointer_GetNextEntry
+0x4A82F6: mov     eax, [esp+1Ch+valueOut]
 0x4A82FA: test    eax, eax
 0x4A82FC: jz      short loc_4A830A
 0x4A82FE: mov     edx, [esi]
@@ -44,7 +44,7 @@
 0x4A8304: mov     ecx, esi
 0x4A8306: call    eax
 0x4A8308: and     bl, al
-0x4A830A: cmp     [esp+1Ch+var_C], 0
+0x4A830A: cmp     [esp+1Ch+position], 0
 0x4A830F: jnz     short loc_4A82E0
 0x4A8311: pop     edi
 0x4A8312: pop     ebp

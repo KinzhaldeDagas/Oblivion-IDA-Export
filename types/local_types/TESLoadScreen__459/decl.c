@@ -1,1 +1,1 @@
-TESLoadScreen
+struct TESLoadScreen;

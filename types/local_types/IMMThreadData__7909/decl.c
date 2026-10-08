@@ -1,1 +1,1 @@
-IMMThreadData
+typedef _tagIMMThreadData IMMThreadData;

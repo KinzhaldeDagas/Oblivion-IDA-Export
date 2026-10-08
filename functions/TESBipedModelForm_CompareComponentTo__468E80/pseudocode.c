@@ -2,13 +2,13 @@ bool __thiscall TESBipedModelForm_CompareComponentTo(_DWORD *this, void *a2)
 {
   char *v3; // edi
 
-  v3 = (char *)OblivionDynamicCast(
+  v3 = (char *)OblivionDynamicCast( /*0x468e9c*/
                  a2,
                  0,
                  (struct _s_RTTICompleteObjectLocator *)&BaseFormComponent `RTTI Type Descriptor',
                  &TESBipedModelForm `RTTI Type Descriptor',
                  0);
-  return !v3
+  return !v3 /*0x468ea5*/
       || memcmp(this + 1, v3 + 4, 4u)
       || (*(unsigned __int8 (__thiscall **)(_DWORD *, char *))(*(this + 2) + 0xC))(this + 2, v3 + 8)
       || (*(unsigned __int8 (__thiscall **)(_DWORD *, char *))(*(this + 0xE) + 0xC))(this + 0xE, v3 + 0x38)

@@ -1,4 +1,4 @@
-0x453250: push    ebx
+0x453250: push    ebx; MEF v56 lifetime wrapper invalidates/suspends indices across owner teardown, including clearing/freeing+74/+78 arrays. Finally restores suspension even on SEH unwind. Auxiliary tables own only private key/index storage, not engine objects. No coherence claim for arbitrary external raw memory writes outside the decoded interfaces.
 0x453251: push    esi
 0x453252: mov     esi, ecx
 0x453254: mov     ecx, [esi]
@@ -35,7 +35,7 @@
 0x453295: cmp     eax, ebx
 0x453297: jz      short loc_4532A2
 0x453299: push    eax
-0x45329A: call    FormHeapFree
+0x45329A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45329F: add     esp, 4
 0x4532A2: mov     ecx, [esi+54h]
 0x4532A5: cmp     ecx, ebx
@@ -133,14 +133,14 @@
 0x453382: call    edx
 0x453384: jmp     short loc_453360
 0x453386: push    eax
-0x453387: call    FormHeapFree
+0x453387: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45338C: add     esp, 4
 0x45338F: cmp     [esi+24h], ebx
 0x453392: jz      short loc_4533AA
 0x453394: mov     eax, [esi+24h]
 0x453397: mov     edi, [eax+4]
 0x45339A: push    eax
-0x45339B: call    FormHeapFree
+0x45339B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4533A0: add     esp, 4
 0x4533A3: cmp     edi, ebx
 0x4533A5: mov     [esi+24h], edi
@@ -151,7 +151,7 @@
 0x4533B2: mov     eax, [esi+2Ch]
 0x4533B5: mov     edi, [eax+4]
 0x4533B8: push    eax
-0x4533B9: call    FormHeapFree
+0x4533B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4533BE: add     esp, 4
 0x4533C1: cmp     edi, ebx
 0x4533C3: mov     [esi+2Ch], edi

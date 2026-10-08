@@ -298,17 +298,17 @@
 0x47EEA0: cmp     eax, ebp
 0x47EEA2: mov     [esp+2Ch+var_4], 1
 0x47EEAA: jz      short loc_47EED2
-0x47EEAC: push    esi
-0x47EEAD: push    18h
-0x47EEAF: push    ebp
-0x47EEB0: push    ebp
-0x47EEB1: push    ebp
-0x47EEB2: push    edi
-0x47EEB3: push    ebp
-0x47EEB4: push    ebx
-0x47EEB5: push    8
-0x47EEB7: mov     ecx, eax
-0x47EEB9: call    sub_7174B0
+0x47EEAC: push    esi; triangleIndices
+0x47EEAD: push    18h; triangleCount
+0x47EEAF: push    ebp; dataFlags
+0x47EEB0: push    ebp; hasVertexColors
+0x47EEB1: push    ebp; textureCoordinates
+0x47EEB2: push    edi; colors
+0x47EEB3: push    ebp; normals
+0x47EEB4: push    ebx; vertices
+0x47EEB5: push    8; vertexCount
+0x47EEB7: mov     ecx, eax; this
+0x47EEB9: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x47EEBE: mov     ecx, [esp+2Ch+var_C]
 0x47EEC2: mov     large fs:0, ecx
 0x47EEC9: pop     ecx
@@ -328,3 +328,20 @@
 0x47EEE3: pop     ebx
 0x47EEE4: add     esp, 18h
 0x47EEE7: retn
+0x9AF4B0: mov     eax, [ebp+4]
+0x9AF4B3: push    eax
+0x9AF4B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF4B9: pop     ecx
+0x9AF4BA: retn
+0x9AF4BB: mov     eax, [ebp+4]
+0x9AF4BE: push    eax
+0x9AF4BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF4C4: pop     ecx
+0x9AF4C5: retn
+0x9AF4C6: mov     edx, [esp+arg_4]
+0x9AF4CA: lea     eax, [edx-1Ch]
+0x9AF4CD: mov     ecx, [edx-20h]
+0x9AF4D0: xor     ecx, eax
+0x9AF4D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF4D7: mov     eax, offset stru_ADBA88
+0x9AF4DC: jmp     ___CxxFrameHandler3

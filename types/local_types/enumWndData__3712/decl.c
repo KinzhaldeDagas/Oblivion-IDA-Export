@@ -1,1 +1,1 @@
-enumWndData
+typedef _enumWndData enumWndData;

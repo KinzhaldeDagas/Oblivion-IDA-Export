@@ -1,1 +1,1 @@
-IContinueVtbl_0
+typedef IContinueVtbl IContinueVtbl_0;

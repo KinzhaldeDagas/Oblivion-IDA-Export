@@ -30,3 +30,13 @@
 0x589F0A: pop     esi
 0x589F0B: add     esp, 10h
 0x589F0E: retn    8
+0x9BF7A0: mov     ecx, [ebp-10h]
+0x9BF7A3: add     ecx, 8; void *
+0x9BF7A6: jmp     BSStringT_Clear
+0x9BF7AB: mov     edx, [esp+a2]
+0x9BF7AF: lea     eax, [edx-8]
+0x9BF7B2: mov     ecx, [edx-0Ch]
+0x9BF7B5: xor     ecx, eax
+0x9BF7B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF7BC: mov     eax, offset stru_AE8CA4
+0x9BF7C1: jmp     ___CxxFrameHandler3

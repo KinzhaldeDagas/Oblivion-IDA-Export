@@ -11,22 +11,22 @@ void __usercall sub_459A10(
 {
   DWORD (__stdcall *v9)(); // esi
 
-  sub_4599B0(a1, a7, a8, a9);
-  if ( sub_578FE0() != 3 || GetOpenedMenuCode(a1, a7, a8, a9) != 3 )
+  sub_4599B0(a1, a7, a8, a9); /*0x459a10*/
+  if ( sub_578FE0() != 3 || GetOpenedMenuCode() != 3 ) /*0x459a27*/
   {
-    sub_6B94E0();
-    a9 = CloseAllMenus(a8, a1, a7, a9);
+    MenuTopicManager::Destroy(); /*0x459a29*/
+    a9 = CloseAllMenus(a8, a1, a7, a9); /*0x459a2e*/
   }
-  sub_5791A0(a1, a7, a8, a9);
-  sub_5791E0(a9, a6, a7, a8, a5, a2, a3, a4, a1);
-  sub_579220(a1, a7, a8, a9);
-  v9 = GetTickCount;
-  dword_B33B08 = GetTickCount();
-  if ( v9() > dword_B33B08 + 0xBB8 )
+  sub_5791A0(a1, a7, a8); /*0x459a34*/
+  sub_5791E0(a9, a6, a7, a8, a5, a2, a3, a4); /*0x459a39*/
+  sub_579220(a1, a7, a8, a9); /*0x459a3e*/
+  v9 = GetTickCount;                            // MEF v30 hook contract: preserve both GetTickCount calls and dword_B33B08 write, then reload dword_B33B08 after the second call before unsigned elapsed comparison. Do not carry start in volatile ECX across the API call. /*0x459a43*/
+  unk_B33B08 = GetTickCount(); /*0x459a4b*/
+  if ( v9() > unk_B33B08 + 0xBB8 ) /*0x459a61*/
   {
-    if ( sub_57BAC0(a1, a7, a8, a9) )
-      sub_57B950(a1, a7, a8, 0.0, 0, 0.0);
+    if ( sub_57BAC0() ) /*0x459a63*/
+      sub_57B950(a1, a7, a8, 0, 0.0); /*0x459a86*/
     else
-      sub_440AF0((int)TES, a7, a8, a1, 1, 0, 0);
+      sub_440AF0((int)MEMORY[0xB333A0], a7, a8, a1, 1, 0, 0); /*0x459a78*/
   }
 }

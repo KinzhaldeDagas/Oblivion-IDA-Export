@@ -1,4 +1,4 @@
-0x447490: push    ecx
+0x447490: push    ecx; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x447491: mov     eax, [esp+4+arg_0]
 0x447495: test    eax, eax
 0x447497: mov     [esp+4+var_4], 0

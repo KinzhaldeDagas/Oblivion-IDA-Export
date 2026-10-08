@@ -1,1 +1,1 @@
-BIND_OPTS2
+typedef tagBIND_OPTS2 BIND_OPTS2;

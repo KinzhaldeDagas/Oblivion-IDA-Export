@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 95,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 105,
+  "chunks": [
+    [
+      "0x573880",
+      "0x5738BA"
+    ]
+  ],
+  "chunks_sha256": "b5770a9cafc21a608b8794706e9a9ec923649b5efdef470d84f6ffb64e601c9f",
+  "comment_regular": "Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
+  "comment_repeatable": "Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.\n\nMEF v57 IMPLEMENTED 2026-10-08: v57 clear observer invalidates matching indices and receiver scopes before native destruction. Full-list dtor7C69C0 calls here7C69F6; receiver-list dtor7D5390 calls here7D53C6, including changed base vtables. No engine callbacks occur under private index lock.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiTPointerList::FreeAllNodes",
   "end_ea": "0x5738BA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiTPointerList::FreeAllNodes",
   "segment": ".text",
   "sha256": "b5770a9cafc21a608b8794706e9a9ec923649b5efdef470d84f6ffb64e601c9f",
   "size": 58,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x573880",
+  "total_chunk_size": 58,
   "type": "void __thiscall(NiTPointerList__BSImageSpaceShader *this)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 105

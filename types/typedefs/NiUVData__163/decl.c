@@ -1,1 +1,1 @@
-NiUVData
+struct NiUVData;

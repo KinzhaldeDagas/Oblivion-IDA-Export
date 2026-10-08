@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5E6E32",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x5E6E3F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E6E41",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5E6E5A",
-    "line": "push    offset sub_645A30",
+    "line": "push    offset TESObjectREFR_SetOwnedDoorLockedForActor; Verified body: rejects null/dead actor refs and non-door forms; applies only when the door is owned by the actor (using worldspace-sensitive ownership when applicable) and has an effective lock; sets locked bit on this/linked door and marks linked owner cells as not unlocked. Probable role: callback used by actor package/cell spatial queries; callers include EvaluatePackage and process movement paths.",
     "mnemonic": "push",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5E6E6D",
-    "line": "push    offset sub_645AF0; a6",
+    "line": "push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5E6EA2",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x5E6EFE",
-    "line": "push    offset sub_645A30; a5",
+    "line": "push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x5E6F25",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x5E6F62",
-    "line": "push    offset sub_645AF0; a6",
+    "line": "push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x5E6F89",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },

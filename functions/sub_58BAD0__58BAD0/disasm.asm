@@ -15,7 +15,7 @@
 0x58BAF8: mov     [esp+24h+Format], ebx
 0x58BAFC: mov     [esp+24h+var_10], bx
 0x58BB01: mov     [esp+24h+var_E], bx
-0x58BB06: mov     edi, [esp+24h+arg_0]
+0x58BB06: mov     edi, [esp+24h+value]
 0x58BB0A: mov     [esp+24h+var_4], ebx
 0x58BB0E: xor     esi, esi
 0x58BB10: mov     eax, ds:0B3AF10h[esi*4]
@@ -31,7 +31,7 @@
 0x58BB33: add     eax, 1
 0x58BB36: push    ebx
 0x58BB37: mov     ds:0B3B0ACh, eax
-0x58BB3C: call    FormHeapFree
+0x58BB3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58BB41: add     esp, 4
 0x58BB44: xor     al, al
 0x58BB46: mov     ecx, [esp+24h+var_C]
@@ -67,7 +67,7 @@
 0x58BBA6: call    sub_40FEC0
 0x58BBAB: add     esi, 4
 0x58BBAE: add     esp, 10h
-0x58BBB1: cmp     esi, offset byte_B3B0A0
+0x58BBB1: cmp     esi, offset unk_B3B0A0
 0x58BBB7: jl      short loc_58BB86
 0x58BBB9: mov     eax, [edi]
 0x58BBBB: mov     eax, [eax+8]
@@ -91,7 +91,7 @@
 0x58BBF6: cmp     eax, ebx
 0x58BBF8: jnz     short loc_58BBF0
 0x58BBFA: push    esi
-0x58BBFB: call    FormHeapFree
+0x58BBFB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58BC00: add     esp, 4
 0x58BC03: mov     al, 1
 0x58BC05: mov     ecx, [esp+24h+var_C]
@@ -102,3 +102,12 @@
 0x58BC13: pop     ebx
 0x58BC14: add     esp, 14h
 0x58BC17: retn
+0x9B7140: lea     ecx, [ebp-14h]; void *
+0x9B7143: jmp     BSStringT_Clear
+0x9B7148: mov     edx, [esp+arg_4]
+0x9B714C: lea     eax, [edx-14h]
+0x9B714F: mov     ecx, [edx-18h]
+0x9B7152: xor     ecx, eax
+0x9B7154: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7159: mov     eax, offset stru_AE1DB4
+0x9B715E: jmp     ___CxxFrameHandler3

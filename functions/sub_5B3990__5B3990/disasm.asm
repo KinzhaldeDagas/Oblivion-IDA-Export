@@ -19,12 +19,12 @@
 0x5B39C5: push    0FBBh
 0x5B39CA: mov     ecx, ebp
 0x5B39CC: call    Tile_GetFloat
-0x5B39D1: call    Double_To_SInt32
+0x5B39D1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B39D6: push    0FB5h
 0x5B39DB: mov     ecx, ebp
 0x5B39DD: mov     edi, eax
 0x5B39DF: call    Tile_GetFloat
-0x5B39E4: call    Double_To_SInt32
+0x5B39E4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B39E9: add     eax, 0FFFFFFFFh; switch 8 cases
 0x5B39EC: cmp     eax, 7
 0x5B39EF: ja      short def_5B39F8; jumptable 005B39F8 default case, cases 3,5-7
@@ -34,7 +34,6 @@
 0x5B3A04: test    eax, eax
 0x5B3A06: jz      short def_5B39F8; jumptable 005B39F8 default case, cases 3,5-7
 0x5B3A08: jmp     short loc_5B3A10
-0x5B3A0A: align 10h
 0x5B3A10: mov     esi, [eax+8]
 0x5B3A13: cmp     [esi+4], edi
 0x5B3A16: lea     ecx, [eax+8]
@@ -131,7 +130,7 @@
 0x5B3B31: and     ecx, 7Fh
 0x5B3B34: lea     eax, [esi-0Dh]
 0x5B3B37: cmp     ecx, eax
-0x5B3B39: mov     ecx, offset byte_B3B404
+0x5B3B39: mov     ecx, (offset dword_B3B0B4+350h)
 0x5B3B3E: jnz     short loc_5B3B52
 0x5B3B40: call    sub_597A60
 0x5B3B45: call    sub_5B2B70
@@ -157,7 +156,7 @@
 0x5B3B7D: mov     ecx, ebp
 0x5B3B7F: xor     bl, bl
 0x5B3B81: call    Tile_GetFloat
-0x5B3B86: call    Double_To_SInt32
+0x5B3B86: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B3B8B: cmp     eax, 10h
 0x5B3B8E: jz      loc_5B3D0E
 0x5B3B94: cmp     eax, 8
@@ -165,7 +164,7 @@
 0x5B3B9C: mov     ecx, ebp
 0x5B3B9E: jnz     short loc_5B3C17
 0x5B3BA0: call    Tile_GetFloat
-0x5B3BA5: call    Double_To_SInt32
+0x5B3BA5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B3BAA: mov     esi, ds:0B14360h
 0x5B3BB0: test    esi, esi
 0x5B3BB2: mov     edi, eax
@@ -204,7 +203,7 @@
 0x5B3C13: pop     ecx
 0x5B3C14: retn    8
 0x5B3C17: call    Tile_GetFloat
-0x5B3C1C: call    Double_To_SInt32
+0x5B3C1C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B3C21: mov     ecx, [esp+14h+var_4]
 0x5B3C25: xor     edx, edx
 0x5B3C27: add     ecx, 38h ; '8'
@@ -251,7 +250,7 @@
 0x5B3CAA: mov     ecx, [ecx+4]
 0x5B3CAD: push    0FAEh
 0x5B3CB2: call    Tile_GetFloat
-0x5B3CB7: call    Double_To_SInt32
+0x5B3CB7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B3CBC: cmp     [esp+14h+arg_0], 7
 0x5B3CC1: mov     esi, eax
 0x5B3CC3: jnz     short loc_5B3CCA
@@ -271,9 +270,9 @@
 0x5B3CEF: mov     edi, [esp+14h+var_4]
 0x5B3CF3: push    ecx
 0x5B3CF4: mov     ecx, [edi+4]; this
-0x5B3CF7: fstp    [esp+18h+a2]; a3
-0x5B3CFA: push    0FAEh; a2
-0x5B3CFF: call    Tile_SetFloat
+0x5B3CF7: fstp    [esp+18h+a2]; value
+0x5B3CFA: push    0FAEh; propertyCode
+0x5B3CFF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B3D04: push    0
 0x5B3D06: mov     ecx, edi
 0x5B3D08: push    esi

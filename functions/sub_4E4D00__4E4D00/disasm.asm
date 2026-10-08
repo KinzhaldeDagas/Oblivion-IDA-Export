@@ -1,4 +1,4 @@
-0x4E4D00: mov     eax, [esp+arg_0]
+0x4E4D00: mov     eax, [esp+arg_0]; Verified shared LAND/PathGrid serialized-group matcher. For group labels matching the parent CELL FormID24, it accepts temporary child group type 9, rejects persistent group type 8 and distant group type 10, and accepts ancestor CELL children group type 6 only when includeParent is set; other ancestor groups delegate to the owning CELL matcher.
 0x4E4D04: push    ebx
 0x4E4D05: xor     bl, bl
 0x4E4D07: test    eax, eax
@@ -18,7 +18,7 @@
 0x4E4D2D: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4E4D32: push    0; int
 0x4E4D34: push    edx; a1
-0x4E4D35: call    TESForm_LookupByFormID
+0x4E4D35: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E4D3A: add     esp, 4
 0x4E4D3D: push    eax; void *
 0x4E4D3E: call    OblivionDynamicCast

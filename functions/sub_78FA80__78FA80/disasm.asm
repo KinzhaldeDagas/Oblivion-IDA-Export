@@ -1,4 +1,4 @@
-0x78FA80: mov     edx, [ecx+4]
+0x78FA80: mov     edx, [ecx+4]; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.
 0x78FA83: test    edx, edx
 0x78FA85: jnz     short loc_78FA8A
 0x78FA87: xor     eax, eax

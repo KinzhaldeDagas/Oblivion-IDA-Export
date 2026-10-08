@@ -3,20 +3,20 @@ NiDynamicGeometryGroup *sub_77EA10()
   NiDynamicGeometryGroup *result; // eax
   NiDynamicGeometryGroup *v1; // eax
 
-  result = (NiDynamicGeometryGroup *)dword_B428A4;
-  if ( !dword_B428A4 )
+  result = (NiDynamicGeometryGroup *)unk_B428A4; /*0x77ea10*/
+  if ( !unk_B428A4 ) /*0x77ea10*/
   {
-    v1 = (NiDynamicGeometryGroup *)FormHeapAlloc(0x50u);
-    if ( v1 )
+    v1 = (NiDynamicGeometryGroup *)FormHeapAlloc(0x50u); /*0x77ea1b*/
+    if ( v1 ) /*0x77ea25*/
     {
-      result = NiDynamicGeometryGroup::NiDynamicGeometryGroup(v1);
-      dword_B428A4 = (int)result;
+      result = NiDynamicGeometryGroup::NiDynamicGeometryGroup(v1); /*0x77ea29*/
+      unk_B428A4 = (int)result; /*0x77ea2e*/
     }
     else
     {
-      dword_B428A4 = 0;
-      return 0;
+      unk_B428A4 = 0; /*0x77ea36*/
+      return 0; /*0x77ea34*/
     }
   }
-  return result;
+  return result; /*0x77ea33*/
 }

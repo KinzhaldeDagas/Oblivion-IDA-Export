@@ -1,19 +1,40 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_9F90D0",
+  "chunks": [
+    [
+      "0x9F90D0",
+      "0x9F9124"
+    ],
+    [
+      "0x403BC0",
+      "0x403BD4"
+    ],
+    [
+      "0x9BCD70",
+      "0x9BCD94"
+    ]
+  ],
+  "chunks_sha256": "002feaabf7f85e887986e1683149867caeb91221dcd9bc2b0f1de0180ee380ec",
+  "comment_regular": "Verified INI setting registration for bEnableTrees:SpeedTree; calls SettingCollectionList_AddSetting on the 8-byte value/name pair and registers atexit cleanup.",
+  "comment_repeatable": "Verified INI setting registration for bEnableTrees:SpeedTree; calls SettingCollectionList_AddSetting on the 8-byte value/name pair and registers atexit cleanup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "INISetting_bEnableTrees_SpeedTree_ctor",
   "end_ea": "0x9F9124",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9F90D0",
+  "name": "INISetting_bEnableTrees_SpeedTree_ctor",
   "segment": ".text",
   "sha256": "55cc0b6aeaef16b6c178c70b710c854975340e401a58aa1a5d5f0132fd10cc55",
   "size": 84,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9F90D0",
+  "total_chunk_size": 140,
   "type": "int()",
-  "xrefs_from_count": 27,
+  "xrefs_from_count": 50,
   "xrefs_to_count": 0
 }

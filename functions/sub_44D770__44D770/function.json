@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x44D770",
+      "0x44D80F"
+    ]
+  ],
+  "chunks_sha256": "3095d8aee38bd0ecb48f599470947f0bbf6dbe4b5bd8d8dc51827b6746084a5c",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified pool block ownership 2026-09-30: B0686C currently holds 2048 records per allocation; allocation size is 12*capacity with overflow saturation. First record is a block-chain header linked through global B33EA8, while free nodes begin at block+12. Thus the observed block supplies 2047 payload nodes. Native list reservations must use this pool, not inject separately allocated 12-byte heap objects. Pool block/free/lock addresses are B33EA8/B33EAC/B33F00 with owner/depth B33F78/B33F7C. No renderer resources are allocated here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_44D770",
+  "display_name": "NiTListNodePool_Refill",
   "end_ea": "0x44D80F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_44D770",
+  "name": "NiTListNodePool_Refill",
   "segment": ".text",
   "sha256": "3095d8aee38bd0ecb48f599470947f0bbf6dbe4b5bd8d8dc51827b6746084a5c",
   "size": 159,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x44D770",
+  "total_chunk_size": 159,
   "type": "_DWORD *()",
   "xrefs_from_count": 45,
   "xrefs_to_count": 1

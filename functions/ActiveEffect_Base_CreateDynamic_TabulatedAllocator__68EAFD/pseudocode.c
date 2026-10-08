@@ -1,4 +1,5 @@
-int __usercall ActiveEffect_Base_CreateDynamic_::TabulatedAllocator@<eax>(
+// Verified (Oblivion): invokes the ActiveEffectFactory returned by the effect-code map and passes the original caster, MagicItem and EffectItem.
+void __usercall ActiveEffect_Base_CreateDynamic_::TabulatedAllocator(
         int (__cdecl *a1)(int, int)@<eax>,
         int a2,
         int a3,
@@ -29,33 +30,33 @@ int __usercall ActiveEffect_Base_CreateDynamic_::TabulatedAllocator@<eax>(
 {
   int v27; // eax
 
-  v27 = a1(a24, a25);
-  return ActiveEffect_Base_CreateDynamic_::Wrapup(
-           v27,
-           a2,
-           a3,
-           a4,
-           a5,
-           a6,
-           a7,
-           a8,
-           a9,
-           a10,
-           a11,
-           a12,
-           a13,
-           a14,
-           a15,
-           a16,
-           a17,
-           a18,
-           a19,
-           a20,
-           a21,
-           a22,
-           a23,
-           a24,
-           a25,
-           a26,
-           a27);
+  v27 = a1(a24, a25); /*0x68eb08*/
+  ActiveEffect_Base_CreateDynamic_::Wrapup( /*0x68eb0d*/
+    v27,
+    a2,
+    a3,
+    a4,
+    a5,
+    a6,
+    a7,
+    a8,
+    a9,
+    a10,
+    a11,
+    a12,
+    a13,
+    a14,
+    a15,
+    a16,
+    a17,
+    a18,
+    a19,
+    a20,
+    a21,
+    a22,
+    a23,
+    a24,
+    a25,
+    a26,
+    a27);
 }

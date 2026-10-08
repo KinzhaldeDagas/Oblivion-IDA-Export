@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x772790",
+      "0x7727C7"
+    ]
+  ],
+  "chunks_sha256": "d0f029c8cd473556407fba51c49ddc4cf08c7012a106efe3db2a171b9f2ada2d",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified 2026-10-01: unlink existing entry from saved list, update neighbor next/previous and group head+10/count+C, clear both links in removed node. No allocation, release or free occurs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_772790",
+  "display_name": "NiD3DRenderStateGroup_RemoveSavedEntry",
   "end_ea": "0x7727C7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_772790",
+  "name": "NiD3DRenderStateGroup_RemoveSavedEntry",
   "segment": ".text",
   "sha256": "d0f029c8cd473556407fba51c49ddc4cf08c7012a106efe3db2a171b9f2ada2d",
   "size": 55,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x772790",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 55,
+  "type": "OblivionRenderStateEntry *__thiscall(OblivionRenderStateGroupPrefix *this, OblivionRenderStateEntry *entry)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1
 }

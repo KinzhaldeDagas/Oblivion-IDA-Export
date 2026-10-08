@@ -1,31 +1,31 @@
-void __usercall sub_447CA0(int a1@<ecx>, double a2@<st2>, double a3@<st1>)
+void __usercall sub_447CA0(int a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
 {
-  int v4; // ebx
+  int v5; // ebx
   int i; // esi
-  void *v6; // ecx
-  int v7; // esi
-  void *v8; // eax
+  TESObjectCELL *v7; // ecx
+  int v8; // esi
+  TESObjectCELL *v9; // eax
 
-  v4 = *(_DWORD *)(a1 + 0xCC);
-  for ( i = 0; i < v4; ++i )
+  v5 = *(_DWORD *)(a1 + 0xCC); /*0x447ca5*/
+  for ( i = 0; i < v5; ++i ) /*0x447caf*/
   {
-    v6 = *(void **)(*(_DWORD *)(a1 + 0xC4) + 4 * i);
-    if ( v6 )
-      sub_4CB8C0(v6, a2, a3, 1, 1);
+    v7 = *(TESObjectCELL **)(*(_DWORD *)(a1 + 0xC4) + 4 * i); /*0x447cb7*/
+    if ( v7 ) /*0x447cbc*/
+      sub_4CB8C0(v7, a2, a3, a4, 1, 1); /*0x447cc2*/
   }
-  v7 = a1 + 0xC;
-  if ( a1 != 0xFFFFFFF4 )
+  v8 = a1 + 0xC; /*0x447cce*/
+  if ( a1 != 0xFFFFFFF4 ) /*0x447cd3*/
   {
-    do
+    do /*0x447cf4*/
     {
-      if ( *(_DWORD *)v7 )
+      if ( *(_DWORD *)v8 ) /*0x447cd5*/
       {
-        v8 = (void *)sub_4EF1E0(*(_DWORD **)v7);
-        if ( v8 )
-          sub_4CB8C0(v8, a2, a3, 1, 1);
+        v9 = (TESObjectCELL *)sub_4EF1E0(*(_DWORD **)v8); /*0x447cdb*/
+        if ( v9 ) /*0x447ce2*/
+          sub_4CB8C0(v9, a2, a3, a4, 1, 1); /*0x447cea*/
       }
-      v7 = *(_DWORD *)(v7 + 4);
+      v8 = *(_DWORD *)(v8 + 4); /*0x447cef*/
     }
-    while ( v7 );
+    while ( v8 ); /*0x447cf4*/
   }
 }

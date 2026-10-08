@@ -11,7 +11,7 @@
 0x48F6D1: add     esp, 4
 0x48F6D4: mov     eax, ds:0B34438h
 0x48F6D9: push    eax
-0x48F6DA: call    FormHeapFree
+0x48F6DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F6DF: mov     ecx, [esp+8+arg_0]
 0x48F6E3: xor     eax, eax
 0x48F6E5: add     esp, 4
@@ -22,7 +22,7 @@
 0x48F6FE: jnz     short loc_48F720
 0x48F700: push    offset aIcons; "Icons"
 0x48F705: push    offset aSIcon_small_it; "%s\\icon_small_item_pickup.dds"
-0x48F70A: push    offset dword_B34438; int
+0x48F70A: push    0B34438h; int
 0x48F70F: call    BSStringT_Static_Format
 0x48F714: mov     eax, ds:0B34438h
 0x48F719: add     esp, 0Ch
@@ -32,7 +32,7 @@
 0x48F723: jnz     short loc_48F745
 0x48F725: push    offset aIcons; "Icons"
 0x48F72A: push    offset aSIcon_enchante; "%s\\icon_enchanted_item.dds"
-0x48F72F: push    offset dword_B34438; int
+0x48F72F: push    0B34438h; int
 0x48F734: call    BSStringT_Static_Format
 0x48F739: mov     eax, ds:0B34438h
 0x48F73E: add     esp, 0Ch
@@ -42,7 +42,7 @@
 0x48F748: jnz     short loc_48F76A
 0x48F74A: push    offset aIcons; "Icons"
 0x48F74F: push    offset aSIcon_poisoned; "%s\\icon_poisoned_weapon.dds"
-0x48F754: push    offset dword_B34438; int
+0x48F754: push    0B34438h; int
 0x48F759: call    BSStringT_Static_Format
 0x48F75E: mov     eax, ds:0B34438h
 0x48F763: add     esp, 0Ch
@@ -52,7 +52,7 @@
 0x48F76D: jnz     short loc_48F78F
 0x48F76F: push    offset aIcons; "Icons"
 0x48F774: push    offset aSIcon_broken_i; "%s\\icon_broken_item.dds"
-0x48F779: push    offset dword_B34438; int
+0x48F779: push    0B34438h; int
 0x48F77E: call    BSStringT_Static_Format
 0x48F783: mov     eax, ds:0B34438h
 0x48F788: add     esp, 0Ch
@@ -63,7 +63,7 @@
 0x48F793: push    ecx
 0x48F794: push    offset aIcons; "Icons"
 0x48F799: push    offset aSIcon_image_se; "%s\\icon_image_set_%d.dds"
-0x48F79E: push    offset dword_B34438; int
+0x48F79E: push    0B34438h; int
 0x48F7A3: call    BSStringT_Static_Format
 0x48F7A8: mov     eax, ds:0B34438h
 0x48F7AD: add     esp, 10h

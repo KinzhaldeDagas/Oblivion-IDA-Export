@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x58B040",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified 2026-10-07: underscore-prefixed names scan dynamic trait array with case-insensitive comparison; existing entry increments lookupHits and reuses ID. requestedID=-1 allocates ID=endIndex+10000, new entry0x10 with id+0,lookup counter+4,BSStringT name+8; appends to growable array. Non-underscore names search first-character buckets before allocation. Fallout0x827DDCD0 uses map and additional validation; do not transfer its rejection rules.",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x58B096",
-    "line": "push    eax; unsigned __int8 *",
+    "line": "push    eax; name",
     "mnemonic": "push",
     "size": 1
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x58B0AB",
-    "line": "mov     ebp, [esp+24h+arg_4]",
+    "line": "mov     ebp, [esp+24h+requestedID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,19 +361,19 @@
   },
   {
     "ea": "0x58B0F9",
-    "line": "push    ebp",
+    "line": "push    ebp; id",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58B0FA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58B0FC",
-    "line": "call    sub_589F20",
+    "line": "call    Tile__TraitEntry__Initialize",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x58B1D0",
-    "line": "mov     ecx, offset off_B13BC4",
+    "line": "mov     ecx, offset g_TileUserTraitTable; Verified: dynamic trait entry pointer array. Header data+4,capacity+8,endIndex+0xA,count+0xC,growBy+0xE from AddUserTrait growth/writes. Custom numeric IDs depend on registry insertion order.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -934,5 +934,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BD8A0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD8A3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD8A4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD8A9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD8AA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD8AB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD8AF",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD8B2",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD8B5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD8B7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD8BC",
+    "line": "mov     eax, offset stru_AE71E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD8C1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

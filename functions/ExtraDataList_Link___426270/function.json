@@ -1,18 +1,31 @@
 {
-  "callees_count": 82,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 45,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 39,
-  "display_name": "ExtraDataList_Link?",
+  "chunks": [
+    [
+      "0x426270",
+      "0x42671F"
+    ]
+  ],
+  "chunks_sha256": "596179195a11df6bb797763a93ba3cc865322facf3aaf1adf9ba6ecda3536705",
+  "comment_regular": "Verified post-load owner resolution: ExtraOwnership (type 0x27/XOWN) treats its stored dword as a FormID, rebases it with TESForm_ResolveFormID, resolves via TESForm_LookupByFormID, and replaces the slot with TESForm*. Missing owners remove the extra. ExtraGlobal (type 0x28/XGLB) follows the same path with a TESGlobal RTTI cast; missing/wrong-type globals remove their extra. ExtraRank (0x29/XRNK) is an inline signed value and is not FormID-linked.",
+  "comment_repeatable": "Verified post-load owner resolution: ExtraOwnership (type 0x27/XOWN) treats its stored dword as a FormID, rebases it with TESForm_ResolveFormID, resolves via TESForm_LookupByFormID, and replaces the slot with TESForm*. Missing owners remove the extra. ExtraGlobal (type 0x28/XGLB) follows the same path with a TESGlobal RTTI cast; missing/wrong-type globals remove their extra. ExtraRank (0x29/XRNK) is an inline signed value and is not FormID-linked.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 40,
+  "display_name": "ExtraDataList_ResolveLoadedFormIDs",
   "end_ea": "0x42671F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "ExtraDataList_Link?",
+  "name": "ExtraDataList_ResolveLoadedFormIDs",
   "segment": ".text",
   "sha256": "596179195a11df6bb797763a93ba3cc865322facf3aaf1adf9ba6ecda3536705",
   "size": 1199,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x426270",
+  "total_chunk_size": 1199,
   "type": "int __thiscall(ExtraDataList *this, TESForm *)",
   "xrefs_from_count": 484,
   "xrefs_to_count": 2

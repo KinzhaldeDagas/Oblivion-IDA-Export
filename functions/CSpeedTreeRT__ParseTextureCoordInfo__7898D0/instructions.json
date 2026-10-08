@@ -1,0 +1,2090 @@
+[
+  {
+    "ea": "0x7898D0",
+    "line": "push    0FFFFFFFFh; CSpeedTreeRT::ParseTextureCoordInfo (top-level token 10000). Allocates the 0x54 embedded-texcoord object; parses branch/leaf/frond 8-float coordinate tables, composite texture filename, and horizontal/360 billboard flags through terminator 10001. Leaf V coordinates honor the global texture-flip flag.",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x7898D2",
+    "line": "push    offset SEH_7898D0",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x7898D7",
+    "line": "mov     eax, large fs:0",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7898DD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7898DE",
+    "line": "sub     esp, 0C8h",
+    "mnemonic": "sub",
+    "size": 6
+  },
+  {
+    "ea": "0x7898E4",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7898E9",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7898EB",
+    "line": "mov     [esp+0D4h+var_10], eax",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7898F2",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7898F3",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7898F4",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7898F5",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7898F6",
+    "line": "mov     eax, ds:0B30AACh",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7898FB",
+    "line": "xor     eax, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7898FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7898FE",
+    "line": "lea     eax, [esp+0E8h+var_C]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x789905",
+    "line": "mov     large fs:0, eax",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x78990B",
+    "line": "mov     edi, [esp+0E8h+file]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x789912",
+    "line": "push    54h ; 'T'; Embedded texcoord block allocation: stock SEmbeddedTexCoords is 0x54 bytes and is stored at CSpeedTreeRT+0x4C.",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x789914",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789916",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x78991B",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x78991D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789920",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789922",
+    "line": "jz      short loc_789960",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x789924",
+    "line": "fld1; SEmbeddedTexCoords constructor inline: zero counts/pointers/string, default shadow texcoords to (1,1),(0,1),(0,0),(1,0).",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x789926",
+    "line": "mov     [eax], ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789928",
+    "line": "mov     [eax+4], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x78992B",
+    "line": "mov     [eax+8], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x78992E",
+    "line": "mov     [eax+0Ch], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789931",
+    "line": "mov     [eax+10h], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789934",
+    "line": "mov     [eax+14h], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789937",
+    "line": "mov     dword ptr [eax+30h], 0Fh",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x78993E",
+    "line": "mov     [eax+2Ch], ebx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789941",
+    "line": "mov     [eax+1Ch], bl",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789944",
+    "line": "fst     dword ptr [eax+34h]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x789947",
+    "line": "fst     dword ptr [eax+38h]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x78994A",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x78994C",
+    "line": "fst     dword ptr [eax+3Ch]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x78994F",
+    "line": "fst     dword ptr [eax+44h]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x789952",
+    "line": "fst     dword ptr [eax+48h]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x789955",
+    "line": "fstp    dword ptr [eax+50h]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x789958",
+    "line": "fst     dword ptr [eax+40h]",
+    "mnemonic": "fst",
+    "size": 3
+  },
+  {
+    "ea": "0x78995B",
+    "line": "fstp    dword ptr [eax+4Ch]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x78995E",
+    "line": "jmp     short loc_789962",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789960",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x789962",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789964",
+    "line": "mov     [esi+4Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789967",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; SpeedTreeOBSE 2026-05-25 stock-tail fidelity pass: local 10000 texcoord block allocates CSpeedTreeRT+0x4C and requires a first recognized 10002..10007 payload before accepting 10001.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x78996C",
+    "line": "lea     esp, [esp+0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x789970",
+    "line": "add     eax, 0FFFFD8EEh; switch 6 cases",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x789975",
+    "line": "cmp     eax, 5",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x789978",
+    "line": "ja      near ptr def_78997E; jumptable 0078997E default case",
+    "mnemonic": "ja",
+    "size": 6
+  },
+  {
+    "ea": "0x78997E",
+    "line": "jmp     ds:jpt_78997E[eax*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x789985",
+    "line": "mov     ecx, edi; Texture coord token 10002: read leaf map count, allocate count*8 floats at embedded+0x04, fill by ParseFloat.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789987",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x78998C",
+    "line": "mov     ecx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x78998F",
+    "line": "mov     [ecx], eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789991",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789994",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789996",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789998",
+    "line": "jle     loc_789C44",
+    "mnemonic": "jle",
+    "size": 6
+  },
+  {
+    "ea": "0x78999E",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x7899A0",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x7899A2",
+    "line": "xor     ecx, ecx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7899A4",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x7899A6",
+    "line": "mov     edx, 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7899AB",
+    "line": "mul     edx",
+    "mnemonic": "mul",
+    "size": 2
+  },
+  {
+    "ea": "0x7899AD",
+    "line": "seto    cl",
+    "mnemonic": "seto",
+    "size": 3
+  },
+  {
+    "ea": "0x7899B0",
+    "line": "neg     ecx",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x7899B2",
+    "line": "or      ecx, eax",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x7899B4",
+    "line": "push    ecx; Size",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7899B5",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7899BA",
+    "line": "mov     ecx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7899BD",
+    "line": "mov     [ecx+4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7899C0",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7899C3",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7899C6",
+    "line": "cmp     [edx], ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7899C8",
+    "line": "mov     [esp+0E8h+var_D4], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7899CC",
+    "line": "jle     loc_789C44",
+    "mnemonic": "jle",
+    "size": 6
+  },
+  {
+    "ea": "0x7899D2",
+    "line": "mov     ebp, [esp+0E8h+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7899D6",
+    "line": "shl     ebp, 5",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x7899D9",
+    "line": "mov     ebx, 8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7899DE",
+    "line": "mov     edi, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7899E0",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7899E2",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7899E7",
+    "line": "mov     eax, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7899EA",
+    "line": "mov     ecx, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7899ED",
+    "line": "fstp    dword ptr [ecx+ebp]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x7899F0",
+    "line": "add     ebp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7899F3",
+    "line": "sub     ebx, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x7899F6",
+    "line": "jnz     short loc_7899E0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x7899F8",
+    "line": "mov     eax, [esp+0E8h+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7899FC",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7899FF",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789A02",
+    "line": "cmp     eax, [edx]",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789A04",
+    "line": "mov     [esp+0E8h+var_D4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789A08",
+    "line": "jl      short loc_7899D2",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x789A0A",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x789A0C",
+    "line": "jmp     loc_789C44",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x789A11",
+    "line": "mov     ecx, edi; 2026-05-21 360 gap pass: token 10003 reads embedded billboard texcoord count/table into embedded texcoords +0x08/+0x0C only; no write to CSpeedTreeRT+0x54 observed.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789A13",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789A18",
+    "line": "mov     ecx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A1B",
+    "line": "mov     [ecx+8], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A1E",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A21",
+    "line": "mov     eax, [edx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A24",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789A26",
+    "line": "jle     loc_789C44",
+    "mnemonic": "jle",
+    "size": 6
+  },
+  {
+    "ea": "0x789A2C",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x789A2E",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x789A30",
+    "line": "xor     ecx, ecx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x789A32",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x789A34",
+    "line": "mov     edx, 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789A39",
+    "line": "mul     edx",
+    "mnemonic": "mul",
+    "size": 2
+  },
+  {
+    "ea": "0x789A3B",
+    "line": "seto    cl",
+    "mnemonic": "seto",
+    "size": 3
+  },
+  {
+    "ea": "0x789A3E",
+    "line": "neg     ecx",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x789A40",
+    "line": "or      ecx, eax",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x789A42",
+    "line": "push    ecx; Size",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789A43",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789A48",
+    "line": "mov     ecx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A4B",
+    "line": "mov     [ecx+0Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A4E",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A51",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789A54",
+    "line": "cmp     [edx+8], ebx",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x789A57",
+    "line": "mov     [esp+0E8h+var_D4], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789A5B",
+    "line": "jle     loc_789C44",
+    "mnemonic": "jle",
+    "size": 6
+  },
+  {
+    "ea": "0x789A61",
+    "line": "mov     ebp, [esp+0E8h+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789A65",
+    "line": "shl     ebp, 5",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x789A68",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789A6A",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789A6F",
+    "line": "mov     eax, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A72",
+    "line": "mov     ecx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A75",
+    "line": "mov     edx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789A77",
+    "line": "fstp    dword ptr [ecx+ebp]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x789A7A",
+    "line": "and     edx, 80000001h",
+    "mnemonic": "and",
+    "size": 6
+  },
+  {
+    "ea": "0x789A80",
+    "line": "jns     short loc_789A87",
+    "mnemonic": "jns",
+    "size": 2
+  },
+  {
+    "ea": "0x789A82",
+    "line": "dec     edx",
+    "mnemonic": "dec",
+    "size": 1
+  },
+  {
+    "ea": "0x789A83",
+    "line": "or      edx, 0FFFFFFFEh",
+    "mnemonic": "or",
+    "size": 3
+  },
+  {
+    "ea": "0x789A86",
+    "line": "inc     edx",
+    "mnemonic": "inc",
+    "size": 1
+  },
+  {
+    "ea": "0x789A87",
+    "line": "jz      short loc_789AA2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x789A89",
+    "line": "cmp     byte ptr ds:0B4297Dh, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x789A90",
+    "line": "jz      short loc_789AA2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x789A92",
+    "line": "mov     eax, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A95",
+    "line": "mov     ecx, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789A98",
+    "line": "fld     dword ptr [ecx+ebp]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x789A9B",
+    "line": "lea     eax, [ecx+ebp]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x789A9E",
+    "line": "fchs",
+    "mnemonic": "fchs",
+    "size": 2
+  },
+  {
+    "ea": "0x789AA0",
+    "line": "fstp    dword ptr [eax]",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x789AA2",
+    "line": "add     ebx, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789AA5",
+    "line": "add     ebp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789AA8",
+    "line": "cmp     ebx, 8",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x789AAB",
+    "line": "jl      short loc_789A68",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x789AAD",
+    "line": "mov     eax, [esp+0E8h+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789AB1",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789AB4",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789AB7",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x789AB9",
+    "line": "cmp     eax, [edx+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x789ABC",
+    "line": "mov     [esp+0E8h+var_D4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789AC0",
+    "line": "jl      short loc_789A61",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x789AC2",
+    "line": "jmp     loc_789C44",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x789AC7",
+    "line": "mov     ecx, edi; Texture coord token 10004: read frond map count, allocate count*8 floats at embedded+0x14, fill by ParseFloat.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789AC9",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789ACE",
+    "line": "mov     ecx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789AD1",
+    "line": "mov     [ecx+10h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789AD4",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789AD7",
+    "line": "mov     eax, [edx+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789ADA",
+    "line": "cmp     eax, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789ADC",
+    "line": "jle     loc_789C44",
+    "mnemonic": "jle",
+    "size": 6
+  },
+  {
+    "ea": "0x789AE2",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x789AE4",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x789AE6",
+    "line": "xor     ecx, ecx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x789AE8",
+    "line": "add     eax, eax",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x789AEA",
+    "line": "mov     edx, 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789AEF",
+    "line": "mul     edx",
+    "mnemonic": "mul",
+    "size": 2
+  },
+  {
+    "ea": "0x789AF1",
+    "line": "seto    cl",
+    "mnemonic": "seto",
+    "size": 3
+  },
+  {
+    "ea": "0x789AF4",
+    "line": "neg     ecx",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x789AF6",
+    "line": "or      ecx, eax",
+    "mnemonic": "or",
+    "size": 2
+  },
+  {
+    "ea": "0x789AF8",
+    "line": "push    ecx; Size",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789AF9",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789AFE",
+    "line": "mov     ecx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789B01",
+    "line": "mov     [ecx+14h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789B04",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789B07",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789B0A",
+    "line": "cmp     [edx+10h], ebx",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x789B0D",
+    "line": "mov     [esp+0E8h+var_D4], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789B11",
+    "line": "jle     loc_789C44",
+    "mnemonic": "jle",
+    "size": 6
+  },
+  {
+    "ea": "0x789B17",
+    "line": "mov     ebp, [esp+0E8h+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789B1B",
+    "line": "shl     ebp, 5",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x789B1E",
+    "line": "mov     ebx, 8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789B23",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789B25",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789B2A",
+    "line": "mov     eax, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789B2D",
+    "line": "mov     ecx, [eax+14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789B30",
+    "line": "fstp    dword ptr [ecx+ebp]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x789B33",
+    "line": "add     ebp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789B36",
+    "line": "sub     ebx, 1",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x789B39",
+    "line": "jnz     short loc_789B23",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x789B3B",
+    "line": "mov     eax, [esp+0E8h+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789B3F",
+    "line": "mov     edx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789B42",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789B45",
+    "line": "cmp     eax, [edx+10h]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x789B48",
+    "line": "mov     [esp+0E8h+var_D4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789B4C",
+    "line": "jl      short loc_789B17",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x789B4E",
+    "line": "xor     ebx, ebx",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x789B50",
+    "line": "jmp     loc_789C44",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x789B55",
+    "line": "sub     esp, 1Ch; Texture coord token 10005: read composite texture filename, normalize/remove path, store string at embedded+0x18.",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x789B58",
+    "line": "mov     eax, esp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789B5A",
+    "line": "mov     [esp+104h+var_D4], esp",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789B5E",
+    "line": "push    eax; outSmallString",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789B5F",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789B61",
+    "line": "call    OB_CTreeFileAccess_ReadString_010201A0; CTreeFileAccess::ParseString-style helper. Reads a 4-byte byte count, then consumes that many raw bytes into a small-string object.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789B66",
+    "line": "lea     ecx, [esp+104h+filename]; this",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x789B6D",
+    "line": "call    OB_stString28_CopyCtorConsumeTemporary_010201A0; Oblivion 28-byte SSO copy constructor for a by-value temporary: initializes destination, copies the source substring, and releases heap-backed source storage. Used after ParseString.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789B72",
+    "line": "lea     ecx, [esp+0E8h+result]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x789B76",
+    "line": "push    ecx; result",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789B77",
+    "line": "lea     ecx, [esp+0ECh+filename]; filename",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x789B7E",
+    "line": "mov     [esp+0ECh+var_4], ebx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x789B85",
+    "line": "call    OB_IdvNoPath_010201A0; Oblivion IdvNoPath helper: copies the input 28-byte SSO string, scans backward for '/' or '\\', and constructs the returned basename string. RT4.1 IdvFilename.h corroborates the algorithm/name.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789B8A",
+    "line": "mov     ecx, [esi+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789B8D",
+    "line": "push    0FFFFFFFFh; count",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x789B8F",
+    "line": "push    ebx; offset",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789B90",
+    "line": "add     ecx, 18h; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789B93",
+    "line": "push    eax; source",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789B94",
+    "line": "mov     byte ptr [esp+0F4h+var_4], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x789B9C",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789BA1",
+    "line": "mov     ebp, 10h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789BA6",
+    "line": "cmp     [esp+0E8h+result.capacity], ebp",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x789BAA",
+    "line": "jb      short loc_789BB9",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x789BAC",
+    "line": "mov     edx, dword ptr [esp+0E8h+result.storage]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789BB0",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789BB1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789BB6",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789BB9",
+    "line": "cmp     [esp+0E8h+filename.capacity], ebp",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x789BC0",
+    "line": "mov     [esp+0E8h+result.capacity], 0Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x789BC8",
+    "line": "mov     [esp+0E8h+result.size], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789BCC",
+    "line": "mov     byte ptr [esp+0E8h+result.storage], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789BD1",
+    "line": "mov     [esp+0E8h+var_4], 0FFFFFFFFh",
+    "mnemonic": "mov",
+    "size": 11
+  },
+  {
+    "ea": "0x789BDC",
+    "line": "jb      short loc_789C44",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x789BDE",
+    "line": "mov     eax, dword ptr [esp+0E8h+filename.storage]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x789BE5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789BE6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789BEB",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x789BEE",
+    "line": "jmp     short loc_789C44",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789BF0",
+    "line": "mov     ebp, [edi]; 2026-05-21 360 gap pass: token 10006 writes raw one-byte horizontal billboard flag to CSpeedTreeRT+0x6D; no CSpeedTreeRT+0x54 count update.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789BF2",
+    "line": "lea     ecx, [ebp+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x789BF5",
+    "line": "mov     [edi], ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789BF7",
+    "line": "mov     ecx, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789BFA",
+    "line": "cmp     ecx, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789BFC",
+    "line": "jz      short loc_789C07",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x789BFE",
+    "line": "mov     eax, [edi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789C01",
+    "line": "sub     eax, ecx",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x789C03",
+    "line": "cmp     ebp, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789C05",
+    "line": "jb      short loc_789C0C",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x789C07",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789C0C",
+    "line": "mov     edx, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789C0F",
+    "line": "cmp     byte ptr [edx+ebp], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x789C13",
+    "line": "setnz   al",
+    "mnemonic": "setnz",
+    "size": 3
+  },
+  {
+    "ea": "0x789C16",
+    "line": "mov     [esi+6Dh], al",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789C19",
+    "line": "jmp     short loc_789C44",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789C1B",
+    "line": "mov     ebp, [edi]; 2026-05-21 360 gap pass: token 10007 writes raw one-byte 360 billboard flag to CSpeedTreeRT+0x6C; this enables the branch gate but does not set directional image count +0x54.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789C1D",
+    "line": "lea     ecx, [ebp+1]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x789C20",
+    "line": "mov     [edi], ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789C22",
+    "line": "mov     ecx, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789C25",
+    "line": "cmp     ecx, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789C27",
+    "line": "jz      short loc_789C32",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x789C29",
+    "line": "mov     eax, [edi+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789C2C",
+    "line": "sub     eax, ecx",
+    "mnemonic": "sub",
+    "size": 2
+  },
+  {
+    "ea": "0x789C2E",
+    "line": "cmp     ebp, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x789C30",
+    "line": "jb      short loc_789C37",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x789C32",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789C37",
+    "line": "mov     edx, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789C3A",
+    "line": "cmp     byte ptr [edx+ebp], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x789C3E",
+    "line": "setnz   al",
+    "mnemonic": "setnz",
+    "size": 3
+  },
+  {
+    "ea": "0x789C41",
+    "line": "mov     [esi+6Ch], al",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x789C44",
+    "line": "mov     ecx, edi; Texture coord parser loop tail: after each recognized payload, read next token and exit only on 10001; EOF before 10001 throws.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789C46",
+    "line": "call    OB_CTreeFileAccess_IsEOF_010201A0; CTreeFileAccess::EndOfFile-style helper. Returns true when byte-buffer begin is null or cursor offset is at/after end-begin.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789C4B",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x789C4D",
+    "line": "jnz     short loc_789C8B",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x789C4F",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x789C51",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789C56",
+    "line": "cmp     eax, 2711h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x789C5B",
+    "line": "jnz     loc_789970",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x789C61",
+    "line": "mov     ecx, [esp+0E8h+var_C]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x789C68",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x789C6F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x789C70",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x789C71",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x789C72",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x789C73",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x789C74",
+    "line": "mov     ecx, [esp+0D4h+var_10]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x789C7B",
+    "line": "xor     ecx, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x789C7D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789C82",
+    "line": "add     esp, 0D4h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x789C88",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x789C8B",
+    "line": "push    3Dh ; '='; count",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x789C8D",
+    "line": "push    offset aPrematureEnd_0; \"premature end of file reached parsing t\"...",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x789C92",
+    "line": "lea     ecx, [esp+0F0h+details]; this",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x789C96",
+    "line": "mov     [esp+0F0h+details.capacity], 0Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x789C9E",
+    "line": "mov     [esp+0F0h+details.size], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789CA2",
+    "line": "mov     byte ptr [esp+0F0h+details.storage], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789CA7",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789CAC",
+    "line": "push    ebx; appendSystemError",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789CAD",
+    "line": "lea     ecx, [esp+0ECh+details]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x789CB1",
+    "line": "push    ecx; details",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789CB2",
+    "line": "lea     ecx, [esp+0F0h+var_54]; this",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x789CB9",
+    "line": "mov     [esp+0F0h+var_4], 3",
+    "mnemonic": "mov",
+    "size": 11
+  },
+  {
+    "ea": "0x789CC4",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789CC9",
+    "line": "push    offset __TI3?AVIdvFileError@@; throw info for 'class IdvFileError'",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x789CCE",
+    "line": "lea     edx, [esp+0ECh+var_54]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x789CD5",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789CD6",
+    "line": "call    ThrowException??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789CDC",
+    "line": "sbb     al, 68h ; 'h'",
+    "mnemonic": "sbb",
+    "size": 2
+  },
+  {
+    "ea": "0x789CDE",
+    "line": "cld",
+    "mnemonic": "cld",
+    "size": 1
+  },
+  {
+    "ea": "0x789CDF",
+    "line": "mov     edx, 4C8D00A8h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789CE4",
+    "line": "and     al, 3Ch",
+    "mnemonic": "and",
+    "size": 2
+  },
+  {
+    "ea": "0x789CE6",
+    "line": "mov     [esp+8+arg_30.capacity], 0Fh",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x789CEE",
+    "line": "mov     [esp+8+arg_30.size], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x789CF2",
+    "line": "mov     byte ptr [esp+8+arg_30.storage], 0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x789CF7",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789CFC",
+    "line": "push    ebx; appendSystemError",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789CFD",
+    "line": "lea     eax, [esp+4+arg_30]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x789D01",
+    "line": "push    eax; details",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789D02",
+    "line": "lea     ecx, [esp+8+arg_68]; this",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x789D06",
+    "line": "mov     [esp+8+arg_E0], 2",
+    "mnemonic": "mov",
+    "size": 11
+  },
+  {
+    "ea": "0x789D11",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x789D16",
+    "line": "push    offset __TI3?AVIdvFileError@@; throw info for 'class IdvFileError'",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x789D1B",
+    "line": "lea     ecx, [esp+4+arg_68]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x789D1F",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x789D20",
+    "line": "call    ThrowException??",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4B0",
+    "line": "lea     ecx, [ebp-2Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB4B3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4B8",
+    "line": "lea     ecx, [ebp-0D0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB4BE",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4C3",
+    "line": "lea     ecx, [ebp-98h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB4C9",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4CE",
+    "line": "lea     ecx, [ebp-0B4h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB4D4",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4D9",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB4DD",
+    "line": "lea     eax, [edx-0D8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB4E3",
+    "line": "mov     ecx, [edx-0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CB4E9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB4EB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4F0",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB4F3",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB4F6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB4F8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4FD",
+    "line": "mov     eax, offset stru_AF3C10",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB502",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
+  }
+]

@@ -2,7 +2,7 @@
 0x9EC536: push    ecx
 0x9EC537: fstp    [esp+4+var_4]; float
 0x9EC53A: push    offset aFpersboastpers; "fPersBoastPers"
-0x9EC53F: mov     ecx, offset fPersBoastPers
+0x9EC53F: mov     ecx, 0B37848h
 0x9EC544: call    GameSetting_ConstrAndReg_float
 0x9EC549: push    offset sub_A1F7B0; void (__cdecl *)()
 0x9EC54E: call    _atexit

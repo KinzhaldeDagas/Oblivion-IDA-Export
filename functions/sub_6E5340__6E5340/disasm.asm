@@ -11,9 +11,9 @@
 0x6E5355: pop     esi
 0x6E5356: retn    4
 0x6E5359: lea     eax, [edi+1Ch]
-0x6E535C: push    eax
-0x6E535D: lea     ecx, [esi+1Ch]
-0x6E5360: call    sub_8AA390
+0x6E535C: push    eax; other
+0x6E535D: lea     ecx, [esi+1Ch]; this
+0x6E5360: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x6E5365: test    al, al
 0x6E5367: jnz     short loc_6E5352
 0x6E5369: mov     ecx, [edi+28h]

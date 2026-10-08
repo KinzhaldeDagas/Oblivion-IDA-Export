@@ -1,1 +1,1 @@
-LPCGUID
+typedef const GUID *LPCGUID;

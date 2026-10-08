@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D7890",
-    "line": "push    ebx",
+    "line": "push    ebx; Saves base NiExtraData, 32-bit key count, then every ordered key record as float time followed by text string.",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6D78D7",
-    "line": "call    sub_6EC760",
+    "line": "call    NiTextKey_SaveBinary; Saves one NiTextKey: writes float time at +0x00 followed by text at +0x04.",
     "mnemonic": "call",
     "size": 5
   },

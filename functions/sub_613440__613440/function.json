@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 9,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x613440",
+      "0x6134BC"
+    ]
+  ],
+  "chunks_sha256": "91492c1fc7cfc3ac265496fd6bacf423c1573be65586a887d128cf70110ef629",
+  "comment_regular": "Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.",
+  "comment_repeatable": "Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_613440",
+  "display_name": "CombatController_IsTargetWithinRangedDistance",
   "end_ea": "0x6134BC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_613440",
+  "name": "CombatController_IsTargetWithinRangedDistance",
   "segment": ".text",
   "sha256": "91492c1fc7cfc3ac265496fd6bacf423c1573be65586a887d128cf70110ef629",
   "size": 124,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x613440",
-  "type": "bool __thiscall(void **this, float, float, int)",
+  "total_chunk_size": 124,
+  "type": "bool __thiscall(void *this, float surfaceDistance, float maximumDistance, int unused)",
   "xrefs_from_count": 53,
   "xrefs_to_count": 11
 }

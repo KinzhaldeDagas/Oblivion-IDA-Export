@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x4F9540",
+      "0x4F9580"
+    ]
+  ],
+  "chunks_sha256": "f1ffa3d920b7f05f1884a64e223f9d6d564b7c8ced7992df4e37aace67bfc481",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified TESGlobal vtable override at +0xB4 (A498D0): RTTI-casts source to TESGlobal, copies base TESForm components, then copies variable type byte +0x20 and float value +0x24.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4F9540",
+  "display_name": "TESGlobal_CopyComponentFrom",
   "end_ea": "0x4F9580",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F9540",
+  "name": "TESGlobal_CopyComponentFrom",
   "segment": ".text",
   "sha256": "f1ffa3d920b7f05f1884a64e223f9d6d564b7c8ced7992df4e37aace67bfc481",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F9540",
-  "type": "char __thiscall(TESForm *this, TESForm *)",
+  "total_chunk_size": 64,
+  "type": "char __thiscall(TESGlobal *self, TESForm *source)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

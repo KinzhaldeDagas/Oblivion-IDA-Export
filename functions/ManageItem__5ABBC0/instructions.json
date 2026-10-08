@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x5ABC43",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5ABC84",
-    "line": "call    sub_5C1900",
+    "line": "call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x5ABCEA",
-    "line": "mov     ecx, offset byte_B3B3DB",
+    "line": "mov     ecx, (offset dword_B3B0B4+327h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x5ABD3D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x5ABDE2",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,13 +1285,13 @@
   },
   {
     "ea": "0x5ABE80",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ABE82",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x5ABEB9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x5ABEC2",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,13 +1471,13 @@
   },
   {
     "ea": "0x5ABEE1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ABEE3",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,13 +1603,13 @@
   },
   {
     "ea": "0x5ABF2C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ABF2E",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x5ABFF0",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,19 +2113,19 @@
   },
   {
     "ea": "0x5AC048",
-    "line": "fstp    [esp+20h+a2]; a3",
+    "line": "fstp    [esp+20h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC04B",
-    "line": "push    0FB8h; a2",
+    "line": "push    0FB8h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AC050",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2257,13 +2257,13 @@
   },
   {
     "ea": "0x5AC090",
-    "line": "fstp    [esp+20h+a2]; a3",
+    "line": "fstp    [esp+20h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC093",
-    "line": "push    0FB8h; a2",
+    "line": "push    0FB8h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x5AC09A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x5AC0F4",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x5AC134",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2719,19 +2719,19 @@
   },
   {
     "ea": "0x5AC17E",
-    "line": "fstp    [esp+20h+a2]; a3",
+    "line": "fstp    [esp+20h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC181",
-    "line": "push    0FB8h; a2",
+    "line": "push    0FB8h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AC186",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3013,7 +3013,7 @@
   },
   {
     "ea": "0x5AC221",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3517,7 +3517,7 @@
   },
   {
     "ea": "0x5AC31A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3631,19 +3631,19 @@
   },
   {
     "ea": "0x5AC354",
-    "line": "fstp    [esp+20h+a2]; a3",
+    "line": "fstp    [esp+20h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC357",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AC35C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

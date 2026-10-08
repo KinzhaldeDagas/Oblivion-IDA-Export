@@ -1,19 +1,32 @@
 {
-  "callees_count": 28,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x6541A0",
+      "0x654411"
+    ]
+  ],
+  "chunks_sha256": "fcf8d0830381a4f4285abf9332bc741812ea713502c19ce23f5f1739aa0c92e9",
+  "comment_regular": "Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.",
+  "comment_repeatable": "Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6541A0",
+  "display_name": "MiddleHighProcess_CacheEquipmentAttachmentNodes",
   "end_ea": "0x654411",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6541A0",
+  "name": "MiddleHighProcess_CacheEquipmentAttachmentNodes",
   "segment": ".text",
   "sha256": "fcf8d0830381a4f4285abf9332bc741812ea713502c19ce23f5f1739aa0c92e9",
   "size": 625,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6541A0",
-  "type": "char __thiscall(int *this, int, _DWORD *)",
+  "total_chunk_size": 625,
+  "type": "bool __thiscall(MiddleHighProcess *this, void *skinInstance, NiNode *rootNode)",
   "xrefs_from_count": 204,
   "xrefs_to_count": 2
 }

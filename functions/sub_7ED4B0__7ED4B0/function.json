@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 26,
+  "chunks": [
+    [
+      "0x7ED4B0",
+      "0x7ED5B6"
+    ]
+  ],
+  "chunks_sha256": "47bbf78b29fb027fb15250ef1afb5612172e878e4d625bc39fddfa02657b3e4b",
+  "comment_regular": "Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
+  "comment_repeatable": "Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ED4B0",
+  "display_name": "BSShaderLightingProperty__GetNextActiveLight",
   "end_ea": "0x7ED5B6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ED4B0",
+  "name": "BSShaderLightingProperty__GetNextActiveLight",
   "segment": ".text",
   "sha256": "47bbf78b29fb027fb15250ef1afb5612172e878e4d625bc39fddfa02657b3e4b",
   "size": 262,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ED4B0",
-  "type": "int __thiscall(int **this)",
+  "total_chunk_size": 262,
+  "type": "ShadowSceneLight *__thiscall(BSShaderLightingProperty *this)",
   "xrefs_from_count": 118,
   "xrefs_to_count": 26
 }

@@ -3,20 +3,20 @@
 0x9979F8: sub     esp, 0Ch
 0x9979FB: push    ebx
 0x9979FC: xor     ebx, ebx
-0x9979FE: cmp     dword_BABC14, ebx
+0x9979FE: cmp     dword ptr unk_BABC14, ebx
 0x997A04: push    esi
 0x997A05: push    edi
 0x997A06: jnz     short loc_997A0D
 0x997A08: call    ___initmbctable
 0x997A0D: push    104h; nSize
-0x997A12: mov     esi, offset byte_BAA650
+0x997A12: mov     esi, (offset dword_BA9E10+840h)
 0x997A17: push    esi; lpFilename
 0x997A18: push    ebx; hModule
-0x997A19: mov     byte_BAA754, bl
+0x997A19: mov     byte ptr dword_BA9E10+944h, bl
 0x997A1F: call    ds:GetModuleFileNameA
-0x997A25: mov     eax, dword_BABC04
+0x997A25: mov     eax, dword ptr unk_BABC04
 0x997A2A: cmp     eax, ebx
-0x997A2C: mov     dword_BA9DC4, esi
+0x997A2C: mov     dword ptr unk_BA9DC4, esi
 0x997A32: jz      short loc_997A3B
 0x997A34: cmp     [eax], bl
 0x997A36: mov     [ebp+var_4], eax
@@ -58,8 +58,8 @@
 0x997A90: mov     eax, [ebp+var_8]
 0x997A93: add     esp, 0Ch
 0x997A96: dec     eax
-0x997A97: mov     dword_BA9DA8, eax
-0x997A9C: mov     dword_BA9DAC, esi
+0x997A97: mov     dword ptr unk_BA9DA8, eax
+0x997A9C: mov     dword ptr unk_BA9DAC, esi
 0x997AA2: xor     eax, eax
 0x997AA4: jmp     short loc_997AA9
 0x997AA6: or      eax, 0FFFFFFFFh

@@ -6,7 +6,7 @@
 0x6A5520: push    edi
 0x6A5521: mov     edi, ecx
 0x6A5523: mov     ecx, esi; this
-0x6A5525: call    TESObjectREFR_GetParentCell
+0x6A5525: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A552A: mov     ecx, eax
 0x6A552C: call    sub_4AF170
 0x6A5531: test    eax, eax
@@ -15,14 +15,14 @@
 0x6A553B: mov     eax, [esi]
 0x6A553D: mov     edx, [eax+174h]
 0x6A5543: xor     ebx, ebx
-0x6A5545: push    ebx
-0x6A5546: push    1
-0x6A5548: push    esi
+0x6A5545: push    ebx; excludedPoints
+0x6A5546: push    1; pathMode
+0x6A5548: push    esi; actor
 0x6A5549: mov     [esp+0C8h+a3], ebx
 0x6A554D: mov     [esp+0C8h+var_78], ebx
 0x6A5551: call    edx
-0x6A5553: push    eax
-0x6A5554: call    sub_67D820
+0x6A5553: push    eax; position
+0x6A5554: call    TESPathGrid_FindNearestReachablePointForActor; Verified actor-aware PathGrid point selection. For a placed reference, builds a temporary graph node at the requested position, attaches below-water and SubSpace flags, and asks that cell's PathGrid for the best reachable candidate. For exterior coordinates, searches the loaded cell grid; when the position is in the active world's loaded neighborhood, compares actor-aware candidates from the containing and adjacent cell PathGrids. It may reduce cost for candidates with the extra reachability result; exact meaning of that mode remains Candidate.
 0x6A5559: mov     esi, eax
 0x6A555B: add     esp, 10h
 0x6A555E: cmp     esi, ebx
@@ -80,10 +80,9 @@
 0x6A560B: fld     [esp+0BCh+var_34]
 0x6A5612: fstp    [esp+0BCh+var_A0]
 0x6A5616: jmp     short loc_6A5620
-0x6A5618: align 10h
 0x6A5620: mov     eax, [esp+0BCh+var_A4]
-0x6A5624: mov     ecx, [eax]
-0x6A5626: call    sub_4BEF40
+0x6A5624: mov     ecx, [eax]; this
+0x6A5626: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x6A562B: mov     ecx, [eax]
 0x6A562D: mov     edx, [eax+4]
 0x6A5630: mov     edi, [eax+8]
@@ -97,7 +96,7 @@
 0x6A5646: mov     [esp+0C0h+var_80], edi
 0x6A564A: mov     [eax+8], edi
 0x6A564D: add     esi, 0Ch
-0x6A5650: call    GetRandomLargeInteger?
+0x6A5650: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6A5655: mov     [esp+0C0h+var_AC], eax
 0x6A5659: fild    [esp+0C0h+var_AC]
 0x6A565D: add     esp, 4
@@ -150,7 +149,7 @@
 0x6A5720: fstp    [esp+0BCh+var_AC]
 0x6A5724: jnz     loc_6A5690
 0x6A572A: push    0; Seed
-0x6A572C: call    GetRandomLargeInteger?
+0x6A572C: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6A5731: mov     [esp+0C0h+var_A8], eax
 0x6A5735: fild    [esp+0C0h+var_A8]
 0x6A5739: add     esp, 4
@@ -212,9 +211,9 @@
 0x6A5816: pop     ebx
 0x6A5817: add     esp, 0ACh
 0x6A581D: retn    0Ch
-0x6A5820: call    TESObjectREFR_GetParentCell
+0x6A5820: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A5825: mov     ecx, eax; this
-0x6A5827: call    TESObjectCELL_IsInterior
+0x6A5827: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6A582C: test    al, al
 0x6A582E: jnz     loc_6A59FA
 0x6A5834: xor     ecx, ecx
@@ -247,10 +246,10 @@
 0x6A588C: fld     [esp+0BCh+var_8C]
 0x6A5890: push    ecx
 0x6A5891: mov     [esp+0C0h+var_94], ecx
-0x6A5895: fstp    [esp+0C0h+var_C0]; float
-0x6A5898: lea     ecx, [esp+0C0h+var_24]
+0x6A5895: fstp    [esp+0C0h+angleZ]; angleZ
+0x6A5898: lea     ecx, [esp+0C0h+var_24]; this
 0x6A589F: mov     [esp+0C0h+var_90], edx
-0x6A58A3: call    NiMatrix33_InitRotationTransform
+0x6A58A3: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x6A58A8: fldz
 0x6A58AA: fst     [esp+0BCh+var_94]
 0x6A58AE: lea     ecx, [esp+0BCh+var_94]
@@ -300,7 +299,6 @@
 0x6A5950: fadd    [esp+0BCh+var_70]
 0x6A5954: fstp    [esp+0BCh+var_A8]
 0x6A5958: jmp     short loc_6A5960
-0x6A595A: align 10h
 0x6A5960: fild    [esp+0BCh+var_AC]
 0x6A5964: lea     eax, [esp+0BCh+a3]
 0x6A5968: push    eax; a3

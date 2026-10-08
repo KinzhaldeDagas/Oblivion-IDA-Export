@@ -1,4 +1,4 @@
-0x4DD850: push    0FFFFFFFFh
+0x4DD850: push    0FFFFFFFFh; Verified enable-state activation: this branch runs when the reference's 0x800 disabled bit is set, performs activation/processing work, then clears the bit through TESForm_SetDisabledFlag. It recursively propagates state through ExtraEnableStateChildren.
 0x4DD852: push    offset SEH_8C8970
 0x4DD857: mov     eax, large fs:0
 0x4DD85D: push    eax
@@ -24,9 +24,9 @@
 0x4DD894: push    40000000h
 0x4DD899: mov     ecx, esi
 0x4DD89B: call    eax
-0x4DD89D: push    0; a2
+0x4DD89D: push    0; disabled
 0x4DD89F: mov     ecx, esi; this
-0x4DD8A1: call    TESForm_SetEnabled?
+0x4DD8A1: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
 0x4DD8A6: mov     edx, [esi]
 0x4DD8A8: mov     eax, [edx+190h]
 0x4DD8AE: mov     ecx, esi
@@ -56,18 +56,18 @@
 0x4DD8F1: mov     [esp+1Ch+var_4], 0
 0x4DD8F9: jz      short loc_4DD904
 0x4DD8FB: mov     ecx, eax; this
-0x4DD8FD: call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)
+0x4DD8FD: call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.
 0x4DD902: jmp     short loc_4DD906
 0x4DD904: xor     eax, eax
-0x4DD906: push    0
-0x4DD908: push    0
-0x4DD90A: push    0
-0x4DD90C: push    3
-0x4DD90E: push    esi
-0x4DD90F: mov     ecx, offset ActorProcessManager_ptr
+0x4DD906: push    0; relativeTo
+0x4DD908: push    0; insertRelative
+0x4DD90A: push    0; append
+0x4DD90C: push    3; processLevel
+0x4DD90E: push    esi; object
+0x4DD90F: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x4DD914: mov     [esp+30h+var_4], 0FFFFFFFFh
 0x4DD91C: mov     [esi+58h], eax
-0x4DD91F: call    sub_673A90
+0x4DD91F: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x4DD924: mov     eax, [esi+40h]
 0x4DD927: test    eax, eax
 0x4DD929: jz      loc_4DDA48
@@ -153,7 +153,7 @@
 0x4DDA1E: cmp     byte ptr [eax+4], 1Ah
 0x4DDA22: jnz     short loc_4DDA48
 0x4DDA24: lea     ecx, [esi+44h]
-0x4DDA27: call    sub_41E650
+0x4DDA27: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x4DDA2C: test    eax, eax
 0x4DDA2E: jz      short loc_4DDA48
 0x4DDA30: mov     eax, [eax]
@@ -164,7 +164,7 @@
 0x4DDA39: call    GetShadowSceneNode
 0x4DDA3E: add     esp, 4
 0x4DDA41: mov     ecx, eax
-0x4DDA43: call    sub_7C6FF0
+0x4DDA43: call    ShadowSceneNode_UpdateOrClearSourceLight; Find an existing source light; clear receiver associations when source flag +0x18 bit0 is set, otherwise refresh source-derived state.
 0x4DDA48: test    edi, edi
 0x4DDA4A: jz      short loc_4DDAA0
 0x4DDA4C: mov     edx, [edi]
@@ -186,7 +186,7 @@
 0x4DDA76: push    edi
 0x4DDA77: call    eax
 0x4DDA79: mov     ecx, edi; int
-0x4DDA7B: call    EvaluatePackage
+0x4DDA7B: call    EvaluatePackage; Actor::EvaluatePackage. After current package changes, resets/evaluates actor AI state through sub_5EAE70 and process callbacks; plugin calls this after assigning runtime packages.
 0x4DDA80: mov     ecx, [edi+58h]
 0x4DDA83: mov     edx, [ecx]
 0x4DDA85: mov     eax, [edx+8]
@@ -204,7 +204,7 @@
 0x4DDAA6: push    esi
 0x4DDAA7: call    sub_665260
 0x4DDAAC: lea     ecx, [esi+44h]
-0x4DDAAF: call    sub_4203A0
+0x4DDAAF: call    ExtraDataList_GetEnableStateChildren; Returns the embedded child-reference list in ExtraEnableStateChildren, or null.
 0x4DDAB4: mov     esi, eax
 0x4DDAB6: test    esi, esi
 0x4DDAB8: jz      short loc_4DDAEE
@@ -215,13 +215,13 @@
 0x4DDAC9: jz      short loc_4DDAEE
 0x4DDACB: mov     edi, [esi]
 0x4DDACD: lea     ecx, [edi+44h]
-0x4DDAD0: call    sub_420340
+0x4DDAD0: call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.
 0x4DDAD5: test    al, al
 0x4DDAD7: mov     ecx, edi
 0x4DDAD9: jz      short loc_4DDAE2
 0x4DDADB: call    sub_4E4690
 0x4DDAE0: jmp     short loc_4DDAE7
-0x4DDAE2: call    sub_4DD850
+0x4DDAE2: call    sub_4DD850; Verified enable-state activation: this branch runs when the reference's 0x800 disabled bit is set, performs activation/processing work, then clears the bit through TESForm_SetDisabledFlag. It recursively propagates state through ExtraEnableStateChildren.
 0x4DDAE7: mov     esi, [esi+4]
 0x4DDAEA: test    esi, esi
 0x4DDAEC: jnz     short loc_4DDAC0
@@ -232,3 +232,15 @@
 0x4DDAFB: pop     esi
 0x4DDAFC: add     esp, 10h
 0x4DDAFF: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

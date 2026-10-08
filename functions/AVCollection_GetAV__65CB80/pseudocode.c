@@ -1,10 +1,11 @@
-double __thiscall AVCollection_GetAV(_DWORD *this, int a2)
+// Verified: returns found entry float or 0.0 if absent; read path calls GetNode and does not allocate.
+float __thiscall AVCollection_GetAV(AVCollection *self, int actorValue)
 {
-  float *Node; // eax
+  AVCollectionEntry *Node; // eax
 
-  Node = (float *)AVCollection_GetNode(this, a2);
-  if ( Node )
-    return Node[1];
+  Node = AVCollection_GetNode(self, actorValue); /*0x65cb85*/
+  if ( Node ) /*0x65cb8c*/
+    return Node->value; /*0x65cb95*/
   else
-    return (float)0.0;
+    return 0.0; /*0x65cba2*/
 }

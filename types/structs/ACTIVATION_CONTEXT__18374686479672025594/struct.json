@@ -1,100 +1,162 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_ACTIVATION_CONTEXT",
+  "definition": "struct _ACTIVATION_CONTEXT\n{\nULONG magic;\nint ref_count;\nfile_info config;\nfile_info appdir;\nassembly *assemblies;\nunsigned int num_assemblies;\nunsigned int allocated_assemblies;\nDWORD sections;\nstrsection_header *wndclass_section;\nstrsection_header *dllredirect_section;\nstrsection_header *progid_section;\nguidsection_header *tlib_section;\nguidsection_header *comserver_section;\nguidsection_header *ifaceps_section;\nguidsection_header *clrsurrogate_section;\n}\n",
   "id": 18374686479672025594,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "magic",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref_count",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "config",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "file_info"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "appdir",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "file_info"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "assemblies",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "assembly *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_assemblies",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "allocated_assemblies",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sections",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wndclass_section",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "strsection_header *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dllredirect_section",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "strsection_header *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "progid_section",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "strsection_header *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tlib_section",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "guidsection_header *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "comserver_section",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "guidsection_header *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ifaceps_section",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "guidsection_header *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrsurrogate_section",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "guidsection_header *"
     }
   ],
   "name": "_ACTIVATION_CONTEXT",
+  "ordinal": 827,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

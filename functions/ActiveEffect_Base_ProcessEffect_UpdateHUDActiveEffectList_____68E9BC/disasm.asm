@@ -1,11 +1,11 @@
 0x68E9BC: mov     ecx, [esi+20h]
 0x68E9BF: test    ecx, ecx
-0x68E9C1: jz      short ActiveEffect_Base_ProcessEffect___RemoveEffect
+0x68E9C1: jz      short ActiveEffect_Base_ProcessEffect___RemoveEffect; ActiveEffect process Remove call site: vfunc +0x3C, then bRemoved=1 and owner-list cleanup.
 0x68E9C3: mov     edx, [ecx]
 0x68E9C5: mov     eax, [edx+4]
 0x68E9C8: call    eax
 0x68E9CA: cmp     eax, ds:0B333C4h
-0x68E9D0: jnz     short ActiveEffect_Base_ProcessEffect___RemoveEffect
+0x68E9D0: jnz     short ActiveEffect_Base_ProcessEffect___RemoveEffect; ActiveEffect process Remove call site: vfunc +0x3C, then bRemoved=1 and owner-list cleanup.
 0x68E9D2: push    3ECh
 0x68E9D7: call    Menu_GetOpenMenuTile
 0x68E9DC: add     esp, 4

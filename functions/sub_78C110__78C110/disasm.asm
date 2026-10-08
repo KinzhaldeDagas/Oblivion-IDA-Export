@@ -1,5 +1,5 @@
-0x78C110: fldz
-0x78C112: fld     [esp+arg_0]
+0x78C110: fldz; CSpeedTreeRT::SetLodLevel. Accepts only [0,1], writing instanceData+0x10 for instances or treeEngine+0x14 for base trees; out-of-range input records the SDK error.
+0x78C112: fld     [esp+lodLevel]
 0x78C116: fcom    st(1)
 0x78C118: fnstsw  ax
 0x78C11A: fstp    st(1)
@@ -18,9 +18,9 @@
 0x78C139: mov     eax, [ecx]
 0x78C13B: fstp    dword ptr [eax+14h]
 0x78C13E: retn    4
-0x78C141: push    38h ; '8'; MaxCount
+0x78C141: push    38h ; '8'; count
 0x78C143: fstp    st
 0x78C145: push    offset aSetlodlevelExp; "SetLodLevel() expects a value in the ra"...
-0x78C14A: mov     ecx, offset dword_B2B614
-0x78C14F: call    sub_414500
+0x78C14A: mov     ecx, offset OB_g_strError_010201A0; this
+0x78C14F: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x78C154: retn    4

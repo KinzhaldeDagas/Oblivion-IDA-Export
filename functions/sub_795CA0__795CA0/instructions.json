@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x795CA0",
-    "line": "push    ebx",
+    "line": "push    ebx; OBLIVION AUTHORITY (2026-08-30): Copy-assigns a range of vector<unsigned short> owners into initialized destination owners and returns the advanced destination.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795CA1",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x795CA6",
-    "line": "mov     ebp, [esp+8+arg_8]",
+    "line": "mov     ebp, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x795CAB",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x795CC2",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795CC3",
-    "line": "lea     ecx, [esi+ebp]",
+    "line": "lea     ecx, [esi+ebp]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x795CC6",
-    "line": "call    sub_795510",
+    "line": "call    OB_stVectorUShort_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned short>, with self/empty/reuse/reallocate paths and exact end repair.",
     "mnemonic": "call",
     "size": 5
   },

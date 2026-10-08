@@ -1,1 +1,1 @@
-std::bad_typeid
+struct std::bad_typeid;

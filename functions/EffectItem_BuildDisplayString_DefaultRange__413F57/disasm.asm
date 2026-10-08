@@ -6,7 +6,7 @@
 0x413F67: jmp     short loc_413F6B
 0x413F69: xor     eax, eax
 0x413F6B: push    eax
-0x413F6C: mov     eax, sMagicEffectItemOn
+0x413F6C: mov     eax, ds:0B33468h
 0x413F71: push    eax
 0x413F72: push    offset aSS_4; " %s %s"
 0x413F77: lea     ecx, [esp+0Ch+arg_20]

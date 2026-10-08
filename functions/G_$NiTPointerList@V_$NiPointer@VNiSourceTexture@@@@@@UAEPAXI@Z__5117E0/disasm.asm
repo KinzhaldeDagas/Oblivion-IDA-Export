@@ -4,7 +4,7 @@
 0x5117E8: test    [esp+4+arg_0], 1
 0x5117ED: jz      short loc_5117F8
 0x5117EF: push    esi
-0x5117F0: call    FormHeapFree
+0x5117F0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5117F5: add     esp, 4
 0x5117F8: mov     eax, esi
 0x5117FA: pop     esi

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4F1840",
-    "line": "push    esi",
+    "line": "push    esi; Verified exterior-cell removal gate. Requires the cell to belong to this WorldSpace; clears inactive forms in either branch. If the cell has no winning override or its winner is a master file, unloads it from save state, removes it from TESWorldSpace's cell map, and destroys it; otherwise it leaves the overridden cell registered.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1841",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4F185B",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x4F186F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F1871",
-    "line": "call    sub_4D1570",
+    "line": "call    TESObjectCELL_ClearInactiveRuntimeForms; Verified inactive-cell form cleanup. Preserves persistent references and references whose winning override is a non-master file; unloads/destroys other nonpersistent references. Also destroys a PathGrid when it has no override or its winning override is a master, clears eligible LAND data, and clears cell flag 0x10. This is called during both interior and exterior teardown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,31 +145,31 @@
   },
   {
     "ea": "0x4F187B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F187D",
-    "line": "call    sub_4D1570",
+    "line": "call    TESObjectCELL_ClearInactiveRuntimeForms; Verified inactive-cell form cleanup. Preserves persistent references and references whose winning override is a non-master file; unloads/destroys other nonpersistent references. Also destroys a PathGrid when it has no override or its winning override is a master, clears eligible LAND data, and clears cell flag 0x10. This is called during both interior and exterior teardown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F1882",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4F1888",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1889",
-    "line": "call    sub_463A90",
+    "line": "call    TESSaveLoadGame_UnloadForm;",
     "mnemonic": "call",
     "size": 5
   },

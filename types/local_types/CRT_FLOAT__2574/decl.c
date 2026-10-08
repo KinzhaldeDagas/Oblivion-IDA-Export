@@ -1,1 +1,4 @@
-_CRT_FLOAT
+struct _CRT_FLOAT
+{
+float f;
+};

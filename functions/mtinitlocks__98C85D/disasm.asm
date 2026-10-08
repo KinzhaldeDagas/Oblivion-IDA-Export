@@ -1,7 +1,7 @@
 0x98C85D: push    esi
 0x98C85E: push    edi
 0x98C85F: xor     esi, esi
-0x98C861: mov     edi, offset unk_BAA158
+0x98C861: mov     edi, (offset dword_BA9E10+348h)
 0x98C866: cmp     dword_B310C4[esi*8], 1
 0x98C86E: jnz     short loc_98C88E
 0x98C870: lea     eax, ds:0B310C0h[esi*8]

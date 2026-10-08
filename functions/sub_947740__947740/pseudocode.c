@@ -4,5 +4,5 @@ int __thiscall sub_947740(_DWORD **this, int a2, int a3, int a4)
            *(this + 0xFFFFFFFE),
            a2,
            a3,
-           dword_BA9508);
+           unk_BA9508);
 }

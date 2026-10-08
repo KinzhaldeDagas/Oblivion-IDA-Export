@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 12,
-  "callers_count": 54,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 1633,
+  "chunks": [
+    [
+      "0x801110",
+      "0x8011D2"
+    ]
+  ],
+  "chunks_sha256": "add0fd329963898c45afd1d097d943a9813af87d6b21db41d166c4d0db33356c",
+  "comment_regular": "Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.",
+  "comment_repeatable": "Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.\n\n[2026-10-04 focused runtime audit CORRECTION] a3 is RAW D3DTEXTUREADDRESS, passed unchanged to sampler states1/2 at801181/801190. D3DTADDRESS_WRAP=1; D3DTADDRESS_CLAMP=3. Do not confuse with NiTexturingProperty ClampMode where3 denotes wrap-both. Atlas fixture previously set WRAP despite native frond factory passing3; that validation did not reproduce native addressing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_801110",
+  "display_name": "BSShader_ConfigureTextureStageSampler",
   "end_ea": "0x8011D2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_801110",
+  "name": "BSShader_ConfigureTextureStageSampler",
   "segment": ".text",
   "sha256": "add0fd329963898c45afd1d097d943a9813af87d6b21db41d166c4d0db33356c",
   "size": 194,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x801110",
-  "type": "_BYTE *__cdecl(int, int, int, int)",
+  "total_chunk_size": 194,
+  "type": "_BYTE *__cdecl(_DWORD *, int, int, int)",
   "xrefs_from_count": 85,
   "xrefs_to_count": 1633
 }

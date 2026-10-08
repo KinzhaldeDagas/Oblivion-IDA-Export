@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5C1216",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -136,5 +136,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x5C0CB0",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVTESForm@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,TESForm *>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5C0CB6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0EF0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0EF3",
+    "line": "jmp     loc_5C0CB0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0EF8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C0EFC",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0EFF",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0F02",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C0F04",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0F09",
+    "line": "mov     eax, offset stru_AEA024",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0F0E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

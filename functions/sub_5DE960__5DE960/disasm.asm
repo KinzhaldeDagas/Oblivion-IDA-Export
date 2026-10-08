@@ -9,10 +9,10 @@
 0x5DE97C: mov     edx, ds:0B38CF0h
 0x5DE982: mov     eax, ds:0B38CE8h
 0x5DE987: push    0
-0x5DE989: push    edx
-0x5DE98A: push    0
-0x5DE98C: push    0
-0x5DE98E: push    eax
+0x5DE989: push    edx; firstButton
+0x5DE98A: push    0; baseButtonIndex
+0x5DE98C: push    0; callback
+0x5DE98E: push    eax; message
 0x5DE98F: call    ShowUIMessageBox
 0x5DE994: mov     ecx, ds:0B147F8h
 0x5DE99A: mov     edx, 1

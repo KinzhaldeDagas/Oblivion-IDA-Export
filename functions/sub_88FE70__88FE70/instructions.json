@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x88FE70",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; TES4 authoritative: listener callback used by 0x894E80 swept integration path. Reads hit collidable/filter at entry+0x28 -> +0x1C, checks low 6 bits for layer 0x14.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x88FE7A",
-    "line": "and     eax, 3Fh",
+    "line": "and     eax, 3Fh; Extracts collision layer from hit entry+0x28 collidable filter info low 6 bits.",
     "mnemonic": "and",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x88FE81",
-    "line": "add     dword ptr [ecx+64h], 1",
+    "line": "add     dword ptr [ecx+64h], 1; For layer 0x14 hits, increments controller listener counter at proxy+0x254 (this is proxy+0x1F0 here).",
     "mnemonic": "add",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x88FE91",
-    "line": "mov     [esp+arg_0], offset Vector3_InitValue?",
+    "line": "mov     [esp+arg_0], offset g_zeroNiPoint3",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x88FE99",
-    "line": "jmp     sub_64B3A0",
+    "line": "jmp     bhkCharacterController_SetObjectVelocityFromWorldVector; For layer 0x14 swept hits, optional proxy+0x251 path writes zero velocity to the low-level collision object through 0x64B3A0; it does not alter the candidate position written by 0x894E80.",
     "mnemonic": "jmp",
     "size": 5
   },

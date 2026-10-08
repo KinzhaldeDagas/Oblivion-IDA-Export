@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E5F10",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Builds TallGrassShader constant maps in Oblivion. Vertex bindings include WVP, ShadowProjTransform, fog, grouped constants and instancing; pixel bindings include point-light color/data and alpha-test reference.",
     "mnemonic": "push",
     "size": 2
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7E5FA8",
-    "line": "push    offset flt_B44EF8",
+    "line": "push    offset unk_B44EF8",
     "mnemonic": "push",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x7E5FD1",
-    "line": "push    offset dword_B46638",
+    "line": "push    offset flt_B46638",
     "mnemonic": "push",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7E5FEF",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: projected/instance vertex path declares fogparam at vs c15 from shared B45E14[0x209] / B46638.",
     "mnemonic": "call",
     "size": 2
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x7E5FFA",
-    "line": "push    offset dword_B46648",
+    "line": "push    (offset flt_B46638+10h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7E6018",
-    "line": "call    eax",
+    "line": "call    eax; Fog constant-map decode: projected/instance vertex path declares fogcolor at vs c14 from shared B45E14[0x20D] / B46648.",
     "mnemonic": "call",
     "size": 2
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7E6023",
-    "line": "push    offset dword_B46070",
+    "line": "push    offset flt_B46070",
     "mnemonic": "push",
     "size": 5
   },
@@ -1228,5 +1228,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0CA0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CAE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CAF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CB4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CB5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0CB6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0CBA",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CBD",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0CC0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0CC2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CC7",
+    "line": "mov     eax, offset stru_AF94E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0CCC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,1 @@
-ExtraRagDollData
+struct ExtraRagDollData;

@@ -1,4 +1,4 @@
-0x45D030: sub     esp, 14h
+0x45D030: sub     esp, 14h; MEF PERF 2026-10-02 PASS2: Verified Havok drain: bucket-order iteration, deferred ExtraData ownership when scene node absent, otherwise temporary save cursor and load-consumption diagnostic; then removes map key. Preserve callback order, saved cursor and free-vs-transfer ownership.
 0x45D033: push    esi
 0x45D034: mov     esi, ecx
 0x45D036: mov     ecx, [esi+60h]
@@ -10,7 +10,6 @@
 0x45D043: mov     edi, [ecx+8]
 0x45D046: mov     ecx, edi
 0x45D048: jmp     short loc_45D050
-0x45D04A: align 10h
 0x45D050: cmp     dword ptr [ecx], 0
 0x45D053: jnz     loc_45D0E3
 0x45D059: add     eax, 1
@@ -19,29 +18,29 @@
 0x45D061: jb      short loc_45D050
 0x45D063: xor     eax, eax
 0x45D065: test    eax, eax
-0x45D067: mov     [esp+1Ch+var_C], eax
+0x45D067: mov     [esp+1Ch+position], eax
 0x45D06B: jz      loc_45D162
 0x45D071: push    ebx
 0x45D072: push    ebp
-0x45D073: lea     eax, [esp+24h+var_14]
-0x45D077: push    eax
+0x45D073: lea     eax, [esp+24h+valueOut]
+0x45D077: push    eax; valueOut
 0x45D078: lea     ecx, [esp+28h+a1]
-0x45D07C: push    ecx
-0x45D07D: mov     ecx, [esi+60h]
-0x45D080: lea     edx, [esp+2Ch+var_C]
-0x45D084: push    edx
-0x45D085: call    sub_452600
+0x45D07C: push    ecx; keyOut
+0x45D07D: mov     ecx, [esi+60h]; self
+0x45D080: lea     edx, [esp+2Ch+position]
+0x45D084: push    edx; position
+0x45D085: call    NiTMap_U32Pointer_GetNextEntry
 0x45D08A: mov     ebp, [esp+24h+a1]
 0x45D08E: push    0; int
 0x45D090: push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *
 0x45D095: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x45D09A: push    0; int
 0x45D09C: push    ebp; a1
-0x45D09D: call    TESForm_LookupByFormID
+0x45D09D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45D0A2: add     esp, 4
 0x45D0A5: push    eax; void *
 0x45D0A6: call    OblivionDynamicCast
-0x45D0AB: mov     ebx, [esp+38h+var_14]
+0x45D0AB: mov     ebx, [esp+38h+valueOut]
 0x45D0AF: mov     edi, eax
 0x45D0B1: add     esp, 14h
 0x45D0B4: test    edi, edi
@@ -51,14 +50,14 @@
 0x45D0C2: mov     eax, ebx
 0x45D0C4: push    eax
 0x45D0C5: lea     ecx, [edi+44h]
-0x45D0C8: call    sub_4211E0
+0x45D0C8: call    ExtraDataList_SetSavedHavokData; Gets/creates Oblivion ExtraSavedMovementData and stores its saved-Havok-data pointer; runtime diagnostic confirms the field purpose.
 0x45D0CD: mov     ecx, [esi+4]
 0x45D0D0: test    ecx, ecx
-0x45D0D2: push    1000000h
-0x45D0D7: push    edi
+0x45D0D2: push    1000000h; flags
+0x45D0D7: push    edi; form
 0x45D0D8: jnz     short loc_45D0DC
-0x45D0DA: mov     ecx, [esi]
-0x45D0DC: call    sub_452C20
+0x45D0DA: mov     ecx, [esi]; self
+0x45D0DC: call    ChangesMap_AddFormChangeFlags;
 0x45D0E1: jmp     short loc_45D14C
 0x45D0E3: mov     eax, [edi+eax*4]
 0x45D0E6: jmp     loc_45D065
@@ -93,7 +92,7 @@
 0x45D14C: mov     ecx, [esi+60h]
 0x45D14F: push    ebp
 0x45D150: call    NiTMap_RemoveAt
-0x45D155: cmp     [esp+24h+var_C], 0
+0x45D155: cmp     [esp+24h+position], 0
 0x45D15A: jnz     loc_45D073
 0x45D160: pop     ebp
 0x45D161: pop     ebx

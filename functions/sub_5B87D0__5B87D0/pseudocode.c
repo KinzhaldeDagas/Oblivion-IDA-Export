@@ -1,5 +1,5 @@
-unsigned int *__userpurge sub_5B87D0@<eax>(
-        float a1@<ecx>,
+Tile *__userpurge sub_5B87D0@<eax>(
+        Menu *a1@<ecx>,
         double st6_0@<st1>,
         double st7_0@<st0>,
         _DWORD *a4,
@@ -14,37 +14,36 @@ unsigned int *__userpurge sub_5B87D0@<eax>(
         char a13,
         char a14)
 {
-  TESObjectCELL *ParentCell; // eax
-  int v17; // eax
-  TESObjectREFR *v18; // ecx
-  TESObjectCELL *v19; // eax
-  int v20; // ebp
-  int v21; // ebx
+  ExtraDataList *DwordAtOffset40; // eax
+  int v15; // eax
+  PlayerCharacter *v16; // ecx
+  ExtraDataList *v17; // eax
+  int v18; // ebp
+  int v19; // ebx
   int XCoordinate; // esi
   int YCoordinate; // edi
   TESForm *CellFromCoords; // eax
-  unsigned int v25; // eax
-  bool v26; // cc
-  unsigned int v27; // esi
-  int v28; // eax
-  int v29; // esi
-  float v30; // edi
-  double Float; // st7
-  _DWORD *v32; // esi
-  unsigned int *TileFromTemplate; // ebx
-  unsigned int v34; // ebp
-  unsigned int v35; // esi
-  NiObject *v36; // eax
-  NiObject *v37; // eax
-  int v38; // edx
-  double v39; // st6
-  double v40; // st7
-  double v41; // st6
-  double v42; // st5
-  int v43; // edx
-  float v44; // ecx
-  char *v45; // edi
-  char v46; // al
+  unsigned int v23; // eax
+  bool v24; // cc
+  unsigned int v25; // esi
+  int v26; // eax
+  int v27; // esi
+  Menu *v28; // edi
+  _DWORD *v29; // esi
+  Tile *v30; // ebx
+  int v31; // ebp
+  unsigned int v32; // esi
+  NiObject *v33; // eax
+  NiObject *v34; // eax
+  int v35; // edx
+  double v36; // st6
+  double v37; // st7
+  double v38; // st6
+  double v39; // st5
+  int v40; // edx
+  char *v41; // ecx
+  int v42; // edi
+  char v43; // al
   float a2; // [esp+0h] [ebp-98h]
   float a2a; // [esp+0h] [ebp-98h]
   float a2b; // [esp+0h] [ebp-98h]
@@ -53,189 +52,178 @@ unsigned int *__userpurge sub_5B87D0@<eax>(
   float a2e; // [esp+0h] [ebp-98h]
   float a2f; // [esp+0h] [ebp-98h]
   float a2g; // [esp+0h] [ebp-98h]
-  TESObjectCELL *v56; // [esp+14h] [ebp-84h]
+  TESObjectCELL *v53; // [esp+14h] [ebp-84h]
   unsigned int a3; // [esp+18h] [ebp-80h]
   unsigned int a3a; // [esp+18h] [ebp-80h]
   unsigned int a3b; // [esp+18h] [ebp-80h]
   float a3c; // [esp+18h] [ebp-80h]
-  _DWORD *v61; // [esp+20h] [ebp-78h] BYREF
-  _DWORD *v62; // [esp+24h] [ebp-74h]
-  _DWORD *v63; // [esp+28h] [ebp-70h]
-  float v64; // [esp+2Ch] [ebp-6Ch] BYREF
-  float v65; // [esp+30h] [ebp-68h]
-  int v66; // [esp+34h] [ebp-64h]
-  float v67; // [esp+38h] [ebp-60h]
-  float v68; // [esp+3Ch] [ebp-5Ch]
-  float v69; // [esp+40h] [ebp-58h]
-  float v70; // [esp+44h] [ebp-54h]
-  float v71; // [esp+48h] [ebp-50h]
-  float v72; // [esp+4Ch] [ebp-4Ch]
-  float v73; // [esp+50h] [ebp-48h]
-  char v74[64]; // [esp+54h] [ebp-44h] BYREF
+  _DWORD *v58; // [esp+20h] [ebp-78h] BYREF
+  _DWORD *v59; // [esp+24h] [ebp-74h]
+  _DWORD *v60; // [esp+28h] [ebp-70h]
+  float v61; // [esp+2Ch] [ebp-6Ch] BYREF
+  float v62; // [esp+30h] [ebp-68h]
+  int v63; // [esp+34h] [ebp-64h]
+  float v64; // [esp+38h] [ebp-60h]
+  float v65; // [esp+3Ch] [ebp-5Ch]
+  float v66; // [esp+40h] [ebp-58h]
+  Menu *v67; // [esp+44h] [ebp-54h]
+  float v68; // [esp+48h] [ebp-50h]
+  float v69; // [esp+4Ch] [ebp-4Ch]
+  float v70; // [esp+50h] [ebp-48h]
+  char v71[64]; // [esp+54h] [ebp-44h] BYREF
 
-  v61 = a4;
-  v62 = a5;
-  v70 = a1;
-  *(float *)&v63 = 0.0;
-  ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-  sub_4CCE20((ExtraDataList *)ParentCell, (float *)&v61, &v61, COERCE_FLOAT(1));
-  a3 = (unsigned int)(uGridsToLoad - 1) >> 1;
-  v17 = ((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>))TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetPos)(
-          TESDataHandler_g_PlayerRef,
+  v58 = a4; /*0x5b87f3*/
+  v59 = a5; /*0x5b8800*/
+  v67 = a1; /*0x5b8807*/
+  *(float *)&v60 = 0.0; /*0x5b880b*/
+  DwordAtOffset40 = (ExtraDataList *)Shared_GetDwordAtOffset40(reference); /*0x5b8823*/
+  sub_4CCE20(DwordAtOffset40, (float *)&v58, &v58, COERCE_FLOAT(1)); /*0x5b882a*/
+  a3 = (unsigned int)(uGridsToLoad - 1) >> 1; /*0x5b883f*/
+  v15 = ((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>))reference->vtbl->super.super.super.GetPos)( /*0x5b884b*/
+          reference,
           st7_0,
           st6_0);
-  v64 = *(float *)v17;
-  v65 = *(float *)(v17 + 4);
-  v18 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-  v66 = *(_DWORD *)(v17 + 8);
-  v19 = TESObjectREFR_GetParentCell(v18);
-  sub_4CCE20((ExtraDataList *)v19, &v64, &v64, COERCE_FLOAT(1));
-  if ( sub_4D8B90((TESObjectREFR *)TESDataHandler_g_PlayerRef) )
+  v61 = *(float *)v15; /*0x5b884f*/
+  v62 = *(float *)(v15 + 4); /*0x5b885c*/
+  v16 = reference; /*0x5b8866*/
+  v63 = *(_DWORD *)(v15 + 8); /*0x5b886d*/
+  v17 = (ExtraDataList *)Shared_GetDwordAtOffset40(v16); /*0x5b8871*/
+  sub_4CCE20(v17, &v61, &v61, COERCE_FLOAT(1)); /*0x5b8878*/
+  if ( sub_4D8B90((TESObjectREFR *)reference) ) /*0x5b8883*/
   {
-    v20 = ((int)v64 - 0x800) >> 0xC;
-    v21 = ((int)v65 - 0x800) >> 0xC;
-    XCoordinate = ((int)*(float *)&v61 - 0x800) >> 0xC;
-    YCoordinate = ((int)*(float *)&v62 - 0x800) >> 0xC;
+    v18 = ((int)v61 - 0x800) >> 0xC; /*0x5b889e*/
+    v19 = ((int)v62 - 0x800) >> 0xC; /*0x5b88b3*/
+    XCoordinate = ((int)*(float *)&v58 - 0x800) >> 0xC; /*0x5b88c8*/
+    YCoordinate = ((int)*(float *)&v59 - 0x800) >> 0xC; /*0x5b88dd*/
   }
   else
   {
-    v20 = (int)v64 >> 0xC;
-    v21 = (int)v65 >> 0xC;
-    XCoordinate = (int)*(float *)&v61 >> 0xC;
-    YCoordinate = (int)*(float *)&v62 >> 0xC;
-    CellFromCoords = TES_GetCellFromCoords(TES, a3 + 1, a3 + 1);
-    v56 = (TESObjectCELL *)CellFromCoords;
-    if ( CellFromCoords )
+    v18 = (int)v61 >> 0xC; /*0x5b88ee*/
+    v19 = (int)v62 >> 0xC; /*0x5b88fd*/
+    XCoordinate = (int)*(float *)&v58 >> 0xC; /*0x5b890c*/
+    YCoordinate = (int)*(float *)&v59 >> 0xC; /*0x5b892a*/
+    CellFromCoords = TES_GetCellFromCoords(MEMORY[0xB333A0], a3 + 1, a3 + 1); /*0x5b892d*/
+    v53 = (TESObjectCELL *)CellFromCoords; /*0x5b8934*/
+    if ( CellFromCoords ) /*0x5b8938*/
     {
-      XCoordinate = TESObjectCELL_GetXCoordinate((TESObjectCELL *)CellFromCoords);
-      YCoordinate = TESObjectCELL_GetYCoordinate(v56);
+      XCoordinate = TESObjectCELL_GetXCoordinate((TESObjectCELL *)CellFromCoords); /*0x5b8945*/
+      YCoordinate = TESObjectCELL_GetYCoordinate(v53); /*0x5b894c*/
     }
   }
-  v25 = a3;
-  v26 = XCoordinate < (int)(v20 - a3);
-  a3a = v20 - a3;
-  if ( !v26 && XCoordinate <= (int)(v25 + v20) )
+  v23 = a3; /*0x5b894e*/
+  v24 = XCoordinate < (int)(v18 - a3); /*0x5b8956*/
+  a3a = v18 - a3; /*0x5b8958*/
+  if ( !v24 && XCoordinate <= (int)(v23 + v18) )
   {
-    v27 = v21 - v25;
-    if ( YCoordinate >= (int)(v21 - v25) && YCoordinate <= (int)(v25 + v21) )
+    v25 = v19 - v23; /*0x5b896e*/
+    if ( YCoordinate >= (int)(v19 - v23) && YCoordinate <= (int)(v23 + v19) )
     {
-      if ( sub_4D8B90((TESObjectREFR *)TESDataHandler_g_PlayerRef) )
+      if ( sub_4D8B90((TESObjectREFR *)reference) ) /*0x5b8988*/
       {
-        v28 = (a3a << 0xC) + 0x800;
-        v29 = (v27 << 0xC) + 0x800;
+        v26 = (a3a << 0xC) + 0x800; /*0x5b8998*/
+        v27 = (v25 << 0xC) + 0x800; /*0x5b89a8*/
       }
       else
       {
-        v28 = a3a << 0xC;
-        v29 = v27 << 0xC;
+        v26 = a3a << 0xC; /*0x5b89bc*/
+        v27 = v25 << 0xC; /*0x5b89c7*/
       }
-      v67 = (float)v28;
-      v68 = (float)v29;
-      v30 = v70;
-      Float = 0.0;
-      v69 = 0.0;
-      v71 = v67;
-      v32 = *(_DWORD **)(*(_DWORD *)(LODWORD(v70) + 0x68) + 0x34);
-      v73 = 0.0;
-      v72 = v68;
-      if ( !v32 )
-        goto LABEL_17;
-      while ( 1 )
+      v64 = (float)v26; /*0x5b89b2*/
+      v65 = (float)v27; /*0x5b89da*/
+      v28 = v67; /*0x5b89de*/
+      v66 = 0.0; /*0x5b89e8*/
+      v68 = v64; /*0x5b89f0*/
+      v29 = *(_DWORD **)(v67[2].members.unk18 + 0x34); /*0x5b89f7*/
+      v70 = 0.0; /*0x5b89fc*/
+      v69 = v65; /*0x5b8a00*/
+      if ( !v29 ) /*0x5b8a04*/
+        goto LABEL_17; /*0x5b8a04*/
+      while ( 1 ) /*0x5b8a06*/
       {
-        TileFromTemplate = (unsigned int *)v32[2];
-        v32 = (_DWORD *)*v32;
-        Float = Tile_GetFloat(TileFromTemplate, 0xFA7);
-        if ( Float == *(float *)&SrcStr )
-          break;
-        if ( !v32 )
-          goto LABEL_17;
+        v30 = (Tile *)v29[2]; /*0x5b8a06*/
+        v29 = (_DWORD *)*v29; /*0x5b8a0c*/
+        if ( Tile_GetFloat(v30, 0xFA7) == *(float *)&SrcStr ) /*0x5b8a25*/
+          break; /*0x5b8a25*/
+        if ( !v29 ) /*0x5b8a29*/
+          goto LABEL_17; /*0x5b8a29*/
       }
-      if ( !TileFromTemplate )
+      if ( !v30 ) /*0x5b8a2f*/
       {
 LABEL_17:
-        TileFromTemplate = Menu_CreateTileFromTemplate(
-                             (_DWORD *)LODWORD(v30),
-                             0.0,
-                             st6_0,
-                             Float,
-                             *(TileWindow **)(LODWORD(v30) + 0x68),
-                             "map_local_icon",
-                             0);
-        if ( !TileFromTemplate )
-          return TileFromTemplate;
+        v30 = Menu::RenderTemplate(v28, (Tile *)v28[2].members.unk18, "map_local_icon", 0); /*0x5b8a31*/
+        if ( !v30 ) /*0x5b8a47*/
+          return v30; /*0x5b8cdf*/
       }
-      v34 = TileFromTemplate[9];
-      *((_BYTE *)TileFromTemplate + 6) = 0;
-      if ( v34 )
+      v31 = *((_DWORD *)v30 + 9); /*0x5b8a4d*/
+      *((_BYTE *)v30 + 6) = 0; /*0x5b8a52*/
+      if ( v31 ) /*0x5b8a56*/
       {
-        qmemcpy((void *)(v34 + 0x30), &stru_B26AF0[0xA].unk2C, 0x24u);
-        v35 = 0;
-        for ( a3b = 0; v35 < *(unsigned __int16 *)(v34 + 0xB8); a3b = ++v35 )
+        qmemcpy((void *)(v31 + 0x30), &stru_B26AF0[0xA].unk2C, 0x24u); /*0x5b8a65*/
+        v32 = 0; /*0x5b8a67*/
+        for ( a3b = 0; v32 < *(unsigned __int16 *)(v31 + 0xB8); a3b = ++v32 ) /*0x5b8a69*/
         {
-          if ( *(unsigned __int16 *)(v34 + 0xB6) > v35 )
-            v36 = *(NiObject **)(*(_DWORD *)(v34 + 0xB0) + 4 * v35);
+          if ( *(unsigned __int16 *)(v31 + 0xB6) > v32 ) /*0x5b8a89*/
+            v33 = *(NiObject **)(*(_DWORD *)(v31 + 0xB0) + 4 * v32); /*0x5b8a95*/
           else
-            v36 = 0;
-          v37 = NiRTTI_Cast((BSStringT *)dword_B3FCD4, v36);
-          if ( v37 )
+            v33 = 0; /*0x5b8a8b*/
+          v34 = NiRTTI_Cast((BSStringT *)&stru_B3FCD4, v33); /*0x5b8a9e*/
+          if ( v34 ) /*0x5b8aa8*/
           {
-            qmemcpy(&v37[6], &stru_B26AF0[0xA].unk2C, 0x24u);
-            v35 = a3b;
+            qmemcpy(&v34[6], &stru_B26AF0[0xA].unk2C, 0x24u); /*0x5b8ab7*/
+            v32 = a3b; /*0x5b8ab9*/
           }
         }
       }
-      v38 = uGridsToLoad - 1;
-      v67 = *(float *)&v61 - v71;
-      v68 = *(float *)&v62 - v72;
-      v39 = dbl_A46040;
-      v40 = dbl_A6CC88;
-      v70 = v67 * v39 * v40;
-      v41 = v39 * (dbl_A37650 - v68) * v40;
-      v42 = (double)v38;
-      if ( v38 < 0 )
-        v42 = v42 + flt_A2FC78;
-      v43 = 0;
-      v44 = *(float *)&a6;
-      v45 = (char *)(v74 - a6);
+      v35 = uGridsToLoad - 1; /*0x5b8add*/
+      v64 = *(float *)&v58 - v68; /*0x5b8ae6*/
+      v65 = *(float *)&v59 - v69; /*0x5b8af2*/
+      v36 = dbl_A46040; /*0x5b8afa*/
+      v37 = dbl_A6CC88; /*0x5b8b0a*/
+      *(float *)&v67 = v64 * v36 * v37; /*0x5b8b0c*/
+      v38 = v36 * (dbl_A37650 - v65) * v37; /*0x5b8b1c*/
+      v39 = (double)v35; /*0x5b8b1e*/
+      if ( v35 < 0 ) /*0x5b8b22*/
+        v39 = v39 + flt_A2FC78; /*0x5b8b24*/
+      v40 = 0; /*0x5b8b34*/
+      v41 = a6; /*0x5b8b38*/
+      v42 = v71 - a6; /*0x5b8b3a*/
       do
       {
-        if ( *(float *)&a6 == 0.0 )
-          break;
-        v46 = *(_BYTE *)LODWORD(v44);
-        if ( !*(_BYTE *)LODWORD(v44) )
-          break;
-        v45[LODWORD(v44)] = (v46 < 0x30 || v46 > 0x39) && (v46 < 0x41 || v46 > 0x5A) && (v46 < 0x61 || v46 > 0x7A)
-                          ? 0x5F
-                          : v46;
-        ++v43;
-        ++LODWORD(v44);
+        if ( !a6 ) /*0x5b8b42*/
+          break; /*0x5b8b42*/
+        v43 = *v41; /*0x5b8b44*/
+        if ( !*v41 ) /*0x5b8b44*/
+          break; /*0x5b8b48*/
+        v41[v42] = (v43 < 0x30 || v43 > 0x39) && (v43 < 0x41 || v43 > 0x5A) && (v43 < 0x61 || v43 > 0x7A) ? 0x5F : v43;
+        ++v40; /*0x5b8b6b*/
+        ++v41; /*0x5b8b6e*/
       }
-      while ( v43 < 0x3F );
-      v74[v43] = 0;
-      BSStringT_Set((BSStringT *)TileFromTemplate + 1, v74, 0);
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAE, fConstant_2);
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFAF, v70);
-      a3c = v40 * v42 + v41;
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB0, a3c);
-      Tile_SetString(TileFromTemplate, (_DWORD *)0xFB2, a6);
-      a2 = (float)a7;
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB3, a2);
-      a2a = (float)((a8 != 0) + 1);
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB4, a2a);
-      a2b = (float)a9;
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB5, a2b);
-      a2c = (float)((a10 != 0) + 1);
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB6, a2c);
-      a2d = (float)a11;
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFA7, a2d);
-      a2e = (float)((a12 != 0) + 1);
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB8, a2e);
-      a2f = (float)((a13 != 0) + 1);
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFB9, a2f);
-      a2g = (float)((a14 != 0) + 1);
-      Tile_SetFloat((Tile *)TileFromTemplate, (_DWORD *)0xFBA, a2g);
-      return TileFromTemplate;
+      while ( v40 < 0x3F );
+      v71[v40] = 0; /*0x5b8b80*/
+      BSStringT_Set((BSStringT *)v30 + 1, v71, 0); /*0x5b8b85*/
+      Tile_SetFloat(v30, 0xFAEu, fConstant_2); /*0x5b8b9b*/
+      Tile_SetFloat(v30, 0xFAFu, *(float *)&v67); /*0x5b8baf*/
+      a3c = v37 * v39 + v38; /*0x5b8b3c*/
+      Tile_SetFloat(v30, 0xFB0u, a3c); /*0x5b8bc3*/
+      Tile_SetString(v30, (_DWORD *)0xFB2, a6); /*0x5b8bd0*/
+      a2 = (float)a7; /*0x5b8bdf*/
+      Tile_SetFloat(v30, 0xFB3u, a2); /*0x5b8be7*/
+      a2a = (float)((a8 != 0) + 1); /*0x5b8c06*/
+      Tile_SetFloat(v30, 0xFB4u, a2a); /*0x5b8c0e*/
+      a2b = (float)a9; /*0x5b8c1d*/
+      Tile_SetFloat(v30, 0xFB5u, a2b); /*0x5b8c25*/
+      a2c = (float)((a10 != 0) + 1); /*0x5b8c44*/
+      Tile_SetFloat(v30, 0xFB6u, a2c); /*0x5b8c4c*/
+      a2d = (float)a11; /*0x5b8c5b*/
+      Tile_SetFloat(v30, 0xFA7u, a2d); /*0x5b8c63*/
+      a2e = (float)((a12 != 0) + 1); /*0x5b8c82*/
+      Tile_SetFloat(v30, 0xFB8u, a2e); /*0x5b8c8a*/
+      a2f = (float)((a13 != 0) + 1); /*0x5b8ca9*/
+      Tile_SetFloat(v30, 0xFB9u, a2f); /*0x5b8cb1*/
+      a2g = (float)((a14 != 0) + 1); /*0x5b8cd0*/
+      Tile_SetFloat(v30, 0xFBAu, a2g); /*0x5b8cd8*/
+      return v30; /*0x5b8cd8*/
     }
   }
-  return 0;
+  return 0; /*0x5b8cee*/
 }

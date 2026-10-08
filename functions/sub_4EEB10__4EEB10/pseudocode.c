@@ -1,12 +1,15 @@
-unsigned int __cdecl sub_4EEB10(int a1, int a2)
+// Verified: sorts entries ascending by selectionWeight. The same field is consumed by Oblivion's weighted random weather selector.
+int __cdecl OblivionTESWeatherList_CompareSelectionWeight(
+        OblivionTESWeatherWeightEntry *left,
+        OblivionTESWeatherWeightEntry *right)
 {
-  unsigned int v2; // eax
+  unsigned int selectionWeight; // eax
   unsigned int v3; // ecx
 
-  v2 = *(_DWORD *)(a1 + 4);
-  v3 = *(_DWORD *)(a2 + 4);
-  if ( v2 <= v3 )
-    return v2 < v3;
+  selectionWeight = left->selectionWeight; /*0x4eeb18*/
+  v3 = right->selectionWeight; /*0x4eeb1b*/
+  if ( selectionWeight <= v3 ) /*0x4eeb20*/
+    return selectionWeight < v3; /*0x4eeb28*/
   else
-    return 0xFFFFFFFF;
+    return 0xFFFFFFFF; /*0x4eeb22*/
 }

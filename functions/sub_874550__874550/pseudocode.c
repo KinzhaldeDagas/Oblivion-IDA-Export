@@ -1,14 +1,14 @@
-void __thiscall sub_874550(NiTArray_NiD3DPass *this, int a2, int a3, int Stage, _DWORD *a5)
+void __thiscall sub_874550(NiTArray_NiD3DPass *this, int a2, int a3, NiD3DPass *Stage, _DWORD *a5)
 {
-  int v6; // edi
+  float *v6; // edi
   NiD3DPass *v7; // esi
   _DWORD *v8; // ebx
-  int v9; // edi
+  NiD3DPass *v9; // edi
   int (__thiscall *v10)(_DWORD *, _DWORD); // eax
   int v11; // eax
   int v12; // edi
   int v13; // ebp
-  int v14; // edi
+  NiD3DPass *v14; // edi
   int v15; // eax
   int v16; // edi
   int v17; // ebp
@@ -18,117 +18,117 @@ void __thiscall sub_874550(NiTArray_NiD3DPass *this, int a2, int a3, int Stage, 
   int v21; // ebx
   NiTexture *Texture; // edi
   UInt32 m_uiRefCount; // ebx
-  int *p_members; // edi
-  int v25; // ebp
+  float *p_m_uiRefCount; // edi
+  float v25; // ebp
   UInt32 Unk08; // edi
   int v27; // ebx
-  int *v28; // edi
-  int v29; // ebp
+  float *v28; // edi
+  float v29; // ebp
   UInt32 v30; // ebx
-  NiRenderedTexture *v31; // edi
-  NiRenderedTexture *v32; // ebp
+  volatile LONG *v31; // edi
+  volatile LONG *v32; // ebp
 
-  v6 = *(_DWORD *)(Stage + 0xC);
-  v7 = (NiD3DPass *)dword_B4763C;
-  sub_848E50(v6);
-  (*((void (__thiscall **)(NiTArray_NiD3DPass *, int, int, _DWORD))this->_vtbl + 0x2F))(this, a2, v6, 0);
-  v8 = a5;
-  v10 = *(int (__thiscall **)(_DWORD *, _DWORD))(*a5 + 0x88);
-  Stage = v7->Stages.data->Stage;
-  v9 = Stage;
-  v11 = v10(a5, 0);
-  v12 = *(_DWORD *)(v9 + 4);
-  v13 = v11;
-  if ( v12 != v11 )
+  v6 = *(float **)&Stage->Name[8]; /*0x87457f*/
+  v7 = (NiD3DPass *)unk_B4763C; /*0x874582*/
+  sub_848E50(v6); /*0x874589*/
+  (*((void (__thiscall **)(NiTArray_NiD3DPass *, int, float *, _DWORD))this->_vtbl + 0x2F))(this, a2, v6, 0); /*0x8745a0*/
+  v8 = a5; /*0x8745a5*/
+  v10 = *(int (__thiscall **)(_DWORD *, _DWORD))(*a5 + 0x88); /*0x8745ad*/
+  Stage = (NiD3DPass *)v7->Stages.data->Stage; /*0x8745b7*/
+  v9 = Stage; /*0x8745a9*/
+  v11 = v10(a5, 0); /*0x8745bb*/
+  v12 = *(_DWORD *)v9->Name; /*0x8745bd*/
+  v13 = v11; /*0x8745c0*/
+  if ( v12 != v11 ) /*0x8745c4*/
   {
-    if ( v12 )
+    if ( v12 ) /*0x8745c8*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v12 + 4)) )
-        (**(void (__thiscall ***)(int, int))v12)(v12, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v12 + 4)) ) /*0x8745ce*/
+        (**(void (__thiscall ***)(int, int))v12)(v12, 1); /*0x8745e4*/
     }
-    *(_DWORD *)(Stage + 4) = v13;
-    if ( v13 )
-      InterlockedIncrement((volatile LONG *)(v13 + 4));
+    *(_DWORD *)Stage->Name = v13; /*0x8745ec*/
+    if ( v13 ) /*0x8745ef*/
+      InterlockedIncrement((volatile LONG *)(v13 + 4)); /*0x8745f5*/
   }
-  Stage = (int)v7->Stages.data->Texture;
-  v14 = Stage;
-  v15 = sub_848FD0(v8, 0);
-  v16 = *(_DWORD *)(v14 + 4);
-  v17 = v15;
-  if ( v16 != v15 )
+  Stage = (NiD3DPass *)v7->Stages.data->Texture; /*0x874608*/
+  v14 = Stage; /*0x8745fe*/
+  v15 = sub_848FD0(v8, 0); /*0x87460c*/
+  v16 = *(_DWORD *)v14->Name; /*0x874611*/
+  v17 = v15; /*0x874614*/
+  if ( v16 != v15 ) /*0x874618*/
   {
-    if ( v16 )
+    if ( v16 ) /*0x87461c*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v16 + 4)) )
-        (**(void (__thiscall ***)(int, int))v16)(v16, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v16 + 4)) ) /*0x874622*/
+        (**(void (__thiscall ***)(int, int))v16)(v16, 1); /*0x874638*/
     }
-    *(_DWORD *)(Stage + 4) = v17;
-    if ( v17 )
-      InterlockedIncrement((volatile LONG *)(v17 + 4));
+    *(_DWORD *)Stage->Name = v17; /*0x874640*/
+    if ( v17 ) /*0x874643*/
+      InterlockedIncrement((volatile LONG *)(v17 + 4)); /*0x874649*/
   }
-  v18 = v7->Stages.data[1].Stage;
-  v19 = (*(int (__thiscall **)(_DWORD *, _DWORD))(*v8 + 0x90))(v8, 0);
-  v20 = *(_DWORD *)(v18 + 4);
-  v21 = v19;
-  if ( v20 != v19 )
+  v18 = v7->Stages.data[1].Stage; /*0x874654*/
+  v19 = (*(int (__thiscall **)(_DWORD *, _DWORD))(*v8 + 0x90))(v8, 0); /*0x874661*/
+  v20 = *(_DWORD *)(v18 + 4); /*0x874663*/
+  v21 = v19; /*0x874666*/
+  if ( v20 != v19 ) /*0x87466a*/
   {
-    if ( v20 )
+    if ( v20 ) /*0x87466e*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v20 + 4)) )
-        (**(void (__thiscall ***)(int, int))v20)(v20, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v20 + 4)) ) /*0x874674*/
+        (**(void (__thiscall ***)(int, int))v20)(v20, 1); /*0x87468a*/
     }
-    *(_DWORD *)(v18 + 4) = v21;
-    if ( v21 )
-      InterlockedIncrement((volatile LONG *)(v21 + 4));
+    *(_DWORD *)(v18 + 4) = v21; /*0x87468e*/
+    if ( v21 ) /*0x874691*/
+      InterlockedIncrement((volatile LONG *)(v21 + 4)); /*0x874697*/
   }
-  Texture = v7->Stages.data[1].Texture;
-  m_uiRefCount = Texture->members.super.super.m_uiRefCount;
-  p_members = (int *)&Texture->members;
-  v25 = dword_B43110;
-  if ( m_uiRefCount != dword_B43110 )
+  Texture = v7->Stages.data[1].Texture; /*0x8746a0*/
+  m_uiRefCount = Texture->members.super.super.m_uiRefCount; /*0x8746a8*/
+  p_m_uiRefCount = (float *)&Texture->members.super.super.m_uiRefCount; /*0x8746ab*/
+  v25 = flt_B43110[0]; /*0x8746b0*/
+  if ( m_uiRefCount != LODWORD(flt_B43110[0]) ) /*0x8746b2*/
   {
-    if ( m_uiRefCount )
+    if ( m_uiRefCount ) /*0x8746b6*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(m_uiRefCount + 4)) )
-        (**(void (__thiscall ***)(UInt32, int))m_uiRefCount)(m_uiRefCount, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(m_uiRefCount + 4)) ) /*0x8746bc*/
+        (**(void (__thiscall ***)(UInt32, int))m_uiRefCount)(m_uiRefCount, 1); /*0x8746d2*/
     }
-    *p_members = v25;
-    if ( v25 )
-      InterlockedIncrement((volatile LONG *)(v25 + 4));
+    *p_m_uiRefCount = v25; /*0x8746d6*/
+    if ( v25 != 0.0 ) /*0x8746d8*/
+      InterlockedIncrement((volatile LONG *)(LODWORD(v25) + 4)); /*0x8746de*/
   }
-  Unk08 = v7->Stages.data[1].Unk08;
-  v27 = *(_DWORD *)(Unk08 + 4);
-  v28 = (int *)(Unk08 + 4);
-  v29 = dword_B43108;
-  if ( v27 != dword_B43108 )
+  Unk08 = v7->Stages.data[1].Unk08; /*0x8746e7*/
+  v27 = *(_DWORD *)(Unk08 + 4); /*0x8746ef*/
+  v28 = (float *)(Unk08 + 4); /*0x8746f2*/
+  v29 = unk_B43108[0]; /*0x8746f7*/
+  if ( v27 != LODWORD(unk_B43108[0]) ) /*0x8746f9*/
   {
-    if ( v27 )
+    if ( v27 ) /*0x8746fd*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v27 + 4)) )
-        (**(void (__thiscall ***)(int, int))v27)(v27, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v27 + 4)) ) /*0x874703*/
+        (**(void (__thiscall ***)(int, int))v27)(v27, 1); /*0x874719*/
     }
-    *v28 = v29;
-    if ( v29 )
-      InterlockedIncrement((volatile LONG *)(v29 + 4));
+    *v28 = v29; /*0x87471d*/
+    if ( v29 != 0.0 ) /*0x87471f*/
+      InterlockedIncrement((volatile LONG *)(LODWORD(v29) + 4)); /*0x874725*/
   }
-  v30 = v7->Stages.data[2].Stage;
-  v31 = *(NiRenderedTexture **)(v30 + 4);
-  v32 = CanopySadowMap;
-  if ( v31 != CanopySadowMap )
+  v30 = v7->Stages.data[2].Stage; /*0x87472e*/
+  v31 = *(volatile LONG **)(v30 + 4); /*0x874736*/
+  v32 = (volatile LONG *)g_CanopyShadowMap; /*0x87473b*/
+  if ( v31 != g_CanopyShadowMap ) /*0x87473d*/
   {
-    if ( v31 )
+    if ( v31 ) /*0x874741*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)&v31->member) )
-        v31->__vftable->super.super.super.Destructor((NiRefObject *)v31, 1);
+      if ( !InterlockedDecrement(v31 + 1) ) /*0x874747*/
+        (**(void (__thiscall ***)(void *, int))v31)((void *)v31, 1); /*0x87475d*/
     }
-    *(_DWORD *)(v30 + 4) = v32;
-    if ( v32 )
-      InterlockedIncrement((volatile LONG *)&v32->member);
+    *(_DWORD *)(v30 + 4) = v32; /*0x874761*/
+    if ( v32 ) /*0x874764*/
+      InterlockedIncrement(v32 + 1); /*0x87476a*/
   }
-  ++v7->RefCount;
-  Stage = (int)v7;
-  sub_76CE40(this + 4, *((NiD3DPass **)this + 0xE), (NiD3DPass **)&Stage);
-  if ( v7->RefCount-- == 1 )
-    sub_7604D0(v7);
-  ++*((_DWORD *)this + 0xE);
+  ++v7->RefCount; /*0x874775*/
+  Stage = v7; /*0x874778*/
+  NiTArray_NiD3DPass_SetAt(this + 4, *((_DWORD *)this + 0xE), &Stage); /*0x874794*/
+  if ( v7->RefCount-- == 1 ) /*0x87479c*/
+    NiD3DPass_ReleaseToPool(v7); /*0x8747a7*/
+  ++*((_DWORD *)this + 0xE); /*0x8747ac*/
 }

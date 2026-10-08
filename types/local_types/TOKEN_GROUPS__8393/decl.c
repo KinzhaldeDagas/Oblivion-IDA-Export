@@ -1,1 +1,5 @@
-_TOKEN_GROUPS
+struct _TOKEN_GROUPS
+{
+DWORD GroupCount;
+SID_AND_ATTRIBUTES Groups[1];
+};

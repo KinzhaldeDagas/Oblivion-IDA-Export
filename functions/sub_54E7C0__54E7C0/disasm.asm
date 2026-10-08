@@ -5,7 +5,6 @@
 0x54E7C6: cmp     [esi+10h], edi
 0x54E7C9: jbe     short loc_54E7F5
 0x54E7CB: jmp     short loc_54E7D0
-0x54E7CD: align 10h
 0x54E7D0: mov     eax, [esi]
 0x54E7D2: mov     edx, [eax+54h]
 0x54E7D5: push    edi

@@ -1,9 +1,9 @@
-0x738110: sub     esp, 38h
+0x738110: sub     esp, 38h; NiTriShapeData normal rebuild: clears storage, accumulates normalized triangle directions (including shared-normal groups), normalizes vertices and ORs dirty flags +0x2E with 2. Prettier Faces RefreshMorphedGeometryData relies on this dirty write correctly; no duplicate write needed. NBT exclusion required because allocator clears three planes.
 0x738113: push    esi
 0x738114: push    edi
-0x738115: push    1
+0x738115: push    1; clearStorage
 0x738117: mov     edi, ecx
-0x738119: call    sub_728280
+0x738119: call    NiGeometryData_AllocateAndClearNormals; Allocate and zero the normal storage before accumulating unit triangle normals.
 0x73811E: mov     eax, [edi]
 0x738120: mov     edx, [eax+5Ch]
 0x738123: mov     esi, [edi+48h]
@@ -88,7 +88,7 @@
 0x738214: fmulp   st(2), st
 0x738216: fsubrp  st(1), st
 0x738218: fstp    [esp+4Ch+var_1C]
-0x73821C: call    sub_4BFAA0
+0x73821C: call    NiPoint3_NormalizeApproximateInPlace; Normalize the triangle cross product before adding it to all three vertex accumulators; this produces equal triangle weighting rather than area weighting.
 0x738221: mov     eax, [edi+20h]
 0x738224: fld     dword ptr [eax+ebx]
 0x738227: add     esp, 4
@@ -130,7 +130,7 @@
 0x738284: fld     st
 0x738286: fadd    dword ptr [eax+8]
 0x738289: fstp    dword ptr [eax+8]
-0x73828C: mov     eax, [edi+4Ch]
+0x73828C: mov     eax, [edi+4Ch]; When shared-normal entry count equals m_usVertices, add each triangle contribution to the vertex and every UInt16 index in its 8-byte entry. This keeps authored UV-split vertices smooth.
 0x73828F: test    eax, eax
 0x738291: jz      loc_738385
 0x738297: mov     dx, [edi+50h]
@@ -228,9 +228,9 @@
 0x7383A6: movzx   ecx, ax
 0x7383A9: push    ecx
 0x7383AA: push    edx
-0x7383AB: call    sub_725890
+0x7383AB: call    NiPoint3_NormalizeStridedArray; Normalize all accumulated vertex normals with 12-byte stride.
 0x7383B0: add     esp, 0Ch
-0x7383B3: or      word ptr [edi+2Eh], 2
+0x7383B3: or      word ptr [edi+2Eh], 2; Mark the normal channel dirty (bit 1).
 0x7383B8: pop     edi
 0x7383B9: pop     esi
 0x7383BA: add     esp, 38h

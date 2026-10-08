@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x468AF0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x468AFA",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x429EC0: fld     [esp+arg_0]
+0x429EC0: fld     [esp+arg_0]; Constructs ExtraTimeLeft: type 0x2D and supplied float value.
 0x429EC4: mov     eax, ecx
 0x429EC6: fstp    dword ptr [eax+0Ch]
 0x429EC9: mov     byte ptr [eax+4], 2Dh ; '-'

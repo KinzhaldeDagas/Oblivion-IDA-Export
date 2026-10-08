@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESGlobal",
+  "definition": "struct TESGlobal\n{\nTESFormVtbl *vtbl;\nTESFormMembr super;\nBSStringT name;\nUInt8 type; ///< Verified one-byte FNAM global variable type code at +0x20; exact enum names not recovered.\nUInt8 pad21[3];\nfloat data; ///< Verified FLTV float value at +0x24, written by runtime global loader and native form-record serializer.\n}\n",
   "id": 18374686479672025266,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00052.",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "TESFormVtbl *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 20
+      "size": 20,
+      "type": "TESFormMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "name",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "BSStringT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified one-byte FNAM global variable type code at +0x20; exact enum names not recovered.",
       "name": "type",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "pad21",
       "offset": 33,
       "offset_hex": "0x21",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified FLTV float value at +0x24, written by runtime global loader and native form-record serializer.",
       "name": "data",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "float"
     }
   ],
   "name": "TESGlobal",
+  "ordinal": 458,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

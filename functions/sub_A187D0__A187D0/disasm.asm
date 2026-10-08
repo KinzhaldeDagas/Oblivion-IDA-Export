@@ -1,5 +1,5 @@
 0xA187D0: push    esi
-0xA187D1: mov     esi, dword_B34424
+0xA187D1: mov     esi, ds:0B34424h
 0xA187D7: test    esi, esi
 0xA187D9: jz      short loc_A187F7
 0xA187DB: lea     eax, [esi+4]

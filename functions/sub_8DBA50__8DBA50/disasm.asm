@@ -38,7 +38,6 @@
 0x8DBAD5: mov     ebx, [esi+1Ch]
 0x8DBAD8: mov     ebp, [esi+48h]
 0x8DBADB: jmp     short loc_8DBAE0
-0x8DBADD: align 10h
 0x8DBAE0: movzx   ecx, word ptr [eax+20h]
 0x8DBAE4: movzx   ecx, byte ptr [ecx+ebx]
 0x8DBAE8: lea     ecx, [ecx+ecx*4]

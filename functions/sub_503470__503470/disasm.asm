@@ -16,7 +16,7 @@
 0x503496: push    eax; a2
 0x503497: push    ecx; a1
 0x503498: mov     dword ptr [esp+24h+var_4], 0
-0x5034A0: call    Script_ExtractArgs
+0x5034A0: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5034A5: add     esp, 20h
 0x5034A8: test    al, al
 0x5034AA: jnz     short loc_5034AE
@@ -29,7 +29,7 @@
 0x5034BC: push    0
 0x5034BE: push    eax
 0x5034BF: push    ecx
-0x5034C0: call    sub_4F6EC0
+0x5034C0: call    GetIsClass_Eval; GetIsClass_Eval (index 68 / opcode 0x1044): requires the subject BaseForm to be TESNPC (form type 0x23), then pointer-compares NPC class at +0x104 with the Class parameter (typeID 0x10). Result is numeric 1 or 0.
 0x5034C5: add     esp, 10h
 0x5034C8: pop     ecx
 0x5034C9: retn

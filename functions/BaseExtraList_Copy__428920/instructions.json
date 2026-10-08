@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x42892F",
-    "line": "mov     ecx, offset BSExtraDataCS",
+    "line": "mov     ecx, 0B33800h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x428953",
-    "line": "call    ExtraDataList_CopyBSExtraData",
+    "line": "call    ExtraDataList_CopyBSExtraData; Verified extra-data copy lifecycle for ownership state: the copy dispatcher handles kExtraData_Ownership, kExtraData_Global, and kExtraData_Rank through their typed setters, creating/updating separate ExtraOwnership, ExtraGlobal, and ExtraRank payloads rather than sharing the source node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x428960",
-    "line": "mov     ecx, offset BSExtraDataCS; lpCriticalSection",
+    "line": "mov     ecx, 0B33800h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

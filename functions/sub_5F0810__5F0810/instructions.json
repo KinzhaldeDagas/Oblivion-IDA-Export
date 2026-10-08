@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x5F086A",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F086C",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x5F087A",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F087C",
-    "line": "push    eax",
+    "line": "push    eax; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F087D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F087F",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x5F08C8",
-    "line": "mov     ecx, [eax+1E0h]; this",
+    "line": "mov     ecx, [eax+1E0h]; reference",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5F08CE",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x5F08DC",
-    "line": "mov     ecx, [eax+1E0h]",
+    "line": "mov     ecx, [eax+1E0h]; reference",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5F08E2",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F08E4",
-    "line": "push    eax",
+    "line": "push    eax; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F08E5",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x5F0950",
-    "line": "lea     ecx, [esp+4Ch+var_24]",
+    "line": "lea     ecx, [esp+4Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x5F095C",
-    "line": "call    sub_68A9F0",
+    "line": "call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x5F0970",
-    "line": "push    eax",
+    "line": "push    eax; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x5F0973",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F0978",
-    "line": "push    eax; a3",
+    "line": "push    eax; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5F0985",
-    "line": "push    eax; a2",
+    "line": "push    eax; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
@@ -661,19 +661,19 @@
   },
   {
     "ea": "0x5F098B",
-    "line": "push    eax",
+    "line": "push    eax; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F098C",
-    "line": "lea     ecx, [esp+5Ch+var_24]",
+    "line": "lea     ecx, [esp+5Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5F0990",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x5F099E",
-    "line": "call    sub_689BB0",
+    "line": "call    sub_689BB0; Copies only reference-type TravelPath nodes into an output BSSimpleList. Fast-travel helper uses this to process teleport refs/current-mount path side effects; it intentionally skips the final destination vector node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x5F09B0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F09B2",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x5F0A18",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,25 +913,25 @@
   },
   {
     "ea": "0x5F0A1F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0A21",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F0A26",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0A28",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x5F0A2F",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,19 +1141,19 @@
   },
   {
     "ea": "0x5F0A96",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F0A9B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0A9D",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x5F0AA9",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,13 +1189,13 @@
   },
   {
     "ea": "0x5F0AB2",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F0AB7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; linkedDoor",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x5F0ABB",
-    "line": "call    sub_42B470",
+    "line": "call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x5F0AC2",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,19 +1441,19 @@
   },
   {
     "ea": "0x5F0B43",
-    "line": "mov     ecx, [eax+1E0h]",
+    "line": "mov     ecx, [eax+1E0h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5F0B49",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F0B4C",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,13 +1501,13 @@
   },
   {
     "ea": "0x5F0B69",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0B6B",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,19 +1603,19 @@
   },
   {
     "ea": "0x5F0BA8",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F0BAB",
-    "line": "mov     ecx, [ecx+1E0h]",
+    "line": "mov     ecx, [ecx+1E0h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5F0BB1",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,19 +1897,19 @@
   },
   {
     "ea": "0x5F0C50",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0C52",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F0C55",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,19 +1933,19 @@
   },
   {
     "ea": "0x5F0C63",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0C65",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F0C68",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2083,7 +2083,7 @@
   },
   {
     "ea": "0x5F0CB5",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,19 +2263,19 @@
   },
   {
     "ea": "0x5F0D0B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0D0D",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F0D10",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2305,19 +2305,19 @@
   },
   {
     "ea": "0x5F0D20",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F0D22",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+var_54]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F0D25",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x5F0D35",
-    "line": "lea     ecx, [esp+54h+a4]",
+    "line": "lea     ecx, [esp+54h+a4]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2365,13 +2365,13 @@
   },
   {
     "ea": "0x5F0D41",
-    "line": "call    sub_68AA10",
+    "line": "call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F0D46",
-    "line": "mov     ecx, [esp+54h+var_18]",
+    "line": "mov     ecx, [esp+54h+var_24.unknown0C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2422,5 +2422,59 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3D80",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D83",
+    "line": "jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D88",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3D8C",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D8F",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D92",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3D94",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D99",
+    "line": "mov     eax, offset stru_AEC898",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D9E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

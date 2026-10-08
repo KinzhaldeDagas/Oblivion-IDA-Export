@@ -27,7 +27,6 @@
 0x7409D6: cmp     [esi+0Ch], eax
 0x7409D9: jbe     short loc_740A07
 0x7409DB: jmp     short loc_7409E0
-0x7409DD: align 10h
 0x7409E0: mov     ecx, [esi+10h]
 0x7409E3: mov     ecx, [ecx+eax*4]
 0x7409E6: mov     edx, [edi+10h]

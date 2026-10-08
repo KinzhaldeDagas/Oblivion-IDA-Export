@@ -1,4 +1,4 @@
-0x4019A0: push    esi
+0x4019A0: push    esi; Releases consecutive free blocks at the high end of the heap backing buffer, reducing committed heap usage and updating the tail pointer.
 0x4019A1: mov     esi, [ecx+24h]
 0x4019A4: test    esi, esi
 0x4019A6: jz      loc_401A28
@@ -26,7 +26,7 @@
 0x4019E5: lea     eax, [edx+eax*8]
 0x4019E8: push    esi
 0x4019E9: push    eax
-0x4019EA: call    sub_401690
+0x4019EA: call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.
 0x4019EF: mov     eax, [esi+4]
 0x4019F2: add     dword ptr [ecx+1Ch], 0FFFFFFFFh
 0x4019F6: and     eax, 0FFFFFFFh

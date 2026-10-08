@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x5528F0",
+      "0x55298C"
+    ]
+  ],
+  "chunks_sha256": "495bedfac80421739cbd3af747a68036a3e450e4059f12b394707a9762d089ed",
+  "comment_regular": "Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
+  "comment_repeatable": "Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5528F0",
+  "display_name": "FaceGenHeadParameters_Copy",
   "end_ea": "0x55298C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5528F0",
+  "name": "FaceGenHeadParameters_Copy",
   "segment": ".text",
   "sha256": "495bedfac80421739cbd3af747a68036a3e450e4059f12b394707a9762d089ed",
   "size": 156,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5528F0",
-  "type": "void __cdecl(int *, int)",
+  "total_chunk_size": 156,
+  "type": "void __cdecl(const FaceGenHeadParameters *source, FaceGenHeadParameters *destination)",
   "xrefs_from_count": 65,
   "xrefs_to_count": 13
 }

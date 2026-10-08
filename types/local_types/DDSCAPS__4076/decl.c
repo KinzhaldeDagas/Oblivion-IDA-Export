@@ -1,1 +1,4 @@
-_DDSCAPS
+struct _DDSCAPS
+{
+DWORD dwCaps;
+};

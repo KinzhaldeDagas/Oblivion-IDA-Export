@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x793C00",
+      "0x793C3D"
+    ]
+  ],
+  "chunks_sha256": "996b2ae24ba96e62d7cf42ce4a522e38a2b14748dbaa27d35d343d176496307a",
+  "comment_regular": "Oblivion-local CWindEngine::Init: copies leafFactors.x/y; derives leafFrequency and leafThrow directly from wind strength and those factors; stores strength. The embedded leafOscillation vector is not read by this routine.\n\nOblivion-local CWindEngine::Init for the 0x1C-byte SIdvWindInfo record. Copies leafFactors.x/y, computes leafFrequency = leafFactors.y * strength * kFrequencyScale and leafThrow = leafFactors.x * strength * kThrowScale, then stores strength. This routine does not read the intervening leafOscillation vector; later source is used only to name the observed record fields.",
+  "comment_repeatable": "Oblivion-local CWindEngine::Init for the 0x1C-byte SIdvWindInfo record. Copies leafFactors.x/y, computes leafFrequency = leafFactors.y * strength * kFrequencyScale and leafThrow = leafFactors.x * strength * kThrowScale, then stores strength. This routine does not read the intervening leafOscillation vector; later source is used only to name the observed record fields.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_793C00",
+  "display_name": "OB_CWindEngine_Init_010201A0",
   "end_ea": "0x793C3D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_793C00",
+  "name": "OB_CWindEngine_Init_010201A0",
   "segment": ".text",
   "sha256": "996b2ae24ba96e62d7cf42ce4a522e38a2b14748dbaa27d35d343d176496307a",
   "size": 61,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x793C00",
-  "type": "float *__thiscall(float *this, float *)",
+  "total_chunk_size": 61,
+  "type": "void __thiscall(OB_CWindEngine_010201A0 *this, const OB_SIdvWindInfo_010201A0 *windInfo)",
   "xrefs_from_count": 17,
   "xrefs_to_count": 1
 }

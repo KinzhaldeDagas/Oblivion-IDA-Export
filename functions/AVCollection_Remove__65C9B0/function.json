@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x65C9B0",
+      "0x65CA06"
+    ]
+  ],
+  "chunks_sha256": "56ab1949839be3071a3db73130d0151e329a9d60de34f78f7daa85c428497b76",
+  "comment_regular": "Verified: IDs9/10 zero permanent value without freeing; indexed IDs dispatch RemoveArrayNode; default removes pointer from list then frees entry. Dedicated allocation ownership ends at destructor, not Remove.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "AVCollection_Remove",
   "end_ea": "0x65CA06",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AVCollection_Remove",
   "segment": ".text",
   "sha256": "56ab1949839be3071a3db73130d0151e329a9d60de34f78f7daa85c428497b76",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65C9B0",
-  "type": "void __thiscall(unsigned int **this, _BYTE *)",
+  "total_chunk_size": 86,
+  "type": "void __thiscall(AVCollection *self, AVCollectionEntry *entry)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 2
 }

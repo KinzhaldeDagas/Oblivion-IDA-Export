@@ -1,4 +1,4 @@
-0x64B3A0: push    ebp
+0x64B3A0: push    ebp; Writes a caller-supplied TES/world velocity vector into the low-level collision object after scaling by hkFactor. Used by save/load restore and by the swept-hit listener to zero object velocity on selected layer hits.
 0x64B3A1: mov     ebp, esp
 0x64B3A3: and     esp, 0FFFFFFF0h
 0x64B3A6: sub     esp, 20h
@@ -25,7 +25,7 @@
 0x64B3E2: push    ecx; a2
 0x64B3E3: mov     ecx, eax; this
 0x64B3E5: fstp    [esp+24h+a2.z]
-0x64B3E9: call    sub_8AC0B0
+0x64B3E9: call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.
 0x64B3EE: mov     ecx, [esp+20h+var_4]
 0x64B3F2: xor     ecx, esp
 0x64B3F4: call    @__security_check_cookie@4; __security_check_cookie(x)

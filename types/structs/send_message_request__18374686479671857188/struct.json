@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "send_message_request",
+  "definition": "struct send_message_request\n{\nrequest_header __header;\nthread_id_t id;\nint type;\nint flags;\nuser_handle_t win;\nunsigned int msg;\nlparam_t wparam;\nlparam_t lparam;\ntimeout_t timeout;\n}\n",
   "id": 18374686479671857188,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "request_header"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "id",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "thread_id_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "win",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "user_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "msg",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wparam",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "lparam_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lparam",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 8
+      "size": 8,
+      "type": "lparam_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "timeout",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 8
+      "size": 8,
+      "type": "timeout_t"
     }
   ],
   "name": "send_message_request",
+  "ordinal": 6902,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 56
 }

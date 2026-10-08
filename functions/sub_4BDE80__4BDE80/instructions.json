@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BDE80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified duplicate-cell check: packs exterior coordinates and performs GetAt through map vtable +0x04. Releases the temporary task smart pointer and returns whether that cell already has a DistantLODLoaderTask.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x4BDEA4",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, dword ptr [esp+18h+group_y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BDEA8",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+18h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BDEAC",
-    "line": "push    eax",
+    "line": "push    eax; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BDEAD",
-    "line": "push    ecx",
+    "line": "push    ecx; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BDEAE",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4BDEB6",
-    "line": "mov     [esp+18h+arg_4], 0",
+    "line": "mov     dword ptr [esp+18h+group_y], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4BDEC3",
-    "line": "lea     ecx, [esp+18h+arg_4]",
+    "line": "lea     ecx, [esp+18h+group_y]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4BDED7",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, dword ptr [esp+18h+group_y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -316,5 +316,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B4470",
+    "line": "lea     ecx, [ebp+8]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4473",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4478",
+    "line": "mov     edx, dword ptr [esp+group_y]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B447C",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B447F",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4482",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B4484",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4489",
+    "line": "mov     eax, offset stru_ADFB38",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B448E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

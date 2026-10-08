@@ -23,14 +23,14 @@
 0x66E118: push    eax
 0x66E119: mov     [esp+4E8h+var_4B0], esi
 0x66E11D: mov     [esp+4E8h+var_4AC], ecx
-0x66E121: call    sub_46D5C0
+0x66E121: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x66E126: fadd    st, st
 0x66E128: mov     ecx, ds:0B333C4h; this
 0x66E12E: add     esp, 4
 0x66E131: fstp    [esp+4E4h+var_4B4]
-0x66E135: call    MobileObject_GetCharProxy
-0x66E13A: mov     ecx, eax
-0x66E13C: call    sub_8913C0
+0x66E135: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
+0x66E13A: mov     ecx, eax; this
+0x66E13C: call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
 0x66E141: fstp    [esp+4E4h+var_4CC]
 0x66E145: fld     [esp+4E4h+var_4CC]
 0x66E149: mov     edx, [esi]
@@ -69,9 +69,9 @@
 0x66E1C8: fstp    dword ptr [esi+7FCh]
 0x66E1CE: fld     dword ptr [esi+7FCh]
 0x66E1D4: push    ecx
-0x66E1D5: lea     ecx, [esp+4E8h+var_3D0]
-0x66E1DC: fstp    [esp+4E8h+var_4E8]; float
-0x66E1DF: call    NiMatrix33_InitRotationTransform
+0x66E1D5: lea     ecx, [esp+4E8h+var_3D0]; this
+0x66E1DC: fstp    [esp+4E8h+angleZ]; angleZ
+0x66E1DF: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66E1E4: fld     dword ptr [esi+7FCh]
 0x66E1EA: fstp    dword ptr [esi+800h]
 0x66E1F0: fld     [esp+4E4h+var_4B4]
@@ -98,9 +98,9 @@
 0x66E246: jmp     short loc_66E264
 0x66E248: fld     dword ptr [esi+800h]
 0x66E24E: push    ecx
-0x66E24F: lea     ecx, [esp+4E8h+var_3D0]
-0x66E256: fstp    [esp+4E8h+var_4E8]; float
-0x66E259: call    NiMatrix33_InitRotationTransform
+0x66E24F: lea     ecx, [esp+4E8h+var_3D0]; this
+0x66E256: fstp    [esp+4E8h+angleZ]; angleZ
+0x66E259: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66E25E: jmp     short loc_66E264
 0x66E260: fstp    st(1)
 0x66E262: fstp    st
@@ -113,7 +113,6 @@
 0x66E274: mov     [esp+4E4h+var_4CC], eax
 0x66E278: mov     [esp+4E4h+var_4A0], edi
 0x66E27C: jmp     short loc_66E284
-0x66E27E: align 10h
 0x66E280: mov     esi, [esp+4E4h+var_4B0]
 0x66E284: cmp     edi, [esp+4E4h+var_4CC]
 0x66E288: jg      loc_66E8EF
@@ -128,19 +127,19 @@
 0x66E2AB: fldz
 0x66E2AD: lea     ecx, [esp+4E4h+var_4C4]
 0x66E2B1: fstp    [esp+4E4h+var_4BC]
-0x66E2B5: call    sub_43F350
+0x66E2B5: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x66E2BA: fstp    st
 0x66E2BC: fild    [esp+4E4h+var_4CC]
 0x66E2C0: lea     eax, [edi-1]
 0x66E2C3: mov     [esp+4E4h+var_4C8], eax
 0x66E2C7: push    ecx
-0x66E2C8: lea     ecx, [esp+4E8h+var_3AC]
+0x66E2C8: lea     ecx, [esp+4E8h+var_3AC]; this
 0x66E2CF: fdivr   qword ptr ds:0A3D5B0h
 0x66E2D5: fimul   [esp+4E8h+var_4C8]
 0x66E2D9: fstp    [esp+4E8h+var_4C8]
 0x66E2DD: fld     [esp+4E8h+var_4C8]
-0x66E2E1: fstp    [esp+4E8h+var_4E8]; float
-0x66E2E4: call    NiMatrix33_InitRotationTransform
+0x66E2E1: fstp    [esp+4E8h+angleZ]; angleZ
+0x66E2E4: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x66E2E9: lea     ecx, [esp+4E4h+var_4C4]
 0x66E2ED: push    ecx
 0x66E2EE: lea     edx, [esp+4E8h+var_3DC]
@@ -166,7 +165,7 @@
 0x66E350: mov     [esp+4E8h+var_1CC], ebx
 0x66E357: mov     [esp+4E8h+var_1C8], ebx
 0x66E35E: movaps  [esp+4E8h+var_1E0], xmm0
-0x66E366: call    sub_65ABE0
+0x66E366: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x66E36B: fld     [esp+4E4h+var_49C]
 0x66E36F: fld     qword ptr ds:0A39088h
 0x66E375: movzx   eax, word ptr [eax+2]
@@ -214,10 +213,10 @@
 0x66E439: mov     [esp+4E4h+var_4], ebx
 0x66E440: mov     [esp+4E4h+var_1C8], edx
 0x66E447: mov     [esp+4E4h+var_1CC], ebx
-0x66E44E: call    TESObjectREFR_GetParentCell
+0x66E44E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66E453: mov     esi, eax
 0x66E455: mov     ecx, esi; this
-0x66E457: call    TESObjectCELL_IsInterior
+0x66E457: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66E45C: test    al, al
 0x66E45E: jz      short loc_66E46A
 0x66E460: lea     ecx, [esi+28h]
@@ -351,7 +350,7 @@
 0x66E62F: fld     [esp+4ECh+var_4D4]
 0x66E633: mov     ecx, eax
 0x66E635: fstp    [esp+4ECh+var_4EC]; float
-0x66E638: call    sub_532090
+0x66E638: call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.
 0x66E63D: mov     edi, eax
 0x66E63F: jmp     short loc_66E643
 0x66E641: xor     edi, edi
@@ -359,43 +358,43 @@
 0x66E649: lea     eax, [esp+4E4h+var_458]
 0x66E650: push    eax
 0x66E651: mov     byte ptr [esp+4E8h+var_4], bl
-0x66E658: call    sub_65ABE0
+0x66E658: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x66E65D: movzx   eax, word ptr [eax+2]
 0x66E661: shl     eax, 10h
 0x66E664: or      eax, 1Fh
-0x66E667: lea     ecx, [esp+4E4h+var_450]
+0x66E667: lea     ecx, [esp+4E4h+info]
 0x66E66E: mov     esi, eax
-0x66E670: call    sub_532250
+0x66E670: call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.
 0x66E675: cmp     edi, ebx
 0x66E677: mov     byte ptr [esp+4E4h+var_4], 2
-0x66E67F: mov     [esp+4E4h+var_450], esi
+0x66E67F: mov     [esp+4E4h+info.collisionFilter], esi
 0x66E686: jz      short loc_66E694
 0x66E688: mov     ecx, [edi+8]
-0x66E68B: mov     [esp+4E4h+var_44C], ecx
+0x66E68B: mov     [esp+4E4h+info.shape], ecx
 0x66E692: jmp     short loc_66E69B
-0x66E694: mov     [esp+4E4h+var_44C], ebx
+0x66E694: mov     [esp+4E4h+info.shape], ebx
 0x66E69B: fldz
 0x66E69D: mov     eax, [esp+4E4h+var_4AC]
-0x66E6A1: fst     [esp+4E4h+var_42C]
+0x66E6A1: fst     [esp+4E4h+info.transform+4]
 0x66E6A8: lea     edx, [esp+4E4h+var_270]
-0x66E6AF: fst     [esp+4E4h+var_428]
+0x66E6AF: fst     [esp+4E4h+info.transform+8]
 0x66E6B6: push    edx
-0x66E6B7: fst     [esp+4E8h+var_424]
-0x66E6BE: lea     ecx, [esp+4E8h+var_400]
-0x66E6C5: fst     [esp+4E8h+var_420]
-0x66E6CC: fst     [esp+4E8h+var_418]
-0x66E6D3: fst     [esp+4E8h+var_414]
-0x66E6DA: fst     [esp+4E8h+var_410]
-0x66E6E1: fst     [esp+4E8h+var_40C]
-0x66E6E8: fst     [esp+4E8h+var_404]
+0x66E6B7: fst     [esp+4E8h+info.transform+0Ch]
+0x66E6BE: lea     ecx, [esp+4E8h+info.transform+30h]
+0x66E6C5: fst     [esp+4E8h+info.transform+10h]
+0x66E6CC: fst     [esp+4E8h+info.transform+18h]
+0x66E6D3: fst     [esp+4E8h+info.transform+1Ch]
+0x66E6DA: fst     [esp+4E8h+info.transform+20h]
+0x66E6E1: fst     [esp+4E8h+info.transform+24h]
+0x66E6E8: fst     [esp+4E8h+info.transform+2Ch]
 0x66E6EF: fld1
-0x66E6F1: fst     [esp+4E8h+var_430]
-0x66E6F8: fst     [esp+4E8h+var_41C]
-0x66E6FF: fstp    [esp+4E8h+var_408]
-0x66E706: fst     [esp+4E8h+var_400]
-0x66E70D: fst     [esp+4E8h+var_3FC]
-0x66E714: fst     [esp+4E8h+var_3F8]
-0x66E71B: fstp    [esp+4E8h+var_3F4]
+0x66E6F1: fst     [esp+4E8h+info.transform]
+0x66E6F8: fst     [esp+4E8h+info.transform+14h]
+0x66E6FF: fstp    [esp+4E8h+info.transform+28h]
+0x66E706: fst     [esp+4E8h+info.transform+30h]
+0x66E70D: fst     [esp+4E8h+info.transform+34h]
+0x66E714: fst     [esp+4E8h+info.transform+38h]
+0x66E71B: fstp    [esp+4E8h+info.transform+3Ch]
 0x66E722: fld     dword ptr [eax]
 0x66E724: fld     qword ptr ds:0A39088h
 0x66E72A: fmul    st(1), st
@@ -407,16 +406,16 @@
 0x66E741: fmul    dword ptr [eax+8]
 0x66E744: fstp    [esp+4E8h+var_268]
 0x66E74B: call    sub_47DCD0
-0x66E750: lea     eax, [esp+4E4h+var_450]
-0x66E757: push    eax
-0x66E758: lea     ecx, [esp+4E8h+var_46C]
-0x66E75C: call    sub_531FC0
+0x66E750: lea     eax, [esp+4E4h+info]
+0x66E757: push    eax; info
+0x66E758: lea     ecx, [esp+4E8h+self]; self
+0x66E75C: call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.
 0x66E761: mov     ecx, [esp+4E4h+var_4B0]; this
 0x66E765: mov     byte ptr [esp+4E4h+var_4], 3
-0x66E76D: call    TESObjectREFR_GetParentCell
+0x66E76D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66E772: mov     esi, eax
 0x66E774: mov     ecx, esi; this
-0x66E776: call    TESObjectCELL_IsInterior
+0x66E776: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66E77B: test    al, al
 0x66E77D: jz      short loc_66E789
 0x66E77F: lea     ecx, [esi+28h]
@@ -424,30 +423,30 @@
 0x66E787: jmp     short loc_66E78E
 0x66E789: mov     eax, ds:0B35C24h
 0x66E78E: push    eax
-0x66E78F: lea     ecx, [esp+4E8h+var_46C]
+0x66E78F: lea     ecx, [esp+4E8h+self]
 0x66E793: call    sub_89F470
 0x66E798: lea     ecx, [esp+4E4h+var_374]
 0x66E79F: mov     [esp+4E4h+var_388], offset ??_7hkAllCdBodyPairCollector@@6B@; const hkAllCdBodyPairCollector::`vftable'
 0x66E7AA: mov     [esp+4E4h+var_380], ecx
 0x66E7B1: mov     [esp+4E4h+var_378], 80000010h
-0x66E7BC: mov     eax, [esp+4E4h+var_464]
+0x66E7BC: mov     eax, [esp+4E4h+self.hkObject]
 0x66E7C3: cmp     eax, ebx
 0x66E7C5: mov     byte ptr [esp+4E4h+var_4], 4
 0x66E7CD: mov     [esp+4E4h+var_37C], ebx
 0x66E7D4: mov     byte ptr [esp+4E4h+var_384], bl
 0x66E7DB: mov     esi, eax
 0x66E7DD: jz      short loc_66E802
-0x66E7DF: lea     ecx, [esp+4E4h+var_46C]
-0x66E7E3: call    sub_89F570
+0x66E7DF: lea     ecx, [esp+4E4h+self]
+0x66E7E3: call    bhkRefObject_UpdateHavokObject
 0x66E7E8: mov     edx, [esi]
 0x66E7EA: mov     edx, [edx+38h]
 0x66E7ED: lea     eax, [esp+4E4h+var_388]
 0x66E7F4: push    eax
 0x66E7F5: mov     ecx, esi
 0x66E7F7: call    edx
-0x66E7F9: lea     ecx, [esp+4E4h+var_46C]
-0x66E7FD: call    sub_89F570
-0x66E802: lea     ecx, [esp+4E4h+var_46C]
+0x66E7F9: lea     ecx, [esp+4E4h+self]
+0x66E7FD: call    bhkRefObject_UpdateHavokObject
+0x66E802: lea     ecx, [esp+4E4h+self]
 0x66E806: call    sub_8AECA0
 0x66E80B: cmp     edi, ebx
 0x66E80D: jz      short loc_66E819
@@ -462,10 +461,10 @@
 0x66E827: lea     ecx, [esp+4E4h+var_388]; this
 0x66E82E: mov     byte ptr [esp+4E4h+var_4], 3
 0x66E836: call    ??1hkAllCdBodyPairCollector@@UAE@XZ; hkAllCdBodyPairCollector::~hkAllCdBodyPairCollector(void)
-0x66E83B: lea     ecx, [esp+4E4h+var_46C]; this
+0x66E83B: lea     ecx, [esp+4E4h+self]; this
 0x66E83F: mov     byte ptr [esp+4E4h+var_4], 2
 0x66E847: call    ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)
-0x66E84C: mov     eax, [esp+4E4h+var_43C]
+0x66E84C: mov     eax, [esp+4E4h+info.propertyCapacityFlags]
 0x66E853: test    eax, eax
 0x66E855: mov     byte ptr [esp+4E4h+var_4], bl
 0x66E85C: js      short loc_66E899
@@ -476,7 +475,7 @@
 0x66E874: cmp     ecx, ebx
 0x66E876: jnz     short loc_66E87E
 0x66E878: mov     ecx, ds:0BA7D9Ch
-0x66E87E: mov     edx, [esp+4E4h+var_444]
+0x66E87E: mov     edx, [esp+4E4h+info.propertyData]
 0x66E885: and     eax, 3FFFFFFFh
 0x66E88A: add     eax, eax
 0x66E88C: add     eax, eax
@@ -533,3 +532,27 @@
 0x66E941: fstp    dword ptr [eax+8]
 0x66E944: mov     al, 1
 0x66E946: jmp     short loc_66E8C9
+0x9C41F0: lea     ecx, [ebp+var_1C0]
+0x9C41F6: jmp     sub_538C80
+0x9C41FB: mov     eax, [ebp+var_4B8]
+0x9C4201: push    eax
+0x9C4202: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4207: pop     ecx
+0x9C4208: retn
+0x9C4209: lea     ecx, [ebp+info]
+0x9C420F: jmp     sub_8A5090
+0x9C4214: lea     ecx, [ebp+self]; this
+0x9C421A: jmp     ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)
+0x9C421F: lea     ecx, [ebp+var_388]; this
+0x9C4225: jmp     ??1hkAllCdBodyPairCollector@@UAE@XZ; hkAllCdBodyPairCollector::~hkAllCdBodyPairCollector(void)
+0x9C422A: mov     edx, [esp-4+arg_4]
+0x9C422E: lea     eax, [edx-4D4h]
+0x9C4234: mov     ecx, [edx-4D8h]
+0x9C423A: xor     ecx, eax
+0x9C423C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4241: add     eax, 0Ch
+0x9C4244: mov     ecx, [edx-8]
+0x9C4247: xor     ecx, eax
+0x9C4249: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C424E: mov     eax, offset stru_AECBF8
+0x9C4253: jmp     ___CxxFrameHandler3

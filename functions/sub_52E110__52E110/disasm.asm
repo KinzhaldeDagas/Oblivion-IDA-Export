@@ -1,4 +1,4 @@
-0x52E110: mov     eax, [esp+arg_0]
+0x52E110: mov     eax, [esp+source]; Copy the complete 16-byte TRDT payload and deep-copy responseText into the destination TESResponse. This is the ownership boundary between the global shared INFO response cache and each caller's temporary list.
 0x52E114: mov     edx, [eax]
 0x52E116: mov     [ecx], edx
 0x52E118: mov     edx, [eax+4]

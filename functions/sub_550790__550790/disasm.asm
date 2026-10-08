@@ -23,7 +23,7 @@
 0x5507BB: test    eax, eax
 0x5507BD: jz      short loc_5507D1
 0x5507BF: push    eax
-0x5507C0: push    offset unk_B39D88
+0x5507C0: push    offset stru_B39D88
 0x5507C5: call    NiRTTI_Cast
 0x5507CA: add     esp, 8
 0x5507CD: test    eax, eax

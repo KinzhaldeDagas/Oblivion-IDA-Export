@@ -43,7 +43,7 @@
 0x74D1B9: push    eax
 0x74D1BA: mov     ecx, edi
 0x74D1BC: mov     [esi+8], edx
-0x74D1BF: call    sub_53D4B0
+0x74D1BF: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x74D1C4: mov     ecx, [eax]
 0x74D1C6: mov     [esi], ecx
 0x74D1C8: mov     edx, [eax+4]

@@ -1,1 +1,1 @@
-UINT_PTR
+typedef unsigned int UINT_PTR;

@@ -24,46 +24,46 @@ void __thiscall sub_90FB60(__m128 *this, int a2)
   __m128 v24; // [esp+50h] [ebp-20h] BYREF
   __m128 v25; // [esp+60h] [ebp-10h] BYREF
 
-  v3 = *((_DWORD **)this + 7);
-  v4 = *((_DWORD **)this + 6);
-  sub_88FCC0(&v22, (__m128 *)(v4[0x14] + 0x10), this + 3);
-  sub_88FCC0(&v21, (__m128 *)(v3[0x14] + 0x10), this + 4);
-  v5 = _mm_sub_ps(v21, v22);
-  v6 = _mm_mul_ps(v5, v5);
-  v7 = _mm_shuffle_ps(v6, v6, 0x55).m128_f32[0] + v6.m128_f32[0];
-  v8 = _mm_shuffle_ps(v6, v6, 0xAA);
-  v9 = v8;
-  v9.m128_f32[0] = v8.m128_f32[0] + v7;
-  v23 = v9;
-  v23.m128_i32[0] = fsqrt(v8.m128_f32[0] + v7);
-  v15 = v23.m128_f32[0];
-  if ( v23.m128_f32[0] >= (double)flt_A37080 )
+  v3 = *((_DWORD **)this + 7); /*0x90fb6d*/
+  v4 = *((_DWORD **)this + 6); /*0x90fb71*/
+  hkTransform_TransformPosition(&v22, (__m128 *)(v4[0x14] + 0x10), this + 3); /*0x90fb83*/
+  hkTransform_TransformPosition(&v21, (__m128 *)(v3[0x14] + 0x10), this + 4); /*0x90fb97*/
+  v5 = _mm_sub_ps(v21, v22); /*0x90fba6*/
+  v6 = _mm_mul_ps(v5, v5); /*0x90fbac*/
+  v7 = _mm_shuffle_ps(v6, v6, 0x55).m128_f32[0] + v6.m128_f32[0]; /*0x90fbb9*/
+  v8 = _mm_shuffle_ps(v6, v6, 0xAA); /*0x90fbbd*/
+  v9 = v8; /*0x90fbc1*/
+  v9.m128_f32[0] = v8.m128_f32[0] + v7; /*0x90fbc4*/
+  v23 = v9; /*0x90fbc8*/
+  v23.m128_i32[0] = fsqrt(v8.m128_f32[0] + v7); /*0x90fbd1*/
+  v15 = v23.m128_f32[0]; /*0x90fbe0*/
+  if ( v23.m128_f32[0] >= (double)flt_A37080 ) /*0x90fbf3*/
   {
-    v10 = *((_BYTE *)this + 0x5C);
-    *(float *)&v17 = fConstant_1 / v23.m128_f32[0];
-    v23 = _mm_mul_ps(_mm_shuffle_ps((__m128)v17, (__m128)v17, 0), v5);
-    if ( (v10 || v15 >= (double)*((float *)this + 0x14))
+    v10 = *((_BYTE *)this + 0x5C); /*0x90fbff*/
+    *(float *)&v17 = fConstant_1 / v23.m128_f32[0]; /*0x90fc08*/
+    v23 = _mm_mul_ps(_mm_shuffle_ps((__m128)v17, (__m128)v17, 0), v5); /*0x90fc1f*/
+    if ( (v10 || v15 >= (double)*((float *)this + 0x14)) /*0x90fc4b*/
       && (*((_BYTE *)this + 0x5D) || v15 <= (double)*((float *)this + 0x14)) )
     {
-      sub_8ABCE0(v4, &v22, &v24);
-      sub_8ABCE0(v3, &v21, &v25);
-      v11 = _mm_mul_ps(_mm_sub_ps(v25, v24), v23);
-      v12 = (v15 - *((float *)this + 0x14)) * *((float *)this + 0x15);
-      v13 = this + 2;
-      v14 = v12
+      sub_8ABCE0(v4, &v22, &v24); /*0x90fc5d*/
+      sub_8ABCE0(v3, &v21, &v25); /*0x90fc6e*/
+      v11 = _mm_mul_ps(_mm_sub_ps(v25, v24), v23); /*0x90fc92*/
+      v12 = (v15 - *((float *)this + 0x14)) * *((float *)this + 0x15); /*0x90fcb3*/
+      v13 = this + 2; /*0x90fcba*/
+      v14 = v12 /*0x90fcc0*/
           + (float)(_mm_shuffle_ps(v11, v11, 0xAA).m128_f32[0]
                   + (float)(_mm_shuffle_ps(v11, v11, 0x55).m128_f32[0] + v11.m128_f32[0]))
           * v13[3].m128_f32[2];
-      *(float *)&v16 = v14;
-      *(float *)&v18 = -v14;
-      *v13 = _mm_mul_ps(_mm_shuffle_ps((__m128)v18, (__m128)v18, 0), v23);
-      v19 = *(_DWORD *)(a2 + 8);
-      sub_8A6410((int)v3);
-      (*(void (__thiscall **)(_DWORD, int, __m128 *, __m128 *))(*(_DWORD *)v3[0x14] + 0x68))(v3[0x14], v19, v13, &v21);
-      *v13 = _mm_mul_ps(_mm_shuffle_ps((__m128)v16, (__m128)v16, 0), v23);
-      v20 = *(_DWORD *)(a2 + 8);
-      sub_8A6410((int)v4);
-      (*(void (__thiscall **)(_DWORD, int, __m128 *, __m128 *))(*(_DWORD *)v4[0x14] + 0x68))(v4[0x14], v20, v13, &v22);
+      *(float *)&v16 = v14; /*0x90fcc2*/
+      *(float *)&v18 = -v14; /*0x90fcc8*/
+      *v13 = _mm_mul_ps(_mm_shuffle_ps((__m128)v18, (__m128)v18, 0), v23); /*0x90fcdc*/
+      v19 = *(_DWORD *)(a2 + 8); /*0x90fce4*/
+      sub_8A6410((int)v3); /*0x90fce8*/
+      (*(void (__thiscall **)(_DWORD, int, __m128 *, __m128 *))(*(_DWORD *)v3[0x14] + 0x68))(v3[0x14], v19, v13, &v21); /*0x90fcfd*/
+      *v13 = _mm_mul_ps(_mm_shuffle_ps((__m128)v16, (__m128)v16, 0), v23); /*0x90fd1d*/
+      v20 = *(_DWORD *)(a2 + 8); /*0x90fd25*/
+      sub_8A6410((int)v4); /*0x90fd29*/
+      (*(void (__thiscall **)(_DWORD, int, __m128 *, __m128 *))(*(_DWORD *)v4[0x14] + 0x68))(v4[0x14], v20, v13, &v22); /*0x90fd3e*/
     }
   }
 }

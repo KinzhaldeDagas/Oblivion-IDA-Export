@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7750F0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7750F3",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x77512E",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; Scan the nine native D3D depth/stencil candidates and retain the closest supported depth/stencil bit-count match.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -157,61 +157,61 @@
   },
   {
     "ea": "0x77513C",
-    "line": "mov     esi, ds:dword_B29944[edi]",
+    "line": "mov     esi, ds:D3DDepthStencilFormatCandidates[edi]",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x775142",
-    "line": "lea     edx, [esp+20h+arg_0]",
+    "line": "lea     edx, [esp+20h+stencilBits]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x775146",
-    "line": "push    edx",
+    "line": "push    edx; stencilBits",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x775147",
-    "line": "lea     eax, [esp+24h+var_C]",
+    "line": "lea     eax, [esp+24h+depthBits]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77514B",
-    "line": "push    eax",
+    "line": "push    eax; depthBits",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77514C",
-    "line": "push    esi",
+    "line": "push    esi; format",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77514D",
-    "line": "mov     [esp+2Ch+var_C], ebx",
+    "line": "mov     [esp+2Ch+depthBits], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x775151",
-    "line": "mov     [esp+2Ch+arg_0], ebx",
+    "line": "mov     [esp+2Ch+stencilBits], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x775155",
-    "line": "call    sub_774AE0",
+    "line": "call    D3DDepthStencilFormat_GetBitCounts; Map D3D depth/stencil formats to their depth-bit and stencil-bit counts for compatibility ranking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x77515A",
-    "line": "mov     ecx, [esp+2Ch+var_C]",
+    "line": "mov     ecx, [esp+2Ch+depthBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x77516B",
-    "line": "mov     [esp+2Ch+var_C], eax",
+    "line": "mov     [esp+2Ch+depthBits], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x775178",
-    "line": "mov     edx, [esp+2Ch+var_C]",
+    "line": "mov     edx, [esp+2Ch+depthBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x775187",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, [esp+20h+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x775192",
-    "line": "mov     [esp+20h+var_C], eax",
+    "line": "mov     [esp+20h+depthBits], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7751A1",
-    "line": "mov     edx, [esp+20h+var_C]",
+    "line": "mov     edx, [esp+20h+depthBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7751AB",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },

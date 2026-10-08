@@ -1,1 +1,1 @@
-IOleInPlaceFrameVtbl_0
+typedef IOleInPlaceFrameVtbl IOleInPlaceFrameVtbl_0;

@@ -1,35 +1,19 @@
-const char *__thiscall sub_8A3200(char *this)
+void __thiscall sub_8A3200(char *this)
 {
-  const char *result; // eax
-
-  switch ( *(this + 0xD3) )
+  switch ( *(this + 0xD3) ) /*0x8a320e*/
   {
-    case 0:
-      result = "Invalid";
-      break;
-    case 1:
-      result = "Fixed";
-      break;
-    case 2:
-      result = "Keyframed";
-      break;
-    case 3:
-      result = "Debris";
-      break;
-    case 4:
-      result = "Moving";
-      break;
-    case 5:
-      result = "Critical";
-      break;
-    case 6:
-      result = "Bullet";
-      break;
-    case 7:
-      result = def_8A320E();
-      break;
+    case 0: /*0x8a320e*/
+    case 1: /*0x8a320e*/
+    case 2: /*0x8a320e*/
+    case 3: /*0x8a320e*/
+    case 4: /*0x8a320e*/
+    case 5: /*0x8a320e*/
+    case 6: /*0x8a320e*/
+      return;
+    case 7: /*0x8a320e*/
+      def_8A320E(); /*0x8a3240*/
+      break; /*0x8a3240*/
     default:
-      JUMPOUT(0x8A3244);
+      JUMPOUT(0x8A3244); /*0x8a3244*/
   }
-  return result;
 }

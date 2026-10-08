@@ -1,12 +1,13 @@
-char __cdecl sub_4F7330(int a1, int a2, int a3, double *a4)
+// GetGlobalValue_Eval (index 74 / opcode 0x104A): parameter must be TESGlobal (form type 0x04); returns its float value at +0x24, otherwise numeric 0.
+char __cdecl GetGlobalValue_Eval(TESObjectREFR *subject, TESGlobal *global, TESForm *param2, double *value)
 {
-  *a4 = dbl_A3D360;
-  if ( a2 )
+  *value = dbl_A3D360; /*0x4f7340*/
+  if ( global ) /*0x4f7342*/
   {
-    if ( *(_BYTE *)(a2 + 4) == 4 )
-      *a4 = *(float *)(a2 + 0x24);
+    if ( global->super.type == kFormType_Global ) /*0x4f7348*/
+      *value = global->data; /*0x4f734d*/
   }
-  if ( IsConsoleMode )
-    Interface_ConsolePrint("GetGlobalValue >> %0.2f", *a4);
-  return 1;
+  if ( MEMORY[0xB361AC] ) /*0x4f734f*/
+    Interface_ConsolePrint("GetGlobalValue >> %0.2f", *value); /*0x4f7365*/
+  return 1; /*0x4f736f*/
 }

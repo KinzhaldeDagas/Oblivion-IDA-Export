@@ -17,7 +17,7 @@
 0x4D9831: call    dword ptr ds:0A28078h
 0x4D9837: lea     ecx, [esp+14h+arg_0]
 0x4D983B: push    ecx
-0x4D983C: mov     ecx, offset off_B082F0
+0x4D983C: mov     ecx, offset stru_B082F0; MEF PERF 2026-10-08: Verified strong-pointer16 array used by TESBoundObject_Create3DImpl4B39F7; clear4B26D5 and remove4D9849 are also observed. Its entire lifetime/population not sealed. Generic AddFirstEmpty patch must not assume every caller is a NiNode child array.
 0x4D9841: mov     [esp+18h+var_4], 0
 0x4D9849: call    sub_4B24F0
 0x4D984E: test    esi, esi
@@ -39,3 +39,12 @@
 0x4D987E: pop     esi
 0x4D987F: add     esp, 0Ch
 0x4D9882: retn
+0x9B5A40: lea     ecx, [ebp+4]; slot
+0x9B5A43: jmp     NiPointerSlot_Release
+0x9B5A48: mov     edx, [esp+arg_4]
+0x9B5A4C: lea     eax, [edx-4]
+0x9B5A4F: mov     ecx, [edx-8]
+0x9B5A52: xor     ecx, eax
+0x9B5A54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5A59: mov     eax, offset stru_AE0A50
+0x9B5A5E: jmp     ___CxxFrameHandler3

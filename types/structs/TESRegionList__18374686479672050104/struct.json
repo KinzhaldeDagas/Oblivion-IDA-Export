@@ -1,0 +1,63 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESRegionList",
+  "definition": "struct TESRegionList\n{\nTESRegionListVtable *vtable; ///< Verified RTTI-identified TESRegionList object vtable.\nOblivionRegionListNode regions; ///< Verified inline BSSimpleList head of TESRegion* entries at +0x4.\nunsigned __int8 ownsRegionMemory; ///< Verified constructor flag: when set, Clear/dtor destroys region objects; default DataHandler-owned list is constructed with ownership=1.\nunsigned __int8 padding0D[3]; ///< Padding.\n}\n",
+  "id": 18374686479672050104,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified RTTI-identified TESRegionList object vtable.",
+      "name": "vtable",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "TESRegionListVtable *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified inline BSSimpleList head of TESRegion* entries at +0x4.",
+      "name": "regions",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 8,
+      "type": "OblivionRegionListNode"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified constructor flag: when set, Clear/dtor destroys region objects; default DataHandler-owned list is constructed with ownership=1.",
+      "name": "ownsRegionMemory",
+      "offset": 12,
+      "offset_hex": "0xC",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Padding.",
+      "name": "padding0D",
+      "offset": 13,
+      "offset_hex": "0xD",
+      "size": 3,
+      "type": "unsigned __int8[3]"
+    }
+  ],
+  "name": "TESRegionList",
+  "ordinal": 229,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 16
+}

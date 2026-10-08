@@ -1,1 +1,1 @@
-SC_RPC_LOCK
+typedef void *SC_RPC_LOCK;

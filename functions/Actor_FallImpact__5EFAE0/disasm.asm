@@ -1,4 +1,4 @@
-0x5EFAE0: sub     esp, 28h
+0x5EFAE0: sub     esp, 28h; TES4 authoritative fall-impact damage path. Consumes proxy flag 0x80 and fall timer +0x320 after MobileObject::Move returns; this is the final Slowfall safety interception point.
 0x5EFAE3: push    esi
 0x5EFAE4: mov     esi, ecx
 0x5EFAE6: call    sub_5E6C10
@@ -39,7 +39,7 @@
 0x5EFB49: call    eax
 0x5EFB4B: mov     edi, eax
 0x5EFB4D: mov     ecx, esi; this
-0x5EFB4F: call    MobileObject_GetCharProxy
+0x5EFB4F: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5EFB54: mov     ebp, eax
 0x5EFB56: test    ebp, ebp
 0x5EFB58: jz      loc_5EFD18
@@ -83,7 +83,7 @@
 0x5EFBDD: fld     [esp+38h+var_1C]
 0x5EFBE1: fsub    [esp+38h+var_10]
 0x5EFBE5: fstp    [esp+38h+var_4]
-0x5EFBE9: call    sub_43F350
+0x5EFBE9: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5EFBEE: fstp    st
 0x5EFBF0: push    ecx
 0x5EFBF1: fld     [esp+3Ch+var_4]
@@ -94,7 +94,7 @@
 0x5EFC05: fstp    [esp+3Ch+var_3C]; float
 0x5EFC08: call    sub_65A650
 0x5EFC0D: lea     ecx, [ebp+1E0h]
-0x5EFC13: call    sub_88D370
+0x5EFC13: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x5EFC18: cmp     eax, 5
 0x5EFC1B: jnz     short loc_5EFC52
 0x5EFC1D: mov     edx, [esi]
@@ -124,9 +124,9 @@
 0x5EFC6A: fstp    dword ptr [esp+38h+a2+4]
 0x5EFC6E: mov     ecx, esi
 0x5EFC70: call    eax
-0x5EFC72: mov     ecx, ds:0B333C4h
-0x5EFC78: push    eax
-0x5EFC79: call    sub_4D7E30
+0x5EFC72: mov     ecx, ds:0B333C4h; this
+0x5EFC78: push    eax; pointXYZ
+0x5EFC79: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x5EFC7E: fstp    [esp+38h+var_28]
 0x5EFC82: mov     ecx, ds:0B333CCh
 0x5EFC88: mov     eax, [ecx+0DCh]
@@ -180,7 +180,7 @@
 0x5EFD22: push    ecx
 0x5EFD23: mov     ecx, esi
 0x5EFD25: fstp    [esp+44h+var_44]; float
-0x5EFD28: call    sub_65AF30
+0x5EFD28: call    MobileObject_Move; TES4 authoritative: MobileObject movement step. Builds local movement/update packet and calls CharProxy vtable +0x80; for bhkCharacterController that dispatches to 0x896000. Entry point for per-actor movement discipline injection before controller integration.
 0x5EFD2D: mov     ecx, eax
 0x5EFD2F: test    ecx, ecx
 0x5EFD31: mov     dword ptr [esp+38h+a2+4], ecx
@@ -188,10 +188,10 @@
 0x5EFD3B: mov     edx, [ecx+1F4h]
 0x5EFD41: shr     edx, 7
 0x5EFD44: and     dl, 1
-0x5EFD47: jz      loc_5EFF16
-0x5EFD4D: and     dword ptr [ecx+1F4h], 0FFFFFF7Fh
-0x5EFD57: fld     dword ptr [ecx+320h]
-0x5EFD5D: fstp    [esp+38h+a3]
+0x5EFD47: jz      loc_5EFF16; TES4 authoritative: conditional skip when proxy flag 0x80 is not set. For Slowfall safety hook, prefer 0x5EFD4D after this branch so the hook only runs on pending fall impacts.
+0x5EFD4D: and     dword ptr [ecx+1F4h], 0FFFFFF7Fh; TES4 authoritative Slowfall safety hook candidate: pending fall impact confirmed. Stolen instruction is 10-byte and dword [ecx+1F4h],0FFFFFF7Fh; ECX=proxy, ESI=Actor. Protected falls can clear +0x80/+0x320 and jump to 0x5EFF16.
+0x5EFD57: fld     dword ptr [ecx+320h]; TES4 authoritative: reads fallTimer from proxy +0x320 after clearing +0x80. If trampoline at 0x5EFD4D continues vanilla, return here after stolen instruction.
+0x5EFD5D: fstp    [esp+38h+a3]; Reads fallTimer from proxy +0x320 then immediately zeros it. Slowfall can prevent damage by clearing timer/flag earlier or here as a last guard.
 0x5EFD61: fldz
 0x5EFD63: fstp    dword ptr [ecx+320h]
 0x5EFD69: fld     [esp+38h+a3]
@@ -202,25 +202,25 @@
 0x5EFD7A: jp      loc_5EFF14
 0x5EFD80: fmul    dword ptr ds:0B37468h
 0x5EFD86: mov     eax, [esi]
-0x5EFD88: mov     edx, [eax+388h]
+0x5EFD88: mov     edx, [eax+388h]; TES4 authoritative: Actor_FallImpact calls Actor vtable +0x388 to obtain a related rider/mount actor; if that object has a char proxy, its +0x310 scalar is used for fall damage scaling.
 0x5EFD8E: mov     ebx, ecx
 0x5EFD90: fadd    dword ptr ds:0B37460h
 0x5EFD96: mov     ecx, esi
-0x5EFD98: fstp    dword ptr [esp+38h+a2]
+0x5EFD98: fstp    dword ptr [esp+38h+a2]; Fall damage time component: timer * fJumpFallTimeMult + fJumpFallTimeBase.
 0x5EFD9C: call    edx
 0x5EFD9E: mov     edi, eax
 0x5EFDA0: test    edi, edi
 0x5EFDA2: jz      short loc_5EFDB8
 0x5EFDA4: mov     ecx, edi; this
-0x5EFDA6: call    MobileObject_GetCharProxy
+0x5EFDA6: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5EFDAB: test    eax, eax
 0x5EFDAD: jz      short loc_5EFDB8
 0x5EFDAF: mov     ecx, edi; this
-0x5EFDB1: call    MobileObject_GetCharProxy
+0x5EFDB1: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5EFDB6: mov     ebx, eax
 0x5EFDB8: fld     dword ptr [ebx+310h]
 0x5EFDBE: mov     eax, [esi]
-0x5EFDC0: fmul    dword ptr ds:0B37488h
+0x5EFDC0: fmul    dword ptr ds:0B37488h; Fall damage skill component uses proxy +0x310 (same scalar as jump/fall skill) * fJumpFallSkillMult + fJumpFallSkillBase.
 0x5EFDC6: mov     edx, [eax+170h]
 0x5EFDCC: mov     ecx, esi
 0x5EFDCE: xor     bl, bl
@@ -240,31 +240,31 @@
 0x5EFDFA: test    al, al
 0x5EFDFC: jz      short loc_5EFE0B
 0x5EFDFE: mov     ecx, ebp; this
-0x5EFE00: call    TESActorBase_CanFly
+0x5EFE00: call    TESActorBase_CanFly; TESActorBase_CanFly: creature base flag 0x20. Actor_FallImpact skips fall damage for can-fly actors; Slowfall/climb discipline should not overwrite natural flying behavior.
 0x5EFE05: mov     bl, al
 0x5EFE07: test    bl, bl
 0x5EFE09: jnz     short loc_5EFE2D
 0x5EFE0B: mov     eax, [esi]
-0x5EFE0D: mov     edx, [eax+380h]
+0x5EFE0D: mov     edx, [eax+380h]; TES4 authoritative: Actor_FallImpact checks Actor vtable +0x380 GetMountedHorse before deciding whether fall damage can apply.
 0x5EFE13: mov     ecx, esi
 0x5EFE15: call    edx
 0x5EFE17: test    eax, eax
 0x5EFE19: jnz     short loc_5EFE2D
 0x5EFE1B: mov     eax, [esi]
-0x5EFE1D: mov     edx, [eax+18Ch]
+0x5EFE1D: mov     edx, [eax+18Ch]; TES4 authoritative: Actor_FallImpact checks TESObjectREFR vtable +0x18C GetSleepState; nonzero sleep state suppresses fall damage.
 0x5EFE23: mov     ecx, esi
 0x5EFE25: call    edx
 0x5EFE27: test    eax, eax
 0x5EFE29: jz      short loc_5EFE2D
 0x5EFE2B: mov     bl, 1
 0x5EFE2D: mov     eax, [esi]
-0x5EFE2F: mov     edx, [eax+380h]
+0x5EFE2F: mov     edx, [eax+380h]; TES4 authoritative: final Actor_FallImpact mounted check. If GetMountedHorse returns non-null or CanFly/sleep skip flag is set, fall damage is skipped.
 0x5EFE35: mov     ecx, esi
 0x5EFE37: call    edx
 0x5EFE39: test    eax, eax
 0x5EFE3B: jnz     loc_5EFF04
 0x5EFE41: test    bl, bl
-0x5EFE43: jnz     loc_5EFF04
+0x5EFE43: jnz     loc_5EFF04; TES4 authoritative: fall damage only proceeds when the actor is not mounted and the can-fly/sleep skip flag is clear.
 0x5EFE49: fldz
 0x5EFE4B: mov     eax, [esi]
 0x5EFE4D: mov     edx, [eax+39Ch]
@@ -273,7 +273,7 @@
 0x5EFE57: push    1
 0x5EFE59: push    1Ah
 0x5EFE5B: mov     ecx, esi
-0x5EFE5D: call    edx
+0x5EFE5D: call    edx; Qualifying fall impact: Acrobatics (0x1A), useValue1, identity scale (0.0).
 0x5EFE5F: fldz
 0x5EFE61: mov     eax, [esi]
 0x5EFE63: mov     edx, [eax+220h]
@@ -290,7 +290,7 @@
 0x5EFE83: call    Actor_PlayPainFX
 0x5EFE88: test    edi, edi
 0x5EFE8A: jz      short loc_5EFF04
-0x5EFE8C: mov     ecx, offset fJumpFallRiderMult
+0x5EFE8C: mov     ecx, (offset flt_B37488+8)
 0x5EFE91: call    GameSetting_GetSafeFloatPointer
 0x5EFE96: fldz
 0x5EFE98: fcom    dword ptr [eax]
@@ -304,9 +304,9 @@
 0x5EFEAD: push    1
 0x5EFEAF: push    1Ah
 0x5EFEB1: mov     ecx, edi
-0x5EFEB3: call    edx
+0x5EFEB3: call    edx; Secondary qualifying fall-impact actor: Acrobatics (0x1A), useValue1, identity scale (0.0).
 0x5EFEB5: mov     esi, [edi]
-0x5EFEB7: mov     ecx, offset fJumpFallRiderMult
+0x5EFEB7: mov     ecx, (offset flt_B37488+8)
 0x5EFEBC: call    GameSetting_GetSafeFloatPointer
 0x5EFEC1: fldz
 0x5EFEC3: push    0

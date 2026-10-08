@@ -1,19 +1,32 @@
 {
-  "callees_count": 29,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_67F690",
+  "chunks": [
+    [
+      "0x67F690",
+      "0x67F82F"
+    ]
+  ],
+  "chunks_sha256": "0e4632c00cc72f6343ad6cfc7e37ba43f6c8bc2a33762f390545ce29e3ad8cac",
+  "comment_regular": "Verified low-level route search seeding: enumerate the per-space reference map for the origin TESForm, filter eligible linked references, compute initial costs from source position and sourceRef, initialize per-node search state/parent, insert candidates into AStarWorldNodeList, and retain the best candidate already in the destination space.",
+  "comment_repeatable": "Verified low-level route search seeding: enumerate the per-space reference map for the origin TESForm, filter eligible linked references, compute initial costs from source position and sourceRef, initialize per-node search state/parent, insert candidates into AStarWorldNodeList, and retain the best candidate already in the destination space.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "TravelPath_SeedSpaceDoorCandidates",
   "end_ea": "0x67F82F",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_67F690",
+  "name": "TravelPath_SeedSpaceDoorCandidates",
   "segment": ".text",
   "sha256": "0e4632c00cc72f6343ad6cfc7e37ba43f6c8bc2a33762f390545ce29e3ad8cac",
   "size": 415,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67F690",
-  "type": "void __cdecl(_DWORD *)",
-  "xrefs_from_count": 150,
+  "total_chunk_size": 415,
+  "type": "void __cdecl(AStarWorldNodeList *openNodes)",
+  "xrefs_from_count": 152,
   "xrefs_to_count": 1
 }

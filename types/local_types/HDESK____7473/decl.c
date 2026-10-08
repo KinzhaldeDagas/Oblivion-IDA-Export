@@ -1,1 +1,4 @@
-HDESK__
+struct HDESK__
+{
+int unused;
+};

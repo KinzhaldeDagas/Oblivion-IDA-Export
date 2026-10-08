@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x882FC0",
-    "line": "push    ebx",
+    "line": "push    ebx; Hair viewer strings call the base PP-lighting exporter, so native Refract/RefractF power/period state is visible on Hair before Hair-specific fields are appended.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x882FC2",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+viewerStrings]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x882FC7",
-    "line": "push    esi",
+    "line": "push    esi; viewerStrings",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x882FCA",
-    "line": "call    sub_7D9890",
+    "line": "call    BSShaderPPLightingProperty_GetViewerStrings; Verified (Oblivion): BSShaderPPLightingProperty_GetViewerStrings exports property+0xE0 as \"spTexEffectData\" and reads the current-fill color at +0x0C..+0x18, current-edge color at +0x1C..+0x28, and edge falloff at +0x54. Viewer labels duplicate R for the third color component; probable blue-channel typo, corroborated by the RGBA grouping and Fallout's NiColorA layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x882FE7",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x882FFB",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x883026",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x88303A",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x883051",
-    "line": "mov     byte ptr [esp+0Ch+arg_0], cl",
+    "line": "mov     byte ptr [esp+0Ch+viewerStrings], cl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x883055",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+viewerStrings]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x883068",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x883085",
-    "line": "lea     edx, [esp+0Ch+arg_0]",
+    "line": "lea     edx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x88309C",
-    "line": "mov     byte ptr [esp+0Ch+arg_0], al",
+    "line": "mov     byte ptr [esp+0Ch+viewerStrings], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8830A0",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x8830BC",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x8830D0",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x8830E7",
-    "line": "mov     byte ptr [esp+0Ch+arg_0], dl",
+    "line": "mov     byte ptr [esp+0Ch+viewerStrings], dl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8830EB",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x883107",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x88311B",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },

@@ -1,1 +1,1 @@
-_ino_t
+typedef unsigned __int16 _ino_t;

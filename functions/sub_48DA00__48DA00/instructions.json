@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x48DA39",
-    "line": "cmp     [esp+2Ch+arg_0], 0",
+    "line": "cmp     [esp+2Ch+entry], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x48DA76",
-    "line": "mov     [esp+2Ch+arg_0], ebp",
+    "line": "mov     [esp+2Ch+entry], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,31 +337,31 @@
   },
   {
     "ea": "0x48DAB7",
-    "line": "mov     ecx, [esp+2Ch+var_18]",
+    "line": "mov     ecx, [esp+2Ch+var_18]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48DABB",
-    "line": "push    0",
+    "line": "push    0; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48DABD",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48DABF",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48DAC0",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x48DB15",
-    "line": "push    eax; a1",
+    "line": "push    eax; formType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48DB16",
-    "line": "call    TESForm_CreateDynamic",
+    "line": "call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x48DB4F",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x48DB55",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48DB56",
-    "line": "call    TESDataHandler_AddForm",
+    "line": "call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,31 +1471,31 @@
   },
   {
     "ea": "0x48DCFE",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48DD00",
-    "line": "push    ecx",
+    "line": "push    ecx; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48DD01",
-    "line": "mov     ecx, [esp+34h+var_14]",
+    "line": "mov     ecx, [esp+34h+var_14]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48DD05",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x48DD0A",
-    "line": "mov     ebp, [esp+2Ch+arg_0]",
+    "line": "mov     ebp, [esp+2Ch+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x48DD13",
-    "line": "mov     [esp+2Ch+arg_0], ebp",
+    "line": "mov     [esp+2Ch+entry], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x48DD25",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+entry], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1663,13 +1663,13 @@
   },
   {
     "ea": "0x48DD70",
-    "line": "push    eax; a1",
+    "line": "push    eax; formType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48DD71",
-    "line": "call    TESForm_CreateDynamic",
+    "line": "call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1783,19 +1783,19 @@
   },
   {
     "ea": "0x48DDAD",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x48DDB3",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48DDB4",
-    "line": "call    TESDataHandler_AddForm",
+    "line": "call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,31 +2581,31 @@
   },
   {
     "ea": "0x48DF48",
-    "line": "mov     ecx, [esp+2Ch+var_14]",
+    "line": "mov     ecx, [esp+2Ch+var_14]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48DF4C",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48DF4E",
-    "line": "push    eax",
+    "line": "push    eax; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48DF4F",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x48DF54",
-    "line": "mov     eax, [esp+2Ch+arg_0]",
+    "line": "mov     eax, [esp+2Ch+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x48DF5D",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+entry], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2686,5 +2686,287 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFD70",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD7B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD7E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD7F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD84",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD85",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD86",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD89",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD8A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD8F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD90",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD91",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD94",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD95",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFD9A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD9B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFD9C",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFD9F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDA0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFDA5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDA6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDA7",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFDAA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDAB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFDB0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDB1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDB2",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFDB5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDB6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFDBB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDBC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDBD",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFDC0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDC1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFDC6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDC7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFDC8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFDCC",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFDCF",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFDD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFDD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFDD9",
+    "line": "mov     eax, offset stru_ADC1FC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFDDE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

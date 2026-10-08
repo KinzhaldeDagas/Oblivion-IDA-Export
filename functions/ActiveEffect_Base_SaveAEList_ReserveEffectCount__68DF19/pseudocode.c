@@ -1,5 +1,5 @@
-int __cdecl ActiveEffect_Base_SaveAEList_::ReserveEffectCount(
-        int a1,
+int __usercall ActiveEffect_Base_SaveAEList_::ReserveEffectCount@<eax>(
+        double a1@<st0>,
         int a2,
         int a3,
         int a4,
@@ -8,12 +8,13 @@ int __cdecl ActiveEffect_Base_SaveAEList_::ReserveEffectCount(
         int a7,
         int a8,
         int a9,
-        int a10)
+        _DWORD *a10,
+        int a11)
 {
-  size_t v11; // [esp-4h] [ebp-10h]
+  unsigned __int8 *bufferCursor; // ebp
   _UNKNOWN *retaddr; // [esp+Ch] [ebp+0h] BYREF
 
-  LODWORD(v11) = 2;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &retaddr, v11);
-  return ActiveEffect_Base_SaveAEList_::ProcessActvEffList(a1, a2, a3, a4, a5, a6, a7, a8, a9);
+  bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x68df30*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &retaddr, 2u); /*0x68df34*/
+  return ActiveEffect_Base_SaveAEList_::ProcessActvEffList(bufferCursor, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 }

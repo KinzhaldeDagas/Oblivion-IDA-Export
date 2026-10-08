@@ -4,7 +4,7 @@
 0x4104C6: mov     esi, ecx
 0x4104C8: cmp     dword ptr [esi], 0
 0x4104CB: push    edi
-0x4104CC: mov     edi, dword ptr [esp+0Ch+ArgList]
+0x4104CC: mov     edi, [esp+0Ch+ArgList]
 0x4104D0: jnz     short loc_4104E8
 0x4104D2: mov     eax, [esp+0Ch+arg_8]
 0x4104D6: push    0
@@ -14,7 +14,7 @@
 0x4104DB: call    sub_410160
 0x4104E0: test    al, al
 0x4104E2: jz      loc_4105D6
-0x4104E8: mov     ecx, dword_B350D8
+0x4104E8: mov     ecx, ds:0B350D8h
 0x4104EE: mov     edx, [ecx+280h]
 0x4104F4: mov     cl, byte ptr [esp+0Ch+arg_C]
 0x4104F8: test    cl, cl

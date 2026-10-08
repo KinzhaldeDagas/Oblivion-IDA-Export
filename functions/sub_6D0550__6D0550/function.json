@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D0550",
+      "0x6D05B6"
+    ]
+  ],
+  "chunks_sha256": "4cefe8ddd5bbb230f2a17bf2af4d5a00826e94b73a7a69a383cc8099967f92f2",
+  "comment_regular": "Loads NiTimeController, then for stream versions 0x0A010068 through 0x0A01006C reads a transitional Boolean and maps it to controller flag 0x20. Other versions rely on the base flag representation/migration.",
+  "comment_repeatable": "Loads NiTimeController, then for stream versions 0x0A010068 through 0x0A01006C reads a transitional Boolean and maps it to controller flag 0x20. Other versions rely on the base flag representation/migration.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D0550",
+  "display_name": "NiInterpController_LoadBinary",
   "end_ea": "0x6D05B6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D0550",
+  "name": "NiInterpController_LoadBinary",
   "segment": ".text",
   "sha256": "4cefe8ddd5bbb230f2a17bf2af4d5a00826e94b73a7a69a383cc8099967f92f2",
   "size": 102,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D0550",
-  "type": "unsigned int __thiscall(int *this, signed int)",
+  "total_chunk_size": 102,
+  "type": "unsigned int __thiscall(NiRenderer *this, signed int)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 4
 }

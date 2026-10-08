@@ -1,10 +1,10 @@
-0x7EE5D0: push    ebx
+0x7EE5D0: push    ebx; BloodOnDeath decode 2026-05-30: shader-property diagnostic dump; no spawn, lifetime, or projection cap is enforced here.
 0x7EE5D1: push    esi
 0x7EE5D2: mov     esi, [esp+8+arg_0]
 0x7EE5D6: push    edi
 0x7EE5D7: push    esi
 0x7EE5D8: mov     edi, ecx
-0x7EE5DA: call    sub_7E28E0
+0x7EE5DA: call    sub_7E28E0; Shader/property diagnostic dumper. Prints pass names via BSShaderProperty_GetRenderPassName; BSSM_FRONDS from this path is diagnostic text only.
 0x7EE5DF: mov     eax, ds:0B4618Ch
 0x7EE5E4: push    eax; ArgList
 0x7EE5E5: call    TESOutput_PrintString
@@ -44,8 +44,8 @@
 0x7EE64C: push    ebx
 0x7EE64D: mov     ecx, esi
 0x7EE64F: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
-0x7EE654: mov     ecx, edi
-0x7EE656: call    sub_7ED5D0
+0x7EE654: mov     ecx, edi; this
+0x7EE656: call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.
 0x7EE65B: push    eax; __int16
 0x7EE65C: push    offset aActiveLights; "active lights"
 0x7EE661: call    TESOutput_PrintLabeledUnsignedShort
@@ -70,7 +70,7 @@
 0x7EE69C: jbe     short loc_7EE6D7
 0x7EE69E: push    eax; int
 0x7EE69F: push    offset aNumberOfDecals; "number of decals"
-0x7EE6A4: call    TESOutput_PrintLabeledUnsignedInt
+0x7EE6A4: call    TESOutput_PrintLabeledUnsignedInt; BloodOnDeath decode: "number of decals" is diagnostic shader-property state, not a trail density cap.
 0x7EE6A9: movzx   ebx, word ptr [esi+0Ah]
 0x7EE6AD: movzx   ecx, word ptr [esi+8]
 0x7EE6B1: add     esp, 8

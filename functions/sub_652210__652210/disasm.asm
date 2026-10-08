@@ -78,10 +78,10 @@
 0x6522D3: push    ecx
 0x6522D4: mov     ecx, ebx
 0x6522D6: call    sub_566B30
-0x6522DB: mov     ecx, [esi+2Ch]
-0x6522DE: push    eax
-0x6522DF: call    sub_4D7E30
-0x6522E4: call    Double_To_SInt32
+0x6522DB: mov     ecx, [esi+2Ch]; this
+0x6522DE: push    eax; pointXYZ
+0x6522DF: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+0x6522E4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6522E9: mov     [esp+20h+arg_0], eax
 0x6522ED: fild    [esp+20h+arg_0]
 0x6522F1: mov     ecx, ebx
@@ -105,16 +105,16 @@
 0x65232C: mov     ecx, esi
 0x65232E: call    eax
 0x652330: mov     ecx, [esi+2Ch]; this
-0x652333: call    GetTeleportExtraData
+0x652333: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x652338: test    eax, eax
 0x65233A: jz      short loc_6523B8
 0x65233C: mov     edx, [edi]
 0x65233E: mov     eax, [edx+174h]
 0x652344: mov     ecx, edi
 0x652346: call    eax
-0x652348: mov     ecx, [esi+2Ch]
+0x652348: mov     ecx, [esi+2Ch]; this
 0x65234B: mov     ebp, eax
-0x65234D: call    sub_4D76F0
+0x65234D: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x652352: fld     dword ptr [eax]
 0x652354: fsub    dword ptr [ebp+0]
 0x652357: fstp    dword ptr [esp+20h+var_C]
@@ -247,7 +247,7 @@
 0x6524EE: cmp     byte ptr [esi+0D0h], 0
 0x6524F5: jz      loc_6526A8
 0x6524FB: mov     ecx, [esi+2Ch]; this
-0x6524FE: call    GetTeleportExtraData
+0x6524FE: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x652503: test    eax, eax
 0x652505: mov     ecx, [esi+2Ch]
 0x652508: jnz     short loc_65255D
@@ -260,7 +260,7 @@
 0x65251B: call    TESObjectREFR_GetWorldSpace
 0x652520: mov     ecx, [esi+2Ch]; this
 0x652523: push    eax
-0x652524: call    TESObjectREFR_GetParentCell
+0x652524: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x652529: mov     ecx, [ebp+0]
 0x65252C: mov     edx, [ebp+4]
 0x65252F: push    eax
@@ -314,7 +314,7 @@
 0x6525B6: call    TESObjectREFR_GetWorldSpace
 0x6525BB: mov     ecx, [esi+2Ch]; this
 0x6525BE: push    eax
-0x6525BF: call    TESObjectREFR_GetParentCell
+0x6525BF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6525C4: mov     ecx, [ebp+0]
 0x6525C7: mov     edx, [ebp+4]
 0x6525CA: push    eax
@@ -360,15 +360,15 @@
 0x65264D: pop     ebx
 0x65264E: add     esp, 10h
 0x652651: retn    8
-0x652654: mov     ecx, [esi+2Ch]
+0x652654: mov     ecx, [esi+2Ch]; this
 0x652657: mov     ebx, [esi]
-0x652659: call    sub_4D76F0
+0x652659: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x65265E: mov     ecx, [esi+2Ch]; this
 0x652661: mov     ebp, eax
 0x652663: call    TESObjectREFR_GetWorldSpace
 0x652668: mov     ecx, [esi+2Ch]; this
 0x65266B: push    eax
-0x65266C: call    TESObjectREFR_GetParentCell
+0x65266C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x652671: mov     ecx, [ebp+0]
 0x652674: mov     edx, [ebp+4]
 0x652677: push    eax
@@ -387,9 +387,9 @@
 0x65269B: cmp     byte ptr [esi+0D0h], 0
 0x6526A2: jnz     loc_652792
 0x6526A8: push    3Ah ; ':'; a1
-0x6526AA: call    TESForm_LookupByFormID
+0x6526AA: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6526AF: add     esp, 4
-0x6526B2: mov     ecx, offset TimeGlobals
+0x6526B2: mov     ecx, 0B332E0h
 0x6526B7: mov     ebx, eax
 0x6526B9: call    TimeGlobals_GetGameHour
 0x6526BE: fstp    [esp+20h+arg_0]
@@ -430,7 +430,7 @@
 0x65273C: call    TESObjectREFR_GetWorldSpace
 0x652741: mov     ecx, [esi+2Ch]; this
 0x652744: push    eax
-0x652745: call    TESObjectREFR_GetParentCell
+0x652745: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65274A: push    eax
 0x65274B: mov     eax, [ebp+0]
 0x65274E: mov     edx, [eax+174h]
@@ -442,7 +442,7 @@
 0x652760: mov     ecx, esi
 0x652762: call    eax
 0x652764: mov     ecx, edi; this
-0x652766: call    Actor__GetProcessLevel
+0x652766: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x65276B: cmp     eax, 1
 0x65276E: jnz     loc_6529EC
 0x652774: mov     ecx, edi
@@ -658,7 +658,7 @@
 0x6529B5: test    eax, eax
 0x6529B7: jz      short loc_6529C2
 0x6529B9: push    eax
-0x6529BA: call    FormHeapFree
+0x6529BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6529BF: add     esp, 4
 0x6529C2: mov     dword ptr [esi+44h], 0
 0x6529C9: mov     dword ptr [esi+2Ch], 0

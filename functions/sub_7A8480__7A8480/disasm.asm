@@ -1,4 +1,4 @@
-0x7A8480: fld     dword ptr ds:0A3D65Ch
+0x7A8480: fld     dword ptr ds:0A3D65Ch; Constructs the embedded 0x1C-byte SIdvWindInfo with leafFactors.x/y initialized to the local default scalar and the remaining five floats zero. CTreeEngine construction subsequently derives leafOscillation and assigns strength.
 0x7A8486: mov     eax, ecx
 0x7A8488: fst     dword ptr [eax]
 0x7A848A: fstp    dword ptr [eax+4]

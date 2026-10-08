@@ -1,1 +1,1 @@
-PCONTEXT
+typedef CONTEXT *PCONTEXT;

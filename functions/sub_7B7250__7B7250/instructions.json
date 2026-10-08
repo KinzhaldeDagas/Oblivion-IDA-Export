@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7B7250",
-    "line": "push    ebx",
+    "line": "push    ebx; [Verified] Static-initialization target called with unk_B430D8 by InitializeRendererShaderStateGlobals. Resets renderer/shader state, clears pass-control bytes +1/+2, sets +3=1, resets shader version to 0, and releases cached renderer objects. [Unknown] The owning C++ class for unk_B430D8 is not identified.",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7B731D",
-    "line": "mov     ds:0B42E85h, bl",
+    "line": "mov     ds:0B42E85h, bl; [Verified] RendererShaderState_ResetGlobals clears OB_ShaderPassControl+1.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7B7356",
-    "line": "mov     ds:0B42E86h, bl",
+    "line": "mov     ds:0B42E86h, bl; [Verified] RendererShaderState_ResetGlobals clears bFullBrightLighting before renderer startup reloads its INI value.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7B736E",
-    "line": "mov     byte ptr ds:0B42E87h, 1",
+    "line": "mov     byte ptr ds:0B42E87h, 1; [Verified] RendererShaderState_ResetGlobals initializes OB_ShaderPassControl+3 to one; the byte's meaning and consumers are Unknown.",
     "mnemonic": "mov",
     "size": 7
   },

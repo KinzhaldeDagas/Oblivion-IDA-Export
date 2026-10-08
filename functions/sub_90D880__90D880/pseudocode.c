@@ -1,5 +1,5 @@
 int __thiscall sub_90D880(_DWORD **this, int a2)
 {
-  (*(void (__thiscall **)(_DWORD, int))(**(this + 2) + 0x14))(*(this + 2), a2);
-  return a2;
+  (*(void (__thiscall **)(_DWORD, int))(**(this + 2) + 0x14))(*(this + 2), a2); /*0x90d88b*/
+  return a2; /*0x90d890*/
 }

@@ -271,19 +271,19 @@
   },
   {
     "ea": "0x7F4803",
-    "line": "push    3",
+    "line": "push    3; preset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4805",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F4807",
-    "line": "call    sub_7715E0",
+    "line": "call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x7F4941",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x7F4945",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F4946",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F4947",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x7F4958",
-    "line": "push    eax; a3",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F4959",
-    "line": "push    edx; a2",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x7F495D",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },

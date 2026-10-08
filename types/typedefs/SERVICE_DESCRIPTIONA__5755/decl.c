@@ -1,1 +1,4 @@
-_SERVICE_DESCRIPTIONA
+struct _SERVICE_DESCRIPTIONA
+{
+LPSTR lpDescription;
+};

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BA2A0",
-    "line": "push    esi",
+    "line": "push    esi; Verified random/default seed: returns 0 when the seed array count at +0x52 is zero; otherwise returns seedValues[Game_RandomLargeInteger(0) % count]. TESObjectREFR_GetTreeSeed reaches this when no per-reference seed extra exists.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4BA2B3",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },

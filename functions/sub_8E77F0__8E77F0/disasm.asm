@@ -19,7 +19,6 @@
 0x8E7817: cmp     esi, edi
 0x8E7819: jnb     short loc_8E7842
 0x8E781B: jmp     short loc_8E7820
-0x8E781D: align 10h
 0x8E7820: mov     edx, [esp+10h+arg_C]
 0x8E7824: mov     eax, [esp+10h+arg_8]
 0x8E7828: mov     ecx, [esp+10h+arg_4]

@@ -3,24 +3,24 @@
 0x60D1F4: push    esi
 0x60D1F5: mov     esi, ecx
 0x60D1F7: mov     ecx, ds:0B33B00h
-0x60D1FD: mov     [esp+18h+var_4], 0
+0x60D1FD: mov     [esp+18h+source], 0
 0x60D205: mov     ebp, [ecx+14h]
 0x60D208: push    edi
 0x60D209: mov     [esp+1Ch+var_C], 0
-0x60D211: call    sub_45A170
+0x60D211: call    TESSaveLoadGame_UseSaveGameBlocks
 0x60D216: test    al, al
 0x60D218: jz      short loc_60D24D
-0x60D21A: mov     ecx, ds:0B33B00h
-0x60D220: push    4; Size
+0x60D21A: mov     ecx, ds:0B33B00h; self
+0x60D220: push    4; byteCount
 0x60D222: lea     eax, [esp+20h+Src]
-0x60D226: push    eax; Src
+0x60D226: push    eax; source
 0x60D227: mov     [esp+24h+Src], 4B4F4C42h
 0x60D22F: call    SaveLoad_SaveData
-0x60D234: mov     ecx, ds:0B33B00h
+0x60D234: mov     ecx, ds:0B33B00h; self
 0x60D23A: mov     edx, [ecx+14h]
-0x60D23D: push    2; Size
-0x60D23F: lea     eax, [esp+20h+var_4]
-0x60D243: push    eax; Src
+0x60D23D: push    2; byteCount
+0x60D23F: lea     eax, [esp+20h+source]
+0x60D243: push    eax; source
 0x60D244: mov     [esp+24h+var_C], edx
 0x60D248: call    SaveLoad_SaveData
 0x60D24D: mov     eax, [esi+8]
@@ -29,15 +29,15 @@
 0x60D25A: jz      short loc_60D263
 0x60D25C: mov     ecx, [eax+0Ch]
 0x60D25F: mov     [esp+1Ch+var_10], ecx
-0x60D263: mov     ecx, ds:0B33B00h
-0x60D269: push    4
+0x60D263: mov     ecx, ds:0B33B00h; self
+0x60D269: push    4; byteCount
 0x60D26B: lea     edx, [esp+20h+var_10]
-0x60D26F: push    edx
-0x60D270: call    SaveLoad_SaveFormID
+0x60D26F: push    edx; source
+0x60D270: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
 0x60D275: mov     eax, [esp+1Ch+var_10]
 0x60D279: test    eax, eax
 0x60D27B: jz      short loc_60D2DB
-0x60D27D: mov     edi, [esp+1Ch+arg_0]
+0x60D27D: mov     edi, [esp+1Ch+changeMask]
 0x60D281: test    edi, 20000h
 0x60D287: jz      short loc_60D2CA
 0x60D289: mov     ecx, ds:0B33A98h
@@ -47,11 +47,11 @@
 0x60D297: jz      short loc_60D2CA
 0x60D299: mov     eax, [esi+8]
 0x60D29C: mov     cl, [eax+20h]
-0x60D29F: push    1; Size
-0x60D2A1: lea     edx, [esp+20h+arg_0]
-0x60D2A5: mov     byte ptr [esp+20h+arg_0], cl
-0x60D2A9: mov     ecx, ds:0B33B00h
-0x60D2AF: push    edx; Src
+0x60D29F: push    1; byteCount
+0x60D2A1: lea     edx, [esp+20h+changeMask]
+0x60D2A5: mov     byte ptr [esp+20h+changeMask], cl
+0x60D2A9: mov     ecx, ds:0B33B00h; self
+0x60D2AF: push    edx; source
 0x60D2B0: call    SaveLoad_SaveData
 0x60D2B5: test    edi, 10000h
 0x60D2BB: jnz     short loc_60D2CA
@@ -59,20 +59,20 @@
 0x60D2C0: mov     eax, [ecx]
 0x60D2C2: mov     edx, [eax+0E0h]
 0x60D2C8: call    edx
-0x60D2CA: mov     ecx, ds:0B33B00h
-0x60D2D0: push    4; Size
+0x60D2CA: mov     ecx, ds:0B33B00h; self
+0x60D2D0: push    4; byteCount
 0x60D2D2: lea     eax, [esi+4]
-0x60D2D5: push    eax; Src
+0x60D2D5: push    eax; source
 0x60D2D6: call    SaveLoad_SaveData
-0x60D2DB: push    4; Size
+0x60D2DB: push    4; byteCount
 0x60D2DD: lea     ecx, [esi+0Ch]
-0x60D2E0: push    ecx; Src
-0x60D2E1: mov     ecx, ds:0B33B00h
+0x60D2E0: push    ecx; source
+0x60D2E1: mov     ecx, ds:0B33B00h; self
 0x60D2E7: call    SaveLoad_SaveData
-0x60D2EC: mov     ecx, ds:0B33B00h
-0x60D2F2: push    4; Size
+0x60D2EC: mov     ecx, ds:0B33B00h; self
+0x60D2F2: push    4; byteCount
 0x60D2F4: add     esi, 10h
-0x60D2F7: push    esi; Src
+0x60D2F7: push    esi; source
 0x60D2F8: call    SaveLoad_SaveData
 0x60D2FD: cmp     byte ptr ds:0B05BACh, 0
 0x60D304: jz      short loc_60D36D
@@ -83,7 +83,7 @@
 0x60D316: jz      short loc_60D353
 0x60D318: mov     edx, [edi]
 0x60D31A: push    edx; a1
-0x60D31B: call    TESForm_LookupByFormID
+0x60D31B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x60D320: mov     ecx, [edi+5]
 0x60D323: mov     edx, [eax]
 0x60D325: add     esp, 4
@@ -110,7 +110,7 @@
 0x60D365: call    sub_40FEC0
 0x60D36A: add     esp, 10h
 0x60D36D: mov     ecx, ds:0B33B00h
-0x60D373: call    sub_45A170
+0x60D373: call    TESSaveLoadGame_UseSaveGameBlocks
 0x60D378: test    al, al
 0x60D37A: jz      short loc_60D3AF
 0x60D37C: mov     edx, ds:0B33B00h

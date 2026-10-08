@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x689C60",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified route normalization scans teleport references for an earlier route reference in the linked door's spatial container; when one is found, it removes nodes from the list head through the current node. Probable intent is to prune a redundant teleport loop; exact loop policy remains Unknown.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -66,12 +66,6 @@
     "size": 2
   },
   {
-    "ea": "0x689C7A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x689C80",
     "line": "mov     edi, [esp+1Ch+var_8]",
     "mnemonic": "mov",
@@ -103,7 +97,7 @@
   },
   {
     "ea": "0x689C93",
-    "line": "mov     ecx, [ebx]",
+    "line": "mov     ecx, [ebx]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -115,7 +109,7 @@
   },
   {
     "ea": "0x689C99",
-    "line": "call    sub_68B0F0",
+    "line": "call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +133,7 @@
   },
   {
     "ea": "0x689CA4",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,13 +157,13 @@
   },
   {
     "ea": "0x689CAF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689CB1",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,25 +181,25 @@
   },
   {
     "ea": "0x689CBA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689CBC",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x689CC1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689CC3",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -264,12 +258,6 @@
     "size": 2
   },
   {
-    "ea": "0x689CDD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x689CE0",
     "line": "cmp     dword ptr [esi+4], 0",
     "mnemonic": "cmp",
@@ -307,13 +295,13 @@
   },
   {
     "ea": "0x689CEF",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689CF1",
-    "line": "call    sub_68B0F0",
+    "line": "call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,13 +319,13 @@
   },
   {
     "ea": "0x689CFA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689CFC",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,13 +481,13 @@
   },
   {
     "ea": "0x689D3E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689D40",
-    "line": "call    sub_68B1C0",
+    "line": "call    TravelPathNode_FreeOwnedPosition; Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +499,7 @@
   },
   {
     "ea": "0x689D46",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +559,7 @@
   },
   {
     "ea": "0x689D60",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,13 +673,13 @@
   },
   {
     "ea": "0x689D94",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689D96",
-    "line": "call    sub_68B1C0",
+    "line": "call    TravelPathNode_FreeOwnedPosition; Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +691,7 @@
   },
   {
     "ea": "0x689D9C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

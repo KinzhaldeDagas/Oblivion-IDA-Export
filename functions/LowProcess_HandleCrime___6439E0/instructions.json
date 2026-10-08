@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6439E0",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; RadiantAI: LowProcess crime/acquire response candidate. Calls service filtering, acquire formulas, and shouldActorFight.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x643A17",
-    "line": "mov     [esp+24h+var_C], ecx",
+    "line": "mov     [esp+24h+form], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x643A1B",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x643A22",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x643A37",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x643A3B",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x643A58",
-    "line": "mov     ecx, [esp+24h+var_C]",
+    "line": "mov     ecx, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x643A5C",
-    "line": "push    ecx",
+    "line": "push    ecx; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x643A65",
-    "line": "call    sub_470520",
+    "line": "call    TESForm_GetValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x643A9F",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x643AB3",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x643AC6",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x643AF1",
-    "line": "mov     ecx, [esp+24h+var_C]",
+    "line": "mov     ecx, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x643B30",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,25 +769,25 @@
   },
   {
     "ea": "0x643B61",
-    "line": "push    1Fh",
+    "line": "push    1Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x643B63",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x643B65",
-    "line": "call    Actor_GetLuckModifiedBaseAV",
+    "line": "call    Actor_GetLuckModifiedBaseAV; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x643B6A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x643B70",
-    "line": "call    Calc_AIAquireForStealing?",
+    "line": "call    Calc_AIAquireForStealing?; RadiantAI 2026-07-12: acquire steal score. Callers pass luck-modified Sneak as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=0, mult=-1 => score = luckModifiedSneak - responsibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,25 +919,25 @@
   },
   {
     "ea": "0x643BB0",
-    "line": "push    1Fh",
+    "line": "push    1Fh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x643BB2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x643BB4",
-    "line": "call    Actor_GetLuckModifiedBaseAV",
+    "line": "call    Actor_GetLuckModifiedBaseAV; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x643BB9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x643BBF",
-    "line": "call    Calc_AIAquireForPickpocketing?",
+    "line": "call    Calc_AIAquireForPickpocketing?; RadiantAI 2026-07-12: acquire pickpocket score. Callers pass luck-modified Sneak as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=0, mult=-1 => score = luckModifiedSneak - responsibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x643C44",
-    "line": "call    sub_546640",
+    "line": "call    sub_546640; RadiantAI 2026-07-12: acquire kill score. Callers pass shouldActorFight result as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=50, mult=-1 => score = fightScore + 50 - responsibility.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x643C49",
-    "line": "mov     ebp, [esp+2Ch+var_C]",
+    "line": "mov     ebp, [esp+2Ch+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x643C9D",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x643CA1",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x643CD8",
-    "line": "lea     ecx, [esp+24h+var_C]",
+    "line": "lea     ecx, [esp+24h+form]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x643CF3",
-    "line": "mov     [esp+38h+var_C], 0",
+    "line": "mov     [esp+38h+form], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x643D0A",
-    "line": "lea     eax, [esp+24h+var_C]",
+    "line": "lea     eax, [esp+24h+form]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1639,13 +1639,13 @@
   },
   {
     "ea": "0x643D21",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x643D23",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x643DD7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x643E07",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

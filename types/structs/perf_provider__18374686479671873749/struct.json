@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "perf_provider",
+  "definition": "struct perf_provider\n{\nHMODULE perflib __offset(OFF64|AUTO);\nWCHAR_0 linkage[260];\nWCHAR_0 objects[260];\nPM_OPEN_PROC *pOpen __offset(OFF64|AUTO);\nPM_CLOSE_PROC *pClose __offset(OFF64|AUTO);\nPM_COLLECT_PROC *pCollect __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671873749,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "perflib",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HMODULE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "linkage",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 520
+      "size": 520,
+      "type": "WCHAR_0[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "objects",
       "offset": 524,
-      "offset_hex": "0x20c",
-      "size": 520
+      "offset_hex": "0x20C",
+      "size": 520,
+      "type": "WCHAR_0[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pOpen",
       "offset": 1044,
       "offset_hex": "0x414",
-      "size": 4
+      "size": 4,
+      "type": "PM_OPEN_PROC *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pClose",
       "offset": 1048,
       "offset_hex": "0x418",
-      "size": 4
+      "size": 4,
+      "type": "PM_CLOSE_PROC *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCollect",
       "offset": 1052,
-      "offset_hex": "0x41c",
-      "size": 4
+      "offset_hex": "0x41C",
+      "size": 4,
+      "type": "PM_COLLECT_PROC *"
     }
   ],
   "name": "perf_provider",
+  "ordinal": 8390,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1056
 }

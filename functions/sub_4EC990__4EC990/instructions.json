@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EC990",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified terrain ray query: uses NiPick against terrainLODNode with a vertical ray from worldPosition.z + 1,000,000 toward -Z. It returns the selected record's hit Z at +0x10 and copies a separate 3-float vector at +0x28..+0x30; the latter's meaning remains Unknown.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4EC9C3",
-    "line": "mov     eax, [esp+70h+arg_0]",
+    "line": "mov     eax, [esp+70h+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4EC9D7",
-    "line": "fadd    qword ptr ds:0A47CA8h",
+    "line": "fadd    qword ptr ds:0A47CA8h; Verified terrain pick ray starts at the requested world position with kTerrainLODQuadRayStartZOffset (1,000,000) added to Z.",
     "mnemonic": "fadd",
     "size": 6
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x4ECA15",
-    "line": "mov     [esp+70h+var_40], eax",
+    "line": "mov     [esp+70h+var_40], eax; Verified terrain pick ray direction is (0,0,-1), using kTerrainLODQuadRayDirectionZ.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ECA19",
-    "line": "call    sub_959BC0",
+    "line": "call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4ECA82",
-    "line": "call    sub_959D60",
+    "line": "call    NiPick_ExecuteAndSort; Verified terrain query calls NiPick_ExecuteAndSort; the selected nearest record supplies intersectionPoint.z and its +0x28 auxiliary vector. For geometry records that vector is the normalized surface normal; bounds-only fallback records do not explicitly populate it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x4ECA98",
-    "line": "mov     ecx, [esp+70h+arg_4]",
+    "line": "mov     ecx, [esp+70h+hitMetadataOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ECA9C",
-    "line": "fstp    dword ptr [ecx]",
+    "line": "fstp    dword ptr [ecx]; Verified output is the selected NiPick record's intersection Z (record +0x10).",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x4ECAA1",
-    "line": "mov     ecx, [esp+70h+arg_8]",
+    "line": "mov     ecx, [esp+70h+terrainHitPositionOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4ECAA5",
-    "line": "mov     [ecx], edx",
+    "line": "mov     [ecx], edx; Probable for terrain NIF geometry hits: copies NiPickRecord.surfaceNormal_028. The scene-object fallback does not explicitly set this field, so keep the call-site interpretation Probable rather than universal.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x4ECAC1",
-    "line": "call    sub_959EC0",
+    "line": "call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -628,5 +628,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B64A0",
+    "line": "lea     ecx, [ebp-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B64A3",
+    "line": "jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B64A8",
+    "line": "mov     edx, [esp+hitMetadataOut]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B64AC",
+    "line": "lea     eax, [edx-60h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B64AF",
+    "line": "mov     ecx, [edx-64h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B64B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B64B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B64B9",
+    "line": "mov     eax, offset stru_AE1394",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B64BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

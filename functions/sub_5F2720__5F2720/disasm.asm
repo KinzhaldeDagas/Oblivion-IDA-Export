@@ -1,4 +1,4 @@
-0x5F2720: sub     esp, 0Ch
+0x5F2720: sub     esp, 0Ch; Fast-travel loop player AV update: fatigue regeneration over travel time.
 0x5F2723: fldz
 0x5F2725: push    esi
 0x5F2726: mov     esi, ecx
@@ -26,7 +26,7 @@
 0x5F2766: fstp    [esp+10h+var_8]
 0x5F276A: fld     [esp+10h+var_8]
 0x5F276E: fld     st
-0x5F2770: call    Double_To_SInt32
+0x5F2770: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F2775: mov     [esp+10h+var_8], eax
 0x5F2779: fild    [esp+10h+var_8]
 0x5F277D: fstp    [esp+10h+var_8]

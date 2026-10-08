@@ -1,1 +1,1 @@
-HUDMainMenu
+struct HUDMainMenu;

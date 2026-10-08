@@ -1,1 +1,3 @@
-Node
+struct Node
+{
+};

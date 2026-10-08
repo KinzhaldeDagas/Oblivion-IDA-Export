@@ -1,19 +1,36 @@
 {
-  "callees_count": 62,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 38,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_60C940",
+  "chunks": [
+    [
+      "0x60C940",
+      "0x60CD69"
+    ],
+    [
+      "0x9C3040",
+      "0x9C3086"
+    ]
+  ],
+  "chunks_sha256": "d609d863993009156eec481ab7703a78f1f93b84619f0b68a46eb590483f20a5",
+  "comment_regular": "ArrowProjectile shot constructor. ammoEntry is mandatory and unconditionally dereferenced; weaponEntry is optional internally although Actor_ProcessAction requires both. Native damage combines WEAP+AMMO contributions. Poison consumption and enchantment-charge reduction occur before process/node/cell construction with no rollback. On completion it has cell-attached the projectile and incremented g_liveArrowProjectileCount, returns placement this, and still has not performed inventory depletion or ActorProcessManager insertion. External ThrowingWeapon contrast after this native result: supplying source-WEAP damage in both proxy AMMO and real WEAP entries creates a double contribution, and destroying the projectile does not restore consumed poison or charge.",
+  "comment_repeatable": "ArrowProjectile shot constructor. ammoEntry is mandatory and unconditionally dereferenced; weaponEntry is optional internally although Actor_ProcessAction requires both. Native damage combines WEAP+AMMO contributions. Poison consumption and enchantment-charge reduction occur before process/node/cell construction with no rollback. On completion it has cell-attached the projectile and incremented g_liveArrowProjectileCount, returns placement this, and still has not performed inventory depletion or ActorProcessManager insertion. External ThrowingWeapon contrast after this native result: supplying source-WEAP damage in both proxy AMMO and real WEAP entries creates a double contribution, and destroying the projectile does not restore consumed poison or charge.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "ArrowProjectile_ConstructFromShot",
   "end_ea": "0x60CD69",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_60C940",
+  "name": "ArrowProjectile_ConstructFromShot",
   "segment": ".text",
   "sha256": "80bdfe8d8b7e734c474db925ab0ba1300fa57627498b2a69b8efb6b5acae6b94",
   "size": 1065,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60C940",
-  "type": "ArrowProjectile *__thiscall(ArrowProjectile *this, TESChildCELL *arg0, int, int, int, float, float, float, float, ExtraDataList ***)",
-  "xrefs_from_count": 418,
+  "total_chunk_size": 1135,
+  "type": "ArrowProjectile *__thiscall(ArrowProjectile *this, Actor *shooter, float originX, float originY, float originZ, float yawZ, float pitchX, float attackStrength, EntryData *ammoEntry, EntryData *weaponEntry)",
+  "xrefs_from_count": 434,
   "xrefs_to_count": 1
 }

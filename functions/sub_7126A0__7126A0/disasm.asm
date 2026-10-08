@@ -8,7 +8,6 @@
 0x7126B8: jbe     short loc_71270A
 0x7126BA: push    esi
 0x7126BB: jmp     short loc_7126C0
-0x7126BD: align 10h
 0x7126C0: mov     eax, [edi+1F0h]
 0x7126C6: mov     esi, [eax+ebx*4]
 0x7126C9: test    esi, esi
@@ -20,7 +19,7 @@
 0x7126D6: test    eax, eax
 0x7126D8: jz      short loc_7126FE
 0x7126DA: lea     ebx, [ebx+0]
-0x7126E0: cmp     eax, offset dword_B3FA80
+0x7126E0: cmp     eax, offset stru_B3FA80
 0x7126E5: jz      short loc_7126F0
 0x7126E7: mov     eax, [eax+4]
 0x7126EA: test    eax, eax

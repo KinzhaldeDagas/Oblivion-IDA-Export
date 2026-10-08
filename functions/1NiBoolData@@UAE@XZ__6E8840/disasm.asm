@@ -19,13 +19,13 @@
 0x6E887C: jz      short loc_6E889B
 0x6E887E: mov     ecx, [eax-4]
 0x6E8881: lea     edi, [eax-4]
-0x6E8884: push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; void (__thiscall *)(void *)
+0x6E8884: push    offset Shared_NoOpVirtual_60D0A0; void (__thiscall *)(void *)
 0x6E8889: push    ecx; int
 0x6E888A: push    8; unsigned int
 0x6E888C: push    eax; void *
 0x6E888D: call    $LN21
 0x6E8892: push    edi
-0x6E8893: call    FormHeapFree
+0x6E8893: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E8898: add     esp, 4
 0x6E889B: mov     ecx, esi
 0x6E889D: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -37,3 +37,12 @@
 0x6E88B7: pop     esi
 0x6E88B8: add     esp, 10h
 0x6E88BB: retn
+0x9CA4B0: mov     ecx, [ebp-10h]
+0x9CA4B3: jmp     NiRefObject_destr
+0x9CA4B8: mov     edx, [esp+arg_4]
+0x9CA4BC: lea     eax, [edx-0Ch]
+0x9CA4BF: mov     ecx, [edx-10h]
+0x9CA4C2: xor     ecx, eax
+0x9CA4C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA4C9: mov     eax, offset stru_AF2BA8
+0x9CA4CE: jmp     ___CxxFrameHandler3

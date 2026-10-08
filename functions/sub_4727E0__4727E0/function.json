@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x4727E0",
+      "0x4728BD"
+    ]
+  ],
+  "chunks_sha256": "b7ebf9b8361fe74faacf79ba1695de1ec537a1ec7bb7cd38283e0f10d5045a92",
+  "comment_regular": "Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with \"m:\" and compared with suffix 'l' to choose left/right attacks.",
+  "comment_repeatable": "Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with \"m:\" and compared with suffix 'l' to choose left/right attacks.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4727E0",
+  "display_name": "ActorAnimData_GetNextTextKeySuffixChar",
   "end_ea": "0x4728BD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4727E0",
+  "name": "ActorAnimData_GetNextTextKeySuffixChar",
   "segment": ".text",
   "sha256": "b7ebf9b8361fe74faacf79ba1695de1ec537a1ec7bb7cd38283e0f10d5045a92",
   "size": 221,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4727E0",
+  "total_chunk_size": 221,
   "type": "char __userpurge@<al>(_DWORD *this@<ecx>, int@<edi>, size_t MaxCount, float *Str2, int)",
   "xrefs_from_count": 96,
   "xrefs_to_count": 4

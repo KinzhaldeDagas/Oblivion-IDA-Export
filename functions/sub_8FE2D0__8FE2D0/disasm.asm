@@ -109,7 +109,7 @@
 0x8FE466: push    edx
 0x8FE467: push    ecx
 0x8FE468: lea     ecx, [esp+1E8h+var_1B0]
-0x8FE46C: call    sub_88FE00
+0x8FE46C: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8FE471: movaps  xmm1, [esp+1E0h+var_190]
 0x8FE476: movaps  xmm0, [esp+1E0h+var_1B0]
 0x8FE47B: mov     al, [esp+edi+1E0h+var_1B8]
@@ -510,7 +510,6 @@
 0x8FE9A5: movaps  xmm4, xmmword ptr [eax+30h]
 0x8FE9A9: mov     ecx, ebx
 0x8FE9AB: jmp     short loc_8FE9B0
-0x8FE9AD: align 10h
 0x8FE9B0: movaps  xmm0, xmmword ptr [ecx]
 0x8FE9B3: movaps  xmm5, xmm0
 0x8FE9B6: shufps  xmm5, xmm0, 0AAh ; 'ª'
@@ -767,7 +766,6 @@
 0x8FED0F: movaps  xmm3, xmmword ptr [eax+20h]
 0x8FED13: movaps  xmm4, xmmword ptr [eax+30h]
 0x8FED17: jmp     short loc_8FED20
-0x8FED19: align 10h
 0x8FED20: movaps  xmm0, xmmword ptr [ecx]
 0x8FED23: movaps  xmm5, xmm0
 0x8FED26: shufps  xmm5, xmm0, 0AAh ; 'ª'

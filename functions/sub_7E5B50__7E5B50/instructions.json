@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7E5B76",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7E5B9F",
-    "line": "mov     [esp+24h+arg_0], esi",
+    "line": "mov     [esp+24h+element], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x7E5BA9",
-    "line": "lea     eax, [esp+20h+arg_0]",
+    "line": "lea     eax, [esp+20h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7E5BAD",
-    "line": "push    eax",
+    "line": "push    eax; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E5BAE",
-    "line": "lea     ecx, [ebp+110h]",
+    "line": "lea     ecx, [ebp+110h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7E5BBC",
-    "line": "call    NiTArray_AddItem",
+    "line": "call    NiTObjectArray_AddFirstEmpty",
     "mnemonic": "call",
     "size": 5
   },
@@ -442,5 +442,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CF800",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF803",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF808",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CF80C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF80F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF812",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CF814",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF819",
+    "line": "mov     eax, offset stru_AF8414",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF81E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

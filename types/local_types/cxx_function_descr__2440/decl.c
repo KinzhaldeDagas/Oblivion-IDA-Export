@@ -1,1 +1,1 @@
-cxx_function_descr
+typedef __cxx_function_descr cxx_function_descr;

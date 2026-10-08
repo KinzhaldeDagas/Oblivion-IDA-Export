@@ -182,7 +182,7 @@
 0x4A416F: jmp     short loc_4A4176
 0x4A4171: mov     eax, [esp+24h+var_14]
 0x4A4175: push    eax
-0x4A4176: call    FormHeapFree
+0x4A4176: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A417B: add     esp, 4
 0x4A417E: mov     ecx, [esp+24h+var_C]
 0x4A4182: mov     large fs:0, ecx
@@ -192,3 +192,12 @@
 0x4A418C: pop     ebx
 0x4A418D: add     esp, 14h
 0x4A4190: retn    8
+0x9B7140: lea     ecx, [ebp-14h]; void *
+0x9B7143: jmp     BSStringT_Clear
+0x9B7148: mov     edx, [esp+arg_4]
+0x9B714C: lea     eax, [edx-14h]
+0x9B714F: mov     ecx, [edx-18h]
+0x9B7152: xor     ecx, eax
+0x9B7154: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7159: mov     eax, offset stru_AE1DB4
+0x9B715E: jmp     ___CxxFrameHandler3

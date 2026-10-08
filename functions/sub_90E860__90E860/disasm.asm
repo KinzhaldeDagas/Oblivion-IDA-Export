@@ -300,7 +300,6 @@
 0x90EC23: jle     short loc_90EC9C
 0x90EC25: xor     ebp, ebp
 0x90EC27: jmp     short loc_90EC30
-0x90EC29: align 10h
 0x90EC30: mov     eax, [edi]
 0x90EC32: mov     eax, [eax+ebp+4]
 0x90EC36: mov     ecx, [esp+0A0h+var_78]

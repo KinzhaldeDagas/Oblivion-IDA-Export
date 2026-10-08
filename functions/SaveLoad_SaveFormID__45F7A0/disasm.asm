@@ -1,4 +1,4 @@
-0x45F7A0: mov     eax, ds:0B33398h
+0x45F7A0: mov     eax, ds:0B33398h; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
 0x45F7A5: push    ebx
 0x45F7A6: push    esi
 0x45F7A7: push    edi
@@ -19,19 +19,19 @@
 0x45F7D0: mov     eax, [edx+18h]
 0x45F7D3: push    offset aErrorTessavelo; "Error: TESSaveLoadGame::SaveGameData() "...
 0x45F7D8: call    eax
-0x45F7DA: mov     ebx, [esp+0Ch+arg_4]
+0x45F7DA: mov     ebx, [esp+0Ch+byteCount]
 0x45F7DE: shr     ebx, 2
 0x45F7E1: mov     edi, 0
 0x45F7E6: jz      short loc_45F819
 0x45F7E8: push    ebp
-0x45F7E9: mov     ebp, [esp+10h+arg_0]
+0x45F7E9: mov     ebp, [esp+10h+source]
 0x45F7ED: lea     ecx, [ecx+0]
 0x45F7F0: cmp     byte ptr [esi+7Dh], 0
 0x45F7F4: jz      short loc_45F804
 0x45F7F6: mov     ecx, [ebp+edi*4+0]
-0x45F7FA: push    ecx
-0x45F7FB: mov     ecx, esi
-0x45F7FD: call    SaveLoad_IRefToFormID?
+0x45F7FA: push    ecx; formID
+0x45F7FB: mov     ecx, esi; self
+0x45F7FD: call    SaveLoad_FormIDToIRef; MEF PERF 2026-09-08: PERF-3 concrete producer: SaveLoad_SaveFormID loops over byteLength>>2 input DWORDs and, when owner+7Dh enables IRef encoding, calls45E0D0 for each. Converted index is written to the save buffer and cursor advances4; lookup ordering is serialized behavior.
 0x45F802: jmp     short loc_45F808
 0x45F804: mov     eax, [ebp+edi*4+0]
 0x45F808: mov     edx, [esi+14h]

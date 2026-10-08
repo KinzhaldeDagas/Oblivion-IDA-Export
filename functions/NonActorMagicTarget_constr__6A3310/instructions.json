@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A3310",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified cross-build layout divergence: Fallout NonActorMagicTarget has MagicTarget size 16 and total size 40; constructor places parent ref at +0x1C and BSSimpleList header at +0x20. Oblivion MagicTarget is 8 bytes and NonActorMagicTarget is 32 bytes, with parent at +0x14 and ActiveEffectList header at +0x18. Fallout's extra IsInvulnerable vtable slot is absent in Oblivion; do not transfer its later vtable offsets or data offsets.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6A334C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6A3357",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, [esp+20h+parentReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6A3367",
-    "line": "mov     [esi+18h], ebx",
+    "line": "mov     [esi+18h], ebx; Verified active-effect list header is the two-pointer pair at outer-object +0x18/+0x1C. Slot +8 returns its address; ActiveEffect_Base_LinkAEList traverses each node as {ActiveEffect *item, node *next}. `BSSimpleList<ActiveEffect *>` is Probable by exact Fallout homolog/type metadata; Oblivion-side layout and traversal are directly established.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x6A336D",
-    "line": "mov     [esi+14h], eax",
+    "line": "mov     [esi+14h], eax; Verified NonActorMagicTarget parent TESObjectREFR pointer is stored at outer-object +0x14; slot +4 returns it and the setter writes the same offset.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -226,5 +226,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C60D0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C60D3",
+    "line": "jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C60D8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C60DC",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C60DF",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C60E2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C60E4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C60E9",
+    "line": "mov     eax, offset stru_AEE6DC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C60EE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

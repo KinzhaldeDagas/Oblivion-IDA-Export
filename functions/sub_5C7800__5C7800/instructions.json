@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5C781D",
-    "line": "push    eax",
+    "line": "push    eax; state",
     "mnemonic": "push",
     "size": 1
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x5C78A4",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C78A9",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x5C78BC",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C78C1",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5C78CA",
-    "line": "lea     edx, [esp+21Ch+var_190]",
+    "line": "lea     edx, [esp+21Ch+outDelta]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x5C78EB",
-    "line": "fstp    [esp+210h+var_210]; float",
+    "line": "fstp    [esp+210h+value]; maximumRms",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C78EE",
-    "line": "push    0; char",
+    "line": "push    0; specialSecondBankMode",
     "mnemonic": "push",
     "size": 2
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x5C78F4",
-    "line": "push    eax; int",
+    "line": "push    eax; outParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C78F5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5C78FF",
-    "line": "call    sub_521A10",
+    "line": "call    TESNPC_GetActiveFaceGenDeltaParameters; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7904",
-    "line": "push    eax; int",
+    "line": "push    eax; delta",
     "mnemonic": "push",
     "size": 1
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x5C790B",
-    "line": "push    edi; int",
+    "line": "push    edi; base",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C790C",
-    "line": "call    sub_552990",
+    "line": "call    FaceGenHeadParameters_Combine; Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x5C7913",
-    "line": "push    1",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x5C791B",
-    "line": "push    0",
+    "line": "push    0; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C791D",
-    "line": "push    ecx",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5C7922",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x5C7976",
-    "line": "fstp    [esp+210h+var_210]; float",
+    "line": "fstp    [esp+210h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C7979",
-    "line": "push    1; int",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -673,25 +673,25 @@
   },
   {
     "ea": "0x5C797F",
-    "line": "push    0; int",
+    "line": "push    0; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C7981",
-    "line": "push    edx; int",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7982",
-    "line": "call    sub_555A00",
+    "line": "call    FaceGenHeadParameters_SetControlValue; Set one fan-0 control while preserving its paired control. matrixChannel 0 updates matrix 0; matrixChannel 1 updates matrix 2 through the authored FanControls bases.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7987",
-    "line": "push    1",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -703,19 +703,19 @@
   },
   {
     "ea": "0x5C798D",
-    "line": "push    1",
+    "line": "push    1; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C798F",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7990",
-    "line": "call    BSFaceGen_GetAge",
+    "line": "call    FaceGenHeadParameters_GetControlValue; Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,13 +733,13 @@
   },
   {
     "ea": "0x5C799C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C799E",
-    "line": "call    sub_522230",
+    "line": "call    TESNPC_GetSexMorphBase; Returns the stock sex-morph base endpoint: +2.0 for female TESNPCs and -2.0 for male TESNPCs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,13 +913,13 @@
   },
   {
     "ea": "0x5C79F6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C79F8",
-    "line": "call    sub_522230",
+    "line": "call    TESNPC_GetSexMorphBase; Returns the stock sex-morph base endpoint: +2.0 for female TESNPCs and -2.0 for male TESNPCs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,49 +955,49 @@
   },
   {
     "ea": "0x5C7A0E",
-    "line": "fstp    [esp+210h+var_210]; float",
+    "line": "fstp    [esp+210h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C7A11",
-    "line": "push    1; int",
+    "line": "push    1; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C7A13",
-    "line": "push    1; int",
+    "line": "push    1; controlIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C7A15",
-    "line": "push    ecx; int",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A16",
-    "line": "call    sub_555A00",
+    "line": "call    FaceGenHeadParameters_SetControlValue; Set one fan-0 control while preserving its paired control. matrixChannel 0 updates matrix 0; matrixChannel 1 updates matrix 2 through the authored FanControls bases.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7A1B",
-    "line": "lea     edx, [esp+21Ch+var_190]",
+    "line": "lea     edx, [esp+21Ch+outDelta]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5C7A22",
-    "line": "push    edx",
+    "line": "push    edx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A23",
-    "line": "call    sub_552880",
+    "line": "call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x5C7A2B",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C7A30",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x5C7A39",
-    "line": "lea     eax, [esp+21Ch+var_130]",
+    "line": "lea     eax, [esp+21Ch+raceParameters]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1051,19 +1051,19 @@
   },
   {
     "ea": "0x5C7A46",
-    "line": "lea     ecx, [esp+20Ch+var_130]",
+    "line": "lea     ecx, [esp+20Ch+raceParameters]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5C7A4D",
-    "line": "push    ecx",
+    "line": "push    ecx; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A4E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1075,19 +1075,19 @@
   },
   {
     "ea": "0x5C7A58",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7A5D",
-    "line": "lea     edx, [esp+20Ch+var_190]",
+    "line": "lea     edx, [esp+20Ch+outDelta]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C7A61",
-    "line": "push    edx",
+    "line": "push    edx; outDelta",
     "mnemonic": "push",
     "size": 1
   },
@@ -1099,25 +1099,25 @@
   },
   {
     "ea": "0x5C7A66",
-    "line": "push    eax",
+    "line": "push    eax; absoluteParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A67",
-    "line": "lea     ecx, [esp+214h+var_130]",
+    "line": "lea     ecx, [esp+214h+raceParameters]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5C7A6E",
-    "line": "push    ecx",
+    "line": "push    ecx; raceParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A6F",
-    "line": "call    sub_552C10",
+    "line": "call    FaceGenHeadParameters_ComputeRaceDelta; Computes the NPC-persisted delta = adjusted absolute parameters - race base for each active matrix. Prettier Faces 1.19.7 audit: curation must score actual post-projection race-relative coefficients. Applying soft compression again only to score/history (without applying it to output) understates real tails/spikes. Candidate capture limits once; scoring now measures the resulting coefficients directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,67 +1135,67 @@
   },
   {
     "ea": "0x5C7A79",
-    "line": "fstp    [esp+210h+var_210]; float",
+    "line": "fstp    [esp+210h+value]; maximumRms",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C7A7C",
-    "line": "push    0; char",
+    "line": "push    0; specialSecondBankMode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C7A7E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C7A80",
-    "line": "call    sub_521A10",
+    "line": "call    TESNPC_GetActiveFaceGenDeltaParameters; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7A85",
-    "line": "push    eax; int",
+    "line": "push    eax; outParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A86",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C7A88",
-    "line": "call    sub_521A10",
+    "line": "call    TESNPC_GetActiveFaceGenDeltaParameters; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7A8D",
-    "line": "push    eax; int",
+    "line": "push    eax; delta",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A8E",
-    "line": "lea     edx, [esp+21Ch+var_190]",
+    "line": "lea     edx, [esp+21Ch+outDelta]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5C7A95",
-    "line": "push    edx; int",
+    "line": "push    edx; base",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7A96",
-    "line": "call    sub_552990",
+    "line": "call    FaceGenHeadParameters_Combine; Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,37 +1207,37 @@
   },
   {
     "ea": "0x5C7A9E",
-    "line": "lea     ecx, [esp+20Ch+var_D0]",
+    "line": "lea     ecx, [esp+20Ch+outState]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5C7AA5",
-    "line": "call    FaceGenHeadParameters_Ctor",
+    "line": "call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7AAA",
-    "line": "mov     ecx, [esi+0E8h]",
+    "line": "mov     ecx, [esi+0E8h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5C7AB0",
-    "line": "lea     eax, [esp+20Ch+var_D0]",
+    "line": "lea     eax, [esp+20Ch+outState]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5C7AB7",
-    "line": "push    eax",
+    "line": "push    eax; outState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7AB8",
-    "line": "push    esi",
+    "line": "push    esi; npc",
     "mnemonic": "push",
     "size": 1
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x5C7AC1",
-    "line": "call    TESRace_GetFaceGenHeadParameters",
+    "line": "call    TESRace_BuildFaceGenRenderState; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7AC6",
-    "line": "lea     ecx, [esp+20Ch+var_D0]",
+    "line": "lea     ecx, [esp+20Ch+outState]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1297,13 +1297,13 @@
   },
   {
     "ea": "0x5C7AE0",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7AE1",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x5C7AE9",
-    "line": "lea     ecx, [esp+208h+var_CC]",
+    "line": "lea     ecx, [esp+208h+outState.parameters.matrices.columns]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x5C7AFF",
-    "line": "push    0",
+    "line": "push    0; state",
     "mnemonic": "push",
     "size": 2
   },
@@ -1357,13 +1357,13 @@
   },
   {
     "ea": "0x5C7B03",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C7B04",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,19 +1381,19 @@
   },
   {
     "ea": "0x5C7B14",
-    "line": "lea     ecx, [esp+20Ch+var_D0]",
+    "line": "lea     ecx, [esp+20Ch+outState]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5C7B1B",
-    "line": "call    FaceGenHeadParameters_Dtor",
+    "line": "call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C7B20",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x5C7B29",
-    "line": "lea     ecx, [esp+218h+var_130]",
+    "line": "lea     ecx, [esp+218h+raceParameters]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x5C7B3E",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x5C7B47",
-    "line": "lea     edx, [esp+218h+var_190]",
+    "line": "lea     edx, [esp+218h+outDelta]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x5C7B5C",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1558,5 +1558,185 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C1540",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1545",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1547",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1549",
+    "line": "lea     eax, [ebp-1F0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C154F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1550",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1555",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1556",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9C155B",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C155D",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C155F",
+    "line": "lea     eax, [ebp-190h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1565",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1566",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C156B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C156C",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1571",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1573",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1575",
+    "line": "lea     eax, [ebp-130h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C157B",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C157C",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1581",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1582",
+    "line": "lea     ecx, [ebp-0D0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1588",
+    "line": "jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C158D",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C1591",
+    "line": "lea     eax, [edx-1FCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1597",
+    "line": "mov     ecx, [edx-200h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C159D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C159F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C15A4",
+    "line": "mov     eax, offset stru_AEA5C0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C15A9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

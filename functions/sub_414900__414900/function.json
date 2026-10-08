@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_414900",
+  "chunks": [
+    [
+      "0x414900",
+      "0x414971"
+    ],
+    [
+      "0x9C8F40",
+      "0x9C8F63"
+    ]
+  ],
+  "chunks_sha256": "b91f4cf109c5c44fce632595bb2f1fe861a64f9d33cb51f2a24aa50b221e431c",
+  "comment_regular": "Oblivion 1.2.0.416: std::logic_error copy constructor. Copies the 0x0C-byte std::exception base, installs the logic_error vftable, initializes the 28-byte SSO message at +0x0C, then assigns the source message.",
+  "comment_repeatable": "Oblivion 1.2.0.416: std::logic_error copy constructor. Copies the 0x0C-byte std::exception base, installs the logic_error vftable, initializes the 28-byte SSO message at +0x0C, then assigns the source message.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "OB_std_logic_error_CopyCtor_010201A0",
   "end_ea": "0x414971",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_414900",
+  "name": "OB_std_logic_error_CopyCtor_010201A0",
   "segment": ".text",
   "sha256": "c8f34365fb721b574a9031a93e132745736204b6f20fd3f3891e21473d371ae1",
   "size": 113,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x414900",
-  "type": "std::exception *__thiscall(std::exception *this, struct std::exception *)",
-  "xrefs_from_count": 41,
+  "total_chunk_size": 148,
+  "type": "OB_std_logic_error_010201A0 *__thiscall(OB_std_logic_error_010201A0 *this, const OB_std_logic_error_010201A0 *other)",
+  "xrefs_from_count": 52,
   "xrefs_to_count": 7
 }

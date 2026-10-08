@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4AC9C0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified (Oblivion): initializes the 0xE0-byte TESEffectShaderData block at TESEffectShader+0x18, including cFlags, blend defaults, particle lifetimes/velocity/scale/colors, and the byte/float values copied by TESEffectShader_ConfigureVisualProperty. Probable member names come from the matching Fallout EffectShaderData layout; the defaults and offsets are directly corroborated in Oblivion.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4AC9CA",
-    "line": "mov     [ecx], al",
+    "line": "mov     [ecx], al; Verified (Oblivion): TESEffectShaderData_InitializeDefaults zeroes Data.cFlags. Individual set-bit semantics are established at the MagicShaderHitEffect_InitializeVisual callsites: 0x01 suppresses texture-effect-data setup; 0x08 suppresses the particle-property path.",
     "mnemonic": "mov",
     "size": 2
   },

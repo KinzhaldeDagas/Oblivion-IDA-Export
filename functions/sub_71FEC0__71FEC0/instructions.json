@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x71FEE9",
-    "line": "mov     ebx, [esp+30h+arg_0]",
+    "line": "mov     ebx, [esp+30h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x71FF37",
-    "line": "lea     edx, [esp+3Ch+arg_0]",
+    "line": "lea     edx, [esp+3Ch+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x71FF4D",
-    "line": "cmp     byte ptr [esp+30h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+30h+stream], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x71FFB7",
-    "line": "call    edx",
+    "line": "call    edx; Read the 16-bit shared-normal entry-array length.",
     "mnemonic": "call",
     "size": 2
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x71FFE3",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Allocate one 8-byte NiSharedNormalArrayEntry per serialized entry.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x71FFF8",
-    "line": "push    offset sub_71FAB0",
+    "line": "push    offset NiSharedNormalArrayEntry_Construct; Initialize one 8-byte shared-normal entry to an empty count and null UInt16 index list.",
     "mnemonic": "push",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x720001",
-    "line": "call    sub_401080",
+    "line": "call    sub_401080; Initialize every shared-normal entry to {count=0, indices=null}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x720008",
-    "line": "mov     byte ptr [esp+30h+arg_0], 1",
+    "line": "mov     byte ptr [esp+30h+stream], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x720020",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Create the first linked index-pool block with capacity equal to the entry-array length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,19 +739,19 @@
   },
   {
     "ea": "0x72003C",
-    "line": "push    ecx",
+    "line": "push    ecx; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x72003D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x72003F",
-    "line": "call    sub_71FAC0",
+    "line": "call    NiSharedNormalIndexPoolBlock_Construct; Construct a 20-byte linked pool block for shared-normal UInt16 index lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x720084",
-    "line": "call    edx",
+    "line": "call    edx; Read this entry's 16-bit shared-normal index count.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x72012C",
-    "line": "mov     [eax+4], edx",
+    "line": "mov     [eax+4], edx; Reserve count UInt16 indices from a pool block, growing through linked blocks when necessary.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x72014D",
-    "line": "call    eax",
+    "line": "call    eax; Read the shared vertex indices directly into the pooled slice.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x720164",
-    "line": "lea     eax, [edi+eax*8]",
+    "line": "lea     eax, [edi+eax*8]; Store {count, pooledIndices} in this 8-byte shared-normal entry.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -1438,5 +1438,137 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA1B0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA1B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA1B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1BB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA1BE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1BF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA1C4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1C6",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA1C9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1CA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA1CF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1D0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA1D1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA1D5",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA1D8",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA1DB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA1DD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA1E2",
+    "line": "mov     eax, offset stru_AF2948",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA1E7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

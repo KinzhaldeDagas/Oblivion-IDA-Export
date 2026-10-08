@@ -2,7 +2,7 @@
 0x77C4D6: mov     eax, ds:0B30AACh
 0x77C4DB: xor     eax, esp
 0x77C4DD: mov     [esp+108h+var_4], eax
-0x77C4E4: mov     eax, dword ptr [esp+108h+ArgList]
+0x77C4E4: mov     eax, [esp+108h+ArgList]
 0x77C4EB: push    esi
 0x77C4EC: mov     esi, ecx
 0x77C4EE: mov     ecx, [esp+10Ch+arg_4]

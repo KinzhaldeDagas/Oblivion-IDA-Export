@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x64B400",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MiddleHighProcess constructor: derives from MiddleLowProcess, installs MiddleHighProcess vtable, initializes pathing, currentPackage +0x0C0 and currentPackProcedure. No movementFlags field is initialized here.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x64B42A",
-    "line": "call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess::MiddleLowProcess(void)",
+    "line": "call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess constructor: derives from LowProcess and installs MiddleLowProcess vtable; no currentPackage or movementFlags storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x64B431",
-    "line": "mov     dword ptr [esi], offset ??_7MiddleHighProcess@@6B@; const MiddleHighProcess::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7MiddleHighProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -802,5 +802,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3A90",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3A93",
+    "line": "jmp     ??1MiddleLowProcess@@UAE@XZ; MiddleLowProcess::~MiddleLowProcess(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3A98",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3A9B",
+    "line": "add     ecx, 118h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3AA1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AA6",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3AA9",
+    "line": "add     ecx, 184h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3AAF",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AB4",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3AB8",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3ABB",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3ABE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3AC0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3AC5",
+    "line": "mov     eax, offset stru_AEC608",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3ACA",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -11,7 +11,7 @@
 0x6C29B5: mov     dword ptr ds:0B3D384h, offset sub_6BF4D0
 0x6C29BF: mov     dword ptr ds:0B3D2F4h, offset sub_6BF570
 0x6C29C9: mov     byte ptr ds:0B3D3F3h, 10h
-0x6C29D0: call    sub_6C2920
+0x6C29D0: call    NiPosKey_RegisterEvaluatorType5; Position type 5 registers NiPosKey_InsertType5Step for GuaranteeTimeRange boundary insertion.
 0x6C29D5: add     esp, 8
 0x6C29D8: mov     eax, 1
 0x6C29DD: retn

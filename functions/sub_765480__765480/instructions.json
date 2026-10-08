@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x765480",
-    "line": "sub     esp, 30h",
+    "line": "sub     esp, 30h; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x76549F",
-    "line": "call    sub_761AE0",
+    "line": "call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7654E1",
-    "line": "call    sub_710190",
+    "line": "call    NiMatrix3_ScaleTo",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7654F7",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x765527",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },

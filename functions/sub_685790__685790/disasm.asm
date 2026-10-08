@@ -4,7 +4,7 @@
 0x685795: push    edi
 0x685796: mov     edi, ecx
 0x685798: mov     bl, 1
-0x68579A: call    sub_6899C0
+0x68579A: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68579F: mov     esi, [eax]
 0x6857A1: test    esi, esi
 0x6857A3: jz      loc_685862
@@ -12,8 +12,8 @@
 0x6857AA: mov     ebp, [esp+1Ch+arg_0]
 0x6857AE: test    ebp, ebp
 0x6857B0: jz      loc_68586D
-0x6857B6: mov     ecx, esi
-0x6857B8: call    sub_68B110
+0x6857B6: mov     ecx, esi; this
+0x6857B8: call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.
 0x6857BD: fldz
 0x6857BF: mov     ecx, [eax]
 0x6857C1: fstp    [esp+1Ch+arg_0]
@@ -24,7 +24,7 @@
 0x6857D1: mov     [esp+1Ch+var_8], edx
 0x6857D5: mov     [esp+1Ch+var_4], eax
 0x6857D9: xor     bl, bl
-0x6857DB: call    sub_6899C0
+0x6857DB: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6857E0: cmp     dword ptr [eax+4], 0
 0x6857E4: jnz     short loc_6857F5
 0x6857E6: mov     ecx, edi

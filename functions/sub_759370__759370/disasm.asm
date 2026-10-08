@@ -41,41 +41,41 @@
 0x7593EE: push    edi
 0x7593EF: lea     esi, [ecx+64h]
 0x7593F2: mov     ecx, 0Dh
-0x7593F7: lea     edi, [esp+134h+var_9C]
+0x7593F7: lea     edi, [esp+134h+local]
 0x7593FE: rep movsd
 0x759400: mov     esi, [ebx+10h]
 0x759403: add     esi, 64h ; 'd'
 0x759406: mov     ecx, 0Dh
 0x75940B: lea     edi, [esp+134h+var_68]
-0x759412: lea     eax, [esp+134h+var_34]
+0x759412: lea     eax, [esp+134h+parent]
 0x759419: rep movsd
 0x75941B: push    eax
 0x75941C: lea     ecx, [esp+138h+var_68]
-0x759423: call    sub_718A80
-0x759428: lea     ecx, [esp+134h+var_9C]
-0x75942F: push    ecx
-0x759430: lea     edx, [esp+138h+var_D0]
-0x759434: push    edx
-0x759435: lea     ecx, [esp+13Ch+var_34]
-0x75943C: call    sub_53D7A0
+0x759423: call    sub_718A80;
+0x759428: lea     ecx, [esp+134h+local]
+0x75942F: push    ecx; local
+0x759430: lea     edx, [esp+138h+out]
+0x759434: push    edx; out
+0x759435: lea     ecx, [esp+13Ch+parent]; parent
+0x75943C: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x759441: cmp     byte ptr [ebx+30h], 0
-0x759445: mov     eax, [esp+134h+var_AC]
-0x75944C: mov     ecx, [esp+134h+var_A8]
-0x759453: mov     edx, [esp+134h+var_A4]
+0x759445: mov     eax, [esp+134h+out.pos.x]
+0x75944C: mov     ecx, [esp+134h+out.pos.y]
+0x759453: mov     edx, [esp+134h+out.pos.z]
 0x75945A: mov     [esp+134h+var_F4], eax
 0x75945E: mov     [esp+134h+var_F0], ecx
 0x759462: mov     [esp+134h+var_EC], edx
 0x759466: jz      short loc_7594A9
 0x759468: lea     esi, [ebx+34h]
-0x75946B: push    offset Vector3_InitValue?
-0x759470: mov     ecx, esi
-0x759472: call    sub_8AA390
+0x75946B: push    offset g_zeroNiPoint3; other
+0x759470: mov     ecx, esi; this
+0x759472: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x759477: test    al, al
 0x759479: jz      short loc_7594A9
 0x75947B: push    esi
 0x75947C: lea     eax, [esp+138h+var_100]
 0x759480: push    eax
-0x759481: lea     ecx, [esp+13Ch+var_D0]
+0x759481: lea     ecx, [esp+13Ch+out]
 0x759485: call    sub_7101F0
 0x75948A: mov     ecx, [eax]
 0x75948C: mov     edx, [eax+4]
@@ -84,13 +84,12 @@
 0x759496: lea     ecx, [esp+134h+var_10C]
 0x75949A: mov     [esp+134h+var_108], edx
 0x75949E: mov     [esp+134h+var_104], eax
-0x7594A2: call    sub_43F350
+0x7594A2: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7594A7: fstp    st
 0x7594A9: xor     edi, edi
 0x7594AB: cmp     [ebp+48h], di
 0x7594AF: jbe     loc_75965A
 0x7594B5: jmp     short loc_7594C0
-0x7594B7: align 10h
 0x7594C0: mov     eax, [ebp+5Ch]
 0x7594C3: fld     [esp+134h+arg_0]
 0x7594CA: movzx   ecx, di
@@ -158,7 +157,7 @@
 0x75959A: lea     ecx, [esp+134h+var_118]
 0x75959E: mov     [esp+134h+var_118], eax
 0x7595A2: mov     [esp+134h+var_110], edx
-0x7595A6: call    sub_43F350
+0x7595A6: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7595AB: fstp    st
 0x7595AD: fld     [esp+134h+var_114]
 0x7595B1: fmul    [esp+134h+var_108]

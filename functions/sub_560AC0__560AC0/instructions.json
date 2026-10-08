@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x560AC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY 2026-08-27: Material application selects forced/TES branch and leaf dimming scalars and writes accepted [0,1] values to the engine before texture/material loads. It has cleanup EH but no internal catch. A swallowed later exception can therefore leave the scalar update applied while subsequent material setup is partial.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x560AFB",
-    "line": "mov     edi, [esp+158h+arg_0]",
+    "line": "mov     edi, [esp+158h+treeObject]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x560B06",
-    "line": "mov     [esp+158h+var_134], ebp",
+    "line": "mov     [esp+158h+outTexture], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x560B0E",
-    "line": "mov     [esp+158h+var_13C], esi",
+    "line": "mov     [esp+158h+texture], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x560B68",
-    "line": "fstp    [esp+158h+var_144]",
+    "line": "fstp    [esp+158h+var_144]; Verified: when fTreeForceBranchDimming is outside [0,1], dispatches TESObjectTREE vtable +0x14C to TESObjectTREE_GetBranchDimming, which reads +0x64; accepted values are written to CSpeedTreeRT before texture setup.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x560B89",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560B8C",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+value]; scalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x560B8F",
-    "line": "call    sub_7870E0",
+    "line": "call    CSpeedTreeRT__SetBranchDimmingScalar; CSpeedTreeRT::SetBranchDimmingScalar. Writes CTreeEngine+0x8C when the engine exists. Fallout symbols identify the field; Oblivion layout is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x560BA4",
-    "line": "fld     [esp+158h+var_144]",
+    "line": "fld     [esp+158h+var_144]; Reads fTreeForceLeafDimming:SpeedTree setting value. Its database default is -1.0, which is outside [0,1] and therefore selects the per-TESObjectTREE fallback getter.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x560BCC",
-    "line": "fstp    [esp+158h+var_144]",
+    "line": "fstp    [esp+158h+var_144]; Verified: when fTreeForceLeafDimming is outside [0,1], dispatches TESObjectTREE vtable +0x154 to TESObjectTREE_GetLeafDimming, which reads +0x68; accepted values are written to CSpeedTreeRT before texture setup.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -607,19 +607,19 @@
   },
   {
     "ea": "0x560BED",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560BF0",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+value]; scalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x560BF3",
-    "line": "call    sub_787100",
+    "line": "call    CSpeedTreeRT__SetLeafDimmingScalar; Calls CSpeedTreeRT::SetLeafDimmingScalar before the later leaf texture/property loads. Values outside [0,1] are not written, preserving the parsed/default SPT scalar.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x560C25",
-    "line": "fstp    [esp+158h+var_144]",
+    "line": "fstp    [esp+158h+var_144]; Verified: when the force-CS override is negative, calls TESObjectTREE_GetCurveScalar via vtable +0x134 (field +0x58) and copies a nonnegative result into BSTreeModel+0x44.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x560C45",
-    "line": "fstp    [esp+158h+var_140]",
+    "line": "fstp    [esp+158h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x560C53",
-    "line": "fld     [esp+158h+var_140]",
+    "line": "fld     [esp+158h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x560CAA",
-    "line": "fstp    [esp+158h+var_140]",
+    "line": "fstp    [esp+158h+slot]; Verified: invalid forced minimum-angle settings fall back through vtable +0x13C to TESObjectTREE_GetMinimumLeafAngle (field +0x5C).",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x560CBA",
-    "line": "fstp    [esp+158h+var_144]",
+    "line": "fstp    [esp+158h+var_144]; Verified: invalid forced maximum-angle settings fall back through vtable +0x144 to TESObjectTREE_GetMaximumLeafAngle (field +0x60).",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x560CBE",
-    "line": "fld     [esp+158h+var_140]",
+    "line": "fld     [esp+158h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1201,19 +1201,19 @@
   },
   {
     "ea": "0x560D04",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560D07",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+value]; angle",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x560D0A",
-    "line": "call    sub_787160",
+    "line": "call    CSpeedTreeRT__SetMinimumBudAngle; Verified: after the fallback/override pair passes [0,90] bounds and min<=max, applies the pair to CSpeedTreeRT_SetMinimumBudAngle and SetMaximumBudAngle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,19 +1231,19 @@
   },
   {
     "ea": "0x560D14",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560D17",
-    "line": "fstp    [esp+15Ch+var_15C]; float",
+    "line": "fstp    [esp+15Ch+value]; angle",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x560D1A",
-    "line": "call    sub_787180",
+    "line": "call    CSpeedTreeRT__SetMaximumBudAngle; CSpeedTreeRT::SetMaximumBudAngle. Writes CTreeEngine leaf-info field +0xB8 when the engine exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,31 +1333,31 @@
   },
   {
     "ea": "0x560D44",
-    "line": "lea     ecx, [esp+158h+var_130]",
+    "line": "lea     ecx, [esp+158h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560D48",
-    "line": "call    sub_786FA0",
+    "line": "call    CSpeedTreeRT__STextures_ctor; SpeedTreeOBSE 2026-05-30 frond restoration: initializes the 7-dword compact texture summary before optional generated-frond texture recovery calls 0x78A890.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560D4D",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560D50",
-    "line": "lea     eax, [esp+158h+var_130]",
+    "line": "lea     eax, [esp+158h+texturesOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560D54",
-    "line": "push    eax",
+    "line": "push    eax; texturesOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -1369,13 +1369,13 @@
   },
   {
     "ea": "0x560D5D",
-    "line": "call    sub_78A890",
+    "line": "call    CSpeedTreeRT__GetTextures; SpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560D62",
-    "line": "mov     eax, [esp+158h+var_130]",
+    "line": "mov     eax, [esp+158h+texturesOut.branchTextureFilename]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1585,13 +1585,13 @@
   },
   {
     "ea": "0x560DC4",
-    "line": "push    0; char",
+    "line": "push    0; searchArchives",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560DC6",
-    "line": "mov     [eax-3], cl",
+    "line": "mov     [eax-3], cl;",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x560DCC",
-    "line": "push    1; char",
+    "line": "push    1; allowMissing",
     "mnemonic": "push",
     "size": 2
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x560DD2",
-    "line": "push    ecx; ArgList",
+    "line": "push    ecx; path",
     "mnemonic": "push",
     "size": 1
   },
@@ -1627,13 +1627,13 @@
   },
   {
     "ea": "0x560DD9",
-    "line": "lea     edx, [esp+164h+var_140]",
+    "line": "lea     edx, [esp+164h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560DDD",
-    "line": "push    edx; int",
+    "line": "push    edx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -1645,19 +1645,19 @@
   },
   {
     "ea": "0x560DE2",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560DE7",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560DE8",
-    "line": "lea     ecx, [esp+15Ch+var_13C]",
+    "line": "lea     ecx, [esp+15Ch+texture]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1669,13 +1669,13 @@
   },
   {
     "ea": "0x560DF4",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560DF9",
-    "line": "lea     ecx, [esp+158h+var_140]; this",
+    "line": "lea     ecx, [esp+158h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1687,13 +1687,13 @@
   },
   {
     "ea": "0x560E05",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560E0A",
-    "line": "mov     esi, [esp+158h+var_13C]",
+    "line": "mov     esi, [esp+158h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x560E10",
-    "line": "jz      short loc_560E4F",
+    "line": "jz      short loc_560E4F;",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x560E1C",
-    "line": "mov     [esp+158h+var_140], eax",
+    "line": "mov     [esp+158h+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1801,25 +1801,25 @@
   },
   {
     "ea": "0x560E47",
-    "line": "mov     ecx, [ebx]",
+    "line": "mov     ecx, [ebx]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560E49",
-    "line": "push    esi",
+    "line": "push    esi; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560E4A",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560E4F",
-    "line": "lea     ecx, [esp+158h+var_130]",
+    "line": "lea     ecx, [esp+158h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x560E5B",
-    "line": "call    sub_786FC0",
+    "line": "call    CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,13 +1873,13 @@
   },
   {
     "ea": "0x560E75",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; compactString",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560E77",
-    "line": "call    sub_449190",
+    "line": "call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x560ECC",
-    "line": "push    0; char",
+    "line": "push    0; searchArchives",
     "mnemonic": "push",
     "size": 2
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x560ED1",
-    "line": "push    1; char",
+    "line": "push    1; allowMissing",
     "mnemonic": "push",
     "size": 2
   },
@@ -2089,19 +2089,19 @@
   },
   {
     "ea": "0x560ED9",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560EDA",
-    "line": "lea     ecx, [esp+164h+var_140]",
+    "line": "lea     ecx, [esp+164h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560EDE",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2113,19 +2113,19 @@
   },
   {
     "ea": "0x560EE5",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; ApplyBaseObject loads the single TESObjectTREE leaf texture into BSTreeModel+0x38. Failure/exception here is separate from per-vertex packed-green dimming and from alpha-test mip disappearance.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560EEA",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560EEB",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2137,13 +2137,13 @@
   },
   {
     "ea": "0x560EF5",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560EFA",
-    "line": "lea     ecx, [esp+158h+var_140]; this",
+    "line": "lea     ecx, [esp+158h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x560F06",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x560F0F",
-    "line": "mov     ebp, [esp+158h+var_134]",
+    "line": "mov     ebp, [esp+158h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2191,13 +2191,13 @@
   },
   {
     "ea": "0x560F20",
-    "line": "lea     ecx, [esp+158h+var_130]",
+    "line": "lea     ecx, [esp+158h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560F24",
-    "line": "call    sub_786FA0",
+    "line": "call    CSpeedTreeRT__STextures_ctor; SpeedTreeOBSE 2026-05-30 frond restoration: initializes the 7-dword compact texture summary before optional generated-frond texture recovery calls 0x78A890.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2209,13 +2209,13 @@
   },
   {
     "ea": "0x560F2D",
-    "line": "push    edx",
+    "line": "push    edx; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560F2E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2227,19 +2227,19 @@
   },
   {
     "ea": "0x560F38",
-    "line": "call    sub_4B9C40",
+    "line": "call    OB_TESObjectTREE_BuildBillboardTexturePath_010201A0; Verified from byte construction and referenced model getter: emits 'Textures\\\\Trees\\\\Billboards\\\\' + model path basename through first dot + '.dds'. If model path has no dot, suffix isn't appended; path truncation/long-path handling not established.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560F3D",
-    "line": "push    0; char",
+    "line": "push    0; searchArchives",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560F3F",
-    "line": "push    1; char",
+    "line": "push    1; allowMissing",
     "mnemonic": "push",
     "size": 2
   },
@@ -2251,19 +2251,19 @@
   },
   {
     "ea": "0x560F45",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560F46",
-    "line": "lea     ecx, [esp+164h+var_134]",
+    "line": "lea     ecx, [esp+164h+outTexture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x560F4A",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outTexture",
     "mnemonic": "push",
     "size": 1
   },
@@ -2275,19 +2275,19 @@
   },
   {
     "ea": "0x560F51",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560F56",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560F57",
-    "line": "lea     ecx, [esp+15Ch+var_13C]",
+    "line": "lea     ecx, [esp+15Ch+texture]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2299,13 +2299,13 @@
   },
   {
     "ea": "0x560F63",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560F68",
-    "line": "lea     ecx, [esp+158h+var_134]; this",
+    "line": "lea     ecx, [esp+158h+outTexture]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2317,13 +2317,13 @@
   },
   {
     "ea": "0x560F74",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560F79",
-    "line": "mov     edi, [esp+158h+var_13C]",
+    "line": "mov     edi, [esp+158h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2431,43 +2431,43 @@
   },
   {
     "ea": "0x560FB6",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560FB8",
-    "line": "push    edi",
+    "line": "push    edi; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x560FB9",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560FBE",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x560FC0",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x560FC2",
-    "line": "call    sub_405870",
+    "line": "call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560FC7",
-    "line": "lea     ecx, [esp+158h+var_130]",
+    "line": "lea     ecx, [esp+158h+texturesOut]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2479,13 +2479,13 @@
   },
   {
     "ea": "0x560FD3",
-    "line": "call    sub_786FC0",
+    "line": "call    CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x560FD8",
-    "line": "mov     esi, [esp+158h+var_13C]",
+    "line": "mov     esi, [esp+158h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2638,5 +2638,203 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BD070",
+    "line": "lea     ecx, [ebp-13Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD076",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD07B",
+    "line": "lea     ecx, [ebp-130h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD081",
+    "line": "jmp     CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD086",
+    "line": "lea     ecx, [ebp-140h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD08C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD091",
+    "line": "mov     eax, [ebp-140h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD097",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD098",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD09D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD09E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD09F",
+    "line": "lea     ecx, [ebp-140h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD0A5",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD0AA",
+    "line": "lea     ecx, [ebp-130h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD0B0",
+    "line": "jmp     CSpeedTreeRT__STextures_dtor; SpeedTreeOBSE 2026-05-30 frond restoration: frees only the temporary leaf/frond filename arrays allocated by compact GetTextures; optional texture recovery calls this after copying candidates.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD0B5",
+    "line": "lea     ecx, [ebp-134h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD0BB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD0C0",
+    "line": "mov     eax, [ebp-138h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD0C6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD0C7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD0CC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD0CD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD0CE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD0D2",
+    "line": "lea     eax, [edx-148h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD0D8",
+    "line": "mov     ecx, [edx-14Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BD0DE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD0E0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD0E5",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD0E8",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD0EB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD0ED",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD0F2",
+    "line": "mov     eax, offset OB_BSTreeModel_ApplyBaseObject_EHFuncInfo_010201A0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD0F7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

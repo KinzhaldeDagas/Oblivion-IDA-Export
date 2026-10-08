@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x555A00",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Set one fan-0 control while preserving its paired control. matrixChannel 0 updates matrix 0; matrixChannel 1 updates matrix 2 through the authored FanControls bases.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x555A04",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x555A09",
-    "line": "mov     ebp, [esp+10h+arg_4]",
+    "line": "mov     ebp, [esp+10h+sexChannel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x555A0F",
-    "line": "mov     edi, [esp+18h+arg_8]",
+    "line": "mov     edi, [esp+18h+controlIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x555A19",
-    "line": "fld     [esp+18h+arg_C]",
+    "line": "fld     [esp+18h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x555A28",
-    "line": "call    sub_553550",
+    "line": "call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,43 +103,43 @@
   },
   {
     "ea": "0x555A33",
-    "line": "push    ebx",
+    "line": "push    ebx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x555A34",
-    "line": "push    edi",
+    "line": "push    edi; matrixChannel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x555A35",
-    "line": "push    esi",
+    "line": "push    esi; controlIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x555A36",
-    "line": "push    0",
+    "line": "push    0; fanIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x555A38",
-    "line": "add     ecx, 0C8h ; 'È'",
+    "line": "add     ecx, 0C8h ; 'È'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x555A3E",
-    "line": "call    sub_6EDD30",
+    "line": "call    FaceGenFanControls_GetControlValue; Control value = projectionOffset + first element of basis * parameters.matrix[2*matrixChannel]. Record is this+0x25C + fanIndex*0x80 + controlIndex*0x40 + matrixChannel*0x20; layout FaceGenFanProjectionRecord (0x20 bytes). Returns zero when initialized byte is false. Signed upper-bound checks only; negative indices are not rejected. Assertion helper logs and returns, so oversized indices are not stopped either. Caller misuse impact unproven.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x555A43",
-    "line": "fstp    [esp+esi*4+18h+var_8]",
+    "line": "fstp    [esp+esi*4+18h+targetPair]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x555A58",
-    "line": "call    sub_553550",
+    "line": "call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,43 +187,43 @@
   },
   {
     "ea": "0x555A63",
-    "line": "push    ebx",
+    "line": "push    ebx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x555A64",
-    "line": "lea     eax, [esp+1Ch+var_8]",
+    "line": "lea     eax, [esp+1Ch+targetPair]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x555A68",
-    "line": "push    eax",
+    "line": "push    eax; targetPair",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x555A69",
-    "line": "push    edi",
+    "line": "push    edi; matrixChannel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x555A6A",
-    "line": "push    0",
+    "line": "push    0; fanIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x555A6C",
-    "line": "add     ecx, 0C8h ; 'È'",
+    "line": "add     ecx, 0C8h ; 'È'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x555A72",
-    "line": "call    sub_6EDE10",
+    "line": "call    FaceGenFanControls_SetControlPair; Set the requested fan-0 control while preserving its paired control in the selected matrix 0/2 channel.",
     "mnemonic": "call",
     "size": 5
   },

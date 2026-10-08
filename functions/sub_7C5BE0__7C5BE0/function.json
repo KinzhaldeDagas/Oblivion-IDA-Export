@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C5BE0",
+      "0x7C5CF3"
+    ]
+  ],
+  "chunks_sha256": "b3f4f61bc6146231b9fde209149d161e1fead63c1c0ca31406e9c2e1b5c14fb3",
+  "comment_regular": "For active lights, discard/release frame-local shadow map +0x114, mark backing sources culled, and invalidate pending receiver-property state.",
+  "comment_repeatable": "For active lights, discard/release frame-local shadow map +0x114, mark backing sources culled, and invalidate pending receiver-property state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C5BE0",
+  "display_name": "ShadowSceneNode_DiscardActiveMapsAndMarkSourcesCulled",
   "end_ea": "0x7C5CF3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C5BE0",
+  "name": "ShadowSceneNode_DiscardActiveMapsAndMarkSourcesCulled",
   "segment": ".text",
   "sha256": "b3f4f61bc6146231b9fde209149d161e1fead63c1c0ca31406e9c2e1b5c14fb3",
   "size": 275,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C5BE0",
+  "total_chunk_size": 275,
   "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 115,
   "xrefs_to_count": 1

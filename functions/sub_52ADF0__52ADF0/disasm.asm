@@ -32,7 +32,7 @@
 0x52AE4C: push    0
 0x52AE4E: push    eax
 0x52AE4F: lea     ecx, [esi+4]
-0x52AE52: call    sub_56A950
+0x52AE52: call    ConditionList_EvaluateForActor; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.
 0x52AE57: test    al, al
 0x52AE59: jz      loc_52AF2D
 0x52AE5F: push    4; Size
@@ -43,13 +43,13 @@
 0x52AE6F: test    edi, edi
 0x52AE71: mov     [esp+1Ch+var_4], 0
 0x52AE79: jz      short loc_52AEA9
-0x52AE7B: mov     ecx, offset TimeGlobals
+0x52AE7B: mov     ecx, 0B332E0h
 0x52AE80: call    TimeGlobals_GetGameYear
 0x52AE85: push    eax
-0x52AE86: mov     ecx, offset TimeGlobals
+0x52AE86: mov     ecx, 0B332E0h
 0x52AE8B: call    TimeGlobals_GetGameMonth
 0x52AE90: push    eax
-0x52AE91: mov     ecx, offset TimeGlobals
+0x52AE91: mov     ecx, 0B332E0h
 0x52AE96: call    TimeGlobals_GetGameDay
 0x52AE9B: movsx   cx, al
 0x52AE9F: push    ecx
@@ -61,11 +61,11 @@
 0x52AEAE: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x52AEB6: mov     [esi+64h], eax
 0x52AEB9: jz      short loc_52AEE1
-0x52AEBB: mov     ecx, [esi+68h]
+0x52AEBB: mov     ecx, [esi+68h]; this
 0x52AEBE: test    ecx, ecx
 0x52AEC0: jz      short loc_52AEE1
-0x52AEC2: push    1
-0x52AEC4: call    Quest_CompleteQuest
+0x52AEC2: push    1; completed
+0x52AEC4: call    TESQuest__SetCompleted; TESQuest completed-state setter used by CompleteQuest. Runtime bit 0x02 is saved through the same one-byte questFlags field.
 0x52AEC9: mov     edx, [esi+68h]
 0x52AECC: mov     ecx, ds:0B333C4h
 0x52AED2: cmp     edx, [ecx+5F4h]
@@ -103,3 +103,15 @@
 0x52AF3A: pop     esi
 0x52AF3B: add     esp, 10h
 0x52AF3E: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

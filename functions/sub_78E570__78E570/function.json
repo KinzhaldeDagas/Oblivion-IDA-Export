@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78E570",
+      "0x78E596"
+    ]
+  ],
+  "chunks_sha256": "0eb814681fd682eede859af4eb548831462d206d6488fb08329d156f99c8a97d",
+  "comment_regular": "Oblivion stVec(size) constructor: zeros all five float slots, clamps only sizes greater than 5 down to 5, and stores the resulting logical size. Exact body corroborated by RT4.1 Vec.cpp.",
+  "comment_repeatable": "Oblivion stVec(size) constructor: zeros all five float slots, clamps only sizes greater than 5 down to 5, and stores the resulting logical size. Exact body corroborated by RT4.1 Vec.cpp.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78E570",
+  "display_name": "OB_stVec_ctor_size_010201A0",
   "end_ea": "0x78E596",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78E570",
+  "name": "OB_stVec_ctor_size_010201A0",
   "segment": ".text",
   "sha256": "0eb814681fd682eede859af4eb548831462d206d6488fb08329d156f99c8a97d",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78E570",
-  "type": "float *__thiscall(float *this, signed int)",
+  "total_chunk_size": 38,
+  "type": "OB_stVec_010201A0 *__thiscall(OB_stVec_010201A0 *this, int size)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 1
 }

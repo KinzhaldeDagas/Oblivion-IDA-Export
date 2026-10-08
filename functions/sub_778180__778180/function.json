@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x778180",
+      "0x7781E1"
+    ]
+  ],
+  "chunks_sha256": "122fb2d0cd7deddedec7200425162d9b62fbb566aff4bf983ebe4f60d47e25f5",
+  "comment_regular": "Verified 2026-10-02 from direct disassembly, RET14h and native diagnostic string: ECX=self, device at+8; five stack arguments length/usage/format/pool/optional description. Calls device CreateIndexBuffer at7781AD (vtable+6C) with NULL shared handle. On failure returns NULL after diagnostic; on success optionally invokes GetDesc+34 and returns buffer without testing GetDesc HRESULT. This is a shared allocation wrapper; PackBuffer7781F0, line index generation778500 and other consumers must route through the same owned buffer factory semantics.\n\nHost API evidence 2026-10-02, distinct from Oblivion binary facts: isolated native D3D9 probes on Parallels WDDM/prl_umdd.dll version001400120A8CE504 recorded468 VB/IB creation cases. INDEX16 permits3-byte allocation and reports Size3 (minimum one2-byte index, no multiple-of-width requirement); INDEX32 requires at least4 bytes. Native Reset rejected live DEFAULT VB and IB with8876086C, then succeeded after final release; a locked MANAGED VB survived Reset and its later Unlock succeeded. An isolated malformed nonzero FVF1 request terminated the probe withC0000094 rather than an HRESULT; this is not evidence of an Oblivion function bug. These host-provider observations constrain the replacement COM/frontend API but must not be mistaken for inferred engine semantics or universally identical driver behavior. Project evidence: analysis/dx11_completion/stage-buffer-factory-contract.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_778180",
+  "display_name": "NiDX9IndexBufferManager_CreateIndexBuffer",
   "end_ea": "0x7781E1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_778180",
+  "name": "NiDX9IndexBufferManager_CreateIndexBuffer",
   "segment": ".text",
   "sha256": "122fb2d0cd7deddedec7200425162d9b62fbb566aff4bf983ebe4f60d47e25f5",
   "size": 97,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x778180",
-  "type": "_DWORD *__thiscall(_DWORD *this, int, int, int, int, int)",
+  "total_chunk_size": 97,
+  "type": "IDirect3DIndexBuffer9 *__thiscall(NiDX9IndexBufferManager *self, unsigned int byteLength, unsigned int usage, D3DFORMAT format, D3DPOOL pool, D3DINDEXBUFFER_DESC *description)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 1
 }

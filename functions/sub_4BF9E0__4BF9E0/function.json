@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 9,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x4BF9E0",
+      "0x4BFAA0"
+    ]
+  ],
+  "chunks_sha256": "8c5d1610ec2bfa4513f5071043049309bcdf969abc762af8ef77a8ce063a639b",
+  "comment_regular": "Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
+  "comment_repeatable": "Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BF9E0",
+  "display_name": "NiPoint3__NormalizedCrossProduct",
   "end_ea": "0x4BFAA0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BF9E0",
+  "name": "NiPoint3__NormalizedCrossProduct",
   "segment": ".text",
   "sha256": "8c5d1610ec2bfa4513f5071043049309bcdf969abc762af8ef77a8ce063a639b",
   "size": 192,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BF9E0",
-  "type": "float *__thiscall(float *this, float *, float *)",
+  "total_chunk_size": 192,
+  "type": "NiPoint3 *__thiscall(const NiPoint3 *this, NiPoint3 *out, const NiPoint3 *rhs)",
   "xrefs_from_count": 66,
   "xrefs_to_count": 14
 }

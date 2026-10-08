@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4535A0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,25 +31,25 @@
   },
   {
     "ea": "0x4535AA",
-    "line": "mov     edi, [esp+24h+arg_0]",
+    "line": "mov     edi, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4535AE",
-    "line": "push    eax",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4535AF",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4535B0",
-    "line": "call    sub_453530",
+    "line": "call    SaveLoad_AdjustCreatedFormChangeFlags; Verified: created-form predicate at 45353F gates adjustment; RTTI cast TESObjectREFR -> clear bit4/set bit2; RTTI cast TESObjectCELL -> OR6; otherwise preserves flags. Used by LoadForm 463930, LoadGame 465FEE/4664CD and save-side normalization 4535A0. Unknown broader meanings of flag bits outside these form-specific uses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x453622",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x45373F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x453741",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x453753",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x453755",
-    "line": "call    NiDX9TextureData__GetLevels",
+    "line": "call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x4537AC",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x4537F6",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x453805",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x45380C",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x45383F",
-    "line": "fistp   [esp+28h+arg_0]",
+    "line": "fistp   [esp+28h+form]",
     "mnemonic": "fistp",
     "size": 4
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x453847",
-    "line": "fistp   [esp+28h+arg_4]",
+    "line": "fistp   [esp+28h+flags]",
     "mnemonic": "fistp",
     "size": 4
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x453852",
-    "line": "mov     ecx, [esp+28h+arg_4]",
+    "line": "mov     ecx, [esp+28h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x453889",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x4538A5",
-    "line": "fistp   [esp+28h+arg_0]",
+    "line": "fistp   [esp+28h+form]",
     "mnemonic": "fistp",
     "size": 4
   },
@@ -1489,13 +1489,13 @@
   },
   {
     "ea": "0x4538AD",
-    "line": "fistp   [esp+28h+arg_4]",
+    "line": "fistp   [esp+28h+flags]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x4538B1",
-    "line": "mov     ecx, [esp+28h+arg_4]",
+    "line": "mov     ecx, [esp+28h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x4538B8",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x4538BB",
-    "line": "mov     edx, [esp+2Ch+arg_0]",
+    "line": "mov     edx, [esp+2Ch+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x4538C2",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x4538CC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },

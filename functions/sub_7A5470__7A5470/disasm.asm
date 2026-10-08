@@ -1,4 +1,4 @@
-0x7A5470: fldz
+0x7A5470: fldz; CProjectedShadow constructor: zeros right/up/out vectors and initializes the embedded 28-byte SpeedTree string for the shadow-map filename.
 0x7A5472: mov     eax, ecx
 0x7A5474: fst     dword ptr [eax+8]
 0x7A5477: xor     ecx, ecx

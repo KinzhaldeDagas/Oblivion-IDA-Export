@@ -11,7 +11,7 @@
 0x7724E7: mov     ecx, esi
 0x7724E9: call    sub_7724D0
 0x7724EE: push    esi
-0x7724EF: call    FormHeapFree
+0x7724EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7724F4: add     esp, 4
 0x7724F7: pop     esi
 0x7724F8: retn

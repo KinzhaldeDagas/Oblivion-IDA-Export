@@ -1,4 +1,4 @@
-0x7977D0: push    0FFFFFFFFh
+0x7977D0: push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::CombineStrips stitches per-LOD unsigned-short index arrays, including parity-dependent degenerates when requested, then replaces lengths/pointers/totals through deep vector assignment. RT4.1 corroborates the algorithm only; its 32-bit contiguous storage differs.
 0x7977D2: push    offset SEH_7977D0
 0x7977D7: mov     eax, large fs:0
 0x7977DD: push    eax
@@ -28,22 +28,22 @@
 0x797817: test    dx, dx
 0x79781A: jbe     loc_798072
 0x797820: movzx   eax, word ptr [esi+20h]
-0x797824: push    eax; char *
-0x797825: lea     ecx, [esp+84h+var_2C]
-0x797829: call    sub_7974F0
+0x797824: push    eax; count
+0x797825: lea     ecx, [esp+84h+source]; this
+0x797829: call    OB_stVector_stVectorUShort_FillCtorEmpty_010201A0; OBLIVION AUTHORITY (2026-08-30): Constructs vector<vector<unsigned short>> with count empty inner vectors; CombineStrips uses it for temporary per-LOD strip-length storage.
 0x79782E: movzx   ecx, word ptr [esi+20h]
-0x797832: push    ecx; char *
-0x797833: lea     ecx, [esp+84h+var_3C]
+0x797832: push    ecx; count
+0x797833: lea     ecx, [esp+84h+var_3C]; this
 0x797837: mov     [esp+84h+var_4], edi
-0x79783E: call    sub_797570
+0x79783E: call    OB_stVector_stVectorUShortPtr_FillCtorEmpty_010201A0; OBLIVION AUTHORITY (2026-08-30): Constructs vector<vector<unsigned short*>> with count empty inner vectors; CombineStrips uses it for temporary per-LOD strip-pointer storage.
 0x797843: movzx   eax, word ptr [esi+20h]
-0x797847: lea     edx, [esp+80h+var_54]
-0x79784B: push    edx
-0x79784C: push    eax
-0x79784D: lea     ecx, [esp+88h+var_1C]
+0x797847: lea     edx, [esp+80h+value]
+0x79784B: push    edx; value
+0x79784C: push    eax; count
+0x79784D: lea     ecx, [esp+88h+var_1C]; this
 0x797851: mov     byte ptr [esp+88h+var_4], 1
-0x797859: mov     [esp+88h+var_54], edi
-0x79785D: call    sub_7956B0
+0x797859: mov     [esp+88h+value], edi
+0x79785D: call    OB_stVectorUInt32_FillCtor_010201A0; OBLIVION AUTHORITY (2026-08-30): Fill constructor for vector<unsigned int>; used by CIndexedGeometry::CombineStrips to create per-LOD triangle totals initialized to zero.
 0x797862: cmp     [esi+20h], di
 0x797866: mov     byte ptr [esp+80h+var_4], 2
 0x79786B: mov     [esp+80h+var_68], edi
@@ -51,7 +51,6 @@
 0x797875: xor     ebp, ebp
 0x797877: mov     [esp+80h+var_6C], ebp
 0x79787B: jmp     short loc_797880
-0x79787D: align 10h
 0x797880: mov     ebx, [esp+80h+var_68]
 0x797884: cmp     bx, 0FFFFh
 0x797888: jle     loc_797911
@@ -104,7 +103,7 @@
 0x79790C: jmp     loc_797880
 0x797911: cmp     [esp+80h+var_6C], 0
 0x797916: jle     loc_797EBA
-0x79791C: cmp     byte ptr [esp+80h+arg_0], 0
+0x79791C: cmp     [esp+80h+retainOriginal], 0
 0x797924: jz      loc_7979F0
 0x79792A: xor     ebp, ebp
 0x79792C: lea     esp, [esp+0]
@@ -213,7 +212,7 @@
 0x797A56: push    ecx; Size
 0x797A57: call    FormHeapAlloc
 0x797A5C: add     esp, 4
-0x797A5F: mov     [esp+80h+var_54], eax
+0x797A5F: mov     [esp+80h+value], eax
 0x797A63: mov     [esp+80h+Dst], eax
 0x797A67: mov     [esp+80h+var_5C], 0
 0x797A6F: mov     ebp, [esp+80h+var_68]
@@ -289,16 +288,16 @@
 0x797B3D: jb      short loc_797B44
 0x797B3F: call    __invalid_parameter_noinfo
 0x797B44: movzx   eax, word ptr [esp+80h+var_64]
-0x797B49: mov     [esp+80h+var_50], eax
+0x797B49: mov     dword ptr [esp+80h+var_50], eax
 0x797B4D: add     eax, eax
-0x797B4F: push    eax; Size
+0x797B4F: push    eax; byteCount
 0x797B50: mov     [esp+84h+var_64], eax
 0x797B54: mov     eax, [ebx+4]
 0x797B57: mov     ecx, [eax+ebp*4]
 0x797B5A: mov     ebx, [esp+84h+Dst]
-0x797B5E: push    ecx; Src
-0x797B5F: push    ebx; Dst
-0x797B60: call    _memcpy
+0x797B5E: push    ecx; source
+0x797B5F: push    ebx; destination
+0x797B60: call    _memcpy;
 0x797B65: add     ebx, [esp+8Ch+var_64]
 0x797B69: mov     eax, [esi+4Ch]
 0x797B6C: add     esp, 0Ch
@@ -328,9 +327,9 @@
 0x797BAF: sub     eax, 1
 0x797BB2: cmp     ebp, eax
 0x797BB4: jge     loc_797D80
-0x797BBA: cmp     byte ptr [esp+80h+arg_0], 0
+0x797BBA: cmp     [esp+80h+retainOriginal], 0
 0x797BC2: jz      loc_797CDF
-0x797BC8: mov     ecx, [esp+80h+var_50]
+0x797BC8: mov     ecx, dword ptr [esp+80h+var_50]
 0x797BCC: and     ecx, 80000001h
 0x797BD2: jns     short loc_797BD9
 0x797BD4: dec     ecx
@@ -351,7 +350,7 @@
 0x797BFC: add     eax, [esi+4Ch]
 0x797BFF: mov     edx, [eax+4]
 0x797C02: test    edx, edx
-0x797C04: mov     [esp+80h+var_50], eax
+0x797C04: mov     dword ptr [esp+80h+var_50], eax
 0x797C08: jz      short loc_797C16
 0x797C0A: mov     ecx, [eax+8]
 0x797C0D: sub     ecx, edx
@@ -359,7 +358,7 @@
 0x797C12: cmp     ebp, ecx
 0x797C14: jb      short loc_797C1F
 0x797C16: call    __invalid_parameter_noinfo
-0x797C1B: mov     eax, [esp+80h+var_50]
+0x797C1B: mov     eax, dword ptr [esp+80h+var_50]
 0x797C1F: mov     eax, [eax+4]
 0x797C22: mov     ecx, [eax+ebp*4]
 0x797C25: mov     edx, [esp+80h+var_64]
@@ -380,7 +379,7 @@
 0x797C51: add     eax, [esi+4Ch]
 0x797C54: mov     edx, [eax+4]
 0x797C57: test    edx, edx
-0x797C59: mov     [esp+80h+var_50], eax
+0x797C59: mov     dword ptr [esp+80h+var_50], eax
 0x797C5D: jz      short loc_797C6B
 0x797C5F: mov     ecx, [eax+8]
 0x797C62: sub     ecx, edx
@@ -388,7 +387,7 @@
 0x797C67: cmp     ebp, ecx
 0x797C69: jb      short loc_797C74
 0x797C6B: call    __invalid_parameter_noinfo
-0x797C70: mov     eax, [esp+80h+var_50]
+0x797C70: mov     eax, dword ptr [esp+80h+var_50]
 0x797C74: mov     ecx, [eax+4]
 0x797C77: mov     edx, [ecx+ebp*4]
 0x797C7A: mov     eax, [esp+80h+var_64]
@@ -438,7 +437,7 @@
 0x797CFC: add     eax, [esi+4Ch]
 0x797CFF: mov     edx, [eax+4]
 0x797D02: test    edx, edx
-0x797D04: mov     [esp+80h+var_50], eax
+0x797D04: mov     dword ptr [esp+80h+var_50], eax
 0x797D08: jz      short loc_797D16
 0x797D0A: mov     ecx, [eax+8]
 0x797D0D: sub     ecx, edx
@@ -446,7 +445,7 @@
 0x797D12: cmp     ebp, ecx
 0x797D14: jb      short loc_797D1F
 0x797D16: call    __invalid_parameter_noinfo
-0x797D1B: mov     eax, [esp+80h+var_50]
+0x797D1B: mov     eax, dword ptr [esp+80h+var_50]
 0x797D1F: mov     edx, [eax+4]
 0x797D22: mov     ecx, [esp+80h+var_64]
 0x797D26: mov     eax, [edx+ebp*4]
@@ -483,12 +482,12 @@
 0x797D80: add     [esp+80h+var_5C], 1
 0x797D85: jmp     loc_797A6F
 0x797D8A: movzx   eax, word ptr [esp+80h+var_6C]
-0x797D8F: mov     ecx, [esp+80h+var_28]
+0x797D8F: mov     ecx, [esp+80h+source.begin]
 0x797D93: test    ecx, ecx
-0x797D95: mov     [esp+80h+var_50], eax
+0x797D95: mov     dword ptr [esp+80h+var_50], eax
 0x797D99: movzx   ebx, bp
 0x797D9C: jz      short loc_797DAB
-0x797D9E: mov     eax, [esp+80h+var_24]
+0x797D9E: mov     eax, [esp+80h+source.end]
 0x797DA2: sub     eax, ecx
 0x797DA4: sar     eax, 4
 0x797DA7: cmp     ebx, eax
@@ -496,7 +495,7 @@
 0x797DAB: call    __invalid_parameter_noinfo
 0x797DB0: mov     edi, ebx
 0x797DB2: shl     edi, 4
-0x797DB5: add     edi, [esp+80h+var_28]
+0x797DB5: add     edi, [esp+80h+source.begin]
 0x797DB9: mov     eax, [edi+4]
 0x797DBC: test    eax, eax
 0x797DBE: jnz     short loc_797DC4
@@ -523,24 +522,24 @@
 0x797DF2: jbe     short loc_797DF9
 0x797DF4: call    __invalid_parameter_noinfo
 0x797DF9: lea     edx, [esp+80h+var_50]
-0x797DFD: push    edx; int
-0x797DFE: push    ebp; Src
-0x797DFF: push    edi; int
+0x797DFD: push    edx; value
+0x797DFE: push    ebp; position
+0x797DFF: push    edi; position
 0x797E00: lea     eax, [esp+8Ch+var_4C]
-0x797E04: push    eax; int
-0x797E05: mov     ecx, edi
-0x797E07: call    sub_795A40
+0x797E04: push    eax; result
+0x797E05: mov     ecx, edi; this
+0x797E07: call    OB_stVectorUShort_InsertOne_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned short>; used when CombineStrips appends a composite strip length.
 0x797E0C: mov     ebp, [esp+80h+var_68]
-0x797E10: mov     ecx, [esp+80h+var_38]
+0x797E10: mov     ecx, [esp+80h+var_3C.begin]
 0x797E14: test    ecx, ecx
 0x797E16: jz      short loc_797E25
-0x797E18: mov     eax, [esp+80h+var_34]
+0x797E18: mov     eax, [esp+80h+var_3C.end]
 0x797E1C: sub     eax, ecx
 0x797E1E: sar     eax, 4
 0x797E21: cmp     ebx, eax
 0x797E23: jb      short loc_797E2E
 0x797E25: call    __invalid_parameter_noinfo
-0x797E2A: mov     ecx, [esp+80h+var_38]
+0x797E2A: mov     ecx, [esp+80h+var_3C.begin]
 0x797E2E: mov     edi, ebx
 0x797E30: shl     edi, 4
 0x797E33: mov     eax, [edi+ecx+4]
@@ -560,7 +559,7 @@
 0x797E55: cmp     edx, ecx
 0x797E57: jnb     short loc_797E6A
 0x797E59: mov     eax, [edi+8]
-0x797E5C: mov     ecx, [esp+80h+var_54]
+0x797E5C: mov     ecx, [esp+80h+value]
 0x797E60: mov     [eax], ecx
 0x797E62: add     eax, 4
 0x797E65: mov     [edi+8], eax
@@ -569,42 +568,42 @@
 0x797E6D: cmp     eax, ebp
 0x797E6F: jbe     short loc_797E76
 0x797E71: call    __invalid_parameter_noinfo
-0x797E76: lea     edx, [esp+80h+var_54]
-0x797E7A: push    edx; int
+0x797E76: lea     edx, [esp+80h+value]
+0x797E7A: push    edx; value
 0x797E7B: push    ebp; Src
-0x797E7C: push    edi; int
-0x797E7D: lea     eax, [esp+8Ch+var_44]
-0x797E81: push    eax; int
-0x797E82: mov     ecx, edi
-0x797E84: call    sub_7A3620
+0x797E7C: push    edi; position
+0x797E7D: lea     eax, [esp+8Ch+result]
+0x797E81: push    eax; result
+0x797E82: mov     ecx, edi; this
+0x797E84: call    OB_stVector4_InsertOne_010201A0; Oblivion binary evidence: inserts one four-byte value at a checked owner/current iterator by calling OB_stVector4_InsertFill, then returns a relocated iterator to the inserted slot. Widely folded across SpeedTree pointer and scalar vectors.
 0x797E89: mov     ebp, [esp+80h+var_68]
-0x797E8D: mov     ecx, [esp+80h+var_18]
+0x797E8D: mov     ecx, [esp+80h+var_1C.begin]
 0x797E91: test    ecx, ecx
 0x797E93: jz      short loc_797EA2
-0x797E95: mov     eax, [esp+80h+var_14]
+0x797E95: mov     eax, [esp+80h+var_1C.end]
 0x797E99: sub     eax, ecx
 0x797E9B: sar     eax, 2
 0x797E9E: cmp     ebx, eax
 0x797EA0: jb      short loc_797EAB
 0x797EA2: call    __invalid_parameter_noinfo
-0x797EA7: mov     ecx, [esp+80h+var_18]
+0x797EA7: mov     ecx, [esp+80h+var_1C.begin]
 0x797EAB: mov     edx, [esp+80h+var_6C]
 0x797EAF: add     edx, 0FFFFFFFEh
 0x797EB2: mov     [ecx+ebx*4], edx
 0x797EB5: jmp     loc_797FD0
-0x797EBA: mov     ecx, [esp+80h+var_28]
+0x797EBA: mov     ecx, [esp+80h+source.begin]
 0x797EBE: test    ecx, ecx
 0x797EC0: movzx   edi, bx
-0x797EC3: mov     [esp+80h+var_54], edi
+0x797EC3: mov     [esp+80h+value], edi
 0x797EC7: jz      short loc_797ED6
-0x797EC9: mov     eax, [esp+80h+var_24]
+0x797EC9: mov     eax, [esp+80h+source.end]
 0x797ECD: sub     eax, ecx
 0x797ECF: sar     eax, 4
 0x797ED2: cmp     edi, eax
 0x797ED4: jb      short loc_797EDB
 0x797ED6: call    __invalid_parameter_noinfo
 0x797EDB: shl     edi, 4
-0x797EDE: add     edi, [esp+80h+var_28]
+0x797EDE: add     edi, [esp+80h+source.begin]
 0x797EE2: mov     ebx, [edi+8]
 0x797EE5: cmp     [edi+4], ebx
 0x797EE8: jbe     short loc_797EEF
@@ -621,7 +620,7 @@
 0x797F07: test    eax, eax
 0x797F09: lea     ecx, [eax+eax]
 0x797F0C: lea     edx, [ecx+ebp]
-0x797F0F: mov     [esp+80h+var_50], edx
+0x797F0F: mov     dword ptr [esp+80h+var_50], edx
 0x797F13: jle     short loc_797F21
 0x797F15: push    ecx; Src
 0x797F16: push    ebx; Src
@@ -629,19 +628,19 @@
 0x797F18: push    ebp; Dst
 0x797F19: call    _memmove_s
 0x797F1E: add     esp, 10h
-0x797F21: mov     eax, [esp+80h+var_50]
+0x797F21: mov     eax, dword ptr [esp+80h+var_50]
 0x797F25: mov     [edi+8], eax
-0x797F28: mov     ecx, [esp+80h+var_38]
+0x797F28: mov     ecx, [esp+80h+var_3C.begin]
 0x797F2C: test    ecx, ecx
 0x797F2E: jz      short loc_797F3F
-0x797F30: mov     eax, [esp+80h+var_34]
+0x797F30: mov     eax, [esp+80h+var_3C.end]
 0x797F34: sub     eax, ecx
 0x797F36: sar     eax, 4
-0x797F39: cmp     [esp+80h+var_54], eax
+0x797F39: cmp     [esp+80h+value], eax
 0x797F3D: jb      short loc_797F48
 0x797F3F: call    __invalid_parameter_noinfo
-0x797F44: mov     ecx, [esp+80h+var_38]
-0x797F48: mov     edi, [esp+80h+var_54]
+0x797F44: mov     ecx, [esp+80h+var_3C.begin]
+0x797F48: mov     edi, [esp+80h+value]
 0x797F4C: shl     edi, 4
 0x797F4F: mov     ebx, [edi+ecx+8]
 0x797F53: add     edi, ecx
@@ -660,7 +659,7 @@
 0x797F78: test    eax, eax
 0x797F7A: lea     ecx, ds:0[eax*4]
 0x797F81: lea     edx, [ecx+ebp]
-0x797F84: mov     [esp+80h+var_50], edx
+0x797F84: mov     dword ptr [esp+80h+var_50], edx
 0x797F88: jle     short loc_797F96
 0x797F8A: push    ecx; Src
 0x797F8B: push    ebx; Src
@@ -668,19 +667,19 @@
 0x797F8D: push    ebp; Dst
 0x797F8E: call    _memmove_s
 0x797F93: add     esp, 10h
-0x797F96: mov     eax, [esp+80h+var_50]
+0x797F96: mov     eax, dword ptr [esp+80h+var_50]
 0x797F9A: mov     [edi+8], eax
-0x797F9D: mov     ecx, [esp+80h+var_18]
+0x797F9D: mov     ecx, [esp+80h+var_1C.begin]
 0x797FA1: test    ecx, ecx
 0x797FA3: jz      short loc_797FB7
-0x797FA5: mov     eax, [esp+80h+var_14]
+0x797FA5: mov     eax, [esp+80h+var_1C.end]
 0x797FA9: movzx   edx, word ptr [esp+80h+var_68]
 0x797FAE: sub     eax, ecx
 0x797FB0: sar     eax, 2
 0x797FB3: cmp     edx, eax
 0x797FB5: jb      short loc_797FC0
 0x797FB7: call    __invalid_parameter_noinfo
-0x797FBC: mov     ecx, [esp+80h+var_18]
+0x797FBC: mov     ecx, [esp+80h+var_1C.begin]
 0x797FC0: movzx   eax, word ptr [esp+80h+var_68]
 0x797FC5: mov     ebp, [esp+80h+var_68]
 0x797FC9: mov     dword ptr [ecx+eax*4], 0
@@ -688,53 +687,53 @@
 0x797FD3: cmp     bp, [esi+20h]
 0x797FD7: mov     [esp+80h+var_68], ebp
 0x797FDB: jb      loc_797875
-0x797FE1: mov     ecx, esi
-0x797FE3: call    sub_7969B0
-0x797FE8: lea     ecx, [esp+80h+var_2C]
-0x797FEC: push    ecx
-0x797FED: lea     ecx, [esi+38h]
-0x797FF0: call    sub_796BC0
+0x797FE1: mov     ecx, esi; this
+0x797FE3: call    OB_CIndexedGeometry_DeleteIndexData_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::DeleteIndexData frees every owned unsigned-short strip buffer, nulls the pointer slots, clears each inner pointer vector, then empties the per-LOD strip container.
+0x797FE8: lea     ecx, [esp+80h+source]
+0x797FEC: push    ecx; source
+0x797FED: lea     ecx, [esi+38h]; this
+0x797FF0: call    OB_stVector_stVectorUShort_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<vector<unsigned short>>. Reuses outer capacity when possible, otherwise destroys/frees and allocates exact 0x10-byte owner storage.
 0x797FF5: lea     edx, [esp+80h+var_3C]
-0x797FF9: push    edx
-0x797FFA: lea     ecx, [esi+48h]
-0x797FFD: call    sub_796D10
+0x797FF9: push    edx; source
+0x797FFA: lea     ecx, [esi+48h]; this
+0x797FFD: call    OB_stVector_stVectorUShortPtr_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<vector<unsigned short*>>. The 4-byte inner element type selects the shared inner-vector copy machinery.
 0x798002: lea     eax, [esp+80h+var_1C]
-0x798006: push    eax
-0x798007: lea     ecx, [esi+28h]
-0x79800A: call    sub_785580
-0x79800F: mov     eax, [esp+80h+var_18]
+0x798006: push    eax; source
+0x798007: lea     ecx, [esi+28h]; this
+0x79800A: call    OB_stVectorUInt32_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned int>, covering self, empty, capacity-reuse, and reallocation paths. CIndexedGeometry::CombineStrips uses it for per-LOD triangle totals.
+0x79800F: mov     eax, [esp+80h+var_1C.begin]
 0x798013: test    eax, eax
 0x798015: jz      short loc_798020
 0x798017: push    eax
-0x798018: call    FormHeapFree
+0x798018: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79801D: add     esp, 4
-0x798020: mov     esi, [esp+80h+var_38]
+0x798020: mov     esi, [esp+80h+var_3C.begin]
 0x798024: test    esi, esi
 0x798026: jz      short loc_798049
-0x798028: mov     ecx, [esp+80h+arg_0]
-0x79802F: mov     eax, [esp+80h+var_34]
+0x798028: mov     ecx, dword ptr [esp+80h+retainOriginal]
+0x79802F: mov     eax, [esp+80h+var_3C.end]
 0x798033: push    ecx
 0x798034: lea     edx, [esp+84h+var_3C]
 0x798038: push    edx
-0x798039: push    eax
-0x79803A: push    esi
-0x79803B: call    sub_794FC0
+0x798039: push    eax; last
+0x79803A: push    esi; first
+0x79803B: call    OB_stVector4_DestroyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.
 0x798040: push    esi
-0x798041: call    FormHeapFree
+0x798041: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x798046: add     esp, 14h
-0x798049: mov     esi, [esp+80h+var_28]
+0x798049: mov     esi, [esp+80h+source.begin]
 0x79804D: test    esi, esi
 0x79804F: jz      short loc_798072
-0x798051: mov     ecx, [esp+80h+arg_0]
-0x798058: mov     eax, [esp+80h+var_24]
+0x798051: mov     ecx, dword ptr [esp+80h+retainOriginal]
+0x798058: mov     eax, [esp+80h+source.end]
 0x79805C: push    ecx
-0x79805D: lea     edx, [esp+84h+var_2C]
+0x79805D: lea     edx, [esp+84h+source]
 0x798061: push    edx
-0x798062: push    eax
-0x798063: push    esi
-0x798064: call    sub_794FC0
+0x798062: push    eax; last
+0x798063: push    esi; first
+0x798064: call    OB_stVector4_DestroyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.
 0x798069: push    esi
-0x79806A: call    FormHeapFree
+0x79806A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79806F: add     esp, 14h
 0x798072: mov     ecx, [esp+80h+var_C]
 0x798076: mov     large fs:0, ecx
@@ -745,3 +744,16 @@
 0x798081: pop     ebx
 0x798082: add     esp, 6Ch
 0x798085: retn    4
+0x9CC0F0: lea     ecx, [ebp-2Ch]; this
+0x9CC0F3: jmp     OB_stVector_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Full destructor for an outer vector of 0x10-byte vector owners. Destroys every inner owner, frees outer storage, and clears the triplet; structurally shared by multiple specializations.
+0x9CC0F8: lea     ecx, [ebp-3Ch]; this
+0x9CC0FB: jmp     OB_stVector_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Full destructor for an outer vector of 0x10-byte vector owners. Destroys every inner owner, frees outer storage, and clears the triplet; structurally shared by multiple specializations.
+0x9CC100: lea     ecx, [ebp-1Ch]; this
+0x9CC103: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC108: mov     edx, [esp+arg_4]
+0x9CC10C: lea     eax, [edx-70h]
+0x9CC10F: mov     ecx, [edx-74h]
+0x9CC112: xor     ecx, eax
+0x9CC114: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC119: mov     eax, offset stru_AF5174
+0x9CC11E: jmp     ___CxxFrameHandler3

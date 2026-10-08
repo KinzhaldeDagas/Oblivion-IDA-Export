@@ -1,1 +1,1 @@
-NumericIDBufferMap
+struct NumericIDBufferMap;

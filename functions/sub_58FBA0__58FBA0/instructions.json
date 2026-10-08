@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x58FBDD",
-    "line": "push    0FA5h",
+    "line": "push    0FA5h; trait",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x58FBE2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x58FBEB",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x58FC0E",
-    "line": "push    0FA5h",
+    "line": "push    0FA5h; trait",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x58FC13",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58FC15",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x58FC25",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58FC27",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58FC2A",
-    "line": "call    Tile_Property_SetFloatValue?",
+    "line": "call    Tile__Value__SetFloat; Verified: marks numeric; if changed or string trait 0xFDE, clears string, stores number, clears own expression actions via 0x588930, then CalculateValue(this,true). Same-value ordinary traits bypass clear/evaluation. Unlike Fallout SetFloat, no abClearActions parameter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -502,12 +502,6 @@
     "line": "jmp     short loc_58FCB0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x58FCA9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x58FCB0",
@@ -853,7 +847,7 @@
   },
   {
     "ea": "0x58FD4B",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+value]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -955,7 +949,7 @@
   },
   {
     "ea": "0x58FD78",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

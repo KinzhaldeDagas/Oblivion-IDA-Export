@@ -1,4 +1,4 @@
-0x769960: push    ecx
+0x769960: push    ecx; MoonSugarEffect decode: batch/prepack geometry entry builder. Chooses/caches shader interface, runs skinning gate, registers geometry with dynamic/unshared geometry group, then appends 0x10 queue nodes {NiGeometry*, skinPartitionOr0, BuffDataOrPartitionBuffer, next} using dword_B42164 free list and renderer head/tail fields. Not an isolated object-mask draw API.
 0x769961: mov     eax, [esp+4+arg_0]
 0x769965: push    ebx
 0x769966: mov     ebx, [eax+0B8h]
@@ -12,7 +12,7 @@
 0x769984: jnz     short loc_7699B5
 0x769986: mov     eax, [eax+0BCh]
 0x76998C: push    eax
-0x76998D: push    offset NiD3DShaderInterfaceString
+0x76998D: push    0B42858h
 0x769992: call    NiRTTI_Cast
 0x769997: add     esp, 8
 0x76999A: push    eax; a2
@@ -35,7 +35,7 @@
 0x7699CE: push    edi
 0x7699CF: push    ecx
 0x7699D0: mov     ecx, esi
-0x7699D2: call    sub_768890
+0x7699D2: call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.
 0x7699D7: mov     dx, [ebp+2Eh]
 0x7699DB: and     dx, 0F000h
 0x7699E0: xor     edi, edi
@@ -64,7 +64,7 @@
 0x769A15: push    ebp; NiGeometryData *
 0x769A16: push    eax; NiGeometryGroup *
 0x769A17: mov     ecx, [esi+8A0h]
-0x769A1D: call    NiGeometryGroup__AddGeometryDataToGroup
+0x769A1D: call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x769A22: cmp     [esp+14h+var_4], 0
 0x769A27: jz      short loc_769AA0
 0x769A29: mov     eax, [ebx+0Ch]

@@ -1,6 +1,6 @@
-0x78E6E0: sub     esp, 0Ch
+0x78E6E0: sub     esp, 0Ch; Oblivion compiler-lowered stVec::operator+: initializes the hidden return object with min(lhs.size,rhs.size), then adds components over lhs.size, matching the shipped RT4.1 source semantics (which assume compatible sizes).
 0x78E6E3: push    ebx
-0x78E6E4: mov     ebx, [esp+10h+arg_4]
+0x78E6E4: mov     ebx, [esp+10h+rhs]
 0x78E6E8: mov     edx, [ebx+14h]
 0x78E6EB: push    ebp
 0x78E6EC: mov     ebp, [ecx+14h]
@@ -11,7 +11,7 @@
 0x78E6F5: mov     edx, ebp
 0x78E6F7: cmp     edx, 5
 0x78E6FA: fldz
-0x78E6FC: mov     eax, [esp+1Ch+arg_0]
+0x78E6FC: mov     eax, [esp+1Ch+result]
 0x78E700: fst     dword ptr [eax+10h]
 0x78E703: fst     dword ptr [eax+0Ch]
 0x78E706: lea     esi, [eax+8]
@@ -29,7 +29,7 @@
 0x78E727: mov     ebp, ebx
 0x78E729: sub     ebp, ecx
 0x78E72B: mov     eax, ebx
-0x78E72D: sub     eax, [esp+1Ch+arg_0]
+0x78E72D: sub     eax, [esp+1Ch+result]
 0x78E731: mov     [esp+1Ch+var_C], ebp
 0x78E735: mov     ebp, [ecx+14h]
 0x78E738: lea     edx, [ecx+4]
@@ -56,7 +56,7 @@
 0x78E77C: fadd    dword ptr [edx-8]
 0x78E77F: fstp    dword ptr [esi-0Ch]
 0x78E782: jl      short loc_78E740
-0x78E784: mov     eax, [esp+1Ch+arg_0]
+0x78E784: mov     eax, [esp+1Ch+result]
 0x78E788: cmp     edi, ebp
 0x78E78A: jge     short loc_78E7A9
 0x78E78C: mov     esi, eax

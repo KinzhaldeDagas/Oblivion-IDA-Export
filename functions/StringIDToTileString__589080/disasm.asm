@@ -1,4 +1,4 @@
-0x589080: push    esi
+0x589080: push    esi; Verified: ID>=10000 uses dynamic-table slot ID%10000 then checks stored ID; lower IDs scan static buckets. Bounds/error behavior for arbitrary invalid IDs remains Unknown. Do not call with an unverified invented custom ID.
 0x589081: mov     esi, [esp+4+arg_0]
 0x589085: cmp     esi, 2710h
 0x58908B: jl      short loc_5890C5
@@ -26,7 +26,6 @@
 0x5890C5: mov     edx, offset dword_B3B0B4
 0x5890CA: push    edi
 0x5890CB: jmp     short loc_5890D0
-0x5890CD: align 10h
 0x5890D0: mov     eax, [edx]
 0x5890D2: test    eax, eax
 0x5890D4: jz      short loc_5890ED
@@ -41,7 +40,7 @@
 0x5890E9: test    eax, eax
 0x5890EB: jnz     short loc_5890D6
 0x5890ED: add     edx, 10h
-0x5890F0: cmp     edx, offset byte_B3B274
+0x5890F0: cmp     edx, (offset dword_B3B0B4+1C0h)
 0x5890F6: jl      short loc_5890D0
 0x5890F8: xor     eax, eax
 0x5890FA: pop     edi

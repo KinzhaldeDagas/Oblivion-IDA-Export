@@ -1,4 +1,4 @@
-0x766F30: sub     esp, 14h
+0x766F30: sub     esp, 14h; DX10 bridge note: EndBatch reaches D3D9 DrawIndexedPrimitive/DrawPrimitive only after shader pass setup, stream/index binding via shader vtable +0x3C, and NiDX9ShaderConstantManager flush. The D3D9 draw hook is therefore the authoritative boundary for loading captured DX10 state; companion SM4 shaders are preferred, with generated fallback DX10 shaders only as a diagnostic path when companions are missing.
 0x766F33: push    ebx
 0x766F34: push    esi
 0x766F35: mov     esi, ecx
@@ -105,7 +105,7 @@
 0x76705D: mov     edi, [ebx+8]
 0x767060: mov     ebx, [ebx+4]
 0x767063: mov     [esp+20h+var_C], ecx
-0x767067: mov     ecx, [esi+624h]; void *
+0x767067: mov     ecx, [esi+624h]; this
 0x76706D: cmp     ecx, [esi+0A94h]
 0x767073: mov     [esp+20h], ebx
 0x767077: lea     eax, [ebp+20h]
@@ -117,7 +117,7 @@
 0x76708A: jbe     short loc_76709F
 0x76708C: push    edx
 0x76708D: push    offset aEndbatchCannot; "EndBatch> Cannot render partition with "...
-0x767092: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x767092: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x767097: add     esp, 8
 0x76709A: jmp     loc_7671E1
 0x76709F: mov     edx, [ecx]
@@ -168,7 +168,7 @@
 0x767113: mov     eax, [edx+4]
 0x767116: call    eax
 0x767118: xor     eax, eax
-0x76711A: cmp     [edi+30h], eax
+0x76711A: cmp     [edi+30h], eax; Comparative family verified with Fallout NiXenonRenderer::Do_EndBatch 0x827A7C88: both use shader pass loop -> buffer preparation -> IB/null branch -> per-array indexed loop or one non-indexed draw -> finish/next geometry/pass -> clear dirty low nibble -> shader release and batch-list cleanup. Fallout Xenon descriptor IB/base/type/primitiveCount/arrayCount/lengths are +0x34/+0x38/+0x3C/+0x40/+0x48/+0x4C, versus Oblivion +0x30/+0x34/+0x38/+0x3C/+0x44/+0x48. Xenon converts primitive count through D3DPRIMITIVEVERTEXCOUNT before DrawVertices; Oblivion passes primitive count to D3D9. Do not transplant Xenon offsets, API counts, or decompiler mis-typed virtual member names.
 0x76711D: jz      short loc_76718E
 0x76711F: cmp     [edi+44h], eax
 0x767122: mov     [esp+20h+var_8], eax
@@ -217,7 +217,7 @@
 0x7671A4: mov     ecx, [edi+38h]
 0x7671A7: push    ecx
 0x7671A8: push    eax
-0x7671A9: call    edx
+0x7671A9: call    edx; Verified Oblivion batch non-indexed draw: descriptor IndexBuffer+0x30 is null; DrawPrimitive(Type=+0x38, unsigned StartVertex bits=+0x34, PrimitiveCount=+0x3C). This is a distinct geometry submission path, not an indexed-template requirement. DX11 integration (2026-10-01): first-use observation can own vertex publications and generate sequential R32 indices for triangle list/strip indirect draws; preserve start/count and vertex order. This backend representation does not prove native traversal suppression is enabled.
 0x7671AB: mov     ecx, [esi+624h]
 0x7671B1: mov     edx, [ecx]
 0x7671B3: mov     edx, [edx+40h]

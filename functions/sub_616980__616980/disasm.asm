@@ -19,7 +19,7 @@
 0x6169AF: push    ecx
 0x6169B0: push    eax
 0x6169B1: mov     ecx, edi
-0x6169B3: call    sub_613BB0
+0x6169B3: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x6169B8: test    al, al
 0x6169BA: mov     edx, [edi+80h]
 0x6169C0: jz      short loc_6169EF
@@ -52,7 +52,7 @@
 0x616A0A: push    ecx
 0x616A0B: push    eax
 0x616A0C: mov     ecx, edi
-0x616A0E: call    sub_613BB0
+0x616A0E: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x616A13: test    al, al
 0x616A15: mov     edx, [edi+7Ch]
 0x616A18: jz      short loc_616A44
@@ -100,7 +100,7 @@
 0x616A8A: test    ebp, ebp
 0x616A8C: jz      loc_616B89
 0x616A92: push    0; Seed
-0x616A94: call    GetRandomLargeInteger?
+0x616A94: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x616A99: cdq
 0x616A9A: lea     ecx, [ebp+ebp+0]
 0x616A9E: idiv    ecx
@@ -115,7 +115,7 @@
 0x616AB3: push    edx
 0x616AB4: push    eax
 0x616AB5: mov     ecx, edi
-0x616AB7: call    sub_613BB0
+0x616AB7: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x616ABC: test    al, al
 0x616ABE: jz      short loc_616AC4
 0x616AC0: mov     esi, [ebx]
@@ -140,7 +140,7 @@
 0x616AEA: push    ecx
 0x616AEB: push    eax
 0x616AEC: mov     ecx, edi
-0x616AEE: call    sub_613BB0
+0x616AEE: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x616AF3: test    al, al
 0x616AF5: jz      short loc_616AFD
 0x616AF7: mov     esi, [esi]
@@ -155,7 +155,7 @@
 0x616B0B: push    ebx
 0x616B0C: push    eax
 0x616B0D: mov     ecx, edi
-0x616B0F: call    sub_613BB0
+0x616B0F: call    CombatController_CanUseSpellAgainstCurrentTarget
 0x616B14: test    al, al
 0x616B16: jnz     short loc_616B3E
 0x616B18: mov     esi, [esi+4]
@@ -201,7 +201,7 @@
 0x616B7E: jnz     short loc_616B89
 0x616B80: mov     ecx, [esi]
 0x616B82: push    0
-0x616B84: call    sub_41A610
+0x616B84: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x616B89: pop     edi
 0x616B8A: mov     eax, esi
 0x616B8C: pop     esi

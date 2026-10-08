@@ -20,13 +20,13 @@
 0x916193: jz      short loc_9161B2
 0x916195: mov     ecx, [eax-4]
 0x916198: lea     edi, [eax-4]
-0x91619B: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x91619B: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x9161A0: push    ecx; int
 0x9161A1: push    8; unsigned int
 0x9161A3: push    eax; void *
 0x9161A4: call    $LN21
 0x9161A9: push    edi
-0x9161AA: call    FormHeapFree
+0x9161AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9161AF: add     esp, 4
 0x9161B2: mov     dword ptr [esi], offset ??_7hkBaseObject@@6B@; const hkBaseObject::`vftable'
 0x9161B8: mov     ecx, [esp+1Ch+var_C]
@@ -36,3 +36,12 @@
 0x9161C5: pop     esi
 0x9161C6: add     esp, 10h
 0x9161C9: retn
+0x9D7B50: mov     ecx, [ebp-10h]
+0x9D7B53: jmp     sub_4BFC40
+0x9D7B58: mov     edx, [esp+arg_4]
+0x9D7B5C: lea     eax, [edx-0Ch]
+0x9D7B5F: mov     ecx, [edx-10h]
+0x9D7B62: xor     ecx, eax
+0x9D7B64: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7B69: mov     eax, offset stru_AFF69C
+0x9D7B6E: jmp     ___CxxFrameHandler3

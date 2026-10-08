@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x70C230",
+      "0x70C332"
+    ]
+  ],
+  "chunks_sha256": "0fe9fe0fc6f72050733d7c9d187cd0e4cb421818167d36f67111744c6a7d70da",
+  "comment_regular": "Pass329 decode: this camera-bound helper only fits near/far to the supplied source sphere (projected center +/- radius) and updates the camera. It does not recompute or overwrite ShadowSceneLight::Render's lateral FOV, so D1's remaining large-static silhouette cannot be assigned to a second lateral framing stage.",
+  "comment_repeatable": "Pass329 decode: this camera-bound helper only fits near/far to the supplied source sphere (projected center +/- radius) and updates the camera. It does not recompute or overwrite ShadowSceneLight::Render's lateral FOV, so D1's remaining large-static silhouette cannot be assigned to a second lateral framing stage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_70C230",
   "end_ea": "0x70C332",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_70C230",
   "segment": ".text",
   "sha256": "0fe9fe0fc6f72050733d7c9d187cd0e4cb421818167d36f67111744c6a7d70da",
   "size": 258,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70C230",
+  "total_chunk_size": 258,
   "type": "char __thiscall(float *this, float *)",
   "xrefs_from_count": 82,
   "xrefs_to_count": 1

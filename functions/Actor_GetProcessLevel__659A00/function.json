@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 47,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 73,
+  "chunks": [
+    [
+      "0x659A00",
+      "0x659A14"
+    ]
+  ],
+  "chunks_sha256": "797d43fb5025cb4ed1bbe260ffb1d31f8273fdf5772c43e8443010a2593b71fb",
+  "comment_regular": "Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
+  "comment_repeatable": "Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Actor::GetProcessLevel",
   "end_ea": "0x659A14",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor::GetProcessLevel",
   "segment": ".text",
   "sha256": "797d43fb5025cb4ed1bbe260ffb1d31f8273fdf5772c43e8443010a2593b71fb",
   "size": 20,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x659A00",
+  "total_chunk_size": 20,
   "type": "int __thiscall(Actor *this)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 73

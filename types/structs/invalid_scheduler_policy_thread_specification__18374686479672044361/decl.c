@@ -1,1 +1,1 @@
-invalid_scheduler_policy_thread_specification
+typedef exception invalid_scheduler_policy_thread_specification;

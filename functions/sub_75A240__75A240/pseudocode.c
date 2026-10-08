@@ -1,4 +1,4 @@
-char *sub_75A240()
+NiRTTI *sub_75A240()
 {
-  return dword_B418EC;
+  return &stru_B418EC; /*0x75a245*/
 }

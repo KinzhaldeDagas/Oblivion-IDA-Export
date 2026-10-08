@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7D7FF8",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7D8050",
-    "line": "call    sub_7263B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7D806D",
-    "line": "push    0; char",
+    "line": "push    0; copyData",
     "mnemonic": "push",
     "size": 2
   },
@@ -457,85 +457,85 @@
   },
   {
     "ea": "0x7D8073",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D8074",
-    "line": "push    edx; char",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D8075",
-    "line": "push    0; int",
+    "line": "push    0; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8077",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D8079",
-    "line": "call    sub_7260B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D807E",
-    "line": "push    0Ch",
+    "line": "push    0Ch; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8080",
-    "line": "push    0Ch",
+    "line": "push    0Ch; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8082",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D8083",
-    "line": "push    3",
+    "line": "push    3; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8085",
-    "line": "push    0",
+    "line": "push    0; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8087",
-    "line": "push    0",
+    "line": "push    0; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8089",
-    "line": "push    0",
+    "line": "push    0; streamIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D808B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D808D",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,91 +559,91 @@
   },
   {
     "ea": "0x7D809F",
-    "line": "push    0; char",
+    "line": "push    0; copyData",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80A1",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D80A2",
-    "line": "push    edx; char",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D80A3",
-    "line": "push    1; int",
+    "line": "push    1; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80A5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D80A7",
-    "line": "call    sub_7260B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D80AC",
-    "line": "push    0Ch",
+    "line": "push    0Ch; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80AE",
-    "line": "push    0Ch",
+    "line": "push    0Ch; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80B0",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D80B1",
-    "line": "push    3",
+    "line": "push    3; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80B3",
-    "line": "push    0",
+    "line": "push    0; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80B5",
-    "line": "push    1",
+    "line": "push    1; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80B7",
-    "line": "push    1",
+    "line": "push    1; streamIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D80B9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D80BB",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x7D80E9",
-    "line": "push    0; char",
+    "line": "push    0; copyData",
     "mnemonic": "push",
     "size": 2
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x7D80F0",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x7D80F8",
-    "line": "push    eax; char",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -757,55 +757,55 @@
   },
   {
     "ea": "0x7D80FC",
-    "line": "push    ebx; int",
+    "line": "push    ebx; blockIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D80FD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D80FF",
-    "line": "call    sub_7260B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D8104",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8106",
-    "line": "push    10h",
+    "line": "push    10h; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8108",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D8109",
-    "line": "push    4",
+    "line": "push    4; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D810B",
-    "line": "push    0",
+    "line": "push    0; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D810D",
-    "line": "push    ebx",
+    "line": "push    ebx; blockIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -817,73 +817,73 @@
   },
   {
     "ea": "0x7D8111",
-    "line": "push    ebp",
+    "line": "push    ebp; streamIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D8112",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D8114",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D8119",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D811B",
-    "line": "push    10h",
+    "line": "push    10h; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D811D",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D811E",
-    "line": "push    4",
+    "line": "push    4; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8120",
-    "line": "push    10h",
+    "line": "push    10h; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D8122",
-    "line": "push    ebx",
+    "line": "push    ebx; blockIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D8123",
-    "line": "push    ebx",
+    "line": "push    ebx; streamIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D8124",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D8126",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -988,5 +988,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8CE0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CE3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CE4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8CE9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CEA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CEB",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B8CEF",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CF2",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CF5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8CF7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8CFC",
+    "line": "mov     eax, offset stru_AE3140",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8D01",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

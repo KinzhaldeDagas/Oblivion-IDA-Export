@@ -1,1 +1,1 @@
-TCITEMW
+typedef tagTCITEMW TCITEMW;

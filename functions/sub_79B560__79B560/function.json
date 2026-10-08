@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79B560",
+      "0x79B614"
+    ]
+  ],
+  "chunks_sha256": "0343776ea89aec8b26c79ab893ad9a58781db28aae8a32550c928d8bef9758f3",
+  "comment_regular": "Checked insert-one wrapper for st_vector<SFrondVertex>. Preserves the pre-growth iterator index, delegates to InsertFill(count=1), then returns an 8-byte {owner,current} iterator.",
+  "comment_repeatable": "Checked insert-one wrapper for st_vector<SFrondVertex>. Preserves the pre-growth iterator index, delegates to InsertFill(count=1), then returns an 8-byte {owner,current} iterator.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79B560",
+  "display_name": "OB_stVector_SFrondVertex_InsertOne_010201A0",
   "end_ea": "0x79B614",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79B560",
+  "name": "OB_stVector_SFrondVertex_InsertOne_010201A0",
   "segment": ".text",
   "sha256": "0343776ea89aec8b26c79ab893ad9a58781db28aae8a32550c928d8bef9758f3",
   "size": 180,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79B560",
-  "type": "unsigned int **__thiscall(unsigned int *this, unsigned int **, unsigned int *, char *, const void *)",
+  "total_chunk_size": 180,
+  "type": "OB_stVectorIterator_SFrondVertex_010201A0 *__thiscall(OB_stVector16_010201A0 *this, OB_stVectorIterator_SFrondVertex_010201A0 *result, OB_stVector16_010201A0 *expectedOwner, OB_SFrondVertex_010201A0 *position, const OB_SFrondVertex_010201A0 *value)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 1
 }

@@ -1,31 +1,31 @@
-void __thiscall sub_440190(_DWORD *this, TESObjectCELL *a2)
+void __thiscall sub_440190(Sky **this, TESObjectCELL *a2)
 {
-  _DWORD *v3; // ecx
-  char v4; // al
-  _DWORD *v5; // ecx
+  Sky *v3; // ecx
+  bool HasFlag80; // al
+  Sky *v5; // ecx
 
-  v3 = (_DWORD *)*(this + 0x17);
-  if ( v3[0x37] )
+  v3 = *(this + 0x17); /*0x440193*/
+  if ( v3->unk0DC ) /*0x440196*/
   {
-    if ( a2 )
+    if ( a2 ) /*0x4401a6*/
     {
-      if ( TESObjectCELL_IsInterior(a2) )
+      if ( TESObjectCELL_IsInterior(a2) ) /*0x4401aa*/
       {
-        v4 = sub_4C9820(a2);
-        v5 = (_DWORD *)*(this + 0x17);
-        if ( v4 )
-          sub_543BB0(v5, 2);
+        HasFlag80 = TESObjectCELL_HasFlag80(a2); /*0x4401b5*/
+        v5 = *(this + 0x17); /*0x4401bc*/
+        if ( HasFlag80 ) /*0x4401bf*/
+          Sky__SetMode(v5, 2u); /*0x4401c3*/
         else
-          sub_543BB0(v5, 1);
+          Sky__SetMode(v5, 1u); /*0x4401cf*/
       }
       else
       {
-        sub_543BB0((_DWORD *)*(this + 0x17), 3);
+        Sky__SetMode(*(this + 0x17), 3u); /*0x4401de*/
       }
     }
     else
     {
-      sub_543BB0(v3, 3);
+      Sky__SetMode(v3, 3u); /*0x4401f2*/
     }
   }
 }

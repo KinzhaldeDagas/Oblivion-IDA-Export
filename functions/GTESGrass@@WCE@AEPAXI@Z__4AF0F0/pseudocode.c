@@ -1,4 +1,4 @@
-TESGrass *__thiscall TESGrass::`scalar deleting destructor'(char *this, unsigned int a2)
+TESForm *__thiscall TESGrass::`scalar deleting destructor'(char *this, char a2)
 {
-  return TESGrass::`scalar deleting destructor'((TESGrass *)(this + 0xFFFFFFDC), a2);
+  return TESGrass::`scalar deleting destructor'((TESForm *)(this + 0xFFFFFFDC), a2);
 }

@@ -7,6 +7,6 @@
 0xA25158: cmp     byte ptr [eax], 53h ; 'S'
 0xA2515B: jnz     short locret_A25164
 0xA2515D: push    eax
-0xA2515E: call    FormHeapFree
+0xA2515E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0xA25163: pop     ecx
 0xA25164: retn

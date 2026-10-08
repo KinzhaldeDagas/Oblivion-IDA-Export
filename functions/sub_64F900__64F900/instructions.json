@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x64F925",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x64F931",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x64F9CF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64F9D1",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x64FB4E",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },

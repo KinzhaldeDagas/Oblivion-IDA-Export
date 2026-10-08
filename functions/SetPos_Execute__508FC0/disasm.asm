@@ -23,7 +23,7 @@
 0x508FF7: push    edx; a3
 0x508FF8: push    eax; a2
 0x508FF9: push    ecx; a1
-0x508FFA: call    Script_ExtractArgs
+0x508FFA: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x508FFF: add     esp, 24h
 0x509002: test    al, al
 0x509004: jnz     short loc_50900E
@@ -80,18 +80,18 @@
 0x50909D: test    eax, eax
 0x50909F: jz      short loc_5090CE
 0x5090A1: mov     ecx, eax; this
-0x5090A3: call    MobileObject_GetCharProxy
+0x5090A3: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5090A8: test    eax, eax
 0x5090AA: mov     [esp+28h+var_10], eax
 0x5090AE: jz      short loc_5090CE
 0x5090B0: lea     ecx, [eax+1E0h]
-0x5090B6: call    sub_88D370
+0x5090B6: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x5090BB: cmp     eax, 4
 0x5090BE: jz      short loc_5090CE
 0x5090C0: lea     ecx, [esp+28h+a2]
 0x5090C4: push    ecx; a2
 0x5090C5: mov     ecx, [esp+2Ch+var_10]; this
-0x5090C9: call    sub_452A10
+0x5090C9: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x5090CE: mov     edx, [esi]
 0x5090D0: mov     eax, [edx+154h]
 0x5090D6: mov     ecx, esi
@@ -111,7 +111,7 @@
 0x5090F8: push    ecx
 0x5090F9: mov     ecx, esi; this
 0x5090FB: fstp    [esp+30h+var_30]; a2
-0x5090FE: call    NiAVObject_UpdateNiAVObject
+0x5090FE: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x509103: pop     edi
 0x509104: pop     esi
 0x509105: pop     ebp

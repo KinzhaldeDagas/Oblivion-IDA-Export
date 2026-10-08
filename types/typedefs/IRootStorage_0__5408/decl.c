@@ -1,1 +1,1 @@
-IRootStorage_0
+typedef IRootStorage IRootStorage_0;

@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x80FC20",
+      "0x80FCD6"
+    ]
+  ],
+  "chunks_sha256": "4cc650a729e3f0bfc28db88e119eacd3500d1175434351577a56c3138cf9c6cf",
+  "comment_regular": "\n\nSpeedTreeOBSE v156: optional branch 30000 scalar wrapper at virtual slot A945D4 scales the B46498 ambient and four following direct-light float4 RGBs only during this native constant upload. The original receives eight raw DWORD stack args; 80FC3B loads definition1 shader at definition+4. Restore CPU source bank in SEH finally. Native hook/game execution remains UNVERIFIED; offscreen original branch shaders and CPU restoration tested.\n\nSpeedTreeBranchShader setup-program virtual: reuses shader definition 1 constant maps for current branch pass, then forwards to generic SetupShaderPrograms.",
+  "comment_repeatable": "SpeedTreeBranchShader setup-program virtual: reuses shader definition 1 constant maps for current branch pass, then forwards to generic SetupShaderPrograms.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_80FC20",
+  "display_name": "OB_SpeedTreeBranchShader_SetupShaderPrograms_010201A0",
   "end_ea": "0x80FCD6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80FC20",
+  "name": "OB_SpeedTreeBranchShader_SetupShaderPrograms_010201A0",
   "segment": ".text",
   "sha256": "4cc650a729e3f0bfc28db88e119eacd3500d1175434351577a56c3138cf9c6cf",
   "size": 182,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80FC20",
+  "total_chunk_size": 182,
   "type": "NiObjectNET *__thiscall(NiD3DShader *this, NiObjectNET *, int, int, int, int, int, int, int)",
   "xrefs_from_count": 81,
   "xrefs_to_count": 1

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$56F05A17AA3FC6AE398DE93B240A8F78",
+  "definition": "union $56F05A17AA3FC6AE398DE93B240A8F78\n{\nPULONG64 IntegerContext[16];\n$4CA40AA5833EABF16EF0E5C8F4E300B9 s;\n}\n",
   "id": 18374686479672048249,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IntegerContext",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "PULONG64[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "s",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 64
+      "size": 64,
+      "type": "$4CA40AA5833EABF16EF0E5C8F4E300B9"
     }
   ],
   "name": "$56F05A17AA3FC6AE398DE93B240A8F78",
+  "ordinal": 9008,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 64
 }

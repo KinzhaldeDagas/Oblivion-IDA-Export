@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A56F0",
-    "line": "push    esi",
+    "line": "push    esi; Verified: writes region-data RDAT header and serializes weatherList as RDWT; Climate instead serializes the same EntryData abstraction as WLS(T).",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4A56F3",
-    "line": "call    sub_4A3560",
+    "line": "call    TESRegionData_SaveHeader; Verified: serializes region-data type/override/priority base header into RDAT.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4A5700",
-    "line": "call    sub_4EEB30",
+    "line": "call    OblivionTESWeatherList_SaveChunk; Verified: serializes each Oblivion weather entry as TESWeather FormID plus uint32 selectionWeight at +4; shared by climate WLS(T) and region RDWT.",
     "mnemonic": "call",
     "size": 5
   },

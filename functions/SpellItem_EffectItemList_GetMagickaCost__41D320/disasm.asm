@@ -41,7 +41,7 @@
 0x41D385: push    eax; int
 0x41D386: push    ecx
 0x41D387: fstp    [esp+18h+var_18]; float
-0x41D38A: call    Calc_SkillModifiedMagickaCost
+0x41D38A: call    Calc_SkillModifiedMagickaCost; Spell magicka cost uses luck-modified magic skill. AVU replacement must preserve vanilla lower clamp and fractional precision before configurable cap/DR handling.
 0x41D38F: add     esp, 0Ch
 0x41D392: fstp    [esp+0Ch+arg_0]
 0x41D396: fld     [esp+0Ch+arg_0]

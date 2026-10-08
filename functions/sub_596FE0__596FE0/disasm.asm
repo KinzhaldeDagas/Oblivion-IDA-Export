@@ -64,11 +64,11 @@
 0x5970A2: push    ecx
 0x5970A3: push    edx
 0x5970A4: push    1
-0x5970A6: push    offset sub_596A00
+0x5970A6: push    offset ClassMenu_ApplyChosenClass; Oblivion character-generation class commit. Installs the selected TESClass, rebuilds TESNPC auto stats, clears level/attribute/specialization advancement state, then replays deferred skill use under the new seven-major and specialization classification.
 0x5970AB: push    esi
 0x5970AC: call    ShowUIMessageBox
 0x5970B1: push    esi
-0x5970B2: call    FormHeapFree
+0x5970B2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5970B7: add     esp, 2Ch
 0x5970BA: mov     ecx, [esp+24h+var_C]
 0x5970BE: mov     large fs:0, ecx
@@ -83,10 +83,10 @@
 0x5970D4: fld     dword ptr ds:0A379B4h
 0x5970DA: mov     edi, [esp+24h+arg_4]
 0x5970DE: push    ecx
-0x5970DF: fstp    [esp+28h+a2]; a3
-0x5970E2: push    0FB0h; a2
+0x5970DF: fstp    [esp+28h+a2]; value
+0x5970E2: push    0FB0h; propertyCode
 0x5970E7: mov     ecx, edi; this
-0x5970E9: call    Tile_SetFloat
+0x5970E9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5970EE: push    edi
 0x5970EF: mov     ecx, esi
 0x5970F1: call    sub_596BC0
@@ -99,12 +99,12 @@
 0x597106: push    0FAAh
 0x59710B: mov     ecx, edi
 0x59710D: call    Tile_GetFloat
-0x597112: call    Double_To_SInt32
+0x597112: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x597117: push    0
 0x597119: mov     ecx, esi
 0x59711B: mov     [esi+44h], eax
 0x59711E: mov     [esi+3Ch], ebx
-0x597121: call    sub_596CF0
+0x597121: call    ClassMenu_RefreshClassDetails; Morrowind Leveling hook: refresh extended ClassMenu minor skill traits after vanilla class display update.
 0x597126: mov     ecx, [esp+24h+var_C]
 0x59712A: mov     large fs:0, ecx
 0x597131: pop     ecx
@@ -120,7 +120,7 @@
 0x597147: add     esp, 4
 0x59714A: mov     ecx, esi; int
 0x59714C: mov     dword ptr [esi+58h], 1
-0x597153: call    sub_584740
+0x597153: call    Menu__StartFadeOut; ClassMenu button 5 overall-cancel path: request native menu close. Eventual deletion dispatches through ClassMenu::~ClassMenu at 0x596C70.
 0x597158: mov     ecx, [esp+24h+var_C]
 0x59715C: mov     large fs:0, ecx
 0x597163: pop     ecx
@@ -129,3 +129,12 @@
 0x597166: pop     ebx
 0x597167: add     esp, 14h
 0x59716A: retn    8
+0x9B7140: lea     ecx, [ebp-14h]; void *
+0x9B7143: jmp     BSStringT_Clear
+0x9B7148: mov     edx, [esp+arg_4]
+0x9B714C: lea     eax, [edx-14h]
+0x9B714F: mov     ecx, [edx-18h]
+0x9B7152: xor     ecx, eax
+0x9B7154: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7159: mov     eax, offset stru_AE1DB4
+0x9B715E: jmp     ___CxxFrameHandler3

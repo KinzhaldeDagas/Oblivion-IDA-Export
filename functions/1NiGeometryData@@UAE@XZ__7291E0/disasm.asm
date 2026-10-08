@@ -1,4 +1,4 @@
-0x7291E0: push    0FFFFFFFFh
+0x7291E0: push    0FFFFFFFFh;
 0x7291E2: push    offset ??1NiPSysResetOnLoopCtlr@@UAE@XZ_SEH
 0x7291E7: mov     eax, large fs:0
 0x7291ED: push    eax
@@ -14,9 +14,9 @@
 0x729204: mov     esi, ecx
 0x729206: mov     [esp+20h+var_10], esi
 0x72920A: mov     dword ptr [esi], offset ??_7NiGeometryData@@6B@; const NiGeometryData::`vftable'
-0x729210: push    esi
+0x729210: push    esi; data
 0x729211: mov     [esp+24h+var_4], 1
-0x729219: call    sub_7014A0
+0x729219: call    NiRenderer_PurgeGeometryDataFromCurrent;
 0x72921E: mov     edi, [esi+34h]
 0x729221: mov     ebp, ds:0A2807Ch
 0x729227: add     esp, 4
@@ -48,7 +48,7 @@
 0x72926E: mov     ecx, edi
 0x729270: call    sub_732A20
 0x729275: push    edi
-0x729276: call    FormHeapFree
+0x729276: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72927B: add     esp, 4
 0x72927E: mov     eax, ds:0B3FE00h
 0x729283: cmp     dword ptr [esi+20h], 0
@@ -61,7 +61,7 @@
 0x729297: mov     ecx, edi
 0x729299: call    sub_732A20
 0x72929E: push    edi
-0x72929F: call    FormHeapFree
+0x72929F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7292A4: add     esp, 4
 0x7292A7: mov     eax, ds:0B3FE00h
 0x7292AC: cmp     dword ptr [esi+24h], 0
@@ -74,7 +74,7 @@
 0x7292C0: mov     ecx, edi
 0x7292C2: call    sub_732A20
 0x7292C7: push    edi
-0x7292C8: call    FormHeapFree
+0x7292C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7292CD: add     esp, 4
 0x7292D0: mov     eax, ds:0B3FE00h
 0x7292D5: cmp     dword ptr [esi+28h], 0
@@ -87,21 +87,21 @@
 0x7292E9: mov     ecx, edi
 0x7292EB: call    sub_732A20
 0x7292F0: push    edi
-0x7292F1: call    FormHeapFree
+0x7292F1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7292F6: add     esp, 4
 0x7292F9: jmp     short loc_729322
 0x7292FB: mov     eax, [esi+1Ch]
 0x7292FE: push    eax
-0x7292FF: call    FormHeapFree
+0x7292FF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x729304: mov     eax, [esi+20h]
 0x729307: push    eax
-0x729308: call    FormHeapFree
+0x729308: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72930D: mov     eax, [esi+24h]
 0x729310: push    eax
-0x729311: call    FormHeapFree
+0x729311: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x729316: mov     eax, [esi+28h]
 0x729319: push    eax
-0x72931A: call    FormHeapFree
+0x72931A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72931F: add     esp, 10h
 0x729322: mov     edi, [esi+34h]
 0x729325: test    edi, edi
@@ -130,3 +130,15 @@
 0x729363: pop     ebp
 0x729364: add     esp, 10h
 0x729367: retn
+0x9C9EB0: mov     ecx, [ebp-10h]
+0x9C9EB3: jmp     NiRefObject_destr
+0x9C9EB8: mov     ecx, [ebp-10h]
+0x9C9EBB: add     ecx, 34h ; '4'; slot
+0x9C9EBE: jmp     NiPointerSlot_Release
+0x9C9EC3: mov     edx, [esp+arg_4]
+0x9C9EC7: lea     eax, [edx-10h]
+0x9C9ECA: mov     ecx, [edx-14h]
+0x9C9ECD: xor     ecx, eax
+0x9C9ECF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9ED4: mov     eax, offset stru_AF2654
+0x9C9ED9: jmp     ___CxxFrameHandler3

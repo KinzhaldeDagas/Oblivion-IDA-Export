@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79B860",
-    "line": "push    ebx",
+    "line": "push    ebx; Overlap-safe backward copy-assignment of compact SFrondGuide records. Deep-assigns each embedded SFrondVertex vector before copying scalar fields.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B861",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79B866",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79B86F",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x79B879",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B87A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79B87C",
-    "line": "call    sub_79B160",
+    "line": "call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x79B8BB",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },

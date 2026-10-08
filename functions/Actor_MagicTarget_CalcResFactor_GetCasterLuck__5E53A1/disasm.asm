@@ -21,7 +21,7 @@
 0x5E53DC: push    eax; int
 0x5E53DD: push    esi; int
 0x5E53DE: push    ebp; int
-0x5E53DF: call    Calc_MagicTargetResistanceFactor
+0x5E53DF: call    Calc_MagicTargetResistanceFactor; Calls Calc_MagicTargetResistanceFactor(caster skill, caster luck, target Willpower AV, magic-item resistance, effect-specific resistance).
 0x5E53E4: add     esp, 14h
 0x5E53E7: pop     esi
 0x5E53E8: pop     edi

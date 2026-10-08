@@ -19,13 +19,13 @@
 0x90FAEC: add     ecx, 10h
 0x90FAEF: push    ecx
 0x90FAF0: lea     ecx, [esp+38h+var_10]
-0x90FAF4: call    sub_88FCC0
+0x90FAF4: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x90FAF9: mov     edx, [edi+50h]
 0x90FAFC: push    ebx
 0x90FAFD: add     edx, 10h
 0x90FB00: push    edx
 0x90FB01: lea     ecx, [esp+38h+var_20]
-0x90FB05: call    sub_88FCC0
+0x90FB05: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x90FB0A: movaps  xmm1, [esp+30h+var_20]
 0x90FB0F: movaps  xmm0, [esp+30h+var_10]
 0x90FB14: subps   xmm0, xmm1

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x497240",
-    "line": "mov     al, [ecx]",
+    "line": "mov     al, [ecx]; Canonical XRGD writer: count is u8; zero emits nothing, otherwise one XRGD of count*28 bytes. Successful repeated loads replace buffer/count; malformed clean failure removes the singleton.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x497260",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },

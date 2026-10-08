@@ -10,18 +10,18 @@ char __thiscall sub_71AEC0(_DWORD *this, char *FullPath, int a3, int a4, int a5,
   char Dir[259]; // [esp+1Ch] [ebp-408h] BYREF
   _BYTE v17[769]; // [esp+11Fh] [ebp-305h] BYREF
 
-  sub_748760(Dir, FullPath);
-  v8 = *(unsigned __int8 (__thiscall **)(_DWORD *, _BYTE *))(*(this + 0x20) + 4);
-  v9 = this + 0x20;
-  if ( v8(v9, v17) )
+  sub_748760(Dir, FullPath); /*0x71af15*/
+  v8 = *(unsigned __int8 (__thiscall **)(_DWORD *, _BYTE *))(*(this + 0x20) + 4); /*0x71af20*/
+  v9 = this + 0x20; /*0x71af23*/
+  if ( v8(v9, v17) ) /*0x71af33*/
   {
-    LODWORD(v15) = 0x8000;
-    NiFile_Indirect = (void (__thiscall ***)(_DWORD, int))NiFile_GetNiFile_Indirect((int)FullPath, 0, v15);
-    if ( NiFile_Indirect )
+    LODWORD(v15) = 0x8000; /*0x71af39*/
+    NiFile_Indirect = (void (__thiscall ***)(_DWORD, int))NiFile_GetNiFile_Indirect((int)FullPath, 0, v15); /*0x71af46*/
+    if ( NiFile_Indirect ) /*0x71af4d*/
     {
-      if ( ((unsigned __int8 (__thiscall *)(void (__thiscall ***)(_DWORD, int)))(*NiFile_Indirect)[1])(NiFile_Indirect) )
+      if ( ((unsigned __int8 (__thiscall *)(void (__thiscall ***)(_DWORD, int)))(*NiFile_Indirect)[1])(NiFile_Indirect) ) /*0x71af56*/
       {
-        v11 = (*(unsigned __int8 (__thiscall **)(_DWORD *, void (__thiscall ***)(_DWORD, int), int, int, int, int, int))(*v9 + 0xC))(
+        v11 = (*(unsigned __int8 (__thiscall **)(_DWORD *, void (__thiscall ***)(_DWORD, int), int, int, int, int, int))(*v9 + 0xC))( /*0x71af77*/
                 v9,
                 NiFile_Indirect,
                 a5,
@@ -29,21 +29,21 @@ char __thiscall sub_71AEC0(_DWORD *this, char *FullPath, int a3, int a4, int a5,
                 a3,
                 a4,
                 a7) == 0;
-        v12 = **NiFile_Indirect;
-        v13 = NiFile_Indirect;
-        if ( !v11 )
+        v12 = **NiFile_Indirect; /*0x71af7b*/
+        v13 = NiFile_Indirect; /*0x71af7f*/
+        if ( !v11 ) /*0x71af81*/
         {
-          v12(NiFile_Indirect, 1);
-          return 1;
+          v12(NiFile_Indirect, 1); /*0x71af83*/
+          return 1; /*0x71af87*/
         }
       }
       else
       {
-        v12 = **NiFile_Indirect;
-        v13 = NiFile_Indirect;
+        v12 = **NiFile_Indirect; /*0x71af8b*/
+        v13 = NiFile_Indirect; /*0x71af8f*/
       }
-      v12(v13, 1);
+      v12(v13, 1); /*0x71af91*/
     }
   }
-  return 0;
+  return 0; /*0x71af95*/
 }

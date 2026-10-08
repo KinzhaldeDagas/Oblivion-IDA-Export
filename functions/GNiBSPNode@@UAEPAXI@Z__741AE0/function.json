@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x741AE0",
+      "0x741AFE"
+    ]
+  ],
+  "chunks_sha256": "9f4d6b2a450b3370608900a62e66fe112067db6fcc1d3500ff7effc634a2696b",
+  "comment_regular": "\n\n[2026-10-03 frond material partitions] Verified NiNode vtable 0xA7E38C slot0 uses this folded scalar deleting destructor despite existing NiBSP symbol name. ECX=this, DWORD flags on stack, forwards 0x70B810, optionally FormHeapFree bit0, returns this. Plugin group vtable copies COL+39 slots and overrides only deletion to retire all child metadata for group before forwarding once.\n[2026-10-03 frond group lifetime] Plugin private group destructor now clears group/root associations without erasing live child metadata. Native destructor may release children that remain alive through outside references. Private shape destructor719AD0 wrapper remains sole scene-metadata eraser; owner retirement clears model/RT borrows but retains draw snapshots.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiBSPNode::`scalar deleting destructor'(uint)",
   "end_ea": "0x741AFE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??_GNiBSPNode@@UAEPAXI@Z",
   "segment": ".text",
   "sha256": "9f4d6b2a450b3370608900a62e66fe112067db6fcc1d3500ff7effc634a2696b",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x741AE0",
+  "total_chunk_size": 30,
   "type": "NiBSPNode *__thiscall(NiBSPNode *this, char)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 3

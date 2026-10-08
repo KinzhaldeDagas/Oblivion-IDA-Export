@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x551A00",
-    "line": "sub     esp, 108h",
+    "line": "sub     esp, 108h; Build age overlay through engine FindFile (loose/archive lookup): exact requested age first, then floor decade descending to zero. Does not search upwards; null can mean only higher-age overlays exist. Prettier Faces 1.19.9 fixes prior midpoint-only fallback: probe ascending higher decades while closer than current lower result, preserve exact match and lower ties, reconstruct winner because each call mutates outPath. Native unbounded source copy into 260-byte stack buffer remains guarded by plugin path length check in randomizer scope.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x551A14",
-    "line": "mov     eax, [esp+108h+arg_C]",
+    "line": "mov     eax, [esp+108h+baseTexturePath]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x551A20",
-    "line": "mov     esi, [esp+114h+arg_0]",
+    "line": "mov     esi, [esp+114h+outPath]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x551A28",
-    "line": "movzx   edi, [esp+118h+arg_8]",
+    "line": "movzx   edi, [esp+118h+age]",
     "mnemonic": "movzx",
     "size": 8
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x551A3B",
-    "line": "jg      loc_551B1A",
+    "line": "jg      loc_551B1A; Reject ages above 100.",
     "mnemonic": "jg",
     "size": 6
   },
   {
     "ea": "0x551A41",
-    "line": "mov     ebp, [esp+118h+arg_4]",
+    "line": "mov     ebp, [esp+118h+sex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x551A4B",
-    "line": "jge     loc_551B1A",
+    "line": "jge     loc_551B1A; Sex 0 selects suffix M; sex 1 selects suffix F.",
     "mnemonic": "jge",
     "size": 6
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x551A57",
-    "line": "mov     cl, [eax]",
+    "line": "mov     cl, [eax]; Begin an unbounded byte copy of baseTexturePath, including its NUL, into a 260-byte stack buffer. A source length >= 260 writes beyond the frame before any extension validation.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x551A59",
-    "line": "mov     [edx+eax], cl",
+    "line": "mov     [edx+eax], cl; Vanilla/native robustness finding: NUL-inclusive unbounded copy into 260-byte stack array, >=260-byte source length exceeds array. 0x551A00..+0x135 IDA bytes match deployed EXE SHA256 range 0011d4f5799710e459b39e375a8c11e514988f4c4f9e8d6b55057089ad3b5aab. Trigger asset-path reachability and observed crash not tested; unrelated to OCO load defect absent further evidence.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x551A94",
-    "line": "call    BSStringT_Static_Format",
+    "line": "call    BSStringT_Static_Format; Try an exact <base><M|F><age>.dds asset first, allowing mods to supply per-year textures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x551AD2",
-    "line": "add     edi, edi",
+    "line": "add     edi, edi; If exact age is absent, round downward to the previous decade. All vanilla age textures are decade-only M/F10 through M/F60, so stock random ages can use a texture up to almost ten years younger than geometry.",
     "mnemonic": "add",
     "size": 2
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x551AE1",
-    "line": "call    BSStringT_Static_Format",
+    "line": "call    BSStringT_Static_Format; Search only downward in ten-year steps; the resolver never considers a closer upper-decade texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x551B15",
-    "line": "call    BSStringT_Set",
+    "line": "call    BSStringT_Set; No suitable age texture exists; clear the output path.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x474070",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4740A2",
-    "line": "mov     [esp+2Ch+var_18], esi",
+    "line": "mov     [esp+2Ch+slot], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x4740C0",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4740C5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; object",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4740CB",
-    "line": "call    TESActorBaseData_GetMagicka",
+    "line": "call    Shared_GetWordAtOffset08; TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x474136",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x474160",
-    "line": "call    sub_470820",
+    "line": "call    AnimKeyMap_InsertOrAssign; Insert-or-assign for the ActorAnimData encoded-key map at +0x9C. Hashes UInt16 key, finds an equal node, invokes node cleanup before overwrite, or allocates/links a new node and increments map count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x474173",
-    "line": "call    sub_470820",
+    "line": "call    AnimKeyMap_InsertOrAssign; Insert-or-assign for the ActorAnimData encoded-key map at +0x9C. Hashes UInt16 key, finds an equal node, invokes node cleanup before overwrite, or allocates/links a new node and increments map count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x4741BA",
-    "line": "call    sub_4708B0",
+    "line": "call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x4741D9",
-    "line": "call    ??0AnimSequenceMultiple@@QAE@XZ; AnimSequenceMultiple::AnimSequenceMultiple(void)",
+    "line": "call    AnimSequenceMultiple_ctor; AnimSequenceMultiple constructor: converts an existing single sequence entry into a multiple-sequence list and moves the existing BSAnimGroupSequence into it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x4741F1",
-    "line": "call    sub_470820",
+    "line": "call    AnimKeyMap_InsertOrAssign; Insert-or-assign for the ActorAnimData encoded-key map at +0x9C. Hashes UInt16 key, finds an equal node, invokes node cleanup before overwrite, or allocates/links a new node and increments map count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x474210",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x474224",
-    "line": "lea     ecx, [esp+2Ch+var_18]; this",
+    "line": "lea     ecx, [esp+2Ch+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x474230",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x474248",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x474269",
-    "line": "call    sub_438540",
+    "line": "call    ModelLoader_ReleaseModelPath; Releases a model-loader path reference. Used by AnimIdle/queued-loader cleanup when a KF/model reference is no longer needed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,19 +1183,19 @@
   },
   {
     "ea": "0x4742BF",
-    "line": "call    sub_6C4A10",
+    "line": "call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4742C4",
-    "line": "lea     ecx, [esp+2Ch+var_14]; this",
+    "line": "lea     ecx, [esp+2Ch+var_14]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4742C8",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x47432B",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x474373",
-    "line": "call    ??0BSAnimGroupSequence@@QAE@XZ; BSAnimGroupSequence::BSAnimGroupSequence(void)",
+    "line": "call    ??0BSAnimGroupSequence@@QAE@XZ; BSAnimGroupSequence ctor: stores parsed TESAnimGroup at +0x68 with refcount, copies source sequence/controller data from KF model.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,31 +1591,31 @@
   },
   {
     "ea": "0x47438D",
-    "line": "mov     ecx, [ebx+98h]",
+    "line": "mov     ecx, [ebx+98h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x474393",
-    "line": "push    1",
+    "line": "push    1; validateControlledBlocks",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x474395",
-    "line": "push    0",
+    "line": "push    0; name",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x474397",
-    "line": "push    edi",
+    "line": "push    edi; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474398",
-    "line": "call    sub_6C5760",
+    "line": "call    NiControllerManager_AddSequence; Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1708,12 +1708,6 @@
     "line": "jmp     short loc_4743D0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4743CD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4743D0",
@@ -1837,7 +1831,7 @@
   },
   {
     "ea": "0x474407",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1891,7 @@
   },
   {
     "ea": "0x47442A",
-    "line": "call    sub_6C4A10",
+    "line": "call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,7 +2053,7 @@
   },
   {
     "ea": "0x47446F",
-    "line": "call    sub_4708B0",
+    "line": "call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,7 +2089,7 @@
   },
   {
     "ea": "0x47447E",
-    "line": "mov     esi, [esp+2Ch+var_18]",
+    "line": "mov     esi, [esp+2Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2233,7 +2227,7 @@
   },
   {
     "ea": "0x4744C9",
-    "line": "mov     esi, [esp+2Ch+var_18]",
+    "line": "mov     esi, [esp+2Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2362,5 +2356,119 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AED90",
+    "line": "lea     ecx, [ebp-18h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AED93",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AED98",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AED9B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AED9C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEDA1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEDA2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEDA3",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEDA6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEDA7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEDAC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEDAD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEDAE",
+    "line": "mov     edx, [esp+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AEDB2",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEDB5",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEDB8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEDBA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEDBF",
+    "line": "mov     eax, offset stru_ADB480",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEDC4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

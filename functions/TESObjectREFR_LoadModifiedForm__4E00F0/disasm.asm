@@ -1,7 +1,7 @@
 0x4E00F0: mov     eax, [esp+a1]
 0x4E00F4: sub     esp, 8
 0x4E00F7: push    ebx
-0x4E00F8: mov     ebx, [esp+0Ch+arg_0]
+0x4E00F8: mov     ebx, [esp+0Ch+changeMask]
 0x4E00FC: push    ebp
 0x4E00FD: push    esi
 0x4E00FE: push    edi
@@ -22,16 +22,16 @@
 0x4E0124: call    sub_46AA00
 0x4E0129: mov     ecx, ds:0B33B00h
 0x4E012F: xor     ebp, ebp
-0x4E0131: mov     [esp+18h+var_8], ebp
-0x4E0135: mov     [esp+18h+arg_0], ebp
-0x4E0139: call    sub_45A170
+0x4E0131: mov     [esp+18h+destination], ebp
+0x4E0135: mov     [esp+18h+changeMask], ebp
+0x4E0139: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E013E: test    al, al
 0x4E0140: jz      loc_4E01E7
-0x4E0146: push    4; Size
+0x4E0146: push    4; byteCount
 0x4E0148: lea     ecx, [esp+1Ch+Dst]
-0x4E014C: push    ecx; Dst
-0x4E014D: mov     ecx, ds:0B33B00h
-0x4E0153: call    SaveLoad_LoadData
+0x4E014C: push    ecx; destination
+0x4E014D: mov     ecx, ds:0B33B00h; self
+0x4E0153: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4E0158: cmp     [esp+18h+Dst], 4B4F4C42h
 0x4E0160: jz      short loc_4E01CA
 0x4E0162: mov     eax, ds:0B33B00h
@@ -40,7 +40,7 @@
 0x4E016F: jz      short loc_4E01AE
 0x4E0171: mov     edx, [edi]
 0x4E0173: push    edx; a1
-0x4E0174: call    TESForm_LookupByFormID
+0x4E0174: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E0179: mov     ecx, [edi+5]
 0x4E017C: movzx   edx, byte ptr [edi+9]
 0x4E0180: add     esp, 4
@@ -66,14 +66,14 @@
 0x4E01BD: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x4E01C2: call    PrintError
 0x4E01C7: add     esp, 10h
-0x4E01CA: mov     ecx, ds:0B33B00h
+0x4E01CA: mov     ecx, ds:0B33B00h; self
 0x4E01D0: mov     eax, [ecx+14h]
-0x4E01D3: push    2; Size
-0x4E01D5: lea     edx, [esp+1Ch+var_8]
-0x4E01D9: push    edx; Dst
-0x4E01DA: mov     [esp+20h+arg_0], eax
-0x4E01DE: call    SaveLoad_LoadData
-0x4E01E3: mov     ebp, [esp+18h+arg_0]
+0x4E01D3: push    2; byteCount
+0x4E01D5: lea     edx, [esp+1Ch+destination]
+0x4E01D9: push    edx; destination
+0x4E01DA: mov     [esp+20h+changeMask], eax
+0x4E01DE: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4E01E3: mov     ebp, [esp+18h+changeMask]
 0x4E01E7: mov     eax, ds:0B33B00h
 0x4E01EC: mov     ecx, [eax+18h]
 0x4E01EF: shr     ecx, 7
@@ -81,12 +81,12 @@
 0x4E01F5: jz      short loc_4E023A
 0x4E01F7: lea     ebp, [esi+44h]
 0x4E01FA: mov     ecx, ebp
-0x4E01FC: call    sub_420260
+0x4E01FC: call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x4E0201: mov     edi, eax
 0x4E0203: test    edi, edi
 0x4E0205: jz      short loc_4E0236
 0x4E0207: mov     ecx, ebp
-0x4E0209: call    sub_420340
+0x4E0209: call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.
 0x4E020E: test    al, al
 0x4E0210: mov     ecx, esi; this
 0x4E0212: jz      short loc_4E0225
@@ -99,9 +99,9 @@
 0x4E0225: mov     eax, [edi+8]
 0x4E0228: shr     eax, 0Bh
 0x4E022B: and     eax, 0FFFFFF01h
-0x4E0230: push    eax; a2
-0x4E0231: call    TESForm_SetEnabled?
-0x4E0236: mov     ebp, [esp+18h+arg_0]
+0x4E0230: push    eax; disabled
+0x4E0231: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
+0x4E0236: mov     ebp, [esp+18h+changeMask]
 0x4E023A: test    bl, 1
 0x4E023D: jz      short loc_4E0261
 0x4E023F: mov     eax, [esi+8]
@@ -141,8 +141,8 @@
 0x4E029C: call    sub_4DC8F0
 0x4E02A1: mov     ecx, esi
 0x4E02A3: call    UnequipLight
-0x4E02A8: mov     ecx, esi
-0x4E02AA: call    sub_4DCCF0
+0x4E02A8: mov     ecx, esi; this
+0x4E02AA: call    TESObjectREFR_ClearEquippedAmmo3D; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.
 0x4E02AF: lea     ecx, [esi+44h]
 0x4E02B2: call    ExtraDataList_RemoveContainerExtraData
 0x4E02B7: mov     edx, [esi]
@@ -193,25 +193,25 @@
 0x4E033B: call    eax
 0x4E033D: test    al, al
 0x4E033F: jnz     short loc_4E0365
-0x4E0341: push    2; a2
+0x4E0341: push    2; byteCount
 0x4E0343: lea     ecx, [esp+1Ch+a1]
-0x4E0347: push    ecx; a1
-0x4E0348: mov     ecx, esi
-0x4E034A: call    TESForm_LoadDataFromCurrentSaveGame
+0x4E0347: push    ecx; destination
+0x4E0348: mov     ecx, esi; self
+0x4E034A: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4E034F: mov     eax, [esp+18h+a1]
 0x4E0353: test    ax, ax
 0x4E0356: jz      short loc_4E0365
 0x4E0358: mov     ecx, ds:0B33B00h
 0x4E035E: push    eax
 0x4E035F: push    esi
-0x4E0360: call    sub_459020
+0x4E0360: call    SaveLoad_QueueAttachedAnimationBlob; MEF v27 verification: same raw blob consumed-length contract as sub_458E50 for SaveLoad+0x58 map; guarded skips must advance/discard payload.
 0x4E0365: test    ebx, 808h
 0x4E036B: jz      short loc_4E03A4
-0x4E036D: push    2; a2
+0x4E036D: push    2; byteCount
 0x4E036F: lea     edx, [esp+1Ch+a1]
-0x4E0373: push    edx; a1
-0x4E0374: mov     ecx, esi
-0x4E0376: call    TESForm_LoadDataFromCurrentSaveGame
+0x4E0373: push    edx; destination
+0x4E0374: mov     ecx, esi; self
+0x4E0376: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4E037B: mov     eax, [esp+18h+a1]
 0x4E037F: test    ax, ax
 0x4E0382: jz      short loc_4E03A4
@@ -220,43 +220,43 @@
 0x4E0390: jnz     short loc_4E039B
 0x4E0392: push    eax
 0x4E0393: push    esi
-0x4E0394: call    sub_459310
+0x4E0394: call    SaveLoad_QueueHavokBlob; MEF v27 verification: same raw blob consumed-length contract as sub_458E50 for SaveLoad+0x60 map; guarded skips must advance/discard payload.
 0x4E0399: jmp     short loc_4E03A4
 0x4E039B: movzx   eax, ax
 0x4E039E: push    eax
-0x4E039F: call    SaveLoad_AdvanceBufferOffset
+0x4E039F: call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.
 0x4E03A4: mov     ecx, ds:0B33B00h
 0x4E03AA: cmp     byte ptr [ecx+7Ch], 43h ; 'C'
 0x4E03AE: jb      short loc_4E03D4
 0x4E03B0: test    bl, 10h
 0x4E03B3: jz      short loc_4E03D4
-0x4E03B5: push    4; a2
+0x4E03B5: push    4; byteCount
 0x4E03B7: lea     ebp, [esi+38h]
-0x4E03BA: push    ebp; a1
-0x4E03BB: mov     ecx, esi
-0x4E03BD: call    TESForm_LoadDataFromCurrentSaveGame
+0x4E03BA: push    ebp; destination
+0x4E03BB: mov     ecx, esi; self
+0x4E03BD: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4E03C2: fld     dword ptr [ebp+0]
 0x4E03C5: push    ecx
 0x4E03C6: mov     ecx, esi
 0x4E03C8: fstp    dword ptr [esp+1Ch+var_1C]; float
 0x4E03CB: call    sub_4DB520
-0x4E03D0: mov     ebp, [esp+18h+arg_0]
+0x4E03D0: mov     ebp, [esp+18h+changeMask]
 0x4E03D4: test    ebx, 40000h
 0x4E03DA: jz      short loc_4E03F9
-0x4E03DC: push    8
-0x4E03DE: mov     ecx, edi
-0x4E03E0: call    sub_41F830
+0x4E03DC: push    8; mask
+0x4E03DE: mov     ecx, edi; this
+0x4E03E0: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4E03E5: test    al, al
-0x4E03E7: push    8
-0x4E03E9: mov     ecx, edi
+0x4E03E7: push    8; mask
+0x4E03E9: mov     ecx, edi; this
 0x4E03EB: jz      short loc_4E03F4
-0x4E03ED: call    sub_423E50
+0x4E03ED: call    ExtraDataList_ClearActionFlagBits
 0x4E03F2: jmp     short loc_4E03F9
-0x4E03F4: call    sub_423DF0
+0x4E03F4: call    ExtraDataList_SetActionFlagBits; OR action flag mask into existing byte (default byte 1 when absent), creating state as needed. ONAM calls this with 0x08.
 0x4E03F9: test    ebx, 80000h
 0x4E03FF: jz      short loc_4E044E
 0x4E0401: mov     ecx, edi
-0x4E0403: call    sub_420FF0
+0x4E0403: call    ExtraDataList_RemoveLastFinishedSequence; Removes ExtraLastFinishedSequence (type 0x4A).
 0x4E0408: test    ebx, ebx
 0x4E040A: mov     eax, ebx
 0x4E040C: jnz     short loc_4E041B
@@ -265,14 +265,14 @@
 0x4E0415: push    esi
 0x4E0416: call    sub_4533F0
 0x4E041B: test    eax, 40000h
-0x4E0420: push    8
-0x4E0422: mov     ecx, edi
+0x4E0420: push    8; mask
+0x4E0422: mov     ecx, edi; this
 0x4E0424: jz      short loc_4E0432
-0x4E0426: call    sub_41F830
+0x4E0426: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4E042B: test    al, al
 0x4E042D: setz    al
 0x4E0430: jmp     short loc_4E0437
-0x4E0432: call    sub_41F830
+0x4E0432: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4E0437: test    al, al
 0x4E0439: mov     ecx, edi
 0x4E043B: jz      short loc_4E0444
@@ -281,7 +281,7 @@
 0x4E0444: push    offset aOpen; "Open"
 0x4E0449: call    sub_424DE0
 0x4E044E: mov     ecx, ds:0B33B00h
-0x4E0454: call    sub_45A170
+0x4E0454: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E0459: test    al, al
 0x4E045B: jz      loc_4E0574
 0x4E0461: mov     ecx, ds:0B33B00h
@@ -291,9 +291,9 @@
 0x4E0472: jz      loc_4E051A
 0x4E0478: mov     edx, [edi]
 0x4E047A: push    edx; a1
-0x4E047B: call    TESForm_LookupByFormID
+0x4E047B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E0480: mov     ecx, eax
-0x4E0482: movzx   eax, word ptr [esp+1Ch+var_8]
+0x4E0482: movzx   eax, word ptr [esp+1Ch+destination]
 0x4E0487: add     eax, ebp
 0x4E0489: add     esp, 4
 0x4E048C: cmp     esi, eax
@@ -306,7 +306,7 @@
 0x4E049B: mov     eax, [edx+0D4h]
 0x4E04A1: call    eax
 0x4E04A3: mov     ecx, [edi]
-0x4E04A5: movzx   edx, word ptr [esp+20h+var_8]
+0x4E04A5: movzx   edx, word ptr [esp+20h+destination]
 0x4E04AA: push    eax
 0x4E04AB: push    ecx
 0x4E04AC: push    79Ah
@@ -331,7 +331,7 @@
 0x4E04E2: push    edx
 0x4E04E3: mov     edx, [eax+0D4h]
 0x4E04E9: call    edx
-0x4E04EB: movzx   ecx, word ptr [esp+20h+var_8]
+0x4E04EB: movzx   ecx, word ptr [esp+20h+destination]
 0x4E04F0: push    eax
 0x4E04F1: mov     eax, [edi]
 0x4E04F3: push    eax
@@ -349,7 +349,7 @@
 0x4E0513: pop     ebx
 0x4E0514: add     esp, 8
 0x4E0517: retn    8
-0x4E051A: movzx   eax, word ptr [esp+18h+var_8]
+0x4E051A: movzx   eax, word ptr [esp+18h+destination]
 0x4E051F: lea     edx, [eax+ebp]
 0x4E0522: cmp     esi, edx
 0x4E0524: jbe     short loc_4E0551

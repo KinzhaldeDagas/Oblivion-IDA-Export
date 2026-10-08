@@ -1,50 +1,53 @@
-unsigned int __thiscall sub_7958D0(_DWORD *this, unsigned int a2, char a3)
+// Oblivion binary evidence: compiler-folded four-byte vector resize(newSize,value). Growth delegates to OB_stVector4_InsertFill; shrink erases the tail. Sole observed caller is CIndexedGeometry::AddStrip, confirming that the implementation is generic rather than leaf-specific.
+void __thiscall OB_stVector4_ResizeFill_010201A0(OB_stVector4_010201A0 *this, unsigned int newSize, unsigned int value)
 {
-  unsigned int v4; // ecx
-  unsigned int result; // eax
-  int v6; // edi
-  void *v7; // ebp
-  char *v8; // ebp
-  unsigned int v9; // edi
-  char *v10; // edi
-  int v11[2]; // [esp+10h] [ebp-8h] BYREF
+  unsigned int *begin; // ecx
+  unsigned int currentSize; // eax
+  int oldSize; // edi
+  unsigned int *insertionPosition; // ebp
+  unsigned int *oldEnd; // ebp
+  unsigned int *currentBegin; // edi
+  unsigned int *eraseBegin; // edi
+  OB_stVector4Iterator_010201A0 result; // [esp+10h] [ebp-8h] BYREF
 
-  v4 = *(this + 1);
-  if ( v4 )
-    result = (int)(*(this + 2) - v4) >> 2;
+  begin = this->begin; /*0x7958d8*/
+  if ( begin ) /*0x7958de*/
+    currentSize = this->end - begin; /*0x7958e9*/
   else
-    result = 0;
-  if ( result >= a2 )
+    currentSize = 0; /*0x7958e0*/
+  if ( currentSize >= newSize ) /*0x7958f2*/
   {
-    if ( v4 )
+    if ( begin ) /*0x79592d*/
     {
-      v8 = (char *)*(this + 2);
-      result = (int)&v8[-v4] >> 2;
-      if ( a2 < result )
+      oldEnd = this->end; /*0x79592f*/
+      if ( newSize < oldEnd - begin ) /*0x79593b*/
       {
-        if ( v4 > (unsigned int)v8 )
-          _invalid_parameter_noinfo();
-        v9 = *(this + 1);
-        if ( v9 > *(this + 2) )
-          _invalid_parameter_noinfo();
-        v11[1] = v9;
-        v10 = (char *)(v9 + 4 * a2);
-        if ( (unsigned int)v10 > *(this + 2) || (unsigned int)v10 < *(this + 1) )
-          _invalid_parameter_noinfo();
-        return (unsigned int)sub_439050(this, a2, v11, (int)this, v10, (int)this, v8);
+        if ( begin > oldEnd ) /*0x79593f*/
+          _invalid_parameter_noinfo(); /*0x795941*/
+        currentBegin = this->begin; /*0x795946*/
+        if ( currentBegin > this->end ) /*0x79594c*/
+          _invalid_parameter_noinfo(); /*0x79594e*/
+        result.current = currentBegin; /*0x795953*/
+        eraseBegin = &currentBegin[newSize]; /*0x795957*/
+        if ( eraseBegin > this->end || eraseBegin < this->begin ) /*0x795962*/
+          _invalid_parameter_noinfo(); /*0x795964*/
+        OB_stVector4_EraseRange_010201A0( /*0x795974*/
+          this,
+          &result,
+          (OB_stVector4Iterator_010201A0)__PAIR64__((unsigned int)eraseBegin, (unsigned int)this),
+          (OB_stVector4Iterator_010201A0)__PAIR64__((unsigned int)oldEnd, (unsigned int)this));
       }
     }
   }
   else
   {
-    if ( v4 )
-      v6 = (int)(*(this + 2) - v4) >> 2;
+    if ( begin ) /*0x7958f6*/
+      oldSize = this->end - begin; /*0x795901*/
     else
-      v6 = 0;
-    v7 = (void *)*(this + 2);
-    if ( v4 > (unsigned int)v7 )
-      _invalid_parameter_noinfo();
-    return (unsigned int)sub_7A3280(this, (int)this, v7, a2 - v6, (int)&a3);
+      oldSize = 0; /*0x7958f8*/
+    insertionPosition = this->end; /*0x795904*/
+    if ( begin > insertionPosition ) /*0x795909*/
+      _invalid_parameter_noinfo(); /*0x79590b*/
+    OB_stVector4_InsertFill_010201A0(this, this, insertionPosition, newSize - oldSize, &value); /*0x79591c*/
   }
-  return result;
 }

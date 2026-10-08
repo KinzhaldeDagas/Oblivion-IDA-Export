@@ -1,8 +1,8 @@
-0x783C30: mov     eax, ds:0B428C0h
+0x783C30: mov     eax, ds:0B428C0h; Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x783C35: mov     ecx, [eax]
-0x783C37: lea     edx, [esp+arg_0]
+0x783C37: lea     edx, [esp+bytecode]
 0x783C3B: push    edx
-0x783C3C: mov     edx, [esp+4+arg_0]
+0x783C3C: mov     edx, [esp+4+bytecode]
 0x783C40: push    edx
 0x783C41: push    eax
 0x783C42: mov     eax, [ecx+1A8h]
@@ -17,5 +17,5 @@
 0x783C5D: add     esp, 10h
 0x783C60: xor     eax, eax
 0x783C62: retn    4
-0x783C65: mov     eax, [esp+arg_0]
+0x783C65: mov     eax, [esp+bytecode]
 0x783C69: retn    4

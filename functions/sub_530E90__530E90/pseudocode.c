@@ -1,44 +1,46 @@
-int __thiscall sub_530E90(TESForm *this, BSStringT *a2)
+int __thiscall TESTopicInfo::GetFormDetailedString(TESForm *this, BSStringT *a2)
 {
   int *TopicInfoParent; // eax
   TESTopic *v4; // esi
   const char *v5; // eax
-  TESQuest *v6; // eax
+  TESQuest *OwnerQuest; // eax
   const char *v7; // eax
-  _DWORD *v8; // ecx
-  CHAR *v9; // eax
+  TESResponse *first; // ecx
+  const char *Text; // eax
   int v11; // [esp-4h] [ebp-320h]
   int v12; // [esp-4h] [ebp-320h]
   char v13[260]; // [esp+Ch] [ebp-310h] BYREF
   char v14[260]; // [esp+110h] [ebp-20Ch] BYREF
   char v15[260]; // [esp+214h] [ebp-108h] BYREF
 
-  v13[0] = 0;
-  TopicInfoParent = TESTopic_static_GetTopicInfoParent_((int)this);
-  v4 = (TESTopic *)TopicInfoParent;
-  if ( TopicInfoParent )
+  v13[0] = 0; /*0x530eb1*/
+  TopicInfoParent = TESTopic_static_GetTopicInfoParent_((int)this); /*0x530eb6*/
+  v4 = (TESTopic *)TopicInfoParent; /*0x530ebb*/
+  if ( TopicInfoParent ) /*0x530ec2*/
   {
-    v5 = (const char *)(*(int (__thiscall **)(int *, int))(*TopicInfoParent + 0xD4))(
+    v5 = (const char *)(*(int (__thiscall **)(int *, int))(*TopicInfoParent + 0xD4))( /*0x530ed2*/
                          TopicInfoParent,
                          TopicInfoParent[3]);
-    _sprintf(v13, ", Topic '%s' (%08X)", v5, v11);
+    _sprintf(v13, ", Topic '%s' (%08X)", v5, v11); /*0x530edf*/
   }
-  v15[0] = 0;
-  if ( v4 )
+  v15[0] = 0; /*0x530ee9*/
+  if ( v4 ) /*0x530ef1*/
   {
-    v6 = sub_52F570(v4, (int)this);
-    if ( v6 )
+    OwnerQuest = TESTopic::GetOwnerQuest(v4, (OblivionTopicInfo *)this); /*0x530ef6*/
+    if ( OwnerQuest ) /*0x530efd*/
     {
-      v7 = (const char *)((int (__thiscall *)(TESQuest *, UInt32))v6->vtbl->GetEditorName)(v6, v6->super.refID);
-      _sprintf(v15, "Quest '%s' (%08X)", v7, v12);
+      v7 = (const char *)((int (__thiscall *)(TESQuest *, UInt32))OwnerQuest->vtbl->GetEditorName)( /*0x530f0d*/
+                           OwnerQuest,
+                           OwnerQuest->super.refID);
+      _sprintf(v15, "Quest '%s' (%08X)", v7, v12); /*0x530f1d*/
     }
   }
-  v14[0] = 0;
-  v8 = (_DWORD *)*sub_530C40(this);
-  if ( v8 )
+  v14[0] = 0; /*0x530f27*/
+  first = TESTopicInfo::GetResponseList((OblivionTopicInfo *)this)->first; /*0x530f34*/
+  if ( first )
   {
-    v9 = sub_52E100(v8);
-    _sprintf(v14, ", Text: \"%s\"", v9);
+    Text = TESResponse::GetText(first); /*0x530f3a*/
+    _sprintf(v14, ", Text: \"%s\"", Text);
   }
   return BSStringT_Static_Format(
            a2,

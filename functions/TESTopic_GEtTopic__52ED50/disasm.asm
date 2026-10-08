@@ -1,9 +1,9 @@
-0x52ED50: mov     eax, [esp+arg_4]
+0x52ED50: mov     eax, [esp+index]; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x52ED54: test    eax, eax
 0x52ED56: jge     short loc_52ED5B
 0x52ED58: xor     eax, eax
 0x52ED5A: retn
-0x52ED5B: mov     ecx, [esp+arg_0]
+0x52ED5B: mov     ecx, dword ptr [esp+topicType]
 0x52ED5F: cmp     eax, ds:0B110F4h[ecx*4]
 0x52ED66: jge     short loc_52ED58
 0x52ED68: mov     ecx, ds:0B111B8h[ecx*4]

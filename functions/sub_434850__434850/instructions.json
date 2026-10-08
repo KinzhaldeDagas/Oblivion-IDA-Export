@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x434850",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+arg_8]; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x434861",
-    "line": "call    sub_431970",
+    "line": "call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.",
     "mnemonic": "call",
     "size": 5
   },

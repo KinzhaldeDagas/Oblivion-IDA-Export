@@ -81,7 +81,7 @@
 0x6C8658: test    eax, eax
 0x6C865A: mov     [esp+38h+var_4], 1
 0x6C8662: jz      short loc_6C8682
-0x6C8664: push    offset sub_7016A0; a5
+0x6C8664: push    offset NiPointerSlot_Release; a5
 0x6C8669: push    offset sub_6C6370; a4
 0x6C866E: push    esi; size
 0x6C866F: lea     ebx, [eax+4]
@@ -163,20 +163,20 @@
 0x6C8746: push    eax; void *
 0x6C8747: call    $LN21
 0x6C874C: push    ebx
-0x6C874D: call    FormHeapFree
+0x6C874D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C8752: add     esp, 4
 0x6C8755: mov     eax, [edi+18h]
 0x6C8758: test    eax, eax
 0x6C875A: jz      short loc_6C8779
 0x6C875C: mov     edx, [eax-4]
 0x6C875F: lea     ebx, [eax-4]
-0x6C8762: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6C8762: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6C8767: push    edx; int
 0x6C8768: push    10h; unsigned int
 0x6C876A: push    eax; void *
 0x6C876B: call    $LN21
 0x6C8770: push    ebx
-0x6C8771: call    FormHeapFree
+0x6C8771: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6C8776: add     esp, 4
 0x6C8779: mov     eax, [esp+38h+var_24]
 0x6C877D: mov     ecx, [esp+38h+var_20]
@@ -193,3 +193,20 @@
 0x6C879B: pop     ebx
 0x6C879C: add     esp, 24h
 0x6C879F: retn
+0x9C7610: mov     eax, [ebp-10h]
+0x9C7613: push    eax
+0x9C7614: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7619: pop     ecx
+0x9C761A: retn
+0x9C761B: mov     eax, [ebp-10h]
+0x9C761E: push    eax
+0x9C761F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7624: pop     ecx
+0x9C7625: retn
+0x9C7626: mov     edx, [esp+arg_4]
+0x9C762A: lea     eax, [edx-28h]
+0x9C762D: mov     ecx, [edx-2Ch]
+0x9C7630: xor     ecx, eax
+0x9C7632: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7637: mov     eax, offset stru_AEFA60
+0x9C763C: jmp     ___CxxFrameHandler3

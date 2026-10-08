@@ -1,1 +1,1 @@
-HavokFileStreambufWriter
+struct HavokFileStreambufWriter;

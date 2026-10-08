@@ -1,1 +1,1 @@
-IComThreadingInfoVtbl_0
+typedef IComThreadingInfoVtbl IComThreadingInfoVtbl_0;

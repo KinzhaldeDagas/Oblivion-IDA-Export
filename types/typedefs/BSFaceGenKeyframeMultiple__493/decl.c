@@ -1,1 +1,1 @@
-BSFaceGenKeyframeMultiple
+struct BSFaceGenKeyframeMultiple;

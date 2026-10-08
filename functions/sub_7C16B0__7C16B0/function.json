@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C16B0",
+      "0x7C1733"
+    ]
+  ],
+  "chunks_sha256": "ab4d015d43c1806f61b440f641296c855899f53fa8209d2dc6e4fd6fd2a5dac4",
+  "comment_regular": "Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.",
+  "comment_repeatable": "Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.\n\nMEF v57 IMPLEMENTED 2026-10-08: v57 ref-list AddTail mutation wrapper announces writer before engine allocator/ref callbacks, then updates bounded unique-node/source indices or discards them. Private lock never spans native calls. Cache growth rebuilds only when needed; source owners protected from receiver-cache churn.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C16B0",
+  "display_name": "NiTRefPointerList__AddTail",
   "end_ea": "0x7C1733",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C16B0",
+  "name": "NiTRefPointerList__AddTail",
   "segment": ".text",
   "sha256": "ab4d015d43c1806f61b440f641296c855899f53fa8209d2dc6e4fd6fd2a5dac4",
   "size": 131,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C16B0",
+  "total_chunk_size": 131,
   "type": "_DWORD *__thiscall(_DWORD *this, int *)",
   "xrefs_from_count": 60,
   "xrefs_to_count": 11

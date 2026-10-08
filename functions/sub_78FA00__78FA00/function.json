@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78FA00",
+      "0x78FA39"
+    ]
+  ],
+  "chunks_sha256": "545fb1ef432e85d7a930de2b95bc7f7820676d1d3f1174050fc5c5092f7bd6ad",
+  "comment_regular": "OBLIVION AUTHORITY 2026-08-27: Recursively accumulates hierarchical branch placement percent. Base is 0 when branch is null or has no parent. Otherwise A(branch)=A(parent)+(1-A(parent))*branch->percentAlongParent. This visits the full parent chain; it is not the RT4.1 limited-depth product formula.",
+  "comment_repeatable": "OBLIVION AUTHORITY 2026-08-27: Recursively accumulates hierarchical branch placement percent. Base is 0 when branch is null or has no parent. Otherwise A(branch)=A(parent)+(1-A(parent))*branch->percentAlongParent. This visits the full parent chain; it is not the RT4.1 limited-depth product formula.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78FA00",
+  "display_name": "OB_CBranch_AccumulateLeafDimmingPercent_010201A0",
   "end_ea": "0x78FA39",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78FA00",
+  "name": "OB_CBranch_AccumulateLeafDimmingPercent_010201A0",
   "segment": ".text",
   "sha256": "545fb1ef432e85d7a930de2b95bc7f7820676d1d3f1174050fc5c5092f7bd6ad",
   "size": 57,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78FA00",
-  "type": "double __cdecl(float *)",
+  "total_chunk_size": 57,
+  "type": "float __cdecl(const OB_CBranch_010201A0 *branch)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 2
 }

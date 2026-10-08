@@ -1,4 +1,4 @@
-0x64252F: add     eax, offset flt_B33E9C
+0x64252F: add     eax, 0B33E9Ch
 0x642534: fstp    [esp+arg_14]
 0x642538: fld     [esp+arg_14]
 0x64253C: fstp    dword ptr [ebp+1B8h]
@@ -50,12 +50,12 @@
 0x6425C7: test    al, al
 0x6425C9: jz      loc_6426E6
 0x6425CF: mov     ebp, [esp+10h+arg_10]
-0x6425D3: mov     ecx, esi
-0x6425D5: call    sub_5E0F30
+0x6425D3: mov     ecx, esi; this
+0x6425D5: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x6425DA: test    al, al
 0x6425DC: jnz     loc_6426DA
-0x6425E2: mov     ecx, esi
-0x6425E4: call    sub_5E32D0
+0x6425E2: mov     ecx, esi; this
+0x6425E4: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x6425E9: test    al, al
 0x6425EB: jz      loc_6426DA
 0x6425F1: mov     ecx, [esi+58h]
@@ -73,9 +73,9 @@
 0x64261C: call    eax
 0x64261E: test    eax, eax
 0x642620: jnz     loc_6426DA
-0x642626: push    3
-0x642628: push    4
-0x64262A: call    TESTopic__GEtTopic
+0x642626: push    3; index
+0x642628: push    4; topicType
+0x64262A: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x64262F: add     esp, 8
 0x642632: mov     ecx, esi
 0x642634: mov     ebx, eax
@@ -122,7 +122,7 @@
 0x6426B5: call    eax
 0x6426B7: mov     ebx, [esi+58h]
 0x6426BA: mov     edi, [ebx]
-0x6426BC: mov     ecx, offset unk_B36928
+0x6426BC: mov     ecx, (offset flt_B36778+1B0h)
 0x6426C1: add     edi, 1C0h
 0x6426C7: call    GameSetting_GetSafeFloatPointer
 0x6426CC: fld     dword ptr [eax]
@@ -137,23 +137,23 @@
 0x6426E2: mov     ecx, esi
 0x6426E4: call    edx
 0x6426E6: push    0; a2
-0x6426E8: mov     ecx, offset ActorProcessManager_ptr; this
-0x6426ED: call    sub_673A50
+0x6426E8: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6426ED: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6426F2: mov     ecx, eax; this
-0x6426F4: call    sub_7616D0
+0x6426F4: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6426F9: mov     ebx, [esp+34h+var_10]
 0x6426FD: mov     dword ptr [ebx+1A4h], 0
 0x642707: fld     dword ptr ds:0B36708h
 0x64270D: mov     ecx, esi; this
 0x64270F: fstp    [esp+34h+var_1C]
 0x642713: mov     ebp, eax
-0x642715: call    TESObjectREFR_GetParentCell
+0x642715: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64271A: test    eax, eax
 0x64271C: jz      short loc_642730
 0x64271E: mov     ecx, esi; this
-0x642720: call    TESObjectREFR_GetParentCell
+0x642720: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x642725: mov     ecx, eax; this
-0x642727: call    TESObjectCELL_IsInterior
+0x642727: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x64272C: test    al, al
 0x64272E: jnz     short loc_64273A
 0x642730: fld     [esp+34h+var_1C]

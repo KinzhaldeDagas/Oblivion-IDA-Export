@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x731620",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Fog property propagation decode: NiPropertyState copy constructor preserves all ten slots, including inherited fog slot +0x0C.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x73164D",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x731661",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x731695",
-    "line": "mov     ebx, [edi]",
+    "line": "mov     ebx, [edi]; Fog property propagation decode: copy loop includes fog slot +0x0C, so child/geometry state copies retain inherited B333E4 until overridden.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -424,5 +424,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA810",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA813",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA818",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA81D",
+    "line": "push    0Ah; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA81F",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA821",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA824",
+    "line": "add     eax, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA827",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA828",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA82D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA82E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA832",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA835",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA838",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA83A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA83F",
+    "line": "mov     eax, offset stru_AF2EC0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA844",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

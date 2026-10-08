@@ -1,1 +1,6 @@
-_UNICODE_STRING
+struct _UNICODE_STRING
+{
+USHORT Length;
+USHORT MaximumLength;
+PWSTR Buffer;
+};

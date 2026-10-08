@@ -1,5 +1,5 @@
 0xA26A10: push    esi
-0xA26A11: mov     esi, dword_B3F998
+0xA26A11: mov     esi, dword ptr unk_B3F998
 0xA26A17: test    esi, esi
 0xA26A19: jz      short loc_A26A37
 0xA26A1B: lea     eax, [esi+4]

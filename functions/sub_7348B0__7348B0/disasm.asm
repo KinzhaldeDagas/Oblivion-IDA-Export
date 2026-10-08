@@ -8,7 +8,6 @@
 0x7348C3: push    esi
 0x7348C4: mov     esi, [esp+0Ch+arg_0]
 0x7348C8: jmp     short loc_7348D0
-0x7348CA: align 10h
 0x7348D0: movzx   ecx, byte ptr [esi+1]
 0x7348D4: and     cl, 0FCh
 0x7348D7: add     cl, cl

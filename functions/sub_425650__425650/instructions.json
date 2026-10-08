@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x425650",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified conditional ExtraTeleport cleanup branch: when the matching cleanup flag is present and the reference is not in the protected state, it removes low-path world indexing when the door-link reference-ID ordering condition holds, then removes the ExtraTeleport entry.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x425657",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x425726",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x42572D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42572F",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,19 +475,19 @@
   },
   {
     "ea": "0x425739",
-    "line": "mov     edx, [esp+18h+arg_4]",
+    "line": "mov     edx, [esp+18h+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x42573D",
-    "line": "push    edx",
+    "line": "push    edx; doorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42573E",
-    "line": "call    sub_67F340",
+    "line": "call    TravelPath_RemoveAStarWorldNodeFromSpaceMaps; Verified unlink path for a door reference whose ExtraTeleport is being removed: locate its AStarWorldNode by reciprocal space pair and endpoint refs, remove it from both inner lists, remove/free empty inner maps and outer entries, unlink it from LowPathSearchGlobals.allAStarWorldNodes, release its state slot, and free the node. Called from RemoveExtraTeleportFromDoorRef and ExtraData cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x425820",
-    "line": "mov     eax, SaveLoad_CurrentSavegame",
+    "line": "mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x4258DE",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x89F6B0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x89F6C2",
-    "line": "mov     edi, offset dword_B3FA80",
+    "line": "mov     edi, offset stru_B3FA80",
     "mnemonic": "mov",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x89F6C8",
-    "line": "call    sub_890A10",
+    "line": "call    sub_890A10; TES4 authoritative metadata contains-key helper for the same +0x44/+0x48 0x10-byte entry map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x89F6E2",
-    "line": "call    sub_47F990",
+    "line": "call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x89F6EA",
-    "line": "push    offset dword_B3FA80",
+    "line": "push    offset stru_B3FA80",
     "mnemonic": "push",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x89F703",
-    "line": "push    offset dword_B3FA80",
+    "line": "push    offset stru_B3FA80",
     "mnemonic": "push",
     "size": 5
   },

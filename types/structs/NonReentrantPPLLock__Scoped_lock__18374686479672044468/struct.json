@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_NonReentrantPPLLock__Scoped_lock",
+  "definition": "struct _NonReentrantPPLLock__Scoped_lock\n{\n_NonReentrantPPLLock *lock;\n$671395F1491F0B1ACDC7BF26D3A20439 wait;\n}\n",
   "id": 18374686479672044468,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lock",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "_NonReentrantPPLLock *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wait",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 24
+      "size": 24,
+      "type": "$671395F1491F0B1ACDC7BF26D3A20439"
     }
   ],
   "name": "_NonReentrantPPLLock__Scoped_lock",
+  "ordinal": 7812,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 28
 }

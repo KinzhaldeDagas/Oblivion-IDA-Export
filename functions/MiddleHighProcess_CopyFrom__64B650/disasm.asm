@@ -24,14 +24,14 @@
 0x64B6B0: mov     ecx, [esi+17Ch]
 0x64B6B6: mov     [edi+17Ch], ecx
 0x64B6BC: mov     [esi+17Ch], ebp
-0x64B6C2: mov     ecx, [edi+17Ch]
+0x64B6C2: mov     ecx, [edi+17Ch]; this
 0x64B6C8: cmp     ecx, ebp
 0x64B6CA: jz      short loc_64B6D9
 0x64B6CC: fldz
 0x64B6CE: push    ecx
-0x64B6CF: fstp    [esp+14h+var_14]; float
-0x64B6D2: push    5; int
-0x64B6D4: call    sub_470FC0
+0x64B6CF: fstp    [esp+14h+easeOutTime]; easeOutTime
+0x64B6D2: push    5; slot
+0x64B6D4: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x64B6D9: mov     edx, [esi+0E4h]
 0x64B6DF: mov     [edi+0E4h], edx
 0x64B6E5: mov     eax, [esi+0E8h]
@@ -167,11 +167,10 @@
 0x64B935: cmp     dword ptr [ebp+4], 0
 0x64B939: jz      short loc_64B956
 0x64B93B: jmp     short loc_64B940
-0x64B93D: align 10h
 0x64B940: mov     eax, [ebp+4]
 0x64B943: mov     ebx, [eax+4]
 0x64B946: push    eax
-0x64B947: call    FormHeapFree
+0x64B947: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64B94C: add     esp, 4
 0x64B94F: test    ebx, ebx
 0x64B951: mov     [ebp+4], ebx

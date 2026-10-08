@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79A9E0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+first]; Fills an initialized SFrondVertex range with one 0x38-byte value. Used by vector insert when the insertion point has enough trailing initialized elements.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79A9E4",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79A9ED",
-    "line": "mov     ebx, [esp+4+arg_8]",
+    "line": "mov     ebx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },

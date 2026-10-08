@@ -2,14 +2,14 @@ void sub_71B240()
 {
   NiDevImageConverter *v0; // esi
 
-  v0 = dword_B3FD28;
-  if ( dword_B3FD28 )
+  v0 = unk_B3FD28; /*0x71b241*/
+  if ( unk_B3FD28 ) /*0x71b241*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)v0 + 1) )
+    if ( !InterlockedDecrement((volatile LONG *)v0 + 1) ) /*0x71b24f*/
     {
-      if ( v0 )
-        (**(void (__thiscall ***)(NiDevImageConverter *, int))v0)(v0, 1);
+      if ( v0 ) /*0x71b25b*/
+        (**(void (__thiscall ***)(NiDevImageConverter *, int))v0)(v0, 1); /*0x71b265*/
     }
-    dword_B3FD28 = 0;
+    unk_B3FD28 = 0; /*0x71b267*/
   }
 }

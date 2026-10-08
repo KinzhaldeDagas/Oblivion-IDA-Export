@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x68DA7B",
+      "0x68DA96"
+    ]
+  ],
+  "chunks_sha256": "577c14dcff96042b4f9b99a3a25d024790dbed341f6ceed813e2f09d321f38e8",
+  "comment_regular": "Verified (Oblivion): size traversal calls each hit-effect vtable +0x74 with ECX=this, first explicit argument the owning ActiveEffect* (EDI), and second explicit argument the target reference passed to ActiveEffect_Base_SaveSize (EBX). This establishes the shared GetExtraSaveSize virtual signature.",
+  "comment_repeatable": "Verified (Oblivion): size traversal calls each hit-effect vtable +0x74 with ECX=this, first explicit argument the owning ActiveEffect* (EDI), and second explicit argument the target reference passed to ActiveEffect_Base_SaveSize (EBX). This establishes the shared GetExtraSaveSize virtual signature.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_SaveSize:::LoopBody",
   "end_ea": "0x68DA96",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_SaveSize:::LoopBody",
   "segment": ".text",
   "sha256": "577c14dcff96042b4f9b99a3a25d024790dbed341f6ceed813e2f09d321f38e8",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68DA7B",
-  "type": "int __usercall@<eax>(_DWORD *@<esi>, __int16)",
+  "total_chunk_size": 27,
+  "type": "int __usercall@<eax>(_DWORD *@<esi>, int)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 2
 }

@@ -1,4 +1,4 @@
-BOOL __stdcall sub_6FA7B0(int a1)
+BOOL __thiscall sub_6FA7B0(NiRenderTargetGroup *this, int a2)
 {
-  return (unsigned __int8)sub_716BC0(a1) == 0;
+  return !sub_716BC0(this, a2); /*0x6fa7c1*/
 }

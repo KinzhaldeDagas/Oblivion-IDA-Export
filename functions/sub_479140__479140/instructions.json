@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x479140",
-    "line": "mov     ecx, [esp+arg_8]",
+    "line": "mov     ecx, [esp+sourceModelRoot]; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x479147",
-    "line": "mov     ebp, [esp+4+arg_4]",
+    "line": "mov     ebp, [esp+4+modelRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x479152",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x479162",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x479171",
-    "line": "push    offset dword_B3FCC0",
+    "line": "push    offset stru_B3FCC0",
     "mnemonic": "push",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x479188",
-    "line": "cmp     [esp+8+arg_10], 7",
+    "line": "cmp     [esp+8+modelType], 7",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4791C8",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,13 +373,13 @@
   },
   {
     "ea": "0x4791F8",
-    "line": "push    ebp",
+    "line": "push    ebp; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4791F9",
-    "line": "call    sub_480770",
+    "line": "call    NiNode_RemoveScbChildAlongFadeNodeChain; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x479288",
-    "line": "call    eax",
+    "line": "call    eax; Attach the generated model root to the exact skeleton parent selected by Prn extra data.",
     "mnemonic": "call",
     "size": 2
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x4792AB",
-    "line": "call    eax",
+    "line": "call    eax; Reparent exact-name Scb out of modelRoot as a sibling under the same Prn-selected parent; AddObject detaches it from its former parent.",
     "mnemonic": "call",
     "size": 2
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x4792BA",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },

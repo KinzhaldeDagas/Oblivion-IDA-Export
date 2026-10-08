@@ -1,1 +1,1 @@
-PInterfaceList
+typedef InterfaceList *PInterfaceList;

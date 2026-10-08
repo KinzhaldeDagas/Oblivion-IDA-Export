@@ -49,12 +49,11 @@
 0x729001: sub     eax, esi
 0x729003: mov     [esp+18h+var_4], eax
 0x729007: jmp     short loc_729014
-0x729009: align 10h
 0x729010: mov     eax, [esp+18h+var_4]
 0x729014: add     eax, esi
-0x729016: push    eax
-0x729017: mov     ecx, esi
-0x729019: call    sub_8AA390
+0x729016: push    eax; other
+0x729017: mov     ecx, esi; this
+0x729019: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x72901E: test    al, al
 0x729020: jnz     loc_7291C5
 0x729026: add     edi, 1
@@ -92,9 +91,9 @@
 0x72908B: mov     ebp, [ebp+20h]
 0x72908E: sub     ebp, esi
 0x729090: lea     edx, [esi+ebp]
-0x729093: push    edx
-0x729094: mov     ecx, esi
-0x729096: call    sub_8AA390
+0x729093: push    edx; other
+0x729094: mov     ecx, esi; this
+0x729096: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x72909B: test    al, al
 0x72909D: jnz     loc_7291C5
 0x7290A3: add     edi, 1

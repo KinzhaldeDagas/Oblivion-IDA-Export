@@ -1,1 +1,7 @@
-_DEBUG_EVENT
+struct _DEBUG_EVENT
+{
+DWORD dwDebugEventCode;
+DWORD dwProcessId;
+DWORD dwThreadId;
+$CAB53D924484C00E6DE96DD9979BDEF9 u;
+};

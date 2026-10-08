@@ -12,7 +12,7 @@
 0x6C553D: mov     large fs:0, eax
 0x6C5543: mov     esi, ecx
 0x6C5545: mov     [esp+1Ch+var_10], esi
-0x6C5549: call    ??0NiTimeController@@QAE@XZ; NiTimeController::NiTimeController(void)
+0x6C5549: call    ??0NiTimeController@@QAE@XZ; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x6C554E: xor     ebx, ebx
 0x6C5550: mov     dword ptr [esi], offset ??_7NiControllerManager@@6B@; const NiControllerManager::`vftable'
 0x6C5556: mov     [esp+1Ch+var_4], ebx
@@ -62,3 +62,38 @@
 0x6C55E9: pop     ebx
 0x6C55EA: add     esp, 10h
 0x6C55ED: retn
+0x6C44E0: mov     eax, [ecx+4]
+0x6C44E3: test    eax, eax
+0x6C44E5: mov     dword ptr [ecx], offset ??_7?$NiTArray@V?$NiPointer@VNiControllerSequence@@@@@@6B@; const NiTArray<NiPointer<NiControllerSequence>>::`vftable'
+0x6C44EB: jz      short locret_6C450C
+0x6C44ED: mov     ecx, [eax-4]
+0x6C44F0: push    esi
+0x6C44F1: lea     esi, [eax-4]
+0x6C44F4: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x6C44F9: push    ecx; int
+0x6C44FA: push    4; unsigned int
+0x6C44FC: push    eax; void *
+0x6C44FD: call    $LN21
+0x6C4502: push    esi
+0x6C4503: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x6C4508: add     esp, 4
+0x6C450B: pop     esi
+0x6C450C: retn
+0x9C73B0: mov     ecx, [ebp-10h]; this
+0x9C73B3: jmp     ??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C73B8: mov     ecx, [ebp-10h]
+0x9C73BB: add     ecx, 3Ch ; '<'
+0x9C73BE: jmp     loc_6C44E0
+0x9C73C3: mov     ecx, [ebp-10h]
+0x9C73C6: add     ecx, 4Ch ; 'L'; void *
+0x9C73C9: jmp     sub_6C4090
+0x9C73CE: mov     ecx, [ebp-10h]
+0x9C73D1: add     ecx, 58h ; 'X'
+0x9C73D4: jmp     j_??1?$NiTStringPointerMap@PAVNiControllerSequence@@@@UAE@XZ; NiTStringPointerMap<NiControllerSequence *>::~NiTStringPointerMap<NiControllerSequence *>(void)
+0x9C73D9: mov     edx, [esp+arg_4]
+0x9C73DD: lea     eax, [edx-0Ch]
+0x9C73E0: mov     ecx, [edx-10h]
+0x9C73E3: xor     ecx, eax
+0x9C73E5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C73EA: mov     eax, offset stru_AEF800
+0x9C73EF: jmp     ___CxxFrameHandler3

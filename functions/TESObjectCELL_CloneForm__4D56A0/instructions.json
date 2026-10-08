@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D56A0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified: TESObjectCELL_CloneForm clones the CELL via TESForm_Clone, then clones associated LAND and TESPathGrid through vtable slot +0x38 and duplicates eligible child references through the same slot before adding them to the destination cell. This shows +0x38 is the CreateDuplicateForm virtual family.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4D56C7",
-    "line": "call    TESForm_Clone",
+    "line": "call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4D5783",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x4D57C8",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x4D580D",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -832,12 +832,6 @@
     "line": "jmp     short loc_4D5820",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4D581D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4D5820",
@@ -1015,19 +1009,19 @@
   },
   {
     "ea": "0x4D5870",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D5871",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D5873",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x4D5891",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

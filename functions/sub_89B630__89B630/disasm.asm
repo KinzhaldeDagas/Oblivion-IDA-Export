@@ -88,7 +88,6 @@
 0x89B793: test    eax, eax
 0x89B795: jle     short loc_89B816
 0x89B797: jmp     short loc_89B7A0
-0x89B799: align 10h
 0x89B7A0: mov     eax, [esp+844h+var_818]
 0x89B7A4: mov     ecx, [eax+ebx*8+4]
 0x89B7A8: movsx   eax, byte ptr [ecx+5]

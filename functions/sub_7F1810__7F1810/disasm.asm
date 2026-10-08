@@ -1,4 +1,4 @@
-0x7F1810: push    0FFFFFFFFh
+0x7F1810: push    0FFFFFFFFh; STLSPData ctor: allocates 0x300-byte shared leaf shader data buffer at +0x08 and clears scalar fields +0x0C..+0x14.
 0x7F1812: push    offset SEH_7F1810
 0x7F1817: mov     eax, large fs:0
 0x7F181D: push    eax
@@ -11,13 +11,13 @@
 0x7F182C: mov     large fs:0, eax
 0x7F1832: mov     esi, ecx
 0x7F1834: mov     [esp+18h+var_10], esi
-0x7F1838: push    offset NiRefObject_objcount; lpAddend
+0x7F1838: push    0B3FD64h; lpAddend
 0x7F183D: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7F1843: mov     dword ptr [esi+4], 0
 0x7F184A: call    dword ptr ds:0A28078h
 0x7F1850: push    300h; Size
 0x7F1855: mov     [esp+1Ch+var_4], 0
-0x7F185D: mov     dword ptr [esi], offset ??_7STLSPData@@6B@; const STLSPData::`vftable'
+0x7F185D: mov     dword ptr [esi], offset ??_7STLSPData@@6B@;
 0x7F1863: call    FormHeapAlloc
 0x7F1868: push    300h
 0x7F186D: push    0
@@ -36,3 +36,12 @@
 0x7F1894: pop     esi
 0x7F1895: add     esp, 10h
 0x7F1898: retn
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

@@ -1,24 +1,24 @@
-0x416E9B: push    4; Size
+0x416E9B: push    4; byteCount
 0x416E9D: lea     ecx, [esp+4+Dst]
-0x416EA1: push    ecx; Dst
-0x416EA2: mov     ecx, SaveLoad_CurrentSavegame
+0x416EA1: push    ecx; destination
+0x416EA2: mov     ecx, g_TESSaveLoadGame; self
 0x416EA8: mov     [esp+8+Dst], ebp
-0x416EAC: call    SaveLoad_LoadData
-0x416EB1: xor     esi, esi
+0x416EAC: call    SaveLoad_LoadData; MEF candidate verification 2026-05-30: known-effect signed dword count verified; loop consumes one FormID per positive entry. Accepted pending signed dword clamp.
+0x416EB1: xor     esi, esi; MEF v51 bridge-stack audit: direct JMP preserves entry ESP; signed known-effects count is exactly dword [ESP+14h]. Bridge restores ESP before replaying the signed comparison.
 0x416EB3: cmp     [esp+Dst], ebp
 0x416EB7: jle     short loc_416F12
 0x416EB9: mov     edi, 200000h
 0x416EBE: mov     edi, edi
-0x416EC0: mov     ecx, SaveLoad_CurrentSavegame
-0x416EC6: push    4; Size
+0x416EC0: mov     ecx, g_TESSaveLoadGame; self
+0x416EC6: push    4; byteCount
 0x416EC8: lea     edx, [esp+4+ArgList]
-0x416ECC: push    edx; Dst
-0x416ECD: call    SaveLoad_LoadData
+0x416ECC: push    edx; destination
+0x416ECD: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x416ED2: mov     ecx, dword ptr [esp+ArgList]
 0x416ED6: lea     eax, [esp+arg_14]
 0x416EDA: push    eax
 0x416EDB: push    ecx
-0x416EDC: mov     ecx, offset EffectSettingCollection
+0x416EDC: mov     ecx, 0B33508h
 0x416EE1: mov     [esp+8+arg_14], ebp
 0x416EE5: call    NiTMap_GetAt
 0x416EEA: mov     eax, [esp+arg_14]
@@ -34,18 +34,18 @@
 0x416F09: add     esi, 1
 0x416F0C: cmp     esi, [esp+Dst]
 0x416F10: jl      short loc_416EC0
-0x416F12: mov     ecx, SaveLoad_CurrentSavegame
-0x416F18: call    sub_45A170
+0x416F12: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
+0x416F18: call    TESSaveLoadGame_UseSaveGameBlocks
 0x416F1D: test    al, al
 0x416F1F: jz      loc_417033
-0x416F25: mov     ecx, SaveLoad_CurrentSavegame
+0x416F25: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x416F2B: mov     edi, [ecx+80h]
 0x416F31: cmp     edi, ebp
 0x416F33: mov     esi, [ecx+14h]
 0x416F36: jz      loc_416FDB
 0x416F3C: mov     eax, [edi]
 0x416F3E: push    eax; a1
-0x416F3F: call    TESForm_LookupByFormID
+0x416F3F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x416F44: movzx   edx, [esp+4+arg_C]
 0x416F49: mov     ecx, eax
 0x416F4B: lea     eax, [edx+ebx]

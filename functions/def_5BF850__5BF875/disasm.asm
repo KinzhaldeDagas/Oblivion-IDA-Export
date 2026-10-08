@@ -5,7 +5,7 @@
 0x5BF882: mov     [esp+arg_14], 4
 0x5BF88A: lea     ebx, [ebx+0]
 0x5BF890: push    0; Seed
-0x5BF892: call    GetRandomLargeInteger?
+0x5BF892: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5BF897: fld     dword ptr ds:0B33E9Ch
 0x5BF89D: fnstcw  word ptr [esp+4+arg_10+2]
 0x5BF8A1: mov     ebp, eax
@@ -17,10 +17,10 @@
 0x5BF8B9: mov     edx, [esp+4+Seed]
 0x5BF8BD: push    edx; Seed
 0x5BF8BE: fldcw   word ptr [esp+8+arg_10+2]
-0x5BF8C2: call    GetRandomLargeInteger?
+0x5BF8C2: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5BF8C7: push    ebp; Seed
 0x5BF8C8: mov     edi, eax
-0x5BF8CA: call    GetRandomLargeInteger?
+0x5BF8CA: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5BF8CF: add     esp, 0Ch
 0x5BF8D2: and     edi, 3
 0x5BF8D5: mov     ebp, 0
@@ -47,7 +47,6 @@
 0x5BF913: lea     edi, [esi+30h]
 0x5BF916: mov     ebx, 4
 0x5BF91B: jmp     short loc_5BF920
-0x5BF91D: align 10h
 0x5BF920: mov     eax, [edi+4]
 0x5BF923: add     eax, 0FFFFFFE7h; switch 76 cases
 0x5BF926: cmp     eax, 4Bh
@@ -75,9 +74,9 @@
 0x5BF975: mov     ecx, [esi+0A4h]; this
 0x5BF97B: fild    [esp+Seed]
 0x5BF97F: push    ecx
-0x5BF980: fstp    [esp+4+a2]; a3
-0x5BF983: push    0FAEh; a2
-0x5BF988: call    Tile_SetFloat
+0x5BF980: fstp    [esp+4+a2]; value
+0x5BF983: push    0FAEh; propertyCode
+0x5BF988: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BF98D: add     edi, 14h; jumptable 005BF932 default case, cases 26-49,51-74,76-99
 0x5BF990: sub     ebx, 1
 0x5BF993: jnz     short loc_5BF920
@@ -85,10 +84,10 @@
 0x5BF996: call    sub_5BEA90
 0x5BF99B: fld     dword ptr ds:0A379B4h
 0x5BF9A1: mov     ecx, [esi+0BCh]; this
-0x5BF9A7: fstp    [esp+4+a2]; a3
-0x5BF9AA: push    0FAFh; a2
+0x5BF9A7: fstp    [esp+4+a2]; value
+0x5BF9AA: push    0FAFh; propertyCode
 0x5BF9AF: mov     [esi+88h], ebp
-0x5BF9B5: call    Tile_SetFloat
+0x5BF9B5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BF9BA: call    sub_5BE870
 0x5BF9BF: test    al, al
 0x5BF9C1: mov     ecx, [esi+0B8h]; this
@@ -97,20 +96,20 @@
 0x5BF9CA: fld1
 0x5BF9CC: jmp     short loc_5BF9D4
 0x5BF9CE: fld     dword ptr ds:0A379B4h
-0x5BF9D4: fstp    [esp+4+a2]; a3
-0x5BF9D7: push    0FAFh; a2
-0x5BF9DC: call    Tile_SetFloat
-0x5BF9E1: mov     ecx, ds:0B333C4h
-0x5BF9E7: push    20h ; ' '
-0x5BF9E9: call    Actor_GetSkillMasteryLevel
+0x5BF9D4: fstp    [esp+4+a2]; value
+0x5BF9D7: push    0FAFh; propertyCode
+0x5BF9DC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5BF9E1: mov     ecx, ds:0B333C4h; this
+0x5BF9E7: push    20h ; ' '; actorValue
+0x5BF9E9: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BF9EE: cmp     eax, 1
 0x5BF9F1: mov     ecx, [esi+0C0h]; this
 0x5BF9F7: push    ecx
 0x5BF9F8: jl      short loc_5BFA20
 0x5BF9FA: fld     dword ptr ds:0A379B4h
-0x5BFA00: fstp    [esp+4+a2]; a3
-0x5BFA03: push    0FB1h; a2
-0x5BFA08: call    Tile_SetFloat
+0x5BFA00: fstp    [esp+4+a2]; value
+0x5BFA03: push    0FB1h; propertyCode
+0x5BFA08: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BFA0D: fld1
 0x5BFA0F: mov     ecx, [esi+0C0h]
 0x5BFA15: push    ecx; a2
@@ -118,9 +117,9 @@
 0x5BFA19: push    0FAFh
 0x5BFA1E: jmp     short loc_5BFA2A
 0x5BFA20: fld1
-0x5BFA22: fstp    [esp+4+a2]; a3
-0x5BFA25: push    0FB1h; a2
-0x5BFA2A: call    Tile_SetFloat
+0x5BFA22: fstp    [esp+4+a2]; value
+0x5BFA25: push    0FB1h; propertyCode
+0x5BFA2A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BFA2F: fld     dword ptr ds:0B38E20h
 0x5BFA35: mov     edx, [esi+0D8h]
 0x5BFA3B: sub     esp, 8
@@ -129,7 +128,7 @@
 0x5BFA44: fld     dword ptr ds:0B38E18h
 0x5BFA4A: mov     eax, [edi]
 0x5BFA4C: mov     edx, [eax+284h]
-0x5BFA52: fstp    dword ptr [esp+0]
+0x5BFA52: fstp    [esp+8+var_8]
 0x5BFA55: push    20h ; ' '
 0x5BFA57: mov     ecx, edi
 0x5BFA59: call    edx
@@ -157,7 +156,7 @@
 0x5BFAA2: mov     [esp+20h+arg_C], ebp
 0x5BFAA6: fst     dword ptr [esi+7Ch]
 0x5BFAA9: mov     [esp+40h], ebp
-0x5BFAAD: call    Double_To_SInt32
+0x5BFAAD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BFAB2: push    eax; ArgList
 0x5BFAB3: lea     eax, [esp+24h+arg_C]
 0x5BFAB7: push    offset aI; "%i"
@@ -180,7 +179,7 @@
 0x5BFAF7: mov     [esi+0F0h], ebp
 0x5BFAFD: call    sub_5BF170
 0x5BFB02: push    edi
-0x5BFB03: call    FormHeapFree
+0x5BFB03: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BFB08: add     esp, 8
 0x5BFB0B: mov     ecx, [esp+10h+arg_10]
 0x5BFB0F: mov     large fs:0, ecx

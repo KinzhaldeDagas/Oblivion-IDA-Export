@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiDX9TextureData",
+  "definition": "struct NiDX9TextureData\n{\nvoid **_vtbl;\nNiTexture *parent;\nNiDX9Renderer *pRenderer;\nNiPixelFormat PixelFormat;\nIDirect3DBaseTexture9 *dTexture;\nUInt32 Width;\nUInt32 Height;\nUInt32 Levels;\n}\n",
   "id": 18374686479672049093,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parent",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "NiTexture *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pRenderer",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "NiDX9Renderer *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PixelFormat",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 68
+      "offset_hex": "0xC",
+      "size": 68,
+      "type": "NiPixelFormat"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dTexture",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "IDirect3DBaseTexture9 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Width",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Height",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Levels",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "NiDX9TextureData",
+  "ordinal": 9293,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 96
 }

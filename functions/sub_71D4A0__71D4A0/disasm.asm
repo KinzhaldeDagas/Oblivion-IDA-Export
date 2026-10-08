@@ -53,7 +53,6 @@
 0x71D535: mov     edx, eax
 0x71D537: mov     eax, [esp+10h+arg_C]
 0x71D53B: jmp     short loc_71D540
-0x71D53D: align 10h
 0x71D540: test    ebp, ebp
 0x71D542: jbe     short loc_71D574
 0x71D544: mov     edi, ebp

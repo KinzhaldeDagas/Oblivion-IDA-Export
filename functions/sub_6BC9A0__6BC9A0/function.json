@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6BC9A0",
+  "chunks": [
+    [
+      "0x6BC9A0",
+      "0x6BCD97"
+    ],
+    [
+      "0x9C7170",
+      "0x9C7199"
+    ]
+  ],
+  "chunks_sha256": "2327ee2fd555019930a91383dccca13097769d231fc0488479694577c840c627",
+  "comment_regular": "Type-2 cubic position boundary insertion: allocate count+1 0x40-byte records, insert evaluated position, split/repair adjacent cubic tangent state when interior, free old array, replace pointer, then recompute derived coefficients.",
+  "comment_repeatable": "Type-2 cubic position boundary insertion: allocate count+1 0x40-byte records, insert evaluated position, split/repair adjacent cubic tangent state when interior, free old array, replace pointer, then recompute derived coefficients.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiPosKey_InsertType2Cubic",
   "end_ea": "0x6BCD97",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6BC9A0",
+  "name": "NiPosKey_InsertType2Cubic",
   "segment": ".text",
   "sha256": "ef672b21dd64d6303be499c7d421cc14b2d417d66fc0b51288495c5b48180495",
   "size": 1015,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6BC9A0",
-  "type": "char __cdecl(float, void **, int *)",
-  "xrefs_from_count": 322,
+  "total_chunk_size": 1056,
+  "type": "char __cdecl(float, void **, unsigned int *)",
+  "xrefs_from_count": 336,
   "xrefs_to_count": 1
 }

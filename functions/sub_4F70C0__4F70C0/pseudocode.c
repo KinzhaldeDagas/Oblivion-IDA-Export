@@ -1,44 +1,45 @@
-char __cdecl sub_4F70C0(Actor *a1, int a2, int a3, double *a4)
+// GetInFaction_Eval (index 71 / opcode 0x1047): the Faction parameter (typeID 0x11) is present when TESActorBaseData_GetFactionRank != -1. This returns a membership predicate, not the numeric rank.
+char __cdecl GetInFaction_Eval(TESObjectREFR *subject, TESForm *param1, TESForm *param2, double *value)
 {
-  int v8; // edi
+  TESForm *v4; // edi
   TESForm *ActorBaseForm; // eax
-  int v10; // ecx
-  double v11; // st4
+  int v6; // ecx
+  double v7; // st7
 
-  *a4 = 0.0;
-  v8 = 0;
-  if ( a2 )
+  *value = 0.0; /*0x4f70cc*/
+  v4 = 0; /*0x4f70cf*/
+  if ( param1 ) /*0x4f70d3*/
   {
-    if ( *(_BYTE *)(a2 + 4) == 6 )
-      v8 = a2;
+    if ( param1->member.type == kFormType_Faction ) /*0x4f70d9*/
+      v4 = param1; /*0x4f70db*/
   }
-  if ( a1 == (Actor *)dword_B3619C && v8 == dword_B36198 )
+  if ( subject == (TESObjectREFR *)unk_B3619C && v4 == (TESForm *)unk_B36198 ) /*0x4f70ef*/
   {
-    *a4 = flt_B361A0;
+    *value = unk_B361A0; /*0x4f70f7*/
 LABEL_17:
-    if ( IsConsoleMode )
-      Interface_ConsolePrint("GetInFaction >> %0.2f", *a4);
-    return 1;
+    if ( MEMORY[0xB361AC] ) /*0x4f7169*/
+      Interface_ConsolePrint("GetInFaction >> %0.2f", *value); /*0x4f717f*/
+    return 1; /*0x4f717f*/
   }
-  if ( a1 && a1->vtbl->super.super.IsActor((TESObjectREFR *)a1) )
+  if ( subject && subject->vtbl->IsActor(subject) ) /*0x4f710d*/
   {
-    ActorBaseForm = Actor_GetActorBaseForm(a1, 1);
-    if ( !ActorBaseForm[2].member.modlist.data && !ActorBaseForm[2].member.refID )
-      ActorBaseForm = Actor_GetActorBaseForm(a1, 0);
-    if ( ActorBaseForm )
+    ActorBaseForm = Actor_GetActorBaseForm((Actor *)subject, 1); /*0x4f7117*/
+    if ( !ActorBaseForm[2].member.modlist.data && !ActorBaseForm[2].member.refID ) /*0x4f7122*/
+      ActorBaseForm = Actor_GetActorBaseForm((Actor *)subject, 0); /*0x4f712c*/
+    if ( ActorBaseForm ) /*0x4f7133*/
     {
-      if ( v8 )
+      if ( v4 ) /*0x4f7137*/
       {
-        LOBYTE(v10) = a1 == (Actor *)TESDataHandler_g_PlayerRef;
-        if ( TESActorBaseData_GetFactionRank(&ActorBaseForm[1].member.refID, v8, v10) != 0xFFFFFFFF )
-          *a4 = 1.0;
+        LOBYTE(v6) = subject == (TESObjectREFR *)reference; /*0x4f713f*/
+        if ( TESActorBaseData_GetFactionRank((int *)&ActorBaseForm[1].member.refID, (int)v4, v6) != 0xFFFFFFFF ) /*0x4f714f*/
+          *value = 1.0; /*0x4f7153*/
       }
     }
-    v11 = *a4;
-    dword_B3619C = (int)a1;
-    flt_B361A0 = v11;
-    dword_B36198 = v8;
-    goto LABEL_17;
+    v7 = *value; /*0x4f7155*/
+    unk_B3619C = (int)subject; /*0x4f7157*/
+    unk_B361A0 = v7; /*0x4f715d*/
+    unk_B36198 = (int)v4; /*0x4f7163*/
+    goto LABEL_17; /*0x4f7163*/
   }
-  return 1;
+  return 1; /*0x4f7187*/
 }

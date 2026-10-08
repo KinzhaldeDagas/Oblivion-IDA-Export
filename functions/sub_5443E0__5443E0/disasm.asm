@@ -2,7 +2,7 @@
 0x5443E4: push    esi
 0x5443E5: push    eax
 0x5443E6: mov     esi, ecx
-0x5443E8: call    sub_543D30
+0x5443E8: call    SkyObject__CreateRootNodeAndAttach; Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.
 0x5443ED: mov     ecx, [esi+4]
 0x5443F0: push    offset aStarsRoot; "Stars Root"
 0x5443F5: call    NiObjectNET_SetName

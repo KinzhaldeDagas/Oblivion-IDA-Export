@@ -19,7 +19,7 @@
 0x54EBDF: test    eax, eax
 0x54EBE1: jz      short loc_54EBF3
 0x54EBE3: push    eax
-0x54EBE4: call    FormHeapFree
+0x54EBE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x54EBE9: add     esp, 4
 0x54EBEC: mov     dword ptr [esi+0Ch], 0
 0x54EBF3: mov     dword ptr [esi+10h], 0
@@ -39,3 +39,12 @@
 0x54EC22: pop     esi
 0x54EC23: add     esp, 10h
 0x54EC26: retn
+0x9BBB20: mov     ecx, [ebp-10h]
+0x9BBB23: jmp     loc_54E550
+0x9BBB28: mov     edx, [esp+arg_4]
+0x9BBB2C: lea     eax, [edx-8]
+0x9BBB2F: mov     ecx, [edx-0Ch]
+0x9BBB32: xor     ecx, eax
+0x9BBB34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBB39: mov     eax, offset stru_AE586C
+0x9BBB3E: jmp     ___CxxFrameHandler3

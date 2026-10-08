@@ -1,136 +1,216 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DDeviceDesc",
+  "definition": "struct _D3DDeviceDesc\n{\nDWORD dwSize;\nDWORD dwFlags;\nD3DCOLORMODEL dcmColorModel;\nDWORD dwDevCaps;\nD3DTRANSFORMCAPS dtcTransformCaps;\nBOOL bClipping;\nD3DLIGHTINGCAPS dlcLightingCaps;\nD3DPRIMCAPS dpcLineCaps;\nD3DPRIMCAPS dpcTriCaps;\nDWORD dwDeviceRenderBitDepth;\nDWORD dwDeviceZBufferBitDepth;\nDWORD dwMaxBufferSize;\nDWORD dwMaxVertexCount;\nDWORD dwMinTextureWidth;\nDWORD dwMinTextureHeight;\nDWORD dwMaxTextureWidth;\nDWORD dwMaxTextureHeight;\nDWORD dwMinStippleWidth;\nDWORD dwMaxStippleWidth;\nDWORD dwMinStippleHeight;\nDWORD dwMaxStippleHeight;\n}\n",
   "id": 18374686479672035494,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwFlags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dcmColorModel",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "D3DCOLORMODEL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDevCaps",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dtcTransformCaps",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "D3DTRANSFORMCAPS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bClipping",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dlcLightingCaps",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 16
+      "offset_hex": "0x1C",
+      "size": 16,
+      "type": "D3DLIGHTINGCAPS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dpcLineCaps",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 56
+      "offset_hex": "0x2C",
+      "size": 56,
+      "type": "D3DPRIMCAPS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dpcTriCaps",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 56
+      "size": 56,
+      "type": "D3DPRIMCAPS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDeviceRenderBitDepth",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwDeviceZBufferBitDepth",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMaxBufferSize",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMaxVertexCount",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMinTextureWidth",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMinTextureHeight",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMaxTextureWidth",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMaxTextureHeight",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMinStippleWidth",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMaxStippleWidth",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMinStippleHeight",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwMaxStippleHeight",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "_D3DDeviceDesc",
+  "ordinal": 4153,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 204
 }

@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x41B616",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x72A6B0",
+      "0x72A813"
+    ]
+  ],
+  "chunks_sha256": "df54f707a8e2ac3c3c6c0fb837329f268757dadf6a2764e6e5bfa91601e2fe0f",
+  "comment_regular": "Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.",
+  "comment_repeatable": "Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_72A6B0",
+  "display_name": "NiSphere_Merge",
   "end_ea": "0x72A813",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_72A6B0",
+  "name": "NiSphere_Merge",
   "segment": ".text",
   "sha256": "df54f707a8e2ac3c3c6c0fb837329f268757dadf6a2764e6e5bfa91601e2fe0f",
   "size": 355,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x72A6B0",
+  "total_chunk_size": 355,
   "type": "void __thiscall(float *this, float *)",
   "xrefs_from_count": 122,
   "xrefs_to_count": 9

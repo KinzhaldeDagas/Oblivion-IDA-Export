@@ -1,27 +1,26 @@
-int __usercall ActiveEffect_Base_ProcessEffect_::UpdateTimeElapsed@<eax>(
-        int _ESI@<esi>,
-        char bp0@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>)
+// ActiveEffect timeElapsed update: advances by frame delta and clamps to duration except for persistent spell types/bound wearable cases.
+int __usercall ActiveEffect_Base_ProcessEffect_::UpdateTimeElapsed@<eax>(int _ESI@<esi>, double a2@<st2>, int a3)
 {
-  int v5; // eax
-  double v6; // st5
-  int v7; // ecx
+  int v6; // eax
+  double v7; // st5
+  int v8; // ecx
+  float v10; // [esp+8h] [ebp+8h]
 
-  v5 = *(_DWORD *)(_ESI + 0x28);
-  if ( v5 == 4
-    || v5 == 1
+  v6 = *(_DWORD *)(_ESI + 0x28); /*0x68e830*/
+  v10 = a2; /*0x68e833*/
+  if ( v6 == 4 /*0x68e85b*/
+    || v6 == 1
     || (unsigned __int8)ActiveEffect_Base_IsBoundObjWearable((_DWORD *)_ESI)
-    || *(float *)(_ESI + 0x1C) >= a3 + *(float *)(_ESI + 4) )
+    || *(float *)(_ESI + 0x1C) >= a2 + *(float *)(_ESI + 4) )
   {
-    v6 = a3 + *(float *)(_ESI + 4);
+    v7 = a2 + *(float *)(_ESI + 4); /*0x68e86e*/
   }
   else
   {
-    v6 = *(float *)(_ESI + 0x1C);
+    v10 = *(float *)(_ESI + 0x1C) - *(float *)(_ESI + 4); /*0x68e865*/
+    v7 = *(float *)(_ESI + 0x1C); /*0x68e869*/
   }
-  v7 = *(_DWORD *)(_ESI + 0x20);
-  *(float *)(_ESI + 4) = v6;
-  return ActiveEffect_Base_ProcessEffect_::CheckQueuedHitFX(v7, bp0, _ESI, v6, a4, a5);
+  v8 = *(_DWORD *)(_ESI + 0x20); /*0x68e871*/
+  *(float *)(_ESI + 4) = v7; /*0x68e874*/
+  return ActiveEffect_Base_ProcessEffect_::CheckQueuedHitFX(v8, _ESI, a3, v10);
 }

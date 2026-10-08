@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x842A00",
+      "0x842B7C"
+    ],
+    [
+      "0x9D3210",
+      "0x9D3233"
+    ]
+  ],
+  "chunks_sha256": "32c71f7f4cffe1355d92b75c15bfe63867fb8067c1d7ed83b8ba96c55a292616",
+  "comment_regular": "\nV176 verified receiver contract: ShadowLightShader_QueueSLS2023_SLS2031; selector 0x60. 7C9F30 dispatch and full enqueuer observed. Exact pass/VS/PS pairs: B45720 VS23/PS31, B45724 VS23/PS32, B45734 VS24/PS31, B4573C VS24/PS32. Native PS31/32 RGB is a lighting-only prepass; points use entry slots1/2 and VS c17/c18, colors PS c3/c4, primary color c2. Keep following native texture/composite passes. Complete functions and all IDA chunks exported for code identity.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_842A00",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowLightShader_QueueSLS2023_SLS2031",
   "end_ea": "0x842B7C",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_842A00",
+  "name": "ShadowLightShader_QueueSLS2023_SLS2031",
   "segment": ".text",
   "sha256": "357f4519cbec6df14bc2a2ab8ff4c99922d1456e20342588a6977b0266f87227",
   "size": 380,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x842A00",
-  "type": "void __thiscall(NiTArray_NiD3DPass *this, int, int, int Stage, _DWORD *)",
-  "xrefs_from_count": 153,
+  "total_chunk_size": 415,
+  "type": "void __thiscall(NiTArray_NiD3DPass *this, int, int, NiD3DPass *Stage, _DWORD *)",
+  "xrefs_from_count": 164,
   "xrefs_to_count": 1
 }

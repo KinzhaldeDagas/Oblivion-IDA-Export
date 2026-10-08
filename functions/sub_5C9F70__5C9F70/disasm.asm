@@ -17,6 +17,6 @@
 0x5C9FA3: call    sub_578D70
 0x5C9FA8: cmp     al, 2
 0x5C9FAA: jnz     short loc_5C9FB1
-0x5C9FAC: jmp     sub_5C9C70
+0x5C9FAC: jmp     RaceSexMenu_ExecuteResetFace; Reset Face menu action: resolve the open RaceSexMenu, reset the player NPC's active FaceGen delta, synchronously rebuild the player face, then synchronize the menu controls from player state.
 0x5C9FB1: mov     byte ptr ds:0B3B4C9h, 0
 0x5C9FB8: retn

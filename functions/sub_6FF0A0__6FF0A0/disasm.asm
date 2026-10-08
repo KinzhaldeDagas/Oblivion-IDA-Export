@@ -20,7 +20,7 @@
 0x6FF0CE: retn    8
 0x6FF0D1: push    ebp
 0x6FF0D2: lea     ebp, [esi+24h]
-0x6FF0D5: push    offset Vector3_InitValue?
+0x6FF0D5: push    offset g_zeroNiPoint3
 0x6FF0DA: mov     ecx, ebp
 0x6FF0DC: call    sub_8AA350
 0x6FF0E1: fld     [esp+48h+arg_0]
@@ -57,27 +57,27 @@
 0x6FF158: test    ah, 44h
 0x6FF15B: jnp     loc_6FF261
 0x6FF161: fstp    st(1)
-0x6FF163: push    offset Vector3_InitValue?
+0x6FF163: push    offset g_zeroNiPoint3; other
 0x6FF168: fld     [esp+4Ch+var_24]
-0x6FF16C: lea     ecx, [esp+4Ch+var_18]
+0x6FF16C: lea     ecx, [esp+4Ch+var_18]; this
 0x6FF170: fsub    dword ptr [ebp+0]
-0x6FF173: fstp    [esp+4Ch+var_18]
+0x6FF173: fstp    [esp+4Ch+var_18.x]
 0x6FF177: fld     [esp+4Ch+var_20]
 0x6FF17B: fsub    dword ptr [ebp+4]
-0x6FF17E: fstp    [esp+4Ch+var_14]
+0x6FF17E: fstp    [esp+4Ch+var_18.y]
 0x6FF182: fld     [esp+4Ch+var_1C]
 0x6FF186: fsub    dword ptr [ebp+8]
-0x6FF189: fstp    [esp+4Ch+var_10]
+0x6FF189: fstp    [esp+4Ch+var_18.z]
 0x6FF18D: fld     dword ptr [esi+20h]
 0x6FF190: fstp    [esp+4Ch+var_34]
 0x6FF194: fld     [esp+4Ch+var_34]
-0x6FF198: fld     [esp+4Ch+var_18]
+0x6FF198: fld     [esp+4Ch+var_18.x]
 0x6FF19C: fmul    st, st(1)
 0x6FF19E: fstp    [esp+4Ch+var_C]
-0x6FF1A2: fld     [esp+4Ch+var_14]
+0x6FF1A2: fld     [esp+4Ch+var_18.y]
 0x6FF1A6: fmul    st, st(1)
 0x6FF1A8: fstp    [esp+4Ch+var_8]
-0x6FF1AC: fmul    [esp+4Ch+var_10]
+0x6FF1AC: fmul    [esp+4Ch+var_18.z]
 0x6FF1B0: fstp    [esp+4Ch+var_4]
 0x6FF1B4: fld1
 0x6FF1B6: fdivrp  st(1), st
@@ -93,23 +93,23 @@
 0x6FF1D8: fstp    [esp+4Ch+var_28]
 0x6FF1DC: fld     [esp+4Ch+var_30]
 0x6FF1E0: fsub    dword ptr [esi+30h]
-0x6FF1E3: fstp    [esp+4Ch+var_18]
+0x6FF1E3: fstp    [esp+4Ch+var_18.x]
 0x6FF1E7: fld     [esp+4Ch+var_2C]
 0x6FF1EB: fsub    dword ptr [esi+34h]
-0x6FF1EE: fstp    [esp+4Ch+var_14]
+0x6FF1EE: fstp    [esp+4Ch+var_18.y]
 0x6FF1F2: fld     [esp+4Ch+var_28]
 0x6FF1F6: fsub    dword ptr [esi+38h]
-0x6FF1F9: fstp    [esp+4Ch+var_10]
-0x6FF1FD: call    sub_8AA390
+0x6FF1F9: fstp    [esp+4Ch+var_18.z]
+0x6FF1FD: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x6FF202: test    al, al
 0x6FF204: jz      short loc_6FF244
 0x6FF206: test    ebx, ebx
 0x6FF208: mov     eax, [esp+48h+arg_4]
 0x6FF20C: mov     eax, [eax+5Ch]
 0x6FF20F: jz      short loc_6FF244
-0x6FF211: fld     [esp+48h+var_18]
-0x6FF215: fld     [esp+48h+var_14]
-0x6FF219: fld     [esp+48h+var_10]
+0x6FF211: fld     [esp+48h+var_18.x]
+0x6FF215: fld     [esp+48h+var_18.y]
+0x6FF219: fld     [esp+48h+var_18.z]
 0x6FF21D: fld     dword ptr [eax]
 0x6FF21F: sub     ebx, 1
 0x6FF222: fadd    st, st(3)

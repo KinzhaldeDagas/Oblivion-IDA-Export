@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x462B30",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x462B8E",
-    "line": "mov     edi, [esp+60h+arg_0]",
+    "line": "mov     edi, [esp+60h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x462BAA",
-    "line": "mov     edx, [edi+4]",
+    "line": "mov     edx, [edi+4]; Savegame review: direct file_object[1] read callback usage; plugin wraps the save file callback before this subroutine runs.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x462BE8",
-    "line": "mov     byte ptr [esp+74h+arg_0], bl",
+    "line": "mov     byte ptr [esp+74h+stream], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x462C42",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x462C65",
-    "line": "mov     byte ptr [esp+60h+arg_0], 0",
+    "line": "mov     byte ptr [esp+60h+stream], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x462D31",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x462D71",
-    "line": "mov     byte ptr [esp+60h+arg_0], bl",
+    "line": "mov     byte ptr [esp+60h+stream], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x462DEA",
-    "line": "cmp     byte ptr [esp+60h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+60h+stream], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x462E1D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x462E5F",
-    "line": "call    sub_66EAF0",
+    "line": "call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x462F42",
-    "line": "mov     byte ptr [esp+60h+arg_0], 0",
+    "line": "mov     byte ptr [esp+60h+stream], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2257,13 +2257,13 @@
   },
   {
     "ea": "0x462FC8",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x462FCA",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x462FD9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2311,25 +2311,25 @@
   },
   {
     "ea": "0x462FE8",
-    "line": "push    ecx",
+    "line": "push    ecx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x462FE9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x462FEE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x462FF0",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2545,7 +2545,7 @@
   },
   {
     "ea": "0x463061",
-    "line": "call    sub_66EAF0",
+    "line": "call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2563,7 +2563,7 @@
   },
   {
     "ea": "0x46306F",
-    "line": "mov     byte ptr [esp+60h+arg_0], 0",
+    "line": "mov     byte ptr [esp+60h+stream], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x463078",
-    "line": "cmp     byte ptr [esp+60h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+60h+stream], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x4630A4",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x4630C7",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2773,13 +2773,13 @@
   },
   {
     "ea": "0x4630DE",
-    "line": "push    0; signed int",
+    "line": "push    0; cellY",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4630E0",
-    "line": "push    0; signed int",
+    "line": "push    0; cellX",
     "mnemonic": "push",
     "size": 2
   },
@@ -2827,7 +2827,7 @@
   },
   {
     "ea": "0x4630F1",
-    "line": "call    sub_4F1630",
+    "line": "call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2917,19 +2917,19 @@
   },
   {
     "ea": "0x46311B",
-    "line": "push    edi",
+    "line": "push    edi; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46311C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46311E",
-    "line": "call    sub_45F970",
+    "line": "call    TESSaveLoadGame_LoadGlobalValues; Verified load dispatcher call for the Global Variables record (diagnostic string at 45FB3C).",
     "mnemonic": "call",
     "size": 5
   },
@@ -3271,19 +3271,19 @@
   },
   {
     "ea": "0x4631D6",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4631DB",
-    "line": "call    sub_677280",
+    "line": "call    ActorProcessManager_ClearCrimes",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4631E0",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3565,13 +3565,13 @@
   },
   {
     "ea": "0x463268",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x46326D",
-    "line": "call    sub_6770F0",
+    "line": "call    ActorProcessManager_LoadCrimes",
     "mnemonic": "call",
     "size": 5
   },
@@ -3871,7 +3871,7 @@
   },
   {
     "ea": "0x463302",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4177,7 +4177,7 @@
   },
   {
     "ea": "0x4633A0",
-    "line": "cmp     byte ptr [esp+60h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+60h+stream], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -4249,7 +4249,7 @@
   },
   {
     "ea": "0x4633CF",
-    "line": "lea     ecx, [esp+64h+arg_0]",
+    "line": "lea     ecx, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4285,7 +4285,7 @@
   },
   {
     "ea": "0x4633DC",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4543,7 +4543,7 @@
   },
   {
     "ea": "0x463454",
-    "line": "lea     eax, [esp+64h+arg_0]",
+    "line": "lea     eax, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4579,7 +4579,7 @@
   },
   {
     "ea": "0x463461",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4753,7 +4753,7 @@
   },
   {
     "ea": "0x4634BD",
-    "line": "lea     ecx, [esp+64h+arg_0]",
+    "line": "lea     ecx, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4783,7 +4783,7 @@
   },
   {
     "ea": "0x4634C5",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4861,7 +4861,7 @@
   },
   {
     "ea": "0x4634F9",
-    "line": "lea     edx, [esp+64h+arg_0]",
+    "line": "lea     edx, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4897,7 +4897,7 @@
   },
   {
     "ea": "0x463506",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5071,7 +5071,7 @@
   },
   {
     "ea": "0x463562",
-    "line": "lea     eax, [esp+64h+arg_0]",
+    "line": "lea     eax, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5101,7 +5101,7 @@
   },
   {
     "ea": "0x46356A",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5203,7 +5203,7 @@
   },
   {
     "ea": "0x4635AE",
-    "line": "lea     edx, [esp+64h+arg_0]",
+    "line": "lea     edx, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5239,7 +5239,7 @@
   },
   {
     "ea": "0x4635BB",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5413,7 +5413,7 @@
   },
   {
     "ea": "0x463617",
-    "line": "lea     eax, [esp+64h+arg_0]",
+    "line": "lea     eax, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5443,7 +5443,7 @@
   },
   {
     "ea": "0x46361F",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5521,7 +5521,7 @@
   },
   {
     "ea": "0x463652",
-    "line": "lea     ecx, [esp+64h+arg_0]",
+    "line": "lea     ecx, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5557,7 +5557,7 @@
   },
   {
     "ea": "0x46365F",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5731,7 +5731,7 @@
   },
   {
     "ea": "0x4636BB",
-    "line": "lea     eax, [esp+64h+arg_0]",
+    "line": "lea     eax, [esp+64h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -5761,7 +5761,7 @@
   },
   {
     "ea": "0x4636C3",
-    "line": "mov     [esp+74h+arg_0], ebp",
+    "line": "mov     [esp+74h+stream], ebp",
     "mnemonic": "mov",
     "size": 4
   },

@@ -32,7 +32,7 @@
 0x516127: push    edx; a2
 0x516128: push    eax; a1
 0x516129: mov     dword ptr [esp+58h+var_20], ebp
-0x51612D: call    Script_ExtractArgs
+0x51612D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x516132: add     esp, 20h
 0x516135: test    al, al
 0x516137: jnz     short loc_51614F
@@ -65,27 +65,27 @@
 0x516181: jz      loc_51629A
 0x516187: mov     ecx, esi; this
 0x516189: xor     edi, edi
-0x51618B: call    GetTeleportExtraData
+0x51618B: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x516190: mov     esi, eax
 0x516192: cmp     esi, ebp
 0x516194: jz      short loc_5161C9
-0x516196: mov     ecx, esi
-0x516198: call    sub_42B470
+0x516196: mov     ecx, esi; linkedDoor
+0x516198: call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.
 0x51619D: mov     edi, eax
 0x51619F: cmp     edi, ebp
 0x5161A1: jnz     short loc_5161C9
 0x5161A3: mov     ecx, esi
-0x5161A5: call    sub_42B460
+0x5161A5: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x5161AA: test    eax, eax
 0x5161AC: jz      short loc_5161C9
 0x5161AE: mov     ecx, esi
-0x5161B0: call    sub_42B460
+0x5161B0: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x5161B5: mov     ecx, eax; this
-0x5161B7: call    TESObjectCELL_IsInterior
+0x5161B7: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5161BC: test    al, al
 0x5161BE: jz      short loc_5161C9
 0x5161C0: mov     ecx, esi
-0x5161C2: call    sub_42B460
+0x5161C2: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x5161C7: mov     ebp, eax
 0x5161C9: push    25h ; '%'
 0x5161CB: lea     ecx, [esp+3Ch+var_1C]
@@ -130,7 +130,7 @@
 0x516253: lea     ecx, [esp+38h+var_1C]
 0x516257: push    ecx
 0x516258: mov     ecx, ebp
-0x51625A: call    sub_4CBE50
+0x51625A: call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.
 0x51625F: lea     ecx, [esp+38h+var_1C]
 0x516263: call    NiTMap_Clear
 0x516268: mov     dl, [esp+38h+var_21]
@@ -155,3 +155,12 @@
 0x5162AB: pop     ebx
 0x5162AC: add     esp, 24h
 0x5162AF: retn
+0x9B7250: lea     ecx, [ebp-1Ch]
+0x9B7253: jmp     ??1?$NiTPointerMap@PAVTESObjectCELL@@_N@@UAE@XZ; NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(void)
+0x9B7258: mov     edx, [esp+arg_4]
+0x9B725C: lea     eax, [edx-28h]
+0x9B725F: mov     ecx, [edx-2Ch]
+0x9B7262: xor     ecx, eax
+0x9B7264: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7269: mov     eax, offset stru_AE1E8C
+0x9B726E: jmp     ___CxxFrameHandler3

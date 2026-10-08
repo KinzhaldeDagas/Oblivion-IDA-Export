@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76D8C0",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; DX10OBSE resource decode: wraps an existing D3D texture resource as NiDX9TextureBufferData by AddRef, GetSurfaceLevel(0), GetDesc, and attaching/creating Ni2DBuffer parent data.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x76D8D9",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x76D923",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76D924",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x76D92F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

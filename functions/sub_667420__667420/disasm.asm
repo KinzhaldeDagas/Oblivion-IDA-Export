@@ -10,7 +10,7 @@
 0x667437: test    al, al
 0x667439: jnz     loc_667514
 0x66743F: mov     ecx, ebx; this
-0x667441: call    TESObjectREFR__GetNiNode
+0x667441: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x667446: test    eax, eax
 0x667448: jz      loc_667514
 0x66744E: mov     eax, [edi]
@@ -28,7 +28,7 @@
 0x667471: mov     ecx, ebx; this
 0x667473: mov     [esp+28h+var_8], edx
 0x667477: mov     [esp+28h+var_4], eax
-0x66747B: call    TESObjectREFR__GetNiNode
+0x66747B: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x667480: fld     dword ptr [eax+54h]
 0x667483: fsub    [esp+28h+var_10]
 0x667487: add     eax, 54h ; 'T'
@@ -74,7 +74,7 @@
 0x667500: call    sub_88CF20
 0x667505: add     esp, 10h
 0x667508: push    edi
-0x667509: mov     ecx, offset dword_B3BB44
+0x667509: mov     ecx, (offset qword_B3BB2C+18h)
 0x66750E: call    BSSimpleList_PushBack
 0x667513: pop     esi
 0x667514: pop     edi

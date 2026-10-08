@@ -1,4 +1,4 @@
-0x772560: push    ecx
+0x772560: push    ecx; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x772561: push    ebx
 0x772562: push    esi
 0x772563: mov     esi, ecx
@@ -33,7 +33,7 @@
 0x7725AB: mov     ecx, edi
 0x7725AD: call    edx
 0x7725AF: push    esi
-0x7725B0: call    FormHeapFree
+0x7725B0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7725B5: add     esp, 4
 0x7725B8: pop     edi
 0x7725B9: pop     esi

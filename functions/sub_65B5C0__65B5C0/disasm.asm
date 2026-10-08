@@ -3,7 +3,7 @@
 0x65B5C4: push    ebp
 0x65B5C5: push    edi
 0x65B5C6: mov     ebp, ecx
-0x65B5C8: call    MobileObject_GetCharProxy
+0x65B5C8: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65B5CD: mov     edi, eax
 0x65B5CF: xor     ebx, ebx
 0x65B5D1: cmp     edi, ebx
@@ -17,19 +17,19 @@
 0x65B5EA: and     eax, ebp
 0x65B5EC: mov     ecx, eax; this
 0x65B5EE: jz      short loc_65B5FF
-0x65B5F0: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x65B5F0: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x65B5F5: cmp     eax, 2
 0x65B5F8: mov     [esp+1Ch+var_D], 1
 0x65B5FD: jz      short loc_65B603
 0x65B5FF: mov     [esp+1Ch+var_D], bl
 0x65B603: push    esi
 0x65B604: mov     ecx, ebp; this
-0x65B606: call    TESObjectREFR_GetParentCell
+0x65B606: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65B60B: mov     esi, eax
 0x65B60D: cmp     esi, ebx
 0x65B60F: jz      short loc_65B635
 0x65B611: mov     ecx, esi; this
-0x65B613: call    TESObjectCELL_IsInterior
+0x65B613: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x65B618: test    al, al
 0x65B61A: jz      short loc_65B62A
 0x65B61C: lea     ecx, [esi+28h]
@@ -43,7 +43,7 @@
 0x65B639: mov     ecx, [edi+8]
 0x65B63C: cmp     ecx, ebx
 0x65B63E: jz      short loc_65B647
-0x65B640: call    sub_8AC0C0
+0x65B640: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x65B645: jmp     short loc_65B649
 0x65B647: xor     eax, eax
 0x65B649: mov     eax, [eax+8]
@@ -67,7 +67,7 @@
 0x65B683: fstp    [esp+20h+var_4]
 0x65B687: fld     [esp+20h+var_4]
 0x65B68B: fmul    qword ptr ds:0A39088h
-0x65B691: fstp    dword ptr [edi+318h]
+0x65B691: fstp    dword ptr [edi+318h]; TES4 authoritative: actor/mobile proxy world update refreshes proxy+0x318 as current cell water height * hkFactor.
 0x65B697: jnz     short loc_65B6A5
 0x65B699: mov     eax, [esp+20h+var_C]
 0x65B69D: push    eax
@@ -76,13 +76,13 @@
 0x65B6A5: lea     ecx, [ebp+2Ch]
 0x65B6A8: push    ecx; a2
 0x65B6A9: mov     ecx, edi; this
-0x65B6AB: call    sub_452A10
+0x65B6AB: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x65B6B0: mov     ecx, [edi+364h]
 0x65B6B6: xor     bl, bl
 0x65B6B8: test    ecx, ecx
 0x65B6BA: jz      short loc_65B6C5
 0x65B6BC: push    0
-0x65B6BE: call    sub_89F6B0
+0x65B6BE: call    sub_89F6B0; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.
 0x65B6C3: jmp     short loc_65B6C7
 0x65B6C5: xor     eax, eax
 0x65B6C7: mov     esi, [ebp+3Ch]
@@ -113,7 +113,7 @@
 0x65B707: lea     edx, [esp+20h+var_4]
 0x65B70B: push    edx
 0x65B70C: mov     ecx, edi
-0x65B70E: call    sub_57E270
+0x65B70E: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x65B713: mov     ecx, [esp+20h+var_4]
 0x65B717: mov     eax, [ebp+0]
 0x65B71A: mov     edx, [eax+90h]

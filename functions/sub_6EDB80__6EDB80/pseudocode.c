@@ -1,19 +1,23 @@
-_DWORD *__cdecl sub_6EDB80(_DWORD *a1, _DWORD *a2, _DWORD *a3)
+FaceGenMatrix *__cdecl sub_6EDB80(FaceGenMatrix *source, FaceGenMatrix *a2, FaceGenMatrix *a3)
 {
-  _DWORD *v3; // esi
-  _DWORD *v4; // edi
+  FaceGenMatrix *v3; // esi
+  FaceGenMatrix *v4; // edi
 
-  v3 = a1;
-  if ( a1 == a2 )
-    return a3;
-  v4 = a3;
-  do
+  v3 = source; /*0x6edb86*/
+  if ( source == a2 ) /*0x6edb8c*/
+    return a3; /*0x6edbbb*/
+  v4 = a3; /*0x6edb8f*/
+  do /*0x6edbb3*/
   {
-    sub_5520E0(v4, (int)a2, v3);
-    sub_414420((int)(v4 + 6), v3 + 6, 0, 0xFFFFFFFF);
-    v3 += 0xD;
-    v4 += 0xD;
+    FaceGenMatrix_Assign(v4, v3); /*0x6edb96*/
+    OB_stString28_AssignSubstring_010201A0( /*0x6edba6*/
+      (OB_stString28_010201A0 *)&v4[1],
+      (const OB_stString28_010201A0 *)&v3[1],
+      0,
+      0xFFFFFFFF);
+    v3 = (FaceGenMatrix *)((char *)v3 + 0x34); /*0x6edbab*/
+    v4 = (FaceGenMatrix *)((char *)v4 + 0x34); /*0x6edbae*/
   }
-  while ( v3 != a2 );
-  return v4;
+  while ( v3 != a2 ); /*0x6edbb3*/
+  return v4; /*0x6edbb8*/
 }

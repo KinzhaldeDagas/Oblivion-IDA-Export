@@ -1,6 +1,6 @@
-0x7D72D0: push    esi
+0x7D72D0: push    esi; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7D72D1: mov     esi, ds:0B3F928h
-0x7D72D7: call    sub_7D7150
+0x7D72D7: call    NiRenderer_DrainRenderTargetGroupStack; Drain all strong-owned target-stack entries and end the currently ready group before optional D3D EndScene ownership handling.
 0x7D72DC: cmp     dword ptr [esi+204h], 1
 0x7D72E3: jnz     short loc_7D7308
 0x7D72E5: cmp     dword ptr [esi+200h], 0

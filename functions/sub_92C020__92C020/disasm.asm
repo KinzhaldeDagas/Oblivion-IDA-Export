@@ -60,7 +60,7 @@
 0x92C0B2: lea     ecx, [esi+10h]
 0x92C0B5: xor     eax, eax
 0x92C0B7: mov     [esp+70h+var_4C], eax
-0x92C0BB: mov     [esp+70h+var_48], eax
+0x92C0BB: mov     dword ptr [esp+70h+var_48], eax
 0x92C0BF: mov     eax, [esi+8]
 0x92C0C2: lea     edx, [esp+70h+var_4C]
 0x92C0C6: push    edx
@@ -74,7 +74,7 @@
 0x92C0D3: push    ecx
 0x92C0D4: lea     ecx, [esp+88h+var_55]
 0x92C0D8: push    ecx
-0x92C0D9: mov     [esp+8Ch+var_44], 80000000h
+0x92C0D9: mov     dword ptr [esp+8Ch+var_48+4], 80000000h
 0x92C0E1: call    sub_92BAE0
 0x92C0E6: mov     cl, [eax]
 0x92C0E8: add     esp, 1Ch
@@ -102,14 +102,13 @@
 0x92C128: mov     ecx, [esp+70h+var_50]
 0x92C12C: movaps  xmm0, xmmword ptr [ecx]
 0x92C12F: movaps  xmmword ptr [eax], xmm0
-0x92C132: mov     ecx, [esp+70h+var_48]
+0x92C132: mov     ecx, dword ptr [esp+70h+var_48]
 0x92C136: xor     eax, eax
 0x92C138: cmp     ecx, eax
 0x92C13A: mov     [esp+70h+var_50], eax
 0x92C13E: jle     loc_92C1FB
 0x92C144: mov     [esp+70h+var_54], eax
 0x92C148: jmp     short loc_92C150
-0x92C14A: align 10h
 0x92C150: mov     edx, [esp+70h+var_4C]
 0x92C154: mov     eax, [esp+70h+var_54]
 0x92C158: mov     ecx, [eax+edx+10h]
@@ -160,7 +159,7 @@
 0x92C1D3: call    sub_92C020
 0x92C1D8: mov     eax, [esp+0B8h+var_50]
 0x92C1DC: mov     edx, [esp+0B8h+var_54]
-0x92C1E0: mov     ecx, [esp+0B8h+var_48]
+0x92C1E0: mov     ecx, dword ptr [esp+0B8h+var_48]
 0x92C1E4: add     esp, 48h
 0x92C1E7: inc     eax
 0x92C1E8: add     edx, 20h ; ' '
@@ -168,7 +167,7 @@
 0x92C1ED: mov     [esp+70h+var_50], eax
 0x92C1F1: mov     [esp+70h+var_54], edx
 0x92C1F5: jl      loc_92C150
-0x92C1FB: mov     eax, [esp+70h+var_44]
+0x92C1FB: mov     eax, dword ptr [esp+70h+var_48+4]
 0x92C1FF: test    eax, eax
 0x92C201: js      short loc_92C22D
 0x92C203: mov     ecx, [esp+70h+var_4C]

@@ -1,18 +1,31 @@
 {
-  "callees_count": 45,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_7FD260",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x7FD260",
+      "0x7FD55E"
+    ]
+  ],
+  "chunks_sha256": "1b8d04a1a507ca098c263bdd8a95af7710bf7d57bf7fe27d6ccd43357213f865",
+  "comment_regular": "Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.\nDX11 active-map ownership audit 2026-10-01: ordinary7FD260 prefix7FD2A9..7FD329 performs pixel2C<-84 first, then vertex30<-88. Each unequal assignment releases the old map via InterlockedDecrement BEFORE publishing/retaining the replacement; zero calls old vtable[0](this,1). Pointer equality skips both ref operations. BuildConstantMaps7FCC80 retains main/alternate maps at7C/80/84/88, separately from active2C/30. A coalesced final-store plan must simulate intermediate counts and reject any zero-count destructor or overflow, even when net alias deltas cancel. Such stores require exclusion of all map refcount writers/observers and preserved object lifetimes; read-capture scope alone is insufficient.\n\nLighting30 selector-state dispatcher. Concrete shader definition ID is 0x1A. Route group 7 covers selectors 0x12B..0x15F; inherited 0x177..0x17A selectors fall outside that family.",
+  "comment_repeatable": "Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.\nDX11 state composition verified 2026-09-30: ordinary selectors12D..146 select DWORD(B46F28+4*selector), ensure its render-state group at pass+30, and call772CD0 with RS168=7/save0. This edits authored group data, not immediate device state. Device application is later via75FD90->7726C0. A copied program must match this route-pass identity and update its unique non-saving RS168 in place, preserving geometry-before-pass write order. The pointer alone is not lifetime or complete state freshness authority.\nVerified activation details 2026-09-30: ordinary12D..146 restores main pixel/vertex map references from shader+84/+88 into+2C/+30. Vertex mask row selector-12A writes first five entry+8 bytes through B46B98 pointers (bits1..5), then static B46963+k for k6..33. Pixel mask writes B46930+i for i0..48 using bit(i+1) modulo32 (x86 SHL). Finally B46935..37 and B46974..76 are forced to1. These writes precede bucket vertex-then-pixel SortByEnabled calls and can change the effective enabled prefix for a previously captured constant recipe.\nState-group audit 2026-10-01: ordinary selectors12D..146 upsert COLORWRITEENABLE168=7 without saving. This activation occurs for a nonempty bucket even if all geometry entries are excluded; do not skip its group effect merely because drawCount is0.\nDX11 projected-state integration 2026-10-01: group acquisition and selector168 update precede material draws. Before-bucket readers can see a null/incomplete group that native setup will populate. A CPU projected view must carry the planned group/node shape without storing to native memory, revalidate the actual preimage, and retain the separate pool-ownership/commit requirement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "Lighting30Shader_SelectRenderPass",
   "end_ea": "0x7FD55E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FD260",
+  "name": "Lighting30Shader_SelectRenderPass",
   "segment": ".text",
   "sha256": "1b8d04a1a507ca098c263bdd8a95af7710bf7d57bf7fe27d6ccd43357213f865",
   "size": 766,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FD260",
+  "total_chunk_size": 766,
   "type": "char __cdecl(unsigned __int16)",
   "xrefs_from_count": 282,
   "xrefs_to_count": 7

@@ -1,103 +1,110 @@
-double __userpurge sub_55C900@<st0>(int a1@<ecx>, double result@<st0>, double a3@<st1>, int a4)
+double __userpurge sub_55C900@<st0>(int a1@<ecx>, double result@<st0>, double a3@<st1>, double a4@<st2>, int a5)
 {
-  int v5; // edi
-  int v6; // ebx
-  int v7; // ebp
+  int v6; // edi
+  int v7; // ebx
   int v8; // ebp
-  int v9; // ebx
-  int v10; // eax
-  int v11; // ebx
-  int v12; // eax
-  float v13; // [esp+8h] [ebp-2Ch]
+  int v9; // ebp
+  int v10; // ebx
+  int v11; // eax
+  int v12; // ebx
+  int v13; // eax
   float v14; // [esp+8h] [ebp-2Ch]
-  int v15; // [esp+10h] [ebp-24h]
+  float v15; // [esp+8h] [ebp-2Ch]
   int v16; // [esp+10h] [ebp-24h]
-  _UNKNOWN **v17; // [esp+18h] [ebp-1Ch]
-  int *v18; // [esp+1Ch] [ebp-18h]
-  float v19; // [esp+28h] [ebp-Ch]
-  float v20; // [esp+2Ch] [ebp-8h]
-  float v21; // [esp+30h] [ebp-4h]
+  int v17; // [esp+10h] [ebp-24h]
+  _UNKNOWN **v18; // [esp+18h] [ebp-1Ch]
+  int *v19; // [esp+1Ch] [ebp-18h]
+  float v20; // [esp+28h] [ebp-Ch]
+  float v21; // [esp+2Ch] [ebp-8h]
+  float v22; // [esp+30h] [ebp-4h]
   _UNKNOWN *retaddr; // [esp+34h] [ebp+0h] BYREF
 
-  v5 = 0;
-  while ( 2 )
+  v6 = 0; /*0x55c909*/
+  while ( 2 ) /*0x55c923*/
   {
-    switch ( v5 )
+    switch ( v6 ) /*0x55c923*/
     {
-      case 8:
-      case 0xB:
-        v6 = (*(int (__usercall **)@<eax>(int@<ecx>, _UNKNOWN **, int *, double@<st0>))(*(_DWORD *)a1 + 0x9C))(
+      case 8: /*0x55c923*/
+      case 0xB: /*0x55c923*/
+        v7 = (*(int (__usercall **)@<eax>(int@<ecx>, _UNKNOWN **, int *, double@<st0>, double@<st1>))(*(_DWORD *)a1 + 0x9C))( /*0x55c938*/
                a1,
-               v17,
                v18,
-               result);
-        v18 = &a4;
-        v7 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x9C))(a1);
-        v17 = &retaddr;
-        *(float *)&v15 = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v6 + 0x5C))(v6);
-        result = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v7 + 0x5C))(v7);
-        v13 = result;
-        sub_54F5E0(v13, COERCE_FLOAT(8), (float *)v15, (float *)0xB);
-        if ( v5 != 8 )
-          goto LABEL_5;
-        a3 = v20;
-        goto LABEL_9;
-      case 9:
-      case 0xA:
-        v8 = (*(int (__usercall **)@<eax>(int@<ecx>, _UNKNOWN **, int *, double@<st0>))(*(_DWORD *)a1 + 0x9C))(
+               v19,
+               result,
+               a3);
+        v19 = &a5; /*0x55c948*/
+        v8 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x9C))(a1); /*0x55c94d*/
+        v18 = &retaddr; /*0x55c951*/
+        *(float *)&v16 = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v7 + 0x5C))(v7); /*0x55c962*/
+        result = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v8 + 0x5C))(v8); /*0x55c969*/
+        v14 = result; /*0x55c96c*/
+        sub_54F5E0(v14, COERCE_FLOAT(8), (float *)v16, (float *)0xB); /*0x55c96f*/
+        if ( v6 != 8 ) /*0x55c97a*/
+          goto LABEL_5; /*0x55c97a*/
+        a4 = v21; /*0x55c97c*/
+        goto LABEL_9; /*0x55c980*/
+      case 9: /*0x55c923*/
+      case 0xA: /*0x55c923*/
+        v9 = (*(int (__usercall **)@<eax>(int@<ecx>, _UNKNOWN **, int *, double@<st0>, double@<st1>))(*(_DWORD *)a1 + 0x9C))( /*0x55c994*/
                a1,
-               v17,
                v18,
-               result);
-        v9 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x9C))(a1);
-        v18 = &a4;
-        v17 = &retaddr;
-        *(float *)&v16 = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v8 + 0x5C))(v8);
-        result = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v9 + 0x5C))(v9);
-        v14 = result;
-        sub_54F5E0(v14, COERCE_FLOAT(9), (float *)v16, (float *)0xA);
-        if ( v5 == 9 )
-          a3 = v20;
+               v19,
+               result,
+               a3);
+        v10 = (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x9C))(a1); /*0x55c9a5*/
+        v19 = &a5; /*0x55c9ab*/
+        v18 = &retaddr; /*0x55c9b3*/
+        *(float *)&v17 = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v9 + 0x5C))(v9); /*0x55c9c0*/
+        result = ((double (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)v10 + 0x5C))(v10); /*0x55c9c7*/
+        v15 = result; /*0x55c9ca*/
+        sub_54F5E0(v15, COERCE_FLOAT(9), (float *)v17, (float *)0xA); /*0x55c9cd*/
+        if ( v6 == 9 ) /*0x55c9d8*/
+          a4 = v21; /*0x55c9da*/
         else
 LABEL_5:
-          a3 = v21;
-        goto LABEL_9;
-      case 0xE:
-      case 0xF:
-      case 0x10:
+          a4 = v22; /*0x55c982*/
+        goto LABEL_9; /*0x55c9de*/
+      case 0xE: /*0x55c923*/
+      case 0xF: /*0x55c923*/
+      case 0x10: /*0x55c923*/
         goto LABEL_15;
       default:
-        v10 = (*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>))(*(_DWORD *)a1 + 0x9C))(a1, result);
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v10 + 0x5C))(v10, v5);
+        v11 = (*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)a1 + 0x9C))( /*0x55c9ea*/
+                a1,
+                result,
+                a3);
+        (*(void (__thiscall **)(int, int))(*(_DWORD *)v11 + 0x5C))(v11, v6); /*0x55c9f4*/
 LABEL_9:
-        v19 = a3;
-        a3 = v19;
-        if ( v19 > 0.0 && a3 <= 1.0 )
+        v20 = a4; /*0x55c9f6*/
+        a4 = v20; /*0x55ca04*/
+        if ( v20 > 0.0 && a4 <= 1.0 ) /*0x55ca14*/
         {
-          v11 = a4;
-          if ( (*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a4 + 0x10) + 0x1C))(*(_DWORD *)(a4 + 0x10), v5) )
+          v12 = a5; /*0x55ca16*/
+          if ( (*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a5 + 0x10) + 0x1C))(*(_DWORD *)(a5 + 0x10), v6) ) /*0x55ca23*/
           {
-            if ( !*(_BYTE *)(v11 + 0x1C) )
+            if ( !*(_BYTE *)(v12 + 0x1C) ) /*0x55ca29*/
             {
-              sub_5508F0(*(_DWORD *)v11, v11 + 4);
-              *(_BYTE *)(v11 + 0x1C) = 1;
+              NiGeometry_RestoreFaceGenBaseVertices(*(_DWORD *)v12, v12 + 4); /*0x55ca36*/
+              *(_BYTE *)(v12 + 0x1C) = 1; /*0x55ca3e*/
             }
-            v12 = (*(int (__usercall **)@<eax>(_DWORD@<ecx>, int, double@<st0>))(**(_DWORD **)(v11 + 0x10) + 0x1C))(
-                    *(_DWORD *)(v11 + 0x10),
-                    v5,
-                    result);
-            result = v19;
-            (*(void (__thiscall **)(int, int, _DWORD, _DWORD, float))(*(_DWORD *)v12 + 4))(
-              v12,
-              v11 + 4,
-              *(_DWORD *)(v11 + 0x18),
-              *(_DWORD *)(v11 + 0x14),
-              COERCE_FLOAT(LODWORD(v19)));
+            v13 = (*(int (__usercall **)@<eax>(_DWORD@<ecx>, int, double@<st0>, double@<st1>))(**(_DWORD **)(v12 + 0x10) /*0x55ca4b*/
+                                                                                             + 0x1C))(
+                    *(_DWORD *)(v12 + 0x10),
+                    v6,
+                    result,
+                    a3);
+            result = v20; /*0x55ca4d*/
+            (*(void (__thiscall **)(int, int, _DWORD, _DWORD, float))(*(_DWORD *)v13 + 4))( /*0x55ca68*/
+              v13,
+              v12 + 4,
+              *(_DWORD *)(v12 + 0x18),
+              *(_DWORD *)(v12 + 0x14),
+              COERCE_FLOAT(LODWORD(v20)));
           }
         }
 LABEL_15:
-        if ( ++v5 < 0x11 )
-          continue;
+        if ( ++v6 < 0x11 ) /*0x55ca74*/
+          continue; /*0x55ca74*/
         return result;
     }
   }

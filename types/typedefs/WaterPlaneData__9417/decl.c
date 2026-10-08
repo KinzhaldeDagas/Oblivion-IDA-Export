@@ -1,1 +1,1 @@
-WaterPlaneData
+struct WaterPlaneData;

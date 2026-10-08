@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_761920",
+  "chunks": [
+    [
+      "0x761920",
+      "0x761A2E"
+    ]
+  ],
+  "chunks_sha256": "a0a0340c399ad565ce6f05ceb2a2b33f72f0bb1e8cb991c9952c78ee3b2f595b",
+  "comment_regular": "Oblivion-authoritative NiDX9RenderedTextureData::Create. Allocates renderer data, calls CreateSurf, attaches it to NiRenderedTexture, QueryInterfaces the level-0 resource as IDirect3DTexture9, and wraps its surface in NiDX9TextureBufferData; all failures release partial resources.",
+  "comment_repeatable": "Oblivion-authoritative NiDX9RenderedTextureData::Create. Allocates renderer data, calls CreateSurf, attaches it to NiRenderedTexture, QueryInterfaces the level-0 resource as IDirect3DTexture9, and wraps its surface in NiDX9TextureBufferData; all failures release partial resources.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "NiDX9RenderedTextureData_Create",
   "end_ea": "0x761A2E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_761920",
+  "name": "NiDX9RenderedTextureData_Create",
   "segment": ".text",
   "sha256": "a0a0340c399ad565ce6f05ceb2a2b33f72f0bb1e8cb991c9952c78ee3b2f595b",
   "size": 270,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x761920",
+  "total_chunk_size": 270,
   "type": "NiDX9TextureData *__usercall@<eax>(int@<edi>, NiTexture *, NiDX9Renderer *)",
   "xrefs_from_count": 124,
   "xrefs_to_count": 1

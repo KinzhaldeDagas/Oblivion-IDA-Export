@@ -1,4 +1,4 @@
-0x7ABC40: push    ebx
+0x7ABC40: push    ebx; MoonSugarEffect decode: BSShaderAccumulator immediate geometry bucket allocator. Creates/links a paired NiGeometry list + BSShaderProperty::RenderPass list group under accumulator +0x19 and returns the group for appending.
 0x7ABC41: push    ebp
 0x7ABC42: mov     ebp, ecx
 0x7ABC44: xor     ebx, ebx
@@ -22,16 +22,16 @@
 0x7ABC7E: mov     esi, eax
 0x7ABC80: jmp     short loc_7ABC84
 0x7ABC82: xor     esi, esi
-0x7ABC84: mov     ecx, esi
-0x7ABC86: call    sub_7A9C30
+0x7ABC84: mov     ecx, esi; this
+0x7ABC86: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7ABC8B: mov     eax, [esi+4]
 0x7ABC8E: lea     edi, [esi+14h]
-0x7ABC91: mov     ecx, edi
+0x7ABC91: mov     ecx, edi; this
 0x7ABC93: mov     [esi+0Ch], eax
 0x7ABC96: mov     [esi+4], ebx
 0x7ABC99: mov     [esi+8], ebx
 0x7ABC9C: mov     [esi+10h], ebx
-0x7ABC9F: call    sub_7A9C30
+0x7ABC9F: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7ABCA4: mov     ecx, [edi+4]
 0x7ABCA7: mov     [edi+0Ch], ecx
 0x7ABCAA: mov     [edi+4], ebx

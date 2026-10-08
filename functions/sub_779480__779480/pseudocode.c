@@ -1,4 +1,5 @@
-int __thiscall sub_779480(_DWORD *this)
+// DialoguePackage participant accessor: returns the target at +0x60.
+Actor *__thiscall DialoguePackage::GetTarget(DialoguePackageRuntimeView *this)
 {
-  return *(this + 0x18);
+  return this->target; /*0x779483*/
 }

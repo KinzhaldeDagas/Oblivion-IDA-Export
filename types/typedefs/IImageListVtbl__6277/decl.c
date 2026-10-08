@@ -1,1 +1,35 @@
-IImageListVtbl
+struct IImageListVtbl
+{
+HRESULT_1 (*QueryInterface)(IImageList_0 *, const IID *const, void **);
+ULONG (*AddRef)(IImageList_0 *);
+ULONG (*Release)(IImageList_0 *);
+HRESULT_1 (*Add)(IImageList_0 *, HBITMAP, HBITMAP, int *);
+HRESULT_1 (*ReplaceIcon)(IImageList_0 *, int, HICON, int *);
+HRESULT_1 (*SetOverlayImage)(IImageList_0 *, int, int);
+HRESULT_1 (*Replace)(IImageList_0 *, int, HBITMAP, HBITMAP);
+HRESULT_1 (*AddMasked)(IImageList_0 *, HBITMAP, COLORREF, int *);
+HRESULT_1 (*Draw)(IImageList_0 *, IMAGELISTDRAWPARAMS *);
+HRESULT_1 (*Remove)(IImageList_0 *, int);
+HRESULT_1 (*GetIcon)(IImageList_0 *, int, UINT, HICON *);
+HRESULT_1 (*GetImageInfo)(IImageList_0 *, int, IMAGEINFO *);
+HRESULT_1 (*Copy)(IImageList_0 *, int, IUnknown_0 *, int, UINT);
+HRESULT_1 (*Merge)(IImageList_0 *, int, IUnknown_0 *, int, int, int, const IID *const, PVOID *);
+HRESULT_1 (*Clone)(IImageList_0 *, const IID *const, PVOID *);
+HRESULT_1 (*GetImageRect)(IImageList_0 *, int, RECT *);
+HRESULT_1 (*GetIconSize)(IImageList_0 *, int *, int *);
+HRESULT_1 (*SetIconSize)(IImageList_0 *, int, int);
+HRESULT_1 (*GetImageCount)(IImageList_0 *, int *);
+HRESULT_1 (*SetImageCount)(IImageList_0 *, UINT);
+HRESULT_1 (*SetBkColor)(IImageList_0 *, COLORREF, COLORREF *);
+HRESULT_1 (*GetBkColor)(IImageList_0 *, COLORREF *);
+HRESULT_1 (*BeginDrag)(IImageList_0 *, int, int, int);
+HRESULT_1 (*EndDrag)(IImageList_0 *);
+HRESULT_1 (*DragEnter)(IImageList_0 *, HWND, int, int);
+HRESULT_1 (*DragLeave)(IImageList_0 *, HWND);
+HRESULT_1 (*DragMove)(IImageList_0 *, int, int);
+HRESULT_1 (*SetDragCursorImage)(IImageList_0 *, IUnknown_0 *, int, int, int);
+HRESULT_1 (*DragShowNolock)(IImageList_0 *, BOOL);
+HRESULT_1 (*GetDragImage)(IImageList_0 *, POINT *, POINT *, const IID *const, PVOID *);
+HRESULT_1 (*GetItemFlags)(IImageList_0 *, int, DWORD *);
+HRESULT_1 (*GetOverlayImage)(IImageList_0 *, int, int *);
+};

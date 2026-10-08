@@ -33,7 +33,7 @@
 0x7494D1: call    edx
 0x7494D3: test    eax, eax
 0x7494D5: jz      short loc_7494E5
-0x7494D7: cmp     eax, offset dword_B41E14
+0x7494D7: cmp     eax, offset stru_B41E14
 0x7494DC: jz      short loc_749505
 0x7494DE: mov     eax, [eax+4]
 0x7494E1: test    eax, eax

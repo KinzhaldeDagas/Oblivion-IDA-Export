@@ -12,9 +12,9 @@
 0x70B548: mov     ebp, eax
 0x70B54A: test    ebp, ebp
 0x70B54C: jz      short loc_70B5AB
-0x70B54E: push    ebp
-0x70B54F: lea     ecx, [edi+0ACh]
-0x70B555: call    sub_523B10
+0x70B54E: push    ebp; capacity
+0x70B54F: lea     ecx, [edi+0ACh]; self
+0x70B555: call    NiTObjectArray_Resize16
 0x70B55A: xor     esi, esi
 0x70B55C: test    ebp, ebp
 0x70B55E: jbe     short loc_70B5AB
@@ -28,7 +28,7 @@
 0x70B575: push    eax
 0x70B576: mov     ecx, edi
 0x70B578: call    edx
-0x70B57A: mov     eax, dword ptr [esp+14h+var_4]
+0x70B57A: mov     eax, [esp+14h+var_4]
 0x70B57E: test    eax, eax
 0x70B580: jz      short loc_70B5A4
 0x70B582: mov     ebx, eax
@@ -56,7 +56,6 @@
 0x70B5C0: test    ebp, ebp
 0x70B5C2: jz      loc_70B68D
 0x70B5C8: jmp     short loc_70B5D4
-0x70B5CA: align 10h
 0x70B5D0: mov     ebx, [esp+14h+arg_0]
 0x70B5D4: mov     ecx, ebx
 0x70B5D6: sub     ebp, 1

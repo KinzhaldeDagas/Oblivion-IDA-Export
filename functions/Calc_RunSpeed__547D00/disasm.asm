@@ -1,4 +1,4 @@
-0x547D00: push    ecx
+0x547D00: push    ecx; TES4 authoritative: Calc_RunSpeed. Starts from Calc_WalkSpeed, then applies fMoveRunAthleticsMult * Athletics * 0.01 + fMoveRunMult. Selected by sub_5E65B0 when process movement flag 0x200 is set.
 0x547D01: mov     eax, [esp+4+arg_10]
 0x547D05: fld     [esp+4+arg_4]
 0x547D09: mov     ecx, [esp+4+arg_8]
@@ -10,7 +10,7 @@
 0x547D17: fstp    [esp+18h+var_14]
 0x547D1B: fld     [esp+18h+arg_0]
 0x547D1F: fstp    [esp+18h+var_18]
-0x547D22: call    Calc_WalkSpeed
+0x547D22: call    Calc_WalkSpeed; TES4 authoritative: Calc_WalkSpeed. Uses Speed actor value, carried weight/encumbrance, weapon-out branch, creature/character walk min/max game settings, and sneak multiplier; selected by sub_5E65B0 when run/swim/fly-speed flags are absent.
 0x547D27: fadd    qword ptr ds:0A2FC68h
 0x547D2D: fstp    [esp+18h+var_4]
 0x547D31: fld     [esp+18h+var_4]

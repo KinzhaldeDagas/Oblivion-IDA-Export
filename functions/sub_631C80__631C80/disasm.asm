@@ -17,7 +17,7 @@
 0x631CA6: push    esi
 0x631CA7: call    BSSimpleList_Remove
 0x631CAC: push    esi
-0x631CAD: call    FormHeapFree
+0x631CAD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x631CB2: add     esp, 4
 0x631CB5: pop     esi
 0x631CB6: retn    4

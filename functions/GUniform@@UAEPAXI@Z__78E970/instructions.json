@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78E970",
-    "line": "test    byte ptr [esp+arg_0], 1",
+    "line": "test    byte ptr [esp+flags], 1; Oblivion COMDAT-folded scalar deleting destructor shared by the Random and Uniform vtable slots at 0xA8C5D4 and 0xA8C600. Restores the Random base vftable, then calls FormHeapFree only when flags bit 0 is set.",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x78E981",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

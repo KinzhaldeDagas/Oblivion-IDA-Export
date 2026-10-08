@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7155A0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Compute controller time from application-time delta, frequency, phase, cycle mode, and backwards flag. Updates scaledTimeAccumulator +0x24 and last application time +0x20; returns the clamped/looped/reversed time later cached at +0x28 by NiTimeController_IsUpdateUnchanged.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7155B6",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7155E3",
-    "line": "fst     [esp+10h+arg_0]",
+    "line": "fst     [esp+10h+applicationTime]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7155F0",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7155FB",
-    "line": "fmul    [esp+10h+arg_0]",
+    "line": "fmul    [esp+10h+applicationTime]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x715604",
-    "line": "push    offset stru_B3FCA0; lpCriticalSection",
+    "line": "push    offset unk_B3FCA0; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x71560E",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    [esp+14h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x715612",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     [esp+14h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x71561C",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    [esp+14h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x715636",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x715672",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -661,19 +661,19 @@
   },
   {
     "ea": "0x715703",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x715707",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x71570B",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x715711",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x715724",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x715728",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x715740",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x71574D",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -901,13 +901,13 @@
   },
   {
     "ea": "0x715775",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x715779",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x715784",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x715788",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x71578F",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x715793",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x7157A7",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x7157B1",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x7157D7",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x7157E9",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x7157F2",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7157F6",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x715800",
-    "line": "push    offset stru_B3FCA0; lpCriticalSection",
+    "line": "push    offset unk_B3FCA0; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x71580B",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },

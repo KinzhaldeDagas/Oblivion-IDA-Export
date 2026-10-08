@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7A7F10",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; OBLIVION AUTHORITY (2026-08-24): CBillboardLeaf::SetColor. If applyDimming is true, scales RGB by +0x18 colorScaleByte/255; clamps and packs to +0x14. Generated LOD0 call 0x791E5C passes true; lower-LOD merge call 0x7A91F8 passes false.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7A7F13",
-    "line": "cmp     byte ptr [esp+14h+arg_4], 0",
+    "line": "cmp     [esp+14h+applyColorScale], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x7A7F18",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+rgb]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x7A7F36",
-    "line": "mov     [esp+14h+arg_4], edx",
+    "line": "mov     dword ptr [esp+14h+applyColorScale], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A7F3A",
-    "line": "fild    [esp+14h+arg_4]",
+    "line": "fild    dword ptr [esp+14h+applyColorScale]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x7A7F44",
-    "line": "fstp    [esp+14h+arg_4]",
+    "line": "fstp    dword ptr [esp+14h+applyColorScale]; Generated-tree SetPackedColor path optionally multiplies RGB by CBillboardLeaf+0x18 colorScaleByte/255 before clamping and packing. This can produce a zero green byte.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A7F48",
-    "line": "fld     [esp+14h+arg_4]",
+    "line": "fld     dword ptr [esp+14h+applyColorScale]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x7A7FED",
-    "line": "fnstcw  word ptr [esp+14h+arg_4]",
+    "line": "fnstcw  word ptr [esp+14h+applyColorScale]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x7A7FF1",
-    "line": "movzx   eax, word ptr [esp+14h+arg_4]",
+    "line": "movzx   eax, word ptr [esp+14h+applyColorScale]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x7A7FFF",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+rgb], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8003",
-    "line": "fldcw   word ptr [esp+14h+arg_0]",
+    "line": "fldcw   word ptr [esp+14h+rgb]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x7A8012",
-    "line": "fldcw   word ptr [esp+14h+arg_4]",
+    "line": "fldcw   word ptr [esp+14h+applyColorScale]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7A801A",
-    "line": "fnstcw  word ptr [esp+14h+arg_4]",
+    "line": "fnstcw  word ptr [esp+14h+applyColorScale]",
     "mnemonic": "fnstcw",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x7A8020",
-    "line": "movzx   eax, word ptr [esp+14h+arg_4]",
+    "line": "movzx   eax, word ptr [esp+14h+applyColorScale]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x7A802A",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+rgb], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A802E",
-    "line": "fldcw   word ptr [esp+14h+arg_0]",
+    "line": "fldcw   word ptr [esp+14h+rgb]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x7A803D",
-    "line": "fldcw   word ptr [esp+14h+arg_4]",
+    "line": "fldcw   word ptr [esp+14h+applyColorScale]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x7A8045",
-    "line": "fnstcw  word ptr [esp+14h+arg_4]",
+    "line": "fnstcw  word ptr [esp+14h+applyColorScale]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x7A8049",
-    "line": "movzx   eax, word ptr [esp+14h+arg_4]",
+    "line": "movzx   eax, word ptr [esp+14h+applyColorScale]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x7A8053",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+rgb], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A8057",
-    "line": "fldcw   word ptr [esp+14h+arg_0]",
+    "line": "fldcw   word ptr [esp+14h+rgb]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x7A8063",
-    "line": "mov     [ecx+14h], edx",
+    "line": "mov     [ecx+14h], edx; Pack clamped RGB into CBillboardLeaf+0x14. Leaf geometry later uses byte +1 (green) as its scalar lighting/dimming fraction.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A8066",
-    "line": "fldcw   word ptr [esp+14h+arg_4]",
+    "line": "fldcw   word ptr [esp+14h+applyColorScale]",
     "mnemonic": "fldcw",
     "size": 4
   },

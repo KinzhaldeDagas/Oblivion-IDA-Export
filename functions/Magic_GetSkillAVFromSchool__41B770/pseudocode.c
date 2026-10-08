@@ -1,29 +1,17 @@
-int __cdecl Magic_GetSkillAVFromSchool(int a1)
+void __cdecl Magic_GetSkillAVFromSchool(int a1)
 {
-  int result; // eax
-
-  switch ( a1 )
+  switch ( a1 ) /*0x41b77c*/
   {
-    case 0:
-      result = 0x14;
-      break;
-    case 1:
-      result = 0x15;
-      break;
-    case 2:
-      result = 0x16;
-      break;
-    case 3:
-      result = 0x17;
-      break;
-    case 4:
-      result = 0x18;
-      break;
-    case 5:
-      result = Magic_GetSkillAVFromSchool_::Done(a1);
-      break;
+    case 0: /*0x41b77c*/
+    case 1: /*0x41b77c*/
+    case 2: /*0x41b77c*/
+    case 3: /*0x41b77c*/
+    case 4: /*0x41b77c*/
+      return;
+    case 5: /*0x41b77c*/
+      Magic_GetSkillAVFromSchool_::Done(); /*0x41b7a2*/
+      break; /*0x41b7a2*/
     default:
-      JUMPOUT(0x41B7A6);
+      JUMPOUT(0x41B7A6); /*0x41b7a6*/
   }
-  return result;
 }

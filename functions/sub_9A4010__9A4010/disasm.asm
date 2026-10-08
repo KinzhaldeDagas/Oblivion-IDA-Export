@@ -10,7 +10,7 @@
 0x9A4025: mov     edi, [esp+8+arg_4]
 0x9A4029: mov     eax, [edi+0Ch]
 0x9A402C: push    eax
-0x9A402D: call    NiObjectNET_GetExtraData
+0x9A402D: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x9A4032: test    eax, eax
 0x9A4034: jnz     short loc_9A4040
 0x9A4036: pop     edi
@@ -22,14 +22,14 @@
 0x9A4042: push    edi
 0x9A4043: mov     ecx, esi
 0x9A4045: call    sub_9A9040
-0x9A404A: cmp     byte_B4295B, 0
+0x9A404A: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A4051: mov     ebx, [edi+14h]
 0x9A4054: mov     esi, eax
 0x9A4056: jnz     short loc_9A405D
-0x9A4058: call    sub_783C70
+0x9A4058: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A405D: and     ebx, 0FFh
 0x9A4063: mov     eax, 3
-0x9A4068: cmp     dword_B428D8[ebx*4], eax
+0x9A4068: cmp     g_D3DXParameterClassDispatch[ebx*4], eax
 0x9A406F: jnz     short loc_9A4092
 0x9A4071: mov     ecx, [esi]
 0x9A4073: fild    dword ptr [esi]
@@ -43,13 +43,13 @@
 0x9A4088: fstp    dword ptr [edx+0BAAA70h]
 0x9A408E: pop     esi
 0x9A408F: retn    20h ; ' '
-0x9A4092: cmp     byte_B4295B, 0
+0x9A4092: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A4099: mov     ebx, [edi+14h]
 0x9A409C: jnz     short loc_9A40A3
-0x9A409E: call    sub_783C70
+0x9A409E: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A40A3: and     ebx, 0FFh
 0x9A40A9: mov     eax, 4
-0x9A40AE: cmp     dword_B428D8[ebx*4], eax
+0x9A40AE: cmp     g_D3DXParameterClassDispatch[ebx*4], eax
 0x9A40B5: jnz     short loc_9A40CC
 0x9A40B7: mov     ecx, [esp+0Ch+arg_0]
 0x9A40BB: fld     dword ptr [esi]

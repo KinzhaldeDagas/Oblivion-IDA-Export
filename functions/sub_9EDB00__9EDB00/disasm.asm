@@ -2,7 +2,7 @@
 0x9EDB06: push    ecx
 0x9EDB07: fstp    [esp+4+var_4]; float
 0x9EDB0A: push    offset aFrumblehitbloc; "fRumbleHitBlockedTime"
-0x9EDB0F: mov     ecx, offset unk_B37C28
+0x9EDB0F: mov     ecx, 0B37C28h
 0x9EDB14: call    GameSetting_ConstrAndReg_float
 0x9EDB19: push    offset sub_A1FF70; void (__cdecl *)()
 0x9EDB1E: call    _atexit

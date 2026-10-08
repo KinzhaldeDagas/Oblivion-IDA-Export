@@ -3,7 +3,6 @@
 0x634723: xor     eax, eax
 0x634725: lea     ecx, [esi+2C8h]
 0x63472B: jmp     short loc_634730
-0x63472D: align 10h
 0x634730: mov     dword ptr [ecx], 0
 0x634736: mov     byte ptr [esi+eax+2DCh], 0
 0x63473E: add     eax, 1

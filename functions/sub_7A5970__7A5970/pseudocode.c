@@ -1,9 +1,11 @@
-float *__cdecl sub_7A5970(float *a1, float *a2, int a3)
+// Deep-copy assigns one SIdvLeafTexture value across an existing 0x54-stride range.
+void __cdecl OB_SIdvLeafTexture_CopyAssignFillRange_010201A0(
+        OB_SIdvLeafTexture_010201A0 *first,
+        OB_SIdvLeafTexture_010201A0 *last,
+        const OB_SIdvLeafTexture_010201A0 *value)
 {
-  float *i; // esi
-  float *result; // eax
+  OB_SIdvLeafTexture_010201A0 *i; // esi
 
-  for ( i = a1; i != a2; i += 0x15 )
-    result = sub_7A3470(i, a3);
-  return result;
+  for ( i = first; i != last; ++i ) /*0x7a597c*/
+    OB_SIdvLeafTexture_CopyAssign_010201A0(i, value); /*0x7a5986*/
 }

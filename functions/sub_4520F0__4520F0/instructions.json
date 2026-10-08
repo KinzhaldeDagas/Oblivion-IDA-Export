@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4520F0",
-    "line": "push    ebx",
+    "line": "push    ebx; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "push",
     "size": 1
   },
@@ -82,12 +82,6 @@
     "line": "jmp     short loc_452110",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x45210D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x452110",
@@ -229,7 +223,7 @@
   },
   {
     "ea": "0x452141",
-    "line": "call    sub_451F80",
+    "line": "call    TESFile_GetThreadSafeFileForThread; Looks up a TESFile clone by thread ID; if absent, constructs and opens a read-only clone, copies master/index state, assigns the root thread-safe parent, and inserts it into the per-thread map.",
     "mnemonic": "call",
     "size": 5
   },

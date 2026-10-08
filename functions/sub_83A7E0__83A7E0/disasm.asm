@@ -78,49 +78,49 @@
 0x83A8AB: call    dword ptr ds:0A28078h
 0x83A8B1: cmp     [esi+30h], ebx
 0x83A8B4: jnz     short loc_83A8BE
-0x83A8B6: call    sub_772DF0
+0x83A8B6: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83A8BB: mov     [esi+30h], eax
 0x83A8BE: mov     ecx, [esi+30h]
 0x83A8C1: push    ebx
 0x83A8C2: push    ebx
 0x83A8C3: push    1Bh
-0x83A8C5: call    sub_772CD0
+0x83A8C5: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83A8CA: cmp     [esi+30h], ebx
 0x83A8CD: jnz     short loc_83A8D7
-0x83A8CF: call    sub_772DF0
+0x83A8CF: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83A8D4: mov     [esi+30h], eax
 0x83A8D7: mov     ecx, [esi+30h]
 0x83A8DA: push    ebx
 0x83A8DB: push    ebx
 0x83A8DC: push    0Fh
-0x83A8DE: call    sub_772CD0
+0x83A8DE: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83A8E3: cmp     [esi+30h], ebx
 0x83A8E6: jnz     short loc_83A8F0
-0x83A8E8: call    sub_772DF0
+0x83A8E8: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83A8ED: mov     [esi+30h], eax
 0x83A8F0: mov     ecx, [esi+30h]
 0x83A8F3: push    ebx
 0x83A8F4: push    1
 0x83A8F6: push    7
-0x83A8F8: call    sub_772CD0
+0x83A8F8: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83A8FD: cmp     [esi+30h], ebx
 0x83A900: jnz     short loc_83A90A
-0x83A902: call    sub_772DF0
+0x83A902: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83A907: mov     [esi+30h], eax
 0x83A90A: mov     ecx, [esi+30h]
 0x83A90D: push    ebx
 0x83A90E: push    4
 0x83A910: push    17h
-0x83A912: call    sub_772CD0
+0x83A912: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83A917: cmp     [esi+30h], ebx
 0x83A91A: jnz     short loc_83A924
-0x83A91C: call    sub_772DF0
+0x83A91C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83A921: mov     [esi+30h], eax
 0x83A924: mov     ecx, [esi+30h]
 0x83A927: push    ebx
 0x83A928: push    1
 0x83A92A: push    0Eh
-0x83A92C: call    sub_772CD0
+0x83A92C: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83A931: cmp     esi, ds:0B45B38h
 0x83A937: mov     dword ptr ds:0B440B4h, 400002h
 0x83A941: mov     ds:0B44744h, ebx
@@ -128,7 +128,7 @@
 0x83A949: add     dword ptr [esi+60h], 0FFFFFFFFh
 0x83A94D: jnz     short loc_83A956
 0x83A94F: mov     ecx, esi
-0x83A951: call    sub_7604D0
+0x83A951: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x83A956: mov     esi, ds:0B45B38h
 0x83A95C: cmp     esi, ebx
 0x83A95E: mov     [esp+28h+var_14], esi
@@ -186,49 +186,49 @@
 0x83A9E0: call    dword ptr ds:0A28078h
 0x83A9E6: cmp     [esi+30h], ebx
 0x83A9E9: jnz     short loc_83A9F3
-0x83A9EB: call    sub_772DF0
+0x83A9EB: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83A9F0: mov     [esi+30h], eax
 0x83A9F3: mov     ecx, [esi+30h]
 0x83A9F6: push    ebx
 0x83A9F7: push    ebx
 0x83A9F8: push    1Bh
-0x83A9FA: call    sub_772CD0
+0x83A9FA: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83A9FF: cmp     [esi+30h], ebx
 0x83AA02: jnz     short loc_83AA0C
-0x83AA04: call    sub_772DF0
+0x83AA04: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AA09: mov     [esi+30h], eax
 0x83AA0C: mov     ecx, [esi+30h]
 0x83AA0F: push    ebx
 0x83AA10: push    ebx
 0x83AA11: push    0Fh
-0x83AA13: call    sub_772CD0
+0x83AA13: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AA18: cmp     [esi+30h], ebx
 0x83AA1B: jnz     short loc_83AA25
-0x83AA1D: call    sub_772DF0
+0x83AA1D: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AA22: mov     [esi+30h], eax
 0x83AA25: mov     ecx, [esi+30h]
 0x83AA28: push    ebx
 0x83AA29: push    1
 0x83AA2B: push    7
-0x83AA2D: call    sub_772CD0
+0x83AA2D: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AA32: cmp     [esi+30h], ebx
 0x83AA35: jnz     short loc_83AA3F
-0x83AA37: call    sub_772DF0
+0x83AA37: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AA3C: mov     [esi+30h], eax
 0x83AA3F: mov     ecx, [esi+30h]
 0x83AA42: push    ebx
 0x83AA43: push    4
 0x83AA45: push    17h
-0x83AA47: call    sub_772CD0
+0x83AA47: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AA4C: cmp     [esi+30h], ebx
 0x83AA4F: jnz     short loc_83AA59
-0x83AA51: call    sub_772DF0
+0x83AA51: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AA56: mov     [esi+30h], eax
 0x83AA59: mov     ecx, [esi+30h]
 0x83AA5C: push    ebx
 0x83AA5D: push    1
 0x83AA5F: push    0Eh
-0x83AA61: call    sub_772CD0
+0x83AA61: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AA66: cmp     esi, ds:0B45B3Ch
 0x83AA6C: mov     dword ptr ds:0B440B8h, (offset loc_840007+1)
 0x83AA76: mov     ds:0B44748h, ebx
@@ -236,7 +236,7 @@
 0x83AA7E: add     dword ptr [esi+60h], 0FFFFFFFFh
 0x83AA82: jnz     short loc_83AA8B
 0x83AA84: mov     ecx, esi
-0x83AA86: call    sub_7604D0
+0x83AA86: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x83AA8B: mov     esi, ds:0B45B3Ch
 0x83AA91: cmp     esi, ebx
 0x83AA93: mov     [esp+28h+var_14], esi
@@ -294,49 +294,49 @@
 0x83AB15: call    dword ptr ds:0A28078h
 0x83AB1B: cmp     [esi+30h], ebx
 0x83AB1E: jnz     short loc_83AB28
-0x83AB20: call    sub_772DF0
+0x83AB20: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AB25: mov     [esi+30h], eax
 0x83AB28: mov     ecx, [esi+30h]
 0x83AB2B: push    ebx
 0x83AB2C: push    ebx
 0x83AB2D: push    1Bh
-0x83AB2F: call    sub_772CD0
+0x83AB2F: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AB34: cmp     [esi+30h], ebx
 0x83AB37: jnz     short loc_83AB41
-0x83AB39: call    sub_772DF0
+0x83AB39: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AB3E: mov     [esi+30h], eax
 0x83AB41: mov     ecx, [esi+30h]
 0x83AB44: push    ebx
 0x83AB45: push    ebx
 0x83AB46: push    0Fh
-0x83AB48: call    sub_772CD0
+0x83AB48: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AB4D: cmp     [esi+30h], ebx
 0x83AB50: jnz     short loc_83AB5A
-0x83AB52: call    sub_772DF0
+0x83AB52: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AB57: mov     [esi+30h], eax
 0x83AB5A: mov     ecx, [esi+30h]
 0x83AB5D: push    ebx
 0x83AB5E: push    1
 0x83AB60: push    7
-0x83AB62: call    sub_772CD0
+0x83AB62: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AB67: cmp     [esi+30h], ebx
 0x83AB6A: jnz     short loc_83AB74
-0x83AB6C: call    sub_772DF0
+0x83AB6C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AB71: mov     [esi+30h], eax
 0x83AB74: mov     ecx, [esi+30h]
 0x83AB77: push    ebx
 0x83AB78: push    8
 0x83AB7A: push    17h
-0x83AB7C: call    sub_772CD0
+0x83AB7C: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AB81: cmp     [esi+30h], ebx
 0x83AB84: jnz     short loc_83AB8E
-0x83AB86: call    sub_772DF0
+0x83AB86: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x83AB8B: mov     [esi+30h], eax
 0x83AB8E: mov     ecx, [esi+30h]
 0x83AB91: push    ebx
 0x83AB92: push    1
 0x83AB94: push    0Eh
-0x83AB96: call    sub_772CD0
+0x83AB96: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x83AB9B: or      eax, 0FFFFFFFFh
 0x83AB9E: mov     dword ptr ds:0B440BCh, 2
 0x83ABA8: mov     ds:0B4474Ch, ebx
@@ -344,7 +344,7 @@
 0x83ABB1: mov     [esp+28h+var_4], eax
 0x83ABB5: jnz     short loc_83ABBE
 0x83ABB7: mov     ecx, esi
-0x83ABB9: call    sub_7604D0
+0x83ABB9: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x83ABBE: mov     ecx, dword ptr [esp+28h+var_C]
 0x83ABC2: mov     large fs:0, ecx
 0x83ABC9: pop     ecx
@@ -354,3 +354,14 @@
 0x83ABCD: pop     ebx
 0x83ABCE: add     esp, 14h
 0x83ABD1: retn
+0x9D31B0: lea     ecx, [ebp-14h]; void *
+0x9D31B3: jmp     sub_4027D0
+0x9D31B8: lea     ecx, [ebp-10h]
+0x9D31BB: jmp     loc_75FA70
+0x9D31C0: mov     edx, [esp+arg_4]
+0x9D31C4: lea     eax, [edx-18h]
+0x9D31C7: mov     ecx, [edx-1Ch]
+0x9D31CA: xor     ecx, eax
+0x9D31CC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D31D1: mov     eax, offset stru_AFB608
+0x9D31D6: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x4E8DB0",
+      "0x4E8E78"
+    ]
+  ],
+  "chunks_sha256": "90002a24aabba177751595c181471910e0d9a9c47cc76422bd4d46508c732b36",
+  "comment_regular": "Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
+  "comment_repeatable": "Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E8DB0",
+  "display_name": "TESRoad_FindNearestConnectedPoint",
   "end_ea": "0x4E8E78",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E8DB0",
+  "name": "TESRoad_FindNearestConnectedPoint",
   "segment": ".text",
   "sha256": "90002a24aabba177751595c181471910e0d9a9c47cc76422bd4d46508c732b36",
   "size": 200,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E8DB0",
-  "type": "char *__stdcall(float *, int *, float *)",
+  "total_chunk_size": 200,
+  "type": "TESConnectedPoint *__stdcall(const NiPoint3 *position, BSSimpleList_VoidPtr *points, float *outDistance)",
   "xrefs_from_count": 74,
   "xrefs_to_count": 5
 }

@@ -6,7 +6,7 @@
 0xA15A90: push    0
 0xA15A92: push    0
 0xA15A94: push    0Ch
-0xA15A96: push    offset dword_BA94C0
+0xA15A96: push    offset unk_BA94C0
 0xA15A9B: push    offset aHkmotion; "hkMotion"
 0xA15AA0: mov     ecx, offset unk_BA953C
 0xA15AA5: call    sub_90D190

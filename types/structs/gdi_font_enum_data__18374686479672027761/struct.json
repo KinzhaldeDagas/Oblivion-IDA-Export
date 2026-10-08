@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "gdi_font_enum_data",
+  "definition": "struct gdi_font_enum_data\n{\nENUMLOGFONTEXW elf;\nNEWTEXTMETRICEXW ntm;\n}\n",
   "id": 18374686479672027761,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "elf",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 348
+      "size": 348,
+      "type": "ENUMLOGFONTEXW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ntm",
       "offset": 348,
-      "offset_hex": "0x15c",
-      "size": 100
+      "offset_hex": "0x15C",
+      "size": 100,
+      "type": "NEWTEXTMETRICEXW"
     }
   ],
   "name": "gdi_font_enum_data",
+  "ordinal": 1517,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 448
 }

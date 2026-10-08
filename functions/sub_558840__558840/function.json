@@ -1,19 +1,36 @@
 {
-  "callees_count": 142,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 48,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_558840",
+  "chunks": [
+    [
+      "0x558840",
+      "0x559184"
+    ],
+    [
+      "0x9BC7E0",
+      "0x9BC80E"
+    ]
+  ],
+  "chunks_sha256": "f3e8a0bc8837741703c8ebc3edfe23233f3d278450281aef0091e8353a92c1c1",
+  "comment_regular": "Apply EGM banks 0 and 1 as weighted int16 position deltas to the geometry vertex buffer. Validates basis dimensions, serializes shared model access, and marks only the vertex channel dirty. This routine does not regenerate the geometry normal array; bFixFaceNormals later performs only a targeted FaceGenFace-to-FaceGenEars seam copy.\n\nNative EGM lock defects, statically verified: early failures after stream acquisition can return false without unlock; failed acquisition can still continue via cached base-vertex branch then success unlocks preexisting stream. Preconditions matter; runtime/shipped-asset reachability not established. IDA range +0x944 matches deployed EXE hash 33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0. PF guards source versions 1.19.11, but local PF DLL removed 2026-10-01 at user request. OCO LoadGame root cause remains unresolved.",
+  "comment_repeatable": "Native EGM lock defects, statically verified: early failures after stream acquisition can return false without unlock; failed acquisition can still continue via cached base-vertex branch then success unlocks preexisting stream. Preconditions matter; runtime/shipped-asset reachability not established. IDA range +0x944 matches deployed EXE hash 33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0. PF guards source versions 1.19.11, but local PF DLL removed 2026-10-01 at user request. OCO LoadGame root cause remains unresolved.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 17,
+  "display_name": "BSFaceGenModel_ApplyEGMMorph",
   "end_ea": "0x559184",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_558840",
+  "name": "BSFaceGenModel_ApplyEGMMorph",
   "segment": ".text",
   "sha256": "33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0",
   "size": 2372,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x558840",
-  "type": "char __thiscall(char *this, unsigned int *, int, float, float *)",
-  "xrefs_from_count": 810,
+  "total_chunk_size": 2418,
+  "type": "bool __thiscall(void *this, const FaceGenHeadParameters *parameters, NiGeometry *geometry, float morphScale, const NiPoint3 *basePositions)",
+  "xrefs_from_count": 840,
   "xrefs_to_count": 7
 }

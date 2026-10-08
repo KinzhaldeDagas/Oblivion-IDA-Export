@@ -1,0 +1,19 @@
+{
+  "bytes_preview_hex": "",
+  "bytes_sha256": "",
+  "comments": {
+    "regular": "WaterManager-owned water-reflection lifetime flag. Sole writes: set at 0x49C4CC after installing the reflection accumulator and cleared at 0x49C809 after accumulator flush/restoration. Reads: FlushPassBucket remaps 0x49->0x48 and 0x16F->0x16E; AccumulateGeometry avoids its fallback pending mark, uses the Sky 0x17D-only path, and skips 0x168..0x16D plus 0x170..0x17B while keeping 0x16E/0x16F.",
+    "repeatable": "WaterManager-owned water-reflection lifetime flag. Sole writes: set at 0x49C4CC after installing the reflection accumulator and cleared at 0x49C809 after accumulator flush/restoration. Reads: FlushPassBucket remaps 0x49->0x48 and 0x16F->0x16E; AccumulateGeometry avoids its fallback pending mark, uses the Sky 0x17D-only path, and skips 0x168..0x16D plus 0x170..0x17B while keeping 0x16E/0x16F."
+  },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
+  "display_name": "g_bWaterReflectionPassActive",
+  "ea": "0xB42CE8",
+  "evidence_confidence": "Unknown",
+  "kind": "data",
+  "name": "g_bWaterReflectionPassActive",
+  "segment": ".data",
+  "size": 1,
+  "source_annotation_confidence": "Unknown",
+  "type": "bool",
+  "xrefs_to_count": 6
+}

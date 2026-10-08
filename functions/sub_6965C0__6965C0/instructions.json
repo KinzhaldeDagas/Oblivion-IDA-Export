@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x696603",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x69669E",
-    "line": "call    sub_5E1500",
+    "line": "call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x6966D9",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x696743",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

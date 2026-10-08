@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x42EEEB",
-    "line": "call    BSFile_constr",
+    "line": "call    BSFile_constr; MEF v57 VERIFY 2026-10-08: VERIFIED PERF-1 eligibility provenance: Archive passes mode0 to BSFile_constr430970, then installs Archive vtableA35D74 at42EEFD. BSFile initializes callback+4=430050, mode+20=0, stream sentinel+30=FFFFFFFF, and existence flag+24. v57's native archive gate additionally requires an open handle+1C; unsupported stream state keeps native fallback. Constructor metadata alone is not evidence that every archive invocation takes the fast path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x42EF35",
-    "line": "mov     [esi+1A0h], ebp",
+    "line": "mov     [esi+1A0h], ebp; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Cached-name owner initialization: +1A0h is setNULL here, +1A4h at42EF3B, and +194h flags cleared42EF41. Proposed construction leaves those ownersNULL and cached bit20h clear until a complete private name buffer plus all folder offset arrays are ready.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x42EF9B",
-    "line": "jnz     loc_42F481",
+    "line": "jnz     loc_42F481; MEF IMPLEMENTED v55 2026-09-07: Private cached-build failure uses this existing invalid-object epilogue after returning to the unchanged constructor stack/SEH. Original factory rejects bit1 and invokes deleting destructor. Tests check synthetic0x170 frame, preserved registers, SEH-link restoration andret16; no engine exception dispatch or security-cookie implementation is executed by fixture.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x42EFA8",
-    "line": "ja      loc_42F481",
+    "line": "ja      loc_42F481; MEF IMPLEMENTED v55 2026-09-07: Private cached-build failure uses this existing invalid-object epilogue after returning to the unchanged constructor stack/SEH. Original factory rejects bit1 and invokes deleting destructor. Tests check synthetic0x170 frame, preserved registers, SEH-link restoration andret16; no engine exception dispatch or security-cookie implementation is executed by fixture.",
     "mnemonic": "ja",
     "size": 6
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x42F01E",
-    "line": "push    eax",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F01F",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F020",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x42F030",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x42F0A0",
-    "line": "mov     eax, [esi+170h]",
+    "line": "mov     eax, [esi+170h]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Coordinated deferred-construction hook: replace this6-byte mov EAX,[ESI+170h] (8B8670010000) with jump42F0E0. This skips cached flag publication and both unchecked early allocations through42F0DA, leaving owner+1A0/+1A4 NULL. No outstanding cdecl args here.42F0E0 resetsEDI/counters; install only with private builder hook42F24F.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x42F0DA",
-    "line": "mov     [esi+1A4h], eax",
+    "line": "mov     [esi+1A4h], eax; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Existing top-level filename offset array is published here before any per-folder slots are initialized. Destructor42C114 later frees every slot up to folderCount, without an initialized-prefix count. A simple later failure return is unsafe with this publication; deferred private construction must bypass it.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -990,12 +990,6 @@
     "size": 2
   },
   {
-    "ea": "0x42F0FA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x42F100",
     "line": "mov     edi, [esp+170h+var_154]",
     "mnemonic": "mov",
@@ -1003,7 +997,7 @@
   },
   {
     "ea": "0x42F104",
-    "line": "test    byte ptr [esi+160h], 1",
+    "line": "test    byte ptr [esi+160h], 1; MEF PLAN 2026-09-07: Intervening folder loop42F0E0..42F219 tests header+160h and sub42BD70; it does not inspect live cached-name bit20h. Deferring cached flag/filename owners does not change these observed gates. Directory storage and file metadata remain separate preconditions.",
     "mnemonic": "test",
     "size": 7
   },
@@ -1123,25 +1117,25 @@
   },
   {
     "ea": "0x42F144",
-    "line": "push    eax",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F145",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F146",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42F148",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,31 +1189,31 @@
   },
   {
     "ea": "0x42F16C",
-    "line": "push    edx",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F16D",
-    "line": "lea     eax, [esp+174h+var_110]",
+    "line": "lea     eax, [esp+174h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x42F171",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F172",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42F174",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1279,7 @@
   },
   {
     "ea": "0x42F196",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF PLAN 2026-09-07: Separate earlier metadata defect: per-folder file-entry allocation computes16*count with overflow saturation, but NULL becomesEDI0 then flows to read callback42F1EC for nonzero count. Read byte length instead uses unchecked SHL EDX,4 at42F1D6. Filename-only builder cannot fix this earlier allocation/read path. Metadata correction needs checked count/read extent and partial-array cleanup before using42F481 as a general failure exit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,7 +1585,7 @@
   },
   {
     "ea": "0x42F24F",
-    "line": "mov     eax, [esi+170h]",
+    "line": "mov     eax, [esi+170h]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Private cached-name builder hook,6-byte8B8670010000. All earlier folder/file arrays have completed; ESI=archive, no pending args, constructor SEH state1. Build exact-length raw table and checked per-folder u32 offset arrays privately; require returned bytes==declared length and each required NUL inside remaining bytes. Commit +1A0/+1A4 and bit20h only after success, then42F30F. On failure free private owners, retainNULL fields/clear bit20h, then42F481 marks invalid and returns object for factory destruction. Paired with42F0A0; plan only.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1603,25 +1597,25 @@
   },
   {
     "ea": "0x42F25B",
-    "line": "push    eax",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F25C",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42F25D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x42F25F",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes; MEF PLAN 2026-09-07: Cached table read returns a byte count in EAX via42C8E0, but constructor discards it at42F264 and scans declared storage. Require exact declared count before any terminator scan; allocation capacity is not proof of initialized input.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1660,12 +1654,6 @@
     "line": "jmp     short loc_42F280",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x42F27A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x42F280",
@@ -1789,7 +1777,7 @@
   },
   {
     "ea": "0x42F2C9",
-    "line": "mov     [edx+ecx*4], edi",
+    "line": "mov     [edx+ecx*4], edi; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Original constructor publishes each filename offset before unbounded terminator scan42F2D7. Replacement should record offsets only in its private arrays while bounded scanning; permit original empty strings, lengths within declared buffer, and unused trailing bytes. Do not add a255-character cap or require header totalFileCount equality as an unproven format policy.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1813,7 +1801,7 @@
   },
   {
     "ea": "0x42F2D7",
-    "line": "mov     dl, [eax]",
+    "line": "mov     dl, [eax]; MEF PLAN 2026-09-07: Confirmed bounded-construction defect: loop reads [EAX] until NUL with no remaining-table comparison. Missing terminator or short read can scan outside declared allocation. Paired private-construction replacement42F0A0/42F24F fixes this stage only; earlier folder/file metadata validation remains separate.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1909,7 +1897,7 @@
   },
   {
     "ea": "0x42F30F",
-    "line": "mov     ebx, [esp+170h+var_14C]",
+    "line": "mov     ebx, [esp+170h+var_14C]; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Verified private-builder success continuation: reloads EBX filename argument from[ESP+24h], then GetTickCount overwritesEAX. Original loop EBP/EDI totals are dead: EBP reset42F357, EDI overwritten42F35E before next use. Helper should preserve callee-saved registers, ESP and constructor SEH; no need to reproduce native scan counters.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2346,12 +2334,6 @@
     "size": 2
   },
   {
-    "ea": "0x42F419",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x42F420",
     "line": "xor     ebp, ebp",
     "mnemonic": "xor",
@@ -2527,7 +2509,7 @@
   },
   {
     "ea": "0x42F481",
-    "line": "or      byte ptr [esi+194h], 1",
+    "line": "or      byte ptr [esi+194h], 1; MEF PLAN 2026-09-07: Revalidated in current authoritative IDB. Existing invalid-archive path ORs owner+194h bit1, then42F488 returnsESI through normal SEH/cookie/RET10h epilogue. Suitable private cached-build failure AFTER helper frees private buffers and leaves name owner pointersNULL. Bypasses later invalidation calls42F3BF/42F44A. Do not returnNULL directly: factory would lose allocated Archive object.",
     "mnemonic": "or",
     "size": 7
   },
@@ -2608,5 +2590,161 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9ABBB0",
+    "line": "mov     ecx, [ebp-144h]; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABBB6",
+    "line": "jmp     ??1BSFile@@UAE@XZ; BSFile::~BSFile(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABBBB",
+    "line": "mov     ecx, [ebp-144h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABBC1",
+    "line": "add     ecx, 200h; lpCriticalSection",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABBC7",
+    "line": "jmp     NiDeleteCriticalSection",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABBCC",
+    "line": "mov     eax, [ebp-150h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABBD2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABBD3",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABBD8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABBD9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABBDA",
+    "line": "mov     eax, [ebp-150h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABBE0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABBE1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABBE6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABBE7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ABBE8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABBEC",
+    "line": "lea     eax, [edx-160h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABBF2",
+    "line": "mov     ecx, [edx-164h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ABBF8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABBFA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABBFF",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABC02",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABC05",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABC07",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABC0C",
+    "line": "mov     eax, offset stru_AD8980",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABC11",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

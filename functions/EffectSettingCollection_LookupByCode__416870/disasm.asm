@@ -3,7 +3,7 @@
 0x416875: lea     eax, [esp+4+var_4]
 0x416878: push    eax
 0x416879: push    ecx
-0x41687A: mov     ecx, offset EffectSettingCollection
+0x41687A: mov     ecx, 0B33508h
 0x41687F: mov     [esp+0Ch+var_4], 0
 0x416887: call    NiTMap_GetAt
 0x41688C: mov     eax, [esp+4+var_4]

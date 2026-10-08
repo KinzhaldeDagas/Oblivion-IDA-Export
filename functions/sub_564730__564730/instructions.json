@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x564730",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BSTreeNode branch LOD child setter: replaces child under Branches and updates branch array. No frond-equivalent setter was found in this node surface.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x564769",
-    "line": "mov     ecx, [edi+0DCh]",
+    "line": "mov     ecx, [edi+0DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x564793",
-    "line": "call    sub_5601E0",
+    "line": "call    BSTreeModel_GetNumBranchLODLevels",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x564798",
-    "line": "mov     si, [esp+28h+arg_0]",
+    "line": "mov     si, word ptr [esp+28h+slot]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x5647ED",
-    "line": "lea     eax, [esp+2Ch+arg_0]",
+    "line": "lea     eax, [esp+2Ch+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x5647F6",
-    "line": "lea     ecx, [esp+28h+arg_0]; this",
+    "line": "lea     ecx, [esp+28h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5647FA",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x564832",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -532,5 +532,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5BD0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BD3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BD8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5BDC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BDF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BE9",
+    "line": "mov     eax, offset stru_AE0BB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BEE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

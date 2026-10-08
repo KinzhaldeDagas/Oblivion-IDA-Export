@@ -133,7 +133,7 @@
 0x65F28B: fsub    dword ptr [ecx+8]
 0x65F28E: lea     ecx, [esp+90h+var_80]
 0x65F292: fstp    [esp+90h+var_78]
-0x65F296: call    sub_43F350
+0x65F296: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x65F29B: mov     eax, [esp+90h+var_68]
 0x65F29F: fstp    [esp+90h+var_84]
 0x65F2A3: mov     ecx, [eax+1F0h]
@@ -155,7 +155,7 @@
 0x65F2D8: mov     dword ptr [esp+9Ch+var_74], esi
 0x65F2DC: mov     dword ptr [esp+9Ch+var_74+4], edi
 0x65F2E0: mov     [esp+9Ch+var_6C], ebx
-0x65F2E4: call    sub_5326B0
+0x65F2E4: call    PlayerCameraCollisionPhantomPair_CastSegment; UpdateCameraCollision calls the camera phantom-pair cast from player/camera position to candidate camera position; this is camera collision behavior, not a general Climbing movement rule.
 0x65F2E9: test    al, al
 0x65F2EB: jz      short loc_65F348
 0x65F2ED: fld     dword ptr [esp+90h+var_74]
@@ -258,16 +258,16 @@
 0x65F43D: test    eax, eax
 0x65F43F: jnz     loc_65F554
 0x65F445: mov     ecx, edi; this
-0x65F447: call    MobileObject_GetCharProxy
+0x65F447: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65F44C: mov     ecx, edi
 0x65F44E: mov     ebx, eax
-0x65F450: call    sub_5E0660
+0x65F450: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x65F455: fsub    qword ptr ds:0A735C8h
 0x65F45B: test    esi, esi
 0x65F45D: fstp    [esp+90h+var_68]
 0x65F461: jz      short loc_65F478
 0x65F463: mov     ecx, esi
-0x65F465: call    sub_5E0660
+0x65F465: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x65F46A: fmul    qword ptr ds:0A2FAA0h
 0x65F470: fadd    [esp+90h+var_68]
 0x65F474: fstp    [esp+90h+var_68]
@@ -280,7 +280,7 @@
 0x65F493: fstp    [esp+98h+camera_size]; camera_size
 0x65F496: push    eax; a3
 0x65F497: push    ebx; a2
-0x65F498: call    sub_5328B0
+0x65F498: call    PlayerCameraCollision_TestProxySphereOverlap
 0x65F49D: fldz
 0x65F49F: test    al, al
 0x65F4A1: jnz     short loc_65F4D9
@@ -293,10 +293,10 @@
 0x65F4BC: fstp    [esp+98h+camera_size]; camera_size
 0x65F4BF: push    ecx; a3
 0x65F4C0: mov     ecx, esi; this
-0x65F4C2: call    MobileObject_GetCharProxy
+0x65F4C2: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65F4C7: mov     ecx, [edi+1F0h]; this
 0x65F4CD: push    eax; a2
-0x65F4CE: call    sub_5328B0
+0x65F4CE: call    PlayerCameraCollision_TestProxySphereOverlap
 0x65F4D3: test    al, al
 0x65F4D5: jz      short loc_65F550
 0x65F4D7: fldz

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x796540",
-    "line": "movzx   eax, byte ptr [esp+arg_4]",
+    "line": "movzx   eax, [esp+windMatrixIndex]; Oblivion legacy CIndexedGeometry::AddVertexWind. Stores 1-weight and maps the input index into the CWindEngine local matrix window. Only one weight/index stream exists here; 4.1 later split this into Wind1/Wind2.",
     "mnemonic": "movzx",
     "size": 5
   },
   {
     "ea": "0x796545",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+windWeight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x796558",
-    "line": "fstp    [esp+4+arg_0]",
+    "line": "fstp    [esp+4+windWeight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79655C",
-    "line": "lea     eax, [esp+4+arg_0]",
+    "line": "lea     eax, [esp+4+windWeight]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x796560",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,43 +79,43 @@
   },
   {
     "ea": "0x796564",
-    "line": "lea     ecx, [esi+0F8h]; int",
+    "line": "lea     ecx, [esi+0F8h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x79656A",
-    "line": "mov     byte ptr [esp+8+arg_4], dl",
+    "line": "mov     [esp+8+windMatrixIndex], dl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79656E",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x796573",
-    "line": "lea     ecx, [esp+4+arg_4]",
+    "line": "lea     ecx, [esp+4+windMatrixIndex]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x796577",
-    "line": "push    ecx; int",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796578",
-    "line": "lea     ecx, [esi+108h]; int",
+    "line": "lea     ecx, [esi+108h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x79657E",
-    "line": "call    sub_78D4E0",
+    "line": "call    OB_stVectorByte_PushBack_010201A0; Oblivion byte-vector push_back: appends in available capacity or delegates to checked insert-one at end. Called by CIndexedGeometry::AddVertexWind for matrix indices.",
     "mnemonic": "call",
     "size": 5
   },

@@ -16,18 +16,18 @@
 0x68932E: lea     eax, [esp+258h+var_C]
 0x689335: mov     large fs:0, eax
 0x68933B: mov     esi, [esp+258h+arg_0]
-0x689342: mov     ebp, [esp+258h+arg_4]
+0x689342: mov     ebp, [esp+258h+end]
 0x689349: mov     edi, ecx
 0x68934B: call    sub_684EC0
 0x689350: mov     ecx, esi; this
-0x689352: call    TESObjectREFR_GetParentCell
+0x689352: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x689357: test    eax, eax
 0x689359: jz      loc_6895A2
 0x68935F: mov     ecx, ds:0B333C4h; this
 0x689365: call    PlayerCharacter__IsSleeping?
 0x68936A: test    al, al
 0x68936C: jz      short loc_689384
-0x68936E: mov     eax, [esp+258h+arg_8]
+0x68936E: mov     eax, [esp+258h+extraCost]
 0x689375: push    eax
 0x689376: push    ebp
 0x689377: push    esi
@@ -108,33 +108,33 @@
 0x689474: push    ecx; Format
 0x689475: call    Interface_ConsolePrint
 0x68947A: add     esp, 10h
-0x68947D: lea     ecx, [esp+258h+var_244]
+0x68947D: lea     ecx, [esp+258h+segmentQuery]
 0x689481: call    sub_67D760
-0x689486: mov     eax, [esp+258h+arg_8]
+0x689486: mov     eax, [esp+258h+extraCost]
 0x68948D: mov     dl, [edi+10h]
-0x689490: push    eax; float
-0x689491: push    esi; int
-0x689492: push    ebp; int
+0x689490: push    eax; extraCost
+0x689491: push    esi; actor
+0x689492: push    ebp; end
 0x689493: lea     ecx, [esi+2Ch]
-0x689496: push    ecx; int
-0x689497: lea     ecx, [esp+268h+var_244]
+0x689496: push    ecx; start
+0x689497: lea     ecx, [esp+268h+segmentQuery]; segmentQuery
 0x68949B: mov     [esp+268h+var_4], 0
 0x6894A6: mov     [esp+268h+var_22C], dl
-0x6894AA: call    sub_67EB60
+0x6894AA: call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.
 0x6894AF: push    esi
 0x6894B0: lea     ebp, [edi+14h]
 0x6894B3: push    ebp
-0x6894B4: lea     ecx, [esp+260h+var_244]
+0x6894B4: lea     ecx, [esp+260h+segmentQuery]
 0x6894B8: mov     bl, al
-0x6894BA: call    sub_67E3D0
+0x6894BA: call    sub_67E3D0; Verified route-surface consumer follows the graph-node predecessor pointer at +0x0C, emits TeleportData at each connected point's +0x14 position, and transfers water/SubSpace flags to route-node metadata.
 0x6894BF: test    bl, bl
 0x6894C1: jnz     short loc_6894E1
 0x6894C3: mov     ecx, esi
 0x6894C5: call    sub_5E34B0
 0x6894CA: test    al, al
 0x6894CC: jnz     short loc_6894E1
-0x6894CE: mov     ecx, ebp
-0x6894D0: call    TESHealthForm_GetHealth
+0x6894CE: mov     ecx, ebp; this
+0x6894D0: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x6894D5: push    eax
 0x6894D6: mov     ecx, ebp
 0x6894D8: call    sub_68C170
@@ -145,8 +145,8 @@
 0x6894E9: push    esi
 0x6894EA: mov     ecx, edi
 0x6894EC: call    sub_684000
-0x6894F1: mov     ecx, ebp
-0x6894F3: call    sub_42B410
+0x6894F1: mov     ecx, ebp; this
+0x6894F3: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x6894F8: mov     ebx, eax
 0x6894FA: test    ebx, ebx
 0x6894FC: jz      short loc_689576
@@ -186,18 +186,18 @@
 0x68955A: push    1
 0x68955C: mov     ecx, esi
 0x68955E: call    eax
-0x689560: lea     ecx, [esp+258h+var_244]; void *
+0x689560: lea     ecx, [esp+258h+segmentQuery]; this
 0x689564: mov     [esp+258h+var_4], 0FFFFFFFFh
-0x68956F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x68956F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x689574: jmp     short loc_6895A2
 0x689576: cmp     byte ptr ds:0B3C08Ah, 0
 0x68957D: jz      short loc_689587
 0x68957F: push    esi
 0x689580: mov     ecx, edi
 0x689582: call    sub_685EA0
-0x689587: lea     ecx, [esp+258h+var_244]; void *
+0x689587: lea     ecx, [esp+258h+segmentQuery]; this
 0x68958B: mov     [esp+258h+var_4], 0FFFFFFFFh
-0x689596: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x689596: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x68959B: mov     ecx, edi
 0x68959D: call    sub_6847B0
 0x6895A2: mov     ecx, [esp+258h+var_C]
@@ -212,3 +212,16 @@
 0x6895BE: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6895C3: add     esp, 244h
 0x6895C9: retn    0Ch
+0x9C5120: lea     ecx, [ebp-244h]; this
+0x9C5126: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C512B: mov     edx, [esp+end]
+0x9C512F: lea     eax, [edx-248h]
+0x9C5135: mov     ecx, [edx-24Ch]
+0x9C513B: xor     ecx, eax
+0x9C513D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5142: add     eax, 10h
+0x9C5145: mov     ecx, [edx-4]
+0x9C5148: xor     ecx, eax
+0x9C514A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C514F: mov     eax, offset stru_AED954
+0x9C5154: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 29,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7895E0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 58,
+  "chunks": [
+    [
+      "0x7895E0",
+      "0x789609"
+    ]
+  ],
+  "chunks_sha256": "1bbb564bae090e3ba5829657763de713e96189269e82508e0b8c927c2fba7dfa",
+  "comment_regular": "Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
+  "comment_repeatable": "Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "CSpeedTreeRT__SetError",
   "end_ea": "0x789609",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7895E0",
+  "name": "CSpeedTreeRT__SetError",
   "segment": ".text",
   "sha256": "1bbb564bae090e3ba5829657763de713e96189269e82508e0b8c927c2fba7dfa",
   "size": 41,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7895E0",
-  "type": "_DWORD *__usercall@<eax>(int@<edi>, char *Src)",
+  "total_chunk_size": 41,
+  "type": "void __cdecl(const char *error)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 58
 }

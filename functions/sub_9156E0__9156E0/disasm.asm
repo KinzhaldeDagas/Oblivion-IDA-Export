@@ -67,7 +67,6 @@
 0x9157A6: cmp     edi, 0FFFFFFFFh
 0x9157A9: jz      short loc_915801
 0x9157AB: jmp     short loc_9157B0
-0x9157AD: align 10h
 0x9157B0: mov     ecx, [ebx+24h]
 0x9157B3: mov     eax, [ecx]
 0x9157B5: push    edi

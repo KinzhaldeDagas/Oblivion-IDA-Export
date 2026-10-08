@@ -1,4 +1,4 @@
-0x783C70: mov     eax, 1
+0x783C70: mov     eax, 1; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x783C75: mov     edx, 0Ch
 0x783C7A: mov     ecx, 0Dh
 0x783C7F: mov     dword ptr ds:0B428D8h, 0

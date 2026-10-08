@@ -1,9 +1,9 @@
-0x649340: sub     esp, 8
+0x649340: sub     esp, 8; RadiantAI: package refresh/reselection bridge. If no current package, calls 0x648E40 to choose one; validates procedure row, checks duration/package flags, can end/reset packages, then calls 0x648E40 again for reselection.
 0x649343: push    ebp
 0x649344: push    esi
 0x649345: mov     esi, ecx
 0x649347: push    edi; float
-0x649348: mov     ecx, offset TimeGlobals
+0x649348: mov     ecx, 0B332E0h
 0x64934D: call    TimeGlobals_GetGameHour
 0x649352: fstp    [esp+14h+var_8]
 0x649356: cmp     [esp+14h+arg_4], 0
@@ -43,7 +43,7 @@
 0x6493AF: push    edi
 0x6493B0: mov     ecx, esi
 0x6493B2: mov     byte ptr [esp+1Ch+arg_0], 1
-0x6493B7: call    sub_648E40
+0x6493B7: call    sub_648E40; RadiantAI: per-process package refresh wrapper; calls actor base package chooser chain and stores selected package at process+0x8.
 0x6493BC: mov     ebp, [esi+8]
 0x6493BF: cmp     ebp, ebx
 0x6493C1: jnz     short loc_6493C7
@@ -68,12 +68,12 @@
 0x649404: test    al, al
 0x649406: jz      loc_649634
 0x64940C: push    edi
-0x64940D: push    offset sub_645A30
+0x64940D: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; Verified body: rejects null/dead actor refs and non-door forms; applies only when the door is owned by the actor (using worldspace-sensitive ownership when applicable) and has an effective lock; sets locked bit on this/linked door and marks linked owner cells as not unlocked. Probable role: callback used by actor package/cell spatial queries; callers include EvaluatePackage and process movement paths.
 0x649412: jmp     loc_649645
 0x649417: cmp     dword ptr [ebp+18h], 0FFFFFFFFh
 0x64941B: jnz     short loc_649424
 0x64941D: mov     ecx, ebp
-0x64941F: call    sub_5672A0
+0x64941F: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x649424: mov     ecx, [ebp+30h]
 0x649427: fld     [esp+18h+var_8]
 0x64942B: cmp     ecx, ebx
@@ -99,7 +99,7 @@
 0x64946D: cmp     al, 0FFh
 0x64946F: jnz     short loc_649480
 0x649471: fld     dword ptr [esi+0Ch]
-0x649474: call    Double_To_SInt32
+0x649474: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x649479: mov     ebx, eax
 0x64947B: add     ebx, [ebp+30h]
 0x64947E: jmp     short loc_649485
@@ -117,7 +117,7 @@
 0x64949F: test    ah, 41h
 0x6494A2: jnz     short loc_6494A9
 0x6494A4: mov     byte ptr [esp+18h+arg_0], 1
-0x6494A9: call    Double_To_SInt32
+0x6494A9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6494AE: cmp     eax, ebx
 0x6494B0: jl      short loc_6494B9
 0x6494B2: mov     byte ptr [esp+18h+arg_0], 1
@@ -134,15 +134,15 @@
 0x6494D6: call    Script_AddEventToExtraScript
 0x6494DB: add     esp, 0Ch
 0x6494DE: mov     ecx, ebp
-0x6494E0: call    sub_565DF0
+0x6494E0: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x6494E5: test    al, al
 0x6494E7: jz      short loc_6494FC
-0x6494E9: mov     ecx, offset TimeGlobals
+0x6494E9: mov     ecx, 0B332E0h
 0x6494EE: call    TimeGlobals_GetGameDay
 0x6494F3: mov     ecx, ebx
 0x6494F5: push    eax
 0x6494F6: push    ebp
-0x6494F7: call    sub_41FFC0
+0x6494F7: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x6494FC: cmp     byte ptr [esp+18h+arg_0], 0
 0x649501: jnz     loc_64958F
 0x649507: jmp     short loc_64957D
@@ -193,12 +193,12 @@
 0x649586: call    sub_5660B0
 0x64958B: test    al, al
 0x64958D: jnz     short loc_649536
-0x64958F: mov     ecx, ebp
-0x649591: call    sub_5660A0
+0x64958F: mov     ecx, ebp; self
+0x649591: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x649596: test    al, al
 0x649598: jz      short loc_6495BA
 0x64959A: mov     ecx, edi; int
-0x64959C: call    sub_5EAE70
+0x64959C: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x6495A1: mov     eax, [esi+8]
 0x6495A4: test    eax, eax
 0x6495A6: jz      short loc_6495B8
@@ -212,7 +212,7 @@
 0x6495B8: xor     ebp, ebp
 0x6495BA: push    edi
 0x6495BB: mov     ecx, esi
-0x6495BD: call    sub_648E40
+0x6495BD: call    sub_648E40; RadiantAI: per-process package refresh wrapper; calls actor base package chooser chain and stores selected package at process+0x8.
 0x6495C2: test    ebp, ebp
 0x6495C4: jz      short loc_649621
 0x6495C6: cmp     ebp, [esi+8]
@@ -222,10 +222,10 @@
 0x6495D1: test    al, 1
 0x6495D3: jz      short loc_649610
 0x6495D5: mov     ecx, ds:0B333C4h; this
-0x6495DB: call    TESObjectREFR_GetParentCell
+0x6495DB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6495E0: mov     ecx, edi; this
 0x6495E2: mov     ebx, eax
-0x6495E4: call    TESObjectREFR_GetParentCell
+0x6495E4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6495E9: cmp     ebx, eax
 0x6495EB: jnz     short loc_649610
 0x6495ED: cmp     dword ptr [esi+4], 0
@@ -261,7 +261,7 @@
 0x64963B: test    al, al
 0x64963D: jz      short loc_649686
 0x64963F: push    edi; a7
-0x649640: push    offset sub_645AF0; a6
+0x649640: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x649645: mov     edx, [edi]
 0x649647: fld     dword ptr ds:0A5B6C0h
 0x64964D: mov     eax, [edx+174h]
@@ -279,7 +279,7 @@
 0x649670: call    eax
 0x649672: push    eax; a2
 0x649673: mov     ecx, edi; this
-0x649675: call    TESObjectREFR_GetParentCell
+0x649675: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64967A: mov     ecx, ds:0B33A98h
 0x649680: push    eax; a1
 0x649681: call    sub_446B90
@@ -292,14 +292,14 @@
 0x649696: test    al, al
 0x649698: jz      short loc_6496A2
 0x64969A: push    edi
-0x64969B: push    offset sub_645A30
+0x64969B: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; Verified body: rejects null/dead actor refs and non-door forms; applies only when the door is owned by the actor (using worldspace-sensitive ownership when applicable) and has an effective lock; sets locked bit on this/linked door and marks linked owner cells as not unlocked. Probable role: callback used by actor package/cell spatial queries; callers include EvaluatePackage and process movement paths.
 0x6496A0: jmp     short loc_6496B4
 0x6496A2: mov     ecx, [esi+8]
 0x6496A5: call    sub_565DA0
 0x6496AA: test    al, al
 0x6496AC: jz      short loc_6496F5
 0x6496AE: push    edi; a7
-0x6496AF: push    offset sub_645AF0; a6
+0x6496AF: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x6496B4: mov     edx, [edi]
 0x6496B6: fld     dword ptr ds:0A5B6C0h
 0x6496BC: mov     eax, [edx+174h]
@@ -317,7 +317,7 @@
 0x6496DF: call    eax
 0x6496E1: push    eax; a2
 0x6496E2: mov     ecx, edi; this
-0x6496E4: call    TESObjectREFR_GetParentCell
+0x6496E4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6496E9: mov     ecx, ds:0B33A98h
 0x6496EF: push    eax; a1
 0x6496F0: call    sub_446B90
@@ -338,7 +338,7 @@
 0x64971A: cmp     byte ptr [ecx+20h], 0
 0x64971E: jz      short loc_649726
 0x649720: push    edi
-0x649721: call    sub_568BB0
+0x649721: call    sub_568BB0; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.
 0x649726: fld     dword ptr ds:0A30634h
 0x64972C: push    ecx
 0x64972D: mov     ecx, [esi+8]
@@ -360,13 +360,13 @@
 0x64975D: call    eax
 0x64975F: push    eax; int
 0x649760: mov     ecx, edi; this
-0x649762: call    TESObjectREFR_GetParentCell
+0x649762: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x649767: push    eax; int
 0x649768: mov     ecx, edi; this
 0x64976A: call    TESObjectREFR_GetWorldSpace
 0x64976F: push    eax; int
 0x649770: mov     ecx, edi
-0x649772: call    sub_4D7A20
+0x649772: call    TESObjectREFR_SetStartLocation; TESObjectREFR wrapper records package start location from worldspace/cell, position XYZ, and rotZ into ExtraPackageStartLocation.
 0x649777: mov     edx, [esi]
 0x649779: mov     eax, [edx+38Ch]
 0x64977F: push    ebx
@@ -405,7 +405,7 @@
 0x6497D6: cmp     edi, ebx
 0x6497D8: jz      short loc_6497E3
 0x6497DA: push    edi
-0x6497DB: call    FormHeapFree
+0x6497DB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6497E0: add     esp, 4
 0x6497E3: push    edi
 0x6497E4: mov     ecx, esi

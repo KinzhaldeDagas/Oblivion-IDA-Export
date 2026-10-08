@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4A1780",
-    "line": "mov     eax, [esp+arg_20]",
+    "line": "mov     eax, [esp+triangleIndices]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A1784",
-    "line": "mov     edx, [esp+arg_18]",
+    "line": "mov     edx, dword ptr [esp+dataFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x4A1789",
-    "line": "push    eax",
+    "line": "push    eax; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A178A",
-    "line": "mov     eax, [esp+8+arg_14]",
+    "line": "mov     eax, dword ptr [esp+8+hasVertexColors]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,97 +37,97 @@
   },
   {
     "ea": "0x4A1790",
-    "line": "mov     ecx, [esp+8+arg_1C]",
+    "line": "mov     ecx, dword ptr [esp+8+triangleCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A1794",
-    "line": "push    ecx",
+    "line": "push    ecx; triangleCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A1795",
-    "line": "mov     ecx, [esp+0Ch+arg_10]",
+    "line": "mov     ecx, [esp+0Ch+textureCoordinates]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A1799",
-    "line": "push    edx",
+    "line": "push    edx; dataFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A179A",
-    "line": "mov     edx, [esp+10h+arg_C]",
+    "line": "mov     edx, [esp+10h+colors]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A179E",
-    "line": "push    eax",
+    "line": "push    eax; hasVertexColors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A179F",
-    "line": "mov     eax, [esp+14h+arg_8]",
+    "line": "mov     eax, [esp+14h+normals]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A17A3",
-    "line": "push    ecx",
+    "line": "push    ecx; textureCoordinates",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A17A4",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A17A8",
-    "line": "push    edx",
+    "line": "push    edx; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A17A9",
-    "line": "mov     edx, [esp+1Ch+arg_0]",
+    "line": "mov     edx, dword ptr [esp+1Ch+vertexCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A17AD",
-    "line": "push    eax",
+    "line": "push    eax; normals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A17AE",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A17AF",
-    "line": "push    edx",
+    "line": "push    edx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A17B0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A17B2",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },

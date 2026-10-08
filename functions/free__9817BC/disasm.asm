@@ -23,3 +23,22 @@
 0x9817FA: pop     ecx
 0x9817FB: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x981802: call    _free___$LN14
+0x981812: push    4
+0x981814: call    __unlock
+0x981819: pop     ecx
+0x98181A: retn
+0x98181B: push    esi; lpMem
+0x98181C: push    0; dwFlags
+0x98181E: push    dword ptr ds:0BAA2ACh; hHeap
+0x981824: call    dword ptr ds:0A28198h
+0x98182A: test    eax, eax
+0x98182C: jnz     short loc_981844
+0x98182E: call    __errno
+0x981833: mov     esi, eax
+0x981835: call    dword ptr ds:0A281ECh
+0x98183B: push    eax
+0x98183C: call    __get_errno_from_oserr
+0x981841: mov     [esi], eax
+0x981843: pop     ecx
+0x981844: call    __SEH_epilog4
+0x981849: retn

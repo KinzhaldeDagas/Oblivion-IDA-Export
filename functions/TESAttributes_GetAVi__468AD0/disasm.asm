@@ -3,7 +3,7 @@
 0x468AD5: push    eax
 0x468AD6: push    0
 0x468AD8: mov     esi, ecx
-0x468ADA: call    ActorValue_GetGroupOffsetFromAV
+0x468ADA: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x468ADF: movsx   ecx, al
 0x468AE2: mov     al, [ecx+esi+4]
 0x468AE6: add     esp, 8

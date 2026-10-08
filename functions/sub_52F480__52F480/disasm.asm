@@ -12,7 +12,6 @@
 0x52F496: mov     ebx, ecx
 0x52F498: lea     edx, [eax+1]
 0x52F49B: jmp     short loc_52F4A0
-0x52F49D: align 10h
 0x52F4A0: mov     cl, [eax]
 0x52F4A2: add     eax, 1
 0x52F4A5: test    cl, cl
@@ -25,7 +24,6 @@
 0x52F4B7: mov     eax, edi
 0x52F4B9: sub     edx, edi
 0x52F4BB: jmp     short loc_52F4C0
-0x52F4BD: align 10h
 0x52F4C0: mov     cl, [eax]
 0x52F4C2: mov     [edx+eax], cl
 0x52F4C5: add     eax, 1
@@ -37,9 +35,9 @@
 0x52F4D3: mov     eax, [edi]
 0x52F4D5: test    eax, eax
 0x52F4D7: jz      short loc_52F4E5
-0x52F4D9: push    esi; Str2
-0x52F4DA: push    eax; Str1
-0x52F4DB: call    __strcmp
+0x52F4D9: push    esi; right
+0x52F4DA: push    eax; left
+0x52F4DB: call    CRT_StricmpLocaleDispatch
 0x52F4E0: add     esp, 8
 0x52F4E3: jmp     short loc_52F4F0
 0x52F4E5: xor     eax, eax

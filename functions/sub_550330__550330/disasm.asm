@@ -1,7 +1,7 @@
-0x550330: push    ebx
+0x550330: push    ebx; Exact FaceGen matrix equality: dimensions must match and all coefficient bytes are compared.
 0x550331: mov     ebx, ecx
 0x550333: mov     eax, [ebx]
-0x550335: mov     ecx, [esp+4+arg_0]
+0x550335: mov     ecx, [esp+4+right]
 0x550339: cmp     [ecx], eax
 0x55033B: push    esi
 0x55033C: jnz     loc_55041B
@@ -18,11 +18,11 @@
 0x550364: push    0
 0x550366: add     ecx, 8
 0x550369: add     esi, esi
-0x55036B: call    sub_54F7A0
+0x55036B: call    sub_54F7A0; Bounds-checked float-vector element access. Returns begin + index*4; begin is vector+4 (FaceGenMatrix+0x0C).
 0x550370: push    0
 0x550372: lea     ecx, [ebx+8]
 0x550375: mov     edi, eax
-0x550377: call    sub_54F7A0
+0x550377: call    sub_54F7A0; Bounds-checked float-vector element access. Returns begin + index*4; begin is vector+4 (FaceGenMatrix+0x0C).
 0x55037C: cmp     esi, 4
 0x55037F: jb      short loc_550395
 0x550381: mov     ecx, [eax]

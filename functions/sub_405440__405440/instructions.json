@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x405461",
-    "line": "mov     eax, ObjectPtr",
+    "line": "mov     eax, ds:0B33428h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x405479",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x405489",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x40548E",
-    "line": "mov     ecx, [eax+8]",
+    "line": "mov     ecx, [eax+8];",
     "mnemonic": "mov",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4054A2",
-    "line": "mov     edx, TES",
+    "line": "mov     edx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4054C2",
-    "line": "call    sub_4CAFF0",
+    "line": "call    sub_4CAFF0; Retrieve the cell canopy-shadow mask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4054EB",
-    "line": "mov     eax, menuRenderedTexture",
+    "line": "mov     eax, dword ptr texture",
     "mnemonic": "mov",
     "size": 5
   },
@@ -385,25 +385,25 @@
   },
   {
     "ea": "0x4054F4",
-    "line": "mov     ecx, g_textureManager; this",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4054FA",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4054FB",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x405500",
-    "line": "mov     esi, menuRenderedTexture",
+    "line": "mov     esi, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x405526",
-    "line": "mov     menuRenderedTexture, ebx",
+    "line": "mov     dword ptr texture, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40552C",
-    "line": "cmp     byte_B42D54, bl",
+    "line": "cmp     byte ptr unk_B42D54, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x405536",
-    "line": "fstp    flt_B42D50",
+    "line": "fstp    dword ptr unk_B42D50",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x40553C",
-    "line": "mov     byte_B42D54, bl",
+    "line": "mov     byte ptr unk_B42D54, bl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x405545",
-    "line": "mov     byte_B33397, bl",
+    "line": "mov     byte ptr unk_B33397, bl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x405550",
-    "line": "mov     eax, ObjectPtr",
+    "line": "mov     eax, ds:0B33428h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x405569",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x40557E",
-    "line": "call    sub_410C40",
+    "line": "call    sub_410C40; MenuPlease: patched call to sub_410C40 so device reset does not restart Map loop.bik.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x405586",
-    "line": "cmp     UseHDR, bl",
+    "line": "cmp     OB_RendererGlobalState_010201A0.bHighDynamicRangeMode, bl",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x405593",
-    "line": "mov     edx, TES",
+    "line": "mov     edx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x4055AF",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },

@@ -11,7 +11,7 @@
 0x6EC5E5: test    eax, eax
 0x6EC5E7: jz      short loc_6EC5FE
 0x6EC5E9: lea     esp, [esp+0]
-0x6EC5F0: cmp     eax, offset dword_B3E7E8
+0x6EC5F0: cmp     eax, offset stru_B3E7E8
 0x6EC5F5: jz      short loc_6EC62A
 0x6EC5F7: mov     eax, [eax+4]
 0x6EC5FA: test    eax, eax

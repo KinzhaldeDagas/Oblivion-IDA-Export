@@ -1,9 +1,7 @@
-bhkGenericConstraint *__thiscall bhkGenericConstraint::`scalar deleting destructor'(
-        bhkGenericConstraint *this,
-        char a2)
+bhkSerializable *__thiscall bhkGenericConstraint::`scalar deleting destructor'(bhkSerializable *this, char a2)
 {
-  bhkGenericConstraint::~bhkGenericConstraint(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  bhkGenericConstraint::~bhkGenericConstraint(this); /*0x8c1d53*/
+  if ( (a2 & 1) != 0 ) /*0x8c1d5d*/
+    FormHeapFree((unsigned int)this); /*0x8c1d60*/
+  return this; /*0x8c1d6a*/
 }

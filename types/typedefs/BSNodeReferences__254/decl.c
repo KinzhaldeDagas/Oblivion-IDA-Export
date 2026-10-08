@@ -1,1 +1,1 @@
-BSNodeReferences
+struct BSNodeReferences;

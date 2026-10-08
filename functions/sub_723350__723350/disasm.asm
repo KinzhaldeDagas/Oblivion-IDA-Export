@@ -1,6 +1,6 @@
 0x723350: push    ebx
 0x723351: push    ebp
-0x723352: mov     ebp, [esp+8+arg_0]
+0x723352: mov     ebp, [esp+8+stream]
 0x723356: push    esi
 0x723357: push    edi
 0x723358: push    ebp

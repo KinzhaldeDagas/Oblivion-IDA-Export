@@ -11,9 +11,9 @@ int __userpurge EffectItemList_GetStrongestItem_::LoopContinue@<eax>(
 {
   int v9; // eax
 
-  v9 = *(_DWORD *)(a1 + 8);
-  if ( v9 && v9 != 4 )
-    return EffectItemList_GetStrongestItem_::LoopBody(a2, v9 - 4, a3, a4, a5, a6, a7, a8, a9);
+  v9 = *(_DWORD *)(a1 + 8); /*0x415344*/
+  if ( v9 && v9 != 4 ) /*0x415350*/
+    return EffectItemList_GetStrongestItem_::LoopBody(a2, v9 - 4, a3, a4, a5, a6, a7, a8, a9); /*0x415350*/
   else
-    return EffectItemList_GetStrongestItem_::LoopFinish(a3, a4);
+    return EffectItemList_GetStrongestItem_::LoopFinish(a3, a4); /*0x415351*/
 }

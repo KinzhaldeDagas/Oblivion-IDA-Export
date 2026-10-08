@@ -1,4 +1,4 @@
-0x521B60: call    sub_578D70
+0x521B60: call    InterfaceManager_ConsumeMessageButton
 0x521B65: mov     ecx, ds:0B362D0h
 0x521B6B: sub     al, 1
 0x521B6D: neg     al

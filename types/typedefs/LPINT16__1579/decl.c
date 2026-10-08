@@ -1,1 +1,1 @@
-LPINT16
+typedef INT16 *LPINT16;

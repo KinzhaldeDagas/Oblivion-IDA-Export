@@ -79,10 +79,10 @@
 0x6317D3: push    eax
 0x6317D4: mov     ecx, ebx
 0x6317D6: call    sub_566B30
-0x6317DB: mov     ecx, [esi+2Ch]
-0x6317DE: push    eax
-0x6317DF: call    sub_4D7E30
-0x6317E4: call    Double_To_SInt32
+0x6317DB: mov     ecx, [esi+2Ch]; this
+0x6317DE: push    eax; pointXYZ
+0x6317DF: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+0x6317E4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6317E9: mov     [esp+28h+arg_0], eax
 0x6317ED: fild    [esp+28h+arg_0]
 0x6317F1: mov     ecx, ebx
@@ -105,7 +105,7 @@
 0x63182A: mov     ecx, esi
 0x63182C: call    eax
 0x63182E: mov     ecx, [esi+2Ch]; this
-0x631831: call    GetTeleportExtraData
+0x631831: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x631836: test    eax, eax
 0x631838: jz      short loc_631878
 0x63183A: mov     edx, [edi]
@@ -115,12 +115,12 @@
 0x631846: push    eax
 0x631847: lea     ecx, [esp+2Ch+var_18]
 0x63184B: push    ecx
-0x63184C: mov     ecx, [esi+2Ch]
-0x63184F: call    sub_4D76F0
+0x63184C: mov     ecx, [esi+2Ch]; this
+0x63184F: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x631854: mov     ecx, eax
 0x631856: call    sub_4121A0
 0x63185B: lea     ecx, [esp+28h+var_18]
-0x63185F: call    sub_404C90
+0x63185F: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x631864: fild    dword ptr ds:0B36B28h
 0x63186A: fcompp
 0x63186C: fnstsw  ax
@@ -148,15 +148,15 @@
 0x6318B0: mov     ecx, esi
 0x6318B2: call    eax
 0x6318B4: mov     ecx, [esi+2Ch]; this
-0x6318B7: call    GetTeleportExtraData
+0x6318B7: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x6318BC: test    eax, eax
-0x6318BE: mov     ecx, [esi+2Ch]
+0x6318BE: mov     ecx, [esi+2Ch]; this
 0x6318C1: jnz     short loc_6318CF
 0x6318C3: mov     edx, [ecx]
 0x6318C5: mov     eax, [edx+174h]
 0x6318CB: call    eax
 0x6318CD: jmp     short loc_6318D4
-0x6318CF: call    sub_4D76F0
+0x6318CF: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x6318D4: mov     ecx, [eax]
 0x6318D6: mov     ebp, [esi]
 0x6318D8: mov     [esp+20h+var_10], ecx
@@ -176,7 +176,7 @@
 0x631905: call    TESObjectREFR_GetWorldSpace
 0x63190A: mov     ecx, [esi+2Ch]; this
 0x63190D: push    eax
-0x63190E: call    TESObjectREFR_GetParentCell
+0x63190E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x631913: mov     edx, [ebp+418h]
 0x631919: push    eax
 0x63191A: lea     ecx, [esp+30h+var_10]
@@ -185,26 +185,26 @@
 0x631920: mov     ecx, esi
 0x631922: call    edx
 0x631924: mov     ecx, edi; this
-0x631926: call    Actor__GetProcessLevel
+0x631926: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x63192B: test    eax, eax
 0x63192D: jnz     loc_631B35
 0x631933: mov     ecx, [esi+2Ch]; this
-0x631936: call    GetTeleportExtraData
+0x631936: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x63193B: test    eax, eax
 0x63193D: jz      short loc_63197E
 0x63193F: mov     eax, [edi]
 0x631941: mov     edx, [eax+174h]
 0x631947: mov     ecx, edi
 0x631949: call    edx
-0x63194B: mov     ecx, [esi+2Ch]
+0x63194B: mov     ecx, [esi+2Ch]; this
 0x63194E: push    eax
 0x63194F: lea     eax, [esp+2Ch+var_C]
 0x631953: push    eax
-0x631954: call    sub_4D76F0
+0x631954: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x631959: mov     ecx, eax
 0x63195B: call    sub_4121A0
 0x631960: lea     ecx, [esp+28h+var_C]
-0x631964: call    sub_404C90
+0x631964: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x631969: fild    dword ptr ds:0B36B28h
 0x63196F: fcompp
 0x631971: fnstsw  ax
@@ -252,7 +252,7 @@
 0x6319EE: cmp     eax, ebp
 0x6319F0: jz      short loc_6319FB
 0x6319F2: push    eax
-0x6319F3: call    FormHeapFree
+0x6319F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6319F8: add     esp, 4
 0x6319FB: cmp     dword ptr [esi+38h], 1
 0x6319FF: mov     [esi+44h], ebp
@@ -353,7 +353,7 @@
 0x631AF3: cmp     eax, ebx
 0x631AF5: jz      short loc_631B00
 0x631AF7: push    eax
-0x631AF8: call    FormHeapFree
+0x631AF8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x631AFD: add     esp, 4
 0x631B00: mov     [esi+44h], ebx
 0x631B03: mov     [esi+2Ch], ebx

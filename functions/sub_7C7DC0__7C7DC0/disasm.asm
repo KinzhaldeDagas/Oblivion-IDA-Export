@@ -1,5 +1,5 @@
-0x7C7DC0: sub     esp, 8
-0x7C7DC3: cmp     [esp+8+arg_0], 0
+0x7C7DC0: sub     esp, 8; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
+0x7C7DC3: cmp     [esp+8+backingLight], 0
 0x7C7DC8: mov     [esp+8+var_4], ecx
 0x7C7DCC: jz      short loc_7C7E48
 0x7C7DCE: push    ebp
@@ -18,8 +18,8 @@
 0x7C7DED: lea     eax, [esp+18h+var_8]
 0x7C7DF1: push    eax
 0x7C7DF2: mov     ecx, esi
-0x7C7DF4: call    sub_405AD0
-0x7C7DF9: mov     ecx, [esp+18h+arg_0]
+0x7C7DF4: call    ShadowSceneLight_GetLightRef
+0x7C7DF9: mov     ecx, [esp+18h+backingLight]
 0x7C7DFD: cmp     [eax], ecx
 0x7C7DFF: mov     eax, [esp+18h+var_8]
 0x7C7E03: setz    bl
@@ -50,7 +50,7 @@
 0x7C7E37: retn    4
 0x7C7E3A: mov     ecx, [esp+18h+var_4]
 0x7C7E3E: push    esi
-0x7C7E3F: call    sub_7C77C0
+0x7C7E3F: call    ShadowSceneNode_RemoveFullLight; Remove the matching full-list ShadowSceneLight after backing-source identity comparison.
 0x7C7E44: pop     edi
 0x7C7E45: pop     esi
 0x7C7E46: pop     ebx

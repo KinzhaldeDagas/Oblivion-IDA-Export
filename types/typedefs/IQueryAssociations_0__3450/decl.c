@@ -1,1 +1,1 @@
-IQueryAssociations_0
+typedef IQueryAssociations IQueryAssociations_0;

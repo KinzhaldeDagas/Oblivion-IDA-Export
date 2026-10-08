@@ -1,4 +1,4 @@
-0x7D94B0: push    0FFFFFFFFh
+0x7D94B0: push    0FFFFFFFFh; Verified (Oblivion): BSShaderPPLightingProperty constructor initializes the reference-counted TextureEffectData slot at this+0xE0 (DWORD index 0x38) to null. TextureEffectProperty_SetData replaces that same offset; BSShaderPPLightingProperty destructor releases and clears it before chaining to BSShaderLightingProperty. Fallout's typed property layout calls the member spTexEffectData at the same +0xE0 offset.
 0x7D94B2: push    offset ??0BSShaderPPLightingProperty@@QAE@XZ_SEH
 0x7D94B7: mov     eax, large fs:0
 0x7D94BD: push    eax
@@ -14,7 +14,7 @@
 0x7D94D1: mov     large fs:0, eax
 0x7D94D7: mov     esi, ecx
 0x7D94D9: mov     [esp+28h+var_14], esi
-0x7D94DD: call    ??0BSShaderLightingProperty@@QAE@XZ; BSShaderLightingProperty::BSShaderLightingProperty(void)
+0x7D94DD: call    ??0BSShaderLightingProperty@@QAE@XZ; [Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.
 0x7D94E2: fldz
 0x7D94E4: mov     dword ptr [esi], offset ??_7BSShaderPPLightingProperty@@6B@; const BSShaderPPLightingProperty::`vftable'
 0x7D94EA: fst     dword ptr [esi+0A8h]
@@ -34,7 +34,7 @@
 0x7D9530: cmp     eax, ebx
 0x7D9532: mov     byte ptr [esp+28h+var_4], 3
 0x7D9537: jz      short loc_7D9558
-0x7D9539: push    offset sub_7016A0; a5
+0x7D9539: push    offset NiPointerSlot_Release; a5
 0x7D953E: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7D9543: push    2; size
 0x7D9545: lea     ebp, [eax+4]
@@ -87,7 +87,7 @@
 0x7D95C8: cmp     eax, ebx
 0x7D95CA: mov     byte ptr [esp+28h+var_4], 4
 0x7D95CF: jz      short loc_7D95F0
-0x7D95D1: push    offset sub_7016A0; a5
+0x7D95D1: push    offset NiPointerSlot_Release; a5
 0x7D95D6: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7D95DB: push    2; size
 0x7D95DD: lea     edi, [eax+4]
@@ -140,7 +140,7 @@
 0x7D965F: cmp     eax, ebx
 0x7D9661: mov     byte ptr [esp+28h+var_4], 5
 0x7D9666: jz      short loc_7D9687
-0x7D9668: push    offset sub_7016A0; a5
+0x7D9668: push    offset NiPointerSlot_Release; a5
 0x7D966D: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7D9672: push    2; size
 0x7D9674: lea     edi, [eax+4]
@@ -254,3 +254,33 @@
 0x7D97CA: pop     ebx
 0x7D97CB: add     esp, 14h
 0x7D97CE: retn
+0x9CEEF0: mov     ecx, [ebp-14h]; this
+0x9CEEF3: jmp     ??1BSShaderLightingProperty@@UAE@XZ; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
+0x9CEEF8: mov     ecx, [ebp-14h]
+0x9CEEFB: add     ecx, 0D4h ; 'Ô'; slot
+0x9CEF01: jmp     NiPointerSlot_Release
+0x9CEF06: mov     ecx, [ebp-14h]
+0x9CEF09: add     ecx, 0E0h ; 'à'; slot
+0x9CEF0F: jmp     NiPointerSlot_Release
+0x9CEF14: mov     eax, [ebp-10h]
+0x9CEF17: push    eax
+0x9CEF18: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CEF1D: pop     ecx
+0x9CEF1E: retn
+0x9CEF1F: mov     eax, [ebp-10h]
+0x9CEF22: push    eax
+0x9CEF23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CEF28: pop     ecx
+0x9CEF29: retn
+0x9CEF2A: mov     eax, [ebp-10h]
+0x9CEF2D: push    eax
+0x9CEF2E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CEF33: pop     ecx
+0x9CEF34: retn
+0x9CEF35: mov     edx, [esp+arg_4]
+0x9CEF39: lea     eax, [edx-18h]
+0x9CEF3C: mov     ecx, [edx-1Ch]
+0x9CEF3F: xor     ecx, eax
+0x9CEF41: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEF46: mov     eax, offset stru_AF7CBC
+0x9CEF4B: jmp     ___CxxFrameHandler3

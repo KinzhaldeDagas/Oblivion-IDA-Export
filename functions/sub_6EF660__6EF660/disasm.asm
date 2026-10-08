@@ -16,12 +16,12 @@
 0x6EF688: mov     [ebp+var_10], esp
 0x6EF68B: mov     esi, ecx
 0x6EF68D: mov     [ebp+var_14], esi
-0x6EF690: mov     eax, [ebp+arg_C]
+0x6EF690: mov     eax, [ebp+begin]
 0x6EF693: mov     ecx, [eax+4]
 0x6EF696: fld     dword ptr [eax]
 0x6EF698: mov     edx, [eax+8]
 0x6EF69B: fstp    [ebp+var_58]
-0x6EF69E: push    offset sub_794EB0; void (__thiscall *)(void *)
+0x6EF69E: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
 0x6EF6A3: push    offset sub_557340; void (__thiscall *)(void *, void *)
 0x6EF6A8: push    3; int
 0x6EF6AA: mov     [ebp+var_54], ecx
@@ -44,7 +44,7 @@
 0x6EF6D5: mov     ebx, [esi+0Ch]
 0x6EF6D8: sub     ebx, eax
 0x6EF6DA: sar     ebx, 6
-0x6EF6DD: mov     edi, [ebp+arg_8]
+0x6EF6DD: mov     edi, [ebp+end]
 0x6EF6E0: cmp     edi, ecx
 0x6EF6E2: jz      loc_6EF8F2
 0x6EF6E8: cmp     eax, ecx
@@ -56,7 +56,7 @@
 0x6EF6F9: sub     edx, ecx
 0x6EF6FB: cmp     edx, edi
 0x6EF6FD: jnb     short loc_6EF704
-0x6EF6FF: call    sub_790B90
+0x6EF6FF: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6EF704: test    eax, eax
 0x6EF706: jnz     short loc_6EF70C
 0x6EF708: xor     ecx, ecx
@@ -101,12 +101,12 @@
 0x6EF766: mov     byte ptr [ebp+var_18], 0
 0x6EF76A: mov     edx, [ebp+var_18]
 0x6EF76D: push    edx
-0x6EF76E: mov     [ebp+arg_8], eax
-0x6EF771: mov     edx, [ebp+arg_8]
+0x6EF76E: mov     [ebp+end], eax
+0x6EF771: mov     edx, [ebp+end]
 0x6EF774: push    edx
 0x6EF775: push    esi
 0x6EF776: push    eax
-0x6EF777: mov     [ebp+arg_C], eax
+0x6EF777: mov     [ebp+begin], eax
 0x6EF77A: mov     eax, [ebp+arg_4]
 0x6EF77D: push    eax
 0x6EF77E: push    ecx
@@ -118,14 +118,14 @@
 0x6EF78F: push    edi
 0x6EF790: push    eax
 0x6EF791: mov     ecx, esi
-0x6EF793: mov     [ebp+arg_8], eax
+0x6EF793: mov     [ebp+end], eax
 0x6EF796: call    sub_6EF620
 0x6EF79B: mov     ecx, [esi+8]
 0x6EF79E: mov     byte ptr [ebp+var_18], 0
 0x6EF7A2: mov     edx, [ebp+var_18]
 0x6EF7A5: push    edx
-0x6EF7A6: mov     [ebp+arg_8], eax
-0x6EF7A9: mov     edx, [ebp+arg_8]
+0x6EF7A6: mov     [ebp+end], eax
+0x6EF7A9: mov     edx, [ebp+end]
 0x6EF7AC: push    edx
 0x6EF7AD: push    esi
 0x6EF7AE: push    eax
@@ -147,15 +147,15 @@
 0x6EF7D8: test    ecx, ecx
 0x6EF7DA: jz      short loc_6EF7F4
 0x6EF7DC: mov     edx, [esi+8]
-0x6EF7DF: push    edx
-0x6EF7E0: push    ecx
+0x6EF7DF: push    edx; end
+0x6EF7E0: push    ecx; begin
 0x6EF7E1: mov     ecx, esi
-0x6EF7E3: call    sub_557740
+0x6EF7E3: call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.
 0x6EF7E8: mov     eax, [esi+4]
 0x6EF7EB: push    eax
-0x6EF7EC: call    FormHeapFree
+0x6EF7EC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EF7F1: add     esp, 4
-0x6EF7F4: mov     eax, [ebp+arg_C]
+0x6EF7F4: mov     eax, [ebp+begin]
 0x6EF7F7: shl     ebx, 6
 0x6EF7FA: add     ebx, eax
 0x6EF7FC: shl     edi, 6
@@ -164,14 +164,14 @@
 0x6EF804: mov     [esi+8], edi
 0x6EF807: mov     [esi+4], eax
 0x6EF80A: jmp     loc_6EF8F2
-0x6EF80F: mov     eax, [ebp+arg_8]
-0x6EF812: mov     esi, [ebp+arg_C]
+0x6EF80F: mov     eax, [ebp+end]
+0x6EF812: mov     esi, [ebp+begin]
 0x6EF815: mov     ecx, [ebp+var_14]
-0x6EF818: push    eax
-0x6EF819: push    esi
-0x6EF81A: call    sub_557740
+0x6EF818: push    eax; end
+0x6EF819: push    esi; begin
+0x6EF81A: call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.
 0x6EF81F: push    esi
-0x6EF820: call    FormHeapFree
+0x6EF820: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6EF825: add     esp, 4
 0x6EF828: push    0
 0x6EF82A: push    0
@@ -186,7 +186,7 @@
 0x6EF843: jnb     short loc_6EF8BB
 0x6EF845: mov     ecx, edi
 0x6EF847: shl     ecx, 6
-0x6EF84A: mov     [ebp+arg_C], ecx
+0x6EF84A: mov     [ebp+begin], ecx
 0x6EF84D: add     ecx, ebx
 0x6EF84F: push    ecx
 0x6EF850: push    eax
@@ -205,7 +205,7 @@
 0x6EF86B: mov     ecx, esi
 0x6EF86D: mov     byte ptr [ebp+var_4], 3
 0x6EF871: call    sub_6EF620
-0x6EF876: mov     eax, [ebp+arg_C]
+0x6EF876: mov     eax, [ebp+begin]
 0x6EF879: add     [esi+8], eax
 0x6EF87C: mov     esi, [esi+8]
 0x6EF87F: lea     edx, [ebp+var_58]
@@ -218,15 +218,15 @@
 0x6EF893: add     esp, 0Ch
 0x6EF896: jmp     short loc_6EF8F2
 0x6EF898: mov     ecx, [ebp+var_14]
-0x6EF89B: mov     eax, [ebp+arg_8]
+0x6EF89B: mov     eax, [ebp+end]
 0x6EF89E: mov     edx, [ecx+8]
 0x6EF8A1: shl     eax, 6
 0x6EF8A4: add     edx, eax
-0x6EF8A6: push    edx
+0x6EF8A6: push    edx; end
 0x6EF8A7: mov     edx, [ebp+arg_4]
 0x6EF8AA: add     eax, edx
-0x6EF8AC: push    eax
-0x6EF8AD: call    sub_557740
+0x6EF8AC: push    eax; begin
+0x6EF8AD: call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.
 0x6EF8B2: push    0
 0x6EF8B4: push    0
 0x6EF8B6: call    ThrowException??
@@ -236,7 +236,7 @@
 0x6EF8C1: mov     edi, eax
 0x6EF8C3: sub     edi, ecx
 0x6EF8C5: push    eax
-0x6EF8C6: mov     [ebp+arg_C], ecx
+0x6EF8C6: mov     [ebp+begin], ecx
 0x6EF8C9: push    edi
 0x6EF8CA: mov     ecx, esi
 0x6EF8CC: call    sub_559980
@@ -246,7 +246,7 @@
 0x6EF8D8: push    edi
 0x6EF8D9: push    ebx
 0x6EF8DA: call    sub_558680
-0x6EF8DF: mov     edx, [ebp+arg_C]
+0x6EF8DF: mov     edx, [ebp+begin]
 0x6EF8E2: lea     ecx, [ebp+var_58]
 0x6EF8E5: push    ecx
 0x6EF8E6: add     edx, ebx
@@ -254,7 +254,7 @@
 0x6EF8E9: push    ebx
 0x6EF8EA: call    sub_6EF560
 0x6EF8EF: add     esp, 18h
-0x6EF8F2: push    offset sub_794EB0; void (__thiscall *)(void *)
+0x6EF8F2: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
 0x6EF8F7: push    3; int
 0x6EF8F9: push    10h; unsigned int
 0x6EF8FB: lea     eax, [ebp+var_48]
@@ -270,3 +270,19 @@
 0x6EF919: mov     esp, ebp
 0x6EF91B: pop     ebp
 0x6EF91C: retn    10h
+0x556E10: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
+0x556E15: push    3; int
+0x556E17: push    10h; unsigned int
+0x556E19: add     ecx, 10h
+0x556E1C: push    ecx; void *
+0x556E1D: call    $LN21
+0x556E22: retn
+0x9C85C0: lea     ecx, [ebp+var_58]
+0x9C85C3: jmp     loc_556E10
+0x9C85C8: mov     edx, [esp-4+arg_4]
+0x9C85CC: lea     eax, [edx+0Ch]
+0x9C85CF: mov     ecx, [edx-5Ch]
+0x9C85D2: xor     ecx, eax
+0x9C85D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C85D9: mov     eax, offset stru_AF0968
+0x9C85DE: jmp     ___CxxFrameHandler3

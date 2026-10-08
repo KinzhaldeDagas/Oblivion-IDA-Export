@@ -24,3 +24,12 @@
 0x8C200D: pop     esi
 0x8C200E: add     esp, 10h
 0x8C2011: retn
+0x9D74A0: mov     ecx, [ebp-10h]; this
+0x9D74A3: jmp     ??1bhkGenericConstraint@@UAE@XZ; bhkGenericConstraint::~bhkGenericConstraint(void)
+0x9D74A8: mov     edx, [esp+arg_4]
+0x9D74AC: lea     eax, [edx-8]
+0x9D74AF: mov     ecx, [edx-0Ch]
+0x9D74B2: xor     ecx, eax
+0x9D74B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D74B9: mov     eax, offset stru_AFF0C4
+0x9D74BE: jmp     ___CxxFrameHandler3

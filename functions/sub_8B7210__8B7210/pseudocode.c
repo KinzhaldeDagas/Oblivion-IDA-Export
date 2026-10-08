@@ -5,17 +5,17 @@ _OWORD *__thiscall sub_8B7210(int *this, float *a2)
   int v5; // edi
   _BYTE v6[76]; // [esp+10h] [ebp-50h] BYREF
 
-  result = (_OWORD *)sub_5398E0((int)v6, a2);
-  v4 = result;
-  if ( this )
+  result = (_OWORD *)sub_5398E0((int)v6, a2); /*0x8b7232*/
+  v4 = result; /*0x8b723c*/
+  if ( this ) /*0x8b723e*/
   {
-    v5 = *(this + 2);
-    if ( v5 )
+    v5 = *(this + 2); /*0x8b7240*/
+    if ( v5 ) /*0x8b7245*/
     {
-      sub_89F570(this);
-      sub_8ABA40(v5, v4);
-      return (_OWORD *)sub_89F570(this);
+      bhkRefObject_UpdateHavokObject(this); /*0x8b7249*/
+      sub_8ABA40(v5, v4); /*0x8b7251*/
+      return (_OWORD *)bhkRefObject_UpdateHavokObject(this); /*0x8b7258*/
     }
   }
-  return result;
+  return result; /*0x8b725d*/
 }

@@ -1,36 +1,42 @@
-int *__thiscall sub_674F70(int **this, int a2)
+// Verified: scans six lists, unlinks matching target08 records then calls destructor/free. In-loop traversal/restart behavior preserved, not normalized.
+void __thiscall ActorProcessManager_RemoveCrimesForTarget(ActorProcessManager *self, TESObjectREFR *target)
 {
-  int **v2; // edi
+  CrimeListNode **crimeLists; // edi
   int v3; // ebx
   int *v4; // ecx
-  int *result; // eax
-  unsigned int *v6; // esi
+  int *v5; // eax
+  Crime *v6; // esi
 
-  v2 = this + 0xA;
-  v3 = 6;
-  do
+  crimeLists = self->crimeLists; /*0x674f78*/
+  v3 = 6; /*0x674f7b*/
+  do /*0x674fc5*/
   {
-    v4 = *v2;
-    for ( result = *v2; result; result = (int *)result[1] )
+    v4 = (int *)*crimeLists; /*0x674f80*/
+    v5 = (int *)*crimeLists; /*0x674f82*/
+    if ( *crimeLists ) /*0x674f82*/
     {
-      if ( !result[1] && !*result )
-        break;
-      v6 = (unsigned int *)*result;
-      if ( *result )
+      do /*0x674fbd*/
       {
-        if ( v6[2] == a2 )
+        if ( !v5[1] && !*v5 ) /*0x674f8e*/
+          break; /*0x674f91*/
+        v6 = (Crime *)*v5; /*0x674f93*/
+        if ( *v5 ) /*0x674f93*/
         {
-          BSSimpleList_Remove(v4, *result);
-          sub_605E80(v6);
-          FormHeapFree((unsigned int)v6);
-          v4 = *v2;
-          result = *v2;
+          if ( v6->target == target ) /*0x674f9c*/
+          {
+            BSSimpleList_Remove(v4, *v5); /*0x674f9f*/
+            Crime_Destructor(v6); /*0x674fa6*/
+            FormHeapFree((unsigned int)v6); /*0x674fac*/
+            v4 = (int *)*crimeLists; /*0x674fb1*/
+            v5 = (int *)*crimeLists; /*0x674fb6*/
+          }
         }
+        v5 = (int *)v5[1]; /*0x674fb8*/
       }
+      while ( v5 ); /*0x674fbd*/
     }
-    ++v2;
-    --v3;
+    ++crimeLists; /*0x674fbf*/
+    --v3; /*0x674fc2*/
   }
-  while ( v3 );
-  return result;
+  while ( v3 ); /*0x674fc5*/
 }

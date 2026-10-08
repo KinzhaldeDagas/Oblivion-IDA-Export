@@ -1,55 +1,55 @@
-LONG __thiscall sub_4B34E0(_DWORD *this, unsigned int a2, LONG *a3)
+unsigned int __thiscall NiTObjectArray_SetAt(MEF_RefPointerArray16 *self, unsigned int index, void **element)
 {
-  LONG result; // eax
+  unsigned int result; // eax
   int v5; // ecx
-  int v6; // edx
-  int v7; // ecx
-  int v8; // esi
-  _DWORD *v9; // edi
+  void **data; // edx
+  void **v7; // ecx
+  volatile LONG *v8; // esi
+  void **v9; // edi
   bool v10; // zf
 
-  if ( (dword_B35AD8 & 1) == 0 )
+  if ( (dword_B35AD8[0] & 1) == 0 ) /*0x4b34f1*/
   {
-    dword_B35AD8 |= 1u;
-    dword_B35AD4 = 0;
-    atexit(sub_A1B600);
+    dword_B35AD8[0] |= 1u; /*0x4b34f3*/
+    unk_B35AD4 = 0; /*0x4b34fe*/
+    atexit(sub_A1B600); /*0x4b3508*/
   }
-  result = a2;
-  if ( a2 < *((unsigned __int16 *)this + 5) )
+  result = index; /*0x4b3514*/
+  if ( index < self->usedEnd ) /*0x4b351e*/
   {
-    v5 = dword_B35AD4;
-    v6 = *(this + 1);
-    if ( *a3 == dword_B35AD4 )
+    v5 = unk_B35AD4; /*0x4b3538*/
+    data = self->data; /*0x4b3541*/
+    if ( *element == (void *)unk_B35AD4 ) /*0x4b3544*/
     {
-      if ( *(_DWORD *)(v6 + 4 * a2) != v5 )
-        --*((_WORD *)this + 6);
+      if ( data[index] != (void *)v5 ) /*0x4b3554*/
+        --self->occupiedCount; /*0x4b3556*/
     }
-    else if ( *(_DWORD *)(v6 + 4 * a2) == v5 )
+    else if ( data[index] == (void *)v5 ) /*0x4b3549*/
     {
-      ++*((_WORD *)this + 6);
+      ++self->occupiedCount; /*0x4b354b*/
     }
   }
   else
   {
-    *((_WORD *)this + 5) = a2 + 1;
-    if ( *a3 != dword_B35AD4 )
-      ++*((_WORD *)this + 6);
+    self->usedEnd = index + 1; /*0x4b3523*/
+    if ( *element != (void *)unk_B35AD4 ) /*0x4b3530*/
+      ++self->occupiedCount; /*0x4b3532*/
   }
-  v7 = *(this + 1);
-  v8 = *(_DWORD *)(v7 + 4 * a2);
-  v9 = (_DWORD *)(v7 + 4 * a2);
-  if ( v8 != *a3 )
+  v7 = self->data; /*0x4b355c*/
+  v8 = (volatile LONG *)v7[index]; /*0x4b355f*/
+  v9 = &v7[index]; /*0x4b3565*/
+  if ( v8 != *element ) /*0x4b3568*/
   {
-    if ( v8 )
+    if ( v8 ) /*0x4b356c*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) )
-        (**(void (__thiscall ***)(int, int))v8)(v8, 1);
+      if ( !InterlockedDecrement(v8 + 1) ) /*0x4b3572*/
+        (**(void (__thiscall ***)(void *, int))v8)((void *)v8, 1); /*0x4b3587*/
     }
-    result = *a3;
-    v10 = *a3 == 0;
-    *v9 = *a3;
-    if ( !v10 )
-      return InterlockedIncrement((volatile LONG *)(result + 4));
+    result = (unsigned int)*element; /*0x4b3589*/
+    v10 = *element == 0; /*0x4b358c*/
+    *v9 = *element; /*0x4b358e*/
+    if ( !v10 ) /*0x4b3590*/
+      return InterlockedIncrement((volatile LONG *)(result + 4)); /*0x4b3596*/
   }
-  return result;
+  return result; /*0x4b359c*/
 }

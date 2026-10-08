@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DISPLAY_DEVICEA",
+  "definition": "struct DISPLAY_DEVICEA\n{\nDWORD cb;\nCHAR DeviceName[32];\nCHAR DeviceString[128];\nDWORD StateFlags;\nCHAR DeviceID[128];\nCHAR DeviceKey[128];\n}\n",
   "id": 18374686479672043831,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cb",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeviceName",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 32
+      "size": 32,
+      "type": "CHAR[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeviceString",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 128
+      "size": 128,
+      "type": "CHAR[128]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StateFlags",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeviceID",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 128
+      "offset_hex": "0xA8",
+      "size": 128,
+      "type": "CHAR[128]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeviceKey",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 128
+      "size": 128,
+      "type": "CHAR[128]"
     }
   ],
   "name": "DISPLAY_DEVICEA",
+  "ordinal": 7609,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 424
 }

@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESSaveLoad",
+  "definition": "struct TESSaveLoad\n{\nUInt32 unk000[6];\nUInt32 flags;\nUInt32 unk01C[3];\nCreatedObjectNode createdObjectList;\nUInt32 unk030[6];\nUInt8 numMods;\nUInt8 pad049[3];\nUInt8 *modRefIDTable;\n}\n",
   "id": 18374686479672016999,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "unk000",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "UInt32[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "flags",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "unk01C",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 12
+      "offset_hex": "0x1C",
+      "size": 12,
+      "type": "UInt32[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "createdObjectList",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 8
+      "size": 8,
+      "type": "CreatedObjectNode"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "unk030",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 24
+      "size": 24,
+      "type": "UInt32[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "numMods",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "pad049",
       "offset": 73,
       "offset_hex": "0x49",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "modRefIDTable",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "UInt8 *"
     }
   ],
   "name": "TESSaveLoad",
+  "ordinal": 9696,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 80
 }

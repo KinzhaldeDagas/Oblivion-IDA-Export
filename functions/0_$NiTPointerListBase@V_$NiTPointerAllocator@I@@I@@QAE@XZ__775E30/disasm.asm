@@ -9,7 +9,6 @@
 0x775E44: push    ebx
 0x775E45: push    edi
 0x775E46: jmp     short loc_775E50
-0x775E48: align 10h
 0x775E50: mov     ecx, [ebp+454h]
 0x775E56: mov     ebx, [ecx+eax*4]
 0x775E59: test    ebx, ebx
@@ -36,7 +35,7 @@
 0x775E88: mov     [esi+4], eax
 0x775E8B: mov     [esi+8], eax
 0x775E8E: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@I@@6B@; const NiTListBase<NiTPointerAllocator<uint>,uint>::`vftable'
-0x775E94: call    FormHeapFree
+0x775E94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775E99: mov     eax, [esp+18h+var_4]
 0x775E9D: add     esp, 4
 0x775EA0: movzx   ecx, word ptr [ebp+45Ah]
@@ -52,7 +51,7 @@
 0x775EBE: mov     ecx, esi
 0x775EC0: call    sub_775DA0
 0x775EC5: push    esi
-0x775EC6: call    FormHeapFree
+0x775EC6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775ECB: add     esp, 4
 0x775ECE: mov     esi, [ebp+464h]
 0x775ED4: test    esi, esi
@@ -60,12 +59,12 @@
 0x775ED8: mov     ecx, esi
 0x775EDA: call    sub_775DA0
 0x775EDF: push    esi
-0x775EE0: call    FormHeapFree
+0x775EE0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775EE5: add     esp, 4
 0x775EE8: mov     edx, [ebp+454h]
 0x775EEE: push    edx
 0x775EEF: mov     dword ptr [ebp+450h], offset ??_7?$NiTArray@PAVModeDesc@NiDX9AdapterDesc@@@@6B@; const NiTArray<NiDX9AdapterDesc::ModeDesc *>::`vftable'
-0x775EF9: call    FormHeapFree
+0x775EF9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775EFE: add     esp, 4
 0x775F01: pop     esi
 0x775F02: pop     ebp

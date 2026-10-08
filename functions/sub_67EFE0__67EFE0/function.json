@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x67EFE0",
+      "0x67F027"
+    ]
+  ],
+  "chunks_sha256": "33c5c19d2568692233e4cad840d29fd0eb77565c3c3ec4f95088735b6468eaa3",
+  "comment_regular": "Verified Oblivion AStarNodeList append uses intrusive nodes and appends at the start/head pointer. Fallout's inspected AStarQueue stores each AStarNode in a sorted linked list within one of 20 F-cost buckets; the two layouts/algorithms are distinct.",
+  "comment_repeatable": "Verified Oblivion AStarNodeList append uses intrusive nodes and appends at the start/head pointer. Fallout's inspected AStarQueue stores each AStarNode in a sorted linked list within one of 20 F-cost buckets; the two layouts/algorithms are distinct.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67EFE0",
+  "display_name": "AStarNodeList_Add",
   "end_ea": "0x67F027",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67EFE0",
+  "name": "AStarNodeList_Add",
   "segment": ".text",
   "sha256": "33c5c19d2568692233e4cad840d29fd0eb77565c3c3ec4f95088735b6468eaa3",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67EFE0",
-  "type": "void __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 71,
+  "type": "void __thiscall(AStarNodeList *this, void *graphNode)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 4
 }

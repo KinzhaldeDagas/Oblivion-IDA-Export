@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x680A00",
+      "0x680A9C"
+    ]
+  ],
+  "chunks_sha256": "eefde5fa52b12ad8aa5830f0e9deac03a9561e03fccd8cf590f3b64535038d5c",
+  "comment_regular": "Verified factory filter: refuses a TESObjectREFR whose TESFormMembr.flags has deleted bit 0x20, then requires ExtraTeleport and a non-null linked door before allocating the AStarWorldNode.",
+  "comment_repeatable": "Verified factory filter: refuses a TESObjectREFR whose TESFormMembr.flags has deleted bit 0x20, then requires ExtraTeleport and a non-null linked door before allocating the AStarWorldNode.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680A00",
+  "display_name": "TravelPath_CreateAStarWorldNode",
   "end_ea": "0x680A9C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680A00",
+  "name": "TravelPath_CreateAStarWorldNode",
   "segment": ".text",
   "sha256": "eefde5fa52b12ad8aa5830f0e9deac03a9561e03fccd8cf590f3b64535038d5c",
   "size": 156,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680A00",
-  "type": "int __cdecl(TESObjectREFR *a1)",
+  "total_chunk_size": 156,
+  "type": "AStarWorldNode *__cdecl(TESObjectREFR *doorReference)",
   "xrefs_from_count": 72,
   "xrefs_to_count": 1
 }

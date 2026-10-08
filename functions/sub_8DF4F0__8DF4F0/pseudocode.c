@@ -1,4 +1,4 @@
 void __thiscall sub_8DF4F0(struct _RTL_CRITICAL_SECTION *this)
 {
-  LeaveCriticalSection((LPCRITICAL_SECTION)this + 0xC);
+  LeaveCriticalSection((LPCRITICAL_SECTION)this + 0xC); /*0x8df4f7*/
 }

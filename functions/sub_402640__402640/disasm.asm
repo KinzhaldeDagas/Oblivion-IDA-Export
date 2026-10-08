@@ -1,4 +1,4 @@
-0x402640: sub     esp, 8
+0x402640: sub     esp, 8; Scans one MemoryPool for empty 4 KiB pages, unlinks each page's entries from its free list, VirtualFree's the page, and clears page metadata.
 0x402643: push    ebp
 0x402644: push    esi
 0x402645: mov     esi, ecx

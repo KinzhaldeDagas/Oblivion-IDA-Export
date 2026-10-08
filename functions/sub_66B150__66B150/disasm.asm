@@ -24,14 +24,14 @@
 0x66B1A4: xor     ebp, ebp
 0x66B1A6: push    ebp; char
 0x66B1A7: mov     ecx, esi; int
-0x66B1A9: call    sub_668D00
+0x66B1A9: call    ObservedActorRef_InitDefaultIdleVariants; Actor reference default idle variant initialization. Seeds default idle/animation choices during actor setup; observed from actor initialization path.
 0x66B1AE: mov     ecx, [esi+5ACh]
 0x66B1B4: cmp     ecx, ebp
 0x66B1B6: jz      short loc_66B1BD
-0x66B1B8: call    BSSimpleList_Clear
+0x66B1B8: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x66B1BD: mov     eax, [esi+5ACh]
 0x66B1C3: push    eax
-0x66B1C4: call    FormHeapFree
+0x66B1C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B1C9: mov     ecx, [esi+58h]
 0x66B1CC: add     esp, 4
 0x66B1CF: cmp     ecx, ebp
@@ -45,23 +45,23 @@
 0x66B1E3: mov     [esi+58h], ebp
 0x66B1E6: jz      short loc_66B1F1
 0x66B1E8: push    eax
-0x66B1E9: call    FormHeapFree
+0x66B1E9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B1EE: add     esp, 4
 0x66B1F1: mov     ecx, [esi+1F8h]
 0x66B1F7: cmp     ecx, ebp
 0x66B1F9: jz      short loc_66B20F
-0x66B1FB: call    BSSimpleList_Clear
+0x66B1FB: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x66B200: mov     eax, [esi+1F8h]
 0x66B206: push    eax
-0x66B207: call    FormHeapFree
+0x66B207: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B20C: add     esp, 4
 0x66B20F: mov     ecx, [esi+1FCh]
 0x66B215: cmp     ecx, ebp
 0x66B217: jz      short loc_66B22D
-0x66B219: call    BSSimpleList_Clear
+0x66B219: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x66B21E: mov     eax, [esi+1FCh]
 0x66B224: push    eax
-0x66B225: call    FormHeapFree
+0x66B225: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B22A: add     esp, 4
 0x66B22D: mov     edi, [esi+1F0h]
 0x66B233: cmp     edi, ebp
@@ -69,7 +69,7 @@
 0x66B237: mov     ecx, edi
 0x66B239: call    sub_532180
 0x66B23E: push    edi
-0x66B23F: call    FormHeapFree
+0x66B23F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B244: add     esp, 4
 0x66B247: mov     edi, [esi+1F4h]
 0x66B24D: cmp     edi, ebp
@@ -101,7 +101,7 @@
 0x66B29B: cmp     ecx, ebp
 0x66B29D: jz      short loc_66B2A6
 0x66B29F: push    1
-0x66B2A1: call    sub_419F10
+0x66B2A1: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x66B2A6: cmp     [esi+1E4h], ebp
 0x66B2AC: jz      short loc_66B30A
 0x66B2AE: mov     edi, edi
@@ -127,7 +127,7 @@
 0x66B2E2: mov     edx, [ecx]
 0x66B2E4: push    ecx
 0x66B2E5: mov     [eax], edx
-0x66B2E7: call    FormHeapFree
+0x66B2E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B2EC: add     esp, 4
 0x66B2EF: jmp     short loc_66B2F3
 0x66B2F1: mov     [eax], ebp
@@ -135,14 +135,14 @@
 0x66B2F9: jnz     short loc_66B2B0
 0x66B2FB: mov     eax, [esi+1E4h]
 0x66B301: push    eax
-0x66B302: call    FormHeapFree
+0x66B302: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B307: add     esp, 4
 0x66B30A: cmp     [esi+5E8h], ebp
 0x66B310: jz      short loc_66B32E
 0x66B312: mov     eax, [esi+5E8h]
 0x66B318: mov     edi, [eax+4]
 0x66B31B: push    eax
-0x66B31C: call    FormHeapFree
+0x66B31C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B321: add     esp, 4
 0x66B324: cmp     edi, ebp
 0x66B326: mov     [esi+5E8h], edi
@@ -154,7 +154,7 @@
 0x66B340: mov     eax, [esi+5F0h]
 0x66B346: mov     edi, [eax+4]
 0x66B349: push    eax
-0x66B34A: call    FormHeapFree
+0x66B34A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B34F: add     esp, 4
 0x66B352: cmp     edi, ebp
 0x66B354: mov     [esi+5F0h], edi
@@ -166,7 +166,7 @@
 0x66B370: mov     eax, [esi+5FCh]
 0x66B376: mov     edi, [eax+4]
 0x66B379: push    eax
-0x66B37A: call    FormHeapFree
+0x66B37A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B37F: add     esp, 4
 0x66B382: cmp     edi, ebp
 0x66B384: mov     [esi+5FCh], edi
@@ -198,16 +198,16 @@
 0x66B3D9: mov     ecx, edi
 0x66B3DB: call    sub_47AB80
 0x66B3E0: push    edi
-0x66B3E1: call    FormHeapFree
+0x66B3E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B3E6: add     esp, 4
 0x66B3E9: mov     edi, [esi+5CCh]
 0x66B3EF: cmp     edi, ebp
 0x66B3F1: mov     [esi+5C8h], ebp
 0x66B3F7: jz      short loc_66B409
 0x66B3F9: mov     ecx, edi; this
-0x66B3FB: call    DisposeActorAnimData
+0x66B3FB: call    DisposeActorAnimData; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.
 0x66B400: push    edi
-0x66B401: call    FormHeapFree
+0x66B401: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B406: add     esp, 4
 0x66B409: mov     [esi+5CCh], ebp
 0x66B40F: mov     edi, [esi+5D0h]
@@ -243,7 +243,7 @@
 0x66B474: mov     eax, [esi+708h]
 0x66B47A: mov     edi, [eax+4]
 0x66B47D: push    eax
-0x66B47E: call    FormHeapFree
+0x66B47E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B483: add     esp, 4
 0x66B486: cmp     edi, ebp
 0x66B488: mov     [esi+708h], edi
@@ -254,7 +254,7 @@
 0x66B49E: jz      short loc_66B4AC
 0x66B4A0: mov     ecx, ds:0B33B00h
 0x66B4A6: push    eax
-0x66B4A7: call    sub_452230
+0x66B4A7: call    sub_452230; EnginePatch v1: save-buffer free hook used to remove tracked record ranges and avoid stale bounds during savegame loading.
 0x66B4AC: mov     eax, [esi+730h]
 0x66B4B2: cmp     eax, ebp
 0x66B4B4: jz      short loc_66B4F2
@@ -284,7 +284,7 @@
 0x66B4FC: mov     ecx, edi; this
 0x66B4FE: call    sub_6B73E0
 0x66B503: push    edi
-0x66B504: call    FormHeapFree
+0x66B504: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B509: add     esp, 4
 0x66B50C: mov     [esi+764h], ebp
 0x66B512: mov     [esi+760h], ebp
@@ -300,21 +300,21 @@
 0x66B531: mov     ecx, ebp; this
 0x66B533: call    sub_6B73E0
 0x66B538: push    ebp
-0x66B539: call    FormHeapFree
+0x66B539: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B53E: add     esp, 4
 0x66B541: mov     dword ptr [edi], 0
 0x66B547: xor     ebp, ebp
 0x66B549: add     edi, 4
 0x66B54C: sub     ebx, 1
 0x66B54F: jnz     short loc_66B520
-0x66B551: mov     ecx, esi
-0x66B553: call    sub_663980
+0x66B551: mov     ecx, esi; this
+0x66B553: call    Player_ClearAttributeBonusBuckets; Frees every queued eight-byte attribute-bonus bucket and the BSSimpleList head, then clears PlayerCharacter::attributeBonuses. Used before loading a replacement queue.
 0x66B558: cmp     [esi+784h], ebp
 0x66B55E: jz      short loc_66B57C
 0x66B560: mov     eax, [esi+784h]
 0x66B566: mov     edi, [eax+4]
 0x66B569: push    eax
-0x66B56A: call    FormHeapFree
+0x66B56A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x66B56F: add     esp, 4
 0x66B572: cmp     edi, ebp
 0x66B574: mov     [esi+784h], edi
@@ -370,10 +370,10 @@
 0x66B5F8: call    eax
 0x66B5FA: mov     ds:0B3BB60h, ebp
 0x66B600: push    ebp
-0x66B601: push    offset Vector3_InitValue?
-0x66B606: push    offset Vector3_InitValue?
-0x66B60B: mov     ecx, offset word_B3BB4C
-0x66B610: call    sub_959D60
+0x66B601: push    offset g_zeroNiPoint3
+0x66B606: push    offset g_zeroNiPoint3
+0x66B60B: mov     ecx, (offset qword_B3BB2C+20h)
+0x66B610: call    NiPick_ExecuteAndSort; Verified NiPick query runner: invokes NiPick_ProcessSceneObject over the configured pick root, gathers hit records, sorts by the record distance field, and leaves the nearest record first in the result list.
 0x66B615: mov     edi, [esi+79Ch]
 0x66B61B: cmp     edi, ebp
 0x66B61D: mov     byte ptr [esp+24h+var_4], 5
@@ -469,3 +469,30 @@
 0x66B706: pop     ebx
 0x66B707: add     esp, 10h
 0x66B70A: retn
+0x9C40C0: mov     ecx, [ebp-10h]; int
+0x9C40C3: jmp     sub_612150
+0x9C40C8: mov     ecx, [ebp-10h]
+0x9C40CB: add     ecx, 574h; slot
+0x9C40D1: jmp     NiPointerSlot_Release
+0x9C40D6: mov     ecx, [ebp-10h]
+0x9C40D9: add     ecx, 5D0h; slot
+0x9C40DF: jmp     NiPointerSlot_Release
+0x9C40E4: mov     ecx, [ebp-10h]
+0x9C40E7: add     ecx, 5D8h; slot
+0x9C40ED: jmp     NiPointerSlot_Release
+0x9C40F2: mov     ecx, [ebp-10h]
+0x9C40F5: add     ecx, 788h
+0x9C40FB: jmp     ??1?$NiTMap@IE@@UAE@XZ; NiTMap<uint,uchar>::~NiTMap<uint,uchar>(void)
+0x9C4100: mov     ecx, [ebp-10h]
+0x9C4103: add     ecx, 798h; slot
+0x9C4109: jmp     NiPointerSlot_Release
+0x9C410E: mov     ecx, [ebp-10h]
+0x9C4111: add     ecx, 79Ch; slot
+0x9C4117: jmp     NiPointerSlot_Release
+0x9C411C: mov     edx, [esp+arg_4]
+0x9C4120: lea     eax, [edx-14h]
+0x9C4123: mov     ecx, [edx-18h]
+0x9C4126: xor     ecx, eax
+0x9C4128: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C412D: mov     eax, offset stru_AECB18
+0x9C4132: jmp     ___CxxFrameHandler3

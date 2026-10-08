@@ -127,3 +127,12 @@
 0x7F2A14: pop     ebx
 0x7F2A15: add     esp, 1Ch
 0x7F2A18: retn
+0x9CFF00: mov     ecx, [ebp-1Ch]; this
+0x9CFF03: jmp     ??1BSShaderProperty@@UAE@XZ; BSShaderProperty::~BSShaderProperty(void)
+0x9CFF08: mov     edx, [esp+arg_4]
+0x9CFF0C: lea     eax, [edx-20h]
+0x9CFF0F: mov     ecx, [edx-24h]
+0x9CFF12: xor     ecx, eax
+0x9CFF14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFF19: mov     eax, offset stru_AF89D8
+0x9CFF1E: jmp     ___CxxFrameHandler3

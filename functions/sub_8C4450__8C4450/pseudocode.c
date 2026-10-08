@@ -1,9 +1,9 @@
-bhkHeightFieldShape *__thiscall sub_8C4450(bhkHeightFieldShape *this, char a2)
+bhkShape *__thiscall sub_8C4450(bhkShape *this, char a2)
 {
-  *(_DWORD *)this = &bhkPlaneShape::`vftable';
-  --dword_BA810C;
-  bhkHeightFieldShape::~bhkHeightFieldShape(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  this->__vftable = (NiObjectVtbl *)&bhkPlaneShape::`vftable'; /*0x8c4453*/
+  --unk_BA810C; /*0x8c4459*/
+  bhkHeightFieldShape::~bhkHeightFieldShape(this); /*0x8c4460*/
+  if ( (a2 & 1) != 0 ) /*0x8c446a*/
+    FormHeapFree((unsigned int)this); /*0x8c446d*/
+  return this; /*0x8c4477*/
 }

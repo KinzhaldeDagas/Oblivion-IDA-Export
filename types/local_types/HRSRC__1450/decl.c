@@ -1,1 +1,1 @@
-HRSRC
+typedef HRSRC__ *HRSRC;

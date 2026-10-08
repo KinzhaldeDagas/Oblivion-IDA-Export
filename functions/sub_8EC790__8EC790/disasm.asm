@@ -1,4 +1,4 @@
-0x8EC790: push    ebp
+0x8EC790: push    ebp; TES4 authoritative: active-surface constraint solver. Advances along input motion, activates earliest blocking planes, and recomputes sliding motion. It does not create a step-up/mantle displacement by itself.
 0x8EC791: mov     ebp, esp
 0x8EC793: and     esp, 0FFFFFFF0h
 0x8EC796: sub     esp, 64h
@@ -7,14 +7,14 @@
 0x8EC79B: mov     esi, [ebp+arg_4]
 0x8EC79E: push    edi
 0x8EC79F: mov     edi, [ebp+arg_0]
-0x8EC7A2: mov     eax, [edi+40h]
+0x8EC7A2: mov     eax, [edi+40h]; Input +0x40 is remaining solve distance/time scalar; output starts as a copy of input point and motion vector.
 0x8EC7A5: movaps  xmm0, xmmword ptr [edi+10h]
 0x8EC7A9: movaps  xmmword ptr [esi+10h], xmm0
 0x8EC7AD: movaps  xmm0, xmmword ptr [edi]
 0x8EC7B0: xor     ebx, ebx
 0x8EC7B2: mov     [esp+70h+var_60], eax
 0x8EC7B6: movaps  xmmword ptr [esi], xmm0
-0x8EC7B9: mov     eax, [edi+4Ch]
+0x8EC7B9: mov     eax, [edi+4Ch]; Input +0x4C is surface-constraint count; each active surface has a 0x10-byte state entry in output+0x24.
 0x8EC7BC: xor     ecx, ecx
 0x8EC7BE: test    eax, eax
 0x8EC7C0: mov     [esp+70h+var_10], ebx
@@ -24,7 +24,7 @@
 0x8EC7D0: jle     short loc_8EC800
 0x8EC7D2: xor     edx, edx
 0x8EC7D4: mov     eax, [esi+24h]
-0x8EC7D7: add     eax, edx
+0x8EC7D7: add     eax, edx; Initializes per-surface state entries: selected/used bytes and accumulated distance/bias fields reset to zero.
 0x8EC7D9: mov     byte ptr [eax+1], 0
 0x8EC7DD: mov     byte ptr [eax], 0
 0x8EC7E0: mov     dword ptr [eax+4], 0
@@ -43,7 +43,6 @@
 0x8EC815: jmp     short loc_8EC820
 0x8EC817: mov     ebx, [esp+70h+var_10]
 0x8EC81B: jmp     short loc_8EC820
-0x8EC81D: align 10h
 0x8EC820: mov     ecx, [esp+70h+var_60]
 0x8EC824: mov     eax, [edi+4Ch]
 0x8EC827: or      edx, 0FFFFFFFFh
@@ -56,7 +55,7 @@
 0x8EC83E: mov     [esp+70h+var_58], edx
 0x8EC842: cmp     ebx, 1
 0x8EC845: jl      short loc_8EC851
-0x8EC847: cmp     [esp+70h+var_40], ecx
+0x8EC847: cmp     [esp+70h+solverState], ecx
 0x8EC84B: jz      loc_8EC978
 0x8EC851: cmp     ebx, 2
 0x8EC854: jl      short loc_8EC860
@@ -71,7 +70,7 @@
 0x8EC877: jnz     loc_8EC978
 0x8EC87D: mov     eax, [edi+48h]
 0x8EC880: mov     ebx, [esp+70h+var_58]
-0x8EC884: movaps  xmm2, xmmword ptr [eax+ebx+10h]
+0x8EC884: movaps  xmm2, xmmword ptr [eax+ebx+10h]; Loads candidate surface data: vector at surface+0x00 and point/vector at surface+0x10 from the 0x40-byte constraint array.
 0x8EC889: movaps  xmm1, xmmword ptr [eax+ebx]
 0x8EC88D: movaps  xmm0, xmmword ptr [esi+10h]
 0x8EC891: add     eax, ebx
@@ -86,7 +85,7 @@
 0x8EC8AF: addss   xmm4, xmm3
 0x8EC8B3: movss   dword ptr [eax], xmm4
 0x8EC8B7: fld     [esp+70h+var_4C]
-0x8EC8BB: fchs
+0x8EC8BB: fchs; Computes positive blocking distance along current motion to this surface; non-positive values do not block the current solve step.
 0x8EC8BD: fst     [esp+70h+var_5C]
 0x8EC8C1: fcomp   dword ptr ds:0A2FAA8h
 0x8EC8C7: fnstsw  ax
@@ -135,7 +134,7 @@
 0x8EC95D: test    ah, 5
 0x8EC960: jp      short loc_8EC970
 0x8EC962: fdiv    [esp+70h+var_5C]
-0x8EC966: mov     [esp+70h+var_54], ecx
+0x8EC966: mov     [esp+70h+var_54], ecx; Chooses the earliest blocking surface by shrinking the current step fraction/distance.
 0x8EC96A: fstp    [esp+70h+var_64]
 0x8EC96E: jmp     short loc_8EC978
 0x8EC970: fstp    st
@@ -169,12 +168,11 @@
 0x8EC9D3: mulps   xmm2, xmm1
 0x8EC9D6: addps   xmm0, xmm2
 0x8EC9D9: fstp    [esp+70h+var_60]
-0x8EC9DD: movaps  xmmword ptr [esi], xmm0
+0x8EC9DD: movaps  xmmword ptr [esi], xmm0; Advances output point by selectedStep * currentMotion; this is constraint sliding progress, not a hard upward snap.
 0x8EC9E0: jle     short loc_8ECA09
 0x8EC9E2: lea     ecx, [esp+70h+var_38]
 0x8EC9E6: mov     edx, ebx
 0x8EC9E8: jmp     short loc_8EC9F0
-0x8EC9EA: align 10h
 0x8EC9F0: mov     eax, [ecx]
 0x8EC9F2: fld     [esp+70h+var_64]
 0x8EC9F6: fadd    dword ptr [eax+4]
@@ -200,8 +198,8 @@
 0x8ECA2B: shl     ecx, 6
 0x8ECA2E: add     ecx, ebx
 0x8ECA30: mov     ebx, [esi+24h]
-0x8ECA33: lea     eax, [esp+eax*4+70h+var_40]
-0x8ECA37: mov     [eax+4], ecx
+0x8ECA33: lea     eax, [esp+eax*4+70h+solverState]
+0x8ECA37: mov     [eax+4], ecx; Records the selected blocking surface in the active-plane set for recomputing the allowed motion direction.
 0x8ECA3A: mov     ecx, edx
 0x8ECA3C: shl     ecx, 4
 0x8ECA3F: fld     dword ptr [ecx+ebx+8]
@@ -209,10 +207,10 @@
 0x8ECA45: fadd    dword ptr ds:0A9AFD8h
 0x8ECA4B: mov     [eax+8], ecx
 0x8ECA4E: mov     [eax], edx
-0x8ECA50: lea     eax, [esp+70h+var_40]
+0x8ECA50: lea     eax, [esp+70h+solverState]; solverState
 0x8ECA54: fadd    st, st
-0x8ECA56: fstp    dword ptr [ecx+8]
-0x8ECA59: call    sub_8EC340
+0x8ECA56: fstp    dword ptr [ecx+8]; Inflates this surface state bias by approximately 2*(oldBias + 1.1920929e-7) before recomputing active motion.
+0x8ECA59: call    hkSurfaceConstraintUtil_RecomputeActiveSurfaceMotion; Recomputes current motion from the active surface set; active set is capped by the small stack records used here.
 0x8ECA5E: fld     [esp+70h+var_60]
 0x8ECA62: fcomp   dword ptr ds:0A2FAA8h
 0x8ECA68: fnstsw  ax
@@ -225,7 +223,7 @@
 0x8ECA78: pop     ebp
 0x8ECA79: retn
 0x8ECA7A: mov     edx, [edi+40h]
-0x8ECA7D: mov     [esi+20h], edx
+0x8ECA7D: mov     [esi+20h], edx; No more blocking surface: writes full requested solve distance into output progress field and returns.
 0x8ECA80: pop     edi
 0x8ECA81: pop     esi
 0x8ECA82: pop     ebx

@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7AFE36",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7AFE50",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7AFE74",
-    "line": "call    ??1BSImageSpaceShader@@UAE@XZ; BSImageSpaceShader::~BSImageSpaceShader(void)",
+    "line": "call    ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -676,5 +676,173 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CD620",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD623",
+    "line": "jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD628",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD62D",
+    "line": "push    3; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD62F",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD631",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD634",
+    "line": "add     eax, 94h ; '”'",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD639",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD63A",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD63F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD640",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD645",
+    "line": "push    3; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD647",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD649",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD64C",
+    "line": "add     eax, 0A0h ; ' '",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD651",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD652",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD657",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD658",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD65B",
+    "line": "add     ecx, 0E0h ; 'à'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CD661",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD666",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD66A",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD66D",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD670",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD672",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD677",
+    "line": "mov     eax, offset stru_AF6900",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD67C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -72,13 +72,13 @@
 0x5F7FA9: call    TESPackage_LocationData_SetReference
 0x5F7FAE: push    edi
 0x5F7FAF: mov     ecx, esi
-0x5F7FB1: call    TESPackage_SetLocation
+0x5F7FB1: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x5F7FB6: test    edi, edi
 0x5F7FB8: jz      short loc_5F7FCA
 0x5F7FBA: mov     ecx, edi
 0x5F7FBC: call    TESPackage_LocationData_destr
 0x5F7FC1: push    edi
-0x5F7FC2: call    FormHeapFree
+0x5F7FC2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F7FC7: add     esp, 4
 0x5F7FCA: mov     dword ptr [esi+18h], 15h
 0x5F7FD1: mov     ecx, [ebp+58h]
@@ -89,7 +89,7 @@
 0x5F7FDD: push    1; a3
 0x5F7FDF: push    esi; a2
 0x5F7FE0: mov     ecx, ebp; this
-0x5F7FE2: call    Actor_AddPackage?
+0x5F7FE2: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x5F7FE7: mov     ecx, [esp+20h+var_C]
 0x5F7FEB: mov     large fs:0, ecx
 0x5F7FF2: pop     ecx
@@ -98,3 +98,20 @@
 0x5F7FF5: pop     ebp
 0x5F7FF6: add     esp, 10h
 0x5F7FF9: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

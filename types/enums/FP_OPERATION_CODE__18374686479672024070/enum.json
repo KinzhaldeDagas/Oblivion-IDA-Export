@@ -1,0 +1,651 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "_FP_OPERATION_CODE",
+  "definition": "enum _FP_OPERATION_CODE : __int32\n{\n_FpCodeUnspecified = 0x0,\n_FpCodeAdd = 0x1,\n_FpCodeSubtract = 0x2,\n_FpCodeMultiply = 0x3,\n_FpCodeDivide = 0x4,\n_FpCodeSquareRoot = 0x5,\n_FpCodeRemainder = 0x6,\n_FpCodeCompare = 0x7,\n_FpCodeConvert = 0x8,\n_FpCodeRound = 0x9,\n_FpCodeTruncate = 0xA,\n_FpCodeFloor = 0xB,\n_FpCodeCeil = 0xC,\n_FpCodeAcos = 0xD,\n_FpCodeAsin = 0xE,\n_FpCodeAtan = 0xF,\n_FpCodeAtan2 = 0x10,\n_FpCodeCabs = 0x11,\n_FpCodeCos = 0x12,\n_FpCodeCosh = 0x13,\n_FpCodeExp = 0x14,\n_FpCodeFabs = 0x15,\n_FpCodeFmod = 0x16,\n_FpCodeFrexp = 0x17,\n_FpCodeHypot = 0x18,\n_FpCodeLdexp = 0x19,\n_FpCodeLog = 0x1A,\n_FpCodeLog10 = 0x1B,\n_FpCodeModf = 0x1C,\n_FpCodePow = 0x1D,\n_FpCodeSin = 0x1E,\n_FpCodeSinh = 0x1F,\n_FpCodeTan = 0x20,\n_FpCodeTanh = 0x21,\n_FpCodeY0 = 0x22,\n_FpCodeY1 = 0x23,\n_FpCodeYn = 0x24,\n_FpCodeLogb = 0x25,\n_FpCodeNextafter = 0x26,\n_FpCodeNegate = 0x27,\n_FpCodeFmin = 0x28,\n_FpCodeFmax = 0x29,\n_FpCodeConvertTrunc = 0x2A,\n_XMMIAddps = 0x2B,\n_XMMIAddss = 0x2C,\n_XMMISubps = 0x2D,\n_XMMISubss = 0x2E,\n_XMMIMulps = 0x2F,\n_XMMIMulss = 0x30,\n_XMMIDivps = 0x31,\n_XMMIDivss = 0x32,\n_XMMISqrtps = 0x33,\n_XMMISqrtss = 0x34,\n_XMMIMaxps = 0x35,\n_XMMIMaxss = 0x36,\n_XMMIMinps = 0x37,\n_XMMIMinss = 0x38,\n_XMMICmpps = 0x39,\n_XMMICmpss = 0x3A,\n_XMMIComiss = 0x3B,\n_XMMIUComiss = 0x3C,\n_XMMICvtpi2ps = 0x3D,\n_XMMICvtsi2ss = 0x3E,\n_XMMICvtps2pi = 0x3F,\n_XMMICvtss2si = 0x40,\n_XMMICvttps2pi = 0x41,\n_XMMICvttss2si = 0x42,\n_XMMIAddsubps = 0x43,\n_XMMIHaddps = 0x44,\n_XMMIHsubps = 0x45,\n_XMMI2Addpd = 0x46,\n_XMMI2Addsd = 0x47,\n_XMMI2Subpd = 0x48,\n_XMMI2Subsd = 0x49,\n_XMMI2Mulpd = 0x4A,\n_XMMI2Mulsd = 0x4B,\n_XMMI2Divpd = 0x4C,\n_XMMI2Divsd = 0x4D,\n_XMMI2Sqrtpd = 0x4E,\n_XMMI2Sqrtsd = 0x4F,\n_XMMI2Maxpd = 0x50,\n_XMMI2Maxsd = 0x51,\n_XMMI2Minpd = 0x52,\n_XMMI2Minsd = 0x53,\n_XMMI2Cmppd = 0x54,\n_XMMI2Cmpsd = 0x55,\n_XMMI2Comisd = 0x56,\n_XMMI2UComisd = 0x57,\n_XMMI2Cvtpd2pi = 0x58,\n_XMMI2Cvtsd2si = 0x59,\n_XMMI2Cvttpd2pi = 0x5A,\n_XMMI2Cvttsd2si = 0x5B,\n_XMMI2Cvtps2pd = 0x5C,\n_XMMI2Cvtss2sd = 0x5D,\n_XMMI2Cvtpd2ps = 0x5E,\n_XMMI2Cvtsd2ss = 0x5F,\n_XMMI2Cvtdq2ps = 0x60,\n_XMMI2Cvttps2dq = 0x61,\n_XMMI2Cvtps2dq = 0x62,\n_XMMI2Cvttpd2dq = 0x63,\n_XMMI2Cvtpd2dq = 0x64,\n_XMMI2Addsubpd = 0x65,\n_XMMI2Haddpd = 0x66,\n_XMMI2Hsubpd = 0x67,\n}\n",
+  "id": 18374686479672024070,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeUnspecified",
+      "value": 0
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeAdd",
+      "value": 1
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeSubtract",
+      "value": 2
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeMultiply",
+      "value": 3
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeDivide",
+      "value": 4
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeSquareRoot",
+      "value": 5
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeRemainder",
+      "value": 6
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeCompare",
+      "value": 7
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeConvert",
+      "value": 8
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeRound",
+      "value": 9
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeTruncate",
+      "value": 10
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeFloor",
+      "value": 11
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeCeil",
+      "value": 12
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeAcos",
+      "value": 13
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeAsin",
+      "value": 14
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeAtan",
+      "value": 15
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeAtan2",
+      "value": 16
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeCabs",
+      "value": 17
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeCos",
+      "value": 18
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeCosh",
+      "value": 19
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeExp",
+      "value": 20
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeFabs",
+      "value": 21
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeFmod",
+      "value": 22
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeFrexp",
+      "value": 23
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeHypot",
+      "value": 24
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeLdexp",
+      "value": 25
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeLog",
+      "value": 26
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeLog10",
+      "value": 27
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeModf",
+      "value": 28
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodePow",
+      "value": 29
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeSin",
+      "value": 30
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeSinh",
+      "value": 31
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeTan",
+      "value": 32
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeTanh",
+      "value": 33
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeY0",
+      "value": 34
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeY1",
+      "value": 35
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeYn",
+      "value": 36
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeLogb",
+      "value": 37
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeNextafter",
+      "value": 38
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeNegate",
+      "value": 39
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeFmin",
+      "value": 40
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeFmax",
+      "value": 41
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_FpCodeConvertTrunc",
+      "value": 42
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIAddps",
+      "value": 43
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIAddss",
+      "value": 44
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMISubps",
+      "value": 45
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMISubss",
+      "value": 46
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIMulps",
+      "value": 47
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIMulss",
+      "value": 48
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIDivps",
+      "value": 49
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIDivss",
+      "value": 50
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMISqrtps",
+      "value": 51
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMISqrtss",
+      "value": 52
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIMaxps",
+      "value": 53
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIMaxss",
+      "value": 54
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIMinps",
+      "value": 55
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIMinss",
+      "value": 56
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICmpps",
+      "value": 57
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICmpss",
+      "value": 58
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIComiss",
+      "value": 59
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIUComiss",
+      "value": 60
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICvtpi2ps",
+      "value": 61
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICvtsi2ss",
+      "value": 62
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICvtps2pi",
+      "value": 63
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICvtss2si",
+      "value": 64
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICvttps2pi",
+      "value": 65
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMICvttss2si",
+      "value": 66
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIAddsubps",
+      "value": 67
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIHaddps",
+      "value": 68
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMIHsubps",
+      "value": 69
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Addpd",
+      "value": 70
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Addsd",
+      "value": 71
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Subpd",
+      "value": 72
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Subsd",
+      "value": 73
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Mulpd",
+      "value": 74
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Mulsd",
+      "value": 75
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Divpd",
+      "value": 76
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Divsd",
+      "value": 77
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Sqrtpd",
+      "value": 78
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Sqrtsd",
+      "value": 79
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Maxpd",
+      "value": 80
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Maxsd",
+      "value": 81
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Minpd",
+      "value": 82
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Minsd",
+      "value": 83
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cmppd",
+      "value": 84
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cmpsd",
+      "value": 85
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Comisd",
+      "value": 86
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2UComisd",
+      "value": 87
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtpd2pi",
+      "value": 88
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtsd2si",
+      "value": 89
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvttpd2pi",
+      "value": 90
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvttsd2si",
+      "value": 91
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtps2pd",
+      "value": 92
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtss2sd",
+      "value": 93
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtpd2ps",
+      "value": 94
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtsd2ss",
+      "value": 95
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtdq2ps",
+      "value": 96
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvttps2dq",
+      "value": 97
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtps2dq",
+      "value": 98
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvttpd2dq",
+      "value": 99
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Cvtpd2dq",
+      "value": 100
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Addsubpd",
+      "value": 101
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Haddpd",
+      "value": 102
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_XMMI2Hsubpd",
+      "value": 103
+    }
+  ],
+  "name": "_FP_OPERATION_CODE",
+  "ordinal": 7833,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

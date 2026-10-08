@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x4B0A30",
+      "0x4B0B32"
+    ],
+    [
+      "0x9B3B90",
+      "0x9B3BC1"
+    ]
+  ],
+  "chunks_sha256": "3ded8fb4591f7554515b4b4136f33a7992fa0749f2ff6dae83bc9172f30bbf6c",
+  "comment_regular": "Probable: TESBoundObject 3D helper; if the bound form's model path is nonempty it obtains reference-specific model data through TESBoundObject_GetReferenceModelData, otherwise creates an empty NiNode. Then ensures the result is parented under a root NiNode.",
+  "comment_repeatable": "Probable: TESBoundObject 3D helper; if the bound form's model path is nonempty it obtains reference-specific model data through TESBoundObject_GetReferenceModelData, otherwise creates an empty NiNode. Then ensures the result is parented under a root NiNode.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_4B0A30",
   "end_ea": "0x4B0B32",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_4B0A30",
   "segment": ".text",
   "sha256": "30fe014c7d8a950c842c961056cc1abeb1ecaabafecdf5139cf5f196d5c94f29",
   "size": 258,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B0A30",
-  "type": "NiNode *__userpurge@<eax>(_DWORD *@<ecx>, double@<st0>, TESObjectREFR *)",
-  "xrefs_from_count": 97,
+  "total_chunk_size": 307,
+  "type": "NiNode *__thiscall(TESBoundObject *this, TESObjectREFR *reference)",
+  "xrefs_from_count": 116,
   "xrefs_to_count": 1
 }

@@ -16,7 +16,7 @@
 0x507828: push    eax; a2
 0x507829: push    ecx; a1
 0x50782A: mov     dword ptr [esp+30h+var_10], 1
-0x507832: call    Script_ExtractArgs
+0x507832: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x507837: add     esp, 20h
 0x50783A: test    al, al
 0x50783C: jnz     short loc_507842
@@ -42,7 +42,7 @@
 0x50787F: mov     ecx, ds:0B333C4h; this
 0x507885: push    edx
 0x507886: mov     dword ptr [esp+1Ch+var_C+4], eax
-0x50788A: call    TESObjectREFR_GetParentCell
+0x50788A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x50788F: mov     ecx, ds:0B33A98h
 0x507895: push    eax
 0x507896: call    sub_44EE00
@@ -50,8 +50,8 @@
 0x50789D: test    esi, esi
 0x50789F: jz      short loc_507909
 0x5078A1: push    edi
-0x5078A2: mov     ecx, esi
-0x5078A4: call    sub_4F0620
+0x5078A2: mov     ecx, esi; worldspace
+0x5078A4: call    TESWorldSpace_CollectPersistentCellReferences; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.
 0x5078A9: mov     edi, eax
 0x5078AB: test    edi, edi
 0x5078AD: mov     esi, edi
@@ -81,9 +81,9 @@
 0x5078F4: test    esi, esi
 0x5078F6: jnz     short loc_5078B1
 0x5078F8: mov     ecx, edi
-0x5078FA: call    BSSimpleList_Clear
+0x5078FA: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5078FF: push    edi
-0x507900: call    FormHeapFree
+0x507900: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x507905: add     esp, 4
 0x507908: pop     edi
 0x507909: cmp     dword ptr [esp+14h+var_10], 0

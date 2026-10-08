@@ -5,7 +5,7 @@
 0x4A815E: test    [esp+4+arg_0], 1
 0x4A8163: jz      short loc_4A816E
 0x4A8165: push    esi
-0x4A8166: call    FormHeapFree
+0x4A8166: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A816B: add     esp, 4
 0x4A816E: mov     eax, esi
 0x4A8170: pop     esi

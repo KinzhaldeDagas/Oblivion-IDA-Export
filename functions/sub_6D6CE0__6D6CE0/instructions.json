@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x6D6D20",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+applicationTime]; applicationTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6D6D23",
-    "line": "call    sub_6C36B0",
+    "line": "call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6D6D96",
-    "line": "mov     [esp+40h+var_38], eax",
+    "line": "mov     [esp+40h+applicationTime], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,19 +571,19 @@
   },
   {
     "ea": "0x6D6E0C",
-    "line": "mov     [esp+40h+var_38], eax",
+    "line": "mov     [esp+40h+applicationTime], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6D6E10",
-    "line": "fstp    [esp+40h+var_38]",
+    "line": "fstp    [esp+40h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6D6E14",
-    "line": "lea     eax, [esp+40h+var_38]",
+    "line": "lea     eax, [esp+40h+applicationTime]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x6D6E3E",
-    "line": "mov     [esp+40h+var_38], edx",
+    "line": "mov     [esp+40h+applicationTime], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6D6E42",
-    "line": "lea     edx, [esp+40h+var_38]",
+    "line": "lea     edx, [esp+40h+applicationTime]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -811,19 +811,19 @@
   },
   {
     "ea": "0x6D6E91",
-    "line": "mov     [esp+40h+var_38], eax",
+    "line": "mov     [esp+40h+applicationTime], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6D6E95",
-    "line": "fstp    [esp+40h+var_38]",
+    "line": "fstp    [esp+40h+applicationTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6D6E99",
-    "line": "lea     eax, [esp+40h+var_38]",
+    "line": "lea     eax, [esp+40h+applicationTime]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -865,13 +865,13 @@
   },
   {
     "ea": "0x6D6EAE",
-    "line": "mov     [esp+40h+var_38], edx",
+    "line": "mov     [esp+40h+applicationTime], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6D6EB2",
-    "line": "lea     edx, [esp+40h+var_38]",
+    "line": "lea     edx, [esp+40h+applicationTime]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -897,6 +897,78 @@
     "ea": "0x6D6EBF",
     "line": "call    sub_6D6AD0",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7B40",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7B43",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C7B44",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7B49",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C7B4A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C7B4B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C7B4F",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7B52",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7B55",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C7B57",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7B5C",
+    "line": "mov     eax, offset stru_AEFF04",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7B61",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

@@ -36,7 +36,7 @@
 0x4A134E: call    edx
 0x4A1350: test    eax, eax
 0x4A1352: jz      short loc_4A1366
-0x4A1354: cmp     eax, offset dword_B3FD4C
+0x4A1354: cmp     eax, offset stru_B3FD4C
 0x4A1359: jz      loc_4A13E4
 0x4A135F: mov     eax, [eax+4]
 0x4A1362: test    eax, eax
@@ -80,7 +80,7 @@
 0x4A13D9: push    0
 0x4A13DB: mov     ecx, ebx
 0x4A13DD: call    sub_435CE0
-0x4A13E2: jmp     short loc_4A144D
+0x4A13E2: jmp     short loc_4A144D; MEF PERF 2026-10-08: PERF-17 scoped reserve design point AFTER source-wrapper choice: source usedEnd+B6 bounds current nonnull transfers but can overestimate sparse sources and is reloaded by native loop. Fresh destination must still be empty/unchanged. Keep native growth fallback for more transfers than estimate; preserve old-parent detach lookup costs.
 0x4A13E4: push    0DCh ; 'Ü'; Size
 0x4A13E9: mov     [esp+34h+var_1C], ebx
 0x4A13ED: call    FormHeapAlloc
@@ -113,7 +113,7 @@
 0x4A143F: mov     ecx, [esp+30h+var_1C]
 0x4A1443: push    offset aFadenodeAnim; "FadeNode Anim"
 0x4A1448: call    NiObjectNET_SetName
-0x4A144D: movzx   eax, word ptr [ebx+0B6h]
+0x4A144D: movzx   eax, word ptr [ebx+0B6h]; MEF PERF 2026-10-08: PERF-17 scoped reserve design point AFTER source-wrapper choice: source usedEnd+B6 bounds current nonnull transfers but can overestimate sparse sources and is reloaded by native loop. Fresh destination must still be empty/unchanged. Keep native growth fallback for more transfers than estimate; preserve old-parent detach lookup costs.
 0x4A1454: xor     esi, esi
 0x4A1456: test    eax, eax
 0x4A1458: jbe     short loc_4A1483
@@ -123,10 +123,10 @@
 0x4A1464: mov     eax, [eax+esi*4]
 0x4A1467: test    eax, eax
 0x4A1469: jz      short loc_4A1475
-0x4A146B: push    1
-0x4A146D: push    eax
-0x4A146E: mov     ecx, ebp
-0x4A1470: call    NiNode__AddObject
+0x4A146B: push    1; firstAvailableSlot
+0x4A146D: push    eax; child
+0x4A146E: mov     ecx, ebp; this
+0x4A1470: call    NiNode__AddObject; MEF PERF 2026-10-08: PERF-16/17 bulk route: fresh BSFadeNode destination constructed at4A1310, then actual source/wrapper child array iterated4A144D..1475; each nonnull child calls AddObject with firstAvailableSlot=1. N means actual successful transfers, not total NIF objects; wrapper branches can reduce source to one child. No per-frame frequency assertion.
 0x4A1475: movzx   eax, word ptr [ebx+0B6h]
 0x4A147C: add     esi, 1
 0x4A147F: cmp     eax, esi
@@ -141,7 +141,7 @@
 0x4A149C: mov     esi, [ecx+8]
 0x4A149F: push    esi; a2
 0x4A14A0: mov     ecx, ebp; this
-0x4A14A2: call    sub_405680
+0x4A14A2: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4A14A7: push    esi
 0x4A14A8: mov     ecx, edi
 0x4A14AA: call    sub_4A1220
@@ -176,7 +176,7 @@
 0x4A150F: fstp    [esp+30h+var_1C]
 0x4A1513: fld     [esp+30h+var_1C]
 0x4A1517: fstp    dword ptr [ebp+60h]
-0x4A151A: push    offset stru_B3F600; lpCriticalSection
+0x4A151A: push    offset unk_B3F600; lpCriticalSection
 0x4A151F: call    dword ptr ds:0A2806Ch
 0x4A1525: call    dword ptr ds:0A2808Ch
 0x4A152B: mov     esi, [esp+30h+var_18]
@@ -194,7 +194,7 @@
 0x4A1557: mov     eax, [eax]
 0x4A1559: push    eax
 0x4A155A: mov     ecx, ebp
-0x4A155C: call    NiNode_AddNiExtraData
+0x4A155C: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x4A1561: push    0
 0x4A1563: mov     ecx, esi
 0x4A1565: call    sub_6FFBE0
@@ -204,7 +204,7 @@
 0x4A1573: sub     ds:0B3F67Ch, edi
 0x4A1579: jnz     short loc_4A1585
 0x4A157B: mov     dword ptr ds:0B3F678h, 0
-0x4A1585: push    offset stru_B3F600; lpCriticalSection
+0x4A1585: push    offset unk_B3F600; lpCriticalSection
 0x4A158A: call    dword ptr ds:0A28074h
 0x4A1590: mov     ecx, ebp
 0x4A1592: call    sub_4A07E0
@@ -236,3 +236,24 @@
 0x4A15DA: pop     ebx
 0x4A15DB: add     esp, 1Ch
 0x4A15DE: retn    4
+0x9B2200: mov     ecx, [ebp-14h]; this
+0x9B2203: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9B2208: lea     ecx, [ebp+4]; slot
+0x9B220B: jmp     NiPointerSlot_Release
+0x9B2210: mov     eax, [ebp-1Ch]
+0x9B2213: push    eax
+0x9B2214: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2219: pop     ecx
+0x9B221A: retn
+0x9B221B: mov     eax, [ebp-10h]
+0x9B221E: push    eax
+0x9B221F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2224: pop     ecx
+0x9B2225: retn
+0x9B2226: mov     edx, [esp+arg_4]
+0x9B222A: lea     eax, [edx-20h]
+0x9B222D: mov     ecx, [edx-24h]
+0x9B2230: xor     ecx, eax
+0x9B2232: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2237: mov     eax, offset stru_ADE244
+0x9B223C: jmp     ___CxxFrameHandler3

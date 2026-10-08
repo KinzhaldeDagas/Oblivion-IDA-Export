@@ -21,6 +21,6 @@ void __usercall Actor_AttackHandling_::CreatureDamage(
         int a20,
         int a21)
 {
-  (*(void (__thiscall **)(int))(*(_DWORD *)a1 + 0x34C))(a1);
-  JUMPOUT(0x5FF515);
+  (*(void (__thiscall **)(int))(*(_DWORD *)a1 + 0x34C))(a1); /*0x5ff3bb*/
+  JUMPOUT(0x5FF515); /*0x5ff515*/
 }

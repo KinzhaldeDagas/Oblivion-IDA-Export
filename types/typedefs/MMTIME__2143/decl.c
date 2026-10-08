@@ -1,1 +1,1 @@
-MMTIME
+typedef mmtime_tag MMTIME;

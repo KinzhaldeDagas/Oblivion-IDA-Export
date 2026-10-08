@@ -1,17 +1,15 @@
-char __cdecl sub_62E890(_BYTE *a1)
+char __cdecl sub_62E890(TESObjectREFR *a1)
 {
-  int v1; // eax
+  TESForm::FormFlags flags; // eax
 
-  if ( a1 )
+  if ( a1 ) /*0x62e897*/
   {
-    v1 = *((_DWORD *)a1 + 2);
-    if ( (v1 & 0x20) == 0
-      && (v1 & 0x4000) == 0
-      && *(_BYTE *)((*(int (__thiscall **)(_BYTE *))(*(_DWORD *)a1 + 0x170))(a1) + 4) == 0x18 )
+    flags = a1->member.super.flags; /*0x62e899*/
+    if ( (flags & 0x20) == 0 && (flags & 0x4000) == 0 && a1->vtbl->GetBaseForm(a1)->member.type == kFormType_Door ) /*0x62e8bd*/
     {
-      if ( GetTeleportExtraData(a1) )
-        BSSimpleList_PushFront(&dword_B3B944, (int)a1);
+      if ( TESObjectREFR_GetTeleportData(a1) ) /*0x62e8c1*/
+        BSSimpleList_PushFront(&unk_B3B944, (int)a1); /*0x62e8d0*/
     }
   }
-  return 0;
+  return 0; /*0x62e8d7*/
 }

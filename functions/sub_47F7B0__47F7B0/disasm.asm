@@ -19,7 +19,7 @@
 0x47F7ED: test    byte ptr ds:0B343FCh, 1
 0x47F7F4: jnz     short loc_47F817
 0x47F7F6: or      dword ptr ds:0B343FCh, 1
-0x47F7FD: mov     ecx, offset flt_B34398
+0x47F7FD: mov     ecx, 0B34398h
 0x47F802: mov     [esp+38h+var_4], 0
 0x47F80A: call    sub_47DCA0
 0x47F80F: mov     [esp+38h+var_4], 0FFFFFFFFh
@@ -27,19 +27,19 @@
 0x47F81C: cmp     eax, ds:0B33EA0h
 0x47F822: jz      short loc_47F83B
 0x47F824: push    edi
-0x47F825: mov     ecx, offset flt_B34398
+0x47F825: mov     ecx, 0B34398h
 0x47F82A: call    sub_718200
 0x47F82F: mov     ecx, ds:0B33EA0h
 0x47F835: mov     ds:0B069C4h, ecx
 0x47F83B: mov     edx, [esi+20h]
 0x47F83E: mov     eax, [esi+24h]
 0x47F841: mov     ecx, [esi+28h]
-0x47F844: mov     [esp+38h+var_1C.Center.x], edx
+0x47F844: mov     [esp+38h+self.Center.x], edx
 0x47F848: mov     edx, [esi+2Ch]
-0x47F84B: mov     [esp+38h+var_1C.Center.y], eax
-0x47F84F: mov     [esp+38h+var_1C.Center.z], ecx
-0x47F853: mov     [esp+38h+var_1C.Radius], edx
-0x47F857: mov     esi, offset flt_B34398
+0x47F84B: mov     [esp+38h+self.Center.y], eax
+0x47F84F: mov     [esp+38h+self.Center.z], ecx
+0x47F853: mov     [esp+38h+self.Radius], edx
+0x47F857: mov     esi, 0B34398h
 0x47F85C: xor     edi, edi
 0x47F85E: mov     edi, edi
 0x47F860: mov     ecx, [esi+4]
@@ -49,11 +49,11 @@
 0x47F86C: lea     ecx, [esp+38h+a2]
 0x47F870: mov     [esp+38h+a2], eax
 0x47F874: mov     eax, [esi+0Ch]
-0x47F877: push    ecx; a2
-0x47F878: lea     ecx, [esp+3Ch+var_1C]; this
+0x47F877: push    ecx; plane
+0x47F878: lea     ecx, [esp+3Ch+self]; self
 0x47F87C: mov     [esp+3Ch+var_24], edx
 0x47F880: mov     [esp+3Ch+var_20], eax
-0x47F884: call    sub_47DA70
+0x47F884: call    NiBound_ClassifyAgainstPlane
 0x47F889: cmp     eax, 2
 0x47F88C: jz      short loc_47F8AD
 0x47F88E: add     edi, 10h
@@ -76,3 +76,14 @@
 0x47F8BC: pop     esi
 0x47F8BD: add     esp, 2Ch
 0x47F8C0: retn
+0x9AF5A0: mov     eax, ds:0B343FCh
+0x9AF5A5: and     eax, 0FFFFFFFEh
+0x9AF5A8: mov     ds:0B343FCh, eax
+0x9AF5AD: retn
+0x9AF5AE: mov     edx, [esp+arg_4]
+0x9AF5B2: lea     eax, [edx-28h]
+0x9AF5B5: mov     ecx, [edx-2Ch]
+0x9AF5B8: xor     ecx, eax
+0x9AF5BA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF5BF: mov     eax, offset stru_ADBB48
+0x9AF5C4: jmp     ___CxxFrameHandler3

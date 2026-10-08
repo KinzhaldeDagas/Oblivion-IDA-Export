@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4D7C84",
-    "line": "lea     edi, [esp+58h+var_48]",
+    "line": "lea     edi, [esp+58h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x4D7CA9",
-    "line": "fstp    [esp+5Ch+var_48]",
+    "line": "fstp    [esp+5Ch+right.data]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D7CAD",
-    "line": "fld     [esp+5Ch+var_48]",
+    "line": "fld     [esp+5Ch+right.data]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4D7CB1",
-    "line": "fstp    [esp+5Ch+var_38]",
+    "line": "fstp    [esp+5Ch+right.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x4D7CC0",
-    "line": "fstp    [esp+5Ch+var_48]",
+    "line": "fstp    [esp+5Ch+right.data]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D7CC4",
-    "line": "fld     [esp+5Ch+var_48]",
+    "line": "fld     [esp+5Ch+right.data]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4D7CC8",
-    "line": "fstp    [esp+5Ch+var_38]",
+    "line": "fstp    [esp+5Ch+right.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -247,43 +247,43 @@
   },
   {
     "ea": "0x4D7CD1",
-    "line": "lea     eax, [esp+58h+var_48]",
+    "line": "lea     eax, [esp+58h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7CD5",
-    "line": "fstp    [esp+58h+var_28]",
+    "line": "fstp    [esp+58h+right.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4D7CD9",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7CDA",
-    "line": "lea     ecx, [esp+5Ch+var_24]",
+    "line": "lea     ecx, [esp+5Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D7CDE",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7CDF",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D7CE1",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },

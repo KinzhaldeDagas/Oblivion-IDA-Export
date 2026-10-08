@@ -212,7 +212,7 @@
 0x946BAC: ja      short loc_946BB6
 0x946BAE: cmp     edi, eax
 0x946BB0: jbe     loc_946CA4
-0x946BB6: cmp     edi, offset dword_BA8788
+0x946BB6: cmp     edi, offset unk_BA8788
 0x946BBC: mov     bl, byte ptr [esp+38h+arg_0]
 0x946BC0: mov     [esp+38h+var_C], eax
 0x946BC4: mov     [esp+38h+var_8], eax

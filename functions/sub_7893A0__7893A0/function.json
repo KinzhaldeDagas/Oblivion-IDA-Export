@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7893A0",
+      "0x7893D2"
+    ]
+  ],
+  "chunks_sha256": "b9242a4f770fabe87ec1878cfc6861d3f5d1b73f7df14150198951ed0b7367e4",
+  "comment_regular": "Oblivion std::runtime_error destructor: destroys the embedded 28-byte SSO message, restores empty SSO state, and invokes std::exception teardown.",
+  "comment_repeatable": "Oblivion std::runtime_error destructor: destroys the embedded 28-byte SSO message, restores empty SSO state, and invokes std::exception teardown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7893A0",
+  "display_name": "OB_std_runtime_error_Dtor_010201A0",
   "end_ea": "0x7893D2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7893A0",
+  "name": "OB_std_runtime_error_Dtor_010201A0",
   "segment": ".text",
   "sha256": "b9242a4f770fabe87ec1878cfc6861d3f5d1b73f7df14150198951ed0b7367e4",
   "size": 50,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7893A0",
-  "type": "void __thiscall(std::exception *this)",
+  "total_chunk_size": 50,
+  "type": "void __thiscall(OB_std_runtime_error_010201A0 *this)",
   "xrefs_from_count": 19,
   "xrefs_to_count": 3
 }

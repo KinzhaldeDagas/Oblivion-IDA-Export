@@ -1,12 +1,13 @@
-char __cdecl sub_4F67A0(int a1, int a2, int a3, double *a4)
+// GetQuestRunning_Eval (index 56 / opcode 0x1038): tests the Quest parameter's questFlags bit 0. It does not inspect stage or completion state.
+char __cdecl GetQuestRunning_Eval(TESObjectREFR *subject, TESQuest *quest, TESForm *param2, double *value)
 {
-  *a4 = 0.0;
-  if ( a2 )
+  *value = 0.0; /*0x4f67ac*/
+  if ( quest ) /*0x4f67ae*/
   {
-    if ( (*(_BYTE *)(a2 + 0x3C) & 1) != 0 )
-      *a4 = 1.0;
+    if ( (quest->questFlags & 1) != 0 ) /*0x4f67b4*/
+      *value = 1.0; /*0x4f67b8*/
   }
-  if ( IsConsoleMode )
-    Interface_ConsolePrint("GetQuestRunning >> %0.2f", *a4);
-  return 1;
+  if ( MEMORY[0xB361AC] ) /*0x4f67ba*/
+    Interface_ConsolePrint("GetQuestRunning >> %0.2f", *value); /*0x4f67d0*/
+  return 1; /*0x4f67da*/
 }

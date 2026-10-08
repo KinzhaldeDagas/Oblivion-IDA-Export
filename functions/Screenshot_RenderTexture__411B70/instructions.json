@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x411B9D",
-    "line": "mov     ecx, dword_B350D8",
+    "line": "mov     ecx, ds:0B350D8h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x411C52",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x411C57",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x411C6A",
-    "line": "mov     ecx, g_worldScenegraph",
+    "line": "mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x411CB9",
-    "line": "mov     ecx, OSGlobals; this",
+    "line": "mov     ecx, ds:0B33398h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x411CBF",
-    "line": "call    NiRenderer_Render",
+    "line": "call    NiRenderer_Render;",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x411CC6",
-    "line": "mov     edx, g_worldScenegraph",
+    "line": "mov     edx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x411D35",
-    "line": "call    eax",
+    "line": "call    eax; DX11 readback contract verified 2026-09-24: IDirect3DTexture9::GetLevelDesc(0, &desc), vtable +0x44. Queried Format feeds CPU surface creation; numeric runtime format is not statically established.",
     "mnemonic": "call",
     "size": 2
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x411D64",
-    "line": "call    ecx",
+    "line": "call    ecx; DX11 readback contract verified 2026-09-24: IDirect3DDevice9::CreateOffscreenPlainSurface, vtable +0x90: queried source Format, pool=2 (SYSTEMMEM), shared handle=null. This creation HRESULT is checked.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x411DB9",
-    "line": "call    eax",
+    "line": "call    eax; DX11 readback contract verified 2026-09-24: IDirect3DDevice9::GetRenderTargetData(source level-0 surface, SYSTEMMEM destination), vtable +0x80. HRESULT is not tested; source Release follows at 0x411DC5. Modern replacement must complete real CPU destination bytes before return; a sidecar-valid flag is insufficient.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x411DDD",
-    "line": "call    eax",
+    "line": "call    eax; DX11 readback contract verified 2026-09-24: IDirect3DSurface9::LockRect(&locked, null, 0x800), vtable +0x34. 0x800 is D3DLOCK_NOSYSLOCK, not READONLY. HRESULT is not tested before conversion.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x411E41",
-    "line": "movzx   edx, byte ptr [esi+ecx+1]",
+    "line": "movzx   edx, byte ptr [esi+ecx+1]; DX11 readback contract verified 2026-09-24: Pixel loop reads source bytes 2,1,0 into RGB output, increments input by four bytes per pixel; no LockedRect.Pitch use in this loop. UnlockRect at 0x411E79 and Release at 0x411E85.",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1618,5 +1618,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AAF50",
+    "line": "lea     ecx, [ebp-88h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AAF56",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAF5B",
+    "line": "mov     eax, [ebp-94h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AAF61",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAF62",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAF67",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAF68",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAF69",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AAF6D",
+    "line": "lea     eax, [edx-0ACh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AAF73",
+    "line": "mov     ecx, [edx-0B0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AAF79",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AAF7B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAF80",
+    "line": "mov     eax, offset stru_AD7E34",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAF85",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

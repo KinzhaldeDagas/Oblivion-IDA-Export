@@ -49,31 +49,31 @@
   },
   {
     "ea": "0x62448F",
-    "line": "push    1",
+    "line": "push    1; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x624491",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x624493",
-    "line": "push    11h",
+    "line": "push    11h; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x624495",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x624497",
-    "line": "mov     byte ptr [esi+174h], 1",
+    "line": "mov     byte ptr [esi+174h], 1; Initializes CombatController+0x174 to true before movement/path evaluation; this is the current-target reachability state.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6244A0",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6244CB",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x62454D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x624559",
-    "line": "call    sub_624030",
+    "line": "call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x624584",
-    "line": "call    sub_624030",
+    "line": "call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x6245A1",
-    "line": "call    sub_624030",
+    "line": "call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.",
     "mnemonic": "call",
     "size": 5
   },

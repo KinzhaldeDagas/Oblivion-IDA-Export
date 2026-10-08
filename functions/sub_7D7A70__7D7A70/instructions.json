@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7D7A70",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified (Oblivion): replaces the TextureEffectData pointer at +0xE0 on the supplied NiProperty-derived shader property, with Interlocked release/addref handling, then clears a 32-bit state at +0x24. BSShaderPPLightingProperty constructor/destructor and viewer export independently confirm +0xE0 is its spTexEffectData ownership slot. Direct callers select property ID 4 subtypes 5..10: PP-lighting/SpeedTree PP (5), Hair (6), SpeedTree Branch (7), SpeedTree Leaf (9), and Lighting30 (10); subtype 8 remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D7A71",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+data]",
     "mnemonic": "mov",
     "size": 4
   },

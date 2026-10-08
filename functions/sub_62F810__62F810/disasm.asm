@@ -61,7 +61,7 @@
 0x62F8C2: call    edx
 0x62F8C4: push    eax; int
 0x62F8C5: mov     ecx, edi; this
-0x62F8C7: call    TESObjectREFR_GetParentCell
+0x62F8C7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62F8CC: push    eax; int
 0x62F8CD: call    sub_4D5E30
 0x62F8D2: add     esp, 1Ch
@@ -77,13 +77,13 @@
 0x62F8EE: call    edx
 0x62F8F0: push    eax; a2
 0x62F8F1: mov     ecx, edi; this
-0x62F8F3: call    TESObjectREFR_GetParentCell
+0x62F8F3: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62F8F8: mov     ecx, ds:0B33A98h
 0x62F8FE: push    eax; a1
 0x62F8FF: call    sub_446B90
-0x62F904: push    offset dword_B3B944
+0x62F904: push    offset unk_B3B944
 0x62F909: push    ebp
-0x62F90A: mov     ecx, offset ActorProcessManager_ptr
+0x62F90A: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x62F90F: call    sub_67A420
 0x62F914: mov     ebx, eax
 0x62F916: mov     eax, ds:0B3B948h
@@ -92,7 +92,7 @@
 0x62F921: jz      short loc_62F93A
 0x62F923: mov     esi, [eax+4]
 0x62F926: push    eax
-0x62F927: call    FormHeapFree
+0x62F927: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62F92C: add     esp, 4
 0x62F92F: test    esi, esi
 0x62F931: mov     eax, esi
@@ -122,8 +122,8 @@
 0x62F981: call    sub_5E6BA0
 0x62F986: test    al, al
 0x62F988: jnz     loc_62FB99
-0x62F98E: mov     ecx, esi
-0x62F990: call    sub_5E0F30
+0x62F98E: mov     ecx, esi; this
+0x62F990: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x62F995: test    al, al
 0x62F997: jnz     loc_62FB99
 0x62F99D: mov     edx, [esi]
@@ -134,13 +134,13 @@
 0x62F9AB: test    al, al
 0x62F9AD: jnz     loc_62FB99
 0x62F9B3: mov     ecx, esi; this
-0x62F9B5: call    sub_5E6C60
+0x62F9B5: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x62F9BA: test    al, al
 0x62F9BC: jz      short loc_62F9C8
 0x62F9BE: cmp     byte ptr [ebp+2Ch], 0
 0x62F9C2: jnz     loc_62FB99
 0x62F9C8: mov     ecx, esi; this
-0x62F9CA: call    sub_5E6C60
+0x62F9CA: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x62F9CF: test    al, al
 0x62F9D1: jz      short loc_62F9E3
 0x62F9D3: mov     ecx, [esp+48h+var_30]
@@ -149,7 +149,7 @@
 0x62F9DF: test    al, al
 0x62F9E1: jz      short loc_62FA4B
 0x62F9E3: mov     ecx, esi; this
-0x62F9E5: call    sub_5E6C60
+0x62F9E5: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x62F9EA: test    al, al
 0x62F9EC: jnz     loc_62FB99
 0x62F9F2: mov     edi, [esp+48h+friendlyFight_]
@@ -186,8 +186,8 @@
 0x62FA40: add     esp, 20h
 0x62FA43: test    eax, eax
 0x62FA45: jle     loc_62FB99
-0x62FA4B: lea     ecx, [esp+48h+var_20]
-0x62FA4F: call    sub_68A9F0
+0x62FA4B: lea     ecx, [esp+48h+var_20]; this
+0x62FA4F: call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.
 0x62FA54: mov     ecx, [esi+58h]
 0x62FA57: mov     eax, [ecx]
 0x62FA59: mov     edx, [eax+8]
@@ -217,12 +217,12 @@
 0x62FAA0: mov     ecx, esi
 0x62FAA2: call    eax
 0x62FAA4: mov     ecx, esi; this
-0x62FAA6: call    Actor__GetProcessLevel
+0x62FAA6: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x62FAAB: test    eax, eax
 0x62FAAD: jz      loc_62FB84
 0x62FAB3: mov     ebp, [esi+58h]
 0x62FAB6: mov     edi, [ebp+0]
-0x62FAB9: mov     ecx, offset TimeGlobals
+0x62FAB9: mov     ecx, 0B332E0h
 0x62FABE: add     edi, 1Ch
 0x62FAC1: call    TimeGlobals_GetGameHour
 0x62FAC6: fsub    qword ptr ds:0A563D0h
@@ -234,20 +234,20 @@
 0x62FAD9: fstp    [esp+4Ch+var_4C]
 0x62FADC: call    edx
 0x62FADE: mov     ecx, esi; this
-0x62FAE0: call    Actor__GetProcessLevel
+0x62FAE0: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x62FAE5: push    eax
 0x62FAE6: push    esi
-0x62FAE7: mov     ecx, offset ActorProcessManager_ptr
+0x62FAE7: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x62FAEC: call    sub_674550
-0x62FAF1: push    0
-0x62FAF3: push    0
-0x62FAF5: push    0
+0x62FAF1: push    0; relativeTo
+0x62FAF3: push    0; insertRelative
+0x62FAF5: push    0; append
 0x62FAF7: mov     ecx, esi; this
-0x62FAF9: call    Actor__GetProcessLevel
-0x62FAFE: push    eax
-0x62FAFF: push    esi
-0x62FB00: mov     ecx, offset ActorProcessManager_ptr
-0x62FB05: call    sub_673A90
+0x62FAF9: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
+0x62FAFE: push    eax; processLevel
+0x62FAFF: push    esi; object
+0x62FB00: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x62FB05: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x62FB0A: mov     ebp, [esp+48h+a7]
 0x62FB0E: jmp     short loc_62FB84
 0x62FB10: mov     esi, [esp+48h+arg_0]
@@ -268,9 +268,9 @@
 0x62FB40: push    eax; void *
 0x62FB41: call    OblivionDynamicCast
 0x62FB46: add     esp, 14h
-0x62FB49: mov     ecx, ebp
+0x62FB49: mov     ecx, ebp; self
 0x62FB4B: mov     esi, eax
-0x62FB4D: call    sub_606140
+0x62FB4D: call    Crime_GetGoldValue
 0x62FB52: fstp    [esp+48h+var_34]
 0x62FB56: mov     ecx, esi
 0x62FB58: call    sub_5234A0
@@ -287,16 +287,16 @@
 0x62FB7B: fstp    [esp+4Ch+var_4C]
 0x62FB7E: call    edx
 0x62FB80: mov     byte ptr [ebp+11h], 1
-0x62FB84: lea     ecx, [esp+48h+var_20]
+0x62FB84: lea     ecx, [esp+48h+var_20]; this
 0x62FB88: mov     [esp+48h+var_4], 0FFFFFFFFh
-0x62FB90: call    sub_68AA10
+0x62FB90: call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
 0x62FB95: mov     ebx, [esp+48h+distanceToTarget]
 0x62FB99: cmp     [esp+48h+var_28], 0
 0x62FB9E: jnz     loc_62F950
 0x62FBA4: mov     ecx, ebx
-0x62FBA6: call    BSSimpleList_Clear
+0x62FBA6: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x62FBAB: push    ebx
-0x62FBAC: call    FormHeapFree
+0x62FBAC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62FBB1: add     esp, 4
 0x62FBB4: mov     ecx, [esp+48h+var_C]
 0x62FBB8: mov     large fs:0, ecx
@@ -307,3 +307,12 @@
 0x62FBC3: pop     ebx
 0x62FBC4: add     esp, 34h
 0x62FBC7: retn    0Ch
+0x9C3D80: lea     ecx, [ebp-20h]; this
+0x9C3D83: jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.
+0x9C3D88: mov     edx, [esp+arg_4]
+0x9C3D8C: lea     eax, [edx-38h]
+0x9C3D8F: mov     ecx, [edx-3Ch]
+0x9C3D92: xor     ecx, eax
+0x9C3D94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3D99: mov     eax, offset stru_AEC898
+0x9C3D9E: jmp     ___CxxFrameHandler3

@@ -13,36 +13,36 @@ char __userpurge sub_5AC390@<al>(
 {
   Tile *altActiveTile; // eax
 
-  if ( !InterfaceManager_MenuModeHasFocus(0x3EA) )
-    return 0;
-  if ( a10 != 0xF )
+  if ( !InterfaceManager_MenuModeHasFocus(0x3EA) ) /*0x5ac395*/
+    return 0; /*0x5ac395*/
+  if ( a10 != 0xF ) /*0x5ac3ac*/
   {
-    switch ( a10 )
+    switch ( a10 ) /*0x5ac3e9*/
     {
-      case 0xD:
-        if ( a11 >= 1.0 )
+      case 0xD: /*0x5ac3e9*/
+        if ( a11 >= 1.0 ) /*0x5ac3f6*/
         {
-          sub_5A5E80(a7, a8, a1, 1.0);
-          return 1;
+          sub_5A5E80(a7, a8, a1, 1.0); /*0x5ac3f8*/
+          return 1; /*0x5ac3ff*/
         }
         break;
-      case 0xE:
-        if ( a11 >= 1.0 )
+      case 0xE: /*0x5ac3e9*/
+        if ( a11 >= 1.0 ) /*0x5ac412*/
         {
-          sub_5A5F60(a7, a8, a1, 1.0);
-          return 1;
+          sub_5A5F60(a7, a8, a1, 1.0); /*0x5ac414*/
+          return 1; /*0x5ac41b*/
         }
         break;
-      case 0xC:
-        sub_5C1F70(a1, a2, a3, a4, a5, a6, a7, a8, a9);
-        return 1;
+      case 0xC: /*0x5ac3e9*/
+        Input_ProcessQuickSlotHotkeys(a1, a2, a3, a4, a5, a6, a7, a8, a9); /*0x5ac423*/
+        return 1; /*0x5ac42a*/
     }
-    return 0;
+    return 0; /*0x5ac3f6*/
   }
-  if ( sub_6DA150(0xF) != 2 )
-    return 0;
-  altActiveTile = InterfaceManager_GetSingleton(0, 1)->altActiveTile;
-  if ( altActiveTile )
-    sub_5AB980(a1, a2, a3, a4, a5, a6, a7, a8, a9, altActiveTile);
-  return 1;
+  if ( sub_6DA150(0xF) != 2 ) /*0x5ac3c0*/
+    return 0; /*0x5ac42d*/
+  altActiveTile = InterfaceManager_GetSingleton(0, 1)->altActiveTile; /*0x5ac3cb*/
+  if ( altActiveTile ) /*0x5ac3d6*/
+    sub_5AB980(a1, a2, a3, a4, a5, a6, a7, a8, a9, altActiveTile); /*0x5ac3d9*/
+  return 1; /*0x5ac3e3*/
 }

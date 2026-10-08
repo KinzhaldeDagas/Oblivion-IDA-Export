@@ -1,4 +1,4 @@
-BSStringT *sub_A07F20()
+NiRTTI *sub_A07F20()
 {
-  return sub_70E220((BSStringT *)dword_B3E8B0, "NiBoneLODController", (int)dword_B3FC98);
+  return NiRTTI_Constructor(&stru_B3E8B0, "NiBoneLODController", &stru_B3FC98); /*0xa07f34*/
 }

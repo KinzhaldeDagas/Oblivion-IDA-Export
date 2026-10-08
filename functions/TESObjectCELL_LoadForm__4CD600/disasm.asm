@@ -1,4 +1,4 @@
-0x4CD600: push    ebp
+0x4CD600: push    ebp; Authoritative CELL deletion note: the record-header deleted flag does not short-circuit TESObjectCELL payload dispatch; serialized DATA/direct fields and shared ExtraDataList chunks are still replayed in stream order.
 0x4CD601: mov     ebp, esp
 0x4CD603: sub     esp, 8
 0x4CD606: mov     eax, ds:0B30AACh
@@ -24,7 +24,7 @@
 0x4CD642: mov     [ebp+var_8], eax
 0x4CD645: push    edi
 0x4CD646: mov     ecx, ebx
-0x4CD648: call    TESFile_InitializeFormFromRecord
+0x4CD648: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4CD64D: mov     ecx, ebx
 0x4CD64F: call    TESFile_GetChunkType
 0x4CD654: cmp     eax, 4C4C5546h
@@ -48,7 +48,7 @@
 0x4CD6B1: lea     esi, [edi+24h]
 0x4CD6B4: push    esi; Dst
 0x4CD6B5: mov     ecx, ebx; a1
-0x4CD6B7: call    TESFile_GetChunkData
+0x4CD6B7: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4CD6BC: mov     al, [esi]
 0x4CD6BE: movsx   ecx, al
 0x4CD6C1: cmp     ecx, 0FFh
@@ -81,9 +81,9 @@
 0x4CD705: push    ecx
 0x4CD706: lea     ecx, [edi+28h]
 0x4CD709: fstp    [esp+18h+var_18]; float
-0x4CD70C: call    sub_423FF0
+0x4CD70C: call    ExtraDataList_SetWaterHeight
 0x4CD711: mov     eax, ds:0B33A98h
-0x4CD716: cmp     byte ptr [eax+0CD1h], 0
+0x4CD716: cmp     byte ptr [eax+0CD1h], 0; Verified cell-load gate: when activeFileState.retainActiveFile is zero, TESObjectCELL_LoadForm clears flags0 bit 0x40; when nonzero it preserves the serialized bit. This bit is toggled by linked-door lock/unlock and tested with bit 0x20 in public-cell access decisions. Probable semantic label is TempPublic; the exact historical/runtime reason for the DataHandler gate remains Unknown.
 0x4CD71D: jnz     short loc_4CD722
 0x4CD71F: and     byte ptr [esi], 0BFh
 0x4CD722: mov     ecx, edi
@@ -104,7 +104,7 @@
 0x4CD75B: push    8; a4
 0x4CD75D: push    eax; Dst
 0x4CD75E: mov     ecx, ebx; a1
-0x4CD760: call    TESFile_GetChunkData
+0x4CD760: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4CD765: jmp     loc_4CD92D
 0x4CD76A: cmp     eax, 434F4C58h
 0x4CD76F: jz      loc_4CD923
@@ -123,7 +123,7 @@
 0x4CD7AB: push    200h; a4
 0x4CD7B0: push    esi; Dst
 0x4CD7B1: mov     ecx, ebx; a1
-0x4CD7B3: call    TESFile_GetChunkData
+0x4CD7B3: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4CD7B8: mov     edx, [edi]
 0x4CD7BA: mov     eax, [edx+0D8h]
 0x4CD7C0: push    esi
@@ -160,20 +160,20 @@
 0x4CD84F: push    28h ; '('; a4
 0x4CD851: push    eax; Dst
 0x4CD852: mov     ecx, ebx; a1
-0x4CD854: call    TESFile_GetChunkData
+0x4CD854: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4CD859: jmp     loc_4CD92D
 0x4CD85E: test    edi, edi
 0x4CD860: jz      short loc_4CD874
 0x4CD862: lea     eax, [edi+18h]
 0x4CD865: push    ebx
 0x4CD866: push    eax
-0x4CD867: call    TESFullname_Load
+0x4CD867: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4CD86C: add     esp, 8
 0x4CD86F: jmp     loc_4CD92D
 0x4CD874: xor     eax, eax
 0x4CD876: push    ebx
 0x4CD877: push    eax
-0x4CD878: call    TESFullname_Load
+0x4CD878: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4CD87D: add     esp, 8
 0x4CD880: jmp     loc_4CD92D
 0x4CD885: cmp     eax, 50534558h
@@ -224,10 +224,10 @@
 0x4CD91A: jz      short loc_4CD923
 0x4CD91C: cmp     eax, 574C4358h
 0x4CD921: jnz     short loc_4CD92D
-0x4CD923: push    edi
-0x4CD924: push    ebx
-0x4CD925: lea     ecx, [edi+28h]
-0x4CD928: call    ExtraDataList_Load
+0x4CD923: push    edi; owner
+0x4CD924: push    ebx; tesFile
+0x4CD925: lea     ecx, [edi+28h]; this
+0x4CD928: call    ExtraDataList_Load; Common ExtraDataList single-chunk dispatcher reached by REFR/ACHR/ACRE. TESFile_GetChunkData(max) semantics at 0x450C20: length 0 leaves destination unchanged; <=max copies a prefix only; >max copies max-1 and writes a terminal zero. Each explicitly zeroed scratch therefore gives deterministic malformed-width behavior; singleton setters make repeats last-wins/remove as noted per branch.
 0x4CD92D: mov     ecx, ebx
 0x4CD92F: call    TESFile_GetNextChunk
 0x4CD934: test    al, al

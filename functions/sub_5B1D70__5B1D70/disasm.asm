@@ -7,7 +7,7 @@
 0x5B1D7A: lea     ebx, [ebx+0]
 0x5B1D80: mov     eax, [edi]
 0x5B1D82: push    eax
-0x5B1D83: call    FormHeapFree
+0x5B1D83: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B1D88: mov     edi, [edi+4]
 0x5B1D8B: add     esp, 4
 0x5B1D8E: test    edi, edi
@@ -17,7 +17,7 @@
 0x5B1D98: mov     eax, [esi+4]
 0x5B1D9B: mov     edi, [eax+4]
 0x5B1D9E: push    eax
-0x5B1D9F: call    FormHeapFree
+0x5B1D9F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B1DA4: add     esp, 4
 0x5B1DA7: test    edi, edi
 0x5B1DA9: mov     [esi+4], edi

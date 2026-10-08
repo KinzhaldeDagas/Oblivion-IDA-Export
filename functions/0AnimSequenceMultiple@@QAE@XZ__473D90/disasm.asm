@@ -1,4 +1,4 @@
-0x473D90: push    0FFFFFFFFh
+0x473D90: push    0FFFFFFFFh; AnimSequenceMultiple constructor: converts an existing single sequence entry into a multiple-sequence list and moves the existing BSAnimGroupSequence into it.
 0x473D92: push    offset ??0AnimSequenceMultiple@@QAE@XZ_SEH
 0x473D97: mov     eax, large fs:0
 0x473D9D: push    eax
@@ -36,7 +36,7 @@
 0x473DF7: call    edx
 0x473DF9: push    eax
 0x473DFA: mov     ecx, edi
-0x473DFC: call    AddMultiple
+0x473DFC: call    AnimSequenceMultiple_AddSequence; AnimSequenceMultiple add-sequence method. Inserts a refcounted BSAnimGroupSequence into the multiple-sequence linked list and increments the list count.
 0x473E01: mov     eax, [esi]
 0x473E03: mov     edx, [eax+4]
 0x473E06: push    ebx
@@ -56,3 +56,14 @@
 0x473E25: pop     ebx
 0x473E26: add     esp, 10h
 0x473E29: retn    4
+0x470B70: mov     dword ptr [ecx], offset ??_7AnimSequenceBase@@6B@; const AnimSequenceBase::`vftable'
+0x470B76: retn
+0x9AED20: mov     ecx, [ebp-10h]
+0x9AED23: jmp     loc_470B70
+0x9AED28: mov     edx, [esp+arg_4]
+0x9AED2C: lea     eax, [edx-10h]
+0x9AED2F: mov     ecx, [edx-14h]
+0x9AED32: xor     ecx, eax
+0x9AED34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AED39: mov     eax, offset stru_ADB410
+0x9AED3E: jmp     ___CxxFrameHandler3

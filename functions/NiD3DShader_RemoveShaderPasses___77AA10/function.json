@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77AA10",
+      "0x77AA5D"
+    ]
+  ],
+  "chunks_sha256": "2e909d9f5e2362914e4153930d1d6ab08204181f4dee14ab91246939683e5693",
+  "comment_regular": "Reset a NiD3DShader pass queue before per-geometry setup. Releases every Passes[0..PassCount) slot through NiTArray assignment, releases and nulls CurrentPass, then zeros PassCount and CurrentPassIndex. A subsequent selector-resolution failure therefore cannot reuse a pass from the previous geometry or selector.",
+  "comment_repeatable": "Reset a NiD3DShader pass queue before per-geometry setup. Releases every Passes[0..PassCount) slot through NiTArray assignment, releases and nulls CurrentPass, then zeros PassCount and CurrentPassIndex. A subsequent selector-resolution failure therefore cannot reuse a pass from the previous geometry or selector.\nDX11 refresh audit: queue reset and pooled pass release prohibit using the prior CurrentPass address as frame-refresh authority. Reconstruct current material producer inputs from owned geometry/property/pass inventory instead.\nDX11 replacement audit 2026-10-01: verified x86 queue ownership layout: shader+34 CurrentPassIndex, +38 PassCount, +3C CurrentPass, +40 embedded Passes array. Reset clears every old slot via NiTArray_NiD3DPass_SetAt, then decrements CurrentPass+60 and calls ReleaseToPool on zero before clearing pointer/count/index. These are pass-pool lifecycle effects, distinct from accumulator persistent lists and constant-map NiPointer refs. They remain required when replacing the bucket body. Fallout827C6020 ResetPasses is related by purpose but its body only clears current pass/index; do not infer Oblivion queue release behavior from it.\nDX11 queue audit 2026-10-01: preserve release ordering even if next selected pass aliases a prior queue/current object. An intermediate zero ref invokes7604D0 before any new retain; final net deltas cannot suppress that retirement. Initialized, nonretiring paths can coalesce under exclusive all-reference-writer/observer and lifetime ownership; pool cleanup and cold sentinel initialization require explicit lifecycle handling.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiD3DShader_RemoveShaderPasses?",
+  "display_name": "NiD3DShader_ResetPassQueue",
   "end_ea": "0x77AA5D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiD3DShader_RemoveShaderPasses?",
+  "name": "NiD3DShader_ResetPassQueue",
   "segment": ".text",
   "sha256": "2e909d9f5e2362914e4153930d1d6ab08204181f4dee14ab91246939683e5693",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77AA10",
+  "total_chunk_size": 77,
   "type": "void __thiscall(NiD3DShader *this)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 32

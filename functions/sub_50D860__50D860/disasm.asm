@@ -16,7 +16,7 @@
 0x50D89E: mov     edx, ds:0B333A0h
 0x50D8A4: mov     ecx, [edx+54h]
 0x50D8A7: add     esp, 4
-0x50D8AA: call    sub_49E280
+0x50D8AA: call    sub_49E280; Pass205/206: LODWaterRoot jump-table loop creates four generated child quads under 0x00B35234 and reaches shared child-creation tail.
 0x50D8AF: mov     eax, ds:0B333A0h
 0x50D8B4: mov     ecx, [eax+54h]
 0x50D8B7: jmp     sub_498F30

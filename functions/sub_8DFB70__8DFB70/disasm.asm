@@ -75,7 +75,7 @@
 0x8DFC59: push    ebx
 0x8DFC5A: call    sub_8CC3F0
 0x8DFC5F: add     esp, 4
-0x8DFC62: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x8DFC62: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x8DFC67: fld     [esp+30E4h+var_30C4]
 0x8DFC6B: mov     ecx, [esp+30E4h+var_30CC]
 0x8DFC6F: mov     edx, [esp+30E4h+var_30C8]

@@ -1,1 +1,4 @@
-PlayerCharacterVtbl
+struct PlayerCharacterVtbl
+{
+ActorVtbl super;
+};

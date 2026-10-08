@@ -1,1 +1,1 @@
-hkWorldPostIntegrateListener
+struct hkWorldPostIntegrateListener;

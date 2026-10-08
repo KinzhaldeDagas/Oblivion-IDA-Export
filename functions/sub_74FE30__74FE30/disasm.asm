@@ -3,7 +3,7 @@
 0x74FE35: push    edi
 0x74FE36: push    esi
 0x74FE37: mov     edi, ecx
-0x74FE39: call    sub_75E480
+0x74FE39: call    j_NiSingleInterpController_LinkObject
 0x74FE3E: cmp     dword ptr [esi+0D8h], 0A010068h
 0x74FE48: jnb     loc_74FF1C
 0x74FE4E: push    ebx

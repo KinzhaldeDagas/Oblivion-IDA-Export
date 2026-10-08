@@ -1,19 +1,32 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x526FA0",
+      "0x527154"
+    ]
+  ],
+  "chunks_sha256": "b5440113e37b4d5795a8f2b73e984ba108bbe0ac44144064cead2efbf266c988",
+  "comment_regular": "Oblivion 1.2.0.416: compiler-emitted vector<float>::insert(position,count,value) body used by the checked float insert-one wrapper; 4-byte stride, 1.5x growth, alias-safe local fill value, in-place shift or FormHeap reallocation. Named CompilerCopy because equivalent specializations also exist at other addresses.",
+  "comment_repeatable": "Oblivion 1.2.0.416: compiler-emitted vector<float>::insert(position,count,value) body used by the checked float insert-one wrapper; 4-byte stride, 1.5x growth, alias-safe local fill value, in-place shift or FormHeap reallocation. Named CompilerCopy because equivalent specializations also exist at other addresses.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_526FA0",
+  "display_name": "OB_stVectorFloat_InsertFill_CompilerCopy_010201A0",
   "end_ea": "0x527154",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_526FA0",
+  "name": "OB_stVectorFloat_InsertFill_CompilerCopy_010201A0",
   "segment": ".text",
   "sha256": "b5440113e37b4d5795a8f2b73e984ba108bbe0ac44144064cead2efbf266c988",
   "size": 436,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x526FA0",
-  "type": "void __thiscall(_DWORD *this, int, char *Src, unsigned int, int *)",
+  "total_chunk_size": 436,
+  "type": "void __thiscall(OB_stVectorFloat_010201A0 *this, OB_stVectorFloatIterator_010201A0 position, unsigned int count, const float *value)",
   "xrefs_from_count": 205,
   "xrefs_to_count": 2
 }

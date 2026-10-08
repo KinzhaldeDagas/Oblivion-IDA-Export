@@ -34,3 +34,13 @@
 0x4AE03D: pop     esi
 0x4AE03E: add     esp, 10h
 0x4AE041: retn
+0x9B2C70: mov     ecx, [ebp-10h]
+0x9B2C73: add     ecx, 0Ch; this
+0x9B2C76: jmp     ??1TESObjectACTI@@UAE@XZ; TESObjectACTI::~TESObjectACTI(void)
+0x9B2C7B: mov     edx, [esp+arg_4]
+0x9B2C7F: lea     eax, [edx-0Ch]
+0x9B2C82: mov     ecx, [edx-10h]
+0x9B2C85: xor     ecx, eax
+0x9B2C87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2C8C: mov     eax, offset stru_ADEAEC
+0x9B2C91: jmp     ___CxxFrameHandler3

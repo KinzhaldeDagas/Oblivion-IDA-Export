@@ -2,16 +2,19 @@ int __thiscall sub_4E5550(_DWORD *this)
 {
   int result; // eax
 
-  result = *(this + 7);
-  if ( result )
+  result = *(this + 7); /*0x4e5550*/
+  if ( result ) /*0x4e5555*/
   {
-    if ( dword_B35F88 )
+    if ( g_PathGridDebugRenderRoot ) /*0x4e5557*/
     {
-      (*(void (__thiscall **)(UInt32, int, int))(*(_DWORD *)dword_B35F88 + 0x84))(dword_B35F88, result, 1);
-      NiAVObject_InitializePropertyState((NiAVObject *)dword_B35F88);
-      NiNode_UpdateDynamicEffectState((NiNode *)dword_B35F88);
-      return NiAVObject_UpdateNiAVObject((NiAVObject *)dword_B35F88, 0.0, 0);
+      ((void (__thiscall *)(NiNode *, int, int))g_PathGridDebugRenderRoot->vtbl->AddObject)( /*0x4e556c*/
+        g_PathGridDebugRenderRoot,
+        result,
+        1);
+      NiAVObject_InitializePropertyState((NiAVObject *)g_PathGridDebugRenderRoot); /*0x4e5574*/
+      NiNode_UpdateDynamicEffectState(g_PathGridDebugRenderRoot); /*0x4e557f*/
+      return NiAVObject_UpdateNiAVObject((NiAVObject *)g_PathGridDebugRenderRoot, 0.0, 0); /*0x4e5592*/
     }
   }
-  return result;
+  return result; /*0x4e5597*/
 }

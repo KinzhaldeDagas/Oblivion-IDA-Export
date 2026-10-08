@@ -136,12 +136,12 @@
 0x7DE56E: mov     ecx, [esi+108h]; this
 0x7DE574: add     esp, 8
 0x7DE577: call    BSRenderedTexture__GetInnerTexture
-0x7DE57C: push    eax; a2
+0x7DE57C: push    eax; texture
 0x7DE57D: mov     ecx, edi; this
-0x7DE57F: call    sub_76C910
-0x7DE584: push    1
-0x7DE586: mov     ecx, edi
-0x7DE588: call    sub_771640
+0x7DE57F: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
+0x7DE584: push    1; filterPreset
+0x7DE586: mov     ecx, edi; this
+0x7DE588: call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.
 0x7DE58D: mov     eax, [esi+0F8h]
 0x7DE593: mov     eax, [eax+24h]
 0x7DE596: mov     eax, [eax+4]
@@ -155,13 +155,41 @@
 0x7DE5AF: mov     ecx, [esi+104h]; this
 0x7DE5B5: add     esp, 8
 0x7DE5B8: call    BSRenderedTexture__GetInnerTexture
-0x7DE5BD: push    eax; a2
+0x7DE5BD: push    eax; texture
 0x7DE5BE: mov     ecx, edi; this
-0x7DE5C0: call    sub_76C910
+0x7DE5C0: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7DE5C5: cmp     edi, ebp
 0x7DE5C7: mov     [esp+2Ch+var_C], ebx
 0x7DE5CB: jz      short def_7DE45B
 0x7DE5CD: add     [edi+5Ch], ebx
 0x7DE5D0: jnz     short def_7DE45B
 0x7DE5D2: mov     ecx, edi
-0x7DE5D4: call    sub_772560
+0x7DE5D4: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9CF330: lea     ecx, [ebp-10h]
+0x9CF333: jmp     loc_75FA70
+0x9CF338: lea     ecx, [ebp-10h]
+0x9CF33B: jmp     loc_75FA70
+0x9CF340: lea     ecx, [ebp-10h]
+0x9CF343: jmp     loc_75FA70
+0x9CF348: lea     ecx, [ebp-10h]
+0x9CF34B: jmp     loc_75FA70
+0x9CF350: lea     ecx, [ebp-10h]
+0x9CF353: jmp     loc_75FA70
+0x9CF358: lea     ecx, [ebp-10h]
+0x9CF35B: jmp     loc_75FA70
+0x9CF360: lea     ecx, [ebp-10h]
+0x9CF363: jmp     loc_75FA70
+0x9CF368: mov     edx, [esp+arg_4]
+0x9CF36C: lea     eax, [edx-14h]
+0x9CF36F: mov     ecx, [edx-18h]
+0x9CF372: xor     ecx, eax
+0x9CF374: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF379: mov     eax, offset stru_AF7FD8
+0x9CF37E: jmp     ___CxxFrameHandler3

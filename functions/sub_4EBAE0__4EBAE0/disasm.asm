@@ -1,8 +1,8 @@
 0x4EBAE0: mov     ecx, ds:0B333A0h
 0x4EBAE6: push    esi
 0x4EBAE7: call    TES__GetCurrentWorldspace
-0x4EBAEC: mov     ecx, eax
-0x4EBAEE: call    sub_4EF7E0
+0x4EBAEC: mov     ecx, eax; worldspace
+0x4EBAEE: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4EBAF3: cmp     [esp+4+arg_0], 0
 0x4EBAF8: jz      loc_4EBB8F
 0x4EBAFE: push    1
@@ -13,15 +13,15 @@
 0x4EBB11: test    esi, esi
 0x4EBB13: jz      short loc_4EBB22
 0x4EBB15: call    TES__GetCurrentWorldspace
-0x4EBB1A: push    eax
-0x4EBB1B: mov     ecx, esi
-0x4EBB1D: call    sub_483D60
+0x4EBB1A: push    eax; worldspace
+0x4EBB1B: mov     ecx, esi; gridDistantArray
+0x4EBB1D: call    DistantLOD_UpdateExteriorGrid; Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.
 0x4EBB22: mov     ecx, ds:0B333C4h
 0x4EBB28: mov     eax, [ecx]
 0x4EBB2A: mov     edx, [eax+174h]
 0x4EBB30: call    edx
 0x4EBB32: mov     edx, [eax]
-0x4EBB34: push    1
+0x4EBB34: push    1; a4
 0x4EBB36: sub     esp, 0Ch
 0x4EBB39: mov     ecx, esp
 0x4EBB3B: mov     [ecx], edx
@@ -29,7 +29,7 @@
 0x4EBB40: mov     eax, [eax+8]
 0x4EBB43: mov     [ecx+4], edx
 0x4EBB46: mov     [ecx+8], eax
-0x4EBB49: call    sub_4EA6E0
+0x4EBB49: call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.
 0x4EBB4E: mov     ecx, ds:0B33A10h
 0x4EBB54: add     esp, 10h
 0x4EBB57: push    5
@@ -39,7 +39,7 @@
 0x4EBB66: mov     eax, [edx+174h]
 0x4EBB6C: call    eax
 0x4EBB6E: mov     edx, [eax]
-0x4EBB70: push    0
+0x4EBB70: push    0; a4
 0x4EBB72: sub     esp, 0Ch
 0x4EBB75: mov     ecx, esp
 0x4EBB77: mov     [ecx], edx
@@ -47,7 +47,7 @@
 0x4EBB7C: mov     eax, [eax+8]
 0x4EBB7F: mov     [ecx+4], edx
 0x4EBB82: mov     [ecx+8], eax
-0x4EBB85: call    sub_4EA6E0
+0x4EBB85: call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.
 0x4EBB8A: add     esp, 10h
 0x4EBB8D: pop     esi
 0x4EBB8E: retn
@@ -57,8 +57,8 @@
 0x4EBB9E: push    0
 0x4EBBA0: mov     byte ptr ds:0B3608Fh, 0
 0x4EBBA7: call    TES__GetCurrentWorldspace
-0x4EBBAC: mov     ecx, eax
-0x4EBBAE: call    sub_4EF7E0
+0x4EBBAC: mov     ecx, eax; worldspace
+0x4EBBAE: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4EBBB3: mov     ecx, eax
 0x4EBBB5: call    sub_4EA080
 0x4EBBBA: mov     eax, ds:0B34424h

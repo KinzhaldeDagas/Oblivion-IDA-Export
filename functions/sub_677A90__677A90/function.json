@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x677A90",
+      "0x677B41"
+    ]
+  ],
+  "chunks_sha256": "6fbdfa792c2368086a7fbcd295b4ef8c443a649adcb2f36ec72ad728babeb9cc",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_677A90",
+  "comment_repeatable": "MEF LARGE PERF 2026-09-08: PERF-7 population: LoadGame466918 calls rebuild, which frees candidate nodes, empties embeddedhead+60, walks process-list+68 and admits nearby actor references with duplicate checks. Only this direct rebuild caller was found. Large post-load lists can precede trimming; no assertion of continual per-frame rebuild.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ProcessLists_RebuildNearbyActorCandidates",
   "end_ea": "0x677B41",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_677A90",
+  "name": "ProcessLists_RebuildNearbyActorCandidates",
   "segment": ".text",
   "sha256": "6fbdfa792c2368086a7fbcd295b4ef8c443a649adcb2f36ec72ad728babeb9cc",
   "size": 177,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x677A90",
+  "total_chunk_size": 177,
   "type": "void __thiscall(_DWORD *this)",
-  "xrefs_from_count": 83,
+  "xrefs_from_count": 81,
   "xrefs_to_count": 1
 }

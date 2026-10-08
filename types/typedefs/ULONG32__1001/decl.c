@@ -1,1 +1,1 @@
-ULONG32
+typedef unsigned int ULONG32;

@@ -7,13 +7,13 @@ int __userpurge Actor_GetBaseCalcAVi@<eax>(int *a1@<ecx>, int a2@<ebx>, int a3@<
   float v10; // [esp+4h] [ebp+4h]
   float v11; // [esp+4h] [ebp+4h]
 
-  BaseCalcAVf = Actor_GetBaseCalcAVf(a1, a2, a3, a4, a5);
-  v5 = BaseCalcAVf;
-  v10 = (float)Double_To_SInt32(BaseCalcAVf);
-  v6 = v5 - v10;
-  v7 = v10;
-  if ( v6 < dbl_A2FC68 )
-    v7 = v7 - dbl_A2F928;
-  v11 = v7;
-  return Double_To_SInt32(v11);
+  BaseCalcAVf = Actor_GetBaseCalcAVf(a1, a2, a3, a4, a5); /*0x5f191a*/
+  v5 = BaseCalcAVf; /*0x5f191e*/
+  v10 = (float)Double_To_SInt32(BaseCalcAVf); /*0x5f1931*/
+  v6 = v5 - v10; /*0x5f193d*/
+  v7 = v10; /*0x5f193d*/
+  if ( v6 < dbl_A2FC68 ) /*0x5f194a*/
+    v7 = v7 - dbl_A2F928; /*0x5f194c*/
+  v11 = v7; /*0x5f1952*/
+  return Double_To_SInt32(v11); /*0x5f195f*/
 }

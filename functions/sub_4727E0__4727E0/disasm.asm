@@ -1,4 +1,4 @@
-0x4727E0: push    ecx
+0x4727E0: push    ecx; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with "m:" and compared with suffix 'l' to choose left/right attacks.
 0x4727E1: mov     eax, [esp+4+arg_8]
 0x4727E5: test    eax, eax
 0x4727E7: jz      short loc_4727ED

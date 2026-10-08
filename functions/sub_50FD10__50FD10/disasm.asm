@@ -18,7 +18,7 @@
 0x50FD3F: mov     esi, ecx
 0x50FD41: call    sub_494F30
 0x50FD46: push    esi
-0x50FD47: call    FormHeapFree
+0x50FD47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x50FD4C: add     esp, 4
 0x50FD4F: mov     esi, [esp+24h+arg_8]
 0x50FD53: test    esi, esi
@@ -67,7 +67,7 @@
 0x50FDF5: call    ShowDetectorWindow
 0x50FDFA: jmp     short loc_50FDFE
 0x50FDFC: xor     eax, eax
-0x50FDFE: mov     ecx, ds:0B333C4h
+0x50FDFE: mov     ecx, ds:0B333C4h; this
 0x50FE04: mov     ds:0B3339Ch, eax
 0x50FE09: mov     al, [ecx+588h]
 0x50FE0F: test    al, al
@@ -78,8 +78,8 @@
 0x50FE25: push    edx
 0x50FE26: mov     byte ptr [esp+28h+arg_8], al
 0x50FE2A: mov     edx, [esp+28h+arg_8]
-0x50FE2E: push    edx
-0x50FE2F: call    PlayerCharacter_GetPlayerNode
+0x50FE2E: push    edx; firstPerson
+0x50FE2F: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x50FE34: mov     ecx, ds:0B3339Ch
 0x50FE3A: push    eax
 0x50FE3B: call    sub_496C00
@@ -164,3 +164,25 @@
 0x50FF61: pop     ebx
 0x50FF62: add     esp, 10h
 0x50FF65: retn
+0x9B6F30: mov     eax, [ebp+0Ch]
+0x9B6F33: push    eax
+0x9B6F34: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6F39: pop     ecx
+0x9B6F3A: retn
+0x9B6F3B: mov     eax, [ebp-10h]
+0x9B6F3E: push    eax
+0x9B6F3F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6F44: pop     ecx
+0x9B6F45: retn
+0x9B6F46: mov     eax, [ebp+0Ch]
+0x9B6F49: push    eax
+0x9B6F4A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6F4F: pop     ecx
+0x9B6F50: retn
+0x9B6F51: mov     edx, [esp+arg_4]
+0x9B6F55: lea     eax, [edx-14h]
+0x9B6F58: mov     ecx, [edx-18h]
+0x9B6F5B: xor     ecx, eax
+0x9B6F5D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6F62: mov     eax, offset stru_AE1C34
+0x9B6F67: jmp     ___CxxFrameHandler3

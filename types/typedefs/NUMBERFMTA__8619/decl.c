@@ -1,1 +1,1 @@
-NUMBERFMTA
+typedef _numberfmtA NUMBERFMTA;

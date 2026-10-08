@@ -1,4 +1,4 @@
-0x982525: mov     edx, [esp+arg_4]
+0x982525: mov     edx, [esp+arg_4]; MEF PERF 2026-09-07: PERF-2 ASCII comparison evidence: maps unsigned byte A..Z to byte+20h independently for both strings, compares folded values, stops atNUL/difference. Other bytes unchanged. ASCII-folded hashing is valid only for this proven branch with exact equality verification.
 0x982529: push    esi
 0x98252A: mov     esi, [esp+4+arg_0]
 0x98252E: push    edi

@@ -44,3 +44,14 @@
 0x55A096: pop     esi
 0x55A097: add     esp, 10h
 0x55A09A: retn    8
+0x55A000: mov     dword ptr [ecx], offset ??_7BSFaceGenMorph@@6B@; const BSFaceGenMorph::`vftable'
+0x55A006: retn
+0x9BC9C0: mov     ecx, [ebp-10h]
+0x9BC9C3: jmp     loc_55A000
+0x9BC9C8: mov     edx, [esp+arg_4]
+0x9BC9CC: lea     eax, [edx-8]
+0x9BC9CF: mov     ecx, [edx-0Ch]
+0x9BC9D2: xor     ecx, eax
+0x9BC9D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC9D9: mov     eax, offset stru_AE6570
+0x9BC9DE: jmp     ___CxxFrameHandler3

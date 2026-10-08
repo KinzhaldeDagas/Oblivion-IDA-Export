@@ -71,12 +71,12 @@
 0x644174: test    ecx, ecx
 0x644176: mov     edi, 1
 0x64417B: jz      short loc_644193
-0x64417D: call    sub_452A60
+0x64417D: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x644182: test    eax, eax
 0x644184: jz      short loc_644193
 0x644186: mov     eax, [esi+8]
 0x644189: mov     ecx, [eax+28h]
-0x64418C: call    sub_452A60
+0x64418C: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x644191: mov     edi, eax
 0x644193: mov     edx, [esi]
 0x644195: mov     eax, [edx+554h]
@@ -130,7 +130,7 @@
 0x644215: pop     ebx
 0x644216: retn    4
 0x644219: mov     ecx, ebx; this
-0x64421B: call    Actor__GetProcessLevel
+0x64421B: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x644220: cmp     eax, 2
 0x644223: mov     edx, [esi]
 0x644225: jge     short loc_64423F

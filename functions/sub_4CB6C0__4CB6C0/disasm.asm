@@ -2,7 +2,7 @@
 0x4CB6C1: mov     ebp, ecx
 0x4CB6C3: push    edi
 0x4CB6C4: push    ebp; a2
-0x4CB6C5: mov     ecx, offset stru_B35C80; this
+0x4CB6C5: mov     ecx, offset unk_B35C80; this
 0x4CB6CA: call    sub_496EA0
 0x4CB6CF: lea     edi, [ebp+48h]
 0x4CB6D2: test    edi, edi
@@ -19,22 +19,22 @@
 0x4CB6EC: cmp     byte ptr [eax+4], 1Ah
 0x4CB6F0: jnz     short loc_4CB714
 0x4CB6F2: lea     ecx, [esi+44h]
-0x4CB6F5: call    sub_41E650
+0x4CB6F5: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x4CB6FA: test    eax, eax
 0x4CB6FC: jz      short loc_4CB714
-0x4CB6FE: push    0
-0x4CB700: push    eax
+0x4CB6FE: push    0; optionalContext
+0x4CB700: push    eax; payload
 0x4CB701: mov     eax, [esi]
 0x4CB703: mov     edx, [eax+170h]
 0x4CB709: mov     ecx, esi
 0x4CB70B: call    edx
-0x4CB70D: mov     ecx, eax
-0x4CB70F: call    sub_4B22E0
+0x4CB70D: mov     ecx, eax; self
+0x4CB70F: call    TESObjectLIGH_UpdateAttachedLightPayload; Per-cell TESObjectLIGH source update only; optionalContext=null and no ShadowSceneNodeAddShadowCaster call occurs.
 0x4CB714: test    edi, edi
 0x4CB716: jnz     short loc_4CB6D7
 0x4CB718: pop     esi
 0x4CB719: push    ebp; a2
-0x4CB71A: mov     ecx, offset stru_B35C80; this
+0x4CB71A: mov     ecx, offset unk_B35C80; this
 0x4CB71F: call    sub_496F50
 0x4CB724: pop     edi
 0x4CB725: pop     ebp

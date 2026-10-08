@@ -20,11 +20,11 @@
 0x4A3C2E: mov     ecx, edi; void *
 0x4A3C30: call    TESTexture_destr
 0x4A3C35: push    edi
-0x4A3C36: call    FormHeapFree
+0x4A3C36: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A3C3B: add     esp, 4
 0x4A3C3E: mov     ecx, esi
 0x4A3C40: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x4A3C48: call    sub_4A3510
+0x4A3C48: call    TESRegionData_SetBaseVTable
 0x4A3C4D: mov     ecx, [esp+1Ch+var_C]
 0x4A3C51: mov     large fs:0, ecx
 0x4A3C58: pop     ecx
@@ -32,3 +32,12 @@
 0x4A3C5A: pop     esi
 0x4A3C5B: add     esp, 10h
 0x4A3C5E: retn
+0x9B2890: mov     ecx, [ebp-10h]
+0x9B2893: jmp     TESRegionData_SetBaseVTable
+0x9B2898: mov     edx, [esp+arg_4]
+0x9B289C: lea     eax, [edx-0Ch]
+0x9B289F: mov     ecx, [edx-10h]
+0x9B28A2: xor     ecx, eax
+0x9B28A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B28A9: mov     eax, offset stru_ADE820
+0x9B28AE: jmp     ___CxxFrameHandler3

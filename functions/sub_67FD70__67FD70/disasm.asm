@@ -1,4 +1,4 @@
-0x67FD70: push    0FFFFFFFFh
+0x67FD70: push    0FFFFFFFFh; Verified add path for a newly allocated AStarWorldNode: under LowPathSearchGlobals.lowPathCriticalSection, insert the same node into the nested space map in both directions. The outer map is keyed by spaceA/spaceB; each inner map keys the opposite space and stores BSSimpleList<AStarWorldNode*>. Existing entries/lists are reused; missing maps/lists are allocated. WorldSpace endpoints create 0xBF-bucket inner maps, other endpoint forms create 0x25-bucket maps; why these bucket counts differ is Unknown. Fallout's TeleportDoorSearch::GetNodeConnections enumerates cell/worldspace door lists during search instead of using this Oblivion cached reciprocal map.
 0x67FD72: push    offset SEH_67FD70
 0x67FD77: mov     eax, large fs:0
 0x67FD7D: push    eax
@@ -13,19 +13,19 @@
 0x67FD8D: lea     eax, [esp+28h+var_C]
 0x67FD91: mov     large fs:0, eax
 0x67FD97: push    offset unk_A2F830; lpCriticalSection
-0x67FD9C: mov     ecx, offset g_pathingMutex
+0x67FD9C: mov     ecx, 0B3BE80h
 0x67FDA1: call    NiEnterCriticalSection
-0x67FDA6: mov     edi, [esp+28h+arg_0]
+0x67FDA6: mov     edi, [esp+28h+node]
 0x67FDAA: xor     esi, esi
 0x67FDAC: cmp     edi, esi
 0x67FDAE: jz      loc_67FFF5
 0x67FDB4: mov     ecx, edi
 0x67FDB6: mov     [esp+28h+var_14], esi
-0x67FDBA: call    sub_452A60
+0x67FDBA: call    Shared_GetPointerAtOffset08; Verified at this AStarWorldNode call site: Shared_GetPointerAtOffset08 is a 4-byte getter for [this+8], which is AStarWorldNode.spaceA. The helper's other use cases do not change this call's field meaning.
 0x67FDBF: mov     ebp, eax
 0x67FDC1: mov     ecx, edi
 0x67FDC3: mov     [esp+28h+a2], ebp
-0x67FDC7: call    NiDX92DBufferData__GetSurfaceData
+0x67FDC7: call    NiDX92DBufferData__GetSurfaceData; Verified at this AStarWorldNode call site: NiDX92DBufferData::GetSurfaceData is a 4-byte getter for [this+0x10]; here it reads AStarWorldNode.spaceB. The generic helper name reflects other callers, not this node's semantic field.
 0x67FDCC: mov     ecx, ds:0B3BE00h
 0x67FDD2: mov     ebx, eax
 0x67FDD4: lea     eax, [esp+28h+var_14]
@@ -56,13 +56,13 @@
 0x67FE1A: add     esp, 4
 0x67FE1D: cmp     eax, esi
 0x67FE1F: jz      short loc_67FE32
-0x67FE21: mov     edx, [esp+28h+arg_0]
+0x67FE21: mov     edx, [esp+28h+node]
 0x67FE25: mov     [eax], esi
 0x67FE27: mov     [eax+4], esi
 0x67FE2A: mov     edi, eax
 0x67FE2C: push    edx
 0x67FE2D: jmp     loc_67FECA
-0x67FE32: mov     edx, [esp+28h+arg_0]
+0x67FE32: mov     edx, [esp+28h+node]
 0x67FE36: xor     edi, edi
 0x67FE38: push    edx
 0x67FE39: jmp     loc_67FECA
@@ -76,9 +76,9 @@
 0x67FE56: cmp     eax, esi
 0x67FE58: mov     [esp+28h+var_4], esi
 0x67FE5C: jz      short loc_67FE8F
-0x67FE5E: push    0BFh ; '¿'
-0x67FE63: mov     ecx, eax
-0x67FE65: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)
+0x67FE5E: push    0BFh ; '¿'; bucketCount
+0x67FE63: mov     ecx, eax; this
+0x67FE65: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.
 0x67FE6A: jmp     short loc_67FE91
 0x67FE6C: call    FormHeapAlloc
 0x67FE71: add     esp, 4
@@ -86,9 +86,9 @@
 0x67FE78: cmp     eax, esi
 0x67FE7A: mov     [esp+28h+var_4], 1
 0x67FE82: jz      short loc_67FE8F
-0x67FE84: push    25h ; '%'
-0x67FE86: mov     ecx, eax
-0x67FE88: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)
+0x67FE84: push    25h ; '%'; bucketCount
+0x67FE86: mov     ecx, eax; this
+0x67FE88: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.
 0x67FE8D: jmp     short loc_67FE91
 0x67FE8F: xor     eax, eax
 0x67FE91: mov     ecx, ds:0B3BE00h; this
@@ -108,7 +108,7 @@
 0x67FEBF: mov     edi, eax
 0x67FEC1: jmp     short loc_67FEC5
 0x67FEC3: xor     edi, edi
-0x67FEC5: mov     ecx, [esp+28h+arg_0]
+0x67FEC5: mov     ecx, [esp+28h+node]
 0x67FEC9: push    ecx
 0x67FECA: mov     ecx, edi
 0x67FECC: call    BSSimpleList_PushFront
@@ -141,7 +141,7 @@
 0x67FF1E: mov     ecx, [esp+28h+var_14]
 0x67FF22: cmp     ecx, esi
 0x67FF24: jz      short loc_67FF35
-0x67FF26: mov     edx, [esp+28h+arg_0]
+0x67FF26: mov     edx, [esp+28h+node]
 0x67FF2A: push    edx
 0x67FF2B: call    BSSimpleList_PushFront
 0x67FF30: jmp     loc_67FFF5
@@ -153,7 +153,7 @@
 0x67FF43: mov     [eax], esi
 0x67FF45: mov     [eax+4], esi
 0x67FF48: mov     esi, eax
-0x67FF4A: mov     eax, [esp+28h+arg_0]
+0x67FF4A: mov     eax, [esp+28h+node]
 0x67FF4E: push    eax
 0x67FF4F: mov     ecx, esi
 0x67FF51: call    BSSimpleList_PushFront
@@ -169,9 +169,9 @@
 0x67FF71: cmp     eax, esi
 0x67FF73: mov     [esp+28h+var_4], 2
 0x67FF7B: jz      short loc_67FFAE
-0x67FF7D: push    0BFh ; '¿'
-0x67FF82: mov     ecx, eax
-0x67FF84: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)
+0x67FF7D: push    0BFh ; '¿'; bucketCount
+0x67FF82: mov     ecx, eax; this
+0x67FF84: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.
 0x67FF89: jmp     short loc_67FFB0
 0x67FF8B: call    FormHeapAlloc
 0x67FF90: add     esp, 4
@@ -179,9 +179,9 @@
 0x67FF97: cmp     eax, esi
 0x67FF99: mov     [esp+28h+var_4], 3
 0x67FFA1: jz      short loc_67FFAE
-0x67FFA3: push    25h ; '%'
-0x67FFA5: mov     ecx, eax
-0x67FFA7: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)
+0x67FFA3: push    25h ; '%'; bucketCount
+0x67FFA5: mov     ecx, eax; this
+0x67FFA7: call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.
 0x67FFAC: jmp     short loc_67FFB0
 0x67FFAE: xor     eax, eax
 0x67FFB0: mov     ecx, ds:0B3BE00h; this
@@ -198,7 +198,7 @@
 0x67FFD5: mov     [eax], esi
 0x67FFD7: mov     [eax+4], esi
 0x67FFDA: mov     esi, eax
-0x67FFDC: mov     ecx, [esp+28h+arg_0]
+0x67FFDC: mov     ecx, [esp+28h+node]
 0x67FFE0: push    ecx
 0x67FFE1: mov     ecx, esi
 0x67FFE3: call    BSSimpleList_PushFront
@@ -207,7 +207,7 @@
 0x67FFED: push    edx; a2
 0x67FFEE: mov     ecx, edi; this
 0x67FFF0: call    NiTMap_SetAt
-0x67FFF5: mov     ecx, offset g_pathingMutex; lpCriticalSection
+0x67FFF5: mov     ecx, 0B3BE80h; lpCriticalSection
 0x67FFFA: call    NiLeaveCriticalSection_0
 0x67FFFF: mov     ecx, dword ptr [esp+28h+var_C]
 0x680003: mov     large fs:0, ecx
@@ -218,3 +218,30 @@
 0x68000E: pop     ebx
 0x68000F: add     esp, 14h
 0x680012: retn
+0x9C4B50: mov     eax, [ebp-14h]
+0x9C4B53: push    eax
+0x9C4B54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4B59: pop     ecx
+0x9C4B5A: retn
+0x9C4B5B: mov     eax, [ebp-14h]
+0x9C4B5E: push    eax
+0x9C4B5F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4B64: pop     ecx
+0x9C4B65: retn
+0x9C4B66: mov     eax, [ebp-14h]
+0x9C4B69: push    eax
+0x9C4B6A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4B6F: pop     ecx
+0x9C4B70: retn
+0x9C4B71: mov     eax, [ebp-14h]
+0x9C4B74: push    eax
+0x9C4B75: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4B7A: pop     ecx
+0x9C4B7B: retn
+0x9C4B7C: mov     edx, [esp+arg_4]
+0x9C4B80: lea     eax, [edx-18h]
+0x9C4B83: mov     ecx, [edx-1Ch]
+0x9C4B86: xor     ecx, eax
+0x9C4B88: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4B8D: mov     eax, offset stru_AED478
+0x9C4B92: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x68E53B",
+      "0x68E5B0"
+    ]
+  ],
+  "chunks_sha256": "61db07463c997f1652c4ae3be4382e44645546673ed04d582cdfcff2eb329b01",
+  "comment_regular": "Verified ActiveEffect LoadEffect reconstructs type 5 MagicModelHitEffect or type 6 MagicShaderHitEffect, invokes the per-object load callback, and attaches each pointer in an allocated 8-byte HitEffectNode at ActiveEffect+0x34.",
+  "comment_repeatable": "Verified ActiveEffect LoadEffect reconstructs type 5 MagicModelHitEffect or type 6 MagicShaderHitEffect, invokes the per-object load callback, and attaches each pointer in an allocated 8-byte HitEffectNode at ActiveEffect+0x34.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_LoadEffect:::LoadHitEffect",
   "end_ea": "0x68E5B0",
-  "flags": 5120,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_LoadEffect:::LoadHitEffect",
   "segment": ".text",
   "sha256": "61db07463c997f1652c4ae3be4382e44645546673ed04d582cdfcff2eb329b01",
   "size": 117,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E53B",
-  "type": "int __usercall@<eax>(_DWORD *@<ebx>, int@<ebp>, int@<edi>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
+  "total_chunk_size": 117,
+  "type": "void __userpurge(float *@<ebx>, int@<ebp>, int@<edi>, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 2
 }

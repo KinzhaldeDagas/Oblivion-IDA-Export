@@ -19,12 +19,12 @@
 0x5A2F4F: push    ebp
 0x5A2F50: push    eax
 0x5A2F51: call    edx
-0x5A2F53: call    sub_5C1900
-0x5A2F58: mov     ecx, ds:0B333C4h
-0x5A2F5E: push    1
-0x5A2F60: push    ebx
-0x5A2F61: push    edi
-0x5A2F62: call    TESObjectREFR_AddItem_Abbrev
+0x5A2F53: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
+0x5A2F58: mov     ecx, ds:0B333C4h; this
+0x5A2F5E: push    1; count
+0x5A2F60: push    ebx; extraList
+0x5A2F61: push    edi; item
+0x5A2F62: call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.
 0x5A2F67: mov     ecx, [esi+2Ch]
 0x5A2F6A: mov     eax, [ecx]
 0x5A2F6C: cmp     eax, ebx
@@ -48,7 +48,7 @@
 0x5A2F90: mov     ecx, eax
 0x5A2F92: mov     eax, [edx+100h]
 0x5A2F98: call    eax
-0x5A2F9A: call    sub_5C1900
+0x5A2F9A: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5A2F9F: jmp     short loc_5A2FA8
 0x5A2FA1: mov     ecx, ebp
 0x5A2FA3: call    sub_41F650

@@ -14,7 +14,7 @@
 0x44013F: jmp     short loc_440130
 0x440141: push    ecx; a1
 0x440142: mov     ecx, ds:0B33A98h
-0x440148: call    sub_447BA0
+0x440148: call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.
 0x44014D: mov     eax, [edi+38h]
 0x440150: mov     dword ptr [eax+esi*4], 0
 0x440157: mov     eax, ds:0B051D4h

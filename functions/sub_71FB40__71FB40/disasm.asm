@@ -1,4 +1,4 @@
-0x71FB40: mov     eax, [esp+arg_1C]
+0x71FB40: mov     eax, [esp+arg_1C]; [2026-10-03 constructor ownership audit] Complete construction chain 71FB40->732D70->728670->7005D0 performs no allocation. NiGeometryData adopts caller vertex/normal/color/UV pointers and reads positions for bounds; this routine adopts ushort indices at+48 and writes DWORD 3*triangleCount at+44. No owned input is freed in this constructor chain. 347-check native-byte fixture verified exact x86 call ABI, pointers, optional-null fields and 0x58 write extent for3/32768/65535 vertices and1/65535 triangles. Bounds computation was redirected; no constructor-fault injection or destructor execution claimed.
 0x71FB44: mov     edx, [esp+arg_14]
 0x71FB48: push    esi
 0x71FB49: push    eax
@@ -23,9 +23,9 @@
 0x71FB79: mov     eax, [esp+4+arg_20]
 0x71FB7D: mov     [esi+48h], eax
 0x71FB80: xor     eax, eax
-0x71FB82: mov     [esi+4Ch], eax
-0x71FB85: mov     [esi+50h], ax
-0x71FB89: mov     [esi+54h], eax
+0x71FB82: mov     [esi+4Ch], eax; Initialize the optional shared-normal entry array pointer to null.
+0x71FB85: mov     [esi+50h], ax; Initialize the shared-normal entry-array length to zero.
+0x71FB89: mov     [esi+54h], eax; Initialize the shared-normal index-pool block list to null.
 0x71FB8C: mov     dword ptr [esi], offset ??_7NiTriShapeData@@6B@; const NiTriShapeData::`vftable'
 0x71FB92: mov     [esi+44h], edx
 0x71FB95: mov     eax, esi

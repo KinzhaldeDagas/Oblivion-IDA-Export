@@ -5,10 +5,10 @@
 0x624C95: cmp     byte ptr [esi+59h], 0
 0x624C99: push    edi
 0x624C9A: jnz     short loc_624CA5
-0x624C9C: call    sub_624480
+0x624C9C: call    CombatController_InitializeCombatState
 0x624CA1: mov     byte ptr [esi+59h], 1
 0x624CA5: mov     ecx, esi
-0x624CA7: call    sub_6135F0
+0x624CA7: call    CombatController_GetCurrentTarget
 0x624CAC: mov     ebp, [esp+10h+arg_0]
 0x624CB0: cmp     ebp, eax
 0x624CB2: jz      loc_624DA5
@@ -60,15 +60,15 @@
 0x624D2F: call    Actor_IsCreature
 0x624D34: test    al, al
 0x624D36: jz      short loc_624D5A
-0x624D38: mov     ecx, ebp; this
-0x624D3A: call    TESObjectREFR_GetOwner
+0x624D38: mov     ecx, ebp; reference
+0x624D3A: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x624D3F: test    eax, eax
 0x624D41: jz      short loc_624DA5
-0x624D43: mov     ecx, [esi+3Ch]; this
-0x624D46: call    TESObjectREFR_GetOwner
-0x624D4B: mov     ecx, ebp; this
+0x624D43: mov     ecx, [esi+3Ch]; reference
+0x624D46: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
+0x624D4B: mov     ecx, ebp; reference
 0x624D4D: mov     edi, eax
-0x624D4F: call    TESObjectREFR_GetOwner
+0x624D4F: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x624D54: cmp     eax, edi
 0x624D56: jnz     short loc_624D5E
 0x624D58: jmp     short loc_624DA5
@@ -81,7 +81,7 @@
 0x624D6C: push    edx
 0x624D6D: push    ebp
 0x624D6E: call    eax
-0x624D70: call    Double_To_SInt32
+0x624D70: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x624D75: fldz
 0x624D77: sub     esp, 8
 0x624D7A: fst     [esp+18h+var_14]; float
@@ -90,11 +90,11 @@
 0x624D83: push    0; float
 0x624D85: push    eax; char
 0x624D86: push    ebp; int
-0x624D87: call    sub_616190
+0x624D87: call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x624D8C: jmp     short loc_624DA5
 0x624D8E: push    1
 0x624D90: mov     ecx, esi
-0x624D92: call    sub_614290
+0x624D92: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x624D97: test    al, al
 0x624D99: setz    cl
 0x624D9C: push    ecx
@@ -144,11 +144,11 @@
 0x624E27: cmp     eax, 4
 0x624E2A: jnz     short loc_624E46
 0x624E2C: mov     ecx, esi
-0x624E2E: call    sub_6135F0
+0x624E2E: call    CombatController_GetCurrentTarget
 0x624E33: cmp     ebp, eax
 0x624E35: jnz     short loc_624E46
 0x624E37: mov     ecx, esi
-0x624E39: call    sub_614290
+0x624E39: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x624E3E: test    al, al
 0x624E40: jz      loc_624F85
 0x624E46: push    0
@@ -157,7 +157,7 @@
 0x624E4C: call    sub_6239D0
 0x624E51: push    eax
 0x624E52: mov     ecx, esi
-0x624E54: call    sub_612DE0
+0x624E54: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x624E59: push    0
 0x624E5B: mov     ecx, esi
 0x624E5D: call    sub_619920
@@ -257,7 +257,7 @@
 0x624F6E: jz      short loc_624F81
 0x624F70: push    eax
 0x624F71: mov     ecx, esi
-0x624F73: call    sub_612DE0
+0x624F73: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x624F78: push    0
 0x624F7A: mov     ecx, esi
 0x624F7C: call    sub_619920

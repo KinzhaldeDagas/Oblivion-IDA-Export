@@ -1,4 +1,4 @@
-0x7871A0: push    ecx
+0x7871A0: push    ecx; CSpeedTreeRT::GetLodLevel. Returns instanceData+0x10 for instances or treeEngine+0x14 for base trees.
 0x7871A1: mov     eax, [ecx+34h]
 0x7871A4: test    eax, eax
 0x7871A6: jz      short loc_7871B3

@@ -1,25 +1,26 @@
-void __thiscall AVCollection_destr(unsigned int *this)
+// Verified: clears list/indexed storage and then frees/nulls both dedicated nodes at +8/+0xC. Completes constructor ownership. Probable relative of Fallout ModifierList destructor, but permanent-node layout is Oblivion-specific.
+void __thiscall AVCollection_destr(AVCollection *self)
 {
-  unsigned int *v2; // esi
-  unsigned int *v3; // esi
+  unsigned int *p_magicka; // esi
+  unsigned int *p_fatigue; // esi
 
-  AVCollection_ClearArrayAndList(this);
-  v2 = this + 2;
-  if ( this != (unsigned int *)0xFFFFFFF8 )
+  AVCollection_ClearArrayAndList(self); /*0x65ccc4*/
+  p_magicka = (unsigned int *)&self->magicka; /*0x65ccc9*/
+  if ( self != (AVCollection *)0xFFFFFFF8 ) /*0x65ccce*/
   {
-    if ( *v2 )
+    if ( *p_magicka ) /*0x65ccd0*/
     {
-      FormHeapFree(*v2);
-      *v2 = 0;
+      FormHeapFree(*p_magicka); /*0x65ccd7*/
+      *p_magicka = 0; /*0x65ccdf*/
     }
   }
-  v3 = this + 3;
-  if ( this != (unsigned int *)0xFFFFFFF4 )
+  p_fatigue = (unsigned int *)&self->fatigue; /*0x65cce5*/
+  if ( self != (AVCollection *)0xFFFFFFF4 ) /*0x65ccea*/
   {
-    if ( *v3 )
+    if ( *p_fatigue ) /*0x65ccec*/
     {
-      FormHeapFree(*v3);
-      *v3 = 0;
+      FormHeapFree(*p_fatigue); /*0x65ccf3*/
+      *p_fatigue = 0; /*0x65ccfb*/
     }
   }
 }

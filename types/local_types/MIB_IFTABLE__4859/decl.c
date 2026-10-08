@@ -1,1 +1,5 @@
-_MIB_IFTABLE
+struct _MIB_IFTABLE
+{
+DWORD dwNumEntries;
+MIB_IFROW table[1];
+};

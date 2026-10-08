@@ -1,4 +1,4 @@
-0x46BDA0: push    ebp
+0x46BDA0: push    ebp; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x46BDA1: mov     ebp, esp
 0x46BDA3: sub     esp, 24h
 0x46BDA6: mov     eax, ds:0B30AACh
@@ -19,7 +19,7 @@
 0x46BDD5: mov     ebx, esp
 0x46BDD7: push    eax; a4
 0x46BDD8: push    ebx; Dst
-0x46BDD9: call    TESFile_GetChunkData
+0x46BDD9: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x46BDDE: mov     eax, [ebp+var_8]
 0x46BDE1: mov     ecx, [ebp+arg_8]
 0x46BDE4: cmp     ax, cx
@@ -28,10 +28,10 @@
 0x46BDEC: movzx   eax, cx
 0x46BDEF: mov     edx, [ebp+Dst]
 0x46BDF2: movzx   ecx, ax
-0x46BDF5: push    ecx; Size
-0x46BDF6: push    ebx; Src
-0x46BDF7: push    edx; Dst
-0x46BDF8: call    _memcpy
+0x46BDF5: push    ecx; byteCount
+0x46BDF6: push    ebx; source
+0x46BDF7: push    edx; destination
+0x46BDF8: call    _memcpy; Copy the available fixed prefix only; this is an overlay, not a whole-structure replacement.
 0x46BDFD: push    0; int
 0x46BDFF: push    offset ??_R0?AVTESUsesForm@@@8; struct TypeDescriptor *
 0x46BE04: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -99,7 +99,7 @@
 0x46BEC8: test    ecx, ecx
 0x46BECA: jz      short loc_46BEE9
 0x46BECC: cmp     di, dx
-0x46BECF: jnb     short loc_46BEE9
+0x46BECF: jnb     short loc_46BEE9; Value component is overwritten only when the chunk extends past its start offset. The check does not require all four bytes to remain, so a truncated component is unsafe/indeterminate.
 0x46BED1: movzx   edx, di
 0x46BED4: mov     eax, [edx+ebx]
 0x46BED7: mov     [ebp+var_C], eax

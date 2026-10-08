@@ -1,1 +1,1 @@
-NiTexture::RendererData
+struct NiTexture::RendererData;

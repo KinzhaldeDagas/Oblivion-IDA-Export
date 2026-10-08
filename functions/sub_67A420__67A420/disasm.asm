@@ -22,7 +22,7 @@
 0x67A454: mov     esi, [edi+0Ch]
 0x67A457: mov     ecx, esi; this
 0x67A459: mov     [esp+38h+var_8], esi
-0x67A45D: call    TESObjectREFR_GetParentCell
+0x67A45D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67A462: mov     ecx, esi; this
 0x67A464: mov     [esp+38h+var_18], eax
 0x67A468: call    TESObjectREFR_GetWorldSpace
@@ -36,9 +36,9 @@
 0x67A485: jnz     short loc_67A49B
 0x67A487: push    3; a2
 0x67A489: mov     ecx, ebx; this
-0x67A48B: call    sub_673A50
+0x67A48B: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x67A490: mov     ecx, eax; this
-0x67A492: call    sub_7616D0
+0x67A492: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67A497: mov     edi, eax
 0x67A499: jmp     short loc_67A4C3
 0x67A49B: cmp     esi, 1
@@ -51,15 +51,14 @@
 0x67A4AB: jmp     short loc_67A4AF
 0x67A4AD: push    0; a2
 0x67A4AF: mov     ecx, ebx; this
-0x67A4B1: call    sub_673A50
+0x67A4B1: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x67A4B6: mov     ecx, eax; this
-0x67A4B8: call    sub_7616D0
+0x67A4B8: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67A4BD: mov     [esp+38h+var_28], eax
 0x67A4C1: mov     edi, eax
 0x67A4C3: test    edi, edi
 0x67A4C5: jz      loc_67A72C
 0x67A4CB: jmp     short loc_67A4D4
-0x67A4CD: align 10h
 0x67A4D0: mov     edi, [esp+38h+var_28]
 0x67A4D4: mov     ecx, [edi]
 0x67A4D6: test    ecx, ecx
@@ -77,7 +76,6 @@
 0x67A4F9: mov     [esp+38h+var_10], 0
 0x67A501: jz      loc_67A71D
 0x67A507: jmp     short loc_67A510
-0x67A509: align 10h
 0x67A510: mov     edx, [esi]
 0x67A512: mov     eax, [edx+198h]
 0x67A518: push    0
@@ -101,14 +99,14 @@
 0x67A550: test    al, al
 0x67A552: jnz     loc_67A6EA
 0x67A558: mov     ecx, esi; this
-0x67A55A: call    TESObjectREFR_GetParentCell
+0x67A55A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67A55F: mov     ebx, eax
 0x67A561: mov     ecx, esi; this
 0x67A563: mov     [esp+38h+var_14], ebx
 0x67A567: call    TESObjectREFR_GetWorldSpace
-0x67A56C: mov     ecx, esi
+0x67A56C: mov     ecx, esi; this
 0x67A56E: mov     edi, eax
-0x67A570: call    sub_5E0380
+0x67A570: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x67A575: test    eax, eax
 0x67A577: jz      short loc_67A593
 0x67A579: cmp     byte ptr [eax+20h], 0Fh
@@ -128,13 +126,13 @@
 0x67A5A7: test    ebx, ebx
 0x67A5A9: jz      short loc_67A5B6
 0x67A5AB: mov     ecx, ebx; this
-0x67A5AD: call    TESObjectCELL_IsInterior
+0x67A5AD: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x67A5B2: test    al, al
 0x67A5B4: jz      short loc_67A5C7
 0x67A5B6: mov     ecx, [esp+38h+var_18]; this
 0x67A5BA: test    ecx, ecx
 0x67A5BC: jz      short loc_67A634
-0x67A5BE: call    TESObjectCELL_IsInterior
+0x67A5BE: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x67A5C3: test    al, al
 0x67A5C5: jnz     short loc_67A634
 0x67A5C7: mov     edx, [esp+38h+var_8]
@@ -176,18 +174,18 @@
 0x67A640: mov     ecx, [ebp+0]; this
 0x67A643: test    ecx, ecx
 0x67A645: jz      loc_67A6E6
-0x67A64B: call    GetTeleportExtraData
+0x67A64B: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x67A650: test    eax, eax
 0x67A652: jz      short loc_67A6AC
-0x67A654: mov     ecx, eax
-0x67A656: call    sub_42B410
+0x67A654: mov     ecx, eax; this
+0x67A656: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x67A65B: mov     edi, eax
 0x67A65D: mov     ecx, edi; this
-0x67A65F: call    TESObjectREFR_GetParentCell
+0x67A65F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67A664: cmp     eax, ebx
 0x67A666: jz      short loc_67A68B
 0x67A668: mov     ecx, edi; this
-0x67A66A: call    TESObjectREFR_GetParentCell
+0x67A66A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67A66F: test    eax, eax
 0x67A671: jnz     short loc_67A6AC
 0x67A673: mov     ecx, edi; this
@@ -258,9 +256,9 @@
 0x67A736: jl      loc_67A483
 0x67A73C: test    ebp, ebp
 0x67A73E: jz      short loc_67A74C
-0x67A740: push    offset sub_673B70
+0x67A740: push    offset CompareActorDistanceToPlayer
 0x67A745: mov     ecx, ebp
-0x67A747: call    sub_5B27A0
+0x67A747: call    BSSimpleList_SortViaArrayAndRebuild
 0x67A74C: pop     edi
 0x67A74D: pop     esi
 0x67A74E: mov     eax, ebp

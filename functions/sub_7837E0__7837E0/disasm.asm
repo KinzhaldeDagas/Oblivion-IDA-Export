@@ -1,1 +1,1 @@
-0x7837E0: jmp     sub_783080
+0x7837E0: jmp     sub_783080; MoonSugarEffect decode: NiD3DVertexShader vtable +0x5C validity/restore thunk over sub_77EB10. Works only for wrappers with a creator pointer or an already-live +0x30 handle.

@@ -29,10 +29,10 @@
 0x75DA0A: lea     eax, [esp+20h+var_C]
 0x75DA0E: push    eax
 0x75DA0F: call    edx
-0x75DA11: push    eax
-0x75DA12: lea     ecx, [esp+20h+arg_0]
-0x75DA16: call    sub_55E2A0
-0x75DA1B: mov     eax, dword ptr [esp+1Ch+var_C]
+0x75DA11: push    eax; incoming
+0x75DA12: lea     ecx, [esp+20h+arg_0]; this
+0x75DA16: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x75DA1B: mov     eax, [esp+1Ch+var_C]
 0x75DA1F: test    eax, eax
 0x75DA21: jz      loc_75DAFA
 0x75DA27: mov     edi, eax
@@ -63,9 +63,9 @@
 0x75DA6D: lea     eax, [esp+20h+var_8]
 0x75DA71: push    eax
 0x75DA72: call    edx
-0x75DA74: push    eax
-0x75DA75: lea     ecx, [esp+20h+arg_0]
-0x75DA79: call    sub_55E2A0
+0x75DA74: push    eax; incoming
+0x75DA75: lea     ecx, [esp+20h+arg_0]; this
+0x75DA79: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x75DA7E: mov     eax, [esp+1Ch+var_8]
 0x75DA82: test    eax, eax
 0x75DA84: jz      short loc_75DAA0
@@ -82,7 +82,7 @@
 0x75DA9A: push    1
 0x75DA9C: mov     ecx, ebx
 0x75DA9E: call    edx
-0x75DAA0: mov     edx, dword ptr [esp+1Ch+var_C]
+0x75DAA0: mov     edx, [esp+1Ch+var_C]
 0x75DAA4: mov     ecx, [esi+68h]
 0x75DAA7: mov     eax, [ecx]
 0x75DAA9: mov     eax, [eax+90h]
@@ -107,7 +107,7 @@
 0x75DAD4: push    1
 0x75DAD6: mov     ecx, edi
 0x75DAD8: call    eax
-0x75DADA: mov     edi, dword ptr [esp+1Ch+var_C]
+0x75DADA: mov     edi, [esp+1Ch+var_C]
 0x75DADE: test    edi, edi
 0x75DAE0: jz      short loc_75DAFA
 0x75DAE2: lea     ecx, [edi+4]

@@ -1,1 +1,1 @@
-GEOTYPE
+typedef DWORD GEOTYPE;

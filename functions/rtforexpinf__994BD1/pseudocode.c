@@ -1,9 +1,15 @@
-double __fastcall rtforexpinf(char a1)
+void __fastcall rtforexpinf(char a1)
 {
-  double result; // st7
-
-  if ( !a1 )
-    return *(double *)&tbyte_B31CD0;
-  rtforloginf_::tranzeronpop();
-  return result;
+  if ( a1 ) /*0x994bd3*/
+  {
+    rtforloginf_::tranzeronpop(); /*0x994bd3*/
+  }
+  else
+  {
+    __asm /*0x994bd5*/
+    {
+      fstp    st
+      fld     tbyte_B31CD0
+    }
+  }
 }

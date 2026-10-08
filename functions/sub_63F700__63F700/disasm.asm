@@ -15,7 +15,7 @@
 0x63F72F: push    edi
 0x63F730: mov     edi, [esp+14h+arg_0]
 0x63F734: mov     ecx, edi; this
-0x63F736: call    TESObjectREFR_GetParentCell
+0x63F736: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63F73B: mov     ecx, eax
 0x63F73D: call    TESObjectCELL_GetWaterHeight
 0x63F742: fstp    [esp+14h+var_8]
@@ -32,7 +32,7 @@
 0x63F766: push    ecx
 0x63F767: mov     ecx, edi; this
 0x63F769: fstp    [esp+18h+var_18]; float
-0x63F76C: call    TESObjectREFR_GetParentCell
+0x63F76C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63F771: push    eax; int
 0x63F772: lea     ecx, [edi+2Ch]
 0x63F775: push    ecx; int
@@ -62,7 +62,7 @@
 0x63F7D1: test    al, al
 0x63F7D3: jnz     loc_63F85A
 0x63F7D9: mov     ecx, edi; this
-0x63F7DB: call    TESObjectREFR_GetParentCell
+0x63F7DB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63F7E0: mov     ecx, eax
 0x63F7E2: call    TESObjectCELL_GetWaterHeight
 0x63F7E7: fcomp   dword ptr ds:0A2FAA8h
@@ -88,7 +88,7 @@
 0x63F826: push    eax
 0x63F827: mov     ecx, ebp
 0x63F829: mov     [esi+288h], eax
-0x63F82F: call    DisplacementMapConstructor????
+0x63F82F: call    DisplacementMapConstructor????; Pass205: Water displacement setup; writes WaterShaderProperty +0x70=1 and +0x6C=rendered texture inner texture.
 0x63F834: mov     ecx, [esi+288h]
 0x63F83A: mov     [ecx], edi
 0x63F83C: mov     edx, [esi+288h]
@@ -121,7 +121,7 @@
 0x63F893: test    al, al
 0x63F895: jnz     short loc_63F8C2
 0x63F897: mov     ecx, edi; this
-0x63F899: call    TESObjectREFR_GetParentCell
+0x63F899: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63F89E: mov     ecx, eax
 0x63F8A0: call    TESObjectCELL_GetWaterHeight
 0x63F8A5: fcomp   dword ptr ds:0A2FAA8h

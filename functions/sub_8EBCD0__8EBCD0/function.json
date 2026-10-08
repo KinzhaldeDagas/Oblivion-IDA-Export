@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x8EBCD0",
+      "0x8EC099"
+    ]
+  ],
+  "chunks_sha256": "36d5a1315ab1b54a5448f7e8ea69452c04d1cd46aedb448aea408308fd856a33",
+  "comment_regular": "Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.",
+  "comment_repeatable": "Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_8EBCD0",
+  "display_name": "hkSurfaceConstraintUtil_ProjectAgainstTwoPlanes",
   "end_ea": "0x8EC099",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8EBCD0",
+  "name": "hkSurfaceConstraintUtil_ProjectAgainstTwoPlanes",
   "segment": ".text",
   "sha256": "36d5a1315ab1b54a5448f7e8ea69452c04d1cd46aedb448aea408308fd856a33",
   "size": 969,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8EBCD0",
-  "type": "void __usercall(int@<edi>, __m128 *, __m128 *, __m128 *, __m128 *)",
+  "total_chunk_size": 969,
+  "type": "void __usercall(int solverState@<edi>, __m128 *surfaceA, __m128 *surfaceB, __m128 *inputPoint, __m128 *outPoint)",
   "xrefs_from_count": 306,
   "xrefs_to_count": 5
 }

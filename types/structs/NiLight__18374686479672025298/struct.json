@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiLight",
+  "definition": "struct __cppobj NiLight : NiDynamicEffect\n{\nfloat m_fDimmer;\nNiColor m_kAmb;\nNiColor m_kDiff;\nNiColor m_kSpec;\nUInt32 unk104;\n}\n",
   "id": 18374686479672025298,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 220
+      "size": 220,
+      "type": "NiDynamicEffect"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_fDimmer",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_kAmb",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 12
+      "offset_hex": "0xE0",
+      "size": 12,
+      "type": "NiColor"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_kDiff",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 12
+      "offset_hex": "0xEC",
+      "size": 12,
+      "type": "NiColor"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "m_kSpec",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 12
+      "offset_hex": "0xF8",
+      "size": 12,
+      "type": "NiColor"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk104",
       "offset": 260,
       "offset_hex": "0x104",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "NiLight",
+  "ordinal": 611,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 264
 }

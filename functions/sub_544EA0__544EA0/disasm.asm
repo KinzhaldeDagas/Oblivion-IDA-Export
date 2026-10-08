@@ -13,9 +13,9 @@
 0x544EBD: lea     eax, [esp+48h+var_C]
 0x544EC1: mov     large fs:0, eax
 0x544EC7: mov     esi, ecx
-0x544EC9: mov     eax, [esp+48h+arg_0]
+0x544EC9: mov     eax, [esp+48h+triangleIndices]
 0x544ECD: push    eax
-0x544ECE: call    sub_543D30
+0x544ECE: call    SkyObject__CreateRootNodeAndAttach; Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.
 0x544ED3: mov     ecx, [esi+4]
 0x544ED6: push    offset aSunRoot; "Sun Root"
 0x544EDB: call    NiObjectNET_SetName
@@ -25,7 +25,7 @@
 0x544EED: fld     st
 0x544EEF: push    30h ; '0'; Size
 0x544EF1: fld     qword ptr ds:0A3D360h
-0x544EF7: mov     [esp+50h+var_2C], eax
+0x544EF7: mov     [esp+50h+vertices], eax
 0x544EFB: fmul    st(1), st
 0x544EFD: fxch    st(1)
 0x544EFF: fstp    [esp+50h+var_1C]
@@ -41,11 +41,11 @@
 0x544F20: mov     [eax+8], ecx
 0x544F23: fld     dword ptr ds:0B11E2Ch
 0x544F29: fmul    st, st(2)
-0x544F2B: fstp    [esp+50h+arg_0]
-0x544F2F: fld     [esp+50h+arg_0]
-0x544F33: fst     [esp+50h+arg_0]
+0x544F2B: fstp    [esp+50h+triangleIndices]
+0x544F2F: fld     [esp+50h+triangleIndices]
+0x544F33: fst     [esp+50h+triangleIndices]
 0x544F37: fstp    [esp+50h+var_34]
-0x544F3B: fld     [esp+50h+arg_0]
+0x544F3B: fld     [esp+50h+triangleIndices]
 0x544F3F: fstp    [esp+50h+var_1C]
 0x544F43: mov     edx, [esp+50h+var_1C]
 0x544F47: fld     [esp+50h+var_34]
@@ -70,11 +70,11 @@
 0x544F91: fld     st
 0x544F93: fmulp   st(3), st
 0x544F95: fxch    st(2)
-0x544F97: fstp    [esp+50h+arg_0]
+0x544F97: fstp    [esp+50h+triangleIndices]
 0x544F9B: fxch    st(1)
 0x544F9D: fstp    [esp+50h+var_1C]
 0x544FA1: mov     edx, [esp+50h+var_1C]
-0x544FA5: fld     [esp+50h+arg_0]
+0x544FA5: fld     [esp+50h+triangleIndices]
 0x544FA9: mov     [eax+24h], edx
 0x544FAC: fstp    [esp+50h+var_18]
 0x544FB0: mov     ecx, [esp+50h+var_18]
@@ -92,7 +92,7 @@
 0x544FE1: mov     edx, ds:0B3F9A8h
 0x544FE7: mov     [eax+0Ch], edx
 0x544FEA: mov     ecx, ds:0B3F9ACh
-0x544FF0: mov     [esp+50h+var_30], eax
+0x544FF0: mov     [esp+50h+normals], eax
 0x544FF4: mov     [eax+10h], ecx
 0x544FF7: mov     edx, ds:0B3F9B0h
 0x544FFD: mov     [eax+14h], edx
@@ -130,11 +130,11 @@
 0x545076: mov     [eax+8], ecx
 0x545079: fld     dword ptr ds:0B11E34h
 0x54507F: fmul    st, st(2)
-0x545081: fstp    [esp+58h+arg_0]
-0x545085: fld     [esp+58h+arg_0]
-0x545089: fst     [esp+58h+arg_0]
+0x545081: fstp    [esp+58h+triangleIndices]
+0x545085: fld     [esp+58h+triangleIndices]
+0x545089: fst     [esp+58h+triangleIndices]
 0x54508D: fstp    [esp+58h+var_34]
-0x545091: fld     [esp+58h+arg_0]
+0x545091: fld     [esp+58h+triangleIndices]
 0x545095: fstp    [esp+58h+var_1C]
 0x545099: mov     edx, [esp+58h+var_1C]
 0x54509D: fld     [esp+58h+var_34]
@@ -159,11 +159,11 @@
 0x5450E7: fld     st
 0x5450E9: fmulp   st(3), st
 0x5450EB: fxch    st(2)
-0x5450ED: fstp    [esp+58h+arg_0]
+0x5450ED: fstp    [esp+58h+triangleIndices]
 0x5450F1: fxch    st(1)
 0x5450F3: fstp    [esp+58h+var_1C]
 0x5450F7: mov     edx, [esp+58h+var_1C]
-0x5450FB: fld     [esp+58h+arg_0]
+0x5450FB: fld     [esp+58h+triangleIndices]
 0x5450FF: mov     [eax+24h], edx
 0x545102: fstp    [esp+58h+var_18]
 0x545106: mov     ecx, [esp+58h+var_18]
@@ -207,7 +207,7 @@
 0x5451A2: call    FormHeapAlloc
 0x5451A7: mov     ebx, eax
 0x5451A9: add     esp, 14h
-0x5451AC: mov     [esp+48h+arg_0], ebx
+0x5451AC: mov     [esp+48h+triangleIndices], ebx
 0x5451B0: test    ebx, ebx
 0x5451B2: mov     [esp+48h+var_4], 0
 0x5451BA: jz      short loc_5451CD
@@ -243,7 +243,7 @@
 0x545218: call    FormHeapAlloc
 0x54521D: mov     edi, eax
 0x54521F: add     esp, 4
-0x545222: mov     [esp+48h+arg_0], edi
+0x545222: mov     [esp+48h+triangleIndices], edi
 0x545226: test    edi, edi
 0x545228: mov     [esp+48h+var_4], 1
 0x545230: jz      short loc_545243
@@ -339,7 +339,7 @@
 0x54535E: mov     ecx, 1
 0x545363: mov     edx, 2
 0x545368: push    0Ch; Size
-0x54536A: mov     [esp+58h+arg_0], eax
+0x54536A: mov     [esp+58h+triangleIndices], eax
 0x54536E: mov     word ptr [eax], 0
 0x545373: mov     [eax+2], cx
 0x545377: mov     [eax+4], dx
@@ -363,20 +363,20 @@
 0x5453C8: test    eax, eax
 0x5453CA: mov     [esp+48h+var_4], 2
 0x5453D2: jz      short loc_5453F8
-0x5453D4: mov     edx, [esp+48h+arg_0]
-0x5453D8: mov     ecx, [esp+48h+var_30]
-0x5453DC: push    edx
-0x5453DD: mov     edx, [esp+4Ch+var_2C]
-0x5453E1: push    2
-0x5453E3: push    0
-0x5453E5: push    1
-0x5453E7: push    ebp
-0x5453E8: push    ebx
-0x5453E9: push    ecx
-0x5453EA: push    edx
-0x5453EB: push    4
-0x5453ED: mov     ecx, eax
-0x5453EF: call    sub_7174B0
+0x5453D4: mov     edx, [esp+48h+triangleIndices]
+0x5453D8: mov     ecx, [esp+48h+normals]
+0x5453DC: push    edx; triangleIndices
+0x5453DD: mov     edx, [esp+4Ch+vertices]
+0x5453E1: push    2; triangleCount
+0x5453E3: push    0; dataFlags
+0x5453E5: push    1; hasVertexColors
+0x5453E7: push    ebp; textureCoordinates
+0x5453E8: push    ebx; colors
+0x5453E9: push    ecx; normals
+0x5453EA: push    edx; vertices
+0x5453EB: push    4; vertexCount
+0x5453ED: mov     ecx, eax; this
+0x5453EF: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x5453F4: mov     ebx, eax
 0x5453F6: jmp     short loc_5453FA
 0x5453F8: xor     ebx, ebx
@@ -409,3 +409,50 @@
 0x545443: call    NiObjectNET_SetName
 0x545448: mov     eax, [esi+10h]
 0x54544B: or      word ptr [eax+18h], 2
+0x9BA8B0: mov     eax, [ebp+4]
+0x9BA8B3: push    eax
+0x9BA8B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA8B9: pop     ecx
+0x9BA8BA: retn
+0x9BA8BB: mov     eax, [ebp+4]
+0x9BA8BE: push    eax
+0x9BA8BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA8C4: pop     ecx
+0x9BA8C5: retn
+0x9BA8C6: mov     eax, [ebp-1Ch]
+0x9BA8C9: push    eax
+0x9BA8CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA8CF: pop     ecx
+0x9BA8D0: retn
+0x9BA8D1: mov     eax, [ebp+4]
+0x9BA8D4: push    eax
+0x9BA8D5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA8DA: pop     ecx
+0x9BA8DB: retn
+0x9BA8DC: mov     eax, [ebp+4]
+0x9BA8DF: push    eax
+0x9BA8E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA8E5: pop     ecx
+0x9BA8E6: retn
+0x9BA8E7: mov     eax, [ebp+4]
+0x9BA8EA: push    eax
+0x9BA8EB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA8F0: pop     ecx
+0x9BA8F1: retn
+0x9BA8F2: mov     eax, [ebp+4]
+0x9BA8F5: push    eax
+0x9BA8F6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA8FB: pop     ecx
+0x9BA8FC: retn
+0x9BA8FD: mov     eax, [ebp+4]
+0x9BA900: push    eax
+0x9BA901: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA906: pop     ecx
+0x9BA907: retn
+0x9BA908: mov     edx, [esp+arg_4]
+0x9BA90C: lea     eax, [edx-38h]
+0x9BA90F: mov     ecx, [edx-3Ch]
+0x9BA912: xor     ecx, eax
+0x9BA914: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA919: mov     eax, offset stru_AE4998
+0x9BA91E: jmp     ___CxxFrameHandler3

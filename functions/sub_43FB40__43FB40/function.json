@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x43FB40",
+      "0x43FB9F"
+    ]
+  ],
+  "chunks_sha256": "57f02981a1546997e8564a01559594f582a239c06aa4c04d5e136dda30197872",
+  "comment_regular": "Exterior-grid shadow source-light activation. For every uGridsToLoad cell at process level 6, enumerate its references and register each ordinary attached ExtraLight, then reconcile receivers for every ShadowSceneNode full-list source. This does not enumerate statics and never calls ShadowSceneNodeAddShadowCaster.",
+  "comment_repeatable": "Exterior-grid shadow source-light activation. For every uGridsToLoad cell at process level 6, enumerate its references and register each ordinary attached ExtraLight, then reconcile receivers for every ShadowSceneNode full-list source. This does not enumerate statics and never calls ShadowSceneNodeAddShadowCaster.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_43FB40",
+  "display_name": "TES_RegisterExteriorGridAttachedLightsAndReconcile",
   "end_ea": "0x43FB9F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43FB40",
+  "name": "TES_RegisterExteriorGridAttachedLightsAndReconcile",
   "segment": ".text",
   "sha256": "57f02981a1546997e8564a01559594f582a239c06aa4c04d5e136dda30197872",
   "size": 95,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43FB40",
-  "type": "void __thiscall(_DWORD **this)",
+  "total_chunk_size": 95,
+  "type": "void __thiscall(TES *self)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 1
 }

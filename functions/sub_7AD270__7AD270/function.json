@@ -1,19 +1,32 @@
 {
-  "callees_count": 173,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 45,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_7AD270",
-  "end_ea": "0x7ADCD8",
+  "chunks": [
+    [
+      "0x7AD270",
+      "0x7ADFD0"
+    ]
+  ],
+  "chunks_sha256": "e7f748d8a0944753d3998eddc4146397be8b56c912558491cf1c31505ad1e396",
+  "comment_regular": "BSShaderAccumulator vtable +0x58; bool __thiscall(this, geometry). The generic path keeps BSShaderProperty* at raw [ESP+0x1C], EBP=current RenderPass, and EDX=currentNode->next. At 0x7ADA04 a no-call Lighting30 predicate may use only EAX to test vtable 0x00A9576C and selector 0x177..0x17A. Match preserves EDX and jumps to 0x7ADA32; miss replays CMP g_bWaterReflectionPassActive,0 and jumps to 0x7ADA0B. The only ordinary selector-bucket insertion is 0x7ADE2C: this+0x104+0x14*selector. Thus the interception precedes all list mutation. It must not purge a selector bucket, including under FreezeRenderAccumulation, because buckets can intentionally retain other borrowed nodes.\n\nPass 369 exact-class closure: the saved property at raw [ESP+0x1C] can be scoped with vptr A9576C without a call. Oblivion has exactly three references that store this vptr (constructor, derived destructor, clone), and both the engine NiRTTI and MSVC RTTI contain no native class derived from Lighting30ShaderProperty. The MSVC hierarchy is a linear nine-class offset-zero chain. Therefore the exact vptr comparison selects only retail Lighting30ShaderProperty objects and deliberately excludes other PP-lighting owners of selectors 0x177..0x17A.\n\nPass 370 subtype census: all 17 native BSShaderProperty-family MSVC hierarchies reference the shared BSShaderProperty base descriptor ACF34C. Reading vtable slot +0x54 for this complete set yields subtypes {0,1,2,3,4,5,6,7,9,10,11,12,13,14,15}; only Lighting30ShaderProperty_vftable A9576C yields 10. The exact-vptr filter remains preferable because it is no-call and conservatively excludes non-native or extension properties, but subtype 10 is class-unique within retail Oblivion.\n\nCULLING MainWorld goal 2026-09-27: bool return is NOT a queued-geometry certificate. Observed no-work branches return true (e.g. 0x7AD383); 0x7ADFC2 directly invokes geometry Render and 0x7ADFC7 returns true. Other branches enqueue geometry/pass records. Telemetry must distinguish handling from actual enqueue/direct-render outcomes; do not label a true result as saved/queued draw evidence.\n\nBSShaderAccumulator per-geometry accumulation entry (+0x58). Invokes the shader-property pass producer and inserts each RenderPass into bucket 0x14*(selector+0xD); mode 5 bypasses the ordinary receiver eligibility check.",
+  "comment_repeatable": "BSShaderAccumulator vtable +0x58; bool __thiscall(this, geometry). The generic path keeps BSShaderProperty* at raw [ESP+0x1C], EBP=current RenderPass, and EDX=currentNode->next. At 0x7ADA04 a no-call Lighting30 predicate may use only EAX to test vtable 0x00A9576C and selector 0x177..0x17A. Match preserves EDX and jumps to 0x7ADA32; miss replays CMP g_bWaterReflectionPassActive,0 and jumps to 0x7ADA0B. The only ordinary selector-bucket insertion is 0x7ADE2C: this+0x104+0x14*selector. Thus the interception precedes all list mutation. It must not purge a selector bucket, including under FreezeRenderAccumulation, because buckets can intentionally retain other borrowed nodes.\n\nPass 369 exact-class closure: the saved property at raw [ESP+0x1C] can be scoped with vptr A9576C without a call. Oblivion has exactly three references that store this vptr (constructor, derived destructor, clone), and both the engine NiRTTI and MSVC RTTI contain no native class derived from Lighting30ShaderProperty. The MSVC hierarchy is a linear nine-class offset-zero chain. Therefore the exact vptr comparison selects only retail Lighting30ShaderProperty objects and deliberately excludes other PP-lighting owners of selectors 0x177..0x17A.\n\nPass 370 subtype census: all 17 native BSShaderProperty-family MSVC hierarchies reference the shared BSShaderProperty base descriptor ACF34C. Reading vtable slot +0x54 for this complete set yields subtypes {0,1,2,3,4,5,6,7,9,10,11,12,13,14,15}; only Lighting30ShaderProperty_vftable A9576C yields 10. The exact-vptr filter remains preferable because it is no-call and conservatively excludes non-native or extension properties, but subtype 10 is class-unique within retail Oblivion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
+  "display_name": "BSShaderAccumulator_AccumulateGeometry",
+  "end_ea": "0x7ADFD0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7AD270",
+  "name": "BSShaderAccumulator_AccumulateGeometry",
   "segment": ".text",
-  "sha256": "3224797394e7e4a13b84672b48ba4de60c0a788fcc86d83ad4fade6da37def80",
-  "size": 2664,
+  "sha256": "e7f748d8a0944753d3998eddc4146397be8b56c912558491cf1c31505ad1e396",
+  "size": 3424,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7AD270",
-  "type": "void __userpurge(int@<ecx>, int@<edi>, NiGeometry *, int, int, int, int, int, int, int, int, int, int, int, int)",
-  "xrefs_from_count": 926,
+  "total_chunk_size": 3424,
+  "type": "bool __thiscall(BSShaderAccumulator *this, NiGeometry *geometry)",
+  "xrefs_from_count": 1187,
   "xrefs_to_count": 1
 }

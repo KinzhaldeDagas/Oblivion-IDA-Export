@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x521A10",
+      "0x521A31"
+    ]
+  ],
+  "chunks_sha256": "5c81dbbd7895f42912e0afbd8cc72694f98632e41792ec15e399c1872d0bc5ed",
+  "comment_regular": "CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.",
+  "comment_repeatable": "CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_521A10",
+  "display_name": "TESNPC_GetActiveFaceGenDeltaParameters",
   "end_ea": "0x521A31",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_521A10",
+  "name": "TESNPC_GetActiveFaceGenDeltaParameters",
   "segment": ".text",
   "sha256": "5c81dbbd7895f42912e0afbd8cc72694f98632e41792ec15e399c1872d0bc5ed",
   "size": 33,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x521A10",
-  "type": "NiNode **__thiscall(TESNPC *this)",
+  "total_chunk_size": 33,
+  "type": "FaceGenHeadParameters *__thiscall(TESNPC *this)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 15
 }

@@ -5,5 +5,5 @@
 // positive sp value has been detected, the output may be wrong!
 void def_77134B()
 {
-  ;
+  ; /*0x7714d7*/
 }

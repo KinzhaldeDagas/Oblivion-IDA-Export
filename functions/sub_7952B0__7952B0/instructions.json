@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7952B0",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): vector<unsigned short> insert-fill core. Uses 2-byte element arithmetic, overlap-safe moves, and 1.5x growth.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7952D2",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7952F7",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x79535B",
-    "line": "mov     ebx, [esp+18h+Src]",
+    "line": "mov     ebx, [esp+18h+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x795373",
-    "line": "mov     [esp+14h+arg_8], edx",
+    "line": "mov     [esp+14h+value], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x795385",
-    "line": "mov     ecx, [esp+14h+arg_8]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -553,19 +553,19 @@
   },
   {
     "ea": "0x79538D",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79538E",
-    "line": "push    ebp",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79538F",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x795392",
-    "line": "call    sub_794F90",
+    "line": "call    OB_stVectorUShort_UninitializedFillN_010201A0; OBLIVION AUTHORITY (2026-08-30): Trivial uninitialized_fill_n for unsigned-short storage; writes count copies and returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x7953C7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x7953EC",
-    "line": "mov     edi, [esp+14h+Src]",
+    "line": "mov     edi, [esp+14h+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x7953FC",
-    "line": "mov     [esp+14h+arg_8], eax",
+    "line": "mov     [esp+14h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -871,25 +871,25 @@
   },
   {
     "ea": "0x795406",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795407",
-    "line": "push    ebx; int",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795408",
-    "line": "push    edi; Src",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795409",
-    "line": "call    sub_794E80",
+    "line": "call    OB_stVectorUShort_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x79541B",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -937,13 +937,13 @@
   },
   {
     "ea": "0x79541E",
-    "line": "push    ebp",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79541F",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -955,13 +955,13 @@
   },
   {
     "ea": "0x795422",
-    "line": "call    sub_794F90",
+    "line": "call    OB_stVectorUShort_UninitializedFillN_010201A0; OBLIVION AUTHORITY (2026-08-30): Trivial uninitialized_fill_n for unsigned-short storage; writes count copies and returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x795427",
-    "line": "mov     eax, [esp+14h+arg_8]",
+    "line": "mov     eax, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x795435",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -997,19 +997,19 @@
   },
   {
     "ea": "0x795438",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795439",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79543A",
-    "line": "call    sub_794E30",
+    "line": "call    OB_stVectorUShort_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one unsigned-short value across [first,last) and returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x79544A",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1075,37 +1075,37 @@
   },
   {
     "ea": "0x79544F",
-    "line": "push    ebx; int",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795450",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795451",
-    "line": "call    sub_794E80",
+    "line": "call    OB_stVectorUShort_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x795456",
-    "line": "push    ebx; int",
+    "line": "push    ebx; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795457",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795458",
-    "line": "push    edi; Src",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1117,13 +1117,13 @@
   },
   {
     "ea": "0x79545C",
-    "line": "call    sub_794E50",
+    "line": "call    OB_stVectorUShort_CopyBackwardRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x795461",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x795469",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1147,19 +1147,19 @@
   },
   {
     "ea": "0x79546C",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79546D",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79546E",
-    "line": "call    sub_794E30",
+    "line": "call    OB_stVectorUShort_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one unsigned-short value across [first,last) and returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },

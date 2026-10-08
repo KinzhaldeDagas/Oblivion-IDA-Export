@@ -39,10 +39,10 @@
 0x5D30DB: call    sub_591A80
 0x5D30E0: fld     dword ptr ds:0A379B4h
 0x5D30E6: push    ecx
-0x5D30E7: fstp    [esp+724h+a2]; a3
-0x5D30EA: push    0FA1h; a2
+0x5D30E7: fstp    [esp+724h+a2]; value
+0x5D30EA: push    0FA1h; propertyCode
 0x5D30EF: mov     ecx, edi; this
-0x5D30F1: call    Tile_SetFloat
+0x5D30F1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D30F6: mov     esi, [esi]
 0x5D30F8: push    0; char
 0x5D30FA: lea     ecx, [esp+724h+var_714]
@@ -61,7 +61,7 @@
 0x5D312B: push    eax; Dst
 0x5D312C: push    0; int
 0x5D312E: push    esi; int
-0x5D312F: call    sub_4610F0
+0x5D312F: call    TESSaveLoadGame_BuildSavePreview; Builds embedded ESS screenshot NiSourceTexture and formatted name/level/location/days/date. Optional playtime output is HH:MM:SS.
 0x5D3134: lea     ecx, [esp+720h+var_4B4]
 0x5D313B: push    ecx
 0x5D313C: mov     esi, eax
@@ -86,9 +86,9 @@
 0x5D3185: fild    [esp+720h+var_714]
 0x5D3189: push    ecx
 0x5D318A: mov     ecx, [ebx+40h]; this
-0x5D318D: fstp    [esp+724h+a2]; a3
-0x5D3190: push    0FAEh; a2
-0x5D3195: call    Tile_SetFloat
+0x5D318D: fstp    [esp+724h+a2]; value
+0x5D3190: push    0FAEh; propertyCode
+0x5D3195: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D319A: test    edi, edi
 0x5D319C: jz      short loc_5D31E7
 0x5D319E: test    esi, esi
@@ -106,10 +106,10 @@
 0x5D31BE: jnz     short loc_5D31EB
 0x5D31C0: fld1
 0x5D31C2: push    ecx
-0x5D31C3: fstp    [esp+724h+a2]; a3
+0x5D31C3: fstp    [esp+724h+a2]; value
 0x5D31C6: mov     ecx, edi; this
-0x5D31C8: push    0FA1h; a2
-0x5D31CD: call    Tile_SetFloat
+0x5D31C8: push    0FA1h; propertyCode
+0x5D31CD: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D31D2: mov     eax, ds:0B38750h
 0x5D31D7: mov     ecx, [ebx+44h]
 0x5D31DA: push    eax

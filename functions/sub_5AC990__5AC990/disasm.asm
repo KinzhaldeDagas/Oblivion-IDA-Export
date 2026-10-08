@@ -96,3 +96,12 @@
 0x5ACAB3: push    ecx
 0x5ACAB4: push    eax
 0x5ACAB5: jmp     short loc_5ACABF
+0x9C0510: lea     ecx, [ebp+var_18]; void *
+0x9C0513: jmp     BSStringT_Clear
+0x9C0518: mov     edx, [esp-4+arg_4]
+0x9C051C: lea     eax, [edx-14h]
+0x9C051F: mov     ecx, [edx-18h]
+0x9C0522: xor     ecx, eax
+0x9C0524: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0529: mov     eax, offset stru_AE97E8
+0x9C052E: jmp     ___CxxFrameHandler3

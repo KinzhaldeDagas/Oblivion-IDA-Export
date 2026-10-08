@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7ED5C0",
+      "0x7ED5C5"
+    ]
+  ],
+  "chunks_sha256": "3933be5e0623f3326dfb5a186d4ae396e5c4458a2a8bed2c717b74ba8a758e8c",
+  "comment_regular": "Return BSShaderProperty's native shadow-light list count from +0x78; +0x70 is the list head and +0x74 is the tail.",
+  "comment_repeatable": "Return BSShaderProperty's native shadow-light list count from +0x78; +0x70 is the list head and +0x74 is the tail.\n\nMEF PERF 2026-10-07 PASS4: Verified width distinction: MOV AX,[ECX+78] returns only LOW16 bits of native DWORD property-list count. This is not evidence of a65535-node cap. LC-1 builder counts via iterators and does not use this getter to bound its fill.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ED5C0",
+  "display_name": "BSShaderProperty_GetShadowLightCount",
   "end_ea": "0x7ED5C5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ED5C0",
+  "name": "BSShaderProperty_GetShadowLightCount",
   "segment": ".text",
   "sha256": "3933be5e0623f3326dfb5a186d4ae396e5c4458a2a8bed2c717b74ba8a758e8c",
   "size": 5,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ED5C0",
-  "type": "__int16 __thiscall(_WORD *this)",
+  "total_chunk_size": 5,
+  "type": "unsigned __int16 __thiscall(MEF_PropertyShadowLightListView32 *self)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 3
 }

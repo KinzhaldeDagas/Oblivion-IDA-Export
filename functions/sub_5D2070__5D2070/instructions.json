@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5D20A6",
-    "line": "mov     ecx, [esi+68h]; TileWindow *",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5D20AE",
-    "line": "call    Menu_LoadXML",
+    "line": "call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x5D2117",
-    "line": "fstp    [esp+18h+var_18]; a3",
+    "line": "fstp    [esp+18h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D211A",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5D2121",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5D213D",
-    "line": "call    ContainerExtraData_GetItemCount",
+    "line": "call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,13 +541,13 @@
   },
   {
     "ea": "0x5D2191",
-    "line": "fstp    [esp+18h+var_18]; a3",
+    "line": "fstp    [esp+18h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D2194",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x5D219B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,19 +583,19 @@
   },
   {
     "ea": "0x5D21A7",
-    "line": "fstp    [esp+18h+var_18]; a3",
+    "line": "fstp    [esp+18h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D21AA",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D21AF",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x5D21D4",
-    "line": "fstp    [esp+18h+var_18]; a3",
+    "line": "fstp    [esp+18h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D21D7",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D21DC",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,19 +691,19 @@
   },
   {
     "ea": "0x5D21EF",
-    "line": "push    3",
+    "line": "push    3; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5D21F1",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5D21F3",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,19 +949,19 @@
   },
   {
     "ea": "0x5D2277",
-    "line": "fstp    [esp+18h+var_18]; a3",
+    "line": "fstp    [esp+18h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D227A",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D227F",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

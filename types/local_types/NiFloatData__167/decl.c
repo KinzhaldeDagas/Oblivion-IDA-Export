@@ -1,1 +1,1 @@
-NiFloatData
+struct NiFloatData;

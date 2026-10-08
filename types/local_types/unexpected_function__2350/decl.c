@@ -1,1 +1,1 @@
-unexpected_function
+typedef void (*unexpected_function)(void);

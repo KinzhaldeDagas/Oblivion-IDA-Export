@@ -1,4 +1,4 @@
-0x447050: push    ebx
+0x447050: push    ebx; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.
 0x447051: push    esi
 0x447052: mov     esi, [esp+8+arg_0]
 0x447056: mov     eax, [esi]
@@ -9,7 +9,7 @@
 0x447063: push    edi
 0x447064: mov     ecx, esi
 0x447066: and     bl, 1
-0x447069: call    edx
+0x447069: call    edx; Pass273 crash context: 0x000104A1 startup capture ended at null EIP before PreLoadGame/PostLoadGame; recovered stack returned through TESDataHandler_LoadForm's virtual LoadForm call with an EngineBugFixes frame. All native SimpleShadow/shadow producer counters were zero, so this artifact is not evidence of a ShadowPass mutation.
 0x44706B: test    bl, bl
 0x44706D: mov     [esp+10h], al
 0x447071: jnz     short loc_44707D

@@ -1,8 +1,9 @@
-int __usercall Calc_DetectionLevel_::CalcAttackBonus@<eax>(
+// Applies fSneakTargetAttackBonus when the target has attacked the detector; otherwise retains the current factor.
+int __usercall Calc_DetectionLevel_ApplyAttackBonus@<eax>(
         char a1@<zf>,
         int a2,
         int a3,
-        int a4,
+        float a4,
         int a5,
         int a6,
         int a7,
@@ -23,18 +24,18 @@ int __usercall Calc_DetectionLevel_::CalcAttackBonus@<eax>(
 {
   int v22; // [esp+8h] [ebp+8h]
 
-  __asm { fst     [esp+arg_4]; int }
-  if ( !a1 )
+  __asm { fst     [esp+arg_4]; Applies fSneakTargetAttackBonus when the target has attacked the detector; otherwise retains the current factor. } /*0x54657b*/
+  if ( !a1 ) /*0x54657f*/
   {
-    __asm
+    __asm /*0x546581*/
     {
       fld     dword ptr ds:0B366E0h
       fstp    [esp+arg_4]
     }
   }
-  return Calc_DetectionLevel_::UnderwaterFactors(
+  return Calc_DetectionLevel_ApplyUnderwaterFactor(
            a2,
-           v22,
+           *(float *)&v22,
            a4,
            a5,
            a6,

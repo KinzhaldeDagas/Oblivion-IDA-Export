@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6078E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; ArrowProjectile constructor/initializer: constructs MobileObject state, installs projectile vtables, allocates HighProcess, clears collision/transfer flags, increments the live-projectile count, and returns this.",
     "mnemonic": "push",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x607946",
-    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)",
+    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x607961",
-    "line": "mov     [esi+95h], bl",
+    "line": "mov     [esi+95h], bl; Initialize ArrowProjectile byte +0x95 to zero. Actor-hit inventory transfer changes it to one.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -274,5 +274,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2F00",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F03",
+    "line": "jmp     MobileObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F08",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F0B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2F0C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F11",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2F12",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2F13",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2F17",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F1A",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F1D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2F1F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F24",
+    "line": "mov     eax, offset stru_AEBC20",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F29",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

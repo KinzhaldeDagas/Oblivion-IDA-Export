@@ -1,4 +1,4 @@
-BSStringT *sub_A10B40()
+NiRTTI *sub_A10B40()
 {
-  return sub_70E220(&stru_B42644, "NiDX9SwapChainDepthStencilBufferData", (int)&stru_B4263C);
+  return NiRTTI_Constructor(&stru_B42644, "NiDX9SwapChainDepthStencilBufferData", &stru_B4263C); /*0xa10b54*/
 }

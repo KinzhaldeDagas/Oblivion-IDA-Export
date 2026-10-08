@@ -1,19 +1,36 @@
 {
-  "callees_count": 26,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_78C6F0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x78C6F0",
+      "0x78C85F"
+    ],
+    [
+      "0x9CB860",
+      "0x9CB88B"
+    ]
+  ],
+  "chunks_sha256": "e9d0bb99f151816119c7d02e26c965bdba6208d1c30e1f1c38d763a3e2f65132",
+  "comment_regular": "CSpeedTreeRT::GetGeometry bit-vector dispatcher. Live Oblivion xrefs call it only at 0x5617D2/0x561A52 with branch bit 0x01 and 0x562744 with leaf bit 0x04; no stock caller requests frond bit 0x02 or billboard bit 0x08.\n\nSpeedTreeOBSE 2026-05-31 leaf-mesh family gap pass: GetGeometry leaf bit 0x04 reaches stock leaf-card export only; 4.1 mesh leaves would require CLeafGeometry SMesh output not present in Oblivion's fixed-card consumer.\n[2026-10-05 curated capability inventory] Fresh decompile confirms branches1/fronds2/leaves4/billboards8; directional billboard branch depends on flag360 and bit10 override. Compared with native5636E0 builder calling branch5616F0, leaf5622B0, billboard562E20 only. Library export capability is distinct from stock render-resource integration; current plugin frond/root extensions are documented separately.",
+  "comment_repeatable": "SpeedTreeOBSE 2026-05-31 leaf-mesh family gap pass: GetGeometry leaf bit 0x04 reaches stock leaf-card export only; 4.1 mesh leaves would require CLeafGeometry SMesh output not present in Oblivion's fixed-card consumer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "CSpeedTreeRT__GetGeometry",
   "end_ea": "0x78C85F",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78C6F0",
+  "name": "CSpeedTreeRT__GetGeometry",
   "segment": ".text",
   "sha256": "e843d8177b88d9780a07692b715160c1649729a486d9325d21f833b7ac83f3a8",
   "size": 367,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78C6F0",
-  "type": "void __userpurge(float *this@<ecx>, void *Src, char, rsize_t MaxCount, rsize_t, int)",
-  "xrefs_from_count": 152,
+  "total_chunk_size": 410,
+  "type": "void __userpurge(OB_CSpeedTreeRT_010201A0 *this@<ecx>, OB_SpeedTreeGeometryOutput_010201A0 *Src, unsigned int geometryFlags, rsize_t MaxCount, rsize_t leafLod, int)",
+  "xrefs_from_count": 165,
   "xrefs_to_count": 3
 }

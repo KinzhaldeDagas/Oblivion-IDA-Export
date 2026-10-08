@@ -6,21 +6,21 @@ int __usercall Cmd_Cast_::CastNonActor@<eax>(
         int a5,
         int a6,
         int a7,
-        TESObjectREFR *a8)
+        TESChildCELL *a8)
 {
-  TESObjectCELL *ParentCell; // esi
-  TESObjectCELL *v9; // eax
+  TESObjectCELL *DwordAtOffset40; // esi
+  UInt32 v9; // eax
   TESObjectCELL *v10; // edi
 
-  ParentCell = TESObjectREFR_GetParentCell(a3);
-  v9 = TESObjectREFR_GetParentCell(a8);
-  v10 = v9;
-  if ( ParentCell )
+  DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a3); /*0x5020f0*/
+  v9 = Shared_GetDwordAtOffset40(a8); /*0x5020f2*/
+  v10 = (TESObjectCELL *)v9; /*0x5020f9*/
+  if ( DwordAtOffset40 ) /*0x5020fb*/
   {
-    if ( v9 )
+    if ( v9 ) /*0x5020ff*/
     {
-      if ( TESObjectCELL_IsProcessLevel_LowHigh(ParentCell, 1) && TESObjectCELL_IsProcessLevel_LowHigh(v10, 0) )
-        MagicCaster_CastMagicItem(a1, a7, a2, 0);
+      if ( TESObjectCELL_IsProcessLevel_LowHigh(DwordAtOffset40, 1) && TESObjectCELL_IsProcessLevel_LowHigh(v10, 0) ) /*0x50211c*/
+        MagicCaster_CastMagicItem(a1, a7, a2, 0); /*0x50212f*/
     }
   }
   return Cmd_Cast_::Done_();

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60C940",
-    "line": "push    ebp",
+    "line": "push    ebp; ArrowProjectile shot constructor. ammoEntry is mandatory and unconditionally dereferenced; weaponEntry is optional internally although Actor_ProcessAction requires both. Native damage combines WEAP+AMMO contributions. Poison consumption and enchantment-charge reduction occur before process/node/cell construction with no rollback. On completion it has cell-attached the projectile and incremented g_liveArrowProjectileCount, returns placement this, and still has not performed inventory depletion or ActorProcessManager insertion. External ThrowingWeapon contrast after this native result: supplying source-WEAP damage in both proxy AMMO and real WEAP entries creates a double contribution, and destroying the projectile does not restore consumed poison or charge.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x60C977",
-    "line": "mov     eax, [ebp+arg_1C]",
+    "line": "mov     eax, [ebp+ammoEntry]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60C97A",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+owner]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60C97D",
-    "line": "mov     edi, [ebp+arg_20]",
+    "line": "mov     edi, [ebp+weaponEntry]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x60C986",
-    "line": "mov     dword ptr [esp+64h+anonymous_0+4], eax",
+    "line": "mov     [esp+64h+anonymous_0+4], eax; a3",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x60C991",
-    "line": "mov     edx, dword ptr [esp+64h+anonymous_0+4]",
+    "line": "mov     edx, [esp+64h+anonymous_0+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x60C9A6",
-    "line": "mov     eax, [edx+8]",
+    "line": "mov     eax, [edx+8]; ammoEntry->type is loaded from EntryData+0x08. This TESObjectAMMO becomes the projectile's source/base form; the WEAP entry is not used as projectile base.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60C9A9",
-    "line": "fst     dword ptr [esi+64h]",
+    "line": "fst     dword ptr [esi+64h]; Initialize projectile +0x64 presentation alpha/fade scalar to 1.0; lifecycle state 3 later reduces it over three seconds.",
     "mnemonic": "fst",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x60C9AF",
-    "line": "mov     [esi+60h], ecx",
+    "line": "mov     [esi+60h], ecx; Initialize ArrowProjectile lifecycle +0x60 to state 0 (active flight). This field is separate from collisionData->state at +0x5C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x60C9B5",
-    "line": "fstp    dword ptr [esp+64h+var_48]",
+    "line": "fstp    [esp+64h+a4]; Read TESObjectAMMO projectile speed at form+0x7C; native speed is then scaled by the projectile-speed game setting and attack-strength curve.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60C9B9",
-    "line": "mov     [esp+64h+var_3C], eax",
+    "line": "mov     [esp+64h+baseForm], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,31 +247,31 @@
   },
   {
     "ea": "0x60C9C7",
-    "line": "fmul    dword ptr [esp+64h+var_48]",
+    "line": "fmul    [esp+64h+a4]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x60C9CB",
-    "line": "fstp    dword ptr [esp+64h+var_48]",
+    "line": "fstp    [esp+64h+a4]; a4",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60C9CF",
-    "line": "fld     dword ptr [esp+64h+var_48]",
+    "line": "fld     [esp+64h+a4]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x60C9D3",
-    "line": "fst     dword ptr [esi+6Ch]",
+    "line": "fst     dword ptr [esi+6Ch]; Initial scalar speed = AMMO projectile-speed field * global speed multiplier.",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x60C9D6",
-    "line": "fld     [ebp+arg_18]",
+    "line": "fld     [ebp+attackStrength]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x60C9E5",
-    "line": "mov     [esi+78h], ebx",
+    "line": "mov     [esi+78h], ebx; Store shooter reference for attribution and player-only launch-obstruction handling; projectile base form remains AMMO.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x60C9EC",
-    "line": "fstp    dword ptr [esi+6Ch]",
+    "line": "fstp    dword ptr [esi+6Ch]; Final launch speed scales initial speed by draw-strength interpolation: strength + (1-strength)*minimum-draw-speed factor.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x60CA31",
-    "line": "mov     [esi+97h], cl",
+    "line": "mov     [esi+97h], cl; Initialize ArrowProjectile +0x97 impact-impulse one-shot guard to false.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -433,31 +433,31 @@
   },
   {
     "ea": "0x60CA46",
-    "line": "fstp    [esp+68h+var_68.x]",
+    "line": "fstp    [esp+68h+var_68.x]; damageOffset",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CA49",
-    "line": "push    ebx",
+    "line": "push    ebx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60CA4A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CA4C",
-    "line": "call    EquippedWeaponData_GetDamage",
+    "line": "call    EquippedWeaponData_GetDamage; TES4 authoritative call ABI: EntryData in ECX, Actor* owner as first stack argument, float damageOffset as second; returns damage through ST0 and ends with retn 8. This type is required to keep ArrowProjectile constructor stack analysis correct.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CA51",
-    "line": "fstp    [esp+6Ch+anonymous_0]",
+    "line": "fstp    qword ptr [esp+64h+a4]; Compute equipped WEAP contribution to physical projectile damage using shooter context.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -475,67 +475,67 @@
   },
   {
     "ea": "0x60CA58",
-    "line": "mov     ecx, dword ptr [esp+70h+anonymous_1+4]",
+    "line": "mov     ecx, [esp+68h+anonymous_0+4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60CA5C",
-    "line": "fstp    [esp+70h+var_70]",
+    "line": "fstp    [esp+68h+var_68.x]; damageOffset",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CA5F",
-    "line": "push    ebx",
+    "line": "push    ebx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60CA60",
-    "line": "call    EquippedWeaponData_GetDamage",
+    "line": "call    EquippedWeaponData_GetDamage; TES4 authoritative call ABI: EntryData in ECX, Actor* owner as first stack argument, float damageOffset as second; returns damage through ST0 and ends with retn 8. This type is required to keep ArrowProjectile constructor stack analysis correct.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CA65",
-    "line": "fadd    [esp+74h+anonymous_1]",
+    "line": "fadd    qword ptr [esp+64h+a4]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x60CA69",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CA6B",
-    "line": "fstp    dword ptr [esp+74h+anonymous_1]",
+    "line": "fstp    [esp+64h+a4]; Add equipped AMMO damage contribution to WEAP damage before draw-strength scaling.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60CA6F",
-    "line": "fld     dword ptr [esp+74h+anonymous_1]",
+    "line": "fld     [esp+64h+a4]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x60CA73",
-    "line": "fmul    [ebp+arg_18]",
+    "line": "fmul    [ebp+attackStrength]",
     "mnemonic": "fmul",
     "size": 3
   },
   {
     "ea": "0x60CA76",
-    "line": "fstp    dword ptr [esi+70h]",
+    "line": "fstp    dword ptr [esi+70h]; Store projectile physical damage = (WEAP damage + AMMO damage) * attackStrength.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CA79",
-    "line": "call    sub_484DF0",
+    "line": "call    EquippedEntryData_GetPoison; Capture poison from the equipped WEAP EntryData into the independent projectile.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,19 +559,19 @@
   },
   {
     "ea": "0x60CA88",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CA8A",
-    "line": "call    sub_484E50",
+    "line": "call    EquippedEntryData_ConsumePoison; Consume/remove poison from equipped WEAP EntryData at projectile construction, not at impact.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CA8F",
-    "line": "mov     ecx, dword ptr [esp+74h+anonymous_0+4]",
+    "line": "mov     ecx, [esp+64h+baseForm]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x60CAA2",
-    "line": "mov     [esi+7Ch], eax",
+    "line": "mov     [esi+7Ch], eax; Capture AMMO form enchantment as projectile arrowEnch; no per-stack AMMO instance is retained.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x60CAD9",
-    "line": "mov     [esp+74h+var_68.w], eax",
+    "line": "mov     [esp+64h+anonymous_0+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x60CADF",
-    "line": "mov     [esp+74h+var_68.w], edx",
+    "line": "mov     [esp+64h+anonymous_0+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60CAE3",
-    "line": "cmp     [esp+74h+var_68.w], edx",
+    "line": "cmp     [esp+64h+anonymous_0+4], edx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -739,25 +739,25 @@
   },
   {
     "ea": "0x60CAED",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CAEF",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CAF4",
-    "line": "fstp    dword ptr [esp+74h+var_48]",
+    "line": "fstp    [esp+64h+var_38]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60CAF8",
-    "line": "mov     ecx, [esp+74h+var_68.w]",
+    "line": "mov     ecx, [esp+64h+anonymous_0+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -793,19 +793,19 @@
   },
   {
     "ea": "0x60CB07",
-    "line": "fstp    [esp+78h+var_68.w]",
+    "line": "fstp    [esp+64h+a4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60CB0B",
-    "line": "fld     dword ptr [esp+78h+anonymous_0+4]",
+    "line": "fld     [esp+64h+var_38]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x60CB0F",
-    "line": "fld     [esp+78h+var_68.w]",
+    "line": "fld     [esp+64h+a4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x60CB20",
-    "line": "push    eax; int",
+    "line": "push    eax; targetStack",
     "mnemonic": "push",
     "size": 1
   },
@@ -865,19 +865,19 @@
   },
   {
     "ea": "0x60CB29",
-    "line": "fld     dword ptr [esp+7Ch+anonymous_0+4]",
+    "line": "fld     [esp+68h+var_38]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x60CB2D",
-    "line": "fsub    [esp+7Ch+var_68.w]",
+    "line": "fsub    [esp+68h+a4]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x60CB31",
-    "line": "push    eax; int",
+    "line": "push    eax; containerChanges",
     "mnemonic": "push",
     "size": 1
   },
@@ -889,31 +889,31 @@
   },
   {
     "ea": "0x60CB33",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CB35",
-    "line": "fstp    [esp+84h+var_68.w]",
+    "line": "fstp    [esp+70h+a4]; Compute remaining equipped-WEAP enchantment charge after shot cost.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60CB39",
-    "line": "fld     [esp+84h+var_68.w]",
+    "line": "fld     [esp+70h+a4]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x60CB3D",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+70h+newCharge]; newCharge",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CB40",
-    "line": "call    sub_488AA0",
+    "line": "call    EquippedEntryData_SetCharge; Commit reduced charge to the equipped WEAP instance at projectile construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,25 +931,25 @@
   },
   {
     "ea": "0x60CB4B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CB4D",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CB52",
-    "line": "fstp    qword ptr [esp+78h+var_68.w]",
+    "line": "fstp    qword ptr [esp+64h+a4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60CB56",
-    "line": "mov     ecx, [esp+78h+var_68.z]",
+    "line": "mov     ecx, [esp+64h+anonymous_0+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x60CB65",
-    "line": "fcomp   qword ptr [esp+7Ch+var_68.z]",
+    "line": "fcomp   qword ptr [esp+64h+a4]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x60CB84",
-    "line": "mov     ecx, [esp+8Ch+a2]",
+    "line": "mov     ecx, [esp+64h+anonymous_0+4]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60CB88",
-    "line": "mov     [esi+80h], ecx",
+    "line": "mov     [esi+80h], ecx; Store bow enchantment on projectile only when the equipped WEAP had sufficient charge; impact later uses this retained pointer.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1111,19 +1111,19 @@
   },
   {
     "ea": "0x60CBA6",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60CBA8",
-    "line": "lea     ecx, [eax+18h]",
+    "line": "lea     ecx, [eax+18h]; magicItem",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x60CBAB",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x60CBBD",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocate the projectile magic-hit-effect object (0x4C bytes). This allocation is not handled as a recoverable constructor failure.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x60CBC5",
-    "line": "mov     [esp+90h+a2], eax",
+    "line": "mov     [esp+64h+a4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x60CBCB",
-    "line": "mov     byte ptr [esp+90h+var_30], 1",
+    "line": "mov     byte ptr [esp+64h+var_4], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1213,25 +1213,25 @@
   },
   {
     "ea": "0x60CBD9",
-    "line": "fstp    [esp+94h+var_94]; float",
+    "line": "fstp    [esp+68h+var_68.x]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CBDC",
-    "line": "push    edi; int",
+    "line": "push    edi; effectShader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60CBDD",
-    "line": "push    esi; int",
+    "line": "push    esi; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60CBDE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x60CBEB",
-    "line": "mov     edx, [edi]",
+    "line": "mov     edx, [edi]; Fatal OOM path: the magic-hit-effect allocation result is dereferenced immediately; null does not propagate as a constructor failure return.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x60CBF2",
-    "line": "mov     byte ptr [esp+90h+var_30], 0",
+    "line": "mov     byte ptr [esp+64h+var_4], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1303,19 +1303,19 @@
   },
   {
     "ea": "0x60CBFD",
-    "line": "push    edi",
+    "line": "push    edi; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60CBFE",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x60CC03",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,13 +1369,13 @@
   },
   {
     "ea": "0x60CC18",
-    "line": "mov     ecx, [ebp+arg_4]",
+    "line": "mov     ecx, [ebp+originX]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60CC1B",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+originY]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x60CC25",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+originZ]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1423,19 +1423,19 @@
   },
   {
     "ea": "0x60CC30",
-    "line": "call    TESObjectREFR_SetPosition",
+    "line": "call    TESObjectREFR_SetPosition; Initialize projectile world position from constructor originX/originY/originZ.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CC35",
-    "line": "push    2ECh; Size",
+    "line": "push    2ECh; Allocate a HighProcess (0x2EC bytes) for the new ArrowProjectile before scene generation.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x60CC3A",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocate a HighProcess for the new projectile. On allocation failure native code stores a null process and continues local construction; there is no error return.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x60CC42",
-    "line": "mov     [esp+90h+a2], eax",
+    "line": "mov     [esp+64h+a4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x60CC48",
-    "line": "mov     byte ptr [esp+90h+var_30], 2",
+    "line": "mov     byte ptr [esp+64h+var_4], 2",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x60CC51",
-    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)",
+    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,13 +1489,13 @@
   },
   {
     "ea": "0x60CC58",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; HighProcess allocation failed: store null at MobileObject+0x58 and continue. If construction completes, Actor_GetProcessLevel returns -1 and requested level-0 manager insertion is silently rejected.",
     "mnemonic": "xor",
     "size": 2
   },
   {
     "ea": "0x60CC5A",
-    "line": "fld     [ebp+arg_10]",
+    "line": "fld     [ebp+yawZ]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1507,37 +1507,37 @@
   },
   {
     "ea": "0x60CC5E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CC60",
-    "line": "fstp    [esp+94h+var_94]; float",
+    "line": "fstp    [esp+68h+var_68.x]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CC63",
-    "line": "mov     byte ptr [esp+94h+var_30], 0",
+    "line": "mov     byte ptr [esp+68h+var_4], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x60CC68",
-    "line": "mov     [esi+58h], eax",
+    "line": "mov     [esi+58h], eax; Assign the newly constructed HighProcess to MobileObject+0x58.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60CC6B",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; Store launch yaw Z supplied by Actor_ProcessAction; projectile orientation is independent from the released ArrowBone clone.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CC70",
-    "line": "fld     [ebp+arg_14]",
+    "line": "fld     [ebp+pitchX]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1549,19 +1549,19 @@
   },
   {
     "ea": "0x60CC74",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CC76",
-    "line": "fstp    [esp+98h+var_98]; float",
+    "line": "fstp    [esp+68h+var_68.x]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CC79",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; Store launch pitch X supplied by Actor_ProcessAction; roll Y is forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,19 +1579,19 @@
   },
   {
     "ea": "0x60CC81",
-    "line": "fstp    [esp+9Ch+var_9C]; float",
+    "line": "fstp    [esp+68h+var_68.x]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CC84",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CC86",
-    "line": "call    sub_4D89F0",
+    "line": "call    TESObjectREFR_SetRotationY; Set projectile reference rotation Y (roll) to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x60CC91",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,13 +1639,13 @@
   },
   {
     "ea": "0x60CC9E",
-    "line": "mov     edx, [esp+9Ch+a2]",
+    "line": "mov     edx, [esp+64h+baseForm]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60CCA2",
-    "line": "push    edx; a2",
+    "line": "push    edx; baseForm",
     "mnemonic": "push",
     "size": 1
   },
@@ -1657,19 +1657,19 @@
   },
   {
     "ea": "0x60CCA5",
-    "line": "call    TESObjectREFR_SetBaseForm",
+    "line": "call    TESObjectREFR_SetBaseForm; Hard recovery boundary: set ArrowProjectile.baseForm to ammoEntry->type. weaponEntry contributes damage/enchantment/poison/flags only and its WEAP form is not retained by the projectile.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CCAA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CCAC",
-    "line": "call    MobileObject_GenerateNiNode",
+    "line": "call    MobileObject_GenerateNiNode; Generate a separate projectile-owned NiNode from the AMMO base form/model after cell and transform initialization.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,25 +1699,25 @@
   },
   {
     "ea": "0x60CCBC",
-    "line": "call    NiObjectNET_SetName",
+    "line": "call    NiObjectNET_SetName; Name the generated projectile root \"Arrow\". This node is distinct from the actor-owned equipped/held model.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CCC1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CCC3",
-    "line": "call    sub_608CB0",
+    "line": "call    ArrowProjectile_InitializeNodeLocalTransformAndCollision; Initialize the generated projectile root's local transform and collision filter, then ensure recursive alpha properties. This call does not perform a local-to-world transform update.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CCC8",
-    "line": "fld     [ebp+arg_18]",
+    "line": "fld     [ebp+attackStrength]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1729,25 +1729,25 @@
   },
   {
     "ea": "0x60CCCC",
-    "line": "fstp    [esp+0A0h+var_A0]; float",
+    "line": "fstp    [esp+68h+var_68.x]; attackStrength",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60CCCF",
-    "line": "push    ebx; int",
+    "line": "push    ebx; shooter",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60CCD0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CCD2",
-    "line": "call    sub_60A230",
+    "line": "call    ArrowProjectile_EnsureCharacterProxy; Ensures a high-process ArrowProjectile owns a sphere-based bhk character proxy. Builds projectile collision layer 6 independently of the visible NIF, derives gravity/collision metadata from shooter and attack strength, attaches the projectile NiNode, and initializes water-height/filter state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x60CCE1",
-    "line": "fstp    [esp+9Ch+var_68.x]",
+    "line": "fstp    [esp+64h+var_30]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1783,25 +1783,25 @@
   },
   {
     "ea": "0x60CCE7",
-    "line": "fst     [esp+9Ch+var_68.y]",
+    "line": "fst     [esp+64h+var_2C]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x60CCEB",
-    "line": "fst     [esp+9Ch+var_68.z]",
+    "line": "fst     [esp+64h+var_28]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x60CCEF",
-    "line": "fstp    [esp+9Ch+var_68.w]",
+    "line": "fstp    [esp+64h+var_24]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60CCF3",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x60CD03",
-    "line": "lea     ecx, [esp+9Ch+var_68]",
+    "line": "lea     ecx, [esp+64h+var_30]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1855,13 +1855,13 @@
   },
   {
     "ea": "0x60CD0A",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CD0F",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
@@ -1873,37 +1873,37 @@
   },
   {
     "ea": "0x60CD12",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CD17",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CD19",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CD1E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60CD20",
-    "line": "call    sub_60C5B0",
+    "line": "call    ArrowProjectile_CheckPlayerLaunchObstruction; Player-only launch-obstruction ray test from projectile origin toward player eye/reference height. A valid early hit is routed through normal ArrowProjectile collision handling and collision-state resolution; non-player shots skip this path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60CD25",
-    "line": "mov     eax, ds:0B3B7D0h",
+    "line": "mov     eax, ds:0B3B7D0h; After constructing a shot, increment g_liveArrowProjectileCount and compare against iArrowMaxRefCount (default 15).",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1939,19 +1939,19 @@
   },
   {
     "ea": "0x60CD3C",
-    "line": "push    0",
+    "line": "push    0; destroyImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60CD3E",
-    "line": "push    ecx",
+    "line": "push    ecx; maximumReferenceCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60CD3F",
-    "line": "call    sub_608120",
+    "line": "call    ArrowProjectile_PruneOldestSettled; When live count exceeds iArrowMaxRefCount, request deferred pruning of the oldest lifecycle-state-2 projectile.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x60CD49",
-    "line": "mov     ecx, dword ptr [esp+9Ch+var_48+4]",
+    "line": "mov     ecx, dword ptr [esp+64h+var_C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x60CD58",
-    "line": "mov     ecx, dword ptr [esp+8Ch+anonymous_0+4]",
+    "line": "mov     ecx, [esp+54h+var_14]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2038,5 +2038,143 @@
     "line": "retn    24h ; '$'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3040",
+    "line": "mov     ecx, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3043",
+    "line": "jmp     MobileObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3048",
+    "line": "mov     eax, [ebp+a4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C304B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C304C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3051",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3052",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3053",
+    "line": "mov     eax, [ebp+a4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3056",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3057",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C305C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C305D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C305E",
+    "line": "mov     edx, [esp-4+originX]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3062",
+    "line": "lea     eax, [edx-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3065",
+    "line": "mov     ecx, [edx-58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3068",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C306A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C306F",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3072",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3075",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3077",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C307C",
+    "line": "mov     eax, offset stru_AEBD1C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3081",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

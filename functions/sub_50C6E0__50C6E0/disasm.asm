@@ -17,7 +17,7 @@
 0x50C708: push    edx; a2
 0x50C709: push    eax; a1
 0x50C70A: mov     dword ptr [esp+28h+var_4], 0
-0x50C712: call    Script_ExtractArgs
+0x50C712: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50C717: add     esp, 20h
 0x50C71A: test    al, al
 0x50C71C: jnz     short loc_50C721
@@ -52,9 +52,9 @@
 0x50C76C: jz      short loc_50C781
 0x50C76E: mov     ecx, dword ptr [esp+8+var_4]
 0x50C772: mov     [eax+104h], ecx
-0x50C778: push    0
-0x50C77A: mov     ecx, eax
-0x50C77C: call    sub_5222D0
+0x50C778: push    0; skipDerivedStats
+0x50C77A: mov     ecx, eax; this
+0x50C77C: call    TESNPC_RecalculateAutoStats; Authoritative Oblivion TESNPC auto-stat calculation. For each of 21 skills: major = 25+(level-1), non-major = 5+0.1*(level-1), then add 5+0.5*(level-1) for matching class specialization, then the signed race bonus, cap at 100, and store in TESNPC::baseSkills. The chargen placeholder class suppresses major/specialization contributions. Attributes start from sex-specific race values, add configured +5 class-primary bonuses, then add (level-1) per governed major skill or 0.2*(level-1) per governed non-major skill, capped at 100.
 0x50C781: mov     al, 1
 0x50C783: pop     esi
 0x50C784: pop     ecx

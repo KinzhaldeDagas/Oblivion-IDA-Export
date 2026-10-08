@@ -1,4 +1,4 @@
-0x67ED00: cmp     [esp+arg_0], 0
+0x67ED00: cmp     [esp+value], 0; Verified sets/clears stateFlags bit 0x08. TESPathGrid_LoadSerializedGraphChunks sets it when point Z is below the cell water height; actor-aware edge scoring treats it as a boundary trait.
 0x67ED05: jz      short loc_67ED0E
 0x67ED07: or      byte ptr [ecx+10h], 8
 0x67ED0B: retn    4

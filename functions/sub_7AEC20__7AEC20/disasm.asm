@@ -9,7 +9,7 @@
 0x7AEC30: jz      short loc_7AEC3D
 0x7AEC32: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
 0x7AEC36: jnz     short loc_7AEC3D
-0x7AEC38: call    sub_772560
+0x7AEC38: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7AEC3D: test    edi, edi
 0x7AEC3F: mov     [esi], edi
 0x7AEC41: mov     eax, esi

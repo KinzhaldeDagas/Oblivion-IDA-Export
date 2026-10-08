@@ -1,1 +1,1 @@
-cxx_type_info_table
+typedef __cxx_type_info_table cxx_type_info_table;

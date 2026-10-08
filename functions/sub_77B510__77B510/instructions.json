@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77B510",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+declaration]; DirectX10OBSE authority: Oblivion NiDX9RenderState vertex declaration cache. Sets input mode byte +0x1000=1, caches decl at +0x100C, then calls IDirect3DDevice9::SetVertexDeclaration via vtable +0x15C.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x77B529",
-    "line": "cmp     byte ptr [esp+arg_4], 0",
+    "line": "cmp     [esp+savePrevious], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x77B551",
-    "line": "mov     [esp+arg_4], eax",
+    "line": "mov     dword ptr [esp+savePrevious], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x77B55B",
-    "line": "mov     [esp+arg_0], ecx",
+    "line": "mov     [esp+declaration], ecx",
     "mnemonic": "mov",
     "size": 4
   },

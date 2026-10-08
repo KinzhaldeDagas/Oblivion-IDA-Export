@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79B8D0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 10,
+  "chunks": [
+    [
+      "0x79B8D0",
+      "0x79B9E2"
+    ],
+    [
+      "0x9CC2A0",
+      "0x9CC2C3"
+    ]
+  ],
+  "chunks_sha256": "447dd4600c0f523d3a4108ba4e75211256d7e3d6d0dc537944439a1fd874320c",
+  "comment_regular": "Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
+  "comment_repeatable": "Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_SFrondGuide_Swap_010201A0",
   "end_ea": "0x79B9E2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79B8D0",
+  "name": "OB_SFrondGuide_Swap_010201A0",
   "segment": ".text",
   "sha256": "4243ed40dd2953d9637b09b3902c6f88d9164f4b49345379b6f170d77fd5a2b9",
   "size": 274,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79B8D0",
-  "type": "void __cdecl(int, int)",
-  "xrefs_from_count": 93,
+  "total_chunk_size": 309,
+  "type": "void __cdecl(OB_SFrondGuide_010201A0 *left, OB_SFrondGuide_010201A0 *right)",
+  "xrefs_from_count": 105,
   "xrefs_to_count": 10
 }

@@ -8,18 +8,18 @@
 0x721B80: jz      short loc_721B95
 0x721B82: lea     esi, [eax+64h]
 0x721B85: mov     ecx, 0Dh
-0x721B8A: lea     edi, [esp+13Ch+var_68]
+0x721B8A: lea     edi, [esp+13Ch+parent]
 0x721B91: rep movsd
 0x721B93: jmp     short loc_721BA1
-0x721B95: lea     ecx, [esp+13Ch+var_68]
+0x721B95: lea     ecx, [esp+13Ch+parent]
 0x721B9C: call    sub_718A50
 0x721BA1: push    ebp
 0x721BA2: lea     eax, [ebx+30h]
-0x721BA5: push    eax
-0x721BA6: lea     ecx, [esp+144h+var_34]
-0x721BAD: push    ecx
-0x721BAE: lea     ecx, [esp+148h+var_68]
-0x721BB5: call    sub_53D7A0
+0x721BA5: push    eax; local
+0x721BA6: lea     ecx, [esp+144h+out]
+0x721BAD: push    ecx; out
+0x721BAE: lea     ecx, [esp+148h+parent]; parent
+0x721BB5: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x721BBA: mov     esi, eax
 0x721BBC: movzx   eax, byte ptr [ebx+0DCh]
 0x721BC3: lea     ebp, [ebx+64h]
@@ -102,7 +102,7 @@
 0x721CE0: push    eax
 0x721CE1: lea     ecx, [esp+148h+var_8C]
 0x721CE8: push    ecx
-0x721CE9: call    sub_710250
+0x721CE9: call    NiPoint3_MultiplyMatrix3
 0x721CEE: mov     edx, [eax]
 0x721CF0: mov     [esp+14Ch+var_130], edx
 0x721CF4: mov     ecx, [eax+4]
@@ -114,7 +114,7 @@
 0x721D04: lea     ecx, [esp+154h+var_C8]
 0x721D0B: push    ecx
 0x721D0C: mov     [esp+158h+var_128], edx
-0x721D10: call    sub_710250
+0x721D10: call    NiPoint3_MultiplyMatrix3
 0x721D15: mov     edx, [eax]
 0x721D17: mov     [esp+158h+var_108], edx
 0x721D1B: mov     ecx, [eax+4]
@@ -126,7 +126,7 @@
 0x721D2B: lea     ecx, [esp+160h+var_B0]
 0x721D32: push    ecx
 0x721D33: mov     [esp+164h+var_100], edx
-0x721D37: call    sub_710250
+0x721D37: call    NiPoint3_MultiplyMatrix3
 0x721D3C: fld     [esp+164h+var_104]
 0x721D40: mov     edx, [eax]
 0x721D42: mov     [esp+164h+var_114], edx
@@ -271,7 +271,7 @@
 0x721F11: push    ebp
 0x721F12: push    ecx
 0x721F13: push    edx
-0x721F14: call    sub_710250
+0x721F14: call    NiPoint3_MultiplyMatrix3
 0x721F19: add     esp, 0Ch
 0x721F1C: mov     ecx, eax
 0x721F1E: call    sub_4BF9B0
@@ -390,7 +390,7 @@
 0x7220B0: push    edx
 0x7220B1: lea     eax, [esp+148h+var_98]
 0x7220B8: push    eax
-0x7220B9: call    sub_710250
+0x7220B9: call    NiPoint3_MultiplyMatrix3
 0x7220BE: mov     ecx, [eax]
 0x7220C0: mov     [esp+14Ch+var_114], ecx
 0x7220C4: mov     edx, [eax+4]
@@ -402,7 +402,7 @@
 0x7220D4: lea     edx, [esp+154h+var_74]
 0x7220DB: push    edx
 0x7220DC: mov     [esp+158h+var_10C], eax
-0x7220E0: call    sub_710250
+0x7220E0: call    NiPoint3_MultiplyMatrix3
 0x7220E5: mov     ecx, [eax]
 0x7220E7: mov     [esp+158h+var_108], ecx
 0x7220EB: mov     edx, [eax+4]
@@ -414,7 +414,7 @@
 0x7220FB: lea     edx, [esp+160h+var_BC]
 0x722102: push    edx
 0x722103: mov     [esp+164h+var_100], eax
-0x722107: call    sub_710250
+0x722107: call    NiPoint3_MultiplyMatrix3
 0x72210C: mov     ecx, [eax]
 0x72210E: mov     [esp+164h+var_130], ecx
 0x722112: fld     [esp+164h+var_130]
@@ -474,7 +474,7 @@
 0x7221E4: push    ebp
 0x7221E5: push    edx
 0x7221E6: push    eax
-0x7221E7: call    sub_710250
+0x7221E7: call    NiPoint3_MultiplyMatrix3
 0x7221EC: add     esp, 0Ch
 0x7221EF: mov     ecx, eax
 0x7221F1: call    sub_4BF9B0

@@ -1,26 +1,26 @@
-0x479140: mov     ecx, [esp+arg_8]
+0x479140: mov     ecx, [esp+sourceModelRoot]; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.
 0x479144: test    ecx, ecx
 0x479146: push    ebp
-0x479147: mov     ebp, [esp+4+arg_4]
+0x479147: mov     ebp, [esp+4+modelRoot]
 0x47914B: jz      short loc_47915B
 0x47914D: push    offset off_A3CEAC
-0x479152: call    NiObjectNET_GetExtraData
+0x479152: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x479157: test    eax, eax
 0x479159: jnz     short loc_47916F
 0x47915B: push    offset off_A3CEAC
 0x479160: mov     ecx, ebp
-0x479162: call    NiObjectNET_GetExtraData
+0x479162: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x479167: test    eax, eax
 0x479169: jz      loc_47925B
 0x47916F: push    edi
 0x479170: push    eax
-0x479171: push    offset dword_B3FCC0
+0x479171: push    offset stru_B3FCC0
 0x479176: call    NiRTTI_Cast
 0x47917B: mov     edi, eax
 0x47917D: add     esp, 8
 0x479180: test    edi, edi
 0x479182: jz      loc_47923A
-0x479188: cmp     [esp+8+arg_10], 7
+0x479188: cmp     [esp+8+modelType], 7
 0x47918D: push    ebx
 0x47918E: setz    bl
 0x479191: test    bl, bl
@@ -43,7 +43,7 @@
 0x4791BD: jnz     loc_47927B
 0x4791C3: mov     eax, [esp+10h+a1]
 0x4791C7: push    eax
-0x4791C8: call    sub_4DC270
+0x4791C8: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4791CD: mov     esi, eax
 0x4791CF: add     esp, 4
 0x4791D2: test    esi, esi
@@ -60,8 +60,8 @@
 0x4791F0: call    eax
 0x4791F2: cmp     byte ptr [eax+4], 24h ; '$'
 0x4791F6: jnz     short loc_479213
-0x4791F8: push    ebp
-0x4791F9: call    sub_480770
+0x4791F8: push    ebp; rootNode
+0x4791F9: call    NiNode_RemoveScbChildAlongFadeNodeChain; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.
 0x4791FE: add     esp, 4
 0x479201: pop     esi
 0x479202: pop     ebx
@@ -120,7 +120,7 @@
 0x479283: push    1
 0x479285: push    ebp
 0x479286: mov     ecx, esi
-0x479288: call    eax
+0x479288: call    eax; Attach the generated model root to the exact skeleton parent selected by Prn extra data.
 0x47928A: push    offset off_A3CE0C; a2
 0x47928F: push    ebp; a1
 0x479290: call    NiObjectNET_LookupObjectByName
@@ -133,13 +133,13 @@
 0x4792A6: push    1
 0x4792A8: push    edi
 0x4792A9: mov     ecx, esi
-0x4792AB: call    eax
+0x4792AB: call    eax; Reparent exact-name Scb out of modelRoot as a sibling under the same Prn-selected parent; AddObject detaches it from its former parent.
 0x4792AD: push    1
 0x4792AF: push    esi
 0x4792B0: call    sub_897A90
 0x4792B5: add     esp, 8
 0x4792B8: mov     ecx, edi; this
-0x4792BA: call    NiAVObject_InitializePropertyState
+0x4792BA: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4792BF: mov     ecx, edi
 0x4792C1: call    NiNode_UpdateDynamicEffectState
 0x4792C6: lea     esi, [ebp+0ACh]

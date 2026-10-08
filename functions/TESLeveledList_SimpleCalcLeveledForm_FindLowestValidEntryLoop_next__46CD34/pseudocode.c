@@ -13,9 +13,9 @@ int __userpurge TESLeveledList_SimpleCalcLeveledForm_::FindLowestValidEntryLoop_
 {
   _DWORD *v11; // eax
 
-  v11 = *(_DWORD **)(a1 + 4);
-  if ( v11 )
-    return TESLeveledList_SimpleCalcLeveledForm_::FindLowestValidEntryLoop(
+  v11 = *(_DWORD **)(a1 + 4); /*0x46cd34*/
+  if ( v11 ) /*0x46cd39*/
+    return TESLeveledList_SimpleCalcLeveledForm_::FindLowestValidEntryLoop( /*0x46cd39*/
              v11,
              a4,
              a2,
@@ -27,9 +27,9 @@ int __userpurge TESLeveledList_SimpleCalcLeveledForm_::FindLowestValidEntryLoop_
              a9,
              a10,
              a11);
-  if ( !a2 )
-    return TESLeveledList_SimpleCalcLeveledForm_::Done_(a6, a7, a8, a9);
-  if ( !(GetRandomLargeInteger_(0) % a3) )
-    JUMPOUT(0x46CD66);
+  if ( !a2 ) /*0x46cd3d*/
+    return TESLeveledList_SimpleCalcLeveledForm_::Done_(a6, a7, a8, a9); /*0x46cd3d*/
+  if ( !(Game_RandomLargeInteger(0) % a3) ) /*0x46cd56*/
+    JUMPOUT(0x46CD66); /*0x46cd66*/
   return TESLeveledList_SimpleCalcLeveledForm_::FindRandomValidEntryLoop(a6, a7, a8, a9);
 }

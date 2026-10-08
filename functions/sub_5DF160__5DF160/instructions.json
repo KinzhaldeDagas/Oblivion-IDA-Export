@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5DF160",
-    "line": "push    ebp",
+    "line": "push    ebp; Display/settings apply handler; recomputes tree distance scalar flt_B0760C and calls 0x55FCB0 to refresh cached SpeedTree distances.",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x5DF1F5",
-    "line": "mov     cl, ds:0B06CF4h",
+    "line": "mov     cl, ds:0B06CF4h; Display-settings apply path reads bDoStaticAndArchShadows before recomposing the category mask.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5DF232",
-    "line": "mov     ds:0B2C678h, ecx",
+    "line": "mov     ds:0B2C678h, ecx; Display-settings apply writes Architecture bit 0x02 | Actors bit 0x08 to the caster-category mask.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5DF248",
-    "line": "call    ShadowCanopyPass",
+    "line": "call    ShadowCanopyPass; Retail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5DF258",
-    "line": "call    SetTextureCanopyShadowMap",
+    "line": "call    SetTextureCanopyShadowMap; Install/own the current canopy shadow-map texture at global 0x00B4310C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x5DF269",
-    "line": "call    sub_482670",
+    "line": "call    ClearCanopyShadowMap; Clear/release canopy shadow-map state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x5DF2CA",
-    "line": "call    sub_55FCB0",
+    "line": "call    sub_55FCB0; Refresh cached tree model distance parameters across singleton tree cache using fTreeNearDistanceBase and flt_B39E10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x5DF490",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x5DF4AA",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,19 +2011,19 @@
   },
   {
     "ea": "0x5DF67A",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DF67D",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DF682",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2394,12 +2394,6 @@
     "size": 2
   },
   {
-    "ea": "0x5DF769",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x5DF770",
     "line": "add     dword ptr [esi+0FCh], 0FFFFFFFFh",
     "mnemonic": "add",
@@ -2767,13 +2761,13 @@
   },
   {
     "ea": "0x5DF844",
-    "line": "cmp     byte ptr ds:0B43077h, 0; jumptable 005DF1A4 case 9",
+    "line": "cmp     byte ptr ds:0B43077h, 0; Verified settings-menu case 9 toggles bDisplayLODLand; DistantLOD_UpdateLandLODMap reads this setting when activating LandLOD display.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x5DF84B",
-    "line": "mov     ecx, offset byte_B02D70",
+    "line": "mov     ecx, offset bDisplayLODLand",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2851,7 +2845,7 @@
   },
   {
     "ea": "0x5DF880",
-    "line": "mov     ecx, offset byte_B06F0C",
+    "line": "mov     ecx, offset g_bShadowSourceAsReceiverSetting",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3648,12 +3642,6 @@
     "size": 2
   },
   {
-    "ea": "0x5DFAC8",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x5DFAD0",
     "line": "add     [esi+0ECh], ecx",
     "mnemonic": "add",
@@ -4020,12 +4008,6 @@
     "size": 2
   },
   {
-    "ea": "0x5DFB9D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5DFBA0",
     "line": "add     [esi+0F4h], ecx",
     "mnemonic": "add",
@@ -4375,13 +4357,13 @@
   },
   {
     "ea": "0x5DFC55",
-    "line": "cmp     byte ptr ds:0B09AE8h, 0; jumptable 005DF1A4 case 30",
+    "line": "cmp     byte ptr ds:0B09AE8h, 0; Verified settings-menu case 30 toggles bDisplayLODBuildings; DistantLOD_UpdateExteriorGrid uses this setting for its building/object channel.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x5DFC5C",
-    "line": "mov     ecx, offset byte_B09AE8",
+    "line": "mov     ecx, offset bDisplayLODBuildings",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4489,13 +4471,13 @@
   },
   {
     "ea": "0x5DFCA6",
-    "line": "cmp     byte ptr ds:0B09AF0h, 0; jumptable 005DF1A4 case 31",
+    "line": "cmp     byte ptr ds:0B09AF0h, 0; Verified settings-menu case 31 toggles bDisplayLODTrees; DistantLOD_UpdateExteriorGrid uses this setting for its tree channel.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x5DFCAD",
-    "line": "mov     ecx, offset byte_B09AF0",
+    "line": "mov     ecx, offset bDisplayLODTrees",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5209,7 +5191,7 @@
   },
   {
     "ea": "0x5DFE8C",
-    "line": "mov     ecx, offset byte_B02D70",
+    "line": "mov     ecx, offset bDisplayLODLand",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5257,7 +5239,7 @@
   },
   {
     "ea": "0x5DFEAB",
-    "line": "call    sub_59B640",
+    "line": "call    ControlsMenu__SetInvertYButtonLabel",
     "mnemonic": "call",
     "size": 5
   },
@@ -5497,7 +5479,7 @@
   },
   {
     "ea": "0x5DFF68",
-    "line": "call    sub_497AE0",
+    "line": "call    Renderer_SetGammaAndMarkDirty; Verified in OblivionNew 2026-09-26: accepts a changed positive gamma float, stores it at B06C2C and sets byte B34FA4. No direct D3D call here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5509,7 +5491,7 @@
   },
   {
     "ea": "0x5DFF70",
-    "line": "call    sub_497C30",
+    "line": "call    Renderer_ApplyPendingGammaRamp; Verified in OblivionNew 2026-09-26: copies requested gamma B06C2C to fGamma INI value B06F64, clears B34FA4, builds 256 identical RGB WORD entries round(pow(i/255,gamma)*65535), then calls device vtable +54 (IDirect3DDevice9::SetGammaRamp slot21), swapchain0, flags1 (D3DSGR_CALIBRATE). Device is loaded from renderer +280; renderer pointer at B350D8. Constants: A3DDD8=255, A3DDD0=65535, A2FAA0=0.5. EAX return in decompiler is not an API HRESULT: SetGammaRamp is void.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5671,7 +5653,7 @@
   },
   {
     "ea": "0x5DFFCC",
-    "line": "call    sub_59B640",
+    "line": "call    ControlsMenu__SetInvertYButtonLabel",
     "mnemonic": "call",
     "size": 5
   },
@@ -5917,7 +5899,7 @@
   },
   {
     "ea": "0x5E0066",
-    "line": "call    sub_59B640",
+    "line": "call    ControlsMenu__SetInvertYButtonLabel",
     "mnemonic": "call",
     "size": 5
   },
@@ -6236,6 +6218,96 @@
   {
     "ea": "0x5E0126",
     "line": "jmp     loc_5E00A1",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2160",
+    "line": "lea     ecx, [ebp+var_18]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2163",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2168",
+    "line": "lea     ecx, [ebp+var_18]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C216B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2170",
+    "line": "lea     ecx, [ebp+var_18]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2173",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2178",
+    "line": "lea     ecx, [ebp+var_18]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C217B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2180",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2184",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2187",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C218A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C218C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2191",
+    "line": "mov     eax, offset stru_AEB098",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2196",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

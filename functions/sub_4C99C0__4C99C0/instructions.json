@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4C99C0",
-    "line": "push    ecx",
+    "line": "push    ecx; Fog interior decode: reads TESObjectCELL::LightingData fog packed RGB at lighting+0x08 and normalizes to float RGB.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4C99CE",
-    "line": "mov     eax, [eax+8]",
+    "line": "mov     eax, [eax+8]; Fog interior decode: load LightingData fog packed RGB (+0x08), source for active Sky fog color in mode 1.",
     "mnemonic": "mov",
     "size": 3
   },

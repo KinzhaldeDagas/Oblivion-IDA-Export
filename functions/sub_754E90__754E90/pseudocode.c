@@ -1,5 +1,5 @@
 // attributes: thunk
-int __thiscall sub_754E90(_DWORD *this, _DWORD *a2)
+int __thiscall j_NiTimeController_LinkObject(_DWORD *this, _DWORD *a2)
 {
-  return sub_715E70(this, a2);
+  return NiTimeController_LinkObject(this, a2);
 }

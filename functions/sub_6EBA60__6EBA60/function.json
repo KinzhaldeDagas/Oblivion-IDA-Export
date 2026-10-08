@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6EBA60",
+      "0x6EBA7A"
+    ]
+  ],
+  "chunks_sha256": "7cba87c976d4fc4c4123ef92414ab35934486c74766848d6a131d92f890194c8",
+  "comment_regular": "Default range clone: clone through the NiObject pointer map, then invoke the clone's post-clone/collapse virtual. Subclasses override when authored data must be sliced.",
+  "comment_repeatable": "Default range clone: clone through the NiObject pointer map, then invoke the clone's post-clone/collapse virtual. Subclasses override when authored data must be sliced.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6EBA60",
+  "display_name": "NiInterpolator_CloneTimeRange",
   "end_ea": "0x6EBA7A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6EBA60",
+  "name": "NiInterpolator_CloneTimeRange",
   "segment": ".text",
   "sha256": "7cba87c976d4fc4c4123ef92414ab35934486c74766848d6a131d92f890194c8",
   "size": 26,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EBA60",
+  "total_chunk_size": 26,
   "type": "int __thiscall(void *this, int, int)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 18

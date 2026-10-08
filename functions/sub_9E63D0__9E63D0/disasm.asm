@@ -2,7 +2,7 @@
 0x9E63D6: push    ecx
 0x9E63D7: fstp    [esp+4+var_4]; float
 0x9E63DA: push    offset aFsneakbasevalu; "fSneakBaseValue"
-0x9E63DF: mov     ecx, offset fSneakBaseValue
+0x9E63DF: mov     ecx, (offset flt_B366D8+28h)
 0x9E63E4: call    GameSetting_ConstrAndReg_float
 0x9E63E9: push    offset sub_A1D520; void (__cdecl *)()
 0x9E63EE: call    _atexit

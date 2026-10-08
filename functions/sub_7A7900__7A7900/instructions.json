@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7900",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Compact stock SIdvBranchInfo parser. Allocates 0x74 bytes, accepts only core branch-level tokens 6000..6017, and stores spline/profile pointers at +0x50..+0x70.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x7A7948",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A794A",
-    "line": "call    sub_7A7610",
+    "line": "call    OB_SIdvBranchInfo_ctor_010201A0; Compact stock SIdvBranchInfo constructor. Initializes core branch fields, diffuse texcoord controls, flare defaults at +0x24..+0x4C, and default spline pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7A795C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7A7969",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7A7975",
-    "line": "push    15h; MaxCount",
+    "line": "push    15h; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,55 +211,55 @@
   },
   {
     "ea": "0x7A797C",
-    "line": "lea     ecx, [esp+0B4h+var_78]",
+    "line": "lea     ecx, [esp+0B4h+details]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A7980",
-    "line": "mov     [esp+0B4h+var_60], 0Fh",
+    "line": "mov     [esp+0B4h+details.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A7988",
-    "line": "mov     [esp+0B4h+var_64], ebx",
+    "line": "mov     [esp+0B4h+details.size], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A798C",
-    "line": "mov     [esp+0B4h+var_74], bl",
+    "line": "mov     byte ptr [esp+0B4h+details.storage], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A7990",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A7995",
-    "line": "push    ebx",
+    "line": "push    ebx; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A7996",
-    "line": "lea     eax, [esp+0B0h+var_78]",
+    "line": "lea     eax, [esp+0B0h+details]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A799A",
-    "line": "push    eax",
+    "line": "push    eax; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A799B",
-    "line": "lea     ecx, [esp+0B4h+var_5C]",
+    "line": "lea     ecx, [esp+0B4h+var_5C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7A79AA",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x7A79BE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A79C0",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7A79DC",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x7A79F2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A79F4",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x7A79FA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7A7A0C",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x7A7A22",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7A24",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x7A7A2A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7A7A3C",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x7A7A52",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7A54",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x7A7A5A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x7A7A6C",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x7A7A82",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7A84",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x7A7A8A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x7A7A9C",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x7A7AB2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7AB4",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7A7ABA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x7A7ACC",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x7A7AE2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7AE4",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x7A7AEA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7A7AFC",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x7A7B12",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7B14",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x7A7B1A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x7A7B2C",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,13 +1015,13 @@
   },
   {
     "ea": "0x7A7B42",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7B44",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x7A7B4A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x7A7B5C",
-    "line": "call    sub_7909D0",
+    "line": "call    OB_CTreeFileAccess_ParseSplineProfileObject_010201A0; Reads one stock counted string from CTreeFileAccess, allocates a 0x5C stBezierSpline/profile object, and constructs it from the text. Used by frond token 13005 and branch parameter/profile tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,13 +1105,13 @@
   },
   {
     "ea": "0x7A7B72",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7B74",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7A7B7A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x7A7B8C",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x7A7B9A",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x7A7BA9",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x7A7BB8",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x7A7BC4",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x7A7BD0",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x7A7BDC",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,13 +1501,13 @@
   },
   {
     "ea": "0x7A7C3A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7C3C",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,37 +1597,37 @@
   },
   {
     "ea": "0x7A7C6F",
-    "line": "lea     ecx, [esp+0B4h+var_94]",
+    "line": "lea     ecx, [esp+0B4h+var_94]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A7C73",
-    "line": "mov     [esp+0B4h+var_7C], 0Fh",
+    "line": "mov     [esp+0B4h+var_94.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A7C7B",
-    "line": "mov     [esp+0B4h+var_80], 0",
+    "line": "mov     [esp+0B4h+var_94.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A7C83",
-    "line": "mov     [esp+0B4h+var_90], 0",
+    "line": "mov     byte ptr [esp+0B4h+var_94.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A7C88",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A7C8D",
-    "line": "push    0",
+    "line": "push    0; appendSystemError",
     "mnemonic": "push",
     "size": 2
   },
@@ -1639,13 +1639,13 @@
   },
   {
     "ea": "0x7A7C93",
-    "line": "push    edx",
+    "line": "push    edx; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A7C94",
-    "line": "lea     ecx, [esp+0B4h+var_34]",
+    "line": "lea     ecx, [esp+0B4h+var_34]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x7A7CA6",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1683,6 +1683,102 @@
     "ea": "0x7A7CB5",
     "line": "call    ThrowException??",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE10",
+    "line": "mov     eax, [ebp-98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCE16",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCE17",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE1C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCE1D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCE1E",
+    "line": "lea     ecx, [ebp-78h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCE21",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE26",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCE2C",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE31",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCE35",
+    "line": "lea     eax, [edx-9Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCE3B",
+    "line": "mov     ecx, [edx-0A0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CCE41",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCE43",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE48",
+    "line": "mov     eax, offset stru_AF6210",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE4D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

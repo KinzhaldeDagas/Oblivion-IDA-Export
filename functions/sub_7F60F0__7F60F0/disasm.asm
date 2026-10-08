@@ -1,14 +1,14 @@
-0x7F60F0: mov     eax, [esp+arg_8]
+0x7F60F0: mov     eax, [esp+lightingProperty]
 0x7F60F4: fld     dword ptr [eax+94h]
 0x7F60FA: push    ebx
 0x7F60FB: push    edi
-0x7F60FC: fstp    [esp+8+arg_8]
-0x7F6100: mov     edi, [esp+8+arg_4]
+0x7F60FC: fstp    [esp+8+lightingProperty]; Tree/LOD light rebuild reads BSShaderLightingProperty+0x94. Base constructor 0x7EE4B8 initializes this dimmer to 1.0; no leaf-specific writer is proven in the draw path.
+0x7F6100: mov     edi, [esp+8+renderEntry]
 0x7F6104: xor     bl, bl
 0x7F6106: cmp     [edi+8], bl
 0x7F6109: jbe     short loc_7F6145
 0x7F610B: push    esi
-0x7F610C: mov     esi, [esp+0Ch+arg_C]
+0x7F610C: mov     esi, [esp+0Ch+previousRenderEntry]
 0x7F6110: test    esi, esi
 0x7F6112: mov     ecx, [edi+0Ch]
 0x7F6115: movzx   eax, bl
@@ -19,12 +19,12 @@
 0x7F6122: mov     edx, [esi+0Ch]
 0x7F6125: cmp     ecx, [edx+eax*4]
 0x7F6128: jz      short loc_7F613C
-0x7F612A: fld     [esp+0Ch+arg_8]
+0x7F612A: fld     [esp+0Ch+lightingProperty]
 0x7F612E: push    ecx
-0x7F612F: fstp    [esp+10h+var_10]; float
-0x7F6132: push    ecx; int
-0x7F6133: push    eax; int
-0x7F6134: call    sub_7EE390
+0x7F612F: fstp    [esp+10h+propertyDimmer]; propertyDimmer
+0x7F6132: push    ecx; shadowSceneLight
+0x7F6133: push    eax; lightSlot
+0x7F6134: call    OB_BSShader_DispatchLightConstantUpdate_010201A0; Rebuild only present/changed slots. Normal tree callers pass previousRenderEntry=null after reset, so every present slot is rewritten.
 0x7F6139: add     esp, 0Ch
 0x7F613C: add     bl, 1
 0x7F613F: cmp     bl, [edi+8]

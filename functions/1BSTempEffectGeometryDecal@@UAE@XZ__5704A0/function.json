@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 6,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x5704A0",
+      "0x570683"
+    ],
+    [
+      "0x9BDC50",
+      "0x9BDC94"
+    ]
+  ],
   "chunks_sha256": "2f84cc37346c3ef421b3306223029d1597340f0b2da24abc79baeb94d1d13f7d",
   "comment_regular": "[Verified] BSTempEffectGeometryDecal destructor unregisters its DECAL_DATA payload from the target shader property via BSShaderLightingProperty_RemoveDecalData, releases the target NiProperty, then releases the payload's source texture and target property and frees the 0x4C payload.",
   "comment_repeatable": "[Verified] BSTempEffectGeometryDecal destructor unregisters its DECAL_DATA payload from the target shader property via BSShaderLightingProperty_RemoveDecalData, releases the target NiProperty, then releases the payload's source texture and target property and frees the 0x4C payload.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 7,
   "display_name": "BSTempEffectGeometryDecal_Dtor",
   "end_ea": "0x570683",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "904cd5c2a6051de78b0d2d306694c8e9f26f220ac1bbc49f0bfd0c0d324977f5",
   "size": 483,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x5704A0",
   "total_chunk_size": 551,
   "type": "void __thiscall(BSTempEffectGeometryDecalLayout_t *this)",

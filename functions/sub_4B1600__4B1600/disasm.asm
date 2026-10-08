@@ -1,4 +1,4 @@
-0x4B1600: push    0FFFFFFFFh
+0x4B1600: push    0FFFFFFFFh; Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. Its ShadowSceneLight registration uses trackBackingPosition=false because reference lifecycle supplies the attachment path.
 0x4B1602: push    offset SEH_4B1600
 0x4B1607: mov     eax, large fs:0
 0x4B160D: push    eax
@@ -17,7 +17,7 @@
 0x4B1635: mov     large fs:0, eax
 0x4B163B: mov     ebp, [esp+154h+arg_0]
 0x4B1642: test    ebp, ebp
-0x4B1644: mov     esi, [esp+154h+arg_4]
+0x4B1644: mov     esi, [esp+154h+referenceRoot]
 0x4B164B: mov     [esp+154h+var_140], ecx
 0x4B164F: jz      loc_4B1A17
 0x4B1655: test    esi, esi
@@ -29,10 +29,10 @@
 0x4B166A: mov     edi, eax
 0x4B166C: mov     eax, [esp+154h+var_140]
 0x4B1670: mov     bl, 20h ; ' '
-0x4B1672: test    [eax+7Ch], bl
+0x4B1672: test    [eax+7Ch], bl; Test lightFlags_7C bit 0x20 ('Off by default' in the Oblivion Construction Set). Set bypasses the ordinary parent-cell/water-height precheck and later suppresses the non-actor reference-light path.
 0x4B1675: jnz     short loc_4B16AF
 0x4B1677: mov     ecx, ebp; this
-0x4B1679: call    TESObjectREFR_GetParentCell
+0x4B1679: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4B167E: test    eax, eax
 0x4B1680: jz      short loc_4B16F4
 0x4B1682: mov     edx, [ebp+0]
@@ -42,7 +42,7 @@
 0x4B168F: fld     dword ptr [eax+8]
 0x4B1692: mov     ecx, ebp; this
 0x4B1694: fstp    [esp+154h+var_138]
-0x4B1698: call    TESObjectREFR_GetParentCell
+0x4B1698: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4B169D: mov     ecx, eax
 0x4B169F: call    TESObjectCELL_GetWaterHeight
 0x4B16A4: fcomp   [esp+154h+var_138]
@@ -69,11 +69,11 @@
 0x4B16E1: test    al, al
 0x4B16E3: mov     eax, [esp+154h+var_140]
 0x4B16E7: jnz     short loc_4B16F8
-0x4B16E9: test    [eax+7Ch], bl
+0x4B16E9: test    [eax+7Ch], bl; For a non-actor reference, lightFlags_7C bit 0x20 ('Off by default') exits without creating/configuring the attached point light.
 0x4B16EC: jnz     loc_4B1A17
 0x4B16F2: jmp     short loc_4B16F8
 0x4B16F4: mov     eax, [esp+154h+var_140]
-0x4B16F8: test    byte ptr [eax+7Ch], 4
+0x4B16F8: test    byte ptr [eax+7Ch], 4; Test lightFlags_7C bit 0x04 ('Negative' in the Oblivion Construction Set). Set negates the normalized RGB components before configuring the NiPointLight.
 0x4B16FC: movzx   ecx, byte ptr [eax+78h]
 0x4B1700: mov     [esp+154h+var_13C], ecx
 0x4B1704: movzx   edx, byte ptr [eax+79h]
@@ -145,8 +145,7 @@
 0x4B17D4: test    eax, eax
 0x4B17D6: jz      short loc_4B17F2
 0x4B17D8: jmp     short loc_4B17E0
-0x4B17DA: align 10h
-0x4B17E0: cmp     eax, offset dword_B3FD80
+0x4B17E0: cmp     eax, offset stru_B3FD80
 0x4B17E5: jz      loc_4B187C
 0x4B17EB: mov     eax, [eax+4]
 0x4B17EE: test    eax, eax
@@ -208,12 +207,12 @@
 0x4B18AF: push    ecx
 0x4B18B0: mov     ecx, edi; this
 0x4B18B2: fstp    [esp+15Ch+a2]; a2
-0x4B18B5: call    NiAVObject_UpdateNiAVObject
+0x4B18B5: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4B18BA: jmp     short loc_4B18C0
 0x4B18BC: mov     ebx, [esp+154h+var_140]
-0x4B18C0: push    esi; a2
-0x4B18C1: mov     ecx, ebp; this
-0x4B18C3: call    sub_4DD130
+0x4B18C0: push    esi; backingLight
+0x4B18C1: mov     ecx, ebp; self
+0x4B18C3: call    TESObjectREFR_SetExtraLightPayload; Install the ordinary ExtraLight type 0x30 attached-light payload on the reference.
 0x4B18C8: mov     eax, ds:0B3FA90h
 0x4B18CD: mov     [esi+0E0h], eax
 0x4B18D3: mov     ecx, ds:0B3FA94h
@@ -257,7 +256,7 @@
 0x4B198A: mov     [esi+0B8h], eax
 0x4B1990: cmp     ds:0B43384h, bl
 0x4B1996: jz      short loc_4B19BD
-0x4B1998: push    offset stru_B43400; lpCriticalSection
+0x4B1998: push    offset unk_B43400; lpCriticalSection
 0x4B199D: call    dword ptr ds:0A2806Ch
 0x4B19A3: call    dword ptr ds:0A2808Ch
 0x4B19A9: mov     ebp, 1
@@ -266,25 +265,25 @@
 0x4B19B9: mov     bl, 1
 0x4B19BB: jmp     short loc_4B19C2
 0x4B19BD: mov     ebp, 1
-0x4B19C2: push    0
-0x4B19C4: push    esi
+0x4B19C2: push    0; trackBackingPosition
+0x4B19C4: push    esi; backingLight
 0x4B19C5: push    0
 0x4B19C7: call    GetShadowSceneNode
 0x4B19CC: add     esp, 4
-0x4B19CF: mov     ecx, eax
-0x4B19D1: call    sub_7C6AE0
+0x4B19CF: mov     ecx, eax; self
+0x4B19D1: call    ShadowSceneNode_FindOrCreateFullLightForSource; Register the reference/equipped NiPointLight with trackBackingPosition=false.
 0x4B19D6: test    bl, bl
 0x4B19D8: jz      short loc_4B19F7
 0x4B19DA: sub     ds:0B4347Ch, ebp
 0x4B19E0: jnz     short loc_4B19EC
 0x4B19E2: mov     dword ptr ds:0B43478h, 0
-0x4B19EC: push    offset stru_B43400; lpCriticalSection
+0x4B19EC: push    offset unk_B43400; lpCriticalSection
 0x4B19F1: call    dword ptr ds:0A28074h
 0x4B19F7: mov     edi, [esp+154h+var_140]
 0x4B19FB: mov     eax, [edi+74h]
 0x4B19FE: mov     ecx, esi
-0x4B1A00: call    sub_4B1210
-0x4B1A05: fld     dword ptr [edi+88h]
+0x4B1A00: call    NiPointLight_ConfigureAttenuationFromLightRadius; Configure point-light attenuation from TESObjectLIGH::radius_74 using the engine interior/exterior attenuation policy.
+0x4B1A05: fld     dword ptr [edi+88h]; Seed NiLight::m_fDimmer (+0xDC) from TESObjectLIGH::fade_88 (FNAM).
 0x4B1A0B: add     [esi+0B8h], ebp
 0x4B1A11: fstp    dword ptr [esi+0DCh]
 0x4B1A17: mov     ecx, dword ptr [esp+154h+var_C]
@@ -299,3 +298,19 @@
 0x4B1A33: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4B1A38: add     esp, 140h
 0x4B1A3E: retn    8
+0x9B2FC0: mov     eax, [ebp-138h]
+0x9B2FC6: push    eax
+0x9B2FC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B2FCC: pop     ecx
+0x9B2FCD: retn
+0x9B2FCE: mov     edx, [esp+referenceRoot]
+0x9B2FD2: lea     eax, [edx-144h]
+0x9B2FD8: mov     ecx, [edx-148h]
+0x9B2FDE: xor     ecx, eax
+0x9B2FE0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2FE5: add     eax, 10h
+0x9B2FE8: mov     ecx, [edx-4]
+0x9B2FEB: xor     ecx, eax
+0x9B2FED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2FF2: mov     eax, offset stru_ADED64
+0x9B2FF7: jmp     ___CxxFrameHandler3

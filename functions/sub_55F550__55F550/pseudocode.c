@@ -1,83 +1,81 @@
-void __thiscall sub_55F550(unsigned int *this)
+// Verified manager teardown: clears the form/seed model cache and pending reference-node map, releases default render properties and canopy resources. This is lifecycle teardown, not per-cell DistantLOD cleanup.
+void __thiscall BSTreeManager_dtor(BSTreeManager_OblivionVerifiedLayout *this)
 {
   LONG (__stdcall *v2)(volatile LONG *); // ebp
-  void (__thiscall ***v3)(_DWORD, int); // esi
-  NiRenderedTexture *v4; // esi
-  unsigned int v5; // esi
-  int v6; // esi
-  int v7; // esi
-  int v8; // esi
-  int v9; // esi
-  int v10; // esi
-  int v11; // esi
+  float v3; // esi
+  volatile LONG *v4; // esi
+  LockFreeMap *pendingReferenceNodes; // esi
+  BSXFlags *treeFlags; // esi
+  NiAlphaProperty *alphaProperty; // esi
+  NiVertexColorProperty *vertexColorProperty; // esi
+  NiMaterialProperty *materialProperty; // esi
+  NiZBufferProperty *zBufferProperty; // esi
+  volatile LONG *unknown_004; // esi
 
-  sub_55E390(0);
-  v2 = InterlockedDecrement;
-  if ( dword_B43108 )
+  BSTreeManager_ClearModelCache(0); /*0x55f586*/
+  v2 = InterlockedDecrement; /*0x55f590*/
+  if ( LODWORD(unk_B43108[0]) ) /*0x55f58b*/
   {
-    v3 = (void (__thiscall ***)(_DWORD, int))dword_B43108;
-    if ( !v2((volatile LONG *)(dword_B43108 + 4)) )
+    v3 = unk_B43108[0]; /*0x55f59d*/
+    if ( !v2((volatile LONG *)(LODWORD(unk_B43108[0]) + 4)) && v3 != 0.0 ) /*0x55f5ab*/
+      (**(void (__thiscall ***)(float, int))LODWORD(v3))(COERCE_FLOAT(LODWORD(v3)), 1); /*0x55f5b5*/
+    unk_B43108[0] = 0.0; /*0x55f5b7*/
+  }
+  v4 = (volatile LONG *)g_CanopyShadowMap; /*0x55f5c1*/
+  if ( g_CanopyShadowMap ) /*0x55f5c1*/
+  {
+    if ( !v2(v4 + 1) ) /*0x55f5cf*/
     {
-      if ( v3 )
-        (**v3)(v3, 1);
+      if ( v4 ) /*0x55f5d7*/
+        (**(void (__thiscall ***)(void *, int))v4)((void *)v4, 1); /*0x55f5e1*/
     }
-    dword_B43108 = 0;
+    g_CanopyShadowMap = 0; /*0x55f5e3*/
   }
-  v4 = CanopySadowMap;
-  if ( CanopySadowMap )
+  g_bCanopyShadowMapPending = 1; /*0x55f5ed*/
+  sub_4A3C60(); /*0x55f5f4*/
+  pendingReferenceNodes = this->pendingReferenceNodes; /*0x55f5f9*/
+  if ( pendingReferenceNodes ) /*0x55f5fe*/
   {
-    if ( !v2((volatile LONG *)&v4->member) )
-    {
-      if ( v4 )
-        v4->__vftable->super.super.super.Destructor((NiRefObject *)v4, 1);
-    }
-    CanopySadowMap = 0;
+    pendingReferenceNodes->vtbl = &LockFreeMap<TESObjectREFR *,BSTreeNode *>::`vftable'; /*0x55f604*/
+    sub_55F3C0(pendingReferenceNodes, 1); /*0x55f60a*/
+    FormHeapFree((unsigned int)pendingReferenceNodes->members.buckets); /*0x55f613*/
+    FormHeapFree((unsigned int)pendingReferenceNodes->members.unk04); /*0x55f624*/
+    FormHeapFree((unsigned int)pendingReferenceNodes); /*0x55f62a*/
   }
-  byte_B06A28 = 1;
-  sub_4A3C60();
-  v5 = *(this + 9);
-  if ( v5 )
+  treeFlags = this->treeFlags; /*0x55f632*/
+  if ( treeFlags ) /*0x55f63c*/
   {
-    *(_DWORD *)v5 = &LockFreeMap<TESObjectREFR *,BSTreeNode *>::`vftable';
-    sub_55F3C0((LockFreeMap *)v5, 1);
-    FormHeapFree(*(_DWORD *)(v5 + 0xC));
-    FormHeapFree(*(_DWORD *)(v5 + 4));
-    FormHeapFree(v5);
+    if ( !v2((volatile LONG *)treeFlags + 1) ) /*0x55f642*/
+      (**(void (__thiscall ***)(BSXFlags *, int))treeFlags)(treeFlags, 1); /*0x55f654*/
   }
-  v6 = *(this + 6);
-  if ( v6 )
+  alphaProperty = this->alphaProperty; /*0x55f656*/
+  if ( alphaProperty ) /*0x55f660*/
   {
-    if ( !v2((volatile LONG *)(v6 + 4)) )
-      (**(void (__thiscall ***)(int, int))v6)(v6, 1);
+    if ( !v2((volatile LONG *)&alphaProperty->base.members) ) /*0x55f666*/
+      (*(void (__thiscall **)(NiAlphaProperty *, int))alphaProperty->base.vtbl)(alphaProperty, 1); /*0x55f678*/
   }
-  v7 = *(this + 5);
-  if ( v7 )
+  vertexColorProperty = this->vertexColorProperty; /*0x55f67a*/
+  if ( vertexColorProperty ) /*0x55f684*/
   {
-    if ( !v2((volatile LONG *)(v7 + 4)) )
-      (**(void (__thiscall ***)(int, int))v7)(v7, 1);
+    if ( !v2((volatile LONG *)vertexColorProperty + 1) ) /*0x55f68a*/
+      (**(void (__thiscall ***)(NiVertexColorProperty *, int))vertexColorProperty)(vertexColorProperty, 1); /*0x55f69c*/
   }
-  v8 = *(this + 4);
-  if ( v8 )
+  materialProperty = this->materialProperty; /*0x55f69e*/
+  if ( materialProperty ) /*0x55f6a8*/
   {
-    if ( !v2((volatile LONG *)(v8 + 4)) )
-      (**(void (__thiscall ***)(int, int))v8)(v8, 1);
+    if ( !v2((volatile LONG *)materialProperty + 1) ) /*0x55f6ae*/
+      (**(void (__thiscall ***)(NiMaterialProperty *, int))materialProperty)(materialProperty, 1); /*0x55f6c0*/
   }
-  v9 = *(this + 3);
-  if ( v9 )
+  zBufferProperty = this->zBufferProperty; /*0x55f6c2*/
+  if ( zBufferProperty ) /*0x55f6cc*/
   {
-    if ( !v2((volatile LONG *)(v9 + 4)) )
-      (**(void (__thiscall ***)(int, int))v9)(v9, 1);
+    if ( !v2((volatile LONG *)zBufferProperty + 1) ) /*0x55f6d2*/
+      (**(void (__thiscall ***)(NiZBufferProperty *, int))zBufferProperty)(zBufferProperty, 1); /*0x55f6e4*/
   }
-  v10 = *(this + 2);
-  if ( v10 )
+  unknown_004 = (volatile LONG *)this->unknown_004; /*0x55f6e6*/
+  if ( unknown_004 ) /*0x55f6f3*/
   {
-    if ( !v2((volatile LONG *)(v10 + 4)) )
-      (**(void (__thiscall ***)(int, int))v10)(v10, 1);
-  }
-  v11 = *(this + 1);
-  if ( v11 )
-  {
-    if ( !v2((volatile LONG *)(v11 + 4)) )
-      (**(void (__thiscall ***)(int, int))v11)(v11, 1);
+    if ( !v2(unknown_004 + 1) ) /*0x55f6f9*/
+      (**(void (__thiscall ***)(void *, int))unknown_004)((void *)unknown_004, 1); /*0x55f70b*/
   }
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 41,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 4,
+  "chunks": [
+    [
+      "0x463A90",
+      "0x463D6A"
+    ]
+  ],
+  "chunks_sha256": "7b547ef754ed57d672aa9ac4112e097d7302cd2a575ea9193870d4af31d75b3c",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
-  "display_name": "sub_463A90",
+  "comment_repeatable": "\nVerified: identity from literal TESSaveLoadGame::UnloadForm at 463B66 and unload diagnostic; looks up change entry, computes flags/save size, writes 4-byte header and virtual SaveGame payload, then stores buffer+flags in entry at 463D45/463D48. Caller 4F1840 invokes before removing/destroying cell. Probable homolog Fallout 825F02A8. Verified divergence: Oblivion existing-buffer warning continues; Fallout existing-buffer warning returns. Oblivion has no explicit unload-while-loading argument. Header/payload is Oblivion-specific; do not import Fallout BGSSaveFormBuffer layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
+  "display_name": "TESSaveLoadGame_UnloadForm",
   "end_ea": "0x463D6A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_463A90",
+  "name": "TESSaveLoadGame_UnloadForm",
   "segment": ".text",
   "sha256": "7b547ef754ed57d672aa9ac4112e097d7302cd2a575ea9193870d4af31d75b3c",
   "size": 730,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x463A90",
-  "type": "char __thiscall(_DWORD **this, TESForm *)",
+  "total_chunk_size": 730,
+  "type": "bool __thiscall(TESSaveLoadGame_SerializationView *self, TESForm *form)",
   "xrefs_from_count": 286,
   "xrefs_to_count": 4
 }

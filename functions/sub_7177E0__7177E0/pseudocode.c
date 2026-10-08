@@ -1,22 +1,23 @@
-NiAVObject *__thiscall sub_7177E0(
+// Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.
+NiAVObject *__thiscall NiLines_ctorWithGeometryData(
         NiAVObject *this,
-        unsigned __int16 a2,
-        int a3,
-        int a4,
-        int a5,
-        char a6,
-        __int16 a7,
-        int a8)
+        UInt16 vertexCount,
+        NiPoint3 *vertices,
+        NiColorAlpha *colors,
+        void *arg5,
+        char arg6,
+        __int16 arg7,
+        int lineFlags)
 {
-  _DWORD *v9; // eax
+  NiGeometryData *v9; // eax
   NiGeometryData *v10; // eax
 
-  v9 = (_DWORD *)FormHeapAlloc(0x44u);
-  if ( v9 )
-    v10 = (NiGeometryData *)sub_732A30(v9, a2, a3, a4, a5, a6, a7, a8);
+  v9 = (NiGeometryData *)FormHeapAlloc(0x44u); /*0x717806*/
+  if ( v9 ) /*0x71781c*/
+    v10 = NiLinesData_ctor(v9, vertexCount, vertices, colors, arg5, arg6, arg7, lineFlags); /*0x717843*/
   else
-    v10 = 0;
-  NiGeometry::NiGeometry((NiGeometry *)this, v10);
-  this->vtbl = (NiAVObjectVtbl *)&NiLines::`vftable';
-  return this;
+    v10 = 0; /*0x71784a*/
+  NiGeometry::NiGeometry((NiGeometry *)this, v10); /*0x717857*/
+  this->vtbl = (NiAVObjectVtbl *)&NiLines::`vftable'; /*0x71785c*/
+  return this; /*0x717864*/
 }

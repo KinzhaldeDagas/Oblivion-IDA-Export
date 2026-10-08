@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A3390",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified Oblivion NonActorMagicTarget destructor runs MagicTarget_destr on subobject +0x0C and restores the BSExtraData vtable; no list removal appears in this function. Fallout's corresponding destructor explicitly removes all active-effect list entries first. This is a lifecycle difference; list ownership/cleanup responsibility in Oblivion remains Unknown pending all caller paths.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6A33C2",
-    "line": "lea     ecx, [esi+0Ch]",
+    "line": "lea     ecx, [esi+0Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -154,5 +154,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9ABA50",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABA53",
+    "line": "jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABA58",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABA5C",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABA5F",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABA62",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABA64",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABA69",
+    "line": "mov     eax, offset stru_AD8848",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABA6E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

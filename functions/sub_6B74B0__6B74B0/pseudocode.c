@@ -1,5 +1,5 @@
-BOOL __thiscall sub_6B74B0(_DWORD *this)
+bool __thiscall Conversation::FirstItem(ConversationView *this)
 {
-  *(this + 2) = this;
-  return *this != 0;
+  this->currentItemNode = (DialogueItemNode *)this; /*0x6b74b2*/
+  return this->firstItem != 0; /*0x6b74ba*/
 }

@@ -108,7 +108,6 @@
 0x7468B3: test    ebx, ebx
 0x7468B5: jle     loc_746953
 0x7468BB: jmp     short loc_7468C0
-0x7468BD: align 10h
 0x7468C0: mov     ecx, [eax+16B4h]
 0x7468C6: cmp     ecx, 0Dh
 0x7468C9: movzx   edx, ds:byte_A849FC[edi]

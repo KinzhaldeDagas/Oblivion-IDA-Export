@@ -1,4 +1,4 @@
-0x7EB250: push    0FFFFFFFFh
+0x7EB250: push    0FFFFFFFFh; MoonSugarEffect decode: Gethit constant map exposes fDoubleVis from B2D90C.. and fBlurParams from B46114.. to the native shader.
 0x7EB252: push    offset SEH_803C90
 0x7EB257: mov     eax, large fs:0
 0x7EB25D: push    eax
@@ -49,7 +49,7 @@
 0x7EB2E9: mov     edx, [ecx]
 0x7EB2EB: mov     eax, [edx+18h]
 0x7EB2EE: push    0
-0x7EB2F0: push    offset flt_B46114
+0x7EB2F0: push    offset unk_B46114
 0x7EB2F5: push    4
 0x7EB2F7: push    10h
 0x7EB2F9: push    offset EmptyString
@@ -118,3 +118,20 @@
 0x7EB3C4: pop     esi
 0x7EB3C5: add     esp, 10h
 0x7EB3C8: retn    4
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

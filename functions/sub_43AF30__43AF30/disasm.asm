@@ -5,16 +5,16 @@
 0x43AF34: mov     edi, ecx
 0x43AF36: mov     ecx, [edi+20h]; this
 0x43AF39: push    0; a2
-0x43AF3B: call    TESObjectREFR_GetParentCell
-0x43AF40: mov     ecx, TES
+0x43AF3B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x43AF40: mov     ecx, ds:0B333A0h
 0x43AF46: push    eax; a1
 0x43AF47: call    TESObjectCELL_IsProcessLevel?LowHigh
 0x43AF4C: test    al, al
 0x43AF4E: jz      loc_43AFEF
 0x43AF54: xor     esi, esi
-0x43AF56: cmp     byte_B350D5, 0
+0x43AF56: cmp     byte ptr ds:0B350D5h, 0
 0x43AF5D: jz      short loc_43AF8E
-0x43AF5F: call    nullsub_returnTrue_0arg
+0x43AF5F: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x43AF64: test    al, al
 0x43AF66: jnz     short loc_43AF8E
 0x43AF68: mov     ebx, ds:Sleep
@@ -24,9 +24,9 @@
 0x43AF75: push    5; dwMilliseconds
 0x43AF77: call    ebx ; Sleep
 0x43AF79: add     esi, 1
-0x43AF7C: cmp     byte_B350D5, 0
+0x43AF7C: cmp     byte ptr ds:0B350D5h, 0
 0x43AF83: jz      short loc_43AF8E
-0x43AF85: call    nullsub_returnTrue_0arg
+0x43AF85: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x43AF8A: test    al, al
 0x43AF8C: jz      short loc_43AF70
 0x43AF8E: mov     ecx, [edi+20h]
@@ -36,7 +36,7 @@
 0x43AF9B: test    al, al
 0x43AF9D: jnz     short loc_43AFCE
 0x43AF9F: mov     eax, [edi+20h]
-0x43AFA2: mov     ecx, TES
+0x43AFA2: mov     ecx, ds:0B333A0h
 0x43AFA8: push    eax
 0x43AFA9: call    sub_441E90
 0x43AFAE: test    al, al
@@ -50,7 +50,7 @@
 0x43AFC5: push    eax; a2
 0x43AFC6: lea     ecx, [edi+2Ch]; this
 0x43AFC9: call    NiSmartPointer_Set??
-0x43AFCE: mov     esi, ioManager
+0x43AFCE: mov     esi, ds:0B33A10h
 0x43AFD4: push    ecx
 0x43AFD5: mov     eax, esp
 0x43AFD7: mov     [eax], edi

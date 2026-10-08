@@ -1,1 +1,1 @@
-StgStreamImpl_0
+typedef StgStreamImpl StgStreamImpl_0;

@@ -1,5 +1,5 @@
 0x4EADD5: fld     st; jumptable 004EACCA default case
-0x4EADD7: call    Double_To_SInt32
+0x4EADD7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EADDC: mov     [esp+arg_18], eax
 0x4EADE0: fild    [esp+arg_18]
 0x4EADE4: fstp    [esp+arg_18]
@@ -67,7 +67,7 @@
 0x4EAECF: mov     ecx, [esp+arg_8C]
 0x4EAED6: mov     [esp+arg_40], ecx
 0x4EAEDA: lea     ecx, [esp+arg_38]
-0x4EAEDE: call    sub_43F350
+0x4EAEDE: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4EAEE3: fstp    st
 0x4EAEE5: fld     [esp+arg_40]
 0x4EAEE9: fld     [esp+arg_90]

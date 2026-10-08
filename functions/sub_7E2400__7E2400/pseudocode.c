@@ -1,11 +1,12 @@
-void __thiscall sub_7E2400(int this)
+// Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.
+void __thiscall RenderPass_Destroy(RenderPass_DecodedLayout *this)
 {
-  unsigned int v2; // eax
+  void **lightArray_0C; // eax
 
-  v2 = *(_DWORD *)(this + 0xC);
-  *(_WORD *)(this + 4) = 0;
-  if ( v2 )
-    FormHeapFree(v2);
-  *(_BYTE *)(this + 9) = 0;
-  *(_DWORD *)(this + 0xC) = 0;
+  lightArray_0C = this->lightArray_0C;          // Load the owned light-array pointer from RenderPass+0x0C for destruction. /*0x7e2404*/
+  this->selector_04 = 0; /*0x7e240b*/
+  if ( lightArray_0C ) /*0x7e240f*/
+    FormHeapFree((unsigned int)lightArray_0C);  // Free the owned light-pointer array. RenderPass_Destroy does not free the 0x10-byte record itself. /*0x7e2412*/
+  this->pad_09[0] = 0; /*0x7e241a*/
+  this->lightArray_0C = 0; /*0x7e241d*/
 }

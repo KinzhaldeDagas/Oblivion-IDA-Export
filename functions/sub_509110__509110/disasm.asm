@@ -20,7 +20,7 @@
 0x509144: push    edx; a3
 0x509145: push    eax; a2
 0x509146: push    ecx; a1
-0x509147: call    Script_ExtractArgs
+0x509147: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50914C: add     esp, 24h
 0x50914F: test    al, al
 0x509151: jnz     short loc_509158
@@ -41,21 +41,21 @@
 0x509180: jnz     short loc_5091B3
 0x509182: fld     [esp+34h+var_2C]
 0x509186: push    ecx
-0x509187: mov     ecx, ebx
-0x509189: fstp    [esp+38h+var_38]; float
-0x50918C: call    sub_4D8A10
+0x509187: mov     ecx, ebx; this
+0x509189: fstp    [esp+38h+radians]; radians
+0x50918C: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x509191: jmp     short loc_5091B3
 0x509193: fld     [esp+34h+var_2C]
 0x509197: push    ecx
-0x509198: mov     ecx, ebx
-0x50919A: fstp    [esp+38h+var_38]; float
-0x50919D: call    sub_4D89F0
+0x509198: mov     ecx, ebx; this
+0x50919A: fstp    [esp+38h+radians]; radians
+0x50919D: call    TESObjectREFR_SetRotationY; TES4 authoritative: write reference rotation Y at TESObjectREFR+0x24, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5091A2: jmp     short loc_5091B3
 0x5091A4: fld     [esp+34h+var_2C]
 0x5091A8: push    ecx
-0x5091A9: mov     ecx, ebx
-0x5091AB: fstp    [esp+38h+var_38]; float
-0x5091AE: call    sub_4D89D0
+0x5091A9: mov     ecx, ebx; this
+0x5091AB: fstp    [esp+38h+radians]; radians
+0x5091AE: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5091B3: mov     edx, [ebx]
 0x5091B5: mov     eax, [edx+154h]
 0x5091BB: push    ebp
@@ -91,7 +91,7 @@
 0x509200: push    ecx
 0x509201: fstp    [esp+44h+a2]; a2
 0x509204: mov     ecx, ebp; this
-0x509206: call    NiAVObject_UpdateNiAVObject
+0x509206: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x50920B: pop     ebp
 0x50920C: mov     al, 1
 0x50920E: pop     ebx

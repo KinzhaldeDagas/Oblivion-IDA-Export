@@ -1,1 +1,1 @@
-DisintegrateArmorEffect
+struct DisintegrateArmorEffect;

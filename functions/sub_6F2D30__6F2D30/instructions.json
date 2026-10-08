@@ -85,19 +85,19 @@
   },
   {
     "ea": "0x6F2D59",
-    "line": "mov     edi, [esp+1Ch+arg_0]",
+    "line": "mov     edi, [esp+1Ch+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F2D5D",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6F2D5F",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6F2D6F",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x6F2D74",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -208,5 +208,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C88A0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C88A3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C88A8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C88AC",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C88AF",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C88B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C88B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C88B9",
+    "line": "mov     eax, offset stru_AF0FC4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C88BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

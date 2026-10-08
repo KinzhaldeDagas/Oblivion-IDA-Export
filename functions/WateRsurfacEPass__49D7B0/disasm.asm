@@ -140,7 +140,7 @@
 0x49D974: cmp     ds:0B45FE0h, ebx
 0x49D97A: jnz     short loc_49D986
 0x49D97C: push    13h; a1
-0x49D97E: call    GetShaderDefinition
+0x49D97E: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x49D983: add     esp, 4
 0x49D986: cmp     ds:0B42D7Ch, ebx
 0x49D98C: jz      short loc_49DA08
@@ -212,9 +212,9 @@
 0x49DA62: cmp     eax, ds:0B45FC8h
 0x49DA68: jz      short loc_49DA9C
 0x49DA6A: mov     ecx, [edi]
-0x49DA6C: push    ecx; a2
+0x49DA6C: push    ecx; texture
 0x49DA6D: mov     ecx, ds:0B42F50h; this
-0x49DA73: call    sub_7C1EE0
+0x49DA73: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49DA78: mov     edx, ds:0B45FC8h
 0x49DA7E: mov     eax, ds:0B43104h
 0x49DA83: mov     ecx, ds:0B42F50h
@@ -228,7 +228,7 @@
 0x49DA95: mov     ecx, edi; this
 0x49DA97: call    NiSmartPointer_Set??
 0x49DA9C: push    13h; a1
-0x49DA9E: call    GetShaderDefinition
+0x49DA9E: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x49DAA3: add     esp, 4
 0x49DAA6: cmp     eax, ebx
 0x49DAA8: jz      short loc_49DAAD
@@ -242,7 +242,7 @@
 0x49DAC2: push    edx; a3
 0x49DAC3: push    eax; a2
 0x49DAC4: push    ebx; a1
-0x49DAC5: call    sub_7B4900
+0x49DAC5: call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.
 0x49DACA: add     esp, 10h
 0x49DACD: jmp     short loc_49DB48
 0x49DACF: cmp     dword ptr [esi+0Ch], 0
@@ -252,7 +252,7 @@
 0x49DADE: push    8; a3
 0x49DAE0: push    ecx; a2
 0x49DAE1: mov     ecx, ds:0B42F50h; this
-0x49DAE7: call    BSTextureManager_GetDefaultRenderTarget
+0x49DAE7: call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.
 0x49DAEC: push    eax; a2
 0x49DAED: mov     ecx, edi; this
 0x49DAEF: call    NiSmartPointer_Set??
@@ -263,7 +263,7 @@
 0x49DB00: push    eax; a3
 0x49DB01: push    ecx; a2
 0x49DB02: push    ebx; a1
-0x49DB03: call    sub_7B4900
+0x49DB03: call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.
 0x49DB08: add     esp, 10h
 0x49DB0B: jmp     short loc_49DB48
 0x49DB0D: mov     eax, [esi+0Ch]
@@ -271,8 +271,8 @@
 0x49DB12: cmp     eax, ebx
 0x49DB14: jz      short loc_49DB22
 0x49DB16: mov     ecx, ds:0B42F50h; this
-0x49DB1C: push    eax; a2
-0x49DB1D: call    sub_7C1EE0
+0x49DB1C: push    eax; texture
+0x49DB1D: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49DB22: mov     edi, [esi+0Ch]
 0x49DB25: cmp     edi, ebx
 0x49DB27: jz      short loc_49DB48
@@ -290,7 +290,7 @@
 0x49DB43: call    edx
 0x49DB45: mov     [esi+0Ch], ebx
 0x49DB48: push    14h; a1
-0x49DB4A: call    GetShaderDefinition
+0x49DB4A: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x49DB4F: add     esp, 4
 0x49DB52: test    eax, eax
 0x49DB54: jz      short loc_49DB5B
@@ -319,9 +319,9 @@
 0x49DB9E: test    ah, 44h
 0x49DBA1: jnp     short loc_49DBD6
 0x49DBA3: mov     ecx, [edi]
-0x49DBA5: push    ecx; a2
+0x49DBA5: push    ecx; texture
 0x49DBA6: mov     ecx, ds:0B42F50h; this
-0x49DBAC: call    sub_7C1EE0
+0x49DBAC: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x49DBB1: mov     edx, ds:0B43104h
 0x49DBB7: mov     ecx, ds:0B42F50h
 0x49DBBD: push    0
@@ -333,9 +333,9 @@
 0x49DBCE: push    eax; a2
 0x49DBCF: mov     ecx, edi; this
 0x49DBD1: call    NiSmartPointer_Set??
-0x49DBD6: push    edi
-0x49DBD7: mov     ecx, offset dword_B45FB4
-0x49DBDC: call    sub_55E2A0
+0x49DBD6: push    edi; incoming
+0x49DBD7: mov     ecx, (offset OB_ShaderConstantStorage_010201A0+1A0h); this
+0x49DBDC: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x49DBE1: cmp     byte ptr ds:0B3522Bh, 0
 0x49DBE8: jnz     short loc_49DC07
 0x49DBEA: mov     eax, ds:0B35220h
@@ -374,7 +374,7 @@
 0x49DC58: fstp    st
 0x49DC5A: jmp     short loc_49DC5E
 0x49DC5C: fstp    st(1)
-0x49DC5E: call    Double_To_SInt32
+0x49DC5E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x49DC63: lea     edi, [esi+14h]
 0x49DC66: mov     ds:0B45F48h, eax
 0x49DC6B: cmp     dword ptr [edi], 0
@@ -391,11 +391,11 @@
 0x49DC8A: push    edx; a3
 0x49DC8B: push    eax; a2
 0x49DC8C: push    ebx; a1
-0x49DC8D: call    sub_7B4900
+0x49DC8D: call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.
 0x49DC92: add     esp, 10h
-0x49DC95: push    offset dword_B45FA8
-0x49DC9A: mov     ecx, edi
-0x49DC9C: call    sub_55E2A0
+0x49DC95: push    (offset OB_ShaderConstantStorage_010201A0+194h); incoming
+0x49DC9A: mov     ecx, edi; this
+0x49DC9C: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x49DCA1: mov     eax, ds:0B45FB4h
 0x49DCA6: test    eax, eax
 0x49DCA8: jz      short loc_49DCD2

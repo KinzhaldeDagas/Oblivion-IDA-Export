@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x798360",
+      "0x79854C"
+    ]
+  ],
+  "chunks_sha256": "5bfcedca8d50850c5ca37c8e88d2125296fe4034a3ca135e77b4e7d6fe6b6e70",
+  "comment_regular": "Applies the optional Compute transform to stock leaf geometry.\n\nOblivion CLeafGeometry::Transform. Applies the 4x4 stTransform to every LOD's leaf centers (including the preserved CPU-wind source centers) and transforms the per-card orientation vectors.",
+  "comment_repeatable": "Oblivion CLeafGeometry::Transform. Applies the 4x4 stTransform to every LOD's leaf centers (including the preserved CPU-wind source centers) and transforms the per-card orientation vectors.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_798360",
+  "display_name": "OB_CLeafGeometry_Transform_010201A0",
   "end_ea": "0x79854C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_798360",
+  "name": "OB_CLeafGeometry_Transform_010201A0",
   "segment": ".text",
   "sha256": "5bfcedca8d50850c5ca37c8e88d2125296fe4034a3ca135e77b4e7d6fe6b6e70",
   "size": 492,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x798360",
-  "type": "float *__userpurge@<eax>(float *result@<eax>, int@<ecx>, float *)",
+  "total_chunk_size": 492,
+  "type": "void __thiscall(OB_CLeafGeometry_010201A0 *this, const OB_stTransform_010201A0 *transform)",
   "xrefs_from_count": 178,
   "xrefs_to_count": 1
 }

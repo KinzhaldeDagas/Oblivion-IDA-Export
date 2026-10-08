@@ -1,52 +1,44 @@
-signed int *__usercall sub_6A9110@<eax>(
-        double a1@<st2>,
-        double a2@<st1>,
-        double st7_0@<st0>,
-        int a4,
-        int a5,
-        signed int *a6,
-        int *a7)
+signed int *__cdecl sub_6A9110(int a1, int a2, signed int *a3, signed int **a4)
 {
   int v7; // edi
-  int v8; // eax
+  signed int *v8; // eax
   double v9; // st4
-  NiTMap_Entry_TESCELL *v10; // edx
+  MEF_U32PointerMapEntry32 *v10; // edx
   const char *v11; // eax
   unsigned int v12; // eax
   char *v13; // edi
   unsigned int v15; // eax
   char *v16; // edi
-  double v18; // st5
-  double v19; // st6
-  int v20; // edx
-  unsigned int v21; // eax
-  unsigned int v22; // ecx
-  _DWORD *v23; // edx
-  _DWORD *v24; // esi
-  NiTMap_Entry_TESCELL *v25; // ecx
-  float *v26; // esi
-  TESObjectCELL *v27; // ebx
-  NiNode *niNode; // eax
-  bool v29; // c0
-  bool v30; // c3
-  float v31; // ecx
-  float v32; // edx
+  int v18; // edx
+  unsigned int v19; // eax
+  unsigned int v20; // ecx
+  _DWORD *v21; // edx
+  _DWORD *v22; // esi
+  MEF_U32PointerMapEntry32 *v23; // ecx
+  float *v24; // esi
+  NiDX9TextureData *v25; // ebx
+  UInt32 Width; // eax
+  bool v27; // c0
+  bool v28; // c3
+  float v29; // ecx
+  float v30; // edx
+  double v31; // st7
+  double eComponent_low; // st6
   double v33; // st7
-  double pathGrid_low; // st6
+  double v34; // st7
   double v35; // st7
-  double v36; // st7
-  double v37; // st7
-  double v38; // st6
-  unsigned int v39; // eax
-  char *v40; // edi
-  int *v42; // eax
-  char v43; // cl
-  int v44; // ecx
-  int (__cdecl *v45)(int, int, int, char, int, int, int); // edx
-  char v46; // cl
-  char *v47; // edi
-  __int16 v49; // dx
-  bool v50; // zf
+  double v36; // st6
+  unsigned int v37; // eax
+  char *v38; // edi
+  int *v40; // eax
+  char v41; // cl
+  int v42; // ecx
+  int (__cdecl *v43)(int, int, int, char, int, int, int); // edx
+  char v44; // cl
+  char *v45; // edi
+  __int16 v47; // dx
+  bool v48; // zf
+  char *v49; // eax
   char *v51; // eax
   char *v53; // eax
   char *v55; // eax
@@ -55,397 +47,391 @@ signed int *__usercall sub_6A9110@<eax>(
   char *v61; // eax
   char *v63; // eax
   char *v65; // eax
-  char *v67; // eax
-  char v69; // cl
-  char *v70; // eax
-  char v72; // cl
-  char *v73; // edi
+  char v67; // cl
+  char *v68; // eax
+  char v70; // cl
+  char *v71; // edi
   IDirect3DBaseTexture9 *Texture; // eax
-  unsigned int v76; // eax
-  char *v77; // edi
-  IDirect3DBaseTexture9 *v79; // eax
-  char *v80; // edi
-  double v82; // st6
+  unsigned int v74; // eax
+  char *v75; // edi
+  IDirect3DBaseTexture9 *v77; // eax
+  char *v78; // edi
   signed int *result; // eax
-  int v84; // ecx
+  signed int *v81; // ecx
+  float v82; // [esp+28h] [ebp-210h]
+  float v83; // [esp+28h] [ebp-210h]
+  float v84; // [esp+28h] [ebp-210h]
   float v85; // [esp+28h] [ebp-210h]
-  float v86; // [esp+28h] [ebp-210h]
-  float v87; // [esp+28h] [ebp-210h]
-  float v88; // [esp+28h] [ebp-210h]
+  float v86; // [esp+2Ch] [ebp-20Ch]
+  float v87; // [esp+2Ch] [ebp-20Ch]
+  float v88; // [esp+2Ch] [ebp-20Ch]
   float v89; // [esp+2Ch] [ebp-20Ch]
-  float v90; // [esp+2Ch] [ebp-20Ch]
-  float v91; // [esp+2Ch] [ebp-20Ch]
-  float v92; // [esp+2Ch] [ebp-20Ch]
-  double v93; // [esp+30h] [ebp-208h]
-  int v94; // [esp+34h] [ebp-204h]
+  double v90; // [esp+30h] [ebp-208h]
+  int v91; // [esp+34h] [ebp-204h]
+  float v92; // [esp+4Ch] [ebp-1ECh]
+  float v93; // [esp+4Ch] [ebp-1ECh]
+  float v94; // [esp+4Ch] [ebp-1ECh]
   float v95; // [esp+4Ch] [ebp-1ECh]
-  float v96; // [esp+4Ch] [ebp-1ECh]
-  float v97; // [esp+4Ch] [ebp-1ECh]
-  float v98; // [esp+4Ch] [ebp-1ECh]
-  int v99; // [esp+50h] [ebp-1E8h]
-  int v100; // [esp+50h] [ebp-1E8h]
-  NiTMap_Entry_TESCELL *v101; // [esp+54h] [ebp-1E4h] BYREF
-  float v102; // [esp+58h] [ebp-1E0h] BYREF
-  float v103; // [esp+5Ch] [ebp-1DCh] BYREF
-  int v104; // [esp+60h] [ebp-1D8h]
-  float v105; // [esp+64h] [ebp-1D4h]
-  float v106; // [esp+68h] [ebp-1D0h]
-  float v107; // [esp+6Ch] [ebp-1CCh]
-  int *v108; // [esp+70h] [ebp-1C8h]
-  TESFormVtbl *vtbl; // [esp+74h] [ebp-1C4h] BYREF
-  float v110; // [esp+78h] [ebp-1C0h]
-  float v111; // [esp+7Ch] [ebp-1BCh]
-  void **v112; // [esp+80h] [ebp-1B8h]
-  signed int *v113; // [esp+84h] [ebp-1B4h]
-  TESObjectCELL *v114; // [esp+88h] [ebp-1B0h] BYREF
-  int v115; // [esp+8Ch] [ebp-1ACh]
-  double v116; // [esp+90h] [ebp-1A8h]
-  int v117; // [esp+98h] [ebp-1A0h] BYREF
-  _BYTE v118[3]; // [esp+9Ch] [ebp-19Ch] BYREF
-  char v119; // [esp+9Fh] [ebp-199h] BYREF
-  char v120[200]; // [esp+A0h] [ebp-198h] BYREF
-  char v121[204]; // [esp+168h] [ebp-D0h] BYREF
-  int savedregs; // [esp+238h] [ebp+0h] BYREF
+  int v96; // [esp+50h] [ebp-1E8h]
+  int v97; // [esp+50h] [ebp-1E8h]
+  MEF_U32PointerMapEntry32 *position; // [esp+54h] [ebp-1E4h] BYREF
+  float v99; // [esp+58h] [ebp-1E0h] BYREF
+  float v100; // [esp+5Ch] [ebp-1DCh] BYREF
+  int v101; // [esp+60h] [ebp-1D8h]
+  float v102; // [esp+64h] [ebp-1D4h]
+  float v103; // [esp+68h] [ebp-1D0h]
+  float v104; // [esp+6Ch] [ebp-1CCh]
+  signed int **v105; // [esp+70h] [ebp-1C8h]
+  unsigned int keyOut; // [esp+74h] [ebp-1C4h] BYREF
+  float v107; // [esp+78h] [ebp-1C0h]
+  float v108; // [esp+7Ch] [ebp-1BCh]
+  float v109; // [esp+80h] [ebp-1B8h]
+  signed int *v110; // [esp+84h] [ebp-1B4h]
+  void *valueOut; // [esp+88h] [ebp-1B0h] BYREF
+  signed int *v112; // [esp+8Ch] [ebp-1ACh]
+  double v113; // [esp+90h] [ebp-1A8h]
+  int v114; // [esp+98h] [ebp-1A0h] BYREF
+  _BYTE v115[3]; // [esp+9Ch] [ebp-19Ch] BYREF
+  char v116; // [esp+9Fh] [ebp-199h] BYREF
+  char v117[200]; // [esp+A0h] [ebp-198h] BYREF
+  char v118[204]; // [esp+168h] [ebp-D0h] BYREF
 
-  v7 = *a6;
-  v113 = a6;
-  v8 = *a7;
-  v89 = (float)v7;
-  v9 = (double)iDebugTextLeftRightOffset;
-  v108 = a7;
-  v10 = *(NiTMap_Entry_TESCELL **)(*(_DWORD *)(a4 + 0x300) + 0xC);
-  v85 = v9;
-  v104 = a4;
-  v115 = v8;
-  v101 = v10;
-  InterfaceMgr_DebugTextLine((char)&savedregs, a1, a2, st7_0, "AUDIO INFO", v85, v89, 1, 0xFFFFFFFF);
-  v99 = 2 * a5 + v7;
-  v11 = "C";
-  if ( !byte_B333B8 )
-    v11 = "N";
-  _sprintf(v120, "[%s] Music Playing: ", v11);
-  switch ( *(_WORD *)(a4 + 0xB0) )
+  v7 = *a3; /*0x6a9136*/
+  v110 = a3; /*0x6a9147*/
+  v8 = *a4; /*0x6a914b*/
+  v86 = (float)v7; /*0x6a914d*/
+  v9 = (double)iDebugTextLeftRightOffset; /*0x6a9151*/
+  v105 = a4; /*0x6a9157*/
+  v10 = *(MEF_U32PointerMapEntry32 **)(*(_DWORD *)(a1 + 0x300) + 0xC); /*0x6a9161*/
+  v82 = v9; /*0x6a9164*/
+  v101 = a1; /*0x6a916c*/
+  v112 = v8; /*0x6a9170*/
+  position = v10; /*0x6a9174*/
+  InterfaceMgr_DebugTextLine("AUDIO INFO", v82, v86, 1, 0xFFFFFFFF); /*0x6a9178*/
+  v96 = 2 * a2 + v7; /*0x6a918e*/
+  v11 = "C"; /*0x6a9192*/
+  if ( !unk_B333B8 ) /*0x6a9187*/
+    v11 = "N"; /*0x6a9199*/
+  _sprintf(v117, "[%s] Music Playing: ", v11);
+  switch ( *(_WORD *)(a1 + 0xB0) ) /*0x6a91bd*/
   {
-    case 0:
-      _sprintf(v121, "Explore!");
-      break;
-    case 1:
-      _sprintf(v121, "Public");
-      break;
-    case 2:
-      _sprintf(v121, "Dungeon?");
-      break;
-    case 4:
-      _sprintf(v121, "Battle!");
-      break;
-    case 8:
-      _sprintf(v121, "Special");
-      break;
+    case 0: /*0x6a91bd*/
+      _sprintf(v118, "Explore!"); /*0x6a91d1*/
+      break; /*0x6a91d1*/
+    case 1: /*0x6a91bd*/
+      _sprintf(v118, "Public"); /*0x6a91d8*/
+      break; /*0x6a91d8*/
+    case 2: /*0x6a91bd*/
+      _sprintf(v118, "Dungeon?"); /*0x6a91e7*/
+      break; /*0x6a91e7*/
+    case 4: /*0x6a91bd*/
+      _sprintf(v118, "Battle!"); /*0x6a91f6*/
+      break; /*0x6a91f6*/
+    case 8: /*0x6a91bd*/
+      _sprintf(v118, "Special"); /*0x6a9205*/
+      break; /*0x6a9205*/
     default:
       break;
   }
-  v12 = strlen(v121) + 1;
-  v13 = &v119;
-  while ( *++v13 )
-    ;
-  qmemcpy(v13, v121, v12);
-  _sprintf(v121, "(%.3f)", *(float *)(v104 + 0x2F0));
-  v15 = strlen(v121) + 1;
-  v16 = &v119;
-  while ( *++v16 )
-    ;
-  qmemcpy(v16, v121, v15);
-  v90 = (float)v99;
-  v18 = (double)iDebugTextLeftRightOffset;
-  v86 = v18;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v18, a2, st7_0, v120, v86, v90, 1, 0xFFFFFFFF);
-  _sprintf(v120, "%d sounds loaded. %d moving sounds registered.", v101, *(_DWORD *)(*(_DWORD *)(v104 + 0x304) + 0xC));
-  v91 = (float)(a5 + v99);
-  v19 = (double)iDebugTextLeftRightOffset;
-  v87 = v19;
-  InterfaceMgr_DebugTextLine((char)&savedregs, v18, v19, st7_0, v120, v87, v91, 1, 0xFFFFFFFF);
-  v20 = *(_DWORD *)(v104 + 0x300);
-  v21 = *(_DWORD *)(v20 + 4);
-  v22 = 0;
-  v100 = 2 * a5 + a5 + v99;
-  v114 = 0;
-  if ( v21 )
+  v12 = strlen(v118) + 1; /*0x6a920d*/
+  v13 = &v116; /*0x6a9225*/
+  while ( *++v13 ) /*0x6a9230*/
+    ; /*0x6a9228*/
+  qmemcpy(v13, v118, v12); /*0x6a9239*/
+  _sprintf(v118, "(%.3f)", *(float *)(v101 + 0x2F0)); /*0x6a925f*/
+  v15 = strlen(v118) + 1; /*0x6a9277*/
+  v16 = &v116; /*0x6a927f*/
+  while ( *++v16 ) /*0x6a928a*/
+    ; /*0x6a9282*/
+  qmemcpy(v16, v118, v15); /*0x6a9295*/
+  v87 = (float)v96; /*0x6a92a4*/
+  v83 = (float)iDebugTextLeftRightOffset; /*0x6a92b3*/
+  InterfaceMgr_DebugTextLine(v117, v83, v87, 1, 0xFFFFFFFF); /*0x6a92b7*/
+  _sprintf( /*0x6a92e7*/
+    v117,
+    "%d sounds loaded. %d moving sounds registered.",
+    position,
+    *(_DWORD *)(*(_DWORD *)(v101 + 0x304) + 0xC));
+  v88 = (float)(a2 + v96); /*0x6a92fa*/
+  v84 = (float)iDebugTextLeftRightOffset; /*0x6a9308*/
+  InterfaceMgr_DebugTextLine(v117, v84, v88, 1, 0xFFFFFFFF); /*0x6a930c*/
+  v18 = *(_DWORD *)(v101 + 0x300); /*0x6a9311*/
+  v19 = *(_DWORD *)(v18 + 4); /*0x6a9317*/
+  v20 = 0; /*0x6a931a*/
+  v97 = 2 * a2 + a2 + v96; /*0x6a9323*/
+  valueOut = 0; /*0x6a9327*/
+  if ( v19 ) /*0x6a932b*/
   {
-    v23 = *(_DWORD **)(v20 + 8);
-    v24 = v23;
-    while ( !*v24 )
+    v21 = *(_DWORD **)(v18 + 8); /*0x6a932d*/
+    v22 = v21; /*0x6a9330*/
+    while ( !*v22 ) /*0x6a9335*/
     {
-      ++v22;
-      ++v24;
-      if ( v22 >= v21 )
-        goto LABEL_17;
+      ++v20; /*0x6a9337*/
+      ++v22; /*0x6a933a*/
+      if ( v20 >= v19 ) /*0x6a933f*/
+        goto LABEL_17; /*0x6a933f*/
     }
-    v25 = (NiTMap_Entry_TESCELL *)v23[v22];
+    v23 = (MEF_U32PointerMapEntry32 *)v21[v20]; /*0x6a9397*/
   }
   else
   {
 LABEL_17:
-    v25 = 0;
+    v23 = 0; /*0x6a9341*/
   }
-  v101 = v25;
-  if ( v25 )
+  position = v23; /*0x6a9345*/
+  if ( v23 ) /*0x6a9349*/
   {
-    do
+    do /*0x6a9993*/
     {
-      v26 = (float *)v104;
-      sub_452600(*(NiTMap_TESCELL **)(v104 + 0x300), &v101, (void **)&vtbl, &v114);
-      v27 = v114;
-      vtbl = v114->vtbl;
-      if ( sub_6B67D0(v114) )
+      v24 = (float *)v101; /*0x6a9350*/
+      NiTMap_U32Pointer_GetNextEntry(*(MEF_U32PointerMapLayout32 **)(v101 + 0x300), &position, &keyOut, &valueOut); /*0x6a9369*/
+      v25 = (NiDX9TextureData *)valueOut; /*0x6a936e*/
+      keyOut = *(_DWORD *)valueOut; /*0x6a9376*/
+      if ( sub_6B67D0(valueOut) ) /*0x6a937a*/
       {
-        if ( useSoundDebugInfo )
+        if ( useSoundDebugInfo ) /*0x6a939c*/
         {
-          v94 = sub_6B67D0(v27);
-          _sprintf(v120, "%s:\t", v94);
+          v91 = sub_6B67D0(v25); /*0x6a93ac*/
+          _sprintf(v117, "%s:\t", v91); /*0x6a93b7*/
         }
         else
         {
-          _sprintf(v120, "%d:\t", v27->members.super.refID);
+          _sprintf(v117, "%d:\t", *(_DWORD *)&v25->PixelFormat.BitsPerPixel); /*0x6a93c7*/
         }
       }
       else
       {
-        _sprintf(v120, "%NoName:\t");
+        _sprintf(v117, "%NoName:\t"); /*0x6a938d*/
       }
-      v102 = 0.0;
-      v103 = 0.0;
-      niNode = v27->members.niNode;
-      if ( niNode )
+      v99 = 0.0; /*0x6a93d1*/
+      v100 = 0.0; /*0x6a93d5*/
+      Width = v25->Width; /*0x6a93d9*/
+      if ( Width ) /*0x6a93de*/
       {
-        ((void (__stdcall *)(NiNode *, float *))niNode->vtbl->super.super.Load)(niNode, &v103);
-        ((void (__stdcall *)(NiNode *, float *))v27->members.niNode->vtbl->super.super.PostLoad)(
-          v27->members.niNode,
-          &v102);
+        (*(void (__stdcall **)(UInt32, float *))(*(_DWORD *)Width + 0x1C))(Width, &v100); /*0x6a93eb*/
+        (*(void (__stdcall **)(UInt32, float *))(*(_DWORD *)v25->Width + 0x20))(v25->Width, &v99); /*0x6a93fb*/
       }
-      if ( ((int)v27->vtbl & 2) != 0 )
+      if ( ((int)v25->_vtbl & 2) != 0 ) /*0x6a9400*/
       {
-        v29 = v103 < dbl_A47CA8;
-        v30 = v103 == dbl_A47CA8;
-        v31 = *(float *)&v27->members.fullName.name.m_dataLen;
-        v32 = *(float *)&v27->members.flags0;
-        v112 = v27->members.extraData.vtbl;
-        v110 = v31;
-        v111 = v32;
-        if ( v29 || v30 )
+        v27 = v100 < kTerrainLODQuadRayStartZOffset; /*0x6a940d*/
+        v28 = v100 == kTerrainLODQuadRayStartZOffset; /*0x6a940d*/
+        v29 = *(float *)&v25->PixelFormat.Components[0].eComponent; /*0x6a9413*/
+        v30 = *(float *)&v25->PixelFormat.Components[0].eRepresentation; /*0x6a9416*/
+        v109 = *(float *)&v25->PixelFormat.Components[0].BitsPerComponent; /*0x6a9419*/
+        v107 = v29; /*0x6a941d*/
+        v108 = v30; /*0x6a9423*/
+        if ( v27 || v28 ) /*0x6a9427*/
         {
-          if ( BYTE2(v27->members.objectList.refr) )
-            v36 = fCostant_100;
+          if ( BYTE2(v25->PixelFormat.Components[3].eRepresentation) ) /*0x6a94fb*/
+            v34 = fCostant_100; /*0x6a9501*/
           else
-            v36 = (double)HIWORD(v27->members.pathGrid) / fCostant_100;
-          v116 = v36;
-          v105 = v110 - v26[0x20];
-          v106 = v111 - v26[0x21];
-          v107 = *(float *)&v112 - v26[0x22];
-          v18 = v105 * v105;
-          v97 = v106 * v106 + v18 + v107 * v107;
-          v98 = sqrt(v97);
-          pathGrid_low = v103 * dbl_A76F60;
-          v35 = (double)LOWORD(v27->members.pathGrid) / fCostant_100;
-          _sprintf(v121, "(-%.1fdB)(-%.1fdB)(%.0f/%.0f) (%.0f)", v35, v116, dbl_A76F60 * v102, pathGrid_low, v98);
+            v34 = (double)HIWORD(v25->PixelFormat.Components[3].eComponent) / fCostant_100; /*0x6a9515*/
+          v113 = v34; /*0x6a951b*/
+          v102 = v107 - v24[0x20]; /*0x6a9529*/
+          v103 = v108 - v24[0x21]; /*0x6a9537*/
+          v104 = v109 - v24[0x22]; /*0x6a9545*/
+          v94 = v103 * v103 + v102 * v102 + v104 * v104; /*0x6a9565*/
+          v95 = sqrt(v94); /*0x6a9572*/
+          eComponent_low = v100 * dbl_A76F60; /*0x6a959c*/
+          v33 = (double)LOWORD(v25->PixelFormat.Components[3].eComponent) / fCostant_100; /*0x6a95b9*/
+          _sprintf(v118, "(-%.1fdB)(-%.1fdB)(%.0f/%.0f) (%.0f)", v33, v113, dbl_A76F60 * v99, eComponent_low, v95); /*0x6a95c8*/
         }
         else
         {
-          if ( BYTE2(v27->members.objectList.refr) )
-            v33 = fCostant_100;
+          if ( BYTE2(v25->PixelFormat.Components[3].eRepresentation) ) /*0x6a9430*/
+            v31 = fCostant_100; /*0x6a9436*/
           else
-            v33 = (double)HIWORD(v27->members.pathGrid) / fCostant_100;
-          v116 = v33;
-          v105 = v110 - v26[0x20];
-          v106 = v111 - v26[0x21];
-          v107 = *(float *)&v112 - v26[0x22];
-          v18 = v105 * v105;
-          pathGrid_low = v107 * v107;
-          v95 = v106 * v106 + v18 + pathGrid_low;
-          v96 = sqrt(v95);
-          v35 = (double)LOWORD(v27->members.pathGrid) / fCostant_100;
-          _sprintf(v121, "(-%.1fdB)(-%.1fdB)(%.0f/Default) (%.0f)", v35, v116, v102 * dbl_A76F60, v96);
+            v31 = (double)HIWORD(v25->PixelFormat.Components[3].eComponent) / fCostant_100; /*0x6a944a*/
+          v113 = v31; /*0x6a9450*/
+          v102 = v107 - v24[0x20]; /*0x6a945e*/
+          v103 = v108 - v24[0x21]; /*0x6a946c*/
+          v104 = v109 - v24[0x22]; /*0x6a947a*/
+          eComponent_low = v104 * v104; /*0x6a9496*/
+          v92 = v103 * v103 + v102 * v102 + eComponent_low; /*0x6a949a*/
+          v93 = sqrt(v92); /*0x6a94a7*/
+          v33 = (double)LOWORD(v25->PixelFormat.Components[3].eComponent) / fCostant_100; /*0x6a94df*/
+          _sprintf(v118, "(-%.1fdB)(-%.1fdB)(%.0f/Default) (%.0f)", v33, v113, v99 * dbl_A76F60, v93); /*0x6a94ee*/
         }
       }
       else
       {
-        if ( BYTE2(v27->members.objectList.refr) )
+        if ( BYTE2(v25->PixelFormat.Components[3].eRepresentation) ) /*0x6a95d2*/
         {
-          v37 = fCostant_100;
-          v38 = v37;
+          v35 = fCostant_100; /*0x6a95d8*/
+          v36 = v35; /*0x6a95de*/
         }
         else
         {
-          v38 = (double)HIWORD(v27->members.pathGrid) / fCostant_100;
-          v37 = fCostant_100;
+          v36 = (double)HIWORD(v25->PixelFormat.Components[3].eComponent) / fCostant_100; /*0x6a95f6*/
+          v35 = fCostant_100; /*0x6a95f6*/
         }
-        v93 = v38;
-        pathGrid_low = (double)LOWORD(v27->members.pathGrid);
-        v35 = pathGrid_low / v37;
-        _sprintf(v121, "(-%.1fdB)(-%.1fdB)", v35, v93);
+        v90 = v36; /*0x6a960a*/
+        eComponent_low = (double)LOWORD(v25->PixelFormat.Components[3].eComponent); /*0x6a960e*/
+        v33 = eComponent_low / v35; /*0x6a9612*/
+        _sprintf(v118, "(-%.1fdB)(-%.1fdB)", v33, v90); /*0x6a961d*/
       }
-      v39 = strlen(v121) + 1;
-      v40 = &v119;
-      while ( *++v40 )
-        ;
-      qmemcpy(v40, v121, v39);
-      if ( sub_6B6AF0((int)v27) )
+      v37 = strlen(v118) + 1; /*0x6a9637*/
+      v38 = &v116; /*0x6a963f*/
+      while ( *++v38 ) /*0x6a964a*/
+        ; /*0x6a9642*/
+      qmemcpy(v38, v118, v37); /*0x6a9653*/
+      if ( sub_6B6AF0((int)v25) ) /*0x6a965e*/
       {
-        v42 = (int *)&v119;
-        do
+        v40 = (int *)&v116; /*0x6a966b*/
+        do /*0x6a9678*/
         {
-          v43 = *((_BYTE *)v42 + 1);
-          v42 = (int *)((char *)v42 + 1);
+          v41 = *((_BYTE *)v40 + 1); /*0x6a9670*/
+          v40 = (int *)((char *)v40 + 1); /*0x6a9673*/
         }
-        while ( v43 );
-        v44 = aPlay_0;
-        v45 = (int (__cdecl *)(int, int, int, char, int, int, int))dword_A76EF8;
+        while ( v41 ); /*0x6a9678*/
+        v42 = aPlay_0; /*0x6a967a*/
+        v43 = (int (__cdecl *)(int, int, int, char, int, int, int))dword_A76EF8; /*0x6a9680*/
       }
       else
       {
-        v42 = (int *)&v119;
-        do
+        v40 = (int *)&v116; /*0x6a9688*/
+        do /*0x6a9698*/
         {
-          v46 = *((_BYTE *)v42 + 1);
-          v42 = (int *)((char *)v42 + 1);
+          v44 = *((_BYTE *)v40 + 1); /*0x6a9690*/
+          v40 = (int *)((char *)v40 + 1); /*0x6a9693*/
         }
-        while ( v46 );
-        v44 = aPause_0;
-        v45 = off_A76EF0;
+        while ( v44 ); /*0x6a9698*/
+        v42 = aPause_0; /*0x6a969a*/
+        v43 = off_A76EF0; /*0x6a96a0*/
       }
-      *v42 = v44;
-      v42[1] = (int)v45;
-      v47 = &v119;
-      while ( *++v47 )
-        ;
-      v49 = (__int16)vtbl;
-      v50 = ((unsigned __int8)vtbl & 1) == 0;
-      *(_WORD *)v47 = word_A61EA8;
-      if ( !v50 )
+      *v40 = v42; /*0x6a96aa*/
+      v40[1] = (int)v43; /*0x6a96ac*/
+      v45 = &v116; /*0x6a96af*/
+      while ( *++v45 ) /*0x6a96ba*/
+        ; /*0x6a96b2*/
+      v47 = keyOut; /*0x6a96bc*/
+      v48 = (keyOut & 1) == 0; /*0x6a96c0*/
+      *(_WORD *)v45 = *(_WORD *)word_A61EA8; /*0x6a96c9*/
+      if ( !v48 ) /*0x6a96cc*/
       {
-        v51 = &v119;
-        while ( *++v51 )
-          ;
-        *(_WORD *)v51 = a2d;
-        v51[2] = byte_A76EEA;
+        v49 = &v116; /*0x6a96d2*/
+        while ( *++v49 ) /*0x6a96dd*/
+          ; /*0x6a96d5*/
+        *(_WORD *)v49 = a2d; /*0x6a96e6*/
+        v49[2] = byte_A76EEA; /*0x6a96ef*/
       }
-      if ( (v49 & 2) != 0 )
+      if ( (v47 & 2) != 0 ) /*0x6a96f5*/
       {
-        v53 = &v119;
-        while ( *++v53 )
-          ;
-        *(_WORD *)v53 = a3d_1;
-        v53[2] = byte_A76EE6;
+        v51 = &v116; /*0x6a96fb*/
+        while ( *++v51 ) /*0x6a9708*/
+          ; /*0x6a9700*/
+        *(_WORD *)v51 = a3d_1; /*0x6a9711*/
+        v51[2] = byte_A76EE6; /*0x6a971a*/
       }
-      if ( (v49 & 4) != 0 )
+      if ( (v47 & 4) != 0 ) /*0x6a9720*/
       {
-        v55 = &v119;
-        while ( *++v55 )
-          ;
-        *(_DWORD *)v55 = aVoce;
-        *((_WORD *)v55 + 2) = word_A76EE0;
+        v53 = &v116; /*0x6a9726*/
+        while ( *++v53 ) /*0x6a9738*/
+          ; /*0x6a9730*/
+        *(_DWORD *)v53 = aVoce; /*0x6a9740*/
+        *((_WORD *)v53 + 2) = word_A76EE0; /*0x6a9749*/
       }
-      if ( (v49 & 8) != 0 )
+      if ( (v47 & 8) != 0 ) /*0x6a9750*/
       {
-        v57 = &v119;
-        while ( *++v57 )
-          ;
-        *(_DWORD *)v57 = aFoot_0;
-        *((_WORD *)v57 + 2) = word_A76ED8;
+        v55 = &v116; /*0x6a9756*/
+        while ( *++v55 ) /*0x6a9768*/
+          ; /*0x6a9760*/
+        *(_DWORD *)v55 = aFoot_0; /*0x6a9770*/
+        *((_WORD *)v55 + 2) = word_A76ED8; /*0x6a9779*/
       }
-      if ( (v49 & 0x10) != 0 )
+      if ( (v47 & 0x10) != 0 ) /*0x6a9780*/
       {
-        v59 = &v119;
-        while ( *++v59 )
-          ;
-        *(_DWORD *)v59 = aLoop_0;
-        *((_WORD *)v59 + 2) = word_A76ED0;
+        v57 = &v116; /*0x6a9786*/
+        while ( *++v57 ) /*0x6a9798*/
+          ; /*0x6a9790*/
+        *(_DWORD *)v57 = aLoop_0; /*0x6a97a0*/
+        *((_WORD *)v57 + 2) = word_A76ED0; /*0x6a97a9*/
       }
-      if ( (v49 & 0x20) != 0 )
+      if ( (v47 & 0x20) != 0 ) /*0x6a97b0*/
       {
-        v61 = &v119;
-        while ( *++v61 )
-          ;
-        *(_DWORD *)v61 = aSyst;
-        *((_WORD *)v61 + 2) = word_A76EC8;
+        v59 = &v116; /*0x6a97b6*/
+        while ( *++v59 ) /*0x6a97c8*/
+          ; /*0x6a97c0*/
+        *(_DWORD *)v59 = aSyst; /*0x6a97d0*/
+        *((_WORD *)v59 + 2) = word_A76EC8; /*0x6a97d9*/
       }
-      if ( (v49 & 0x40) != 0 )
+      if ( (v47 & 0x40) != 0 ) /*0x6a97e0*/
       {
-        v63 = &v119;
-        while ( *++v63 )
-          ;
-        *(_DWORD *)v63 = aLofr;
-        *((_WORD *)v63 + 2) = word_A76EC0;
+        v61 = &v116; /*0x6a97e6*/
+        while ( *++v61 ) /*0x6a97f8*/
+          ; /*0x6a97f0*/
+        *(_DWORD *)v61 = aLofr; /*0x6a9800*/
+        *((_WORD *)v61 + 2) = word_A76EC0; /*0x6a9809*/
       }
-      if ( (v49 & 0x100) != 0 )
+      if ( (v47 & 0x100) != 0 ) /*0x6a9813*/
       {
-        v65 = &v119;
-        while ( *++v65 )
-          ;
-        *(_DWORD *)v65 = a1off;
-        *((_WORD *)v65 + 2) = word_A76EB8;
+        v63 = &v116; /*0x6a9819*/
+        while ( *++v63 ) /*0x6a9828*/
+          ; /*0x6a9820*/
+        *(_DWORD *)v63 = a1off; /*0x6a9830*/
+        *((_WORD *)v63 + 2) = word_A76EB8; /*0x6a9839*/
       }
-      if ( (v49 & 0x1000) != 0 )
+      if ( (v47 & 0x1000) != 0 ) /*0x6a9843*/
       {
-        v67 = &v119;
-        while ( *++v67 )
-          ;
-        v69 = byte_A76EB0;
-        *(_DWORD *)v67 = aRgn;
-        v67[4] = v69;
+        v65 = &v116; /*0x6a9849*/
+        while ( *++v65 ) /*0x6a9858*/
+          ; /*0x6a9850*/
+        v67 = byte_A76EB0; /*0x6a9860*/
+        *(_DWORD *)v65 = aRgn; /*0x6a9866*/
+        v65[4] = v67; /*0x6a9868*/
       }
-      if ( BYTE2(v27->members.objectList.refr) )
+      if ( BYTE2(v25->PixelFormat.Components[3].eRepresentation) ) /*0x6a986b*/
       {
-        v70 = &v119;
-        while ( *++v70 )
-          ;
-        v72 = byte_A76EAA;
-        *(_WORD *)v70 = word_A76EA8;
-        v70[2] = v72;
+        v68 = &v116; /*0x6a9875*/
+        while ( *++v68 ) /*0x6a9880*/
+          ; /*0x6a9878*/
+        v70 = byte_A76EAA; /*0x6a9889*/
+        *(_WORD *)v68 = word_A76EA8; /*0x6a988f*/
+        v68[2] = v70; /*0x6a9892*/
       }
-      v73 = &v119;
-      while ( *++v73 )
-        ;
-      *(_WORD *)v73 = word_A61E98;
-      if ( NiDX9TextureData::GetTexture((NiDX9TextureData *)v27) )
+      v71 = &v116; /*0x6a9899*/
+      while ( *++v71 ) /*0x6a98a8*/
+        ; /*0x6a98a0*/
+      *(_WORD *)v71 = *(_WORD *)word_A61E98; /*0x6a98b3*/
+      if ( NiDX9TextureData::GetTexture(v25) ) /*0x6a98b6*/
       {
-        Texture = NiDX9TextureData::GetTexture((NiDX9TextureData *)v27);
-        ((void (__userpurge *)(IDirect3DBaseTexture9 *, int *, double@<st0>, double@<st1>))Texture->lpVtbl->FreePrivateData)(
+        Texture = NiDX9TextureData::GetTexture(v25); /*0x6a98c5*/
+        ((void (__userpurge *)(IDirect3DBaseTexture9 *, int *, double@<st0>, double@<st1>))Texture->lpVtbl->FreePrivateData)( /*0x6a98d5*/
           Texture,
-          &v117,
-          v35,
-          pathGrid_low);
-        _sprintf(v121, "[%i]", v117);
-        v76 = strlen(v121) + 1;
-        v77 = &v119;
-        while ( *++v77 )
-          ;
-        qmemcpy(v77, v121, v76);
-        v79 = NiDX9TextureData::GetTexture((NiDX9TextureData *)v27);
-        if ( (((int (__stdcall *)(IDirect3DBaseTexture9 *, _BYTE *))v79->lpVtbl->PreLoad)(v79, v118) & 2) != 0 )
+          &v114,
+          v33,
+          eComponent_low);
+        _sprintf(v118, "[%i]", v114); /*0x6a98e9*/
+        v74 = strlen(v118) + 1; /*0x6a9907*/
+        v75 = &v116; /*0x6a9911*/
+        while ( *++v75 ) /*0x6a991c*/
+          ; /*0x6a9914*/
+        qmemcpy(v75, v118, v74); /*0x6a9923*/
+        v77 = NiDX9TextureData::GetTexture(v25); /*0x6a992e*/
+        if ( (((int (__stdcall *)(IDirect3DBaseTexture9 *, _BYTE *))v77->lpVtbl->PreLoad)(v77, v115) & 2) != 0 ) /*0x6a9942*/
         {
-          v80 = &v119;
-          while ( *++v80 )
-            ;
-          *(_DWORD *)v80 = dword_A76E9C;
+          v78 = &v116; /*0x6a9948*/
+          while ( *++v78 ) /*0x6a9958*/
+            ; /*0x6a9950*/
+          *(_DWORD *)v78 = dword_A76E9C; /*0x6a9960*/
         }
       }
-      v92 = (float)v100;
-      v82 = (double)iDebugTextLeftRightOffset;
-      v88 = v82;
-      InterfaceMgr_DebugTextLine((char)&savedregs, v18, v82, v35, v120, v88, v92, 1, 0xFFFFFFFF);
-      v100 += a5;
+      v89 = (float)v97; /*0x6a996d*/
+      v85 = (float)iDebugTextLeftRightOffset; /*0x6a997b*/
+      InterfaceMgr_DebugTextLine(v117, v85, v89, 1, 0xFFFFFFFF); /*0x6a997f*/
+      v97 += a2; /*0x6a9987*/
     }
-    while ( v101 );
-    result = (signed int *)v115;
-    *v113 = v100;
-    *v108 = (int)result;
+    while ( position ); /*0x6a9993*/
+    result = v112; /*0x6a99a1*/
+    *v110 = v97; /*0x6a99a5*/
+    *v105 = result; /*0x6a99ab*/
   }
   else
   {
-    result = v113;
-    v84 = v115;
-    *v113 = v100;
-    *v108 = v84;
+    result = v110; /*0x6a99c6*/
+    v81 = v112; /*0x6a99ca*/
+    *v110 = v97; /*0x6a99ce*/
+    *v105 = v81; /*0x6a99d5*/
   }
-  return result;
+  return result; /*0x6a99ad*/
 }

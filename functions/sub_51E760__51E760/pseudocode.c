@@ -1,4 +1,4 @@
-void __userpurge sub_51E760(char *this@<ecx>, int a2@<ebx>, int a3, size_t a4)
+void __userpurge sub_51E760(char *this@<ecx>, ActorBaseSaveChangeMask a2, size_t a3)
 {
-  TESActorBase_LoadModified((int)(this + 0xFFFFFF78), a2, a3, a4);
+  TESActorBase_LoadModified((TESActorBase *)(this + 0xFFFFFF78), a2, a3); /*0x51e766*/
 }

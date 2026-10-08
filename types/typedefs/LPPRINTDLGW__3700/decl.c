@@ -1,1 +1,1 @@
-LPPRINTDLGW
+typedef tagPDW *LPPRINTDLGW;

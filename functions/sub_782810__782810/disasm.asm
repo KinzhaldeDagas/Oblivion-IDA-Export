@@ -8,7 +8,7 @@
 0x782820: mov     esi, [eax+18h]
 0x782823: push    eax
 0x782824: mov     [eax+8], edi
-0x782827: call    FormHeapFree
+0x782827: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78282C: add     esp, 4
 0x78282F: cmp     esi, edi
 0x782831: mov     eax, esi

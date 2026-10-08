@@ -106,7 +106,7 @@
 0x5E45CF: call    edx
 0x5E45D1: cmp     esi, ds:0B333C4h
 0x5E45D7: jnz     short loc_5E45DE
-0x5E45D9: call    sub_5C1900
+0x5E45D9: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5E45DE: pop     ebp
 0x5E45DF: pop     edi
 0x5E45E0: pop     esi

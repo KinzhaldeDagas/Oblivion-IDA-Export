@@ -9,7 +9,7 @@
 0x680F76: add     esp, 0Ch
 0x680F79: test    ecx, ecx
 0x680F7B: jz      loc_681045
-0x680F81: call    MobileObject_GetCharProxy
+0x680F81: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x680F86: test    eax, eax
 0x680F88: jz      loc_681045
 0x680F8E: mov     eax, [eax+368h]
@@ -23,12 +23,12 @@
 0x680FA9: lea     ebx, [eax+70h]
 0x680FAC: push    ebx
 0x680FAD: push    esi
-0x680FAE: call    sub_43F3E0
+0x680FAE: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x680FB3: add     ebx, 10h
 0x680FB6: lea     edi, [esi+0Ch]
 0x680FB9: push    ebx
 0x680FBA: push    edi
-0x680FBB: call    sub_43F3E0
+0x680FBB: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x680FC0: fld     dword ptr [edi]
 0x680FC2: fsub    dword ptr [esi]
 0x680FC4: add     esp, 10h

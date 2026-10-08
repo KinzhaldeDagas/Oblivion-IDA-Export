@@ -1,1 +1,1 @@
-CredHandle
+typedef SecHandle CredHandle;

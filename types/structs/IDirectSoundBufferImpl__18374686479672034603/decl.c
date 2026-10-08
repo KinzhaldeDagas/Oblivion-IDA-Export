@@ -1,1 +1,47 @@
-IDirectSoundBufferImpl
+struct IDirectSoundBufferImpl
+{
+IDirectSoundBuffer8_0 IDirectSoundBuffer8_iface;
+IDirectSoundNotify_0 IDirectSoundNotify_iface;
+IDirectSound3DListener_0 IDirectSound3DListener_iface;
+IDirectSound3DBuffer_0 IDirectSound3DBuffer_iface;
+IKsPropertySet_0 IKsPropertySet_iface;
+LONG numIfaces;
+LONG ref;
+LONG refn;
+LONG ref3D;
+LONG refiks;
+DirectSoundDevice_0 *device;
+SRWLOCK lock;
+PWAVEFORMATEX pwfx;
+BufferMemory_0 *buffer;
+DWORD playflags;
+DWORD state;
+DWORD leadin;
+DWORD writelead;
+DWORD buflen;
+DWORD nAvgBytesPerSec;
+DWORD freq;
+DSVOLUMEPAN volpan;
+DSBUFFERDESC dsbd;
+ULONG freqneeded;
+DWORD firstep;
+float firgain;
+__declspec(align(8)) LONG64 freqAdjustNum;
+LONG64 freqAdjustDen;
+LONG64 freqAccNum;
+DWORD sec_mixpos;
+LPDSBPOSITIONNOTIFY notifies;
+int nrofnotifies;
+DS3DBUFFER ds3db_ds3db;
+LONG ds3db_lVolume;
+BOOL ds3db_need_recalc;
+int mix_channels;
+bitsgetfunc get;
+bitsgetfunc get_aux;
+bitsputfunc put;
+bitsputfunc put_aux;
+int num_filters;
+DSFilter_0 *filters;
+eax_buffer_info eax;
+list entry;
+};

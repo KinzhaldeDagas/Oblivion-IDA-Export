@@ -1,1 +1,1 @@
-LPSTR
+typedef CHAR *LPSTR;

@@ -25,13 +25,13 @@
 0x76381D: mov     ecx, eax
 0x76381F: call    sub_70F010
 0x763824: mov     esi, eax
-0x763826: push    esi
-0x763827: call    sub_76BEF0
+0x763826: push    esi; pixelFormat
+0x763827: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x76382C: mov     dword ptr [esi+10h], 0
 0x763833: jmp     loc_763D0C
 0x763838: xor     esi, esi
-0x76383A: push    esi
-0x76383B: call    sub_76BEF0
+0x76383A: push    esi; pixelFormat
+0x76383B: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763840: mov     [esi+10h], esi
 0x763843: jmp     loc_763D0C
 0x763848: push    44h ; 'D'; jumptable 00763803 case 1
@@ -43,13 +43,13 @@
 0x76385B: mov     ecx, eax
 0x76385D: call    sub_70F010
 0x763862: mov     esi, eax
-0x763864: push    esi
-0x763865: call    sub_76BEF0
+0x763864: push    esi; pixelFormat
+0x763865: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x76386A: mov     dword ptr [esi+10h], 1
 0x763871: jmp     loc_763D0C
 0x763876: xor     esi, esi
-0x763878: push    esi
-0x763879: call    sub_76BEF0
+0x763878: push    esi; pixelFormat
+0x763879: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x76387E: mov     dword ptr [esi+10h], 1
 0x763885: jmp     loc_763D0C
 0x76388A: push    44h ; 'D'; jumptable 00763803 case 3
@@ -61,13 +61,13 @@
 0x76389D: mov     ecx, eax
 0x76389F: call    sub_70F010
 0x7638A4: mov     esi, eax
-0x7638A6: push    esi
-0x7638A7: call    sub_76BEF0
+0x7638A6: push    esi; pixelFormat
+0x7638A7: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x7638AC: mov     dword ptr [esi+10h], 3
 0x7638B3: jmp     loc_763D0C
 0x7638B8: xor     esi, esi
-0x7638BA: push    esi
-0x7638BB: call    sub_76BEF0
+0x7638BA: push    esi; pixelFormat
+0x7638BB: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x7638C0: mov     dword ptr [esi+10h], 3
 0x7638C7: jmp     loc_763D0C
 0x7638CC: push    44h ; 'D'; jumptable 00763803 case 4
@@ -79,13 +79,13 @@
 0x7638DF: mov     ecx, eax
 0x7638E1: call    sub_70F010
 0x7638E6: mov     esi, eax
-0x7638E8: push    esi
-0x7638E9: call    sub_76BEF0
+0x7638E8: push    esi; pixelFormat
+0x7638E9: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x7638EE: mov     dword ptr [esi+10h], 4
 0x7638F5: jmp     loc_763D0C
 0x7638FA: xor     esi, esi
-0x7638FC: push    esi
-0x7638FD: call    sub_76BEF0
+0x7638FC: push    esi; pixelFormat
+0x7638FD: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763902: mov     dword ptr [esi+10h], 4
 0x763909: jmp     loc_763D0C
 0x76390E: push    44h ; 'D'; jumptable 00763803 case 5
@@ -97,13 +97,13 @@
 0x763921: mov     ecx, eax
 0x763923: call    sub_70F010
 0x763928: mov     esi, eax
-0x76392A: push    esi
-0x76392B: call    sub_76BEF0
+0x76392A: push    esi; pixelFormat
+0x76392B: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763930: mov     dword ptr [esi+10h], 5
 0x763937: jmp     loc_763D0C
 0x76393C: xor     esi, esi
-0x76393E: push    esi
-0x76393F: call    sub_76BEF0
+0x76393E: push    esi; pixelFormat
+0x76393F: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763944: mov     dword ptr [esi+10h], 5
 0x76394B: jmp     loc_763D0C
 0x763950: xor     esi, esi; jumptable 00763803 cases 6,7
@@ -117,13 +117,13 @@
 0x76396A: mov     ecx, eax
 0x76396C: call    sub_70F010
 0x763971: mov     esi, eax
-0x763973: push    esi
-0x763974: call    sub_76BEF0
+0x763973: push    esi; pixelFormat
+0x763974: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763979: mov     dword ptr [esi+10h], 8
 0x763980: jmp     loc_763D0C
 0x763985: xor     esi, esi
-0x763987: push    esi
-0x763988: call    sub_76BEF0
+0x763987: push    esi; pixelFormat
+0x763988: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x76398D: mov     dword ptr [esi+10h], 8
 0x763994: jmp     loc_763D0C
 0x763999: push    44h ; 'D'; jumptable 00763803 case 9
@@ -135,13 +135,13 @@
 0x7639AC: mov     ecx, eax
 0x7639AE: call    sub_70F010
 0x7639B3: mov     esi, eax
-0x7639B5: push    esi
-0x7639B6: call    sub_76BEF0
+0x7639B5: push    esi; pixelFormat
+0x7639B6: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x7639BB: mov     dword ptr [esi+10h], 9
 0x7639C2: jmp     loc_763D0C
 0x7639C7: xor     esi, esi
-0x7639C9: push    esi
-0x7639CA: call    sub_76BEF0
+0x7639C9: push    esi; pixelFormat
+0x7639CA: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x7639CF: mov     dword ptr [esi+10h], 9
 0x7639D6: jmp     loc_763D0C
 0x7639DB: push    44h ; 'D'; jumptable 00763803 case 10
@@ -153,13 +153,13 @@
 0x7639EE: mov     ecx, eax
 0x7639F0: call    sub_70F010
 0x7639F5: mov     esi, eax
-0x7639F7: push    esi
-0x7639F8: call    sub_76BEF0
+0x7639F7: push    esi; pixelFormat
+0x7639F8: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x7639FD: mov     dword ptr [esi+10h], 0Ah
 0x763A04: jmp     loc_763D0C
 0x763A09: xor     esi, esi
-0x763A0B: push    esi
-0x763A0C: call    sub_76BEF0
+0x763A0B: push    esi; pixelFormat
+0x763A0C: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763A11: mov     dword ptr [esi+10h], 0Ah
 0x763A18: jmp     loc_763D0C
 0x763A1D: push    44h ; 'D'; jumptable 00763803 case 11
@@ -171,13 +171,13 @@
 0x763A30: mov     ecx, eax
 0x763A32: call    sub_70F010
 0x763A37: mov     esi, eax
-0x763A39: push    esi
-0x763A3A: call    sub_76BEF0
+0x763A39: push    esi; pixelFormat
+0x763A3A: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763A3F: mov     dword ptr [esi+10h], 0Bh
 0x763A46: jmp     loc_763D0C
 0x763A4B: xor     esi, esi
-0x763A4D: push    esi
-0x763A4E: call    sub_76BEF0
+0x763A4D: push    esi; pixelFormat
+0x763A4E: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763A53: mov     dword ptr [esi+10h], 0Bh
 0x763A5A: jmp     loc_763D0C
 0x763A5F: push    44h ; 'D'; jumptable 00763803 case 12
@@ -189,13 +189,13 @@
 0x763A72: mov     ecx, eax
 0x763A74: call    sub_70F010
 0x763A79: mov     esi, eax
-0x763A7B: push    esi
-0x763A7C: call    sub_76BEF0
+0x763A7B: push    esi; pixelFormat
+0x763A7C: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763A81: mov     dword ptr [esi+10h], 0Ch
 0x763A88: jmp     loc_763D0C
 0x763A8D: xor     esi, esi
-0x763A8F: push    esi
-0x763A90: call    sub_76BEF0
+0x763A8F: push    esi; pixelFormat
+0x763A90: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763A95: mov     dword ptr [esi+10h], 0Ch
 0x763A9C: jmp     loc_763D0C
 0x763AA1: push    44h ; 'D'; jumptable 00763803 case 13
@@ -207,13 +207,13 @@
 0x763AB4: mov     ecx, eax
 0x763AB6: call    sub_70F010
 0x763ABB: mov     esi, eax
-0x763ABD: push    esi
-0x763ABE: call    sub_76BEF0
+0x763ABD: push    esi; pixelFormat
+0x763ABE: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763AC3: mov     dword ptr [esi+10h], 0Dh
 0x763ACA: jmp     loc_763D0C
 0x763ACF: xor     esi, esi
-0x763AD1: push    esi
-0x763AD2: call    sub_76BEF0
+0x763AD1: push    esi; pixelFormat
+0x763AD2: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763AD7: mov     dword ptr [esi+10h], 0Dh
 0x763ADE: jmp     loc_763D0C
 0x763AE3: push    44h ; 'D'; jumptable 00763803 cases 2,22
@@ -225,13 +225,13 @@
 0x763AF6: mov     ecx, eax
 0x763AF8: call    sub_70F010
 0x763AFD: mov     esi, eax
-0x763AFF: push    esi
-0x763B00: call    sub_76BEF0
+0x763AFF: push    esi; pixelFormat
+0x763B00: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763B05: mov     [esi+10h], ebx
 0x763B08: jmp     loc_763D0C
 0x763B0D: xor     esi, esi
-0x763B0F: push    esi
-0x763B10: call    sub_76BEF0
+0x763B0F: push    esi; pixelFormat
+0x763B10: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763B15: mov     [esi+10h], ebx
 0x763B18: jmp     loc_763D0C
 0x763B1D: push    44h ; 'D'; jumptable 00763803 case 14
@@ -243,13 +243,13 @@
 0x763B30: mov     ecx, eax
 0x763B32: call    sub_70F010
 0x763B37: mov     esi, eax
-0x763B39: push    esi
-0x763B3A: call    sub_76BEF0
+0x763B39: push    esi; pixelFormat
+0x763B3A: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763B3F: mov     dword ptr [esi+10h], 0Eh
 0x763B46: jmp     loc_763D0C
 0x763B4B: xor     esi, esi
-0x763B4D: push    esi
-0x763B4E: call    sub_76BEF0
+0x763B4D: push    esi; pixelFormat
+0x763B4E: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763B53: mov     dword ptr [esi+10h], 0Eh
 0x763B5A: jmp     loc_763D0C
 0x763B5F: push    44h ; 'D'; jumptable 00763803 case 15
@@ -261,13 +261,13 @@
 0x763B72: mov     ecx, eax
 0x763B74: call    sub_70F010
 0x763B79: mov     esi, eax
-0x763B7B: push    esi
-0x763B7C: call    sub_76BEF0
+0x763B7B: push    esi; pixelFormat
+0x763B7C: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763B81: mov     dword ptr [esi+10h], 0Fh
 0x763B88: jmp     loc_763D0C
 0x763B8D: xor     esi, esi
-0x763B8F: push    esi
-0x763B90: call    sub_76BEF0
+0x763B8F: push    esi; pixelFormat
+0x763B90: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763B95: mov     dword ptr [esi+10h], 0Fh
 0x763B9C: jmp     loc_763D0C
 0x763BA1: push    44h ; 'D'; jumptable 00763803 case 16
@@ -279,13 +279,13 @@
 0x763BB4: mov     ecx, eax
 0x763BB6: call    sub_70F010
 0x763BBB: mov     esi, eax
-0x763BBD: push    esi
-0x763BBE: call    sub_76BEF0
+0x763BBD: push    esi; pixelFormat
+0x763BBE: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763BC3: mov     dword ptr [esi+10h], 10h
 0x763BCA: jmp     loc_763D0C
 0x763BCF: xor     esi, esi
-0x763BD1: push    esi
-0x763BD2: call    sub_76BEF0
+0x763BD1: push    esi; pixelFormat
+0x763BD2: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763BD7: mov     dword ptr [esi+10h], 10h
 0x763BDE: jmp     loc_763D0C
 0x763BE3: push    44h ; 'D'; jumptable 00763803 case 17
@@ -297,13 +297,13 @@
 0x763BF6: mov     ecx, eax
 0x763BF8: call    sub_70F010
 0x763BFD: mov     esi, eax
-0x763BFF: push    esi
-0x763C00: call    sub_76BEF0
+0x763BFF: push    esi; pixelFormat
+0x763C00: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763C05: mov     dword ptr [esi+10h], 11h
 0x763C0C: jmp     loc_763D0C
 0x763C11: xor     esi, esi
-0x763C13: push    esi
-0x763C14: call    sub_76BEF0
+0x763C13: push    esi; pixelFormat
+0x763C14: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763C19: mov     dword ptr [esi+10h], 11h
 0x763C20: jmp     loc_763D0C
 0x763C25: push    44h ; 'D'; jumptable 00763803 case 18
@@ -315,13 +315,13 @@
 0x763C38: mov     ecx, eax
 0x763C3A: call    sub_70F010
 0x763C3F: mov     esi, eax
-0x763C41: push    esi
-0x763C42: call    sub_76BEF0
+0x763C41: push    esi; pixelFormat
+0x763C42: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763C47: mov     dword ptr [esi+10h], 12h
 0x763C4E: jmp     loc_763D0C
 0x763C53: xor     esi, esi
-0x763C55: push    esi
-0x763C56: call    sub_76BEF0
+0x763C55: push    esi; pixelFormat
+0x763C56: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763C5B: mov     dword ptr [esi+10h], 12h
 0x763C62: jmp     loc_763D0C
 0x763C67: push    44h ; 'D'; jumptable 00763803 case 19
@@ -333,13 +333,13 @@
 0x763C7A: mov     ecx, eax
 0x763C7C: call    sub_70F010
 0x763C81: mov     esi, eax
-0x763C83: push    esi
-0x763C84: call    sub_76BEF0
+0x763C83: push    esi; pixelFormat
+0x763C84: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763C89: mov     dword ptr [esi+10h], 13h
 0x763C90: jmp     short loc_763D0C
 0x763C92: xor     esi, esi
-0x763C94: push    esi
-0x763C95: call    sub_76BEF0
+0x763C94: push    esi; pixelFormat
+0x763C95: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763C9A: mov     dword ptr [esi+10h], 13h
 0x763CA1: jmp     short loc_763D0C
 0x763CA3: push    44h ; 'D'; jumptable 00763803 case 20
@@ -351,13 +351,13 @@
 0x763CB6: mov     ecx, eax
 0x763CB8: call    sub_70F010
 0x763CBD: mov     esi, eax
-0x763CBF: push    esi
-0x763CC0: call    sub_76BEF0
+0x763CBF: push    esi; pixelFormat
+0x763CC0: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763CC5: mov     dword ptr [esi+10h], 14h
 0x763CCC: jmp     short loc_763D0C
 0x763CCE: xor     esi, esi
-0x763CD0: push    esi
-0x763CD1: call    sub_76BEF0
+0x763CD0: push    esi; pixelFormat
+0x763CD1: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763CD6: mov     dword ptr [esi+10h], 14h
 0x763CDD: jmp     short loc_763D0C
 0x763CDF: push    44h ; 'D'; jumptable 00763803 case 21
@@ -371,8 +371,8 @@
 0x763CF9: mov     esi, eax
 0x763CFB: jmp     short loc_763CFF
 0x763CFD: xor     esi, esi
-0x763CFF: push    esi
-0x763D00: call    sub_76BEF0
+0x763CFF: push    esi; pixelFormat
+0x763D00: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x763D05: mov     dword ptr [esi+10h], 15h
 0x763D0C: mov     [esi+0Ch], eax
 0x763D0F: add     esp, 4

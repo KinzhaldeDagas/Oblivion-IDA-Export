@@ -1,19 +1,32 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x4E2D60",
+      "0x4E2F6B"
+    ]
+  ],
+  "chunks_sha256": "bf5197ffbc9d0d7cc0dc12659c7ab70c07d32ed479dee32f2edc3998157abeda",
+  "comment_regular": "Verified ABI correction 2026-10-04: ECX complete reference receiver; RET4(save)/RET8(load). MobileObject caller supplies exactly these stack words. Removed fictitious FPU register arguments and by-value TESForm argument; internal reference serialization outside current process-focused pass.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
   "display_name": "TESObjectREFR_SaveModifiedForm",
   "end_ea": "0x4E2F6B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_SaveModifiedForm",
   "segment": ".text",
   "sha256": "bf5197ffbc9d0d7cc0dc12659c7ab70c07d32ed479dee32f2edc3998157abeda",
   "size": 523,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E2D60",
-  "type": "void __userpurge(TESChildCELL *this@<ecx>, double@<st0>, TESForm Src)",
+  "total_chunk_size": 523,
+  "type": "void __thiscall(TESObjectREFR *self, unsigned int changeMask)",
   "xrefs_from_count": 201,
   "xrefs_to_count": 2
 }

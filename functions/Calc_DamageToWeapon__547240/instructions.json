@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x547240",
-    "line": "fld     dword ptr ds:0B36E10h",
+    "line": "fld     dword ptr ds:0B36E10h; Returns baseAttackDamage * fDamageToWeaponPercentage. The GameSetting storage is 0xB36E10, registered at 0x9E8C70; native default is 0.01. Return ABI is float.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x547246",
-    "line": "fmul    [esp+arg_0]",
+    "line": "fmul    [esp+baseAttackDamage]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x54724A",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+baseAttackDamage]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x54724E",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+baseAttackDamage]",
     "mnemonic": "fld",
     "size": 4
   },

@@ -1,4 +1,4 @@
-BSStringT *sub_A0A000()
+NiRTTI *sub_A0A000()
 {
-  return sub_70E220((BSStringT *)dword_B3FD54, "NiTriBasedGeom", (int)dword_B3FD5C);
+  return NiRTTI_Constructor(&stru_B3FD54, "NiTriBasedGeom", &stru_B3FD5C); /*0xa0a014*/
 }

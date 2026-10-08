@@ -75,7 +75,7 @@
 0x6FC115: fdivrp  st(1), st
 0x6FC117: fstp    [esp+0F4h+var_6C]
 0x6FC11E: call    FormHeapAlloc
-0x6FC123: mov     dword ptr [esp+0F4h+var_B8], eax
+0x6FC123: mov     [esp+0F4h+vertices], eax
 0x6FC127: xor     ecx, ecx
 0x6FC129: mov     eax, esi
 0x6FC12B: mov     edx, 0Ch
@@ -118,12 +118,12 @@
 0x6FC1A2: mov     edx, 8
 0x6FC1A7: mul     edx
 0x6FC1A9: seto    cl
-0x6FC1AC: mov     dword ptr [esp+0F0h+var_D0+4], edi
+0x6FC1AC: mov     [esp+0F0h+colors+4], edi
 0x6FC1B0: neg     ecx
 0x6FC1B2: or      ecx, eax
 0x6FC1B4: push    ecx; Size
 0x6FC1B5: call    FormHeapAlloc
-0x6FC1BA: mov     dword ptr [esp+0F4h+var_B8+4], eax
+0x6FC1BA: mov     [esp+0F4h+vertices+4], eax
 0x6FC1BE: mov     eax, [esp+0F4h+arg_4]
 0x6FC1C5: lea     eax, [eax+eax*2]
 0x6FC1C8: xor     ecx, ecx
@@ -136,7 +136,7 @@
 0x6FC1DA: push    ecx; Size
 0x6FC1DB: call    FormHeapAlloc
 0x6FC1E0: fldz
-0x6FC1E2: mov     ecx, dword ptr [esp+0F8h+var_B8]
+0x6FC1E2: mov     ecx, [esp+0F8h+vertices]
 0x6FC1E6: fst     dword ptr [esp+0F8h+var_C8]
 0x6FC1EA: fst     dword ptr [esp+0F8h+var_C8+4]
 0x6FC1EE: mov     ebp, eax
@@ -167,7 +167,7 @@
 0x6FC247: mov     [ebx+8], edx
 0x6FC24A: jz      short loc_6FC266
 0x6FC24C: mov     edi, [eax]
-0x6FC24E: mov     edx, dword ptr [esp+0F0h+var_D0+4]
+0x6FC24E: mov     edx, [esp+0F0h+colors+4]
 0x6FC252: mov     [edx], edi
 0x6FC254: mov     edi, [eax+4]
 0x6FC257: mov     [edx+4], edi
@@ -177,7 +177,7 @@
 0x6FC263: mov     [edx+0Ch], eax
 0x6FC266: cmp     [esp+0F0h+arg_4], esi
 0x6FC26D: fld     dword ptr ds:0A3D65Ch
-0x6FC273: mov     eax, dword ptr [esp+0F0h+var_B8+4]
+0x6FC273: mov     eax, [esp+0F0h+vertices+4]
 0x6FC277: fstp    [esp+0F0h+var_8C]
 0x6FC27B: mov     edx, [esp+0F0h+var_8C]
 0x6FC27F: fxch    st(1)
@@ -200,27 +200,26 @@
 0x6FC2BF: call    __CIcos
 0x6FC2C4: fstp    [esp+0F0h+var_DC]
 0x6FC2C8: fld     [esp+0F0h+var_DC]
-0x6FC2CC: mov     eax, dword ptr [esp+0F0h+var_B8+4]
-0x6FC2D0: mov     ecx, dword ptr [esp+0F0h+var_D0+4]
+0x6FC2CC: mov     eax, [esp+0F0h+vertices+4]
+0x6FC2D0: mov     ecx, [esp+0F0h+colors+4]
 0x6FC2D4: fstp    [esp+0F0h+var_DC]
 0x6FC2D8: fld     [esp+0F0h+var_DC]
 0x6FC2DC: add     eax, 8
 0x6FC2DF: fld     [esp+0F0h+var_54]
 0x6FC2E6: mov     dword ptr [esp+0F0h+var_A0+4], eax
-0x6FC2EA: mov     eax, dword ptr [esp+0F0h+var_B8]
+0x6FC2EA: mov     eax, [esp+0F0h+vertices]
 0x6FC2EE: fmul    st, st(1)
 0x6FC2F0: add     ecx, 10h
 0x6FC2F3: add     ebx, 0Ch
 0x6FC2F6: sub     eax, [esp+0F0h+var_A8]
 0x6FC2FA: fstp    [esp+0F0h+var_C0]
-0x6FC2FE: mov     dword ptr [esp+0F0h+var_D0], ecx
+0x6FC2FE: mov     [esp+0F0h+colors], ecx
 0x6FC302: fstp    [esp+0F0h+var_78]
 0x6FC306: mov     [esp+0F0h+var_D4], eax
 0x6FC30A: fld     [esp+0F0h+var_6C]
 0x6FC311: fstp    dword ptr [esp+0F0h+var_98+4]
 0x6FC315: jmp     short loc_6FC322
 0x6FC317: jmp     short loc_6FC320
-0x6FC319: align 10h
 0x6FC320: fstp    st
 0x6FC322: mov     edx, [esp+0F0h+var_D8]
 0x6FC326: fild    [esp+0F0h+var_D8]
@@ -279,7 +278,7 @@
 0x6FC3E9: mov     eax, [esp+0F0h+arg_C]
 0x6FC3F0: test    eax, eax
 0x6FC3F2: mov     [ebx+8], ecx
-0x6FC3F5: mov     ecx, dword ptr [esp+0F0h+var_D0]
+0x6FC3F5: mov     ecx, [esp+0F0h+colors]
 0x6FC3F9: jz      short loc_6FC411
 0x6FC3FB: mov     edx, [eax]
 0x6FC3FD: mov     [ecx], edx
@@ -297,7 +296,7 @@
 0x6FC428: add     ecx, 10h
 0x6FC42B: mov     [eax], edx
 0x6FC42D: mov     edx, dword ptr [esp+0F0h+var_98+4]
-0x6FC431: mov     dword ptr [esp+0F0h+var_D0], ecx
+0x6FC431: mov     [esp+0F0h+colors], ecx
 0x6FC435: fstp    [esp+0F0h+var_A4]
 0x6FC439: mov     ecx, [esp+0F0h+var_D8]
 0x6FC43D: mov     [eax+4], edx
@@ -323,7 +322,7 @@
 0x6FC488: fldz
 0x6FC48A: mov     ebx, [esp+0F0h+var_A8]
 0x6FC48E: fld1
-0x6FC490: mov     ecx, dword ptr [esp+0F0h+var_B8]
+0x6FC490: mov     ecx, [esp+0F0h+vertices]
 0x6FC494: fxch    st(1)
 0x6FC496: mov     word ptr [ebp+esi*2+0], 0
 0x6FC49D: fst     dword ptr [esp+0F0h+var_C8]
@@ -364,7 +363,7 @@
 0x6FC51D: mov     edx, [ecx]
 0x6FC51F: mov     eax, edi
 0x6FC521: shl     eax, 4
-0x6FC524: add     eax, dword ptr [esp+0F0h+var_D0+4]
+0x6FC524: add     eax, [esp+0F0h+colors+4]
 0x6FC528: mov     [eax], edx
 0x6FC52A: mov     edx, [ecx+4]
 0x6FC52D: mov     [eax+4], edx
@@ -373,7 +372,7 @@
 0x6FC536: mov     ecx, [ecx+0Ch]
 0x6FC539: mov     [eax+0Ch], ecx
 0x6FC53C: fld     dword ptr ds:0A3D65Ch
-0x6FC542: mov     eax, dword ptr [esp+0F0h+var_B8+4]
+0x6FC542: mov     eax, [esp+0F0h+vertices+4]
 0x6FC546: fstp    [esp+0F0h+var_8C]
 0x6FC54A: mov     edx, [esp+0F0h+var_8C]
 0x6FC54E: mov     [eax+edi*8], edx
@@ -386,7 +385,7 @@
 0x6FC571: add     edi, 1
 0x6FC574: test    eax, eax
 0x6FC576: fstp    [esp+0F0h+var_D4]
-0x6FC57A: mov     dword ptr [esp+0F0h+var_D0], eax
+0x6FC57A: mov     [esp+0F0h+colors], eax
 0x6FC57E: fstp    [esp+0F0h+var_A4]
 0x6FC582: fld     [esp+0F0h+var_6C]
 0x6FC589: fst     [esp+0F0h+var_C8]
@@ -402,7 +401,7 @@
 0x6FC5B0: call    __CIcos
 0x6FC5B5: fstp    [esp+0F0h+var_DC]
 0x6FC5B9: fld     [esp+0F0h+var_DC]
-0x6FC5BD: mov     edx, dword ptr [esp+0F0h+var_B8+4]
+0x6FC5BD: mov     edx, [esp+0F0h+vertices+4]
 0x6FC5C1: fstp    [esp+0F0h+var_DC]
 0x6FC5C5: lea     eax, [edx+edi*8]
 0x6FC5C8: fld     [esp+0F0h+var_DC]
@@ -411,20 +410,19 @@
 0x6FC5D7: mov     eax, edi
 0x6FC5D9: fmul    st, st(1)
 0x6FC5DB: shl     eax, 4
-0x6FC5DE: add     eax, dword ptr [esp+0F0h+var_D0+4]
+0x6FC5DE: add     eax, [esp+0F0h+colors+4]
 0x6FC5E2: lea     ecx, [edi+edi*2]
 0x6FC5E5: fstp    [esp+0F0h+var_78]
 0x6FC5E9: lea     ebx, [ebx+ecx*4]
 0x6FC5EC: fstp    [esp+0F0h+var_58]
 0x6FC5F3: fld     [esp+0F0h+var_D8]
 0x6FC5F7: mov     [esp+0F0h+var_D8], eax
-0x6FC5FB: mov     eax, dword ptr [esp+0F0h+var_B8]
+0x6FC5FB: mov     eax, [esp+0F0h+vertices]
 0x6FC5FF: fstp    dword ptr [esp+0F0h+var_98+4]
 0x6FC603: sub     eax, [esp+0F0h+var_A8]
 0x6FC607: mov     [esp+0F0h+var_D4], eax
 0x6FC60B: jmp     short loc_6FC610
-0x6FC60D: align 10h
-0x6FC610: mov     eax, dword ptr [esp+0F0h+var_D0]
+0x6FC610: mov     eax, [esp+0F0h+colors]
 0x6FC614: cmp     eax, [esp+0F0h+arg_4]
 0x6FC61B: jnz     short loc_6FC621
 0x6FC61D: fldz
@@ -504,7 +502,7 @@
 0x6FC734: add     eax, 8
 0x6FC737: fstp    [esp+0F0h+var_A4]
 0x6FC73B: mov     [esp+0F0h+var_BC], eax
-0x6FC73F: mov     eax, dword ptr [esp+0F0h+var_D0]
+0x6FC73F: mov     eax, [esp+0F0h+colors]
 0x6FC743: add     ecx, 10h
 0x6FC746: add     edi, 1
 0x6FC749: add     ebx, 0Ch
@@ -521,7 +519,7 @@
 0x6FC774: add     eax, 0FFFFFFFFh
 0x6FC777: mov     [ebp+esi*2+0], ax
 0x6FC77C: add     esi, 1
-0x6FC77F: sub     dword ptr [esp+0F0h+var_D0], 1
+0x6FC77F: sub     [esp+0F0h+colors], 1
 0x6FC784: jnz     loc_6FC610
 0x6FC78A: mov     ebx, [esp+0F0h+var_A8]
 0x6FC78E: mov     eax, dword ptr [esp+0F0h+var_B0]
@@ -535,7 +533,7 @@
 0x6FC7AD: push    0C0h ; 'À'; Size
 0x6FC7B2: add     esi, 1
 0x6FC7B5: call    FormHeapAlloc
-0x6FC7BA: mov     ecx, eax
+0x6FC7BA: mov     ecx, eax; this
 0x6FC7BC: add     esp, 4
 0x6FC7BF: mov     [esp+0F0h+var_8C], ecx
 0x6FC7C3: test    ecx, ecx
@@ -543,22 +541,22 @@
 0x6FC7D0: jz      short loc_6FC800
 0x6FC7D2: mov     eax, 55555556h
 0x6FC7D7: imul    esi
-0x6FC7D9: push    ebp
+0x6FC7D9: push    ebp; triangleIndices
 0x6FC7DA: mov     eax, edx
 0x6FC7DC: shr     eax, 1Fh
 0x6FC7DF: add     eax, edx
-0x6FC7E1: mov     edx, dword ptr [esp+0F4h+var_B8+4]
-0x6FC7E5: push    eax
-0x6FC7E6: mov     eax, dword ptr [esp+0F8h+var_D0+4]
-0x6FC7EA: push    0
-0x6FC7EC: push    1
-0x6FC7EE: push    edx
-0x6FC7EF: mov     edx, dword ptr [esp+104h+var_B8]
-0x6FC7F3: push    eax
-0x6FC7F4: push    ebx
-0x6FC7F5: push    edx
-0x6FC7F6: push    edi
-0x6FC7F7: call    sub_7174B0
+0x6FC7E1: mov     edx, [esp+0F4h+vertices+4]
+0x6FC7E5: push    eax; triangleCount
+0x6FC7E6: mov     eax, [esp+0F8h+colors+4]
+0x6FC7EA: push    0; dataFlags
+0x6FC7EC: push    1; hasVertexColors
+0x6FC7EE: push    edx; textureCoordinates
+0x6FC7EF: mov     edx, [esp+104h+vertices]
+0x6FC7F3: push    eax; colors
+0x6FC7F4: push    ebx; normals
+0x6FC7F5: push    edx; vertices
+0x6FC7F6: push    edi; vertexCount
+0x6FC7F7: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x6FC7FC: mov     esi, eax
 0x6FC7FE: jmp     short loc_6FC802
 0x6FC800: xor     esi, esi
@@ -630,12 +628,12 @@
 0x6FC8D0: fst     dword ptr [ecx-0Ch]
 0x6FC8D3: jns     short loc_6FC8C1
 0x6FC8D5: fstp    st
-0x6FC8D7: mov     dword ptr [esp+0F0h+var_D0+4], eax
+0x6FC8D7: mov     [esp+0F0h+colors+4], eax
 0x6FC8DB: jmp     short loc_6FC8ED
 0x6FC8DD: xor     eax, eax
-0x6FC8DF: mov     dword ptr [esp+0F0h+var_D0+4], eax
+0x6FC8DF: mov     [esp+0F0h+colors+4], eax
 0x6FC8E3: jmp     short loc_6FC8ED
-0x6FC8E5: mov     dword ptr [esp+0F0h+var_D0+4], 0
+0x6FC8E5: mov     [esp+0F0h+colors+4], 0
 0x6FC8ED: xor     ecx, ecx
 0x6FC8EF: mov     eax, esi
 0x6FC8F1: mov     edx, 8
@@ -669,9 +667,9 @@
 0x6FC945: add     esp, 0Ch
 0x6FC948: cmp     edi, esi
 0x6FC94A: mov     [esp+0F0h+var_BC], eax
-0x6FC94E: mov     dword ptr [esp+0F0h+var_B8+4], esi
+0x6FC94E: mov     [esp+0F0h+vertices+4], esi
 0x6FC952: jbe     loc_6FCD1A
-0x6FC958: mov     eax, dword ptr [esp+0F0h+var_B8+4]
+0x6FC958: mov     eax, [esp+0F0h+vertices+4]
 0x6FC95C: fld     [esp+0F0h+var_64]
 0x6FC963: add     eax, 1
 0x6FC966: fst     [esp+0F0h+var_B0]
@@ -682,7 +680,7 @@
 0x6FC978: jge     short loc_6FC980
 0x6FC97A: fadd    dword ptr ds:0A2FC78h
 0x6FC980: fmulp   st(1), st
-0x6FC982: mov     dword ptr [esp+0F0h+var_B8], 0
+0x6FC982: mov     [esp+0F0h+vertices], 0
 0x6FC98A: fstp    [esp+0F0h+var_D4]
 0x6FC98E: fldz
 0x6FC990: fstp    [esp+0F0h+var_A4]
@@ -719,7 +717,7 @@
 0x6FCA19: lea     edi, [esi+esi*2]
 0x6FCA1C: shl     eax, 4
 0x6FCA1F: fstp    dword ptr [esp+0F0h+var_A0]
-0x6FCA23: add     eax, dword ptr [esp+0F0h+var_D0+4]
+0x6FCA23: add     eax, [esp+0F0h+colors+4]
 0x6FCA27: fld     dword ptr [esp+0F0h+var_A0]
 0x6FCA2B: add     edi, edi
 0x6FCA2D: fstp    [esp+0F0h+var_7C]
@@ -728,7 +726,7 @@
 0x6FCA36: mov     [esp+0F0h+var_D8], eax
 0x6FCA3A: add     edi, edx
 0x6FCA3C: lea     esp, [esp+0]
-0x6FCA40: mov     eax, dword ptr [esp+0F0h+var_B8]
+0x6FCA40: mov     eax, [esp+0F0h+vertices]
 0x6FCA44: cmp     eax, [esp+0F0h+arg_4]
 0x6FCA4B: jnz     short loc_6FCA51
 0x6FCA4D: fldz
@@ -758,7 +756,7 @@
 0x6FCAAA: fmul    dword ptr [esp+0F0h+var_B0]
 0x6FCAAE: fstp    [esp+0F0h+var_A8]
 0x6FCAB2: fld     [esp+0F0h+var_1C]
-0x6FCAB9: fstp    dword ptr [esp+0F0h+var_D0]
+0x6FCAB9: fstp    [esp+0F0h+colors]
 0x6FCABD: fld     [esp+0F0h+var_D4]
 0x6FCAC1: fld     st
 0x6FCAC3: fld     [esp+0F0h+arg_0]
@@ -773,7 +771,7 @@
 0x6FCAE6: fmul    st, st(2)
 0x6FCAE8: fstp    [esp+0F0h+var_3C]
 0x6FCAEF: mov     ecx, [esp+0F0h+var_3C]
-0x6FCAF6: fld     dword ptr [esp+0F0h+var_D0]
+0x6FCAF6: fld     [esp+0F0h+colors]
 0x6FCAFA: mov     [edi+4], ecx
 0x6FCAFD: fld     st
 0x6FCAFF: fmul    st, st(3)
@@ -833,7 +831,7 @@
 0x6FCBD0: fxch    st(2)
 0x6FCBD2: fstp    [esp+0F0h+var_A8]
 0x6FCBD6: fld     dword ptr [esp+0F0h+var_98]
-0x6FCBDA: fstp    dword ptr [esp+0F0h+var_D0]
+0x6FCBDA: fstp    [esp+0F0h+colors]
 0x6FCBDE: fld     [esp+0F0h+var_D4]
 0x6FCBE2: fld     st
 0x6FCBE4: fmul    st, st(2)
@@ -845,7 +843,7 @@
 0x6FCBFC: fmul    st, st(3)
 0x6FCBFE: fstp    [esp+0F0h+var_24]
 0x6FCC05: mov     edx, [esp+0F0h+var_24]
-0x6FCC0C: fld     dword ptr [esp+0F0h+var_D0]
+0x6FCC0C: fld     [esp+0F0h+colors]
 0x6FCC10: mov     [edi+4], edx
 0x6FCC13: fld     st
 0x6FCC15: fmulp   st(4), st
@@ -881,7 +879,7 @@
 0x6FCC8F: mov     edx, [esp+0F0h+var_BC]
 0x6FCC93: fstp    [esp+0F0h+var_A4]
 0x6FCC97: mov     [esp+0F0h+var_D8], eax
-0x6FCC9B: mov     eax, dword ptr [esp+0F0h+var_B8]
+0x6FCC9B: mov     eax, [esp+0F0h+vertices]
 0x6FCC9F: mov     [ebp+4], ecx
 0x6FCCA2: add     eax, 1
 0x6FCCA5: mov     [edx+esi*2], si
@@ -890,11 +888,11 @@
 0x6FCCAF: add     ebx, 0Ch
 0x6FCCB2: add     ebp, 8
 0x6FCCB5: cmp     eax, [esp+0F0h+arg_4]
-0x6FCCBC: mov     dword ptr [esp+0F0h+var_B8], eax
+0x6FCCBC: mov     [esp+0F0h+vertices], eax
 0x6FCCC0: jbe     loc_6FCA40
 0x6FCCC6: mov     eax, [esp+0F0h+arg_4]
 0x6FCCCD: fld     [esp+0F0h+var_6C]
-0x6FCCD4: mov     edx, dword ptr [esp+0F0h+var_B8+4]
+0x6FCCD4: mov     edx, [esp+0F0h+vertices+4]
 0x6FCCD8: fstp    [esp+0F0h+var_C8]
 0x6FCCDC: mov     ecx, [esp+0F0h+var_48]
 0x6FCCE3: fld     dword ptr [esp+0F0h+var_A0]
@@ -903,7 +901,7 @@
 0x6FCCEF: mov     [ecx+edx*2], ax
 0x6FCCF3: mov     eax, [esp+0F0h+var_8C]
 0x6FCCF7: cmp     eax, [esp+0F0h+var_4C]
-0x6FCCFE: mov     dword ptr [esp+0F0h+var_B8+4], eax
+0x6FCCFE: mov     [esp+0F0h+vertices+4], eax
 0x6FCD02: jb      loc_6FC958
 0x6FCD08: mov     edi, [esp+0F0h+var_4C]
 0x6FCD0F: mov     ebx, [esp+0F0h+var_74]
@@ -921,7 +919,7 @@
 0x6FCD48: push    ecx
 0x6FCD49: mov     ecx, [esp+0F4h+var_44]
 0x6FCD50: push    edx
-0x6FCD51: mov     edx, dword ptr [esp+0F8h+var_D0+4]
+0x6FCD51: mov     edx, [esp+0F8h+colors+4]
 0x6FCD55: push    edi
 0x6FCD56: add     ebp, ebp
 0x6FCD58: push    ebp
@@ -960,3 +958,30 @@
 0x6FCDB4: pop     ebx
 0x6FCDB5: add     esp, 0DCh
 0x6FCDBB: retn
+0x9C91A0: mov     eax, [ebp-8Ch]
+0x9C91A6: push    eax
+0x9C91A7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C91AC: pop     ecx
+0x9C91AD: retn
+0x9C91AE: mov     eax, [ebp-8Ch]
+0x9C91B4: push    eax
+0x9C91B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C91BA: pop     ecx
+0x9C91BB: retn
+0x9C91BC: mov     eax, [ebp-8Ch]
+0x9C91C2: push    eax
+0x9C91C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C91C8: pop     ecx
+0x9C91C9: retn
+0x9C91CA: mov     eax, [ebp-8Ch]
+0x9C91D0: push    eax
+0x9C91D1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C91D6: pop     ecx
+0x9C91D7: retn
+0x9C91D8: mov     edx, [esp+arg_4]
+0x9C91DC: lea     eax, [edx-0E0h]
+0x9C91E2: mov     ecx, [edx-0E4h]
+0x9C91E8: xor     ecx, eax
+0x9C91EA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C91EF: mov     eax, offset stru_AF1AF0
+0x9C91F4: jmp     ___CxxFrameHandler3

@@ -8,7 +8,7 @@
 0x6D4B3D: mov     ecx, [esi+34h]
 0x6D4B40: mov     edx, ds:0B3D2C8h[ecx*4]
 0x6D4B47: push    eax
-0x6D4B48: call    edx ; dword_B3D2C8
+0x6D4B48: call    edx ; unk_B3D2C8
 0x6D4B4A: add     esp, 4
 0x6D4B4D: mov     ecx, [esp+8+arg_0]
 0x6D4B51: cmp     ecx, ebx

@@ -1,19 +1,36 @@
 {
-  "callees_count": 82,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 35,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
-  "display_name": "BSTreeNode::BSTreeNode(void)",
+  "chunks": [
+    [
+      "0x5640E0",
+      "0x564594"
+    ],
+    [
+      "0x9BD480",
+      "0x9BD501"
+    ]
+  ],
+  "chunks_sha256": "547f19a7de04cc1f953f9997027b347bd4f49594f86bfd7bd21f95d6582ba5d9",
+  "comment_regular": "Verified 0xF0-byte BSTreeNode layout: NiNode base +0x00..+0xDB; model +0xDC; branch/leaf LOD arrays +0xE0/+0xE4; billboardGeometry +0xE8; +0xEC float Unknown. Constructor creates child slot 2 as a separate NiBillboardNode named Billboard; the +0xE8 field stores the NiTriBasedGeom added under that parent.",
+  "comment_repeatable": "Verified 0xF0-byte BSTreeNode layout: NiNode base +0x00..+0xDB; model +0xDC; branch/leaf LOD arrays +0xE0/+0xE4; billboardGeometry +0xE8; +0xEC float Unknown. Constructor creates child slot 2 as a separate NiBillboardNode named Billboard; the +0xE8 field stores the NiTriBasedGeom added under that parent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "BSTreeNode_ctor",
   "end_ea": "0x564594",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0BSTreeNode@@QAE@XZ",
+  "name": "BSTreeNode_ctor",
   "segment": ".text",
   "sha256": "f1257c4727f7de2ac94e4ce4c52c724ef55f74c0ced5c44ef0caa8cc213b1533",
   "size": 1204,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5640E0",
-  "type": "BSTreeNode *__thiscall(BSTreeNode *this, NiNode *, int)",
-  "xrefs_from_count": 485,
+  "total_chunk_size": 1333,
+  "type": "BSTreeNode_OblivionLayout_0F0 *__thiscall(BSTreeNode_OblivionLayout_0F0 *this, BSTreeModel_OblivionLayout_058 *model, bhkRefObject *collisionShape)",
+  "xrefs_from_count": 532,
   "xrefs_to_count": 1
 }

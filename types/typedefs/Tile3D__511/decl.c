@@ -1,1 +1,1 @@
-Tile3D
+struct Tile3D;

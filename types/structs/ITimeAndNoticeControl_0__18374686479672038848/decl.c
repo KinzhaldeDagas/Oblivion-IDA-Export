@@ -1,1 +1,1 @@
-ITimeAndNoticeControl_0
+typedef ITimeAndNoticeControl ITimeAndNoticeControl_0;

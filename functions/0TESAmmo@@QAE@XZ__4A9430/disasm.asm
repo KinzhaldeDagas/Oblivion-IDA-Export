@@ -68,3 +68,30 @@
 0x4A9535: pop     ebx
 0x4A9536: add     esp, 10h
 0x4A9539: retn
+0x9B2AD0: mov     ecx, [ebp-10h]
+0x9B2AD3: jmp     TESObject_destr
+0x9B2AD8: mov     ecx, [ebp-10h]
+0x9B2ADB: add     ecx, 24h ; '$'
+0x9B2ADE: jmp     TESFullName_Initialize
+0x9B2AE3: mov     ecx, [ebp-10h]
+0x9B2AE6: add     ecx, 30h ; '0'; this
+0x9B2AE9: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B2AEE: mov     ecx, [ebp-10h]
+0x9B2AF1: add     ecx, 48h ; 'H'; void *
+0x9B2AF4: jmp     j_TESTexture_destr
+0x9B2AF9: mov     ecx, [ebp-10h]
+0x9B2AFC: add     ecx, 64h ; 'd'
+0x9B2AFF: jmp     TESValueForm_destr
+0x9B2B04: mov     ecx, [ebp-10h]
+0x9B2B07: add     ecx, 6Ch ; 'l'
+0x9B2B0A: jmp     TESWeightForm_destr
+0x9B2B0F: mov     ecx, [ebp-10h]
+0x9B2B12: add     ecx, 74h ; 't'
+0x9B2B15: jmp     TESAttackDamageForm_destr
+0x9B2B1A: mov     edx, [esp+arg_4]
+0x9B2B1E: lea     eax, [edx-14h]
+0x9B2B21: mov     ecx, [edx-18h]
+0x9B2B24: xor     ecx, eax
+0x9B2B26: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2B2B: mov     eax, offset stru_ADE98C
+0x9B2B30: jmp     ___CxxFrameHandler3

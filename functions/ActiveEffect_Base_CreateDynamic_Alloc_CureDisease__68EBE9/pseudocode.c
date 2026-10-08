@@ -1,3 +1,4 @@
+// Verified allocation path for CUDI: creates the shared CureEffect class and calls CureEffect_constr_MagicType with subtype value 2.
 int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CureDisease(
         int a1,
         int a2,
@@ -23,13 +24,15 @@ int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CureDisease(
         int a22,
         int a23,
         int a24,
-        int a25)
+        int a25,
+        int a26)
 {
-  int v26; // [esp+64h] [ebp+64h]
+  ActiveEffect *v26; // eax
 
-  v26 = FormHeapAlloc(0x40u);
-  if ( v26 )
-    return ActiveEffect_Base_CreateDynamic_::Constr_CurePD(
+  v26 = (ActiveEffect *)FormHeapAlloc(0x40u); /*0x68ebeb*/
+  if ( v26 ) /*0x68ec01*/
+    return ActiveEffect_Base_CreateDynamic_::Constr_CurePD( /*0x68ec08*/
+             v26,
              a1,
              a2,
              a3,
@@ -54,9 +57,10 @@ int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CureDisease(
              a22,
              a23,
              a24,
-             v26);
+             (int)v26,
+             a26);
   else
-    return ActiveEffect_Base_CreateDynamic_::Return_0(
+    return ActiveEffect_Base_CreateDynamic_::Return_0( /*0x68ec01*/
              a1,
              a2,
              a3,
@@ -81,5 +85,6 @@ int __cdecl ActiveEffect_Base_CreateDynamic_::Alloc_CureDisease(
              a22,
              a23,
              a24,
-             0);
+             0,
+             a26);
 }

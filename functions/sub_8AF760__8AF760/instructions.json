@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AF760",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: quicksort over 0x30-byte contact entries using float at entry+0x1C as the sort key.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x8AF76A",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+entries]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x8AF76F",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+left]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8AF772",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+right]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x8AF796",
-    "line": "lea     ecx, [ecx+ebx+1Ch]",
+    "line": "lea     ecx, [ecx+ebx+1Ch]; TES4 authoritative: 0x30-byte contact entries are sorted by float at entry+0x1C, used as hit distance/fraction ordering.",
     "mnemonic": "lea",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x8AF83B",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+entries]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x8AF84F",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+left]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -535,37 +535,37 @@
   },
   {
     "ea": "0x8AF86A",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+flags]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8AF86D",
-    "line": "push    ecx",
+    "line": "push    ecx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AF86E",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AF86F",
-    "line": "push    edi",
+    "line": "push    edi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AF870",
-    "line": "push    ebx",
+    "line": "push    ebx; entries",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AF871",
-    "line": "call    sub_8AF760",
+    "line": "call    hkpCdPointEntry30_QuickSortByDistance; TES4 authoritative: quicksort over 0x30-byte contact entries using float at entry+0x1C as the sort key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x8AF879",
-    "line": "cmp     esi, [ebp+arg_8]",
+    "line": "cmp     esi, [ebp+right]",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x8AF880",
-    "line": "mov     [ebp+arg_4], edi",
+    "line": "mov     [ebp+left], edi",
     "mnemonic": "mov",
     "size": 3
   },

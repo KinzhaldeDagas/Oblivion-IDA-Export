@@ -1,1 +1,1 @@
-ICallFactory_0
+typedef ICallFactory ICallFactory_0;

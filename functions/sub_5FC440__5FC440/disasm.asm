@@ -39,7 +39,7 @@
 0x5FC4A1: retn    14h
 0x5FC4A4: push    edi
 0x5FC4A5: mov     ecx, esi; this
-0x5FC4A7: call    TESObjectREFR_GetParentCell
+0x5FC4A7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5FC4AC: mov     edi, eax
 0x5FC4AE: call    sub_4C9F60
 0x5FC4B3: test    al, al
@@ -55,7 +55,7 @@
 0x5FC4C9: call    sub_4D4790
 0x5FC4CE: test    eax, eax
 0x5FC4D0: jz      short loc_5FC4FF
-0x5FC4D2: mov     ecx, [esp+10h+arg_0]
+0x5FC4D2: mov     ecx, [esp+10h+form]
 0x5FC4D6: mov     edx, [esi]
 0x5FC4D8: mov     edx, [edx+100h]
 0x5FC4DE: push    0
@@ -77,17 +77,17 @@
 0x5FC4F9: xor     eax, eax
 0x5FC4FB: pop     ebx
 0x5FC4FC: retn    14h
-0x5FC4FF: test    ebp, ebp
-0x5FC501: mov     edi, [esp+10h+arg_0]
-0x5FC505: jz      short loc_5FC550
-0x5FC507: mov     ecx, ebp
-0x5FC509: call    ExtraDataList_GetOwner
+0x5FC4FF: test    ebp, ebp; DropItem null BaseExtraList gate. TEST EBP preserves ZF through the following MOV; vanilla short JZ at 0x5FC505 targets ownership work at 0x5FC550 even when EBP is null.
+0x5FC501: mov     edi, [esp+10h+form]
+0x5FC505: jz      short loc_5FC550; MEF v31 verified branch correction: encode JZ +0x14 to 0x5FC51B. With ZF=1 from TEST EBP, the existing long JZ at 0x5FC51B immediately transfers to normal removal path 0x5FC5B7, bypassing only null-list ownership work.
+0x5FC507: mov     ecx, ebp; this
+0x5FC509: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x5FC50E: test    eax, eax
 0x5FC510: jz      short loc_5FC537
-0x5FC512: mov     ecx, ebp
-0x5FC514: call    ExtraDataList_GetOwner
+0x5FC512: mov     ecx, ebp; this
+0x5FC514: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x5FC519: test    eax, eax
-0x5FC51B: jz      loc_5FC5B7
+0x5FC51B: jz      loc_5FC5B7; Existing long JZ target reused by DropItem null-extra-list correction; preserved ZF routes null EBP to 0x5FC5B7.
 0x5FC521: mov     eax, [esi]
 0x5FC523: mov     edx, [eax+198h]
 0x5FC529: push    0
@@ -105,19 +105,19 @@
 0x5FC549: mov     ecx, ebp
 0x5FC54B: call    ExtraDataList_RemoveOwner
 0x5FC550: mov     ecx, esi; this
-0x5FC552: call    TESObjectREFR_GetParentCell
+0x5FC552: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5FC557: test    eax, eax
 0x5FC559: jz      short loc_5FC5B7
 0x5FC55B: mov     ecx, esi; this
-0x5FC55D: call    TESObjectREFR_GetParentCell
-0x5FC562: mov     ecx, eax
-0x5FC564: call    TESObjectCELL_GetOwner
+0x5FC55D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x5FC562: mov     ecx, eax; cell
+0x5FC564: call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.
 0x5FC569: test    eax, eax
 0x5FC56B: jz      short loc_5FC5B7
-0x5FC56D: push    edi
-0x5FC56E: call    sub_470520
-0x5FC573: mov     [esp+14h+arg_0], eax
-0x5FC577: fild    [esp+14h+arg_0]
+0x5FC56D: push    edi; form
+0x5FC56E: call    TESForm_GetValue
+0x5FC573: mov     [esp+14h+form], eax
+0x5FC577: fild    [esp+14h+form]
 0x5FC57B: add     esp, 4
 0x5FC57E: fld     dword ptr ds:0B373C8h
 0x5FC584: fcompp
@@ -135,9 +135,9 @@
 0x5FC5A5: mov     eax, [ecx]
 0x5FC5A7: mov     edx, [eax+170h]
 0x5FC5AD: call    edx
-0x5FC5AF: push    eax
-0x5FC5B0: mov     ecx, ebp
-0x5FC5B2: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x5FC5AF: push    eax; owner
+0x5FC5B0: mov     ecx, ebp; this
+0x5FC5B2: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x5FC5B7: mov     ecx, [esp+10h+arg_10]
 0x5FC5BB: mov     edx, [esp+10h+arg_C]
 0x5FC5BF: mov     eax, [esi]
@@ -203,11 +203,11 @@
 0x5FC65A: push    1
 0x5FC65C: push    eax
 0x5FC65D: mov     ecx, esi
-0x5FC65F: call    Actor_EquipItem
+0x5FC65F: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5FC664: mov     ecx, edi
 0x5FC666: call    ContainerEntryExtraData_DestroyDataTable
 0x5FC66B: push    edi
-0x5FC66C: call    FormHeapFree
+0x5FC66C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FC671: add     esp, 4
 0x5FC674: test    ebx, ebx
 0x5FC676: jz      short loc_5FC6B9

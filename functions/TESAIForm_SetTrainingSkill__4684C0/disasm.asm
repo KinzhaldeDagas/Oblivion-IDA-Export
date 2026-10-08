@@ -1,4 +1,4 @@
-0x4684C0: mov     eax, [esp+arg_0]
+0x4684C0: mov     eax, [esp+actorValue]; Accept only SkillActorValue 0x0C..0x20 and store its zero-based 0..20 index in TESAIForm+0x0C.
 0x4684C4: lea     edx, [eax-0Ch]
 0x4684C7: cmp     edx, 14h
 0x4684CA: ja      short locret_4684D1

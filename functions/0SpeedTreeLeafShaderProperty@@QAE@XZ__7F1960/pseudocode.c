@@ -1,30 +1,34 @@
-SpeedTreeLeafShaderProperty *__thiscall SpeedTreeLeafShaderProperty::SpeedTreeLeafShaderProperty(
-        SpeedTreeLeafShaderProperty *this,
-        __int16 a2,
-        int a3,
-        int a4)
+//
+//
+// [2026-10-02 Fallout comparative pass]
+// Verified 0xB0-byte leaf property layout: base constructor receives STSPData; retains STLSPData at +0xA8 and stores unsigned leaf LOD at +0xAC. Fallout constructor 0x828CDD50 corroborates parameter roles; platform-specific property offsets and calling convention remain Oblivion-derived.
+OB_SpeedTreeLeafShaderProperty_010201A0 *__thiscall SpeedTreeLeafShaderProperty::SpeedTreeLeafShaderProperty(
+        OB_SpeedTreeLeafShaderProperty_010201A0 *this,
+        unsigned __int16 leafLodIndex,
+        OB_STSPData_010201A0 *stspData,
+        OB_STLSPData_010201A0 *stlspData)
 {
-  int v5; // edi
+  OB_STLSPData_010201A0 *v5; // edi
 
-  SpeedTreeShaderLightingProperty::SpeedTreeShaderLightingProperty(this, a3);
-  *(_DWORD *)this = &SpeedTreeLeafShaderProperty::`vftable';
-  *((_DWORD *)this + 0x2A) = 0;
-  v5 = *((_DWORD *)this + 0x2A);
-  if ( v5 == a4 )
+  OB_SpeedTreeShaderLightingProperty_ctorWithSTSP_010201A0((SpeedTreeShaderLightingProperty *)this, (int)stspData); /*0x7f198f*/
+  *(_DWORD *)this->gap0 = &SpeedTreeLeafShaderProperty::`vftable'; /*0x7f1994*/
+  this->stlspData = 0; /*0x7f19a2*/
+  v5 = this->stlspData; /*0x7f19ac*/
+  if ( v5 == stlspData ) /*0x7f19bd*/
   {
-    *((_WORD *)this + 0x56) = a2;
+    this->leafLodIndex = leafLodIndex; /*0x7f1a14*/
   }
   else
   {
-    if ( v5 )
+    if ( v5 ) /*0x7f19c1*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-        (**(void (__thiscall ***)(int, int))v5)(v5, 1);
+      if ( !InterlockedDecrement(&v5->refCount) ) /*0x7f19c7*/
+        (*(void (__thiscall **)(OB_STLSPData_010201A0 *, int))v5->vtbl)(v5, 1); /*0x7f19dd*/
     }
-    *((_DWORD *)this + 0x2A) = a4;
-    if ( a4 )
-      InterlockedIncrement((volatile LONG *)(a4 + 4));
-    *((_WORD *)this + 0x56) = a2;
+    this->stlspData = stlspData; /*0x7f19e1*/
+    if ( stlspData ) /*0x7f19e7*/
+      InterlockedIncrement(&stlspData->refCount); /*0x7f19ed*/
+    this->leafLodIndex = leafLodIndex; /*0x7f19f8*/
   }
-  return this;
+  return this; /*0x7f1a1d*/
 }

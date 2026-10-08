@@ -38,3 +38,14 @@
 0x532366: pop     esi
 0x532367: add     esp, 10h
 0x53236A: retn
+0x890230: mov     dword ptr [ecx], offset ??_7hkCdPointCollector@@6B@; const hkCdPointCollector::`vftable'
+0x890236: retn
+0x9B8D70: mov     ecx, [ebp-10h]
+0x9B8D73: jmp     loc_890230
+0x9B8D78: mov     edx, [esp+arg_4]
+0x9B8D7C: lea     eax, [edx-8]
+0x9B8D7F: mov     ecx, [edx-0Ch]
+0x9B8D82: xor     ecx, eax
+0x9B8D84: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8D89: mov     eax, offset stru_AE31C4
+0x9B8D8E: jmp     ___CxxFrameHandler3

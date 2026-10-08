@@ -1,8 +1,8 @@
-0x7956B0: push    ebp
+0x7956B0: push    ebp; OBLIVION AUTHORITY (2026-08-30): Fill constructor for vector<unsigned int>; used by CIndexedGeometry::CombineStrips to create per-LOD triangle totals initialized to zero.
 0x7956B1: push    esi
 0x7956B2: xor     ebp, ebp
 0x7956B4: push    edi
-0x7956B5: mov     edi, [esp+0Ch+arg_0]
+0x7956B5: mov     edi, [esp+0Ch+count]
 0x7956B9: cmp     edi, ebp
 0x7956BB: mov     esi, ecx
 0x7956BD: mov     [esi+4], ebp
@@ -11,7 +11,7 @@
 0x7956C6: jz      short loc_795714
 0x7956C8: cmp     edi, 0FFFFFFFFh
 0x7956CB: jbe     short loc_7956D2
-0x7956CD: call    sub_790B90
+0x7956CD: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x7956D2: push    ebx
 0x7956D3: lea     ebx, ds:0[edi*4]
 0x7956DA: push    ebx; Size
@@ -25,9 +25,8 @@
 0x7956F1: mov     ecx, edi
 0x7956F3: mov     edx, eax
 0x7956F5: jbe     short loc_79570E
-0x7956F7: mov     edi, [esp+10h+arg_4]
+0x7956F7: mov     edi, [esp+10h+value]
 0x7956FB: jmp     short loc_795700
-0x7956FD: align 10h
 0x795700: mov     ebp, [edi]
 0x795702: mov     [edx], ebp
 0x795704: sub     ecx, 1

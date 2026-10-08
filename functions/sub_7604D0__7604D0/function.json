@@ -1,18 +1,31 @@
 {
-  "callees_count": 22,
-  "callers_count": 442,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 795,
+  "chunks": [
+    [
+      "0x7604D0",
+      "0x7605FD"
+    ]
+  ],
+  "chunks_sha256": "3724f1144ae448879c3049924aa4507dcb7b197cc70bd28dd9b9e052b1b55234",
+  "comment_regular": "Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
+  "comment_repeatable": "Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.\nComparative queue audit 2026-10-01: verified body releases pixel map/program, vertex map/program, render-state group, six strings and texture stages, resets counters, then returns renderer-owned pass to pool; otherwise virtual destruction. Fallout827B68C0 has the same broad cleanup family but platform-specific layout/allocation calls. It is not a trivial free-list pointer update and must not execute inside a private DX11 metadata gate.\nDX11 restricted replacement lifetime audit 2026-10-01: pass+5D selects renderer-owned pool cleanup. Zero-reference release is not permitted inside a DX11 metadata gate. Pool pointer is the DWORD at B42044 (verified native operand), not the decompiler MEMORY B3F9B0 array expression. Resource cleanup and pool mutation require their own exclusion. A nonretiring external pin decrement may only proceed while count+60 is greater than one.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_7604D0",
+  "display_name": "NiD3DPass_ReleaseToPool",
   "end_ea": "0x7605FD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7604D0",
+  "name": "NiD3DPass_ReleaseToPool",
   "segment": ".text",
   "sha256": "3724f1144ae448879c3049924aa4507dcb7b197cc70bd28dd9b9e052b1b55234",
   "size": 301,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7604D0",
+  "total_chunk_size": 301,
   "type": "void __thiscall(NiD3DPass *this)",
   "xrefs_from_count": 152,
   "xrefs_to_count": 796

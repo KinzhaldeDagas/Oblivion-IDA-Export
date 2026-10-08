@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x56C180",
+      "0x56C1CC"
+    ]
+  ],
   "chunks_sha256": "eb72935fb1a3331303b2ceb1c8e25b9412c8136b72e5e57ad4c494aee666eabc",
   "comment_regular": "[Verified] Requires DECAL_DATA at +0x18. Resolves/casts targetReferenceFormID_3C to TESObjectREFR: a resolved reference must have loaded 3D; an unresolved reference is accepted only when the stored FormID is zero. This zero/unresolved success path is absent from geometry-decal IsSaveable at 0x56D480.",
   "comment_repeatable": "[Verified] Requires DECAL_DATA at +0x18. Resolves/casts targetReferenceFormID_3C to TESObjectREFR: a resolved reference must have loaded 3D; an unresolved reference is accepted only when the stored FormID is zero. This zero/unresolved success path is absent from geometry-decal IsSaveable at 0x56D480.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "BSTempEffectDecal_IsSaveable",
   "end_ea": "0x56C1CC",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "eb72935fb1a3331303b2ceb1c8e25b9412c8136b72e5e57ad4c494aee666eabc",
   "size": 76,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x56C180",
   "total_chunk_size": 76,
   "type": "bool __thiscall(BSTempEffectDecalLayout_t *this)",

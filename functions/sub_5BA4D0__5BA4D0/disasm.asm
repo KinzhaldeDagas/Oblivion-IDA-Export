@@ -21,9 +21,9 @@
 0x5BA50A: jz      loc_5BAC94
 0x5BA510: mov     ecx, esi
 0x5BA512: call    Tile_GetParentMenu
-0x5BA517: mov     ecx, esi
+0x5BA517: mov     ecx, esi; this
 0x5BA519: mov     edi, eax
-0x5BA51B: call    sub_5893B0
+0x5BA51B: call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.
 0x5BA520: test    al, al
 0x5BA522: jnz     short loc_5BA535
 0x5BA524: mov     eax, [edi+24h]
@@ -35,21 +35,21 @@
 0x5BA536: mov     ecx, edi
 0x5BA538: call    sub_5B8FC0
 0x5BA53D: mov     ecx, ds:0B333C4h; this
-0x5BA543: call    TESObjectREFR_GetParentCell
+0x5BA543: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5BA548: test    eax, eax
 0x5BA54A: jz      loc_5BAC94
 0x5BA550: mov     ecx, [edi+58h]; this
 0x5BA553: fld1
 0x5BA555: push    ecx
-0x5BA556: fstp    [esp+88h+var_88]; a3
-0x5BA559: push    0FA1h; a2
-0x5BA55E: call    Tile_SetFloat
+0x5BA556: fstp    [esp+88h+var_88]; value
+0x5BA559: push    0FA1h; propertyCode
+0x5BA55E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BA563: fld     dword ptr ds:0A379B4h
 0x5BA569: mov     ecx, [edi+60h]; this
 0x5BA56C: push    ecx
-0x5BA56D: fstp    [esp+88h+var_88]; a3
-0x5BA570: push    0FA1h; a2
-0x5BA575: call    Tile_SetFloat
+0x5BA56D: fstp    [esp+88h+var_88]; value
+0x5BA570: push    0FA1h; propertyCode
+0x5BA575: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BA57A: mov     ecx, edi
 0x5BA57C: call    sub_5B7550
 0x5BA581: fld1
@@ -57,15 +57,15 @@
 0x5BA585: jz      loc_5BAC83
 0x5BA58B: mov     ecx, [edi+64h]; this
 0x5BA58E: push    ecx
-0x5BA58F: fstp    [esp+88h+var_88]; a3
-0x5BA592: push    0FA1h; a2
-0x5BA597: call    Tile_SetFloat
+0x5BA58F: fstp    [esp+88h+var_88]; value
+0x5BA592: push    0FA1h; propertyCode
+0x5BA597: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BA59C: fld     dword ptr ds:0A379B4h
 0x5BA5A2: mov     ecx, [edi+64h]; this
 0x5BA5A5: push    ecx
-0x5BA5A6: fstp    [esp+88h+var_88]; a3
-0x5BA5A9: push    0FA1h; a2
-0x5BA5AE: call    Tile_SetFloat
+0x5BA5A6: fstp    [esp+88h+var_88]; value
+0x5BA5A9: push    0FA1h; propertyCode
+0x5BA5AE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BA5B3: mov     eax, [edi+68h]
 0x5BA5B6: mov     esi, [eax+34h]
 0x5BA5B9: cmp     esi, ebp
@@ -84,7 +84,7 @@
 0x5BA5D6: jnz     short loc_5BA5C0
 0x5BA5D8: mov     ecx, [edi+68h]
 0x5BA5DB: add     ecx, 30h ; '0'
-0x5BA5DE: call    NiTPointerList__FreeAllNodes
+0x5BA5DE: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x5BA5E3: mov     ecx, ds:0B333C4h; this
 0x5BA5E9: call    TESObjectREFR_GetWorldSpace
 0x5BA5EE: mov     ecx, ds:0B3F9A8h
@@ -100,7 +100,7 @@
 0x5BA612: lea     ecx, [esp+88h+var_54]
 0x5BA616: push    ecx
 0x5BA617: mov     ecx, ds:0B333C4h; this
-0x5BA61D: call    TESObjectREFR_GetParentCell
+0x5BA61D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5BA622: mov     ecx, ds:0B33A98h
 0x5BA628: push    eax
 0x5BA629: call    sub_44EE00
@@ -108,16 +108,16 @@
 0x5BA630: mov     ecx, [edi+0C4h]
 0x5BA636: cmp     ecx, ebp
 0x5BA638: jz      short loc_5BA64E
-0x5BA63A: call    BSSimpleList_Clear
+0x5BA63A: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5BA63F: mov     eax, [edi+0C4h]
 0x5BA645: push    eax
-0x5BA646: call    FormHeapFree
+0x5BA646: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BA64B: add     esp, 4
 0x5BA64E: cmp     esi, ebp
 0x5BA650: mov     [edi+0C4h], ebp
 0x5BA656: jz      short loc_5BA665
-0x5BA658: mov     ecx, esi
-0x5BA65A: call    sub_4F0620
+0x5BA658: mov     ecx, esi; worldspace
+0x5BA65A: call    TESWorldSpace_CollectPersistentCellReferences; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.
 0x5BA65F: mov     [edi+0C4h], eax
 0x5BA665: mov     ebx, [edi+0C4h]
 0x5BA66B: cmp     ebx, ebp
@@ -141,29 +141,29 @@
 0x5BA6AD: mov     ecx, esi
 0x5BA6AF: call    edx
 0x5BA6B1: mov     ecx, [eax]
-0x5BA6B3: mov     [esp+84h+var_70+4], ecx
+0x5BA6B3: mov     [esp+84h+var_70.y], ecx
 0x5BA6B7: mov     edx, [eax+4]
 0x5BA6BA: push    1; float
-0x5BA6BC: mov     [esp+88h+var_68], edx
+0x5BA6BC: mov     [esp+88h+var_70.z], edx
 0x5BA6C0: mov     eax, [eax+8]
 0x5BA6C3: lea     ecx, [esp+88h+var_3C]
 0x5BA6C7: push    ecx; int
 0x5BA6C8: mov     ecx, ds:0B333C4h; this
-0x5BA6CE: lea     edx, [esp+8Ch+var_70+4]
+0x5BA6CE: lea     edx, [esp+8Ch+var_70.y]
 0x5BA6D2: push    edx; int
 0x5BA6D3: mov     [esp+90h+var_64], eax
-0x5BA6D7: call    TESObjectREFR_GetParentCell
+0x5BA6D7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5BA6DC: mov     ecx, eax
 0x5BA6DE: call    sub_4CCE20
 0x5BA6E3: lea     eax, [esp+84h+var_3C]
 0x5BA6E7: push    eax
 0x5BA6E8: call    sub_4D2D00
-0x5BA6ED: mov     [esp+88h+var_70], eax
-0x5BA6F1: fild    [esp+88h+var_70]
+0x5BA6ED: mov     [esp+88h+var_70.x], eax
+0x5BA6F1: fild    [esp+88h+var_70.x]
 0x5BA6F5: add     esp, 4
 0x5BA6F8: fmul    qword ptr ds:0A3C770h
 0x5BA6FE: fmul    qword ptr ds:0A3DDD8h
-0x5BA704: call    Double_To_SInt32
+0x5BA704: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BA709: mov     ebp, eax
 0x5BA70B: test    ebp, ebp
 0x5BA70D: jle     short loc_5BA772
@@ -193,12 +193,12 @@
 0x5BA74C: call    sub_4D7730
 0x5BA751: mov     ecx, eax; this
 0x5BA753: call    TESModel_GetModelPath
-0x5BA758: fld     [esp+0A4h+var_68]
+0x5BA758: fld     [esp+0A4h+var_70.z]
 0x5BA75C: push    eax; int
 0x5BA75D: sub     esp, 8
 0x5BA760: fstp    [esp+0B0h+var_AC]; float
 0x5BA764: mov     ecx, edi
-0x5BA766: fld     [esp+0B0h+var_70+4]
+0x5BA766: fld     [esp+0B0h+var_70.y]
 0x5BA76A: fstp    [esp+0B0h+var_B0]; float
 0x5BA76D: call    sub_5B87D0
 0x5BA772: xor     ebp, ebp
@@ -242,34 +242,34 @@
 0x5BA7FC: mov     ecx, esi
 0x5BA7FE: call    eax
 0x5BA800: mov     ecx, [eax]
-0x5BA802: mov     [esp+84h+var_70+4], ecx
+0x5BA802: mov     [esp+84h+var_70.y], ecx
 0x5BA806: mov     edx, [eax+4]
 0x5BA809: push    1; float
-0x5BA80B: mov     [esp+88h+var_68], edx
+0x5BA80B: mov     [esp+88h+var_70.z], edx
 0x5BA80F: mov     eax, [eax+8]
 0x5BA812: lea     ecx, [esp+88h+var_3C]
 0x5BA816: push    ecx; int
 0x5BA817: mov     ecx, ds:0B333C4h; this
-0x5BA81D: lea     edx, [esp+8Ch+var_70+4]
+0x5BA81D: lea     edx, [esp+8Ch+var_70.y]
 0x5BA821: push    edx; int
 0x5BA822: mov     [esp+90h+var_64], eax
-0x5BA826: call    TESObjectREFR_GetParentCell
+0x5BA826: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5BA82B: mov     ecx, eax
 0x5BA82D: call    sub_4CCE20
 0x5BA832: lea     eax, [esp+84h+var_3C]
 0x5BA836: push    eax
 0x5BA837: call    sub_4D2D00
-0x5BA83C: mov     [esp+88h+var_70], eax
-0x5BA840: fild    [esp+88h+var_70]
+0x5BA83C: mov     [esp+88h+var_70.x], eax
+0x5BA840: fild    [esp+88h+var_70.x]
 0x5BA844: add     esp, 4
 0x5BA847: fmul    qword ptr ds:0A3C770h
 0x5BA84D: fmul    qword ptr ds:0A3DDD8h
-0x5BA853: call    Double_To_SInt32
+0x5BA853: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BA858: mov     ebp, eax
 0x5BA85A: test    ebp, ebp
 0x5BA85C: jle     short loc_5BA8C5
 0x5BA85E: mov     ecx, esi; this
-0x5BA860: call    GetTeleportExtraData
+0x5BA860: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x5BA865: test    eax, eax
 0x5BA867: jz      short loc_5BA877
 0x5BA869: lea     ecx, [esp+84h+var_5C]
@@ -283,13 +283,13 @@
 0x5BA881: mov     ecx, esi
 0x5BA883: call    eax
 0x5BA885: push    eax; a1
-0x5BA886: call    TESFullName_GetNameForForm
+0x5BA886: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x5BA88B: add     esp, 4
 0x5BA88E: push    eax; a2
 0x5BA88F: lea     ecx, [esp+8Ch+var_5C]; this
 0x5BA893: call    BSStringT_Set
 0x5BA898: mov     ecx, [esp+84h+var_5C.m_data]
-0x5BA89C: fld     [esp+84h+var_68]
+0x5BA89C: fld     [esp+84h+var_70.z]
 0x5BA8A0: push    0; char
 0x5BA8A2: push    0; char
 0x5BA8A4: push    0; char
@@ -302,13 +302,13 @@
 0x5BA8B0: sub     esp, 8
 0x5BA8B3: fstp    [esp+0B0h+var_AC]; float
 0x5BA8B7: mov     ecx, edi
-0x5BA8B9: fld     [esp+0B0h+var_70+4]
+0x5BA8B9: fld     [esp+0B0h+var_70.y]
 0x5BA8BD: fstp    [esp+0B0h+var_B0]; float
 0x5BA8C0: call    sub_5B87D0
 0x5BA8C5: test    ebx, ebx
 0x5BA8C7: jnz     loc_5BA79F
 0x5BA8CD: mov     ecx, [edi+0C8h]
-0x5BA8D3: call    BSSimpleList_Clear
+0x5BA8D3: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5BA8D8: mov     ecx, ds:0B333C4h
 0x5BA8DE: call    sub_65D830
 0x5BA8E3: mov     esi, eax
@@ -322,12 +322,12 @@
 0x5BA8F6: mov     eax, [ecx+10h]
 0x5BA8F9: test    eax, eax
 0x5BA8FB: mov     esi, [esi+4]
-0x5BA8FE: mov     byte ptr [esp+84h+var_70], 1
+0x5BA8FE: mov     byte ptr [esp+84h+var_70.x], 1
 0x5BA903: jnz     short loc_5BA915
 0x5BA905: push    1
 0x5BA907: call    sub_52B440
 0x5BA90C: test    eax, eax
-0x5BA90E: mov     byte ptr [esp+84h+var_70], 0
+0x5BA90E: mov     byte ptr [esp+84h+var_70.x], 0
 0x5BA913: jz      short loc_5BA966
 0x5BA915: mov     edx, [eax]
 0x5BA917: mov     ecx, eax
@@ -338,8 +338,8 @@
 0x5BA926: mov     eax, [eax+8]
 0x5BA929: push    0; char
 0x5BA92B: push    1; char
-0x5BA92D: mov     [esp+8Ch+var_70+4], ecx
-0x5BA931: mov     ecx, [esp+8Ch+var_70]
+0x5BA92D: mov     [esp+8Ch+var_70.y], ecx
+0x5BA931: mov     ecx, [esp+8Ch+var_70.x]
 0x5BA935: push    ecx; char
 0x5BA936: push    0FFh; int
 0x5BA93B: push    0; char
@@ -347,12 +347,12 @@
 0x5BA93F: push    1; char
 0x5BA941: push    63h ; 'c'; int
 0x5BA943: push    0; int
-0x5BA945: mov     [esp+0A8h+var_68], edx
-0x5BA949: fld     [esp+0A8h+var_68]
+0x5BA945: mov     [esp+0A8h+var_70.z], edx
+0x5BA949: fld     [esp+0A8h+var_70.z]
 0x5BA94D: sub     esp, 8
 0x5BA950: fstp    [esp+0B0h+var_AC]; float
 0x5BA954: mov     ecx, edi
-0x5BA956: fld     [esp+0B0h+var_70+4]
+0x5BA956: fld     [esp+0B0h+var_70.y]
 0x5BA95A: mov     [esp+0B0h+var_64], eax
 0x5BA95E: fstp    [esp+0B0h+var_B0]; float
 0x5BA961: call    sub_5B87D0
@@ -363,19 +363,19 @@
 0x5BA976: mov     edx, [esi+62Ch]
 0x5BA97C: mov     eax, [esi+630h]
 0x5BA982: mov     [esp+84h+var_64], ecx
-0x5BA986: push    offset Vector3_InitValue?
-0x5BA98B: lea     ecx, [esp+88h+var_70+4]
-0x5BA98F: mov     [esp+88h+var_70+4], edx
-0x5BA993: mov     [esp+88h+var_68], eax
-0x5BA997: call    sub_8AA390
+0x5BA986: push    offset g_zeroNiPoint3; other
+0x5BA98B: lea     ecx, [esp+88h+var_70.y]; this
+0x5BA98F: mov     [esp+88h+var_70.y], edx
+0x5BA993: mov     [esp+88h+var_70.z], eax
+0x5BA997: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x5BA99C: test    al, al
 0x5BA99E: jz      short loc_5BA9E8
 0x5BA9A0: mov     ebx, [esi+638h]
-0x5BA9A6: mov     ecx, esi
-0x5BA9A8: call    sub_4D8AF0
+0x5BA9A6: mov     ecx, esi; this
+0x5BA9A8: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x5BA9AD: cmp     ebx, eax
 0x5BA9AF: jnz     short loc_5BA9E2
-0x5BA9B1: fld     [esp+84h+var_68]
+0x5BA9B1: fld     [esp+84h+var_70.z]
 0x5BA9B5: push    1; char
 0x5BA9B7: push    0; char
 0x5BA9B9: push    0; char
@@ -388,7 +388,7 @@
 0x5BA9CD: sub     esp, 8
 0x5BA9D0: fstp    [esp+0B0h+var_AC]; float
 0x5BA9D4: mov     ecx, edi
-0x5BA9D6: fld     [esp+0B0h+var_70+4]
+0x5BA9D6: fld     [esp+0B0h+var_70.y]
 0x5BA9DA: fstp    [esp+0B0h+var_B0]; float
 0x5BA9DD: call    sub_5B87D0
 0x5BA9E2: mov     esi, ds:0B333C4h
@@ -408,12 +408,12 @@
 0x5BAA0B: push    0; char
 0x5BAA0D: push    62h ; 'b'; int
 0x5BAA0F: push    offset aLocal_player; "local_player"
-0x5BAA14: mov     [esp+0A8h+var_68], edx
-0x5BAA18: fld     [esp+0A8h+var_68]
+0x5BAA14: mov     [esp+0A8h+var_70.z], edx
+0x5BAA18: fld     [esp+0A8h+var_70.z]
 0x5BAA1C: sub     esp, 8
 0x5BAA1F: fstp    [esp+0B0h+var_AC]; float
-0x5BAA23: mov     [esp+0B0h+var_70+4], ecx
-0x5BAA27: fld     [esp+0B0h+var_70+4]
+0x5BAA23: mov     [esp+0B0h+var_70.y], ecx
+0x5BAA27: fld     [esp+0B0h+var_70.y]
 0x5BAA2B: mov     ecx, edi
 0x5BAA2D: fstp    [esp+0B0h+var_B0]; float
 0x5BAA30: mov     [esp+0B0h+var_64], eax
@@ -434,35 +434,35 @@
 0x5BAA6D: test    ebp, ebp
 0x5BAA6F: jz      loc_5BAB73
 0x5BAA75: mov     ecx, ds:0B333C4h; this
-0x5BAA7B: call    TESObjectREFR_GetParentCell
+0x5BAA7B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5BAA80: mov     ecx, eax
 0x5BAA82: call    sub_4CCE00
-0x5BAA87: fstp    qword ptr [esp+84h+var_70+4]
+0x5BAA87: fstp    qword ptr [esp+84h+var_70.y]
 0x5BAA8B: mov     ecx, ds:0B333C4h
 0x5BAA91: mov     edx, [ecx]
 0x5BAA93: mov     eax, [edx+1E0h]
 0x5BAA99: call    eax
-0x5BAA9B: fadd    qword ptr [esp+84h+var_70+4]
+0x5BAA9B: fadd    qword ptr [esp+84h+var_70.y]
 0x5BAA9F: push    ecx
-0x5BAAA0: lea     ecx, [esp+88h+var_30]
-0x5BAAA4: fstp    [esp+88h+var_70]
-0x5BAAA8: fld     [esp+88h+var_70]
+0x5BAAA0: lea     ecx, [esp+88h+var_30]; this
+0x5BAAA4: fstp    [esp+88h+var_70.x]
+0x5BAAA8: fld     [esp+88h+var_70.x]
 0x5BAAAC: fchs
-0x5BAAAE: fstp    [esp+88h+var_88]; float
-0x5BAAB1: call    sub_70FD80
+0x5BAAAE: fstp    [esp+88h+var_88]; angleY
+0x5BAAB1: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
 0x5BAAB6: push    0FCBh
 0x5BAABB: mov     ecx, esi
 0x5BAABD: call    Tile_GetFloat
 0x5BAAC2: fmul    qword ptr ds:0A2FAA0h
 0x5BAAC8: push    0FCAh
 0x5BAACD: mov     ecx, esi
-0x5BAACF: fstp    [esp+88h+var_70]
+0x5BAACF: fstp    [esp+88h+var_70.x]
 0x5BAAD3: call    Tile_GetFloat
 0x5BAAD8: fmul    qword ptr ds:0A2FAA0h
 0x5BAADE: mov     byte ptr [esi+6], 1
 0x5BAAE2: xor     esi, esi
 0x5BAAE4: cmp     [ebp+0B8h], si
-0x5BAAEB: fstp    [esp+84h+var_70+4]
+0x5BAAEB: fstp    [esp+84h+var_70.y]
 0x5BAAEF: jbe     short loc_5BAB57
 0x5BAAF1: movzx   ecx, word ptr [ebp+0B6h]
 0x5BAAF8: cmp     ecx, esi
@@ -472,20 +472,20 @@
 0x5BAB00: mov     edx, [ebp+0B0h]
 0x5BAB06: mov     eax, [edx+esi*4]
 0x5BAB09: push    eax
-0x5BAB0A: push    offset dword_B3FCD4
+0x5BAB0A: push    offset stru_B3FCD4
 0x5BAB0F: call    NiRTTI_Cast
 0x5BAB14: add     esp, 8
 0x5BAB17: test    eax, eax
 0x5BAB19: jz      short loc_5BAB49
-0x5BAB1B: fld     [esp+84h+var_70]
-0x5BAB1F: push    offset Vector3_InitValue?
+0x5BAB1B: fld     [esp+84h+var_70.x]
+0x5BAB1F: push    offset g_zeroNiPoint3
 0x5BAB24: fstp    [esp+88h+var_48]
 0x5BAB28: lea     ecx, [esp+88h+var_48]
 0x5BAB2C: fldz
 0x5BAB2E: push    ecx
 0x5BAB2F: fstp    [esp+8Ch+var_44]
 0x5BAB33: lea     edx, [esp+8Ch+var_30]
-0x5BAB37: fld     [esp+8Ch+var_70+4]
+0x5BAB37: fld     [esp+8Ch+var_70.y]
 0x5BAB3B: push    edx
 0x5BAB3C: fchs
 0x5BAB3E: mov     ecx, eax
@@ -504,7 +504,7 @@
 0x5BAB68: push    1; a3
 0x5BAB6A: push    ecx
 0x5BAB6B: fstp    [esp+8Ch+a2]; a2
-0x5BAB6E: call    NiAVObject_UpdateNiAVObject
+0x5BAB6E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5BAB73: test    ebx, ebx
 0x5BAB75: jz      loc_5BAC62
 0x5BAB7B: cmp     [esp+84h+arg_0], 0
@@ -512,26 +512,26 @@
 0x5BAB89: mov     ecx, [edi+64h]
 0x5BAB8C: push    0FAEh
 0x5BAB91: call    Tile_GetFloat
-0x5BAB96: call    Double_To_SInt32
+0x5BAB96: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BAB9B: mov     ecx, [edi+64h]
 0x5BAB9E: mov     ebp, eax
 0x5BABA0: push    0FAFh
-0x5BABA5: mov     [esp+88h+var_70+4], ebp
+0x5BABA5: mov     [esp+88h+var_70.y], ebp
 0x5BABA9: call    Tile_GetFloat
-0x5BABAE: call    Double_To_SInt32
-0x5BABB3: fild    [esp+84h+var_70+4]
+0x5BABAE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x5BABB3: fild    [esp+84h+var_70.y]
 0x5BABB7: mov     esi, [esp+84h+var_60]
 0x5BABBB: mov     ebx, eax
 0x5BABBD: push    0FADh
-0x5BABC2: fstp    [esp+88h+var_70+4]
+0x5BABC2: fstp    [esp+88h+var_70.y]
 0x5BABC6: mov     ecx, esi
-0x5BABC8: mov     [esp+88h+var_70], ebx
+0x5BABC8: mov     [esp+88h+var_70.x], ebx
 0x5BABCC: call    Tile_GetFloat
-0x5BABD1: fsubr   [esp+84h+var_70+4]
+0x5BABD1: fsubr   [esp+84h+var_70.y]
 0x5BABD5: push    0FACh
 0x5BABDA: mov     ecx, esi
-0x5BABDC: fstp    [esp+88h+var_70+4]
-0x5BABE0: fild    [esp+88h+var_70]
+0x5BABDC: fstp    [esp+88h+var_70.y]
+0x5BABE0: fild    [esp+88h+var_70.x]
 0x5BABE4: fstp    [esp+88h+var_60]
 0x5BABE8: call    Tile_GetFloat
 0x5BABED: fsubr   [esp+84h+var_60]
@@ -539,16 +539,16 @@
 0x5BABF4: push    ecx
 0x5BABF5: mov     ecx, esi; this
 0x5BABF7: fstp    [esp+88h+var_60]
-0x5BABFB: fld     [esp+88h+var_70+4]
-0x5BABFF: fstp    [esp+88h+var_88]; a3
-0x5BAC02: push    0FB8h; a2
-0x5BAC07: call    Tile_SetFloat
+0x5BABFB: fld     [esp+88h+var_70.y]
+0x5BABFF: fstp    [esp+88h+var_88]; value
+0x5BAC02: push    0FB8h; propertyCode
+0x5BAC07: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BAC0C: fld     [esp+84h+var_60]
 0x5BAC10: push    ecx
-0x5BAC11: fstp    [esp+88h+var_88]; a3
-0x5BAC14: push    0FB9h; a2
+0x5BAC11: fstp    [esp+88h+var_88]; value
+0x5BAC14: push    0FB9h; propertyCode
 0x5BAC19: mov     ecx, esi; this
-0x5BAC1B: call    Tile_SetFloat
+0x5BAC1B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BAC20: mov     ecx, [edi+70h]; this
 0x5BAC23: mov     eax, ebp
 0x5BAC25: cdq
@@ -557,9 +557,9 @@
 0x5BAC2A: mov     [esp+84h+var_60], eax
 0x5BAC2E: push    ecx
 0x5BAC2F: fild    [esp+88h+var_60]
-0x5BAC33: fstp    [esp+88h+var_88]; a3
-0x5BAC36: push    0FAEh; a2
-0x5BAC3B: call    Tile_SetFloat
+0x5BAC33: fstp    [esp+88h+var_88]; value
+0x5BAC36: push    0FAEh; propertyCode
+0x5BAC3B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BAC40: mov     edi, [edi+70h]
 0x5BAC43: mov     eax, ebx
 0x5BAC45: cdq
@@ -569,12 +569,12 @@
 0x5BAC4E: push    ecx
 0x5BAC4F: fild    [esp+88h+var_60]
 0x5BAC53: mov     ecx, edi; this
-0x5BAC55: fstp    [esp+88h+var_88]; a3
-0x5BAC58: push    0FAFh; a2
-0x5BAC5D: call    Tile_SetFloat
+0x5BAC55: fstp    [esp+88h+var_88]; value
+0x5BAC58: push    0FAFh; propertyCode
+0x5BAC5D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BAC62: mov     ecx, [esp+84h+var_5C.m_data]
 0x5BAC66: push    ecx
-0x5BAC67: call    FormHeapFree
+0x5BAC67: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BAC6C: add     esp, 4
 0x5BAC6F: mov     ecx, [esp+84h+var_C]
 0x5BAC73: mov     large fs:0, ecx
@@ -587,9 +587,9 @@
 0x5BAC82: retn
 0x5BAC83: push    ecx
 0x5BAC84: mov     ecx, [edi+64h]; this
-0x5BAC87: fstp    [esp+88h+var_88]; a3
-0x5BAC8A: push    0FA1h; a2
-0x5BAC8F: call    Tile_SetFloat
+0x5BAC87: fstp    [esp+88h+var_88]; value
+0x5BAC8A: push    0FA1h; propertyCode
+0x5BAC8F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BAC94: mov     ecx, [esp+84h+var_C]
 0x5BAC98: mov     large fs:0, ecx
 0x5BAC9F: pop     ecx
@@ -599,3 +599,12 @@
 0x5BACA3: pop     ebx
 0x5BACA4: add     esp, 70h
 0x5BACA7: retn
+0x9C0D00: lea     ecx, [ebp-5Ch]; void *
+0x9C0D03: jmp     BSStringT_Clear
+0x9C0D08: mov     edx, [esp+arg_4]
+0x9C0D0C: lea     eax, [edx-74h]
+0x9C0D0F: mov     ecx, [edx-78h]
+0x9C0D12: xor     ecx, eax
+0x9C0D14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0D19: mov     eax, offset stru_AE9E68
+0x9C0D1E: jmp     ___CxxFrameHandler3

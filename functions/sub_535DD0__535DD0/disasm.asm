@@ -14,9 +14,8 @@
 0x535DF8: jnz     short loc_535E06
 0x535DFA: cmp     ds:0B36594h, ebx
 0x535E00: jz      loc_53604B
-0x535E06: mov     eax, offset dword_B36594
+0x535E06: mov     eax, (offset dword_B36590+4)
 0x535E0B: jmp     short loc_535E10
-0x535E0D: align 10h
 0x535E10: mov     ecx, [eax+4]
 0x535E13: test    ecx, ecx
 0x535E15: jnz     short loc_535E1B
@@ -38,7 +37,7 @@
 0x535E3A: test    edx, edx
 0x535E3C: jz      loc_53604B
 0x535E42: push    edx
-0x535E43: call    sub_47FAC0
+0x535E43: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x535E48: add     esp, 4
 0x535E4B: test    eax, eax
 0x535E4D: jz      loc_53604B
@@ -52,7 +51,7 @@
 0x535E6B: push    offset flt_B2F080
 0x535E70: lea     ecx, [esp+174h+var_110]
 0x535E74: movaps  [esp+174h+var_E0], xmm0
-0x535E7C: call    sub_8B1DD0
+0x535E7C: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x535E81: mov     edx, [esi]
 0x535E83: mov     edx, [edx+0ACh]
 0x535E89: lea     eax, [esp+170h+var_90]
@@ -142,7 +141,7 @@
 0x535FD9: mov     eax, [eax+50h]
 0x535FDC: add     eax, 0D0h ; 'Ð'
 0x535FE1: jmp     short loc_535FE8
-0x535FE3: mov     eax, offset stru_BA7A40
+0x535FE3: mov     eax, offset unk_BA7A40
 0x535FE8: movaps  xmm1, xmmword ptr [eax]
 0x535FEB: addps   xmm1, xmm0
 0x535FEE: movaps  xmmword ptr [esp+170h+var_148+8], xmm1
@@ -150,7 +149,7 @@
 0x535FF6: test    edi, edi
 0x535FF8: jz      short loc_536020
 0x535FFA: mov     ecx, esi
-0x535FFC: call    sub_89F570
+0x535FFC: call    bhkRefObject_UpdateHavokObject
 0x536001: mov     ecx, edi
 0x536003: call    sub_8A6410
 0x536008: mov     edi, [edi+50h]
@@ -161,7 +160,7 @@
 0x536015: mov     ecx, edi
 0x536017: call    edx
 0x536019: mov     ecx, esi
-0x53601B: call    sub_89F570
+0x53601B: call    bhkRefObject_UpdateHavokObject
 0x536020: fld     dword ptr [esp+170h+var_158]
 0x536024: fsub    dword ptr ds:0B370D8h
 0x53602A: add     dword ptr [ebx+0Ch], 0FFFFFFFFh
@@ -169,10 +168,10 @@
 0x536032: fstp    dword ptr [ebx+8]
 0x536035: jg      short loc_53604B
 0x536037: push    ebx
-0x536038: call    FormHeapFree
+0x536038: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x53603D: add     esp, 4
 0x536040: push    ebx
-0x536041: mov     ecx, offset dword_B36594
+0x536041: mov     ecx, (offset dword_B36590+4)
 0x536046: call    BSSimpleList_Remove
 0x53604B: mov     ecx, [esp+170h+var_4]
 0x536052: pop     edi

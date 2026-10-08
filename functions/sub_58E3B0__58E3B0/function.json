@@ -1,19 +1,32 @@
 {
-  "callees_count": 90,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x58E3B0",
+      "0x58E7C6"
+    ]
+  ],
+  "chunks_sha256": "7dae382d024a725230502953740343f7380a7d13f24d1630f00ff1b2793ce0e7",
+  "comment_regular": "AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.",
+  "comment_repeatable": "AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.\nVerified descriptive name: resolves navigation trait by walking Tile ancestors until trait exists. Constants105/104 choose nearest strictly greater/smaller integer listindex among visible siblings with xdefault trait. No sibling candidate => ascend to parent and resolve same trait there. Constants106/107 choose min/max child index, with default-focus fallback. Candidate scans do not directly check target; caller applies eligibility.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_58E3B0",
+  "display_name": "Tile::ResolveNavigationTrait",
   "end_ea": "0x58E7C6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58E3B0",
+  "name": "Tile::ResolveNavigationTrait",
   "segment": ".text",
   "sha256": "7dae382d024a725230502953740343f7380a7d13f24d1630f00ff1b2793ce0e7",
   "size": 1046,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58E3B0",
-  "type": "_DWORD *__userpurge@<eax>(Tile *@<ecx>, double@<st2>, double@<st1>, double st7_0@<st0>, _DWORD *, _DWORD *)",
+  "total_chunk_size": 1046,
+  "type": "Tile *__thiscall(Tile *this, unsigned int trait, unsigned int *resolvedTrait)",
   "xrefs_from_count": 421,
   "xrefs_to_count": 7
 }

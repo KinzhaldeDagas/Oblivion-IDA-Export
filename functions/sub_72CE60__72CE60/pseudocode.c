@@ -8,22 +8,22 @@ char __thiscall sub_72CE60(const void **this, int Key)
   size_t v9; // [esp-4h] [ebp-14h]
   int (__cdecl *v10)(const void *, const void *); // [esp+4h] [ebp-Ch]
 
-  v2 = (_DWORD *)Key;
-  v3 = *(_DWORD *)(Key + 8);
-  v4 = 0;
-  if ( !v3 )
-    return 1;
-  while ( 1 )
+  v2 = (_DWORD *)Key; /*0x72ce61*/
+  v3 = *(_DWORD *)(Key + 8); /*0x72ce66*/
+  v4 = 0; /*0x72ce6a*/
+  if ( !v3 ) /*0x72ce71*/
+    return 1; /*0x72cea3*/
+  while ( 1 ) /*0x72ce7e*/
   {
-    LODWORD(v9) = PtFuncCompare;
-    HIDWORD(v8) = 2;
-    LODWORD(v8) = *(this + 2);
-    v7 = *this;
-    Key = *(unsigned __int16 *)(*v2 + 8 * v4);
-    if ( !bsearch(&Key, v7, v8, v9, v10) )
-      break;
-    if ( ++v4 >= v3 )
-      return 1;
+    LODWORD(v9) = PtFuncCompare; /*0x72ce7e*/
+    HIDWORD(v8) = 2; /*0x72ce83*/
+    LODWORD(v8) = *(this + 2); /*0x72ce85*/
+    v7 = *this; /*0x72ce86*/
+    Key = *(unsigned __int16 *)(*v2 + 8 * v4); /*0x72ce8c*/
+    if ( !bsearch(&Key, v7, v8, v9, v10) ) /*0x72ce90*/
+      break; /*0x72ce90*/
+    if ( ++v4 >= v3 ) /*0x72cea1*/
+      return 1; /*0x72cea1*/
   }
-  return 0;
+  return 0; /*0x72cea3*/
 }

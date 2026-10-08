@@ -20,7 +20,7 @@
 0x7C8367: mov     [esp+1Ch+var_4], esi
 0x7C836B: jz      short loc_7C8376
 0x7C836D: mov     ecx, eax
-0x7C836F: call    NiFogProperty_constr
+0x7C836F: call    NiFogProperty_constr; Fog decode: constructs full BSFogProperty. Base NiFogProperty fields use default color; extension adds fogStart +0x2C and fogEnd +0x30.
 0x7C8374: mov     esi, eax
 0x7C8376: mov     eax, [esp+1Ch+arg_0]
 0x7C837A: push    eax
@@ -36,3 +36,15 @@
 0x7C839A: pop     esi
 0x7C839B: add     esp, 10h
 0x7C839E: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

@@ -2,7 +2,7 @@
 0x9E8696: push    ecx
 0x9E8697: fstp    [esp+4+var_4]; float
 0x9E869A: push    offset aFaimeleehandmu; "fAIMeleeHandMult"
-0x9E869F: mov     ecx, offset flt_B36D10
+0x9E869F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+38h)
 0x9E86A4: call    GameSetting_ConstrAndReg_float
 0x9E86A9: push    offset sub_A1E140; void (__cdecl *)()
 0x9E86AE: call    _atexit

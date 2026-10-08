@@ -1,5 +1,5 @@
 int sub_9D7E90()
 {
-  NiInitalizeCriticalSection(&stru_B32C00);
-  return atexit(sub_A163F0);
+  NiInitalizeCriticalSection(&unk_B32C00); /*0x9d7e95*/
+  return atexit(sub_A163F0); /*0x9d7ea5*/
 }

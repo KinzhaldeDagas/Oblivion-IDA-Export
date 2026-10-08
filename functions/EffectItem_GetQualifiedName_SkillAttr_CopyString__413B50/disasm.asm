@@ -6,7 +6,7 @@
 0x413B5C: jnz     short EffectItem_GetQualifiedName_SkillAttr___CopyString
 0x413B5E: mov     eax, [esp+arg_0]
 0x413B62: push    eax
-0x413B63: call    FormHeapFree
+0x413B63: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x413B68: add     esp, 4
 0x413B6B: pop     esi
 0x413B6C: add     esp, 8

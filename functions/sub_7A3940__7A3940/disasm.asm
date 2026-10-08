@@ -1,4 +1,4 @@
-0x7A3940: push    0FFFFFFFFh
+0x7A3940: push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): Builds generated explicit leaf LODs. Copies highest leaf vector into LOD0, then loops LOD index 1..numLeafLodLevels-1 and calls CLeafLodEngine::ComputeNextLevel on the immediately preceding LOD.
 0x7A3942: push    offset SEH_7A3940
 0x7A3947: mov     eax, large fs:0
 0x7A394D: push    eax
@@ -18,7 +18,6 @@
 0x7A3971: fstp    [esp+58h+var_44]
 0x7A3975: xor     ebx, ebx
 0x7A3977: jmp     short loc_7A3980
-0x7A3979: align 10h
 0x7A3980: mov     eax, [esi+98h]
 0x7A3986: test    eax, eax
 0x7A3988: jz      loc_7A3A32
@@ -80,12 +79,12 @@
 0x7A3A41: jp      short loc_7A3A4D
 0x7A3A43: fld     dword ptr ds:0A31C80h
 0x7A3A49: fstp    [esp+58h+var_44]
-0x7A3A4D: mov     ecx, [esi+0D4h]
+0x7A3A4D: mov     ecx, [esi+0D4h]; this
 0x7A3A53: test    ecx, ecx
 0x7A3A55: jz      loc_7A3B5C
 0x7A3A5B: lea     eax, [esi+74h]
-0x7A3A5E: push    eax
-0x7A3A5F: call    sub_79B2F0
+0x7A3A5E: push    eax; source
+0x7A3A5F: call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.
 0x7A3A64: mov     ebp, 1
 0x7A3A69: cmp     [esi+0C0h], ebp
 0x7A3A6F: mov     [esp+58h+var_40], ebp
@@ -97,52 +96,52 @@
 0x7A3A8E: fstp    [esp+58h+var_44]
 0x7A3A92: fild    [esp+58h+var_40]
 0x7A3A96: sub     esp, 0Ch
-0x7A3A99: lea     ecx, [esp+64h+var_2C]
+0x7A3A99: lea     ecx, [esp+64h+var_2C]; this
 0x7A3A9D: fmul    [esp+64h+arg_0]
 0x7A3AA1: fadd    qword ptr ds:0A2F928h
 0x7A3AA7: fstp    [esp+64h+var_40]
 0x7A3AAB: fld     [esp+64h+var_40]
-0x7A3AAF: fstp    [esp+64h+var_5C]; float
+0x7A3AAF: fstp    [esp+64h+leafSizeIncreaseFactor]; leafSizeIncreaseFactor
 0x7A3AB3: fld     dword ptr [esi+0E4h]
-0x7A3AB9: fstp    [esp+64h+var_60]; float
+0x7A3AB9: fstp    [esp+64h+leafReductionPercentage]; leafReductionPercentage
 0x7A3ABD: fld     [esp+64h+var_44]
-0x7A3AC1: fstp    [esp+64h+var_64]; float
-0x7A3AC4: push    ebx; int
-0x7A3AC5: call    sub_7A8F00
+0x7A3AC1: fstp    [esp+64h+spacingTolerance]; spacingTolerance
+0x7A3AC4: push    ebx; originalLeaves
+0x7A3AC5: call    OB_CLeafLodEngine_ctor_010201A0; OBLIVION AUTHORITY (2026-08-30): Constructs exact 0x20-byte CLeafLodEngine: vector<SLodEntry> at +0x00, spacing +0x10, reduction +0x14, SIdvLeafInfo reference pointer +0x18, size-increase factor +0x1C. RT 4.1 corroborates member names after this layout was recovered from Oblivion.
 0x7A3ACA: mov     ecx, [esi+0D4h]
 0x7A3AD0: sub     esp, 10h
 0x7A3AD3: lea     edx, [ecx+edi-10h]
-0x7A3AD7: mov     ecx, esp
+0x7A3AD7: mov     ecx, esp; this
 0x7A3AD9: mov     [esp+68h+var_40], esp
-0x7A3ADD: push    edx
+0x7A3ADD: push    edx; source
 0x7A3ADE: mov     [esp+6Ch+var_4], 0
-0x7A3AE6: call    sub_7A3580
-0x7A3AEB: lea     eax, [esp+68h+var_3C]
-0x7A3AEF: push    eax
-0x7A3AF0: lea     ecx, [esp+6Ch+var_2C]
-0x7A3AF4: call    sub_7A9740
+0x7A3AE6: call    OB_stVector4_CopyCtor_010201A0; BuildLeafLods copies a four-byte pointer vector with the folded shallow vector copy constructor. This does not duplicate or rewrite leaf texture objects.
+0x7A3AEB: lea     eax, [esp+68h+result]
+0x7A3AEF: push    eax; result
+0x7A3AF0: lea     ecx, [esp+6Ch+var_2C]; this
+0x7A3AF4: call    OB_CLeafLodEngine_ComputeNextLevel_010201A0; OBLIVION AUTHORITY (2026-08-24): Per-lower-LOD call: input is prior explicit LOD, output becomes the current LOD. Thus BuildNewLeaves color averaging is applied at every generated lower level, not merely one special layer.
 0x7A3AF9: mov     ecx, [esi+0D4h]
-0x7A3AFF: push    eax
-0x7A3B00: add     ecx, edi
+0x7A3AFF: push    eax; source
+0x7A3B00: add     ecx, edi; this
 0x7A3B02: mov     byte ptr [esp+5Ch+var_4], 1
-0x7A3B07: call    sub_79B2F0
-0x7A3B0C: mov     eax, [esp+58h+var_38]
+0x7A3B07: call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.
+0x7A3B0C: mov     eax, [esp+58h+result.begin]
 0x7A3B10: xor     ecx, ecx
 0x7A3B12: cmp     eax, ecx
 0x7A3B14: jz      short loc_7A3B21
 0x7A3B16: push    eax
-0x7A3B17: call    FormHeapFree
+0x7A3B17: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A3B1C: add     esp, 4
 0x7A3B1F: xor     ecx, ecx
-0x7A3B21: mov     eax, [esp+58h+var_28]
+0x7A3B21: mov     eax, [esp+58h+var_2C.m_vPairs.begin]
 0x7A3B25: cmp     eax, ecx
-0x7A3B27: mov     [esp+58h+var_38], ecx
-0x7A3B2B: mov     [esp+58h+var_34], ecx
-0x7A3B2F: mov     [esp+58h+var_30], ecx
+0x7A3B27: mov     [esp+58h+result.begin], ecx
+0x7A3B2B: mov     [esp+58h+result.end], ecx
+0x7A3B2F: mov     [esp+58h+result.capacityEnd], ecx
 0x7A3B33: mov     [esp+58h+var_4], 0FFFFFFFFh
 0x7A3B3B: jz      short loc_7A3B46
 0x7A3B3D: push    eax
-0x7A3B3E: call    FormHeapFree
+0x7A3B3E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A3B43: add     esp, 4
 0x7A3B46: add     ebp, 1
 0x7A3B49: add     edi, 10h
@@ -158,3 +157,14 @@
 0x7A3B6B: pop     ebx
 0x7A3B6C: add     esp, 44h
 0x7A3B6F: retn    4
+0x9CC970: lea     ecx, [ebp-2Ch]; this
+0x9CC973: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC978: lea     ecx, [ebp-3Ch]; this
+0x9CC97B: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC980: mov     edx, [esp+arg_4]
+0x9CC984: lea     eax, [edx-48h]
+0x9CC987: mov     ecx, [edx-4Ch]
+0x9CC98A: xor     ecx, eax
+0x9CC98C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC991: mov     eax, offset stru_AF5D00
+0x9CC996: jmp     ___CxxFrameHandler3

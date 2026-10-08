@@ -59,7 +59,7 @@
 0x8C4D58: movaps  xmm1, [esp+58h+var_30]
 0x8C4D5D: mulps   xmm0, xmm1
 0x8C4D60: movaps  [esp+58h+var_30], xmm0
-0x8C4D65: call    sub_88FCC0
+0x8C4D65: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8C4D6A: movaps  xmm0, [esp+50h+var_20]
 0x8C4D6F: movaps  xmm1, xmmword ptr [esi]
 0x8C4D72: add     [esp+50h+var_34], 0Ch

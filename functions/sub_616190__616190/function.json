@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x616190",
+      "0x6162CD"
+    ]
+  ],
+  "chunks_sha256": "d9ec498d0d9138d9d866beee1dc72b222261a6a23a53e9c73231dbad6bcda5e2",
+  "comment_regular": "Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.",
+  "comment_repeatable": "Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_616190",
+  "display_name": "CombatController_TryAddTarget",
   "end_ea": "0x6162CD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_616190",
+  "name": "CombatController_TryAddTarget",
   "segment": ".text",
   "sha256": "d9ec498d0d9138d9d866beee1dc72b222261a6a23a53e9c73231dbad6bcda5e2",
   "size": 317,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x616190",
-  "type": "void __userpurge(int@<ecx>, int@<ebp>, double@<st2>, double@<st0>, PlayerCharacter *, int, float, float, float)",
+  "total_chunk_size": 317,
+  "type": "void __userpurge(int@<ecx>, int@<ebp>, double@<st2>, double@<st0>, Actor *, int, float, float, float)",
   "xrefs_from_count": 120,
   "xrefs_to_count": 7
 }

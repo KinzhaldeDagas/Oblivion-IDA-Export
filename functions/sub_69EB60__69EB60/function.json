@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_69EB60",
+  "chunks": [
+    [
+      "0x69EB60",
+      "0x69EC2F"
+    ]
+  ],
+  "chunks_sha256": "1ca80b40edd4a892228f1630daed46cbaaff30dbe3f0a28a2c80919ae4fe2df5",
+  "comment_regular": "Verified MagicModelHitEffect_Update calls base lifetime/target checks, uses bFinished to stop the SpecialIdle_HitEffect controller sequence, and returns false after the visual is done so ActorProcessManager_UpdateTempEffects can remove it.",
+  "comment_repeatable": "Verified MagicModelHitEffect_Update calls base lifetime/target checks, uses bFinished to stop the SpecialIdle_HitEffect controller sequence, and returns false after the visual is done so ActorProcessManager_UpdateTempEffects can remove it.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "MagicModelHitEffect_Update",
   "end_ea": "0x69EC2F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_69EB60",
+  "name": "MagicModelHitEffect_Update",
   "segment": ".text",
   "sha256": "1ca80b40edd4a892228f1630daed46cbaaff30dbe3f0a28a2c80919ae4fe2df5",
   "size": 207,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69EB60",
-  "type": "char __thiscall(_DWORD *this, float)",
+  "total_chunk_size": 207,
+  "type": "bool __thiscall(MagicHitEffect *this, float deltaSeconds)",
   "xrefs_from_count": 88,
   "xrefs_to_count": 1
 }

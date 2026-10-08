@@ -8,7 +8,7 @@
 0x4A1A2E: lea     ecx, [esp+118h+FullPath]
 0x4A1A32: push    ecx; int
 0x4A1A33: push    eax; Str1
-0x4A1A34: call    sub_47D8F0
+0x4A1A34: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4A1A39: lea     edx, [esp+120h+var_10C]
 0x4A1A3D: push    edx; int
 0x4A1A3E: lea     eax, [esp+124h+var_114]

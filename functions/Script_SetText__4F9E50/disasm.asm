@@ -30,11 +30,11 @@
 0x4F9E95: push    esi
 0x4F9E96: call    __memset
 0x4F9E9B: mov     eax, [esp+1Ch+Src]
-0x4F9E9F: push    edi; Size
-0x4F9EA0: push    eax; Src
-0x4F9EA1: push    esi; Dst
+0x4F9E9F: push    edi; byteCount
+0x4F9EA0: push    eax; source
+0x4F9EA1: push    esi; destination
 0x4F9EA2: mov     [ebp+2Ch], esi
-0x4F9EA5: call    _memcpy
+0x4F9EA5: call    _memcpy;
 0x4F9EAA: add     esp, 18h
 0x4F9EAD: pop     edi
 0x4F9EAE: pop     esi

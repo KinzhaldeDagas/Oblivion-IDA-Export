@@ -10,7 +10,7 @@
 0x5ED879: mov     eax, [edx+20h]
 0x5ED87C: call    eax
 0x5ED87E: mov     ecx, esi; this
-0x5ED880: call    TESObjectREFR_IsPersistent?
+0x5ED880: call    TESObjectREFR_IsPersistent
 0x5ED885: test    al, al
 0x5ED887: jz      short loc_5ED896
 0x5ED889: mov     ecx, [esi+58h]
@@ -73,9 +73,9 @@
 0x5ED921: call    sub_4DD4B0
 0x5ED926: fld     dword ptr ds:0A32048h
 0x5ED92C: add     esp, 8
-0x5ED92F: mov     ecx, esi
-0x5ED931: fstp    [esp+34h+var_34]; float
-0x5ED934: call    sub_4D89D0
+0x5ED92F: mov     ecx, esi; this
+0x5ED931: fstp    [esp+34h+radians]; radians
+0x5ED934: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5ED939: mov     ecx, [esi+58h]
 0x5ED93C: mov     edx, [ecx+8]
 0x5ED93F: mov     ecx, [edx+24h]
@@ -85,7 +85,7 @@
 0x5ED94B: cmp     eax, 1
 0x5ED94E: jnz     short loc_5ED9A4
 0x5ED950: mov     ecx, ebx; this
-0x5ED952: call    TESObjectCELL_IsInterior
+0x5ED952: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5ED957: test    al, al
 0x5ED959: jz      loc_5EDA07
 0x5ED95F: push    1
@@ -135,9 +135,9 @@
 0x5ED9D1: call    sub_4DD4B0
 0x5ED9D6: fld     dword ptr ds:0A32048h
 0x5ED9DC: add     esp, 8
-0x5ED9DF: mov     ecx, edi
-0x5ED9E1: fstp    [esp+3Ch+var_3C]; float
-0x5ED9E4: call    sub_4D89D0
+0x5ED9DF: mov     ecx, edi; this
+0x5ED9E1: fstp    [esp+3Ch+var_3C]; radians
+0x5ED9E4: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5ED9E9: mov     ecx, [esi+58h]
 0x5ED9EC: mov     ecx, [ecx+8]
 0x5ED9EF: mov     ebx, [edi]

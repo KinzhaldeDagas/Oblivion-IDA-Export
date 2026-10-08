@@ -1,4 +1,4 @@
-0x59B8C0: call    sub_578D70
+0x59B8C0: call    InterfaceManager_ConsumeMessageButton; [Controller decode 2026-07-09] Reset-defaults confirmation callback. Resets currently selected scheme and marks bindings dirty for label refresh.
 0x59B8C5: cmp     al, 2
 0x59B8C7: jnz     short locret_59B91D
 0x59B8C9: push    3FDh

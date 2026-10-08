@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x810630",
-    "line": "sub     esp, 670h",
+    "line": "sub     esp, 670h; SpeedTreeBranchShader 1x pixel program loader: fills ten STB1 ps_1_3 slots at +0x10C..+0x133, including SPECMULT define derived from flt_B2C2BC for specular variants.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -690,12 +690,6 @@
     "size": 2
   },
   {
-    "ea": "0x810859",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x810860",
     "line": "mov     eax, [esi]",
     "mnemonic": "mov",
@@ -835,7 +829,7 @@
   },
   {
     "ea": "0x8108AD",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
     "mnemonic": "call",
     "size": 5
   },

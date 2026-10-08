@@ -5,7 +5,7 @@
 0x72272E: test    byte ptr [esp+4+arg_0], 1
 0x722733: jz      short loc_72273E
 0x722735: push    esi
-0x722736: call    FormHeapFree
+0x722736: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72273B: add     esp, 4
 0x72273E: mov     eax, esi
 0x722740: pop     esi

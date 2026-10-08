@@ -1,1 +1,1 @@
-RIP_INFO
+typedef _RIP_INFO RIP_INFO;

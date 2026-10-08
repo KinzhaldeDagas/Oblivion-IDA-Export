@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x78E8A0",
+      "0x78E94D"
+    ]
+  ],
+  "chunks_sha256": "f719e3ef38a96790ab6e78b28f6ef6988b6570c0d41a9ec2d4358b61f8f686fe",
+  "comment_regular": "Oblivion compiler-lowered stVec::operator*(float): initializes the hidden return object with lhs.size and scales every active component. Exact behavior corroborated by RT4.1 Vec.cpp.",
+  "comment_repeatable": "Oblivion compiler-lowered stVec::operator*(float): initializes the hidden return object with lhs.size and scales every active component. Exact behavior corroborated by RT4.1 Vec.cpp.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78E8A0",
+  "display_name": "OB_stVec_Scale_010201A0",
   "end_ea": "0x78E94D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78E8A0",
+  "name": "OB_stVec_Scale_010201A0",
   "segment": ".text",
   "sha256": "f719e3ef38a96790ab6e78b28f6ef6988b6570c0d41a9ec2d4358b61f8f686fe",
   "size": 173,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78E8A0",
-  "type": "int __thiscall(_DWORD *this, int, float)",
+  "total_chunk_size": 173,
+  "type": "OB_stVec_010201A0 *__thiscall(const OB_stVec_010201A0 *this, OB_stVec_010201A0 *result, float scalar)",
   "xrefs_from_count": 72,
   "xrefs_to_count": 2
 }

@@ -13,7 +13,7 @@
 0x6088D7: test    eax, eax
 0x6088D9: jz      short loc_6088E4
 0x6088DB: push    eax
-0x6088DC: call    FormHeapFree
+0x6088DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6088E1: add     esp, 4
 0x6088E4: mov     dword ptr [esi+5Ch], 0
 0x6088EB: pop     esi

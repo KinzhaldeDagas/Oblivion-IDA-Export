@@ -1,4 +1,4 @@
-BSStringT *sub_A0A4C0()
+NiRTTI *sub_A0A4C0()
 {
-  return sub_70E220((BSStringT *)dword_B40150, "NiScreenGeometryData", (int)dword_B3FD2C);
+  return NiRTTI_Constructor(&stru_B40150, "NiScreenGeometryData", &stru_B3FD2C); /*0xa0a4d4*/
 }

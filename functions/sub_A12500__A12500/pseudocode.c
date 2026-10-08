@@ -1,4 +1,4 @@
-BSStringT *sub_A12500()
+NiRTTI *sub_A12500()
 {
-  return sub_70E220((BSStringT *)dword_BA7F9C, "bhkBvTreeShape", (int)dword_BA7D78);
+  return NiRTTI_Constructor(&stru_BA7F9C, "bhkBvTreeShape", &stru_BA7D78); /*0xa12514*/
 }

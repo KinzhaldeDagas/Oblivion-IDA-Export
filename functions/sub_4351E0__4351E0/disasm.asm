@@ -1,4 +1,4 @@
-0x4351E0: push    esi
+0x4351E0: push    esi; QueuedDistantLOD attach/update callback: attaches result node +0x3C through owner +0x38/+0x1C then updates property state.
 0x4351E1: mov     esi, ecx
 0x4351E3: mov     eax, [esi+3Ch]
 0x4351E6: test    eax, eax
@@ -15,9 +15,9 @@
 0x435201: push    ecx
 0x435202: mov     ecx, [esi+3Ch]; this
 0x435205: fstp    [esp+0Ch+a2]; a2
-0x435208: call    NiAVObject_UpdateNiAVObject
+0x435208: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x43520D: mov     ecx, [esi+3Ch]
 0x435210: pop     esi
-0x435211: jmp     NiAVObject_InitializePropertyState
+0x435211: jmp     NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x435216: pop     esi
 0x435217: retn

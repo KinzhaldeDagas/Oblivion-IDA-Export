@@ -39,7 +39,7 @@
 0x5F41EB: test    esi, esi
 0x5F41ED: jz      loc_5F4297
 0x5F41F3: test    edi, edi
-0x5F41F5: push    1
+0x5F41F5: push    1; slotSelector
 0x5F41F7: jz      loc_5F42C4
 0x5F41FD: mov     eax, [esp+20h+var_8]
 0x5F4201: mov     ecx, [eax+58h]
@@ -86,9 +86,9 @@
 0x5F4273: test    bl, bl
 0x5F4275: setnz   cl
 0x5F4278: lea     ecx, [ecx+ecx+1]
-0x5F427C: push    ecx
-0x5F427D: mov     ecx, esi
-0x5F427F: call    sub_4706E0
+0x5F427C: push    ecx; slotSelector
+0x5F427D: mov     ecx, esi; this
+0x5F427F: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x5F4284: test    eax, eax
 0x5F4286: jz      short loc_5F4293
 0x5F4288: cmp     dword ptr [eax+44h], 1
@@ -110,8 +110,8 @@
 0x5F42BF: pop     ebx
 0x5F42C0: add     esp, 0Ch
 0x5F42C3: retn
-0x5F42C4: mov     ecx, esi
-0x5F42C6: call    sub_4706E0
+0x5F42C4: mov     ecx, esi; this
+0x5F42C6: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x5F42CB: test    eax, eax
 0x5F42CD: jz      short loc_5F42DA
 0x5F42CF: cmp     dword ptr [eax+44h], 1
@@ -121,8 +121,8 @@
 0x5F42E2: jbe     loc_5F43B9
 0x5F42E8: cmp     [esp+1Ch+var_9], 0
 0x5F42ED: jnz     short loc_5F42FA
-0x5F42EF: lea     ecx, [ebp+0ACh]
-0x5F42F5: call    sub_477EF0
+0x5F42EF: lea     ecx, [ebp+0ACh]; this
+0x5F42F5: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x5F42FA: movzx   eax, word ptr [ebp+0B6h]
 0x5F4301: xor     edi, edi
 0x5F4303: test    eax, eax

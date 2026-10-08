@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4259E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Common ExtraDataList single-chunk dispatcher reached by REFR/ACHR/ACRE. TESFile_GetChunkData(max) semantics at 0x450C20: length 0 leaves destination unchanged; <=max copies a prefix only; >max copies max-1 and writes a terminal zero. Each explicitly zeroed scratch therefore gives deterministic malformed-width behavior; singleton setters make repeats last-wins/remove as noted per branch.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x425A6B",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XMRC: fresh zeroed bounded U32; 0 removes, nonzero sets/replaces. Common REFR/ACHR/ACRE loader accepts it regardless of narrower schema placement.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425A73",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x425A7F",
-    "line": "call    sub_4206A0",
+    "line": "call    ExtraDataList_SetMerchantContainer; Creates/updates ExtraMerchantContainer; null removes type 0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x425A8D",
-    "line": "call    BaseExtraList_GetExtraData",
+    "line": "call    BaseExtraList_GetExtraData; XLOC: reuse or create 12-byte ExtraLockData. Accepts only exact 12 (direct struct copy) or exact legacy 16 (level=byte0, key=dword4, dword8 ignored, flags=byte12). Other widths print error, remove the entire lock extra, and return. Accepted input always ORs flag bit 0; repeats update the singleton, while malformed repeats remove it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x425AA4",
-    "line": "cmp     eax, esi",
+    "line": "cmp     eax, esi; MEF v34 verified XLOC OOM guard: null 12-byte lock-data allocation must skip the unconsumed chunk at 0x426251 instead of constructing an ExtraLock around null.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x425AC2",
-    "line": "test    eax, eax",
+    "line": "test    eax, eax; MEF v51 crash correction: hook entry is a JMP, so ESP is identical to vanilla. Replay the following SEH construction-state store with raw displacement [ESP+34h], not [ESP+38h]. The old bridge zeroed ExtraDataList_Load's return address on every successful XLOC wrapper allocation, producing RET to EIP 0.",
     "mnemonic": "test",
     "size": 2
   },
   {
     "ea": "0x425AC4",
-    "line": "mov     [esp+38h+var_4], 0",
+    "line": "mov     [esp+38h+var_4], 0; Authoritative replay byte sequence is C7 44 24 34 00 00 00 00 (mov dword ptr [esp+34h],0). MEF v51 preserves this exact stack slot before continuing at 0x425ACC.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x425ACE",
-    "line": "push    esi",
+    "line": "push    esi; lockData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425ACF",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425AD1",
-    "line": "call    sub_429A80",
+    "line": "call    ExtraLock_ctor; Verified ExtraLock constructor: initializes BSExtraData type 0x31 and wrapper vtable, clears the +8 base field, and stores the ExtraLockData* payload at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x425B00",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x425B0D",
-    "line": "or      byte ptr [esi+8], 1",
+    "line": "or      byte ptr [esi+8], 1; XLOC runtime-only load mutation verified 2026-09-05: both accepted12 andlegacy16 paths converge at0x425B05 then OR byte[lockData+8] with1 here. Thus loaded flags = serialized flags |0x01, including zero input. TESCS peers0x45F4A8/0x45F4D5 exit without this OR. CELL rich semantics expose flags by executable; lossless raw recompile/remapping preserve serialized flags. This shared-loader instruction also applies to placed owners, whose broader flag presentation is a separate audit target.",
     "mnemonic": "or",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x425B23",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x425B65",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XGLB: fresh zeroed bounded U32. Effective 0 removes ExtraGlobal; nonzero sets/replaces.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425B6D",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x425B76",
-    "line": "push    ecx",
+    "line": "push    ecx; global",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425B77",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425B79",
-    "line": "call    sub_423720",
+    "line": "call    ExtraDataList_SetGlobal; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x425B83",
-    "line": "cmp     dword ptr [edi+254h], 4",
+    "line": "cmp     dword ptr [edi+254h], 4; XSED tree seed: length 4 reads a zeroed dword and uses byte0; every other length reads with max=1 from a zeroed byte (0=>0, 1=>byte, >1=>forced 0). Seed 0xFF removes ExtraSeed; other values create/replace it. Repeats are ordered last-wins/removal.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x425BA0",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,19 +805,19 @@
   },
   {
     "ea": "0x425BB1",
-    "line": "push    edx",
+    "line": "push    edx; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425BB2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425BB4",
-    "line": "call    sub_423BD0",
+    "line": "call    ExtraDataList_SetOrRemoveTreeSeed; Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x425BC7",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,19 +865,19 @@
   },
   {
     "ea": "0x425BD0",
-    "line": "push    edx",
+    "line": "push    edx; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425BD1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425BD3",
-    "line": "call    sub_423BD0",
+    "line": "call    ExtraDataList_SetOrRemoveTreeSeed; Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x425BFD",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XUSE loader: fresh zeroed u32 plus bounded max-4 read, then stores only low byte in ExtraUses. Always creates/updates, including empty=>0; high 24 bits are discarded.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425C05",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x425C11",
-    "line": "call    ExtraDataList_SetUses",
+    "line": "call    ExtraDataList_SetUses; ExtraUses singleton setter always creates/updates and narrows to u8; no removal sentinel. Repeated XUSE retains node position and replaces the byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x425C1B",
-    "line": "fldz",
+    "line": "fldz; Verified Oblivion XLOD load path defaults a NiPoint3 normal to (0,0,0.97), overlays the 12-byte chunk, and stores it in ExtraDistantData.normal_00C. Fallout's ExtraDataList::Load routes XLOD_ID to its normal setter at the same offset, despite the different ExtraData EType.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x425C1F",
-    "line": "fst     [esp+3Ch+a1]",
+    "line": "fst     [esp+3Ch+a1]; XLOD: fresh (0,0,0.97000003f) 12-byte scratch plus bounded overlay; every occurrence creates/replaces the singleton, including empty/malformed input.",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x425C2C",
-    "line": "fld     ds:flt_A34F5C",
+    "line": "fld     ds:kDistantLODNormalLimit_097",
     "mnemonic": "fld",
     "size": 6
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x425C38",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,19 +1051,19 @@
   },
   {
     "ea": "0x425C41",
-    "line": "push    eax",
+    "line": "push    eax; normal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425C42",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425C44",
-    "line": "call    sub_420100",
+    "line": "call    ExtraDataList_SetDistantDataNormal; Verified Oblivion setter writes the supplied NiPoint3 into ExtraDistantData.normal_00C (+0x0C..+0x17). Fallout's same-named setter uses LandNormal at the same +0x0C offset; its EType is 0x13 versus Oblivion's 0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x425C75",
-    "line": "jz      short loc_425C82",
+    "line": "jz      short loc_425C82; MEF v51 audited sibling ExtraData OOM bridge: restore construction state at [ESP+34h] on wrapper allocation failure.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x425C79",
-    "line": "call    ??0ExtraRagDollData@@QAE@XZ; ExtraRagDollData::ExtraRagDollData(void)",
+    "line": "call    ??0ExtraRagDollData@@QAE@XZ; MEF v35 cleanup proof: ExtraRagDollData constructor only sets type/vtable and zeroes fields +8/+C. Before payload attachment, direct FormHeapFree is complete cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x425CA4",
-    "line": "jz      short loc_425CAF",
+    "line": "jz      short loc_425CAF; MEF v51 audited sibling ExtraData OOM bridge: after freeing the unlinked wrapper, restore construction state at [ESP+34h].",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x425CC8",
-    "line": "call    sub_497470",
+    "line": "call    ExtraRagDollDataArray_LoadXRGD; XRGD singleton loader: count=(size/28)&0xFF, then size % count is tested instead of %28. count==0 faults (including 0..27 and canonical 256-bone size); nonzero remainder cleanly fails and the caller removes the singleton; remainder zero with size!=count*28 is accepted, allocates count*28, then reads size and overflows. Safe success is 1..255 complete 28-byte bones. Successful repeats replace count/buffer and leak the prior buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x425CF8",
-    "line": "fstp    [esp+3Ch+a2]",
+    "line": "fstp    [esp+3Ch+a2]; XCHG: fresh zeroed 4-byte scratch, bounded max-4 read, interpreted as float bits. Empty=>0.0; short input zero-fills the untouched suffix; oversized input preserves only first 3 bytes and forces byte3=0. ExtraCharge always creates/updates, including zero; repeats last-win.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x425CFE",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x425D0D",
-    "line": "call    sub_41EE90",
+    "line": "call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,13 +1507,13 @@
   },
   {
     "ea": "0x425D44",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XRNK: fresh zeroed bounded U32 interpreted as signed int32. Effective -1 removes ExtraRank; all other values, including 0, set/replace.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425D4C",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,19 +1525,19 @@
   },
   {
     "ea": "0x425D55",
-    "line": "push    eax",
+    "line": "push    eax; rank",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425D56",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425D58",
-    "line": "call    sub_4237E0",
+    "line": "call    ExtraDataList_SetRank; Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,13 +1585,13 @@
   },
   {
     "ea": "0x425D75",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XTRG: fresh zeroed bounded U32; 0 removes, nonzero sets/replaces. Common REFR/ACHR/ACRE loader accepts it.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425D7D",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x425D89",
-    "line": "call    sub_420D40",
+    "line": "call    ExtraDataList_SetXTarget; Sets ExtraXTarget; null removes type 0x4D, otherwise updates or creates it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x425D9A",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; XMRK: create a zeroed MapMarkerData only if absent, otherwise reuse inherited/current data, then call the internal companion-stream loader. The helper itself advances over FNAM/FULL/TNAM; outer dispatch must not process those consumed chunks. Loader failure is ignored and can leave a partially updated/default marker.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1693,19 +1693,19 @@
   },
   {
     "ea": "0x425DB8",
-    "line": "jz      short loc_425DC3",
+    "line": "jz      short loc_425DC3; MEF v51 audited sibling ExtraData OOM bridge: JMP entry means SEH state restoration uses [ESP+34h]. Previous +38h failure-only path would corrupt the return slot.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x425DBA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425DBC",
-    "line": "call    sub_42B3F0",
+    "line": "call    MapMarkerData_ctor; MapMarkerData constructor zeros TESFullName storage, FNAM flags byte, and TNAM u16 type. unused0D is not explicitly initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,13 +1723,13 @@
   },
   {
     "ea": "0x425DC5",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425DC6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1747,25 +1747,25 @@
   },
   {
     "ea": "0x425DD2",
-    "line": "call    sub_423590",
+    "line": "call    ExtraDataList_SetMapMarkerData",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x425DD7",
-    "line": "push    edi",
+    "line": "push    edi; tesFile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425DD8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425DDA",
-    "line": "call    sub_42B200",
+    "line": "call    MapMarkerData_LoadXMRKSequence; XMRK companion loader owns cursor advancement. After XMRK it advances once, optionally consumes adjacent FNAM, requires/loads adjacent FULL, then advances and requires/loads adjacent TNAM. A nonmatching chunk at either required position is swallowed from outer dispatch. FNAM max1: empty retains, exact1 replaces, >1 forces 0. TNAM max2: empty retains, exact/short prefix-overlays existing u16, >2 keeps byte0 and forces byte1=0. FULL empty clears; nonempty replaces via unbounded read+strlen and is unsafe without terminal NUL. Existing marker state is reused across repeated/partial sequences.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x425E03",
-    "line": "mov     [esp+38h+a1], eax",
+    "line": "mov     [esp+38h+a1], eax; XPSL loader: fresh zeroed 20-byte bounded scratch. Dword0=start-location FormID, dwords1..3=position XYZ, dword4=rotZ. First creation stores all; repeats replace FormID/XYZ but preserve first rotZ.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x425E20",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x425E3B",
-    "line": "call    sub_41F4C0",
+    "line": "call    ExtraDataList_SetStartLocation; ExtraPackageStartLocation setter: first creation stores selected location FormID, XYZ, and rotZ; updating an extant singleton replaces only location/XYZ and preserves existing rotZ.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x425E4C",
-    "line": "jnz     loc_426251",
+    "line": "jnz     loc_426251; XSOL: processed only when chunk length is exactly 1. Valid input reads one byte and creates/updates ExtraSoul, including zero/0xFF; all other widths are ignored without changing inherited/current soul data. Repeated valid chunks last-win.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x425E60",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x425E7E",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; XTEL: reuse existing TeleportData or allocate one initialized to FLT_MAX sentinels/linkedDoor NULL. TeleportData_LoadXTEL then reads into a fresh zeroed 28-byte scratch and overwrites all seven dwords, so empty=>all zero, short=>prefix+zeros, >28=>first 27 bytes+forced zero. Repeats replace the whole singleton state.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2089,19 +2089,19 @@
   },
   {
     "ea": "0x425E9C",
-    "line": "jz      short loc_425EA7",
+    "line": "jz      short loc_425EA7; MEF v51 audited sibling ExtraData OOM bridge: restore construction state at [ESP+34h] on allocation failure.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x425E9E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425EA0",
-    "line": "call    sub_42B590",
+    "line": "call    TeleportData_InitSentinels; TeleportData constructor initializes linkedDoor=NULL and all six transform floats to FLT_MAX sentinels. Any XTEL immediately replaces them from a fresh zeroed scratch in TeleportData_LoadXTEL.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,19 +2149,19 @@
   },
   {
     "ea": "0x425EBB",
-    "line": "push    edi",
+    "line": "push    edi; tesFile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425EBC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425EBE",
-    "line": "call    sub_42B670",
+    "line": "call    TeleportData_LoadXTEL; XTEL loader: verifies current type, zero-initializes 28-byte scratch every call, bounded-read max 28, then copies all seven dwords to TeleportData. Empty therefore clears all; short is prefix+zero; oversized is 27 bytes plus forced final zero; repeats replace rather than prefix-overlay prior data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x425ED7",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2209,19 +2209,19 @@
   },
   {
     "ea": "0x425EE0",
-    "line": "push    eax",
+    "line": "push    eax; climate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425EE1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425EE3",
-    "line": "call    TESObjectCELL_SetInteriorClimate",
+    "line": "call    TESObjectCELL_SetInteriorClimate; Oblivion common XCCM path uses a fresh zeroed bounded U32 then TESObjectCELL_SetInteriorClimate; it installs ExtraCellClimate with no owner-class guard. The subsequent common LinkFormIDs climate case0x0C at0x426429 validates the target as TESClimate and removes failure. Shared writer emits retained XCCM as exact4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,13 +2323,13 @@
   },
   {
     "ea": "0x425F2F",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XRTM: fresh zeroed bounded U32; 0 removes, nonzero sets/replaces. Common REFR/ACHR/ACRE loader accepts it.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425F37",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,19 +2341,19 @@
   },
   {
     "ea": "0x425F40",
-    "line": "push    edx",
+    "line": "push    edx; markerReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x425F41",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x425F43",
-    "line": "call    sub_4205C0",
+    "line": "call    ExtraDataList_SetRandomTeleportMarker; Verified ExtraDataList random-marker setter: null removes ExtraData type 0x43; non-null updates or allocates an ExtraRandomTeleportMarker and stores the TESObjectREFR* marker at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,7 +2383,7 @@
   },
   {
     "ea": "0x425F54",
-    "line": "fstp    [esp+3Ch+a2]",
+    "line": "fstp    [esp+3Ch+a2]; XTIM loader: fresh zeroed u32 plus bounded max-4 read, bit-cast as float32 into ExtraTimeLeft. Always creates/updates, including zero/NaN; repeats last-win.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x425F5A",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,7 +2425,7 @@
   },
   {
     "ea": "0x425F69",
-    "line": "call    sub_41EDF0",
+    "line": "call    ExtraDataList_SetTimeLeft; ExtraTimeLeft singleton setter always creates/updates the supplied float32 bit pattern; no zero or NaN removal sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2455,13 +2455,13 @@
   },
   {
     "ea": "0x425F7A",
-    "line": "mov     [esp+3Ch+a4], 0",
+    "line": "mov     [esp+3Ch+a4], 0; XLCM: fresh zeroed dword plus bounded max-4 read. Zero removes ExtraLevCreaModifier; nonzero creates/replaces. Short input is prefix+zeros; oversized preserves 3 bytes and forces byte3=0. Repeats can replace or remove inherited/current state.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425F82",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2485,7 @@
   },
   {
     "ea": "0x425F8E",
-    "line": "call    sub_420780",
+    "line": "call    ExtraDataList_SetLevCreaModifier; Creates/updates ExtraLevCreaModifier; null removes type 0x24.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2515,13 +2515,13 @@
   },
   {
     "ea": "0x425F9F",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XPSN loader: fresh zeroed u32 plus bounded max-4 read, then always creates/updates raw ExtraPoison FormID. ResolveLoadedFormIDs later requires AlchemyItem and removes invalid state.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x425FA7",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2545,7 +2545,7 @@
   },
   {
     "ea": "0x425FB3",
-    "line": "call    sub_41EFD0",
+    "line": "call    ExtraDataList_SetPoison; ExtraPoison setter always creates/updates raw serialized FormID, including zero. Post-load resolution removes zero/unresolved/non-AlchemyItem targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,7 +2701,7 @@
   },
   {
     "ea": "0x42601F",
-    "line": "jz      short loc_426030",
+    "line": "jz      short loc_426030; MEF v51 audited sibling ExtraData OOM bridge: restore construction state at [ESP+34h] on region-list allocation failure.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2719,7 +2719,7 @@
   },
   {
     "ea": "0x426025",
-    "line": "call    TESRegionList_constr",
+    "line": "call    TESRegionList_constr; Verified: mode byte at +0xC controls ownership and shared region-data cache lifetime. Owning lists reset cache on first owner and increment the manager/list refcount.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x426053",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF v51 bridge-stack audit: replacement CALL entry adds return and retains pending size. Vanilla region-list object is [ESP+3Ch] before size push/call, therefore bridge cleanup pointer [ESP+44h] is exact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x426067",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2875,13 +2875,13 @@
   },
   {
     "ea": "0x426076",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x42607B",
-    "line": "mov     edx, TESDataHandler",
+    "line": "mov     edx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x426083",
-    "line": "mov     ecx, [edx+0BCh]",
+    "line": "mov     ecx, [edx+0BCh]; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2905,13 +2905,13 @@
   },
   {
     "ea": "0x42608C",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42608D",
-    "line": "call    sub_4A63E0",
+    "line": "call    TESRegionList_FindRegionByFormID; Verified: linear search over region list comparing TESRegion formID at object offset +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2929,19 +2929,19 @@
   },
   {
     "ea": "0x426096",
-    "line": "mov     ecx, [esp+38h+a2]",
+    "line": "mov     ecx, [esp+38h+a2]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x42609A",
-    "line": "push    eax",
+    "line": "push    eax; region",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42609B",
-    "line": "call    sub_4A6350",
+    "line": "call    TESRegionList_AddUniqueRegion; Verified: inserts region only when not already present, preserving unique TESRegion membership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,7 +2983,7 @@
   },
   {
     "ea": "0x4260AF",
-    "line": "call    sub_4241E0",
+    "line": "call    ExtraDataList_SetRegionList; 0x4241E0: Named ExtraDataList_SetRegionList after direct decompilation: a nonnull candidate list replaces/frees prior region-list payload; null removes type8. Shared XCLR calls this for placed reference and CELL owners, with no record-kind gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3001,7 +3001,7 @@
   },
   {
     "ea": "0x4260B9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3013,7 +3013,7 @@
   },
   {
     "ea": "0x4260C1",
-    "line": "jmp     loc_426251",
+    "line": "jmp     loc_426251; MEF v33 XCLR allocation-failure continuation. Matches the invalid-length behavior: leave the current chunk unconsumed for the outer loader and exit this ExtraDataList_Load dispatch.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -3025,7 +3025,7 @@
   },
   {
     "ea": "0x4260C8",
-    "line": "mov     [esp+38h+a1], eax",
+    "line": "mov     [esp+38h+a1], eax; XESP: fresh zeroed bounded 8-byte scratch. Parent dword0 zero removes; otherwise set/replaces. Byte4 is stored verbatim as u8 flags; bytes5..7 are ignored.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3061,7 +3061,7 @@
   },
   {
     "ea": "0x4260D9",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x4260E5",
-    "line": "call    sub_420280",
+    "line": "call    ExtraDataList_SetEnableStateParent; Creates or updates ExtraEnableStateParent; a null parent removes extra type 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x4260F1",
-    "line": "call    sub_420380",
+    "line": "call    ExtraDataList_SetEnableStateFlags; Replaces the complete ExtraEnableStateParent flags byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3139,13 +3139,13 @@
   },
   {
     "ea": "0x426102",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XOWN: fresh zeroed bounded U32 per occurrence. Effective 0 removes ExtraOwnership; nonzero sets/replaces. Short input overlays zero; >4 copies first3 and forces high byte zero.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x42610A",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3157,19 +3157,19 @@
   },
   {
     "ea": "0x426113",
-    "line": "push    ecx",
+    "line": "push    ecx; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x426114",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x426116",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3199,13 +3199,13 @@
   },
   {
     "ea": "0x426127",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XHRS: fresh zeroed bounded U32; 0 removes, nonzero sets/replaces. Common REFR/ACHR/ACRE loader accepts it.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x42612F",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3229,7 +3229,7 @@
   },
   {
     "ea": "0x42613B",
-    "line": "call    sub_420860",
+    "line": "call    ExtraDataList_SetTravelHorse; Creates/updates ExtraTravelHorse type 0x58; null removes the travel-horse link.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3325,7 +3325,7 @@
   },
   {
     "ea": "0x42617D",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3349,7 +3349,7 @@
   },
   {
     "ea": "0x42618A",
-    "line": "call    sub_4242C0",
+    "line": "call    ExtraDataList_SetCellMusicType; Oblivion common XCMT loader reads a fresh zeroed byte with bounded max1 and calls ExtraDataList_SetCellMusicType0x4242C0. Zero removes; nonzero stores the byte regardless of owner. Shared writer case0x0B emits retained XCMT size1. xEdit declares the field on CELL.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3379,13 +3379,13 @@
   },
   {
     "ea": "0x42619B",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XHLT: fresh zeroed signed dword plus bounded max-4 read, then FILD converts SInt32 to runtime float ExtraHealth. Empty=>0.0; short=>sign/value from prefix+zeros; oversized=>first 3 bytes with high byte forced zero. Zero is retained as an ExtraHealth singleton; repeats last-win.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4261A3",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3445,13 +3445,13 @@
   },
   {
     "ea": "0x4261C3",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XACT: fresh zeroed dword plus bounded max-4 read; setter consumes only byte0 as action flags. Value 1 is default and removes/omits ExtraAction only when no companion action state exists; other values create/replace. Later XACT can clear ONAM/open bit 0x08 because it replaces the whole flag byte.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4261CB",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3463,19 +3463,19 @@
   },
   {
     "ea": "0x4261D4",
-    "line": "push    edx",
+    "line": "push    edx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4261D5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4261D7",
-    "line": "call    sub_423DA0",
+    "line": "call    ExtraDataList_SetActionFlags; Replace ExtraAction flag byte. Default value 1 removes/omits the extra only when its companion action-state dword is zero; otherwise retain/update. This is the XACT consumer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3505,13 +3505,13 @@
   },
   {
     "ea": "0x4261E5",
-    "line": "mov     [esp+3Ch+a2], 0",
+    "line": "mov     [esp+3Ch+a2], 0; XCNT: fresh zeroed dword plus bounded max-4 read; setter consumes signed/low 16-bit count. Counts 0 or 1 remove ExtraCount (implicit default count), all other low-16 values create/replace. Repeats are ordered replace/remove.",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4261ED",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3601,7 +3601,7 @@
   },
   {
     "ea": "0x42621B",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3631,7 +3631,7 @@
   },
   {
     "ea": "0x42622A",
-    "line": "call    sub_423FF0",
+    "line": "call    ExtraDataList_SetWaterHeight; Oblivion common XCLW loader reads fresh-zero bounded U32, bitcasts float, then calls ExtraDataList_SetWaterHeight0x423FF0. Either signed zero removes; nonzero and NaN values store/update. Common writer case4 emits retained raw float bits as exact4, with no owner-type filter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3667,7 +3667,7 @@
   },
   {
     "ea": "0x426240",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3691,13 +3691,13 @@
   },
   {
     "ea": "0x42624C",
-    "line": "call    sub_4204E0",
+    "line": "call    ExtraDataList_SetWaterType; Oblivion common XCWT loader uses fresh-zero bounded U32 then ExtraDataList_SetWaterType; no owner filter. Shared LinkFormIDs water case0x05 casts to TESWaterForm and removes unresolved/wrong-kind data. Common writer emits retained XCWT size4.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x426251",
-    "line": "mov     ecx, [esp+38h+var_C]",
+    "line": "mov     ecx, [esp+38h+var_C]; MEF v34 shared pre-consumption ExtraDataList_Load allocation-failure exit for XLOC/XMRK/XTEL.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3748,5 +3748,227 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AB8C0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB8C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8C4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB8C9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8CB",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB8CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8CF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB8D4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8D6",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB8D9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8DA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB8DF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8E1",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB8E4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8E5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB8EA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8EC",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB8EF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8F0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB8F5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8F6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8F7",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB8FA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB8FB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB900",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB901",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AB902",
+    "line": "mov     edx, [esp+owner]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AB906",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB909",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB90C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB90E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB913",
+    "line": "mov     eax, offset stru_AD8708",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB918",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

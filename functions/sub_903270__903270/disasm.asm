@@ -30,7 +30,6 @@
 0x9032D2: mov     [esp+24h+var_8], edx
 0x9032D6: jle     short loc_903318
 0x9032D8: jmp     short loc_9032E0
-0x9032DA: align 10h
 0x9032E0: mov     eax, [ebp+10h]
 0x9032E3: mov     ecx, [eax+esi*8]
 0x9032E6: mov     eax, [esp+24h+arg_C]

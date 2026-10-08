@@ -1,9 +1,9 @@
 _DWORD *sub_A132A0()
 {
-  return sub_90D190(
-           dword_BA81F4,
+  return sub_90D190( /*0xa132c7*/
+           unk_BA81F4,
            (int)"hkStorageSampledHeightFieldShape",
-           (int)dword_BA8218,
+           (int)unk_BA8218,
            0x70,
            0,
            0,

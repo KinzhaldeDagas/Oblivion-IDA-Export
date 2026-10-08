@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x65FF47",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x65FF4A",
-    "line": "fstp    [esp+8+var_4]",
+    "line": "fstp    [esp+8+var_4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x65FF61",
-    "line": "fstp    [esp+10h+var_C]; float",
+    "line": "fstp    [esp+10h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x65FF69",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65FF6C",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65FF6D",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed player/first-person ActorAnimData update caller; supports broad scheduler classification.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65FF72",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65FF74",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x65FF86",
-    "line": "fstp    [esp+10h+var_C]; float",
+    "line": "fstp    [esp+10h+explicitTimeOrMinusOne]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x65FF90",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65FF93",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65FF94",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed player/first-person ActorAnimData update caller; supports broad scheduler classification.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x66000E",
-    "line": "call    sub_41EDF0",
+    "line": "call    ExtraDataList_SetTimeLeft; ExtraTimeLeft singleton setter always creates/updates the supplied float32 bit pattern; no zero or NaN removal sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x66002B",
-    "line": "call    sub_447490",
+    "line": "call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x660057",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

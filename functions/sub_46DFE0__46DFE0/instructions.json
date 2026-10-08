@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x46E016",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF v57 IMPLEMENTED 2026-10-08: PERF-2 supersedes old v55/v56 allocation-hook target with PerfAMAllocateNifzPatch: retains actual size and buffer across nested allocation callbacks. Coupled read46E027 and batch46E02C use captured initialized extent plus two sentinels; do not trust a post-callback changed TESFile chunk size. Exactly one native free at46E055.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x46E027",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46E02C",
-    "line": "cmp     byte ptr [ebx], 0",
+    "line": "cmp     byte ptr [ebx], 0; MEF PERF 2026-09-07: Proposed PERF-2 bulk-loader boundary5bytes803B007424; EBXtemp buffer, EBPmodel component, EDI TESFile. Source advertised length is[EDI+254h]; v55 allocates two trailing zero sentinels at46E016. Bulk optimization must preserve first-empty-string termination, valid order and caller-owned free46E055/56, and seal initialized input extent; sentinels are not complete-read proof. No ready-made unsafe jump or source-pointer ownership transfer.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x46E034",
-    "line": "call    sub_46DD70",
+    "line": "call    TESModelList_AddUniqueModelPath; MEF PERF 2026-09-07: PERF-2 direct producer: NIFZ loader calls AddUniqueModelPath once per nonempty encoded string, then scans input length again and advances46E04F. Empty string terminates the list. This is a resource-loading path via TESCreature_LoadForm51E17F, not established as a per-frame FPS bottleneck.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x46E056",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

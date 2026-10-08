@@ -1,1 +1,1 @@
-HKL
+typedef HKL__ *HKL;

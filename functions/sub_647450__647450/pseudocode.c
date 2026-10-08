@@ -1,80 +1,70 @@
-char __userpurge sub_647450@<al>(TESForm **ecx0@<ecx>, int a2@<ebx>, float a3, int a4, int a5)
+// Verified 2026-10-04: LowProcess load role from Oblivion process vtable slot +0x3F8, parent call chain and matching serialization/reset behavior. ECX receiver and RET12 establish stack arity; owner is MobileObject (dispatch 65A835 for Revert). Probable: currentFlags semantic name follows matching Fallout and forwarded extra load word; broader policy unverified.
+// Verified paired low-process load, plus legacy branches: version<36 reads/converts a legacy4-byte date representation; version<33 with mask200000 skips a UInt16-counted8-byte legacy payload. Follow(+2C) and unk030(+30) temporarily hold loaded FormIDs until InitLoadGame resolves them. FormID-helper RET8 stack deltas corrected at6476C0/647710/647729.
+void __thiscall LowProcess_LoadGame(
+        LowProcess *self,
+        ProcessSaveChangeMask changeMask,
+        unsigned int currentFlags,
+        MobileObject *owner)
 {
-  float v5; // edi
-  UInt32 v7; // ebp
-  UInt32 *v8; // edi
-  TESForm *v9; // eax
-  const char *v10; // eax
-  TESSaveLoad *v11; // ecx
-  double v12; // st7
-  double v13; // rt0
-  double v14; // st6
-  double v15; // st5
-  unsigned int v16; // ebx
-  TESSaveLoad *v17; // ecx
-  TESForm *v18; // eax
-  TESSaveLoad *v19; // ecx
-  UInt32 v20; // eax
-  TESSaveLoad *v21; // ecx
-  UInt32 *v22; // edi
-  UInt32 v23; // esi
-  TESForm *v24; // ecx
+  ProcessSaveChangeMask v4; // edi
+  unsigned __int8 *bufferCursor; // ebp
+  UInt32 *currentlyLoadingFormHeader; // edi
+  TESForm *v8; // eax
+  const char *v9; // eax
+  TESSaveLoadGame_SerializationView *v10; // ecx
+  double v11; // st7
+  double v12; // rt0
+  double v13; // st6
+  double v14; // st5
+  unsigned int v15; // ebx
+  TESSaveLoadGame_SerializationView *v16; // ecx
+  TESForm *v17; // eax
+  TESSaveLoadGame_SerializationView *v18; // ecx
+  TESSaveLoadGame_SerializationView *v19; // ecx
+  UInt32 *v20; // edi
+  unsigned __int8 *v21; // esi
+  TESForm *v22; // ecx
+  unsigned __int8 *v23; // eax
+  const char *v24; // eax
   const char *v25; // eax
-  const char *v26; // eax
-  UInt32 v27; // edx
-  int v29; // [esp-20h] [ebp-40h]
-  int v30; // [esp-20h] [ebp-40h]
-  size_t v31; // [esp-1Ch] [ebp-3Ch]
-  int v32; // [esp-1Ch] [ebp-3Ch]
-  int v33; // [esp-1Ch] [ebp-3Ch]
-  size_t v34; // [esp-14h] [ebp-34h]
-  size_t v35; // [esp-Ch] [ebp-2Ch]
-  int v36; // [esp-Ch] [ebp-2Ch]
-  int v37; // [esp-8h] [ebp-28h]
-  size_t v38; // [esp-8h] [ebp-28h]
-  size_t v39; // [esp-8h] [ebp-28h]
-  size_t v40; // [esp-8h] [ebp-28h]
-  size_t v41; // [esp-8h] [ebp-28h]
-  int v42; // [esp-8h] [ebp-28h]
-  size_t v43; // [esp-4h] [ebp-24h]
-  size_t v44; // [esp-4h] [ebp-24h]
-  int v45; // [esp-4h] [ebp-24h]
-  size_t v46; // [esp-4h] [ebp-24h]
-  int v47; // [esp-4h] [ebp-24h]
-  int v48; // [esp+4h] [ebp-1Ch]
-  TESForm *v49; // [esp+4h] [ebp-1Ch]
-  int v50; // [esp+8h] [ebp-18h]
+  unsigned __int8 *v26; // edx
+  int v27; // [esp-8h] [ebp-28h]
+  int v28; // [esp-8h] [ebp-28h]
+  int v29; // [esp-8h] [ebp-28h]
+  int v30; // [esp-4h] [ebp-24h]
+  int v31; // [esp-4h] [ebp-24h]
+  int v32; // [esp-4h] [ebp-24h]
   int Dst; // [esp+Ch] [ebp-14h] BYREF
-  __int64 v52; // [esp+10h] [ebp-10h] BYREF
-  int a1; // [esp+1Ch] [ebp-4h]
+  unsigned int v34[2]; // [esp+10h] [ebp-10h]
+  unsigned int v35; // [esp+18h] [ebp-8h] BYREF
+  int a1; // [esp+1Ch] [ebp-4h] BYREF
 
-  v5 = a3;
-  sub_60D3C0(ecx0, a2, (int *)LODWORD(a3), a4, a5);
-  v7 = 0;
-  a5 = 0;
-  if ( sub_45A170() )
+  v4 = changeMask; /*0x64745a*/
+  BaseProcess_LoadGame(self, changeMask, currentFlags, owner); /*0x647469*/
+  bufferCursor = 0; /*0x647474*/
+  owner = 0; /*0x647476*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v43) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v43);
+    SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 4u); /*0x647494*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v8 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v8 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x6474a8*/
+      if ( currentlyLoadingFormHeader )
       {
-        v9 = TESForm_LookupByFormID(*v8);
-        v10 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v9->vtbl->GetEditorName)(
-                              v9,
-                              *((unsigned __int8 *)v8 + 9),
-                              *(UInt32 *)((char *)v8 + 5));
+        v8 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x6474b5*/
+        v9 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v8->vtbl->GetEditorName)( /*0x6474d0*/
+                             v8,
+                             *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                             *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           ".\\AI\\LowProcess.cpp",
           0xF38,
-          *v8,
-          v10,
-          v37,
-          v45);
+          *currentlyLoadingFormHeader,
+          v9,
+          v27,
+          v30);
       }
       else
       {
@@ -82,191 +72,167 @@ char __userpurge sub_647450@<al>(TESForm **ecx0@<ecx>, int a2@<ebx>, float a3, i
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\AI\\LowProcess.cpp",
           0xF38,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    v7 = SaveLoad_CurrentSavegame->unk000[5];
-    LODWORD(v44) = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a5, v44);
-    v5 = a3;
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x647511*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &owner, 2u); /*0x64751b*/
+    v4 = changeMask; /*0x647520*/
   }
-  HIDWORD(v38) = a2;
-  LODWORD(v38) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, ecx0 + 5, v38);
-  v11 = SaveLoad_CurrentSavegame;
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x36u
-    || (LODWORD(v39) = 4,
-        SaveLoad_LoadData((int)v11, ecx0 + 6, v39),
-        v11 = SaveLoad_CurrentSavegame,
-        LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x36u) )
+  SaveLoad_LoadData(g_TESSaveLoadGame, &self->curHour, 4u); /*0x647531*/
+  v10 = g_TESSaveLoadGame; /*0x647536*/
+  if ( g_TESSaveLoadGame->currentVersion < 0x36u /*0x647557*/
+    || (SaveLoad_LoadData(v10, &self->curPackedDate, 4u),
+        v10 = g_TESSaveLoadGame,
+        g_TESSaveLoadGame->currentVersion < 0x36u) )
   {
-    LODWORD(v39) = 4;
-    SaveLoad_LoadData((int)v11, &a4, v39);
-    v12 = *(float *)&a4;
-    unknown_libname_14(dbl_A2FA98, *(float *)&a4);
-    a3 = v12;
-    v13 = fCostant_100;
-    v52 = (__int64)(a3 / v13);
-    v14 = *(float *)&a4;
-    v15 = *(float *)&a4 / dbl_A2FA98;
-    a4 = LOWORD(a3) | 0xC00;
-    v52 = (__int64)v15;
-    v16 = ((0x10 * (unsigned int)(__int64)v15) | (unsigned int)(__int64)(a3 / v13)) << 9;
-    unknown_libname_14(v13, v14);
-    a3 = v14;
-    a4 = LOWORD(a3) | 0xC00;
-    v52 = (__int64)a3;
-    ecx0[6] = (TESForm *)(v52 | v16);
-    v11 = SaveLoad_CurrentSavegame;
+    SaveLoad_LoadData(v10, &currentFlags, 4u); /*0x647564*/
+    v11 = *(float *)&currentFlags; /*0x647569*/
+    unknown_libname_14(dbl_A2FA98, *(float *)&currentFlags); /*0x647573*/
+    *(float *)&changeMask = v11; /*0x647578*/
+    v12 = fCostant_100; /*0x647591*/
+    *(_QWORD *)v34 = (__int64)(*(float *)&changeMask / v12); /*0x6475a0*/
+    v13 = *(float *)&currentFlags; /*0x6475ac*/
+    v14 = *(float *)&currentFlags / dbl_A2FA98; /*0x6475b6*/
+    currentFlags = (unsigned __int16)changeMask | 0xC00; /*0x6475c6*/
+    *(_QWORD *)v34 = (__int64)v14; /*0x6475ce*/
+    v15 = ((0x10 * (unsigned int)(__int64)v14) | (unsigned int)(__int64)(*(float *)&changeMask / v12)) << 9; /*0x6475df*/
+    unknown_libname_14(v12, v13); /*0x6475e4*/
+    *(float *)&changeMask = v13; /*0x6475e9*/
+    currentFlags = (unsigned __int16)changeMask | 0xC00; /*0x6475ff*/
+    *(_QWORD *)v34 = (__int64)*(float *)&changeMask; /*0x647607*/
+    self->curPackedDate = v34[0] | v15; /*0x647611*/
+    v10 = g_TESSaveLoadGame; /*0x647618*/
   }
-  LODWORD(v39) = 1;
-  SaveLoad_LoadData((int)v11, ecx0 + 7, v39);
-  LODWORD(v40) = 1;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (char *)ecx0 + 0x1D, v40);
-  LODWORD(v41) = 1;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, ecx0 + 0x21, v41);
-  v17 = SaveLoad_CurrentSavegame;
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x34u )
+  SaveLoad_LoadData(v10, &self->unk01C, 1u); /*0x647624*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, &self->procedureCompleted, 1u); /*0x647635*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, &self->unk084, 1u); /*0x647649*/
+  v16 = g_TESSaveLoadGame; /*0x64764e*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x34u ) /*0x647659*/
   {
-    LODWORD(v43) = 1;
-    SaveLoad_LoadData((int)v17, (char *)ecx0 + 0x1F, v43);
-    v17 = SaveLoad_CurrentSavegame;
+    SaveLoad_LoadData(v16, &self->isAlerted, 1u); /*0x647661*/
+    v16 = g_TESSaveLoadGame; /*0x647666*/
   }
-  if ( LOBYTE(v17[1].createdObjectList.next) >= 0x37u )
+  if ( v16->currentVersion >= 0x37u ) /*0x647670*/
   {
-    LODWORD(v43) = 1;
-    SaveLoad_LoadData((int)v17, ecx0 + 8, v43);
-    v17 = SaveLoad_CurrentSavegame;
+    SaveLoad_LoadData(v16, &self->unk020, 1u); /*0x647678*/
+    v16 = g_TESSaveLoadGame; /*0x64767d*/
   }
-  if ( LOBYTE(v17[1].createdObjectList.next) >= 0x4Bu )
+  if ( v16->currentVersion >= 0x4Bu ) /*0x647687*/
   {
-    LODWORD(v43) = 4;
-    SaveLoad_LoadData((int)v17, ecx0 + 0x22, v43);
-    v17 = SaveLoad_CurrentSavegame;
+    SaveLoad_LoadData(v16, &self->unk088, 4u); /*0x647692*/
+    v16 = g_TESSaveLoadGame; /*0x647697*/
   }
-  if ( LOBYTE(v17[1].createdObjectList.next) >= 0x4Fu )
+  if ( v16->currentVersion >= 0x4Fu ) /*0x6476a1*/
   {
-    LODWORD(v43) = 4;
-    SaveLoad_LoadData((int)v17, ecx0 + 0xA, v43);
-    LODWORD(v46) = 4;
-    SaveLoad_LoadFormID(&a3, v46, v48, v50, Dst);
-    v18 = TESForm_LookupByFormID(a1);
-    ecx0[9] = (TESForm *)OblivionDynamicCast(
-                           v18,
-                           0,
-                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                           (struct TypeDescriptor *)&TESBoundObject `RTTI Type Descriptor',
-                           0);
-    v17 = SaveLoad_CurrentSavegame;
+    SaveLoad_LoadData(v16, &self->unk028, 4u); /*0x6476a9*/
+    SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)&changeMask, 4u); /*0x6476bb*/
+    v17 = TESForm_LookupByFormID(changeMask); /*0x6476d3*/
+    self->usedItem = (TESForm *)OblivionDynamicCast( /*0x6476e1*/
+                                  v17,
+                                  0,
+                                  (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                  (struct TypeDescriptor *)&TESBoundObject `RTTI Type Descriptor',
+                                  0);
+    v16 = g_TESSaveLoadGame; /*0x6476e4*/
   }
-  if ( LOBYTE(v17[1].createdObjectList.next) >= 0x56u )
+  if ( v16->currentVersion >= 0x56u ) /*0x6476f1*/
   {
-    LODWORD(v35) = 4;
-    SaveLoad_LoadData((int)v17, ecx0 + 0xE, v35);
+    SaveLoad_LoadData(v16, &self->unk038, 4u); /*0x6476f9*/
+    v16 = g_TESSaveLoadGame; /*0x6476fe*/
   }
-  LODWORD(v35) = 4;
-  SaveLoad_LoadFormID(&v52, v35, v43, SHIDWORD(v43), v48);
-  LODWORD(v34) = 4;
-  ecx0[0xB] = (TESForm *)v50;
-  SaveLoad_LoadFormID(&Dst, v34, v36, v42, v47);
-  ecx0[0xC] = v49;
-  if ( (LODWORD(v5) & 0x400000) != 0 )
-    AVCollection_Load(ecx0 + 0x1C);
-  v19 = SaveLoad_CurrentSavegame;
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x33u && (LODWORD(v5) & 0x200000) != 0 )
+  SaveLoad_LoadFormID(v16, &v35, 4u); /*0x64770b*/
+  self->follow = (Actor *)v35; /*0x64771a*/
+  SaveLoad_LoadFormID(g_TESSaveLoadGame, (unsigned int *)&a1, 4u); /*0x647724*/
+  self->unk030 = (TESObjectREFR *)a1; /*0x647733*/
+  if ( (v4 & 0x400000) != 0 ) /*0x647736*/
+    AVCollection_Load(&self->avDamageModifiers); /*0x64773b*/
+  v18 = g_TESSaveLoadGame; /*0x647740*/
+  if ( g_TESSaveLoadGame->currentVersion < 0x33u && (v4 & 0x200000) != 0 ) /*0x647752*/
   {
-    LODWORD(v31) = 2;
-    SaveLoad_LoadData((int)v19, &Dst, v31);
-    v19 = SaveLoad_CurrentSavegame;
-    if ( (_WORD)Dst )
+    SaveLoad_LoadData(v18, &changeMask, 2u); /*0x64775b*/
+    v18 = g_TESSaveLoadGame; /*0x647768*/
+    if ( (_WORD)changeMask ) /*0x64776e*/
     {
-      SaveLoad_AdvanceBufferOffset(v19, 8 * (unsigned __int16)Dst);
-      v19 = SaveLoad_CurrentSavegame;
+      SaveLoad_AdvanceBufferOffset(v18, 8 * (unsigned __int16)changeMask); /*0x64777a*/
+      v18 = g_TESSaveLoadGame; /*0x64777f*/
     }
   }
-  if ( LOBYTE(v19[1].createdObjectList.next) >= 0x74u )
+  if ( v18->currentVersion >= 0x74u ) /*0x647789*/
   {
-    LODWORD(v31) = 4;
-    SaveLoad_LoadData((int)v19, ecx0 + 0x23, v31);
-    v19 = SaveLoad_CurrentSavegame;
+    SaveLoad_LoadData(v18, &self->unk08C, 4u); /*0x647794*/
+    v18 = g_TESSaveLoadGame; /*0x647799*/
   }
-  if ( LOBYTE(v19[1].createdObjectList.next) >= 0x76u )
+  if ( v18->currentVersion >= 0x76u ) /*0x6477a3*/
+    SaveLoad_LoadData(v18, &self->unk01E, 1u); /*0x6477ab*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x6477b6*/
   {
-    LODWORD(v31) = 1;
-    SaveLoad_LoadData((int)v19, (char *)ecx0 + 0x1E, v31);
-  }
-  LOBYTE(v20) = sub_45A170();
-  if ( (_BYTE)v20 )
-  {
-    v21 = SaveLoad_CurrentSavegame;
-    v22 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v23 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v22 )
+    v19 = g_TESSaveLoadGame; /*0x6477c3*/
+    v20 = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x6477c9*/
+    v21 = g_TESSaveLoadGame->bufferCursor; /*0x6477d1*/
+    if ( v20 ) /*0x6477d4*/
     {
-      v24 = TESForm_LookupByFormID(*v22);
-      v20 = WORD2(v52) + v7;
-      if ( v23 <= v20 )
+      v22 = TESForm_LookupByFormID(*v20); /*0x6477e7*/
+      v23 = &bufferCursor[(unsigned __int16)owner]; /*0x6477e9*/
+      if ( v21 <= v23 ) /*0x6477f1*/
       {
-        if ( v23 < v20 )
+        if ( v21 < v23 ) /*0x647834*/
         {
-          v26 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v24->vtbl->GetEditorName)(
-                                v24,
-                                *((unsigned __int8 *)v22 + 9),
-                                *(UInt32 *)((char *)v22 + 5));
-          LOBYTE(v20) = PrintError(
-                          "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s"
-                          " with version %i and flags %08X",
-                          v7 + WORD2(v52) - v23,
-                          ".\\AI\\LowProcess.cpp",
-                          0xF8F,
-                          *v22,
-                          v26,
-                          v30,
-                          v33);
+          v25 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v22->vtbl->GetEditorName)( /*0x64784b*/
+                                v22,
+                                *((unsigned __int8 *)v20 + 9),
+                                *(UInt32 *)((char *)v20 + 5));
+          PrintError( /*0x64786a*/
+            "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
+            "%i and flags %08X",
+            &bufferCursor[(unsigned __int16)owner - (_DWORD)v21],
+            ".\\AI\\LowProcess.cpp",
+            0xF8F,
+            *v20,
+            v25,
+            v29,
+            v32);
         }
       }
       else
       {
-        v25 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v24->vtbl->GetEditorName)(
-                              v24,
-                              *((unsigned __int8 *)v22 + 9),
-                              *(UInt32 *)((char *)v22 + 5));
-        LOBYTE(v20) = PrintError(
-                        "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s wi"
-                        "th version %i and flags %08X",
-                        v23 - WORD2(v52) - v7,
-                        ".\\AI\\LowProcess.cpp",
-                        0xF8F,
-                        *v22,
-                        v25,
-                        v29,
-                        v32);
+        v24 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v22->vtbl->GetEditorName)( /*0x647804*/
+                              v22,
+                              *((unsigned __int8 *)v20 + 9),
+                              *(UInt32 *)((char *)v20 + 5));
+        PrintError( /*0x647823*/
+          "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
+          &v21[-(unsigned __int16)owner] - bufferCursor,
+          ".\\AI\\LowProcess.cpp",
+          0xF8F,
+          *v20,
+          v24,
+          v28,
+          v31);
       }
     }
     else
     {
-      LOBYTE(v20) = BYTE4(v52);
-      v27 = WORD2(v52) + v7;
-      if ( v23 <= v27 )
+      v26 = &bufferCursor[(unsigned __int16)owner]; /*0x647880*/
+      if ( v21 <= v26 ) /*0x647885*/
       {
-        if ( v23 < v27 )
-          LOBYTE(v20) = PrintError(
-                          "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-                          v7 + WORD2(v52) - v23,
-                          ".\\AI\\LowProcess.cpp",
-                          0xF8F,
-                          LOBYTE(v21[1].createdObjectList.next));
+        if ( v21 < v26 ) /*0x6478b1*/
+          PrintError( /*0x6478cc*/
+            "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
+            &bufferCursor[(unsigned __int16)owner - (_DWORD)v21],
+            ".\\AI\\LowProcess.cpp",
+            0xF8F,
+            v19->currentVersion);
       }
       else
       {
-        LOBYTE(v20) = PrintError(
-                        "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-                        v23 - WORD2(v52) - v7,
-                        ".\\AI\\LowProcess.cpp",
-                        0xF8F,
-                        LOBYTE(v21[1].createdObjectList.next));
+        PrintError( /*0x6478a0*/
+          "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
+          &v21[-(unsigned __int16)owner] - bufferCursor,
+          ".\\AI\\LowProcess.cpp",
+          0xF8F,
+          v19->currentVersion);
       }
     }
   }
-  return v20;
 }

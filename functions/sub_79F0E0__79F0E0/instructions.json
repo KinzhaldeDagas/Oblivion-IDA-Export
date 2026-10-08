@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79F0E0",
-    "line": "push    ebx",
+    "line": "push    ebx; Checked erase-range for st_vector<SFrondGuide>. Validates iterator owners, deep-moves [last,end) over [first,last), destroys the vacated tail, updates end, and returns {owner,first}.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x79F0E2",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79F0ED",
-    "line": "cmp     ebp, [esp+0Ch+arg_C]",
+    "line": "cmp     ebp, [esp+0Ch+lastOwner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x79F0F8",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79F0FC",
-    "line": "mov     ecx, [esp+0Ch+arg_10]",
+    "line": "mov     ecx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x79F108",
-    "line": "mov     byte ptr [esp+10h+arg_4], 0",
+    "line": "mov     byte ptr [esp+10h+firstOwner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79F10D",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x79F112",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x79F117",
-    "line": "mov     edx, [esp+18h+arg_0]",
+    "line": "mov     edx, [esp+18h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,25 +139,25 @@
   },
   {
     "ea": "0x79F11C",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F11D",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F11E",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F11F",
-    "line": "call    sub_79BE80",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeForwardThunk_010201A0; Thin checked/STL wrapper around forward SFrondGuide range copy-assignment; returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x79F129",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x79F12F",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F130",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F131",
-    "line": "call    sub_79E150",
+    "line": "call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x79F13D",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

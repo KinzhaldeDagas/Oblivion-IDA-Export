@@ -1,199 +1,204 @@
-int __thiscall sub_474530(_DWORD *this, int a2, float a3, int a4)
+// Plays a selected BSAnimGroupSequence. Resolves default slot from fixed group metadata, maps physical slot 5->0 and 6->3 while retaining the requested alias for clear semantics, handles menu/full reset conditions, records active key +0x3C and sequence +0xA0, chooses morph only for matching nonzero morph keys and equal controller counts, otherwise cross-fades or blends from a temporary pose, applies the maximum old/new Blend byte as transition time, and initializes slot action state.
+BSAnimGroupSequence *__thiscall ActorAnimData_PlaySequence(
+        ActorAnimData *this,
+        BSAnimGroupSequence *sequence,
+        unsigned int encodedKey,
+        int slotSelector)
 {
-  int v7; // ecx
-  int v8; // edi
-  int v9; // ebx
-  int v10; // ebp
-  int v12; // eax
-  int v13; // eax
-  int v14; // ebx
-  float v15; // ebx
-  char v16; // bl
-  int v17; // ebx
-  unsigned __int8 v18; // al
-  int v19; // edx
-  NiNode *v20; // edi
-  float v21; // [esp+8h] [ebp-38h]
-  int v22; // [esp+28h] [ebp-18h]
-  int v23; // [esp+2Ch] [ebp-14h]
-  int v24; // [esp+30h] [ebp-10h]
+  int GroupID; // ecx
+  BSAnimGroupSequence *v6; // edi
+  int v7; // ebx
+  BSAnimGroupSequence *v8; // ebp
+  BSAnimGroupSequence *v10; // eax
+  BSAnimGroupSequence *v11; // eax
+  int v12; // ebx
+  _BYTE *v13; // ebx
+  char MorphKey; // bl
+  int v15; // ebx
+  unsigned __int8 v16; // al
+  int v17; // edx
+  NiNode *RootNode; // edi
+  float weight; // [esp+8h] [ebp-38h]
+  int v20; // [esp+28h] [ebp-18h]
+  int slot; // [esp+2Ch] [ebp-14h]
+  int v22; // [esp+30h] [ebp-10h]
 
-  v7 = sub_51AA00(LOBYTE(a3));
-  v24 = v7;
-  v22 = a4;
-  if ( a4 == 0xFFFFFFFF )
-    v22 = *(_DWORD *)(0x24 * v7 + 0xB102E8);
-  v23 = v22;
-  if ( v22 == 5 )
+  GroupID = AnimKey_GetGroupID(encodedKey); /*0x474563*/
+  v22 = GroupID; /*0x47456f*/
+  v20 = slotSelector; /*0x474573*/
+  if ( slotSelector == 0xFFFFFFFF ) /*0x474577*/
+    v20 = *(_DWORD *)(0x24 * GroupID + 0xB102E8); /*0x474583*/
+  slot = v20; /*0x47458b*/
+  if ( v20 == 5 ) /*0x474592*/
   {
-    v22 = 0;
+    v20 = 0; /*0x4745a3*/
   }
-  else if ( v22 == 6 )
+  else if ( v20 == 6 ) /*0x474597*/
   {
-    v22 = 3;
+    v20 = 3; /*0x474599*/
   }
-  v8 = *(this + v22 + 0x28);
-  v9 = 0;
-  LOBYTE(a4) = 0;
-  if ( v8 )
-    v9 = *(_DWORD *)(v8 + 0x44);
-  v10 = a2;
-  if ( !a2 || LOWORD(a3) == 0xFF )
-    return 0;
-  if ( *(_DWORD *)(a2 + 0x44) == 3 )
-    sub_6C9CB0(a2, 0.0, 0);
-  if ( !*(_DWORD *)(v10 + 0x44)
-    || *(_DWORD *)(v10 + 0x24)
-    || InterfaceManager_IsMenuMode()
-    && (NiNode *)*(this + 1) == PlayerCharacter_GetPlayerNode(TESDataHandler_g_PlayerRef, 0) )
+  v6 = this->animSequences[v20]; /*0x4745af*/
+  v7 = 0; /*0x4745b6*/
+  LOBYTE(slotSelector) = 0; /*0x4745ba*/
+  if ( v6 ) /*0x4745bf*/
+    v7 = *((_DWORD *)v6 + 0x11); /*0x4745c1*/
+  v8 = sequence; /*0x4745c4*/
+  if ( !sequence || (_WORD)encodedKey == 0xFF ) /*0x4745d7*/
+    return 0; /*0x474a86*/
+  if ( *((_DWORD *)sequence + 0x11) == 3 ) /*0x4745e1*/
+    NiControllerSequence_Deactivate(sequence, 0.0, 0); /*0x4745ed*/
+  if ( !*((_DWORD *)v8 + 0x11)
+    || *((_DWORD *)v8 + 9)
+    || InterfaceManager_IsMenuMode() && this->RootNode == PlayerCharacter_GetNodeByPerspective(reference, 0) )
   {
-    if ( InterfaceManager_IsMenuMode()
-      && (NiNode *)*(this + 1) == PlayerCharacter_GetPlayerNode(TESDataHandler_g_PlayerRef, 0)
-      && !sub_45A500(SaveLoad_CurrentSavegame) )
+    if ( InterfaceManager_IsMenuMode() /*0x474655*/
+      && this->RootNode == PlayerCharacter_GetNodeByPerspective(reference, 0)
+      && !sub_45A500(g_TESSaveLoadGame) )
     {
-      sub_470FC0(this, 4, 0.0);
-      sub_470FC0(this, 0, 0.0);
-      sub_470FC0(this, 1, 0.0);
-      sub_470FC0(this, 2, 0.0);
-      if ( *(this + 0x26) )
+      ActorAnimData_ClearSlot(this, 4, 0.0); /*0x47466c*/
+      ActorAnimData_ClearSlot(this, 0, 0.0); /*0x47467b*/
+      ActorAnimData_ClearSlot(this, 1, 0.0); /*0x47468a*/
+      ActorAnimData_ClearSlot(this, 2, 0.0); /*0x474699*/
+      if ( this->manager ) /*0x47469e*/
       {
-        v12 = *(this + 0x2B);
-        if ( v12 )
+        v10 = this->animSequences[3]; /*0x4746a8*/
+        if ( v10 ) /*0x4746b0*/
         {
-          if ( *(_DWORD *)(v12 + 0x44) )
+          if ( *((_DWORD *)v10 + 0x11) ) /*0x4746b2*/
           {
-            v13 = *(_DWORD *)(v12 + 0x58);
-            if ( v13 )
-              sub_470B50(v13, 0.0);
-            if ( *(_DWORD *)(*(this + 0x2B) + 0x44) == 5 )
-              sub_6C4480((_DWORD *)*(this + 0x26), 0.0);
-            sub_6C9CB0(*(this + 0x2B), 0.0, 0);
+            v11 = *((BSAnimGroupSequence **)v10 + 0x16); /*0x4746b8*/
+            if ( v11 ) /*0x4746bd*/
+              BSAnimGroupSequence_Deactivate(v11, 0.0); /*0x4746c6*/
+            if ( *((_DWORD *)this->animSequences[3] + 0x11) == 5 ) /*0x4746d5*/
+              NiControllerManager_DeactivateTransitionSources((_DWORD *)this->manager, 0.0); /*0x4746e3*/
+            NiControllerSequence_Deactivate(this->animSequences[3], 0.0, 0); /*0x4746f6*/
           }
         }
       }
-      *(this + 0x2B) = 0;
-      *((_WORD *)this + 0x21) = 0xFF;
-      *((_WORD *)this + 0x3B) = 0xFF;
-      *(this + 0x15) = 0xFFFFFFFF;
-      HighPRocess_DoAction_____(TESDataHandler_g_PlayerRef, 0xFFFFFFFF, 0);
-      sub_4728C0((int)this);
-      v14 = v22;
+      this->animSequences[3] = 0; /*0x4746fb*/
+      this->animsMapKey[3] = 0xFF; /*0x47470a*/
+      HIWORD(this->unk74) = 0xFF; /*0x47470e*/
+      this->unk48State[3] = 0xFFFFFFFF; /*0x474714*/
+      Actor_SetCurrentActionWithBowVisualCleanup((Actor *)reference, kActorCurrentAction_None, 0); /*0x474723*/
+      ActorAnimData_ResetRootMotion((int)this); /*0x47472a*/
+      v12 = v20; /*0x47472f*/
     }
-    else if ( v9 == 1 )
+    else if ( v7 == 1 ) /*0x47473c*/
     {
-      v14 = v22;
-      if ( v23 != v22 || *((_BYTE *)this + 0xC4) || *(_DWORD *)(v10 + 0x44) )
-        sub_470FC0(this, v23, 0.0);
+      v12 = v20; /*0x474754*/
+      if ( slot != v20 || this->unkC4 || *((_DWORD *)v8 + 0x11) ) /*0x474765*/
+        ActorAnimData_ClearSlot(this, slot, 0.0); /*0x474774*/
     }
     else
     {
-      sub_470FC0(this, v23, 0.0);
-      v14 = v22;
-      v8 = 0;
+      ActorAnimData_ClearSlot(this, slot, 0.0); /*0x474747*/
+      v12 = v20; /*0x47474c*/
+      v6 = 0; /*0x474750*/
     }
-    *((_WORD *)this + v14 + 0x1E) = LOWORD(a3);
-    *(this + v14 + 0x28) = v10;
-    if ( !InterfaceManager_IsMenuMode()
-      || (NiNode *)*(this + 1) != PlayerCharacter_GetPlayerNode(TESDataHandler_g_PlayerRef, 0) )
+    this->animsMapKey[v12] = encodedKey; /*0x47477e*/
+    this->animSequences[v12] = v8; /*0x474783*/
+    if ( !InterfaceManager_IsMenuMode() || this->RootNode != PlayerCharacter_GetNodeByPerspective(reference, 0) )
     {
-      if ( v8 )
+      if ( v6 )
       {
-        sub_405070(&a2, *(_DWORD *)(v10 + 0x68));
-        sub_405070(&a3, *(_DWORD *)(v8 + 0x68));
-        v15 = a3;
-        if ( sub_51AAD0((_BYTE *)LODWORD(a3)) )
+        sub_405070(&sequence, *((_DWORD *)v8 + 0x1A)); /*0x4747b9*/
+        sub_405070(&encodedKey, *((_DWORD *)v6 + 0x1A)); /*0x4747ce*/
+        v13 = (_BYTE *)encodedKey; /*0x4747d3*/
+        if ( TESAnimGroup_GetMorphKey((_BYTE *)encodedKey) )
         {
-          v16 = sub_51AAD0((_BYTE *)LODWORD(v15));
-          if ( v16 == sub_51AAD0((_BYTE *)a2) )
+          MorphKey = TESAnimGroup_GetMorphKey(v13); /*0x4747f2*/
+          if ( MorphKey == TESAnimGroup_GetMorphKey(sequence) )
           {
-            v17 = *(_DWORD *)(v8 + 0xC);
-            if ( v17 == *(_DWORD *)(v10 + 0xC) )
+            v15 = *((_DWORD *)v6 + 3); /*0x4747fd*/
+            if ( v15 == *((_DWORD *)v8 + 3) )
             {
-              LOBYTE(a4) = 1;
-              if ( v10 == v8 )
+              LOBYTE(slotSelector) = 1; /*0x47480b*/
+              if ( v8 == v6 )
               {
                 PrintError(
                   "Morph Error: Trying to morph from sequence to itself.\r\n'%s' on '%s'.",
-                  *(const char **)(v8 + 8),
-                  *(const char **)(*(this + 1) + 8));
-                LOBYTE(a4) = 0;
+                  *((const char **)v6 + 2),
+                  this->RootNode->members.super.super.m_pcName);
+                LOBYTE(slotSelector) = 0; /*0x47482a*/
               }
             }
             else
             {
               PrintError(
                 "Morph Error: Controller count not the same.\r\n'%s' has %d controllers and\r\n'%s' has %d on '%s'.",
-                *(const char **)(v8 + 8),
-                v17,
-                *(const char **)(v10 + 8),
-                *(_DWORD *)(v10 + 0xC),
-                *(const char **)(*(this + 1) + 8));
+                *((const char **)v6 + 2),
+                v15,
+                *((const char **)v8 + 2),
+                *((_DWORD *)v8 + 3),
+                this->RootNode->members.super.super.m_pcName);
             }
           }
         }
-        sub_7016A0((NiD3DVertexShader *)&a3);
-        sub_7016A0((NiD3DVertexShader *)&a2);
-        v14 = v22;
+        NiPointerSlot_Release((void **)&encodedKey); /*0x474838*/
+        NiPointerSlot_Release((void **)&sequence); /*0x474849*/
+        v12 = v20; /*0x47484e*/
       }
     }
-    v18 = 0;
-    a3 = flt_B06538;
-    if ( v8 )
-      v18 = *(_BYTE *)(*(_DWORD *)(v8 + 0x68) + 0x21);
-    v19 = *(_DWORD *)(v10 + 0x68);
-    if ( *(_BYTE *)(v19 + 0x21) > v18 )
-      v18 = *(_BYTE *)(v19 + 0x21);
-    if ( v18 )
+    v16 = 0; /*0x474858*/
+    *(float *)&encodedKey = flt_B06538; /*0x47485c*/
+    if ( v6 ) /*0x474860*/
+      v16 = *(_BYTE *)(*((_DWORD *)v6 + 0x1A) + 0x21); /*0x474865*/
+    v17 = *((_DWORD *)v8 + 0x1A); /*0x474868*/
+    if ( *(_BYTE *)(v17 + 0x21) > v16 ) /*0x474870*/
+      v16 = *(_BYTE *)(v17 + 0x21); /*0x474872*/
+    if ( v16 ) /*0x474876*/
     {
-      LODWORD(a3) = v18;
-      a3 = (double)v18 / dbl_A3AA50;
+      encodedKey = v16; /*0x47487b*/
+      *(float *)&encodedKey = (double)v16 / dbl_A3AA50; /*0x474889*/
     }
-    if ( InterfaceManager_IsMenuMode() && (NiNode *)*(this + 1) == TESDataHandler_g_PlayerRef->inventoryPC
-      || sub_5790E0(0x40C, 0) )
+    if ( InterfaceManager_IsMenuMode() && this->RootNode == reference->inventoryPC /*0x4748ae*/
+      || InterfaceManager_IsMenuVisibleByID(0x40C, 0) )
     {
-      a3 = flt_B06540;
+      *(float *)&encodedKey = flt_B06540; /*0x4748c0*/
     }
-    if ( *((_BYTE *)this + 0xC4) )
-      a3 = 0.0;
-    a3 = a3 / flt_B06530;
-    *(float *)(v10 + 0x48) = *(float *)(v10 + 0x2C) + dbl_A2FC68;
-    if ( a3 >= (double)flt_A34BA0 )
+    if ( this->unkC4 ) /*0x4748c4*/
+      *(float *)&encodedKey = 0.0; /*0x4748cf*/
+    *(float *)&encodedKey = *(float *)&encodedKey / flt_B06530; /*0x4748dd*/
+    *((float *)v8 + 0x12) = *((float *)v8 + 0xB) + dbl_A2FC68; /*0x4748ea*/
+    if ( *(float *)&encodedKey >= (double)flt_A34BA0 ) /*0x474900*/
     {
-      if ( (_BYTE)a4 )
+      if ( (_BYTE)slotSelector ) /*0x474951*/
       {
-        sub_6C4060(v8, v10, a3, 0, 1.0, 1.0);
+        NiControllerSequence_Morph(v6, (NiD3DPass *)v8, *(float *)&encodedKey, 0, 1.0, 1.0); /*0x47496d*/
       }
-      else if ( !v8 || !*(_DWORD *)(v8 + 0x44) || !sub_6C4000(v8, v10, a3, 0, 1, 1.0, 0) )
+      else if ( !v6 /*0x474999*/
+             || !*((_DWORD *)v6 + 0x11)
+             || !NiControllerSequence_CrossFade(v6, v8, *(float *)&encodedKey, 0, 1, 1.0, 0) )
       {
-        if ( (NiNode *)*(this + 1) == PlayerCharacter_GetPlayerNode(TESDataHandler_g_PlayerRef, 1)
-          || (v20 = (NiNode *)*(this + 1), v20 == PlayerCharacter_GetPlayerNode(TESDataHandler_g_PlayerRef, 0))
-          || sub_47F7B0(v20, (int)g_worldScenegraph->camera) && !byte_B333B8 )
+        if ( this->RootNode == PlayerCharacter_GetNodeByPerspective(reference, 1) /*0x4749e9*/
+          || (RootNode = this->RootNode, RootNode == PlayerCharacter_GetNodeByPerspective(reference, 0))
+          || sub_47F7B0((float *)RootNode, *((_DWORD *)g_WorldSceneReceiverRoot + 0x37)) && !unk_B333B8 )
         {
-          sub_6C5C70((_DWORD *)*(this + 0x26), v10, 0.0, a3, 0, 0);
+          NiControllerManager_BlendFromPose((int **)this->manager, v8, 0.0, *(float *)&encodedKey, 0, 0); /*0x474a2f*/
         }
         else
         {
-          sub_470B20((_DWORD *)v10, 0, 1, 1.0, 0.0, 0);
+          BSAnimGroupSequence_Activate(v8, 0, 1, 1.0, 0.0, 0); /*0x474a0d*/
         }
       }
     }
     else
     {
-      sub_6C9BA0((_DWORD *)v10, 0, 1, 1.0, 0.0, 0, 0);
+      NiControllerSequence_Activate(v8, 0, 1, 1.0, 0.0, 0, 0); /*0x47491c*/
     }
-    if ( *(_DWORD *)(0x24 * v24 + 0xB102EC) <= 7u )
-      *(this + v14 + 0x12) = 0;
-    if ( *((_BYTE *)this + 0xC4) )
+    if ( *(_DWORD *)(0x24 * v22 + 0xB102EC) <= 7u ) /*0x474a45*/
+      this->unk48State[v12] = 0; /*0x474a55*/
+    if ( this->unkC4 ) /*0x474a5d*/
     {
-      v21 = *((float *)this + 0x25);
-      *((_BYTE *)this + 0xC4) = 0;
-      sub_471230((int)this, v21, 0, 1);
+      weight = this->unk94; /*0x474a73*/
+      this->unkC4 = 0; /*0x474a76*/
+      ActorAnimData_SampleAndExtractRootMotion((int)this, weight, 0, 1); /*0x474a7d*/
     }
-    return v10;
+    return v8; /*0x474a82*/
   }
   else
   {
-    *(this + v22 + 0x12) = 0;
-    return v10;
+    this->unk48State[v20] = 0; /*0x47461d*/
+    return v8; /*0x474625*/
   }
 }

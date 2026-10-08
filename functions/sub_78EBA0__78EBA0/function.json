@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x78EBA0",
+      "0x78EBEE"
+    ]
+  ],
+  "chunks_sha256": "4b8050fa2b367cb71b54b4f35f6dcae996e99705308f885f9186a2af5885f15b",
+  "comment_regular": "CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.",
+  "comment_repeatable": "CTreeFileAccess vector3 float reader. Reads three 4-byte floats into caller buffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78EBA0",
+  "display_name": "OB_CTreeFileAccess_ReadVec3_010201A0",
   "end_ea": "0x78EBEE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78EBA0",
+  "name": "OB_CTreeFileAccess_ReadVec3_010201A0",
   "segment": ".text",
   "sha256": "4b8050fa2b367cb71b54b4f35f6dcae996e99705308f885f9186a2af5885f15b",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78EBA0",
-  "type": "float *__thiscall(unsigned int *this, float *)",
+  "total_chunk_size": 78,
+  "type": "float *__thiscall(OB_CTreeFileAccess_010201A0 *this, float *outVec3)",
   "xrefs_from_count": 37,
   "xrefs_to_count": 14
 }

@@ -1,1 +1,1 @@
-RpcServerInterface
+typedef _RpcServerInterface RpcServerInterface;

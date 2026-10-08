@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "chunks": [
+    [
+      "0x4ECC60",
+      "0x4ECD51"
+    ],
+    [
+      "0x9B64D0",
+      "0x9B6533"
+    ]
+  ],
+  "chunks_sha256": "500338d138725c4f85e8a9c9a08f1b3a8a56033a20d668ae955c21804ef9bae1",
+  "comment_regular": "Verified TerrainLODQuadLoadTask layout/constructor: 0x48 bytes; +0x2C owning WorldSpace FormID, +0x30/+0x34 tile-file X/Y, +0x38 quad-data context, +0x3C loaded mesh node, +0x40/+0x44 generated color/normal textures.",
+  "comment_repeatable": "Verified TerrainLODQuadLoadTask layout/constructor: 0x48 bytes; +0x2C owning WorldSpace FormID, +0x30/+0x34 tile-file X/Y, +0x38 quad-data context, +0x3C loaded mesh node, +0x40/+0x44 generated color/normal textures.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "TerrainLODQuadLoadTask::TerrainLODQuadLoadTask(void)",
   "end_ea": "0x4ECD51",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0TerrainLODQuadLoadTask@@QAE@XZ",
   "segment": ".text",
   "sha256": "62fab62dd5ff24f71dac1b35418ae34270d5672c5e0ea413ea95899e35350d29",
   "size": 241,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ECC60",
-  "type": "TerrainLODQuadLoadTask *__thiscall(TerrainLODQuadLoadTask *this, int, int, int, int)",
-  "xrefs_from_count": 73,
+  "total_chunk_size": 340,
+  "type": "TerrainLODQuadLoadTask_OblivionLayout_048Verified *__thiscall(TerrainLODQuadLoadTask_OblivionLayout_048Verified *this, TESTerrainLODQuad_OblivionComplete_060 *quadData, unsigned int worldspaceFormID, int tileFileX, int tileFileY)",
+  "xrefs_from_count": 98,
   "xrefs_to_count": 1
 }

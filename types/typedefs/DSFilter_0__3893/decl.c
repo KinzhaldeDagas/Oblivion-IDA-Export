@@ -1,1 +1,1 @@
-DSFilter_0
+typedef DSFilter DSFilter_0;

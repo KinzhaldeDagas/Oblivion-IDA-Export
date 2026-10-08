@@ -16,7 +16,7 @@
 0x52B418: lea     eax, [esp+14h+Dst]
 0x52B41C: push    eax; Dst
 0x52B41D: mov     ecx, edi; a1
-0x52B41F: call    TESFile_GetChunkData
+0x52B41F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52B424: mov     ecx, dword ptr [esp+10h+Dst]
 0x52B428: mov     dl, byte ptr [esp+10h+var_4]
 0x52B42C: mov     [esi+0Ch], ecx

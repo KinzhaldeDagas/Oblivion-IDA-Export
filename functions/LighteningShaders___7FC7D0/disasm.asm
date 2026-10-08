@@ -1,4 +1,4 @@
-0x7FC7D0: push    0FFFFFFFFh
+0x7FC7D0: push    0FFFFFFFFh; MoonSugarEffect decode: Lighting30 shader definition builds multiple vertex declarations: 6-slot base object layout, 8-slot variant, 4-slot variant, and another 8-slot variant. Confirms object shaders have material-specific vertex layouts.
 0x7FC7D2: push    offset SEH_7FC7D0
 0x7FC7D7: mov     eax, large fs:0
 0x7FC7DD: push    eax
@@ -15,7 +15,7 @@
 0x7FC7F7: push    8; Size
 0x7FC7F9: call    FormHeapAlloc
 0x7FC7FE: add     esp, 4
-0x7FC801: mov     [esp+28h+var_14], eax
+0x7FC801: mov     [esp+28h+objectDeclaration], eax
 0x7FC805: test    eax, eax
 0x7FC807: mov     [esp+28h+var_4], 0
 0x7FC80F: jz      short loc_7FC81C
@@ -25,11 +25,11 @@
 0x7FC81A: jmp     short loc_7FC81E
 0x7FC81C: xor     ebp, ebp
 0x7FC81E: mov     eax, ds:0B43104h
-0x7FC823: push    1; StreamCount
-0x7FC825: push    6; a2
-0x7FC827: push    eax; a1
+0x7FC823: push    1; streamCount
+0x7FC825: push    6; elementCount
+0x7FC827: push    eax; renderer
 0x7FC828: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x7FC830: call    CreateDX9ShaderDeclaration
+0x7FC830: call    CreateDX9ShaderDeclaration; Create Lighting30 one-stream six-element object declaration.
 0x7FC835: mov     esi, [ebp+0]
 0x7FC838: mov     edi, eax
 0x7FC83A: add     esp, 0Ch
@@ -56,22 +56,22 @@
 0x7FC86B: push    edi; lpAddend
 0x7FC86C: call    dword ptr ds:0A28078h
 0x7FC872: mov     ecx, ds:0B43104h
-0x7FC878: push    1; StreamCount
-0x7FC87A: push    8; a2
-0x7FC87C: push    ecx; a1
-0x7FC87D: call    CreateDX9ShaderDeclaration
+0x7FC878: push    1; streamCount
+0x7FC87A: push    8; elementCount
+0x7FC87C: push    ecx; renderer
+0x7FC87D: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7FC882: mov     edx, ds:0B43104h
-0x7FC888: push    1; StreamCount
-0x7FC88A: push    4; a2
-0x7FC88C: push    edx; a1
-0x7FC88D: mov     esi, eax
-0x7FC88F: call    CreateDX9ShaderDeclaration
-0x7FC894: push    1; StreamCount
-0x7FC896: mov     ebx, eax
+0x7FC888: push    1; streamCount
+0x7FC88A: push    4; elementCount
+0x7FC88C: push    edx; renderer
+0x7FC88D: mov     esi, eax; Create Lighting30 one-stream eight-element skinned declaration.
+0x7FC88F: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
+0x7FC894: push    1; streamCount
+0x7FC896: mov     ebx, eax; Create Lighting30 alternate one-stream four-element declaration.
 0x7FC898: mov     eax, ds:0B43104h
-0x7FC89D: push    8; a2
-0x7FC89F: push    eax; a1
-0x7FC8A0: call    CreateDX9ShaderDeclaration
+0x7FC89D: push    8; elementCount
+0x7FC89F: push    eax; renderer
+0x7FC8A0: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7FC8A5: mov     ecx, [ebp+0]
 0x7FC8A8: mov     edx, [ecx]
 0x7FC8AA: add     esp, 24h
@@ -79,10 +79,10 @@
 0x7FC8AF: push    2
 0x7FC8B1: push    0
 0x7FC8B3: push    0
-0x7FC8B5: mov     edi, eax
+0x7FC8B5: mov     edi, eax; Create Lighting30 alternate one-stream eight-element declaration.
 0x7FC8B7: mov     eax, [edx+50h]
 0x7FC8BA: push    0
-0x7FC8BC: call    eax
+0x7FC8BC: call    eax; Object declaration element 0: POSITION0, FLOAT3.
 0x7FC8BE: mov     ecx, [ebp+0]
 0x7FC8C1: mov     edx, [ecx]
 0x7FC8C3: mov     eax, [edx+50h]
@@ -91,7 +91,7 @@
 0x7FC8CA: push    3
 0x7FC8CC: push    3
 0x7FC8CE: push    1
-0x7FC8D0: call    eax
+0x7FC8D0: call    eax; Object declaration element 1: NORMAL0, FLOAT3.
 0x7FC8D2: mov     ecx, [ebp+0]
 0x7FC8D5: mov     edx, [ecx]
 0x7FC8D7: mov     eax, [edx+50h]
@@ -100,7 +100,7 @@
 0x7FC8DE: push    4
 0x7FC8E0: push    5
 0x7FC8E2: push    2
-0x7FC8E4: call    eax
+0x7FC8E4: call    eax; Object declaration element 2: COLOR0, FLOAT4.
 0x7FC8E6: mov     ecx, [ebp+0]
 0x7FC8E9: mov     edx, [ecx]
 0x7FC8EB: mov     eax, [edx+50h]
@@ -109,7 +109,7 @@
 0x7FC8F2: push    5
 0x7FC8F4: push    7
 0x7FC8F6: push    3
-0x7FC8F8: call    eax
+0x7FC8F8: call    eax; Object declaration element 3: TEXCOORD0, FLOAT2.
 0x7FC8FA: mov     ecx, [ebp+0]
 0x7FC8FD: mov     edx, [ecx]
 0x7FC8FF: mov     eax, [edx+4Ch]
@@ -121,7 +121,7 @@
 0x7FC90F: push    0Eh
 0x7FC911: push    4
 0x7FC913: push    0
-0x7FC915: call    eax
+0x7FC915: call    eax; Object declaration element 4: generated TANGENT0, FLOAT3.
 0x7FC917: mov     ecx, [ebp+0]
 0x7FC91A: mov     edx, [ecx]
 0x7FC91C: mov     eax, [edx+4Ch]
@@ -133,7 +133,7 @@
 0x7FC92C: push    0Fh
 0x7FC92E: push    5
 0x7FC930: push    0
-0x7FC932: call    eax
+0x7FC932: call    eax; Object declaration element 5: generated BINORMAL0, FLOAT3.
 0x7FC934: mov     edx, [esi]
 0x7FC936: push    0
 0x7FC938: mov     eax, [edx+50h]
@@ -142,7 +142,7 @@
 0x7FC93F: push    0
 0x7FC941: push    0
 0x7FC943: mov     ecx, esi
-0x7FC945: call    eax
+0x7FC945: call    eax; Skinned declaration element 0: POSITION0, FLOAT3.
 0x7FC947: mov     edx, [esi]
 0x7FC949: mov     eax, [edx+50h]
 0x7FC94C: push    0
@@ -151,7 +151,7 @@
 0x7FC952: push    1
 0x7FC954: push    1
 0x7FC956: mov     ecx, esi
-0x7FC958: call    eax
+0x7FC958: call    eax; Skinned declaration element 1: BLENDWEIGHT0, FLOAT4.
 0x7FC95A: mov     edx, [esi]
 0x7FC95C: mov     eax, [edx+50h]
 0x7FC95F: push    0
@@ -160,7 +160,7 @@
 0x7FC965: push    2
 0x7FC967: push    2
 0x7FC969: mov     ecx, esi
-0x7FC96B: call    eax
+0x7FC96B: call    eax; Skinned declaration element 2: BLENDINDICES0, D3DCOLOR (normalized/swizzled packed indices).
 0x7FC96D: mov     edx, [esi]
 0x7FC96F: mov     eax, [edx+50h]
 0x7FC972: push    0
@@ -169,7 +169,7 @@
 0x7FC978: push    3
 0x7FC97A: push    3
 0x7FC97C: mov     ecx, esi
-0x7FC97E: call    eax
+0x7FC97E: call    eax; Skinned declaration element 3: NORMAL0, FLOAT3.
 0x7FC980: mov     edx, [esi]
 0x7FC982: mov     eax, [edx+50h]
 0x7FC985: push    0
@@ -178,7 +178,7 @@
 0x7FC98B: push    5
 0x7FC98D: push    4
 0x7FC98F: mov     ecx, esi
-0x7FC991: call    eax
+0x7FC991: call    eax; Skinned declaration element 4: COLOR0, FLOAT4.
 0x7FC993: mov     edx, [esi]
 0x7FC995: mov     eax, [edx+50h]
 0x7FC998: push    0
@@ -187,7 +187,7 @@
 0x7FC99E: push    7
 0x7FC9A0: push    5
 0x7FC9A2: mov     ecx, esi
-0x7FC9A4: call    eax
+0x7FC9A4: call    eax; Skinned declaration element 5: TEXCOORD0, FLOAT2.
 0x7FC9A6: mov     edx, [esi]
 0x7FC9A8: mov     eax, [edx+4Ch]
 0x7FC9AB: push    0
@@ -199,7 +199,7 @@
 0x7FC9BA: push    6
 0x7FC9BC: push    0
 0x7FC9BE: mov     ecx, esi
-0x7FC9C0: call    eax
+0x7FC9C0: call    eax; Skinned declaration element 6: generated TANGENT0, FLOAT3.
 0x7FC9C2: mov     edx, [esi]
 0x7FC9C4: mov     eax, [edx+4Ch]
 0x7FC9C7: push    0
@@ -211,7 +211,7 @@
 0x7FC9D6: push    7
 0x7FC9D8: push    0
 0x7FC9DA: mov     ecx, esi
-0x7FC9DC: call    eax
+0x7FC9DC: call    eax; Skinned declaration element 7: generated BINORMAL0, FLOAT3.
 0x7FC9DE: mov     edx, [ebx]
 0x7FC9E0: push    0
 0x7FC9E2: push    2
@@ -334,16 +334,16 @@
 0x7FCAE4: call    eax
 0x7FCAE6: mov     ecx, [ebp+0]
 0x7FCAE9: test    ecx, ecx
-0x7FCAEB: mov     [esp+28h+var_14], ecx
+0x7FCAEB: mov     [esp+28h+objectDeclaration], ecx
 0x7FCAEF: jnz     short loc_7FCAF7
-0x7FCAF1: mov     [esp+28h+var_14], ecx
+0x7FCAF1: mov     [esp+28h+objectDeclaration], ecx
 0x7FCAF5: jmp     short loc_7FCB22
 0x7FCAF7: mov     edx, [ecx]
 0x7FCAF9: mov     eax, [edx+4]
 0x7FCAFC: call    eax
 0x7FCAFE: test    eax, eax
 0x7FCB00: jz      short loc_7FCB14
-0x7FCB02: cmp     eax, offset dword_B3F684
+0x7FCB02: cmp     eax, offset stru_B3F684
 0x7FCB07: jz      loc_7FCBCD
 0x7FCB0D: mov     eax, [eax+4]
 0x7FCB10: test    eax, eax
@@ -351,8 +351,8 @@
 0x7FCB14: xor     al, al
 0x7FCB16: neg     al
 0x7FCB18: sbb     eax, eax
-0x7FCB1A: and     eax, [esp+28h+var_14]
-0x7FCB1E: mov     [esp+28h+var_14], eax
+0x7FCB1A: and     eax, [esp+28h+objectDeclaration]
+0x7FCB1E: mov     [esp+28h+objectDeclaration], eax
 0x7FCB22: mov     edx, [esi]
 0x7FCB24: mov     eax, [edx+4]
 0x7FCB27: mov     ecx, esi
@@ -360,7 +360,7 @@
 0x7FCB2B: test    eax, eax
 0x7FCB2D: jz      short loc_7FCB42
 0x7FCB2F: nop
-0x7FCB30: cmp     eax, offset dword_B3F684
+0x7FCB30: cmp     eax, offset stru_B3F684
 0x7FCB35: jz      loc_7FCBD4
 0x7FCB3B: mov     eax, [eax+4]
 0x7FCB3E: test    eax, eax
@@ -377,7 +377,7 @@
 0x7FCB55: test    eax, eax
 0x7FCB57: jz      short loc_7FCB6E
 0x7FCB59: lea     esp, [esp+0]
-0x7FCB60: cmp     eax, offset dword_B3F684
+0x7FCB60: cmp     eax, offset stru_B3F684
 0x7FCB65: jz      short loc_7FCBDB
 0x7FCB67: mov     eax, [eax+4]
 0x7FCB6A: test    eax, eax
@@ -393,7 +393,7 @@
 0x7FCB7F: call    eax
 0x7FCB81: test    eax, eax
 0x7FCB83: jz      short loc_7FCB93
-0x7FCB85: cmp     eax, offset dword_B3F684
+0x7FCB85: cmp     eax, offset stru_B3F684
 0x7FCB8A: jz      short loc_7FCBDF
 0x7FCB8C: mov     eax, [eax+4]
 0x7FCB8F: test    eax, eax
@@ -410,13 +410,13 @@
 0x7FCBAE: test    eax, eax
 0x7FCBB0: mov     [esp+28h+var_4], 1
 0x7FCBB8: jz      short loc_7FCBE3
-0x7FCBBA: mov     ecx, [esp+28h+var_14]
-0x7FCBBE: push    edi
-0x7FCBBF: push    ebx
-0x7FCBC0: push    esi
-0x7FCBC1: push    ecx
+0x7FCBBA: mov     ecx, [esp+28h+objectDeclaration]
+0x7FCBBE: push    edi; alternate8Declaration
+0x7FCBBF: push    ebx; alternate4Declaration
+0x7FCBC0: push    esi; skinDeclaration
+0x7FCBC1: push    ecx; objectDeclaration
 0x7FCBC2: mov     ecx, eax; this
-0x7FCBC4: call    ??0Lighting30Shader@@QAE@XZ; Lighting30Shader::Lighting30Shader(void)
+0x7FCBC4: call    ??0Lighting30Shader@@QAE@XZ; Lighting30ShaderDefinition_Create constructs the concrete Lighting30Shader used by GetShaderDefinition(0x1A).
 0x7FCBC9: mov     esi, eax
 0x7FCBCB: jmp     short loc_7FCBE5
 0x7FCBCD: mov     al, 1
@@ -482,3 +482,20 @@
 0x7FCC70: pop     ebx
 0x7FCC71: add     esp, 14h
 0x7FCC74: retn
+0x9CE940: mov     eax, [ebp-14h]
+0x9CE943: push    eax
+0x9CE944: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE949: pop     ecx
+0x9CE94A: retn
+0x9CE94B: mov     eax, [ebp-10h]
+0x9CE94E: push    eax
+0x9CE94F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE954: pop     ecx
+0x9CE955: retn
+0x9CE956: mov     edx, [esp+arg_4]
+0x9CE95A: lea     eax, [edx-18h]
+0x9CE95D: mov     ecx, [edx-1Ch]
+0x9CE960: xor     ecx, eax
+0x9CE962: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE967: mov     eax, offset stru_AF7880
+0x9CE96C: jmp     ___CxxFrameHandler3

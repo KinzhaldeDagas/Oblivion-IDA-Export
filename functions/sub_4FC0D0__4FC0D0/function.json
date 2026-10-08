@@ -1,19 +1,36 @@
 {
-  "callees_count": 54,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 29,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_4FC0D0",
+  "chunks": [
+    [
+      "0x4FC0D0",
+      "0x4FC360"
+    ],
+    [
+      "0x9B6BD0",
+      "0x9B6C00"
+    ]
+  ],
+  "chunks_sha256": "f44925973c312b537ab3a87586a6792ce631b1bed010ef936490ea104258cce1",
+  "comment_regular": "Authoritative Oblivion SCPT runtime loader. Stream-replays every chunk: SCHR and SCDA mutate singleton fields (later chunks win); SLSD and SCRO/SCRV append; SCVR names only the latest SLSD created during this call. Unlike TESCS, Oblivion has no SCTX handler. SCHD is also absent.",
+  "comment_repeatable": "Authoritative Oblivion SCPT runtime loader. Stream-replays every chunk: SCHR and SCDA mutate singleton fields (later chunks win); SLSD and SCRO/SCRV append; SCVR names only the latest SLSD created during this call. Unlike TESCS, Oblivion has no SCTX handler. SCHD is also absent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "Script_LoadForm",
   "end_ea": "0x4FC360",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4FC0D0",
+  "name": "Script_LoadForm",
   "segment": ".text",
   "sha256": "c35e132256108b952b18ecfbc305b38d9414008bb5be5530a9639edc33765b0a",
   "size": 656,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4FC0D0",
+  "total_chunk_size": 704,
   "type": "char __thiscall(_DWORD *this, Data *)",
-  "xrefs_from_count": 251,
+  "xrefs_from_count": 269,
   "xrefs_to_count": 1
 }

@@ -2,7 +2,7 @@
 0x6E8FC4: push    ebp
 0x6E8FC5: push    eax
 0x6E8FC6: mov     ebp, ecx
-0x6E8FC8: call    sub_715F10
+0x6E8FC8: call    NiTimeController_RegisterStreamables; Registers the NiObject base first and, on success, registers the refcounted next-controller object at +0x34. The target at +0x30 is a link, not recursively registered here.
 0x6E8FCD: test    al, al
 0x6E8FCF: jnz     short loc_6E8FD5
 0x6E8FD1: pop     ebp

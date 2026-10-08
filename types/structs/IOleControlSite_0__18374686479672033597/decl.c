@@ -1,1 +1,1 @@
-IOleControlSite_0
+typedef IOleControlSite IOleControlSite_0;

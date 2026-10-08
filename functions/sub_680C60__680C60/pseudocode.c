@@ -1,11 +1,12 @@
-void __thiscall sub_680C60(BSTextureManager *this, _WORD *a2)
+// Verified: removes the existing link item from AStarWorldNodeList and reinserts it according to its updated fitness, allowing the sorted open list to reflect an improved score.
+void __thiscall AStarWorldNodeList_ReinsertByFitness(AStarWorldNodeList *this, TravelPathSpaceDoorLink *node)
 {
-  _WORD *v2; // edi
+  TravelPathSpaceDoorLink *v2; // edi
 
-  v2 = a2;
-  if ( a2 )
+  v2 = node; /*0x680c62*/
+  if ( node ) /*0x680c6a*/
   {
-    sub_776690(this, (int *)&a2);
-    sub_680BB0(this, v2);
+    NiTPointerList_RemoveByData(this, (void **)&node); /*0x680c71*/
+    AStarWorldNodeList_InsertByFitness(this, v2); /*0x680c79*/
   }
 }

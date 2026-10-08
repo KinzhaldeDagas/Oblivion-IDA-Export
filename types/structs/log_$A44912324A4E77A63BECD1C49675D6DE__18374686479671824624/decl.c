@@ -1,1 +1,5 @@
-log::$A44912324A4E77A63BECD1C49675D6DE
+struct log::$A44912324A4E77A63BECD1C49675D6DE
+{
+double chi;
+double clo;
+};

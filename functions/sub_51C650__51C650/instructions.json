@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51C650",
-    "line": "push    esi",
+    "line": "push    esi; Verified TESCreature override for blood-particle virtual +0x40: NoBloodSpray returns NULL; otherwise reads bloodSpray TESModel path and falls back to base sBloodParticleDefault when null or empty.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x51C67C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x51C67F",
-    "line": "jmp     TESActorBaseData_GetBloodParticlePath",
+    "line": "jmp     TESActorBaseData_GetBloodParticlePath; Verified base TESActorBaseData implementation for blood-particle virtual +0x40: returns current sBloodParticleDefault string-setting pointer.",
     "mnemonic": "jmp",
     "size": 5
   },

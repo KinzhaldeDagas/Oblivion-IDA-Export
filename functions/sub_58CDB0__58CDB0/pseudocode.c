@@ -1,46 +1,47 @@
-void __thiscall sub_58CDB0(unsigned int **this)
+// Verified: destroys main template unconditionally; subtemplate objects only when ownsSubTemplates is true; always frees subtemplate list links. ReadFile transfers subtemplate ownership to Menu before destroying storage. No savegame serialization in this teardown path.
+void __thiscall Tile::BuildStorage::Destroy(OblivionTileBuildStorage *this)
 {
-  unsigned int *v2; // edi
+  OblivionTileTemplate *mainTemplate; // edi
   bool v3; // zf
-  unsigned int **v4; // edi
-  unsigned int *v5; // ebp
-  unsigned int *v6; // edi
+  OblivionTileTemplateList *p_subTemplates; // edi
+  OblivionTileTemplate *item; // ebp
+  OblivionTileTemplateList *next; // edi
 
-  v2 = *this;
-  if ( *this )
+  mainTemplate = this->mainTemplate; /*0x58cdb4*/
+  if ( this->mainTemplate ) /*0x58cdb4*/
   {
-    sub_5852C0(*this);
-    FormHeapFree((unsigned int)v2);
+    Tile::TileTemplate::Destroy(this->mainTemplate); /*0x58cdbc*/
+    FormHeapFree((unsigned int)mainTemplate); /*0x58cdc2*/
   }
-  v3 = *((_BYTE *)this + 0x10) == 0;
-  *(this + 3) = 0;
-  if ( !v3 )
+  v3 = this->ownsSubTemplates == 0; /*0x58cdca*/
+  this->currentTemplate = 0; /*0x58cdce*/
+  if ( !v3 ) /*0x58cdd5*/
   {
-    v4 = this + 1;
-    if ( this != (unsigned int **)0xFFFFFFFC )
+    p_subTemplates = &this->subTemplates; /*0x58cdd7*/
+    if ( this != (OblivionTileBuildStorage *)0xFFFFFFFC ) /*0x58cddc*/
     {
-      do
+      do /*0x58cdfb*/
       {
-        v5 = *v4;
-        if ( *v4 )
+        item = p_subTemplates->item; /*0x58cde0*/
+        if ( p_subTemplates->item ) /*0x58cde0*/
         {
-          sub_5852C0(*v4);
-          FormHeapFree((unsigned int)v5);
+          Tile::TileTemplate::Destroy(p_subTemplates->item); /*0x58cde8*/
+          FormHeapFree((unsigned int)item); /*0x58cdee*/
         }
-        v4 = (unsigned int **)v4[1];
+        p_subTemplates = p_subTemplates->next; /*0x58cdf6*/
       }
-      while ( v4 );
+      while ( p_subTemplates ); /*0x58cdfb*/
     }
   }
-  if ( *(this + 2) )
+  if ( this->subTemplates.next ) /*0x58cdfe*/
   {
-    do
+    do /*0x58ce18*/
     {
-      v6 = (unsigned int *)(*(this + 2))[1];
-      FormHeapFree((unsigned int)*(this + 2));
-      *(this + 2) = v6;
+      next = this->subTemplates.next->next; /*0x58ce07*/
+      FormHeapFree((unsigned int)this->subTemplates.next); /*0x58ce0b*/
+      this->subTemplates.next = next; /*0x58ce15*/
     }
-    while ( v6 );
+    while ( next ); /*0x58ce18*/
   }
-  *(this + 1) = 0;
+  this->subTemplates.item = 0; /*0x58ce1b*/
 }

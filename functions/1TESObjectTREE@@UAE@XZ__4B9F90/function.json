@@ -1,19 +1,40 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "TESObjectTREE::~TESObjectTREE(void)",
+  "chunks": [
+    [
+      "0x4B9F90",
+      "0x4BA02E"
+    ],
+    [
+      "0x4B9D50",
+      "0x4B9D61"
+    ],
+    [
+      "0x9B3DF0",
+      "0x9B3E6C"
+    ]
+  ],
+  "chunks_sha256": "7d3478bfb29e6034a19881c9254d8d794e2e3ae53420923ae24e3a96f24816cf",
+  "comment_regular": "Verified destructor releases the seed table's backing buffer from TESObjectTREE+0x4C after restoring the NiTArray<unsigned int> vtable at +0x48, then destroys TESIconTree, TESModelTree, and TESObject bases.",
+  "comment_repeatable": "Verified destructor releases the seed table's backing buffer from TESObjectTREE+0x4C after restoring the NiTArray<unsigned int> vtable at +0x48, then destroys TESIconTree, TESModelTree, and TESObject bases.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "TESObjectTREE_dtor",
   "end_ea": "0x4BA02E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1TESObjectTREE@@UAE@XZ",
+  "name": "TESObjectTREE_dtor",
   "segment": ".text",
   "sha256": "62fcb953e18401c40e3a8b3ec46652e028bd966ab492695c3afc8509c2df0858",
   "size": 158,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B9F90",
-  "type": "void __thiscall(TESForm *this)",
-  "xrefs_from_count": 53,
+  "total_chunk_size": 299,
+  "type": "void __thiscall(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this)",
+  "xrefs_from_count": 94,
   "xrefs_to_count": 1
 }

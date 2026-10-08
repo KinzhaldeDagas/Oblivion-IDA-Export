@@ -79,12 +79,12 @@
 0x4878E3: mov     edi, [esi]
 0x4878E5: test    edi, edi
 0x4878E7: jz      short loc_48790B
-0x4878E9: mov     ecx, edi
-0x4878EB: call    ExtraDataList_GetReferencePointer
+0x4878E9: mov     ecx, edi; this
+0x4878EB: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x4878F0: test    eax, eax
 0x4878F2: jz      short loc_487904
-0x4878F4: mov     ecx, edi
-0x4878F6: call    ExtraDataList_GetReferencePointer
+0x4878F4: mov     ecx, edi; this
+0x4878F6: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x4878FB: mov     ecx, [esp+14h+arg_0]
 0x4878FF: cmp     [eax+0Ch], ecx
 0x487902: jz      short loc_48791C

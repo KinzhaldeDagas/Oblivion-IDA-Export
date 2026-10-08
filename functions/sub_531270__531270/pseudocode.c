@@ -1,7 +1,8 @@
-void __thiscall sub_531270(TESForm *this, unsigned int **a2)
+// Snapshot the current TESTopicInfo response stream by deep-cloning the shared lazy response cache into the caller's list. MenuTopic and DialogueItem then own independent TESResponse objects and strings; rebuilding the global cache for another INFO cannot invalidate existing runtime responses.
+void __thiscall TESTopicInfo::CollectResponses(OblivionTopicInfo *this, TESResponseListView *outResponses)
 {
-  int *v2; // eax
+  TESResponseListView *ResponseList; // eax
 
-  v2 = sub_530C40(this);
-  sub_530930(a2, (int)v2);
+  ResponseList = TESTopicInfo::GetResponseList(this); /*0x531270*/
+  TESResponseList::CloneFrom(outResponses, ResponseList); /*0x53127a*/
 }

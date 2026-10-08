@@ -360,12 +360,6 @@
     "size": 2
   },
   {
-    "ea": "0x71EB2A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x71EB30",
     "line": "mov     ecx, [esi+5Ch]",
     "mnemonic": "mov",
@@ -469,25 +463,25 @@
   },
   {
     "ea": "0x71EB6A",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EB6B",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EB6C",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EB6D",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1050,12 +1044,6 @@
     "size": 2
   },
   {
-    "ea": "0x71ECCA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x71ECD0",
     "line": "mov     ecx, [esi+5Ch]",
     "mnemonic": "mov",
@@ -1159,25 +1147,25 @@
   },
   {
     "ea": "0x71ED0A",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71ED0B",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71ED0C",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71ED0D",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1638,12 +1626,6 @@
     "size": 2
   },
   {
-    "ea": "0x71EE2A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x71EE30",
     "line": "mov     ecx, [esi+5Ch]",
     "mnemonic": "mov",
@@ -1747,25 +1729,25 @@
   },
   {
     "ea": "0x71EE6A",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EE6B",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EE6C",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EE6D",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2269,25 +2251,25 @@
   },
   {
     "ea": "0x71EFAA",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EFAB",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EFAC",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71EFAD",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2640,12 +2622,6 @@
     "size": 2
   },
   {
-    "ea": "0x71F09D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x71F0A0",
     "line": "mov     ecx, [esi+5Ch]",
     "mnemonic": "mov",
@@ -2749,25 +2725,25 @@
   },
   {
     "ea": "0x71F0DA",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71F0DB",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71F0DC",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71F0DD",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4294,5 +4270,197 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA030",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA033",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA034",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA039",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA03A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA03B",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA03E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA03F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA044",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA045",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA046",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA049",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA04A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA04F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA050",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA051",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA054",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA055",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA05A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA05B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA05C",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA05F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA060",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA065",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA066",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA067",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA06B",
+    "line": "lea     eax, [edx-4Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA06E",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA071",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA073",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA078",
+    "line": "mov     eax, offset stru_AF27E4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA07D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

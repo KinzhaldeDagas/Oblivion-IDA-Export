@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x7A9820",
+      "0x7A98D7"
+    ]
+  ],
+  "chunks_sha256": "10342a35b892af5e73d8e98ce52a7702e555859e2996616a13752794f910c853",
+  "comment_regular": "Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.\nGPU static-world audit 2026-09-27: render-entry light association is part of each geometry pass, not a global camera-only table. This function publishes B42E90/B42EB8, resets light slots outside selector exceptions, dispatches the entry light array, then calls geometry virtual +0x84. Resident submission must preserve that selector/light association and may not cache the borrowed RenderPass pointers.\nDX11 source-state audit 2026-10-01: the per-entry light loop uses the byte count at entry+8, independently of B2DCFC shader light limit. Type1B dispatcher7EE390 reaches7EDCD0, whose slot<20 guard bounds actual source writes. Capture min(actualCount,20) qualified sources for full global-state replay, not merely min(actualCount,shaderLimit).\n\nDX11 observation-boundary audit 2026-10-02: this wrapper publishes B42E90/B42EB8 and light sources before geometry virtual+84; it is an entry boundary, not the final D3D device draw boundary. Native shader setup and map applications occur below that virtual call before DrawIndexedPrimitive/DrawPrimitive. An observer stamp at this entry may therefore expire before device submission. A later complete data snapshot must be separately proved against the still-current entry/selector and actual device-call receipt; never renew an older captured pass image merely because writers have finished. V229 live trace: ordinary Lighting30 samples reached capture but all sampled copies rejected TimingRejected/InvalidDrawBefore; the precise invalidating writer was not identified by that trace.\n\nSubmit one accumulated Oblivion RenderPass. Publishes the selector/current entry, dispatches its current-light constants, then invokes geometry render virtual +0x84, reaching the rigid or hardware-skinned DX9 pass loop.",
+  "comment_repeatable": "Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.\nDX11 GPU-world association (2026-09-27): read active pass only inside the installed overlay invocation and completed-publication/writer-excluded draw scope. a1+0 is geometry; byte a1+8 is light count; a1+0xC is ordered light-pointer array. Native publishes low 16 bits of raw selector as DWORD B42E90 and exact entry address at B42EB8 before geometry virtual +0x84. These globals alone do not establish native lifetime or a complete material pass; duplicated scene occurrences must not be collapsed by geometry address.\n\n[GPU discovery audit 2026-10-02, stage-gpu-world-bucket-scoped-discovery] Rechecked this Oblivion function: ordinary selectors12D..146 reach the first-node call7ACDE4 and subsequent-node call7ACECC to7A9820, after the bucket activation/map setup. These selectors are not among this function's specialized early-return selector cases. Thus the V232 trace's three sampled Lighting30 draws outside bucket scope do not by themselves prove a missing ordinary bucket pass hook. Source discovery now requires copied live RenderBucket cookie/mode0/matching selector/verified caller before spending its restricted rolling budget. Full device receipt/read/lifetime and replacement transaction predicates are unchanged. New pass/scope counters distinguish ordinary pass observations, ordinary bucket pass observations and out-of-bucket/identity skips. No new native read permission or native suppression is inferred from these counters.\n\n2026-10-02 V233 live renderer evidence: user confirmed correct visuals, responsiveness and normal exit. Bucket-scoped discovery skipped outside-bucket ordinary draws before budget consumption. Later mode0 selector301 (0x12D) device draw capture passed receipt/read scope but rejected because geometry was outside the resident static catalog (11 cumulative rejects at frame600). No successful capture/transaction/original-bucket suppression recorded. Geometry identity/reason for absence is NOT established by this trace; do not broaden static eligibility from this evidence. Runtime archive stage-v233-bucket-scoped-discovery/runtime-20261002-135400.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A9820",
+  "display_name": "BSShaderAccumulator_DrawRenderPass",
   "end_ea": "0x7A98D7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A9820",
+  "name": "BSShaderAccumulator_DrawRenderPass",
   "segment": ".text",
   "sha256": "10342a35b892af5e73d8e98ce52a7702e555859e2996616a13752794f910c853",
   "size": 183,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A9820",
-  "type": "int __stdcall(_DWORD *, unsigned __int16)",
+  "total_chunk_size": 183,
+  "type": "int __stdcall(RenderPass_DecodedLayout *entry, unsigned __int16 selector)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 9
 }

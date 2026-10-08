@@ -35,7 +35,7 @@
 0x45CA30: test    eax, eax
 0x45CA32: jz      short loc_45CA3D
 0x45CA34: push    eax
-0x45CA35: call    FormHeapFree
+0x45CA35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45CA3A: add     esp, 4
 0x45CA3D: movzx   eax, byte ptr [ebx]
 0x45CA40: push    eax; Size
@@ -83,16 +83,16 @@
 0x45CAC0: mov     ebp, eax
 0x45CAC2: lea     edi, [ebp+1Ch]
 0x45CAC5: lea     ecx, [esp+12Ch+ArgList]
-0x45CAC9: push    edi; Str2
-0x45CACA: push    ecx; Str1
-0x45CACB: call    __strcmp
+0x45CAC9: push    edi; right
+0x45CACA: push    ecx; left
+0x45CACB: call    CRT_StricmpLocaleDispatch
 0x45CAD0: add     esp, 8
 0x45CAD3: test    eax, eax
 0x45CAD5: jz      loc_45CB7C
 0x45CADB: lea     edx, [esp+12Ch+ArgList]
 0x45CADF: push    offset aOblivion_esm; "Oblivion.esm"
-0x45CAE4: push    edx; Str1
-0x45CAE5: call    __strcmp
+0x45CAE4: push    edx; left
+0x45CAE5: call    CRT_StricmpLocaleDispatch
 0x45CAEA: add     esp, 8
 0x45CAED: test    eax, eax
 0x45CAEF: jnz     short loc_45CAF9
@@ -101,14 +101,14 @@
 0x45CAF7: jmp     short loc_45CB15
 0x45CAF9: lea     eax, [esp+12Ch+ArgList]
 0x45CAFD: push    offset aOblivionse_esm; "OblivionSE.esm"
-0x45CB02: push    eax; Str1
-0x45CB03: call    __strcmp
+0x45CB02: push    eax; left
+0x45CB03: call    CRT_StricmpLocaleDispatch
 0x45CB08: add     esp, 8
 0x45CB0B: test    eax, eax
 0x45CB0D: jnz     short loc_45CB21
-0x45CB0F: push    edi; Str2
+0x45CB0F: push    edi; right
 0x45CB10: push    offset aOblivion_esm; "Oblivion.esm"
-0x45CB15: call    __strcmp
+0x45CB15: call    CRT_StricmpLocaleDispatch
 0x45CB1A: add     esp, 8
 0x45CB1D: test    eax, eax
 0x45CB1F: jz      short loc_45CB7C

@@ -22,7 +22,6 @@
 0x730CE2: cmp     [esp+10h+Size], esi
 0x730CE6: jbe     short loc_730D1E
 0x730CE8: jmp     short loc_730CF0
-0x730CEA: align 10h
 0x730CF0: mov     eax, [edi+21Ch]
 0x730CF6: push    1
 0x730CF8: lea     ecx, [esp+14h+var_8]

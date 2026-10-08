@@ -1,1 +1,1 @@
-LPARAM
+typedef LONG LPARAM;

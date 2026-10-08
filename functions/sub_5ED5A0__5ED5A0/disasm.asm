@@ -1,7 +1,7 @@
 0x5ED5A0: sub     esp, 8
 0x5ED5A3: push    esi
 0x5ED5A4: mov     esi, ecx
-0x5ED5A6: mov     ecx, [esp+0Ch+arg_0]
+0x5ED5A6: mov     ecx, [esp+0Ch+arg_0]; this
 0x5ED5AA: test    ecx, ecx
 0x5ED5AC: jz      loc_5ED71A
 0x5ED5B2: mov     eax, [ecx+8]
@@ -17,7 +17,7 @@
 0x5ED5D2: xor     edi, edi
 0x5ED5D4: test    edi, edi
 0x5ED5D6: jz      loc_5ED719
-0x5ED5DC: call    sub_4849C0
+0x5ED5DC: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5ED5E1: fstp    [esp+10h+arg_0]
 0x5ED5E5: mov     eax, [edi+24h]
 0x5ED5E8: fld     [esp+10h+arg_0]
@@ -46,7 +46,7 @@
 0x5ED62D: test    eax, eax
 0x5ED62F: jz      short loc_5ED641
 0x5ED631: mov     ecx, eax
-0x5ED633: call    sub_6135F0
+0x5ED633: call    CombatController_GetCurrentTarget
 0x5ED638: test    eax, eax
 0x5ED63A: jz      short loc_5ED641
 0x5ED63C: add     eax, 68h ; 'h'
@@ -70,9 +70,9 @@
 0x5ED667: mov     eax, [edx+2BCh]
 0x5ED66D: push    1
 0x5ED66F: call    eax
-0x5ED671: push    0
-0x5ED673: mov     ecx, edi
-0x5ED675: call    MagicItem_GetFXEffect
+0x5ED671: push    0; effectIndex
+0x5ED673: mov     ecx, edi; magicItem
+0x5ED675: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x5ED67A: mov     edi, eax
 0x5ED67C: test    edi, edi
 0x5ED67E: jz      loc_5ED719
@@ -122,7 +122,7 @@
 0x5ED709: mov     ecx, esi; this
 0x5ED70B: call    sub_6B73E0
 0x5ED710: push    esi
-0x5ED711: call    FormHeapFree
+0x5ED711: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5ED716: add     esp, 4
 0x5ED719: pop     edi
 0x5ED71A: pop     esi

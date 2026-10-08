@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x769340",
+      "0x7693D8"
+    ]
+  ],
+  "chunks_sha256": "e97e99386a5c03add4aabc7f87ba5a17bd763038f3ef66022e2e69945f4f8cc1",
+  "comment_regular": "Process the renderer pending-surface list at the scene presentation boundary by invoking each queued buffer's vtable+0x28 update/resolve operation. The shadow texture buffer is never queued because its predicate is false.",
+  "comment_repeatable": "Process the renderer pending-surface list at the scene presentation boundary by invoking each queued buffer's vtable+0x28 update/resolve operation. The shadow texture buffer is never queued because its predicate is false.\nDX11 retirement audit 2026-10-01: this PresentScene body drains atDisplayFrame and dispatches each buffer virtual+28; it does not itself acquire the renderer critical section. Do not infer lock ownership from being at Present. The default implicit-buffer Present dispatch is76D6D0 and uses its device+4C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "NiDX9Renderer::PresentScene",
   "end_ea": "0x7693D8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiDX9Renderer::PresentScene",
   "segment": ".text",
   "sha256": "e97e99386a5c03add4aabc7f87ba5a17bd763038f3ef66022e2e69945f4f8cc1",
   "size": 152,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x769340",
-  "type": "char __thiscall(int this)",
+  "total_chunk_size": 152,
+  "type": "bool __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 65,
   "xrefs_to_count": 1
 }

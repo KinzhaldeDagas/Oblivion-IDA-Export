@@ -23,7 +23,7 @@
 0x4F9BF1: push    edi
 0x4F9BF2: jmp     ds:jpt_4F9BF2[eax*4]; switch jump
 0x4F9BF9: mov     ecx, esi; jumptable 004F9BF2 case 48
-0x4F9BFB: call    TESObjectCELL_IsInterior
+0x4F9BFB: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4F9C00: test    al, al
 0x4F9C02: jz      short loc_4F9C0D
 0x4F9C04: mov     edi, [esi+0Ch]; jumptable 004F9BF2 case 53
@@ -38,20 +38,20 @@
 0x4F9C1F: mov     ecx, esi; this
 0x4F9C21: xor     edi, edi
 0x4F9C23: call    TESObjectCELL_GetYCoordinate
-0x4F9C28: push    eax
+0x4F9C28: push    eax; group_y
 0x4F9C29: mov     ecx, esi; this
 0x4F9C2B: call    TESObjectCELL_GetXCoordinate
-0x4F9C30: push    eax
-0x4F9C31: call    sub_4EF1D0
+0x4F9C30: push    eax; group_x
+0x4F9C31: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4F9C36: add     esp, 8
 0x4F9C39: jmp     short loc_4F9C81
 0x4F9C3B: mov     ecx, esi; jumptable 004F9BF2 cases 49-51
-0x4F9C3D: call    TESObjectREFR_GetParentCell
+0x4F9C3D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F9C42: mov     edi, eax
 0x4F9C44: test    edi, edi
 0x4F9C46: jz      short loc_4F9C5C
 0x4F9C48: mov     ecx, edi; this
-0x4F9C4A: call    TESObjectCELL_IsInterior
+0x4F9C4A: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4F9C4F: test    al, al
 0x4F9C51: jz      short loc_4F9C5C
 0x4F9C53: mov     edi, [edi+0Ch]
@@ -68,8 +68,8 @@
 0x4F9C72: mov     ecx, esi
 0x4F9C74: xor     edi, edi
 0x4F9C76: call    edx
-0x4F9C78: push    eax
-0x4F9C79: call    sub_4EFE40
+0x4F9C78: push    eax; worldPosition
+0x4F9C79: call    TESWorldSpace_PackCellCoordinates
 0x4F9C7E: add     esp, 4
 0x4F9C81: mov     ecx, ebx
 0x4F9C83: test    ecx, ecx

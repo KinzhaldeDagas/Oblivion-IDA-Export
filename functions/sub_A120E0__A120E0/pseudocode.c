@@ -1,4 +1,4 @@
 void sub_A120E0()
 {
-  stru_BA7A40 = stru_BA7A30;
+  unk_BA7A40 = unk_BA7A30; /*0xa120e7*/
 }

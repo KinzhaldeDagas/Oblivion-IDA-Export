@@ -2,7 +2,7 @@
 0x4D2D03: mov     ecx, ds:0B333C4h; this
 0x4D2D09: push    ebx
 0x4D2D0A: mov     [esp+2Ch+var_24], 0
-0x4D2D12: call    TESObjectREFR_GetParentCell
+0x4D2D12: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4D2D17: mov     ebx, eax
 0x4D2D19: test    ebx, ebx
 0x4D2D1B: jz      loc_4D31BB
@@ -194,13 +194,13 @@
 0x4D2F5D: push    ecx
 0x4D2F5E: sar     esi, 0Ch
 0x4D2F61: push    eax
-0x4D2F62: mov     [esp+48h+var_C], esi
+0x4D2F62: mov     [esp+48h+cellY], esi
 0x4D2F66: mov     [esp+48h+var_20], ecx
 0x4D2F6A: mov     [esp+48h+var_1C], ecx
 0x4D2F6E: call    sub_4123C0
 0x4D2F73: add     esp, 10h
-0x4D2F76: push    esi; signed int
-0x4D2F77: push    ebp; signed int
+0x4D2F76: push    esi; cellY
+0x4D2F77: push    ebp; cellX
 0x4D2F78: mov     ecx, edi; this
 0x4D2F7A: call    TESWorldSpace__GetCellAtCellCoord
 0x4D2F7F: mov     ebx, eax
@@ -208,7 +208,7 @@
 0x4D2F83: mov     [esp+38h+var_10], ebx
 0x4D2F87: jz      loc_4D3020
 0x4D2F8D: lea     ecx, [ebx+28h]
-0x4D2F90: call    sub_420B50
+0x4D2F90: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4D2F95: test    eax, eax
 0x4D2F97: mov     [esp+38h+var_18], eax
 0x4D2F9B: jz      short loc_4D2FB4
@@ -231,8 +231,8 @@
 0x4D2FD3: mov     [esp+38h+var_25], cl
 0x4D2FD7: jnz     short loc_4D3034
 0x4D2FD9: add     esi, 1
-0x4D2FDC: push    esi; signed int
-0x4D2FDD: push    ebp; signed int
+0x4D2FDC: push    esi; cellY
+0x4D2FDD: push    ebp; cellX
 0x4D2FDE: mov     ecx, edi; this
 0x4D2FE0: mov     [esp+40h+var_25], 1
 0x4D2FE5: call    TESWorldSpace__GetCellAtCellCoord
@@ -241,7 +241,7 @@
 0x4D2FEE: mov     [esp+38h+var_4], esi
 0x4D2FF2: jz      short loc_4D302A
 0x4D2FF4: lea     ecx, [esi+28h]
-0x4D2FF7: call    sub_420B50
+0x4D2FF7: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4D2FFC: test    eax, eax
 0x4D2FFE: mov     [esp+38h+var_14], eax
 0x4D3002: jz      short loc_4D3016
@@ -281,18 +281,18 @@
 0x4D3067: xor     bl, bl
 0x4D3069: cmp     eax, 0Fh
 0x4D306C: jnz     short loc_4D30B6
-0x4D306E: mov     ecx, [esp+38h+var_C]
-0x4D3072: push    ecx; signed int
+0x4D306E: mov     ecx, [esp+38h+cellY]
+0x4D3072: push    ecx; cellY
 0x4D3073: mov     ecx, [esp+3Ch+var_8]; this
 0x4D3077: lea     edx, [ebp+1]
-0x4D307A: push    edx; signed int
+0x4D307A: push    edx; cellX
 0x4D307B: mov     bl, 1
 0x4D307D: call    TESWorldSpace__GetCellAtCellCoord
 0x4D3082: mov     esi, eax
 0x4D3084: test    esi, esi
 0x4D3086: jz      short loc_4D30B2
 0x4D3088: lea     ecx, [esi+28h]
-0x4D308B: call    sub_420B50
+0x4D308B: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4D3090: mov     edi, eax
 0x4D3092: test    edi, edi
 0x4D3094: jz      short loc_4D30A8
@@ -329,18 +329,18 @@
 0x4D30EC: jz      short loc_4D315A
 0x4D30EE: test    bl, bl
 0x4D30F0: jz      short loc_4D3136
-0x4D30F2: mov     eax, [esp+38h+var_C]
+0x4D30F2: mov     eax, [esp+38h+cellY]
 0x4D30F6: mov     ecx, [esp+38h+var_8]; this
 0x4D30FA: add     eax, 1
-0x4D30FD: push    eax; signed int
+0x4D30FD: push    eax; cellY
 0x4D30FE: add     ebp, 1
-0x4D3101: push    ebp; signed int
+0x4D3101: push    ebp; cellX
 0x4D3102: call    TESWorldSpace__GetCellAtCellCoord
 0x4D3107: mov     esi, eax
 0x4D3109: test    esi, esi
 0x4D310B: jz      loc_4D31B8
 0x4D3111: lea     ecx, [esi+28h]
-0x4D3114: call    sub_420B50
+0x4D3114: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4D3119: test    eax, eax
 0x4D311B: jz      short loc_4D3130
 0x4D311D: push    0

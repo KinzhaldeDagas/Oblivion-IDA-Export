@@ -214,3 +214,12 @@
 0x43C4AF: pop     ebx
 0x43C4B0: add     esp, 1Ch
 0x43C4B3: retn    8
+0x9ACC20: lea     ecx, [ebp-1Ch]; void *
+0x9ACC23: jmp     sub_4BDDC0
+0x9ACC28: mov     edx, [esp+arg_4]
+0x9ACC2C: lea     eax, [edx-20h]
+0x9ACC2F: mov     ecx, [edx-24h]
+0x9ACC32: xor     ecx, eax
+0x9ACC34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACC39: mov     eax, offset stru_AD984C
+0x9ACC3E: jmp     ___CxxFrameHandler3

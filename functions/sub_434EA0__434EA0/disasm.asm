@@ -4,7 +4,7 @@
 0x434EA6: test    eax, eax
 0x434EA8: push    edi
 0x434EA9: jz      short loc_434EBB
-0x434EAB: mov     ecx, dword_B35300
+0x434EAB: mov     ecx, dword ptr unk_B35300
 0x434EB1: push    0
 0x434EB3: push    eax
 0x434EB4: call    sub_4A1ED0
@@ -12,7 +12,7 @@
 0x434EBB: mov     eax, [esi+20h]
 0x434EBE: test    eax, eax
 0x434EC0: jz      short loc_434EDB
-0x434EC2: mov     ecx, dword_B35300
+0x434EC2: mov     ecx, dword ptr unk_B35300
 0x434EC8: mov     edx, [ecx]
 0x434ECA: push    0
 0x434ECC: push    eax
@@ -28,9 +28,9 @@
 0x434EEB: test    eax, eax
 0x434EED: jz      short loc_434F0A
 0x434EEF: push    1; char
-0x434EF1: push    offset dword_B256D0; int
+0x434EF1: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x434EF6: push    eax; Src
-0x434EF7: call    NiSourceTexture__LoadTextureByFilename
+0x434EF7: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x434EFC: add     esp, 0Ch
 0x434EFF: push    eax; a2
 0x434F00: mov     ecx, edi; this
@@ -50,7 +50,7 @@
 0x434F20: test    eax, eax
 0x434F22: jz      short loc_434F3F
 0x434F24: push    1
-0x434F26: push    offset dword_B256D0
+0x434F26: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0
 0x434F2B: push    eax
 0x434F2C: call    NiSourceTexture__LoadTextureNothing
 0x434F31: add     esp, 0Ch

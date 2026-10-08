@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "assembly_identity",
+  "definition": "struct assembly_identity\n{\nWCHAR_0 *name __offset(OFF64|AUTO);\nWCHAR_0 *arch __offset(OFF64|AUTO);\nWCHAR_0 *public_key __offset(OFF64|AUTO);\nWCHAR_0 *language __offset(OFF64|AUTO);\nWCHAR_0 *type __offset(OFF64|AUTO);\nassembly_version version;\nBOOL optional;\nBOOL delayed;\n}\n",
   "id": 18374686479671877938,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "name",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "arch",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "public_key",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "language",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "version",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 8
+      "size": 8,
+      "type": "assembly_version"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "optional",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "delayed",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     }
   ],
   "name": "assembly_identity",
+  "ordinal": 8758,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 36
 }

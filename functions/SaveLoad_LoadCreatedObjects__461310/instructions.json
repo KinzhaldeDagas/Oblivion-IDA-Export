@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x46134B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x46137B",
-    "line": "call    edx",
+    "line": "call    edx; Savegame review: reads file-controlled created-object count used as loop bound at 0x4613D2; plugin clamps at 0x461380.",
     "mnemonic": "call",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x461380",
-    "line": "cmp     [esp+54h+var_38], ebp",
+    "line": "cmp     [esp+54h+var_38], ebp; EnginePatch v1: byte-checked SaveLoad_LoadCreatedObjects count guard. Clamps save-controlled UInt32 record count using hard cap and remaining file bytes / 0x14 before the created-object load loop.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4613B6",
-    "line": "mov     [esp+54h+var_40], ebx",
+    "line": "mov     [esp+54h+file], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4613BC",
-    "line": "mov     [esp+54h+var_40], ebp",
+    "line": "mov     [esp+54h+file], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x46142F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,19 +583,19 @@
   },
   {
     "ea": "0x46143B",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46143C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46143E",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,25 +607,25 @@
   },
   {
     "ea": "0x461445",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x461447",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x461449",
-    "line": "push    ebx",
+    "line": "push    ebx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46144A",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x46145F",
-    "line": "mov     eax, [esp+54h+var_40]",
+    "line": "mov     eax, [esp+54h+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,19 +661,19 @@
   },
   {
     "ea": "0x461469",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; dataHandler",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x46146F",
-    "line": "push    0",
+    "line": "push    0; firstFileLowFormFilter",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x461471",
-    "line": "push    eax",
+    "line": "push    eax; file",
     "mnemonic": "push",
     "size": 1
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x461479",
-    "line": "call    TESDataHandler_LoadFormRecord",
+    "line": "call    TESDataHandler_LoadFormRecord; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x461494",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x4614AD",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x4614F9",
-    "line": "mov     ebx, [esp+54h+var_40]",
+    "line": "mov     ebx, [esp+54h+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x461528",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1156,5 +1156,77 @@
     "line": "jmp     short loc_4614FD",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9AE5D0",
+    "line": "mov     eax, [ebp-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE5D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE5D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE5D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE5DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE5DB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE5DF",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE5E2",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE5E5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE5E7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE5EC",
+    "line": "mov     eax, offset stru_ADADD4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE5F1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

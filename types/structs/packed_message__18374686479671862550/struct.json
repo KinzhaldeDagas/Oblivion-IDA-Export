@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "packed_message",
+  "definition": "struct packed_message\n{\npacked_structs ps;\nint count;\nconst void *data[4] __offset(OFF64|AUTO);\nsize_t size[4];\n}\n",
   "id": 18374686479671862550,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ps",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 96
+      "size": 96,
+      "type": "packed_structs"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "count",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 16
+      "size": 16,
+      "type": "const void *[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "size",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 32
+      "size": 32,
+      "type": "size_t[4]"
     }
   ],
   "name": "packed_message",
+  "ordinal": 7530,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 152
 }

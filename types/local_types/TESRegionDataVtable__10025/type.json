@@ -1,0 +1,96 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESRegionDataVtable",
+  "definition": "struct TESRegionDataVtable\n{\nvoid *scalarDeletingDestructor; ///< Verified scalar deleting destructor.\nvoid *saveRegionDataHeader; ///< Verified writes RDAT chunk header containing virtual data ID, override flag and priority.\nvoid *loadRegionDataHeader; ///< Verified loads override flag and priority from RDAT header.\nvoid *unknown0C; ///< Verified derived data-type getter: manager filters compare this return value to 2..7.\nvoid *unknown10; ///< Candidate remaining virtual is copy/snapshot operation; not applied without usage tracing.\nvoid *unknown14; ///< Unknown virtual.\nvoid *unknown18; ///< Unknown virtual.\nvoid *unknown1C; ///< Unknown virtual.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified scalar deleting destructor.",
+      "name": "scalarDeletingDestructor",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified writes RDAT chunk header containing virtual data ID, override flag and priority.",
+      "name": "saveRegionDataHeader",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified loads override flag and priority from RDAT header.",
+      "name": "loadRegionDataHeader",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified derived data-type getter: manager filters compare this return value to 2..7.",
+      "name": "unknown0C",
+      "offset_bits": 96,
+      "offset_bytes": 12,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Candidate remaining virtual is copy/snapshot operation; not applied without usage tracing.",
+      "name": "unknown10",
+      "offset_bits": 128,
+      "offset_bytes": 16,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown virtual.",
+      "name": "unknown14",
+      "offset_bits": 160,
+      "offset_bytes": 20,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown virtual.",
+      "name": "unknown18",
+      "offset_bits": 192,
+      "offset_bytes": 24,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown virtual.",
+      "name": "unknown1C",
+      "offset_bits": 224,
+      "offset_bytes": 28,
+      "size_bits": 32,
+      "type": "void *"
+    }
+  ],
+  "name": "TESRegionDataVtable",
+  "ordinal": 10025,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 32
+}

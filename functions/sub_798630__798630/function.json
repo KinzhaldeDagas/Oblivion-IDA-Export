@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 10,
+  "chunks": [
+    [
+      "0x798630",
+      "0x798687"
+    ]
+  ],
+  "chunks_sha256": "cac9595507af0ce23596e31e19fffefab3f8a07b035de4a0ba2cb344498f6e12",
+  "comment_regular": "Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.",
+  "comment_repeatable": "Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_798630",
+  "display_name": "OB_CLeafGeometry_SmallUpdate_010201A0",
   "end_ea": "0x798687",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_798630",
+  "name": "OB_CLeafGeometry_SmallUpdate_010201A0",
   "segment": ".text",
   "sha256": "cac9595507af0ce23596e31e19fffefab3f8a07b035de4a0ba2cb344498f6e12",
   "size": 87,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x798630",
-  "type": "void __thiscall(int this, _DWORD *, unsigned __int16, int, int, int)",
+  "total_chunk_size": 87,
+  "type": "void __thiscall(OB_CLeafGeometry_010201A0 *this, OB_SLeafGeometryOutput_010201A0 *outLeaf, unsigned __int16 lodLevel, float cameraAzimuthDegrees, float cameraPitchDegrees, float leafSizeIncreaseFactor)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 10
 }

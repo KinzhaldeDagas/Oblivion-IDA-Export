@@ -1,27 +1,28 @@
-NiObject *__cdecl sub_5508A0(int a1)
+// Scan NiObjectNET extra data and return the FaceGen base-vertex data object used to restore authored positions.
+NiObject *__cdecl NiObjectNET_FindFaceGenBaseVertexData(NiObjectNET *object)
 {
   NiObject *result; // eax
-  unsigned int v2; // edi
+  unsigned int m_extraDataListLen; // edi
   int v3; // esi
-  int v4; // ecx
+  NiExtraData **m_extraDataList; // ecx
 
-  if ( !a1 )
-    return 0;
-  v2 = *(unsigned __int16 *)(a1 + 0x14);
-  if ( !*(_WORD *)(a1 + 0x14) )
-    return 0;
-  v3 = 0;
-  while ( 1 )
+  if ( !object ) /*0x5508a7*/
+    return 0; /*0x5508a9*/
+  m_extraDataListLen = object->members.m_extraDataListLen; /*0x5508ae*/
+  if ( !object->members.m_extraDataListLen ) /*0x5508ae*/
+    return 0; /*0x5508b7*/
+  v3 = 0; /*0x5508bc*/
+  while ( 1 ) /*0x5508c2*/
   {
-    v4 = *(_DWORD *)(a1 + 0x10);
-    if ( *(_DWORD *)(v4 + 4 * (unsigned __int16)v3) )
+    m_extraDataList = object->members.m_extraDataList; /*0x5508c2*/
+    if ( m_extraDataList[(unsigned __int16)v3] ) /*0x5508c8*/
     {
-      result = NiRTTI_Cast(&stru_B39D90, *(NiObject **)(v4 + 4 * (unsigned __int16)v3));
-      if ( result )
-        break;
+      result = NiRTTI_Cast((BSStringT *)&stru_B39D90, (NiObject *)m_extraDataList[(unsigned __int16)v3]); /*0x5508d5*/
+      if ( result ) /*0x5508df*/
+        break; /*0x5508df*/
     }
-    if ( ++v3 >= v2 )
-      return 0;
+    if ( ++v3 >= m_extraDataListLen ) /*0x5508e6*/
+      return 0; /*0x5508e8*/
   }
-  return result;
+  return result; /*0x5508ab*/
 }

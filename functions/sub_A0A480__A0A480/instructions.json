@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA0A480",
-    "line": "push    0",
+    "line": "push    0; parent",
     "mnemonic": "push",
     "size": 2
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0xA0A487",
-    "line": "mov     ecx, offset stru_B40124",
+    "line": "mov     ecx, offset stru_B40124; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA0A48C",
-    "line": "call    sub_70E220",
+    "line": "call    NiRTTI_Constructor; Constructs one Oblivion NiRTTI descriptor: writes the class-name pointer at +0 and parent NiRTTI pointer at +4, then returns this. This is the native NiRTTI constructor used by the SpeedTree shader-property RTTI initializers decoded in Pass 368.",
     "mnemonic": "call",
     "size": 5
   },

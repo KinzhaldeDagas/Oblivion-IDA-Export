@@ -1,4 +1,4 @@
-0x800110: push    0FFFFFFFFh
+0x800110: push    0FFFFFFFFh; MoonSugarEffect decode: RefractionShader dtor releases programs/pass/extra texture, returns global dword_B474AC to texture manager, then calls BSImageSpaceShader dtor.
 0x800112: push    offset ??0RefractionShader@@QAE@XZ_SEH
 0x800117: mov     eax, large fs:0
 0x80011D: push    eax
@@ -55,7 +55,7 @@
 0x8001B9: jz      short loc_8001CD
 0x8001BB: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x8001BF: jnz     short loc_8001C6
-0x8001C1: call    sub_7604D0
+0x8001C1: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8001C6: mov     dword ptr [ebp+0], 0
 0x8001CD: mov     edi, [esi+0A0h]
 0x8001D3: test    edi, edi
@@ -77,8 +77,8 @@
 0x800202: test    eax, eax
 0x800204: jz      short loc_800242
 0x800206: mov     ecx, ds:0B42F50h; this
-0x80020C: push    eax; a2
-0x80020D: call    sub_7C1EE0
+0x80020C: push    eax; texture
+0x80020D: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x800212: mov     edi, ds:0B474ACh
 0x800218: test    edi, edi
 0x80021A: jz      short loc_800242
@@ -117,13 +117,13 @@
 0x800276: push    ebp; void *
 0x800277: mov     byte ptr [esp+34h+var_4], 2
 0x80027C: call    $LN21
-0x800281: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x800281: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x800286: push    1; int
 0x800288: push    4; unsigned int
 0x80028A: push    ebx; void *
 0x80028B: mov     byte ptr [esp+34h+var_4], 1
 0x800290: call    $LN21
-0x800295: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x800295: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x80029A: push    1; int
 0x80029C: push    4; unsigned int
 0x80029E: lea     eax, [esi+90h]
@@ -132,7 +132,7 @@
 0x8002AA: call    $LN21
 0x8002AF: mov     ecx, esi; this
 0x8002B1: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x8002B9: call    ??1BSImageSpaceShader@@UAE@XZ; BSImageSpaceShader::~BSImageSpaceShader(void)
+0x8002B9: call    ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
 0x8002BE: mov     ecx, dword ptr [esp+24h+var_C]
 0x8002C2: mov     large fs:0, ecx
 0x8002C9: pop     ecx
@@ -142,3 +142,39 @@
 0x8002CD: pop     ebx
 0x8002CE: add     esp, 10h
 0x8002D1: retn
+0x9D0670: mov     ecx, [ebp-10h]; this
+0x9D0673: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9D0678: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D067D: push    1; int
+0x9D067F: push    4; unsigned int
+0x9D0681: mov     eax, [ebp-10h]
+0x9D0684: add     eax, 90h
+0x9D0689: push    eax; void *
+0x9D068A: call    $LN21
+0x9D068F: retn
+0x9D0690: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0695: push    1; int
+0x9D0697: push    4; unsigned int
+0x9D0699: mov     eax, [ebp-10h]
+0x9D069C: add     eax, 94h ; '”'
+0x9D06A1: push    eax; void *
+0x9D06A2: call    $LN21
+0x9D06A7: retn
+0x9D06A8: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9D06AD: push    1; int
+0x9D06AF: push    4; unsigned int
+0x9D06B1: mov     eax, [ebp-10h]
+0x9D06B4: add     eax, 9Ch ; 'œ'
+0x9D06B9: push    eax; void *
+0x9D06BA: call    $LN21
+0x9D06BF: retn
+0x9D06C0: mov     ecx, [ebp-10h]
+0x9D06C3: add     ecx, 0A0h ; ' '; slot
+0x9D06C9: jmp     NiPointerSlot_Release
+0x9D06CE: mov     edx, [esp+arg_4]
+0x9D06D2: lea     eax, [edx-14h]
+0x9D06D5: mov     ecx, [edx-18h]
+0x9D06D8: xor     ecx, eax
+0x9D06DA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D06DF: mov     eax, offset stru_AF8FE0
+0x9D06E4: jmp     ___CxxFrameHandler3

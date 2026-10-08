@@ -27,8 +27,8 @@
 0x65E20C: call    Player_ModAVNode
 0x65E211: fstp    dword ptr [esi+edi*4+204h]
 0x65E218: add     esp, 0Ch
-0x65E21B: push    edi; a2
-0x65E21C: call    sub_57A6F0
+0x65E21B: push    edi; actorValue
+0x65E21C: call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.
 0x65E221: add     esp, 4
 0x65E224: cmp     edi, 8
 0x65E227: jnz     short loc_65E242
@@ -42,10 +42,10 @@
 0x65E23D: push    ebp
 0x65E23E: mov     ecx, esi
 0x65E240: call    eax
-0x65E242: push    0
-0x65E244: push    edi
-0x65E245: mov     ecx, esi
-0x65E247: call    sub_5E2670
+0x65E242: push    0; updatePlayerUI
+0x65E244: push    edi; actorValue
+0x65E245: mov     ecx, esi; this
+0x65E247: call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.
 0x65E24C: pop     edi
 0x65E24D: pop     esi
 0x65E24E: pop     ebp

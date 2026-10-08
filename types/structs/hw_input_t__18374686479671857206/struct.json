@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "hw_input_t",
+  "definition": "union hw_input_t\n{\nint type;\n$E072E603FEF95D793E0794080B88DBC7 kbd;\n$A112CB03ACBACA653F159BCC4597A535 mouse;\n$32E56BE1F84328C924E91698D8836E09 hw;\n}\n",
   "id": 18374686479671857206,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "kbd",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$E072E603FEF95D793E0794080B88DBC7"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mouse",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "$A112CB03ACBACA653F159BCC4597A535"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hw",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "$32E56BE1F84328C924E91698D8836E09"
     }
   ],
   "name": "hw_input_t",
+  "ordinal": 6653,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 40
 }

@@ -1,6 +1,6 @@
 0x45DE50: mov     eax, [edi]
 0x45DE52: push    eax; a1
-0x45DE53: call    TESForm_LookupByFormID
+0x45DE53: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45DE58: mov     esi, eax
 0x45DE5A: add     esp, 4
 0x45DE5D: test    esi, esi

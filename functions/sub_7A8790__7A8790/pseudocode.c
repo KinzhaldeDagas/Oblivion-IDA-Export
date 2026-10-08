@@ -1,5 +1,9 @@
-_DWORD *__stdcall sub_7A8790(_DWORD *a1, int a2, _DWORD *a3)
+// OBLIVION AUTHORITY (2026-08-30): Uninitialized fill_n wrapper for SLodEntry; returns destination+count.
+OB_CLeafLodEngine_SLodEntry_010201A0 *__cdecl OB_LeafLodEntry_UninitializedFillN_ReturnEnd_010201A0(
+        OB_CLeafLodEngine_SLodEntry_010201A0 *destination,
+        unsigned int count,
+        const OB_CLeafLodEngine_SLodEntry_010201A0 *value)
 {
-  sub_7A8720(a1, a2, a3);
-  return &a1[2 * a2];
+  OB_LeafLodEntry_UninitializedFillN_010201A0(destination, count, value); /*0x7a87b2*/
+  return &destination[count]; /*0x7a87bd*/
 }

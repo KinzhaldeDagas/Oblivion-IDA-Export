@@ -1,12 +1,7 @@
-void __userpurge sub_51F160(TESForm *this@<ecx>, int edi0@<edi>, int a2)
+void __thiscall sub_51F160(TESForm *this, int a2)
 {
-  size_t v5; // [esp-4h] [ebp-Ch]
-
-  TESForm_SaveModifiedForm(this, a2);
-  sub_46EAC0((char *)this + 0x24, edi0, a2);
-  if ( (a2 & 4) != 0 )
-  {
-    LODWORD(v5) = 1;
-    TESForm_SaveDataToCurrentSaveGame((TESForm *)((char *)this + 0x34), v5);
-  }
+  TESForm_SaveModifiedForm(this, a2); /*0x51f169*/
+  sub_46EAC0((char *)this + 0x24, a2); /*0x51f172*/
+  if ( (a2 & 4) != 0 ) /*0x51f17a*/
+    TESForm_SaveDataToCurrentSaveGame(this, (char *)this + 0x34, 1u); /*0x51f184*/
 }

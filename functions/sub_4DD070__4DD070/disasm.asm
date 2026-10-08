@@ -39,10 +39,10 @@
 0x4DD0E5: fld1
 0x4DD0E7: push    ecx
 0x4DD0E8: fstp    dword ptr [esi+4]
-0x4DD0EB: lea     ecx, [esp+38h+var_24]
+0x4DD0EB: lea     ecx, [esp+38h+var_24]; this
 0x4DD0EF: fstp    dword ptr [esi+8]
-0x4DD0F2: fstp    [esp+38h+var_38]; float
-0x4DD0F5: call    NiMatrix33_InitRotationTransform
+0x4DD0F2: fstp    [esp+38h+angleZ]; angleZ
+0x4DD0F5: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x4DD0FA: push    esi
 0x4DD0FB: lea     eax, [esp+38h+var_30]
 0x4DD0FF: push    eax
@@ -55,7 +55,7 @@
 0x4DD113: mov     eax, [eax+8]
 0x4DD116: mov     ecx, esi
 0x4DD118: mov     [esi+8], eax
-0x4DD11B: call    sub_43F350
+0x4DD11B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4DD120: fstp    st
 0x4DD122: mov     eax, esi
 0x4DD124: pop     esi

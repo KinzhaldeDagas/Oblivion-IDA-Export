@@ -19,7 +19,7 @@
 0x6C4C01: jb      short loc_6C4BE0
 0x6C4C03: pop     esi
 0x6C4C04: lea     ecx, [ebx+3Ch]
-0x6C4C07: call    sub_739670
+0x6C4C07: call    sub_739670; Pass227: Clears NiScreenSpaceCamera +0x134 texture array and releases live NiScreenTexture pointers.
 0x6C4C0C: pop     edi
 0x6C4C0D: lea     ecx, [ebx+58h]
 0x6C4C10: pop     ebx

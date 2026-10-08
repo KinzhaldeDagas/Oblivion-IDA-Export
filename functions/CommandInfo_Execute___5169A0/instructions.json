@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5169A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; TES4 authoritative script instruction executor. Handles expression/control opcodes directly and dispatches ordinary CommandInfo execute callbacks for vanilla script commands.",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x516A23",
-    "line": "movsx   ecx, word ptr [edi+eax]",
+    "line": "movsx   ecx, word ptr [edi+eax]; Begin-block event id dispatch: opcode 0x10 reads event id, uses the event callback table at 0xB0AF58, and skips the block when the callback result is 0.",
     "mnemonic": "movsx",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x516A92",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x516BD5",
-    "line": "call    Script_GetRefVariableByIndex",
+    "line": "call    Script_GetRefVariableByIndex; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x516D04",
-    "line": "lea     ecx, [esp+75Ch+var_720]; void *",
+    "line": "lea     ecx, [esp+75Ch+var_720]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x516D13",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x516D90",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x516E60",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x516E6B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x516E86",
-    "line": "lea     ecx, [esp+75Ch+var_720]; void *",
+    "line": "lea     ecx, [esp+75Ch+var_720]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x516E95",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x517036",
-    "line": "mov     eax, [esp+75Ch+ArgList]; jumptable 00516B76 default case, cases 18-20,26,27",
+    "line": "mov     eax, [esp+75Ch+ArgList]; Default script-command path: lookup CommandInfo by opcode, error if the opcode is not in the vanilla lookup ranges.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x51703E",
-    "line": "call    ScriptRunner_LookupCommandByOpcode",
+    "line": "call    ScriptRunner_LookupCommandInfoByOpcode; TES4 authoritative: vanilla command lookup. Supports opcode ranges 0x100..0x182 at 0xB0B420 and 0x1000..0x1170 at 0xB0C8C0; each CommandInfo record is 0x28 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x5170A2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3127,7 +3127,7 @@
   },
   {
     "ea": "0x5170BA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x5170C9",
-    "line": "cmp     byte ptr [eax+10h], 0",
+    "line": "cmp     byte ptr [eax+10h], 0; Checks CommandInfo packed field at +0x10 low byte: command requires a parent/reference when nonzero.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -3409,7 +3409,7 @@
   },
   {
     "ea": "0x517179",
-    "line": "jz      loc_517295",
+    "line": "jz      loc_517295; Execution gate: when a12/skip-mode is clear, vanilla calls CommandInfo.execute; when set, it falls through to the argument-consume path without invoking the command.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -3421,7 +3421,7 @@
   },
   {
     "ea": "0x517181",
-    "line": "jz      loc_5172D3; jumptable 00516B76 cases 16,17,28,29",
+    "line": "jz      loc_5172D3; Skip-mode/reference-missing fallthrough: if parameters exist, vanilla consumes compiled args with Script_ExtractArgs so the opcode offset remains synchronized.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -3511,7 +3511,7 @@
   },
   {
     "ea": "0x5171A8",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3754,5 +3754,575 @@
     "line": "jmp     short loc_517230",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x517230",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x517233",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x517235",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x517237",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517238",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517239",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x51723A",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x51723B",
+    "line": "lea     edx, [esp+770h+a3]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x51723F",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517240",
+    "line": "lea     eax, [esp+774h+var_728]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x517244",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517245",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517246",
+    "line": "call    ExecuteScriptInstruction?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x51724B",
+    "line": "add     esp, 20h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x51724E",
+    "line": "sub     [esp+75Ch+var_73C], 1",
+    "mnemonic": "sub",
+    "size": 5
+  },
+  {
+    "ea": "0x517253",
+    "line": "jnz     short loc_517230",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x517255",
+    "line": "mov     ecx, [esp+75Ch+a3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x517259",
+    "line": "movzx   eax, word ptr [edi+ecx]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x51725D",
+    "line": "add     ecx, 2",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x517260",
+    "line": "test    ax, ax",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x517263",
+    "line": "mov     [esp+75Ch+a3], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x517267",
+    "line": "jle     short loc_5172D3; jumptable 00516B76 cases 16,17,28,29",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x517269",
+    "line": "movzx   ecx, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x51726C",
+    "line": "mov     [esp+75Ch+var_73C], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x517270",
+    "line": "mov     edx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x517273",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x517275",
+    "line": "push    edx; l",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517276",
+    "line": "mov     edx, [esp+760h+a1]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x51727A",
+    "line": "push    ebp; a6",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x51727B",
+    "line": "push    eax; a5",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x51727C",
+    "line": "push    ebx; a4",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x51727D",
+    "line": "lea     ecx, [esp+76Ch+a3]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x517281",
+    "line": "push    ecx; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517282",
+    "line": "push    edi; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517283",
+    "line": "push    edx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x517284",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x517289",
+    "line": "add     esp, 1Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x51728C",
+    "line": "sub     [esp+75Ch+var_73C], 1",
+    "mnemonic": "sub",
+    "size": 5
+  },
+  {
+    "ea": "0x517291",
+    "line": "jnz     short loc_517270",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x517293",
+    "line": "jmp     short loc_5172D3; jumptable 00516B76 cases 16,17,28,29",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x517295",
+    "line": "cmp     byte ptr [eax+25h], 0; CommandInfo +0x24 flag byte1 marks commands that set ScriptRunner +0xA1 before execute; observed on side-effecting commands such as Activate/MoveTo/Position/ForceFlee.",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x517299",
+    "line": "mov     ecx, [eax+18h]; Calls CommandInfo.execute with vanilla command ABI: ParamInfo*, script data, thisObj, containingObj, Script*, ScriptEventList*, result storage, opcode offset pointer.",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x51729C",
+    "line": "jz      short loc_5172A5",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x51729E",
+    "line": "mov     byte ptr [esi+0A1h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5172A5",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5172A7",
+    "line": "jz      loc_516ACF",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5172AD",
+    "line": "lea     eax, [esp+75Ch+a3]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x5172B1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172B2",
+    "line": "mov     eax, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x5172B5",
+    "line": "lea     edx, [esp+760h+var_730]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x5172B9",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172BA",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5172BC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172BD",
+    "line": "mov     eax, [esp+768h+a1]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x5172C1",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172C2",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172C3",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172C4",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172C5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5172C6",
+    "line": "call    ecx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x5172C8",
+    "line": "add     esp, 20h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5172CB",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5172CD",
+    "line": "jz      loc_516ACF",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5172D3",
+    "line": "mov     al, 1; jumptable 00516B76 cases 16,17,28,29",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5172D5",
+    "line": "mov     ecx, dword ptr [esp+75Ch+var_C]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5172DC",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5172E3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5172E4",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5172E5",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5172E6",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5172E7",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5172E8",
+    "line": "mov     ecx, [esp+748h+var_10]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5172EF",
+    "line": "xor     ecx, esp",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x5172F1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5172F6",
+    "line": "add     esp, 748h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x5172FC",
+    "line": "retn    24h ; '$'",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x9B72F0",
+    "line": "lea     ecx, [ebp-720h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B72F6",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B72FB",
+    "line": "lea     ecx, [ebp-720h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7301",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7306",
+    "line": "lea     ecx, [ebp-744h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B730C",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7311",
+    "line": "lea     ecx, [ebp-744h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7317",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B731C",
+    "line": "mov     edx, [esp+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B7320",
+    "line": "lea     eax, [edx-74Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B7326",
+    "line": "mov     ecx, [edx-750h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B732C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B732E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7333",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7336",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7339",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B733B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7340",
+    "line": "mov     eax, offset stru_AE1F38",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7345",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

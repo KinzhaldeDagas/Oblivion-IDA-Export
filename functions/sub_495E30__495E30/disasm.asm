@@ -132,7 +132,7 @@
 0x495FEA: cmp     eax, ebx
 0x495FEC: jz      short loc_495FFE
 0x495FEE: mov     edi, edi
-0x495FF0: cmp     eax, offset dword_BA7D38
+0x495FF0: cmp     eax, offset stru_BA7D38
 0x495FF5: jz      short loc_496025
 0x495FF7: mov     eax, [eax+4]
 0x495FFA: cmp     eax, ebx
@@ -167,7 +167,7 @@
 0x496041: call    eax
 0x496043: cmp     eax, ebx
 0x496045: jz      short loc_496055
-0x496047: cmp     eax, offset dword_BA7D84
+0x496047: cmp     eax, offset stru_BA7D84
 0x49604C: jz      short loc_49609D
 0x49604E: mov     eax, [eax+4]
 0x496051: cmp     eax, ebx
@@ -187,10 +187,10 @@
 0x49607D: lea     ecx, [ecx+0]
 0x496080: cmp     edi, ebx
 0x496082: jz      short loc_4960A1
-0x496084: lea     ecx, [esp+0B0h+var_88]
-0x496088: push    ecx
-0x496089: mov     ecx, edi
-0x49608B: call    sub_677C70
+0x496084: lea     ecx, [esp+0B0h+outData]
+0x496088: push    ecx; outData
+0x496089: mov     ecx, edi; this
+0x49608B: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x496090: or      [esp+0B0h+var_90], 1
 0x496095: cmp     [eax], ebx
 0x496097: jz      short loc_4960A1
@@ -201,7 +201,7 @@
 0x4960A1: xor     bl, bl
 0x4960A3: test    byte ptr [esp+0B0h+var_90], 1
 0x4960A8: jz      short loc_4960CF
-0x4960AA: mov     esi, [esp+0B0h+var_88]
+0x4960AA: mov     esi, [esp+0B0h+outData]
 0x4960AE: and     [esp+0B0h+var_90], 0FFFFFFFEh
 0x4960B3: test    esi, esi
 0x4960B5: jz      short loc_4960CF
@@ -220,9 +220,9 @@
 0x4960CF: test    bl, bl
 0x4960D1: jz      loc_49625E
 0x4960D7: lea     eax, [esp+0B0h+var_8C]
-0x4960DB: push    eax
-0x4960DC: mov     ecx, edi
-0x4960DE: call    sub_677C70
+0x4960DB: push    eax; outData
+0x4960DC: mov     ecx, edi; this
+0x4960DE: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x4960E3: mov     eax, [eax]
 0x4960E5: mov     ecx, [esp+0B0h+var_94]
 0x4960E9: push    eax
@@ -256,7 +256,7 @@
 0x49613D: call    eax
 0x49613F: cmp     eax, ebx
 0x496141: jz      short loc_496151
-0x496143: cmp     eax, offset dword_BA7D78
+0x496143: cmp     eax, offset stru_BA7D78
 0x496148: jz      short loc_496191
 0x49614A: mov     eax, [eax+4]
 0x49614D: cmp     eax, ebx
@@ -268,7 +268,7 @@
 0x496159: mov     edi, eax
 0x49615B: jz      loc_496203
 0x496161: push    edi
-0x496162: push    offset dword_BA7D68
+0x496162: push    offset stru_BA7D68
 0x496167: call    NiRTTI_Cast
 0x49616C: add     esp, 8
 0x49616F: cmp     eax, ebx
@@ -284,7 +284,7 @@
 0x496191: mov     al, 1
 0x496193: jmp     short loc_496153
 0x496195: push    edi
-0x496196: push    offset dword_BA7D5C
+0x496196: push    offset stru_BA7D5C
 0x49619B: call    NiRTTI_Cast
 0x4961A0: mov     ebp, eax
 0x4961A2: add     esp, 8
@@ -322,7 +322,7 @@
 0x4961FF: jb      short loc_4961D3
 0x496201: jmp     short loc_49625E
 0x496203: push    esi
-0x496204: push    offset dword_BA7D44
+0x496204: push    offset stru_BA7D44
 0x496209: call    NiRTTI_Cast
 0x49620E: add     esp, 8
 0x496211: cmp     eax, ebx
@@ -335,7 +335,7 @@
 0x496223: push    eax
 0x496224: jmp     short loc_496255
 0x496226: push    esi
-0x496227: push    offset unk_BA7D50
+0x496227: push    0BA7D50h
 0x49622C: call    NiRTTI_Cast
 0x496231: add     esp, 8
 0x496234: cmp     eax, ebx
@@ -371,3 +371,21 @@
 0x496286: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x49628B: add     esp, 9Ch
 0x496291: retn    8
+0x9B0270: mov     eax, [ebp-8Ch]
+0x9B0276: push    eax
+0x9B0277: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B027C: pop     ecx
+0x9B027D: retn
+0x9B027E: lea     ecx, [ebp-8Ch]; slot
+0x9B0284: jmp     NiPointerSlot_Release
+0x9B0289: mov     edx, [esp+arg_4]
+0x9B028D: lea     eax, [edx-0A0h]
+0x9B0293: mov     ecx, [edx-0A4h]
+0x9B0299: xor     ecx, eax
+0x9B029B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B02A0: add     eax, 10h
+0x9B02A3: mov     ecx, [edx-4]
+0x9B02A6: xor     ecx, eax
+0x9B02A8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B02AD: mov     eax, offset stru_ADC620
+0x9B02B2: jmp     ___CxxFrameHandler3

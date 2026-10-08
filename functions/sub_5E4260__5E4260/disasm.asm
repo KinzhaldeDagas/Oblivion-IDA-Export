@@ -67,7 +67,7 @@
 0x5E4305: jz      short loc_5E4320
 0x5E4307: push    1
 0x5E4309: lea     ecx, [eax+18h]
-0x5E430C: call    sub_419F10
+0x5E430C: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x5E4311: mov     ecx, ds:0B333C4h
 0x5E4317: cmp     esi, ecx
 0x5E4319: jnz     short loc_5E4320

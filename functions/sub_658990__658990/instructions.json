@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x65899F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -298,12 +298,6 @@
     "line": "jmp     short loc_658A30",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x658A2D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x658A30",
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x658AF2",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },

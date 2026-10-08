@@ -70,14 +70,14 @@
 0x7D6EFC: push    1
 0x7D6EFE: mov     ecx, esi
 0x7D6F00: call    eax
-0x7D6F02: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7D6F02: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7D6F07: push    6; int
 0x7D6F09: push    4; unsigned int
 0x7D6F0B: lea     eax, [ebp+8]
 0x7D6F0E: push    eax; void *
 0x7D6F0F: mov     byte ptr [esp+34h+var_4], 0
 0x7D6F14: call    $LN21
-0x7D6F19: push    offset NiRefObject_objcount; lpAddend
+0x7D6F19: push    0B3FD64h; lpAddend
 0x7D6F1E: mov     dword ptr [ebp+0], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7D6F25: call    edi ; InterlockedDecrement
 0x7D6F27: mov     ecx, dword ptr [esp+24h+var_C]
@@ -89,3 +89,23 @@
 0x7D6F36: pop     ebx
 0x7D6F37: add     esp, 10h
 0x7D6F3A: retn
+0x9CED50: mov     ecx, [ebp-10h]
+0x9CED53: jmp     NiRefObject_destr
+0x9CED58: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CED5D: push    6; int
+0x9CED5F: push    4; unsigned int
+0x9CED61: mov     eax, [ebp-10h]
+0x9CED64: add     eax, 8
+0x9CED67: push    eax; void *
+0x9CED68: call    $LN21
+0x9CED6D: retn
+0x9CED6E: mov     ecx, [ebp-10h]
+0x9CED71: add     ecx, 20h ; ' '; slot
+0x9CED74: jmp     NiPointerSlot_Release
+0x9CED79: mov     edx, [esp+arg_4]
+0x9CED7D: lea     eax, [edx-14h]
+0x9CED80: mov     ecx, [edx-18h]
+0x9CED83: xor     ecx, eax
+0x9CED85: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CED8A: mov     eax, offset stru_AF7B90
+0x9CED8F: jmp     ___CxxFrameHandler3

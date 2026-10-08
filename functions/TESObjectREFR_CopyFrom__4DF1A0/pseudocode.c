@@ -1,227 +1,228 @@
+//
+// GPU static-world lifecycle audit 2026-09-27: CopyFrom ABI supplies destination ECX and source reference, not a cell argument. A mark-only observer cannot infer/dereference a stable target cell from those raw values; unqualified resident ownership invalidation is conservative until reference-to-cell ownership is separately proved.
 void __thiscall TESObjectREFR_CopyFrom(TESChildCELL *this, TESChildCELL *a2)
 {
   double v2; // st5
-  double v3; // st6
-  TESObjectREFR *v5; // eax
-  TESObjectREFR *v6; // ebx
+  TESObjectREFR *v4; // eax
+  TESObjectREFR *v5; // ebx
   char IsPersistent; // al
-  int v8; // esi
-  double v9; // st7
+  int v7; // esi
+  double v8; // st7
   double scale; // st6
   signed __int16 ExtraCount; // si
-  _DWORD *v12; // esi
-  _DWORD *v13; // eax
-  float *v14; // esi
-  int v15; // eax
-  NiAVObject *v16; // eax
+  _DWORD *v11; // esi
+  _DWORD *v12; // eax
+  float *v13; // esi
+  int v14; // eax
+  NiAVObject *v15; // eax
   TESObjectCELL *parentCell; // ecx
-  TESObjectCELL *v18; // ecx
-  BSExtraData *Teleport; // esi
-  BSExtraData *v20; // eax
-  BSExtraDataVtbl *v21; // edi
-  BSExtraDataVtbl *v22; // edi
-  ExtraDataList *v23; // edi
-  _BYTE *v24; // ecx
+  TESObjectCELL *v17; // ecx
+  TeleportData *Teleport; // esi
+  TeleportData *v19; // eax
+  TESObjectREFR *v20; // edi
+  TESObjectREFR *LinkedDoor; // edi
+  ExtraDataList *v22; // edi
+  _BYTE *v23; // ecx
   void (__thiscall **vtbl)(TESChildCELL *, int); // esi
-  int v26; // eax
-  TESObjectCELL *v27; // eax
-  int v28; // eax
-  int v29; // ebx
-  _DWORD *v30; // eax
-  int v31; // eax
-  void *v32; // eax
-  bool v33; // al
-  int v34; // eax
+  int v25; // eax
+  TESObjectCELL *v26; // eax
+  int v27; // eax
+  int v28; // ebx
+  _DWORD *v29; // eax
+  int v30; // eax
+  TESObjectLIGH_DecodedLayout *v31; // eax
+  bool v32; // al
+  int v33; // eax
+  NiAVObject *v34; // eax
   NiAVObject *v35; // eax
-  NiAVObject *v36; // eax
-  NiNode *v37; // eax
-  BSExtraData *v38; // eax
-  TESObjectREFR *v39; // eax
-  TESObjectREFR *v40; // esi
+  NiNode *v36; // eax
+  TeleportData *v37; // eax
+  TESObjectREFR *v38; // eax
+  TESObjectREFR *v39; // esi
   TeleportData *TeleportData; // eax
-  int v42; // [esp+24h] [ebp-3Ch]
-  TESObjectREFR *v43; // [esp+38h] [ebp-28h]
-  float v44[9]; // [esp+3Ch] [ebp-24h] BYREF
+  NiNode *v41; // [esp+24h] [ebp-3Ch]
+  TESObjectREFR *v42; // [esp+38h] [ebp-28h]
+  float v43[9]; // [esp+3Ch] [ebp-24h] BYREF
   float a2b; // [esp+64h] [ebp+4h]
   char a2a; // [esp+64h] [ebp+4h]
 
-  v5 = (TESObjectREFR *)OblivionDynamicCast(
+  v4 = (TESObjectREFR *)OblivionDynamicCast( /*0x4df1bb*/
                           a2,
                           0,
                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                           (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
                           0);
-  v6 = v5;
-  v43 = v5;
-  if ( v5 )
+  v5 = v4; /*0x4df1c0*/
+  v42 = v4; /*0x4df1c7*/
+  if ( v4 ) /*0x4df1cb*/
   {
-    IsPersistent = TESObjectREFR_IsPersistent_(v5);
-    TESObjectREFR_SetPersistance(this, v2, v3, IsPersistent);
-    TESForm_CopyAllComponentsFrom((TESForm *)this, (TESForm *)a2);
-    if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) )
+    IsPersistent = TESObjectREFR_IsPersistent(v4); /*0x4df1d3*/
+    TESObjectREFR_SetPersistance(this, IsPersistent); /*0x4df1db*/
+    TESForm_CopyAllComponentsFrom((TESForm *)this, (TESForm *)a2); /*0x4df1e3*/
+    if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) ) /*0x4df1f3*/
     {
-      v8 = (int)v6->vtbl->GetBaseForm(v6);
-      if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) != v8 )
-        (*((void (__thiscall **)(TESChildCELL *, _DWORD))this->vtbl + 0x54))(this, 0);
+      v7 = (int)v5->vtbl->GetBaseForm(v5); /*0x4df205*/
+      if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) != v7 ) /*0x4df216*/
+        (*((void (__thiscall **)(TESChildCELL *, _DWORD))this->vtbl + 0x54))(this, 0); /*0x4df225*/
     }
-    v9 = *((float *)this + 0xE);
-    qmemcpy(this + 7, &v6->member.baseForm, 0x1Cu);
-    scale = v6->member.scale;
-    if ( scale != v9 && !(*((unsigned __int8 (__thiscall **)(TESChildCELL *))this->vtbl + 0x64))(this)
+    v8 = *((float *)this + 0xE); /*0x4df227*/
+    qmemcpy(this + 7, &v5->member.baseForm, 0x1Cu); /*0x4df236*/
+    scale = v5->member.scale; /*0x4df238*/
+    if ( scale != v8 && !(*((unsigned __int8 (__thiscall **)(TESChildCELL *))this->vtbl + 0x64))(this) /*0x4df27e*/
       || *(_BYTE *)((*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) + 4) == 0x22
-      && (ExtraCount = ExtraDataList_GetExtraCount(&v6->member.baseExtraList),
+      && (ExtraCount = ExtraDataList_GetExtraCount(&v5->member.baseExtraList),
           ExtraDataList_GetExtraCount((ExtraDataList *)(this + 0x11)) != ExtraCount) )
     {
-      (*((void (__thiscall **)(TESChildCELL *, _DWORD))this->vtbl + 0x54))(this, 0);
+      (*((void (__thiscall **)(TESChildCELL *, _DWORD))this->vtbl + 0x54))(this, 0); /*0x4df28d*/
     }
-    if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) )
+    if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) ) /*0x4df29a*/
     {
-      v12 = (_DWORD *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5D))(this);
-      v13 = (_DWORD *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-      v13[0x15] = *v12;
-      v13[0x16] = v12[1];
-      v13[0x17] = v12[2];
-      v14 = sub_4D7AF0((float *)this, v44);
-      qmemcpy((void *)((*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) + 0x30), v14, 0x24u);
-      v15 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-      sub_897A20(v15, 1);
-      v9 = 0.0;
-      v16 = (NiAVObject *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-      NiAVObject_UpdateNiAVObject(v16, 0.0, 1);
+      v11 = (_DWORD *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5D))(this); /*0x4df2b1*/
+      v12 = (_DWORD *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df2be*/
+      v12[0x15] = *v11; /*0x4df2c2*/
+      v12[0x16] = v11[1]; /*0x4df2c8*/
+      v12[0x17] = v11[2]; /*0x4df2d2*/
+      v13 = sub_4D7AF0((float *)this, v43); /*0x4df2dd*/
+      qmemcpy((void *)((*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) + 0x30), v13, 0x24u); /*0x4df2f4*/
+      v14 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df303*/
+      sub_897A20(v14, 1); /*0x4df306*/
+      v8 = 0.0; /*0x4df30e*/
+      v15 = (NiAVObject *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df321*/
+      NiAVObject_UpdateNiAVObject(v15, 0.0, 1); /*0x4df325*/
     }
-    parentCell = v6->member.parentCell;
-    if ( parentCell )
+    parentCell = v5->member.parentCell; /*0x4df32a*/
+    if ( parentCell ) /*0x4df32f*/
     {
-      sub_4D35D0(parentCell, v2, scale, v9, (TESObjectREFR *)this);
-      if ( !(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) )
-        sub_434020(ioManager, v2, scale, v9, 5);
+      TESObjectCELL_AddReference(parentCell, (TESObjectREFR *)this); /*0x4df332*/
+      if ( !(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) ) /*0x4df342*/
+        sub_434020(MEMORY[0xB33A10], v2, scale, v8, 5); /*0x4df350*/
     }
     else
     {
-      v18 = *((TESObjectCELL **)this + 0x10);
-      if ( v18 )
-        sub_4CECD0(v18, (TESObjectREFR *)this);
+      v17 = *((TESObjectCELL **)this + 0x10); /*0x4df357*/
+      if ( v17 ) /*0x4df35c*/
+        TESObjectCELL_RemoveReference(v17, (TESObjectREFR *)this); /*0x4df35f*/
     }
-    Teleport = (BSExtraData *)ExtraDataList_GetTeleport((ExtraDataList *)(this + 0x11));
-    if ( Teleport )
+    Teleport = ExtraDataList_GetTeleport((ExtraDataList *)(this + 0x11)); /*0x4df36c*/
+    if ( Teleport ) /*0x4df370*/
     {
-      v20 = (BSExtraData *)ExtraDataList_GetTeleport(&v6->member.baseExtraList);
-      if ( !v20 || (v21 = sub_42B410(v20), v21 != sub_42B410(Teleport)) )
+      v19 = ExtraDataList_GetTeleport(&v5->member.baseExtraList); /*0x4df375*/
+      if ( !v19 || (v20 = TeleportData_GetLinkedDoor(v19), v20 != TeleportData_GetLinkedDoor(Teleport)) ) /*0x4df390*/
       {
-        v22 = sub_42B410(Teleport);
-        sub_41F5E0(&v22[8].CompareTo);
-        (*((void (__thiscall **)(BSExtraDataVtbl *, int))v22->Destructor + 0x11))(v22, 0x100000);
-        TeleportData::SetLinkedDoor((TeleportData *)Teleport, 0);
+        LinkedDoor = TeleportData_GetLinkedDoor(Teleport); /*0x4df399*/
+        sub_41F5E0(&LinkedDoor->member.baseExtraList.vtbl); /*0x4df39e*/
+        LinkedDoor->vtbl->super.ClearModified((TESForm *)LinkedDoor, 0x100000); /*0x4df3af*/
+        TeleportData::SetLinkedDoor(Teleport, 0); /*0x4df3b5*/
       }
     }
-    v23 = (ExtraDataList *)(this + 0x11);
-    BaseExtraList_Copy((ExtraDataList *)(this + 0x11), &v6->member.baseExtraList);
-    sub_4DB520((MobileObject *)this, v6->member.scale);
-    if ( v6->vtbl->GetNiNode(v6) )
+    v22 = (ExtraDataList *)(this + 0x11); /*0x4df3bd*/
+    BaseExtraList_Copy((ExtraDataList *)(this + 0x11), &v5->member.baseExtraList); /*0x4df3c3*/
+    sub_4DB520((MobileObject *)this, v5->member.scale); /*0x4df3d1*/
+    if ( v5->vtbl->GetNiNode(v5) ) /*0x4df3e0*/
     {
-      if ( (*(_DWORD *)(this + 2) & 0x4000) != 0 )
+      if ( (*(_DWORD *)(this + 2) & 0x4000) != 0 ) /*0x4df3f5*/
       {
-        v24 = *((_BYTE **)this + 7);
-        if ( v24 )
+        v23 = *((_BYTE **)this + 7); /*0x4df3f7*/
+        if ( v23 ) /*0x4df3fc*/
         {
-          if ( v24[4] == 0x1E )
+          if ( v23[4] == 0x1E ) /*0x4df401*/
           {
-            vtbl = (void (__thiscall **)(TESChildCELL *, int))this->vtbl;
-            v26 = (*(int (__thiscall **)(_BYTE *, TESChildCELL *, _DWORD))(*(_DWORD *)v24 + 0xEC))(v24, this, 0);
-            vtbl[0x54](this, v26);
+            vtbl = (void (__thiscall **)(TESChildCELL *, int))this->vtbl; /*0x4df40b*/
+            v25 = (*(int (__thiscall **)(_BYTE *, TESChildCELL *, _DWORD))(*(_DWORD *)v23 + 0xEC))(v23, this, 0); /*0x4df411*/
+            vtbl[0x54](this, v25); /*0x4df41c*/
           }
         }
       }
-      if ( !(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this)
-        && (v27 = *((TESObjectCELL **)this + 0x10)) != 0
-        && TESObjectCELL_IsProcessLevel_LowHigh(v27, 0) )
+      if ( !(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) /*0x4df43f*/
+        && (v26 = *((TESObjectCELL **)this + 0x10)) != 0
+        && TESObjectCELL_IsProcessLevel_LowHigh(v26, 0) )
       {
-        sub_441EF0((int)TES, (TESObjectREFR *)this, *((_DWORD **)this + 0x10), 0, 0);
+        sub_441EF0((int)MEMORY[0xB333A0], (TESObjectREFR *)this, *((_DWORD **)this + 0x10), 0, 0); /*0x4df457*/
       }
       else
       {
-        v28 = *((_DWORD *)this + 7);
-        if ( !v28 || *(_BYTE *)(v28 + 4) != 0x1E )
+        v27 = *((_DWORD *)this + 7); /*0x4df461*/
+        if ( !v27 || *(_BYTE *)(v27 + 4) != 0x1E ) /*0x4df46b*/
         {
-          v29 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x53))(this);
-          v30 = (_DWORD *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5D))(this);
-          *(_DWORD *)(v29 + 0x54) = *v30;
-          *(_DWORD *)(v29 + 0x58) = v30[1];
-          *(_DWORD *)(v29 + 0x5C) = v30[2];
-          qmemcpy((void *)(v29 + 0x30), sub_4D7AF0((float *)this, v44), 0x24u);
-          a2b = fabs(TESObjectREFR_GetScale((TESObjectREFR *)this));
-          *(float *)(v29 + 0x60) = a2b;
-          if ( v43->vtbl->GetNiNode(v43)->members.super.m_parent )
+          v28 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x53))(this); /*0x4df481*/
+          v29 = (_DWORD *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5D))(this); /*0x4df48b*/
+          *(_DWORD *)(v28 + 0x54) = *v29; /*0x4df48f*/
+          *(_DWORD *)(v28 + 0x58) = v29[1]; /*0x4df495*/
+          *(_DWORD *)(v28 + 0x5C) = v29[2]; /*0x4df4a2*/
+          qmemcpy((void *)(v28 + 0x30), sub_4D7AF0((float *)this, v43), 0x24u); /*0x4df4b4*/
+          a2b = fabs(TESObjectREFR_GetScale((TESObjectREFR *)this)); /*0x4df4c5*/
+          *(float *)(v28 + 0x60) = a2b; /*0x4df4cd*/
+          if ( v42->vtbl->GetNiNode(v42)->members.super.m_parent ) /*0x4df4da*/
           {
-            v31 = (int)v43->vtbl->GetNiNode(v43);
-            (*(void (__thiscall **)(_DWORD, int, _DWORD))(**(_DWORD **)(v31 + 0x1C) + 0x84))(
-              *(_DWORD *)(v31 + 0x1C),
-              v29,
+            v30 = (int)v42->vtbl->GetNiNode(v42); /*0x4df4ea*/
+            (*(void (__thiscall **)(_DWORD, int, _DWORD))(**(_DWORD **)(v30 + 0x1C) + 0x84))( /*0x4df4fa*/
+              *(_DWORD *)(v30 + 0x1C),
+              v28,
               0);
           }
         }
       }
-      if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) )
+      if ( (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this) ) /*0x4df507*/
       {
-        if ( *(_BYTE *)((*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) + 4) == 0x1A )
+        if ( *(_BYTE *)((*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this) + 4) == 0x1A ) /*0x4df51e*/
         {
-          v42 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-          v32 = (void *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this);
-          sub_4B1600(v32, (TESObjectREFR *)this, v42);
+          v41 = (NiNode *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df530*/
+          v31 = (TESObjectLIGH_DecodedLayout *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5C))(this); /*0x4df53a*/
+          TESObjectLIGH_ConfigureReferencePointLight(v31, (TESObjectREFR *)this, v41); /*0x4df53e*/
         }
       }
-      v23 = (ExtraDataList *)(this + 0x11);
-      v33 = sub_41F830((ExtraDataList *)(this + 0x11), 8);
-      sub_4DE460(this, COERCE_FLOAT(v33), 1);
-      v34 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-      sub_897A20(v34, 1);
-      v35 = (NiAVObject *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-      NiAVObject_UpdateNiAVObject(v35, 0.0, 1);
-      v36 = (NiAVObject *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-      NiAVObject_InitializePropertyState(v36);
-      v37 = (NiNode *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this);
-      NiNode_UpdateDynamicEffectState(v37);
+      v22 = (ExtraDataList *)(this + 0x11); /*0x4df543*/
+      v32 = ExtraDataList_TestActionFlagBits((ExtraDataList *)(this + 0x11), 8u); /*0x4df54a*/
+      sub_4DE460((TESObjectREFR *)this, COERCE_FLOAT(v32), 1); /*0x4df55d*/
+      v33 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df56f*/
+      sub_897A20(v33, 1); /*0x4df572*/
+      v34 = (NiAVObject *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df58d*/
+      NiAVObject_UpdateNiAVObject(v34, 0.0, 1); /*0x4df591*/
+      v35 = (NiAVObject *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df5a1*/
+      NiAVObject_InitializePropertyState(v35); /*0x4df5a5*/
+      v36 = (NiNode *)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x55))(this); /*0x4df5b5*/
+      NiNode_UpdateDynamicEffectState(v36); /*0x4df5b9*/
     }
     else
     {
-      (*((void (__thiscall **)(TESChildCELL *, _DWORD))this->vtbl + 0x54))(this, 0);
+      (*((void (__thiscall **)(TESChildCELL *, _DWORD))this->vtbl + 0x54))(this, 0); /*0x4df5cd*/
     }
-    v38 = (BSExtraData *)ExtraDataList_GetTeleport(v23);
-    if ( v38 )
+    v37 = ExtraDataList_GetTeleport(v22); /*0x4df5d1*/
+    if ( v37 ) /*0x4df5d8*/
     {
-      if ( (*(_DWORD *)(this + 2) & 0x4000) == 0 )
+      if ( (*(_DWORD *)(this + 2) & 0x4000) == 0 ) /*0x4df5e7*/
       {
-        v39 = (TESObjectREFR *)sub_42B410(v38);
-        v40 = v39;
-        if ( !v39 )
+        v38 = TeleportData_GetLinkedDoor(v37); /*0x4df5ef*/
+        v39 = v38; /*0x4df5f4*/
+        if ( !v38 ) /*0x4df5f8*/
         {
-          sub_4D76D0(this);
-          return;
+          sub_4D76D0(this); /*0x4df5fc*/
+          return; /*0x4df608*/
         }
-        if ( !TESObjectREFR_IsPersistent_(v39) )
-          TESObjectREFR_SetPersistance((TESChildCELL *)v40, v2, scale, 1);
-        TeleportData = ExtraDataList_GetTeleport(&v40->member.baseExtraList);
-        if ( !TeleportData )
-          TeleportData = TESObjectREFR::GetTeleportData(v40);
-        TeleportData::SetLinkedDoor(TeleportData, (TESObjectREFR *)this);
-        a2a = 0;
-        if ( sub_41E690(v23) )
+        if ( !TESObjectREFR_IsPersistent(v38) ) /*0x4df60d*/
+          TESObjectREFR_SetPersistance((TESChildCELL *)v39, 1); /*0x4df61a*/
+        TeleportData = ExtraDataList_GetTeleport(&v39->member.baseExtraList); /*0x4df624*/
+        if ( !TeleportData ) /*0x4df62b*/
+          TeleportData = TESObjectREFR::GetTeleportData(v39); /*0x4df62f*/
+        TeleportData::SetLinkedDoor(TeleportData, (TESObjectREFR *)this); /*0x4df637*/
+        a2a = 0; /*0x4df63e*/
+        if ( ExtraDataList_GetLock(v22) ) /*0x4df643*/
         {
-          if ( sub_41E690(&v40->member.baseExtraList) )
+          if ( ExtraDataList_GetLock(&v39->member.baseExtraList) ) /*0x4df64e*/
           {
-            sub_41F5D0(&v40->member.baseExtraList.vtbl);
-            a2a = 1;
+            sub_41F5D0(&v39->member.baseExtraList.vtbl); /*0x4df659*/
+            a2a = 1; /*0x4df65e*/
           }
         }
-        if ( ExtraDataList_GetOwner(v23) && ExtraDataList_GetOwner(&v40->member.baseExtraList) )
+        if ( ExtraDataList_GetOwner(v22) && ExtraDataList_GetOwner(&v39->member.baseExtraList) ) /*0x4df670*/
         {
-          sub_4DB900((char *)v40);
+          TESObjectREFR_ClearOwnershipOnSelfAndLinkedDoor((char *)v39);// Verified CopyFrom conflict case: source and linked-door references both have XOWN, so calls TESObjectREFR_ClearOwnershipOnSelfAndLinkedDoor, which clears XOWN/XGLB/XRNK on the linked pair; the same block removes conflicting ExtraLock when both endpoints have locks. /*0x4df67b*/
         }
-        else if ( !a2a )
+        else if ( !a2a ) /*0x4df687*/
         {
-          return;
+          return; /*0x4df687*/
         }
-        PrintError("Conflicting shared data removed from linked door reference.");
+        PrintError("Conflicting shared data removed from linked door reference."); /*0x4df68e*/
       }
     }
   }

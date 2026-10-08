@@ -23,8 +23,8 @@
 0x68A1DF: mov     eax, ebx
 0x68A1E1: pop     ebx
 0x68A1E2: retn
-0x68A1E3: mov     ecx, edi
+0x68A1E3: mov     ecx, edi; this
 0x68A1E5: pop     edi
 0x68A1E6: pop     esi
 0x68A1E7: pop     ebx
-0x68A1E8: jmp     sub_68B0F0
+0x68A1E8: jmp     TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.

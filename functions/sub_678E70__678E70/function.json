@@ -1,19 +1,32 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_678E70",
+  "chunks": [
+    [
+      "0x678E70",
+      "0x678F41"
+    ]
+  ],
+  "chunks_sha256": "624193f854ec2e50effbdd07dfcb92ebf491fdb5074740b5c7eb3906df820e9a",
+  "comment_regular": "Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect and marks matching targetReference/TESEffectShader effects finished.",
+  "comment_repeatable": "Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect and marks matching targetReference/TESEffectShader effects finished.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ActorProcessManager_FinishShaderEffectsForTarget",
   "end_ea": "0x678F41",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_678E70",
+  "name": "ActorProcessManager_FinishShaderEffectsForTarget",
   "segment": ".text",
   "sha256": "624193f854ec2e50effbdd07dfcb92ebf491fdb5074740b5c7eb3906df820e9a",
   "size": 209,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x678E70",
-  "type": "LONG __thiscall(int *this, int, LONG)",
+  "total_chunk_size": 209,
+  "type": "LONG __thiscall(ActorProcessManager *this, TESObjectREFR *targetReference, TESEffectShader *effectShader)",
   "xrefs_from_count": 107,
   "xrefs_to_count": 4
 }

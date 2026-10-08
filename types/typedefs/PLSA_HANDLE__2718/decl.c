@@ -1,1 +1,1 @@
-PLSA_HANDLE
+typedef PVOID *PLSA_HANDLE;

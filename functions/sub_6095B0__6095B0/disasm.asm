@@ -1,4 +1,4 @@
-0x6095B0: sub     esp, 64h
+0x6095B0: sub     esp, 64h; Collision state 3: restore free-impact placement, configure collision layer/group, derive impulse and orientation from saved impact direction and projectile speed, apply the impulse, and mark collision geometry active.
 0x6095B3: push    esi
 0x6095B4: mov     esi, ecx
 0x6095B6: mov     eax, [esi]
@@ -30,7 +30,7 @@
 0x609602: fstp    [esp+74h+a2]; a2
 0x609605: call    eax
 0x609607: mov     ecx, eax; this
-0x609609: call    NiAVObject_UpdateNiAVObject
+0x609609: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x60960E: mov     edx, [esi]
 0x609610: mov     eax, [edx+154h]
 0x609616: push    0; a4
@@ -39,7 +39,7 @@
 0x60961C: mov     ecx, esi
 0x60961E: call    eax
 0x609620: push    eax; a1
-0x609621: call    sub_88D070
+0x609621: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x609626: mov     eax, ds:0B3B7D4h
 0x60962B: add     esp, 10h
 0x60962E: test    eax, eax
@@ -52,7 +52,7 @@
 0x609646: mov     eax, 0Ah
 0x60964B: mov     ds:0B2EB3Ch, eax
 0x609650: mov     ds:0B3B7D4h, eax
-0x609655: mov     edi, [esp+6Ch+arg_0]
+0x609655: mov     edi, [esp+6Ch+collisionObject]
 0x609659: shl     eax, 10h
 0x60965C: or      eax, 4
 0x60965F: test    edi, edi
@@ -83,11 +83,11 @@
 0x6096B2: fstp    [esp+70h+var_5C]
 0x6096B6: fmul    dword ptr [esi+90h]
 0x6096BC: fstp    [esp+70h+var_58]
-0x6096C0: call    sub_4BFAA0
+0x6096C0: call    NiPoint3_NormalizeApproximateInPlace
 0x6096C5: mov     edx, [esi+5Ch]
 0x6096C8: add     edx, 10h
 0x6096CB: push    edx
-0x6096CC: call    sub_4BFAA0
+0x6096CC: call    NiPoint3_NormalizeApproximateInPlace
 0x6096D1: mov     eax, [esi+5Ch]
 0x6096D4: fld     dword ptr [eax+14h]
 0x6096D7: add     esp, 8
@@ -106,9 +106,9 @@
 0x6096FA: fmulp   st(2), st
 0x6096FC: fxch    st(2)
 0x6096FE: faddp   st(1), st
-0x609700: fstp    [esp+6Ch+arg_0]
+0x609700: fstp    [esp+6Ch+collisionObject]
 0x609704: fld     dword ptr [eax+10h]
-0x609707: fld     [esp+6Ch+arg_0]
+0x609707: fld     [esp+6Ch+collisionObject]
 0x60970B: fld     st
 0x60970D: fmulp   st(2), st
 0x60970F: fxch    st(1)
@@ -147,9 +147,9 @@
 0x60977F: fstp    [esp+6Ch+var_58]
 0x609783: fld     dword ptr [esi+6Ch]
 0x609786: fmul    dword ptr ds:0B37058h
-0x60978C: fstp    [esp+6Ch+arg_0]
+0x60978C: fstp    [esp+6Ch+collisionObject]
 0x609790: fld     [esp+6Ch+var_60]
-0x609794: fld     [esp+6Ch+arg_0]
+0x609794: fld     [esp+6Ch+collisionObject]
 0x609798: fld     st
 0x60979A: fmulp   st(2), st
 0x60979C: fxch    st(1)
@@ -180,8 +180,8 @@
 0x6097E9: call    sub_7101F0
 0x6097EE: fld     [esp+6Ch+var_50]
 0x6097F2: fabs
-0x6097F4: fstp    [esp+6Ch+arg_0]
-0x6097F8: fld     [esp+6Ch+arg_0]
+0x6097F4: fstp    [esp+6Ch+collisionObject]
+0x6097F8: fld     [esp+6Ch+collisionObject]
 0x6097FC: fld     [esp+6Ch+var_4C]
 0x609800: fld     st
 0x609802: fabs
@@ -195,7 +195,7 @@
 0x609817: push    ecx
 0x609818: fstp    [esp+70h+var_70]; float
 0x60981B: call    sub_537770
-0x609820: fmul    [esp+70h+arg_0]
+0x609820: fmul    [esp+70h+collisionObject]
 0x609824: add     esp, 4
 0x609827: fstp    [esp+6Ch+var_4C]
 0x60982B: jmp     short loc_60982F
@@ -204,7 +204,7 @@
 0x609831: lea     ecx, [esp+6Ch+var_54]
 0x609835: push    ecx
 0x609836: fstp    [esp+70h+var_50]
-0x60983A: call    sub_4BFAA0
+0x60983A: call    NiPoint3_NormalizeApproximateInPlace
 0x60983F: fld     dword ptr ds:0B37050h
 0x609845: mov     edx, [esi]
 0x609847: fld     st
@@ -233,8 +233,8 @@
 0x60988C: mov     edx, [eax+154h]
 0x609892: mov     ecx, esi
 0x609894: call    edx
-0x609896: push    eax
-0x609897: call    sub_480340
+0x609896: push    eax; object
+0x609897: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x60989C: add     esp, 4
 0x60989F: test    eax, eax
 0x6098A1: pop     edi

@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x55E060",
+      "0x55E292"
+    ]
+  ],
+  "chunks_sha256": "618229f117f2c6d53486d03ec45c21da67be28b14474e633b4e57a4a74aae277",
+  "comment_regular": "\n[2026-10-03 cross-game comparison] Fallout82468728 names the homolog BSTreeManager::UpdateWindMatrices and identifies appTimer.fDelta. Oblivion independently reads strength this+1C and deltaB33E9C; Fallout reads this+14 and its own timer. Four oscillator phases and wind matrix/leaf timer calls establish correspondence; offsets differ. Plugin shadow animation consumes the same post-native update strength/delta without modifying native wind.\n\nVerified wind loop: uses four phase accumulators and four sine/cosine coefficient pairs to generate four wind matrices; previous wind speed normalizes phase when current wind changes. Fallout's named UpdateWindMatrices has the same four-matrix pattern but uses different manager offsets and its own wind/time globals.",
+  "comment_repeatable": "Verified wind loop: uses four phase accumulators and four sine/cosine coefficient pairs to generate four wind matrices; previous wind speed normalizes phase when current wind changes. Fallout's named UpdateWindMatrices has the same four-matrix pattern but uses different manager offsets and its own wind/time globals.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_55E060",
+  "display_name": "BSTreeManager_UpdateWindMatrices",
   "end_ea": "0x55E292",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55E060",
+  "name": "BSTreeManager_UpdateWindMatrices",
   "segment": ".text",
   "sha256": "618229f117f2c6d53486d03ec45c21da67be28b14474e633b4e57a4a74aae277",
   "size": 562,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55E060",
-  "type": "void __thiscall(float *this)",
+  "total_chunk_size": 562,
+  "type": "void __thiscall(BSTreeManager_OblivionVerifiedLayout *this)",
   "xrefs_from_count": 165,
   "xrefs_to_count": 1
 }

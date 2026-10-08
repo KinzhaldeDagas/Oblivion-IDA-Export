@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x53F6E4",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -1213,13 +1213,13 @@
   },
   {
     "ea": "0x53F6EC",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53F6ED",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x53F7F0",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x53F7FF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x53F839",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2076,12 +2076,6 @@
     "size": 2
   },
   {
-    "ea": "0x53F897",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x53F8A0",
     "line": "mov     eax, [esp+30h+var_1C]",
     "mnemonic": "mov",
@@ -2173,7 +2167,7 @@
   },
   {
     "ea": "0x53F8D2",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2203,7 +2197,7 @@
   },
   {
     "ea": "0x53F8DF",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2281,7 +2275,7 @@
   },
   {
     "ea": "0x53F8FF",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2724,12 +2718,6 @@
     "size": 2
   },
   {
-    "ea": "0x53F9DA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x53F9E0",
     "line": "mov     ecx, [esp+30h+var_1C]",
     "mnemonic": "mov",
@@ -2821,7 +2809,7 @@
   },
   {
     "ea": "0x53FA12",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2851,7 +2839,7 @@
   },
   {
     "ea": "0x53FA1F",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2929,7 +2917,7 @@
   },
   {
     "ea": "0x53FA3F",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },

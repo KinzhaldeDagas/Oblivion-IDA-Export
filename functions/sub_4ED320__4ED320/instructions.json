@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4ED320",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified BuildMesh scheduling: allocates a TerrainLODQuadLoadTask with priority 3 and the current quad-data context; passes the worldspace filename key and quad tile coordinates, then queues the task.",
     "mnemonic": "push",
     "size": 2
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4ED3A7",
-    "line": "mov     dword ptr [esi+8], 1",
+    "line": "mov     dword ptr [esi+8], 1; Verified state transition: sets TerrainLODQuadState_Loading (1) before creating/queueing the TerrainLODQuadLoadTask.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4ED3EB",
-    "line": "push    ecx",
+    "line": "push    ecx; tileFileY",
     "mnemonic": "push",
     "size": 1
   },
@@ -439,19 +439,19 @@
   },
   {
     "ea": "0x4ED3F2",
-    "line": "push    ecx",
+    "line": "push    ecx; tileFileX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ED3F3",
-    "line": "push    edx",
+    "line": "push    edx; worldspaceFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ED3F4",
-    "line": "push    esi",
+    "line": "push    esi; quadData",
     "mnemonic": "push",
     "size": 1
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x4ED3F7",
-    "line": "call    ??0TerrainLODQuadLoadTask@@QAE@XZ; TerrainLODQuadLoadTask::TerrainLODQuadLoadTask(void)",
+    "line": "call    ??0TerrainLODQuadLoadTask@@QAE@XZ; Verified task factory passes the owning WorldSpace FormID and tile-file coordinates derived from quadX/quadY (each multiplied by 32) into the terrain NIF load task.",
     "mnemonic": "call",
     "size": 5
   },
@@ -580,5 +580,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CA420",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA423",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA424",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA429",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA42A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA42B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA42F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA432",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA435",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA437",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA43C",
+    "line": "mov     eax, offset stru_AF2B24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA441",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

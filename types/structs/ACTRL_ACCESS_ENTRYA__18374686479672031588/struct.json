@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_ACTRL_ACCESS_ENTRYA",
+  "definition": "struct _ACTRL_ACCESS_ENTRYA\n{\nTRUSTEE_A Trustee;\nULONG fAccessFlags;\nACCESS_RIGHTS Access;\nACCESS_RIGHTS ProvSpecificAccess;\nINHERIT_FLAGS Inheritance;\nLPSTR lpInheritProperty;\n}\n",
   "id": 18374686479672031588,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Trustee",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "TRUSTEE_A"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fAccessFlags",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Access",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "ACCESS_RIGHTS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProvSpecificAccess",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "ACCESS_RIGHTS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Inheritance",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "INHERIT_FLAGS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpInheritProperty",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "LPSTR"
     }
   ],
   "name": "_ACTRL_ACCESS_ENTRYA",
+  "ordinal": 2845,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

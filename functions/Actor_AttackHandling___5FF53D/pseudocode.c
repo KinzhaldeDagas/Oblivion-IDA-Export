@@ -9,7 +9,7 @@ int __usercall Actor_AttackHandling_::__@<eax>(
         int a8,
         int a9,
         int a10,
-        float a11,
+        int a11,
         int a12,
         int a13,
         int a14,
@@ -31,9 +31,9 @@ int __usercall Actor_AttackHandling_::__@<eax>(
 {
   int v29; // eax
 
-  v29 = a1();
-  (*(void (__thiscall **)(int, int))(a2 + 0x210))(a3, v29 + 1);
-  (*(void (__thiscall **)(int, int))(*(_DWORD *)a3 + 0x218))(a3, a29);
+  v29 = a1(); /*0x5ff53d*/
+  (*(void (__thiscall **)(int, int))(a2 + 0x210))(a3, v29 + 1); /*0x5ff54b*/
+  (*(void (__thiscall **)(int, int))(*(_DWORD *)a3 + 0x218))(a3, a29); /*0x5ff55c*/
   return Actor_AttackHandling_::ApplyNormalWeaponResistance(
            bl0,
            a3,
@@ -57,5 +57,7 @@ int __usercall Actor_AttackHandling_::__@<eax>(
            a22,
            a23,
            a24,
-           a25);
+           a25,
+           a26,
+           a27);
 }

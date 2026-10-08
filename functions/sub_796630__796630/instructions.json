@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x796630",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion CIndexedGeometry::ChangeTexCoord. For the current vertex, remaps retained diffuse UVs only when its saved map index matches changedMapIndex; applies the global T sign flip before appending.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x79665C",
-    "line": "mov     cl, byte ptr [esp+10h+arg_0]",
+    "line": "mov     cl, [esp+10h+changedMapIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x796694",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+newTexCoords]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x79669F",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    dword ptr [esp+14h+changedMapIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7966A5",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     dword ptr [esp+14h+changedMapIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7966BC",
-    "line": "fstp    [esp+14h+var_8]",
+    "line": "fstp    [esp+14h+diffuseST]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7966DF",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    dword ptr [esp+14h+changedMapIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7966E6",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     dword ptr [esp+14h+changedMapIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7966F9",
-    "line": "call    sub_787680",
+    "line": "call    CSpeedTreeRT__GetTextureFlip; CSpeedTreeRT::GetTextureFlip: returns the single global bool at 0xB4297D. Oblivion startup sets it true at 0x55EBB7.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,31 +421,31 @@
   },
   {
     "ea": "0x79670D",
-    "line": "push    0FFFFFFFFh; float",
+    "line": "push    0FFFFFFFFh; mapIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79670F",
-    "line": "lea     ecx, [esp+14h+var_8]",
+    "line": "lea     ecx, [esp+14h+diffuseST]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x796713",
-    "line": "push    ecx; int",
+    "line": "push    ecx; diffuseST",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796714",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x796716",
-    "line": "call    sub_796320",
+    "line": "call    OB_CIndexedGeometry_AddVertexTexCoord0_010201A0; Legacy TexCoord0 writer: stores diffuse S/T, optionally retains original CAD S/T plus map index, and applies the global T-flip only to the exported diffuse layer.",
     "mnemonic": "call",
     "size": 5
   },

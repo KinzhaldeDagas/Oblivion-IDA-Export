@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x50925E",
-    "line": "lea     edi, [esp+88h+var_6C]",
+    "line": "lea     edi, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -235,55 +235,55 @@
   },
   {
     "ea": "0x50929B",
-    "line": "lea     ecx, [esp+8Ch+var_48]",
+    "line": "lea     ecx, [esp+8Ch+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x50929F",
-    "line": "fstp    [esp+8Ch+var_8C]; float",
+    "line": "fstp    [esp+8Ch+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5092A2",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5092A7",
-    "line": "lea     eax, [esp+88h+var_6C]",
+    "line": "lea     eax, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5092AB",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5092AC",
-    "line": "lea     ecx, [esp+8Ch+var_24]",
+    "line": "lea     ecx, [esp+8Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5092B0",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5092B1",
-    "line": "lea     ecx, [esp+90h+var_48]",
+    "line": "lea     ecx, [esp+90h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5092B5",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x5092C9",
-    "line": "lea     edi, [esp+88h+var_6C]",
+    "line": "lea     edi, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -361,55 +361,55 @@
   },
   {
     "ea": "0x5092DC",
-    "line": "lea     ecx, [esp+8Ch+var_48]",
+    "line": "lea     ecx, [esp+8Ch+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5092E0",
-    "line": "fstp    [esp+8Ch+var_8C]; float",
+    "line": "fstp    [esp+8Ch+angleX]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5092E3",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5092E8",
-    "line": "lea     eax, [esp+88h+var_6C]",
+    "line": "lea     eax, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5092EC",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5092ED",
-    "line": "lea     ecx, [esp+8Ch+var_24]",
+    "line": "lea     ecx, [esp+8Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5092F1",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5092F2",
-    "line": "lea     ecx, [esp+90h+var_48]",
+    "line": "lea     ecx, [esp+90h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5092F6",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x50930A",
-    "line": "lea     edi, [esp+88h+var_6C]",
+    "line": "lea     edi, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -487,55 +487,55 @@
   },
   {
     "ea": "0x50931D",
-    "line": "lea     ecx, [esp+8Ch+var_48]",
+    "line": "lea     ecx, [esp+8Ch+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x509321",
-    "line": "fstp    [esp+8Ch+var_8C]; float",
+    "line": "fstp    [esp+8Ch+angleX]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x509324",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x509329",
-    "line": "lea     eax, [esp+88h+var_6C]",
+    "line": "lea     eax, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x50932D",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50932E",
-    "line": "lea     ecx, [esp+8Ch+var_24]",
+    "line": "lea     ecx, [esp+8Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x509332",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x509333",
-    "line": "lea     ecx, [esp+90h+var_48]",
+    "line": "lea     ecx, [esp+90h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x509337",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x509345",
-    "line": "lea     edi, [esp+88h+var_6C]",
+    "line": "lea     edi, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x509373",
-    "line": "lea     esi, [esp+88h+var_6C]",
+    "line": "lea     esi, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x509392",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

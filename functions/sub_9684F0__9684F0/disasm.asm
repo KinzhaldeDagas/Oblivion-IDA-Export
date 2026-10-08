@@ -4,7 +4,7 @@
 0x9684F6: push    ebp
 0x9684F7: push    esi
 0x9684F8: push    edi
-0x9684F9: push    offset Vector3_InitValue?; int
+0x9684F9: push    offset g_zeroNiPoint3; int
 0x9684FE: push    ecx
 0x9684FF: lea     ecx, [esp+68h+var_14]
 0x968503: fstp    [esp+68h+var_68]; float
@@ -18,7 +18,7 @@
 0x968523: mov     ecx, [edi+4]
 0x968526: mov     esi, [esp+60h+arg_4]
 0x96852A: mov     edx, [edi+8]
-0x96852D: push    offset Vector3_InitValue?; int
+0x96852D: push    offset g_zeroNiPoint3; int
 0x968532: mov     [esp+64h+var_10], eax
 0x968536: lea     eax, [esp+64h+var_14]
 0x96853A: push    eax; int
@@ -259,7 +259,7 @@
 0x9687FD: mov     ebx, [esp+60h+arg_10]
 0x968801: fld     [esp+60h+arg_0]
 0x968805: mov     esi, [esp+60h+arg_C]
-0x968809: push    offset Vector3_InitValue?; int
+0x968809: push    offset g_zeroNiPoint3; int
 0x96880E: lea     ecx, [esp+64h+var_14]
 0x968812: push    ecx; int
 0x968813: push    ebx; int

@@ -16,7 +16,7 @@
 0x5EB396: test    al, al
 0x5EB398: jz      short loc_5EB3EC
 0x5EB39A: mov     ecx, esi; this
-0x5EB39C: call    TESObjectREFR_GetParentCell
+0x5EB39C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EB3A1: mov     edi, eax
 0x5EB3A3: test    edi, edi
 0x5EB3A5: jz      short loc_5EB3EC
@@ -39,7 +39,7 @@
 0x5EB3CF: lea     ecx, [esp+30h+var_C]
 0x5EB3D3: push    ecx; int
 0x5EB3D4: mov     ecx, esi
-0x5EB3D6: call    sub_5E2E20
+0x5EB3D6: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x5EB3DB: mov     edx, [esi]
 0x5EB3DD: mov     edx, [edx+1CCh]
 0x5EB3E3: lea     eax, [esp+14h+var_C]

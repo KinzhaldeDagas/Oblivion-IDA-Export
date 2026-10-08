@@ -16,7 +16,7 @@
 0x51E204: cmp     byte ptr [eax], 0
 0x51E207: jnz     short loc_51E214
 0x51E209: pop     edi
-0x51E20A: mov     ecx, esi
+0x51E20A: mov     ecx, esi; self
 0x51E20C: pop     esi
 0x51E20D: jmp     TESActorBaseData_GetBloodTexturePath
 0x51E212: mov     eax, edi

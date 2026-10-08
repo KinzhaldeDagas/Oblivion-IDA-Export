@@ -47,7 +47,7 @@
 0x64FC6E: add     esp, 10h
 0x64FC71: retn    4
 0x64FC74: mov     ecx, [esi+2Ch]; this
-0x64FC77: call    GetTeleportExtraData
+0x64FC77: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x64FC7C: test    eax, eax
 0x64FC7E: jz      loc_64FD43
 0x64FC84: mov     edx, [edi]
@@ -57,12 +57,12 @@
 0x64FC90: push    eax
 0x64FC91: lea     ecx, [esp+24h+var_C]
 0x64FC95: push    ecx
-0x64FC96: mov     ecx, [esi+2Ch]
-0x64FC99: call    sub_4D76F0
+0x64FC96: mov     ecx, [esi+2Ch]; this
+0x64FC99: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x64FC9E: mov     ecx, eax
 0x64FCA0: call    sub_4121A0
 0x64FCA5: lea     ecx, [esp+20h+var_C]
-0x64FCA9: call    sub_404C90
+0x64FCA9: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x64FCAE: fcomp   dword ptr ds:0A2FFE8h
 0x64FCB4: fnstsw  ax
 0x64FCB6: test    ah, 41h
@@ -88,18 +88,18 @@
 0x64FCF6: mov     ecx, [esi+44h]
 0x64FCF9: push    ebx; int
 0x64FCFA: jnz     loc_64FE95
-0x64FD00: mov     ecx, [ecx]; this
+0x64FD00: mov     ecx, [ecx]; reference
 0x64FD02: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
 0x64FD07: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x64FD0C: push    ebx; int
-0x64FD0D: call    TESObjectREFR_GetOwner
+0x64FD0D: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x64FD12: push    eax; void *
 0x64FD13: call    OblivionDynamicCast
 0x64FD18: add     esp, 14h
 0x64FD1B: cmp     eax, ebx
 0x64FD1D: jz      short loc_64FD2C
 0x64FD1F: push    eax
-0x64FD20: mov     ecx, offset ActorProcessManager_ptr
+0x64FD20: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x64FD25: call    sub_675220
 0x64FD2A: mov     ebp, eax
 0x64FD2C: mov     eax, [esi+44h]
@@ -123,22 +123,22 @@
 0x64FD63: cmp     [esi+0D0h], bl
 0x64FD69: jz      short loc_64FDCA
 0x64FD6B: mov     ecx, [esi+2Ch]; this
-0x64FD6E: call    GetTeleportExtraData
+0x64FD6E: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x64FD73: test    eax, eax
 0x64FD75: mov     ebx, [esi]
-0x64FD77: mov     ecx, [esi+2Ch]
+0x64FD77: mov     ecx, [esi+2Ch]; this
 0x64FD7A: jnz     short loc_64FD88
 0x64FD7C: mov     edx, [ecx]
 0x64FD7E: mov     eax, [edx+174h]
 0x64FD84: call    eax
 0x64FD86: jmp     short loc_64FD8D
-0x64FD88: call    sub_4D76F0
+0x64FD88: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x64FD8D: mov     ecx, [esi+2Ch]; this
 0x64FD90: mov     ebp, eax
 0x64FD92: call    TESObjectREFR_GetWorldSpace
 0x64FD97: mov     ecx, [esi+2Ch]; this
 0x64FD9A: push    eax
-0x64FD9B: call    TESObjectREFR_GetParentCell
+0x64FD9B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64FDA0: mov     ecx, [ebp+0]
 0x64FDA3: mov     edx, [ebp+4]
 0x64FDA6: push    eax
@@ -157,9 +157,9 @@
 0x64FDCA: cmp     byte ptr [esi+0D0h], 0
 0x64FDD1: jnz     loc_64FF22
 0x64FDD7: push    3Ah ; ':'; a1
-0x64FDD9: call    TESForm_LookupByFormID
+0x64FDD9: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x64FDDE: add     esp, 4
-0x64FDE1: mov     ecx, offset TimeGlobals
+0x64FDE1: mov     ecx, 0B332E0h
 0x64FDE6: mov     ebx, eax
 0x64FDE8: call    TimeGlobals_GetGameHour
 0x64FDED: fstp    [esp+20h+arg_0]
@@ -199,10 +199,10 @@
 0x64FE68: call    TESObjectREFR_GetWorldSpace
 0x64FE6D: mov     ecx, [esi+2Ch]; this
 0x64FE70: push    eax
-0x64FE71: call    TESObjectREFR_GetParentCell
-0x64FE76: mov     ecx, [esi+2Ch]
+0x64FE71: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x64FE76: mov     ecx, [esi+2Ch]; this
 0x64FE79: push    eax
-0x64FE7A: call    sub_4D76F0
+0x64FE7A: call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.
 0x64FE7F: push    eax
 0x64FE80: mov     eax, [ebx+418h]
 0x64FE86: push    edi
@@ -233,8 +233,8 @@
 0x64FEB5: jz      short loc_64FED8
 0x64FEB7: mov     ecx, [esi+44h]
 0x64FEBA: mov     edx, [ecx+4]
-0x64FEBD: push    edx
-0x64FEBE: call    sub_470520
+0x64FEBD: push    edx; form
+0x64FEBE: call    TESForm_GetValue
 0x64FEC3: mov     ecx, [esi+44h]
 0x64FEC6: mov     edx, [ecx+10h]
 0x64FEC9: imul    edx, eax
@@ -254,7 +254,7 @@
 0x64FEF0: cmp     eax, ebx
 0x64FEF2: jz      short loc_64FEFD
 0x64FEF4: push    eax
-0x64FEF5: call    FormHeapFree
+0x64FEF5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64FEFA: add     esp, 4
 0x64FEFD: mov     [esi+2Ch], ebx
 0x64FF00: mov     [esi+44h], ebx

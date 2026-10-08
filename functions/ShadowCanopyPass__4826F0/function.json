@@ -1,19 +1,36 @@
 {
-  "callees_count": 150,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 76,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 13,
+  "chunks": [
+    [
+      "0x4826F0",
+      "0x48331B"
+    ],
+    [
+      "0x9AF720",
+      "0x9AF825"
+    ]
+  ],
+  "chunks_sha256": "9fa751614e2dead2c4e66f122dbfd35196eb4ec0f53155906003017c4e9e5323",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused callsite decode: builds a temporary process with null VisibleGeo at 0x483153 and uses it for canopy render at 0x48317F. This is a separate process/camera/target route, correctly outside CULLING's exact world owner gate.\n\nRetail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.",
+  "comment_repeatable": "Retail canopy shadow-map pass; separate from per-source ShadowSceneLight mode-5 maps.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 16,
   "display_name": "ShadowCanopyPass",
   "end_ea": "0x48331B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ShadowCanopyPass",
   "segment": ".text",
   "sha256": "3467b20059c59fb541f37df1006973ea6fd0ca1555e9243b8f0d1d2cfdd151b0",
   "size": 3115,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4826F0",
-  "type": "NiFrustum *__thiscall(GridCellArray *this)",
-  "xrefs_from_count": 1062,
+  "total_chunk_size": 3376,
+  "type": "signed int __thiscall(GridCellArray *this)",
+  "xrefs_from_count": 1137,
   "xrefs_to_count": 3
 }

@@ -1,50 +1,50 @@
-int __thiscall SettingCollectionMap_BuildOutputArray(_DWORD *this, char *a2)
+int __thiscall SettingCollectionMap_BuildOutputArray(_DWORD *this, char *valueOut)
 {
-  NiTMap_TESCELL *v2; // esi
+  MEF_U32PointerMapLayout32 *v2; // esi
   unsigned int v3; // ecx
   int v4; // ebx
   unsigned int v5; // eax
-  NiTMap_Entry_TESCELL **m_buckets; // edx
-  NiTMap_Entry_TESCELL *v7; // eax
+  MEF_U32PointerMapEntry32 **buckets; // edx
+  MEF_U32PointerMapEntry32 *v7; // eax
   unsigned __int16 *v8; // edi
-  NiTMap_Entry_TESCELL *v10; // [esp+Ch] [ebp-8h] BYREF
-  void *v11; // [esp+10h] [ebp-4h] BYREF
+  MEF_U32PointerMapEntry32 *position; // [esp+Ch] [ebp-8h] BYREF
+  unsigned int keyOut; // [esp+10h] [ebp-4h] BYREF
 
-  v2 = (NiTMap_TESCELL *)(this + 0x43);
-  v3 = *(this + 0x44);
-  v4 = 0;
-  v5 = 0;
-  if ( v3 )
+  v2 = (MEF_U32PointerMapLayout32 *)(this + 0x43); /*0x4a7cd5*/
+  v3 = *(this + 0x44); /*0x4a7cdb*/
+  v4 = 0; /*0x4a7cde*/
+  v5 = 0; /*0x4a7ce0*/
+  if ( v3 ) /*0x4a7ce5*/
   {
-    m_buckets = v2->m_buckets;
-    while ( !*m_buckets )
+    buckets = v2->buckets; /*0x4a7cea*/
+    while ( !*buckets ) /*0x4a7cf2*/
     {
-      ++v5;
-      ++m_buckets;
-      if ( v5 >= v3 )
-        goto LABEL_5;
+      ++v5; /*0x4a7cf4*/
+      ++buckets; /*0x4a7cf7*/
+      if ( v5 >= v3 ) /*0x4a7cfc*/
+        goto LABEL_5; /*0x4a7cfc*/
     }
-    v7 = v2->m_buckets[v5];
+    v7 = v2->buckets[v5]; /*0x4a7d49*/
   }
   else
   {
 LABEL_5:
-    v7 = 0;
+    v7 = 0; /*0x4a7cfe*/
   }
-  v10 = v7;
-  if ( v7 )
+  position = v7; /*0x4a7d02*/
+  if ( v7 ) /*0x4a7d06*/
   {
-    v8 = (unsigned __int16 *)a2;
-    do
+    v8 = (unsigned __int16 *)valueOut; /*0x4a7d08*/
+    do /*0x4a7d3c*/
     {
-      sub_452600(v2, &v10, &v11, (TESObjectCELL **)&a2);
-      if ( a2 )
+      NiTMap_U32Pointer_GetNextEntry(v2, &position, &keyOut, (void **)&valueOut); /*0x4a7d21*/
+      if ( valueOut ) /*0x4a7d2c*/
       {
-        Setting_BuildOutputArray(a2, v8);
-        ++v4;
+        Setting_BuildOutputArray(valueOut, v8); /*0x4a7d2f*/
+        ++v4; /*0x4a7d34*/
       }
     }
-    while ( v10 );
+    while ( position ); /*0x4a7d3c*/
   }
-  return v4;
+  return v4; /*0x4a7d3e*/
 }

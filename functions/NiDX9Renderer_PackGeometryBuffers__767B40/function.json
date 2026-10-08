@@ -1,19 +1,32 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x767B40",
+      "0x767E96"
+    ]
+  ],
+  "chunks_sha256": "3d0e841ce8ade39720237a8b3ed24c8a589d229e0954951777eb0a8b4857d470",
+  "comment_regular": "\n\n[v154 declaration transition] Confirmed static4000/live-stream early return ignores a changed declaration. Normal UV draw scope compares GeometryBufferData+0C native declaration and explicitly calls this routine with force=1 on mismatch; retained CPU streams permit repacking. Failure attempts original layout and suppresses draw if restoration cannot prepare valid buffers. Actual native repack execution remains UNVERIFIED.\n\nSpeedTreeOBSE v160: RGB geometry now selects its color declaration across render modes, optionally combining normal UVset2 with COLOR0 in an8-element declaration. This removes the plugin own mode-based declaration switch that otherwise could force repacking via this routine. Actual native pack-call counts/performance remain UNVERIFIED.\n\nMoonSugarEffect decode: NiDX9Renderer::PackGeometryBuffers for non-skinned geometry. Validates/reuses BuffData when streams are live and not force-dirty; otherwise resizes streams, repacks vertices via NiD3DShaderDeclaration +0x6C or default packer, rebuilds IB through 0x7781F0, and clears low dirty flags.\n[SpeedTreeOBSE v170] Local mesh rocking uses this rigid geometry packer with final force argument=1 after changing retained position/normal arrays and both STSP-owner/AGD tangent frames. Native4000/live-stream early return otherwise ignores low dirty bits. Failed pack rolls CPU pose back and attempts one forced old-pose upload; unrecovered failure hides the owned mesh until retry. Source/synthetic validation only; live execution UNVERIFIED.",
+  "comment_repeatable": "MoonSugarEffect decode: NiDX9Renderer::PackGeometryBuffers for non-skinned geometry. Validates/reuses BuffData when streams are live and not force-dirty; otherwise resizes streams, repacks vertices via NiD3DShaderDeclaration +0x6C or default packer, rebuilds IB through 0x7781F0, and clears low dirty flags.\nDX11 static-buffer audit 2026-10-01: force argument low byte0 + HasLiveStreams true + geometry-data dirtyFlags high nibble4000 returns1 before any pack/update work. Low12 dirty bits do not invalidate this particular early return. Other cases resize/repack or update descriptor/IB fields and need explicit preparation; a current buffer pointer alone is not proof that packing can be skipped.\nDX11 clean-descriptor audit 2026-10-01: with live streams, no skin, no forced pack, nonvolatile high flags and low dirty bits0, matching declaration stream count skips vertex/index upload but still updates buffer Flags, VertCount/MaxVertCount, TriCount/MaxTriCount, ArrayLengths/IndexArray and NumArrays. Concrete NiTriShapeData uses data+48 index pointer, null lengths and one array. NiTriStripsData uses data+48 lengths, data+4C indices and WORD+44 strip count. Selected declaration StreamCount is+20; null declaration implies1. Changed draw counts/array metadata require refreshing draw templates; correct bindings alone do not authorize replay.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "NiDX9Renderer::PackGeometryBuffers",
   "end_ea": "0x767E96",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiDX9Renderer::PackGeometryBuffers",
   "segment": ".text",
   "sha256": "3d0e841ce8ade39720237a8b3ed24c8a589d229e0954951777eb0a8b4857d470",
   "size": 854,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x767B40",
-  "type": "char __thiscall(NiDX9Renderer *this, NiGeometryBufferData *, NiTriShapeData *, _DWORD *, NiD3DShaderDeclaration *, UInt32)",
+  "total_chunk_size": 854,
+  "type": "char __thiscall(NiDX9Renderer *this, NiGeometryBufferData *, NiTriShapeData *, _DWORD *, NiD3DShaderDeclaration *, UInt32 IBSize)",
   "xrefs_from_count": 326,
   "xrefs_to_count": 2
 }

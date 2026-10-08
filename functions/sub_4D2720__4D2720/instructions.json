@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4D276C",
-    "line": "lea     ecx, [ebx+28h]",
+    "line": "lea     ecx, [ebx+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4D2777",
-    "line": "call    sub_420C40",
+    "line": "call    ExtraDataList_GetNorthRotation; Returns ExtraNorthRotation's float payload (type 0x4C), or 0.0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x4D2BFA",
-    "line": "call    sub_420B50",
+    "line": "call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x4D2C39",
-    "line": "call    sub_420B70",
+    "line": "call    ExtraDataList_SetSeenData; Replaces the owned SeenData pointer, destroying the previous object; null removes ExtraSeenData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x4D2CB4",
-    "line": "call    sub_420B70",
+    "line": "call    ExtraDataList_SetSeenData; Replaces the owned SeenData pointer, destroying the previous object; null removes ExtraSeenData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2662,5 +2662,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B55B0",
+    "line": "mov     eax, [ebp-0F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B55B6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B55B7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B55BC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B55BD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B55BE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B55C2",
+    "line": "lea     eax, [edx-0FCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B55C8",
+    "line": "mov     ecx, [edx-100h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B55CE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B55D0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B55D5",
+    "line": "mov     eax, offset stru_AE0688",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B55DA",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

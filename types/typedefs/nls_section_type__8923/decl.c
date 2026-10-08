@@ -1,1 +1,7 @@
-nls_section_type
+enum nls_section_type : __int32
+{
+NLS_SECTION_SORTKEYS = 0x9,
+NLS_SECTION_CASEMAP = 0xA,
+NLS_SECTION_CODEPAGE = 0xB,
+NLS_SECTION_NORMALIZE = 0xC,
+};

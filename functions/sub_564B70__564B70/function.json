@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x564B70",
+      "0x564BEA"
+    ]
+  ],
+  "chunks_sha256": "68a422b5584aca4430d29f0464c54aa11fb04048e458960e8ceb31c70b73d816",
+  "comment_regular": "2026-05-18 73000 consumer decode: initializes bhkTransformShape cinfo used for single sphere/box placement. Layout observed by 0x8A2160: +0x04 child hk shape pointer, +0x10 4x4 transform. Stock sets identity rotation and translation zero before 0x565510 writes translation at +0x40..+0x4C.",
+  "comment_repeatable": "2026-05-18 73000 consumer decode: initializes bhkTransformShape cinfo used for single sphere/box placement. Layout observed by 0x8A2160: +0x04 child hk shape pointer, +0x10 4x4 transform. Stock sets identity rotation and translation zero before 0x565510 writes translation at +0x40..+0x4C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_564B70",
+  "display_name": "OB_bhkTransformShapeCinfo_InitIdentity_010201A0",
   "end_ea": "0x564BEA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_564B70",
+  "name": "OB_bhkTransformShapeCinfo_InitIdentity_010201A0",
   "segment": ".text",
   "sha256": "68a422b5584aca4430d29f0464c54aa11fb04048e458960e8ceb31c70b73d816",
   "size": 122,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x564B70",
+  "total_chunk_size": 122,
   "type": "float *__thiscall(float *this)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 3

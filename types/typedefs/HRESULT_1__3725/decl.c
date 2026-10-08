@@ -1,1 +1,1 @@
-HRESULT_1
+typedef int HRESULT_1;

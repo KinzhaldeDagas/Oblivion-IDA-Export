@@ -1,1 +1,1 @@
-HMACHINE
+typedef HANDLE HMACHINE;

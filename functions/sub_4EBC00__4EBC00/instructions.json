@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EBC00",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Verified initial terrain-quad map setup: discovers available NIFs, marks each corresponding quad Unloaded (5), stores its map-derived world origin, and sets the grid-cell width used by distance checks.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4EBC24",
-    "line": "call    sub_4EB1A0",
+    "line": "call    TESWorldSpaceTerrainLODQuadMap_DiscoverAvailableNIFs; Verified available-file scan iterates signed quad coordinates [-32,31], uses terrainLODQuadOwner (+0x48 TESWorldSpace backpointer) to read the owning FormID, and checks `Meshes\\\\Landscape\\\\LOD\\\\<worldspaceFormID>.<quadX*32>.<quadY*32>.32.NIF`. Only existing files create map roots; this scan does not load NIFs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4EBC56",
-    "line": "mov     [esp+24h+var_14], eax",
+    "line": "mov     [esp+24h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,61 +205,61 @@
   },
   {
     "ea": "0x4EBC65",
-    "line": "lea     ecx, [esp+24h+var_18]",
+    "line": "lea     ecx, [esp+24h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EBC69",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EBC6A",
-    "line": "lea     edx, [esp+28h+var_10]",
+    "line": "lea     edx, [esp+28h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EBC6E",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EBC6F",
-    "line": "lea     eax, [esp+2Ch+var_14]",
+    "line": "lea     eax, [esp+2Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EBC73",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EBC74",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EBC76",
-    "line": "mov     [esp+30h+var_18], 0",
+    "line": "mov     [esp+30h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4EBC7E",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4EBC83",
-    "line": "mov     ecx, [esp+24h+var_18]",
+    "line": "mov     ecx, [esp+24h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4EBCA2",
-    "line": "mov     [esp+24h+var_18], edx",
+    "line": "mov     [esp+24h+valueOut], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x4EBCA9",
-    "line": "fild    [esp+24h+var_18]",
+    "line": "fild    [esp+24h+valueOut]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4EBCAD",
-    "line": "mov     [esp+24h+var_18], ecx",
+    "line": "mov     [esp+24h+valueOut], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4EBCBB",
-    "line": "fild    [esp+24h+var_18]",
+    "line": "fild    [esp+24h+valueOut]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x4EBCDA",
-    "line": "cmp     [esp+24h+var_14], 0",
+    "line": "cmp     [esp+24h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

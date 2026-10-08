@@ -1,1 +1,4 @@
-IDirectDrawSurface
+struct IDirectDrawSurface
+{
+IDirectDrawSurfaceVtbl *lpVtbl;
+};

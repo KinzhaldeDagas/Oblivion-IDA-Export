@@ -1,1 +1,1 @@
-TileMenu
+struct TileMenu;

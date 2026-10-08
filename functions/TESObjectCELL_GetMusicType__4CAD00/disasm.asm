@@ -1,11 +1,11 @@
-0x4CAD00: sub     esp, 0Ch
+0x4CAD00: sub     esp, 0Ch; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.
 0x4CAD03: push    ebx
 0x4CAD04: push    ebp
 0x4CAD05: push    esi
 0x4CAD06: push    edi
 0x4CAD07: mov     edi, ecx
 0x4CAD09: push    edi; a2
-0x4CAD0A: mov     ecx, offset stru_B35C80; this
+0x4CAD0A: mov     ecx, offset unk_B35C80; this
 0x4CAD0F: call    sub_496EA0
 0x4CAD14: test    byte ptr ds:0B35E10h, 1
 0x4CAD1B: jnz     short loc_4CAD46
@@ -26,9 +26,9 @@
 0x4CAD5A: jnz     short loc_4CAD81
 0x4CAD5C: mov     ecx, ebx
 0x4CAD5E: call    sub_41F9B0
-0x4CAD63: mov     ecx, eax
+0x4CAD63: mov     ecx, eax; this
 0x4CAD65: test    ecx, ecx
-0x4CAD67: mov     [esp+1Ch+var_4], ecx
+0x4CAD67: mov     [esp+1Ch+self], ecx
 0x4CAD6B: jnz     short loc_4CAD98
 0x4CAD6D: test    byte ptr [edi+24h], 1
 0x4CAD71: jnz     short loc_4CAD81
@@ -38,7 +38,7 @@
 0x4CAD7A: call    sub_4EF0F0
 0x4CAD7F: mov     esi, eax
 0x4CAD81: push    edi; a2
-0x4CAD82: mov     ecx, offset stru_B35C80; this
+0x4CAD82: mov     ecx, offset unk_B35C80; this
 0x4CAD87: call    sub_496F50
 0x4CAD8C: mov     eax, esi
 0x4CAD8E: pop     edi
@@ -100,7 +100,7 @@
 0x4CAE31: fnstsw  ax
 0x4CAE33: test    ah, 1
 0x4CAE36: jnz     loc_4CAEF1
-0x4CAE3C: push    offset qword_B35E04
+0x4CAE3C: push    offset g_CachedCellMusicPositionX
 0x4CAE41: mov     ecx, esi
 0x4CAE43: call    sub_8AA350
 0x4CAE48: test    al, al
@@ -108,7 +108,7 @@
 0x4CAE4C: cmp     dword ptr ds:0B09554h, 3
 0x4CAE53: jz      short loc_4CAE6F
 0x4CAE55: push    edi; a2
-0x4CAE56: mov     ecx, offset stru_B35C80; this
+0x4CAE56: mov     ecx, offset unk_B35C80; this
 0x4CAE5B: call    sub_496F50
 0x4CAE60: mov     eax, ds:0B09554h
 0x4CAE65: pop     edi
@@ -126,16 +126,16 @@
 0x4CAE83: mov     ecx, [esi]
 0x4CAE85: mov     edx, [esi+4]
 0x4CAE88: mov     ebx, [ebp+0]
-0x4CAE8B: push    eax; int
+0x4CAE8B: push    eax; worldspace
 0x4CAE8C: sub     esp, 0Ch
 0x4CAE8F: mov     eax, esp
 0x4CAE91: mov     [eax], ecx
 0x4CAE93: mov     ecx, [esi+8]
 0x4CAE96: mov     [eax+4], edx
 0x4CAE99: mov     [eax+8], ecx
-0x4CAE9C: mov     ecx, [esp+2Ch+var_4]
-0x4CAEA0: push    7; int
-0x4CAEA2: call    sub_4A67B0
+0x4CAE9C: mov     ecx, [esp+2Ch+self]; this
+0x4CAEA0: push    7; dataID
+0x4CAEA2: call    TESRegionList_SelectDataAtWorldPosition; Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.
 0x4CAEA7: mov     edx, [ebx+1Ch]
 0x4CAEAA: push    eax
 0x4CAEAB: mov     ecx, ebp
@@ -174,10 +174,10 @@
 0x4CAF18: jnz     short loc_4CAF1D
 0x4CAF1A: mov     eax, [edi+50h]
 0x4CAF1D: mov     ebx, [esi]
-0x4CAF1F: push    eax
-0x4CAF20: push    0
-0x4CAF22: push    7
-0x4CAF24: call    sub_4A6460
+0x4CAF1F: push    eax; worldspace
+0x4CAF20: push    0; worldXY
+0x4CAF22: push    7; dataID
+0x4CAF24: call    TESRegionList_SelectDataForLocation
 0x4CAF29: push    eax
 0x4CAF2A: mov     eax, [ebx+1Ch]
 0x4CAF2D: mov     ecx, esi
@@ -204,7 +204,7 @@
 0x4CAF66: mov     ebp, eax
 0x4CAF68: mov     ds:0B09554h, ebp
 0x4CAF6E: push    edi; a2
-0x4CAF6F: mov     ecx, offset stru_B35C80; this
+0x4CAF6F: mov     ecx, offset unk_B35C80; this
 0x4CAF74: call    sub_496F50
 0x4CAF79: pop     edi
 0x4CAF7A: pop     esi

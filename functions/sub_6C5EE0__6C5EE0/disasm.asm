@@ -11,7 +11,7 @@
 0x6C5EFC: mov     large fs:0, eax
 0x6C5F02: mov     esi, ecx
 0x6C5F04: mov     [esp+18h+var_10], esi
-0x6C5F08: call    sub_6D04E0
+0x6C5F08: call    NiInterpController_Construct; Constructs NiInterpController over NiTimeController, installs its vtable, and clears interpolator capability/manager flag 0x20.
 0x6C5F0D: xor     eax, eax
 0x6C5F0F: mov     [esp+18h+var_4], eax
 0x6C5F13: mov     [esi+3Ch], eax
@@ -29,3 +29,12 @@
 0x6C5F3D: pop     esi
 0x6C5F3E: add     esp, 10h
 0x6C5F41: retn    4
+0x9C7500: mov     ecx, [ebp-10h]; this
+0x9C7503: jmp     j_??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C7508: mov     edx, [esp+arg_4]
+0x9C750C: lea     eax, [edx-8]
+0x9C750F: mov     ecx, [edx-0Ch]
+0x9C7512: xor     ecx, eax
+0x9C7514: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7519: mov     eax, offset stru_AEF954
+0x9C751E: jmp     ___CxxFrameHandler3

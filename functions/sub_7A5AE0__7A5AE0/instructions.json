@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7A5AE0",
-    "line": "push    ecx",
+    "line": "push    ecx; Typed wrapper for backward SIdvLeafTexture copy assignment.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5AE1",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A5AE5",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7A5AF1",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7A5AF6",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x7A5AFB",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A5AFF",
-    "line": "push    eax",
+    "line": "push    eax; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5B00",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5B01",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5B02",
-    "line": "call    sub_7A5A50",
+    "line": "call    OB_SIdvLeafTexture_CopyAssignRangeBackward_010201A0; Overlap-safe backward deep-copy assignment of compact SIdvLeafTexture records.",
     "mnemonic": "call",
     "size": 5
   },

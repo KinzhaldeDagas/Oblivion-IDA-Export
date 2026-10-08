@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7AB701",
-    "line": "mov     edi, 1A3h",
+    "line": "mov     edi, 1A3h; Reset loop count is exactly 0x1A3 selector buckets.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x7AB708",
-    "line": "lea     ecx, [esi-4]",
+    "line": "lea     ecx, [esi-4]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7AB70B",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Accumulator reset releases a selector bucket's previous free nodes to the global pool; no RenderPass destructor is called.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7AB712",
-    "line": "mov     [esi+8], eax",
+    "line": "mov     [esi+8], eax; Move active bucket nodes to the bucket free chain and clear active bookkeeping; payload pointers are merely retained/overwritten on reuse.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x7AB759",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB75B",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7AB776",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x7AB7BA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB7BC",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x7AB7D7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x7AB81A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB81C",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x7AB82A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x7AB835",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x7AB856",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x7AB870",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB872",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,13 +877,13 @@
   },
   {
     "ea": "0x7AB88C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB88E",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x7AB8A5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB8A7",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1032,12 +1032,6 @@
     "size": 2
   },
   {
-    "ea": "0x7AB8DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x7AB8E0",
     "line": "mov     edi, [esi+8]",
     "mnemonic": "mov",
@@ -1069,13 +1063,13 @@
   },
   {
     "ea": "0x7AB8EC",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB8EE",
-    "line": "call    sub_7E2400",
+    "line": "call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x7AB8F4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,13 +1105,13 @@
   },
   {
     "ea": "0x7AB900",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AB902",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
     "mnemonic": "call",
     "size": 5
   },

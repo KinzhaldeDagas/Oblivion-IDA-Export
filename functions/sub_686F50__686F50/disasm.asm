@@ -7,7 +7,7 @@
 0x686F5C: retn
 0x686F5D: push    ebp
 0x686F5E: mov     ecx, edi
-0x686F60: call    sub_6899C0
+0x686F60: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x686F65: mov     ebp, [esp+8+arg_8]
 0x686F69: push    eax
 0x686F6A: mov     ecx, ebp
@@ -23,7 +23,7 @@
 0x686F84: test    esi, esi
 0x686F86: jz      loc_687056
 0x686F8C: mov     ecx, esi; this
-0x686F8E: call    MobileObject_GetCharProxy
+0x686F8E: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x686F93: test    eax, eax
 0x686F95: jz      loc_687056
 0x686F9B: mov     ecx, [esi+58h]
@@ -75,10 +75,10 @@
 0x687009: push    ecx
 0x68700A: mov     ecx, esi; this
 0x68700C: fstp    [esp+14h+var_14]; float
-0x68700F: call    TESObjectREFR_GetParentCell
+0x68700F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x687014: push    eax; int
 0x687015: mov     ecx, edi
-0x687017: call    sub_6899C0
+0x687017: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68701C: push    eax; int
 0x68701D: mov     ecx, esi
 0x68701F: call    Actor_IsUnderwater??
@@ -97,7 +97,7 @@
 0x68703A: push    ecx
 0x68703B: push    ebp
 0x68703C: mov     ecx, edi
-0x68703E: call    sub_6899C0
+0x68703E: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x687043: push    eax
 0x687044: push    esi
 0x687045: call    sub_686450

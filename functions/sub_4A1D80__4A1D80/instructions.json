@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4A1DDB",
-    "line": "call    sub_47D8F0",
+    "line": "call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4A1E0D",
-    "line": "push    offset CriticalSection; lpCriticalSection",
+    "line": "push    0B35380h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4A1E65",
-    "line": "push    offset CriticalSection; lpCriticalSection",
+    "line": "push    0B35380h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -532,5 +532,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B2280",
+    "line": "lea     ecx, [ebp-124h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2286",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B228B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B228F",
+    "line": "lea     eax, [edx-120h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2295",
+    "line": "mov     ecx, [edx-124h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B229B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B229D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B22A2",
+    "line": "add     eax, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B22A5",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B22A8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B22AA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B22AF",
+    "line": "mov     eax, offset stru_ADE29C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B22B4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

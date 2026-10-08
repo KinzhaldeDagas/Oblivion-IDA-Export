@@ -1,12 +1,12 @@
-0x7FEE40: mov     eax, [esp+arg_4]
+0x7FEE40: mov     eax, [esp+output]; Fog render consumer decode: Lighting30 TexEffect alternate payload writer; called from 0x7FF4A0 selectors 0x15E..0x15F and writes alternate FogColor/FogParam constants B46B78/B46B88.
 0x7FEE44: sub     esp, 20h
 0x7FEE47: test    eax, eax
 0x7FEE49: jz      loc_7FF04F
-0x7FEE4F: mov     eax, [eax+0E0h]
+0x7FEE4F: mov     eax, [eax+0E0h]; Fog decode: reads shaderProperty+0xE0 TexEffectData for the alternate TexEffect constant payload.
 0x7FEE55: test    eax, eax
 0x7FEE57: jz      short loc_7FEEC4
 0x7FEE59: mov     ecx, [eax+0Ch]
-0x7FEE5C: mov     ds:0B46B48h, ecx
+0x7FEE5C: mov     ds:0B46B48h, ecx; Fog decode: writes TexEffect Fill Color vector to B45E14[0x34D..0x350] / B46B48.
 0x7FEE62: mov     edx, [eax+10h]
 0x7FEE65: mov     ds:0B46B4Ch, edx
 0x7FEE6B: mov     ecx, [eax+14h]
@@ -14,7 +14,7 @@
 0x7FEE74: mov     edx, [eax+18h]
 0x7FEE77: mov     ds:0B46B54h, edx
 0x7FEE7D: mov     ecx, [eax+1Ch]
-0x7FEE80: mov     ds:0B46B58h, ecx
+0x7FEE80: mov     ds:0B46B58h, ecx; Fog decode: writes TexEffect Rim Color vector to B45E14[0x351..0x354] / B46B58.
 0x7FEE86: mov     edx, [eax+20h]
 0x7FEE89: mov     ds:0B46B5Ch, edx
 0x7FEE8F: mov     ecx, [eax+24h]
@@ -22,11 +22,11 @@
 0x7FEE98: mov     edx, [eax+28h]
 0x7FEE9B: mov     ds:0B46B64h, edx
 0x7FEEA1: fld     dword ptr [eax+4Ch]
-0x7FEEA4: fstp    dword ptr ds:0B46B3Ch
+0x7FEEA4: fstp    dword ptr ds:0B46B3Ch; Fog decode: writes TexEffect U/V offsets into B45E14[0x34A..0x34B].
 0x7FEEAA: fld     dword ptr [eax+50h]
 0x7FEEAD: fstp    dword ptr ds:0B46B40h
 0x7FEEB3: fld     dword ptr [eax+54h]
-0x7FEEB6: fstp    dword ptr ds:0B46B68h
+0x7FEEB6: fstp    dword ptr ds:0B46B68h; Fog decode: writes TexEffect fVars constant B45E14[0x355] / B46B68.
 0x7FEEBC: fld1
 0x7FEEBE: fstp    dword ptr ds:0B46B6Ch
 0x7FEEC4: fldz
@@ -41,14 +41,14 @@
 0x7FEEE3: mov     ds:0B46B7Ch, ecx
 0x7FEEE9: mov     ecx, [esp+20h+var_20]
 0x7FEEEC: fst     [esp+20h+var_1C]
-0x7FEEF0: mov     ds:0B46B78h, eax
+0x7FEEF0: mov     ds:0B46B78h, eax; Fog decode: clears alternate TexEffect FogColor constant B46B78 before property-state fog override.
 0x7FEEF5: fst     [esp+20h+var_18]
 0x7FEEF9: mov     eax, [esp+20h+var_14]
 0x7FEEFD: fstp    [esp+20h+var_14]
-0x7FEF01: mov     ds:0B46B88h, ecx
+0x7FEF01: mov     ds:0B46B88h, ecx; Fog decode: clears alternate TexEffect FogParam constant B46B88 before property-state fog override.
 0x7FEF07: mov     ecx, [esp+20h+var_14]
 0x7FEF0B: mov     ds:0B46B94h, ecx
-0x7FEF11: mov     ecx, [esp+20h+arg_0]
+0x7FEF11: mov     ecx, [esp+20h+arg_0]; this
 0x7FEF15: test    ecx, ecx
 0x7FEF17: mov     ds:0B46B80h, edx
 0x7FEF1D: mov     edx, [esp+20h+var_1C]
@@ -58,11 +58,11 @@
 0x7FEF30: mov     ds:0B46B90h, eax
 0x7FEF35: jz      loc_7FF04F
 0x7FEF3B: push    edi
-0x7FEF3C: lea     edx, [esp+24h+arg_4]
-0x7FEF40: push    edx
-0x7FEF41: call    sub_405760
-0x7FEF46: mov     edi, [eax]
-0x7FEF48: mov     eax, [esp+24h+arg_4]
+0x7FEF3C: lea     edx, [esp+24h+output]
+0x7FEF40: push    edx; output
+0x7FEF41: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
+0x7FEF46: mov     edi, [eax]; Fog decode: obtains NiGeometry+0xAC NiPropertyState via sub_405760 before reading fog property slot.
+0x7FEF48: mov     eax, [esp+24h+output]
 0x7FEF4C: test    eax, eax
 0x7FEF4E: jz      short loc_7FEF70
 0x7FEF50: push    esi
@@ -80,17 +80,17 @@
 0x7FEF6B: mov     ecx, esi
 0x7FEF6D: call    edx
 0x7FEF6F: pop     esi
-0x7FEF70: mov     ecx, [edi+0Ch]
+0x7FEF70: mov     ecx, [edi+0Ch]; Fog render consumer decode: TexEffect alternate path reads NiPropertyState+0x0C fog property slot.
 0x7FEF73: test    ecx, ecx
 0x7FEF75: pop     edi
 0x7FEF76: jz      loc_7FF04F
 0x7FEF7C: fld     dword ptr [ecx+2Ch]
-0x7FEF7F: fstp    [esp+20h+arg_0]
+0x7FEF7F: fstp    [esp+20h+arg_0]; Fog render consumer decode: TexEffect reads BSFogProperty+0x2C fogStart.
 0x7FEF83: fld     dword ptr [ecx+30h]
-0x7FEF86: fstp    [esp+20h+arg_4]
+0x7FEF86: fstp    [esp+20h+output]; Fog render consumer decode: TexEffect reads BSFogProperty+0x30 fogEnd.
 0x7FEF8A: fldz
 0x7FEF8C: fld     st
-0x7FEF8E: fld     [esp+20h+arg_4]
+0x7FEF8E: fld     [esp+20h+output]
 0x7FEF92: fucom   st(1)
 0x7FEF94: fnstsw  ax
 0x7FEF96: fstp    st(1)
@@ -117,7 +117,7 @@
 0x7FEFD6: fstp    [esp+20h+var_8]
 0x7FEFDA: mov     [esp+20h+var_18], eax
 0x7FEFDE: mov     eax, [esp+20h+var_8]
-0x7FEFE2: mov     ds:0B46B88h, ecx
+0x7FEFE2: mov     ds:0B46B88h, ecx; Fog render consumer decode: TexEffect alternate FogParam B46B88 = (fogEnd, fogEnd - fogStart, 1, 0).
 0x7FEFE8: fst     [esp+20h+var_4]
 0x7FEFEC: mov     ecx, [esp+20h+var_4]
 0x7FEFF0: fld     [esp+20h+var_20]
@@ -132,7 +132,7 @@
 0x7FF016: mov     ds:0B46B94h, ecx
 0x7FF01C: fstp    [esp+20h+var_8]
 0x7FF020: mov     ecx, [esp+20h+var_8]
-0x7FF024: mov     ds:0B46B78h, edx
+0x7FF024: mov     ds:0B46B78h, edx; Fog render consumer decode: TexEffect alternate FogColor B46B78 = (fog.r, fog.g, fog.b, 0).
 0x7FF02A: fstp    [esp+20h+var_4]
 0x7FF02E: mov     edx, [esp+20h+var_4]
 0x7FF032: mov     ds:0B46B7Ch, eax

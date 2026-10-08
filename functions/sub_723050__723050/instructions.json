@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x723050",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Common NiGeometry clone post-process. Resolves the destination through the clone map, handles geometry-data cloning/sharing, and rebuilds shader/property state only when the source geometry has a shader; a source-null shader leaves the clone shader/property state null.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x72307E",
-    "line": "call    sub_707AB0",
+    "line": "call    sub_707AB0; Pass227: Base object-map/reference collection called before NiScreenSpaceCamera child array traversal.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7230EB",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x723123",
-    "line": "cmp     eax, offset unk_B40124",
+    "line": "cmp     eax, offset stru_B40124",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x72315C",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x723193",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x723196",
-    "line": "call    sub_4EC910",
+    "line": "call    NiGeometry_SetShader; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x7231DF",
-    "line": "call    sub_731620",
+    "line": "call    sub_731620; Fog property propagation decode: NiPropertyState copy constructor preserves all ten slots, including inherited fog slot +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,19 +775,19 @@
   },
   {
     "ea": "0x7231F5",
-    "line": "call    sub_7077D0",
+    "line": "call    sub_7077D0; Fog property propagation decode: NiAVObject local-property merge helper; property kind 1 writes BSFogProperty/NiFogProperty to NiPropertyState +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7231FA",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7231FB",
-    "line": "lea     ecx, [edi+0ACh]",
+    "line": "lea     ecx, [edi+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x723206",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x723280",
-    "line": "push    offset stru_B3FA00; lpCriticalSection",
+    "line": "push    offset unk_B3FA00; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -1150,5 +1150,131 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA3D0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA3D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA3D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA3D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA3DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA3DB",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA3DE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA3E3",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA3E6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA3E7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA3EC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA3ED",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA3EE",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA3F1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA3F6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA3FA",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA3FD",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA400",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA402",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA407",
+    "line": "mov     eax, offset stru_AF2AF8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA40C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

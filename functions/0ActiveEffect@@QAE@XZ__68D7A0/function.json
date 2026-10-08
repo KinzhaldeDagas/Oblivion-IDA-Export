@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 31,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 32,
+  "chunks": [
+    [
+      "0x68D7A0",
+      "0x68D815"
+    ]
+  ],
+  "chunks_sha256": "5175244f79ea55bffc2f0cdbfc75db6fd69ab920e42e907d05144eedacfae13e",
+  "comment_regular": "Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.",
+  "comment_repeatable": "Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "ActiveEffect::ActiveEffect(void)",
+  "display_name": "ActiveEffect_Ctor",
   "end_ea": "0x68D815",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0ActiveEffect@@QAE@XZ",
+  "name": "ActiveEffect_Ctor",
   "segment": ".text",
   "sha256": "5175244f79ea55bffc2f0cdbfc75db6fd69ab920e42e907d05144eedacfae13e",
   "size": 117,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68D7A0",
+  "total_chunk_size": 117,
   "type": "ActiveEffect *__thiscall(ActiveEffect *this, MagicCaster *, MagicItem *, EffectItem *)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 32

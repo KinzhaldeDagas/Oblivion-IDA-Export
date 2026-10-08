@@ -1,4 +1,4 @@
-int __usercall EffectItem_BuildDisplayString_::QualifySkillAttrName@<eax>(
+int __userpurge EffectItem_BuildDisplayString_::QualifySkillAttrName@<eax>(
         unsigned int a1@<ebx>,
         _DWORD *esi0@<esi>,
         BSStringT *a3@<edi>,
@@ -14,7 +14,7 @@ int __usercall EffectItem_BuildDisplayString_::QualifySkillAttrName@<eax>(
         int a13,
         int a14,
         int a15,
-        int a16,
+        char a16,
         int a17,
         int a18,
         int a19,
@@ -43,8 +43,8 @@ int __usercall EffectItem_BuildDisplayString_::QualifySkillAttrName@<eax>(
         int a42,
         int a43)
 {
-  EffectItem_GetQualifiedName_SkillAttr(esi0, (int)&a2);
-  BSStringT_Set(a3, &a2, a1);
+  EffectItem_GetQualifiedName_SkillAttr(esi0, (int)&a2); /*0x413cde*/
+  BSStringT_Set(a3, &a2, a1); /*0x413ceb*/
   return EffectItem_BuildDisplayString_::CheckMagnitudeType(
            a1,
            esi0,

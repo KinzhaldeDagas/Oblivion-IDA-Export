@@ -1,4 +1,4 @@
-0x51C210: push    ebp
+0x51C210: push    ebp; Load an Oblivion CLAS record. DATA is a fixed 0x34-byte payload containing two attributes, specialization, seven majors, flags/services, and training data. Invalid uniqueness/attribute data is reported after loading, but the routine still returns success; no minor list is loaded.
 0x51C211: mov     ebp, esp
 0x51C213: push    ecx
 0x51C214: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x51C234: jmp     loc_51C341
 0x51C239: push    esi
 0x51C23A: mov     ecx, ebx
-0x51C23C: call    TESFile_InitializeFormFromRecord
+0x51C23C: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x51C241: mov     ecx, ebx
 0x51C243: call    TESFile_GetChunkType
 0x51C248: test    eax, eax
@@ -46,7 +46,7 @@
 0x51C28E: push    eax; Dst
 0x51C28F: push    ebx; a2
 0x51C290: mov     ecx, esi; this
-0x51C292: call    TESForm_LoadGenericComponents
+0x51C292: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x51C297: jmp     short loc_51C300
 0x51C299: mov     eax, [ebx+254h]
 0x51C29F: call    __alloca?
@@ -54,7 +54,7 @@
 0x51C2A6: push    200h; a4
 0x51C2AB: push    edi; Dst
 0x51C2AC: mov     ecx, ebx; a1
-0x51C2AE: call    TESFile_GetChunkData
+0x51C2AE: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51C2B3: mov     edx, [esi]
 0x51C2B5: mov     eax, [edx+0D8h]
 0x51C2BB: push    edi
@@ -84,7 +84,7 @@
 0x51C2F4: xor     eax, eax
 0x51C2F6: push    ebx
 0x51C2F7: push    eax
-0x51C2F8: call    TESFullname_Load
+0x51C2F8: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51C2FD: add     esp, 8
 0x51C300: mov     ecx, ebx
 0x51C302: call    TESFile_GetNextChunk
@@ -94,8 +94,8 @@
 0x51C30D: call    TESFile_GetChunkType
 0x51C312: test    eax, eax
 0x51C314: jnz     loc_51C250
-0x51C31A: mov     ecx, esi
-0x51C31C: call    sub_51C030
+0x51C31A: mov     ecx, esi; this
+0x51C31C: call    TESClass_ValidateData; Post-load validation failure only emits an error; the CLAS record remains loaded and this function returns true.
 0x51C321: test    al, al
 0x51C323: jnz     short loc_51C33F
 0x51C325: mov     edx, [esi]

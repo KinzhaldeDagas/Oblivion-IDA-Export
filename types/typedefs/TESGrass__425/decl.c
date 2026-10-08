@@ -1,1 +1,1 @@
-TESGrass
+struct TESGrass;

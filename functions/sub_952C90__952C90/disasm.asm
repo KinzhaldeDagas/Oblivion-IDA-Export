@@ -127,7 +127,6 @@
 0x952E7A: jle     loc_952F6A
 0x952E80: lea     esi, [edi+148h]
 0x952E86: jmp     short loc_952E90
-0x952E88: align 10h
 0x952E90: mov     eax, [esi]
 0x952E92: cmp     eax, 37h ; '7'
 0x952E95: jge     loc_952F47
@@ -225,7 +224,6 @@
 0x952FBE: lea     ebx, [edi+138h]
 0x952FC4: mov     [esp+0A0h+var_88], ecx
 0x952FC8: jmp     short loc_952FD0
-0x952FCA: align 10h
 0x952FD0: mov     ecx, [ebx+2EB8h]
 0x952FD6: lea     eax, [ebx+8]
 0x952FD9: lea     edx, [esp+0A0h+var_30]

@@ -1,4 +1,4 @@
 int __thiscall sub_42BB50(_DWORD *this)
 {
-  return *(this + 0x59);
+  return *(this + 0x59); /*0x42bb56*/
 }

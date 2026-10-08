@@ -1,20 +1,21 @@
-void __cdecl sub_4EA6E0(int a1, float a2, int a3, int a4)
+// Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.
+void __cdecl DistantLOD_UpdateLandLODAtPosition(unsigned int a1, float a2, int a3, int a4)
 {
   TESWorldSpace *CurrentWorldspace; // eax
-  TESWorldSpace *ParentWorldpsace; // esi
-  NiTMap_TESCELL *v6; // eax
+  TESWorldSpace *PointerAtOffset7C; // esi
+  TESWorldSpaceTerrainLODQuadMap *RootTerrainLODQuadMap; // eax
 
-  CurrentWorldspace = TES::GetCurrentWorldspace(TES);
-  ParentWorldpsace = CurrentWorldspace;
-  if ( CurrentWorldspace )
+  CurrentWorldspace = TES::GetCurrentWorldspace(MEMORY[0xB333A0]); /*0x4ea6e7*/
+  PointerAtOffset7C = CurrentWorldspace; /*0x4ea6ec*/
+  if ( CurrentWorldspace ) /*0x4ea6f0*/
   {
-    if ( TESWorldSpace_GetParentWorldpsace(CurrentWorldspace) )
+    if ( Shared_GetPointerAtOffset7C(CurrentWorldspace) ) /*0x4ea6f4*/
     {
-      do
-        ParentWorldpsace = TESWorldSpace_GetParentWorldpsace(ParentWorldpsace);
-      while ( TESWorldSpace_GetParentWorldpsace(ParentWorldpsace) );
+      do /*0x4ea70b*/
+        PointerAtOffset7C = (TESWorldSpace *)Shared_GetPointerAtOffset7C(PointerAtOffset7C); /*0x4ea707*/
+      while ( Shared_GetPointerAtOffset7C(PointerAtOffset7C) ); /*0x4ea70b*/
     }
-    v6 = (NiTMap_TESCELL *)sub_4EF7E0((int)ParentWorldpsace);
-    sub_4EA160(a1, a2, a3, v6, a4);
+    RootTerrainLODQuadMap = TESWorldSpace_GetRootTerrainLODQuadMap(PointerAtOffset7C); /*0x4ea71b*/
+    DistantLOD_UpdateLandLODMap(a1, a2, a3, RootTerrainLODQuadMap, a4); /*0x4ea73a*/
   }
 }

@@ -8,8 +8,8 @@
 0x48B9D5: push    edi
 0x48B9D6: mov     edi, ecx
 0x48B9D8: mov     [esp+24h+var_10], edi
-0x48B9DC: mov     [esp+24h+var_14], ebx
-0x48B9E0: mov     dword ptr [esp+24h+var_8], ebx
+0x48B9DC: mov     [esp+24h+form], ebx
+0x48B9E0: mov     [esp+24h+var_8], ebx
 0x48B9E4: jz      short loc_48BA23
 0x48B9E6: push    ebx
 0x48B9E7: push    0Ch
@@ -25,13 +25,13 @@
 0x48BA05: mov     ecx, [esi]
 0x48BA07: cmp     ecx, ebx
 0x48BA09: jz      short loc_48BA10
-0x48BA0B: call    BSSimpleList_Clear
+0x48BA0B: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48BA10: mov     ecx, [esi]
 0x48BA12: push    ecx
-0x48BA13: call    FormHeapFree
+0x48BA13: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48BA18: push    esi
 0x48BA19: mov     [esi], ebx
-0x48BA1B: call    FormHeapFree
+0x48BA1B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48BA20: add     esp, 8
 0x48BA23: mov     ecx, [edi+4]; this
 0x48BA26: cmp     ecx, ebx
@@ -58,14 +58,14 @@
 0x48BA63: call    OblivionDynamicCast
 0x48BA68: add     esp, 14h
 0x48BA6B: cmp     eax, ebx
-0x48BA6D: mov     [esp+28h+var_C], eax
+0x48BA6D: mov     [esp+28h+item], eax
 0x48BA71: jz      loc_48BB76
 0x48BA77: mov     eax, [esp+28h+var_10]
 0x48BA7B: mov     eax, [eax]
 0x48BA7D: cmp     eax, ebx
 0x48BA7F: mov     dl, 1
 0x48BA81: jz      short loc_48BAA1
-0x48BA83: mov     esi, [esp+28h+var_C]
+0x48BA83: mov     esi, [esp+28h+item]
 0x48BA87: test    dl, dl
 0x48BA89: jz      short loc_48BACD
 0x48BA8B: mov     ecx, [eax]
@@ -88,12 +88,12 @@
 0x48BAB3: mov     esi, [eax]
 0x48BAB5: cmp     esi, ebx
 0x48BAB7: jz      short loc_48BAD5
-0x48BAB9: mov     ecx, esi
-0x48BABB: call    ExtraDataList_GetOwner
+0x48BAB9: mov     ecx, esi; this
+0x48BABB: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BAC0: test    eax, eax
 0x48BAC2: jz      short loc_48BAD5
-0x48BAC4: mov     ecx, esi
-0x48BAC6: call    ExtraDataList_GetOwner
+0x48BAC4: mov     ecx, esi; this
+0x48BAC6: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BACB: jmp     short loc_48BAD7
 0x48BACD: cmp     eax, ebx
 0x48BACF: jz      short loc_48BAA1
@@ -107,10 +107,10 @@
 0x48BAE2: mov     esi, [edi]
 0x48BAE4: cmp     esi, ebx
 0x48BAE6: jz      short loc_48BB01
-0x48BAE8: mov     ecx, [esi]
+0x48BAE8: mov     ecx, [esi]; this
 0x48BAEA: cmp     ecx, ebx
 0x48BAEC: jz      short loc_48BB01
-0x48BAEE: call    ExtraDataList_GetOwner
+0x48BAEE: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BAF3: test    eax, eax
 0x48BAF5: jz      short loc_48BAFA
 0x48BAF7: add     ebp, 1
@@ -123,12 +123,12 @@
 0x48BB07: mov     esi, [eax]
 0x48BB09: cmp     esi, ebx
 0x48BB0B: jz      short loc_48BB32
-0x48BB0D: mov     ecx, esi
-0x48BB0F: call    ExtraDataList_GetOwner
+0x48BB0D: mov     ecx, esi; this
+0x48BB0F: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BB14: test    eax, eax
 0x48BB16: jz      short loc_48BB32
-0x48BB18: mov     ecx, esi
-0x48BB1A: call    ExtraDataList_GetOwner
+0x48BB18: mov     ecx, esi; this
+0x48BB1A: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BB1F: cmp     eax, ebx
 0x48BB21: jz      short loc_48BB32
 0x48BB23: mov     ecx, [esp+28h+arg_4]
@@ -146,19 +146,19 @@
 0x48BB41: jg      short loc_48BB47
 0x48BB43: cmp     eax, ebx
 0x48BB45: jge     short loc_48BB76
-0x48BB47: mov     esi, [esp+28h+var_C]
-0x48BB4B: mov     ecx, [esp+28h+arg_0]
-0x48BB4F: push    esi
-0x48BB50: call    TESActorBase_GetEquippableItemRating
-0x48BB55: fstp    [esp+28h+var_C]
-0x48BB59: fld     [esp+28h+var_C]
+0x48BB47: mov     esi, [esp+28h+item]
+0x48BB4B: mov     ecx, [esp+28h+arg_0]; this
+0x48BB4F: push    esi; item
+0x48BB50: call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.
+0x48BB55: fstp    [esp+28h+item]
+0x48BB59: fld     [esp+28h+item]
 0x48BB5D: fld     [esp+28h+var_18]
 0x48BB61: fcomp   st(1)
 0x48BB63: fnstsw  ax
 0x48BB65: test    ah, 5
 0x48BB68: jp      short loc_48BB74
 0x48BB6A: fstp    [esp+28h+var_18]
-0x48BB6E: mov     [esp+28h+var_14], esi
+0x48BB6E: mov     [esp+28h+form], esi
 0x48BB72: jmp     short loc_48BB76
 0x48BB74: fstp    st
 0x48BB76: mov     edx, [esp+28h+arg_4]
@@ -171,7 +171,6 @@
 0x48BB8F: test    ebx, ebx
 0x48BB91: jz      loc_48BCD3
 0x48BB97: jmp     short loc_48BBA0
-0x48BB99: align 10h
 0x48BBA0: mov     edi, [ebx]
 0x48BBA2: test    edi, edi
 0x48BBA4: jz      loc_48BC91
@@ -207,12 +206,12 @@
 0x48BBFC: mov     esi, [eax]
 0x48BBFE: test    esi, esi
 0x48BC00: jz      short loc_48BC40
-0x48BC02: mov     ecx, esi
-0x48BC04: call    ExtraDataList_GetOwner
+0x48BC02: mov     ecx, esi; this
+0x48BC04: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BC09: test    eax, eax
 0x48BC0B: jz      short loc_48BC40
-0x48BC0D: mov     ecx, esi
-0x48BC0F: call    ExtraDataList_GetOwner
+0x48BC0D: mov     ecx, esi; this
+0x48BC0F: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BC14: test    eax, eax
 0x48BC16: jz      short loc_48BC40
 0x48BC18: mov     eax, [edi]
@@ -221,12 +220,12 @@
 0x48BC1E: mov     esi, [eax]
 0x48BC20: test    esi, esi
 0x48BC22: jz      short loc_48BC38
-0x48BC24: mov     ecx, esi
-0x48BC26: call    ExtraDataList_GetOwner
+0x48BC24: mov     ecx, esi; this
+0x48BC26: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BC2B: test    eax, eax
 0x48BC2D: jz      short loc_48BC38
-0x48BC2F: mov     ecx, esi
-0x48BC31: call    ExtraDataList_GetOwner
+0x48BC2F: mov     ecx, esi; this
+0x48BC31: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48BC36: jmp     short loc_48BC3A
 0x48BC38: xor     eax, eax
 0x48BC3A: cmp     eax, [esp+28h+arg_0]
@@ -245,9 +244,9 @@
 0x48BC5D: call    TESContainer_HasForm
 0x48BC62: test    al, al
 0x48BC64: jnz     short loc_48BC91
-0x48BC66: mov     ecx, [esp+28h+arg_0]
-0x48BC6A: push    ebp
-0x48BC6B: call    TESActorBase_GetEquippableItemRating
+0x48BC66: mov     ecx, [esp+28h+arg_0]; this
+0x48BC6A: push    ebp; item
+0x48BC6B: call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.
 0x48BC70: fstp    [esp+28h+arg_4]
 0x48BC74: fld     [esp+28h+arg_4]
 0x48BC78: fld     [esp+28h+var_18]
@@ -256,38 +255,38 @@
 0x48BC80: test    ah, 5
 0x48BC83: jp      short loc_48BC8F
 0x48BC85: fstp    [esp+28h+var_18]
-0x48BC89: mov     dword ptr [esp+28h+var_8], ebp
+0x48BC89: mov     [esp+28h+var_8], ebp
 0x48BC8D: jmp     short loc_48BC91
 0x48BC8F: fstp    st
 0x48BC91: mov     ebx, [ebx+4]
 0x48BC94: test    ebx, ebx
 0x48BC96: jnz     loc_48BBA0
-0x48BC9C: mov     esi, dword ptr [esp+28h+var_8]
+0x48BC9C: mov     esi, [esp+28h+var_8]
 0x48BCA0: test    esi, esi
 0x48BCA2: jz      short loc_48BCD3
-0x48BCA4: mov     ebx, [esp+28h+var_14]
+0x48BCA4: mov     ebx, [esp+28h+form]
 0x48BCA8: cmp     esi, ebx
 0x48BCAA: jz      short loc_48BCD3
 0x48BCAC: mov     edi, [esp+28h+arg_0]
-0x48BCB0: push    esi
-0x48BCB1: mov     ecx, edi
-0x48BCB3: call    TESActorBase_GetEquippableItemRating
-0x48BCB8: fstp    [esp+28h+var_8]
-0x48BCBC: push    ebx
-0x48BCBD: mov     ecx, edi
-0x48BCBF: call    TESActorBase_GetEquippableItemRating
-0x48BCC4: fcomp   [esp+28h+var_8]
+0x48BCB0: push    esi; item
+0x48BCB1: mov     ecx, edi; this
+0x48BCB3: call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.
+0x48BCB8: fstp    qword ptr [esp+28h+var_8]
+0x48BCBC: push    ebx; item
+0x48BCBD: mov     ecx, edi; this
+0x48BCBF: call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.
+0x48BCC4: fcomp   qword ptr [esp+28h+var_8]
 0x48BCC8: fnstsw  ax
 0x48BCCA: test    ah, 5
 0x48BCCD: jp      short loc_48BCD3
-0x48BCCF: mov     [esp+28h+var_14], esi
-0x48BCD3: mov     ebx, [esp+28h+var_14]
+0x48BCCF: mov     [esp+28h+form], esi
+0x48BCD3: mov     ebx, [esp+28h+form]
 0x48BCD7: mov     ebp, [esp+28h+var_10]
-0x48BCDB: push    0
-0x48BCDD: push    1
-0x48BCDF: push    ebx
-0x48BCE0: mov     ecx, ebp
-0x48BCE2: call    ContainerExtraData_GetEntryForForm
+0x48BCDB: push    0; referenceFormIDOrZero
+0x48BCDD: push    1; unusedAlwaysOne
+0x48BCDF: push    ebx; form
+0x48BCE0: mov     ecx, ebp; this
+0x48BCE2: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x48BCE7: xor     esi, esi
 0x48BCE9: test    ebx, ebx
 0x48BCEB: mov     edi, eax

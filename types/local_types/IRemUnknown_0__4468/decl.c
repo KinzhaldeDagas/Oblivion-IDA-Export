@@ -1,1 +1,1 @@
-IRemUnknown_0
+typedef IRemUnknown IRemUnknown_0;

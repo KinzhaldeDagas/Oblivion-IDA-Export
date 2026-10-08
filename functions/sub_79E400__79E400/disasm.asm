@@ -1,4 +1,4 @@
-0x79E400: push    ebp
+0x79E400: push    ebp; Oblivion st_vector<SFrondTexture>::insert(position,count,value). Makes an alias-safe value copy, enforces max_size 0x5D1745D, grows capacity by 1.5x when needed, and performs exception-safe deep construction/destruction of 0x2C-byte string-bearing records.
 0x79E401: mov     ebp, esp
 0x79E403: push    0FFFFFFFFh
 0x79E405: push    offset SEH_79E400
@@ -15,26 +15,26 @@
 0x79E422: lea     eax, [ebp+var_C]
 0x79E425: mov     large fs:0, eax
 0x79E42B: mov     [ebp+var_10], esp
-0x79E42E: mov     ebx, [ebp+arg_C]
-0x79E431: push    0FFFFFFFFh
+0x79E42E: mov     ebx, [ebp+value]
+0x79E431: push    0FFFFFFFFh; count
 0x79E433: xor     edi, edi
 0x79E435: mov     esi, ecx
-0x79E437: push    edi
-0x79E438: push    ebx
-0x79E439: lea     ecx, [ebp+var_40]
+0x79E437: push    edi; offset
+0x79E438: push    ebx; source
+0x79E439: lea     ecx, [ebp+var_40]; this
 0x79E43C: mov     [ebp+var_48], esi
-0x79E43F: mov     [ebp+var_28], 0Fh
-0x79E446: mov     [ebp+var_2C], edi
-0x79E449: mov     byte ptr [ebp+var_3C], 0
-0x79E44D: call    sub_414420
+0x79E43F: mov     [ebp+var_40.filename.capacity], 0Fh
+0x79E446: mov     [ebp+var_40.filename.size], edi
+0x79E449: mov     byte ptr [ebp+var_40.filename.storage], 0
+0x79E44D: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x79E452: fld     dword ptr [ebx+1Ch]
-0x79E455: fstp    [ebp+var_24]
+0x79E455: fstp    [ebp+var_40.aspectRatio]
 0x79E458: fld     dword ptr [ebx+20h]
-0x79E45B: fstp    [ebp+var_20]
+0x79E45B: fstp    [ebp+var_40.sizeScale]
 0x79E45E: fld     dword ptr [ebx+24h]
-0x79E461: fstp    [ebp+var_1C]
+0x79E461: fstp    [ebp+var_40.minAngleOffset]
 0x79E464: fld     dword ptr [ebx+28h]
-0x79E467: fstp    [ebp+var_18]
+0x79E467: fstp    [ebp+var_40.maxAngleOffset]
 0x79E46A: mov     ecx, [esi+4]
 0x79E46D: cmp     ecx, edi
 0x79E46F: mov     [ebp+var_4], edi
@@ -47,7 +47,7 @@
 0x79E483: mov     edi, edx
 0x79E485: shr     edi, 1Fh
 0x79E488: add     edi, edx
-0x79E48A: mov     ebx, [ebp+arg_8]
+0x79E48A: mov     ebx, [ebp+count]
 0x79E48D: test    ebx, ebx
 0x79E48F: jz      loc_79E6EE
 0x79E495: test    ecx, ecx
@@ -66,7 +66,7 @@
 0x79E4B8: sub     edx, eax
 0x79E4BA: cmp     edx, ebx
 0x79E4BC: jnb     short loc_79E4C3
-0x79E4BE: call    sub_790B90
+0x79E4BE: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x79E4C3: test    ecx, ecx
 0x79E4C5: jnz     short loc_79E4CB
 0x79E4C7: xor     eax, eax
@@ -114,41 +114,41 @@
 0x79E531: push    edi; char *
 0x79E532: call    sub_556440
 0x79E537: mov     ecx, [esi+4]
-0x79E53A: mov     byte ptr [ebp+var_44], 0
-0x79E53E: mov     edx, [ebp+var_44]
+0x79E53A: mov     byte ptr [ebp+destinationLast], 0
+0x79E53E: mov     edx, [ebp+destinationLast]
 0x79E541: push    edx
-0x79E542: mov     edx, [ebp+var_44]
+0x79E542: mov     edx, [ebp+destinationLast]
 0x79E545: push    edx
 0x79E546: push    esi
-0x79E547: push    eax
-0x79E548: mov     [ebp+var_50], eax
-0x79E54B: mov     [ebp+var_4C], eax
-0x79E54E: mov     eax, [ebp+arg_4]
-0x79E551: push    eax
-0x79E552: push    ecx
+0x79E547: push    eax; destinationFirst
+0x79E548: mov     [ebp+first], eax
+0x79E54B: mov     [ebp+last], eax
+0x79E54E: mov     eax, [ebp+position]
+0x79E551: push    eax; last
+0x79E552: push    ecx; first
 0x79E553: mov     byte ptr [ebp+var_4], 1
-0x79E557: call    sub_79B470
+0x79E557: call    OB_SFrondTexture_UninitializedCopy_010201A0; Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.
 0x79E55C: add     esp, 20h
 0x79E55F: lea     ecx, [ebp+var_40]
-0x79E562: push    ecx
-0x79E563: push    ebx
-0x79E564: push    eax
-0x79E565: mov     ecx, esi
-0x79E567: mov     [ebp+var_4C], eax
-0x79E56A: call    sub_79E080
+0x79E562: push    ecx; value
+0x79E563: push    ebx; count
+0x79E564: push    eax; destination
+0x79E565: mov     ecx, esi; this
+0x79E567: mov     [ebp+last], eax
+0x79E56A: call    OB_stVector_SFrondTexture_UninitializedFillNThunk_010201A0; st_vector<SFrondTexture> uninitialized-fill thunk: placement-copy-constructs count values and returns destination+count.
 0x79E56F: mov     ecx, [esi+8]
-0x79E572: mov     byte ptr [ebp+var_44], 0
-0x79E576: mov     edx, [ebp+var_44]
+0x79E572: mov     byte ptr [ebp+destinationLast], 0
+0x79E576: mov     edx, [ebp+destinationLast]
 0x79E579: push    edx
-0x79E57A: mov     edx, [ebp+var_44]
+0x79E57A: mov     edx, [ebp+destinationLast]
 0x79E57D: push    edx
 0x79E57E: push    esi
-0x79E57F: push    eax
-0x79E580: mov     [ebp+var_4C], eax
-0x79E583: mov     eax, [ebp+arg_4]
-0x79E586: push    ecx
-0x79E587: push    eax
-0x79E588: call    sub_79B470
+0x79E57F: push    eax; destinationFirst
+0x79E580: mov     [ebp+last], eax
+0x79E583: mov     eax, [ebp+position]
+0x79E586: push    ecx; last
+0x79E587: push    eax; first
+0x79E588: call    OB_SFrondTexture_UninitializedCopy_010201A0; Exception-safe uninitialized_copy for SFrondTexture. Normal path placement-copy-constructs [first,last) and returns destination end; the SEH cleanup landing path destroys the constructed prefix and rethrows.
 0x79E58D: mov     ecx, [esi+4]
 0x79E590: add     esp, 18h
 0x79E593: test    ecx, ecx
@@ -166,18 +166,18 @@
 0x79E5B1: add     ebx, eax
 0x79E5B3: test    ecx, ecx
 0x79E5B5: jz      short loc_79E5D2
-0x79E5B7: mov     edx, [ebp+var_44]
+0x79E5B7: mov     edx, [ebp+destinationLast]
 0x79E5BA: mov     eax, [esi+8]
 0x79E5BD: push    edx
 0x79E5BE: push    esi
-0x79E5BF: push    eax
-0x79E5C0: push    ecx
-0x79E5C1: call    sub_79B120
+0x79E5BF: push    eax; last
+0x79E5C0: push    ecx; first
+0x79E5C1: call    OB_SFrondTexture_DestroyRange_010201A0; Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.
 0x79E5C6: mov     ecx, [esi+4]
 0x79E5C9: push    ecx
-0x79E5CA: call    FormHeapFree
+0x79E5CA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79E5CF: add     esp, 14h
-0x79E5D2: mov     eax, [ebp+var_50]
+0x79E5D2: mov     eax, [ebp+first]
 0x79E5D5: imul    edi, 2Ch ; ','
 0x79E5D8: imul    ebx, 2Ch ; ','
 0x79E5DB: add     edi, eax
@@ -186,20 +186,20 @@
 0x79E5E2: mov     [esi+8], ebx
 0x79E5E5: mov     [esi+4], eax
 0x79E5E8: jmp     loc_79E6EE
-0x79E5ED: mov     edx, [ebp+var_4C]
-0x79E5F0: mov     esi, [ebp+var_50]
+0x79E5ED: mov     edx, [ebp+last]
+0x79E5F0: mov     esi, [ebp+first]
 0x79E5F3: mov     ecx, [ebp+var_48]
-0x79E5F6: push    edx
-0x79E5F7: push    esi
-0x79E5F8: call    sub_79BDD0
+0x79E5F6: push    edx; last
+0x79E5F7: push    esi; first
+0x79E5F8: call    OB_SFrondTexture_DestroyRangeThunk_010201A0; Thin checked/STL trampoline for destruction of an SFrondTexture range.
 0x79E5FD: push    esi
-0x79E5FE: call    FormHeapFree
+0x79E5FE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79E603: add     esp, 4
 0x79E606: push    0
 0x79E608: push    0
 0x79E60A: call    ThrowException??
 0x79E60F: mov     ecx, [esi+8]
-0x79E612: mov     edi, [ebp+arg_4]
+0x79E612: mov     edi, [ebp+position]
 0x79E615: mov     edx, ecx
 0x79E617: sub     edx, edi
 0x79E619: mov     eax, 2E8BA2E9h
@@ -209,20 +209,20 @@
 0x79E625: shr     eax, 1Fh
 0x79E628: add     eax, edx
 0x79E62A: cmp     eax, ebx
-0x79E62C: mov     [ebp+var_44], ecx
+0x79E62C: mov     [ebp+destinationLast], ecx
 0x79E62F: jnb     loc_79E6B9
 0x79E635: mov     eax, ebx
 0x79E637: imul    eax, 2Ch ; ','
-0x79E63A: mov     [ebp+var_44], eax
+0x79E63A: mov     [ebp+destinationLast], eax
 0x79E63D: add     eax, edi
-0x79E63F: push    eax
-0x79E640: push    ecx
-0x79E641: push    edi
-0x79E642: mov     ecx, esi
-0x79E644: call    sub_79E0F0
+0x79E63F: push    eax; destinationFirst
+0x79E640: push    ecx; last
+0x79E641: push    edi; first
+0x79E642: mov     ecx, esi; this
+0x79E644: call    OB_stVector_SFrondTexture_UninitializedCopyThunk_010201A0; st_vector<SFrondTexture> uninitialized-copy thunk: deep-copy-constructs [first,last) into raw destination storage and returns destination end.
 0x79E649: mov     ecx, [esi+8]
 0x79E64C: lea     edx, [ebp+var_40]
-0x79E64F: push    edx
+0x79E64F: push    edx; value
 0x79E650: mov     edx, ecx
 0x79E652: sub     edx, edi
 0x79E654: mov     eax, 2E8BA2E9h
@@ -232,64 +232,64 @@
 0x79E660: shr     eax, 1Fh
 0x79E663: add     eax, edx
 0x79E665: sub     ebx, eax
-0x79E667: push    ebx
-0x79E668: push    ecx
-0x79E669: mov     ecx, esi
+0x79E667: push    ebx; count
+0x79E668: push    ecx; destination
+0x79E669: mov     ecx, esi; this
 0x79E66B: mov     byte ptr [ebp+var_4], 3
-0x79E66F: call    sub_79E080
-0x79E674: mov     eax, [ebp+var_44]
+0x79E66F: call    OB_stVector_SFrondTexture_UninitializedFillNThunk_010201A0; st_vector<SFrondTexture> uninitialized-fill thunk: placement-copy-constructs count values and returns destination+count.
+0x79E674: mov     eax, [ebp+destinationLast]
 0x79E677: add     [esi+8], eax
 0x79E67A: mov     esi, [esi+8]
 0x79E67D: lea     ecx, [ebp+var_40]
-0x79E680: push    ecx
+0x79E680: push    ecx; value
 0x79E681: sub     esi, eax
-0x79E683: push    esi
-0x79E684: push    edi
+0x79E683: push    esi; last
+0x79E684: push    edi; first
 0x79E685: mov     [ebp+var_4], 0
-0x79E68C: call    sub_79B6B0
+0x79E68C: call    OB_SFrondTexture_FillRange_010201A0; Assigns one SFrondTexture value throughout [first,last), including deep filename assignment and all four scalar fields.
 0x79E691: add     esp, 0Ch
 0x79E694: jmp     short loc_79E6EE
-0x79E696: mov     eax, [ebp+arg_8]
+0x79E696: mov     eax, [ebp+count]
 0x79E699: mov     ecx, [ebp+var_48]
 0x79E69C: imul    eax, 2Ch ; ','
 0x79E69F: mov     edx, [ecx+8]
 0x79E6A2: add     edx, eax
-0x79E6A4: push    edx
-0x79E6A5: mov     edx, [ebp+arg_4]
+0x79E6A4: push    edx; last
+0x79E6A5: mov     edx, [ebp+position]
 0x79E6A8: add     eax, edx
-0x79E6AA: push    eax
-0x79E6AB: call    sub_79BDD0
+0x79E6AA: push    eax; first
+0x79E6AB: call    OB_SFrondTexture_DestroyRangeThunk_010201A0; Thin checked/STL trampoline for destruction of an SFrondTexture range.
 0x79E6B0: push    0
 0x79E6B2: push    0
 0x79E6B4: call    ThrowException??
 0x79E6B9: imul    ebx, 2Ch ; ','
-0x79E6BC: push    ecx
+0x79E6BC: push    ecx; destinationFirst
 0x79E6BD: mov     eax, ecx
 0x79E6BF: sub     eax, ebx
-0x79E6C1: push    ecx
-0x79E6C2: push    eax
-0x79E6C3: mov     ecx, esi
+0x79E6C1: push    ecx; last
+0x79E6C2: push    eax; first
+0x79E6C3: mov     ecx, esi; this
 0x79E6C5: mov     [ebp+var_48], eax
-0x79E6C8: call    sub_79E0F0
+0x79E6C8: call    OB_stVector_SFrondTexture_UninitializedCopyThunk_010201A0; st_vector<SFrondTexture> uninitialized-copy thunk: deep-copy-constructs [first,last) into raw destination storage and returns destination end.
 0x79E6CD: mov     ecx, [ebp+var_48]
 0x79E6D0: mov     [esi+8], eax
-0x79E6D3: mov     eax, [ebp+var_44]
-0x79E6D6: push    eax
-0x79E6D7: push    ecx
-0x79E6D8: push    edi
-0x79E6D9: call    sub_79E120
+0x79E6D3: mov     eax, [ebp+destinationLast]
+0x79E6D6: push    eax; destinationLast
+0x79E6D7: push    ecx; last
+0x79E6D8: push    edi; first
+0x79E6D9: call    OB_SFrondTexture_CopyAssignRangeBackwardCheckedThunk_010201A0; Checked/STL trampoline for overlap-safe backward SFrondTexture range assignment.
 0x79E6DE: lea     edx, [ebp+var_40]
-0x79E6E1: push    edx
+0x79E6E1: push    edx; value
 0x79E6E2: add     ebx, edi
-0x79E6E4: push    ebx
-0x79E6E5: push    edi
-0x79E6E6: call    sub_79B6B0
+0x79E6E4: push    ebx; last
+0x79E6E5: push    edi; first
+0x79E6E6: call    OB_SFrondTexture_FillRange_010201A0; Assigns one SFrondTexture value throughout [first,last), including deep filename assignment and all four scalar fields.
 0x79E6EB: add     esp, 18h
-0x79E6EE: cmp     [ebp+var_28], 10h
+0x79E6EE: cmp     [ebp+var_40.filename.capacity], 10h
 0x79E6F2: jb      short loc_79E700
-0x79E6F4: mov     eax, [ebp+var_3C]
+0x79E6F4: mov     eax, dword ptr [ebp+var_40.filename.storage]
 0x79E6F7: push    eax
-0x79E6F8: call    FormHeapFree
+0x79E6F8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79E6FD: add     esp, 4
 0x79E700: mov     ecx, [ebp+var_C]
 0x79E703: mov     large fs:0, ecx
@@ -303,3 +303,15 @@
 0x79E718: mov     esp, ebp
 0x79E71A: pop     ebp
 0x79E71B: retn    10h
+0x9CC420: lea     ecx, [ebp+var_40]; this
+0x9CC423: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CC428: mov     edx, [esp-4+position]
+0x9CC42C: lea     eax, [edx+0Ch]
+0x9CC42F: mov     ecx, [edx-54h]
+0x9CC432: xor     ecx, eax
+0x9CC434: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC439: mov     ecx, [edx-8]
+0x9CC43C: xor     ecx, eax
+0x9CC43E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC443: mov     eax, offset stru_AF5614
+0x9CC448: jmp     ___CxxFrameHandler3

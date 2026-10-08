@@ -1,4 +1,5 @@
-TESChildCELL *__userpurge sub_4B86C0@<eax>(
+// Verified Fallout corroboration for this Oblivion helper pair: Fallout's FindRandomTeleportTarget calls PlayerCharacter::GetLastSpaceForDoor before selecting among the door's RandomTeleports, avoids the previous index when possible, and calls SetLastSpaceForDoor with the selected index. Oblivion independently proves its helper pair operates on the same per-door remembered-space behavior; only this behavior is treated as shared.
+TESChildCELL *__userpurge DoorTeleport_SelectRandomDestinationDoor@<eax>(
         int a1@<ecx>,
         double a2@<st2>,
         double a3@<st1>,
@@ -7,237 +8,241 @@ TESChildCELL *__userpurge sub_4B86C0@<eax>(
         _BYTE *a6)
 {
   TESChildCELL *v7; // ebp
-  TESObjectCELL *ParentCell; // eax
-  unsigned __int8 *v9; // edi
-  _BYTE *v10; // eax
-  _BYTE *v11; // esi
-  ExtraTeleport *TeleportExtraData; // eax
-  ExtraTeleport *v13; // eax
-  BSExtraDataVtbl *v14; // eax
-  unsigned __int8 *v15; // eax
-  int v16; // edx
-  unsigned int v17; // esi
-  _DWORD *v18; // eax
-  unsigned __int8 **v19; // eax
-  unsigned __int8 *v20; // ecx
-  int v21; // eax
-  PlayerCharacter *v22; // ecx
-  int v23; // edi
+  TESObjectCELL *DwordAtOffset40; // eax
+  TESForm *SpatialContainerAtPosition; // edi
+  TESObjectREFR *v10; // eax
+  TESObjectREFR *v11; // esi
+  TeleportData *TeleportData; // eax
+  TeleportData *v13; // eax
+  TESObjectREFR *LinkedDoor; // eax
+  int v15; // edx
+  unsigned int v16; // esi
+  _DWORD *v17; // eax
+  TESForm **v18; // eax
+  TESForm *v19; // ecx
+  TESChildCELL *v20; // eax
+  PlayerCharacter *v21; // ecx
+  int v22; // edi
   unsigned int i; // edx
-  int v25; // eax
-  int *v26; // esi
-  unsigned __int8 **v27; // eax
-  unsigned __int8 *v28; // edx
-  int v29; // esi
-  unsigned __int8 *v30; // ecx
-  TESChildCELL *v31; // eax
-  int v32; // eax
-  TESObjectCELL *v33; // eax
-  int v34; // esi
-  TESChildCELL *v36; // [esp+14h] [ebp-40h] BYREF
-  int v37; // [esp+18h] [ebp-3Ch]
-  unsigned int v38; // [esp+1Ch] [ebp-38h]
-  unsigned int v39; // [esp+20h] [ebp-34h]
-  int v40; // [esp+24h] [ebp-30h]
-  unsigned int v41[4]; // [esp+28h] [ebp-2Ch] BYREF
-  unsigned int v42[4]; // [esp+38h] [ebp-1Ch] BYREF
-  unsigned int v43; // [esp+50h] [ebp-4h]
-  unsigned __int8 *WorldSpace; // [esp+58h] [ebp+4h]
-  unsigned int v45; // [esp+5Ch] [ebp+8h]
+  int v24; // eax
+  int *v25; // esi
+  TESObjectCELL **v26; // eax
+  TESObjectCELL *v27; // edx
+  int v28; // esi
+  TESObjectCELL *v29; // ecx
+  TESChildCELL *v30; // eax
+  TESWorldSpace *v31; // eax
+  TESObjectCELL *v32; // eax
+  TESObjectCELL *v33; // esi
+  TESChildCELL *v35; // [esp+14h] [ebp-40h] BYREF
+  int v36; // [esp+18h] [ebp-3Ch]
+  unsigned int v37; // [esp+1Ch] [ebp-38h]
+  unsigned int v38; // [esp+20h] [ebp-34h]
+  int v39; // [esp+24h] [ebp-30h]
+  unsigned int v40[4]; // [esp+28h] [ebp-2Ch] BYREF
+  unsigned int v41[4]; // [esp+38h] [ebp-1Ch] BYREF
+  unsigned int v42; // [esp+50h] [ebp-4h]
+  TESWorldSpace *WorldSpace; // [esp+58h] [ebp+4h]
+  unsigned int v44; // [esp+5Ch] [ebp+8h]
 
-  v37 = a1;
-  v7 = 0;
-  v36 = 0;
-  if ( a5 )
+  v36 = a1; /*0x4b86e7*/
+  v7 = 0; /*0x4b86f1*/
+  v35 = 0; /*0x4b86f5*/
+  if ( a5 ) /*0x4b86f9*/
   {
-    WorldSpace = (unsigned __int8 *)TESObjectREFR_GetWorldSpace(a5);
-    if ( !WorldSpace )
+    WorldSpace = TESObjectREFR_GetWorldSpace(a5); /*0x4b8708*/
+    if ( !WorldSpace ) /*0x4b870c*/
     {
-      if ( TESObjectREFR_GetParentCell(a5) )
+      if ( Shared_GetDwordAtOffset40(a5) ) /*0x4b8710*/
       {
-        ParentCell = TESObjectREFR_GetParentCell(a5);
-        if ( TESObjectCELL_IsInterior(ParentCell) )
-          WorldSpace = (unsigned __int8 *)TESObjectREFR_GetParentCell(a5);
+        DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a5); /*0x4b871b*/
+        if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x4b8722*/
+          WorldSpace = (TESWorldSpace *)Shared_GetDwordAtOffset40(a5); /*0x4b8732*/
       }
     }
-    v9 = 0;
-    if ( a6 )
+    SpatialContainerAtPosition = 0; /*0x4b873a*/
+    if ( a6 ) /*0x4b873e*/
     {
-      v10 = (_BYTE *)sub_4D8E40(a6);
-      v11 = v10;
-      if ( v10 )
+      v10 = (TESObjectREFR *)sub_4D8E40(a6); /*0x4b8740*/
+      v11 = v10; /*0x4b8745*/
+      if ( v10 ) /*0x4b8749*/
       {
-        if ( GetTeleportExtraData(v10) )
+        if ( TESObjectREFR_GetTeleportData(v10) ) /*0x4b874d*/
         {
-          TeleportExtraData = GetTeleportExtraData(v11);
-          if ( sub_42B410(&TeleportExtraData->super) )
+          TeleportData = TESObjectREFR_GetTeleportData(v11); /*0x4b8758*/
+          if ( TeleportData_GetLinkedDoor(TeleportData) ) /*0x4b875f*/
           {
-            v13 = GetTeleportExtraData(v11);
-            v14 = sub_42B410(&v13->super);
-            sub_4D8AF0(v14);
-            v9 = v15;
+            v13 = TESObjectREFR_GetTeleportData(v11); /*0x4b876a*/
+            LinkedDoor = TeleportData_GetLinkedDoor(v13); /*0x4b8771*/
+            SpatialContainerAtPosition = TESObjectREFR_GetSpatialContainerAtPosition(LinkedDoor); /*0x4b877d*/
           }
         }
       }
     }
-    if ( WorldSpace )
+    if ( WorldSpace ) /*0x4b8783*/
     {
-      NiTPointerMap<int,bool>::NiTPointerMap<int,bool>((NiTPointerMap<int,bool> *)v41, 0x25u);
-      v16 = v37;
-      v17 = 0;
-      v18 = (_DWORD *)(v37 + 0x68);
-      v43 = 0;
-      v45 = 0;
-      v38 = 0;
-      if ( v37 != 0xFFFFFF98 )
+      NiTPointerMap<int,bool>::NiTPointerMap<int,bool>((NiTPointerMap<int,bool> *)v40, 0x25u); /*0x4b878f*/
+      v15 = v36; /*0x4b8794*/
+      v16 = 0; /*0x4b8798*/
+      v17 = (_DWORD *)(v36 + 0x68); /*0x4b879a*/
+      v42 = 0; /*0x4b879f*/
+      v44 = 0; /*0x4b87a3*/
+      v37 = 0; /*0x4b87a7*/
+      if ( v36 != 0xFFFFFF98 ) /*0x4b87ab*/
       {
-        do
+        do /*0x4b87bc*/
         {
-          if ( *v18 )
-            ++v17;
-          v18 = (_DWORD *)v18[1];
+          if ( *v17 ) /*0x4b87b0*/
+            ++v16; /*0x4b87b4*/
+          v17 = (_DWORD *)v17[1]; /*0x4b87b7*/
         }
-        while ( v18 );
-        v38 = v17;
+        while ( v17 ); /*0x4b87bc*/
+        v37 = v16; /*0x4b87be*/
       }
-      if ( v9 )
+      if ( SpatialContainerAtPosition ) /*0x4b87c4*/
       {
-        if ( v9 != WorldSpace )
+        if ( SpatialContainerAtPosition != (TESForm *)WorldSpace ) /*0x4b87ca*/
         {
-          v19 = (unsigned __int8 **)(v37 + 0x68);
-          if ( v37 != 0xFFFFFF98 )
+          v18 = (TESForm **)(v36 + 0x68); /*0x4b87cc*/
+          if ( v36 != 0xFFFFFF98 ) /*0x4b87d1*/
           {
-            do
+            do /*0x4b87d3*/
             {
-              v20 = v19[1];
-              if ( !v20 && !*v19 )
-                break;
-              if ( *v19 == v9 )
+              v19 = v18[1]; /*0x4b87d3*/
+              if ( !v19 && !*v18 ) /*0x4b87da*/
+                break; /*0x4b87da*/
+              if ( *v18 == SpatialContainerAtPosition ) /*0x4b87e0*/
               {
-                v45 = v17;
-                v21 = sub_4CB070(v9, WorldSpace, &v36);
-                v16 = v37;
-                v7 = (TESChildCELL *)v21;
-                v36 = 0;
-                break;
+                v44 = v16; /*0x4b87f5*/
+                v20 = (TESChildCELL *)DoorTeleport_FindRandomDestinationDoor( /*0x4b87f9*/
+                                        (TESObjectCELL *)SpatialContainerAtPosition,
+                                        (unsigned __int8 *)WorldSpace,
+                                        (TESObjectREFR **)&v35);// Verified call edge: DoorTeleport_SelectRandomDestinationDoor receives the matched listed space, current WorldSpace, and an output for an already-linked teleport door.
+                v15 = v36; /*0x4b87fe*/
+                v7 = v20; /*0x4b8805*/
+                v35 = 0; /*0x4b8807*/
+                break; /*0x4b8807*/
               }
-              v19 = (unsigned __int8 **)v19[1];
+              v18 = (TESForm **)v18[1]; /*0x4b87e2*/
             }
-            while ( v20 );
+            while ( v19 ); /*0x4b87d3*/
           }
         }
       }
-      v22 = TESDataHandler_g_PlayerRef;
-      v23 = 0xFFFFFFFF;
-      v39 = 0xFFFFFFFF;
-      v40 = sub_663EB0(v22, v16);
-      if ( v45 >= v17 )
+      v21 = reference; /*0x4b880b*/
+      v22 = 0xFFFFFFFF; /*0x4b8811*/
+      v38 = 0xFFFFFFFF; /*0x4b8815*/
+      v39 = (unsigned __int8)PlayerCharacter_GetLastSpaceForDoor(v21, v15);// Verified cross-reference: reads the player's remembered last-space index for this source door before random destination selection; the selected space is compared against this value to avoid an immediate repeat when possible. /*0x4b8825*/
+      if ( v44 >= v16 ) /*0x4b8829*/
       {
 LABEL_50:
-        if ( !v7 )
+        if ( !v7 ) /*0x4b892b*/
         {
-          if ( v36 )
+          if ( v35 ) /*0x4b8937*/
           {
-            if ( (*(_BYTE *)(v37 + 0x64) & 1) != 0 )
+            if ( (*(_BYTE *)(v36 + 0x64) & 1) != 0 ) /*0x4b8941*/
             {
-              RemoveExtraTeleportFromDoorRef(v36);
-              v32 = TESObjectREFR_GetWorldSpace((TESObjectREFR *)v36);
-              if ( v32 )
+              RemoveExtraTeleportFromDoorRef((TESObjectCELL **)v35); /*0x4b8944*/
+              v31 = TESObjectREFR_GetWorldSpace((TESObjectREFR *)v35); /*0x4b8950*/
+              if ( v31 ) /*0x4b8957*/
               {
-                sub_4F2630(v32, a2, a3, a4);
+                sub_4F2630((int)v31, a2, a3, a4); /*0x4b895b*/
               }
               else
               {
-                v33 = TESObjectREFR_GetParentCell((TESObjectREFR *)v36);
-                v34 = (int)v33;
-                if ( v33 )
+                v32 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v35); /*0x4b8966*/
+                v33 = v32; /*0x4b896b*/
+                if ( v32 ) /*0x4b896f*/
                 {
-                  if ( TESObjectCELL_IsInterior(v33) )
+                  if ( TESObjectCELL_IsInterior(v32) ) /*0x4b8973*/
                   {
-                    sub_4B8420(v42, 0x25u);
-                    LOBYTE(v43) = 1;
-                    sub_4CBE50(v34, a2, a3, a4, v42);
-                    NiTMap_Clear(v42);
-                    LOBYTE(v43) = 0;
-                    NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(v42);
+                    sub_4B8420(v41, 0x25u); /*0x4b8982*/
+                    LOBYTE(v42) = 1; /*0x4b898e*/
+                    sub_4CBE50(v33, a2, a3, a4, v41); /*0x4b8993*/
+                    NiTMap_Clear(v41); /*0x4b899c*/
+                    LOBYTE(v42) = 0; /*0x4b89a5*/
+                    NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(v41); /*0x4b89a9*/
                   }
                 }
               }
-              v7 = v36;
-              v23 = v39;
+              v7 = v35; /*0x4b89ae*/
+              v22 = v38; /*0x4b89b2*/
             }
           }
         }
       }
       else
       {
-        while ( !v7 )
+        while ( !v7 ) /*0x4b8837*/
         {
-          ++v45;
-          for ( i = GetRandomLargeInteger_(0) % v17; ; i = GetRandomLargeInteger_(0) % v38 )
+          ++v44; /*0x4b883d*/
+          for ( i = Game_RandomLargeInteger(0) % v16; ; i = Game_RandomLargeInteger(0) % v37 ) /*0x4b884d*/
           {
-            v23 = i;
-            v25 = (*(int (__thiscall **)(unsigned int *, unsigned int))(v41[0] + 4))(v41, i);
-            v26 = *(int **)(v41[2] + 4 * v25);
-            if ( !v26 )
-              break;
-            while ( !(*(unsigned __int8 (__thiscall **)(unsigned int *, int, int))(v41[0] + 8))(v41, v23, v26[1]) )
+            v22 = i; /*0x4b8853*/
+            v24 = (*(int (__thiscall **)(unsigned int *, unsigned int))(v40[0] + 4))(v40, i); /*0x4b885d*/
+            v25 = *(int **)(v40[2] + 4 * v24); /*0x4b8863*/
+            if ( !v25 ) /*0x4b8868*/
+              break; /*0x4b8868*/
+            while ( !(*(unsigned __int8 (__thiscall **)(unsigned int *, int, int))(v40[0] + 8))(v40, v22, v25[1]) ) /*0x4b8884*/
             {
-              v26 = (int *)*v26;
-              if ( !v26 )
-                goto LABEL_34;
+              v25 = (int *)*v25; /*0x4b8886*/
+              if ( !v25 ) /*0x4b888a*/
+                goto LABEL_34; /*0x4b888a*/
             }
-            if ( !*((_BYTE *)v26 + 8) )
-              break;
+            if ( !*((_BYTE *)v25 + 8) ) /*0x4b88ba*/
+              break; /*0x4b88ba*/
           }
 LABEL_34:
-          v27 = (unsigned __int8 **)(v37 + 0x68);
-          v28 = 0;
-          v29 = 0;
-          if ( v37 != 0xFFFFFF98 )
+          v26 = (TESObjectCELL **)(v36 + 0x68); /*0x4b888c*/
+          v27 = 0; /*0x4b8893*/
+          v28 = 0; /*0x4b8895*/
+          if ( v36 != 0xFFFFFF98 ) /*0x4b8899*/
           {
-            do
+            do /*0x4b88a0*/
             {
-              v30 = v27[1];
-              if ( !v30 && !*v27 )
-                break;
-              if ( v29 == v23 )
+              v29 = v26[1]; /*0x4b88a0*/
+              if ( !v29 && !*v26 ) /*0x4b88a7*/
+                break; /*0x4b88a7*/
+              if ( v28 == v22 ) /*0x4b88ad*/
               {
-                v28 = *v27;
-                break;
+                v27 = *v26; /*0x4b88d3*/
+                break; /*0x4b88d3*/
               }
-              v27 = (unsigned __int8 **)v27[1];
-              ++v29;
+              v26 = (TESObjectCELL **)v26[1]; /*0x4b88af*/
+              ++v28; /*0x4b88b1*/
             }
-            while ( v30 );
+            while ( v29 ); /*0x4b88a0*/
           }
-          v31 = (TESChildCELL *)sub_4CB070(v28, WorldSpace, &v36);
-          v7 = v31;
-          if ( v36 )
+          v30 = (TESChildCELL *)DoorTeleport_FindRandomDestinationDoor( /*0x4b88d5*/
+                                  v27,
+                                  (unsigned __int8 *)WorldSpace,
+                                  (TESObjectREFR **)&v35);// Verified call edge: DoorTeleport_SelectRandomDestinationDoor receives a randomly selected listed destination space and returns a random eligible destination door; caller tracks existing ExtraTeleport candidates and avoids a repeated space.
+          v7 = v30; /*0x4b88ec*/
+          if ( v35 ) /*0x4b88ee*/
           {
-            if ( v39 == 0xFFFFFFFF )
-              v39 = v23;
+            if ( v38 == 0xFFFFFFFF ) /*0x4b88f5*/
+              v38 = v22; /*0x4b88f7*/
           }
-          if ( v31 )
+          if ( v30 ) /*0x4b88fd*/
           {
-            if ( v23 == v40 )
+            if ( v22 == v39 ) /*0x4b8903*/
             {
-              v36 = v31;
-              v39 = v23;
-              v7 = 0;
+              v35 = v30; /*0x4b8905*/
+              v38 = v22; /*0x4b8909*/
+              v7 = 0; /*0x4b890d*/
             }
           }
-          NiTMap_SetAt(v41, v29, 1);
-          if ( v45 >= v38 )
-            goto LABEL_50;
-          v17 = v38;
+          NiTMap_SetAt(v40, v28, 1); /*0x4b8916*/
+          if ( v44 >= v37 ) /*0x4b8923*/
+            goto LABEL_50; /*0x4b8923*/
+          v16 = v37; /*0x4b8831*/
         }
       }
-      if ( v23 != 0xFFFFFFFF )
-        sub_663EE0(TESDataHandler_g_PlayerRef, v37, v23);
-      v43 = 0xFFFFFFFF;
-      NiTPointerMap<int,bool>::~NiTPointerMap<int,bool>(v41);
+      if ( v22 != 0xFFFFFFFF ) /*0x4b89b9*/
+        PlayerCharacter_SetLastSpaceForDoor(reference, v36, v22);// Verified cross-reference: commits the chosen destination-space index to the PlayerCharacter per-door last-space map after candidate selection. /*0x4b89c7*/
+      v42 = 0xFFFFFFFF; /*0x4b89d0*/
+      NiTPointerMap<int,bool>::~NiTPointerMap<int,bool>(v40); /*0x4b89d8*/
     }
   }
-  return v7;
+  return v7; /*0x4b89df*/
 }

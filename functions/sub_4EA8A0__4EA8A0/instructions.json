@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4EA8D4",
-    "line": "mov     [esp+104h+var_6C], edi",
+    "line": "mov     [esp+104h+slot], edi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4EA954",
-    "line": "call    nullsub_return0_0arg",
+    "line": "call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x4EABD4",
-    "line": "call    Rand3",
+    "line": "call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x4EAC20",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x4EAC56",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2338,5 +2338,59 @@
     "line": "fstp    st",
     "mnemonic": "fstp",
     "size": 2
+  },
+  {
+    "ea": "0x9B6150",
+    "line": "lea     ecx, [ebp+slot]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6153",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6158",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B615C",
+    "line": "lea     eax, [edx-0F4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B6162",
+    "line": "mov     ecx, [edx-0F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B6168",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B616A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B616F",
+    "line": "mov     eax, offset stru_AE1090",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6174",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

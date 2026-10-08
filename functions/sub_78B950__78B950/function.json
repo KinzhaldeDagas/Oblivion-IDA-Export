@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_78B950",
+  "chunks": [
+    [
+      "0x78B950",
+      "0x78BA93"
+    ],
+    [
+      "0x9CB680",
+      "0x9CB6AB"
+    ]
+  ],
+  "chunks_sha256": "13854c4cf1ff44359fdd8531e04be071ed93a02c1256966b7079cfaa021231b7",
+  "comment_regular": "CSpeedTreeRT::SetBranchWindMethod. Before Compute, mirrors the wind method to CWindEngine and branch geometry; disables vertex weighting for WIND_NONE and invalidates prior CPU-wind geometry when switching off.",
+  "comment_repeatable": "CSpeedTreeRT::SetBranchWindMethod. Before Compute, mirrors the wind method to CWindEngine and branch geometry; disables vertex weighting for WIND_NONE and invalidates prior CPU-wind geometry when switching off.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "CSpeedTreeRT__SetBranchWindMethod",
   "end_ea": "0x78BA93",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78B950",
+  "name": "CSpeedTreeRT__SetBranchWindMethod",
   "segment": ".text",
   "sha256": "3a199ef8479afcd4ba243f52e0821837042aaf380b925a7fe21853b5a6abfa0b",
   "size": 323,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78B950",
-  "type": "_DWORD *__userpurge@<eax>(int this@<ecx>, int@<edi>, int)",
-  "xrefs_from_count": 131,
+  "total_chunk_size": 366,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, int method)",
+  "xrefs_from_count": 144,
   "xrefs_to_count": 1
 }

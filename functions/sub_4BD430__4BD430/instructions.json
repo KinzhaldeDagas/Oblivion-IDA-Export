@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BD430",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified DistantLOD cell task producer: allocates a 0x2C DistantLODLoaderTaskData payload and stores cell/worldspace/mode plus instancedLODNode (+0x1C) and cellLODBuffer (+0x20). DistantLOD_UpdateExteriorGrid supplies the global scene node and a per-cell Ni2DBuffer. The generic bound-object callback retains the buffer in queued records; the tree override uses the node and ignores the buffer.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x4BD46B",
-    "line": "mov     edi, [esp+138h+arg_0]",
+    "line": "mov     edi, [esp+138h+worldspace]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BD472",
-    "line": "mov     eax, [esp+138h+arg_C]",
+    "line": "mov     eax, [esp+138h+instancedLODNode]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BD479",
-    "line": "mov     edx, [esp+138h+arg_10]",
+    "line": "mov     edx, [esp+138h+cellLODBuffer]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4BD484",
-    "line": "mov     [esp+138h+var_118], ecx",
+    "line": "mov     [esp+138h+ownerMap], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,31 +157,31 @@
   },
   {
     "ea": "0x4BD496",
-    "line": "mov     ebp, [esp+138h+arg_8]",
+    "line": "mov     ebp, [esp+138h+group_y]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BD49D",
-    "line": "mov     ebx, [esp+138h+arg_4]",
+    "line": "mov     ebx, [esp+138h+group_x]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BD4A4",
-    "line": "push    ebp",
+    "line": "push    ebp; groupY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD4A5",
-    "line": "push    ebx",
+    "line": "push    ebx; groupX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD4A6",
-    "line": "call    sub_4BDE80",
+    "line": "call    DistantLODLoaderTaskMap_HasCellTask; Verified duplicate-cell check: packs exterior coordinates and performs GetAt through map vtable +0x04. Releases the temporary task smart pointer and returns whether that cell already has a DistantLODLoaderTask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x4BD4B3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BD4B5",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x4BD4BE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BD4C0",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4BD4C7",
-    "line": "cmp     [esp+138h+arg_18], 2",
+    "line": "cmp     [esp+138h+lodMode], 2",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x4BD4D1",
-    "line": "push    ebp",
+    "line": "push    ebp; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD4D2",
-    "line": "push    ebx",
+    "line": "push    ebx; cellX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD4D3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BD4D5",
-    "line": "call    sub_4F0DA0",
+    "line": "call    TESWorldSpace_PassesCellLODFilter; Verified DistantLOD loader task filter: for task mode a8==2, it skips scheduling unless TESWorldSpace_PassesCellLODFilter allows this cell. Other modes bypass that cell-map check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4BD517",
-    "line": "mov     [esi+8], edi",
+    "line": "mov     [esi+8], edi; Verified: stores TESWorldSpace and exterior group coordinates in the loader payload; at the corresponding queue call, the pointer in +0x1C originates from global 0xB34424, the scene node later passed as TESObjectTREE_UpdateDistantBillboard.instancedNode.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x4BD51F",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Verified: stores the per-cell Ni2DBuffer at DistantLODLoaderTaskData.cellLODBuffer (+0x20); the base TESBoundObject update callback requires this pointer and retains it in each queued record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,25 +415,25 @@
   },
   {
     "ea": "0x4BD52C",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Verified: stores the distant instance scene node at DistantLODLoaderTaskData.instancedLODNode (+0x1C). DistantLOD_UpdateExteriorGrid supplies the global node at 0xB34424; the TESObjectTREE override requires this node to add distant billboard instances.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BD531",
-    "line": "mov     edx, [esp+138h+arg_18]",
+    "line": "mov     edx, [esp+138h+lodMode]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BD538",
-    "line": "push    ebp",
+    "line": "push    ebp; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD539",
-    "line": "push    ebx",
+    "line": "push    ebx; group_x",
     "mnemonic": "push",
     "size": 1
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x4BD53E",
-    "line": "mov     [esi+24h], edx",
+    "line": "mov     [esi+24h], edx; Verified stores the DistantLODLoadMode passed by DistantLOD_UpdateExteriorGrid into task-data +0x24; the worker forwards it to the external parser or worldspace override-record loader.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4BD541",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x4BD57B",
-    "line": "lea     eax, [esp+144h+var_114]",
+    "line": "lea     eax, [esp+144h+lodPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x4BD5A4",
-    "line": "lea     eax, [esp+144h+var_114]",
+    "line": "lea     eax, [esp+144h+lodPath]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4BD5B5",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Verified queue branch for external records: formats DistantLOD\\\\<EditorID>_X_Y.lod, checks that the file exists, and constructs a path-backed DistantLODLoaderTask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,25 +691,25 @@
   },
   {
     "ea": "0x4BD5CD",
-    "line": "mov     ecx, [esp+138h+var_118]",
+    "line": "mov     ecx, [esp+138h+ownerMap]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BD5D1",
-    "line": "mov     edx, [esp+138h+arg_14]",
+    "line": "mov     edx, [esp+138h+priorityIndex]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BD5D8",
-    "line": "push    esi",
+    "line": "push    esi; taskData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD5D9",
-    "line": "push    ecx",
+    "line": "push    ecx; ownerMap",
     "mnemonic": "push",
     "size": 1
   },
@@ -721,31 +721,31 @@
   },
   {
     "ea": "0x4BD5E1",
-    "line": "push    ecx",
+    "line": "push    ecx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD5E2",
-    "line": "lea     edx, [esp+144h+var_114]",
+    "line": "lea     edx, [esp+144h+lodPath]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4BD5E6",
-    "line": "push    edx",
+    "line": "push    edx; lodPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD5E7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BD5E9",
-    "line": "call    sub_4BCAC0",
+    "line": "call    DistantLODLoaderTask_ctorExternalLodFile; Verified task constructor for external .lod files: initializes the same owner/payload fields, sets the supplied DistantLOD\\\\<EditorID>_X_Y.lod path, and marks queued-file state for opening on the worker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x4BD5F2",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Verified queue branch for embedded records: used when externalLodFiles is false; creates DistantLODLoaderTask with no external file path, then LoadCellData searches the WorldSpace override chain.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,25 +799,25 @@
   },
   {
     "ea": "0x4BD60A",
-    "line": "mov     ecx, [esp+138h+var_118]",
+    "line": "mov     ecx, [esp+138h+ownerMap]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BD60E",
-    "line": "mov     edx, [esp+138h+arg_14]",
+    "line": "mov     edx, [esp+138h+priorityIndex]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BD615",
-    "line": "push    esi",
+    "line": "push    esi; taskData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD616",
-    "line": "push    ecx",
+    "line": "push    ecx; ownerMap",
     "mnemonic": "push",
     "size": 1
   },
@@ -829,19 +829,19 @@
   },
   {
     "ea": "0x4BD61E",
-    "line": "push    ecx",
+    "line": "push    ecx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD61F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BD621",
-    "line": "call    sub_4BCA90",
+    "line": "call    DistantLODLoaderTask_ctorEmbeddedRecordSource; Verified task constructor for the embedded-record source path: initializes IOTask, sets DistantLODLoaderTask vtable, stores owner map and DistantLODLoaderTaskData, and carries no external .lod path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x4BD659",
-    "line": "mov     ecx, [esp+140h+var_118]",
+    "line": "mov     ecx, [esp+140h+ownerMap]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x4BD667",
-    "line": "call    eax",
+    "line": "call    eax; Verified task registration: inserts the task into g_DistantLODLoaderTasksByCell under its packed exterior-cell label through map vtable +0x0C, then submits the task to IOManager.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x4BD675",
-    "line": "call    eax",
+    "line": "call    eax; Verified: after cell-key registration, submits the DistantLODLoaderTask to IOManager's task queue.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x4BD679",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BD67B",
-    "line": "call    sub_4BD230",
+    "line": "call    DistantLODLoaderTaskData_Destroy; Verified DistantLODLoaderTaskData destructor: frees every TESBoundObject-keyed cell payload/map, releases instancedLODNode (+0x1C) and cellLODBuffer (+0x20), then destroys the embedded map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x4BD681",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1198,5 +1198,173 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B4350",
+    "line": "mov     eax, [ebp-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4356",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4357",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B435C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B435D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B435E",
+    "line": "lea     ecx, [ebp-124h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4364",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4369",
+    "line": "mov     eax, [ebp-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B436F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4370",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4375",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4376",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4377",
+    "line": "mov     eax, [ebp-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B437D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B437E",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4383",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4384",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B4385",
+    "line": "mov     edx, [esp+group_x]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B4389",
+    "line": "lea     eax, [edx-128h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B438F",
+    "line": "mov     ecx, [edx-12Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B4395",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B4397",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B439C",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B439F",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B43A2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B43A4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B43A9",
+    "line": "mov     eax, offset stru_ADFA78",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B43AE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

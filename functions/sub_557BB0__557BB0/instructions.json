@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x557BDC",
-    "line": "push    offset sub_557B30; a5",
+    "line": "push    offset FaceGenEgtBasisBank_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x557BE1",
-    "line": "push    offset sub_6EF4A0; a4",
+    "line": "push    offset FaceGenEgtBasisBank_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x557C01",
-    "line": "mov     [esp+3Ch+var_10], 0Fh",
+    "line": "mov     [esp+3Ch+sourceString.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x557C09",
-    "line": "mov     [esp+3Ch+var_14], 0",
+    "line": "mov     [esp+3Ch+sourceString.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x557C11",
-    "line": "mov     byte ptr [esp+3Ch+var_24], 0",
+    "line": "mov     byte ptr [esp+3Ch+sourceString.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -211,25 +211,25 @@
   },
   {
     "ea": "0x557C2B",
-    "line": "push    eax; MaxCount",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x557C2C",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x557C2D",
-    "line": "lea     ecx, [esp+44h+var_28]",
+    "line": "lea     ecx, [esp+44h+sourceString]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x557C31",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,31 +241,31 @@
   },
   {
     "ea": "0x557C39",
-    "line": "push    eax",
+    "line": "push    eax; bank1",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x557C3A",
-    "line": "push    edi",
+    "line": "push    edi; bank0",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x557C3B",
-    "line": "lea     ecx, [esp+44h+var_28]",
+    "line": "lea     ecx, [esp+44h+sourceString]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x557C3F",
-    "line": "push    esi",
+    "line": "push    esi; coordinateMetadata",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x557C40",
-    "line": "push    ecx",
+    "line": "push    ecx; sourceString",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x557C46",
-    "line": "call    sub_6EFA20",
+    "line": "call    BSFaceGenEgtData_LoadFile; Load FREGT003 texture-morph data. Validate the magic, read the 56-byte descriptor, and materialize two banks of 64-byte RGB basis records. The descriptor supplies image dimensions and independent bank counts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x557C4E",
-    "line": "cmp     [esp+3Ch+var_10], 10h",
+    "line": "cmp     [esp+3Ch+sourceString.capacity], 10h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x557C55",
-    "line": "mov     edx, [esp+3Ch+var_24]",
+    "line": "mov     edx, dword ptr [esp+3Ch+sourceString.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x557C5A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -376,5 +376,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BC6A0",
+    "line": "push    offset FaceGenEgtBasisBank_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6A5",
+    "line": "push    2; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC6A7",
+    "line": "push    10h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC6A9",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6AC",
+    "line": "add     eax, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6AF",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC6B0",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6B5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC6B6",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6B9",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6BE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BC6C2",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6C5",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6C8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC6CA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6CF",
+    "line": "mov     eax, offset stru_AE6300",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6D4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

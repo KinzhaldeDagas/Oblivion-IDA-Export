@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46B680",
-    "line": "push    edi",
+    "line": "push    edi; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x46B69D",
-    "line": "mov     eax, edx",
+    "line": "mov     eax, edx; Update result on every non-null file entry; no merge traversal occurs when caller passes -1.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x46B6AD",
-    "line": "pop     edi",
+    "line": "pop     edi; For TESTopicInfo::GetResponseList this returned final TESFile is paired with the single sourceFileOffset stored by the last INFO loader invocation.",
     "mnemonic": "pop",
     "size": 1
   },

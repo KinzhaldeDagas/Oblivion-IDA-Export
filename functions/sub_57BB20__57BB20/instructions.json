@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x57BB20",
-    "line": "push    esi; int",
+    "line": "push    esi; AchievementsNative evidence: magic-item popup wrapper. Args observed from InventoryMenu hover: data pointer, exposed popup X, source row Y, bottom margin, inventory entry, popup depth; opens/validates MagicPopupMenu then forwards to 0x5B4230.",
     "mnemonic": "push",
     "size": 1
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x57BBA6",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x57BBAB",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x57BBB0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x57BBDD",
-    "line": "call    sub_5B4230",
+    "line": "call    sub_5B4230; AchievementsNative evidence: MagicPopupMenu builder for magic/effect items. Sets root user0=source Y, user1=bottom margin, user3=depth; stores exposed popup X at +0x50 and hidden X at +0x54 (exposed X minus background width).",
     "mnemonic": "call",
     "size": 5
   },

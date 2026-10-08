@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4F01F0",
+  "chunks": [
+    [
+      "0x4F01F0",
+      "0x4F02B0"
+    ]
+  ],
+  "chunks_sha256": "f4463d78cd3ff3576a028bc604456fb6de8ff819265bc8e7884fee56542729e5",
+  "comment_regular": "Verified: symmetric removal from the coordinate-indexed list or fallbackReferences under the shared WorldSpace reference-index critical section; removes an empty per-cell list/map entry.",
+  "comment_repeatable": "Verified: symmetric removal from the coordinate-indexed list or fallbackReferences under the shared WorldSpace reference-index critical section; removes an empty per-cell list/map entry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "TESWorldSpace_RemoveIndexedReference",
   "end_ea": "0x4F02B0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F01F0",
+  "name": "TESWorldSpace_RemoveIndexedReference",
   "segment": ".text",
   "sha256": "f4463d78cd3ff3576a028bc604456fb6de8ff819265bc8e7884fee56542729e5",
   "size": 192,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F01F0",
-  "type": "void __thiscall(_DWORD *this, TESObjectREFR *a2)",
+  "total_chunk_size": 192,
+  "type": "void __thiscall(TESWorldSpace *this, TESObjectREFR *reference)",
   "xrefs_from_count": 84,
   "xrefs_to_count": 1
 }

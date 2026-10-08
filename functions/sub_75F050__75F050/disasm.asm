@@ -4,7 +4,7 @@
 0x75F056: push    edi
 0x75F057: push    esi
 0x75F058: mov     edi, ecx
-0x75F05A: call    nullsub_returnvVoid_1arg
+0x75F05A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x75F05F: mov     eax, [esi+220h]
 0x75F065: push    1
 0x75F067: lea     ecx, [esp+10h+arg_0]

@@ -40,7 +40,6 @@
 0x57FFC6: mov     eax, [ebx]
 0x57FFC8: lea     edx, [eax+1]
 0x57FFCB: jmp     short loc_57FFD0
-0x57FFCD: align 10h
 0x57FFD0: mov     cl, [eax]
 0x57FFD2: add     eax, 1
 0x57FFD5: test    cl, cl

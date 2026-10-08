@@ -25,7 +25,7 @@
 0x50A461: push    edx; a3
 0x50A462: push    ecx; a2
 0x50A463: push    eax; a1
-0x50A464: call    Script_ExtractArgs
+0x50A464: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50A469: add     esp, 20h
 0x50A46C: test    al, al
 0x50A46E: jnz     short loc_50A477
@@ -88,12 +88,12 @@
 0x50A513: jz      loc_50A5C4
 0x50A519: push    0FFFFFFFFh; a2
 0x50A51B: mov     ecx, esi; this
-0x50A51D: call    TESForm_GetOverrideFile
+0x50A51D: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x50A522: test    eax, eax
 0x50A524: jz      loc_50A5C4
 0x50A52A: push    0FFFFFFFFh; a2
 0x50A52C: mov     ecx, esi; this
-0x50A52E: call    TESForm_GetOverrideFile
+0x50A52E: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x50A533: add     eax, 1Ch
 0x50A536: push    eax
 0x50A537: lea     eax, [esp+123Ch+Buffer]
@@ -120,7 +120,7 @@
 0x50A56F: push    eax; lpSystemTime
 0x50A570: push    0FFFFFFFFh; a2
 0x50A572: mov     ecx, esi; this
-0x50A574: call    TESForm_GetOverrideFile
+0x50A574: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x50A579: mov     ecx, eax
 0x50A57B: call    TESFile_GetLastWriteTime
 0x50A580: movzx   ecx, [esp+1238h+var_1224.wMinute]
@@ -167,7 +167,7 @@
 0x50A5F7: push    edx; lpBuffer
 0x50A5F8: push    edi; hFile
 0x50A5F9: call    ebx ; WriteFile
-0x50A5FB: push    offset byte_B34190
+0x50A5FB: push    0B34190h
 0x50A600: lea     eax, [esp+123Ch+Buffer]
 0x50A604: push    offset aS_5; "%s\t"
 0x50A609: push    eax
@@ -220,10 +220,10 @@
 0x50A688: push    edi; hFile
 0x50A689: call    ebx ; WriteFile
 0x50A68B: mov     ecx, esi; this
-0x50A68D: call    TESObjectREFR_GetParentCell
+0x50A68D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x50A692: mov     ebp, eax
 0x50A694: mov     ecx, ebp; this
-0x50A696: call    TESObjectCELL_IsInterior
+0x50A696: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x50A69B: test    al, al
 0x50A69D: mov     ecx, ebp; this
 0x50A69F: jnz     short loc_50A6D1
@@ -273,7 +273,7 @@
 0x50A71B: call    eax
 0x50A71D: fld     dword ptr [eax]
 0x50A71F: sub     esp, 8
-0x50A722: fstp    [esp+1240h+var_1240]
+0x50A722: fstp    qword ptr [esp+1240h+var_1240]
 0x50A725: lea     ecx, [esp+1240h+Buffer]
 0x50A729: push    offset a_0f; "%.0f\t"
 0x50A72E: push    ecx
@@ -301,7 +301,7 @@
 0x50A765: call    eax
 0x50A767: fld     dword ptr [eax+4]
 0x50A76A: sub     esp, 8
-0x50A76D: fstp    [esp+1240h+var_1240]
+0x50A76D: fstp    qword ptr [esp+1240h+var_1240]
 0x50A770: lea     ecx, [esp+1240h+Buffer]
 0x50A774: push    offset a_0f; "%.0f\t"
 0x50A779: push    ecx
@@ -329,7 +329,7 @@
 0x50A7B5: call    eax
 0x50A7B7: fld     dword ptr [eax+8]
 0x50A7BA: sub     esp, 8
-0x50A7BD: fstp    [esp+1240h+var_1240]
+0x50A7BD: fstp    qword ptr [esp+1240h+var_1240]
 0x50A7C0: lea     ecx, [esp+1240h+Buffer]
 0x50A7C4: push    offset a_0f; "%.0f\t"
 0x50A7C9: push    ecx

@@ -1,8 +1,8 @@
-0x7878F0: mov     eax, ecx
+0x7878F0: mov     eax, ecx; Oblivion legacy CSimpleBillboard cache: lazily scales the 12-float unit quad by tree width/height and marks the 0x34-byte cache valid.
 0x7878F2: cmp     byte ptr [eax+30h], 0
 0x7878F6: jnz     locret_787993
 0x7878FC: fld     dword ptr ds:0B2BA7Ch
-0x787902: fld     [esp+arg_0]
+0x787902: fld     [esp+width]
 0x787906: fld     st
 0x787908: fmulp   st(2), st
 0x78790A: fxch    st(1)
@@ -11,7 +11,7 @@
 0x787914: fmul    st, st(1)
 0x787916: fstp    dword ptr [eax+4]
 0x787919: fld     dword ptr ds:0B2BA84h
-0x78791F: fld     [esp+arg_4]
+0x78791F: fld     [esp+height]
 0x787923: fld     st
 0x787925: fmulp   st(2), st
 0x787927: fxch    st(1)

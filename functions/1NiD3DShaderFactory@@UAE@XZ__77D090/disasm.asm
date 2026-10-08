@@ -38,26 +38,26 @@
 0x77D0ED: jb      short loc_77D0E0
 0x77D0EF: xor     eax, eax
 0x77D0F1: test    eax, eax
-0x77D0F3: mov     [esp+18h+var_8], eax
+0x77D0F3: mov     [esp+18h+position], eax
 0x77D0F7: pop     ebx
 0x77D0F8: jz      short loc_77D139
 0x77D0FA: lea     ebx, [ebx+0]
-0x77D100: lea     eax, [esp+14h+var_C]
-0x77D104: push    eax
-0x77D105: lea     ecx, [esp+18h+var_4]
-0x77D109: push    ecx
-0x77D10A: lea     edx, [esp+1Ch+var_8]
-0x77D10E: push    edx
-0x77D10F: mov     ecx, edi
-0x77D111: mov     [esp+20h+var_C], 0
-0x77D119: call    sub_452600
-0x77D11E: cmp     [esp+14h+var_C], 0
+0x77D100: lea     eax, [esp+14h+valueOut]
+0x77D104: push    eax; valueOut
+0x77D105: lea     ecx, [esp+18h+keyOut]
+0x77D109: push    ecx; keyOut
+0x77D10A: lea     edx, [esp+1Ch+position]
+0x77D10E: push    edx; position
+0x77D10F: mov     ecx, edi; self
+0x77D111: mov     [esp+20h+valueOut], 0
+0x77D119: call    NiTMap_U32Pointer_GetNextEntry
+0x77D11E: cmp     [esp+14h+valueOut], 0
 0x77D123: jz      short loc_77D132
-0x77D125: mov     eax, [esp+14h+var_4]
+0x77D125: mov     eax, [esp+14h+keyOut]
 0x77D129: push    eax
 0x77D12A: call    sub_77CB50
 0x77D12F: add     esp, 4
-0x77D132: cmp     [esp+14h+var_8], 0
+0x77D132: cmp     [esp+14h+position], 0
 0x77D137: jnz     short loc_77D100
 0x77D139: mov     ecx, edi
 0x77D13B: mov     dword ptr [esi+14h], 0

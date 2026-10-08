@@ -11,38 +11,38 @@ void __thiscall sub_4A61E0(_DWORD *this, float a2, int a3, float a4)
   float v13; // [esp+8h] [ebp+4h]
   float v14; // [esp+10h] [ebp+Ch]
 
-  v4 = a2;
-  v6 = fCostant_100;
-  if ( a2 > 1.0 )
-    v4 = v4 / v6;
-  v7 = v6;
-  v8 = v4;
-  v9 = v7;
-  v13 = v8;
-  if ( a4 <= 1.0 )
-    v10 = a4;
+  v4 = a2; /*0x4a61e3*/
+  v6 = fCostant_100; /*0x4a61ed*/
+  if ( a2 > 1.0 ) /*0x4a61f6*/
+    v4 = v4 / v6; /*0x4a61f8*/
+  v7 = v6; /*0x4a61fa*/
+  v8 = v4; /*0x4a61fa*/
+  v9 = v7; /*0x4a61fa*/
+  v13 = v8; /*0x4a61fc*/
+  if ( a4 <= 1.0 ) /*0x4a620b*/
+    v10 = a4; /*0x4a6211*/
   else
-    v10 = a4 / v9;
-  v14 = v10;
-  if ( a3 )
+    v10 = a4 / v9; /*0x4a620d*/
+  v14 = v10; /*0x4a6217*/
+  if ( a3 ) /*0x4a621d*/
   {
-    if ( v13 >= 0.0 && v13 <= 1.0 && v14 >= 0.0 && v14 <= 1.0 )
+    if ( v13 >= 0.0 && v13 <= 1.0 && v14 >= 0.0 && v14 <= 1.0 ) /*0x4a624d*/
     {
-      v11 = (_DWORD *)(a3 + 4);
-      if ( a3 != 0xFFFFFFFC )
+      v11 = (_DWORD *)(a3 + 4); /*0x4a6250*/
+      if ( a3 != 0xFFFFFFFC ) /*0x4a6255*/
       {
-        do
+        do /*0x4a6280*/
         {
-          if ( !*v11 )
-            break;
-          if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*v11 + 4))(*v11) )
+          if ( !*v11 ) /*0x4a6257*/
+            break; /*0x4a625b*/
+          if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*v11 + 4))(*v11) ) /*0x4a6262*/
           {
-            v12 = (*(int (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)*v11 + 0x14))(*v11, 0);
-            sub_4A60E0(this, v12);
+            v12 = (*(int (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)*v11 + 0x14))(*v11, 0); /*0x4a6271*/
+            sub_4A60E0(this, v12); /*0x4a6276*/
           }
-          v11 = (_DWORD *)v11[1];
+          v11 = (_DWORD *)v11[1]; /*0x4a627b*/
         }
-        while ( v11 );
+        while ( v11 ); /*0x4a6280*/
       }
     }
   }

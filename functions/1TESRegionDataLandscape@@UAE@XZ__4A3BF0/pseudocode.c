@@ -1,13 +1,13 @@
 void __thiscall TESRegionDataLandscape::~TESRegionDataLandscape(TESRegionDataLandscape *this)
 {
-  _DWORD *v2; // edi
+  TESTexture *canopyShadowTexture; // edi
 
-  *(_DWORD *)this = &TESRegionDataLandscape::`vftable';
-  v2 = *((_DWORD **)this + 2);
-  if ( v2 )
+  this->base.vtable = (TESRegionDataVtable *)&TESRegionDataLandscape::`vftable'; /*0x4a3c19*/
+  canopyShadowTexture = this->canopyShadowTexture; /*0x4a3c1f*/
+  if ( canopyShadowTexture ) /*0x4a3c2c*/
   {
-    TESTexture_destr(v2);
-    FormHeapFree((unsigned int)v2);
+    TESTexture_destr(canopyShadowTexture); /*0x4a3c30*/
+    FormHeapFree((unsigned int)canopyShadowTexture); /*0x4a3c36*/
   }
-  sub_4A3510(this);
+  TESRegionData_SetBaseVTable(this); /*0x4a3c48*/
 }

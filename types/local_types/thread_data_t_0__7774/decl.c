@@ -1,1 +1,1 @@
-thread_data_t_0
+typedef __thread_data_0 thread_data_t_0;

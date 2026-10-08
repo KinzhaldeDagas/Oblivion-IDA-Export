@@ -1,19 +1,36 @@
 {
-  "callees_count": 149,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 51,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x498340",
+      "0x498EAA"
+    ],
+    [
+      "0x9B0410",
+      "0x9B045A"
+    ]
+  ],
+  "chunks_sha256": "2f344c84815059dc017a9a897570df5715bd04edf761811a48070772d81d4096",
+  "comment_regular": "\nV179 interior-distance audit: copies fLightLOD1 value B06EAC to renderer B4307C and fLightLOD2 B06EB4 to B43080. User INI values are1000/1500. Extra projector thresholds B43084/B43088 are separate and are not part of the new DX11 interior range override.",
   "comment_repeatable": "",
-  "data_refs_count": 46,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 71,
   "display_name": "CreateWindowAndInitialize",
   "end_ea": "0x498EAA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "CreateWindowAndInitialize",
   "segment": ".text",
   "sha256": "4089efa48616161457bf879435cd7f06c38a4a32ab9e73c89b23279d9a26d14b",
   "size": 2922,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x498340",
+  "total_chunk_size": 2996,
   "type": "int __cdecl(HWND, HINSTANCE)",
-  "xrefs_from_count": 990,
+  "xrefs_from_count": 1014,
   "xrefs_to_count": 1
 }

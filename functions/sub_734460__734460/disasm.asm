@@ -74,7 +74,6 @@
 0x73455D: mov     [esp+94h+var_74], edx
 0x734561: jbe     loc_7346D3
 0x734567: jmp     short loc_734574
-0x734569: align 10h
 0x734570: mov     edx, [esp+94h+var_74]
 0x734574: mov     ecx, [esi+5Ch]
 0x734577: mov     ebx, [esi+60h]
@@ -207,3 +206,19 @@
 0x7346FB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x734700: add     esp, 80h
 0x734706: retn    4
+0x9CA9E0: mov     eax, [ebp-64h]
+0x9CA9E3: push    eax
+0x9CA9E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA9E9: pop     ecx
+0x9CA9EA: retn
+0x9CA9EB: mov     edx, [esp+arg_4]
+0x9CA9EF: lea     eax, [edx-84h]
+0x9CA9F5: mov     ecx, [edx-88h]
+0x9CA9FB: xor     ecx, eax
+0x9CA9FD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAA02: add     eax, 10h
+0x9CAA05: mov     ecx, [edx-4]
+0x9CAA08: xor     ecx, eax
+0x9CAA0A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAA0F: mov     eax, offset stru_AF3064
+0x9CAA14: jmp     ___CxxFrameHandler3

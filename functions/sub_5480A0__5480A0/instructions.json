@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5480A0",
-    "line": "sub     esp, 28h",
+    "line": "sub     esp, 28h; Oblivion native attribute-bonus lookup. skillIncreaseCount <= 0 returns 1; values >= 10 use iLevelUp10Mult. Constructor defaults: counts 1-4 => x2, 5-7 => x3, 8-9 => x4, 10+ => x5.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x5480A3",
-    "line": "mov     ecx, [esp+28h+arg_0]",
+    "line": "mov     ecx, [esp+28h+skillIncreaseCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,61 +25,61 @@
   },
   {
     "ea": "0x5480AF",
-    "line": "mov     [esp+28h+var_28], offset iLevelUp01Mult",
+    "line": "mov     [esp+28h+var_28], offset g_iLevelUp01Mult",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x5480B6",
-    "line": "mov     [esp+28h+var_24], offset iLevelUp02Mult",
+    "line": "mov     [esp+28h+var_24], offset g_iLevelUp02Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480BE",
-    "line": "mov     [esp+28h+var_20], offset unk_B37630",
+    "line": "mov     [esp+28h+var_20], offset g_iLevelUp03Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480C6",
-    "line": "mov     [esp+28h+var_1C], offset unk_B37638",
+    "line": "mov     [esp+28h+var_1C], offset g_iLevelUp04Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480CE",
-    "line": "mov     [esp+28h+var_18], offset unk_B37640",
+    "line": "mov     [esp+28h+var_18], offset g_iLevelUp05Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480D6",
-    "line": "mov     [esp+28h+var_14], offset unk_B37648",
+    "line": "mov     [esp+28h+var_14], offset g_iLevelUp06Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480DE",
-    "line": "mov     [esp+28h+var_10], offset unk_B37650",
+    "line": "mov     [esp+28h+var_10], offset g_iLevelUp07Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480E6",
-    "line": "mov     [esp+28h+var_C], offset iLevelUp08Mult",
+    "line": "mov     [esp+28h+var_C], offset g_iLevelUp08Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480EE",
-    "line": "mov     [esp+28h+var_8], offset unk_B37660",
+    "line": "mov     [esp+28h+var_8], offset g_iLevelUp09Mult",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5480F6",
-    "line": "mov     [esp+28h+var_4], offset iLevelUp10Mult",
+    "line": "mov     [esp+28h+var_4], offset g_iLevelUp10Mult",
     "mnemonic": "mov",
     "size": 8
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x548119",
-    "line": "mov     ecx, offset dword_B35464",
+    "line": "mov     ecx, offset flt_B35464",
     "mnemonic": "mov",
     "size": 5
   },

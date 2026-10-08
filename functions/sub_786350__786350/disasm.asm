@@ -1,4 +1,4 @@
-0x786350: push    0FFFFFFFFh
+0x786350: push    0FFFFFFFFh; stBezierSpline evenly-spaced point/table builder. Called after parsing a new profile string, with 0x1F4 samples in the observed constructor path.
 0x786352: push    offset SEH_786350
 0x786357: mov     eax, large fs:0
 0x78635D: push    eax
@@ -14,44 +14,44 @@
 0x786371: mov     large fs:0, eax
 0x786377: mov     [esp+6Ch+var_4C], ecx
 0x78637B: xor     edi, edi
-0x78637D: mov     [esp+6Ch+var_30], edi
-0x786381: mov     [esp+6Ch+var_2C], edi
-0x786385: mov     [esp+6Ch+var_28], edi
-0x786389: mov     ebp, [esp+6Ch+arg_0]
-0x78638D: push    ebp
-0x78638E: lea     ecx, [esp+70h+var_34]
+0x78637D: mov     [esp+6Ch+var_34.begin], edi
+0x786381: mov     [esp+6Ch+var_34.end], edi
+0x786385: mov     [esp+6Ch+var_34.capacityEnd], edi
+0x786389: mov     ebp, [esp+6Ch+count]
+0x78638D: push    ebp; count
+0x78638E: lea     ecx, [esp+70h+var_34]; this
 0x786392: mov     [esp+70h+var_4], edi
-0x786396: call    sub_785E00
+0x786396: call    OB_stVector_stVec_ResizeDefault_010201A0; Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.
 0x78639B: cmp     ebp, edi
 0x78639D: jbe     loc_786461
 0x7863A3: mov     eax, ebp
 0x7863A5: test    eax, eax
-0x7863A7: mov     [esp+6Ch+arg_0], eax
-0x7863AB: fild    [esp+6Ch+arg_0]
+0x7863A7: mov     [esp+6Ch+count], eax
+0x7863AB: fild    [esp+6Ch+count]
 0x7863AF: jge     short loc_7863B7
 0x7863B1: fadd    dword ptr ds:0A2FC78h
 0x7863B7: fstp    [esp+6Ch+var_48]
-0x7863BB: mov     [esp+6Ch+arg_0], edi
+0x7863BB: mov     [esp+6Ch+count], edi
 0x7863BF: mov     ecx, edi
 0x7863C1: test    ecx, ecx
-0x7863C3: mov     [esp+6Ch+var_3C], ecx
-0x7863C7: fild    [esp+6Ch+var_3C]
+0x7863C3: mov     [esp+6Ch+var_3C.owner], ecx
+0x7863C7: fild    [esp+6Ch+var_3C.owner]
 0x7863CB: jge     short loc_7863D3
 0x7863CD: fadd    dword ptr ds:0A2FC78h
 0x7863D3: fdiv    [esp+6Ch+var_48]
 0x7863D7: push    ecx
-0x7863D8: mov     ecx, [esp+70h+var_4C]
-0x7863DC: lea     edx, [esp+70h+var_24]
+0x7863D8: mov     ecx, [esp+70h+var_4C]; this
+0x7863DC: lea     edx, [esp+70h+result]
 0x7863E0: fstp    [esp+70h+var_40]
 0x7863E4: fld     [esp+70h+var_40]
-0x7863E8: fstp    [esp+70h+var_70]; float
-0x7863EB: push    edx; int
-0x7863EC: call    sub_7844A0
-0x7863F1: mov     ebx, [esp+6Ch+var_30]
+0x7863E8: fstp    [esp+70h+v]; percent
+0x7863EB: push    edx; result
+0x7863EC: call    OB_StBezierSpline_SampleControlCurve_010201A0; Oblivion compact stBezierSpline control-curve sampler. Constructs a 2D result, clamps percent to [0,1], returns the terminal control point at the final segment, otherwise cubic-interpolates four splinePoints records. Sole caller is CreateEvenlySpacedPoints.
+0x7863F1: mov     ebx, [esp+6Ch+var_34.begin]
 0x7863F5: test    ebx, ebx
 0x7863F7: mov     esi, eax
 0x7863F9: jz      short loc_786416
-0x7863FB: mov     ecx, [esp+6Ch+var_2C]
+0x7863FB: mov     ecx, [esp+6Ch+var_34.end]
 0x7863FF: sub     ecx, ebx
 0x786401: mov     eax, 2AAAAAABh
 0x786406: imul    ecx
@@ -62,9 +62,9 @@
 0x786412: cmp     edi, eax
 0x786414: jb      short loc_78641F
 0x786416: call    __invalid_parameter_noinfo
-0x78641B: mov     ebx, [esp+6Ch+var_30]
+0x78641B: mov     ebx, [esp+6Ch+var_34.begin]
 0x78641F: mov     ecx, [esi]
-0x786421: mov     eax, [esp+6Ch+arg_0]
+0x786421: mov     eax, [esp+6Ch+count]
 0x786425: mov     [eax+ebx], ecx
 0x786428: mov     edx, [esi+4]
 0x78642B: add     eax, ebx
@@ -76,10 +76,10 @@
 0x78643C: mov     ecx, [esi+10h]
 0x78643F: mov     [eax+10h], ecx
 0x786442: mov     edx, [esi+14h]
-0x786445: lea     ecx, [esp+6Ch+var_24]; void *
+0x786445: lea     ecx, [esp+6Ch+result]; this
 0x786449: mov     [eax+14h], edx
-0x78644C: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
-0x786451: add     [esp+6Ch+arg_0], 18h
+0x78644C: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x786451: add     [esp+6Ch+count], 18h
 0x786456: add     edi, 1
 0x786459: cmp     edi, ebp
 0x78645B: jb      loc_7863BF
@@ -95,21 +95,21 @@
 0x78647F: jbe     short loc_786486
 0x786481: call    __invalid_parameter_noinfo
 0x786486: push    esi
-0x786487: push    ebx
+0x786487: push    ebx; last
 0x786488: push    edi
-0x786489: push    ebx
+0x786489: push    ebx; first
 0x78648A: lea     eax, [esp+7Ch+var_3C]
-0x78648E: push    eax
-0x78648F: mov     ecx, ebx
-0x786491: call    sub_784AC0
-0x786496: push    ebp
-0x786497: mov     ecx, ebx
-0x786499: call    sub_785E00
+0x78648E: push    eax; result
+0x78648F: mov     ecx, ebx; this
+0x786491: call    OB_stVector24_EraseRange_010201A0; Oblivion 1.2.0.416: checked erase(first,last) for 0x18-byte records; compacts the tail, destroys remnants, updates end, and returns an iterator.
+0x786496: push    ebp; count
+0x786497: mov     ecx, ebx; this
+0x786499: call    OB_stVector_stVec_ResizeDefault_010201A0; Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.
 0x78649E: mov     esi, [esp+6Ch+var_4C]
 0x7864A2: mov     eax, [esi+10h]
 0x7864A5: xor     edi, edi
 0x7864A7: test    eax, eax
-0x7864A9: mov     [esp+6Ch+arg_0], edi
+0x7864A9: mov     [esp+6Ch+count], edi
 0x7864AD: jz      short loc_7864C7
 0x7864AF: mov     ecx, [esi+14h]
 0x7864B2: sub     ecx, eax
@@ -154,14 +154,14 @@
 0x786526: mov     [esp+6Ch+var_54], eax
 0x78652A: jbe     loc_7867F2
 0x786530: test    ebp, ebp
-0x786532: mov     [esp+6Ch+var_3C], ebp
-0x786536: fild    [esp+6Ch+var_3C]
+0x786532: mov     [esp+6Ch+var_3C.owner], ebp
+0x786536: fild    [esp+6Ch+var_3C.owner]
 0x78653A: jge     short loc_786542
 0x78653C: fadd    dword ptr ds:0A2FC78h
 0x786542: fstp    [esp+6Ch+var_48]
 0x786546: mov     [esp+6Ch+var_44], 18h
 0x78654E: jmp     short loc_786558
-0x786550: mov     edi, [esp+6Ch+arg_0]
+0x786550: mov     edi, [esp+6Ch+count]
 0x786554: mov     eax, [esp+6Ch+var_54]
 0x786558: mov     ecx, [esp+6Ch+var_50]
 0x78655C: fild    [esp+6Ch+var_50]
@@ -174,14 +174,14 @@
 0x786572: fstp    [esp+6Ch+var_58]
 0x786576: jnb     loc_78661A
 0x78657C: lea     ebx, [edi+edi*2]
-0x78657F: mov     edi, [esp+6Ch+var_30]
+0x78657F: mov     edi, [esp+6Ch+var_34.begin]
 0x786583: add     ebx, ebx
 0x786585: add     ebx, ebx
 0x786587: add     ebx, ebx
 0x786589: lea     esp, [esp+0]
 0x786590: test    edi, edi
 0x786592: jz      short loc_7865AF
-0x786594: mov     ecx, [esp+6Ch+var_2C]
+0x786594: mov     ecx, [esp+6Ch+var_34.end]
 0x786598: sub     ecx, edi
 0x78659A: mov     eax, 2AAAAAABh
 0x78659F: imul    ecx
@@ -192,7 +192,7 @@
 0x7865AB: cmp     esi, eax
 0x7865AD: jb      short loc_7865B8
 0x7865AF: call    __invalid_parameter_noinfo
-0x7865B4: mov     edi, [esp+6Ch+var_30]
+0x7865B4: mov     edi, [esp+6Ch+var_34.begin]
 0x7865B8: fld     [esp+6Ch+var_58]
 0x7865BC: fld     dword ptr [ebx+edi]
 0x7865BF: fcompp
@@ -201,7 +201,7 @@
 0x7865C6: jp      short loc_786604
 0x7865C8: test    edi, edi
 0x7865CA: jz      short loc_7865EA
-0x7865CC: mov     ecx, [esp+6Ch+var_2C]
+0x7865CC: mov     ecx, [esp+6Ch+var_34.end]
 0x7865D0: sub     ecx, edi
 0x7865D2: mov     eax, 2AAAAAABh
 0x7865D7: imul    ecx
@@ -213,7 +213,7 @@
 0x7865E6: cmp     edx, eax
 0x7865E8: jb      short loc_7865F3
 0x7865EA: call    __invalid_parameter_noinfo
-0x7865EF: mov     edi, [esp+6Ch+var_30]
+0x7865EF: mov     edi, [esp+6Ch+var_34.begin]
 0x7865F3: fld     [esp+6Ch+var_58]
 0x7865F7: fld     dword ptr [ebx+edi+18h]
 0x7865FB: fcompp
@@ -225,22 +225,22 @@
 0x78660A: cmp     esi, [esp+6Ch+var_54]
 0x78660E: jb      short loc_786590
 0x786610: jmp     short loc_786616
-0x786612: mov     [esp+6Ch+arg_0], esi
-0x786616: mov     edi, [esp+6Ch+arg_0]
+0x786612: mov     [esp+6Ch+count], esi
+0x786616: mov     edi, [esp+6Ch+count]
 0x78661A: fldz
 0x78661C: sub     esp, 14h
-0x78661F: fst     [esp+80h+var_70]; float
-0x786623: lea     ecx, [esp+80h+var_24]
-0x786627: fst     [esp+80h+var_74]; float
-0x78662B: fst     [esp+80h+var_78]; float
-0x78662F: fstp    [esp+80h+var_7C]; float
+0x78661F: fst     [esp+80h+v]; v
+0x786623: lea     ecx, [esp+80h+result]; this
+0x786627: fst     [esp+80h+w]; w
+0x78662B: fst     [esp+80h+z]; z
+0x78662F: fstp    [esp+80h+y]; y
 0x786633: fld     [esp+80h+var_58]
-0x786637: fstp    [esp+80h+var_80]; float
-0x78663A: call    sub_78E5D0
-0x78663F: mov     ecx, [esp+6Ch+var_30]
+0x786637: fstp    [esp+80h+x]; x
+0x78663A: call    OB_stVec_ctor_xyzwv_010201A0; Oblivion five-component stVec constructor: stores x/y/z/w/v and sets logical size to 5. Exact body corroborated by RT4.1 Vec.cpp.
+0x78663F: mov     ecx, [esp+6Ch+var_34.begin]
 0x786643: test    ecx, ecx
 0x786645: jz      short loc_786664
-0x786647: mov     esi, [esp+6Ch+var_2C]
+0x786647: mov     esi, [esp+6Ch+var_34.end]
 0x78664B: mov     edx, esi
 0x78664D: sub     edx, ecx
 0x78664F: mov     eax, 2AAAAAABh
@@ -252,8 +252,8 @@
 0x786660: cmp     edi, eax
 0x786662: jb      short loc_786671
 0x786664: call    __invalid_parameter_noinfo
-0x786669: mov     esi, [esp+6Ch+var_2C]
-0x78666D: mov     ecx, [esp+6Ch+var_30]
+0x786669: mov     esi, [esp+6Ch+var_34.end]
+0x78666D: mov     ecx, [esp+6Ch+var_34.begin]
 0x786671: lea     ebp, [edi+edi*2]
 0x786674: add     ebp, ebp
 0x786676: add     ebp, ebp
@@ -261,7 +261,7 @@
 0x78667A: lea     eax, [ecx+ebp]
 0x78667D: add     edi, 1
 0x786680: test    ecx, ecx
-0x786682: mov     [esp+6Ch+var_3C], eax
+0x786682: mov     [esp+6Ch+var_3C.owner], eax
 0x786686: jz      short loc_7866A1
 0x786688: mov     edx, esi
 0x78668A: sub     edx, ecx
@@ -274,8 +274,8 @@
 0x78669D: cmp     edi, eax
 0x78669F: jb      short loc_7866AE
 0x7866A1: call    __invalid_parameter_noinfo
-0x7866A6: mov     esi, [esp+6Ch+var_2C]
-0x7866AA: mov     ecx, [esp+6Ch+var_30]
+0x7866A6: mov     esi, [esp+6Ch+var_34.end]
+0x7866AA: mov     ecx, [esp+6Ch+var_34.begin]
 0x7866AE: test    ecx, ecx
 0x7866B0: lea     edx, [edi+edi*2]
 0x7866B3: lea     ebx, [ecx+edx*8]
@@ -288,14 +288,14 @@
 0x7866C6: mov     eax, edx
 0x7866C8: shr     eax, 1Fh
 0x7866CB: add     eax, edx
-0x7866CD: cmp     [esp+6Ch+arg_0], eax
+0x7866CD: cmp     [esp+6Ch+count], eax
 0x7866D1: jb      short loc_7866E0
 0x7866D3: call    __invalid_parameter_noinfo
-0x7866D8: mov     esi, [esp+6Ch+var_2C]
-0x7866DC: mov     ecx, [esp+6Ch+var_30]
+0x7866D8: mov     esi, [esp+6Ch+var_34.end]
+0x7866DC: mov     ecx, [esp+6Ch+var_34.begin]
 0x7866E0: test    ecx, ecx
 0x7866E2: fld     [esp+6Ch+var_58]
-0x7866E6: mov     eax, [esp+6Ch+var_3C]
+0x7866E6: mov     eax, [esp+6Ch+var_3C.owner]
 0x7866EA: fsub    dword ptr [eax]
 0x7866EC: fld     dword ptr [ebx]
 0x7866EE: fsub    dword ptr [ecx+ebp]
@@ -313,8 +313,8 @@
 0x78670E: cmp     edi, eax
 0x786710: jb      short loc_78671F
 0x786712: call    __invalid_parameter_noinfo
-0x786717: mov     esi, [esp+6Ch+var_2C]
-0x78671B: mov     ecx, [esp+6Ch+var_30]
+0x786717: mov     esi, [esp+6Ch+var_34.end]
+0x78671B: mov     ecx, [esp+6Ch+var_34.begin]
 0x78671F: test    ecx, ecx
 0x786721: lea     edx, [edi+edi*2]
 0x786724: lea     edi, [ecx+edx*8]
@@ -326,23 +326,23 @@
 0x786735: mov     eax, edx
 0x786737: shr     eax, 1Fh
 0x78673A: add     eax, edx
-0x78673C: cmp     [esp+6Ch+arg_0], eax
+0x78673C: cmp     [esp+6Ch+count], eax
 0x786740: jb      short loc_78674B
 0x786742: call    __invalid_parameter_noinfo
-0x786747: mov     ecx, [esp+6Ch+var_30]
+0x786747: mov     ecx, [esp+6Ch+var_34.begin]
 0x78674B: fld     dword ptr [ecx+ebp+4]
 0x78674F: mov     esi, [esp+6Ch+var_40]
 0x786753: mov     eax, [esi+4]
-0x786756: fstp    [esp+6Ch+var_3C]
+0x786756: fstp    [esp+6Ch+var_3C.owner]
 0x78675A: test    eax, eax
 0x78675C: fld     dword ptr [edi+4]
-0x78675F: fld     [esp+6Ch+var_3C]
+0x78675F: fld     [esp+6Ch+var_3C.owner]
 0x786763: fld     st
 0x786765: fsubp   st(2), st
 0x786767: fld     [esp+6Ch+var_58]
 0x78676B: fmulp   st(2), st
 0x78676D: faddp   st(1), st
-0x78676F: fstp    [esp+6Ch+var_20]
+0x78676F: fstp    [esp+6Ch+result.data+4]
 0x786773: jz      short loc_786791
 0x786775: mov     ecx, [esi+8]
 0x786778: sub     ecx, eax
@@ -356,22 +356,22 @@
 0x78678F: jb      short loc_786796
 0x786791: call    __invalid_parameter_noinfo
 0x786796: mov     eax, [esi+4]
-0x786799: mov     ecx, [esp+6Ch+var_24]
+0x786799: mov     ecx, [esp+6Ch+result.data]
 0x78679D: mov     esi, [esp+6Ch+var_44]
 0x7867A1: mov     [eax+esi], ecx
-0x7867A4: mov     edx, [esp+6Ch+var_20]
+0x7867A4: mov     edx, [esp+6Ch+result.data+4]
 0x7867A8: add     eax, esi
 0x7867AA: mov     [eax+4], edx
-0x7867AD: mov     ecx, [esp+6Ch+var_1C]
+0x7867AD: mov     ecx, [esp+6Ch+result.data+8]
 0x7867B1: mov     [eax+8], ecx
-0x7867B4: mov     edx, [esp+6Ch+var_18]
+0x7867B4: mov     edx, [esp+6Ch+result.data+0Ch]
 0x7867B8: mov     [eax+0Ch], edx
-0x7867BB: mov     ecx, [esp+6Ch+var_14]
+0x7867BB: mov     ecx, [esp+6Ch+result.data+10h]
 0x7867BF: mov     [eax+10h], ecx
-0x7867C2: mov     edx, [esp+6Ch+var_10]
-0x7867C6: lea     ecx, [esp+6Ch+var_24]; void *
+0x7867C2: mov     edx, [esp+6Ch+result.size]
+0x7867C6: lea     ecx, [esp+6Ch+result]; this
 0x7867CA: mov     [eax+14h], edx
-0x7867CD: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7867CD: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7867D2: mov     eax, [esp+6Ch+var_50]
 0x7867D6: add     eax, 1
 0x7867D9: add     esi, 18h
@@ -440,21 +440,21 @@
 0x786891: mov     [eax+10h], ecx
 0x786894: mov     edx, [esi+14h]
 0x786897: mov     [eax+14h], edx
-0x78689A: mov     esi, [esp+6Ch+var_30]
+0x78689A: mov     esi, [esp+6Ch+var_34.begin]
 0x78689E: test    esi, esi
 0x7868A0: mov     [esp+6Ch+var_4], 0FFFFFFFFh
 0x7868A8: jz      short loc_7868CD
-0x7868AA: mov     edi, [esp+6Ch+var_2C]
+0x7868AA: mov     edi, [esp+6Ch+var_34.end]
 0x7868AE: cmp     esi, edi
 0x7868B0: jz      short loc_7868C4
-0x7868B2: mov     ecx, esi; void *
-0x7868B4: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7868B2: mov     ecx, esi; this
+0x7868B4: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7868B9: add     esi, 18h
 0x7868BC: cmp     esi, edi
 0x7868BE: jnz     short loc_7868B2
-0x7868C0: mov     esi, [esp+6Ch+var_30]
+0x7868C0: mov     esi, [esp+6Ch+var_34.begin]
 0x7868C4: push    esi
-0x7868C5: call    FormHeapFree
+0x7868C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7868CA: add     esp, 4
 0x7868CD: mov     ecx, [esp+6Ch+var_C]
 0x7868D1: mov     large fs:0, ecx
@@ -465,3 +465,12 @@
 0x7868DC: pop     ebx
 0x7868DD: add     esp, 58h
 0x7868E0: retn    4
+0x9CB190: lea     ecx, [ebp-34h]; this
+0x9CB193: jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.
+0x9CB198: mov     edx, [esp+arg_4]
+0x9CB19C: lea     eax, [edx-5Ch]
+0x9CB19F: mov     ecx, [edx-60h]
+0x9CB1A2: xor     ecx, eax
+0x9CB1A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CB1A9: mov     eax, offset stru_AF3844
+0x9CB1AE: jmp     ___CxxFrameHandler3

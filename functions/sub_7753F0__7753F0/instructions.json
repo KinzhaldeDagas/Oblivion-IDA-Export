@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x77556E",
-    "line": "mov     eax, offset dword_B29944",
+    "line": "mov     eax, offset D3DDepthStencilFormatCandidates",
     "mnemonic": "mov",
     "size": 5
   },
@@ -868,12 +868,6 @@
     "line": "jmp     short loc_775590",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x77558A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x775590",
@@ -1108,12 +1102,6 @@
     "line": "jmp     short loc_775600",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7755FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x775600",
@@ -1537,7 +1525,7 @@
   },
   {
     "ea": "0x7756C4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

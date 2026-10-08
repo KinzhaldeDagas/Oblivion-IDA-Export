@@ -1,4 +1,4 @@
-0x7077D0: push    0FFFFFFFFh
+0x7077D0: push    0FFFFFFFFh; Fog property propagation decode: NiAVObject local-property merge helper; property kind 1 writes BSFogProperty/NiFogProperty to NiPropertyState +0x0C.
 0x7077D2: push    offset SEH_7077D0
 0x7077D7: mov     eax, large fs:0
 0x7077DD: push    eax
@@ -29,7 +29,7 @@
 0x707821: jmp     loc_707966
 0x707826: mov     [esp+28h+var_14], edi
 0x70782A: mov     ebx, 1
-0x70782F: push    offset stru_B3FA00; lpCriticalSection
+0x70782F: push    offset unk_B3FA00; lpCriticalSection
 0x707834: mov     [esp+2Ch+var_4], ebx
 0x707838: call    dword ptr ds:0A2806Ch
 0x70783E: call    dword ptr ds:0A2808Ch
@@ -47,7 +47,7 @@
 0x70786D: mov     ecx, [esp+28h+a2]
 0x707871: push    ecx
 0x707872: mov     ecx, eax
-0x707874: call    sub_731620
+0x707874: call    sub_731620; Fog property propagation decode: NiPropertyState copy constructor preserves all ten slots, including inherited fog slot +0x0C.
 0x707879: mov     byte ptr [esp+28h+var_4], bl
 0x70787D: push    eax
 0x70787E: jmp     short loc_70788F
@@ -71,16 +71,16 @@
 0x7078B1: mov     edx, [eax+4Ch]
 0x7078B4: mov     ecx, esi
 0x7078B6: call    edx
-0x7078B8: cmp     eax, 0Ah
-0x7078BB: jg      short loc_707902
+0x7078B8: cmp     eax, 0Ah; Pass222: Real property-kind guard cmp kind,0x0A before NiPropertyState slot write.
+0x7078BB: jg      short loc_707902; Fog property propagation decode: GetPropertyType guard before state slot write; fog kind 1 is accepted.
 0x7078BD: mov     eax, [esi]
 0x7078BF: mov     edx, [eax+4Ch]
 0x7078C2: mov     ecx, esi
 0x7078C4: call    edx
 0x7078C6: mov     ecx, [esp+28h+var_14]
-0x7078CA: mov     edi, [ecx+eax*4+8]
+0x7078CA: mov     edi, [ecx+eax*4+8]; Fog property propagation decode: old slot read uses state +0x08 + 4*kind; fog kind 1 reads state +0x0C.
 0x7078CE: cmp     edi, esi
-0x7078D0: lea     ebx, [ecx+eax*4+8]
+0x7078D0: lea     ebx, [ecx+eax*4+8]; Fog property propagation decode: target slot formula state +0x08 + 4*kind; BSFogProperty kind 1 lands at state +0x0C.
 0x7078D4: jz      short loc_707902
 0x7078D6: test    edi, edi
 0x7078D8: jz      short loc_7078F6
@@ -106,7 +106,7 @@
 0x70790B: sub     ds:0B3FA7Ch, ebx
 0x707911: jnz     short loc_70791D
 0x707913: mov     dword ptr ds:0B3FA78h, 0
-0x70791D: push    offset stru_B3FA00; lpCriticalSection
+0x70791D: push    offset unk_B3FA00; lpCriticalSection
 0x707922: call    dword ptr ds:0A28074h
 0x707928: mov     esi, [esp+28h+var_14]
 0x70792C: test    esi, esi
@@ -140,3 +140,24 @@
 0x707975: pop     ebx
 0x707976: add     esp, 14h
 0x707979: retn    0Ch
+0x9C96A0: mov     eax, [ebp-10h]
+0x9C96A3: and     eax, 1
+0x9C96A6: jz      locret_9C96B8
+0x9C96AC: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9C96B0: mov     ecx, [ebp+4]; slot
+0x9C96B3: jmp     NiPointerSlot_Release
+0x9C96B8: retn
+0x9C96B9: lea     ecx, [ebp-14h]; slot
+0x9C96BC: jmp     NiPointerSlot_Release
+0x9C96C1: mov     eax, [ebp+0Ch]
+0x9C96C4: push    eax
+0x9C96C5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C96CA: pop     ecx
+0x9C96CB: retn
+0x9C96CC: mov     edx, [esp+a2]
+0x9C96D0: lea     eax, [edx-18h]
+0x9C96D3: mov     ecx, [edx-1Ch]
+0x9C96D6: xor     ecx, eax
+0x9C96D8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C96DD: mov     eax, offset stru_AF1F60
+0x9C96E2: jmp     ___CxxFrameHandler3

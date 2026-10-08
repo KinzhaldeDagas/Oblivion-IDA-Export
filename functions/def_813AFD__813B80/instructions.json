@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x813B97",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x813BB7",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x813BEE",
-    "line": "mov     dword ptr [esp+arg_B0.UseAppendVirtual], ebp",
+    "line": "mov     dword ptr [esp+cullingProcess.UseAppendVirtual], ebp",
     "mnemonic": "mov",
     "size": 7
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x813C10",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x813C1F",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x813C21",
-    "line": "lea     ecx, [esp+0Ch+arg_B0]",
+    "line": "lea     ecx, [esp+0Ch+cullingProcess]; self",
     "mnemonic": "lea",
     "size": 7
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x813C2F",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x813C3B",
-    "line": "lea     ecx, [esp+0Ch+arg_B0]; this",
+    "line": "lea     ecx, [esp+0Ch+cullingProcess]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x813C4A",
-    "line": "mov     [esp+0Ch+arg_B0.Camera], edi",
+    "line": "mov     [esp+0Ch+cullingProcess.Camera], edi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x813C51",
-    "line": "call    NiCullingProcess__SetFrustum",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,37 +331,37 @@
   },
   {
     "ea": "0x813C5C",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x813C5E",
-    "line": "lea     ecx, [esp+0Ch+arg_B0]",
+    "line": "lea     ecx, [esp+0Ch+cullingProcess]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x813C65",
-    "line": "push    ecx",
+    "line": "push    ecx; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x813C66",
-    "line": "push    eax",
+    "line": "push    eax; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x813C67",
-    "line": "push    edi",
+    "line": "push    edi; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x813C68",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x813C87",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x813C8C",
-    "line": "lea     ecx, [esp+8+arg_B0]; this",
+    "line": "lea     ecx, [esp+8+cullingProcess]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x813C9B",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x813CE5",
-    "line": "mov     ebx, [esp+18h+var_4]",
+    "line": "mov     ebx, [esp+18h+propertyDimmer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x813CF6",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x813D10",
-    "line": "call    AddImageSpaceShader",
+    "line": "call    AddImageSpaceShader; ImprovedShaders hook target: AddImageSpaceShader(this=list, arg0=BSImageSpaceShader*). Hook calls native trampoline, then appends paired HDR(0x08)/Blur-Bloom(0x07) shader if absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,25 +709,25 @@
   },
   {
     "ea": "0x813D32",
-    "line": "fstp    [esp+4+var_4]; float",
+    "line": "fstp    [esp+4+propertyDimmer]; propertyDimmer",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x813D35",
-    "line": "push    eax; int",
+    "line": "push    eax; shadowSceneLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x813D36",
-    "line": "push    0; int",
+    "line": "push    0; lightSlot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x813D38",
-    "line": "call    sub_7EE390",
+    "line": "call    OB_BSShader_DispatchLightConstantUpdate_010201A0; Oblivion per-light constant dispatcher. For active BSShaderProperty type 0x1B it calls Lighting30Shader_WriteType1BLightConstants; otherwise it uses the generic color path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x813D61",
-    "line": "call    sub_813300",
+    "line": "call    RenderShadowCategoryObjectListOffscreen; Mode-0 cube-map helper: swaps temporary accumulator/culling state and renders the current ShadowSceneLight's +0xE8 category/object list through ShadowSceneLight_RenderCategoryObjectList.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x813D7A",
-    "line": "fstp    [esp+18h+var_4]",
+    "line": "fstp    [esp+18h+propertyDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x813D7E",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x813D96",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -865,13 +865,13 @@
   },
   {
     "ea": "0x813D9F",
-    "line": "fstp    [esp+18h+var_4]",
+    "line": "fstp    [esp+18h+propertyDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x813DA3",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1111,13 +1111,13 @@
   },
   {
     "ea": "0x813E62",
-    "line": "fstp    [esp+18h+var_4]",
+    "line": "fstp    [esp+18h+propertyDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x813E66",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x813EBC",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1393,13 +1393,13 @@
   },
   {
     "ea": "0x813F2F",
-    "line": "fstp    [esp+18h+var_4]",
+    "line": "fstp    [esp+18h+propertyDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x813F33",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x813F89",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1675,13 +1675,13 @@
   },
   {
     "ea": "0x813FF0",
-    "line": "fstp    [esp+18h+var_4]",
+    "line": "fstp    [esp+18h+propertyDimmer]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x813FF4",
-    "line": "fld     [esp+18h+var_4]",
+    "line": "fld     [esp+18h+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x8140A6",
-    "line": "call    ImageShaderList__ProcessImageSpaceShader",
+    "line": "call    ImageShaderList__ProcessImageSpaceShader; MoonSugarEffect decode: ImageSpaceShaderList processing builds a temporary active shader list, binds each shader to the shared screen element, and ping-pongs source/destination targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x8140B6",
-    "line": "mov     [esp+18h+var_4], ebx",
+    "line": "mov     [esp+18h+propertyDimmer], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x814105",
-    "line": "mov     ecx, [esp+24h+arg_B0.Planes.CullingPlanes.Normal.x+48h]",
+    "line": "mov     ecx, [esp+24h+cullingProcess.Planes.CullingPlanes.Normal.x+48h]",
     "mnemonic": "mov",
     "size": 7
   },

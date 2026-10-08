@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x58B249",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+trait]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x58B27E",
-    "line": "mov     [esp+20h+arg_0], eax",
+    "line": "mov     [esp+20h+trait], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x58B28E",
-    "line": "push    esi",
+    "line": "push    esi; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58B28F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58B291",
-    "line": "call    sub_589DF0",
+    "line": "call    Tile__Value__Initialize;",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x58B2A6",
-    "line": "mov     [esp+20h+arg_0], esi",
+    "line": "mov     [esp+20h+trait], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x58B2B6",
-    "line": "lea     eax, [esp+20h+arg_0]",
+    "line": "lea     eax, [esp+20h+trait]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x58B2BF",
-    "line": "call    sub_589640",
+    "line": "call    NiTPointerList__InsertBeforePosition",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x58B2C6",
-    "line": "lea     ecx, [esp+20h+arg_0]",
+    "line": "lea     ecx, [esp+20h+trait]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x58B2CE",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -454,5 +454,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6200",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6203",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6204",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6209",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C620A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C620B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C620F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6212",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6215",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6217",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C621C",
+    "line": "mov     eax, offset stru_AEE7E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6221",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

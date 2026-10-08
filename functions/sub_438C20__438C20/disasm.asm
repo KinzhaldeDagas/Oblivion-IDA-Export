@@ -76,3 +76,12 @@
 0x438CE3: call    eax
 0x438CE5: mov     al, 1
 0x438CE7: jmp     short loc_438CAB
+0x9AC700: lea     ecx, [ebp+4]; void *
+0x9AC703: jmp     sub_4BDDC0
+0x9AC708: mov     edx, [esp+arg_4]
+0x9AC70C: lea     eax, [edx-14h]
+0x9AC70F: mov     ecx, [edx-18h]
+0x9AC712: xor     ecx, eax
+0x9AC714: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC719: mov     eax, offset stru_AD93CC
+0x9AC71E: jmp     ___CxxFrameHandler3

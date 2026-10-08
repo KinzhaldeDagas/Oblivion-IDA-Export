@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4809A3",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4809C6",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x480A10",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x480A11",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x480A66",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x480A6D",
-    "line": "lea     ecx, [esp+0Ch+arg_0]; this",
+    "line": "lea     ecx, [esp+0Ch+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x480A71",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,8 +1,9 @@
-char __thiscall sub_564730(_DWORD *this, unsigned __int16 arg0, Ni2DBuffer *a2)
+// BSTreeNode branch LOD child setter: replaces child under Branches and updates branch array. No frond-equivalent setter was found in this node surface.
+char __thiscall sub_564730(BSTreeModel_OblivionLayout_058 **this, void *arg0, Ni2DBuffer *a2)
 {
-  _DWORD *v4; // ecx
+  BSTreeModel_OblivionLayout_058 *v4; // ecx
   Ni2DBuffer *v5; // ebp
-  unsigned __int16 v6; // ax
+  unsigned __int16 NumBranchLODLevels; // ax
   unsigned __int16 v7; // si
   int v8; // ebx
   int v9; // esi
@@ -12,33 +13,38 @@ char __thiscall sub_564730(_DWORD *this, unsigned __int16 arg0, Ni2DBuffer *a2)
   __int16 v14; // [esp+1Ah] [ebp-Eh]
   unsigned int v15; // [esp+24h] [ebp-4h]
 
-  v12 = 0;
-  v13 = 0;
-  v14 = 0;
-  v4 = (_DWORD *)*(this + 0x37);
-  v15 = 0;
-  if ( !v4 || !*(this + 0x38) || (v5 = a2) == 0 || (v6 = sub_5601E0(v4), v7 = arg0, arg0 >= v6) )
+  v12 = 0; /*0x56475b*/
+  v13 = 0; /*0x56475f*/
+  v14 = 0; /*0x564764*/
+  v4 = *(this + 0x37); /*0x564769*/
+  v15 = 0; /*0x564771*/
+  if ( !v4 /*0x5647a3*/
+    || !*(this + 0x38)
+    || (v5 = a2) == 0
+    || (NumBranchLODLevels = BSTreeModel_GetNumBranchLODLevels(v4),
+        v7 = (unsigned __int16)arg0,
+        (unsigned __int16)arg0 >= NumBranchLODLevels) )
   {
-    FormHeapFree(0);
-    return 0;
+    FormHeapFree(0); /*0x564832*/
+    return 0; /*0x564832*/
   }
-  v8 = (*(int (__thiscall **)(_DWORD *))(*this + 0xA0))(this);
-  if ( !v8 )
+  v8 = ((int (__thiscall *)(BSTreeModel_OblivionLayout_058 **))(*this)[1].seed)(this); /*0x5647b5*/
+  if ( !v8 ) /*0x5647b9*/
   {
-    v15 = 0xFFFFFFFF;
-    BSStringT_Clear(&v12);
-    return 0;
+    v15 = 0xFFFFFFFF; /*0x5647bf*/
+    BSStringT_Clear(&v12); /*0x5647c7*/
+    return 0; /*0x56483a*/
   }
-  v9 = 4 * v7;
-  v10 = (_DWORD *)(v9 + *(this + 0x38));
-  if ( *v10 )
+  v9 = 4 * v7; /*0x5647d9*/
+  v10 = (void **)((char *)&(*(this + 0x38))->vftable + v9); /*0x5647db*/
+  if ( *v10 ) /*0x5647dd*/
   {
-    (*(void (__thiscall **)(int, unsigned __int16 *, _DWORD))(*(_DWORD *)v8 + 0x88))(v8, &arg0, *v10);
-    sub_7016A0((NiD3DVertexShader *)&arg0);
+    (*(void (__thiscall **)(int, void **, _DWORD))(*(_DWORD *)v8 + 0x88))(v8, &arg0, *v10); /*0x5647f4*/
+    NiPointerSlot_Release(&arg0); /*0x5647fa*/
   }
-  (*(void (__thiscall **)(int, Ni2DBuffer *, int))(*(_DWORD *)v8 + 0x84))(v8, v5, 1);
-  NiSmartPointer_Set__((Ni2DBuffer **)(v9 + *(this + 0x38)), v5);
-  v15 = 0xFFFFFFFF;
-  BSStringT_Clear(&v12);
-  return 1;
+  (*(void (__thiscall **)(int, Ni2DBuffer *, int))(*(_DWORD *)v8 + 0x84))(v8, v5, 1); /*0x56480c*/
+  NiSmartPointer_Set__((Ni2DBuffer **)((char *)*(this + 0x38) + v9), v5); /*0x564817*/
+  v15 = 0xFFFFFFFF; /*0x564820*/
+  BSStringT_Clear(&v12); /*0x564828*/
+  return 1; /*0x56483c*/
 }

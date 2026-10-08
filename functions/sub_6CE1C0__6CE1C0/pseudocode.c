@@ -1,5 +1,6 @@
+// NiSingleInterpController link slot delegates to NiTimeController link processing. Concrete legacy controllers may perform additional versioned link migration after this returns.
 // attributes: thunk
-int __stdcall sub_6CE1C0(int a1)
+int __thiscall NiSingleInterpController_LinkObject(_DWORD *this, _DWORD *a2)
 {
-  return sub_754E90(a1);
+  return j_NiTimeController_LinkObject(this, a2);
 }

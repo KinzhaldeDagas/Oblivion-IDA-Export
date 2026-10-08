@@ -11,7 +11,7 @@
 0x752C55: mov     ecx, [esi+8]
 0x752C58: mov     ebp, [edi+8]
 0x752C5B: push    ecx
-0x752C5C: call    FormHeapFree
+0x752C5C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x752C61: mov     eax, ebp
 0x752C63: add     esp, 4
 0x752C66: lea     edx, [eax+1]

@@ -11,13 +11,13 @@
 0x69DD1E: push    esi
 0x69DD1F: mov     ecx, eax
 0x69DD21: call    BSSimpleList_Remove
-0x69DD26: mov     ecx, esi
+0x69DD26: mov     ecx, esi; self
 0x69DD28: mov     dword ptr [esi+18h], 0
-0x69DD2F: call    BSTempEffect_destr
+0x69DD2F: call    BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.
 0x69DD34: test    [esp+4+arg_0], 1
 0x69DD39: jz      short loc_69DD44
 0x69DD3B: push    esi
-0x69DD3C: call    FormHeapFree
+0x69DD3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69DD41: add     esp, 4
 0x69DD44: mov     eax, esi
 0x69DD46: pop     esi

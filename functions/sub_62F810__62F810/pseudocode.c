@@ -4,17 +4,17 @@ void __userpurge sub_62F810(
         double st7_0@<st0>,
         TESObjectREFR *a4,
         TESObjectREFR *friendlyFight_,
-        int a7)
+        Crime *a7)
 {
-  int v6; // ebp
-  int v7; // esi
+  Crime *v6; // ebp
+  TESObjectREFR *target; // esi
   bool v8; // zf
   float *(__thiscall *GetPos)(TESObjectREFR *); // edx
   int v10; // eax
-  double Distance; // st7
+  double value; // st7
   TESObjectCELL *v12; // eax
   int v13; // eax
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
   TESObjectREFR **v15; // ebx
   unsigned int v16; // eax
   int v17; // esi
@@ -44,83 +44,91 @@ void __userpurge sub_62F810(
   char v41; // [esp+14h] [ebp-58h]
   float a5; // [esp+18h] [ebp-54h]
   float v43; // [esp+38h] [ebp-34h]
-  float v44; // [esp+38h] [ebp-34h]
+  float GoldValue; // [esp+38h] [ebp-34h]
   float v45; // [esp+38h] [ebp-34h]
   TESForm *v46; // [esp+3Ch] [ebp-30h]
   TESObjectREFR **v47; // [esp+44h] [ebp-28h]
   float distanceToTarget; // [esp+48h] [ebp-24h]
-  int v49[5]; // [esp+4Ch] [ebp-20h] BYREF
+  TravelPath v49; // [esp+4Ch] [ebp-20h] BYREF
   unsigned int v50; // [esp+68h] [ebp-4h]
 
-  v46 = 0;
-  if ( *(_BYTE *)(((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))a4->vtbl->GetBaseForm)(
+  v46 = 0; /*0x62f847*/
+  if ( *(_BYTE *)(((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>, double@<st2>))a4->vtbl->GetBaseForm)( /*0x62f851*/
                     a4,
                     st7_0,
-                    a2)
+                    a2,
+                    a1)
                 + 4) == 0x23 )
-    v46 = a4->vtbl->GetBaseForm(a4);
-  v6 = a7;
-  v7 = *(_DWORD *)(a7 + 8);
-  if ( v7 )
-    (*(int (__thiscall **)(int))(*(_DWORD *)v7 + 0x190))(v7);
-  v8 = !sub_4D8B90(a4);
-  a5 = (float)dword_B36A50;
-  GetPos = a4->vtbl->GetPos;
-  if ( v8 )
+    v46 = a4->vtbl->GetBaseForm(a4); /*0x62f85f*/
+  v6 = a7; /*0x62f863*/
+  target = a7->target; /*0x62f867*/
+  if ( target ) /*0x62f870*/
+    ((int (__thiscall *)(TESObjectREFR *))target->vtbl->IsActor)(target); /*0x62f87c*/
+  v8 = !sub_4D8B90(a4); /*0x62f89a*/
+  a5 = (float)(int)stru_B36A50.value; /*0x62f89c*/
+  GetPos = a4->vtbl->GetPos; /*0x62f8a1*/
+  if ( v8 ) /*0x62f8a9*/
   {
-    v13 = (int)GetPos(a4);
-    Distance = (double)dword_B36A50;
-    v40 = (float *)v13;
-    a3a = Distance;
-    v34 = a4->vtbl->GetPos(a4);
-    ParentCell = TESObjectREFR_GetParentCell(a4);
-    sub_446B90(ParentCell, v34, a3a, v40, a5, (unsigned __int8 (__cdecl *)(TESObjectREFR *, int))sub_62E890, a7);
+    v13 = (int)GetPos(a4); /*0x62f8d7*/
+    value = (double)(int)stru_B36A50.value; /*0x62f8d9*/
+    v40 = (float *)v13; /*0x62f8df*/
+    a3a = value; /*0x62f8eb*/
+    v34 = a4->vtbl->GetPos(a4); /*0x62f8f0*/
+    DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a4); /*0x62f8f3*/
+    sub_446B90( /*0x62f8ff*/
+      DwordAtOffset40,
+      v34,
+      a3a,
+      v40,
+      a5,
+      (unsigned __int8 (__cdecl *)(TESObjectREFR *, int))sub_62E890,
+      (int)a7);
   }
   else
   {
-    v10 = (int)GetPos(a4);
-    Distance = (double)dword_B36A50;
-    v39 = (float *)v10;
-    a3 = Distance;
-    v33 = a4->vtbl->GetPos(a4);
-    v12 = TESObjectREFR_GetParentCell(a4);
-    sub_4D5E30(v12, v33, a3, v39, a5, (unsigned __int8 (__cdecl *)(TESObjectREFR *, int))sub_62E890, a7);
+    v10 = (int)GetPos(a4); /*0x62f8ab*/
+    value = (double)(int)stru_B36A50.value; /*0x62f8ad*/
+    v39 = (float *)v10; /*0x62f8b3*/
+    a3 = value; /*0x62f8bf*/
+    v33 = a4->vtbl->GetPos(a4); /*0x62f8c4*/
+    v12 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a4); /*0x62f8c7*/
+    sub_4D5E30(v12, v33, a3, v39, a5, (unsigned __int8 (__cdecl *)(TESObjectREFR *, int))sub_62E890, (int)a7); /*0x62f8cd*/
   }
-  v15 = sub_67A420(a7, (int)&dword_B3B944);
-  v16 = dword_B3B948;
-  distanceToTarget = *(float *)&v15;
-  if ( dword_B3B948 )
+  v15 = sub_67A420((ActorProcessManager *)&qword_B3BB2C[0x75], (int)a7, (int)&unk_B3B944); /*0x62f914*/
+  v16 = unk_B3B948; /*0x62f916*/
+  distanceToTarget = *(float *)&v15; /*0x62f91d*/
+  if ( unk_B3B948 ) /*0x62f916*/
   {
-    do
+    do /*0x62f938*/
     {
-      v17 = *(_DWORD *)(v16 + 4);
-      FormHeapFree(v16);
-      v16 = v17;
-      dword_B3B948 = v17;
+      v17 = *(_DWORD *)(v16 + 4); /*0x62f923*/
+      FormHeapFree(v16); /*0x62f927*/
+      v16 = v17; /*0x62f931*/
+      unk_B3B948 = v17; /*0x62f933*/
     }
-    while ( v17 );
+    while ( v17 ); /*0x62f938*/
   }
-  dword_B3B944 = 0;
-  v18 = v15;
-  if ( v15 )
+  unk_B3B944 = 0; /*0x62f93c*/
+  v18 = v15; /*0x62f946*/
+  if ( v15 ) /*0x62f948*/
   {
-    while ( *v18 )
+    while ( *v18 ) /*0x62f954*/
     {
-      v19 = 0;
-      if ( (*v18)->vtbl->IsActor(*v18) )
-        v19 = *v18;
-      v47 = (TESObjectREFR **)v18[1];
-      if ( v19 )
+      v19 = 0; /*0x62f966*/
+      if ( (*v18)->vtbl->IsActor(*v18) ) /*0x62f968*/
+        v19 = *v18; /*0x62f96e*/
+      v47 = (TESObjectREFR **)v18[1]; /*0x62f975*/
+      if ( v19 ) /*0x62f979*/
       {
-        if ( !sub_5E6BA0((Actor *)v19)
-          && !sub_5E0F30(v19)
+        if ( !sub_5E6BA0((Actor *)v19) /*0x62f9be*/
+          && !Actor::IsSleeping((Actor *)v19)
           && !((unsigned __int8 (__thiscall *)(TESObjectREFR *, int))v19->vtbl[1].GetSleepState)(v19, 1)
-          && (!sub_5E6C60((Actor *)v19) || !*(_BYTE *)(v6 + 0x2C)) )
+          && (!Actor_IsGuardClass((Actor *)v19) || !v6->flag2C) )
         {
-          if ( sub_5E6C60((Actor *)v19) && (TESActorBaseData_AllFactionsAreEvil(&v46[1].member.refID), !v20)
-            || !sub_5E6C60((Actor *)v19)
-            && (Distance = TesObjectREF_GetDistance(v19, friendlyFight_, 0),
-                a3b = Distance,
+          if ( Actor_IsGuardClass((Actor *)v19) && (TESActorBaseData_AllFactionsAreEvil(&v46[1].member.refID), !v20) /*0x62fa45*/
+            || !Actor_IsGuardClass((Actor *)v19)
+            && (value = TesObjectREF_GetDistance(v19, friendlyFight_, 0),
+                a3b = value,
                 v41 = ((int (__thiscall *)(TESObjectREFR *, int, _DWORD, int))v19->vtbl[1].Unk_37)(
                         v19,
                         0x21,
@@ -131,61 +139,70 @@ void __userpurge sub_62F810(
                 shouldActorFight(v21, (int)friendlyFight_, v35, distanceToTarget, v41, 0, 0, 0x64),
                 v22 > 0) )
           {
-            sub_68A9F0(v49);
-            vtbl = v19[1].vtbl;
-            v24 = *((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 2);
-            v50 = 0;
-            v25 = 0;
-            if ( !v24(vtbl) || (Distance = sub_65D880(TESDataHandler_g_PlayerRef, Distance, v49, v19), v26) )
-              v25 = 1;
-            if ( v19[1].vtbl && v25 )
+            PathLow_ctor(&v49); /*0x62fa4f*/
+            vtbl = v19[1].vtbl; /*0x62fa54*/
+            v24 = *((int (__thiscall **)(TESObjectREFRVtbl *))vtbl->super.super.InitializeComponent + 2); /*0x62fa59*/
+            v50 = 0; /*0x62fa5c*/
+            v25 = 0; /*0x62fa64*/
+            if ( !v24(vtbl) || (value = sub_65D880(reference, value, (int *)&v49, v19), v26) ) /*0x62fa7f*/
+              v25 = 1; /*0x62fa81*/
+            if ( v19[1].vtbl && v25 ) /*0x62fa8f*/
             {
-              ((void (__thiscall *)(TESObjectREFR *, int, _DWORD, int, _DWORD))v19->vtbl[1].Unk_5A)(v19, v6, 0, 1, 0);
-              if ( Actor::GetProcessLevel((Actor *)v19) )
+              ((void (__thiscall *)(TESObjectREFR *, Crime *, _DWORD, int, _DWORD))v19->vtbl[1].GetActiveSkinInfo)( /*0x62faa2*/
+                v19,
+                v6,
+                0,
+                1,
+                0);
+              if ( Actor::GetProcessLevel((Actor *)v19) ) /*0x62faa6*/
               {
-                v27 = v19[1].vtbl;
-                v28 = (void (__thiscall **)(TESObjectREFRVtbl *, _DWORD))((char *)v27->super.super.InitializeComponent
+                v27 = v19[1].vtbl; /*0x62fab3*/
+                v28 = (void (__thiscall **)(TESObjectREFRVtbl *, _DWORD))((char *)v27->super.super.InitializeComponent /*0x62fabe*/
                                                                         + 0x1C);
-                v43 = TimeGlobals_GetGameHour(&TimeGlobals) - dbl_A563D0;
-                Distance = v43;
-                (*v28)(v27, LODWORD(v43));
-                ProcessLevel = Actor::GetProcessLevel((Actor *)v19);
-                sub_674550((char)v27, a1, a2, v43, (int)v19, ProcessLevel);
-                v30 = Actor::GetProcessLevel((Actor *)v19);
-                sub_673A90((int)v19, v30, 0, 0, 0);
-                v6 = a7;
+                v43 = TimeGlobals_GetGameHour(&MEMORY[0xB332E0]) - kFaceGenVariationScale1_5; /*0x62facf*/
+                value = v43; /*0x62fad5*/
+                (*v28)(v27, LODWORD(v43)); /*0x62fadc*/
+                ProcessLevel = Actor::GetProcessLevel((Actor *)v19); /*0x62fae0*/
+                sub_674550((int)v19, ProcessLevel); /*0x62faec*/
+                v30 = Actor::GetProcessLevel((Actor *)v19); /*0x62faf9*/
+                ActorProcessManager_AddMobileObject( /*0x62fb05*/
+                  (ActorProcessManager *)&qword_B3BB2C[0x75],
+                  (MobileObject *)v19,
+                  v30,
+                  0,
+                  0,
+                  0);
+                v6 = a7; /*0x62fb0a*/
               }
             }
             else
             {
-              ActorBaseForm = Actor_GetActorBaseForm((Actor *)a4, 1);
-              if ( !ActorBaseForm[2].member.modlist.data && !ActorBaseForm[2].member.refID )
-                ActorBaseForm = Actor_GetActorBaseForm((Actor *)a4, 0);
-              v32 = (char *)OblivionDynamicCast(
+              ActorBaseForm = Actor_GetActorBaseForm((Actor *)a4, 1); /*0x62fb18*/
+              if ( !ActorBaseForm[2].member.modlist.data && !ActorBaseForm[2].member.refID ) /*0x62fb23*/
+                ActorBaseForm = Actor_GetActorBaseForm((Actor *)a4, 0); /*0x62fb2d*/
+              v32 = (char *)OblivionDynamicCast( /*0x62fb4b*/
                               ActorBaseForm,
                               0,
                               (struct _s_RTTICompleteObjectLocator *)&TESActorBase `RTTI Type Descriptor',
                               &TESNPC `RTTI Type Descriptor',
                               0);
-              v44 = sub_606140(v6);
-              a2 = v44;
-              a1 = v44;
-              v45 = sub_5234A0(v32) * v44 + v44;
-              Distance = v45;
-              (*(void (__stdcall **)(_DWORD))(**(_DWORD **)(v6 + 0xC) + 0x254))(LODWORD(v45));
-              *(_BYTE *)(v6 + 0x11) = 1;
+              GoldValue = Crime_GetGoldValue(v6); /*0x62fb52*/
+              v45 = sub_5234A0(v32) * GoldValue + GoldValue; /*0x62fb73*/
+              value = v45; /*0x62fb77*/
+              ((void (__stdcall *)(_DWORD))v6->criminal->vtbl->Unk_95)(LODWORD(v45)); /*0x62fb7e*/
+              v6->flag11 = 1; /*0x62fb80*/
             }
-            v50 = 0xFFFFFFFF;
-            sub_68AA10(v49);
-            v15 = (TESObjectREFR **)LODWORD(distanceToTarget);
+            v50 = 0xFFFFFFFF; /*0x62fb88*/
+            PathLow_dtor(&v49); /*0x62fb90*/
+            v15 = (TESObjectREFR **)LODWORD(distanceToTarget); /*0x62fb95*/
           }
         }
       }
-      if ( !v47 )
-        break;
-      v18 = v47;
+      if ( !v47 ) /*0x62fb9e*/
+        break; /*0x62fb9e*/
+      v18 = v47; /*0x62f950*/
     }
-    BSSimpleList_Clear(v15);
+    BSSimpleList_Clear(v15); /*0x62fba6*/
   }
-  FormHeapFree((unsigned int)v15);
+  FormHeapFree((unsigned int)v15); /*0x62fbac*/
 }

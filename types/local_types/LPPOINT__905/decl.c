@@ -1,1 +1,1 @@
-LPPOINT
+typedef tagPOINT *LPPOINT;

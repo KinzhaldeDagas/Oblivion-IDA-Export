@@ -1,0 +1,42 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "AttachedLightPayload_Decoded",
+  "definition": "struct AttachedLightPayload_Decoded\n{\nNiLight *backingLight_00; ///< Strong-owned backing NiLight. Set/replaced with intrusive reference counting and released during payload replacement/removal.\nfloat targetDimmer_04; ///< Target fade/dimmer state. Both ordinary ExtraLight (0x30) and spell-effect ExtraLight (0x49) creators initialize it to 1.0; TESObjectLIGH_UpdateAttachedLightState moves NiLight::m_fDimmer (+0xDC) toward it and retargets it from TESObjectLIGH::fade_88 for native pulse/flicker modes.\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Strong-owned backing NiLight. Set/replaced with intrusive reference counting and released during payload replacement/removal.",
+      "name": "backingLight_00",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 32,
+      "type": "NiLight *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Target fade/dimmer state. Both ordinary ExtraLight (0x30) and spell-effect ExtraLight (0x49) creators initialize it to 1.0; TESObjectLIGH_UpdateAttachedLightState moves NiLight::m_fDimmer (+0xDC) toward it and retargets it from TESObjectLIGH::fade_88 for native pulse/flicker modes.",
+      "name": "targetDimmer_04",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "float"
+    }
+  ],
+  "name": "AttachedLightPayload_Decoded",
+  "ordinal": 9761,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 8
+}

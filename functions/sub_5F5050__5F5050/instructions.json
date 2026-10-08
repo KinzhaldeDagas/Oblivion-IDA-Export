@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F5050",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; TES4 authoritative: player Acrobatics dodge-style action. Chooses anim group 0xB..0xE from movement flags and starts current action 9.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x5F5057",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,31 +175,31 @@
   },
   {
     "ea": "0x5F50A5",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F50A7",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F50A9",
-    "line": "push    ebp",
+    "line": "push    ebp; groupID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F50AA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F50AC",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,73 +235,73 @@
   },
   {
     "ea": "0x5F50C3",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F50C5",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F50C7",
-    "line": "push    esi",
+    "line": "push    esi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F50C8",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F50CA",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F50CF",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F50D1",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F50D3",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F50D8",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F50D9",
-    "line": "push    9",
+    "line": "push    9; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F50DB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F50DD",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5F5102",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },

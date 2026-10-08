@@ -4,7 +4,7 @@ void __userpurge EffectItem_Initialize_::CheckOnTarget(
         double a2@<st0>,
         int a3,
         int a5,
-        char a6,
+        int a6,
         int a7,
         int a8,
         int a9,
@@ -25,8 +25,8 @@ void __userpurge EffectItem_Initialize_::CheckOnTarget(
         int a24,
         int a25)
 {
-  if ( (eax0 & 0x40) == 0 )
-    EffectItem_Initialize_::NoValidRange(
+  if ( (eax0 & 0x40) == 0 ) /*0x4148b2*/
+    EffectItem_Initialize_::NoValidRange( /*0x4148b2*/
       a3,
       a5,
       a6,
@@ -49,6 +49,6 @@ void __userpurge EffectItem_Initialize_::CheckOnTarget(
       a23,
       a24,
       a25);
-  *(_DWORD *)(a1 + 0x10) = 2;
-  EffectItem_Initialize_::Done(a1, a2, a3);
+  *(_DWORD *)(a1 + 0x10) = 2; /*0x4148b4*/
+  EffectItem_Initialize_::Done(a1, a2, a3); /*0x4148bb*/
 }

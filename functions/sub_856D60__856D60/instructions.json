@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x856DB4",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x856DFD",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,37 +247,37 @@
   },
   {
     "ea": "0x856E02",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856E04",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856E06",
-    "line": "push    78h ; 'x'",
+    "line": "push    78h ; 'x'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856E08",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856E09",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856E0A",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x856E44",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,37 +367,37 @@
   },
   {
     "ea": "0x856E49",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856E4B",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856E4D",
-    "line": "push    86h ; '†'",
+    "line": "push    86h ; '†'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x856E52",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856E53",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856E54",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x856E95",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -499,37 +499,37 @@
   },
   {
     "ea": "0x856E9A",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856E9C",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856E9E",
-    "line": "push    7Bh ; '{'",
+    "line": "push    7Bh ; '{'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856EA0",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856EA1",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856EA2",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x856EDC",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,37 +619,37 @@
   },
   {
     "ea": "0x856EE1",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856EE3",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856EE5",
-    "line": "push    89h ; '‰'",
+    "line": "push    89h ; '‰'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x856EEA",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856EEB",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856EEC",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x856F38",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,37 +763,37 @@
   },
   {
     "ea": "0x856F3D",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856F3F",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856F41",
-    "line": "push    79h ; 'y'",
+    "line": "push    79h ; 'y'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856F43",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856F44",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856F45",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x856F7F",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -883,37 +883,37 @@
   },
   {
     "ea": "0x856F84",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856F86",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x856F88",
-    "line": "push    87h ; '‡'",
+    "line": "push    87h ; '‡'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x856F8D",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856F8E",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x856F8F",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x857007",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1075,37 +1075,37 @@
   },
   {
     "ea": "0x85700C",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85700E",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857010",
-    "line": "push    76h ; 'v'",
+    "line": "push    76h ; 'v'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857012",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857013",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857014",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x85704E",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1195,37 +1195,37 @@
   },
   {
     "ea": "0x857053",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857055",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857057",
-    "line": "push    7Ch ; '|'",
+    "line": "push    7Ch ; '|'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857059",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85705A",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85705B",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x85709C",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1327,37 +1327,37 @@
   },
   {
     "ea": "0x8570A1",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8570A3",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8570A5",
-    "line": "push    17Bh",
+    "line": "push    17Bh; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8570AA",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8570AB",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8570AC",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x8570E6",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1447,37 +1447,37 @@
   },
   {
     "ea": "0x8570EB",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8570ED",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8570EF",
-    "line": "push    82h ; '‚'",
+    "line": "push    82h ; '‚'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8570F4",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8570F5",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8570F6",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x857142",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1591,37 +1591,37 @@
   },
   {
     "ea": "0x857147",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857149",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85714B",
-    "line": "push    84h ; '„'",
+    "line": "push    84h ; '„'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x857150",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857151",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857152",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x85718C",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1711,37 +1711,37 @@
   },
   {
     "ea": "0x857191",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857193",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857195",
-    "line": "push    8Ah ; 'Š'",
+    "line": "push    8Ah ; 'Š'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x85719A",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85719B",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85719C",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x8571D6",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1831,37 +1831,37 @@
   },
   {
     "ea": "0x8571DB",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8571DD",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8571DF",
-    "line": "push    90h",
+    "line": "push    90h; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8571E4",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8571E5",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8571E6",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x857227",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1963,37 +1963,37 @@
   },
   {
     "ea": "0x85722C",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85722E",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857230",
-    "line": "push    77h ; 'w'",
+    "line": "push    77h ; 'w'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857232",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857233",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857234",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x85726E",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2083,37 +2083,37 @@
   },
   {
     "ea": "0x857273",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857275",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857277",
-    "line": "push    85h ; '…'",
+    "line": "push    85h ; '…'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x85727C",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85727D",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85727E",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x8572BF",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2215,37 +2215,37 @@
   },
   {
     "ea": "0x8572C4",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8572C6",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8572C8",
-    "line": "push    7Ah ; 'z'",
+    "line": "push    7Ah ; 'z'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8572CA",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8572CB",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8572CC",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x857306",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2335,37 +2335,37 @@
   },
   {
     "ea": "0x85730B",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85730D",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85730F",
-    "line": "push    88h ; 'ˆ'",
+    "line": "push    88h ; 'ˆ'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x857314",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857315",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857316",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2437,7 +2437,7 @@
   },
   {
     "ea": "0x857349",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x857392",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2551,37 +2551,37 @@
   },
   {
     "ea": "0x857397",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857399",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85739B",
-    "line": "push    7Eh ; '~'",
+    "line": "push    7Eh ; '~'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85739D",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85739E",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85739F",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2659,7 +2659,7 @@
   },
   {
     "ea": "0x8573D9",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2671,37 +2671,37 @@
   },
   {
     "ea": "0x8573DE",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8573E0",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8573E2",
-    "line": "push    8Ch ; 'Œ'",
+    "line": "push    8Ch ; 'Œ'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8573E7",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8573E8",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8573E9",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2791,7 +2791,7 @@
   },
   {
     "ea": "0x85742A",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2803,37 +2803,37 @@
   },
   {
     "ea": "0x85742F",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857431",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857433",
-    "line": "push    81h",
+    "line": "push    81h; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x857438",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857439",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85743A",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x857474",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2923,37 +2923,37 @@
   },
   {
     "ea": "0x857479",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85747B",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85747D",
-    "line": "push    8Fh",
+    "line": "push    8Fh; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x857482",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857483",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857484",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x8574D0",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3067,37 +3067,37 @@
   },
   {
     "ea": "0x8574D5",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8574D7",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8574D9",
-    "line": "push    7Fh",
+    "line": "push    7Fh; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8574DB",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8574DC",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8574DD",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x857517",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3187,37 +3187,37 @@
   },
   {
     "ea": "0x85751C",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85751E",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857520",
-    "line": "push    8Dh",
+    "line": "push    8Dh; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x857525",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857526",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857527",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3331,7 +3331,7 @@
   },
   {
     "ea": "0x85757E",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3343,37 +3343,37 @@
   },
   {
     "ea": "0x857583",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857585",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857587",
-    "line": "push    7Dh ; '}'",
+    "line": "push    7Dh ; '}'; selector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857589",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85758A",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85758B",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3451,7 +3451,7 @@
   },
   {
     "ea": "0x8575C5",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3463,37 +3463,37 @@
   },
   {
     "ea": "0x8575CA",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8575CC",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8575CE",
-    "line": "push    83h ; 'ƒ'",
+    "line": "push    83h ; 'ƒ'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8575D3",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8575D4",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8575D5",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3583,7 +3583,7 @@
   },
   {
     "ea": "0x857616",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3595,37 +3595,37 @@
   },
   {
     "ea": "0x85761B",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85761D",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x85761F",
-    "line": "push    8Bh ; '‹'",
+    "line": "push    8Bh ; '‹'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x857624",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857625",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857626",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3703,7 +3703,7 @@
   },
   {
     "ea": "0x857660",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3715,37 +3715,37 @@
   },
   {
     "ea": "0x857665",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857667",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x857669",
-    "line": "push    91h ; '‘'",
+    "line": "push    91h ; '‘'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x85766E",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x85766F",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x857670",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3835,7 +3835,7 @@
   },
   {
     "ea": "0x8576AD",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3847,37 +3847,37 @@
   },
   {
     "ea": "0x8576B2",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8576B4",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8576B6",
-    "line": "push    80h ; '€'",
+    "line": "push    80h ; '€'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8576BB",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8576BC",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8576BD",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3955,7 +3955,7 @@
   },
   {
     "ea": "0x8576EC",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3967,37 +3967,37 @@
   },
   {
     "ea": "0x8576F1",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8576F3",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8576F5",
-    "line": "push    8Eh ; 'Ž'",
+    "line": "push    8Eh ; 'Ž'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x8576FA",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8576FB",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8576FC",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4051,7 +4051,7 @@
   },
   {
     "ea": "0x85771C",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4120,5 +4120,917 @@
     "line": "retn    3Ch ; '<'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D3D70",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3D73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3D79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D7B",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3D7E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D7F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3D84",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D85",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D86",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3D89",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D8A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3D8F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D90",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D91",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3D94",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D95",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3D9A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D9B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3D9C",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3D9F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DA0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DA5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DA6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DA7",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DAA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DAB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DB0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DB1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DB2",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DB5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DB6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DBB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DBC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DBD",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DC0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DC1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DC6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DC7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DC8",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DCB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DCC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DD1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DD2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DD3",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DD6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DD7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DDC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DDD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DDE",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DE1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DE2",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DE7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DE8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DE9",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DEC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DED",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DF2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DF3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DF4",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3DF7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DF8",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3DFD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DFE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3DFF",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E02",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E03",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E08",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E09",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E0A",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E0D",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E0E",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E13",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E14",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E15",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E18",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E19",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E1E",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E1F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E20",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E23",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E24",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E29",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E2A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E2B",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E2E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E2F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E34",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E35",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E36",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E39",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E3A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E3F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E40",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E41",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E44",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E45",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E4A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E4B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E4C",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E4F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E50",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E55",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E56",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E57",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E5A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E5B",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E60",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E61",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E62",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E65",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E66",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E6B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E6C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E6D",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E70",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E71",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E76",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E77",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E78",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E7B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E7C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E81",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E82",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E83",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E86",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E87",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E8C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E8D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E8E",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E91",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E92",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3E97",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E98",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E99",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3E9C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3E9D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3EA2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3EA3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3EA4",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3EA7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3EA8",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3EAD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3EAE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3EAF",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D3EB3",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3EB6",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3EB9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D3EBB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3EC0",
+    "line": "mov     eax, offset stru_AFBFAC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3EC5",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

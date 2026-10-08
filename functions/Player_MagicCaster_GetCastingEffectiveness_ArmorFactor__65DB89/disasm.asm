@@ -27,7 +27,7 @@
 0x65DBCA: call    Calc_ArmorSpellEffectiveness
 0x65DBCF: fstp    [esp+20h+arg_8]
 0x65DBD3: add     esp, 14h
-0x65DBD6: cmp     [esp+0Ch+arg_4], 0
+0x65DBD6: cmp     byte ptr [esp+0Ch+arg_4], 0
 0x65DBDB: pop     edi
 0x65DBDC: jz      short Player_MagicCaster_GetCastingEffectiveness___MultiplyFactors
 0x65DBDE: fld     [esp+8+arg_8]

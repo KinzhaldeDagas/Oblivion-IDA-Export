@@ -1,4 +1,4 @@
 char __thiscall sub_769F10(_BYTE *this)
 {
-  return *(this + 0xA90);
+  return *(this + 0xA90); /*0x769f16*/
 }

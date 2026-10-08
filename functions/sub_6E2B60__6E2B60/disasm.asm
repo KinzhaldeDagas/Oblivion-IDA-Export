@@ -5,7 +5,7 @@
 0x6E2B68: jnz     short loc_6E2BB8
 0x6E2B6A: push    ebx
 0x6E2B6B: push    eax
-0x6E2B6C: call    FormHeapFree
+0x6E2B6C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E2B71: mov     ebx, [esi+40h]
 0x6E2B74: add     esp, 4
 0x6E2B77: test    ebx, ebx

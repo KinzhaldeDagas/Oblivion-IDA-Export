@@ -2,10 +2,10 @@
 0x9A105D: mov     ebp, esp
 0x9A105F: sub     esp, 10h
 0x9A1062: push    ebx
-0x9A1063: push    [ebp+Locale]; struct localeinfo_struct *
+0x9A1063: push    dword ptr [ebp+MaxCount+4]; struct localeinfo_struct *
 0x9A1066: lea     ecx, [ebp+var_10]; this
 0x9A1069: call    ??0_LocaleUpdate@@QAE@PAUlocaleinfo_struct@@@Z
-0x9A106E: mov     ecx, [ebp+MaxCount]
+0x9A106E: mov     ecx, dword ptr [ebp+MaxCount]
 0x9A1071: xor     ebx, ebx
 0x9A1073: cmp     ecx, ebx
 0x9A1075: jnz     short loc_9A108A
@@ -51,7 +51,7 @@
 0x9A10E6: mov     eax, [ebp+var_10.mbcinfo]
 0x9A10E9: cmp     [eax+8], ebx
 0x9A10EC: jnz     short loc_9A1102
-0x9A10EE: push    [ebp+Locale]; Locale
+0x9A10EE: push    dword ptr [ebp+MaxCount+4]; Locale
 0x9A10F1: push    ecx; MaxCount
 0x9A10F2: push    [ebp+Str2]; Str2
 0x9A10F5: push    [ebp+Str1]; Str1

@@ -39,7 +39,7 @@
 0x6BB528: push    ecx
 0x6BB529: fstp    [esp+20h+var_20]; float
 0x6BB52C: mov     [esp+20h+arg_C], 0
-0x6BB534: call    sub_6BB270
+0x6BB534: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6BB539: add     esp, 18h
 0x6BB53C: pop     esi
 0x6BB53D: pop     ebx

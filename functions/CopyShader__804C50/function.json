@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x804C50",
+      "0x804DDA"
+    ],
+    [
+      "0x9D0CA0",
+      "0x9D0CD1"
+    ]
+  ],
+  "chunks_sha256": "f59d33670c9d3297b7325be1ddf629d2020e45999858875225141cbbbef58121",
+  "comment_regular": "MoonSugarEffect decode: CopyShader definition constructor pattern: allocate ShaderDefinition, create two-element screen-space declaration, allocate CopyShader object, load programs, build passes, refcount into definition.",
+  "comment_repeatable": "MoonSugarEffect decode: CopyShader definition constructor pattern: allocate ShaderDefinition, create two-element screen-space declaration, allocate CopyShader object, load programs, build passes, refcount into definition.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "CopyShader",
   "end_ea": "0x804DDA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "CopyShader",
   "segment": ".text",
   "sha256": "58cc67860d4f7f4eb0dbda8e897c37f4e812d4e0ac317ae6b14f88040deac47e",
   "size": 394,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x804C50",
+  "total_chunk_size": 443,
   "type": "NiD3DShaderDeclaration **()",
-  "xrefs_from_count": 169,
+  "xrefs_from_count": 188,
   "xrefs_to_count": 1
 }

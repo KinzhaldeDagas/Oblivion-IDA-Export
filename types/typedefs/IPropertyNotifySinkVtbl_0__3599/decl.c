@@ -1,1 +1,1 @@
-IPropertyNotifySinkVtbl_0
+typedef IPropertyNotifySinkVtbl IPropertyNotifySinkVtbl_0;

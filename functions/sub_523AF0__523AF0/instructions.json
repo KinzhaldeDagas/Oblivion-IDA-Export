@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x523AF0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+first]; std::fill specialization for float: assigns *value across [first,last) and returns last. Shipped Oblivion callers use it for initialized portions of vector<float> growth/reuse.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x523AF4",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x523AFC",
-    "line": "mov     edx, [esp+arg_8]",
+    "line": "mov     edx, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },

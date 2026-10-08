@@ -11,7 +11,7 @@
 0x88F895: test    eax, eax
 0x88F897: jz      short loc_88F8AE
 0x88F899: lea     esp, [esp+0]
-0x88F8A0: cmp     eax, offset dword_BA7D84
+0x88F8A0: cmp     eax, offset stru_BA7D84
 0x88F8A5: jz      short loc_88F8CC
 0x88F8A7: mov     eax, [eax+4]
 0x88F8AA: test    eax, eax
@@ -80,17 +80,17 @@
 0x88F95E: test    edi, edi
 0x88F960: jz      short loc_88F977
 0x88F962: mov     ecx, esi
-0x88F964: call    sub_89F570
+0x88F964: call    bhkRefObject_UpdateHavokObject
 0x88F969: mov     ecx, edi
 0x88F96B: call    sub_8A6410
 0x88F970: mov     ecx, esi
-0x88F972: call    sub_89F570
+0x88F972: call    bhkRefObject_UpdateHavokObject
 0x88F977: mov     ecx, ebx
-0x88F979: call    sub_452A60
+0x88F979: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x88F97E: test    eax, eax
 0x88F980: pop     edi
 0x88F981: jz      short loc_88F9C5
-0x88F983: push    offset dword_BA7F3C
+0x88F983: push    0BA7F3Ch
 0x88F988: mov     ecx, eax
 0x88F98A: call    sub_700010
 0x88F98F: test    eax, eax

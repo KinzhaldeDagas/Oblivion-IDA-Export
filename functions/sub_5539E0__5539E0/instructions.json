@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5539E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Sets a manual FaceGen slider by projecting its current value, transposing the authored basis, scaling by target-current, and adding the adjustment into the selected parameter matrix.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x553A07",
-    "line": "cmp     [esp+50h+arg_0], 0",
+    "line": "cmp     [esp+50h+parameters], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x553A1C",
-    "line": "call    sub_553550",
+    "line": "call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x553A27",
-    "line": "mov     eax, [esp+50h+arg_4]",
+    "line": "mov     eax, [esp+50h+matrixGroup]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553A2B",
-    "line": "mov     ebp, [esp+50h+arg_8]",
+    "line": "mov     ebp, [esp+50h+matrixChannel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x553A4E",
-    "line": "mov     ebx, [esp+50h+arg_C]",
+    "line": "mov     ebx, [esp+50h+sliderIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,55 +241,55 @@
   },
   {
     "ea": "0x553A6D",
-    "line": "mov     ecx, [esp+50h+arg_4]",
+    "line": "mov     ecx, [esp+50h+matrixGroup]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553A71",
-    "line": "push    ebx",
+    "line": "push    ebx; sliderIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553A72",
-    "line": "push    ebp",
+    "line": "push    ebp; matrixChannel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553A73",
-    "line": "mov     ebp, [esp+58h+arg_0]",
+    "line": "mov     ebp, [esp+58h+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553A77",
-    "line": "push    ecx",
+    "line": "push    ecx; matrixGroup",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553A78",
-    "line": "push    ebp",
+    "line": "push    ebp; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553A79",
-    "line": "call    sub_5538F0",
+    "line": "call    FaceGenHeadParameters_GetSliderValue; Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x553A7E",
-    "line": "fstp    [esp+60h+arg_0]",
+    "line": "fstp    [esp+60h+parameters]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x553A82",
-    "line": "fld     [esp+60h+arg_10]",
+    "line": "fld     [esp+60h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x553A90",
-    "line": "fsub    [esp+50h+arg_0]",
+    "line": "fsub    [esp+50h+parameters]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x553A94",
-    "line": "fstp    [esp+50h+arg_0]",
+    "line": "fstp    [esp+50h+parameters]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x553A9A",
-    "line": "call    sub_553550",
+    "line": "call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x553AA4",
-    "line": "lea     edx, [esp+50h+var_24]",
+    "line": "lea     edx, [esp+50h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x553AA8",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -367,19 +367,19 @@
   },
   {
     "ea": "0x553AB6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x553AB8",
-    "line": "call    sub_552730",
+    "line": "call    FaceGenMatrix_Transpose; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x553ABD",
-    "line": "fld     [esp+50h+arg_0]",
+    "line": "fld     [esp+50h+parameters]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x553AC6",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x553AC9",
-    "line": "push    ecx; int",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x553ACC",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x553AD2",
-    "line": "call    sub_552310",
+    "line": "call    FaceGenMatrix_Scale; Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x553ADA",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553ADB",
-    "line": "lea     ecx, [ebp+edx*8+0]",
+    "line": "lea     ecx, [ebp+edx*8+0]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x553AE4",
-    "line": "call    sub_551DA0",
+    "line": "call    FaceGenMatrix_AddInPlace; Dimension-checked in-place element addition: this += rhs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x553AE9",
-    "line": "mov     eax, [esp+50h+var_30]",
+    "line": "mov     eax, [esp+50h+var_3C.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x553AF2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x553AFA",
-    "line": "mov     eax, [esp+50h+var_18]",
+    "line": "mov     eax, [esp+50h+out.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x553B00",
-    "line": "mov     [esp+50h+var_30], esi",
+    "line": "mov     [esp+50h+var_3C.begin], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553B04",
-    "line": "mov     [esp+50h+var_2C], esi",
+    "line": "mov     [esp+50h+var_3C.end], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553B08",
-    "line": "mov     [esp+50h+var_28], esi",
+    "line": "mov     [esp+50h+var_3C.capacityEnd], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x553B0F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -604,5 +604,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BC000",
+    "line": "lea     ecx, [ebp-24h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC003",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC008",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC00B",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC010",
+    "line": "mov     edx, [esp+matrixGroup]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BC014",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC017",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC01A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC01C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC021",
+    "line": "mov     eax, offset stru_AE5C70",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC026",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

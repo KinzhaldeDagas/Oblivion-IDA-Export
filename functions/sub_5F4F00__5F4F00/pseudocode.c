@@ -1,46 +1,49 @@
-BSExtraDataVtbl *__thiscall sub_5F4F00(Actor *this)
+ActorAnimData *__thiscall Actor_PlayStaggerAnimGroup(Actor *this)
 {
-  BSExtraDataVtbl *result; // eax
-  ActorAnimData *v6; // ebx
+  ActorAnimData *result; // eax
+  ActorAnimData *v3; // ebx
   unsigned __int16 AnimGroup; // ax
-  _DWORD *v8; // edi
-  PowerListEntry *v9; // eax
-  _DWORD *AnimData; // eax
+  unsigned int v5; // edi
+  BSAnimGroupSequence *NormalizedSequenceSlot; // eax
+  ActorAnimData *AnimDataByPerspective; // eax
 
-  if ( !this->members.super.process
-    || (result = (BSExtraDataVtbl *)((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process),
-        result != (BSExtraDataVtbl *)8) )
+  if ( !this->members.super.process /*0x5f4f19*/
+    || (result = (ActorAnimData *)((int (__thiscall *)(LowProcess *))this->members.super.process->GetCurrentAction)(this->members.super.process),
+        result != (ActorAnimData *)8) )
   {
-    result = TESObjectREFR_GetAnimData(this);
-    v6 = (ActorAnimData *)result;
-    if ( result )
+    result = TESObjectREFR_GetAnimData((TESObjectREFR *)this); /*0x5f4f22*/
+    v3 = result; /*0x5f4f27*/
+    if ( result ) /*0x5f4f2b*/
     {
-      if ( this->members.super.process )
+      if ( this->members.super.process ) /*0x5f4f31*/
       {
-        result = (BSExtraDataVtbl *)this->vtbl->super.super.GetSleepState((TESObjectREFR *)this);
-        if ( !result )
+        result = (ActorAnimData *)this->vtbl->super.super.GetSleepState((TESObjectREFR *)this); /*0x5f4f45*/
+        if ( !result ) /*0x5f4f49*/
         {
-          AnimGroup = Actor_LoadAnimGroup_((TESObjectREFR *)this, 0x1E, 0, 0);
-          v8 = (_DWORD *)AnimGroup;
-          if ( sub_51AA00(AnimGroup) == 0x1E )
+          AnimGroup = Actor_LoadAnimGroup_(this, 0x1Eu, 0, 0); /*0x5f4f52*/
+          v5 = AnimGroup; /*0x5f4f57*/
+          if ( AnimKey_GetGroupID(AnimGroup) == 0x1E ) /*0x5f4f66*/
           {
-            ActorAnimData_PlayAnimGroup((int)v6, v8, 1, 0xFFFFFFFF);
-            v9 = sub_4706E0(v6, 3);
-            HighPRocess_DoAction_____((PlayerCharacter *)this, 7, (int)v9);
-            return (BSExtraDataVtbl *)((int (__thiscall *)(Actor *, _DWORD *, int))this->vtbl->Unk_E9)(this, v8, 1);
+            ActorAnimData_PlayAnimGroup(v3, v5, 1u, 0xFFFFFFFF); /*0x5f4f6f*/
+            NormalizedSequenceSlot = ActorAnimData_GetNormalizedSequenceSlot(v3, 3u); /*0x5f4f78*/
+            Actor_SetCurrentActionWithBowVisualCleanup( /*0x5f4f82*/
+              this,
+              kActorCurrentAction_UnequipWeapon|kActorCurrentAction_Block,
+              NormalizedSequenceSlot);
+            return (ActorAnimData *)((int (__thiscall *)(Actor *, unsigned int, int))this->vtbl->Unk_E9)(this, v5, 1); /*0x5f4f94*/
           }
           else
           {
-            result = (BSExtraDataVtbl *)sub_470FC0(v6, 3, 0.0);
-            if ( this == (Actor *)TESDataHandler_g_PlayerRef )
+            result = (ActorAnimData *)ActorAnimData_ClearSlot(v3, 3, 0.0); /*0x5f4fa4*/
+            if ( this == (Actor *)reference ) /*0x5f4fb1*/
             {
-              AnimData = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1);
-              return (BSExtraDataVtbl *)sub_470FC0(AnimData, 3, 0.0);
+              AnimDataByPerspective = PlayerCharacter_GetAnimDataByPerspective(reference, 1); /*0x5f4fb5*/
+              return (ActorAnimData *)ActorAnimData_ClearSlot(AnimDataByPerspective, 3, 0.0); /*0x5f4fc4*/
             }
           }
         }
       }
     }
   }
-  return result;
+  return result; /*0x5f4f98*/
 }

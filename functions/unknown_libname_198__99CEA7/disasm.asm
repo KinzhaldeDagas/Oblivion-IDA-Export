@@ -5,7 +5,7 @@
 0x99CEAC: mov     eax, ___security_cookie
 0x99CEB1: xor     eax, ebp
 0x99CEB3: mov     [ebp+var_4], eax
-0x99CEB6: mov     eax, dword_BAA778
+0x99CEB6: mov     eax, dword_BA9E10+968h
 0x99CEBB: push    ebx
 0x99CEBC: mov     ebx, ds:GetLocaleInfoW
 0x99CEC2: push    esi
@@ -22,16 +22,16 @@
 0x99CED1: call    ebx ; GetLocaleInfoW
 0x99CED3: test    eax, eax
 0x99CED5: jz      short loc_99CEDF
-0x99CED7: mov     dword_BAA778, edi
+0x99CED7: mov     dword_BA9E10+968h, edi
 0x99CEDD: jmp     short loc_99CF0E
 0x99CEDF: call    ds:GetLastError
 0x99CEE5: cmp     eax, 78h ; 'x'
 0x99CEE8: jnz     short loc_99CEF4
 0x99CEEA: push    2
 0x99CEEC: pop     eax
-0x99CEED: mov     dword_BAA778, eax
+0x99CEED: mov     dword_BA9E10+968h, eax
 0x99CEF2: jmp     short loc_99CEF9
-0x99CEF4: mov     eax, dword_BAA778
+0x99CEF4: mov     eax, dword_BA9E10+968h
 0x99CEF9: cmp     eax, 2
 0x99CEFC: jz      loc_99CFC0
 0x99CF02: cmp     eax, esi

@@ -68,3 +68,19 @@
 0x49536C: mov     ecx, offset aTransdest; jumptable 00495342 case 5
 0x495371: jmp     short def_495342
 0x495373: mov     ecx, offset aMorphsource; jumptable 00495342 case 6
+0x9B01F0: mov     eax, [ebp-148h]
+0x9B01F6: push    eax
+0x9B01F7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B01FC: pop     ecx
+0x9B01FD: retn
+0x9B01FE: mov     edx, [esp+arg_4]
+0x9B0202: lea     eax, [edx-14Ch]
+0x9B0208: mov     ecx, [edx-150h]
+0x9B020E: xor     ecx, eax
+0x9B0210: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0215: add     eax, 10h
+0x9B0218: mov     ecx, [edx-4]
+0x9B021B: xor     ecx, eax
+0x9B021D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0222: mov     eax, offset stru_ADC5C0
+0x9B0227: jmp     ___CxxFrameHandler3

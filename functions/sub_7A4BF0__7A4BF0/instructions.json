@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A4BF0",
-    "line": "push    ecx",
+    "line": "push    ecx; Typed uninitialized-copy wrapper. The executable continues after the call and returns the constructed destination end; its former noreturn boundary was false.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4BF1",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7A4BFD",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7A4C02",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,32 +55,44 @@
   },
   {
     "ea": "0x7A4C07",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A4C0B",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C0C",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C0D",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4C0E",
-    "line": "call    sub_7A3BD0",
+    "line": "call    OB_SIdvLeafTexture_UninitializedCopy_010201A0; Exception-safe uninitialized deep copy of 0x54-byte SIdvLeafTexture records. Normal completion returns destination end; the separate SEH landing path destroys the constructed prefix and rethrows.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x7A4C13",
+    "line": "add     esp, 1Ch; Restored normal fall-through after uninitialized copy; returns the destination-end pointer with retn 0x0C.",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A4C16",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

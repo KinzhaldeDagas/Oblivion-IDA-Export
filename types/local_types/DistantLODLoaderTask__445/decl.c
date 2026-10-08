@@ -1,1 +1,1 @@
-DistantLODLoaderTask
+struct DistantLODLoaderTask;

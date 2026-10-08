@@ -1,124 +1,198 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagPDW",
+  "definition": "struct tagPDW\n{\nDWORD lStructSize;\nHWND hwndOwner;\nHGLOBAL hDevMode;\nHGLOBAL hDevNames;\nHDC hDC;\nDWORD Flags;\nWORD nFromPage;\nWORD nToPage;\nWORD nMinPage;\nWORD nMaxPage;\nWORD nCopies;\nHINSTANCE hInstance;\nLPARAM_0 lCustData;\nLPPRINTHOOKPROC lpfnPrintHook;\nLPSETUPHOOKPROC lpfnSetupHook;\nLPCWSTR lpPrintTemplateName;\nLPCWSTR lpSetupTemplateName;\nHGLOBAL hPrintTemplate;\nHGLOBAL hSetupTemplate;\n}\n",
   "id": 18374686479672033979,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lStructSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndOwner",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDevMode",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HGLOBAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDevNames",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HGLOBAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDC",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HDC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flags",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nFromPage",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nToPage",
       "offset": 26,
-      "offset_hex": "0x1a",
-      "size": 2
+      "offset_hex": "0x1A",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nMinPage",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 2
+      "offset_hex": "0x1C",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nMaxPage",
       "offset": 30,
-      "offset_hex": "0x1e",
-      "size": 2
+      "offset_hex": "0x1E",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nCopies",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hInstance",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HINSTANCE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lCustData",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 8
+      "size": 8,
+      "type": "LPARAM_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpfnPrintHook",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "LPPRINTHOOKPROC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpfnSetupHook",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "LPSETUPHOOKPROC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpPrintTemplateName",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpSetupTemplateName",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hPrintTemplate",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HGLOBAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hSetupTemplate",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HGLOBAL"
     }
   ],
   "name": "tagPDW",
+  "ordinal": 3699,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

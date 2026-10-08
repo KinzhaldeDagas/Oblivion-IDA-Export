@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x69DB90",
+      "0x69DBA9"
+    ]
+  ],
+  "chunks_sha256": "43ac762513081db9456f107ee2a6acd48311362e4269ef28414b27ead9536155",
+  "comment_regular": "Verified (Oblivion): base GetExtraSaveSize receives owner ActiveEffect* and target TESObjectREFR*; it returns 5 bytes before version 0x72 and 9 bytes from version 0x72.",
+  "comment_repeatable": "Verified (Oblivion): base GetExtraSaveSize receives owner ActiveEffect* and target TESObjectREFR*; it returns 5 bytes before version 0x72 and 9 bytes from version 0x72.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_69DB90",
+  "display_name": "MagicHitEffect_GetExtraSaveSize",
   "end_ea": "0x69DBA9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_69DB90",
+  "name": "MagicHitEffect_GetExtraSaveSize",
   "segment": ".text",
   "sha256": "43ac762513081db9456f107ee2a6acd48311362e4269ef28414b27ead9536155",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69DB90",
-  "type": "signed int __stdcall(int, int)",
+  "total_chunk_size": 25,
+  "type": "unsigned __int16 __thiscall(MagicHitEffect *this, ActiveEffect *ownerActiveEffect, TESObjectREFR *targetReference)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 3
 }

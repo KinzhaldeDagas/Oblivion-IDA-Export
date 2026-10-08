@@ -1,1 +1,1 @@
-ITypeInfo_0
+typedef ITypeInfo ITypeInfo_0;

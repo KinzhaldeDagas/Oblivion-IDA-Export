@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x551A00",
+      "0x551B35"
+    ]
+  ],
+  "chunks_sha256": "0011d4f5799710e459b39e375a8c11e514988f4c4f9e8d6b55057089ad3b5aab",
+  "comment_regular": "Build age overlay through engine FindFile (loose/archive lookup): exact requested age first, then floor decade descending to zero. Does not search upwards; null can mean only higher-age overlays exist. Prettier Faces 1.19.9 fixes prior midpoint-only fallback: probe ascending higher decades while closer than current lower result, preserve exact match and lower ties, reconstruct winner because each call mutates outPath. Native unbounded source copy into 260-byte stack buffer remains guarded by plugin path length check in randomizer scope.",
+  "comment_repeatable": "Build age overlay through engine FindFile (loose/archive lookup): exact requested age first, then floor decade descending to zero. Does not search upwards; null can mean only higher-age overlays exist. Prettier Faces 1.19.9 fixes prior midpoint-only fallback: probe ascending higher decades while closer than current lower result, preserve exact match and lower ties, reconstruct winner because each call mutates outPath. Native unbounded source copy into 260-byte stack buffer remains guarded by plugin path length check in randomizer scope.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_551A00",
+  "display_name": "FaceGen_BuildAgeTexturePath",
   "end_ea": "0x551B35",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_551A00",
+  "name": "FaceGen_BuildAgeTexturePath",
   "segment": ".text",
   "sha256": "0011d4f5799710e459b39e375a8c11e514988f4c4f9e8d6b55057089ad3b5aab",
   "size": 309,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x551A00",
-  "type": "char *__cdecl(BSStringT *, signed int, unsigned __int8, char *)",
+  "total_chunk_size": 309,
+  "type": "char *__cdecl(BSStringT *outPath, int sex, unsigned __int8 age, const char *baseTexturePath)",
   "xrefs_from_count": 124,
   "xrefs_to_count": 1
 }

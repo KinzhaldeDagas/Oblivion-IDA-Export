@@ -1,0 +1,5 @@
+struct NiAdditionalGeometryDataVtbl
+{
+NiObjectVtbl super;
+NiAdditionalGeometryData_IsPackedCandidate_t isPackedDataCandidate;
+};

@@ -1,19 +1,36 @@
 {
-  "callees_count": 49,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 12,
-  "display_name": "sub_6B7840",
+  "chunks": [
+    [
+      "0x6B7840",
+      "0x6B7B5B"
+    ],
+    [
+      "0x9C6E70",
+      "0x9C6E96"
+    ]
+  ],
+  "chunks_sha256": "a2edf2071e2d4d38af1d29c5c2e5aeef524616d8d4ff5446044dc96a830ef4f8",
+  "comment_regular": "Recreates the serialized DialogueItem list and restores Conversation.currentItemNode from its UInt16 index. It does not call TESTopic::CreateConversation or run INFO results.",
+  "comment_repeatable": "Recreates the serialized DialogueItem list and restores Conversation.currentItemNode from its UInt16 index. It does not call TESTopic::CreateConversation or run INFO results.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "Conversation::LoadGame",
   "end_ea": "0x6B7B5B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B7840",
+  "name": "Conversation::LoadGame",
   "segment": ".text",
   "sha256": "2c81d441cea60f76e08d1fe86068ba8be2dc263877613e5762cfd0cfd5c3d978",
   "size": 795,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B7840",
-  "type": "void __thiscall(unsigned int ***this)",
-  "xrefs_from_count": 311,
+  "total_chunk_size": 833,
+  "type": "void __thiscall(ConversationView *this)",
+  "xrefs_from_count": 325,
   "xrefs_to_count": 1
 }

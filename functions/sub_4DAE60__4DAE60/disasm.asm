@@ -10,7 +10,7 @@
 0x4DAE78: mov     edi, [esi+10h]
 0x4DAE7B: mov     ecx, esi
 0x4DAE7D: mov     [esp+50h+arg_4], edi
-0x4DAE81: call    sub_452A60
+0x4DAE81: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x4DAE86: cmp     esi, [ebp+10h]
 0x4DAE89: mov     ebx, eax
 0x4DAE8B: jz      short loc_4DAEB0
@@ -39,7 +39,7 @@
 0x4DAECC: call    edx
 0x4DAECE: test    eax, eax
 0x4DAED0: jz      short loc_4DAEE4
-0x4DAED2: cmp     eax, offset dword_B35288
+0x4DAED2: cmp     eax, 0B35288h
 0x4DAED7: jz      loc_4DB02A
 0x4DAEDD: mov     eax, [eax+4]
 0x4DAEE0: test    eax, eax
@@ -47,7 +47,7 @@
 0x4DAEE4: test    edi, edi
 0x4DAEE6: jz      loc_4DB02A
 0x4DAEEC: push    edi
-0x4DAEED: push    offset dword_BA7D84
+0x4DAEED: push    offset stru_BA7D84
 0x4DAEF2: call    NiRTTI_Cast
 0x4DAEF7: mov     esi, eax
 0x4DAEF9: add     esp, 8
@@ -65,11 +65,11 @@
 0x4DAF19: test    edi, edi
 0x4DAF1B: jz      short loc_4DAF32
 0x4DAF1D: mov     ecx, esi
-0x4DAF1F: call    sub_89F570
+0x4DAF1F: call    bhkRefObject_UpdateHavokObject
 0x4DAF24: mov     ecx, edi
 0x4DAF26: call    sub_8A6440
 0x4DAF2B: mov     ecx, esi
-0x4DAF2D: call    sub_89F570
+0x4DAF2D: call    bhkRefObject_UpdateHavokObject
 0x4DAF32: mov     al, [ebp+0]
 0x4DAF35: test    al, 2
 0x4DAF37: jz      short loc_4DAF71
@@ -87,26 +87,26 @@
 0x4DAF5A: push    eax
 0x4DAF5B: call    sub_4D7AF0
 0x4DAF60: push    eax
-0x4DAF61: lea     ecx, [esp+54h+var_34]
+0x4DAF61: lea     ecx, [esp+54h+destination]
 0x4DAF65: call    sub_7150F0
-0x4DAF6A: lea     ecx, [esp+50h+var_34]
+0x4DAF6A: lea     ecx, [esp+50h+destination]
 0x4DAF6E: push    ecx
 0x4DAF6F: jmp     short loc_4DAFA6
-0x4DAF71: mov     ecx, ds:0B33B00h
-0x4DAF77: push    0Ch; Size
+0x4DAF71: mov     ecx, ds:0B33B00h; self
+0x4DAF77: push    0Ch; byteCount
 0x4DAF79: lea     edx, [esp+54h+Dst]
-0x4DAF7D: push    edx; Dst
-0x4DAF7E: call    SaveLoad_LoadData
-0x4DAF83: mov     ecx, ds:0B33B00h
-0x4DAF89: push    10h; Size
-0x4DAF8B: lea     eax, [esp+54h+var_34]
-0x4DAF8F: push    eax; Dst
-0x4DAF90: call    SaveLoad_LoadData
+0x4DAF7D: push    edx; destination
+0x4DAF7E: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4DAF83: mov     ecx, ds:0B33B00h; self
+0x4DAF89: push    10h; byteCount
+0x4DAF8B: lea     eax, [esp+54h+destination]
+0x4DAF8F: push    eax; destination
+0x4DAF90: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4DAF95: lea     ecx, [esp+50h+Dst]
 0x4DAF99: push    ecx
 0x4DAF9A: mov     ecx, esi
 0x4DAF9C: call    sub_4D69A0
-0x4DAFA1: lea     edx, [esp+50h+var_34]
+0x4DAFA1: lea     edx, [esp+50h+destination]
 0x4DAFA5: push    edx
 0x4DAFA6: mov     ecx, esi
 0x4DAFA8: call    sub_4D6A00
@@ -114,28 +114,28 @@
 0x4DAFB0: test    al, 4
 0x4DAFB2: mov     byte ptr [esp+50h+arg_4], 0
 0x4DAFB7: jz      short loc_4DB032
-0x4DAFB9: mov     ecx, ds:0B33B00h
-0x4DAFBF: push    1; Size
+0x4DAFB9: mov     ecx, ds:0B33B00h; self
+0x4DAFBF: push    1; byteCount
 0x4DAFC1: lea     eax, [esp+54h+arg_4]
-0x4DAFC5: push    eax; Dst
-0x4DAFC6: call    SaveLoad_LoadData
+0x4DAFC5: push    eax; destination
+0x4DAFC6: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4DAFCB: cmp     byte ptr [esp+50h+arg_4], 0
 0x4DAFD0: jz      short loc_4DB03D
-0x4DAFD2: push    0Ch; Size
+0x4DAFD2: push    0Ch; byteCount
 0x4DAFD4: lea     ecx, [esp+54h+Dst]
-0x4DAFD8: push    ecx; Dst
-0x4DAFD9: mov     ecx, ds:0B33B00h
-0x4DAFDF: call    SaveLoad_LoadData
-0x4DAFE4: mov     ecx, ds:0B33B00h
-0x4DAFEA: push    0Ch; Size
-0x4DAFEC: lea     edx, [esp+54h+var_34]
-0x4DAFF0: push    edx; Dst
-0x4DAFF1: call    SaveLoad_LoadData
+0x4DAFD8: push    ecx; destination
+0x4DAFD9: mov     ecx, ds:0B33B00h; self
+0x4DAFDF: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4DAFE4: mov     ecx, ds:0B33B00h; self
+0x4DAFEA: push    0Ch; byteCount
+0x4DAFEC: lea     edx, [esp+54h+destination]
+0x4DAFF0: push    edx; destination
+0x4DAFF1: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4DAFF6: lea     eax, [esp+50h+Dst]
 0x4DAFFA: push    eax
 0x4DAFFB: mov     ecx, esi
 0x4DAFFD: call    sub_4D9960
-0x4DB002: lea     ecx, [esp+50h+var_34]
+0x4DB002: lea     ecx, [esp+50h+destination]
 0x4DB006: push    ecx
 0x4DB007: mov     ecx, esi
 0x4DB009: call    sub_4D99E0
@@ -143,11 +143,11 @@
 0x4DB011: test    edi, edi
 0x4DB013: jz      short loc_4DB02A
 0x4DB015: mov     ecx, esi
-0x4DB017: call    sub_89F570
+0x4DB017: call    bhkRefObject_UpdateHavokObject
 0x4DB01C: mov     ecx, edi
 0x4DB01E: call    sub_8A6410
 0x4DB023: mov     ecx, esi
-0x4DB025: call    sub_89F570
+0x4DB025: call    bhkRefObject_UpdateHavokObject
 0x4DB02A: pop     edi
 0x4DB02B: pop     esi
 0x4DB02C: pop     ebp
@@ -158,10 +158,10 @@
 0x4DB034: jz      short loc_4DB03D
 0x4DB036: mov     byte ptr [esp+50h+arg_4], 1
 0x4DB03B: jmp     short loc_4DAFD2
-0x4DB03D: push    offset Vector3_InitValue?
+0x4DB03D: push    offset g_zeroNiPoint3
 0x4DB042: mov     ecx, esi
 0x4DB044: call    sub_4D9960
-0x4DB049: push    offset Vector3_InitValue?
+0x4DB049: push    offset g_zeroNiPoint3
 0x4DB04E: mov     ecx, esi
 0x4DB050: call    sub_4D99E0
 0x4DB055: test    bl, bl
@@ -170,7 +170,7 @@
 0x4DB05C: test    edi, edi
 0x4DB05E: jz      short loc_4DB02A
 0x4DB060: mov     ecx, esi
-0x4DB062: call    sub_89F570
+0x4DB062: call    bhkRefObject_UpdateHavokObject
 0x4DB067: mov     ecx, edi
 0x4DB069: call    sub_8A6440
 0x4DB06E: pop     edi
@@ -179,4 +179,4 @@
 0x4DB072: pop     ebp
 0x4DB073: pop     ebx
 0x4DB074: add     esp, 40h
-0x4DB077: jmp     sub_89F570
+0x4DB077: jmp     bhkRefObject_UpdateHavokObject

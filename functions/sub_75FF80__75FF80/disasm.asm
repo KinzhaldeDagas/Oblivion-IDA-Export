@@ -15,7 +15,7 @@
 0x75FF9D: jz      short loc_75FFAC
 0x75FF9F: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
 0x75FFA3: jnz     short loc_75FFAA
-0x75FFA5: call    sub_772560
+0x75FFA5: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x75FFAA: mov     [edi], ebp
 0x75FFAC: add     ebx, 1
 0x75FFAF: cmp     bx, [esi+0Ah]

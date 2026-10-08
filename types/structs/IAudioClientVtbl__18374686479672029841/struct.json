@@ -1,100 +1,162 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IAudioClientVtbl",
+  "definition": "struct IAudioClientVtbl\n{\nHRESULT_0 (*QueryInterface)(IAudioClient_0 *, const IID *const, void **);\nULONG (*AddRef)(IAudioClient_0 *);\nULONG (*Release)(IAudioClient_0 *);\nHRESULT_0 (*Initialize)(IAudioClient_0 *, AUDCLNT_SHAREMODE, DWORD, REFERENCE_TIME, REFERENCE_TIME, const WAVEFORMATEX *, LPCGUID);\nHRESULT_0 (*GetBufferSize)(IAudioClient_0 *, UINT32 *);\nHRESULT_0 (*GetStreamLatency)(IAudioClient_0 *, REFERENCE_TIME *);\nHRESULT_0 (*GetCurrentPadding)(IAudioClient_0 *, UINT32 *);\nHRESULT_0 (*IsFormatSupported)(IAudioClient_0 *, AUDCLNT_SHAREMODE, const WAVEFORMATEX *, WAVEFORMATEX **);\nHRESULT_0 (*GetMixFormat)(IAudioClient_0 *, WAVEFORMATEX **);\nHRESULT_0 (*GetDevicePeriod)(IAudioClient_0 *, REFERENCE_TIME *, REFERENCE_TIME *);\nHRESULT_0 (*Start)(IAudioClient_0 *);\nHRESULT_0 (*Stop)(IAudioClient_0 *);\nHRESULT_0 (*Reset)(IAudioClient_0 *);\nHRESULT_0 (*SetEventHandle)(IAudioClient_0 *, HANDLE);\nHRESULT_0 (*GetService)(IAudioClient_0 *, const IID *const, void **);\n}\n",
   "id": 18374686479672029841,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IAudioClient_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IAudioClient_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Initialize",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, AUDCLNT_SHAREMODE, DWORD, REFERENCE_TIME, REFERENCE_TIME, const WAVEFORMATEX *, LPCGUID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetBufferSize",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, UINT32 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetStreamLatency",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, REFERENCE_TIME *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCurrentPadding",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, UINT32 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsFormatSupported",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, AUDCLNT_SHAREMODE, const WAVEFORMATEX *, WAVEFORMATEX **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetMixFormat",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, WAVEFORMATEX **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDevicePeriod",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, REFERENCE_TIME *, REFERENCE_TIME *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Start",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Stop",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reset",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetEventHandle",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, HANDLE)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetService",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioClient_0 *, const IID *const, void **)"
     }
   ],
   "name": "IAudioClientVtbl",
+  "ordinal": 2214,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 60
 }

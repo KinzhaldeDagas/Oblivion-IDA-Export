@@ -1,1 +1,1 @@
-WND
+typedef tagWND WND;

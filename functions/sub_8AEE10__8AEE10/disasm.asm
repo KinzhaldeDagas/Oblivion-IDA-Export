@@ -14,7 +14,7 @@
 0x8AEE31: lea     eax, [esp+60h+var_50]
 0x8AEE35: push    eax
 0x8AEE36: mov     ecx, esi
-0x8AEE38: call    sub_6848D0
+0x8AEE38: call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.
 0x8AEE3D: lea     ecx, [esp+60h+var_50]
 0x8AEE41: lea     esi, [edi+20h]
 0x8AEE44: push    ecx

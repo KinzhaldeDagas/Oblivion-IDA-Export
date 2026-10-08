@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A10B0",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+deltaSeconds]; Verified MagicShaderHitEffect_Update calls base lifetime/target checks, updates its model/shader components, uses bFinished to finish their fade/animation, and returns false when the temp effect is done.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6A10B9",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+var_10]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6A10BE",
-    "line": "call    sub_69D9A0",
+    "line": "call    MagicHitEffect_Update; Verified MagicHitEffect_Update accumulates elapsedSeconds at +0x20, rejects missing/unloaded/flagged targetReference at +0x1C, and sets bFinished (+0x24) when durationSeconds (+0x08) is exceeded. Model and shader overrides use bFinished to end their visuals; the field's broad role is Probable 'finished/expired' state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6A10ED",
-    "line": "fadd    [esp+0Ch+arg_0]",
+    "line": "fadd    [esp+0Ch+deltaSeconds]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6A10FA",
-    "line": "fstp    dword ptr [esi+38h]",
+    "line": "fstp    dword ptr [esi+38h]; Verified (Oblivion): field +0x38 accumulates deltaSeconds during shader hit-effect update; typed as elapsedVisualSeconds_38. This is distinct from base MagicHitEffect::elapsedSeconds at +0x20.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x6A1135",
-    "line": "push    offset dword_B35288",
+    "line": "push    0B35288h",
     "mnemonic": "push",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x6A11B5",
-    "line": "mov     ecx, [esi+34h]",
+    "line": "mov     ecx, [esi+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A11B8",
-    "line": "fstp    [esp+10h+var_4]",
+    "line": "fstp    [esp+10h+var_4]; Verified (Oblivion): the current particle level at shaderProperty_3C+0x80, deltaSeconds, elapsedVisualSeconds_38, and bFinished are passed to TESEffectShader_AdvanceParticleLevel; its returned level is written back to +0x80. The separately computed target-size ratio is stored at +0x124.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6A11BF",
-    "line": "push    eax; float",
+    "line": "push    eax; bFinished",
     "mnemonic": "push",
     "size": 1
   },
@@ -553,19 +553,19 @@
   },
   {
     "ea": "0x6A11C3",
-    "line": "fstp    [esp+20h+var_18]; float",
+    "line": "fstp    [esp+20h+elapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6A11C7",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6A11CB",
-    "line": "fstp    [esp+20h+var_1C]; float",
+    "line": "fstp    [esp+20h+visualElapsedSeconds]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -577,13 +577,13 @@
   },
   {
     "ea": "0x6A11D3",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+currentValue]; currentParticleLevel",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A11D6",
-    "line": "call    sub_4ADBA0",
+    "line": "call    TESEffectShader_AdvanceParticleLevel; Verified (Oblivion): ParticleShaderProperty_AdvanceEffectAnimation updates shaderProperty_3C using its current alpha/timer state, deltaSeconds, elapsedVisualSeconds_38 and bFinished.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x6A11E6",
-    "line": "push    1; char",
+    "line": "push    1; allowEmission",
     "mnemonic": "push",
     "size": 2
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x6A11F5",
-    "line": "push    0; char",
+    "line": "push    0; applyWorldOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A11F7",
-    "line": "fstp    dword ptr [edx+124h]",
+    "line": "fstp    dword ptr [edx+124h]; Verified (Oblivion): stores the computed, clamped target-to-actor scale ratio at ParticleShaderProperty::targetScaleRatio_124. The field name is Probable; its value is directly derived from the target's visual height and used to scale the shader effect.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x6A1201",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6A1204",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+visualElapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A1207",
-    "line": "call    sub_7E51F0",
+    "line": "call    ParticleShaderProperty_UpdateParticles; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x6A1225",
-    "line": "push    ecx; float",
+    "line": "push    ecx; bFinished",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A1226",
-    "line": "mov     ecx, [esi+34h]",
+    "line": "mov     ecx, [esi+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x6A122C",
-    "line": "fstp    [esp+20h+var_18]; float",
+    "line": "fstp    [esp+20h+elapsedSeconds]; activeElapsedSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -757,31 +757,31 @@
   },
   {
     "ea": "0x6A1233",
-    "line": "fstp    [esp+20h+var_1C]; float",
+    "line": "fstp    [esp+20h+visualElapsedSeconds]; visualElapsedSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6A1237",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6A123B",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+currentValue]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A123E",
-    "line": "push    eax; int",
+    "line": "push    eax; textureEffectData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A123F",
-    "line": "call    sub_4ADC90",
+    "line": "call    TESEffectShader_AnimateTextureEffect; Verified (Oblivion): MagicShaderHitEffect_Update calls TESEffectShader_AnimateTextureEffect with its refcounted textureEffectData_48, deltaSeconds, elapsedVisualSeconds_38, base elapsedSeconds, and bFinished; the updater's writes keep the attached fill/edge texture effect and UV motion synchronized with the shader's animation timeline.",
     "mnemonic": "call",
     "size": 5
   },

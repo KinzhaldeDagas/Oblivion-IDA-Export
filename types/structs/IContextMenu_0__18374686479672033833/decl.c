@@ -1,1 +1,1 @@
-IContextMenu_0
+typedef IContextMenu IContextMenu_0;

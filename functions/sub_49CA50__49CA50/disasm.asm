@@ -28,7 +28,7 @@
 0x49CAA1: lea     eax, [esp+1Ch+var_4]
 0x49CAA5: push    eax
 0x49CAA6: call    edx
-0x49CAA8: mov     eax, dword ptr [esp+18h+var_4]
+0x49CAA8: mov     eax, [esp+18h+var_4]
 0x49CAAC: test    eax, eax
 0x49CAAE: jz      short loc_49CACE
 0x49CAB0: mov     esi, eax
@@ -72,13 +72,13 @@
 0x49CB10: jz      short loc_49CB2F
 0x49CB12: mov     ecx, [eax-4]
 0x49CB15: lea     esi, [eax-4]
-0x49CB18: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x49CB18: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x49CB1D: push    ecx; int
 0x49CB1E: push    4; unsigned int
 0x49CB20: push    eax; void *
 0x49CB21: call    $LN21
 0x49CB26: push    esi
-0x49CB27: call    FormHeapFree
+0x49CB27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49CB2C: add     esp, 4
 0x49CB2F: pop     esi
 0x49CB30: mov     dword ptr [ebx+8], 0

@@ -58,3 +58,30 @@
 0x77BE4B: jmp     loc_7645C0
 0x77BE50: pop     ebx
 0x77BE51: retn
+0x7645C0: mov     eax, ds:0B42154h
+0x7645C5: test    eax, eax
+0x7645C7: jz      short loc_7645DB
+0x7645C9: mov     ecx, [eax]
+0x7645CB: mov     edx, [ecx+8]
+0x7645CE: push    eax
+0x7645CF: call    edx
+0x7645D1: mov     dword ptr ds:0B42154h, 0
+0x7645DB: mov     ecx, ds:0B42160h
+0x7645E1: test    ecx, ecx
+0x7645E3: push    esi
+0x7645E4: mov     esi, ecx
+0x7645E6: jz      short loc_7645F6
+0x7645E8: call    sub_775F10
+0x7645ED: push    esi
+0x7645EE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x7645F3: add     esp, 4
+0x7645F6: mov     eax, ds:0B42150h
+0x7645FB: test    eax, eax
+0x7645FD: mov     dword ptr ds:0B42160h, 0
+0x764607: pop     esi
+0x764608: jz      short loc_764611
+0x76460A: push    eax; hLibModule
+0x76460B: call    dword ptr ds:0A28204h
+0x764611: mov     dword ptr ds:0B42158h, 0
+0x76461B: mov     ecx, offset off_B28E00
+0x764620: jmp     NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.

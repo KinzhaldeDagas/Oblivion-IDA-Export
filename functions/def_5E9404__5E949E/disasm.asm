@@ -5,7 +5,7 @@
 0x5E94AB: jnz     loc_5E93D0
 0x5E94B1: push    0; Seed
 0x5E94B3: mov     [esp+4+arg_1C], ebx
-0x5E94B7: call    GetRandomLargeInteger?
+0x5E94B7: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5E94BC: add     esp, 4
 0x5E94BF: test    ebx, ebx
 0x5E94C1: jz      short loc_5E953C
@@ -61,7 +61,7 @@
 0x5E9542: mov     eax, [ebx+4]
 0x5E9545: mov     esi, [eax+4]
 0x5E9548: push    eax
-0x5E9549: call    FormHeapFree
+0x5E9549: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E954E: add     esp, 4
 0x5E9551: test    esi, esi
 0x5E9553: mov     [ebx+4], esi
@@ -73,16 +73,16 @@
 0x5E9568: mov     eax, [edi+4]
 0x5E956B: mov     esi, [eax+4]
 0x5E956E: push    eax
-0x5E956F: call    FormHeapFree
+0x5E956F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E9574: add     esp, 4
 0x5E9577: test    esi, esi
 0x5E9579: mov     [edi+4], esi
 0x5E957C: jnz     short loc_5E9568
 0x5E957E: push    edi
 0x5E957F: mov     dword ptr [edi], 0
-0x5E9585: call    FormHeapFree
+0x5E9585: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E958A: push    ebx
-0x5E958B: call    FormHeapFree
+0x5E958B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E9590: add     esp, 8
 0x5E9593: pop     edi
 0x5E9594: pop     esi

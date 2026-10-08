@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x46591D",
-    "line": "push    1",
+    "line": "push    1; ContinueFromLastSave decode: TESSaveLoadGame_LoadGame calls Savegame_Rename(this, 0, saveStem, 1); saveStem should be extensionless for normal menu-style load.",
     "mnemonic": "push",
     "size": 2
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x465923",
-    "line": "call    Savegame_Rename",
+    "line": "call    TESSaveLoadGame_ResolveSaveFile; Load path resolver call. CharacterSpecificSaves applies the same character-qualified stem for quickload/autoload consistency.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x46592A",
-    "line": "mov     eax, 32h ; '2'",
+    "line": "mov     eax, 32h ; '2'; MEF SAVE PERF PASS2 2026-10-08: PERF-20 VERIFIED: each LoadGame constructs a fresh local NiTLargeArray<FormAndFlags*> with capacity/growBy50 and used/nonzero0, allocating200 bytes at46596D. This post-load queue is separate from retained numeric/worldspace ID arrays (PERF-19). No repeated-hole scan: append5A6AB0 targets used count. Repeated +50 growth copies the prior queue; ordinary completion frees storage466A31.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x465933",
-    "line": "mov     [esp+330h+var_290], eax",
+    "line": "mov     [esp+330h+self.capacity], eax; Verified: capacity field initialized at +8, used in bounds comparisons.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x46593A",
-    "line": "mov     [esp+330h+var_284], eax",
+    "line": "mov     [esp+330h+self.growBy], eax; Verified: growth increment initialized at +0x14.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -385,25 +385,25 @@
   },
   {
     "ea": "0x46594B",
-    "line": "mov     [esp+330h+var_2F8], esi",
+    "line": "mov     [esp+330h+stream], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x46594F",
-    "line": "mov     [esp+330h+var_298], offset ??_7?$NiTLargeArray@PAUFormAndFlags@@@@6B@; const NiTLargeArray<FormAndFlags *>::`vftable'",
+    "line": "mov     [esp+330h+self.vtable], offset ??_7?$NiTLargeArray@PAUFormAndFlags@@@@6B@; Verified: NiTLargeArray vtable pointer.",
     "mnemonic": "mov",
     "size": 11
   },
   {
     "ea": "0x46595A",
-    "line": "mov     [esp+330h+var_28C], ebx",
+    "line": "mov     [esp+330h+self.count], ebx; Verified: logical item count initialized/reset at +0xC.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x465961",
-    "line": "mov     [esp+330h+var_288], ebx",
+    "line": "mov     [esp+330h+self.nonzeroCount], ebx; Verified: nonzero element count tracked at +0x10.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x465975",
-    "line": "mov     [esp+330h+var_294], eax",
+    "line": "mov     [esp+330h+self.data], eax; Verified: pointer to uint32 backing storage.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x465999",
-    "line": "call    sub_45DBC0",
+    "line": "call    TESSaveLoadGame_OpenAndValidateSave",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x465A0A",
-    "line": "mov     eax, [esp+330h+var_294]",
+    "line": "mov     eax, [esp+330h+self.data]; Verified: pointer to uint32 backing storage.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x465A3F",
-    "line": "call    sub_45D5F0",
+    "line": "call    TESSaveLoadGame_ReadSaveHeader",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,13 +937,13 @@
   },
   {
     "ea": "0x465A81",
-    "line": "call    sub_45C9C0",
+    "line": "call    sub_45C9C0; MEF v58 SAVE IMPLEMENTATION: staged SR-1 admission hook replaces this CALL only. Validate/capture before original plugin-list mapping45C9C0, Reset465B12, incoming map construction and world deserialization. AL0 follows existing stream/reference-map/local-array cleanup465A8A. Header/version metadata was already read; no atomic rollback claim. Snapshot protection initially covers native major0/version5E..7D with zero created-object count; other shapes remain explicit native fallback.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x465A86",
-    "line": "test    al, al",
+    "line": "test    al, al; MEF v58 SR1 implementation verified: admission at preceding CALL binds immutable bytes only for supported major0/minor5E..7D native-mode0 saves with createdCount0. Malformed framing/acquisition/OOM refuses via AL0 here before Reset; unsupported shapes remain native. Snapshot may retain up to256MiB per stream and adds a full input read. Fixture verifies every-prefix truncation, CON offsets, preview bounds, ownership and PERF4 extent integration. No gameplay timing/roundtrip claim.",
     "mnemonic": "test",
     "size": 2
   },
@@ -1033,13 +1033,13 @@
   },
   {
     "ea": "0x465AA8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; owner",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x465AAA",
-    "line": "call    sub_4530A0",
+    "line": "call    SaveLoad_ClearReferenceMapState;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x465AB0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x465B03",
-    "line": "jz      short loc_465B10",
+    "line": "jz      short loc_465B10; MEF v58 contracts/evidence: tests/PERFORMANCE_V58_CONTRACTS.md and build/validation/v58. Seven new signature-gated executable writes cover PERF18 query/consumer/producer/ctor/dtor, PERF20 local append and partial SR1 admission. PERF19 modifies the existing checked lookup helper. Matching exterior restores, manager queues and unsupported SR1 framing remain native.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x465B10",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; MEF v58 contracts/evidence: tests/PERFORMANCE_V58_CONTRACTS.md and build/validation/v58. Seven new signature-gated executable writes cover PERF18 query/consumer/producer/ctor/dtor, PERF20 local append and partial SR1 admission. PERF19 modifies the existing checked lookup helper. Matching exterior restores, manager queues and unsupported SR1 framing remain native.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x465B31",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x465B33",
-    "line": "call    ??0ChangesMap@@QAE@XZ; ChangesMap::ChangesMap(void)",
+    "line": "call    ??0ChangesMap@@QAE@XZ;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x465B43",
-    "line": "lea     eax, [esp+334h+var_2F4]",
+    "line": "lea     eax, [esp+334h+arg2]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x465B58",
-    "line": "mov     [esp+344h+var_2F4], edi",
+    "line": "mov     [esp+344h+arg2], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x465B5C",
-    "line": "call    edx",
+    "line": "call    edx; MEF v58 SR1 covered count/header/ID spans are prevalidated against retained snapshot bytes before entering this stage. Native file callback430050 dispatches to per-object cloned read slot+38; seeks and size queries use same snapshot. Custom streams/cursor contracts, unsupported versions and nonzero created-object tables are native fallbacks with outstanding SR1 risk. Do not infer general malformed-save or mid-load abort safety.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x465B62",
-    "line": "lea     eax, [esp+348h+var_2F4]",
+    "line": "lea     eax, [esp+348h+arg2]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1393,13 +1393,13 @@
   },
   {
     "ea": "0x465B6F",
-    "line": "mov     [esp+358h+var_2F4], edi",
+    "line": "mov     [esp+358h+arg2], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x465B73",
-    "line": "call    edx",
+    "line": "call    edx; MEF SAVE PERF PASS2 2026-10-08: SR-1 HEADER EXTENSION: four-byte declared change-record count is read through native stream callback without testing returned count. Later loop is unsigned count-driven46686C..46687B. Do not reserve PERF-20 queue directly from this unvalidated value. Validate exact count/header reads and physical extents with checked arithmetic before treating count as an allocation bound.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x465B7F",
-    "line": "mov     eax, ds:0B33398h",
+    "line": "mov     eax, ds:0B33398h; MEF SAVE PERF PASS2 2026-10-08: SR-1 recovery boundary qualification: this existing early failure path clears loading flags, closes/unlinks stream, destroys incoming map and frees local array, before later lock432860 at465BF0 and global-load callbacks465C4D. It is NOT a safe jump target from a record-loop failure: later lock/state/form/queue side effects need separate cleanup. Reset462080 already ran465B12, so even this early path is not evidence of atomic rollback.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x465BF7",
-    "line": "call    sub_459A10",
+    "line": "call    sub_459A10; Caller of sub_459A10 in TESSaveLoadGame_LoadGame; load-game start/menu transition path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,19 +1723,19 @@
   },
   {
     "ea": "0x465C25",
-    "line": "push    esi",
+    "line": "push    esi; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465C26",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x465C28",
-    "line": "call    sub_45E3D0",
+    "line": "call    SaveLoad_LoadIDArrays; MEF PERF 2026-09-08: PERF-4 direct LoadGame caller invokes45E3D0 and does not branch on its return before further file seeks/processing. A new fatal reserve/read failure cannot simply invent a boolean early return; propagate through a defined load-abort contract or retain a safe compatible fallback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x465C4D",
-    "line": "call    SaveLoad_LoadGame_Subroutine?",
+    "line": "call    SaveLoad_LoadGame_Subroutine?; EnginePatch v2: call patched to install per-file safe read callback before SaveLoad_LoadGame_Subroutine direct read paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x465C65",
-    "line": "mov     [esp+330h+var_2F4], edi",
+    "line": "mov     [esp+330h+arg2], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x465C83",
-    "line": "lea     eax, [esp+338h+var_318]",
+    "line": "lea     eax, [esp+338h+reference]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1933,13 +1933,13 @@
   },
   {
     "ea": "0x465C90",
-    "line": "mov     [esp+348h+var_318], ebx",
+    "line": "mov     [esp+348h+reference], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x465C94",
-    "line": "call    edx",
+    "line": "call    edx; MEF SAVE PERF PASS2 2026-10-08: SR-1 HEADER EXTENSION VERIFIED: requests12-byte change-record header then immediately loads its FormID at465C96; no returned-count check or per-iteration header clear. Native BSFile short/EOF read leaves remaining bytes untouched. EOF after a missing-plugin, zero-payload header can reprocess that stale header until declared count exhausted (assuming stable stream/mapping and normal callbacks); loop has no local EOF break. No corrupt save or gameplay hang executed.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x465CAB",
-    "line": "fstp    [esp+334h+var_318]",
+    "line": "fstp    [esp+334h+reference]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x465CD1",
-    "line": "lea     ecx, [esp+350h+var_318]",
+    "line": "lea     ecx, [esp+350h+reference]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x465CEC",
-    "line": "fld     [esp+358h+var_318]",
+    "line": "fld     [esp+358h+reference]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x465D07",
-    "line": "call    SaveLoad_ResolveFormID",
+    "line": "call    SaveLoad_ResolveFormID; Remaps a serialized FormID's high-byte mod index through TESSaveLoad::modRefIDTable. Dynamic 0xFF IDs pass through; missing/out-of-range mods resolve to zero; low 24-bit object ID is preserved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x465D52",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x465D59",
-    "line": "mov     eax, [esp+334h+var_30F]",
+    "line": "mov     eax, [esp+334h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x465D70",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2383,7 +2383,7 @@
   },
   {
     "ea": "0x465D7E",
-    "line": "mov     [esp+330h+var_318], edi",
+    "line": "mov     [esp+330h+reference], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2413,49 +2413,49 @@
   },
   {
     "ea": "0x465D8F",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x465D91",
-    "line": "lea     eax, [esp+334h+var_2D0]",
+    "line": "lea     eax, [esp+334h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x465D95",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465D96",
-    "line": "push    esi",
+    "line": "push    esi; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465D97",
-    "line": "call    sub_45BB00",
+    "line": "call    SaveLoad_ReadFileBytes; EnginePatch v2: byte-checked save-file read wrapper. Short reads are zero-filled before callers parse destination buffers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x465D9C",
-    "line": "movsx   edi, byte ptr [esp+330h+var_2D0+2]",
+    "line": "movsx   edi, byte ptr [esp+330h+destination+2]",
     "mnemonic": "movsx",
     "size": 5
   },
   {
     "ea": "0x465DA1",
-    "line": "movsx   ecx, byte ptr [esp+330h+var_2D0+3]",
+    "line": "movsx   ecx, byte ptr [esp+330h+destination+3]",
     "mnemonic": "movsx",
     "size": 5
   },
   {
     "ea": "0x465DA6",
-    "line": "mov     edx, [esp+330h+var_2D0]",
+    "line": "mov     edx, [esp+330h+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2485,7 +2485,7 @@
   },
   {
     "ea": "0x465DB8",
-    "line": "push    6",
+    "line": "push    6; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2497,19 +2497,19 @@
   },
   {
     "ea": "0x465DBE",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465DBF",
-    "line": "push    esi",
+    "line": "push    esi; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465DC0",
-    "line": "call    sub_45BB00",
+    "line": "call    SaveLoad_ReadFileBytes; EnginePatch v2: byte-checked save-file read wrapper. Short reads are zero-filled before callers parse destination buffers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2563,13 +2563,13 @@
   },
   {
     "ea": "0x465DE4",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x465DEA",
-    "line": "mov     [esp+330h+var_318], eax",
+    "line": "mov     [esp+330h+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2587,7 +2587,7 @@
   },
   {
     "ea": "0x465DF4",
-    "line": "push    0Ch",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2599,19 +2599,19 @@
   },
   {
     "ea": "0x465DFD",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465DFE",
-    "line": "push    esi",
+    "line": "push    esi; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465DFF",
-    "line": "call    sub_45BB00",
+    "line": "call    SaveLoad_ReadFileBytes; EnginePatch v2: byte-checked save-file read wrapper. Short reads are zero-filled before callers parse destination buffers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2665,7 +2665,7 @@
   },
   {
     "ea": "0x465E2A",
-    "line": "mov     [esp+330h+var_318], eax",
+    "line": "mov     [esp+330h+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x465E46",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2863,43 +2863,43 @@
   },
   {
     "ea": "0x465E8E",
-    "line": "mov     eax, [esp+330h+var_318]",
+    "line": "mov     eax, [esp+330h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x465E92",
-    "line": "push    ecx",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465E93",
-    "line": "mov     ecx, [ebp+10h]",
+    "line": "mov     ecx, [ebp+10h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x465E96",
-    "line": "push    edi",
+    "line": "push    edi; cellX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465E97",
-    "line": "push    edx",
+    "line": "push    edx; cellFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465E98",
-    "line": "push    eax",
+    "line": "push    eax; worldspaceFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465E99",
-    "line": "call    sub_452FE0",
+    "line": "call    ExteriorCellNewReferencesMap_AddCell; Verified: exterior-cell coordinate collision path records worldspace/cellID/cellX/cellY before deleting the conflicting cell form.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2917,19 +2917,19 @@
   },
   {
     "ea": "0x465EA2",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465EA3",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x465EA5",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -2947,13 +2947,13 @@
   },
   {
     "ea": "0x465EB1",
-    "line": "push    24h ; '$'",
+    "line": "push    24h ; '$'; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x465EB3",
-    "line": "lea     ecx, [esp+334h+var_2BC]",
+    "line": "lea     ecx, [esp+334h+data]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2965,49 +2965,49 @@
   },
   {
     "ea": "0x465EB9",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465EBA",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x465EC0",
-    "line": "push    esi",
+    "line": "push    esi; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465EC1",
-    "line": "mov     [esp+33Ch+var_2BC], eax",
+    "line": "mov     [esp+33Ch+data.kind], eax; Verified: 36-byte payload read by LoadGame at 465EB1..465ED6.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x465EC8",
-    "line": "mov     [esp+33Ch+var_2B8], eax",
+    "line": "mov     [esp+33Ch+data.boundFormIDOrVariant], eax; Verified: kind value tested at +0; branch 1 allocates ArrowProjectile, 2 selects a MagicProjectile subtype, 0/3 feed standard TESObjectREFR construction/reuse at 4603E0.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x465ECF",
-    "line": "mov     [esp+33Ch+var_2B4], eax",
+    "line": "mov     [esp+33Ch+data.locationFormID], eax; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x465ED6",
-    "line": "call    sub_45BB00",
+    "line": "call    SaveLoad_ReadFileBytes; Verified: read size 0x24 into initial-reference data. Fields +4 and +8 are subsequently FormID-remapped; +8 identifies the location cell/worldspace.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x465EDB",
-    "line": "mov     edx, [esp+330h+var_2B8]",
+    "line": "mov     edx, [esp+330h+data.boundFormIDOrVariant]; Verified: kind value tested at +0; branch 1 allocates ArrowProjectile, 2 selects a MagicProjectile subtype, 0/3 feed standard TESObjectREFR construction/reuse at 4603E0.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3031,13 +3031,13 @@
   },
   {
     "ea": "0x465EE7",
-    "line": "mov     [esp+330h+var_2B8], eax",
+    "line": "mov     [esp+330h+data.boundFormIDOrVariant], eax; Verified: kind value tested at +0; branch 1 allocates ArrowProjectile, 2 selects a MagicProjectile subtype, 0/3 feed standard TESObjectREFR construction/reuse at 4603E0.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x465EEB",
-    "line": "mov     eax, [esp+330h+var_2B4]",
+    "line": "mov     eax, [esp+330h+data.locationFormID]; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x465EFC",
-    "line": "mov     [esp+330h+var_2B4], eax",
+    "line": "mov     [esp+330h+data.locationFormID], eax; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x465F0C",
-    "line": "mov     eax, [esp+330h+var_2B4]",
+    "line": "mov     eax, [esp+330h+data.locationFormID]; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x465F11",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3133,7 +3133,7 @@
   },
   {
     "ea": "0x465F18",
-    "line": "push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *",
+    "line": "push    offset ??_R0?AVTESObjectCELL@@@8; worldX",
     "mnemonic": "push",
     "size": 5
   },
@@ -3199,7 +3199,7 @@
   },
   {
     "ea": "0x465F3B",
-    "line": "mov     [esp+35Ch+var_318], eax",
+    "line": "mov     [esp+35Ch+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3217,7 +3217,7 @@
   },
   {
     "ea": "0x465F47",
-    "line": "lea     ecx, [esp+330h+var_2B0]",
+    "line": "lea     ecx, [esp+330h+data.positionX]; Verified: +8 is resolved as FormID and looked up/cast as TESObjectCELL or TESWorldSpace at 465EEB..465F3F.",
     "mnemonic": "lea",
     "size": 7
   },
@@ -3283,7 +3283,7 @@
   },
   {
     "ea": "0x465F6A",
-    "line": "fld     [esp+330h+var_2B0]",
+    "line": "fld     [esp+330h+data.positionX]; Verified: +8 is resolved as FormID and looked up/cast as TESObjectCELL or TESWorldSpace at 465EEB..465F3F.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3295,7 +3295,7 @@
   },
   {
     "ea": "0x465F75",
-    "line": "fld     dword ptr [esp+330h+var_2AC]",
+    "line": "fld     [esp+330h+data.positionY]; Verified: +0xC,+0x10,+0x14 are finite-checked as a NiPoint3 and X/Y select a worldspace cell at 465F47..465F92.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3325,7 +3325,7 @@
   },
   {
     "ea": "0x465F8B",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -3337,7 +3337,7 @@
   },
   {
     "ea": "0x465F8F",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -3355,7 +3355,7 @@
   },
   {
     "ea": "0x465F97",
-    "line": "mov     [esp+330h+var_318], eax",
+    "line": "mov     [esp+330h+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x465F9D",
-    "line": "mov     eax, [esp+330h+var_318]",
+    "line": "mov     eax, [esp+330h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3391,13 +3391,13 @@
   },
   {
     "ea": "0x465FAB",
-    "line": "push    0; a2",
+    "line": "push    0; worldZ",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x465FAD",
-    "line": "push    eax; a1",
+    "line": "push    eax; worldY",
     "mnemonic": "push",
     "size": 1
   },
@@ -3421,13 +3421,13 @@
   },
   {
     "ea": "0x465FB7",
-    "line": "mov     eax, [esp+330h+var_318]",
+    "line": "mov     eax, [esp+330h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x465FBB",
-    "line": "cmp     [esp+330h+var_2BC], 3",
+    "line": "cmp     [esp+330h+data.kind], 3; Verified: 36-byte payload read by LoadGame at 465EB1..465ED6.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3451,7 +3451,7 @@
   },
   {
     "ea": "0x465FCB",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3481,19 +3481,19 @@
   },
   {
     "ea": "0x465FD9",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x465FDC",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465FDD",
-    "line": "call    sub_452D30",
+    "line": "call    ChangesMap_FindByForm;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3523,13 +3523,13 @@
   },
   {
     "ea": "0x465FEA",
-    "line": "push    ecx",
+    "line": "push    ecx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465FEB",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -3541,13 +3541,13 @@
   },
   {
     "ea": "0x465FEE",
-    "line": "call    sub_453530",
+    "line": "call    SaveLoad_AdjustCreatedFormChangeFlags; Verified: created-form predicate at 45353F gates adjustment; RTTI cast TESObjectREFR -> clear bit4/set bit2; RTTI cast TESObjectCELL -> OR6; otherwise preserves flags. Used by LoadForm 463930, LoadGame 465FEE/4664CD and save-side normalization 4535A0. Unknown broader meanings of flag bits outside these form-specific uses.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x465FF3",
-    "line": "mov     esi, [esp+330h+var_30F]",
+    "line": "mov     esi, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3649,19 +3649,19 @@
   },
   {
     "ea": "0x466029",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46602A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46602C",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -3673,31 +3673,31 @@
   },
   {
     "ea": "0x466035",
-    "line": "lea     edx, [esp+330h+var_2BC]",
+    "line": "lea     edx, [esp+330h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x466039",
-    "line": "push    edx",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46603A",
-    "line": "push    eax",
+    "line": "push    eax; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46603B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46603D",
-    "line": "call    sub_4603E0",
+    "line": "call    TESSaveLoadGame_CreateReferenceFromInitialData;  Verified created-reference branch behavior from Oblivion RTTI/allocation evidence: kind=1 allocates ArrowProjectile; kind=2 selects MagicBall/Bolt/Fog class; kinds=0/3 use TESBoundObject lookup and standard TESObjectREFR construction or compatible existing REFR reuse. Fallout CreatedReferenceInitialData is 31 bytes and uses a compact 3-byte BoundIDIndex; Oblivion payload is 36 bytes with dword IDs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3733,7 +3733,7 @@
   },
   {
     "ea": "0x46604F",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3757,31 +3757,31 @@
   },
   {
     "ea": "0x46605C",
-    "line": "mov     edx, [esp+330h+var_2B4]",
+    "line": "mov     edx, [esp+330h+data.locationFormID]; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x466060",
-    "line": "push    ecx",
+    "line": "push    ecx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466061",
-    "line": "mov     ecx, [ebp+8]",
+    "line": "mov     ecx, [ebp+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x466064",
-    "line": "push    edx",
+    "line": "push    edx; cellFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466065",
-    "line": "call    sub_452E70",
+    "line": "call    InteriorCellNewReferencesMap_AddReferenceID; Verified: LoadGame resolves cell/reference FormIDs, confirms the cell is interior, then appends their pair to InteriorCellNewReferencesMap. Exterior references use the adjacent separate map branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3805,13 +3805,13 @@
   },
   {
     "ea": "0x466070",
-    "line": "mov     ecx, [esp+330h+var_2B0]",
+    "line": "mov     ecx, [esp+330h+data.positionX]; Verified: +8 is resolved as FormID and looked up/cast as TESObjectCELL or TESWorldSpace at 465EEB..465F3F.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x466077",
-    "line": "mov     edx, dword ptr [esp+330h+var_2AC]",
+    "line": "mov     edx, [esp+330h+data.positionY]; Verified: +0xC,+0x10,+0x14 are finite-checked as a NiPoint3 and X/Y select a worldspace cell at 465F47..465F92.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3835,7 +3835,7 @@
   },
   {
     "ea": "0x466085",
-    "line": "mov     ecx, dword ptr [esp+33Ch+var_2AC+4]",
+    "line": "mov     ecx, [esp+33Ch+data.positionZ]; Candidate: trailing 12 bytes at +0x18 resemble an angle vector; no Oblivion-side read of these bytes has been established. Fallout uses a separate ReferenceLocationInitialData plus compact type/bound-ID suffix.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3859,31 +3859,31 @@
   },
   {
     "ea": "0x466096",
-    "line": "mov     eax, [esp+33Ch+var_2B4]",
+    "line": "mov     eax, [esp+33Ch+data.locationFormID]; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x46609D",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4660A0",
-    "line": "push    edx",
+    "line": "push    edx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4660A1",
-    "line": "push    eax",
+    "line": "push    eax; worldspaceFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4660A2",
-    "line": "call    sub_452F10",
+    "line": "call    ExteriorCellNewReferencesMap_AddReference; Verified: LoadGame resolves worldspace and saved reference location, then inserts worldspace/refID and location into ExteriorCellNewReferencesMap. Fallout BGSSaveLoadReferencesMap::LoadReferencesForCell has the related restore path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3901,19 +3901,19 @@
   },
   {
     "ea": "0x4660AF",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4660B0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4660B2",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -3931,7 +3931,7 @@
   },
   {
     "ea": "0x4660BE",
-    "line": "mov     ecx, [esp+330h+var_2B4]",
+    "line": "mov     ecx, [esp+330h+data.locationFormID]; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4027,7 +4027,7 @@
   },
   {
     "ea": "0x4660F2",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4039,19 +4039,19 @@
   },
   {
     "ea": "0x4660FA",
-    "line": "mov     [esp+330h+var_27C], eax",
+    "line": "mov     [esp+330h+var_27C.primaryLocationFormID], eax; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x466101",
-    "line": "mov     [esp+330h+var_26C], eax",
+    "line": "mov     [esp+330h+var_27C.fallbackLocationFormID], eax; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x466108",
-    "line": "push    2Ch ; ','",
+    "line": "push    2Ch ; ','; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -4063,25 +4063,25 @@
   },
   {
     "ea": "0x466111",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466112",
-    "line": "push    esi",
+    "line": "push    esi; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466113",
-    "line": "call    sub_45BB00",
+    "line": "call    SaveLoad_ReadFileBytes; EnginePatch v2: byte-checked save-file read wrapper. Short reads are zero-filled before callers parse destination buffers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x466118",
-    "line": "mov     ecx, [esp+330h+var_27C]",
+    "line": "mov     ecx, [esp+330h+var_27C.primaryLocationFormID]; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4105,7 +4105,7 @@
   },
   {
     "ea": "0x466127",
-    "line": "mov     edx, [esp+330h+var_26C]",
+    "line": "mov     edx, [esp+330h+var_27C.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4123,7 +4123,7 @@
   },
   {
     "ea": "0x466131",
-    "line": "mov     [esp+334h+var_27C], eax",
+    "line": "mov     [esp+334h+var_27C.primaryLocationFormID], eax; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4141,7 +4141,7 @@
   },
   {
     "ea": "0x466143",
-    "line": "mov     [esp+330h+var_26C], eax",
+    "line": "mov     [esp+330h+var_27C.fallbackLocationFormID], eax; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4183,7 +4183,7 @@
   },
   {
     "ea": "0x466156",
-    "line": "mov     eax, [esp+330h+var_26C]",
+    "line": "mov     eax, [esp+330h+var_27C.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4195,7 +4195,7 @@
   },
   {
     "ea": "0x46615E",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4309,7 +4309,7 @@
   },
   {
     "ea": "0x46619A",
-    "line": "fld     [esp+330h+var_268]",
+    "line": "fld     dword ptr [esp+330h+var_27C.unknown14]; Unknown: trailing payload bytes are copied but not consumed by the reconstruction code examined.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -4321,7 +4321,7 @@
   },
   {
     "ea": "0x4661A5",
-    "line": "fld     dword ptr [esp+330h+var_264]",
+    "line": "fld     dword ptr [esp+330h+var_27C.unknown14+4]; Unknown: trailing payload bytes are copied but not consumed by the reconstruction code examined.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -4351,7 +4351,7 @@
   },
   {
     "ea": "0x4661BB",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -4363,7 +4363,7 @@
   },
   {
     "ea": "0x4661BF",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -4465,13 +4465,13 @@
   },
   {
     "ea": "0x4661FB",
-    "line": "push    ecx",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4661FC",
-    "line": "push    edx",
+    "line": "push    edx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
@@ -4483,7 +4483,7 @@
   },
   {
     "ea": "0x4661FF",
-    "line": "call    sub_45C4F0",
+    "line": "call    TESSaveLoadGame_RebuildReferenceFromLocationOverrides;  Verified: moved-reference rebuild. Resolves primary location ID at +0 (fallback ID +0x10 when zero), casts it to TESObjectCELL or TESWorldSpace, scans its override files for the requested referenceID, loads matching reference records, runs PostFixup, and restores actor/REFR starting location data. Worldspace path quantizes X/Y by >>12 to find the owning cell. Probable role homolog: Fallout ReferenceInitialData::GetOriginalLocationCellAndWorld / LoadChangedReference; Oblivion implementation searches local override files directly. Verified: a2 uses 44-byte moved-reference payload; +0 and +0x10 are remapped FormIDs before call. X/Y at +4/+8 are consumed on the worldspace path. Remaining fields Unknown. Verified cross-reference divergence: Fallout MovedReferenceInitialData is 34 bytes (27-byte location data + compact original-location index and int16 cell XY); Oblivion restore reads 44 bytes and supports primary/fallback full FormIDs at +0/+0x10 plus world XY at +4/+8. Confidence label Probable applies only to s",
     "mnemonic": "call",
     "size": 5
   },
@@ -4519,13 +4519,13 @@
   },
   {
     "ea": "0x466213",
-    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; worldY",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x466218",
-    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "line": "push    offset ??_R0?AVTESForm@@@8; worldX",
     "mnemonic": "push",
     "size": 5
   },
@@ -4561,7 +4561,7 @@
   },
   {
     "ea": "0x46622A",
-    "line": "mov     [esp+330h+var_318], eax",
+    "line": "mov     [esp+330h+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4579,7 +4579,7 @@
   },
   {
     "ea": "0x466232",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4597,49 +4597,49 @@
   },
   {
     "ea": "0x46623B",
-    "line": "mov     ecx, [esp+330h+var_318]; this",
+    "line": "mov     ecx, [esp+330h+reference]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x46623F",
-    "line": "push    ecx",
+    "line": "push    ecx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466240",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x466245",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x466247",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46624C",
-    "line": "push    ebx",
+    "line": "push    ebx; worldZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46624D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46624F",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -4669,7 +4669,7 @@
   },
   {
     "ea": "0x466261",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4693,31 +4693,31 @@
   },
   {
     "ea": "0x46626E",
-    "line": "mov     ecx, [esp+330h+var_26C]",
+    "line": "mov     ecx, [esp+330h+var_27C.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x466275",
-    "line": "push    eax",
+    "line": "push    eax; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466276",
-    "line": "push    ecx",
+    "line": "push    ecx; cellFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466277",
-    "line": "mov     ecx, [ebp+8]",
+    "line": "mov     ecx, [ebp+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46627A",
-    "line": "call    sub_452E70",
+    "line": "call    InteriorCellNewReferencesMap_AddReferenceID; Verified: alternate load branch inserts cell/reference IDs into the interior map and also pushes the reference ID to manager list +0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4765,13 +4765,13 @@
   },
   {
     "ea": "0x466295",
-    "line": "mov     ecx, [esp+330h+var_268]",
+    "line": "mov     ecx, dword ptr [esp+330h+var_27C.unknown14]; Unknown: trailing payload bytes are copied but not consumed by the reconstruction code examined.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x46629C",
-    "line": "mov     edx, dword ptr [esp+330h+var_264]",
+    "line": "mov     edx, dword ptr [esp+330h+var_27C.unknown14+4]; Unknown: trailing payload bytes are copied but not consumed by the reconstruction code examined.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4795,7 +4795,7 @@
   },
   {
     "ea": "0x4662AA",
-    "line": "mov     ecx, dword ptr [esp+33Ch+var_264+4]",
+    "line": "mov     ecx, dword ptr [esp+33Ch+var_27C.unknown14+8]; Unknown: trailing payload bytes are copied but not consumed by the reconstruction code examined.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4819,31 +4819,31 @@
   },
   {
     "ea": "0x4662BB",
-    "line": "mov     eax, [esp+33Ch+var_26C]",
+    "line": "mov     eax, [esp+33Ch+var_27C.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4662C2",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4662C5",
-    "line": "push    edx",
+    "line": "push    edx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4662C6",
-    "line": "push    eax",
+    "line": "push    eax; worldspaceFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4662C7",
-    "line": "call    sub_452F10",
+    "line": "call    ExteriorCellNewReferencesMap_AddReference; Verified: exterior load branch inserts worldspace/reference location into exterior map and pushes the reference ID to manager list +0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4879,7 +4879,7 @@
   },
   {
     "ea": "0x4662DE",
-    "line": "mov     edx, [esp+330h+var_26C]",
+    "line": "mov     edx, [esp+330h+var_27C.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4921,19 +4921,19 @@
   },
   {
     "ea": "0x4662FC",
-    "line": "push    ecx",
+    "line": "push    ecx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4662FD",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x466300",
-    "line": "call    sub_452D10",
+    "line": "call    ChangesMap_FindByFormID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -5005,7 +5005,7 @@
   },
   {
     "ea": "0x466335",
-    "line": "mov     edx, [esp+330h+var_244]",
+    "line": "mov     edx, [esp+330h+var_244.primaryLocationFormID]; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5035,7 +5035,7 @@
   },
   {
     "ea": "0x466346",
-    "line": "mov     eax, [esp+330h+var_234]",
+    "line": "mov     eax, [esp+330h+var_244.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5053,7 +5053,7 @@
   },
   {
     "ea": "0x466350",
-    "line": "mov     [esp+334h+var_244], esi",
+    "line": "mov     [esp+334h+var_244.primaryLocationFormID], esi; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -5071,13 +5071,13 @@
   },
   {
     "ea": "0x46635D",
-    "line": "mov     [esp+334h+var_234], eax",
+    "line": "mov     [esp+334h+var_244.fallbackLocationFormID], eax; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x466364",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5185,7 +5185,7 @@
   },
   {
     "ea": "0x466398",
-    "line": "fld     [esp+330h+var_240]",
+    "line": "fld     [esp+330h+var_244.worldX]; Verified: source world X; used when source locator is a TESWorldSpace.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -5197,7 +5197,7 @@
   },
   {
     "ea": "0x4663A3",
-    "line": "fld     [esp+330h+var_23C]",
+    "line": "fld     [esp+330h+var_244.worldY]; Verified: source world Y; used when source locator is a TESWorldSpace.",
     "mnemonic": "fld",
     "size": 7
   },
@@ -5227,7 +5227,7 @@
   },
   {
     "ea": "0x4663B9",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -5239,7 +5239,7 @@
   },
   {
     "ea": "0x4663BD",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -5323,13 +5323,13 @@
   },
   {
     "ea": "0x4663E8",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4663E9",
-    "line": "push    ecx",
+    "line": "push    ecx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
@@ -5341,13 +5341,13 @@
   },
   {
     "ea": "0x4663EC",
-    "line": "call    sub_45C4F0",
+    "line": "call    TESSaveLoadGame_RebuildReferenceFromLocationOverrides;  Verified: moved-reference rebuild. Resolves primary location ID at +0 (fallback ID +0x10 when zero), casts it to TESObjectCELL or TESWorldSpace, scans its override files for the requested referenceID, loads matching reference records, runs PostFixup, and restores actor/REFR starting location data. Worldspace path quantizes X/Y by >>12 to find the owning cell. Probable role homolog: Fallout ReferenceInitialData::GetOriginalLocationCellAndWorld / LoadChangedReference; Oblivion implementation searches local override files directly. Verified: a2 uses 44-byte moved-reference payload; +0 and +0x10 are remapped FormIDs before call. X/Y at +4/+8 are consumed on the worldspace path. Remaining fields Unknown. Verified cross-reference divergence: Fallout MovedReferenceInitialData is 34 bytes (27-byte location data + compact original-location index and int16 cell XY); Oblivion restore reads 44 bytes and supports primary/fallback full FormIDs at +0/+0x10 plus world XY at +4/+8. Confidence label Probable applies only to s",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4663F1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -5359,13 +5359,13 @@
   },
   {
     "ea": "0x4663F5",
-    "line": "push    ebx",
+    "line": "push    ebx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4663F6",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5665,7 +5665,7 @@
   },
   {
     "ea": "0x466499",
-    "line": "mov     ecx, [esp+330h+var_2F8]",
+    "line": "mov     ecx, [esp+330h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5731,19 +5731,19 @@
   },
   {
     "ea": "0x4664BA",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4664BD",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4664BE",
-    "line": "call    sub_452D30",
+    "line": "call    ChangesMap_FindByForm;",
     "mnemonic": "call",
     "size": 5
   },
@@ -5767,13 +5767,13 @@
   },
   {
     "ea": "0x4664C9",
-    "line": "push    esi",
+    "line": "push    esi; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4664CA",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -5785,7 +5785,7 @@
   },
   {
     "ea": "0x4664CD",
-    "line": "call    sub_453530",
+    "line": "call    SaveLoad_AdjustCreatedFormChangeFlags; Verified: created-form predicate at 45353F gates adjustment; RTTI cast TESObjectREFR -> clear bit4/set bit2; RTTI cast TESObjectCELL -> OR6; otherwise preserves flags. Used by LoadForm 463930, LoadGame 465FEE/4664CD and save-side normalization 4535A0. Unknown broader meanings of flag bits outside these form-specific uses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5869,7 +5869,7 @@
   },
   {
     "ea": "0x4664F8",
-    "line": "mov     esi, [esp+330h+var_30F]",
+    "line": "mov     esi, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6115,7 +6115,7 @@
   },
   {
     "ea": "0x466589",
-    "line": "mov     eax, [esp+330h+var_30F]",
+    "line": "mov     eax, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6193,37 +6193,37 @@
   },
   {
     "ea": "0x4665B0",
-    "line": "mov     ecx, [esp+330h+var_30F]",
+    "line": "mov     ecx, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4665B4",
-    "line": "push    ecx",
+    "line": "push    ecx; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4665B5",
-    "line": "push    esi",
+    "line": "push    esi; changeFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4665B6",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4665B7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4665B9",
-    "line": "call    TESSaveLoadGame_ResetObject",
+    "line": "call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6271,7 +6271,7 @@
   },
   {
     "ea": "0x4665D8",
-    "line": "mov     [esp+330h+var_318], eax",
+    "line": "mov     [esp+330h+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6283,7 +6283,7 @@
   },
   {
     "ea": "0x4665E2",
-    "line": "cmp     eax, [esp+330h+var_318]",
+    "line": "cmp     eax, [esp+330h+reference]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -6385,7 +6385,7 @@
   },
   {
     "ea": "0x466610",
-    "line": "call    sub_45C020",
+    "line": "call    sub_45C020; Verified behavior: post-reset reference/process reconciliation; ensures MobileObject LowProcess allocation, handles actor death state, reattaches references to loaded cells by parent cell or worldspace position, and updates scene/process state. Called by ResetFormForLoad (45F2AD), LoadGame (466610), and cell reset path 4CBFE3. Exact class method name Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6499,7 +6499,7 @@
   },
   {
     "ea": "0x466650",
-    "line": "mov     eax, [esp+330h+var_30F]",
+    "line": "mov     eax, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6511,25 +6511,25 @@
   },
   {
     "ea": "0x466657",
-    "line": "push    eax",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466658",
-    "line": "push    ecx",
+    "line": "push    ecx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466659",
-    "line": "mov     ecx, [ebp+4]",
+    "line": "mov     ecx, [ebp+4]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46665C",
-    "line": "call    sub_452C90",
+    "line": "call    ChangesMap_SetChangeFlags; MEF SAVE AUDIT 2026-10-08: SR-1 recovery gate: change flags are set before buffer allocation/read, and earlier branches can reset/init the form before reaching here. A new short-read branch cannot simply skip/continue and claim atomic recovery. Establish coordinated abort/cleanup or stage input before irreversible form changes; zero-fill alone fabricates data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6553,13 +6553,13 @@
   },
   {
     "ea": "0x466669",
-    "line": "call    sub_453500",
+    "line": "call    sub_453500; EnginePatch v1: save-buffer allocation hook used to track record buffer base/end for later savegame parser count clamps.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46666E",
-    "line": "mov     ecx, [esp+330h+var_2F8]",
+    "line": "mov     ecx, [esp+330h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6577,37 +6577,37 @@
   },
   {
     "ea": "0x466679",
-    "line": "push    eax",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46667A",
-    "line": "push    esi",
+    "line": "push    esi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46667B",
-    "line": "push    ecx",
+    "line": "push    ecx; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46667C",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46667E",
-    "line": "call    sub_45BB00",
+    "line": "call    SaveLoad_ReadFileBytes; MEF SAVE AUDIT 2026-10-08: SR-1 Verified propagation gap: immediate record read uses declaredUInt16 length into newly allocated buffer, but following code ignores return count, calls preparer460BC0 at466695 and virtual loader+54 at4666A7. If read is short, uninitialized tail can be consumed. v57 CreateTrackedSaveBuffer tracks allocated extent, not bytes initialized, and does not zero it.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x466683",
-    "line": "mov     eax, [esp+330h+var_30F]",
+    "line": "mov     eax, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6655,7 +6655,7 @@
   },
   {
     "ea": "0x46669C",
-    "line": "mov     eax, [esp+330h+var_30F]",
+    "line": "mov     eax, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6733,7 +6733,7 @@
   },
   {
     "ea": "0x4666C5",
-    "line": "mov     edx, [esp+330h+var_30F]",
+    "line": "mov     edx, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6781,7 +6781,7 @@
   },
   {
     "ea": "0x4666DE",
-    "line": "mov     [esp+330h+var_318], eax",
+    "line": "mov     [esp+330h+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6793,25 +6793,25 @@
   },
   {
     "ea": "0x4666E4",
-    "line": "lea     eax, [esp+330h+var_318]",
+    "line": "lea     eax, [esp+330h+reference]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4666E8",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4666E9",
-    "line": "lea     ecx, [esp+334h+var_298]",
+    "line": "lea     ecx, [esp+334h+self]; self",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4666F0",
-    "line": "call    sub_5A6AB0",
+    "line": "call    NiTLargeArray32_AppendSlot; MEF SAVE PERF PASS2 2026-10-08: PERF-20 producer: one append per immediate non-player loaded form; player record retained separately4666F7. A16-byte record holds form+0,load flags+4,previous flags+8,save version byte+C. Null allocation still passes a null slot to append; preserve slot count/order and native failure behavior. Queue pointer/index storage is not serialized. Raw FormHeap record ownership passes to post-load finalizer45FDA0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6823,7 +6823,7 @@
   },
   {
     "ea": "0x4666F7",
-    "line": "mov     [esp+330h+var_2F4], eax",
+    "line": "mov     [esp+330h+arg2], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6985,7 +6985,7 @@
   },
   {
     "ea": "0x466747",
-    "line": "call    sub_452230",
+    "line": "call    sub_452230; EnginePatch v1: save-buffer free hook used to remove tracked record ranges and avoid stale bounds during savegame loading.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6997,25 +6997,25 @@
   },
   {
     "ea": "0x46674F",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x466752",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x466754",
-    "line": "push    edx",
+    "line": "push    edx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466755",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -7039,25 +7039,25 @@
   },
   {
     "ea": "0x466761",
-    "line": "mov     ecx, [ebp+4]",
+    "line": "mov     ecx, [ebp+4]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x466764",
-    "line": "push    eax",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466765",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466766",
-    "line": "call    sub_452D60",
+    "line": "call    ChangesMap_RemoveFormChangeFlags;",
     "mnemonic": "call",
     "size": 5
   },
@@ -7171,7 +7171,7 @@
   },
   {
     "ea": "0x4667AF",
-    "line": "call    sub_453500",
+    "line": "call    sub_453500; EnginePatch v1: save-buffer allocation hook used to track record buffer base/end for later savegame parser count clamps.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7237,7 +7237,7 @@
   },
   {
     "ea": "0x4667D7",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -7249,13 +7249,13 @@
   },
   {
     "ea": "0x4667DD",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4667DE",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -7327,43 +7327,43 @@
   },
   {
     "ea": "0x46680D",
-    "line": "mov     edx, [esp+330h+var_2F8]",
+    "line": "mov     edx, [esp+330h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x466811",
-    "line": "push    eax",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466812",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466813",
-    "line": "push    edx",
+    "line": "push    edx; stream",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466814",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x466816",
-    "line": "call    sub_45BB00",
+    "line": "call    SaveLoad_ReadFileBytes; MEF SAVE PERF PASS2 2026-10-08: SR-1 DEFERRED EXTENSION VERIFIED: buffer length+4 allocated4667AF; length/type/version prefix initialized4667E4; this read supplies payload. EAX actual count is overwritten with flags46681B, then buffer published into incoming ChangesMap at466829 with no completion check. Incomplete payload tail remains uninitialized under native BSFile/v57 allocation behavior. Must reject before publication and preserve single ownership on failure.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46681B",
-    "line": "mov     eax, [esp+330h+var_30F]",
+    "line": "mov     eax, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7375,31 +7375,31 @@
   },
   {
     "ea": "0x466823",
-    "line": "push    ebx",
+    "line": "push    ebx; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466824",
-    "line": "push    eax",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466825",
-    "line": "push    ecx",
+    "line": "push    ecx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466826",
-    "line": "mov     ecx, [ebp+4]",
+    "line": "mov     ecx, [ebp+4]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x466829",
-    "line": "call    sub_452CF0",
+    "line": "call    ChangesMap_SetChangeBuffer; MEF SAVE PERF PASS2 2026-10-08: SR-1 DEFERRED EXTENSION: ChangesMap_SetChangeBuffer452CF0 assigns entry+4 after SetChangeFlags. Deferred data survives map promotion4648D9..4648E5. LoadForm46386D later activates prefix length+4; v57 range tracking records allocation/declared extent, not initialized input. Current save path465422 can write cached declared payload if retained until a later SaveGame. These are conditional downstream paths, not an observed corrupted save.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7411,7 +7411,7 @@
   },
   {
     "ea": "0x466830",
-    "line": "mov     edx, [esp+330h+var_30F]",
+    "line": "mov     edx, [esp+330h+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7423,25 +7423,25 @@
   },
   {
     "ea": "0x466838",
-    "line": "mov     ecx, [ebp+4]",
+    "line": "mov     ecx, [ebp+4]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46683B",
-    "line": "push    edx",
+    "line": "push    edx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46683C",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46683D",
-    "line": "call    sub_452C90",
+    "line": "call    ChangesMap_SetChangeFlags;",
     "mnemonic": "call",
     "size": 5
   },
@@ -7453,25 +7453,25 @@
   },
   {
     "ea": "0x466846",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x466848",
-    "line": "push    ecx",
+    "line": "push    ecx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x466849",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46684C",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -7525,7 +7525,7 @@
   },
   {
     "ea": "0x466868",
-    "line": "mov     esi, [esp+330h+var_2F8]",
+    "line": "mov     esi, [esp+330h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7555,31 +7555,31 @@
   },
   {
     "ea": "0x46687B",
-    "line": "jb      TESSaveLoadGame_LoadGame___ChangeRecordLoop_Top",
+    "line": "jb      TESSaveLoadGame_LoadGame___ChangeRecordLoop_Top; MEF SAVE PERF PASS2 2026-10-08: SR-1 HEADER EXTENSION: backedge depends only on incremented record counter < declared count. Missing-plugin branch465D16 logs,465D32 seeks declared payload and jumps here; no successful-read/progress condition. A short-file scenario can perform remaining-count iterations of read/resolve/diagnostic/seek after EOF. This is finite count amplification, not a proved infinite loop; per-iteration loading-menu helper5AD980 may do additional work.",
     "mnemonic": "jb",
     "size": 6
   },
   {
     "ea": "0x466881",
-    "line": "mov     edi, [esp+330h+var_2F4]",
+    "line": "mov     edi, [esp+330h+arg2]; arg2",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x466885",
-    "line": "push    1",
+    "line": "push    1; initializationMode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x466887",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x466889",
-    "line": "call    sub_464440",
+    "line": "call    TESSaveLoadGame_ReconcileExistingChanges; Verified: LoadGame finalization (caller 466889) ensures incoming map at manager+4, walks current map at +0, reconciles extant forms through sub45F180/ResetObject and reconstructs missing moved references from their old locations, then destroys old current map and promotes incoming map to +0. Probable Fallout homolog BGSSaveLoadGame::RevertCurrentChanges 825F1938: same existing-form reconciliation, missing moved-reference handling, and final map swap. Fallout uses TESForm::Revert and BGSReconstructFormsInAllFilesMap; Oblivion uses sub45F180 plus source-file search at 45C4F0. Note: function also has a separate game/world initialization branch; the map reconciliation and swap are in the save-load branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7609,7 +7609,7 @@
   },
   {
     "ea": "0x46689C",
-    "line": "lea     ecx, [esp+338h+var_298]",
+    "line": "lea     ecx, [esp+338h+self]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -7627,7 +7627,7 @@
   },
   {
     "ea": "0x4668A6",
-    "line": "call    sub_45FDA0",
+    "line": "call    TESSaveLoadGame_FinalizeLoadedForms",
     "mnemonic": "call",
     "size": 5
   },
@@ -7651,7 +7651,7 @@
   },
   {
     "ea": "0x4668B0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7663,13 +7663,13 @@
   },
   {
     "ea": "0x4668B8",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4668BA",
-    "line": "call    SaveLoad_ValidateCreatedObj??",
+    "line": "call    TESSaveLoadGame_ProcessDeferredDeletions",
     "mnemonic": "call",
     "size": 5
   },
@@ -7693,7 +7693,7 @@
   },
   {
     "ea": "0x4668CB",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7711,7 +7711,7 @@
   },
   {
     "ea": "0x4668D7",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7729,7 +7729,7 @@
   },
   {
     "ea": "0x4668E3",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7783,13 +7783,13 @@
   },
   {
     "ea": "0x466904",
-    "line": "call    sub_45FC60",
+    "line": "call    TESSaveLoadGame_LoadTempEffectsList; [Verified] TESSaveLoadGame_LoadTempEffectsList version-gates the Temp Effects List chunk and calls ActorProcessManager_LoadTempEffects for save versions >=0x5E; earlier versions skip the chunk body.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x466909",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7801,13 +7801,13 @@
   },
   {
     "ea": "0x466913",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x466918",
-    "line": "call    sub_677A90",
+    "line": "call    ProcessLists_RebuildNearbyActorCandidates; MEF PERF 2026-10-02: PERF-10 scoped hook candidate: ECX=B3BD00, target677A90, candidate embedded head=ECX+60=B3BD60. This connects receiver clear to the global destination used by duplicate scans. CALL bytes E8 73 11 21 00. Secondary PERF-7 load cost, not covered by v56 trimming. Only this direct caller was found.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7963,7 +7963,7 @@
   },
   {
     "ea": "0x466995",
-    "line": "mov     ecx, [ebp+40h]",
+    "line": "mov     ecx, [ebp+40h]; xOBSE source Hooks_SaveLoad.cpp installs serialization load callback hook here; Blockhead registered load/new-game callbacks clear scripted head/mesh/age overrides. Source evidence only for plugin scheduling; no proof this ordering causes OCO face corruption. Capture alongside native head reconstruction during A/B cold/in-process matrix.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -8035,13 +8035,13 @@
   },
   {
     "ea": "0x4669B8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; owner",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4669BA",
-    "line": "call    sub_4530A0",
+    "line": "call    SaveLoad_ClearReferenceMapState; Verified: LoadGame clears the transient reference-map owner and frees it at 4669C0. Candidate: exact owner layout remains partial.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8053,7 +8053,7 @@
   },
   {
     "ea": "0x4669C0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8227,7 +8227,7 @@
   },
   {
     "ea": "0x466A29",
-    "line": "mov     edx, [esp+340h+var_294]",
+    "line": "mov     edx, [esp+340h+self.data]; Verified: pointer to uint32 backing storage.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -8239,7 +8239,7 @@
   },
   {
     "ea": "0x466A31",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; MEF SAVE PERF PASS2 2026-10-08: PERF-20 lifecycle: ordinary LoadGame completion frees local post-load array storage, so its capacity is not reused by the next load. This distinguishes recurrent queue-growth copies from PERF-19 retained ID-table high-water growth. Finalizer45FDA0 already freed per-slot records in second callback pass; do not free those records twice.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8449,7 +8449,7 @@
   },
   {
     "ea": "0x466A8A",
-    "line": "mov     ecx, [esp+330h+var_294]",
+    "line": "mov     ecx, [esp+330h+self.data]; Verified: pointer to uint32 backing storage.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -8461,7 +8461,7 @@
   },
   {
     "ea": "0x466A92",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8548,5 +8548,179 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x4526C0",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4526C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4526C4",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTLargeArray@PAUFormAndFlags@@@@6B@; const NiTLargeArray<FormAndFlags *>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4526CA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4526CF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4526D0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE770",
+    "line": "lea     ecx, [ebp-298h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE776",
+    "line": "jmp     loc_4526C0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE77B",
+    "line": "mov     eax, [ebp-2D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE781",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE782",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE787",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE788",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE789",
+    "line": "mov     eax, [ebp-2D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE78F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE790",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE795",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE796",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE797",
+    "line": "mov     edx, [esp+Str]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE79B",
+    "line": "lea     eax, [edx-320h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE7A1",
+    "line": "mov     ecx, [edx-324h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE7A7",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE7A9",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE7AE",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE7B1",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE7B4",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE7B6",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE7BB",
+    "line": "mov     eax, offset stru_ADAF48",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE7C0",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

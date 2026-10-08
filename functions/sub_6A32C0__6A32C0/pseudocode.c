@@ -1,5 +1,8 @@
-int __thiscall sub_6A32C0(_DWORD *this, int a2)
+// Verified setter for NonActorMagicTarget.parentReference at +0x14; the sole direct caller is the modified-extra load path.
+TESObjectREFR *__thiscall NonActorMagicTarget_SetParentReference(
+        NonActorMagicTarget *this,
+        TESObjectREFR *parentReference)
 {
-  *(this + 5) = a2;
-  return a2;
+  this->parentReference = parentReference; /*0x6a32c4*/
+  return parentReference; /*0x6a32c7*/
 }

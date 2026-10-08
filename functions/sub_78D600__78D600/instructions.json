@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78D600",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; CTreeFileAccess-style memory reader constructor. Copies supplied SPT bytes into an owned byte vector; cursor starts at byte offset 0.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,25 +133,25 @@
   },
   {
     "ea": "0x78D63C",
-    "line": "mov     ebx, [esp+24h+arg_4]",
+    "line": "mov     ebx, [esp+24h+bufferSize]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78D640",
-    "line": "push    esi; int",
+    "line": "push    esi; fillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D641",
-    "line": "push    ebx; int",
+    "line": "push    ebx; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D642",
-    "line": "mov     ecx, edi; int",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x78D648",
-    "line": "call    sub_6EF4B0",
+    "line": "call    OB_stVectorByte_ResizeFill_010201A0; Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x78D666",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+buffer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -328,5 +328,65 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB940",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB943",
+    "line": "add     ecx, 4; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB946",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB94B",
+    "line": "mov     edx, [esp+bufferSize]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB94F",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB952",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB955",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB957",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB95C",
+    "line": "mov     eax, offset stru_AF46B0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB961",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

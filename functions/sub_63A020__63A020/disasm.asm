@@ -50,7 +50,7 @@
 0x63A0BE: test    esi, esi
 0x63A0C0: jz      short loc_63A0CB
 0x63A0C2: push    esi
-0x63A0C3: call    FormHeapFree
+0x63A0C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63A0C8: add     esp, 4
 0x63A0CB: push    esi
 0x63A0CC: mov     ecx, ebx
@@ -103,9 +103,9 @@
 0x63A172: fnstsw  ax
 0x63A174: test    ah, 41h
 0x63A177: jnz     short loc_63A1B1
-0x63A179: push    esi
-0x63A17A: add     ecx, 0A8h ; '¨'
-0x63A180: call    sub_446C30
+0x63A179: push    esi; item
+0x63A17A: add     ecx, 0A8h ; '¨'; this
+0x63A180: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x63A185: test    al, al
 0x63A187: jnz     short loc_63A1B1
 0x63A189: push    20h ; ' '; Size
@@ -132,9 +132,9 @@
 0x63A1C5: jz      short loc_63A1FC
 0x63A1C7: mov     edi, [esi]
 0x63A1C9: mov     ecx, ebx
-0x63A1CB: call    sub_67F100
+0x63A1CB: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x63A1D0: push    esi
-0x63A1D1: call    FormHeapFree
+0x63A1D1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63A1D6: mov     ecx, [esp+18h+arg_0]
 0x63A1DA: mov     edx, [ecx]
 0x63A1DC: mov     eax, [edx+2F8h]

@@ -1,1 +1,1 @@
-BufferMemory_0
+typedef BufferMemory BufferMemory_0;

@@ -1,10 +1,10 @@
-0x770150: mov     eax, [ecx+18h]
+0x770150: mov     eax, [ecx+18h]; DirectX10OBSE authority: Oblivion declaration element emitter. Uses B29858/B2983C/B298A0 type-method-usage tables and returns the D3D9 element byte size; DX10 input-layout mapping follows this emitted declaration surface.
 0x770153: mov     edx, [ecx+2Ch]
 0x770156: push    ebx
 0x770157: push    esi
-0x770158: mov     si, [esp+8+arg_4]
+0x770158: mov     si, [esp+8+stream]
 0x77015D: mov     [edx+eax*8], si
-0x770161: mov     eax, [esp+8+arg_0]
+0x770161: mov     eax, [esp+8+entry]
 0x770165: mov     edx, [ecx+18h]
 0x770168: mov     esi, [ecx+2Ch]
 0x77016B: push    edi

@@ -22,13 +22,13 @@
 0x4C6771: xor     edi, edi
 0x4C6773: mov     [esp+98h+var_7C], edi
 0x4C6777: mov     ecx, [esp+98h+var_80]
-0x4C677B: mov     ecx, [ecx+20h]; this
+0x4C677B: mov     ecx, [ecx+20h]; object
 0x4C677E: test    ecx, ecx
 0x4C6780: jz      loc_4C6F09
 0x4C6786: cmp     edi, 4
 0x4C6789: jge     loc_4C6F09
 0x4C678F: lea     esi, [edi+2]
-0x4C6792: call    TESObjectCELL_GetNiNode?
+0x4C6792: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x4C6797: test    eax, eax
 0x4C6799: jz      short loc_4C67C7
 0x4C679B: movzx   edx, word ptr [eax+0B6h]
@@ -65,15 +65,15 @@
 0x4C6818: movzx   ecx, word ptr [eax+8]
 0x4C681C: mov     edx, [eax+1Ch]
 0x4C681F: movzx   ecx, cx
-0x4C6822: push    edx
-0x4C6823: push    ecx
-0x4C6824: lea     ecx, [eax+0Ch]
-0x4C6827: call    sub_72A0F0
+0x4C6822: push    edx; vertices
+0x4C6823: push    ecx; vertexCount
+0x4C6824: lea     ecx, [eax+0Ch]; self
+0x4C6827: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x4C682C: mov     eax, [esi+0B4h]
 0x4C6832: or      word ptr [eax+2Eh], 0Fh
 0x4C6837: push    4
 0x4C6839: mov     ecx, esi
-0x4C683B: call    NiNode_GetNiPropertyByID
+0x4C683B: call    NiNode_GetNiPropertyByID;
 0x4C6840: mov     esi, eax
 0x4C6842: test    esi, esi
 0x4C6844: jz      short loc_4C6869
@@ -235,8 +235,8 @@
 0x4C6A72: mov     [esp+98h+var_4], 10h
 0x4C6A7D: or      ebx, 10000h
 0x4C6A83: jmp     short loc_4C6AA6
-0x4C6A85: mov     [esp+98h+var_54], 0
-0x4C6A8D: lea     edx, [esp+98h+var_54]
+0x4C6A85: mov     [esp+98h+slot], 0
+0x4C6A8D: lea     edx, [esp+98h+slot]
 0x4C6A91: mov     [esp+98h+var_58], edx
 0x4C6A95: mov     [esp+98h+var_4], 11h
 0x4C6AA0: or      ebx, 20000h
@@ -278,128 +278,128 @@
 0x4C6B0C: mov     [esp+98h+var_4], 10h
 0x4C6B17: jz      short loc_4C6B2C
 0x4C6B19: and     ebx, 0FFFDFFFFh
-0x4C6B1F: lea     ecx, [esp+98h+var_54]; this
+0x4C6B1F: lea     ecx, [esp+98h+slot]; slot
 0x4C6B23: mov     [esp+98h+var_84], ebx
-0x4C6B27: call    sub_7016A0
+0x4C6B27: call    NiPointerSlot_Release
 0x4C6B2C: test    ebx, 10000h
 0x4C6B32: mov     [esp+98h+var_4], 0Fh
 0x4C6B3D: jz      short loc_4C6B52
 0x4C6B3F: and     ebx, 0FFFEFFFFh
-0x4C6B45: lea     ecx, [esp+98h+var_30]; this
+0x4C6B45: lea     ecx, [esp+98h+var_30]; slot
 0x4C6B49: mov     [esp+98h+var_84], ebx
-0x4C6B4D: call    sub_7016A0
+0x4C6B4D: call    NiPointerSlot_Release
 0x4C6B52: test    ebx, 8000h
 0x4C6B58: mov     [esp+98h+var_4], 0Eh
 0x4C6B63: jz      short loc_4C6B78
 0x4C6B65: and     ebx, 0FFFF7FFFh
-0x4C6B6B: lea     ecx, [esp+98h+var_50]; this
+0x4C6B6B: lea     ecx, [esp+98h+var_50]; slot
 0x4C6B6F: mov     [esp+98h+var_84], ebx
-0x4C6B73: call    sub_7016A0
+0x4C6B73: call    NiPointerSlot_Release
 0x4C6B78: test    ebx, 4000h
 0x4C6B7E: mov     [esp+98h+var_4], 0Dh
 0x4C6B89: jz      short loc_4C6B9E
 0x4C6B8B: and     ebx, 0FFFFBFFFh
-0x4C6B91: lea     ecx, [esp+98h+var_2C]; this
+0x4C6B91: lea     ecx, [esp+98h+var_2C]; slot
 0x4C6B95: mov     [esp+98h+var_84], ebx
-0x4C6B99: call    sub_7016A0
+0x4C6B99: call    NiPointerSlot_Release
 0x4C6B9E: test    ebx, 2000h
 0x4C6BA4: mov     [esp+98h+var_4], 0Ch
 0x4C6BAF: jz      short loc_4C6BC4
 0x4C6BB1: and     ebx, 0FFFFDFFFh
-0x4C6BB7: lea     ecx, [esp+98h+var_4C]; this
+0x4C6BB7: lea     ecx, [esp+98h+var_4C]; slot
 0x4C6BBB: mov     [esp+98h+var_84], ebx
-0x4C6BBF: call    sub_7016A0
+0x4C6BBF: call    NiPointerSlot_Release
 0x4C6BC4: test    ebx, 1000h
 0x4C6BCA: mov     [esp+98h+var_4], 0Bh
 0x4C6BD5: jz      short loc_4C6BEA
 0x4C6BD7: and     ebx, 0FFFFEFFFh
-0x4C6BDD: lea     ecx, [esp+98h+var_28]; this
+0x4C6BDD: lea     ecx, [esp+98h+var_28]; slot
 0x4C6BE1: mov     [esp+98h+var_84], ebx
-0x4C6BE5: call    sub_7016A0
+0x4C6BE5: call    NiPointerSlot_Release
 0x4C6BEA: test    ebx, 800h
 0x4C6BF0: mov     [esp+98h+var_4], 0Ah
 0x4C6BFB: jz      short loc_4C6C10
 0x4C6BFD: and     ebx, 0FFFFF7FFh
-0x4C6C03: lea     ecx, [esp+98h+var_48]; this
+0x4C6C03: lea     ecx, [esp+98h+var_48]; slot
 0x4C6C07: mov     [esp+98h+var_84], ebx
-0x4C6C0B: call    sub_7016A0
+0x4C6C0B: call    NiPointerSlot_Release
 0x4C6C10: test    ebx, 400h
 0x4C6C16: mov     [esp+98h+var_4], 9
 0x4C6C21: jz      short loc_4C6C36
 0x4C6C23: and     ebx, 0FFFFFBFFh
-0x4C6C29: lea     ecx, [esp+98h+var_24]; this
+0x4C6C29: lea     ecx, [esp+98h+var_24]; slot
 0x4C6C2D: mov     [esp+98h+var_84], ebx
-0x4C6C31: call    sub_7016A0
+0x4C6C31: call    NiPointerSlot_Release
 0x4C6C36: test    ebx, 200h
 0x4C6C3C: mov     [esp+98h+var_4], 8
 0x4C6C47: jz      short loc_4C6C5C
 0x4C6C49: and     ebx, 0FFFFFDFFh
-0x4C6C4F: lea     ecx, [esp+98h+var_44]; this
+0x4C6C4F: lea     ecx, [esp+98h+var_44]; slot
 0x4C6C53: mov     [esp+98h+var_84], ebx
-0x4C6C57: call    sub_7016A0
+0x4C6C57: call    NiPointerSlot_Release
 0x4C6C5C: test    ebx, 100h
 0x4C6C62: mov     [esp+98h+var_4], 7
 0x4C6C6D: jz      short loc_4C6C82
 0x4C6C6F: and     ebx, 0FFFFFEFFh
-0x4C6C75: lea     ecx, [esp+98h+var_20]; this
+0x4C6C75: lea     ecx, [esp+98h+var_20]; slot
 0x4C6C79: mov     [esp+98h+var_84], ebx
-0x4C6C7D: call    sub_7016A0
+0x4C6C7D: call    NiPointerSlot_Release
 0x4C6C82: test    bl, bl
 0x4C6C84: mov     [esp+98h+var_4], 6
 0x4C6C8F: jns     short loc_4C6CA4
 0x4C6C91: and     ebx, 0FFFFFF7Fh
-0x4C6C97: lea     ecx, [esp+98h+var_40]; this
+0x4C6C97: lea     ecx, [esp+98h+var_40]; slot
 0x4C6C9B: mov     [esp+98h+var_84], ebx
-0x4C6C9F: call    sub_7016A0
+0x4C6C9F: call    NiPointerSlot_Release
 0x4C6CA4: test    bl, 40h
 0x4C6CA7: mov     [esp+98h+var_4], 5
 0x4C6CB2: jz      short loc_4C6CC4
 0x4C6CB4: and     ebx, 0FFFFFFBFh
-0x4C6CB7: lea     ecx, [esp+98h+var_1C]; this
+0x4C6CB7: lea     ecx, [esp+98h+var_1C]; slot
 0x4C6CBB: mov     [esp+98h+var_84], ebx
-0x4C6CBF: call    sub_7016A0
+0x4C6CBF: call    NiPointerSlot_Release
 0x4C6CC4: test    bl, 20h
 0x4C6CC7: mov     [esp+98h+var_4], 4
 0x4C6CD2: jz      short loc_4C6CE4
 0x4C6CD4: and     ebx, 0FFFFFFDFh
-0x4C6CD7: lea     ecx, [esp+98h+var_3C]; this
+0x4C6CD7: lea     ecx, [esp+98h+var_3C]; slot
 0x4C6CDB: mov     [esp+98h+var_84], ebx
-0x4C6CDF: call    sub_7016A0
+0x4C6CDF: call    NiPointerSlot_Release
 0x4C6CE4: test    bl, 10h
 0x4C6CE7: mov     [esp+98h+var_4], 3
 0x4C6CF2: jz      short loc_4C6D07
 0x4C6CF4: and     ebx, 0FFFFFFEFh
-0x4C6CF7: lea     ecx, [esp+98h+var_18]; this
+0x4C6CF7: lea     ecx, [esp+98h+var_18]; slot
 0x4C6CFE: mov     [esp+98h+var_84], ebx
-0x4C6D02: call    sub_7016A0
+0x4C6D02: call    NiPointerSlot_Release
 0x4C6D07: test    bl, 8
 0x4C6D0A: mov     [esp+98h+var_4], 2
 0x4C6D15: jz      short loc_4C6D27
 0x4C6D17: and     ebx, 0FFFFFFF7h
-0x4C6D1A: lea     ecx, [esp+98h+var_38]; this
+0x4C6D1A: lea     ecx, [esp+98h+var_38]; slot
 0x4C6D1E: mov     [esp+98h+var_84], ebx
-0x4C6D22: call    sub_7016A0
+0x4C6D22: call    NiPointerSlot_Release
 0x4C6D27: test    bl, 4
 0x4C6D2A: mov     [esp+98h+var_4], 1
 0x4C6D35: jz      short loc_4C6D4A
 0x4C6D37: and     ebx, 0FFFFFFFBh
-0x4C6D3A: lea     ecx, [esp+98h+var_14]; this
+0x4C6D3A: lea     ecx, [esp+98h+var_14]; slot
 0x4C6D41: mov     [esp+98h+var_84], ebx
-0x4C6D45: call    sub_7016A0
+0x4C6D45: call    NiPointerSlot_Release
 0x4C6D4A: xor     edi, edi
 0x4C6D4C: test    bl, 2
 0x4C6D4F: mov     [esp+98h+var_4], edi
 0x4C6D56: jz      short loc_4C6D68
 0x4C6D58: and     ebx, 0FFFFFFFDh
-0x4C6D5B: lea     ecx, [esp+98h+var_34]; this
+0x4C6D5B: lea     ecx, [esp+98h+var_34]; slot
 0x4C6D5F: mov     [esp+98h+var_84], ebx
-0x4C6D63: call    sub_7016A0
+0x4C6D63: call    NiPointerSlot_Release
 0x4C6D68: test    bl, 1
 0x4C6D6B: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x4C6D76: jz      short loc_4C6D87
-0x4C6D78: lea     ecx, [esp+98h+var_10]; this
+0x4C6D78: lea     ecx, [esp+98h+var_10]; slot
 0x4C6D7F: and     ebx, 0FFFFFFFEh
-0x4C6D82: call    sub_7016A0
+0x4C6D82: call    NiPointerSlot_Release
 0x4C6D87: mov     ebp, [esp+98h+var_80]
 0x4C6D8B: mov     ecx, [ebp+24h]
 0x4C6D8E: mov     esi, [esp+98h+var_7C]
@@ -507,7 +507,7 @@
 0x4C6ECB: push    eax
 0x4C6ECC: call    sub_7D7400
 0x4C6ED1: mov     ecx, [esp+98h+var_78]
-0x4C6ED5: call    sub_7E24C0
+0x4C6ED5: call    BSShaderProperty_ClearRenderPassLists; Owner-side cleanup for all four BSShaderProperty RenderPass lists at +0x28/+0x38/+0x48/+0x58. For every node it unlinks the node, releases the node through the list allocator, destroys the payload's owned light array, and frees the 0x10-byte RenderPass. This is the ordinary payload owner; accumulator selector buckets do not perform this destruction.
 0x4C6EDA: mov     ebp, [esp+98h+var_74]
 0x4C6EDE: mov     edi, [esp+98h+var_7C]
 0x4C6EE2: fldz
@@ -515,13 +515,13 @@
 0x4C6EE6: push    ecx
 0x4C6EE7: fstp    [esp+0A0h+a2]; a2
 0x4C6EEA: mov     ecx, ebp; this
-0x4C6EEC: call    NiAVObject_UpdateNiAVObject
+0x4C6EEC: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4C6EF1: cmp     [esp+98h+arg_0], 0
 0x4C6EF9: jz      short loc_4C6F09
 0x4C6EFB: mov     ecx, ebp
 0x4C6EFD: call    NiNode_UpdateDynamicEffectState
 0x4C6F02: mov     ecx, ebp; this
-0x4C6F04: call    NiAVObject_InitializePropertyState
+0x4C6F04: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4C6F09: add     edi, 1
 0x4C6F0C: cmp     edi, 4
 0x4C6F0F: mov     [esp+98h+var_7C], edi
@@ -546,3 +546,136 @@
 0x4C6F57: pop     ebx
 0x4C6F58: add     esp, 84h
 0x4C6F5E: retn    8
+0x9B4B20: mov     eax, [ebp-84h]
+0x9B4B26: and     eax, 1
+0x9B4B29: jz      locret_9B4B3E
+0x9B4B2F: and     dword ptr [ebp-84h], 0FFFFFFFEh
+0x9B4B36: lea     ecx, [ebp-10h]; slot
+0x9B4B39: jmp     NiPointerSlot_Release
+0x9B4B3E: retn
+0x9B4B3F: mov     eax, [ebp-84h]
+0x9B4B45: and     eax, 2
+0x9B4B48: jz      locret_9B4B5D
+0x9B4B4E: and     dword ptr [ebp-84h], 0FFFFFFFDh
+0x9B4B55: lea     ecx, [ebp-34h]; slot
+0x9B4B58: jmp     NiPointerSlot_Release
+0x9B4B5D: retn
+0x9B4B5E: mov     eax, [ebp-84h]
+0x9B4B64: and     eax, 4
+0x9B4B67: jz      locret_9B4B7C
+0x9B4B6D: and     dword ptr [ebp-84h], 0FFFFFFFBh
+0x9B4B74: lea     ecx, [ebp-14h]; slot
+0x9B4B77: jmp     NiPointerSlot_Release
+0x9B4B7C: retn
+0x9B4B7D: mov     eax, [ebp-84h]
+0x9B4B83: and     eax, 8
+0x9B4B86: jz      locret_9B4B9B
+0x9B4B8C: and     dword ptr [ebp-84h], 0FFFFFFF7h
+0x9B4B93: lea     ecx, [ebp-38h]; slot
+0x9B4B96: jmp     NiPointerSlot_Release
+0x9B4B9B: retn
+0x9B4B9C: mov     eax, [ebp-84h]
+0x9B4BA2: and     eax, 10h
+0x9B4BA5: jz      locret_9B4BBA
+0x9B4BAB: and     dword ptr [ebp-84h], 0FFFFFFEFh
+0x9B4BB2: lea     ecx, [ebp-18h]; slot
+0x9B4BB5: jmp     NiPointerSlot_Release
+0x9B4BBA: retn
+0x9B4BBB: mov     eax, [ebp-84h]
+0x9B4BC1: and     eax, 20h
+0x9B4BC4: jz      locret_9B4BD9
+0x9B4BCA: and     dword ptr [ebp-84h], 0FFFFFFDFh
+0x9B4BD1: lea     ecx, [ebp-3Ch]; slot
+0x9B4BD4: jmp     NiPointerSlot_Release
+0x9B4BD9: retn
+0x9B4BDA: mov     eax, [ebp-84h]
+0x9B4BE0: and     eax, 40h
+0x9B4BE3: jz      locret_9B4BF8
+0x9B4BE9: and     dword ptr [ebp-84h], 0FFFFFFBFh
+0x9B4BF0: lea     ecx, [ebp-1Ch]; slot
+0x9B4BF3: jmp     NiPointerSlot_Release
+0x9B4BF8: retn
+0x9B4BF9: mov     eax, [ebp-84h]
+0x9B4BFF: and     eax, 80h
+0x9B4C04: jz      locret_9B4C1C
+0x9B4C0A: and     dword ptr [ebp-84h], 0FFFFFF7Fh
+0x9B4C14: lea     ecx, [ebp-40h]; slot
+0x9B4C17: jmp     NiPointerSlot_Release
+0x9B4C1C: retn
+0x9B4C1D: mov     eax, [ebp-84h]
+0x9B4C23: and     eax, 100h
+0x9B4C28: jz      locret_9B4C40
+0x9B4C2E: and     dword ptr [ebp-84h], 0FFFFFEFFh
+0x9B4C38: lea     ecx, [ebp-20h]; slot
+0x9B4C3B: jmp     NiPointerSlot_Release
+0x9B4C40: retn
+0x9B4C41: mov     eax, [ebp-84h]
+0x9B4C47: and     eax, 200h
+0x9B4C4C: jz      locret_9B4C64
+0x9B4C52: and     dword ptr [ebp-84h], 0FFFFFDFFh
+0x9B4C5C: lea     ecx, [ebp-44h]; slot
+0x9B4C5F: jmp     NiPointerSlot_Release
+0x9B4C64: retn
+0x9B4C65: mov     eax, [ebp-84h]
+0x9B4C6B: and     eax, 400h
+0x9B4C70: jz      locret_9B4C88
+0x9B4C76: and     dword ptr [ebp-84h], 0FFFFFBFFh
+0x9B4C80: lea     ecx, [ebp-24h]; slot
+0x9B4C83: jmp     NiPointerSlot_Release
+0x9B4C88: retn
+0x9B4C89: mov     eax, [ebp-84h]
+0x9B4C8F: and     eax, 800h
+0x9B4C94: jz      locret_9B4CAC
+0x9B4C9A: and     dword ptr [ebp-84h], 0FFFFF7FFh
+0x9B4CA4: lea     ecx, [ebp-48h]; slot
+0x9B4CA7: jmp     NiPointerSlot_Release
+0x9B4CAC: retn
+0x9B4CAD: mov     eax, [ebp-84h]
+0x9B4CB3: and     eax, 1000h
+0x9B4CB8: jz      locret_9B4CD0
+0x9B4CBE: and     dword ptr [ebp-84h], 0FFFFEFFFh
+0x9B4CC8: lea     ecx, [ebp-28h]; slot
+0x9B4CCB: jmp     NiPointerSlot_Release
+0x9B4CD0: retn
+0x9B4CD1: mov     eax, [ebp-84h]
+0x9B4CD7: and     eax, 2000h
+0x9B4CDC: jz      locret_9B4CF4
+0x9B4CE2: and     dword ptr [ebp-84h], 0FFFFDFFFh
+0x9B4CEC: lea     ecx, [ebp-4Ch]; slot
+0x9B4CEF: jmp     NiPointerSlot_Release
+0x9B4CF4: retn
+0x9B4CF5: mov     eax, [ebp-84h]
+0x9B4CFB: and     eax, 4000h
+0x9B4D00: jz      locret_9B4D18
+0x9B4D06: and     dword ptr [ebp-84h], 0FFFFBFFFh
+0x9B4D10: lea     ecx, [ebp-2Ch]; slot
+0x9B4D13: jmp     NiPointerSlot_Release
+0x9B4D18: retn
+0x9B4D19: mov     eax, [ebp-84h]
+0x9B4D1F: and     eax, 8000h
+0x9B4D24: jz      locret_9B4D3C
+0x9B4D2A: and     dword ptr [ebp-84h], 0FFFF7FFFh
+0x9B4D34: lea     ecx, [ebp-50h]; slot
+0x9B4D37: jmp     NiPointerSlot_Release
+0x9B4D3C: retn
+0x9B4D3D: mov     eax, [ebp-84h]
+0x9B4D43: and     eax, 10000h
+0x9B4D48: jz      locret_9B4D60
+0x9B4D4E: and     dword ptr [ebp-84h], 0FFFEFFFFh
+0x9B4D58: lea     ecx, [ebp-30h]; slot
+0x9B4D5B: jmp     NiPointerSlot_Release
+0x9B4D60: retn
+0x9B4D61: mov     eax, [ebp-84h]
+0x9B4D67: and     eax, 20000h
+0x9B4D6C: jz      locret_9B4D84
+0x9B4D72: and     dword ptr [ebp-84h], 0FFFDFFFFh
+0x9B4D7C: lea     ecx, [ebp-54h]; slot
+0x9B4D7F: jmp     NiPointerSlot_Release
+0x9B4D84: retn
+0x9B4D85: mov     edx, [esp+arg_4]
+0x9B4D89: lea     eax, [edx-88h]
+0x9B4D8F: mov     ecx, [edx-8Ch]
+0x9B4D95: xor     ecx, eax
+0x9B4D97: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B4D9C: mov     eax, offset stru_ADFF44
+0x9B4DA1: jmp     ___CxxFrameHandler3

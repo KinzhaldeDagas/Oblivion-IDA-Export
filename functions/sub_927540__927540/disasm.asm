@@ -15,7 +15,6 @@
 0x927578: jle     short loc_9275F1
 0x92757A: push    edi
 0x92757B: jmp     short loc_927580
-0x92757D: align 10h
 0x927580: mov     eax, [esi+1Ch]
 0x927583: mov     ecx, [eax+ebx*8]
 0x927586: mov     edx, [ecx+0B0h]

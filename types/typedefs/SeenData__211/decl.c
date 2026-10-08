@@ -1,1 +1,1 @@
-SeenData
+struct SeenData;

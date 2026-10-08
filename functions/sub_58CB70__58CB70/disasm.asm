@@ -27,9 +27,9 @@
 0x58CBC2: mov     [esi+4], eax
 0x58CBC5: mov     [eax+8], edx
 0x58CBC8: mov     esi, [esi+4]
-0x58CBCB: push    0
-0x58CBCD: mov     ecx, ebx
-0x58CBCF: call    DoActionEnumeration
+0x58CBCB: push    0; forceUpdate
+0x58CBCD: mov     ecx, ebx; this
+0x58CBCF: call    Tile__Value__CalculateValue; Verified: receiver is 0x1C-byte Tile::Value, NOT Tile. Reads owner at +0, numeric value +4, trait code +0x18, expression head pointer +0x10. Native SetFloat 0x58CA00 and dependency propagation 0x58BDD0 pass Value pointers. Fallout named analogue 0x8220BFF0. Local SDK Tile::DoActionEnumeration incorrectly passes Tile* to this address; plugin direct calls are invalid-receiver calls.
 0x58CBD4: mov     eax, esi
 0x58CBD6: pop     esi
 0x58CBD7: pop     ebx

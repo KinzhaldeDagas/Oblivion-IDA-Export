@@ -1,8 +1,9 @@
-int __fastcall sub_4EF7E0(int a1)
+// Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
+TESWorldSpaceTerrainLODQuadMap *__fastcall TESWorldSpace_GetRootTerrainLODQuadMap(TESWorldSpace *worldspace)
 {
-  int i; // eax
+  TESWorldSpace *i; // eax
 
-  for ( i = *(_DWORD *)(a1 + 0x7C); i; i = *(_DWORD *)(i + 0x7C) )
-    a1 = i;
-  return a1 + 0x38;
+  for ( i = worldspace->parentWorldspace; i; i = i->parentWorldspace ) /*0x4ef7e5*/
+    worldspace = i; /*0x4ef7e7*/
+  return &worldspace->terrainLODQuadRoots; /*0x4ef7f3*/
 }

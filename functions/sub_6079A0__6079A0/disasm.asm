@@ -1,4 +1,4 @@
-0x6079A0: push    ebp
+0x6079A0: push    ebp; Creates or resets projectile collision state 4, records the optional target reference, initializes transform/velocity fields from the character proxy or node transform, and marks collision resolution active.
 0x6079A1: mov     ebp, esp
 0x6079A3: and     esp, 0FFFFFFF0h
 0x6079A6: sub     esp, 34h
@@ -17,9 +17,9 @@
 0x6079CB: push    54h ; 'T'; Size
 0x6079CD: call    FormHeapAlloc
 0x6079D2: mov     [ebx+5Ch], eax
-0x6079D5: mov     dword ptr [eax], 4
+0x6079D5: mov     dword ptr [eax], 4; Create state 4 fallback/settling record. Optional target reference may be stored at +0x28; this state is also used when active flight decays without a normal embed.
 0x6079DB: mov     eax, [ebx+5Ch]
-0x6079DE: mov     edx, [ebp+arg_0]
+0x6079DE: mov     edx, [ebp+target]
 0x6079E1: mov     dword ptr [eax+2Ch], 0
 0x6079E8: mov     ecx, [ebx+5Ch]
 0x6079EB: mov     [ecx+28h], edx
@@ -54,20 +54,20 @@
 0x607A5F: mov     [eax+8], ecx
 0x607A62: add     esp, 4
 0x607A65: mov     ecx, ebx; this
-0x607A67: call    MobileObject_GetCharProxy
+0x607A67: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x607A6C: test    eax, eax
 0x607A6E: jz      loc_607B42
 0x607A74: mov     ecx, ebx; this
-0x607A76: call    MobileObject_GetCharProxy
+0x607A76: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x607A7B: test    eax, eax
 0x607A7D: jz      short loc_607A8F
 0x607A7F: mov     eax, [eax+8]
 0x607A82: test    eax, eax
 0x607A84: jz      short loc_607A8F
 0x607A86: mov     ecx, eax
-0x607A88: call    sub_8AC0A0
+0x607A88: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x607A8D: jmp     short loc_607A94
-0x607A8F: mov     eax, offset stru_BA7A40
+0x607A8F: mov     eax, offset unk_BA7A40
 0x607A94: movaps  xmm0, xmmword ptr [eax]
 0x607A97: movss   [esp+40h+var_30], xmm0
 0x607A9D: fld     [esp+40h+var_30]
@@ -121,7 +121,7 @@
 0x607B35: push    ecx
 0x607B36: add     edx, 1Ch
 0x607B39: push    edx
-0x607B3A: call    sub_43F3E0
+0x607B3A: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x607B3F: add     esp, 8
 0x607B42: mov     ecx, [esp+40h+var_4]
 0x607B46: pop     edi

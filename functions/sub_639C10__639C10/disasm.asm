@@ -92,10 +92,10 @@
 0x639D00: push    eax
 0x639D01: mov     ecx, edi
 0x639D03: call    sub_566B30
-0x639D08: push    eax
-0x639D09: mov     ecx, ebp
-0x639D0B: call    sub_4D7E30
-0x639D10: call    Double_To_SInt32
+0x639D08: push    eax; pointXYZ
+0x639D09: mov     ecx, ebp; this
+0x639D0B: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+0x639D10: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x639D15: mov     [esp+20h+arg_0], eax
 0x639D19: fild    [esp+20h+arg_0]
 0x639D1D: fcomp   qword ptr ds:0A37478h
@@ -118,10 +118,10 @@
 0x639D55: push    edx
 0x639D56: mov     ecx, edi
 0x639D58: call    sub_566B30
-0x639D5D: mov     ecx, [esi+2Ch]
-0x639D60: push    eax
-0x639D61: call    sub_4D7E30
-0x639D66: call    Double_To_SInt32
+0x639D5D: mov     ecx, [esi+2Ch]; this
+0x639D60: push    eax; pointXYZ
+0x639D61: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+0x639D66: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x639D6B: mov     ecx, edi
 0x639D6D: mov     ebx, eax
 0x639D6F: call    sub_566DB0
@@ -217,7 +217,7 @@
 0x639E8B: retn    4
 0x639E8E: push    30h ; '0'
 0x639E90: mov     ecx, ebp
-0x639E92: call    sub_5E05F0
+0x639E92: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x639E97: pop     edi
 0x639E98: pop     esi
 0x639E99: pop     ebp

@@ -121,7 +121,6 @@
 0x8D0E8E: lea     eax, [esp+120h+var_C0]
 0x8D0E92: mov     ecx, 2
 0x8D0E97: jmp     short loc_8D0EA0
-0x8D0E99: align 10h
 0x8D0EA0: movaps  xmm0, xmmword ptr [eax]
 0x8D0EA3: movaps  xmm5, xmm0
 0x8D0EA6: shufps  xmm5, xmm0, 0AAh ; 'ª'

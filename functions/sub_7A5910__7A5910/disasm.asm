@@ -1,4 +1,4 @@
-0x7A5910: fld     dword ptr ds:0A524B0h
+0x7A5910: fld     dword ptr ds:0A524B0h; Compact Oblivion SIdvLeafTexture constructor. The executable record is exactly 0x54 bytes and ends after sizeUsed; RT 4.1 mesh-leaf extension fields are absent.
 0x7A5916: mov     eax, ecx
 0x7A5918: xor     ecx, ecx
 0x7A591A: mov     [eax], cl

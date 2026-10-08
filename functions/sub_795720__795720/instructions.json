@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795720",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): Resizes a vector<unsigned int>, inserting fill values when growing and erasing the tail when shrinking; used for per-LOD triangle totals.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x79573C",
-    "line": "mov     ebx, [esp+18h+arg_0]",
+    "line": "mov     ebx, [esp+18h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x795760",
-    "line": "lea     eax, [esp+18h+arg_4]",
+    "line": "lea     eax, [esp+18h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x795764",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,31 +187,31 @@
   },
   {
     "ea": "0x795767",
-    "line": "push    ebx; int",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795768",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795769",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79576A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79576C",
-    "line": "call    sub_7950A0",
+    "line": "call    OB_stVectorUInt32_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): vector<unsigned int> insert-fill core. Handles in-place overlap and 1.5x geometric reallocation while preserving the checked insertion position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7957A3",
-    "line": "mov     [esp+18h+var_4], edi",
+    "line": "mov     [esp+18h+result.current], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,49 +385,49 @@
   },
   {
     "ea": "0x7957B9",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7957BA",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7957BB",
-    "line": "push    edi; Dst",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7957BC",
-    "line": "push    esi; int",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7957BD",
-    "line": "lea     ecx, [esp+28h+var_8]",
+    "line": "lea     ecx, [esp+28h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7957C1",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7957C2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7957C4",
-    "line": "call    sub_439050",
+    "line": "call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7FA470",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x7FA470",
+      "0x7FA574"
+    ]
+  ],
+  "chunks_sha256": "58b472c21ec3505ecf4230b01ee9b8001b41e73ddbd663c178a0e17d9575f470",
+  "comment_regular": "Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.",
+  "comment_repeatable": "Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "BSImageSpaceShader_BindFirstFreeRenderedTexture",
   "end_ea": "0x7FA574",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FA470",
+  "name": "BSImageSpaceShader_BindFirstFreeRenderedTexture",
   "segment": ".text",
   "sha256": "58b472c21ec3505ecf4230b01ee9b8001b41e73ddbd663c178a0e17d9575f470",
   "size": 260,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FA470",
-  "type": "LONG __thiscall(BSImageSpaceShader *this, NiRenderedTexture *a2)",
+  "total_chunk_size": 260,
+  "type": "int __thiscall(void *imageSpaceShader, void *renderedTexture)",
   "xrefs_from_count": 124,
   "xrefs_to_count": 6
 }

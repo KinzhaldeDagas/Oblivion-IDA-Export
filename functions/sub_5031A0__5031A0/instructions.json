@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5031A0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified script-style callback body: parses a TESObjectCELL* and integer, then calls TESObjectCELL_SetPublicFlag20(cell, value > 0). Candidate command identity: SetCellPublic, based on the Fallout analog only. Oblivion command registration/name remains Unknown: current IDA xrefs and a raw function-pointer search show no registered reference.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x5031C4",
-    "line": "mov     ecx, [esp+1Ch+arg_4]",
+    "line": "mov     ecx, [esp+1Ch+compiledParams]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5031E0",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5031F0",
-    "line": "mov     ecx, dword ptr [esp+8+var_8]",
+    "line": "mov     ecx, dword ptr [esp+8+var_8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x5031FF",
-    "line": "push    eax",
+    "line": "push    eax; isPublic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503200",
-    "line": "call    sub_4C9840",
+    "line": "call    TESObjectCELL_SetPublicFlag20; Verified body: sets/clears TESObjectCELL flags0 bit 0x20 and calls MarkAsModified(mask 8). Probable semantic identity: Public flag, supported by TESObjectCELL_HasPublicFlag20 and door trespass-access checks; Fallout independently names the homolog SetPublic. This comment records the confidence boundary; Fallout similarity alone is not treated as proof.",
     "mnemonic": "call",
     "size": 5
   },

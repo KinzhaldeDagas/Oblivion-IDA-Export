@@ -2,9 +2,9 @@ void __thiscall InputGlobals::FlushKeyboardBuffer(InputGlobal *this)
 {
   DWORD v1; // [esp+0h] [ebp-4h] BYREF
 
-  v1 = (DWORD)this;
-  if ( this->keyboardInterface )
-    ((void (__cdecl *)(ParamInfo *__return_ptr __struct_ptr, IDirectInput8 *, DWORD, DIDEVICEOBJECTDATA *, DWORD *, DWORD))this->keyboardInterface->vtbl->IDirectInputDevice2Impl_GetDeviceData)(
+  v1 = (DWORD)this; /*0x403160*/
+  if ( this->keyboardInterface ) /*0x403161*/
+    ((void (__cdecl *)(ParamInfo *__return_ptr __struct_ptr, IDirectInput8 *, DWORD, DIDEVICEOBJECTDATA *, DWORD *, DWORD))this->keyboardInterface->vtbl->IDirectInputDevice2Impl_GetDeviceData)( /*0x403183*/
       (ParamInfo *)this->keyboardInterface,
       (IDirectInput8 *)0x14,
       0,

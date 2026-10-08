@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B1600",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. Its ShadowSceneLight registration uses trackBackingPosition=false because reference lifecycle supplies the attachment path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B1644",
-    "line": "mov     esi, [esp+154h+arg_4]",
+    "line": "mov     esi, [esp+154h+referenceRoot]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4B1672",
-    "line": "test    [eax+7Ch], bl",
+    "line": "test    [eax+7Ch], bl; Test lightFlags_7C bit 0x20 ('Off by default' in the Oblivion Construction Set). Set bypasses the ordinary parent-cell/water-height precheck and later suppresses the non-actor reference-light path.",
     "mnemonic": "test",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4B1679",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4B1698",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4B16E9",
-    "line": "test    [eax+7Ch], bl",
+    "line": "test    [eax+7Ch], bl; For a non-actor reference, lightFlags_7C bit 0x20 ('Off by default') exits without creating/configuring the attached point light.",
     "mnemonic": "test",
     "size": 3
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4B16F8",
-    "line": "test    byte ptr [eax+7Ch], 4",
+    "line": "test    byte ptr [eax+7Ch], 4; Test lightFlags_7C bit 0x04 ('Negative' in the Oblivion Construction Set). Set negates the normalized RGB components before configuring the NiPointLight.",
     "mnemonic": "test",
     "size": 4
   },
@@ -882,14 +882,8 @@
     "size": 2
   },
   {
-    "ea": "0x4B17DA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4B17E0",
-    "line": "cmp     eax, offset dword_B3FD80",
+    "line": "cmp     eax, offset stru_B3FD80",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1261,7 +1255,7 @@
   },
   {
     "ea": "0x4B18B5",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,19 +1273,19 @@
   },
   {
     "ea": "0x4B18C0",
-    "line": "push    esi; a2",
+    "line": "push    esi; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B18C1",
-    "line": "mov     ecx, ebp; this",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B18C3",
-    "line": "call    sub_4DD130",
+    "line": "call    TESObjectREFR_SetExtraLightPayload; Install the ordinary ExtraLight type 0x30 attached-light payload on the reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1549,7 @@
   },
   {
     "ea": "0x4B1998",
-    "line": "push    offset stru_B43400; lpCriticalSection",
+    "line": "push    offset unk_B43400; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -1609,13 +1603,13 @@
   },
   {
     "ea": "0x4B19C2",
-    "line": "push    0",
+    "line": "push    0; trackBackingPosition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B19C4",
-    "line": "push    esi",
+    "line": "push    esi; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -1639,13 +1633,13 @@
   },
   {
     "ea": "0x4B19CF",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B19D1",
-    "line": "call    sub_7C6AE0",
+    "line": "call    ShadowSceneNode_FindOrCreateFullLightForSource; Register the reference/equipped NiPointLight with trackBackingPosition=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,7 +1675,7 @@
   },
   {
     "ea": "0x4B19EC",
-    "line": "push    offset stru_B43400; lpCriticalSection",
+    "line": "push    offset unk_B43400; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -1711,13 +1705,13 @@
   },
   {
     "ea": "0x4B1A00",
-    "line": "call    sub_4B1210",
+    "line": "call    NiPointLight_ConfigureAttenuationFromLightRadius; Configure point-light attenuation from TESObjectLIGH::radius_74 using the engine interior/exterior attenuation policy.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B1A05",
-    "line": "fld     dword ptr [edi+88h]",
+    "line": "fld     dword ptr [edi+88h]; Seed NiLight::m_fDimmer (+0xDC) from TESObjectLIGH::fade_88 (FNAM).",
     "mnemonic": "fld",
     "size": 6
   },
@@ -1804,5 +1798,101 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B2FC0",
+    "line": "mov     eax, [ebp-138h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2FC6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2FC7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2FCC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2FCD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2FCE",
+    "line": "mov     edx, [esp+referenceRoot]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B2FD2",
+    "line": "lea     eax, [edx-144h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2FD8",
+    "line": "mov     ecx, [edx-148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2FDE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2FE0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2FE5",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2FE8",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2FEB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2FED",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2FF2",
+    "line": "mov     eax, offset stru_ADED64",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2FF7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78FB60",
+      "0x78FBBA"
+    ]
+  ],
+  "chunks_sha256": "b68e079fb091186b2a36f9387e0893f5591d9b8b224c98186f5331606e781af5",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_78FB60",
+  "display_name": "OB_stVector4_Allocate_010201A0",
   "end_ea": "0x78FBBA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78FB60",
+  "name": "OB_stVector4_Allocate_010201A0",
   "segment": ".text",
   "sha256": "b68e079fb091186b2a36f9387e0893f5591d9b8b224c98186f5331606e781af5",
   "size": 90,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78FB60",
-  "type": "_DWORD *__cdecl(char *)",
+  "total_chunk_size": 90,
+  "type": "unsigned int *__cdecl(unsigned int count)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 8
 }

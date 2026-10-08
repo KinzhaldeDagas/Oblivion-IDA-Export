@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6279A6",
-    "line": "mov     esi, [esp+48h+arg_0]",
+    "line": "mov     esi, [esp+48h+pointXYZ]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6279CE",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x627A2A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x627A52",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x627A57",
-    "line": "call    sub_4D76F0",
+    "line": "call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x627AB4",
-    "line": "mov     [esp+4Ch+var_2C], edx",
+    "line": "mov     dword ptr [esp+4Ch+var_2C], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x627AB8",
-    "line": "mov     [esp+4Ch+var_28], eax",
+    "line": "mov     dword ptr [esp+4Ch+var_2C+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x627AC4",
-    "line": "fld     [esp+4Ch+var_2C]",
+    "line": "fld     dword ptr [esp+4Ch+var_2C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x627ACC",
-    "line": "fstp    [esp+4Ch+var_38]",
+    "line": "fstp    dword ptr [esp+4Ch+var_38]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x627AD0",
-    "line": "fld     [esp+4Ch+var_28]",
+    "line": "fld     dword ptr [esp+4Ch+var_2C+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x627AD8",
-    "line": "fstp    [esp+4Ch+var_34]",
+    "line": "fstp    dword ptr [esp+4Ch+var_38+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x627ADC",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x627AF5",
-    "line": "fld     [esp+4Ch+var_38]",
+    "line": "fld     dword ptr [esp+4Ch+var_38]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x627AFF",
-    "line": "fmul    [esp+4Ch+var_34]",
+    "line": "fmul    dword ptr [esp+4Ch+var_38+4]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x627B1F",
-    "line": "fadd    [esp+4Ch+var_2C]",
+    "line": "fadd    dword ptr [esp+4Ch+var_2C]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x627B31",
-    "line": "mov     [esp+4Ch+var_38], edx",
+    "line": "mov     dword ptr [esp+4Ch+var_38], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x627B35",
-    "line": "fadd    [esp+4Ch+var_28]",
+    "line": "fadd    dword ptr [esp+4Ch+var_2C+4]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x627B41",
-    "line": "mov     [esp+4Ch+var_34], eax",
+    "line": "mov     dword ptr [esp+4Ch+var_38+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x627B45",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x627B4E",
-    "line": "mov     edx, [esp+4Ch+var_38]",
+    "line": "mov     edx, dword ptr [esp+4Ch+var_38]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x627B60",
-    "line": "mov     ecx, [esp+68h+var_34]",
+    "line": "mov     ecx, dword ptr [esp+68h+var_38+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x627B71",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,19 +925,19 @@
   },
   {
     "ea": "0x627B96",
-    "line": "push    esi",
+    "line": "push    esi; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x627B97",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x627B99",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x627C43",
-    "line": "fstp    [esp+4Ch+var_2C]",
+    "line": "fstp    dword ptr [esp+4Ch+var_2C]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1261,13 +1261,13 @@
   },
   {
     "ea": "0x627C4F",
-    "line": "fstp    [esp+4Ch+var_28]",
+    "line": "fstp    dword ptr [esp+4Ch+var_2C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x627C53",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x627C6C",
-    "line": "fld     [esp+4Ch+var_2C]",
+    "line": "fld     dword ptr [esp+4Ch+var_2C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x627C76",
-    "line": "fmul    [esp+4Ch+var_28]",
+    "line": "fmul    dword ptr [esp+4Ch+var_2C+4]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x627CA8",
-    "line": "mov     [esp+4Ch+var_2C], edx",
+    "line": "mov     dword ptr [esp+4Ch+var_2C], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1435,13 +1435,13 @@
   },
   {
     "ea": "0x627CB8",
-    "line": "mov     [esp+4Ch+var_28], eax",
+    "line": "mov     dword ptr [esp+4Ch+var_2C+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x627CBC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x627CC5",
-    "line": "mov     edx, [esp+4Ch+var_2C]",
+    "line": "mov     edx, dword ptr [esp+4Ch+var_2C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x627CD7",
-    "line": "mov     ecx, [esp+68h+var_28]",
+    "line": "mov     ecx, dword ptr [esp+68h+var_2C+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x627CE8",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },

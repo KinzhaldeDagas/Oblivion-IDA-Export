@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
-  "callers_count": 1,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x403B80",
+      "0x403BBE"
+    ]
+  ],
+  "chunks_sha256": "b54d8da2d1371d6dbee3485d79bb6f7a6c32a79a90da2c415e9b7ae8bb10b71b",
+  "comment_regular": "[Controller decode 2026-07-09] Minimal rebind checks: forbids reserved inputs such as Escape, Grave/console, and PrintScreen before writing a binding.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "InputGlobals::RebindControlMinimalChecks",
   "end_ea": "0x403BBE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobals::RebindControlMinimalChecks",
   "segment": ".text",
   "sha256": "b54d8da2d1371d6dbee3485d79bb6f7a6c32a79a90da2c415e9b7ae8bb10b71b",
   "size": 62,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x403B80",
+  "total_chunk_size": 62,
   "type": "int __thiscall(InputGlobal *this, UInt8 whichCtrl, UInt8 whichScheme, UInt8 newButton)",
   "xrefs_from_count": 29,
   "xrefs_to_count": 2

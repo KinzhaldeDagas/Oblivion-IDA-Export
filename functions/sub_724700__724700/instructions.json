@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x724700",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, dword ptr [esp+firstAvailableSlot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,31 +25,31 @@
   },
   {
     "ea": "0x724708",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+child]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x72470C",
-    "line": "push    eax",
+    "line": "push    eax; firstAvailableSlot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x72470D",
-    "line": "push    ecx",
+    "line": "push    ecx; child",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x72470E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x724710",
-    "line": "call    NiNode__AddObject",
+    "line": "call    NiNode__AddObject; Adds child to this NiNode after reference protection and reparent/detach. firstAvailableSlot selects hole reuse versus append/grow behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x724735",
-    "line": "mov     [esp+8+arg_4], 0",
+    "line": "mov     dword ptr [esp+8+firstAvailableSlot], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x72474D",
-    "line": "lea     ecx, [esp+8+arg_4]",
+    "line": "lea     ecx, [esp+8+firstAvailableSlot]",
     "mnemonic": "lea",
     "size": 4
   },

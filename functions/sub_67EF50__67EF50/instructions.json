@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67EF50",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified graph-node Euclidean distance helper; used by Road and PathGrid graph operations. Null inputs return FLT_MAX.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x67EF5A",
-    "line": "mov     edi, [esp+14h+arg_0]",
+    "line": "mov     edi, [esp+14h+a]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x67EF66",
-    "line": "mov     ecx, [esp+14h+arg_4]",
+    "line": "mov     ecx, [esp+14h+b]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x67EF6F",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67EF74",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x67EF78",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x67EFB5",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+a]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x67EFB9",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+a]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x67EFC2",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+a]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x67EFC6",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+a]",
     "mnemonic": "fld",
     "size": 4
   },

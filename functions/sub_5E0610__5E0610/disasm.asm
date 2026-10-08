@@ -1,4 +1,4 @@
-0x5E0610: cmp     dword ptr [ecx+58h], 0
+0x5E0610: cmp     dword ptr [ecx+58h], 0; 3DTheft decode: Actor_SetMovementFlag wrapper calls process vfunc +0x2C4 with enabled=true.
 0x5E0614: jz      short locret_5E062A
 0x5E0616: mov     ecx, [ecx+58h]
 0x5E0619: mov     eax, [ecx]

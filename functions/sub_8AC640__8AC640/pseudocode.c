@@ -1,34 +1,35 @@
-unsigned int __thiscall sub_8AC640(float *this, __m128 *a2)
+// TES4 authoritative: searches existing manifold entries for a candidate 0x30-byte contact with match error < 0.1; returns index or 0xFFFFFFFF.
+unsigned int __thiscall hkpCharacterProxy_FindMatchingManifoldContact(float *this, __m128 *candidate)
 {
   int v3; // ebp
   unsigned int result; // eax
   signed int v5; // esi
   __m128 *v6; // edi
-  double v7; // st7
+  double matched; // st7
   float v8; // [esp+Ch] [ebp-8h]
   unsigned int v9; // [esp+10h] [ebp-4h]
 
-  v3 = *((_DWORD *)this + 0x1E);
-  result = 0xFFFFFFFF;
-  v5 = 0;
-  v9 = 0xFFFFFFFF;
-  v8 = 0.1;
-  if ( v3 > 0 )
+  v3 = *((_DWORD *)this + 0x1E); /*0x8ac647*/
+  result = 0xFFFFFFFF; /*0x8ac64b*/
+  v5 = 0; /*0x8ac64e*/
+  v9 = 0xFFFFFFFF; /*0x8ac652*/
+  v8 = 0.1;                                     // Contact-match threshold is 0.1; entries above this are treated as new contacts. /*0x8ac656*/
+  if ( v3 > 0 ) /*0x8ac65e*/
   {
-    v6 = *((__m128 **)this + 0x1D);
-    do
+    v6 = *((__m128 **)this + 0x1D); /*0x8ac661*/
+    do /*0x8ac68e*/
     {
-      v7 = sub_8ABF70(this, a2, v6);
-      if ( v7 < v8 )
+      matched = hkpCharacterProxy_ComputeContactMatchError(this, candidate, v6); /*0x8ac66c*/
+      if ( matched < v8 ) /*0x8ac67a*/
       {
-        v8 = v7;
-        v9 = v5;
+        v8 = matched; /*0x8ac67c*/
+        v9 = v5; /*0x8ac680*/
       }
-      ++v5;
-      v6 += 3;
+      ++v5; /*0x8ac688*/
+      v6 += 3; /*0x8ac689*/
     }
-    while ( v5 < v3 );
-    return v9;
+    while ( v5 < v3 ); /*0x8ac68e*/
+    return v9; /*0x8ac690*/
   }
-  return result;
+  return result; /*0x8ac695*/
 }

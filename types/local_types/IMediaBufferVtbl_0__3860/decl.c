@@ -1,1 +1,1 @@
-IMediaBufferVtbl_0
+typedef IMediaBufferVtbl IMediaBufferVtbl_0;

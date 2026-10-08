@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x7D1FD0",
+      "0x7D2066"
+    ],
+    [
+      "0x9CEA10",
+      "0x9CEA44"
+    ]
+  ],
+  "chunks_sha256": "0096c9097bdbc018863c717a883e0a3953f06801fbdd1b41373e65d2594be850",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7D1FD0",
+  "comment_repeatable": "MEF PERF 2026-10-07: Verified RemoveTail: reads tail+8, predecessor node+4; updates tail and predecessor.next or clears head; retains payload to result, virtual-releases node, decrements count. Typed list view is16 bytes; node view12 bytes. Nonempty valid-list precondition.\nMEF v57 IMPLEMENTED 2026-10-08: v57 tail-removal observer covers direct and RemovePosition-tail calls. Native result references, count, tail links and allocator release preserved; nested observer mismatch conservatively discards cache.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTRefPointerList__RemoveTail",
   "end_ea": "0x7D2066",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D1FD0",
+  "name": "NiTRefPointerList__RemoveTail",
   "segment": ".text",
   "sha256": "74ffb35acb077eddac49188055eb9d5b22c937e2caac93baf38abe95f6eb795d",
   "size": 150,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D1FD0",
-  "type": "_DWORD *__thiscall(_DWORD *this, _DWORD *)",
-  "xrefs_from_count": 50,
+  "total_chunk_size": 202,
+  "type": "void **__thiscall(MEF_RefList32 *self, void **result)",
+  "xrefs_from_count": 66,
   "xrefs_to_count": 1
 }

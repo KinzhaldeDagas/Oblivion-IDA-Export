@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5465A4",
-    "line": "cmp     byte ptr [esp+arg_48], 0",
+    "line": "cmp     byte ptr [esp+arg_48], 0; Carries the sleeping-target bonus stage (fSneakSleepBonus) into final aggregation.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x5465A9",
-    "line": "jz      short Calc_DetectionLevel___CalcDetectionLevel",
+    "line": "jz      short Calc_DetectionLevel_Finalize; Final Oblivion aggregation: adds fSneakBaseValue and the accumulated distance/sound/light/skill/context contributions, converts to an integer detection score, and preserves a minimum positive result of 1 where required.",
     "mnemonic": "jz",
     "size": 2
   },

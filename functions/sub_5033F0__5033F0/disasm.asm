@@ -4,6 +4,6 @@
 0x5033F9: push    0
 0x5033FB: push    0
 0x5033FD: push    ecx
-0x5033FE: call    sub_4F7030
+0x5033FE: call    GetIsPlayableRace_Eval
 0x503403: add     esp, 10h
 0x503406: retn

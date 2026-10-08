@@ -1,4 +1,4 @@
-BSStringT *sub_A056A0()
+NiRTTI *sub_A056A0()
 {
-  return sub_70E220((BSStringT *)dword_B3DE94, "NiMaterialColorController", (int)dword_B3EEFC);
+  return NiRTTI_Constructor(&stru_B3DE94, "NiMaterialColorController", &stru_B3EEFC); /*0xa056b4*/
 }

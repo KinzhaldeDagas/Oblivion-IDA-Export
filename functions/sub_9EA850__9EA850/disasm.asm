@@ -2,7 +2,7 @@
 0x9EA856: push    ecx
 0x9EA857: fstp    [esp+4+var_4]; float
 0x9EA85A: push    offset aFaicombatslope; "fAICombatSlopeDifference"
-0x9EA85F: mov     ecx, offset fAICombatSlopeDifference
+0x9EA85F: mov     ecx, (offset flt_B37328+8)
 0x9EA864: call    GameSetting_ConstrAndReg_float
 0x9EA869: push    offset sub_A1ED80; void (__cdecl *)()
 0x9EA86E: call    _atexit

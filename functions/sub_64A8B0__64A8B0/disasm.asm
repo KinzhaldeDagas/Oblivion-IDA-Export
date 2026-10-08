@@ -15,10 +15,10 @@
 0x64A8DF: push    ebx
 0x64A8E0: push    ebp
 0x64A8E1: push    edi
-0x64A8E2: mov     ecx, esi
+0x64A8E2: mov     ecx, esi; this
 0x64A8E4: mov     [esp+20h+var_D], al
 0x64A8E8: mov     [esp+20h+var_E], al
-0x64A8EC: call    sub_5E0380
+0x64A8EC: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x64A8F1: lea     ecx, [esi+44h]; this
 0x64A8F4: mov     ebx, eax
 0x64A8F6: call    ExtraDataList__GetTravelHorse
@@ -89,9 +89,9 @@
 0x64A9C5: mov     eax, [edx+170h]
 0x64A9CB: mov     ecx, esi
 0x64A9CD: call    eax
-0x64A9CF: push    eax
-0x64A9D0: lea     ecx, [edi+44h]
-0x64A9D3: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x64A9CF: push    eax; owner
+0x64A9D0: lea     ecx, [edi+44h]; this
+0x64A9D3: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x64A9D8: mov     ecx, [esi+58h]
 0x64A9DB: mov     edx, [ecx]
 0x64A9DD: mov     eax, [edx+8]
@@ -129,7 +129,7 @@
 0x64AA3C: mov     ecx, edi
 0x64AA3E: call    TesObjectREF_GetDistance
 0x64AA43: fstp    [esp+20h+var_C]
-0x64AA47: mov     ecx, offset fAIAcquireObjectDistance
+0x64AA47: mov     ecx, (offset flt_B36778+170h)
 0x64AA4C: call    GameSetting_GetSafeFloatPointer
 0x64AA51: fld     dword ptr [eax]
 0x64AA53: fcomp   [esp+20h+var_C]
@@ -184,7 +184,7 @@
 0x64AADA: call    eax
 0x64AADC: jmp     short loc_64AB24
 0x64AADE: mov     ecx, esi; this
-0x64AAE0: call    TESObjectREFR_GetParentCell
+0x64AAE0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64AAE5: mov     edx, [esi]
 0x64AAE7: mov     eax, [edx+174h]
 0x64AAED: mov     ecx, esi

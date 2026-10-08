@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x709F64",
-    "line": "push    ebx",
+    "line": "push    ebx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x709F65",
-    "line": "lea     eax, [esp+0A0h+var_24]",
+    "line": "lea     eax, [esp+0A0h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x709F69",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x709F6A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x709F6C",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x709FE3",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -460,12 +460,6 @@
     "line": "jmp     short loc_70A040",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x70A038",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x70A040",

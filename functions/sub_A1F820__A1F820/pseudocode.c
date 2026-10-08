@@ -1,4 +1,4 @@
 void __cdecl sub_A1F820()
 {
-  GameSetting_destr((int *)&iPersuasionDemandGold);
+  GameSetting_destr((int *)&MEMORY[0xB37880]); /*0xa1f825*/
 }

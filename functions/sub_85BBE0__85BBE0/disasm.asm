@@ -1,4 +1,4 @@
-0x85BBE0: push    esi
+0x85BBE0: push    esi; Pass205: WaterShaderProperty constructor; initializes pass-data block +0x6C..+0x84 with default flags and floats.
 0x85BBE1: mov     esi, ecx
 0x85BBE3: call    ??0BSShaderProperty@@QAE@XZ; BSShaderProperty::BSShaderProperty(void)
 0x85BBE8: fld1

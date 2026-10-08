@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x791510",
-    "line": "push    ecx",
+    "line": "push    ecx; Reallocation/insert-one wrapper for the CBranch flare vector at CBranch+0x30. Preserves the iterator index across growth and delegates the 0x18-byte record insertion to 0x791140.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x791513",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x79153C",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x79154D",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,43 +241,43 @@
   },
   {
     "ea": "0x791573",
-    "line": "mov     ecx, [esp+14h+arg_C]",
+    "line": "mov     ecx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791577",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791578",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79157A",
-    "line": "push    ebp",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79157B",
-    "line": "push    ebx",
+    "line": "push    ebx; iteratorOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79157C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79157E",
-    "line": "call    sub_791140",
+    "line": "call    OB_stVectorBranchFlareEntry_InsertFill_010201A0; Fixed-stride 0x18 vector insert/fill machinery for OB_CBranchFlareEntry records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791510 always requests count=1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x791599",
-    "line": "mov     [esp+14h+arg_8], ebx",
+    "line": "mov     [esp+14h+position], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7915A9",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+resultIterator]",
     "mnemonic": "mov",
     "size": 4
   },

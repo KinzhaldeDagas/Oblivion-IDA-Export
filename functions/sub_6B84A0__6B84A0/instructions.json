@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B84A0",
-    "line": "push    ecx",
+    "line": "push    ecx; Saves response display text and voice path with UInt8 lengths, then the copied 8-byte TRDT prefix as two UInt32 values.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6B84B9",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6B84C5",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6B84CB",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x6B84DE",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B84DF",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B84E5",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x6B84FA",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -205,25 +205,25 @@
   },
   {
     "ea": "0x6B8502",
-    "line": "mov     [esp+8+var_1], al",
+    "line": "mov     [esp+8+source], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B8506",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6B8508",
-    "line": "lea     eax, [esp+0Ch+var_1]",
+    "line": "lea     eax, [esp+0Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B850C",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x6B8512",
-    "line": "mov     al, [esp+8+var_1]",
+    "line": "mov     al, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,19 +265,19 @@
   },
   {
     "ea": "0x6B8520",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8521",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B8527",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x6B852D",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B8533",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x6B8538",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x6B853E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B8544",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x6B8549",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },

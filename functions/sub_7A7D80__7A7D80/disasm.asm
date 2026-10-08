@@ -1,6 +1,6 @@
-0x7A7D80: push    esi
+0x7A7D80: push    esi; Compact stock CBillboardLeaf default constructor. Initializes only the 0x4C-byte Oblivion layout: position, angle/color/colorScale, one normal/tangent/binormal block, texture index, primary wind weight/group.
 0x7A7D81: mov     esi, ecx
-0x7A7D83: call    sub_78ECF0
+0x7A7D83: call    OB_CIdvCamera_ctor_010201A0; Constructs the exact 0x10-byte Oblivion CIdvCamera base: installs its vftable and zeros the three-float position at +0x04. Called as the base constructor of both CTreeEngine and CBillboardLeaf. RT4.1 exposes the same layout/behavior under the later name stCamera.
 0x7A7D88: fldz
 0x7A7D8A: mov     dword ptr [esi], offset ??_7CBillboardLeaf@@6B@; const CBillboardLeaf::`vftable'
 0x7A7D90: mov     dword ptr [esi+14h], 0FFFFFFFFh

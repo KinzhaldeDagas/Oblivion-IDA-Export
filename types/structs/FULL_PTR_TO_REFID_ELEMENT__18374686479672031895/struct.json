@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_FULL_PTR_TO_REFID_ELEMENT",
+  "definition": "struct __declspec(align(4)) _FULL_PTR_TO_REFID_ELEMENT\n{\n_FULL_PTR_TO_REFID_ELEMENT *Next;\nvoid *Pointer;\nULONG RefId;\nunsigned __int8 State;\n}\n",
   "id": 18374686479672031895,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Next",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "_FULL_PTR_TO_REFID_ELEMENT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Pointer",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RefId",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "State",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 1
+      "offset_hex": "0xC",
+      "size": 1,
+      "type": "unsigned __int8"
     }
   ],
   "name": "_FULL_PTR_TO_REFID_ELEMENT",
+  "ordinal": 2947,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

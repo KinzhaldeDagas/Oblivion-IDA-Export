@@ -1,18 +1,18 @@
-0x58B800: sub     esp, 804h
+0x58B800: sub     esp, 804h; Silt Strider consequence: injected NorthernUI row uses sibling() in y expression. With AddHead attachment and pre-existing children, source is the prior head child. It is not the previous visible row by listindex. Single-child self-reference is a conditional cycle risk; actual NorthernUI parent contents must be checked.
 0x58B806: mov     eax, ds:0B30AACh
 0x58B80B: xor     eax, esp
 0x58B80D: mov     [esp+804h+var_4], eax
 0x58B814: push    ebx
 0x58B815: push    esi
-0x58B816: mov     esi, [esp+80Ch+arg_0]
+0x58B816: mov     esi, [esp+80Ch+target]
 0x58B81D: push    edi
-0x58B81E: mov     edi, [esp+810h+arg_4]
-0x58B825: lea     eax, [esp+810h+var_804]
-0x58B829: push    eax
+0x58B81E: mov     edi, [esp+810h+selector]
+0x58B825: lea     eax, [esp+810h+name]
+0x58B829: push    eax; parameter
 0x58B82A: xor     ebx, ebx
-0x58B82C: push    edi
-0x58B82D: mov     [esp+818h+var_804], bl
-0x58B831: call    sub_588FC0
+0x58B82C: push    edi; text
+0x58B82D: mov     [esp+818h+name], bl
+0x58B831: call    Tile__TextToTraitAndParam; Verified: splits selector at parentheses, puts parameter text in supplied buffer, converts selector token through TileStringToStringID. GetTileByName uses result 0x138C for sibling.
 0x58B836: add     esp, 8
 0x58B839: cmp     eax, 1389h
 0x58B83E: jg      short loc_58B888
@@ -52,7 +52,7 @@
 0x58B8AB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x58B8B0: add     esp, 804h
 0x58B8B6: retn
-0x58B8B7: cmp     [esp+810h+var_804], bl; jumptable 0058B896 case 5004
+0x58B8B7: cmp     [esp+810h+name], bl; jumptable 0058B896 case 5004
 0x58B8BB: jnz     short loc_58B922
 0x58B8BD: mov     eax, [esi+10h]
 0x58B8C0: cmp     [eax+3Ch], ebx
@@ -61,12 +61,12 @@
 0x58B8CC: mov     eax, edx
 0x58B8CE: cmp     eax, ebx
 0x58B8D0: jz      loc_58B9B6
-0x58B8D6: cmp     [eax+8], esi
+0x58B8D6: cmp     [eax+8], esi; Verified sibling() lookup: scan parent list, advance next before checking successful match; return next node data if present, else wrap to head. Hidden/target/listindex traits are never read. Single child resolves itself, which can create an expression cycle.
 0x58B8D9: lea     ecx, [eax+8]
 0x58B8DC: mov     eax, [eax]
 0x58B8DE: jz      short loc_58B8FF
 0x58B8E0: cmp     eax, ebx
-0x58B8E2: jnz     short loc_58B8D6
+0x58B8E2: jnz     short loc_58B8D6; Verified sibling() lookup: scan parent list, advance next before checking successful match; return next node data if present, else wrap to head. Hidden/target/listindex traits are never read. Single child resolves itself, which can create an expression cycle.
 0x58B8E4: mov     eax, [edx+8]
 0x58B8E7: pop     edi
 0x58B8E8: pop     esi
@@ -99,10 +99,10 @@
 0x58B93A: cmp     eax, ebx
 0x58B93C: mov     esi, [esi]
 0x58B93E: jz      short loc_58B952
-0x58B940: lea     ecx, [esp+810h+var_804]
+0x58B940: lea     ecx, [esp+810h+name]
 0x58B944: push    ecx; unsigned __int8 *
 0x58B945: push    eax; unsigned __int8 *
-0x58B946: call    __mbsicmp
+0x58B946: call    __mbsicmp; Verified sibling(name): immediate parent children only, case-insensitive string match, no visibility/navigation filtering.
 0x58B94B: add     esp, 8
 0x58B94E: test    eax, eax
 0x58B950: jz      short loc_58B970
@@ -136,7 +136,7 @@
 0x58B99A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x58B99F: add     esp, 804h
 0x58B9A5: retn
-0x58B9A6: mov     al, [esp+810h+var_804]; jumptable 0058B896 case 5005
+0x58B9A6: mov     al, [esp+810h+name]; jumptable 0058B896 case 5005
 0x58B9AA: cmp     al, bl
 0x58B9AC: jnz     short loc_58B9D1
 0x58B9AE: cmp     [esi+3Ch], ebx
@@ -157,10 +157,10 @@
 0x58B9D7: jz      short loc_58B98C
 0x58B9D9: cmp     [esi+3Ch], ebx
 0x58B9DC: jz      short loc_58B98C
-0x58B9DE: lea     eax, [esp+810h+var_804]
-0x58B9E2: push    eax; unsigned __int8 *
-0x58B9E3: mov     ecx, esi
-0x58B9E5: call    sub_589930
+0x58B9DE: lea     eax, [esp+810h+name]
+0x58B9E2: push    eax; name
+0x58B9E3: mov     ecx, esi; this
+0x58B9E5: call    Tile_FindDescendantByName
 0x58B9EA: pop     edi
 0x58B9EB: pop     esi
 0x58B9EC: pop     ebx

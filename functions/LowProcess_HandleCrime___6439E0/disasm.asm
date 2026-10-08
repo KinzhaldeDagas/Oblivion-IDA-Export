@@ -1,4 +1,4 @@
-0x6439E0: sub     esp, 14h
+0x6439E0: sub     esp, 14h; RadiantAI: LowProcess crime/acquire response candidate. Calls service filtering, acquire formulas, and shouldActorFight.
 0x6439E3: push    esi
 0x6439E4: push    edi
 0x6439E5: lea     edi, [ecx+54h]
@@ -17,19 +17,19 @@
 0x643A0C: jz      loc_643DF6
 0x643A12: mov     ecx, [ebx+4]
 0x643A15: mov     edi, [ebx]
-0x643A17: mov     [esp+24h+var_C], ecx
-0x643A1B: mov     ecx, edi; this
+0x643A17: mov     [esp+24h+form], ecx
+0x643A1B: mov     ecx, edi; reference
 0x643A1D: mov     byte ptr [esp+24h+arg_0], 1
-0x643A22: call    TESObjectREFR_GetOwner
+0x643A22: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x643A27: test    eax, eax
 0x643A29: jz      short loc_643A44
 0x643A2B: mov     edx, [esi]
 0x643A2D: mov     eax, [edx+170h]
 0x643A33: mov     ecx, esi
 0x643A35: call    eax
-0x643A37: mov     ecx, edi; this
+0x643A37: mov     ecx, edi; reference
 0x643A39: mov     ebp, eax
-0x643A3B: call    TESObjectREFR_GetOwner
+0x643A3B: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x643A40: cmp     eax, ebp
 0x643A42: jnz     short loc_643A58
 0x643A44: mov     edx, [edi]
@@ -38,10 +38,10 @@
 0x643A4E: call    eax
 0x643A50: test    al, al
 0x643A52: jz      loc_643B26
-0x643A58: mov     ecx, [esp+24h+var_C]
-0x643A5C: push    ecx
+0x643A58: mov     ecx, [esp+24h+form]
+0x643A5C: push    ecx; form
 0x643A5D: mov     [esp+28h+var_14], 0FFFFFFFFh
-0x643A65: call    sub_470520
+0x643A65: call    TESForm_GetValue
 0x643A6A: mov     edx, [edi]
 0x643A6C: add     esp, 4
 0x643A6F: mov     ebp, eax
@@ -59,21 +59,21 @@
 0x643A96: call    Actor_IsNPC
 0x643A9B: test    al, al
 0x643A9D: push    0; int
-0x643A9F: mov     ecx, edi; this
+0x643A9F: mov     ecx, edi; reference
 0x643AA1: jz      short loc_643AA7
 0x643AA3: mov     ebp, edi
 0x643AA5: jmp     short loc_643ADA
 0x643AA7: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
 0x643AAC: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x643AB1: push    0; int
-0x643AB3: call    TESObjectREFR_GetOwner
+0x643AB3: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x643AB8: push    eax; void *
 0x643AB9: call    OblivionDynamicCast
 0x643ABE: add     esp, 14h
 0x643AC1: test    eax, eax
 0x643AC3: jz      short loc_643B42
 0x643AC5: push    eax
-0x643AC6: mov     ecx, offset ActorProcessManager_ptr
+0x643AC6: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x643ACB: call    sub_675220
 0x643AD0: mov     ebp, eax
 0x643AD2: test    ebp, ebp
@@ -88,7 +88,7 @@
 0x643AEB: jnz     short loc_643B42
 0x643AED: test    ebp, ebp
 0x643AEF: jz      short loc_643B42
-0x643AF1: mov     ecx, [esp+24h+var_C]
+0x643AF1: mov     ecx, [esp+24h+form]
 0x643AF5: push    ecx
 0x643AF6: push    0; a2
 0x643AF8: mov     ecx, ebp; this
@@ -110,7 +110,7 @@
 0x643B28: push    edi
 0x643B29: mov     ecx, esi
 0x643B2B: call    TesObjectREF_GetDistance
-0x643B30: call    Double_To_SInt32
+0x643B30: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x643B35: mov     [ebx+14h], eax
 0x643B38: jmp     loc_643D46
 0x643B3D: mov     byte ptr [esp+24h+arg_0], 0
@@ -126,12 +126,12 @@
 0x643B5C: mov     ecx, esi
 0x643B5E: call    eax
 0x643B60: push    eax
-0x643B61: push    1Fh
-0x643B63: mov     ecx, esi
-0x643B65: call    Actor_GetLuckModifiedBaseAV
-0x643B6A: call    Double_To_SInt32
+0x643B61: push    1Fh; actorValue
+0x643B63: mov     ecx, esi; this
+0x643B65: call    Actor_GetLuckModifiedBaseAV; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.
+0x643B6A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x643B6F: push    eax
-0x643B70: call    Calc_AIAquireForStealing?
+0x643B70: call    Calc_AIAquireForStealing?; RadiantAI 2026-07-12: acquire steal score. Callers pass luck-modified Sneak as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=0, mult=-1 => score = luckModifiedSneak - responsibility.
 0x643B75: mov     ebp, eax
 0x643B77: jmp     loc_643C51
 0x643B7C: mov     edx, [edi]
@@ -151,12 +151,12 @@
 0x643BAB: mov     ecx, esi
 0x643BAD: call    eax
 0x643BAF: push    eax
-0x643BB0: push    1Fh
-0x643BB2: mov     ecx, esi
-0x643BB4: call    Actor_GetLuckModifiedBaseAV
-0x643BB9: call    Double_To_SInt32
+0x643BB0: push    1Fh; actorValue
+0x643BB2: mov     ecx, esi; this
+0x643BB4: call    Actor_GetLuckModifiedBaseAV; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.
+0x643BB9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x643BBE: push    eax
-0x643BBF: call    Calc_AIAquireForPickpocketing?
+0x643BBF: call    Calc_AIAquireForPickpocketing?; RadiantAI 2026-07-12: acquire pickpocket score. Callers pass luck-modified Sneak as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=0, mult=-1 => score = luckModifiedSneak - responsibility.
 0x643BC4: add     esp, 8
 0x643BC7: push    64h ; 'd'
 0x643BC9: push    0
@@ -206,8 +206,8 @@
 0x643C40: call    eax
 0x643C42: push    eax
 0x643C43: push    ebp
-0x643C44: call    sub_546640
-0x643C49: mov     ebp, [esp+2Ch+var_C]
+0x643C44: call    sub_546640; RadiantAI 2026-07-12: acquire kill score. Callers pass shouldActorFight result as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=50, mult=-1 => score = fightScore + 50 - responsibility.
+0x643C49: mov     ebp, [esp+2Ch+form]
 0x643C4D: mov     [esp+2Ch+var_14], eax
 0x643C51: add     esp, 8
 0x643C54: test    ebp, ebp
@@ -232,9 +232,9 @@
 0x643C93: mov     eax, [edx+170h]
 0x643C99: mov     ecx, esi
 0x643C9B: call    eax
-0x643C9D: mov     ecx, edi; this
+0x643C9D: mov     ecx, edi; reference
 0x643C9F: mov     ebp, eax
-0x643CA1: call    TESObjectREFR_GetOwner
+0x643CA1: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x643CA6: cmp     eax, ebp
 0x643CA8: jz      loc_643DD6
 0x643CAE: mov     dword ptr [ebx+1Ch], 5
@@ -247,7 +247,7 @@
 0x643CC8: jnz     loc_643D93
 0x643CCE: cmp     dword ptr [ebx+1Ch], 1
 0x643CD2: jnz     loc_643D8A
-0x643CD8: lea     ecx, [esp+24h+var_C]
+0x643CD8: lea     ecx, [esp+24h+form]
 0x643CDC: push    ecx
 0x643CDD: push    0
 0x643CDF: push    1
@@ -256,12 +256,12 @@
 0x643CEE: push    0
 0x643CF0: push    edx
 0x643CF1: mov     ecx, esi
-0x643CF3: mov     [esp+38h+var_C], 0
+0x643CF3: mov     [esp+38h+form], 0
 0x643CFB: call    sub_5E4A00
 0x643D00: test    al, al
 0x643D02: jnz     short loc_643D31
 0x643D04: mov     ecx, ds:0B35ECCh
-0x643D0A: lea     eax, [esp+24h+var_C]
+0x643D0A: lea     eax, [esp+24h+form]
 0x643D0E: push    eax
 0x643D0F: push    0
 0x643D11: push    1
@@ -271,8 +271,8 @@
 0x643D18: call    sub_5E4A00
 0x643D1D: test    al, al
 0x643D1F: jnz     short loc_643D31
-0x643D21: mov     ecx, edi
-0x643D23: call    sub_4D7740
+0x643D21: mov     ecx, edi; this
+0x643D23: call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
 0x643D28: test    eax, eax
 0x643D2A: jz      short loc_643D31
 0x643D2C: mov     byte ptr [esp+24h+arg_0], 0
@@ -326,7 +326,7 @@
 0x643DD2: mov     [edi], ebx
 0x643DD4: jmp     short loc_643DDF
 0x643DD6: push    ebx
-0x643DD7: call    FormHeapFree
+0x643DD7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x643DDC: add     esp, 4
 0x643DDF: mov     edx, [esp+24h+var_10]
 0x643DE3: mov     eax, [edx+4]
@@ -342,7 +342,7 @@
 0x643E00: mov     eax, [edi+4]
 0x643E03: mov     esi, [eax+4]
 0x643E06: push    eax
-0x643E07: call    FormHeapFree
+0x643E07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x643E0C: add     esp, 4
 0x643E0F: test    esi, esi
 0x643E11: mov     [edi+4], esi

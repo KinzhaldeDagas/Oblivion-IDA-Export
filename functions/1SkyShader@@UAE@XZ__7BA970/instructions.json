@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7BA9BD",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7BA9D7",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7BA9F1",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x7BAB02",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x7BAB1D",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x7BAE03",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x7BAE1C",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2767,7 +2767,7 @@
   },
   {
     "ea": "0x7BAE35",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2809,7 +2809,7 @@
   },
   {
     "ea": "0x7BAE4E",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2851,7 +2851,7 @@
   },
   {
     "ea": "0x7BAE67",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x7BAE80",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4063,7 +4063,7 @@
   },
   {
     "ea": "0x7BB05F",
-    "line": "call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)",
+    "line": "call    ??1BSShader@@UAE@XZ;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4120,5 +4120,491 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CDC70",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC73",
+    "line": "jmp     ??1BSShader@@UAE@XZ;",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC78",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC7B",
+    "line": "add     ecx, 7Ch ; '|'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC7E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC83",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC86",
+    "line": "add     ecx, 80h ; '€'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDC8C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC91",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDC94",
+    "line": "add     ecx, 84h ; '„'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDC9A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDC9F",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDCA2",
+    "line": "add     ecx, 88h ; 'ˆ'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDCA8",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDCAD",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDCB0",
+    "line": "add     ecx, 8Ch ; 'Œ'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDCB6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDCBB",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDCBE",
+    "line": "add     ecx, 90h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDCC4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDCC9",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDCCC",
+    "line": "add     ecx, 94h ; '”'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDCD2",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDCD7",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDCDA",
+    "line": "add     ecx, 98h ; '˜'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDCE0",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDCE5",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDCE8",
+    "line": "add     ecx, 9Ch ; 'œ'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDCEE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDCF3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDCF6",
+    "line": "add     ecx, 0A0h ; ' '; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDCFC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD01",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD04",
+    "line": "add     ecx, 0A4h ; '¤'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD0A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD0F",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD12",
+    "line": "add     ecx, 0A8h ; '¨'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD18",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD1D",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD20",
+    "line": "add     ecx, 0ACh ; '¬'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD26",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD2B",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD2E",
+    "line": "add     ecx, 0B0h ; '°'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD34",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD39",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD3C",
+    "line": "add     ecx, 0B4h ; '´'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD42",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD47",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD4A",
+    "line": "add     ecx, 0B8h ; '¸'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD50",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD55",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD58",
+    "line": "add     ecx, 0BCh ; '¼'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD5E",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD63",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD66",
+    "line": "add     ecx, 0C0h ; 'À'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD6C",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD71",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD74",
+    "line": "add     ecx, 0C4h ; 'Ä'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD7A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD7F",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD82",
+    "line": "add     ecx, 0C8h ; 'È'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD88",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD8D",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD90",
+    "line": "add     ecx, 0CCh ; 'Ì'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDD96",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDD9B",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDD9E",
+    "line": "add     ecx, 0D0h ; 'Ð'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDDA4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDDA9",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDDAC",
+    "line": "add     ecx, 0D4h ; 'Ô'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDDB2",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDDB7",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDDBA",
+    "line": "add     ecx, 0D8h ; 'Ø'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDDC0",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDDC5",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CDDC9",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDDCC",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDDCF",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CDDD1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDDD6",
+    "line": "mov     eax, offset stru_AF6DB8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDDDB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

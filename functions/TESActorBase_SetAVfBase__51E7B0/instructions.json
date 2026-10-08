@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51E7B0",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+arg_4]; TESActorBase_SetAVfBase converts the float value through Double_To_SInt32, then delegates to vtbl +0x134 SetAViBase. Player_Actor_SetAVfBase reaches this through baseform vtbl +0x130; because it funnels into integer byte-backed storage, a future AVU hook can share the same storage guard if a report targets float SetAV paths.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x51E7BA",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

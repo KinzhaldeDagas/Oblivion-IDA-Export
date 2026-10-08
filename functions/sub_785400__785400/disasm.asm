@@ -1,5 +1,5 @@
-0x785400: push    ebx
-0x785401: mov     ebx, [esp+4+arg_0]
+0x785400: push    ebx; Oblivion 1.2.0.416: vector<stVec> copy assignment with self, empty, reuse, capacity-reuse, and reallocation cases.
+0x785401: mov     ebx, [esp+4+other]
 0x785405: push    esi
 0x785406: mov     esi, ecx
 0x785408: cmp     esi, ebx
@@ -17,8 +17,8 @@
 0x785429: shr     ecx, 1Fh
 0x78542C: add     ecx, edx
 0x78542E: jnz     short loc_78543F
-0x785430: mov     ecx, esi
-0x785432: call    sub_784BF0
+0x785430: mov     ecx, esi; this
+0x785432: call    OB_stVector24_Clear_010201A0; Oblivion 1.2.0.416: vector clear implemented as checked erase(begin,end).
 0x785437: pop     ebp
 0x785438: mov     eax, esi
 0x78543A: pop     esi
@@ -41,16 +41,16 @@
 0x785461: cmp     ecx, eax
 0x785463: ja      short loc_7854C6
 0x785465: mov     eax, [ebx+8]
-0x785468: push    edi
-0x785469: push    eax
-0x78546A: push    ebp
-0x78546B: call    sub_784880
+0x785468: push    edi; destination
+0x785469: push    eax; last
+0x78546A: push    ebp; first
+0x78546B: call    OB_stVector24_CopyRangeAdapter_010201A0; Oblivion 1.2.0.416: copy-range adapter for 0x18-byte records; returns destination advanced by the source count.
 0x785470: mov     ecx, [esi+8]
 0x785473: add     esp, 0Ch
-0x785476: push    ecx
-0x785477: push    eax
+0x785476: push    ecx; last
+0x785477: push    eax; first
 0x785478: mov     ecx, esi
-0x78547A: call    sub_7849F0
+0x78547A: call    OB_stVector24_DestroyRange_010201A0; Oblivion 1.2.0.416: destroys [first,last) in 0x18-byte steps through the folded trivial record destructor.
 0x78547F: mov     eax, [ebx+4]
 0x785482: test    eax, eax
 0x785484: jnz     short loc_78549B
@@ -96,24 +96,24 @@
 0x7854E2: add     eax, edx
 0x7854E4: cmp     ecx, eax
 0x7854E6: ja      short loc_785525
-0x7854E8: mov     ecx, esi
-0x7854EA: call    sub_783FE0
+0x7854E8: mov     ecx, esi; this
+0x7854EA: call    OB_stVector24_Size_010201A0; Oblivion 1.2.0.416: returns (end-begin)/0x18 for a compiler-folded 24-byte vector specialization; xrefs show both stVec and branch-flare records.
 0x7854EF: lea     edx, [eax+eax*2]
 0x7854F2: lea     eax, [ebp+edx*8+0]
-0x7854F6: push    edi
-0x7854F7: push    eax
-0x7854F8: push    ebp
-0x7854F9: mov     [esp+1Ch+arg_0], eax
-0x7854FD: call    sub_784880
+0x7854F6: push    edi; destination
+0x7854F7: push    eax; last
+0x7854F8: push    ebp; first
+0x7854F9: mov     [esp+1Ch+other], eax
+0x7854FD: call    OB_stVector24_CopyRangeAdapter_010201A0; Oblivion 1.2.0.416: copy-range adapter for 0x18-byte records; returns destination advanced by the source count.
 0x785502: mov     eax, [esi+8]
 0x785505: mov     ecx, [ebx+8]
-0x785508: mov     edx, [esp+1Ch+arg_0]
+0x785508: mov     edx, [esp+1Ch+other]
 0x78550C: add     esp, 0Ch
-0x78550F: push    eax
-0x785510: push    ecx
-0x785511: push    edx
+0x78550F: push    eax; destination
+0x785510: push    ecx; last
+0x785511: push    edx; first
 0x785512: mov     ecx, esi
-0x785514: call    sub_7849C0
+0x785514: call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.
 0x785519: pop     edi
 0x78551A: mov     [esi+8], eax
 0x78551D: pop     ebp
@@ -124,29 +124,29 @@
 0x785525: test    edi, edi
 0x785527: jz      short loc_785541
 0x785529: mov     eax, [esi+8]
-0x78552C: push    eax
-0x78552D: push    edi
+0x78552C: push    eax; last
+0x78552D: push    edi; first
 0x78552E: mov     ecx, esi
-0x785530: call    sub_7849F0
+0x785530: call    OB_stVector24_DestroyRange_010201A0; Oblivion 1.2.0.416: destroys [first,last) in 0x18-byte steps through the folded trivial record destructor.
 0x785535: mov     ecx, [esi+4]
 0x785538: push    ecx
-0x785539: call    FormHeapFree
+0x785539: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78553E: add     esp, 4
-0x785541: mov     ecx, ebx
-0x785543: call    sub_783FE0
-0x785548: push    eax
-0x785549: mov     ecx, esi
-0x78554B: call    sub_784FA0
+0x785541: mov     ecx, ebx; this
+0x785543: call    OB_stVector24_Size_010201A0; Oblivion 1.2.0.416: returns (end-begin)/0x18 for a compiler-folded 24-byte vector specialization; xrefs show both stVec and branch-flare records.
+0x785548: push    eax; capacity
+0x785549: mov     ecx, esi; this
+0x78554B: call    OB_stVector24_Buy_010201A0; Oblivion 1.2.0.416: initializes an empty 24-byte-record vector and allocates capacity*0x18 bytes when capacity is nonzero.
 0x785550: test    al, al
 0x785552: jz      short loc_78556A
 0x785554: mov     edx, [esi+4]
 0x785557: mov     eax, [ebx+8]
 0x78555A: mov     ecx, [ebx+4]
-0x78555D: push    edx
-0x78555E: push    eax
-0x78555F: push    ecx
+0x78555D: push    edx; destination
+0x78555E: push    eax; last
+0x78555F: push    ecx; first
 0x785560: mov     ecx, esi
-0x785562: call    sub_7849C0
+0x785562: call    OB_stVector24_UninitializedCopyRangeThunk_010201A0; Oblivion 1.2.0.416: stdcall adapter to the shared 0x18-byte uninitialized-copy primitive.
 0x785567: mov     [esi+8], eax
 0x78556A: pop     edi
 0x78556B: pop     ebp

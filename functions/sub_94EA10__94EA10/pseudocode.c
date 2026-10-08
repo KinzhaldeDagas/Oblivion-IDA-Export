@@ -36,66 +36,66 @@ int __thiscall sub_94EA10(__m128 *this, int a2, _DWORD *a3, int a4)
   __m128 v40[4]; // [esp+98h] [ebp-80h] BYREF
   __m128 v41[4]; // [esp+D8h] [ebp-40h] BYREF
 
-  v4 = *(__m128 **)(a2 + 0xC);
-  sub_958600((_DWORD *)this + 0x30, (int)a3);
-  sub_94D100(this, a2, v40, v41);
-  sub_88FCC0(this + 5, v40, v4 + 3);
-  sub_88FCC0(this + 4, v41, v4 + 1);
-  sub_94CF80(this, a4);
-  sub_94CF30((int *)this, a4);
-  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(*a3 + 0x1C))(
+  v4 = *(__m128 **)(a2 + 0xC); /*0x94ea20*/
+  sub_958600((_DWORD *)this + 0x30, (int)a3); /*0x94ea31*/
+  sub_94D100(this, a2, v40, v41); /*0x94ea49*/
+  hkTransform_TransformPosition(this + 5, v40, v4 + 3); /*0x94ea5a*/
+  hkTransform_TransformPosition(this + 4, v41, v4 + 1); /*0x94ea6e*/
+  sub_94CF80(this, a4); /*0x94ea79*/
+  sub_94CF30((int *)this, a4); /*0x94ea84*/
+  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(*a3 + 0x1C))( /*0x94ea9e*/
     a3,
     this + 4,
     this + 5,
     0xFFFF0000,
     a4);
-  sub_88FE00(&v39, this + 9, v4 + 6);
-  v7 = *(this + 5);
-  v8 = *a3;
-  *(float *)&v31 = this->m128_f32[0] * flt_A45E4C;
-  v9 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v31, (__m128)v31, 0), v39), v7);
-  *(float *)&v32 = this->m128_f32[0] * flt_A3D65C;
-  v36 = v9;
-  v37 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v32, (__m128)v32, 0), v39), v7);
-  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v8 + 0x1C))(a3, &v36, &v37, 0xFF008000, a4);
-  v24 = v4[9].m128_i32[0];
-  v33 = v4[9].m128_i32[1];
-  sub_88FE00(&v37, this + 9, v4 + 7);
-  v10 = *a3;
-  v11 = (__m128)(unsigned int)v33;
-  *(float *)&v34 = this->m128_f32[0] * flt_A2FAAC;
-  v12 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v11, v11, 0), v39), *(this + 5));
-  v13 = (__m128)v34;
-  *(float *)&v35 = this->m128_f32[0] * flt_A641B8;
-  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v13, v13, 0), v37), v12);
-  v38 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v35, (__m128)v35, 0), v37), v12);
-  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v10 + 0x1C))(a3, &v36, &v38, 0xFFFFFFFF, a4);
-  v14 = (__m128)(unsigned int)v24;
-  *(float *)&v25 = this->m128_f32[0] * flt_A2FAAC;
-  v15 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), v39), *(this + 5));
-  v16 = (__m128)v25;
-  *(float *)&v26 = this->m128_f32[0] * flt_A641B8;
-  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v16, v16, 0), v37), v15);
-  v38 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v26, (__m128)v26, 0), v37), v15);
-  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(*a3 + 0x1C))(a3, &v36, &v38, 0xFFFFFFFF, a4);
-  sub_88FE00(&v37, this + 9, v4 + 4);
-  v17 = *(this + 5);
-  v18 = *a3;
-  *(float *)&v27 = this->m128_f32[0] * flt_A45E4C;
-  v19 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v27, (__m128)v27, 0), v37), v17);
-  *(float *)&v28 = this->m128_f32[0] * flt_A3D65C;
-  v38 = v19;
-  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v28, (__m128)v28, 0), v37), v17);
-  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v18 + 0x1C))(a3, &v38, &v36, 0xFFFFFF00, a4);
-  sub_88FE00(&v37, this + 6, v4 + 2);
-  v20 = *(this + 4);
-  v21 = *a3;
-  *(float *)&v29 = this->m128_f32[0] * flt_A45E4C;
-  v22 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v29, (__m128)v29, 0), v37), v20);
-  *(float *)&v30 = this->m128_f32[0] * flt_A3D65C;
-  v38 = v22;
-  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v30, (__m128)v30, 0), v37), v20);
-  return (*(int (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v21 + 0x1C))(
+  hkBasis_TransformVector(&v39, this + 9, v4 + 6); /*0x94eab0*/
+  v7 = *(this + 5); /*0x94eac2*/
+  v8 = *a3; /*0x94eac9*/
+  *(float *)&v31 = this->m128_f32[0] * flt_A45E4C; /*0x94eacb*/
+  v9 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v31, (__m128)v31, 0), v39), v7); /*0x94eae7*/
+  *(float *)&v32 = this->m128_f32[0] * kHeadBodyNormalMatchRadius; /*0x94eaea*/
+  v36 = v9; /*0x94eaf4*/
+  v37 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v32, (__m128)v32, 0), v39), v7); /*0x94eb10*/
+  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v8 + 0x1C))(a3, &v36, &v37, 0xFF008000, a4); /*0x94eb1d*/
+  v24 = v4[9].m128_i32[0]; /*0x94eb36*/
+  v33 = v4[9].m128_i32[1]; /*0x94eb3f*/
+  hkBasis_TransformVector(&v37, this + 9, v4 + 7); /*0x94eb43*/
+  v10 = *a3; /*0x94eb60*/
+  v11 = (__m128)(unsigned int)v33; /*0x94eb66*/
+  *(float *)&v34 = this->m128_f32[0] * kFaceEarNormalMatchRadius; /*0x94eb6c*/
+  v12 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v11, v11, 0), v39), *(this + 5)); /*0x94eb8a*/
+  v13 = (__m128)v34; /*0x94eb8d*/
+  *(float *)&v35 = this->m128_f32[0] * flt_A641B8; /*0x94eb93*/
+  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v13, v13, 0), v37), v12); /*0x94ebab*/
+  v38 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v35, (__m128)v35, 0), v37), v12); /*0x94ebcb*/
+  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v10 + 0x1C))(a3, &v36, &v38, 0xFFFFFFFF, a4); /*0x94ebd0*/
+  v14 = (__m128)(unsigned int)v24; /*0x94ebec*/
+  *(float *)&v25 = this->m128_f32[0] * kFaceEarNormalMatchRadius; /*0x94ebf2*/
+  v15 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), v39), *(this + 5)); /*0x94ec10*/
+  v16 = (__m128)v25; /*0x94ec13*/
+  *(float *)&v26 = this->m128_f32[0] * flt_A641B8; /*0x94ec19*/
+  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v16, v16, 0), v37), v15); /*0x94ec30*/
+  v38 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v26, (__m128)v26, 0), v37), v15); /*0x94ec42*/
+  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(*a3 + 0x1C))(a3, &v36, &v38, 0xFFFFFFFF, a4); /*0x94ec5b*/
+  hkBasis_TransformVector(&v37, this + 9, v4 + 4); /*0x94ec6d*/
+  v17 = *(this + 5); /*0x94ec82*/
+  v18 = *a3; /*0x94ec86*/
+  *(float *)&v27 = this->m128_f32[0] * flt_A45E4C; /*0x94ec88*/
+  v19 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v27, (__m128)v27, 0), v37), v17); /*0x94eca4*/
+  *(float *)&v28 = this->m128_f32[0] * kHeadBodyNormalMatchRadius; /*0x94eca7*/
+  v38 = v19; /*0x94ecb2*/
+  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v28, (__m128)v28, 0), v37), v17); /*0x94ecd5*/
+  (*(void (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v18 + 0x1C))(a3, &v38, &v36, 0xFFFFFF00, a4); /*0x94ecda*/
+  hkBasis_TransformVector(&v37, this + 6, v4 + 2); /*0x94ece9*/
+  v20 = *(this + 4); /*0x94ecfe*/
+  v21 = *a3; /*0x94ed02*/
+  *(float *)&v29 = this->m128_f32[0] * flt_A45E4C; /*0x94ed04*/
+  v22 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v29, (__m128)v29, 0), v37), v20); /*0x94ed20*/
+  *(float *)&v30 = this->m128_f32[0] * kHeadBodyNormalMatchRadius; /*0x94ed23*/
+  v38 = v22; /*0x94ed2e*/
+  v36 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v30, (__m128)v30, 0), v37), v20); /*0x94ed4e*/
+  return (*(int (__thiscall **)(_DWORD *, __m128 *, __m128 *, unsigned int, int))(v21 + 0x1C))( /*0x94ed59*/
            a3,
            &v38,
            &v36,

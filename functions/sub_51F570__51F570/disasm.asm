@@ -29,3 +29,15 @@
 0x51F5CE: pop     esi
 0x51F5CF: add     esp, 10h
 0x51F5D2: retn
+0x9B7B80: mov     ecx, [ebp-10h]; void *
+0x9B7B83: jmp     BSStringT_Clear
+0x9B7B88: mov     ecx, [ebp-10h]
+0x9B7B8B: add     ecx, 8; void *
+0x9B7B8E: jmp     BSStringT_Clear
+0x9B7B93: mov     edx, [esp+arg_4]
+0x9B7B97: lea     eax, [edx-8]
+0x9B7B9A: mov     ecx, [edx-0Ch]
+0x9B7B9D: xor     ecx, eax
+0x9B7B9F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7BA4: mov     eax, offset stru_AE2494
+0x9B7BA9: jmp     ___CxxFrameHandler3

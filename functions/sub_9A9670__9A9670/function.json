@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x9A9670",
+      "0x9A9733"
+    ]
+  ],
+  "chunks_sha256": "51d22a355a910be12a7b5ebcc74a071fd6dcd32b76b920bdb52a63282e26572e",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_9A9670",
+  "comment_repeatable": "Verified companion to SortByEnabled: array this is map+0C, base pointer this+4, end this+0A and live count this+0C. SetAt updates occupancy/end as needed and assigns the pointer with NiPointer decrement/destructor/increment behavior. The caller retains its current entry while exchanging two positions; model array order without executing native refcounts under metadata gates.\nDX11 lifecycle obligation 2026-10-01: SetAt lazily tests DWORD BAAA94 bit0, sets it, initializes BAAA90 to null and registers A27C10 with atexit. A27C10 decrements/releases that sentinel if nonnull. A bulk permutation must not fake this side effect by setting the flag alone. Current commit planning requires bit0 initialized and sentinel null whenever the projected native sequence performs a swap; a no-swap sequence does not require SetAt initialization.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "NiTArray_ConstantMapEntry_SetAt",
   "end_ea": "0x9A9733",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_9A9670",
+  "name": "NiTArray_ConstantMapEntry_SetAt",
   "segment": ".text",
   "sha256": "51d22a355a910be12a7b5ebcc74a071fd6dcd32b76b920bdb52a63282e26572e",
   "size": 195,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A9670",
-  "type": "LONG __thiscall(_DWORD *this, unsigned int, LONG *)",
+  "total_chunk_size": 195,
+  "type": "LONG __thiscall(void *this, unsigned int index, NiD3DShaderConstantMapEntry *const *value)",
   "xrefs_from_count": 88,
   "xrefs_to_count": 4
 }

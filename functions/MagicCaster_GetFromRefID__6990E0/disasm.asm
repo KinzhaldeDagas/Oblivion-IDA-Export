@@ -1,6 +1,6 @@
 0x6990E0: mov     eax, [esp+a1]
 0x6990E4: push    eax; a1
-0x6990E5: call    TESForm_LookupByFormID
+0x6990E5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6990EA: add     esp, 4
 0x6990ED: test    eax, eax
 0x6990EF: jz      short MagicCaster_GetFromRefID___Done

@@ -14,12 +14,12 @@
 0x4F78D4: jz      loc_4F7A49
 0x4F78DA: cmp     dword ptr [edi+58h], 0
 0x4F78DE: jz      loc_4F7A49
-0x4F78E4: mov     ecx, edi
-0x4F78E6: call    sub_5E0380
+0x4F78E4: mov     ecx, edi; this
+0x4F78E6: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4F78EB: test    eax, eax
 0x4F78ED: jz      loc_4F7A49
-0x4F78F3: mov     ecx, edi
-0x4F78F5: call    sub_5E0380
+0x4F78F3: mov     ecx, edi; this
+0x4F78F5: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4F78FA: movsx   eax, byte ptr [eax+20h]
 0x4F78FE: cmp     eax, 20h; switch 33 cases
 0x4F7901: ja      def_4F7907

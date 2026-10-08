@@ -29,16 +29,16 @@
 0x6A53DA: test    al, al
 0x6A53DC: jnz     short loc_6A5400
 0x6A53DE: mov     ecx, [esi+3Ch]
-0x6A53E1: push    0
-0x6A53E3: push    50525453h
-0x6A53E8: add     ecx, 68h ; 'h'
-0x6A53EB: call    sub_6A24B0
+0x6A53E1: push    0; casterFilterOrNull
+0x6A53E3: push    50525453h; effectCode
+0x6A53E8: add     ecx, 68h ; 'h'; this
+0x6A53EB: call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.
 0x6A53F0: fldz
 0x6A53F2: push    ecx
 0x6A53F3: fstp    [esp+0Ch+var_C]; int
 0x6A53F6: mov     ecx, [esi+3Ch]; int
 0x6A53F9: push    0; int
-0x6A53FB: call    Actor_Kill
+0x6A53FB: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.
 0x6A5400: mov     eax, [esi+3Ch]
 0x6A5403: mov     ecx, [eax+58h]
 0x6A5406: push    eax
@@ -68,7 +68,7 @@
 0x6A544B: test    ecx, ecx
 0x6A544D: jz      short loc_6A545A
 0x6A544F: push    0
-0x6A5451: call    sub_419F10
+0x6A5451: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x6A5456: mov     byte ptr [esi+61h], 0
 0x6A545A: pop     edi
 0x6A545B: pop     esi

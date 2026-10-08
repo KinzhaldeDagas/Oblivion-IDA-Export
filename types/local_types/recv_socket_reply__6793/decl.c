@@ -1,1 +1,6 @@
-recv_socket_reply
+struct recv_socket_reply
+{
+reply_header __header;
+obj_handle_t wait;
+unsigned int options;
+};

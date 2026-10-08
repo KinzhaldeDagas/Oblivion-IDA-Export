@@ -1,30 +1,30 @@
-void __thiscall sub_6B7450(unsigned int **this)
+void __thiscall Conversation::Destroy(ConversationView *this)
 {
-  unsigned int *v2; // edi
-  unsigned int v3; // eax
+  DialogueItemView *firstItem; // edi
+  DialogueItemNode *nextItemNode; // eax
 
-  if ( this )
+  if ( this ) /*0x6b7455*/
   {
-    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)this) )
+    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)this) ) /*0x6b7461*/
     {
-      v2 = *this;
-      if ( *this )
+      firstItem = this->firstItem; /*0x6b7463*/
+      if ( this->firstItem ) /*0x6b7463*/
       {
-        sub_6B81D0(*this);
-        FormHeapFree((unsigned int)v2);
+        DialogueItem::Destroy(this->firstItem); /*0x6b746b*/
+        FormHeapFree((unsigned int)firstItem); /*0x6b7471*/
       }
-      v3 = (unsigned int)*(this + 1);
-      if ( v3 )
+      nextItemNode = this->nextItemNode; /*0x6b7479*/
+      if ( nextItemNode ) /*0x6b747e*/
       {
-        *(this + 1) = *(unsigned int **)(v3 + 4);
-        *this = *(unsigned int **)v3;
-        FormHeapFree(v3);
+        this->nextItemNode = nextItemNode->next; /*0x6b7483*/
+        this->firstItem = nextItemNode->item; /*0x6b7489*/
+        FormHeapFree((unsigned int)nextItemNode); /*0x6b748b*/
       }
       else
       {
-        *this = 0;
+        this->firstItem = 0; /*0x6b7495*/
       }
     }
   }
-  *(this + 2) = 0;
+  this->currentItemNode = 0; /*0x6b749e*/
 }

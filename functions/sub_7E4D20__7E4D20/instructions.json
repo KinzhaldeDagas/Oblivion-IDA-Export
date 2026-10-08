@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E4D20",
-    "line": "sub     esp, 3Ch",
+    "line": "sub     esp, 3Ch; Verified (Oblivion): samples a target geometry with non-null skinData and stores a transformed particle position/direction; this is emitterType_70 value 1, kParticleShaderEmitter_SkinnedGeometry. Fallout calls the analogous mode GenerateFromCollisionBones; correspondence to that exact label is Probable.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7E4E91",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7E4F82",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x7E4FBB",
-    "line": "mov     eax, [esp+48h+arg_0]",
+    "line": "mov     eax, [esp+48h+slotIndex]",
     "mnemonic": "mov",
     "size": 4
   },

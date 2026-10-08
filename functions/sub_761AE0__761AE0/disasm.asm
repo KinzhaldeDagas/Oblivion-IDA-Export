@@ -1,4 +1,4 @@
-0x761AE0: mov     ecx, [esp+arg_4]
+0x761AE0: mov     ecx, [esp+arg_4]; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.
 0x761AE4: fld     dword ptr [ecx]
 0x761AE6: mov     eax, [esp+arg_0]
 0x761AEA: fld     [esp+arg_C]

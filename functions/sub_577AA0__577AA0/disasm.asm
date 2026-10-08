@@ -38,7 +38,7 @@
 0x577B00: mov     ecx, edi
 0x577B02: call    sub_5777A0
 0x577B07: push    edi
-0x577B08: call    FormHeapFree
+0x577B08: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x577B0D: add     esp, 4
 0x577B10: cmp     [esi+0Ch], ebx
 0x577B13: jnz     short loc_577AD7
@@ -53,3 +53,12 @@
 0x577B32: pop     ebx
 0x577B33: add     esp, 10h
 0x577B36: retn
+0x9BE5E0: mov     ecx, [ebp-10h]
+0x9BE5E3: jmp     j_??1?$NiTList@PAVTextPage@FontManager@@@@UAE@XZ; NiTList<FontManager::TextPage *>::~NiTList<FontManager::TextPage *>(void)
+0x9BE5E8: mov     edx, [esp+arg_4]
+0x9BE5EC: lea     eax, [edx-10h]
+0x9BE5EF: mov     ecx, [edx-14h]
+0x9BE5F2: xor     ecx, eax
+0x9BE5F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE5F9: mov     eax, offset stru_AE7D0C
+0x9BE5FE: jmp     ___CxxFrameHandler3

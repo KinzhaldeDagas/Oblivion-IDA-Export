@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DDCF0",
-    "line": "push    ebx",
+    "line": "push    ebx; Adds item/count and optional ExtraDataList to this reference's container data, normalizing ownership/reference-pointer state and emitting the inventory event.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4DDCF2",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+extraList]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x4DDD01",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DDD03",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x4DDD0C",
-    "line": "mov     ecx, ebx; this",
+    "line": "mov     ecx, ebx; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DDD0E",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DDD13",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4DDD17",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x4DDD27",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DDD29",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x4DDD37",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4DDD45",
-    "line": "mov     [esp+0Ch+arg_4], esi",
+    "line": "mov     [esp+0Ch+extraList], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4DDD68",
-    "line": "call    sub_5E03C0",
+    "line": "call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x4DDD74",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+extraList]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DDD78",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DDD7D",
-    "line": "mov     eax, [esp+10h+arg_4]",
+    "line": "mov     eax, [esp+10h+extraList]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4DDD82",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x4DDDA8",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4DDDAC",
-    "line": "mov     edx, [esp+20h+arg_0]",
+    "line": "mov     edx, [esp+20h+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -433,31 +433,31 @@
   },
   {
     "ea": "0x4DDDB3",
-    "line": "push    ecx",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DDDB4",
-    "line": "push    ebp",
+    "line": "push    ebp; extraList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DDDB5",
-    "line": "push    edx",
+    "line": "push    edx; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DDDB6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DDDB8",
-    "line": "call    ContainerExtraData_AddItem",
+    "line": "call    ContainerExtraData_AddItem; Canonical form-based container add: item, optional instance ExtraDataList, and signed count. All four external callers enter only at this head; the formerly split interior blocks are one logical routine ending in retn 0x0C. A proxy-to-source conversion hook here covers actor-hit/form adds but not ordinary world-reference pickup.",
     "mnemonic": "call",
     "size": 5
   },

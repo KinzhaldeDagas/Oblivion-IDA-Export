@@ -17,14 +17,14 @@
 0x664D9A: call    edx
 0x664D9C: test    eax, eax
 0x664D9E: jz      short loc_664DAE
-0x664DA0: cmp     eax, offset dword_B3CA58
+0x664DA0: cmp     eax, offset unk_B3CA58
 0x664DA5: jz      short loc_664DB6
 0x664DA7: mov     eax, [eax+4]
 0x664DAA: test    eax, eax
 0x664DAC: jnz     short loc_664DA0
 0x664DAE: push    esi
 0x664DAF: mov     ecx, edi
-0x664DB1: call    sub_6FFE90
+0x664DB1: call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
 0x664DB6: test    ebx, ebx
 0x664DB8: mov     esi, ebx
 0x664DBA: jnz     short loc_664D90
@@ -47,7 +47,7 @@
 0x664DEC: mov     ecx, [edi+0A8h]
 0x664DF2: test    ecx, ecx
 0x664DF4: jz      short loc_664E0D
-0x664DF6: call    sub_452A60
+0x664DF6: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x664DFB: cmp     eax, edi
 0x664DFD: jz      short loc_664E0D
 0x664DFF: mov     ecx, [edi+0A8h]

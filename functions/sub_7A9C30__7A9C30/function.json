@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 18,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_7A9C30",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 46,
+  "chunks": [
+    [
+      "0x7A9C30",
+      "0x7A9CBA"
+    ]
+  ],
+  "chunks_sha256": "70ef1c5244e8967ba406fbfe664b24368d13909873365860670fcfa075abbea0",
+  "comment_regular": "Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.",
+  "comment_repeatable": "Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.\nVerified cleanup 2026-09-30: pop each old local free node in forward-chain order; under native CS B33F00 set node+4=0, node.next=current global free head B33EAC, then global free head=node. This reverses the returned chain; node+8 payload remains untouched. Afterwards local freeHead=0 and active tail.next=0. Bucket7AC9A0 subsequently transfers active head into freeHead and clears active head/tail/count unless frozen. Fallout8220EF38 is the homologous CleanUnusedNodes; its spin-lock nesting differs from this per-node critical-section sequence.\nDX11 replacement authority audit 2026-10-01: cleanup of a nonempty local free chain writes the shared native pool head at B33EAC under the real CRITICAL_SECTION B33F00 (base B33E90+70), with native owner thread at B33F78 and nesting at B33F7C. A captured BuildCommit result that returns old free nodes therefore requires pool ownership again at application and throughout rollback; checking only the planning boolean is insufficient. A bucket with no old free chain avoids this shared-pool write, but still requires separate lifetime and local list-writer proof. Renderer+80 lock alone does not replace this pool lock.\nVerified comparative family 2026-10-01: Fallout PPC 8220EF38 BSTPersistentList<NiTPointerAllocator<unsigned int>,NiGeometry*>::CleanUnusedNodes has the same free-chain walk, shared-pool return, list+C clear and active-tail termination as this Oblivion implementation. Its recursive BSSpinLock plus outer whole-chain lock differs from Oblivion Win32 per-node CRITICAL_SECTION use. Related append family: Oblivion 7ABDE0 and Fallout 82210150 reuse list free nodes or acquire from the allocator, append the existing payload pointer without refcount transfer, and update tail/count. This correlation does not prove scene-resource lifetime or all writer exclusion.\n\nMEF PERF 2026-10-07 PASS5: PERF-15 cleanup cost boundary: F already-free nodes cause F critical-section acquisitions/releases while returning nodes to global pool; active payloads are never destroyed here. Ordered-list fast path must retain this. No claim that native pooling repeatedly reallocates active nodes or that batching locks is proven safe.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "BSTPersistentList_ReleaseFreeNodesToGlobalPool",
   "end_ea": "0x7A9CBA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A9C30",
+  "name": "BSTPersistentList_ReleaseFreeNodesToGlobalPool",
   "segment": ".text",
   "sha256": "70ef1c5244e8967ba406fbfe664b24368d13909873365860670fcfa075abbea0",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A9C30",
-  "type": "void __fastcall(int)",
+  "total_chunk_size": 138,
+  "type": "void __thiscall(BSTPersistentListPointer *this)",
   "xrefs_from_count": 51,
   "xrefs_to_count": 46
 }

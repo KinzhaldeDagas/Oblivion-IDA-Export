@@ -1,4 +1,4 @@
-0x6803A0: mov     edx, [esp+arg_0]
+0x6803A0: mov     edx, [esp+space]; Verified: chooses the link endpoint reference matching the supplied spatial form, calls its position virtual at vtable offset +0x174, and copies the NiPoint3 to outPosition. Returns false for missing/mismatched endpoints.
 0x6803A4: xor     al, al
 0x6803A6: test    edx, edx
 0x6803A8: jz      short locret_6803E0
@@ -15,7 +15,7 @@
 0x6803C2: mov     edx, [eax+174h]
 0x6803C8: call    edx
 0x6803CA: mov     edx, [eax]
-0x6803CC: mov     ecx, [esp+arg_4]
+0x6803CC: mov     ecx, [esp+outPosition]
 0x6803D0: mov     [ecx], edx
 0x6803D2: mov     edx, [eax+4]
 0x6803D5: mov     [ecx+4], edx

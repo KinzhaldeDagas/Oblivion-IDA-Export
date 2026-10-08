@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x77B140",
-    "line": "push    ebx",
+    "line": "push    ebx; DX10OBSE verified decode: NiDX9RenderState texture-stage setter remaps D3DTSS enum to cached slot, compares value, calls IDirect3DDevice9::SetTextureStageState only on change, then updates cache/previous value.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77B141",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+state]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x77B153",
-    "line": "mov     edx, [esp+4+arg_0]",
+    "line": "mov     edx, [esp+4+stage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x77B15F",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x77B187",
-    "line": "cmp     [esp+0Ch+arg_C], 0",
+    "line": "cmp     [esp+0Ch+savePrevious], 0",
     "mnemonic": "cmp",
     "size": 5
   },

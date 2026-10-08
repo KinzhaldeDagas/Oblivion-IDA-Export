@@ -11,7 +11,7 @@
 0x484A59: lea     eax, [esp+1Ch+var_C]
 0x484A5D: mov     large fs:0, eax
 0x484A63: mov     esi, ecx
-0x484A65: mov     ebx, [esp+1Ch+arg_0]
+0x484A65: mov     ebx, [esp+1Ch+owner]
 0x484A69: test    ebx, ebx
 0x484A6B: jz      loc_484B30
 0x484A71: mov     eax, [esi]
@@ -19,9 +19,9 @@
 0x484A75: jz      short loc_484A99
 0x484A77: cmp     dword ptr [eax], 0
 0x484A7A: jz      short loc_484A99
-0x484A7C: mov     ecx, [eax]
-0x484A7E: push    ebx
-0x484A7F: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x484A7C: mov     ecx, [eax]; this
+0x484A7E: push    ebx; owner
+0x484A7F: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x484A84: mov     ecx, [esp+1Ch+var_C]
 0x484A88: mov     large fs:0, ecx
 0x484A8F: pop     ecx
@@ -33,7 +33,7 @@
 0x484A99: push    14h; Size
 0x484A9B: call    FormHeapAlloc
 0x484AA0: add     esp, 4
-0x484AA3: mov     [esp+1Ch+arg_0], eax
+0x484AA3: mov     [esp+1Ch+owner], eax
 0x484AA7: test    eax, eax
 0x484AA9: mov     [esp+1Ch+var_4], 0
 0x484AB1: jz      short loc_484ABE
@@ -42,10 +42,10 @@
 0x484ABA: mov     edi, eax
 0x484ABC: jmp     short loc_484AC0
 0x484ABE: xor     edi, edi
-0x484AC0: push    ebx
-0x484AC1: mov     ecx, edi
+0x484AC0: push    ebx; owner
+0x484AC1: mov     ecx, edi; this
 0x484AC3: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x484ACB: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x484ACB: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x484AD0: cmp     dword ptr [esi], 0
 0x484AD3: jnz     short loc_484B13
 0x484AD5: push    8; Size
@@ -101,3 +101,15 @@
 0x484B5A: pop     ebx
 0x484B5B: add     esp, 0Ch
 0x484B5E: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

@@ -1,1 +1,31 @@
-TAB_INFO
+struct TAB_INFO
+{
+HWND hwnd;
+HWND hwndNotify;
+UINT uNumItem;
+UINT uNumRows;
+INT tabHeight;
+INT tabWidth;
+INT tabMinWidth;
+USHORT uHItemPadding;
+USHORT uVItemPadding;
+USHORT uHItemPadding_s;
+USHORT uVItemPadding_s;
+HFONT hFont;
+HCURSOR hcurArrow;
+HIMAGELIST himl;
+HWND hwndToolTip;
+INT leftmostVisible;
+INT iSelected;
+INT iHotTracked;
+INT uFocus;
+BOOL DoRedraw;
+BOOL needsScrolling;
+BOOL fHeightSet;
+BOOL bUnicode;
+HWND hwndUpDown;
+INT cbInfo;
+DWORD exStyle;
+DWORD dwStyle;
+HDPA items;
+};

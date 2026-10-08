@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7E2E4C",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1306,5 +1306,113 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CF620",
+    "line": "mov     ecx, [ebp-20h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF623",
+    "line": "jmp     ??1BSShader@@UAE@XZ;",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF628",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF62B",
+    "line": "add     ecx, 84h ; '„'; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CF631",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF636",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF639",
+    "line": "add     ecx, 88h ; 'ˆ'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CF63F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF644",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF647",
+    "line": "add     ecx, 8Ch ; 'Œ'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CF64D",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF652",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CF656",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF659",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF65C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CF65E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF663",
+    "line": "mov     eax, offset stru_AF8278",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF668",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

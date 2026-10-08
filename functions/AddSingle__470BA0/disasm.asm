@@ -1,4 +1,4 @@
-0x470BA0: push    esi
+0x470BA0: push    esi; AnimSequenceSingle setter. Replaces the held BSAnimGroupSequence/NiNode pointer with refcount decrement/increment around the old and new sequence.
 0x470BA1: push    edi
 0x470BA2: mov     edi, ecx
 0x470BA4: mov     esi, [edi+4]

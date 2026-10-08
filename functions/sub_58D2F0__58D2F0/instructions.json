@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x58D2F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Probable 2026-10-07: TileTemplate::AddPair role, supported by all seven callers in ParseFile, item construction and lexical normalization, plus Fallout named0x827DF340. Not renamed this pass: full rewrite branches/command semantics remain unexamined. Highest-value next parser target.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x58D31B",
-    "line": "cmp     byte ptr [esp+28h+arg_C], 0",
+    "line": "cmp     [esp+28h+preserveStrings], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x58D332",
-    "line": "mov     [esp+2Ch+arg_C], eax",
+    "line": "mov     dword ptr [esp+2Ch+preserveStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58D336",
-    "line": "fild    [esp+2Ch+arg_C]",
+    "line": "fild    dword ptr [esp+2Ch+preserveStrings]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -199,31 +199,31 @@
   },
   {
     "ea": "0x58D353",
-    "line": "push    0FFFFFFFFh; int",
+    "line": "push    0FFFFFFFFh; requestedID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58D355",
-    "line": "push    esi; unsigned __int8 *",
+    "line": "push    esi; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D356",
-    "line": "call    sub_58B040",
+    "line": "call    Tile__AddUserTrait",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58D35B",
-    "line": "mov     [esp+30h+arg_C], eax",
+    "line": "mov     dword ptr [esp+30h+preserveStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58D35F",
-    "line": "fild    [esp+30h+arg_C]",
+    "line": "fild    dword ptr [esp+30h+preserveStrings]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x58D376",
-    "line": "mov     [esp+28h+arg_C], edi",
+    "line": "mov     dword ptr [esp+28h+preserveStrings], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x58D386",
-    "line": "mov     eax, [esp+28h+arg_8]",
+    "line": "mov     eax, [esp+28h+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x58D38E",
-    "line": "push    eax; int",
+    "line": "push    eax; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x58D391",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58D396",
-    "line": "push    eax; int",
+    "line": "push    eax; argument",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D397",
-    "line": "push    esi; int",
+    "line": "push    esi; text",
     "mnemonic": "push",
     "size": 1
   },
@@ -337,31 +337,31 @@
   },
   {
     "ea": "0x58D399",
-    "line": "mov     ecx, [esp+38h+arg_0]",
+    "line": "mov     ecx, [esp+38h+command]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58D39D",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+number]; number",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58D3A0",
-    "line": "push    ecx; int",
+    "line": "push    ecx; command",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D3A1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D3A3",
-    "line": "call    sub_589FA0",
+    "line": "call    Tile__TileTemplateItem__Initialize; Verified: 0x18-byte parsed item fields command+0,number+4,BSStringT text+8,contextual argument+0x10,line+0x14. BuildAndNameTree writes createdTile into argument for tile-begin; ConnectTraits reads trait there for property/action commands. sourceLine comes from ParseFile newline counter. Remaining command-dependent interpretations Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x58D45D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x58D493",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+command]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x58D4C9",
-    "line": "mov     ecx, [edx+8]",
+    "line": "mov     ecx, [edx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x58D4EB",
-    "line": "push    edi",
+    "line": "push    edi; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D4EC",
-    "line": "call    sub_58BC80",
+    "line": "call    Tile__BuildStorage__GetSubTemplateByName; Verified: walks BuildStorage subTemplates and compares BSStringT names case-insensitively; returns match or NULL. Called by AddPair when entering named template. Fallout named analogue0x827DBEF8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,19 +1063,19 @@
   },
   {
     "ea": "0x58D505",
-    "line": "push    edi",
+    "line": "push    edi; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58D506",
-    "line": "mov     ecx, edx",
+    "line": "mov     ecx, edx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58D508",
-    "line": "call    sub_58CE30",
+    "line": "call    Tile__BuildStorage__NewSubTemplate; Verified: allocates0x1C template, Initialize(name,storage), appends to embedded subtemplate list, returns template. Used by AddPair when name lookup fails. Fallout named analogue0x827DED28 allocates0x14 template.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x58D543",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x58D554",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x58D5AD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x58D5C0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x58D614",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x58D625",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2023,7 +2023,7 @@
   },
   {
     "ea": "0x58D720",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x58D753",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x58D764",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x58D770",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x58D781",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2335,7 @@
   },
   {
     "ea": "0x58D7D8",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2437,7 +2437,7 @@
   },
   {
     "ea": "0x58D80A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2473,7 +2473,7 @@
   },
   {
     "ea": "0x58D81D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x58D83A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x58D84B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x58D85F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2635,7 +2635,7 @@
   },
   {
     "ea": "0x58D870",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3070,5 +3070,77 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BF900",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF903",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BF904",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF909",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BF90A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BF90B",
+    "line": "mov     edx, [esp+Src]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BF90F",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF912",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF915",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF917",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF91C",
+    "line": "mov     eax, offset stru_AE8DDC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF921",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

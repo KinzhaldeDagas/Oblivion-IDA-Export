@@ -14,7 +14,7 @@
 0x4C8E53: jz      loc_4C8EEB
 0x4C8E59: lea     ecx, [edi+2Ch]
 0x4C8E5C: mov     [esp+8+arg_0], ecx
-0x4C8E60: call    BSSimpleList_Clear
+0x4C8E60: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4C8E65: push    esi; a2
 0x4C8E66: mov     ecx, edi; this
 0x4C8E68: call    TESForm_CopyAllComponentsFrom
@@ -40,7 +40,6 @@
 0x4C8EA5: cmp     dword ptr [esi+4], 0
 0x4C8EA9: jz      short loc_4C8EB9
 0x4C8EAB: jmp     short loc_4C8EB0
-0x4C8EAD: align 10h
 0x4C8EB0: mov     esi, [esi+4]
 0x4C8EB3: cmp     dword ptr [esi+4], 0
 0x4C8EB7: jnz     short loc_4C8EB0

@@ -1,7 +1,7 @@
 0x415315: cmp     [esp+arg_18], 0
 0x41531A: jz      short EffectItemList_GetStrongestItem___CheckRange
 0x41531C: mov     ecx, esi
-0x41531E: call    EffectItem_GetArea
+0x41531E: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x415323: xor     edx, edx
 0x415325: test    eax, eax
 0x415327: setnle  dl

@@ -9,8 +9,8 @@
 0x75F3E6: jmp     short loc_75F40E
 0x75F3E8: fld     [esp+4+arg_0]
 0x75F3EC: push    ecx
-0x75F3ED: fstp    [esp+8+var_8]; float
-0x75F3F0: call    sub_6C36B0
+0x75F3ED: fstp    [esp+8+applicationTime]; applicationTime
+0x75F3F0: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x75F3F5: test    al, al
 0x75F3F7: jz      short loc_75F40E
 0x75F3F9: mov     ecx, [esi+3Ch]

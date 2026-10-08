@@ -1,1 +1,1 @@
-NiGeometryGroupManager
+struct NiGeometryGroupManager;

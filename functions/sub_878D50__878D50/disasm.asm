@@ -31,7 +31,7 @@
 0x878DA6: mov     ecx, esi
 0x878DA8: call    edx
 0x878DAA: mov     eax, [edi+24h]
-0x878DAD: mov     ecx, [esp+20h+arg_C]
+0x878DAD: mov     ecx, [esp+20h+value]
 0x878DB1: mov     ebx, [eax]
 0x878DB3: mov     edx, [ecx]
 0x878DB5: mov     eax, [edx+88h]
@@ -64,7 +64,7 @@
 0x878DFA: push    ebp; lpAddend
 0x878DFB: call    dword ptr ds:0A28078h
 0x878E01: mov     edx, [edi+24h]
-0x878E04: mov     eax, [esp+20h+arg_C]
+0x878E04: mov     eax, [esp+20h+value]
 0x878E08: mov     ebx, [edx+4]
 0x878E0B: push    0
 0x878E0D: push    eax
@@ -102,7 +102,7 @@
 0x878E62: mov     ebx, [ebp+4]
 0x878E65: cmp     ebx, eax
 0x878E67: mov     ecx, eax
-0x878E69: mov     [esp+20h+arg_C], ecx
+0x878E69: mov     [esp+20h+value], ecx
 0x878E6D: jz      short loc_878EA4
 0x878E6F: test    ebx, ebx
 0x878E71: jz      short loc_878E93
@@ -118,7 +118,7 @@
 0x878E89: push    1
 0x878E8B: mov     ecx, ebx
 0x878E8D: call    eax
-0x878E8F: mov     ecx, [esp+20h+arg_C]
+0x878E8F: mov     ecx, [esp+20h+value]
 0x878E93: test    ecx, ecx
 0x878E95: mov     [ebp+4], ecx
 0x878E98: jz      short loc_878EA4
@@ -127,20 +127,20 @@
 0x878E9E: call    dword ptr ds:0A28078h
 0x878EA4: mov     ebx, 1
 0x878EA9: add     [edi+60h], ebx
-0x878EAC: mov     [esp+20h+arg_C], edi
+0x878EAC: mov     [esp+20h+value], edi
 0x878EB0: mov     edx, [esi+38h]
-0x878EB3: lea     ecx, [esp+20h+arg_C]
-0x878EB7: push    ecx
-0x878EB8: push    edx
-0x878EB9: lea     ecx, [esi+40h]
+0x878EB3: lea     ecx, [esp+20h+value]
+0x878EB7: push    ecx; value
+0x878EB8: push    edx; index
+0x878EB9: lea     ecx, [esi+40h]; this
 0x878EBC: mov     [esp+28h+var_4], 0
-0x878EC4: call    sub_76CE40
+0x878EC4: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x878EC9: or      eax, 0FFFFFFFFh
 0x878ECC: add     [edi+60h], eax
 0x878ECF: mov     [esp+20h+var_4], eax
 0x878ED3: jnz     short loc_878EDC
 0x878ED5: mov     ecx, edi
-0x878ED7: call    sub_7604D0
+0x878ED7: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x878EDC: add     [esi+38h], ebx
 0x878EDF: mov     ecx, [esp+20h+var_C]
 0x878EE3: mov     large fs:0, ecx
@@ -151,3 +151,12 @@
 0x878EEE: pop     ebx
 0x878EEF: add     esp, 0Ch
 0x878EF2: retn    10h
+0x9D3390: lea     ecx, [ebp+10h]; void *
+0x9D3393: jmp     sub_4027D0
+0x9D3398: mov     edx, [esp+arg_4]
+0x9D339C: lea     eax, [edx-10h]
+0x9D339F: mov     ecx, [edx-14h]
+0x9D33A2: xor     ecx, eax
+0x9D33A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D33A9: mov     eax, offset stru_AFB7C0
+0x9D33AE: jmp     ___CxxFrameHandler3

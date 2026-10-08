@@ -1,5 +1,5 @@
-char __cdecl sub_7871C0(char a1)
+// Static CSpeedTreeRT::SetDropToBillboard. Updates the global toggle that adds the synthetic billboard LOD to branch/frond/leaf transition selection.
+void __cdecl CSpeedTreeRT__SetDropToBillboard(bool enabled)
 {
-  byte_B4297C = a1;
-  return a1;
+  CSpeedTreeRT__s_dropToBillboard = enabled; /*0x7871c4*/
 }

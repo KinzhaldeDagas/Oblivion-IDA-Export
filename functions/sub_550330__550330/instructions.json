@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x550330",
-    "line": "push    ebx",
+    "line": "push    ebx; Exact FaceGen matrix equality: dimensions must match and all coefficient bytes are compared.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x550335",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x55036B",
-    "line": "call    sub_54F7A0",
+    "line": "call    sub_54F7A0; Bounds-checked float-vector element access. Returns begin + index*4; begin is vector+4 (FaceGenMatrix+0x0C).",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x550377",
-    "line": "call    sub_54F7A0",
+    "line": "call    sub_54F7A0; Bounds-checked float-vector element access. Returns begin + index*4; begin is vector+4 (FaceGenMatrix+0x0C).",
     "mnemonic": "call",
     "size": 5
   },

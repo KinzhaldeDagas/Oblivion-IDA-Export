@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x689DC0",
+      "0x689EF5"
+    ]
+  ],
+  "chunks_sha256": "9416e19c2f7f9041533ea68827913b9c0dadefb161df1e6f32d211eab68bfa78",
+  "comment_regular": "Verified post-A* road augmentation. It walks TravelPath nodes, switches to the linked door's WorldSpace and TeleportData marker position on teleport transitions, then asks that world's TESRoad to add surface-derived position nodes for applicable segments. TravelPath_ComputeDistance subsequently sums the added node segments, so road data changes the measured travel distance; this is route measurement/surface sampling, not the A* route search.",
+  "comment_repeatable": "Verified post-A* road augmentation. It walks TravelPath nodes, switches to the linked door's WorldSpace and TeleportData marker position on teleport transitions, then asks that world's TESRoad to add surface-derived position nodes for applicable segments. TravelPath_ComputeDistance subsequently sums the added node segments, so road data changes the measured travel distance; this is route measurement/surface sampling, not the A* route search.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_689DC0",
+  "display_name": "TravelPath_AddRoadSegmentsForPath",
   "end_ea": "0x689EF5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_689DC0",
+  "name": "TravelPath_AddRoadSegmentsForPath",
   "segment": ".text",
   "sha256": "9416e19c2f7f9041533ea68827913b9c0dadefb161df1e6f32d211eab68bfa78",
   "size": 309,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x689DC0",
-  "type": "void __thiscall(char *this, TESObjectCELL **)",
+  "total_chunk_size": 309,
+  "type": "void __thiscall(TravelPath *this, TESObjectREFR *sourceRef)",
   "xrefs_from_count": 136,
   "xrefs_to_count": 3
 }

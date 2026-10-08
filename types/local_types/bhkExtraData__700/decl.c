@@ -1,1 +1,1 @@
-bhkExtraData
+struct bhkExtraData;

@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x57B85F",
-    "line": "fstp    [esp+4+var_4]",
+    "line": "fstp    [esp+4+deltaSeconds]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x57B86B",
-    "line": "call    MagicTarget_ProcessEffects",
+    "line": "call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x57B875",
-    "line": "push    eax",
+    "line": "push    eax; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57B876",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x57B87B",
-    "line": "call    sub_678D90",
+    "line": "call    ActorProcessManager_FinishHitEffectsForTarget; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicHitEffect; for matching targetReference, calls the hit-effect detach virtual and marks the effect finished.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,19 +277,19 @@
   },
   {
     "ea": "0x57B883",
-    "line": "fstp    [esp+4+var_4]",
+    "line": "fstp    [esp+4+deltaSeconds]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x57B886",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x57B88B",
-    "line": "call    sub_67ACA0",
+    "line": "call    ActorProcessManager_UpdateTempEffects; [Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x57B894",
-    "line": "fst     dword ptr ds:0B46124h",
+    "line": "fst     dword ptr ds:0B46124h; MoonSugarEffect decode: RaceSex/menu reset path zeros native Gethit intensity globals flt_B46124/flt_B46120.",
     "mnemonic": "fst",
     "size": 6
   },

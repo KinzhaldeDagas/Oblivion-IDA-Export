@@ -1,8 +1,8 @@
-int __userpurge TESLevCreature_LoadForm_::LoadScript@<eax>(int a1@<ebp>, Data *a2@<edi>, int a3@<esi>, int a4)
+char __userpurge TESLevCreature_LoadForm_::LoadScript@<al>(int a1@<ebp>, Data *a2@<edi>, TESForm *a3@<esi>, int a4)
 {
-  *(_DWORD *)(a1 - 8) = 0;
-  TESFile_GetChunkData4(a2, (char *)(a1 - 8));
-  *(_DWORD *)(a3 + 0x38) = *(_DWORD *)(a1 - 8);
-  TESScriptableForm_Link(a3 + 0x34, (TESForm *)a3);
-  return TESLevCreature_LoadForm_::NextChunk(a4);
+  *(_DWORD *)(a1 - 8) = 0; /*0x4af80f*/
+  TESFile_GetChunkData4(a2, (char *)(a1 - 8)); /*0x4af816*/
+  a3[2].member.flags = *(_DWORD *)(a1 - 8); /*0x4af81e*/
+  TESScriptableForm_Link((int)&a3[2].member, a3); /*0x4af825*/
+  return TESLevCreature_LoadForm_::NextChunk(a2, a3, a4);
 }

@@ -481,19 +481,19 @@
   },
   {
     "ea": "0x45EA7E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45EA80",
-    "line": "fstp    [esp+34h+var_34]; float",
+    "line": "fstp    [esp+34h+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x45EA83",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x45EB6A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x45EB75",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x45EB87",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,13 +1045,13 @@
   },
   {
     "ea": "0x45EB9E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45EBA0",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },

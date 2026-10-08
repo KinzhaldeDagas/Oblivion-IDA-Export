@@ -1,4 +1,4 @@
-0x5FCAB0: push    0FFFFFFFFh
+0x5FCAB0: push    0FFFFFFFFh; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x5FCAB2: push    offset Actor_ProcessAction_SEH
 0x5FCAB7: mov     eax, large fs:0
 0x5FCABD: push    eax
@@ -32,9 +32,9 @@
 0x5FCB0F: mov     edi, eax
 0x5FCB11: mov     ecx, esi; this
 0x5FCB13: mov     [esp+74h+var_60], edi
-0x5FCB17: call    MobileObject_GetCharProxy
+0x5FCB17: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5FCB1C: cmp     edi, ebx
-0x5FCB1E: mov     dword ptr [esp+74h+var_28], eax
+0x5FCB1E: mov     [esp+74h+originX], eax
 0x5FCB22: jz      Actor_ProcessAction___Done
 0x5FCB28: cmp     [esi+58h], ebx
 0x5FCB2B: jz      Actor_ProcessAction___Done
@@ -55,20 +55,20 @@
 0x5FCB5B: cmp     eax, ds:0B333C4h
 0x5FCB61: jnz     short loc_5FCB77
 0x5FCB63: fld     dword ptr ds:0B14E58h
-0x5FCB69: fstp    [esp+74h+arg_0]
+0x5FCB69: fstp    [esp+74h+arg0]
 0x5FCB6D: fld     dword ptr ds:0B14E5Ch
-0x5FCB73: fstp    [esp+74h+arg_4]
+0x5FCB73: fstp    [esp+74h+arg1]
 0x5FCB77: fld1
-0x5FCB79: push    ebx
+0x5FCB79: push    ebx; slotSelector
 0x5FCB7A: fstp    [esp+78h+var_50]
-0x5FCB7E: mov     ecx, edi
+0x5FCB7E: mov     ecx, edi; this
 0x5FCB80: fldz
 0x5FCB82: mov     [esp+78h+var_5C], ebx
 0x5FCB86: fstp    [esp+78h+var_54]
 0x5FCB8A: mov     [esp+78h+var_4C], ebx
 0x5FCB8E: mov     dword ptr [esp+78h+var_48+4], ebx
-0x5FCB92: mov     [esp+78h+var_58], 0FFFFFFFFh
-0x5FCB9A: call    sub_4706E0
+0x5FCB92: mov     [esp+78h+action], 0FFFFFFFFh
+0x5FCB9A: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x5FCB9F: mov     ebp, eax
 0x5FCBA1: mov     eax, [esi]
 0x5FCBA3: mov     edx, [eax+168h]
@@ -77,7 +77,7 @@
 0x5FCBAF: call    edx
 0x5FCBB1: mov     ecx, esi
 0x5FCBB3: mov     edi, eax
-0x5FCBB5: call    Actor_GetCurrentAction
+0x5FCBB5: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FCBBA: cmp     eax, 0FFFFFFFFh
 0x5FCBBD: jz      Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FCBC3: mov     ecx, [esi+58h]
@@ -85,15 +85,15 @@
 0x5FCBC8: mov     edx, [eax+2D4h]
 0x5FCBCE: call    edx
 0x5FCBD0: test    eax, eax
-0x5FCBD2: jz      loc_5FD8B3
+0x5FCBD2: jz      Actor_ProcessAction_PostSequenceGuardTail
 0x5FCBD8: mov     ecx, [esi+58h]
 0x5FCBDB: mov     eax, [ecx]
 0x5FCBDD: mov     edx, [eax+2D4h]
 0x5FCBE3: call    edx
 0x5FCBE5: cmp     [eax+44h], ebx
-0x5FCBE8: jz      loc_5FD8B3
+0x5FCBE8: jz      Actor_ProcessAction_PostSequenceGuardTail
 0x5FCBEE: mov     ecx, esi
-0x5FCBF0: call    Actor_GetCurrentAction
+0x5FCBF0: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FCBF5: cmp     eax, 0Ah; switch 11 cases
 0x5FCBF8: ja      Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FCBFE: jmp     ds:jpt_5FCBFE[eax*4]; switch jump
@@ -102,56 +102,56 @@
 0x5FCC0A: mov     edx, [eax+2D4h]
 0x5FCC10: call    edx
 0x5FCC12: mov     ecx, [eax+68h]
-0x5FCC15: call    TESAnimGroup_GetAnimationGroup
+0x5FCC15: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5FCC1A: lea     eax, [eax+eax*8]
 0x5FCC1D: mov     eax, ds:0B102E8h[eax*4]
 0x5FCC24: sub     eax, 1
 0x5FCC27: jz      Actor_ProcessAction___Attack_Cast
 0x5FCC2D: sub     eax, 2
 0x5FCC30: jnz     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FCC36: mov     ecx, [esp+74h+var_60]
-0x5FCC3A: push    3
-0x5FCC3C: call    ActorAnimData_GetSomethingFromField8Value
+0x5FCC36: mov     ecx, [esp+74h+var_60]; this
+0x5FCC3A: push    3; slot
+0x5FCC3C: call    ActorAnimData_GetSlotActionState; Native action-2 slot-3 hit gate: normalized slot state must equal 1. For Starshooting's AttackLeft/AttackRight (note-template class 4), state 1 specifically means the Hit threshold has been crossed; class 5 uses Hit and class 6 uses Attack at the analogous phase.
 0x5FCC41: cmp     eax, 1
 0x5FCC44: jnz     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FCC4A: mov     ecx, [esp+74h+var_60]
-0x5FCC4E: push    3
-0x5FCC50: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FCC4A: mov     ecx, [esp+74h+var_60]; Slot-3 attack-hit dispatch begins here by reading the active animation key. The descriptor's noteTemplateClass at +0x0C then selects class 4 regular attack (0x5FCDDE), class 5 power attack (0x5FCD49), or class 6 BlockAttack (0x5FCC83). Starshooting AttackLeft/AttackRight are class 4. The throwing bridge intercepts here and suppresses the native class-4 resolver only after its projectile transaction succeeds.
+0x5FCC4E: push    3; slot
+0x5FCC50: call    ActorAnimData_GetAnimGroupFromField8Value; Uses the slot-3 active group to distinguish the native attack path before nock/release processing.
 0x5FCC55: push    eax
-0x5FCC56: call    sub_51AA00
+0x5FCC56: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FCC5B: lea     ecx, [eax+eax*8]
-0x5FCC5E: mov     eax, ds:0B102ECh[ecx*4]
+0x5FCC5E: mov     eax, ds:0B102ECh[ecx*4]; Loads AnimGroupInfo.noteTemplateClass (+0x0C) for the active slot-3 group: 4 => regular AttackLeft/AttackRight hit resolver, 5 => power-attack resolver, 6 => BlockAttack resolver.
 0x5FCC65: add     esp, 4
 0x5FCC68: sub     eax, 4
-0x5FCC6B: jz      Actor_ProcessAction___Attack_CastEnchantment?
+0x5FCC6B: jz      Actor_ProcessAction_Class4RegularAttackHit
 0x5FCC71: sub     eax, 1
-0x5FCC74: jz      loc_5FCD49
+0x5FCC74: jz      Actor_ProcessAction_Class5PowerAttackHit
 0x5FCC7A: sub     eax, 1
 0x5FCC7D: jnz     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FCC83: mov     edx, [esi]
+0x5FCC83: mov     edx, [esi]; Native note-template class 6 BlockAttack hit resolver. This is the branch that computes close reach, calls CombatController_FindActorWithinReach, and applies block/disarm/knockdown-related effects; it is distinct from class-4 AttackLeft/AttackRight.
 0x5FCC85: mov     eax, [edx+0ECh]
 0x5FCC8B: mov     ecx, esi
 0x5FCC8D: call    eax
-0x5FCC8F: fstp    [esp+74h+var_28+4]
-0x5FCC93: mov     ecx, offset fCombatDistance
+0x5FCC8F: fstp    qword ptr [esp+74h+originX+4]
+0x5FCC93: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+248h)
 0x5FCC98: call    GameSetting_GetSafeFloatPointer
 0x5FCC9D: fld     dword ptr [eax]
-0x5FCC9F: fmul    [esp+74h+var_28+4]
+0x5FCC9F: fmul    qword ptr [esp+74h+originX+4]
 0x5FCCA3: push    ecx
 0x5FCCA4: fstp    dword ptr [esp+78h+var_30+4]
 0x5FCCA8: fld     dword ptr [esp+78h+var_30+4]
 0x5FCCAC: fstp    [esp+78h+duration]
 0x5FCCAF: push    esi
-0x5FCCB0: call    GetActorWithinReach??
+0x5FCCB0: call    CombatController_FindActorWithinReach
 0x5FCCB5: mov     edi, eax
 0x5FCCB7: add     esp, 8
 0x5FCCBA: test    edi, edi
 0x5FCCBC: jz      short loc_5FCD25
 0x5FCCBE: push    edi
 0x5FCCBF: mov     ecx, esi
-0x5FCCC1: call    sub_5FC2B0
+0x5FCCC1: call    Actor_AttemptBlockDisarmPerkOnHit; ODismemberment combat decode: block-side disarm perk attempt. Uses block/weapon skill mastery and iPerkBlockDisarmChance to make the blocker disarm the attacker.
 0x5FCCC6: mov     ecx, edi
-0x5FCCC8: call    sub_5F4FD0
+0x5FCCC8: call    Actor_PlayKnockdownAnimGroup
 0x5FCCCD: mov     ecx, [esi+58h]
 0x5FCCD0: mov     edx, [ecx]
 0x5FCCD2: mov     eax, [edx+0F8h]
@@ -183,7 +183,7 @@
 0x5FCD1D: call    sub_6AF880
 0x5FCD22: add     esp, 24h
 0x5FCD25: mov     ecx, esi
-0x5FCD27: call    sub_5E5640
+0x5FCD27: call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.
 0x5FCD2C: test    al, al
 0x5FCD2E: jz      Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FCD34: mov     ecx, [esi+58h]
@@ -193,7 +193,7 @@
 0x5FCD41: push    eax
 0x5FCD42: push    6
 0x5FCD44: jmp     Actor_ProcessAction___DefaultAction??_
-0x5FCD49: cmp     esi, ds:0B333C4h
+0x5FCD49: cmp     esi, ds:0B333C4h; Native note-template class 5 power-attack hit resolver for AttackPower and directional power attacks. Performs player/AI-specific virtual dispatch, post-hit handling, then advances action state.
 0x5FCD4F: jz      short loc_5FCD94
 0x5FCD51: mov     edx, [esi]
 0x5FCD53: mov     eax, [edx+334h]
@@ -214,7 +214,7 @@
 0x5FCD7D: test    al, al
 0x5FCD7F: jnz     short loc_5FCD8A
 0x5FCD81: mov     ecx, esi
-0x5FCD83: call    sub_5F9620
+0x5FCD83: call    Actor_ProcessAttackReachProbe; Verified call context: Actor_ProcessAction invokes Actor_ProcessAttackReachProbe with actor in ECX in this non-player attack branch; surrounding action/weapon-state checks gate the call.
 0x5FCD88: jmp     short loc_5FCDA6
 0x5FCD8A: mov     edx, [esi]
 0x5FCD8C: mov     eax, [edx+3B0h]
@@ -234,7 +234,7 @@
 0x5FCDB3: mov     ecx, esi
 0x5FCDB5: call    sub_5E4010
 0x5FCDBA: mov     ecx, esi
-0x5FCDBC: call    sub_5E5640
+0x5FCDBC: call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.
 0x5FCDC1: test    al, al
 0x5FCDC3: jz      Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FCDC9: mov     ecx, [esi+58h]
@@ -244,7 +244,7 @@
 0x5FCDD6: push    eax
 0x5FCDD7: push    3
 0x5FCDD9: jmp     Actor_ProcessAction___DefaultAction??_
-0x5FCDDE: mov     ecx, [esi+58h]
+0x5FCDDE: mov     ecx, [esi+58h]; Native note-template class 4 regular-attack hit resolver used by AttackLeft and AttackRight. It selects process/active-MagicCaster/actor-virtual attack handling, then joins common post-hit processing. Starshooting reuses these groups for throwing, so a successful projectile bridge must bypass this native regular-weapon transaction; this branch is not the class-6 close-reach BlockAttack path.
 0x5FCDE1: mov     edx, [ecx]
 0x5FCDE3: mov     eax, [edx+13Ch]
 0x5FCDE9: call    eax
@@ -291,7 +291,7 @@
 0x5FCE58: test    al, al
 0x5FCE5A: jnz     short loc_5FCE6A
 0x5FCE5C: mov     ecx, esi
-0x5FCE5E: call    sub_5F9620
+0x5FCE5E: call    Actor_ProcessAttackReachProbe; Verified call context: second Actor_ProcessAction branch invokes Actor_ProcessAttackReachProbe with actor in ECX after corresponding action-state checks.
 0x5FCE63: push    0
 0x5FCE65: jmp     loc_5FCDB3
 0x5FCE6A: mov     edx, [esi]
@@ -312,16 +312,16 @@
 0x5FCE93: call    eax
 0x5FCE95: push    0
 0x5FCE97: jmp     loc_5FCDB3
-0x5FCE9C: mov     ecx, [esp+74h+var_60]
-0x5FCEA0: push    1
-0x5FCEA2: call    ActorAnimData_GetSomethingFromField8Value
+0x5FCE9C: mov     ecx, [esp+74h+var_60]; this
+0x5FCEA0: push    1; slot
+0x5FCEA2: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x5FCEA7: cmp     eax, 1
 0x5FCEAA: jnz     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FCEB0: mov     ecx, [esp+74h+var_60]
-0x5FCEB4: push    eax
-0x5FCEB5: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FCEB0: mov     ecx, [esp+74h+var_60]; this
+0x5FCEB4: push    eax; slot
+0x5FCEB5: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5FCEBA: push    eax
-0x5FCEBB: call    sub_51AA00
+0x5FCEBB: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FCEC0: lea     ecx, [eax+eax*8]
 0x5FCEC3: mov     eax, ds:0B102ECh[ecx*4]
 0x5FCECA: add     eax, 0FFFFFFFCh
@@ -339,7 +339,7 @@
 0x5FCEF4: push    ecx
 0x5FCEF5: mov     ecx, esi; this
 0x5FCEF7: fstp    [esp+78h+duration]
-0x5FCEFA: call    TESObjectREFR_GetParentCell
+0x5FCEFA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5FCEFF: mov     edx, [esi]
 0x5FCF01: push    eax
 0x5FCF02: mov     eax, [edx+174h]
@@ -348,9 +348,9 @@
 0x5FCF0C: push    eax
 0x5FCF0D: mov     ecx, esi
 0x5FCF0F: call    Actor_IsUnderwater??
-0x5FCF14: mov     ecx, esi
+0x5FCF14: mov     ecx, esi; this
 0x5FCF16: mov     bl, al
-0x5FCF18: call    Actor_IsSwimming
+0x5FCF18: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x5FCF1D: test    al, al
 0x5FCF1F: jnz     short loc_5FCF25
 0x5FCF21: test    bl, bl
@@ -381,8 +381,8 @@
 0x5FCF6E: call    MagicCaster_UseActiveMagicItem
 0x5FCF73: jmp     loc_5FCDC9
 0x5FCF78: mov     ecx, [esp+74h+var_60]; jumptable 005FCBFE case 4
-0x5FCF7C: push    3
-0x5FCF7E: call    ActorAnimData_GetSomethingFromField8Value
+0x5FCF7C: push    3; slot
+0x5FCF7E: call    ActorAnimData_GetSlotActionState; Current action 4 (AttackBow) performs native nock/Attach work only at exact slot-3 state 1, after the Attach note. Hold/state 2 has no separate Actor_ProcessAction branch.
 0x5FCF83: cmp     eax, 1
 0x5FCF86: jnz     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FCF8C: mov     ecx, ds:0B333C4h
@@ -390,30 +390,29 @@
 0x5FCF94: mov     [esp+74h+var_40], edi
 0x5FCF98: mov     dword ptr [esp+74h+var_48], eax
 0x5FCF9C: jnz     short loc_5FCFD0
-0x5FCF9E: mov     dword ptr [esp+74h+var_48], 2
+0x5FCF9E: mov     dword ptr [esp+74h+var_48], 2; For PlayerCharacter, run the nock/attach presentation loop twice: the existing animation-data context plus explicit first-person ActorAnimData. Non-player actors run one context.
 0x5FCFA6: jmp     short loc_5FCFB6
 0x5FCFA8: jmp     short loc_5FCFB0
-0x5FCFAA: align 10h
-0x5FCFB0: mov     ecx, ds:0B333C4h
+0x5FCFB0: mov     ecx, ds:0B333C4h; this
 0x5FCFB6: cmp     esi, ecx
 0x5FCFB8: jnz     short loc_5FCFD0
 0x5FCFBA: cmp     dword ptr [esp+74h+var_48], 1
 0x5FCFBF: jnz     short loc_5FCFD0
-0x5FCFC1: push    1
-0x5FCFC3: call    sub_6600D0
+0x5FCFC1: push    1; firstPerson
+0x5FCFC3: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x5FCFC8: mov     ebx, eax
 0x5FCFCA: mov     [esp+74h+var_40], ebx
 0x5FCFCE: jmp     short loc_5FCFD4
 0x5FCFD0: mov     ebx, [esp+74h+var_40]
-0x5FCFD4: mov     ecx, [esi+58h]
+0x5FCFD4: mov     ecx, [esi+58h]; Bow current-action 4, gated by action-slot state 1: obtain quiver node and held-arrow target node through process virtuals for each applicable perspective.
 0x5FCFD7: mov     edx, [ecx]
-0x5FCFD9: mov     eax, [edx+128h]
+0x5FCFD9: mov     eax, [edx+128h]; Indirect call through process vtable +0x128 = GetArrowCloneSourceNode. Resolves Quiver; Actor_ProcessAction finds Arrow:0 beneath it.
 0x5FCFDF: push    ebx
 0x5FCFE0: call    eax
 0x5FCFE2: mov     ecx, [esi+58h]
 0x5FCFE5: mov     edx, [ecx]
 0x5FCFE7: mov     edi, eax
-0x5FCFE9: mov     eax, [edx+12Ch]
+0x5FCFE9: mov     eax, [edx+12Ch]; Indirect call through process vtable +0x12C = GetArrowAttachTargetNode. Resolves perspective-correct ArrowBone; the Arrow:0 clone is attached here.
 0x5FCFEF: push    ebx
 0x5FCFF0: call    eax
 0x5FCFF2: test    edi, edi
@@ -423,7 +422,7 @@
 0x5FCFFE: jz      loc_5FD0DB
 0x5FD004: mov     edx, [edi]
 0x5FD006: mov     eax, [edx+58h]
-0x5FD009: push    offset aArrow0; "Arrow:0"
+0x5FD009: push    offset aArrow0; Native bow nock handoff: find 'Arrow:0' on Quiver, clone it, and attach the clone to the held-arrow target node. Player inventory count then hides the corresponding ArrowN quiver mesh.
 0x5FD00E: mov     ecx, edi
 0x5FD010: call    eax
 0x5FD012: mov     ebx, eax
@@ -433,17 +432,17 @@
 0x5FD01D: call    PrintError
 0x5FD022: add     esp, 4
 0x5FD025: jmp     loc_5FD0DB
-0x5FD02A: mov     ecx, ebx
-0x5FD02C: call    sub_700900
+0x5FD02A: mov     ecx, ebx; Clone Quiver child 'Arrow:0' as a distinct transient NiObject. This clone, not an equipped WEAP node, becomes the held projectile presentation.
+0x5FD02C: call    NiObject_CloneWithPointerMap; Native bow nock: clone Arrow:0 from the Quiver source. The equipped WEAP slot is not transferred into this held visual.
 0x5FD031: mov     edx, [ebp+0]
 0x5FD034: push    1
 0x5FD036: push    eax
-0x5FD037: mov     eax, [edx+84h]
+0x5FD037: mov     eax, [edx+84h]; Directly attach the transient Quiver Arrow:0 clone to the perspective-correct ArrowBone via NiNode vslot +0x84 = NiNode::AddObject(child, firstAvailableSlot=1). Prn is not involved; ArrowBone's child array becomes the persistent owner and no separate clone pointer is stored.
 0x5FD03D: mov     ecx, ebp
 0x5FD03F: call    eax
 0x5FD041: cmp     esi, ds:0B333C4h
 0x5FD047: jnz     loc_5FD0DB
-0x5FD04D: call    GetGodMode
+0x5FD04D: call    GetGodMode; Returns g_godModeEnabled (0x00B3BB06).
 0x5FD052: test    al, al
 0x5FD054: jnz     loc_5FD0DB
 0x5FD05A: mov     ecx, [esi+58h]
@@ -452,59 +451,59 @@
 0x5FD065: push    1
 0x5FD067: call    eax
 0x5FD069: mov     eax, [eax+8]
-0x5FD06C: push    eax
-0x5FD06D: mov     ecx, esi
-0x5FD06F: call    TESObjectREF_GetItemCount
-0x5FD074: cmp     eax, 1
+0x5FD06C: push    eax; item
+0x5FD06D: mov     ecx, esi; this
+0x5FD06F: call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).
+0x5FD074: cmp     eax, 1; Player-only nongod-mode quiver visualization: inspect AMMO inventory count after attaching the held clone. Count 1 selects source Arrow:0 for hiding.
 0x5FD077: jnz     short loc_5FD07F
 0x5FD079: mov     edi, ebx
 0x5FD07B: xor     ebx, ebx
 0x5FD07D: jmp     short loc_5FD0D2
-0x5FD07F: cmp     eax, ds:0B35588h
+0x5FD07F: cmp     eax, ds:0B35588h; If inventory count is <= iMaxArrowsInQuiver, select Quiver child name Arrow(count-1); counts above the display cap do not hide an individual mesh here.
 0x5FD085: jg      short loc_5FD0DB
 0x5FD087: xor     ebx, ebx
-0x5FD089: mov     dword ptr [esp+74h+var_28+4], ebx
+0x5FD089: mov     [esp+74h+originX+4], ebx
 0x5FD08D: mov     word ptr [esp+74h+var_20], bx
 0x5FD092: mov     word ptr [esp+74h+var_20+2], bx
 0x5FD097: add     eax, 0FFFFFFFFh
 0x5FD09A: push    eax
-0x5FD09B: lea     ecx, [esp+78h+var_28+4]
+0x5FD09B: lea     ecx, [esp+78h+originX+4]
 0x5FD09F: push    offset aArrowD; "Arrow%d"
 0x5FD0A4: push    ecx
 0x5FD0A5: mov     [esp+80h+var_4], ebx
 0x5FD0A9: call    BSStringT_Static_Format
 0x5FD0AE: mov     edx, [edi]
-0x5FD0B0: mov     eax, dword ptr [esp+80h+var_28+4]
+0x5FD0B0: mov     eax, [esp+80h+originX+4]
 0x5FD0B4: mov     edx, [edx+58h]
 0x5FD0B7: add     esp, 0Ch
 0x5FD0BA: push    eax
 0x5FD0BB: mov     ecx, edi
 0x5FD0BD: call    edx
-0x5FD0BF: lea     ecx, [esp+74h+var_28+4]; void *
+0x5FD0BF: lea     ecx, [esp+74h+originX+4]; void *
 0x5FD0C3: mov     edi, eax
 0x5FD0C5: mov     [esp+74h+var_4], 0FFFFFFFFh
 0x5FD0CD: call    BSStringT_Clear
 0x5FD0D2: cmp     edi, ebx
 0x5FD0D4: jz      short loc_5FD0DB
-0x5FD0D6: or      word ptr [edi+18h], 1
+0x5FD0D6: or      word ptr [edi+18h], 1; Set bit 0 at selected quiver child's flags +0x18, visually hiding one quiver arrow to reflect the nocked item. This does not decrement inventory.
 0x5FD0DB: sub     dword ptr [esp+74h+var_48], 1
 0x5FD0E0: jnz     loc_5FCFB0
 0x5FD0E6: mov     ecx, [esi+58h]
 0x5FD0E9: mov     eax, [ecx]
 0x5FD0EB: mov     edx, [eax+2D4h]
 0x5FD0F1: call    edx
-0x5FD0F3: push    eax
-0x5FD0F4: push    5
-0x5FD0F6: mov     ecx, esi
-0x5FD0F8: call    HighPRocess_DoAction?????
+0x5FD0F3: push    eax; sequence
+0x5FD0F4: push    5; action
+0x5FD0F6: mov     ecx, esi; this
+0x5FD0F8: call    Actor_SetCurrentActionWithBowVisualCleanup; After cloning Quiver Arrow:0 into ArrowBone, request action 4 -> 5 (AttackBowArrowAttached). This Attach boundary establishes the native held/cocked visual state.
 0x5FD0FD: mov     ebp, [esp+74h+var_3C]
 0x5FD101: jmp     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FD106: mov     ecx, [esp+74h+var_60]; jumptable 005FCBFE case 5
-0x5FD10A: push    3
-0x5FD10C: call    ActorAnimData_GetSomethingFromField8Value
+0x5FD10A: push    3; slot
+0x5FD10C: call    ActorAnimData_GetSlotActionState; Current action 5 (AttackBowArrowAttached) executes native Release only at exact slot-3 state 3, after the Release note. Hold/state 2 and End/state 4 have no release branch.
 0x5FD111: cmp     eax, 3
 0x5FD114: jnz     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FD11A: mov     ecx, ds:0B3F9ACh
+0x5FD11A: mov     ecx, ds:0B3F9ACh; Initialize the native AttackBow Release projectile origin from g_zeroNiPoint3. This BSS NiPoint3 has no write xrefs and supplies (0,0,0); a later successful ArrowBone child-0 lookup must replace it with the held clone's world translation.
 0x5FD120: mov     eax, ds:0B3F9A8h
 0x5FD125: mov     edx, ds:0B3F9B0h
 0x5FD12B: mov     [esp+74h+var_14], ecx
@@ -519,14 +518,13 @@
 0x5FD155: mov     ebx, [esp+74h+var_40]
 0x5FD159: jmp     short loc_5FD166
 0x5FD15B: jmp     short loc_5FD160
-0x5FD15D: align 10h
-0x5FD160: mov     ecx, ds:0B333C4h
+0x5FD160: mov     ecx, ds:0B333C4h; this
 0x5FD166: cmp     esi, ecx
 0x5FD168: jnz     short loc_5FD17E
 0x5FD16A: cmp     dword ptr [esp+74h+var_48], 1
 0x5FD16F: jnz     short loc_5FD17E
-0x5FD171: push    1
-0x5FD173: call    sub_6600D0
+0x5FD171: push    1; firstPerson
+0x5FD173: call    Actor_GetSkinInfoByPerspective; On the second player perspective pass, replace the default ActorSkinInfo with PlayerCharacter+0x5C8 first-person skin info. The following process vtable +0x12C call uses this skin context to select the corresponding ArrowBone cache; this is not ActorAnimData.
 0x5FD178: mov     ebx, eax
 0x5FD17A: mov     [esp+74h+var_40], ebx
 0x5FD17E: mov     ecx, [esi+58h]
@@ -542,27 +540,27 @@
 0x5FD19F: push    ebx
 0x5FD1A0: call    edx
 0x5FD1A2: mov     ebp, eax
-0x5FD1A4: push    0
-0x5FD1A6: mov     ecx, ebp
-0x5FD1A8: call    sub_405790
+0x5FD1A4: push    0; index
+0x5FD1A6: mov     ecx, ebp; this
+0x5FD1A8: call    NiNode_GetChildAtIndex; Get ArrowBone child 0 before cleanup. The child is the held Arrow:0 clone attached at the Attach note.
 0x5FD1AD: mov     edi, eax
 0x5FD1AF: test    edi, edi
 0x5FD1B1: jz      loc_5FD243
 0x5FD1B7: mov     eax, [edi]
-0x5FD1B9: mov     edx, [eax+74h]
+0x5FD1B9: mov     edx, [eax+74h]; Held Arrow:0 child virtual +0x74 resolves to NiAVObject_UpdateWorldTransform. This is the actual local-to-world conversion performed immediately before sampling release origin.
 0x5FD1BC: mov     ecx, edi
 0x5FD1BE: call    edx
-0x5FD1C0: mov     ecx, ds:0B333C4h
+0x5FD1C0: mov     ecx, ds:0B333C4h; Invoke held clone virtual +0x74 before reading its world transform; ensures the sampled transform is current.
 0x5FD1C6: cmp     esi, ecx
 0x5FD1C8: jnz     short loc_5FD204
-0x5FD1CA: push    1
+0x5FD1CA: push    1; firstPerson
 0x5FD1CC: xor     bl, bl
-0x5FD1CE: call    PlayerCharacter_GetPlayerNode
+0x5FD1CE: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x5FD1D3: test    eax, eax
 0x5FD1D5: jz      short loc_5FD1EC
-0x5FD1D7: mov     ecx, ds:0B333C4h
-0x5FD1DD: push    1
-0x5FD1DF: call    PlayerCharacter_GetPlayerNode
+0x5FD1D7: mov     ecx, ds:0B333C4h; this
+0x5FD1DD: push    1; firstPerson
+0x5FD1DF: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x5FD1E4: test    byte ptr [eax+18h], 1
 0x5FD1E8: jz      short loc_5FD1EC
 0x5FD1EA: mov     bl, 1
@@ -576,8 +574,8 @@
 0x5FD1FE: jnz     short loc_5FD222
 0x5FD200: test    bl, bl
 0x5FD202: jz      short loc_5FD222
-0x5FD204: mov     eax, [edi+88h]
-0x5FD20A: mov     ecx, [edi+8Ch]
+0x5FD204: mov     eax, [edi+88h]; Read held child world translation X/Y/Z at +0x88/+0x8C/+0x90 after virtual +0x74 updated its world transform. Only these three position floats become projectile origin; child rotation and scale are not passed. External Crossbow contrast: a custom attachment topology without ArrowBone child 0 cannot supply this native origin.
+0x5FD20A: mov     ecx, [edi+8Ch]; Select release origin from the visible player perspective: if the first-person player root is app-culled, sample third-person; otherwise sample first-person. Non-player actors sample their sole active context.
 0x5FD210: mov     edx, [edi+90h]
 0x5FD216: mov     [esp+74h+a2], eax
 0x5FD21A: mov     [esp+74h+var_14], ecx
@@ -585,45 +583,45 @@
 0x5FD222: push    0
 0x5FD224: call    GetShadowSceneNode
 0x5FD229: add     esp, 4
-0x5FD22C: push    ebp
-0x5FD22D: mov     ecx, eax
-0x5FD22F: call    sub_7C5E70
-0x5FD234: lea     ecx, [ebp+0ACh]
-0x5FD23A: call    sub_477EF0
+0x5FD22C: push    ebp; object
+0x5FD22D: mov     ecx, eax; this
+0x5FD22F: call    ShadowSceneNode_RemoveObjectReceivers; Remove ArrowBone subtree geometry from shadow receiver lists only; this call does not detach the held clone.
+0x5FD234: lea     ecx, [ebp+0ACh]; this
+0x5FD23A: call    NiTObjectArray_ClearAndRelease; Normal AttackBow Release visual boundary: after optionally sampling ArrowBone child-0 world translation, clear/release every child in ArrowBone's NiTArray at +0xAC. Both available player perspective targets are cleared; visibility controls only which perspective supplies origin. A missing target or child 0 skips this pass. 0x5F0182 is defensive transition cleanup.
 0x5FD23F: mov     ebx, [esp+74h+var_40]
 0x5FD243: sub     dword ptr [esp+74h+var_48], 1
 0x5FD248: jnz     loc_5FD160
 0x5FD24E: mov     eax, [esi]
 0x5FD250: mov     edx, [eax+1E0h]
 0x5FD256: mov     ecx, esi
-0x5FD258: call    edx
+0x5FD258: call    edx; Actor vtable +0x1E0 returns float launch yawZ: base Actor/MobileObject uses rotation.z; Player override adds PlayerCharacter+0x61C and single-wraps by 2*pi. Stored directly as one dword.
 0x5FD25A: fstp    dword ptr [esp+74h+var_30]
-0x5FD25E: mov     ecx, esi
-0x5FD260: call    sub_4A9720
+0x5FD25E: mov     ecx, esi; this
+0x5FD260: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x5FD265: fstp    [esp+74h+var_34]
 0x5FD269: fld1
 0x5FD26B: mov     eax, ds:0B333C4h
 0x5FD270: cmp     esi, eax
 0x5FD272: fstp    dword ptr [esp+74h+var_48]
 0x5FD276: jnz     short loc_5FD2C6
-0x5FD278: fld     dword ptr [eax+640h]
-0x5FD27E: mov     ecx, offset fArrowBowTimerMult
+0x5FD278: fld     dword ptr [eax+640h]; Player draw strength input: PlayerCharacter+0x640 * fArrowBowTimerMult (setting storage 0xB37088) + fArrowBowTimerBase (0xB37080). NPC attackStrength remains 1.0.
+0x5FD27E: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3B0h)
 0x5FD283: fstp    dword ptr [esp+74h+var_30+4]
 0x5FD287: call    GameSetting_GetSafeFloatPointer
 0x5FD28C: fld     dword ptr [esp+74h+var_30+4]
-0x5FD290: mov     ecx, offset fArrowBowTimerBase
+0x5FD290: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3A8h)
 0x5FD295: fmul    dword ptr [eax]
-0x5FD297: fstp    [esp+74h+var_28+4]
+0x5FD297: fstp    qword ptr [esp+74h+originX+4]
 0x5FD29B: call    GameSetting_GetSafeFloatPointer
 0x5FD2A0: fld     dword ptr [eax]
 0x5FD2A2: sub     esp, 8
-0x5FD2A5: fadd    [esp+7Ch+var_28+4]
+0x5FD2A5: fadd    qword ptr [esp+7Ch+originX+4]
 0x5FD2A9: fstp    dword ptr [esp+7Ch+var_30+4]
 0x5FD2AD: fld     dword ptr [esp+7Ch+var_30+4]
-0x5FD2B1: fstp    [esp+7Ch+duration]
+0x5FD2B1: fstp    [esp+7Ch+duration]; b
 0x5FD2B5: fld1
-0x5FD2B7: fstp    [esp+7Ch+var_7C]
-0x5FD2BA: call    sub_4AC760
+0x5FD2B7: fstp    [esp+7Ch+a]; a
+0x5FD2BA: call    Float_Min; Clamp native player attackStrength to min(1.0, timer*multiplier+base) using Float_Min; NPC remains 1.0. The value is passed to ArrowProjectile_ConstructFromShot. External bridge contrast: supplying a hardcoded 1.0 forces full native strength and bypasses player draw-time scaling.
 0x5FD2BF: fstp    dword ptr [esp+7Ch+var_48]
 0x5FD2C3: add     esp, 8
 0x5FD2C6: mov     ecx, [esi+58h]
@@ -641,15 +639,15 @@
 0x5FD2E8: cmp     ebp, ebx
 0x5FD2EA: mov     edi, eax
 0x5FD2EC: mov     [esp+74h+var_38], edi
-0x5FD2F0: jz      loc_5FD53E
+0x5FD2F0: jz      loc_5FD53E; Missing equipped AMMO EntryData: skip projectile construction/insertion and the entire native post-shot side-effect tail, then still proceed to the requested action 5->3 boundary.
 0x5FD2F6: cmp     edi, ebx
-0x5FD2F8: jz      loc_5FD53E
-0x5FD2FE: mov     ecx, [ebp+8]
+0x5FD2F8: jz      loc_5FD53E; Missing equipped WEAP EntryData: skip projectile construction/insertion and the entire native post-shot side-effect tail, then still request action 5->3.
+0x5FD2FE: mov     ecx, [ebp+8]; Begin quest-item check on equipped AMMO instance data. Quest-item ammo is not fired by this path.
 0x5FD301: mov     eax, [ecx]
 0x5FD303: mov     edx, [eax+78h]
 0x5FD306: call    edx
 0x5FD308: test    al, al
-0x5FD30A: jnz     loc_5FD53E
+0x5FD30A: jnz     loc_5FD53E; Quest-item AMMO gate: skip constructor, manager insertion, ammo virtual, fatigue, INVI purge, and condition damage; still fall through to the action 5->3 request.
 0x5FD310: mov     eax, [ebp+8]
 0x5FD313: cmp     eax, ebx
 0x5FD315: mov     [esp+74h+var_40], ebx
@@ -674,7 +672,7 @@
 0x5FD354: test    ebx, ebx
 0x5FD356: jz      short loc_5FD363
 0x5FD358: mov     ecx, ebx
-0x5FD35A: call    sub_6135F0
+0x5FD35A: call    CombatController_GetCurrentTarget
 0x5FD35F: mov     edi, eax
 0x5FD361: jmp     short loc_5FD365
 0x5FD363: xor     edi, edi
@@ -684,14 +682,14 @@
 0x5FD36D: fld     dword ptr [eax+7Ch]
 0x5FD370: jmp     short loc_5FD374
 0x5FD372: fld1
-0x5FD374: mov     ecx, offset flt_B37040
+0x5FD374: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+368h)
 0x5FD379: fstp    [esp+74h+var_40]
 0x5FD37D: call    GameSetting_GetSafeFloatPointer
 0x5FD382: fld     [esp+74h+var_40]
 0x5FD386: fmul    dword ptr [eax]
 0x5FD388: push    esi
-0x5FD389: fstp    dword ptr [esp+78h+var_28+4]
-0x5FD38D: call    sub_608280
+0x5FD389: fstp    [esp+78h+originX+4]
+0x5FD38D: call    Actor_CalculateArrowGravity; NPC bow path calculates gravity compensation and may predict an aim point from combat target motion before projectile construction.
 0x5FD392: add     esp, 4
 0x5FD395: fstp    [esp+74h+var_40]
 0x5FD399: test    edi, edi
@@ -702,92 +700,92 @@
 0x5FD3AB: mov     edx, [esp+74h+var_14]
 0x5FD3AF: push    eax
 0x5FD3B0: sub     esp, 8
-0x5FD3B3: fstp    [esp+80h+var_7C]
-0x5FD3B7: fld     dword ptr [esp+80h+var_28+4]
-0x5FD3BB: fstp    [esp+80h+var_80]
+0x5FD3B3: fstp    [esp+80h+a]
+0x5FD3B7: fld     [esp+80h+originX+4]
+0x5FD3BB: fstp    [esp+80h+attackStrength]
 0x5FD3BE: push    edi
 0x5FD3BF: sub     esp, 0Ch
 0x5FD3C2: mov     eax, esp
 0x5FD3C4: mov     [eax], ecx
 0x5FD3C6: mov     ecx, [esp+90h+var_10]
 0x5FD3CD: mov     [eax+4], edx
-0x5FD3D0: lea     edx, [esp+90h+var_28+4]
-0x5FD3D4: push    edx
+0x5FD3D0: lea     edx, [esp+90h+originX+4]
+0x5FD3D4: push    edx; originX
 0x5FD3D5: mov     [eax+8], ecx
-0x5FD3D8: call    sub_6159C0
-0x5FD3DD: fld     dword ptr [esp+94h+var_28+4]
+0x5FD3D8: call    Combat_PredictAimPoint_Setup
+0x5FD3DD: fld     [esp+94h+originX+4]
 0x5FD3E1: fstp    [esp+94h+var_34]
 0x5FD3E5: add     esp, 20h
 0x5FD3E8: fld     [esp+74h+var_1C]
 0x5FD3EC: fstp    dword ptr [esp+74h+var_30]
 0x5FD3F0: mov     edi, [esp+74h+var_38]
-0x5FD3F4: mov     ecx, esi
-0x5FD3F6: call    Actor_IsSwimming
+0x5FD3F4: mov     ecx, esi; this
+0x5FD3F6: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x5FD3FB: test    al, al
 0x5FD3FD: jz      short loc_5FD40D
 0x5FD3FF: fld     dword ptr [esp+74h+var_48]
 0x5FD403: fmul    qword ptr ds:0A2FC80h
 0x5FD409: fstp    dword ptr [esp+74h+var_48]
-0x5FD40D: mov     eax, ds:0B333C4h
+0x5FD40D: mov     eax, ds:0B333C4h; Player-only byte +0x5C0 gates the native shot transaction. Its behavior is proven here but its semantic identity remains unnamed.
 0x5FD412: cmp     esi, eax
 0x5FD414: jnz     short loc_5FD423
 0x5FD416: cmp     byte ptr [eax+5C0h], 0
-0x5FD41D: jnz     loc_5FD53E
+0x5FD41D: jnz     loc_5FD53E; When PlayerCharacter+0x5C0 is nonzero, skip constructor/insertion and all post-shot side effects, but still request action 5->3.
 0x5FD423: push    9Ch ; 'œ'; Size
 0x5FD428: call    FormHeapAlloc
 0x5FD42D: add     esp, 4
-0x5FD430: mov     dword ptr [esp+74h+var_28+4], eax
+0x5FD430: mov     [esp+74h+originX+4], eax
 0x5FD434: test    eax, eax
 0x5FD436: mov     [esp+74h+var_4], 1
-0x5FD43E: jz      short loc_5FD483
+0x5FD43E: jz      short loc_5FD483; Outer 0x9C ArrowProjectile allocation failed. No constructor or manager insertion occurs, but control still joins the native post-shot tail, so ammo/fatigue/INVI/condition/action side effects can still run.
 0x5FD440: fld     dword ptr [esp+74h+var_48]
 0x5FD444: mov     ecx, [esp+74h+a2]
-0x5FD448: push    edi
-0x5FD449: push    ebp
+0x5FD448: push    edi; weaponEntry
+0x5FD449: push    ebp; ammoEntry
 0x5FD44A: sub     esp, 18h
-0x5FD44D: fstp    [esp+94h+var_80]
+0x5FD44D: fstp    [esp+94h+attackStrength]; attackStrength
 0x5FD451: mov     edx, esp
 0x5FD453: fld     [esp+94h+var_34]
-0x5FD457: fstp    [esp+94h+var_84]
+0x5FD457: fstp    [esp+94h+pitchX]; pitchX
 0x5FD45B: fld     dword ptr [esp+94h+var_30]
-0x5FD45F: fstp    [esp+94h+var_88]
+0x5FD45F: fstp    [esp+94h+yawZ]; yawZ
 0x5FD463: mov     [edx], ecx
 0x5FD465: mov     ecx, [esp+94h+var_14]
 0x5FD46C: mov     [edx+4], ecx
 0x5FD46F: mov     ecx, [esp+94h+var_10]
 0x5FD476: mov     [edx+8], ecx
-0x5FD479: push    esi
-0x5FD47A: mov     ecx, eax
-0x5FD47C: call    sub_60C940
+0x5FD479: push    esi; shooter
+0x5FD47A: mov     ecx, eax; this
+0x5FD47C: call    ArrowProjectile_ConstructFromShot; Construct an independent ArrowProjectile from equipped AMMO and WEAP data after held-arrow visual removal. Native ArrowProjectile_ConstructFromShot returns placement this on normal completion and has no recoverable null-return branch; the caller's null path meaningfully covers outer allocation failure or a replacement hook.
 0x5FD481: jmp     short loc_5FD485
 0x5FD483: xor     eax, eax
-0x5FD485: test    eax, eax
+0x5FD485: test    eax, eax; Native projectile construction result gate. Non-null proceeds to generic level-0 ActorProcessManager insertion; null skips insertion but still reaches the post-shot virtual at 0x5FD4AE.
 0x5FD487: mov     [esp+74h+var_4], 0FFFFFFFFh
 0x5FD48F: jz      short loc_5FD4A4
-0x5FD491: push    0
-0x5FD493: push    0
-0x5FD495: push    0
-0x5FD497: push    0
-0x5FD499: push    eax
-0x5FD49A: mov     ecx, offset ActorProcessManager_ptr
-0x5FD49F: call    sub_673A90
-0x5FD4A4: mov     edx, [esi]
+0x5FD491: push    0; relativeTo
+0x5FD493: push    0; insertRelative
+0x5FD495: push    0; append
+0x5FD497: push    0; processLevel
+0x5FD499: push    eax; object
+0x5FD49A: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x5FD49F: call    ActorProcessManager_AddMobileObject; Attempts generic level-0 insertion of the non-null projectile into the inline ActorProcessManager at 0x00B3BD00. The callee returns void and can silently reject a process-level mismatch, so this call establishes no success predicate.
+0x5FD4A4: mov     edx, [esi]; Post-shot join is reached after either a nonnull projectile insertion attempt or a null constructor/allocation result. Everything through the final action 5->3 transition below is therefore not a projectile-success predicate.
 0x5FD4A6: mov     eax, [edx+2E8h]
 0x5FD4AC: mov     ecx, esi
-0x5FD4AE: call    eax
-0x5FD4B0: push    1Ch
-0x5FD4B2: mov     ecx, esi
-0x5FD4B4: call    Actor_GetSkillMasteryLevel
+0x5FD4AE: call    eax; Always-invoked native post-shot virtual after the construction/insertion branch. Base Actor target is no-op 0x0060D0A0; PlayerCharacter override 0x00662590 consumes one equipped AMMO item. Native ordering is construct -> optional insertion attempt -> post-shot virtual, not 'consume only after confirmed insertion'.
+0x5FD4B0: push    1Ch; actorValue
+0x5FD4B2: mov     ecx, esi; this
+0x5FD4B4: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5FD4B9: test    eax, eax
 0x5FD4BB: jnz     short loc_5FD4D6
-0x5FD4BD: mov     ecx, offset unk_B37020
+0x5FD4BD: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+348h)
 0x5FD4C2: call    GameSetting_GetSafeFloatPointer
 0x5FD4C7: fld     dword ptr [eax]
 0x5FD4C9: push    ecx
 0x5FD4CA: fchs
-0x5FD4CC: mov     ecx, esi
-0x5FD4CE: fstp    [esp+78h+duration]
-0x5FD4D1: call    Actor_ModFatigue?
+0x5FD4CC: mov     ecx, esi; this
+0x5FD4CE: fstp    [esp+78h+duration]; delta
+0x5FD4D1: call    Actor_ApplyNegativeFatigueDeltaClamped; Only Marksman mastery 0 (novice) pays fMarksmanFatigueBurnPerShot here; the setting is negated and clamped by Actor_ApplyNegativeFatigueDeltaClamped.
 0x5FD4D6: mov     edx, [esi]
 0x5FD4D8: mov     eax, [edx+284h]
 0x5FD4DE: push    2Fh ; '/'
@@ -795,57 +793,57 @@
 0x5FD4E2: call    eax
 0x5FD4E4: test    eax, eax
 0x5FD4E6: jle     short loc_5FD4F7
-0x5FD4E8: push    0
-0x5FD4EA: push    49564E49h
-0x5FD4EF: lea     ecx, [esi+68h]
-0x5FD4F2: call    sub_6A24B0
+0x5FD4E8: push    0; casterFilterOrNull
+0x5FD4EA: push    49564E49h; effectCode
+0x5FD4EF: lea     ecx, [esi+68h]; this
+0x5FD4F2: call    MagicTarget_RemoveActiveEffectsByCode; If Invisibility AV 0x2F is positive, remove all nonterminated 'INVI' active effects from any caster. Ordinary attack startup already performs the same purge at 0x5F49FA; release repeats the check.
 0x5FD4F7: mov     ecx, dword ptr [esp+74h+var_30+4]
 0x5FD4FB: mov     edx, [ecx+88h]
 0x5FD501: mov     eax, [edx+10h]
 0x5FD504: add     ecx, 88h ; 'ˆ'
 0x5FD50A: call    eax
 0x5FD50C: movzx   ecx, ax
-0x5FD50F: mov     dword ptr [esp+74h+var_28+4], ecx
+0x5FD50F: mov     [esp+74h+originX+4], ecx
 0x5FD513: push    ecx
-0x5FD514: fild    dword ptr [esp+78h+var_28+4]
-0x5FD518: fstp    [esp+78h+duration]
-0x5FD51B: call    Calc_DamageToWeapon
+0x5FD514: fild    [esp+78h+originX+4]
+0x5FD518: fstp    [esp+78h+duration]; baseAttackDamage
+0x5FD51B: call    Calc_WeaponConditionDamagePerShot; Convert WEAP UInt16 attack damage to per-shot condition damage using fDamageToWeaponPercentage.
 0x5FD520: mov     edx, [esi]
-0x5FD522: fstp    dword ptr [esp+78h+var_28+4]
-0x5FD526: fld     dword ptr [esp+78h+var_28+4]
+0x5FD522: fstp    [esp+78h+originX+4]
+0x5FD526: fld     [esp+78h+originX+4]
 0x5FD52A: mov     eax, [edx+2C4h]
 0x5FD530: add     esp, 4
 0x5FD533: push    0
 0x5FD535: push    ecx
-0x5FD536: fstp    [esp+7Ch+var_7C]
+0x5FD536: fstp    [esp+7Ch+a]
 0x5FD539: push    edi
 0x5FD53A: mov     ecx, esi
-0x5FD53C: call    eax
-0x5FD53E: mov     ecx, [esi+58h]
+0x5FD53C: call    eax; Actor vtable +0x2C4 applies condition damage to the weapon EntryData. Base target 0x5F3870 may break/unequip at zero; Player override 0x65FF10 suppresses mutation in god mode.
+0x5FD53E: mov     ecx, [esi+58h]; Action-only join. Preconditions that reject the shot arrive here without construction, insertion, ammo consumption, fatigue, INVI purge, or weapon-condition damage; native code still requests action 5->3 if a process exists.
 0x5FD541: mov     edx, [ecx]
 0x5FD543: mov     eax, [edx+2D4h]
 0x5FD549: call    eax
-0x5FD54B: push    eax
-0x5FD54C: push    3
-0x5FD54E: mov     ecx, esi
-0x5FD550: call    HighPRocess_DoAction?????
+0x5FD54B: push    eax; sequence
+0x5FD54C: push    3; action
+0x5FD54E: mov     ecx, esi; this
+0x5FD550: call    Actor_SetCurrentActionWithBowVisualCleanup; After the complete native Release tail, retain slot-3 sequence and request action 5 -> 3 (AttackFollowThrough). This runs even when projectile allocation was null or manager insertion silently rejected, so observing 5->3 proves an action boundary, not projectile success.
 0x5FD555: mov     ebp, [esp+74h+var_3C]
-0x5FD559: jmp     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
+0x5FD559: jmp     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; Action 3 is handled by Actor_ProcessAction's default update path; there is no dedicated follow-through case that starts another bow group or clears the process action.
 0x5FD55E: mov     ecx, [esi+58h]; jumptable 005FCBFE cases 0,1
 0x5FD561: mov     edx, [ecx]
 0x5FD563: mov     eax, [edx+304h]
 0x5FD569: call    eax
 0x5FD56B: mov     ecx, esi
 0x5FD56D: movzx   ebx, al
-0x5FD570: call    Actor_GetCurrentAction
+0x5FD570: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FD575: neg     eax
 0x5FD577: sbb     eax, eax
 0x5FD579: add     eax, 1
 0x5FD57C: cmp     ebx, eax
 0x5FD57E: jz      Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FD584: mov     ecx, [esp+74h+var_60]
-0x5FD588: push    3
-0x5FD58A: call    ActorAnimData_GetSomethingFromField8Value
+0x5FD584: mov     ecx, [esp+74h+var_60]; this
+0x5FD588: push    3; slot
+0x5FD58A: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x5FD58F: cmp     eax, 1
 0x5FD592: jl      Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FD598: cmp     esi, ds:0B333C4h
@@ -858,7 +856,7 @@
 0x5FD5B5: mov     edi, [ecx]
 0x5FD5B7: mov     ecx, esi
 0x5FD5B9: add     edi, 308h
-0x5FD5BF: call    Actor_GetCurrentAction
+0x5FD5BF: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FD5C4: mov     ecx, [esi+58h]
 0x5FD5C7: test    eax, eax
 0x5FD5C9: mov     eax, [edi]
@@ -872,12 +870,12 @@
 0x5FD5DD: jnz     short loc_5FD5FC
 0x5FD5DF: cmp     ebp, 1
 0x5FD5E2: jnz     short loc_5FD5FC
-0x5FD5E4: push    ebp; a2
-0x5FD5E5: call    Player_GetAnimData
-0x5FD5EA: mov     ecx, ds:0B333C4h
-0x5FD5F0: push    ebp
+0x5FD5E4: push    ebp; firstPerson
+0x5FD5E5: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
+0x5FD5EA: mov     ecx, ds:0B333C4h; this
+0x5FD5F0: push    ebp; firstPerson
 0x5FD5F1: mov     ebx, eax
-0x5FD5F3: call    sub_6600D0
+0x5FD5F3: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x5FD5F8: mov     dword ptr [esp+74h+var_30+4], eax
 0x5FD5FC: mov     ecx, [esi+58h]
 0x5FD5FF: mov     edi, [ecx]
@@ -887,7 +885,7 @@
 0x5FD607: push    edx
 0x5FD608: mov     ecx, esi
 0x5FD60A: add     edi, 150h
-0x5FD610: call    Actor_GetCurrentAction
+0x5FD610: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FD615: mov     ecx, [esi+58h]
 0x5FD618: mov     edx, [edi]
 0x5FD61A: test    eax, eax
@@ -920,10 +918,10 @@
 0x5FD668: mov     eax, [ecx]
 0x5FD66A: mov     edx, [eax+41Ch]
 0x5FD670: call    edx
-0x5FD672: push    eax
-0x5FD673: push    esi
-0x5FD674: mov     ecx, offset ActorProcessManager_ptr
-0x5FD679: call    sub_679240
+0x5FD672: push    eax; effectShader
+0x5FD673: push    esi; targetReference
+0x5FD674: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x5FD679: call    ActorProcessManager_FindWeaponEnchantmentShader; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect, then filters by targetReference, bWeaponEnchantment_28, bFinished and TESEffectShader pointer. It keeps one match and marks duplicate/different-shader entries finished. Fallout's analogous ProcessLists routine uses a distinct NiShader collection; Oblivion uses ActorProcessManager::extendedTempEffects.
 0x5FD67E: test    eax, eax
 0x5FD680: jz      short loc_5FD689
 0x5FD682: mov     ecx, eax
@@ -969,8 +967,8 @@
 0x5FD6F7: mov     eax, [edx+0ECh]
 0x5FD6FD: push    1
 0x5FD6FF: call    eax
-0x5FD701: mov     ecx, eax
-0x5FD703: call    sub_484DF0
+0x5FD701: mov     ecx, eax; this
+0x5FD703: call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.
 0x5FD708: test    eax, eax
 0x5FD70A: jz      short Actor_ProcessAction___def_5FD71D; jumptable 005FD71D default case
 0x5FD70C: add     eax, 24h ; '$'
@@ -999,14 +997,14 @@
 0x5FD75B: push    0
 0x5FD75D: push    offset aWpnblunt2hande; "WPNBlunt2HandEquipEnchanted"
 0x5FD762: mov     ecx, esi
-0x5FD764: call    sub_65A970
+0x5FD764: call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
 0x5FD769: mov     edi, eax
 0x5FD76B: test    edi, edi
 0x5FD76D: jz      short Actor_ProcessAction___def_5FD71D; jumptable 005FD71D default case
 0x5FD76F: mov     ecx, edi; this
 0x5FD771: call    sub_6B73E0
 0x5FD776: push    edi
-0x5FD777: call    FormHeapFree
+0x5FD777: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5FD77C: add     esp, 4
 0x5FD77F: push    0; jumptable 005FD71D default case
 0x5FD781: push    0
@@ -1020,9 +1018,9 @@
 0x5FD79A: call    eax
 0x5FD79C: test    eax, eax
 0x5FD79E: jnz     short Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FD7A0: mov     ecx, dword ptr [esp+74h+var_28]
+0x5FD7A0: mov     ecx, [esp+74h+originX]
 0x5FD7A4: add     ecx, 1E0h
-0x5FD7AA: call    sub_88D370
+0x5FD7AA: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x5FD7AF: sub     eax, 0
 0x5FD7B2: jz      loc_5FD862
 0x5FD7B8: sub     eax, 1
@@ -1032,25 +1030,25 @@
 0x5FD7C2: test    ebp, ebp
 0x5FD7C4: jz      short Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
 0x5FD7C6: mov     ecx, [ebp+68h]
-0x5FD7C9: call    TESAnimGroup_GetAnimationGroup
+0x5FD7C9: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5FD7CE: cmp     eax, 29h ; ')'
 0x5FD7D1: jnz     short Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FD7D3: push    0
-0x5FD7D5: push    0FFFFFFFFh
-0x5FD7D7: mov     ecx, esi
-0x5FD7D9: call    HighPRocess_DoAction?????
+0x5FD7D3: push    0; sequence
+0x5FD7D5: push    0FFFFFFFFh; action
+0x5FD7D7: mov     ecx, esi; this
+0x5FD7D9: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x5FD7DE: mov     edx, [esi]; jumptable 005FCBFE default case, cases 3,6-8
 0x5FD7E0: mov     eax, [edx+214h]
 0x5FD7E6: mov     ecx, esi
 0x5FD7E8: call    eax
-0x5FD7EA: mov     edi, [esp+74h+var_58]
+0x5FD7EA: mov     edi, [esp+74h+action]
 0x5FD7EE: mov     ebx, eax
 0x5FD7F0: test    ebx, ebx
 0x5FD7F2: jz      loc_5FD8FB
 0x5FD7F8: cmp     edi, 0FFFFFFFFh
 0x5FD7FB: jnz     loc_5FDB2C
 0x5FD801: mov     ecx, esi
-0x5FD803: call    Actor_GetCurrentAction
+0x5FD803: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FD808: cmp     eax, 2
 0x5FD80B: jl      short loc_5FD816
 0x5FD80D: cmp     eax, 5
@@ -1072,8 +1070,8 @@
 0x5FD83B: push    eax
 0x5FD83C: mov     eax, [edi+39Ch]
 0x5FD842: mov     ecx, esi
-0x5FD844: call    eax
-0x5FD846: mov     edi, [esp+74h+var_58]
+0x5FD844: call    eax; Repeated action award: AV resolved by Actor vfunc +0x21C, useValue0, identity scale (0.0); 0x48 sentinel is rejected.
+0x5FD846: mov     edi, [esp+74h+action]
 0x5FD84A: sub     ebx, 1
 0x5FD84D: jnz     short loc_5FD816
 0x5FD84F: mov     edx, [esi]
@@ -1097,30 +1095,30 @@
 0x5FD88B: test    ebp, ebp
 0x5FD88D: jz      loc_5FD7D3
 0x5FD893: mov     ecx, [ebp+68h]
-0x5FD896: call    TESAnimGroup_GetAnimationGroup
+0x5FD896: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5FD89B: cmp     eax, 2Ah ; '*'
 0x5FD89E: jmp     loc_5FD7D1
 0x5FD8A3: mov     ecx, esi; jumptable 005FCBFE case 9
-0x5FD8A5: call    sub_5E3590
+0x5FD8A5: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5FD8AA: fstp    [esp+74h+var_54]
 0x5FD8AE: jmp     Actor_ProcessAction___Actor_UpdateAnim?_DefaultAction; jumptable 005FCBFE default case, cases 3,6-8
-0x5FD8B3: mov     ecx, esi
-0x5FD8B5: call    Actor_GetCurrentAction
+0x5FD8B3: mov     ecx, esi; Post-sequence guard tail shared by missing/finished-sequence checks. The external throwing bridge resumes here after its handled class-4 projectile transaction, bypassing native melee handling—but it also bypasses the native bow post-shot tail at 0x5FD4AE..0x5FD550. Unless recreated, that custom path has no post-shot AMMO virtual, novice Marksman fatigue burn, Release-time INVI recheck, weapon condition damage, or native action 5->3 transition.
+0x5FD8B5: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FD8BA: cmp     eax, 6
 0x5FD8BD: jnz     loc_5FD7D3
 0x5FD8C3: mov     edi, [esp+74h+var_60]
-0x5FD8C7: push    1
-0x5FD8C9: mov     ecx, edi
-0x5FD8CB: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FD8C7: push    1; slot
+0x5FD8C9: mov     ecx, edi; this
+0x5FD8CB: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5FD8D0: push    eax
-0x5FD8D1: call    sub_51AA00
+0x5FD8D1: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FD8D6: add     esp, 4
 0x5FD8D9: cmp     eax, 1Bh
 0x5FD8DC: jnz     loc_5FD7D3
-0x5FD8E2: push    1
-0x5FD8E4: mov     ecx, edi
-0x5FD8E6: mov     [esp+78h+var_58], 6
-0x5FD8EE: call    sub_4706E0
+0x5FD8E2: push    1; slotSelector
+0x5FD8E4: mov     ecx, edi; this
+0x5FD8E6: mov     [esp+78h+action], 6
+0x5FD8EE: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x5FD8F3: push    eax
 0x5FD8F4: push    6
 0x5FD8F6: jmp     Actor_ProcessAction___DefaultAction??_
@@ -1133,15 +1131,15 @@
 0x5FD910: test    eax, eax
 0x5FD912: jnz     loc_5FDAAB
 0x5FD918: mov     ecx, esi
-0x5FD91A: call    Actor_GetCurrentAction
+0x5FD91A: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FD91F: cmp     eax, 0FFFFFFFFh
 0x5FD922: jz      short loc_5FD930
 0x5FD924: add     eax, 0FFFFFFFEh
 0x5FD927: cmp     eax, 3
 0x5FD92A: ja      loc_5FDA1F
-0x5FD930: mov     ebx, dword ptr [esp+74h+var_28]
+0x5FD930: mov     ebx, [esp+74h+originX]
 0x5FD934: lea     ecx, [ebx+1E0h]
-0x5FD93A: call    sub_88D370
+0x5FD93A: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x5FD93F: sub     eax, 0
 0x5FD942: jz      short loc_5FD9A8
 0x5FD944: sub     eax, 1
@@ -1150,9 +1148,9 @@
 0x5FD94C: jnz     loc_5FDA1F
 0x5FD952: fld     dword ptr [ebx+324h]
 0x5FD958: mov     ecx, offset dword_B148EC
-0x5FD95D: fstp    dword ptr [esp+74h+var_28+4]
+0x5FD95D: fstp    [esp+74h+originX+4]
 0x5FD961: call    GameSetting_GetSafeFloatPointer
-0x5FD966: fld     dword ptr [esp+74h+var_28+4]
+0x5FD966: fld     [esp+74h+originX+4]
 0x5FD96A: fld     dword ptr [eax]
 0x5FD96C: fcompp
 0x5FD96E: fnstsw  ax
@@ -1167,7 +1165,7 @@
 0x5FD985: test    ebp, ebp
 0x5FD987: jz      loc_5FDA1F
 0x5FD98D: mov     ecx, [ebp+68h]
-0x5FD990: call    TESAnimGroup_GetAnimationGroup
+0x5FD990: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5FD995: cmp     eax, 29h ; ')'
 0x5FD998: jnz     loc_5FDA1F
 0x5FD99E: mov     [esp+74h+var_5C], 29h ; ')'
@@ -1175,11 +1173,11 @@
 0x5FD9A8: test    ebp, ebp
 0x5FD9AA: jz      short loc_5FDA1F
 0x5FD9AC: mov     ecx, [ebp+68h]
-0x5FD9AF: call    TESAnimGroup_GetAnimationGroup
+0x5FD9AF: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5FD9B4: cmp     eax, 29h ; ')'
 0x5FD9B7: jz      short loc_5FD9C6
 0x5FD9B9: mov     ecx, [ebp+68h]
-0x5FD9BC: call    TESAnimGroup_GetAnimationGroup
+0x5FD9BC: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5FD9C1: cmp     eax, 28h ; '('
 0x5FD9C4: jnz     short loc_5FDA1F
 0x5FD9C6: mov     edx, [esi]
@@ -1195,11 +1193,11 @@
 0x5FD9E3: test    al, 0Fh
 0x5FD9E5: jnz     short loc_5FDA0F
 0x5FD9E7: mov     ecx, esi
-0x5FD9E9: call    Actor_GetCurrentAction
+0x5FD9E9: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FD9EE: cmp     eax, 0FFFFFFFFh
 0x5FD9F1: jnz     short loc_5FD9FC
 0x5FD9F3: mov     edi, 0Ah
-0x5FD9F8: mov     [esp+74h+var_58], edi
+0x5FD9F8: mov     [esp+74h+action], edi
 0x5FD9FC: mov     ecx, [esp+74h+var_60]
 0x5FDA00: mov     [esp+74h+var_5C], 2Ah ; '*'
 0x5FDA08: mov     byte ptr [ecx+0C4h], 1
@@ -1221,7 +1219,7 @@
 0x5FDA3D: test    al, al
 0x5FDA3F: jnz     short loc_5FDAAB
 0x5FDA41: mov     ecx, esi
-0x5FDA43: call    Actor_GetCurrentAction
+0x5FDA43: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FDA48: cmp     eax, 0FFFFFFFFh
 0x5FDA4B: jnz     short loc_5FDAAB
 0x5FDA4D: mov     ecx, esi
@@ -1230,20 +1228,20 @@
 0x5FDA56: jz      short loc_5FDAAB
 0x5FDA58: mov     edi, [esp+74h+var_60]
 0x5FDA5C: mov     ecx, edi
-0x5FDA5E: call    sub_472EA0
+0x5FDA5E: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x5FDA63: test    al, al
 0x5FDA65: jnz     short loc_5FDA72
 0x5FDA67: push    0
 0x5FDA69: push    1
 0x5FDA6B: mov     ecx, edi
-0x5FDA6D: call    sub_475440
+0x5FDA6D: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x5FDA72: mov     ecx, [esi+58h]
 0x5FDA75: mov     eax, [ecx]
 0x5FDA77: mov     edx, [eax+0F0h]
 0x5FDA7D: xor     edi, edi
 0x5FDA7F: push    1
 0x5FDA81: mov     [esp+78h+var_5C], 11h
-0x5FDA89: mov     [esp+78h+var_58], edi
+0x5FDA89: mov     [esp+78h+action], edi
 0x5FDA8D: call    edx
 0x5FDA8F: test    eax, eax
 0x5FDA91: jz      short loc_5FDAAB
@@ -1268,7 +1266,7 @@
 0x5FDAC9: test    al, al
 0x5FDACB: jz      short loc_5FDB2C
 0x5FDACD: mov     ecx, esi
-0x5FDACF: call    Actor_GetCurrentAction
+0x5FDACF: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FDAD4: cmp     eax, 0FFFFFFFFh
 0x5FDAD7: jnz     short loc_5FDB2C
 0x5FDAD9: mov     eax, [esi]
@@ -1297,7 +1295,7 @@
 0x5FDB19: jz      short loc_5FDB2C
 0x5FDB1B: mov     edi, 1
 0x5FDB20: mov     [esp+74h+var_5C], 12h
-0x5FDB28: mov     [esp+74h+var_58], edi
+0x5FDB28: mov     [esp+74h+action], edi
 0x5FDB2C: mov     eax, [esi]
 0x5FDB2E: mov     edx, [eax+27Ch]
 0x5FDB34: mov     ecx, esi
@@ -1404,11 +1402,11 @@
 0x5FDC7A: movzx   eax, ds:byte_5FE32C[eax]
 0x5FDC81: jmp     ds:jpt_5FDC81[eax*4]; switch jump
 0x5FDC88: mov     ecx, [esp+74h+var_60]; jumptable 005FDC81 cases 3,8
-0x5FDC8C: call    sub_471210
+0x5FDC8C: call    ActorAnimData_IsCurrentIdleActive; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 2. Mounted/action callers treat this as the active idle phase.
 0x5FDC91: test    al, al
 0x5FDC93: jnz     short loc_5FDCA2; jumptable 005FDC81 cases 4,5,9,10
 0x5FDC95: mov     ecx, [esp+74h+var_60]
-0x5FDC99: call    sub_472EA0
+0x5FDC99: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x5FDC9E: test    al, al
 0x5FDCA0: jz      short Actor_ProcessAction___def_5FDC81; jumptable 005FDC81 default case, cases 6,7
 0x5FDCA2: mov     ebp, 1; jumptable 005FDC81 cases 4,5,9,10
@@ -1427,7 +1425,7 @@
 0x5FDCCF: mov     ebp, 1
 0x5FDCD4: mov     [esp+74h+var_5C], ebp
 0x5FDCD8: test    bl, 0Fh
-0x5FDCDB: fld     [esp+74h+arg_0]
+0x5FDCDB: fld     [esp+74h+arg0]
 0x5FDCDF: fstp    [esp+74h+var_50]
 0x5FDCE3: jz      loc_5FDDC9
 0x5FDCE9: test    ebx, 200h
@@ -1455,10 +1453,10 @@
 0x5FDD2F: test    eax, eax
 0x5FDD31: mov     ecx, esi
 0x5FDD33: jnz     short loc_5FDD43
-0x5FDD35: call    sub_5E3590
+0x5FDD35: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5FDD3A: fstp    [esp+74h+var_54]
 0x5FDD3E: jmp     loc_5FDDE3
-0x5FDD43: call    sub_5E3750
+0x5FDD43: call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.
 0x5FDD48: fstp    [esp+74h+var_54]
 0x5FDD4C: jmp     loc_5FDDE3
 0x5FDD51: test    ebx, 0FF00h
@@ -1468,7 +1466,7 @@
 0x5FDD62: mov     ebp, 3
 0x5FDD67: mov     ecx, esi
 0x5FDD69: mov     [esp+74h+var_5C], ebp
-0x5FDD6D: call    sub_5E3590
+0x5FDD6D: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5FDD72: fstp    [esp+74h+var_54]
 0x5FDD76: jmp     short loc_5FDDE3
 0x5FDD78: test    bl, 2
@@ -1476,7 +1474,7 @@
 0x5FDD7D: mov     ebp, 4
 0x5FDD82: mov     ecx, esi
 0x5FDD84: mov     [esp+74h+var_5C], ebp
-0x5FDD88: call    sub_5E3590
+0x5FDD88: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5FDD8D: fstp    [esp+74h+var_54]
 0x5FDD91: jmp     short loc_5FDDE3
 0x5FDD93: test    bl, 4
@@ -1484,7 +1482,7 @@
 0x5FDD98: mov     ebp, 5
 0x5FDD9D: mov     ecx, esi
 0x5FDD9F: mov     [esp+74h+var_5C], ebp
-0x5FDDA3: call    sub_5E3590
+0x5FDDA3: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5FDDA8: fstp    [esp+74h+var_54]
 0x5FDDAC: jmp     short loc_5FDDE3
 0x5FDDAE: test    bl, 8
@@ -1492,7 +1490,7 @@
 0x5FDDB3: mov     ebp, 6
 0x5FDDB8: mov     [esp+74h+var_5C], ebp
 0x5FDDBC: mov     ecx, esi
-0x5FDDBE: call    sub_5E3590
+0x5FDDBE: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5FDDC3: fstp    [esp+74h+var_54]
 0x5FDDC7: jmp     short loc_5FDDE3
 0x5FDDC9: test    bl, 10h
@@ -1506,7 +1504,7 @@
 0x5FDDE3: cmp     edi, 0FFFFFFFFh
 0x5FDDE6: jz      short loc_5FDDF8
 0x5FDDE8: mov     ecx, esi
-0x5FDDEA: call    Actor_GetCurrentAction
+0x5FDDEA: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FDDEF: cmp     eax, 0FFFFFFFFh
 0x5FDDF2: jnz     Actor_ProcessAction___Done
 0x5FDDF8: fld1
@@ -1531,28 +1529,28 @@
 0x5FDE33: mov     ecx, [esp+74h+var_5C]
 0x5FDE37: mov     edx, dword ptr [esp+74h+var_48+4]
 0x5FDE3B: mov     eax, [esp+74h+var_4C]
-0x5FDE3F: push    0
+0x5FDE3F: push    0; fallbackPass
 0x5FDE41: push    ecx
 0x5FDE42: push    edx
 0x5FDE43: push    eax
-0x5FDE44: call    sub_51A9B0
+0x5FDE44: call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).
 0x5FDE49: mov     edi, [esp+84h+var_60]
 0x5FDE4D: add     esp, 0Ch
-0x5FDE50: mov     ecx, edi
-0x5FDE52: push    eax
-0x5FDE53: call    sub_470D20
+0x5FDE50: mov     ecx, edi; this
+0x5FDE52: push    eax; requestedKey
+0x5FDE53: call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.
 0x5FDE58: movzx   ebp, ax
 0x5FDE5B: push    ebp
-0x5FDE5C: call    sub_51AA00
+0x5FDE5C: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FDE61: add     esp, 4
-0x5FDE64: cmp     [esp+74h+var_58], 0FFFFFFFFh
+0x5FDE64: cmp     [esp+74h+action], 0FFFFFFFFh
 0x5FDE69: mov     ebx, eax
 0x5FDE6B: jz      short loc_5FDE7B
 0x5FDE6D: cmp     [esp+74h+var_5C], ebx
 0x5FDE71: jz      short loc_5FDE7B
-0x5FDE73: mov     [esp+74h+var_58], 0FFFFFFFFh
+0x5FDE73: mov     [esp+74h+action], 0FFFFFFFFh
 0x5FDE7B: mov     ecx, esi
-0x5FDE7D: call    Actor_GetCurrentAction
+0x5FDE7D: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FDE82: cmp     eax, 0FFFFFFFFh
 0x5FDE85: jz      loc_5FDFB3
 0x5FDE8B: mov     ecx, [esi+58h]
@@ -1563,24 +1561,24 @@
 0x5FDE9A: jz      loc_5FDFB3
 0x5FDEA0: lea     ecx, [ebx+ebx*8]
 0x5FDEA3: mov     edx, ds:0B102E8h[ecx*4]
-0x5FDEAA: push    edx
-0x5FDEAB: mov     ecx, edi
-0x5FDEAD: call    sub_4706E0
+0x5FDEAA: push    edx; slotSelector
+0x5FDEAB: mov     ecx, edi; this
+0x5FDEAD: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x5FDEB2: mov     ecx, [esi+58h]
-0x5FDEB5: mov     [esp+74h+arg_0], eax
+0x5FDEB5: mov     [esp+74h+arg0], eax
 0x5FDEB9: mov     eax, [ecx]
 0x5FDEBB: mov     edx, [eax+2D4h]
 0x5FDEC1: call    edx
-0x5FDEC3: cmp     [esp+74h+arg_0], eax
+0x5FDEC3: cmp     [esp+74h+arg0], eax
 0x5FDEC7: jnz     loc_5FDFB3
 0x5FDECD: mov     ecx, esi
-0x5FDECF: call    Actor_GetCurrentAction
+0x5FDECF: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FDED4: cmp     eax, 0Ch
 0x5FDED7: jnz     Actor_ProcessAction___Done
 0x5FDEDD: mov     ebx, edi
-0x5FDEDF: push    0
-0x5FDEE1: mov     ecx, ebx
-0x5FDEE3: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FDEDF: push    0; slot
+0x5FDEE1: mov     ecx, ebx; this
+0x5FDEE3: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5FDEE8: movzx   edi, ax
 0x5FDEEB: mov     eax, [esi]
 0x5FDEED: mov     edx, [eax+27Ch]
@@ -1589,7 +1587,7 @@
 0x5FDEF7: test    eax, eax
 0x5FDEF9: jz      short loc_5FDF25; jumptable 005FDF13 cases 4-6,11-14
 0x5FDEFB: push    edi
-0x5FDEFC: call    sub_51AA00
+0x5FDEFC: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FDF01: add     eax, 0FFFFFFFCh; switch 11 cases
 0x5FDF04: add     esp, 4
 0x5FDF07: cmp     eax, 0Ah
@@ -1602,7 +1600,7 @@
 0x5FDF25: and     edi, 0FF03h; jumptable 005FDF13 cases 4-6,11-14
 0x5FDF2B: or      edi, 3
 0x5FDF2E: push    edi; jumptable 005FDF13 default case, case 7
-0x5FDF2F: call    sub_51AA00
+0x5FDF2F: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FDF34: add     eax, 0FFFFFFFDh; switch 14 cases
 0x5FDF37: add     esp, 4
 0x5FDF3A: cmp     eax, 0Dh
@@ -1610,7 +1608,7 @@
 0x5FDF3F: movzx   ecx, ds:byte_5FE358[eax]
 0x5FDF46: jmp     ds:jpt_5FDF46[ecx*4]; switch jump
 0x5FDF4D: mov     ecx, esi; jumptable 005FDF46 cases 7-10
-0x5FDF4F: call    sub_5E3750
+0x5FDF4F: call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.
 0x5FDF54: fstp    [esp+74h+var_54]
 0x5FDF58: push    edi; jumptable 005FDF46 default case
 0x5FDF59: mov     ecx, ebx
@@ -1620,21 +1618,21 @@
 0x5FDF65: fld     [esp+74h+var_54]
 0x5FDF69: push    edi
 0x5FDF6A: mov     ecx, ebx
-0x5FDF6C: fstp    [esp+78h+var_28+4]
+0x5FDF6C: fstp    qword ptr [esp+78h+originX+4]
 0x5FDF70: call    sub_472330
 0x5FDF75: movsx   edx, ax
-0x5FDF78: mov     [esp+74h+arg_4], edx
-0x5FDF7C: fild    [esp+74h+arg_4]
-0x5FDF80: fdivr   [esp+74h+var_28+4]
+0x5FDF78: mov     [esp+74h+arg1], edx
+0x5FDF7C: fild    [esp+74h+arg1]
+0x5FDF80: fdivr   qword ptr [esp+74h+originX+4]
 0x5FDF84: fmul    [esp+74h+var_50]
 0x5FDF88: fstp    [esp+74h+var_50]
 0x5FDF8C: fld     [esp+74h+var_50]
 0x5FDF90: fstp    dword ptr [ebx+0BCh]
 0x5FDF96: jmp     Actor_ProcessAction___Done
 0x5FDF9B: mov     ecx, esi; jumptable 005FDF46 cases 3-6,11-14
-0x5FDF9D: call    sub_5E3590
+0x5FDF9D: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
 0x5FDFA2: jmp     short loc_5FDF54
-0x5FDFA4: fld     [esp+74h+arg_4]; jumptable 005FDF46 cases 15,16
+0x5FDFA4: fld     [esp+74h+arg1]; jumptable 005FDF46 cases 15,16
 0x5FDFA8: fstp    dword ptr [ebx+0BCh]
 0x5FDFAE: jmp     Actor_ProcessAction___Done
 0x5FDFB3: cmp     bp, 0FFh
@@ -1655,7 +1653,7 @@
 0x5FDFF1: test    eax, eax
 0x5FDFF3: jz      short loc_5FE021; jumptable 005FE00D cases 4-6,11-14
 0x5FDFF5: push    ebp
-0x5FDFF6: call    sub_51AA00
+0x5FDFF6: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FDFFB: add     eax, 0FFFFFFFCh; switch 11 cases
 0x5FDFFE: add     esp, 4
 0x5FE001: cmp     eax, 0Ah
@@ -1677,12 +1675,12 @@
 0x5FE03B: fld     [esp+74h+var_54]
 0x5FE03F: mov     ecx, [esp+74h+var_60]
 0x5FE043: push    edi
-0x5FE044: fstp    [esp+78h+var_28+4]
+0x5FE044: fstp    qword ptr [esp+78h+originX+4]
 0x5FE048: call    sub_472330
 0x5FE04D: movsx   ecx, ax
-0x5FE050: mov     [esp+74h+arg_4], ecx
-0x5FE054: fild    [esp+74h+arg_4]
-0x5FE058: fdivr   [esp+74h+var_28+4]
+0x5FE050: mov     [esp+74h+arg1], ecx
+0x5FE054: fild    [esp+74h+arg1]
+0x5FE058: fdivr   qword ptr [esp+74h+originX+4]
 0x5FE05C: fmul    [esp+74h+var_50]
 0x5FE060: fstp    [esp+74h+var_50]
 0x5FE064: mov     edx, [esp+74h+var_60]
@@ -1708,42 +1706,42 @@
 0x5FE0A4: fld1
 0x5FE0A6: fstp    dword ptr [edi+0C0h]
 0x5FE0AC: jmp     short loc_5FE0B8
-0x5FE0AE: fld     [esp+74h+arg_4]
+0x5FE0AE: fld     [esp+74h+arg1]
 0x5FE0B2: fstp    dword ptr [edi+0BCh]
 0x5FE0B8: lea     eax, [ebx+ebx*8]
 0x5FE0BB: mov     ecx, ds:0B102E8h[eax*4]
-0x5FE0C2: push    ecx
-0x5FE0C3: mov     ecx, edi
-0x5FE0C5: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FE0C2: push    ecx; slot
+0x5FE0C3: mov     ecx, edi; this
+0x5FE0C5: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5FE0CA: cmp     ax, bp
 0x5FE0CD: jz      loc_5FE178
-0x5FE0D3: push    ebp
-0x5FE0D4: mov     ecx, edi
-0x5FE0D6: call    sub_470D00
+0x5FE0D3: push    ebp; encodedKey
+0x5FE0D4: mov     ecx, edi; this
+0x5FE0D6: call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.
 0x5FE0DB: test    al, al
 0x5FE0DD: jz      loc_5FE178
-0x5FE0E3: push    0FFFFFFFFh
-0x5FE0E5: push    1
-0x5FE0E7: push    ebp
-0x5FE0E8: mov     ecx, edi
-0x5FE0EA: call    ActorAnimData_PlayAnimGroup
-0x5FE0EF: cmp     [esp+74h+var_58], 0FFFFFFFFh
+0x5FE0E3: push    0FFFFFFFFh; repeatOrAction
+0x5FE0E5: push    1; playImmediately
+0x5FE0E7: push    ebp; encodedKey
+0x5FE0E8: mov     ecx, edi; this
+0x5FE0EA: call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.
+0x5FE0EF: cmp     [esp+74h+action], 0FFFFFFFFh
 0x5FE0F4: jz      short loc_5FE122
 0x5FE0F6: push    ebp
-0x5FE0F7: call    TESAnimGroup_IsAnimGroupIdle
+0x5FE0F7: call    TESAnimGroup_IsAnimGroupIdle; Static native idle-group classifier over a raw group byte: true only for Idle (0), DynamicIdle (1), BlockIdle (27), and TorchIdle (33).
 0x5FE0FC: add     esp, 4
 0x5FE0FF: test    al, al
 0x5FE101: jnz     short loc_5FE122
 0x5FE103: lea     eax, [ebx+ebx*8]
 0x5FE106: mov     edx, ds:0B102E8h[eax*4]
-0x5FE10D: push    edx
-0x5FE10E: mov     ecx, edi
-0x5FE110: call    sub_4706E0
-0x5FE115: push    eax
-0x5FE116: mov     eax, [esp+78h+var_58]
-0x5FE11A: push    eax
-0x5FE11B: mov     ecx, esi
-0x5FE11D: call    HighPRocess_DoAction?????
+0x5FE10D: push    edx; slotSelector
+0x5FE10E: mov     ecx, edi; this
+0x5FE110: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
+0x5FE115: push    eax; sequence
+0x5FE116: mov     eax, [esp+78h+action]
+0x5FE11A: push    eax; action
+0x5FE11B: mov     ecx, esi; this
+0x5FE11D: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x5FE122: mov     edx, [esi]
 0x5FE124: mov     eax, [edx+3A4h]
 0x5FE12A: push    1
@@ -1754,22 +1752,22 @@
 0x5FE134: jnz     short loc_5FE178
 0x5FE136: mov     ecx, dword ptr [esp+74h+var_48+4]
 0x5FE13A: mov     edx, [esp+74h+var_4C]
-0x5FE13E: push    0
+0x5FE13E: push    0; fallbackPass
 0x5FE140: push    29h ; ')'
 0x5FE142: push    ecx
 0x5FE143: push    edx
-0x5FE144: call    sub_51A9B0
+0x5FE144: call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).
 0x5FE149: mov     ebx, [esp+84h+var_60]
 0x5FE14D: add     esp, 0Ch
-0x5FE150: mov     ecx, ebx
-0x5FE152: push    eax
-0x5FE153: call    sub_470D20
-0x5FE158: push    0FFFFFFFFh
+0x5FE150: mov     ecx, ebx; this
+0x5FE152: push    eax; requestedKey
+0x5FE153: call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.
+0x5FE158: push    0FFFFFFFFh; repeatOrAction
 0x5FE15A: movzx   edi, ax
-0x5FE15D: push    0
-0x5FE15F: push    edi
-0x5FE160: mov     ecx, ebx
-0x5FE162: call    ActorAnimData_PlayAnimGroup
+0x5FE15D: push    0; playImmediately
+0x5FE15F: push    edi; encodedKey
+0x5FE160: mov     ecx, ebx; this
+0x5FE162: call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.
 0x5FE167: mov     eax, [esi]
 0x5FE169: mov     edx, [eax+3A4h]
 0x5FE16F: push    0
@@ -1777,9 +1775,9 @@
 0x5FE172: mov     ecx, esi
 0x5FE174: call    edx
 0x5FE176: mov     edi, ebx
-0x5FE178: push    2
-0x5FE17A: mov     ecx, edi
-0x5FE17C: call    sub_4706E0
+0x5FE178: push    2; slotSelector
+0x5FE17A: mov     ecx, edi; this
+0x5FE17C: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x5FE181: mov     ecx, [esi+58h]
 0x5FE184: mov     ebx, eax
 0x5FE186: mov     eax, [ecx]
@@ -1796,37 +1794,37 @@
 0x5FE1AB: jnz     short loc_5FE21F
 0x5FE1AD: mov     eax, dword ptr [esp+74h+var_48+4]
 0x5FE1B1: mov     ecx, [esp+74h+var_4C]
-0x5FE1B5: push    0
+0x5FE1B5: push    0; fallbackPass
 0x5FE1B7: push    21h ; '!'
 0x5FE1B9: push    eax
 0x5FE1BA: push    ecx
-0x5FE1BB: call    sub_51A9B0
+0x5FE1BB: call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).
 0x5FE1C0: mov     ebx, [esp+84h+var_60]
 0x5FE1C4: add     esp, 0Ch
-0x5FE1C7: mov     ecx, ebx
-0x5FE1C9: push    eax
-0x5FE1CA: call    sub_470D20
+0x5FE1C7: mov     ecx, ebx; this
+0x5FE1C9: push    eax; requestedKey
+0x5FE1CA: call    ActorAnimData_ResolveAnimKeyFallback; Native encoded animation-key resolver. A candidate is valid only when its map entry's selector virtual returns a sequence. Order: exact key; weapon-prefix compatibility; fast-move group to normal-move group; on the outer pass only, strip movement prefix; finally replace nonzero group with Idle (0). Returns 0 on failure.
 0x5FE1CF: movzx   edi, ax
 0x5FE1D2: push    edi
-0x5FE1D3: call    sub_51AA00
+0x5FE1D3: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x5FE1D8: lea     edx, [eax+eax*8]
 0x5FE1DB: mov     eax, ds:0B102E8h[edx*4]
 0x5FE1E2: add     esp, 4
-0x5FE1E5: push    eax
-0x5FE1E6: mov     ecx, ebx
-0x5FE1E8: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FE1E5: push    eax; slot
+0x5FE1E6: mov     ecx, ebx; this
+0x5FE1E8: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5FE1ED: cmp     ax, di
 0x5FE1F0: jz      loc_5FE272
-0x5FE1F6: push    edi
-0x5FE1F7: mov     ecx, ebx
-0x5FE1F9: call    sub_470D00
+0x5FE1F6: push    edi; encodedKey
+0x5FE1F7: mov     ecx, ebx; this
+0x5FE1F9: call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.
 0x5FE1FE: test    al, al
 0x5FE200: jz      short loc_5FE272
-0x5FE202: push    0FFFFFFFFh
-0x5FE204: push    1
-0x5FE206: push    edi
-0x5FE207: mov     ecx, ebx
-0x5FE209: call    ActorAnimData_PlayAnimGroup
+0x5FE202: push    0FFFFFFFFh; repeatOrAction
+0x5FE204: push    1; playImmediately
+0x5FE206: push    edi; encodedKey
+0x5FE207: mov     ecx, ebx; this
+0x5FE209: call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.
 0x5FE20E: mov     edx, [esi]
 0x5FE210: mov     eax, [edx+3A4h]
 0x5FE216: push    1
@@ -1844,37 +1842,37 @@
 0x5FE232: test    ebx, ebx
 0x5FE234: jz      short loc_5FE272
 0x5FE236: mov     ecx, [ebx+68h]
-0x5FE239: call    TESAnimGroup_GetAnimationGroup
+0x5FE239: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5FE23E: cmp     eax, 21h ; '!'
 0x5FE241: jnz     short loc_5FE272
 0x5FE243: fldz
 0x5FE245: push    ecx
-0x5FE246: fstp    [esp+78h+duration]; float
-0x5FE249: mov     ecx, edi
-0x5FE24B: push    2; int
-0x5FE24D: call    sub_470FC0
+0x5FE246: fstp    [esp+78h+duration]; easeOutTime
+0x5FE249: mov     ecx, edi; this
+0x5FE24B: push    2; slot
+0x5FE24D: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x5FE252: mov     ecx, ds:0B333C4h; this
 0x5FE258: cmp     esi, ecx
 0x5FE25A: jnz     short loc_5FE272
 0x5FE25C: fldz
 0x5FE25E: push    ecx
-0x5FE25F: fstp    [esp+78h+duration]; float
-0x5FE262: push    2; int
-0x5FE264: push    1; a2
-0x5FE266: call    Player_GetAnimData
-0x5FE26B: mov     ecx, eax
-0x5FE26D: call    sub_470FC0
+0x5FE25F: fstp    [esp+78h+duration]; easeOutTime
+0x5FE262: push    2; slot
+0x5FE264: push    1; firstPerson
+0x5FE266: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
+0x5FE26B: mov     ecx, eax; this
+0x5FE26D: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x5FE272: mov     edi, [esp+74h+var_60]
-0x5FE276: push    3
-0x5FE278: mov     ecx, edi
-0x5FE27A: call    sub_4706E0
+0x5FE276: push    3; slotSelector
+0x5FE278: mov     ecx, edi; this
+0x5FE27A: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x5FE27F: test    eax, eax
 0x5FE281: jz      short Actor_ProcessAction___Done
-0x5FE283: push    3
-0x5FE285: mov     ecx, edi
-0x5FE287: call    ActorAnimData_GetAnimGroupFromField8Value
+0x5FE283: push    3; slot
+0x5FE285: mov     ecx, edi; this
+0x5FE287: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x5FE28C: push    eax
-0x5FE28D: call    sub_51AC80
+0x5FE28D: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x5FE292: add     esp, 4
 0x5FE295: test    al, al
 0x5FE297: jz      short Actor_ProcessAction___Done
@@ -1884,7 +1882,7 @@
 0x5FE2A2: push    edx; a2
 0x5FE2A3: mov     ecx, esi; this
 0x5FE2A5: add     edi, 30Ch
-0x5FE2AB: call    sub_5E6A40
+0x5FE2AB: call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.
 0x5FE2B0: mov     edx, [eax]
 0x5FE2B2: sub     esp, 0Ch
 0x5FE2B5: mov     ecx, esp
@@ -1905,3 +1903,17 @@
 0x5FE2DB: pop     ebx
 0x5FE2DC: add     esp, 60h
 0x5FE2DF: retn    8
+0x9C2B50: lea     ecx, [ebp-24h]; void *
+0x9C2B53: jmp     BSStringT_Clear
+0x9C2B58: mov     eax, [ebp-24h]
+0x9C2B5B: push    eax
+0x9C2B5C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2B61: pop     ecx
+0x9C2B62: retn
+0x9C2B63: mov     edx, [esp+arg1]
+0x9C2B67: lea     eax, [edx-64h]
+0x9C2B6A: mov     ecx, [edx-68h]
+0x9C2B6D: xor     ecx, eax
+0x9C2B6F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2B74: mov     eax, offset stru_AEB8E8
+0x9C2B79: jmp     ___CxxFrameHandler3

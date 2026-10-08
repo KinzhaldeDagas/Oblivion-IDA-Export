@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x5E6DAF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5E6DC0",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x5E6DCA",
-    "line": "push    esi",
+    "line": "push    esi; criminal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E6DCB",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5E6DD0",
-    "line": "call    sub_675E90",
+    "line": "call    ActorProcessManager_RemoveCrimesForCriminal",
     "mnemonic": "call",
     "size": 5
   },

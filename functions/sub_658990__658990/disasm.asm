@@ -6,7 +6,7 @@
 0x65899B: push    esi
 0x65899C: push    edi; int
 0x65899D: mov     ebp, ecx
-0x65899F: call    Double_To_SInt32
+0x65899F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x6589A4: push    0; int
 0x6589A6: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x6589AB: mov     edi, eax
@@ -48,7 +48,6 @@
 0x658A21: jz      loc_658AF7
 0x658A27: mov     edi, [esp+14h+arg_0]
 0x658A2B: jmp     short loc_658A30
-0x658A2D: align 10h
 0x658A30: mov     edx, [edi]
 0x658A32: mov     eax, [edx+198h]
 0x658A38: push    0
@@ -127,7 +126,7 @@
 0x658AEC: mov     ecx, esi
 0x658AEE: call    edx
 0x658AF0: mov     ecx, esi; int
-0x658AF2: call    sub_5EAE70
+0x658AF2: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x658AF7: pop     edi
 0x658AF8: pop     esi
 0x658AF9: pop     ebp

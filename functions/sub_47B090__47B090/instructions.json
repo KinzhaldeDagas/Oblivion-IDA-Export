@@ -955,13 +955,13 @@
   },
   {
     "ea": "0x47B2DB",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x47B2E0",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x47B2FB",
-    "line": "lea     edx, [esp+0B4h+var_78]",
+    "line": "lea     edx, [esp+0B4h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x47B31C",
-    "line": "lea     ecx, [esp+0B4h+var_78]; this",
+    "line": "lea     ecx, [esp+0B4h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x47B328",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x47B369",
-    "line": "lea     ecx, [esp+0B4h+var_80]; this",
+    "line": "lea     ecx, [esp+0B4h+var_80]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1207,19 +1207,19 @@
   },
   {
     "ea": "0x47B375",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x47B37A",
-    "line": "mov     ecx, [esi+0B8h]",
+    "line": "mov     ecx, [esi+0B8h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x47B380",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x47B39D",
-    "line": "lea     ecx, [esp+0B4h+a2]; this",
+    "line": "lea     ecx, [esp+0B4h+a2]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x47B3A9",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,19 +1291,19 @@
   },
   {
     "ea": "0x47B3B2",
-    "line": "push    eax",
+    "line": "push    eax; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47B3B3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47B3B5",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x47B3C5",
-    "line": "push    0; int",
+    "line": "push    0; basePositions",
     "mnemonic": "push",
     "size": 2
   },
@@ -1339,13 +1339,13 @@
   },
   {
     "ea": "0x47B3C8",
-    "line": "fstp    [esp+0BCh+var_BC]; float",
+    "line": "fstp    [esp+0BCh+morphScale]; morphScale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x47B3CB",
-    "line": "push    esi; int",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
@@ -1357,25 +1357,25 @@
   },
   {
     "ea": "0x47B3D0",
-    "line": "push    ecx; int",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47B3D1",
-    "line": "mov     ecx, [esp+0C4h+var_9C]",
+    "line": "mov     ecx, [esp+0C4h+var_9C]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x47B3D5",
-    "line": "call    sub_558840",
+    "line": "call    BSFaceGenModel_ApplyEGMMorph; Native EGM lock defects, statically verified: early failures after stream acquisition can return false without unlock; failed acquisition can still continue via cached base-vertex branch then success unlocks preexisting stream. Preconditions matter; runtime/shipped-asset reachability not established. IDA range +0x944 matches deployed EXE hash 33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0. PF guards source versions 1.19.11, but local PF DLL removed 2026-10-01 at user request. OCO LoadGame root cause remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x47B3DA",
-    "line": "lea     ecx, [esp+0B4h+var_8C]; this",
+    "line": "lea     ecx, [esp+0B4h+var_8C]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1387,13 +1387,13 @@
   },
   {
     "ea": "0x47B3E6",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x47B3EB",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1522,12 +1522,6 @@
     "line": "jmp     short loc_47B440",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x47B43A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x47B440",
@@ -2218,5 +2212,113 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AF270",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF275",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF277",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF279",
+    "line": "lea     eax, [ebp-6Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF27C",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF27D",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF282",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF283",
+    "line": "lea     ecx, [ebp-8Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF289",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF28E",
+    "line": "lea     ecx, [ebp-88h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF294",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF299",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF29D",
+    "line": "lea     eax, [edx-0A4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF2A3",
+    "line": "mov     ecx, [edx-0A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AF2A9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF2AB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF2B0",
+    "line": "mov     eax, offset stru_ADB8B4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF2B5",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

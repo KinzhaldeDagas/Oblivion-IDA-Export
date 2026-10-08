@@ -10,60 +10,60 @@ void __thiscall BoltShader::~BoltShader(BoltShader *this)
   NiD3DVertexShader *v9; // edi
   NiD3DPass *v10; // ecx
 
-  this->super.__vftable = (BSShaderVtbl *)&BoltShader::`vftable';
-  v2 = InterlockedDecrement;
-  if ( dword_B4690C )
+  this->super.__vftable = (BSShaderVtbl *)&BoltShader::`vftable'; /*0x7f458b*/
+  v2 = InterlockedDecrement; /*0x7f4596*/
+  if ( unk_B4690C ) /*0x7f4591*/
   {
-    v3 = (void (__thiscall ***)(_DWORD, int))dword_B4690C;
-    if ( !v2((volatile LONG *)(dword_B4690C + 4)) )
+    v3 = (void (__thiscall ***)(_DWORD, int))unk_B4690C; /*0x7f45aa*/
+    if ( !v2((volatile LONG *)(unk_B4690C + 4)) ) /*0x7f45b0*/
     {
-      if ( v3 )
-        (**v3)(v3, 1);
+      if ( v3 ) /*0x7f45b8*/
+        (**v3)(v3, 1); /*0x7f45c2*/
     }
-    dword_B4690C = 0;
+    unk_B4690C = 0; /*0x7f45c4*/
   }
-  FormHeapFree(this->Unk00[1]);
-  this->Unk00[1] = 0;
-  v4 = (NiD3DPass *)this->Unk00[0x3F];
-  if ( v4 )
+  FormHeapFree(this->Unk00[1]); /*0x7f45d1*/
+  this->Unk00[1] = 0; /*0x7f45d6*/
+  v4 = (NiD3DPass *)this->Unk00[0x3F]; /*0x7f45dc*/
+  if ( v4 ) /*0x7f45e7*/
   {
-    v5 = v4->RefCount-- == 1;
-    if ( v5 )
-      sub_7604D0(v4);
-    this->Unk00[0x3F] = 0;
+    v5 = v4->RefCount-- == 1; /*0x7f45e9*/
+    if ( v5 ) /*0x7f45ed*/
+      NiD3DPass_ReleaseToPool(v4); /*0x7f45ef*/
+    this->Unk00[0x3F] = 0; /*0x7f45f4*/
   }
-  v6 = this->Vertex[0];
-  if ( v6 )
+  v6 = this->Vertex[0]; /*0x7f45fa*/
+  if ( v6 ) /*0x7f4602*/
   {
-    if ( !v2((volatile LONG *)v6 + 1) )
-      (**(void (__thiscall ***)(NiD3DVertexShader *, int))v6)(v6, 1);
-    this->Vertex[0] = 0;
+    if ( !v2((volatile LONG *)v6 + 1) ) /*0x7f4608*/
+      (**(void (__thiscall ***)(NiD3DVertexShader *, int))v6)(v6, 1); /*0x7f461a*/
+    this->Vertex[0] = 0; /*0x7f461c*/
   }
-  v7 = this->Pixel[0];
-  if ( v7 )
+  v7 = this->Pixel[0]; /*0x7f4622*/
+  if ( v7 ) /*0x7f462a*/
   {
-    if ( !v2((volatile LONG *)v7 + 1) )
-      (**(void (__thiscall ***)(NiD3DPixelShader *, int))v7)(v7, 1);
-    this->Pixel[0] = 0;
+    if ( !v2((volatile LONG *)v7 + 1) ) /*0x7f4630*/
+      (**(void (__thiscall ***)(NiD3DPixelShader *, int))v7)(v7, 1); /*0x7f4642*/
+    this->Pixel[0] = 0; /*0x7f4644*/
   }
-  v8 = this->Pixel[0];
-  if ( v8 )
+  v8 = this->Pixel[0]; /*0x7f464a*/
+  if ( v8 ) /*0x7f4657*/
   {
-    if ( !v2((volatile LONG *)v8 + 1) )
-      (**(void (__thiscall ***)(NiD3DPixelShader *, int))v8)(v8, 1);
+    if ( !v2((volatile LONG *)v8 + 1) ) /*0x7f465d*/
+      (**(void (__thiscall ***)(NiD3DPixelShader *, int))v8)(v8, 1); /*0x7f466f*/
   }
-  v9 = this->Vertex[0];
-  if ( v9 )
+  v9 = this->Vertex[0]; /*0x7f4671*/
+  if ( v9 ) /*0x7f467e*/
   {
-    if ( !v2((volatile LONG *)v9 + 1) )
-      (**(void (__thiscall ***)(NiD3DVertexShader *, int))v9)(v9, 1);
+    if ( !v2((volatile LONG *)v9 + 1) ) /*0x7f4684*/
+      (**(void (__thiscall ***)(NiD3DVertexShader *, int))v9)(v9, 1); /*0x7f4696*/
   }
-  v10 = (NiD3DPass *)this->Unk00[0x3F];
-  if ( v10 )
+  v10 = (NiD3DPass *)this->Unk00[0x3F]; /*0x7f4698*/
+  if ( v10 ) /*0x7f46a4*/
   {
-    v5 = v10->RefCount-- == 1;
-    if ( v5 )
-      sub_7604D0(v10);
+    v5 = v10->RefCount-- == 1; /*0x7f46a6*/
+    if ( v5 ) /*0x7f46aa*/
+      NiD3DPass_ReleaseToPool(v10); /*0x7f46ac*/
   }
-  BSShader::~BSShader(&this->super);
+  BSShader::~BSShader(&this->super); /*0x7f46bb*/
 }

@@ -22,74 +22,74 @@ const struct _s_RTTIBaseClassDescriptor *__usercall FindVITargetTypeInstance@<ea
   unsigned int v19; // [esp+28h] [ebp-8h]
   char v20; // [esp+2Fh] [ebp-1h]
 
-  v5 = *(_DWORD *)(a1 + 0x10);
-  v18 = 0xFFFFFFFF;
-  v15 = 0xFFFFFFFF;
-  v6 = *(_DWORD *)(v5 + 8);
-  v7 = 0;
-  v16 = 0;
-  v14 = 0;
-  v13 = 0;
-  v12 = *(_DWORD *)(v5 + 0xC);
-  v17 = 0;
-  v20 = 1;
-  v19 = 0;
-  if ( !v6 )
-    return 0;
-  do
+  v5 = *(_DWORD *)(a1 + 0x10); /*0x983198*/
+  v18 = 0xFFFFFFFF; /*0x98319e*/
+  v15 = 0xFFFFFFFF; /*0x9831a2*/
+  v6 = *(_DWORD *)(v5 + 8); /*0x9831a7*/
+  v7 = 0; /*0x9831ac*/
+  v16 = 0; /*0x9831b0*/
+  v14 = 0; /*0x9831b3*/
+  v13 = 0; /*0x9831b6*/
+  v12 = *(_DWORD *)(v5 + 0xC); /*0x9831b9*/
+  v17 = 0; /*0x9831bc*/
+  v20 = 1; /*0x9831bf*/
+  v19 = 0; /*0x9831c3*/
+  if ( !v6 ) /*0x9831c6*/
+    return 0; /*0x9831c6*/
+  do /*0x9832bf*/
   {
-    v8 = *(_DWORD *)(v12 + 4 * v19);
-    if ( v19 - v18 > v17 && (*(_DWORD *)v8 == a5 || !strcmp((const char *)(*(_DWORD *)v8 + 8), (const char *)(a5 + 8))) )
+    v8 = *(_DWORD *)(v12 + 4 * v19); /*0x9831d2*/
+    if ( v19 - v18 > v17 && (*(_DWORD *)v8 == a5 || !strcmp((const char *)(*(_DWORD *)v8 + 8), (const char *)(a5 + 8))) ) /*0x9831ee*/
     {
-      if ( (*(_BYTE *)(v8 + 0x14) & 3) == 0 )
-        v13 = (const struct _s_RTTIBaseClassDescriptor *)v8;
-      v18 = v19;
-      v7 = v8;
-      v17 = *(_DWORD *)(v8 + 4);
+      if ( (*(_BYTE *)(v8 + 0x14) & 3) == 0 ) /*0x9831fd*/
+        v13 = (const struct _s_RTTIBaseClassDescriptor *)v8; /*0x9831ff*/
+      v18 = v19; /*0x983205*/
+      v7 = v8; /*0x98320b*/
+      v17 = *(_DWORD *)(v8 + 4); /*0x98320d*/
     }
-    if ( (*(const struct _s_RTTICompleteObjectLocator **)v8 == a3
+    if ( (*(const struct _s_RTTICompleteObjectLocator **)v8 == a3 /*0x98323f*/
        || !strcmp((const char *)(*(_DWORD *)v8 + 8), (const char *)a3 + 8))
       && (struct TypeDescriptor *)PMDtoOffset((_DWORD *)(v8 + 8), a2) == a4 )
     {
-      if ( v19 - v18 > v17 )
+      if ( v19 - v18 > v17 ) /*0x98324a*/
       {
-        if ( (*(_BYTE *)(v8 + 0x14) & 5) == 0 )
-          v14 = v8;
+        if ( (*(_BYTE *)(v8 + 0x14) & 5) == 0 ) /*0x9832b4*/
+          v14 = v8; /*0x9832b6*/
       }
-      else if ( v20 )
+      else if ( v20 ) /*0x983250*/
       {
-        if ( (*(_BYTE *)(v7 + 0x14) & 0x40) != 0 )
+        if ( (*(_BYTE *)(v7 + 0x14) & 0x40) != 0 ) /*0x983256*/
         {
-          if ( (*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(v7 + 0x18) + 0xC) + 4 * (v19 - v18)) + 0x14) & 1) != 0 )
-            v20 = 0;
-          v9 = (*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(v7 + 0x18) + 0xC) + 4 * (v19 - v18)) + 0x14) & 4) == 0;
+          if ( (*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(v7 + 0x18) + 0xC) + 4 * (v19 - v18)) + 0x14) & 1) != 0 ) /*0x98327a*/
+            v20 = 0; /*0x98327c*/
+          v9 = (*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(v7 + 0x18) + 0xC) + 4 * (v19 - v18)) + 0x14) & 4) == 0; /*0x983285*/
         }
         else
         {
-          if ( !v18 && (*(_BYTE *)(v8 + 0x14) & 1) != 0 )
-            v20 = 0;
-          v9 = 1;
+          if ( !v18 && (*(_BYTE *)(v8 + 0x14) & 1) != 0 ) /*0x983262*/
+            v20 = 0; /*0x983264*/
+          v9 = 1; /*0x983268*/
         }
-        if ( v20 && v9 )
+        if ( v20 && v9 ) /*0x98328f*/
         {
-          v10 = PMDtoOffset((_DWORD *)(v7 + 8), a2);
-          if ( v16 && v15 != v10 )
-            return 0;
-          v16 = (const struct _s_RTTIBaseClassDescriptor *)v7;
-          v15 = v10;
+          v10 = PMDtoOffset((_DWORD *)(v7 + 8), a2); /*0x983297*/
+          if ( v16 && v15 != v10 ) /*0x9832a6*/
+            return 0; /*0x9832a6*/
+          v16 = (const struct _s_RTTIBaseClassDescriptor *)v7; /*0x9832a8*/
+          v15 = v10; /*0x9832ab*/
         }
       }
     }
-    ++v19;
+    ++v19; /*0x9832b9*/
   }
-  while ( v19 < v6 );
-  if ( !v20 || (result = v16) == 0 )
+  while ( v19 < v6 ); /*0x9832bf*/
+  if ( !v20 || (result = v16) == 0 ) /*0x9832d0*/
   {
-    if ( !v14 )
-      return 0;
-    result = v13;
-    if ( !v13 )
-      return 0;
+    if ( !v14 ) /*0x9832d6*/
+      return 0; /*0x9832d6*/
+    result = v13; /*0x9832d8*/
+    if ( !v13 ) /*0x9832dd*/
+      return 0; /*0x9832df*/
   }
-  return result;
+  return result; /*0x9832e1*/
 }

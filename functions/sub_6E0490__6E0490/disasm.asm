@@ -22,7 +22,7 @@
 0x6E04CA: mov     [esp+20h+var_4], ebx
 0x6E04CE: jz      short loc_6E04E9
 0x6E04D0: mov     ecx, esi; this
-0x6E04D2: call    ??0NiTimeController@@QAE@XZ; NiTimeController::NiTimeController(void)
+0x6E04D2: call    ??0NiTimeController@@QAE@XZ; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x6E04D7: mov     dword ptr [esi], offset ??_7NiLookAtController@@6B@; const NiLookAtController::`vftable'
 0x6E04DD: mov     [esi+40h], ebx
 0x6E04E0: mov     [esi+3Ch], bx
@@ -34,7 +34,7 @@
 0x6E04F0: push    esi
 0x6E04F1: mov     ecx, edi
 0x6E04F3: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x6E04FB: call    sub_715D80
+0x6E04FB: call    NiTimeController_CopyMembers; Copies flags and timing values through +0x24. Remaps target +0x30 through the clone map only when runtime types match, and clones the refcounted next-controller chain at +0x34. Runtime cache +0x28 and update/force bytes are not copied here.
 0x6E0500: movzx   eax, word ptr [edi+3Ch]
 0x6E0504: mov     [esi+3Ch], ax
 0x6E0508: test    byte ptr [edi+3Ch], 1
@@ -58,3 +58,15 @@
 0x6E053F: pop     ebx
 0x6E0540: add     esp, 10h
 0x6E0543: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x783C30",
+      "0x783C6C"
+    ]
+  ],
+  "chunks_sha256": "99f676659ad8a015334e35d135e98998c7d3203203ef2334091f7e6cb121ea0d",
+  "comment_regular": "Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.",
+  "comment_repeatable": "Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_783C30",
+  "display_name": "NiDX9Renderer__CreatePixelShader",
   "end_ea": "0x783C6C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_783C30",
+  "name": "NiDX9Renderer__CreatePixelShader",
   "segment": ".text",
   "sha256": "99f676659ad8a015334e35d135e98998c7d3203203ef2334091f7e6cb121ea0d",
   "size": 60,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x783C30",
-  "type": "int __stdcall(int)",
+  "total_chunk_size": 60,
+  "type": "IDirect3DPixelShader9 *__stdcall(const unsigned int *bytecode)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 6
 }

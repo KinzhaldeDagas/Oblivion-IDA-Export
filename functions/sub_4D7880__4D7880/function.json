@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D7880",
+      "0x4D78D1"
+    ]
+  ],
+  "chunks_sha256": "682da4c13df7bba7855284aa461e4f205a11efbb5d7ae0cd276c0b73c2d88356",
+  "comment_regular": "Verified per-reference seed writer. For a TREE form, maps the requested uint32 seed through TESObjectTREE_GetIndexForSeed and stores the byte in ExtraData_Seed. If the tree seed array is empty or the seed is absent, the index is 0xFF; ExtraDataList_SetOrRemoveTreeSeed treats 0xFF as remove, so no concrete per-reference seed is retained. Whether another runtime path populates Oblivion's array remains Unknown.",
+  "comment_repeatable": "Verified per-reference seed writer. For a TREE form, maps the requested uint32 seed through TESObjectTREE_GetIndexForSeed and stores the byte in ExtraData_Seed. If the tree seed array is empty or the seed is absent, the index is 0xFF; ExtraDataList_SetOrRemoveTreeSeed treats 0xFF as remove, so no concrete per-reference seed is retained. Whether another runtime path populates Oblivion's array remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D7880",
+  "display_name": "TESObjectREFR_SetTreeSeedByValue",
   "end_ea": "0x4D78D1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D7880",
+  "name": "TESObjectREFR_SetTreeSeedByValue",
   "segment": ".text",
   "sha256": "682da4c13df7bba7855284aa461e4f205a11efbb5d7ae0cd276c0b73c2d88356",
   "size": 81,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D7880",
-  "type": "void __thiscall(char *this, int)",
+  "total_chunk_size": 81,
+  "type": "void __thiscall(TESObjectREFR *this, int seedValue)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1
 }

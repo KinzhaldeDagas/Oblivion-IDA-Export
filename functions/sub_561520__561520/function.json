@@ -1,19 +1,32 @@
 {
-  "callees_count": 42,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x561520",
+      "0x5616E9"
+    ]
+  ],
+  "chunks_sha256": "75711991c4fb43adceeea7b54d938bb1d242b0179f99455fe2e40063c4ab7a0f",
+  "comment_regular": "Verified render-resource cleanup: frees six per-LOD arrays; releases billboardShape_STBB (+0x1C), leafShaderStreamData (+0x20), texture properties/textures (+0x34..+0x3C), collisionShape (+0x40), and other array smart pointers. CSpeedTreeRT and baseModel are released separately by BSTreeModel_dtor.",
+  "comment_repeatable": "Verified render-resource cleanup: frees six per-LOD arrays; releases billboardShape_STBB (+0x1C), leafShaderStreamData (+0x20), texture properties/textures (+0x34..+0x3C), collisionShape (+0x40), and other array smart pointers. CSpeedTreeRT and baseModel are released separately by BSTreeModel_dtor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_561520",
+  "display_name": "BSTreeModel_ClearModel",
   "end_ea": "0x5616E9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_561520",
+  "name": "BSTreeModel_ClearModel",
   "segment": ".text",
   "sha256": "75711991c4fb43adceeea7b54d938bb1d242b0179f99455fe2e40063c4ab7a0f",
   "size": 457,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x561520",
-  "type": "void __thiscall(int **this)",
+  "total_chunk_size": 457,
+  "type": "void __thiscall(BSTreeModel_OblivionLayout_058 *this)",
   "xrefs_from_count": 239,
   "xrefs_to_count": 2
 }

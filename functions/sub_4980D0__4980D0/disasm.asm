@@ -6,7 +6,7 @@
 0x4980DA: xor     bl, bl
 0x4980DC: cmp     eax, ebp
 0x4980DE: jnz     short loc_4980F2
-0x4980E0: call    sub_763DE0
+0x4980E0: call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.
 0x4980E5: cmp     eax, ebp
 0x4980E7: mov     ds:0B34FC4h, eax
 0x4980EC: jz      loc_49830A
@@ -14,7 +14,7 @@
 0x4980F4: push    esi
 0x4980F5: mov     esi, ds:0B06C54h
 0x4980FB: jnz     short loc_49810B
-0x4980FD: call    sub_763DE0
+0x4980FD: call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.
 0x498102: cmp     eax, ebp
 0x498104: mov     ds:0B34FC4h, eax
 0x498109: jz      short loc_498123
@@ -156,15 +156,15 @@
 0x4982A4: pop     ecx
 0x4982A5: retn
 0x4982A6: movzx   edx, byte ptr ds:0B06DB4h
-0x4982AD: push    ecx; int
-0x4982AE: push    ecx; Str1
-0x4982AF: push    ecx; int
-0x4982B0: push    edx; char
-0x4982B1: push    ecx; int
-0x4982B2: push    ecx; int
+0x4982AD: push    ecx; maxPS20Instructions
+0x4982AE: push    ecx; adapterVendorPrefix
+0x4982AF: push    ecx; adapterCaps
+0x4982B0: push    edx; bForce1XShaders
+0x4982B1: push    ecx; shaderCapsB
+0x4982B2: push    ecx; shaderCapsA
 0x4982B3: mov     ds:0B06C48h, ecx
 0x4982B9: mov     ds:0B06C44h, ecx
-0x4982BF: call    SetShaderPackage
+0x4982BF: call    SetShaderPackage; [Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.
 0x4982C4: add     esp, 18h
 0x4982C7: cmp     byte ptr ds:0B06CA4h, 0
 0x4982CE: jnz     loc_4981FE
@@ -178,9 +178,8 @@
 0x4982DC: mov     byte ptr ds:0B34FC8h, 0
 0x4982E3: xor     eax, eax
 0x4982E5: jmp     short loc_4982F0
-0x4982E7: align 10h
 0x4982F0: mov     cl, ds:byte_A3DE48[eax]
-0x4982F6: mov     ds:byte_B34FC8[eax], cl
+0x4982F6: mov     [eax+0B34FC8h], cl
 0x4982FC: add     eax, 1
 0x4982FF: test    cl, cl
 0x498301: jnz     short loc_4982F0
@@ -193,9 +192,8 @@
 0x49830A: mov     byte ptr ds:0B34FC8h, 0
 0x498311: xor     eax, eax
 0x498313: jmp     short loc_498320
-0x498315: align 10h
 0x498320: mov     cl, ds:byte_A3DE24[eax]
-0x498326: mov     ds:byte_B34FC8[eax], cl
+0x498326: mov     [eax+0B34FC8h], cl
 0x49832C: add     eax, 1
 0x49832F: test    cl, cl
 0x498331: jnz     short loc_498320

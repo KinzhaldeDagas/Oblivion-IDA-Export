@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x4030F0",
+      "0x403158"
+    ]
+  ],
+  "chunks_sha256": "ff4e09a899c4bd2111982b55af54a94251ea80de6fb6a14db7a1785076a23a8e",
+  "comment_regular": "[Controller decode 2026-07-09] Sets joystick deadzone through DIPROP_DEADZONE. Oblivion passes a float percent; DirectInput property value is deadzonePercent * 10000.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "InputGlobals::SetJoystickDeadzone",
   "end_ea": "0x403158",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobals::SetJoystickDeadzone",
   "segment": ".text",
   "sha256": "ff4e09a899c4bd2111982b55af54a94251ea80de6fb6a14db7a1785076a23a8e",
   "size": 104,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4030F0",
+  "total_chunk_size": 104,
   "type": "void __thiscall(InputGlobal *this, UInt8 whichJoystick, float deadzonePercent)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 1

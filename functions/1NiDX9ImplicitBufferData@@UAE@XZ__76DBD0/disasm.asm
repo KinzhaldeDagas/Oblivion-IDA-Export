@@ -20,9 +20,9 @@
 0x76DC04: mov     dword ptr [esi+0Ch], 0
 0x76DC0B: mov     eax, [esi+10h]
 0x76DC0E: push    eax
-0x76DC0F: call    FormHeapFree
+0x76DC0F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76DC14: add     esp, 4
-0x76DC17: push    offset NiRefObject_objcount; lpAddend
+0x76DC17: push    0B3FD64h; lpAddend
 0x76DC1C: mov     dword ptr [esi+10h], 0
 0x76DC23: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x76DC29: call    dword ptr ds:0A2807Ch

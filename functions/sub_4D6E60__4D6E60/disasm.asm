@@ -8,15 +8,15 @@
 0x4D6E72: push    esi
 0x4D6E73: call    sub_4533F0
 0x4D6E78: test    eax, 40000h
-0x4D6E7D: push    8
-0x4D6E7F: lea     ecx, [esi+44h]
+0x4D6E7D: push    8; mask
+0x4D6E7F: lea     ecx, [esi+44h]; this
 0x4D6E82: jz      short loc_4D6E94
-0x4D6E84: call    sub_41F830
+0x4D6E84: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4D6E89: neg     al
 0x4D6E8B: pop     esi
 0x4D6E8C: sbb     eax, eax
 0x4D6E8E: add     eax, 1
 0x4D6E91: retn    4
-0x4D6E94: call    sub_41F830
+0x4D6E94: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4D6E99: pop     esi
 0x4D6E9A: retn    4

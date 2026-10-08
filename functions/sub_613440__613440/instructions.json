@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x613440",
-    "line": "push    ebx",
+    "line": "push    ebx; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x613449",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x61345A",
-    "line": "fld     [esp+8+arg_4]",
+    "line": "fld     [esp+8+maximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x61348C",
-    "line": "fstp    [esp+8+arg_4]",
+    "line": "fstp    [esp+8+maximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x61349C",
-    "line": "fstp    [esp+8+arg_4]",
+    "line": "fstp    [esp+8+maximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6134A0",
-    "line": "fld     [esp+8+arg_0]",
+    "line": "fld     [esp+8+surfaceDistance]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6134A4",
-    "line": "fld     [esp+8+arg_4]",
+    "line": "fld     [esp+8+maximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },

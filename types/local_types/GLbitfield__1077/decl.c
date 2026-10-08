@@ -1,1 +1,1 @@
-GLbitfield
+typedef unsigned int GLbitfield;

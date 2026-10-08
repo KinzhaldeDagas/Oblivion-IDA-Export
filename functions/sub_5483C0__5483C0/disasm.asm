@@ -5,4 +5,4 @@
 0x5483CE: fdivp   st(2), st
 0x5483D0: fdivrp  st(1), st
 0x5483D2: fmul    dword ptr ds:0B379B0h
-0x5483D8: jmp     Double_To_SInt32
+0x5483D8: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

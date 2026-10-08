@@ -1,4 +1,4 @@
 void __cdecl sub_A1EC90()
 {
-  GameSetting_destr((int *)&flt_B372B8);
+  GameSetting_destr((int *)flt_B372B8); /*0xa1ec95*/
 }

@@ -4,7 +4,7 @@
 0x628146: cmp     byte ptr [ebp+3Ch], 0
 0x62814A: jz      loc_6281F5
 0x628150: mov     ecx, [esp+10h+arg_0]; this
-0x628154: call    TESObjectREFR_IsPersistent?
+0x628154: call    TESObjectREFR_IsPersistent
 0x628159: test    al, al
 0x62815B: jz      loc_6281F5
 0x628161: fld     dword ptr ds:0A32048h

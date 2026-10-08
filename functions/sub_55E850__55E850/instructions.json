@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55E850",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified Oblivion manager layout is 0x28 bytes with modelCacheByTree at +0 and pendingReferenceNodes at +0x24; constructor initializes shared Ni properties and the TESObjectREFR* -> BSTreeNode* map. Fallout's manager size/field offsets differ. Confidence applies to these local offsets and constructor stores.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1693,37 +1693,37 @@
   },
   {
     "ea": "0x55EBA7",
-    "line": "push    4",
+    "line": "push    4; matrixCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55EBA9",
-    "line": "call    sub_78BD80",
+    "line": "call    CSpeedTreeRT__SetNumWindMatrices; Static CSpeedTreeRT::SetNumWindMatrices. Forwards the requested count as an unsigned 16-bit value to the global wind-matrix container; SDK exception scaffolding surrounds the call.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55EBAE",
-    "line": "push    1",
+    "line": "push    1; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55EBB0",
-    "line": "call    sub_7871C0",
+    "line": "call    CSpeedTreeRT__SetDropToBillboard; Static CSpeedTreeRT::SetDropToBillboard. Updates the global toggle that adds the synthetic billboard LOD to branch/frond/leaf transition selection.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55EBB5",
-    "line": "push    1",
+    "line": "push    1; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55EBB7",
-    "line": "call    sub_787690",
+    "line": "call    CSpeedTreeRT__SetTextureFlip; Oblivion startup initializes CSpeedTreeRT global texture flip to true (push 1; call 0x787690). This is the sole code xref to the setter in this IDB, so generated/embedded SpeedTree T coordinates are negated for the Direct3D/Gamebryo path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,31 +1807,31 @@
   },
   {
     "ea": "0x55EBEE",
-    "line": "push    0Ch",
+    "line": "push    0Ch; entrySize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55EBF0",
-    "line": "push    25h ; '%'",
+    "line": "push    25h ; '%'; bucketCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55EBF2",
-    "line": "push    2",
+    "line": "push    2; initialSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55EBF4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55EBF6",
-    "line": "call    sub_55E720",
+    "line": "call    BSTreeManager_ReferenceNodeMap_ctor; Verified local RTTI and constructor call: constructs LockFreeMap<TESObjectREFR*,BSTreeNode*> with arguments (2,37,12), used by BSTreeManager at +0x24.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1912,5 +1912,335 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BCB70",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB73",
+    "line": "add     ecx, 4; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB76",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCB7B",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB7E",
+    "line": "add     ecx, 8; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB81",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCB86",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB89",
+    "line": "add     ecx, 0Ch; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB8C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCB91",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB94",
+    "line": "add     ecx, 10h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB97",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCB9C",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCB9F",
+    "line": "add     ecx, 14h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBA2",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBA7",
+    "line": "mov     ecx, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBAA",
+    "line": "add     ecx, 18h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBAD",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBB2",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBB5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBB6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBBB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBBC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBBD",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBC0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBC1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBC6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBC7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBC8",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBCB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBCC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBD1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBD2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBD3",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBD6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBD7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBDC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBDD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBDE",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBE1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBE2",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBE7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBE8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBE9",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBEC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBED",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCBF2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBF3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCBF4",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BCBF8",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBFB",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCBFE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCC00",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCC05",
+    "line": "mov     eax, offset stru_AE66EC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCC0A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

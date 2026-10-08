@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60C5B0",
-    "line": "push    ebp",
+    "line": "push    ebp; Player-only launch-obstruction ray test from projectile origin toward player eye/reference height. A valid early hit is routed through normal ArrowProjectile collision handling and collision-state resolution; non-player shots skip this path.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x60C605",
-    "line": "jnz     loc_60C91B",
+    "line": "jnz     loc_60C91B; Only player-fired projectiles run the immediate launch-obstruction ray test between held-visual origin and player eye/reference height.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x60C6D7",
-    "line": "fstp    dword ptr [esp+2D4h+var_284]",
+    "line": "fstp    dword ptr [esp+2D4h+havokNormal]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x60C6E7",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x60C6F7",
-    "line": "call    sub_57E270",
+    "line": "call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x60C709",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x60C723",
-    "line": "call    bhkWorldRayCastData__SetCastInputFrom",
+    "line": "call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x60C744",
-    "line": "fadd    dword ptr [esp+2D8h+var_284]",
+    "line": "fadd    dword ptr [esp+2D8h+havokNormal]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x60C770",
-    "line": "call    bhkWorldRayCastData__SetCastInputTo",
+    "line": "call    bhkWorldRayCastData__SetCastInputTo; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x60C7A3",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x60C7AC",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x60C807",
-    "line": "movaps  [esp+2D4h+var_284+4], xmm0",
+    "line": "movaps  [esp+2D4h+havokNormal+4], xmm0",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x60C821",
-    "line": "mov     [esp+2D8h+var_260], eax",
+    "line": "mov     [esp+2D8h+collidable], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x60C836",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x60C869",
-    "line": "lea     eax, [esp+2D8h+var_250]",
+    "line": "lea     eax, [esp+2D8h+havokPoint]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x60C879",
-    "line": "fld     dword ptr [esp+2DCh+var_284]",
+    "line": "fld     dword ptr [esp+2DCh+havokNormal]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1201,49 +1201,49 @@
   },
   {
     "ea": "0x60C8CC",
-    "line": "mov     eax, [esp+2DCh+var_260]",
+    "line": "mov     eax, [esp+2DCh+collidable]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60C8D0",
-    "line": "lea     ecx, [esp+2DCh+var_284+4]",
+    "line": "lea     ecx, [esp+2DCh+havokNormal+4]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60C8D4",
-    "line": "push    ecx",
+    "line": "push    ecx; havokNormal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60C8D5",
-    "line": "lea     edx, [esp+2E0h+var_250]",
+    "line": "lea     edx, [esp+2E0h+havokPoint]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x60C8DC",
-    "line": "push    edx",
+    "line": "push    edx; havokPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60C8DD",
-    "line": "push    eax",
+    "line": "push    eax; collidable",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60C8DE",
-    "line": "push    edi",
+    "line": "push    edi; projectile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60C8DF",
-    "line": "call    sub_60D950",
+    "line": "call    ArrowProjectile_HandleCollisionHit; If launch ray intersects another valid actor before ordinary flight, route the intersection through projectile hit processing immediately.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,13 +1255,13 @@
   },
   {
     "ea": "0x60C8E7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60C8E9",
-    "line": "call    sub_60BE90",
+    "line": "call    ArrowProjectile_ResolveCollisionState; Validates projectile collision data and dispatches persisted collision state 0..4 to the corresponding reconstruction helper. Missing node collision data is reported and the stale state record is freed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1384,5 +1384,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3000",
+    "line": "lea     ecx, [ebp+var_1C0]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3006",
+    "line": "jmp     sub_538C80",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C300B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C300F",
+    "line": "lea     eax, [edx-2C4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C3015",
+    "line": "mov     ecx, [edx-2C8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C301B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C301D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3022",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3025",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3028",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C302A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C302F",
+    "line": "mov     eax, offset stru_AEBCE0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3034",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

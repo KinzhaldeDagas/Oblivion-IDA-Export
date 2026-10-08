@@ -1,4 +1,4 @@
 void __cdecl sub_A20690()
 {
-  GameSetting_destr((int *)&fMagicSunDamageScreenGlowMult);
+  GameSetting_destr((int *)&flt_B37ED0[0x3A]); /*0xa20695*/
 }

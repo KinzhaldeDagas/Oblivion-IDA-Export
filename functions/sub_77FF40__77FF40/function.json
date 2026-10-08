@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x77FF40",
+      "0x78005F"
+    ]
+  ],
+  "chunks_sha256": "03c13a744c2dac1a35901642fe49a5b91377b13575c1db55e812e700afbae5ac",
+  "comment_regular": "DX10 bridge note: Oblivion texture-stage/sampler default replay. dword_B28CB0 is 2. dword_B2A7C0 stage 0 defaults are COLOROP=MODULATE, COLORARG1=TEXTURE, COLORARG2=CURRENT, ALPHAOP=SELECTARG1, ALPHAARG1=TEXTURE, ALPHAARG2=CURRENT; for stages after 0 the function forces COLOROP/ALPHAOP to DISABLE. DX10 seed/fallback shaders mirror this two-stage table, including stage 0/1 texture SRV sampling and CURRENT chaining when enabled.",
+  "comment_repeatable": "DX10 bridge note: Oblivion texture-stage/sampler default replay. dword_B28CB0 is 2. dword_B2A7C0 stage 0 defaults are COLOROP=MODULATE, COLORARG1=TEXTURE, COLORARG2=CURRENT, ALPHAOP=SELECTARG1, ALPHAARG1=TEXTURE, ALPHAARG2=CURRENT; for stages after 0 the function forces COLOROP/ALPHAOP to DISABLE. DX10 seed/fallback shaders mirror this two-stage table, including stage 0/1 texture SRV sampling and CURRENT chaining when enabled.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "sub_77FF40",
   "end_ea": "0x78005F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_77FF40",
   "segment": ".text",
   "sha256": "03c13a744c2dac1a35901642fe49a5b91377b13575c1db55e812e700afbae5ac",
   "size": 287,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77FF40",
+  "total_chunk_size": 287,
   "type": "void __thiscall(_DWORD **this)",
   "xrefs_from_count": 101,
   "xrefs_to_count": 2

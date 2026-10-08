@@ -1,1 +1,1 @@
-__WINE_FINALLY_CTX
+typedef void (*__WINE_FINALLY_CTX)(BOOL, void *);

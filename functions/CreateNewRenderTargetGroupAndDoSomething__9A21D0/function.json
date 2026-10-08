@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "CreateNewRenderTargetGroupAndDoSomething",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x9A21D0",
+      "0x9A228D"
+    ],
+    [
+      "0x9D7DE0",
+      "0x9D7E06"
+    ]
+  ],
+  "chunks_sha256": "786ef05a4969b0c0a4edd5e8f01e7f52a7066d07803466cfd1b3e9206dec7254",
+  "comment_regular": "Creates a one-color-target NiRenderTargetGroup, attaches the supplied Ni2DBuffer at slot 0, and optionally attaches a NiDepthStencilBuffer.",
+  "comment_repeatable": "Creates a one-color-target NiRenderTargetGroup, attaches the supplied Ni2DBuffer at slot 0, and optionally attaches a NiDepthStencilBuffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiRenderTargetGroup::CreateWithBuffers",
   "end_ea": "0x9A228D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "CreateNewRenderTargetGroupAndDoSomething",
+  "name": "NiRenderTargetGroup::CreateWithBuffers",
   "segment": ".text",
   "sha256": "05c3eced491a3601ef8561503e49ef2a45e6f0fa9cf8042ea30135a0623d579c",
   "size": 189,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A21D0",
-  "type": "NiRenderTargetGroup *__cdecl(Ni2DBuffer *a1, NiRenderer *a2, NiDepthStencilBuffer *a3)",
-  "xrefs_from_count": 73,
+  "total_chunk_size": 227,
+  "type": "NiRenderTargetGroup *__cdecl(Ni2DBuffer *colorBuffer, NiRenderer *renderer, NiDepthStencilBuffer *depthBuffer)",
+  "xrefs_from_count": 87,
   "xrefs_to_count": 2
 }

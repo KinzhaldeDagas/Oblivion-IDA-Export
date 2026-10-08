@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x620050",
-    "line": "sub     esp, 7Ch",
+    "line": "sub     esp, 7Ch; Read-mostly lane test for one ally: predictive target/ally yaw plus local horizontal bound width. Success has a controller side effect, so SmartAI must not call it as a query.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,25 +43,25 @@
   },
   {
     "ea": "0x620066",
-    "line": "push    ebx; a4",
+    "line": "push    ebx; useActorProjection",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x620067",
-    "line": "push    esi; a3",
+    "line": "push    esi; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x620068",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x620069",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x62007B",
-    "line": "call    sub_61DDF0",
+    "line": "call    Actor_CalculateAimAnglesToTarget; Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x620084",
-    "line": "mov     esi, [esp+0A4h+arg_8]",
+    "line": "mov     esi, [esp+0A4h+to]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6200B8",
-    "line": "cmp     [esp+88h+arg_C], bl",
+    "line": "cmp     [esp+88h+arg_C], bl; When requireInCombat is true, candidate must satisfy Actor::IsInCombat(true). Candidate must also be HighProcess, non-null, and not shooter.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x6200D7",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6200D9",
-    "line": "push    esi; a3",
+    "line": "push    esi; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6200DA",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6200DB",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x6200EB",
-    "line": "fld     [esp+88h+var_78]",
+    "line": "fld     [esp+88h+var_78]; Candidate must be strictly closer than current target by TESObjectREFR_GetSurfaceDistance; equal or farther is not blocking.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x620105",
-    "line": "call    sub_61DDF0",
+    "line": "call    Actor_CalculateAimAnglesToTarget; Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62010A",
-    "line": "fstp    [esp+98h+var_78]",
+    "line": "fstp    [esp+98h+var_78]; Aim yaw uses projectile/spell predictive solver (active modes 2/4), not a static position-only bearing. Pitch output is ignored by this lane test.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x62017E",
-    "line": "mov     edx, [eax+15Ch]",
+    "line": "mov     edx, [eax+15Ch]; Width=max(boundMax.x-boundMin.x, boundMax.y-boundMin.y); engine does not apply actor scale here.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x6201EB",
-    "line": "fld     dword ptr ds:0A70EA8h",
+    "line": "fld     dword ptr ds:0A70EA8h; If candidate surface distance == 0, angular tolerance is 0.0174533 rad (1 degree). Otherwise tolerance=atan(2*horizontalWidth/distance).",
     "mnemonic": "fld",
     "size": 6
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x620222",
-    "line": "fstp    [esp+88h+var_6C]",
+    "line": "fstp    [esp+88h+var_6C]; Vanilla compares abs(targetYaw-allyYaw) without +/-pi wrap normalization and ignores pitch/vertical separation.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x620230",
-    "line": "fld     [esp+88h+var_6C]",
+    "line": "fld     [esp+88h+var_6C]; Blocks iff fabs(targetYaw-candidateYaw) <= angularTolerance. Difference is not wrap-normalized; no vertical-angle or LOS test.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x620241",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; Blocking in-combat candidate with a controller is marked +0x15A and given the lane-clear timer, even if wrapper later returns another ally's result.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x62026D",
-    "line": "call    sub_612CF0",
+    "line": "call    CombatController_MarkAsBlockingAlly; Marks CombatController+0x15A as a blocking ally and starts timer: +0x164=current controller time +0x44, +0x168=game setting, +0x16C=-1.",
     "mnemonic": "call",
     "size": 5
   },

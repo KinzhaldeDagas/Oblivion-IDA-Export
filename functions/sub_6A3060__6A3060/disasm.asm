@@ -4,17 +4,16 @@
 0x6A3063: push    edi
 0x6A3064: mov     ebp, ecx
 0x6A3066: push    0; a2
-0x6A3068: mov     ecx, offset ActorProcessManager_ptr; this
-0x6A306D: call    sub_673A50
+0x6A3068: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6A306D: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6A3072: test    eax, eax
 0x6A3074: jz      loc_6A3123
 0x6A307A: mov     ecx, eax; this
-0x6A307C: call    sub_7616D0
+0x6A307C: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6A3081: mov     ebx, eax
 0x6A3083: test    ebx, ebx
 0x6A3085: jz      loc_6A3123
 0x6A308B: jmp     short loc_6A3090
-0x6A308D: align 10h
 0x6A3090: mov     esi, [ebx]
 0x6A3092: test    esi, esi
 0x6A3094: jz      short loc_6A30AA
@@ -74,12 +73,12 @@
 0x6A311B: test    ebx, ebx
 0x6A311D: jnz     loc_6A3090
 0x6A3123: push    1; a2
-0x6A3125: mov     ecx, offset ActorProcessManager_ptr; this
-0x6A312A: call    sub_673A50
+0x6A3125: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x6A312A: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6A312F: test    eax, eax
 0x6A3131: jz      loc_6A31DB
 0x6A3137: mov     ecx, eax; this
-0x6A3139: call    sub_7616D0
+0x6A3139: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6A313E: mov     ebx, eax
 0x6A3140: test    ebx, ebx
 0x6A3142: jz      loc_6A31DB

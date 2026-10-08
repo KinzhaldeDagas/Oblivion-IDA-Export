@@ -1,8 +1,8 @@
 void __thiscall WaterGeometryPAss(WaterManager *this, float *a2, char a3)
 {
-  TESObjectCELL *ParentCell; // eax
+  ExtraDataList *DwordAtOffset40; // eax
   int v6; // edi
-  TESObjectCELL *v7; // eax
+  ExtraDataList *v7; // eax
   float *v8; // eax
   double v9; // st7
   double v10; // st6
@@ -11,7 +11,7 @@ void __thiscall WaterGeometryPAss(WaterManager *this, float *a2, char a3)
   double v13; // st4
   double v14; // rt1
   double v15; // rtt
-  TESObjectCELL *v16; // eax
+  ExtraDataList *v16; // eax
   float *v17; // eax
   _DWORD *unk34; // eax
   int v19; // ecx
@@ -28,7 +28,7 @@ void __thiscall WaterGeometryPAss(WaterManager *this, float *a2, char a3)
   ShaderDefinition *ShaderDefinition; // eax
   BSShader *shader; // ebp
   double v32; // st7
-  void (__thiscall ***v33)(_DWORD, int); // edi
+  float v33; // edi
   float v34; // ecx
   char IsUnderwater; // [esp+17h] [ebp-41h]
   float v36; // [esp+18h] [ebp-40h]
@@ -59,189 +59,189 @@ void __thiscall WaterGeometryPAss(WaterManager *this, float *a2, char a3)
   bool v61; // [esp+5Ch] [ebp+4h]
   float v62; // [esp+60h] [ebp+8h]
 
-  if ( TESObjectREFR_GetParentCell(*(TESObjectREFR **)a2)
+  if ( Shared_GetDwordAtOffset40(*(void **)a2) /*0x49b954*/
     && (*(int (__thiscall **)(_DWORD))(**(_DWORD **)a2 + 0x154))(*(_DWORD *)a2) )
   {
-    ParentCell = TESObjectREFR_GetParentCell(*(TESObjectREFR **)a2);
-    WaterHeight = TESObjectCELL_GetWaterHeight(ParentCell);
-    v61 = *(float *)((*(int (__thiscall **)(_DWORD))(**(_DWORD **)a2 + 0x174))(*(_DWORD *)a2) + 8) < WaterHeight;
-    v6 = *(_DWORD *)a2 + 0x2C;
-    v7 = TESObjectREFR_GetParentCell(*(TESObjectREFR **)a2);
-    IsUnderwater = Actor_IsUnderwater__(*(void **)a2, v6, (int)v7, 1.0);
-    v8 = (float *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)a2 + 0x174))(*(_DWORD *)a2);
-    v52 = *v8;
-    v47 = *(float *)(*((_DWORD *)a2 + 1) + 0x54);
-    v54 = v8[1];
-    v57 = *v8 - v47;
-    v51 = *(float *)(*((_DWORD *)a2 + 1) + 0x58);
-    v59 = v54 - v51;
-    v38 = v57 * v57 + v59 * v59 + 0.0 * 0.0;
-    v39 = sqrt(v38);
-    if ( v39 <= (double)flt_A3F420 )
+    DwordAtOffset40 = (ExtraDataList *)Shared_GetDwordAtOffset40(*(void **)a2); /*0x49b960*/
+    WaterHeight = TESObjectCELL_GetWaterHeight(DwordAtOffset40); /*0x49b96c*/
+    v61 = *(float *)((*(int (__thiscall **)(_DWORD))(**(_DWORD **)a2 + 0x174))(*(_DWORD *)a2) + 8) < WaterHeight; /*0x49b98f*/
+    v6 = *(_DWORD *)a2 + 0x2C; /*0x49b99d*/
+    v7 = (ExtraDataList *)Shared_GetDwordAtOffset40(*(void **)a2); /*0x49b9a0*/
+    IsUnderwater = Actor_IsUnderwater__(*(void **)a2, v6, v7, 1.0); /*0x49b9b0*/
+    v8 = (float *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)a2 + 0x174))(*(_DWORD *)a2); /*0x49b9bc*/
+    v52 = *v8; /*0x49b9d0*/
+    v47 = *(float *)(*((_DWORD *)a2 + 1) + 0x54); /*0x49b9da*/
+    v54 = v8[1]; /*0x49b9e2*/
+    v57 = *v8 - v47; /*0x49b9e9*/
+    v51 = *(float *)(*((_DWORD *)a2 + 1) + 0x58); /*0x49b9ed*/
+    v59 = v54 - v51; /*0x49ba00*/
+    v38 = v57 * v57 + v59 * v59 + 0.0 * 0.0; /*0x49ba22*/
+    v39 = sqrt(v38); /*0x49ba2f*/
+    if ( v39 <= (double)flt_A3F420 ) /*0x49ba4e*/
     {
-      v12 = v54;
-      v10 = v52;
+      v12 = v54; /*0x49ba92*/
+      v10 = v52; /*0x49ba96*/
     }
     else
     {
-      v9 = (dbl_A3F418 - 0.0) / (v39 - 0.0);
-      v10 = v52;
-      v47 = (v47 - v52) * v9 + v52;
-      v11 = v9 * (v51 - v54) + v54;
-      v12 = v54;
-      v51 = v11;
+      v9 = (dbl_A3F418 - 0.0) / (v39 - 0.0); /*0x49ba5c*/
+      v10 = v52; /*0x49ba6a*/
+      v47 = (v47 - v52) * v9 + v52; /*0x49ba70*/
+      v11 = v9 * (v51 - v54) + v54; /*0x49ba88*/
+      v12 = v54; /*0x49ba88*/
+      v51 = v11; /*0x49ba8a*/
     }
-    v55 = v12;
-    v40 = v10 - v10;
-    v13 = dbl_A3F410;
-    v14 = dbl_A3F408;
-    flt_B45FB8 = (v40 - v13) * v14 + (v40 - v13) * v14 - 1.0;
-    v41 = v12 - v12;
-    v15 = dbl_A3F400;
-    flt_B45FBC = (v41 - v13) * v14 * v15 + 1.0;
-    v42 = v47 - v10;
-    flt_B45FAC = (v42 - v13) * v14 * v15 + 1.0;
-    v43 = v51 - v12;
-    flt_B45FB0 = v15 * (v14 * (v43 - v13)) + 1.0;
-    dword_B45F98 = *((_DWORD *)a2 + 7);
-    dword_B45F9C = *((_DWORD *)a2 + 8);
-    if ( (TESObjectREFR_GetParentCell(*(TESObjectREFR **)a2)->members.flags0 & 2) != 0 )
+    v55 = v12; /*0x49baa0*/
+    v40 = v10 - v10; /*0x49baa8*/
+    v13 = dbl_A3F410; /*0x49bab0*/
+    v14 = dbl_A3F408; /*0x49bac0*/
+    OB_ShaderConstantStorage_010201A0[0x69] = (v40 - v13) * v14 + (v40 - v13) * v14 - 1.0; /*0x49baca*/
+    v41 = v12 - v12; /*0x49bad4*/
+    v15 = kFaceGenPolarNegativeTwo; /*0x49bae8*/
+    OB_ShaderConstantStorage_010201A0[0x6A] = (v41 - v13) * v14 * v15 + 1.0; /*0x49baec*/
+    v42 = v47 - v10; /*0x49bafa*/
+    OB_ShaderConstantStorage_010201A0[0x66] = (v42 - v13) * v14 * v15 + 1.0; /*0x49bb0a*/
+    v43 = v51 - v12; /*0x49bb18*/
+    OB_ShaderConstantStorage_010201A0[0x67] = v15 * (v14 * (v43 - v13)) + 1.0; /*0x49bb26*/
+    OB_ShaderConstantStorage_010201A0[0x61] = a2[7]; /*0x49bb2f*/
+    OB_ShaderConstantStorage_010201A0[0x62] = a2[8]; /*0x49bb38*/
+    if ( (*(_BYTE *)(Shared_GetDwordAtOffset40(*(void **)a2) + 0x24) & 2) != 0 ) /*0x49bb4d*/
     {
-      v16 = TESObjectREFR_GetParentCell(*(TESObjectREFR **)a2);
-      v56 = TESObjectCELL_GetWaterHeight(v16) + dbl_A2FC80;
-      v17 = (float *)(*((_DWORD *)a2 + 1) + 0x54);
-      v53 = v10;
-      *v17 = v53;
-      v17[1] = v55;
-      v17[2] = v56;
-      *(_WORD *)(*((_DWORD *)a2 + 1) + 0x18) &= ~1u;
-      NiAVObject_UpdateNiAVObject(*((NiAVObject **)a2 + 1), 0.0, 1);
+      v16 = (ExtraDataList *)Shared_GetDwordAtOffset40(*(void **)a2); /*0x49bb51*/
+      v56 = TESObjectCELL_GetWaterHeight(v16) + dbl_A2FC80; /*0x49bb6e*/
+      v17 = (float *)(*((_DWORD *)a2 + 1) + 0x54); /*0x49bb74*/
+      v53 = v10; /*0x49ba9a*/
+      *v17 = v53; /*0x49bb77*/
+      v17[1] = v55; /*0x49bb7d*/
+      v17[2] = v56; /*0x49bb80*/
+      *(_WORD *)(*((_DWORD *)a2 + 1) + 0x18) &= ~1u; /*0x49bb86*/
+      NiAVObject_UpdateNiAVObject(*((NiAVObject **)a2 + 1), 0.0, 1); /*0x49bb95*/
     }
     else
     {
-      *(_WORD *)(*((_DWORD *)a2 + 1) + 0x18) |= 1u;
+      *(_WORD *)(*((_DWORD *)a2 + 1) + 0x18) |= 1u; /*0x49bb9f*/
     }
-    unk34 = (_DWORD *)this->unk34;
-    v19 = 0;
-    v36 = flt_A32048;
-    v20 = 0;
-    v44 = 0;
-    if ( unk34 )
+    unk34 = (_DWORD *)this->unk34; /*0x49bba4*/
+    v19 = 0; /*0x49bbad*/
+    v36 = flt_A32048; /*0x49bbaf*/
+    v20 = 0; /*0x49bbb3*/
+    v44 = 0; /*0x49bbb8*/
+    if ( unk34 ) /*0x49bbbc*/
     {
-      do
+      do /*0x49bc7c*/
       {
-        v21 = unk34[2];
-        v22 = (_DWORD *)*unk34;
-        if ( v20 )
+        v21 = unk34[2]; /*0x49bbc4*/
+        v22 = (_DWORD *)*unk34; /*0x49bbc7*/
+        if ( v20 ) /*0x49bbc9*/
         {
-          v23 = *((_DWORD *)a2 + 1);
-          v58 = *(float *)(*(_DWORD *)(v21 + 4) + 0x54) - *(float *)(v23 + 0x54);
-          v60 = *(float *)(*(_DWORD *)(v21 + 4) + 0x58) - *(float *)(v23 + 0x58);
-          v48 = v58 * v58 + v60 * v60 + 0.0 * 0.0;
-          v49 = sqrt(v48);
-          if ( v36 > (double)v49 )
+          v23 = *((_DWORD *)a2 + 1); /*0x49bbcf*/
+          v58 = *(float *)(*(_DWORD *)(v21 + 4) + 0x54) - *(float *)(v23 + 0x54); /*0x49bc04*/
+          v60 = *(float *)(*(_DWORD *)(v21 + 4) + 0x58) - *(float *)(v23 + 0x58); /*0x49bc18*/
+          v48 = v58 * v58 + v60 * v60 + 0.0 * 0.0; /*0x49bc3c*/
+          v49 = sqrt(v48); /*0x49bc49*/
+          if ( v36 > (double)v49 ) /*0x49bc64*/
           {
-            v36 = v49;
-            v44 = v21;
+            v36 = v49; /*0x49bc66*/
+            v44 = v21; /*0x49bc6a*/
           }
         }
-        unk34 = v22;
-        if ( (float *)v21 == a2 )
-          v20 = 1;
+        unk34 = v22; /*0x49bc74*/
+        if ( (float *)v21 == a2 ) /*0x49bc76*/
+          v20 = 1; /*0x49bc78*/
       }
-      while ( v22 );
-      v19 = v44;
+      while ( v22 ); /*0x49bc7c*/
+      v19 = v44; /*0x49bc82*/
     }
-    if ( v36 != dbl_A3A5B0 )
+    if ( v36 != dbl_A3A5B0 ) /*0x49bc95*/
     {
-      v50 = (v36 - 0.0) / (dbl_A3F3F8 - 0.0) * (1.0 - 0.0) + 0.0;
-      if ( v50 >= 0.0 )
-        v45 = (v36 - 0.0) / (dbl_A3F3F8 - 0.0) * (1.0 - 0.0) + 0.0;
+      v50 = (v36 - 0.0) / (dbl_A3F3F8 - 0.0) * (1.0 - 0.0) + 0.0; /*0x49bcb5*/
+      if ( v50 >= 0.0 ) /*0x49bcc4*/
+        v45 = (v36 - 0.0) / (dbl_A3F3F8 - 0.0) * (1.0 - 0.0) + 0.0; /*0x49bcce*/
       else
-        v45 = 0.0;
-      v24 = v50;
-      if ( v45 <= 1.0 )
+        v45 = 0.0; /*0x49bcc8*/
+      v24 = v50; /*0x49bcda*/
+      if ( v45 <= 1.0 ) /*0x49bcdf*/
       {
-        if ( v50 < 0.0 )
-          v24 = 0.0;
+        if ( v50 < 0.0 ) /*0x49bcf0*/
+          v24 = 0.0; /*0x49bcf4*/
       }
       else
       {
-        v24 = 1.0;
+        v24 = 1.0; /*0x49bce5*/
       }
-      v37 = v24;
-      if ( v37 < (double)a2[6] )
-        a2[6] = v37;
-      if ( *(float *)(v19 + 0x18) > (double)v37 )
-        *(float *)(v19 + 0x18) = v37;
+      v37 = v24; /*0x49bcf6*/
+      if ( v37 < (double)a2[6] ) /*0x49bd0a*/
+        a2[6] = v37; /*0x49bd0c*/
+      if ( *(float *)(v19 + 0x18) > (double)v37 ) /*0x49bd19*/
+        *(float *)(v19 + 0x18) = v37; /*0x49bd1b*/
     }
-    NiPropertyByID = NiNode_GetNiPropertyByID(*((NiNode **)a2 + 1), 4);
-    v26 = a2[6];
-    v27 = NiPropertyByID;
-    NiPropertyByID[5].members.super.m_uiRefCount = (UInt32)a2[6];
-    v28 = a3 || v61 && !IsUnderwater && sub_5E05B0(*(_DWORD **)a2);
-    byte_B45F4D = v28;
-    LOBYTE(v27[5].members.m_controller) = v28;
-    BYTE1(v27[5].members.m_controller) = v61;
-    if ( dword_B42D78 )
-      ((void (__cdecl *)(int, int))dword_B42D78)(1, 1);
+    NiPropertyByID = NiNode_GetNiPropertyByID(*((NiNode **)a2 + 1), 4); /*0x49bd27*/
+    v26 = a2[6]; /*0x49bd2c*/
+    v27 = NiPropertyByID; /*0x49bd34*/
+    NiPropertyByID[5].members.super.m_uiRefCount = (UInt32)a2[6]; /*0x49bd36*/
+    v28 = a3 || v61 && !IsUnderwater && sub_5E05B0(*(_DWORD **)a2); /*0x49bd58*/
+    BYTE1(OB_ShaderConstantStorage_010201A0[0x4E]) = v28; /*0x49bd5e*/
+    LOBYTE(v27[5].members.m_controller) = v28; /*0x49bd63*/
+    BYTE1(v27[5].members.m_controller) = v61; /*0x49bd69*/
+    if ( unk_B42D78 ) /*0x49bd6f*/
+      ((void (__cdecl *)(int, int))unk_B42D78)(1, 1); /*0x49bd7c*/
     else
-      v26 = 0.0;
-    v62 = v26;
-    if ( BYTE1(v27[5].members.m_controller) )
+      v26 = 0.0; /*0x49bd87*/
+    v62 = v26; /*0x49bd90*/
+    if ( BYTE1(v27[5].members.m_controller) ) /*0x49bd89*/
     {
-      if ( LOBYTE(v27[5].members.m_controller) && *(float *)&v27[5].members.m_pcName <= 1.0 )
+      if ( LOBYTE(v27[5].members.m_controller) && *(float *)&v27[5].members.m_pcName <= 1.0 ) /*0x49bdac*/
       {
-        v29 = *(float *)&v27[5].members.m_pcName + v62;
-        if ( v29 > 1.0 )
-          v29 = 1.0;
+        v29 = *(float *)&v27[5].members.m_pcName + v62; /*0x49bdb4*/
+        if ( v29 > 1.0 ) /*0x49bdc1*/
+          v29 = 1.0; /*0x49bdc3*/
 LABEL_46:
-        *(float *)&v27[5].members.m_pcName = v29;
+        *(float *)&v27[5].members.m_pcName = v29; /*0x49bdf9*/
 LABEL_47:
-        if ( ShaderPackage >= 2 )
+        if ( *(int *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le >= 2 ) /*0x49be06*/
         {
-          ShaderDefinition = GetShaderDefinition(0x14u);
-          if ( ShaderDefinition )
-            shader = ShaderDefinition->shader;
+          ShaderDefinition = GetShaderDefinition(0x14u); /*0x49be0e*/
+          if ( ShaderDefinition ) /*0x49be18*/
+            shader = ShaderDefinition->shader; /*0x49be1a*/
           else
-            shader = 0;
-          byte_B45F4C = 1;
-          sub_55E2A0(&dword_B45FB4, (int *)a2 + 3);
-          if ( !byte_B3522B )
+            shader = 0; /*0x49be1f*/
+          LOBYTE(OB_ShaderConstantStorage_010201A0[0x4E]) = 1; /*0x49be2a*/
+          OB_NiSmartPointer_Assign_010201A0((int *)&OB_ShaderConstantStorage_010201A0[0x68], (int *)a2 + 3); /*0x49be31*/
+          if ( !MEMORY[0xB33E90][0x139B] ) /*0x49be36*/
           {
-            if ( dword_B35220 )
-              v32 = *(float *)(dword_B35220 + 0x98);
+            if ( *(_DWORD *)&MEMORY[0xB33E90][0x1390] ) /*0x49be3f*/
+              v32 = *(float *)(*(_DWORD *)&MEMORY[0xB33E90][0x1390] + 0x98); /*0x49be48*/
             else
-              v32 = flt_A31C80;
-            WaterShader_DisplaceDampener = v32;
+              v32 = flt_A31C80; /*0x49be50*/
+            OB_ShaderConstantStorage_010201A0[0x4B] = v32; /*0x49be56*/
           }
-          nullsub_returnTrue_0arg();
-          sub_7B4900(shader, dword_B43104, *((_DWORD *)a2 + 2), *((_DWORD *)a2 + 2));
-          nullsub_returnTrue_0arg();
-          sub_55E2A0((int *)a2 + 2, &dword_B45FA8);
-          if ( dword_B45FB4 )
+          Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x49be5e*/
+          sub_7B4900(shader, unk_B43104, *((_DWORD *)a2 + 2), *((_DWORD *)a2 + 2)); /*0x49be72*/
+          Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x49be79*/
+          OB_NiSmartPointer_Assign_010201A0((int *)a2 + 2, (int *)&OB_ShaderConstantStorage_010201A0[0x65]); /*0x49be88*/
+          if ( LODWORD(OB_ShaderConstantStorage_010201A0[0x68]) ) /*0x49be8d*/
           {
-            v33 = (void (__thiscall ***)(_DWORD, int))dword_B45FB4;
-            if ( !InterlockedDecrement((volatile LONG *)(dword_B45FB4 + 4)) )
+            v33 = OB_ShaderConstantStorage_010201A0[0x68]; /*0x49be96*/
+            if ( !InterlockedDecrement((volatile LONG *)(LODWORD(OB_ShaderConstantStorage_010201A0[0x68]) + 4)) /*0x49bea8*/
+              && v33 != 0.0 )
             {
-              if ( v33 )
-                (**v33)(v33, 1);
+              (**(void (__thiscall ***)(float, int))LODWORD(v33))(COERCE_FLOAT(LODWORD(v33)), 1); /*0x49beb2*/
             }
-            dword_B45FB4 = 0;
+            OB_ShaderConstantStorage_010201A0[0x68] = 0.0; /*0x49beb4*/
           }
-          v34 = flt_B45FB8;
-          byte_B45F4C = 0;
-          a2[7] = v34;
-          a2[8] = flt_B45FBC;
+          v34 = OB_ShaderConstantStorage_010201A0[0x69]; /*0x49bebe*/
+          LOBYTE(OB_ShaderConstantStorage_010201A0[0x4E]) = 0; /*0x49bec4*/
+          a2[7] = v34; /*0x49becb*/
+          a2[8] = OB_ShaderConstantStorage_010201A0[0x6A]; /*0x49bed4*/
         }
-        return;
+        return; /*0x49bed4*/
       }
-      if ( *(float *)&v27[5].members.m_pcName <= 0.0 )
-        goto LABEL_47;
+      if ( *(float *)&v27[5].members.m_pcName <= 0.0 ) /*0x49bdd4*/
+        goto LABEL_47; /*0x49bdd4*/
     }
-    v29 = *(float *)&v27[5].members.m_pcName - v62 / dbl_A3F3F0;
-    if ( v29 < 0.0 )
-      v29 = 0.0;
-    goto LABEL_46;
+    v29 = *(float *)&v27[5].members.m_pcName - v62 / dbl_A3F3F0; /*0x49bde6*/
+    if ( v29 < 0.0 ) /*0x49bdf1*/
+      v29 = 0.0; /*0x49bdf3*/
+    goto LABEL_46; /*0x49bdf3*/
   }
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 51,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
-  "display_name": "Sky_CreateChildGlobalObjects",
+  "chunks": [
+    [
+      "0x543200",
+      "0x54350B"
+    ],
+    [
+      "0x9BA5E0",
+      "0x9BA611"
+    ]
+  ],
+  "chunks_sha256": "2af2e689063a6e9df969252b2760a801cd94e4d1a4db34d9f87418192c1c2e98",
+  "comment_regular": "Verified: accepts an explicit Climate, else resolves built-in Climate FormID 0x15F; stores Sky.firstClimate and refreshes stars, sun textures, and moon child objects.",
+  "comment_repeatable": "Verified: accepts an explicit Climate, else resolves built-in Climate FormID 0x15F; stores Sky.firstClimate and refreshes stars, sun textures, and moon child objects.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "Sky_SetClimateAndRefreshChildren",
   "end_ea": "0x54350B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Sky_CreateChildGlobalObjects",
+  "name": "Sky_SetClimateAndRefreshChildren",
   "segment": ".text",
   "sha256": "fdc800f9f69f41f0d671b575f7e275d672bdfbcd9a718a25be359acebd7bae87",
   "size": 779,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x543200",
-  "type": "TESClimate *__thiscall(Sky *this, TESClimate *, char)",
-  "xrefs_from_count": 290,
+  "total_chunk_size": 828,
+  "type": "TESClimate *__thiscall(Sky *this, TESClimate *climate, char forceRefresh)",
+  "xrefs_from_count": 309,
   "xrefs_to_count": 3
 }

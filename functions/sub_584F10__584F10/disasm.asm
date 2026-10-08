@@ -125,7 +125,7 @@
 0x585075: jz      short loc_585084
 0x585077: mov     edx, [esp+12Ch+var_110]
 0x58507B: push    edx
-0x58507C: call    FormHeapFree
+0x58507C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x585081: add     esp, 4
 0x585084: push    8; Size
 0x585086: call    FormHeapAlloc

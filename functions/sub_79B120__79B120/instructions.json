@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79B120",
-    "line": "push    esi",
+    "line": "push    esi; Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B121",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79B126",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x79B13B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

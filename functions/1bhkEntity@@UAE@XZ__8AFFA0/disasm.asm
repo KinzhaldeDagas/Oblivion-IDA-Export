@@ -24,3 +24,12 @@
 0x8AFFFD: pop     esi
 0x8AFFFE: add     esp, 10h
 0x8B0001: retn
+0x9D6DA0: mov     ecx, [ebp-10h]; this
+0x9D6DA3: jmp     ??1bhkWorldObject@@UAE@XZ; bhkWorldObject::~bhkWorldObject(void)
+0x9D6DA8: mov     edx, [esp+arg_4]
+0x9D6DAC: lea     eax, [edx-8]
+0x9D6DAF: mov     ecx, [edx-0Ch]
+0x9D6DB2: xor     ecx, eax
+0x9D6DB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6DB9: mov     eax, offset stru_AFEA9C
+0x9D6DBE: jmp     ___CxxFrameHandler3

@@ -70,3 +70,15 @@
 0x6AA659: pop     ebx
 0x6AA65A: add     esp, 10h
 0x6AA65D: retn    14h
+0x9C6350: lea     ecx, [ebp+14h]; slot
+0x9C6353: jmp     NiPointerSlot_Release
+0x9C6358: mov     ecx, [ebp-10h]
+0x9C635B: add     ecx, 10h; slot
+0x9C635E: jmp     NiPointerSlot_Release
+0x9C6363: mov     edx, [esp+arg_4]
+0x9C6367: lea     eax, [edx-10h]
+0x9C636A: mov     ecx, [edx-14h]
+0x9C636D: xor     ecx, eax
+0x9C636F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6374: mov     eax, offset stru_AEE910
+0x9C6379: jmp     ___CxxFrameHandler3

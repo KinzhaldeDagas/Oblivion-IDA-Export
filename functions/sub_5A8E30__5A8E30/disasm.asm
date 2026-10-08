@@ -16,8 +16,8 @@
 0x5A8E56: mov     eax, [eax+68h]
 0x5A8E59: add     esp, 8
 0x5A8E5C: push    offset aDataMenusMai_2; "Data\\Menus\\Main\\hud_subtitle_menu.xm"...
-0x5A8E61: mov     ecx, eax; TileWindow *
-0x5A8E63: call    Menu_LoadXML
+0x5A8E61: mov     ecx, eax; this
+0x5A8E63: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5A8E68: mov     edi, eax
 0x5A8E6A: mov     ecx, edi
 0x5A8E6C: call    Tile_GetParentMenu
@@ -50,9 +50,9 @@
 0x5A8EC9: call    Tile_GetFloat
 0x5A8ECE: push    ecx
 0x5A8ECF: mov     ecx, [esi+28h]; this
-0x5A8ED2: fstp    [esp+0Ch+a3]; a3
-0x5A8ED5: push    0FB7h; a2
-0x5A8EDA: call    Tile_SetFloat
+0x5A8ED2: fstp    [esp+0Ch+a3]; value
+0x5A8ED5: push    0FB7h; propertyCode
+0x5A8EDA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A8EDF: mov     ecx, [esi+28h]
 0x5A8EE2: push    offset word_A36430
 0x5A8EE7: push    0FDEh

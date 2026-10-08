@@ -15,7 +15,6 @@
 0x6BE605: lea     edi, [ecx+20h]
 0x6BE608: sub     ebp, ecx
 0x6BE60A: jmp     short loc_6BE614
-0x6BE60C: align 10h
 0x6BE610: mov     esi, [esp+1Ch+var_8]
 0x6BE614: mov     ecx, [edi-0Ch]
 0x6BE617: cmp     ecx, [edi+ebp-0Ch]

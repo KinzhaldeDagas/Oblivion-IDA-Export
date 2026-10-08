@@ -2,14 +2,14 @@ signed int sub_748A40()
 {
   signed int result; // eax
 
-  result = nullsub_retminus1_();
-  if ( result >= 0 )
+  result = nullsub_retminus1_(); /*0x748a4b*/
+  if ( result >= 0 ) /*0x748a55*/
   {
-    dword_B4065C = result;
-    dword_B40668 = result;
-    dword_B40674 = result;
-    dword_B40680 = result;
-    byte_B40684 = 1;
+    dword_B40614[0x12] = result; /*0x748a57*/
+    dword_B40614[0x15] = result; /*0x748a5c*/
+    dword_B40614[0x18] = result; /*0x748a61*/
+    dword_B40614[0x1B] = result; /*0x748a66*/
+    LOBYTE(dword_B40614[0x1C]) = 1; /*0x748a6b*/
   }
-  return result;
+  return result; /*0x748a72*/
 }

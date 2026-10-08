@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68D940",
-    "line": "push    esi",
+    "line": "push    esi; Verified registry map destructor: installs base vtable, clears entries, frees the bucket array, and frees the map object when the scalar-deleting flag requests it.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x68D952",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x68D95A",
-    "line": "test    [esp+4+arg_0], 1",
+    "line": "test    [esp+4+freeMemory], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x68D962",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

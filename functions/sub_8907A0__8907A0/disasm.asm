@@ -1,4 +1,4 @@
-0x8907A0: push    ebp
+0x8907A0: push    ebp; TES4 authoritative: set transient push/knockback channel. Converts caller world vector by hkFactor, divides by duration, and if stronger than current +0x2F0 stores +0x300=duration and +0x2F0=push vector/duration. Not a generic ledge-climb impulse API.
 0x8907A1: mov     ebp, esp
 0x8907A3: and     esp, 0FFFFFFF0h
 0x8907A6: sub     esp, 40h
@@ -8,7 +8,7 @@
 0x8907B4: mov     eax, [ebp+arg_0]
 0x8907B7: fld     dword ptr [eax]
 0x8907B9: xorps   xmm1, xmm1
-0x8907BC: fld     qword ptr ds:0A39088h
+0x8907BC: fld     qword ptr ds:0A39088h; Uses hkFactor, so sub_8907A0 expects caller vector in TES/world units and stores Havok-unit push data.
 0x8907C2: fmul    st(1), st
 0x8907C4: fxch    st(1)
 0x8907C6: fstp    dword ptr [esp+40h+var_20]
@@ -51,8 +51,8 @@
 0x89084F: fnstsw  ax
 0x890851: test    ah, 5
 0x890854: jp      short loc_890874
-0x890856: fstp    dword ptr [ecx+300h]
-0x89085C: movaps  xmmword ptr [ecx+2F0h], xmm1
+0x890856: fstp    dword ptr [ecx+300h]; Stores transient push timer at proxy+0x300 only when new push vector magnitude exceeds existing +0x2F0 magnitude.
+0x89085C: movaps  xmmword ptr [ecx+2F0h], xmm1; Stores transient push vector at proxy+0x2F0; later consumed by 0x890970 as remainingTime * vector.
 0x890863: mov     ecx, [esp+40h+var_4]
 0x890867: xor     ecx, esp
 0x890869: call    @__security_check_cookie@4; __security_check_cookie(x)

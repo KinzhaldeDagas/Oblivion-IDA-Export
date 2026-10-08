@@ -17,7 +17,7 @@
 0x80C8E9: lea     esp, [esp+0]
 0x80C8F0: lea     eax, [esp+3Ch+var_24]
 0x80C8F4: push    eax
-0x80C8F5: call    sub_7606A0
+0x80C8F5: call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.
 0x80C8FA: add     esp, 4
 0x80C8FD: mov     esi, eax
 0x80C8FF: mov     ecx, [edi]
@@ -28,7 +28,7 @@
 0x80C90F: jz      short loc_80C91C
 0x80C911: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x80C915: jnz     short loc_80C91C
-0x80C917: call    sub_7604D0
+0x80C917: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x80C91C: mov     eax, [esi]
 0x80C91E: test    eax, eax
 0x80C920: mov     [edi], eax
@@ -43,27 +43,27 @@
 0x80C93D: add     eax, 60h ; '`'
 0x80C940: cmp     dword ptr [eax], 0
 0x80C943: jnz     short loc_80C94A
-0x80C945: call    sub_7604D0
+0x80C945: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x80C94A: lea     ecx, [esp+3Ch+a3]
 0x80C94E: push    ecx
-0x80C94F: call    sub_772630
+0x80C94F: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x80C954: mov     edx, [esp+40h+a3]
 0x80C958: push    2
 0x80C95A: push    ebx
 0x80C95B: push    0
 0x80C95D: push    edx
 0x80C95E: mov     [esp+50h+var_4], ebx
-0x80C962: call    sub_801110
+0x80C962: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x80C967: mov     ecx, [edi]; this
 0x80C969: mov     eax, [esp+50h+a3]
 0x80C96D: mov     edx, [ecx+14h]
 0x80C970: add     esp, 14h
 0x80C973: push    eax; a3
 0x80C974: push    edx; a2
-0x80C975: call    sub_760010
+0x80C975: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x80C97A: lea     eax, [esp+3Ch+var_20]
 0x80C97E: push    eax
-0x80C97F: call    sub_772630
+0x80C97F: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x80C984: add     esp, 4
 0x80C987: mov     esi, eax
 0x80C989: mov     eax, [esp+3Ch+a3]
@@ -77,7 +77,7 @@
 0x80C9A0: add     eax, 5Ch ; '\'
 0x80C9A3: cmp     dword ptr [eax], 0
 0x80C9A6: jnz     short loc_80C9AD
-0x80C9A8: call    sub_772560
+0x80C9A8: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80C9AD: mov     eax, [esi]
 0x80C9AF: test    eax, eax
 0x80C9B1: mov     [esp+3Ch+a3], eax
@@ -92,23 +92,23 @@
 0x80C9CE: cmp     dword ptr [ecx+5Ch], 0
 0x80C9D2: lea     eax, [ecx+5Ch]
 0x80C9D5: jnz     short loc_80C9DC
-0x80C9D7: call    sub_772560
+0x80C9D7: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80C9DC: mov     eax, [esp+3Ch+a3]
 0x80C9E0: push    2
 0x80C9E2: push    ebx
 0x80C9E3: push    ebx
 0x80C9E4: push    eax
-0x80C9E5: call    sub_801110
+0x80C9E5: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x80C9EA: mov     ecx, [edi]; this
 0x80C9EC: mov     edx, [esp+4Ch+a3]
 0x80C9F0: mov     eax, [ecx+14h]
 0x80C9F3: add     esp, 10h
 0x80C9F6: push    edx; a3
 0x80C9F7: push    eax; a2
-0x80C9F8: call    sub_760010
+0x80C9F8: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x80C9FD: lea     ecx, [esp+3Ch+var_1C]
 0x80CA01: push    ecx
-0x80CA02: call    sub_772630
+0x80CA02: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x80CA07: add     esp, 4
 0x80CA0A: mov     esi, eax
 0x80CA0C: mov     eax, [esp+3Ch+a3]
@@ -122,7 +122,7 @@
 0x80CA23: add     eax, 5Ch ; '\'
 0x80CA26: cmp     dword ptr [eax], 0
 0x80CA29: jnz     short loc_80CA30
-0x80CA2B: call    sub_772560
+0x80CA2B: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CA30: mov     eax, [esi]
 0x80CA32: test    eax, eax
 0x80CA34: mov     [esp+3Ch+a3], eax
@@ -137,23 +137,23 @@
 0x80CA51: cmp     dword ptr [ecx+5Ch], 0
 0x80CA55: lea     eax, [ecx+5Ch]
 0x80CA58: jnz     short loc_80CA5F
-0x80CA5A: call    sub_772560
+0x80CA5A: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CA5F: mov     eax, [esp+3Ch+a3]
 0x80CA63: push    2
 0x80CA65: push    ebx
 0x80CA66: push    2
 0x80CA68: push    eax
-0x80CA69: call    sub_801110
+0x80CA69: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x80CA6E: mov     ecx, [edi]; this
 0x80CA70: mov     edx, [esp+4Ch+a3]
 0x80CA74: mov     eax, [ecx+14h]
 0x80CA77: add     esp, 10h
 0x80CA7A: push    edx; a3
 0x80CA7B: push    eax; a2
-0x80CA7C: call    sub_760010
+0x80CA7C: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x80CA81: lea     ecx, [esp+3Ch+var_18]
 0x80CA85: push    ecx
-0x80CA86: call    sub_772630
+0x80CA86: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x80CA8B: add     esp, 4
 0x80CA8E: mov     esi, eax
 0x80CA90: mov     eax, [esp+3Ch+a3]
@@ -167,7 +167,7 @@
 0x80CAA7: add     eax, 5Ch ; '\'
 0x80CAAA: cmp     dword ptr [eax], 0
 0x80CAAD: jnz     short loc_80CAB4
-0x80CAAF: call    sub_772560
+0x80CAAF: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CAB4: mov     eax, [esi]
 0x80CAB6: test    eax, eax
 0x80CAB8: mov     [esp+3Ch+a3], eax
@@ -182,23 +182,23 @@
 0x80CAD5: cmp     dword ptr [ecx+5Ch], 0
 0x80CAD9: lea     eax, [ecx+5Ch]
 0x80CADC: jnz     short loc_80CAE3
-0x80CADE: call    sub_772560
+0x80CADE: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CAE3: mov     eax, [esp+3Ch+a3]
 0x80CAE7: push    2
 0x80CAE9: push    3
 0x80CAEB: push    3
 0x80CAED: push    eax
-0x80CAEE: call    sub_801110
+0x80CAEE: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x80CAF3: mov     ecx, [edi]; this
 0x80CAF5: mov     edx, [esp+4Ch+a3]
 0x80CAF9: mov     eax, [ecx+14h]
 0x80CAFC: add     esp, 10h
 0x80CAFF: push    edx; a3
 0x80CB00: push    eax; a2
-0x80CB01: call    sub_760010
+0x80CB01: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x80CB06: lea     ecx, [esp+3Ch+var_14]
 0x80CB0A: push    ecx
-0x80CB0B: call    sub_772630
+0x80CB0B: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x80CB10: add     esp, 4
 0x80CB13: mov     esi, eax
 0x80CB15: mov     eax, [esp+3Ch+a3]
@@ -212,7 +212,7 @@
 0x80CB2C: add     eax, 5Ch ; '\'
 0x80CB2F: cmp     dword ptr [eax], 0
 0x80CB32: jnz     short loc_80CB39
-0x80CB34: call    sub_772560
+0x80CB34: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CB39: mov     eax, [esi]
 0x80CB3B: test    eax, eax
 0x80CB3D: mov     [esp+3Ch+a3], eax
@@ -227,20 +227,20 @@
 0x80CB5A: cmp     dword ptr [ecx+5Ch], 0
 0x80CB5E: lea     eax, [ecx+5Ch]
 0x80CB61: jnz     short loc_80CB68
-0x80CB63: call    sub_772560
+0x80CB63: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CB68: mov     eax, [esp+3Ch+a3]
 0x80CB6C: push    2
 0x80CB6E: push    ebx
 0x80CB6F: push    4
 0x80CB71: push    eax
-0x80CB72: call    sub_801110
+0x80CB72: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x80CB77: mov     ecx, [edi]; this
 0x80CB79: mov     edx, [esp+4Ch+a3]
 0x80CB7D: mov     eax, [ecx+14h]
 0x80CB80: add     esp, 10h
 0x80CB83: push    edx; a3
 0x80CB84: push    eax; a2
-0x80CB85: call    sub_760010
+0x80CB85: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x80CB8A: push    0
 0x80CB8C: call    sub_404F00
 0x80CB91: add     esp, 4
@@ -248,7 +248,7 @@
 0x80CB97: jl      loc_80CC22
 0x80CB9D: lea     ecx, [esp+3Ch+var_10]
 0x80CBA1: push    ecx
-0x80CBA2: call    sub_772630
+0x80CBA2: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x80CBA7: add     esp, 4
 0x80CBAA: mov     esi, eax
 0x80CBAC: mov     eax, [esp+3Ch+a3]
@@ -262,7 +262,7 @@
 0x80CBC3: add     eax, 5Ch ; '\'
 0x80CBC6: cmp     dword ptr [eax], 0
 0x80CBC9: jnz     short loc_80CBD0
-0x80CBCB: call    sub_772560
+0x80CBCB: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CBD0: mov     eax, [esi]
 0x80CBD2: test    eax, eax
 0x80CBD4: mov     [esp+3Ch+a3], eax
@@ -277,20 +277,20 @@
 0x80CBF1: cmp     dword ptr [ecx+5Ch], 0
 0x80CBF5: lea     eax, [ecx+5Ch]
 0x80CBF8: jnz     short loc_80CBFF
-0x80CBFA: call    sub_772560
+0x80CBFA: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CBFF: mov     eax, [esp+3Ch+a3]
 0x80CC03: push    2
 0x80CC05: push    3
 0x80CC07: push    5
 0x80CC09: push    eax
-0x80CC0A: call    sub_801110
+0x80CC0A: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x80CC0F: mov     ecx, [edi]; this
 0x80CC11: mov     edx, [esp+4Ch+a3]
 0x80CC15: mov     eax, [ecx+14h]
 0x80CC18: add     esp, 10h
 0x80CC1B: push    edx; a3
 0x80CC1C: push    eax; a2
-0x80CC1D: call    sub_760010
+0x80CC1D: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x80CC22: mov     eax, [esp+3Ch+a3]
 0x80CC26: test    eax, eax
 0x80CC28: mov     [esp+3Ch+var_4], 0FFFFFFFFh
@@ -300,7 +300,7 @@
 0x80CC38: add     eax, 5Ch ; '\'
 0x80CC3B: cmp     dword ptr [eax], 0
 0x80CC3E: jnz     short loc_80CC45
-0x80CC40: call    sub_772560
+0x80CC40: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x80CC45: add     edi, 4
 0x80CC48: sub     [esp+3Ch+var_28], ebx
 0x80CC4C: jnz     loc_80C8F0
@@ -317,3 +317,31 @@
 0x80CC8A: pop     ebx
 0x80CC8B: add     esp, 2Ch
 0x80CC8E: retn
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9D0D70: lea     ecx, [ebp-24h]; void *
+0x9D0D73: jmp     sub_4027D0
+0x9D0D78: lea     ecx, [ebp-2Ch]
+0x9D0D7B: jmp     loc_75FA70
+0x9D0D80: lea     ecx, [ebp-20h]
+0x9D0D83: jmp     loc_75FA70
+0x9D0D88: lea     ecx, [ebp-1Ch]
+0x9D0D8B: jmp     loc_75FA70
+0x9D0D90: lea     ecx, [ebp-18h]
+0x9D0D93: jmp     loc_75FA70
+0x9D0D98: lea     ecx, [ebp-14h]
+0x9D0D9B: jmp     loc_75FA70
+0x9D0DA0: lea     ecx, [ebp-10h]
+0x9D0DA3: jmp     loc_75FA70
+0x9D0DA8: mov     edx, [esp+arg_4]
+0x9D0DAC: lea     eax, [edx-2Ch]
+0x9D0DAF: mov     ecx, [edx-30h]
+0x9D0DB2: xor     ecx, eax
+0x9D0DB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0DB9: mov     eax, offset stru_AF956C
+0x9D0DBE: jmp     ___CxxFrameHandler3

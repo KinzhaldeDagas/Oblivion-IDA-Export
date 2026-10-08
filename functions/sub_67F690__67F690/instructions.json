@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67F690",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified low-level route search seeding: enumerate the per-space reference map for the origin TESForm, filter eligible linked references, compute initial costs from source position and sourceRef, initialize per-node search state/parent, insert candidates into AStarWorldNodeList, and retain the best candidate already in the destination space.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x67F699",
-    "line": "cmp     [ebp+arg_0], 0",
+    "line": "cmp     [ebp+openNodes], 0",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x67F6AB",
-    "line": "lea     eax, [esp+20h+var_14]",
+    "line": "lea     eax, [esp+20h+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x67F6B7",
-    "line": "mov     [esp+28h+var_14], 0",
+    "line": "mov     [esp+28h+self], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x67F6CC",
-    "line": "mov     esi, [esp+20h+var_14]",
+    "line": "mov     esi, [esp+20h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x67F6DA",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x67F6E1",
-    "line": "mov     [esp+20h+var_C], eax",
+    "line": "mov     [esp+20h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -156,74 +156,68 @@
     "size": 2
   },
   {
-    "ea": "0x67F6ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x67F6F0",
-    "line": "mov     esi, [esp+20h+var_14]",
+    "line": "mov     esi, [esp+20h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x67F6F4",
-    "line": "lea     edx, [esp+20h+var_10]",
+    "line": "lea     edx, [esp+20h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67F6F8",
-    "line": "push    edx",
+    "line": "push    edx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F6F9",
-    "line": "lea     eax, [esp+24h+var_8]",
+    "line": "lea     eax, [esp+24h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67F6FD",
-    "line": "push    eax",
+    "line": "push    eax; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F6FE",
-    "line": "lea     ecx, [esp+28h+var_C]",
+    "line": "lea     ecx, [esp+28h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67F702",
-    "line": "push    ecx",
+    "line": "push    ecx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F703",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F705",
-    "line": "mov     [esp+2Ch+var_10], 0",
+    "line": "mov     [esp+2Ch+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x67F70D",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67F712",
-    "line": "mov     edi, [esp+20h+var_10]",
+    "line": "mov     edi, [esp+20h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,19 +271,19 @@
   },
   {
     "ea": "0x67F735",
-    "line": "push    edx",
+    "line": "push    edx; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F736",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F738",
-    "line": "call    sub_680790",
+    "line": "call    TravelPathSpaceDoorLink_IsEligibleInSpace; Verified endpoint filter: rejects references with deleted bit 0x20; disabled bit 0x800 is rejected unless the verified allow-disabled-doors policy is set. The independent CalcLowPathToPoint diagnostic names 0x800 '-Disabled'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,43 +313,43 @@
   },
   {
     "ea": "0x67F750",
-    "line": "push    1",
+    "line": "push    1; includeTransitionPenalty",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67F752",
-    "line": "push    eax",
+    "line": "push    eax; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F753",
-    "line": "push    esi",
+    "line": "push    esi; candidateNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F754",
-    "line": "push    offset qword_B3BE20",
+    "line": "push    0B3BE20h; position",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x67F759",
-    "line": "push    ecx",
+    "line": "push    ecx; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F75A",
-    "line": "call    sub_680AA0",
+    "line": "call    TravelPath_ComputeTransitionDistanceCost; Verified cost calculation: obtains the reference's position in the specified spatial form and adds Euclidean distance from the supplied position. When includeTransitionPenalty is true it also adds TravelPath_ComputeDoorTransitionPenalty. Sentinel/invalid-position fallback is the global float constant; broader heuristic policy is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67F75F",
-    "line": "fstp    [esp+34h+var_24]",
+    "line": "fstp    [esp+34h+fitness]; fitness",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -367,13 +361,13 @@
   },
   {
     "ea": "0x67F766",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F768",
-    "line": "call    sub_680930",
+    "line": "call    TravelPath_SearchState_SetFitness; Verified: writes fitness at +0 of the 0x10-byte TravelPathSearchState selected by the link's 16-bit searchNodeIndex. Non-finite/NaN fitness is logged and clamped to 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,55 +379,55 @@
   },
   {
     "ea": "0x67F773",
-    "line": "push    edx",
+    "line": "push    edx; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F774",
-    "line": "push    0",
+    "line": "push    0; parentNode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67F776",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F778",
-    "line": "call    sub_680460",
+    "line": "call    TravelPath_SearchState_SetParentAndSpace; Verified: stores predecessor link pointer at state +4 and the spatial form used to enter the current link at state +8. Seed links use a null predecessor and source space.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67F77D",
-    "line": "push    1",
+    "line": "push    1; discovered",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67F77F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F781",
-    "line": "call    sub_680570",
+    "line": "call    TravelPath_SearchState_SetDiscoveredFlag; Verified: sets/clears state flag bit 0x01. It is set during source seeding and for newly inserted links; because it persists after expansion, its 'discovered' meaning is Probable.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67F786",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F788",
-    "line": "call    sub_6804B0",
+    "line": "call    TravelPath_SearchState_GetFitness; Verified: returns fitness from state +0 for the link's searchNodeIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,19 +463,19 @@
   },
   {
     "ea": "0x67F79C",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+openNodes]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x67F79F",
-    "line": "push    esi",
+    "line": "push    esi; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F7A0",
-    "line": "call    sub_680BB0",
+    "line": "call    AStarWorldNodeList_InsertByFitness; Verified: Inserts a search-node index into the single AStarWorldNodeList. Reads that index's fitness from the 0x10-byte transient state table and keeps the list in ascending fitness order (before first >=, otherwise tail). This differs from Fallout's TeleportDoorSearch AStarQueue: Fallout AddNode selects one of 20 buckets from normalized fitness, then sorts within that bucket.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,19 +487,19 @@
   },
   {
     "ea": "0x67F7AA",
-    "line": "push    eax",
+    "line": "push    eax; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F7AB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F7AD",
-    "line": "call    sub_6803F0",
+    "line": "call    TravelPathSpaceDoorLink_GetOtherSpace; Verified: if the supplied spatial form matches spaceA or spaceB, returns the opposite spatial TESForm; otherwise returns null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,43 +529,43 @@
   },
   {
     "ea": "0x67F7C2",
-    "line": "push    0",
+    "line": "push    0; includeTransitionPenalty",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67F7C4",
-    "line": "push    edx",
+    "line": "push    edx; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F7C5",
-    "line": "push    esi",
+    "line": "push    esi; candidateNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F7C6",
-    "line": "push    offset qword_B3BE2C",
+    "line": "push    0B3BE2Ch; position",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x67F7CB",
-    "line": "push    ecx",
+    "line": "push    ecx; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F7CC",
-    "line": "call    sub_680AA0",
+    "line": "call    TravelPath_ComputeTransitionDistanceCost; Verified cost calculation: obtains the reference's position in the specified spatial form and adds Euclidean distance from the supplied position. When includeTransitionPenalty is true it also adds TravelPath_ComputeDoorTransitionPenalty. Sentinel/invalid-position fallback is the global float constant; broader heuristic policy is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67F7D1",
-    "line": "fstp    [esp+34h+var_8]",
+    "line": "fstp    qword ptr [esp+34h+keyOut]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -583,19 +577,19 @@
   },
   {
     "ea": "0x67F7D8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; node",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F7DA",
-    "line": "call    sub_6804B0",
+    "line": "call    TravelPath_SearchState_GetFitness; Verified: returns fitness from state +0 for the link's searchNodeIndex.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67F7DF",
-    "line": "fadd    [esp+20h+var_8]",
+    "line": "fadd    qword ptr [esp+20h+keyOut]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -607,13 +601,13 @@
   },
   {
     "ea": "0x67F7EA",
-    "line": "fstp    [esp+20h+var_10]",
+    "line": "fstp    [esp+20h+valueOut]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x67F7EE",
-    "line": "fld     [esp+20h+var_10]",
+    "line": "fld     [esp+20h+valueOut]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -697,7 +691,7 @@
   },
   {
     "ea": "0x67F81E",
-    "line": "cmp     [esp+20h+var_C], 0",
+    "line": "cmp     [esp+20h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

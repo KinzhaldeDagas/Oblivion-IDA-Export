@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D21F0",
-    "line": "push    ebx",
+    "line": "push    ebx; Remove property-side shadow-light links, reset shader-side state, and free this light's object/receiver list associations.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7D220B",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7D2246",
-    "line": "call    sub_7EE720",
+    "line": "call    BSShaderProperty_RemoveShadowLight; Remove the paired ShadowSceneLight association from BSShaderProperty+0x6C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7D226A",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x7D2277",
-    "line": "jmp     NiTPointerList__FreeAllNodes",
+    "line": "jmp     NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "jmp",
     "size": 5
   }

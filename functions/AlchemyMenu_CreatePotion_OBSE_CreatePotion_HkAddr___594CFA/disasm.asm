@@ -1,16 +1,16 @@
 0x594CFA: call    Alchemy_MatchPotion
 0x594CFF: test    eax, eax
 0x594D01: jz      short loc_594D18
-0x594D03: mov     ecx, ds:0B333C4h
-0x594D09: push    1
-0x594D0B: push    0
-0x594D0D: push    eax
-0x594D0E: call    TESObjectREFR_AddItem_Abbrev
+0x594D03: mov     ecx, ds:0B333C4h; this
+0x594D09: push    1; count
+0x594D0B: push    0; extraList
+0x594D0D: push    eax; item
+0x594D0E: call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.
 0x594D13: jmp     loc_594DF1
 0x594D18: mov     ecx, [edi+94h]
-0x594D1E: push    ecx
-0x594D1F: mov     ecx, ds:0B33A98h
-0x594D25: call    TESDataHandler_AddForm
+0x594D1E: push    ecx; form
+0x594D1F: mov     ecx, ds:0B33A98h; self
+0x594D25: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x594D2A: mov     edx, [edi+94h]
 0x594D30: mov     ecx, ds:0B33B00h
 0x594D36: push    edx
@@ -44,11 +44,11 @@
 0x594D9D: lea     ecx, [eax+4]; this
 0x594DA0: call    BSStringT_Set
 0x594DA5: mov     eax, [edi+94h]
-0x594DAB: mov     ecx, ds:0B333C4h
-0x594DB1: push    1
-0x594DB3: push    0
-0x594DB5: push    eax
-0x594DB6: call    TESObjectREFR_AddItem_Abbrev
+0x594DAB: mov     ecx, ds:0B333C4h; this
+0x594DB1: push    1; count
+0x594DB3: push    0; extraList
+0x594DB5: push    eax; item
+0x594DB6: call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.
 0x594DBB: push    80h ; '€'; Size
 0x594DC0: call    FormHeapAlloc
 0x594DC5: add     esp, 4
@@ -94,8 +94,8 @@
 0x594E52: push    0
 0x594E54: push    eax; a3
 0x594E55: call    edx
-0x594E57: mov     ecx, [esi]
-0x594E59: call    TESHealthForm_GetHealth
+0x594E57: mov     ecx, [esi]; this
+0x594E59: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x594E5E: cmp     eax, 1
 0x594E61: jnz     short loc_594E9F
 0x594E63: mov     ebx, [esi]
@@ -104,7 +104,7 @@
 0x594E69: mov     ecx, ebx
 0x594E6B: call    ContainerEntryExtraData_DestroyDataTable
 0x594E70: push    ebx
-0x594E71: call    FormHeapFree
+0x594E71: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x594E76: add     esp, 4
 0x594E79: mov     ecx, [esi-70h]
 0x594E7C: mov     dword ptr [esi], 0
@@ -117,21 +117,21 @@
 0x594E95: fstp    [esp+28h+a2]
 0x594E98: push    0FA1h
 0x594E9D: jmp     short loc_594EC9
-0x594E9F: mov     ecx, [esi]
-0x594EA1: call    TESHealthForm_GetHealth
-0x594EA6: mov     ecx, [esi]
+0x594E9F: mov     ecx, [esi]; this
+0x594EA1: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
+0x594EA6: mov     ecx, [esi]; this
 0x594EA8: sub     eax, 1
-0x594EAB: push    eax
-0x594EAC: call    sub_60D020
-0x594EB1: mov     ecx, [esi]
-0x594EB3: call    TESHealthForm_GetHealth
+0x594EAB: push    eax; value
+0x594EAC: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
+0x594EB1: mov     ecx, [esi]; this
+0x594EB3: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x594EB8: mov     [esp+24h+var_10], eax
 0x594EBC: fild    [esp+24h+var_10]
 0x594EC0: push    ecx
-0x594EC1: fstp    [esp+28h+a2]; a3
-0x594EC4: push    0FAEh; a2
+0x594EC1: fstp    [esp+28h+a2]; value
+0x594EC4: push    0FAEh; propertyCode
 0x594EC9: mov     ecx, [esi-48h]; this
-0x594ECC: call    Tile_SetFloat
+0x594ECC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x594ED1: add     esi, 4
 0x594ED4: sub     ebp, 1
 0x594ED7: jnz     loc_594E27

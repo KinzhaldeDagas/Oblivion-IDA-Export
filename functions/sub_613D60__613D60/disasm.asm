@@ -28,7 +28,7 @@
 0x613DA2: mov     ecx, ebx
 0x613DA4: call    ContainerEntryExtraData_DestroyDataTable
 0x613DA9: push    ebx
-0x613DAA: call    FormHeapFree
+0x613DAA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x613DAF: add     esp, 4
 0x613DB2: cmp     edi, [esi+94h]
 0x613DB8: pop     ebx
@@ -48,9 +48,9 @@
 0x613DEB: mov     [esi+9Ch], ebp
 0x613DF1: mov     ecx, [edi]
 0x613DF3: push    1
-0x613DF5: call    sub_419F10
+0x613DF5: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x613DFA: push    edi
-0x613DFB: call    FormHeapFree
+0x613DFB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x613E00: add     esp, 4
 0x613E03: pop     edi
 0x613E04: pop     esi

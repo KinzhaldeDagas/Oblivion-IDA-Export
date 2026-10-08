@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x673A90",
-    "line": "push    ebx",
+    "line": "push    ebx; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x673A91",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+processLevel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x673A9A",
-    "line": "ja      short def_673A9C",
+    "line": "ja      short def_673A9C; jumptable 00673A9C default case",
     "mnemonic": "ja",
     "size": 2
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x673AA3",
-    "line": "lea     esi, [ecx+68h]; jumptable 00673A9C case 0",
+    "line": "lea     esi, [ecx+68h]; Process-level collection mapping: level 0 -> manager+0x68; level 1 -> manager+0x00; level 2 -> manager+0x0C; level 3 -> manager+0x18.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -88,5 +88,131 @@
     "line": "jmp     short loc_673AB8",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x673AB6",
+    "line": "xor     esi, esi; jumptable 00673A9C default case",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x673AB8",
+    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x673ABC",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x673ABE",
+    "line": "call    Actor__GetProcessLevel; Direct call to Actor::GetProcessLevel (0x659A00), not an object virtual dispatch. A null MobileObject process yields -1; any mismatch with requested processLevel silently returns without insertion or status.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x673AC3",
+    "line": "cmp     eax, ebx; Reject insertion unless the MobileObject's current process level equals the requested processLevel argument.",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x673AC5",
+    "line": "jnz     short loc_673AE2",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x673AC7",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x673AC9",
+    "line": "jz      short loc_673AE2",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x673ACB",
+    "line": "mov     eax, [esp+0Ch+relativeTo]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x673ACF",
+    "line": "mov     ecx, dword ptr [esp+0Ch+insertRelative]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x673AD3",
+    "line": "mov     edx, dword ptr [esp+0Ch+append]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x673AD7",
+    "line": "push    eax; relativeTo",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x673AD8",
+    "line": "push    ecx; insertRelative",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x673AD9",
+    "line": "push    edx; append",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x673ADA",
+    "line": "push    edi; object",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x673ADB",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x673ADD",
+    "line": "call    ProcessLevelList_InsertMobileObject; Insert the MobileObject into the selected process-level list using the requested ordering. The release path requests level 0, append=false, insertRelative=false, relativeTo=null. The helper is void and exposes no insertion-success predicate.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x673AE2",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x673AE3",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x673AE4",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x673AE5",
+    "line": "retn    14h",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

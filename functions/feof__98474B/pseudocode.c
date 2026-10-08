@@ -1,8 +1,11 @@
 int __cdecl feof(FILE *File)
 {
-  if ( File )
-    return File->_flag & 0x10;
-  *_errno() = 0x16;
-  _invalid_parameter(0, 0, 0, 0, 0);
-  return 0;
+  int v1; // ebx
+  int v2; // edi
+
+  if ( File ) /*0x984754*/
+    return File->_flag & 0x10; /*0x984775*/
+  *_errno() = 0x16; /*0x984760*/
+  _invalid_parameter(v1, v2, 0); /*0x984766*/
+  return 0; /*0x984770*/
 }

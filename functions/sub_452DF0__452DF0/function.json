@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x452DF0",
+      "0x452E70"
+    ]
+  ],
+  "chunks_sha256": "797a7e62222b7e07eaf0bad27290329b3812a2ed054c2f09a0522deaf05d5bfe",
+  "comment_regular": "Verified: manager flags1000 blocks removal and returns false. Looks up change entry; missing returns false. Existing entry: removes/frees when payload+4 is NULL or force true; frees nonnull payload via MemoryHeap_Free_checked then entry via FormHeapFree. Returns true even when existing nonempty entry is retained with force=false. Original class spelling remains Unknown; descriptive SaveLoadChangesMap name.",
+  "comment_repeatable": "\nVerified update: original class identity is now established as ChangesMap from raw Oblivion RTTI B05A40 and ctor 45A860. Earlier Unknown class-spelling statement is superseded; behavioral contract unchanged.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_452DF0",
+  "display_name": "SaveLoadChangesMap_RemoveChanges",
   "end_ea": "0x452E70",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_452DF0",
+  "name": "SaveLoadChangesMap_RemoveChanges",
   "segment": ".text",
   "sha256": "797a7e62222b7e07eaf0bad27290329b3812a2ed054c2f09a0522deaf05d5bfe",
   "size": 128,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x452DF0",
-  "type": "char __thiscall(_DWORD *this, int, char)",
+  "total_chunk_size": 128,
+  "type": "bool __thiscall(ChangesMap *self, unsigned int formID, bool force)",
   "xrefs_from_count": 59,
   "xrefs_to_count": 15
 }

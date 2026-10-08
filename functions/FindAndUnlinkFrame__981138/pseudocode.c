@@ -1,22 +1,22 @@
-int __cdecl _FindAndUnlinkFrame(int a1)
+DWORD *__cdecl _FindAndUnlinkFrame(int a1)
 {
-  int result; // eax
+  DWORD *result; // eax
 
-  if ( a1 == *(_DWORD *)(_getptd() + 0x98) )
+  if ( a1 == _getptd()[0x26] ) /*0x981148*/
   {
-    result = _getptd();
-    *(_DWORD *)(result + 0x98) = *(_DWORD *)(a1 + 4);
+    result = _getptd(); /*0x98114a*/
+    result[0x26] = *(_DWORD *)(a1 + 4); /*0x981152*/
   }
   else
   {
-    for ( result = *(_DWORD *)(_getptd() + 0x98); ; result = *(_DWORD *)(result + 4) )
+    for ( result = (DWORD *)_getptd()[0x26]; ; result = (DWORD *)result[1] ) /*0x98115f*/
     {
-      if ( !*(_DWORD *)(result + 4) )
-        _inconsistency();
-      if ( a1 == *(_DWORD *)(result + 4) )
-        break;
+      if ( !result[1] ) /*0x981170*/
+        _inconsistency(); /*0x981177*/
+      if ( a1 == result[1] ) /*0x98116c*/
+        break; /*0x98116c*/
     }
-    *(_DWORD *)(result + 4) = *(_DWORD *)(a1 + 4);
+    result[1] = *(_DWORD *)(a1 + 4); /*0x98117f*/
   }
-  return result;
+  return result; /*0x981158*/
 }

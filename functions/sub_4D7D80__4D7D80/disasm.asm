@@ -1,7 +1,7 @@
 0x4D7D80: push    esi
 0x4D7D81: mov     esi, ecx
 0x4D7D83: lea     ecx, [esi+44h]
-0x4D7D86: call    sub_4203C0
+0x4D7D86: call    ExtraDataList_GetItemDropper; Returns the TESObjectREFR stored in ExtraItemDropper type 0x41.
 0x4D7D8B: test    eax, eax
 0x4D7D8D: jz      short loc_4D7D98
 0x4D7D8F: push    esi

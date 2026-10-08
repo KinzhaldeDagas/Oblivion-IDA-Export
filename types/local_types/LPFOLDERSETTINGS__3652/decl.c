@@ -1,1 +1,1 @@
-LPFOLDERSETTINGS
+typedef __WIDL_shobjidl_generated_name_00000026 *LPFOLDERSETTINGS;

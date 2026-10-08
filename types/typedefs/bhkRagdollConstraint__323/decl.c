@@ -1,1 +1,1 @@
-bhkRagdollConstraint
+struct bhkRagdollConstraint;

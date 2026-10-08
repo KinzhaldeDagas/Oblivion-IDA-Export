@@ -1,1 +1,5 @@
-TESCELL_CoordOrLight
+union TESCELL_CoordOrLight
+{
+CellCoordinates *coords;
+LightingData *lighting;
+};

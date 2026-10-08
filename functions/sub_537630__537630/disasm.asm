@@ -5,7 +5,6 @@
 0x537637: test    esi, esi
 0x537639: jz      short loc_537656
 0x53763B: jmp     short loc_537640
-0x53763D: align 10h
 0x537640: fld     [esp+8+arg_0]
 0x537644: push    ecx
 0x537645: mov     ecx, esi

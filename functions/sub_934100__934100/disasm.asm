@@ -34,3 +34,45 @@
 0x93415F: jmp     short loc_934134
 0x934161: movzx   ecx, byte ptr [esi+3]; jumptable 0093412A case 0
 0x934165: add     esi, ecx
+0x9341C8: mov     eax, large fs:2Ch; jumptable 0093412A case 1
+0x9341CE: mov     ecx, ds:0BA9DE4h
+0x9341D4: mov     esi, [eax+ecx*4]
+0x9341D7: mov     eax, [esi+19Ch]
+0x9341DD: mov     ecx, [eax+0A8h]
+0x9341E3: cmp     ecx, [eax+30h]
+0x9341E6: jge     short loc_9341F9
+0x9341E8: mov     edx, [eax+64h]
+0x9341EB: inc     ecx
+0x9341EC: mov     [eax+0A8h], ecx
+0x9341F2: mov     [edi], edx
+0x9341F4: mov     [eax+64h], edi
+0x9341F7: jmp     short loc_934209
+0x9341F9: mov     ecx, ds:0BA7D98h
+0x9341FF: mov     eax, [ecx]
+0x934201: push    1Ch
+0x934203: push    0Ch
+0x934205: push    edi
+0x934206: call    dword ptr [eax+1Ch]
+0x934209: mov     eax, [ebp+8]
+0x93420C: test    eax, eax
+0x93420E: js      short loc_93422A
+0x934210: mov     ecx, [ebp+0]
+0x934213: and     eax, 3FFFFFFFh
+0x934218: push    14h
+0x93421A: shl     eax, 2
+0x93421D: push    eax
+0x93421E: push    ecx
+0x93421F: mov     ecx, [esi+19Ch]
+0x934225: call    sub_8A75D0
+0x93422A: mov     edx, [ebp+8]
+0x93422D: pop     edi
+0x93422E: and     edx, 0C0000000h
+0x934234: or      edx, 80000000h
+0x93423A: pop     esi
+0x93423B: mov     dword ptr [ebp+0], 0
+0x934242: mov     dword ptr [ebp+4], 0
+0x934249: mov     [ebp+8], edx
+0x93424C: pop     ebp
+0x93424D: pop     ebx
+0x93424E: pop     ecx
+0x93424F: retn

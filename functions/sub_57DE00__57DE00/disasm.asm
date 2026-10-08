@@ -18,7 +18,7 @@
 0x57DE2D: mov     ecx, [eax+edx*4]
 0x57DE30: call    sub_5739C0
 0x57DE35: fld     dword ptr [esp+0Ch+var_8]
-0x57DE39: call    Double_To_SInt32
+0x57DE39: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57DE3E: xor     ecx, ecx
 0x57DE40: cmp     eax, [esi+0Ch]
 0x57DE43: pop     esi

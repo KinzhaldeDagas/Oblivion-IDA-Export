@@ -1,0 +1,36 @@
+{
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x7A84A0",
+      "0x7A8604"
+    ],
+    [
+      "0x9CCE90",
+      "0x9CCEB9"
+    ]
+  ],
+  "chunks_sha256": "294ed4c8ba18bbd050b1c9e4eb83cd441e397e1bf3aa79a8bc51e4536fcca9f9",
+  "comment_regular": "Recovered Oblivion SIdvWindInfo parser: stores only leaf oscillation, leaf factors, and strength; consumes deprecated wind fields.\n\nRecovered unrecognized Oblivion function boundary. SIdvWindInfo::Parse reads local tokens 5000..5006 until EndWindInfo: direction, branch oscillation, branch factors, and enabled are consumed/discarded; leafOscillation, leafFactors, and strength are stored. The 4.1 source/Fallout supply the historical name only after the local switch and field stores were observed.",
+  "comment_repeatable": "Recovered unrecognized Oblivion function boundary. SIdvWindInfo::Parse reads local tokens 5000..5006 until EndWindInfo: direction, branch oscillation, branch factors, and enabled are consumed/discarded; leafOscillation, leafFactors, and strength are stored. The 4.1 source/Fallout supply the historical name only after the local switch and field stores were observed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_SIdvWindInfo_Parse_010201A0",
+  "end_ea": "0x7A8604",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
+  "has_pseudocode": true,
+  "name": "OB_SIdvWindInfo_Parse_010201A0",
+  "segment": ".text",
+  "sha256": "bdc012f18705677e2c9ef049dd217a7d602083e7979c9dc7cd73ed3d460c4195",
+  "size": 356,
+  "source_annotation_confidence": "Unknown",
+  "start_ea": "0x7A84A0",
+  "total_chunk_size": 397,
+  "type": "void __thiscall(OB_SIdvWindInfo_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 140,
+  "xrefs_to_count": 1
+}

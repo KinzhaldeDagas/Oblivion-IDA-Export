@@ -1,10 +1,11 @@
-int __thiscall sub_556300(_DWORD *this)
+// Return the number of 64-byte basis records in one loaded EGT bank.
+unsigned int __thiscall FaceGenEgtBasisBank_GetCount(const FaceGenEgtBasisBank *self)
 {
-  int v1; // edx
+  void *begin; // edx
 
-  v1 = *(this + 1);
-  if ( v1 )
-    return (*(this + 2) - v1) >> 6;
+  begin = self->begin; /*0x556300*/
+  if ( begin ) /*0x556305*/
+    return ((char *)self->end - (char *)begin) >> 6; /*0x55630f*/
   else
-    return 0;
+    return 0; /*0x556307*/
 }

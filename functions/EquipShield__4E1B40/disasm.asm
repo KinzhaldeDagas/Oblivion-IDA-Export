@@ -22,19 +22,19 @@
 0x4E1B7E: call    edx
 0x4E1B80: mov     ecx, ds:0B333C4h
 0x4E1B86: cmp     esi, ecx
-0x4E1B88: mov     ebx, [esp+28h+arg_0]
+0x4E1B88: mov     ebx, dword ptr [esp+28h+firstPerson]
 0x4E1B8C: jnz     short loc_4E1BB4
 0x4E1B8E: cmp     eax, ebp
 0x4E1B90: jz      short loc_4E1BA0
 0x4E1B92: push    ebx; int
 0x4E1B93: mov     ecx, eax; int
 0x4E1B95: call    sub_479F80
-0x4E1B9A: mov     ecx, ds:0B333C4h
+0x4E1B9A: mov     ecx, ds:0B333C4h; this
 0x4E1BA0: mov     al, [ecx+588h]
-0x4E1BA6: mov     byte ptr [esp+28h+arg_0], al
-0x4E1BAA: mov     edx, [esp+28h+arg_0]
-0x4E1BAE: push    edx
-0x4E1BAF: call    sub_6600D0
+0x4E1BA6: mov     [esp+28h+firstPerson], al
+0x4E1BAA: mov     edx, dword ptr [esp+28h+firstPerson]
+0x4E1BAE: push    edx; firstPerson
+0x4E1BAF: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4E1BB4: cmp     eax, ebp
 0x4E1BB6: jz      short loc_4E1BC2
 0x4E1BB8: push    ebx; int
@@ -46,13 +46,13 @@
 0x4E1BC6: lea     ecx, [ebx+64h]
 0x4E1BC9: cmp     ecx, ebp
 0x4E1BCB: jz      short loc_4E1C2A
-0x4E1BCD: push    ebp
-0x4E1BCE: push    esi
-0x4E1BCF: push    0Dh
+0x4E1BCD: push    ebp; skeletonRoot
+0x4E1BCE: push    esi; actorRef
+0x4E1BCF: push    0Dh; slot
 0x4E1BD1: push    ebp
 0x4E1BD2: call    TESBipedModelForm_GetModelPath
-0x4E1BD7: push    eax
-0x4E1BD8: call    sub_479450
+0x4E1BD7: push    eax; modelPath
+0x4E1BD8: call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.
 0x4E1BDD: mov     edi, eax
 0x4E1BDF: mov     [esp+38h+Src], ebp
 0x4E1BE3: mov     [esp+38h+var_10], bp
@@ -73,7 +73,7 @@
 0x4E1C14: call    NiObjectNET_SetName
 0x4E1C19: push    ebx
 0x4E1C1A: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x4E1C22: call    FormHeapFree
+0x4E1C22: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E1C27: add     esp, 4
 0x4E1C2A: mov     edx, [esi]
 0x4E1C2C: mov     eax, [edx+190h]
@@ -97,3 +97,12 @@
 0x4E1C5D: pop     ebx
 0x4E1C5E: add     esp, 14h
 0x4E1C61: retn    4
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

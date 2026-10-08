@@ -1,13 +1,17 @@
-float *__thiscall sub_78EDD0(float *this, float *a2, float *a3)
+// Oblivion stRotTransform 3x3 multiply (C++ operator* with an explicit hidden result pointer). Computes this*rhs into the supplied 0x24-byte output transform.
+OB_stRotTransform_010201A0 *__thiscall OB_stRotTransform_MultiplyCopy_010201A0(
+        const OB_stRotTransform_010201A0 *this,
+        OB_stRotTransform_010201A0 *outTransform,
+        const OB_stRotTransform_010201A0 *rhs)
 {
-  *a2 = a3[3] * *(this + 1) + *a3 * *this + a3[6] * *(this + 2);
-  a2[1] = a3[4] * *(this + 1) + a3[1] * *this + *(this + 2) * a3[7];
-  a2[2] = a3[5] * *(this + 1) + *this * a3[2] + a3[8] * *(this + 2);
-  a2[3] = a3[3] * *(this + 4) + *(this + 3) * *a3 + a3[6] * *(this + 5);
-  a2[4] = a3[4] * *(this + 4) + a3[1] * *(this + 3) + a3[7] * *(this + 5);
-  a2[5] = *(this + 3) * a3[2] + a3[5] * *(this + 4) + a3[8] * *(this + 5);
-  a2[6] = *(this + 7) * a3[3] + *a3 * *(this + 6) + a3[6] * *(this + 8);
-  a2[7] = a3[1] * *(this + 6) + *(this + 7) * a3[4] + *(this + 8) * a3[7];
-  a2[8] = a3[5] * *(this + 7) + *(this + 6) * a3[2] + a3[8] * *(this + 8);
-  return a2;
+  outTransform->m[0] = rhs->m[3] * this->m[1] + rhs->m[0] * this->m[0] + rhs->m[6] * this->m[2]; /*0x78edec*/
+  outTransform->m[1] = rhs->m[4] * this->m[1] + rhs->m[1] * this->m[0] + this->m[2] * rhs->m[7]; /*0x78ee03*/
+  outTransform->m[2] = rhs->m[5] * this->m[1] + this->m[0] * rhs->m[2] + rhs->m[8] * this->m[2]; /*0x78ee1b*/
+  outTransform->m[3] = rhs->m[3] * this->m[4] + this->m[3] * rhs->m[0] + rhs->m[6] * this->m[5]; /*0x78ee33*/
+  outTransform->m[4] = rhs->m[4] * this->m[4] + rhs->m[1] * this->m[3] + rhs->m[7] * this->m[5]; /*0x78ee4c*/
+  outTransform->m[5] = this->m[3] * rhs->m[2] + rhs->m[5] * this->m[4] + rhs->m[8] * this->m[5]; /*0x78ee65*/
+  outTransform->m[6] = this->m[7] * rhs->m[3] + rhs->m[0] * this->m[6] + rhs->m[6] * this->m[8]; /*0x78ee7d*/
+  outTransform->m[7] = rhs->m[1] * this->m[6] + this->m[7] * rhs->m[4] + this->m[8] * rhs->m[7]; /*0x78ee96*/
+  outTransform->m[8] = rhs->m[5] * this->m[7] + this->m[6] * rhs->m[2] + rhs->m[8] * this->m[8]; /*0x78eeaf*/
+  return outTransform; /*0x78eeb2*/
 }

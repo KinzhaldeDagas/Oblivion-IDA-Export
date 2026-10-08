@@ -2,7 +2,7 @@
 0x9EAD46: push    ecx
 0x9EAD47: fstp    [esp+4+var_4]; float
 0x9EAD4A: push    offset aFmovecreatur_0; "fMoveCreatureWalkMax"
-0x9EAD4F: mov     ecx, offset fMoveCreatureWalkMax
+0x9EAD4F: mov     ecx, (offset flt_B373C8+40h)
 0x9EAD54: call    GameSetting_ConstrAndReg_float
 0x9EAD59: push    offset sub_A1EF30; void (__cdecl *)()
 0x9EAD5E: call    _atexit

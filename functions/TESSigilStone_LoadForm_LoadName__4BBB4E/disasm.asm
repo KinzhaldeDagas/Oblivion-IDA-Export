@@ -3,10 +3,10 @@
 0x4BBB52: lea     eax, [esi+24h]
 0x4BBB55: push    ebx
 0x4BBB56: push    eax
-0x4BBB57: call    TESFullname_Load
+0x4BBB57: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4BBB5C: jmp     short TESSigilStone_LoadForm___ChunkLoop_Next_Popstack
 0x4BBB5E: xor     eax, eax
 0x4BBB60: push    ebx
 0x4BBB61: push    eax
-0x4BBB62: call    TESFullname_Load
+0x4BBB62: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4BBB67: jmp     short TESSigilStone_LoadForm___ChunkLoop_Next_Popstack

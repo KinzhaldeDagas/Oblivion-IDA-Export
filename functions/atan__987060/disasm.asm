@@ -6,8 +6,8 @@
 0x987079: and     eax, 1F80h
 0x98707E: cmp     eax, 1F80h
 0x987083: jnz     short loc_987094
-0x987085: fnstcw  [esp+8+var_8]
-0x987088: mov     ax, [esp+8+var_8]
+0x987085: fnstcw  word ptr [esp+8+var_8]
+0x987088: mov     ax, word ptr [esp+8+var_8]
 0x98708C: and     ax, 7Fh
 0x987090: cmp     ax, 7Fh
 0x987094: lea     esp, [esp+8]

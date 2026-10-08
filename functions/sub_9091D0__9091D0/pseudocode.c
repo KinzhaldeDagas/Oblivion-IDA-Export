@@ -33,51 +33,51 @@ int __cdecl sub_9091D0(__m128 **a1, int a2, int a3, int a4)
   char v35; // [esp+BCh] [ebp-414h] BYREF
   _BYTE v36[524]; // [esp+2C0h] [ebp-210h] BYREF
 
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v5 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v5 + 0x1A4) < *(_DWORD *)(v5 + 0x1A8) )
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x9091e1*/
+  v5 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x9091f7*/
+  if ( *(_DWORD *)(v5 + 0x1A4) < *(_DWORD *)(v5 + 0x1A8) ) /*0x909207*/
   {
-    v6 = ThreadLocalStoragePointer[TlsIndex];
-    v7 = *(_DWORD **)(v5 + 0x1A4);
-    *v7 = "LtBvTree";
-    v7[3] = "QueryTree";
-    v8 = __rdtsc();
-    v7[1] = v8;
-    *(_DWORD *)(v6 + 0x1A4) = v7 + 4;
+    v6 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x909209*/
+    v7 = *(_DWORD **)(v5 + 0x1A4); /*0x90920b*/
+    *v7 = "LtBvTree"; /*0x909211*/
+    v7[3] = "QueryTree"; /*0x909217*/
+    v8 = __rdtsc(); /*0x90921e*/
+    v7[1] = v8; /*0x909228*/
+    *(_DWORD *)(v6 + 0x1A4) = v7 + 4; /*0x90922e*/
   }
-  sub_8B1FF0(v31, *(__m128 **)(a2 + 8), a1[2]);
-  (*(void (__thiscall **)(_DWORD, __m128 *, _DWORD, _BYTE *))((*a1)->m128_i32[0] + 0xC))(
+  sub_8B1FF0(v31, *(__m128 **)(a2 + 8), a1[2]); /*0x909246*/
+  (*(void (__thiscall **)(_DWORD, __m128 *, _DWORD, _BYTE *))((*a1)->m128_i32[0] + 0xC))( /*0x909260*/
     *a1,
     v31,
     *(_DWORD *)(a3 + 8),
     v30);
-  v9 = *(_DWORD **)a2;
-  v32 = &v35;
-  v33 = 0;
-  v34 = 0x80000080;
-  (*(void (__thiscall **)(_DWORD *, _BYTE *, char **))(*v9 + 0x24))(v9, v30, &v32);
-  v10 = NtCurrentTeb()->ThreadLocalStoragePointer;
-  if ( *(_DWORD *)(v10[TlsIndex] + 0x1A4) < *(_DWORD *)(v10[TlsIndex] + 0x1A8) )
+  v9 = *(_DWORD **)a2; /*0x909263*/
+  v32 = &v35; /*0x90926c*/
+  v33 = 0; /*0x90927f*/
+  v34 = 0x80000080; /*0x90928a*/
+  (*(void (__thiscall **)(_DWORD *, _BYTE *, char **))(*v9 + 0x24))(v9, v30, &v32); /*0x90929a*/
+  v10 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x9092a3*/
+  if ( *(_DWORD *)(v10[MEMORY[0xBA9DE4]] + 0x1A4) < *(_DWORD *)(v10[MEMORY[0xBA9DE4]] + 0x1A8) ) /*0x9092b9*/
   {
-    v26 = v10[TlsIndex];
-    v11 = *(_DWORD **)(v26 + 0x1A4);
-    *v11 = "StNarrowPhase";
-    v12 = __rdtsc();
-    v11[1] = v12;
-    *(_DWORD *)(v26 + 0x1A4) = v11 + 3;
+    v26 = v10[MEMORY[0xBA9DE4]]; /*0x9092c3*/
+    v11 = *(_DWORD **)(v26 + 0x1A4); /*0x9092c7*/
+    *v11 = "StNarrowPhase"; /*0x9092cd*/
+    v12 = __rdtsc(); /*0x9092d3*/
+    v11[1] = v12; /*0x9092e1*/
+    *(_DWORD *)(v26 + 0x1A4) = v11 + 3; /*0x9092e7*/
   }
-  v13 = (*(int (__thiscall **)(_DWORD))((*a1)->m128_i32[0] + 8))(*a1);
-  v14 = v32;
-  v15 = v9[3];
-  v27 = v13;
-  v29[3] = a2;
-  v25 = &v32[4 * v33];
-  v29[2] = *(_DWORD *)(a2 + 8);
-  if ( v32 != v25 )
+  v13 = (*(int (__thiscall **)(_DWORD))((*a1)->m128_i32[0] + 8))(*a1); /*0x9092f1*/
+  v14 = v32; /*0x9092f4*/
+  v15 = v9[3]; /*0x9092fe*/
+  v27 = v13; /*0x909301*/
+  v29[3] = a2; /*0x909311*/
+  v25 = &v32[4 * v33]; /*0x909318*/
+  v29[2] = *(_DWORD *)(a2 + 8); /*0x90931c*/
+  if ( v32 != v25 ) /*0x909320*/
   {
-    do
+    do /*0x9093a8*/
     {
-      if ( *(_BYTE *)(***(int (__thiscall ****)(_DWORD, char *, int, __m128 **, int, int, _DWORD))(a3 + 4))(
+      if ( *(_BYTE *)(***(int (__thiscall ****)(_DWORD, char *, int, __m128 **, int, int, _DWORD))(a3 + 4))( /*0x90933f*/
                        *(_DWORD *)(a3 + 4),
                        &v28,
                        a3,
@@ -86,11 +86,11 @@ int __cdecl sub_9091D0(__m128 **a1, int a2, int a3, int a4)
                        v15,
                        *(_DWORD *)v14) )
       {
-        v16 = (*(int (__thiscall **)(int, _DWORD, _BYTE *))(*(_DWORD *)v15 + 0x28))(v15, *(_DWORD *)v14, v36);
-        v29[1] = *(_DWORD *)v14;
-        v29[0] = v16;
-        v17 = (*(int (__thiscall **)(int))(*(_DWORD *)v16 + 8))(v16);
-        (*(void (__cdecl **)(__m128 **, _DWORD *, int, int))(*(_DWORD *)a3
+        v16 = (*(int (__thiscall **)(int, _DWORD, _BYTE *))(*(_DWORD *)v15 + 0x28))(v15, *(_DWORD *)v14, v36); /*0x909353*/
+        v29[1] = *(_DWORD *)v14; /*0x909358*/
+        v29[0] = v16; /*0x90935c*/
+        v17 = (*(int (__thiscall **)(int))(*(_DWORD *)v16 + 8))(v16); /*0x909364*/
+        (*(void (__cdecl **)(__m128 **, _DWORD *, int, int))(*(_DWORD *)a3 /*0x90938b*/
                                                            + 0x14
                                                            * *(unsigned __int8 *)(*(_DWORD *)a3
                                                                                 + 0x20 * v27
@@ -101,33 +101,33 @@ int __cdecl sub_9091D0(__m128 **a1, int a2, int a3, int a4)
           v29,
           a3,
           a4);
-        if ( *(_BYTE *)(a4 + 4) )
-          break;
+        if ( *(_BYTE *)(a4 + 4) ) /*0x909395*/
+          break; /*0x90939d*/
       }
-      v14 += 4;
+      v14 += 4; /*0x9093a3*/
     }
-    while ( v14 != v25 );
-    v14 = v32;
+    while ( v14 != v25 ); /*0x9093a8*/
+    v14 = v32; /*0x9093ae*/
   }
-  v18 = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v19 = TlsIndex;
-  LODWORD(v20) = v18[TlsIndex];
-  if ( *(_DWORD *)(v20 + 0x1A4) < *(_DWORD *)(v20 + 0x1A8) )
+  v18 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x9093b5*/
+  v19 = MEMORY[0xBA9DE4]; /*0x9093bc*/
+  LODWORD(v20) = v18[MEMORY[0xBA9DE4]]; /*0x9093c2*/
+  if ( *(_DWORD *)(v20 + 0x1A4) < *(_DWORD *)(v20 + 0x1A8) ) /*0x9093d1*/
   {
-    v21 = v18[TlsIndex];
-    v22 = *(_DWORD **)(v20 + 0x1A4);
-    *v22 = "lt";
-    v20 = __rdtsc();
-    v22[1] = v20;
-    *(_DWORD *)(v21 + 0x1A4) = v22 + 3;
-    v14 = v32;
+    v21 = v18[MEMORY[0xBA9DE4]]; /*0x9093d3*/
+    v22 = *(_DWORD **)(v20 + 0x1A4); /*0x9093d5*/
+    *v22 = "lt"; /*0x9093db*/
+    v20 = __rdtsc(); /*0x9093e1*/
+    v22[1] = v20; /*0x9093eb*/
+    *(_DWORD *)(v21 + 0x1A4) = v22 + 3; /*0x9093f1*/
+    v14 = v32; /*0x9093f7*/
   }
-  if ( v34 >= 0 )
+  if ( v34 >= 0 ) /*0x909407*/
   {
-    v23 = *(_DWORD *)(v18[v19] + 0x19C);
-    if ( !v23 )
-      v23 = dword_BA7D9C;
-    LODWORD(v20) = sub_8A75D0(v23, v14, 4 * v34, 0x14);
+    v23 = *(_DWORD *)(v18[v19] + 0x19C); /*0x90940c*/
+    if ( !v23 ) /*0x909414*/
+      v23 = unk_BA7D9C; /*0x909416*/
+    LODWORD(v20) = sub_8A75D0(v23, v14, 4 * v34, 0x14); /*0x90942a*/
   }
-  return v20;
+  return v20; /*0x90942f*/
 }

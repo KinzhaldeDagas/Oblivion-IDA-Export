@@ -1,7 +1,7 @@
 NiTriShapeData *__stdcall sub_49D2A0(float a1, float a2, int a3, int a4, char a5, float a6)
 {
   float *v6; // eax
-  unsigned int v7; // edi
+  NiPoint3 *v7; // edi
   bool v8; // zf
   double v9; // st7
   double v10; // rt0
@@ -9,7 +9,7 @@ NiTriShapeData *__stdcall sub_49D2A0(float a1, float a2, int a3, int a4, char a5
   double v12; // st3
   float *v13; // ebp
   UInt16 *v15; // ebx
-  float *v16; // eax
+  NiPoint3 *v16; // eax
   float *v17; // eax
   float *v18; // esi
   double v19; // st7
@@ -22,173 +22,173 @@ NiTriShapeData *__stdcall sub_49D2A0(float a1, float a2, int a3, int a4, char a5
   float v26; // [esp+38h] [ebp+4h]
   float v27; // [esp+38h] [ebp+4h]
   float v28; // [esp+38h] [ebp+4h]
-  unsigned int v29; // [esp+38h] [ebp+4h]
-  int v30; // [esp+48h] [ebp+14h]
+  NiPoint3 *v29; // [esp+38h] [ebp+4h]
+  NiColorAlpha *v30; // [esp+48h] [ebp+14h]
   float v31; // [esp+4Ch] [ebp+18h]
   float v32; // [esp+4Ch] [ebp+18h]
   float v33; // [esp+4Ch] [ebp+18h]
   float v34; // [esp+4Ch] [ebp+18h]
   float v35; // [esp+4Ch] [ebp+18h]
 
-  v6 = (float *)FormHeapAlloc(0x30u);
-  v7 = (unsigned int)v6;
-  if ( !v6 )
-    return 0;
-  v8 = (dword_B35260 & 1) == 0;
-  v9 = a1;
-  v10 = dbl_A2FAA0;
-  v25 = a1 * v10;
-  v11 = v25;
-  *v6 = v25;
-  v26 = a2 * v10;
-  v12 = v26;
-  v6[1] = v26;
-  v6[2] = 0.0;
-  v27 = -v9 * v10;
-  v6[3] = v27;
-  v24 = v12;
-  v6[4] = v24;
-  v6[5] = 0.0;
-  v6[6] = v27;
-  v28 = v10 * -a2;
-  v6[7] = v28;
-  v6[8] = 0.0;
-  v23 = v11;
-  v6[9] = v23;
-  v6[0xA] = v28;
-  v6[0xB] = 0.0;
-  if ( v8 )
+  v6 = (float *)FormHeapAlloc(0x30u); /*0x49d2c9*/
+  v7 = (NiPoint3 *)v6; /*0x49d2ce*/
+  if ( !v6 ) /*0x49d2d7*/
+    return 0; /*0x49d2d7*/
+  v8 = (MEMORY[0xB33E90][0x13D0] & 1) == 0; /*0x49d2dd*/
+  v9 = a1; /*0x49d2e4*/
+  v10 = dbl_A2FAA0; /*0x49d2f2*/
+  v25 = a1 * v10; /*0x49d2f4*/
+  v11 = v25; /*0x49d2f8*/
+  *v6 = v25; /*0x49d308*/
+  v26 = a2 * v10; /*0x49d30e*/
+  v12 = v26; /*0x49d312*/
+  v6[1] = v26; /*0x49d320*/
+  v6[2] = 0.0; /*0x49d32f*/
+  v27 = -v9 * v10; /*0x49d334*/
+  v6[3] = v27; /*0x49d346*/
+  v24 = v12; /*0x49d349*/
+  v6[4] = v24; /*0x49d353*/
+  v6[5] = 0.0; /*0x49d360*/
+  v6[6] = v27; /*0x49d36b*/
+  v28 = v10 * -a2; /*0x49d374*/
+  v6[7] = v28; /*0x49d386*/
+  v6[8] = 0.0; /*0x49d393*/
+  v23 = v11; /*0x49d396*/
+  v6[9] = v23; /*0x49d3a0*/
+  v6[0xA] = v28; /*0x49d3ab*/
+  v6[0xB] = 0.0; /*0x49d3b6*/
+  if ( v8 ) /*0x49d3b9*/
   {
-    dword_B35260 |= 1u;
-    flt_B35254 = 0.0;
-    flt_B35258 = 0.0;
-    flt_B3525C = 1.0;
+    *(_DWORD *)&MEMORY[0xB33E90][0x13D0] |= 1u; /*0x49d3bb*/
+    *(float *)&MEMORY[0xB33E90][0x13C4] = 0.0; /*0x49d3c2*/
+    *(float *)&MEMORY[0xB33E90][0x13C8] = 0.0; /*0x49d3c8*/
+    *(float *)&MEMORY[0xB33E90][0x13CC] = 1.0; /*0x49d3d0*/
   }
-  v13 = (float *)FormHeapAlloc(0x20u);
-  if ( !v13 )
+  v13 = (float *)FormHeapAlloc(0x20u); /*0x49d3e1*/
+  if ( !v13 ) /*0x49d3e8*/
   {
-    FormHeapFree(v7);
-    return 0;
+    FormHeapFree((unsigned int)v7); /*0x49d3eb*/
+    return 0; /*0x49d3f5*/
   }
-  v15 = (UInt16 *)FormHeapAlloc(0xCu);
-  if ( !v15 )
+  v15 = (UInt16 *)FormHeapAlloc(0xCu); /*0x49d401*/
+  if ( !v15 ) /*0x49d408*/
   {
-    FormHeapFree(v7);
-    FormHeapFree((unsigned int)v13);
-    return 0;
+    FormHeapFree((unsigned int)v7); /*0x49d40b*/
+    FormHeapFree((unsigned int)v13); /*0x49d411*/
+    return 0; /*0x49d41b*/
   }
-  *v15 = 0;
-  v15[1] = 1;
-  v15[2] = 2;
-  v15[3] = 0;
-  v15[4] = 2;
-  v15[5] = 3;
-  v29 = 0;
-  if ( a5 )
+  *v15 = 0; /*0x49d42a*/
+  v15[1] = 1; /*0x49d42d*/
+  v15[2] = 2; /*0x49d433*/
+  v15[3] = 0; /*0x49d437*/
+  v15[4] = 2; /*0x49d43b*/
+  v15[5] = 3; /*0x49d43f*/
+  v29 = 0; /*0x49d445*/
+  if ( a5 ) /*0x49d449*/
   {
-    v16 = (float *)FormHeapAlloc(0x30u);
-    v29 = (unsigned int)v16;
-    if ( v16 )
+    v16 = (NiPoint3 *)FormHeapAlloc(0x30u); /*0x49d44d*/
+    v29 = v16; /*0x49d457*/
+    if ( v16 ) /*0x49d45b*/
     {
-      *v16 = flt_B35254;
-      v16[1] = flt_B35258;
-      v16[2] = flt_B3525C;
-      v16[3] = flt_B35254;
-      v16[4] = flt_B35258;
-      v16[5] = flt_B3525C;
-      v16[6] = flt_B35254;
-      v16[7] = flt_B35258;
-      v16[8] = flt_B3525C;
-      v16[9] = flt_B35254;
-      v16[0xA] = flt_B35258;
-      v16[0xB] = flt_B3525C;
+      v16->x = *(float *)&MEMORY[0xB33E90][0x13C4]; /*0x49d463*/
+      v16->y = *(float *)&MEMORY[0xB33E90][0x13C8]; /*0x49d46b*/
+      v16->z = *(float *)&MEMORY[0xB33E90][0x13CC]; /*0x49d474*/
+      v16[1].x = *(float *)&MEMORY[0xB33E90][0x13C4]; /*0x49d47d*/
+      v16[1].y = *(float *)&MEMORY[0xB33E90][0x13C8]; /*0x49d486*/
+      v16[1].z = *(float *)&MEMORY[0xB33E90][0x13CC]; /*0x49d48f*/
+      v16[2].x = *(float *)&MEMORY[0xB33E90][0x13C4]; /*0x49d498*/
+      v16[2].y = *(float *)&MEMORY[0xB33E90][0x13C8]; /*0x49d4a1*/
+      v16[2].z = *(float *)&MEMORY[0xB33E90][0x13CC]; /*0x49d4aa*/
+      v16[3].x = *(float *)&MEMORY[0xB33E90][0x13C4]; /*0x49d4b3*/
+      v16[3].y = *(float *)&MEMORY[0xB33E90][0x13C8]; /*0x49d4bc*/
+      v16[3].z = *(float *)&MEMORY[0xB33E90][0x13CC]; /*0x49d4c5*/
     }
   }
-  v30 = 0;
-  if ( !LOBYTE(a6) )
-    goto LABEL_24;
-  v17 = (float *)FormHeapAlloc(0x40u);
-  v18 = v17;
-  if ( v17 )
-    sub_401080(v17, 0x10, 4, (void *(__thiscall *)(void *))sub_47EA50);
+  v30 = 0; /*0x49d4cd*/
+  if ( !LOBYTE(a6) ) /*0x49d4d1*/
+    goto LABEL_24; /*0x49d4d1*/
+  v17 = (float *)FormHeapAlloc(0x40u); /*0x49d4d9*/
+  v18 = v17; /*0x49d4de*/
+  if ( v17 ) /*0x49d4f1*/
+    sub_401080(v17, 0x10, 4, (void *(__thiscall *)(void *))sub_47EA50); /*0x49d4fd*/
   else
-    v18 = 0;
-  v30 = (int)v18;
-  if ( v18 )
+    v18 = 0; /*0x49d504*/
+  v30 = (NiColorAlpha *)v18; /*0x49d510*/
+  if ( v18 ) /*0x49d514*/
   {
-    if ( (dword_B35260 & 2) == 0 )
+    if ( (MEMORY[0xB33E90][0x13D0] & 2) == 0 ) /*0x49d521*/
     {
-      dword_B35260 |= 2u;
-      sub_404850(&flt_B3524C, (int)"fAlpha:Water", flt_A3D65C);
-      atexit(sub_A1A630);
+      *(_DWORD *)&MEMORY[0xB33E90][0x13D0] |= 2u; /*0x49d523*/
+      sub_404850((float *)&MEMORY[0xB33E90][0x13BC], (int)"fAlpha:Water", kHeadBodyNormalMatchRadius); /*0x49d546*/
+      atexit(sub_A1A630); /*0x49d550*/
     }
-    if ( *(float *)GameSetting_GetSafeFloatPointer((int *)&flt_B3524C) <= 1.0 )
+    if ( *GameSetting_GetSafeFloatPointer((float *)&MEMORY[0xB33E90][0x13BC]) <= 1.0 ) /*0x49d573*/
     {
-      if ( *(float *)GameSetting_GetSafeFloatPointer((int *)&flt_B3524C) < 0.0 )
-        flt_B3524C = 0.0;
+      if ( *GameSetting_GetSafeFloatPointer((float *)&MEMORY[0xB33E90][0x13BC]) < 0.0 ) /*0x49d592*/
+        *(float *)&MEMORY[0xB33E90][0x13BC] = 0.0; /*0x49d594*/
     }
     else
     {
-      flt_B3524C = 1.0;
+      *(float *)&MEMORY[0xB33E90][0x13BC] = 1.0; /*0x49d575*/
     }
-    v31 = sub_404E30(&flt_B3524C);
-    *v18 = 1.0;
-    v18[1] = 1.0;
-    v18[2] = 1.0;
-    v18[3] = v31;
-    v32 = sub_404E30(&flt_B3524C);
-    v18[4] = 1.0;
-    v18[5] = 1.0;
-    v18[6] = 1.0;
-    v18[7] = v32;
-    v33 = sub_404E30(&flt_B3524C);
-    v18[8] = 1.0;
-    v18[9] = 1.0;
-    v18[0xA] = 1.0;
-    v18[0xB] = v33;
-    v34 = sub_404E30(&flt_B3524C);
-    v19 = 1.0;
-    v18[0xC] = 1.0;
-    v18[0xD] = 1.0;
-    v18[0xE] = 1.0;
-    v18[0xF] = v34;
+    v31 = sub_404E30(&MEMORY[0xB33E90][0x13BC]); /*0x49d5a8*/
+    *v18 = 1.0; /*0x49d5ca*/
+    v18[1] = 1.0; /*0x49d5d4*/
+    v18[2] = 1.0; /*0x49d5d7*/
+    v18[3] = v31; /*0x49d5df*/
+    v32 = sub_404E30(&MEMORY[0xB33E90][0x13BC]); /*0x49d5e7*/
+    v18[4] = 1.0; /*0x49d609*/
+    v18[5] = 1.0; /*0x49d614*/
+    v18[6] = 1.0; /*0x49d617*/
+    v18[7] = v32; /*0x49d61a*/
+    v33 = sub_404E30(&MEMORY[0xB33E90][0x13BC]); /*0x49d627*/
+    v18[8] = 1.0; /*0x49d649*/
+    v18[9] = 1.0; /*0x49d654*/
+    v18[0xA] = 1.0; /*0x49d657*/
+    v18[0xB] = v33; /*0x49d65f*/
+    v34 = sub_404E30(&MEMORY[0xB33E90][0x13BC]); /*0x49d667*/
+    v19 = 1.0; /*0x49d66b*/
+    v18[0xC] = 1.0; /*0x49d689*/
+    v18[0xD] = 1.0; /*0x49d694*/
+    v18[0xE] = 1.0; /*0x49d697*/
+    v18[0xF] = v34; /*0x49d69a*/
   }
   else
   {
 LABEL_24:
-    v19 = 1.0;
+    v19 = 1.0; /*0x49d69f*/
   }
-  v35 = v19;
-  if ( a4 != 1 )
+  v35 = v19; /*0x49d6a5*/
+  if ( a4 != 1 ) /*0x49d6ac*/
   {
-    v20 = (double)a4;
-    if ( a4 < 0 )
-      v20 = v20 + flt_A2FC78;
-    v35 = v20;
+    v20 = (double)a4; /*0x49d6b4*/
+    if ( a4 < 0 ) /*0x49d6b8*/
+      v20 = v20 + flt_A2FC78; /*0x49d6ba*/
+    v35 = v20; /*0x49d6c0*/
   }
-  *v13 = v35;
-  v13[1] = v35;
-  v13[2] = 0.0;
-  v13[3] = v35;
-  v13[4] = 0.0;
-  v13[5] = 0.0;
-  v13[6] = v35;
-  v13[7] = 0.0;
-  v21 = (NiTriShapeData *)FormHeapAlloc(0x58u);
-  if ( !v21 )
+  *v13 = v35; /*0x49d6dc*/
+  v13[1] = v35; /*0x49d6e3*/
+  v13[2] = 0.0; /*0x49d6f0*/
+  v13[3] = v35; /*0x49d6fd*/
+  v13[4] = 0.0; /*0x49d712*/
+  v13[5] = 0.0; /*0x49d719*/
+  v13[6] = v35; /*0x49d724*/
+  v13[7] = 0.0; /*0x49d727*/
+  v21 = (NiTriShapeData *)FormHeapAlloc(0x58u); /*0x49d72a*/
+  if ( !v21 ) /*0x49d740*/
   {
-    v22 = 0;
-    goto LABEL_31;
+    v22 = 0; /*0x49d7a5*/
+    goto LABEL_31; /*0x49d7a7*/
   }
-  v22 = sub_71FB40(v21, 4, v7, v29, v30, (int)v13, 1, 0, 2, v15);
-  if ( !v22 )
+  v22 = NiTriShapeData_ConstructWithData(v21, 4u, v7, v29, v30, v13, 1, 0, 2u, v15); /*0x49d75e*/
+  if ( !v22 ) /*0x49d762*/
   {
 LABEL_31:
-    FormHeapFree(v7);
-    FormHeapFree(v29);
-    FormHeapFree((unsigned int)v13);
-    FormHeapFree((unsigned int)v15);
-    FormHeapFree(v30);
+    FormHeapFree((unsigned int)v7); /*0x49d764*/
+    FormHeapFree((unsigned int)v29); /*0x49d76f*/
+    FormHeapFree((unsigned int)v13); /*0x49d775*/
+    FormHeapFree((unsigned int)v15); /*0x49d77b*/
+    FormHeapFree((unsigned int)v30); /*0x49d785*/
   }
-  return v22;
+  return v22; /*0x49d78f*/
 }

@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
-  "callers_count": 18,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 45,
+  "chunks": [
+    [
+      "0x771640",
+      "0x7716DA"
+    ]
+  ],
+  "chunks_sha256": "09c602e3453291606cd7e197f0ca897843296acae8428a64d9296108806c6dd2",
+  "comment_regular": "Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.\n\nApply native filter preset row [MIN,MAG,MIP] to D3DSAMP_MAGFILTER/MINFILTER/MIPFILTER. SimpleShadow preset 1 = LINEAR/LINEAR/NONE.",
+  "comment_repeatable": "Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_771640",
+  "display_name": "NiD3DTextureStage_ApplyFilterPreset",
   "end_ea": "0x7716DA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_771640",
+  "name": "NiD3DTextureStage_ApplyFilterPreset",
   "segment": ".text",
   "sha256": "09c602e3453291606cd7e197f0ca897843296acae8428a64d9296108806c6dd2",
   "size": 154,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x771640",
-  "type": "_BYTE *__thiscall(_DWORD **this, int)",
+  "total_chunk_size": 154,
+  "type": "int __thiscall(NiD3DTextureStage *this, unsigned int filterPreset)",
   "xrefs_from_count": 45,
   "xrefs_to_count": 45
 }

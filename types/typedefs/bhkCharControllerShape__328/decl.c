@@ -1,1 +1,1 @@
-bhkCharControllerShape
+struct bhkCharControllerShape;

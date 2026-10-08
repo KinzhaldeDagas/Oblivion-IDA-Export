@@ -1,107 +1,90 @@
-int __userpurge sub_4BD990@<eax>(
-        _DWORD *a1@<ecx>,
-        double a2@<st2>,
-        double a3@<st1>,
-        double a4@<st0>,
-        int a5,
-        int *a6,
-        signed int *a7)
+int __userpurge sub_4BD990@<eax>(_DWORD *a1@<ecx>, double a2@<st1>, double a3@<st0>, int a4, int *a5, signed int *a6)
 {
-  signed int v7; // edi
+  int v7; // edi
   int v8; // ecx
-  char v9; // al
+  unsigned __int8 v9; // al
   int v10; // esi
   int v11; // eax
+  double v12; // st5
+  double v13; // st6
+  double v14; // st7
   int result; // eax
-  signed int *v13; // ecx
-  float v14; // [esp+4h] [ebp-1F8h]
-  float v15; // [esp+4h] [ebp-1F8h]
-  float v16; // [esp+4h] [ebp-1F8h]
-  float v17; // [esp+8h] [ebp-1F4h]
-  float v18; // [esp+8h] [ebp-1F4h]
-  float v19; // [esp+8h] [ebp-1F4h]
-  int v21; // [esp+28h] [ebp-1D4h]
-  int v22; // [esp+28h] [ebp-1D4h]
-  int v23; // [esp+28h] [ebp-1D4h]
-  signed int v24; // [esp+2Ch] [ebp-1D0h]
-  int v25; // [esp+2Ch] [ebp-1D0h]
-  int v26; // [esp+2Ch] [ebp-1D0h]
-  int v27; // [esp+30h] [ebp-1CCh] BYREF
-  int v28; // [esp+34h] [ebp-1C8h]
-  int v29; // [esp+38h] [ebp-1C4h]
-  int v30; // [esp+3Ch] [ebp-1C0h]
-  signed int *v31; // [esp+40h] [ebp-1BCh]
-  int v32; // [esp+44h] [ebp-1B8h]
-  _DWORD v33[3]; // [esp+48h] [ebp-1B4h] BYREF
-  char v34; // [esp+54h] [ebp-1A8h]
-  int v35; // [esp+58h] [ebp-1A4h] BYREF
-  char v36[400]; // [esp+5Ch] [ebp-1A0h] BYREF
-  int v37; // [esp+1F8h] [ebp-4h]
+  signed int *v16; // ecx
+  float v17; // [esp+4h] [ebp-1F8h]
+  float v18; // [esp+4h] [ebp-1F8h]
+  float v19; // [esp+4h] [ebp-1F8h]
+  float v20; // [esp+8h] [ebp-1F4h]
+  float v21; // [esp+8h] [ebp-1F4h]
+  float v22; // [esp+8h] [ebp-1F4h]
+  int v24; // [esp+2Ch] [ebp-1D0h]
+  int v25; // [esp+30h] [ebp-1CCh] BYREF
+  int v26; // [esp+34h] [ebp-1C8h]
+  int v27; // [esp+38h] [ebp-1C4h]
+  int v28; // [esp+3Ch] [ebp-1C0h]
+  signed int *v29; // [esp+40h] [ebp-1BCh]
+  int v30; // [esp+44h] [ebp-1B8h]
+  _DWORD v31[3]; // [esp+48h] [ebp-1B4h] BYREF
+  char v32; // [esp+54h] [ebp-1A8h]
+  int v33; // [esp+58h] [ebp-1A4h] BYREF
+  char v34[400]; // [esp+5Ch] [ebp-1A0h] BYREF
+  int v35; // [esp+1F8h] [ebp-4h]
 
-  v7 = *a7;
-  v8 = *a6;
-  v31 = a7;
-  v32 = v8;
-  v24 = v7;
-  v28 = 0;
-  v29 = 0;
-  v30 = 0;
-  v33[0] = &LockFreeMap<unsigned int,NiPointer<DistantLODLoaderTask>>::LockFreeMapIterator::`vftable';
-  v33[1] = 0;
-  v33[2] = 0;
-  v34 = 0;
-  v37 = 0;
-  do
+  v7 = *a6; /*0x4bd9d9*/
+  v8 = *a5; /*0x4bd9e1*/
+  v29 = a6; /*0x4bd9e4*/
+  v30 = v8; /*0x4bd9ea*/
+  v26 = 0; /*0x4bd9f2*/
+  v27 = 0; /*0x4bd9f6*/
+  v28 = 0; /*0x4bd9fa*/
+  v31[0] = &LockFreeMap<unsigned int,NiPointer<DistantLODLoaderTask>>::LockFreeMapIterator::`vftable'; /*0x4bd9fe*/
+  v31[1] = 0; /*0x4bda06*/
+  v31[2] = 0; /*0x4bda0a*/
+  v32 = 0; /*0x4bda0e*/
+  v35 = 0; /*0x4bda12*/
+  do /*0x4bdaa4*/
   {
-    v27 = 0;
-    LOBYTE(v37) = 1;
-    v9 = sub_642D90(a1, (int)v33, &v35, &v27, 1);
-    v10 = v27;
-    if ( v9 )
+    v25 = 0; /*0x4bda19*/
+    LOBYTE(v35) = 1; /*0x4bda32*/
+    v9 = sub_642D90(a1, (int)v31, &v33, &v25, 1); /*0x4bda3a*/
+    v10 = v25; /*0x4bda41*/
+    if ( v9 ) /*0x4bda45*/
     {
-      v11 = 0;
-      while ( *(_DWORD *)(4 * v11 + 0xA45A58) != (unsigned __int8)BYTE2(*(_DWORD *)(v27 + 0x10)) )
+      v11 = 0; /*0x4bda57*/
+      while ( *(_DWORD *)(4 * v11 + 0xA45A58) != (unsigned __int8)BYTE2(*(_DWORD *)(v25 + 0x10)) ) /*0x4bda67*/
       {
-        if ( ++v11 >= 3 )
-          goto LABEL_8;
+        if ( ++v11 >= 3 ) /*0x4bda6f*/
+          goto LABEL_8; /*0x4bda6f*/
       }
-      ++*(&v28 + v11);
+      ++*(&v26 + v11); /*0x4bda73*/
     }
 LABEL_8:
-    LOBYTE(v37) = 0;
-    if ( v10 )
+    LOBYTE(v35) = 0; /*0x4bda7c*/
+    if ( v10 ) /*0x4bda85*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v10 + 8)) )
-        (**(void (__thiscall ***)(int, int))v10)(v10, 1);
+      if ( !InterlockedDecrement((volatile LONG *)(v10 + 8)) ) /*0x4bda8b*/
+        (**(void (__thiscall ***)(int, int))v10)(v10, 1); /*0x4bda9d*/
     }
   }
-  while ( (v34 & 2) == 0 );
-  _sprintf(v36, "High LOD to load: %d", v28);
-  __asm { fild    [esp+1F4h+var_1D0] }
-  __asm { fstp    [esp+1F8h+var_1F4]; float }
-  v21 = 0x500 - iDebugTextLeftRightOffset;
-  __asm { fild    [esp+1F8h+var_1D4] }
-  __asm { fstp    [esp+1F8h+var_1F8]; float }
-  InterfaceMgr_DebugTextLine((char)a6, a2, a3, a4, (int)v36, v14, v17, 3, 0xFFFFFFFF);
-  v25 = a5 + v7;
-  _sprintf(v36, "Mid LOD to load: %d", v29);
-  __asm { fild    [esp+208h+var_1D0] }
-  __asm { fstp    [esp+1F8h+var_1F4]; float }
-  v22 = 0x500 - iDebugTextLeftRightOffset;
-  __asm { fild    [esp+1F8h+var_1D4] }
-  __asm { fstp    [esp+1F8h+var_1F8]; float }
-  InterfaceMgr_DebugTextLine((char)a6, a2, a3, a4, (int)v36, v15, v18, 3, 0xFFFFFFFF);
-  v26 = a5 + a5 + v7;
-  _sprintf(v36, "Low LOD to load: %d", v30);
-  __asm { fild    [esp+208h+var_1D0] }
-  __asm { fstp    [esp+1F8h+var_1F4]; float }
-  v23 = 0x500 - iDebugTextLeftRightOffset;
-  __asm { fild    [esp+1F8h+var_1D4] }
-  __asm { fstp    [esp+1F8h+var_1F8]; float }
-  InterfaceMgr_DebugTextLine((char)a6, a2, a3, a4, (int)v36, v16, v19, 3, 0xFFFFFFFF);
-  result = v32;
-  v13 = v31;
-  *a6 = v32;
-  *v13 = a5 + v26;
-  return result;
+  while ( (v32 & 2) == 0 ); /*0x4bdaa4*/
+  _sprintf(v34, "High LOD to load: %d", v26);
+  v20 = (float)v7; /*0x4bdad7*/
+  v12 = (double)(0x500 - iDebugTextLeftRightOffset); /*0x4bdadf*/
+  v17 = v12; /*0x4bdae7*/
+  InterfaceMgr_DebugTextLine((char)a5, v12, a2, a3, v34, v17, v20, 3, 0xFFFFFFFF); /*0x4bdaeb*/
+  _sprintf(v34, "Mid LOD to load: %d", v27);
+  v21 = (float)(a4 + v7); /*0x4bdb2a*/
+  v13 = (double)(0x500 - iDebugTextLeftRightOffset); /*0x4bdb32*/
+  v18 = v13; /*0x4bdb3a*/
+  InterfaceMgr_DebugTextLine((char)a5, v12, v13, a3, v34, v18, v21, 3, 0xFFFFFFFF); /*0x4bdb3e*/
+  v24 = a4 + a4 + v7; /*0x4bdb54*/
+  _sprintf(v34, "Low LOD to load: %d", v28);
+  v22 = (float)v24; /*0x4bdb76*/
+  v14 = (double)(0x500 - iDebugTextLeftRightOffset); /*0x4bdb7e*/
+  v19 = v14; /*0x4bdb86*/
+  InterfaceMgr_DebugTextLine((char)a5, v12, v13, v14, v34, v19, v22, 3, 0xFFFFFFFF); /*0x4bdb8a*/
+  result = v30; /*0x4bdb8f*/
+  v16 = v29; /*0x4bdb93*/
+  *a5 = v30; /*0x4bdb9c*/
+  *v16 = a4 + v24; /*0x4bdb9f*/
+  return result; /*0x4bdba1*/
 }

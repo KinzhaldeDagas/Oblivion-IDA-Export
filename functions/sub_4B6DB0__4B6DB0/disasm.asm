@@ -1,4 +1,4 @@
-0x4B6DB0: push    ecx
+0x4B6DB0: push    ecx; Verified TESObjectDOOR DoPostFixup vtable override (TESFormVtbl::DoPostFixup slot +0x6C at 0xA44AC0). If not already linked, links script data, walks raw randomTeleport FormIDs, rebases each through TESForm_GetOverrideFile/TESForm_ResolveFormID, replaces valid IDs with TESForm pointers, and removes invalid entries after logging 'Could not find RandomTeleport ... for Door ...'; then marks the form linked.
 0x4B6DB1: push    edi
 0x4B6DB2: mov     edi, ecx
 0x4B6DB4: mov     eax, [edi+8]
@@ -23,14 +23,14 @@
 0x4B6DF1: mov     dword ptr [esp+10h+ArgList], ecx
 0x4B6DF5: push    0FFFFFFFFh; a2
 0x4B6DF7: mov     ecx, edi; this
-0x4B6DF9: call    TESForm_GetOverrideFile
+0x4B6DF9: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4B6DFE: push    eax; a2
 0x4B6DFF: lea     edx, [esp+14h+ArgList]
 0x4B6E03: push    edx; a1
-0x4B6E04: call    TESForm_ResolveFormID
+0x4B6E04: call    TESForm_ResolveFormID; Verified post-load TNAM fixup: resolves the stored 32-bit form ID in the door's override-file context, looks up the TESForm, and writes the resolved pointer into the randomTeleport node. The failure branch removes that list node.
 0x4B6E09: mov     eax, dword ptr [esp+18h+ArgList]
 0x4B6E0D: push    eax; a1
-0x4B6E0E: call    TESForm_LookupByFormID
+0x4B6E0E: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4B6E13: add     esp, 0Ch
 0x4B6E16: test    eax, eax
 0x4B6E18: jz      short loc_4B6E23
@@ -66,7 +66,7 @@
 0x4B6E68: mov     edx, [eax]
 0x4B6E6A: push    eax
 0x4B6E6B: mov     [esi], edx
-0x4B6E6D: call    FormHeapFree
+0x4B6E6D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B6E72: add     esp, 4
 0x4B6E75: jmp     short loc_4B6E7D
 0x4B6E77: mov     dword ptr [esi], 0

@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IFillLockBytesVtbl",
+  "definition": "struct IFillLockBytesVtbl\n{\nHRESULT_0 (*QueryInterface)(IFillLockBytes_0 *, const IID *const, void **);\nULONG (*AddRef)(IFillLockBytes_0 *);\nULONG (*Release)(IFillLockBytes_0 *);\nHRESULT_0 (*FillAppend)(IFillLockBytes_0 *, const void *, ULONG, ULONG *);\nHRESULT_0 (*FillAt)(IFillLockBytes_0 *, ULARGE_INTEGER, const void *, ULONG, ULONG *);\nHRESULT_0 (*SetFillSize)(IFillLockBytes_0 *, ULARGE_INTEGER);\nHRESULT_0 (*Terminate)(IFillLockBytes_0 *, BOOL);\n}\n",
   "id": 18374686479672038750,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IFillLockBytes_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IFillLockBytes_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IFillLockBytes_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FillAppend",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IFillLockBytes_0 *, const void *, ULONG, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FillAt",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IFillLockBytes_0 *, ULARGE_INTEGER, const void *, ULONG, ULONG *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetFillSize",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IFillLockBytes_0 *, ULARGE_INTEGER)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Terminate",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IFillLockBytes_0 *, BOOL)"
     }
   ],
   "name": "IFillLockBytesVtbl",
+  "ordinal": 5374,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 28
 }

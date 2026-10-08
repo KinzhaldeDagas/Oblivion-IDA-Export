@@ -1,15 +1,15 @@
-ActiveEffect *__cdecl CommandCreatureEffect_Make(int a1, int a2, int a3)
+ActiveEffect *__cdecl CommandCreatureEffect_Make(MagicCaster *caster, MagicItem *magicItem, EffectItem *effectItem)
 {
   ActiveEffect *v3; // esi
   ActiveEffect *result; // eax
 
-  v3 = (ActiveEffect *)FormHeapAlloc(0x38u);
-  result = 0;
-  if ( v3 )
+  v3 = (ActiveEffect *)FormHeapAlloc(0x38u); /*0x692329*/
+  result = 0; /*0x692332*/
+  if ( v3 ) /*0x69233a*/
   {
-    CommandEffect_constr(v3, a1, a2, a3);
-    v3->vtbl = (ActiveEffectVtbl *)&CommandCreatureEffect::`vftable';
-    return v3;
+    CommandEffect_constr(v3, caster, magicItem, effectItem); /*0x69234d*/
+    v3->vtbl = (ActiveEffectVtbl *)&CommandCreatureEffect::`vftable'; /*0x692352*/
+    return v3; /*0x692358*/
   }
-  return result;
+  return result; /*0x69235a*/
 }

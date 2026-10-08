@@ -29,7 +29,6 @@
 0x8DE644: mov     eax, edx
 0x8DE646: jge     short loc_8DE664
 0x8DE648: jmp     short loc_8DE650
-0x8DE64A: align 10h
 0x8DE650: mov     ecx, [esi+5Ch]
 0x8DE653: mov     edi, [ecx+eax*4+4]
 0x8DE657: lea     ecx, [ecx+eax*4]

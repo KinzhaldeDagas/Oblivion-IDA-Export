@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7BA2F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: renderer/image-space recreate path. Cleans shader pass texture refs, clears shader maps, destroys imageSpaceShaderList, deletes texture manager, rebuilds texture manager and image-space list.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7BA31D",
-    "line": "call    sub_7BA0F0",
+    "line": "call    sub_7BA0F0; MoonSugarEffect decode: shader system init prewarms shader definitions 1..27, then constructs imageSpaceShaderList if ImageSpaceEffectEnabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7BA334",
-    "line": "call    sub_7B84E0",
+    "line": "call    sub_7B84E0; MoonSugarEffect decode: RecreateImageSpaceShader begins initialized cleanup by calling sub_7B84E0. This is cached shader pass texture-stage cleanup, not generic NiD3DVertexShader handle restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7BA366",
-    "line": "call    ImageSpaceShaderList__Destroy",
+    "line": "call    ImageSpaceShaderList__Destroy; MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7BA36C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7BA386",
-    "line": "call    BSTextureManager_Delete",
+    "line": "call    BSTextureManager_Delete; MoonSugarEffect decode: RecreateImageSpaceShader deletes g_textureManager after cached shader pass texture-stage refs have been scrubbed and imageSpaceShaderList destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7BA38C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7BA39B",
-    "line": "call    sub_7AB1D0",
+    "line": "call    sub_7AB1D0; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x7BA3DD",
-    "line": "call    sub_7C2450",
+    "line": "call    sub_7C2450; MoonSugarEffect decode: after rebuilding BSTextureManager, prewarms/returns common render targets through sub_7C2450 before recreating screen quads and imageSpaceShaderList.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7BA3E4",
-    "line": "call    sub_7AB1D0",
+    "line": "call    sub_7AB1D0; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x7BA418",
-    "line": "call    ImageSpaceshaderList__Create; Treat this list as a de facto subclass of a standard NiTPointerList as this is bigger of 3 UInt32",
+    "line": "call    ImageSpaceshaderList__Create; MoonSugarEffect decode: image-space list is recreated only after texture manager and screen-element quads are rebuilt. Plugin-owned list insertions/wrappers must be rebuilt/reinserted after this boundary.",
     "mnemonic": "call",
     "size": 5
   },
@@ -574,5 +574,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D00B0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00BB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00BE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00BF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00C4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D00C6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D00CA",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00CD",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D00D0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D00D2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00D7",
+    "line": "mov     eax, offset stru_AF8B40",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D00DC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

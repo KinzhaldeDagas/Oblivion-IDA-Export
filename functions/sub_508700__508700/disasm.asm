@@ -16,7 +16,7 @@
 0x508726: push    eax; a2
 0x508727: push    ecx; a1
 0x508728: mov     dword ptr [esp+24h+var_4], 0
-0x508730: call    Script_ExtractArgs
+0x508730: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x508735: add     esp, 20h
 0x508738: test    al, al
 0x50873A: jnz     short loc_50873E
@@ -24,10 +24,10 @@
 0x50873D: retn
 0x50873E: push    esi
 0x50873F: push    0; a2
-0x508741: mov     ecx, offset ActorProcessManager_ptr; this
-0x508746: call    sub_673A50
+0x508741: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x508746: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x50874B: mov     ecx, eax; this
-0x50874D: call    sub_7616D0
+0x50874D: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x508752: mov     esi, eax
 0x508754: test    esi, esi
 0x508756: jz      short loc_508799
@@ -51,7 +51,7 @@
 0x508787: fstp    [esp+0Ch+var_C]; int
 0x50878A: push    edx; int
 0x50878B: mov     ecx, eax; int
-0x50878D: call    Actor_Kill
+0x50878D: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.
 0x508792: mov     esi, [esi+4]
 0x508795: test    esi, esi
 0x508797: jnz     short loc_508758

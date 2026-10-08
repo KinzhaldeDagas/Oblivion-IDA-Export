@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AFDC0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified: constructs a vertical Havok capsule shape from trunkLength and radius, using trunkLength for endpoint height and radius for capsule radius, then wraps it in the Havok shape container. Called by BSTreeModel_CreateGeometry and CreateArt; it is Oblivion's helper and should not be replaced with Fallout's CreateTree implementation.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,25 +121,25 @@
   },
   {
     "ea": "0x8AFE03",
-    "line": "fst     [esp+144h+var_114]",
+    "line": "fst     [esp+144h+info.endpointA+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x8AFE07",
-    "line": "mov     [esp+144h+var_130], edi",
+    "line": "mov     [esp+144h+info.material], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8AFE0B",
-    "line": "fst     [esp+144h+var_104]",
+    "line": "fst     [esp+144h+info.endpointB+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x8AFE0F",
-    "line": "fld     [ebp+arg_4]",
+    "line": "fld     [ebp+radius]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x8AFE16",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+trunkLength]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x8AFE28",
-    "line": "fstp    [ebp+arg_0]",
+    "line": "fstp    [ebp+trunkLength]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x8AFE3D",
-    "line": "fstp    [esp+148h+var_12C]",
+    "line": "fstp    [esp+148h+info.radius]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x8AFE43",
-    "line": "fst     [esp+148h+var_120]",
+    "line": "fst     [esp+148h+info.endpointA]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x8AFE47",
-    "line": "fst     [esp+148h+var_11C]",
+    "line": "fst     [esp+148h+info.endpointA+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x8AFE4B",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+trunkLength]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -307,31 +307,31 @@
   },
   {
     "ea": "0x8AFE5E",
-    "line": "fstp    [esp+148h+var_118]",
+    "line": "fstp    [esp+148h+info.endpointA+8]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x8AFE62",
-    "line": "fst     [esp+148h+var_110]",
+    "line": "fst     [esp+148h+info.endpointB]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x8AFE66",
-    "line": "fstp    [esp+148h+var_10C]",
+    "line": "fstp    [esp+148h+info.endpointB+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x8AFE6A",
-    "line": "fld     [esp+148h+var_12C]",
+    "line": "fld     [esp+148h+info.radius]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x8AFE6E",
-    "line": "fstp    [esp+148h+var_108]",
+    "line": "fstp    [esp+148h+info.endpointB+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -373,25 +373,25 @@
   },
   {
     "ea": "0x8AFE89",
-    "line": "lea     ecx, [esp+144h+var_130]",
+    "line": "lea     ecx, [esp+144h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8AFE8D",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8AFE8E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8AFE90",
-    "line": "call    sub_563BB0",
+    "line": "call    OB_bhkCapsuleShape_CtorFromCinfo_010201A0; 2026-05-18 73000 consumer decode: constructs bhkCapsuleShape from radius and two endpoints in cinfo. Stock 0x565510 makes endpoints vertical/+Z; sidecar rotation for capsules would need rotated endpoints or a transform-wrapper replacement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -808,5 +808,143 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D6D40",
+    "line": "mov     eax, [ebp+var_134]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6D46",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6D47",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6D4C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6D4D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6D4E",
+    "line": "lea     ecx, [ebp+var_100]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6D54",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6D59",
+    "line": "mov     eax, [ebp+var_134]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6D5F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6D60",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6D65",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6D66",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6D67",
+    "line": "mov     edx, [esp-4+radius]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D6D6B",
+    "line": "lea     eax, [edx-134h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6D71",
+    "line": "mov     ecx, [edx-138h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6D77",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6D79",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6D7E",
+    "line": "add     eax, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6D81",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6D84",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6D86",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6D8B",
+    "line": "mov     eax, offset stru_AFEA70",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6D90",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

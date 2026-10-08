@@ -5,7 +5,7 @@
 0x480829: xor     al, al
 0x48082B: pop     esi
 0x48082C: retn
-0x48082D: push    offset unk_B3CE30
+0x48082D: push    offset stru_B3CE30
 0x480832: mov     ecx, esi
 0x480834: call    sub_700010
 0x480839: test    eax, eax

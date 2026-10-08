@@ -12,15 +12,15 @@
 0x675EA8: mov     esi, [eax]
 0x675EAA: test    esi, esi
 0x675EAC: jz      short loc_675EE1
-0x675EAE: mov     ecx, [esp+10h+arg_0]
+0x675EAE: mov     ecx, [esp+10h+criminal]
 0x675EB2: cmp     [esi+0Ch], ecx
 0x675EB5: jnz     short loc_675EDA
 0x675EB7: mov     ecx, esi
 0x675EB9: call    sub_607120
-0x675EBE: mov     ecx, esi
-0x675EC0: call    sub_605E80
+0x675EBE: mov     ecx, esi; self
+0x675EC0: call    Crime_Destructor
 0x675EC5: push    esi
-0x675EC6: call    FormHeapFree
+0x675EC6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x675ECB: add     esp, 4
 0x675ECE: push    esi
 0x675ECF: mov     ecx, edi

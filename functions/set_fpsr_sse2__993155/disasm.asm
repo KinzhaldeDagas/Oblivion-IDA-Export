@@ -2,7 +2,7 @@
 0x993157: push    offset stru_AFFF88
 0x99315C: call    __SEH_prolog4
 0x993161: xor     eax, eax
-0x993163: cmp     dword_BAABE0, eax
+0x993163: cmp     dword ptr unk_BAABE0, eax
 0x993169: jz      short loc_9931C1
 0x99316B: test    byte ptr [ebp+arg_0], 40h
 0x99316F: jz      short loc_9931B9

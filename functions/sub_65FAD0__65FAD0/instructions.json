@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65FAD0",
-    "line": "push    ecx",
+    "line": "push    ecx; Return the precomputed required-use threshold for a TESSkill. Null skill, absent base class, or a non-native actor value falls back to 1.0; otherwise read requiredSkillExp[0..20]. Major/minor and specialization multipliers are already baked into this array.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x65FAD9",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+skill]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x65FAE3",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x65FAF4",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+skill]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x65FB00",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 maps TESSkill_Data::actorValue to requiredSkillExp index 0..20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x65FB12",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+skill]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x65FB16",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+skill]",
     "mnemonic": "fld",
     "size": 4
   },

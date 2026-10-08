@@ -1,1 +1,1 @@
-MInterfacePointer
+typedef tagMInterfacePointer MInterfacePointer;

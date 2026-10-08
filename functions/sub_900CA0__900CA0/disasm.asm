@@ -206,7 +206,7 @@
 0x900FA1: addps   xmm1, xmm0
 0x900FA4: addps   xmm1, xmm4
 0x900FA7: push    edx
-0x900FA8: movaps  [esp+11Ch+var_9C+0Ch], xmm1
+0x900FA8: movaps  xmmword ptr [esp+11Ch+var_9C+0Ch], xmm1
 0x900FB0: call    dword ptr [eax+20h]
 0x900FB3: add     esi, 10h
 0x900FB6: dec     edi

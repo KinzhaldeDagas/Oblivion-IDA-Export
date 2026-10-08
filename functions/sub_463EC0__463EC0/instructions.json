@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x463EE9",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,19 +109,19 @@
   },
   {
     "ea": "0x463EF5",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463EF6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463EF8",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,31 +133,31 @@
   },
   {
     "ea": "0x463EFF",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463F01",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x463F03",
-    "line": "push    edi",
+    "line": "push    edi; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463F04",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x463F09",
-    "line": "movzx   eax, byte ptr [esp+18h+arg_8]",
+    "line": "movzx   eax, [esp+18h+packageType]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x463F2E",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     dword ptr [esp+18h+packageType], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x463F42",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+combatContext]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x463F63",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     dword ptr [esp+18h+packageType], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x463F77",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463F79",
-    "line": "call    sub_606860",
+    "line": "call    AlarmPackage_Constructor; RadiantAI: AlarmPackage constructor candidate. Hooked by RadiantAIRestored only for opt-in logging; no behavior change.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x463F8D",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     dword ptr [esp+18h+packageType], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x463FA5",
-    "line": "call    ??0FleePackage@@QAE@XZ; FleePackage::FleePackage(void)",
+    "line": "call    ??0FleePackage@@QAE@XZ; 3DTheft: dynamic FleePackage constructor. With (sourceRef,0,0), builds a flee package targeted against sourceRef, marks dynamic, sets procedureArrayIndex=0x13, and initializes extended fields through offset 0x65.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x463FB6",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     dword ptr [esp+18h+packageType], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x463FC6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463FC8",
-    "line": "call    sub_625D00",
+    "line": "call    DialoguePackage_Constructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x463FD9",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     dword ptr [esp+18h+packageType], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x463FE9",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463FEB",
-    "line": "call    sub_67D300",
+    "line": "call    TrespassPackage_Constructor",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x463FFC",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     dword ptr [esp+18h+packageType], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -682,5 +682,227 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AE670",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE673",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE674",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE679",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE67A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE67B",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE67E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE67F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE684",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE685",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE686",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE689",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE68A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE68F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE690",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE691",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE694",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE695",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE69A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE69B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE69C",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE69F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6A0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6A5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6A6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6A7",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE6AA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6AB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6B0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6B1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6B2",
+    "line": "mov     edx, [esp+combatContext]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE6B6",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE6B9",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE6BC",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE6BE",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6C3",
+    "line": "mov     eax, offset stru_ADAE50",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6C8",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

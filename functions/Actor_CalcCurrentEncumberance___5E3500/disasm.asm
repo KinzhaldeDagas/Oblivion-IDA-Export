@@ -23,7 +23,7 @@
 0x5E3535: add     esp, 8
 0x5E3538: push    esi
 0x5E3539: mov     ecx, eax
-0x5E353B: call    ContainerExtraData_GetArmorWeight
+0x5E353B: call    ContainerExtraData_GetArmorWeight; ContainerExtraData_GetArmorWeight authority. After locating a worn instance, the native accumulation multiplies item weight by EntryData::countDelta; sidecar armor-weight corrections must mirror countDelta rather than counting worn ExtraDataList nodes.
 0x5E3540: fstp    [esp+10h+var_4]
 0x5E3544: mov     ecx, esi
 0x5E3546: call    sub_4D8FB0

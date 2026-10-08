@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x613BC4",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -141,6 +141,498 @@
     "ea": "0x613BE5",
     "line": "jnz     short loc_613BF1",
     "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x613BF1",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613BF3",
+    "line": "add     ecx, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x613BF6",
+    "line": "call    EffectItemList_HasHostile; Spell viability first accepts non-hostile effects; hostile spells receive target-specific duplicate/control/area/projectile checks.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613BFB",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613BFD",
+    "line": "jnz     short loc_613C09",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x613BFF",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x613C00",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C02",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x613C03",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x613C06",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x613C09",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C0B",
+    "line": "push    48h ; 'H'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x613C0D",
+    "line": "push    41524150h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x613C12",
+    "line": "add     ecx, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x613C15",
+    "line": "call    EffectItemList_HasEffect; PARA (0x41524150): reject redundant paralysis when the current target is already paralyzed.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613C1A",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613C1C",
+    "line": "jz      short loc_613C35",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x613C1E",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C20",
+    "line": "call    CombatController_GetCurrentTarget",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613C25",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C27",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C29",
+    "line": "mov     eax, [edx+1A0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x613C2F",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x613C31",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613C33",
+    "line": "jnz     short sub_613BE7",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x613C35",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C37",
+    "line": "push    48h ; 'H'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x613C39",
+    "line": "push    434E4C53h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x613C3E",
+    "line": "add     ecx, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x613C41",
+    "line": "call    EffectItemList_HasEffect; SLNC (0x434E4C53): reject redundant silence when target actor value 0x31 is already positive.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613C46",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613C48",
+    "line": "jz      short loc_613C63",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x613C4A",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C4C",
+    "line": "call    CombatController_GetCurrentTarget",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613C51",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C53",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C55",
+    "line": "mov     eax, [edx+284h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x613C5B",
+    "line": "push    31h ; '1'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x613C5D",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x613C5F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613C61",
+    "line": "jg      short sub_613BE7",
+    "mnemonic": "jg",
+    "size": 2
+  },
+  {
+    "ea": "0x613C63",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C65",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x613C66",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C68",
+    "line": "call    CombatController_GetCurrentTarget",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613C6D",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C6F",
+    "line": "add     ecx, 68h ; 'h'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x613C72",
+    "line": "call    MagicTarget_HasMagicItem",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613C77",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613C79",
+    "line": "jnz     sub_613BE7",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x613C7F",
+    "line": "cmp     [esp+24h+var_C], al",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x613C83",
+    "line": "jz      short loc_613C97",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x613C85",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C87",
+    "line": "add     ecx, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x613C8A",
+    "line": "call    EffectItemList_HasAreaEffect; Area-effect presence is a distinct combat spell viability condition, separate from raw magicka cost.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613C8F",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613C91",
+    "line": "jnz     sub_613BE7",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x613C97",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613C99",
+    "line": "add     ecx, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x613C9C",
+    "line": "call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613CA1",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613CA3",
+    "line": "jz      short loc_613CDA",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x613CA5",
+    "line": "cmp     byte ptr [esp+1Ch], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x613CAA",
+    "line": "jnz     short loc_613CCA",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x613CAC",
+    "line": "fld     dword ptr ds:0B3C0D0h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x613CB2",
+    "line": "fstp    [esp+24h+var_20+4]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x613CB6",
+    "line": "call    GetMagicTrackingLimitForScene",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613CBB",
+    "line": "fcomp   [esp+24h+var_20+4]",
+    "mnemonic": "fcomp",
+    "size": 4
+  },
+  {
+    "ea": "0x613CBF",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x613CC1",
+    "line": "test    ah, 41h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x613CC4",
+    "line": "jnp     sub_613BE7",
+    "mnemonic": "jnp",
+    "size": 6
+  },
+  {
+    "ea": "0x613CCA",
+    "line": "mov     ecx, [ebx+3Ch]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x613CCD",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x613CD2",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613CD4",
+    "line": "jnz     sub_613BE7",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x613CDA",
+    "line": "mov     esi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x613CDC",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613CDE",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x613CDF",
+    "line": "jz      short loc_613D3F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x613CE1",
+    "line": "lea     edi, [esi+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x613CE4",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x613CE6",
+    "line": "jz      short loc_613D3F",
+    "mnemonic": "jz",
     "size": 2
   }
 ]

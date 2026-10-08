@@ -1,49 +1,49 @@
-void __thiscall sub_850930(NiTArray_NiD3DPass *this, int a2, int a3, int a4, NiD3DPass *a5)
+void __thiscall sub_850930(NiTArray_NiD3DPass *this, int a2, int a3, NiD3DTextureStage *a4, NiD3DPass *value)
 {
   NiD3DPass *v6; // esi
-  UInt32 Stage; // ebx
+  NiD3DTextureStage *Stage; // ebx
   int v8; // eax
-  int v9; // ebx
-  int v10; // ebp
-  _DWORD **v11; // ebx
-  int v12; // eax
-  UInt32 v14; // [esp+2Ch] [ebp+Ch]
+  NiTexture *Texture; // ebx
+  NiTexture *v10; // ebp
+  NiD3DTextureStage *v11; // ebx
+  unsigned int v12; // eax
+  NiD3DTextureStage *v14; // [esp+2Ch] [ebp+Ch]
 
-  v6 = (NiD3DPass *)dword_B45C18;
-  sub_848DA0(*(float **)(a4 + 0x10));
-  Stage = v6->Stages.data->Stage;
-  v14 = Stage;
-  v8 = ((int (__thiscall *)(NiD3DPass *, _DWORD))a5->__vftable[9].Destroy)(a5, 0);
-  v9 = *(_DWORD *)(Stage + 4);
-  v10 = v8;
-  if ( v9 == v8 )
+  v6 = (NiD3DPass *)unk_B45C18; /*0x85095d*/
+  sub_848DA0((float *)a4[1].Texture); /*0x850964*/
+  Stage = (NiD3DTextureStage *)v6->Stages.data->Stage; /*0x85096c*/
+  v14 = Stage; /*0x85097c*/
+  v8 = ((int (__thiscall *)(NiD3DPass *, _DWORD))value->__vftable[9].Destroy)(value, 0); /*0x850980*/
+  Texture = Stage->Texture; /*0x850982*/
+  v10 = (NiTexture *)v8; /*0x850985*/
+  if ( Texture == (NiTexture *)v8 ) /*0x850989*/
   {
-    v11 = (_DWORD **)v14;
+    v11 = v14; /*0x8509c2*/
   }
   else
   {
-    if ( v9 )
+    if ( Texture ) /*0x85098d*/
     {
-      if ( !InterlockedDecrement((volatile LONG *)(v9 + 4)) )
-        (**(void (__thiscall ***)(int, int))v9)(v9, 1);
+      if ( !InterlockedDecrement((volatile LONG *)&Texture->members) ) /*0x850993*/
+        Texture->__vftable->super.super.Destructor((NiRefObject *)Texture, 1); /*0x8509a9*/
     }
-    v11 = (_DWORD **)v14;
-    *(_DWORD *)(v14 + 4) = v10;
-    if ( v10 )
-      InterlockedIncrement((volatile LONG *)(v10 + 4));
+    v11 = v14; /*0x8509ad*/
+    v14->Texture = v10; /*0x8509b1*/
+    if ( v10 ) /*0x8509b4*/
+      InterlockedIncrement((volatile LONG *)&v10->members); /*0x8509ba*/
   }
-  if ( v11 )
+  if ( v11 ) /*0x8509c8*/
   {
-    if ( byte_B42CDD )
+    if ( unk_B42CDD ) /*0x8509ca*/
     {
-      v12 = ((int (__thiscall *)(NiD3DPass *))a5->__vftable[7].sub_75FD90)(a5);
-      sub_7715E0(v11, v12);
+      v12 = ((int (__thiscall *)(NiD3DPass *))value->__vftable[7].sub_75FD90)(value); /*0x8509dc*/
+      NiD3DTextureStage_ApplyAddressModePreset(v11, v12); /*0x8509e1*/
     }
   }
-  ++v6->RefCount;
-  a5 = v6;
-  sub_76CE40(this + 4, *((NiD3DPass **)this + 0xE), &a5);
-  if ( v6->RefCount-- == 1 )
-    sub_7604D0(v6);
-  ++*((_DWORD *)this + 0xE);
+  ++v6->RefCount; /*0x8509eb*/
+  value = v6; /*0x8509ee*/
+  NiTArray_NiD3DPass_SetAt(this + 4, *((_DWORD *)this + 0xE), &value); /*0x850a06*/
+  if ( v6->RefCount-- == 1 ) /*0x850a0e*/
+    NiD3DPass_ReleaseToPool(v6); /*0x850a19*/
+  ++*((_DWORD *)this + 0xE); /*0x850a1e*/
 }

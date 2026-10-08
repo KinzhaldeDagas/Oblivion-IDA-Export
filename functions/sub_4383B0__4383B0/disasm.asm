@@ -1,4 +1,4 @@
-0x4383B0: push    0FFFFFFFFh
+0x4383B0: push    0FFFFFFFFh; Queues asynchronous KF model load through the model loader. Queued idle and actor animation setup paths use this for deferred KF availability.
 0x4383B2: push    offset SEH_4383B0
 0x4383B7: mov     eax, large fs:0
 0x4383BD: push    eax
@@ -112,3 +112,17 @@
 0x4384D5: pop     ebx
 0x4384D6: add     esp, 10h
 0x4384D9: retn    10h
+0x9AC640: mov     eax, [ebp-10h]
+0x9AC643: push    eax
+0x9AC644: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC649: pop     ecx
+0x9AC64A: retn
+0x9AC64B: lea     ecx, [ebp+8]; void *
+0x9AC64E: jmp     sub_4BDDC0
+0x9AC653: mov     edx, [esp+arg_4]
+0x9AC657: lea     eax, [edx-14h]
+0x9AC65A: mov     ecx, [edx-18h]
+0x9AC65D: xor     ecx, eax
+0x9AC65F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC664: mov     eax, offset stru_AD930C
+0x9AC669: jmp     ___CxxFrameHandler3

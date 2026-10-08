@@ -53,7 +53,6 @@
 0x6D48EF: mov     ebp, ds:0B3D4A0h[eax*4]
 0x6D48F6: jbe     short loc_6D4928
 0x6D48F8: jmp     short loc_6D4900
-0x6D48FA: align 10h
 0x6D4900: movzx   eax, byte ptr [esi+48h]
 0x6D4904: mov     ecx, [edi+0Ch]
 0x6D4907: imul    eax, ebx
@@ -62,7 +61,7 @@
 0x6D490F: add     edx, eax
 0x6D4911: push    ecx
 0x6D4912: push    edx
-0x6D4913: call    ebp ; dword_B3D4A0
+0x6D4913: call    ebp ; unk_B3D4A0
 0x6D4915: add     esp, 8
 0x6D4918: test    al, al
 0x6D491A: jz      loc_6D49E2
@@ -83,7 +82,7 @@
 0x6D494F: add     edx, eax
 0x6D4951: push    ecx
 0x6D4952: push    edx
-0x6D4953: call    ebp ; dword_B3D4A0
+0x6D4953: call    ebp ; unk_B3D4A0
 0x6D4955: add     esp, 8
 0x6D4958: test    al, al
 0x6D495A: jz      loc_6D49E2
@@ -104,7 +103,7 @@
 0x6D498F: add     edx, eax
 0x6D4991: push    ecx
 0x6D4992: push    edx
-0x6D4993: call    ebp ; dword_B3D4A0
+0x6D4993: call    ebp ; unk_B3D4A0
 0x6D4995: add     esp, 8
 0x6D4998: test    al, al
 0x6D499A: jz      short loc_6D49E2
@@ -124,7 +123,7 @@
 0x6D49C4: add     edx, eax
 0x6D49C6: push    ecx
 0x6D49C7: push    edx
-0x6D49C8: call    ebp ; dword_B3D4A0
+0x6D49C8: call    ebp ; unk_B3D4A0
 0x6D49CA: add     esp, 8
 0x6D49CD: test    al, al
 0x6D49CF: jz      short loc_6D49E2

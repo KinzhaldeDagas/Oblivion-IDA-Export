@@ -1,4 +1,4 @@
-0x77B410: mov     eax, [esp+arg_0]
+0x77B410: mov     eax, [esp+arg_0]; DirectX10OBSE authority: Oblivion NiDX9RenderState FVF cache. Sets input mode byte +0x1000=0, caches FVF at +0x1004, then calls IDirect3DDevice9::SetFVF via vtable +0x164.
 0x77B414: test    eax, eax
 0x77B416: jz      short locret_77B461
 0x77B418: cmp     byte ptr [ecx+1000h], 0

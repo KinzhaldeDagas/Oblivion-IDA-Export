@@ -15,17 +15,17 @@
 0x4F86C2: cmp     byte ptr [esi+0D8h], 0
 0x4F86C9: jz      short loc_4F870F
 0x4F86CB: mov     ecx, esi; this
-0x4F86CD: call    TESObjectREFR_GetParentCell
+0x4F86CD: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F86D2: test    eax, eax
 0x4F86D4: jz      short loc_4F870F
 0x4F86D6: mov     ecx, esi; this
-0x4F86D8: call    TESObjectREFR_GetParentCell
+0x4F86D8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F86DD: mov     ecx, eax; this
 0x4F86DF: call    TESObjectCELL__GetWaterForm
 0x4F86E4: test    eax, eax
 0x4F86E6: jz      short loc_4F870F
 0x4F86E8: mov     ecx, esi; this
-0x4F86EA: call    TESObjectREFR_GetParentCell
+0x4F86EA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4F86EF: mov     ecx, eax; this
 0x4F86F1: call    TESObjectCELL__GetWaterForm
 0x4F86F6: mov     edx, [eax]

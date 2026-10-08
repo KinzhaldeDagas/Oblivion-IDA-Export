@@ -33,91 +33,91 @@ void __usercall def_6B00A4(
   float v29; // [esp+4h] [ebp-8h]
   float v30; // [esp+8h] [ebp-4h]
 
-  if ( a8 <= (double)a5 )
+  if ( a8 <= (double)a5 ) /*0x6b0105*/
   {
-    v23 = a8;
-    v10 = a5;
-    v11 = a8;
+    v23 = a8; /*0x6b010f*/
+    v10 = a5; /*0x6b0113*/
+    v11 = a8; /*0x6b0113*/
   }
   else
   {
-    v10 = a5;
-    v11 = a8;
-    v23 = a5;
+    v10 = a5; /*0x6b0107*/
+    v11 = a8; /*0x6b0107*/
+    v23 = a5; /*0x6b0109*/
   }
-  if ( v10 <= v11 )
-    v17 = v11;
+  if ( v10 <= v11 ) /*0x6b011c*/
+    v17 = v11; /*0x6b0126*/
   else
-    v17 = v10;
-  if ( v10 < v11 )
-    v11 = v10;
-  v20 = v11;
-  v12 = dbl_A2FAA0;
-  v28 = (v17 - v20) * v12 + v23;
-  if ( a9 <= (double)a6 )
+    v17 = v10; /*0x6b011e*/
+  if ( v10 < v11 ) /*0x6b0133*/
+    v11 = v10; /*0x6b0135*/
+  v20 = v11; /*0x6b013b*/
+  v12 = dbl_A2FAA0; /*0x6b0155*/
+  v28 = (v17 - v20) * v12 + v23; /*0x6b0157*/
+  if ( a9 <= (double)a6 ) /*0x6b016a*/
   {
-    v18 = a9;
-    v13 = a6;
-    v14 = a9;
-  }
-  else
-  {
-    v13 = a6;
-    v14 = a9;
-    v18 = a6;
-  }
-  if ( v13 <= v14 )
-    v24 = v14;
-  else
-    v24 = v13;
-  if ( v13 < v14 )
-    v14 = v13;
-  v21 = v14;
-  v29 = (v24 - v21) * v12 + v18;
-  if ( a10 <= (double)a7 )
-  {
-    v19 = a10;
-    v15 = a7;
-    v16 = a10;
+    v18 = a9; /*0x6b0174*/
+    v13 = a6; /*0x6b0178*/
+    v14 = a9; /*0x6b0178*/
   }
   else
   {
-    v15 = a7;
-    v16 = a10;
-    v19 = a7;
+    v13 = a6; /*0x6b016c*/
+    v14 = a9; /*0x6b016c*/
+    v18 = a6; /*0x6b016e*/
   }
-  if ( v15 <= v16 )
-    v25 = v16;
+  if ( v13 <= v14 ) /*0x6b0181*/
+    v24 = v14; /*0x6b018b*/
   else
-    v25 = v15;
-  if ( v15 < v16 )
-    v16 = v15;
-  v22 = v16;
-  v30 = v12 * (v25 - v22) + v19;
-  if ( a2 )
+    v24 = v13; /*0x6b0183*/
+  if ( v13 < v14 ) /*0x6b0198*/
+    v14 = v13; /*0x6b019a*/
+  v21 = v14; /*0x6b01a0*/
+  v29 = (v24 - v21) * v12 + v18; /*0x6b01b2*/
+  if ( a10 <= (double)a7 ) /*0x6b01c5*/
   {
-    sub_6B7360(a2, v28, v29, v30);
-    sub_6B7280(a2, flt_A52A74);
-    v26 = Rand5(flt_A57F50) + dbl_A2F928;
-    sub_6B7310(a2, v26);
-    sub_6B7190(a2, 0);
+    v19 = a10; /*0x6b01cf*/
+    v15 = a7; /*0x6b01d3*/
+    v16 = a10; /*0x6b01d3*/
   }
-  if ( a1 )
+  else
   {
-    sub_6B7360(a1, v28, v29, v30);
-    sub_6B7280(a1, flt_A52A74);
-    v27 = Rand5(flt_A57F50) + dbl_A2F928;
-    sub_6B7310(a1, v27);
-    sub_6B7190(a1, 0);
+    v15 = a7; /*0x6b01c7*/
+    v16 = a10; /*0x6b01c7*/
+    v19 = a7; /*0x6b01c9*/
   }
-  if ( a2 )
+  if ( v15 <= v16 ) /*0x6b01dc*/
+    v25 = v16; /*0x6b01e6*/
+  else
+    v25 = v15; /*0x6b01de*/
+  if ( v15 < v16 ) /*0x6b01f3*/
+    v16 = v15; /*0x6b01f5*/
+  v22 = v16; /*0x6b01fd*/
+  v30 = v12 * (v25 - v22) + v19; /*0x6b020f*/
+  if ( a2 ) /*0x6b0213*/
   {
-    sub_6B73E0(a2);
-    FormHeapFree((unsigned int)a2);
+    sub_6B7360(a2, v28, v29, v30); /*0x6b0231*/
+    sub_6B7280(a2, flt_A52A74); /*0x6b0242*/
+    v26 = Rand5(flt_A57F50) + dbl_A2F928; /*0x6b025e*/
+    sub_6B7310(a2, v26); /*0x6b0269*/
+    sub_6B7190(a2, 0); /*0x6b0272*/
   }
-  if ( a1 )
+  if ( a1 ) /*0x6b0279*/
   {
-    sub_6B73E0(a1);
-    FormHeapFree((unsigned int)a1);
+    sub_6B7360(a1, v28, v29, v30); /*0x6b0297*/
+    sub_6B7280(a1, flt_A52A74); /*0x6b02a8*/
+    v27 = Rand5(flt_A57F50) + dbl_A2F928; /*0x6b02c4*/
+    sub_6B7310(a1, v27); /*0x6b02cf*/
+    sub_6B7190(a1, 0); /*0x6b02d8*/
+  }
+  if ( a2 ) /*0x6b02df*/
+  {
+    sub_6B73E0(a2); /*0x6b02e3*/
+    FormHeapFree((unsigned int)a2); /*0x6b02e9*/
+  }
+  if ( a1 ) /*0x6b02f3*/
+  {
+    sub_6B73E0(a1); /*0x6b02f7*/
+    FormHeapFree((unsigned int)a1); /*0x6b02fd*/
   }
 }

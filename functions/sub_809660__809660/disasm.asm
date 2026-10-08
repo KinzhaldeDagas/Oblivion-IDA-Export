@@ -1,4 +1,4 @@
-0x809660: push    esi
+0x809660: push    esi; MoonSugarEffect decode: shared Parallax/Skin program-load wrapper. Calls vtable +0xA8 (vertex/pixel loader thunk) and then +0xC0 class-specific detailed pass population.
 0x809661: mov     esi, ecx
 0x809663: mov     eax, [esi]
 0x809665: mov     edx, [eax+0A8h]

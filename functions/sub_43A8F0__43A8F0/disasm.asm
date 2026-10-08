@@ -6,7 +6,7 @@
 0x43A8FA: jz      short loc_43A931
 0x43A8FC: push    offset dword_A7D0EC
 0x43A901: mov     ecx, esi
-0x43A903: call    NiObjectNET_GetExtraData
+0x43A903: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x43A908: test    eax, eax
 0x43A90A: jz      short loc_43A931
 0x43A90C: mov     ecx, [esp+8+arg_0]

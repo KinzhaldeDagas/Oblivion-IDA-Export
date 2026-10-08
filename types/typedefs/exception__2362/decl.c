@@ -1,1 +1,1 @@
-exception
+typedef __exception exception;

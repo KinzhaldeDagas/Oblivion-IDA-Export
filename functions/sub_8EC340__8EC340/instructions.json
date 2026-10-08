@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8EC340",
-    "line": "push    ebp",
+    "line": "push    ebp; Recomputes allowed motion from the active surface set. Handles one to four active planes by projecting against plane combinations or marking incompatible surfaces.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x8EC34E",
-    "line": "mov     edi, edi",
+    "line": "mov     edi, edi; solverState",
     "mnemonic": "mov",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x8EC367",
-    "line": "mov     ecx, [edi+1Ch]",
+    "line": "mov     ecx, [edi+1Ch]; surface",
     "mnemonic": "mov",
     "size": 3
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x8EC36D",
-    "line": "push    eax",
+    "line": "push    eax; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC36E",
-    "line": "push    edi",
+    "line": "push    edi; solverState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC36F",
-    "line": "lea     esi, [esp+58h+var_30]",
+    "line": "lea     esi, [esp+58h+outPoint]; outPoint",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC373",
-    "line": "call    sub_8EB970",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x8EC381",
-    "line": "lea     ecx, [esp+5Ch+var_3C]",
+    "line": "lea     ecx, [esp+5Ch+surfaceA]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC385",
-    "line": "call    sub_8EB910",
+    "line": "call    hkSurfaceConstraintUtil_IsPointBehindPlane; Tests whether a candidate point lies behind a surface plane by dot(point - surfacePoint, surfaceNormal) < epsilon.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8EC38A",
-    "line": "mov     al, byte ptr [esp+5Ch+var_3C]",
+    "line": "mov     al, byte ptr [esp+5Ch+surfaceA]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x8EC39B",
-    "line": "lea     ecx, [esp+54h+var_40]",
+    "line": "lea     ecx, [esp+54h+surfaceC]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC39F",
-    "line": "call    sub_8EB910",
+    "line": "call    hkSurfaceConstraintUtil_IsPointBehindPlane; Tests whether a candidate point lies behind a surface plane by dot(point - surfacePoint, surfaceNormal) < epsilon.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8EC3A4",
-    "line": "mov     al, byte ptr [esp+54h+var_40]",
+    "line": "mov     al, byte ptr [esp+54h+surfaceC]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x8EC3D0",
-    "line": "push    ecx",
+    "line": "push    ecx; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x8EC3D6",
-    "line": "push    edx",
+    "line": "push    edx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC3D7",
-    "line": "push    eax",
+    "line": "push    eax; surfaceB",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC3D8",
-    "line": "push    ecx",
+    "line": "push    ecx; surfaceA",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC3D9",
-    "line": "call    sub_8EBCD0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstTwoPlanes; Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x8EC3ED",
-    "line": "call    sub_8EB910",
+    "line": "call    hkSurfaceConstraintUtil_IsPointBehindPlane; Tests whether a candidate point lies behind a surface plane by dot(point - surfacePoint, surfaceNormal) < epsilon.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x8EC427",
-    "line": "push    eax",
+    "line": "push    eax; outPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC428",
-    "line": "mov     eax, [edi+10h]",
+    "line": "mov     eax, [edi+10h]; surfaceA",
     "mnemonic": "mov",
     "size": 3
   },
@@ -493,37 +493,37 @@
   },
   {
     "ea": "0x8EC42E",
-    "line": "push    ecx",
+    "line": "push    ecx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC42F",
-    "line": "mov     ecx, [edi+4]",
+    "line": "mov     ecx, [edi+4]; surfaceB",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x8EC432",
-    "line": "push    1",
+    "line": "push    1; allowFallback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8EC434",
-    "line": "push    edx",
+    "line": "push    edx; surfaceC",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC435",
-    "line": "mov     edx, edi",
+    "line": "mov     edx, edi; solverState",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC437",
-    "line": "call    sub_8EC0A0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstThreePlanes; Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x8EC488",
-    "line": "call    sub_8EB7E0",
+    "line": "call    hkSurfaceConstraintUtil_SortActiveConstraints; Sorts active surface constraints before recomputing the active-set solution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,25 +751,25 @@
   },
   {
     "ea": "0x8EC49F",
-    "line": "push    eax",
+    "line": "push    eax; outPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC4A0",
-    "line": "push    ecx",
+    "line": "push    ecx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC4A1",
-    "line": "push    0",
+    "line": "push    0; allowFallback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8EC4A3",
-    "line": "push    edx",
+    "line": "push    edx; surfaceC",
     "mnemonic": "push",
     "size": 1
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x8EC4BD",
-    "line": "mov     eax, [edi+ecx*4+4]",
+    "line": "mov     eax, [edi+ecx*4+4]; surfaceA",
     "mnemonic": "mov",
     "size": 4
   },
@@ -841,19 +841,19 @@
   },
   {
     "ea": "0x8EC4C4",
-    "line": "mov     ecx, [edi+edx*4+4]",
+    "line": "mov     ecx, [edi+edx*4+4]; surfaceB",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC4C8",
-    "line": "mov     edx, edi",
+    "line": "mov     edx, edi; solverState",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC4CA",
-    "line": "call    sub_8EC0A0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstThreePlanes; Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x8EC4E1",
-    "line": "call    sub_8EB910",
+    "line": "call    hkSurfaceConstraintUtil_IsPointBehindPlane; Tests whether a candidate point lies behind a surface plane by dot(point - surfacePoint, surfaceNormal) < epsilon.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x8EC549",
-    "line": "mov     dword ptr [esp+50h+var_30], ecx",
+    "line": "mov     dword ptr [esp+50h+outPoint], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x8EC550",
-    "line": "mov     dword ptr [esp+50h+var_30+4], edx",
+    "line": "mov     dword ptr [esp+50h+outPoint+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x8EC55A",
-    "line": "mov     dword ptr [esp+50h+var_30+8], ecx",
+    "line": "mov     dword ptr [esp+50h+outPoint+8], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x8EC561",
-    "line": "mov     dword ptr [esp+50h+var_30+0Ch], edx",
+    "line": "mov     dword ptr [esp+50h+outPoint+0Ch], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1147,19 +1147,19 @@
   },
   {
     "ea": "0x8EC568",
-    "line": "mov     [esp+50h+var_40], ecx",
+    "line": "mov     [esp+50h+surfaceC], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC56C",
-    "line": "lea     ecx, [esp+50h+var_30]",
+    "line": "lea     ecx, [esp+50h+outPoint]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC570",
-    "line": "push    ecx",
+    "line": "push    ecx; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -1177,49 +1177,49 @@
   },
   {
     "ea": "0x8EC577",
-    "line": "push    edx",
+    "line": "push    edx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC578",
-    "line": "push    0",
+    "line": "push    0; allowFallback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8EC57A",
-    "line": "mov     [esp+5Ch+var_3C], eax",
+    "line": "mov     [esp+5Ch+surfaceA], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC57E",
-    "line": "push    eax",
+    "line": "push    eax; surfaceC",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC57F",
-    "line": "mov     eax, ebx",
+    "line": "mov     eax, ebx; surfaceA",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC581",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; surfaceB",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC583",
-    "line": "mov     edx, edi",
+    "line": "mov     edx, edi; solverState",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC585",
-    "line": "call    sub_8EC0A0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstThreePlanes; Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,19 +1255,19 @@
   },
   {
     "ea": "0x8EC598",
-    "line": "mov     eax, [esp+50h+var_40]",
+    "line": "mov     eax, [esp+50h+surfaceC]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC59C",
-    "line": "lea     ecx, [esp+50h+var_30]",
+    "line": "lea     ecx, [esp+50h+outPoint]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC5A0",
-    "line": "push    ecx",
+    "line": "push    ecx; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -1279,43 +1279,43 @@
   },
   {
     "ea": "0x8EC5A3",
-    "line": "push    edx",
+    "line": "push    edx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC5A4",
-    "line": "push    0",
+    "line": "push    0; allowFallback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8EC5A6",
-    "line": "push    eax",
+    "line": "push    eax; surfaceC",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC5A7",
-    "line": "mov     eax, ebx",
+    "line": "mov     eax, ebx; surfaceA",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC5A9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; surfaceB",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC5AB",
-    "line": "mov     edx, edi",
+    "line": "mov     edx, edi; solverState",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC5AD",
-    "line": "call    sub_8EC0A0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstThreePlanes; Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,19 +1345,19 @@
   },
   {
     "ea": "0x8EC5BE",
-    "line": "mov     ecx, [esp+50h+var_40]",
+    "line": "mov     ecx, [esp+50h+surfaceC]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC5C2",
-    "line": "lea     edx, [esp+50h+var_30]",
+    "line": "lea     edx, [esp+50h+outPoint]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC5C6",
-    "line": "push    edx",
+    "line": "push    edx; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -1369,43 +1369,43 @@
   },
   {
     "ea": "0x8EC5C9",
-    "line": "push    eax",
+    "line": "push    eax; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC5CA",
-    "line": "mov     eax, [esp+58h+var_3C]",
+    "line": "mov     eax, [esp+58h+surfaceA]; surfaceA",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC5CE",
-    "line": "push    0",
+    "line": "push    0; allowFallback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8EC5D0",
-    "line": "push    ecx",
+    "line": "push    ecx; surfaceC",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC5D1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; surfaceB",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC5D3",
-    "line": "mov     edx, edi",
+    "line": "mov     edx, edi; solverState",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC5D5",
-    "line": "call    sub_8EC0A0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstThreePlanes; Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,19 +1435,19 @@
   },
   {
     "ea": "0x8EC5E6",
-    "line": "mov     edx, [esp+50h+var_40]",
+    "line": "mov     edx, [esp+50h+surfaceC]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC5EA",
-    "line": "lea     eax, [esp+50h+var_30]",
+    "line": "lea     eax, [esp+50h+outPoint]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC5EE",
-    "line": "push    eax",
+    "line": "push    eax; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -1459,43 +1459,43 @@
   },
   {
     "ea": "0x8EC5F1",
-    "line": "mov     eax, [esp+54h+var_3C]",
+    "line": "mov     eax, [esp+54h+surfaceA]; surfaceA",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8EC5F5",
-    "line": "push    ecx",
+    "line": "push    ecx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC5F6",
-    "line": "push    0",
+    "line": "push    0; allowFallback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8EC5F8",
-    "line": "push    edx",
+    "line": "push    edx; surfaceC",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC5F9",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; surfaceB",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC5FB",
-    "line": "mov     edx, edi",
+    "line": "mov     edx, edi; solverState",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8EC5FD",
-    "line": "call    sub_8EC0A0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstThreePlanes; Projects against three active planes; falls back through two-plane projections and marks incompatible surfaces in the per-surface state array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x8EC608",
-    "line": "movaps  xmm0, [esp+50h+var_30]",
+    "line": "movaps  xmm0, [esp+50h+outPoint]",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x8EC66F",
-    "line": "mov     ecx, [edi+4]",
+    "line": "mov     ecx, [edi+4]; surface",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1747,25 +1747,25 @@
   },
   {
     "ea": "0x8EC675",
-    "line": "push    edx",
+    "line": "push    edx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC676",
-    "line": "add     esi, 10h",
+    "line": "add     esi, 10h; outPoint",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x8EC679",
-    "line": "push    edi",
+    "line": "push    edi; solverState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC67A",
-    "line": "call    sub_8EB970",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x8EC68C",
-    "line": "mov     ecx, [edi+10h]",
+    "line": "mov     ecx, [edi+10h]; surface",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1831,25 +1831,25 @@
   },
   {
     "ea": "0x8EC692",
-    "line": "push    eax",
+    "line": "push    eax; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC693",
-    "line": "push    edi",
+    "line": "push    edi; solverState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC694",
-    "line": "lea     esi, [esp+58h+var_30]",
+    "line": "lea     esi, [esp+58h+outPoint]; outPoint",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8EC698",
-    "line": "call    sub_8EB970",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstSinglePlane; Projects a point/motion against a single active surface plane with tolerance/radius fields from the surface entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x8EC6A0",
-    "line": "lea     ecx, [esp+58h+var_30]",
+    "line": "lea     ecx, [esp+58h+outPoint]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x8EC6AB",
-    "line": "call    sub_8EB910",
+    "line": "call    hkSurfaceConstraintUtil_IsPointBehindPlane; Tests whether a candidate point lies behind a surface plane by dot(point - surfacePoint, surfaceNormal) < epsilon.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x8EC6BE",
-    "line": "movaps  xmm0, [esp+50h+var_30]",
+    "line": "movaps  xmm0, [esp+50h+outPoint]",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x8EC6F6",
-    "line": "push    ecx",
+    "line": "push    ecx; outPoint",
     "mnemonic": "push",
     "size": 1
   },
@@ -2059,25 +2059,25 @@
   },
   {
     "ea": "0x8EC6FA",
-    "line": "push    edx",
+    "line": "push    edx; inputPoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC6FB",
-    "line": "push    eax",
+    "line": "push    eax; surfaceB",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC6FC",
-    "line": "push    esi",
+    "line": "push    esi; surfaceA",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8EC6FD",
-    "line": "call    sub_8EBCD0",
+    "line": "call    hkSurfaceConstraintUtil_ProjectAgainstTwoPlanes; Projects a point/motion against two active surface planes; falls back to single-plane projections when the pair is degenerate or incompatible.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x8EC70F",
-    "line": "movaps  xmm0, [esp+50h+var_30]",
+    "line": "movaps  xmm0, [esp+50h+outPoint]",
     "mnemonic": "movaps",
     "size": 5
   },

@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4EF7A5",
-    "line": "jz      short loc_4EF7B0",
+    "line": "jz      short loc_4EF7B0; Verified Oblivion: follows every non-null TESWorldSpace.parentWorldspace link to the root without testing an inheritance flag, then returns root climate at +0x58. Fallout divergence: TESWorldSpace::GetClimate follows parent only when sParentUseFlags bit 4 is set.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4EF7B3",
-    "line": "retn",
+    "line": "retn; Verified: returns root TESWorldSpace climate pointer at +0x58; worldspace copy and comparison helpers independently use this result.",
     "mnemonic": "retn",
     "size": 1
   }

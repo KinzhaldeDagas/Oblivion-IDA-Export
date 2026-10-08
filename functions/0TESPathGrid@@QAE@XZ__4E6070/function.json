@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 7,
-  "display_name": "TESPathGrid::TESPathGrid(void)",
+  "chunks": [
+    [
+      "0x4E6070",
+      "0x4E61B5"
+    ],
+    [
+      "0x9B5D90",
+      "0x9B5DD4"
+    ]
+  ],
+  "chunks_sha256": "a9b3220136d1784d0ae008a5eecb27decc202d9529d8cf11f23625856c0ded24",
+  "comment_regular": "Verified TESPathGrid form type 0x34 constructor and 0x54-byte layout. It initializes a secondary TESChildCELL vtable at +0x18, rendered NiNode at +0x1C, parent-cell slot +0x20, point-array pointer +0x24, PGRI list header +0x28, point-count word +0x30, and two 37-bucket maps at +0x34 and +0x44.",
+  "comment_repeatable": "Verified TESPathGrid form type 0x34 constructor and 0x54-byte layout. It initializes a secondary TESChildCELL vtable at +0x18, rendered NiNode at +0x1C, parent-cell slot +0x20, point-array pointer +0x24, PGRI list header +0x28, point-count word +0x30, and two 37-bucket maps at +0x34 and +0x44.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "TESPathGrid_ctor",
   "end_ea": "0x4E61B5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0TESPathGrid@@QAE@XZ",
+  "name": "TESPathGrid_ctor",
   "segment": ".text",
   "sha256": "a1f42ae44827d285bb9477e0e55af545f6f4675e6c425647fc19a8867588d9e4",
   "size": 325,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E6070",
-  "type": "TESPathGrid *__thiscall(TESPathGrid *__hidden this)",
-  "xrefs_from_count": 118,
+  "total_chunk_size": 393,
+  "type": "TESPathGrid *__thiscall(TESPathGrid *this)",
+  "xrefs_from_count": 138,
   "xrefs_to_count": 3
 }

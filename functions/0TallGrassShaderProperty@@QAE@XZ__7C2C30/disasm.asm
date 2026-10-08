@@ -13,7 +13,7 @@
 0x7C2C4E: mov     large fs:0, eax
 0x7C2C54: mov     esi, ecx
 0x7C2C56: mov     [esp+20h+var_10], esi
-0x7C2C5A: call    ??0BSShaderLightingProperty@@QAE@XZ; BSShaderLightingProperty::BSShaderLightingProperty(void)
+0x7C2C5A: call    ??0BSShaderLightingProperty@@QAE@XZ; [Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.
 0x7C2C5F: xor     ebx, ebx
 0x7C2C61: mov     dword ptr [esi], offset ??_7TallGrassShaderProperty@@6B@; const TallGrassShaderProperty::`vftable'
 0x7C2C67: mov     [esp+20h+var_4], ebx
@@ -46,3 +46,18 @@
 0x7C2CBE: pop     ebx
 0x7C2CBF: add     esp, 10h
 0x7C2CC2: retn
+0x9CE330: mov     ecx, [ebp-10h]; this
+0x9CE333: jmp     ??1BSShaderLightingProperty@@UAE@XZ; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
+0x9CE338: mov     ecx, [ebp-10h]
+0x9CE33B: add     ecx, 0A0h ; ' '; slot
+0x9CE341: jmp     NiPointerSlot_Release
+0x9CE346: mov     ecx, [ebp-10h]
+0x9CE349: add     ecx, 0A4h ; '¤'; slot
+0x9CE34F: jmp     NiPointerSlot_Release
+0x9CE354: mov     edx, [esp+arg_4]
+0x9CE358: lea     eax, [edx-10h]
+0x9CE35B: mov     ecx, [edx-14h]
+0x9CE35E: xor     ecx, eax
+0x9CE360: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE365: mov     eax, offset stru_AF736C
+0x9CE36A: jmp     ___CxxFrameHandler3

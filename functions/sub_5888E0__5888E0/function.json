@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x5888E0",
+      "0x58892D"
+    ]
+  ],
+  "chunks_sha256": "d991e12f7bde4ac29ac201a44e3b9caa4c8d6167ddfd48b8c7b00098d599ce10",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified 2026-10-07: unlinks node from both doubly linked dimensions and zeros four links. Does not free node; callers including Value teardown free separately. No vtable in Oblivion action nodes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5888E0",
+  "display_name": "Tile::ActionNode::Unlink",
   "end_ea": "0x58892D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5888E0",
+  "name": "Tile::ActionNode::Unlink",
   "segment": ".text",
   "sha256": "d991e12f7bde4ac29ac201a44e3b9caa4c8d6167ddfd48b8c7b00098d599ce10",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5888E0",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 77,
+  "type": "void __thiscall(OblivionTileActionNode *this)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 2
 }

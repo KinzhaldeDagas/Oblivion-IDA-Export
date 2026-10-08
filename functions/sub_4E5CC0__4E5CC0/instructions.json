@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5CC0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified load path for linked-point state: reads the u16 count and indices, range-checks each against the point array capacity, then sets linkedPointsDisabled on valid non-null points. Save-block boundary diagnostics are performed after the payload read.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4E5CCE",
-    "line": "mov     [esp+1Ch+var_8], 0",
+    "line": "mov     [esp+1Ch+destination], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4E5CD8",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x4E5CE5",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4E5CEB",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x4E5CF1",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E5CF2",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4E5D13",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4E5D69",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,31 +313,31 @@
   },
   {
     "ea": "0x4E5D72",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E5D74",
-    "line": "lea     eax, [esp+20h+var_8]",
+    "line": "lea     eax, [esp+20h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E5D78",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E5D79",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E5D7E",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -349,25 +349,25 @@
   },
   {
     "ea": "0x4E5D84",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E5D85",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4E5D8B",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E5D90",
-    "line": "xor     esi, esi",
+    "line": "xor     esi, esi; EnginePatch v1: byte-checked TESPathGrid modified point-count guard. Clamps save-controlled UInt16 loop count to remaining tracked save buffer bytes / 2 before per-point reads.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x4E5DA0",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; Loading review: per-point path-grid loop driven by save-controlled UInt16 count; plugin clamps count at 0x4E5D90.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4E5DA6",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x4E5DAC",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E5DAD",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x4E5DCA",
-    "line": "mov     ecx, [edx+ecx*4]",
+    "line": "mov     ecx, [edx+ecx*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x4E5DD1",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E5DD3",
-    "line": "call    sub_67ED80",
+    "line": "call    PathGraphNode_SetLinkedPointsDisabled; Verified sets/clears the PathGrid linked-points-disabled flag (0x20). SetLinkedPointsEnabled stores the inverse of its enabled argument.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4E5DEA",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x4E5E11",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E5E16",
-    "line": "movzx   edx, word ptr [esp+20h+var_8]",
+    "line": "movzx   edx, word ptr [esp+20h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x4E5E3A",
-    "line": "movzx   ecx, word ptr [esp+24h+var_8]",
+    "line": "movzx   ecx, word ptr [esp+24h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x4E5E81",
-    "line": "movzx   edx, word ptr [esp+24h+var_8]",
+    "line": "movzx   edx, word ptr [esp+24h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x4E5EAB",
-    "line": "movzx   eax, word ptr [esp+1Ch+var_8]",
+    "line": "movzx   eax, word ptr [esp+1Ch+destination]",
     "mnemonic": "movzx",
     "size": 5
   },

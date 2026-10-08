@@ -1,4 +1,4 @@
-0x588C50: sub     esp, 8
+0x588C50: sub     esp, 8; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
 0x588C53: push    esi
 0x588C54: push    0FADh
 0x588C59: mov     esi, ecx

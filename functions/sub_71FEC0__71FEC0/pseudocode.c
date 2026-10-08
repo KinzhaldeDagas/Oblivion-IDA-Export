@@ -1,179 +1,184 @@
-int *__thiscall sub_71FEC0(NiTriBasedGeomData *this, signed int a2)
+// Load NiTriShapeData triangle indices and its serialized shared-normal table. The table is an array of 8-byte {UInt16 count, UInt16* indices} entries backed by linked index-pool blocks.
+void __thiscall NiTriShapeData_Load(NiTriShapeData *self, NiStream *stream)
 {
-  signed int v3; // ebx
-  void (__cdecl *v4)(int, NiTriBasedGeomData *, int, int *, int); // edx
-  int *v5; // esi
-  void (__cdecl *v6)(int, signed int *, int, int *, int); // eax
-  int v7; // eax
+  NiStream *v3; // ebx
+  void (__cdecl *v4)(int, UInt32 *, int, int *, int); // edx
+  UInt32 *p_m_uiTriListLength; // esi
+  void (__cdecl *v6)(int, NiStream **, int, int *, int); // eax
+  UInt16 *v7; // eax
   int v8; // edx
-  void (__cdecl *v9)(int, int, int, int *, int); // eax
-  void (__cdecl *v10)(int, char *, int, int *, int); // edx
-  int *result; // eax
+  void (__cdecl *v9)(int, UInt16 *, int, int *, int); // eax
+  void (__cdecl *v10)(int, unsigned __int16 *, int, int *, int); // edx
+  unsigned __int16 m_usSharedNormalsArraySize; // ax
   int v12; // edi
-  void *v13; // eax
-  int v14; // esi
-  int *v15; // eax
-  bool v16; // zf
-  void (__cdecl *v17)(int, unsigned __int16 *, int, int *, int); // edx
-  int v18; // esi
-  unsigned __int16 v19; // cx
-  int *v20; // eax
-  int *v21; // esi
-  int v22; // edi
-  int v23; // eax
-  void (__cdecl *v24)(int, int, int, int *, int); // eax
-  int v25; // edx
+  NiSharedNormalArrayEntry *v13; // eax
+  NiSharedNormalArrayEntry *v14; // esi
+  NiSharedNormalIndexPoolBlock *v15; // eax
+  NiSharedNormalIndexPoolBlock *v16; // eax
+  bool v17; // zf
+  void (__cdecl *v18)(int, unsigned __int16 *, int, int *, int); // edx
+  unsigned __int16 *cursor; // esi
+  unsigned __int16 v20; // cx
+  NiSharedNormalIndexPoolBlock *m_pkSharedNormalIndexPool; // eax
+  int *v22; // esi
+  unsigned int v23; // edi
+  int v24; // eax
+  void (__cdecl *v25)(int, unsigned __int16 *, int, int *, int); // eax
   int v26; // edx
-  bool v27; // cf
-  int v28; // [esp-18h] [ebp-48h]
-  int v29; // [esp-14h] [ebp-44h]
-  int v30; // [esp-14h] [ebp-44h]
+  NiSharedNormalArrayEntry *v27; // eax
+  int v28; // edx
+  bool v29; // cf
+  int v30; // [esp-18h] [ebp-48h]
   int v31; // [esp-14h] [ebp-44h]
   int v32; // [esp-14h] [ebp-44h]
-  int v33; // [esp-14h] [ebp-44h]
+  UInt16 *v33; // [esp-14h] [ebp-44h]
   int v34; // [esp-14h] [ebp-44h]
-  unsigned __int16 v35; // [esp+14h] [ebp-1Ch] BYREF
-  int v36; // [esp+18h] [ebp-18h] BYREF
-  int v37; // [esp+1Ch] [ebp-14h] BYREF
-  int v38; // [esp+20h] [ebp-10h] BYREF
-  int v39; // [esp+2Ch] [ebp-4h]
+  int v35; // [esp-14h] [ebp-44h]
+  int v36; // [esp-14h] [ebp-44h]
+  unsigned __int16 sharedIndexCount; // [esp+14h] [ebp-1Ch] BYREF
+  int entryIndex; // [esp+18h] [ebp-18h] BYREF
+  int v39; // [esp+1Ch] [ebp-14h] BYREF
+  int v40; // [esp+20h] [ebp-10h] BYREF
+  int v41; // [esp+2Ch] [ebp-4h]
 
-  v3 = a2;
-  sub_732E70(this, a2);
-  v4 = *(void (__cdecl **)(int, NiTriBasedGeomData *, int, int *, int))(*(_DWORD *)(v3 + 0x21C) + 4);
-  v5 = (int *)(this + 1);
-  v29 = *(_DWORD *)(v3 + 0x21C);
-  v36 = 4;
-  v4(v29, this + 1, 4, &v36, 1);
-  if ( *(_DWORD *)(v3 + 0xD8) < 0xA000111u )
+  v3 = stream; /*0x71fee9*/
+  sub_732E70((NiTriBasedGeomData *)self, (signed int)stream); /*0x71feee*/
+  v4 = *(void (__cdecl **)(int, UInt32 *, int, int *, int))(*((_DWORD *)v3 + 0x87) + 4); /*0x71fef9*/
+  p_m_uiTriListLength = &self->member.m_uiTriListLength; /*0x71ff05*/
+  v31 = *((_DWORD *)v3 + 0x87); /*0x71ff09*/
+  entryIndex = 4; /*0x71ff0a*/
+  v4(v31, &self->member.m_uiTriListLength, 4, &entryIndex, 1); /*0x71ff12*/
+  if ( *((_DWORD *)v3 + 0x36) < 0xA000111u ) /*0x71ff22*/
   {
-    LOBYTE(a2) = 1;
+    LOBYTE(stream) = 1; /*0x720008*/
   }
   else
   {
-    v30 = *(_DWORD *)(v3 + 0x21C);
-    v6 = *(void (__cdecl **)(int, signed int *, int, int *, int))(v30 + 4);
-    v36 = 1;
-    v6(v30, &a2, 1, &v36, 1);
-    if ( !(_BYTE)a2 )
-      goto LABEL_5;
+    v32 = *((_DWORD *)v3 + 0x87); /*0x71ff3c*/
+    v6 = *(void (__cdecl **)(int, NiStream **, int, int *, int))(v32 + 4); /*0x71ff3d*/
+    entryIndex = 1; /*0x71ff40*/
+    v6(v32, &stream, 1, &entryIndex, 1); /*0x71ff48*/
+    if ( !(_BYTE)stream ) /*0x71ff52*/
+      goto LABEL_5; /*0x71ff52*/
   }
-  if ( *v5 )
+  if ( *p_m_uiTriListLength )
   {
-    v7 = FormHeapAlloc((unsigned __int64)(unsigned int)*v5 >> 0x1F != 0 ? 0xFFFFFFFF : 2 * *v5);
-    v8 = 2 * *v5;
-    *((_DWORD *)this + 0x12) = v7;
-    v31 = v7;
-    v9 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v3 + 0x21C) + 4);
-    v28 = *(_DWORD *)(v3 + 0x21C);
-    v36 = 2;
-    v9(v28, v31, v8, &v36, 1);
+    v7 = (UInt16 *)FormHeapAlloc((unsigned __int64)*p_m_uiTriListLength >> 0x1F != 0 ? 0xFFFFFFFF : 2 * *p_m_uiTriListLength);
+    v8 = 2 * *p_m_uiTriListLength; /*0x71ff72*/
+    self->member.m_pusTriList = v7; /*0x71ff7d*/
+    v33 = v7; /*0x71ff86*/
+    v9 = *(void (__cdecl **)(int, UInt16 *, int, int *, int))(*((_DWORD *)v3 + 0x87) + 4); /*0x71ff87*/
+    v30 = *((_DWORD *)v3 + 0x87); /*0x71ff8a*/
+    entryIndex = 2; /*0x71ff8b*/
+    v9(v30, v33, v8, &entryIndex, 1); /*0x71ff93*/
   }
 LABEL_5:
-  v10 = *(void (__cdecl **)(int, char *, int, int *, int))(*(_DWORD *)(v3 + 0x21C) + 4);
-  v32 = *(_DWORD *)(v3 + 0x21C);
-  v36 = 2;
-  v10(v32, (char *)this + 0x50, 2, &v36, 1);
-  result = (int *)*((unsigned __int16 *)this + 0x28);
-  if ( (_WORD)result )
+  v10 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(*((_DWORD *)v3 + 0x87) + 4); /*0x71ff98*/
+  v34 = *((_DWORD *)v3 + 0x87); /*0x71ffae*/
+  entryIndex = 2; /*0x71ffaf*/
+  v10(v34, &self->member.m_usSharedNormalsArraySize, 2, &entryIndex, 1);// Read the 16-bit shared-normal entry-array length. /*0x71ffb7*/
+  m_usSharedNormalsArraySize = self->member.m_usSharedNormalsArraySize; /*0x71ffb9*/
+  if ( m_usSharedNormalsArraySize )
   {
-    v12 = (unsigned __int16)result;
-    v13 = (void *)FormHeapAlloc((unsigned __int64)(unsigned __int16)result >> 0x1D != 0 ? 0xFFFFFFFF : 8 * (unsigned __int16)result);
-    v14 = (int)v13;
-    v38 = (int)v13;
-    v39 = 0;
-    if ( v13 )
-      sub_401080(v13, 8, v12, (void *(__thiscall *)(void *))sub_71FAB0);
+    v12 = m_usSharedNormalsArraySize; /*0x71ffc8*/
+    v13 = (NiSharedNormalArrayEntry *)FormHeapAlloc(
+                                        (unsigned __int64)m_usSharedNormalsArraySize >> 0x1D != 0
+                                      ? 0xFFFFFFFF
+                                      : 8 * m_usSharedNormalsArraySize);
+    v14 = v13;                                  // Allocate one 8-byte NiSharedNormalArrayEntry per serialized entry. /*0x71ffe3*/
+    v40 = (int)v13; /*0x71ffe8*/
+    v41 = 0; /*0x71ffee*/
+    if ( v13 ) /*0x71fff6*/
+      sub_401080(v13, 8, v12, (void *(__thiscall *)(void *))NiSharedNormalArrayEntry_Construct);// Initialize every shared-normal entry to {count=0, indices=null}. /*0x720001*/
     else
-      v14 = 0;
-    v39 = 0xFFFFFFFF;
-    *((_DWORD *)this + 0x13) = v14;
-    v15 = (int *)FormHeapAlloc(0x14u);
-    v38 = (int)v15;
-    v39 = 1;
-    result = v15 ? sub_71FAC0(v15, *((unsigned __int16 *)this + 0x28)) : 0;
-    v16 = *((_WORD *)this + 0x28) == 0;
-    v39 = 0xFFFFFFFF;
-    *((_DWORD *)this + 0x15) = result;
-    v36 = 0;
-    if ( !v16 )
+      v14 = 0; /*0x720012*/
+    v41 = 0xFFFFFFFF; /*0x720019*/
+    self->member.m_pkSharedNormals = v14; /*0x72001d*/
+    v15 = (NiSharedNormalIndexPoolBlock *)FormHeapAlloc(0x14u);// Create the first linked index-pool block with capacity equal to the entry-array length. /*0x720020*/
+    v40 = (int)v15; /*0x720028*/
+    v41 = 1; /*0x72002e*/
+    v16 = v15 ? NiSharedNormalIndexPoolBlock_Construct(v15, self->member.m_usSharedNormalsArraySize) : 0;
+    v17 = self->member.m_usSharedNormalsArraySize == 0; /*0x720048*/
+    v41 = 0xFFFFFFFF; /*0x72004d*/
+    self->member.m_pkSharedNormalIndexPool = v16; /*0x720051*/
+    entryIndex = 0; /*0x720054*/
+    if ( !v17 )
     {
       do
       {
-        v17 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(*(_DWORD *)(v3 + 0x21C) + 4);
-        v33 = *(_DWORD *)(v3 + 0x21C);
-        v18 = 0;
-        v37 = 2;
-        v17(v33, &v35, 2, &v37, 1);
-        v19 = v35;
-        if ( v35 )
+        v18 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(*((_DWORD *)v3 + 0x87) + 4); /*0x72006f*/
+        v35 = *((_DWORD *)v3 + 0x87); /*0x72007d*/
+        cursor = 0; /*0x72007e*/
+        v39 = 2; /*0x720080*/
+        v18(v35, &sharedIndexCount, 2, &v39, 1);// Read this entry's 16-bit shared-normal index count. /*0x720084*/
+        v20 = sharedIndexCount; /*0x720086*/
+        if ( sharedIndexCount )
         {
-          v20 = *((int **)this + 0x15);
-          if ( v20 )
+          m_pkSharedNormalIndexPool = self->member.m_pkSharedNormalIndexPool; /*0x720097*/
+          if ( m_pkSharedNormalIndexPool )
           {
-            while ( v35 > (unsigned int)v20[3] )
+            while ( sharedIndexCount > m_pkSharedNormalIndexPool->remaining ) /*0x7200a4*/
             {
-              v20 = (int *)v20[4];
-              if ( !v20 )
-                goto LABEL_18;
+              m_pkSharedNormalIndexPool = m_pkSharedNormalIndexPool->next; /*0x7200a6*/
+              if ( !m_pkSharedNormalIndexPool ) /*0x7200ab*/
+                goto LABEL_18; /*0x7200ab*/
             }
           }
           else
           {
 LABEL_18:
-            v21 = (int *)FormHeapAlloc(0x14u);
-            v38 = (int)v21;
-            v39 = 2;
-            if ( v21 )
+            v22 = (int *)FormHeapAlloc(0x14u); /*0x7200ad*/
+            v40 = (int)v22; /*0x7200b9*/
+            v41 = 2; /*0x7200bf*/
+            if ( v22 )
             {
-              v22 = 2 * *(_DWORD *)(*((_DWORD *)this + 0x15) + 8);
-              v23 = FormHeapAlloc(
-                      (unsigned __int64)(unsigned int)v22 >> 0x1F != 0
+              v23 = 2 * self->member.m_pkSharedNormalIndexPool->capacity; /*0x7200cb*/
+              v24 = FormHeapAlloc(
+                      (unsigned __int64)v23 >> 0x1F != 0
                     ? 0xFFFFFFFF
-                    : 4 * *(_DWORD *)(*((_DWORD *)this + 0x15) + 8));
-              *v21 = v23;
-              v21[1] = v23;
-              v21[2] = v22;
-              v21[3] = v22;
-              v21[4] = 0;
-              v20 = v21;
+                    : 4 * self->member.m_pkSharedNormalIndexPool->capacity);
+              *v22 = v24; /*0x7200e5*/
+              v22[1] = v24; /*0x7200e7*/
+              v22[2] = v23; /*0x7200ea*/
+              v22[3] = v23; /*0x7200ed*/
+              v22[4] = 0; /*0x7200f3*/
+              m_pkSharedNormalIndexPool = (NiSharedNormalIndexPoolBlock *)v22; /*0x7200fa*/
             }
             else
             {
-              v20 = 0;
+              m_pkSharedNormalIndexPool = 0; /*0x720103*/
             }
-            v20[4] = *((_DWORD *)this + 0x15);
-            v19 = v35;
-            v39 = 0xFFFFFFFF;
-            *((_DWORD *)this + 0x15) = v20;
+            m_pkSharedNormalIndexPool->next = self->member.m_pkSharedNormalIndexPool; /*0x720108*/
+            v20 = sharedIndexCount; /*0x72010b*/
+            v41 = 0xFFFFFFFF; /*0x720110*/
+            self->member.m_pkSharedNormalIndexPool = m_pkSharedNormalIndexPool; /*0x720118*/
           }
-          v18 = v20[1];
-          v20[3] -= v19;
-          v20[1] = v18 + 2 * v35;
-          v34 = *(_DWORD *)(v3 + 0x21C);
-          v24 = *(void (__cdecl **)(int, int, int, int *, int))(v34 + 4);
-          v38 = 2;
-          v24(v34, v18, 2 * v35, &v38, 1);
-          v19 = v35;
+          cursor = m_pkSharedNormalIndexPool->cursor; /*0x72011b*/
+          m_pkSharedNormalIndexPool->remaining -= v20; /*0x720121*/
+          m_pkSharedNormalIndexPool->cursor = &cursor[sharedIndexCount];// Reserve count UInt16 indices from a pool block, growing through linked blocks when necessary. /*0x72012c*/
+          v36 = *((_DWORD *)v3 + 0x87); /*0x720145*/
+          v25 = *(void (__cdecl **)(int, unsigned __int16 *, int, int *, int))(v36 + 4); /*0x720146*/
+          v40 = 2; /*0x720149*/
+          v25(v36, cursor, 2 * sharedIndexCount, &v40, 1);// Read the shared vertex indices directly into the pooled slice. /*0x72014d*/
+          v20 = sharedIndexCount; /*0x72014f*/
         }
-        v25 = v36;
-        result = (int *)(*((_DWORD *)this + 0x13) + 8 * (unsigned __int16)v36);
-        if ( v19 && v18 )
+        v26 = entryIndex; /*0x72015a*/
+        v27 = &self->member.m_pkSharedNormals[(unsigned __int16)entryIndex];// Store {count, pooledIndices} in this 8-byte shared-normal entry. /*0x720164*/
+        if ( v20 && cursor ) /*0x72016b*/
         {
-          *(_WORD *)result = v19;
-          result[1] = v18;
+          v27->count = v20; /*0x72016d*/
+          v27->indices = cursor; /*0x720170*/
         }
         else
         {
-          *(_WORD *)result = 0;
-          result[1] = 0;
+          v27->count = 0; /*0x720175*/
+          v27->indices = 0; /*0x72017a*/
         }
-        v26 = v25 + 1;
-        v27 = (unsigned __int16)v26 < *((_WORD *)this + 0x28);
-        v36 = v26;
+        v28 = v26 + 1; /*0x720181*/
+        v29 = (unsigned __int16)v28 < self->member.m_usSharedNormalsArraySize; /*0x720184*/
+        entryIndex = v28; /*0x720188*/
       }
-      while ( v27 );
+      while ( v29 );
     }
   }
-  return result;
 }

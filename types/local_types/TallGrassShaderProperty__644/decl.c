@@ -1,1 +1,1 @@
-TallGrassShaderProperty
+struct TallGrassShaderProperty;

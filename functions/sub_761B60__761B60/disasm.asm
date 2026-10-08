@@ -1,4 +1,4 @@
-0x761B60: mov     ecx, [esp+arg_4]
+0x761B60: mov     ecx, [esp+arg_4]; MoonSugarEffect decode: alternate D3D matrix packer with translation in slots 3/7/11, still camera-relative. Used by some skin matrix formats.
 0x761B64: fld     dword ptr [ecx]
 0x761B66: mov     eax, [esp+arg_0]
 0x761B6A: fld     [esp+arg_C]

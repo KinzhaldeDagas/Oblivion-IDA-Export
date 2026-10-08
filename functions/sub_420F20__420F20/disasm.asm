@@ -1,4 +1,4 @@
-0x420F20: push    0FFFFFFFFh
+0x420F20: push    0FFFFFFFFh; Gets/creates ExtraPersuasionPercent (type 0x46) and records the Oblivion persuasion timestamp fields supplied by the caller (year/day/hour/month ordering follows observed stores).
 0x420F22: push    offset SEH_8C8970
 0x420F27: mov     eax, large fs:0
 0x420F2D: push    eax
@@ -24,7 +24,7 @@
 0x420F62: mov     [esp+1Ch+var_4], esi
 0x420F66: jz      short loc_420F71
 0x420F68: mov     ecx, eax
-0x420F6A: call    sub_42A6E0
+0x420F6A: call    ExtraPersuasionPercent_ctor; Constructs Oblivion ExtraPersuasionPercent (type 0x46) with zeroed payload fields.
 0x420F6F: jmp     short loc_420F73
 0x420F71: xor     eax, eax
 0x420F73: push    eax; BSExtraData *
@@ -47,3 +47,15 @@
 0x420FAE: pop     esi
 0x420FAF: add     esp, 10h
 0x420FB2: retn    10h
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A45F0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY 2026-08-27: Generated/parsed leaf-LOD gate is parsedLeafLodFlag. Flag 0 allocates explicit leaf-LOD vectors, always runs CBranch::Compute to make leaves, then calls BuildLeafLods. Flag 1 skips allocation and BuildLeafLods because token-7000 data supplied explicit LOD vectors.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7A4625",
-    "line": "mov     ds:0B2B704h, al",
+    "line": "mov     ds:0B2B704h, al; Stores whether parsedLeafLodFlag is zero. This is the generated explicit-leaf-LOD path condition.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7A4632",
-    "line": "mov     [esp+5Ch+var_48], eax",
+    "line": "mov     [esp+5Ch+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x7A4640",
-    "line": "push    ebx",
+    "line": "push    ebx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4641",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A4643",
-    "line": "call    sub_7915C0",
+    "line": "call    OB_CBranch_ctor_010201A0; Compact stock CBranch constructor. Oblivion branch object is 0x40 bytes: parent, percent, child SIdvBranch vector, vertex pointer/count, cross-section/start offsets, volume/fuzzy volume, flare vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7A465E",
-    "line": "mov     edi, [esi+0C0h]",
+    "line": "mov     edi, [esi+0C0h]; Executed only when parsedLeafLodFlag==0: allocates leafLodLevelCount explicit leaf vectors for generated LODs.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7A468B",
-    "line": "mov     [esp+5Ch+var_48], eax",
+    "line": "mov     [esp+5Ch+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x7A469B",
-    "line": "push    offset sub_794EB0; a5",
+    "line": "push    offset OB_stVector4_DestroyThiscall_010201A0; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7A46A0",
-    "line": "push    offset sub_6EF4A0; a4",
+    "line": "push    offset FaceGenEgtBasisBank_Construct; Inside flag-zero allocation path; constructs the generated explicit leaf-vector array.",
     "mnemonic": "push",
     "size": 5
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x7A46C9",
-    "line": "call    sub_790B00",
+    "line": "call    OB_CBranch_ClearStaticBranchInfoVector_010201A0; Source-match: CBranch::ClearBranchInfo/static branch-info clear helper. Clears the global/static branch info vector used by branch parsing/compute.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A46CE",
-    "line": "mov     edi, ds:0B429E4h",
+    "line": "mov     edi, ds:0B429E4h; a2",
     "mnemonic": "mov",
     "size": 6
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7A46DA",
-    "line": "mov     ds:0B429B8h, edx",
+    "line": "mov     ds:0B429B8h, edx; Before branch/leaf generation, publishes &this->leafInfo to the globals consumed by CBranch::MakeLeaf; this is the same struct updated by SetLeafDimmingScalar.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7A4726",
-    "line": "mov     [esp+5Ch+var_48], ebx",
+    "line": "mov     [esp+5Ch+value], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -673,19 +673,19 @@
   },
   {
     "ea": "0x7A475B",
-    "line": "lea     ecx, [esp+5Ch+var_48]",
+    "line": "lea     ecx, [esp+5Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A475F",
-    "line": "push    ecx; int",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4760",
-    "line": "mov     eax, offset dword_B429DC",
+    "line": "mov     eax, offset lastOwner",
     "mnemonic": "mov",
     "size": 5
   },
@@ -697,31 +697,31 @@
   },
   {
     "ea": "0x7A4766",
-    "line": "push    eax; int",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4767",
-    "line": "lea     edx, [esp+68h+var_44]",
+    "line": "lea     edx, [esp+68h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A476B",
-    "line": "push    edx; int",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A476C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A476E",
-    "line": "call    sub_7A3620",
+    "line": "call    OB_stVector4_InsertOne_010201A0; Oblivion binary evidence: inserts one four-byte value at a checked owner/current iterator by calling OB_stVector4_InsertFill, then returns a relocated iterator to the inserted slot. Widely folded across SpeedTree pointer and scalar vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,19 +757,19 @@
   },
   {
     "ea": "0x7A4787",
-    "line": "push    eax",
+    "line": "push    eax; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4788",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A478A",
-    "line": "call    sub_78EA30",
+    "line": "call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,25 +793,25 @@
   },
   {
     "ea": "0x7A4798",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A479A",
-    "line": "fstp    [esp+64h+var_48]",
+    "line": "fstp    [esp+64h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A479E",
-    "line": "fld     [esp+64h+var_48]",
+    "line": "fld     [esp+64h+value]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A47A2",
-    "line": "fstp    [esp+64h+var_60]; float",
+    "line": "fstp    [esp+64h+a15]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -829,25 +829,25 @@
   },
   {
     "ea": "0x7A47AC",
-    "line": "fstp    [esp+64h+var_48]",
+    "line": "fstp    [esp+64h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A47B0",
-    "line": "fld     [esp+64h+var_48]",
+    "line": "fld     [esp+64h+value]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A47B4",
-    "line": "fstp    [esp+64h+var_64]; float",
+    "line": "fstp    [esp+64h+minValue]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A47B7",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x7A47BF",
-    "line": "fstp    [esp+5Ch+var_48]",
+    "line": "fstp    [esp+5Ch+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1165,19 +1165,19 @@
   },
   {
     "ea": "0x7A4859",
-    "line": "push    edx",
+    "line": "push    edx; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A485A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A485C",
-    "line": "call    sub_78EA30",
+    "line": "call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,37 +1189,37 @@
   },
   {
     "ea": "0x7A4865",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A4868",
-    "line": "push    eax",
+    "line": "push    eax; lodCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4869",
-    "line": "call    sub_798090",
+    "line": "call    OB_CIndexedGeometry_SetNumLodLevels_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::SetNumLodLevels clears the nested unsigned-short length and unsigned-short-pointer containers plus 32-bit triangle totals, records the unsigned-short LOD count, resizes both outer vectors with empty inner values, and zeroes totals.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A486E",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A4871",
-    "line": "push    0",
+    "line": "push    0; lodLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A4873",
-    "line": "call    sub_794A90",
+    "line": "call    OB_CIndexedGeometry_ResetStripCounter_010201A0; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x7A487D",
-    "line": "fst     [esp+5Ch+var_3C]",
+    "line": "fst     [esp+5Ch+a10]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x7A4898",
-    "line": "fst     [esp+60h+var_30]",
+    "line": "fst     [esp+60h+a9]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x7A48C4",
-    "line": "fstp    [esp+60h+var_60]; float",
+    "line": "fstp    [esp+60h+a15]; parentRadius",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x7A48C9",
-    "line": "push    eax; int",
+    "line": "push    eax; windGroupIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x7A48CB",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+a13]; incomingWindWeight",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1387,37 +1387,37 @@
   },
   {
     "ea": "0x7A48D1",
-    "line": "push    edx; int",
+    "line": "push    edx; generatedLeafVectorWrapper",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A48D2",
-    "line": "push    ecx; int",
+    "line": "push    ecx; branchGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A48D3",
-    "line": "lea     edx, [esp+70h+var_3C]",
+    "line": "lea     edx, [esp+70h+a10]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A48D7",
-    "line": "push    edx; int",
+    "line": "push    edx; parentDirection",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A48D8",
-    "line": "lea     ecx, [esp+74h+var_30]",
+    "line": "lea     ecx, [esp+74h+a9]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A48DC",
-    "line": "push    ecx; int",
+    "line": "push    ecx; parentTransform3x3",
     "mnemonic": "push",
     "size": 1
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x7A48E0",
-    "line": "fst     [esp+80h+var_7C]; float",
+    "line": "fst     [esp+80h+a8]; parentDimmingScalar",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1441,25 +1441,25 @@
   },
   {
     "ea": "0x7A48E7",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+a7]; percentAlongParent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A48EA",
-    "line": "push    edx; int",
+    "line": "push    edx; branchBasePosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A48EB",
-    "line": "fld     [esp+84h+var_48]",
+    "line": "fld     [esp+84h+value]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A48EF",
-    "line": "push    0; int",
+    "line": "push    0; branchLevel",
     "mnemonic": "push",
     "size": 2
   },
@@ -1471,43 +1471,43 @@
   },
   {
     "ea": "0x7A48F2",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7A48F5",
-    "line": "fstp    [esp+8Ch+var_8C]; float",
+    "line": "fstp    [esp+8Ch+a4]; treeSizeScalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A48F8",
-    "line": "push    eax; int",
+    "line": "push    eax; rngSeed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A48F9",
-    "line": "call    sub_7925B0",
+    "line": "call    OB_CBranch_Compute_010201A0; 2026-05-19 captured 4.x load pass: recursive branch compute still consumes compact stock SIdvBranchInfo only; no root-support branch parameter or 40007 supplemental-root consumer is observed. Captured 23002/23003-in-40007 handling is OBSE sidecar grammar only.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A48FE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A4900",
-    "line": "call    sub_7A3C80",
+    "line": "call    OB_CTreeEngine_BuildBranchLods_010201A0; Flattens branch tree, ranks by volume/large-branch retention/fuzziness, then emits branch LOD strips through OB_CBranch_ComputeLod_010201A0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A4905",
-    "line": "cmp     byte ptr [esi+0D8h], 0",
+    "line": "cmp     byte ptr [esi+0D8h], 0; After branch generation, parsedLeafLodFlag==0 selects generated explicit leaf-LOD construction.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x7A490E",
-    "line": "fld     [esp+5Ch+arg_0]",
+    "line": "fld     [esp+5Ch+leafSizeIncreaseFactor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1537,13 +1537,13 @@
   },
   {
     "ea": "0x7A4915",
-    "line": "fstp    [esp+60h+var_60]; float",
+    "line": "fstp    [esp+60h+a15]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A4918",
-    "line": "call    sub_7A3940",
+    "line": "call    OB_CTreeEngine_BuildLeafLods_010201A0; Calls CTreeEngine::BuildLeafLods only for the generated path (no parsed top-level token 7000 cluster).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1630,5 +1630,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CCA80",
+    "line": "mov     eax, [ebp-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCA83",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCA84",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCA89",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCA8A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCA8B",
+    "line": "mov     eax, [ebp-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCA8E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCA8F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCA94",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCA95",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCA96",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCA9A",
+    "line": "lea     eax, [edx-4Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCA9D",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCAA0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCAA2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCAA7",
+    "line": "mov     eax, offset stru_AF5E40",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCAAC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

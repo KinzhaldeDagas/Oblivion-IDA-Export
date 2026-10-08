@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x63C730",
-    "line": "sub     esp, 5Ch",
+    "line": "sub     esp, 5Ch; MorrowindMovements: process vtable +0x2CC movement-vector handoff shared by actor process movement; reads +0x2C0 flags before MobileObject::Move.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x63C7AF",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63C7B1",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x63C7C7",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63C7C9",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; Player movement handoff calls Player_GetAnimData(player, 1) when third-person animation data may be needed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,31 +271,31 @@
   },
   {
     "ea": "0x63C7D6",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63C7D8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63C7DA",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x63C7DF",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63C7E1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x63C7E6",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x63C7F6",
-    "line": "mov     edx, [esi]",
+    "line": "mov     edx, [esi]; Non-player movement handoff obtains ActorAnimData through actor vtable +0x164 before calling 0x4723A0.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x63C872",
-    "line": "call    sub_4723A0",
+    "line": "call    ActorAnimData_GetMovementVector; Movement handoff calls ActorAnimData movement-vector extraction. MorrowindMovements hooks this call to apply a transient +0xBC/+0xC0 root-motion clamp scale only during 0x4723A0, then restores before playback/save state can observe it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x63C88A",
-    "line": "lea     ecx, [esp+6Ch+arg_0]; this",
+    "line": "lea     ecx, [esp+6Ch+arg_0]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x63C88E",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,13 +1495,13 @@
   },
   {
     "ea": "0x63CA70",
-    "line": "fstp    [esp+70h+var_70]; float",
+    "line": "fstp    [esp+70h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x63CA73",
-    "line": "lea     ecx, [esp+70h+var_24]",
+    "line": "lea     ecx, [esp+70h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x63CA7B",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x63CA8F",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x63CB44",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x63CB55",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x63CBF1",
-    "line": "call    sub_441800",
+    "line": "call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x63CC7A",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2617,7 +2617,7 @@
   },
   {
     "ea": "0x63CCB6",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2821,7 +2821,7 @@
   },
   {
     "ea": "0x63CD16",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2905,7 +2905,7 @@
   },
   {
     "ea": "0x63CD4B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x63CD8B",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },

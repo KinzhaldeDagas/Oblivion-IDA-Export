@@ -12,7 +12,7 @@
 0x6FF584: lea     eax, [edi+4]
 0x6FF587: push    eax; lpAddend
 0x6FF588: call    dword ptr ds:0A28078h
-0x6FF58E: push    offset stru_B3F600; lpCriticalSection
+0x6FF58E: push    offset unk_B3F600; lpCriticalSection
 0x6FF593: call    dword ptr ds:0A2806Ch
 0x6FF599: call    dword ptr ds:0A2808Ch
 0x6FF59F: mov     ebp, 1
@@ -38,7 +38,7 @@
 0x6FF5E0: sub     ds:0B3F67Ch, ebp
 0x6FF5E6: jnz     short loc_6FF5F2
 0x6FF5E8: mov     dword ptr ds:0B3F678h, 0
-0x6FF5F2: push    offset stru_B3F600; lpCriticalSection
+0x6FF5F2: push    offset unk_B3F600; lpCriticalSection
 0x6FF5F7: call    dword ptr ds:0A28074h
 0x6FF5FD: pop     ebp
 0x6FF5FE: pop     edi
@@ -64,13 +64,13 @@
 0x6FF632: movzx   eax, word ptr [esi+14h]
 0x6FF636: add     eax, eax
 0x6FF638: add     eax, eax
-0x6FF63A: push    eax; Size
-0x6FF63B: push    ecx; Src
-0x6FF63C: push    ebx; Dst
-0x6FF63D: call    _memcpy
+0x6FF63A: push    eax; byteCount
+0x6FF63B: push    ecx; source
+0x6FF63C: push    ebx; destination
+0x6FF63D: call    _memcpy;
 0x6FF642: mov     edx, [esi+10h]
 0x6FF645: push    edx
-0x6FF646: call    FormHeapFree
+0x6FF646: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6FF64B: add     esp, 14h
 0x6FF64E: mov     [esi+10h], ebx
 0x6FF651: movzx   eax, word ptr [esi+14h]
@@ -98,11 +98,11 @@
 0x6FF69A: add     ebp, ebp
 0x6FF69C: add     ebp, ebp
 0x6FF69E: mov     ecx, [eax+ebp]
-0x6FF6A1: call    sub_452A60
+0x6FF6A1: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6FF6A6: mov     ecx, [esi+10h]
 0x6FF6A9: mov     ecx, [ecx+ebp-4]
 0x6FF6AD: mov     edi, eax
-0x6FF6AF: call    sub_452A60
+0x6FF6AF: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6FF6B4: mov     cl, [eax]
 0x6FF6B6: cmp     cl, [edi]
 0x6FF6B8: jnz     short loc_6FF6D4
@@ -136,7 +136,7 @@
 0x6FF704: sub     ds:0B3F67Ch, ebp
 0x6FF70A: jnz     short loc_6FF716
 0x6FF70C: mov     dword ptr ds:0B3F678h, 0
-0x6FF716: push    offset stru_B3F600; lpCriticalSection
+0x6FF716: push    offset unk_B3F600; lpCriticalSection
 0x6FF71B: call    dword ptr ds:0A28074h
 0x6FF721: pop     ebx
 0x6FF722: pop     ebp
@@ -150,7 +150,7 @@
 0x6FF732: sub     dword ptr ds:0B3F67Ch, 1
 0x6FF739: jnz     short loc_6FF745
 0x6FF73B: mov     dword ptr ds:0B3F678h, 0
-0x6FF745: push    offset stru_B3F600; lpCriticalSection
+0x6FF745: push    offset unk_B3F600; lpCriticalSection
 0x6FF74A: call    dword ptr ds:0A28074h
 0x6FF750: pop     ebx
 0x6FF751: pop     ebp

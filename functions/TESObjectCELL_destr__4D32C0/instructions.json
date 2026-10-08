@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x4D3347",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D3349",
-    "line": "call    sub_4A6380",
+    "line": "call    TESRegionList_Clear; Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x4D33B4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x4D341F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -790,5 +790,149 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5630",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5633",
+    "line": "jmp     TESForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5638",
+    "line": "cmp     dword ptr [ebp-10h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x9B563C",
+    "line": "jz      loc_9B5650",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5642",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5645",
+    "line": "add     eax, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5648",
+    "line": "mov     [ebp-14h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B564B",
+    "line": "jmp     loc_9B5657",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5650",
+    "line": "mov     dword ptr [ebp-14h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x9B5657",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B565A",
+    "line": "jmp     TESFullName_Initialize",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B565F",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5662",
+    "line": "add     ecx, 28h ; '('",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5665",
+    "line": "jmp     BaseExtraList_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B566A",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B566D",
+    "line": "add     ecx, 54h ; 'T'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5670",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5675",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5679",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B567C",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B567F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5681",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5686",
+    "line": "mov     eax, offset stru_AE0710",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B568B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

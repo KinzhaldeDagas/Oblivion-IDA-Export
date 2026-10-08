@@ -6,14 +6,14 @@
 0x5C2743: mov     ecx, [esi+30h]
 0x5C2746: push    0FD3h
 0x5C274B: call    Tile_GetFloat
-0x5C2750: call    Double_To_SInt32
+0x5C2750: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C2755: mov     ecx, [esi+8ECh]
 0x5C275B: push    eax
 0x5C275C: call    sub_57D2D0
 0x5C2761: mov     ecx, [esi+30h]
 0x5C2764: push    0FD4h
 0x5C2769: call    Tile_GetFloat
-0x5C276E: call    Double_To_SInt32
+0x5C276E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C2773: mov     ecx, [esi+8ECh]
 0x5C2779: push    eax
 0x5C277A: call    sub_583DD0

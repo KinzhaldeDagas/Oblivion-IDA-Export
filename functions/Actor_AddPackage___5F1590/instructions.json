@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F1590",
-    "line": "push    ebp",
+    "line": "push    ebp; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5F15C3",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x5F169F",
-    "line": "call    sub_566830",
+    "line": "call    sub_566830; 3DTheft decode: Actor_AddPackage_ performs the dynamic-marker helper when markDynamic/a4 is true; callers should let this path mark runtime packages instead of forcing packageFlags 0x800 manually.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x5F1772",
-    "line": "mov     ecx, [ecx+8]",
+    "line": "mov     ecx, [ecx+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x5F1785",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x5F17EC",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; 3DTheft decode 2026-05-16: Actor_AddPackage_ editor-package path stores v7 into process->editorPackage and resets editorPackProcedure. AddScriptPackage reaches this with setCurrent=0 markDynamic=0.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1267,13 +1267,13 @@
   },
   {
     "ea": "0x5F17F8",
-    "line": "mov     dword ptr [edx+4], 0",
+    "line": "mov     dword ptr [edx+4], 0; 3DTheft decode: Actor_AddPackage_ editor-package handoff resets editorPackProcedure to slot 0, not TRAVEL semantics specifically; slot 0 maps through the package procedure row.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x5F17FF",
-    "line": "call    sub_5E8DE0",
+    "line": "call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x5F1861",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x5F18DB",
-    "line": "call    eax",
+    "line": "call    eax; 3DTheft decode: current-package handoff resets currentPackProcedure to slot 0; SetCurrentPackProcedure clamps slots, not eProcedure enum values.",
     "mnemonic": "call",
     "size": 2
   },

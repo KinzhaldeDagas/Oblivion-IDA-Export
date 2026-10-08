@@ -1,4 +1,4 @@
 int __thiscall sub_940B70(signed __int16 *this)
 {
-  return *(this + 7);
+  return *(this + 7); /*0x940b74*/
 }

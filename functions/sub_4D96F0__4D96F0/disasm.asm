@@ -44,7 +44,6 @@
 0x4D9767: mov     eax, edi
 0x4D9769: sub     edx, edi
 0x4D976B: jmp     short loc_4D9770
-0x4D976D: align 10h
 0x4D9770: mov     cl, [eax]
 0x4D9772: mov     [edx+eax], cl
 0x4D9775: add     eax, 1

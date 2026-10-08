@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x694AB0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+context]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,19 +25,19 @@
   },
   {
     "ea": "0x694AB8",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x694ABD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x694ABF",
-    "line": "call    sub_6948B0",
+    "line": "call    LightEffect_TeardownTransientPointLight; PreLoad tears down any existing transient LightEffect point light and its native full-list entry.",
     "mnemonic": "call",
     "size": 5
   },

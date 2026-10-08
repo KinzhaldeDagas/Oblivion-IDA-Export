@@ -1,1 +1,1 @@
-DCB
+typedef tagDCB DCB;

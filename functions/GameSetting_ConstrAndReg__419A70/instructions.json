@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x419A70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x419A98",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+name]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x419A9C",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+defaultValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x419AB1",
-    "line": "lea     edx, [esp+18h+arg_0]",
+    "line": "lea     edx, [esp+18h+name]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x419AB7",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x419AF0",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -304,5 +304,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AB570",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB573",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB578",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AB57C",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB57F",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB582",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB584",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB589",
+    "line": "mov     eax, offset stru_AD8444",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB58E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,36 @@
 {
-  "callees_count": 77,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 57,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 144,
-  "display_name": "sub_7CC280",
+  "chunks": [
+    [
+      "0x7CC280",
+      "0x7CD08B"
+    ],
+    [
+      "0x9CE980",
+      "0x9CE9C7"
+    ]
+  ],
+  "chunks_sha256": "028165d1d42f55234f7d57a6e4bfb0fe03ae9b1bb5c5eedbc09aa2511ef77e5e",
+  "comment_regular": "Oblivion-authoritative ShadowLightShader constant-map builder. Registers the B44FD8 four-float vector as PointLightPos0 at vertex c16; the mode-5 SLS2052..2056 caster vertex programs expose the same register as LightPosition and use c16.w as their depth normalization denominator.\n\nSpeedTreeOBSE v156 binding evidence: pixel map Ambient Color c1 <- B46498; Light Color0..3 c2..5 <- B464A8/B464B8/B464C8/B464D8. Size16/stride4/one register, flags10000007, noncopy source. Use actual definition1 map entries when validating; B4551C..2C auxiliary pointers can reflect another map construction. Vertex DiffuseColor0..2 c19..21 read the same first three direct-light vectors.\n\nVerified (Oblivion): builds ShadowLightShader-owned vertex/pixel constant maps and registers texture-effect U/V at vertex c9/c10, current fill/edge RGBA at pixel c0/c1, and edge-falloff/fVars at pixel c2. ShadowLightShader's vtable slot +0x88 points here; slot +0x38 applies these maps to the active pass's shader programs. This confirms the 0x18C..0x18F passes consume these maps through their active shader owner.",
+  "comment_repeatable": "Verified (Oblivion): builds ShadowLightShader-owned vertex/pixel constant maps and registers texture-effect U/V at vertex c9/c10, current fill/edge RGBA at pixel c0/c1, and edge-falloff/fVars at pixel c2. ShadowLightShader's vtable slot +0x88 points here; slot +0x38 applies these maps to the active pass's shader programs. This confirms the 0x18C..0x18F passes consume these maps through their active shader owner.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 228,
+  "display_name": "ShadowLightShader__BuildConstantMaps",
   "end_ea": "0x7CD08B",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
-  "name": "sub_7CC280",
+  "name": "ShadowLightShader__BuildConstantMaps",
   "segment": ".text",
   "sha256": "46b51f10a850d781728c1d4109159e2be3a1f5a93fc0d624ccdcc3cd7838fc8e",
   "size": 3595,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7CC280",
-  "type": "void __thiscall(Ni2DBuffer **this)",
-  "xrefs_from_count": 1487,
+  "total_chunk_size": 3666,
+  "type": "void __thiscall(void *this)",
+  "xrefs_from_count": 1516,
   "xrefs_to_count": 1
 }

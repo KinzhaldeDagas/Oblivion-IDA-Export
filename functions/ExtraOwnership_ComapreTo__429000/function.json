@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x429000",
+      "0x429049"
+    ]
+  ],
+  "chunks_sha256": "4ead75d010bb99a35eb49a9d060dfa58b8d2c506ccd737efed220d4d12ce97a5",
+  "comment_regular": "Verified ExtraOwnership comparison: requires the other payload to RTTI-cast to ExtraOwnership, compares BSExtraData base state, then compares ownerForm pointers.",
+  "comment_repeatable": "Verified ExtraOwnership comparison: requires the other payload to RTTI-cast to ExtraOwnership, compares BSExtraData base state, then compares ownerForm pointers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "ExtraOwnership::ComapreTo",
+  "display_name": "ExtraOwnership_CompareTo",
   "end_ea": "0x429049",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "ExtraOwnership::ComapreTo",
+  "name": "ExtraOwnership_CompareTo",
   "segment": ".text",
   "sha256": "4ead75d010bb99a35eb49a9d060dfa58b8d2c506ccd737efed220d4d12ce97a5",
   "size": 73,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x429000",
-  "type": "bool __thiscall(ExtraOwnership *this, BSExtraData *a2)",
+  "total_chunk_size": 73,
+  "type": "bool __thiscall(ExtraOwnership *this, BSExtraData *other)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 1
 }

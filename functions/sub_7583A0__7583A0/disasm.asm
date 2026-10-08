@@ -29,7 +29,6 @@
 0x7583E4: test    ecx, ecx
 0x7583E6: jbe     short loc_758414
 0x7583E8: jmp     short loc_7583F0
-0x7583EA: align 10h
 0x7583F0: movzx   eax, byte ptr [esi+14h]
 0x7583F4: mov     ecx, [esi+0Ch]
 0x7583F7: imul    eax, edi
@@ -38,7 +37,7 @@
 0x7583FF: add     edx, eax
 0x758401: push    ecx
 0x758402: push    edx
-0x758403: call    ebp ; dword_B3D4A0
+0x758403: call    ebp ; unk_B3D4A0
 0x758405: add     esp, 8
 0x758408: test    al, al
 0x75840A: jz      short loc_75844D
@@ -49,7 +48,6 @@
 0x758416: cmp     [esi+18h], edi
 0x758419: jbe     short loc_758444
 0x75841B: jmp     short loc_758420
-0x75841D: align 10h
 0x758420: movzx   eax, byte ptr [esi+24h]
 0x758424: mov     ecx, [esi+1Ch]
 0x758427: imul    eax, edi
@@ -58,7 +56,7 @@
 0x75842F: add     edx, eax
 0x758431: push    ecx
 0x758432: push    edx
-0x758433: call    ebp ; dword_B3D4A0
+0x758433: call    ebp ; unk_B3D4A0
 0x758435: add     esp, 8
 0x758438: test    al, al
 0x75843A: jz      short loc_75844D

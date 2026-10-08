@@ -1,1 +1,31 @@
-tagDCB
+struct tagDCB
+{
+DWORD DCBlength;
+DWORD BaudRate;
+unsigned __int32 fBinary : 1;
+unsigned __int32 fParity : 1;
+unsigned __int32 fOutxCtsFlow : 1;
+unsigned __int32 fOutxDsrFlow : 1;
+unsigned __int32 fDtrControl : 2;
+unsigned __int32 fDsrSensitivity : 1;
+unsigned __int32 fTXContinueOnXoff : 1;
+unsigned __int32 fOutX : 1;
+unsigned __int32 fInX : 1;
+unsigned __int32 fErrorChar : 1;
+unsigned __int32 fNull : 1;
+unsigned __int32 fRtsControl : 2;
+unsigned __int32 fAbortOnError : 1;
+unsigned __int32 fDummy2 : 17;
+WORD wReserved;
+WORD XonLim;
+WORD XoffLim;
+BYTE ByteSize;
+BYTE Parity;
+BYTE StopBits;
+char XonChar;
+char XoffChar;
+char ErrorChar;
+char EofChar;
+char EvtChar;
+WORD wReserved1;
+};

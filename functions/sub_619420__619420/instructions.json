@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x619430",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x619469",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x6194FE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x619500",
-    "line": "call    sub_615520",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x61951F",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x619537",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x61957A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x619583",
-    "line": "call    sub_615520",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "call",
     "size": 5
   },

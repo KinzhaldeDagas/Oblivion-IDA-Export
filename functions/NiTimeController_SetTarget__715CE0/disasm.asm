@@ -1,4 +1,4 @@
-0x715CE0: push    esi
+0x715CE0: push    esi; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.
 0x715CE1: push    edi
 0x715CE2: mov     edi, [esp+8+arg_0]
 0x715CE6: mov     esi, ecx
@@ -14,7 +14,7 @@
 0x715D03: cmp     dword ptr [ecx+0Ch], 0
 0x715D07: jz      short loc_715D0F
 0x715D09: push    esi
-0x715D0A: call    sub_6FFE90
+0x715D0A: call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
 0x715D0F: test    edi, edi
 0x715D11: mov     [esi+30h], edi
 0x715D14: jz      short loc_715D5B
@@ -29,7 +29,7 @@
 0x715D29: jnz     short loc_715D20
 0x715D2B: push    esi
 0x715D2C: mov     ecx, edi
-0x715D2E: call    sub_6FFE60
+0x715D2E: call    NiObjectNET_AddController; Prepends a non-null NiTimeController to NiObjectNET's refcounted controller chain, first setting the controller's next link to the current head.
 0x715D33: mov     eax, [esi]
 0x715D35: mov     edx, [eax+60h]
 0x715D38: mov     ecx, esi

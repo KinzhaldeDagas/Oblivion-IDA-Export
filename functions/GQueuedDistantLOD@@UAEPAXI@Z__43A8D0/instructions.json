@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x43A8D3",
-    "line": "call    ??1QueuedDistantLOD@@UAE@XZ; QueuedDistantLOD::~QueuedDistantLOD(void)",
+    "line": "call    ??1QueuedDistantLOD@@UAE@XZ; Verified QueuedDistantLOD destruction: releases the Ni2DBuffer at DistantLODQueuedInstanceData+0x1C, frees the 0x20-byte context, releases the task's result/resource pointers, then frees the queued model path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x43A8E0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

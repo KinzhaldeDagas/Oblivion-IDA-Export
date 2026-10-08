@@ -1,19 +1,32 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_679120",
+  "chunks": [
+    [
+      "0x679120",
+      "0x67923F"
+    ]
+  ],
+  "chunks_sha256": "0ec577190c38dda7e33fb3bc901f7ae7ef11c342a9ea11d085c394560d409ece",
+  "comment_regular": "Verified (Oblivion): walks each temp effect's GetType/parent RTTI chain to NiRTTI_MagicShaderHitEffect, filters by target, unfinished state and clear bWeaponEnchantment_28, and selects the smallest BSTempEffect::elapsedSeconds. A prior candidate with TESEffectShader::Data.cFlags bit 0 can be displaced by one without it. The exact meaning of bit 0 remains Unknown.",
+  "comment_repeatable": "Verified (Oblivion): walks each temp effect's GetType/parent RTTI chain to NiRTTI_MagicShaderHitEffect, filters by target, unfinished state and clear bWeaponEnchantment_28, and selects the smallest BSTempEffect::elapsedSeconds. A prior candidate with TESEffectShader::Data.cFlags bit 0 can be displaced by one without it. The exact meaning of bit 0 remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ActorProcessManager_FindTargetNonWeaponShaderHitEffect",
   "end_ea": "0x67923F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_679120",
+  "name": "ActorProcessManager_FindTargetNonWeaponShaderHitEffect",
   "segment": ".text",
   "sha256": "0ec577190c38dda7e33fb3bc901f7ae7ef11c342a9ea11d085c394560d409ece",
   "size": 287,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x679120",
-  "type": "int __thiscall(int *this, int)",
+  "total_chunk_size": 287,
+  "type": "MagicShaderHitEffect *__thiscall(ActorProcessManager *this, TESObjectREFR *targetReference)",
   "xrefs_from_count": 136,
   "xrefs_to_count": 1
 }

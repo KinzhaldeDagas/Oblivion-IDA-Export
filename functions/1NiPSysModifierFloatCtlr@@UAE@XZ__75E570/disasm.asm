@@ -4,7 +4,7 @@
 0x75E576: push    edi
 0x75E577: push    eax
 0x75E578: mov     dword ptr [esi], offset ??_7NiPSysModifierCtlr@@6B@; const NiPSysModifierCtlr::`vftable'
-0x75E57E: call    FormHeapFree
+0x75E57E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x75E583: mov     edi, [esi+3Ch]
 0x75E586: add     esp, 4
 0x75E589: test    edi, edi

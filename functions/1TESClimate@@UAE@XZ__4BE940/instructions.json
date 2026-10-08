@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BE940",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified: TESClimate destructor destroys both textures, clears the weather EntryData list at +0x30, then destroys model and TESForm base.",
     "mnemonic": "push",
     "size": 2
   },
@@ -226,5 +226,143 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B45C0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45C3",
+    "line": "jmp     TESForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B45C8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45CB",
+    "line": "add     ecx, 18h; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45CE",
+    "line": "jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B45D3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45D6",
+    "line": "add     ecx, 30h ; '0'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45D9",
+    "line": "jmp     sub_4EED70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B45DE",
+    "line": "push    offset TESTexture_destr; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9B45E3",
+    "line": "push    2; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B45E5",
+    "line": "push    0Ch; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9B45E7",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45EA",
+    "line": "add     eax, 38h ; '8'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45ED",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B45EE",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B45F3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B45F4",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B45F8",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45FB",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B45FE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B4600",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4605",
+    "line": "mov     eax, offset stru_ADFC70",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B460A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

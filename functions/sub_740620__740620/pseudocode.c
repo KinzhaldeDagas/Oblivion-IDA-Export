@@ -1,4 +1,4 @@
-void *sub_740620()
+NiRTTI *sub_740620()
 {
-  return &unk_B401E4;
+  return &stru_B401E4; /*0x740625*/
 }

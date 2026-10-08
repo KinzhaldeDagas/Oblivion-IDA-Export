@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6116D0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Character current-package cleanup. DialoguePackage receives special two-participant cleanup: stop active playback, detach both actors, restore saved ExtraPackage state where present, reset procedure state, and destroy the one shared dynamic package/owned Conversation.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x61172C",
-    "line": "mov     [esp+18h+var_4], edi",
+    "line": "mov     [esp+18h+form], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,31 +187,31 @@
   },
   {
     "ea": "0x61173C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61173E",
-    "line": "call    sub_625D70",
+    "line": "call    DialoguePackage__StopActiveSpeakerDialogue; Stops dialogue playback on activeSpeaker when a DialoguePackage is being torn down or replaced.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x611743",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x611745",
-    "line": "call    NiDX9TextureData__GetLevels",
+    "line": "call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x61174A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x61174E",
-    "line": "call    sub_779480",
+    "line": "call    DialoguePackage__GetTarget; DialoguePackage participant accessor: returns the target at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x611754",
-    "line": "mov     ecx, offset unk_B3BD7C",
+    "line": "mov     ecx, (offset qword_B3BB2C+250h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x611761",
-    "line": "mov     ecx, offset unk_B3BD7C",
+    "line": "mov     ecx, (offset qword_B3BB2C+250h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x6117F3",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x61180E",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,25 +715,25 @@
   },
   {
     "ea": "0x61183A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61183C",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x611841",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x611843",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x611880",
-    "line": "call    sub_5E8DE0",
+    "line": "call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x61188A",
-    "line": "call    sub_41FB40",
+    "line": "call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x6118AA",
-    "line": "call    sub_41FB60",
+    "line": "call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x6118BD",
-    "line": "call    sub_41FB80",
+    "line": "call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x6118D4",
-    "line": "mov     [esp+18h+var_4], eax",
+    "line": "mov     [esp+18h+form], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x6118DE",
-    "line": "call    sub_41FBA0",
+    "line": "call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6118E3",
-    "line": "mov     ecx, [esp+18h+var_4]",
+    "line": "mov     ecx, [esp+18h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x611916",
-    "line": "call    sub_5E6B40",
+    "line": "call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x611959",
-    "line": "call    sub_5E8DE0",
+    "line": "call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x611963",
-    "line": "call    sub_41FB40",
+    "line": "call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x611978",
-    "line": "call    sub_41FB60",
+    "line": "call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x611990",
-    "line": "call    sub_41FB80",
+    "line": "call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x6119B1",
-    "line": "call    sub_41FBA0",
+    "line": "call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1879,25 +1879,25 @@
   },
   {
     "ea": "0x611A92",
-    "line": "mov     eax, [esp+18h+var_4]",
+    "line": "mov     eax, [esp+18h+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x611A96",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x611A9C",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x611A9D",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x611AA9",
-    "line": "mov     ecx, [esp+18h+var_4]",
+    "line": "mov     ecx, [esp+18h+form]",
     "mnemonic": "mov",
     "size": 4
   },

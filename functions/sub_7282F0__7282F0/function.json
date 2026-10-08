@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 5,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7282F0",
+      "0x728320"
+    ]
+  ],
+  "chunks_sha256": "3052653f4c959f063daa83d72d5514761fcfff8508fa0c574a50fd18c536ea75",
+  "comment_regular": "\n\nSpeedTreeOBSE v155 evidence: assembly reads NiGeometryData+28 UV base, (byte at+2C)&3F set count, and word+8 vertex count; returns UVbase + 8*set*vertexCount or zero. Used to copy owned USER1/USER2 UV planes5/6 in optional foliage publication extension. This is CPU metadata exposure, not native shader support. Actual game publication remains UNVERIFIED.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_7282F0",
   "end_ea": "0x728320",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_7282F0",
   "segment": ".text",
   "sha256": "3052653f4c959f063daa83d72d5514761fcfff8508fa0c574a50fd18c536ea75",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7282F0",
+  "total_chunk_size": 48,
   "type": "int __thiscall(NiGeometry *this, unsigned __int16 a2)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 5

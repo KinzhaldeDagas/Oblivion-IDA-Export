@@ -7,18 +7,18 @@ bool __thiscall TESForm_CompareComponentTo(TESForm *this, BaseFormComponent *a2)
   const char *v7; // eax
   const char *v8; // [esp-4h] [ebp-Ch]
 
-  v3 = (TESForm *)OblivionDynamicCast(
+  v3 = (TESForm *)OblivionDynamicCast( /*0x46b887*/
                     a2,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&BaseFormComponent `RTTI Type Descriptor',
                     (struct TypeDescriptor *)&TESForm `RTTI Type Descriptor',
                     0);
-  v4 = v3;
-  result = !v3
+  v4 = v3; /*0x46b88c*/
+  result = !v3 /*0x46b896*/
         || this->member.type != v3->member.type
         || (TESForm::GetEditorNameLen(this) || TESForm::GetEditorNameLen(v4))
         && ((EditorNameLen = TESForm::GetEditorNameLen(v4), TESForm::GetEditorNameLen(this) != EditorNameLen)
-         || (v8 = v4->vtbl->GetEditorName(v4), v7 = this->vtbl->GetEditorName(this), _strcmp((char *)v7, (char *)v8)))
+         || (v8 = v4->vtbl->GetEditorName(v4), v7 = this->vtbl->GetEditorName(this), CRT_StricmpLocaleDispatch(v7, v8)))
         || ((this->member.flags ^ v4->member.flags) & 0xFFFFBFF4) != 0;
-  return result;
+  return result; /*0x46b895*/
 }

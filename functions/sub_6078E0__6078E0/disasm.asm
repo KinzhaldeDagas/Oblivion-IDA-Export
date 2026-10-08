@@ -1,4 +1,4 @@
-0x6078E0: push    0FFFFFFFFh
+0x6078E0: push    0FFFFFFFFh; ArrowProjectile constructor/initializer: constructs MobileObject state, installs projectile vtables, allocates HighProcess, clears collision/transfer flags, increments the live-projectile count, and returns this.
 0x6078E2: push    offset MagicProj_constr_default_SEH
 0x6078E7: mov     eax, large fs:0
 0x6078ED: push    eax
@@ -26,14 +26,14 @@
 0x60793D: mov     byte ptr [esp+20h+var_4], 1
 0x607942: jz      short loc_60794D
 0x607944: mov     ecx, eax; this
-0x607946: call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)
+0x607946: call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.
 0x60794B: jmp     short loc_60794F
 0x60794D: xor     eax, eax
 0x60794F: mov     [esi+58h], eax
 0x607952: mov     [esi+5Ch], ebx
 0x607955: mov     [esi+94h], bl
 0x60795B: mov     [esi+98h], ebx
-0x607961: mov     [esi+95h], bl
+0x607961: mov     [esi+95h], bl; Initialize ArrowProjectile byte +0x95 to zero. Actor-hit inventory transfer changes it to one.
 0x607967: mov     [esi+97h], bl
 0x60796D: add     dword ptr ds:0B3B7D0h, 1
 0x607974: mov     eax, esi
@@ -44,3 +44,17 @@
 0x607983: pop     ebx
 0x607984: add     esp, 14h
 0x607987: retn
+0x9C2F00: mov     ecx, [ebp-14h]
+0x9C2F03: jmp     MobileObject_destr
+0x9C2F08: mov     eax, [ebp-10h]
+0x9C2F0B: push    eax
+0x9C2F0C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2F11: pop     ecx
+0x9C2F12: retn
+0x9C2F13: mov     edx, [esp+arg_4]
+0x9C2F17: lea     eax, [edx-10h]
+0x9C2F1A: mov     ecx, [edx-14h]
+0x9C2F1D: xor     ecx, eax
+0x9C2F1F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2F24: mov     eax, offset stru_AEBC20
+0x9C2F29: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x4E48B0",
+      "0x4E491F"
+    ]
+  ],
+  "chunks_sha256": "b1affe5def472b38c7497c4abbd223405cfa145b7b7c5320b2f6754a1054160b",
+  "comment_regular": "\nV178 observation: reached by4D7D10 before its pointer-equality branch; calls88CD50 on existing3D when present, then performs interior/exterior cell-manager lookup and calls5369B0,536D30,5374F0. These side effects precede the leaf root assignment. No promotion of pending light ownership is justified merely by unchanged niNode address.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_4E48B0",
   "end_ea": "0x4E491F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_4E48B0",
   "segment": ".text",
   "sha256": "b1affe5def472b38c7497c4abbd223405cfa145b7b7c5320b2f6754a1054160b",
   "size": 111,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E48B0",
-  "type": "char __thiscall(int this)",
+  "total_chunk_size": 111,
+  "type": "char __thiscall(TESObjectCELL **this)",
   "xrefs_from_count": 56,
   "xrefs_to_count": 1
 }

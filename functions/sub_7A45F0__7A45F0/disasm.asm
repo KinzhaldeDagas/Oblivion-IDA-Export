@@ -1,4 +1,4 @@
-0x7A45F0: push    0FFFFFFFFh
+0x7A45F0: push    0FFFFFFFFh; OBLIVION AUTHORITY 2026-08-27: Generated/parsed leaf-LOD gate is parsedLeafLodFlag. Flag 0 allocates explicit leaf-LOD vectors, always runs CBranch::Compute to make leaves, then calls BuildLeafLods. Flag 1 skips allocation and BuildLeafLods because token-7000 data supplied explicit LOD vectors.
 0x7A45F2: push    offset SEH_7A45F0
 0x7A45F7: mov     eax, large fs:0
 0x7A45FD: push    eax
@@ -16,17 +16,17 @@
 0x7A4619: cmp     byte ptr [esi+0D8h], 0
 0x7A4620: push    40h ; '@'; Size
 0x7A4622: setz    al
-0x7A4625: mov     ds:0B2B704h, al
+0x7A4625: mov     ds:0B2B704h, al; Stores whether parsedLeafLodFlag is zero. This is the generated explicit-leaf-LOD path condition.
 0x7A462A: call    FormHeapAlloc
 0x7A462F: add     esp, 4
-0x7A4632: mov     [esp+5Ch+var_48], eax
+0x7A4632: mov     [esp+5Ch+value], eax
 0x7A4636: xor     ebx, ebx
 0x7A4638: cmp     eax, ebx
 0x7A463A: mov     [esp+5Ch+var_4], ebx
 0x7A463E: jz      short loc_7A464A
-0x7A4640: push    ebx
-0x7A4641: mov     ecx, eax
-0x7A4643: call    sub_7915C0
+0x7A4640: push    ebx; parent
+0x7A4641: mov     ecx, eax; this
+0x7A4643: call    OB_CBranch_ctor_010201A0; Compact stock CBranch constructor. Oblivion branch object is 0x40 bytes: parent, percent, child SIdvBranch vector, vertex pointer/count, cross-section/start offsets, volume/fuzzy volume, flare vector.
 0x7A4648: jmp     short loc_7A464C
 0x7A464A: xor     eax, eax
 0x7A464C: or      ebp, 0FFFFFFFFh
@@ -34,7 +34,7 @@
 0x7A4655: mov     [esp+5Ch+var_4], ebp
 0x7A4659: mov     [esi+58h], eax
 0x7A465C: jnz     short loc_7A46BD
-0x7A465E: mov     edi, [esi+0C0h]
+0x7A465E: mov     edi, [esi+0C0h]; Executed only when parsedLeafLodFlag==0: allocates leafLodLevelCount explicit leaf vectors for generated LODs.
 0x7A4664: xor     ecx, ecx
 0x7A4666: mov     eax, edi
 0x7A4668: mov     edx, 10h
@@ -50,12 +50,12 @@
 0x7A4682: push    eax; Size
 0x7A4683: call    FormHeapAlloc
 0x7A4688: add     esp, 4
-0x7A468B: mov     [esp+5Ch+var_48], eax
+0x7A468B: mov     [esp+5Ch+value], eax
 0x7A468F: cmp     eax, ebx
 0x7A4691: mov     [esp+5Ch+var_4], 1
 0x7A4699: jz      short loc_7A46B3
-0x7A469B: push    offset sub_794EB0; a5
-0x7A46A0: push    offset sub_6EF4A0; a4
+0x7A469B: push    offset OB_stVector4_DestroyThiscall_010201A0; a5
+0x7A46A0: push    offset FaceGenEgtBasisBank_Construct; Inside flag-zero allocation path; constructs the generated explicit leaf-vector array.
 0x7A46A5: push    edi; size
 0x7A46A6: lea     ebx, [eax+4]
 0x7A46A9: push    10h; a2
@@ -66,10 +66,10 @@
 0x7A46B7: mov     [esi+0D4h], ebx
 0x7A46BD: mov     ecx, [esi+0F0h]
 0x7A46C3: mov     ds:0B2B708h, ecx
-0x7A46C9: call    sub_790B00
-0x7A46CE: mov     edi, ds:0B429E4h
+0x7A46C9: call    OB_CBranch_ClearStaticBranchInfoVector_010201A0; Source-match: CBranch::ClearBranchInfo/static branch-info clear helper. Clears the global/static branch info vector used by branch parsing/compute.
+0x7A46CE: mov     edi, ds:0B429E4h; a2
 0x7A46D4: lea     edx, [esi+84h]
-0x7A46DA: mov     ds:0B429B8h, edx
+0x7A46DA: mov     ds:0B429B8h, edx; Before branch/leaf generation, publishes &this->leafInfo to the globals consumed by CBranch::MakeLeaf; this is the same struct updated by SetLeafDimmingScalar.
 0x7A46E0: xor     ebp, ebp
 0x7A46E2: mov     ecx, [esi+64h]
 0x7A46E5: test    ecx, ecx
@@ -92,7 +92,7 @@
 0x7A471B: mov     edx, ds:0B429E0h
 0x7A4721: test    edx, edx
 0x7A4723: mov     ebx, [eax+ebp*4]
-0x7A4726: mov     [esp+5Ch+var_48], ebx
+0x7A4726: mov     [esp+5Ch+value], ebx
 0x7A472A: jz      short loc_7A4752
 0x7A472C: mov     ecx, ds:0B429E8h
 0x7A4732: mov     eax, edi
@@ -110,38 +110,38 @@
 0x7A4752: cmp     edx, edi
 0x7A4754: jbe     short loc_7A475B
 0x7A4756: call    __invalid_parameter_noinfo
-0x7A475B: lea     ecx, [esp+5Ch+var_48]
-0x7A475F: push    ecx; int
-0x7A4760: mov     eax, offset dword_B429DC
+0x7A475B: lea     ecx, [esp+5Ch+value]
+0x7A475F: push    ecx; value
+0x7A4760: mov     eax, offset lastOwner
 0x7A4765: push    edi; Src
-0x7A4766: push    eax; int
-0x7A4767: lea     edx, [esp+68h+var_44]
-0x7A476B: push    edx; int
-0x7A476C: mov     ecx, eax
-0x7A476E: call    sub_7A3620
+0x7A4766: push    eax; position
+0x7A4767: lea     edx, [esp+68h+result]
+0x7A476B: push    edx; result
+0x7A476C: mov     ecx, eax; this
+0x7A476E: call    OB_stVector4_InsertOne_010201A0; Oblivion binary evidence: inserts one four-byte value at a checked owner/current iterator by calling OB_stVector4_InsertFill, then returns a relocated iterator to the inserted slot. Widely folded across SpeedTree pointer and scalar vectors.
 0x7A4773: mov     edi, ds:0B429E4h
 0x7A4779: add     ebp, 1
 0x7A477C: jmp     loc_7A46E2
 0x7A4781: mov     eax, [esi+48h]
 0x7A4784: lea     ebp, [esi+20h]
-0x7A4787: push    eax
-0x7A4788: mov     ecx, ebp
-0x7A478A: call    sub_78EA30
+0x7A4787: push    eax; seed
+0x7A4788: mov     ecx, ebp; this
+0x7A478A: call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.
 0x7A478F: fld     dword ptr [esi+50h]
 0x7A4792: fadd    dword ptr [esi+4Ch]
 0x7A4795: sub     esp, 8
-0x7A4798: mov     ecx, ebp
-0x7A479A: fstp    [esp+64h+var_48]
-0x7A479E: fld     [esp+64h+var_48]
-0x7A47A2: fstp    [esp+64h+var_60]; float
+0x7A4798: mov     ecx, ebp; this
+0x7A479A: fstp    [esp+64h+value]
+0x7A479E: fld     [esp+64h+value]
+0x7A47A2: fstp    [esp+64h+a15]; maxValue
 0x7A47A6: fld     dword ptr [esi+4Ch]
 0x7A47A9: fsub    dword ptr [esi+50h]
-0x7A47AC: fstp    [esp+64h+var_48]
-0x7A47B0: fld     [esp+64h+var_48]
-0x7A47B4: fstp    [esp+64h+var_64]; float
-0x7A47B7: call    sub_78EA00
+0x7A47AC: fstp    [esp+64h+value]
+0x7A47B0: fld     [esp+64h+value]
+0x7A47B4: fstp    [esp+64h+minValue]; minValue
+0x7A47B7: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x7A47BC: mov     ecx, [esi+54h]
-0x7A47BF: fstp    [esp+5Ch+var_48]
+0x7A47BF: fstp    [esp+5Ch+value]
 0x7A47C3: push    ecx; Seed
 0x7A47C4: call    _srand
 0x7A47C9: fldz
@@ -192,19 +192,19 @@
 0x7A4851: fstp    dword ptr [eax+4Ch]
 0x7A4854: jmp     short loc_7A47E0
 0x7A4856: mov     edx, [esi+48h]
-0x7A4859: push    edx
-0x7A485A: mov     ecx, ebp
-0x7A485C: call    sub_78EA30
+0x7A4859: push    edx; seed
+0x7A485A: mov     ecx, ebp; this
+0x7A485C: call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.
 0x7A4861: movzx   eax, word ptr [esi+70h]
-0x7A4865: mov     ecx, [esi+5Ch]
-0x7A4868: push    eax
-0x7A4869: call    sub_798090
-0x7A486E: mov     ecx, [esi+5Ch]
-0x7A4871: push    0
-0x7A4873: call    sub_794A90
+0x7A4865: mov     ecx, [esi+5Ch]; this
+0x7A4868: push    eax; lodCount
+0x7A4869: call    OB_CIndexedGeometry_SetNumLodLevels_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::SetNumLodLevels clears the nested unsigned-short length and unsigned-short-pointer containers plus 32-bit triangle totals, records the unsigned-short LOD count, resizes both outer vectors with empty inner values, and zeroes totals.
+0x7A486E: mov     ecx, [esi+5Ch]; this
+0x7A4871: push    0; lodLevel
+0x7A4873: call    OB_CIndexedGeometry_ResetStripCounter_010201A0; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.
 0x7A4878: fldz
 0x7A487A: mov     ecx, [esi+48h]
-0x7A487D: fst     [esp+5Ch+var_3C]
+0x7A487D: fst     [esp+5Ch+a10]
 0x7A4881: push    ecx
 0x7A4882: fst     [esp+60h+var_38]
 0x7A4886: mov     ds:0B429C0h, ecx
@@ -212,7 +212,7 @@
 0x7A488E: mov     eax, [esi+48h]
 0x7A4891: fst     [esp+60h+var_34]
 0x7A4895: lea     edx, [esi+74h]
-0x7A4898: fst     [esp+60h+var_30]
+0x7A4898: fst     [esp+60h+a9]
 0x7A489C: fst     [esp+60h+var_20]
 0x7A48A0: fst     [esp+60h+var_10]
 0x7A48A4: fxch    st(1)
@@ -223,39 +223,39 @@
 0x7A48B6: fst     [esp+60h+var_18]
 0x7A48BA: fst     [esp+60h+var_14]
 0x7A48BE: fld     dword ptr ds:0A30634h
-0x7A48C4: fstp    [esp+60h+var_60]; float
+0x7A48C4: fstp    [esp+60h+a15]; parentRadius
 0x7A48C7: fxch    st(1)
-0x7A48C9: push    eax; int
+0x7A48C9: push    eax; windGroupIndex
 0x7A48CA: push    ecx
-0x7A48CB: fstp    [esp+68h+var_68]; float
+0x7A48CB: fstp    [esp+68h+a13]; incomingWindWeight
 0x7A48CE: mov     ecx, [esi+5Ch]
-0x7A48D1: push    edx; int
-0x7A48D2: push    ecx; int
-0x7A48D3: lea     edx, [esp+70h+var_3C]
-0x7A48D7: push    edx; int
-0x7A48D8: lea     ecx, [esp+74h+var_30]
-0x7A48DC: push    ecx; int
+0x7A48D1: push    edx; generatedLeafVectorWrapper
+0x7A48D2: push    ecx; branchGeometry
+0x7A48D3: lea     edx, [esp+70h+a10]
+0x7A48D7: push    edx; parentDirection
+0x7A48D8: lea     ecx, [esp+74h+a9]
+0x7A48DC: push    ecx; parentTransform3x3
 0x7A48DD: sub     esp, 8
-0x7A48E0: fst     [esp+80h+var_7C]; float
+0x7A48E0: fst     [esp+80h+a8]; parentDimmingScalar
 0x7A48E4: lea     edx, [esi+4]
-0x7A48E7: fstp    [esp+80h+var_80]; float
-0x7A48EA: push    edx; int
-0x7A48EB: fld     [esp+84h+var_48]
-0x7A48EF: push    0; int
+0x7A48E7: fstp    [esp+80h+a7]; percentAlongParent
+0x7A48EA: push    edx; branchBasePosition
+0x7A48EB: fld     [esp+84h+value]
+0x7A48EF: push    0; branchLevel
 0x7A48F1: push    ecx
-0x7A48F2: mov     ecx, [esi+58h]
-0x7A48F5: fstp    [esp+8Ch+var_8C]; float
-0x7A48F8: push    eax; int
-0x7A48F9: call    sub_7925B0
-0x7A48FE: mov     ecx, esi
-0x7A4900: call    sub_7A3C80
-0x7A4905: cmp     byte ptr [esi+0D8h], 0
+0x7A48F2: mov     ecx, [esi+58h]; this
+0x7A48F5: fstp    [esp+8Ch+a4]; treeSizeScalar
+0x7A48F8: push    eax; rngSeed
+0x7A48F9: call    OB_CBranch_Compute_010201A0; 2026-05-19 captured 4.x load pass: recursive branch compute still consumes compact stock SIdvBranchInfo only; no root-support branch parameter or 40007 supplemental-root consumer is observed. Captured 23002/23003-in-40007 handling is OBSE sidecar grammar only.
+0x7A48FE: mov     ecx, esi; this
+0x7A4900: call    OB_CTreeEngine_BuildBranchLods_010201A0; Flattens branch tree, ranks by volume/large-branch retention/fuzziness, then emits branch LOD strips through OB_CBranch_ComputeLod_010201A0.
+0x7A4905: cmp     byte ptr [esi+0D8h], 0; After branch generation, parsedLeafLodFlag==0 selects generated explicit leaf-LOD construction.
 0x7A490C: jnz     short loc_7A491D
-0x7A490E: fld     [esp+5Ch+arg_0]
+0x7A490E: fld     [esp+5Ch+leafSizeIncreaseFactor]
 0x7A4912: push    ecx
 0x7A4913: mov     ecx, esi
-0x7A4915: fstp    [esp+60h+var_60]; float
-0x7A4918: call    sub_7A3940
+0x7A4915: fstp    [esp+60h+a15]; float
+0x7A4918: call    OB_CTreeEngine_BuildLeafLods_010201A0; Calls CTreeEngine::BuildLeafLods only for the generated path (no parsed top-level token 7000 cluster).
 0x7A491D: push    0; Time
 0x7A491F: call    __time64
 0x7A4924: push    eax; Seed
@@ -270,3 +270,20 @@
 0x7A493C: pop     ebx
 0x7A493D: add     esp, 48h
 0x7A4940: retn    4
+0x9CCA80: mov     eax, [ebp-48h]
+0x9CCA83: push    eax
+0x9CCA84: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCA89: pop     ecx
+0x9CCA8A: retn
+0x9CCA8B: mov     eax, [ebp-48h]
+0x9CCA8E: push    eax
+0x9CCA8F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCA94: pop     ecx
+0x9CCA95: retn
+0x9CCA96: mov     edx, [esp+arg_4]
+0x9CCA9A: lea     eax, [edx-4Ch]
+0x9CCA9D: mov     ecx, [edx-50h]
+0x9CCAA0: xor     ecx, eax
+0x9CCAA2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CCAA7: mov     eax, offset stru_AF5E40
+0x9CCAAC: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-GameplayMenu
+struct GameplayMenu;

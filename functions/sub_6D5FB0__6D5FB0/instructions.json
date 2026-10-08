@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D5FB0",
-    "line": "mov     ecx, [ecx+2Ch]",
+    "line": "mov     ecx, [ecx+2Ch]; Guarantees transform authored-data coverage for [start,end] in place by delegating to NiTransformData_GuaranteeTimeRange when data +0x2C is non-null.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6D5FC9",
-    "line": "call    sub_6E1B00",
+    "line": "call    NiTransformData_GuaranteeTimeRange; Mutates every nonempty transform channel to guarantee keys at start/end: rotation content 2, translation content 1, scale content 0. Euler rotation is handled recursively by the generic key helper.",
     "mnemonic": "call",
     "size": 5
   },

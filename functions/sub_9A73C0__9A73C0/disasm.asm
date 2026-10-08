@@ -35,7 +35,7 @@
 0x9A742A: shl     ebx, 6
 0x9A742D: lea     esi, [esp+1F0h+var_1C0]
 0x9A7431: test    al, al
-0x9A7433: lea     ebx, flt_BAA9E0[ebx]
+0x9A7433: lea     ebx, unk_BAA9E0[ebx]
 0x9A7439: mov     ecx, 10h
 0x9A743E: mov     edi, ebx
 0x9A7440: rep movsd
@@ -77,7 +77,7 @@
 0x9A749C: mov     ecx, 10h
 0x9A74A1: lea     edi, [esp+1F0h+var_1C0]
 0x9A74A5: rep movsd
-0x9A74A7: lea     ebx, flt_BAA9E0[ebx]
+0x9A74A7: lea     ebx, unk_BAA9E0[ebx]
 0x9A74AD: mov     ecx, 10h
 0x9A74B2: lea     esi, [esp+1F0h+var_1C0]
 0x9A74B6: mov     edi, ebx
@@ -115,7 +115,7 @@
 0x9A7503: mov     ebx, [ebp+arg_0]
 0x9A7506: mov     esi, [edx+2Ch]
 0x9A7509: shl     ebx, 6
-0x9A750C: lea     ebx, flt_BAA9E0[ebx]
+0x9A750C: lea     ebx, unk_BAA9E0[ebx]
 0x9A7512: add     esi, 940h
 0x9A7518: test    al, al
 0x9A751A: mov     ecx, 10h
@@ -171,7 +171,7 @@
 0x9A75B3: mov     ebx, [ebp+arg_0]
 0x9A75B6: shl     ebx, 6
 0x9A75B9: cmp     [esp+1F0h+var_1D6], 0
-0x9A75BE: lea     ebx, flt_BAA9E0[ebx]
+0x9A75BE: lea     ebx, unk_BAA9E0[ebx]
 0x9A75C4: mov     ecx, 10h
 0x9A75C9: lea     esi, [esp+1F0h+var_80]
 0x9A75D0: mov     edi, ebx
@@ -274,7 +274,7 @@
 0x9A772E: mov     edi, [ebp+arg_0]
 0x9A7731: shl     edi, 6
 0x9A7734: cmp     ebx, 1Ah
-0x9A7737: lea     edi, flt_BAA9E0[edi]
+0x9A7737: lea     edi, unk_BAA9E0[edi]
 0x9A773D: mov     ecx, 10h
 0x9A7742: lea     esi, [esp+1F0h+var_140]
 0x9A7749: mov     [esp+1F0h+var_1D0], edi
@@ -330,7 +330,7 @@
 0x9A77EA: mov     edi, [ebp+arg_0]
 0x9A77ED: shl     edi, 6
 0x9A77F0: cmp     ebx, 1Eh
-0x9A77F3: lea     edi, flt_BAA9E0[edi]
+0x9A77F3: lea     edi, unk_BAA9E0[edi]
 0x9A77F9: mov     ecx, 10h
 0x9A77FE: lea     esi, [esp+1F0h+var_140]
 0x9A7805: mov     [esp+1F0h+var_1D0], edi
@@ -418,7 +418,7 @@
 0x9A78F8: push    eax
 0x9A78F9: mov     eax, [ebp+arg_0]
 0x9A78FC: shl     eax, 6
-0x9A78FF: add     eax, offset flt_BAA9E0
+0x9A78FF: add     eax, offset unk_BAA9E0
 0x9A7904: push    eax
 0x9A7905: call    sub_9A5510
 0x9A790A: add     esp, 10h
@@ -608,7 +608,7 @@
 0x9A7B19: push    ecx
 0x9A7B1A: shl     edx, 6
 0x9A7B1D: push    eax
-0x9A7B1E: add     edx, offset flt_BAA9E0
+0x9A7B1E: add     edx, offset unk_BAA9E0
 0x9A7B24: push    edx
 0x9A7B25: jmp     loc_9A7905
 0x9A7B2A: mov     eax, [ebp+arg_10]; jumptable 009A73EA cases 65-68
@@ -646,7 +646,7 @@
 0x9A7B85: push    ecx
 0x9A7B86: shl     edx, 6
 0x9A7B89: push    edi
-0x9A7B8A: add     edx, offset flt_BAA9E0
+0x9A7B8A: add     edx, offset unk_BAA9E0
 0x9A7B90: push    edx
 0x9A7B91: jmp     loc_9A7905
 0x9A7B96: mov     eax, [ebp+arg_10]; jumptable 009A73EA case 73
@@ -757,7 +757,7 @@
 0x9A7CF4: mov     edx, off_B329E4; jumptable 009A73EA cases 82-86
 0x9A7CFA: mov     ecx, [ebp+arg_8]
 0x9A7CFD: push    edx
-0x9A7CFE: call    NiObjectNET_GetExtraData
+0x9A7CFE: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x9A7D03: test    eax, eax
 0x9A7D05: jnz     short loc_9A7D15
 0x9A7D07: mov     eax, 80000010h
@@ -850,7 +850,7 @@
 0x9A7E3F: mov     eax, [edi+4]
 0x9A7E42: mov     edi, [edi]
 0x9A7E44: push    eax
-0x9A7E45: push    offset dword_B40224
+0x9A7E45: push    offset stru_B40224
 0x9A7E4A: call    NiRTTI_Cast
 0x9A7E4F: add     esp, 8
 0x9A7E52: test    eax, eax

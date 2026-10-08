@@ -6,7 +6,7 @@
 0x5063DB: push    0
 0x5063DD: push    0
 0x5063DF: push    eax
-0x5063E0: call    sub_4F5C50
+0x5063E0: call    Cmd_GetNoRumors_Evaluate; GetNoRumors_Evaluate is separately used by CTDA rows: returns Actor::IsNoRumor(subject) as numeric 1/0 for actor subjects, and 0 for null/nonactor input. A GetNoRumors condition is a predicate result; it does not itself add/remove the INFOGENERAL topic cache.
 0x5063E5: add     esp, 10h
 0x5063E8: cmp     byte ptr ds:0B361ACh, 0
 0x5063EF: mov     bl, al

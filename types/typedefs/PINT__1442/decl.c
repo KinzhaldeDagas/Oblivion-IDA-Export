@@ -1,1 +1,1 @@
-PINT
+typedef int *PINT;

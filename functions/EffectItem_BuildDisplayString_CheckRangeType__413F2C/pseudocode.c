@@ -1,6 +1,6 @@
 int __userpurge EffectItem_BuildDisplayString_::CheckRangeType@<eax>(
         char a1@<bl>,
-        int a2,
+        int a2@<edi>,
         int a3,
         int a4,
         int a5,
@@ -8,8 +8,8 @@ int __userpurge EffectItem_BuildDisplayString_::CheckRangeType@<eax>(
         int a7,
         int a8,
         int a9,
-        char a10,
-        int a11,
+        int a10,
+        char a11,
         int a12,
         int a13,
         int a14,
@@ -42,12 +42,13 @@ int __userpurge EffectItem_BuildDisplayString_::CheckRangeType@<eax>(
         int a41,
         int a42,
         int a43,
-        char a44,
-        char a45)
+        int a44,
+        char a45,
+        char a46)
 {
-  if ( a44 != a1 )
-    return EffectItem_BuildDisplayString_::Done(a2, a3, a4, a5, a6, a7);
-  if ( a45 == a1 )
-    return EffectItem_BuildDisplayString_::DefaultRange(a2, a3, a4, a5, a6, a7, a8, a9, a10);
-  return EffectItem_BuildDisplayString_::StrikeRange(a2, a3, a4, a5, a6, a7, a8, a9, a10);
+  if ( a45 != a1 ) /*0x413f33*/
+    return EffectItem_BuildDisplayString_::Done(a2, a3, a4, a5, a6, a7, a8); /*0x413f33*/
+  if ( a46 == a1 ) /*0x413f3c*/
+    return EffectItem_BuildDisplayString_::DefaultRange(a3, a4, a5, a6, a7, a8, a9, a10, a11); /*0x413f3c*/
+  return EffectItem_BuildDisplayString_::StrikeRange(a3, a4, a5, a6, a7, a8, a9, a10, a11);
 }

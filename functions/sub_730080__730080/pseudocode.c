@@ -1,4 +1,4 @@
-char *sub_730080()
+NiRTTI *sub_730080()
 {
-  return dword_B3FF90;
+  return &stru_B3FF90; /*0x730085*/
 }

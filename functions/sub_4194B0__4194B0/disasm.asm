@@ -16,6 +16,6 @@
 0x4194D3: push    edx
 0x4194D4: push    eax
 0x4194D5: push    ecx
-0x4194D6: call    EnchantmentItem_EffectAllowedFromEnch??
+0x4194D6: call    EnchantmentItem_EffectAllowedFromEnch??; UCWUS decode note: EnchantmentItem_EffectAllowedFromEnch applies global object/effect flag rules for weapon/apparel enchantment effects. UCWUS should not bypass this wholesale; the faithful path is a targeted apparel-cast branch patch plus plugin session/suppression commands.
 0x4194DB: add     esp, 10h
 0x4194DE: retn

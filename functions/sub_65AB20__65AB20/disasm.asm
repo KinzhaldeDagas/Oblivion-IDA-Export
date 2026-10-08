@@ -4,7 +4,7 @@
 0x65AB28: test    [esp+4+arg_0], 1
 0x65AB2D: jz      short loc_65AB38
 0x65AB2F: push    esi
-0x65AB30: call    FormHeapFree
+0x65AB30: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65AB35: add     esp, 4
 0x65AB38: mov     eax, esi
 0x65AB3A: pop     esi

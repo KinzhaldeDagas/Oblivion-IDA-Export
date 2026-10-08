@@ -105,7 +105,7 @@
 0x80C765: lea     ecx, [esp+400h+FileName]
 0x80C76C: push    ecx; lpFileName
 0x80C76D: mov     ecx, [esp+404h+var_3D8]
-0x80C771: call    CreatePixelShader
+0x80C771: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x80C776: mov     esi, [ebp+0]
 0x80C779: mov     edi, eax
 0x80C77B: cmp     esi, edi
@@ -165,7 +165,7 @@
 0x80C82C: push    ebx; int
 0x80C82D: lea     edx, [esp+400h+FileName]
 0x80C834: push    edx; lpFileName
-0x80C835: call    CreatePixelShader
+0x80C835: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x80C83A: mov     edi, eax
 0x80C83C: mov     eax, [esp+3ECh+var_3DC]
 0x80C840: mov     esi, [eax]

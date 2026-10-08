@@ -22,7 +22,7 @@
 0x56A7ED: mov     ecx, edi
 0x56A7EF: call    TESFile_GetChunkType
 0x56A7F4: cmp     eax, 41445443h
-0x56A7F9: jnz     short loc_56A832
+0x56A7F9: jnz     short loc_56A832; ConditionList_LoadCondition accepts CTDT/CTDA by chunk signature, allocates a 0x18 ConditionEntry::Data, and passes it to Condition_Load; this path does not validate functionIndex against Script_CommandList length.
 0x56A7FB: push    18h; Size
 0x56A7FD: call    FormHeapAlloc
 0x56A802: add     esp, 4
@@ -48,3 +48,15 @@
 0x56A840: pop     ebx
 0x56A841: add     esp, 0Ch
 0x56A844: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

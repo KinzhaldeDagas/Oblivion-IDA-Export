@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46B370",
-    "line": "sub     esp, 40h",
+    "line": "sub     esp, 40h; Compresses the global TESForm record buffer with zlib when payload exists and FORM flag 0x40000 is clear. Rebuilds the record with compressed flag, original payload size, and deflated data.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x46B3E8",
-    "line": "push    ebp",
+    "line": "push    ebp; MEF v51 bridge-stack audit: at direct-JMP entry B, saved EBP/ESI plus pending size place payload at [ESP+14h] and zlib stream at [ESP+1Ch]; no-size failure after cleanup uses [ESP+18h]. All paths rejoin with vanilla ESP.",
     "mnemonic": "push",
     "size": 1
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x46B427",
-    "line": "push    ebp",
+    "line": "push    ebp; MEF v51 bridge-stack audit: pending error-string push makes zlib stream [ESP+1Ch]. Helper arguments plus original string total 0Ch; add esp,0Ch restores the common failure-epilogue stack.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46B428",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x46B449",
-    "line": "or      dword ptr [edi+8], 40000h",
+    "line": "or      dword ptr [edi+8], 40000h; MEF v51 bridge-stack audit: pending final allocation size makes zlib stream [ESP+1Ch]. Helper arguments plus size total 0Ch; cleanup restores the common uncompressed-return frame.",
     "mnemonic": "or",
     "size": 7
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x46B479",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x46B480",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46B481",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x46B485",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x46B491",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Success path ownership: compressed record allocation succeeded before old B33C14 buffer is freed and replaced.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x46B4AD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,6 +1,6 @@
 // positive sp value has been detected, the output may be wrong!
 void *__userpurge ActiveEffect_Base_SaveEffect_::SkipDataList@<eax>(
-        _BYTE *a1@<ecx>,
+        TESSaveLoadGame_SerializationView *a1@<ecx>,
         int a2@<ebp>,
         int a3,
         int a4,
@@ -11,12 +11,11 @@ void *__userpurge ActiveEffect_Base_SaveEffect_::SkipDataList@<eax>(
         int a9,
         char a10)
 {
-  char v10; // al
-  size_t v12; // [esp-20h] [ebp-20h]
+  char currentVersion; // al
 
-  v10 = a1[0x7C];
-  if ( (unsigned __int8)v10 < 0x48u )
-    return (void *)ActiveEffect_Base_SaveEffect_::LowbitUnk14(v10, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
-  LODWORD(v12) = 4;
-  return SaveLoad_SaveData((int)a1, (void *)(a2 + 0x14), v12);
+  currentVersion = a1->currentVersion; /*0x68dc46*/
+  if ( (unsigned __int8)currentVersion < 0x48u ) /*0x68dc4b*/
+    return (void *)ActiveEffect_Base_SaveEffect_::LowbitUnk14(currentVersion, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10); /*0x68dc4b*/
+  else
+    return SaveLoad_SaveData(a1, (const void *)(a2 + 0x14), 4u); /*0x68dc53*/
 }

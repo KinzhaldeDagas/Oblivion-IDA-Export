@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4309BD",
-    "line": "mov     dword ptr [esi+4], offset BSFile_ReadFunc",
+    "line": "mov     dword ptr [esi+4], offset BSFile_ReadFunc; MEF PLAN 2026-09-07: BSFile constructor installs BSFile_ReadFunc430050 at owner+4. Archive ctor subsequently installs A35D74 vtable and invokes SetByteSwap(false)42EF75. Thus cached Archive_ReadBytes uses vanilla read chain430050->vtable+38/A35DAC->4302B0->747E80.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4309FE",
-    "line": "mov     dword ptr [esi+30h], 0FFFFFFFFh",
+    "line": "mov     dword ptr [esi+30h], 0FFFFFFFFh; MEF v57 VERIFY 2026-10-08: VERIFIED archive gate dependency: BSFile constructor writes DWORD stream+30=FFFFFFFF. Together with native Archive vtable, callback430050, mode+20=0, existence flag+24 and handle+1C, this explains v57 PerfAMNativeArchive's supported stream shape.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -532,5 +532,59 @@
     "line": "jmp     short loc_430A41",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9ABE40",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABE43",
+    "line": "jmp     ??1NiFile@@UAE@XZ; NiFile::~NiFile(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABE48",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ABE4C",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABE4F",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ABE52",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ABE54",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABE59",
+    "line": "mov     eax, offset stru_AD8B90",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ABE5E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

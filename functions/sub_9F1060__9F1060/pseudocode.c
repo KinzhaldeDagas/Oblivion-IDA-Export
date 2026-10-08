@@ -1,5 +1,5 @@
 int sub_9F1060()
 {
-  GameSetting_ConstrAndReg(&dword_B38700, (int)"sMenuDisplayNoSaves", (int)"No saved games.");
-  return atexit(sub_A21520);
+  GameSetting_ConstrAndReg(&stru_B38700, "sMenuDisplayNoSaves", "No saved games."); /*0x9f106f*/
+  return atexit(sub_A21520); /*0x9f107f*/
 }

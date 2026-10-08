@@ -1,10 +1,13 @@
-std::exception *__thiscall sub_6F7DD0(std::exception *this, _DWORD *a2)
+// Oblivion runtime_error constructor from the 28-byte SpeedTree small string: constructs std::exception, installs runtime_error vftable, initializes SSO state, and copies the message.
+OB_std_runtime_error_010201A0 *__thiscall OB_std_runtime_error_CtorFromString_010201A0(
+        OB_std_runtime_error_010201A0 *this,
+        const OB_stString28_010201A0 *message)
 {
-  std::exception::exception(this);
-  *(_DWORD *)this = &std::runtime_error::`vftable';
-  *((_DWORD *)this + 8) = 0;
-  *((_DWORD *)this + 9) = 0xF;
-  *((_BYTE *)this + 0x10) = 0;
-  sub_414420((int)this + 0xC, a2, 0, 0xFFFFFFFF);
-  return this;
+  std::exception::exception((std::exception *)this); /*0x6f7df8*/
+  *(_DWORD *)this->exceptionBase = &std::runtime_error::`vftable'; /*0x6f7e02*/
+  this->message.size = 0; /*0x6f7e0a*/
+  this->message.capacity = 0xF; /*0x6f7e0d*/
+  this->message.storage.inlineData[0] = 0; /*0x6f7e19*/
+  OB_stString28_AssignSubstring_010201A0(&this->message, message, 0, 0xFFFFFFFF); /*0x6f7e21*/
+  return this; /*0x6f7e28*/
 }

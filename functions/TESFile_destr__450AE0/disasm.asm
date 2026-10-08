@@ -25,7 +25,7 @@
 0x450B28: cmp     eax, ebp
 0x450B2A: jz      short loc_450B35
 0x450B2C: push    eax
-0x450B2D: call    FormHeapFree
+0x450B2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450B32: add     esp, 4
 0x450B35: mov     ebx, [ebx+4]
 0x450B38: cmp     ebx, ebp
@@ -35,7 +35,7 @@
 0x450B41: mov     eax, [edi+4]
 0x450B44: mov     ebx, [eax+4]
 0x450B47: push    eax
-0x450B48: call    FormHeapFree
+0x450B48: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450B4D: add     esp, 4
 0x450B50: cmp     ebx, ebp
 0x450B52: mov     [edi+4], ebx
@@ -49,7 +49,7 @@
 0x450B67: cmp     eax, ebp
 0x450B69: jz      short loc_450B74
 0x450B6B: push    eax
-0x450B6C: call    FormHeapFree
+0x450B6C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450B71: add     esp, 4
 0x450B74: mov     ebx, [ebx+4]
 0x450B77: cmp     ebx, ebp
@@ -59,7 +59,7 @@
 0x450B80: mov     eax, [edi+4]
 0x450B83: mov     ebx, [eax+4]
 0x450B86: push    eax
-0x450B87: call    FormHeapFree
+0x450B87: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450B8C: add     esp, 4
 0x450B8F: cmp     ebx, ebp
 0x450B91: mov     [edi+4], ebx
@@ -67,23 +67,23 @@
 0x450B96: mov     [edi], ebp
 0x450B98: mov     eax, [esi+224h]
 0x450B9E: push    eax
-0x450B9F: call    FormHeapFree
+0x450B9F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450BA4: mov     eax, [esi+3F4h]
 0x450BAA: push    eax
-0x450BAB: call    FormHeapFree
+0x450BAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450BB0: add     esp, 8
 0x450BB3: mov     ecx, esi
 0x450BB5: mov     [esi+3F4h], ebp
-0x450BBB: call    sub_451000
+0x450BBB: call    TESFile_ClearThreadSafeFiles; Destroys every TESFile clone in the thread-ID map, clears and destroys the map, and nulls the owning TESFile's map pointer.
 0x450BC0: mov     eax, [esi+40Ch]
 0x450BC6: push    eax
-0x450BC7: call    FormHeapFree
+0x450BC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450BCC: mov     [esi+40Ch], ebp
 0x450BD2: mov     [esi+412h], bp
 0x450BD9: mov     [esi+410h], bp
 0x450BE0: mov     eax, [esi+404h]
 0x450BE6: push    eax
-0x450BE7: call    FormHeapFree
+0x450BE7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x450BEC: add     esp, 8
 0x450BEF: mov     [esi+404h], ebp
 0x450BF5: mov     [esi+40Ah], bp
@@ -97,3 +97,16 @@
 0x450C12: pop     ebx
 0x450C13: add     esp, 10h
 0x450C16: retn
+0x9AE0B0: mov     ecx, [ebp-10h]
+0x9AE0B3: add     ecx, 404h; void *
+0x9AE0B9: jmp     BSStringT_Clear
+0x9AE0BE: mov     ecx, [ebp-10h]
+0x9AE0C1: add     ecx, 40Ch; void *
+0x9AE0C7: jmp     BSStringT_Clear
+0x9AE0CC: mov     edx, [esp+arg_4]
+0x9AE0D0: lea     eax, [edx-14h]
+0x9AE0D3: mov     ecx, [edx-18h]
+0x9AE0D6: xor     ecx, eax
+0x9AE0D8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE0DD: mov     eax, offset stru_ADA9A8
+0x9AE0E2: jmp     ___CxxFrameHandler3

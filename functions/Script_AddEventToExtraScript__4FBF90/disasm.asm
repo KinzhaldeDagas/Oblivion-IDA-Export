@@ -1,4 +1,4 @@
-0x4FBF90: push    ebx
+0x4FBF90: push    ebx; 3DTheft decode: Script_AddEventToExtraScript(package, refExtraList, eventMask). AddScriptPackage calls this for previous editor package with 0x800 and new package with 0x200 before Actor_AddPackage_.
 0x4FBF91: push    esi
 0x4FBF92: mov     esi, [esp+8+arg_4]
 0x4FBF96: xor     bl, bl

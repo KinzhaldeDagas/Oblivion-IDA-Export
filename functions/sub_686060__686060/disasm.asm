@@ -9,9 +9,9 @@
 0x68607D: lea     esi, [ecx+14h]
 0x686080: lea     eax, [esp+1Ch+var_18]
 0x686084: push    eax
-0x686085: mov     ecx, esi
+0x686085: mov     ecx, esi; this
 0x686087: mov     [esp+20h+var_18], 0
-0x68608F: call    TESHealthForm_GetHealth
+0x68608F: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x686094: push    eax
 0x686095: mov     ecx, esi
 0x686097: call    sub_68BF60
@@ -20,10 +20,10 @@
 0x6860A4: mov     ecx, [esp+1Ch+var_18]
 0x6860A8: test    ecx, ecx
 0x6860AA: jnz     short loc_6860B5
-0x6860AC: mov     ecx, esi
-0x6860AE: call    TESHealthForm_GetHealth
+0x6860AC: mov     ecx, esi; this
+0x6860AE: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x6860B3: mov     ecx, eax
-0x6860B5: call    sub_6899C0
+0x6860B5: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6860BA: mov     ecx, [eax]
 0x6860BC: mov     edx, [eax+4]
 0x6860BF: mov     eax, [eax+8]

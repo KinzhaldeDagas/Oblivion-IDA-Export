@@ -1,4 +1,4 @@
-0x8A2160: push    ebp
+0x8A2160: push    ebp; 2026-05-18 73000 consumer decode: bhkTransformShape setup consumes cinfo +0x04 child shape and cinfo +0x10 4x4 transform. This proves a rotation sidecar can be applied by building a non-identity transform cinfo instead of extending stock collision records.
 0x8A2161: mov     ebp, esp
 0x8A2163: and     esp, 0FFFFFFF0h
 0x8A2166: push    0FFFFFFFFh
@@ -34,7 +34,7 @@
 0x8A21C5: push    eax
 0x8A21C6: lea     ecx, [ebx+10h]
 0x8A21C9: mov     [esp+78h+var_4], 0
-0x8A21D1: call    sub_8A2050
+0x8A21D1: call    sub_8A2050; 2026-05-18 73000 consumer decode: copies a full 4x4 transform matrix from cinfo into the Havok construction object; rows 0..2 via 0x8A1FB0 and row 3 here. 0x565510 stock callers leave rotation identity and write translation only.
 0x8A21D6: mov     ecx, [ebx+4]
 0x8A21D9: push    eax
 0x8A21DA: push    ecx
@@ -88,3 +88,19 @@
 0x8A2258: mov     esp, ebp
 0x8A225A: pop     ebp
 0x8A225B: retn    4
+0x9D6A20: mov     eax, [ebp+var_64]
+0x9D6A23: push    eax
+0x9D6A24: call    sub_8C9290
+0x9D6A29: pop     ecx
+0x9D6A2A: retn
+0x9D6A2B: mov     edx, [esp-4+arg_4]
+0x9D6A2F: lea     eax, [edx-64h]
+0x9D6A32: mov     ecx, [edx-68h]
+0x9D6A35: xor     ecx, eax
+0x9D6A37: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6A3C: add     eax, 0Ch
+0x9D6A3F: mov     ecx, [edx-8]
+0x9D6A42: xor     ecx, eax
+0x9D6A44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6A49: mov     eax, offset stru_AFE7B4
+0x9D6A4E: jmp     ___CxxFrameHandler3

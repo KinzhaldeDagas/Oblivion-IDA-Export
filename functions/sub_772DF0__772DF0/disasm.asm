@@ -1,4 +1,4 @@
-0x772DF0: mov     ecx, ds:0B427A8h
+0x772DF0: mov     ecx, ds:0B427A8h; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x772DF6: cmp     dword ptr [ecx+8], 0
 0x772DFA: push    esi
 0x772DFB: lea     esi, [ecx+8]
@@ -9,7 +9,7 @@
 0x772E06: push    ebx
 0x772E07: lea     ebx, [ecx+0Ch]
 0x772E0A: push    eax
-0x772E0B: call    sub_7729E0
+0x772E0B: call    sub_7729E0;
 0x772E10: mov     ecx, [ebx]
 0x772E12: add     ecx, ecx
 0x772E14: mov     [ebx], ecx

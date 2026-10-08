@@ -1,45 +1,52 @@
-_DWORD *__thiscall sub_79EE40(_DWORD *this, int a2)
+// Oblivion st_vector<SFrondGuide> copy constructor. Allocates sourceCount*0x30 and deep-copy-constructs each compact guide, including its owned SFrondVertex vector. The executable establishes the by-value layout.
+// positive sp value has been detected, the output may be wrong!
+OB_stVector_SFrondGuide_010201A0 *__thiscall OB_stVector_SFrondGuide_CopyCtor_010201A0(
+        OB_stVector_SFrondGuide_010201A0 *this,
+        const OB_stVector_SFrondGuide_010201A0 *source)
 {
-  int v4; // eax
-  unsigned int v5; // esi
-  _DWORD *v6; // eax
-  unsigned int v7; // esi
+  OB_SFrondGuide_010201A0 *begin; // eax
+  unsigned int sourceCount; // esi
+  OB_SFrondGuide_010201A0 *allocatedBegin; // eax
+  OB_SFrondGuide_010201A0 *sourceEnd; // esi
   bool v8; // cc
-  int v9; // ecx
-  _DWORD v11[9]; // [esp+0h] [ebp-24h] BYREF
-  unsigned int v12; // [esp+2Ch] [ebp+8h]
+  const OB_SFrondGuide_010201A0 *v9; // ecx
+  int v11; // [esp-18h] [ebp-3Ch] BYREF
+  OB_stVector_SFrondGuide_010201A0 *v12; // [esp+10h] [ebp-14h]
+  int *v13; // [esp+14h] [ebp-10h]
+  int v14; // [esp+20h] [ebp-4h]
+  OB_SFrondGuide_010201A0 *sourceBegin; // [esp+2Ch] [ebp+8h]
 
-  v11[5] = v11;
-  v11[4] = this;
-  v4 = *(_DWORD *)(a2 + 4);
-  if ( v4 )
-    v5 = (*(_DWORD *)(a2 + 8) - v4) / 0x30;
+  v13 = &v11; /*0x79ee68*/
+  v12 = this; /*0x79ee6d*/
+  begin = source->begin; /*0x79ee73*/
+  if ( begin ) /*0x79ee7a*/
+    sourceCount = source->end - begin; /*0x79ee94*/
   else
-    v5 = 0;
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = 0;
-  if ( v5 )
+    sourceCount = 0; /*0x79ee7c*/
+  this->begin = 0; /*0x79ee9a*/
+  this->end = 0; /*0x79ee9d*/
+  this->capacityEnd = 0; /*0x79eea0*/
+  if ( sourceCount ) /*0x79eea3*/
   {
-    if ( v5 > 0x5555555 )
-      sub_790B90((int)this);
-    v6 = sub_799FA0((char *)v5);
-    *(this + 1) = v6;
-    *(this + 2) = v6;
-    *(this + 3) = &v6[0xC * v5];
-    v7 = *(_DWORD *)(a2 + 8);
-    v8 = *(_DWORD *)(a2 + 4) <= v7;
-    v11[8] = 0;
-    if ( !v8 )
-      _invalid_parameter_noinfo();
-    v12 = *(_DWORD *)(a2 + 4);
-    v9 = v12;
-    if ( v12 > *(_DWORD *)(a2 + 8) )
+    if ( sourceCount > 0x5555555 ) /*0x79eeab*/
+      OB_stVector_ThrowLengthError_010201A0((int)this); /*0x79eead*/
+    allocatedBegin = OB_stVector_SFrondGuide_Allocate_010201A0(sourceCount); /*0x79eeb4*/
+    this->begin = allocatedBegin; /*0x79eec1*/
+    this->end = allocatedBegin; /*0x79eec4*/
+    this->capacityEnd = &allocatedBegin[sourceCount]; /*0x79eec7*/
+    sourceEnd = source->end; /*0x79eeca*/
+    v8 = source->begin <= sourceEnd; /*0x79eed0*/
+    v14 = 0; /*0x79eed3*/
+    if ( !v8 ) /*0x79eeda*/
+      _invalid_parameter_noinfo((int)source, (int)this, (int)sourceEnd); /*0x79eedc*/
+    sourceBegin = source->begin; /*0x79eee7*/
+    v9 = sourceBegin; /*0x79eee1*/
+    if ( sourceBegin > source->end ) /*0x79eeea*/
     {
-      _invalid_parameter_noinfo();
-      v9 = v12;
+      _invalid_parameter_noinfo((int)source, (int)this, (int)sourceEnd); /*0x79eeec*/
+      v9 = sourceBegin; /*0x79eef1*/
     }
-    sub_79C2E0(v9, v7, (_DWORD *)*(this + 1));
+    this->end = OB_SFrondGuide_UninitializedCopy_010201A0(v9, sourceEnd, this->begin); /*0x79ef0f*/
   }
-  return this;
+  return this; /*0x79ef14*/
 }

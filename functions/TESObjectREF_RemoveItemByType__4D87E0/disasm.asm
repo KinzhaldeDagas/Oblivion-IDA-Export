@@ -12,3 +12,49 @@
 0x4D87F9: jmp     loc_491690
 0x4D87FE: pop     esi
 0x4D87FF: retn    0Ch
+0x491690: push    ecx
+0x491691: fld     dword ptr ds:0A30634h
+0x491697: push    ebx
+0x491698: push    esi
+0x491699: mov     esi, [esp+0Ch+arg_8]
+0x49169D: test    esi, esi
+0x49169F: mov     ebx, ecx
+0x4916A1: fstp    dword ptr [ebx+8]
+0x4916A4: mov     [esp+0Ch+var_4], 0
+0x4916AC: jle     short loc_4916F5
+0x4916AE: push    ebp
+0x4916AF: mov     ebp, [esp+10h+arg_4]
+0x4916B3: push    edi
+0x4916B4: mov     ecx, [esp+14h+arg_0]
+0x4916B8: lea     eax, [esp+14h+var_4]
+0x4916BC: push    eax
+0x4916BD: push    ecx
+0x4916BE: mov     ecx, ebx
+0x4916C0: call    sub_486240
+0x4916C5: mov     edi, [esp+14h+var_4]
+0x4916C9: cmp     edi, esi
+0x4916CB: jle     short loc_4916D3
+0x4916CD: mov     edi, esi
+0x4916CF: mov     [esp+14h+var_4], edi
+0x4916D3: push    0
+0x4916D5: push    1
+0x4916D7: push    0
+0x4916D9: push    0
+0x4916DB: push    0
+0x4916DD: push    0
+0x4916DF: push    0
+0x4916E1: push    edi
+0x4916E2: push    ebp
+0x4916E3: push    eax
+0x4916E4: push    0
+0x4916E6: mov     ecx, ebx
+0x4916E8: call    ContainerExtraData_RemoveForm
+0x4916ED: sub     esi, edi
+0x4916EF: test    esi, esi
+0x4916F1: jg      short loc_4916B4
+0x4916F3: pop     edi
+0x4916F4: pop     ebp
+0x4916F5: pop     esi
+0x4916F6: pop     ebx
+0x4916F7: pop     ecx
+0x4916F8: retn    0Ch

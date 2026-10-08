@@ -1,1 +1,1 @@
-ILHEAD
+typedef _ILHEAD ILHEAD;

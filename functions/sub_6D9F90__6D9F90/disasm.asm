@@ -34,12 +34,12 @@
 0x6D9FE9: call    eax
 0x6D9FEB: mov     edi, [esp+28h+var_4]
 0x6D9FEF: mov     edx, [esp+28h+a2]
-0x6D9FF3: mov     cl, ds:byte_B3D3EE[edi]
+0x6D9FF3: mov     cl, byte ptr ds:unk_B3D3EE[edi]
 0x6D9FF9: push    edx
 0x6D9FFA: mov     [esi+14h], cl
 0x6D9FFD: mov     eax, ds:0B3D0A0h[edi*4]
 0x6DA004: push    ebx
-0x6DA005: call    eax ; dword_B3D0A0
+0x6DA005: call    eax ; unk_B3D0A0
 0x6DA007: mov     ecx, [esp+30h+a2]
 0x6DA00B: mov     edx, ds:0B3D428h[edi*4]
 0x6DA012: mov     ebx, eax

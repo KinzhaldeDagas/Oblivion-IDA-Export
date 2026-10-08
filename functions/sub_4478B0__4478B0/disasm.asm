@@ -74,7 +74,7 @@
 0x4479B1: add     ecx, 1
 0x4479B4: push    ecx
 0x4479B5: mov     ecx, esi
-0x4479B7: call    TESFile_GetMasterByIndex
+0x4479B7: call    TESFile_GetMasterByIndex; Oblivion TESFile_GetMasterByIndex returns masterFiles[slot-1] for a one-based MAST index, bounded by masterCount. FormID owner-byte resolution can therefore select distinct alias slots for duplicate filenames.
 0x4479BC: test    eax, eax
 0x4479BE: jnz     short loc_4479C2
 0x4479C0: mov     eax, esi
@@ -89,7 +89,7 @@
 0x4479E1: or      eax, edi
 0x4479E3: push    0; int
 0x4479E5: push    eax; a1
-0x4479E6: call    TESForm_LookupByFormID
+0x4479E6: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4479EB: add     esp, 4
 0x4479EE: push    eax; void *
 0x4479EF: call    OblivionDynamicCast
@@ -97,7 +97,7 @@
 0x4479F7: mov     [esp+2Ch+var_18], eax
 0x4479FB: jmp     loc_447B59; jumptable 00447AEC cases 1,4,5
 0x447A00: mov     ecx, esi
-0x447A02: call    TESFile__NextGroup
+0x447A02: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x447A07: jmp     loc_44796E
 0x447A0C: cmp     ecx, ds:0B06048h
 0x447A12: jnz     loc_447ADC
@@ -121,11 +121,11 @@
 0x447A51: push    0; a4
 0x447A53: push    ebp; Dst
 0x447A54: mov     ecx, esi; a1
-0x447A56: call    TESFile_GetChunkData
+0x447A56: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x447A5B: mov     edx, [esp+2Ch+Str2]
-0x447A5F: push    edx; Str2
-0x447A60: push    ebp; Str1
-0x447A61: call    __strcmp
+0x447A5F: push    edx; right
+0x447A60: push    ebp; left
+0x447A61: call    CRT_StricmpLocaleDispatch
 0x447A66: add     esp, 8
 0x447A69: test    eax, eax
 0x447A6B: jnz     short loc_447ACC
@@ -151,7 +151,7 @@
 0x447AAC: push    8; a4
 0x447AAE: lea     eax, [esp+30h+Dst]
 0x447AB2: push    eax; Dst
-0x447AB3: call    TESFile_GetChunkData
+0x447AB3: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x447AB8: mov     ecx, dword ptr [esp+2Ch+Dst]
 0x447ABC: mov     edx, [esp+2Ch+arg_4]
 0x447AC0: mov     eax, [esp+2Ch+var_4]
@@ -194,7 +194,7 @@
 0x447B42: add     esp, 1Ch
 0x447B45: retn    0Ch
 0x447B48: mov     ecx, esi; jumptable 00447AEC case 6
-0x447B4A: call    TESFile__NextGroup
+0x447B4A: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x447B4F: jmp     short loc_447B62
 0x447B51: cmp     ecx, ds:0B060A8h
 0x447B57: jnz     short def_447AEC; jumptable 00447AEC default case, cases 2,3

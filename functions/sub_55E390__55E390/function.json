@@ -1,19 +1,32 @@
 {
-  "callees_count": 60,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_55E390",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 24,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x55E390",
+      "0x55E651"
+    ]
+  ],
+  "chunks_sha256": "bd1881f8dcfc3ec148520bbb184be23175a3ac46f5820690048d113c770fb754",
+  "comment_regular": "Verified cache maintenance: with unusedModelsOnly=true removes tree-form/seed model entries whose model is null or only map-owned; false releases and clears every model cache entry. Called during TES destruction and BSTreeManager destruction.",
+  "comment_repeatable": "Verified cache maintenance: with unusedModelsOnly=true removes tree-form/seed model entries whose model is null or only map-owned; false releases and clears every model cache entry. Called during TES destruction and BSTreeManager destruction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "BSTreeManager_ClearModelCache",
   "end_ea": "0x55E651",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55E390",
+  "name": "BSTreeManager_ClearModelCache",
   "segment": ".text",
   "sha256": "bd1881f8dcfc3ec148520bbb184be23175a3ac46f5820690048d113c770fb754",
   "size": 705,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55E390",
-  "type": "int __cdecl(char)",
+  "total_chunk_size": 705,
+  "type": "void __cdecl(bool unusedModelsOnly)",
   "xrefs_from_count": 270,
   "xrefs_to_count": 4
 }

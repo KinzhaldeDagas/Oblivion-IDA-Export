@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x50A8A0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion ToggleCellNode console command handler. Parses category 0..5, reports the native category label, and routes to TES__ShowCellNode.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x50A8D2",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x50A92B",
-    "line": "push    0",
+    "line": "push    0; activeExteriorCellsOnly",
     "mnemonic": "push",
     "size": 2
   },
@@ -289,37 +289,37 @@
   },
   {
     "ea": "0x50A936",
-    "line": "mov     byte ptr [esp+14h+var_4], bl",
+    "line": "mov     [esp+14h+show], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x50A93A",
-    "line": "mov     eax, [esp+14h+var_4]",
+    "line": "mov     eax, dword ptr [esp+14h+show]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x50A93E",
-    "line": "push    eax",
+    "line": "push    eax; show",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50A93F",
-    "line": "push    ecx",
+    "line": "push    ecx; nodeCategory",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50A940",
-    "line": "mov     ecx, ds:0B333A0h",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x50A946",
-    "line": "call    sub_442A30",
+    "line": "call    TES__ShowCellNode; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.",
     "mnemonic": "call",
     "size": 5
   },

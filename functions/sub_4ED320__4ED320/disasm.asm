@@ -1,4 +1,4 @@
-0x4ED320: push    0FFFFFFFFh
+0x4ED320: push    0FFFFFFFFh; Verified BuildMesh scheduling: allocates a TerrainLODQuadLoadTask with priority 3 and the current quad-data context; passes the worldspace filename key and quad tile coordinates, then queues the task.
 0x4ED322: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x4ED327: mov     eax, large fs:0
 0x4ED32D: push    eax
@@ -47,7 +47,7 @@
 0x4ED3A0: lea     ebx, [esi+4]
 0x4ED3A3: jnz     short loc_4ED419
 0x4ED3A5: push    48h ; 'H'; Size
-0x4ED3A7: mov     dword ptr [esi+8], 1
+0x4ED3A7: mov     dword ptr [esi+8], 1; Verified state transition: sets TerrainLODQuadState_Loading (1) before creating/queueing the TerrainLODQuadLoadTask.
 0x4ED3AE: call    FormHeapAlloc
 0x4ED3B3: add     esp, 4
 0x4ED3B6: mov     [esp+20h+var_10], eax
@@ -68,14 +68,14 @@
 0x4ED3E2: mov     edx, [edx+0Ch]
 0x4ED3E5: movsx   ecx, cx
 0x4ED3E8: shl     ecx, 5
-0x4ED3EB: push    ecx
+0x4ED3EB: push    ecx; tileFileY
 0x4ED3EC: movsx   ecx, di
 0x4ED3EF: shl     ecx, 5
-0x4ED3F2: push    ecx
-0x4ED3F3: push    edx
-0x4ED3F4: push    esi
+0x4ED3F2: push    ecx; tileFileX
+0x4ED3F3: push    edx; worldspaceFormID
+0x4ED3F4: push    esi; quadData
 0x4ED3F5: mov     ecx, eax; this
-0x4ED3F7: call    ??0TerrainLODQuadLoadTask@@QAE@XZ; TerrainLODQuadLoadTask::TerrainLODQuadLoadTask(void)
+0x4ED3F7: call    ??0TerrainLODQuadLoadTask@@QAE@XZ; Verified task factory passes the owning WorldSpace FormID and tile-file coordinates derived from quadX/quadY (each multiplied by 32) into the terrain NIF load task.
 0x4ED3FC: jmp     short loc_4ED400
 0x4ED3FE: xor     eax, eax
 0x4ED400: push    eax
@@ -95,3 +95,15 @@
 0x4ED429: pop     ebx
 0x4ED42A: add     esp, 10h
 0x4ED42D: retn
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

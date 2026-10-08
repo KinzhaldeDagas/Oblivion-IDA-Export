@@ -1,19 +1,32 @@
 {
-  "callees_count": 53,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x540850",
+      "0x540E82"
+    ]
+  ],
+  "chunks_sha256": "64c7b21b5a24a73e5ea7ed87f4caebbf2767838167fd2072ad9aa6950c4d734b",
+  "comment_regular": "HDR weather/global updater, not merely fog. While HDR is enabled it resolves first/second weather values, including fSunlightDimmer and fTreeDimmer, then writes direct or transitioned renderer globals.",
+  "comment_repeatable": "HDR weather/global updater, not merely fog. While HDR is enabled it resolves first/second weather values, including fSunlightDimmer and fTreeDimmer, then writes direct or transitioned renderer globals.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_540850",
+  "display_name": "OB_Sky_UpdateHDRWeatherAndTreeDimmerConstants_010201A0",
   "end_ea": "0x540E82",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_540850",
+  "name": "OB_Sky_UpdateHDRWeatherAndTreeDimmerConstants_010201A0",
   "segment": ".text",
   "sha256": "64c7b21b5a24a73e5ea7ed87f4caebbf2767838167fd2072ad9aa6950c4d734b",
   "size": 1586,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x540850",
-  "type": "double __usercall@<st0>(Sky *this@<ecx>, double@<st0>)",
+  "total_chunk_size": 1586,
+  "type": "void __thiscall(Sky *this)",
   "xrefs_from_count": 472,
   "xrefs_to_count": 4
 }

@@ -1,4 +1,4 @@
-0x4F8370: fldz
+0x4F8370: fldz; GetIsPlayerBirthsign_Eval compares the Birthsign parameter with the PlayerCharacter's birthsign; its result does not depend on the dialogue speaker.
 0x4F8372: mov     eax, [esp+arg_4]
 0x4F8376: push    esi
 0x4F8377: push    edi

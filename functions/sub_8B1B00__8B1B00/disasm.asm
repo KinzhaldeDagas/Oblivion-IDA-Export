@@ -1,4 +1,4 @@
-0x8B1B00: push    ebp
+0x8B1B00: push    ebp; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8B1B01: mov     ebp, esp
 0x8B1B03: and     esp, 0FFFFFFF0h
 0x8B1B06: sub     esp, 10h

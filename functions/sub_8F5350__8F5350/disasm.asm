@@ -30,7 +30,6 @@
 0x8F53B5: mov     edx, [ebp+arg_8]
 0x8F53B8: add     esi, 1Ch
 0x8F53BB: jmp     short loc_8F53C0
-0x8F53BD: align 10h
 0x8F53C0: mov     eax, [ebp+arg_4]
 0x8F53C3: movaps  xmm0, xmmword ptr [esi-0Ch]
 0x8F53C7: add     eax, 10h

@@ -1,1 +1,4 @@
-HACCEL__
+struct HACCEL__
+{
+int unused;
+};

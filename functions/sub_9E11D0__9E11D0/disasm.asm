@@ -7,15 +7,15 @@
 0x9E11E5: push    eax
 0x9E11E6: lea     eax, [esp+10h+var_C]
 0x9E11EA: mov     large fs:0, eax
-0x9E11F0: mov     ecx, offset dword_B35788
+0x9E11F0: mov     ecx, offset unk_B35788
 0x9E11F5: call    TESForm_constr
-0x9E11FA: mov     ecx, offset dword_B35788
+0x9E11FA: mov     ecx, offset unk_B35788
 0x9E11FF: mov     [esp+10h+var_4], 0
-0x9E1207: mov     dword_B35788, offset ??_7TESCombatStyle@@6B@; const TESCombatStyle::`vftable' ...
-0x9E1211: mov     byte_B3578C, 3Eh ; '>'
+0x9E1207: mov     dword ptr unk_B35788, offset ??_7TESCombatStyle@@6B@; const TESCombatStyle::`vftable' ...
+0x9E1211: mov     byte ptr unk_B3578C, 3Eh ; '>'
 0x9E1218: call    sub_4A9A00
 0x9E121D: push    offset sub_A1AE40; void (__cdecl *)()
-0x9E1222: mov     dword_B35788, offset ??_7DefaultCombatStyle@@6B@; const DefaultCombatStyle::`vftable' ...
+0x9E1222: mov     dword ptr unk_B35788, offset ??_7DefaultCombatStyle@@6B@; const DefaultCombatStyle::`vftable' ...
 0x9E122C: call    _atexit
 0x9E1231: add     esp, 4
 0x9E1234: mov     ecx, [esp+10h+var_C]
@@ -23,3 +23,12 @@
 0x9E123F: pop     ecx
 0x9E1240: add     esp, 0Ch
 0x9E1243: retn
+0x9B2B70: mov     ecx, offset unk_B35788; this
+0x9B2B75: jmp     TESForm_destr
+0x9B2B7A: mov     edx, [esp+arg_4]
+0x9B2B7E: lea     eax, [edx]
+0x9B2B80: mov     ecx, [edx-4]
+0x9B2B83: xor     ecx, eax
+0x9B2B85: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2B8A: mov     eax, offset stru_ADEA1C
+0x9B2B8F: jmp     ___CxxFrameHandler3

@@ -35,13 +35,13 @@
 0x73ABA1: jz      short loc_73ABD5
 0x73ABA3: mov     eax, [ebx+8]
 0x73ABA6: push    eax
-0x73ABA7: call    FormHeapFree
+0x73ABA7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73ABAC: mov     eax, [ebx+0Ch]
 0x73ABAF: push    eax
-0x73ABB0: call    FormHeapFree
+0x73ABB0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73ABB5: mov     eax, [ebx+10h]
 0x73ABB8: push    eax
-0x73ABB9: call    FormHeapFree
+0x73ABB9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73ABBE: mov     ecx, ds:0B40134h; this
 0x73ABC4: add     esp, 0Ch
 0x73ABC7: lea     edx, [esp+24h+a2]
@@ -59,11 +59,11 @@
 0x73ABEC: mov     dword ptr [edi], offset ??_7?$NiTArray@PAVScreenElement@NiScreenGeometryData@@@@6B@; const NiTArray<NiScreenGeometryData::ScreenElement *>::`vftable'
 0x73ABF2: mov     edi, [edi+4]
 0x73ABF5: push    edi
-0x73ABF6: call    FormHeapFree
+0x73ABF6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73ABFB: add     esp, 4
-0x73ABFE: mov     ecx, esi; this
+0x73ABFE: mov     ecx, esi; self
 0x73AC00: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x73AC08: call    ??1NiTriShapeDynamicData@@UAE@XZ; NiTriShapeDynamicData::~NiTriShapeDynamicData(void)
+0x73AC08: call    NiTriShapeData_Destruct; Destroy NiTriShapeData triangle indices, linked shared-normal index-pool blocks, and the per-entry shared-normal array.
 0x73AC0D: mov     ecx, [esp+24h+var_C]
 0x73AC11: mov     large fs:0, ecx
 0x73AC18: pop     ecx
@@ -72,3 +72,21 @@
 0x73AC1B: pop     ebx
 0x73AC1C: add     esp, 14h
 0x73AC1F: retn
+0x7388D0: mov     eax, [ecx+4]
+0x7388D3: push    eax
+0x7388D4: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVScreenElement@NiScreenGeometryData@@@@6B@; const NiTArray<NiScreenGeometryData::ScreenElement *>::`vftable'
+0x7388DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x7388DF: pop     ecx
+0x7388E0: retn
+0x9CAC90: mov     ecx, [ebp-10h]; self
+0x9CAC93: jmp     NiTriShapeData_Destruct; Destroy NiTriShapeData triangle indices, linked shared-normal index-pool blocks, and the per-entry shared-normal array.
+0x9CAC98: mov     ecx, [ebp-10h]
+0x9CAC9B: add     ecx, 60h ; '`'
+0x9CAC9E: jmp     loc_7388D0
+0x9CACA3: mov     edx, [esp+arg_4]
+0x9CACA7: lea     eax, [edx-14h]
+0x9CACAA: mov     ecx, [edx-18h]
+0x9CACAD: xor     ecx, eax
+0x9CACAF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CACB4: mov     eax, offset stru_AF32D0
+0x9CACB9: jmp     ___CxxFrameHandler3

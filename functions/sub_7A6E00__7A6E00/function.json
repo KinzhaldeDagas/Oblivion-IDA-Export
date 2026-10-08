@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A6E00",
+      "0x7A6E42"
+    ]
+  ],
+  "chunks_sha256": "9acee42a5f5d1124bb477b532c25cc48f01539c4c46e454f4d3e4e3e8482f02e",
+  "comment_regular": "Oblivion Normal destructor. Decrements the shared Normal instance count; non-final instances mark their PosGen base notReady so only the final owner releases the shared sx/sfx tables.",
+  "comment_repeatable": "Oblivion Normal destructor. Decrements the shared Normal instance count; non-final instances mark their PosGen base notReady so only the final owner releases the shared sx/sfx tables.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_7A6E00",
+  "display_name": "OB_Normal_dtor_010201A0",
   "end_ea": "0x7A6E42",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A6E00",
+  "name": "OB_Normal_dtor_010201A0",
   "segment": ".text",
   "sha256": "9acee42a5f5d1124bb477b532c25cc48f01539c4c46e454f4d3e4e3e8482f02e",
   "size": 66,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A6E00",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 66,
+  "type": "void __thiscall(OB_Normal_010201A0 *this)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 1
 }

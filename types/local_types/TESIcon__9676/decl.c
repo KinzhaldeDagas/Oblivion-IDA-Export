@@ -1,1 +1,4 @@
-TESIcon
+struct TESIcon
+{
+TESTexture super;
+};

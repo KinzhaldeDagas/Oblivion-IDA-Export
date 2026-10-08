@@ -1,19 +1,36 @@
 {
-  "callees_count": 78,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 34,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_560AC0",
+  "chunks": [
+    [
+      "0x560AC0",
+      "0x56102D"
+    ],
+    [
+      "0x9BD070",
+      "0x9BD0FC"
+    ]
+  ],
+  "chunks_sha256": "3c7639f88314fd9946360baea675750fdab4c393d4ee0d52958836fc46ee92d5",
+  "comment_regular": "OBLIVION AUTHORITY 2026-08-27: Material application selects forced/TES branch and leaf dimming scalars and writes accepted [0,1] values to the engine before texture/material loads. It has cleanup EH but no internal catch. A swallowed later exception can therefore leave the scalar update applied while subsequent material setup is partial.",
+  "comment_repeatable": "OBLIVION AUTHORITY 2026-08-27: Material application selects forced/TES branch and leaf dimming scalars and writes accepted [0,1] values to the engine before texture/material loads. It has cleanup EH but no internal catch. A swallowed later exception can therefore leave the scalar update applied while subsequent material setup is partial.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "BSTreeModel_ApplyBaseObject",
   "end_ea": "0x56102D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_560AC0",
+  "name": "BSTreeModel_ApplyBaseObject",
   "segment": ".text",
   "sha256": "85e0a5cc6db6b2681aeb04f94dd7487696597184d3ba4a92a7843bd34cde4ff2",
   "size": 1389,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x560AC0",
-  "type": "void __thiscall(_DWORD *this, _DWORD *)",
-  "xrefs_from_count": 512,
+  "total_chunk_size": 1529,
+  "type": "void __thiscall(BSTreeModel_OblivionLayout_058 *this, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree)",
+  "xrefs_from_count": 549,
   "xrefs_to_count": 1
 }

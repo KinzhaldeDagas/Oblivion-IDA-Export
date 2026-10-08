@@ -1,5 +1,5 @@
-0x6803F0: mov     eax, [ecx+8]
-0x6803F3: mov     edx, [esp+arg_0]
+0x6803F0: mov     eax, [ecx+8]; Verified: if the supplied spatial form matches spaceA or spaceB, returns the opposite spatial TESForm; otherwise returns null.
+0x6803F3: mov     edx, [esp+space]
 0x6803F7: push    esi
 0x6803F8: xor     esi, esi
 0x6803FA: cmp     edx, eax

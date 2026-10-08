@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ECC60",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+before]; Detect duplicate and find ordered insertion point using normalized receiver-surface distance: (distance to light - receiver radius) / light range.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7ECC7F",
-    "line": "mov     ebx, [esp+24h+arg_0]",
+    "line": "mov     ebx, [esp+24h+light]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7ECC96",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7ECCDC",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7ECCE3",
-    "line": "mov     esi, [esp+30h+arg_4]",
+    "line": "mov     esi, [esp+30h+bound]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x7ECD28",
-    "line": "fstp    [esp+30h+arg_4]",
+    "line": "fstp    [esp+30h+bound]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ECD2C",
-    "line": "fld     [esp+30h+arg_4]",
+    "line": "fld     [esp+30h+bound]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x7ECD35",
-    "line": "fstp    [esp+30h+arg_4]",
+    "line": "fstp    [esp+30h+bound]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ECD39",
-    "line": "fld     [esp+30h+arg_4]",
+    "line": "fld     [esp+30h+bound]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7ECD70",
-    "line": "cmp     edi, [esp+30h+arg_0]",
+    "line": "cmp     edi, [esp+30h+light]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x7ECD7A",
-    "line": "mov     ecx, [esp+30h+arg_8]",
+    "line": "mov     ecx, [esp+30h+before]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x7ECD87",
-    "line": "lea     edx, [esp+30h+arg_4]",
+    "line": "lea     edx, [esp+30h+bound]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x7ECD8E",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7ECD9B",
-    "line": "mov     eax, [esp+30h+arg_4]",
+    "line": "mov     eax, [esp+30h+bound]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x7ECDCC",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x7ECEA0",
-    "line": "mov     edx, [esp+30h+arg_8]",
+    "line": "mov     edx, [esp+30h+before]",
     "mnemonic": "mov",
     "size": 4
   },

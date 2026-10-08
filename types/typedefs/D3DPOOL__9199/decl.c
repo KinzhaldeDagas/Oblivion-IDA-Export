@@ -1,1 +1,1 @@
-_D3DPOOL
+typedef D3DPOOL _D3DPOOL;

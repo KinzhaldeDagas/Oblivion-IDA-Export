@@ -1,4 +1,4 @@
-0x5E0380: cmp     dword ptr [ecx+58h], 0
+0x5E0380: cmp     dword ptr [ecx+58h], 0; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x5E0384: jz      short loc_5E0393
 0x5E0386: mov     ecx, [ecx+58h]
 0x5E0389: mov     eax, [ecx]

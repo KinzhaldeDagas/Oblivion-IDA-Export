@@ -12,11 +12,11 @@
 0x629F5B: mov     edi, [esp+0Ch+arg_0]
 0x629F5F: mov     ecx, edi; this
 0x629F61: mov     ebx, eax
-0x629F63: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x629F63: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x629F68: cmp     eax, 5
 0x629F6B: jz      loc_62A001
 0x629F71: mov     ecx, edi; this
-0x629F73: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x629F73: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x629F78: cmp     eax, 3
 0x629F7B: jz      loc_62A001
 0x629F81: cmp     byte ptr [edi+0C8h], 0
@@ -55,7 +55,7 @@
 0x629FDB: mov     eax, 201h
 0x629FE0: pop     ebx
 0x629FE1: retn    18h
-0x629FE4: fld     dword ptr [esp+0Ch+arg_C]
+0x629FE4: fld     [esp+0Ch+arg_C]
 0x629FE8: fcompp
 0x629FEA: fnstsw  ax
 0x629FEC: test    ah, 5

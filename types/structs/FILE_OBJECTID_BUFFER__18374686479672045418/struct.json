@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "FILE_OBJECTID_BUFFER",
+  "definition": "typedef _FILE_OBJECTID_BUFFER FILE_OBJECTID_BUFFER\n",
   "id": 18374686479672045418,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ObjectId",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "BYTE[16]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 48
+      "size": 48,
+      "type": "$444D6430EF0ECE31F722CF24140D7086"
     }
   ],
   "name": "FILE_OBJECTID_BUFFER",
+  "ordinal": 8100,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

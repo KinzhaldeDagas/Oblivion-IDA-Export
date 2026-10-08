@@ -1,4 +1,4 @@
-0x569840: push    esi
+0x569840: push    esi; 3DTheft decode: LocationData_CopyFrom preserves type-specific radius/object data and skips copy when source type is 0xFF unless forced.
 0x569841: mov     esi, [esp+4+arg_0]
 0x569845: test    esi, esi
 0x569847: push    edi

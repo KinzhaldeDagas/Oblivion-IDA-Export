@@ -1,18 +1,31 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x403960",
+      "0x403B43"
+    ]
+  ],
+  "chunks_sha256": "3cc9ab8d19ba9f24cac7e5c4dc6475d854028230faa56e145235821448027481",
+  "comment_regular": "[Controller decode 2026-07-09] Resets requested binding scheme. Scheme 0 keyboard, 1 mouse, 2 joystick/controller, 3 all. Joystick defaults are installed only when joystick flag bit0 is active; AlwaysRunControlBoh at +0x1BD5 is adjacent to but outside the persisted 29-row joystick block.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "InputGlobals::ResetControlMap",
   "end_ea": "0x403B43",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobals::ResetControlMap",
   "segment": ".text",
   "sha256": "3cc9ab8d19ba9f24cac7e5c4dc6475d854028230faa56e145235821448027481",
   "size": 483,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x403960",
+  "total_chunk_size": 483,
   "type": "char __thiscall(DIDEVCAPS *this, UInt16 scheme)",
   "xrefs_from_count": 103,
   "xrefs_to_count": 2

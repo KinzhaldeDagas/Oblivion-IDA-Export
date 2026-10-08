@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6761AF",
-    "line": "call    GetExtraDataFollower",
+    "line": "call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x67622B",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x67624C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67624E",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x676257",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x676259",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x676264",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x676266",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },

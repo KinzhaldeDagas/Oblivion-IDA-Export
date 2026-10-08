@@ -8,13 +8,13 @@
 0x4F8A61: mov     eax, [ecx]
 0x4F8A63: mov     edx, [eax+154h]
 0x4F8A69: push    offset dword_A7D0EC
-0x4F8A6E: call    edx
+0x4F8A6E: call    edx; CanHaveFlames virtual call may return a null NiObjectNET*. Vanilla immediately forwards EAX as ECX to NiObjectNET::GetExtraData at 0x4F8A72.
 0x4F8A70: mov     ecx, eax
-0x4F8A72: call    NiObjectNET_GetExtraData
+0x4F8A72: call    NiObjectNET_GetExtraData; MEF v31 verified guard site: return null/0 without calling NiObjectNET::GetExtraData when ECX is null; preserve native RET 4 name-argument cleanup and resume at 0x4F8A77.
 0x4F8A77: test    eax, eax
 0x4F8A79: jz      short loc_4F8AA3
 0x4F8A7B: push    eax
-0x4F8A7C: push    offset dword_B3F484
+0x4F8A7C: push    offset stru_B3F484
 0x4F8A81: call    NiRTTI_Cast
 0x4F8A86: mov     eax, [eax+0Ch]
 0x4F8A89: shr     eax, 4

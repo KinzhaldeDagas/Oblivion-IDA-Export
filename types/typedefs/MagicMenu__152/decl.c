@@ -1,1 +1,1 @@
-MagicMenu
+struct MagicMenu;

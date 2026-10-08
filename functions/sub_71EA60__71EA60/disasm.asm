@@ -58,7 +58,6 @@
 0x71EB24: cmp     ebx, ebp
 0x71EB26: ja      short loc_71EB7C
 0x71EB28: jmp     short loc_71EB30
-0x71EB2A: align 10h
 0x71EB30: mov     ecx, [esi+5Ch]
 0x71EB33: mov     eax, [ecx+ebx*4+4]
 0x71EB37: sub     eax, [ecx+ebx*4]
@@ -76,10 +75,10 @@
 0x71EB60: mov     edx, [esp+5Ch+Size]
 0x71EB64: add     eax, [esi+50h]
 0x71EB67: add     ecx, [edi+50h]
-0x71EB6A: push    edx; Size
-0x71EB6B: push    eax; Src
-0x71EB6C: push    ecx; Dst
-0x71EB6D: call    _memcpy
+0x71EB6A: push    edx; byteCount
+0x71EB6B: push    eax; source
+0x71EB6C: push    ecx; destination
+0x71EB6D: call    _memcpy;
 0x71EB72: add     ebx, 1
 0x71EB75: add     esp, 0Ch
 0x71EB78: cmp     ebx, ebp
@@ -173,7 +172,6 @@
 0x71ECC4: cmp     ebx, ebp
 0x71ECC6: ja      short loc_71ED1C
 0x71ECC8: jmp     short loc_71ECD0
-0x71ECCA: align 10h
 0x71ECD0: mov     ecx, [esi+5Ch]
 0x71ECD3: mov     eax, [ecx+ebx*4+4]
 0x71ECD7: sub     eax, [ecx+ebx*4]
@@ -191,10 +189,10 @@
 0x71ED00: mov     edx, [esp+5Ch+Size]
 0x71ED04: add     eax, [esi+50h]
 0x71ED07: add     ecx, [edi+50h]
-0x71ED0A: push    edx; Size
-0x71ED0B: push    eax; Src
-0x71ED0C: push    ecx; Dst
-0x71ED0D: call    _memcpy
+0x71ED0A: push    edx; byteCount
+0x71ED0B: push    eax; source
+0x71ED0C: push    ecx; destination
+0x71ED0D: call    _memcpy;
 0x71ED12: add     ebx, 1
 0x71ED15: add     esp, 0Ch
 0x71ED18: cmp     ebx, ebp
@@ -271,7 +269,6 @@
 0x71EE24: cmp     ebx, ebp
 0x71EE26: ja      short loc_71EE7C
 0x71EE28: jmp     short loc_71EE30
-0x71EE2A: align 10h
 0x71EE30: mov     ecx, [esi+5Ch]
 0x71EE33: mov     eax, [ecx+ebx*4+4]
 0x71EE37: sub     eax, [ecx+ebx*4]
@@ -289,10 +286,10 @@
 0x71EE60: mov     edx, [esp+5Ch+Size]
 0x71EE64: add     eax, [esi+50h]
 0x71EE67: add     ecx, [edi+50h]
-0x71EE6A: push    edx; Size
-0x71EE6B: push    eax; Src
-0x71EE6C: push    ecx; Dst
-0x71EE6D: call    _memcpy
+0x71EE6A: push    edx; byteCount
+0x71EE6B: push    eax; source
+0x71EE6C: push    ecx; destination
+0x71EE6D: call    _memcpy;
 0x71EE72: add     ebx, 1
 0x71EE75: add     esp, 0Ch
 0x71EE78: cmp     ebx, ebp
@@ -376,10 +373,10 @@
 0x71EFA0: mov     edx, [esp+5Ch+Size]
 0x71EFA4: add     eax, [esi+50h]
 0x71EFA7: add     ecx, [edi+50h]
-0x71EFAA: push    edx; Size
-0x71EFAB: push    eax; Src
-0x71EFAC: push    ecx; Dst
-0x71EFAD: call    _memcpy
+0x71EFAA: push    edx; byteCount
+0x71EFAB: push    eax; source
+0x71EFAC: push    ecx; destination
+0x71EFAD: call    _memcpy;
 0x71EFB2: add     ebx, 1
 0x71EFB5: add     esp, 0Ch
 0x71EFB8: cmp     ebx, ebp
@@ -438,7 +435,6 @@
 0x71F097: cmp     ebx, ebp
 0x71F099: ja      short loc_71F0EC
 0x71F09B: jmp     short loc_71F0A0
-0x71F09D: align 10h
 0x71F0A0: mov     ecx, [esi+5Ch]
 0x71F0A3: mov     eax, [ecx+ebx*4+4]
 0x71F0A7: sub     eax, [ecx+ebx*4]
@@ -456,10 +452,10 @@
 0x71F0D0: mov     edx, [esp+5Ch+Size]
 0x71F0D4: add     eax, [esi+50h]
 0x71F0D7: add     ecx, [edi+50h]
-0x71F0DA: push    edx; Size
-0x71F0DB: push    eax; Src
-0x71F0DC: push    ecx; Dst
-0x71F0DD: call    _memcpy
+0x71F0DA: push    edx; byteCount
+0x71F0DB: push    eax; source
+0x71F0DC: push    ecx; destination
+0x71F0DD: call    _memcpy;
 0x71F0E2: add     ebx, 1
 0x71F0E5: add     esp, 0Ch
 0x71F0E8: cmp     ebx, ebp
@@ -714,3 +710,35 @@
 0x71F495: pop     ebx
 0x71F496: add     esp, 48h
 0x71F499: retn    0Ch
+0x9CA030: mov     eax, [ebp+8]
+0x9CA033: push    eax
+0x9CA034: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA039: pop     ecx
+0x9CA03A: retn
+0x9CA03B: mov     eax, [ebp+8]
+0x9CA03E: push    eax
+0x9CA03F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA044: pop     ecx
+0x9CA045: retn
+0x9CA046: mov     eax, [ebp+8]
+0x9CA049: push    eax
+0x9CA04A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA04F: pop     ecx
+0x9CA050: retn
+0x9CA051: mov     eax, [ebp+8]
+0x9CA054: push    eax
+0x9CA055: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA05A: pop     ecx
+0x9CA05B: retn
+0x9CA05C: mov     eax, [ebp+8]
+0x9CA05F: push    eax
+0x9CA060: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA065: pop     ecx
+0x9CA066: retn
+0x9CA067: mov     edx, [esp+arg_4]
+0x9CA06B: lea     eax, [edx-4Ch]
+0x9CA06E: mov     ecx, [edx-50h]
+0x9CA071: xor     ecx, eax
+0x9CA073: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA078: mov     eax, offset stru_AF27E4
+0x9CA07D: jmp     ___CxxFrameHandler3

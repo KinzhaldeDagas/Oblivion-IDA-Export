@@ -1,21 +1,20 @@
 void __thiscall TogglePOV(PlayerCharacter *this, UInt8 a1)
 {
-  double v2; // st5
-  double v3; // st7
+  double v2; // st7
 
-  this->isThirdPerson = a1 == 0;
-  if ( !a1 && this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0) )
+  this->isThirdPerson = a1 == 0; /*0x66c598*/
+  if ( !a1 && this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0) ) /*0x66c5aa*/
   {
-    v3 = flt_B36B80;
-    *((float *)&qword_B3BB20 + 1) = flt_B36B80;
+    v2 = unk_B36B80; /*0x66c5b0*/
+    *(float *)&unk_B3BB24.vtbl = unk_B36B80; /*0x66c5b6*/
   }
-  if ( !VanityCamState )
+  if ( !MEMORY[0xB3BB04] ) /*0x66c5bc*/
   {
-    if ( this->firstPersonNiNode )
+    if ( this->firstPersonNiNode ) /*0x66c5c5*/
     {
-      byte_B14E4D = 1;
-      sub_66B710(this, v3, v2, 0);
-      ToggleBody(this, this->isThirdPerson == 0);
+      byte_B14E4D = 1; /*0x66c5d2*/
+      sub_66B710(this, v2, 0); /*0x66c5d9*/
+      ToggleBody(this, this->isThirdPerson == 0); /*0x66c5eb*/
     }
   }
 }

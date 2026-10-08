@@ -230,9 +230,9 @@
 0x5744A5: push    ecx; a2
 0x5744A6: mov     ecx, esi; this
 0x5744A8: mov     [esp+4Ch+var_4], 0FFFFFFFFh
-0x5744B0: call    sub_405680
+0x5744B0: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5744B5: mov     ecx, esi; this
-0x5744B7: call    NiAVObject_InitializePropertyState
+0x5744B7: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5744BC: mov     eax, esi
 0x5744BE: mov     ecx, [esp+48h+var_C]
 0x5744C2: mov     large fs:0, ecx
@@ -243,3 +243,20 @@
 0x5744CD: pop     ebx
 0x5744CE: add     esp, 34h
 0x5744D1: retn    8
+0x9BE1F0: mov     eax, [ebp-28h]
+0x9BE1F3: push    eax
+0x9BE1F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE1F9: pop     ecx
+0x9BE1FA: retn
+0x9BE1FB: mov     eax, [ebp+8]
+0x9BE1FE: push    eax
+0x9BE1FF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE204: pop     ecx
+0x9BE205: retn
+0x9BE206: mov     edx, [esp+arg_4]
+0x9BE20A: lea     eax, [edx-38h]
+0x9BE20D: mov     ecx, [edx-3Ch]
+0x9BE210: xor     ecx, eax
+0x9BE212: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE217: mov     eax, offset stru_AE79CC
+0x9BE21C: jmp     ___CxxFrameHandler3

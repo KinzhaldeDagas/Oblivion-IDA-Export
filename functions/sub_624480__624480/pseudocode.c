@@ -1,64 +1,64 @@
 void __usercall sub_624480(void **a1@<ecx>, double a2@<st0>)
 {
-  TESObjectREFR *v4; // edi
-  bool v5; // bl
+  TESObjectREFR *v3; // edi
+  bool v4; // bl
   unsigned __int16 AnimGroup; // ax
-  int v7; // ebp
-  int v8; // eax
-  _DWORD *v9; // eax
+  int v6; // ebp
+  int v7; // eax
+  _DWORD *v8; // eax
+  int v9; // eax
   int v10; // eax
-  int v11; // eax
-  char v12; // al
-  int v13; // edx
-  int v14; // [esp+10h] [ebp-4h] BYREF
+  char v11; // al
+  int v12; // edx
+  int v13; // [esp+10h] [ebp-4h] BYREF
 
-  sub_61E8A0(a1);
-  v4 = (TESObjectREFR *)a1[0xF];
-  *((_BYTE *)a1 + 0x174) = 1;
-  v5 = 0;
-  AnimGroup = Actor_LoadAnimGroup_(v4, 0x11, 0, 1);
-  v7 = AnimGroup;
-  if ( AnimGroup )
+  sub_61E8A0(a1); /*0x624487*/
+  v3 = (TESObjectREFR *)a1[0xF]; /*0x62448c*/
+  *((_BYTE *)a1 + 0x174) = 1;                   // Initializes CombatController+0x174 to true before movement/path evaluation; this is the current-target reachability state. /*0x624497*/
+  v4 = 0; /*0x62449e*/
+  AnimGroup = Actor_LoadAnimGroup_(v3, 0x11, 0, 1); /*0x6244a0*/
+  v6 = AnimGroup; /*0x6244a5*/
+  if ( AnimGroup ) /*0x6244ab*/
   {
-    v8 = (int)v4->vtbl->GetAnimData(v4);
-    if ( v8 )
-      v5 = sub_470960(*(_DWORD **)(v8 + 0x9C), v7, &v14) != 0;
+    v7 = (int)v3->vtbl->GetAnimData(v3); /*0x6244b7*/
+    if ( v7 ) /*0x6244bb*/
+      v4 = ActorAnimData_FindAnimMapEntry(*(_DWORD **)(v7 + 0x9C), v6, &v13) != 0; /*0x6244d4*/
   }
-  v9 = a1[0xF];
-  *((_BYTE *)a1 + 0x1BC) = v5;
-  if ( !v9
-    || (v10 = v9[0x16]) == 0
-    || !(*(int (__thiscall **)(int, int))(*(_DWORD *)v10 + 0xEC))(v10, 1)
-    || (v11 = *(_DWORD *)((*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)a1[0xF] + 0x16) + 0xEC))(
+  v8 = a1[0xF]; /*0x6244d6*/
+  *((_BYTE *)a1 + 0x1BC) = v4; /*0x6244db*/
+  if ( !v8 /*0x62451f*/
+    || (v9 = v8[0x16]) == 0
+    || !(*(int (__thiscall **)(int, int))(*(_DWORD *)v9 + 0xEC))(v9, 1)
+    || (v10 = *(_DWORD *)((*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)a1[0xF] + 0x16) + 0xEC))(
                             *((_DWORD *)a1[0xF] + 0x16),
                             1)
                         + 8)) == 0 )
   {
-    *((_BYTE *)a1 + 0x130) = 1;
+    *((_BYTE *)a1 + 0x130) = 1; /*0x62458f*/
 LABEL_15:
-    *((_BYTE *)a1 + 0x131) = 1;
-    sub_624030((int)a1, (Actor *)v4, a2, 0);
-    return;
+    *((_BYTE *)a1 + 0x131) = 1; /*0x624596*/
+    CombatController_RefreshTacticalState((int)a1, (Actor *)v3, a2, 0); /*0x6245a1*/
+    return; /*0x6245a1*/
   }
-  v12 = *(_BYTE *)(v11 + 0x90);
-  if ( v12 != 5 && v12 != 4 )
+  v11 = *(_BYTE *)(v10 + 0x90); /*0x624521*/
+  if ( v11 != 5 && v11 != 4 ) /*0x62452d*/
   {
-    *((_BYTE *)a1 + 0x130) = 0;
-    v4 = (TESObjectREFR *)sub_612960((_DWORD **)a1, 1);
-    if ( v4 )
+    *((_BYTE *)a1 + 0x130) = 0; /*0x624533*/
+    v3 = (TESObjectREFR *)sub_612960((_DWORD **)a1, 1); /*0x62453f*/
+    if ( v3 ) /*0x624543*/
     {
 LABEL_11:
-      ContainerEntryExtraData_DestroyDataTable((unsigned int *)v4, v13);
-      FormHeapFree((unsigned int)v4);
-      sub_624030((int)a1, (Actor *)v4, a2, 0);
-      return;
+      ContainerEntryExtraData_DestroyDataTable((unsigned int *)v3, v12); /*0x624545*/
+      FormHeapFree((unsigned int)v3); /*0x62454d*/
+      CombatController_RefreshTacticalState((int)a1, (Actor *)v3, a2, 0); /*0x624559*/
+      return; /*0x624563*/
     }
-    goto LABEL_15;
+    goto LABEL_15; /*0x624543*/
   }
-  *((_BYTE *)a1 + 0x131) = 0;
-  v4 = (TESObjectREFR *)sub_612960((_DWORD **)a1, 1);
-  if ( v4 )
-    goto LABEL_11;
-  *((_BYTE *)a1 + 0x130) = 1;
-  sub_624030((int)a1, 0, a2, 0);
+  *((_BYTE *)a1 + 0x131) = 0; /*0x624568*/
+  v3 = (TESObjectREFR *)sub_612960((_DWORD **)a1, 1); /*0x624574*/
+  if ( v3 ) /*0x624578*/
+    goto LABEL_11; /*0x624578*/
+  *((_BYTE *)a1 + 0x130) = 1; /*0x62457d*/
+  CombatController_RefreshTacticalState((int)a1, 0, a2, 0); /*0x624584*/
 }

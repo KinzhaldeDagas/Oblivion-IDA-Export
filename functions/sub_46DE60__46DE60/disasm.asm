@@ -18,7 +18,7 @@
 0x46DE8F: push    esi; a4
 0x46DE90: push    ebx; Dst
 0x46DE91: mov     [ebp+var_10], ebx
-0x46DE94: call    TESFile_GetChunkData
+0x46DE94: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x46DE99: mov     eax, [ebx]
 0x46DE9B: xor     ecx, ecx
 0x46DE9D: mov     esi, 4
@@ -41,10 +41,10 @@
 0x46DED2: mov     eax, [ebp+var_14]
 0x46DED5: mov     ebx, [ebp+var_10]
 0x46DED8: test    eax, eax
-0x46DEDA: mov     [ebp+var_C], 0
+0x46DEDA: mov     [ebp+modelPath], 0
 0x46DEE1: jz      short loc_46DEE8
 0x46DEE3: mov     ecx, [eax]
-0x46DEE5: mov     [ebp+var_C], ecx
+0x46DEE5: mov     [ebp+modelPath], ecx
 0x46DEE8: mov     edx, [eax+4]
 0x46DEEB: push    8; Size
 0x46DEED: mov     [ebp+var_14], edx
@@ -62,8 +62,8 @@
 0x46DF13: mov     al, [esi+ebx]
 0x46DF16: mov     ecx, [ebp+arg_0]
 0x46DF19: movzx   ebx, al
-0x46DF1C: mov     eax, [ebp+var_C]
-0x46DF1F: push    eax
+0x46DF1C: mov     eax, [ebp+modelPath]
+0x46DF1F: push    eax; modelPath
 0x46DF20: push    0; int
 0x46DF22: push    offset ??_R0?AVTESForm@@@8; struct TypeDescriptor *
 0x46DF27: push    offset ??_R0?AVTESModelList@@@8; struct _s_RTTICompleteObjectLocator *
@@ -74,13 +74,13 @@
 0x46DF37: mov     edx, [ebp+var_10]
 0x46DF3A: mov     ecx, [edi+4]
 0x46DF3D: add     esp, 14h
-0x46DF40: push    eax
+0x46DF40: push    eax; form
 0x46DF41: lea     eax, [esi+edx]
 0x46DF44: mov     edx, [ebp+var_8]
-0x46DF47: mov     ecx, [ecx+edx*4]
-0x46DF4A: push    ebx
-0x46DF4B: push    eax
-0x46DF4C: call    sub_46D610
+0x46DF47: mov     ecx, [ecx+edx*4]; this
+0x46DF4A: push    ebx; count
+0x46DF4B: push    eax; entries
+0x46DF4C: call    TESModel_ReplaceTextureHashEntries; Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.
 0x46DF51: lea     eax, [ebx+ebx*2]
 0x46DF54: lea     esi, [esi+eax*8]
 0x46DF57: mov     eax, [ebp+var_8]

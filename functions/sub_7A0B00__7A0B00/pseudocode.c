@@ -1,14 +1,15 @@
-void __stdcall sub_7A0B00(int a1)
+// stdcall cleanup thunk for one st_vector<SFrondGuide> element; used by exception unwind in the outer guide-LOD vector helpers.
+void __stdcall OB_stVector_SFrondGuide_DestroyThunk_010201A0(OB_stVector_SFrondGuide_010201A0 *value)
 {
-  _DWORD *v1; // eax
+  OB_SFrondGuide_010201A0 *begin; // eax
 
-  v1 = *(_DWORD **)(a1 + 4);
-  if ( v1 )
+  begin = value->begin; /*0x7a0b05*/
+  if ( begin ) /*0x7a0b0a*/
   {
-    sub_79E150(v1, *(_DWORD **)(a1 + 8));
-    FormHeapFree(*(_DWORD *)(a1 + 4));
+    OB_SFrondGuide_DestroyRange_010201A0(begin, value->end); /*0x7a0b17*/
+    FormHeapFree((unsigned int)value->begin); /*0x7a0b20*/
   }
-  *(_DWORD *)(a1 + 4) = 0;
-  *(_DWORD *)(a1 + 8) = 0;
-  *(_DWORD *)(a1 + 0xC) = 0;
+  value->begin = 0; /*0x7a0b28*/
+  value->end = 0; /*0x7a0b2f*/
+  value->capacityEnd = 0; /*0x7a0b36*/
 }

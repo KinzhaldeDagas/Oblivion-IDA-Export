@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x67779E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6777AA",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,25 +397,25 @@
   },
   {
     "ea": "0x67783D",
-    "line": "lea     ecx, [esp+2Ch+arg_4]",
+    "line": "lea     ecx, [esp+2Ch+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x677841",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x677842",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x677844",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x677871",
-    "line": "call    Actor_GetDetectionLevel",
+    "line": "call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x6778BE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x6778D7",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -736,12 +736,6 @@
     "line": "jmp     short loc_6778F0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6778ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6778F0",
@@ -847,7 +841,7 @@
   },
   {
     "ea": "0x67791E",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x677928",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,13 +1213,13 @@
   },
   {
     "ea": "0x6779BD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6779BF",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },

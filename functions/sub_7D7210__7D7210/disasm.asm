@@ -1,6 +1,6 @@
 0x7D7210: push    esi
 0x7D7211: mov     esi, ds:0B3F928h
-0x7D7217: call    sub_7D7150
+0x7D7217: call    NiRenderer_DrainRenderTargetGroupStack; Drain and release every render-target stack entry, then end the active group. This path does not rebind a previous/default target or restore viewport/scissor state.
 0x7D721C: cmp     dword ptr [esi+200h], 1
 0x7D7223: jnz     short loc_7D7248
 0x7D7225: cmp     dword ptr [esi+204h], 0

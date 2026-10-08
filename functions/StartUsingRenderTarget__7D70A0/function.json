@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x7D70A0",
+      "0x7D7110"
+    ]
+  ],
+  "chunks_sha256": "556353d3f7bd0d20f8e1df307c50ac31cd040a12964dc300c332735f027c6987",
+  "comment_regular": "Renderer target-stack transition. Ends the current target if necessary, begins the supplied group with clear flags, and pushes it on the render-target ownership stack.\n\nBegin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.",
+  "comment_repeatable": "Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "StartUsingRenderTarget",
+  "display_name": "NiRenderer_PushAndBeginRenderTargetGroup",
   "end_ea": "0x7D7110",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "StartUsingRenderTarget",
+  "name": "NiRenderer_PushAndBeginRenderTargetGroup",
   "segment": ".text",
   "sha256": "556353d3f7bd0d20f8e1df307c50ac31cd040a12964dc300c332735f027c6987",
   "size": 112,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D70A0",
+  "total_chunk_size": 112,
   "type": "int __cdecl(NiRenderTargetGroup *a1, ClearFlags clearFlags)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 6

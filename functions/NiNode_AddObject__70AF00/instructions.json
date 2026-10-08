@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70AF00",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Adds child to this NiNode after reference protection and reparent/detach. firstAvailableSlot selects hole reuse versus append/grow behavior.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x70AF26",
-    "line": "mov     esi, [esp+20h+arg_0]",
+    "line": "mov     esi, [esp+20h+child]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,25 +127,25 @@
   },
   {
     "ea": "0x70AF3E",
-    "line": "push    ebx",
+    "line": "push    ebx; newParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70AF3F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x70AF41",
-    "line": "call    sub_7074B0",
+    "line": "call    NiAVObject_SetParentAndDetachFromOld; MEF PERF 2026-10-08: PERF-16 mutation boundary: SetParentAndDetachFromOld executes BEFORE AddFirstEmpty70AF67, and may alter the relevant array (especially same-parent reattach). A pre-detach density check or blanket firstAvailableSlot=false substitution is not equivalent. Preserve AddObject temporary child references and old-parent callbacks.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x70AF46",
-    "line": "cmp     byte ptr [esp+20h+arg_4], 0",
+    "line": "cmp     [esp+20h+firstAvailableSlot], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x70AF4C",
-    "line": "mov     [esp+24h+arg_4], esi",
+    "line": "mov     dword ptr [esp+24h+firstAvailableSlot], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x70AF54",
-    "line": "lea     eax, [esp+20h+arg_4]",
+    "line": "lea     eax, [esp+20h+firstAvailableSlot]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70AF58",
-    "line": "push    eax",
+    "line": "push    eax; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70AF59",
-    "line": "lea     ecx, [ebx+0ACh]",
+    "line": "lea     ecx, [ebx+0ACh]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x70AF67",
-    "line": "call    NiTArray_AddItem",
+    "line": "call    NiTObjectArray_AddFirstEmpty; MEF PERF 2026-10-08: PERF-16 concrete child-array route: nonzero firstAvailableSlot passes parent+AC array to4B3680; zero flag uses native append path70AF70..A6. Optimization belongs at actual hole-search decision with current metadata; it must not skip parent detachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,49 +265,49 @@
   },
   {
     "ea": "0x70AF96",
-    "line": "push    edx",
+    "line": "push    edx; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70AF97",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x70AF99",
-    "line": "call    sub_523B10",
+    "line": "call    NiTObjectArray_Resize16",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x70AF9E",
-    "line": "lea     eax, [esp+20h+arg_4]",
+    "line": "lea     eax, [esp+20h+firstAvailableSlot]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70AFA2",
-    "line": "push    eax",
+    "line": "push    eax; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70AFA3",
-    "line": "push    ebp",
+    "line": "push    ebp; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70AFA4",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x70AFA6",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },
@@ -484,5 +484,71 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C9930",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9933",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9938",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C993B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9940",
+    "line": "mov     edx, dword ptr [esp+firstAvailableSlot]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C9944",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9947",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C994A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C994C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9951",
+    "line": "mov     eax, offset stru_AF21A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9956",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 3,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x659C90",
+      "0x659F1B"
+    ],
+    [
+      "0x9D05C0",
+      "0x9D0607"
+    ]
+  ],
+  "chunks_sha256": "ec8668967e0b35fb2d5449259a240b0d90f4d161288b06b70d11b3b13db45318",
+  "comment_regular": "Verified 2026-10-04: 659EA3 is an internal switch-join and shared SEH epilogue, not a callable function. All entry xrefs are local; reattached without changing bytes/labels. Reads process-level byte: 0 high(0x2EC),1 middle-high(0x18C),2 middle-low(0xA8),3 low(0x90),FF none. Creates missing tier with matching constructor and registers owner; existing mismatched tier uses owner virtual transition. Shared tail calls TESObjectREFR load then process +0x3F8 with changeMask,currentFlags,owner.",
   "comment_repeatable": "",
-  "data_refs_count": 3,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "MobileObject_LoadModifiedForm",
-  "end_ea": "0x659EA3",
+  "end_ea": "0x659F1B",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
   "name": "MobileObject_LoadModifiedForm",
   "segment": ".text",
-  "sha256": "4aac93493b368d8d54adc2584b6ac28c9fe29ae740d17d75e8db82029f06360e",
-  "size": 531,
+  "sha256": "856aab687593b00ca945ea2a6d6f78cc8ecd99d98ffc0db8eea88de2037ae9d5",
+  "size": 651,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x659C90",
-  "type": "int __userpurge@<eax>(_DWORD *@<ecx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>, int, int)",
-  "xrefs_from_count": 208,
+  "total_chunk_size": 722,
+  "type": "void __thiscall(MobileObject *self, unsigned int changeMask, unsigned int currentFlags)",
+  "xrefs_from_count": 287,
   "xrefs_to_count": 4
 }

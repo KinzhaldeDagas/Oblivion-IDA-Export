@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x784B30",
-    "line": "push    esi",
+    "line": "push    esi; vector<float> uninitialized-fill primitive: constructs count four-byte float elements at destination from *value and returns destination+count. Identified from Oblivion call shape and four-byte stride.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784B31",
-    "line": "mov     esi, [esp+4+arg_4]",
+    "line": "mov     esi, [esp+4+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x784B38",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x784B42",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,5 +1,5 @@
 // attributes: thunk
-void __thiscall sub_722700(char **this, NiGeometry *a2, _DWORD **a3)
+void __thiscall j_NiGeometry_CopyMembersForClone(NiGeometry *this, NiGeometry *dest, void *cloningProcess)
 {
-  sub_723020(this, a2, a3);
+  NiGeometry_CopyMembersForClone(this, dest, cloningProcess); /*0x722700*/
 }

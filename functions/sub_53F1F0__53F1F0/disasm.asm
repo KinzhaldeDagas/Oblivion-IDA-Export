@@ -42,9 +42,9 @@
 0x53F25E: mov     ecx, esi
 0x53F260: call    edx
 0x53F262: lea     esi, [edi+8]
-0x53F265: push    ebx
-0x53F266: mov     ecx, esi
-0x53F268: call    sub_55E2A0
+0x53F265: push    ebx; incoming
+0x53F266: mov     ecx, esi; this
+0x53F268: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x53F26D: mov     ecx, [esi]
 0x53F26F: push    offset aLastPrecipRoot; "Last Precip Root"
 0x53F274: call    NiObjectNET_SetName
@@ -81,13 +81,13 @@
 0x53F2CC: push    0
 0x53F2CE: push    0
 0x53F2D0: push    esi
-0x53F2D1: call    sub_439EB0
+0x53F2D1: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x53F2D6: mov     ebp, eax
 0x53F2D8: test    ebp, ebp
 0x53F2DA: jz      loc_53F409
 0x53F2E0: push    offset aSkySnow_nif; "Sky\\Snow.NIF"
-0x53F2E5: push    esi; Str1
-0x53F2E6: call    __strcmp
+0x53F2E5: push    esi; left
+0x53F2E6: call    CRT_StricmpLocaleDispatch
 0x53F2EB: fldz
 0x53F2ED: mov     edx, [ebp+0]
 0x53F2F0: add     esp, 8
@@ -129,7 +129,7 @@
 0x53F361: mov     edx, [ebp+0B0h]
 0x53F367: mov     eax, [edx+esi*4]
 0x53F36A: push    eax
-0x53F36B: push    offset dword_B3FAB0
+0x53F36B: push    offset parent
 0x53F370: call    NiRTTI_Cast
 0x53F375: add     esp, 8
 0x53F378: test    eax, eax
@@ -141,7 +141,7 @@
 0x53F38A: mov     eax, [eax+0B0h]
 0x53F390: mov     eax, [eax]
 0x53F392: push    eax
-0x53F393: push    offset dword_B40864
+0x53F393: push    offset stru_B40864
 0x53F398: call    NiRTTI_Cast
 0x53F39D: add     esp, 8
 0x53F3A0: test    eax, eax
@@ -177,7 +177,7 @@
 0x53F3F8: push    eax
 0x53F3F9: call    edx
 0x53F3FB: mov     ecx, [ebx]; this
-0x53F3FD: call    NiAVObject_InitializePropertyState
+0x53F3FD: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x53F402: mov     ecx, [ebx]
 0x53F404: call    NiNode_UpdateDynamicEffectState
 0x53F409: mov     ecx, dword ptr [esp+28h+var_C]
@@ -189,3 +189,15 @@
 0x53F418: pop     ebx
 0x53F419: add     esp, 14h
 0x53F41C: retn    4
+0x9AFAA0: mov     eax, [ebp-10h]
+0x9AFAA3: push    eax
+0x9AFAA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAA9: pop     ecx
+0x9AFAAA: retn
+0x9AFAAB: mov     edx, [esp+arg_4]
+0x9AFAAF: lea     eax, [edx-18h]
+0x9AFAB2: mov     ecx, [edx-1Ch]
+0x9AFAB5: xor     ecx, eax
+0x9AFAB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFABC: mov     eax, offset stru_ADBFB0
+0x9AFAC1: jmp     ___CxxFrameHandler3

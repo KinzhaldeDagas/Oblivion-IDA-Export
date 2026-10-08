@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x452F10",
-    "line": "push    ebx",
+    "line": "push    ebx; MEF SAVE AUDIT 2026-10-08: PERF-18 producer: worldspace-keyed list prepends distinct allocated12-byte tuples {referenceID,signedcellX,signedcellY}. UnloadForm463C71 and LoadGame4660A2/4662C7 are observed producers. Preserve newest-first sequence and all ownership. Existing v57 PERF11 indexes different raw blob maps, not this coordinate list.",
     "mnemonic": "push",
     "size": 1
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x452F6A",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+referenceID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x452F75",
-    "line": "fld     [esp+0Ch+arg_8]",
+    "line": "fld     [esp+0Ch+worldX]; MEF SAVE AUDIT 2026-10-08: PERF-18 coordinate fidelity: FLD worldX; FISTP DWORD; SAR12, repeated forY at452F87. FISTP obeys the current x87 rounding mode; a decompiler integer cast is not proof of truncation. Index exact stored tuple coordinates instead of recomputing with C++ cast/floor.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x452F87",
-    "line": "fld     [esp+0Ch+arg_C]",
+    "line": "fld     [esp+0Ch+worldY]",
     "mnemonic": "fld",
     "size": 4
   },

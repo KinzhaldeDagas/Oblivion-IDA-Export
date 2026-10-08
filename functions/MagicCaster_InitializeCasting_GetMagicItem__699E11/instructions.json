@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x699E45",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x699E4B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; magicItem",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x699E4D",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },

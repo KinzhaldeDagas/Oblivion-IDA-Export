@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45F2E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified ABI: ECX save/load manager, stack existingFile/stem/mode, RET0Ch at45F78C. EBP carries mode through sprintf at45F3AD. aPortable resolver bridge duplicates five cdecl formatting arguments and passes EBP as sixth; offline compiled bridge test checks reads with10 backups and saves with1 versus10. Co-save allowance is SDK-derived: .obse adds one byte vs .ess, and backup sidecars need base+5+4*count+NUL within260.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x45F31B",
-    "line": "mov     ebx, [esp+648h+arg_0]",
+    "line": "mov     ebx, [esp+648h+existingFile]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x45F324",
-    "line": "mov     ebp, [esp+648h+arg_8]",
+    "line": "mov     ebp, [esp+648h+mode]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x45F35D",
-    "line": "mov     eax, [esp+648h+arg_4]",
+    "line": "mov     eax, [esp+648h+stem]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x45F38C",
-    "line": "mov     edx, ds:0B05564h",
+    "line": "mov     edx, ds:0B05564h; ContinueFromLastSave decode: Savegame_Rename builds full path as GameSaveRoot + SaveSubdir + stem + .ess using globals 0x00B3F280 and *(0x00B05564).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x45F39B",
-    "line": "push    offset word_B3F280",
+    "line": "push    offset unk_B3F280",
     "mnemonic": "push",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x45F3AD",
-    "line": "call    __sprintf",
+    "line": "call    __sprintf; Verified aPortable bounds surface: resolver filename sprintf; subsequent backup path is OldFilename[256], capped 10 iterations with .bak appends. Validate root+stem+40+NUL before entering unsafe backup concatenation, not only MAX_PATH filename length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -372,14 +372,8 @@
     "size": 2
   },
   {
-    "ea": "0x45F3BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x45F3C0",
-    "line": "mov     cl, byte ptr ds:word_B3F280[eax]",
+    "line": "mov     cl, byte ptr ds:unk_B3F280[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -424,12 +418,6 @@
     "line": "jmp     short loc_45F3E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x45F3DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x45F3E0",
@@ -624,12 +612,6 @@
     "size": 2
   },
   {
-    "ea": "0x45F449",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x45F450",
     "line": "xor     eax, eax",
     "mnemonic": "xor",
@@ -637,7 +619,7 @@
   },
   {
     "ea": "0x45F452",
-    "line": "mov     cl, byte ptr ds:word_B3F280[eax]",
+    "line": "mov     cl, byte ptr ds:unk_B3F280[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1014,12 +996,6 @@
     "size": 2
   },
   {
-    "ea": "0x45F508",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x45F510",
     "line": "mov     cl, [esp+eax+648h+OldFilename]",
     "mnemonic": "mov",
@@ -1126,12 +1102,6 @@
     "line": "jmp     short loc_45F550",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x45F54A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x45F550",
@@ -1405,7 +1375,7 @@
   },
   {
     "ea": "0x45F5E3",
-    "line": "mov     ebp, [esp+648h+arg_8]",
+    "line": "mov     ebp, [esp+648h+mode]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1735,7 +1705,7 @@
   },
   {
     "ea": "0x45F696",
-    "line": "push    eax",
+    "line": "push    eax; mode",
     "mnemonic": "push",
     "size": 1
   },
@@ -1747,25 +1717,25 @@
   },
   {
     "ea": "0x45F69E",
-    "line": "push    ecx",
+    "line": "push    ecx; stem",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45F69F",
-    "line": "push    eax",
+    "line": "push    eax; existingFile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45F6A0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45F6A2",
-    "line": "call    Savegame_Rename",
+    "line": "call    TESSaveLoadGame_ResolveSaveFile",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,31 +1747,31 @@
   },
   {
     "ea": "0x45F6AC",
-    "line": "push    0",
+    "line": "push    0; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45F6AE",
-    "line": "push    0",
+    "line": "push    0; stem",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45F6B0",
-    "line": "push    0",
+    "line": "push    0; existingFile",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45F6B2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45F6B4",
-    "line": "call    Savegame_Rename",
+    "line": "call    TESSaveLoadGame_ResolveSaveFile",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1939,7 @@
   },
   {
     "ea": "0x45F723",
-    "line": "push    0",
+    "line": "push    0; MEF v58 VERIFIED mode translation: ResolveSaveFile load flag1 does NOT mean BSFile mode1. This branch pushes constructor mode0;4309AE stores it atstream+20. BSFile_OpenFile42FE92/42FEAF chooses rb for mode0. Existing PERF4 and new SR1 native-read eligibility must require +20==0.",
     "mnemonic": "push",
     "size": 2
   },
@@ -2182,5 +2152,131 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AE510",
+    "line": "mov     eax, [ebp-630h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE516",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE517",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE51C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE51D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE51E",
+    "line": "mov     eax, [ebp-630h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE524",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE525",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE52A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE52B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE52C",
+    "line": "mov     edx, [esp+stem]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE530",
+    "line": "lea     eax, [edx-638h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE536",
+    "line": "mov     ecx, [edx-63Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE53C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE53E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE543",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE546",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE549",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE54B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE550",
+    "line": "mov     eax, offset stru_ADAD4C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE555",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

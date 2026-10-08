@@ -11,9 +11,9 @@
 0x4FAAA4: jz      short loc_4FAABE
 0x4FAAA6: mov     eax, [edi+18h]
 0x4FAAA9: mov     esi, [esi+4]
-0x4FAAAC: push    ebx; Str2
-0x4FAAAD: push    eax; Str1
-0x4FAAAE: call    __strcmp
+0x4FAAAC: push    ebx; right
+0x4FAAAD: push    eax; left
+0x4FAAAE: call    CRT_StricmpLocaleDispatch
 0x4FAAB3: add     esp, 8
 0x4FAAB6: test    eax, eax
 0x4FAAB8: jz      short loc_4FAAD0

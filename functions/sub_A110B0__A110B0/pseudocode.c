@@ -1,4 +1,4 @@
-BSStringT *sub_A110B0()
+NiRTTI *sub_A110B0()
 {
-  return sub_70E220(&stru_B431D8, "SkyShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor((NiRTTI *)&qword_B43178[0xC], "SkyShader", &MEMORY[0xB4257C]); /*0xa110c4*/
 }

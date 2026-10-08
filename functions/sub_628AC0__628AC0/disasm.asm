@@ -10,17 +10,17 @@
 0x628AD9: cmp     edi, 30h ; '0'
 0x628ADC: jnz     short loc_628B03
 0x628ADE: sub     esp, 8
-0x628AE1: fstp    [esp+10h+var_10]; double
+0x628AE1: fstp    qword ptr [esp+10h+var_10]; double
 0x628AE4: call    _floor
 0x628AE9: fstp    [esp+10h+arg_4]
 0x628AED: add     esp, 8
 0x628AF0: fld     [esp+8+arg_4]
-0x628AF4: call    Double_To_SInt32
+0x628AF4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x628AF9: fld     [esp+8+arg_8]
 0x628AFD: mov     [esi+298h], eax
 0x628B03: mov     eax, [esp+8+arg_0]
 0x628B07: push    ecx
-0x628B08: fstp    dword ptr [esp+0Ch+var_10+4]; float
+0x628B08: fstp    [esp+0Ch+var_10+4]; float
 0x628B0B: push    edi; int
 0x628B0C: push    eax; int
 0x628B0D: mov     ecx, esi

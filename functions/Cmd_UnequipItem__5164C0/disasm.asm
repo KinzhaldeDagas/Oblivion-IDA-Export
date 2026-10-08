@@ -32,7 +32,7 @@
 0x516514: push    ecx; a1
 0x516515: mov     dword ptr [esp+54h+var_20], ebx
 0x516519: mov     [esp+54h+var_18], ebx
-0x51651D: call    Script_ExtractArgs
+0x51651D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x516522: add     esp, 24h
 0x516525: test    al, al
 0x516527: jnz     short loc_51653C
@@ -86,7 +86,7 @@
 0x5165B2: jz      loc_516780
 0x5165B8: push    ebx
 0x5165B9: mov     ecx, esi
-0x5165BB: call    sub_41F370
+0x5165BB: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x5165C0: mov     eax, [esp+30h+var_1C]
 0x5165C4: mov     ecx, dword ptr [esp+30h+var_20]
 0x5165C8: push    ebx
@@ -107,7 +107,7 @@
 0x5165FA: push    edx
 0x5165FB: push    eax; a1
 0x5165FC: mov     [esp+38h+var_4], ebx
-0x516600: call    TESFullName_GetNameForForm
+0x516600: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x516605: add     esp, 4
 0x516608: push    eax; ArgList
 0x516609: lea     ecx, [esp+38h+string]
@@ -184,7 +184,7 @@
 0x5166DD: mov     edx, [esp+30h+var_1C]
 0x5166E1: mov     ecx, [eax]
 0x5166E3: push    edx
-0x5166E4: call    sub_41F370
+0x5166E4: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x5166E9: mov     al, 1
 0x5166EB: mov     ecx, [esp+30h+var_C]
 0x5166EF: mov     large fs:0, ecx
@@ -231,7 +231,7 @@
 0x516768: push    ecx
 0x516769: mov     ecx, ebx
 0x51676B: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x516773: call    sub_41F370
+0x516773: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x516778: mov     ecx, [esi]
 0x51677A: push    ebx
 0x51677B: call    BSSimpleList_PushFront
@@ -244,3 +244,22 @@
 0x516790: pop     ebx
 0x516791: add     esp, 20h
 0x516794: retn
+0x9B72B0: lea     ecx, [ebp-14h]; void *
+0x9B72B3: jmp     BSStringT_Clear
+0x9B72B8: mov     eax, [ebp-14h]
+0x9B72BB: push    eax
+0x9B72BC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B72C1: pop     ecx
+0x9B72C2: retn
+0x9B72C3: mov     eax, [ebp-14h]
+0x9B72C6: push    eax
+0x9B72C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B72CC: pop     ecx
+0x9B72CD: retn
+0x9B72CE: mov     edx, [esp+arg_4]
+0x9B72D2: lea     eax, [edx-20h]
+0x9B72D5: mov     ecx, [edx-24h]
+0x9B72D8: xor     ecx, eax
+0x9B72DA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B72DF: mov     eax, offset stru_AE1EF4
+0x9B72E4: jmp     ___CxxFrameHandler3

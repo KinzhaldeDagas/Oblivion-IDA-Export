@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7A0CD0",
-    "line": "push    edi",
+    "line": "push    edi; Destroys [first,last) guide-LOD levels. Every 16-byte element owns a vector of 0x30 SFrondGuide copies, so each inner guide range is deep-destroyed before its allocation is freed.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0CD1",
-    "line": "mov     edi, [esp+4+arg_0]",
+    "line": "mov     edi, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0CD5",
-    "line": "cmp     edi, [esp+4+arg_4]",
+    "line": "cmp     edi, [esp+4+last]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7A0CF8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7A0D14",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7A0D28",
-    "line": "cmp     edi, [esp+10h+arg_4]",
+    "line": "cmp     edi, [esp+10h+last]",
     "mnemonic": "cmp",
     "size": 4
   },

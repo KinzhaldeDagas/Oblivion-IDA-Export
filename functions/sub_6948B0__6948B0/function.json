@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x6948B0",
+      "0x69497F"
+    ]
+  ],
+  "chunks_sha256": "77c1285253053d593903250096c1c5356bc02dee1c162e4c790b4db77d7381b3",
+  "comment_regular": "Tear down a LightEffect transient point light by backing-light identity: remove its full-list ShadowSceneLight, detach it from the actor scene graph, clear actor extra-data type 0x49, release the LightEffect smart pointer, and decrement the active magic-light count.",
+  "comment_repeatable": "Tear down a LightEffect transient point light by backing-light identity: remove its full-list ShadowSceneLight, detach it from the actor scene graph, clear actor extra-data type 0x49, release the LightEffect smart pointer, and decrement the active magic-light count.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_6948B0",
+  "display_name": "LightEffect_TeardownTransientPointLight",
   "end_ea": "0x69497F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6948B0",
+  "name": "LightEffect_TeardownTransientPointLight",
   "segment": ".text",
   "sha256": "77c1285253053d593903250096c1c5356bc02dee1c162e4c790b4db77d7381b3",
   "size": 207,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6948B0",
-  "type": "void __thiscall(int *this)",
+  "total_chunk_size": 207,
+  "type": "void __thiscall(LightEffect_DecodedLayout *self)",
   "xrefs_from_count": 103,
   "xrefs_to_count": 4
 }

@@ -12,9 +12,9 @@
 0x6FE039: mov     eax, [edi+8]
 0x6FE03C: test    eax, eax
 0x6FE03E: jz      short loc_6FE056
-0x6FE040: push    eax; Str2
-0x6FE041: push    esi; Str1
-0x6FE042: call    __strcmp
+0x6FE040: push    eax; right
+0x6FE041: push    esi; left
+0x6FE042: call    CRT_StricmpLocaleDispatch
 0x6FE047: add     esp, 8
 0x6FE04A: neg     eax
 0x6FE04C: sbb     eax, eax

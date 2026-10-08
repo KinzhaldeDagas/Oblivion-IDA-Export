@@ -1,4 +1,4 @@
-0x404940: sub     esp, 20Ch
+0x404940: sub     esp, 20Ch; Enumerates CD-ROM drives and selects the first whose root contains OblivionLauncher.exe; stores its drive letter in byte_B33394.
 0x404946: mov     eax, ___security_cookie
 0x40494B: xor     eax, esp
 0x40494D: mov     [esp+20Ch+var_4], eax
@@ -11,13 +11,13 @@
 0x404966: xor     bl, bl
 0x404968: xor     edi, edi
 0x40496A: cmp     [esp+214h+Buffer], bl
-0x40496E: mov     byte_B33394, bl
+0x40496E: mov     byte ptr unk_B33394, bl
 0x404974: jz      short loc_4049E7
 0x404976: push    ebp
 0x404977: mov     ebp, ds:GetDriveTypeA
 0x40497D: push    esi
 0x40497E: mov     edi, edi
-0x404980: cmp     byte_B33394, 0
+0x404980: cmp     byte ptr unk_B33394, 0
 0x404987: jnz     short loc_4049E5
 0x404989: lea     esi, [esp+edi+21Ch+Buffer]
 0x40498D: push    esi; lpRootPathName
@@ -37,7 +37,7 @@
 0x4049BA: test    eax, eax
 0x4049BC: jnz     short loc_4049C5
 0x4049BE: mov     al, [esi]
-0x4049C0: mov     byte_B33394, al
+0x4049C0: mov     byte ptr unk_B33394, al
 0x4049C5: mov     bl, 1
 0x4049C7: mov     eax, esi
 0x4049C9: lea     edx, [eax+1]

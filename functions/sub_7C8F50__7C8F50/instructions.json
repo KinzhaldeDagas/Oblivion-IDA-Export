@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C8F50",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion-authoritative ShadowLightShader initialization/reset: initializes the base shader, releases cached vertex/pixel programs and 419 pooled passes, releases auxiliary maps, then clears four 0x68C-byte pass/constant work tables.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7C8F53",
-    "line": "call    sub_8025F0",
+    "line": "call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7C8F5E",
-    "line": "mov     edi, offset dword_B45290",
+    "line": "mov     edi, offset unk_B45290",
     "mnemonic": "mov",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7C8F8A",
-    "line": "cmp     edi, offset dword_B45494",
+    "line": "cmp     edi, offset unk_B45494",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7C8F92",
-    "line": "mov     edi, offset dword_B45088",
+    "line": "mov     edi, offset unk_B45088",
     "mnemonic": "mov",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7C8FBE",
-    "line": "cmp     edi, offset dword_B4528C",
+    "line": "cmp     edi, offset unk_B4528C",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7C8FC6",
-    "line": "mov     esi, offset dword_B455A0",
+    "line": "mov     esi, offset g_ShadowLightPassBySelector",
     "mnemonic": "mov",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7C8FDB",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7C8FE9",
-    "line": "cmp     esi, offset dword_B45C2C",
+    "line": "cmp     esi, offset unk_B45C2C",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7C8FF1",
-    "line": "mov     edi, offset dword_B45018",
+    "line": "mov     edi, offset unk_B45018",
     "mnemonic": "mov",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x7C9025",
-    "line": "mov     edi, offset dword_B45518",
+    "line": "mov     edi, offset unk_B45518",
     "mnemonic": "mov",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x7C9057",
-    "line": "cmp     edi, offset dword_B4555C",
+    "line": "cmp     edi, offset unk_B4555C",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x7C9066",
-    "line": "push    offset dword_B43B20",
+    "line": "push    offset unk_B43B20",
     "mnemonic": "push",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7C9077",
-    "line": "push    offset dword_B441B0",
+    "line": "push    offset unk_B441B0",
     "mnemonic": "push",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x7C9088",
-    "line": "push    offset dword_B43490",
+    "line": "push    offset unk_B43490",
     "mnemonic": "push",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x7C9099",
-    "line": "push    offset dword_B44840",
+    "line": "push    offset unk_B44840",
     "mnemonic": "push",
     "size": 5
   },

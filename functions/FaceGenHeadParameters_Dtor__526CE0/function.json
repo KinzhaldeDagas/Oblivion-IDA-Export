@@ -1,19 +1,48 @@
 {
-  "callees_count": 10,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "FaceGenHeadParameters_Dtor",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
+  "callers_count": 16,
+  "chunks": [
+    [
+      "0x526CE0",
+      "0x526DAA"
+    ],
+    [
+      "0x431320",
+      "0x431331"
+    ],
+    [
+      "0x521CB0",
+      "0x521CC1"
+    ],
+    [
+      "0x521CD0",
+      "0x521CE1"
+    ],
+    [
+      "0x9B80A0",
+      "0x9B80F5"
+    ]
+  ],
+  "chunks_sha256": "6fb1798124e2eacae7f0cc95eb7c21e62953952ab4575a2615b8f5af8fdb9ecb",
+  "comment_regular": "Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+  "comment_repeatable": "Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "FaceGenRenderState_Destruct",
   "end_ea": "0x526DAA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "FaceGenHeadParameters_Dtor",
+  "name": "FaceGenRenderState_Destruct",
   "segment": ".text",
   "sha256": "e5e90b3c99fa5eee58b22c0e098c731cdb77ab2f572487aba2e1cb84c183adb4",
   "size": 202,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x526CE0",
-  "type": "void __thiscall(unsigned int *this)",
-  "xrefs_from_count": 68,
+  "total_chunk_size": 338,
+  "type": "void __thiscall(FaceGenRenderState *this)",
+  "xrefs_from_count": 115,
   "xrefs_to_count": 16
 }

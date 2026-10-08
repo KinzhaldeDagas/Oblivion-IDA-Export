@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4FF053",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x4FF05B",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x4FF063",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FF064",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -936,12 +936,6 @@
     "size": 2
   },
   {
-    "ea": "0x4FF21A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4FF220",
     "line": "push    200h",
     "mnemonic": "push",
@@ -1027,7 +1021,7 @@
   },
   {
     "ea": "0x4FF250",
-    "line": "lea     edi, [esp+1910h+var_14CC]",
+    "line": "lea     edi, [esp+1910h+source]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1177,7 +1171,7 @@
   },
   {
     "ea": "0x4FF2A9",
-    "line": "lea     ebp, [esp+1910h+var_14CC]",
+    "line": "lea     ebp, [esp+1910h+source]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1192,12 +1186,6 @@
     "line": "jmp     short loc_4FF2C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4FF2B6",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x4FF2C0",
@@ -1291,7 +1279,7 @@
   },
   {
     "ea": "0x4FF304",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -1303,19 +1291,19 @@
   },
   {
     "ea": "0x4FF30C",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FF30D",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FF30E",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

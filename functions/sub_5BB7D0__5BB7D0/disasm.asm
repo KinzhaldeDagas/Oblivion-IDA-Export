@@ -1,10 +1,10 @@
-0x5BB7D0: call    Tile_SetFloat
+0x5BB7D0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB7D5: fldz
 0x5BB7D7: push    ecx
 0x5BB7D8: mov     ecx, [ebx+40h]; this
-0x5BB7DB: fstp    [esp-4+a3]; a3
-0x5BB7DE: push    0FB3h; a2
-0x5BB7E3: call    Tile_SetFloat
+0x5BB7DB: fstp    [esp-4+a3]; value
+0x5BB7DE: push    0FB3h; propertyCode
+0x5BB7E3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BB7E8: push    0
 0x5BB7EA: mov     ecx, ebx
 0x5BB7EC: call    sub_5B8FC0
@@ -24,7 +24,7 @@
 0x5BB816: mov     ecx, [ebx+28h]
 0x5BB819: push    0FAEh
 0x5BB81E: call    Tile_GetFloat
-0x5BB823: call    Double_To_SInt32
+0x5BB823: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BB828: cmp     al, 5
 0x5BB82A: jg      short loc_5BB84A
 0x5BB82C: movsx   eax, al

@@ -1,1 +1,1 @@
-ISurrogateVtbl_0
+typedef ISurrogateVtbl ISurrogateVtbl_0;

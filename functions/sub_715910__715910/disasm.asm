@@ -1,5 +1,5 @@
-0x715910: push    ebx
-0x715911: mov     ebx, dword ptr [esp+4+ArgList]
+0x715910: push    ebx; Formats NiTimeController cycle type: 0 LOOP, 1 REVERSE, 2 CLAMP.
+0x715911: mov     ebx, [esp+4+ArgList]
 0x715915: push    esi
 0x715916: mov     eax, ebx
 0x715918: push    edi

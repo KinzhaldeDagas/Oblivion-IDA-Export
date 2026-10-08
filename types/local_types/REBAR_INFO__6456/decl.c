@@ -1,1 +1,34 @@
-REBAR_INFO
+struct REBAR_INFO
+{
+COLORREF clrBk;
+COLORREF clrText;
+COLORREF clrBtnText;
+COLORREF clrBtnFace;
+HIMAGELIST himl;
+UINT uNumBands;
+UINT uNumRows;
+HWND hwndSelf;
+HWND hwndToolTip;
+HWND hwndNotify;
+HFONT hDefaultFont;
+HFONT hFont;
+SIZE imageSize;
+DWORD dwStyle;
+DWORD orgStyle;
+SIZE calcSize;
+BOOL bUnicode;
+BOOL DoRedraw;
+UINT fStatus;
+HCURSOR hcurArrow;
+HCURSOR hcurHorz;
+HCURSOR hcurVert;
+HCURSOR hcurDrag;
+INT iVersion;
+POINT dragStart;
+POINT dragNow;
+INT iOldBand;
+INT ihitoffset;
+INT ichevronhotBand;
+INT iGrabbedBand;
+HDPA bands;
+};

@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x488F75",
-    "line": "push    1Dh",
+    "line": "push    1Dh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x488F77",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x488F79",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -574,5 +574,821 @@
     "line": "fld     [esp+20h+var_10]",
     "mnemonic": "fld",
     "size": 4
+  },
+  {
+    "ea": "0x488F99",
+    "line": "cmp     [esp+1Ch+var_8], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x488F9E",
+    "line": "jz      loc_4890B0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x488FA4",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x488FA6",
+    "line": "jz      loc_4890B0",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x488FAC",
+    "line": "cmp     dword ptr [esi+34h], 3",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x488FB0",
+    "line": "jnz     short loc_48902E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x488FB2",
+    "line": "fild    dword ptr [ebx+4]",
+    "mnemonic": "fild",
+    "size": 3
+  },
+  {
+    "ea": "0x488FB5",
+    "line": "fstp    [esp+1Ch+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x488FB9",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x488FBB",
+    "line": "fcomp   [esp+1Ch+var_C]",
+    "mnemonic": "fcomp",
+    "size": 4
+  },
+  {
+    "ea": "0x488FBF",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x488FC1",
+    "line": "test    ah, 44h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x488FC4",
+    "line": "jnp     loc_488EF4",
+    "mnemonic": "jnp",
+    "size": 6
+  },
+  {
+    "ea": "0x488FCA",
+    "line": "add     esi, 24h ; '$'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x488FCD",
+    "line": "jz      loc_488EF4",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x48902E",
+    "line": "mov     ecx, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x489031",
+    "line": "push    ecx; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x489032",
+    "line": "call    TESForm_GetEnchantableFormCharge",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x489037",
+    "line": "movzx   edx, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x48903A",
+    "line": "mov     eax, [esi+24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48903D",
+    "line": "mov     [esp+20h+var_8], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x489041",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x489043",
+    "line": "lea     ecx, [esi+24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x489046",
+    "line": "fild    [esp+20h+var_8]",
+    "mnemonic": "fild",
+    "size": 4
+  },
+  {
+    "ea": "0x48904A",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48904D",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x48904F",
+    "line": "fstp    [esp+20h+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x489053",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x489055",
+    "line": "mov     eax, [edi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x489058",
+    "line": "fstp    [esp+20h+var_C]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x48905C",
+    "line": "cmp     byte ptr [eax+4], 15h",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x489060",
+    "line": "jnz     short loc_489082",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x489062",
+    "line": "mov     ecx, (offset flt_B37ED0+3A8h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x489067",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48906C",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x48906E",
+    "line": "fmul    [esp+20h+var_C]",
+    "mnemonic": "fmul",
+    "size": 4
+  },
+  {
+    "ea": "0x489072",
+    "line": "fstp    [esp+20h+var_10]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x489076",
+    "line": "fild    dword ptr [ebx+4]",
+    "mnemonic": "fild",
+    "size": 3
+  },
+  {
+    "ea": "0x489079",
+    "line": "fadd    [esp+20h+var_10]",
+    "mnemonic": "fadd",
+    "size": 4
+  },
+  {
+    "ea": "0x48907D",
+    "line": "jmp     loc_488EF0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x489082",
+    "line": "fld     [esp+20h+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x489086",
+    "line": "mov     ecx, [ebx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x489089",
+    "line": "sub     esp, 0Ch",
+    "mnemonic": "sub",
+    "size": 3
+  },
+  {
+    "ea": "0x48908C",
+    "line": "fstp    [esp+2Ch+var_24]; float",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x489090",
+    "line": "mov     [esp+2Ch+var_8], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x489094",
+    "line": "fld     [esp+2Ch+var_10]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x489098",
+    "line": "fstp    [esp+2Ch+var_28]; float",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x48909C",
+    "line": "fild    [esp+2Ch+var_8]",
+    "mnemonic": "fild",
+    "size": 4
+  },
+  {
+    "ea": "0x4890A0",
+    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x4890A3",
+    "line": "call    Calc_EnchantedWeaponStaffValue",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4890A8",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4890AB",
+    "line": "jmp     loc_488EF0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4890B0",
+    "line": "fild    dword ptr [ebx+4]",
+    "mnemonic": "fild",
+    "size": 3
+  },
+  {
+    "ea": "0x4890B3",
+    "line": "jmp     loc_488EF0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x4890B8",
+    "line": "mov     esi, [esp+20h+targetNpc]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4890BC",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4890C2",
+    "line": "push    esi; targetNpc",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4890C3",
+    "line": "call    calculateItemMultiplicationFromDisposition",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4890C8",
+    "line": "fstp    dword ptr [esp+20h]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4890CC",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4890D2",
+    "line": "fild    dword ptr [ecx+11Ch]",
+    "mnemonic": "fild",
+    "size": 6
+  },
+  {
+    "ea": "0x4890D8",
+    "line": "push    1Dh; actorValue",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4890DA",
+    "line": "fmul    qword ptr ds:0A3D8E8h",
+    "mnemonic": "fmul",
+    "size": 6
+  },
+  {
+    "ea": "0x4890E0",
+    "line": "fadd    dword ptr [esp+24h]",
+    "mnemonic": "fadd",
+    "size": 4
+  },
+  {
+    "ea": "0x4890E4",
+    "line": "fstp    dword ptr [esp+24h]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4890E8",
+    "line": "fld     dword ptr [esp+24h]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x4890EC",
+    "line": "fmul    [esp+24h+var_10]",
+    "mnemonic": "fmul",
+    "size": 4
+  },
+  {
+    "ea": "0x4890F0",
+    "line": "fstp    [esp+24h+var_10]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4890F4",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4890F9",
+    "line": "cmp     eax, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x4890FC",
+    "line": "jge     short loc_48912E",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x4890FE",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x489100",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x489102",
+    "line": "call    ContainerEntryExtraData_GetHealth",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x489107",
+    "line": "fstp    dword ptr [esp+20h]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x48910B",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x48910D",
+    "line": "fld     dword ptr [esp+20h]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x489111",
+    "line": "fcom    st(1)",
+    "mnemonic": "fcom",
+    "size": 2
+  },
+  {
+    "ea": "0x489113",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x489115",
+    "line": "fstp    st(1)",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x489117",
+    "line": "test    ah, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x48911A",
+    "line": "jnz     short loc_48912C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48911C",
+    "line": "fmul    qword ptr ds:0A3B150h",
+    "mnemonic": "fmul",
+    "size": 6
+  },
+  {
+    "ea": "0x489122",
+    "line": "fmul    [esp+20h+var_10]",
+    "mnemonic": "fmul",
+    "size": 4
+  },
+  {
+    "ea": "0x489126",
+    "line": "fstp    [esp+20h+var_10]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x48912A",
+    "line": "jmp     short loc_48912E",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48912C",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x48912E",
+    "line": "fld     [esp+20h+var_10]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x489132",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x489133",
+    "line": "fstp    [esp+24h+var_24]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x489136",
+    "line": "call    sub_484370",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48913B",
+    "line": "fstp    [esp+24h+var_10]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x48913F",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x489142",
+    "line": "fld     [esp+20h+var_10]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x489146",
+    "line": "fld     [esp+20h+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x48914A",
+    "line": "fcompp",
+    "mnemonic": "fcompp",
+    "size": 2
+  },
+  {
+    "ea": "0x48914C",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x48914E",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x489151",
+    "line": "jnp     short loc_489165",
+    "mnemonic": "jnp",
+    "size": 2
+  },
+  {
+    "ea": "0x489153",
+    "line": "mov     ecx, ds:0B333C4h; this",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x489159",
+    "line": "push    1Dh; actorValue",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x48915B",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x489160",
+    "line": "cmp     eax, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x489163",
+    "line": "jl      short loc_48916D",
+    "mnemonic": "jl",
+    "size": 2
+  },
+  {
+    "ea": "0x489165",
+    "line": "fld     [esp+20h+var_C]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x489169",
+    "line": "fstp    [esp+20h+var_10]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x48916D",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48916F",
+    "line": "call    sub_5FAA70",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x489174",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x489176",
+    "line": "mov     [esp+20h], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48917A",
+    "line": "fild    dword ptr [esp+20h]",
+    "mnemonic": "fild",
+    "size": 4
+  },
+  {
+    "ea": "0x48917E",
+    "line": "jge     short loc_489186",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x489180",
+    "line": "fadd    dword ptr ds:0A2FC78h",
+    "mnemonic": "fadd",
+    "size": 6
+  },
+  {
+    "ea": "0x489186",
+    "line": "fstp    dword ptr [esp+20h]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x48918A",
+    "line": "fld     [esp+20h+var_10]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x48918E",
+    "line": "fld     dword ptr [esp+20h]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x489192",
+    "line": "fcom    st(1)",
+    "mnemonic": "fcom",
+    "size": 2
+  },
+  {
+    "ea": "0x489194",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x489196",
+    "line": "test    ah, 5",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x489199",
+    "line": "jp      short loc_4891AF",
+    "mnemonic": "jp",
+    "size": 2
+  },
+  {
+    "ea": "0x48919B",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48919C",
+    "line": "fstp    st(1)",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x48919E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48919F",
+    "line": "fstp    [esp+18h+var_10]",
+    "mnemonic": "fstp",
+    "size": 4
+  },
+  {
+    "ea": "0x4891A3",
+    "line": "fld     [esp+18h+var_10]",
+    "mnemonic": "fld",
+    "size": 4
+  },
+  {
+    "ea": "0x4891A7",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4891A8",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4891A9",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4891AC",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4891AF",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4891B0",
+    "line": "fstp    st",
+    "mnemonic": "fstp",
+    "size": 2
+  },
+  {
+    "ea": "0x4891B2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4891B3",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4891B4",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4891B5",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4891B8",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

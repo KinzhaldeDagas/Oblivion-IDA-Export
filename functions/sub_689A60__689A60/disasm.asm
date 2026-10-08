@@ -1,4 +1,4 @@
-0x689A60: push    0FFFFFFFFh
+0x689A60: push    0FFFFFFFFh; Verified copies low-path route entries into newly allocated TravelPathNode records. Each clone is set to kind 0 and stores the route TESObjectREFR*; these references remain non-owned.
 0x689A62: push    offset SEH_6CED50
 0x689A67: mov     eax, large fs:0
 0x689A6D: push    eax
@@ -13,14 +13,14 @@
 0x689A7D: lea     eax, [esp+28h+var_C]
 0x689A81: mov     large fs:0, eax
 0x689A87: mov     [esp+28h+var_14], ecx
-0x689A8B: call    sub_689A00
-0x689A90: mov     eax, [esp+28h+arg_0]
+0x689A8B: call    TravelPath_ClearNodes; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.
+0x689A90: mov     eax, [esp+28h+sourceNodes]
 0x689A94: xor     ebp, ebp
 0x689A96: xor     ebx, ebx
 0x689A98: cmp     eax, ebp
-0x689A9A: mov     [esp+28h+arg_0], eax
+0x689A9A: mov     [esp+28h+sourceNodes], eax
 0x689A9E: jz      loc_689B95
-0x689AA4: mov     esi, [esp+28h+arg_0]
+0x689AA4: mov     esi, [esp+28h+sourceNodes]
 0x689AA8: cmp     [esi+4], ebp
 0x689AAB: jnz     short loc_689AB5
 0x689AAD: cmp     [esi], ebp
@@ -32,19 +32,19 @@
 0x689AC3: cmp     eax, ebp
 0x689AC5: mov     [esp+28h+var_4], ebp
 0x689AC9: jz      short loc_689AD6
-0x689ACB: mov     ecx, eax
-0x689ACD: call    sub_68B0C0
+0x689ACB: mov     ecx, eax; this
+0x689ACD: call    TravelPathNode_Init; Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.
 0x689AD2: mov     edi, eax
 0x689AD4: jmp     short loc_689AD8
 0x689AD6: xor     edi, edi
-0x689AD8: push    ebp
-0x689AD9: mov     ecx, edi
+0x689AD8: push    ebp; kind
+0x689AD9: mov     ecx, edi; this
 0x689ADB: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x689AE3: call    sub_68B1D0
+0x689AE3: call    TravelPathNode_SetKind; Verified kind setter writes the low byte at +4; when switching away from kind 1 it frees the owned NiPoint3* payload, then clears payload and stores the new kind. Observed kinds are 0=reference, 1=owned position, initial sentinel 0xFF.
 0x689AE8: mov     eax, [esi]
-0x689AEA: push    eax
-0x689AEB: mov     ecx, edi
-0x689AED: call    sub_68B100
+0x689AEA: push    eax; reference
+0x689AEB: mov     ecx, edi; this
+0x689AED: call    TravelPathNode_SetReference; Verified stores a TESObjectREFR* into payload +0 only when kind==0. The route node does not take an extra reference to the TESObjectREFR.
 0x689AF2: cmp     ebx, ebp
 0x689AF4: jz      short loc_689B3E
 0x689AF6: cmp     edi, ebp
@@ -103,10 +103,10 @@
 0x689B7B: mov     [esi+4], eax
 0x689B7E: jmp     short loc_689B82
 0x689B80: mov     [esi], edi
-0x689B82: mov     ecx, [esp+28h+arg_0]
+0x689B82: mov     ecx, [esp+28h+sourceNodes]
 0x689B86: mov     eax, [ecx+4]
 0x689B89: cmp     eax, ebp
-0x689B8B: mov     [esp+28h+arg_0], eax
+0x689B8B: mov     [esp+28h+sourceNodes], eax
 0x689B8F: jnz     loc_689AA4
 0x689B95: mov     ecx, [esp+28h+var_C]
 0x689B99: mov     large fs:0, ecx
@@ -117,3 +117,15 @@
 0x689BA4: pop     ebx
 0x689BA5: add     esp, 14h
 0x689BA8: retn    4
+0x9AFAA0: mov     eax, [ebp-10h]
+0x9AFAA3: push    eax
+0x9AFAA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAA9: pop     ecx
+0x9AFAAA: retn
+0x9AFAAB: mov     edx, [esp+arg_4]
+0x9AFAAF: lea     eax, [edx-18h]
+0x9AFAB2: mov     ecx, [edx-1Ch]
+0x9AFAB5: xor     ecx, eax
+0x9AFAB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFABC: mov     eax, offset stru_ADBFB0
+0x9AFAC1: jmp     ___CxxFrameHandler3

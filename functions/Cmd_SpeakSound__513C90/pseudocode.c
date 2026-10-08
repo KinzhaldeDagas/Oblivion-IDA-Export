@@ -9,67 +9,67 @@ char __usercall Cmd_SpeakSound@<al>(
         int a8,
         UInt32 *a9)
 {
-  int v11; // eax
-  Actor *v13; // eax
-  Actor *v14; // esi
-  int v16; // [esp+1Ch] [ebp+0h] BYREF
-  unsigned int v17; // [esp+20h] [ebp+4h] BYREF
+  int v9; // eax
+  Actor *v11; // eax
+  Actor *v12; // esi
+  int v14; // [esp+1Ch] [ebp+0h] BYREF
+  unsigned int v15; // [esp+20h] [ebp+4h] BYREF
   UInt32 *a3; // [esp+24h] [ebp+8h]
-  BSStringT v19; // [esp+28h] [ebp+Ch] BYREF
+  BSStringT v17; // [esp+28h] [ebp+Ch] BYREF
   TESObjectREFR *a4; // [esp+30h] [ebp+14h] BYREF
   char ArgList[1024]; // [esp+34h] [ebp+18h] BYREF
-  unsigned int v22; // [esp+440h] [ebp+424h]
+  unsigned int v20; // [esp+440h] [ebp+424h]
 
-  a3 = a9;
-  a4 = arg8;
-  v19.m_data = 0;
-  v19.m_dataLen = 0;
-  v19.m_bufLen = 0;
-  v22 = 0;
-  v17 = 0;
-  v16 = 0x32;
-  if ( !Script_ExtractArgs(a1, arg4, a9, arg8, a5, a6, l, ArgList, &v17, &v16) )
-    goto LABEL_17;
-  v11 = 0;
-  while ( ArgList[v11++] )
-    ;
-  if ( arg8
-    && (v13 = (Actor *)OblivionDynamicCast(
+  a3 = a9; /*0x513cf5*/
+  a4 = arg8; /*0x513cfb*/
+  v17.m_data = 0; /*0x513d06*/
+  v17.m_dataLen = 0; /*0x513d0a*/
+  v17.m_bufLen = 0; /*0x513d0f*/
+  v20 = 0; /*0x513d32*/
+  v15 = 0; /*0x513d39*/
+  v14 = 0x32; /*0x513d3d*/
+  if ( !Script_ExtractArgs(a1, arg4, a9, arg8, a5, a6, l, ArgList, &v15, &v14) ) /*0x513d45*/
+    goto LABEL_17; /*0x513d45*/
+  v9 = 0; /*0x513d55*/
+  while ( ArgList[v9++] ) /*0x513d60*/
+    ; /*0x513d57*/
+  if ( arg8 /*0x513d94*/
+    && (v11 = (Actor *)OblivionDynamicCast(
                          arg8,
                          0,
                          (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                          &Actor `RTTI Type Descriptor',
                          0),
-        (v14 = v13) != 0)
-    && v13->members.super.process
-    && !Actor::GetProcessLevel(v13) )
+        (v12 = v11) != 0)
+    && v11->members.super.process
+    && !Actor::GetProcessLevel(v11) )
   {
-    if ( v17 > 6 )
-      v17 = 0;
-    if ( v16 >= 0 )
+    if ( v15 > 6 ) /*0x513da7*/
+      v15 = 0; /*0x513dae*/
+    if ( v14 >= 0 ) /*0x513db8*/
     {
-      if ( v16 > 0x64 )
-        v16 = 0x64;
+      if ( v14 > 0x64 ) /*0x513dc3*/
+        v14 = 0x64; /*0x513dc5*/
     }
     else
     {
-      v16 = 0;
+      v14 = 0; /*0x513dba*/
     }
-    BSStringT_Static_Format(&v19, "%s", ArgList);
-    Actor::InitDialogue(v14, v19.m_data, (int **)&a4, v17, v16, 0, 0, 0, 0, 1);
-    *(float *)&a3 = st7_0;
-    ((void (__thiscall *)(LowProcess *, int))v14->members.super.process->Unk_80)(v14->members.super.process, 1);
-    ((void (__thiscall *)(LowProcess *, UInt32 *))v14->members.super.process->Unk_82)(v14->members.super.process, a3);
-    if ( IsConsoleMode )
-      Interface_ConsolePrint("The NPC will speak the sound now.");
-    v22 = 0xFFFFFFFF;
-    BSStringT_Clear((unsigned int *)&v19);
-    return 1;
+    BSStringT_Static_Format(&v17, "%s", ArgList); /*0x513ddc*/
+    Actor::InitDialogue(v12, v17.m_data, (int **)&a4, v15, v14, 0, 0, 0, 0, 1); /*0x513e00*/
+    *(float *)&a3 = st7_0; /*0x513e05*/
+    ((void (__thiscall *)(LowProcess *, int))v12->members.super.process->Unk_80)(v12->members.super.process, 1); /*0x513e16*/
+    ((void (__thiscall *)(LowProcess *, UInt32 *))v12->members.super.process->Unk_82)(v12->members.super.process, a3); /*0x513e2d*/
+    if ( MEMORY[0xB361AC] ) /*0x513e2f*/
+      Interface_ConsolePrint("The NPC will speak the sound now."); /*0x513e3c*/
+    v20 = 0xFFFFFFFF; /*0x513e48*/
+    BSStringT_Clear((unsigned int *)&v17); /*0x513e53*/
+    return 1; /*0x513e58*/
   }
   else
   {
 LABEL_17:
-    FormHeapFree(0);
-    return 0;
+    FormHeapFree(0); /*0x513e5d*/
+    return 0; /*0x513e65*/
   }
 }

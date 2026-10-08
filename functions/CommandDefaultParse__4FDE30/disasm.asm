@@ -1,4 +1,4 @@
-0x4FDE30: sub     esp, 230h
+0x4FDE30: sub     esp, 230h; TES4 authoritative default command parser. It compiles a command's ParamInfo list into script bytecode consumed later by Script_ExtractArgs.
 0x4FDE36: mov     eax, ds:0B30AACh
 0x4FDE3B: xor     eax, esp
 0x4FDE3D: mov     [esp+230h+var_4], eax
@@ -15,7 +15,7 @@
 0x4FDE6C: lea     ecx, [eax+esi+20Ch]
 0x4FDE73: mov     ax, word ptr [esp+23Ch+arg_0]
 0x4FDE7B: mov     [esi+208h], edx
-0x4FDE81: mov     [ecx], ax
+0x4FDE81: mov     [ecx], ax; Writes the expected parameter count word into the compiled script-data buffer; Script_ExtractArgs later reads this count before parsing arguments.
 0x4FDE84: add     dword ptr [esi+40Ch], 2
 0x4FDE8B: movzx   eax, ax
 0x4FDE8E: cmp     eax, edx
@@ -235,7 +235,7 @@
 0x4FE1B4: test    eax, eax
 0x4FE1B6: jz      short loc_4FE1C7
 0x4FE1B8: mov     ecx, eax; this
-0x4FE1BA: call    TESObjectCELL_IsInterior
+0x4FE1BA: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4FE1BF: test    al, al
 0x4FE1C1: jnz     loc_4FE85B
 0x4FE1C7: movsx   eax, word ptr [esp+240h+var_230]
@@ -705,12 +705,12 @@
 0x4FE8A8: mov     [ecx+esi+20Ch], di
 0x4FE8B0: add     dword ptr [esi+40Ch], 2
 0x4FE8B7: mov     eax, [esi+40Ch]
-0x4FE8BD: push    edi; Size
+0x4FE8BD: push    edi; byteCount
 0x4FE8BE: lea     edx, [esp+244h+Src]
-0x4FE8C2: push    edx; Src
+0x4FE8C2: push    edx; source
 0x4FE8C3: lea     eax, [esi+eax+20Ch]
-0x4FE8CA: push    eax; Dst
-0x4FE8CB: call    _memcpy
+0x4FE8CA: push    eax; destination
+0x4FE8CB: call    _memcpy;
 0x4FE8D0: add     esp, 0Ch
 0x4FE8D3: add     [esi+40Ch], edi
 0x4FE8D9: jmp     loc_4FEC3E
@@ -783,9 +783,9 @@
 0x4FEA21: xor     edi, edi; jumptable 004FE89B case 5
 0x4FEA23: mov     eax, ds:0B0A1A8h[edi*4]
 0x4FEA2A: lea     edx, [esp+240h+Src]
-0x4FEA2E: push    edx; Str2
-0x4FEA2F: push    eax; Str1
-0x4FEA30: call    __strcmp
+0x4FEA2E: push    edx; right
+0x4FEA2F: push    eax; left
+0x4FEA30: call    CRT_StricmpLocaleDispatch
 0x4FEA35: add     esp, 8
 0x4FEA38: test    eax, eax
 0x4FEA3A: jz      short loc_4FEA6E
@@ -838,10 +838,10 @@
 0x4FEAEA: add     dword ptr [esi+40Ch], 1
 0x4FEAF1: jmp     loc_4FEC3E
 0x4FEAF6: mov     edx, ds:0B10BC4h; jumptable 004FE89B case 18
-0x4FEAFC: push    edx; Str2
+0x4FEAFC: push    edx; right
 0x4FEAFD: lea     eax, [esp+244h+Src]
-0x4FEB01: push    eax; Str1
-0x4FEB02: call    __strcmp
+0x4FEB01: push    eax; left
+0x4FEB02: call    CRT_StricmpLocaleDispatch
 0x4FEB07: add     esp, 8
 0x4FEB0A: test    eax, eax
 0x4FEB0C: jnz     short loc_4FEB21
@@ -849,10 +849,10 @@
 0x4FEB14: mov     [ecx+esi+20Ch], ax
 0x4FEB1C: jmp     loc_4FEC37
 0x4FEB21: mov     ecx, ds:0B10BC8h
-0x4FEB27: push    ecx; Str2
+0x4FEB27: push    ecx; right
 0x4FEB28: lea     edx, [esp+244h+Src]
-0x4FEB2C: push    edx; Str1
-0x4FEB2D: call    __strcmp
+0x4FEB2C: push    edx; left
+0x4FEB2D: call    CRT_StricmpLocaleDispatch
 0x4FEB32: add     esp, 8
 0x4FEB35: test    eax, eax
 0x4FEB37: jnz     loc_4FEE61
@@ -861,13 +861,13 @@
 0x4FEB48: mov     [ecx+esi+20Ch], ax
 0x4FEB50: jmp     loc_4FEC37
 0x4FEB55: xor     ebp, ebp; jumptable 004FE89B case 10
-0x4FEB57: mov     edi, offset animGroupInfos_ptr
+0x4FEB57: mov     edi, offset animGroupInfos_ptr; Default command parser hit in animation console-command search set; parses command args before handlers such as PlayGroup/PickIdle/LoopGroup.
 0x4FEB5C: lea     esp, [esp+0]
 0x4FEB60: mov     edx, [edi]
-0x4FEB62: push    edx; Str2
+0x4FEB62: push    edx; right
 0x4FEB63: lea     eax, [esp+244h+Src]
-0x4FEB67: push    eax; Str1
-0x4FEB68: call    __strcmp
+0x4FEB67: push    eax; left
+0x4FEB68: call    CRT_StricmpLocaleDispatch
 0x4FEB6D: add     esp, 8
 0x4FEB70: test    eax, eax
 0x4FEB72: jz      short loc_4FEBB0
@@ -897,10 +897,10 @@
 0x4FEBC8: xor     edi, edi; jumptable 004FE89B case 33
 0x4FEBCA: lea     ebx, [ebx+0]
 0x4FEBD0: mov     edx, ds:0B081D0h[edi*4]
-0x4FEBD7: push    edx; Str2
+0x4FEBD7: push    edx; right
 0x4FEBD8: lea     eax, [esp+244h+Src]
-0x4FEBDC: push    eax; Str1
-0x4FEBDD: call    __strcmp
+0x4FEBDC: push    eax; left
+0x4FEBDD: call    CRT_StricmpLocaleDispatch
 0x4FEBE2: add     esp, 8
 0x4FEBE5: test    eax, eax
 0x4FEBE7: jz      short loc_4FEC1B

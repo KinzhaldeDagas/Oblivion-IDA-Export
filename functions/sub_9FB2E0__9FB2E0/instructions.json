@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9FB2E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Controller decode 2026-07-10] Registers the paired Xenon-era Controls INI setting with INISettingCollection and installs its atexit cleanup.",
     "mnemonic": "push",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x9FB300",
-    "line": "push    offset unk_B13590",
+    "line": "push    offset fXenonMenuStickSpeed",
     "mnemonic": "push",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x9FB317",
-    "line": "push    offset sub_A245B0; void (__cdecl *)()",
+    "line": "push    offset INISetting_Destroy_fXenonMenuStickSpeed; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },
@@ -124,5 +124,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x403BC0",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x403BC3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x403BC5",
+    "line": "jz      short locret_403BD3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403BC7",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403BCA",
+    "line": "jnz     short locret_403BD3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x403BCC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403BCD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x403BD2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403BD3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BEDC0",
+    "line": "mov     ecx, offset fXenonMenuStickSpeed",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEDC5",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEDCA",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BEDCE",
+    "line": "lea     eax, [edx]",
+    "mnemonic": "lea",
+    "size": 2
+  },
+  {
+    "ea": "0x9BEDD0",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BEDD3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BEDD5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEDDA",
+    "line": "mov     eax, offset stru_AE8430",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEDDF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,4 @@
 signed int SpellItem_MagicItem_ChunkType()
 {
-  return 0x54495053;
+  return 0x54495053; /*0x41d255*/
 }

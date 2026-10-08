@@ -1,11 +1,12 @@
-char *__thiscall sub_5E4080(_DWORD *this)
+// Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.
+const char *__thiscall Actor::GetCurrentPackageTypeName(Actor *this)
 {
-  int v1; // eax
-  int v2; // eax
+  LowProcess *process; // eax
+  TESPackage *editorPackage; // eax
 
-  v1 = *(this + 0x16);
-  if ( v1 && (v2 = *(_DWORD *)(v1 + 8)) != 0 )
-    return *(char **)(4 * *(char *)(v2 + 0x20) + 0xB12988);
+  process = this->members.super.process; /*0x5e4080*/
+  if ( process && (editorPackage = process->editorPackage) != 0 ) /*0x5e408c*/
+    return *(const char **)(4 * editorPackage->members.type + 0xB12988); /*0x5e4092*/
   else
-    return 0;
+    return 0; /*0x5e409a*/
 }

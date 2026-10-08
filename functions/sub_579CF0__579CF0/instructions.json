@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x579EC4",
-    "line": "call    sub_5821F0",
+    "line": "call    InterfaceManager_ProcessGlobalHotkeys",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x579EF9",
-    "line": "call    sub_583F40",
+    "line": "call    InterfaceManager__UpdateMenuFades; Verified: reads GetTimerPercent and Menu fade state +0x24. State 2 completion sets state 4; if root trait 0x1772==2, destroys MenuTopicManager for DialogMenu at 0x584230 then invokes root tile deleting destructor at 0x584255. Otherwise hides root. State 8 completion sets state 1. This is the normal deferred destruction path, separate from StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x579F39",
-    "line": "call    MiscPass",
+    "line": "call    MiscPass; MoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1801,67 +1801,67 @@
   },
   {
     "ea": "0x47EEAC",
-    "line": "push    esi",
+    "line": "push    esi; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47EEAD",
-    "line": "push    18h",
+    "line": "push    18h; triangleCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47EEAF",
-    "line": "push    ebp",
+    "line": "push    ebp; dataFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47EEB0",
-    "line": "push    ebp",
+    "line": "push    ebp; hasVertexColors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47EEB1",
-    "line": "push    ebp",
+    "line": "push    ebp; textureCoordinates",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47EEB2",
-    "line": "push    edi",
+    "line": "push    edi; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47EEB3",
-    "line": "push    ebp",
+    "line": "push    ebp; normals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47EEB4",
-    "line": "push    ebx",
+    "line": "push    ebx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47EEB5",
-    "line": "push    8",
+    "line": "push    8; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47EEB7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47EEB9",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1978,5 +1978,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AF4B0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4BB",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4BE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4BF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4C4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF4C6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF4CA",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4CD",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF4D0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF4D2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4D7",
+    "line": "mov     eax, offset stru_ADBA88",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF4DC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

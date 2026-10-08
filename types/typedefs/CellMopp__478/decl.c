@@ -1,1 +1,1 @@
-CellMopp
+struct CellMopp;

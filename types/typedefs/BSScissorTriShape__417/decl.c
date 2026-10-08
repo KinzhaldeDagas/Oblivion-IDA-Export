@@ -1,1 +1,1 @@
-BSScissorTriShape
+struct BSScissorTriShape;

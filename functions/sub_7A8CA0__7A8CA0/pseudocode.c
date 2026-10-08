@@ -1,51 +1,56 @@
-int __cdecl sub_7A8CA0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4, _DWORD *a5, int a6, _BYTE *a7)
+// OBLIVION AUTHORITY (2026-08-30): Fills a vector<bool> iterator range one packed bit at a time, setting or clearing the selected bit in each 32-bit word.
+void __cdecl OB_stVectorBool_FillRangeCore_010201A0(
+        OB_stVectorBoolIterator_010201A0 first,
+        OB_stVectorBoolIterator_010201A0 last,
+        const bool *value)
 {
-  unsigned int v9; // ebp
-  unsigned int v10; // ebp
-  unsigned int v11; // ebp
-  int result; // eax
+  unsigned int *word; // esi
+  unsigned int bitOffset; // edi
+  unsigned int *begin; // ebp
+  unsigned int *v6; // ebp
+  unsigned int *v7; // ebp
 
-  while ( a2 != a5 || a3 != a6 )
+  word = first.word; /*0x7a8ca7*/
+  bitOffset = first.bitOffset; /*0x7a8cac*/
+  while ( word != last.word || bitOffset != last.bitOffset ) /*0x7a8cba*/
   {
-    if ( !a1 )
-      _invalid_parameter_noinfo();
-    if ( *a7 )
+    if ( !first.owner ) /*0x7a8cc2*/
+      _invalid_parameter_noinfo(0, bitOffset, (int)word); /*0x7a8cc4*/
+    if ( *value ) /*0x7a8ccd*/
     {
-      if ( !a1 || !a2 )
-        _invalid_parameter_noinfo();
-      v9 = a1[2];
-      if ( v9 > a1[3] )
-        _invalid_parameter_noinfo();
-      if ( a3 + 0x20 * ((int)((int)a2 - v9) >> 2) >= *a1 )
-        _invalid_parameter_noinfo();
-      *a2 |= 1 << a3;
+      if ( !first.owner || !word ) /*0x7a8cd8*/
+        _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8cda*/
+      begin = first.owner->words.begin; /*0x7a8cdf*/
+      if ( begin > first.owner->words.end ) /*0x7a8ce5*/
+        _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8ce7*/
+      if ( bitOffset + 0x20 * (word - begin) >= first.owner->logicalSize ) /*0x7a8cfa*/
+        _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8cfc*/
+      *word |= 1 << bitOffset; /*0x7a8d0a*/
     }
     else
     {
-      if ( !a1 || !a2 )
-        _invalid_parameter_noinfo();
-      v10 = a1[2];
-      if ( v10 > a1[3] )
-        _invalid_parameter_noinfo();
-      if ( a3 + 0x20 * ((int)((int)a2 - v10) >> 2) >= *a1 )
-        _invalid_parameter_noinfo();
-      *a2 &= ~(1 << a3);
+      if ( !first.owner || !word ) /*0x7a8d14*/
+        _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8d16*/
+      v6 = first.owner->words.begin; /*0x7a8d1b*/
+      if ( v6 > first.owner->words.end ) /*0x7a8d21*/
+        _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8d23*/
+      if ( bitOffset + 0x20 * (word - v6) >= first.owner->logicalSize ) /*0x7a8d36*/
+        _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8d38*/
+      *word &= ~(1 << bitOffset); /*0x7a8d48*/
     }
-    v11 = a1[2];
-    if ( v11 > a1[3] )
-      _invalid_parameter_noinfo();
-    result = 0x20 * ((int)((int)a2 - v11) >> 2);
-    if ( result + a3 + 1 > *a1 )
-      result = _invalid_parameter_noinfo();
-    if ( a3 >= 0x1F )
+    v7 = first.owner->words.begin; /*0x7a8d4a*/
+    if ( v7 > first.owner->words.end ) /*0x7a8d50*/
+      _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8d52*/
+    if ( 0x20 * (word - v7) + bitOffset + 1 > first.owner->logicalSize ) /*0x7a8d67*/
+      _invalid_parameter_noinfo((int)first.owner, bitOffset, (int)word); /*0x7a8d69*/
+    if ( bitOffset >= 0x1F ) /*0x7a8d71*/
     {
-      a3 = 0;
-      ++a2;
+      bitOffset = 0; /*0x7a8d7b*/
+      ++word; /*0x7a8d7d*/
     }
     else
     {
-      ++a3;
+      ++bitOffset; /*0x7a8d73*/
     }
   }
-  return result;
 }

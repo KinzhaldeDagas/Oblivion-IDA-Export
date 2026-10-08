@@ -1,4 +1,4 @@
-0x77FE50: mov     eax, ds:0B29FB8h
+0x77FE50: mov     eax, ds:0B29FB8h; DX10 bridge note: render-state initializer table includes D3DRS_CLIPPING=1 and D3DRS_CLIPPLANEENABLE=0; generated DX10 fixed-function VS must consume enabled clip planes via shader clip distances.
 0x77FE55: cmp     eax, 0FFFFFFFFh
 0x77FE58: push    edi
 0x77FE59: mov     edi, ecx

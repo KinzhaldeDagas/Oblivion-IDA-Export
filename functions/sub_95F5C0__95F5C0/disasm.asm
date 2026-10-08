@@ -3,7 +3,7 @@
 0x95F5C2: mov     edi, [esp+8+arg_0]
 0x95F5C6: push    edi
 0x95F5C7: mov     esi, ecx
-0x95F5C9: call    nullsub_returnvVoid_1arg
+0x95F5C9: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x95F5CE: push    edi
 0x95F5CF: lea     ecx, [esi+4]
 0x95F5D2: call    sub_716EA0

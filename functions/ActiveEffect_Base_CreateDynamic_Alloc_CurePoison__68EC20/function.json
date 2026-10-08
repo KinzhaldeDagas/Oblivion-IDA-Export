@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68EC20",
+      "0x68EC42"
+    ]
+  ],
+  "chunks_sha256": "0a551751babc751ab5b247f1c1b236e9c3ed8263be2bca65364703e2ed373dda",
+  "comment_regular": "Verified allocation path for CUPO: creates the shared CureEffect class and calls CureEffect_constr_MagicType with subtype value 3.",
+  "comment_repeatable": "Verified allocation path for CUPO: creates the shared CureEffect class and calls CureEffect_constr_MagicType with subtype value 3.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_CreateDynamic:::Alloc_CurePoison",
   "end_ea": "0x68EC42",
-  "flags": 4096,
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_CreateDynamic:::Alloc_CurePoison",
   "segment": ".text",
   "sha256": "0a551751babc751ab5b247f1c1b236e9c3ed8263be2bca65364703e2ed373dda",
   "size": 34,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68EC20",
+  "total_chunk_size": 34,
   "type": "int __cdecl(int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 1

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x784BF0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion 1.2.0.416: vector clear implemented as checked erase(begin,end).",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x784C13",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,31 +97,31 @@
   },
   {
     "ea": "0x784C15",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784C16",
-    "line": "lea     eax, [esp+24h+var_8]",
+    "line": "lea     eax, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x784C1A",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784C1B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x784C1D",
-    "line": "call    sub_784AC0",
+    "line": "call    OB_stVector24_EraseRange_010201A0; Oblivion 1.2.0.416: checked erase(first,last) for 0x18-byte records; compacts the tail, destroys remnants, updates end, and returns an iterator.",
     "mnemonic": "call",
     "size": 5
   },

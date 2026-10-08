@@ -14,7 +14,7 @@
 0x8AFC5D: jmp     short loc_8AFC61
 0x8AFC5F: xor     eax, eax
 0x8AFC61: push    eax
-0x8AFC62: push    offset dword_BA7F9C
+0x8AFC62: push    offset stru_BA7F9C
 0x8AFC67: call    NiRTTI_Cast
 0x8AFC6C: add     esp, 8
 0x8AFC6F: test    eax, eax

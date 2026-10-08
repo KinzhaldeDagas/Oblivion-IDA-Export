@@ -1,4 +1,4 @@
-0x769B60: push    ecx
+0x769B60: push    ecx; Pass224/226: Prepares NiScreenTexture +0x1C geometry buffer and rebuilds from records when pending/update flags require it.
 0x769B61: push    edi
 0x769B62: mov     edi, [esp+8+arg_0]
 0x769B66: test    edi, edi
@@ -8,13 +8,13 @@
 0x769B6F: push    ebp
 0x769B70: push    esi
 0x769B71: mov     esi, [edi+1Ch]
-0x769B74: mov     ecx, esi
-0x769B76: call    sub_777F10
+0x769B74: mov     ecx, esi; this
+0x769B76: call    NiGeometryBufferData_HasLiveStreams; Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.
 0x769B7B: push    1; streamCount
 0x769B7D: mov     ecx, esi; this
 0x769B7F: mov     bl, al
 0x769B81: mov     dword ptr [esi], 1400000h
-0x769B87: call    sub_777F70
+0x769B87: call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.
 0x769B8C: test    bl, bl
 0x769B8E: mov     ecx, [esi+4]
 0x769B91: movzx   ebp, word ptr [edi+18h]
@@ -36,10 +36,10 @@
 0x769BBD: mov     ecx, [esp+14h+var_4]
 0x769BC1: push    ebp
 0x769BC2: push    edi
-0x769BC3: call    sub_767EA0
+0x769BC3: call    sub_767EA0; Pass224/226: Packs NiScreenTexture records into screen vertices/indices; uses NiScreenTexture +0x14 first texture for dimensions.
 0x769BC8: pop     esi
 0x769BC9: pop     ebp
-0x769BCA: mov     word ptr [edi+18h], 0
+0x769BCA: mov     word ptr [edi+18h], 0; Pass226: Render preparation clears NiScreenTexture +0x18 pending update mask after consuming or observing it.
 0x769BD0: pop     ebx
 0x769BD1: pop     edi
 0x769BD2: pop     ecx

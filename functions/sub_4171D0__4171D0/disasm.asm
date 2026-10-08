@@ -5,7 +5,7 @@
 0x4171DD: jb      short loc_4171EB
 0x4171DF: mov     eax, [esi+10h]
 0x4171E2: push    eax
-0x4171E3: call    FormHeapFree
+0x4171E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4171E8: add     esp, 4
 0x4171EB: xor     eax, eax
 0x4171ED: mov     dword ptr [esi+24h], 0Fh
@@ -16,7 +16,7 @@
 0x417201: test    [esp+4+arg_0], 1
 0x417206: jz      short loc_417211
 0x417208: push    esi
-0x417209: call    FormHeapFree
+0x417209: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41720E: add     esp, 4
 0x417211: mov     eax, esi
 0x417213: pop     esi

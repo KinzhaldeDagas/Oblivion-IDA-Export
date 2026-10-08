@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x680C60",
-    "line": "push    esi",
+    "line": "push    esi; Verified: removes the existing link item from AStarWorldNodeList and reinserts it according to its updated fitness, allowing the sorted open list to reflect an improved score.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x680C62",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,37 +37,37 @@
   },
   {
     "ea": "0x680C6C",
-    "line": "lea     eax, [esp+8+arg_0]",
+    "line": "lea     eax, [esp+8+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x680C70",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680C71",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x680C76",
-    "line": "push    edi",
+    "line": "push    edi; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680C77",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x680C79",
-    "line": "call    sub_680BB0",
+    "line": "call    AStarWorldNodeList_InsertByFitness; Verified: Inserts a search-node index into the single AStarWorldNodeList. Reads that index's fitness from the 0x10-byte transient state table and keeps the list in ascending fitness order (before first >=, otherwise tail). This differs from Fallout's TeleportDoorSearch AStarQueue: Fallout AddNode selects one of 20 buckets from normalized fitness, then sorts within that bucket.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-ExtraLastFinishedSequence
+struct ExtraLastFinishedSequence;

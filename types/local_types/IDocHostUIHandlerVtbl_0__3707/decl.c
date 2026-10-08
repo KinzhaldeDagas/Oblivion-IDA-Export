@@ -1,1 +1,1 @@
-IDocHostUIHandlerVtbl_0
+typedef IDocHostUIHandlerVtbl IDocHostUIHandlerVtbl_0;

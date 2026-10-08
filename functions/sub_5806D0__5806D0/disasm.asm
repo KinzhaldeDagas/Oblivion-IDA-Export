@@ -58,30 +58,30 @@
 0x58079E: mov     eax, [edx+1E0h]
 0x5807A4: call    eax
 0x5807A6: push    ecx
-0x5807A7: lea     ecx, [esp+0E4h+var_84]
-0x5807AB: fstp    [esp+0E4h+var_E4]; float
-0x5807AE: call    NiMatrix33_InitRotationTransform
-0x5807B3: mov     ecx, ds:0B333C4h
-0x5807B9: call    sub_4A9720
+0x5807A7: lea     ecx, [esp+0E4h+var_84]; this
+0x5807AB: fstp    [esp+0E4h+angleZ]; angleZ
+0x5807AE: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
+0x5807B3: mov     ecx, ds:0B333C4h; this
+0x5807B9: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x5807BE: push    ecx
-0x5807BF: lea     ecx, [esp+0E4h+var_30]
-0x5807C6: fstp    [esp+0E4h+var_E4]; float
-0x5807C9: call    NiMatrix33_InitRotationTransposedTransform???
-0x5807CE: lea     ecx, [esp+0E0h+var_30]
-0x5807D5: push    ecx
-0x5807D6: lea     edx, [esp+0E4h+var_60]
-0x5807DD: push    edx
-0x5807DE: lea     ecx, [esp+0E8h+var_84]
-0x5807E2: call    NiMAtrix33_Multiply
+0x5807BF: lea     ecx, [esp+0E4h+right]; this
+0x5807C6: fstp    [esp+0E4h+angleZ]; angleX
+0x5807C9: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x5807CE: lea     ecx, [esp+0E0h+right]
+0x5807D5: push    ecx; right
+0x5807D6: lea     edx, [esp+0E4h+out]
+0x5807DD: push    edx; out
+0x5807DE: lea     ecx, [esp+0E8h+var_84]; this
+0x5807E2: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x5807E7: mov     ecx, 9
 0x5807EC: mov     esi, eax
 0x5807EE: lea     edi, [esp+0E0h+var_84]
 0x5807F2: rep movsd
-0x5807F4: fld     [esp+0E0h+var_80]
+0x5807F4: fld     [esp+0E0h+var_84.data+4]
 0x5807F8: fstp    [esp+0E0h+var_AC]
-0x5807FC: fld     [esp+0E0h+var_74]
+0x5807FC: fld     [esp+0E0h+var_84.data+10h]
 0x580800: fstp    [esp+0E0h+var_A8]
-0x580804: fld     [esp+0E0h+var_68]
+0x580804: fld     [esp+0E0h+var_84.data+1Ch]
 0x580808: fstp    [esp+0E0h+var_A4]
 0x58080C: fild    dword ptr [ebx+10h]
 0x58080F: fstp    [esp+0E0h+var_C8]
@@ -117,14 +117,14 @@
 0x58089A: mov     ecx, ds:0B333C4h; this
 0x5808A0: cmp     ecx, edi
 0x5808A2: jz      short loc_5808DC
-0x5808A4: call    MobileObject_GetCharProxy
+0x5808A4: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5808A9: cmp     eax, edi
 0x5808AB: jz      short loc_5808DC
 0x5808AD: lea     ecx, [esp+0E0h+var_B0]
 0x5808B1: push    ecx
 0x5808B2: mov     ecx, eax
-0x5808B4: call    sub_57E270
-0x5808B9: mov     ecx, offset dword_B135A0
+0x5808B4: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
+0x5808B9: mov     ecx, offset fActivatePickSphereRadius; [Controller decode 2026-07-10] Uses fActivatePickSphereRadius:Interface through GameSetting_GetSafeFloatPointer; this is not a live reference to fXenonMenuDpadRepeatSpeed.
 0x5808BE: call    GameSetting_GetSafeFloatPointer
 0x5808C3: fld     dword ptr [eax]
 0x5808C5: mov     edx, [esp+0E0h+var_B0]
@@ -141,11 +141,11 @@
 0x5808F3: jz      loc_580A7C
 0x5808F9: mov     ecx, ds:0B333C4h; this
 0x5808FF: mov     dword ptr ds:0B3A6E4h, 21h ; '!'
-0x580909: call    TESObjectREFR_GetParentCell
+0x580909: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x58090E: test    eax, eax
 0x580910: jz      short loc_580953
 0x580912: mov     ecx, ds:0B333C4h; this
-0x580918: call    TESObjectREFR_GetParentCell
+0x580918: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x58091D: mov     ecx, eax
 0x58091F: call    sub_4440C0
 0x580924: mov     ecx, [ebx+108h]
@@ -154,7 +154,7 @@
 0x580931: cmp     eax, esi
 0x580933: jz      short loc_580953
 0x580935: mov     ecx, ds:0B333C4h; this
-0x58093B: call    TESObjectREFR_GetParentCell
+0x58093B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x580940: mov     ecx, eax
 0x580942: call    sub_4440C0
 0x580947: mov     ecx, [ebx+108h]
@@ -164,7 +164,7 @@
 0x580959: lea     eax, [esp+0E0h+var_88]
 0x58095D: push    eax
 0x58095E: mov     dword ptr ds:0B3A6E4h, 22h ; '"'
-0x580968: call    sub_65ABE0
+0x580968: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x58096D: movzx   eax, word ptr [eax+2]
 0x580971: mov     ecx, [ebx+108h]
 0x580977: cmp     [ecx+8], eax
@@ -187,13 +187,13 @@
 0x5809B0: call    sub_538EC0
 0x5809B5: mov     esi, eax
 0x5809B7: jmp     loc_580A7C
-0x5809BC: lea     ecx, [esp+0E0h+var_60]
-0x5809C3: call    sub_959BC0
+0x5809BC: lea     ecx, [esp+0E0h+out]
+0x5809C3: call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.
 0x5809C8: mov     ecx, ds:0B333C4h
 0x5809CE: lea     edx, [esp+0E0h+var_B0]
 0x5809D2: push    edx
 0x5809D3: mov     [esp+0E4h+var_4], edi
-0x5809DA: call    sub_65ABE0
+0x5809DA: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x5809DF: fld     [esp+0E0h+var_C8]
 0x5809E3: push    1Fh; int
 0x5809E5: push    ecx
@@ -203,37 +203,36 @@
 0x5809EE: lea     ecx, [esp+0ECh+var_C0]
 0x5809F2: push    ecx; int
 0x5809F3: mov     ecx, ds:0B333A0h
-0x5809F9: lea     edx, [esp+0F0h+var_60]
+0x5809F9: lea     edx, [esp+0F0h+out]
 0x580A00: push    edx; int
 0x580A01: call    sub_442E70
 0x580A06: test    al, al
 0x580A08: jz      short loc_580A63
-0x580A0A: cmp     [esp+0E0h+var_3E], 0
+0x580A0A: cmp     word ptr [esp+0E0h+out.data+22h], 0
 0x580A13: jbe     short loc_580A63
 0x580A15: jmp     short loc_580A20
-0x580A17: align 10h
-0x580A20: mov     eax, [esp+0E0h+var_44]
+0x580A20: mov     eax, [esp+0E0h+out.data+1Ch]
 0x580A27: mov     eax, [eax+edi*4]
 0x580A2A: mov     eax, [eax]
 0x580A2C: push    eax
-0x580A2D: call    sub_4DC270
+0x580A2D: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x580A32: mov     esi, eax
 0x580A34: add     esp, 4
 0x580A37: cmp     esi, ds:0B333C4h
 0x580A3D: jnz     short loc_580A52
-0x580A3F: movzx   ecx, [esp+0E0h+var_3E]
+0x580A3F: movzx   ecx, word ptr [esp+0E0h+out.data+22h]
 0x580A47: add     edi, 1
 0x580A4A: xor     esi, esi
 0x580A4C: cmp     edi, ecx
 0x580A4E: jb      short loc_580A20
 0x580A50: jmp     short loc_580A63
-0x580A52: mov     edx, [esp+0E0h+var_44]
+0x580A52: mov     edx, [esp+0E0h+out.data+1Ch]
 0x580A59: mov     eax, [edx+edi*4]
 0x580A5C: fld     dword ptr [eax+14h]
 0x580A5F: fstp    [esp+0E0h+var_CC]
-0x580A63: lea     ecx, [esp+0E0h+var_60]
+0x580A63: lea     ecx, [esp+0E0h+out]
 0x580A6A: mov     [esp+0E0h+var_4], 0FFFFFFFFh
-0x580A75: call    sub_959EC0
+0x580A75: call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
 0x580A7A: xor     edi, edi
 0x580A7C: cmp     esi, edi
 0x580A7E: mov     dword ptr ds:0B3A6E4h, 4
@@ -314,3 +313,12 @@
 0x580B8F: pop     ebx
 0x580B90: add     esp, 0CCh
 0x580B96: retn
+0x9BEB90: lea     ecx, [ebp-60h]
+0x9BEB93: jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
+0x9BEB98: mov     edx, [esp+arg_4]
+0x9BEB9C: lea     eax, [edx-0D0h]
+0x9BEBA2: mov     ecx, [edx-0D4h]
+0x9BEBA8: xor     ecx, eax
+0x9BEBAA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BEBAF: mov     eax, offset stru_AE8228
+0x9BEBB4: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x509D70",
-    "line": "push    ebx",
+    "line": "push    ebx; CustomAnimSupport decode: debug/dump path for ActorAnimData active slots. Prints slot names and decodes active keys via AnimKey helpers; used by path-specific state diagnostics.",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x509DD7",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x509DE3",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x509E2F",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x509E3B",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x509E57",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x509F75",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x509F77",
-    "line": "call    sub_4712B0",
+    "line": "call    ActorAnimData_GetPendingKFModelCount; Counts pending KFModel installs represented by the ActorAnimData +0xB4 head and +0xB8 linked continuation. The debug animation-state command prints this as Anims Loading.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,19 +979,19 @@
   },
   {
     "ea": "0x509F90",
-    "line": "push    edi",
+    "line": "push    edi; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x509F91",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x509F93",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,19 +1009,19 @@
   },
   {
     "ea": "0x509F9C",
-    "line": "push    edi",
+    "line": "push    edi; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x509F9D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x509F9F",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x509FA8",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x509FBC",
-    "line": "call    sub_51A9E0",
+    "line": "call    AnimKey_GetWeaponPrefix; Final name: AnimKey_GetWeaponPrefix. Returns (encoded key >> 8) & 0xF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x509FCD",
-    "line": "call    sub_51A9D0",
+    "line": "call    AnimKey_GetMovementPrefix; Final name: AnimKey_GetMovementPrefix. Returns encoded key >> 12.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x50A039",
-    "line": "push    offset aIdleanimQueued; \"IdleAnim Queued: %s\"",
+    "line": "push    offset aIdleanimQueued; DumpActorAnimationState command site. Diagnostic command path for printing actor animation state.",
     "mnemonic": "push",
     "size": 5
   },

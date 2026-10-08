@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x5C6B1C",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C6B21",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x5C6B50",
-    "line": "fstp    [esp+9Ch+a2]; float",
+    "line": "fstp    [esp+9Ch+a2]; maximumRms",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5C6B5B",
-    "line": "push    ebx; char",
+    "line": "push    ebx; specialSecondBankMode",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x5C6B60",
-    "line": "push    ecx; int",
+    "line": "push    ecx; outParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6B61",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x5C6B67",
-    "line": "call    sub_521A10",
+    "line": "call    TESNPC_GetActiveFaceGenDeltaParameters; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6B6C",
-    "line": "push    eax; int",
+    "line": "push    eax; delta",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x5C6B73",
-    "line": "push    esi; int",
+    "line": "push    esi; base",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6B74",
-    "line": "call    sub_552990",
+    "line": "call    FaceGenHeadParameters_Combine; Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -306,12 +306,6 @@
     "size": 2
   },
   {
-    "ea": "0x5C6B96",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x5C6BA0",
     "line": "mov     eax, [esp+98h+var_7C]",
     "mnemonic": "mov",
@@ -361,7 +355,7 @@
   },
   {
     "ea": "0x5C6BC3",
-    "line": "mov     dword ptr [esp+0A4h+var_78], esp",
+    "line": "mov     [esp+0A4h+sliderIndex], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +403,7 @@
   },
   {
     "ea": "0x5C6BDA",
-    "line": "call    sub_5C3110",
+    "line": "call    RaceSexMenu_GetCategoryTileByName",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +433,7 @@
   },
   {
     "ea": "0x5C6BEE",
-    "line": "fstp    [esp+9Ch+var_78]",
+    "line": "fstp    qword ptr [esp+9Ch+sliderIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -457,7 +451,7 @@
   },
   {
     "ea": "0x5C6BF9",
-    "line": "fcomp   [esp+98h+var_78]",
+    "line": "fcomp   qword ptr [esp+98h+sliderIndex]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x5C6C54",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +631,7 @@
   },
   {
     "ea": "0x5C6C6C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +667,7 @@
   },
   {
     "ea": "0x5C6C85",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x5C6C9D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,37 +757,37 @@
   },
   {
     "ea": "0x5C6CCB",
-    "line": "mov     dword ptr [esp+98h+var_78], eax",
+    "line": "mov     [esp+98h+sliderIndex], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C6CCF",
-    "line": "fldcw   word ptr [esp+98h+var_78]",
+    "line": "fldcw   word ptr [esp+98h+sliderIndex]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x5C6CD3",
-    "line": "fistp   [esp+98h+var_78]",
+    "line": "fistp   qword ptr [esp+98h+sliderIndex]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x5C6CD7",
-    "line": "mov     eax, dword ptr [esp+98h+var_78]",
+    "line": "mov     eax, [esp+98h+sliderIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C6CDB",
-    "line": "push    eax",
+    "line": "push    eax; sliderIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6CDC",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -817,13 +811,13 @@
   },
   {
     "ea": "0x5C6CEC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6CF1",
-    "line": "push    eax",
+    "line": "push    eax; matrixGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -835,19 +829,19 @@
   },
   {
     "ea": "0x5C6CF6",
-    "line": "push    ecx",
+    "line": "push    ecx; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6CF7",
-    "line": "call    sub_5538F0",
+    "line": "call    FaceGenHeadParameters_GetSliderValue; Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6CFC",
-    "line": "fstp    dword ptr [esp+0A8h+var_78]",
+    "line": "fstp    [esp+0A8h+sliderIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -889,25 +883,25 @@
   },
   {
     "ea": "0x5C6D15",
-    "line": "fstp    [esp+9Ch+a2]; a3",
+    "line": "fstp    [esp+9Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C6D18",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C6D1D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6D22",
-    "line": "fld     dword ptr [esp+98h+var_78]",
+    "line": "fld     [esp+98h+sliderIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -979,13 +973,13 @@
   },
   {
     "ea": "0x5C6D40",
-    "line": "fstp    dword ptr [esp+98h+var_78]",
+    "line": "fstp    [esp+98h+sliderIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5C6D44",
-    "line": "fld     dword ptr [esp+98h+var_78]",
+    "line": "fld     [esp+98h+sliderIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1003,7 +997,7 @@
   },
   {
     "ea": "0x5C6D52",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1027,7 @@
   },
   {
     "ea": "0x5C6D6A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,37 +1087,37 @@
   },
   {
     "ea": "0x5C6D98",
-    "line": "mov     dword ptr [esp+98h+var_78], eax",
+    "line": "mov     [esp+98h+sliderIndex], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C6D9C",
-    "line": "fldcw   word ptr [esp+98h+var_78]",
+    "line": "fldcw   word ptr [esp+98h+sliderIndex]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x5C6DA0",
-    "line": "fistp   [esp+98h+var_78]",
+    "line": "fistp   qword ptr [esp+98h+sliderIndex]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x5C6DA4",
-    "line": "mov     edx, dword ptr [esp+98h+var_78]",
+    "line": "mov     edx, [esp+98h+sliderIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C6DA8",
-    "line": "push    edx",
+    "line": "push    edx; sliderIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6DA9",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -1147,13 +1141,13 @@
   },
   {
     "ea": "0x5C6DB9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6DBE",
-    "line": "push    eax",
+    "line": "push    eax; matrixGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -1165,19 +1159,19 @@
   },
   {
     "ea": "0x5C6DC3",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6DC4",
-    "line": "call    sub_5538F0",
+    "line": "call    FaceGenHeadParameters_GetSliderValue; Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6DC9",
-    "line": "fstp    dword ptr [esp+0A8h+var_78]",
+    "line": "fstp    [esp+0A8h+sliderIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1195,13 +1189,13 @@
   },
   {
     "ea": "0x5C6DD6",
-    "line": "fstp    [esp+9Ch+a2]; a3",
+    "line": "fstp    [esp+9Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C6DD9",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1213,13 +1207,13 @@
   },
   {
     "ea": "0x5C6DE0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6DE5",
-    "line": "fld     dword ptr [esp+98h+var_78]",
+    "line": "fld     [esp+98h+sliderIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1273,13 +1267,13 @@
   },
   {
     "ea": "0x5C6E01",
-    "line": "fstp    dword ptr [esp+98h+var_78]",
+    "line": "fstp    [esp+98h+sliderIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5C6E05",
-    "line": "fld     dword ptr [esp+98h+var_78]",
+    "line": "fld     [esp+98h+sliderIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1291,13 +1285,13 @@
   },
   {
     "ea": "0x5C6E0A",
-    "line": "fstp    [esp+9Ch+a2]; a3",
+    "line": "fstp    [esp+9Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C6E0D",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1309,7 +1303,7 @@
   },
   {
     "ea": "0x5C6E14",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,13 +1321,13 @@
   },
   {
     "ea": "0x5C6E1C",
-    "line": "fstp    [esp+9Ch+a2]; a3",
+    "line": "fstp    [esp+9Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C6E1F",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1345,7 +1339,7 @@
   },
   {
     "ea": "0x5C6E26",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,13 +1369,13 @@
   },
   {
     "ea": "0x5C6E38",
-    "line": "fstp    [esp+9Ch+a2]; a3",
+    "line": "fstp    [esp+9Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C6E3B",
-    "line": "push    0FB8h; a2",
+    "line": "push    0FB8h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1393,7 +1387,7 @@
   },
   {
     "ea": "0x5C6E42",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,7 +1435,7 @@
   },
   {
     "ea": "0x5C6E5F",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1534,5 +1528,89 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C1460",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1465",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1467",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1469",
+    "line": "lea     eax, [ebp-6Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C146C",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C146D",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1472",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1473",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C1477",
+    "line": "lea     eax, [edx-88h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C147D",
+    "line": "mov     ecx, [edx-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1483",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1485",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C148A",
+    "line": "mov     eax, offset stru_AEA504",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C148F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,1 @@
-LPCSTR
+typedef const CHAR *LPCSTR;

@@ -1,4 +1,5 @@
-void __thiscall sub_69D950(_DWORD *this)
+// Verified base MagicHitEffect detach clears its targetReference pointer at +0x1C. ActiveEffect::~ActiveEffect also clears ownerActiveEffect (+0x18) and sets bFinished (+0x24) before freeing its association-list nodes.
+void __thiscall MagicHitEffect_Detach(MagicHitEffect *this)
 {
-  *(this + 7) = 0;
+  this->targetReference = 0; /*0x69d950*/
 }

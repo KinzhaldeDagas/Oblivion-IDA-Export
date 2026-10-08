@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_481570",
+  "chunks": [
+    [
+      "0x481570",
+      "0x48165C"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "e7b66849c842a88d908f1cd1eef809cee0954a0f6c243e79655bcffb707bf8e8",
+  "comment_regular": "Recursively traverses a NiAVObject hierarchy. For each geometry object lacking property type 0, allocates a 0x1C NiAlphaProperty, sets flags bit 0, and attaches it. Non-geometry nodes recurse through children.",
+  "comment_repeatable": "Recursively traverses a NiAVObject hierarchy. For each geometry object lacking property type 0, allocates a 0x1C NiAlphaProperty, sets flags bit 0, and attaches it. Non-geometry nodes recurse through children.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiAVObject_EnsureAlphaPropertyRecursive",
   "end_ea": "0x48165C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_481570",
+  "name": "NiAVObject_EnsureAlphaPropertyRecursive",
   "segment": ".text",
   "sha256": "36453ca7727ba511f075015d37187fd2ccd61053d7ddfb09c982f9cc1b15ce41",
   "size": 236,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x481570",
-  "type": "void __cdecl(NiNode *)",
-  "xrefs_from_count": 90,
+  "total_chunk_size": 274,
+  "type": "void __cdecl(NiAVObject *object)",
+  "xrefs_from_count": 104,
   "xrefs_to_count": 2
 }

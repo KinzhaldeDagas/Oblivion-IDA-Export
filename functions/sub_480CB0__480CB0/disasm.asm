@@ -12,7 +12,7 @@
 0x480CCC: call    edx
 0x480CCE: test    eax, eax
 0x480CD0: jz      short loc_480CE4
-0x480CD2: cmp     eax, offset unk_B365AC
+0x480CD2: cmp     eax, offset stru_B365AC
 0x480CD7: jz      loc_480D5B
 0x480CDD: mov     eax, [eax+4]
 0x480CE0: test    eax, eax
@@ -20,7 +20,7 @@
 0x480CE4: test    byte ptr [ebx+18h], 2
 0x480CE8: jz      short loc_480D4C
 0x480CEA: mov     ecx, ebp
-0x480CEC: call    sub_452A60
+0x480CEC: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x480CF1: test    eax, eax
 0x480CF3: jz      short loc_480D10
 0x480CF5: mov     edx, [eax]
@@ -29,7 +29,7 @@
 0x480CFC: call    eax
 0x480CFE: test    eax, eax
 0x480D00: jz      short loc_480D10
-0x480D02: cmp     eax, offset dword_B35288
+0x480D02: cmp     eax, 0B35288h
 0x480D07: jz      short loc_480D5B
 0x480D09: mov     eax, [eax+4]
 0x480D0C: test    eax, eax
@@ -37,17 +37,17 @@
 0x480D10: test    byte ptr [ebx+18h], 2
 0x480D14: jz      short loc_480D4C
 0x480D16: mov     ecx, ebp
-0x480D18: call    sub_452A60
+0x480D18: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x480D1D: test    eax, eax
 0x480D1F: jz      short loc_480D4C
 0x480D21: mov     ecx, ebp
-0x480D23: call    sub_452A60
+0x480D23: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x480D28: cmp     dword ptr [eax+8], 0
 0x480D2C: jz      short loc_480D4C
 0x480D2E: push    esi
 0x480D2F: push    edi
 0x480D30: mov     ecx, ebp
-0x480D32: call    sub_452A60
+0x480D32: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x480D37: mov     esi, [eax+8]
 0x480D3A: mov     edi, offset aArrow; "Arrow"
 0x480D3F: mov     ecx, 6

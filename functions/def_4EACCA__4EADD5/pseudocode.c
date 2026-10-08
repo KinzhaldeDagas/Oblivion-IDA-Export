@@ -26,7 +26,7 @@ int ***__usercall def_4EACCA@<eax>(
         float a24,
         float a25,
         float a26,
-        int a27,
+        float a27,
         int a28,
         int a29,
         int a30,
@@ -41,195 +41,112 @@ int ***__usercall def_4EACCA@<eax>(
         float a39,
         float a40)
 {
-  int v41; // ecx
-  int v47; // eax
-  float *v48; // ecx
-  int v49; // edx
-  int v50; // ecx
+  double v40; // st6
+  double v41; // st7
+  int v42; // ecx
+  double v43; // st6
+  double v44; // st5
+  double v45; // st4
+  int v46; // eax
+  float *v47; // ecx
+  double v48; // st7
+  int ***v49; // edx
+  double v50; // st6
+  double v51; // st6
+  int v52; // ecx
   int ***result; // eax
-  int v54; // [esp+Ch] [ebp+Ch]
+  float v54; // [esp+8h] [ebp+8h]
+  float v55; // [esp+Ch] [ebp+Ch]
+  float v56; // [esp+Ch] [ebp+Ch]
+  float v57; // [esp+Ch] [ebp+Ch]
+  float v58; // [esp+18h] [ebp+18h]
 
-  __asm { fld     st; jumptable 004EACCA default case }
-  v54 = Double_To_SInt32(a3);
-  __asm
-  {
-    fild    [esp+arg_18]
-    fstp    [esp+arg_18]
-    fld     [esp+arg_18]
-    fld     st
-    fsubp   st(2), st
-    fxch    st(1)
-    fcomp   qword ptr ds:0A2FC68h
-    fnstsw  ax
-  }
-  if ( (_AX & 0x100) != 0 )
-    __asm { fsub    qword ptr ds:0A2F928h }
-  __asm { fstp    [esp+arg_34] }
-  if ( a1 )
-    sub_4C3540(*(TESObjectCELL ***)(a2 + 0x14), (int)&a40, (int)&a14, &a24);
+  v55 = (float)Double_To_SInt32(a3); /*0x4eade4*/
+  v40 = a3 - v55; /*0x4eadf0*/
+  v41 = v55; /*0x4eadf0*/
+  if ( v40 < dbl_A2FC68 ) /*0x4eadfd*/
+    v41 = v41 - dbl_A2F928; /*0x4eadff*/
+  a13 = v41; /*0x4eae07*/
+  if ( a1 ) /*0x4eae15*/
+    sub_4C3540(*(TESObjectCELL ***)(a2 + 0x14), (int)&a40, (int)&a14, &a24); /*0x4eae22*/
   else
-    sub_4406A0(TES, &a11, &a14, &a24);
-  v41 = *(_DWORD *)(a2 + 0x30);
-  if ( *(_BYTE *)(v41 + 0x1E) )
+    sub_4406A0(MEMORY[0xB333A0], &a11, &a14, &a24); /*0x4eae34*/
+  v42 = *(_DWORD *)(a2 + 0x30); /*0x4eae39*/
+  if ( *(_BYTE *)(v42 + 0x1E) ) /*0x4eae3c*/
   {
-    if ( *(_BYTE *)(v41 + 0x1C) )
+    if ( *(_BYTE *)(v42 + 0x1C) ) /*0x4eae47*/
     {
-      a14 = a24;
-      a15 = a25;
-      a16 = a26;
+      a14 = a24; /*0x4eae59*/
+      a15 = a25; /*0x4eae5d*/
+      a16 = a26; /*0x4eae61*/
     }
     else
     {
-      __asm
-      {
-        fld     [esp+arg_60]
-        fadd    [esp+arg_38]
-        fstp    [esp+arg_18]
-        fld     [esp+arg_64]
-        fadd    [esp+arg_3C]
-        fstp    [esp+arg_24]
-        fld     [esp+arg_68]
-        fadd    [esp+arg_40]
-        fstp    [esp+arg_14]
-        fld     [esp+arg_18]
-        fstp    [esp+arg_84]
-      }
-      __asm { fld     [esp+arg_24] }
-      a14 = a33;
-      __asm { fstp    [esp+arg_88] }
-      __asm { fld     [esp+arg_14] }
-      a15 = a34;
-      __asm { fstp    [esp+arg_8C] }
-      a16 = a35;
-      sub_43F350(&a14);
-      __asm { fstp    st }
+      v56 = a24 + a14; /*0x4eae7c*/
+      v58 = a25 + a15; /*0x4eae88*/
+      v54 = a26 + a16; /*0x4eae94*/
+      a33 = v56; /*0x4eae9c*/
+      a14 = v56; /*0x4eaeae*/
+      a34 = v58; /*0x4eaeb2*/
+      a15 = v58; /*0x4eaec4*/
+      a35 = v54; /*0x4eaec8*/
+      a16 = v54; /*0x4eaed6*/
+      Vector3_NormalizeInPlace(&a14); /*0x4eaede*/
     }
   }
-  __asm
+  if ( a36 <= (double)a16 && a32 >= (double)a16 ) /*0x4eaf0b*/
   {
-    fld     [esp+arg_40]
-    fld     [esp+arg_90]
-    fcomp   st(1)
-    fnstsw  ax
-  }
-  if ( (_AX & 0x4100) == 0 )
-    goto LABEL_23;
-  __asm
-  {
-    fld     [esp+arg_80]
-    fcomp   st(1)
-    fnstsw  ax
-  }
-  if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-  {
-    __asm
-    {
-      fld     [esp+arg_38]
-      fld     qword ptr ds:0A2FAA0h
-      fmul    st(1), st
-      fadd    st(1), st
-      fxch    st(1)
-      fstp    [esp+arg_38]
-      fld     [esp+arg_38]
-      fld     qword ptr ds:0A46B18h
-      fcom    st(1)
-      fnstsw  ax
-      fstp    st(1)
-    }
-    __asm { fld     dword ptr ds:0A34F5Ch }
-    if ( !__SETP__(HIBYTE(_AX) & 0x41, 0) )
-      __asm { fst     [esp+arg_38] }
-    __asm
-    {
-      fld     [esp+arg_3C]
-      fmul    st, st(3)
-      fadd    st, st(3)
-      fstp    [esp+arg_3C]
-      fld     [esp+arg_3C]
-      fcomp   st(2)
-      fnstsw  ax
-    }
-    if ( (_AX & 0x100) == 0 )
-      __asm { fst     [esp+arg_3C] }
-    __asm
-    {
-      fxch    st(3)
-      fmul    st, st(2)
-      faddp   st(2), st
-      fxch    st(1)
-      fstp    [esp+arg_40]
-      fld     [esp+arg_40]
-      fcompp
-      fnstsw  ax
-    }
-    if ( (_AX & 0x100) != 0 )
-      __asm { fstp    st }
+    v43 = dbl_A2FAA0; /*0x4eaf1f*/
+    a14 = a14 * v43 + v43; /*0x4eaf21*/
+    v44 = dbl_A46B18; /*0x4eaf33*/
+    v45 = kDistantLODNormalLimit_097; /*0x4eaf38*/
+    if ( v44 <= a14 ) /*0x4eaf3e*/
+      a14 = kDistantLODNormalLimit_097; /*0x4eaf40*/
+    a15 = a15 * v43 + v43; /*0x4eaf4c*/
+    if ( a15 >= v44 ) /*0x4eaf5b*/
+      a15 = v45; /*0x4eaf5d*/
+    a16 = v43 + a16 * v43; /*0x4eaf69*/
+    if ( a16 >= v44 ) /*0x4eaf78*/
+      a16 = v45; /*0x4eaf7a*/
+    a11 = a14 + a11; /*0x4eaf8c*/
+    a12 = a15 + a12; /*0x4eaf98*/
+    a13 = a16 + a13; /*0x4eafa4*/
+    a27 = 0.0; /*0x4eafaa*/
+    *(float *)&a28 = 0.0; /*0x4eafae*/
+    *(float *)&a29 = 0.0; /*0x4eafb2*/
+    *(float *)&a30 = 0.0; /*0x4eafb6*/
+    if ( a1 ) /*0x4eafba*/
+      sub_4C4B70(*(_DWORD **)(a2 + 0x14), (int)&a40, (int)&a27); /*0x4eafcc*/
     else
-      __asm { fstp    [esp+arg_40] }
-    __asm
-    {
-      fld     [esp+arg_38]
-      fadd    [esp+arg_2C]
-      fstp    [esp+arg_2C]
-      fld     [esp+arg_3C]
-      fadd    [esp+arg_30]
-      fstp    [esp+arg_30]
-      fld     [esp+arg_40]
-      fadd    [esp+arg_34]
-      fstp    [esp+arg_34]
-      fldz
-      fst     [esp+arg_6C]
-      fst     [esp+arg_70]
-      fst     [esp+arg_74]
-      fstp    [esp+arg_78]
-    }
-    if ( a1 )
-      sub_4C4B70(*(_DWORD **)(a2 + 0x14), (int)&a40, (int)&a27);
-    else
-      sub_4407A0(TES, &a11, &a27);
-    __asm { fld     [esp+arg_6C] }
-    __asm { fmul    qword ptr ds:0A47A48h }
-    __asm { fld     [esp+arg_70] }
-    v47 = (unsigned __int16)a21;
-    __asm { fmul    qword ptr ds:0A47A40h }
-    v48 = (float *)(dword_B36098 + 0xC * (unsigned __int16)a21);
-    __asm { faddp   st(1), st }
-    v49 = (int)a21 + 1;
-    __asm { fld     [esp+arg_74] }
-    *v48 = a11;
-    __asm { fmul    qword ptr ds:0A47A38h }
-    v48[1] = a12;
-    __asm { faddp   st(1), st }
-    v48[2] = a13;
-    v50 = dword_B3609C;
-    a21 = (int ***)v49;
-    __asm
-    {
-      fstp    [esp+arg_18]
-      fld     [esp+arg_18]
-      fstp    dword ptr [ecx+eax*4]
-    }
-    *(float *)(v50 + 4 * v47) = _ET1;
+      sub_4407A0(MEMORY[0xB333A0], &a11, &a27); /*0x4eafe3*/
+    v46 = (unsigned __int16)a21; /*0x4eb000*/
+    v47 = (float *)(unk_B36098 + 0xC * (unsigned __int16)a21); /*0x4eb00c*/
+    v48 = a27 * dbl_A47A48 + *(float *)&a28 * dbl_A47A40; /*0x4eb013*/
+    v49 = (int ***)((char *)a21 + 1); /*0x4eb015*/
+    v50 = *(float *)&a29; /*0x4eb018*/
+    *v47 = a11; /*0x4eb01c*/
+    v51 = v50 * dbl_A47A38; /*0x4eb01e*/
+    v47[1] = a12; /*0x4eb028*/
+    v47[2] = a13; /*0x4eb031*/
+    v52 = unk_B3609C; /*0x4eb034*/
+    a21 = v49; /*0x4eb03a*/
+    v57 = v48 + v51; /*0x4eb03e*/
+    *(float *)(v52 + 4 * v46) = v57; /*0x4eb046*/
   }
-  else
-  {
-LABEL_23:
-    __asm { fstp    st }
-  }
-  if ( ++a19 < a17 )
-    JUMPOUT(0x4EAA64);
-  if ( ++a18 < a17 )
-    JUMPOUT(0x4EAA30);
-  result = a21;
-  if ( (_WORD)a21 )
-    return sub_7C4F50(
+  if ( ++a19 < a17 ) /*0x4eb062*/
+    JUMPOUT(0x4EAA64); /*0x4eaa64*/
+  if ( ++a18 < a17 ) /*0x4eb075*/
+    JUMPOUT(0x4EAA30); /*0x4eaa30*/
+  result = a21; /*0x4eb07b*/
+  if ( (_WORD)a21 ) /*0x4eb082*/
+    return sub_7C4F50( /*0x4eb0a6*/
              *(int ***)(a2 + 0x18),
              *(_DWORD *)(a2 + 8),
              *(_DWORD *)(a2 + 0xC),
              *(_DWORD *)(a2 + 0x20),
              *(_DWORD *)(a2 + 0x30),
-             dword_B36098,
-             dword_B3609C,
-             *(float *)&a21);
-  return result;
+             unk_B36098,
+             unk_B3609C,
+             (int)a21);
+  return result; /*0x4eb0c3*/
 }

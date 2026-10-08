@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x73DD70",
+      "0x73DE3E"
+    ],
+    [
+      "0x9CAD70",
+      "0x9CAD96"
+    ]
+  ],
+  "chunks_sha256": "ac655cb0e2ba5ddb2543b74d09466a3d229bcca9167f643257f5d9e94a31a821",
+  "comment_regular": "Pass226: NiScreenTexture record capacity helper; reallocates/copies 0x1C-byte records. Stock xrefs are load/copy only and do not set +0x18.",
+  "comment_repeatable": "Pass226: NiScreenTexture record capacity helper; reallocates/copies 0x1C-byte records. Stock xrefs are load/copy only and do not set +0x18.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_73DD70",
   "end_ea": "0x73DE3E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_73DD70",
   "segment": ".text",
   "sha256": "d4ca234154063096ec09cd85a29d1f33a93f3ee3a95d269aa0908801ce34992d",
   "size": 206,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x73DD70",
+  "total_chunk_size": 244,
   "type": "void __thiscall(unsigned int *this, int)",
-  "xrefs_from_count": 84,
+  "xrefs_from_count": 98,
   "xrefs_to_count": 2
 }

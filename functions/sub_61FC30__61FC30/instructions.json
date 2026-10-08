@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x61FC72",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x61FCB0",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x61FCB7",
-    "line": "call    sub_61DDF0",
+    "line": "call    Actor_CalculateAimAnglesToTarget; Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x61FCCE",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x61FCD2",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61FCD4",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x61FCDA",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x61FCF1",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x61FCF5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61FCF7",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x61FCFD",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x61FD28",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x61FD39",
-    "line": "mov     ecx, offset unk_B36DA0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+0C8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x61FD6F",
-    "line": "push    eax",
+    "line": "push    eax; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61FD70",
-    "line": "call    sub_612690",
+    "line": "call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,13 +733,13 @@
   },
   {
     "ea": "0x61FDA0",
-    "line": "push    ecx",
+    "line": "push    ecx; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61FDA1",
-    "line": "call    sub_612690",
+    "line": "call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x61FE03",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x61FE19",
-    "line": "push    eax",
+    "line": "push    eax; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61FE1A",
-    "line": "call    sub_612690",
+    "line": "call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,6 +1243,228 @@
   },
   {
     "ea": "0x61FE8C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x615050",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x615051",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x615053",
+    "line": "cmp     byte ptr [esi+17Dh], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x61505A",
+    "line": "jz      short loc_61507F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x61505C",
+    "line": "mov     eax, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x61505F",
+    "line": "mov     ecx, [eax+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615062",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x615064",
+    "line": "mov     eax, [edx+0C4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x61506A",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x61506C",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x61506E",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615071",
+    "line": "push    30h ; '0'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x615073",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x615078",
+    "line": "mov     byte ptr [esi+17Dh], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x61507F",
+    "line": "mov     ecx, [esi+1A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x615085",
+    "line": "cmp     ecx, ds:0B372F0h",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x61508B",
+    "line": "jge     short loc_6150BD",
+    "mnemonic": "jge",
+    "size": 2
+  },
+  {
+    "ea": "0x61508D",
+    "line": "mov     edx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615090",
+    "line": "mov     ecx, [edx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x615093",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x615095",
+    "line": "mov     edx, [eax+4CCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x61509B",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x61509C",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x61509E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6150A0",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6150A2",
+    "line": "call    CombatController_GetCurrentTarget",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x6150A7",
+    "line": "cmp     edi, eax",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6150A9",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6150AA",
+    "line": "jnz     short loc_6150BD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x6150AC",
+    "line": "mov     eax, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6150AF",
+    "line": "mov     ecx, [eax+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x6150B2",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x6150B4",
+    "line": "mov     eax, [edx+4A4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x6150BA",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6150BB",
+    "line": "jmp     eax",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x6150BD",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x6150BE",
     "line": "retn",
     "mnemonic": "retn",
     "size": 1

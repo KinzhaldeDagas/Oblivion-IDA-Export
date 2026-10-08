@@ -5,12 +5,12 @@
 0x748039: xor     eax, eax
 0x74803B: pop     esi
 0x74803C: retn
-0x74803D: mov     ecx, [esp+4+arg_0]
+0x74803D: mov     ecx, [esp+4+self]; self
 0x748041: push    ebx
 0x748042: push    edi
 0x748043: mov     edi, [esp+0Ch+Dst]
-0x748047: push    esi; Count
-0x748048: push    edi; Dst
+0x748047: push    esi; byteCount
+0x748048: push    edi; destination
 0x748049: call    NiFile_DirectRead
 0x74804E: mov     ecx, [esp+0Ch+arg_C]
 0x748052: mov     ebx, eax

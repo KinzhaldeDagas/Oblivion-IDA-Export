@@ -27,7 +27,6 @@
 0x4C826C: mov     [esp+1B1C4h+var_1B1B4], ecx
 0x4C8270: lea     ebp, [esp+1B1C4h+var_1A400]
 0x4C8277: jmp     short loc_4C8280
-0x4C8279: align 10h
 0x4C8280: mov     eax, [esp+ecx*4+1B1C4h+var_1B1AC]
 0x4C8284: test    eax, eax
 0x4C8286: jz      loc_4C830C
@@ -90,13 +89,12 @@
 0x4C8334: call    sub_4C80F0
 0x4C8339: xor     edi, edi
 0x4C833B: jmp     short loc_4C8340
-0x4C833D: align 10h
 0x4C8340: xor     esi, esi
 0x4C8342: mov     eax, [ebx+24h]
 0x4C8345: mov     ecx, [eax+8]
 0x4C8348: mov     ecx, [ecx+edi]
 0x4C834B: add     ecx, esi
-0x4C834D: call    sub_43F350
+0x4C834D: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4C8352: fstp    st
 0x4C8354: mov     edx, [ebx+24h]
 0x4C8357: mov     eax, [edx+8]
@@ -106,15 +104,15 @@
 0x4C8364: fld     qword ptr ds:0A46298h
 0x4C836A: fmul    st(1), st
 0x4C836C: fxch    st(1)
-0x4C836E: call    Double_To_SInt32
+0x4C836E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C8373: fld     dword ptr [ebp+8]
 0x4C8376: fmul    st, st(1)
 0x4C8378: mov     [esp+1B1C4h+var_1B1AE], al
-0x4C837C: call    Double_To_SInt32
+0x4C837C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C8381: fld     dword ptr [ebp+0]
 0x4C8384: fmul    st, st(1)
 0x4C8386: mov     [esp+1B1C4h+var_1B1AD], al
-0x4C838A: call    Double_To_SInt32
+0x4C838A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4C838F: movsx   edx, al
 0x4C8392: mov     [esp+1B1C4h+var_1B1B4], edx
 0x4C8396: movsx   eax, [esp+1B1C4h+var_1B1AE]
@@ -143,7 +141,7 @@
 0x4C83E8: mov     eax, [edx+8]
 0x4C83EB: mov     ecx, [eax+edi]
 0x4C83EE: add     ecx, esi
-0x4C83F0: call    sub_43F350
+0x4C83F0: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x4C83F5: fstp    st
 0x4C83F7: add     esi, 0Ch
 0x4C83FA: cmp     esi, 0D8Ch
@@ -154,7 +152,6 @@
 0x4C8412: xor     ebp, ebp
 0x4C8414: lea     ebx, [esp+1B1C4h+var_1A400]
 0x4C841B: jmp     short loc_4C8420
-0x4C841D: align 10h
 0x4C8420: mov     eax, [esp+ebp*4+1B1C4h+var_1B1AC]
 0x4C8424: test    eax, eax
 0x4C8426: jz      loc_4C84B0

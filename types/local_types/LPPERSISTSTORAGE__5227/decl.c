@@ -1,1 +1,1 @@
-LPPERSISTSTORAGE
+typedef IPersistStorage_0 *LPPERSISTSTORAGE;

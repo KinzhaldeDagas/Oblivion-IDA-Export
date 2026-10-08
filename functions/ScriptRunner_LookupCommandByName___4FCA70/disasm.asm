@@ -6,16 +6,16 @@
 0x4FCA79: mov     esi, offset off_B0A2CC
 0x4FCA7E: mov     edi, edi
 0x4FCA80: mov     eax, [esi-4]
-0x4FCA83: push    edi; Str2
-0x4FCA84: push    eax; Str1
-0x4FCA85: call    __strcmp
+0x4FCA83: push    edi; right
+0x4FCA84: push    eax; left
+0x4FCA85: call    CRT_StricmpLocaleDispatch
 0x4FCA8A: add     esp, 8
 0x4FCA8D: test    eax, eax
 0x4FCA8F: jz      loc_4FCB2B
 0x4FCA95: mov     ecx, [esi]
-0x4FCA97: push    edi; Str2
-0x4FCA98: push    ecx; Str1
-0x4FCA99: call    __strcmp
+0x4FCA97: push    edi; right
+0x4FCA98: push    ecx; left
+0x4FCA99: call    CRT_StricmpLocaleDispatch
 0x4FCA9E: add     esp, 8
 0x4FCAA1: test    eax, eax
 0x4FCAA3: jz      loc_4FCB2B
@@ -24,39 +24,39 @@
 0x4FCAAF: cmp     esi, offset byte_B0A54C
 0x4FCAB5: jl      short loc_4FCA80
 0x4FCAB7: xor     ebx, ebx
-0x4FCAB9: mov     esi, offset Script_CommandList?.shortName
+0x4FCAB9: mov     esi, offset Script_CommandList.shortName
 0x4FCABE: mov     edi, edi
 0x4FCAC0: mov     ecx, [esi-4]
-0x4FCAC3: push    ecx; Str2
-0x4FCAC4: push    edi; Str1
-0x4FCAC5: call    __strcmp
+0x4FCAC3: push    ecx; right
+0x4FCAC4: push    edi; left
+0x4FCAC5: call    CRT_StricmpLocaleDispatch
 0x4FCACA: add     esp, 8
 0x4FCACD: test    eax, eax
 0x4FCACF: jz      short loc_4FCB48
 0x4FCAD1: mov     edx, [esi]
-0x4FCAD3: push    edx; Str2
-0x4FCAD4: push    edi; Str1
-0x4FCAD5: call    __strcmp
+0x4FCAD3: push    edx; right
+0x4FCAD4: push    edi; left
+0x4FCAD5: call    CRT_StricmpLocaleDispatch
 0x4FCADA: add     esp, 8
 0x4FCADD: test    eax, eax
 0x4FCADF: jz      short loc_4FCB48
 0x4FCAE1: add     esi, 28h ; '('
 0x4FCAE4: add     ebx, 1
-0x4FCAE7: cmp     esi, (offset Script_CommandList?.shortName+39A8h)
+0x4FCAE7: cmp     esi, offset unk_B1026C
 0x4FCAED: jl      short loc_4FCAC0
 0x4FCAEF: xor     ebx, ebx
 0x4FCAF1: mov     esi, offset Script_ConsoleCommandList.shortName
 0x4FCAF6: mov     edx, [esi-4]
-0x4FCAF9: push    edx; Str2
-0x4FCAFA: push    edi; Str1
-0x4FCAFB: call    __strcmp
+0x4FCAF9: push    edx; right
+0x4FCAFA: push    edi; left
+0x4FCAFB: call    CRT_StricmpLocaleDispatch
 0x4FCB00: add     esp, 8
 0x4FCB03: test    eax, eax
 0x4FCB05: jz      short loc_4FCB65
 0x4FCB07: mov     eax, [esi]
-0x4FCB09: push    eax; Str2
-0x4FCB0A: push    edi; Str1
-0x4FCB0B: call    __strcmp
+0x4FCB09: push    eax; right
+0x4FCB0A: push    edi; left
+0x4FCB0B: call    CRT_StricmpLocaleDispatch
 0x4FCB10: add     esp, 8
 0x4FCB13: test    eax, eax
 0x4FCB15: jz      short loc_4FCB65

@@ -1,5 +1,6 @@
-char __cdecl sub_67F0F0(char a1)
+// Verified: writes policy byte 2 at qword_B3BB2C[0xBA] and returns the assigned value. The second CalcLowPathToPoint boolean is saved/restored through this setter and corresponds to 'allow disabled doors'.
+bool __cdecl TravelPath_SetAllowDisabledDoors(bool enabled)
 {
-  byte_B3BE16 = a1;
-  return a1;
+  BYTE2(qword_B3BB2C[0xBA]) = enabled; /*0x67f0f4*/
+  return enabled; /*0x67f0f9*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B0D10",
-    "line": "push    ebp",
+    "line": "push    ebp; Load an Oblivion TESObjectLIGH record. The DATA chunk is exactly 0x18 bytes at object +0x70..+0x87; zero +0x80 is normalized to 1.0 and zero +0x84 to 90.0.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B0D3D",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -195,12 +195,6 @@
     "ea": "0x4B0D6C",
     "line": "jmp     short loc_4B0D72",
     "mnemonic": "jmp",
-    "size": 2
-  },
-  {
-    "ea": "0x4B0D6E",
-    "line": "align 10h",
-    "mnemonic": null,
     "size": 2
   },
   {
@@ -307,7 +301,7 @@
   },
   {
     "ea": "0x4B0DB0",
-    "line": "call    TESForm_LoadGenericComponents",
+    "line": "call    TESForm_LoadGenericComponents; Load the Oblivion LIGH DATA chunk as exactly 0x18 bytes into TESObjectLIGH+0x70..+0x87. Shadow registration later copies object +0x80 and +0x84.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +349,7 @@
   },
   {
     "ea": "0x4B0DCF",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +445,7 @@
   },
   {
     "ea": "0x4B0E08",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +505,7 @@
   },
   {
     "ea": "0x4B0E26",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +595,7 @@
   },
   {
     "ea": "0x4B0E54",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +637,7 @@
   },
   {
     "ea": "0x4B0E6D",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; Load the four-byte Oblivion LIGH FNAM subrecord into TESObjectLIGH::fade_88.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +763,7 @@
   },
   {
     "ea": "0x4B0EAD",
-    "line": "jp      short loc_4B0EBB",
+    "line": "jp      short loc_4B0EBB; If the loaded TESObjectLIGH DATA value at +0x84 is zero, restore the retail 90.0 default. The shadow lifecycle copies this value to ShadowSceneLight projector FOV +0x124.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -805,7 +799,7 @@
   },
   {
     "ea": "0x4B0EC6",
-    "line": "jp      short loc_4B0ED0",
+    "line": "jp      short loc_4B0ED0; If loaded TESObjectLIGH DATA falloff exponent +0x80 is zero, restore the retail 1.0 default. Attached-reference registration copies it to ShadowSceneLight+0x128.",
     "mnemonic": "jp",
     "size": 2
   },

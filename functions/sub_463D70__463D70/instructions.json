@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x463D75",
-    "line": "mov     ebp, [esp+38h+arg_0]",
+    "line": "mov     ebp, [esp+38h+referenceID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x463DBC",
-    "line": "lea     edi, [esp+40h+var_2C]",
+    "line": "lea     edi, [esp+40h+data]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x463DC2",
-    "line": "mov     ecx, [esp+40h+var_28]",
+    "line": "mov     ecx, dword ptr [esp+40h+data+4]; Verified: kind value tested at +0; branch 1 allocates ArrowProjectile, 2 selects a MagicProjectile subtype, 0/3 feed standard TESObjectREFR construction/reuse at 4603E0.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x463DCE",
-    "line": "mov     edx, [esp+40h+var_24]",
+    "line": "mov     edx, dword ptr [esp+40h+data+8]; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x463DD5",
-    "line": "mov     [esp+44h+var_28], eax",
+    "line": "mov     dword ptr [esp+44h+data+4], eax; Verified: kind value tested at +0; branch 1 allocates ArrowProjectile, 2 selects a MagicProjectile subtype, 0/3 feed standard TESObjectREFR construction/reuse at 4603E0.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,37 +211,37 @@
   },
   {
     "ea": "0x463DDE",
-    "line": "mov     [esp+40h+var_24], eax",
+    "line": "mov     dword ptr [esp+40h+data+8], eax; Candidate: value is passed through the saved-form-ID resolver at 465EE2; its meaning is bound-form ID for normal references and may be type-dependent for projectiles.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x463DE2",
-    "line": "lea     eax, [esp+40h+var_2C]",
+    "line": "lea     eax, [esp+40h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x463DE6",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463DE7",
-    "line": "push    ebp",
+    "line": "push    ebp; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463DE8",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463DEA",
-    "line": "call    sub_4603E0",
+    "line": "call    TESSaveLoadGame_CreateReferenceFromInitialData;  Verified created-reference branch behavior from Oblivion RTTI/allocation evidence: kind=1 allocates ArrowProjectile; kind=2 selects MagicBall/Bolt/Fog class; kinds=0/3 use TESBoundObject lookup and standard TESObjectREFR construction or compatible existing REFR reuse. Fallout CreatedReferenceInitialData is 31 bytes and uses a compact 3-byte BoundIDIndex; Oblivion payload is 36 bytes with dword IDs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x463E1D",
-    "line": "mov     [esp+arg_0], 1",
+    "line": "mov     [esp+referenceID], 1",
     "mnemonic": "mov",
     "size": 8
   },
@@ -475,19 +475,19 @@
   },
   {
     "ea": "0x463E51",
-    "line": "lea     edi, [esp+40h+var_2C]",
+    "line": "lea     edi, [esp+40h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x463E55",
-    "line": "rep movsd",
+    "line": "rep movsd; Verified: moved data copy size 44 bytes from saved buffer+4. Payload structure attached as OblivionMovedReferenceInitialData.",
     "mnemonic": "movsd",
     "size": 2
   },
   {
     "ea": "0x463E57",
-    "line": "mov     ecx, [esp+40h+var_2C]",
+    "line": "mov     ecx, dword ptr [esp+40h+data]; Verified: 36-byte payload read by LoadGame at 465EB1..465ED6.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x463E63",
-    "line": "mov     edx, [esp+40h+var_1C]",
+    "line": "mov     edx, dword ptr [esp+40h+data+10h]; Verified: +0xC,+0x10,+0x14 are finite-checked as a NiPoint3 and X/Y select a worldspace cell at 465F47..465F92.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x463E6A",
-    "line": "mov     [esp+44h+var_2C], eax",
+    "line": "mov     dword ptr [esp+44h+data], eax; Verified: 36-byte payload read by LoadGame at 465EB1..465ED6.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,25 +541,25 @@
   },
   {
     "ea": "0x463E73",
-    "line": "mov     [esp+40h+var_1C], eax",
+    "line": "mov     dword ptr [esp+40h+data+10h], eax; Verified: +0xC,+0x10,+0x14 are finite-checked as a NiPoint3 and X/Y select a worldspace cell at 465F47..465F92.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x463E77",
-    "line": "lea     eax, [esp+40h+var_2C]",
+    "line": "lea     eax, [esp+40h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x463E7B",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463E7C",
-    "line": "push    ebp",
+    "line": "push    ebp; referenceID",
     "mnemonic": "push",
     "size": 1
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x463E7F",
-    "line": "call    sub_45C4F0",
+    "line": "call    TESSaveLoadGame_RebuildReferenceFromLocationOverrides;  Verified: moved-reference rebuild. Resolves primary location ID at +0 (fallback ID +0x10 when zero), casts it to TESObjectCELL or TESWorldSpace, scans its override files for the requested referenceID, loads matching reference records, runs PostFixup, and restores actor/REFR starting location data. Worldspace path quantizes X/Y by >>12 to find the owning cell. Probable role homolog: Fallout ReferenceInitialData::GetOriginalLocationCellAndWorld / LoadChangedReference; Oblivion implementation searches local override files directly. Verified: a2 uses 44-byte moved-reference payload; +0 and +0x10 are remapped FormIDs before call. X/Y at +4/+8 are consumed on the worldspace path. Remaining fields Unknown. Verified cross-reference divergence: Fallout MovedReferenceInitialData is 34 bytes (27-byte location data + compact original-location index and int16 cell XY); Oblivion restore reads 44 bytes and supports primary/fallback full FormIDs at +0/+0x10 plus world XY at +4/+8. Confidence label Probable applies only to s",
     "mnemonic": "call",
     "size": 5
   },

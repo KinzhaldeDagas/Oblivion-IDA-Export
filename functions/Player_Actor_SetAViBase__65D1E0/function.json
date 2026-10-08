@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x65D1E0",
+      "0x65D219"
+    ]
+  ],
+  "chunks_sha256": "196fc61a285cd91a7375e022941664ab7e7b4d8ac0defc75b31f8ddc20103966",
+  "comment_regular": "Player integer base-AV setter. Write the actor-base value, refresh UI, and call Player_OnActorValueBaseChanged with rebuild=true. For skills this rebuilds all requiredSkillExp entries but bypasses normal advancement counters.",
+  "comment_repeatable": "Player integer base-AV setter. Write the actor-base value, refresh UI, and call Player_OnActorValueBaseChanged with rebuild=true. For skills this rebuilds all requiredSkillExp entries but bypasses normal advancement counters.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Player_Actor_SetAViBase",
   "end_ea": "0x65D219",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Player_Actor_SetAViBase",
   "segment": ".text",
   "sha256": "196fc61a285cd91a7375e022941664ab7e7b4d8ac0defc75b31f8ddc20103966",
   "size": 57,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65D1E0",
-  "type": "int __thiscall(Actor *this, int, int)",
+  "total_chunk_size": 57,
+  "type": "void __thiscall(Actor *this, unsigned int, int)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 3
 }

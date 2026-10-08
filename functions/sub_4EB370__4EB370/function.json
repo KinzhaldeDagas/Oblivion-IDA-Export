@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4EB370",
+      "0x4EB3E4"
+    ]
+  ],
+  "chunks_sha256": "92cebaeb0e710855684c0b36aa031f7d94065efe080e82854a55c292d16fa55d",
+  "comment_regular": "Verified quad lookup and terrain pick; Probable auxiliary output role: triangle geometry pick records supply the normalized surface normal at NiPickRecord +0x28..+0x30. Bounds-only fallback records do not explicitly populate that field. The embedded parser remaps the vector and adds it to rounded record positions; the purpose of its 0.97/128 clamp remains Unknown.",
+  "comment_repeatable": "Verified quad lookup and terrain pick; Probable auxiliary output role: triangle geometry pick records supply the normalized surface normal at NiPickRecord +0x28..+0x30. Bounds-only fallback records do not explicitly populate that field. The embedded parser remaps the vector and adds it to rounded record positions; the purpose of its 0.97/128 clamp remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EB370",
+  "display_name": "TESWorldSpaceTerrainLODQuadMap_ProjectPointToLoadedTerrain",
   "end_ea": "0x4EB3E4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EB370",
+  "name": "TESWorldSpaceTerrainLODQuadMap_ProjectPointToLoadedTerrain",
   "segment": ".text",
   "sha256": "92cebaeb0e710855684c0b36aa031f7d94065efe080e82854a55c292d16fa55d",
   "size": 116,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EB370",
-  "type": "char __thiscall(_DWORD *this, int, float *, _DWORD *)",
+  "total_chunk_size": 116,
+  "type": "bool __thiscall(TESWorldSpaceTerrainLODQuadMap *this, NiPoint3 *worldPosition, float *hitPointZOut, NiPoint3 *pickVectorOut)",
   "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

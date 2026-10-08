@@ -7,7 +7,7 @@
 0x667536: push    ebx
 0x667537: push    esi
 0x667538: push    edi
-0x667539: mov     ebx, offset dword_B3BB44
+0x667539: mov     ebx, (offset qword_B3BB2C+18h)
 0x66753E: mov     edi, edi
 0x667540: mov     edi, [ebx]
 0x667542: mov     eax, [edi]
@@ -30,7 +30,7 @@
 0x66756F: call    sub_88CF20
 0x667574: add     esp, 10h
 0x667577: push    edi
-0x667578: mov     ecx, offset dword_B3BB44
+0x667578: mov     ecx, (offset qword_B3BB2C+18h)
 0x66757D: call    BSSimpleList_Remove
 0x667582: cmp     dword ptr ds:0B3BB48h, 0
 0x667589: jnz     short loc_667539

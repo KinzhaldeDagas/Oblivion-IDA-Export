@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x43E07E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -496,5 +496,83 @@
     "line": "jmp     short loc_43E0B2",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x435A60",
+    "line": "mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVTESObjectREFR@@V?$NiPointer@VQueuedReference@@@@@@6B@; const LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference>>::LockFreeMapIterator::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x435A66",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACDD0",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACDD3",
+    "line": "jmp     loc_435A60",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACDD8",
+    "line": "lea     ecx, [ebp-24h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACDDB",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACDE0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ACDE4",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACDE7",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACDEA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACDEC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACDF1",
+    "line": "mov     eax, offset stru_AD9A44",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACDF6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7117C0",
+  "chunks": [
+    [
+      "0x7117C0",
+      "0x7118DB"
+    ]
+  ],
+  "chunks_sha256": "f76c95a3ef00003726fdd1d55337b6cf0c3a9a769d950dd0ca762f24590a8b3f",
+  "comment_regular": "Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.",
+  "comment_repeatable": "Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 27,
+  "display_name": "NiMatrix33_SetEulerZXY",
   "end_ea": "0x7118DB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7117C0",
+  "name": "NiMatrix33_SetEulerZXY",
   "segment": ".text",
   "sha256": "f76c95a3ef00003726fdd1d55337b6cf0c3a9a769d950dd0ca762f24590a8b3f",
   "size": 283,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7117C0",
-  "type": "float *__thiscall(float *this, float, float, float)",
-  "xrefs_from_count": 83,
+  "total_chunk_size": 283,
+  "type": "void __thiscall(NiMatrix33 *this, float yawZ, float pitchX, float rollY)",
+  "xrefs_from_count": 110,
   "xrefs_to_count": 7
 }

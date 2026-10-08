@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5D3902",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x5D3914",
-    "line": "call    sub_5D3650",
+    "line": "call    SaveMenu_AddSaveRow",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5D3934",
-    "line": "call    sub_45D450",
+    "line": "call    TESSaveLoadGame_EnumerateSaveFiles; ContinueFromLastSave fidelity decode: enumerates GameSaveRoot+SaveSubdir+*.ess, constructs SaveGameFile objects (BSFile + vtable + flag byte), inserts into SaveLoad+0x6C list via BSSimpleList_InsertSorted comparator 0x459450.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5D3970",
-    "line": "call    sub_5D3650",
+    "line": "call    SaveMenu_AddSaveRow",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x785580",
+      "0x7856A5"
+    ]
+  ],
+  "chunks_sha256": "22ec4ab1e69f3b43ee2345c791837dc3c4d4bb757f7aa7e215281d4cd1c6b732",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned int>, covering self, empty, capacity-reuse, and reallocation paths. CIndexedGeometry::CombineStrips uses it for per-LOD triangle totals.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned int>, covering self, empty, capacity-reuse, and reallocation paths. CIndexedGeometry::CombineStrips uses it for per-LOD triangle totals.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_785580",
+  "display_name": "OB_stVectorUInt32_CopyAssign_010201A0",
   "end_ea": "0x7856A5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_785580",
+  "name": "OB_stVectorUInt32_CopyAssign_010201A0",
   "segment": ".text",
   "sha256": "22ec4ab1e69f3b43ee2345c791837dc3c4d4bb757f7aa7e215281d4cd1c6b732",
   "size": 293,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785580",
-  "type": "_DWORD *__thiscall(_DWORD *this, int)",
+  "total_chunk_size": 293,
+  "type": "OB_stVectorUInt32_010201A0 *__thiscall(OB_stVectorUInt32_010201A0 *this, const OB_stVectorUInt32_010201A0 *source)",
   "xrefs_from_count": 147,
   "xrefs_to_count": 2
 }

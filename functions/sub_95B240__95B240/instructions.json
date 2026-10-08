@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x95B2A0",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x95B2C4",
-    "line": "fstp    [esp+2FCh+var_2CC]",
+    "line": "fstp    [esp+2FCh+self]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x95B2E4",
-    "line": "fld     [esp+300h+var_2CC]",
+    "line": "fld     [esp+300h+self]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x95B2EF",
-    "line": "call    sub_710250",
+    "line": "call    NiPoint3_MultiplyMatrix3",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,19 +439,19 @@
   },
   {
     "ea": "0x95B34F",
-    "line": "mov     [esp+2E8h+var_1BC], ecx",
+    "line": "mov     [esp+2E8h+outVertices.data], ecx",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95B356",
-    "line": "mov     [esp+2E8h+var_1B8], edx",
+    "line": "mov     [esp+2E8h+outVertices.stride], edx",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95B35D",
-    "line": "mov     [esp+2E8h+var_1B4], cl",
+    "line": "mov     [esp+2E8h+outVertices.unknown08], cl",
     "mnemonic": "mov",
     "size": 7
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x95B373",
-    "line": "mov     [esp+2E8h+var_2CC], edi",
+    "line": "mov     [esp+2E8h+self], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -553,37 +553,37 @@
   },
   {
     "ea": "0x95B393",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x95B395",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95B397",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x95B39C",
-    "line": "lea     ecx, [esp+2E8h+var_1BC]",
+    "line": "lea     ecx, [esp+2E8h+outVertices]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x95B3A3",
-    "line": "push    ecx",
+    "line": "push    ecx; outVertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95B3A4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -595,19 +595,19 @@
   },
   {
     "ea": "0x95B3AA",
-    "line": "call    sub_728B60",
+    "line": "call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x95B3AF",
-    "line": "mov     ecx, [esp+2E8h+var_1BC]",
+    "line": "mov     ecx, [esp+2E8h+outVertices.data]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95B3B6",
-    "line": "mov     edx, [esp+2E8h+var_1B8]",
+    "line": "mov     edx, [esp+2E8h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x95B3DB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95B3DD",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x95B3F1",
-    "line": "mov     edx, [esp+2E8h+var_1B8]",
+    "line": "mov     edx, [esp+2E8h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x95B3F8",
-    "line": "mov     ecx, [esp+2E8h+var_1BC]",
+    "line": "mov     ecx, [esp+2E8h+outVertices.data]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1333,19 +1333,19 @@
   },
   {
     "ea": "0x95B5A8",
-    "line": "push    ecx",
+    "line": "push    ecx; pickedObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95B5A9",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95B5AB",
-    "line": "call    sub_95A2D0",
+    "line": "call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x95B6F9",
-    "line": "mov     ecx, [esp+2ECh+var_2CC]",
+    "line": "mov     ecx, [esp+2ECh+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2707,7 +2707,7 @@
   },
   {
     "ea": "0x95B9C9",
-    "line": "mov     ecx, [esp+2E8h+var_2CC]",
+    "line": "mov     ecx, [esp+2E8h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4045,7 +4045,7 @@
   },
   {
     "ea": "0x95BE14",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4243,7 +4243,7 @@
   },
   {
     "ea": "0x95BE97",
-    "line": "mov     ecx, [esp+2E8h+var_2CC]",
+    "line": "mov     ecx, [esp+2E8h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6127,7 +6127,7 @@
   },
   {
     "ea": "0x95C504",
-    "line": "mov     edi, [esp+2E8h+var_2CC]",
+    "line": "mov     edi, [esp+2E8h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6151,13 +6151,13 @@
   },
   {
     "ea": "0x95C514",
-    "line": "mov     ecx, [esp+2E8h+var_2CC]",
+    "line": "mov     ecx, [esp+2E8h+self]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x95C518",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },

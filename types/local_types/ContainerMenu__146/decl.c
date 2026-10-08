@@ -1,1 +1,1 @@
-ContainerMenu
+struct ContainerMenu;

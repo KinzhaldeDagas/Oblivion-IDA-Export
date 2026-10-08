@@ -20,19 +20,19 @@
 0x9284AA: push    ecx
 0x9284AB: push    edx
 0x9284AC: lea     ecx, [esp+48h+var_30]
-0x9284B0: call    sub_88FCC0
+0x9284B0: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x9284B5: mov     ecx, [esi+20h]
 0x9284B8: lea     eax, [edi+20h]
 0x9284BB: push    eax
 0x9284BC: push    ecx
 0x9284BD: lea     ecx, [esp+48h+var_20]
-0x9284C1: call    sub_88FCC0
+0x9284C1: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x9284C6: mov     edx, [esi+1Ch]
 0x9284C9: add     edi, 30h ; '0'
 0x9284CC: push    edi
 0x9284CD: push    edx
 0x9284CE: lea     ecx, [esp+48h+var_10]
-0x9284D2: call    sub_88FE00
+0x9284D2: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x9284D7: push    ebx
 0x9284D8: lea     eax, [esp+44h+var_30]
 0x9284DC: push    esi

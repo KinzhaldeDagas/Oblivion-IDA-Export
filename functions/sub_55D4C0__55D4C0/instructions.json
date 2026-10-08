@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x55D4E2",
-    "line": "call    sub_70A0D0",
+    "line": "call    NiNode_UpdateDownwardPass; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x55D6D2",
-    "line": "lea     edi, [esp+0A4h+var_68]",
+    "line": "lea     edi, [esp+0A4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x55D701",
-    "line": "lea     edx, [esp+0ACh+var_44]",
+    "line": "lea     edx, [esp+0ACh+out]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x55D732",
-    "line": "lea     edi, [esp+0A4h+var_68]",
+    "line": "lea     edi, [esp+0A4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1111,31 +1111,31 @@
   },
   {
     "ea": "0x55D751",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55D752",
-    "line": "lea     ecx, [esp+0A8h+var_44]",
+    "line": "lea     ecx, [esp+0A8h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55D756",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55D757",
-    "line": "lea     edx, [esp+0ACh+var_68]",
+    "line": "lea     edx, [esp+0ACh+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55D75B",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -1147,31 +1147,31 @@
   },
   {
     "ea": "0x55D763",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55D764",
-    "line": "lea     ecx, [edi+64h]",
+    "line": "lea     ecx, [edi+64h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x55D767",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55D76C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55D76E",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x55D833",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x55D84F",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x55D879",
-    "line": "call    sub_70A0D0",
+    "line": "call    NiNode_UpdateDownwardPass; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x55D8AB",
-    "line": "call    sub_70A0D0",
+    "line": "call    NiNode_UpdateDownwardPass; NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.",
     "mnemonic": "call",
     "size": 5
   },

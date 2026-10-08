@@ -68,7 +68,7 @@
 0x4519ED: test    al, al
 0x4519EF: mov     ecx, esi
 0x4519F1: jnz     short loc_451A17
-0x4519F3: call    TESFile__NextGroup
+0x4519F3: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x4519F8: jmp     short loc_451A1E
 0x4519FA: cmp     eax, [esp+18h+arg_0]
 0x4519FE: jnz     short loc_451A15

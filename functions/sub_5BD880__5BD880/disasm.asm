@@ -16,7 +16,7 @@
 0x5BD8B3: test    eax, eax
 0x5BD8B5: jz      short loc_5BD8BE
 0x5BD8B7: mov     ecx, eax; int
-0x5BD8B9: call    sub_584740
+0x5BD8B9: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5BD8BE: call    sub_5A3540
 0x5BD8C3: retn    8
 0x5BD8C6: cmp     eax, 6
@@ -31,7 +31,7 @@
 0x5BD8E3: test    eax, eax
 0x5BD8E5: jz      short loc_5BD8EE
 0x5BD8E7: mov     ecx, eax; int
-0x5BD8E9: call    sub_584740
+0x5BD8E9: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5BD8EE: call    sub_5DEB80
 0x5BD8F3: retn    8
 0x5BD8F6: cmp     eax, 7
@@ -46,7 +46,7 @@
 0x5BD913: test    eax, eax
 0x5BD915: jz      short loc_5BD91E
 0x5BD917: mov     ecx, eax; int
-0x5BD919: call    sub_584740
+0x5BD919: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5BD91E: call    sub_595380
 0x5BD923: retn    8
 0x5BD926: cmp     eax, 8
@@ -61,6 +61,6 @@
 0x5BD943: test    eax, eax
 0x5BD945: jz      short loc_5BD94E
 0x5BD947: mov     ecx, eax; int
-0x5BD949: call    sub_584740
-0x5BD94E: call    sub_59BA40
+0x5BD949: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
+0x5BD94E: call    ControlsMenu_Open
 0x5BD953: retn    8

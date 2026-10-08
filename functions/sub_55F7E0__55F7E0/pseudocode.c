@@ -1,15 +1,13 @@
-int __cdecl sub_55F7E0(char a1)
+// Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
+BSTreeManager_OblivionVerifiedLayout *__cdecl BSTreeManager_GetInstance(bool createIfMissing)
 {
-  int result; // eax
+  BSTreeManager_OblivionVerifiedLayout *result; // eax
 
-  result = dword_B39E04;
-  if ( !dword_B39E04 )
+  result = g_BSTreeManager_Instance; /*0x55f7e0*/
+  if ( !g_BSTreeManager_Instance && createIfMissing ) /*0x55f7ed*/
   {
-    if ( a1 )
-    {
-      sub_55F750(dword_B39E04);
-      return dword_B39E04;
-    }
+    BSTreeManager_Create((bool)g_BSTreeManager_Instance); /*0x55f7f0*/
+    return g_BSTreeManager_Instance; /*0x55f7f5*/
   }
-  return result;
+  return result; /*0x55f7fd*/
 }

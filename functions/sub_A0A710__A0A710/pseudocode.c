@@ -1,4 +1,4 @@
-BSStringT *sub_A0A710()
+NiRTTI *sub_A0A710()
 {
-  return sub_70E220((BSStringT *)dword_B401DC, "NiParticleMeshesData", (int)dword_B401C8);
+  return NiRTTI_Constructor(&stru_B401DC, "NiParticleMeshesData", &stru_B401C8); /*0xa0a724*/
 }

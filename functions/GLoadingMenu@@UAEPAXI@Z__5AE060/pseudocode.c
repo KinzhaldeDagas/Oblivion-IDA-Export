@@ -5,8 +5,8 @@ LoadingMenu *__userpurge LoadingMenu::`scalar deleting destructor'@<eax>(
         double a4@<st0>,
         char a5)
 {
-  LoadingMenu::~LoadingMenu(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  LoadingMenu::~LoadingMenu(this, a2, a3, a4); /*0x5ae063*/
+  if ( (a5 & 1) != 0 ) /*0x5ae06d*/
+    FormHeapFree((unsigned int)this); /*0x5ae070*/
+  return this; /*0x5ae07a*/
 }

@@ -1,1 +1,4 @@
-HGESTUREINFO__
+struct HGESTUREINFO__
+{
+int unused;
+};

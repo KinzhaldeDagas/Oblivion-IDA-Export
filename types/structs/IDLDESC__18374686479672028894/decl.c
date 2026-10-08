@@ -1,1 +1,1 @@
-IDLDESC
+typedef tagIDLDESC IDLDESC;

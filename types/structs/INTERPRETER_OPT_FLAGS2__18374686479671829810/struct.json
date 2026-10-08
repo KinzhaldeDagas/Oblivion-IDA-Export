@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "INTERPRETER_OPT_FLAGS2",
+  "definition": "struct INTERPRETER_OPT_FLAGS2\n{\nunsigned __int8 HasNewCorrDesc : 1;\nunsigned __int8 ClientCorrCheck : 1;\nunsigned __int8 ServerCorrCheck : 1;\nunsigned __int8 HasNotify : 1;\nunsigned __int8 HasNotify2 : 1;\nunsigned __int8 Unused : 3;\n}\n",
   "id": 18374686479671829810,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HasNewCorrDesc",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int8 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ClientCorrCheck",
-      "offset": 0,
+      "offset": 0.125,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int8 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ServerCorrCheck",
-      "offset": 0,
+      "offset": 0.25,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int8 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HasNotify",
-      "offset": 0,
+      "offset": 0.375,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int8 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HasNotify2",
-      "offset": 0,
+      "offset": 0.5,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int8 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unused",
-      "offset": 0,
+      "offset": 0.625,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.375,
+      "type": "unsigned __int8 : 3"
     }
   ],
   "name": "INTERPRETER_OPT_FLAGS2",
+  "ordinal": 3151,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1
 }

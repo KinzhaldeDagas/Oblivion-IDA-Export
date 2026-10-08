@@ -1,4 +1,4 @@
-0x6CC900: sub     esp, 8
+0x6CC900: sub     esp, 8; Oblivion: special two-active-item normalization. Combines item+4 base weight with item+0x10 ease weight, accounts for item+0x0C priority, then applies highest-only flag or blend threshold.
 0x6CC903: push    ebx
 0x6CC904: push    ebp
 0x6CC905: mov     ebp, ecx

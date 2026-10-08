@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x60121F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x60128A",
-    "line": "call    sub_579540",
+    "line": "call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x60132C",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x601351",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x601353",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x60135C",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x601369",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x6013FD",
-    "line": "call    sub_41A610",
+    "line": "call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x60144C",
-    "line": "call    sub_419F10",
+    "line": "call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x601481",
-    "line": "call    sub_41A610",
+    "line": "call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x601491",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x6014A8",
-    "line": "mov     ecx, [eax+8]",
+    "line": "mov     ecx, [eax+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x6014AF",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,7 +2383,7 @@
   },
   {
     "ea": "0x60153E",
-    "line": "call    sub_612DE0",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2647,7 +2647,7 @@
   },
   {
     "ea": "0x6015AB",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2743,7 +2743,7 @@
   },
   {
     "ea": "0x6015DC",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x601616",
-    "line": "call    sub_616190",
+    "line": "call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3034,5 +3034,77 @@
     "line": "retn    18h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2BD0",
+    "line": "mov     eax, [ebp+18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2BD3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2BD4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2BD9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2BDA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2BDB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2BDF",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2BE2",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2BE5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2BE7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2BEC",
+    "line": "mov     eax, offset stru_AEB948",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2BF1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

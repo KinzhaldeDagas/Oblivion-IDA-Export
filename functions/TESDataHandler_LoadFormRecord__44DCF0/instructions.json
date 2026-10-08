@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x44DCF0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x44DD2F",
-    "line": "mov     [ebp+108h+var_11C], ecx",
+    "line": "mov     [ebp+108h+self], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x44DD3F",
-    "line": "cmp     byte ptr [ebp+108h+arg_4], 0",
+    "line": "cmp     [ebp+108h+firstFileLowFormFilter], 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x44DD74",
-    "line": "jz      TESDataHandler_LoadFormRecord___ResetForm",
+    "line": "jz      TESDataHandler_LoadFormRecord___ResetForm; PARTIAL 0x4000 resolves an existing form and skips full Clear/Initialize. INFO static fields can inherit, but lazy runtime responses still use the winning loader invocation's stored record offset.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x44DE03",
-    "line": "jz      short TESDataHandler_LoadFormRecord___SwitchFormType",
+    "line": "jz      short TESDataHandler_LoadFormRecord___SwitchFormType; Only an existing non-partial, non-DELE form takes the reset path. Valid partial records skip this branch and replay their chunks over inherited in-memory state.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x44DE10",
-    "line": "call    eax",
+    "line": "call    eax; Virtual +0x18 is Script_ClearDataAndComponents for SCPT: frees data/text and clears variable/reference lists before a full replacement load.",
     "mnemonic": "call",
     "size": 2
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x44DE19",
-    "line": "call    eax",
+    "line": "call    eax; Virtual +0x14 is Script_InitializeDataAndComponents for SCPT: zeros ScriptInfo, text/data pointers, and runtime fields after a full replacement clear. Partial loads do not call it.",
     "mnemonic": "call",
     "size": 2
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x44DE21",
-    "line": "ja      TESDataHandler_LoadFormRecord___TESDataHandler_LoadFormRecord_LoadObject; jumptable 0044DE2E default case, cases 2,18-44,55,64",
+    "line": "ja      TESDataHandler_LoadFormRecord___TESDataHandler_LoadFormRecord_LoadObject; Loader dispatch includes case 55/TLOD in the generic object path rather than a special constructor.",
     "mnemonic": "ja",
     "size": 6
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x44DE69",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x44DE83",
-    "line": "xor     bl, bl; jumptable 0044DE2E case 56",
+    "line": "xor     bl, bl; Verified ROAD load path: form type 0x38 allocates 0x30 bytes and constructs TESRoad if not already present, loads its record chunks, attaches it to the current/fallback WorldSpace through TESWorldSpace_SetRoad, then sets TESRoad+0x2C to that owning WorldSpace. The form-type factory and WorldSpace ownership lifecycle corroborate the 0x54 road field.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x44DE9F",
-    "line": "call    ??0TESRoad@@QAE@XZ; TESRoad::TESRoad(void)",
+    "line": "call    TESRoad_ctor; Verified TESRoad constructor sets TESForm type byte to 0x38 and initializes a 37-bucket NiTPointerMap<unsigned int, BSSimpleList<TESConnectedPoint*>*> at +0x1C. Owner WorldSpace pointer is at +0x2C, confirmed by ROAD group helpers and WorldSpace clone repair. The TESConnectedPoint object layout is still Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x44DEB5",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x44DECB",
-    "line": "mov     ecx, [ebp+108h+var_11C]",
+    "line": "mov     ecx, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x44DECE",
-    "line": "mov     ecx, [ecx+0Ch]",
+    "line": "mov     ecx, [ecx+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -889,13 +889,13 @@
   },
   {
     "ea": "0x44DED7",
-    "line": "push    esi",
+    "line": "push    esi; road",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44DED8",
-    "line": "call    sub_4EF100",
+    "line": "call    TESWorldSpace_SetRoad; Verified ownership setter used by serialized ROAD loading: releases the existing WorldSpace road, then assigns the replacement TESRoad*. The ROAD loader writes the reciprocal TESRoad+0x2C owner pointer immediately afterward.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x44DEF2",
-    "line": "test    esi, esi",
+    "line": "test    esi, esi; Independent reuse precedent for MEF v32: primary TESDataHandler loader tests ESI, allocates only when absent, then calls TESDataHandler_LoadForm on the existing form.",
     "mnemonic": "test",
     "size": 2
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x44DF2C",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44DF31",
-    "line": "mov     eax, [ebp+108h+var_11C]",
+    "line": "mov     eax, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x44DF61",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x44DF6A",
-    "line": "mov     eax, [ebp+108h+var_11C]",
+    "line": "mov     eax, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1243,13 +1243,13 @@
   },
   {
     "ea": "0x44DF9D",
-    "line": "mov     eax, [ebp+108h+var_11C]",
+    "line": "mov     eax, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x44DFA0",
-    "line": "mov     ecx, [eax+0Ch]",
+    "line": "mov     ecx, [eax+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1261,13 +1261,13 @@
   },
   {
     "ea": "0x44DFA9",
-    "line": "push    esi",
+    "line": "push    esi; cell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44DFAA",
-    "line": "call    sub_4EFEF0",
+    "line": "call    TESWorldSpace_RegisterExteriorCell; Verified: external cell registration separates one quest-item exterior cell into persistentCell; normal exterior cells are stored in cellMap under packed signed X/Y.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x44DFB5",
-    "line": "call    TESForm_GetQuestItem",
+    "line": "call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x44E008",
-    "line": "jz      TESDataHandler_LoadFormRecord___Return_0",
+    "line": "jz      TESDataHandler_LoadFormRecord___Return_0; Missing current CELL rejects serialized REFR/ACHR/ACRE (returns false); these records require CELL child context.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -1537,19 +1537,19 @@
   },
   {
     "ea": "0x44E03A",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E03B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44E03D",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x44E053",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x44E07C",
-    "line": "call    TESForm_GetQuestItem",
+    "line": "call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x44E0A8",
-    "line": "mov     ebx, [ebp+108h+var_11C]",
+    "line": "mov     ebx, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1771,19 +1771,19 @@
   },
   {
     "ea": "0x44E0B1",
-    "line": "push    esi",
+    "line": "push    esi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E0B2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44E0B4",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x44E0E5",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1963,19 +1963,19 @@
   },
   {
     "ea": "0x44E10C",
-    "line": "mov     ecx, ds:0B33A9Ch",
+    "line": "mov     ecx, ds:0B33A9Ch; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x44E112",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E113",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x44E187",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2335,7 @@
   },
   {
     "ea": "0x44E1D1",
-    "line": "mov     [ebp+108h+var_11C], eax",
+    "line": "mov     [ebp+108h+self], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2461,7 +2461,7 @@
   },
   {
     "ea": "0x44E212",
-    "line": "mov     eax, [ebp+108h+var_11C]",
+    "line": "mov     eax, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x44E23F",
-    "line": "jz      short loc_44E29B",
+    "line": "jz      short loc_44E29B; Missing current CELL is non-fatal for LAND: return true immediately, skip the LAND payload, and continue loading.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2689,7 +2689,7 @@
   },
   {
     "ea": "0x44E291",
-    "line": "push    edi",
+    "line": "push    edi; Existing generic forms including SCPT reach their LoadForm directly. When PARTIAL selected the existing form above, no derived reset occurred: omitted header/blobs inherit; present SCHR/SCDA replace/overlay; SLSD and SCRO/SCRV append.",
     "mnemonic": "push",
     "size": 1
   },
@@ -2701,7 +2701,7 @@
   },
   {
     "ea": "0x44E293",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x44E2A5",
-    "line": "mov     ecx, ds:0B33A9Ch; jumptable 0044DE2E case 52",
+    "line": "mov     ecx, ds:0B33A9Ch; Missing current CELL is fatal for PGRD: log 'PathGrid not associated with cell.' and return false at 0x44E2BC.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x44E2E6",
-    "line": "call    ??0TESPathGrid@@QAE@XZ; TESPathGrid::TESPathGrid(void)",
+    "line": "call    TESPathGrid_ctor; Verified TESPathGrid form type 0x34 constructor and 0x54-byte layout. It initializes a secondary TESChildCELL vtable at +0x18, rendered NiNode at +0x1C, parent-cell slot +0x20, point-array pointer +0x24, PGRI list header +0x28, point-count word +0x30, and two 37-bucket maps at +0x34 and +0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x44E314",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x44E346",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x44E356",
-    "line": "mov     ecx, offset GameSettingCollection",
+    "line": "mov     ecx, (offset flt_B35464+4)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x44E38B",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3169,7 +3169,7 @@
   },
   {
     "ea": "0x44E39F",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3283,13 +3283,13 @@
   },
   {
     "ea": "0x44E3E3",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44E3E8",
-    "line": "mov     ecx, [ebp+108h+var_11C]",
+    "line": "mov     ecx, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3385,7 +3385,7 @@
   },
   {
     "ea": "0x44E422",
-    "line": "call    ??0TESWorldSpace@@QAE@XZ; TESWorldSpace::TESWorldSpace(void)",
+    "line": "call    ??0TESWorldSpace@@QAE@XZ; Verified: TESWorldSpace constructor initializes road (+0x54) to null. In this Oblivion build, the field is a TESRoad* owned by WorldSpace: the destructor releases it, CreateDuplicateForm clones it and verifies the clone's TESRoad RTTI, and TESRoad grouping code uses the reciprocal owner pointer. The adjacent +0x4C and +0x50 fields remain Unknown. Fallout's TESWorldSpace has a different layout and no TESRoad-named type or function was found in the available name/type searches; no Fallout homolog is claimed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3427,13 +3427,13 @@
   },
   {
     "ea": "0x44E436",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44E43B",
-    "line": "mov     ecx, [ebp+108h+var_11C]",
+    "line": "mov     ecx, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3493,7 +3493,7 @@
   },
   {
     "ea": "0x44E45C",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3577,25 +3577,25 @@
   },
   {
     "ea": "0x44E494",
-    "line": "push    esi",
+    "line": "push    esi; topicType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E495",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44E497",
-    "line": "call    sub_52FB40",
+    "line": "call    TESTopic__TESTopic; TESTopic constructor stores the DialogueType argument in topicType. New runtime DIAL records are constructed with zero at 0x44E49C. LoadForm does not initialize a separate scratch candidate for DATA.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44E49C",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; The runtime DIAL/type 57 allocation path creates TESTopic with constructor argument zero. The DATA stream then writes directly into topicType through TESTopic::LoadForm 0x5301E0.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3631,13 +3631,13 @@
   },
   {
     "ea": "0x44E4AB",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44E4B0",
-    "line": "mov     ecx, [ebp+108h+var_11C]",
+    "line": "mov     ecx, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3685,7 +3685,7 @@
   },
   {
     "ea": "0x44E4CB",
-    "line": "jnz     short loc_44E4FA",
+    "line": "jnz     short loc_44E4FA; INFO dispatch reuses an existing TESTopicInfo (including a valid partial base) or allocates only when absent.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -3793,7 +3793,7 @@
   },
   {
     "ea": "0x44E502",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3811,7 +3811,7 @@
   },
   {
     "ea": "0x44E50D",
-    "line": "jmp     TESDataHandler_LoadFormRecord___Done",
+    "line": "jmp     TESDataHandler_LoadFormRecord___Done; Every INFO invocation calls TESTopicInfo_LoadForm; its +0x34 source offset is therefore updated even when a partial bypassed component reset.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -3889,13 +3889,13 @@
   },
   {
     "ea": "0x44E53B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x44E53D",
-    "line": "call    TESSkill_ClearTESSkill",
+    "line": "call    TESSkill_ClearDataAndComponents; Reset TESSkill native data: actorValue=0xFFFFFFFF, governingAttribute=0, specialization=0, and both useValues=1.0; then clear descriptions/components.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3913,7 +3913,7 @@
   },
   {
     "ea": "0x44E544",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3949,13 +3949,13 @@
   },
   {
     "ea": "0x44E55E",
-    "line": "push    ebx; a1",
+    "line": "push    ebx; formType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E55F",
-    "line": "call    TESForm_CreateDynamic",
+    "line": "call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3973,7 +3973,7 @@
   },
   {
     "ea": "0x44E566",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4009,13 +4009,13 @@
   },
   {
     "ea": "0x44E580",
-    "line": "push    ebx; a1",
+    "line": "push    ebx; formType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E581",
-    "line": "call    TESForm_CreateDynamic",
+    "line": "call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4039,13 +4039,13 @@
   },
   {
     "ea": "0x44E58A",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; MEF v58 SR1 gate: created-object loading ultimately dispatches virtual form loaders through447050; no universal final stream position is established across every factory/partial/early-return path in44DCF0. Preflight therefore reports nonzero created tables as unsupported and restores native input position, rather than guessing20+payload advancement. This is remaining SR1 scope, not a repaired created-object loader.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44E58F",
-    "line": "mov     ecx, [ebp+108h+var_11C]",
+    "line": "mov     ecx, [ebp+108h+self]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4057,13 +4057,13 @@
   },
   {
     "ea": "0x44E595",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E596",
-    "line": "call    TESDataHandler_AddForm",
+    "line": "call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4081,7 +4081,7 @@
   },
   {
     "ea": "0x44E5A5",
-    "line": "test    esi, esi; jumptable 0044DE2E default case, cases 2,18-44,55,64",
+    "line": "test    esi, esi; Generic serialized-record path includes form type 55/TLOD.",
     "mnemonic": "test",
     "size": 2
   },
@@ -4123,13 +4123,13 @@
   },
   {
     "ea": "0x44E5BF",
-    "line": "push    ebx; a1",
+    "line": "push    ebx; formType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44E5C0",
-    "line": "call    TESForm_CreateDynamic",
+    "line": "call    TESForm_CreateDynamic; TESForm_CreateDynamic returns null for TLOD/0x37 because the runtime factory explicitly defaults case 55.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4147,7 +4147,7 @@
   },
   {
     "ea": "0x44E5CA",
-    "line": "test    esi, esi",
+    "line": "test    esi, esi; Null TLOD factory result enters the Unknown %s_ID failure path; serialized TLOD is rejected.",
     "mnemonic": "test",
     "size": 2
   },
@@ -4345,7 +4345,7 @@
   },
   {
     "ea": "0x44E643",
-    "line": "call    TESDataHandler_LoadForm",
+    "line": "call    TESDataHandler_LoadForm; TESDataHandler_LoadForm supports override reuse: invokes virtual TESForm::LoadForm on the supplied existing object and updates master/active-file flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4381,7 +4381,7 @@
   },
   {
     "ea": "0x44E655",
-    "line": "mov     eax, [ebp+108h+var_11C]",
+    "line": "mov     eax, [ebp+108h+self]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4534,5 +4534,305 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9ADCA0",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCAB",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCAE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCAF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCB4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCB5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCB6",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCB9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCBA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCBF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCC0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCC1",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCC4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCC5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCCA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCCB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCCC",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCCF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCD0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCD5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCD6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCD7",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCDA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCDB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCE0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCE1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCE2",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCE5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCE6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCEB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCEC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCED",
+    "line": "mov     eax, dword ptr [ebp+108h+ArgList]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCF0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCF1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADCF6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCF7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ADCF8",
+    "line": "mov     edx, dword ptr [esp-4+firstFileLowFormFilter]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ADCFC",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADCFF",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ADD02",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ADD04",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADD09",
+    "line": "mov     ecx, [edx+110h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9ADD0F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ADD11",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADD16",
+    "line": "mov     eax, offset stru_ADA60C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ADD1B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

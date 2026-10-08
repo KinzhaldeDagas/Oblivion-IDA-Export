@@ -1,10 +1,11 @@
-BSExtraDataVtbl *__thiscall sub_41FFA0(ExtraDataList *this)
+// Returns the ragdoll payload stored in ExtraRagDollData, or null.
+BSExtraDataVtbl *__thiscall ExtraDataList_GetRagDollData(ExtraDataList *this)
 {
   BSExtraData *ExtraData; // eax
 
-  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_RagDollData);
-  if ( ExtraData )
-    return ExtraData[1].vtbl;
+  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_RagDollData); /*0x41ffa2*/
+  if ( ExtraData ) /*0x41ffa9*/
+    return ExtraData[1].vtbl; /*0x41ffab*/
   else
-    return 0;
+    return 0; /*0x41ffaf*/
 }

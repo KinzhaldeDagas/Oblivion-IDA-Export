@@ -1,10 +1,10 @@
-0x4C9920: push    ecx
+0x4C9920: push    ecx; Fog interior decode: reads TESObjectCELL::LightingData directional packed RGB at lighting+0x04 and normalizes to float RGB.
 0x4C9921: test    byte ptr [ecx+24h], 1
 0x4C9925: jz      short loc_4C9933
 0x4C9927: mov     eax, [ecx+3Ch]
 0x4C992A: test    eax, eax
 0x4C992C: jz      short loc_4C9933
-0x4C992E: mov     eax, [eax+4]
+0x4C992E: mov     eax, [eax+4]; Fog interior decode: load LightingData directional packed RGB (+0x04).
 0x4C9931: jmp     short loc_4C9935
 0x4C9933: xor     eax, eax
 0x4C9935: movzx   ecx, al

@@ -20,7 +20,7 @@
 0x54FC65: mov     [esp+34h+var_1C], edi
 0x54FC69: mov     byte ptr [esp+34h+var_4], 1
 0x54FC6E: call    dword ptr ds:0A280D0h
-0x54FC74: push    offset stru_B39C00; lpCriticalSection
+0x54FC74: push    offset unk_B39C00; lpCriticalSection
 0x54FC79: mov     [esp+38h+var_14], eax
 0x54FC7D: call    dword ptr ds:0A2806Ch
 0x54FC83: call    dword ptr ds:0A2808Ch
@@ -100,7 +100,7 @@
 0x54FD61: test    edi, edi
 0x54FD63: jz      short loc_54FDA2
 0x54FD65: push    offset aBsfacegenmodel; "BSFaceGenModelMap::FreeLRUData()"
-0x54FD6A: mov     ecx, offset stru_B39C80; lpCriticalSection
+0x54FD6A: mov     ecx, offset unk_B39C80; lpCriticalSection
 0x54FD6F: call    NiTryEnterCS
 0x54FD74: test    al, al
 0x54FD76: jz      short loc_54FDA2
@@ -114,12 +114,12 @@
 0x54FD8E: jmp     short loc_54FD98
 0x54FD90: mov     ecx, [edi+8]
 0x54FD93: call    sub_559BA0
-0x54FD98: mov     ecx, offset stru_B39C80; lpCriticalSection
+0x54FD98: mov     ecx, offset unk_B39C80; lpCriticalSection
 0x54FD9D: call    NiLeaveCriticalSection_0
 0x54FDA2: sub     dword ptr ds:0B39C7Ch, 1
 0x54FDA9: jnz     short loc_54FDB5
 0x54FDAB: mov     dword ptr ds:0B39C78h, 0
-0x54FDB5: push    offset stru_B39C00; lpCriticalSection
+0x54FDB5: push    offset unk_B39C00; lpCriticalSection
 0x54FDBA: call    dword ptr ds:0A28074h
 0x54FDC0: test    edi, edi
 0x54FDC2: mov     byte ptr [esp+34h+var_4], 0
@@ -156,3 +156,14 @@
 0x54FE14: pop     ebx
 0x54FE15: add     esp, 20h
 0x54FE18: retn    8
+0x9BBBF0: lea     ecx, [ebp-20h]; slot
+0x9BBBF3: jmp     NiPointerSlot_Release
+0x9BBBF8: lea     ecx, [ebp-1Ch]; slot
+0x9BBBFB: jmp     NiPointerSlot_Release
+0x9BBC00: mov     edx, [esp+arg_4]
+0x9BBC04: lea     eax, [edx-24h]
+0x9BBC07: mov     ecx, [edx-28h]
+0x9BBC0A: xor     ecx, eax
+0x9BBC0C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBC11: mov     eax, offset stru_AE592C
+0x9BBC16: jmp     ___CxxFrameHandler3

@@ -1,15 +1,20 @@
-_DWORD *__cdecl sub_6BC900(unsigned int size)
+_DWORD *__cdecl sub_6BC900(int size)
 {
   unsigned int v1; // ecx
-  unsigned int *v2; // eax
-  _DWORD *v3; // esi
+  int v2; // eax
+  int v3; // esi
 
-  v1 = (unsigned __int64)size >> 0x1A != 0 ? 0xFFFFFFFF : size << 6;
-  v2 = (unsigned int *)FormHeapAlloc(__CFADD__(v1, 4) ? 0xFFFFFFFF : v1 + 4);
-  if ( !v2 )
-    return 0;
-  v3 = v2 + 1;
-  *v2 = size;
-  ArrayConstructor(v2 + 1, 0x40u, size, (int)sub_7616D0, TESTexture::ClearComponentReferences);
-  return v3;
+  v1 = (unsigned __int64)(unsigned int)size >> 0x1A != 0 ? 0xFFFFFFFF : size << 6;
+  v2 = FormHeapAlloc(__CFADD__(v1, 4) ? 0xFFFFFFFF : v1 + 4);
+  if ( !v2 ) /*0x6bc95b*/
+    return 0; /*0x6bc989*/
+  v3 = v2 + 4; /*0x6bc968*/
+  *(_DWORD *)v2 = size; /*0x6bc96e*/
+  ArrayConstructor( /*0x6bc970*/
+    (char *)(v2 + 4),
+    0x40u,
+    size,
+    (void (__thiscall *)(char *))ActorList_ReturnHead,
+    Shared_NoOpVirtual_60D0A0);
+  return (_DWORD *)v3; /*0x6bc977*/
 }

@@ -5,16 +5,16 @@ int sub_738460(int a1, int a2, char *Format, ...)
   va_list ArgList; // [esp+814h] [ebp+10h] BYREF
 
   va_start(ArgList, Format);
-  if ( dword_B40120
+  if ( unk_B40120 /*0x7384a4*/
     && (HIDWORD(v4) = Format,
         LODWORD(v4) = 0x800,
         vsprintf_s(DstBuf, v4, ArgList, *(va_list *)DstBuf),
-        *((_DWORD *)dword_B40120 + 4)) )
+        *((_DWORD *)unk_B40120 + 4)) )
   {
-    return (*((int (__cdecl **)(char *, int, int))dword_B40120 + 4))(DstBuf, a1, a2);
+    return (*((int (__cdecl **)(char *, int, int))unk_B40120 + 4))(DstBuf, a1, a2); /*0x7384c2*/
   }
   else
   {
-    return 0;
+    return 0; /*0x7384e5*/
   }
 }

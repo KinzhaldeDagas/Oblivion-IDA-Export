@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C5BE0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; For active lights, discard/release frame-local shadow map +0x114, mark backing sources culled, and invalidate pending receiver-property state.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7C5C14",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7C5C5B",
-    "line": "jz      loc_7C5CE3",
+    "line": "jz      loc_7C5CE3; Next ShadowPass cleanup is driven by backing NiLight cull state and releases map/receiver data; it does not read prior projector transform or range.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7C5C67",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7C5C6E",
-    "line": "call    BSTextureManager_DiscardShadowMap",
+    "line": "call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7C5CAA",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7C5CDE",
-    "line": "call    sub_7D5320",
+    "line": "call    ShadowSceneLight_InvalidatePendingReceiverProperties; Walk unfinished receiver cursor +0x144, invalidate accepted subtype-1..10 shader properties, then clear the cursor.",
     "mnemonic": "call",
     "size": 5
   },

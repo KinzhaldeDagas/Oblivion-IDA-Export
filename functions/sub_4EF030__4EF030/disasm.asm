@@ -9,26 +9,25 @@
 0x4EF054: push    ebx
 0x4EF055: push    ebp
 0x4EF056: push    edi
-0x4EF057: call    Double_To_SInt32
+0x4EF057: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EF05C: fld     dword ptr [esi+0B4h]
 0x4EF062: mov     edi, eax
 0x4EF064: sar     edi, 0Ch
 0x4EF067: mov     [esp+18h+var_8], edi
-0x4EF06B: call    Double_To_SInt32
+0x4EF06B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EF070: fld     dword ptr [esi+0B8h]
 0x4EF076: sar     eax, 0Ch
 0x4EF079: mov     [esp+18h+var_4], eax
-0x4EF07D: call    Double_To_SInt32
+0x4EF07D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EF082: fld     dword ptr [esi+0ACh]
 0x4EF088: mov     ebp, eax
 0x4EF08A: sar     ebp, 0Ch
-0x4EF08D: call    Double_To_SInt32
+0x4EF08D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EF092: mov     ebx, eax
 0x4EF094: sar     ebx, 0Ch
 0x4EF097: cmp     ebx, [esp+18h+var_4]
 0x4EF09B: jg      short loc_4EF0E5
 0x4EF09D: jmp     short loc_4EF0A4
-0x4EF09F: align 10h
 0x4EF0A0: mov     edi, [esp+18h+var_8]
 0x4EF0A4: cmp     [esp+18h+var_8], ebp
 0x4EF0A8: jg      short loc_4EF0DC
@@ -36,7 +35,7 @@
 0x4EF0B0: push    edi; a3
 0x4EF0B1: push    ebx; a2
 0x4EF0B2: mov     ecx, esi; this
-0x4EF0B4: call    TESWorldSpace__GetIndexForCellCoord
+0x4EF0B4: call    TESWorldSpace__GetIndexForCellCoord; EngineFix trace 2026-05-11: GetIndexForCellCoord validates coordinates against worldspace [0xAC..0xB8] bounds. DoPostFixups offset-table allocation is based on [0x98..0xA4], so callers that write into rebuilt tables must separately check index against the allocation rectangle.
 0x4EF0B9: test    eax, eax
 0x4EF0BB: jl      short loc_4EF0D5
 0x4EF0BD: mov     ecx, [esi+0A8h]

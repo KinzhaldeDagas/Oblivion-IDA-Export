@@ -1,4 +1,4 @@
-char *sub_8AA890()
+NiRTTI *sub_8AA890()
 {
-  return dword_BA7F3C;
+  return &MEMORY[0xBA7F3C]; /*0x8aa895*/
 }

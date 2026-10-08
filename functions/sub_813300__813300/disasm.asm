@@ -1,4 +1,4 @@
-0x813300: push    0FFFFFFFFh
+0x813300: push    0FFFFFFFFh; Mode-0 cube-map helper: swaps temporary accumulator/culling state and renders the current ShadowSceneLight's +0xE8 category/object list through ShadowSceneLight_RenderCategoryObjectList.
 0x813302: push    offset SEH_813300
 0x813307: mov     eax, large fs:0
 0x81330D: push    eax
@@ -57,7 +57,7 @@
 0x8133D1: push    edx
 0x8133D2: mov     ecx, ebp
 0x8133D4: call    eax
-0x8133D6: call    InitBSShaderAccumulator
+0x8133D6: call    BSShaderAccumulator_GetOrCreateGlobal
 0x8133DB: mov     esi, eax
 0x8133DD: test    esi, esi
 0x8133DF: mov     [esp+0DCh+var_A0], esi
@@ -76,32 +76,32 @@
 0x81340F: push    esi; a2
 0x813410: mov     ecx, ebp; this
 0x813412: mov     byte ptr [esp+0E0h+var_4], 1
-0x81341A: call    NiDX9Renderer__SetShaderAccumulator
+0x81341A: call    NiDX9Renderer__SetShaderAccumulator;
 0x81341F: mov     eax, [esi]
 0x813421: mov     edx, [eax+4Ch]
 0x813424: push    edi
 0x813425: mov     ecx, esi
 0x813427: call    edx
-0x813429: push    0
-0x81342B: lea     ecx, [esp+0E0h+var_9C]
+0x813429: push    0; visibleArray
+0x81342B: lea     ecx, [esp+0E0h+self]; self
 0x81342F: mov     byte ptr [esi+21E0h], 1
-0x813436: call    NiCullingProcess_NiCullingProcess
+0x813436: call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
 0x81343B: fldz
 0x81343D: push    1; a3
 0x81343F: push    ecx
 0x813440: mov     ecx, edi; this
 0x813442: fstp    [esp+0E4h+a2]; a2
 0x813445: mov     byte ptr [esp+0E4h+var_4], 2
-0x81344D: call    NiAVObject_UpdateNiAVObject
-0x813452: mov     [esp+0DCh+var_9C.Camera], edi
+0x81344D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x813452: mov     [esp+0DCh+self.Camera], edi
 0x813456: add     edi, 0ECh ; 'ì'
 0x81345C: push    edi; a2
-0x81345D: lea     ecx, [esp+0E0h+var_9C]; this
-0x813461: call    NiCullingProcess__SetFrustum
+0x81345D: lea     ecx, [esp+0E0h+self]; this
+0x813461: call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.
 0x813466: mov     ecx, [esp+0DCh+arg_0]
-0x81346D: lea     eax, [esp+0DCh+var_9C]
+0x81346D: lea     eax, [esp+0DCh+self]
 0x813471: push    eax
-0x813472: call    sub_7D2070
+0x813472: call    ShadowSceneLight_RenderCategoryObjectList; Traverse ShadowSceneLight+0xE8 object/geometry list and apply the cached caster-category mask. This is category filtering, not per-reference static-light admission.
 0x813477: mov     byte ptr [esi+21E1h], 1
 0x81347E: mov     edx, [esi]
 0x813480: mov     eax, [edx+50h]
@@ -109,15 +109,15 @@
 0x813485: call    eax
 0x813487: push    ebx; a2
 0x813488: mov     ecx, ebp; this
-0x81348A: call    NiDX9Renderer__SetShaderAccumulator
+0x81348A: call    NiDX9Renderer__SetShaderAccumulator;
 0x81348F: cmp     dword ptr [esi+4], 2
 0x813493: lea     edi, [esi+4]
 0x813496: jnb     short loc_81349F
 0x813498: push    edi; lpAddend
 0x813499: call    dword ptr ds:0A28078h
-0x81349F: lea     ecx, [esp+0DCh+var_9C]; this
+0x81349F: lea     ecx, [esp+0DCh+self]; this
 0x8134A3: mov     byte ptr [esp+0DCh+var_4], 1
-0x8134AB: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x8134AB: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x8134B0: test    ebx, ebx
 0x8134B2: mov     ebp, ds:0A2807Ch
 0x8134B8: mov     byte ptr [esp+0DCh+var_4], 0
@@ -151,3 +151,16 @@
 0x813504: pop     ebx
 0x813505: add     esp, 0C8h
 0x81350B: retn    4
+0x9D1230: lea     ecx, [ebp-0A0h]; slot
+0x9D1236: jmp     NiPointerSlot_Release
+0x9D123B: lea     ecx, [ebp-0A4h]; slot
+0x9D1241: jmp     NiPointerSlot_Release
+0x9D1246: lea     ecx, [ebp-9Ch]; this
+0x9D124C: jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
+0x9D1251: mov     edx, [esp+arg_4]
+0x9D1255: lea     eax, [edx-0CCh]
+0x9D125B: mov     ecx, [edx-0D0h]
+0x9D1261: xor     ecx, eax
+0x9D1263: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D1268: mov     eax, offset stru_AF9928
+0x9D126D: jmp     ___CxxFrameHandler3

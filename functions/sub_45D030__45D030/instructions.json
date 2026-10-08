@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45D030",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; MEF PERF 2026-10-02 PASS2: Verified Havok drain: bucket-order iteration, deferred ExtraData ownership when scene node absent, otherwise temporary save cursor and load-consumption diagnostic; then removes map key. Preserve callback order, saved cursor and free-vs-transfer ownership.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -72,12 +72,6 @@
     "size": 2
   },
   {
-    "ea": "0x45D04A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x45D050",
     "line": "cmp     dword ptr [ecx], 0",
     "mnemonic": "cmp",
@@ -127,7 +121,7 @@
   },
   {
     "ea": "0x45D067",
-    "line": "mov     [esp+1Ch+var_C], eax",
+    "line": "mov     [esp+1Ch+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,13 +145,13 @@
   },
   {
     "ea": "0x45D073",
-    "line": "lea     eax, [esp+24h+var_14]",
+    "line": "lea     eax, [esp+24h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45D077",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,31 +163,31 @@
   },
   {
     "ea": "0x45D07C",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45D07D",
-    "line": "mov     ecx, [esi+60h]",
+    "line": "mov     ecx, [esi+60h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x45D080",
-    "line": "lea     edx, [esp+2Ch+var_C]",
+    "line": "lea     edx, [esp+2Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x45D084",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45D085",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +229,7 @@
   },
   {
     "ea": "0x45D09D",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +253,7 @@
   },
   {
     "ea": "0x45D0AB",
-    "line": "mov     ebx, [esp+38h+var_14]",
+    "line": "mov     ebx, [esp+38h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +313,7 @@
   },
   {
     "ea": "0x45D0C8",
-    "line": "call    sub_4211E0",
+    "line": "call    ExtraDataList_SetSavedHavokData; Gets/creates Oblivion ExtraSavedMovementData and stores its saved-Havok-data pointer; runtime diagnostic confirms the field purpose.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +331,13 @@
   },
   {
     "ea": "0x45D0D2",
-    "line": "push    1000000h",
+    "line": "push    1000000h; flags",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x45D0D7",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -355,13 +349,13 @@
   },
   {
     "ea": "0x45D0DA",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45D0DC",
-    "line": "call    sub_452C20",
+    "line": "call    ChangesMap_AddFormChangeFlags;",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +565,7 @@
   },
   {
     "ea": "0x45D155",
-    "line": "cmp     [esp+24h+var_C], 0",
+    "line": "cmp     [esp+24h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

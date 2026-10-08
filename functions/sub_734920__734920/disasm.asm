@@ -8,7 +8,6 @@
 0x734933: push    edi
 0x734934: mov     edi, [esp+0Ch+arg_0]
 0x734938: jmp     short loc_734940
-0x73493A: align 10h
 0x734940: movzx   ecx, byte ptr [edi+1]
 0x734944: movzx   edx, word ptr [esi+104h]
 0x73494B: shl     ecx, 8

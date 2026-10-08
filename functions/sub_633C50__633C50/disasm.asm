@@ -20,7 +20,7 @@
 0x633C8C: test    eax, eax
 0x633C8E: jz      short loc_633CAA
 0x633C90: mov     ecx, eax
-0x633C92: call    sub_6135F0
+0x633C92: call    CombatController_GetCurrentTarget
 0x633C97: test    eax, eax
 0x633C99: jz      short loc_633CAA
 0x633C9B: mov     edx, [eax]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 33,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 68,
+  "chunks": [
+    [
+      "0x65D750",
+      "0x65D768"
+    ]
+  ],
+  "chunks_sha256": "6cb4abd609b39d25d6871327a1425e3a515f089616b0ed716440a722e0848c33",
+  "comment_regular": "PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
+  "comment_repeatable": "PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "Player_GetAnimData",
+  "display_name": "PlayerCharacter_GetAnimDataByPerspective",
   "end_ea": "0x65D768",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Player_GetAnimData",
+  "name": "PlayerCharacter_GetAnimDataByPerspective",
   "segment": ".text",
   "sha256": "6cb4abd609b39d25d6871327a1425e3a515f089616b0ed716440a722e0848c33",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65D750",
-  "type": "void *__thiscall(Actor *this, char a2)",
+  "total_chunk_size": 24,
+  "type": "ActorAnimData *__thiscall(PlayerCharacter *this, bool firstPerson)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 68
 }

@@ -7,19 +7,19 @@
   },
   {
     "ea": "0x9A4AC1",
-    "line": "mov     esi, [esp+4+arg_4]",
+    "line": "mov     esi, [esp+4+entry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x9A4AC5",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A4AC6",
-    "line": "call    sub_9A92E0",
+    "line": "call    NiD3DShaderConstantMap_ConvertMappedValue; DX11 mapped-float provenance (2026-09-28):9A92E0 does NOT always return entry+30 directly. size(+28)/stride(+2C) counts1/2/3 broadcast or fill a scratch float4;8/9/12 expand matrices into scratch. Counts4 and16 pass the pointer through. Other counts pass through only when stride==4 and component count is divisible by4. A source-address provenance resolver must reject/bypass scratch-expansion cases rather than treating every mapped source as a direct float4 array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x9A4AD8",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+program]",
     "mnemonic": "mov",
     "size": 4
   },

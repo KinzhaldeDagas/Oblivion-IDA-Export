@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x798690",
+      "0x7987CA"
+    ]
+  ],
+  "chunks_sha256": "a8cf913c5eeb06ceca1042a731aa6c503039cb07f2ee81193a2469c3b4da6d65",
+  "comment_regular": "Frees dynamic arrays inside every 0x44-byte leaf LOD record without deleting the record array itself.",
+  "comment_repeatable": "Frees dynamic arrays inside every 0x44-byte leaf LOD record without deleting the record array itself.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_798690",
+  "display_name": "OB_CLeafGeometry_FreeLODDataArrays_010201A0",
   "end_ea": "0x7987CA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_798690",
+  "name": "OB_CLeafGeometry_FreeLODDataArrays_010201A0",
   "segment": ".text",
   "sha256": "a8cf913c5eeb06ceca1042a731aa6c503039cb07f2ee81193a2469c3b4da6d65",
   "size": 314,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x798690",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 314,
+  "type": "void __thiscall(OB_CLeafGeometry_010201A0 *this)",
   "xrefs_from_count": 114,
   "xrefs_to_count": 1
 }

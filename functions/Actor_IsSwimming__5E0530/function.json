@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 31,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 52,
+  "chunks": [
+    [
+      "0x5E0530",
+      "0x5E054F"
+    ]
+  ],
+  "chunks_sha256": "736223f26788e9df1fd13c40f91e59777c8a9bfaaa156b8c94bbefb40933795d",
+  "comment_regular": "Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
+  "comment_repeatable": "Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Actor_IsSwimming",
   "end_ea": "0x5E054F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor_IsSwimming",
   "segment": ".text",
   "sha256": "736223f26788e9df1fd13c40f91e59777c8a9bfaaa156b8c94bbefb40933795d",
   "size": 31,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E0530",
-  "type": "bool __thiscall(_DWORD *this)",
+  "total_chunk_size": 31,
+  "type": "bool __thiscall(Actor *this)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 55
 }

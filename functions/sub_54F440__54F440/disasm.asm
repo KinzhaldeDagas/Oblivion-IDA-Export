@@ -8,9 +8,9 @@
 0x54F450: mov     eax, ds:0B11FE0h[esi*4]
 0x54F457: test    eax, eax
 0x54F459: jz      short loc_54F469
-0x54F45B: push    edi; Str2
-0x54F45C: push    eax; Str1
-0x54F45D: call    __strcmp
+0x54F45B: push    edi; right
+0x54F45C: push    eax; left
+0x54F45D: call    CRT_StricmpLocaleDispatch
 0x54F462: add     esp, 8
 0x54F465: test    eax, eax
 0x54F467: jnz     short loc_54F477

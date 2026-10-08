@@ -1,1 +1,1 @@
-bhkConvexTransformShape
+struct bhkConvexTransformShape;

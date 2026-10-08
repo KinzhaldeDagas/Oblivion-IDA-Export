@@ -1,1 +1,4 @@
-HHOOK__
+struct HHOOK__
+{
+int unused;
+};

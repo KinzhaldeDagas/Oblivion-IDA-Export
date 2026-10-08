@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C71B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Reorder the full light list using ShadowSceneLight_ComputeCameraRelativeScore and cached score +0xD0.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7C71EE",
-    "line": "call    sub_7D2FF0",
+    "line": "call    ShadowSceneLight_ComputeCameraRelativeScore; Compute and cache the camera-relative full-list ranking value at ShadowSceneLight+0xD0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -148,12 +148,6 @@
     "line": "jmp     short loc_7C7204",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7C71FF",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
   },
   {
     "ea": "0x7C7200",
@@ -211,7 +205,7 @@
   },
   {
     "ea": "0x7C7218",
-    "line": "call    sub_7D2FF0",
+    "line": "call    ShadowSceneLight_ComputeCameraRelativeScore; Compute and cache the camera-relative full-list ranking value at ShadowSceneLight+0xD0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +229,7 @@
   },
   {
     "ea": "0x7C7227",
-    "line": "mov     edi, [edi+0E8h]",
+    "line": "mov     edi, [edi+0E8h]; MEF LARGE PERF 2026-09-08: PERF-6 quadratic origin: reload full-list head from node+E8 for every outer light, then compare each preceding cached+D0 score until current node or first lower score. No already-ordered-prefix fast path exists. Preserve the original score computation sequence and32-bit cached results.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -253,7 +247,7 @@
   },
   {
     "ea": "0x7C7233",
-    "line": "jz      loc_7C72F4",
+    "line": "jz      loc_7C72F4; MEF v57 VERIFY 2026-10-08: V57-UNWIND-1 is a VERIFIED CONDITIONAL C++ unwind ownership mismatch. Isolated production PerfRankLights probe: normal cold splice balances refs; throwing remove or insert leaves exactly one extra held ref. Native state0 unwind9CE770 releases it. Stock recovery callback throw behavior remains UNKNOWN; not an ordinary-OOM or arbitrary-SEH claim. Correct by scoped native-equivalent ownership, propagate the exception and keep completed list side effects; never replay scoring/mutation after failure.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -277,7 +271,7 @@
   },
   {
     "ea": "0x7C7246",
-    "line": "mov     [esp+3Ch+var_20], edi",
+    "line": "mov     [esp+3Ch+position], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,7 +397,7 @@
   },
   {
     "ea": "0x7C7279",
-    "line": "call    dword ptr ds:0A28078h",
+    "line": "call    dword ptr ds:0A28078h; MEF LARGE PERF 2026-09-08: PERF-6 each new predecessor payload held in ESI gets InterlockedIncrement; previous temp is decremented at7C7256 and final temp at7C7304. For i distinct predecessors scanned without a splice, there are i increments+i decrements. Strong list ownership keeps these references live; eliminating cycles needs pinned native ownership/synchronization, not raw unowned pointer caching.",
     "mnemonic": "call",
     "size": 6
   },
@@ -469,7 +463,7 @@
   },
   {
     "ea": "0x7C72A0",
-    "line": "jmp     short loc_7C72F4",
+    "line": "jmp     short loc_7C72F4; MEF v57 VERIFY 2026-10-08: V57-UNWIND-1 is a VERIFIED CONDITIONAL C++ unwind ownership mismatch. Isolated production PerfRankLights probe: normal cold splice balances refs; throwing remove or insert leaves exactly one extra held ref. Native state0 unwind9CE770 releases it. Stock recovery callback throw behavior remains UNKNOWN; not an ordinary-OOM or arbitrary-SEH claim. Correct by scoped native-equivalent ownership, propagate the exception and keep completed list side effects; never replay scoring/mutation after failure.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -481,19 +475,19 @@
   },
   {
     "ea": "0x7C72A6",
-    "line": "lea     ecx, [esp+3Ch+var_20]",
+    "line": "lea     ecx, [esp+3Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C72AA",
-    "line": "push    ecx",
+    "line": "push    ecx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C72AB",
-    "line": "lea     edx, [esp+40h+var_10]",
+    "line": "lea     edx, [esp+40h+result]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -505,25 +499,25 @@
   },
   {
     "ea": "0x7C72B5",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C72B6",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C72B8",
-    "line": "call    sub_7C17D0",
+    "line": "call    NiTRefPointerList__RemovePosition; MEF v56 cold path deliberately preserves observed order-neutral predecessor remove/reinsert. Differential finite permutations, nonfinite/subnormal cases, net strong refs and emitted entry/fallback fixtures pass. Auxiliary counters are opt-in MEF_PERF_COUNTERS=1; no runtime FPS claim.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C72BD",
-    "line": "mov     eax, [esp+3Ch+var_10]",
+    "line": "mov     eax, [esp+3Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,7 +613,7 @@
   },
   {
     "ea": "0x7C72E3",
-    "line": "mov     ecx, [esp+3Ch+var_20]",
+    "line": "mov     ecx, [esp+3Ch+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,13 +643,13 @@
   },
   {
     "ea": "0x7C72EF",
-    "line": "call    sub_7C6A20",
+    "line": "call    NiTRefPointerList_InsertBeforePosition",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C72F4",
-    "line": "test    esi, esi",
+    "line": "test    esi, esi; MEF v57 VERIFY 2026-10-08: V57-UNWIND-1 is a VERIFIED CONDITIONAL C++ unwind ownership mismatch. Isolated production PerfRankLights probe: normal cold splice balances refs; throwing remove or insert leaves exactly one extra held ref. Native state0 unwind9CE770 releases it. Stock recovery callback throw behavior remains UNKNOWN; not an ordinary-OOM or arbitrary-SEH claim. Correct by scoped native-equivalent ownership, propagate the exception and keep completed list side effects; never replay scoring/mutation after failure.",
     "mnemonic": "test",
     "size": 2
   },
@@ -796,5 +790,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CE770",
+    "line": "lea     ecx, [ebp-24h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE773",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE778",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE77C",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE77F",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE782",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE784",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE789",
+    "line": "mov     eax, offset stru_AF770C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE78E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

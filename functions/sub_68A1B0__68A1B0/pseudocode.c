@@ -1,20 +1,20 @@
-int __thiscall sub_68A1B0(char *this)
+TESObjectREFR *__thiscall sub_68A1B0(char *this)
 {
   char *v1; // esi
-  _BYTE *v2; // edi
+  const TravelPathNode *v2; // edi
 
-  v1 = this + 4;
-  if ( this != (char *)0xFFFFFFFC )
+  v1 = this + 4; /*0x68a1b2*/
+  if ( this != (char *)0xFFFFFFFC ) /*0x68a1b9*/
   {
-    while ( *((_DWORD *)v1 + 1) || *(_DWORD *)v1 )
+    while ( *((_DWORD *)v1 + 1) || *(_DWORD *)v1 ) /*0x68a1c7*/
     {
-      v2 = *(_BYTE **)v1;
-      if ( sub_68B0E0(*(_BYTE **)v1) )
-        return sub_68B0F0(v2);
-      v1 = *((char **)v1 + 1);
-      if ( !v1 )
-        return 0;
+      v2 = *(const TravelPathNode **)v1; /*0x68a1c9*/
+      if ( sub_68B0E0(*(_BYTE **)v1) ) /*0x68a1cd*/
+        return TravelPathNode_GetReference(v2); /*0x68a1e8*/
+      v1 = *((char **)v1 + 1); /*0x68a1d6*/
+      if ( !v1 ) /*0x68a1db*/
+        return 0; /*0x68a1db*/
     }
   }
-  return 0;
+  return 0; /*0x68a1de*/
 }

@@ -1,4 +1,4 @@
-0x4F1AC0: push    0FFFFFFFFh
+0x4F1AC0: push    0FFFFFFFFh; Verified SubSpace spatial-index insertion. Its sole direct caller is TESObjectCELL_IndexSubSpaceReferences, and no direct removal caller was found; current evidence places insertion in the WorldSpace persistent-cell build during TESDataHandler_LoadFiles. Runtime add/remove maintenance beyond this build path is Unknown.
 0x4F1AC2: push    offset SEH_4F1AC0
 0x4F1AC7: mov     eax, large fs:0
 0x4F1ACD: push    eax
@@ -14,7 +14,7 @@
 0x4F1AE1: mov     large fs:0, eax
 0x4F1AE7: mov     esi, ecx
 0x4F1AE9: mov     [esp+3Ch+var_20], esi
-0x4F1AED: mov     ebx, [esp+3Ch+arg_0]
+0x4F1AED: mov     ebx, [esp+3Ch+reference]
 0x4F1AF1: test    ebx, ebx
 0x4F1AF3: jz      loc_4F1CFB
 0x4F1AF9: mov     eax, [ebx]
@@ -34,13 +34,13 @@
 0x4F1B29: push    10h; Size
 0x4F1B2B: call    FormHeapAlloc
 0x4F1B30: add     esp, 4
-0x4F1B33: mov     [esp+3Ch+arg_0], eax
+0x4F1B33: mov     [esp+3Ch+reference], eax
 0x4F1B37: test    eax, eax
 0x4F1B39: mov     [esp+3Ch+var_4], 0
 0x4F1B41: jz      short loc_4F1B4E
-0x4F1B43: push    25h ; '%'
-0x4F1B45: mov     ecx, eax
-0x4F1B47: call    sub_4F0DE0
+0x4F1B43: push    25h ; '%'; bucketCount
+0x4F1B45: mov     ecx, eax; this
+0x4F1B47: call    TESWorldSpaceSubSpaceMap_ctor; Verified 16-byte NiTPointerMap<unsigned int, BSSimpleList<TESObjectREFR *>> constructor used only by TESWorldSpace_IndexSubSpaceReference in this database. Initializes a bucket array with the caller's bucket count; SubSpace index passes 0x25 (37) buckets.
 0x4F1B4C: jmp     short loc_4F1B50
 0x4F1B4E: xor     eax, eax
 0x4F1B50: mov     [esp+3Ch+var_4], 0FFFFFFFFh
@@ -61,10 +61,10 @@
 0x4F1B84: mov     eax, [ebx]
 0x4F1B86: mov     edx, [eax+174h]
 0x4F1B8C: mov     ecx, ebx
-0x4F1B8E: fstp    [esp+3Ch+arg_0]
+0x4F1B8E: fstp    [esp+3Ch+reference]
 0x4F1B92: call    edx
 0x4F1B94: fld     dword ptr [eax]
-0x4F1B96: fsub    [esp+3Ch+arg_0]
+0x4F1B96: fsub    [esp+3Ch+reference]
 0x4F1B9A: fstp    [esp+3Ch+var_28]
 0x4F1B9E: fld     [esp+3Ch+var_28]
 0x4F1BA2: fistp   [esp+3Ch+var_24]
@@ -73,7 +73,7 @@
 0x4F1BAE: mov     ecx, ebx
 0x4F1BB0: call    edx
 0x4F1BB2: fld     dword ptr [eax+4]
-0x4F1BB5: fsub    [esp+3Ch+arg_0]
+0x4F1BB5: fsub    [esp+3Ch+reference]
 0x4F1BB9: fstp    [esp+3Ch+var_1C]
 0x4F1BBD: fld     [esp+3Ch+var_1C]
 0x4F1BC1: fistp   [esp+3Ch+var_28]
@@ -85,7 +85,7 @@
 0x4F1BD6: mov     dword ptr [esp+3Ch+var_14], ebp
 0x4F1BDA: call    edx
 0x4F1BDC: fld     dword ptr [eax]
-0x4F1BDE: fadd    [esp+3Ch+arg_0]
+0x4F1BDE: fadd    [esp+3Ch+reference]
 0x4F1BE2: fstp    [esp+3Ch+var_1C]
 0x4F1BE6: fld     [esp+3Ch+var_1C]
 0x4F1BEA: fistp   [esp+3Ch+var_28]
@@ -97,12 +97,12 @@
 0x4F1BFF: mov     [esp+3Ch+var_18], esi
 0x4F1C03: call    edx
 0x4F1C05: fld     dword ptr [eax+4]
-0x4F1C08: fadd    [esp+3Ch+arg_0]
+0x4F1C08: fadd    [esp+3Ch+reference]
 0x4F1C0C: fstp    [esp+3Ch+var_1C]
 0x4F1C10: fld     [esp+3Ch+var_1C]
-0x4F1C14: fistp   [esp+3Ch+arg_0]
+0x4F1C14: fistp   [esp+3Ch+reference]
 0x4F1C18: mov     eax, [esp+3Ch+var_24]
-0x4F1C1C: mov     ecx, [esp+3Ch+arg_0]
+0x4F1C1C: mov     ecx, [esp+3Ch+reference]
 0x4F1C20: sar     eax, 0Ch
 0x4F1C23: sar     ecx, 0Ch
 0x4F1C26: cmp     eax, esi
@@ -115,18 +115,17 @@
 0x4F1C41: shl     eax, 10h
 0x4F1C44: mov     [esp+3Ch+var_1C], eax
 0x4F1C48: jmp     short loc_4F1C54
-0x4F1C4A: align 10h
 0x4F1C50: mov     eax, [esp+3Ch+var_1C]
 0x4F1C54: mov     ecx, [esp+3Ch+var_20]
 0x4F1C58: mov     ecx, [ecx+60h]
 0x4F1C5B: movzx   edi, bp
 0x4F1C5E: or      edi, eax
-0x4F1C60: lea     eax, [esp+3Ch+arg_0]
+0x4F1C60: lea     eax, [esp+3Ch+reference]
 0x4F1C64: push    eax
 0x4F1C65: push    edi
-0x4F1C66: mov     [esp+44h+arg_0], 0
+0x4F1C66: mov     [esp+44h+reference], 0
 0x4F1C6E: call    NiTMap_GetAt
-0x4F1C73: mov     esi, [esp+3Ch+arg_0]
+0x4F1C73: mov     esi, [esp+3Ch+reference]
 0x4F1C77: test    esi, esi
 0x4F1C79: jnz     short loc_4F1CA2
 0x4F1C7B: push    8; Size
@@ -180,3 +179,15 @@
 0x4F1D0A: pop     ebx
 0x4F1D0B: add     esp, 28h
 0x4F1D0E: retn    4
+0x9B6850: mov     eax, [ebp+4]
+0x9B6853: push    eax
+0x9B6854: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6859: pop     ecx
+0x9B685A: retn
+0x9B685B: mov     edx, [esp+arg_4]
+0x9B685F: lea     eax, [edx-2Ch]
+0x9B6862: mov     ecx, [edx-30h]
+0x9B6865: xor     ecx, eax
+0x9B6867: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B686C: mov     eax, offset stru_AE1654
+0x9B6871: jmp     ___CxxFrameHandler3

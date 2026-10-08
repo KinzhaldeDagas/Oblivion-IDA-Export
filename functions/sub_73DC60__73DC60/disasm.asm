@@ -1,4 +1,4 @@
-0x73DC60: push    esi
+0x73DC60: push    esi; Pass223: Clears default NiShadeProperty global 0x00B401AC.
 0x73DC61: mov     esi, ds:0B401ACh
 0x73DC67: test    esi, esi
 0x73DC69: jz      short loc_73DC91

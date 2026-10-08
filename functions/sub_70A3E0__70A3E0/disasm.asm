@@ -1,4 +1,4 @@
-0x70A3E0: push    0FFFFFFFFh
+0x70A3E0: push    0FFFFFFFFh; Pass222: Recursive inherited property-state build; creates root default state then calls 0x7077D0 cloneInherited=0.
 0x70A3E2: push    offset SEH_70A3E0
 0x70A3E7: mov     eax, large fs:0
 0x70A3ED: push    eax
@@ -23,11 +23,11 @@
 0x70A425: jz      loc_70A4BA
 0x70A42B: lea     eax, [esp+2Ch+var_14]
 0x70A42F: push    eax
-0x70A430: call    sub_70A3E0
-0x70A435: push    eax
-0x70A436: lea     ecx, [esp+30h+var_18]
+0x70A430: call    sub_70A3E0; Pass222: Recursive inherited property-state build; creates root default state then calls 0x7077D0 cloneInherited=0.
+0x70A435: push    eax; incoming
+0x70A436: lea     ecx, [esp+30h+var_18]; this
 0x70A43A: mov     byte ptr [esp+30h+var_4], 2
-0x70A43F: call    sub_55E2A0
+0x70A43F: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x70A444: mov     esi, [esp+2Ch+var_14]
 0x70A448: test    esi, esi
 0x70A44A: mov     byte ptr [esp+2Ch+var_4], bl
@@ -50,7 +50,7 @@
 0x70A475: push    esi
 0x70A476: push    edi
 0x70A477: mov     ecx, ebp
-0x70A479: call    sub_7077D0
+0x70A479: call    sub_7077D0; Fog property propagation decode: recursive inherited-state build applies local properties through 0x7077D0; root B333E4 becomes inherited fog slot +0x0C.
 0x70A47E: test    esi, esi
 0x70A480: mov     [esp+2Ch+var_10], ebx
 0x70A484: mov     byte ptr [esp+2Ch+var_4], 0
@@ -83,7 +83,7 @@
 0x70A4CA: mov     byte ptr [esp+2Ch+var_4], 3
 0x70A4CF: jz      short loc_70A4DA
 0x70A4D1: mov     ecx, eax
-0x70A4D3: call    sub_7319E0
+0x70A4D3: call    sub_7319E0; Pass222: Constructs 0x30-byte NiPropertyState with ten managed smart-pointer slots at +0x08..+0x2C.
 0x70A4D8: jmp     short loc_70A4DC
 0x70A4DA: xor     eax, eax
 0x70A4DC: test    eax, eax
@@ -95,3 +95,26 @@
 0x70A4EA: mov     [esp+30h+var_18], esi
 0x70A4EE: call    dword ptr ds:0A28078h
 0x70A4F4: jmp     loc_70A46F
+0x9C9870: lea     ecx, [ebp-18h]; slot
+0x9C9873: jmp     NiPointerSlot_Release
+0x9C9878: lea     ecx, [ebp-14h]; slot
+0x9C987B: jmp     NiPointerSlot_Release
+0x9C9880: mov     eax, [ebp-10h]
+0x9C9883: and     eax, 1
+0x9C9886: jz      locret_9C9898
+0x9C988C: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9C9890: mov     ecx, [ebp+4]; slot
+0x9C9893: jmp     NiPointerSlot_Release
+0x9C9898: retn
+0x9C9899: mov     eax, [ebp-14h]
+0x9C989C: push    eax
+0x9C989D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C98A2: pop     ecx
+0x9C98A3: retn
+0x9C98A4: mov     edx, [esp+arg_4]
+0x9C98A8: lea     eax, [edx-1Ch]
+0x9C98AB: mov     ecx, [edx-20h]
+0x9C98AE: xor     ecx, eax
+0x9C98B0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C98B5: mov     eax, offset stru_AF2110
+0x9C98BA: jmp     ___CxxFrameHandler3

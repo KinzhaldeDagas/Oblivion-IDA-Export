@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x658940",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x658946",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x65894A",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65894B",
-    "line": "push    edi",
+    "line": "push    edi; changeMask",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x65894E",
-    "line": "call    sub_6478E0",
+    "line": "call    LowProcess_Revert",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x65895B",
-    "line": "lea     ecx, [esi+94h]",
+    "line": "lea     ecx, [esi+94h]; self",
     "mnemonic": "lea",
     "size": 6
   },

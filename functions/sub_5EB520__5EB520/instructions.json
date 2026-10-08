@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x5EB53C",
-    "line": "push    eax; int",
+    "line": "push    eax; flushTermination",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5EB572",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5EB5B5",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x5EB5BB",
-    "line": "mov     ecx, offset ActorProcessManager_ptr; this",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x5EB5D2",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x5EB611",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x5EB628",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x5EB637",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5EB646",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x5EB64D",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5EB658",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,13 +733,13 @@
   },
   {
     "ea": "0x5EB680",
-    "line": "lea     ecx, [esi+68h]",
+    "line": "lea     ecx, [esi+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5EB683",
-    "line": "call    MagicTarget_RemoveAllEffects",
+    "line": "call    MagicTarget_RemoveAllEffects; Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x5EB6A7",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x5EB70D",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x5EB73C",
-    "line": "mov     ecx, [ecx+8]",
+    "line": "mov     ecx, [ecx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x5EB748",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x5EB793",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x5EB7B3",
-    "line": "call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)",
+    "line": "call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,43 +1483,43 @@
   },
   {
     "ea": "0x5EB7EE",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EB7F0",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EB7F2",
-    "line": "push    1",
+    "line": "push    1; append",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EB7F4",
-    "line": "push    3",
+    "line": "push    3; processLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EB7F6",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5EB7F7",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5EB7FC",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x5EB8A5",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x5EB968",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x5EB97A",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x5EB9D3",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2377,7 +2377,7 @@
   },
   {
     "ea": "0x5EB9DC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2485,7 @@
   },
   {
     "ea": "0x5EBA17",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2587,7 +2587,7 @@
   },
   {
     "ea": "0x5EBA50",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x5EBA7F",
-    "line": "call    sub_6162D0",
+    "line": "call    CombatController_RemoveTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2833,7 +2833,7 @@
   },
   {
     "ea": "0x5EBACF",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2905,7 +2905,7 @@
   },
   {
     "ea": "0x5EBAF6",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2917,43 +2917,43 @@
   },
   {
     "ea": "0x5EBB00",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EBB02",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EBB04",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EBB06",
-    "line": "push    3",
+    "line": "push    3; processLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5EBB08",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5EBB09",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5EBB0E",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3022,5 +3022,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C26D0",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C26DB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C26DF",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26E2",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C26E5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C26E7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26EC",
+    "line": "mov     eax, offset stru_AEB550",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C26F1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

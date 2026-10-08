@@ -1,1 +1,5 @@
-EMRSETARCDIRECTION
+struct EMRSETARCDIRECTION
+{
+EMR emr;
+DWORD iArcDirection;
+};

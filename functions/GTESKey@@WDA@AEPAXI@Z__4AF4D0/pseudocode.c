@@ -1,4 +1,4 @@
-TESKey *__thiscall TESKey::`scalar deleting destructor'(char *this, unsigned int a2)
+TESForm *__thiscall TESKey::`scalar deleting destructor'(TESForm *this, char a2)
 {
-  return TESKey::`scalar deleting destructor'((TESKey *)(this + 0xFFFFFFD0), a2);
+  return TESKey::`scalar deleting destructor'(this + 0xFFFFFFFE, a2);
 }

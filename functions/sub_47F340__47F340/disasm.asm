@@ -136,10 +136,10 @@
 0x47F4CC: imul    eax, ebp
 0x47F4CF: add     eax, eax
 0x47F4D1: add     eax, eax
-0x47F4D3: push    eax; Size
-0x47F4D4: push    ecx; Src
-0x47F4D5: push    edi; Dst
-0x47F4D6: call    _memcpy
+0x47F4D3: push    eax; byteCount
+0x47F4D4: push    ecx; source
+0x47F4D5: push    edi; destination
+0x47F4D6: call    _memcpy;
 0x47F4DB: add     esp, 0Ch
 0x47F4DE: jmp     short loc_47F537
 0x47F4E0: test    ebp, ebp
@@ -152,7 +152,6 @@
 0x47F4F2: add     eax, 2
 0x47F4F5: mov     esi, edx
 0x47F4F7: jmp     short loc_47F500
-0x47F4F9: align 10h
 0x47F500: movzx   ebx, byte ptr [eax-2]
 0x47F504: mov     [ecx-2], bl
 0x47F507: movzx   ebx, byte ptr [eax-1]
@@ -185,7 +184,7 @@
 0x47F555: mov     edx, [ecx+8]
 0x47F558: push    eax
 0x47F559: call    edx
-0x47F55B: push    offset dword_B256D0; a2
+0x47F55B: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x47F560: push    esi; a1
 0x47F561: call    NiSourceTexture__LoadTexturePixelData
 0x47F566: add     esp, 8
@@ -201,3 +200,15 @@
 0x47F586: pop     ebx
 0x47F587: add     esp, 88h
 0x47F58D: retn
+0x9AF570: mov     eax, [ebp-7Ch]
+0x9AF573: push    eax
+0x9AF574: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF579: pop     ecx
+0x9AF57A: retn
+0x9AF57B: mov     edx, [esp+arg_4]
+0x9AF57F: lea     eax, [edx-8Ch]
+0x9AF585: mov     ecx, [edx-90h]
+0x9AF58B: xor     ecx, eax
+0x9AF58D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF592: mov     eax, offset stru_ADBB1C
+0x9AF597: jmp     ___CxxFrameHandler3

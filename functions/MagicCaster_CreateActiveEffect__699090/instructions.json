@@ -1,49 +1,49 @@
 [
   {
     "ea": "0x699090",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+sourceObject]; Verified MagicCaster virtual factory adapter (MagicCasterVtbl slot +0x40): forwards caster from ECX plus MagicItem*, EffectItem*, and source TESBoundObject* to ActiveEffect_Base_CreateDynamic; returns the resulting ActiveEffect*.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x699094",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+effectItem]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x699098",
-    "line": "push    eax",
+    "line": "push    eax; sourceObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x699099",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+magicItem]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x69909D",
-    "line": "push    edx",
+    "line": "push    edx; effectItem",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69909E",
-    "line": "push    eax",
+    "line": "push    eax; magicItem",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69909F",
-    "line": "push    ecx",
+    "line": "push    ecx; caster",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6990A0",
-    "line": "call    ActiveEffect_Base_CreateDynamic",
+    "line": "call    ActiveEffect_Base_CreateDynamic; Verified wrapper path: MagicCaster_CreateActiveEffect calls ActiveEffect_Base_CreateDynamic and returns its ActiveEffect factory result to the caster creation flow.",
     "mnemonic": "call",
     "size": 5
   },

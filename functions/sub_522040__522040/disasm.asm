@@ -27,7 +27,6 @@
 0x522084: lea     edx, [ebx+0ECh]
 0x52208A: push    esi
 0x52208B: jmp     short loc_522090
-0x52208D: align 10h
 0x522090: mov     esi, [edx]
 0x522092: cmp     esi, [ecx]
 0x522094: jnz     short loc_5220A8
@@ -95,13 +94,13 @@
 0x52214A: mov     edx, [ebx+1E8h]
 0x522150: cmp     edx, [edi+1E8h]
 0x522156: jnz     short loc_522184
-0x522158: mov     ecx, edi
-0x52215A: call    sub_521A10
-0x52215F: push    eax
-0x522160: mov     ecx, ebx
-0x522162: call    sub_521A10
-0x522167: push    eax
-0x522168: call    sub_551990
+0x522158: mov     ecx, edi; this
+0x52215A: call    TESNPC_GetActiveFaceGenDeltaParameters; Both TESNPC comparison operands resolve to inline, non-null sex-specific FaceGen delta banks; the latent null bug in FaceGenHeadParameters_Differ is not reached here.
+0x52215F: push    eax; CORRECTION: both TESNPC comparison operands resolve to inline, non-null vampirism-selected delta banks through GetAViBase(0x45). Zero selects +0x108; nonzero +0x168. Earlier sex-specific comment was wrong. This form-comparison path is not the player LoadGame gate itself.
+0x522160: mov     ecx, ebx; this
+0x522162: call    TESNPC_GetActiveFaceGenDeltaParameters; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.
+0x522167: push    eax; left
+0x522168: call    FaceGenHeadParameters_Differ; Exact four-matrix difference test for non-null inputs. BUG: null handling is inverted: (null,null) returns true/different, while exactly one null returns false/equal. All three known Oblivion callers supply inline/concrete FaceGen matrices, so this is a latent defect and Prettier Faces does not patch unrelated comparison behavior.
 0x52216D: add     esp, 8
 0x522170: test    al, al
 0x522172: jnz     short loc_522184

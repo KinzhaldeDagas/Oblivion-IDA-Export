@@ -1,1 +1,7 @@
-FMAT2
+struct FMAT2
+{
+FLOAT eM11;
+FLOAT eM12;
+FLOAT eM21;
+FLOAT eM22;
+};

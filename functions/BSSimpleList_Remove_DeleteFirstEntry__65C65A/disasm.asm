@@ -3,7 +3,7 @@
 0x65C660: mov     edx, [esi]
 0x65C662: push    esi
 0x65C663: mov     [ecx], edx
-0x65C665: call    FormHeapFree
+0x65C665: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65C66A: add     esp, 4
 0x65C66D: pop     esi
 0x65C66E: pop     edi

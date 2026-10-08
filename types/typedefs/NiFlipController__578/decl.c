@@ -1,1 +1,1 @@
-NiFlipController
+struct NiFlipController;

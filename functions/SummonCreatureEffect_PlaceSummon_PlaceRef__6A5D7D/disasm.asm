@@ -4,14 +4,14 @@
 0x6A5D84: call    TESObjectREFR_GetWorldSpace
 0x6A5D89: push    eax; a3
 0x6A5D8A: mov     ecx, ebp; this
-0x6A5D8C: call    TESObjectREFR_GetParentCell
+0x6A5D8C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A5D91: push    eax; a2
 0x6A5D92: lea     ecx, [esi+54h]
 0x6A5D95: push    ecx
 0x6A5D96: mov     ecx, ds:0B33A98h
 0x6A5D9C: push    edi
 0x6A5D9D: push    ebx
-0x6A5D9E: call    TESDataHandler_PlaceObjectRef
+0x6A5D9E: call    TESDataHandler_PlaceObjectRef; Verified object-reference placement helper accepts an interior cell or exterior WorldSpace and sets/reuses a reference base form. New reference attachment proceeds through cell lifecycle methods; this helper itself does not write the WorldSpace SubSpace index.
 0x6A5DA3: mov     ebx, eax
 0x6A5DA5: test    ebx, ebx
 0x6A5DA7: jz      SummonCreatureEffect_PlaceSummon___Done

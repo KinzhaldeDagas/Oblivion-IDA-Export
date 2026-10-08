@@ -1,1 +1,1 @@
-ERole
+typedef _ERole ERole;

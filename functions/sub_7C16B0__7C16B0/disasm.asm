@@ -1,4 +1,4 @@
-0x7C16B0: push    ebx
+0x7C16B0: push    ebx; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.
 0x7C16B1: push    ebp
 0x7C16B2: push    esi
 0x7C16B3: mov     esi, ecx

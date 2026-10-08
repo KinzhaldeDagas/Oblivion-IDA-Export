@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_785D30",
+  "chunks": [
+    [
+      "0x785D30",
+      "0x785DF5"
+    ]
+  ],
+  "chunks_sha256": "28579082f559de60df68b075c87cb91cc997bd741887c48a5f6c01a57ff1da08",
+  "comment_regular": "Oblivion stBezierSpline::ClearCache behavior. Iterates the inline global map, destructs and FormHeap-frees every cached 0x5C spline, nulls value slots, destroys all tree nodes, and resets the existing sentinel/map to empty. RT 4.1 source corroborates ownership semantics; Oblivion differs by retaining an inline map rather than deleting a heap map pointer.",
+  "comment_repeatable": "Oblivion stBezierSpline::ClearCache behavior. Iterates the inline global map, destructs and FormHeap-frees every cached 0x5C spline, nulls value slots, destroys all tree nodes, and resets the existing sentinel/map to empty. RT 4.1 source corroborates ownership semantics; Oblivion differs by retaining an inline map rather than deleting a heap map pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "OB_StBezierSpline_ClearCache_010201A0",
   "end_ea": "0x785DF5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_785D30",
+  "name": "OB_StBezierSpline_ClearCache_010201A0",
   "segment": ".text",
   "sha256": "28579082f559de60df68b075c87cb91cc997bd741887c48a5f6c01a57ff1da08",
   "size": 197,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785D30",
-  "type": "int __thiscall(void *this)",
-  "xrefs_from_count": 75,
+  "total_chunk_size": 197,
+  "type": "void __cdecl()",
+  "xrefs_from_count": 79,
   "xrefs_to_count": 2
 }

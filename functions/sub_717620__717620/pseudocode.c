@@ -1,5 +1,5 @@
 // attributes: thunk
-int __stdcall sub_717620(int a1)
+int __thiscall sub_717620(char *this, signed int a2)
 {
-  return sub_717920(a1);
+  return sub_717920(this, a2);
 }

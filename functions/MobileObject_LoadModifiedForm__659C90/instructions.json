@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x659C92",
-    "line": "push    offset SEH_7FCC80",
+    "line": "push    offset MobileObject_LoadModifiedForm_SEH",
     "mnemonic": "push",
     "size": 5
   },
@@ -85,31 +85,31 @@
   },
   {
     "ea": "0x659CB8",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x659CBA",
-    "line": "lea     eax, [esp+28h+var_11]",
+    "line": "lea     eax, [esp+28h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x659CBE",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x659CBF",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x659CC4",
-    "line": "movsx   eax, [esp+24h+var_11]",
+    "line": "movsx   eax, [esp+24h+destination]",
     "mnemonic": "movsx",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x659CCF",
-    "line": "ja      MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "ja      MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "ja",
     "size": 6
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x659CE1",
-    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jz",
     "size": 6
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x659CF0",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x659D10",
-    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x659D25",
-    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jz",
     "size": 6
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x659D37",
-    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x659D5B",
-    "line": "call    ??0HighProcess@@QAE@XZ",
+    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x659D89",
-    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jz",
     "size": 6
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x659D9B",
-    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x659DBF",
-    "line": "call    ??0MiddleHighProcess@@QAE@XZ",
+    "line": "call    ??0MiddleHighProcess@@QAE@XZ; MiddleHighProcess constructor: derives from MiddleLowProcess, installs MiddleHighProcess vtable, initializes pathing, currentPackage +0x0C0 and currentPackProcedure. No movementFlags field is initialized here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x659DEE",
-    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jz      MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jz",
     "size": 6
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x659E00",
-    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jmp     MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x659E24",
-    "line": "call    ??0MiddleLowProcess@@QAE@XZ",
+    "line": "call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess constructor: derives from LowProcess and installs MiddleLowProcess vtable; no currentPackage or movementFlags storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x659E4D",
-    "line": "jz      short MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jz      short MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jz",
     "size": 2
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x659E5B",
-    "line": "jmp     short MobileObject_LoadModifiedForm___def_659CD5",
+    "line": "jmp     short MobileObject_LoadModifiedForm___def_659CD5; jumptable 00659CD5 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x659E7C",
-    "line": "call    ??0LowProcess@@QAE@XZ",
+    "line": "call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,37 +991,37 @@
   },
   {
     "ea": "0x659E85",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x659E87",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x659E89",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x659E8B",
-    "line": "push    3",
+    "line": "push    3; processLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x659E8D",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x659E8E",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1039,8 +1039,434 @@
   },
   {
     "ea": "0x659E9E",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659EA3",
+    "line": "mov     edx, [esi]; jumptable 00659CD5 default case",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659EA5",
+    "line": "mov     eax, [edx+154h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x659EAB",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659EAD",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x659EAF",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x659EB1",
+    "line": "jz      short loc_659EE1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659EB3",
+    "line": "push    0; a2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x659EB5",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659EB7",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659EBC",
+    "line": "mov     ecx, ds:0B333A0h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x659EC2",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659EC3",
+    "line": "call    TESObjectCELL_IsProcessLevel?LowHigh",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659EC8",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x659ECA",
+    "line": "jz      short loc_659ED3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659ECC",
+    "line": "cmp     [esp+24h+destination], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x659ED1",
+    "line": "jz      short loc_659EE1",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659ED3",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659ED5",
+    "line": "mov     eax, [edx+150h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x659EDB",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x659EDD",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659EDF",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x659EE1",
+    "line": "mov     edi, [esp+24h+currentFlags]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x659EE5",
+    "line": "mov     ebp, [esp+24h+changeMask]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x659EE9",
+    "line": "push    edi; currentFlags",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659EEA",
+    "line": "push    ebp; changeMask",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659EEB",
+    "line": "mov     ecx, esi; self",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659EED",
+    "line": "call    TESObjectREFR_LoadModifiedForm",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x659EF2",
+    "line": "mov     ecx, [esi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x659EF5",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x659EF7",
+    "line": "jz      short loc_659F06",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x659EF9",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x659EFB",
+    "line": "mov     eax, [edx+3F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x659F01",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659F02",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659F03",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x659F04",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x659F06",
+    "line": "mov     ecx, dword ptr [esp+24h+var_C]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x659F0A",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x659F11",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x659F12",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x659F13",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x659F14",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x659F15",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x659F18",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05C0",
+    "line": "mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05C4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05C9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05CB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05CF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05D4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05D6",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05D9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05DA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05DF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05E1",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05E4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05E5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05EA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D05EC",
+    "line": "mov     edx, [esp+currentFlags]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D05F0",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05F3",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D05F6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D05F8",
+    "line": "call    @__security_check_cookie@4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D05FD",
+    "line": "mov     eax, offset stru_AF8F64",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0602",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

@@ -10,23 +10,23 @@ int __thiscall sub_6D7C50(_DWORD *this, int a2)
   int v11; // [esp-10h] [ebp-20h]
   int v12; // [esp+Ch] [ebp-4h] BYREF
 
-  v2 = a2;
-  nullsub_returnvVoid_1arg(a2);
-  a2 = *(this + 4);
-  v9 = *(_DWORD *)(v2 + 0x220);
-  v4 = *(void (__cdecl **)(int, int *, int, int *, int))(v9 + 8);
-  v12 = 4;
-  v4(v9, &a2, 4, &v12, 1);
-  if ( a2 )
+  v2 = a2; /*0x6d7c54*/
+  nullsub_returnvVoid_1arg(a2); /*0x6d7c5b*/
+  a2 = *(this + 4); /*0x6d7c6d*/
+  v9 = *(_DWORD *)(v2 + 0x220); /*0x6d7c7e*/
+  v4 = *(void (__cdecl **)(int, int *, int, int *, int))(v9 + 8); /*0x6d7c7f*/
+  v12 = 4; /*0x6d7c82*/
+  v4(v9, &a2, 4, &v12, 1); /*0x6d7c8a*/
+  if ( a2 ) /*0x6d7c95*/
   {
-    v5 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8);
-    v11 = *(this + 2);
-    v10 = *(_DWORD *)(v2 + 0x220);
-    v12 = 1;
-    v5(v10, v11, a2, &v12, 1);
+    v5 = *(void (__cdecl **)(int, int, int, int *, int))(*(_DWORD *)(v2 + 0x220) + 8); /*0x6d7ca4*/
+    v11 = *(this + 2); /*0x6d7cab*/
+    v10 = *(_DWORD *)(v2 + 0x220); /*0x6d7cac*/
+    v12 = 1; /*0x6d7cad*/
+    v5(v10, v11, a2, &v12, 1); /*0x6d7cb5*/
   }
-  v6 = *(_DWORD *)(v2 + 0x220);
-  v7 = *(int (__cdecl **)(int, _DWORD *, int, int *, int))(v6 + 8);
-  v12 = 4;
-  return v7(v6, this + 4, 4, &v12, 1);
+  v6 = *(_DWORD *)(v2 + 0x220); /*0x6d7cba*/
+  v7 = *(int (__cdecl **)(int, _DWORD *, int, int *, int))(v6 + 8); /*0x6d7cc0*/
+  v12 = 4; /*0x6d7cce*/
+  return v7(v6, this + 4, 4, &v12, 1); /*0x6d7cdb*/
 }

@@ -1,4 +1,4 @@
-0x4B0A30: push    0FFFFFFFFh
+0x4B0A30: push    0FFFFFFFFh; Probable: TESBoundObject 3D helper; if the bound form's model path is nonempty it obtains reference-specific model data through TESBoundObject_GetReferenceModelData, otherwise creates an empty NiNode. Then ensures the result is parented under a root NiNode.
 0x4B0A32: push    offset SEH_6ACAB0
 0x4B0A37: mov     eax, large fs:0
 0x4B0A3D: push    eax
@@ -22,15 +22,15 @@
 0x4B0A6A: jnz     short loc_4B0A63
 0x4B0A6C: sub     eax, edx
 0x4B0A6E: jz      short loc_4B0A7E
-0x4B0A70: mov     eax, [esp+1Ch+arg_0]
-0x4B0A74: push    eax
-0x4B0A75: mov     ecx, esi
-0x4B0A77: call    sub_4B3310
+0x4B0A70: mov     eax, [esp+1Ch+reference]
+0x4B0A74: push    eax; reference
+0x4B0A75: mov     ecx, esi; this
+0x4B0A77: call    TESBoundObject_GetReferenceModelData; Probable: obtains or loads reference-specific model data for a TESBoundObject/TESObjectREFR pair. Direct code checks model path, scale, loaded-state reference count and loader data before falling back to ModelLoader_LoadModelData.
 0x4B0A7C: jmp     short loc_4B0AB0
 0x4B0A7E: push    0DCh ; 'Ü'; Size
 0x4B0A83: call    FormHeapAlloc
 0x4B0A88: add     esp, 4
-0x4B0A8B: mov     [esp+1Ch+arg_0], eax
+0x4B0A8B: mov     [esp+1Ch+reference], eax
 0x4B0A8F: test    eax, eax
 0x4B0A91: mov     [esp+1Ch+var_4], 0
 0x4B0A99: jz      short loc_4B0AA6
@@ -52,7 +52,7 @@
 0x4B0AC3: push    0DCh ; 'Ü'; Size
 0x4B0AC8: call    FormHeapAlloc
 0x4B0ACD: add     esp, 4
-0x4B0AD0: mov     [esp+1Ch+arg_0], eax
+0x4B0AD0: mov     [esp+1Ch+reference], eax
 0x4B0AD4: test    eax, eax
 0x4B0AD6: mov     [esp+1Ch+var_4], 1
 0x4B0ADE: jz      short loc_4B0AED
@@ -85,3 +85,20 @@
 0x4B0B2B: pop     esi
 0x4B0B2C: add     esp, 10h
 0x4B0B2F: retn    4
+0x9B3B90: mov     eax, [ebp+4]
+0x9B3B93: push    eax
+0x9B3B94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3B99: pop     ecx
+0x9B3B9A: retn
+0x9B3B9B: mov     eax, [ebp+4]
+0x9B3B9E: push    eax
+0x9B3B9F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B3BA4: pop     ecx
+0x9B3BA5: retn
+0x9B3BA6: mov     edx, [esp+arg_4]
+0x9B3BAA: lea     eax, [edx-0Ch]
+0x9B3BAD: mov     ecx, [edx-10h]
+0x9B3BB0: xor     ecx, eax
+0x9B3BB2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3BB7: mov     eax, offset stru_ADF520
+0x9B3BBC: jmp     ___CxxFrameHandler3

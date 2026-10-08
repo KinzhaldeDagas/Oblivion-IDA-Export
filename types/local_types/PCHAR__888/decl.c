@@ -1,1 +1,1 @@
-PCHAR
+typedef char *PCHAR;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x41EAF0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified ExtraLock lifecycle setter: if type 0x31 exists, frees its old ExtraLockData payload and replaces it; otherwise allocates a 16-byte ExtraLock wrapper, constructs it with the supplied 12-byte ExtraLockData*, and adds it to ExtraDataList.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x41EB26",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x41EB2B",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+lockData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,25 +193,25 @@
   },
   {
     "ea": "0x41EB51",
-    "line": "mov     edx, [esp+1Ch+arg_0]",
+    "line": "mov     edx, [esp+1Ch+lockData]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x41EB55",
-    "line": "push    edx",
+    "line": "push    edx; lockData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x41EB56",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x41EB58",
-    "line": "call    sub_429A80",
+    "line": "call    ExtraLock_ctor; Verified ExtraLock constructor: initializes BSExtraData type 0x31 and wrapper vtable, clears the +8 base field, and stores the ExtraLockData* payload at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -304,5 +304,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA7E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA7EF",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F2",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA7F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7FC",
+    "line": "mov     eax, offset stru_AF2E8C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA801",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

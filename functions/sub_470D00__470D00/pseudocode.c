@@ -1,4 +1,5 @@
-char __thiscall sub_470D00(_DWORD **this, int a2)
+// Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.
+char __thiscall ActorAnimData_HasAnimKey(ActorAnimData *this, unsigned int encodedKey)
 {
-  return sub_470960(*(this + 0x27), a2, &a2);
+  return ActorAnimData_FindAnimMapEntry((_DWORD *)this->animsMap, encodedKey, &encodedKey); /*0x470d15*/
 }

@@ -6,7 +6,7 @@
 0x8AB7B7: mov     edi, [esp+24h+arg_0]
 0x8AB7BB: push    edi
 0x8AB7BC: mov     ebx, ecx
-0x8AB7BE: call    sub_715F40
+0x8AB7BE: call    NiTimeController_LoadBinary; Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.
 0x8AB7C3: mov     eax, [edi+21Ch]
 0x8AB7C9: push    1
 0x8AB7CB: lea     ecx, [esp+28h+var_10]
@@ -32,7 +32,6 @@
 0x8AB80B: fstp    [esp+24h+var_10]
 0x8AB80F: jmp     short loc_8AB824
 0x8AB811: jmp     short loc_8AB820
-0x8AB813: align 10h
 0x8AB820: mov     edi, [esp+24h+arg_0]
 0x8AB824: fld     dword ptr ds:0A30634h
 0x8AB82A: mov     eax, [edi+21Ch]

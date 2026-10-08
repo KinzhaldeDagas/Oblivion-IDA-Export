@@ -1,13 +1,13 @@
-0x4BA2D0: mov     eax, [esp+arg_0]
-0x4BA2D4: mov     edx, [esp+arg_8]
+0x4BA2D0: mov     eax, [esp+tree]; Verified Oblivion context has a 0x1C-byte payload; Fallout's RTTI-named TREE_BILLBOARD_DATA is also 0x1C bytes and its constructor copies an instanceCount-sized NiPoint3 locations array and float color array. Probable field mapping follows matching argument order and downstream use; Oblivion field semantics are not promoted beyond what its own callsites establish.
+0x4BA2D4: mov     edx, [esp+placementArg2]
 0x4BA2D8: push    esi
 0x4BA2D9: mov     esi, ecx
-0x4BA2DB: mov     ecx, [esp+4+arg_4]
+0x4BA2DB: mov     ecx, [esp+4+placementArg1]
 0x4BA2DF: mov     [esi], eax
-0x4BA2E1: mov     eax, [esp+4+arg_C]
+0x4BA2E1: mov     eax, [esp+4+modeOrDistance]
 0x4BA2E5: mov     [esi+4], ecx
 0x4BA2E8: mov     [esi+0Ch], eax
-0x4BA2EB: mov     eax, [esp+4+arg_10]
+0x4BA2EB: mov     eax, [esp+4+instanceCount]
 0x4BA2EF: mov     [esi+8], edx
 0x4BA2F2: xor     ecx, ecx
 0x4BA2F4: mov     [esi+10h], eax
@@ -23,11 +23,11 @@
 0x4BA312: lea     ecx, [ecx+ecx*2]
 0x4BA315: add     ecx, ecx
 0x4BA317: add     ecx, ecx
-0x4BA319: push    ecx; Size
-0x4BA31A: push    edx; Src
-0x4BA31B: push    eax; Dst
+0x4BA319: push    ecx; byteCount
+0x4BA31A: push    edx; source
+0x4BA31B: push    eax; destination
 0x4BA31C: mov     [esi+14h], eax
-0x4BA31F: call    _memcpy
+0x4BA31F: call    _memcpy;
 0x4BA324: mov     eax, [esi+10h]
 0x4BA327: xor     ecx, ecx
 0x4BA329: mov     edx, 4
@@ -38,14 +38,14 @@
 0x4BA337: push    ecx; Size
 0x4BA338: call    FormHeapAlloc
 0x4BA33D: mov     ecx, [esi+10h]
-0x4BA340: mov     edx, [esp+18h+arg_18]
+0x4BA340: mov     edx, [esp+18h+source]
 0x4BA344: add     ecx, ecx
 0x4BA346: add     ecx, ecx
-0x4BA348: push    ecx; Size
-0x4BA349: push    edx; Src
-0x4BA34A: push    eax; Dst
+0x4BA348: push    ecx; byteCount
+0x4BA349: push    edx; source
+0x4BA34A: push    eax; destination
 0x4BA34B: mov     [esi+18h], eax
-0x4BA34E: call    _memcpy
+0x4BA34E: call    _memcpy;
 0x4BA353: add     esp, 20h
 0x4BA356: mov     eax, esi
 0x4BA358: pop     esi

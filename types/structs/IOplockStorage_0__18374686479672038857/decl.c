@@ -1,1 +1,1 @@
-IOplockStorage_0
+typedef IOplockStorage IOplockStorage_0;

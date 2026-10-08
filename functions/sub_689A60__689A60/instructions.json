@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x689A60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified copies low-path route entries into newly allocated TravelPathNode records. Each clone is set to kind 0 and stores the route TESObjectREFR*; these references remain non-owned.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x689A8B",
-    "line": "call    sub_689A00",
+    "line": "call    TravelPath_ClearNodes; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x689A90",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+sourceNodes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x689A9A",
-    "line": "mov     [esp+28h+arg_0], eax",
+    "line": "mov     [esp+28h+sourceNodes], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x689AA4",
-    "line": "mov     esi, [esp+28h+arg_0]",
+    "line": "mov     esi, [esp+28h+sourceNodes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x689ACB",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689ACD",
-    "line": "call    sub_68B0C0",
+    "line": "call    TravelPathNode_Init; Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x689AD8",
-    "line": "push    ebp",
+    "line": "push    ebp; kind",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689AD9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x689AE3",
-    "line": "call    sub_68B1D0",
+    "line": "call    TravelPathNode_SetKind; Verified kind setter writes the low byte at +4; when switching away from kind 1 it frees the owned NiPoint3* payload, then clears payload and stores the new kind. Observed kinds are 0=reference, 1=owned position, initial sentinel 0xFF.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,19 +265,19 @@
   },
   {
     "ea": "0x689AEA",
-    "line": "push    eax",
+    "line": "push    eax; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x689AEB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689AED",
-    "line": "call    sub_68B100",
+    "line": "call    TravelPathNode_SetReference; Verified stores a TESObjectREFR* into payload +0 only when kind==0. The route node does not take an extra reference to the TESObjectREFR.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x689B82",
-    "line": "mov     ecx, [esp+28h+arg_0]",
+    "line": "mov     ecx, [esp+28h+sourceNodes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x689B8B",
-    "line": "mov     [esp+28h+arg_0], eax",
+    "line": "mov     [esp+28h+sourceNodes], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -712,5 +712,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFAA0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFAA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFAA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFAAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFAAB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFAAF",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAB2",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAB5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFAB7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFABC",
+    "line": "mov     eax, offset stru_ADBFB0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFAC1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

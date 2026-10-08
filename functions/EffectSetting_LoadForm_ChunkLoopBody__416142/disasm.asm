@@ -5,7 +5,7 @@
 0x416158: jg      EffectSetting_LoadForm___SwitchMoreChunkTypes_2
 0x41615E: jz      EffectSetting_LoadForm___LoadDescription
 0x416164: cmp     eax, 41544144h
-0x416169: jz      short EffectSetting_LoadForm___LoadEffectSetting
+0x416169: jz      short EffectSetting_LoadForm___LoadEffectSetting; Verified (Oblivion): EffectSetting load reads a 0x40-byte data block into EffectSetting+0x58, which includes the effectShader FormID at +0x78. EffectSetting_LinkForm later resolves that slot to a TESEffectShader*.
 0x41616B: cmp     eax, 42444F4Dh
 0x416170: jz      EffectSetting_LoadForm___LoadModel
 0x416176: jmp     EffectSetting_LoadForm___ChunkLoopContinue

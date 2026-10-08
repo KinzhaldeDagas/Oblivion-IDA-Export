@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x68F496",
-    "line": "push    eax",
+    "line": "push    eax; collidable",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x68F49F",
-    "line": "call    sub_8AFCE0",
+    "line": "call    bhkCollidable_ResolveNiAVObject; TES4 authoritative: resolves Havok collidable/contact reference to a NiAVObject when possible. Handles collidable type 1 directly and type 2 with a fallback through v5+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x68F4AC",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x68F4F8",
-    "line": "push    eax",
+    "line": "push    eax; collidable",
     "mnemonic": "push",
     "size": 1
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x68F4FD",
-    "line": "call    sub_8AFCE0",
+    "line": "call    bhkCollidable_ResolveNiAVObject; TES4 authoritative: resolves Havok collidable/contact reference to a NiAVObject when possible. Handles collidable type 1 directly and type 2 with a fallback through v5+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x68F50A",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x68F5F0",
-    "line": "call    sub_532210",
+    "line": "call    hkpCdPoint_CopyHitEntry30",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x68F680",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x68F69D",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x68F6A5",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x68F6E5",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x68F796",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x68F7B3",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x68F7BB",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x68F7FB",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x68F820",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x68F83F",
-    "line": "push    edx; int",
+    "line": "push    edx; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1825,13 +1825,13 @@
   },
   {
     "ea": "0x68F855",
-    "line": "fstp    [esp+0BCh+var_BC]; float",
+    "line": "fstp    [esp+0BCh+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x68F858",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x68F862",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x68F86A",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x68F8EE",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2356,5 +2356,191 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5580",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5586",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5587",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C558C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C558D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C558E",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5594",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5595",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C559A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C559B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C559C",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C55A2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C55A3",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C55A8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C55A9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C55AA",
+    "line": "mov     eax, [ebp+var_9C]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C55B0",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C55B1",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C55B6",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C55B7",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C55B8",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C55BC",
+    "line": "lea     eax, [edx-0A4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C55C2",
+    "line": "mov     ecx, [edx-0A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C55C8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C55CA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C55CF",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C55D2",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C55D5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C55D7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C55DC",
+    "line": "mov     eax, offset stru_AEDD88",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C55E1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

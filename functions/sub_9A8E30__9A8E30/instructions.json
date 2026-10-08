@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9A8E30",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Pass228: NiD3DShaderConstantMap application path; uses D3D shader constant setter slots, not NiRenderer RenderScreenTexture.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x9A8E34",
-    "line": "mov     ebp, [esp+0Ch+arg_0]",
+    "line": "mov     ebp, [esp+0Ch+shaderProgram]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x9A8E3B",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x9A8E48",
-    "line": "mov     byte ptr [esp+14h+arg_0], 1",
+    "line": "mov     byte ptr [esp+14h+shaderProgram], 1",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9A8E4D",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x9A8E67",
-    "line": "mov     ebx, [esp+14h+arg_20]",
+    "line": "mov     ebx, [esp+14h+a10]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x9A8E6C",
-    "line": "mov     edi, [esp+18h+arg_24]",
+    "line": "mov     edi, [esp+18h+a11]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x9A8E8E",
-    "line": "mov     [esp+18h+arg_24], ecx",
+    "line": "mov     [esp+18h+a11], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x9A8ED7",
-    "line": "mov     [esp+1Ch+arg_20], eax",
+    "line": "mov     [esp+1Ch+a10], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x9A8EDB",
-    "line": "mov     edx, [esp+1Ch+arg_20]",
+    "line": "mov     edx, [esp+1Ch+a10]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x9A8EE8",
-    "line": "mov     edx, [esp+20h+arg_24]",
+    "line": "mov     edx, [esp+20h+a11]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x9A8F0D",
-    "line": "mov     [esp+1Ch+arg_20], eax",
+    "line": "mov     [esp+1Ch+a10], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x9A8F11",
-    "line": "mov     edx, [esp+1Ch+arg_20]",
+    "line": "mov     edx, [esp+1Ch+a10]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x9A8F1E",
-    "line": "mov     edx, [esp+20h+arg_24]",
+    "line": "mov     edx, [esp+20h+a11]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x9A8F52",
-    "line": "mov     ecx, [esp+1Ch+arg_28]",
+    "line": "mov     ecx, [esp+1Ch+a12]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x9A8F57",
-    "line": "mov     ecx, [esp+20h+arg_1C]",
+    "line": "mov     ecx, [esp+20h+a9]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x9A8F60",
-    "line": "mov     ecx, [esp+2Ch+arg_18]",
+    "line": "mov     ecx, [esp+2Ch+a8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x9A8F65",
-    "line": "mov     ecx, [esp+30h+arg_14]",
+    "line": "mov     ecx, [esp+30h+a7]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x9A8F6D",
-    "line": "mov     ecx, [esp+34h+arg_10]",
+    "line": "mov     ecx, [esp+34h+a6]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x9A8F72",
-    "line": "mov     ecx, [esp+38h+arg_C]",
+    "line": "mov     ecx, [esp+38h+a5]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x9A8F77",
-    "line": "mov     ecx, [esp+3Ch+arg_8]",
+    "line": "mov     ecx, [esp+3Ch+a4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x9A8F7C",
-    "line": "mov     ecx, [esp+40h+arg_4]",
+    "line": "mov     ecx, [esp+40h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x9A8FAA",
-    "line": "mov     ecx, [esp+18h+arg_1C]",
+    "line": "mov     ecx, [esp+18h+a9]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x9A8FB6",
-    "line": "mov     ecx, [esp+24h+arg_18]",
+    "line": "mov     ecx, [esp+24h+a8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x9A8FBB",
-    "line": "mov     ecx, [esp+28h+arg_14]",
+    "line": "mov     ecx, [esp+28h+a7]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x9A8FC0",
-    "line": "mov     ecx, [esp+2Ch+arg_8]",
+    "line": "mov     ecx, [esp+2Ch+a4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x9A8FC5",
-    "line": "mov     ecx, [esp+30h+arg_4]",
+    "line": "mov     ecx, [esp+30h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x9A8FDF",
-    "line": "mov     ecx, [esp+18h+arg_1C]",
+    "line": "mov     ecx, [esp+18h+a9]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x9A8FE6",
-    "line": "mov     ecx, [esp+24h+arg_18]",
+    "line": "mov     ecx, [esp+24h+a8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x9A8FEB",
-    "line": "mov     ecx, [esp+28h+arg_14]",
+    "line": "mov     ecx, [esp+28h+a7]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x9A8FF0",
-    "line": "mov     ecx, [esp+2Ch+arg_10]",
+    "line": "mov     ecx, [esp+2Ch+a6]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x9A8FF5",
-    "line": "mov     ecx, [esp+30h+arg_C]",
+    "line": "mov     ecx, [esp+30h+a5]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x9A8FFA",
-    "line": "mov     ecx, [esp+34h+arg_8]",
+    "line": "mov     ecx, [esp+34h+a4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x9A8FFF",
-    "line": "mov     ecx, [esp+38h+arg_4]",
+    "line": "mov     ecx, [esp+38h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x9A900E",
-    "line": "mov     byte ptr [esp+18h+arg_0], 0",
+    "line": "mov     byte ptr [esp+18h+shaderProgram], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x9A902E",
-    "line": "cmp     byte ptr [esp+10h+arg_0], al",
+    "line": "cmp     byte ptr [esp+10h+shaderProgram], al",
     "mnemonic": "cmp",
     "size": 4
   },

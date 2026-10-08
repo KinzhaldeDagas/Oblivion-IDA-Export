@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x774AE0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+format]; Map D3D depth/stencil formats to their depth-bit and stencil-bit counts for compatibility ranking.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x774AF7",
-    "line": "mov     eax, [esp+arg_4]; jumptable 00774AF0 case 70",
+    "line": "mov     eax, [esp+depthBits]; jumptable 00774AF0 case 70",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774AFB",
-    "line": "mov     ecx, [esp+arg_8]",
+    "line": "mov     ecx, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x774B0C",
-    "line": "mov     edx, [esp+arg_4]; jumptable 00774AF0 case 75",
+    "line": "mov     edx, [esp+depthBits]; jumptable 00774AF0 case 75",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774B10",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x774B21",
-    "line": "mov     ecx, [esp+arg_4]; jumptable 00774AF0 case 71",
+    "line": "mov     ecx, [esp+depthBits]; jumptable 00774AF0 case 71",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774B25",
-    "line": "mov     edx, [esp+arg_8]",
+    "line": "mov     edx, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x774B36",
-    "line": "mov     eax, [esp+arg_4]; jumptable 00774AF0 case 73",
+    "line": "mov     eax, [esp+depthBits]; jumptable 00774AF0 case 73",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774B3A",
-    "line": "mov     ecx, [esp+arg_8]",
+    "line": "mov     ecx, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x774B4B",
-    "line": "mov     edx, [esp+arg_4]; jumptable 00774AF0 case 80",
+    "line": "mov     edx, [esp+depthBits]; jumptable 00774AF0 case 80",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774B4F",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x774B60",
-    "line": "mov     ecx, [esp+arg_4]; jumptable 00774AF0 case 77",
+    "line": "mov     ecx, [esp+depthBits]; jumptable 00774AF0 case 77",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774B64",
-    "line": "mov     edx, [esp+arg_8]",
+    "line": "mov     edx, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x774B75",
-    "line": "mov     eax, [esp+arg_4]; jumptable 00774AF0 case 79",
+    "line": "mov     eax, [esp+depthBits]; jumptable 00774AF0 case 79",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774B79",
-    "line": "mov     ecx, [esp+arg_8]",
+    "line": "mov     ecx, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x774B8A",
-    "line": "mov     edx, [esp+arg_4]; jumptable 00774AF0 default case, cases 72,74,76,78",
+    "line": "mov     edx, [esp+depthBits]; jumptable 00774AF0 default case, cases 72,74,76,78",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x774B8E",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+stencilBits]",
     "mnemonic": "mov",
     "size": 4
   },

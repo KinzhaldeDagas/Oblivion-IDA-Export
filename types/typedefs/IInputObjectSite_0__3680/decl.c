@@ -1,1 +1,1 @@
-IInputObjectSite_0
+typedef IInputObjectSite IInputObjectSite_0;

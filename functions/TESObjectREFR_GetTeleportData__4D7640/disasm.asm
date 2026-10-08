@@ -25,8 +25,8 @@
 0x4D7684: cmp     eax, edi
 0x4D7686: mov     [esp+20h+var_4], edi
 0x4D768A: jz      short loc_4D7695
-0x4D768C: mov     ecx, eax
-0x4D768E: call    sub_42B590
+0x4D768C: mov     ecx, eax; this
+0x4D768E: call    TeleportData_InitSentinels; TeleportData constructor initializes linkedDoor=NULL and all six transform floats to FLT_MAX sentinels. Any XTEL immediately replaces them from a fresh zeroed scratch in TeleportData_LoadXTEL.
 0x4D7693: mov     edi, eax
 0x4D7695: push    edi
 0x4D7696: mov     ecx, ebx
@@ -46,3 +46,15 @@
 0x4D76C3: pop     ebx
 0x4D76C4: add     esp, 10h
 0x4D76C7: retn
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

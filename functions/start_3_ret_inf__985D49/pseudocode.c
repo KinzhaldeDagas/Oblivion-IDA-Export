@@ -1,4 +1,4 @@
-int start_3_::ret_inf()
+void start_3_::ret_inf()
 {
-  return start_3_::_ErrorHandling();
+  start_3_::_ErrorHandling(); /*0x985d4e*/
 }

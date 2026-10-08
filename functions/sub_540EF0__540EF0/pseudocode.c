@@ -2,20 +2,20 @@ Sky *__cdecl sub_540EF0(int a1)
 {
   Sky *result; // eax
 
-  result = g_Sky;
-  if ( g_Sky )
+  result = MEMORY[0xB365C4]; /*0x540ef0*/
+  if ( MEMORY[0xB365C4] ) /*0x540ef0*/
   {
-    if ( result->masserMoon )
+    if ( result->masserMoon ) /*0x540ef9*/
     {
-      result = *((Sky **)result->masserMoon + 5);
-      if ( result )
+      result = *((Sky **)result->masserMoon + 5); /*0x540f02*/
+      if ( result ) /*0x540f07*/
       {
-        if ( a1 )
-          LOWORD(result->weather018) |= 0x20u;
+        if ( a1 ) /*0x540f0e*/
+          LOWORD(result->weather018) |= 0x20u; /*0x540f10*/
         else
-          LOWORD(result->weather018) &= ~0x20u;
+          LOWORD(result->weather018) &= ~0x20u; /*0x540f16*/
       }
     }
   }
-  return result;
+  return result; /*0x540f15*/
 }

@@ -1,4 +1,4 @@
-0x5E5A00: push    0FFFFFFFFh
+0x5E5A00: push    0FFFFFFFFh; ODismemberment combat decode: selects a random equipped armor/shield/container entry for durability damage using iArmorDamage* chances, falling back to equipped weapon entry if no armor entry is chosen.
 0x5E5A02: push    offset SEH_5E5A00
 0x5E5A07: mov     eax, large fs:0
 0x5E5A0D: push    eax
@@ -22,7 +22,7 @@
 0x5E5A40: cmp     [esp+30h+var_14], 7
 0x5E5A45: jge     loc_5E5C5E
 0x5E5A4B: push    0; Seed
-0x5E5A4D: call    GetRandomLargeInteger?
+0x5E5A4D: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5E5A52: cdq
 0x5E5A53: mov     ecx, 64h ; 'd'
 0x5E5A58: idiv    ecx
@@ -210,3 +210,15 @@
 0x5E5C71: pop     ebx
 0x5E5C72: add     esp, 1Ch
 0x5E5C75: retn
+0x9C25C0: mov     eax, [ebp-18h]
+0x9C25C3: push    eax
+0x9C25C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C25C9: pop     ecx
+0x9C25CA: retn
+0x9C25CB: mov     edx, [esp+arg_4]
+0x9C25CF: lea     eax, [edx-20h]
+0x9C25D2: mov     ecx, [edx-24h]
+0x9C25D5: xor     ecx, eax
+0x9C25D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C25DC: mov     eax, offset stru_AEB480
+0x9C25E1: jmp     ___CxxFrameHandler3

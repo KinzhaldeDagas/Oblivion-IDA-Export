@@ -1,4 +1,4 @@
-0x678D90: push    ecx
+0x678D90: push    ecx; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicHitEffect; for matching targetReference, calls the hit-effect detach virtual and marks the effect finished.
 0x678D91: push    ebx
 0x678D92: push    esi
 0x678D93: xor     eax, eax
@@ -13,7 +13,7 @@
 0x678DAB: jnz     short loc_678DB5
 0x678DAD: mov     bl, al
 0x678DAF: jmp     short loc_678DB7
-0x678DB1: mov     edi, [esp+10h+arg_0]
+0x678DB1: mov     edi, [esp+10h+targetReference]
 0x678DB5: xor     bl, bl
 0x678DB7: test    al, 1
 0x678DB9: jz      short loc_678DD7
@@ -35,13 +35,13 @@
 0x678DDC: mov     ebp, esi
 0x678DDE: test    ebp, ebp
 0x678DE0: jz      short loc_678E59
-0x678DE2: mov     ebx, [esp+14h+arg_0]
-0x678DE6: lea     ecx, [esp+14h+arg_0]
-0x678DEA: push    ecx
-0x678DEB: mov     ecx, ebp
-0x678DED: call    sub_677C70
+0x678DE2: mov     ebx, [esp+14h+targetReference]
+0x678DE6: lea     ecx, [esp+14h+targetReference]
+0x678DEA: push    ecx; outData
+0x678DEB: mov     ecx, ebp; this
+0x678DED: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x678DF2: mov     esi, [eax]
-0x678DF4: mov     eax, [esp+14h+arg_0]
+0x678DF4: mov     eax, [esp+14h+targetReference]
 0x678DF8: test    eax, eax
 0x678DFA: jz      short loc_678E1A
 0x678DFC: mov     edi, eax
@@ -66,8 +66,7 @@
 0x678E27: test    eax, eax
 0x678E29: jz      short loc_678E52
 0x678E2B: jmp     short loc_678E30
-0x678E2D: align 10h
-0x678E30: cmp     eax, offset unk_B3C0BC
+0x678E30: cmp     eax, offset NiRTTI_MagicHitEffect
 0x678E35: jz      short loc_678E40
 0x678E37: mov     eax, [eax+4]
 0x678E3A: test    eax, eax

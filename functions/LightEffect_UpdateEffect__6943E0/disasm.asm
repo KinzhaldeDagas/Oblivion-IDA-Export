@@ -1,4 +1,4 @@
-0x6943E0: push    edi
+0x6943E0: push    edi; LightEffect update is a native self-heal: if its transient point light exists but no full-list ShadowSceneLight matches that backing-light identity, recreate the entry with trackBackingPosition=true.
 0x6943E1: mov     edi, ecx
 0x6943E3: cmp     dword ptr [edi+38h], 0
 0x6943E7: jz      short loc_694417
@@ -10,16 +10,16 @@
 0x6943F6: test    esi, esi
 0x6943F8: jz      short loc_694416
 0x6943FA: mov     eax, [edi+38h]
-0x6943FD: push    eax
-0x6943FE: mov     ecx, esi
-0x694400: call    sub_7C6230
+0x6943FD: push    eax; backingLight
+0x6943FE: mov     ecx, esi; self
+0x694400: call    ShadowSceneNode_FindFullLightBySource; LightEffect update first tests the native full-light list by backing NiLight identity.
 0x694405: test    eax, eax
 0x694407: jnz     short loc_694416
 0x694409: mov     eax, [edi+38h]
-0x69440C: push    1
-0x69440E: push    eax
-0x69440F: mov     ecx, esi
-0x694411: call    sub_7C6AE0
+0x69440C: push    1; trackBackingPosition
+0x69440E: push    eax; backingLight
+0x69440F: mov     ecx, esi; self
+0x694411: call    ShadowSceneNode_FindOrCreateFullLightForSource; Dynamically created LightEffect NiPointLights register with trackBackingPosition=true.
 0x694416: pop     esi
 0x694417: pop     edi
 0x694418: retn    4

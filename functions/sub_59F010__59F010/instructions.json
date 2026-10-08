@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59F010",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+tileID]; DialogMenu click dispatcher. TOPIC tiles select a post-GREETING MenuTopic; INFOGENERAL clears its cached unread byte immediately; clicked Goodbye INFO is parked for close-time commit. Tile ID 4 is the response-skip/continue control: it stops current playback and immediately advances the already-prepositioned response cursor, so skipping the final response reaches INFO processing without waiting for audio or the post-line delay.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x59F023",
-    "line": "mov     ebp, [esp+10h+arg_4]",
+    "line": "mov     ebp, [esp+10h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x59F045",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x59F04B",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59F050",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59F055",
-    "line": "call    sub_6B8660",
+    "line": "call    MenuTopicManager__GetSingleton",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,25 +169,25 @@
   },
   {
     "ea": "0x59F068",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59F06D",
-    "line": "push    eax",
+    "line": "push    eax; topicIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F06E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F070",
-    "line": "call    sub_6B8610",
+    "line": "call    MenuTopicManager__GoToTopic; Tile user0 (0xFAA) is the zero-based index into the choices after GREETING, matching LoadTopicsList::FirstTopic(skipGreeting=true).",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,43 +205,43 @@
   },
   {
     "ea": "0x59F07D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F07F",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59F084",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F086",
-    "line": "call    sub_6B8560",
+    "line": "call    MenuTopic__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59F08B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F08D",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59F092",
-    "line": "cmp     [eax+20h], bl",
+    "line": "cmp     [eax+20h], bl; Only INFOGENERAL/Rumors clears its cached unread marker at click time. Ordinary TOPIC entries retain their marker until their INFO commits normally and a later MenuTopic is rebuilt from TESTopicInfo.spoken.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -253,31 +253,31 @@
   },
   {
     "ea": "0x59F097",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F099",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59F09E",
-    "line": "mov     [eax+21h], bl",
+    "line": "mov     [eax+21h], bl; Immediate INFOGENERAL UI commit: clear actor-cached MenuTopic.infoNotSpoken before response completion. An interrupted Rumors line can therefore lose its new marker without setting the INFO-global spoken byte.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x59F0A1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F0A3",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,25 +295,25 @@
   },
   {
     "ea": "0x59F0AF",
-    "line": "jz      short loc_59F0C8",
+    "line": "jz      short loc_59F0C8; Oblivion parks a clicked Goodbye INFO based on its flag bit 0x01. Fallout's DialogMenu::SetGoodbyeState (x4y6:0x8252E850) distinguishes forced INFO-Goodbye from natural stock D4 topic state; Oblivion's decoded DoClick/LoadNextTopicList/Close path instead uses closePending plus a parked INFO pointer.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x59F0B1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F0B3",
-    "line": "mov     byte ptr [esi+88h], 1",
+    "line": "mov     byte ptr [esi+88h], 1; Set DialogMenu.closePending immediately for the clicked Goodbye. At final-response exhaustion this byte is overwritten with LoadNextTopicList's return value.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x59F0BA",
-    "line": "call    sub_6B8650",
+    "line": "call    MenuTopicManager__GetCurrentTopic",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x59F0C2",
-    "line": "mov     ds:0B3B294h, ecx",
+    "line": "mov     ds:0B3B294h, ecx; Park the selected Goodbye INFO globally. Only another Goodbye click overwrites this pointer; ordinary topic transitions do not clear it. DialogMenu::Close consumes it with RunResult then AddTopicList.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x59F0CA",
-    "line": "call    sub_59EB90",
+    "line": "call    DialogMenu__AdvanceTopicResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x59F0DB",
-    "line": "mov     ecx, [esi+60h]",
+    "line": "mov     ecx, [esi+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x59F0DE",
-    "line": "call    sub_5EF930",
+    "line": "call    Actor__StopDialoguePlayback; Response-skip control (tile ID 4): stop the speaker's current dialogue playback first. This is an interruption of audio only; it does not abandon the selected MenuTopic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x59F0E5",
-    "line": "call    sub_59EB90",
+    "line": "call    DialogMenu__AdvanceTopicResponse; Immediately advance after stopping playback. Because AdvanceTopicResponse moved the cursor forward when the line began, this starts the next response or, if the skipped line was final, processes AddTopicList/RunResult/Goodbye now.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x59F123",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x59F12B",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59F12E",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x59F135",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x59F149",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x59F17C",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F17D",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x59F185",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,37 +769,37 @@
   },
   {
     "ea": "0x59F19E",
-    "line": "push    ebx",
+    "line": "push    ebx; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F19F",
-    "line": "push    eax",
+    "line": "push    eax; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F1A0",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F1A1",
-    "line": "push    ecx",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F1A2",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F1A4",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,19 +823,19 @@
   },
   {
     "ea": "0x59F1B7",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F1B8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F1BA",
-    "line": "call    sub_59EAA0",
+    "line": "call    DialogMenu__PlayDialogueItem; Starts the first DialogueResponse of an externally supplied DialogueItem; if the item has no responses, returns to the normal topic-list advance path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x59F1C6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x59F1FE",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,13 +973,13 @@
   },
   {
     "ea": "0x59F206",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59F209",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x59F210",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x59F233",
-    "line": "mov     ecx, [esp+14h+arg_4]",
+    "line": "mov     ecx, [esp+14h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x59F25A",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x59F25F",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59F264",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x59F287",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x59F2B0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,19 +1327,19 @@
   },
   {
     "ea": "0x59F2C8",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F2C9",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59F2CB",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x59F2EB",
-    "line": "push    ebx",
+    "line": "push    ebx; conversation",
     "mnemonic": "push",
     "size": 1
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x59F2F4",
-    "line": "push    ebp",
+    "line": "push    ebp; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -1429,25 +1429,25 @@
   },
   {
     "ea": "0x59F302",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F303",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F304",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F306",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,19 +1471,19 @@
   },
   {
     "ea": "0x59F319",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F31A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F31C",
-    "line": "call    sub_59EAA0",
+    "line": "call    DialogMenu__PlayDialogueItem; Starts the first DialogueResponse of an externally supplied DialogueItem; if the item has no responses, returns to the normal topic-list advance path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x59F328",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x59F349",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,13 +1585,13 @@
   },
   {
     "ea": "0x59F351",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59F354",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x59F35B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x59F36F",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1723,7 +1723,7 @@
   },
   {
     "ea": "0x59F395",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,19 +1759,19 @@
   },
   {
     "ea": "0x59F3AD",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F3AE",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59F3B0",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x59F3D0",
-    "line": "push    ebx",
+    "line": "push    ebx; conversation",
     "mnemonic": "push",
     "size": 1
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x59F3D9",
-    "line": "push    ebp",
+    "line": "push    ebp; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -1861,25 +1861,25 @@
   },
   {
     "ea": "0x59F3E7",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F3E8",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F3E9",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F3EB",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x59F416",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,13 +1969,13 @@
   },
   {
     "ea": "0x59F41E",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59F421",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x59F428",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2023,7 +2023,7 @@
   },
   {
     "ea": "0x59F43C",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x59F457",
-    "line": "call    sub_5D2070",
+    "line": "call    RepairMenu_Create",
     "mnemonic": "call",
     "size": 5
   },
@@ -2131,19 +2131,19 @@
   },
   {
     "ea": "0x59F46C",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F46D",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59F46F",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x59F48F",
-    "line": "push    ebx",
+    "line": "push    ebx; conversation",
     "mnemonic": "push",
     "size": 1
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x59F498",
-    "line": "push    ebp",
+    "line": "push    ebp; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -2233,25 +2233,25 @@
   },
   {
     "ea": "0x59F4A6",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F4A7",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F4A8",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F4AA",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x59F4D5",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,13 +2341,13 @@
   },
   {
     "ea": "0x59F4DD",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59F4E0",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x59F4E7",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x59F4FB",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x59F521",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2515,19 +2515,19 @@
   },
   {
     "ea": "0x59F539",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F53A",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59F53C",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x59F55C",
-    "line": "push    ebx",
+    "line": "push    ebx; conversation",
     "mnemonic": "push",
     "size": 1
   },
@@ -2599,7 +2599,7 @@
   },
   {
     "ea": "0x59F565",
-    "line": "push    ebp",
+    "line": "push    ebp; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -2617,25 +2617,25 @@
   },
   {
     "ea": "0x59F573",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F574",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59F575",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F577",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2707,7 +2707,7 @@
   },
   {
     "ea": "0x59F5A2",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,13 +2725,13 @@
   },
   {
     "ea": "0x59F5AA",
-    "line": "fstp    [esp+14h+a2]; a3",
+    "line": "fstp    [esp+14h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59F5AD",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2743,7 +2743,7 @@
   },
   {
     "ea": "0x59F5B4",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2779,7 +2779,7 @@
   },
   {
     "ea": "0x59F5C8",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x59F5DF",
-    "line": "call    sub_5D9590",
+    "line": "call    SpellPurchaseMenu_Create",
     "mnemonic": "call",
     "size": 5
   },
@@ -2863,7 +2863,7 @@
   },
   {
     "ea": "0x59F5EE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2929,7 +2929,7 @@
   },
   {
     "ea": "0x59F60E",
-    "line": "call    sub_59DD40",
+    "line": "call    DialogMenu__Close; Close player dialogue and consume any globally parked clicked-Goodbye INFO with RunResult then AddTopicList. This path does not test RunForRumors. Therefore a Goodbye INFOGENERAL lacking RunForRumors can complete without closing, leave its result pending across later ordinary TOPIC choices, and commit only on a later close unless another Goodbye overwrites it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2947,7 +2947,7 @@
   },
   {
     "ea": "0x59F61A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -24,19 +24,19 @@
 0x5D38FA: jnz     short loc_5D38E4
 0x5D38FC: mov     ecx, [ebp+48h]
 0x5D38FF: add     ecx, 30h ; '0'
-0x5D3902: call    NiTPointerList__FreeAllNodes
+0x5D3902: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x5D3907: push    0
 0x5D3909: push    0
 0x5D390B: push    0
 0x5D390D: push    offset aNewSave; "New Save"
 0x5D3912: mov     ecx, ebp
-0x5D3914: call    sub_5D3650
+0x5D3914: call    SaveMenu_AddSaveRow
 0x5D3919: cmp     [esp+140h+arg_0], 0
 0x5D3921: jz      short loc_5D3939
 0x5D3923: mov     ecx, ds:0B33B00h
 0x5D3929: call    sub_459400
 0x5D392E: mov     ecx, ds:0B33B00h
-0x5D3934: call    sub_45D450
+0x5D3934: call    TESSaveLoadGame_EnumerateSaveFiles; ContinueFromLastSave fidelity decode: enumerates GameSaveRoot+SaveSubdir+*.ess, constructs SaveGameFile objects (BSFile + vtable + flag byte), inserts into SaveLoad+0x6C list via BSSimpleList_InsertSorted comparator 0x459450.
 0x5D3939: mov     ecx, ds:0B33B00h
 0x5D393F: mov     esi, [ecx+6Ch]
 0x5D3942: xor     ebx, ebx
@@ -60,7 +60,7 @@
 0x5D3969: lea     edx, [esp+14Ch+var_130]
 0x5D396D: push    edx
 0x5D396E: mov     ecx, ebp
-0x5D3970: call    sub_5D3650
+0x5D3970: call    SaveMenu_AddSaveRow
 0x5D3975: mov     esi, [esi+4]
 0x5D3978: add     edi, 1
 0x5D397B: test    esi, esi

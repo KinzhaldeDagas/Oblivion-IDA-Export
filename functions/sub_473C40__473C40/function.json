@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x473C40",
+      "0x473CAC"
+    ]
+  ],
+  "chunks_sha256": "8fa484a9578346a99cb5f15fbf2f417432963b2dfdb3397bc810417f797e7c25",
+  "comment_regular": "Writes the 2-byte actor-animation payload length, then delegates to ActorAnimData_SaveState when animation data exists and the actor is eligible. Mirrors Actor_GetAnimationSaveStateSize.",
+  "comment_repeatable": "Writes the 2-byte actor-animation payload length, then delegates to ActorAnimData_SaveState when animation data exists and the actor is eligible. Mirrors Actor_GetAnimationSaveStateSize.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_473C40",
+  "display_name": "Actor_SaveAnimationState",
   "end_ea": "0x473CAC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_473C40",
+  "name": "Actor_SaveAnimationState",
   "segment": ".text",
   "sha256": "8fa484a9578346a99cb5f15fbf2f417432963b2dfdb3397bc810417f797e7c25",
   "size": 108,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x473C40",
+  "total_chunk_size": 108,
   "type": "void __cdecl(int, _DWORD *)",
   "xrefs_from_count": 47,
   "xrefs_to_count": 2

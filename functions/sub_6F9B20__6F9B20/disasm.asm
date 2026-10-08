@@ -88,7 +88,7 @@
 0x6F9C49: cmp     eax, ebp
 0x6F9C4B: jz      short loc_6F9C62
 0x6F9C4D: lea     ecx, [ecx+0]
-0x6F9C50: cmp     eax, offset dword_B3F584
+0x6F9C50: cmp     eax, offset stru_B3F584
 0x6F9C55: jz      loc_6F9D67
 0x6F9C5B: mov     eax, [eax+4]
 0x6F9C5E: cmp     eax, ebp
@@ -137,7 +137,7 @@
 0x6F9CEA: cmp     eax, ebp
 0x6F9CEC: jz      short loc_6F9CFE
 0x6F9CEE: mov     edi, edi
-0x6F9CF0: cmp     eax, offset dword_B3F584
+0x6F9CF0: cmp     eax, offset stru_B3F584
 0x6F9CF5: jz      short loc_6F9D6E
 0x6F9CF7: mov     eax, [eax+4]
 0x6F9CFA: cmp     eax, ebp

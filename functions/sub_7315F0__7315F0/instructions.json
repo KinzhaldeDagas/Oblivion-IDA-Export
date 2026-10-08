@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7315F0",
-    "line": "mov     eax, ds:0B3FFB4h",
+    "line": "mov     eax, ds:0B3FFB4h; Pass223: Registers startup callback 0x00730D80 and shutdown callback 0x00731290 through 0x00747C20.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x731606",
-    "line": "push    offset sub_731290",
+    "line": "push    offset sub_731290; Pass223/229: Engine shutdown property callback; unregisters Ni*Property factories and clears default property globals.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x73160B",
-    "line": "push    offset sub_730D80",
+    "line": "push    offset sub_730D80; Pass223/229/240: Engine startup property callback; seeds default Ni*Property globals and default plain NiFogProperty, then registers NIF factories.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x731610",
-    "line": "call    sub_747C20",
+    "line": "call    sub_747C20; Pass223: Stores engine startup/shutdown callback pair for default property lifecycle.",
     "mnemonic": "call",
     "size": 5
   },

@@ -11,7 +11,7 @@
 0x523189: lea     eax, [esp+1Ch+var_C]
 0x52318D: mov     large fs:0, eax
 0x523193: mov     ebx, ecx
-0x523195: mov     esi, [esp+1Ch+arg_0]
+0x523195: mov     esi, [esp+1Ch+owner]
 0x523199: mov     eax, [esi]
 0x52319B: mov     edx, [eax+168h]
 0x5231A1: mov     ecx, esi
@@ -31,14 +31,14 @@
 0x5231C7: push    154h; Size
 0x5231CC: call    FormHeapAlloc
 0x5231D1: add     esp, 4
-0x5231D4: mov     [esp+1Ch+arg_0], eax
+0x5231D4: mov     [esp+1Ch+owner], eax
 0x5231D8: test    eax, eax
 0x5231DA: mov     [esp+1Ch+var_4], 0
 0x5231E2: jz      short loc_5231F2
-0x5231E4: push    0
-0x5231E6: push    esi
-0x5231E7: mov     ecx, eax
-0x5231E9: call    sub_478730
+0x5231E4: push    0; rootNode
+0x5231E6: push    esi; owner
+0x5231E7: mov     ecx, eax; this
+0x5231E9: call    ActorSkinInfo_ctor; Constructs a 0x154-byte ActorSkinInfo: clears exactly 0x154 bytes, stores the owning Actor at byte offset +0x150, and optionally caches exact-name model nodes from rootNode.
 0x5231EE: mov     edi, eax
 0x5231F0: jmp     short loc_5231F4
 0x5231F2: xor     edi, edi
@@ -57,3 +57,15 @@
 0x523219: pop     ebx
 0x52321A: add     esp, 0Ch
 0x52321D: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

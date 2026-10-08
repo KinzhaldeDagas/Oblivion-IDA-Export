@@ -156,12 +156,6 @@
     "size": 2
   },
   {
-    "ea": "0x4784EA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4784F0",
     "line": "mov     eax, [ebp+4]",
     "mnemonic": "mov",
@@ -223,7 +217,7 @@
   },
   {
     "ea": "0x47850B",
-    "line": "lea     ecx, [eax+ecx*4]",
+    "line": "lea     ecx, [eax+ecx*4]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -235,13 +229,13 @@
   },
   {
     "ea": "0x478510",
-    "line": "push    esi",
+    "line": "push    esi; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x478511",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +433,7 @@
   },
   {
     "ea": "0x478576",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x478619",
-    "line": "push    offset sub_7016A0; void (__thiscall *)(void *)",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x47862B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -880,5 +874,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AFAA0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAA3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFAA4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFAA9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFAAA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFAAB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFAAF",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAB2",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAB5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFAB7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFABC",
+    "line": "mov     eax, offset stru_ADBFB0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFAC1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

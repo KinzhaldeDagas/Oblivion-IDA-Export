@@ -1,4 +1,4 @@
-0x420360: push    3Fh ; '?'; a2
+0x420360: push    3Fh ; '?'; Sets or clears ExtraEnableStateParent flag bit 0 without changing its parent reference.
 0x420362: call    BaseExtraList_GetExtraData
 0x420367: test    eax, eax
 0x420369: jz      short locret_42037D

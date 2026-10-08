@@ -29,7 +29,7 @@
 0x413451: shr     ebx, 4
 0x413454: test    bl, 1
 0x413457: jz      short EffectItem_SetRange___Done
-0x413459: fld     ds:flt_A30634
+0x413459: fld     ds:kTerrainLODQuadRayDirectionZ
 0x41345F: mov     [ecx+10h], edx
 0x413462: fstp    dword ptr [ecx+20h]
 0x413465: mov     al, 1

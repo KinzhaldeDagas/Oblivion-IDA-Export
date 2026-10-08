@@ -12,28 +12,28 @@
 0x4D53A3: cmp     eax, ebp
 0x4D53A5: jz      loc_4D55BB
 0x4D53AB: mov     ecx, [eax+2Ch]
-0x4D53AE: mov     [esp+38h+var_1C], ecx
+0x4D53AE: mov     [esp+38h+var_1C.x], ecx
 0x4D53B2: mov     edx, [eax+30h]
-0x4D53B5: mov     [esp+38h+var_18], edx
+0x4D53B5: mov     [esp+38h+var_1C.y], edx
 0x4D53B9: mov     eax, [eax+34h]
 0x4D53BC: lea     ecx, [esp+38h+var_1C]
 0x4D53C0: push    ecx
-0x4D53C1: mov     [esp+3Ch+var_14], eax
+0x4D53C1: mov     [esp+3Ch+var_1C.z], eax
 0x4D53C5: call    sub_4122F0
 0x4D53CA: add     esp, 4
-0x4D53CD: push    offset flt_B35E14
-0x4D53D2: lea     ecx, [esp+3Ch+var_1C]
-0x4D53D6: call    sub_8AA390
+0x4D53CD: push    offset other; other
+0x4D53D2: lea     ecx, [esp+3Ch+var_1C]; this
+0x4D53D6: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x4D53DB: test    al, al
 0x4D53DD: jz      loc_4D55BB
-0x4D53E3: mov     ecx, [esp+38h+var_14]
-0x4D53E7: mov     edx, [esp+38h+var_1C]
-0x4D53EB: mov     eax, [esp+38h+var_18]
+0x4D53E3: mov     ecx, [esp+38h+var_1C.z]
+0x4D53E7: mov     edx, [esp+38h+var_1C.x]
+0x4D53EB: mov     eax, [esp+38h+var_1C.y]
 0x4D53EF: mov     ds:0B35E1Ch, ecx
 0x4D53F5: mov     ecx, ds:0B333C4h; this
 0x4D53FB: mov     ds:0B35E14h, edx
 0x4D5401: mov     ds:0B35E18h, eax
-0x4D5406: call    TESObjectREFR_GetParentCell
+0x4D5406: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4D540B: cmp     eax, ebp
 0x4D540D: jz      loc_4D55BB
 0x4D5413: test    byte ptr [eax+24h], 1
@@ -50,11 +50,11 @@
 0x4D5439: mov     [esp+3Ch+var_30], eax
 0x4D543D: jz      loc_4D559A
 0x4D5443: push    edi
-0x4D5444: fld     [esp+40h+var_1C]
+0x4D5444: fld     [esp+40h+var_1C.x]
 0x4D5448: fistp   [esp+40h+var_34]
 0x4D544C: mov     esi, [esp+40h+var_34]
 0x4D5450: sar     esi, 0Ch
-0x4D5453: fld     [esp+40h+var_18]
+0x4D5453: fld     [esp+40h+var_1C.y]
 0x4D5457: fistp   [esp+40h+var_34]
 0x4D545B: mov     edi, [esp+40h+var_34]
 0x4D545F: mov     edx, esi
@@ -68,7 +68,7 @@
 0x4D5478: fld     [esp+40h+var_34]
 0x4D547C: mov     [esp+40h+var_34], eax
 0x4D5480: fst     [esp+40h+var_2C]
-0x4D5484: mov     ecx, offset fSeenDataUpdateRadius
+0x4D5484: mov     ecx, 0B35C14h
 0x4D5489: fild    [esp+40h+var_34]
 0x4D548D: fstp    [esp+40h+var_34]
 0x4D5491: fld     [esp+40h+var_34]
@@ -81,7 +81,7 @@
 0x4D54AB: faddp   st(1), st
 0x4D54AD: fstp    [esp+40h+var_20]
 0x4D54B1: call    GameSetting_GetSafeFloatPointer
-0x4D54B6: fld     [esp+40h+var_1C]
+0x4D54B6: fld     [esp+40h+var_1C.x]
 0x4D54BA: fsub    dword ptr [eax]
 0x4D54BC: fld     [esp+40h+var_2C]
 0x4D54C0: fcompp
@@ -90,19 +90,19 @@
 0x4D54C7: jnz     short loc_4D54CE
 0x4D54C9: or      ebp, 0FFFFFFFFh
 0x4D54CC: jmp     short loc_4D54F0
-0x4D54CE: mov     ecx, offset fSeenDataUpdateRadius
+0x4D54CE: mov     ecx, 0B35C14h
 0x4D54D3: call    GameSetting_GetSafeFloatPointer
 0x4D54D8: fld     dword ptr [eax]
-0x4D54DA: fadd    [esp+40h+var_1C]
+0x4D54DA: fadd    [esp+40h+var_1C.x]
 0x4D54DE: fld     [esp+40h+var_24]
 0x4D54E2: fcompp
 0x4D54E4: fnstsw  ax
 0x4D54E6: test    ah, 41h
 0x4D54E9: jp      short loc_4D54F0
 0x4D54EB: mov     ebp, 1
-0x4D54F0: mov     ecx, offset fSeenDataUpdateRadius
+0x4D54F0: mov     ecx, 0B35C14h
 0x4D54F5: call    GameSetting_GetSafeFloatPointer
-0x4D54FA: fld     [esp+40h+var_18]
+0x4D54FA: fld     [esp+40h+var_1C.y]
 0x4D54FE: fsub    dword ptr [eax]
 0x4D5500: fld     [esp+40h+var_28]
 0x4D5504: fcompp
@@ -111,10 +111,10 @@
 0x4D550B: jnz     short loc_4D5517
 0x4D550D: mov     [esp+40h+var_34], 0FFFFFFFFh
 0x4D5515: jmp     short loc_4D553C
-0x4D5517: mov     ecx, offset fSeenDataUpdateRadius
+0x4D5517: mov     ecx, 0B35C14h
 0x4D551C: call    GameSetting_GetSafeFloatPointer
 0x4D5521: fld     dword ptr [eax]
-0x4D5523: fadd    [esp+40h+var_18]
+0x4D5523: fadd    [esp+40h+var_1C.y]
 0x4D5527: fld     [esp+40h+var_20]
 0x4D552B: fcompp
 0x4D552D: fnstsw  ax
@@ -125,9 +125,9 @@
 0x4D553E: push    ebx
 0x4D553F: mov     ebx, 1
 0x4D5544: jz      short loc_4D555D
-0x4D5546: push    edi; signed int
+0x4D5546: push    edi; cellY
 0x4D5547: lea     ecx, [esi+ebp]
-0x4D554A: push    ecx; signed int
+0x4D554A: push    ecx; cellX
 0x4D554B: mov     ecx, [esp+4Ch+var_30]; this
 0x4D554F: call    TESWorldSpace__GetCellAtCellCoord
 0x4D5554: mov     [esp+44h+var_C], eax
@@ -137,8 +137,8 @@
 0x4D5563: jz      short loc_4D557D
 0x4D5565: mov     ecx, [esp+44h+var_30]; this
 0x4D5569: add     eax, edi
-0x4D556B: push    eax; signed int
-0x4D556C: push    esi; signed int
+0x4D556B: push    eax; cellY
+0x4D556C: push    esi; cellX
 0x4D556D: call    TESWorldSpace__GetCellAtCellCoord
 0x4D5572: mov     [esp+ebx*4+44h+var_10], eax
 0x4D5576: mov     eax, [esp+44h+var_34]
@@ -149,9 +149,9 @@
 0x4D5583: jz      short loc_4D5598
 0x4D5585: mov     ecx, [esp+44h+var_30]; this
 0x4D5589: add     eax, edi
-0x4D558B: push    eax; signed int
+0x4D558B: push    eax; cellY
 0x4D558C: add     ebp, esi
-0x4D558E: push    ebp; signed int
+0x4D558E: push    ebp; cellX
 0x4D558F: call    TESWorldSpace__GetCellAtCellCoord
 0x4D5594: mov     [esp+ebx*4+44h+var_10], eax
 0x4D5598: pop     ebx

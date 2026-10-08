@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 6,
-  "callers_count": 17,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5C3440",
+  "callers_count": 142,
+  "chunks": [
+    [
+      "0x5C3440",
+      "0x5C34C9"
+    ],
+    [
+      "0x9C0FB0",
+      "0x9C0FDB"
+    ]
+  ],
+  "chunks_sha256": "8a9bb8f9b860300630104fc3e377bbf501b8d10501b5da70a50e8bf77a17b7ca",
+  "comment_regular": "Consumes owned BSStringT category/control names, resolves the cached category Tile, then recursively finds the named descendant control.",
+  "comment_repeatable": "Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "RaceSexMenu_FindControlTile",
   "end_ea": "0x5C34C9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5C3440",
+  "name": "RaceSexMenu_FindControlTile",
   "segment": ".text",
   "sha256": "8b85e339f88a8b0ce05e1c762089ad9c4a9548074c45e8e2900a6a2e4a9bdbbc",
   "size": 137,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5C3440",
-  "type": "int __thiscall(_DWORD *this, char *, int, unsigned __int8 *, int)",
-  "xrefs_from_count": 52,
+  "total_chunk_size": 180,
+  "type": "Tile *__thiscall(void *this, BSStringT categoryName, BSStringT controlName)",
+  "xrefs_from_count": 66,
   "xrefs_to_count": 142
 }

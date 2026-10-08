@@ -1,13 +1,14 @@
-int __cdecl Calc_DetectionLevel_::UnderwaterFactors(
-        int a1,
+// When the underwater condition is active, scales the relevant light/visibility term by fSneakSwimmingLightMult.
+int __usercall Calc_DetectionLevel_ApplyUnderwaterFactor@<eax>(
+        double a1@<st0>,
         int a2,
-        int a3,
-        int a4,
+        float a3,
+        float a4,
         int a5,
         int a6,
         int a7,
         int a8,
-        int a9,
+        float a9,
         int a10,
         int a11,
         int a12,
@@ -18,11 +19,12 @@ int __cdecl Calc_DetectionLevel_::UnderwaterFactors(
         int a17,
         int a18,
         int a19,
-        float a20)
+        char a20,
+        float a21)
 {
-  if ( (_BYTE)a18 )
+  if ( (_BYTE)a19 ) /*0x546590*/
   {
-    __asm
+    __asm /*0x546592*/
     {
       fst     [esp+arg_1C]
       fld     dword ptr ds:0B36730h
@@ -30,7 +32,7 @@ int __cdecl Calc_DetectionLevel_::UnderwaterFactors(
       fstp    [esp+arg_4C]
     }
   }
-  return Calc_DetectionLevel_::CalcSleepBonus(
+  return Calc_DetectionLevel_ApplySleepBonus(
            a1,
            a2,
            a3,
@@ -49,5 +51,6 @@ int __cdecl Calc_DetectionLevel_::UnderwaterFactors(
            a16,
            a17,
            a18,
-           a19);
+           a19,
+           a20);
 }

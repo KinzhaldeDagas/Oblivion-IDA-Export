@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F70C0",
+      "0x4F718D"
+    ]
+  ],
+  "chunks_sha256": "0f4090e7b9284e665000b208339020fcf9a492103c1480028aeb2835027d6952",
+  "comment_regular": "GetInFaction_Eval (index 71 / opcode 0x1047): the Faction parameter (typeID 0x11) is present when TESActorBaseData_GetFactionRank != -1. This returns a membership predicate, not the numeric rank.",
+  "comment_repeatable": "GetInFaction_Eval (index 71 / opcode 0x1047): the Faction parameter (typeID 0x11) is present when TESActorBaseData_GetFactionRank != -1. This returns a membership predicate, not the numeric rank.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F70C0",
+  "display_name": "GetInFaction_Eval",
   "end_ea": "0x4F718D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F70C0",
+  "name": "GetInFaction_Eval",
   "segment": ".text",
   "sha256": "0f4090e7b9284e665000b208339020fcf9a492103c1480028aeb2835027d6952",
   "size": 205,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F70C0",
-  "type": "char __cdecl(Actor *, int, int, double *)",
+  "total_chunk_size": 205,
+  "type": "char __cdecl(TESObjectREFR *subject, TESForm *param1, TESForm *param2, double *value)",
   "xrefs_from_count": 86,
-  "xrefs_to_count": 4
+  "xrefs_to_count": 3
 }

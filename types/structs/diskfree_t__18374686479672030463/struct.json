@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_diskfree_t",
+  "definition": "struct _diskfree_t\n{\nunsigned int total_clusters;\nunsigned int avail_clusters;\nunsigned int sectors_per_cluster;\nunsigned int bytes_per_sector;\n}\n",
   "id": 18374686479672030463,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "total_clusters",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "avail_clusters",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sectors_per_cluster",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bytes_per_sector",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "unsigned int"
     }
   ],
   "name": "_diskfree_t",
+  "ordinal": 2390,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

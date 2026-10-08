@@ -1,10 +1,11 @@
-int __usercall EffectItemList_HasTouchEffect_::EffectLoop_Next@<eax>(_DWORD *this@<ecx>, char a2@<al>)
+void __usercall EffectItemList_HasTouchEffect_::EffectLoop_Next(_DWORD *this@<ecx>, char a2@<al>)
 {
-  _DWORD *v2; // ecx
+  int v2; // ecx
+  _DWORD *v3; // ecx
 
-  v2 = (_DWORD *)*(this + 2);
-  if ( v2 && (v2 += 0xFFFFFFFF) != 0 )
-    return EffectItemList_HasTouchEffect_::EffectLoop(v2, a2);
+  v2 = *(this + 2); /*0x415066*/
+  if ( v2 && (v3 = (_DWORD *)(v2 - 4)) != 0 ) /*0x415070*/
+    EffectItemList_HasTouchEffect_::EffectLoop(v3, a2); /*0x415070*/
   else
-    return EffectItemList_HasTouchEffect_::Done(v2);
+    EffectItemList_HasTouchEffect_::Done(); /*0x415071*/
 }

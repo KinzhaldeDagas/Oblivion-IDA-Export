@@ -1,4 +1,4 @@
-0x760CC0: push    ecx
+0x760CC0: push    ecx; DX10OBSE resource decode: fills the D3D9 texture levels from converted NiPixelData by locking each texture level/surface and copying rows/blocks.
 0x760CC1: push    esi
 0x760CC2: mov     esi, ecx
 0x760CC4: mov     eax, [esi+50h]
@@ -21,7 +21,7 @@
 0x760CF1: mov     ebx, [esi+50h]
 0x760CF4: push    ebp
 0x760CF5: mov     ebp, [esp+10h+arg_0]
-0x760CF9: mov     eax, [ebp+60h]
+0x760CF9: mov     eax, [ebp+60h]; Upload records source NiPixelData level count (a2[0x18], byte +0x60) before iterating every non-skipped D3D level.
 0x760CFC: push    edi
 0x760CFD: mov     [esi+5Ch], eax
 0x760D00: xor     edi, edi
@@ -33,7 +33,7 @@
 0x760D10: push    ecx
 0x760D11: push    edi
 0x760D12: push    ebx
-0x760D13: call    edx
+0x760D13: call    edx; Verified call through texture vtable+48h = IDirect3DTexture9::GetSurfaceLevel(level, &surface). Each returned alias is passed to full-surface lock/copy/unlock helper 760860, then COM Release at 760D39. Source mip = destination level + LevelsSkipped. A texture-Create/Texture-Unlock-only publication queue misses this actual Oblivion upload route.
 0x760D15: test    eax, eax
 0x760D17: jl      short loc_760D50
 0x760D19: mov     eax, [esp+14h+var_4]
@@ -43,7 +43,7 @@
 0x760D23: add     ecx, edi
 0x760D25: push    ecx
 0x760D26: push    ebp
-0x760D27: call    sub_760860
+0x760D27: call    OB_NiDX9SourceTextureData_CopyMipToSurface_010201A0; Uploads source mip (level + LevelsSkipped) into the matching D3D9 surface. This proves authored/generated DDS mip contents are consumed per level rather than ignored.
 0x760D2C: mov     eax, [esp+24h+var_4]
 0x760D30: mov     edx, [eax]
 0x760D32: add     esp, 10h
@@ -61,12 +61,12 @@
 0x760D4B: pop     esi
 0x760D4C: pop     ecx
 0x760D4D: retn    4
-0x760D50: push    eax
-0x760D51: call    sub_7736F0
+0x760D50: push    eax; hresult
+0x760D51: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x760D56: push    eax
 0x760D57: push    edi
 0x760D58: push    offset aNidx9sourcet_2; "NiDX9SourceTextureData::CopyDataToSurfa"...
-0x760D5D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x760D5D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x760D62: add     esp, 10h
 0x760D65: pop     edi
 0x760D66: pop     ebp

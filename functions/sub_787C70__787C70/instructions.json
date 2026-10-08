@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x787C70",
-    "line": "push    ecx",
+    "line": "push    ecx; Maps normalized/current tree LOD to the Oblivion frond selector count stored on CSpeedTreeRT.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x787C77",
-    "line": "fcomp   [esp+4+arg_0]",
+    "line": "fcomp   [esp+4+lod]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -79,25 +79,25 @@
   },
   {
     "ea": "0x787C93",
-    "line": "fstp    [esp+4+arg_0]",
+    "line": "fstp    [esp+4+lod]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787C97",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+lod]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787C9B",
-    "line": "fstp    [esp+4+arg_0]",
+    "line": "fstp    [esp+4+lod]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787C9F",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+lod]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x787CB4",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

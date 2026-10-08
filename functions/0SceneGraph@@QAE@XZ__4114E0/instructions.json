@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4114E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: SceneGraph constructor creates camera at +0xDC and cullingProcess at +0xE4; world scenegraph uses these in NiRenderer_Render.",
     "mnemonic": "push",
     "size": 2
   },
@@ -265,19 +265,19 @@
   },
   {
     "ea": "0x411573",
-    "line": "push    esi",
+    "line": "push    esi; visibleArray",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x411574",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x411576",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x41157F",
-    "line": "mov     ecx, offset stru_B34448; this",
+    "line": "mov     ecx, 0B34448h; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x411595",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,25 +517,25 @@
   },
   {
     "ea": "0x4115FC",
-    "line": "push    1",
+    "line": "push    1; firstAvailableSlot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4115FE",
-    "line": "push    edi",
+    "line": "push    edi; child",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4115FF",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x411601",
-    "line": "call    NiNode__AddObject",
+    "line": "call    NiNode__AddObject; Adds child to this NiNode after reference protection and reparent/detach. firstAvailableSlot selects hole reuse versus append/grow behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x4116E4",
-    "line": "call    GetFarPlane",
+    "line": "call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x411703",
-    "line": "call    SetCameraFOV_0",
+    "line": "call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1060,5 +1060,167 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AAD00",
+    "line": "mov     ecx, [ebp-44h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AAD03",
+    "line": "jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAD08",
+    "line": "mov     ecx, [ebp-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AAD0B",
+    "line": "add     ecx, 0DCh ; 'Ü'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9AAD11",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAD16",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AAD19",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD1A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAD1F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD20",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD21",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AAD24",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD25",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAD2A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD2B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD2C",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AAD2F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD30",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAD35",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD36",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AAD37",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AAD3B",
+    "line": "lea     eax, [edx-48h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AAD3E",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AAD41",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AAD43",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAD48",
+    "line": "mov     eax, offset stru_AD7C20",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AAD4D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

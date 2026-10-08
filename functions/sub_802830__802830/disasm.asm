@@ -32,7 +32,7 @@
 0x80287F: push    eax; a3
 0x802880: push    ecx; a2
 0x802881: mov     ecx, edi; this
-0x802883: call    sub_76C7D0
+0x802883: call    NiD3DShader_FinishGeometryRender; Generic NiD3DShader vtable +0x44 geometry-finish callback used by Lighting30 and other shaders. It restores D3DRS_LIGHTING (state 0x89) from the shader's saved field, then restores every state recorded by the shader render-state group. The renderer invokes it even when BeginPassLoop returned zero.
 0x802888: pop     edi
 0x802889: pop     esi
 0x80288A: retn    1Ch

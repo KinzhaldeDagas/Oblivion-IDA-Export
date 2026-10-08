@@ -12,14 +12,14 @@ void __cdecl sub_512AE0(
   UInt32 *a3; // [esp+14h] [ebp-208h]
   char a2[4]; // [esp+18h] [ebp-204h] BYREF
 
-  a3 = a8;
-  *(_DWORD *)v8 = 0;
-  if ( Script_ExtractArgs(a1, arg4, a8, a4, argC, a5, l, v8, a2) )
+  a3 = a8; /*0x512b29*/
+  *(_DWORD *)v8 = 0; /*0x512b42*/
+  if ( Script_ExtractArgs(a1, arg4, a8, a4, argC, a5, l, v8, a2) ) /*0x512b4a*/
   {
-    if ( *(_DWORD *)v8 )
+    if ( *(_DWORD *)v8 ) /*0x512b74*/
     {
-      BSStringT_Set((BSStringT *)(*(_DWORD *)v8 + 0x1C), a2, 0);
-      (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)v8 + 0x40))(*(_DWORD *)v8, 0x10);
+      BSStringT_Set((BSStringT *)(*(_DWORD *)v8 + 0x1C), a2, 0); /*0x512b80*/
+      (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)v8 + 0x40))(*(_DWORD *)v8, 0x10); /*0x512b8f*/
     }
   }
 }

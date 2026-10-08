@@ -1,4 +1,4 @@
-0x7D21F0: push    ebx
+0x7D21F0: push    ebx; Remove property-side shadow-light links, reset shader-side state, and free this light's object/receiver list associations.
 0x7D21F1: mov     ebx, ecx
 0x7D21F3: push    edi
 0x7D21F4: mov     edi, [ebx+0E8h]
@@ -11,7 +11,7 @@
 0x7D2205: mov     edi, [edi]
 0x7D2207: push    4
 0x7D2209: mov     ecx, eax
-0x7D220B: call    NiNode_GetNiPropertyByID
+0x7D220B: call    NiNode_GetNiPropertyByID;
 0x7D2210: mov     esi, eax
 0x7D2212: test    esi, esi
 0x7D2214: jz      short loc_7D224B
@@ -36,15 +36,15 @@
 0x7D2241: jz      short loc_7D224B
 0x7D2243: push    ebx
 0x7D2244: mov     ecx, eax
-0x7D2246: call    sub_7EE720
+0x7D2246: call    BSShaderProperty_RemoveShadowLight; Remove the paired ShadowSceneLight association from BSShaderProperty+0x6C.
 0x7D224B: test    edi, edi
 0x7D224D: jnz     short loc_7D2200
 0x7D224F: pop     esi
 0x7D2250: lea     ecx, [ebx+0E4h]
 0x7D2256: mov     dword ptr ds:0B42E90h, 0FFFFFFFFh
 0x7D2260: mov     dword ptr ds:0B42EB8h, 0
-0x7D226A: call    NiTPointerList__FreeAllNodes
+0x7D226A: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7D226F: pop     edi
 0x7D2270: lea     ecx, [ebx+134h]
 0x7D2276: pop     ebx
-0x7D2277: jmp     NiTPointerList__FreeAllNodes
+0x7D2277: jmp     NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.

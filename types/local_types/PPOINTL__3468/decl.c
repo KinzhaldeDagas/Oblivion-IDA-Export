@@ -1,1 +1,1 @@
-PPOINTL
+typedef _POINTL *PPOINTL;

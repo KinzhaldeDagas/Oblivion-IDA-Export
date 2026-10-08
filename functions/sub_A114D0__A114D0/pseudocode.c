@@ -1,4 +1,4 @@
 int sub_A114D0()
 {
-  return atexit(sub_A27650);
+  return atexit(sub_A27650); /*0xa114db*/
 }

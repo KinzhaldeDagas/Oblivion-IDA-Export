@@ -156,12 +156,6 @@
     "size": 2
   },
   {
-    "ea": "0x48E9EC",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
-  },
-  {
     "ea": "0x48E9F0",
     "line": "mov     eax, [esp+30h+var_1C]",
     "mnemonic": "mov",
@@ -565,13 +559,13 @@
   },
   {
     "ea": "0x48EAA9",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48EAAB",
-    "line": "call    sub_41E790",
+    "line": "call    ExtraDataList_GetOriginalReference; Return the TESObjectREFR payload stored in ExtraOriginalReference type 0x26. It cannot redirect an AMMO-keyed inventory entry to a WEAP form.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +847,7 @@
   },
   {
     "ea": "0x48EB2A",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1033,7 @@
   },
   {
     "ea": "0x48EB84",
-    "line": "mov     ebx, [esp+30h+arg_4]",
+    "line": "mov     ebx, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1050,14 +1044,8 @@
     "size": 2
   },
   {
-    "ea": "0x48EB8A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x48EB90",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1075,13 +1063,13 @@
   },
   {
     "ea": "0x48EB9A",
-    "line": "push    ebx",
+    "line": "push    ebx; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48EB9B",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,25 +1117,25 @@
   },
   {
     "ea": "0x48EBB1",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48EBB5",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48EBB7",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48EBB8",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1243,7 @@
   },
   {
     "ea": "0x48EBEF",
-    "line": "mov     edx, [esp+30h+arg_4]",
+    "line": "mov     edx, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1291,7 +1279,7 @@
   },
   {
     "ea": "0x48EBFF",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1297,7 @@
   },
   {
     "ea": "0x48EC07",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,19 +1603,19 @@
   },
   {
     "ea": "0x48ECA9",
-    "line": "mov     eax, [esp+30h+arg_4]",
+    "line": "mov     eax, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48ECAD",
-    "line": "push    eax",
+    "line": "push    eax; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48ECAE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1639,7 +1627,7 @@
   },
   {
     "ea": "0x48ECB8",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,25 +1675,25 @@
   },
   {
     "ea": "0x48ECD0",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48ECD4",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48ECD6",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48ECD7",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1759,7 @@
   },
   {
     "ea": "0x48ECF7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1807,7 @@
   },
   {
     "ea": "0x48ED0F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1825,7 @@
   },
   {
     "ea": "0x48ED1B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1918,12 +1906,6 @@
     "line": "jmp     short loc_48ED50",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x48ED4D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x48ED50",
@@ -2317,25 +2299,25 @@
   },
   {
     "ea": "0x48EE11",
-    "line": "mov     eax, [esp+30h+arg_4]",
+    "line": "mov     eax, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48EE15",
-    "line": "push    eax",
+    "line": "push    eax; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48EE16",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48EE18",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2647,19 +2629,19 @@
   },
   {
     "ea": "0x48EEB2",
-    "line": "mov     edx, [esp+30h+arg_4]",
+    "line": "mov     edx, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48EEB6",
-    "line": "push    edx",
+    "line": "push    edx; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48EEB7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2671,7 +2653,7 @@
   },
   {
     "ea": "0x48EEC1",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2761,25 +2743,25 @@
   },
   {
     "ea": "0x48EEF0",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48EEF4",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48EEF6",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48EEF7",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2839,7 +2821,7 @@
   },
   {
     "ea": "0x48EF14",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3091,25 +3073,25 @@
   },
   {
     "ea": "0x48EF90",
-    "line": "mov     ebp, [esp+30h+arg_4]",
+    "line": "mov     ebp, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48EF94",
-    "line": "push    ebp",
+    "line": "push    ebp; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48EF95",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48EF97",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3253,13 +3235,13 @@
   },
   {
     "ea": "0x48EFE9",
-    "line": "push    ebp",
+    "line": "push    ebp; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48EFEA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3271,7 +3253,7 @@
   },
   {
     "ea": "0x48EFF4",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3373,19 +3355,19 @@
   },
   {
     "ea": "0x48F02C",
-    "line": "mov     ecx, [esp+30h+arg_4]",
+    "line": "mov     ecx, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48F030",
-    "line": "push    ecx",
+    "line": "push    ecx; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48F031",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3397,7 +3379,7 @@
   },
   {
     "ea": "0x48F03B",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3505,19 +3487,19 @@
   },
   {
     "ea": "0x48F070",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48F074",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48F076",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -3529,7 +3511,7 @@
   },
   {
     "ea": "0x48F07A",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3589,7 +3571,7 @@
   },
   {
     "ea": "0x48F09B",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3697,19 +3679,19 @@
   },
   {
     "ea": "0x48F0D8",
-    "line": "mov     edx, [esp+30h+arg_4]",
+    "line": "mov     edx, [esp+30h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48F0DC",
-    "line": "push    edx",
+    "line": "push    edx; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48F0DD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3721,7 +3703,7 @@
   },
   {
     "ea": "0x48F0E7",
-    "line": "call    sub_41E710",
+    "line": "call    ExtraDataList_SetOriginalReferenceExtra; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3769,25 +3751,25 @@
   },
   {
     "ea": "0x48F100",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48F104",
-    "line": "push    1",
+    "line": "push    1; destroyEntryIfMerged",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48F106",
-    "line": "push    esi",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48F107",
-    "line": "call    ContainerExtraData_AddEntry",
+    "line": "call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3853,7 +3835,7 @@
   },
   {
     "ea": "0x48F127",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3901,7 +3883,7 @@
   },
   {
     "ea": "0x48F13F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3919,7 +3901,7 @@
   },
   {
     "ea": "0x48F14B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4012,5 +3994,227 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFE70",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFE73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFE79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE7B",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFE7E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE7F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFE84",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE85",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE86",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFE89",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE8A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFE8F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE90",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE91",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFE94",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE95",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFE9A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE9B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFE9C",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFE9F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFEA0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFEA5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFEA6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFEA7",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFEAA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFEAB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFEB0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFEB1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFEB2",
+    "line": "mov     edx, [esp+originalReference]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFEB6",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFEB9",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFEBC",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFEBE",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFEC3",
+    "line": "mov     eax, offset stru_ADC2CC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFEC8",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -8,29 +8,29 @@
 0x4EA682: fxch    st(1)
 0x4EA684: fstp    [esp+8+var_4]
 0x4EA688: fmul    dword ptr [eax+4]
-0x4EA68B: mov     eax, [esp+8+arg_4]
-0x4EA68F: push    eax
+0x4EA68B: mov     eax, dword ptr [esp+8+createIfMissing]
+0x4EA68F: push    eax; createIfMissing
 0x4EA690: sub     esp, 8
 0x4EA693: fstp    [esp+14h+arg_0]
 0x4EA697: fld     [esp+14h+arg_0]
-0x4EA69B: fstp    [esp+14h+var_14]; double
+0x4EA69B: fstp    qword ptr [esp+14h+var_14]; double
 0x4EA69E: call    _floor
 0x4EA6A3: fstp    [esp+14h+arg_0]
 0x4EA6A7: add     esp, 8
 0x4EA6AA: fld     [esp+0Ch+arg_0]
-0x4EA6AE: call    Double_To_SInt32
+0x4EA6AE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EA6B3: fld     [esp+0Ch+var_4]
-0x4EA6B7: push    eax
+0x4EA6B7: push    eax; quadY
 0x4EA6B8: sub     esp, 8
 0x4EA6BB: fstp    qword ptr [esp]; double
 0x4EA6BE: call    _floor
 0x4EA6C3: fstp    [esp+18h+arg_0]
 0x4EA6C7: add     esp, 8
 0x4EA6CA: fld     [esp+10h+arg_0]
-0x4EA6CE: call    Double_To_SInt32
-0x4EA6D3: push    eax
-0x4EA6D4: mov     ecx, esi
-0x4EA6D6: call    sub_4EA580
+0x4EA6CE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x4EA6D3: push    eax; quadX
+0x4EA6D4: mov     ecx, esi; this
+0x4EA6D6: call    TESWorldSpaceTerrainLODQuadMap_GetOrCreateRoot; Verified quad-root lookup/creation: accepts signed 16-bit quadX/quadY, packs them as (quadX << 16) | uint16(quadY), and optionally allocates/inserts a TESTerrainLODQuadRoot containing quad data, owner map, and coordinates.
 0x4EA6DB: pop     esi
 0x4EA6DC: pop     ecx
 0x4EA6DD: retn    8

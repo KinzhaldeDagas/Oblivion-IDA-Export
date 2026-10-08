@@ -1,4 +1,4 @@
-BSStringT *sub_A109F0()
+NiRTTI *sub_A109F0()
 {
-  return sub_70E220((BSStringT *)&ImageSpaceShaderRTTI___, "NiD3DDefaultShader", (int)&byte_B42884);
+  return NiRTTI_Constructor(&MEMORY[0xB4257C], "NiD3DDefaultShader", &stru_B42884); /*0xa10a04*/
 }

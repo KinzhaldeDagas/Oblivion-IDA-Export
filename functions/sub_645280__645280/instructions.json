@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x645280",
-    "line": "push    ebx",
+    "line": "push    ebx; 3DTheft decode 2026-05-18: process path execution helper used by Follow/travel movement. Builds path when needed, advances PathLow, and returns without invoking Actor::EvaluatePackage.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x645283",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+sourceRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6452ED",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+destinationPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x645304",
-    "line": "mov     edx, [esp+20h+arg_C]",
+    "line": "mov     edx, [esp+20h+destinationWorldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x64530B",
-    "line": "mov     eax, [esp+20h+arg_8]",
+    "line": "mov     eax, [esp+20h+destinationCell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x645318",
-    "line": "call    sub_6836E0",
+    "line": "call    sub_6836E0; Verified: path request/cache builder resolves a containing TESSubSpace candidate by interior cell list or WorldSpace +0x60 coordinate lookup, compares candidate identity with the current choice, and rebuilds the path request when it changes.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x64531D",
-    "line": "lea     ecx, [esp+10h+arg_0]",
+    "line": "lea     ecx, [esp+10h+sourceRef]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x645329",
-    "line": "mov     byte ptr [esp+18h+arg_0], 0",
+    "line": "mov     byte ptr [esp+18h+sourceRef], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x645337",
-    "line": "cmp     byte ptr [esp+10h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+10h+sourceRef], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -421,55 +421,55 @@
   },
   {
     "ea": "0x645352",
-    "line": "mov     edx, [esp+10h+arg_C]",
+    "line": "mov     edx, [esp+10h+destinationWorldspace]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x645356",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+destinationCell]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x64535A",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+destinationPosition]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x64535E",
-    "line": "push    edx",
+    "line": "push    edx; destinationWorldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64535F",
-    "line": "push    eax",
+    "line": "push    eax; destinationCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x645360",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x645361",
-    "line": "mov     ecx, [edi+34h]",
+    "line": "mov     ecx, [edi+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x645364",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x645365",
-    "line": "call    sub_68B030",
+    "line": "call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x6453BD",
-    "line": "fstp    [esp+10h+arg_C]",
+    "line": "fstp    [esp+10h+destinationWorldspace]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x6453D2",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x6453EC",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x645424",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x645487",
-    "line": "fld     [esp+10h+arg_C]",
+    "line": "fld     [esp+10h+destinationWorldspace]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x645497",
-    "line": "fstp    [esp+10h+arg_C]",
+    "line": "fstp    [esp+10h+destinationWorldspace]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x64549D",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x6454C7",
-    "line": "fcomp   [esp+10h+arg_C]",
+    "line": "fcomp   [esp+10h+destinationWorldspace]",
     "mnemonic": "fcomp",
     "size": 4
   },

@@ -24,9 +24,9 @@
 0x7659E0: lea     edi, [esp+118h+var_60]
 0x7659E7: rep movsd
 0x7659E9: mov     ecx, [eax+20h]
-0x7659EC: mov     [esp+118h+var_98], ecx
+0x7659EC: mov     [esp+118h+out.y], ecx
 0x7659F3: mov     ecx, [eax+28h]
-0x7659F6: mov     [esp+118h+var_94], edx
+0x7659F6: mov     [esp+118h+out.z], edx
 0x7659FD: mov     edx, [eax+2Ch]
 0x765A00: mov     [esp+118h+var_90], ecx
 0x765A07: mov     [esp+118h+var_8C], edx
@@ -48,14 +48,14 @@
 0x765A3D: push    ebx; NiGeometryData *
 0x765A3E: push    ecx; NiGeometryGroup *
 0x765A3F: mov     ecx, [ebp+8A0h]
-0x765A45: call    NiGeometryGroup__AddGeometryDataToGroup
+0x765A45: call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x765A4A: movzx   edi, si
 0x765A4D: mov     esi, [ebx+38h]
 0x765A50: push    1; streamCount
 0x765A52: mov     ecx, esi; this
 0x765A54: mov     [esp+11Ch+var_100], edi
 0x765A58: mov     [esp+11Ch+var_2C], esi
-0x765A5F: call    sub_777F70
+0x765A5F: call    sub_777F70; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.
 0x765A64: movzx   ecx, word ptr [esp+118h+var_FC]
 0x765A69: lea     edx, ds:0[ecx*4]
 0x765A70: mov     [esi+18h], edx
@@ -69,8 +69,8 @@
 0x765A8F: xor     edi, edi
 0x765A91: mov     [esi+4Ch], edi
 0x765A94: mov     [esi+48h], edi
-0x765A97: mov     edx, [esp+118h+var_98]
-0x765A9E: mov     ecx, [esp+118h+var_94]
+0x765A97: mov     edx, [esp+118h+out.y]
+0x765A9E: mov     ecx, [esp+118h+out.z]
 0x765AA5: mov     [ebp+658h], edx
 0x765AAB: mov     edx, [esp+118h+var_90]
 0x765AB2: mov     [ebp+65Ch], ecx
@@ -110,7 +110,7 @@
 0x765B38: lea     eax, [ebp+940h]
 0x765B3E: push    edx; int
 0x765B3F: push    eax; int
-0x765B40: call    sub_761AE0
+0x765B40: call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.
 0x765B45: mov     eax, [ebp+280h]
 0x765B4B: mov     edx, [eax]
 0x765B4D: add     esp, 10h
@@ -132,7 +132,7 @@
 0x765B88: push    ecx
 0x765B89: lea     edx, [esp+134h+var_80]
 0x765B90: push    edx
-0x765B91: call    sub_710250
+0x765B91: call    NiPoint3_MultiplyMatrix3
 0x765B96: mov     ecx, [eax]
 0x765B98: mov     [ebp+640h], ecx
 0x765B9E: mov     edx, [eax+4]
@@ -145,7 +145,7 @@
 0x765BBE: push    edx
 0x765BBF: lea     eax, [esp+140h+var_80]
 0x765BC6: push    eax
-0x765BC7: call    sub_710250
+0x765BC7: call    NiPoint3_MultiplyMatrix3
 0x765BCC: mov     edx, [eax]
 0x765BCE: lea     ecx, [ebp+64Ch]
 0x765BD4: mov     [ecx], edx
@@ -153,15 +153,15 @@
 0x765BD9: mov     [ecx+4], edx
 0x765BDC: mov     eax, [eax+8]
 0x765BDF: add     esp, 18h
-0x765BE2: push    ecx
+0x765BE2: push    ecx; other
 0x765BE3: mov     [ecx+8], eax
-0x765BE6: lea     ecx, [esp+130h+var_9C]
-0x765BED: push    ecx
-0x765BEE: lea     ecx, [ebp+640h]
-0x765BF4: call    sub_498FE0
+0x765BE6: lea     ecx, [esp+130h+out]
+0x765BED: push    ecx; out
+0x765BEE: lea     ecx, [ebp+640h]; this
+0x765BF4: call    NiPoint3_CrossProduct
 0x765BF9: push    152h
 0x765BFE: mov     ecx, esi
-0x765C00: call    sub_7780A0
+0x765C00: call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.
 0x765C05: cmp     dword ptr [esi+1Ch], 0
 0x765C09: jbe     short loc_765C14
 0x765C0B: mov     edx, [esi+20h]
@@ -169,7 +169,7 @@
 0x765C14: mov     ecx, [ebp+8B0h]
 0x765C1A: push    0
 0x765C1C: push    esi
-0x765C1D: call    NiGeometryBufferData__RefreshVBChips
+0x765C1D: call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.
 0x765C22: cmp     dword ptr [esi+1Ch], 0
 0x765C26: jbe     short loc_765C36
 0x765C28: mov     eax, [esi+24h]
@@ -184,12 +184,12 @@
 0x765C53: mov     ecx, [eax+10h]
 0x765C56: mov     edx, [eax+14h]
 0x765C59: mov     eax, [eax+0Ch]
-0x765C5C: push    ecx; int
-0x765C5D: mov     ecx, [ebp+8B0h]
-0x765C63: push    edx; Size
-0x765C64: push    eax; int
-0x765C65: push    esi; int
-0x765C66: call    sub_776C90
+0x765C5C: push    ecx; flags
+0x765C5D: mov     ecx, [ebp+8B0h]; self
+0x765C63: push    edx; byteCount
+0x765C64: push    eax; offsetBytes
+0x765C65: push    esi; buffer
+0x765C66: call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
 0x765C6B: mov     esi, eax
 0x765C6D: test    esi, esi
 0x765C6F: jz      loc_766869
@@ -202,7 +202,6 @@
 0x765C8E: jbe     loc_766695
 0x765C94: mov     [esp+12Ch+var_110], eax
 0x765C98: jmp     short loc_765CA0
-0x765C9A: align 10h
 0x765CA0: fld     dword ptr [ebx+0Ch]
 0x765CA3: fmul    qword ptr ds:0A3DDD8h
 0x765CA9: fstp    [esp+12Ch+var_11C]
@@ -330,11 +329,11 @@
 0x765E4C: fstp    dword ptr [esi-44h]
 0x765E4F: fld     [esp+12Ch+var_E4]
 0x765E53: fstp    dword ptr [esi-40h]
-0x765E56: fld     [esp+12Ch+var_9C]
+0x765E56: fld     [esp+12Ch+out.x]
 0x765E5D: fst     dword ptr [esi-3Ch]
-0x765E60: fld     [esp+12Ch+var_98]
+0x765E60: fld     [esp+12Ch+out.y]
 0x765E67: fst     dword ptr [esi-38h]
-0x765E6A: fld     [esp+12Ch+var_94]
+0x765E6A: fld     [esp+12Ch+out.z]
 0x765E71: fst     dword ptr [esi-34h]
 0x765E74: fldz
 0x765E76: fst     dword ptr [esi-2Ch]
@@ -432,7 +431,6 @@
 0x765FA1: mov     [esp+12Ch+var_F0], eax
 0x765FA5: or      ebx, 0FFFFFFFFh
 0x765FA8: jmp     short loc_765FB0
-0x765FAA: align 10h
 0x765FB0: mov     eax, [esp+12Ch+var_100]
 0x765FB4: fld     dword ptr [eax]
 0x765FB6: mov     ecx, [esp+12Ch+var_104]
@@ -530,11 +528,11 @@
 0x7660E1: fstp    dword ptr [esi-68h]
 0x7660E4: fld     [esp+12Ch+var_C8]
 0x7660E8: fstp    dword ptr [esi-64h]
-0x7660EB: fld     [esp+12Ch+var_9C]
+0x7660EB: fld     [esp+12Ch+out.x]
 0x7660F2: fst     dword ptr [esi-60h]
-0x7660F5: fld     [esp+12Ch+var_98]
+0x7660F5: fld     [esp+12Ch+out.y]
 0x7660FC: fst     dword ptr [esi-5Ch]
-0x7660FF: fld     [esp+12Ch+var_94]
+0x7660FF: fld     [esp+12Ch+out.z]
 0x766106: fst     dword ptr [esi-58h]
 0x766109: fldz
 0x76610B: fst     dword ptr [esi-50h]

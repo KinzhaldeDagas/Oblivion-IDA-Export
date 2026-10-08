@@ -45,14 +45,14 @@
 0x5B02F8: push    offset aOddsFBaseFDiff; "odds %f, base %f, diff %f, player %i, l"...
 0x5B02FD: call    sub_40FEC0
 0x5B0302: push    0; Seed
-0x5B0304: call    GetRandomLargeInteger?
+0x5B0304: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5B0309: mov     ecx, ds:0B33EA0h
 0x5B030F: push    ecx; Seed
 0x5B0310: mov     esi, eax
-0x5B0312: call    GetRandomLargeInteger?
+0x5B0312: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5B0317: push    esi; Seed
 0x5B0318: mov     ds:0B3B3FCh, eax
-0x5B031D: call    GetRandomLargeInteger?
+0x5B031D: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5B0322: mov     ecx, ds:0B3B3FCh
 0x5B0328: mov     eax, 0D1B71759h
 0x5B032D: mul     ecx
@@ -79,7 +79,7 @@
 0x5B037E: add     esp, 8
 0x5B0381: push    0
 0x5B0383: push    1Eh
-0x5B0385: call    eax
+0x5B0385: call    eax; LockPick auto-attempt: Security (0x1E), useValue0, identity scale (0.0).
 0x5B0387: fld     [esp+20h+var_1C]
 0x5B038B: fld     [esp+20h+var_1C+4]
 0x5B038F: pop     esi

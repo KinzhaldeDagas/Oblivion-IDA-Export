@@ -6,71 +6,71 @@ void __thiscall sub_557CF0(_DWORD *this)
   int v5; // eax
   int v6; // eax
 
-  v2 = *(this + 0x25);
-  v3 = this + 0x24;
-  if ( v2 )
+  v2 = *(this + 0x25); /*0x557cf5*/
+  v3 = this + 0x24; /*0x557cfb*/
+  if ( v2 ) /*0x557d06*/
   {
-    sub_5570D0(v2, *(this + 0x26));
-    FormHeapFree(v3[1]);
+    sub_5570D0(v2, *(this + 0x26)); /*0x557d13*/
+    FormHeapFree(v3[1]); /*0x557d1c*/
   }
-  v3[1] = 0;
-  v3[2] = 0;
-  v3[3] = 0;
-  v4 = *(this + 0x21);
-  if ( v4 )
+  v3[1] = 0; /*0x557d24*/
+  v3[2] = 0; /*0x557d27*/
+  v3[3] = 0; /*0x557d2a*/
+  v4 = *(this + 0x21); /*0x557d2d*/
+  if ( v4 ) /*0x557d3b*/
   {
-    sub_5573D0(v4, *(this + 0x22));
-    FormHeapFree(*(this + 0x21));
+    sub_5573D0(v4, *(this + 0x22)); /*0x557d48*/
+    FormHeapFree(*(this + 0x21)); /*0x557d51*/
   }
-  *(this + 0x21) = 0;
-  *(this + 0x22) = 0;
-  *(this + 0x23) = 0;
-  v5 = *(this + 0x1D);
-  if ( v5 )
+  *(this + 0x21) = 0; /*0x557d59*/
+  *(this + 0x22) = 0; /*0x557d5c*/
+  *(this + 0x23) = 0; /*0x557d5f*/
+  v5 = *(this + 0x1D); /*0x557d62*/
+  if ( v5 ) /*0x557d6a*/
   {
-    sub_557080(v5, *(this + 0x1E));
-    FormHeapFree(*(this + 0x1D));
+    sub_557080(v5, *(this + 0x1E)); /*0x557d77*/
+    FormHeapFree(*(this + 0x1D)); /*0x557d80*/
   }
-  *(this + 0x1D) = 0;
-  *(this + 0x1E) = 0;
-  *(this + 0x1F) = 0;
-  v6 = *(this + 0x19);
-  if ( v6 )
+  *(this + 0x1D) = 0; /*0x557d88*/
+  *(this + 0x1E) = 0; /*0x557d8b*/
+  *(this + 0x1F) = 0; /*0x557d8e*/
+  v6 = *(this + 0x19); /*0x557d91*/
+  if ( v6 ) /*0x557d99*/
   {
-    sub_557030(v6, *(this + 0x1A));
-    FormHeapFree(*(this + 0x19));
+    sub_557030(v6, *(this + 0x1A)); /*0x557da6*/
+    FormHeapFree(*(this + 0x19)); /*0x557daf*/
   }
-  *(this + 0x19) = 0;
-  *(this + 0x1A) = 0;
-  *(this + 0x1B) = 0;
-  if ( *(this + 0x15) )
-    FormHeapFree(*(this + 0x15));
-  *(this + 0x15) = 0;
-  *(this + 0x16) = 0;
-  *(this + 0x17) = 0;
-  if ( *(this + 0x11) )
-    FormHeapFree(*(this + 0x11));
-  *(this + 0x11) = 0;
-  *(this + 0x12) = 0;
-  *(this + 0x13) = 0;
-  if ( *(this + 0xD) )
-    FormHeapFree(*(this + 0xD));
-  *(this + 0xD) = 0;
-  *(this + 0xE) = 0;
-  *(this + 0xF) = 0;
-  if ( *(this + 9) )
-    FormHeapFree(*(this + 9));
-  *(this + 9) = 0;
-  *(this + 0xA) = 0;
-  *(this + 0xB) = 0;
-  if ( *(this + 5) )
-    FormHeapFree(*(this + 5));
-  *(this + 5) = 0;
-  *(this + 6) = 0;
-  *(this + 7) = 0;
-  if ( *(this + 1) )
-    FormHeapFree(*(this + 1));
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = 0;
+  *(this + 0x19) = 0; /*0x557db7*/
+  *(this + 0x1A) = 0; /*0x557dba*/
+  *(this + 0x1B) = 0; /*0x557dbd*/
+  if ( *(this + 0x15) ) /*0x557dc0*/
+    FormHeapFree(*(this + 0x15)); /*0x557dc8*/
+  *(this + 0x15) = 0; /*0x557dd0*/
+  *(this + 0x16) = 0; /*0x557dd3*/
+  *(this + 0x17) = 0; /*0x557dd6*/
+  if ( *(this + 0x11) ) /*0x557dd9*/
+    FormHeapFree(*(this + 0x11)); /*0x557de1*/
+  *(this + 0x11) = 0; /*0x557de9*/
+  *(this + 0x12) = 0; /*0x557dec*/
+  *(this + 0x13) = 0; /*0x557def*/
+  if ( *(this + 0xD) ) /*0x557df2*/
+    FormHeapFree(*(this + 0xD)); /*0x557dfa*/
+  *(this + 0xD) = 0; /*0x557e02*/
+  *(this + 0xE) = 0; /*0x557e05*/
+  *(this + 0xF) = 0; /*0x557e08*/
+  if ( *(this + 9) ) /*0x557e0b*/
+    FormHeapFree(*(this + 9)); /*0x557e13*/
+  *(this + 9) = 0; /*0x557e1b*/
+  *(this + 0xA) = 0; /*0x557e1e*/
+  *(this + 0xB) = 0; /*0x557e21*/
+  if ( *(this + 5) ) /*0x557e24*/
+    FormHeapFree(*(this + 5)); /*0x557e2c*/
+  *(this + 5) = 0; /*0x557e34*/
+  *(this + 6) = 0; /*0x557e37*/
+  *(this + 7) = 0; /*0x557e3a*/
+  if ( *(this + 1) ) /*0x557e3d*/
+    FormHeapFree(*(this + 1)); /*0x557e45*/
+  *(this + 1) = 0; /*0x557e4d*/
+  *(this + 2) = 0; /*0x557e50*/
+  *(this + 3) = 0; /*0x557e53*/
 }

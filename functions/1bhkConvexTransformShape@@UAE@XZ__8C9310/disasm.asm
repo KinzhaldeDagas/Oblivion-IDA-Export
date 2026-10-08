@@ -24,3 +24,12 @@
 0x8C936D: pop     esi
 0x8C936E: add     esp, 10h
 0x8C9371: retn
+0x9D6E10: mov     ecx, [ebp-10h]; this
+0x9D6E13: jmp     ??1bhkConvexShape@@UAE@XZ; bhkConvexShape::~bhkConvexShape(void)
+0x9D6E18: mov     edx, [esp+arg_4]
+0x9D6E1C: lea     eax, [edx-8]
+0x9D6E1F: mov     ecx, [edx-0Ch]
+0x9D6E22: xor     ecx, eax
+0x9D6E24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6E29: mov     eax, offset stru_AFEB04
+0x9D6E2E: jmp     ___CxxFrameHandler3

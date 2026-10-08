@@ -1,18 +1,31 @@
 {
-  "callees_count": 32,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
-  "display_name": "sub_431970",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x431970",
+      "0x431B5A"
+    ]
+  ],
+  "chunks_sha256": "ea53a11f6e97e262aca62d831c6f9eb20af92e01ee608a4763189996e2650e3a",
+  "comment_regular": "Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.",
+  "comment_repeatable": "Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 12,
+  "display_name": "ModelLoader_BuildFileListWildcard",
   "end_ea": "0x431B5A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_431970",
+  "name": "ModelLoader_BuildFileListWildcard",
   "segment": ".text",
   "sha256": "ea53a11f6e97e262aca62d831c6f9eb20af92e01ee608a4763189996e2650e3a",
   "size": 490,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x431970",
+  "total_chunk_size": 490,
   "type": "char **__cdecl(char *Str, char *, int, char **)",
   "xrefs_from_count": 208,
   "xrefs_to_count": 5

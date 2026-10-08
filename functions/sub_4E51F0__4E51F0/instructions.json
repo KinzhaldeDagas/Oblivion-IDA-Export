@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E51F0",
-    "line": "mov     eax, ds:0B333A0h",
+    "line": "mov     eax, ds:0B333A0h; Verified — linked-point state dispatcher. In an interior, it obtains the current interior cell's PathGrid and applies the reference toggle. Otherwise it scans the loaded exterior grid as a uGridsToLoad × uGridsToLoad array, obtains each present cell's PathGrid, and applies the same toggle. The exterior loop and call to SetLinkedPointsEnabled are confirmed in disassembly at 0x4E5247–0x4E5264. Fallout comparison: Fallout PathBuilder::BuildNavMeshInfoPath (0x82241A48) reconstructs a route through NavMeshInfo nodes and linked-door references into VirtualPathingNodes; that is a different navigation representation and does not establish Oblivion linked-point semantics.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -43,37 +43,37 @@
   },
   {
     "ea": "0x4E5205",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, dword ptr [esp+enabled]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E5209",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E520D",
-    "line": "push    ecx",
+    "line": "push    ecx; enabled",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E520E",
-    "line": "push    edx",
+    "line": "push    edx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E520F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E5211",
-    "line": "call    SetLinkedPointsEnabled",
+    "line": "call    TESPathGrid_SetLinkedPointsEnabled; Verified — for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4E5226",
-    "line": "mov     ebp, [esp+0Ch+arg_0]",
+    "line": "mov     ebp, [esp+0Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -142,12 +142,6 @@
     "line": "jmp     short loc_4E5230",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E522D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4E5230",
@@ -202,5 +196,65 @@
     "line": "mov     eax, [eax]",
     "mnemonic": "mov",
     "size": 2
+  },
+  {
+    "ea": "0x4E5263",
+    "line": "add     esi, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4E5266",
+    "line": "cmp     esi, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4E5268",
+    "line": "jb      short loc_4E5232",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x4E526A",
+    "line": "add     edi, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4E526D",
+    "line": "cmp     edi, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4E526F",
+    "line": "jb      short loc_4E5230",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x4E5271",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4E5272",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4E5273",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4E5274",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
   }
 ]

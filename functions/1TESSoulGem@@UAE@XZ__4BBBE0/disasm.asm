@@ -29,3 +29,12 @@
 0x4BBC60: pop     esi
 0x4BBC61: add     esp, 10h
 0x4BBC64: retn
+0x9B2DC0: mov     ecx, [ebp-10h]; this
+0x9B2DC3: jmp     ??1TESObjectMISC@@UAE@XZ; TESObjectMISC::~TESObjectMISC(void)
+0x9B2DC8: mov     edx, [esp+arg_4]
+0x9B2DCC: lea     eax, [edx-8]
+0x9B2DCF: mov     ecx, [edx-0Ch]
+0x9B2DD2: xor     ecx, eax
+0x9B2DD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2DD9: mov     eax, offset stru_ADEC14
+0x9B2DDE: jmp     ___CxxFrameHandler3

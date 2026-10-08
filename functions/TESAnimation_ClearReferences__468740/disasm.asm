@@ -1,4 +1,4 @@
-0x468740: push    esi
+0x468740: push    esi; CustomAnimSupport decode: clears TESAnimation by freeing heap-copied KFFZ strings and list nodes.
 0x468741: push    edi
 0x468742: mov     esi, ecx
 0x468744: cmp     dword ptr [esi+8], 0
@@ -14,15 +14,15 @@
 0x468760: mov     edx, [eax]
 0x468762: push    eax
 0x468763: mov     [esi+4], edx
-0x468766: call    FormHeapFree
+0x468766: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46876B: add     esp, 4
 0x46876E: push    edi
-0x46876F: call    FormHeapFree
+0x46876F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x468774: add     esp, 4
 0x468777: jmp     short loc_468744
 0x468779: push    edi
 0x46877A: mov     dword ptr [esi+4], 0
-0x468781: call    FormHeapFree
+0x468781: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x468786: add     esp, 4
 0x468789: jmp     short loc_468744
 0x46878B: pop     edi

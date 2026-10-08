@@ -1,4 +1,4 @@
-0x763090: cmp     dword ptr [ecx+8ACh], 0
+0x763090: cmp     dword ptr [ecx+8ACh], 0; MoonSugarEffect decode: vertex shader handle release helper. Clears current vertex shader on renderer state, calls wrapper +0x40 getter, Releases IDirect3DVertexShader9, then wrapper +0x44 stores null.
 0x763097: jz      short loc_7630AD
 0x763099: mov     ecx, [ecx+8ACh]
 0x76309F: mov     eax, [ecx]

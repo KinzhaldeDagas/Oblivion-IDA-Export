@@ -1,6 +1,6 @@
 bool __thiscall sub_6A0300(int this)
 {
-  return !*(_DWORD *)(this + 0x18)
+  return !*(_DWORD *)(this + 0x18) /*0x6a0327*/
       && *(_DWORD *)(this + 0x1C)
       && *(_DWORD *)(this + 0x34)
       && !*(_BYTE *)(this + 0x28)

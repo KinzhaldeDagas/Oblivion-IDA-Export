@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6A2F60",
+      "0x6A2F7C"
+    ]
+  ],
+  "chunks_sha256": "f5223c21ef02082afd07f66e42cebe094681266a67f24691e8b66c12f6d2d59d",
+  "comment_regular": "Verified NightEyeEffect_Link takes PlayerCharacter* linkContext, calls ActiveEffect_Base_Link, then compares the context with the player reference before restoring the player shader. Supports the Probable TESObjectREFR/Actor context type used by the common link dispatcher.",
+  "comment_repeatable": "Verified NightEyeEffect_Link takes PlayerCharacter* linkContext, calls ActiveEffect_Base_Link, then compares the context with the player reference before restoring the player shader. Supports the Probable TESObjectREFR/Actor context type used by the common link dispatcher.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NightEyeEffect_Link",
   "end_ea": "0x6A2F7C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
+  "has_pseudocode": true,
   "name": "NightEyeEffect_Link",
   "segment": ".text",
   "sha256": "f5223c21ef02082afd07f66e42cebe094681266a67f24691e8b66c12f6d2d59d",
   "size": 28,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A2F60",
-  "type": "",
+  "total_chunk_size": 28,
+  "type": "void __thiscall(ActiveEffect *this, PlayerCharacter *linkContext)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 1
 }

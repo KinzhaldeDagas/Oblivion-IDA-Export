@@ -1,6 +1,6 @@
 0x683490: push    esi
 0x683491: mov     esi, ecx
-0x683493: mov     ecx, offset stru_B3C000
+0x683493: mov     ecx, offset unk_B3C000
 0x683498: call    sub_49F470
 0x68349D: cmp     dword ptr [esi+40h], 0
 0x6834A1: jz      short loc_6834ED
@@ -30,6 +30,6 @@
 0x6834E0: mov     dword ptr [esi+8], 0
 0x6834E7: call    sub_682950
 0x6834EC: pop     edi
-0x6834ED: mov     ecx, offset stru_B3C000
+0x6834ED: mov     ecx, offset unk_B3C000
 0x6834F2: pop     esi
 0x6834F3: jmp     j_NiLeaveCriticalSection_0

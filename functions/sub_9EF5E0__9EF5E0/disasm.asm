@@ -1,7 +1,7 @@
 0x9EF5E0: fld1
 0x9EF5E2: push    ecx
 0x9EF5E3: fstp    [esp+4+var_4]; float
-0x9EF5E6: mov     ecx, offset fMagicTrackingMultBall
+0x9EF5E6: mov     ecx, (offset flt_B37ED0+238h)
 0x9EF5EB: push    offset aFmagictracki_1; "fMagicTrackingMultBall"
 0x9EF5F0: call    GameSetting_ConstrAndReg_float
 0x9EF5F5: push    offset sub_A20930; void (__cdecl *)()

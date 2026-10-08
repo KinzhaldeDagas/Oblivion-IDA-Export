@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x690C0C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; compactString",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x690C0E",
-    "line": "call    sub_449190",
+    "line": "call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x690C2D",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x690D43",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x690D8A",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x690D91",
-    "line": "call    sub_41F2F0",
+    "line": "call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1674,12 +1674,6 @@
     "size": 2
   },
   {
-    "ea": "0x690E2D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x690E30",
     "line": "mov     ebx, [esp+3Ch+var_14]",
     "mnemonic": "mov",
@@ -1933,7 +1927,7 @@
   },
   {
     "ea": "0x690EAF",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2191,7 +2185,7 @@
   },
   {
     "ea": "0x690F34",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,7 +2317,7 @@
   },
   {
     "ea": "0x690F86",
-    "line": "call    sub_41F2F0",
+    "line": "call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2413,7 +2407,7 @@
   },
   {
     "ea": "0x690FAA",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2503,7 +2497,7 @@
   },
   {
     "ea": "0x690FD2",
-    "line": "call    sub_41F370",
+    "line": "call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2635,7 +2629,7 @@
   },
   {
     "ea": "0x69100C",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2692,5 +2686,167 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5710",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5713",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5714",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5719",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C571A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C571B",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C571E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C571F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5724",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5725",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5726",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5729",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C572A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C572F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5730",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5731",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5734",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5735",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C573A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C573B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C573C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5740",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5743",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5746",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5748",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C574D",
+    "line": "mov     eax, offset stru_AEDED0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5752",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

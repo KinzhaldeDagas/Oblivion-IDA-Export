@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x42DE89",
-    "line": "mov     ebx, ArchiveProvidedLastFile",
+    "line": "mov     ebx, ds:0B338E4h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x42DED4",
-    "line": "mov     esi, ArchiveList",
+    "line": "mov     esi, ds:0B338E0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x42DF29",
-    "line": "mov     ArchiveProvidedLastFile, edi",
+    "line": "mov     ds:0B338E4h, edi",
     "mnemonic": "mov",
     "size": 6
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x42DF73",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x42DF87",
-    "line": "call    sub_42CC00",
+    "line": "call    Archive_GetFileNameByFolderAndIndex",
     "mnemonic": "call",
     "size": 5
   },

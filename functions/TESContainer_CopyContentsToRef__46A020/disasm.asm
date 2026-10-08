@@ -37,3 +37,26 @@
 0x46A098: mov     [esp+144h+var_128], esi
 0x46A09C: jz      TESContainer_CopyContentsToRef___PostAdditemMessageForPlayer
 0x46A0A2: jmp     short TESContainer_CopyContentsToRef___ContentLoop_
+0x9AE980: mov     eax, [ebp-130h]
+0x9AE986: push    eax
+0x9AE987: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE98C: pop     ecx
+0x9AE98D: retn
+0x9AE98E: mov     eax, [ebp-130h]
+0x9AE994: push    eax
+0x9AE995: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE99A: pop     ecx
+0x9AE99B: retn
+0x9AE99C: lea     ecx, [ebp-130h]; void *
+0x9AE9A2: jmp     BSStringT_Clear
+0x9AE9A7: mov     edx, [esp+unk]
+0x9AE9AB: lea     eax, [edx-134h]
+0x9AE9B1: mov     ecx, [edx-138h]
+0x9AE9B7: xor     ecx, eax
+0x9AE9B9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE9BE: add     eax, 10h
+0x9AE9C1: mov     ecx, [edx-4]
+0x9AE9C4: xor     ecx, eax
+0x9AE9C6: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE9CB: mov     eax, offset stru_ADB0F4
+0x9AE9D0: jmp     ___CxxFrameHandler3

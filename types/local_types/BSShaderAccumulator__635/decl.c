@@ -1,1 +1,1 @@
-BSShaderAccumulator
+struct BSShaderAccumulator;

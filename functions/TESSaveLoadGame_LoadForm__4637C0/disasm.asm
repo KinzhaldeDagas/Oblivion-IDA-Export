@@ -16,7 +16,7 @@
 0x4637EE: lea     eax, [esp+14Ch+var_C]
 0x4637F5: mov     large fs:0, eax
 0x4637FB: mov     eax, ds:0B33398h
-0x463800: mov     edi, [esp+14Ch+arg_0]
+0x463800: mov     edi, [esp+14Ch+form]
 0x463807: mov     ebx, [eax+10h]
 0x46380A: mov     esi, ecx
 0x46380C: call    dword ptr ds:0A2808Ch
@@ -44,7 +44,7 @@
 0x463854: mov     [esp+14Ch+var_128], ebx
 0x463858: jz      loc_4638F6
 0x46385E: push    offset aTessaveloadg_2; "TESSaveLoadGame::LoadForm"
-0x463863: mov     ecx, offset stru_B33B80
+0x463863: mov     ecx, offset unk_B33B80
 0x463868: call    NiEnterCriticalSection
 0x46386D: mov     [esi+14h], ebx
 0x463870: mov     ecx, ds:0B33B00h
@@ -53,8 +53,8 @@
 0x46387B: add     eax, 4
 0x46387E: mov     [ecx+14h], eax
 0x463881: mov     al, [edi+4]
-0x463884: mov     [esp+14Ch+var_134], ebx
-0x463888: mov     cl, byte ptr [esp+14Ch+var_134+2]
+0x463884: mov     dword ptr [esp+14Ch+var_134], ebx
+0x463888: mov     cl, [esp+14Ch+var_134+2]
 0x46388C: cmp     al, cl
 0x46388E: jz      loc_463922
 0x463894: movzx   eax, al
@@ -79,11 +79,11 @@
 0x4638D5: push    eax; lpCriticalSection
 0x4638D6: call    edx
 0x4638D8: mov     eax, [edi+0Ch]
-0x4638DB: mov     ecx, [esi]
-0x4638DD: push    1
-0x4638DF: push    eax
-0x4638E0: call    sub_452DF0
-0x4638E5: mov     ecx, offset stru_B33B80; lpCriticalSection
+0x4638DB: mov     ecx, [esi]; self
+0x4638DD: push    1; force
+0x4638DF: push    eax; formID
+0x4638E0: call    SaveLoadChangesMap_RemoveChanges;
+0x4638E5: mov     ecx, offset unk_B33B80; lpCriticalSection
 0x4638EA: mov     dword ptr [esi+14h], 0
 0x4638F1: call    NiLeaveCriticalSection_0
 0x4638F6: xor     al, al
@@ -101,19 +101,19 @@
 0x46391F: retn    4
 0x463922: mov     eax, [ebp+0]
 0x463925: movzx   ecx, bx
-0x463928: push    eax
+0x463928: push    eax; flags
 0x463929: mov     [esp+150h+var_118], ecx
-0x46392D: push    edi
+0x46392D: push    edi; form
 0x46392E: mov     ecx, esi
-0x463930: call    sub_453530
-0x463935: mov     edx, [esp+14Ch+var_134+3]
+0x463930: call    SaveLoad_AdjustCreatedFormChangeFlags; Verified: created-form predicate at 45353F gates adjustment; RTTI cast TESObjectREFR -> clear bit4/set bit2; RTTI cast TESObjectCELL -> OR6; otherwise preserves flags. Used by LoadForm 463930, LoadGame 465FEE/4664CD and save-side normalization 4535A0. Unknown broader meanings of flag bits outside these form-specific uses.
+0x463935: mov     edx, dword ptr [esp+14Ch+var_134+3]
 0x463939: push    edx
 0x46393A: mov     ecx, esi
 0x46393C: mov     ebp, eax
 0x46393E: call    sub_45A140
 0x463943: mov     eax, [edi+0Ch]
-0x463946: mov     cl, byte ptr [esp+14Ch+var_134+2]
-0x46394A: mov     dl, byte ptr [esp+14Ch+var_134+3]
+0x463946: mov     cl, [esp+14Ch+var_134+2]
+0x46394A: mov     dl, [esp+14Ch+var_134+3]
 0x46394E: mov     [esp+14Ch+var_124], eax
 0x463952: lea     eax, [esp+14Ch+var_124]
 0x463956: mov     [esi+80h], eax
@@ -131,7 +131,7 @@
 0x463980: mov     [esp+154h+var_11F], ebp
 0x463984: mov     [esp+154h+anonymous_1], dl
 0x463988: and     bl, 1
-0x46398B: call    sub_460BC0
+0x46398B: call    sub_460BC0; SavePersistanceFix hook point: TESSaveLoadGame_LoadForm calls sub_460BC0 to apply saved REFR movement before virtual LoadGame handles remaining change flags.
 0x463990: mov     edx, [edi]
 0x463992: mov     eax, [edx+54h]
 0x463995: push    0; lpCriticalSection
@@ -152,14 +152,14 @@
 0x4639C3: push    18h; Size
 0x4639C5: call    FormHeapAlloc
 0x4639CA: add     esp, 4
-0x4639CD: mov     [esp+14Ch+var_12C], eax
+0x4639CD: mov     [esp+14Ch+value], eax
 0x4639D1: cmp     eax, ebx
 0x4639D3: mov     [esp+14Ch+var_4], ebx
 0x4639DA: jz      short loc_4639E9
-0x4639DC: push    32h ; '2'
-0x4639DE: push    32h ; '2'
-0x4639E0: mov     ecx, eax
-0x4639E2: call    sub_452670
+0x4639DC: push    32h ; '2'; growBy
+0x4639DE: push    32h ; '2'; capacity
+0x4639E0: mov     ecx, eax; self
+0x4639E2: call    OblivionPostLoadFormArray_Initialize
 0x4639E7: jmp     short loc_4639EB
 0x4639E9: xor     eax, eax
 0x4639EB: mov     [esp+14Ch+var_4], 0FFFFFFFFh
@@ -169,18 +169,18 @@
 0x463A00: add     esp, 4
 0x463A03: cmp     eax, ebx
 0x463A05: jz      short loc_463A18
-0x463A07: mov     dl, byte ptr [esp+14Ch+var_134+3]
+0x463A07: mov     dl, [esp+14Ch+var_134+3]
 0x463A0B: mov     [eax], edi
 0x463A0D: mov     [eax+4], ebp
 0x463A10: mov     [eax+8], ebx
 0x463A13: mov     [eax+0Ch], dl
 0x463A16: jmp     short loc_463A1A
 0x463A18: xor     eax, eax
-0x463A1A: mov     ecx, [esi+1Ch]
-0x463A1D: mov     [esp+14Ch+var_12C], eax
-0x463A21: lea     eax, [esp+14Ch+var_12C]
-0x463A25: push    eax
-0x463A26: call    sub_5A6AB0
+0x463A1A: mov     ecx, [esi+1Ch]; self
+0x463A1D: mov     [esp+14Ch+value], eax
+0x463A21: lea     eax, [esp+14Ch+value]
+0x463A25: push    eax; value
+0x463A26: call    NiTLargeArray32_AppendSlot; MEF SAVE PERF PASS2 2026-10-08: PERF-20 second producer: deferred LoadForm lazily creates manager+1C FormAndFlags array via452670(50,50) at4639E2, then appends16-byte record here. Finalizer45FDA0 can consume this queue when no caller array supplied; destroys manager array460331/clears+1C460337. Same fixed-increment cost per accumulation episode; do not assume its size or recurrence equals full-load local queue. Persistent queue writer/reentry contract requires separate sealing.
 0x463A2B: mov     eax, [esi+14h]
 0x463A2E: sub     eax, [esp+14Ch+var_118]
 0x463A32: mov     ebp, [esp+14Ch+var_128]
@@ -196,18 +196,34 @@
 0x463A52: call    eax
 0x463A54: push    ebp
 0x463A55: mov     ecx, esi
-0x463A57: call    sub_452230
+0x463A57: call    sub_452230; EnginePatch v1: save-buffer free hook used to remove tracked record ranges and avoid stale bounds during savegame loading.
 0x463A5C: mov     ecx, [esp+14Ch+var_138]
-0x463A60: mov     [ecx+4], ebx
+0x463A60: mov     [ecx+4], ebx;
 0x463A63: mov     eax, [esi+50h]
 0x463A66: cmp     eax, ebx
 0x463A68: jz      short loc_463A76
-0x463A6A: mov     ecx, [esi]
-0x463A6C: push    eax
-0x463A6D: push    edi
-0x463A6E: call    sub_452D60
+0x463A6A: mov     ecx, [esi]; self
+0x463A6C: push    eax; flags
+0x463A6D: push    edi; form
+0x463A6E: call    ChangesMap_RemoveFormChangeFlags;
 0x463A73: mov     [esi+50h], ebx
-0x463A76: mov     ecx, offset stru_B33B80; lpCriticalSection
+0x463A76: mov     ecx, offset unk_B33B80; lpCriticalSection
 0x463A7B: call    NiLeaveCriticalSection_0
 0x463A80: mov     al, 1
 0x463A82: jmp     loc_4638F8
+0x9AE630: mov     eax, [ebp-12Ch]
+0x9AE636: push    eax
+0x9AE637: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE63C: pop     ecx
+0x9AE63D: retn
+0x9AE63E: mov     edx, [esp+arg_4]
+0x9AE642: lea     eax, [edx-13Ch]
+0x9AE648: mov     ecx, [edx-140h]
+0x9AE64E: xor     ecx, eax
+0x9AE650: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE655: add     eax, 10h
+0x9AE658: mov     ecx, [edx-4]
+0x9AE65B: xor     ecx, eax
+0x9AE65D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE662: mov     eax, offset stru_ADAE2C
+0x9AE667: jmp     ___CxxFrameHandler3

@@ -1,18 +1,31 @@
 {
-  "callees_count": 56,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
+  "chunks": [
+    [
+      "0x64D710",
+      "0x64DB1D"
+    ]
+  ],
+  "chunks_sha256": "55fb561df2cf719ff1b547cfd1774125501e2ae570fbbef59c5bb31423921f1f",
+  "comment_regular": "Middle/low FLEE procedure: dynamic-casts current package to FleePackage, resolves target, chooses flee point through FleePackage helpers, and sends movement/path request via process vfuncs +0x3DC/+0x418. Package AlwaysSneak is handled separately by Actor update bit 0x20000 -> movement flag 0x400.",
+  "comment_repeatable": "Middle/low FLEE procedure: dynamic-casts current package to FleePackage, resolves target, chooses flee point through FleePackage helpers, and sends movement/path request via process vfuncs +0x3DC/+0x418. Package AlwaysSneak is handled separately by Actor update bit 0x20000 -> movement flag 0x400.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
   "display_name": "sub_64D710",
   "end_ea": "0x64DB1D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_64D710",
   "segment": ".text",
   "sha256": "55fb561df2cf719ff1b547cfd1774125501e2ae570fbbef59c5bb31423921f1f",
   "size": 1037,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x64D710",
+  "total_chunk_size": 1037,
   "type": "void __thiscall(float *this, TESObjectREFR *)",
   "xrefs_from_count": 390,
   "xrefs_to_count": 1

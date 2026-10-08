@@ -18,7 +18,7 @@
 0x695428: test    al, al
 0x69542A: jnz     loc_6957A2
 0x695430: mov     ecx, [esi+70h]
-0x695433: call    EffectItem_GetArea
+0x695433: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x695438: mov     [esp+20h+var_10], eax
 0x69543C: fild    [esp+20h+var_10]
 0x695440: fmul    dword ptr ds:0B37ED0h
@@ -60,7 +60,7 @@
 0x6954B6: mov     edi, eax
 0x6954B8: test    edi, edi
 0x6954BA: jz      short loc_695539
-0x6954BC: push    offset dword_B258DC
+0x6954BC: push    offset stru_B258DC
 0x6954C1: lea     ecx, [esp+24h+var_C]
 0x6954C5: push    ecx; float
 0x6954C6: lea     ecx, [edi+64h]
@@ -106,14 +106,14 @@
 0x695541: jz      short loc_695548
 0x695543: call    sub_6B7240
 0x695548: mov     ecx, esi; this
-0x69554A: call    MobileObject_GetCharProxy
+0x69554A: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69554F: test    eax, eax
 0x695551: mov     bl, byte ptr [esp+20h+arg_14]
 0x695555: jz      short loc_6955C3
 0x695557: test    bl, bl
 0x695559: jnz     short loc_6955C3
 0x69555B: mov     ecx, esi; this
-0x69555D: call    MobileObject_GetCharProxy
+0x69555D: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x695562: add     eax, 1F0h
 0x695567: test    dword ptr [eax+4], 8000h
 0x69556E: jz      short loc_69557C
@@ -124,13 +124,13 @@
 0x69557C: lea     eax, [esp+20h+arg_14]
 0x695580: push    eax
 0x695581: mov     ecx, esi; this
-0x695583: call    MobileObject_GetCharProxy
+0x695583: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x695588: mov     ecx, eax
-0x69558A: call    sub_57E270
+0x69558A: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x69558F: mov     edi, [esp+20h+arg_14]
 0x695593: mov     ecx, esi; this
 0x695595: or      edi, 4000h
-0x69559B: call    MobileObject_GetCharProxy
+0x69559B: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6955A0: mov     ecx, [eax+364h]
 0x6955A6: test    ecx, ecx
 0x6955A8: jz      short loc_6955C3
@@ -156,7 +156,7 @@
 0x6955E5: mov     ecx, [esp+20h+arg_10]
 0x6955E9: mov     edx, [eax]
 0x6955EB: sub     esp, 8
-0x6955EE: fst     [esp+28h+var_24]; float
+0x6955EE: fst     [esp+28h+easeOutTime]; float
 0x6955F2: fstp    [esp+28h+var_28]; float
 0x6955F5: push    0; int
 0x6955F7: push    ecx; int
@@ -169,7 +169,7 @@
 0x695606: mov     [ecx+4], edx
 0x695609: mov     [ecx+8], eax
 0x69560C: mov     ecx, esi; this
-0x69560E: call    TESObjectREFR_GetParentCell
+0x69560E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x695613: push    eax; int
 0x695614: push    edi; int
 0x695615: mov     ecx, ebp
@@ -199,7 +199,6 @@
 0x695662: test    eax, eax
 0x695664: jz      short loc_695682
 0x695666: jmp     short loc_695670
-0x695668: align 10h
 0x695670: cmp     eax, offset stru_B3CAC0
 0x695675: jz      loc_6957AC
 0x69567B: mov     eax, [eax+4]
@@ -223,20 +222,20 @@
 0x6956AE: jz      short loc_695710
 0x6956B0: fldz
 0x6956B2: push    ecx
-0x6956B3: mov     ecx, edi
-0x6956B5: fstp    [esp+24h+var_24]; float
-0x6956B8: call    sub_4715C0
+0x6956B3: mov     ecx, edi; this
+0x6956B5: fstp    [esp+24h+easeOutTime]; easeOutTime
+0x6956B8: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x6956BD: fldz
-0x6956BF: push    0; int
-0x6956C1: push    0; int
+0x6956BF: push    0; transition
+0x6956C1: push    0; timeSyncSequence
 0x6956C3: sub     esp, 8
-0x6956C6: fstp    [esp+30h+var_2C]; float
-0x6956CA: mov     ecx, ebp
+0x6956C6: fstp    [esp+30h+easeInTime]; easeInTime
+0x6956CA: mov     ecx, ebp; this
 0x6956CC: fld1
-0x6956CE: fstp    [esp+30h+var_30]; float
-0x6956D1: push    0; char
-0x6956D3: push    0; int
-0x6956D5: call    sub_6C9BA0
+0x6956CE: fstp    [esp+30h+weight]; weight
+0x6956D1: push    0; startOver
+0x6956D3: push    0; priority
+0x6956D5: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x6956DA: or      word ptr [edi+8], 8
 0x6956DF: fld     dword ptr ds:0A7DEB4h
 0x6956E5: fchs
@@ -249,7 +248,7 @@
 0x6956F8: fmul    qword ptr ds:0A31C70h
 0x6956FE: fstp    [esp+24h+arg_14]
 0x695702: fld     [esp+24h+arg_14]
-0x695706: fstp    [esp+24h+var_24]; float
+0x695706: fstp    [esp+24h+easeOutTime]; float
 0x695709: push    0; char
 0x69570B: call    MagicCaster_CastingVFX_ClearSomething???
 0x695710: mov     edx, ds:0B33398h
@@ -280,14 +279,14 @@
 0x69575C: sub     esp, 0Ch
 0x69575F: mov     [esp+2Ch+arg_8], eax
 0x695763: fld     [esp+2Ch+arg_8]
-0x695767: fstp    [esp+2Ch+var_24]; float
+0x695767: fstp    [esp+2Ch+easeOutTime]; float
 0x69576B: mov     [esp+2Ch+arg_4], edx
 0x69576F: fld     [esp+2Ch+arg_4]
 0x695773: mov     [esp+2Ch+arg_0], ecx
 0x695777: fstp    [esp+2Ch+var_28]; float
 0x69577B: mov     ecx, edi
 0x69577D: fld     [esp+2Ch+arg_0]
-0x695781: fstp    [esp+2Ch+var_2C]; float
+0x695781: fstp    [esp+2Ch+easeInTime]; float
 0x695784: call    sub_6B7360
 0x695789: push    0
 0x69578B: mov     ecx, edi
@@ -295,7 +294,7 @@
 0x695792: mov     ecx, edi; this
 0x695794: call    sub_6B73E0
 0x695799: push    edi
-0x69579A: call    FormHeapFree
+0x69579A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69579F: add     esp, 4
 0x6957A2: pop     edi
 0x6957A3: pop     esi

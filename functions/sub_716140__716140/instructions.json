@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x716140",
-    "line": "push    ecx",
+    "line": "push    ecx; Viewer output confirms flags: bit 0 anim type APP_TIME/APP_INIT, bits 1..2 cycle LOOP/REVERSE/CLAMP, bit 3 Active, bit 4 Play Backwards; also reports frequency, phase, key range, runtime start/last time, and target.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x716346",
-    "line": "call    sub_7158A0",
+    "line": "call    NiTimeController_FormatAnimType; Formats NiTimeController animation time source: 0 APP_TIME, 1 APP_INIT.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x716388",
-    "line": "call    sub_715910",
+    "line": "call    NiTimeController_FormatCycleType; Formats NiTimeController cycle type: 0 LOOP, 1 REVERSE, 2 CLAMP.",
     "mnemonic": "call",
     "size": 5
   },

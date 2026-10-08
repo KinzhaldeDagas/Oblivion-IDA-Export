@@ -1,4 +1,4 @@
-0x4376A0: push    0FFFFFFFFh
+0x4376A0: push    0FFFFFFFFh; Verified 0x40-byte QueuedTreeModel constructor layout: +0x2C TESModel component, +0x30 lodMultiplier, +0x34 task flags, +0x38 TESObjectREFR, and +0x3C TESObjectTREE. Bytes +0x35..+0x37 remain Unknown.
 0x4376A2: push    offset SEH_4376A0
 0x4376A7: mov     eax, large fs:0
 0x4376AD: push    eax
@@ -14,7 +14,7 @@
 0x4376BF: mov     large fs:0, eax
 0x4376C5: mov     esi, ecx
 0x4376C7: mov     [esp+24h+var_10], esi
-0x4376CB: mov     ebp, [esp+24h+arg_4]
+0x4376CB: mov     ebp, [esp+24h+tree]
 0x4376CF: xor     ebx, ebx
 0x4376D1: cmp     ebp, ebx
 0x4376D3: jz      short loc_4376DA
@@ -31,8 +31,8 @@
 0x4376F2: mov     dword ptr [esi], offset ??_7QueuedModel@@6B@; const QueuedModel::`vftable'
 0x4376F8: mov     [esp+24h+var_4], ebx
 0x4376FC: mov     [esi+28h], ebx
-0x4376FF: mov     ecx, [esp+24h+arg_C]
-0x437703: mov     [esi+30h], ecx
+0x4376FF: mov     ecx, [esp+24h+unknownArg]
+0x437703: mov     [esi+30h], ecx; Verified: constructor argument lodMultiplier is stored at QueuedTreeModel+0x30. The only queue-construction call passes TESForm_GetLODMult(baseTree), substituting literal 6 when the reference HasVisibleDistantFlag; Fallout's homolog names the corresponding enum ENUM_LOD_MULT. The Oblivion enum values beyond this observed override remain Unknown.
 0x437706: mov     [esi+2Ch], edi
 0x437709: mov     [esi+34h], bl
 0x43770C: mov     edx, [edi]
@@ -42,13 +42,13 @@
 0x437718: call    eax
 0x43771A: push    eax
 0x43771B: mov     ecx, esi
-0x43771D: call    sub_434600
+0x43771D: call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.
 0x437722: push    1
 0x437724: push    ebx
 0x437725: mov     ecx, esi
-0x437727: call    sub_434CB0
+0x437727: call    sub_434CB0; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.
 0x43772C: mov     cl, [esi+34h]
-0x43772F: mov     edx, [esp+24h+arg_0]
+0x43772F: mov     edx, [esp+24h+reference]
 0x437733: and     cl, 0F9h
 0x437736: or      cl, 1
 0x437739: mov     [esi+34h], cl
@@ -65,3 +65,22 @@
 0x437759: pop     ebx
 0x43775A: add     esp, 10h
 0x43775D: retn    10h
+0x435A90: mov     eax, [ecx]
+0x435A92: test    eax, eax
+0x435A94: jz      short locret_435AA0
+0x435A96: add     eax, 4
+0x435A99: push    eax; lpAddend
+0x435A9A: call    ds:InterlockedDecrement
+0x435AA0: retn
+0x9AC4C0: mov     ecx, [ebp-10h]; this
+0x9AC4C3: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9AC4C8: mov     ecx, [ebp-10h]
+0x9AC4CB: add     ecx, 28h ; '('
+0x9AC4CE: jmp     loc_435A90
+0x9AC4D3: mov     edx, [esp+tree]
+0x9AC4D7: lea     eax, [edx-14h]
+0x9AC4DA: mov     ecx, [edx-18h]
+0x9AC4DD: xor     ecx, eax
+0x9AC4DF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC4E4: mov     eax, offset stru_AD9190
+0x9AC4E9: jmp     ___CxxFrameHandler3

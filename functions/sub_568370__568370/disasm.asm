@@ -121,7 +121,7 @@
 0x56851A: pop     ebx
 0x56851B: retn
 0x56851C: add     ecx, 24h ; '$'
-0x56851F: call    EffectItemList_HasOnTarget
+0x56851F: call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x568524: test    al, al
 0x568526: jz      short def_56839C; jumptable 0056839C default case, cases 17,28-30,37
 0x568528: mov     bl, 1

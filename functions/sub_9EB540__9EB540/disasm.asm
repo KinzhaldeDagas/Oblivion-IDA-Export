@@ -2,7 +2,7 @@
 0x9EB546: push    ecx
 0x9EB547: fstp    [esp+4+var_4]; float
 0x9EB54A: push    offset aFfatiguejumpmu; "fFatigueJumpMult"
-0x9EB54F: mov     ecx, offset fFatigueJumpMult
+0x9EB54F: mov     ecx, (offset flt_B37528+40h)
 0x9EB554: call    GameSetting_ConstrAndReg_float
 0x9EB559: push    offset sub_A1F1F0; void (__cdecl *)()
 0x9EB55E: call    _atexit

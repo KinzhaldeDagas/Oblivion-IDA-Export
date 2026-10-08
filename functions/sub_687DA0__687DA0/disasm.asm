@@ -68,7 +68,7 @@
 0x687E83: test    ebx, ebx
 0x687E85: jz      loc_688107
 0x687E8B: mov     ecx, ebx; this
-0x687E8D: call    MobileObject_GetCharProxy
+0x687E8D: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x687E92: test    eax, eax
 0x687E94: jz      loc_688107
 0x687E9A: mov     ecx, ds:0B333A0h
@@ -101,23 +101,23 @@
 0x687EFB: mov     ecx, [edi]
 0x687EFD: mov     edx, [edi+4]
 0x687F00: mov     eax, [edi+8]
-0x687F03: mov     [esp+74h+var_3C], ecx
+0x687F03: mov     [esp+74h+start.x], ecx
 0x687F07: lea     ecx, [esp+74h+var_20]
-0x687F0B: mov     [esp+74h+var_38], edx
-0x687F0F: mov     [esp+74h+var_34], eax
-0x687F13: call    sub_6899C0
+0x687F0B: mov     [esp+74h+start.y], edx
+0x687F0F: mov     [esp+74h+start.z], eax
+0x687F13: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x687F18: mov     edi, [eax]
-0x687F1A: mov     [esp+74h+var_48], edi
-0x687F1E: fld     [esp+74h+var_48]
-0x687F22: fsub    [esp+74h+var_3C]
+0x687F1A: mov     [esp+74h+end.x], edi
+0x687F1E: fld     [esp+74h+end.x]
+0x687F22: fsub    [esp+74h+start.x]
 0x687F26: mov     ebp, [eax+4]
-0x687F29: mov     [esp+74h+var_44], ebp
+0x687F29: mov     [esp+74h+end.y], ebp
 0x687F2D: mov     ebx, [eax+8]
 0x687F30: fstp    [esp+74h+var_4C]
 0x687F34: lea     ecx, [esp+74h+var_30]
-0x687F38: fld     [esp+74h+var_44]
-0x687F3C: mov     [esp+74h+var_40], ebx
-0x687F40: fsub    [esp+74h+var_38]
+0x687F38: fld     [esp+74h+end.y]
+0x687F3C: mov     [esp+74h+end.z], ebx
+0x687F40: fsub    [esp+74h+start.y]
 0x687F44: fstp    dword ptr [esp+74h+var_5C]
 0x687F48: fld     [esp+74h+var_4C]
 0x687F4C: fstp    [esp+74h+var_30]
@@ -125,11 +125,11 @@
 0x687F54: fstp    [esp+74h+var_2C]
 0x687F58: fldz
 0x687F5A: fstp    [esp+74h+var_28]
-0x687F5E: call    sub_404C90
+0x687F5E: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x687F63: fstp    dword ptr [esp+74h+var_5C]
-0x687F67: fld     [esp+74h+var_40]
+0x687F67: fld     [esp+74h+end.z]
 0x687F6B: fld     st
-0x687F6D: fld     [esp+74h+var_34]
+0x687F6D: fld     [esp+74h+start.z]
 0x687F71: fld     st
 0x687F73: fsubp   st(2), st
 0x687F75: fxch    st(1)
@@ -151,9 +151,9 @@
 0x687FA7: call    sub_5E34B0
 0x687FAC: test    al, al
 0x687FAE: jz      short loc_687FC9
-0x687FB0: mov     ecx, [esp+74h+var_48]
-0x687FB4: mov     edx, [esp+74h+var_44]
-0x687FB8: mov     eax, [esp+74h+var_40]
+0x687FB0: mov     ecx, [esp+74h+end.x]
+0x687FB4: mov     edx, [esp+74h+end.y]
+0x687FB8: mov     eax, [esp+74h+end.z]
 0x687FBC: mov     [esi], ecx
 0x687FBE: mov     [esi+4], edx
 0x687FC1: mov     [esi+8], eax
@@ -163,37 +163,37 @@
 0x687FD2: fld1
 0x687FD4: lea     ecx, [esp+74h+var_30]
 0x687FD8: fst     [esp+74h+var_30]
-0x687FDC: push    ecx
+0x687FDC: push    ecx; endColor
 0x687FDD: fldz
-0x687FDF: lea     edx, [esp+78h+var_48]
+0x687FDF: lea     edx, [esp+78h+end]
 0x687FE3: fst     [esp+78h+var_2C]
-0x687FE7: push    edx
+0x687FE7: push    edx; end
 0x687FE8: fst     [esp+7Ch+var_28]
 0x687FEC: lea     eax, [esp+7Ch+var_5C]
 0x687FF0: fst     [esp+7Ch+var_24]
-0x687FF4: push    eax
+0x687FF4: push    eax; startColor
 0x687FF5: fst     dword ptr [esp+80h+var_5C]
-0x687FF9: lea     ecx, [esp+80h+var_3C]
+0x687FF9: lea     ecx, [esp+80h+start]
 0x687FFD: fst     [esp+80h+var_54]
-0x688001: push    ecx
+0x688001: push    ecx; start
 0x688002: fstp    [esp+84h+var_50]
 0x688006: fstp    dword ptr [esp+84h+var_5C+4]
-0x68800A: call    sub_47F070
+0x68800A: call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.
 0x68800F: add     esp, 10h
 0x688012: mov     esi, eax
-0x688014: call    sub_4E70B0
+0x688014: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x688019: push    eax; a2
 0x68801A: mov     ecx, esi; this
-0x68801C: call    sub_405680
+0x68801C: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x688021: fld     dword ptr ds:0A3D8F0h
 0x688027: push    ecx
 0x688028: mov     ecx, ds:0B333A0h
 0x68802E: fstp    [esp+78h+var_78]; float
 0x688031: push    esi; int
 0x688032: call    sub_440E60
-0x688037: lea     ecx, [esp+74h+var_20]; void *
+0x688037: lea     ecx, [esp+74h+var_20]; this
 0x68803B: mov     [esp+74h+var_4], 0FFFFFFFFh
-0x688043: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x688043: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x688048: xor     al, al
 0x68804A: mov     ecx, [esp+74h+var_C]
 0x68804E: mov     large fs:0, ecx
@@ -212,9 +212,9 @@
 0x68806B: mov     [esi+8], ebx
 0x68806E: mov     ebx, [esp+74h+arg_C]
 0x688075: push    ebx
-0x688076: lea     edx, [esp+78h+var_48]
+0x688076: lea     edx, [esp+78h+end]
 0x68807A: push    edx
-0x68807B: lea     eax, [esp+7Ch+var_3C]
+0x68807B: lea     eax, [esp+7Ch+start]
 0x68807F: push    eax
 0x688080: push    ecx
 0x688081: call    sub_687060
@@ -226,37 +226,37 @@
 0x688091: fld1
 0x688093: lea     edx, [esp+74h+var_30]
 0x688097: fst     [esp+74h+var_30]
-0x68809B: push    edx
+0x68809B: push    edx; endColor
 0x68809C: fst     [esp+78h+var_2C]
-0x6880A0: lea     eax, [esp+78h+var_48]
+0x6880A0: lea     eax, [esp+78h+end]
 0x6880A4: fldz
-0x6880A6: push    eax
+0x6880A6: push    eax; end
 0x6880A7: fst     [esp+7Ch+var_28]
 0x6880AB: lea     ecx, [esp+7Ch+var_5C]
 0x6880AF: fst     [esp+7Ch+var_24]
-0x6880B3: push    ecx
+0x6880B3: push    ecx; startColor
 0x6880B4: fst     [esp+80h+var_54]
-0x6880B8: lea     edx, [esp+80h+var_3C]
+0x6880B8: lea     edx, [esp+80h+start]
 0x6880BC: fstp    [esp+80h+var_50]
-0x6880C0: push    edx
+0x6880C0: push    edx; start
 0x6880C1: fst     dword ptr [esp+84h+var_5C]
 0x6880C5: fstp    dword ptr [esp+84h+var_5C+4]
-0x6880C9: call    sub_47F070
+0x6880C9: call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.
 0x6880CE: add     esp, 10h
 0x6880D1: mov     esi, eax
-0x6880D3: call    sub_4E70B0
+0x6880D3: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x6880D8: push    eax; a2
 0x6880D9: mov     ecx, esi; this
-0x6880DB: call    sub_405680
+0x6880DB: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x6880E0: fld     dword ptr ds:0A3D8F0h
 0x6880E6: push    ecx
 0x6880E7: mov     ecx, ds:0B333A0h
 0x6880ED: fstp    [esp+78h+var_78]; float
 0x6880F0: push    esi; int
 0x6880F1: call    sub_440E60
-0x6880F6: lea     ecx, [esp+74h+var_20]; void *
+0x6880F6: lea     ecx, [esp+74h+var_20]; this
 0x6880FA: mov     [esp+74h+var_4], 0FFFFFFFFh
-0x688102: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x688102: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x688107: mov     al, 1
 0x688109: mov     ecx, [esp+74h+var_C]
 0x68810D: mov     large fs:0, ecx
@@ -267,3 +267,12 @@
 0x688118: pop     ebx
 0x688119: add     esp, 60h
 0x68811C: retn
+0x9C5080: lea     ecx, [ebp-20h]; this
+0x9C5083: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C5088: mov     edx, [esp+arg_4]
+0x9C508C: lea     eax, [edx-64h]
+0x9C508F: mov     ecx, [edx-68h]
+0x9C5092: xor     ecx, eax
+0x9C5094: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5099: mov     eax, offset stru_AED8D0
+0x9C509E: jmp     ___CxxFrameHandler3

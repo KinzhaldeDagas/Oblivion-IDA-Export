@@ -13,9 +13,9 @@
 0x9A8DE8: jz      short loc_9A8DFF
 0x9A8DEA: mov     eax, [esi+0Ch]
 0x9A8DED: mov     ecx, [esp+10h+Str1]
-0x9A8DF1: push    eax; Str2
-0x9A8DF2: push    ecx; Str1
-0x9A8DF3: call    __strcmp
+0x9A8DF1: push    eax; right
+0x9A8DF2: push    ecx; left
+0x9A8DF3: call    CRT_StricmpLocaleDispatch
 0x9A8DF8: add     esp, 8
 0x9A8DFB: test    eax, eax
 0x9A8DFD: jz      short loc_9A8E0F

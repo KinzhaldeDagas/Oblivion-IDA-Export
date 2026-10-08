@@ -15,7 +15,6 @@
 0x947C73: jle     short loc_947CB9
 0x947C75: xor     edi, edi
 0x947C77: jmp     short loc_947C80
-0x947C79: align 10h
 0x947C80: mov     eax, [ebp+0Ch]
 0x947C83: mov     ecx, [esp+28h+arg_0]
 0x947C87: mov     eax, [edi+eax]
@@ -155,7 +154,6 @@
 0x947E06: lea     eax, [eax+edx*4]
 0x947E09: sub     ecx, ebx
 0x947E0B: jmp     short loc_947E10
-0x947E0D: align 10h
 0x947E10: test    eax, eax
 0x947E12: jz      short loc_947E20
 0x947E14: inc     dword ptr ds:0BA7FC0h

@@ -1,7 +1,7 @@
 0x9F1180: push    offset aTheSaveGameIsN; "The save game is no longer available.  "...
 0x9F1185: push    offset aSsavegamenolon; "sSaveGameNoLongerAvailable"
-0x9F118A: mov     ecx, offset dword_B38748
-0x9F118F: call    GameSetting_ConstrAndReg
+0x9F118A: mov     ecx, offset stru_B38748; self
+0x9F118F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F1194: push    offset sub_A215B0; void (__cdecl *)()
 0x9F1199: call    _atexit
 0x9F119E: pop     ecx

@@ -1,19 +1,32 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B9B30",
+      "0x4B9C19"
+    ]
+  ],
+  "chunks_sha256": "1cb53600657c39c3a2bcdc456daddcb55bdb60ac7e6657717e315872d7505c1e",
+  "comment_regular": "Verified Oblivion TREE record dispatch: accepts TREE record type 0x1C, initializes the base form, and handles MODL/MODB, MODT, EDID, and DMTL (texture-hash cache) chunks. Unlike Fallout TESObjectTREE::Load/Save, this dispatcher has no SNAM seed-array or BNAM billboard-size case. The loader's complete switch and the Fallout routines establish this as a schema divergence; the source of Oblivion seed-array population outside this loader remains Unknown.",
+  "comment_repeatable": "Verified Oblivion TREE record dispatch: accepts TREE record type 0x1C, initializes the base form, and handles MODL/MODB, MODT, EDID, and DMTL (texture-hash cache) chunks. Unlike Fallout TESObjectTREE::Load/Save, this dispatcher has no SNAM seed-array or BNAM billboard-size case. The loader's complete switch and the Fallout routines establish this as a schema divergence; the source of Oblivion seed-array population outside this loader remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B9B30",
+  "display_name": "TESObjectTREE_LoadFormRecord",
   "end_ea": "0x4B9C19",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4B9B30",
+  "name": "TESObjectTREE_LoadFormRecord",
   "segment": ".text",
   "sha256": "1cb53600657c39c3a2bcdc456daddcb55bdb60ac7e6657717e315872d7505c1e",
   "size": 233,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B9B30",
-  "type": "char __thiscall(int this, Data *)",
+  "total_chunk_size": 233,
+  "type": "char __thiscall(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this, Data *file)",
   "xrefs_from_count": 106,
   "xrefs_to_count": 1
 }

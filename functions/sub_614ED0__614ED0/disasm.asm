@@ -26,10 +26,10 @@
 0x614F0C: test    al, al
 0x614F0E: jz      short loc_614F6F
 0x614F10: mov     ecx, esi
-0x614F12: call    sub_6135F0
+0x614F12: call    CombatController_GetCurrentTarget
 0x614F17: mov     ecx, edi
 0x614F19: mov     ebx, eax
-0x614F1B: call    sub_6135F0
+0x614F1B: call    CombatController_GetCurrentTarget
 0x614F20: cmp     eax, ebx
 0x614F22: jnz     short loc_614F6F
 0x614F24: mov     al, [edi+48h]

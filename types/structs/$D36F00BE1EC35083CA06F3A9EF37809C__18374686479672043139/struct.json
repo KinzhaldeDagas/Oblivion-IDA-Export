@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$D36F00BE1EC35083CA06F3A9EF37809C",
+  "definition": "union $D36F00BE1EC35083CA06F3A9EF37809C\n{\nDWORD OffsetToData;\n$0D4604FA25BE18415F17EE284B815447 s2;\n}\n",
   "id": 18374686479672043139,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OffsetToData",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "s2",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "$0D4604FA25BE18415F17EE284B815447"
     }
   ],
   "name": "$D36F00BE1EC35083CA06F3A9EF37809C",
+  "ordinal": 7387,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

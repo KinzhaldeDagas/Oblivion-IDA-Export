@@ -1,4 +1,4 @@
-0x53FF90: mov     eax, [ecx+10h]
+0x53FF90: mov     eax, [ecx+10h]; Pass231: Updates weather wind globals after fog distance update in normal sky path.
 0x53FF93: sub     esp, 10h
 0x53FF96: test    eax, eax
 0x53FF98: jz      loc_5400DC

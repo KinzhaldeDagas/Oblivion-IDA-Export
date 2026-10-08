@@ -3,43 +3,43 @@ char sub_507CB0()
   TES *v0; // eax
   TESObjectCELL *currentInteriorCell; // ecx
   const char *v2; // eax
-  int v4; // [esp-4h] [ebp-4h]
+  unsigned int v4; // [esp-4h] [ebp-4h]
 
-  v0 = TES;
-  byte_B361FD ^= 1u;
-  if ( v0 )
+  v0 = MEMORY[0xB333A0]; /*0x507cb0*/
+  BYTE1(dword_B361CC[0xC]) ^= 1u; /*0x507cb5*/
+  if ( v0 ) /*0x507cbe*/
   {
-    if ( byte_B361FD )
+    if ( BYTE1(dword_B361CC[0xC]) ) /*0x507cc0*/
     {
-      v4 = 0;
+      v4 = 0; /*0x507cc9*/
     }
     else
     {
-      currentInteriorCell = v0->currentInteriorCell;
-      if ( currentInteriorCell )
+      currentInteriorCell = v0->currentInteriorCell; /*0x507ccd*/
+      if ( currentInteriorCell ) /*0x507cd2*/
       {
-        if ( !sub_4C9820(currentInteriorCell) )
+        if ( !TESObjectCELL_HasFlag80(currentInteriorCell) ) /*0x507cdb*/
         {
-          sub_543BB0(&TES->sky->vtbl, 1);
-          goto LABEL_10;
+          Sky__SetMode(MEMORY[0xB333A0]->sky, 1u); /*0x507cf1*/
+          goto LABEL_10; /*0x507cf1*/
         }
-        v0 = TES;
-        v4 = 2;
+        v0 = MEMORY[0xB333A0]; /*0x507cdd*/
+        v4 = 2; /*0x507ce2*/
       }
       else
       {
-        v4 = 3;
+        v4 = 3; /*0x507cf3*/
       }
     }
-    sub_543BB0(&v0->sky->vtbl, v4);
+    Sky__SetMode(v0->sky, v4); /*0x507cf8*/
   }
 LABEL_10:
-  if ( IsConsoleMode )
+  if ( MEMORY[0xB361AC] ) /*0x507cfd*/
   {
-    v2 = (const char *)&aOff;
-    if ( !byte_B361FD )
-      v2 = (const char *)&aOn_0;
-    Interface_ConsolePrint("Sky -> %s", v2);
+    v2 = (const char *)&aOff; /*0x507d0d*/
+    if ( !BYTE1(dword_B361CC[0xC]) ) /*0x507d06*/
+      v2 = "On"; /*0x507d14*/
+    Interface_ConsolePrint("Sky -> %s", v2); /*0x507d1f*/
   }
-  return 1;
+  return 1; /*0x507d29*/
 }

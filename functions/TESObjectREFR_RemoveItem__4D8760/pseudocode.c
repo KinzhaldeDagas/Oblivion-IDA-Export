@@ -1,47 +1,48 @@
-int __userpurge TESObjectREFR_RemoveItem@<eax>(
-        TESObjectREFR *this@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        int a4,
-        unsigned __int8 *a5,
-        int a6,
-        int a7,
-        int a8,
-        TESForm *a9,
-        float *a10,
-        NiPoint3 *a11,
-        char a12,
-        char a13)
+// Removes an inventory item/count, optionally transferring it to destination or placing it at destinationPosition/destinationRotation. Native thiscall has ten stack arguments.
+int __thiscall TESObjectREFR_RemoveItem(
+        TESObjectREFR *this,
+        TESForm *item,
+        ExtraDataList *extraList,
+        int count,
+        int arg3,
+        int arg4,
+        TESObjectREFR *destination,
+        NiPoint3 *destinationPosition,
+        NiPoint3 *destinationRotation,
+        char arg8,
+        char arg9)
 {
+  double v11; // st5
+  double v12; // st6
   int v13; // edi
   double v16; // st7
   int ***ContainerExtraDataForRef; // eax
   int v18; // eax
 
-  v13 = 0;
-  if ( !a4 )
-    return 0;
-  if ( TESObjectREFR_GetContainer(this) )
+  v13 = 0; /*0x4d8767*/
+  if ( !item ) /*0x4d876d*/
+    return 0; /*0x4d8771*/
+  if ( TESObjectREFR_GetContainer(this) ) /*0x4d8778*/
   {
-    v16 = Script_AddEventToExtraScript(this, a5, 4);
-    ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(this);
-    ContainerExtraData_RemoveForm(
+    v16 = Script_AddEventToExtraScript(this, extraList, 4); /*0x4d878b*/
+    ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef(this); /*0x4d8792*/
+    ContainerExtraData_RemoveForm( /*0x4d87c7*/
       ContainerExtraDataForRef,
-      st5_0,
+      v11,
       v16,
-      st6_0,
+      v12,
       this,
-      a4,
-      a7,
-      a6,
-      a5,
-      a8,
-      a9,
-      a10,
-      a11,
-      a12,
-      a13);
-    return v18;
+      (int)item,
+      arg3,
+      count,
+      (unsigned __int8 *)extraList,
+      arg4,
+      (TESForm *)destination,
+      &destinationPosition->x,
+      destinationRotation,
+      arg8,
+      arg9);
+    return v18; /*0x4d87cc*/
   }
-  return v13;
+  return v13; /*0x4d876f*/
 }

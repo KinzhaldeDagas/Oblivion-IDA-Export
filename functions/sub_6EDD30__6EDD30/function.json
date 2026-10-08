@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_6EDD30",
+  "chunks": [
+    [
+      "0x6EDD30",
+      "0x6EDE0F"
+    ]
+  ],
+  "chunks_sha256": "e2070d09647580650e1a4ef57c4416e10d5993a6d2bfb7348d236aa3172214c7",
+  "comment_regular": "Projects one authored FanControl as offset + first element of basisMatrix * parameters.matrix[2*matrixChannel]. This proves control channels 0/1 address matrix 0 geometry and matrix 2 texture.\n\nControl value = projectionOffset + first element of basis * parameters.matrix[2*matrixChannel]. Record is this+0x25C + fanIndex*0x80 + controlIndex*0x40 + matrixChannel*0x20; layout FaceGenFanProjectionRecord (0x20 bytes). Returns zero when initialized byte is false. Signed upper-bound checks only; negative indices are not rejected. Assertion helper logs and returns, so oversized indices are not stopped either. Caller misuse impact unproven.",
+  "comment_repeatable": "Control value = projectionOffset + first element of basis * parameters.matrix[2*matrixChannel]. Record is this+0x25C + fanIndex*0x80 + controlIndex*0x40 + matrixChannel*0x20; layout FaceGenFanProjectionRecord (0x20 bytes). Returns zero when initialized byte is false. Signed upper-bound checks only; negative indices are not rejected. Assertion helper logs and returns, so oversized indices are not stopped either. Caller misuse impact unproven.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "FaceGenFanControls_GetControlValue",
   "end_ea": "0x6EDE0F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6EDD30",
+  "name": "FaceGenFanControls_GetControlValue",
   "segment": ".text",
   "sha256": "e2070d09647580650e1a4ef57c4416e10d5993a6d2bfb7348d236aa3172214c7",
   "size": 223,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EDD30",
-  "type": "double __thiscall(_BYTE *this, signed int, signed int, signed int, int)",
-  "xrefs_from_count": 90,
+  "total_chunk_size": 223,
+  "type": "float __thiscall(void *this, int fanIndex, int controlIndex, int matrixChannel, const FaceGenHeadParameters *parameters)",
+  "xrefs_from_count": 91,
   "xrefs_to_count": 4
 }

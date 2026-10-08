@@ -1,4 +1,4 @@
-0x601B80: sub     esp, 8
+0x601B80: sub     esp, 8; Actor::EvaluatePackage. After current package changes, resets/evaluates actor AI state through sub_5EAE70 and process callbacks; plugin calls this after assigning runtime packages.
 0x601B83: push    esi
 0x601B84: mov     esi, ecx
 0x601B86: cmp     dword ptr [esi+58h], 0
@@ -15,7 +15,7 @@
 0x601BA9: mov     edx, [eax+198h]
 0x601BAF: push    1
 0x601BB1: mov     ecx, esi
-0x601BB3: call    edx
+0x601BB3: call    edx; 3DTheft 2026-05-17: Actor::EvaluatePackage entry is gated while current package type is 0x12 Dialogue.
 0x601BB5: test    al, al
 0x601BB7: jnz     loc_60204B
 0x601BBD: mov     ecx, [esi+58h]
@@ -58,7 +58,7 @@
 0x601C2E: fld     dword ptr ds:0A5B6C0h
 0x601C34: mov     eax, [edx+174h]
 0x601C3A: push    esi; a7
-0x601C3B: push    offset sub_645AF0; a6
+0x601C3B: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x601C40: push    ecx
 0x601C41: mov     ecx, esi
 0x601C43: fstp    [esp+1Ch+a5]; a5
@@ -73,7 +73,7 @@
 0x601C5D: call    eax
 0x601C5F: push    eax; a2
 0x601C60: mov     ecx, esi; this
-0x601C62: call    TESObjectREFR_GetParentCell
+0x601C62: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x601C67: mov     ecx, ds:0B33A98h
 0x601C6D: push    eax; a1
 0x601C6E: call    sub_446B90
@@ -85,7 +85,7 @@
 0x601C80: fld     dword ptr ds:0A5B6C0h
 0x601C86: mov     eax, [edx+174h]
 0x601C8C: push    esi; a7
-0x601C8D: push    offset sub_645A30; a6
+0x601C8D: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6
 0x601C92: push    ecx
 0x601C93: mov     ecx, esi
 0x601C95: fstp    [esp+1Ch+a5]; a5
@@ -100,7 +100,7 @@
 0x601CAF: call    eax
 0x601CB1: push    eax; a2
 0x601CB2: mov     ecx, esi; this
-0x601CB4: call    TESObjectREFR_GetParentCell
+0x601CB4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x601CB9: mov     ecx, ds:0B33A98h
 0x601CBF: push    eax; a1
 0x601CC0: call    sub_446B90
@@ -134,10 +134,10 @@
 0x601D13: jz      short loc_601D1E
 0x601D15: push    esi
 0x601D16: lea     ecx, [eax+44h]
-0x601D19: call    sub_424D00
+0x601D19: call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.
 0x601D1E: push    ebx; int
 0x601D1F: mov     ecx, esi; int
-0x601D21: call    sub_5EAE70
+0x601D21: call    sub_5EAE70; 3DTheft decode 2026-05-18: Actor::EvaluatePackage reaches package reset/cleanup sub_5EAE70. Do not use as a generic path-refresh when only Follow movement should continue.
 0x601D26: mov     ecx, [esi+58h]
 0x601D29: mov     ebx, [ecx+8]
 0x601D2C: test    ebx, ebx
@@ -277,14 +277,14 @@
 0x601EAC: jz      short loc_601EC8
 0x601EAE: fldz
 0x601EB0: push    ecx
-0x601EB1: fstp    [esp+10h+var_10]; float
-0x601EB4: mov     ecx, ebp
-0x601EB6: push    5; int
-0x601EB8: call    sub_470FC0
+0x601EB1: fstp    [esp+10h+easeOutTime]; easeOutTime
+0x601EB4: mov     ecx, ebp; this
+0x601EB6: push    5; slot
+0x601EB8: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x601EBD: push    0
 0x601EBF: push    1
 0x601EC1: mov     ecx, ebp
-0x601EC3: call    sub_475440
+0x601EC3: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x601EC8: push    0
 0x601ECA: mov     ecx, esi
 0x601ECC: call    sub_5E13D0
@@ -294,7 +294,7 @@
 0x601EDB: call    edx
 0x601EDD: mov     ecx, esi; this
 0x601EDF: mov     ebx, eax
-0x601EE1: call    MobileObject_GetCharProxy
+0x601EE1: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x601EE6: mov     [esp+0Ch+arg_4], eax
 0x601EEA: call    sub_531D80
 0x601EEF: mov     ecx, [esp+0Ch+arg_4]
@@ -329,10 +329,10 @@
 0x601F3E: push    0
 0x601F40: push    esi
 0x601F41: call    edx
-0x601F43: push    0
-0x601F45: push    0FFFFFFFFh
-0x601F47: mov     ecx, esi
-0x601F49: call    HighPRocess_DoAction?????
+0x601F43: push    0; sequence
+0x601F45: push    0FFFFFFFFh; action
+0x601F47: mov     ecx, esi; this
+0x601F49: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x601F4E: mov     eax, [esi]
 0x601F50: mov     edx, [eax+164h]
 0x601F56: mov     ecx, esi
@@ -342,14 +342,14 @@
 0x601F5E: jz      loc_601FE5
 0x601F64: fldz
 0x601F66: push    ecx
-0x601F67: fstp    [esp+18h+var_18]; float
-0x601F6A: mov     ecx, edi
-0x601F6C: push    5; int
-0x601F6E: call    sub_470FC0
+0x601F67: fstp    [esp+18h+var_18]; easeOutTime
+0x601F6A: mov     ecx, edi; this
+0x601F6C: push    5; slot
+0x601F6E: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x601F73: push    0
 0x601F75: push    1
 0x601F77: mov     ecx, edi
-0x601F79: call    sub_475440
+0x601F79: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x601F7E: jmp     short loc_601FE5
 0x601F80: mov     eax, [esi]
 0x601F82: mov     edx, [eax+380h]
@@ -397,7 +397,7 @@
 0x601FF8: jz      short loc_602023
 0x601FFA: mov     ecx, [esi+58h]
 0x601FFD: mov     edi, [ecx]
-0x601FFF: mov     ecx, offset TimeGlobals
+0x601FFF: mov     ecx, 0B332E0h
 0x602004: call    TimeGlobals_GetGameHour
 0x602009: fsub    qword ptr ds:0A2F928h
 0x60200F: mov     edx, [edi+1Ch]
@@ -416,7 +416,7 @@
 0x602032: jz      short loc_60204A
 0x602034: mov     edx, [esi+58h]
 0x602037: mov     edi, [edx]
-0x602039: call    sub_452A60
+0x602039: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x60203E: mov     ecx, [esi+58h]
 0x602041: push    eax
 0x602042: mov     eax, [edi+100h]

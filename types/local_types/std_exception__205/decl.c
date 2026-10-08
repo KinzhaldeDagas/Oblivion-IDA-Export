@@ -1,1 +1,1 @@
-std::exception
+struct std::exception;

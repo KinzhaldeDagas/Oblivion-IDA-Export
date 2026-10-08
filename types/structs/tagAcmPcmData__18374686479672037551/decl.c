@@ -1,1 +1,4 @@
-tagAcmPcmData
+struct tagAcmPcmData
+{
+$7C3C66D9C76C4A46414C51603B88CF05 cvt;
+};

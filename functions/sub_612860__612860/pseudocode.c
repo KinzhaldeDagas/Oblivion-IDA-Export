@@ -1,20 +1,20 @@
-char __stdcall sub_612860(void **a1)
+void __stdcall sub_612860(void **source)
 {
-  int *FormID; // eax
-  TESSaveLoad *v2; // ecx
-  TESSaveLoad *v4; // ecx
+  void **FormID; // eax
+  TESSaveLoadGame_SerializationView *v2; // ecx
+  TESSaveLoadGame_SerializationView *v3; // ecx
 
-  if ( a1 && *a1 )
+  if ( source && *source ) /*0x612868*/
   {
-    FormID = (int *)MagicItem_GetFormID(*a1);
-    v2 = SaveLoad_CurrentSavegame;
-    a1 = (void **)FormID;
-    return SaveLoad_SaveFormID(v2, (int)&a1, 4u);
+    FormID = (void **)MagicItem_GetFormID(*source); /*0x61286e*/
+    v2 = g_TESSaveLoadGame; /*0x612873*/
+    source = FormID; /*0x612879*/
+    SaveLoad_SaveFormID(v2, (const unsigned int *)&source, 4u); /*0x612884*/
   }
   else
   {
-    v4 = SaveLoad_CurrentSavegame;
-    a1 = 0;
-    return SaveLoad_SaveFormID(v4, (int)&a1, 4u);
+    v3 = g_TESSaveLoadGame; /*0x61288c*/
+    source = 0; /*0x612899*/
+    SaveLoad_SaveFormID(v3, (const unsigned int *)&source, 4u); /*0x6128a1*/
   }
 }

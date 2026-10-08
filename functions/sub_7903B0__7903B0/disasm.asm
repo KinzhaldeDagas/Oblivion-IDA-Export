@@ -1,9 +1,9 @@
-0x7903B0: mov     edx, [esp+arg_4]
+0x7903B0: mov     edx, [esp+holeIndex]; MSVC adjust-heap primitive for CBranch pointers: selects a child by fuzzyBranchVolume, sifts the hole downward, then delegates to the heap-push helper. Used by make-heap and sort-heap.
 0x7903B4: push    ebx
 0x7903B5: push    esi
-0x7903B6: mov     esi, [esp+8+arg_0]
+0x7903B6: mov     esi, [esp+8+begin]
 0x7903BA: push    edi
-0x7903BB: mov     edi, [esp+0Ch+arg_8]
+0x7903BB: mov     edi, [esp+0Ch+count]
 0x7903BF: lea     ecx, [edx+edx+2]
 0x7903C3: cmp     ecx, edi
 0x7903C5: mov     ebx, edx
@@ -29,13 +29,13 @@
 0x7903FF: mov     [esi+edx*4], ecx
 0x790402: lea     edx, [edi-1]
 0x790405: mov     eax, [esp+0Ch+arg_10]
-0x790409: mov     ecx, [esp+0Ch+arg_C]
+0x790409: mov     ecx, [esp+0Ch+value]
 0x79040D: push    eax
-0x79040E: push    ecx
-0x79040F: push    ebx
-0x790410: push    edx
-0x790411: push    esi
-0x790412: call    sub_78FBC0
+0x79040E: push    ecx; value
+0x79040F: push    ebx; topIndex
+0x790410: push    edx; holeIndex
+0x790411: push    esi; begin
+0x790412: call    OB_BranchPtrVector_PushHeapByFuzzyVolume_010201A0; MSVC heap push primitive for OB_CBranch pointer ranges. Moves parent pointers down until the new pointer fits the ordering defined by CBranch+0x2C fuzzyBranchVolume. This is part of Oblivion's std::sort expansion.
 0x790417: add     esp, 14h
 0x79041A: pop     edi
 0x79041B: pop     esi

@@ -48,7 +48,6 @@
 0x8E56B7: test    eax, eax
 0x8E56B9: jle     short loc_8E56E5
 0x8E56BB: jmp     short loc_8E56C0
-0x8E56BD: align 10h
 0x8E56C0: mov     eax, [ebp+arg_0]
 0x8E56C3: mov     ecx, [eax]
 0x8E56C5: mov     eax, [ecx+edx*4]

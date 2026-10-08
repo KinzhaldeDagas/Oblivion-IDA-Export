@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C1EE0",
-    "line": "push    ecx",
+    "line": "push    ecx; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7C1EF8",
-    "line": "mov     [esp+0Ch+var_4], eax",
+    "line": "mov     [esp+0Ch+node], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7C1F17",
-    "line": "mov     [esp+0Ch+var_4], eax",
+    "line": "mov     [esp+0Ch+node], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7C1F23",
-    "line": "mov     [esp+0Ch+var_4], eax",
+    "line": "mov     [esp+0Ch+node], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,31 +205,31 @@
   },
   {
     "ea": "0x7C1F32",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C1F37",
-    "line": "lea     ecx, [esp+0Ch+var_4]",
+    "line": "lea     ecx, [esp+0Ch+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C1F3B",
-    "line": "push    ecx",
+    "line": "push    ecx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C1F3C",
-    "line": "lea     ecx, [edi+10h]",
+    "line": "lea     ecx, [edi+10h]; list",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7C1F3F",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },

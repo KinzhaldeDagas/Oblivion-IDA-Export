@@ -10,29 +10,29 @@
 0x5B0E81: call    InterfaceManager_GetSingleton
 0x5B0E86: add     esp, 8
 0x5B0E89: mov     ebp, eax
-0x5B0E8B: call    sub_57D7A0
+0x5B0E8B: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5B0E90: fmul    qword ptr ds:0A2FAA0h
 0x5B0E96: fadd    dword ptr [ebp+20h]
-0x5B0E99: call    Double_To_SInt32
+0x5B0E99: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0E9E: mov     ecx, [esi+28h]
 0x5B0EA1: push    0FADh
 0x5B0EA6: mov     edi, eax
 0x5B0EA8: call    Tile_GetFloat
-0x5B0EAD: call    Double_To_SInt32
+0x5B0EAD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0EB2: sub     edi, eax
 0x5B0EB4: mov     [esp+28h+var_14], edi
-0x5B0EB8: call    sub_57D7F0
+0x5B0EB8: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B0EBD: fstp    [esp+28h+var_10]
-0x5B0EC1: call    sub_57D7F0
+0x5B0EC1: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B0EC6: fmul    qword ptr ds:0A2FAA0h
 0x5B0ECC: fadd    dword ptr [ebp+28h]
 0x5B0ECF: fsubr   [esp+28h+var_10]
-0x5B0ED3: call    Double_To_SInt32
+0x5B0ED3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0ED8: mov     ecx, [esi+28h]
 0x5B0EDB: push    0FACh
 0x5B0EE0: mov     ebp, eax
 0x5B0EE2: call    Tile_GetFloat
-0x5B0EE7: call    Double_To_SInt32
+0x5B0EE7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0EEC: sub     ebp, eax
 0x5B0EEE: xor     eax, eax
 0x5B0EF0: cmp     ebp, 28Ah
@@ -49,7 +49,7 @@
 0x5B0F20: fstp    dword ptr [esp+28h+var_10]
 0x5B0F24: fld     dword ptr [esp+28h+var_10]
 0x5B0F28: fld     st
-0x5B0F2A: call    Double_To_SInt32
+0x5B0F2A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0F2F: fdiv    qword ptr ds:0A3F3F0h
 0x5B0F35: cmp     byte ptr [esi+94h], 0
 0x5B0F3C: mov     [esp+28h+var_15], 0
@@ -92,10 +92,10 @@
 0x5B0FB7: fmul    st, st(2)
 0x5B0FB9: fld     st
 0x5B0FBB: fsub    st, st(3)
-0x5B0FBD: call    Double_To_SInt32
+0x5B0FBD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0FC2: cmp     edi, eax
 0x5B0FC4: jl      short loc_5B0FD1
-0x5B0FC6: call    Double_To_SInt32
+0x5B0FC6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B0FCB: cmp     edi, eax
 0x5B0FCD: jl      short loc_5B1002
 0x5B0FCF: jmp     short loc_5B0FD3
@@ -146,10 +146,10 @@
 0x5B107E: mov     eax, [esi+160h]
 0x5B1084: add     eax, 4
 0x5B1087: lea     ecx, [eax+eax*4]
-0x5B108A: mov     ecx, [esi+ecx*8]
+0x5B108A: mov     ecx, [esi+ecx*8]; this
 0x5B108D: test    ecx, ecx
 0x5B108F: jz      short loc_5B10AF
-0x5B1091: call    sub_6B7260
+0x5B1091: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5B1096: test    al, al
 0x5B1098: jnz     short loc_5B10AF
 0x5B109A: mov     eax, [esi+160h]
@@ -177,10 +177,10 @@
 0x5B10F9: mov     eax, [esi+160h]
 0x5B10FF: push    ecx
 0x5B1100: lea     ecx, [eax+eax*4]
-0x5B1103: fstp    [esp+2Ch+a2]; a3
+0x5B1103: fstp    [esp+2Ch+a2]; value
 0x5B1106: mov     ecx, [esi+ecx*8+9Ch]; this
-0x5B110D: push    0FAEh; a2
-0x5B1112: call    Tile_SetFloat
+0x5B110D: push    0FAEh; propertyCode
+0x5B1112: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B1117: mov     eax, [esi+160h]
 0x5B111D: lea     edx, [eax+eax*4]
 0x5B1120: mov     ecx, [esi+edx*8+9Ch]
@@ -203,14 +203,14 @@
 0x5B1165: add     esi, 9Ch ; 'œ'
 0x5B116B: mov     edi, 5
 0x5B1170: fld     dword ptr [esi-20h]
-0x5B1173: call    Double_To_SInt32
+0x5B1173: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B1178: mov     dword ptr [esp+28h+var_10], eax
 0x5B117C: fild    dword ptr [esp+28h+var_10]
 0x5B1180: push    ecx
 0x5B1181: mov     ecx, [esi]; this
-0x5B1183: fstp    [esp+2Ch+a2]; a3
-0x5B1186: push    0FB1h; a2
-0x5B118B: call    Tile_SetFloat
+0x5B1183: fstp    [esp+2Ch+a2]; value
+0x5B1186: push    0FB1h; propertyCode
+0x5B118B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B1190: add     esi, 28h ; '('
 0x5B1193: sub     edi, ebx
 0x5B1195: jnz     short loc_5B1170

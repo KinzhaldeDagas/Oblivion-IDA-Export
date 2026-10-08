@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x8CFAAE",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x8CFAC5",
-    "line": "or      dword ptr [esi+1F4h], 2000h",
+    "line": "or      dword ptr [esi+1F4h], 2000h; Jumping state sets controller flag 0x2000 before computing jump velocity; climb ledge impulses should avoid forcing this unless intentionally invoking vanilla jump semantics.",
     "mnemonic": "or",
     "size": 10
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x8CFAD6",
-    "line": "call    edx",
+    "line": "call    edx; Jumping fetches runtime context through vtable +0x58 before reading +0x20 up/gravity vector for launch direction.",
     "mnemonic": "call",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x8CFAEC",
-    "line": "movaps  [esp+50h+var_30], xmm0",
+    "line": "movaps  [esp+50h+var_30], xmm0; Reads runtime up/gravity basis vector from context+0x20 for jump launch math.",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x8CFAF3",
-    "line": "fld     dword ptr [esi+31Ch]",
+    "line": "fld     dword ptr [esi+31Ch]; MorrowindMovements jump correction source: Jumping state reads proxy+0x31C before computing launch velocity; pre-state hook at 0x89638D can reduce this field without replacing vanilla jump semantics.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x8CFB0B",
-    "line": "fstp    [esp+50h+var_44]",
+    "line": "fstp    [esp+50h+var_44]; Jumping velocity uses abs(proxy+0x31C) and gravity/up basis to compute sqrt(2 * jumpHeight * |gravity|).",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x8CFBDE",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x8CFBEA",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x8CFC0E",
-    "line": "mov     dword ptr [esi+2A0h], 2",
+    "line": "mov     dword ptr [esi+2A0h], 2; Jumping state writes state 2 InAir after applying upward velocity.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0x8CFC18",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },

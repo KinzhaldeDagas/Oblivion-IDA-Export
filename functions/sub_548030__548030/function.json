@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x548030",
+      "0x548094"
+    ]
+  ],
+  "chunks_sha256": "8c60bf67fc51c171668fe6fdd825c2162b8f3a1a284a0cf743b922851f9ce0fd",
+  "comment_regular": "Compute Oblivion's precomputed skill-use requirement: pow(baseSkillValue * g_fSkillUseFactor, g_fSkillUseExp), multiplied by g_fSkillUseSpecMult only for a class-specialization match, then by g_fSkillUseMajorMult for a strict major match or g_fSkillUseMinorMult for every fallback/non-major skill. With native defaults the factors are 0.5625 (major+specialized), 0.75 (major), 0.9375 (non-major+specialized), and 1.25 (non-major).",
+  "comment_repeatable": "Compute Oblivion's precomputed skill-use requirement: pow(baseSkillValue * g_fSkillUseFactor, g_fSkillUseExp), multiplied by g_fSkillUseSpecMult only for a class-specialization match, then by g_fSkillUseMajorMult for a strict major match or g_fSkillUseMinorMult for every fallback/non-major skill. With native defaults the factors are 0.5625 (major+specialized), 0.75 (major), 0.9375 (non-major+specialized), and 1.25 (non-major).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_548030",
+  "display_name": "Calc_RequiredSkillUseExperience",
   "end_ea": "0x548094",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_548030",
+  "name": "Calc_RequiredSkillUseExperience",
   "segment": ".text",
   "sha256": "8c60bf67fc51c171668fe6fdd825c2162b8f3a1a284a0cf743b922851f9ce0fd",
   "size": 100,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x548030",
-  "type": "double __cdecl(int, float, float)",
+  "total_chunk_size": 100,
+  "type": "float __cdecl(UInt32 baseSkillValue, bool matchesClassSpecialization, bool isMajorSkill)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 1
 }

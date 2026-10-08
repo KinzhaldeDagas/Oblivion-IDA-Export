@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
-  "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x474510",
+      "0x474528"
+    ]
+  ],
+  "chunks_sha256": "28ca699ccce8bad3ea4d46787da1fef1b45c4cd840b759da6b53bfe6743afa0f",
+  "comment_regular": "Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
+  "comment_repeatable": "Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_474510",
+  "display_name": "ActorAnimData_ApplyToActor",
   "end_ea": "0x474528",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_474510",
+  "name": "ActorAnimData_ApplyToActor",
   "segment": ".text",
   "sha256": "28ca699ccce8bad3ea4d46787da1fef1b45c4cd840b759da6b53bfe6743afa0f",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x474510",
+  "total_chunk_size": 24,
   "type": "void __thiscall(ActorAnimData *this, TESObjectREFR *a2)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 13

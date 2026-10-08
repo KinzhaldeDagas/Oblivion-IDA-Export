@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E4E00",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified shared LAND/PathGrid group constructor: from a matching exterior/interior CELL sub-block group type 3/5, emits CELL children group type 6 labelled with parent CELL FormID; from matching type 6, emits temporary children group type 9 with the same CELL label. This nests PGRD records under CELL temporary children.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4E4E02",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+out_group_header]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4E4E0F",
-    "line": "mov     edi, [esp+0Ch+arg_4]",
+    "line": "mov     edi, [esp+0Ch+current_group_header]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4E4E1F",
-    "line": "mov     ecx, [edx+20h]",
+    "line": "mov     ecx, [edx+20h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4E4E3E",
-    "line": "mov     dword ptr [esi+0Ch], 9",
+    "line": "mov     dword ptr [esi+0Ch], 9; From the owning CELL children group type 6, emit temporary children group type 9 labelled with the same CELL FormID; LAND/PGRD records are direct children of this group.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4E4E5B",
-    "line": "call    sub_4CA640",
+    "line": "call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4E4E6C",
-    "line": "mov     dword ptr [esi+0Ch], 6",
+    "line": "mov     dword ptr [esi+0Ch], 6; From a matching interior/exterior cell sub-block group (type 3 or 5), emit CELL children group type 6 labelled with the owning CELL FormID.",
     "mnemonic": "mov",
     "size": 7
   },

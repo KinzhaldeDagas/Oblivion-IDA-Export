@@ -1,1 +1,1 @@
-SFGAOF
+typedef ULONG SFGAOF;

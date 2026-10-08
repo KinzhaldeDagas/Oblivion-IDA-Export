@@ -1,1 +1,20 @@
-Time::$21E8F939BF4E043E9FD12279A85C0027
+enum Time::$21E8F939BF4E043E9FD12279A85C0027 : __int32
+{
+kMonth_January = 0x0,
+kMonth_February = 0x1,
+kMonth_March = 0x2,
+kMonth_April = 0x3,
+kMonth_May = 0x4,
+kMonth_June = 0x5,
+kMonth_July = 0x6,
+kMonth_August = 0x7,
+kMonth_September = 0x8,
+kMonth_October = 0x9,
+kMonth_November = 0xA,
+kMonth_December = 0xB,
+kMonth_Spring = 0xC,
+kMonth_Summer = 0xD,
+kMonth_Fall = 0xE,
+kMonth_Winter = 0xF,
+kMonth_Any = 0xFF,
+};

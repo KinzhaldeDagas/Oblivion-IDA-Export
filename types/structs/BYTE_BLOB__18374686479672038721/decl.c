@@ -1,1 +1,1 @@
-BYTE_BLOB
+typedef _BYTE_BLOB BYTE_BLOB;

@@ -1,4 +1,4 @@
-BSStringT *sub_A11280()
+NiRTTI *sub_A11280()
 {
-  return sub_70E220((BSStringT *)dword_B4335C, "SkyShaderProperty", (int)dword_B46000);
+  return NiRTTI_Constructor(&stru_B4335C, "SkyShaderProperty", (NiRTTI *)&OB_ShaderConstantStorage_010201A0[0x7B]); /*0xa11294*/
 }

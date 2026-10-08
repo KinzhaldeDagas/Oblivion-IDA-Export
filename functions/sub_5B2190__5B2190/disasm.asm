@@ -16,7 +16,7 @@
 0x5B21B7: fld     [esp+4+arg_0]
 0x5B21BB: fstp    [esp+4+arg_0]
 0x5B21BF: fld     [esp+4+arg_0]
-0x5B21C3: call    Double_To_SInt32
+0x5B21C3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B21C8: mov     [esi+4], eax
 0x5B21CB: mov     eax, esi
 0x5B21CD: pop     esi
@@ -24,7 +24,7 @@
 0x5B21D1: fld     dword ptr ds:0A30634h
 0x5B21D7: fstp    [esp+4+arg_0]
 0x5B21DB: fld     [esp+4+arg_0]
-0x5B21DF: call    Double_To_SInt32
+0x5B21DF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B21E4: mov     [esi+4], eax
 0x5B21E7: mov     eax, esi
 0x5B21E9: pop     esi

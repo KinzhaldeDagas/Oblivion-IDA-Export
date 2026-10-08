@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x402752",
-    "line": "cmp     g_HeapPoolsBySize[esi], 0",
+    "line": "cmp     dword ptr [esi+0B33080h], 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x40276A",
-    "line": "mov     ecx, g_HeapPoolsBySize[esi]",
+    "line": "mov     ecx, [esi+0B33080h]",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x402770",
-    "line": "call    sub_402640",
+    "line": "call    MemoryPool_FreeUnusedPages; Scans one MemoryPool for empty 4 KiB pages, unlinks each page's entries from its free list, VirtualFree's the page, and clears page metadata.",
     "mnemonic": "call",
     "size": 5
   },

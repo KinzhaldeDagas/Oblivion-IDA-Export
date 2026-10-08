@@ -1,1 +1,1 @@
-PCtxtHandle
+typedef PSecHandle PCtxtHandle;

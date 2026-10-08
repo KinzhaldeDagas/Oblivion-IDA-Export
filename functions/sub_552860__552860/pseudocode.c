@@ -1,5 +1,10 @@
-void *__thiscall sub_552860(void *this)
+char *__thiscall sub_552860(char *this)
 {
-  ArrayConstructor(this, 0x18u, 2, (int)sub_43EB30, (void (__thiscall *)(void *))sub_43ACE0);
-  return this;
+  ArrayConstructor( /*0x552872*/
+    this,
+    0x18u,
+    2,
+    (void (__thiscall *)(char *))FaceGenMatrix_Construct,
+    (void (__thiscall *)(void *))FaceGenMatrix_Destruct);
+  return this; /*0x552879*/
 }

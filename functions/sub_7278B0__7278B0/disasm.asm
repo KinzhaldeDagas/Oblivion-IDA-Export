@@ -72,7 +72,6 @@
 0x72797C: jbe     loc_727A23
 0x727982: mov     [esp+14h+a2], ebx
 0x727986: jmp     short loc_727990
-0x727988: align 10h
 0x727990: push    ebx; int
 0x727991: push    offset aDatastreamInde; "    DataStream Index"
 0x727996: call    TESOutput_PrintLabeledUnsignedInt

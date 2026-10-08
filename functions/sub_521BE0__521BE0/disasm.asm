@@ -51,7 +51,6 @@
 0x521C66: mov     [esi+4], eax
 0x521C69: jbe     short loc_521C9D
 0x521C6B: jmp     short loc_521C70
-0x521C6D: align 10h
 0x521C70: mov     edx, [esi+4]
 0x521C73: movzx   eax, cx
 0x521C76: add     eax, eax
@@ -62,7 +61,7 @@
 0x521C83: cmp     cx, [esi+0Ah]
 0x521C87: jb      short loc_521C70
 0x521C89: push    edi
-0x521C8A: call    FormHeapFree
+0x521C8A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x521C8F: add     esp, 4
 0x521C92: pop     edi
 0x521C93: pop     ebx
@@ -70,7 +69,7 @@
 0x521C95: retn
 0x521C96: mov     dword ptr [esi+4], 0
 0x521C9D: push    edi
-0x521C9E: call    FormHeapFree
+0x521C9E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x521CA3: add     esp, 4
 0x521CA6: pop     edi
 0x521CA7: pop     ebx

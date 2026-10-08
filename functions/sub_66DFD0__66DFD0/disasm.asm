@@ -1,4 +1,4 @@
-0x66DFD0: push    ecx
+0x66DFD0: push    ecx; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Attack control 4 held/pressed/released controls grabbed-object attack/manipulation.
 0x66DFD1: push    esi
 0x66DFD2: mov     esi, ecx
 0x66DFD4: cmp     dword ptr [esi+57Ch], 2
@@ -26,19 +26,19 @@
 0x66E028: push    2; a3
 0x66E02A: push    4; a2
 0x66E02C: mov     ecx, edi; this
-0x66E02E: call    InputGlobals__QueryControlState
+0x66E02E: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x66E033: test    eax, eax
 0x66E035: jnz     short loc_66E075
 0x66E037: push    1; a3
 0x66E039: push    4; a2
 0x66E03B: mov     ecx, edi; this
-0x66E03D: call    InputGlobals__QueryControlState
+0x66E03D: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x66E042: test    eax, eax
 0x66E044: jnz     short loc_66E054
 0x66E046: push    eax; a3
 0x66E047: push    4; a2
 0x66E049: mov     ecx, edi; this
-0x66E04B: call    InputGlobals__QueryControlState
+0x66E04B: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x66E050: test    eax, eax
 0x66E052: jz      short loc_66E075
 0x66E054: fld     [esp+0Ch+arg_0]

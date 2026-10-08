@@ -1,1 +1,5 @@
-_CONTEXT_CHUNK
+struct _CONTEXT_CHUNK
+{
+LONG Offset;
+ULONG Length;
+};

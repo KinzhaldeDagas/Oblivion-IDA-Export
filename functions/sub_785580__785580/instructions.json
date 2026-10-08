@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785580",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned int>, covering self, empty, capacity-reuse, and reallocation paths. CIndexedGeometry::CombineStrips uses it for per-LOD triangle totals.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x785582",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7855A5",
-    "line": "call    sub_784A70",
+    "line": "call    OB_stVector4_Clear_010201A0; OBLIVION AUTHORITY (2026-08-30): clear() wrapper for a trivial 4-byte-element vector; validates begin/end and erases the full range while retaining capacity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x7855CA",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7855CB",
-    "line": "push    ebp; int",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7855CC",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7855CD",
-    "line": "call    sub_790420",
+    "line": "call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x785630",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -493,19 +493,19 @@
   },
   {
     "ea": "0x785634",
-    "line": "push    ebx; int",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785635",
-    "line": "push    edx; Src",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785636",
-    "line": "call    sub_790420",
+    "line": "call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x785644",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785645",
-    "line": "push    eax; int",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785646",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x785649",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x78565F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x78567A",
-    "line": "push    eax",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78567B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78567D",
-    "line": "call    sub_795000",
+    "line": "call    OB_stVectorUInt32_Buy_010201A0; OBLIVION AUTHORITY (2026-08-30): Initializes raw storage for a 4-byte-element vector used here by CIndexedGeometry triangle counts/colors. Resets the triplet, checks max_size, allocates count*4, and returns success.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,19 +727,19 @@
   },
   {
     "ea": "0x78568F",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785690",
-    "line": "push    edx; int",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785691",
-    "line": "push    eax; Src",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x785694",
-    "line": "call    sub_7A25C0",
+    "line": "call    OB_stVector4_UninitializedCopyRange_010201A0",
     "mnemonic": "call",
     "size": 5
   },

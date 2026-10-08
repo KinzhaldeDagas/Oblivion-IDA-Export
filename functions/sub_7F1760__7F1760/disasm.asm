@@ -1,4 +1,4 @@
-0x7F1760: sub     esp, 40h
+0x7F1760: sub     esp, 40h; Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.
 0x7F1763: push    edi
 0x7F1764: mov     edi, [esp+44h+arg_0]
 0x7F1768: cmp     edi, 4
@@ -41,7 +41,7 @@
 0x7F17E0: push    edx
 0x7F17E1: call    D3DXMatrixTranspose_0
 0x7F17E6: shl     edi, 6
-0x7F17E9: add     edi, offset WindMatrixes
+0x7F17E9: add     edi, (offset flt_B46638+180h)
 0x7F17EF: mov     ecx, 10h
 0x7F17F4: lea     esi, [esp+48h+var_40]
 0x7F17F8: rep movsd

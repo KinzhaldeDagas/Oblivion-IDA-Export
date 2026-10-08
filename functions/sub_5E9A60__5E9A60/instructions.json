@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x5E9B28",
-    "line": "lea     edx, [esp+50h+var_34]",
+    "line": "lea     edx, [esp+50h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x5E9B76",
-    "line": "lea     ecx, [esp+50h+var_34]; this",
+    "line": "lea     ecx, [esp+50h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x5E9B7E",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5E9B8F",
-    "line": "lea     ecx, [esp+50h+var_30]; this",
+    "line": "lea     ecx, [esp+50h+var_30]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x5E9B96",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x5E9BD9",
-    "line": "fstp    [esp+50h+var_34]",
+    "line": "fstp    [esp+50h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x5E9BF0",
-    "line": "fld     [esp+50h+var_34]",
+    "line": "fld     [esp+50h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x5E9C00",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x5E9C3F",
-    "line": "fstp    [esp+50h+var_34]",
+    "line": "fstp    [esp+50h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x5E9C5B",
-    "line": "fld     [esp+50h+var_34]",
+    "line": "fld     [esp+50h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x5E9CFE",
-    "line": "lea     ecx, [esp+50h+var_2C]; this",
+    "line": "lea     ecx, [esp+50h+var_2C]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x5E9D06",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,13 +1261,13 @@
   },
   {
     "ea": "0x5E9D14",
-    "line": "lea     ecx, [esp+50h+var_28]; this",
+    "line": "lea     ecx, [esp+50h+var_28]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5E9D18",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1342,5 +1342,215 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2620",
+    "line": "mov     eax, [ebp-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2623",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2626",
+    "line": "jz      locret_9C2638",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C262C",
+    "line": "and     dword ptr [ebp-38h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2630",
+    "line": "lea     ecx, [ebp-30h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2633",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2638",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2639",
+    "line": "mov     eax, [ebp-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C263C",
+    "line": "and     eax, 2",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C263F",
+    "line": "jz      locret_9C2651",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2645",
+    "line": "and     dword ptr [ebp-38h], 0FFFFFFFDh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2649",
+    "line": "lea     ecx, [ebp-34h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C264C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2651",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2652",
+    "line": "mov     eax, [ebp-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2655",
+    "line": "and     eax, 4",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2658",
+    "line": "jz      locret_9C266A",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C265E",
+    "line": "and     dword ptr [ebp-38h], 0FFFFFFFBh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2662",
+    "line": "lea     ecx, [ebp-28h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2665",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C266A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C266B",
+    "line": "mov     eax, [ebp-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C266E",
+    "line": "and     eax, 8",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2671",
+    "line": "jz      locret_9C2683",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2677",
+    "line": "and     dword ptr [ebp-38h], 0FFFFFFF7h",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C267B",
+    "line": "lea     ecx, [ebp-2Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C267E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2683",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2684",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2688",
+    "line": "lea     eax, [edx-40h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C268B",
+    "line": "mov     ecx, [edx-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C268E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2690",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2695",
+    "line": "mov     eax, offset stru_AEB4F0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C269A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -10,7 +10,6 @@
 0x8B1620: mov     esi, ebx
 0x8B1622: jz      short loc_8B1654
 0x8B1624: jmp     short loc_8B1630
-0x8B1626: align 10h
 0x8B1630: cmp     esi, 200h
 0x8B1636: mov     eax, 200h
 0x8B163B: jg      short loc_8B163F

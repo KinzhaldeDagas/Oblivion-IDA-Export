@@ -12,7 +12,7 @@
 0x5F3F3D: call    eax
 0x5F3F3F: mov     ecx, eax
 0x5F3F41: add     ecx, 0Ch
-0x5F3F44: call    EffectItemList_HasOnTarget
+0x5F3F44: call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x5F3F49: test    al, al
 0x5F3F4B: jz      short loc_5F3F54
 0x5F3F4D: mov     ebx, 24h ; '$'

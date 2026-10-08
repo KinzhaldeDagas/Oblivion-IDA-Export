@@ -4,7 +4,7 @@
 0x482038: mov     dword ptr [esi], offset ??_7GridArray@@6B@; const GridArray::`vftable'
 0x48203E: jz      short loc_482049
 0x482040: push    esi
-0x482041: call    FormHeapFree
+0x482041: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x482046: add     esp, 4
 0x482049: mov     eax, esi
 0x48204B: pop     esi

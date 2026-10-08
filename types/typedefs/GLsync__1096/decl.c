@@ -1,1 +1,1 @@
-__GLsync
+struct __GLsync;

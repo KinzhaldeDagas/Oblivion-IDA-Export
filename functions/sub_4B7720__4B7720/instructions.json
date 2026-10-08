@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4B772E",
-    "line": "call    GetExtraDataFollower",
+    "line": "call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x4B7806",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4B7810",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x4B7895",
-    "line": "call    sub_424D00",
+    "line": "call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x4B78A3",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x4B78A9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x4B78D1",
-    "line": "jmp     sub_420F00",
+    "line": "jmp     ExtraDataList_RemoveFollowerExtra; Removes ExtraFollower (type 0x23) when present.",
     "mnemonic": "jmp",
     "size": 5
   },

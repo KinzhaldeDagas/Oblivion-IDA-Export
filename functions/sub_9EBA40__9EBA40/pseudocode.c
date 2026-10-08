@@ -1,5 +1,6 @@
-int sub_9EBA40()
+// Initializes Oblivion iLevelUp08Mult; native default 4.
+int InitSetting_iLevelUp08Mult()
 {
-  GameSetting_ConstrAndReg((int *)&iLevelUp08Mult, (int)"iLevelUp08Mult", 4);
-  return atexit(sub_A1F3D0);
+  GameSetting_ConstrAndReg(&g_iLevelUp07Mult[2], (int)"iLevelUp08Mult", 4); /*0x9eba4c*/
+  return atexit(sub_A1F3D0); /*0x9eba5c*/
 }

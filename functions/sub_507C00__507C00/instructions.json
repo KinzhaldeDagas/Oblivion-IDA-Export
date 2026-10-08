@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x507C00",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+arg_8]; [Controller decode 2026-07-09] ToggleCharControllerShape execute callback. Requires actor target and toggles Havok character-controller shape type.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x507C25",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x507C40",
-    "line": "call    sub_894940",
+    "line": "call    bhkCharacterController_SetShapeType",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x507C52",
-    "line": "call    sub_894940",
+    "line": "call    bhkCharacterController_SetShapeType",
     "mnemonic": "call",
     "size": 5
   },

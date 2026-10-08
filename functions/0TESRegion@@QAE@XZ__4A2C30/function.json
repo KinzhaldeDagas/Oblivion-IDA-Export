@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "TESRegion::TESRegion(void)",
+  "chunks": [
+    [
+      "0x4A2C30",
+      "0x4A2CD8"
+    ],
+    [
+      "0x9B2650",
+      "0x9B267E"
+    ]
+  ],
+  "chunks_sha256": "967ec0e43146211974784c3dfd956b129e821eecb85ff187aaa9ca21122b89e4",
+  "comment_regular": "Verified: constructs TESRegion (FormType 0x2F), allocates owned 12-byte TESRegionDataList at +0x18 (ownsData=1), allocates 8-byte region-area list head at +0x1C, zeros worldspace +0x20 and cached weather +0x24, initializes float +0x28 to flt_A30634.",
+  "comment_repeatable": "Verified: constructs TESRegion (FormType 0x2F), allocates owned 12-byte TESRegionDataList at +0x18 (ownsData=1), allocates 8-byte region-area list head at +0x1C, zeros worldspace +0x20 and cached weather +0x24, initializes float +0x28 to flt_A30634.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESRegion_ctor",
   "end_ea": "0x4A2CD8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0TESRegion@@QAE@XZ",
+  "name": "TESRegion_ctor",
   "segment": ".text",
   "sha256": "84809b64297ddd4d2e275f75fcb48195b1bcdf055de2cb11c810b6938cd31b47",
   "size": 168,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A2C30",
-  "type": "TESRegion *__thiscall(TESRegion *__hidden this)",
-  "xrefs_from_count": 62,
+  "total_chunk_size": 214,
+  "type": "TESRegion *__thiscall(TESRegion *this)",
+  "xrefs_from_count": 78,
   "xrefs_to_count": 2
 }

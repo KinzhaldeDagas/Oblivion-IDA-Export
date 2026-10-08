@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x7C39AB",
-    "line": "mov     [esp+0Ch+var_8], eax",
+    "line": "mov     [esp+0Ch+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C39AF",
-    "line": "mov     [esp+0Ch+var_C], 0",
+    "line": "mov     [esp+0Ch+valueOut], 0",
     "mnemonic": "mov",
     "size": 7
   },
@@ -145,55 +145,55 @@
   },
   {
     "ea": "0x7C39D0",
-    "line": "lea     eax, [esp+1Ch+var_C]",
+    "line": "lea     eax, [esp+1Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C39D4",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C39D5",
-    "line": "lea     ecx, [esp+20h+var_4]",
+    "line": "lea     ecx, [esp+20h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C39D9",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C39DA",
-    "line": "lea     edx, [esp+24h+var_8]",
+    "line": "lea     edx, [esp+24h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C39DE",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C39DF",
-    "line": "mov     ecx, offset off_B2CBC4",
+    "line": "mov     ecx, offset stru_B2CBC4; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7C39E4",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C39E9",
-    "line": "mov     ebx, [esp+1Ch+var_C]",
+    "line": "mov     ebx, [esp+1Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x7C3A28",
-    "line": "mov     [esp+1Ch+var_4], esi",
+    "line": "mov     [esp+1Ch+keyOut], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,25 +379,25 @@
   },
   {
     "ea": "0x7C3A3C",
-    "line": "lea     eax, [esp+1Ch+var_4]",
+    "line": "lea     eax, [esp+1Ch+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C3A40",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C3A41",
-    "line": "lea     ecx, [ebx+20h]",
+    "line": "lea     ecx, [ebx+20h]; list",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7C3A44",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7C3A51",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x7C3A69",
-    "line": "lea     ecx, [ebx+34h]",
+    "line": "lea     ecx, [ebx+34h]; list",
     "mnemonic": "lea",
     "size": 3
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7C3A84",
-    "line": "mov     [esp+1Ch+var_4], esi",
+    "line": "mov     [esp+1Ch+keyOut], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -547,25 +547,25 @@
   },
   {
     "ea": "0x7C3A8A",
-    "line": "lea     edx, [esp+1Ch+var_4]",
+    "line": "lea     edx, [esp+1Ch+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C3A8E",
-    "line": "push    edx",
+    "line": "push    edx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C3A8F",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C3A94",
-    "line": "cmp     [esp+1Ch+var_8], 0",
+    "line": "cmp     [esp+1Ch+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

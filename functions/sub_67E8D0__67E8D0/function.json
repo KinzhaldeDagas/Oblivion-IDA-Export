@@ -1,19 +1,36 @@
 {
-  "callees_count": 54,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 31,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_67E8D0",
+  "chunks": [
+    [
+      "0x67E8D0",
+      "0x67EB58"
+    ],
+    [
+      "0x9C4A90",
+      "0x9C4AB3"
+    ]
+  ],
+  "chunks_sha256": "734f42bafa57e1bf5988a1122ca87ab024043dae6350853426a0bc072a045e3f",
+  "comment_regular": "Verified actor-aware A* over graph-node adjacency. It uses TESConnectedPoint_ComputeActorAwareEdgeCost, skips candidates whose PathGrid linkedPointsDisabled bit 0x20 is set, and applies an additional actor-specific path filter. Its pathgrid caller selects a reachable point for actor movement.",
+  "comment_repeatable": "Verified actor-aware A* over graph-node adjacency. It uses TESConnectedPoint_ComputeActorAwareEdgeCost, skips candidates whose PathGrid linkedPointsDisabled bit 0x20 is set, and applies an additional actor-specific path filter. Its pathgrid caller selects a reachable point for actor movement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "ConnectedPointGraph_FindActorAwarePath",
   "end_ea": "0x67EB58",
+  "evidence_confidence": "Unknown",
   "flags": 22544,
   "has_pseudocode": true,
-  "name": "sub_67E8D0",
+  "name": "ConnectedPointGraph_FindActorAwarePath",
   "segment": ".text",
   "sha256": "4d91f65a91298749bf3416d77456314428f50fe56c9e961a17ffcaa85f5a3c53",
   "size": 648,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67E8D0",
-  "type": "char __thiscall(int *this, TESObjectREFR *)",
-  "xrefs_from_count": 249,
+  "total_chunk_size": 683,
+  "type": "bool __thiscall(void *searchContext, TESObjectREFR *actor)",
+  "xrefs_from_count": 264,
   "xrefs_to_count": 1
 }

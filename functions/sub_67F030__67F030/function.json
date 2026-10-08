@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x67F030",
+      "0x67F095"
+    ]
+  ],
+  "chunks_sha256": "03bb6e97a40265c3c98d6edcbb31c90e6dd9446aef6301ade583743dca64eed8",
+  "comment_regular": "Verified Oblivion AStarNodeList pop scans from start through each node's next link, compares F cost at graph-node+0, unlinks the lowest-F entry, and returns the generic graph-node pointer. Fallout's inspected NavMesh AStarQueue instead selects the first nonempty F bucket among 20.",
+  "comment_repeatable": "Verified Oblivion AStarNodeList pop scans from start through each node's next link, compares F cost at graph-node+0, unlinks the lowest-F entry, and returns the generic graph-node pointer. Fallout's inspected NavMesh AStarQueue instead selects the first nonempty F bucket among 20.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67F030",
+  "display_name": "AStarNodeList_PopLowestTotalEstimateCost",
   "end_ea": "0x67F095",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67F030",
+  "name": "AStarNodeList_PopLowestTotalEstimateCost",
   "segment": ".text",
   "sha256": "03bb6e97a40265c3c98d6edcbb31c90e6dd9446aef6301ade583743dca64eed8",
   "size": 101,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67F030",
-  "type": "void *__thiscall(BSTextureManager *this)",
+  "total_chunk_size": 101,
+  "type": "void *__thiscall(AStarNodeList *this)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 4
 }

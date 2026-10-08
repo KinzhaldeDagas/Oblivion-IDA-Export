@@ -16,7 +16,6 @@
 0x8CBF12: mov     ebp, [esp+58h+arg_8]
 0x8CBF16: push    esi
 0x8CBF17: jmp     short loc_8CBF20
-0x8CBF19: align 10h
 0x8CBF20: mov     edx, [eax+0B8h]
 0x8CBF26: mov     esi, [edx+ebx*4]
 0x8CBF29: test    esi, esi
@@ -31,7 +30,6 @@
 0x8CBF43: test    edx, edx
 0x8CBF45: jle     short loc_8CBF6F
 0x8CBF47: jmp     short loc_8CBF50
-0x8CBF49: align 10h
 0x8CBF50: mov     eax, [esp+5Ch+var_4C]
 0x8CBF54: mov     eax, [eax+ecx*4]
 0x8CBF57: cmp     byte ptr [eax+91h], 0

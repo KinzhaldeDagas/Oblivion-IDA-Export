@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4ED430",
+      "0x4ED559"
+    ]
+  ],
+  "chunks_sha256": "d0544d483bab56e973c892e0f3fb167ecf0a753875e7d551328442ab79627e23",
+  "comment_regular": "Verified per-frame terrain-quad state machine: outside maximumLODQuadDistance advances detach/unload; in range, Unloaded/Loading quads without geometry request a NIF, LoadedDetached/UnloadPending quads attach under LandLOD and become Attached, while Attached quads are stable. State meanings for 1..5 are written in TerrainLODQuadState_Oblivion; values 0 and 6 are Unknown.",
+  "comment_repeatable": "Verified per-frame terrain-quad state machine: outside maximumLODQuadDistance advances detach/unload; in range, Unloaded/Loading quads without geometry request a NIF, LoadedDetached/UnloadPending quads attach under LandLOD and become Attached, while Attached quads are stable. State meanings for 1..5 are written in TerrainLODQuadState_Oblivion; values 0 and 6 are Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4ED430",
+  "display_name": "TESTerrainLODQuad_Update",
   "end_ea": "0x4ED559",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ED430",
+  "name": "TESTerrainLODQuad_Update",
   "segment": ".text",
   "sha256": "d0544d483bab56e973c892e0f3fb167ecf0a753875e7d551328442ab79627e23",
   "size": 297,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ED430",
-  "type": "int __thiscall(float *this, volatile LONG *, float, float, float, int)",
+  "total_chunk_size": 297,
+  "type": "int __thiscall(TESTerrainLODQuad_OblivionComplete_060 *this, NiNode *landLODParent, float maximumLODQuadDistance, float viewX, float viewY, int unknownArg)",
   "xrefs_from_count": 117,
   "xrefs_to_count": 1
 }

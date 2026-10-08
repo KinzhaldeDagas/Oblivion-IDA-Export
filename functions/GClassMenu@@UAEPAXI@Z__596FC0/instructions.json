@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x596FC3",
-    "line": "call    ??1ClassMenu@@UAE@XZ; ClassMenu::~ClassMenu(void)",
+    "line": "call    ??1ClassMenu@@UAE@XZ; ClassMenu destruction boundary. Sidecar staged custom-class selections are menu-lifetime state and must be discarded here (as well as on back/cancel) without committing them; a wrapper must preserve the caller's integer and x87 state before tail-calling the relocated prologue.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x596FD0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

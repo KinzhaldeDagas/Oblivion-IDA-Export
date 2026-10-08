@@ -11,7 +11,7 @@
 0x88F3F2: fstp    [esp+13Ch+var_120]
 0x88F3F6: push    edi
 0x88F3F7: mov     ebx, ecx
-0x88F3F9: call    sub_452A60
+0x88F3F9: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x88F3FE: fldz
 0x88F400: fcom    dword ptr [ebx+14h]
 0x88F403: mov     cl, [ebx+0Dh]
@@ -64,10 +64,10 @@
 0x88F49E: jmp     short loc_88F4BC
 0x88F4A0: test    edi, edi
 0x88F4A2: jz      short loc_88F4BC
-0x88F4A4: push    offset stru_BA7A40
+0x88F4A4: push    offset unk_BA7A40
 0x88F4A9: mov     ecx, edi
 0x88F4AB: call    sub_4D6AF0
-0x88F4B0: push    offset stru_BA7A40
+0x88F4B0: push    offset unk_BA7A40
 0x88F4B5: mov     ecx, edi
 0x88F4B7: call    sub_4D6B30
 0x88F4BC: push    edi
@@ -151,7 +151,7 @@
 0x88F5D4: movaps  xmmword ptr [esp+14Ch+var_C8+8], xmm1
 0x88F5DC: call    sub_8B1C60
 0x88F5E1: lea     ecx, [esp+140h+var_D0]
-0x88F5E5: call    sub_4D6830
+0x88F5E5: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
 0x88F5EA: cmp     [esp+140h+var_125], 0
 0x88F5EF: lea     eax, [esp+140h+var_C8+8]
 0x88F5F6: jnz     short loc_88F5FC
@@ -161,7 +161,7 @@
 0x88F603: push    edx
 0x88F604: lea     ecx, [esp+144h+var_80]
 0x88F60B: movaps  xmmword ptr [esp+144h+var_58+8], xmm0
-0x88F613: call    sub_8B1DD0
+0x88F613: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x88F618: lea     eax, [esp+140h+var_80]
 0x88F61F: push    eax
 0x88F620: lea     ecx, [esp+144h+var_114]
@@ -171,7 +171,7 @@
 0x88F631: push    edx
 0x88F632: lea     eax, [esp+14Ch+var_F0]
 0x88F636: push    eax
-0x88F637: call    sub_43F3E0
+0x88F637: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x88F63C: add     esp, 10h
 0x88F63F: cmp     dword ptr ds:0BA7A8Ch, 0
 0x88F646: jnz     short loc_88F656

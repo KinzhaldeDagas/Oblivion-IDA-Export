@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x535E06",
-    "line": "mov     eax, offset dword_B36594",
+    "line": "mov     eax, (offset dword_B36590+4)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -106,12 +106,6 @@
     "line": "jmp     short loc_535E10",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x535E0D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x535E10",
@@ -241,7 +235,7 @@
   },
   {
     "ea": "0x535E43",
-    "line": "call    sub_47FAC0",
+    "line": "call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +319,7 @@
   },
   {
     "ea": "0x535E7C",
-    "line": "call    sub_8B1DD0",
+    "line": "call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x535FE3",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -913,7 +907,7 @@
   },
   {
     "ea": "0x535FFC",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +973,7 @@
   },
   {
     "ea": "0x53601B",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,7 +1021,7 @@
   },
   {
     "ea": "0x536038",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x536041",
-    "line": "mov     ecx, offset dword_B36594",
+    "line": "mov     ecx, (offset dword_B36590+4)",
     "mnemonic": "mov",
     "size": 5
   },

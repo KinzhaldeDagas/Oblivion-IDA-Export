@@ -1,4 +1,5 @@
-void __thiscall sub_6FFE90(Ni2DBuffer **this, Ni2DBuffer *a2)
+// Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
+void __thiscall NiObjectNET_RemoveController(Ni2DBuffer **this, Ni2DBuffer *a2)
 {
   Ni2DBuffer *v2; // esi
   Ni2DBuffer *v3; // edi
@@ -8,50 +9,50 @@ void __thiscall sub_6FFE90(Ni2DBuffer **this, Ni2DBuffer *a2)
   Ni2DBuffer *v7; // eax
   UInt32 v8; // edi
 
-  v2 = a2;
-  if ( a2 )
+  v2 = a2; /*0x6ffeb4*/
+  if ( a2 ) /*0x6ffeba*/
   {
-    v3 = *(this + 3);
-    v4 = this + 3;
-    if ( v3 )
+    v3 = *(this + 3); /*0x6ffec0*/
+    v4 = this + 3; /*0x6ffec5*/
+    if ( v3 ) /*0x6ffec8*/
     {
-      if ( v3 == a2 )
+      if ( v3 == a2 ) /*0x6ffed0*/
       {
-        InterlockedIncrement((volatile LONG *)&a2->members);
-        NiSmartPointer_Set__(v4, (Ni2DBuffer *)v2[2].members.height);
-        height = v2[2].members.height;
-        v6 = InterlockedDecrement;
-        if ( height )
+        InterlockedIncrement((volatile LONG *)&a2->members); /*0x6ffeda*/
+        NiSmartPointer_Set__(v4, (Ni2DBuffer *)v2[2].members.height); /*0x6ffeee*/
+        height = v2[2].members.height; /*0x6ffef3*/
+        v6 = InterlockedDecrement; /*0x6ffef8*/
+        if ( height ) /*0x6ffefe*/
         {
-          if ( !v6((volatile LONG *)(height + 4)) )
-            (**(void (__thiscall ***)(UInt32, int))height)(height, 1);
-          v2[2].members.height = 0;
+          if ( !v6((volatile LONG *)(height + 4)) ) /*0x6fff04*/
+            (**(void (__thiscall ***)(UInt32, int))height)(height, 1); /*0x6fff16*/
+          v2[2].members.height = 0; /*0x6fff18*/
         }
-        if ( !v6((volatile LONG *)&v2->members) )
-          (*(void (__thiscall **)(Ni2DBuffer *, int))v2->__vftable)(v2, 1);
+        if ( !v6((volatile LONG *)&v2->members) ) /*0x6fff28*/
+          (*(void (__thiscall **)(Ni2DBuffer *, int))v2->__vftable)(v2, 1); /*0x6fff3a*/
       }
       else
       {
-        v7 = (Ni2DBuffer *)v3[2].members.height;
-        if ( v7 )
+        v7 = (Ni2DBuffer *)v3[2].members.height; /*0x6fff3e*/
+        if ( v7 ) /*0x6fff43*/
         {
-          while ( v7 != a2 )
+          while ( v7 != a2 ) /*0x6fff47*/
           {
-            v3 = v7;
-            v7 = (Ni2DBuffer *)v7[2].members.height;
-            if ( !v7 )
-              return;
+            v3 = v7; /*0x6fff49*/
+            v7 = (Ni2DBuffer *)v7[2].members.height; /*0x6fff4b*/
+            if ( !v7 ) /*0x6fff50*/
+              return; /*0x6fff50*/
           }
-          InterlockedIncrement((volatile LONG *)&a2->members);
-          sub_6C61E0(v3, v2[2].members.height);
-          v8 = v2[2].members.height;
-          if ( v8 )
+          InterlockedIncrement((volatile LONG *)&a2->members); /*0x6fff60*/
+          sub_6C61E0(v3, v2[2].members.height); /*0x6fff74*/
+          v8 = v2[2].members.height; /*0x6fff79*/
+          if ( v8 ) /*0x6fff7e*/
           {
-            if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) )
-              (**(void (__thiscall ***)(UInt32, int))v8)(v8, 1);
-            v2[2].members.height = 0;
+            if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) ) /*0x6fff84*/
+              (**(void (__thiscall ***)(UInt32, int))v8)(v8, 1); /*0x6fff9a*/
+            v2[2].members.height = 0; /*0x6fff9c*/
           }
-          sub_7016A0((NiD3DVertexShader *)&a2);
+          NiPointerSlot_Release((NiD3DVertexShader *)&a2); /*0x6fffaf*/
         }
       }
     }

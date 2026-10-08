@@ -1,29 +1,31 @@
-_DWORD *__thiscall sub_452C90(_DWORD *this, _DWORD *a2, int a3)
+//
+// Verified: lookup/create 8-byte entry and replace flags at +0 without altering existing +4 buffer. LoadGame callers 46665C/46683D. Probable homolog: Fallout 825EDD18.
+OblivionChangeData *__thiscall ChangesMap_SetChangeFlags(ChangesMap *self, unsigned int formID, unsigned int flags)
 {
-  _DWORD *v3; // ebx
-  _DWORD *v5; // eax
-  _DWORD *v6; // esi
-  _DWORD *result; // eax
+  unsigned int v3; // ebx
+  OblivionChangeData *v5; // eax
+  OblivionChangeData *v6; // esi
+  OblivionChangeData *result; // eax
 
-  v3 = a2;
-  if ( NiTMap_GetAt(this, (int)a2, &a2) )
+  v3 = formID; /*0x452c91*/
+  if ( NiTMap_GetAt(self, formID, &formID) ) /*0x452c9e*/
   {
-    result = a2;
-    *a2 = a3;
+    result = (OblivionChangeData *)formID; /*0x452cd6*/
+    *(_DWORD *)formID = flags; /*0x452cdf*/
   }
   else
   {
-    v5 = (_DWORD *)FormHeapAlloc(8u);
-    v6 = 0;
-    if ( v5 )
+    v5 = (OblivionChangeData *)FormHeapAlloc(8u); /*0x452caa*/
+    v6 = 0; /*0x452caf*/
+    if ( v5 ) /*0x452cb6*/
     {
-      *v5 = 0;
-      v5[1] = 0;
-      v6 = v5;
+      v5->changeFlags = 0; /*0x452cb8*/
+      v5->savedFormBuffer = 0; /*0x452cba*/
+      v6 = v5; /*0x452cbd*/
     }
-    NiTMap_SetAt(this, (int)v3, (int)v6);
-    *v6 = a3;
-    return v6;
+    NiTMap_SetAt(self, v3, (int)v6); /*0x452cc3*/
+    v6->changeFlags = flags; /*0x452ccc*/
+    return v6; /*0x452cce*/
   }
-  return result;
+  return result; /*0x452cd1*/
 }

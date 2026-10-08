@@ -6,7 +6,7 @@
 0x987C19: and     eax, 1F80h
 0x987C1E: cmp     eax, 1F80h
 0x987C23: jnz     short _ceil___jnedef_10
-0x987C25: fnstcw  [esp+8+var_8]
-0x987C28: mov     ax, [esp+8+var_8]
+0x987C25: fnstcw  word ptr [esp+8+var_8]
+0x987C28: mov     ax, word ptr [esp+8+var_8]
 0x987C2C: and     ax, 7Fh
 0x987C30: cmp     ax, 7Fh

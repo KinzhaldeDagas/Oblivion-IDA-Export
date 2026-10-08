@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LsaQueryInformationPolicy::di",
+  "definition": "struct LsaQueryInformationPolicy::di\n{\nPOLICY_ACCOUNT_DOMAIN_INFO info;\nSID sid;\nDWORD padding[3];\nWCHAR_0 domain[16];\n}\n",
   "id": 18374686479672031410,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "info",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "POLICY_ACCOUNT_DOMAIN_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sid",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 12
+      "offset_hex": "0xC",
+      "size": 12,
+      "type": "SID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "padding",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 12
+      "size": 12,
+      "type": "DWORD[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "domain",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 32
+      "size": 32,
+      "type": "WCHAR_0[16]"
     }
   ],
   "name": "LsaQueryInformationPolicy::di",
+  "ordinal": 2751,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

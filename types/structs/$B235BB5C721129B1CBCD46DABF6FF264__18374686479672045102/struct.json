@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$B235BB5C721129B1CBCD46DABF6FF264",
+  "definition": "union $B235BB5C721129B1CBCD46DABF6FF264\n{\nLDRP_CSLIST Dependencies;\nSINGLE_LIST_ENTRY RemovalLink;\n}\n",
   "id": 18374686479672045102,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Dependencies",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LDRP_CSLIST"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RemovalLink",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SINGLE_LIST_ENTRY"
     }
   ],
   "name": "$B235BB5C721129B1CBCD46DABF6FF264",
+  "ordinal": 7997,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

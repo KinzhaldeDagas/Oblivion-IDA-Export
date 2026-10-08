@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "TESObjectTREE::TESObjectTREE(void)",
+  "chunks": [
+    [
+      "0x4B9DA0",
+      "0x4B9E8B"
+    ],
+    [
+      "0x9B3DB0",
+      "0x9B3DE9"
+    ]
+  ],
+  "chunks_sha256": "f16786085dcd13034b9fd9f3be7f42183c0ed37aee58ff4a82e4a78c72cdba78",
+  "comment_regular": "Verified Oblivion TESObjectTREE layout through +0x7F. The embedded NiTArray<unsigned int> at +0x48 has data +0x4C, capacity +0x50, end/seed count +0x52, numObjects +0x54, and growSize +0x56; constructor initializes these to 0,0,0,1. The scalar fields +0x58..+0x68 are curveScalar/minimumLeafAngle/maximumLeafAngle/branchDimming/leafDimming, with directly verified consumers/defaults matching Fallout. +0x6C/+0x70/+0x74 remain Unknown; billboard size names at +0x78/+0x7C remain Probable.",
+  "comment_repeatable": "Verified Oblivion TESObjectTREE layout through +0x7F. The embedded NiTArray<unsigned int> at +0x48 has data +0x4C, capacity +0x50, end/seed count +0x52, numObjects +0x54, and growSize +0x56; constructor initializes these to 0,0,0,1. The scalar fields +0x58..+0x68 are curveScalar/minimumLeafAngle/maximumLeafAngle/branchDimming/leafDimming, with directly verified consumers/defaults matching Fallout. +0x6C/+0x70/+0x74 remain Unknown; billboard size names at +0x78/+0x7C remain Probable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "TESObjectTREE_ctor",
   "end_ea": "0x4B9E8B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??0TESObjectTREE@@QAE@XZ",
+  "name": "TESObjectTREE_ctor",
   "segment": ".text",
   "sha256": "633961b8ff019a75875a079d8b5573302d31a6bbba9a90173dbb2db4f39e5a81",
   "size": 235,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B9DA0",
-  "type": "TESObjectTREE *__thiscall(TESObjectTREE *__hidden this)",
-  "xrefs_from_count": 74,
+  "total_chunk_size": 292,
+  "type": "TESObjectTREE_OblivionLayout_080_NiTArrayVerified *__thiscall(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this)",
+  "xrefs_from_count": 91,
   "xrefs_to_count": 1
 }

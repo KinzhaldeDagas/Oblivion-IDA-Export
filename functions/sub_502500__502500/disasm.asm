@@ -27,7 +27,7 @@
 0x502563: push    ecx; a2
 0x502564: push    eax; a1
 0x502565: mov     [esp+344h+var_30C], 0
-0x50256D: call    Script_ExtractArgs
+0x50256D: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502572: add     esp, 24h
 0x502575: test    al, al
 0x502577: jz      loc_502616
@@ -67,7 +67,7 @@
 0x5025F0: lea     edx, [esp+324h+String1]
 0x5025F4: push    edx
 0x5025F5: push    0
-0x5025F7: call    TESSaveLoadGame_LoadGame
+0x5025F7: call    TESSaveLoadGame_LoadGame;  Verified map lifecycle: allocates incomingChangesMap at +4, stores save records there, reconciles pre-load currentChangesMap at +0 after form loading, then swaps in incoming map via 464440. The map roles are based on direct stores/lookups and final pointer assignments.
 0x5025FC: test    al, al
 0x5025FE: jz      short loc_502607
 0x502600: push    offset aGameLoaded; "Game Loaded"

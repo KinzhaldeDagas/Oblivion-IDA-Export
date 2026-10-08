@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60C170",
-    "line": "sub     esp, 5Ch",
+    "line": "sub     esp, 5Ch; Projectile lifecycle/settling state machine never replaces the AMMO base assigned by construction. A later ordinary pickup therefore remains reference-based AMMO recovery.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x60C177",
-    "line": "cmp     byte ptr [ebx+94h], 0",
+    "line": "cmp     byte ptr [ebx+94h], 0; Retry deferred embedded-collision post-load fixup (+0x94). Wait while a state 0/1 collision target exists but its 3D root (+0x3C) is still absent.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x60C1B1",
-    "line": "mov     byte ptr [ebx+94h], 0",
+    "line": "mov     byte ptr [ebx+94h], 0; Clear +0x94 before invoking the deferred post-load resolver with saved +0x98; resolver may set it again if 3D remains unavailable.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x60C1D3",
-    "line": "fld     [esp+6Ch+arg_0]",
+    "line": "fld     [esp+6Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x60C1F1",
-    "line": "fst     dword ptr [ebx+68h]",
+    "line": "fst     dword ptr [ebx+68h]; Accumulate elapsedTime at ArrowProjectile +0x68 on each nonnegative update.",
     "mnemonic": "fst",
     "size": 3
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x60C203",
-    "line": "mov     dword ptr [ebx+60h], 3",
+    "line": "mov     dword ptr [ebx+60h], 3; When elapsedTime exceeds fArrowAgeMax (default 90.0 seconds), force lifecycle +0x60 to cleanup/fade state 3.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x60C218",
-    "line": "cmp     dword ptr [ebx+60h], 0",
+    "line": "cmp     dword ptr [ebx+60h], 0; Lifecycle state 0 is active flight: integrate speed/orientation through MobileObject movement and collision handling.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x60C226",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x60C237",
-    "line": "fst     [esp+6Ch+a3]",
+    "line": "fst     [esp+6Ch+a3]; Build local displacement vector (0, speed*dt, 0); MobileObject_Move rotates it by projectile orientation before controller integration.",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x60C23B",
-    "line": "fld     dword ptr [ebx+6Ch]",
+    "line": "fld     dword ptr [ebx+6Ch]; Active flight displacement magnitude for this frame: ArrowProjectile.speed (+0x6C) * deltaTime.",
     "mnemonic": "fld",
     "size": 3
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x60C244",
-    "line": "fmul    [esp+6Ch+arg_0]",
+    "line": "fmul    [esp+6Ch+deltaTime]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x60C26A",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x60C2B0",
-    "line": "fsub    [esp+6Ch+arg_0]",
+    "line": "fsub    [esp+6Ch+deltaTime]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x60C2D1",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x60C2E3",
-    "line": "fsub    [esp+6Ch+arg_0]",
+    "line": "fsub    [esp+6Ch+deltaTime]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -739,31 +739,31 @@
   },
   {
     "ea": "0x60C2FF",
-    "line": "push    0",
+    "line": "push    0; target",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60C301",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60C303",
-    "line": "call    sub_6079A0",
+    "line": "call    ArrowProjectile_BeginCollisionResolution; Creates or resets projectile collision state 4, records the optional target reference, initializes transform/velocity fields from the character proxy or node transform, and marks collision resolution active.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60C308",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60C30A",
-    "line": "call    sub_60BE90",
+    "line": "call    ArrowProjectile_ResolveCollisionState; Validates projectile collision data and dispatches persisted collision state 0..4 to the corresponding reconstruction helper. Missing node collision data is reported and the stale state record is freed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x60C311",
-    "line": "fld     [esp+6Ch+arg_0]",
+    "line": "fld     [esp+6Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x60C328",
-    "line": "call    edx",
+    "line": "call    edx; Integrate local forward displacement through MobileObject_Move using projectile yaw/pitch and collision proxy.",
     "mnemonic": "call",
     "size": 2
   },
@@ -871,19 +871,19 @@
   },
   {
     "ea": "0x60C33C",
-    "line": "mov     esi, ecx",
+    "line": "mov     esi, ecx; After collision, choose resolved lifecycle state: pending state 1 advances to settled state 2; cleanup state 3 remains 3.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60C33E",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60C340",
-    "line": "call    sub_60BE90",
+    "line": "call    ArrowProjectile_ResolveCollisionState; Validates projectile collision data and dispatches persisted collision state 0..4 to the corresponding reconstruction helper. Missing node collision data is reported and the stale state record is freed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x60C36D",
-    "line": "mov     [ebx+60h], esi",
+    "line": "mov     [ebx+60h], esi; Commit lifecycle transition only after ArrowProjectile_ResolveCollisionState succeeds.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x60C421",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x60C433",
-    "line": "fstp    [esp+70h+var_70]; float",
+    "line": "fstp    [esp+70h+rollY]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1375,13 +1375,13 @@
   },
   {
     "ea": "0x60C448",
-    "line": "lea     ecx, [esp+78h+var_24]",
+    "line": "lea     ecx, [esp+78h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60C44C",
-    "line": "fstp    [esp+78h+var_70]; float",
+    "line": "fstp    [esp+78h+rollY]; rollY",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x60C454",
-    "line": "fstp    [esp+78h+var_74]; float",
+    "line": "fstp    [esp+78h+pitchX]; pitchX",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1405,13 +1405,13 @@
   },
   {
     "ea": "0x60C45C",
-    "line": "fstp    [esp+78h+a2]; float",
+    "line": "fstp    [esp+78h+a2]; yawZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60C45F",
-    "line": "call    sub_7117C0",
+    "line": "call    NiMatrix33_SetEulerZXY; Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x60C47D",
-    "line": "jnz     loc_60C52C",
+    "line": "jnz     loc_60C52C; Lifecycle state 2 is settled/persistent impact handling. Validate collision target/cell and retain, migrate, or destroy the projectile accordingly.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x60C4D0",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x60C4D9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x60C4FE",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1801,7 +1801,7 @@
   },
   {
     "ea": "0x60C52F",
-    "line": "jnz     short loc_60C581",
+    "line": "jnz     short loc_60C581; Lifecycle state 3 is cleanup/fade. Other lifecycle states fall through to ordinary scene-node update.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x60C534",
-    "line": "fld     [esp+6Ch+arg_0]",
+    "line": "fld     [esp+6Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x60C540",
-    "line": "fstp    [esp+6Ch+var_4C]",
+    "line": "fstp    [esp+6Ch+var_4C]; State-3 fade: subtract deltaTime/3.0 from +0x64 alpha scalar; destroy when it reaches zero, otherwise apply the scalar to projectile 3D.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x60C571",
-    "line": "fstp    [esp+70h+var_70]; float",
+    "line": "fstp    [esp+70h+rollY]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x60C587",
-    "line": "fld     [esp+6Ch+arg_0]",
+    "line": "fld     [esp+6Ch+deltaTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2023,13 +2023,13 @@
   },
   {
     "ea": "0x60C590",
-    "line": "fstp    [esp+74h+var_74]; a2",
+    "line": "fstp    [esp+74h+pitchX]; a2",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60C593",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_437600",
+  "chunks": [
+    [
+      "0x437600",
+      "0x437692"
+    ]
+  ],
+  "chunks_sha256": "9060ae6b3ffcaa871f8d7d077ae67c49842903412f75cb3ea81f93e2956fc845",
+  "comment_regular": "Verified Oblivion queued distant callback consumes the copied per-cell context, calls sub_4BA780 to build STBB/NiBillboardNode from the flat billboard DDS, then forwards cell key/node/positions/color values to sub_7B4010. Fallout's corresponding QueuedTreeBillboard::CreateBillboard instead calls TESObjectTREE::BuildDistant3D and DistantLODShaderProperty::AddDistantLOD.",
+  "comment_repeatable": "Verified Oblivion queued distant callback consumes the copied per-cell context, calls sub_4BA780 to build STBB/NiBillboardNode from the flat billboard DDS, then forwards cell key/node/positions/color values to sub_7B4010. Fallout's corresponding QueuedTreeBillboard::CreateBillboard instead calls TESObjectTREE::BuildDistant3D and DistantLODShaderProperty::AddDistantLOD.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "QueuedTreeBillboard_ProcessDistant",
   "end_ea": "0x437692",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_437600",
+  "name": "QueuedTreeBillboard_ProcessDistant",
   "segment": ".text",
   "sha256": "9060ae6b3ffcaa871f8d7d077ae67c49842903412f75cb3ea81f93e2956fc845",
   "size": 146,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x437600",
-  "type": "void __thiscall(float ***this)",
+  "total_chunk_size": 146,
+  "type": "void __thiscall(QueuedTreeBillboard *this)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 1
 }

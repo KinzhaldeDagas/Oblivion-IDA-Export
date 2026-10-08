@@ -1,1 +1,1 @@
-bhkWorldObject
+struct bhkWorldObject;

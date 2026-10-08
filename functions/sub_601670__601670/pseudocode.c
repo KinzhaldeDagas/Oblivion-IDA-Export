@@ -1,91 +1,91 @@
 double __usercall sub_601670@<st0>(PlayerCharacter *this@<ecx>, double a2@<st0>)
 {
-  unsigned int v3; // ebp
-  ActorVtbl *v4; // ebx
-  Actor *v5; // eax
-  Actor *v6; // esi
+  unsigned int v2; // ebp
+  ActorVtbl *v3; // ebx
+  Actor *ListHead; // eax
+  Actor *v5; // esi
   ActorVtbl *vtbl; // edi
-  char v8; // al
-  ActorVtbl **v9; // eax
+  char v7; // al
+  ActorVtbl **v8; // eax
   double result; // st7
-  char v11; // al
-  int *v12; // esi
-  unsigned int v13; // esi
-  TESObjectREFR *v14; // [esp+0h] [ebp-24h]
-  float v16; // [esp+14h] [ebp-10h]
-  float v17; // [esp+18h] [ebp-Ch]
-  ActorVtbl *v18; // [esp+1Ch] [ebp-8h] BYREF
-  unsigned int v19; // [esp+20h] [ebp-4h]
+  char v10; // al
+  int *v11; // esi
+  unsigned int v12; // esi
+  TESObjectREFR *v13; // [esp+0h] [ebp-24h]
+  float v15; // [esp+14h] [ebp-10h]
+  float v16; // [esp+18h] [ebp-Ch]
+  ActorVtbl *v17; // [esp+1Ch] [ebp-8h] BYREF
+  unsigned int v18; // [esp+20h] [ebp-4h]
 
-  v3 = 0;
-  v4 = 0;
-  v18 = 0;
-  v19 = 0;
-  v5 = sub_673A50(&ActorProcessManager_ptr, 0);
-  v6 = sub_7616D0((ActorList *)v5);
-  if ( v6 )
+  v2 = 0; /*0x601677*/
+  v3 = 0; /*0x60167d*/
+  v17 = 0; /*0x601685*/
+  v18 = 0; /*0x601689*/
+  ListHead = ActorProcessManager_GetListHead((ActorProcessManager *)&qword_B3BB2C[0x75], 0); /*0x60168d*/
+  v5 = ActorList_ReturnHead((ActorList *)ListHead); /*0x601699*/
+  if ( v5 ) /*0x60169d*/
   {
-    do
+    do /*0x6016ec*/
     {
-      if ( !*(_DWORD *)&v6->members.super.super.super.type && !v6->vtbl )
-        break;
-      vtbl = v6->vtbl;
-      a2 = sub_5F7A80(this, a2, (float *)v6->vtbl, 1);
-      if ( v8 )
+      if ( !*(_DWORD *)&v5->members.super.super.super.type && !v5->vtbl ) /*0x6016a6*/
+        break; /*0x6016a9*/
+      vtbl = v5->vtbl; /*0x6016ab*/
+      a2 = sub_5F7A80(this, a2, (float *)v5->vtbl, 1); /*0x6016b4*/
+      if ( v7 ) /*0x6016bb*/
       {
-        if ( vtbl )
+        if ( vtbl ) /*0x6016bf*/
         {
-          if ( v4 )
+          if ( v3 ) /*0x6016c3*/
           {
-            v9 = (ActorVtbl **)FormHeapAlloc(8u);
-            if ( v9 )
+            v8 = (ActorVtbl **)FormHeapAlloc(8u); /*0x6016c7*/
+            if ( v8 ) /*0x6016d1*/
             {
-              *v9 = v4;
-              v9[1] = 0;
+              *v8 = v3; /*0x6016d3*/
+              v8[1] = 0; /*0x6016d5*/
             }
             else
             {
-              v9 = 0;
+              v8 = 0; /*0x6016de*/
             }
-            v9[1] = (ActorVtbl *)v3;
-            v3 = (unsigned int)v9;
+            v8[1] = (ActorVtbl *)v2; /*0x6016e0*/
+            v2 = (unsigned int)v8; /*0x6016e3*/
           }
-          v4 = vtbl;
+          v3 = vtbl; /*0x6016e5*/
         }
       }
-      v6 = *(Actor **)&v6->members.super.super.super.type;
+      v5 = *(Actor **)&v5->members.super.super.super.type; /*0x6016e7*/
     }
-    while ( v6 );
-    v19 = v3;
-    v18 = v4;
+    while ( v5 ); /*0x6016ec*/
+    v18 = v2; /*0x6016ee*/
+    v17 = v3; /*0x6016f2*/
   }
-  result = sub_5F7A80(this, a2, (float *)TESDataHandler_g_PlayerRef, 1);
-  if ( v11 )
+  result = sub_5F7A80(this, a2, (float *)reference, 1); /*0x601702*/
+  if ( v10 ) /*0x601709*/
   {
-    BSSimpleList_PushFront(&v18, (int)TESDataHandler_g_PlayerRef);
-    v3 = v19;
+    BSSimpleList_PushFront(&v17, (int)reference); /*0x601716*/
+    v2 = v18; /*0x60171b*/
   }
-  v16 = 0.0;
-  v12 = (int *)&v18;
-  do
+  v15 = 0.0; /*0x601723*/
+  v11 = (int *)&v17; /*0x601727*/
+  do /*0x60176b*/
   {
-    if ( !v12[1] && !*v12 )
-      break;
-    v17 = sub_5E68A0(this, *v12, *(float *)v12, v14);
-    if ( v16 < (double)v17 )
-      v16 = v17;
-    v12 = (int *)v12[1];
+    if ( !v11[1] && !*v11 ) /*0x601736*/
+      break; /*0x601739*/
+    v16 = sub_5E68A0(this, *v11, *(float *)v11, v13); /*0x601747*/
+    if ( v15 < (double)v16 ) /*0x60175a*/
+      v15 = v16; /*0x60175c*/
+    v11 = (int *)v11[1]; /*0x601766*/
   }
-  while ( v12 );
-  if ( v3 )
+  while ( v11 ); /*0x60176b*/
+  if ( v2 ) /*0x60176f*/
   {
-    do
+    do /*0x601781*/
     {
-      v13 = *(_DWORD *)(v3 + 4);
-      FormHeapFree(v3);
-      v3 = v13;
+      v12 = *(_DWORD *)(v2 + 4); /*0x601771*/
+      FormHeapFree(v2); /*0x601775*/
+      v2 = v12; /*0x60177f*/
     }
-    while ( v13 );
+    while ( v12 ); /*0x601781*/
   }
-  return result;
+  return result; /*0x601783*/
 }

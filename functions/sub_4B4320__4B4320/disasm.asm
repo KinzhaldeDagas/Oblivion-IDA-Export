@@ -10,10 +10,10 @@
 0x4B4333: lea     esi, [edi+30h]
 0x4B4336: jz      short loc_4B438F
 0x4B4338: push    0FFFFFFFFh; a2
-0x4B433A: call    TESForm_GetOverrideFile
+0x4B433A: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4B433F: push    eax; a2
 0x4B4340: push    esi; a1
-0x4B4341: call    TESForm_ResolveFormID
+0x4B4341: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4B4346: mov     edx, [esi]
 0x4B4348: add     esp, 8
 0x4B434B: lea     ecx, [esp+0Ch+var_4]

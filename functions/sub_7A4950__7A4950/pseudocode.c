@@ -1,108 +1,104 @@
-int __userpurge sub_7A4950@<eax>(float *this@<ecx>, float *a2@<edi>, unsigned int *a3)
+// Oblivion CTreeEngine tree-info parser. Maps the 1002-family tokens to the typed CTreeEngine fields and dispatches nested branch-info parsing.
+void __thiscall OB_CTreeEngine_ParseTreeInfo_010201A0(OB_CTreeEngine_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)
 {
-  int result; // eax
-  int v5; // edx
-  _DWORD *v6; // eax
-  int v7; // eax
-  unsigned int v8; // ecx
-  unsigned int v9; // edx
-  int v10[6]; // [esp-1Ch] [ebp-BCh] BYREF
-  rsize_t v11; // [esp-4h] [ebp-A4h]
-  int *v12; // [esp+14h] [ebp-8Ch]
-  int v13; // [esp+18h] [ebp-88h] BYREF
-  unsigned int v14; // [esp+1Ch] [ebp-84h]
-  int v15; // [esp+2Ch] [ebp-74h]
-  unsigned int v16; // [esp+30h] [ebp-70h]
-  _BYTE v17[4]; // [esp+34h] [ebp-6Ch] BYREF
-  unsigned int v18; // [esp+38h] [ebp-68h]
-  int v19; // [esp+48h] [ebp-58h]
-  unsigned int v20; // [esp+4Ch] [ebp-54h]
-  int v21; // [esp+50h] [ebp-50h] BYREF
-  char v22; // [esp+54h] [ebp-4Ch]
-  int v23; // [esp+64h] [ebp-3Ch]
-  int v24; // [esp+68h] [ebp-38h]
-  _BYTE v25[40]; // [esp+6Ch] [ebp-34h] BYREF
-  int v26; // [esp+9Ch] [ebp-4h]
+  int Dword_010201A0; // eax
+  int v4; // edx
+  OB_stString28_010201A0 *v5; // eax
+  unsigned int v6; // eax
+  unsigned int v7; // ecx
+  int byteBufferBegin; // edx
+  OB_stString28_010201A0 v9; // [esp-1Ch] [ebp-BCh] BYREF
+  OB_stString28_010201A0 *v10; // [esp+14h] [ebp-8Ch]
+  OB_stString28_010201A0 source; // [esp+18h] [ebp-88h] BYREF
+  OB_stString28_010201A0 result; // [esp+34h] [ebp-6Ch] BYREF
+  OB_stString28_010201A0 details; // [esp+50h] [ebp-50h] BYREF
+  OB_IdvFileError_010201A0 v14; // [esp+6Ch] [ebp-34h] BYREF
+  int v15; // [esp+9Ch] [ebp-4h]
 
-  result = sub_78EB40(a3);
-  do
+  Dword_010201A0 = OB_CTreeFileAccess_ReadDword_010201A0(file); /*0x7a4988*/
+  do /*0x7a4af1*/
   {
-    if ( result > 0x7D0 )
+    if ( Dword_010201A0 > 0x7D0 ) /*0x7a4995*/
     {
-      switch ( result )
+      switch ( Dword_010201A0 ) /*0x7a4a78*/
       {
-        case 0x7D1:
-          *(this + 0x10) = sub_78EB10(a3);
-          goto LABEL_21;
-        case 0x7D2:
-          v8 = (*a3)++;
-          v9 = a3[2];
-          if ( !v9 || v8 >= a3[3] - v9 )
-            _invalid_parameter_noinfo();
-          goto LABEL_21;
-        case 0x7D3:
-          *(this + 0x11) = sub_78EB10(a3);
-          goto LABEL_21;
-        case 0x7D4:
-          sub_78EB40(a3);
-          goto LABEL_21;
-        case 0x7D5:
-          v7 = sub_78EB40(a3);
-          sub_7A24F0(this, v7);
-          goto LABEL_21;
-        case 0x7D6:
-          *(this + 0x13) = sub_78EB10(a3);
-          goto LABEL_21;
-        case 0x7D7:
-          *(this + 0x14) = sub_78EB10(a3);
-          goto LABEL_21;
+        case 0x7D1: /*0x7a4a78*/
+          this->treeFarLodDistance = OB_CTreeFileAccess_ReadFloat_010201A0(file); /*0x7a4aa3*/
+          goto LABEL_21; /*0x7a4aa6*/
+        case 0x7D2: /*0x7a4a78*/
+          v7 = file->cursorOffset++; /*0x7a4ab1*/
+          byteBufferBegin = file->byteBufferBegin; /*0x7a4ab8*/
+          if ( !byteBufferBegin || v7 >= file->byteBufferEnd - byteBufferBegin ) /*0x7a4ac6*/
+            _invalid_parameter_noinfo(); /*0x7a4ac8*/
+          goto LABEL_21; /*0x7a4acd*/
+        case 0x7D3: /*0x7a4a78*/
+          this->treeNearLodDistance = OB_CTreeFileAccess_ReadFloat_010201A0(file); /*0x7a4a97*/
+          goto LABEL_21; /*0x7a4a9a*/
+        case 0x7D4: /*0x7a4a78*/
+          OB_CTreeFileAccess_ReadDword_010201A0(file); /*0x7a4aaa*/
+          goto LABEL_21; /*0x7a4aaf*/
+        case 0x7D5: /*0x7a4a78*/
+          v6 = OB_CTreeFileAccess_ReadDword_010201A0(file); /*0x7a4a81*/
+          OB_CTreeEngine_SetSeed_010201A0(this, v6); /*0x7a4a89*/
+          goto LABEL_21; /*0x7a4a8e*/
+        case 0x7D6: /*0x7a4a78*/
+          this->treeSizeScalar = OB_CTreeFileAccess_ReadFloat_010201A0(file); /*0x7a4ad6*/
+          goto LABEL_21; /*0x7a4ad9*/
+        case 0x7D7: /*0x7a4a78*/
+          this->treeSizeVariance = OB_CTreeFileAccess_ReadFloat_010201A0(file); /*0x7a4ae2*/
+          goto LABEL_21; /*0x7a4ae2*/
         default:
           goto LABEL_23;
       }
     }
-    if ( result == 0x7D0 )
+    if ( Dword_010201A0 == 0x7D0 ) /*0x7a499b*/
     {
-      v12 = v10;
-      sub_78EC20(a3, v5, (int)v10);
-      sub_789120((int)&v13, v10[0], v10[1], v10[2], v10[3], v10[4], v10[5], v11);
-      a2 = this + 9;
-      v26 = 0;
-      sub_414420((int)(this + 9), &v13, 0, 0xFFFFFFFF);
-      v26 = 0xFFFFFFFF;
-      if ( v16 >= 0x10 )
-        FormHeapFree(v14);
-      v16 = 0xF;
-      v15 = 0;
-      LOBYTE(v14) = 0;
-      v6 = (_DWORD *)sub_789430((char *)this + 0x24, (int)v17);
-      v26 = 1;
-      sub_414420((int)(this + 9), v6, 0, 0xFFFFFFFF);
-      v26 = 0xFFFFFFFF;
-      if ( v20 >= 0x10 )
-        FormHeapFree(v18);
-      v20 = 0xF;
-      v19 = 0;
-      LOBYTE(v18) = 0;
+      v10 = &v9; /*0x7a49ba*/
+      OB_CTreeFileAccess_ReadString_010201A0(file, v4, &v9); /*0x7a49c1*/
+      OB_stString28_CopyCtorConsumeTemporary_010201A0(&source, v9); /*0x7a49ca*/
+      v15 = 0; /*0x7a49dc*/
+      OB_stString28_AssignSubstring_010201A0( /*0x7a49e3*/
+        (OB_stString28_010201A0 *)this->branchTextureFilenameSmallString,
+        &source,
+        0,
+        0xFFFFFFFF);
+      v15 = 0xFFFFFFFF; /*0x7a49ed*/
+      if ( source.capacity >= 0x10 ) /*0x7a49f8*/
+        FormHeapFree((unsigned int)source.storage.heapData); /*0x7a49ff*/
+      source.capacity = 0xF; /*0x7a4a0e*/
+      source.size = 0; /*0x7a4a16*/
+      source.storage.inlineData[0] = 0; /*0x7a4a1a*/
+      v5 = OB_IdvNoPath_010201A0((const OB_stString28_010201A0 *)this->branchTextureFilenameSmallString, &result); /*0x7a4a1e*/
+      v15 = 1; /*0x7a4a29*/
+      OB_stString28_AssignSubstring_010201A0( /*0x7a4a34*/
+        (OB_stString28_010201A0 *)this->branchTextureFilenameSmallString,
+        v5,
+        0,
+        0xFFFFFFFF);
+      v15 = 0xFFFFFFFF; /*0x7a4a3e*/
+      if ( result.capacity >= 0x10 ) /*0x7a4a49*/
+        FormHeapFree((unsigned int)result.storage.heapData); /*0x7a4a50*/
+      result.capacity = 0xF; /*0x7a4a58*/
+      result.size = 0; /*0x7a4a60*/
+      result.storage.inlineData[0] = 0; /*0x7a4a64*/
     }
     else
     {
-      if ( result != 0x3F6 )
+      if ( Dword_010201A0 != 0x3F6 ) /*0x7a49a2*/
       {
 LABEL_23:
-        LODWORD(v11) = 0x22;
-        v24 = 0xF;
-        v23 = 0;
-        v22 = 0;
-        sub_414500(&v21, (int)a2, "malformed general tree information", v11);
-        v26 = 2;
-        sub_789190((std::exception *)v25, &v21, 0);
-        ThrowException__((int)v25, &_TI3_AVIdvFileError__);
+        details.capacity = 0xF;                 // 2026-05-21 SpeedTreeOBSE core malformed pass: ParseTreeInfo rejects unknown 1002-family tokens as malformed general tree information; later-family compatibility must not reinterpret this as a supplemental tail. /*0x7a4b13*/
+        details.size = 0; /*0x7a4b26*/
+        details.storage.inlineData[0] = 0; /*0x7a4b2a*/
+        OB_stString28_AssignBytes_010201A0(&details, "malformed general tree information", 0x22u); /*0x7a4b2e*/
+        v15 = 2; /*0x7a4b3d*/
+        OB_IdvFileError_Ctor_010201A0(&v14, &details, 0); /*0x7a4b48*/
+        ThrowException__((DWORD)&v14, &_TI3_AVIdvFileError__); /*0x7a4b57*/
       }
-      sub_7A4190((unsigned int *)this, a3);
+      OB_CTreeEngine_ParseBranchInfo_010201A0((unsigned int *)this, 0, file); /*0x7a49ab*/
     }
 LABEL_21:
-    result = sub_78EB40(a3);
+    Dword_010201A0 = OB_CTreeFileAccess_ReadDword_010201A0(file); /*0x7a4ae5*/
   }
-  while ( result != 0x3EB );
-  return result;
+  while ( Dword_010201A0 != 0x3EB ); /*0x7a4af1*/
 }

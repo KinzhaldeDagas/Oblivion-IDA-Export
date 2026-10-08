@@ -1,4 +1,4 @@
-int __usercall unknown_libname_116_::unknown_libname_118@<eax>(double a1@<st0>)
+void unknown_libname_116_::unknown_libname_118()
 {
-  return unknown_libname_116_::unknown_libname_119(a1);
+  unknown_libname_116_::unknown_libname_119(); /*0x990c3b*/
 }

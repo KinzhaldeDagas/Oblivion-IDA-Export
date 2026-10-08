@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x590431",
-    "line": "push    ebx; int",
+    "line": "push    ebx; length",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x59043A",
-    "line": "push    ebx; int",
+    "line": "push    ebx; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59043B",
-    "line": "push    edx; Str",
+    "line": "push    edx; path",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x590451",
-    "line": "call    sub_58DBD0",
+    "line": "call    Tile__ParseFile; Verified: allocates BuildStorage0x14, parses supplied buffer/length when buffer nonnull; otherwise loads file and expands include/source files. Tracks line counter for diagnostics and item construction. Emits lexical pairs to0x58D2F0. Full token grammar and malformed-input cleanup remain Unknown beyond examined branches.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x590478",
-    "line": "push    eax; int",
+    "line": "push    eax; tileTemplate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x590479",
-    "line": "mov     ecx, edi; TileWindow *",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59047B",
-    "line": "call    sub_590330",
+    "line": "call    Tile__BuildAndNameTree; Verified: token 0x28 creates tile, calls virtual Init(newTile,currentParent,NULL,NULL), names it, records pointer in token +0x10, and descends. Token 0x2D ascends through Tile.parent +0x10. Returns FIRST created tile. No automatic wrapper tile and no duplicate-name/id check in this routine. Fallout analogue 0x827E2320 uses different token numbers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x590486",
-    "line": "mov     ebp, eax",
+    "line": "mov     ebp, eax; Verified: EAX from BuildAndNameTree is first created tile, attached beneath receiver. No extra wrapper is allocated; XML root tag selects actual tile class.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x59048C",
-    "line": "jnz     loc_590546",
+    "line": "jnz     loc_590546; Verified failure-path limitation: ReadFile can return NULL after BuildAndNameTree attached tiles. Early parse-error exits bypass normal build-storage cleanup and warning-state restoration below; no rollback loop exists here. Do not infer unchanged tree from NULL result. Actual partial-failure reproduction remains untested.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x59049B",
-    "line": "push    eax",
+    "line": "push    eax; tileTemplate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59049C",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59049E",
-    "line": "call    sub_58CF40",
+    "line": "call    Tile__ConnectTraitsToTree; Verified: second pass over template tokens. On tile-close token 0x2D, traverses current Tile value list and calls Value::CalculateValue(value,true) for every trait except class 0xFA2, then ascends parent. ReadFile therefore initializes properties natively; never call CalculateValue with Tile*. Fallout analogue 0x827E0B28; Fallout adds a critical section and uses other token numbers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x5904A9",
-    "line": "jnz     loc_590546",
+    "line": "jnz     loc_590546; Verified failure-path limitation: ReadFile can return NULL after BuildAndNameTree attached tiles. Early parse-error exits bypass normal build-storage cleanup and warning-state restoration below; no rollback loop exists here. Do not infer unchanged tree from NULL result. Actual partial-failure reproduction remains untested.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x5904E7",
-    "line": "push    eax",
+    "line": "push    eax; tileTemplate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5904E8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5904EA",
-    "line": "call    sub_584960",
+    "line": "call    Menu__AddTemplate; Verified: inserts supplied template in Menu embedded list at+8. Called by ReadFile ownership-transfer loop0x5904EA. Fallout named analogue0x827E3DC8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5904FC",
-    "line": "jnz     short loc_590546",
+    "line": "jnz     short loc_590546; Verified failure-path limitation: ReadFile can return NULL after BuildAndNameTree attached tiles. Early parse-error exits bypass normal build-storage cleanup and warning-state restoration below; no rollback loop exists here. Do not infer unchanged tree from NULL result. Actual partial-failure reproduction remains untested.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x590509",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59050B",
-    "line": "call    sub_58CDB0",
+    "line": "call    Tile__BuildStorage__Destroy; Verified: destroys main template unconditionally; subtemplate objects only when ownsSubTemplates is true; always frees subtemplate list links. ReadFile transfers subtemplate ownership to Menu before destroying storage. No savegame serialization in this teardown path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x590511",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x590546",
-    "line": "pop     ebp",
+    "line": "pop     ebp; Verified failure-path limitation: ReadFile can return NULL after BuildAndNameTree attached tiles. Early parse-error exits bypass normal build-storage cleanup and warning-state restoration below; no rollback loop exists here. Do not infer unchanged tree from NULL result. Actual partial-failure reproduction remains untested.",
     "mnemonic": "pop",
     "size": 1
   },

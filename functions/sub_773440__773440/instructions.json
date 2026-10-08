@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x773440",
-    "line": "push    ebx",
+    "line": "push    ebx; Apply one stage's tracked texture-stage states, then tracked sampler states.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x773453",
-    "line": "push    ebx",
+    "line": "push    ebx; stage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x773454",
-    "line": "call    sub_7732B0",
+    "line": "call    OB_NiD3DTextureStageStateGroup_ApplyStageStates_010201A0; Oblivion draw-time texture-stage application: exactly eight tracked D3DTSS slots; no sampler LOD or texture-factor state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x77345B",
-    "line": "push    ebx",
+    "line": "push    ebx; stage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77345C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x77345E",
-    "line": "call    sub_773330",
+    "line": "call    OB_NiD3DTextureStageStateGroup_ApplySamplerStates_010201A0; Oblivion draw-time stage sampler application: exactly five tracked slots (ADDRESSU/V, MAG/MIN/MIP).",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x68DF50",
+      "0x68DF68"
+    ]
+  ],
+  "chunks_sha256": "fdd6d7ee95c56ad2beb7a01bfa235cee56a9273777762f940d405fbf7319a6d9",
+  "comment_regular": "Verified save loop: for each nonnull ActiveEffect in the target list, calls ActiveEffect_Base_Save and increments the saved count. The effect record contains MagicItem FormID, EffectItem index, and virtual effect-specific payload; version >=0x2A also includes a UInt16 record size.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_SaveAEList:::LoopBody",
   "end_ea": "0x68DF68",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": false,
   "name": "ActiveEffect_Base_SaveAEList:::LoopBody",
   "segment": ".text",
   "sha256": "fdd6d7ee95c56ad2beb7a01bfa235cee56a9273777762f940d405fbf7319a6d9",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68DF50",
+  "total_chunk_size": 24,
   "type": "_DWORD __cdecl(_DWORD, _DWORD, _DWORD)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 2

@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "BackgroundCloneThread",
+  "definition": "struct BackgroundCloneThread\n{\nvoid **vtbl;\nBSThreadMembr super;\nUInt32 unk1C;\nSemaphore semaphores[3];\n}\n",
   "id": 18374686479672025212,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 24
+      "size": 24,
+      "type": "BSThreadMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk1C",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "semaphores",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 36
+      "size": 36,
+      "type": "Semaphore[3]"
     }
   ],
   "name": "BackgroundCloneThread",
+  "ordinal": 400,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

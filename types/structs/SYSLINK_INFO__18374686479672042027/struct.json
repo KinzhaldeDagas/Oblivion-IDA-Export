@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "SYSLINK_INFO",
+  "definition": "struct __declspec(align(8)) SYSLINK_INFO\n{\nHWND Self;\nHWND Notify;\nDWORD Style;\nlist Items;\nBOOL HasFocus;\nint MouseDownID;\nHFONT Font;\nHFONT LinkFont;\nCOLORREF TextColor;\nCOLORREF LinkColor;\nCOLORREF VisitedColor;\nWCHAR_0 BreakChar;\nBOOL IgnoreReturn;\n}\n",
   "id": 18374686479672042027,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Self",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Notify",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Style",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Items",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 8
+      "offset_hex": "0xC",
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HasFocus",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MouseDownID",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Font",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LinkFont",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TextColor",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LinkColor",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VisitedColor",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BreakChar",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 2
+      "size": 2,
+      "type": "WCHAR_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IgnoreReturn",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     }
   ],
   "name": "SYSLINK_INFO",
+  "ordinal": 6487,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 56
 }

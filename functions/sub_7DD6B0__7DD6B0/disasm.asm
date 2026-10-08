@@ -50,7 +50,7 @@
 0x7DD748: mov     eax, [ecx]
 0x7DD74A: mov     edx, [eax+18h]
 0x7DD74D: push    0
-0x7DD74F: push    offset flt_B45F44
+0x7DD74F: push    (offset OB_ShaderConstantStorage_010201A0+130h)
 0x7DD754: push    4
 0x7DD756: push    10h
 0x7DD758: push    offset EmptyString
@@ -64,7 +64,7 @@
 0x7DD771: mov     eax, [ecx]
 0x7DD773: mov     edx, [eax+18h]
 0x7DD776: push    0
-0x7DD778: push    offset flt_B45FAC
+0x7DD778: push    (offset OB_ShaderConstantStorage_010201A0+198h)
 0x7DD77D: push    4
 0x7DD77F: push    10h
 0x7DD781: push    offset EmptyString
@@ -78,7 +78,7 @@
 0x7DD79A: mov     eax, [ecx]
 0x7DD79C: mov     edx, [eax+18h]
 0x7DD79F: push    0
-0x7DD7A1: push    offset WaterShader_DisplaceDampener
+0x7DD7A1: push    (offset OB_ShaderConstantStorage_010201A0+12Ch)
 0x7DD7A6: push    4
 0x7DD7A8: push    10h
 0x7DD7AA: push    offset EmptyString
@@ -92,7 +92,7 @@
 0x7DD7C3: mov     eax, [ecx]
 0x7DD7C5: mov     edx, [eax+18h]
 0x7DD7C8: push    0
-0x7DD7CA: push    offset WaterShader_Rainforce
+0x7DD7CA: push    (offset OB_ShaderConstantStorage_010201A0+144h)
 0x7DD7CF: push    4
 0x7DD7D1: push    10h
 0x7DD7D3: push    offset EmptyString
@@ -105,7 +105,7 @@
 0x7DD7EA: mov     ecx, [esi]
 0x7DD7EC: mov     eax, [ecx]
 0x7DD7EE: push    0
-0x7DD7F0: push    offset WaterShader_DisplaceForce
+0x7DD7F0: push    (offset OB_ShaderConstantStorage_010201A0+154h)
 0x7DD7F5: push    4
 0x7DD7F7: push    10h
 0x7DD7F9: mov     edx, [eax+18h]
@@ -170,7 +170,7 @@
 0x7DD8B1: mov     eax, [ecx]
 0x7DD8B3: mov     edx, [eax+18h]
 0x7DD8B6: push    0
-0x7DD8B8: push    offset flt_B45F78
+0x7DD8B8: push    (offset OB_ShaderConstantStorage_010201A0+164h)
 0x7DD8BD: push    4
 0x7DD8BF: push    10h
 0x7DD8C1: push    offset EmptyString
@@ -184,7 +184,7 @@
 0x7DD8DA: mov     eax, [ecx]
 0x7DD8DC: mov     edx, [eax+18h]
 0x7DD8DF: push    0
-0x7DD8E1: push    offset flt_B45F88
+0x7DD8E1: push    (offset OB_ShaderConstantStorage_010201A0+174h)
 0x7DD8E6: push    4
 0x7DD8E8: push    10h
 0x7DD8EA: push    offset EmptyString
@@ -201,3 +201,20 @@
 0x7DD90E: pop     esi
 0x7DD90F: add     esp, 10h
 0x7DD912: retn
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

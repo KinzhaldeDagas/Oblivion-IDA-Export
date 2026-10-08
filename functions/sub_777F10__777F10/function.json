@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x777F10",
+      "0x777F40"
+    ]
+  ],
+  "chunks_sha256": "e41c1fb1d8d1cebaa24c91861f94f08d2a15f2cc10714915a7756f537eae866b",
+  "comment_regular": "Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.\n[SpeedTreeOBSE v170] Unchanged local mesh pose may skip upload only with clean low dirty flags, matching materialized declaration and this native live-stream predicate. A buffer pointer alone is insufficient. Predicate is allocation evidence, not GPU-byte or rendering proof.",
+  "comment_repeatable": "Pass225/226: Tests whether NiGeometryBufferData is live: stream count nonzero and every VBChip has a D3D vertex buffer.\nDX11 static-buffer audit 2026-10-01: predicate requires nonzero StreamCount(+1C), nonnull VBChip array entries(+24) and nonnull chip VB(+8) for all streams. It proves native allocation association only, not initialized/current CPU/GPU bytes, device ownership or lifetime. DX11 buffer publication receipts and retained bindings remain separate requirements.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_777F10",
+  "display_name": "NiGeometryBufferData_HasLiveStreams",
   "end_ea": "0x777F40",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_777F10",
+  "name": "NiGeometryBufferData_HasLiveStreams",
   "segment": ".text",
   "sha256": "e41c1fb1d8d1cebaa24c91861f94f08d2a15f2cc10714915a7756f537eae866b",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x777F10",
-  "type": "char __thiscall(NiGeometryBufferData *this)",
+  "total_chunk_size": 48,
+  "type": "unsigned __int8 __thiscall(NiGeometryBufferData *this)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 6
 }

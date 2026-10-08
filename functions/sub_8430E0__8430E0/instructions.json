@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x843106",
-    "line": "mov     ebx, [esp+20h+arg_8]",
+    "line": "mov     ebx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x84314D",
-    "line": "mov     [esp+24h+arg_8], ebp",
+    "line": "mov     [esp+24h+value], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x843185",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x843198",
-    "line": "mov     edx, [esp+20h+arg_8]",
+    "line": "mov     edx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x8431B0",
-    "line": "mov     [esp+28h+arg_8], ebp",
+    "line": "mov     [esp+28h+value], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x8431EB",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x8431FE",
-    "line": "mov     edx, [esp+20h+arg_8]",
+    "line": "mov     edx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x84321E",
-    "line": "mov     [esp+20h+arg_8], eax",
+    "line": "mov     [esp+20h+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x843245",
-    "line": "mov     eax, [esp+20h+arg_8]",
+    "line": "mov     eax, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x84326B",
-    "line": "mov     [esp+20h+arg_8], ecx",
+    "line": "mov     [esp+20h+value], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x843291",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x8432AE",
-    "line": "mov     [esp+20h+arg_8], edi",
+    "line": "mov     [esp+20h+value], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,25 +1027,25 @@
   },
   {
     "ea": "0x8432B5",
-    "line": "lea     ecx, [esp+20h+arg_8]",
+    "line": "lea     ecx, [esp+20h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8432B9",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8432BA",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8432BB",
-    "line": "lea     ecx, [esi+40h]",
+    "line": "lea     ecx, [esi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x8432C6",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x8432D9",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1156,5 +1156,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D3210",
+    "line": "lea     ecx, [ebp+0Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3213",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3218",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D321C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D321F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3222",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D3224",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3229",
+    "line": "mov     eax, offset stru_AFB660",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D322E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

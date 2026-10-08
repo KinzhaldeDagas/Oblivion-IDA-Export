@@ -1,94 +1,153 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IObjContextVtbl",
+  "definition": "struct IObjContextVtbl\n{\nHRESULT_0 (*QueryInterface)(IObjContext_0 *, const IID *const, void **);\nULONG (*AddRef)(IObjContext_0 *);\nULONG (*Release)(IObjContext_0 *);\nHRESULT_0 (*SetProperty)(IObjContext_0 *, const GUID *const, CPFLAGS, IUnknown_0 *);\nHRESULT_0 (*RemoveProperty)(IObjContext_0 *, const GUID *const);\nHRESULT_0 (*GetProperty)(IObjContext_0 *, const GUID *const, CPFLAGS *, IUnknown_0 **);\nHRESULT_0 (*EnumContextProps)(IObjContext_0 *, IEnumContextProps_0 **);\nvoid (*Reserved1)(IObjContext_0 *);\nvoid (*Reserved2)(IObjContext_0 *);\nvoid (*Reserved3)(IObjContext_0 *);\nvoid (*Reserved4)(IObjContext_0 *);\nvoid (*Reserved5)(IObjContext_0 *);\nvoid (*Reserved6)(IObjContext_0 *);\nvoid (*Reserved7)(IObjContext_0 *);\n}\n",
   "id": 18374686479672036133,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IObjContext_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetProperty",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IObjContext_0 *, const GUID *const, CPFLAGS, IUnknown_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RemoveProperty",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IObjContext_0 *, const GUID *const)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetProperty",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IObjContext_0 *, const GUID *const, CPFLAGS *, IUnknown_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumContextProps",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IObjContext_0 *, IEnumContextProps_0 **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved1",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "void (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved2",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved3",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved4",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved5",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "void (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved6",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(IObjContext_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved7",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(IObjContext_0 *)"
     }
   ],
   "name": "IObjContextVtbl",
+  "ordinal": 4399,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 56
 }

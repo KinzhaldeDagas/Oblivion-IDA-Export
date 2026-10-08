@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x779710",
-    "line": "push    ebp",
+    "line": "push    ebp; MoonSugar build 39: base shader +0x34 transform slot branches skinned partition to CalculateBoneMatrixes/sub_765560, otherwise pass-0 non-skinned to sub_765480. Confirms hardware skin needs separate post-flush hook.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x779737",
-    "line": "call    NiDX9Renderer__CalculateBoneMatrixes",
+    "line": "call    NiDX9Renderer__CalculateBoneMatrixes; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x779751",
-    "line": "call    sub_765560",
+    "line": "call    sub_765560; MoonSugar build 39: skinned transform upload writes renderer world/bone transform state and D3DTS_WORLD+i for small blend counts. Not a good Moon Sugar detour point; preserve this native path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x77977B",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },

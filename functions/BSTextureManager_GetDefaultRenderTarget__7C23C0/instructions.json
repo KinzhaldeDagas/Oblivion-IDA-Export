@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C23C0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; MoonSugarEffect decode: BSTextureManager_GetDefaultRenderTarget delegates target-type sizing/format to GetRenderedSurfaceParameters, then retrieves/reuses a matching BSRenderedTexture.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7C23EC",
-    "line": "call    GetRenderedSurfacEParameters",
+    "line": "call    BSTextureManager_GetDefaultRenderTargetParameters; Oblivion default rendered-target parameter map. Type 0x17 is the frustum shadow map: square unsigned-short ShadowSurfaceRes dimensions, target flags 6, D3DFORMAT ShadowMapRenderTargetD3DFormat (0x72/D3DFMT_R32F), and auxiliary output zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7C23FD",
-    "line": "push    eax; a7",
+    "line": "push    eax; aux",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7C2402",
-    "line": "push    ecx; a6",
+    "line": "push    ecx; d3dFormat",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x7C2407",
-    "line": "push    edx; a5",
+    "line": "push    edx; targetFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2408",
-    "line": "push    eax; a4",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2409",
-    "line": "push    ecx; a3",
+    "line": "push    ecx; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C240A",
-    "line": "push    edi; a2",
+    "line": "push    edi; renderer",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7C240D",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },

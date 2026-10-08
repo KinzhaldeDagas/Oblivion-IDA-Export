@@ -61,7 +61,7 @@
 0x780823: push    1
 0x780825: mov     ecx, edi
 0x780827: call    eax
-0x780829: push    offset NiRefObject_objcount; lpAddend
+0x780829: push    0B3FD64h; lpAddend
 0x78082E: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x780834: call    ebp ; InterlockedDecrement
 0x780836: pop     edi

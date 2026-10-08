@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EA160",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified LandLOD update loop passes each quad's parent LandLOD node, maximum visibility distance, and view X/Y into TESTerrainLODQuad_Update; worldspace mode bit 0x4 and bDisplayLODLand gate the update.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x4EA1B2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA1B4",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x4EA1C0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA1C2",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x4EA1C9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA1CB",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x4EA1D4",
-    "line": "push    4",
+    "line": "push    4; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4EA1D6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA1D8",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x4EA1F2",
-    "line": "call    sub_4BDD40",
+    "line": "call    DistantLODLoaderTaskMap_Destroy; Verified singleton teardown: destroys and frees g_DistantLODLoaderTasksByCell, then clears the global pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4EA1F7",
-    "line": "call    sub_4BDCD0",
+    "line": "call    DistantLODLoaderTaskMap_EnsureCreated; Verified lazy singleton initializer: allocates 0x1C bytes for the lock-free cell-task map and constructs it with two interfaces, 37 buckets, and 0x0C-byte entries; stores the pointer in g_DistantLODLoaderTasksByCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x4EA1FE",
-    "line": "push    4",
+    "line": "push    4; modeBit",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4EA200",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA202",
-    "line": "call    sub_4EF2D0",
+    "line": "call    TESWorldSpace_IsDistantLODModeEnabled; Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x4EA235",
-    "line": "cmp     byte ptr [esp+40h+arg_10], bl",
+    "line": "cmp     byte ptr [esp+40h+unknownArg], bl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4EA247",
-    "line": "lea     eax, [esp+44h+var_1C]",
+    "line": "lea     eax, [esp+44h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4EA251",
-    "line": "lea     ecx, [esp+40h+var_1C]",
+    "line": "lea     ecx, [esp+40h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x4EA262",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+a1]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4EA266",
-    "line": "fstp    [esp+40h+var_1C]",
+    "line": "fstp    [esp+40h+keyOut]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x4EA26E",
-    "line": "fld     [esp+40h+arg_4]",
+    "line": "fld     [esp+40h+arg4]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4EA272",
-    "line": "fstp    [esp+40h+var_18]",
+    "line": "fstp    [esp+40h+viewY]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x4EA281",
-    "line": "fstp    [esp+40h+var_24]",
+    "line": "fstp    [esp+40h+position]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4EA285",
-    "line": "fld     [esp+40h+var_24]",
+    "line": "fld     [esp+40h+position]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4EA289",
-    "line": "fstp    [esp+40h+var_24]",
+    "line": "fstp    [esp+40h+position]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x4EA2AA",
-    "line": "fmul    [esp+40h+var_24]",
+    "line": "fmul    [esp+40h+position]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x4EA2AE",
-    "line": "fstp    [esp+40h+var_24]",
+    "line": "fstp    [esp+40h+position]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x4EA2B8",
-    "line": "fld     [esp+40h+var_24]",
+    "line": "fld     [esp+40h+position]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x4EA2CB",
-    "line": "mov     esi, [esp+40h+arg_C]",
+    "line": "mov     esi, [esp+40h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4EA2D5",
-    "line": "call    sub_6A9030",
+    "line": "call    NiTMapBase_GetFirstNode",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x4EA2DC",
-    "line": "mov     [esp+40h+var_24], eax",
+    "line": "mov     [esp+40h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x4EA2E2",
-    "line": "mov     ebp, [esp+40h+var_18]",
+    "line": "mov     ebp, [esp+40h+viewY]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4EA2E6",
-    "line": "mov     ebx, [esp+40h+var_1C]",
+    "line": "mov     ebx, [esp+40h+keyOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -697,55 +697,55 @@
   },
   {
     "ea": "0x4EA2F0",
-    "line": "lea     edx, [esp+40h+var_2C]",
+    "line": "lea     edx, [esp+40h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EA2F4",
-    "line": "push    edx",
+    "line": "push    edx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA2F5",
-    "line": "lea     eax, [esp+44h+var_1C]",
+    "line": "lea     eax, [esp+44h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EA2F9",
-    "line": "push    eax",
+    "line": "push    eax; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA2FA",
-    "line": "lea     ecx, [esp+48h+var_24]",
+    "line": "lea     ecx, [esp+48h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4EA2FE",
-    "line": "push    ecx",
+    "line": "push    ecx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA2FF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EA301",
-    "line": "mov     [esp+4Ch+var_2C], 0",
+    "line": "mov     [esp+4Ch+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4EA309",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x4EA315",
-    "line": "mov     edx, [esp+40h+var_2C]",
+    "line": "mov     edx, [esp+40h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4EA319",
-    "line": "mov     ecx, [edx]",
+    "line": "mov     ecx, [edx]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x4EA32D",
-    "line": "mov     edx, [esp+40h+arg_10]",
+    "line": "mov     edx, [esp+40h+unknownArg]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -823,19 +823,19 @@
   },
   {
     "ea": "0x4EA338",
-    "line": "push    edx; int",
+    "line": "push    edx; unknownArg",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA339",
-    "line": "push    ebp; float",
+    "line": "push    ebp; viewY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA33A",
-    "line": "push    ebx; float",
+    "line": "push    ebx; viewX",
     "mnemonic": "push",
     "size": 1
   },
@@ -847,19 +847,19 @@
   },
   {
     "ea": "0x4EA33C",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+maximumLODQuadDistance]; maximumLODQuadDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4EA33F",
-    "line": "push    eax; int",
+    "line": "push    eax; landLODParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA340",
-    "line": "call    sub_4ED430",
+    "line": "call    TESTerrainLODQuad_Update; Verified per-frame terrain-quad state machine: outside maximumLODQuadDistance advances detach/unload; in range, Unloaded/Loading quads without geometry request a NIF, LoadedDetached/UnloadPending quads attach under LandLOD and become Attached, while Attached quads are stable. State meanings for 1..5 are written in TerrainLODQuadState_Oblivion; values 0 and 6 are Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,19 +877,19 @@
   },
   {
     "ea": "0x4EA34A",
-    "line": "push    eax",
+    "line": "push    eax; landLODParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EA34B",
-    "line": "call    sub_4ECAE0",
+    "line": "call    TESTerrainLODQuad_AdvanceUnloadState; Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4EA350",
-    "line": "cmp     [esp+40h+var_24], 0",
+    "line": "cmp     [esp+40h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x4EA35F",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x4EA383",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1030,5 +1030,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B60C0",
+    "line": "lea     ecx, [ebp-20h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B60C3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B60C8",
+    "line": "mov     edx, [esp+arg4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B60CC",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B60CF",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B60D2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B60D4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B60D9",
+    "line": "mov     eax, offset stru_AE100C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B60DE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

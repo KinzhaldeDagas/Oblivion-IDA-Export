@@ -20,43 +20,43 @@ void __userpurge sub_5D38C0(
   int *v18; // eax
   char v19[300]; // [esp+10h] [ebp-130h] BYREF
 
-  v11 = *(_DWORD **)(a1[0x12] + 0x34);
-  while ( v11 )
+  v11 = *(_DWORD **)(a1[0x12] + 0x34); /*0x5d38dc*/
+  while ( v11 ) /*0x5d38e2*/
   {
-    v12 = (void (__thiscall ***)(_DWORD, int))v11[2];
-    v11 = (_DWORD *)*v11;
-    if ( v12 )
-      (**v12)(v12, 1);
+    v12 = (void (__thiscall ***)(_DWORD, int))v11[2]; /*0x5d38e4*/
+    v11 = (_DWORD *)*v11; /*0x5d38ec*/
+    if ( v12 ) /*0x5d38ee*/
+      (**v12)(v12, 1); /*0x5d38f6*/
   }
-  NiTPointerList::FreeAllNodes((NiTPointerList__BSImageSpaceShader *)(a1[0x12] + 0x30));
-  sub_5D3650(a1, a2, a3, a4, a5, a6, a7, a8, a9, "New Save", 0, 0, 0);
-  if ( a10 )
+  NiTPointerList::FreeAllNodes((NiTPointerList__BSImageSpaceShader *)(a1[0x12] + 0x30)); /*0x5d3902*/
+  SaveMenu_AddSaveRow(a1, a2, a3, a4, a5, a6, a7, a8, a9, "New Save", 0, 0, 0); /*0x5d3914*/
+  if ( a10 ) /*0x5d3921*/
   {
-    sub_459400(SaveLoad_CurrentSavegame, v13);
-    sub_45D450(SaveLoad_CurrentSavegame, v14);
+    sub_459400(g_TESSaveLoadGame, v13); /*0x5d3929*/
+    TESSaveLoadGame_EnumerateSaveFiles(g_TESSaveLoadGame, v14); /*0x5d3934*/
   }
-  v15 = (int *)SaveLoad_CurrentSavegame[1].unk01C[0];
-  v16 = 0;
-  a1[0x13] = v15;
-  v17 = 1;
-  v18 = v15;
-  if ( v15 )
+  v15 = (int *)g_TESSaveLoadGame[1].unk01C[0]; /*0x5d393f*/
+  v16 = 0; /*0x5d3942*/
+  a1[0x13] = v15; /*0x5d3946*/
+  v17 = 1; /*0x5d3949*/
+  v18 = v15; /*0x5d394e*/
+  if ( v15 ) /*0x5d3950*/
   {
-    do
+    do /*0x5d395e*/
     {
-      if ( *v18 )
-        ++v16;
-      v18 = (int *)v18[1];
+      if ( *v18 ) /*0x5d3952*/
+        ++v16; /*0x5d3957*/
+      v18 = (int *)v18[1]; /*0x5d3959*/
     }
-    while ( v18 );
-    do
+    while ( v18 ); /*0x5d395e*/
+    do /*0x5d397d*/
     {
-      if ( !*v15 )
-        break;
-      sub_5D3650(a1, a2, a3, a4, a5, a6, a7, a8, a9, v19, v17, *v15, v16);
-      v15 = (int *)v15[1];
-      ++v17;
+      if ( !*v15 ) /*0x5d3960*/
+        break; /*0x5d3964*/
+      SaveMenu_AddSaveRow(a1, a2, a3, a4, a5, a6, a7, a8, a9, v19, v17, *v15, v16); /*0x5d3970*/
+      v15 = (int *)v15[1]; /*0x5d3975*/
+      ++v17; /*0x5d3978*/
     }
-    while ( v15 );
+    while ( v15 ); /*0x5d397d*/
   }
 }

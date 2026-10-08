@@ -19,11 +19,11 @@
 0x65BAC0: test    edi, edi
 0x65BAC2: jz      short loc_65BAEA
 0x65BAC4: mov     ecx, edi; this
-0x65BAC6: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x65BAC6: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x65BACB: cmp     eax, 2
 0x65BACE: jz      short loc_65BADC
 0x65BAD0: mov     ecx, edi; this
-0x65BAD2: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x65BAD2: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x65BAD7: cmp     eax, 1
 0x65BADA: jnz     short loc_65BAEA
 0x65BADC: mov     edx, [esi]
@@ -34,20 +34,20 @@
 0x65BAEA: test    bl, 0Eh
 0x65BAED: jz      short loc_65BB65
 0x65BAEF: mov     ecx, esi; this
-0x65BAF1: call    MobileObject_GetCharProxy
+0x65BAF1: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65BAF6: mov     edi, eax
 0x65BAF8: test    edi, edi
 0x65BAFA: jz      short loc_65BB65
 0x65BAFC: mov     ecx, esi; this
-0x65BAFE: call    TESObjectREFR_GetParentCell
+0x65BAFE: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65BB03: test    eax, eax
 0x65BB05: jz      short loc_65BB34
 0x65BB07: push    ebp
 0x65BB08: mov     ecx, esi; this
-0x65BB0A: call    TESObjectREFR_GetParentCell
+0x65BB0A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65BB0F: mov     ebp, eax
 0x65BB11: mov     ecx, ebp; this
-0x65BB13: call    TESObjectCELL_IsInterior
+0x65BB13: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x65BB18: test    al, al
 0x65BB1A: jz      short loc_65BB26
 0x65BB1C: lea     ecx, [ebp+28h]
@@ -59,7 +59,7 @@
 0x65BB2E: call    sub_895060
 0x65BB33: pop     ebp
 0x65BB34: lea     ecx, [edi+1E0h]
-0x65BB3A: call    sub_88D370
+0x65BB3A: call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.
 0x65BB3F: cmp     eax, 4
 0x65BB42: jz      short loc_65BB65
 0x65BB44: mov     ecx, [esi+2Ch]
@@ -71,7 +71,7 @@
 0x65BB56: mov     ecx, edi; this
 0x65BB58: mov     [esp+1Ch+var_8], edx
 0x65BB5C: mov     [esp+1Ch+var_4], eax
-0x65BB60: call    sub_452A10
+0x65BB60: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x65BB65: mov     ecx, [esi+58h]
 0x65BB68: test    ecx, ecx
 0x65BB6A: jz      loc_65BC37
@@ -104,7 +104,7 @@
 0x65BBBE: call    edx
 0x65BBC0: mov     eax, [esi+58h]
 0x65BBC3: mov     edi, [eax]
-0x65BBC5: mov     ecx, offset TimeGlobals
+0x65BBC5: mov     ecx, 0B332E0h
 0x65BBCA: call    TimeGlobals_GetGameHour
 0x65BBCF: fsub    qword ptr ds:0A2FAA0h
 0x65BBD5: mov     edx, [edi+1Ch]
@@ -112,10 +112,10 @@
 0x65BBD9: mov     ecx, [esi+58h]
 0x65BBDC: fstp    [esp+1Ch+arg_0]
 0x65BBE0: fld     [esp+1Ch+arg_0]
-0x65BBE4: fstp    [esp+1Ch+var_1C]
+0x65BBE4: fstp    dword ptr [esp+1Ch+var_1C]
 0x65BBE7: call    edx
 0x65BBE9: push    esi
-0x65BBEA: mov     ecx, offset ActorProcessManager_ptr
+0x65BBEA: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x65BBEF: call    sub_674E10
 0x65BBF4: jmp     short loc_65BC1F
 0x65BBF6: mov     eax, [ecx]
@@ -123,7 +123,7 @@
 0x65BBFB: call    edx
 0x65BBFD: push    eax
 0x65BBFE: push    esi
-0x65BBFF: mov     ecx, offset ActorProcessManager_ptr
+0x65BBFF: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x65BC04: call    sub_674550
 0x65BC09: mov     ecx, [esi+58h]
 0x65BC0C: test    ecx, ecx

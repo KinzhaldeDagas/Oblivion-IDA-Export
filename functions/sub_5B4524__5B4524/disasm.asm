@@ -37,7 +37,7 @@
 0x5B45A1: mov     eax, [esp+8+arg_14]
 0x5B45A5: push    eax
 0x5B45A6: mov     [esp+0Ch+arg_34C], 0FFFFFFFFh
-0x5B45B1: call    FormHeapFree
+0x5B45B1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B45B6: mov     eax, [ebp+0]
 0x5B45B9: mov     eax, [eax+1Ch]
 0x5B45BC: mov     eax, [eax+48h]
@@ -55,7 +55,7 @@
 0x5B45E5: push    offset aSS_2; "%s\\%s"
 0x5B45EA: push    ecx
 0x5B45EB: call    __sprintf
-0x5B45F0: mov     ebx, dword ptr [esp+18h+ArgList]
+0x5B45F0: mov     ebx, [esp+18h+ArgList]
 0x5B45F4: add     esp, 10h
 0x5B45F7: jmp     short loc_5B4623
 0x5B45F9: mov     edx, ds:0B38BD0h
@@ -76,44 +76,44 @@
 0x5B462F: call    Tile_SetString
 0x5B4634: fld     dword ptr ds:0A379B4h
 0x5B463A: push    ecx
-0x5B463B: fstp    [esp+0Ch+a2]; a3
-0x5B463E: push    0FA1h; a2
+0x5B463B: fstp    [esp+0Ch+a2]; value
+0x5B463E: push    0FA1h; propertyCode
 0x5B4643: mov     ecx, esi; this
-0x5B4645: call    Tile_SetFloat
+0x5B4645: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B464A: fld     dword ptr ds:0A30634h
 0x5B4650: push    ecx
-0x5B4651: fstp    [esp+0Ch+a2]; a3
-0x5B4654: push    0FB0h; a2
+0x5B4651: fstp    [esp+0Ch+a2]; value
+0x5B4654: push    0FB0h; propertyCode
 0x5B4659: mov     ecx, esi; this
-0x5B465B: call    Tile_SetFloat
+0x5B465B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4660: xor     eax, eax
-0x5B4662: mov     [esp+8+arg_8], eax
+0x5B4662: mov     [esp+8+name], eax
 0x5B4666: mov     word ptr [esp+8+arg_C], ax
 0x5B466B: mov     word ptr [esp+8+arg_C+2], ax
 0x5B4670: push    ebx; ArgList
-0x5B4671: lea     edx, [esp+0Ch+arg_8]
+0x5B4671: lea     edx, [esp+0Ch+name]
 0x5B4675: push    offset aMagicpop_effec; "magicpop_effect_%d_icon"
 0x5B467A: push    edx; a3
 0x5B467B: mov     [esp+14h+arg_34C], 2
 0x5B4686: call    BSStringT_Static_Format
-0x5B468B: mov     eax, [esp+14h+arg_8]
+0x5B468B: mov     eax, [esp+14h+name]
 0x5B468F: add     esp, 0Ch
-0x5B4692: push    eax; unsigned __int8 *
-0x5B4693: mov     ecx, esi
-0x5B4695: call    sub_589930
+0x5B4692: push    eax; name
+0x5B4693: mov     ecx, esi; this
+0x5B4695: call    Tile_FindDescendantByName
 0x5B469A: xor     esi, esi
 0x5B469C: cmp     eax, esi
 0x5B469E: jz      short loc_5B46A9
 0x5B46A0: mov     ecx, [eax+2Ch]
 0x5B46A3: or      ecx, 10h
 0x5B46A6: mov     [eax+2Ch], ecx
-0x5B46A9: mov     ecx, [esp+8+arg_8]
+0x5B46A9: mov     ecx, [esp+8+name]
 0x5B46AD: mov     ebp, [ebp+4]
 0x5B46B0: push    ecx
 0x5B46B1: mov     [esp+0Ch+arg_34C], 0FFFFFFFFh
-0x5B46BC: call    FormHeapFree
+0x5B46BC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B46C1: add     esp, 4
-0x5B46C4: mov     [esp+8+arg_8], esi
+0x5B46C4: mov     [esp+8+name], esi
 0x5B46C8: mov     word ptr [esp+8+arg_C+2], si
 0x5B46CD: mov     word ptr [esp+8+arg_C], si
 0x5B46D2: cmp     ebp, esi
@@ -127,14 +127,14 @@
 0x5B46EE: mov     ecx, [ebp+0]; this
 0x5B46F1: fld1
 0x5B46F3: push    ecx
-0x5B46F4: fstp    [esp+0Ch+a2]; a3
-0x5B46F7: push    0FA1h; a2
+0x5B46F4: fstp    [esp+0Ch+a2]; value
+0x5B46F7: push    0FA1h; propertyCode
 0x5B46FC: add     ebp, 4
-0x5B46FF: call    Tile_SetFloat
+0x5B46FF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B4704: sub     esi, 1
 0x5B4707: jnz     short loc_5B46EE
 0x5B4709: mov     esi, [esp+8+a3]
-0x5B470D: mov     ebp, dword ptr [esp+8+arg_1C]
+0x5B470D: mov     ebp, [esp+8+arg_1C]
 0x5B4711: test    ebp, ebp
 0x5B4713: jz      loc_5B4846
 0x5B4719: mov     eax, [ebp+8]
@@ -154,7 +154,7 @@
 0x5B4747: test    al, al
 0x5B4749: jnz     loc_5B4846
 0x5B474F: xor     esi, esi
-0x5B4751: mov     [esp+8+arg_8], esi
+0x5B4751: mov     [esp+8+name], esi
 0x5B4755: mov     word ptr [esp+8+arg_C], si
 0x5B475A: mov     word ptr [esp+8+arg_C+2], si
 0x5B475F: mov     edx, [ebx]
@@ -166,7 +166,7 @@
 0x5B4776: jnz     short loc_5B4793
 0x5B4778: mov     ecx, ds:0B38BD8h
 0x5B477E: push    ecx; ArgList
-0x5B477F: lea     edx, [esp+0Ch+arg_8]
+0x5B477F: lea     edx, [esp+0Ch+name]
 0x5B4783: push    offset aS; "%s"
 0x5B4788: push    edx; int
 0x5B4789: call    BSStringT_Static_Format
@@ -186,20 +186,20 @@
 0x5B47B0: jnz     short loc_5B47B8
 0x5B47B2: fld1
 0x5B47B4: fstp    [esp+0Ch+arg_C]
-0x5B47B8: mov     ecx, [esp+0Ch+arg_18]
+0x5B47B8: mov     ecx, [esp+0Ch+arg_18]; this
 0x5B47BC: mov     ebp, ds:0B38BC8h
 0x5B47C2: movzx   ebx, word ptr [ebx+8]
 0x5B47C6: mov     esi, ds:0B38BC0h
-0x5B47CC: call    sub_4849C0
+0x5B47CC: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5B47D1: fdiv    [esp+0Ch+arg_C]
-0x5B47D5: call    Double_To_SInt32
-0x5B47DA: mov     ecx, [esp+0Ch+arg_18]
+0x5B47D5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x5B47DA: mov     ecx, [esp+0Ch+arg_18]; this
 0x5B47DE: push    eax
 0x5B47DF: movzx   eax, bx
 0x5B47E2: push    ebp
 0x5B47E3: push    eax
-0x5B47E4: call    sub_4849C0
-0x5B47E9: call    Double_To_SInt32
+0x5B47E4: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
+0x5B47E9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B47EE: push    eax
 0x5B47EF: push    esi; ArgList
 0x5B47F0: lea     ecx, [esp+20h+arg_4]
@@ -207,7 +207,7 @@
 0x5B47F9: push    ecx; int
 0x5B47FA: call    BSStringT_Static_Format
 0x5B47FF: add     esp, 1Ch
-0x5B4802: mov     edx, [esp+8+arg_8]
+0x5B4802: mov     edx, [esp+8+name]
 0x5B4806: mov     ecx, [edi+4Ch]
 0x5B4809: push    edx
 0x5B480A: push    0FDEh
@@ -215,11 +215,11 @@
 0x5B4814: fld     dword ptr ds:0A379B4h
 0x5B481A: mov     edi, [edi+4Ch]
 0x5B481D: push    ecx
-0x5B481E: fstp    [esp+0Ch+a2]; a3
-0x5B4821: push    0FA1h; a2
+0x5B481E: fstp    [esp+0Ch+a2]; value
+0x5B4821: push    0FA1h; propertyCode
 0x5B4826: mov     ecx, edi; this
-0x5B4828: call    Tile_SetFloat
-0x5B482D: lea     ecx, [esp+8+arg_8]; void *
+0x5B4828: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5B482D: lea     ecx, [esp+8+name]; void *
 0x5B4831: mov     [esp+8+arg_34C], 0FFFFFFFFh
 0x5B483C: call    BSStringT_Clear
 0x5B4841: jmp     loc_5B49D1
@@ -288,10 +288,10 @@
 0x5B4925: fld     dword ptr ds:0A379B4h
 0x5B492B: mov     edi, [edi+4Ch]
 0x5B492E: push    ecx
-0x5B492F: fstp    [esp+1Ch+var_1C]; a3
-0x5B4932: push    0FA1h; a2
+0x5B492F: fstp    [esp+1Ch+value]; value
+0x5B4932: push    0FA1h; propertyCode
 0x5B4937: mov     ecx, edi; this
-0x5B4939: call    Tile_SetFloat
+0x5B4939: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B493E: lea     ecx, [esp+18h+arg_4]; void *
 0x5B4942: mov     [esp+18h+arg_33C], 0FFFFFFFFh
 0x5B494D: call    BSStringT_Clear
@@ -326,9 +326,9 @@
 0x5B49BE: fld1
 0x5B49C0: push    ecx
 0x5B49C1: mov     ecx, [edi+4Ch]; this
-0x5B49C4: fstp    [esp+1Ch+var_1C]; a3
-0x5B49C7: push    0FA1h; a2
-0x5B49CC: call    Tile_SetFloat
+0x5B49C4: fstp    [esp+1Ch+value]; value
+0x5B49C7: push    0FA1h; propertyCode
+0x5B49CC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B49D1: mov     ecx, [esp+8+arg_30]
 0x5B49D5: push    0; float
 0x5B49D7: call    sub_58FBA0

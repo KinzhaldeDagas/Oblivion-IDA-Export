@@ -11,14 +11,14 @@
 0x53394A: mov     ecx, [eax+10h]
 0x53394D: add     ecx, eax
 0x53394F: jz      short loc_533972
-0x533951: push    offset dword_BA7B80
+0x533951: push    offset stru_BA7B80
 0x533956: lea     eax, [esp+10h+var_8]
 0x53395A: push    eax
-0x53395B: call    sub_47F990
+0x53395B: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x533960: mov     ecx, [eax]
 0x533962: test    ecx, ecx
 0x533964: jz      short loc_533972
-0x533966: call    sub_452A60
+0x533966: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x53396B: pop     esi
 0x53396C: add     esp, 8
 0x53396F: retn    4

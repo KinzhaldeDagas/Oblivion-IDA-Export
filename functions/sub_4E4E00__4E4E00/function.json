@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E4E00",
+      "0x4E4E83"
+    ]
+  ],
+  "chunks_sha256": "d7d198bbc700e6ee7a2e3bd076275d0fc5707cdf8e98f2497ab0ceae9957c35c",
+  "comment_regular": "Verified shared LAND/PathGrid group constructor: from a matching exterior/interior CELL sub-block group type 3/5, emits CELL children group type 6 labelled with parent CELL FormID; from matching type 6, emits temporary children group type 9 with the same CELL label. This nests PGRD records under CELL temporary children.",
+  "comment_repeatable": "Verified shared LAND/PathGrid group constructor: from a matching exterior/interior CELL sub-block group type 3/5, emits CELL children group type 6 labelled with parent CELL FormID; from matching type 6, emits temporary children group type 9 with the same CELL label. This nests PGRD records under CELL temporary children.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E4E00",
+  "display_name": "TESObjectLAND_TESPathGrid_CreateGroupRecord",
   "end_ea": "0x4E4E83",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E4E00",
+  "name": "TESObjectLAND_TESPathGrid_CreateGroupRecord",
   "segment": ".text",
   "sha256": "d7d198bbc700e6ee7a2e3bd076275d0fc5707cdf8e98f2497ab0ceae9957c35c",
   "size": 131,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E4E00",
-  "type": "void __thiscall(int *this, _DWORD *, int)",
+  "total_chunk_size": 131,
+  "type": "void __thiscall(void *this, unsigned int *out_group_header, const unsigned int *current_group_header)",
   "xrefs_from_count": 57,
   "xrefs_to_count": 2
 }

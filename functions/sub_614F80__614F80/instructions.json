@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x614F80",
-    "line": "push    esi",
+    "line": "push    esi; Adds unique non-self actor to CombatController+0x15C ally cache and increments +0x178; caller supplies combat-group friendly entries.",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x614FBA",
-    "line": "add     [esi+178h], ebx",
+    "line": "add     [esi+178h], ebx; CombatController+0x178 counts unique cached allies.",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x614FC0",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; If TESCombatStyle::kFlag_IgnoreAlliesInArea (0x04) is set, skip the nearby-ally +0x17C calculation (ally is still cached).",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x614FD7",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,31 +211,31 @@
   },
   {
     "ea": "0x614FDB",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x614FE0",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x614FE1",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x614FE2",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x614FE7",
-    "line": "fld     dword ptr ds:0B372B8h",
+    "line": "fld     dword ptr ds:0B372B8h; If combat style flag 4 is clear, +0x17C is set when cached ally is closer to current target than fAICombatNoAreaEffectAllyDistance (default 350.0).",
     "mnemonic": "fld",
     "size": 6
   },

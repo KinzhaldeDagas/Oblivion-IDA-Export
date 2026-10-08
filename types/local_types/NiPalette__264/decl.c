@@ -1,1 +1,1 @@
-NiPalette
+struct NiPalette;

@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7B0D9D",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x7B0DA0",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7B0DA5",
-    "line": "push    1",
+    "line": "push    1; filterPreset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7B0DA7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7B0DA9",
-    "line": "call    sub_771640",
+    "line": "call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7B0DD7",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7B0DDA",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7B0E06",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,19 +769,19 @@
   },
   {
     "ea": "0x7B0E9C",
-    "line": "push    0",
+    "line": "push    0; filterPreset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7B0E9E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7B0EA0",
-    "line": "call    sub_771640",
+    "line": "call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7B0ED9",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -895,25 +895,25 @@
   },
   {
     "ea": "0x7B0EDC",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7B0EE1",
-    "line": "push    1",
+    "line": "push    1; filterPreset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7B0EE3",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7B0EE5",
-    "line": "call    sub_771640",
+    "line": "call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x7B0FB9",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x7B0FD1",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x7B0FE2",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x7B0FEF",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x7B1000",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x7B100D",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x7B101E",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,25 +1567,25 @@
   },
   {
     "ea": "0x7B1026",
-    "line": "push    ebx",
+    "line": "push    ebx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B1027",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B1028",
-    "line": "lea     ecx, [esi+40h]",
+    "line": "lea     ecx, [esi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7B102B",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x7B1046",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1702,5 +1702,101 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x75FA70",
+    "line": "mov     ecx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA72",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA74",
+    "line": "jz      short locret_75FA81",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA76",
+    "line": "add     dword ptr [ecx+5Ch], 0FFFFFFFFh",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x75FA7A",
+    "line": "jnz     short locret_75FA81",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA7C",
+    "line": "jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x75FA81",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CD730",
+    "line": "lea     ecx, [ebp-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD733",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD738",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD73C",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD73F",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD742",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD744",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD749",
+    "line": "mov     eax, offset stru_AF69A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD74E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

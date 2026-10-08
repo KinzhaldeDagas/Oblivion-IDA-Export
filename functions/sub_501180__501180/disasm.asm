@@ -20,7 +20,7 @@
 0x5011B7: cmp     byte ptr ds:0B361ACh, 0
 0x5011BE: jz      short loc_5011E6
 0x5011C0: cmp     byte ptr [eax+78h], 0
-0x5011C4: mov     ecx, offset aOn_0
+0x5011C4: mov     ecx, offset aOn_0; "On"
 0x5011C9: jnz     short loc_5011D0
 0x5011CB: mov     ecx, offset aOff
 0x5011D0: push    ecx

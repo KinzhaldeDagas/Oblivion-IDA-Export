@@ -1,19 +1,36 @@
 {
-  "callees_count": 46,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 17,
   "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_479450",
+  "chunks": [
+    [
+      "0x479450",
+      "0x4796E2"
+    ],
+    [
+      "0x9AF0E0",
+      "0x9AF10B"
+    ]
+  ],
+  "chunks_sha256": "5d52db92bcea02fc3e1e7a9843805f61a27c2cd19739d17766b13f7fa8f11d83",
+  "comment_regular": "Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.",
+  "comment_repeatable": "Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "Actor_LoadCloneAndAttachModel3D",
   "end_ea": "0x4796E2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_479450",
+  "name": "Actor_LoadCloneAndAttachModel3D",
   "segment": ".text",
   "sha256": "215e96cd6708b10ec7063c4e901f5a959aef453893d384515e0204182faaf0cc",
   "size": 658,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x479450",
-  "type": "int __cdecl(const char *, int, TESObjectREFR *, int *)",
-  "xrefs_from_count": 271,
+  "total_chunk_size": 701,
+  "type": "NiAVObject *__cdecl(const char *modelPath, int slot, TESObjectREFR *actorRef, NiNode *skeletonRoot)",
+  "xrefs_from_count": 284,
   "xrefs_to_count": 11
 }

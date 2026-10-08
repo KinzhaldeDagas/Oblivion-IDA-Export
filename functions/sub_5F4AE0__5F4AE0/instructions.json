@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5F4AE0",
-    "line": "push    ebx",
+    "line": "push    ebx; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4AE1",
-    "line": "mov     bl, byte ptr [esp+4+arg_0]",
+    "line": "mov     bl, [esp+4+shouldBlock]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5F4B22",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,19 +439,19 @@
   },
   {
     "ea": "0x5F4B97",
-    "line": "push    1",
+    "line": "push    1; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4B99",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4B9B",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x5F4BBE",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x5F4BFA",
-    "line": "push    eax",
+    "line": "push    eax; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4BFB",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4BFD",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x5F4C03",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x5F4C0D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x5F4C11",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4C13",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x5F4C19",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,19 +775,19 @@
   },
   {
     "ea": "0x5F4C29",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4C2B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4C2D",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x5F4C3B",
-    "line": "push    1",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4C3D",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x5F4C43",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x5F4C87",
-    "line": "cmp     byte ptr [esp+10h+arg_0], 0",
+    "line": "cmp     [esp+10h+shouldBlock], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -961,19 +961,19 @@
   },
   {
     "ea": "0x5F4C92",
-    "line": "push    1",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4C94",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4C96",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x5F4CB2",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    dword ptr [esp+10h+shouldBlock]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1057,13 +1057,13 @@
   },
   {
     "ea": "0x5F4CC5",
-    "line": "mov     [esp+10h+arg_0], ecx",
+    "line": "mov     dword ptr [esp+10h+shouldBlock], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5F4CC9",
-    "line": "fild    [esp+10h+arg_0]",
+    "line": "fild    dword ptr [esp+10h+shouldBlock]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x5F4CD3",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    dword ptr [esp+10h+shouldBlock]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5F4CD7",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     dword ptr [esp+10h+shouldBlock]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1093,25 +1093,25 @@
   },
   {
     "ea": "0x5F4CDC",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F4CDF",
-    "line": "push    1; int",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4CE1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4CE3",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x5F4CF2",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     dword ptr [esp+10h+shouldBlock]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1147,61 +1147,61 @@
   },
   {
     "ea": "0x5F4CF7",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F4CFA",
-    "line": "push    1; int",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4CFC",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4CFE",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F4D03",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4D05",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F4D0A",
-    "line": "push    0",
+    "line": "push    0; sequence",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D0C",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D0E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4D10",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x5F4D3E",
-    "line": "cmp     byte ptr [esp+10h+arg_0], 0",
+    "line": "cmp     [esp+10h+shouldBlock], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1333,43 +1333,43 @@
   },
   {
     "ea": "0x5F4D51",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D53",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D55",
-    "line": "push    1Bh",
+    "line": "push    1Bh; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D57",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4D59",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F4D5E",
-    "line": "push    1",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D60",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x5F4D65",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x5F4D6D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1405,37 +1405,37 @@
   },
   {
     "ea": "0x5F4D71",
-    "line": "push    1",
+    "line": "push    1; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D73",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F4D78",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4D79",
-    "line": "push    6",
+    "line": "push    6; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4D7B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4D7D",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x5F4D9E",
-    "line": "mov     cl, byte ptr [esp+10h+arg_0]",
+    "line": "mov     cl, [esp+10h+shouldBlock]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1549,67 +1549,67 @@
   },
   {
     "ea": "0x5F4DAE",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4DB0",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4DB2",
-    "line": "push    edi",
+    "line": "push    edi; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4DB3",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F4DB8",
-    "line": "push    1",
+    "line": "push    1; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4DBA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4DBC",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F4DC1",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F4DC2",
-    "line": "push    6",
+    "line": "push    6; action",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F4DC4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F4DC6",
-    "line": "call    HighPRocess_DoAction?????",
+    "line": "call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x5F4DF6",
-    "line": "mov     cl, byte ptr [esp+10h+arg_0]",
+    "line": "mov     cl, [esp+10h+shouldBlock]",
     "mnemonic": "mov",
     "size": 4
   },

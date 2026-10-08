@@ -1,0 +1,45 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OblivionSavedGlobalValue",
+  "definition": "struct OblivionSavedGlobalValue\n{\nunsigned int formID; ///< Verified: load stream stores exactly an unsigned 32-bit form ID at +0 and float at +4; fixed record size 8 bytes.\nfloat value; ///< Verified: float value is read from stream and written to TESGlobal.data (+0x24) after finite/NaN sanitization.\n}\n",
+  "id": 18374686479672086445,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: load stream stores exactly an unsigned 32-bit form ID at +0 and float at +4; fixed record size 8 bytes.",
+      "name": "formID",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: float value is read from stream and written to TESGlobal.data (+0x24) after finite/NaN sanitization.",
+      "name": "value",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "float"
+    }
+  ],
+  "name": "OblivionSavedGlobalValue",
+  "ordinal": 10014,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 8
+}

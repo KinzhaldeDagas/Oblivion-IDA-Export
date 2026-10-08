@@ -1,19 +1,36 @@
 {
-  "callees_count": 111,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 13,
-  "display_name": "sub_622180",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 52,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x622180",
+      "0x6227F6"
+    ],
+    [
+      "0x9B5200",
+      "0x9B5226"
+    ]
+  ],
+  "chunks_sha256": "4059eb98caac8d90910b0f5dfc1da7ce0d87e7d416b2214f4a77a11027f6f4fb",
+  "comment_regular": "Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.",
+  "comment_repeatable": "Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
+  "display_name": "CombatController_UpdateActiveMode",
   "end_ea": "0x6227F6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_622180",
+  "name": "CombatController_UpdateActiveMode",
   "segment": ".text",
   "sha256": "5d26ca79cfe563cf7d3e45e2bbfecd5ce2aeb3bcfc131fe5183407221fbbf52c",
   "size": 1654,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x622180",
+  "total_chunk_size": 1692,
   "type": "void __usercall(int@<ecx>, char@<bpl>, unsigned int *@<edi>, double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>)",
-  "xrefs_from_count": 634,
+  "xrefs_from_count": 648,
   "xrefs_to_count": 2
 }

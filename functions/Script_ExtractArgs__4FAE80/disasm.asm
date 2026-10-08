@@ -1,11 +1,11 @@
-0x4FAE80: sub     esp, 18h
+0x4FAE80: sub     esp, 18h; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x4FAE83: cmp     [esp+18h+a1], 0
 0x4FAE88: jnz     short loc_4FAE90
 0x4FAE8A: xor     al, al
 0x4FAE8C: add     esp, 18h
 0x4FAE8F: retn
 0x4FAE90: mov     ecx, [esp+18h+arg_8]
-0x4FAE94: mov     eax, [ecx]
+0x4FAE94: mov     eax, [ecx]; Reads the compiled argument count word at scriptData+*opcodeOffset, then advances the offset by two bytes before per-argument extraction.
 0x4FAE96: mov     edx, [esp+18h+arg_4]
 0x4FAE9A: movzx   edx, word ptr [eax+edx]
 0x4FAE9E: push    ebx
@@ -24,9 +24,9 @@
 0x4FAEC7: fldz
 0x4FAEC9: mov     ecx, [esp+28h+a1]
 0x4FAECD: lea     eax, [eax+eax*2]
-0x4FAED0: lea     ebx, [ecx+eax*4+4]
+0x4FAED0: lea     ebx, [ecx+eax*4+4]; Per-argument loop indexes ParamInfo records with 0x0C-byte stride and dispatches by ParamInfo.typeID.
 0x4FAED4: mov     eax, [ebx]
-0x4FAED6: cmp     byte ptr ds:0B0A54Dh[eax*8], 0
+0x4FAED6: cmp     byte ptr ds:0B0A54Dh[eax*8], 0; Type table byte at 0xB0A54D+(8*typeID) selects the form/ref-variable extraction path.
 0x4FAEDE: jz      Script_ExtractArgs___ArgLoop_ExtractNonForm
 0x4FAEE4: mov     eax, [ebp+0]
 0x4FAEE7: fstp    st
@@ -44,7 +44,7 @@
 0x4FAF10: push    eax; int
 0x4FAF11: push    ecx; int
 0x4FAF12: mov     ecx, [esp+30h+arg_14]; int
-0x4FAF16: call    Script_GetRefVariableByIndex
+0x4FAF16: call    Script_GetRefVariableByIndex; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.
 0x4FAF1B: mov     edx, [esp+28h+arg_14]
 0x4FAF1F: mov     edi, eax
 0x4FAF21: mov     eax, [edx+8]
@@ -227,7 +227,7 @@
 0x4FB1B8: mov     eax, [ebp+0]; jumptable 004FB1B1 case 0
 0x4FB1BB: fstp    st
 0x4FB1BD: mov     ecx, [esp+28h+arg_4]
-0x4FB1C1: movzx   ebx, word ptr [eax+ecx]
+0x4FB1C1: movzx   ebx, word ptr [eax+ecx]; Param typeID 0 extracts a string: compiled form stores uint16 length followed by bytes.
 0x4FB1C5: mov     edx, [esp+28h+arg_14]
 0x4FB1C9: add     eax, 2
 0x4FB1CC: mov     [ebp+0], eax
@@ -238,12 +238,12 @@
 0x4FB1DA: mov     edx, [esp+28h+arg_4]
 0x4FB1DE: mov     edi, [esi]
 0x4FB1E0: movsx   ebp, bx
-0x4FB1E3: push    ebp; Size
+0x4FB1E3: push    ebp; byteCount
 0x4FB1E4: add     eax, edx
 0x4FB1E6: add     esi, 4
-0x4FB1E9: push    eax; Src
-0x4FB1EA: push    edi; Dst
-0x4FB1EB: call    _memcpy
+0x4FB1E9: push    eax; source
+0x4FB1EA: push    edi; destination
+0x4FB1EB: call    _memcpy;
 0x4FB1F0: mov     byte ptr [edi+ebp], 0
 0x4FB1F4: mov     ebp, [esp+34h+arg_8]
 0x4FB1F8: add     esp, 0Ch
@@ -251,7 +251,7 @@
 0x4FB1FE: add     [ebp+0], eax
 0x4FB201: jmp     Script_ExtractArgs___ArgLoop_Next
 0x4FB206: mov     ecx, [esp+28h+l]; jumptable 004FB1B1 cases 1,23
-0x4FB20A: fstp    [esp+28h+var_14]
+0x4FB20A: fstp    [esp+28h+var_14]; Param typeID 1/0x17 extracts an integer through ExecuteScriptInstruction_ expression evaluation, then writes SInt32 to the caller output.
 0x4FB20E: mov     edi, [esp+28h+arg_14]
 0x4FB212: mov     edx, [esp+28h+a5]
 0x4FB216: mov     eax, [esp+28h+a4]
@@ -275,12 +275,12 @@
 0x4FB243: jz      Script_ExtractArgs___ArgLoop_Next
 0x4FB249: fld     [esp+28h+var_14]
 0x4FB24D: add     esi, 4
-0x4FB250: call    Double_To_SInt32
+0x4FB250: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4FB255: mov     ecx, [esi-4]
 0x4FB258: mov     [ecx], eax
 0x4FB25A: jmp     Script_ExtractArgs___ArgLoop_Next
 0x4FB25F: mov     edx, [esp+28h+l]; jumptable 004FB1B1 case 2
-0x4FB263: fstp    [esp+28h+var_8]
+0x4FB263: fstp    [esp+28h+var_8]; Param typeID 2 extracts a float through ExecuteScriptInstruction_ expression evaluation, then writes float to the caller output.
 0x4FB267: mov     edi, [esp+28h+arg_14]
 0x4FB26B: mov     eax, [esp+28h+a5]
 0x4FB26F: mov     ecx, [esp+28h+a4]
@@ -341,7 +341,7 @@
 0x4FB30A: mov     eax, [ebp+0]; jumptable 004FB1B1 cases 5,10,18,28
 0x4FB30D: fstp    st
 0x4FB30F: mov     ecx, [esp+28h+arg_4]
-0x4FB313: movzx   ecx, word ptr [eax+ecx]
+0x4FB313: movzx   ecx, word ptr [eax+ecx]; Param typeID 5/0xA/0x12/0x1C extracts a uint16 enum/id style value, used by Actor Value and similar parameter kinds.
 0x4FB317: mov     edx, [esp+28h+arg_14]
 0x4FB31B: add     eax, 2
 0x4FB31E: mov     [ebp+0], eax

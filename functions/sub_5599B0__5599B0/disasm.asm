@@ -64,3 +64,18 @@
 0x559A65: pop     ebx
 0x559A66: add     esp, 18h
 0x559A69: retn
+0x9BC8C0: push    offset sub_558570; void (__thiscall *)(void *)
+0x9BC8C5: push    2; int
+0x9BC8C7: push    10h; unsigned int
+0x9BC8C9: mov     eax, [ebp-18h]
+0x9BC8CC: add     eax, 4
+0x9BC8CF: push    eax; void *
+0x9BC8D0: call    $LN21
+0x9BC8D5: retn
+0x9BC8D6: mov     edx, [esp+arg_4]
+0x9BC8DA: lea     eax, [edx-1Ch]
+0x9BC8DD: mov     ecx, [edx-20h]
+0x9BC8E0: xor     ecx, eax
+0x9BC8E2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC8E7: mov     eax, offset stru_AE64A0
+0x9BC8EC: jmp     ___CxxFrameHandler3

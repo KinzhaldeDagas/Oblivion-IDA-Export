@@ -49,7 +49,7 @@
 0x99DE2D: mov     ecx, [ebp+var_1C]
 0x99DE30: and     ecx, 1Fh
 0x99DE33: imul    ecx, 28h ; '('
-0x99DE36: mov     eax, dword_BAAAC0[eax*4]
+0x99DE36: mov     eax, dword ptr unk_BAAAC0[eax*4]
 0x99DE3D: lea     eax, [eax+ecx+4]
 0x99DE41: and     byte ptr [eax], 0FEh
 0x99DE44: push    [ebp+var_1C]

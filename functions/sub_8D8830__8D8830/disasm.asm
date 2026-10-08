@@ -62,7 +62,6 @@
 0x8D88E3: cmp     eax, ecx
 0x8D88E5: jnb     def_8D888F; jumptable 008D888F default case, cases 20,31
 0x8D88EB: jmp     short loc_8D88F0
-0x8D88ED: align 10h
 0x8D88F0: mov     edx, [eax]
 0x8D88F2: cmp     word ptr [edx+4], 0
 0x8D88F7: jz      short loc_8D88FD

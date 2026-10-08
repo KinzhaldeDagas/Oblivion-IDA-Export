@@ -1,11 +1,8 @@
-int __thiscall sub_414750(int this, char *Src)
+OB_stString28_010201A0 *__thiscall sub_414750(OB_stString28_010201A0 *this, char *Src)
 {
-  rsize_t v4; // [esp-4h] [ebp-Ch]
-
-  *(_DWORD *)(this + 0x18) = 0xF;
-  *(_DWORD *)(this + 0x14) = 0;
-  *(_BYTE *)(this + 4) = 0;
-  LODWORD(v4) = strlen(Src);
-  sub_414500((_DWORD *)this, (int)(Src + 1), Src, v4);
-  return this;
+  this->capacity = 0xF; /*0x41475a*/
+  this->size = 0; /*0x414761*/
+  this->storage.inlineData[0] = 0; /*0x414768*/
+  OB_stString28_AssignBytes_010201A0(this, Src, strlen(Src)); /*0x41477f*/
+  return this; /*0x414784*/
 }

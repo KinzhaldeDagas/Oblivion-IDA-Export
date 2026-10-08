@@ -1,4 +1,4 @@
-0x7E44E0: push    0FFFFFFFFh
+0x7E44E0: push    0FFFFFFFFh; Verified (Oblivion): checks NiNode property ID 4, removes a non-ParticleShaderProperty occupant, allocates a 0x128-byte ParticleShaderProperty when needed, attaches it, and initializes it for the geometry.
 0x7E44E2: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x7E44E7: mov     eax, large fs:0
 0x7E44ED: push    eax
@@ -15,7 +15,7 @@
 0x7E4506: mov     edi, [esp+20h+arg_0]
 0x7E450A: push    4
 0x7E450C: mov     ecx, edi
-0x7E450E: call    NiNode_GetNiPropertyByID
+0x7E450E: call    NiNode_GetNiPropertyByID;
 0x7E4513: test    eax, eax
 0x7E4515: jz      short loc_7E4566
 0x7E4517: mov     edx, [eax]
@@ -50,7 +50,7 @@
 0x7E4562: mov     ecx, esi
 0x7E4564: call    edx
 0x7E4566: push    128h; Size
-0x7E456B: call    FormHeapAlloc
+0x7E456B: call    FormHeapAlloc; Verified (Oblivion): missing property-ID-4 shader property is allocated with sizeof(ParticleShaderProperty)=0x128, constructed, attached to the NiGeometry, then initialized through its SetupGeometry virtual.
 0x7E4570: add     esp, 4
 0x7E4573: mov     [esp+20h+var_10], eax
 0x7E4577: test    eax, eax
@@ -64,12 +64,12 @@
 0x7E4590: push    esi; a2
 0x7E4591: mov     ecx, edi; this
 0x7E4593: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7E459B: call    sub_405680
+0x7E459B: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x7E45A0: mov     eax, [esi]
 0x7E45A2: mov     edx, [eax+58h]
 0x7E45A5: push    edi
 0x7E45A6: mov     ecx, esi
-0x7E45A8: call    edx
+0x7E45A8: call    edx; Verified (Oblivion): after attaching a new ParticleShaderProperty to the node, NiD3DShader_EnsureParticleShaderProperty calls its SetupGeometry virtual with the target geometry; this establishes ParticleShaderProperty::geometry_120.
 0x7E45AA: test    al, al
 0x7E45AC: jnz     short loc_7E45CD
 0x7E45AE: push    esi
@@ -95,3 +95,15 @@
 0x7E45E3: pop     ebx
 0x7E45E4: add     esp, 10h
 0x7E45E7: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

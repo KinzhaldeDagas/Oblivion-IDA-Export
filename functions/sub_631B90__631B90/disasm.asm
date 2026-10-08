@@ -1,4 +1,4 @@
-0x631B90: cmp     [esp+arg_4], 0
+0x631B90: cmp     [esp+arg_4], 0; TES4 authoritative: process vtable +0x2C4 movement flag helper. a3 true ORs bits into process+0x1FC; false clears them.
 0x631B95: mov     eax, [esp+arg_0]
 0x631B99: jz      short loc_631BD3
 0x631B9B: test    al, 30h

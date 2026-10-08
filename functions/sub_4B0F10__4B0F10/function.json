@@ -1,18 +1,31 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B0F10",
+      "0x4B0FB5"
+    ]
+  ],
+  "chunks_sha256": "687937feabc9b6d3bbbf6126c3d225ff71a918e35755ff303907d34ea3171d77",
+  "comment_regular": "Save an Oblivion TESObjectLIGH record, including the exact 0x18-byte DATA block at object +0x70..+0x87.",
+  "comment_repeatable": "Save an Oblivion TESObjectLIGH record. DATA serializes +0x70..+0x87; the separate four-byte FNAM chunk serializes fade_88, and SNAM serializes the linked sound form.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B0F10",
+  "display_name": "TESObjectLIGH_SaveFormRecord",
   "end_ea": "0x4B0FB5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B0F10",
+  "name": "TESObjectLIGH_SaveFormRecord",
   "segment": ".text",
   "sha256": "687937feabc9b6d3bbbf6126c3d225ff71a918e35755ff303907d34ea3171d77",
   "size": 165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B0F10",
+  "total_chunk_size": 165,
   "type": "UInt32 __usercall@<eax>(int this@<ecx>, char@<bpl>, int@<edi>)",
   "xrefs_from_count": 60,
   "xrefs_to_count": 1

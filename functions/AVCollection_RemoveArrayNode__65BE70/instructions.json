@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x65BE7E",
-    "line": "movsx   ecx, [esp+4+arg_0]",
+    "line": "movsx   ecx, byte ptr [esp+4+actorValue]",
     "mnemonic": "movsx",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x65BEEE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; slot",
     "mnemonic": "mov",
     "size": 2
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x65BF6C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x65BF74",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -550,5 +550,23 @@
     "line": "mov     dword ptr [edi+10h], 0",
     "mnemonic": "mov",
     "size": 7
+  },
+  {
+    "ea": "0x65BF83",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x65BF84",
+    "line": "pop     edi; jumptable 0065BE93 default case, cases 1-3,9,10,12,14-25,27-32,34,35,37-39,42-45,50-55",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x65BF85",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

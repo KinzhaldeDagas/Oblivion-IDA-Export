@@ -34,8 +34,8 @@
 0x5E1082: mov     edx, [eax+164h]
 0x5E1088: mov     ecx, edi
 0x5E108A: call    edx
-0x5E108C: mov     ecx, eax
-0x5E108E: call    sub_471210
+0x5E108C: mov     ecx, eax; this
+0x5E108E: call    ActorAnimData_IsCurrentIdleActive; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 2. Mounted/action callers treat this as the active idle phase.
 0x5E1093: test    al, al
 0x5E1095: jz      short loc_5E1063
 0x5E1097: pop     edi

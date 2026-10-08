@@ -1,1 +1,5 @@
-tagCABSTR
+struct tagCABSTR
+{
+ULONG cElems;
+BSTR *pElems;
+};

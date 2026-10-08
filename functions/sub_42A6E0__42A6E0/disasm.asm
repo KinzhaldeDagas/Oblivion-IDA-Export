@@ -1,4 +1,4 @@
-0x42A6E0: fldz
+0x42A6E0: fldz; Constructs Oblivion ExtraPersuasionPercent (type 0x46) with zeroed payload fields.
 0x42A6E2: mov     eax, ecx
 0x42A6E4: fst     dword ptr [eax+0Ch]
 0x42A6E7: mov     byte ptr [eax+4], 46h ; 'F'

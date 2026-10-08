@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$2770B4FFDDA39006A41F4573B95387E7",
+  "definition": "union $2770B4FFDDA39006A41F4573B95387E7\n{\nPVOID Reserved1;\nchar Reserved2[24];\n}\n",
   "id": 18374686479672036606,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved1",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved2",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "char[24]"
     }
   ],
   "name": "$2770B4FFDDA39006A41F4573B95387E7",
+  "ordinal": 4569,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 24
 }

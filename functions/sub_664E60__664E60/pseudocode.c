@@ -1,58 +1,54 @@
-void __usercall sub_664E60(
-        Concurrency::details::SchedulerBase *a1@<ecx>,
-        int a2@<ebp>,
-        double a3@<st2>,
-        double a4@<st1>)
+void __usercall sub_664E60(PlayerCharacter *a1@<ecx>, int a2@<ebp>, double a3@<st1>)
 {
   InterfaceManager *Singleton; // eax
-  InterfaceManager *v7; // edi
-  NiNode *v8; // eax
+  InterfaceManager *v6; // edi
+  NiNode *v7; // eax
   int AnimGroupFromField8Value; // ebx
-  int SomethingFromField8Value; // ebp
-  ActorAnimData *AnimData; // eax
-  _DWORD *v12; // eax
+  int SlotActionState; // ebp
+  double v10; // st5
+  ActorAnimData *AnimDataByPerspective; // eax
+  NiAVObject *ChildAtIndex; // eax
   float v14; // [esp+18h] [ebp-4h]
 
-  Singleton = InterfaceManager_GetSingleton(0, 1);
-  v7 = Singleton;
-  if ( *((_DWORD *)a1 + 0x176) )
+  Singleton = InterfaceManager_GetSingleton(0, 1); /*0x664e69*/
+  v6 = Singleton; /*0x664e78*/
+  if ( a1->inventoryPC ) /*0x664e71*/
   {
-    if ( *((_DWORD *)a1 + 0x16) )
+    if ( a1->super.super.super.process ) /*0x664e80*/
     {
-      if ( Singleton )
+      if ( Singleton ) /*0x664e8c*/
       {
-        v8 = Singleton->unk054[3];
-        if ( v8 )
+        v7 = Singleton->unk054[3]; /*0x664e92*/
+        if ( v7 ) /*0x664e97*/
         {
-          if ( (v8->members.super.m_flags & 1) == 0 )
+          if ( (v7->members.super.m_flags & 1) == 0 ) /*0x664ea1*/
           {
-            AnimGroupFromField8Value = (unsigned __int16)ActorAnimData_GetAnimGroupFromField8Value(
-                                                           *((_WORD **)a1 + 0x177),
-                                                           0);
-            SomethingFromField8Value = ActorAnimData_GetSomethingFromField8Value(*((_DWORD **)a1 + 0x177), 0);
-            v14 = *(float *)(*((_DWORD *)a1 + 0x177) + 0x94)
-                + *(float *)&sub_4706E0(*((ActorAnimData **)a1 + 0x177), 0)[9].data;
-            sub_57ECB0(v7, a3, a4);
-            sub_57D5B0((int)v7, SomethingFromField8Value, a3, a4);
-            if ( (_WORD)AnimGroupFromField8Value == ActorAnimData_GetAnimGroupFromField8Value(
-                                                      *((_WORD **)a1 + 0x177),
-                                                      0) )
-              sub_474AB0(
-                *((_DWORD *)a1 + 0x177),
+            AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(a1->defaultAnimData, 0); /*0x664ebe*/
+            SlotActionState = ActorAnimData_GetSlotActionState(a1->defaultAnimData, 0); /*0x664ece*/
+            v10 = a1->defaultAnimData->unk94 /*0x664ee3*/
+                + *((float *)ActorAnimData_GetNormalizedSequenceSlot(a1->defaultAnimData, 0) + 0x12);
+            sub_57ECB0(v6, v10, a3); /*0x664eea*/
+            sub_57D5B0((int)v6, SlotActionState, v10, a3); /*0x664ef1*/
+            if ( (_WORD)AnimGroupFromField8Value == ActorAnimData_GetAnimGroupFromField8Value(a1->defaultAnimData, 0) ) /*0x664f06*/
+            {
+              v14 = v10; /*0x664ee6*/
+              ActorAnimData_RestorePlaySavedSlot( /*0x664f1c*/
+                (int)a1->defaultAnimData,
+                v10,
                 a3,
-                a4,
                 v14,
                 0,
                 AnimGroupFromField8Value,
-                SomethingFromField8Value,
+                SlotActionState,
                 v14,
                 0xFFFFFFFF);
-            AnimData = (ActorAnimData *)Player_GetAnimData((Actor *)a1, *((_BYTE *)a1 + 0x588) == 0);
-            sub_474510(AnimData, (TESObjectREFR *)a1);
-            v12 = (_DWORD *)(*(int (__thiscall **)(Concurrency::details::SchedulerBase *))(*(_DWORD *)a1 + 0x154))(a1);
-            if ( !*((_BYTE *)a1 + 0x588) )
-              v12 = (_DWORD *)sub_405790((int)v12, 0);
-            sub_5EA1A0((int)a1, a2, v12);
+            }
+            AnimDataByPerspective = PlayerCharacter_GetAnimDataByPerspective(a1, a1->isThirdPerson == 0); /*0x664f2e*/
+            ActorAnimData_ApplyToActor(AnimDataByPerspective, (TESObjectREFR *)a1); /*0x664f36*/
+            ChildAtIndex = (NiAVObject *)a1->vtbl->super.super.super.GetNiNode((TESObjectREFR *)a1); /*0x664f45*/
+            if ( !a1->isThirdPerson ) /*0x664f47*/
+              ChildAtIndex = NiNode_GetChildAtIndex((NiNode *)ChildAtIndex, 0); /*0x664f56*/
+            sub_5EA1A0((int)a1, a2, ChildAtIndex); /*0x664f5e*/
           }
         }
       }

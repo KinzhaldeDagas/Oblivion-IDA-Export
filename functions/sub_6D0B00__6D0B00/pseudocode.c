@@ -1,4 +1,7 @@
-int __thiscall sub_6D0B00(_DWORD *this, unsigned __int16 a2)
+// Returns interpolators[index] from NiGeomMorpherController +0x54.
+NiInterpolator *__thiscall NiGeomMorpherController_GetInterpolator(
+        NiGeomMorpherController *this,
+        unsigned __int16 index)
 {
-  return *(_DWORD *)(*(this + 0x15) + 4 * a2);
+  return this->interpolators[index]; /*0x6d0b0b*/
 }

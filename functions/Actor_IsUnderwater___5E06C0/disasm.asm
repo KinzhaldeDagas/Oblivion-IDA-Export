@@ -5,7 +5,7 @@
 0x5E06C9: xor     bl, bl
 0x5E06CB: test    esi, esi
 0x5E06CD: jz      short loc_5E06FF
-0x5E06CF: call    sub_5E0660
+0x5E06CF: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5E06D4: fmul    [esp+10h+arg_8]
 0x5E06D8: mov     eax, [esp+10h+arg_0]
 0x5E06DC: mov     ecx, esi

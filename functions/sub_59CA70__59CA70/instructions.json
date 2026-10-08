@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59CA70",
-    "line": "mov     eax, ds:0B33398h",
+    "line": "mov     eax, ds:0B33398h; [Controller decode 2026-07-09] Controls menu cancel/scroll update. Escape control 29 backs out/cancels; mouse release clears rebind gate.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x59CA85",
-    "line": "call    InputGlobals__QueryMouseKeyState",
+    "line": "call    InputGlobals__QueryMouseKeyState; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x59CA94",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x59CAF0",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

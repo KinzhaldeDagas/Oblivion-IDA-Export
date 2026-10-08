@@ -83,8 +83,8 @@
 0x647CCE: xor     edi, edi
 0x647CD0: mov     ecx, [esi+8]
 0x647CD3: mov     [edi+4], ecx
-0x647CD6: mov     ecx, esi
-0x647CD8: call    TESHealthForm_GetHealth
+0x647CD6: mov     ecx, esi; this
+0x647CD8: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x647CDD: mov     edx, [esp+24h+arg_4]
 0x647CE1: mov     ecx, [esp+24h+var_14]
 0x647CE5: push    edi
@@ -96,7 +96,7 @@
 0x647CFA: mov     ecx, esi
 0x647CFC: call    ContainerEntryExtraData_DestroyDataTable
 0x647D01: push    esi
-0x647D02: call    FormHeapFree
+0x647D02: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x647D07: mov     edi, [esp+28h+arg_8]
 0x647D0B: add     esp, 4
 0x647D0E: add     ebp, 1
@@ -175,9 +175,9 @@
 0x647DE2: jmp     short loc_647DE6
 0x647DE4: xor     edi, edi
 0x647DE6: mov     eax, [esi+8]
-0x647DE9: mov     ecx, esi
+0x647DE9: mov     ecx, esi; this
 0x647DEB: mov     [edi+4], eax
-0x647DEE: call    TESHealthForm_GetHealth
+0x647DEE: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x647DF3: mov     ecx, [esp+24h+arg_4]
 0x647DF7: mov     [edi], ecx
 0x647DF9: mov     ecx, [esp+24h+var_14]
@@ -189,7 +189,7 @@
 0x647E10: mov     ecx, esi
 0x647E12: call    ContainerEntryExtraData_DestroyDataTable
 0x647E17: push    esi
-0x647E18: call    FormHeapFree
+0x647E18: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x647E1D: mov     ebx, [esp+28h+arg_0]
 0x647E21: mov     edi, [esp+28h+arg_8]
 0x647E25: add     esp, 4
@@ -236,9 +236,9 @@
 0x647E99: jmp     short loc_647E9D
 0x647E9B: xor     esi, esi
 0x647E9D: mov     edx, [edi+8]
-0x647EA0: mov     ecx, edi
+0x647EA0: mov     ecx, edi; this
 0x647EA2: mov     [esi+4], edx
-0x647EA5: call    TESHealthForm_GetHealth
+0x647EA5: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x647EAA: mov     ecx, [esp+24h+var_14]
 0x647EAE: mov     [esi+10h], eax
 0x647EB1: mov     eax, [esp+24h+arg_4]
@@ -251,7 +251,7 @@
 0x647ECB: mov     ecx, edi
 0x647ECD: call    ContainerEntryExtraData_DestroyDataTable
 0x647ED2: push    edi
-0x647ED3: call    FormHeapFree
+0x647ED3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x647ED8: add     esp, 4
 0x647EDB: add     ebx, 1
 0x647EDE: cmp     ebx, [esp+24h+arg_8]
@@ -298,8 +298,8 @@
 0x647F59: xor     esi, esi
 0x647F5B: mov     ecx, [edi+8]
 0x647F5E: mov     [esi+4], ecx
-0x647F61: mov     ecx, edi
-0x647F63: call    TESHealthForm_GetHealth
+0x647F61: mov     ecx, edi; this
+0x647F63: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x647F68: mov     edx, [esp+24h+arg_4]
 0x647F6C: mov     ecx, [esp+24h+var_14]
 0x647F70: push    esi
@@ -312,7 +312,7 @@
 0x647F89: mov     ecx, edi
 0x647F8B: call    ContainerEntryExtraData_DestroyDataTable
 0x647F90: push    edi
-0x647F91: call    FormHeapFree
+0x647F91: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x647F96: add     esp, 4
 0x647F99: add     ebx, 1
 0x647F9C: cmp     ebx, [esp+24h+arg_8]
@@ -358,9 +358,9 @@
 0x648015: jmp     short loc_648019
 0x648017: xor     esi, esi
 0x648019: mov     eax, [edi+8]
-0x64801C: mov     ecx, edi
+0x64801C: mov     ecx, edi; this
 0x64801E: mov     [esi+4], eax
-0x648021: call    TESHealthForm_GetHealth
+0x648021: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x648026: mov     ecx, [esp+24h+arg_4]
 0x64802A: mov     [esi], ecx
 0x64802C: mov     ecx, [esp+24h+var_14]
@@ -373,7 +373,7 @@
 0x648047: mov     ecx, edi
 0x648049: call    ContainerEntryExtraData_DestroyDataTable
 0x64804E: push    edi
-0x64804F: call    FormHeapFree
+0x64804F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648054: add     esp, 4
 0x648057: add     ebx, 1
 0x64805A: cmp     ebx, [esp+24h+arg_8]
@@ -386,7 +386,7 @@
 0x64806B: retn    0Ch
 0x64806E: mov     esi, [esp+24h+arg_0]
 0x648072: mov     ecx, esi; this
-0x648074: call    TESObjectREFR_GetParentCell
+0x648074: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x648079: mov     edx, [esi]
 0x64807B: mov     edi, eax
 0x64807D: mov     eax, [edx+174h]

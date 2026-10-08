@@ -1,6 +1,6 @@
-char __usercall sub_505870@<al>(char a1@<bpl>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+char __usercall sub_505870@<al>(double a1@<st2>, double a2@<st1>)
 {
-  if ( TESDataHandler_g_PlayerRef )
-    sub_57A9B0(a1, a2, a3, a4);
-  return 1;
+  if ( reference ) /*0x505870*/
+    sub_57A9B0(a1, a2); /*0x505879*/
+  return 1; /*0x505880*/
 }

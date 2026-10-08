@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_HIDP_LINK_COLLECTION_NODE",
+  "definition": "struct _HIDP_LINK_COLLECTION_NODE\n{\nUSAGE LinkUsage;\nUSAGE LinkUsagePage;\nUSHORT Parent;\nUSHORT NumberOfChildren;\nUSHORT NextSibling;\nUSHORT FirstChild;\nunsigned __int32 CollectionType : 8;\nunsigned __int32 IsAlias : 1;\nunsigned __int32 Reserved : 23;\nPVOID UserContext;\n}\n",
   "id": 18374686479672034238,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LinkUsage",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "USAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LinkUsagePage",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "USAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Parent",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NumberOfChildren",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NextSibling",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FirstChild",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 2
+      "offset_hex": "0xA",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CollectionType",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 1
+      "offset_hex": "0xC",
+      "size": 1,
+      "type": "unsigned __int32 : 8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsAlias",
       "offset": 13,
-      "offset_hex": "0xd",
-      "size": 0
+      "offset_hex": "0xD",
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
-      "offset": 13,
-      "offset_hex": "0xd",
-      "size": 2
+      "offset": 13.125,
+      "offset_hex": "0xD",
+      "size": 2.875,
+      "type": "unsigned __int32 : 23"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UserContext",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     }
   ],
   "name": "_HIDP_LINK_COLLECTION_NODE",
+  "ordinal": 3773,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

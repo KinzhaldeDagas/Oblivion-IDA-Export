@@ -19,7 +19,7 @@
 0x722882: mov     [esp+28h+var_4], 5
 0x72288A: call    sub_738420
 0x72288F: add     esp, 4
-0x722892: push    offset stru_B3FA00; lpCriticalSection
+0x722892: push    offset unk_B3FA00; lpCriticalSection
 0x722897: call    dword ptr ds:0A2806Ch
 0x72289D: call    dword ptr ds:0A2808Ch
 0x7228A3: add     dword ptr ds:0B3FA7Ch, 1
@@ -45,7 +45,7 @@
 0x7228DF: sub     dword ptr ds:0B3FA7Ch, 1
 0x7228E6: jnz     short loc_7228EE
 0x7228E8: mov     ds:0B3FA78h, ebx
-0x7228EE: push    offset stru_B3FA00; lpCriticalSection
+0x7228EE: push    offset unk_B3FA00; lpCriticalSection
 0x7228F3: call    dword ptr ds:0A28074h
 0x7228F9: mov     edi, [esi+0B4h]
 0x7228FF: cmp     edi, ebx
@@ -155,3 +155,27 @@
 0x722A01: pop     ebx
 0x722A02: add     esp, 10h
 0x722A05: retn
+0x9CA360: mov     ecx, [ebp-10h]; this
+0x9CA363: jmp     ??1NiAVObject@@UAE@XZ; NiAVObject::~NiAVObject(void)
+0x9CA368: mov     ecx, [ebp-10h]
+0x9CA36B: add     ecx, 0ACh ; '¬'; slot
+0x9CA371: jmp     NiPointerSlot_Release
+0x9CA376: mov     ecx, [ebp-10h]
+0x9CA379: add     ecx, 0B0h ; '°'; slot
+0x9CA37F: jmp     NiPointerSlot_Release
+0x9CA384: mov     ecx, [ebp-10h]
+0x9CA387: add     ecx, 0B4h ; '´'; slot
+0x9CA38D: jmp     NiPointerSlot_Release
+0x9CA392: mov     ecx, [ebp-10h]
+0x9CA395: add     ecx, 0B8h ; '¸'; slot
+0x9CA39B: jmp     NiPointerSlot_Release
+0x9CA3A0: mov     ecx, [ebp-10h]
+0x9CA3A3: add     ecx, 0BCh ; '¼'; slot
+0x9CA3A9: jmp     NiPointerSlot_Release
+0x9CA3AE: mov     edx, [esp+arg_4]
+0x9CA3B2: lea     eax, [edx-14h]
+0x9CA3B5: mov     ecx, [edx-18h]
+0x9CA3B8: xor     ecx, eax
+0x9CA3BA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA3BF: mov     eax, offset stru_AF2A84
+0x9CA3C4: jmp     ___CxxFrameHandler3

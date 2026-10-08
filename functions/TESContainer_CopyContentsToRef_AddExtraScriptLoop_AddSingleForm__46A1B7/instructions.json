@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x46A1B9",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x46A1BB",
-    "line": "push    esi",
+    "line": "push    esi; extraList",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x46A1D3",
-    "line": "mov     ecx, [esp+8+arg_1C]",
+    "line": "mov     ecx, [esp+8+arg_1C]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x46A1D7",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46A1D8",
-    "line": "call    TESObjectREFR_AddItem_Abbrev",
+    "line": "call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.",
     "mnemonic": "call",
     "size": 5
   }

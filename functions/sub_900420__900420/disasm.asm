@@ -188,7 +188,6 @@
 0x9006B2: jl      short loc_9006E7
 0x9006B4: lea     ecx, [esi+0Ch]
 0x9006B7: jmp     short loc_9006C0
-0x9006B9: align 10h
 0x9006C0: fld     dword ptr [ecx]
 0x9006C2: fcomp   dword ptr ds:0A2FAA8h
 0x9006C8: fnstsw  ax

@@ -20,7 +20,7 @@
 0x98E009: jnz     short loc_98E06A
 0x98E00B: xor     eax, eax
 0x98E00D: inc     eax
-0x98E00E: inc     dword_BA9E14
+0x98E00E: inc     dword_BA9E10+4
 0x98E014: test    word ptr [esi+0Ch], 10Ch
 0x98E01A: jnz     short loc_98E06A
 0x98E01C: push    ebx

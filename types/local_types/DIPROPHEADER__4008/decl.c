@@ -1,1 +1,7 @@
-DIPROPHEADER
+struct DIPROPHEADER
+{
+DWORD dwSize;
+DWORD dwHeaderSize;
+DWORD dwObj;
+DWORD dwHow;
+};

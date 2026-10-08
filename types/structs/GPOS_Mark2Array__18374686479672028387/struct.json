@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "GPOS_Mark2Array",
+  "definition": "struct GPOS_Mark2Array\n{\nWORD Mark2Count;\nGPOS_Mark2Record Mark2Record[1];\n}\n",
   "id": 18374686479672028387,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Mark2Count",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Mark2Record",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "GPOS_Mark2Record[1]"
     }
   ],
   "name": "GPOS_Mark2Array",
+  "ordinal": 1714,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 4
 }

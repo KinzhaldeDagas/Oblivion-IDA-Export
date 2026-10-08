@@ -1,4 +1,4 @@
-0x701C00: push    esi
+0x701C00: push    esi; [2026-10-04 v110 texture acceptance] Verified AL bool: no renderer or failed renderer+104 call returns AL0 at701C0D; success/already-created returns AL1 at701C44. VtableA7D8CC+5C. Frond loader may prepare deferred NiSourceTexture under its existing paired renderer/cache lock, then independently checks data. Bool success does not exclude error pixels.
 0x701C01: mov     esi, ecx
 0x701C03: mov     ecx, ds:0B3F928h
 0x701C09: test    ecx, ecx
@@ -9,7 +9,7 @@
 0x701C11: cmp     dword ptr [esi+24h], 0
 0x701C15: jnz     short loc_701C44
 0x701C17: mov     eax, [ecx]
-0x701C19: mov     edx, [eax+104h]
+0x701C19: mov     edx, [eax+104h]; NiDX9Renderer vtable +0x104 (slot 65) is CreateSourceTexture; Oblivion 1.2.0416 resolves it to 0x763560.
 0x701C1F: push    esi
 0x701C20: call    edx
 0x701C22: test    al, al

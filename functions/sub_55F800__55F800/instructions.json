@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55F800",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified local call paths: invoked from QueuedTreeModel_RunCreateStage (worker result publication) and TESObjectTREE_CreateTreeNodeDirect (synchronous creation). Validates tree model path and reference base-form identity, consumes an already-published node if present, otherwise derives seed, obtains/copies cached model, applies reference scale, and creates BSTreeNode art.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x55F82B",
-    "line": "mov     [esp+2Ch+var_18], edi",
+    "line": "mov     [esp+2Ch+baseModel], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x55F840",
-    "line": "mov     ebx, [esp+2Ch+arg_4]",
+    "line": "mov     ebx, [esp+2Ch+treeObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x55F88B",
-    "line": "mov     ebp, [esp+2Ch+arg_0]",
+    "line": "mov     ebp, [esp+2Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,19 +325,19 @@
   },
   {
     "ea": "0x55F8AD",
-    "line": "mov     ecx, offset stru_B39E80",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x55F8B2",
-    "line": "mov     [esp+30h+arg_4], edi",
+    "line": "mov     [esp+30h+treeObject], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55F8B6",
-    "line": "call    NiEnterCriticalSection",
+    "line": "call    NiEnterCriticalSection; Verified: protects lookup-and-consume of pendingReferenceNodes with the tree critical section; a hit is removed before leaving the lock, so worker-published tree nodes are consumed once.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x55F8C3",
-    "line": "lea     edx, [esp+2Ch+arg_4]",
+    "line": "lea     edx, [esp+2Ch+treeObject]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x55F8C9",
-    "line": "call    eax",
+    "line": "call    eax; Verified: queries pendingReferenceNodes by TESObjectREFR*; a hit returns the worker-created BSTreeNode.",
     "mnemonic": "call",
     "size": 2
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x55F8D8",
-    "line": "call    eax",
+    "line": "call    eax; Verified: removes the reference key after a successful lookup, transferring the pending node to the synchronous caller exactly once.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x55F8DA",
-    "line": "mov     ecx, offset stru_B39E80; lpCriticalSection",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x55F8E4",
-    "line": "mov     esi, [esp+2Ch+arg_4]",
+    "line": "mov     esi, [esp+2Ch+treeObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55F8E8",
-    "line": "lea     ecx, [esp+2Ch+var_18]; this",
+    "line": "lea     ecx, [esp+2Ch+baseModel]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x55F8F4",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x55F900",
-    "line": "mov     ecx, offset stru_B39E80; lpCriticalSection",
+    "line": "mov     ecx, offset g_BSTreeManager_TreeCriticalSection; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x55F905",
-    "line": "call    NiLeaveCriticalSection_0",
+    "line": "call    NiLeaveCriticalSection_0; Oblivion tree-cache lock B39E80 is released before cached-base acquisition/MakeBase/instance dispatch. Instance construction later uses a distinct lock at B39F80; the cache lock does not define CSpeedTreeRT lifetime identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x55F913",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55F915",
-    "line": "call    sub_4D7820",
+    "line": "call    TESObjectREFR_GetTreeSeed; Verified: TESObjectREFR_GetTreeSeed handles tree references only (base-form type byte 0x1E), reads ExtraData_Seed via ExtraDataList_GetSeedIndex, and asks TESObjectTREE_GetSeedAtIndex to resolve the stored index. Fallout exposes the corresponding named TESObjectTREE::GetSeedAtIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x55F924",
-    "line": "push    edi",
+    "line": "push    edi; recreate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F925",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,49 +553,49 @@
   },
   {
     "ea": "0x55F92D",
-    "line": "push    esi",
+    "line": "push    esi; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F92E",
-    "line": "push    ebx",
+    "line": "push    ebx; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F92F",
-    "line": "lea     ecx, [esp+34h+var_14]",
+    "line": "lea     ecx, [esp+34h+modelOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55F933",
-    "line": "push    ecx",
+    "line": "push    ecx; outModel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F934",
-    "line": "mov     ecx, ds:0B39E04h",
+    "line": "mov     ecx, ds:0B39E04h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x55F93A",
-    "line": "call    sub_55ED30",
+    "line": "call    BSTreeManager_GetModel; Acquire cached base BSTreeModel for this TESObjectTREE and TESObjectREFR-derived seed before MakeBase or instance creation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55F93F",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F940",
-    "line": "lea     ecx, [esp+30h+var_18]",
+    "line": "lea     ecx, [esp+30h+baseModel]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -607,13 +607,13 @@
   },
   {
     "ea": "0x55F949",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55F94E",
-    "line": "lea     ecx, [esp+2Ch+var_14]; this",
+    "line": "lea     ecx, [esp+2Ch+modelOut]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x55F957",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55F95C",
-    "line": "mov     edi, [esp+2Ch+var_18]",
+    "line": "mov     edi, [esp+2Ch+baseModel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x55F96A",
-    "line": "jbe     short loc_55F9D8",
+    "line": "jbe     short loc_55F9D8; Verified: BSTreeModel inherits NiRefObject and +0x04 is its reference count (constructor initializes it through NiRefObject; destructor decrements global object bookkeeping). With the manager cache and this local smart pointer accounting for the normal two references, count <=2 selects in-place base initialization; additional owners select a fresh per-reference instance model.",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x55F96E",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Verified: allocates 0x58 bytes, exactly the BSTreeModel type size; constructor initializes a fresh NiRefObject/BSTreeModel before InitAsInstance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x55F976",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x55F985",
-    "line": "call    ??0BSTreeModel@@QAE@XZ; BSTreeModel::BSTreeModel(void)",
+    "line": "call    BSTreeModel_ctor; Verified current STBB layout view: BSTreeModel_OblivionLayout_058_STBBVerified refines model+0x1C to NiTriShape* billboardShape_STBB. This supersedes the earlier partial +0x1C NiStream view; the ctor initializes the shape pointer null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,13 +739,13 @@
   },
   {
     "ea": "0x55F990",
-    "line": "push    edi",
+    "line": "push    edi; baseModel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F991",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x55F998",
-    "line": "call    sub_5630A0",
+    "line": "call    BSTreeModel_InitAsInstance; Verified: once the cached base BSTreeModel has additional owners, constructs a per-reference model and calls BSTreeModel_InitAsInstance; failure destroys the partial instance before returning.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x55F9AF",
-    "line": "lea     ecx, [esp+2Ch+var_18]; this",
+    "line": "lea     ecx, [esp+2Ch+baseModel]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x55F9BB",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,25 +895,25 @@
   },
   {
     "ea": "0x55F9D8",
-    "line": "push    esi",
+    "line": "push    esi; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F9D9",
-    "line": "push    ebx",
+    "line": "push    ebx; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F9DA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55F9DC",
-    "line": "call    BSTreeModel__MakeBase",
+    "line": "call    BSTreeModel_InitFromBase; Verified: when the cached model reference count is at the unshared threshold (<=2), initializes that cached BSTreeModel directly from the TESObjectTREE form and the reference-derived seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x55F9EB",
-    "line": "fstp    [esp+2Ch+arg_0]",
+    "line": "fstp    [esp+2Ch+reference]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x55F9FE",
-    "line": "fstp    [esp+2Ch+arg_0]",
+    "line": "fstp    [esp+2Ch+reference]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x55FA04",
-    "line": "fld     [esp+2Ch+arg_0]",
+    "line": "fld     [esp+2Ch+reference]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1093,13 +1093,13 @@
   },
   {
     "ea": "0x55FA2C",
-    "line": "lea     ecx, [esp+2Ch+var_18]; this",
+    "line": "lea     ecx, [esp+2Ch+baseModel]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55FA30",
-    "line": "mov     byte ptr [esi+4Ch], 1",
+    "line": "mov     byte ptr [esi+4Ch], 1; Verified: sets BSTreeModel+0x4C to 1 after invoking the model's CreateArt vtable slot and optionally naming the returned NiObjectNET. The field is initialized to 0 by BSTreeModel_ctor; no stock consumer was identified, so its meaning remains Unknown.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x55FA3C",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1124,6 +1124,102 @@
   {
     "ea": "0x55FA43",
     "line": "jmp     loc_55F9C2",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCCB0",
+    "line": "lea     ecx, [ebp-18h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCCB3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCCB8",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCCBB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCCC0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCCC3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCCC4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCCC9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCCCA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCCCB",
+    "line": "mov     edx, [esp+treeObject]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BCCCF",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCCD2",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCCD5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCCD7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCCDC",
+    "line": "mov     eax, offset stru_AE6810",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCCE1",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

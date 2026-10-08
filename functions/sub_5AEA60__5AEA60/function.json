@@ -1,18 +1,31 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5AEA60",
+      "0x5AEC9E"
+    ]
+  ],
+  "chunks_sha256": "10c6465b38852ee202a0afb6d80ad933419c6ab56ac195c713648f9252049c3e",
+  "comment_regular": "CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.",
+  "comment_repeatable": "CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 5,
-  "display_name": "sub_5AEA60",
+  "display_name": "LoadgameMenu_Open",
   "end_ea": "0x5AEC9E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5AEA60",
+  "name": "LoadgameMenu_Open",
   "segment": ".text",
   "sha256": "10c6465b38852ee202a0afb6d80ad933419c6ab56ac195c713648f9252049c3e",
   "size": 574,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5AEA60",
+  "total_chunk_size": 574,
   "type": "int __usercall@<eax>(double@<st7>, double@<st6>, double@<st5>, double@<st4>, double@<st3>, double@<st2>, double@<st1>, double@<st0>, char)",
   "xrefs_from_count": 231,
   "xrefs_to_count": 5

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5400E0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+arg_4]; Exterior fog-color decode: blends up to four packed weather RGB colors and weights into a Sky RGB vector; caller 0x5418F0 uses colorSlot 1 for active exterior fog color.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x5400FF",
-    "line": "fstp    [esp+4+arg_4]",
+    "line": "fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper accumulates packed color[0].r * weight[0]; caller 0x5418F0 supplies weather color slots including fog slot 1.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x540118",
-    "line": "fstp    [esp+4+arg_4]",
+    "line": "fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper adds packed color[1].r * weight[1] for adjacent phase or second-weather blend.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x540131",
-    "line": "fstp    [esp+4+arg_4]",
+    "line": "fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper adds packed color[2].r * weight[2] when transition contributes a second weather.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x54014A",
-    "line": "fstp    [esp+4+arg_4]",
+    "line": "fstp    [esp+4+arg_4]; Fog weather-field decode: RGB helper adds packed color[3].r * weight[3] before 1/255 normalization.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x54015C",
-    "line": "fstp    dword ptr [ecx]",
+    "line": "fstp    dword ptr [ecx]; Exterior fog-color decode: writes blended RGB.r to caller-provided Sky color vector; for colorSlot 1 this is Sky+0x48 fogColor.r.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x5401C4",
-    "line": "fstp    dword ptr [ecx+4]",
+    "line": "fstp    dword ptr [ecx+4]; Exterior fog-color decode: writes blended RGB.g to caller-provided Sky color vector; for colorSlot 1 this is Sky+0x4C fogColor.g.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x540236",
-    "line": "fst     dword ptr [ecx+8]",
+    "line": "fst     dword ptr [ecx+8]; Exterior fog-color decode: writes blended RGB.b to caller-provided Sky color vector; for colorSlot 1 this is Sky+0x50 fogColor.b.",
     "mnemonic": "fst",
     "size": 3
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x540284",
-    "line": "mov     eax, [edx+10h]",
+    "line": "mov     eax, [edx+10h]; Fog weather-field decode: RGB helper optionally clamps blended color against firstWeather +0x54/+0x55/+0x56 per-channel caps after additive weather contribution.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x5402A3",
-    "line": "fstp    [esp+arg_8]",
+    "line": "fstp    [esp+arg_8]; Fog weather-field decode: red channel cap uses firstWeather byte +0x54 scaled by 1/255; cap applies to caller target including fog color slot 1.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x5402E0",
-    "line": "fstp    [esp+arg_8]",
+    "line": "fstp    [esp+arg_8]; Fog weather-field decode: green channel cap uses firstWeather byte +0x55 scaled by 1/255; cap applies to caller target including fog color slot 1.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x540323",
-    "line": "fstp    [esp+arg_8]",
+    "line": "fstp    [esp+arg_8]; Fog weather-field decode: blue channel cap uses firstWeather byte +0x56 scaled by 1/255; cap applies to caller target including fog color slot 1.",
     "mnemonic": "fstp",
     "size": 4
   },

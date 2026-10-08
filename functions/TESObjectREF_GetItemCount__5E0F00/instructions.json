@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E0F00",
-    "line": "push    esi",
+    "line": "push    esi; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5E0F21",
-    "line": "jmp     ContainerExtraData_GetItemCount",
+    "line": "jmp     ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "jmp",
     "size": 5
   },

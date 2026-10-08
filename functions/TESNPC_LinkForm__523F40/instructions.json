@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x523F5A",
-    "line": "call    TESScriptableForm_Link",
+    "line": "call    TESScriptableForm_Link; 3DTheft decode 2026-05-13: TESNPC::LinkForm links TESScriptableForm at NPC+0xC4 before container/AI/base-data components; plugin filters scripted bases for safer spawned thief templates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x523FA3",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x523FAE",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x523FBC",
-    "line": "push    offset ??_R0?AVTESClass@@@8; struct TypeDescriptor *",
+    "line": "push    offset ??_R0?AVTESClass@@@8; TESNPC link resolves stored class FormID at NPC+0x104 into TESClass* via TESForm_LookupByFormID + dynamic cast. Confirms TESNPC::npcClass offset for plugin class checks.",
     "mnemonic": "push",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x523FC9",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,19 +343,19 @@
   },
   {
     "ea": "0x523FF0",
-    "line": "push    0",
+    "line": "push    0; skipDerivedStats",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x523FF2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x523FF4",
-    "line": "call    sub_5222D0",
+    "line": "call    TESNPC_RecalculateAutoStats; Authoritative Oblivion TESNPC auto-stat calculation. For each of 21 skills: major = 25+(level-1), non-major = 5+0.1*(level-1), then add 5+0.5*(level-1) for matching class specialization, then the signed race bonus, cap at 100, and store in TESNPC::baseSkills. The chargen placeholder class suppresses major/specialization contributions. Attributes start from sex-specific race values, add configured +5 class-primary bonuses, then add (level-1) per governed major skill or 0.2*(level-1) per governed non-major skill, capped at 100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x524025",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x524030",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x52404B",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x5240E2",
-    "line": "call    sub_5239C0",
+    "line": "call    TESNPC_RecomputeBaseVampirismFromSpells; Non-player base vampirism reconstruction: skips formID 7; scans NPC and race spell lists, selects spell-type 4 and VAMP effect code 0x504D4156, sums EffectItem magnitudes, converts to integer, sets base AV 0x45 via virtual+0x134. Supports identifying FaceGen bank selector 0x45 as vampirism, not sex.",
     "mnemonic": "call",
     "size": 5
   },

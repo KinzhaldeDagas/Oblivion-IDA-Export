@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CBE50",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4CBED4",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x4CBF18",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4CBF23",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x4CBF63",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CBF65",
-    "line": "call    sub_4B78E0",
+    "line": "call    TESObjectDOOR_HasRandomTeleportSpaces; Verified mechanics: returns true iff either pointer in the 8-byte TESObjectDOOR.randomTeleport BSSimpleList head is nonzero. Probable domain meaning: the door has at least one random-teleport destination space, supported by the membership and destination-selection callers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x4CBF6F",
-    "line": "call    RemoveExtraTeleportFromDoorRef",
+    "line": "call    RemoveExtraTeleportFromDoorRef; Verified teleport-extra removal hook: before removing linked-door metadata, it removes the corresponding AStarWorldNode from the low-path space maps; then it clears teleport metadata from the linked door and this reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x4CBFAD",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -739,31 +739,31 @@
   },
   {
     "ea": "0x4CBFBF",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4CBFC5",
-    "line": "push    0",
+    "line": "push    0; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CBFC7",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; changeFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CBFC9",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CBFCA",
-    "line": "call    TESSaveLoadGame_ResetObject",
+    "line": "call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x4CBFE3",
-    "line": "call    sub_45C020",
+    "line": "call    sub_45C020; Verified behavior: post-reset reference/process reconciliation; ensures MobileObject LowProcess allocation, handles actor death state, reattaches references to loaded cells by parent cell or worldspace position, and updates scene/process state. Called by ResetFormForLoad (45F2AD), LoadGame (466610), and cell reset path 4CBFE3. Exact class method name Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x4CC002",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,37 +955,37 @@
   },
   {
     "ea": "0x4CC025",
-    "line": "lea     eax, [esp+20h+var_10+3]",
+    "line": "lea     eax, [esp+20h+valueOut+3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4CC029",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CC02A",
-    "line": "push    edi",
+    "line": "push    edi; key",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CC02B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CC02D",
-    "line": "mov     byte ptr [esp+28h+var_10+3], 0",
+    "line": "mov     [esp+28h+valueOut+3], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4CC032",
-    "line": "call    sub_4D6760",
+    "line": "call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x4CC03B",
-    "line": "cmp     byte ptr [esp+20h+var_10+3], 0",
+    "line": "cmp     [esp+20h+valueOut+3], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x4CC045",
-    "line": "call    sub_4CBE50",
+    "line": "call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x4CC055",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

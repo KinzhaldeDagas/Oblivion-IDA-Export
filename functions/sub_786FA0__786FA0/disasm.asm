@@ -1,4 +1,4 @@
-0x786FA0: mov     eax, ecx
+0x786FA0: mov     eax, ecx; SpeedTreeOBSE 2026-05-30 frond restoration: initializes the 7-dword compact texture summary before optional generated-frond texture recovery calls 0x78A890.
 0x786FA2: xor     ecx, ecx
 0x786FA4: mov     [eax], ecx
 0x786FA6: mov     [eax+4], ecx

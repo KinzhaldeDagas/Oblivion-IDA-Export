@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4B2730",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified Oblivion usage cache direction: packed exterior cell label -> BSSimpleList of (TESBoundObject*, instanceCount), used to retain/release queued model-loader paths per cell. Fallout's inspected DistantLODShaderProperty::AddDistantLOD instead finds CachedDistantLOD by base-object FormID and records cell keys on that object entry; these are different ownership maps, not offset homologs.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B2731",
-    "line": "mov     ebp, [esp+4+arg_0]",
+    "line": "mov     ebp, [esp+4+model]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4B273D",
-    "line": "cmp     [esp+4+arg_4], 0",
+    "line": "cmp     [esp+4+usageCount], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4B274E",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+model]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x4B2754",
-    "line": "mov     ecx, offset off_B08300",
+    "line": "mov     ecx, offset g_DistantLODCellModelUsageMap",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4B2759",
-    "line": "mov     [esp+14h+arg_0], 0",
+    "line": "mov     [esp+14h+model], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4B276A",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+model]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4B2793",
-    "line": "mov     ecx, offset off_B08300; this",
+    "line": "mov     ecx, offset g_DistantLODCellModelUsageMap; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4B27C4",
-    "line": "push    8; Size",
+    "line": "push    8; Verified new per-model usage entry allocation: 8 bytes for boundObject pointer + usageCount; inserted into the current exterior-cell list.",
     "mnemonic": "push",
     "size": 2
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4B27E1",
-    "line": "mov     eax, [esp+0Ch+arg_4]",
+    "line": "mov     eax, [esp+0Ch+usageCount]; Verified increments this cell's reference-model usage count by the number of queued distant instances.",
     "mnemonic": "mov",
     "size": 4
   },

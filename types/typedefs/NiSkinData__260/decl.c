@@ -1,1 +1,1 @@
-NiSkinData
+struct NiSkinData;

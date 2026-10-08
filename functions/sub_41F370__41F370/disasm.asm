@@ -1,4 +1,4 @@
-0x41F370: push    0FFFFFFFFh
+0x41F370: push    0FFFFFFFFh; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x41F372: push    offset SEH_6F8920
 0x41F377: mov     eax, large fs:0
 0x41F37D: push    eax
@@ -26,7 +26,7 @@
 0x41F3BA: mov     [esp+14h+var_4], 0
 0x41F3C2: jz      short loc_41F3CD
 0x41F3C4: mov     ecx, eax
-0x41F3C6: call    sub_42A050
+0x41F3C6: call    ExtraCannotWear_ctor; Constructs marker extra ExtraCannotWear, type 0x47.
 0x41F3CB: jmp     short loc_41F3CF
 0x41F3CD: xor     eax, eax
 0x41F3CF: push    eax; BSExtraData *
@@ -50,3 +50,15 @@
 0x41F40B: pop     esi
 0x41F40C: add     esp, 0Ch
 0x41F40F: retn    4
+0x9AFAD0: mov     eax, [ebp+4]
+0x9AFAD3: push    eax
+0x9AFAD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAD9: pop     ecx
+0x9AFADA: retn
+0x9AFADB: mov     edx, [esp+arg_4]
+0x9AFADF: lea     eax, [edx-4]
+0x9AFAE2: mov     ecx, [edx-8]
+0x9AFAE5: xor     ecx, eax
+0x9AFAE7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFAEC: mov     eax, offset stru_ADBFDC
+0x9AFAF1: jmp     ___CxxFrameHandler3

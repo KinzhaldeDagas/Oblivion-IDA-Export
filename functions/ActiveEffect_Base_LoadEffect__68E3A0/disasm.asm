@@ -12,3 +12,20 @@
 0x68E3BC: push    eax
 0x68E3BD: lea     eax, [esp+38h+var_C]
 0x68E3C1: mov     large fs:0, eax
+0x9C54B0: mov     eax, [ebp-10h]
+0x9C54B3: push    eax
+0x9C54B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C54B9: pop     ecx
+0x9C54BA: retn
+0x9C54BB: mov     eax, [ebp-10h]
+0x9C54BE: push    eax
+0x9C54BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C54C4: pop     ecx
+0x9C54C5: retn
+0x9C54C6: mov     edx, [esp+arg_4]
+0x9C54CA: lea     eax, [edx-28h]
+0x9C54CD: mov     ecx, [edx-2Ch]
+0x9C54D0: xor     ecx, eax
+0x9C54D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C54D7: mov     eax, offset stru_AEDC90
+0x9C54DC: jmp     ___CxxFrameHandler3

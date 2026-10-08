@@ -1,1 +1,1 @@
-PERF
+typedef ERF *PERF;

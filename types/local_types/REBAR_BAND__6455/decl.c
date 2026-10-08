@@ -1,1 +1,37 @@
-REBAR_BAND
+struct REBAR_BAND
+{
+UINT fStyle;
+UINT fMask;
+COLORREF clrFore;
+COLORREF clrBack;
+INT iImage;
+HWND hwndChild;
+UINT cxMinChild;
+UINT cyMinChild;
+UINT cx;
+HBITMAP hbmBack;
+UINT wID;
+UINT cyChild;
+UINT cyMaxChild;
+UINT cyIntegral;
+UINT cxIdeal;
+__declspec(align(8)) LPARAM_0 lParam;
+UINT cxHeader;
+INT cxEffective;
+UINT cyHeader;
+UINT cxMinBand;
+UINT cyMinBand;
+UINT cyRowSoFar;
+INT iRow;
+UINT fStatus;
+UINT fDraw;
+UINT uCDret;
+RECT rcBand;
+RECT rcGripper;
+RECT rcCapImage;
+RECT rcCapText;
+RECT rcChild;
+RECT rcChevron;
+LPWSTR lpText;
+HWND hwndPrevParent;
+};

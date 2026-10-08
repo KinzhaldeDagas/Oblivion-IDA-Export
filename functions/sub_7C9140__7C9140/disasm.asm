@@ -8,7 +8,6 @@
 0x7C914F: mov     edi, offset dword_B45040
 0x7C9154: xor     esi, esi
 0x7C9156: jmp     short loc_7C9160
-0x7C9158: align 10h
 0x7C9160: mov     eax, [edi]
 0x7C9162: cmp     byte ptr [eax+8], 0
 0x7C9166: jz      loc_7C9210
@@ -32,12 +31,12 @@
 0x7C91AC: add     eax, 0FFFFFE89h
 0x7C91B1: cmp     eax, 2
 0x7C91B4: ja      short loc_7C91DC
-0x7C91B6: fld     dword ptr [esp+28h+var_18]
+0x7C91B6: fld     [esp+28h+var_18]
 0x7C91BA: fld     [esp+28h+arg_4]
 0x7C91BE: fld     st
 0x7C91C0: fmulp   st(2), st
 0x7C91C2: fxch    st(1)
-0x7C91C4: fstp    dword ptr [esp+28h+var_18]
+0x7C91C4: fstp    [esp+28h+var_18]
 0x7C91C8: fld     [esp+28h+var_14]
 0x7C91CC: fmul    st, st(1)
 0x7C91CE: fstp    [esp+28h+var_14]
@@ -47,7 +46,7 @@
 0x7C91DC: fld     [esp+28h+arg_C]
 0x7C91E0: fdiv    [esp+28h+arg_4]
 0x7C91E4: fstp    [esp+28h+arg_C]
-0x7C91E8: fld     dword ptr [esp+28h+var_18]
+0x7C91E8: fld     [esp+28h+var_18]
 0x7C91EC: fstp    dword ptr [esi+0B44FD8h]
 0x7C91F2: fld     [esp+28h+var_14]
 0x7C91F6: fstp    dword ptr [esi+0B44FDCh]

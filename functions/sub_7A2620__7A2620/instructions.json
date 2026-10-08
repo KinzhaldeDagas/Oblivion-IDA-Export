@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A2620",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; CTreeEngine::FreeTransientData. Releases compact trunk branch, leaf LOD vectors, branch-info arrays, and related transient generator state, then clears CTreeEngine+0x21.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7A263E",
-    "line": "call    sub_790D00",
+    "line": "call    OB_CBranch_cleanup_010201A0; Compact CBranch cleanup: frees vertex storage, recursively destroys children, and clears child/flare vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7A2644",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x7A276C",
-    "line": "push    offset sub_794EB0; void (__thiscall *)(void *)",
+    "line": "push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x7A277B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x7A27C2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A27C4",
-    "line": "call    sub_7A7800",
+    "line": "call    OB_SIdvBranchInfo_Dtor_010201A0; Each branch-info pointer is destructed through OB_SIdvBranchInfo_Dtor before the enclosing 0x74 record is freed, proving per-record ownership of the nine optional spline pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x7A27CA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

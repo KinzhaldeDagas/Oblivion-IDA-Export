@@ -13,7 +13,7 @@
 0x547B6E: fisub   [esp+arg_10]
 0x547B72: fdivrp  st(2), st
 0x547B74: faddp   st(1), st
-0x547B76: call    Double_To_SInt32
+0x547B76: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x547B7B: xor     ecx, ecx
 0x547B7D: test    eax, eax
 0x547B7F: setle   cl

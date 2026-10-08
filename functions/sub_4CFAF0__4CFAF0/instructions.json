@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x4CFB11",
-    "line": "lea     ecx, [ebx+28h]",
+    "line": "lea     ecx, [ebx+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4CFB14",
-    "line": "call    ExtraDataList?_GetDetachTime",
+    "line": "call    ExtraDataList_GetDetachTime; Returns the uint32 payload of ExtraDetachTime (type 0x10), or zero when absent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4CFB34",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x4CFB45",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4CFB8B",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x4CFC4E",
-    "line": "call    sub_420480",
+    "line": "call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x4CFC73",
-    "line": "call    sub_4203E0",
+    "line": "call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x4CFC9F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x4CFCBD",
-    "line": "call    sub_4204A0",
+    "line": "call    ExtraDataList_RemoveDroppedItemList; Removes ExtraDroppedItemList type 0x42 when present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x4CFD8E",
-    "line": "call    sub_420480",
+    "line": "call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x4CFDB2",
-    "line": "call    sub_4203E0",
+    "line": "call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x4CFDDE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x4CFDF2",
-    "line": "call    sub_4204A0",
+    "line": "call    ExtraDataList_RemoveDroppedItemList; Removes ExtraDroppedItemList type 0x42 when present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x4CFE2B",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1603,19 +1603,19 @@
   },
   {
     "ea": "0x4CFE40",
-    "line": "push    0",
+    "line": "push    0; detachTime",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CFE42",
-    "line": "lea     ecx, [ebx+28h]",
+    "line": "lea     ecx, [ebx+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4CFE45",
-    "line": "call    ExtraDataList?_SetDetachTime",
+    "line": "call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x4CFEA5",
-    "line": "call    TESForm_GetQuestItem",
+    "line": "call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2107,13 +2107,13 @@
   },
   {
     "ea": "0x4CFF35",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CFF37",
-    "line": "call    sub_4DBE40",
+    "line": "call    TESObjectREFR_SetLockedFlagOnSelfOrLinkedDoor; Verified lock-state propagation helper: if this reference has an ExtraLock wrapper, sets its locked bit; otherwise follows its linked-door reference and sets that wrapper's locked bit. It then calls TESObjectREFR_MarkLockDataAsModified so the owning reference or linked door records change mask 0x40.",
     "mnemonic": "call",
     "size": 5
   },

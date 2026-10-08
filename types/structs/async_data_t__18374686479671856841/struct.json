@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "async_data_t",
+  "definition": "struct async_data_t\n{\nobj_handle_t handle;\nobj_handle_t event;\nclient_ptr_t iosb;\nclient_ptr_t user;\nclient_ptr_t apc;\napc_param_t apc_context;\n}\n",
   "id": 18374686479671856841,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "obj_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "event",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "obj_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iosb",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "client_ptr_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "user",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "client_ptr_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "apc",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "client_ptr_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "apc_context",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "apc_param_t"
     }
   ],
   "name": "async_data_t",
+  "ordinal": 6645,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

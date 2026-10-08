@@ -1,4 +1,4 @@
-0x7A5740: push    0FFFFFFFFh
+0x7A5740: push    0FFFFFFFFh; Allocates and initializes the SIdvLeafInfo runtime tables: random rocking-group time offsets, 16 floats per texture-orientation texcoord block, and zeroed per-LOD leaf-card vertex tables.
 0x7A5742: push    offset SEH_7A5740
 0x7A5747: mov     eax, large fs:0
 0x7A574D: push    eax
@@ -13,7 +13,7 @@
 0x7A575E: mov     large fs:0, eax
 0x7A5764: mov     esi, ecx
 0x7A5766: mov     eax, [esi+38h]
-0x7A5769: mov     ebx, [esp+20h+arg_0]
+0x7A5769: mov     ebx, [esp+20h+leafTextureCount]
 0x7A576D: xor     ecx, ecx
 0x7A576F: mov     edx, 4
 0x7A5774: mul     edx
@@ -24,20 +24,20 @@
 0x7A5780: push    ecx; Size
 0x7A5781: call    FormHeapAlloc
 0x7A5786: add     esp, 4
-0x7A5789: lea     ecx, [esp+20h+arg_0]
+0x7A5789: lea     ecx, [esp+20h+leafTextureCount]; this
 0x7A578D: mov     [esi+4Ch], eax
-0x7A5790: call    sub_78EAF0
+0x7A5790: call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).
 0x7A5795: xor     edi, edi
 0x7A5797: cmp     [esi+38h], edi
 0x7A579A: mov     [esp+20h+var_4], edi
 0x7A579E: jle     short loc_7A57C9
 0x7A57A0: fld     dword ptr ds:0A5A04Ch
 0x7A57A6: sub     esp, 8
-0x7A57A9: fstp    [esp+28h+var_24]; float
-0x7A57AD: lea     ecx, [esp+28h+arg_0]
+0x7A57A9: fstp    [esp+28h+maxValue]; maxValue
+0x7A57AD: lea     ecx, [esp+28h+leafTextureCount]; this
 0x7A57B1: fldz
-0x7A57B3: fstp    [esp+28h+var_28]; float
-0x7A57B6: call    sub_78EA00
+0x7A57B3: fstp    [esp+28h+minValue]; minValue
+0x7A57B6: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x7A57BB: mov     eax, [esi+4Ch]
 0x7A57BE: fstp    dword ptr [eax+edi*4]
 0x7A57C1: add     edi, 1
@@ -145,9 +145,9 @@
 0x7A58D6: add     edi, 4
 0x7A58D9: cmp     ebx, [esi+3Ch]
 0x7A58DC: jl      short loc_7A5862
-0x7A58DE: lea     ecx, [esp+20h+arg_0]; void *
+0x7A58DE: lea     ecx, [esp+20h+leafTextureCount]; this
 0x7A58E2: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x7A58EA: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7A58EA: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7A58EF: mov     ecx, [esp+20h+var_C]
 0x7A58F3: mov     large fs:0, ecx
 0x7A58FA: pop     ecx
@@ -157,3 +157,12 @@
 0x7A58FE: pop     ebx
 0x7A58FF: add     esp, 0Ch
 0x7A5902: retn    4
+0x9CCBB0: lea     ecx, [ebp+4]; this
+0x9CCBB3: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CCBB8: mov     edx, [esp+arg_4]
+0x9CCBBC: lea     eax, [edx-10h]
+0x9CCBBF: mov     ecx, [edx-14h]
+0x9CCBC2: xor     ecx, eax
+0x9CCBC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CCBC9: mov     eax, offset stru_AF5F30
+0x9CCBCE: jmp     ___CxxFrameHandler3

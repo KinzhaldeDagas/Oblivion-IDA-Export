@@ -1,1 +1,1 @@
-GLuint64
+typedef UINT64 GLuint64;

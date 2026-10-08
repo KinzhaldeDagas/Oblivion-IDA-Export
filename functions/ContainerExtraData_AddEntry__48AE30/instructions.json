@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x48AE30",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x48AE3A",
-    "line": "mov     ebx, [esp+18h+arg_0]",
+    "line": "mov     ebx, [esp+18h+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -70,5 +70,1253 @@
     "line": "jz      ContainerExtraData_AddEntry___Done",
     "mnemonic": "jz",
     "size": 6
+  },
+  {
+    "ea": "0x48AE53",
+    "line": "mov     ecx, [edi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AE56",
+    "line": "cmp     ecx, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE58",
+    "line": "jz      short ContainerExtraData_AddEntry___GetExistingEntry",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE5A",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE5C",
+    "line": "mov     edx, [eax+40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AE5F",
+    "line": "push    8000000h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x48AE64",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE66",
+    "line": "mov     eax, [ebx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AE69",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AE6A",
+    "line": "push    ebp; referenceFormIDOrZero",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AE6B",
+    "line": "push    1; unusedAlwaysOne",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE6D",
+    "line": "push    eax; form",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AE6E",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE70",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AE75",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE77",
+    "line": "mov     eax, [ebx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AE7A",
+    "line": "mov     [esp+24h+var_4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AE7E",
+    "line": "mov     eax, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE80",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE82",
+    "line": "mov     [esp+24h+var_8], esi",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AE86",
+    "line": "jz      short ContainerExtraData_AddEntry___MergeEntryToExistingEntry",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE88",
+    "line": "cmp     [eax+4], ebp",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x48AE8B",
+    "line": "jnz     short ContainerExtraData_AddEntry___MergeEntryToExistingEntry",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE8D",
+    "line": "cmp     [eax], ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE8F",
+    "line": "jnz     short ContainerExtraData_AddEntry___MergeEntryToExistingEntry",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE91",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AE92",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AE97",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48AE9A",
+    "line": "mov     [ebx], ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE9C",
+    "line": "cmp     esi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AE9E",
+    "line": "jz      ContainerExtraData_AddEntry___AddArgumentEntryToEntryList",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x48AEA4",
+    "line": "mov     ecx, [ebx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AEA7",
+    "line": "add     [esi+4], ecx",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48AEAA",
+    "line": "mov     eax, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEAC",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEAE",
+    "line": "jz      short loc_48AEBD",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEB0",
+    "line": "cmp     [eax+4], ebp",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x48AEB3",
+    "line": "jnz     short loc_48AEBD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEB5",
+    "line": "cmp     [eax], ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEB7",
+    "line": "jz      loc_48AFED",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x48AEBD",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEBF",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEC1",
+    "line": "mov     [esp+24h+var_14], edx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AEC5",
+    "line": "mov     [esp+24h+form], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AEC9",
+    "line": "jz      ContainerExtraData_AddEntry___DestroyArgEntry",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x48AECF",
+    "line": "jmp     short ContainerExtraData_AddEntry___MergeEntryDataTableLoop_",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AED1",
+    "line": "mov     eax, [esp+24h+form]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AED5",
+    "line": "mov     esi, [esp+24h+var_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AED9",
+    "line": "mov     edi, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEDB",
+    "line": "cmp     edi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEDD",
+    "line": "jz      loc_48AFC2",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x48AEE3",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEE5",
+    "line": "mov     bl, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEE7",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AEEC",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEEE",
+    "line": "jz      short loc_48AEFF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEF0",
+    "line": "mov     eax, [esp+24h+var_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AEF4",
+    "line": "mov     ecx, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AEF7",
+    "line": "push    ecx; reference",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AEF8",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AEFA",
+    "line": "call    ExtraDataList_SetReferencePointer; Set or create ExtraReferencePointer (type 0x22) in one logical function, now merged through 0x41FAF4. This extra preserves persistent-reference provenance inside an already form-keyed inventory entry; it does not override EntryData.type or sourceRef->baseForm and therefore cannot restore a thrown proxy AMMO to its source WEAP.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AEFF",
+    "line": "cmp     [esp+24h+var_14], ebp",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x48AF03",
+    "line": "jz      short loc_48AF60",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF05",
+    "line": "mov     edx, [esp+24h+var_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AF09",
+    "line": "mov     esi, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF0B",
+    "line": "cmp     esi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF0D",
+    "line": "jz      short loc_48AF58",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF0F",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF11",
+    "line": "jz      ContainerExtraData_AddEntry___MergeEntryDataTableLoop_Next",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x48AF17",
+    "line": "cmp     edi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF19",
+    "line": "jz      short loc_48AF47",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF1B",
+    "line": "push    esi; other",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AF1C",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF1E",
+    "line": "call    ExtraDataList_CompareListForContainer; False means these two ExtraDataLists are stack-compatible; then native code adds their ExtraCount values. True advances to the next candidate.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AF23",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF25",
+    "line": "jnz     short loc_48AF47",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF27",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF29",
+    "line": "call    ExtraDataList_GetExtraCount",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AF2E",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF30",
+    "line": "movzx   ebx, ax",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x48AF33",
+    "line": "call    ExtraDataList_GetExtraCount",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AF38",
+    "line": "add     bx, ax",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48AF3B",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF3D",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AF3E",
+    "line": "call    ExtraDataList_SetExtraCount",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AF43",
+    "line": "xor     bl, bl",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF45",
+    "line": "jmp     short loc_48AF52",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF47",
+    "line": "mov     eax, [esp+24h+var_14]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AF4B",
+    "line": "mov     ecx, [eax+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AF4E",
+    "line": "mov     [esp+24h+var_14], ecx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AF52",
+    "line": "cmp     [esp+24h+var_14], ebp",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x48AF56",
+    "line": "jnz     short loc_48AF05",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF58",
+    "line": "test    bl, bl",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF5A",
+    "line": "jz      short ContainerExtraData_AddEntry___MergeEntryDataTableLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF5C",
+    "line": "mov     esi, [esp+24h+var_8]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AF60",
+    "line": "cmp     [esi], ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF62",
+    "line": "jnz     short loc_48AF7D",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF64",
+    "line": "push    8; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF66",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AF6B",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48AF6E",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF70",
+    "line": "jz      short loc_48AF79",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF72",
+    "line": "mov     [eax], ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF74",
+    "line": "mov     [eax+4], ebp",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AF77",
+    "line": "jmp     short loc_48AF7B",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF79",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF7B",
+    "line": "mov     [esi], eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF7D",
+    "line": "cmp     edi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF7F",
+    "line": "mov     esi, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF81",
+    "line": "jz      short ContainerExtraData_AddEntry___MergeEntryDataTableLoop_Next",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF83",
+    "line": "cmp     [esi], ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF85",
+    "line": "jz      short loc_48AFA9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF87",
+    "line": "push    8; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF89",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AF8E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48AF91",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF93",
+    "line": "jz      short loc_48AF9E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF95",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF97",
+    "line": "mov     [eax], edx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF99",
+    "line": "mov     [eax+4], ebp",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AF9C",
+    "line": "jmp     short loc_48AFA0",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AF9E",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFA0",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AFA3",
+    "line": "mov     [eax+4], ecx",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AFA6",
+    "line": "mov     [esi+4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AFA9",
+    "line": "mov     [esi], edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFAB",
+    "line": "mov     edx, [esp+24h+form]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AFAF",
+    "line": "mov     eax, [edx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x48AFB2",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFB4",
+    "line": "mov     ebx, [esp+24h+entry]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AFB8",
+    "line": "mov     [esp+24h+form], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AFBC",
+    "line": "jnz     ContainerExtraData_AddEntry___MergeEntryDataTableLoop",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x48AFC2",
+    "line": "mov     edi, [esp+24h+var_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AFC6",
+    "line": "cmp     [esp+24h+destroyEntryIfMerged], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x48AFCB",
+    "line": "jz      short loc_48AFED",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFCD",
+    "line": "mov     ecx, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFCF",
+    "line": "cmp     ecx, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFD1",
+    "line": "jz      short loc_48AFD8",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFD3",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AFD8",
+    "line": "mov     eax, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFDA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AFDB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AFE0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AFE1",
+    "line": "mov     [ebx], ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFE3",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AFE8",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48AFEB",
+    "line": "mov     ebx, ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFED",
+    "line": "mov     ecx, [esp+24h+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48AFF1",
+    "line": "push    ebp; referenceFormIDOrZero",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AFF2",
+    "line": "push    1; unusedAlwaysOne",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFF4",
+    "line": "push    ecx; form",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48AFF5",
+    "line": "mov     ecx, edi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFF7",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48AFFC",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48AFFE",
+    "line": "cmp     esi, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48B000",
+    "line": "jz      short ContainerExtraData_AddEntry___Done_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B002",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B004",
+    "line": "cmp     eax, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48B006",
+    "line": "jz      short loc_48B011",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B008",
+    "line": "cmp     [eax+4], ebp",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x48B00B",
+    "line": "jnz     short ContainerExtraData_AddEntry___Done_",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B00D",
+    "line": "cmp     [eax], ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48B00F",
+    "line": "jnz     short ContainerExtraData_AddEntry___Done_",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B011",
+    "line": "cmp     [esi+4], ebp",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x48B014",
+    "line": "jnz     short ContainerExtraData_AddEntry___Done_",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B016",
+    "line": "mov     edx, [esp+24h+var_10]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x48B01A",
+    "line": "mov     ecx, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B01C",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48B01D",
+    "line": "call    BSSimpleList_Remove",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B022",
+    "line": "mov     ecx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B024",
+    "line": "cmp     ecx, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48B026",
+    "line": "jz      short loc_48B02D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B028",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B02D",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B02F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48B030",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B035",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48B036",
+    "line": "mov     [esi], ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B038",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B03D",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48B040",
+    "line": "cmp     ebx, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48B042",
+    "line": "jz      short ContainerExtraData_AddEntry___Done_",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B044",
+    "line": "mov     ecx, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B046",
+    "line": "cmp     ecx, ebp",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x48B048",
+    "line": "jz      short loc_48B04F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x48B04A",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B04F",
+    "line": "mov     ecx, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B051",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48B052",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B057",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48B058",
+    "line": "mov     [ebx], ebp",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B05A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B05F",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48B062",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B063",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B064",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B065",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B066",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48B069",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x48B06C",
+    "line": "mov     ecx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x48B06E",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x48B06F",
+    "line": "call    BSSimpleList_PushBack",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x48B074",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B075",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B076",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B077",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x48B078",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x48B07B",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

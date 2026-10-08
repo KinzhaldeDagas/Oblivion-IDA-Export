@@ -26,7 +26,7 @@
 0x51EBD8: lea     ebx, [esi+68h]
 0x51EBDB: lea     ecx, [esi+11Ch]; this
 0x51EBE1: mov     dword ptr [esi], offset ??_7TESCreature@@6BTESCreature@@@; const TESCreature::`vftable'{for `TESCreature'}
-0x51EBE7: mov     dword ptr [edi], offset ??_7TESCreature@@6BTESActorBaseData@@@; const TESCreature::`vftable'{for `TESActorBaseData'}
+0x51EBE7: mov     dword ptr [edi], offset ??_7TESCreature@@6BTESActorBaseData@@@; Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.
 0x51EBED: mov     dword ptr [esi+44h], offset ??_7TESCreature@@6BTESContainer@@@; const TESCreature::`vftable'{for `TESContainer'}
 0x51EBF4: mov     dword ptr [esi+54h], offset ??_7TESCreature@@6BTESSpellList@@@; const TESCreature::`vftable'{for `TESSpellList'}
 0x51EBFB: mov     dword ptr [ebx], offset ??_7TESCreature@@6BTESAIForm@@@; const TESCreature::`vftable'{for `TESAIForm'}
@@ -42,10 +42,10 @@
 0x51EC53: lea     ecx, [esi+134h]
 0x51EC59: mov     byte ptr [esp+24h+var_4], 2
 0x51EC5E: call    TESTexture_constr
-0x51EC63: mov     ecx, esi
+0x51EC63: mov     ecx, esi; self
 0x51EC65: mov     byte ptr [esp+24h+var_4], 3
 0x51EC6A: mov     byte ptr [esi+4], 24h ; '$'
-0x51EC6E: call    sub_51C7B0
+0x51EC6E: call    TESCreature_InitializeDefaults
 0x51EC73: push    32h ; '2'
 0x51EC75: mov     ecx, ebx
 0x51EC77: call    TESAIForm_SetResponsibility
@@ -61,7 +61,7 @@
 0x51EC97: push    32h ; '2'; char
 0x51EC99: push    6; int
 0x51EC9B: lea     ecx, [esi+88h]; int
-0x51ECA1: call    TESAttributes_SetAVi
+0x51ECA1: call    TESAttributes_SetAVi; TESAttributes_SetAVi: attributes are stored as single bytes in TESAttributes. AVU base-AV guards clamp attributes to 0..configuredLimit before player integer base setters/modifiers reach this storage.
 0x51ECA6: mov     eax, [edi]
 0x51ECA8: mov     edx, [eax+50h]
 0x51ECAB: or      dword ptr [edi+4], 4000h
@@ -88,3 +88,21 @@
 0x51ECF0: pop     ebx
 0x51ECF1: add     esp, 10h
 0x51ECF4: retn
+0x9B7A40: mov     ecx, [ebp-10h]; this
+0x9B7A43: jmp     ??1TESActorBase@@UAE@XZ; TESActorBase::~TESActorBase(void)
+0x9B7A48: mov     ecx, [ebp-10h]
+0x9B7A4B: add     ecx, 0E4h ; 'ä'
+0x9B7A51: jmp     TESAttackDamageForm_destr
+0x9B7A56: mov     ecx, [ebp-10h]
+0x9B7A59: add     ecx, 11Ch; this
+0x9B7A5F: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B7A64: mov     ecx, [ebp-10h]
+0x9B7A67: add     ecx, 134h; void *
+0x9B7A6D: jmp     TESTexture_destr
+0x9B7A72: mov     edx, [esp+arg_4]
+0x9B7A76: lea     eax, [edx-14h]
+0x9B7A79: mov     ecx, [edx-18h]
+0x9B7A7C: xor     ecx, eax
+0x9B7A7E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7A83: mov     eax, offset stru_AE23B4
+0x9B7A88: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x77BA10: mov     eax, ecx
+0x77BA10: mov     eax, ecx; DX10 bridge note: Oblivion derives the fog-table capability flag from Caps.RasterCaps bits 0x100 (D3DPRASTERCAPS_FOGTABLE) and 0x100000 (D3DPRASTERCAPS_WFOG). The DX10 bridge uses this observed behavior when seeding FOGTABLEMODE defaults, while runtime fog changes are captured through SetRenderState.
 0x77BA12: mov     ecx, [eax+103Ch]
 0x77BA18: test    ecx, 100h
 0x77BA1E: jz      short loc_77BA2E

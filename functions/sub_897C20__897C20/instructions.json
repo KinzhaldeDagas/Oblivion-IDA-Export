@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x897CE7",
-    "line": "cmp     byte ptr [esp+2Ch+arg_0], 0",
+    "line": "cmp     byte ptr [esp+2Ch+slot], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x897D27",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x897D51",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x897D90",
-    "line": "fstp    [esp+30h+arg_0]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x897D95",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x897D9F",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x897DA3",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x897DA9",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x897DAD",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x897DC8",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x897E1A",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x897E6A",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x897EB3",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x897ED6",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x897F7A",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x897F92",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x897FCC",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x897FDA",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x897FE7",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x897FEE",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x898004",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x898013",
-    "line": "call    eax ; dword_BA7A84",
+    "line": "call    eax ; unk_BA7A84",
     "mnemonic": "call",
     "size": 2
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x89802B",
-    "line": "lea     eax, [esp+30h+arg_0]",
+    "line": "lea     eax, [esp+30h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1783,13 +1783,13 @@
   },
   {
     "ea": "0x898034",
-    "line": "lea     ecx, [esp+2Ch+arg_0]; this",
+    "line": "lea     ecx, [esp+2Ch+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x898038",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x898046",
-    "line": "lea     ecx, [esp+2Ch+var_14]; this",
+    "line": "lea     ecx, [esp+2Ch+var_14]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x898052",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x898066",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,7 +1957,7 @@
   },
   {
     "ea": "0x89809A",
-    "line": "mov     [esp+2Ch+arg_0], edi",
+    "line": "mov     [esp+2Ch+slot], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x8980B3",
-    "line": "cmp     ecx, [esp+2Ch+arg_0]",
+    "line": "cmp     ecx, [esp+2Ch+slot]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x8980C3",
-    "line": "mov     eax, [esp+2Ch+arg_0]",
+    "line": "mov     eax, [esp+2Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x8981D1",
-    "line": "mov     eax, [esp+2Ch+arg_0]",
+    "line": "mov     eax, [esp+2Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2641,7 +2641,7 @@
   },
   {
     "ea": "0x8981DC",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2716,5 +2716,209 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D67A0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67A3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67A4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67A9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67AA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67AB",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67AE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67B3",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67B6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67B7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67BC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67BD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67BE",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67C1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67C2",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67C7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67C8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67C9",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67CC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67CD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67D2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67D3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67D4",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67D7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67D8",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67DD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67DE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D67DF",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D67E3",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67E6",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D67E9",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D67EB",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67F0",
+    "line": "mov     eax, offset stru_AFE588",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D67F5",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

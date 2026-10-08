@@ -6,7 +6,7 @@
 0x47F75D: test    edi, edi
 0x47F75F: jz      short loc_47F79F
 0x47F761: push    esi
-0x47F762: push    offset dword_B3CD7C
+0x47F762: push    offset stru_B3CD7C
 0x47F767: call    sub_700010
 0x47F76C: mov     esi, eax
 0x47F76E: test    esi, esi

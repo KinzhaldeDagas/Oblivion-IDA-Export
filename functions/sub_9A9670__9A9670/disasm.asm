@@ -2,28 +2,28 @@
 0x9A9671: push    ebp
 0x9A9672: push    esi
 0x9A9673: mov     ebx, 1
-0x9A9678: test    byte ptr dword_BAAA94, bl
+0x9A9678: test    byte ptr g_ConstantMapArrayStaticInitFlags, bl
 0x9A967E: push    edi
 0x9A967F: mov     esi, ecx
 0x9A9681: jnz     short loc_9A96A0
-0x9A9683: or      dword_BAAA94, ebx
-0x9A9689: push    offset sub_A27C10; void (__cdecl *)()
-0x9A968E: mov     dword_BAAA90, 0
+0x9A9683: or      g_ConstantMapArrayStaticInitFlags, ebx
+0x9A9689: push    offset NiTArray_ConstantMapEntry_ReleaseEmptySentinel; void (__cdecl *)()
+0x9A968E: mov     g_ConstantMapArrayEmptyEntry, 0
 0x9A9698: call    _atexit
 0x9A969D: add     esp, 4
 0x9A96A0: movzx   ecx, word ptr [esi+0Ah]
-0x9A96A4: mov     eax, [esp+10h+arg_0]
+0x9A96A4: mov     eax, [esp+10h+index]
 0x9A96A8: cmp     eax, ecx
-0x9A96AA: mov     ebp, [esp+10h+arg_4]
+0x9A96AA: mov     ebp, [esp+10h+value]
 0x9A96AE: jb      short loc_9A96C8
 0x9A96B0: lea     edx, [eax+1]
 0x9A96B3: mov     [esi+0Ah], dx
 0x9A96B7: mov     ecx, [ebp+0]
-0x9A96BA: cmp     ecx, dword_BAAA90
+0x9A96BA: cmp     ecx, g_ConstantMapArrayEmptyEntry
 0x9A96C0: jz      short loc_9A96EC
 0x9A96C2: add     [esi+0Ch], bx
 0x9A96C6: jmp     short loc_9A96EC
-0x9A96C8: mov     ecx, dword_BAAA90
+0x9A96C8: mov     ecx, g_ConstantMapArrayEmptyEntry
 0x9A96CE: cmp     [ebp+0], ecx
 0x9A96D1: mov     edx, [esi+4]
 0x9A96D4: jz      short loc_9A96E1

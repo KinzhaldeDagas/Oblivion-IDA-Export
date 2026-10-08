@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CAAC0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4CAAC4",
-    "line": "add     ecx, 28h ; '('",
+    "line": "add     ecx, 28h ; '('; this",
     "mnemonic": "add",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4CAAD1",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4CAAE0",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+actor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x4CAB53",
-    "line": "mov     ecx, [esp+18h+var_4]",
+    "line": "mov     ecx, [esp+18h+var_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4CAB57",
-    "line": "call    sub_41E7F0",
+    "line": "call    ExtraDataList_GetRank; Verified accessor: returns ExtraRank.rank as signed 32-bit; returns -1 when kExtraData_Rank is absent. Cell ownership compares this required rank against the actor's faction rank.",
     "mnemonic": "call",
     "size": 5
   },

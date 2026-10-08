@@ -19,7 +19,6 @@
 0x74C5F6: jbe     short loc_74C618
 0x74C5F8: mov     ebp, [esi+4]
 0x74C5FB: jmp     short loc_74C600
-0x74C5FD: align 10h
 0x74C600: movzx   ecx, ax
 0x74C603: cmp     dword ptr [ebp+ecx*4+0], 0
 0x74C608: setz    cl

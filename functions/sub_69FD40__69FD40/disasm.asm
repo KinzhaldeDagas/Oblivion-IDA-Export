@@ -50,9 +50,9 @@
 0x69FDD5: push    1
 0x69FDD7: mov     ecx, ebp
 0x69FDD9: call    sub_46A9C0
-0x69FDDE: push    ebx
-0x69FDDF: mov     ecx, ebp
-0x69FDE1: call    sub_4D7D10
+0x69FDDE: push    ebx; node
+0x69FDDF: mov     ecx, ebp; this
+0x69FDE1: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
 0x69FDE6: mov     edx, [ebp+0]
 0x69FDE9: mov     eax, [edx+174h]
 0x69FDEF: mov     ecx, ebp
@@ -77,7 +77,7 @@
 0x69FE24: add     esp, 8
 0x69FE27: push    offset dword_A7D0EC
 0x69FE2C: mov     ecx, ebx
-0x69FE2E: call    NiObjectNET_GetExtraData
+0x69FE2E: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x69FE33: test    eax, eax
 0x69FE35: jz      short loc_69FE55
 0x69FE37: mov     edx, [eax+0Ch]
@@ -93,9 +93,9 @@
 0x69FE52: add     esp, 4
 0x69FE55: push    offset off_A3CEB0
 0x69FE5A: mov     ecx, ebx
-0x69FE5C: call    NiObjectNET_GetExtraData
+0x69FE5C: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x69FE61: push    eax
-0x69FE62: push    offset dword_B35ACC
+0x69FE62: push    offset stru_B35ACC
 0x69FE67: call    NiRTTI_Cast
 0x69FE6C: add     esp, 8
 0x69FE6F: test    eax, eax
@@ -117,9 +117,9 @@
 0x69FE9E: push    eax
 0x69FE9F: mov     ecx, ebx
 0x69FEA1: mov     [esp+4Ch+var_4], 0FFFFFFFFh
-0x69FEA9: call    NiNode_AddNiExtraData
+0x69FEA9: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x69FEAE: mov     ecx, ebp; int
-0x69FEB0: call    sub_4E3490
+0x69FEB0: call    Actor_SetupAnimationData; CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\SpecialAnims.
 0x69FEB5: mov     edx, [ebp+0]
 0x69FEB8: mov     eax, [edx+0ECh]
 0x69FEBE: mov     ecx, ebp
@@ -152,3 +152,15 @@
 0x69FEFF: pop     ebx
 0x69FF00: add     esp, 34h
 0x69FF03: retn
+0x9C5E60: mov     eax, [ebp-34h]
+0x9C5E63: push    eax
+0x9C5E64: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5E69: pop     ecx
+0x9C5E6A: retn
+0x9C5E6B: mov     edx, [esp+arg_4]
+0x9C5E6F: lea     eax, [edx-38h]
+0x9C5E72: mov     ecx, [edx-3Ch]
+0x9C5E75: xor     ecx, eax
+0x9C5E77: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5E7C: mov     eax, offset stru_AEE514
+0x9C5E81: jmp     ___CxxFrameHandler3

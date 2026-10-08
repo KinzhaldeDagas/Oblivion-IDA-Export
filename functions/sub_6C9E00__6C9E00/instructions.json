@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C9E00",
-    "line": "fldz",
+    "line": "fldz; Internal sequence morph implementation. Activates the source against the destination, marks destination transition state and source state 6 (morph source), and records morph timing/weight fields. ActorAnimData reaches this only through the guarded 0x6C4060 wrapper.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6C9E05",
-    "line": "push    1; char",
+    "line": "push    1; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6C9E08",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6C9E0D",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x6C9E1A",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, dword ptr [esp+0Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6C9E1E",
-    "line": "push    1; int",
+    "line": "push    1; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6C9E20",
-    "line": "push    esi; int",
+    "line": "push    esi; timeSyncSequence",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x6C9E24",
-    "line": "fstp    [esp+1Ch+var_18]; float",
+    "line": "fstp    [esp+1Ch+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6C9E28",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x6C9E2E",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6C9E31",
-    "line": "push    0; char",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6C9E33",
-    "line": "push    ebx; int",
+    "line": "push    ebx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6C9E34",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },

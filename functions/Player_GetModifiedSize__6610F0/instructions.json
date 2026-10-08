@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6610F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Computes the versioned PlayerCharacter modified-form save size. Skill persistence includes fixed native arrays plus a variable-length list of eight-byte attribute-bonus buckets in save versions >=0x58.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6610FE",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x661143",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x6611B8",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x6611DF",
-    "line": "call    sub_473BF0",
+    "line": "call    Actor_GetAnimationSaveStateSize; Returns the serialized actor-animation block size including its 2-byte length prefix. Null animation data or actors excluded by virtual predicate +0x198 serialize only the zero-length prefix.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x661330",
-    "line": "mov     ecx, offset dword_B3BB44",
+    "line": "mov     ecx, (offset qword_B3BB2C+18h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x661375",
-    "line": "jb      short loc_66139B",
+    "line": "jb      short loc_66139B; For save versions >=0x58, reserve four bytes for the attribute-bucket count and eight bytes for every non-null queued bucket. Older versions reserve one eight-byte bucket.",
     "mnemonic": "jb",
     "size": 2
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x66143E",
-    "line": "jb      short loc_661488",
+    "line": "jb      short loc_661488; Reserve a class FormID and, only when the player's base class is the distinguished custom-class form, reserve the full TESClass save payload containing the fixed seven major skills.",
     "mnemonic": "jb",
     "size": 2
   },
@@ -1705,13 +1705,13 @@
   },
   {
     "ea": "0x66146D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66146F",
-    "line": "call    sub_51C360",
+    "line": "call    TESClass_GetSaveGameSize; Returns save-game payload size for the fixed 0x34-byte TESClass DATA block plus length-prefixed name and icon strings.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x6614C3",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

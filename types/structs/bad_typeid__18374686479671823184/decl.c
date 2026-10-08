@@ -1,1 +1,1 @@
-bad_typeid
+typedef exception bad_typeid;

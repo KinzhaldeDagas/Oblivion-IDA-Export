@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x596C70",
+      "0x596CDF"
+    ],
+    [
+      "0x9C0380",
+      "0x9C03A3"
+    ]
+  ],
+  "chunks_sha256": "bd5cf83876d15335f862b497d1f8a2626a7d29f3ce27f70fd4c4692def9cf123",
+  "comment_regular": "ClassMenu destruction boundary. Sidecar staged custom-class selections are menu-lifetime state and must be discarded here (as well as on back/cancel) without committing them; a wrapper must preserve the caller's integer and x87 state before tail-calling the relocated prologue.",
+  "comment_repeatable": "ClassMenu destruction boundary. Sidecar staged custom-class selections are menu-lifetime state and must be discarded here (as well as on back/cancel) without committing them; a wrapper must preserve the caller's integer and x87 state before tail-calling the relocated prologue.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "ClassMenu::~ClassMenu(void)",
   "end_ea": "0x596CDF",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "??1ClassMenu@@UAE@XZ",
   "segment": ".text",
   "sha256": "7901760d80b125c93034019c20c43512360202e238461a79fd20469825835936",
   "size": 111,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x596C70",
+  "total_chunk_size": 146,
   "type": "void __usercall(Menu *this@<ecx>, double@<st2>, double@<st1>, double@<st0>)",
-  "xrefs_from_count": 33,
+  "xrefs_from_count": 44,
   "xrefs_to_count": 1
 }

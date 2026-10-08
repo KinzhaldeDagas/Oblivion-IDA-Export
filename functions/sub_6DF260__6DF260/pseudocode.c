@@ -4,18 +4,18 @@ int __thiscall sub_6DF260(char *this, float a2, float a3)
   int v4; // edi
   int result; // eax
 
-  v3 = this + 0x38;
-  v4 = 3;
-  do
+  v3 = this + 0x38; /*0x6df262*/
+  v4 = 3; /*0x6df265*/
+  do /*0x6df298*/
   {
-    if ( *(_DWORD *)v3 )
-      result = (*(int (__thiscall **)(_DWORD, _DWORD, _DWORD))(**(_DWORD **)v3 + 0x84))(
+    if ( *(_DWORD *)v3 ) /*0x6df270*/
+      result = (*(int (__thiscall **)(_DWORD, _DWORD, _DWORD))(**(_DWORD **)v3 + 0x84))( /*0x6df290*/
                  *(_DWORD *)v3,
                  LODWORD(a2),
                  LODWORD(a3));
-    v3 += 4;
-    --v4;
+    v3 += 4; /*0x6df292*/
+    --v4; /*0x6df295*/
   }
-  while ( v4 );
-  return result;
+  while ( v4 ); /*0x6df298*/
+  return result; /*0x6df29a*/
 }

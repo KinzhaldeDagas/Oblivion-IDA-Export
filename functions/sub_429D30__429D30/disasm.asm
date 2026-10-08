@@ -1,4 +1,4 @@
-0x429D30: mov     eax, ecx
+0x429D30: mov     eax, ecx; Constructs ExtraAction: type 0x13, default flag byte 1, null action reference.
 0x429D32: xor     ecx, ecx
 0x429D34: mov     byte ptr [eax+4], 13h
 0x429D38: mov     [eax+8], ecx

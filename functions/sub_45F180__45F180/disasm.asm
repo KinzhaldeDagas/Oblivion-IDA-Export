@@ -3,7 +3,7 @@
 0x45F185: push    ebp
 0x45F186: mov     ebp, [eax]
 0x45F188: push    esi
-0x45F189: mov     esi, [esp+0Ch+arg_0]
+0x45F189: mov     esi, [esp+0Ch+form]
 0x45F18D: push    edi
 0x45F18E: push    0; int
 0x45F190: push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *
@@ -26,18 +26,18 @@
 0x45F1C7: call    TESDataHandler_IsFormIDCreated?
 0x45F1CC: test    al, al
 0x45F1CE: jz      short loc_45F1DF
-0x45F1D0: push    esi
-0x45F1D1: mov     ecx, edi
-0x45F1D3: call    sub_45C7A0
+0x45F1D0: push    esi; form
+0x45F1D1: mov     ecx, edi; self
+0x45F1D3: call    TESSaveLoadGame_DeleteForm
 0x45F1D8: pop     edi
 0x45F1D9: pop     esi
 0x45F1DA: pop     ebp
 0x45F1DB: pop     ebx
 0x45F1DC: retn    8
-0x45F1DF: push    ebp
-0x45F1E0: push    esi
+0x45F1DF: push    ebp; changeFlags
+0x45F1E0: push    esi; form
 0x45F1E1: mov     ecx, edi
-0x45F1E3: call    sub_4535A0
+0x45F1E3: call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.
 0x45F1E8: mov     ebp, eax
 0x45F1EA: mov     dword ptr [edi+44h], 1FFFF000h
 0x45F1F1: mov     edx, [esi]
@@ -48,11 +48,11 @@
 0x45F1FE: call    edx
 0x45F200: test    ebx, ebx
 0x45F202: jz      loc_45F2B6
-0x45F208: push    0
-0x45F20A: push    ebx
-0x45F20B: push    esi
-0x45F20C: mov     ecx, edi
-0x45F20E: call    TESSaveLoadGame_ResetObject
+0x45F208: push    0; mode
+0x45F20A: push    ebx; changeFlags
+0x45F20B: push    esi; form
+0x45F20C: mov     ecx, edi; self
+0x45F20E: call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.
 0x45F213: test    ebp, ebp
 0x45F215: jns     short loc_45F25C
 0x45F217: push    0; int
@@ -64,12 +64,12 @@
 0x45F22B: add     esp, 14h
 0x45F22E: mov     ecx, eax; this
 0x45F230: mov     [esp+10h+arg_4], eax
-0x45F234: call    TESObjectREFR_GetParentCell
+0x45F234: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45F239: test    eax, eax
 0x45F23B: jz      short loc_45F1D0
 0x45F23D: mov     ecx, [esp+10h+arg_4]; this
 0x45F241: push    0; a2
-0x45F243: call    TESObjectREFR_GetParentCell
+0x45F243: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45F248: mov     ecx, ds:0B333A0h
 0x45F24E: push    eax; a1
 0x45F24F: call    TESObjectCELL_IsProcessLevel?LowHigh
@@ -78,7 +78,7 @@
 0x45F25C: mov     ecx, edi
 0x45F25E: call    sub_45A500
 0x45F263: cmp     byte ptr [esi+4], 30h ; '0'
-0x45F267: mov     byte ptr [esp+10h+arg_0], al
+0x45F267: mov     byte ptr [esp+10h+form], al
 0x45F26B: jnz     short loc_45F292
 0x45F26D: mov     eax, ds:0B33398h
 0x45F272: mov     ecx, [eax+10h]
@@ -93,7 +93,7 @@
 0x45F294: mov     eax, [edx+6Ch]
 0x45F297: mov     ecx, esi
 0x45F299: call    eax
-0x45F29B: mov     ecx, [esp+10h+arg_0]
+0x45F29B: mov     ecx, [esp+10h+form]
 0x45F29F: push    ecx
 0x45F2A0: mov     ecx, edi
 0x45F2A2: call    sub_45A530
@@ -101,7 +101,7 @@
 0x45F2A9: push    ebx
 0x45F2AA: push    esi
 0x45F2AB: mov     ecx, edi
-0x45F2AD: call    sub_45C020
+0x45F2AD: call    sub_45C020; Verified behavior: post-reset reference/process reconciliation; ensures MobileObject LowProcess allocation, handles actor death state, reattaches references to loaded cells by parent cell or worldspace position, and updates scene/process state. Called by ResetFormForLoad (45F2AD), LoadGame (466610), and cell reset path 4CBFE3. Exact class method name Unknown.
 0x45F2B2: test    al, al
 0x45F2B4: jz      short loc_45F2D7
 0x45F2B6: mov     dword ptr [edi+44h], 60000000h

@@ -1,49 +1,50 @@
-char __cdecl sub_4F4E20(TESObjectREFR *a1, TESObjectREFR *a2, int a3, double *a4)
+// GetDisposition_Eval (index 76 / opcode 0x104C): for valid actor subject and Actor parameter, returns the subject's disposition toward that target. A global one-pair cache reuses the last result; non-actor inputs leave numeric result 0.
+char __cdecl GetDisposition_Eval(TESObjectREFR *subject, TESObjectREFR *target, TESForm *param2, double *value)
 {
-  TESObjectREFR *v6; // esi
-  TESObjectREFR *v7; // edi
-  double v8; // st5
-  char *v9; // eax
+  TESObjectREFR *v4; // esi
+  TESObjectREFR *v5; // edi
+  double v6; // st7
+  char *v7; // eax
   char *Name; // [esp+0h] [ebp-18h]
-  double v12; // [esp+4h] [ebp-14h]
+  double v10; // [esp+4h] [ebp-14h]
 
-  *a4 = 0.0;
-  v6 = 0;
-  if ( a1 )
+  *value = 0.0; /*0x4f4e27*/
+  v4 = 0; /*0x4f4e30*/
+  if ( subject ) /*0x4f4e34*/
   {
-    if ( a1->vtbl->IsActor(a1) )
-      v6 = a1;
+    if ( subject->vtbl->IsActor(subject) ) /*0x4f4e40*/
+      v4 = subject; /*0x4f4e46*/
   }
-  v7 = 0;
-  if ( a2 )
+  v5 = 0; /*0x4f4e4d*/
+  if ( target ) /*0x4f4e51*/
   {
-    if ( a2->vtbl->IsActor(a2) )
-      v7 = a2;
+    if ( target->vtbl->IsActor(target) ) /*0x4f4e5d*/
+      v5 = target; /*0x4f4e63*/
   }
-  if ( v6 )
+  if ( v4 ) /*0x4f4e68*/
   {
-    if ( v7 )
+    if ( v5 ) /*0x4f4e6c*/
     {
-      if ( v6 == (TESObjectREFR *)dword_B36180 && v7 == (TESObjectREFR *)dword_B36184 )
+      if ( v4 == (TESObjectREFR *)unk_B36180 && v5 == (TESObjectREFR *)unk_B36184 ) /*0x4f4e7c*/
       {
-        *a4 = flt_B36188;
+        *value = unk_B36188; /*0x4f4e84*/
       }
       else
       {
-        v8 = (double)((int (__thiscall *)(TESObjectREFR *, TESObjectREFR *))v6->vtbl[1].super.Unk_1F)(v6, v7);
-        dword_B36184 = (int)v7;
-        dword_B36180 = (int)v6;
-        *a4 = v8;
-        flt_B36188 = v8;
+        v6 = (double)((int (__thiscall *)(TESObjectREFR *, TESObjectREFR *))v4->vtbl[1].super.Unk_1F)(v4, v5); /*0x4f4e9a*/
+        unk_B36184 = (int)v5; /*0x4f4e9e*/
+        unk_B36180 = (int)v4; /*0x4f4ea4*/
+        *value = v6; /*0x4f4eaa*/
+        unk_B36188 = v6; /*0x4f4ead*/
       }
-      if ( IsConsoleMode )
+      if ( MEMORY[0xB361AC] ) /*0x4f4eb3*/
       {
-        v12 = *a4;
-        Name = TESObjectREFR_GetName(v7);
-        v9 = TESObjectREFR_GetName(v6);
-        Interface_ConsolePrint("%.20s disposition to %.20s is %.1f", v9, Name, v12);
+        v10 = *value; /*0x4f4ec4*/
+        Name = TESObjectREFR_GetName(v5); /*0x4f4ecc*/
+        v7 = TESObjectREFR_GetName(v4); /*0x4f4ecf*/
+        Interface_ConsolePrint("%.20s disposition to %.20s is %.1f", v7, Name, v10); /*0x4f4eda*/
       }
     }
   }
-  return 1;
+  return 1; /*0x4f4ee6*/
 }

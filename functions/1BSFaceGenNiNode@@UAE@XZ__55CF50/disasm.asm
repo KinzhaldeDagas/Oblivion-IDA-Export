@@ -40,3 +40,12 @@
 0x55CFD3: pop     esi
 0x55CFD4: add     esp, 10h
 0x55CFD7: retn
+0x9BCB10: mov     ecx, [ebp-10h]; this
+0x9BCB13: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9BCB18: mov     edx, [esp+arg_4]
+0x9BCB1C: lea     eax, [edx-0Ch]
+0x9BCB1F: mov     ecx, [edx-10h]
+0x9BCB22: xor     ecx, eax
+0x9BCB24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BCB29: mov     eax, offset stru_AE669C
+0x9BCB2E: jmp     ___CxxFrameHandler3

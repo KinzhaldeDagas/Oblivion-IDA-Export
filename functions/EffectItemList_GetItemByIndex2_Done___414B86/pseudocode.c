@@ -1,4 +1,4 @@
-int __stdcall EffectItemList_GetItemByIndex2_::Done_(int a1)
+void __stdcall EffectItemList_GetItemByIndex2_::Done_(int a1)
 {
-  return EffectItemList_GetItemByIndex2_::Done(a1);
+  EffectItemList_GetItemByIndex2_::Done(a1); /*0x414b86*/
 }

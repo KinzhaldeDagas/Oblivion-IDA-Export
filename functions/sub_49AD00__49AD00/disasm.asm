@@ -40,7 +40,7 @@
 0x49AD8A: mov     [esp+0D0h+var_B0], ecx
 0x49AD8E: mov     ecx, ebx; this
 0x49AD90: mov     [esp+0D0h+var_B4], eax
-0x49AD94: call    TESObjectCELL_IsInterior
+0x49AD94: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x49AD99: fldz
 0x49AD9B: test    al, al
 0x49AD9D: jz      loc_49AE30
@@ -108,7 +108,7 @@
 0x49AE8D: mov     [esp+0D0h+var_A0], eax
 0x49AE91: fld     [esp+0D0h+var_94]
 0x49AE95: mov     [esp+0D0h+a2], ecx
-0x49AE99: fst     [esp+0D0h+var_68]
+0x49AE99: fst     qword ptr [esp+0D0h+start.x]
 0x49AE9D: mov     [esp+0D0h+a2+4], edx
 0x49AEA1: fld     st
 0x49AEA3: mov     eax, [esi+34h]
@@ -191,15 +191,15 @@
 0x49AFB6: fldz
 0x49AFB8: fld     [esp+0D0h+a2]
 0x49AFBC: mov     ecx, ds:0B333A0h
-0x49AFC2: fstp    [esp+0D0h+var_3C]
-0x49AFC9: lea     edx, [esp+0D0h+var_3C]
+0x49AFC2: fstp    [esp+0D0h+worldXY]
+0x49AFC9: lea     edx, [esp+0D0h+worldXY]
 0x49AFD0: fld     [esp+0D0h+a2+4]
-0x49AFD4: push    edx; float *
+0x49AFD4: push    edx; worldXY
 0x49AFD5: fstp    [esp+0D4h+var_38]
 0x49AFDC: fstp    [esp+0D4h+var_34]
 0x49AFE3: call    TES__GetCurrentWorldspace
 0x49AFE8: mov     ecx, eax; this
-0x49AFEA: call    TESWorldSpace__GetCellAtPos
+0x49AFEA: call    TESWorldSpace_GetCellAtWorldPosition
 0x49AFEF: mov     edi, eax
 0x49AFF1: test    edi, edi
 0x49AFF3: jz      short loc_49AFFE
@@ -234,21 +234,21 @@
 0x49B062: fldz
 0x49B064: lea     edx, [esp+0D0h+var_58]
 0x49B068: fst     [esp+0D0h+var_58]
-0x49B06C: push    edx; int
+0x49B06C: push    edx; vertexColor
 0x49B06D: fld1
 0x49B06F: push    ecx
 0x49B070: fstp    [esp+0D8h+var_54]
 0x49B077: fst     [esp+0D8h+var_50]
 0x49B07E: fstp    [esp+0D8h+var_4C]
 0x49B085: fld     dword ptr ds:0A31C80h
-0x49B08B: fstp    [esp+0D8h+var_D8]; float
-0x49B08E: call    sub_47FD30
+0x49B08B: fstp    [esp+0D8h+scale]; scale
+0x49B08E: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x49B093: add     esp, 8
 0x49B096: mov     esi, eax
-0x49B098: call    sub_4E70B0
+0x49B098: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x49B09D: push    eax; a2
 0x49B09E: mov     ecx, esi; this
-0x49B0A0: call    sub_405680
+0x49B0A0: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B0A5: mov     ecx, ebx
 0x49B0A7: call    TESObjectCELL_GetWaterHeight
 0x49B0AC: fld     [esp+0D0h+a3]
@@ -280,21 +280,21 @@
 0x49B11F: fldz
 0x49B121: lea     eax, [esp+0D0h+var_84]
 0x49B125: fst     [esp+0D0h+var_84]
-0x49B129: push    eax; int
+0x49B129: push    eax; vertexColor
 0x49B12A: fst     [esp+0D4h+var_80]
 0x49B12E: push    ecx
 0x49B12F: fld1
 0x49B131: fstp    [esp+0D8h+var_7C]
 0x49B135: fstp    [esp+0D8h+var_78]
 0x49B139: fld     dword ptr ds:0A31C80h
-0x49B13F: fstp    [esp+0D8h+var_D8]; float
-0x49B142: call    sub_47FD30
+0x49B13F: fstp    [esp+0D8h+scale]; scale
+0x49B142: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x49B147: add     esp, 8
 0x49B14A: mov     esi, eax
-0x49B14C: call    sub_4E70B0
+0x49B14C: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x49B151: push    eax; a2
 0x49B152: mov     ecx, esi; this
-0x49B154: call    sub_405680
+0x49B154: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B159: mov     ecx, ebx
 0x49B15B: call    TESObjectCELL_GetWaterHeight
 0x49B160: fld     [esp+0D0h+a3]
@@ -340,7 +340,7 @@
 0x49B1EF: fldz
 0x49B1F1: fld     [esp+0D0h+var_10]
 0x49B1F8: fldz
-0x49B1FA: fld     [esp+0D0h+var_68]
+0x49B1FA: fld     qword ptr [esp+0D0h+start.x]
 0x49B1FE: fxch    st(2)
 0x49B200: fxch    st(4)
 0x49B202: fxch    st(1)
@@ -457,7 +457,7 @@
 0x49B373: mov     ecx, esi; this
 0x49B375: call    sub_6B73E0
 0x49B37A: push    esi
-0x49B37B: call    FormHeapFree
+0x49B37B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49B380: add     esp, 4
 0x49B383: mov     [edi+40h], ebp
 0x49B386: mov     esi, ds:0B333C4h
@@ -470,22 +470,22 @@
 0x49B3AA: mov     ecx, esi
 0x49B3AC: call    edx
 0x49B3AE: mov     ecx, [eax]
-0x49B3B0: mov     dword ptr [esp+0D0h+var_68], ecx
+0x49B3B0: mov     [esp+0D0h+start.x], ecx
 0x49B3B4: mov     edx, [eax+4]
-0x49B3B7: mov     dword ptr [esp+0D0h+var_68+4], edx
+0x49B3B7: mov     [esp+0D0h+start.y], edx
 0x49B3BB: mov     eax, [eax+8]
-0x49B3BE: mov     [esp+0D0h+var_60], eax
-0x49B3C2: fld     [esp+0D0h+var_60]
+0x49B3BE: mov     [esp+0D0h+start.z], eax
+0x49B3C2: fld     [esp+0D0h+start.z]
 0x49B3C6: fadd    qword ptr ds:0A3F3E8h
 0x49B3CC: lea     ecx, [esp+0D0h+var_84]
-0x49B3D0: push    ecx; int
+0x49B3D0: push    ecx; vertexColor
 0x49B3D1: push    ecx
-0x49B3D2: fstp    [esp+0D8h+var_60]
+0x49B3D2: fstp    [esp+0D8h+start.z]
 0x49B3D6: fld     [esp+0D8h+var_B4]
 0x49B3DA: fstp    [esp+0D8h+a2]
 0x49B3DE: fld     [esp+0D8h+var_B0]
 0x49B3E2: fstp    [esp+0D8h+a2+4]
-0x49B3E6: fld     [esp+0D8h+var_60]
+0x49B3E6: fld     [esp+0D8h+start.z]
 0x49B3EA: fstp    [esp+0D8h+var_A0]
 0x49B3EE: fld1
 0x49B3F0: fstp    [esp+0D8h+var_84]
@@ -494,14 +494,14 @@
 0x49B3FA: fst     [esp+0D8h+var_7C]
 0x49B3FE: fstp    [esp+0D8h+var_78]
 0x49B402: fld     dword ptr ds:0A31C80h
-0x49B408: fstp    [esp+0D8h+var_D8]; float
-0x49B40B: call    sub_47FD30
+0x49B408: fstp    [esp+0D8h+scale]; scale
+0x49B40B: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x49B410: add     esp, 8
 0x49B413: mov     esi, eax
-0x49B415: call    sub_4E70B0
+0x49B415: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x49B41A: push    eax; a2
 0x49B41B: mov     ecx, esi; this
-0x49B41D: call    sub_405680
+0x49B41D: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B422: fld     dword ptr ds:0A31C80h
 0x49B428: mov     edx, [esp+0D0h+a2]
 0x49B42C: mov     [esi+54h], edx
@@ -518,27 +518,27 @@
 0x49B44F: fst     [esp+0D0h+var_84]
 0x49B453: lea     edx, [esp+0D0h+var_84]
 0x49B457: fst     [esp+0D0h+var_80]
-0x49B45B: push    edx
+0x49B45B: push    edx; endColor
 0x49B45C: fldz
 0x49B45E: lea     eax, [esp+0D4h+a2]
 0x49B462: fst     [esp+0D4h+var_7C]
-0x49B466: push    eax
+0x49B466: push    eax; end
 0x49B467: fst     [esp+0D8h+var_78]
 0x49B46B: lea     ecx, [esp+0D8h+var_58]
 0x49B472: fst     [esp+0D8h+var_50]
-0x49B479: push    ecx
+0x49B479: push    ecx; startColor
 0x49B47A: fstp    [esp+0DCh+var_4C]
-0x49B481: lea     edx, [esp+0DCh+var_68]
-0x49B485: push    edx
+0x49B481: lea     edx, [esp+0DCh+start]
+0x49B485: push    edx; start
 0x49B486: fst     [esp+0E0h+var_58]
 0x49B48D: fstp    [esp+0E0h+var_54]
-0x49B494: call    sub_47F070
+0x49B494: call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.
 0x49B499: add     esp, 10h
 0x49B49C: mov     esi, eax
-0x49B49E: call    sub_4E70B0
+0x49B49E: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x49B4A3: push    eax; a2
 0x49B4A4: mov     ecx, esi; this
-0x49B4A6: call    sub_405680
+0x49B4A6: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B4AB: fld     dword ptr ds:0A31C80h
 0x49B4B1: push    ecx
 0x49B4B2: mov     ecx, ds:0B333A0h
@@ -551,12 +551,12 @@
 0x49B4CB: sub     esp, 0Ch
 0x49B4CE: fstp    [esp+0DCh+var_D4]; float
 0x49B4D2: fld     [esp+0DCh+var_B0]
-0x49B4D6: fstp    [esp+0DCh+var_D8]; float
+0x49B4D6: fstp    [esp+0DCh+scale]; float
 0x49B4DA: fld     [esp+0DCh+var_B4]
 0x49B4DE: fstp    [esp+0DCh+var_DC]; float
 0x49B4E1: call    sub_6B7360
-0x49B4E6: mov     ecx, [edi+40h]
-0x49B4E9: call    sub_6B7260
+0x49B4E6: mov     ecx, [edi+40h]; this
+0x49B4E9: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x49B4EE: test    al, al
 0x49B4F0: jz      short loc_49B53F
 0x49B4F2: fldz
@@ -575,7 +575,7 @@
 0x49B51D: mov     ecx, esi; this
 0x49B51F: call    sub_6B73E0
 0x49B524: push    esi
-0x49B525: call    FormHeapFree
+0x49B525: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49B52A: add     esp, 4
 0x49B52D: mov     [edi+40h], ebp
 0x49B530: mov     byte ptr ds:0B3522Ah, 0
@@ -586,8 +586,8 @@
 0x49B53B: mov     esp, ebp
 0x49B53D: pop     ebp
 0x49B53E: retn
-0x49B53F: mov     ecx, [edi+40h]
-0x49B542: call    sub_6B7260
+0x49B53F: mov     ecx, [edi+40h]; this
+0x49B542: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x49B547: test    al, al
 0x49B549: jnz     loc_49B5E0
 0x49B54F: fldz

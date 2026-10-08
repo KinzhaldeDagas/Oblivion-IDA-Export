@@ -1,6 +1,6 @@
-0x446C30: test    ecx, ecx
+0x446C30: test    ecx, ecx; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x446C32: jz      short loc_446C43
-0x446C34: mov     eax, [esp+arg_0]
+0x446C34: mov     eax, [esp+item]
 0x446C38: cmp     [ecx], eax
 0x446C3A: jz      short loc_446C43
 0x446C3C: mov     ecx, [ecx+4]

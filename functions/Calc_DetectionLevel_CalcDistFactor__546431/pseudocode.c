@@ -1,4 +1,5 @@
-int __cdecl Calc_DetectionLevel_::CalcDistFactor(
+// Builds the normalized distance contribution from current distance and maximum detection range, then passes it through the remaining factors.
+int __cdecl Calc_DetectionLevel_ApplyDistanceFactor(
         int a1,
         int a2,
         float a3,
@@ -21,14 +22,14 @@ int __cdecl Calc_DetectionLevel_::CalcDistFactor(
 {
   int v20; // [esp+Ch] [ebp+Ch]
 
-  __asm
+  __asm /*0x546436*/
   {
     fsubr   st, st(1)
     fdivrp  st(1), st
     fstp    [esp+arg_8]
     fldz
   }
-  return Calc_DetectionLevel_::CalcMovementFactor(
+  return Calc_DetectionLevel_ApplyMovementFactor(
            (_BYTE)a13 == 0,
            a1,
            a2,

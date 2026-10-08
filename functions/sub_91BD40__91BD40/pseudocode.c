@@ -2,10 +2,10 @@ int __thiscall sub_91BD40(_DWORD **this, int *a2)
 {
   int *v3; // eax
 
-  v3 = sub_91BA70(a2);
-  return (*(int (__thiscall **)(_DWORD, int, int *, int))(**(this + 0xFFFFFFFB) + 0xC))(
+  v3 = sub_91BA70(a2); /*0x91bd49*/
+  return (*(int (__thiscall **)(_DWORD, int, int *, int))(**(this + 0xFFFFFFFB) + 0xC))( /*0x91bd68*/
            *(this + 0xFFFFFFFB),
            a2[0x14] + 0x10,
            v3,
-           dword_BA8438);
+           unk_BA8438);
 }

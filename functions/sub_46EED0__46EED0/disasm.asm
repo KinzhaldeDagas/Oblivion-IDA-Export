@@ -10,7 +10,7 @@
 0x46EEE4: jz      short loc_46EF2D
 0x46EEE6: mov     eax, [edi]
 0x46EEE8: push    eax; a1
-0x46EEE9: call    TESForm_LookupByFormID
+0x46EEE9: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x46EEEE: add     esp, 4
 0x46EEF1: test    eax, eax
 0x46EEF3: mov     [edi], eax
@@ -23,15 +23,15 @@
 0x46EF04: mov     edx, [eax]
 0x46EF06: push    eax
 0x46EF07: mov     [esi], edx
-0x46EF09: call    FormHeapFree
+0x46EF09: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46EF0E: add     esp, 4
 0x46EF11: push    edi
-0x46EF12: call    FormHeapFree
+0x46EF12: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46EF17: add     esp, 4
 0x46EF1A: jmp     short loc_46EF30
 0x46EF1C: push    edi
 0x46EF1D: mov     dword ptr [esi], 0
-0x46EF23: call    FormHeapFree
+0x46EF23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46EF28: add     esp, 4
 0x46EF2B: jmp     short loc_46EF30
 0x46EF2D: mov     esi, [esi+4]

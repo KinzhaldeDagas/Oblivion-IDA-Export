@@ -86,7 +86,7 @@
 0x49E72B: push    ecx
 0x49E72C: mov     ecx, [esi+4]; this
 0x49E72F: fstp    [esp+124h+a2]; a2
-0x49E732: call    NiAVObject_UpdateNiAVObject
+0x49E732: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x49E737: mov     ecx, [esp+11Ch+var_4]
 0x49E73E: pop     edi
 0x49E73F: pop     esi

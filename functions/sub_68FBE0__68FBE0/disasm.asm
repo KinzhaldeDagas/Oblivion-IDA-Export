@@ -1,6 +1,5 @@
 0x68FBE0: sub     ecx, 8
 0x68FBE3: jmp     loc_68FBF0
-0x68FBE8: align 10h
 0x68FBF0: push    esi
 0x68FBF1: mov     esi, ecx
 0x68FBF3: test    esi, esi
@@ -19,7 +18,7 @@
 0x68FC1A: mov     dword ptr [esi], offset ??_7hkCollisionListener@@6B@; const hkCollisionListener::`vftable'
 0x68FC20: jz      short loc_68FC2B
 0x68FC22: push    esi
-0x68FC23: call    FormHeapFree
+0x68FC23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68FC28: add     esp, 4
 0x68FC2B: mov     eax, esi
 0x68FC2D: pop     esi

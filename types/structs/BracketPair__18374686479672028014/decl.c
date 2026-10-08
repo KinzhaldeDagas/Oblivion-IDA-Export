@@ -1,1 +1,1 @@
-BracketPair
+typedef tagBracketPair BracketPair;

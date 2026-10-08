@@ -1,1 +1,1 @@
-HPSTR
+typedef char *HPSTR;

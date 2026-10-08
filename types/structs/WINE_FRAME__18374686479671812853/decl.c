@@ -1,1 +1,1 @@
-__WINE_FRAME
+typedef __tagWINE_FRAME __WINE_FRAME;

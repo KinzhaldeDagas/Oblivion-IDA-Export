@@ -1,4 +1,4 @@
-0x565BE0: mov     eax, [esp+arg_0]
+0x565BE0: mov     eax, [esp+arg_0]; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
 0x565BE4: cmp     eax, 6; switch 7 cases
 0x565BE7: ja      short ActorValue_GetAVFromGroupOffset___def_565BE9
 0x565BE9: jmp     ds:jpt_565BE9[eax*4]; switch jump

@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6F6C37",
-    "line": "push    41h ; 'A'; int",
+    "line": "push    41h ; 'A'; sourceLine",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6F6C3E",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x6F6C5A",
-    "line": "push    esi; Size",
+    "line": "push    esi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F6C5B",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F6C5C",
-    "line": "push    offset byte_B3F06C; Dst",
+    "line": "push    offset destination; destination",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6F6C61",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x6F6C69",
-    "line": "mov     ds:byte_B3F06C[esi], 0",
+    "line": "mov     ds:destination[esi], 0",
     "mnemonic": "mov",
     "size": 7
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x6F6C7C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -268,5 +268,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C8D40",
+    "line": "lea     ecx, [ebp+8]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8D43",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8D48",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8D4C",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8D4F",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8D52",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8D54",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8D59",
+    "line": "mov     eax, offset stru_AF1644",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8D5E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

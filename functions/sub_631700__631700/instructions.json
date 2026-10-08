@@ -487,25 +487,25 @@
   },
   {
     "ea": "0x6317DB",
-    "line": "mov     ecx, [esi+2Ch]",
+    "line": "mov     ecx, [esi+2Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6317DE",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6317DF",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6317E4",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x631831",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x63184C",
-    "line": "mov     ecx, [esi+2Ch]",
+    "line": "mov     ecx, [esi+2Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x63184F",
-    "line": "call    sub_4D76F0",
+    "line": "call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x63185F",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x6318B7",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x6318BE",
-    "line": "mov     ecx, [esi+2Ch]",
+    "line": "mov     ecx, [esi+2Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6318CF",
-    "line": "call    sub_4D76F0",
+    "line": "call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x63190E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x631926",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x631936",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x63194B",
-    "line": "mov     ecx, [esi+2Ch]",
+    "line": "mov     ecx, [esi+2Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x631954",
-    "line": "call    sub_4D76F0",
+    "line": "call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x631964",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x6319F3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x631AF8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

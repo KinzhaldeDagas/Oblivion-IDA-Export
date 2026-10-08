@@ -1,313 +1,313 @@
-int __thiscall MagicItem_LoadVFX__(char *this)
+// MagicItem VFX resolve/apply path. Ensures referenced spell art and effect-item models are loaded, reports missing spell art, and applies cached model handles to effect settings.
+void __thiscall MagicItem_ResolveLoadedVFXModels(char *this)
 {
-  int FXEffect; // esi
-  __int16 v4; // bx
-  __int16 v5; // ax
-  unsigned int v6; // eax
-  __int64 v7; // rax
+  EffectSetting *FXEffect; // esi
+  __int16 v3; // bx
+  __int16 v4; // ax
+  unsigned int v5; // eax
+  __int64 v6; // rax
   volatile LONG *IsModelLoaded; // eax
-  _DWORD *v9; // edi
-  signed int *v10; // esi
+  char *v8; // edi
+  signed int *v9; // esi
   TESForm *NthForm; // edi
-  int v12; // eax
-  signed int v13; // esi
-  char *v14; // eax
-  char *v15; // esi
-  __int64 v16; // rax
-  volatile LONG *v17; // eax
-  _WORD *v18; // eax
-  _WORD *v19; // esi
+  int v11; // eax
+  signed int v12; // esi
+  char *v13; // eax
+  char *v14; // esi
+  __int64 v15; // rax
+  volatile LONG *v16; // eax
+  const char **v17; // eax
+  const char **v18; // esi
   int ModelPath; // eax
-  int v21; // edx
-  volatile LONG *v22; // eax
-  int v23; // eax
-  int v24; // edx
-  int Level; // eax
-  char *v26; // eax
-  int v27; // edx
-  int *v28; // ebp
+  int v20; // edx
+  volatile LONG *v21; // eax
+  int v22; // eax
+  int v23; // edx
+  int v24; // eax
+  char *v25; // eax
+  int v26; // edx
+  int *v27; // ebp
   int *i; // esi
-  volatile LONG *v30; // eax
-  char *v31; // eax
-  __int64 v32; // rax
-  unsigned int v33; // esi
-  int v34; // edi
-  char *v35; // edi
-  int v36; // esi
-  char *v37; // ebx
-  int v38; // ebp
-  unsigned int v39; // eax
-  char *v40; // edi
-  volatile LONG *v42; // eax
-  char *v43; // eax
-  _WORD *v44; // ebx
-  _WORD *j; // edi
-  const char *v46; // esi
-  int v47; // ebp
-  char *v48; // eax
-  _WORD *v50; // edi
-  char v51; // al
-  int k; // ebp
-  unsigned int v53; // eax
-  char *v54; // edi
-  int v56; // esi
-  int v57; // eax
-  size_t v58; // [esp-4h] [ebp-154h]
+  volatile LONG *v29; // eax
+  char *v30; // eax
+  __int64 v31; // rax
+  unsigned int v32; // esi
+  int v33; // edi
+  const char *v34; // edi
+  char *Head; // esi
+  char *v36; // ebx
+  char *v37; // ebp
+  unsigned int v38; // eax
+  char *v39; // edi
+  volatile LONG *v41; // eax
+  char *v42; // eax
+  char *v43; // ebx
+  char *j; // edi
+  const char *v45; // esi
+  int v46; // ebp
+  char *v47; // eax
+  char *v49; // edi
+  char *k; // ebp
+  unsigned int v52; // eax
+  char *v53; // edi
+  int v55; // esi
+  int v56; // eax
+  size_t v57; // [esp-8h] [ebp-158h]
   char *m_data; // [esp-4h] [ebp-154h]
-  int v60; // [esp+14h] [ebp-13Ch]
-  _DWORD *v61; // [esp+18h] [ebp-138h]
+  int v59; // [esp+10h] [ebp-140h]
+  __int16 v60; // [esp+14h] [ebp-13Ch]
+  char *v61; // [esp+18h] [ebp-138h]
   char *v62; // [esp+1Ch] [ebp-134h]
-  char *v63; // [esp+1Ch] [ebp-134h]
-  char *v64; // [esp+20h] [ebp-130h]
-  BSStringT v65; // [esp+24h] [ebp-12Ch] BYREF
-  TESContainer v66; // [esp+2Ch] [ebp-124h] BYREF
-  char Str[260]; // [esp+3Ch] [ebp-114h] BYREF
-  int v68; // [esp+14Ch] [ebp-4h]
+  char *v63; // [esp+20h] [ebp-130h]
+  BSStringT v64; // [esp+24h] [ebp-12Ch] BYREF
+  char v65[16]; // [esp+2Ch] [ebp-124h] BYREF
+  unsigned int v66; // [esp+148h] [ebp-8h]
+  int v67; // [esp+14Ch] [ebp-4h]
 
-  FXEffect = MagicItem_GetFXEffect(this, 0);
-  if ( !sub_419E50(this) )
+  FXEffect = MagicItem_GetFXEffect(this, 0); /*0x41abd6*/
+  if ( !sub_419E50(this) ) /*0x41abd8*/
   {
-    sub_41A610(this, 1);
-    sub_419F10(this, 1);
-    return MagicItem_LoadVFX___::Done();
+    MagicItem_LoadVFXModels(this, 1); /*0x41abe5*/
+    MagicItem_UnloadVFXModels(this, 1); /*0x41abee*/
+    goto LABEL_3; /*0x41abee*/
   }
-  if ( FXEffect )
+  if ( FXEffect ) /*0x41abfa*/
   {
-    v4 = 0;
-    if ( EffectSetting_IsUnkA0Negative((_DWORD *)FXEffect) )
+    v3 = 0; /*0x41ac02*/
+    if ( EffectSetting_IsUnkA0Negative(FXEffect) ) /*0x41ac04*/
     {
-      EffectSetting_AbsUnkA0((signed int *)FXEffect);
-      v4 = v5;
+      EffectSetting_AbsUnkA0((signed int *)FXEffect); /*0x41ac0f*/
+      v3 = v4; /*0x41ac14*/
     }
-    LOWORD(v6) = *(_WORD *)(FXEffect + 0x20);
-    if ( (_WORD)v6 == 0xFFFF )
-      v6 = strlen(*(const char **)(FXEffect + 0x1C));
+    LOWORD(v5) = FXEffect->model.nifModel.m_dataLen; /*0x41ac16*/
+    if ( (_WORD)v5 == 0xFFFF ) /*0x41ac1e*/
+      v5 = strlen(FXEffect->model.nifModel.m_data); /*0x41ac23*/
     else
-      v6 = (unsigned __int16)v6;
-    if ( v6 )
+      v5 = (unsigned __int16)v5; /*0x41ac33*/
+    if ( v5 ) /*0x41ac38*/
     {
-      v7 = ((__int64 (__thiscall *)(int))*(_DWORD *)(*(_DWORD *)(FXEffect + 0x18) + 0x14))(FXEffect + 0x18);
-      IsModelLoaded = (volatile LONG *)ModelLoader_IsModelLoaded__(ModelLoaderPtr, SHIDWORD(v7), v7);
-      if ( IsModelLoaded )
-        sub_434C00(IsModelLoaded, v4);
+      v6 = ((__int64 (__thiscall *)(TESModel *))FXEffect->model.vtbl->GetModelPath)(&FXEffect->model); /*0x41ac43*/
+      IsModelLoaded = (volatile LONG *)ModelLoader_IsModelLoaded__(MEMORY[0xB33A1C], SHIDWORD(v6), v6); /*0x41ac4c*/
+      if ( IsModelLoaded ) /*0x41ac53*/
+        sub_434C00(IsModelLoaded, v3); /*0x41ac58*/
     }
-    else if ( *(_DWORD *)(FXEffect + 0x98) != 0x46464553 )
+    else if ( FXEffect->effectCode != 0x46464553 ) /*0x41ac69*/
     {
-      m_data = EffectSetting_GetName(FXEffect, &v65)->m_data;
-      v68 = 0;
-      PrintError("The %s effect has no associated spell art.", m_data);
-      v68 = 0xFFFFFFFF;
-      FormHeapFree((unsigned int)v65.m_data);
+      m_data = EffectSetting_GetName((int)FXEffect, &v64)->m_data; /*0x41ac79*/
+      v67 = 0; /*0x41ac7f*/
+      PrintError("The %s effect has no associated spell art.", m_data); /*0x41ac8a*/
+      v67 = 0xFFFFFFFF; /*0x41ac94*/
+      FormHeapFree((unsigned int)v64.m_data); /*0x41ac9f*/
     }
   }
-  if ( this )
-    v9 = this + 0xC;
+  if ( this ) /*0x41aca9*/
+    v8 = this + 0xC; /*0x41acab*/
   else
-    v9 = 0;
-  v61 = v9;
-  if ( (v9[2] || v9[1]) && v9 )
+    v8 = 0; /*0x41acb0*/
+  v61 = v8; /*0x41acb6*/
+  if ( (*((_DWORD *)v8 + 2) || *((_DWORD *)v8 + 1)) && v8 ) /*0x41acc8*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x41acd7*/
     {
-      v10 = *(signed int **)(v9[1] + 0x1C);
-      NthForm = TESForm_LookupByFormID(v10[0x18]);
-      if ( EffectSetting_IsUnkA4Negative(v10) )
+      v9 = *(signed int **)(*((_DWORD *)v8 + 1) + 0x1C); /*0x41acd7*/
+      NthForm = TESForm_LookupByFormID(v9[0x18]); /*0x41ace8*/
+      if ( EffectSetting_IsUnkA4Negative(v9) ) /*0x41acea*/
       {
-        EffectSetting_AbsUnkA4(v10);
-        v60 = v12;
-        if ( v12 )
+        EffectSetting_AbsUnkA4(v9); /*0x41acf9*/
+        v60 = v11; /*0x41ad00*/
+        if ( v11 ) /*0x41ad04*/
         {
-          if ( NthForm )
+          if ( NthForm ) /*0x41ad0c*/
           {
-            v13 = v10[0x16];
-            if ( (v13 & 0x10000) != 0 )
+            v12 = v9[0x16]; /*0x41ad12*/
+            if ( (v12 & 0x10000) != 0 ) /*0x41ad1d*/
             {
-              v14 = (char *)OblivionDynamicCast(
+              v13 = (char *)OblivionDynamicCast( /*0x41ad2e*/
                               NthForm,
                               0,
                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                               &TESObjectWEAP `RTTI Type Descriptor',
                               0);
-              if ( v14 )
+              if ( v13 ) /*0x41ad38*/
               {
-                v15 = v14 + 0x30;
-                if ( sub_449190((int)(v14 + 0x30)) )
+                v14 = v13 + 0x30; /*0x41ad3e*/
+                if ( OB_CompactString_Length_010201A0(v13 + 0x30) ) /*0x41ad43*/
                 {
-                  v16 = ((__int64 (__thiscall *)(char *))*(_DWORD *)(*(_DWORD *)v15 + 0x14))(v15);
-                  v17 = (volatile LONG *)ModelLoader_IsModelLoaded__(ModelLoaderPtr, SHIDWORD(v16), v16);
-                  if ( v17 )
-                    goto LABEL_30;
+                  v15 = ((__int64 (__thiscall *)(char *))*(_DWORD *)(*(_DWORD *)v14 + 0x14))(v14); /*0x41ad57*/
+                  v16 = (volatile LONG *)ModelLoader_IsModelLoaded__(MEMORY[0xB33A1C], SHIDWORD(v15), v15); /*0x41ad60*/
+                  if ( v16 ) /*0x41ad67*/
+                    goto LABEL_30; /*0x41ad67*/
                 }
               }
             }
-            else if ( (v13 & 0x20000) != 0 )
+            else if ( (v12 & 0x20000) != 0 ) /*0x41ad86*/
             {
-              v18 = OblivionDynamicCast(
-                      NthForm,
-                      0,
-                      (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                      &TESObjectARMO `RTTI Type Descriptor',
-                      0);
-              if ( v18 )
+              v17 = (const char **)OblivionDynamicCast( /*0x41ad97*/
+                                     NthForm,
+                                     0,
+                                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                     &TESObjectARMO `RTTI Type Descriptor',
+                                     0);
+              if ( v17 ) /*0x41ada1*/
               {
-                v19 = v18 + 0x32;
-                ModelPath = TESBipedModelForm_GetModelPath(v18 + 0x32, 0);
-                v22 = (volatile LONG *)ModelLoader_IsModelLoaded__(ModelLoaderPtr, v21, ModelPath);
-                if ( v22 )
-                  sub_434C00(v22, v60);
-                v23 = TESBipedModelForm_GetModelPath(v19, 1);
-                v17 = (volatile LONG *)ModelLoader_IsModelLoaded__(ModelLoaderPtr, v24, v23);
-                if ( v17 )
+                v18 = v17 + 0x19; /*0x41ada7*/
+                ModelPath = TESBipedModelForm_GetModelPath(v17 + 0x19, 0); /*0x41adae*/
+                v21 = (volatile LONG *)ModelLoader_IsModelLoaded__(MEMORY[0xB33A1C], v20, ModelPath); /*0x41adba*/
+                if ( v21 ) /*0x41adc1*/
+                  sub_434C00(v21, v60); /*0x41adca*/
+                v22 = TESBipedModelForm_GetModelPath(v18, 1); /*0x41add3*/
+                v16 = (volatile LONG *)ModelLoader_IsModelLoaded__(MEMORY[0xB33A1C], v23, v22); /*0x41addf*/
+                if ( v16 ) /*0x41ade6*/
 LABEL_30:
-                  sub_434C00(v17, v60);
+                  sub_434C00(v16, v60); /*0x41ad6d*/
               }
             }
-            else if ( (v13 & 0x40000) != 0 )
+            else if ( (v12 & 0x40000) != 0 ) /*0x41ae04*/
             {
-              if ( NthForm->member.type == kFormType_LeveledCreature )
+              if ( NthForm->member.type == kFormType_LeveledCreature ) /*0x41ae0e*/
               {
-                TESContainer_constr(&v66);
-                v68 = 1;
-                Level = Actor_GetLevel((Actor *)TESDataHandler_g_PlayerRef, 1);
-                TESLeveledList_CalcLeveledForm(&NthForm[1].member.refID, Level, (int)&v66);
-                NthForm = (TESForm *)TESContainer_GetNthForm(&v66, 0);
-                v68 = 0xFFFFFFFF;
-                TESContainer_destr(&v66);
+                TESContainer_constr((TESContainer *)v65); /*0x41ae14*/
+                HIDWORD(v57) = v65; /*0x41ae1d*/
+                v67 = 1; /*0x41ae26*/
+                LOWORD(v24) = Actor_GetLevel((Actor *)reference); /*0x41ae31*/
+                TESLeveledList_CalcLeveledForm(&NthForm[1].member.refID, v24, 1); /*0x41ae3a*/
+                NthForm = (TESForm *)TESContainer_GetNthForm(&v64.m_dataLen, 0); /*0x41ae4e*/
+                v66 = 0xFFFFFFFF; /*0x41ae50*/
+                TESContainer_destr(&v64.m_dataLen); /*0x41ae5b*/
               }
-              v26 = (char *)OblivionDynamicCast(
+              v25 = (char *)OblivionDynamicCast( /*0x41ae6f*/
                               NthForm,
                               0,
                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                               &TESNPC `RTTI Type Descriptor',
                               0);
-              if ( v26 )
+              if ( v25 ) /*0x41ae79*/
               {
-                v28 = sub_5234F0(v26, 1, 1);
-                for ( i = v28; i; i = (int *)i[1] )
+                v27 = sub_5234F0(v25, 1, 1); /*0x41ae86*/
+                for ( i = v27; i; i = (int *)i[1] ) /*0x41ae8c*/
                 {
-                  if ( !i[1] && !*i )
-                    break;
-                  v30 = (volatile LONG *)ModelLoader_IsModelLoaded__(ModelLoaderPtr, v27, *i);
-                  if ( v30 )
-                    sub_434C00(v30, v60);
+                  if ( !i[1] && !*i ) /*0x41ae98*/
+                    break; /*0x41ae9b*/
+                  v29 = (volatile LONG *)ModelLoader_IsModelLoaded__(MEMORY[0xB33A1C], v26, *i); /*0x41aea6*/
+                  if ( v29 ) /*0x41aead*/
+                    sub_434C00(v29, v59); /*0x41aeb2*/
                 }
-                BSSimpleList_Clear(v28);
-                FormHeapFree((unsigned int)v28);
+                BSSimpleList_Clear(v27); /*0x41aec0*/
+                FormHeapFree((unsigned int)v27); /*0x41aec6*/
               }
-              v31 = (char *)OblivionDynamicCast(
+              v30 = (char *)OblivionDynamicCast( /*0x41aedd*/
                               NthForm,
                               0,
                               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                               &TESCreature `RTTI Type Descriptor',
                               0);
-              v64 = v31;
-              if ( v31 )
+              v62 = v30; /*0x41aee7*/
+              if ( v30 ) /*0x41aeeb*/
               {
-                v32 = ((__int64 (__thiscall *)(char *))*(_DWORD *)(*((_DWORD *)v31 + 0x2B) + 0x14))(v31 + 0xAC);
-                v33 = ModelLoader_IsModelLoaded__(ModelLoaderPtr, SHIDWORD(v32), v32);
-                if ( v33 )
+                v31 = ((__int64 (__thiscall *)(char *))*(_DWORD *)(*((_DWORD *)v30 + 0x2B) + 0x14))(v30 + 0xAC); /*0x41af02*/
+                v32 = ModelLoader_IsModelLoaded__(MEMORY[0xB33A1C], SHIDWORD(v31), v31); /*0x41af10*/
+                if ( v32 ) /*0x41af14*/
                 {
-                  v34 = v60;
-                  if ( v60 > 0 )
+                  v33 = v59; /*0x41af1a*/
+                  if ( v59 > 0 ) /*0x41af20*/
                   {
-                    do
+                    do /*0x41af36*/
                     {
-                      InterlockedIncrement((volatile LONG *)(v33 + 4));
-                      --v34;
+                      InterlockedIncrement((volatile LONG *)(v32 + 4)); /*0x41af31*/
+                      --v33; /*0x41af33*/
                     }
-                    while ( v34 );
+                    while ( v33 ); /*0x41af36*/
                   }
-                  v65.m_data = *(char **)v33;
-                  v35 = v65.m_data;
-                  v36 = sub_6899C0(v64 + 0xEC);
-                  strcpy(Str, v35);
-                  v37 = strrchr(Str, 0x5C);
-                  v62 = v37;
-                  v38 = v36;
-                  if ( v37 )
+                  v34 = *(const char **)v32; /*0x41af38*/
+                  v63 = *(char **)v32; /*0x41af44*/
+                  Head = EmbeddedList_GetHead(v62 + 0xEC); /*0x41af51*/
+                  strcpy(&v65[0xC], v34); /*0x41af53*/
+                  v36 = strrchr(&v65[0xC], 0x5C); /*0x41af6f*/
+                  v61 = v36; /*0x41af76*/
+                  v37 = Head; /*0x41af7a*/
+                  if ( v36 ) /*0x41af7c*/
                   {
-                    while ( v38 )
+                    while ( v37 ) /*0x41af82*/
                     {
-                      v37[1] = 0;
-                      if ( *(_DWORD *)v38 )
+                      v36[1] = 0; /*0x41af84*/
+                      if ( *(_DWORD *)v37 ) /*0x41af88*/
                       {
-                        v39 = *(_DWORD *)v38 + strlen(*(const char **)v38) + 1 - *(_DWORD *)v38;
-                        v40 = (char *)&v66.list.next + 3;
-                        while ( *++v40 )
-                          ;
-                        qmemcpy(v40, *(const void **)v38, v39);
-                        v42 = (volatile LONG *)ModelLoader_IsModelLoaded__(ModelLoaderPtr, (int)Str, (int)Str);
-                        if ( v42 )
-                          sub_434C00(v42, v60);
+                        v38 = *(_DWORD *)v37 + strlen(*(const char **)v37) + 1 - *(_DWORD *)v37; /*0x41af9e*/
+                        v39 = &v65[0xB]; /*0x41afa0*/
+                        while ( *++v39 ) /*0x41afab*/
+                          ; /*0x41afa3*/
+                        qmemcpy(v39, *(const void **)v37, v38); /*0x41afb4*/
+                        v41 = (volatile LONG *)ModelLoader_IsModelLoaded__( /*0x41afc8*/
+                                                 MEMORY[0xB33A1C],
+                                                 (int)&v65[0xC],
+                                                 (int)&v65[0xC]);
+                        if ( v41 ) /*0x41afcf*/
+                          sub_434C00(v41, v59); /*0x41afd8*/
                       }
-                      v38 = *(_DWORD *)(v38 + 4);
+                      v37 = *((char **)v37 + 1); /*0x41afdd*/
                     }
                   }
-                  v43 = strrchr(v65.m_data, 0x5C);
-                  if ( v43 )
+                  v42 = strrchr(v63, 0x5C); /*0x41afe9*/
+                  if ( v42 ) /*0x41aff3*/
                   {
-                    LODWORD(v58) = 8;
-                    if ( !_strnicmp(v43 + 1, "Skeleton", v58) )
+                    LODWORD(v57) = 8; /*0x41aff9*/
+                    if ( !_strnicmp(v42 + 1, "Skeleton", v57) ) /*0x41b004*/
                     {
-                      v44 = sub_435830(v65.m_data, 0);
-                      for ( j = v44; j; j = *((_WORD **)j + 1) )
+                      v43 = BuildKFListForModelDirectory(v63, 0); /*0x41b021*/
+                      for ( j = v43; j; j = *((char **)j + 1) ) /*0x41b027*/
                       {
-                        v46 = *(const char **)j;
-                        if ( *(_DWORD *)j )
+                        v45 = *(const char **)j; /*0x41b030*/
+                        if ( *(_DWORD *)j ) /*0x41b030*/
                         {
-                          if ( v60 > 0 )
+                          if ( v59 > 0 ) /*0x41b03b*/
                           {
-                            v47 = v60;
-                            do
+                            v46 = v59; /*0x41b03d*/
+                            do /*0x41b050*/
                             {
-                              sub_439FF0(ModelLoaderPtr, v46);
-                              --v47;
+                              ModelLoader_LoadKFModelNow(MEMORY[0xB33A1C], v45); /*0x41b048*/
+                              --v46; /*0x41b04d*/
                             }
-                            while ( v47 );
+                            while ( v46 ); /*0x41b050*/
                           }
                         }
-                        FormHeapFree((unsigned int)v46);
+                        FormHeapFree((unsigned int)v45); /*0x41b053*/
                       }
-                      BSSimpleList_Clear(v44);
-                      FormHeapFree((unsigned int)v44);
-                      v37 = v62;
+                      BSSimpleList_Clear(v43); /*0x41b064*/
+                      FormHeapFree((unsigned int)v43); /*0x41b06a*/
+                      v36 = v61; /*0x41b06f*/
                     }
                   }
-                  if ( TESAnimation_HasAnimations((_DWORD *)v64 + 0x25) )
+                  if ( TESAnimation_HasAnimations((_DWORD *)v62 + 0x25) ) /*0x41b082*/
                   {
-                    v37[1] = 0;
-                    v48 = (char *)&v66.list.next + 3;
-                    while ( *++v48 )
-                      ;
-                    strcpy(v48, "SpecialAnims");
-                    v50 = (_WORD *)((char *)&v66.list.next + 3);
-                    do
+                    v36[1] = 0; /*0x41b093*/
+                    v47 = &v65[0xB]; /*0x41b097*/
+                    while ( *++v47 ) /*0x41b0a8*/
+                      ; /*0x41b0a0*/
+                    strcpy(v47, "SpecialAnims");// CustomAnimSupport decode: SpecialAnims string use in magic/effect VFX path; effect/model resource handling, not ActorAnimData install. /*0x41b0b6*/
+                    v49 = &v65[0xB]; /*0x41b0d1*/
+                    while ( *++v49 ) /*0x41b0dc*/
+                      ; /*0x41b0d4*/
+                    *(_WORD *)v49 = *(_WORD *)SubStr; /*0x41b0eb*/
+                    v61 = strrchr(&v65[0xC], 0x5C); /*0x41b0f8*/
+                    for ( k = EmbeddedList_GetHead(v62 + 0x94); k; k = *((char **)k + 1) ) /*0x41b105*/
                     {
-                      v51 = *((_BYTE *)v50 + 1);
-                      v50 = (_WORD *)((char *)v50 + 1);
-                    }
-                    while ( v51 );
-                    *v50 = *(_WORD *)SubStr;
-                    v63 = strrchr(Str, 0x5C);
-                    for ( k = sub_6899C0(v64 + 0x94); k; k = *(_DWORD *)(k + 4) )
-                    {
-                      v63[1] = 0;
-                      if ( *(_DWORD *)k )
+                      v61[1] = 0; /*0x41b114*/
+                      if ( *(_DWORD *)k ) /*0x41b118*/
                       {
-                        v53 = *(_DWORD *)k + strlen(*(const char **)k) + 1 - *(_DWORD *)k;
-                        v54 = (char *)&v66.list.next + 3;
-                        while ( *++v54 )
-                          ;
-                        qmemcpy(v54, *(const void **)k, v53);
-                        if ( v60 > 0 )
+                        v52 = *(_DWORD *)k + strlen(*(const char **)k) + 1 - *(_DWORD *)k; /*0x41b12e*/
+                        v53 = &v65[0xB]; /*0x41b130*/
+                        while ( *++v53 ) /*0x41b13b*/
+                          ; /*0x41b133*/
+                        qmemcpy(v53, *(const void **)k, v52); /*0x41b144*/
+                        if ( v59 > 0 ) /*0x41b14f*/
                         {
-                          v56 = v60;
-                          do
+                          v55 = v59; /*0x41b151*/
+                          do /*0x41b166*/
                           {
-                            sub_439FF0(ModelLoaderPtr, Str);
-                            --v56;
+                            ModelLoader_LoadKFModelNow(MEMORY[0xB33A1C], &v65[0xC]); /*0x41b15e*/
+                            --v55; /*0x41b163*/
                           }
-                          while ( v56 );
+                          while ( v55 ); /*0x41b166*/
                         }
                       }
                     }
@@ -318,14 +318,15 @@ LABEL_30:
           }
         }
       }
-      v57 = v61[2];
-      if ( !v57 )
-        return MagicItem_LoadVFX___::Done();
-      v61 = (_DWORD *)(v57 - 4);
-      if ( v57 == 4 )
-        return MagicItem_LoadVFX___::Done();
-      v9 = (_DWORD *)(v57 - 4);
+      v56 = *((_DWORD *)v61 + 2); /*0x41b16f*/
+      if ( !v56 ) /*0x41b178*/
+        break; /*0x41b178*/
+      v61 = (char *)(v56 - 4); /*0x41b17d*/
+      if ( v56 == 4 ) /*0x41b181*/
+        break; /*0x41b181*/
+      v8 = (char *)(v56 - 4); /*0x41acd0*/
     }
   }
-  return MagicItem_LoadVFX___::Done();
+LABEL_3:
+  MagicItem_LoadVFX___::Done(); /*0x41abf3*/
 }

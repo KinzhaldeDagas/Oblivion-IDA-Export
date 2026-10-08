@@ -1,1 +1,1 @@
-ITypeComp_0
+typedef ITypeComp ITypeComp_0;

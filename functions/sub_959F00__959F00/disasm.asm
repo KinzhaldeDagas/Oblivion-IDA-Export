@@ -8,7 +8,7 @@
 0x959F12: push    offset sub_96DAE0
 0x959F17: push    offset aNicollisiondat; "NiCollisionData"
 0x959F1C: mov     byte ptr ds:0BA9A65h, 1
-0x959F23: call    sub_712590
+0x959F23: call    sub_712590; Fog decode: generic NIF property factory registration helper; startup uses it to register "NiFogProperty" factory 0x740E90.
 0x959F28: xor     ecx, ecx
 0x959F2A: mov     eax, 24h ; '$'
 0x959F2F: mov     edx, 4

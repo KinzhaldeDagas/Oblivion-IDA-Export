@@ -1,4 +1,4 @@
-0x4F8840: push    ebp
+0x4F8840: push    ebp; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
 0x4F8841: mov     ebp, esp
 0x4F8843: and     esp, 0FFFFFFF0h
 0x4F8846: sub     esp, 20h

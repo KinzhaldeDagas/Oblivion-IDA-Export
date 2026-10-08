@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x784F20",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+left]; Constructs one 0x30-byte cache-map node: installs left/parent/right links, copies the 28-byte small-string key and stBezierSpline* value from the pair, then writes color and clears isNil.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784F24",
-    "line": "mov     edx, [esp+arg_8]",
+    "line": "mov     edx, [esp+right]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x784F29",
-    "line": "mov     ebp, [esp+4+arg_C]",
+    "line": "mov     ebp, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x784F31",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+parent]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x784F35",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x784F42",
-    "line": "push    0",
+    "line": "push    0; offset",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x784F52",
-    "line": "push    ebp",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x784F53",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x784F59",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x784F61",
-    "line": "mov     cl, [esp+0Ch+arg_10]",
+    "line": "mov     cl, [esp+0Ch+color]",
     "mnemonic": "mov",
     "size": 4
   },

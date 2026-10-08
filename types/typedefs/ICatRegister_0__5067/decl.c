@@ -1,1 +1,1 @@
-ICatRegister_0
+typedef ICatRegister ICatRegister_0;

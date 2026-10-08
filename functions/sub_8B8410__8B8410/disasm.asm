@@ -19,7 +19,7 @@
 0x8B8441: mov     eax, [ebp+arg_0]
 0x8B8444: jnz     short loc_8B8448
 0x8B8446: mov     esi, eax
-0x8B8448: push    offset unk_BA8000
+0x8B8448: push    0BA8000h
 0x8B844D: mov     ecx, esi
 0x8B844F: call    sub_700010
 0x8B8454: mov     edi, eax
@@ -40,7 +40,7 @@
 0x8B847B: mov     dword ptr [esp+34h+var_24], ebx
 0x8B847F: mov     ecx, ebx; this
 0x8B8481: mov     [esp+34h+var_4], edi
-0x8B8485: call    ??0NiTimeController@@QAE@XZ; NiTimeController::NiTimeController(void)
+0x8B8485: call    ??0NiTimeController@@QAE@XZ; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x8B848A: fldz
 0x8B848C: mov     dword ptr [ebx], offset ??_7bhkForceController@@6B@; const bhkForceController::`vftable'
 0x8B8492: movaps  xmm0, xmmword ptr ds:0BA7A40h
@@ -54,7 +54,7 @@
 0x8B84B0: mov     edi, ebx
 0x8B84B2: call    edx
 0x8B84B4: push    esi
-0x8B84B5: call    sub_47FAC0
+0x8B84B5: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x8B84BA: mov     ecx, [ebp+arg_4]
 0x8B84BD: movaps  xmm0, xmmword ptr [ecx]
 0x8B84C0: add     esp, 4
@@ -117,3 +117,15 @@
 0x8B8583: mov     esp, ebp
 0x8B8585: pop     ebp
 0x8B8586: retn
+0x9D6FB0: mov     eax, dword ptr [ebp+var_24]
+0x9D6FB3: push    eax
+0x9D6FB4: call    sub_6078C0
+0x9D6FB9: pop     ecx
+0x9D6FBA: retn
+0x9D6FBB: mov     edx, [esp-4+arg_4]
+0x9D6FBF: lea     eax, [edx-24h]
+0x9D6FC2: mov     ecx, [edx-28h]
+0x9D6FC5: xor     ecx, eax
+0x9D6FC7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6FCC: mov     eax, offset stru_AFEC6C
+0x9D6FD1: jmp     ___CxxFrameHandler3

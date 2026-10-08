@@ -1,4 +1,4 @@
-void __userpurge sub_5C25C0(char a1@<bpl>, double a2@<st2>, double a3@<st1>, double a4@<st0>, unsigned __int8 *a5)
+void __stdcall sub_5C25C0(unsigned __int8 *a1)
 {
   unsigned __int8 *v5; // edi
   int v6; // ebp
@@ -7,47 +7,44 @@ void __userpurge sub_5C25C0(char a1@<bpl>, double a2@<st2>, double a3@<st1>, dou
   int v9; // eax
   int v10; // eax
   int v11; // esi
-  char v12; // [esp-Ch] [ebp-14h]
 
-  v5 = a5;
-  if ( sub_5C1100() >= 0 && sub_5C1100() <= 7 )
+  v5 = a1; /*0x5c25c2*/
+  if ( sub_5C1100() >= 0 && sub_5C1100() <= 7 ) /*0x5c25e3*/
   {
-    if ( v5 )
+    if ( v5 ) /*0x5c25f2*/
     {
-      if ( dword_B3B44C[4 * sub_5C1100()] )
+      if ( unk_B3B44C[4 * sub_5C1100()] ) /*0x5c2600*/
       {
-        v12 = a1;
-        v6 = *(_DWORD *)(dword_B3B444[4 * sub_5C1100()] + 8);
-        if ( v6 )
+        v6 = *(_DWORD *)(unk_B3B444[4 * sub_5C1100()] + 8); /*0x5c2618*/
+        if ( v6 ) /*0x5c261d*/
         {
-          if ( *(_BYTE *)(v6 + 4) != 0x10 )
+          if ( *(_BYTE *)(v6 + 4) != 0x10 ) /*0x5c2623*/
           {
-            TESObjectREFR_GetContainer((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-            ContainerExtraDataForRef = (unsigned int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-            if ( ContainerExtraDataForRef )
+            TESObjectREFR_GetContainer((TESObjectREFR *)reference); /*0x5c262b*/
+            ContainerExtraDataForRef = (unsigned int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)reference); /*0x5c263d*/
+            if ( ContainerExtraDataForRef ) /*0x5c2644*/
             {
-              v8 = sub_5C1100();
-              sub_4895B0(ContainerExtraDataForRef, v6, v8);
+              v8 = sub_5C1100(); /*0x5c2646*/
+              sub_4895B0(ContainerExtraDataForRef, v6, v8); /*0x5c264f*/
             }
           }
         }
-        a1 = v12;
       }
-      if ( dword_B3B44C[4 * sub_5C1100()] >= 1 )
+      if ( unk_B3B44C[4 * sub_5C1100()] >= 1 ) /*0x5c2663*/
       {
-        v9 = sub_5C1100();
-        NiTPointerList::FreeAllNodes((NiTPointerList__BSImageSpaceShader *)((char *)&quickKeyList_ptr + 0x10 * v9));
+        v9 = sub_5C1100(); /*0x5c2676*/
+        NiTPointerList::FreeAllNodes((NiTPointerList__BSImageSpaceShader *)&MEMORY[0xB3B440][0x10 * v9]); /*0x5c2686*/
       }
       else
       {
-        sub_5C1DD0(v5);
+        sub_5C1DD0(v5); /*0x5c266a*/
       }
-      v10 = sub_5C1100();
-      sub_5B1E20((BSTextureManager *)((char *)&quickKeyList_ptr + 0x10 * v10), (void **)&a5);
-      byte_B3B43C = 1;
+      v10 = sub_5C1100(); /*0x5c2690*/
+      NiTPointerList__AddTail((BSTextureManager *)&MEMORY[0xB3B440][0x10 * v10], (void **)&a1); /*0x5c26a0*/
+      byte_B3B418[0x24] = 1; /*0x5c26a5*/
     }
-    v11 = sub_5C1100();
-    sub_5E99C0((TESObjectREFR *)TESDataHandler_g_PlayerRef, a1, a2, a3, a4, v5, 1, 0);
-    byte_B3B418[v11] = 1;
+    v11 = sub_5C1100(); /*0x5c26ba*/
+    sub_5E99C0((TESObjectREFR *)reference, v5, 1, 0); /*0x5c26bc*/
+    byte_B3B418[v11] = 1; /*0x5c26c1*/
   }
 }

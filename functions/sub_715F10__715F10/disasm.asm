@@ -1,4 +1,4 @@
-0x715F10: push    esi
+0x715F10: push    esi; Registers the NiObject base first and, on success, registers the refcounted next-controller object at +0x34. The target at +0x30 is a link, not recursively registered here.
 0x715F11: push    edi
 0x715F12: mov     edi, [esp+8+a2]
 0x715F16: push    edi; a2

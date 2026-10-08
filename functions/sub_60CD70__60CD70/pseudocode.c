@@ -1,4 +1,5 @@
-void __thiscall sub_60CD70(float *this, int a2)
+// ArrowProjectile virtual update wrapper. It ignores the supplied update argument and feeds the current global frame delta to ArrowProjectile_UpdateFlightAndLifecycle.
+void __thiscall ArrowProjectile_Update(ArrowProjectile *this, float ignoredDeltaTime)
 {
-  sub_60C170(this, flt_B33E9C);
+  ArrowProjectile_UpdateFlightAndLifecycle(this, *(float *)&MEMORY[0xB33E90][0xC]); /*0x60cd7a*/
 }

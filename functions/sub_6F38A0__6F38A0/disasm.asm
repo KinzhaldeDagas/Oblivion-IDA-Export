@@ -19,17 +19,17 @@
 0x6F38D1: mov     esi, ecx
 0x6F38D3: mov     ecx, [eax]
 0x6F38D5: xor     ebx, ebx
-0x6F38D7: push    0FFFFFFFFh
-0x6F38D9: push    ebx
+0x6F38D7: push    0FFFFFFFFh; count
+0x6F38D9: push    ebx; offset
 0x6F38DA: add     eax, 4
 0x6F38DD: mov     [ebp+var_34], ecx
-0x6F38E0: push    eax
-0x6F38E1: lea     ecx, [ebp+var_30]
+0x6F38E0: push    eax; source
+0x6F38E1: lea     ecx, [ebp+var_30]; this
 0x6F38E4: mov     [ebp+var_40], esi
-0x6F38E7: mov     [ebp+var_18], 0Fh
-0x6F38EE: mov     [ebp+var_1C], ebx
-0x6F38F1: mov     byte ptr [ebp+var_2C], bl
-0x6F38F4: call    sub_414420
+0x6F38E7: mov     [ebp+var_30.capacity], 0Fh
+0x6F38EE: mov     [ebp+var_30.size], ebx
+0x6F38F1: mov     byte ptr [ebp+var_30.storage], bl
+0x6F38F4: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6F38F9: mov     eax, [esi+4]
 0x6F38FC: cmp     eax, ebx
 0x6F38FE: mov     [ebp+var_4], ebx
@@ -51,7 +51,7 @@
 0x6F392B: sub     edx, ecx
 0x6F392D: cmp     edx, edi
 0x6F392F: jnb     short loc_6F3936
-0x6F3931: call    sub_790B90
+0x6F3931: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F3936: test    eax, eax
 0x6F3938: jnz     short loc_6F393E
 0x6F393A: xor     ecx, ecx
@@ -149,7 +149,7 @@
 0x6F3A11: call    sub_557030
 0x6F3A16: mov     ecx, [esi+4]
 0x6F3A19: push    ecx
-0x6F3A1A: call    FormHeapFree
+0x6F3A1A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F3A1F: add     esp, 14h
 0x6F3A22: mov     eax, [ebp+var_44]
 0x6F3A25: shl     ebx, 5
@@ -167,7 +167,7 @@
 0x6F3A47: push    esi
 0x6F3A48: call    sub_5576E0
 0x6F3A4D: push    esi
-0x6F3A4E: call    FormHeapFree
+0x6F3A4E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F3A53: add     esp, 4
 0x6F3A56: push    0
 0x6F3A58: push    0
@@ -250,11 +250,11 @@
 0x6F3B17: push    ebx
 0x6F3B18: call    sub_6F2460
 0x6F3B1D: add     esp, 18h
-0x6F3B20: cmp     [ebp+var_18], 10h
+0x6F3B20: cmp     [ebp+var_30.capacity], 10h
 0x6F3B24: jb      short loc_6F3B32
-0x6F3B26: mov     eax, [ebp+var_2C]
+0x6F3B26: mov     eax, dword ptr [ebp+var_30.storage]
 0x6F3B29: push    eax
-0x6F3B2A: call    FormHeapFree
+0x6F3B2A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F3B2F: add     esp, 4
 0x6F3B32: mov     ecx, [ebp+var_C]
 0x6F3B35: mov     large fs:0, ecx
@@ -268,3 +268,29 @@
 0x6F3B4A: mov     esp, ebp
 0x6F3B4C: pop     ebp
 0x6F3B4D: retn    10h
+0x556D60: push    esi
+0x556D61: mov     esi, ecx
+0x556D63: cmp     dword ptr [esi+1Ch], 10h
+0x556D67: jb      short loc_556D75
+0x556D69: mov     eax, [esi+8]
+0x556D6C: push    eax
+0x556D6D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x556D72: add     esp, 4
+0x556D75: xor     eax, eax
+0x556D77: mov     dword ptr [esi+1Ch], 0Fh
+0x556D7E: mov     [esi+18h], eax
+0x556D81: mov     [esi+8], al
+0x556D84: pop     esi
+0x556D85: retn
+0x9C8990: lea     ecx, [ebp+var_34]
+0x9C8993: jmp     loc_556D60
+0x9C8998: mov     edx, [esp-4+arg_4]
+0x9C899C: lea     eax, [edx+0Ch]
+0x9C899F: mov     ecx, [edx-48h]
+0x9C89A2: xor     ecx, eax
+0x9C89A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C89A9: mov     ecx, [edx-8]
+0x9C89AC: xor     ecx, eax
+0x9C89AE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C89B3: mov     eax, offset stru_AF1188
+0x9C89B8: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
 char __thiscall sub_565DE0(TESPackage *this)
 {
-  return BYTE1(this->members.packageFlags) & 1;
+  return BYTE1(this->members.packageFlags) & 1; /*0x565de8*/
 }

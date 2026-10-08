@@ -1,4 +1,4 @@
-char *sub_7249E0()
+float *sub_7249E0()
 {
-  return dword_B3FD78;
+  return &MEMORY[0xB3F9B0][0xF2]; /*0x7249e5*/
 }

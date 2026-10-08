@@ -1,4 +1,4 @@
-0x77FDE0: mov     edx, [esp+arg_0]
+0x77FDE0: mov     edx, [esp+transform]; MoonSugarEffect decode: NiDX9RenderState SetNormalization-style helper. Enables D3DRS_NORMALIZENORMALS (0x8F) when transform scale is non-unit or internal normalize flags are set; otherwise disables it.
 0x77FDE4: fld     dword ptr [edx+30h]
 0x77FDE7: fcomp   qword ptr ds:0A88D40h
 0x77FDED: fnstsw  ax

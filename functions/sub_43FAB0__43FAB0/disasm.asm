@@ -7,7 +7,7 @@
 0x43FABB: mov     [esp+0Ch+var_4], 0
 0x43FAC3: jz      short loc_43FB28
 0x43FAC5: mov     ecx, ebx; this
-0x43FAC7: call    TESObjectCELL_IsInterior
+0x43FAC7: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x43FACC: test    al, al
 0x43FACE: jnz     short loc_43FB28
 0x43FAD0: push    ebp

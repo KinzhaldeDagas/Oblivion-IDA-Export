@@ -160,19 +160,19 @@
 0x48801A: cmp     al, 1
 0x48801C: jnz     short loc_488057
 0x48801E: mov     edi, [esp+24h+var_C]
-0x488022: push    12h
-0x488024: mov     ecx, edi
-0x488026: call    Actor_GetSkillMasteryLevel
+0x488022: push    12h; actorValue
+0x488024: mov     ecx, edi; this
+0x488026: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x48802B: cmp     eax, 3
 0x48802E: jnz     short loc_488037
-0x488030: mov     ecx, offset fPerkHeavyArmorExpertSpeedMult
+0x488030: mov     ecx, 0B374D8h
 0x488035: jmp     short loc_488077
-0x488037: push    12h
-0x488039: mov     ecx, edi
-0x48803B: call    Actor_GetSkillMasteryLevel
+0x488037: push    12h; actorValue
+0x488039: mov     ecx, edi; this
+0x48803B: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x488040: cmp     eax, 4
 0x488043: jnz     short loc_488086
-0x488045: mov     ecx, offset fPerkHeavyArmorMasterSpeedMult
+0x488045: mov     ecx, 0B374E0h
 0x48804A: call    GameSetting_GetSafeFloatPointer
 0x48804F: fld     dword ptr [eax]
 0x488051: fmul    [esp+24h+var_14]
@@ -181,12 +181,12 @@
 0x488059: call    TESObjectARMO_ISHeavyArmor
 0x48805E: test    al, al
 0x488060: jnz     short loc_488086
-0x488062: mov     ecx, [esp+24h+var_C]
-0x488066: push    1Bh
-0x488068: call    Actor_GetSkillMasteryLevel
+0x488062: mov     ecx, [esp+24h+var_C]; this
+0x488066: push    1Bh; actorValue
+0x488068: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x48806D: cmp     eax, 3
 0x488070: jl      short loc_488086
-0x488072: mov     ecx, offset fPerkLightArmorExpertSpeedMult
+0x488072: mov     ecx, 0B374E8h
 0x488077: call    GameSetting_GetSafeFloatPointer
 0x48807C: fld     [esp+24h+var_14]
 0x488080: fmul    dword ptr [eax]

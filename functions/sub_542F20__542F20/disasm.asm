@@ -1,4 +1,4 @@
-0x542F20: sub     esp, 8
+0x542F20: sub     esp, 8; Oblivion's normal Sky frame update: determines underwater state and sky visibility, advances weather/time, calls UpdateColors and UpdateFog, updates wind/effects and every active sky child, publishes the sky vector, and clears transient flags.
 0x542F23: push    esi
 0x542F24: mov     esi, ecx
 0x542F26: mov     ecx, ds:0B33B00h
@@ -11,15 +11,15 @@
 0x542F40: test    cl, 1
 0x542F43: jz      loc_5431EB
 0x542F49: push    3
-0x542F4B: call    nullsub_returnTrue_0arg
+0x542F4B: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x542F50: add     esp, 4
-0x542F53: mov     ecx, offset TimeGlobals
+0x542F53: mov     ecx, 0B332E0h
 0x542F58: call    TimeGlobals_GetGameHour
 0x542F5D: fstp    dword ptr [esi+0D0h]
 0x542F63: mov     ecx, ds:0B333C4h; this
 0x542F69: test    ecx, ecx
 0x542F6B: jz      short loc_542FC1
-0x542F6D: call    TESObjectREFR_GetParentCell
+0x542F6D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x542F72: test    eax, eax
 0x542F74: jz      short loc_542FC1
 0x542F76: mov     eax, ds:0B333CCh
@@ -32,16 +32,16 @@
 0x542F91: fld     dword ptr [eax+90h]
 0x542F97: mov     ecx, ds:0B333C4h; this
 0x542F9D: fstp    [esp+0Ch+var_8]
-0x542FA1: call    TESObjectREFR_GetParentCell
+0x542FA1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x542FA6: mov     ecx, eax
 0x542FA8: call    TESObjectCELL_GetWaterHeight
 0x542FAD: fcomp   [esp+0Ch+var_8]
 0x542FB1: fnstsw  ax
 0x542FB3: test    ah, 41h
 0x542FB6: jnz     short loc_542FC1
-0x542FB8: or      dword ptr [esi+0FCh], 4
+0x542FB8: or      dword ptr [esi+0FCh], 4; Fog water decode: normal sky update sets Flags0FC bit 2 when cell water height exceeds active scene height.
 0x542FBF: jmp     short loc_542FC8
-0x542FC1: and     dword ptr [esi+0FCh], 0FFFFFFFBh
+0x542FC1: and     dword ptr [esi+0FCh], 0FFFFFFFBh; Fog water decode: normal sky update clears Flags0FC bit 2 when active scene height is not below water.
 0x542FC8: mov     eax, [esi+0DCh]
 0x542FCE: cmp     eax, 1
 0x542FD1: jz      short loc_542FEF
@@ -60,35 +60,35 @@
 0x542FFA: mov     eax, [ecx+0Ch]
 0x542FFD: or      word ptr [eax+18h], 1
 0x543002: mov     ecx, esi
-0x543004: call    sub_5422F0
+0x543004: call    Sky_UpdateWeatherSelectionAndTransition; Exterior fog decode: updates selected weather and transition state. Maintains Sky::firstWeather, secondWeather, and weatherPercent consumed by fog distance 0x541DD0 and fog color 0x5418F0.
 0x543009: mov     ecx, ds:0B33B00h
 0x54300F: call    sub_45A500
 0x543014: test    al, al
 0x543016: jz      short loc_54301F
 0x543018: or      dword ptr [esi+0FCh], 1
-0x54301F: mov     ecx, esi
-0x543021: call    sub_5418F0
-0x543026: mov     ecx, esi
-0x543028: call    sub_541DD0
+0x54301F: mov     ecx, esi; this
+0x543021: call    Sky__UpdateColors; Exterior fog decode: normal sky update refreshes active sky/weather colors before fog distance update.
+0x543026: mov     ecx, esi; this
+0x543028: call    Sky__UpdateFog; Fog decode: normal sky update calls 0x541DD0; this may take water branch if Flags0FC bit 2 was set earlier in 0x542F20.
 0x54302D: mov     ecx, esi
-0x54302F: call    sub_53FF90
+0x54302F: call    sub_53FF90; Pass231: Updates weather wind globals after fog distance update in normal sky path.
 0x543034: mov     ecx, esi
-0x543036: call    sub_542590
+0x543036: call    sub_542590; Pass231: Updates sky weather side lists/effects before Atmosphere virtual update.
 0x54303B: mov     ecx, [esi+20h]
 0x54303E: test    ecx, ecx
 0x543040: jz      short loc_543052
 0x543042: mov     edx, [ecx]
-0x543044: fld     [esp+0Ch+arg_0]
+0x543044: fld     [esp+0Ch+deltaTime]
 0x543048: mov     eax, [edx+0Ch]
 0x54304B: push    ecx
 0x54304C: fstp    [esp+10h+var_10]
 0x54304F: push    esi
-0x543050: call    eax
+0x543050: call    eax; Exterior fog decode: normal sky update calls Atmosphere virtual update after fog distances; this reaches 0x53B0E0 to copy Sky fog into B333E4.
 0x543052: mov     ecx, [esi+24h]
 0x543055: test    ecx, ecx
 0x543057: jz      short loc_543069
 0x543059: mov     edx, [ecx]
-0x54305B: fld     [esp+0Ch+arg_0]
+0x54305B: fld     [esp+0Ch+deltaTime]
 0x54305F: mov     eax, [edx+0Ch]
 0x543062: push    ecx
 0x543063: fstp    [esp+10h+var_10]
@@ -98,7 +98,7 @@
 0x54306C: test    ecx, ecx
 0x54306E: jz      short loc_543080
 0x543070: mov     edx, [ecx]
-0x543072: fld     [esp+0Ch+arg_0]
+0x543072: fld     [esp+0Ch+deltaTime]
 0x543076: mov     eax, [edx+0Ch]
 0x543079: push    ecx
 0x54307A: fstp    [esp+10h+var_10]
@@ -108,7 +108,7 @@
 0x543083: test    ecx, ecx
 0x543085: jz      short loc_543097
 0x543087: mov     edx, [ecx]
-0x543089: fld     [esp+0Ch+arg_0]
+0x543089: fld     [esp+0Ch+deltaTime]
 0x54308D: mov     eax, [edx+0Ch]
 0x543090: push    ecx
 0x543091: fstp    [esp+10h+var_10]
@@ -116,7 +116,7 @@
 0x543095: call    eax
 0x543097: test    byte ptr [esi+0FCh], 20h
 0x54309E: jz      short loc_5430B2
-0x5430A0: mov     ecx, offset TimeGlobals
+0x5430A0: mov     ecx, 0B332E0h
 0x5430A5: call    TimeGlobals_GetGameDaysPassed
 0x5430AA: cmp     [esi+0ECh], eax
 0x5430B0: jb      short loc_5430C1
@@ -159,7 +159,7 @@
 0x54311B: neg     eax
 0x54311D: add     eax, 1
 0x543120: mov     [edx+70h], eax
-0x543123: mov     ecx, offset TimeGlobals
+0x543123: mov     ecx, 0B332E0h
 0x543128: call    TimeGlobals_GetGameDaysPassed
 0x54312D: mov     [esi+0ECh], eax
 0x543133: pop     ebx
@@ -167,7 +167,7 @@
 0x543137: test    ecx, ecx
 0x543139: jz      short loc_54314B
 0x54313B: mov     eax, [ecx]
-0x54313D: fld     [esp+0Ch+arg_0]
+0x54313D: fld     [esp+0Ch+deltaTime]
 0x543141: mov     edx, [eax+0Ch]
 0x543144: push    ecx
 0x543145: fstp    [esp+10h+var_10]
@@ -177,7 +177,7 @@
 0x54314E: test    ecx, ecx
 0x543150: jz      short loc_543162
 0x543152: mov     eax, [ecx]
-0x543154: fld     [esp+0Ch+arg_0]
+0x543154: fld     [esp+0Ch+deltaTime]
 0x543158: mov     edx, [eax+0Ch]
 0x54315B: push    ecx
 0x54315C: fstp    [esp+10h+var_10]
@@ -186,7 +186,7 @@
 0x543162: mov     ecx, [esi+38h]
 0x543165: test    ecx, ecx
 0x543167: jz      short loc_543176
-0x543169: fld     [esp+0Ch+arg_0]
+0x543169: fld     [esp+0Ch+deltaTime]
 0x54316D: push    ecx
 0x54316E: fstp    [esp+10h+var_10]; float
 0x543171: call    sub_53F4C0
@@ -198,8 +198,8 @@
 0x543185: mov     eax, ds:0B33EA0h
 0x54318A: sub     eax, [esi+0E8h]
 0x543190: test    eax, eax
-0x543192: mov     [esp+0Ch+arg_0], eax
-0x543196: fild    [esp+0Ch+arg_0]
+0x543192: mov     [esp+0Ch+deltaTime], eax
+0x543196: fild    [esp+0Ch+deltaTime]
 0x54319A: jge     short loc_5431A2
 0x54319C: fadd    dword ptr ds:0A2FC78h
 0x5431A2: fld     dword ptr ds:0B36640h
@@ -219,7 +219,7 @@
 0x5431D4: push    ecx
 0x5431D5: call    sub_498060
 0x5431DA: push    2
-0x5431DC: call    nullsub_returnTrue_0arg
+0x5431DC: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5431E1: add     esp, 8
 0x5431E4: and     dword ptr [esi+0FCh], 0FFFFFFFCh
 0x5431EB: pop     esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5206B0",
-    "line": "push    ecx",
+    "line": "push    ecx; Recursive idle candidate search: a node is a fallback if ANAM high bit is set or model path is .kf; child matches override parent fallback.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5206D7",
-    "line": "call    sub_56A950",
+    "line": "call    ConditionList_EvaluateForActor; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x5206EC",
-    "line": "call    sub_520220",
+    "line": "call    TESIdleForm_ModelPathIsKF; TESIdleForm model path extension test: true only when the model path extension is exactly .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x520740",
-    "line": "call    sub_5206B0",
+    "line": "call    TESIdleForm_FindCandidateRecursive; Recursive idle candidate search: a node is a fallback if ANAM high bit is set or model path is .kf; child matches override parent fallback.",
     "mnemonic": "call",
     "size": 5
   },

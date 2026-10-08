@@ -7,7 +7,7 @@
 0x572ED3: add     esi, esi
 0x572ED5: test    eax, eax
 0x572ED7: jz      short loc_572F52
-0x572ED9: cmp     [esp+4+arg_4], 0
+0x572ED9: cmp     byte ptr [esp+4+arg_4], 0
 0x572EDE: jnz     short loc_572EF4
 0x572EE0: cmp     byte ptr ds:0B3A6D4h, 0
 0x572EE7: jnz     short loc_572EF4
@@ -21,7 +21,7 @@
 0x572F00: lea     eax, [esp+8+arg_4]
 0x572F04: push    eax
 0x572F05: call    edx
-0x572F07: mov     eax, dword ptr [esp+4+arg_4]
+0x572F07: mov     eax, [esp+4+arg_4]
 0x572F0B: test    eax, eax
 0x572F0D: jz      short loc_572F2F
 0x572F0F: push    edi

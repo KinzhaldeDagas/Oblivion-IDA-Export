@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x805740",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BloodOnDeath decode 2026-05-30: configures GeometryDecalShader passes. More blood trails come from more Decal_ProjectToSceneGeometry calls and longer lifetimes upstream.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x80577B",
-    "line": "mov     eax, [ecx+7Ch]",
+    "line": "mov     eax, [ecx+7Ch]; BloodOnDeath decode: first geometry-decal pass binds non-skinned VS/PS programs.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x8057A6",
-    "line": "call    sub_772630",
+    "line": "call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x8057D8",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x8057E3",
-    "line": "call    sub_801110",
+    "line": "call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x8057F2",
-    "line": "call    sub_760010",
+    "line": "call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x8057FC",
-    "line": "call    sub_772630",
+    "line": "call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x80581B",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x805848",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x805853",
-    "line": "call    sub_801110",
+    "line": "call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x805862",
-    "line": "call    sub_760010",
+    "line": "call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x8058F3",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x805907",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x805912",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x805923",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x80592E",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x80593F",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x80594A",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x80595B",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x805966",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x805977",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x805982",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x805993",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x80599E",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x8059AF",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x8059BA",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x8059CB",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x8059D6",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x8059E7",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x8059F2",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x805A03",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x805A0E",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x805A1F",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x805A31",
-    "line": "jz      short loc_805A51",
+    "line": "jz      short loc_805A51; BloodOnDeath decode: switch to second geometry-decal pass, which binds skinned VS/PS programs.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x805A3A",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x805A60",
-    "line": "call    sub_772630",
+    "line": "call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x805A7F",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x805AAD",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x805AB9",
-    "line": "call    sub_801110",
+    "line": "call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x805AC8",
-    "line": "call    sub_760010",
+    "line": "call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x805AD2",
-    "line": "call    sub_772630",
+    "line": "call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1915,7 +1915,7 @@
   },
   {
     "ea": "0x805AF1",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x805B1F",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x805B2B",
-    "line": "call    sub_801110",
+    "line": "call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x805B3A",
-    "line": "call    sub_760010",
+    "line": "call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2389,7 +2389,7 @@
   },
   {
     "ea": "0x805BCB",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,7 +2425,7 @@
   },
   {
     "ea": "0x805BDF",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2443,7 +2443,7 @@
   },
   {
     "ea": "0x805BEA",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x805BFB",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2497,7 +2497,7 @@
   },
   {
     "ea": "0x805C06",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x805C17",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x805C22",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2587,7 +2587,7 @@
   },
   {
     "ea": "0x805C33",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x805C3E",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2641,7 +2641,7 @@
   },
   {
     "ea": "0x805C4F",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2659,7 +2659,7 @@
   },
   {
     "ea": "0x805C5A",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2695,7 +2695,7 @@
   },
   {
     "ea": "0x805C6B",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2713,7 +2713,7 @@
   },
   {
     "ea": "0x805C76",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2749,7 +2749,7 @@
   },
   {
     "ea": "0x805C87",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2767,7 +2767,7 @@
   },
   {
     "ea": "0x805C92",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2803,7 +2803,7 @@
   },
   {
     "ea": "0x805CA3",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2821,7 +2821,7 @@
   },
   {
     "ea": "0x805CAE",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x805CBF",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2875,7 +2875,7 @@
   },
   {
     "ea": "0x805CCA",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x805CDB",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2929,7 +2929,7 @@
   },
   {
     "ea": "0x805CE6",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2965,7 +2965,7 @@
   },
   {
     "ea": "0x805CF7",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3013,7 +3013,7 @@
   },
   {
     "ea": "0x805D0F",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3043,7 +3043,7 @@
   },
   {
     "ea": "0x805D1F",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3100,5 +3100,161 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x75FA70",
+    "line": "mov     ecx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA72",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA74",
+    "line": "jz      short locret_75FA81",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA76",
+    "line": "add     dword ptr [ecx+5Ch], 0FFFFFFFFh",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x75FA7A",
+    "line": "jnz     short locret_75FA81",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x75FA7C",
+    "line": "jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x75FA81",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0AF0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0AF3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0AF8",
+    "line": "lea     ecx, [ebp-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0AFB",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0B00",
+    "line": "lea     ecx, [ebp-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0B03",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0B08",
+    "line": "lea     ecx, [ebp-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0B0B",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0B10",
+    "line": "lea     ecx, [ebp-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0B13",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0B18",
+    "line": "lea     ecx, [ebp-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0B1B",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0B20",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0B24",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0B27",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0B2A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0B2C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0B31",
+    "line": "mov     eax, offset stru_AF938C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0B36",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

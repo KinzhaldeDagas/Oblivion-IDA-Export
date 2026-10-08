@@ -1,1 +1,42 @@
-IDirectDrawSurface2Vtbl
+struct IDirectDrawSurface2Vtbl
+{
+HRESULT (__stdcall *QueryInterface)(IDirectDrawSurface2 *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);
+ULONG (__stdcall *AddRef)(IDirectDrawSurface2 *This) __offset(OFF64|AUTO);
+ULONG (__stdcall *Release)(IDirectDrawSurface2 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *AddAttachedSurface)(IDirectDrawSurface2 *This, LPDIRECTDRAWSURFACE2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *AddOverlayDirtyRect)(IDirectDrawSurface2 *This, LPRECT) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Blt)(IDirectDrawSurface2 *This, LPRECT, LPDIRECTDRAWSURFACE2, LPRECT, DWORD, LPDDBLTFX) __offset(OFF64|AUTO);
+HRESULT (__stdcall *BltBatch)(IDirectDrawSurface2 *This, LPDDBLTBATCH, DWORD, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *BltFast)(IDirectDrawSurface2 *This, DWORD, DWORD, LPDIRECTDRAWSURFACE2, LPRECT, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *DeleteAttachedSurface)(IDirectDrawSurface2 *This, DWORD, LPDIRECTDRAWSURFACE2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumAttachedSurfaces)(IDirectDrawSurface2 *This, LPVOID, LPDDENUMSURFACESCALLBACK) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumOverlayZOrders)(IDirectDrawSurface2 *This, DWORD, LPVOID, LPDDENUMSURFACESCALLBACK) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Flip)(IDirectDrawSurface2 *This, LPDIRECTDRAWSURFACE2, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetAttachedSurface)(IDirectDrawSurface2 *This, LPDDSCAPS, LPDIRECTDRAWSURFACE2 *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetBltStatus)(IDirectDrawSurface2 *This, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetCaps)(IDirectDrawSurface2 *This, LPDDSCAPS) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetClipper)(IDirectDrawSurface2 *This, LPDIRECTDRAWCLIPPER *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetColorKey)(IDirectDrawSurface2 *This, DWORD, LPDDCOLORKEY) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDC)(IDirectDrawSurface2 *This, HDC *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetFlipStatus)(IDirectDrawSurface2 *This, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetOverlayPosition)(IDirectDrawSurface2 *This, LPLONG, LPLONG) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetPalette)(IDirectDrawSurface2 *This, LPDIRECTDRAWPALETTE *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetPixelFormat)(IDirectDrawSurface2 *This, LPDDPIXELFORMAT) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetSurfaceDesc)(IDirectDrawSurface2 *This, LPDDSURFACEDESC) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Initialize)(IDirectDrawSurface2 *This, LPDIRECTDRAW, LPDDSURFACEDESC) __offset(OFF64|AUTO);
+HRESULT (__stdcall *IsLost)(IDirectDrawSurface2 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Lock)(IDirectDrawSurface2 *This, LPRECT, LPDDSURFACEDESC, DWORD, HANDLE) __offset(OFF64|AUTO);
+HRESULT (__stdcall *ReleaseDC)(IDirectDrawSurface2 *This, HDC) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Restore)(IDirectDrawSurface2 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetClipper)(IDirectDrawSurface2 *This, LPDIRECTDRAWCLIPPER) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetColorKey)(IDirectDrawSurface2 *This, DWORD, LPDDCOLORKEY) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetOverlayPosition)(IDirectDrawSurface2 *This, LONG, LONG) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetPalette)(IDirectDrawSurface2 *This, LPDIRECTDRAWPALETTE) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Unlock)(IDirectDrawSurface2 *This, LPVOID) __offset(OFF64|AUTO);
+HRESULT (__stdcall *UpdateOverlay)(IDirectDrawSurface2 *This, LPRECT, LPDIRECTDRAWSURFACE2, LPRECT, DWORD, LPDDOVERLAYFX) __offset(OFF64|AUTO);
+HRESULT (__stdcall *UpdateOverlayDisplay)(IDirectDrawSurface2 *This, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *UpdateOverlayZOrder)(IDirectDrawSurface2 *This, DWORD, LPDIRECTDRAWSURFACE2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDDInterface)(IDirectDrawSurface2 *This, LPVOID *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *PageLock)(IDirectDrawSurface2 *This, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *PageUnlock)(IDirectDrawSurface2 *This, DWORD) __offset(OFF64|AUTO);
+};

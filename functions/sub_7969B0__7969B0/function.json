@@ -1,19 +1,32 @@
 {
-  "callees_count": 45,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7969B0",
+      "0x796BBE"
+    ]
+  ],
+  "chunks_sha256": "7e0e7cb665fa8ef28be285282fe077ac736e0b63d4a69beb6d1deee1015ad388",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::DeleteIndexData frees every owned unsigned-short strip buffer, nulls the pointer slots, clears each inner pointer vector, then empties the per-LOD strip container.\n\n[2026-10-03 index ownership closure] Native DeleteIndexData frees every strip allocation and nulls/clears pointer containers; CombineStrips subsequently deep-assigns replacement length/pointer/triangle vectors. The plugin bounded frond combiner follows equivalent ownership using FormHeap allocations and retains outer vector objects/allocator words while replacing validated inner POD spans. No strip buffers are reference-counted or shared by design.\n\nOBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::DeleteIndexData frees every owned unsigned-short strip buffer, nulls the pointer slots, clears each inner pointer vector, then empties the per-LOD strip container.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::DeleteIndexData frees every owned unsigned-short strip buffer, nulls the pointer slots, clears each inner pointer vector, then empties the per-LOD strip container.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7969B0",
+  "display_name": "OB_CIndexedGeometry_DeleteIndexData_010201A0",
   "end_ea": "0x796BBE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7969B0",
+  "name": "OB_CIndexedGeometry_DeleteIndexData_010201A0",
   "segment": ".text",
   "sha256": "7e0e7cb665fa8ef28be285282fe077ac736e0b63d4a69beb6d1deee1015ad388",
   "size": 526,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7969B0",
-  "type": "void __thiscall(unsigned int *this)",
+  "total_chunk_size": 526,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this)",
   "xrefs_from_count": 227,
   "xrefs_to_count": 2
 }

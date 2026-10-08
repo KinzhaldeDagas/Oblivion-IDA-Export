@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D9D00",
-    "line": "push    ebp",
+    "line": "push    ebp; Authoritative common placed-reference loader used by TESObjectREFR, Character/ACHR, and Creature/ACRE vtables (LoadForm slots at 0xA46C60, 0xA6FCB8, 0xA71110; matching SaveFormChunks slots at +8). Replays recognized chunks in stream order and forwards common extras to ExtraDataList_Load; there is no REFR-vs-ACHR/ACRE filter here.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4D9D2A",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4D9D46",
-    "line": "call    sub_41FF80",
+    "line": "call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -274,12 +274,6 @@
     "line": "jmp     loc_4DA088",
     "mnemonic": "jmp",
     "size": 5
-  },
-  {
-    "ea": "0x4D9D79",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x4D9D80",
@@ -469,7 +463,7 @@
   },
   {
     "ea": "0x4D9DFB",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; DATA bounded read max 24: size 0 is a no-op; short chunks prefix-overlay the shared uninitialized/local prior buffer; oversized chunks copy 23 bytes and force byte 23 to zero. Each unguarded DATA copies all 24 scratch bytes to the reference transform.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +637,7 @@
   },
   {
     "ea": "0x4D9E6B",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +691,7 @@
   },
   {
     "ea": "0x4D9E89",
-    "line": "jnz     loc_4DA008",
+    "line": "jnz     loc_4DA008; NAME replay path. The 4-byte scratch accumulator was zeroed once at loader entry and persists across repeated NAME chunks; bounded short reads overlay its prefix, oversized reads force the high byte to zero, and every occurrence performs lookup/store. Any lookup/cast failure latches DATA suppression.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -721,7 +715,7 @@
   },
   {
     "ea": "0x4D9E95",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +739,7 @@
   },
   {
     "ea": "0x4D9E9F",
-    "line": "call    TESForm_ResolveFormID",
+    "line": "call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x4D9F58",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; XSCL bounded max-4 read targets the existing object scale directly. Omitted/empty chunks preserve it; short chunks overlay a byte prefix; oversized chunks copy 3 bytes and zero the high byte; repeated chunks apply in order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,19 +1129,19 @@
   },
   {
     "ea": "0x4D9F9B",
-    "line": "push    8",
+    "line": "push    8; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D9F9D",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4D9FA0",
-    "line": "call    sub_423DF0",
+    "line": "call    ExtraDataList_SetActionFlagBits; ONAM is an empty semantic marker; payload is never read. It ORs action flag bit 0x08 into existing flags, or into default 1 when creating ExtraAction. Repeated ONAM is idempotent. Ordering matters: later XACT replaces the flag byte and can clear 0x08; later ONAM restores it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,25 +1351,25 @@
   },
   {
     "ea": "0x4DA017",
-    "line": "push    esi",
+    "line": "push    esi; Shared REFR/ACHR/ACRE dispatch also forwards XUSE, XPSL, XPSN, and XTIM to ExtraDataList_Load; no placed-kind gate excludes them.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA018",
-    "line": "push    ebx",
+    "line": "push    ebx; tesFile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA019",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DA01C",
-    "line": "call    ExtraDataList_Load",
+    "line": "call    ExtraDataList_Load; Common ExtraDataList single-chunk dispatcher reached by REFR/ACHR/ACRE. TESFile_GetChunkData(max) semantics at 0x450C20: length 0 leaves destination unchanged; <=max copies a prefix only; >max copies max-1 and writes a terminal zero. Each explicitly zeroed scratch therefore gives deterministic malformed-width behavior; singleton setters make repeats last-wins/remove as noted per branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1495,7 @@
   },
   {
     "ea": "0x4DA05D",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1513,7 @@
   },
   {
     "ea": "0x4DA064",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },

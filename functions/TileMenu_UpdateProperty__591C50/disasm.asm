@@ -4,7 +4,7 @@
 0x591C5A: mov     esi, ecx
 0x591C5C: jnz     short loc_591C9A
 0x591C5E: fld     [esp+8+arg_4]
-0x591C62: call    Double_To_SInt32
+0x591C62: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x591C67: mov     ebx, eax
 0x591C69: push    ebx
 0x591C6A: push    1
@@ -58,10 +58,10 @@
 0x591CF7: mov     [edi+14h], eax
 0x591CFA: call    InterfaceManager_GetDepthR
 0x591CFF: push    ecx
-0x591D00: fstp    [esp+10h+a2]; a3
-0x591D03: push    0FABh; a2
+0x591D00: fstp    [esp+10h+a2]; value
+0x591D03: push    0FABh; propertyCode
 0x591D08: mov     ecx, esi; this
-0x591D0A: call    Tile_SetFloat
+0x591D0A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x591D0F: lea     eax, [esp+0Ch+arg_0]
 0x591D13: push    eax
 0x591D14: add     ebx, 0FFFFFC17h

@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5769A2",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x5769DE",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x5769E2",
-    "line": "push    ecx",
+    "line": "push    ecx; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5769E3",
-    "line": "lea     ecx, [eax+0Ch]",
+    "line": "lea     ecx, [eax+0Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5769E6",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5769FA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

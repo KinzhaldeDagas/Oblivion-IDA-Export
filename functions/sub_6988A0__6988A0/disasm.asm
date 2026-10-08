@@ -22,7 +22,7 @@
 0x6988DD: mov     edx, [ebp+arg_8]
 0x6988E0: mov     ebx, [ebp+arg_0]
 0x6988E3: sub     esp, 0Ch
-0x6988E6: mov     [esp+70h+var_48], eax
+0x6988E6: mov     [esp+70h+slot], eax
 0x6988EA: mov     eax, esp
 0x6988EC: mov     [eax], edi
 0x6988EE: mov     edi, [ebp+arg_20]
@@ -37,7 +37,7 @@
 0x698907: mov     [eax+4], edi
 0x69890A: mov     edi, [ebp+arg_18]
 0x69890D: mov     [eax+8], edi
-0x698910: mov     eax, [esp+7Ch+var_48]
+0x698910: mov     eax, [esp+7Ch+slot]
 0x698914: push    eax
 0x698915: mov     esi, ecx
 0x698917: mov     ecx, [ebp+arg_4]
@@ -61,9 +61,9 @@
 0x698962: mov     eax, [esi+74h]
 0x698965: mov     [esi+80h], edi
 0x69896B: fld     dword ptr [eax+74h]
-0x69896E: fstp    [esp+64h+var_48]
+0x69896E: fstp    [esp+64h+slot]
 0x698972: mov     ecx, ebx
-0x698974: fld     [esp+64h+var_48]
+0x698974: fld     [esp+64h+slot]
 0x698978: mov     byte ptr [esp+64h+var_4], 5
 0x69897D: fmul    dword ptr ds:0B37EE8h
 0x698983: mov     [esi+84h], edi
@@ -75,16 +75,16 @@
 0x6989A0: mov     edx, [ebx]
 0x6989A2: mov     eax, [edx+20h]
 0x6989A5: call    eax
-0x6989A7: mov     ecx, ds:0B333C4h
+0x6989A7: mov     ecx, ds:0B333C4h; this
 0x6989AD: cmp     eax, ecx
 0x6989AF: jnz     short loc_698A02
-0x6989B1: push    1
-0x6989B3: call    PlayerCharacter_GetPlayerNode
+0x6989B1: push    1; firstPerson
+0x6989B3: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6989B8: test    eax, eax
 0x6989BA: jz      short loc_698A02
-0x6989BC: mov     ecx, ds:0B333C4h
-0x6989C2: push    1; a4
-0x6989C4: call    PlayerCharacter_GetPlayerNode
+0x6989BC: mov     ecx, ds:0B333C4h; this
+0x6989C2: push    1; firstPerson
+0x6989C4: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6989C9: test    byte ptr [eax+18h], 1
 0x6989CD: jnz     short loc_698A02
 0x6989CF: mov     eax, [esi+34h]
@@ -108,7 +108,7 @@
 0x698A0B: mov     ebx, eax
 0x698A0D: add     esp, 4
 0x698A10: cmp     ebx, edi
-0x698A12: mov     [esp+64h+var_48], ebx
+0x698A12: mov     [esp+64h+slot], ebx
 0x698A16: jz      short loc_698A22
 0x698A18: lea     edx, [ebx+4]
 0x698A1B: push    edx; lpAddend
@@ -131,9 +131,9 @@
 0x698A49: mov     ecx, esi
 0x698A4B: call    sub_696CE0
 0x698A50: mov     eax, [esi+88h]
-0x698A56: push    eax
-0x698A57: mov     ecx, esi
-0x698A59: call    sub_4D7D10
+0x698A56: push    eax; node
+0x698A57: mov     ecx, esi; this
+0x698A59: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
 0x698A5E: mov     ecx, esi
 0x698A60: call    sub_698410
 0x698A65: fld     dword ptr ds:0A7DEB4h
@@ -144,7 +144,7 @@
 0x698A75: fst     [esp+68h+a2.y]
 0x698A79: fst     [esp+68h+a2.z]
 0x698A7D: fstp    [esp+68h+a2.w]
-0x698A81: call    MobileObject_GetCharProxy
+0x698A81: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x698A86: cmp     eax, edi
 0x698A88: jz      short loc_698A9D
 0x698A8A: mov     eax, [eax+8]
@@ -153,12 +153,12 @@
 0x698A91: lea     ecx, [esp+68h+a2]
 0x698A95: push    ecx; a2
 0x698A96: mov     ecx, eax; this
-0x698A98: call    sub_8AC0B0
-0x698A9D: push    esi; Concurrency::details::SchedulerBase *
+0x698A98: call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.
+0x698A9D: push    esi; reference
 0x698A9E: mov     ecx, esi; this
-0x698AA0: call    TESObjectREFR_GetParentCell
-0x698AA5: mov     ecx, eax
-0x698AA7: call    sub_4D35D0
+0x698AA0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x698AA5: mov     ecx, eax; this
+0x698AA7: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x698AAC: mov     eax, [esi+74h]
 0x698AAF: mov     [esi+80h], edi
 0x698AB5: cmp     [eax+84h], edi
@@ -172,7 +172,7 @@
 0x698AD8: mov     ecx, ebx; this
 0x698ADA: call    sub_6B73E0
 0x698ADF: push    ebx
-0x698AE0: call    FormHeapFree
+0x698AE0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x698AE5: add     esp, 4
 0x698AE8: mov     [esi+9Ch], edi
 0x698AEE: mov     eax, ds:0B33398h
@@ -192,7 +192,7 @@
 0x698B1D: jz      short loc_698B79
 0x698B1F: mov     edx, [esi+2Ch]
 0x698B22: mov     ecx, [esi+30h]
-0x698B25: mov     [esp+68h+var_48], edx
+0x698B25: mov     [esp+68h+slot], edx
 0x698B29: mov     edx, [esi+34h]
 0x698B2C: sub     esp, 0Ch
 0x698B2F: mov     [esp+74h+var_40], edx
@@ -202,7 +202,7 @@
 0x698B3F: fld     [esp+74h+var_44]
 0x698B43: mov     ecx, eax
 0x698B45: fstp    [esp+74h+var_70]; float
-0x698B49: fld     [esp+74h+var_48]
+0x698B49: fld     [esp+74h+slot]
 0x698B4D: fstp    [esp+74h+var_74]; float
 0x698B50: call    sub_6B7360
 0x698B55: mov     eax, [esi+94h]
@@ -233,7 +233,7 @@
 0x698BAA: fstp    dword ptr ds:0B3C0D0h
 0x698BB0: jmp     short loc_698BBD
 0x698BB2: push    esi
-0x698BB3: mov     ecx, offset ActorProcessManager_ptr.unk4C
+0x698BB3: mov     ecx, (offset qword_B3BB2C+224h)
 0x698BB8: call    BSSimpleList_PushFront
 0x698BBD: cmp     ebx, edi
 0x698BBF: mov     [esp+68h+var_8], 5
@@ -261,3 +261,33 @@
 0x698BFA: mov     esp, ebp
 0x698BFC: pop     ebp
 0x698BFD: retn    28h ; '('
+0x9C5AE0: mov     ecx, [ebp+a2.x]
+0x9C5AE3: jmp     sub_69FA60
+0x9C5AE8: mov     ecx, [ebp+a2.x]
+0x9C5AEB: add     ecx, 7Ch ; '|'; slot
+0x9C5AEE: jmp     NiPointerSlot_Release
+0x9C5AF3: mov     ecx, [ebp+a2.x]
+0x9C5AF6: add     ecx, 88h ; 'ˆ'; slot
+0x9C5AFC: jmp     NiPointerSlot_Release
+0x9C5B01: mov     ecx, [ebp+a2.x]
+0x9C5B04: add     ecx, 8Ch ; 'Œ'; slot
+0x9C5B0A: jmp     NiPointerSlot_Release
+0x9C5B0F: mov     ecx, [ebp+a2.x]
+0x9C5B12: add     ecx, 90h; slot
+0x9C5B18: jmp     NiPointerSlot_Release
+0x9C5B1D: mov     ecx, [ebp+a2.x]
+0x9C5B20: add     ecx, 94h ; '”'; slot
+0x9C5B26: jmp     NiPointerSlot_Release
+0x9C5B2B: lea     ecx, [ebp+slot]; slot
+0x9C5B2E: jmp     NiPointerSlot_Release
+0x9C5B33: mov     edx, [esp-4+arg_4]
+0x9C5B37: lea     eax, [edx-54h]
+0x9C5B3A: mov     ecx, [edx-58h]
+0x9C5B3D: xor     ecx, eax
+0x9C5B3F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5B44: add     eax, 0Ch
+0x9C5B47: mov     ecx, [edx-8]
+0x9C5B4A: xor     ecx, eax
+0x9C5B4C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5B51: mov     eax, offset stru_AEE1F4
+0x9C5B56: jmp     ___CxxFrameHandler3

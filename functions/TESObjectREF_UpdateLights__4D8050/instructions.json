@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D8050",
-    "line": "push    ebx",
+    "line": "push    ebx; For a TESObjectREFR whose base form is TESObjectLIGH, update both ordinary extra-light type 0x30 and spell-effect extra-light type 0x49 payloads from the same base LIGH data. The actor-owned transient LGHT payload uses the same type 0x49 storage but its parent base form is not TESObjectLIGH.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4D805B",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,25 +151,25 @@
   },
   {
     "ea": "0x4D808C",
-    "line": "push    0",
+    "line": "push    0; optionalContext",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D808E",
-    "line": "push    ebp",
+    "line": "push    ebp; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D808F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D8091",
-    "line": "call    sub_4B22E0",
+    "line": "call    TESObjectLIGH_UpdateAttachedLightPayload; Update ordinary ExtraLight type 0x30 with optionalContext=null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4D8098",
-    "line": "call    sub_41E670",
+    "line": "call    ExtraDataList_GetSpellEffectLight; Returns the secondary/spell-effect REFR_LIGHT payload from extra type 0x49; TESObjectREF_UpdateLights processes it separately from normal ExtraLight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,25 +211,25 @@
   },
   {
     "ea": "0x4D80A5",
-    "line": "push    0",
+    "line": "push    0; optionalContext",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D80A7",
-    "line": "push    eax",
+    "line": "push    eax; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D80A8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D80AA",
-    "line": "call    sub_4B22E0",
+    "line": "call    TESObjectLIGH_UpdateAttachedLightPayload; Update spell-effect ExtraLight type 0x49 with optionalContext=null.",
     "mnemonic": "call",
     "size": 5
   },

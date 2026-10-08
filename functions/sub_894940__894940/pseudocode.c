@@ -1,29 +1,30 @@
-void __thiscall sub_894940(int *this, signed int a2)
+// [Controller decode 2026-07-09] Sets active bhk character-controller shape type and rebuilds/reinstalls the active shape when available.
+void __thiscall bhkCharacterController_SetShapeType(int ***this, int **a2)
 {
   bool v3; // bl
   _DWORD *v4; // ecx
-  hkVector4 *v5; // eax
+  hkVector4 *PositionPtr; // eax
   int v6; // eax
   int v7; // [esp-8h] [ebp-10h]
 
-  if ( *(this + 0xDB) != a2 && a2 < 2 )
+  if ( *(this + 0xDB) != a2 && (int)a2 < 2 ) /*0x894953*/
   {
-    if ( *(this + a2 + 0xDD) )
+    if ( *(this + (_DWORD)a2 + 0xDD) ) /*0x894955*/
     {
-      v3 = (*(this + 0x7D) & 0x8000) != 0;
-      if ( (*(this + 0x7D) & 0x8000) != 0 )
-        sub_893950(this);
-      v4 = (_DWORD *)*(this + 2);
-      *(this + 0xDB) = a2;
-      if ( v4 )
-        v5 = (hkVector4 *)sub_8AC070(v4);
+      v3 = ((unsigned int)*(this + 0x7D) & 0x8000) != 0; /*0x894969*/
+      if ( ((unsigned int)*(this + 0x7D) & 0x8000) != 0 ) /*0x89496c*/
+        sub_893950(this); /*0x89496e*/
+      v4 = *(this + 2); /*0x894973*/
+      *(this + 0xDB) = a2; /*0x894978*/
+      if ( v4 ) /*0x89497e*/
+        PositionPtr = (hkVector4 *)bhkCollisionWrapper_GetPositionPtr(v4); /*0x894980*/
       else
-        v5 = &stru_BA7A40;
-      v7 = (int)v5;
-      v6 = sub_890BA0(this);
-      sub_890660(this, v6, v7);
-      if ( v3 )
-        (*(void (__thiscall **)(int *, _DWORD))(*this + 0x88))(this, 0);
+        PositionPtr = &unk_BA7A40; /*0x894987*/
+      v7 = (int)PositionPtr; /*0x89498c*/
+      v6 = sub_890BA0((int *)this); /*0x89498f*/
+      sub_890660(this, v6, v7); /*0x894997*/
+      if ( v3 ) /*0x89499f*/
+        ((void (__thiscall *)(int ***, _DWORD))(*this)[0x22])(this, 0); /*0x8949ad*/
     }
   }
 }

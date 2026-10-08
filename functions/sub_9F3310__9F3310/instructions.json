@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F3310",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Controller decode 2026-07-09] Initializes input-device label settings for keyboard, mouse, and joystick.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x9F3355",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x9F3357",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x9F336A",
-    "line": "mov     dword_B39548, eax",
+    "line": "mov     dword ptr unk_B39548, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x9F3391",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x9F3393",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x9F33A6",
-    "line": "mov     dword_B3954C, eax",
+    "line": "mov     dword ptr unk_B3954C, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x9F33CD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x9F33CF",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x9F33D4",
-    "line": "mov     dword_B39550, eax",
+    "line": "mov     dword ptr g_deviceLabelSetting_Joystick, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x9F33EB",
-    "line": "mov     dword_B39550, eax",
+    "line": "mov     dword ptr g_deviceLabelSetting_Joystick, eax",
     "mnemonic": "mov",
     "size": 5
   },
@@ -382,5 +382,137 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BA9F0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA9F3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA9F4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA9F9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA9FA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA9FB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA9FE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA9FF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BAA04",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BAA05",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BAA06",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BAA09",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BAA0A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BAA0F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BAA10",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BAA11",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BAA15",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BAA18",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BAA1B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BAA1D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BAA22",
+    "line": "mov     eax, offset stru_AE4AB8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BAA27",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

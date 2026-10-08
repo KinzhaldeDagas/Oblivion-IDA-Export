@@ -1,19 +1,32 @@
 {
-  "callees_count": 285,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 121,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 8,
-  "display_name": "sub_6384B0",
+  "chunks": [
+    [
+      "0x6384B0",
+      "0x6397C3"
+    ]
+  ],
+  "chunks_sha256": "f932aecb40e062c6cd5158942300814988d0731278b218b28bed4392954de340",
+  "comment_regular": "HighProcess package-procedure action 1. Its random-social scan is explicitly gated by conversationScanCooldown, decrements that field once when gated or unsuccessful, and resets it to fAItalktoNPCtimer only after successful package creation. Its early radius gate unusually admits a dead candidate long enough to consume chance/recent-target suppression before final rejection.",
+  "comment_repeatable": "HighProcess package-procedure action 1. Its random-social scan is explicitly gated by conversationScanCooldown, decrements that field once when gated or unsuccessful, and resets it to fAItalktoNPCtimer only after successful package creation. Its early radius gate unusually admits a dead candidate long enough to consume chance/recent-target suppression before final rejection.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 12,
+  "display_name": "HighProcess::UpdatePackageProcedureAction1",
   "end_ea": "0x6397C3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6384B0",
+  "name": "HighProcess::UpdatePackageProcedureAction1",
   "segment": ".text",
   "sha256": "f932aecb40e062c6cd5158942300814988d0731278b218b28bed4392954de340",
   "size": 4883,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6384B0",
-  "type": "void __userpurge(int *ecx0@<ecx>, double st6_0@<st1>, double st7_0@<st0>, TESObjectREFR *)",
+  "total_chunk_size": 4883,
+  "type": "void __thiscall(HighProcess *this, Actor *actor)",
   "xrefs_from_count": 1721,
   "xrefs_to_count": 1
 }

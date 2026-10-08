@@ -1,7 +1,7 @@
-0x7847F0: mov     ecx, [esp+arg_0]
-0x7847F4: mov     edx, [esp+arg_4]
+0x7847F0: mov     ecx, [esp+first]; Oblivion 1.2.0.416: placement/uninitialized copy of six-dword records; shared by stVec and branch-flare vector paths.
+0x7847F4: mov     edx, [esp+last]
 0x7847F8: cmp     ecx, edx
-0x7847FA: mov     eax, [esp+arg_8]
+0x7847FA: mov     eax, [esp+destination]
 0x7847FE: jz      short locret_784832
 0x784800: push    esi
 0x784801: test    eax, eax

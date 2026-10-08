@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5EA800",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; 3DTheft pass 166 crash decode: returns clamped SInt32 in EAX. Hybrid ABI uses ECX=this, entry [ESP+4]=with Actor, entry [ESP+8]=withBase TESForm; every exit is RET 4, so caller must discard the residual withBase dword.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5EA805",
-    "line": "mov     esi, [esp+1Ch+a2]",
+    "line": "mov     esi, [esp+1Ch+a2]; Decoded fixed stack input: with Actor* at entry ESP+4.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5EA81E",
-    "line": "retn    4",
+    "line": "retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.",
     "mnemonic": "retn",
     "size": 3
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x5EA835",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EA837",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x5EAA02",
-    "line": "mov     ecx, [esp+20h+a3]",
+    "line": "mov     ecx, [esp+20h+a3]; Decoded second stack input: withBase TESForm* at entry ESP+8. This input is read even though the function returns with RET 4.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x5EAA12",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x5EAA2D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x5EAA5F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x5EAABA",
-    "line": "retn    4",
+    "line": "retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.",
     "mnemonic": "retn",
     "size": 3
   },
@@ -2263,7 +2263,7 @@
   },
   {
     "ea": "0x5EAC3D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x5EAC81",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x5EACE2",
-    "line": "retn    4",
+    "line": "retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.",
     "mnemonic": "retn",
     "size": 3
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x5EACFC",
-    "line": "retn    4",
+    "line": "retn    4; Hybrid ABI exit: RET 4 consumes only with; caller still owns withBase.",
     "mnemonic": "retn",
     "size": 3
   }

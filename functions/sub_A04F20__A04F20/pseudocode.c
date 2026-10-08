@@ -1,4 +1,4 @@
-BSStringT *sub_A04F20()
+NiRTTI *sub_A04F20()
 {
-  return sub_70E220((BSStringT *)dword_B3DC80, "NiPosData", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_B3DC80, "NiPosData", &stru_B3F684); /*0xa04f34*/
 }

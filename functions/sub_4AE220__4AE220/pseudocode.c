@@ -25,7 +25,7 @@ char __userpurge sub_4AE220@<al>(
   PlayerCharacter *v23; // edi
   CHAR *v24; // eax
   char *m_data; // edi
-  _DWORD *sound; // ecx
+  int *sound; // ecx
   int *v27; // eax
   int *v28; // esi
   float duration; // [esp+0h] [ebp-2Ch]
@@ -34,110 +34,110 @@ char __userpurge sub_4AE220@<al>(
   int v33; // [esp+28h] [ebp-4h]
   TESObjectREFR *v34; // [esp+34h] [ebp+8h]
 
-  v11 = (PlayerCharacter *)OblivionDynamicCast(
+  v11 = (PlayerCharacter *)OblivionDynamicCast( /*0x4ae261*/
                              a7,
                              0,
                              (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                              &Actor `RTTI Type Descriptor',
                              0);
-  v34 = (TESObjectREFR *)v11;
-  if ( a6 )
+  v34 = (TESObjectREFR *)v11; /*0x4ae26c*/
+  if ( a6 ) /*0x4ae270*/
   {
-    if ( v11 )
+    if ( v11 ) /*0x4ae278*/
     {
-      if ( (a6[2] & 0x2000) == 0
+      if ( (a6[2] & 0x2000) == 0 /*0x4ae2c4*/
         && *(_DWORD *)(a1 - 8)
-        && (v12 = *(_BYTE *)(sub_402DC0(&TimeGlobals) + a1 - 4)) != 0
-        && GetRandomLargeInteger_(0) % 0x64 < v12 )
+        && (v12 = *(_BYTE *)(TimeGlobals_GetSeasonIndex(&MEMORY[0xB332E0]) + a1 - 4)) != 0
+        && Game_RandomLargeInteger(0) % 0x64 < v12 )
       {
-        v13 = *(_DWORD **)(a1 - 8);
-        v14 = OblivionDynamicCast(
+        v13 = *(_DWORD **)(a1 - 8); /*0x4ae2ca*/
+        v14 = OblivionDynamicCast( /*0x4ae2dc*/
                 v13,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                 &TESScriptableForm `RTTI Type Descriptor',
                 0);
-        if ( v14 )
-          v15 = *((Script **)v14 + 1);
+        if ( v14 ) /*0x4ae2e6*/
+          v15 = *((Script **)v14 + 1); /*0x4ae2e8*/
         else
-          v15 = 0;
-        v16 = 0;
-        if ( v15 )
+          v15 = 0; /*0x4ae2ed*/
+        v16 = 0; /*0x4ae2ef*/
+        if ( v15 ) /*0x4ae2f3*/
         {
-          v17 = (char *)FormHeapAlloc(0x14u);
-          string.m_data = v17;
-          v33 = 0;
-          if ( v17 )
-            v18 = (ExtraDataList *)ExtraDataList_constr(v17);
+          v17 = (char *)FormHeapAlloc(0x14u); /*0x4ae2fb*/
+          string.m_data = v17; /*0x4ae303*/
+          v33 = 0; /*0x4ae309*/
+          if ( v17 ) /*0x4ae30d*/
+            v18 = (ExtraDataList *)ExtraDataList_constr(v17); /*0x4ae316*/
           else
-            v18 = 0;
-          v33 = 0xFFFFFFFF;
-          ExtraDataList_SetExtraCount(v18, 1);
-          if ( v18 )
+            v18 = 0; /*0x4ae31a*/
+          v33 = 0xFFFFFFFF; /*0x4ae320*/
+          ExtraDataList_SetExtraCount(v18, 1); /*0x4ae328*/
+          if ( v18 ) /*0x4ae32f*/
           {
-            if ( !ExtraDataList_GetExtraScript(v18) )
+            if ( !ExtraDataList_GetExtraScript(v18) ) /*0x4ae333*/
             {
-              ExtraDataList_AddScript(v18, (int)v15);
-              ExtraScript = (char *)ExtraDataList_GetExtraScript(v18);
-              EventList = Script_CreateEventList(ExtraScript);
-              ExtraDataList_SetScriptEventList(v18, (int)EventList);
-              v21 = (char *)FormHeapAlloc(0x58u);
-              string.m_data = v21;
-              v33 = 1;
-              if ( v21 )
-                v16 = (TESObjectREFR *)TESObjectREFR_constr((TESChildCELL *)v21);
-              v33 = 0xFFFFFFFF;
-              ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v18);
-              Script_Run(v15, a5, a4, v16, ExtraScriptEventList, 0, 0);
+              ExtraDataList_AddScript(v18, (int)v15); /*0x4ae33f*/
+              ExtraScript = (char *)ExtraDataList_GetExtraScript(v18); /*0x4ae346*/
+              EventList = Script_CreateEventList(ExtraScript); /*0x4ae34d*/
+              ExtraDataList_SetScriptEventList(v18, (int)EventList); /*0x4ae355*/
+              v21 = (char *)FormHeapAlloc(0x58u); /*0x4ae35c*/
+              string.m_data = v21; /*0x4ae364*/
+              v33 = 1; /*0x4ae36a*/
+              if ( v21 ) /*0x4ae372*/
+                v16 = (TESObjectREFR *)TESObjectREFR_constr((TESChildCELL *)v21); /*0x4ae37b*/
+              v33 = 0xFFFFFFFF; /*0x4ae383*/
+              ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v18); /*0x4ae38b*/
+              Script_Run(v15, a5, a4, v16, ExtraScriptEventList, 0, 0); /*0x4ae394*/
             }
           }
-          v23 = (PlayerCharacter *)v34;
-          ((void (__thiscall *)(TESObjectREFR *, _DWORD *, ExtraDataList *, int))v34->vtbl->AddItem)(v34, v13, v18, 1);
+          v23 = (PlayerCharacter *)v34; /*0x4ae39b*/
+          ((void (__thiscall *)(TESObjectREFR *, _DWORD *, ExtraDataList *, int))v34->vtbl->AddItem)(v34, v13, v18, 1); /*0x4ae3ad*/
         }
         else
         {
-          TESObjectREFR_AddItem_Abbrev(v34, (int)v13, 0, 1);
-          v23 = (PlayerCharacter *)v34;
+          TESObjectREFR_AddItem_Abbrev(v34, (int)v13, 0, 1); /*0x4ae3b9*/
+          v23 = (PlayerCharacter *)v34; /*0x4ae3be*/
         }
-        if ( v23 == TESDataHandler_g_PlayerRef )
+        if ( v23 == reference ) /*0x4ae3c8*/
         {
-          string.m_data = 0;
-          string.m_dataLen = 0;
-          string.m_bufLen = 0;
-          v24 = (CHAR *)v13[0xA];
-          v33 = 2;
-          if ( !v24 )
-            v24 = EmptyString;
-          BSStringT_Static_Format(&string, sFloraSuccessMessage, v24);
-          __asm { fld     dword ptr ds:0A31E2Ch }
-          m_data = string.m_data;
-          __asm { fstp    [esp+34h+duration]; duration }
-          GameUI_QueueMessage(string.m_data, 0, 1u, duration);
-          sound = OSGlobals->sound;
-          if ( sound )
+          string.m_data = 0; /*0x4ae3ce*/
+          string.m_dataLen = 0; /*0x4ae3d2*/
+          string.m_bufLen = 0; /*0x4ae3d7*/
+          v24 = (CHAR *)v13[0xA]; /*0x4ae3dc*/
+          v33 = 2; /*0x4ae3e1*/
+          if ( !v24 ) /*0x4ae3e9*/
+            v24 = EmptyString; /*0x4ae3eb*/
+          BSStringT_Static_Format(&string, MEMORY[0xB35820], v24); /*0x4ae3fd*/
+          __asm { fld     dword ptr ds:0A31E2Ch } /*0x4ae402*/
+          m_data = string.m_data; /*0x4ae408*/
+          __asm { fstp    [esp+34h+duration]; duration } /*0x4ae40c*/
+          GameUI_QueueMessage(string.m_data, 0, 1u, duration); /*0x4ae417*/
+          sound = (int *)MEMORY[0xB33398]->sound; /*0x4ae421*/
+          if ( sound ) /*0x4ae429*/
           {
-            v27 = PlaySound___(sound, "ITMPickupOrganic", 0x121, 1);
-            v28 = v27;
-            if ( v27 )
+            v27 = PlaySound___(sound, "ITMPickupOrganic", 0x121, 1); /*0x4ae437*/
+            v28 = v27; /*0x4ae43c*/
+            if ( v27 ) /*0x4ae440*/
             {
-              sub_6B7190(v27, 0);
-              sub_6B73E0(v28);
-              FormHeapFree((unsigned int)v28);
+              sub_6B7190(v27, 0); /*0x4ae445*/
+              sub_6B73E0(v28); /*0x4ae44c*/
+              FormHeapFree((unsigned int)v28); /*0x4ae452*/
             }
           }
-          v33 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)m_data);
+          v33 = 0xFFFFFFFF; /*0x4ae45b*/
+          FormHeapFree((unsigned int)m_data); /*0x4ae463*/
         }
       }
-      else if ( v11 == TESDataHandler_g_PlayerRef )
+      else if ( v11 == reference ) /*0x4ae473*/
       {
-        __asm { fld     dword ptr ds:0A31E2Ch }
+        __asm { fld     dword ptr ds:0A31E2Ch } /*0x4ae475*/
         __asm { fstp    [esp+2Ch+duration]; duration }
-        GameUI_QueueMessage((const char *)sFloraFailureMessage, 0, 1u, durationa);
-        sub_57DE50(0x1E);
+        GameUI_QueueMessage((const char *)MEMORY[0xB35828], 0, 1u, durationa); /*0x4ae48a*/
+        sub_57DE50(0x1E); /*0x4ae491*/
       }
-      sub_46AA00(a6, 1);
+      sub_46AA00(a6, 1); /*0x4ae49f*/
     }
   }
-  return 1;
+  return 1; /*0x4ae4a6*/
 }

@@ -1,18 +1,31 @@
 {
-  "callees_count": 146,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 43,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x44F3D0",
+      "0x44FA44"
+    ]
+  ],
+  "chunks_sha256": "aec1a8550aa28fad451c20cbe1c52d03dc46e0cb0d67d201cd3058bcca94dd1d",
+  "comment_regular": "Verified TESDataHandler_LoadFiles behavior: when activeFileState.retainActiveFile is nonzero, reopens the retained TESFile and rebuilds its loaded-master array before completing the file load. The flag's writer remains Unknown.",
+  "comment_repeatable": "Verified TESDataHandler_LoadFiles behavior: when activeFileState.retainActiveFile is nonzero, reopens the retained TESFile and rebuilds its loaded-master array before completing the file load. The flag's writer remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 7,
   "display_name": "TESDataHandler_LoadFiles?",
   "end_ea": "0x44FA44",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESDataHandler_LoadFiles?",
   "segment": ".text",
   "sha256": "aec1a8550aa28fad451c20cbe1c52d03dc46e0cb0d67d201cd3058bcca94dd1d",
   "size": 1652,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x44F3D0",
+  "total_chunk_size": 1652,
   "type": "signed int __userpurge@<eax>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, char, char)",
   "xrefs_from_count": 674,
   "xrefs_to_count": 2

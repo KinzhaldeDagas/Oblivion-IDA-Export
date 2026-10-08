@@ -20,7 +20,7 @@
 0x461344: mov     eax, [esi+2Ch]
 0x461347: mov     edi, [eax+4]
 0x46134A: push    eax
-0x46134B: call    FormHeapFree
+0x46134B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x461350: add     esp, 4
 0x461353: cmp     edi, ebp
 0x461355: mov     [esi+2Ch], edi
@@ -36,9 +36,9 @@
 0x46136F: mov     edx, [edi+4]
 0x461372: push    edi
 0x461373: mov     [esp+68h+var_34], 1
-0x46137B: call    edx
+0x46137B: call    edx; Savegame review: reads file-controlled created-object count used as loop bound at 0x4613D2; plugin clamps at 0x461380.
 0x46137D: add     esp, 14h
-0x461380: cmp     [esp+54h+var_38], ebp
+0x461380: cmp     [esp+54h+var_38], ebp; EnginePatch v1: byte-checked SaveLoad_LoadCreatedObjects count guard. Clamps save-controlled UInt32 record count using hard cap and remaining file bytes / 0x14 before the created-object load loop.
 0x461384: jz      loc_461537
 0x46138A: or      dword ptr [esi+18h], 20000h
 0x461391: push    41Ch; Size
@@ -54,9 +54,9 @@
 0x4613AD: mov     ecx, eax
 0x4613AF: call    TESFile_constr
 0x4613B4: mov     ebx, eax
-0x4613B6: mov     [esp+54h+var_40], ebx
+0x4613B6: mov     [esp+54h+file], ebx
 0x4613BA: jmp     short loc_4613C2
-0x4613BC: mov     [esp+54h+var_40], ebp
+0x4613BC: mov     [esp+54h+file], ebp
 0x4613C0: mov     ebx, ebp
 0x4613C2: push    edi
 0x4613C3: mov     ecx, ebx
@@ -91,28 +91,28 @@
 0x461428: mov     eax, [esp+54h+ArgList]
 0x46142C: push    eax; a1
 0x46142D: mov     ebx, eax
-0x46142F: call    TESForm_LookupByFormID
+0x46142F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x461434: add     esp, 4
 0x461437: test    eax, eax
 0x461439: jz      short loc_461445
-0x46143B: push    eax
-0x46143C: mov     ecx, esi
-0x46143E: call    sub_45C7A0
+0x46143B: push    eax; form
+0x46143C: mov     ecx, esi; self
+0x46143E: call    TESSaveLoadGame_DeleteForm
 0x461443: jmp     short loc_46144F
-0x461445: mov     ecx, [esi]
-0x461447: push    1
-0x461449: push    ebx
-0x46144A: call    sub_452DF0
+0x461445: mov     ecx, [esi]; self
+0x461447: push    1; force
+0x461449: push    ebx; formID
+0x46144A: call    SaveLoadChangesMap_RemoveChanges;
 0x46144F: mov     ecx, large fs:2Ch
 0x461456: mov     edx, ds:0BA9DE4h
 0x46145C: mov     esi, [ecx+edx*4]
-0x46145F: mov     eax, [esp+54h+var_40]
+0x46145F: mov     eax, [esp+54h+file]
 0x461463: mov     bl, [esi+184h]
-0x461469: mov     ecx, ds:0B33A98h
-0x46146F: push    0
-0x461471: push    eax
+0x461469: mov     ecx, ds:0B33A98h; dataHandler
+0x46146F: push    0; firstFileLowFormFilter
+0x461471: push    eax; file
 0x461472: mov     byte ptr [esi+184h], 1
-0x461479: call    TESDataHandler_LoadFormRecord
+0x461479: call    TESDataHandler_LoadFormRecord; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.
 0x46147E: mov     ecx, edi
 0x461480: mov     [esi+184h], bl
 0x461486: call    sub_42BC00
@@ -120,7 +120,7 @@
 0x46148F: mov     edi, eax
 0x461491: push    ecx; a1
 0x461492: sub     edi, ebp
-0x461494: call    TESForm_LookupByFormID
+0x461494: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x461499: mov     esi, eax
 0x46149B: add     esp, 4
 0x46149E: test    esi, esi
@@ -128,7 +128,7 @@
 0x4614A6: lea     ecx, [esi+10h]
 0x4614A9: test    ecx, ecx
 0x4614AB: jz      short loc_4614B2
-0x4614AD: call    BSSimpleList_Clear
+0x4614AD: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4614B2: mov     edx, [esi]
 0x4614B4: mov     eax, [edx+6Ch]
 0x4614B7: mov     ecx, esi
@@ -151,7 +151,7 @@
 0x4614EE: call    sub_45AD00
 0x4614F3: mov     esi, ebx
 0x4614F5: mov     edi, [esp+54h+arg_0]
-0x4614F9: mov     ebx, [esp+54h+var_40]
+0x4614F9: mov     ebx, [esp+54h+file]
 0x4614FD: mov     eax, [esp+54h+var_34]
 0x461501: add     eax, 1
 0x461504: cmp     eax, [esp+54h+var_38]
@@ -166,7 +166,7 @@
 0x461520: mov     ecx, ebx
 0x461522: call    TESFile_destr
 0x461527: push    ebx
-0x461528: call    FormHeapFree
+0x461528: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46152D: add     esp, 4
 0x461530: and     dword ptr [esi+18h], 0FFFDFFFFh
 0x461537: mov     ecx, dword ptr [esp+54h+var_C]
@@ -191,3 +191,15 @@
 0x46156C: mov     ecx, ebx
 0x46156E: call    TESFIle_JumpToRecord
 0x461573: jmp     short loc_4614FD
+0x9AE5D0: mov     eax, [ebp-30h]
+0x9AE5D3: push    eax
+0x9AE5D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE5D9: pop     ecx
+0x9AE5DA: retn
+0x9AE5DB: mov     edx, [esp+arg_4]
+0x9AE5DF: lea     eax, [edx-44h]
+0x9AE5E2: mov     ecx, [edx-48h]
+0x9AE5E5: xor     ecx, eax
+0x9AE5E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE5EC: mov     eax, offset stru_ADADD4
+0x9AE5F1: jmp     ___CxxFrameHandler3

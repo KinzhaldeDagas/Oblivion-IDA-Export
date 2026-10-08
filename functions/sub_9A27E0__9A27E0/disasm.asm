@@ -37,7 +37,7 @@
 0x9A283E: test    al, al
 0x9A2840: jz      short loc_9A288F
 0x9A2842: push    esi
-0x9A2843: call    FormHeapFree
+0x9A2843: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A2848: mov     ecx, [esp+14h+arg_0]
 0x9A284C: lea     edx, [esp+14h+var_4]
 0x9A2850: push    edx
@@ -45,7 +45,7 @@
 0x9A2855: push    eax
 0x9A2856: push    ecx
 0x9A2857: call    sub_9A5610
-0x9A285C: movzx   edx, byte_B4294C[eax]
+0x9A285C: movzx   edx, byte ptr unk_B4294C[eax]
 0x9A2863: mov     eax, [ebx+14h]
 0x9A2866: and     eax, 0FFFFFF00h
 0x9A286B: or      edx, eax

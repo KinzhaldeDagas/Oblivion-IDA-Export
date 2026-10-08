@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76C9A0",
+      "0x76CA0D"
+    ]
+  ],
+  "chunks_sha256": "0299c29dc90a088edc7fce20203ba0b0f7c20332cf3526dec68f0e7113cd36a3",
+  "comment_regular": "Pass324: generic NiD3DShader setup consumes a5 renderer propertyState and immediately calls UpdateRenderState(a5). CD crash at 0x00780848 proves a5 was null; no call-edge to the native shadow-map renderer/projector boundary.",
+  "comment_repeatable": "Pass324: generic NiD3DShader setup consumes a5 renderer propertyState and immediately calls UpdateRenderState(a5). CD crash at 0x00780848 proves a5 was null; no call-edge to the native shadow-map renderer/projector boundary.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76C9A0",
+  "display_name": "NiD3DShader_SetupGeometryRenderState",
   "end_ea": "0x76CA0D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76C9A0",
+  "name": "NiD3DShader_SetupGeometryRenderState",
   "segment": ".text",
   "sha256": "0299c29dc90a088edc7fce20203ba0b0f7c20332cf3526dec68f0e7113cd36a3",
   "size": 109,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76C9A0",
+  "total_chunk_size": 109,
   "type": "unsigned int __thiscall(NiD3DShader *this, int, int, int, int, unsigned int, int, int)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 1

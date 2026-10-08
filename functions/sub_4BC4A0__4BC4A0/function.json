@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BC4A0",
+      "0x4BC52C"
+    ]
+  ],
+  "chunks_sha256": "a86880081d2ecbad1559a9f33b3897dd34b587438f2bb2369bfe082fababc853",
+  "comment_regular": "Verified: scans SubSpace reference candidates, keeps only references whose local scaled bounds contain the query, and returns the containing reference with the smallest base-form bound radius (+0x2C). This is smallest-volume/radius selection, not nearest reference-center selection.",
+  "comment_repeatable": "Verified: scans SubSpace reference candidates, keeps only references whose local scaled bounds contain the query, and returns the containing reference with the smallest base-form bound radius (+0x2C). This is smallest-volume/radius selection, not nearest reference-center selection.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BC4A0",
+  "display_name": "TESSubSpace_FindSmallestContainingPosition",
   "end_ea": "0x4BC52C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BC4A0",
+  "name": "TESSubSpace_FindSmallestContainingPosition",
   "segment": ".text",
   "sha256": "a86880081d2ecbad1559a9f33b3897dd34b587438f2bb2369bfe082fababc853",
   "size": 140,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BC4A0",
-  "type": "float *__cdecl(float *, float **)",
+  "total_chunk_size": 140,
+  "type": "TESObjectREFR *__cdecl(float *worldPosition, TESSubSpaceReferenceList *candidateList)",
   "xrefs_from_count": 65,
   "xrefs_to_count": 2
 }

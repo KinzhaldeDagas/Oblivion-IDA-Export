@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x510659",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,19 +577,19 @@
   },
   {
     "ea": "0x51072C",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51072E",
-    "line": "fstp    [esp+3Ch+var_3C]; float",
+    "line": "fstp    [esp+3Ch+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x510731",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,19 +607,19 @@
   },
   {
     "ea": "0x510739",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51073B",
-    "line": "fstp    [esp+3Ch+var_3C]; float",
+    "line": "fstp    [esp+3Ch+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x51073E",
-    "line": "call    sub_4D89F0",
+    "line": "call    TESObjectREFR_SetRotationY; TES4 authoritative: write reference rotation Y at TESObjectREFR+0x24, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x510746",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x510748",
-    "line": "fstp    [esp+3Ch+var_3C]; float",
+    "line": "fstp    [esp+3Ch+radians]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x51074B",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x510789",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

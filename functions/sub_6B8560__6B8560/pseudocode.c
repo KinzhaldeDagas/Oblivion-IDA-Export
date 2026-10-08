@@ -1,5 +1,5 @@
-BOOL __thiscall sub_6B8560(_DWORD *this)
+bool __thiscall MenuTopic::FirstResponse(MenuTopicView *this)
 {
-  *(this + 7) = this + 3;
-  return this != (_DWORD *)0xFFFFFFF4 && *(this + 3);
+  this->currentResponseNode = (DialogueResponseNode *)&this->firstResponse; /*0x6b8565*/
+  return this != (MenuTopicView *)0xFFFFFFF4 && this->firstResponse; /*0x6b8574*/
 }

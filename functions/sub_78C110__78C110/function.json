@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x78C110",
+      "0x78C157"
+    ]
+  ],
+  "chunks_sha256": "5300e0100a6fc76561d99f76982cffc989d3284672e5c95bd8de2ef735b55682",
+  "comment_regular": "CSpeedTreeRT::SetLodLevel. Accepts only [0,1], writing instanceData+0x10 for instances or treeEngine+0x14 for base trees; out-of-range input records the SDK error.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_78C110",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "CSpeedTreeRT__SetLodLevel",
   "end_ea": "0x78C157",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "sub_78C110",
+  "has_pseudocode": true,
+  "name": "CSpeedTreeRT__SetLodLevel",
   "segment": ".text",
   "sha256": "5300e0100a6fc76561d99f76982cffc989d3284672e5c95bd8de2ef735b55682",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78C110",
-  "type": "float *__thiscall(float **this, float)",
+  "total_chunk_size": 71,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, float lodLevel)",
   "xrefs_from_count": 29,
   "xrefs_to_count": 2
 }

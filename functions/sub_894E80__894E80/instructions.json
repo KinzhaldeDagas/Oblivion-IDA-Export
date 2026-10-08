@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x894E80",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: integrates controller position from proxy velocity +0x2E0 and dt. Single observed caller is 0x896828 after state update and velocity writeback.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x894EC2",
-    "line": "mov     eax, [edi+1F4h]",
+    "line": "mov     eax, [edi+1F4h]; Checks controller flag 0x80000 by shifting +0x1F4 >> 19. If clear, uses simple position += velocity*dt path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x894ED7",
-    "line": "mov     eax, [edi+364h]",
+    "line": "mov     eax, [edi+364h]; Swept-hit listener path requires flag 0x80000 and metadata proxy+0x364. Without both, integration simply writes current position + velocity*dt.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x894F29",
-    "line": "call    sub_891440",
+    "line": "call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x894F58",
-    "line": "movaps  xmmword ptr [esp+204h+a2], xmm0",
+    "line": "movaps  xmmword ptr [esp+204h+a2], xmm0; Computes candidate Havok-relative position = current relative position + proxy+0x2E0 * dt.",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x894F68",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x894F85",
-    "line": "call    edx",
+    "line": "call    edx; Linear cast/sweep via metadata+8 hk object vfunc +0x30(start,end,collector,0). Hits are gathered for notification; this call does not itself clamp the candidate end position here.",
     "mnemonic": "call",
     "size": 2
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x894F89",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x894F9E",
-    "line": "call    sub_8AF890",
+    "line": "call    hkpCdPointCollector_SortHitsByDistance; TES4 authoritative: sorts collector contact hits by entry+0x1C when more than one hit is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x894FC2",
-    "line": "call    eax",
+    "line": "call    eax; Dispatches each swept hit to the controller listener at proxy+0x1F0 vfunc +8 before final position writeback.",
     "mnemonic": "call",
     "size": 2
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x894FDB",
-    "line": "call    sub_891560",
+    "line": "call    bhkCharacterController_WriteRelativePosition; After processing swept hits, vanilla still writes the full candidate relative position. This confirms the 0x80000 path is not a blocking ledge-clearance or mantle solver.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x894FFB",
-    "line": "call    sub_891440",
+    "line": "call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x895031",
-    "line": "call    sub_891560",
+    "line": "call    bhkCharacterController_WriteRelativePosition; Simple relative-position writeback when the swept collector path is inactive.",
     "mnemonic": "call",
     "size": 5
   },
@@ -802,5 +802,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D6570",
+    "line": "lea     ecx, [ebp+var_1C0]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6576",
+    "line": "jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D657B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D657F",
+    "line": "lea     eax, [edx-1F4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6585",
+    "line": "mov     ecx, [edx-1F8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D658B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D658D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6592",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6595",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6598",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D659A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D659F",
+    "line": "mov     eax, offset stru_AFE3DC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D65A4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

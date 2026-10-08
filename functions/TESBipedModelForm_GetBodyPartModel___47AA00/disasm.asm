@@ -1,4 +1,4 @@
-0x47AA00: push    ebx
+0x47AA00: push    ebx; ODismemberment: biped slot attach/replace path can rebuild loaded 3D; plugin state must be reapplied after equipment/body changes.
 0x47AA01: push    ebp
 0x47AA02: push    esi
 0x47AA03: push    edi
@@ -36,13 +36,13 @@
 0x47AA62: test    al, al
 0x47AA64: jz      short loc_47AA95
 0x47AA66: mov     eax, ebx
-0x47AA68: push    0
+0x47AA68: push    0; newModelData
 0x47AA6A: shl     eax, 4
 0x47AA6D: lea     edi, [eax+esi+4Ch]
-0x47AA71: push    1
-0x47AA73: push    edi
-0x47AA74: mov     ecx, esi
-0x47AA76: call    sub_478780
+0x47AA71: push    1; replaceMetadata
+0x47AA73: push    edi; slot
+0x47AA74: mov     ecx, esi; this
+0x47AA76: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x47AA7B: mov     ecx, [esp+10h+arg_0]
 0x47AA7F: mov     edx, [esp+10h+arg_4]
 0x47AA83: add     ebx, 5
@@ -77,11 +77,11 @@
 0x47AACE: add     esp, 14h
 0x47AAD1: test    eax, eax
 0x47AAD3: jz      short loc_47AAE3
-0x47AAD5: push    0
-0x47AAD7: push    1
-0x47AAD9: push    edi
-0x47AADA: mov     ecx, esi
-0x47AADC: call    sub_478780
+0x47AAD5: push    0; newModelData
+0x47AAD7: push    1; replaceMetadata
+0x47AAD9: push    edi; slot
+0x47AADA: mov     ecx, esi; this
+0x47AADC: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x47AAE1: jmp     short loc_47AAED
 0x47AAE3: mov     eax, [edi]
 0x47AAE5: push    eax
@@ -125,12 +125,12 @@
 0x47AB42: mov     ebx, [esp+10h+arg_8]
 0x47AB46: mov     ecx, ebx
 0x47AB48: shl     ecx, 4
-0x47AB4B: push    0
+0x47AB4B: push    0; newModelData
 0x47AB4D: lea     edi, [ecx+esi+4Ch]
-0x47AB51: push    1
-0x47AB53: push    edi
-0x47AB54: mov     ecx, esi
-0x47AB56: call    sub_478780
+0x47AB51: push    1; replaceMetadata
+0x47AB53: push    edi; slot
+0x47AB54: mov     ecx, esi; this
+0x47AB56: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x47AB5B: mov     edx, [esp+10h+arg_0]
 0x47AB5F: mov     eax, [esp+10h+arg_4]
 0x47AB63: add     ebx, 5

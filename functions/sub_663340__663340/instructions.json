@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x6633EA",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6633EC",
-    "line": "lea     edx, [esp+18h+var_8]",
+    "line": "lea     edx, [esp+18h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x6633F3",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6633F4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6633F6",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x663406",
-    "line": "mov     eax, [esp+14h+var_8]",
+    "line": "mov     eax, [esp+14h+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x66344A",
-    "line": "mov     ecx, [esp+14h+var_8]",
+    "line": "mov     ecx, [esp+14h+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x663459",
-    "line": "mov     ecx, [esp+14h+var_8]",
+    "line": "mov     ecx, [esp+14h+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x663480",
-    "line": "mov     eax, [esp+14h+var_8]",
+    "line": "mov     eax, [esp+14h+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,49 +595,49 @@
   },
   {
     "ea": "0x66348C",
-    "line": "push    0FFFFFFFFh; a2",
+    "line": "push    0FFFFFFFFh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66348E",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x663493",
-    "line": "push    0Ah; a2",
+    "line": "push    0Ah; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x663495",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66349A",
-    "line": "push    8; a2",
+    "line": "push    8; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66349C",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6634A1",
-    "line": "push    9; a2",
+    "line": "push    9; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6634A3",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },

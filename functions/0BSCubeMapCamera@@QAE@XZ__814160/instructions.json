@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x814160",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BSCubeMapCamera constructor: initializes mode +0x124, six face references +0x128..+0x13C, render/scene fields, cube frustum, and image-space shader list +0x14C.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x814192",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x8141CE",
-    "line": "mov     [ebp+124h], eax",
+    "line": "mov     [ebp+124h], eax; Store BSCubeMapCamera render mode at +0x124. ShadowPass constructs this camera with mode 0.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -208,12 +208,6 @@
     "line": "jmp     short loc_8141E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8141DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x8141E0",
@@ -715,7 +709,7 @@
   },
   {
     "ea": "0x8142E9",
-    "line": "call    ImageSpaceshaderList__Create; Treat this list as a de facto subclass of a standard NiTPointerList as this is bigger of 3 UInt32",
+    "line": "call    ImageSpaceshaderList__Create; MoonSugarEffect decode: ImageSpaceShaderList creation order: NightEye, HDR/Blur, optional Refraction, Hit, and Copy fallback at +0x18.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +739,7 @@
   },
   {
     "ea": "0x8142F9",
-    "line": "mov     [ebp+14Ch], eax",
+    "line": "mov     [ebp+14Ch], eax; Store the private image-space shader list at BSCubeMapCamera+0x14C.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -814,5 +808,173 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D1320",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1323",
+    "line": "jmp     DestroyNiCamera?",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1328",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9D132D",
+    "line": "push    6; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9D132F",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9D1331",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1334",
+    "line": "add     eax, 128h",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1339",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D133A",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D133F",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D1340",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1343",
+    "line": "add     ecx, 140h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1349",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D134E",
+    "line": "mov     ecx, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1351",
+    "line": "add     ecx, 148h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1357",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D135C",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D135F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D1360",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1365",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D1366",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D1367",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D136B",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D136E",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D1371",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D1373",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1378",
+    "line": "mov     eax, offset stru_AF99C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D137D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

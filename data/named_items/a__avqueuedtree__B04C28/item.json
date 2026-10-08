@@ -2,15 +2,18 @@
   "bytes_preview_hex": "",
   "bytes_sha256": "",
   "comments": {
-    "regular": "",
+    "regular": "Cross-IDB comparison revised: both Oblivion and Fallout contain QueuedTreeBillboard RTTI. Oblivion size/layout is 0x38 bytes/context+0x30; Fallout ModelLoader queue allocates 0x40 bytes/context+0x38 and runs Finish->IOManager postprocess->CreateBillboard. Both originate from missing billboard textures; renderer integration differs.",
     "repeatable": "type descriptor name\ntype descriptor name"
   },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
   "display_name": "a_?avqueuedtree",
   "ea": "0xB04C28",
+  "evidence_confidence": "Unknown",
   "kind": "data",
   "name": "a_?avqueuedtree",
   "segment": ".data",
   "size": 26,
+  "source_annotation_confidence": "Unknown",
   "type": "",
   "xrefs_to_count": 0
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CBBB0",
-    "line": "push    esi",
+    "line": "push    esi; Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4CBBB5",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4CBBBF",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x4CBBC6",
-    "line": "push    eax",
+    "line": "push    eax; candidateList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CBBC7",
-    "line": "push    ecx",
+    "line": "push    ecx; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CBBC8",
-    "line": "call    sub_4BC4A0",
+    "line": "call    TESSubSpace_FindSmallestContainingPosition; Verified: scans SubSpace reference candidates, keeps only references whose local scaled bounds contain the query, and returns the containing reference with the smallest base-form bound radius (+0x2C). This is smallest-volume/radius selection, not nearest reference-center selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4CBBD1",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4ECEA0",
-    "line": "sub     esp, 414h",
+    "line": "sub     esp, 414h; Verified child dependency queue: formats the quad's generated color DDS and `_FN.dds` normal map, attaches both texture tasks to TerrainLODQuadLoadTask, sets the dependency flag, then continues the base queued-model path.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4ECEF4",
-    "line": "lea     edx, [esp+448h+var_310]",
+    "line": "lea     edx, [esp+448h+path]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4ECF04",
-    "line": "call    sub_47D8F0",
+    "line": "call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4ECF16",
-    "line": "call    sub_47D8F0",
+    "line": "call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4ECF24",
-    "line": "push    esi",
+    "line": "push    esi; parent",
     "mnemonic": "push",
     "size": 1
   },
@@ -271,19 +271,19 @@
   },
   {
     "ea": "0x4ECF2F",
-    "line": "push    eax",
+    "line": "push    eax; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ECF30",
-    "line": "lea     ecx, [esp+420h+var_310]",
+    "line": "lea     ecx, [esp+420h+path]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4ECF37",
-    "line": "push    ecx",
+    "line": "push    ecx; path",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4ECF3E",
-    "line": "call    sub_43B0D0",
+    "line": "call    QueuedTexture_QueueOrAttachPath; Verified neighboring subsystem: generated landscape LOD color and normal textures are each submitted through QueuedTexture_QueueOrAttachPath as child dependencies of their parent task.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4ECF49",
-    "line": "push    esi",
+    "line": "push    esi; parent",
     "mnemonic": "push",
     "size": 1
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x4ECF5A",
-    "line": "push    edx",
+    "line": "push    edx; priority",
     "mnemonic": "push",
     "size": 1
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x4ECF62",
-    "line": "push    eax",
+    "line": "push    eax; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ECF63",
-    "line": "call    sub_43B0D0",
+    "line": "call    QueuedTexture_QueueOrAttachPath; Verified shared texture dependency helper used by tree, landscape, and generated landscape-LOD paths. It queries the texture/resource cache; on a miss it creates and queues a QueuedTexture, while a hit with a parent creates an attached wrapper task so the dependency participates in parent completion. Caller priority and parent task are forwarded.",
     "mnemonic": "call",
     "size": 5
   },

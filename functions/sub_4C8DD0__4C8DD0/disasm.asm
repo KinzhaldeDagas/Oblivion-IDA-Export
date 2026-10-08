@@ -22,7 +22,7 @@
 0x4C8E04: mov     eax, [esi+30h]
 0x4C8E07: mov     edi, [eax+4]
 0x4C8E0A: push    eax
-0x4C8E0B: call    FormHeapFree
+0x4C8E0B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4C8E10: add     esp, 4
 0x4C8E13: test    edi, edi
 0x4C8E15: mov     [esi+30h], edi

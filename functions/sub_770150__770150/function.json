@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x770150",
+      "0x7701E0"
+    ]
+  ],
+  "chunks_sha256": "b8fda830fcaf43d260681f82d2ba96d5dec219401403c6a8cd3bc91af40ca05b",
+  "comment_regular": "DirectX10OBSE authority: Oblivion declaration element emitter. Uses B29858/B2983C/B298A0 type-method-usage tables and returns the D3D9 element byte size; DX10 input-layout mapping follows this emitted declaration surface.",
+  "comment_repeatable": "DirectX10OBSE authority: Oblivion declaration element emitter. Uses B29858/B2983C/B298A0 type-method-usage tables and returns the D3D9 element byte size; DX10 input-layout mapping follows this emitted declaration surface.\nComparative declaration family verified 2026-10-01: Fallout 827AFA98 AddDeclarationEntry matches the field-mapping algorithm. Oblivion uses entry PackingOffset+4, Input+8, Type+C, Method+10, Usage+14, UsageIndex+18; emits 8-byte DX9 elements through B29858/B2983C/B298A0 and returns B42708[type] for type<12h (18 decimal). These fields and the 28-byte entry/16-byte stream structures were typed from Oblivion accesses and allocation sizes. Unknown entry+0 and stream+4 remain explicitly unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_770150",
+  "display_name": "NiDX9ShaderDeclaration_AddDeclarationEntry",
   "end_ea": "0x7701E0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_770150",
+  "name": "NiDX9ShaderDeclaration_AddDeclarationEntry",
   "segment": ".text",
   "sha256": "b8fda830fcaf43d260681f82d2ba96d5dec219401403c6a8cd3bc91af40ca05b",
   "size": 144,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x770150",
-  "type": "int __thiscall(_DWORD *this, int, __int16)",
+  "total_chunk_size": 144,
+  "type": "unsigned int __thiscall(NiDX9ShaderDeclaration *self, OblivionShaderDeclarationEntry *entry, unsigned __int16 stream)",
   "xrefs_from_count": 41,
   "xrefs_to_count": 1
 }

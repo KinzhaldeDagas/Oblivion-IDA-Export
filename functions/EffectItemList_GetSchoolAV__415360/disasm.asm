@@ -2,7 +2,7 @@
 0x415361: push    0
 0x415363: push    3
 0x415365: or      esi, 0FFFFFFFFh
-0x415368: call    EffectItemList_GetStrongestItem
+0x415368: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x41536D: test    eax, eax
 0x41536F: jz      short EffectItemList_GetSchoolAV___Return_Invalid
 0x415371: mov     ecx, eax

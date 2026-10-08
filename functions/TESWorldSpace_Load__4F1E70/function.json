@@ -1,19 +1,36 @@
 {
-  "callees_count": 84,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 35,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x4F1E70",
+      "0x4F2263"
+    ],
+    [
+      "0x9B68B0",
+      "0x9B68EB"
+    ]
+  ],
+  "chunks_sha256": "ff4d49a199807be45afe4c85abcf3d244a3d2423c4bf717df4e3d93f45b7a5e5",
+  "comment_regular": "Verified local WRLD Load does not read the runtime TESRoad* field at WorldSpace+0x54; ROAD is a separate form/group relationship. The neighboring WorldSpace words +0x4C and +0x50 remain Unknown.",
+  "comment_repeatable": "Verified local WRLD Load does not read the runtime TESRoad* field at WorldSpace+0x54; ROAD is a separate form/group relationship. The neighboring WorldSpace words +0x4C and +0x50 remain Unknown.\n\nWRLD parser correction 2026-09-05: CNAM/NAM2/WNAM/SNAM each zero a fresh u32 then call0x4510E0 ->0x450C20(max4). Size0 yields0; size1..4 copies prefix; size>4 copies3 and forces byte3=0. This independently matches TESCS0x55F740/0x487FC0/0x4879D0; no WRLD-specific direct-cap4 path exists. Final pointer candidate zero clears; SNAM assigns zero. Preserve malformed bytes for raw roundtrip; namespace transformations must use effective low24 value, not serialized highbyte.\n\nPartial WRLD delta correction 2026-09-05: every serialized CNAM/NAM2/WNAM uses fresh-zero scratch then assigns candidate; zero explicitly clears inherited pointer, while omission in a partial retains it. Generated partial output must keep explicit4-byte zero for empty/exactzero/shortzero/overlong-highbyte-only removal. This guidance preserves loader effect; native full writer0x4F1100 applies its own conditional emission.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "TESWorldSpace::Load",
   "end_ea": "0x4F2263",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
   "name": "TESWorldSpace::Load",
   "segment": ".text",
   "sha256": "5c26d30bb17fed72f1de0845b945b26d786721f132098b0f3a73e9b039774a23",
   "size": 1011,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F1E70",
+  "total_chunk_size": 1070,
   "type": "void __thiscall(TESWorldSpace *this, Data *a2)",
-  "xrefs_from_count": 380,
+  "xrefs_from_count": 403,
   "xrefs_to_count": 1
 }

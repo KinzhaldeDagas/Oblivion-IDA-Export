@@ -1,26 +1,34 @@
-_DWORD *__thiscall sub_47C930(_DWORD *this, float a2, char a3)
+//
+// GPU world census audit 2026-09-27: assembly confirms local property-list head at object+9C, entry next+0 and property+8; property controller at +0C; object controller at +0C and next controller at +34. Collect both object/property chains and detect cycles under the same externally proved native read scope.
+void __thiscall NiAVObject_UpdatePropertiesAndControllers(
+        NiAVObject *this,
+        float applicationTime,
+        bool updateProperties)
 {
-  _DWORD *v4; // esi
-  _DWORD *v5; // ecx
-  _DWORD *result; // eax
-  _DWORD *i; // esi
+  NiTList_Entry_NiProperty *propertyEntry; // esi
+  NiProperty *property; // ecx
+  NiInterpController *controller; // esi
 
-  if ( a3 )
+  if ( updateProperties ) /*0x47c939*/
   {
-    v4 = (_DWORD *)*(this + 0x27);
-    while ( v4 )
+    propertyEntry = this->members.m_propertyList.start; /*0x47c93b*/
+    while ( propertyEntry ) /*0x47c943*/
     {
-      v5 = (_DWORD *)v4[2];
-      result = v4 + 2;
-      v4 = (_DWORD *)*v4;
-      if ( v5 )
+      property = propertyEntry->data; /*0x47c945*/
+      propertyEntry = propertyEntry->next; /*0x47c94d*/
+      if ( property ) /*0x47c94f*/
       {
-        if ( v5[3] )
-          result = (_DWORD *)(*(int (__stdcall **)(_DWORD))(*v5 + 0x50))(LODWORD(a2));
+        if ( property->members.m_controller ) /*0x47c951*/
+          (*((void (__stdcall **)(_DWORD))property->vtbl + 0x14))(LODWORD(applicationTime)); /*0x47c964*/
       }
     }
   }
-  for ( i = (_DWORD *)*(this + 3); i; i = (_DWORD *)i[0xD] )
-    result = (_DWORD *)(*(int (__thiscall **)(_DWORD *, _DWORD))(*i + 0x54))(i, LODWORD(a2));
-  return result;
+  for ( controller = this->members.super.m_controller; /*0x47c96f*/
+        controller;
+        controller = (NiInterpController *)controller->member.next )
+  {
+    ((void (__thiscall *)(NiInterpController *, _DWORD))controller->vtbl->super.Update)( /*0x47c980*/
+      controller,
+      LODWORD(applicationTime));                // Unconditional controller-chain Update dispatch. Traversal does not test NiTimeController.flags Active bit before calling virtual +0x54.
+  }
 }

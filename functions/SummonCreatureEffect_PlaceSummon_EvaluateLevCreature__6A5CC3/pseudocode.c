@@ -1,45 +1,49 @@
 int __userpurge SummonCreatureEffect_PlaceSummon_::EvaluateLevCreature@<eax>(
         Actor *a1@<ebp>,
         int a2@<edi>,
-        int a3@<esi>,
-        int a4,
-        int a5,
+        _DWORD *a3@<esi>,
+        double a4@<st2>,
+        double a5@<st1>,
         int a6,
         int a7,
-        TESContainer a8,
+        int a8,
         int a9,
-        int a10,
-        int a11)
+        TESContainer a10,
+        int a11,
+        int a12,
+        int a13)
 {
-  int v11; // eax
+  int v13; // eax
   void *NthForm; // eax
-  void *v13; // ebx
+  void *v15; // ebx
 
-  TESContainer_constr(&a8);
-  a11 = 0;
-  LOWORD(v11) = Actor_GetLevel(a1);
-  TESLeveledList_CalcLeveledForm((_BYTE *)(a2 + 0x24), v11, (int)&a8);
-  NthForm = (void *)TESContainer_GetNthForm(&a8, 0);
-  v13 = OblivionDynamicCast(
+  TESContainer_constr(&a10); /*0x6a5cc7*/
+  a13 = 0; /*0x6a5cd5*/
+  LOWORD(v13) = Actor_GetLevel(a1); /*0x6a5cdd*/
+  TESLeveledList_CalcLeveledForm((_BYTE *)(a2 + 0x24), v13, 1); /*0x6a5ce6*/
+  NthForm = (void *)TESContainer_GetNthForm(&a9, 0); /*0x6a5cff*/
+  v15 = OblivionDynamicCast( /*0x6a5d11*/
           NthForm,
           0,
           (struct _s_RTTICompleteObjectLocator *)&TESObject `RTTI Type Descriptor',
           (struct TypeDescriptor *)&TESBoundObject `RTTI Type Descriptor',
           0);
-  a11 = 0xFFFFFFFF;
-  TESContainer_destr(&a8);
+  a12 = 0xFFFFFFFF; /*0x6a5d13*/
+  TESContainer_destr(&a9); /*0x6a5d1b*/
   return SummonCreatureEffect_PlaceSummon_::ValidateBaseObject(
-           (int)v13,
+           (int)v15,
            a3,
+           (TESObjectREFR *)a1,
            a4,
            a5,
            a6,
            a7,
-           (int)a8.vtbl,
-           *(int *)&a8.type,
-           (int)a8.list.data,
-           (int)a8.list.next,
+           a8,
            a9,
-           a10,
-           a11);
+           *(BSStringT *)&a10.vtbl,
+           (int)a10.list.data,
+           (int)a10.list.next,
+           a11,
+           a12,
+           a13);
 }

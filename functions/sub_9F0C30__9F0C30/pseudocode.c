@@ -1,5 +1,5 @@
 int sub_9F0C30()
 {
-  GameSetting_ConstrAndReg(&dword_B385F8, (int)"sMagicDescription", (int)"Need a gamesetting description.");
-  return atexit(sub_A21310);
+  GameSetting_ConstrAndReg(&stru_B385F8, "sMagicDescription", "Need a gamesetting description."); /*0x9f0c3f*/
+  return atexit(sub_A21310); /*0x9f0c4f*/
 }

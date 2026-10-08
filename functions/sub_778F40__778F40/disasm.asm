@@ -8,5 +8,5 @@
 0x778F52: mov     edx, [esp+10h+arg_0]
 0x778F56: push    eax; NiGeometryData *
 0x778F57: push    edx; NiGeometryGroup *
-0x778F58: call    NiGeometryGroup__AddGeometryDataToGroup
+0x778F58: call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x778F5D: retn    0Ch

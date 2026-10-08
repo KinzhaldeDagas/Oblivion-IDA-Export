@@ -1,6 +1,6 @@
-0x796D10: push    esi
+0x796D10: push    esi; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<vector<unsigned short*>>. The 4-byte inner element type selects the shared inner-vector copy machinery.
 0x796D11: push    edi
-0x796D12: mov     edi, [esp+8+arg_0]
+0x796D12: mov     edi, [esp+8+source]
 0x796D16: mov     esi, ecx
 0x796D18: cmp     esi, edi
 0x796D1A: jz      loc_796E4F
@@ -14,7 +14,7 @@
 0x796D2E: sub     ebx, edx
 0x796D30: sar     ebx, 4
 0x796D33: jnz     short loc_796D43
-0x796D35: call    sub_796890
+0x796D35: call    OB_stVector_stVectorUShortPtr_Clear_010201A0; OBLIVION AUTHORITY (2026-08-30): clear() for vector<vector<unsigned short*>>, implemented as checked erase(begin,end) while retaining outer capacity.
 0x796D3A: pop     ebp
 0x796D3B: pop     ebx
 0x796D3C: pop     edi
@@ -31,17 +31,17 @@
 0x796D53: sar     eax, 4
 0x796D56: cmp     ebx, eax
 0x796D58: ja      short loc_796DAA
-0x796D5A: push    ecx
-0x796D5B: push    ebp
-0x796D5C: push    edx
-0x796D5D: call    sub_795CE0
-0x796D62: mov     ecx, [esp+1Ch+arg_0]
+0x796D5A: push    ecx; destination
+0x796D5B: push    ebp; last
+0x796D5C: push    edx; first
+0x796D5D: call    OB_stVector_stVectorUShortPtr_CopyAssignRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copy-assigns a range of vector<unsigned short*> owners using the structurally shared 4-byte-element vector assignment.
+0x796D62: mov     ecx, [esp+1Ch+source]
 0x796D66: mov     edx, [esi+8]
 0x796D69: push    ecx
 0x796D6A: push    esi
-0x796D6B: push    edx
-0x796D6C: push    eax
-0x796D6D: call    sub_794FC0
+0x796D6B: push    edx; last
+0x796D6C: push    eax; first
+0x796D6D: call    OB_stVector4_DestroyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.
 0x796D72: mov     eax, [edi+4]
 0x796D75: add     esp, 1Ch
 0x796D78: test    eax, eax
@@ -86,19 +86,19 @@
 0x796DCB: sar     eax, 4
 0x796DCE: shl     eax, 4
 0x796DD1: add     eax, edx
-0x796DD3: push    ecx
+0x796DD3: push    ecx; destination
 0x796DD4: mov     ebx, eax
-0x796DD6: push    ebx
-0x796DD7: push    edx
-0x796DD8: call    sub_795CE0
+0x796DD6: push    ebx; last
+0x796DD7: push    edx; first
+0x796DD8: call    OB_stVector_stVectorUShortPtr_CopyAssignRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copy-assigns a range of vector<unsigned short*> owners using the structurally shared 4-byte-element vector assignment.
 0x796DDD: mov     eax, [esi+8]
 0x796DE0: mov     ecx, [edi+8]
 0x796DE3: add     esp, 0Ch
-0x796DE6: push    eax
-0x796DE7: push    ecx
-0x796DE8: push    ebx
+0x796DE6: push    eax; destination
+0x796DE7: push    ecx; last
+0x796DE8: push    ebx; first
 0x796DE9: mov     ecx, esi
-0x796DEB: call    sub_796820
+0x796DEB: call    OB_stVector_stVectorUShortPtr_UninitializedCopyRangeThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): Stdcall adapter for uninitialized copying of vector<unsigned short*> owners. Boundary repaired through ret 0x0C at 0x796846 and noreturn cleared.
 0x796DF0: pop     ebp
 0x796DF1: pop     ebx
 0x796DF2: mov     [esi+8], eax
@@ -109,13 +109,13 @@
 0x796DFC: test    ecx, ecx
 0x796DFE: jz      short loc_796E18
 0x796E00: mov     edx, [esi+8]
-0x796E03: push    edx
-0x796E04: push    ecx
+0x796E03: push    edx; last
+0x796E04: push    ecx; first
 0x796E05: mov     ecx, esi
-0x796E07: call    sub_795820
+0x796E07: call    OB_stVector4_DestroyRangeThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): stdcall adapter for the compiler-folded 0x10-byte vector-owner destruction range.
 0x796E0C: mov     eax, [esi+4]
 0x796E0F: push    eax
-0x796E10: call    FormHeapFree
+0x796E10: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x796E15: add     esp, 4
 0x796E18: mov     ecx, [edi+4]
 0x796E1B: test    ecx, ecx
@@ -125,19 +125,19 @@
 0x796E23: mov     eax, [edi+8]
 0x796E26: sub     eax, ecx
 0x796E28: sar     eax, 4
-0x796E2B: push    eax; char *
-0x796E2C: mov     ecx, esi
-0x796E2E: call    sub_795050
+0x796E2B: push    eax; count
+0x796E2C: mov     ecx, esi; this
+0x796E2E: call    OB_stVector16_Buy_010201A0; OBLIVION AUTHORITY (2026-08-30): Initializes raw storage for a vector whose elements are 0x10-byte vector owners. Enforces max_size 0x0FFFFFFF and allocates count*0x10.
 0x796E33: test    al, al
 0x796E35: jz      short loc_796E4D
 0x796E37: mov     ecx, [esi+4]
 0x796E3A: mov     edx, [edi+8]
 0x796E3D: mov     eax, [edi+4]
-0x796E40: push    ecx
-0x796E41: push    edx
-0x796E42: push    eax
+0x796E40: push    ecx; destination
+0x796E41: push    edx; last
+0x796E42: push    eax; first
 0x796E43: mov     ecx, esi
-0x796E45: call    sub_796820
+0x796E45: call    OB_stVector_stVectorUShortPtr_UninitializedCopyRangeThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): Stdcall adapter for uninitialized copying of vector<unsigned short*> owners. Boundary repaired through ret 0x0C at 0x796846 and noreturn cleared.
 0x796E4A: mov     [esi+8], eax
 0x796E4D: pop     ebp
 0x796E4E: pop     ebx

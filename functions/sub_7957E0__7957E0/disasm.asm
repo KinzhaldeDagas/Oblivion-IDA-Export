@@ -1,4 +1,4 @@
-0x7957E0: push    ecx
+0x7957E0: push    ecx; OBLIVION AUTHORITY (2026-08-30): Full destructor for an outer vector of 0x10-byte vector owners. Destroys every inner owner, frees outer storage, and clears the triplet; structurally shared by multiple specializations.
 0x7957E1: push    esi
 0x7957E2: mov     esi, ecx
 0x7957E4: mov     eax, [esi+4]
@@ -8,12 +8,12 @@
 0x7957EF: mov     edx, [esi+8]
 0x7957F2: push    ecx
 0x7957F3: push    esi
-0x7957F4: push    edx
-0x7957F5: push    eax
-0x7957F6: call    sub_794FC0
+0x7957F4: push    edx; last
+0x7957F5: push    eax; first
+0x7957F6: call    OB_stVector4_DestroyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.
 0x7957FB: mov     eax, [esi+4]
 0x7957FE: push    eax
-0x7957FF: call    FormHeapFree
+0x7957FF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x795804: add     esp, 14h
 0x795807: mov     dword ptr [esi+4], 0
 0x79580E: mov     dword ptr [esi+8], 0

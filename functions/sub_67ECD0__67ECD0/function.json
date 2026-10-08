@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x67ECD0",
+      "0x67ECE5"
+    ]
+  ],
+  "chunks_sha256": "0ae58ddf6fb36bbaa2971f478167a929c6c05b1644be079e8c8371a3dfe49705",
+  "comment_regular": "Verified sets/clears stateFlags bit 0x01, the graph-search discovered/open-list marker.",
+  "comment_repeatable": "Verified sets/clears stateFlags bit 0x01, the graph-search discovered/open-list marker.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67ECD0",
+  "display_name": "GraphNode_SetFlag01",
   "end_ea": "0x67ECE5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67ECD0",
+  "name": "GraphNode_SetFlag01",
   "segment": ".text",
   "sha256": "0ae58ddf6fb36bbaa2971f478167a929c6c05b1644be079e8c8371a3dfe49705",
   "size": 21,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67ECD0",
-  "type": "void __thiscall(_BYTE *this, char)",
+  "total_chunk_size": 21,
+  "type": "void __thiscall(void *this, bool value)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 4
 }

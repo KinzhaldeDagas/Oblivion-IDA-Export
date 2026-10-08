@@ -1,4 +1,5 @@
-bool __thiscall sub_67ED70(_BYTE *this)
+// Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.
+bool __thiscall PathGraphNode_IsLinkedPointsDisabled(void *this)
 {
-  return (*(this + 0x10) & 0x20) != 0;
+  return (*((_BYTE *)this + 0x10) & 0x20) != 0; /*0x67ed79*/
 }

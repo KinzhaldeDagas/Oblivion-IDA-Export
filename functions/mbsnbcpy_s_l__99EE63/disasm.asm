@@ -9,13 +9,13 @@
 0x99EE73: jnz     short loc_99EE85
 0x99EE75: cmp     esi, ebx
 0x99EE77: jnz     short loc_99EE89
-0x99EE79: cmp     [ebp+SizeInBytes], ebx
+0x99EE79: cmp     dword ptr [ebp+SizeInBytes], ebx
 0x99EE7C: jnz     short loc_99EE8E
 0x99EE7E: xor     eax, eax
 0x99EE80: jmp     loc_99F06C
 0x99EE85: cmp     esi, ebx
 0x99EE87: jz      short loc_99EE8E
-0x99EE89: cmp     [ebp+SizeInBytes], ebx
+0x99EE89: cmp     dword ptr [ebp+SizeInBytes], ebx
 0x99EE8C: ja      short loc_99EEAC
 0x99EE8E: call    __errno
 0x99EE93: push    16h
@@ -35,7 +35,7 @@
 0x99EEB1: mov     [esi], bl
 0x99EEB3: jmp     short loc_99EE7E
 0x99EEB5: push    edi; MaxCount
-0x99EEB6: mov     edi, [ebp+Src]
+0x99EEB6: mov     edi, dword ptr [ebp+SizeInBytes+4]
 0x99EEB9: cmp     edi, ebx
 0x99EEBB: jnz     short loc_99EEDB
 0x99EEBD: mov     [esi], bl
@@ -59,13 +59,13 @@
 0x99EEEC: jnz     short loc_99EF03
 0x99EEEE: push    [ebp+MaxCount]; Src
 0x99EEF1: push    edi; Src
-0x99EEF2: push    [ebp+SizeInBytes]; SizeInBytes
+0x99EEF2: push    dword ptr [ebp+SizeInBytes]; SizeInBytes
 0x99EEF5: push    esi; Dst
 0x99EEF6: call    _strncpy_s
 0x99EEFB: add     esp, 10h
 0x99EEFE: jmp     loc_99F04F
 0x99EF03: cmp     [ebp+MaxCount], 0FFFFFFFFh
-0x99EF07: mov     edx, [ebp+SizeInBytes]
+0x99EF07: mov     edx, dword ptr [ebp+SizeInBytes]
 0x99EF0A: mov     eax, esi
 0x99EF0C: jnz     short loc_99EF1D
 0x99EF0E: mov     cl, [edi]
@@ -120,7 +120,7 @@
 0x99EF78: jnz     loc_99F041
 0x99EF7E: cmp     [ebp+MaxCount], 0FFFFFFFFh
 0x99EF82: jnz     short loc_99EFDE
-0x99EF84: mov     eax, [ebp+SizeInBytes]
+0x99EF84: mov     eax, dword ptr [ebp+SizeInBytes]
 0x99EF87: cmp     eax, 1
 0x99EF8A: jbe     short loc_99EFC6
 0x99EF8C: lea     edi, [esi+eax-2]
@@ -140,7 +140,7 @@
 0x99EFAD: dec     [ebp+MaxCount]
 0x99EFB0: cmp     [ebp+MaxCount], esi
 0x99EFB3: jnb     short loc_99EF97
-0x99EFB5: mov     eax, [ebp+SizeInBytes]
+0x99EFB5: mov     eax, dword ptr [ebp+SizeInBytes]
 0x99EFB8: mov     ecx, edi
 0x99EFBA: sub     ecx, [ebp+MaxCount]
 0x99EFBD: test    cl, 1

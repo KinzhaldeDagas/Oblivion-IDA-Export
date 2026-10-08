@@ -18,7 +18,7 @@
 0x6E4C57: mov     ecx, 8
 0x6E4C5C: rep movsd
 0x6E4C5E: mov     ecx, eax
-0x6E4C60: call    sub_6CBC10
+0x6E4C60: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6E4C65: pop     edi
 0x6E4C66: test    al, al
 0x6E4C68: pop     esi
@@ -111,7 +111,7 @@
 0x6E4D73: mov     ecx, 8
 0x6E4D78: rep movsd
 0x6E4D7A: mov     ecx, eax
-0x6E4D7C: call    sub_6CBC10
+0x6E4D7C: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6E4D81: test    al, al
 0x6E4D83: jz      short loc_6E4D90
 0x6E4D85: pop     edi

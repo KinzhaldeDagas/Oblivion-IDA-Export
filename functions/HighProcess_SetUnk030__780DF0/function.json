@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x780DF0",
+      "0x780DFA"
+    ]
+  ],
+  "chunks_sha256": "396b31693515cb75cdf9173465c8199f0fd5acb695d04b0d980f5707d6686b6f",
+  "comment_regular": "\n[2026-10-03 corrected identity] This is the NiD3DVertexShader GPU-handle setter, virtual+44, not HighProcess::SetUnk030. Verified native CreateVertexShader8014E0 passes its D3D9 result here; handle stored+30.\n\nMoonSugarEffect decode: NiD3DVertexShader D3D handle setter. Stores wrapper +0x30 after native CreateVertexShader succeeds.",
+  "comment_repeatable": "MoonSugarEffect decode: NiD3DVertexShader D3D handle setter. Stores wrapper +0x30 after native CreateVertexShader succeeds.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "HighProcess::SetUnk030",
+  "display_name": "NiD3DVertexShader_SetD3DHandle",
   "end_ea": "0x780DFA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "HighProcess::SetUnk030",
+  "name": "NiD3DVertexShader_SetD3DHandle",
   "segment": ".text",
   "sha256": "396b31693515cb75cdf9173465c8199f0fd5acb695d04b0d980f5707d6686b6f",
   "size": 10,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x780DF0",
-  "type": "TESObjectREFR *__thiscall(HighProcess *this, TESObjectREFR *)",
+  "total_chunk_size": 10,
+  "type": "void *__thiscall(void *this, void *shaderHandle)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 6
 }

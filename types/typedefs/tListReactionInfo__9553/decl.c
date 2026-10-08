@@ -1,1 +1,4 @@
-tListReactionInfo
+struct tListReactionInfo
+{
+NodeReactionInfo node;
+};

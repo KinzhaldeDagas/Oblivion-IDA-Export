@@ -16,7 +16,7 @@
 0x5E21F6: push    esi
 0x5E21F7: call    BSSimpleList_Remove
 0x5E21FC: push    esi
-0x5E21FD: call    FormHeapFree
+0x5E21FD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E2202: add     esp, 4
 0x5E2205: pop     esi
 0x5E2206: retn    4

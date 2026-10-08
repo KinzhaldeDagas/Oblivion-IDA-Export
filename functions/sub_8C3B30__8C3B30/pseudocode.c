@@ -10,23 +10,23 @@ unsigned int __thiscall sub_8C3B30(_DWORD *this, unsigned __int16 *a2)
   char *v11; // [esp+Ch] [ebp-28h] BYREF
   char v12[32]; // [esp+10h] [ebp-24h] BYREF
 
-  sub_8B04D0(this, a2);
-  v3 = TESOutput_PrintString(*(char **)dword_BA80F8);
-  v4 = a2[5];
-  v5 = a2[4];
-  v11 = v3;
-  if ( v4 >= v5 )
-    NiTArray_SetSize(a2, v4 + a2[7]);
-  NiTArray_SetAt((NiTArray_NiTexturingPropertyMap *)a2, v4, &v11);
-  if ( this && (v6 = *(this + 2)) != 0 )
-    v7 = *(_DWORD *)(v6 + 0x10);
+  sub_8B04D0(this, a2); /*0x8c3b48*/
+  v3 = TESOutput_PrintString((char *)stru_BA80F8.name); /*0x8c3b53*/
+  v4 = a2[5]; /*0x8c3b58*/
+  v5 = a2[4]; /*0x8c3b5c*/
+  v11 = v3; /*0x8c3b65*/
+  if ( v4 >= v5 ) /*0x8c3b69*/
+    NiTArray_SetSize(a2, v4 + a2[7]); /*0x8c3b74*/
+  NiTArray_SetAt((NiTArray_NiTexturingPropertyMap *)a2, v4, &v11); /*0x8c3b81*/
+  if ( this && (v6 = *(this + 2)) != 0 ) /*0x8c3b8f*/
+    v7 = *(_DWORD *)(v6 + 0x10); /*0x8c3b91*/
   else
-    v7 = 0;
-  _sprintf(v12, "0x%8X", v7);
-  v8 = TESOutput_PrintLabeledString("MoppCode", v12);
-  v9 = a2[5];
-  v11 = v8;
-  if ( v9 >= a2[4] )
-    NiTArray_SetSize(a2, v9 + a2[7]);
-  return NiTArray_SetAt((NiTArray_NiTexturingPropertyMap *)a2, v9, &v11);
+    v7 = 0; /*0x8c3b96*/
+  _sprintf(v12, "0x%8X", v7); /*0x8c3ba3*/
+  v8 = TESOutput_PrintLabeledString("MoppCode", v12); /*0x8c3bb2*/
+  v9 = a2[5]; /*0x8c3bb7*/
+  v11 = v8; /*0x8c3bbb*/
+  if ( v9 >= a2[4] ) /*0x8c3bc8*/
+    NiTArray_SetSize(a2, v9 + a2[7]); /*0x8c3bd3*/
+  return NiTArray_SetAt((NiTArray_NiTexturingPropertyMap *)a2, v9, &v11); /*0x8c3be5*/
 }

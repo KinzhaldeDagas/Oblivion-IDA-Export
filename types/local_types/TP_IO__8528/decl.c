@@ -1,1 +1,1 @@
-_TP_IO
+struct _TP_IO;

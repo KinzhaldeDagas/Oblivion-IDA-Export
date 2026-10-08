@@ -1,19 +1,36 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_55ED30",
+  "chunks": [
+    [
+      "0x55ED30",
+      "0x55EF03"
+    ],
+    [
+      "0x9BCC10",
+      "0x9BCC4F"
+    ]
+  ],
+  "chunks_sha256": "18622e74987b52ffbe7c923465f0eab33ec1ee397a784e5a0e846d18dd1a3cbe",
+  "comment_regular": "Verified one-slot base model cache. For each TESObjectTREE, compares requested seed against BSTreeModel.seed at +0x48; same seed returns the cached model, different seed replaces the only slot. Cache operation is protected by g_BSTreeManager_TreeCriticalSection.",
+  "comment_repeatable": "Verified one-slot base model cache. For each TESObjectTREE, compares requested seed against BSTreeModel.seed at +0x48; same seed returns the cached model, different seed replaces the only slot. Cache operation is protected by g_BSTreeManager_TreeCriticalSection.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "BSTreeManager_GetModel",
   "end_ea": "0x55EF03",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55ED30",
+  "name": "BSTreeManager_GetModel",
   "segment": ".text",
   "sha256": "4d3fdfbc131e8f63751518cc3c5daa09a49b2aec31189e6c85d74dae00a54e46",
   "size": 467,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55ED30",
-  "type": "BSTreeModel **__thiscall(NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> **this, BSTreeModel **, int, int)",
-  "xrefs_from_count": 200,
+  "total_chunk_size": 530,
+  "type": "BSTreeModel_OblivionLayout_058 **__thiscall(BSTreeManager_OblivionVerifiedLayout *this, BSTreeModel_OblivionLayout_058 **outModel, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree, unsigned int seed)",
+  "xrefs_from_count": 221,
   "xrefs_to_count": 1
 }

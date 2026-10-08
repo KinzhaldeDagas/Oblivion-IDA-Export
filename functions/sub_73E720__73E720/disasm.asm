@@ -1,4 +1,4 @@
-0x73E720: sub     esp, 14h
+0x73E720: sub     esp, 14h; Pass330 decode: NiScreenLODData camera selector. It computes distance and projected screen scale from the supplied camera/frustum and Camera::LODAdjust, then selects an authored screen-size threshold.
 0x73E723: push    esi
 0x73E724: mov     esi, ecx
 0x73E726: fld     dword ptr [esi+18h]
@@ -74,7 +74,7 @@
 0x73E817: test    edx, edx
 0x73E819: fmul    [esp+1Ch+var_14]
 0x73E81D: fmul    dword ptr [edi+120h]
-0x73E823: fstp    [esp+1Ch+arg_0]
+0x73E823: fstp    [esp+1Ch+arg_0]; Pass332 decode: NiScreenLODData selection depends on supplied camera frustum, distance, and LODAdjust; the per-light shadow camera can therefore differ from the main-view silhouette.
 0x73E827: jbe     short loc_73E847
 0x73E829: mov     esi, [esi+2Ch]
 0x73E82C: fld     [esp+1Ch+arg_0]

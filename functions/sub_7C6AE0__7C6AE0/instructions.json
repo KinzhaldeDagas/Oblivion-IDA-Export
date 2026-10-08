@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6AE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Find or create a native full-list ShadowSceneLight for a backing NiLight. The third argument is the proved trackBackingPosition boolean, not a ShadowSceneLight pointer or admission selector.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x7C6B0B",
-    "line": "mov     edi, [esp+24h+arg_0]",
+    "line": "mov     edi, [esp+24h+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6B0F",
-    "line": "push    edi",
+    "line": "push    edi; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C6B10",
-    "line": "call    sub_7C6230",
+    "line": "call    ShadowSceneNode_FindFullLightBySource; MEF PERF 2026-10-02: PERF-9: repeated FindOrCreate admissions rescan all prior full-list sources. Always retain final receiver reconcile7C6C0C, existing-entry +104 update, and creation/refcount side effects. An index cannot turn successful FindOrCreate calls into an early return.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x7C6B1B",
-    "line": "mov     al, byte ptr [esp+24h+arg_4]",
+    "line": "mov     al, [esp+24h+trackBackingPosition]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6B1F",
-    "line": "mov     [esi+104h], al",
+    "line": "mov     [esi+104h], al; Update trackBackingPosition on an existing full-list entry.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7C6B37",
-    "line": "mov     [esp+24h+arg_0], eax",
+    "line": "mov     [esp+24h+backingLight], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x7C6B49",
-    "line": "call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight::ShadowSceneLight(void)",
+    "line": "call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight constructor. Initializes projection/transition/status fields, object/receiver list ownership, map/camera state, and source pointers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C6B4E",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Constructor callsite for an ordinary source-light full-list entry; immediate setup writes +0x104, +0x100, list ownership, and optionally +0x114 only.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x7C6B54",
-    "line": "mov     cl, byte ptr [esp+24h+arg_4]",
+    "line": "mov     cl, [esp+24h+trackBackingPosition]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6B58",
-    "line": "mov     [esi+104h], cl",
+    "line": "mov     [esi+104h], cl; Store trackBackingPosition before binding a newly constructed entry's backing light.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x7C6B61",
-    "line": "push    edi",
+    "line": "push    edi; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C6B62",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7C6B68",
-    "line": "call    sub_7D3400",
+    "line": "call    ShadowSceneLight_SetBackingLight; SetBackingLight seeds cached source position immediately when trackBackingPosition is true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7C6B71",
-    "line": "mov     [esp+28h+arg_4], esi",
+    "line": "mov     dword ptr [esp+28h+trackBackingPosition], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7C6B7B",
-    "line": "lea     edx, [esp+24h+arg_4]",
+    "line": "lea     edx, [esp+24h+trackBackingPosition]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7C6B8E",
-    "line": "call    sub_7C16B0",
+    "line": "call    NiTRefPointerList__AddTail; MEF LARGE PERF 2026-09-08: PERF-6 population route: ordinary full-light admission finds by backing source; on miss constructs ShadowSceneLight and adds to full list. This examined body has no list-count budget check. Callers include LIGH reference configuration, attached lights, light effects and scene point-light traversal; this is distinct from the20-actor candidate list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7C6BCC",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x7C6BD5",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C6BDA",
-    "line": "mov     ecx, ds:0B42F50h",
+    "line": "mov     ecx, ds:0B42F50h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7C6BE8",
-    "line": "call    sub_7C1360",
+    "line": "call    BSTextureManager__GetOrCreateShadowDepthStencil; Oblivion shadow depth-stencil allocator. Ensures a square depth-stencil at least ShadowSurfaceRes, deriving compatible renderer surface data from the shadow target format before creation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x7C6BFA",
-    "line": "call    BSTextureManager_FetchShadowMap",
+    "line": "call    BSTextureManager__BorrowFrustumShadowTexture; Oblivion frustum-shadow pool borrow. Removes the head BSRenderedTexture from the unused shadowMaps list and appends the same refcounted object to the used pool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,37 +529,37 @@
   },
   {
     "ea": "0x7C6C01",
-    "line": "push    ebx",
+    "line": "push    ebx; shadowMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C6C02",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C6C04",
-    "line": "call    sub_499310",
+    "line": "call    ShadowSceneLight_SetShadowMap; Strong-own the supplied frame-local shadow map at ShadowSceneLight+0x114, releasing any previous map reference.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C6C09",
-    "line": "push    esi",
+    "line": "push    esi; light",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C6C0A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C6C0C",
-    "line": "call    sub_7C5F60",
+    "line": "call    ShadowSceneNode_ReconcileSourceLightReceivers; Every find/create call concludes by reconciling the source light's receiver associations; this is full-light lifecycle, not direct caster admission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -622,5 +622,89 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CE700",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE703",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE704",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE709",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE70A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CE70B",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE70E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE713",
+    "line": "mov     edx, dword ptr [esp+trackBackingPosition]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE717",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE71A",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE71D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE71F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE724",
+    "line": "mov     eax, offset stru_AF76A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE729",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

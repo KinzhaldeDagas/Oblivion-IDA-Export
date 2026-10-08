@@ -8,7 +8,7 @@
 0x5FF3DE: call    edx
 0x5FF3E0: mov     ecx, edi; this
 0x5FF3E2: push    eax
-0x5FF3E3: call    Actor_GetFatigueFraction
+0x5FF3E3: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x5FF3E8: mov     eax, [edi]
 0x5FF3EA: mov     edx, [eax+284h]
 0x5FF3F0: push    ecx
@@ -45,13 +45,13 @@
 0x5FF448: mov     ecx, edi
 0x5FF44A: call    edx
 0x5FF44C: push    eax
-0x5FF44D: call    Calc_PowerAttackBonus
+0x5FF44D: call    Calc_PowerAttackBonus; Sidecar decode: Calc_PowerAttackBonus derives mastery from skill and gates standing/sidestep/backward/forward AttackPower groups. BladeSkillsRestored substitutes only skill level after consuming the exact 0x5FF4A2 -> 0x5FF4E6 per-thread token; unmatched or overflowed contexts use native skill.
 0x5FF452: add     esp, 8
 0x5FF455: jmp     short loc_5FF459
 0x5FF457: fld1
 0x5FF459: fstp    [esp+arg_30]; int
 0x5FF45D: mov     ecx, edi
-0x5FF45F: call    Actor_IsSneaking
+0x5FF45F: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5FF464: test    al, al
 0x5FF466: jnz     Actor_AttackHandling___ApplySneakAttackBonus
 0x5FF46C: fld     [esp+arg_30]

@@ -1,4 +1,4 @@
-0x77B210: xor     eax, eax
+0x77B210: xor     eax, eax; DX10OBSE target: ClearTextureList zeroes 16 NiDX9RenderState texture-cache slots at +0xFA0..+0xFDC without D3D9 SetTexture calls; plugin mirrors this cache invalidation into DX10 SRV bindings.
 0x77B212: mov     [ecx+0FA0h], eax
 0x77B218: mov     [ecx+0FA4h], eax
 0x77B21E: mov     [ecx+0FA8h], eax

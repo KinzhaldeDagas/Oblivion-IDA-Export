@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x626783",
-    "line": "call    ??1DialoguePackage@@UAE@XZ; DialoguePackage::~DialoguePackage(void)",
+    "line": "call    DialoguePackage__Destructor; DialoguePackage destructor/cancellation path. Clears PlayerCharacter.dialoguePackage when owned, destroys/frees the generated Conversation, and never calls DialogueItem::RunResult. Deferred INFO results are lost on interruption; ImmediateResult side effects already occurred during construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x626790",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

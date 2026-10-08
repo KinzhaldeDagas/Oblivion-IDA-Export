@@ -1,4 +1,4 @@
-0x793CF0: sub     esp, 9Ch
+0x793CF0: sub     esp, 9Ch; Oblivion-local CLightingEngine constructor. Establishes the 0xB0 layout: branch/leaf/frond lighting methods, three 13-float OpenGL-style materials, leaf adjustment scalar, and static-lighting style.
 0x793CF6: fld     dword ptr ds:0A3D65Ch
 0x793CFC: mov     eax, ecx
 0x793CFE: fst     dword ptr [eax+70h]

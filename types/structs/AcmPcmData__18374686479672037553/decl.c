@@ -1,1 +1,1 @@
-AcmPcmData
+typedef tagAcmPcmData AcmPcmData;

@@ -2,7 +2,7 @@
 0x941B03: push    ebx
 0x941B04: push    esi
 0x941B05: push    edi
-0x941B06: mov     edi, dword ptr [esp+18h+Args]
+0x941B06: mov     edi, [esp+18h+Args]
 0x941B0A: mov     esi, ecx
 0x941B0C: push    edi
 0x941B0D: lea     ecx, [esp+1Ch+var_C]

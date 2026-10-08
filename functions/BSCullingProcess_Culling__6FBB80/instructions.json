@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6FBB80",
-    "line": "cmp     byte ptr [ecx+90h], 0",
+    "line": "cmp     byte ptr [ecx+90h], 0; MoonSugarEffect decode: BSCullingProcess ProcessCull override. If +0x90/unk90 is nonzero, uses normal frustum culling; if zero, bypasses cull tests and calls object OnVisible directly.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x6FBB89",
-    "line": "jmp     NiCullingProcess_Culling?",
+    "line": "jmp     NiCullingProcess_CullBoundAndDispatch; Oblivion NiCullingProcess process-cull entry for native scene traversal.",
     "mnemonic": "jmp",
     "size": 5
   },

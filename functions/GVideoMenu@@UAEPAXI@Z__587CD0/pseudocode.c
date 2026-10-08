@@ -5,8 +5,8 @@ VideoMenu *__userpurge VideoMenu::`scalar deleting destructor'@<eax>(
         double a4@<st0>,
         char a5)
 {
-  VideoMenu::~VideoMenu(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  VideoMenu::~VideoMenu(this, a2, a3, a4); /*0x587cd3*/
+  if ( (a5 & 1) != 0 ) /*0x587cdd*/
+    FormHeapFree((unsigned int)this); /*0x587ce0*/
+  return this; /*0x587cea*/
 }

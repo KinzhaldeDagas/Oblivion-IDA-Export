@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D7D10",
+      "0x4D7D75"
+    ]
+  ],
+  "chunks_sha256": "e8d6ba5bd8a0f3aa5655800c9f11c62ca57a34200df79143c3b275f104ac5b87",
+  "comment_regular": "Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
+  "comment_repeatable": "Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D7D10",
+  "display_name": "MobileObject_SetNiNode",
   "end_ea": "0x4D7D75",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D7D10",
+  "name": "MobileObject_SetNiNode",
   "segment": ".text",
   "sha256": "e8d6ba5bd8a0f3aa5655800c9f11c62ca57a34200df79143c3b275f104ac5b87",
   "size": 101,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D7D10",
-  "type": "void __thiscall(MobileObject *this, volatile LONG *a2)",
+  "total_chunk_size": 101,
+  "type": "void __thiscall(MobileObject *this, NiAVObject *node)",
   "xrefs_from_count": 47,
   "xrefs_to_count": 11
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A6FD0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion Random::Next. Rejects an uninitialized seed, selects Buffer[int(Raw()*128)], replaces that entry with another Raw() result, and returns the prior buffered sample.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A7003",
-    "line": "push    27h ; '''; MaxCount",
+    "line": "push    27h ; '''; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x7A700A",
-    "line": "lea     ecx, [esp+64h+var_50]",
+    "line": "lea     ecx, [esp+64h+var_50]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A700E",
-    "line": "mov     [esp+64h+var_38], 0Fh",
+    "line": "mov     [esp+64h+var_50.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A7016",
-    "line": "mov     [esp+64h+var_3C], 0",
+    "line": "mov     [esp+64h+var_50.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A701E",
-    "line": "mov     [esp+64h+var_4C], 0",
+    "line": "mov     byte ptr [esp+64h+var_50.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A7023",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7A704D",
-    "line": "call    sub_7A6CD0",
+    "line": "call    OB_Random_Raw_010201A0; Oblivion Random::Raw Park-Miller step. Advances the shared integer seed with multiplier 16807 modulo 2147483647 and returns seed * 4.656612875e-10 as float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7A7058",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7A706A",
-    "line": "call    sub_7A6CD0",
+    "line": "call    OB_Random_Raw_010201A0; Oblivion Random::Raw Park-Miller step. Advances the shared integer seed with multiplier 16807 modulo 2147483647 and returns seed * 4.656612875e-10 as float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -280,5 +280,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AB190",
+    "line": "lea     ecx, [ebp-50h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB193",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB198",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AB19C",
+    "line": "lea     eax, [edx-4Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB19F",
+    "line": "mov     ecx, [edx-50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AB1A2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AB1A4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB1A9",
+    "line": "mov     eax, offset stru_AD80C8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AB1AE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

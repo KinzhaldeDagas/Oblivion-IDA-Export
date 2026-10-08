@@ -1,1 +1,1 @@
-IInternetSecurityManager_0
+typedef IInternetSecurityManager IInternetSecurityManager_0;

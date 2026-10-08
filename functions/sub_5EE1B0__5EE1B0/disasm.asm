@@ -13,12 +13,12 @@
 0x5EE1D6: test    edi, edi
 0x5EE1D8: jz      short loc_5EE208
 0x5EE1DA: mov     ecx, edi; this
-0x5EE1DC: call    ExtraDataList__GetRefractionProperty
+0x5EE1DC: call    ExtraDataList_GetRefractionPropertyExtra; Returns ExtraRefractionProperty itself. Fallout only corroborates the class label; Oblivion type behavior is authoritative.
 0x5EE1E1: test    eax, eax
 0x5EE1E3: jz      short loc_5EE208
 0x5EE1E5: mov     ebx, [esi]
 0x5EE1E7: mov     ecx, edi; this
-0x5EE1E9: call    ExtraDataList__GetRefractionProperty
+0x5EE1E9: call    ExtraDataList_GetRefractionPropertyExtra; Returns ExtraRefractionProperty itself. Fallout only corroborates the class label; Oblivion type behavior is authoritative.
 0x5EE1EE: fld     dword ptr [eax+0Ch]
 0x5EE1F1: mov     eax, [ebx+270h]
 0x5EE1F7: push    ecx

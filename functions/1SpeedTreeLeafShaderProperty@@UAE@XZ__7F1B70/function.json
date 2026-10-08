@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
+  "chunks": [
+    [
+      "0x7F1B70",
+      "0x7F1C23"
+    ],
+    [
+      "0x9CFE00",
+      "0x9CFE31"
+    ]
+  ],
+  "chunks_sha256": "7888f7702f63eab769a3e9125494e7a5224a4061c67fc0a152b421104133c840",
+  "comment_regular": "\n\n[2026-10-03 lifetime distinction] Leaf-property destructor releases STLSP then lighting-property base resources; it does not destroy owner geometry. Frond plugin now preserves geometry metadata across property retirement and supports rebinding without resurrecting destroyed shape records.\n\nSpeedTreeLeafShaderProperty dtor: releases STLSPData +0xA8 then SpeedTreeShaderLightingProperty base.",
+  "comment_repeatable": "SpeedTreeLeafShaderProperty dtor: releases STLSPData +0xA8 then SpeedTreeShaderLightingProperty base.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "SpeedTreeLeafShaderProperty::~SpeedTreeLeafShaderProperty(void)",
   "end_ea": "0x7F1C23",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "??1SpeedTreeLeafShaderProperty@@UAE@XZ",
   "segment": ".text",
   "sha256": "cece93492447fc2b8ab39936357a5b8e16271541d015ebd5e46a1cd1837c019c",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1B70",
+  "total_chunk_size": 228,
   "type": "void __thiscall(SpeedTreeLeafShaderProperty *__hidden this)",
-  "xrefs_from_count": 71,
+  "xrefs_from_count": 85,
   "xrefs_to_count": 1
 }

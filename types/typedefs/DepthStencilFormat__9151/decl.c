@@ -1,1 +1,11 @@
-DepthStencilFormat
+enum DepthStencilFormat : __int32
+{
+DSFMT_UNKNOWN = 0x0,
+DSFMT_D16_LOCKABLE = 0x46,
+DSFMT_D32 = 0x47,
+DSFMT_D15S1 = 0x49,
+DSFMT_D24S8 = 0x4B,
+DSFMT_D24X8 = 0x4D,
+DSFMT_D24X4S4 = 0x4F,
+DSFMT_D16 = 0x50,
+};

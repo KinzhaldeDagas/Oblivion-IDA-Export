@@ -30,7 +30,7 @@
 0x508E70: push    eax; a2
 0x508E71: push    ecx; a1
 0x508E72: mov     [esp+60h+var_2C], 0
-0x508E7A: call    Script_ExtractArgs
+0x508E7A: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x508E7F: add     esp, 30h
 0x508E82: test    al, al
 0x508E84: jnz     short loc_508E8B
@@ -49,7 +49,7 @@
 0x508EAB: fstp    [esp+30h+var_8]
 0x508EAF: fld     [esp+30h+var_1C]
 0x508EB3: fstp    [esp+30h+var_4]
-0x508EB7: call    TESObjectREFR_GetParentCell
+0x508EB7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x508EBC: mov     ecx, [esp+30h+var_2C]
 0x508EC0: cmp     ecx, eax
 0x508EC2: jz      loc_508FAB
@@ -77,7 +77,7 @@
 0x508F08: mov     ecx, [esp+50h+var_10]
 0x508F0C: mov     [eax+8], ecx
 0x508F0F: mov     ecx, edx; int
-0x508F11: call    sub_66EAF0
+0x508F11: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x508F16: mov     ecx, ds:0B333C4h
 0x508F1C: push    esi
 0x508F1D: call    sub_665260
@@ -106,19 +106,19 @@
 0x508F61: jz      short loc_508F76
 0x508F63: fld     [esp+30h+var_4]
 0x508F67: push    ecx
-0x508F68: mov     ecx, esi
-0x508F6A: fstp    [esp+34h+var_34]; float
-0x508F6D: call    sub_4D8A10
+0x508F68: mov     ecx, esi; this
+0x508F6A: fstp    [esp+34h+radians]; radians
+0x508F6D: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x508F72: fldz
 0x508F74: jmp     short loc_508F84
 0x508F76: cmp     esi, ds:0B333C4h
 0x508F7C: jz      short loc_508F8F
 0x508F7E: fld     dword ptr ds:0A32048h
 0x508F84: push    ecx
-0x508F85: mov     ecx, esi
-0x508F87: fstp    [esp+38h+var_38]; float
-0x508F8A: call    sub_4D89D0
-0x508F8F: mov     eax, [esp+38h+var_34]
+0x508F85: mov     ecx, esi; this
+0x508F87: fstp    [esp+38h+var_38]; radians
+0x508F8A: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
+0x508F8F: mov     eax, [esp+38h+radians]
 0x508F93: push    0; int
 0x508F95: push    eax; int
 0x508F96: push    esi; Concurrency::details::SchedulerBase *

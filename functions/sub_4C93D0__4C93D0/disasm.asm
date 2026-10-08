@@ -61,3 +61,18 @@
 0x4C9482: pop     ebp
 0x4C9483: add     esp, 10h
 0x4C9486: retn
+0x9B5050: mov     ecx, [ebp-10h]; this
+0x9B5053: jmp     TESForm_destr
+0x9B5058: mov     ecx, [ebp-10h]
+0x9B505B: add     ecx, 18h; void *
+0x9B505E: jmp     TESTexture_destr
+0x9B5063: mov     ecx, [ebp-10h]
+0x9B5066: add     ecx, 24h ; '$'; slot
+0x9B5069: jmp     NiPointerSlot_Release
+0x9B506E: mov     edx, [esp+arg_4]
+0x9B5072: lea     eax, [edx-10h]
+0x9B5075: mov     ecx, [edx-14h]
+0x9B5078: xor     ecx, eax
+0x9B507A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B507F: mov     eax, offset stru_AE0278
+0x9B5084: jmp     ___CxxFrameHandler3

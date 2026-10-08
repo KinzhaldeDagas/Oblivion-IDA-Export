@@ -37,7 +37,7 @@
 0x8B9965: fstp    [esp+30h+var_4]
 0x8B9969: fld     dword ptr [edi-4]
 0x8B996C: fstp    [esp+30h+var_10]
-0x8B9970: call    sub_43F3E0
+0x8B9970: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8B9975: add     esp, 8
 0x8B9978: push    offset aLocalRot; "Local Rot"
 0x8B997D: lea     ecx, [esp+2Ch+var_10]

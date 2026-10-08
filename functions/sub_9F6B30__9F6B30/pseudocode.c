@@ -1,5 +1,5 @@
 int sub_9F6B30()
 {
-  GameSetting_ConstrAndReg((int *)&dword_B39040, (int)"sGeneralSkin", (int)"General(Skin)");
-  return atexit(sub_A227A0);
+  GameSetting_ConstrAndReg(&stru_B39040, "sGeneralSkin", "General(Skin)"); /*0x9f6b3f*/
+  return atexit(sub_A227A0); /*0x9f6b4f*/
 }

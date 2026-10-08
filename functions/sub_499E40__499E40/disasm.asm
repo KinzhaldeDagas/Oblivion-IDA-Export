@@ -1,4 +1,4 @@
-0x499E40: mov     ecx, ds:0B333A0h
+0x499E40: mov     ecx, ds:0B333A0h; Pass205: Water-related callsite included in pass-data producer verification; cross-check before naming high-level field semantics.
 0x499E46: sub     esp, 10h
 0x499E49: call    TES_GetCurrentCell
 0x499E4E: test    eax, eax
@@ -37,7 +37,7 @@
 0x499EC9: mov     [eax+8], ecx
 0x499ECC: fstp    [esp+1Ch+a2]; a2
 0x499ECF: mov     ecx, ds:0B35234h; this
-0x499ED5: call    NiAVObject_UpdateNiAVObject
+0x499ED5: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x499EDA: mov     ecx, ds:0B35234h
 0x499EE0: pop     esi
 0x499EE1: add     esp, 10h

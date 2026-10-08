@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x7BE102",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x7BE10C",
-    "line": "mov     [esp+40h+var_30], eax",
+    "line": "mov     [esp+40h+texture], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x7BE11F",
-    "line": "mov     esi, [esp+40h+var_30]",
+    "line": "mov     esi, [esp+40h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x7BE155",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x7BE214",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x7BE21D",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7BE228",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,13 +1285,13 @@
   },
   {
     "ea": "0x7BE26B",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE270",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,13 +1309,13 @@
   },
   {
     "ea": "0x7BE278",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE27D",
-    "line": "mov     ecx, [esp+40h+var_30]",
+    "line": "mov     ecx, [esp+40h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x7BE2AB",
-    "line": "mov     ecx, [esp+40h+var_30]; this",
+    "line": "mov     ecx, [esp+40h+texture]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x7BE2BB",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x7BE2C6",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,13 +1543,13 @@
   },
   {
     "ea": "0x7BE306",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE30B",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,13 +1561,13 @@
   },
   {
     "ea": "0x7BE316",
-    "line": "push    esi; a2",
+    "line": "push    esi; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE317",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x7BE39B",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x7BE3BA",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x7BE3C5",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,13 +1981,13 @@
   },
   {
     "ea": "0x7BE40A",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE40F",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2017,13 +2017,13 @@
   },
   {
     "ea": "0x7BE422",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE423",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x7BE42F",
-    "line": "mov     ebp, [esp+40h+var_30]",
+    "line": "mov     ebp, [esp+40h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2089,13 +2089,13 @@
   },
   {
     "ea": "0x7BE44A",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE44F",
-    "line": "mov     ecx, [eax+4]; this",
+    "line": "mov     ecx, [eax+4]; imageSpaceShader",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2113,13 +2113,13 @@
   },
   {
     "ea": "0x7BE458",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; renderedTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE459",
-    "line": "call    sub_7FA470",
+    "line": "call    BSImageSpaceShader_BindFirstFreeRenderedTexture; Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2293,43 +2293,43 @@
   },
   {
     "ea": "0x7BE4BF",
-    "line": "push    0; a7",
+    "line": "push    0; aux",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7BE4C1",
-    "line": "push    71h ; 'q'; a6",
+    "line": "push    71h ; 'q'; d3dFormat",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7BE4C3",
-    "line": "push    4; a5",
+    "line": "push    4; targetFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7BE4C5",
-    "line": "push    edx; a4",
+    "line": "push    edx; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE4C6",
-    "line": "push    ebx; a3",
+    "line": "push    ebx; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE4C7",
-    "line": "push    eax; a2",
+    "line": "push    eax; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE4C8",
-    "line": "call    NiRenderer_GetRenderedSurface",
+    "line": "call    BSTextureManager_GetOrCreateRenderedTexture; Oblivion BSTextureManager cache lookup/allocation. Reuses a matching BSRenderedTexture by size, format, auxiliary value, and flags or creates one, then moves the resource to the in-use list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x7BE4DC",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x7BE4E3",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x7BE4EE",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2491,13 +2491,13 @@
   },
   {
     "ea": "0x7BE52E",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE533",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2539,13 +2539,13 @@
   },
   {
     "ea": "0x7BE54C",
-    "line": "push    esi; a2",
+    "line": "push    esi; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE54D",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x7BE55D",
-    "line": "mov     [esp+40h+var_30], ebp",
+    "line": "mov     [esp+40h+texture], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2719,7 +2719,7 @@
   },
   {
     "ea": "0x7BE5AE",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x7BE5B5",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x7BE5C0",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,13 +2857,13 @@
   },
   {
     "ea": "0x7BE602",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE607",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x7BE688",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x7BE6A2",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x7BE6AD",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3277,13 +3277,13 @@
   },
   {
     "ea": "0x7BE6EF",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE6F4",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3301,13 +3301,13 @@
   },
   {
     "ea": "0x7BE704",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BE705",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3481,7 +3481,7 @@
   },
   {
     "ea": "0x7BE755",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3523,7 +3523,7 @@
   },
   {
     "ea": "0x7BE771",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3745,7 +3745,7 @@
   },
   {
     "ea": "0x7BE7F2",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3769,7 +3769,7 @@
   },
   {
     "ea": "0x7BE7FD",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3871,13 +3871,13 @@
   },
   {
     "ea": "0x7BE83F",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE844",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3948,12 +3948,6 @@
     "size": 2
   },
   {
-    "ea": "0x7BE86D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x7BE870",
     "line": "push    ebx; a2",
     "mnemonic": "push",
@@ -3973,7 +3967,7 @@
   },
   {
     "ea": "0x7BE87D",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3985,7 +3979,7 @@
   },
   {
     "ea": "0x7BE886",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4003,7 +3997,7 @@
   },
   {
     "ea": "0x7BE88D",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4099,13 +4093,13 @@
   },
   {
     "ea": "0x7BE8CD",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE8D2",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4135,7 +4129,7 @@
   },
   {
     "ea": "0x7BE8E8",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4147,7 +4141,7 @@
   },
   {
     "ea": "0x7BE8EF",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4165,7 +4159,7 @@
   },
   {
     "ea": "0x7BE8F6",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4261,13 +4255,13 @@
   },
   {
     "ea": "0x7BE936",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BE93B",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4333,7 +4327,7 @@
   },
   {
     "ea": "0x7BE964",
-    "line": "call    sub_802890",
+    "line": "call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5281,7 +5275,7 @@
   },
   {
     "ea": "0x7BEB2F",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5299,7 +5293,7 @@
   },
   {
     "ea": "0x7BEB37",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5323,7 +5317,7 @@
   },
   {
     "ea": "0x7BEB41",
-    "line": "call    NiRenderer_BeginScene1",
+    "line": "call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5431,7 +5425,7 @@
   },
   {
     "ea": "0x7BEB86",
-    "line": "call    sub_709C60",
+    "line": "call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5449,7 +5443,7 @@
   },
   {
     "ea": "0x7BEB8F",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5467,7 +5461,7 @@
   },
   {
     "ea": "0x7BEBA1",
-    "line": "mov     eax, [esp+40h+var_30]",
+    "line": "mov     eax, [esp+40h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5629,13 +5623,13 @@
   },
   {
     "ea": "0x7BEBE7",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BEBEC",
-    "line": "mov     ecx, [eax+4]; this",
+    "line": "mov     ecx, [eax+4]; imageSpaceShader",
     "mnemonic": "mov",
     "size": 3
   },
@@ -5653,13 +5647,13 @@
   },
   {
     "ea": "0x7BEBF5",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; renderedTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BEBF6",
-    "line": "call    sub_7FA470",
+    "line": "call    BSImageSpaceShader_BindFirstFreeRenderedTexture; Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5821,13 +5815,13 @@
   },
   {
     "ea": "0x7BEC3F",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BEC44",
-    "line": "mov     ecx, [eax+4]; this",
+    "line": "mov     ecx, [eax+4]; imageSpaceShader",
     "mnemonic": "mov",
     "size": 3
   },
@@ -5845,13 +5839,13 @@
   },
   {
     "ea": "0x7BEC4D",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; renderedTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BEC4E",
-    "line": "call    sub_7FA470",
+    "line": "call    BSImageSpaceShader_BindFirstFreeRenderedTexture; Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5869,7 +5863,7 @@
   },
   {
     "ea": "0x7BEC59",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -5881,7 +5875,7 @@
   },
   {
     "ea": "0x7BEC60",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5899,19 +5893,19 @@
   },
   {
     "ea": "0x7BEC6F",
-    "line": "push    edx; a2",
+    "line": "push    edx; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BEC70",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7BEC75",
-    "line": "mov     eax, [esp+40h+var_30]",
+    "line": "mov     eax, [esp+40h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5935,13 +5929,13 @@
   },
   {
     "ea": "0x7BEC87",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BEC88",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5971,13 +5965,13 @@
   },
   {
     "ea": "0x7BECA1",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7BECA2",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },

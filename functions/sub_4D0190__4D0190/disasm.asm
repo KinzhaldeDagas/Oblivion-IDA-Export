@@ -1,4 +1,4 @@
-0x4D0190: push    0FFFFFFFFh
+0x4D0190: push    0FFFFFFFFh; MoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.
 0x4D0192: push    offset SEH_4D0190
 0x4D0197: mov     eax, large fs:0
 0x4D019D: push    eax
@@ -15,7 +15,7 @@
 0x4D01BD: xor     esi, esi
 0x4D01BF: push    3
 0x4D01C1: mov     [esp+0ECh+var_C0], esi
-0x4D01C5: call    nullsub_returnTrue_0arg
+0x4D01C5: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4D01CA: add     esp, 4
 0x4D01CD: cmp     byte ptr ds:0B42D40h, 0
 0x4D01D4: jz      short loc_4D01F0
@@ -141,15 +141,15 @@
 0x4D0376: push    0
 0x4D0378: call    GetShadowSceneNode
 0x4D037D: add     esp, 4
-0x4D0380: push    0
-0x4D0382: lea     ecx, [esp+0ECh+var_9C]
+0x4D0380: push    0; visibleArray
+0x4D0382: lea     ecx, [esp+0ECh+cullingProcess]; self
 0x4D0386: mov     esi, eax
-0x4D0388: call    NiCullingProcess_NiCullingProcess
+0x4D0388: call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
 0x4D038D: mov     al, [esi+12Ch]
 0x4D0393: mov     byte ptr [esp+0E8h+var_4], 4
 0x4D039B: mov     byte ptr [esp+0E8h+var_CC+3], al
 0x4D039F: mov     byte ptr [esi+12Ch], 1
-0x4D03A6: call    InitBSShaderAccumulator
+0x4D03A6: call    BSShaderAccumulator_GetOrCreateGlobal
 0x4D03AB: mov     byte ptr [eax+21E3h], 0
 0x4D03B2: mov     eax, ds:0B3F928h
 0x4D03B7: cmp     dword ptr [eax+200h], 0
@@ -159,26 +159,26 @@
 0x4D03CC: jnz     short loc_4D03DF
 0x4D03CE: push    0; a2
 0x4D03D0: push    0; a1
-0x4D03D2: call    NiRenderer_BeginScene
+0x4D03D2: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x4D03D7: add     esp, 8
 0x4D03DA: mov     byte ptr [esp+0E8h+var_D4+3], 1
 0x4D03DF: push    7; clearFlags
 0x4D03E1: mov     ecx, edi
-0x4D03E3: call    BSRenderedTexture__UseTextureToRender
+0x4D03E3: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x4D03E8: push    eax; a1
-0x4D03E9: call    StartUsingRenderTarget
-0x4D03EE: mov     ebp, [esp+0F0h+arg_4]
+0x4D03E9: call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.
+0x4D03EE: mov     ebp, [esp+0F0h+camera]
 0x4D03F5: mov     bl, ds:0B42E86h
-0x4D03FB: push    0
-0x4D03FD: lea     ecx, [esp+0F4h+var_9C]
-0x4D0401: push    ecx
-0x4D0402: push    esi
-0x4D0403: push    ebp
+0x4D03FB: push    0; visibleArray
+0x4D03FD: lea     ecx, [esp+0F4h+cullingProcess]
+0x4D0401: push    ecx; cullingProcess
+0x4D0402: push    esi; sceneRoot
+0x4D0403: push    ebp; camera
 0x4D0404: mov     byte ptr ds:0B42E86h, 1
-0x4D040B: call    sub_70C0B0
+0x4D040B: call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.
 0x4D0410: add     esp, 18h
 0x4D0413: mov     ds:0B42E86h, bl
-0x4D0419: call    sub_7D7110
+0x4D0419: call    NiRenderer_PopRenderTargetGroupAndRestore; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.
 0x4D041E: cmp     byte ptr [esp+0E8h+var_D4], 0
 0x4D0423: jz      loc_4D0534
 0x4D0429: call    sub_49A140
@@ -192,40 +192,40 @@
 0x4D0443: mov     byte ptr [esp+0E8h+var_D4+2], al
 0x4D0447: cmp     byte ptr ds:0B125E8h, 0
 0x4D044E: jz      short loc_4D0465
-0x4D0450: push    1
-0x4D0452: call    sub_55F7E0
+0x4D0450: push    1; createIfMissing
+0x4D0452: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x4D0457: add     esp, 4
 0x4D045A: cmp     byte ptr [eax+20h], 0
 0x4D045E: mov     byte ptr [esp+0E8h+var_D4+1], 1
 0x4D0463: jnz     short loc_4D046A
 0x4D0465: mov     byte ptr [esp+0E8h+var_D4+1], 0
-0x4D046A: push    1
-0x4D046C: call    sub_55F7E0
+0x4D046A: push    1; createIfMissing
+0x4D046C: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x4D0471: mov     byte ptr [eax+20h], 0
 0x4D0475: movzx   ebx, word ptr ds:0B42EACh
 0x4D047C: push    6
-0x4D047E: call    sub_7B4890
+0x4D047E: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x4D0483: mov     ecx, dword ptr [esp+0F0h+a3]
 0x4D0487: add     esp, 8
 0x4D048A: test    ecx, ecx
 0x4D048C: jz      short loc_4D0495
-0x4D048E: call    BSRenderedTexture__UseTextureToRender
+0x4D048E: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x4D0493: jmp     short loc_4D0497
 0x4D0495: xor     eax, eax
 0x4D0497: push    7; clearFlags
 0x4D0499: push    eax; a1
-0x4D049A: call    StartUsingRenderTarget
-0x4D049F: push    0
-0x4D04A1: lea     edx, [esp+0F4h+var_9C]
-0x4D04A5: push    edx
-0x4D04A6: push    esi
-0x4D04A7: push    ebp
-0x4D04A8: call    sub_70C0B0
-0x4D04AD: call    sub_7D7110
+0x4D049A: call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.
+0x4D049F: push    0; visibleArray
+0x4D04A1: lea     edx, [esp+0F4h+cullingProcess]
+0x4D04A5: push    edx; cullingProcess
+0x4D04A6: push    esi; sceneRoot
+0x4D04A7: push    ebp; camera
+0x4D04A8: call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.
+0x4D04AD: call    NiRenderer_PopRenderTargetGroupAndRestore; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.
 0x4D04B2: push    ebx
-0x4D04B3: call    sub_7B4890
-0x4D04B8: push    1
-0x4D04BA: call    sub_55F7E0
+0x4D04B3: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
+0x4D04B8: push    1; createIfMissing
+0x4D04BA: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x4D04BF: mov     cl, byte ptr [esp+108h+var_D4+1]
 0x4D04C3: add     esp, 20h
 0x4D04C6: test    edi, edi
@@ -237,7 +237,7 @@
 0x4D04D9: jmp     short loc_4D04E1
 0x4D04DB: and     word ptr [edi+18h], 0FFFEh
 0x4D04E1: push    18h; a1
-0x4D04E3: call    GetShaderDefinition
+0x4D04E3: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x4D04E8: add     esp, 4
 0x4D04EB: test    eax, eax
 0x4D04ED: jz      short loc_4D0530
@@ -262,15 +262,15 @@
 0x4D0525: push    edx; a3
 0x4D0526: push    eax; a2
 0x4D0527: push    edi; a1
-0x4D0528: call    sub_7B4900
+0x4D0528: call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.
 0x4D052D: add     esp, 10h
 0x4D0530: mov     edi, [esp+0E8h+var_D0]
 0x4D0534: cmp     byte ptr [esp+0E8h+var_D4+3], 0
 0x4D0539: jz      short loc_4D0540
-0x4D053B: call    NiRenderer_EndScene
+0x4D053B: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x4D0540: mov     cl, byte ptr [esp+0E8h+var_CC+3]
 0x4D0544: mov     [esi+12Ch], cl
-0x4D054A: call    InitBSShaderAccumulator
+0x4D054A: call    BSShaderAccumulator_GetOrCreateGlobal
 0x4D054F: mov     byte ptr [eax+21E3h], 1
 0x4D0556: mov     ecx, ds:0B43104h
 0x4D055C: mov     edx, [ecx]
@@ -278,22 +278,22 @@
 0x4D0561: lea     eax, [esp+0E8h+var_AC]
 0x4D0565: push    eax
 0x4D0566: call    edx
-0x4D0568: lea     ecx, [esp+0E8h+var_9C]; this
+0x4D0568: lea     ecx, [esp+0E8h+cullingProcess]; this
 0x4D056C: mov     byte ptr [esp+0E8h+var_4], 3
-0x4D0574: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x4D0574: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x4D0579: mov     bl, byte ptr [esp+0E8h+var_D4]
 0x4D057D: mov     ebp, dword ptr [esp+0E8h+a4]
 0x4D0581: mov     esi, dword ptr [esp+0E8h+a3]
 0x4D0585: test    bl, bl
 0x4D0587: jz      short loc_4D0602
 0x4D0589: mov     ecx, ds:0B42F50h; this
-0x4D058F: push    edi; a2
-0x4D0590: call    sub_7C1EE0
+0x4D058F: push    edi; texture
+0x4D0590: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x4D0595: mov     ecx, ds:0B42F50h; this
-0x4D059B: push    esi; a2
-0x4D059C: call    sub_7C1EE0
+0x4D059B: push    esi; texture
+0x4D059C: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x4D05A1: push    2
-0x4D05A3: call    nullsub_returnTrue_0arg
+0x4D05A3: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4D05A8: mov     eax, [esp+0ECh+arg_0]
 0x4D05AF: add     esp, 4
 0x4D05B2: test    ebp, ebp
@@ -324,7 +324,7 @@
 0x4D05FF: push    eax
 0x4D0600: jmp     short loc_4D0661
 0x4D0602: push    2
-0x4D0604: call    nullsub_returnTrue_0arg
+0x4D0604: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4D0609: mov     ecx, [esp+0ECh+arg_0]
 0x4D0610: add     esp, 4
 0x4D0613: test    edi, edi
@@ -384,3 +384,25 @@
 0x4D06AB: pop     ebx
 0x4D06AC: add     esp, 0D4h
 0x4D06B2: retn    8
+0x9B53C0: lea     ecx, [ebp-0D0h]; slot
+0x9B53C6: jmp     NiPointerSlot_Release
+0x9B53CB: lea     ecx, [ebp-0C4h]; slot
+0x9B53D1: jmp     NiPointerSlot_Release
+0x9B53D6: lea     ecx, [ebp-0C8h]; slot
+0x9B53DC: jmp     NiPointerSlot_Release
+0x9B53E1: lea     ecx, [ebp-9Ch]; this
+0x9B53E7: jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
+0x9B53EC: mov     eax, [ebp-0C0h]
+0x9B53F2: and     eax, 1
+0x9B53F5: jz      locret_9B540A
+0x9B53FB: and     dword ptr [ebp-0C0h], 0FFFFFFFEh
+0x9B5402: mov     ecx, [ebp+4]; slot
+0x9B5405: jmp     NiPointerSlot_Release
+0x9B540A: retn
+0x9B540B: mov     edx, [esp+camera]
+0x9B540F: lea     eax, [edx-0D8h]
+0x9B5415: mov     ecx, [edx-0DCh]
+0x9B541B: xor     ecx, eax
+0x9B541D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5422: mov     eax, offset stru_AE0524
+0x9B5427: jmp     ___CxxFrameHandler3

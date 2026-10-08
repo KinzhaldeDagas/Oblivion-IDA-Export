@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x633DFB",
-    "line": "push    12h",
+    "line": "push    12h; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x633DFD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x633E03",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x633EA6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

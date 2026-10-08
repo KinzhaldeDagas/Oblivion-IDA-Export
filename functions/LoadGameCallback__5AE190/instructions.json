@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5AE192",
-    "line": "call    sub_578D70",
+    "line": "call    InterfaceManager_ConsumeMessageButton",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x5AE1BB",
-    "line": "push    offset EmptyString",
+    "line": "push    offset EmptyString; firstButton",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AE1C0",
-    "line": "push    eax",
+    "line": "push    eax; baseButtonIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5AE1C1",
-    "line": "push    eax",
+    "line": "push    eax; callback",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5AE1CA",
-    "line": "push    eax",
+    "line": "push    eax; message",
     "mnemonic": "push",
     "size": 1
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x5AE1E1",
-    "line": "push    0",
+    "line": "push    0; ContinueFromLastSave decode: load-menu callback sets ecx=SaveLoad_CurrentSavegame, pushes (0, selected save stem, 0), calls TESSaveLoadGame_LoadGame. Oblivion behavior authoritative.",
     "mnemonic": "push",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5AE1E6",
-    "line": "call    TESSaveLoadGame_LoadGame",
+    "line": "call    TESSaveLoadGame_LoadGame;  Verified map lifecycle: allocates incomingChangesMap at +4, stores save records there, reconciles pre-load currentChangesMap at +0 after form loading, then swaps in incoming map via 464440. The map roles are based on direct stores/lookups and final pointer assignments.",
     "mnemonic": "call",
     "size": 5
   },

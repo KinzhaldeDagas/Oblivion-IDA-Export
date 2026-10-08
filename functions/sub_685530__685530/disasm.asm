@@ -4,11 +4,11 @@
 0x685538: test    esi, esi
 0x68553A: jz      short loc_685547
 0x68553C: mov     ecx, esi; this
-0x68553E: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x68553E: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x685543: test    eax, eax
 0x685545: jz      short loc_685557
 0x685547: mov     ecx, esi; this
-0x685549: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x685549: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x68554E: cmp     eax, 4
 0x685551: jnz     loc_685782
 0x685557: mov     eax, [esi]
@@ -105,7 +105,7 @@
 0x685677: mov     ecx, esi
 0x685679: jz      loc_685709
 0x68567F: push    0Fh
-0x685681: call    sub_5E05F0
+0x685681: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x685686: fldz
 0x685688: fcomp   [esp+18h+var_10]
 0x68568C: fnstsw  ax
@@ -142,7 +142,7 @@
 0x6856E8: test    ah, 41h
 0x6856EB: jnz     short loc_685705
 0x6856ED: push    10h
-0x6856EF: call    sub_5E0610
+0x6856EF: call    sub_5E0610; 3DTheft decode: Actor_SetMovementFlag wrapper calls process vfunc +0x2C4 with enabled=true.
 0x6856F4: fldz
 0x6856F6: fcomp   [esp+18h+var_C]
 0x6856FA: fnstsw  ax
@@ -158,10 +158,10 @@
 0x685712: mov     ecx, esi
 0x685714: jz      short loc_68572E
 0x685716: push    0Fh
-0x685718: call    sub_5E05F0
+0x685718: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x68571D: push    1
 0x68571F: mov     ecx, esi
-0x685721: call    sub_5E0610
+0x685721: call    sub_5E0610; 3DTheft decode: Actor_SetMovementFlag wrapper calls process vfunc +0x2C4 with enabled=true.
 0x685726: fldz
 0x685728: fstp    [esp+18h+var_C]
 0x68572C: jmp     short loc_685751
@@ -171,10 +171,10 @@
 0x685737: jz      short loc_68574B
 0x685739: push    0Fh
 0x68573B: mov     ecx, esi
-0x68573D: call    sub_5E05F0
+0x68573D: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x685742: push    2
 0x685744: mov     ecx, esi
-0x685746: call    sub_5E0610
+0x685746: call    sub_5E0610; 3DTheft decode: Actor_SetMovementFlag wrapper calls process vfunc +0x2C4 with enabled=true.
 0x68574B: fldz
 0x68574D: fstp    [esp+18h+var_C]
 0x685751: push    1

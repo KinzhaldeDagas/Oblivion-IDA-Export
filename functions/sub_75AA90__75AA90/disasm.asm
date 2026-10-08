@@ -53,7 +53,6 @@
 0x75AB2E: mov     [esp+24h+var_4], eax
 0x75AB32: jge     short loc_75AB6F
 0x75AB34: jmp     short loc_75AB40
-0x75AB36: align 10h
 0x75AB40: mov     eax, [esp+24h+var_14]
 0x75AB44: movzx   ecx, word ptr [eax+0B6h]
 0x75AB4B: cmp     ecx, edi
@@ -65,7 +64,7 @@
 0x75AB5C: add     eax, 20h ; ' '
 0x75AB5F: push    eax
 0x75AB60: lea     ecx, [esp+28h+var_10]
-0x75AB64: call    sub_72A6B0
+0x75AB64: call    NiSphere_Merge; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.
 0x75AB69: add     edi, ebx
 0x75AB6B: cmp     edi, ebp
 0x75AB6D: jl      short loc_75AB40
@@ -118,7 +117,7 @@
 0x75AC01: push    ecx
 0x75AC02: fstp    st
 0x75AC04: lea     ecx, [esp+28h+var_10]
-0x75AC08: call    sub_72A6B0
+0x75AC08: call    NiSphere_Merge; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.
 0x75AC0D: fldz
 0x75AC0F: add     edi, 10h
 0x75AC12: sub     ebp, 1

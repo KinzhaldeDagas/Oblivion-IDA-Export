@@ -1,1 +1,1 @@
-QueuedHelmet
+struct QueuedHelmet;

@@ -1,5 +1,5 @@
 // attributes: thunk
-int __cdecl _local_unwind2_::_lu_continue(
+void __cdecl _local_unwind2_::_lu_continue(
         int a1,
         int a2,
         int a3,
@@ -12,5 +12,5 @@ int __cdecl _local_unwind2_::_lu_continue(
         int a10,
         unsigned int a11)
 {
-  return _local_unwind2_::_lu_top_0(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
+  _local_unwind2_::_lu_top_0(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); /*0x99ca25*/
 }

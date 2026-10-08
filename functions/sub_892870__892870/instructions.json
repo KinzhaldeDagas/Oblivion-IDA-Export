@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x8928C9",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x892970",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x89297E",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x892A08",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x892A42",
-    "line": "call    sub_8907A0",
+    "line": "call    bhkCharacterController_SetTransientPushVector; Character proxy collision/response path feeds transient push setter after world conversion; use as push-channel evidence, not as climbing ledge behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x892A62",
-    "line": "call    sub_8AC070",
+    "line": "call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x892A6E",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x892BE9",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x892C0B",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },

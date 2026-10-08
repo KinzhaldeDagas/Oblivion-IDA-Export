@@ -35,7 +35,7 @@
 0x553677: mov     eax, ds:0B39B80h
 0x55367C: cmp     eax, esi
 0x55367E: jnz     short loc_55368A
-0x553680: call    sub_553550
+0x553680: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x553685: mov     eax, ds:0B39B80h
 0x55368A: cmp     [eax+0DACh], esi
 0x553690: jnz     loc_55371E
@@ -52,7 +52,7 @@
 0x5536B6: cmp     dword ptr ds:0B39B80h, 0
 0x5536BD: mov     byte ptr [esp+24h+var_4], 0
 0x5536C2: jnz     short loc_5536C9
-0x5536C4: call    sub_553550
+0x5536C4: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x5536C9: mov     eax, ds:0B39B80h
 0x5536CE: mov     [eax+0DACh], esi
 0x5536D4: mov     ecx, ds:0B39B80h
@@ -64,7 +64,7 @@
 0x5536F0: cmp     dword ptr ds:0B39B80h, 0
 0x5536F7: mov     esi, ds:0B120F4h
 0x5536FD: jnz     short loc_553704
-0x5536FF: call    sub_553550
+0x5536FF: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x553704: mov     eax, ds:0B39B80h
 0x553709: mov     ecx, [eax+0DACh]
 0x55370F: push    0
@@ -75,7 +75,7 @@
 0x553720: jz      short loc_5537A1
 0x553722: test    eax, eax
 0x553724: jnz     short loc_553730
-0x553726: call    sub_553550
+0x553726: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x55372B: mov     eax, ds:0B39B80h
 0x553730: lea     ecx, [esp+24h+var_10]
 0x553734: push    ecx
@@ -89,7 +89,7 @@
 0x553751: jnz     short loc_55376B
 0x553753: mov     edx, dword ptr [esp+24h+arg_14]
 0x553757: mov     eax, [esp+24h+arg_8]
-0x55375B: mov     ecx, dword ptr [esp+24h+ArgList]
+0x55375B: mov     ecx, [esp+24h+ArgList]
 0x55375F: push    edx; char
 0x553760: push    ebx; int
 0x553761: push    eax; int
@@ -122,7 +122,7 @@
 0x5537A3: jz      short loc_5537ED
 0x5537A5: test    eax, eax
 0x5537A7: jnz     short loc_5537B3
-0x5537A9: call    sub_553550
+0x5537A9: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x5537AE: mov     eax, ds:0B39B80h
 0x5537B3: lea     ecx, [esp+24h+var_10]
 0x5537B7: push    ecx
@@ -136,7 +136,7 @@
 0x5537D0: jnz     short loc_55376B
 0x5537D2: mov     edx, dword ptr [esp+24h+arg_14]
 0x5537D6: mov     eax, [esp+24h+arg_8]
-0x5537DA: mov     ecx, dword ptr [esp+24h+ArgList]
+0x5537DA: mov     ecx, [esp+24h+ArgList]
 0x5537DE: push    edx
 0x5537DF: push    ebx
 0x5537E0: push    eax
@@ -163,7 +163,7 @@
 0x553824: call    NiSmartPointer_Set??
 0x553829: mov     eax, dword ptr [esp+24h+arg_14]
 0x55382D: mov     ecx, [esp+24h+arg_8]
-0x553831: mov     edx, dword ptr [esp+24h+ArgList]
+0x553831: mov     edx, [esp+24h+ArgList]
 0x553835: mov     edi, [esp+24h+var_10]
 0x553839: push    eax; char
 0x55383A: push    ebx; int
@@ -180,7 +180,7 @@
 0x55384F: mov     esi, ebx
 0x553851: cmp     dword ptr ds:0B39B80h, 0
 0x553858: jnz     short loc_55385F
-0x55385A: call    sub_553550
+0x55385A: call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\si.ctl.
 0x55385F: mov     eax, ds:0B39B80h
 0x553864: mov     ecx, [eax+0DACh]
 0x55386A: push    edi
@@ -223,3 +223,22 @@
 0x5538C6: pop     ebx
 0x5538C7: add     esp, 10h
 0x5538CA: retn
+0x9BBFC0: lea     ecx, [ebp-10h]; slot
+0x9BBFC3: jmp     NiPointerSlot_Release
+0x9BBFC8: mov     eax, [ebp+4]
+0x9BBFCB: push    eax
+0x9BBFCC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BBFD1: pop     ecx
+0x9BBFD2: retn
+0x9BBFD3: mov     eax, [ebp+4]
+0x9BBFD6: push    eax
+0x9BBFD7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BBFDC: pop     ecx
+0x9BBFDD: retn
+0x9BBFDE: mov     edx, [esp+ArgList]
+0x9BBFE2: lea     eax, [edx-14h]
+0x9BBFE5: mov     ecx, [edx-18h]
+0x9BBFE8: xor     ecx, eax
+0x9BBFEA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBFEF: mov     eax, offset stru_AE5C3C
+0x9BBFF4: jmp     ___CxxFrameHandler3

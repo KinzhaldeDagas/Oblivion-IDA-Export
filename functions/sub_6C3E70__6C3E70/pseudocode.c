@@ -1,4 +1,4 @@
-char *sub_6C3E70()
+float *sub_6C3E70()
 {
-  return dword_B3CA58;
+  return &qword_B3BB2C[0x3CB]; /*0x6c3e75*/
 }

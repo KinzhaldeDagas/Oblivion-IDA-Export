@@ -1,4 +1,4 @@
-0x8BB654: mov     edx, dword ptr [esp+arg_10]; jumptable 008BB62E default case
+0x8BB654: mov     edx, [esp+arg_10]; jumptable 008BB62E default case
 0x8BB658: mov     ecx, dword ptr [esp+Args]
 0x8BB65C: push    edx; char
 0x8BB65D: mov     edx, [esp+4+arg_18]

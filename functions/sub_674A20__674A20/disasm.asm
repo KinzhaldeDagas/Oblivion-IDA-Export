@@ -1,4 +1,4 @@
-0x674A20: push    ebp
+0x674A20: push    ebp; 3DTheft decode 2026-05-16: frame-loop actor process manager maintenance pass after process updates; removes/destroys invalid refs and refreshes process level state.
 0x674A21: mov     ebp, esp
 0x674A23: and     esp, 0FFFFFFF8h
 0x674A26: sub     esp, 10h
@@ -47,7 +47,7 @@
 0x674AB5: test    al, 1
 0x674AB7: jz      short loc_674AEA
 0x674AB9: push    0FFFFFFFFh; a2
-0x674ABB: call    TESForm_GetOverrideFile
+0x674ABB: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x674AC0: test    eax, eax
 0x674AC2: mov     ecx, ds:0B3BCF8h
 0x674AC8: jnz     short loc_674AEA
@@ -72,11 +72,11 @@
 0x674AFC: jz      short loc_674B2B
 0x674AFE: cmp     dword ptr [ecx+58h], 0
 0x674B02: jz      short loc_674B2B
-0x674B04: call    Actor__GetProcessLevel
+0x674B04: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x674B09: push    eax
 0x674B0A: mov     eax, ds:0B3BCF8h
 0x674B0F: push    eax
-0x674B10: mov     ecx, offset ActorProcessManager_ptr
+0x674B10: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x674B15: call    sub_674550
 0x674B1A: mov     ecx, ds:0B3BCF8h
 0x674B20: call    sub_659BC0
@@ -104,7 +104,7 @@
 0x674B6E: jz      loc_674C8E
 0x674B74: push    0; a2
 0x674B76: mov     ecx, esi; this
-0x674B78: call    TESObjectREFR_GetParentCell
+0x674B78: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x674B7D: mov     ecx, ds:0B333A0h
 0x674B83: push    eax; a1
 0x674B84: call    TESObjectCELL_IsProcessLevel?LowHigh
@@ -129,7 +129,7 @@
 0x674BCC: jge     short loc_674BD4
 0x674BCE: fadd    dword ptr ds:0A2FC78h
 0x674BD4: faddp   st(1), st
-0x674BD6: mov     ecx, offset TimeGlobals
+0x674BD6: mov     ecx, 0B332E0h
 0x674BDB: fstp    [esp+20h+var_C+4]
 0x674BDF: call    TimeGlobals_GetGameDaysPassed
 0x674BE4: test    eax, eax
@@ -138,7 +138,7 @@
 0x674BEE: jge     short loc_674BF6
 0x674BF0: fadd    dword ptr ds:0A2FC78h
 0x674BF6: fmul    qword ptr ds:0A2F920h
-0x674BFC: mov     ecx, offset TimeGlobals
+0x674BFC: mov     ecx, 0B332E0h
 0x674C01: fstp    [esp+20h+var_14+4]
 0x674C05: call    TimeGlobals_GetGameHour
 0x674C0A: fadd    [esp+20h+var_14+4]
@@ -155,12 +155,11 @@
 0x674C29: call    eax
 0x674C2B: lea     ebx, [esi+44h]
 0x674C2E: mov     ecx, ebx
-0x674C30: call    sub_420480
+0x674C30: call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.
 0x674C35: mov     edi, eax
 0x674C37: test    edi, edi
 0x674C39: jz      short loc_674C7B
 0x674C3B: jmp     short loc_674C40
-0x674C3D: align 10h
 0x674C40: mov     ecx, edi
 0x674C42: call    BSSimpleList_IsEmpty
 0x674C47: test    al, al
@@ -168,7 +167,7 @@
 0x674C4B: mov     esi, [edi]
 0x674C4D: push    0
 0x674C4F: lea     ecx, [esi+44h]
-0x674C52: call    sub_4203E0
+0x674C52: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x674C57: mov     edx, [esi]
 0x674C59: mov     eax, [edx+78h]
 0x674C5C: mov     ecx, esi
@@ -178,10 +177,10 @@
 0x674C64: mov     ecx, esi
 0x674C66: call    sub_4D6640
 0x674C6B: mov     ecx, edi
-0x674C6D: call    sub_67F100
+0x674C6D: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x674C72: jmp     short loc_674C40
 0x674C74: mov     ecx, ebx
-0x674C76: call    sub_4204A0
+0x674C76: call    ExtraDataList_RemoveDroppedItemList; Removes ExtraDroppedItemList type 0x42 when present.
 0x674C7B: mov     ecx, ds:0B3BCF8h
 0x674C81: push    ecx
 0x674C82: mov     ecx, ebp
@@ -205,7 +204,7 @@
 0x674CC8: test    dl, 1
 0x674CCB: jz      short loc_674CF4
 0x674CCD: push    0FFFFFFFFh; a2
-0x674CCF: call    TESForm_GetOverrideFile
+0x674CCF: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x674CD4: test    eax, eax
 0x674CD6: mov     ecx, ds:0B3BCF8h
 0x674CDC: jnz     short loc_674CF4
@@ -251,15 +250,15 @@
 0x674D5C: mov     ecx, [ecx+58h]
 0x674D5F: mov     edx, [ecx]
 0x674D61: mov     eax, [edx+8]
-0x674D64: push    0
-0x674D66: push    0
-0x674D68: push    0
+0x674D64: push    0; relativeTo
+0x674D66: push    0; insertRelative
+0x674D68: push    0; append
 0x674D6A: call    eax
 0x674D6C: mov     ecx, ds:0B3BCF8h
-0x674D72: push    eax
-0x674D73: push    ecx
-0x674D74: mov     ecx, offset ActorProcessManager_ptr
-0x674D79: call    sub_673A90
+0x674D72: push    eax; processLevel
+0x674D73: push    ecx; object
+0x674D74: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x674D79: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x674D7E: jmp     short loc_674DCF
 0x674D80: mov     edx, [ecx]
 0x674D82: mov     eax, [edx+1C4h]
@@ -276,11 +275,11 @@
 0x674DA5: jmp     short loc_674DCF
 0x674DA7: cmp     dword ptr [ecx+58h], 0
 0x674DAB: jz      short loc_674DCF
-0x674DAD: call    Actor__GetProcessLevel
+0x674DAD: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x674DB2: mov     ecx, ds:0B3BCF8h
 0x674DB8: push    eax
 0x674DB9: push    ecx
-0x674DBA: mov     ecx, offset ActorProcessManager_ptr
+0x674DBA: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x674DBF: call    sub_674550
 0x674DC4: mov     ecx, ds:0B3BCF8h
 0x674DCA: call    sub_659BC0

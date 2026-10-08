@@ -9,7 +9,6 @@
 0x4A714A: fld     dword ptr [ecx+10h]
 0x4A714D: pop     ecx
 0x4A714E: retn
-0x4A714F: align 10h
 0x4A7150: mov     edx, [ecx]
 0x4A7152: test    edx, edx
 0x4A7154: jz      short loc_4A7170

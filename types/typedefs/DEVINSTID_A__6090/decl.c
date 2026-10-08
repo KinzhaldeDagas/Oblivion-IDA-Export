@@ -1,1 +1,1 @@
-DEVINSTID_A
+typedef CHAR *DEVINSTID_A;

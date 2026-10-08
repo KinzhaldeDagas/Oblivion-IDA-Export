@@ -1,4 +1,4 @@
-0x7073D0: test    byte ptr [ecx+18h], 1
+0x7073D0: test    byte ptr [ecx+18h], 1; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x7073D4: jnz     short locret_7073E7
 0x7073D6: mov     eax, [esp+a2]
 0x7073DA: mov     edx, [eax]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x470CB0",
+      "0x470CD2"
+    ]
+  ],
+  "chunks_sha256": "3d2907edb7ffb82f55a4b924c92c4cf16bdea1df3e0aa4a02bffec731e9f5619",
+  "comment_regular": "AnimSequenceMultiple vtable +0x14. Produces an 8-bit list index by incrementing AL. Indices >=256 wrap modulo 256; index 254 collides with the save format's 0xFE null marker, and index 255 collides with 0xFF random/missing.",
+  "comment_repeatable": "AnimSequenceMultiple vtable +0x14. Produces an 8-bit list index by incrementing AL. Indices >=256 wrap modulo 256; index 254 collides with the save format's 0xFE null marker, and index 255 collides with 0xFF random/missing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_470CB0",
+  "display_name": "AnimSequenceMultiple_GetSelectorForSequence",
   "end_ea": "0x470CD2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_470CB0",
+  "name": "AnimSequenceMultiple_GetSelectorForSequence",
   "segment": ".text",
   "sha256": "3d2907edb7ffb82f55a4b924c92c4cf16bdea1df3e0aa4a02bffec731e9f5619",
   "size": 34,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x470CB0",
-  "type": "unsigned __int8 __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 34,
+  "type": "unsigned __int8 __thiscall(AnimSequenceMultiple *this, BSAnimGroupSequence *sequence)",
   "xrefs_from_count": 16,
   "xrefs_to_count": 1
 }

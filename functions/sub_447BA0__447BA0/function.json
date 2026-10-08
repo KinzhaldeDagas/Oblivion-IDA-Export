@@ -1,18 +1,31 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 9,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x447BA0",
+      "0x447C42"
+    ]
+  ],
+  "chunks_sha256": "7fa05bc337fa93745c9ca5295d310271610308db474ff289dd4b35752c851d29",
+  "comment_regular": "Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.",
+  "comment_repeatable": "Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_447BA0",
+  "display_name": "TESObjectCELL_Deactivate",
   "end_ea": "0x447C42",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_447BA0",
+  "name": "TESObjectCELL_Deactivate",
   "segment": ".text",
   "sha256": "7fa05bc337fa93745c9ca5295d310271610308db474ff289dd4b35752c851d29",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x447BA0",
+  "total_chunk_size": 162,
   "type": "void __userpurge(double st5_0@<st2>, double a2@<st1>, double a3@<st0>, TESObjectCELL *a1)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 9

@@ -1,40 +1,41 @@
-void __thiscall sub_677280(int *this)
+// Verified: six-list owning clear; calls Crime destructor then FormHeapFree for every record, frees list nodes while retaining allocated sentinel heads. Distinct from AlarmPackage borrowed Crime references.
+void __thiscall ActorProcessManager_ClearCrimes(ActorProcessManager *self)
 {
-  int *v1; // ebx
+  CrimeListNode **crimeLists; // ebx
   int v2; // ebp
-  int v3; // esi
-  unsigned int *v4; // edi
-  _DWORD *v5; // eax
+  CrimeListNode *v3; // esi
+  Crime *crime; // edi
+  CrimeListNode *next; // eax
 
-  v1 = this + 0xA;
-  v2 = 6;
-  do
+  crimeLists = self->crimeLists; /*0x677284*/
+  v2 = 6; /*0x677287*/
+  do /*0x6772d6*/
   {
-    v3 = *v1;
-    if ( *v1 )
+    v3 = *crimeLists; /*0x677290*/
+    if ( *crimeLists ) /*0x677290*/
     {
-      while ( 1 )
+      while ( 1 ) /*0x677296*/
       {
-        v4 = *(unsigned int **)v3;
-        if ( !*(_DWORD *)v3 )
-          break;
-        sub_605E80(*(unsigned int **)v3);
-        FormHeapFree((unsigned int)v4);
-        v5 = *(_DWORD **)(v3 + 4);
-        if ( v5 )
+        crime = v3->crime; /*0x677296*/
+        if ( !v3->crime ) /*0x677296*/
+          break; /*0x677296*/
+        Crime_Destructor(v3->crime); /*0x67729e*/
+        FormHeapFree((unsigned int)crime); /*0x6772a4*/
+        next = v3->next; /*0x6772a9*/
+        if ( next ) /*0x6772b1*/
         {
-          *(_DWORD *)(v3 + 4) = v5[1];
-          *(_DWORD *)v3 = *v5;
-          FormHeapFree((unsigned int)v5);
+          v3->next = next->next; /*0x6772b6*/
+          v3->crime = next->crime; /*0x6772bc*/
+          FormHeapFree((unsigned int)next); /*0x6772be*/
         }
         else
         {
-          *(_DWORD *)v3 = 0;
+          v3->crime = 0; /*0x6772c8*/
         }
       }
     }
-    ++v1;
-    --v2;
+    ++crimeLists; /*0x6772d0*/
+    --v2; /*0x6772d3*/
   }
-  while ( v2 );
+  while ( v2 ); /*0x6772d6*/
 }

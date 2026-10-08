@@ -1,7 +1,7 @@
-0x7A86C0: mov     ecx, [esp+arg_0]
-0x7A86C4: mov     edx, [esp+arg_4]
+0x7A86C0: mov     ecx, [esp+first]; OBLIVION AUTHORITY (2026-08-30): Uninitialized forward copy of 8-byte SLodEntry values used while growing m_vPairs.
+0x7A86C4: mov     edx, [esp+last]
 0x7A86C8: cmp     ecx, edx
-0x7A86CA: mov     eax, [esp+arg_8]
+0x7A86CA: mov     eax, [esp+destination]
 0x7A86CE: jz      short locret_7A86EA
 0x7A86D0: push    esi
 0x7A86D1: test    eax, eax

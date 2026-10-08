@@ -1,17 +1,17 @@
-float *sub_6EA8C0()
+NiObject *sub_6EA8C0()
 {
-  float *v0; // eax
-  float *v1; // esi
+  NiObject *v0; // eax
+  NiObject *v1; // esi
 
-  v0 = (float *)FormHeapAlloc(0x40u);
-  v1 = v0;
-  if ( !v0 )
-    return 0;
-  sub_6CC4E0(v0);
-  *(_DWORD *)v1 = &NiBlendPoint3Interpolator::`vftable';
-  *((_DWORD *)v1 + 0xC) = dword_B24FC8;
-  *((_DWORD *)v1 + 0xD) = dword_B24FCC;
-  *((_DWORD *)v1 + 0xE) = dword_B24FD0;
-  *((_BYTE *)v1 + 0x3C) = 0;
-  return v1;
+  v0 = (NiObject *)FormHeapAlloc(0x40u); /*0x6ea8e4*/
+  v1 = v0; /*0x6ea8e9*/
+  if ( !v0 ) /*0x6ea8fc*/
+    return 0; /*0x6ea93c*/
+  sub_6CC4E0(v0); /*0x6ea900*/
+  v1->__vftable = (NiObjectVtbl *)&NiBlendPoint3Interpolator::`vftable'; /*0x6ea905*/
+  v1[6].__vftable = (NiObjectVtbl *)dword_B24FC8; /*0x6ea910*/
+  v1[6].members.m_uiRefCount = dword_B24FCC; /*0x6ea919*/
+  v1[7].__vftable = (NiObjectVtbl *)dword_B24FD0; /*0x6ea922*/
+  LOBYTE(v1[7].members.m_uiRefCount) = 0; /*0x6ea925*/
+  return v1; /*0x6ea92b*/
 }

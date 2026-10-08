@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x45F093",
-    "line": "call    ??1InteriorCellNewReferencesMap@@UAE@XZ; InteriorCellNewReferencesMap::~InteriorCellNewReferencesMap(void)",
+    "line": "call    InteriorCellNewReferencesMap_dtor;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45F098",
-    "line": "test    byte ptr [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+deleteFlags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x45F0A0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

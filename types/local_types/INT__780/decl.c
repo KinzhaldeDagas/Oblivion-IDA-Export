@@ -1,1 +1,1 @@
-INT
+typedef int INT;

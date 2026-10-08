@@ -1,4 +1,4 @@
-0x707E40: mov     eax, [esp+arg_4]
+0x707E40: mov     eax, [esp+arg_4];
 0x707E44: push    edi
 0x707E45: mov     edi, [eax+8]
 0x707E48: test    edi, edi
@@ -22,7 +22,7 @@
 0x707E71: call    sub_700710
 0x707E76: push    eax; a2
 0x707E77: mov     ecx, ebp; this
-0x707E79: call    sub_405680
+0x707E79: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x707E7E: test    edi, edi
 0x707E80: jnz     short loc_707E57
 0x707E82: pop     esi

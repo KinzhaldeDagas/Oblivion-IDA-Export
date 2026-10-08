@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x76E1A5",
-    "line": "push    offset stru_B42680; lpCriticalSection",
+    "line": "push    offset unk_B42680; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x76E1C1",
-    "line": "lea     eax, [esp+0Ch+var_4]",
+    "line": "lea     eax, [esp+0Ch+data]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -73,25 +73,25 @@
   },
   {
     "ea": "0x76E1D0",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76E1D1",
-    "line": "mov     ecx, offset off_B294F0",
+    "line": "mov     ecx, offset list; list",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x76E1D6",
-    "line": "mov     [esp+10h+var_4], esi",
+    "line": "mov     [esp+10h+data], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x76E1DA",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x76E1F2",
-    "line": "push    offset stru_B42680; lpCriticalSection",
+    "line": "push    offset unk_B42680; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x76E219",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x76E221",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },

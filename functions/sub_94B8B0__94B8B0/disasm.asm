@@ -30,7 +30,6 @@
 0x94B907: mov     ecx, [edi]
 0x94B909: mov     edx, ebx
 0x94B90B: jmp     short loc_94B910
-0x94B90D: align 10h
 0x94B910: movaps  xmm2, xmmword ptr [ecx]
 0x94B913: movaps  xmm0, xmm1
 0x94B916: mulps   xmm0, xmm2

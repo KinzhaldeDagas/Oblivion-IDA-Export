@@ -1,57 +1,50 @@
-signed int __thiscall sub_76B090(unsigned __int16 *this, int a2, int a3)
+// Oblivion-authoritative resize/recreate wrapper. Saves the current 0x38-byte presentation block, substitutes requested width/height, and runs full device recreation. Returns 2 for requested parameters, 1 after successfully restoring originals, or 0 if both attempts fail.
+int __thiscall NiDX9Renderer_Recreate(NiDX9Renderer *this, unsigned int width, unsigned int height)
 {
-  int v4; // esi
-  int v5; // eax
-  int v6; // eax
+  NiDX92DBufferData *data; // esi
+  NiDX92DBufferData *v5; // eax
+  NiRTTI *v6; // eax
   char v7; // al
-  _DWORD *v8; // esi
+  unsigned int *v8; // esi
   void *v9; // ecx
   void *v10; // ecx
-  size_t v12; // [esp-8h] [ebp-48h]
-  size_t v13; // [esp-4h] [ebp-44h]
   _BYTE Dst[56]; // [esp+8h] [ebp-38h] BYREF
 
-  v4 = *(_DWORD *)((*(int (__thiscall **)(_DWORD, _DWORD))(**((_DWORD **)this + 0x21E) + 0x70))(
-                     *((_DWORD *)this + 0x21E),
-                     0)
-                 + 0x10);
-  if ( v4 )
+  data = this->member.defaultRTGroup->vtbl->GetBuffer(this->member.defaultRTGroup, 0)->members.data; /*0x76b0a6*/
+  if ( data )
   {
-    v6 = (*(int (__thiscall **)(int))(*(_DWORD *)v4 + 0x10))(v4);
-    if ( v6 )
+    v6 = (NiRTTI *)data->__vftable->GetRTTI(data); /*0x76b0b8*/
+    if ( v6 ) /*0x76b0bc*/
     {
-      while ( (_UNKNOWN *)v6 != &unk_B4265C )
+      while ( v6 != &stru_B4265C ) /*0x76b0c5*/
       {
-        v6 = *(_DWORD *)(v6 + 4);
-        if ( !v6 )
-          goto LABEL_6;
+        v6 = v6->parent; /*0x76b0c7*/
+        if ( !v6 ) /*0x76b0cc*/
+          goto LABEL_6; /*0x76b0cc*/
       }
-      v7 = 1;
+      v7 = 1; /*0x76b13d*/
     }
     else
     {
 LABEL_6:
-      v7 = 0;
+      v7 = 0; /*0x76b0ce*/
     }
-    v5 = v7 != 0 ? v4 : 0;
+    v5 = v7 != 0 ? data : 0;
   }
   else
   {
-    v5 = 0;
+    v5 = 0; /*0x76b0ad*/
   }
-  v8 = (_DWORD *)(v5 + 0x14);
-  LODWORD(v13) = 0x38;
-  memcpy(Dst, (const void *)(v5 + 0x14), v13);
-  *v8 = a2;
-  v8[1] = a3;
-  if ( sub_76A970((NiDX9Renderer *)this) )
-    return 2;
-  HIDWORD(v12) = "NiDX9Renderer::Recreate> Could not reset device to desired parameters - trying to recover original values\n";
-  TESTexture::ClearComponentReferences(v9);
-  LODWORD(v12) = 0x38;
-  memcpy(v8, Dst, v12);
-  if ( sub_76A970((NiDX9Renderer *)this) )
-    return 1;
-  TESTexture::ClearComponentReferences(v10);
-  return 0;
+  v8 = (unsigned int *)&v5[1]; /*0x76b0d6*/
+  memcpy(Dst, &v5[1], sizeof(Dst)); /*0x76b0e1*/
+  *v8 = width; /*0x76b0ee*/
+  v8[1] = height; /*0x76b0f5*/
+  if ( NiDX9Renderer_RecreateDevice(this) ) /*0x76b0f8*/
+    return 2; /*0x76b14f*/
+  Shared_NoOpVirtual_60D0A0(v9); /*0x76b106*/
+  memcpy(v8, Dst, 0x38u); /*0x76b113*/
+  if ( NiDX9Renderer_RecreateDevice(this) ) /*0x76b11d*/
+    return 1; /*0x76b142*/
+  Shared_NoOpVirtual_60D0A0(v10); /*0x76b12b*/
+  return 0; /*0x76b133*/
 }

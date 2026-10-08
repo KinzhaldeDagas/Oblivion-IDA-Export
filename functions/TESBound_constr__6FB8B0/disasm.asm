@@ -1,4 +1,4 @@
-0x6FB8B0: push    esi
+0x6FB8B0: push    esi; Pass269 native BSBound constructor used only for one of four selected exact-root TESObjectSTAT sources when BBX is absent; center/extents are filled from that source's own world bound.
 0x6FB8B1: push    offset off_A7D2CC
 0x6FB8B6: mov     esi, ecx
 0x6FB8B8: call    NiExtraData_ctor

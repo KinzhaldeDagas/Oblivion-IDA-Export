@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68EE90",
+      "0x68EFEE"
+    ]
+  ],
+  "chunks_sha256": "f7bc5ca83665e43a653b33e48f9f946116f9775f0afe5936c45590b882e6ebd9",
+  "comment_regular": "Verified active-effect list load lifecycle: destroys current effects and clears old list nodes, reads the UInt16 effect count (and optional BLOK header), loads each record through ActiveEffect_Base_Load, then inserts valid effects sorted by MagicTarget_ActiveEffectComparisonFunc. The loop also retains save-buffer boundary checks and handles the Vampirism-effect special case.",
+  "comment_repeatable": "Verified active-effect list load lifecycle: destroys current effects and clears old list nodes, reads the UInt16 effect count (and optional BLOK header), loads each record through ActiveEffect_Base_Load, then inserts valid effects sorted by MagicTarget_ActiveEffectComparisonFunc. The loop also retains save-buffer boundary checks and handles the Vampirism-effect special case.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 8,
-  "display_name": "ActiveEffect_Base_LoadAEList?",
+  "display_name": "ActiveEffect_Base_LoadAEList",
   "end_ea": "0x68EFEE",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
-  "name": "ActiveEffect_Base_LoadAEList?",
+  "name": "ActiveEffect_Base_LoadAEList",
   "segment": ".text",
   "sha256": "f7bc5ca83665e43a653b33e48f9f946116f9775f0afe5936c45590b882e6ebd9",
   "size": 350,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68EE90",
-  "type": "int __cdecl(int, PlayerCharacter *, int, __int16, int, int, float, int, int, int, int)",
+  "total_chunk_size": 350,
+  "type": "int __cdecl(int *, PlayerCharacter *, int, __int16, int, int, float, int, int, int, int)",
   "xrefs_from_count": 143,
   "xrefs_to_count": 3
 }

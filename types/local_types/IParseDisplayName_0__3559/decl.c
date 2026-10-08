@@ -1,1 +1,1 @@
-IParseDisplayName_0
+typedef IParseDisplayName IParseDisplayName_0;

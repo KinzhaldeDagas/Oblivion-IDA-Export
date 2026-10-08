@@ -1,4 +1,4 @@
 void sub_701630()
 {
-  g_Renderer = 0;
+  renderer = 0; /*0x701630*/
 }

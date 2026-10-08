@@ -26,7 +26,7 @@
 0x96A3D4: test    ah, 5
 0x96A3D7: jp      loc_96C314
 0x96A3DD: mov     ecx, esi
-0x96A3DF: call    sub_43F350
+0x96A3DF: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x96A3E4: jmp     loc_96C331
 0x96A3E9: fstp    st
 0x96A3EB: jmp     short loc_96A378
@@ -146,7 +146,7 @@
 0x96A567: fld     [esp+arg_4C]
 0x96A56B: mov     edx, [esp+arg_8]
 0x96A56F: fld     [esp+arg_50]
-0x96A573: mov     eax, [esp+arg_98]
+0x96A573: mov     eax, [esp+other]
 0x96A57A: fld     [esp+arg_54]
 0x96A57E: fld     dword ptr [ecx]
 0x96A580: fmul    dword ptr [edi]
@@ -246,7 +246,7 @@
 0x96A683: fstp    st
 0x96A685: fstp    st
 0x96A687: fldz
-0x96A689: fcom    [esp+ecx*4+arg_98]
+0x96A689: fcom    [esp+ecx*4+other]
 0x96A690: fnstsw  ax
 0x96A692: test    ah, 5
 0x96A695: jp      short loc_96A6A4
@@ -254,7 +254,7 @@
 0x96A69B: fmul    dword ptr [esi+34h]
 0x96A69E: fstp    [esp+arg_34]
 0x96A6A2: jmp     short loc_96A6CD
-0x96A6A4: fcom    [esp+ecx*4+arg_98]
+0x96A6A4: fcom    [esp+ecx*4+other]
 0x96A6AB: fnstsw  ax
 0x96A6AD: test    ah, 41h
 0x96A6B0: jnz     short loc_96A6C9
@@ -368,7 +368,7 @@
 0x96A7E5: jz      loc_96C364
 0x96A7EB: cmp     [esp+arg_C], 0
 0x96A7F0: mov     eax, [esp+arg_44]
-0x96A7F4: mov     ecx, [esp+arg_98]
+0x96A7F4: mov     ecx, [esp+other]
 0x96A7FB: lea     eax, [eax+eax*2-0Ch]
 0x96A7FF: jge     short loc_96A838
 0x96A801: fld     dword ptr [ecx+eax*4]
@@ -535,33 +535,33 @@
 0x96A9DD: push    edx; int
 0x96A9DE: call    sub_47DA10
 0x96A9E3: fld     dword ptr [eax]
-0x96A9E5: fadd    [esp+0Ch+arg_12C]
+0x96A9E5: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96A9EC: add     esp, 0Ch
 0x96A9EF: fstp    [esp+arg_28]
 0x96A9F3: fld     dword ptr [eax+4]
-0x96A9F6: fadd    [esp+arg_13C]
+0x96A9F6: fadd    qword ptr [esp+arg_13C.x]
 0x96A9FD: fstp    [esp+arg_2C]
 0x96AA01: mov     ecx, [esp+arg_2C]
 0x96AA05: fld     dword ptr [eax+8]
 0x96AA08: mov     eax, [esp+arg_28]
 0x96AA0C: fadd    [esp+arg_15C]
-0x96AA13: mov     dword ptr [esp+arg_74], eax
-0x96AA17: lea     eax, [esp+arg_74]
-0x96AA1B: mov     dword ptr [esp+arg_74+4], ecx
-0x96AA1F: mov     ecx, [esp+arg_98]
+0x96AA13: mov     [esp+out.x], eax
+0x96AA17: lea     eax, [esp+out]
+0x96AA1B: mov     [esp+out.y], ecx
+0x96AA1F: mov     ecx, [esp+other]
 0x96AA26: fstp    [esp+arg_30]
 0x96AA2A: fld     [esp+arg_3C]
 0x96AA2E: mov     edx, [esp+arg_30]
 0x96AA32: fmul    qword ptr [esp+arg_17C]
 0x96AA39: push    eax
 0x96AA3A: fld     [esp+4+arg_38]
-0x96AA3E: mov     [esp+4+arg_7C], edx
-0x96AA45: fmul    [esp+4+arg_11C]
+0x96AA3E: mov     [esp+4+out.z], edx
+0x96AA45: fmul    qword ptr [esp+4+arg_11C.x]
 0x96AA4C: faddp   st(1), st
 0x96AA4E: fstp    qword ptr [esp+4+arg_64]
 0x96AA52: call    sub_47D9E0
 0x96AA57: fsubr   qword ptr [esp+arg_64]
-0x96AA5B: lea     ecx, [esp+arg_74]
+0x96AA5B: lea     ecx, [esp+out]
 0x96AA5F: push    ecx
 0x96AA60: mov     ecx, [esp+4+arg_60]
 0x96AA64: fstp    [esp+4+arg_8]
@@ -640,17 +640,17 @@
 0x96AB35: cmp     byte ptr [ebp+24h], 0
 0x96AB39: jz      loc_96C364
 0x96AB3F: cmp     [esp+arg_C], 0
-0x96AB44: mov     eax, [esp+arg_98]
-0x96AB4B: push    eax
+0x96AB44: mov     eax, [esp+other]
+0x96AB4B: push    eax; other
 0x96AB4C: jge     short loc_96AB5C
 0x96AB4E: lea     ecx, [esp+4+arg_4C]
 0x96AB52: push    ecx
 0x96AB53: mov     ecx, [esp+8+arg_60]
 0x96AB57: jmp     loc_96C2C3
-0x96AB5C: lea     ecx, [esp+4+arg_74]
-0x96AB60: push    ecx
-0x96AB61: mov     ecx, [esp+8+arg_60]
-0x96AB65: call    sub_498FE0
+0x96AB5C: lea     ecx, [esp+4+out]
+0x96AB60: push    ecx; out
+0x96AB61: mov     ecx, [esp+8+arg_60]; this
+0x96AB65: call    NiPoint3_CrossProduct
 0x96AB6A: jmp     loc_96A45D
 0x96AB6F: mov     ecx, [esp+arg_C]; jumptable 0096A36B case 8
 0x96AB73: fstp    st(1)
@@ -767,34 +767,34 @@
 0x96ACC3: push    ecx; int
 0x96ACC4: call    sub_47DA10
 0x96ACC9: fld     dword ptr [eax]
-0x96ACCB: fadd    [esp+0Ch+arg_12C]
+0x96ACCB: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96ACD2: add     esp, 0Ch
 0x96ACD5: fstp    [esp+arg_28]
 0x96ACD9: mov     edx, [esp+arg_28]
 0x96ACDD: fld     dword ptr [eax+4]
-0x96ACE0: fadd    [esp+arg_13C]
+0x96ACE0: fadd    qword ptr [esp+arg_13C.x]
 0x96ACE7: fstp    [esp+arg_2C]
 0x96ACEB: fld     dword ptr [eax+8]
 0x96ACEE: mov     eax, [esp+arg_2C]
 0x96ACF2: fadd    [esp+arg_15C]
-0x96ACF9: mov     dword ptr [esp+arg_74], edx
-0x96ACFD: lea     edx, [esp+arg_74]
+0x96ACF9: mov     [esp+out.x], edx
+0x96ACFD: lea     edx, [esp+out]
 0x96AD01: push    edx
 0x96AD02: fstp    [esp+4+arg_30]
 0x96AD06: mov     ecx, [esp+4+arg_30]
 0x96AD0A: fld     [esp+4+arg_3C]
-0x96AD0E: mov     [esp+4+arg_7C], ecx
-0x96AD15: fmul    [esp+4+arg_16C]
+0x96AD0E: mov     [esp+4+out.z], ecx
+0x96AD15: fmul    qword ptr [esp+4+arg_16C.x]
 0x96AD1C: mov     ecx, [esp+4+arg_A0]
 0x96AD23: fld     [esp+4+arg_38]
-0x96AD27: mov     dword ptr [esp+4+arg_74+4], eax
+0x96AD27: mov     [esp+4+out.y], eax
 0x96AD2E: fmul    qword ptr [esp+4+arg_14C]
 0x96AD35: faddp   st(1), st
 0x96AD37: fstp    qword ptr [esp+4+arg_64]
 0x96AD3B: call    sub_47D9E0
 0x96AD40: fsubr   qword ptr [esp+arg_64]
 0x96AD44: mov     ecx, [esp+arg_60]
-0x96AD48: lea     eax, [esp+arg_74]
+0x96AD48: lea     eax, [esp+out]
 0x96AD4C: push    eax
 0x96AD4D: fstp    [esp+4+arg_8]
 0x96AD51: fld     [esp+4+arg_8]
@@ -873,16 +873,16 @@
 0x96AE22: jz      loc_96C364
 0x96AE28: cmp     [esp+arg_C], 0
 0x96AE2D: mov     eax, [esp+arg_A0]
-0x96AE34: push    eax
+0x96AE34: push    eax; other
 0x96AE35: jge     short loc_96AE48
 0x96AE37: lea     ecx, [esp+4+arg_18C]
 0x96AE3E: push    ecx
 0x96AE3F: mov     ecx, [esp+8+arg_60]
 0x96AE43: jmp     loc_96C2C3
 0x96AE48: lea     ecx, [esp+4+arg_204]
-0x96AE4F: push    ecx
-0x96AE50: mov     ecx, [esp+8+arg_60]
-0x96AE54: call    sub_498FE0
+0x96AE4F: push    ecx; out
+0x96AE50: mov     ecx, [esp+8+arg_60]; this
+0x96AE54: call    NiPoint3_CrossProduct
 0x96AE59: jmp     loc_96A45D
 0x96AE5E: fldz; jumptable 0096A36B case 9
 0x96AE60: mov     ecx, [esp+arg_C]
@@ -997,34 +997,34 @@
 0x96AFA4: push    ecx; int
 0x96AFA5: call    sub_47DA10
 0x96AFAA: fld     dword ptr [eax]
-0x96AFAC: fadd    [esp+0Ch+arg_12C]
+0x96AFAC: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96AFB3: add     esp, 0Ch
 0x96AFB6: fstp    [esp+arg_28]
 0x96AFBA: mov     edx, [esp+arg_28]
 0x96AFBE: fld     dword ptr [eax+4]
-0x96AFC1: fadd    [esp+arg_13C]
+0x96AFC1: fadd    qword ptr [esp+arg_13C.x]
 0x96AFC8: fstp    [esp+arg_2C]
 0x96AFCC: fld     dword ptr [eax+8]
 0x96AFCF: mov     eax, [esp+arg_2C]
 0x96AFD3: fadd    [esp+arg_15C]
-0x96AFDA: mov     dword ptr [esp+arg_74], edx
-0x96AFDE: lea     edx, [esp+arg_74]
+0x96AFDA: mov     [esp+out.x], edx
+0x96AFDE: lea     edx, [esp+out]
 0x96AFE2: push    edx
 0x96AFE3: fstp    [esp+4+arg_30]
 0x96AFE7: mov     ecx, [esp+4+arg_30]
 0x96AFEB: fld     [esp+4+arg_3C]
-0x96AFEF: mov     [esp+4+arg_7C], ecx
+0x96AFEF: mov     [esp+4+out.z], ecx
 0x96AFF6: fmul    [esp+4+arg_FC]
 0x96AFFD: mov     ecx, [esp+4+arg_A4]
 0x96B004: fld     [esp+4+arg_38]
-0x96B008: mov     dword ptr [esp+4+arg_74+4], eax
-0x96B00F: fmul    qword ptr [esp+4+arg_EC]
+0x96B008: mov     [esp+4+out.y], eax
+0x96B00F: fmul    qword ptr [esp+4+arg_EC.x]
 0x96B016: faddp   st(1), st
 0x96B018: fstp    qword ptr [esp+4+arg_64]
 0x96B01C: call    sub_47D9E0
 0x96B021: fsubr   qword ptr [esp+arg_64]
 0x96B025: mov     ecx, [esp+arg_60]
-0x96B029: lea     eax, [esp+arg_74]
+0x96B029: lea     eax, [esp+out]
 0x96B02D: push    eax
 0x96B02E: fstp    [esp+4+arg_8]
 0x96B032: fld     [esp+4+arg_8]
@@ -1103,16 +1103,16 @@
 0x96B103: jz      loc_96C364
 0x96B109: cmp     [esp+arg_C], 0
 0x96B10E: mov     eax, [esp+arg_A4]
-0x96B115: push    eax
+0x96B115: push    eax; other
 0x96B116: jge     short loc_96B129
 0x96B118: lea     ecx, [esp+4+arg_1CC]
 0x96B11F: push    ecx
 0x96B120: mov     ecx, [esp+8+arg_60]
 0x96B124: jmp     loc_96C2C3
 0x96B129: lea     ecx, [esp+4+arg_1AC]
-0x96B130: push    ecx
-0x96B131: mov     ecx, [esp+8+arg_60]
-0x96B135: call    sub_498FE0
+0x96B130: push    ecx; out
+0x96B131: mov     ecx, [esp+8+arg_60]; this
+0x96B135: call    NiPoint3_CrossProduct
 0x96B13A: jmp     loc_96A45D
 0x96B13F: fstp    st(1); jumptable 0096A36B case 10
 0x96B141: fstp    st
@@ -1206,7 +1206,7 @@
 0x96B245: fstp    [esp+arg_54]
 0x96B249: jmp     short loc_96B24F
 0x96B24B: fst     [esp+arg_54]
-0x96B24F: fld     [esp+arg_11C]
+0x96B24F: fld     qword ptr [esp+arg_11C.x]
 0x96B256: fmul    st, st
 0x96B258: fsubp   st(2), st
 0x96B25A: fxch    st(1)
@@ -1230,38 +1230,38 @@
 0x96B297: push    ecx; int
 0x96B298: call    sub_47DA10
 0x96B29D: fld     dword ptr [eax]
-0x96B29F: fadd    [esp+0Ch+arg_12C]
+0x96B29F: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96B2A6: add     esp, 0Ch
 0x96B2A9: fstp    [esp+arg_28]
 0x96B2AD: mov     edx, [esp+arg_28]
 0x96B2B1: fld     dword ptr [eax+4]
-0x96B2B4: fadd    [esp+arg_13C]
+0x96B2B4: fadd    qword ptr [esp+arg_13C.x]
 0x96B2BB: fstp    [esp+arg_2C]
 0x96B2BF: fld     dword ptr [eax+8]
 0x96B2C2: mov     eax, [esp+arg_2C]
 0x96B2C6: fadd    [esp+arg_15C]
-0x96B2CD: mov     dword ptr [esp+arg_74], edx
-0x96B2D1: lea     edx, [esp+arg_74]
+0x96B2CD: mov     [esp+out.x], edx
+0x96B2D1: lea     edx, [esp+out]
 0x96B2D5: push    edx
 0x96B2D6: fstp    [esp+4+arg_30]
 0x96B2DA: mov     ecx, [esp+4+arg_30]
 0x96B2DE: fld     [esp+4+arg_34]
-0x96B2E2: mov     [esp+4+arg_7C], ecx
+0x96B2E2: mov     [esp+4+out.z], ecx
 0x96B2E9: fmul    qword ptr [esp+4+arg_10C]
-0x96B2F0: mov     ecx, [esp+4+arg_98]
+0x96B2F0: mov     ecx, [esp+4+other]
 0x96B2F7: fld     [esp+4+arg_3C]
-0x96B2FB: mov     dword ptr [esp+4+arg_74+4], eax
+0x96B2FB: mov     [esp+4+out.y], eax
 0x96B302: fmul    qword ptr [esp+4+arg_17C]
 0x96B309: faddp   st(1), st
 0x96B30B: fstp    qword ptr [esp+4+arg_64]
 0x96B30F: call    sub_47D9E0
 0x96B314: fsubr   qword ptr [esp+arg_64]
 0x96B318: mov     ecx, [esp+arg_88]
-0x96B31F: lea     eax, [esp+arg_74]
+0x96B31F: lea     eax, [esp+out]
 0x96B323: push    eax
 0x96B324: fstp    [esp+4+arg_8]
 0x96B328: fld     [esp+4+arg_8]
-0x96B32C: fmul    [esp+4+arg_11C]
+0x96B32C: fmul    qword ptr [esp+4+arg_11C.x]
 0x96B333: fstp    qword ptr [esp+4+arg_64]
 0x96B337: call    sub_47D9E0
 0x96B33C: fadd    qword ptr [esp+arg_64]
@@ -1269,7 +1269,7 @@
 0x96B344: fmul    qword ptr [esp+arg_14C]
 0x96B34B: faddp   st(1), st
 0x96B34D: fld     [esp+arg_54]
-0x96B351: fmul    qword ptr [esp+arg_EC]
+0x96B351: fmul    qword ptr [esp+arg_EC.x]
 0x96B358: faddp   st(1), st
 0x96B35A: fdiv    [esp+arg_14]
 0x96B35E: fstp    [esp+arg_38]
@@ -1335,17 +1335,17 @@
 0x96B3F5: cmp     byte ptr [ebp+24h], 0
 0x96B3F9: jz      loc_96C364
 0x96B3FF: cmp     [esp+arg_C], 0
-0x96B404: mov     eax, [esp+arg_98]
-0x96B40B: push    eax
+0x96B404: mov     eax, [esp+other]
+0x96B40B: push    eax; other
 0x96B40C: jge     short loc_96B422
 0x96B40E: lea     ecx, [esp+4+arg_FC]
 0x96B415: push    ecx
 0x96B416: mov     ecx, [esp+8+arg_88]
 0x96B41D: jmp     loc_96C2C3
 0x96B422: lea     ecx, [esp+4+arg_EC]
-0x96B429: push    ecx
-0x96B42A: mov     ecx, [esp+8+arg_88]
-0x96B431: call    sub_498FE0
+0x96B429: push    ecx; out
+0x96B42A: mov     ecx, [esp+8+arg_88]; this
+0x96B431: call    NiPoint3_CrossProduct
 0x96B436: jmp     loc_96A45D
 0x96B43B: fstp    st(1); jumptable 0096A36B case 11
 0x96B43D: fstp    st
@@ -1463,34 +1463,34 @@
 0x96B593: push    ecx; int
 0x96B594: call    sub_47DA10
 0x96B599: fld     dword ptr [eax]
-0x96B59B: fadd    [esp+0Ch+arg_12C]
+0x96B59B: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96B5A2: add     esp, 0Ch
 0x96B5A5: fstp    [esp+arg_28]
 0x96B5A9: mov     edx, [esp+arg_28]
 0x96B5AD: fld     dword ptr [eax+4]
-0x96B5B0: fadd    [esp+arg_13C]
+0x96B5B0: fadd    qword ptr [esp+arg_13C.x]
 0x96B5B7: fstp    [esp+arg_2C]
 0x96B5BB: fld     dword ptr [eax+8]
 0x96B5BE: mov     eax, [esp+arg_2C]
 0x96B5C2: fadd    [esp+arg_15C]
-0x96B5C9: mov     dword ptr [esp+arg_74], edx
-0x96B5CD: lea     edx, [esp+arg_74]
+0x96B5C9: mov     [esp+out.x], edx
+0x96B5CD: lea     edx, [esp+out]
 0x96B5D1: push    edx
 0x96B5D2: fstp    [esp+4+arg_30]
 0x96B5D6: mov     ecx, [esp+4+arg_30]
 0x96B5DA: fld     [esp+4+arg_34]
-0x96B5DE: mov     [esp+4+arg_7C], ecx
+0x96B5DE: mov     [esp+4+out.z], ecx
 0x96B5E5: fmul    qword ptr [esp+4+arg_CC]
 0x96B5EC: mov     ecx, [esp+4+arg_A0]
 0x96B5F3: fld     [esp+4+arg_3C]
-0x96B5F7: mov     dword ptr [esp+4+arg_74+4], eax
-0x96B5FE: fmul    [esp+4+arg_16C]
+0x96B5F7: mov     [esp+4+out.y], eax
+0x96B5FE: fmul    qword ptr [esp+4+arg_16C.x]
 0x96B605: faddp   st(1), st
 0x96B607: fstp    qword ptr [esp+4+arg_64]
 0x96B60B: call    sub_47D9E0
 0x96B610: fsubr   qword ptr [esp+arg_64]
 0x96B614: mov     ecx, [esp+arg_88]
-0x96B61B: lea     eax, [esp+arg_74]
+0x96B61B: lea     eax, [esp+out]
 0x96B61F: push    eax
 0x96B620: fstp    [esp+4+arg_8]
 0x96B624: fld     [esp+4+arg_8]
@@ -1499,10 +1499,10 @@
 0x96B633: call    sub_47D9E0
 0x96B638: fadd    qword ptr [esp+arg_64]
 0x96B63C: fld     [esp+arg_4C]
-0x96B640: fmul    [esp+arg_11C]
+0x96B640: fmul    qword ptr [esp+arg_11C.x]
 0x96B647: faddp   st(1), st
 0x96B649: fld     [esp+arg_54]
-0x96B64D: fmul    qword ptr [esp+arg_EC]
+0x96B64D: fmul    qword ptr [esp+arg_EC.x]
 0x96B654: faddp   st(1), st
 0x96B656: fdiv    [esp+arg_14]
 0x96B65A: fstp    [esp+arg_38]
@@ -1569,16 +1569,16 @@
 0x96B6F5: jz      loc_96C364
 0x96B6FB: cmp     [esp+arg_C], 0
 0x96B700: mov     eax, [esp+arg_A0]
-0x96B707: push    eax
+0x96B707: push    eax; other
 0x96B708: jge     short loc_96B71E
 0x96B70A: lea     ecx, [esp+4+arg_CC]
 0x96B711: push    ecx
 0x96B712: mov     ecx, [esp+8+arg_88]
 0x96B719: jmp     loc_96C2C3
 0x96B71E: lea     ecx, [esp+4+arg_16C]
-0x96B725: push    ecx
-0x96B726: mov     ecx, [esp+8+arg_88]
-0x96B72D: call    sub_498FE0
+0x96B725: push    ecx; out
+0x96B726: mov     ecx, [esp+8+arg_88]; this
+0x96B72D: call    NiPoint3_CrossProduct
 0x96B732: jmp     loc_96A45D
 0x96B737: fstp    st(1); jumptable 0096A36B case 12
 0x96B739: fldz
@@ -1671,7 +1671,7 @@
 0x96B836: fstp    [esp+arg_50]
 0x96B83A: jmp     short loc_96B840
 0x96B83C: fst     [esp+arg_50]
-0x96B840: fld     qword ptr [esp+arg_EC]
+0x96B840: fld     qword ptr [esp+arg_EC.x]
 0x96B847: fmul    st, st
 0x96B849: fsubp   st(2), st
 0x96B84B: fxch    st(1)
@@ -1695,43 +1695,43 @@
 0x96B888: push    ecx; int
 0x96B889: call    sub_47DA10
 0x96B88E: fld     dword ptr [eax]
-0x96B890: fadd    [esp+0Ch+arg_12C]
+0x96B890: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96B897: add     esp, 0Ch
 0x96B89A: fstp    [esp+arg_28]
 0x96B89E: mov     edx, [esp+arg_28]
 0x96B8A2: fld     dword ptr [eax+4]
-0x96B8A5: fadd    [esp+arg_13C]
+0x96B8A5: fadd    qword ptr [esp+arg_13C.x]
 0x96B8AC: fstp    [esp+arg_2C]
 0x96B8B0: fld     dword ptr [eax+8]
 0x96B8B3: mov     eax, [esp+arg_2C]
 0x96B8B7: fadd    [esp+arg_15C]
-0x96B8BE: mov     dword ptr [esp+arg_74], edx
-0x96B8C2: lea     edx, [esp+arg_74]
+0x96B8BE: mov     [esp+out.x], edx
+0x96B8C2: lea     edx, [esp+out]
 0x96B8C6: push    edx
 0x96B8C7: fstp    [esp+4+arg_30]
 0x96B8CB: mov     ecx, [esp+4+arg_30]
 0x96B8CF: fld     [esp+4+arg_34]
-0x96B8D3: mov     [esp+4+arg_7C], ecx
+0x96B8D3: mov     [esp+4+out.z], ecx
 0x96B8DA: fmul    [esp+4+arg_18C]
 0x96B8E1: mov     ecx, [esp+4+arg_A4]
 0x96B8E8: fld     [esp+4+arg_3C]
-0x96B8EC: mov     dword ptr [esp+4+arg_74+4], eax
+0x96B8EC: mov     [esp+4+out.y], eax
 0x96B8F3: fmul    [esp+4+arg_FC]
 0x96B8FA: faddp   st(1), st
 0x96B8FC: fstp    qword ptr [esp+4+arg_64]
 0x96B900: call    sub_47D9E0
 0x96B905: fsubr   qword ptr [esp+arg_64]
 0x96B909: mov     ecx, [esp+arg_88]
-0x96B910: lea     eax, [esp+arg_74]
+0x96B910: lea     eax, [esp+out]
 0x96B914: push    eax
 0x96B915: fstp    [esp+4+arg_8]
 0x96B919: fld     [esp+4+arg_8]
-0x96B91D: fmul    qword ptr [esp+4+arg_EC]
+0x96B91D: fmul    qword ptr [esp+4+arg_EC.x]
 0x96B924: fstp    qword ptr [esp+4+arg_64]
 0x96B928: call    sub_47D9E0
 0x96B92D: fadd    qword ptr [esp+arg_64]
 0x96B931: fld     [esp+arg_4C]
-0x96B935: fmul    [esp+arg_11C]
+0x96B935: fmul    qword ptr [esp+arg_11C.x]
 0x96B93C: faddp   st(1), st
 0x96B93E: fld     [esp+arg_50]
 0x96B942: fmul    qword ptr [esp+arg_14C]
@@ -1801,16 +1801,16 @@
 0x96B9EA: jz      loc_96C364
 0x96B9F0: cmp     [esp+arg_C], 0
 0x96B9F5: mov     eax, [esp+arg_A4]
-0x96B9FC: push    eax
+0x96B9FC: push    eax; other
 0x96B9FD: jge     short loc_96BA13
 0x96B9FF: lea     ecx, [esp+4+arg_15C]
 0x96BA06: push    ecx
 0x96BA07: mov     ecx, [esp+8+arg_88]
 0x96BA0E: jmp     loc_96C2C3
 0x96BA13: lea     ecx, [esp+4+arg_13C]
-0x96BA1A: push    ecx
-0x96BA1B: mov     ecx, [esp+8+arg_88]
-0x96BA22: call    sub_498FE0
+0x96BA1A: push    ecx; out
+0x96BA1B: mov     ecx, [esp+8+arg_88]; this
+0x96BA22: call    NiPoint3_CrossProduct
 0x96BA27: jmp     loc_96A45D
 0x96BA2C: mov     ecx, [esp+arg_C]; jumptable 0096A36B case 13
 0x96BA30: fstp    st(1)
@@ -1926,34 +1926,34 @@
 0x96BB79: push    ecx; int
 0x96BB7A: call    sub_47DA10
 0x96BB7F: fld     dword ptr [eax]
-0x96BB81: fadd    [esp+0Ch+arg_12C]
+0x96BB81: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96BB88: add     esp, 0Ch
 0x96BB8B: fstp    [esp+arg_28]
 0x96BB8F: mov     edx, [esp+arg_28]
 0x96BB93: fld     dword ptr [eax+4]
-0x96BB96: fadd    [esp+arg_13C]
+0x96BB96: fadd    qword ptr [esp+arg_13C.x]
 0x96BB9D: fstp    [esp+arg_2C]
 0x96BBA1: fld     dword ptr [eax+8]
 0x96BBA4: mov     eax, [esp+arg_2C]
 0x96BBA8: fadd    [esp+arg_15C]
-0x96BBAF: mov     dword ptr [esp+arg_74], edx
-0x96BBB3: lea     edx, [esp+arg_74]
+0x96BBAF: mov     [esp+out.x], edx
+0x96BBB3: lea     edx, [esp+out]
 0x96BBB7: push    edx
 0x96BBB8: fstp    [esp+4+arg_30]
 0x96BBBC: mov     ecx, [esp+4+arg_30]
 0x96BBC0: fld     [esp+4+arg_34]
-0x96BBC4: mov     [esp+4+arg_7C], ecx
+0x96BBC4: mov     [esp+4+out.z], ecx
 0x96BBCB: fmul    qword ptr [esp+4+arg_10C]
-0x96BBD2: mov     ecx, [esp+4+arg_98]
+0x96BBD2: mov     ecx, [esp+4+other]
 0x96BBD9: fld     [esp+4+arg_38]
-0x96BBDD: mov     dword ptr [esp+4+arg_74+4], eax
-0x96BBE4: fmul    [esp+4+arg_11C]
+0x96BBDD: mov     [esp+4+out.y], eax
+0x96BBE4: fmul    qword ptr [esp+4+arg_11C.x]
 0x96BBEB: faddp   st(1), st
 0x96BBED: fstp    qword ptr [esp+4+arg_64]
 0x96BBF1: call    sub_47D9E0
 0x96BBF6: fsubr   qword ptr [esp+arg_64]
 0x96BBFA: mov     ecx, [esp+arg_48]
-0x96BBFE: lea     eax, [esp+arg_74]
+0x96BBFE: lea     eax, [esp+out]
 0x96BC02: push    eax
 0x96BC03: fstp    [esp+4+arg_8]
 0x96BC07: fld     [esp+4+arg_8]
@@ -1962,7 +1962,7 @@
 0x96BC16: call    sub_47D9E0
 0x96BC1B: fadd    qword ptr [esp+arg_64]
 0x96BC1F: fld     [esp+arg_50]
-0x96BC23: fmul    [esp+arg_16C]
+0x96BC23: fmul    qword ptr [esp+arg_16C.x]
 0x96BC2A: faddp   st(1), st
 0x96BC2C: fld     [esp+arg_54]
 0x96BC30: fmul    [esp+arg_FC]
@@ -2031,15 +2031,15 @@
 0x96BCD4: cmp     byte ptr [ebp+24h], 0
 0x96BCD8: jz      loc_96C364
 0x96BCDE: cmp     [esp+arg_C], 0
-0x96BCE3: mov     eax, [esp+arg_98]
-0x96BCEA: push    eax
+0x96BCE3: mov     eax, [esp+other]
+0x96BCEA: push    eax; other
 0x96BCEB: jge     short loc_96BCF9
 0x96BCED: lea     ecx, [esp+4+arg_12C]
 0x96BCF4: jmp     loc_96C2BE
 0x96BCF9: lea     ecx, [esp+4+arg_11C]
-0x96BD00: push    ecx
-0x96BD01: mov     ecx, [esp+8+arg_48]
-0x96BD05: call    sub_498FE0
+0x96BD00: push    ecx; out
+0x96BD01: mov     ecx, [esp+8+arg_48]; this
+0x96BD05: call    NiPoint3_CrossProduct
 0x96BD0A: jmp     loc_96A45D
 0x96BD0F: mov     ecx, [esp+arg_C]; jumptable 0096A36B case 14
 0x96BD13: fstp    st(1)
@@ -2131,7 +2131,7 @@
 0x96BE0A: fstp    [esp+arg_54]
 0x96BE0E: jmp     short loc_96BE14
 0x96BE10: fst     [esp+arg_54]
-0x96BE14: fld     [esp+arg_16C]
+0x96BE14: fld     qword ptr [esp+arg_16C.x]
 0x96BE1B: fmul    st, st
 0x96BE1D: fsubp   st(2), st
 0x96BE1F: fxch    st(1)
@@ -2155,38 +2155,38 @@
 0x96BE5C: push    ecx; int
 0x96BE5D: call    sub_47DA10
 0x96BE62: fld     dword ptr [eax]
-0x96BE64: fadd    [esp+0Ch+arg_12C]
+0x96BE64: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96BE6B: add     esp, 0Ch
 0x96BE6E: fstp    [esp+arg_28]
 0x96BE72: mov     edx, [esp+arg_28]
 0x96BE76: fld     dword ptr [eax+4]
-0x96BE79: fadd    [esp+arg_13C]
+0x96BE79: fadd    qword ptr [esp+arg_13C.x]
 0x96BE80: fstp    [esp+arg_2C]
 0x96BE84: fld     dword ptr [eax+8]
 0x96BE87: mov     eax, [esp+arg_2C]
 0x96BE8B: fadd    [esp+arg_15C]
-0x96BE92: mov     dword ptr [esp+arg_74], edx
-0x96BE96: lea     edx, [esp+arg_74]
+0x96BE92: mov     [esp+out.x], edx
+0x96BE96: lea     edx, [esp+out]
 0x96BE9A: push    edx
 0x96BE9B: fstp    [esp+4+arg_30]
 0x96BE9F: mov     ecx, [esp+4+arg_30]
 0x96BEA3: fld     [esp+4+arg_34]
-0x96BEA7: mov     [esp+4+arg_7C], ecx
+0x96BEA7: mov     [esp+4+out.z], ecx
 0x96BEAE: fmul    qword ptr [esp+4+arg_CC]
 0x96BEB5: mov     ecx, [esp+4+arg_A0]
 0x96BEBC: fld     [esp+4+arg_38]
-0x96BEC0: mov     dword ptr [esp+4+arg_74+4], eax
+0x96BEC0: mov     [esp+4+out.y], eax
 0x96BEC7: fmul    qword ptr [esp+4+arg_14C]
 0x96BECE: faddp   st(1), st
 0x96BED0: fstp    qword ptr [esp+4+arg_64]
 0x96BED4: call    sub_47D9E0
 0x96BED9: fsubr   qword ptr [esp+arg_64]
 0x96BEDD: mov     ecx, [esp+arg_48]
-0x96BEE1: lea     eax, [esp+arg_74]
+0x96BEE1: lea     eax, [esp+out]
 0x96BEE5: push    eax
 0x96BEE6: fstp    [esp+4+arg_8]
 0x96BEEA: fld     [esp+4+arg_8]
-0x96BEEE: fmul    [esp+4+arg_16C]
+0x96BEEE: fmul    qword ptr [esp+4+arg_16C.x]
 0x96BEF5: fstp    qword ptr [esp+4+arg_64]
 0x96BEF9: call    sub_47D9E0
 0x96BEFE: fadd    qword ptr [esp+arg_64]
@@ -2261,14 +2261,14 @@
 0x96BFBB: jz      loc_96C364
 0x96BFC1: cmp     [esp+arg_C], 0
 0x96BFC6: mov     eax, [esp+arg_A0]
-0x96BFCD: push    eax
+0x96BFCD: push    eax; other
 0x96BFCE: jge     short loc_96BFD9
 0x96BFD0: lea     ecx, [esp+4+arg_14]
 0x96BFD4: jmp     loc_96C2BE
 0x96BFD9: lea     ecx, [esp+4+arg_240]
-0x96BFE0: push    ecx
-0x96BFE1: mov     ecx, [esp+8+arg_48]
-0x96BFE5: call    sub_498FE0
+0x96BFE0: push    ecx; out
+0x96BFE1: mov     ecx, [esp+8+arg_48]; this
+0x96BFE5: call    NiPoint3_CrossProduct
 0x96BFEA: jmp     loc_96A45D
 0x96BFEF: mov     ecx, [esp+arg_C]; jumptable 0096A36B case 15
 0x96BFF3: fstp    st(1)
@@ -2385,34 +2385,34 @@
 0x96C143: push    ecx; int
 0x96C144: call    sub_47DA10
 0x96C149: fld     dword ptr [eax]
-0x96C14B: fadd    [esp+0Ch+arg_12C]
+0x96C14B: fadd    qword ptr [esp+0Ch+arg_12C.x]
 0x96C152: add     esp, 0Ch
 0x96C155: fstp    [esp+arg_28]
 0x96C159: mov     edx, [esp+arg_28]
 0x96C15D: fld     dword ptr [eax+4]
-0x96C160: fadd    [esp+arg_13C]
+0x96C160: fadd    qword ptr [esp+arg_13C.x]
 0x96C167: fstp    [esp+arg_2C]
 0x96C16B: fld     dword ptr [eax+8]
 0x96C16E: mov     eax, [esp+arg_2C]
 0x96C172: fadd    [esp+arg_15C]
-0x96C179: mov     dword ptr [esp+arg_74], edx
-0x96C17D: lea     edx, [esp+arg_74]
+0x96C179: mov     [esp+out.x], edx
+0x96C17D: lea     edx, [esp+out]
 0x96C181: push    edx
 0x96C182: fstp    [esp+4+arg_30]
 0x96C186: mov     ecx, [esp+4+arg_30]
 0x96C18A: fld     [esp+4+arg_34]
-0x96C18E: mov     [esp+4+arg_7C], ecx
+0x96C18E: mov     [esp+4+out.z], ecx
 0x96C195: fmul    [esp+4+arg_18C]
 0x96C19C: mov     ecx, [esp+4+arg_A4]
 0x96C1A3: fld     [esp+4+arg_38]
-0x96C1A7: mov     dword ptr [esp+4+arg_74+4], eax
-0x96C1AE: fmul    qword ptr [esp+4+arg_EC]
+0x96C1A7: mov     [esp+4+out.y], eax
+0x96C1AE: fmul    qword ptr [esp+4+arg_EC.x]
 0x96C1B5: faddp   st(1), st
 0x96C1B7: fstp    qword ptr [esp+4+arg_64]
 0x96C1BB: call    sub_47D9E0
 0x96C1C0: fsubr   qword ptr [esp+arg_64]
 0x96C1C4: mov     ecx, [esp+arg_48]
-0x96C1C8: lea     eax, [esp+arg_74]
+0x96C1C8: lea     eax, [esp+out]
 0x96C1CC: push    eax
 0x96C1CD: fstp    [esp+4+arg_8]
 0x96C1D1: fld     [esp+4+arg_8]
@@ -2424,7 +2424,7 @@
 0x96C1ED: fmul    qword ptr [esp+arg_17C]
 0x96C1F4: faddp   st(1), st
 0x96C1F6: fld     [esp+arg_50]
-0x96C1FA: fmul    [esp+arg_16C]
+0x96C1FA: fmul    qword ptr [esp+arg_16C.x]
 0x96C201: faddp   st(1), st
 0x96C203: fdiv    [esp+arg_14]
 0x96C207: fstp    [esp+arg_3C]
@@ -2491,12 +2491,12 @@
 0x96C2A2: jz      loc_96C364
 0x96C2A8: cmp     [esp+arg_C], 0
 0x96C2AD: mov     eax, [esp+arg_A4]
-0x96C2B4: push    eax
+0x96C2B4: push    eax; other
 0x96C2B5: jge     short loc_96C2FE
 0x96C2B7: lea     ecx, [esp+4+arg_258]
-0x96C2BE: push    ecx
-0x96C2BF: mov     ecx, [esp+8+arg_48]
-0x96C2C3: call    sub_498FE0
+0x96C2BE: push    ecx; out
+0x96C2BF: mov     ecx, [esp+8+arg_48]; this
+0x96C2C3: call    NiPoint3_CrossProduct
 0x96C2C8: fld     dword ptr [eax]
 0x96C2CA: fchs
 0x96C2CC: fstp    [esp+arg_28]
@@ -2515,9 +2515,9 @@
 0x96C2F6: mov     [eax+8], edx
 0x96C2F9: jmp     loc_96A385
 0x96C2FE: lea     ecx, [esp+4+arg_24C]
-0x96C305: push    ecx
-0x96C306: mov     ecx, [esp+8+arg_48]
-0x96C30A: call    sub_498FE0
+0x96C305: push    ecx; out
+0x96C306: mov     ecx, [esp+8+arg_48]; this
+0x96C30A: call    NiPoint3_CrossProduct
 0x96C30F: jmp     loc_96A45D
 0x96C314: mov     ecx, ds:0B258D0h
 0x96C31A: mov     [esi], ecx

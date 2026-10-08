@@ -1,8 +1,8 @@
 void __cdecl sub_A26F40()
 {
-  if ( dword_B429F0 )
-    FormHeapFree((unsigned int)dword_B429F0);
-  dword_B429F0 = 0;
-  dword_B429F4 = 0;
-  dword_B429F8 = 0;
+  if ( firstOwner.begin ) /*0xa26f47*/
+    FormHeapFree((unsigned int)firstOwner.begin); /*0xa26f4a*/
+  firstOwner.begin = 0; /*0xa26f52*/
+  firstOwner.end = 0; /*0xa26f5c*/
+  firstOwner.capacity = 0; /*0xa26f66*/
 }

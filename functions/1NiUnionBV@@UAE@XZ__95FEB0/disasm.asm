@@ -5,7 +5,7 @@
 0x95FEBE: mov     eax, [esi+8]
 0x95FEC1: push    eax
 0x95FEC2: mov     dword ptr [esi+4], offset ??_7?$NiTArray@PAVNiBoundingVolume@@@@6B@; const NiTArray<NiBoundingVolume *>::`vftable'
-0x95FEC9: call    FormHeapFree
+0x95FEC9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x95FECE: add     esp, 4
 0x95FED1: mov     dword ptr [esi], offset ??_7NiBoundingVolume@@6B@; const NiBoundingVolume::`vftable'
 0x95FED7: pop     esi

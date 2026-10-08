@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6E1FC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion NiTransformData time-range clone. Creates the destination through the native clone path, slices each nonempty channel to [start,end] through the generic key-range copier (content selectors rotation=2, translation=1, scale=0), then transfers each produced array through the matching ownership setter.",
     "mnemonic": "push",
     "size": 2
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x6E207E",
-    "line": "call    sub_6D3210",
+    "line": "call    NiAnimationKey_CopyRangeRebased; Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6E2096",
-    "line": "call    sub_6E1E90",
+    "line": "call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x6E20CE",
-    "line": "call    sub_6D3210",
+    "line": "call    NiAnimationKey_CopyRangeRebased; Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x6E20E6",
-    "line": "call    sub_6E1F00",
+    "line": "call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x6E211D",
-    "line": "call    sub_6D3210",
+    "line": "call    NiAnimationKey_CopyRangeRebased; Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x6E2135",
-    "line": "call    sub_6E1F60",
+    "line": "call    NiTransformData_SetScaleKeys; Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -868,5 +868,89 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C8120",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8123",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8126",
+    "line": "jz      locret_9C8138",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C812C",
+    "line": "and     dword ptr [ebp-14h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8130",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8133",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8138",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C8139",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C813D",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8140",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8143",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8145",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C814A",
+    "line": "mov     eax, offset stru_AF0414",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C814F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,5 @@
-int __cdecl Calc_DetectionLevel_::CalcSneakSkills(
+// Oblivion Sneak-skill stage. Vanilla caps both detector and target Luck-modified Sneak values at 100, subtracts the target's concealment term from the detector term, and scales by fSneakSkillMult. Existing AVU patch context is preserved conceptually: its patch skips the two vanilla caps.
+int __cdecl Calc_DetectionLevel_ApplySneakSkills(
         int a1,
         int a2,
         float a3,
@@ -6,7 +7,7 @@ int __cdecl Calc_DetectionLevel_::CalcSneakSkills(
         int a5,
         int a6,
         int a7,
-        float a8,
+        int a8,
         int a9,
         int a10,
         int a11,
@@ -23,13 +24,13 @@ int __cdecl Calc_DetectionLevel_::CalcSneakSkills(
   char v20; // cl
   int v22; // [esp+Ch] [ebp+Ch]
 
-  if ( a5 > 0x64 )
-    a5 = 0x64;
-  if ( a6 > 0x64 )
-    a6 = 0x64;
-  __asm
-  {
-    fild    [esp+arg_10]
+  if ( a5 > 0x64 ) /*0x54654b*/
+    a5 = 0x64; /*0x54654d*/
+  if ( a6 > 0x64 ) /*0x546555*/
+    a6 = 0x64; /*0x546557*/
+  __asm /*0x54655d*/
+  {                                             // Calc_DetectionLevel::CalcSneakSkills starts applying detector/target sneak factors after the vanilla 100 caps.
+    fild    [esp+arg_10]; Calc_DetectionLevel::CalcSneakSkills starts applying detector/target sneak factors after the vanilla 100 caps.
     fmulp   st(2), st
     fild    [esp+arg_14]
     fmul    [esp+arg_4]
@@ -39,7 +40,7 @@ int __cdecl Calc_DetectionLevel_::CalcSneakSkills(
     fxch    st(1)
     fstp    [esp+arg_8]
   }
-  return Calc_DetectionLevel_::CalcAttackBonus(
+  return Calc_DetectionLevel_ApplyAttackBonus(
            v20 == 0,
            a1,
            a2,

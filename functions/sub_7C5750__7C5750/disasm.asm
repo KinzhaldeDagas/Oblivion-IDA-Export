@@ -7,7 +7,7 @@
 0x7C575A: push    4
 0x7C575C: mov     ecx, ebx
 0x7C575E: mov     [esp+14h+var_1], 1
-0x7C5763: call    NiNode_GetNiPropertyByID
+0x7C5763: call    NiNode_GetNiPropertyByID;
 0x7C5768: mov     edi, eax
 0x7C576A: test    edi, edi
 0x7C576C: jz      loc_7C583D
@@ -42,37 +42,37 @@
 0x7C57BE: or      [esi+1Ch], edx
 0x7C57C1: mov     dword ptr [esi+24h], 0FFFFFFFFh
 0x7C57C8: mov     edi, [ebx+4]
-0x7C57CB: mov     ecx, esi
-0x7C57CD: call    sub_7ED5C0
+0x7C57CB: mov     ecx, esi; self
+0x7C57CD: call    BSShaderProperty_GetShadowLightCount; Return BSShaderProperty's native shadow-light list count from +0x78; +0x70 is the list head and +0x74 is the tail.
 0x7C57D2: movzx   eax, ax
 0x7C57D5: cmp     edi, eax
 0x7C57D7: ja      short loc_7C57DE
 0x7C57D9: mov     [esp+14h+var_1], 0
-0x7C57DE: mov     ecx, esi
-0x7C57E0: call    sub_7ED5C0
+0x7C57DE: mov     ecx, esi; self
+0x7C57E0: call    BSShaderProperty_GetShadowLightCount; Return BSShaderProperty's native shadow-light list count from +0x78; +0x70 is the list head and +0x74 is the tail.
 0x7C57E5: movzx   edi, ax
 0x7C57E8: test    edi, edi
 0x7C57EA: jle     short loc_7C5831
-0x7C57EC: mov     ecx, esi
-0x7C57EE: call    sub_7ED160
+0x7C57EC: mov     ecx, esi; self
+0x7C57EE: call    BSShaderLightingProperty_GetFirstLightUnfiltered
 0x7C57F3: cmp     byte ptr [eax+0F4h], 0
 0x7C57FA: jnz     short loc_7C5804
 0x7C57FC: push    ebx
 0x7C57FD: mov     ecx, eax
-0x7C57FF: call    sub_7D6940
+0x7C57FF: call    ShadowSceneLight_RemoveReceiverGeometry; Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.
 0x7C5804: cmp     edi, 1
 0x7C5807: jle     short loc_7C5831
 0x7C5809: add     edi, 0FFFFFFFFh
 0x7C580C: lea     esp, [esp+0]
-0x7C5810: mov     ecx, esi
-0x7C5812: call    sub_7ED180
+0x7C5810: mov     ecx, esi; self
+0x7C5812: call    BSShaderLightingProperty_GetNextLightUnfiltered
 0x7C5817: test    eax, eax
 0x7C5819: jz      short loc_7C582C
 0x7C581B: cmp     byte ptr [eax+0F4h], 0
 0x7C5822: jnz     short loc_7C582C
 0x7C5824: push    ebx
 0x7C5825: mov     ecx, eax
-0x7C5827: call    sub_7D6940
+0x7C5827: call    ShadowSceneLight_RemoveReceiverGeometry; Remove one receiver geometry from both the property-side shadow-light association and the light-local object list.
 0x7C582C: sub     edi, 1
 0x7C582F: jnz     short loc_7C5810
 0x7C5831: mov     al, [esp+14h+var_1]

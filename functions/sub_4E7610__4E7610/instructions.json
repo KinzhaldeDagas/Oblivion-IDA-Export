@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E7610",
-    "line": "push    esi",
+    "line": "push    esi; Verified graph lifecycle dispatcher: if pointArray already exists, resolve deferred cross-cell PGRI links and optionally rebuild the render graph; otherwise find the thread-safe override file, load the PathGrid graph chunks, and on successful load perform the same cross-cell resolution/render update.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4E7619",
-    "line": "call    sub_4E6F30",
+    "line": "call    TESPathGrid_ResolveCrossCellLinks; Verified deferred PGRI resolver. For each PGRI row, low u16 is a local point-array index and XYZ at +4 locates the remote point; it adds reciprocal adjacency if absent and emits the reciprocal request on the remote grid. Out-of-range local indices are removed. Caller is TESPathGrid_LoadOrResolveGraph.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x4E7627",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7629",
-    "line": "call    sub_4E71A0",
+    "line": "call    TESPathGrid_RebuildRenderedGraph; Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4E7635",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4E763C",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x4E7659",
-    "line": "push    edi",
+    "line": "push    edi; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E765A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E765C",
-    "line": "call    sub_4E65B0",
+    "line": "call    TESPathGrid_LoadSerializedGraphChunks; Verified serialized PGRL chunk processing calls TESPathGrid_AddPointForLinkedReference, populating the reference-to-point index used by runtime enable/disable callbacks. This is separate from modified-form save data, which stores disabled point indices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x4E7667",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7669",
-    "line": "call    sub_4E6F30",
+    "line": "call    TESPathGrid_ResolveCrossCellLinks; Verified deferred PGRI resolver. For each PGRI row, low u16 is a local point-array index and XYZ at +4 locates the remote point; it adds reciprocal adjacency if absent and emits the reciprocal request on the remote grid. Out-of-range local indices are removed. Caller is TESPathGrid_LoadOrResolveGraph.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x4E7677",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7679",
-    "line": "call    sub_4E71A0",
+    "line": "call    TESPathGrid_RebuildRenderedGraph; Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.",
     "mnemonic": "call",
     "size": 5
   },

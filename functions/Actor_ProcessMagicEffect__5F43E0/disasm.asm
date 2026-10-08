@@ -15,7 +15,7 @@
 0x5F4402: test    eax, eax
 0x5F4404: jz      short Actor_ProcessMagic????___def_5F441D; jumptable 005F441D default case, cases 23-33
 0x5F4406: mov     ecx, [eax+68h]
-0x5F4409: call    TESAnimGroup_GetAnimationGroup
+0x5F4409: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x5F440E: add     eax, 0FFFFFFECh; switch 20 cases
 0x5F4411: cmp     eax, 13h
 0x5F4414: ja      short Actor_ProcessMagic????___def_5F441D; jumptable 005F441D default case, cases 23-33
@@ -51,8 +51,8 @@
 0x5F446F: fld     [esp+8+arg_0]
 0x5F4473: push    ecx
 0x5F4474: lea     ecx, [esi+68h]; this
-0x5F4477: fstp    [esp+0Ch+a2]
-0x5F447A: call    MagicTarget_ProcessEffects
+0x5F4477: fstp    [esp+0Ch+a2]; deltaTime
+0x5F447A: call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.
 0x5F447F: pop     edi
 0x5F4480: pop     esi
 0x5F4481: retn    4

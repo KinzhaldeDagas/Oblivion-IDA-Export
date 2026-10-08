@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x845792",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x8457E2",
-    "line": "mov     ebx, [esp+arg_14]",
+    "line": "mov     ebx, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x8457F3",
-    "line": "mov     [esp+arg_14], ebx",
+    "line": "mov     [esp+value], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,25 +229,25 @@
   },
   {
     "ea": "0x845803",
-    "line": "lea     eax, [esp+arg_14]",
+    "line": "lea     eax, [esp+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x845807",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x845808",
-    "line": "push    ecx",
+    "line": "push    ecx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x845809",
-    "line": "lea     ecx, [edi+40h]",
+    "line": "lea     ecx, [edi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x845817",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x84582D",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },

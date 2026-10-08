@@ -24,7 +24,7 @@
 0x8B7D27: push    edx
 0x8B7D28: call    sub_8A75D0
 0x8B7D2D: push    esi
-0x8B7D2E: call    FormHeapFree
+0x8B7D2E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8B7D33: add     esp, 4
 0x8B7D36: mov     dword ptr [edi+0Ch], 0
 0x8B7D3D: pop     esi

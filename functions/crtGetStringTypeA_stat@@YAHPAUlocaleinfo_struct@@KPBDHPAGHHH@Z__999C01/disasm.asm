@@ -5,7 +5,7 @@
 0x999C06: mov     eax, ___security_cookie
 0x999C0B: xor     eax, ebp
 0x999C0D: mov     [ebp+var_4], eax
-0x999C10: mov     eax, dword_BAA75C
+0x999C10: mov     eax, dword_BA9E10+94Ch
 0x999C15: push    ebx
 0x999C16: push    esi
 0x999C17: xor     ebx, ebx
@@ -23,16 +23,16 @@
 0x999C2E: call    ds:GetStringTypeW
 0x999C34: test    eax, eax
 0x999C36: jz      short loc_999C40
-0x999C38: mov     dword_BAA75C, esi
+0x999C38: mov     dword_BA9E10+94Ch, esi
 0x999C3E: jmp     short loc_999C74
 0x999C40: call    ds:GetLastError
 0x999C46: cmp     eax, 78h ; 'x'
 0x999C49: jnz     short loc_999C55
 0x999C4B: push    2
 0x999C4D: pop     eax
-0x999C4E: mov     dword_BAA75C, eax
+0x999C4E: mov     dword_BA9E10+94Ch, eax
 0x999C53: jmp     short loc_999C5A
-0x999C55: mov     eax, dword_BAA75C
+0x999C55: mov     eax, dword_BA9E10+94Ch
 0x999C5A: cmp     eax, 2
 0x999C5D: jz      loc_999D32
 0x999C63: cmp     eax, ebx

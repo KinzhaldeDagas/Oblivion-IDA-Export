@@ -1,1 +1,1 @@
-IPersistStorage_0
+typedef IPersistStorage IPersistStorage_0;

@@ -1,1 +1,1 @@
-NiLODNode
+struct NiLODNode;

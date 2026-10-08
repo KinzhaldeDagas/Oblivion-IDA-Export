@@ -1,1 +1,1 @@
-_I32
+typedef int _I32;

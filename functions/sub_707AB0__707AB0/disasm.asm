@@ -1,4 +1,4 @@
-0x707AB0: push    esi
+0x707AB0: push    esi; Pass227: Base object-map/reference collection called before NiScreenSpaceCamera child array traversal.
 0x707AB1: push    edi
 0x707AB2: mov     edi, [esp+8+arg_0]
 0x707AB6: push    edi

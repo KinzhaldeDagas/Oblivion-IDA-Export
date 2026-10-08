@@ -1,4 +1,4 @@
-0x590F30: mov     edx, [esp+arg_0]
+0x590F30: mov     edx, [esp+trait]
 0x590F34: cmp     edx, 0FADh
 0x590F3A: jz      short loc_590F44
 0x590F3C: cmp     edx, 0FACh

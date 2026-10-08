@@ -1,1 +1,1 @@
-WAVEHDR
+typedef wavehdr_tag WAVEHDR;

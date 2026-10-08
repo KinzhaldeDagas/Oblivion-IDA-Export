@@ -1,1 +1,1 @@
-LONG32
+typedef int LONG32;

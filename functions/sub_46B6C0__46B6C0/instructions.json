@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46B6C0",
-    "line": "push    esi",
+    "line": "push    esi; Updates TESForm source-file provenance. Thread-safe clones normalize to their root parent; master files replace prior source entries, non-masters append once, and null removes the last source entry.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x46B6CE",
-    "line": "call    sub_44FB90",
+    "line": "call    TESFile_GetThreadSafeParent; Returns the topmost thread-safe parent of this TESFile, or null when this file has no parent. Behavior matches the later engine API name after being verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x46B70C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x46B736",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x46B75E",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

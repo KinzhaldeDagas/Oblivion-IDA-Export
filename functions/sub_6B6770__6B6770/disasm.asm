@@ -5,7 +5,7 @@
 0x6B6778: push    edi
 0x6B6779: jz      short loc_6B6784
 0x6B677B: push    eax
-0x6B677C: call    FormHeapFree
+0x6B677C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B6781: add     esp, 4
 0x6B6784: mov     edi, [esp+8+arg_0]
 0x6B6788: mov     eax, edi

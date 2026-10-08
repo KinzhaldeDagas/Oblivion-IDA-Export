@@ -1,4 +1,4 @@
-0x69E9A0: push    ecx
+0x69E9A0: push    ecx; Verified MagicModelHitEffect InitializeVisual resolves its target and model path, requires the SpecialIdle_HitEffect controller sequence, loads/attaches the model, and activates the sequence. Returns false when target/model/sequence setup fails.
 0x69E9A1: push    ebx
 0x69E9A2: push    esi
 0x69E9A3: mov     esi, ecx
@@ -38,7 +38,7 @@
 0x69EA13: push    0
 0x69EA15: push    0
 0x69EA17: push    eax
-0x69EA18: call    sub_439EB0
+0x69EA18: call    ModelLoader_LoadModelData; Verified (Oblivion): derived field +0x2C is read as the model path and passed to ModelLoader_LoadModelData. During load it temporarily stores the serialized payload pointer before PostLink replaces it with this model path; treat +0x2C as a state-dependent payload/path slot, not a permanently stable char*.
 0x69EA1D: test    eax, eax
 0x69EA1F: jz      short loc_69EA4A
 0x69EA21: mov     eax, [eax+0Ch]
@@ -49,8 +49,8 @@
 0x69EA32: test    eax, eax
 0x69EA34: jz      short loc_69EA4A
 0x69EA36: push    offset aSpecialidle_hi; "SpecialIdle_HitEffect"
-0x69EA3B: mov     ecx, eax
-0x69EA3D: call    sub_4715A0
+0x69EA3B: mov     ecx, eax; this
+0x69EA3D: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x69EA42: test    eax, eax
 0x69EA44: jz      loc_69EB4C
 0x69EA4A: mov     ecx, [esi+2Ch]
@@ -60,7 +60,7 @@
 0x69EA56: add     esp, 4
 0x69EA59: push    eax; a2
 0x69EA5A: mov     ecx, edi; this
-0x69EA5C: call    NiSmartPointer_Set??
+0x69EA5C: call    NiSmartPointer_Set??; Verified (Oblivion): loaded model root is stored in derived field +0x30 through a reference-counted smart-pointer setter; this NiAVObject root is later updated, attached, and positioned.
 0x69EA61: mov     edx, [esi+2Ch]
 0x69EA64: mov     ecx, ds:0B33A1Ch
 0x69EA6A: push    1
@@ -95,7 +95,7 @@
 0x69EAC7: fstp    [esp+18h+var_4]
 0x69EACB: fld     [esp+18h+var_4]
 0x69EACF: fstp    [esp+18h+a2]; a2
-0x69EAD2: call    NiAVObject_UpdateNiAVObject
+0x69EAD2: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x69EAD7: mov     edx, [edi]
 0x69EAD9: mov     eax, [edx+0Ch]
 0x69EADC: push    eax
@@ -106,27 +106,27 @@
 0x69EAEC: test    edi, edi
 0x69EAEE: jz      short loc_69EB4C
 0x69EAF0: push    offset aSpecialidle_hi; "SpecialIdle_HitEffect"
-0x69EAF5: mov     ecx, edi
-0x69EAF7: call    sub_4715A0
+0x69EAF5: mov     ecx, edi; this
+0x69EAF7: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x69EAFC: mov     ebx, eax
 0x69EAFE: test    ebx, ebx
 0x69EB00: jz      short loc_69EB4C
 0x69EB02: fldz
 0x69EB04: push    ecx
-0x69EB05: mov     ecx, edi
-0x69EB07: fstp    [esp+14h+var_14]; float
-0x69EB0A: call    sub_4715C0
+0x69EB05: mov     ecx, edi; this
+0x69EB07: fstp    [esp+14h+easeOutTime]; easeOutTime
+0x69EB0A: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x69EB0F: fldz
-0x69EB11: push    0; int
+0x69EB11: push    0; timeSyncSequence
 0x69EB13: sub     esp, 8
-0x69EB16: fstp    [esp+1Ch+a2]; float
+0x69EB16: fstp    [esp+1Ch+a2]; easeInTime
 0x69EB1A: fld1
 0x69EB1C: mov     ecx, edi
-0x69EB1E: fstp    [esp+1Ch+var_1C]; float
-0x69EB21: push    0; int
-0x69EB23: push    0; int
-0x69EB25: push    ebx; int
-0x69EB26: call    sub_470B20
+0x69EB1E: fstp    [esp+1Ch+weight]; weight
+0x69EB21: push    0; startOver
+0x69EB23: push    0; priority
+0x69EB25: push    ebx; sequence
+0x69EB26: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x69EB2B: fldz
 0x69EB2D: or      word ptr [edi+8], 8
 0x69EB32: fcomp   dword ptr [esi+20h]

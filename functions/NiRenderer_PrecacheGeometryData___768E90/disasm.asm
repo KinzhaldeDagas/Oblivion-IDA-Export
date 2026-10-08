@@ -12,7 +12,7 @@
 0x768EA8: test    eax, eax
 0x768EAA: jz      short loc_768EBE
 0x768EAC: lea     esp, [esp+0]
-0x768EB0: cmp     eax, offset dword_B3FD54
+0x768EB0: cmp     eax, offset stru_B3FD54
 0x768EB5: jz      short loc_768EC8
 0x768EB7: mov     eax, [eax+4]
 0x768EBA: test    eax, eax
@@ -30,7 +30,7 @@
 0x768ED8: push    edi
 0x768ED9: mov     ecx, ebp
 0x768EDB: mov     [esp+20h+var_4], ebx
-0x768EDF: call    sub_768890
+0x768EDF: call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.
 0x768EE4: test    ebx, ebx
 0x768EE6: mov     [esp+18h+var_8], al
 0x768EEA: jz      short loc_768F00
@@ -52,14 +52,14 @@
 0x768F16: add     esp, 8
 0x768F19: retn    10h
 0x768F1C: mov     ecx, ebp; this
-0x768F1E: call    sub_763FE0
+0x768F1E: call    NiDX9Renderer_EnterRendererAndPrecache
 0x768F23: mov     eax, [esp+18h+arg_C]
 0x768F27: test    eax, eax
 0x768F29: mov     [esp+18h+arg_0], eax
 0x768F2D: jnz     short loc_768F54
 0x768F2F: mov     eax, [edi+0BCh]
 0x768F35: push    eax
-0x768F36: push    offset NiD3DShaderInterfaceString
+0x768F36: push    0B42858h
 0x768F3B: call    NiRTTI_Cast
 0x768F40: add     esp, 8
 0x768F43: test    eax, eax
@@ -80,7 +80,7 @@
 0x768F6A: push    esi; NiGeometryData *
 0x768F6B: push    ecx; NiGeometryGroup *
 0x768F6C: mov     ecx, [ebp+8A0h]
-0x768F72: call    NiGeometryGroup__AddGeometryDataToGroup
+0x768F72: call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.
 0x768F77: xor     bl, bl
 0x768F79: cmp     [esp+18h+var_8], bl
 0x768F7D: jz      short loc_768FB1
@@ -95,10 +95,10 @@
 0x768F93: push    esi
 0x768F94: push    edi
 0x768F95: mov     ecx, ebp
-0x768F97: call    sub_768580
+0x768F97: call    NiDX9Renderer_QueueSkinnedGeometryPrepack
 0x768F9C: mov     ecx, ebp
 0x768F9E: mov     bl, al
-0x768FA0: call    sub_764040
+0x768FA0: call    NiDX9Renderer_LeavePrecacheAndRenderer
 0x768FA5: pop     esi
 0x768FA6: mov     al, bl
 0x768FA8: pop     ebx
@@ -107,7 +107,7 @@
 0x768FAB: add     esp, 8
 0x768FAE: retn    10h
 0x768FB1: push    edi
-0x768FB2: push    offset dword_B3FCD4
+0x768FB2: push    offset stru_B3FCD4
 0x768FB7: call    NiRTTI__IsObjectOfRTTIType
 0x768FBC: add     esp, 8
 0x768FBF: test    al, al
@@ -123,7 +123,7 @@
 0x768FD6: push    0
 0x768FD8: jmp     short loc_769006
 0x768FDA: push    edi
-0x768FDB: push    offset dword_B3FD04
+0x768FDB: push    offset stru_B3FD04
 0x768FE0: call    NiRTTI__IsObjectOfRTTIType
 0x768FE5: add     esp, 8
 0x768FE8: test    al, al
@@ -147,10 +147,10 @@
 0x769010: push    esi
 0x769011: push    edi
 0x769012: mov     ecx, ebp
-0x769014: call    sub_768470
+0x769014: call    NiDX9Renderer_QueueStaticGeometryPrepack
 0x769019: mov     bl, al
 0x76901B: mov     ecx, ebp
-0x76901D: call    sub_764040
+0x76901D: call    NiDX9Renderer_LeavePrecacheAndRenderer
 0x769022: pop     esi
 0x769023: mov     al, bl
 0x769025: pop     ebx

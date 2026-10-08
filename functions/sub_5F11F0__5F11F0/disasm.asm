@@ -32,35 +32,35 @@
 0x5F1251: mov     ecx, esi
 0x5F1253: call    eax
 0x5F1255: push    ecx
-0x5F1256: lea     ecx, [esp+78h+var_6C]
-0x5F125A: fstp    [esp+78h+var_78]; float
-0x5F125D: call    NiMatrix33_InitRotationTransform
+0x5F1256: lea     ecx, [esp+78h+var_6C]; this
+0x5F125A: fstp    [esp+78h+angleZ]; angleZ
+0x5F125D: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x5F1262: cmp     esi, ds:0B333C4h
 0x5F1268: jnz     short loc_5F129E
-0x5F126A: mov     ecx, esi
-0x5F126C: call    sub_4A9720
+0x5F126A: mov     ecx, esi; this
+0x5F126C: call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.
 0x5F1271: push    ecx
-0x5F1272: lea     ecx, [esp+78h+var_48]
-0x5F1276: fstp    [esp+78h+var_78]; float
-0x5F1279: call    NiMatrix33_InitRotationTransposedTransform???
-0x5F127E: lea     ecx, [esp+74h+var_48]
-0x5F1282: push    ecx
-0x5F1283: lea     edx, [esp+78h+var_24]
-0x5F1287: push    edx
-0x5F1288: lea     ecx, [esp+7Ch+var_6C]
-0x5F128C: call    NiMAtrix33_Multiply
+0x5F1272: lea     ecx, [esp+78h+right]; this
+0x5F1276: fstp    [esp+78h+angleZ]; angleX
+0x5F1279: call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.
+0x5F127E: lea     ecx, [esp+74h+right]
+0x5F1282: push    ecx; right
+0x5F1283: lea     edx, [esp+78h+out]
+0x5F1287: push    edx; out
+0x5F1288: lea     ecx, [esp+7Ch+var_6C]; this
+0x5F128C: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x5F1291: mov     ecx, 9
 0x5F1296: mov     esi, eax
 0x5F1298: lea     edi, [esp+74h+var_6C]
 0x5F129C: rep movsd
 0x5F129E: mov     ecx, [esp+74h+arg_4]
-0x5F12A2: fld     [esp+74h+var_68]
+0x5F12A2: fld     [esp+74h+var_6C.data+4]
 0x5F12A6: fstp    dword ptr [ecx]
-0x5F12A8: fld     [esp+74h+var_5C]
+0x5F12A8: fld     [esp+74h+var_6C.data+10h]
 0x5F12AC: fstp    dword ptr [ecx+4]
-0x5F12AF: fld     [esp+74h+var_50]
+0x5F12AF: fld     [esp+74h+var_6C.data+1Ch]
 0x5F12B3: fstp    dword ptr [ecx+8]
-0x5F12B6: call    sub_43F350
+0x5F12B6: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5F12BB: pop     edi
 0x5F12BC: fstp    st
 0x5F12BE: pop     esi

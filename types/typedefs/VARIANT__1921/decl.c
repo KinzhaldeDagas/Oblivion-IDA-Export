@@ -1,1 +1,1 @@
-VARIANT
+typedef tagVARIANT VARIANT;

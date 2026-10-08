@@ -1,4 +1,4 @@
-0x47FAC0: mov     eax, [esp+arg_0]
+0x47FAC0: mov     eax, [esp+arg_0]; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x47FAC4: push    esi
 0x47FAC5: mov     esi, [eax+0A8h]
 0x47FACB: test    esi, esi
@@ -12,7 +12,7 @@
 0x47FADA: call    eax
 0x47FADC: test    eax, eax
 0x47FADE: jz      short loc_47FAEE
-0x47FAE0: cmp     eax, offset dword_BA7D24
+0x47FAE0: cmp     eax, 0BA7D24h
 0x47FAE5: jz      short loc_47FAF8
 0x47FAE7: mov     eax, [eax+4]
 0x47FAEA: test    eax, eax

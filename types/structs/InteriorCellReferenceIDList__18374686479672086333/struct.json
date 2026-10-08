@@ -1,0 +1,45 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "InteriorCellReferenceIDList",
+  "definition": "struct InteriorCellReferenceIDList\n{\nunsigned int newestReferenceID; ///< Verified: first/newest reference ID at +0 and older chain pointer at +4 from 452E8A..452F05.\nInteriorCellReferenceIDNode *older;\n}\n",
+  "id": 18374686479672086333,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: first/newest reference ID at +0 and older chain pointer at +4 from 452E8A..452F05.",
+      "name": "newestReferenceID",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "older",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "InteriorCellReferenceIDNode *"
+    }
+  ],
+  "name": "InteriorCellReferenceIDList",
+  "ordinal": 9992,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 8
+}

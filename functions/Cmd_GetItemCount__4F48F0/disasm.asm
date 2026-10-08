@@ -1,9 +1,9 @@
-0x4F48F0: fldz
+0x4F48F0: fldz; GetItemCount_Eval (index 47 / opcode 0x102F), used 54 times in vanilla core dialogue. Requires a valid item form, a container subject, and ContainerChanges data; returns abs(base TESContainer count plus EntryData.countDelta). If no ContainerChanges data exists it returns 0. Fallout's analogue x4y6:0x823BCE90 also has a special form-type-85 leveled-list expansion loop; this Oblivion handler performs only a single lookup for the supplied ObjectID.
 0x4F48F2: push    ebx
-0x4F48F3: mov     ebx, [esp+4+arg_C]
+0x4F48F3: mov     ebx, [esp+4+value]
 0x4F48F7: fstp    qword ptr [ebx]
 0x4F48F9: push    esi
-0x4F48FA: mov     esi, [esp+8+arg_4]
+0x4F48FA: mov     esi, [esp+8+objectID]
 0x4F48FE: push    edi
 0x4F48FF: xor     edi, edi
 0x4F4901: test    esi, esi
@@ -32,12 +32,12 @@
 0x4F493A: jz      short loc_4F4953
 0x4F493C: push    edi; a2
 0x4F493D: mov     ecx, eax; this
-0x4F493F: call    ContainerExtraData_GetItemCount
+0x4F493F: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
 0x4F4944: cdq
 0x4F4945: xor     eax, edx
 0x4F4947: sub     eax, edx
-0x4F4949: mov     [esp+0Ch+arg_C], eax
-0x4F494D: fild    [esp+0Ch+arg_C]
+0x4F4949: mov     [esp+0Ch+value], eax
+0x4F494D: fild    [esp+0Ch+value]
 0x4F4951: fstp    qword ptr [ebx]
 0x4F4953: cmp     byte ptr ds:0B361ACh, 0
 0x4F495A: jz      short loc_4F4971

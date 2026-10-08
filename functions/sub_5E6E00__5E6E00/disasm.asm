@@ -14,11 +14,11 @@
 0x5E6E28: test    edi, edi
 0x5E6E2A: jz      loc_5E6F9A
 0x5E6E30: mov     ecx, esi; this
-0x5E6E32: call    TESObjectREFR_GetParentCell
+0x5E6E32: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E6E37: test    eax, eax
 0x5E6E39: jz      loc_5E6F9A
-0x5E6E3F: mov     ecx, edi
-0x5E6E41: call    sub_567770
+0x5E6E3F: mov     ecx, edi; this
+0x5E6E41: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x5E6E46: test    al, al
 0x5E6E48: jnz     loc_5E6F9A
 0x5E6E4E: mov     ecx, edi
@@ -26,14 +26,14 @@
 0x5E6E55: test    al, al
 0x5E6E57: jz      short loc_5E6E61
 0x5E6E59: push    esi
-0x5E6E5A: push    offset sub_645A30
+0x5E6E5A: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; Verified body: rejects null/dead actor refs and non-door forms; applies only when the door is owned by the actor (using worldspace-sensitive ownership when applicable) and has an effective lock; sets locked bit on this/linked door and marks linked owner cells as not unlocked. Probable role: callback used by actor package/cell spatial queries; callers include EvaluatePackage and process movement paths.
 0x5E6E5F: jmp     short loc_5E6E72
 0x5E6E61: mov     ecx, edi
 0x5E6E63: call    sub_565DA0
 0x5E6E68: test    al, al
 0x5E6E6A: jz      short loc_5E6EB3
 0x5E6E6C: push    esi; a7
-0x5E6E6D: push    offset sub_645AF0; a6
+0x5E6E6D: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x5E6E72: mov     edx, [esi]
 0x5E6E74: fld     dword ptr ds:0A5B6C0h
 0x5E6E7A: mov     eax, [edx+174h]
@@ -51,7 +51,7 @@
 0x5E6E9D: call    eax
 0x5E6E9F: push    eax; a2
 0x5E6EA0: mov     ecx, esi; this
-0x5E6EA2: call    TESObjectREFR_GetParentCell
+0x5E6EA2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E6EA7: mov     ecx, ds:0B33A98h
 0x5E6EAD: push    eax; a1
 0x5E6EAE: call    sub_446B90
@@ -78,7 +78,7 @@
 0x5E6EF1: fld     dword ptr ds:0A5B6C0h
 0x5E6EF7: mov     eax, [edx+174h]
 0x5E6EFD: push    esi; a6
-0x5E6EFE: push    offset sub_645A30; a5
+0x5E6EFE: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a5
 0x5E6F03: push    ecx
 0x5E6F04: mov     ecx, esi
 0x5E6F06: fstp    [esp+14h+a5]
@@ -93,7 +93,7 @@
 0x5E6F20: call    eax
 0x5E6F22: push    eax; a2
 0x5E6F23: mov     ecx, esi; this
-0x5E6F25: call    TESObjectREFR_GetParentCell
+0x5E6F25: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E6F2A: mov     ecx, ds:0B33A98h
 0x5E6F30: push    eax; a1
 0x5E6F31: call    sub_446B90
@@ -113,7 +113,7 @@
 0x5E6F55: fld     dword ptr ds:0A5B6C0h
 0x5E6F5B: mov     eax, [edx+174h]
 0x5E6F61: push    esi; a7
-0x5E6F62: push    offset sub_645AF0; a6
+0x5E6F62: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x5E6F67: push    ecx
 0x5E6F68: mov     ecx, esi
 0x5E6F6A: fstp    [esp+14h+a5]; a5
@@ -128,7 +128,7 @@
 0x5E6F84: call    eax
 0x5E6F86: push    eax; a2
 0x5E6F87: mov     ecx, esi; this
-0x5E6F89: call    TESObjectREFR_GetParentCell
+0x5E6F89: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E6F8E: mov     ecx, ds:0B33A98h
 0x5E6F94: push    eax; a1
 0x5E6F95: call    sub_446B90

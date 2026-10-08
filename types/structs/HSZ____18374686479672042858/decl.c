@@ -1,1 +1,4 @@
-HSZ__
+struct HSZ__
+{
+int unused;
+};

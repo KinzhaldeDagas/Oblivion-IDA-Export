@@ -1,1 +1,1 @@
-hkRigidBody
+struct hkRigidBody;

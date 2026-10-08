@@ -11,7 +11,6 @@
 0x918B56: lea     ebp, [ecx+8]
 0x918B59: xor     ebx, ebx
 0x918B5B: jmp     short loc_918B60
-0x918B5D: align 10h
 0x918B60: mov     ecx, [edi]
 0x918B62: mov     edx, [ecx+ebx]
 0x918B65: mov     eax, [ebp+0]

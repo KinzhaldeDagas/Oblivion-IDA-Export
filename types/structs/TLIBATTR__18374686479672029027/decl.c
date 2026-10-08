@@ -1,1 +1,1 @@
-TLIBATTR
+typedef tagTLIBATTR TLIBATTR;

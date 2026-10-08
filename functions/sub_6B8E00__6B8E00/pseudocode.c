@@ -1,78 +1,76 @@
-UnkBohDialogueTopicBoh *__thiscall sub_6B8E00(
-        UnkBohDialogueTopicBoh *this,
-        TESQuest *a2,
-        TESTopic *a3,
-        UInt32 a4,
-        Actor *a5,
-        char a6)
+// OFE custom Rumors identity: native D7 classification sets MenuTopic+0x20 isInfoGeneral; selected INFO +0x18, ownerQuest +0x14, actual topic +0x24. Native FillResponseList call 6B8F1F takes ECX=self + four stack pointer arguments (ownerQuest,topic,info,speaker), returns void. Preserve isInfoGeneral to keep first-nonempty response behavior, RunForRumors and native continuation semantics.
+MenuTopicView *__thiscall MenuTopic::MenuTopic(
+        MenuTopicView *this,
+        TESQuest *ownerQuest,
+        TESTopic *topic,
+        OblivionTopicInfo *info,
+        Actor *speaker,
+        bool substituteInfoRefusal)
 {
   bool v7; // bl
   TESTopic *v9; // edi
   bool v10; // zf
   TESTopic *v11; // edi
-  int v12; // eax
+  OblivionTopicInfo *StrictMatchingInfo; // eax
   char *m_data; // eax
-  int v14; // eax
-  TESTopic *v16; // [esp+28h] [ebp+4h]
+  TESTopicLinksDecoded *links; // eax
+  TESTopic *ownerQuesta; // [esp+28h] [ebp+4h]
 
-  v7 = 0;
-  this->unkString.m_data = 0;
-  this->unkString.m_dataLen = 0;
-  this->unkString.m_bufLen = 0;
-  this->unk0C = 0;
-  this->unk10 = 0;
-  this->unk1C = 0;
-  this->unk14 = 0;
-  this->unk24 = 0;
-  this->unk18 = 0;
-  if ( a3->super.refID == 0xD7 )
+  v7 = 0; /*0x6b8e2b*/
+  this->displayName.m_data = 0; /*0x6b8e2d*/
+  this->displayName.m_dataLen = 0; /*0x6b8e2f*/
+  this->displayName.m_bufLen = 0; /*0x6b8e33*/
+  this->firstResponse = 0; /*0x6b8e3b*/
+  this->nextResponseNode = 0; /*0x6b8e3e*/
+  this->currentResponseNode = 0; /*0x6b8e41*/
+  this->ownerQuest = 0; /*0x6b8e44*/
+  this->topic = 0; /*0x6b8e47*/
+  this->info = 0; /*0x6b8e4a*/
+  if ( topic->super.refID == 0xD7 ) /*0x6b8e58*/
   {
-    this->isInfoGeneralTopic = 1;
-    this->unk08 = 0;
+    this->isInfoGeneralTopic = 1; /*0x6b8e5a*/
+    this->hasLinkedTopics = 0; /*0x6b8e5e*/
   }
   else
   {
-    this->isInfoGeneralTopic = 0;
+    this->isInfoGeneralTopic = 0; /*0x6b8e63*/
   }
-  v9 = a3;
-  v16 = a3;
-  if ( a4 )
+  v9 = topic; /*0x6b8e74*/
+  ownerQuesta = topic; /*0x6b8e76*/
+  if ( info ) /*0x6b8e7a*/
   {
-    v10 = *(_BYTE *)(a4 + 0x22) == 0;
-    this->unk18 = a4;
-    this->pad21[0] = v10;
-    if ( a6 )
+    v10 = info->spoken == 0;                    // Snapshot !originalInfo->spoken into MenuTopic.infoNotSpoken before any low-disposition InfoRefusal substitution. /*0x6b8e80*/
+    this->info = info; /*0x6b8e83*/
+    this->infoNotSpoken = v10;                  // infoNotSpoken is a presentation/cache byte initialized from !TESTopicInfo.spoken. It is distinct from the authoritative INFO-global spoken byte. /*0x6b8e8d*/
+    if ( substituteInfoRefusal && (info->flags & 0x10) == 0 )// Disposition-refusal substitution applies to ordinary TOPIC menu construction only. If selection returned a low-disposition fallback and the original INFO is not itself flagged InfoRefusal, replace its runtime INFO/topic/quest with the stock FormID 118 InfoRefusal match while retaining the original topic's display label. /*0x6b8e9c*/
     {
-      if ( (*(_BYTE *)(a4 + 0x25) & 0x10) == 0 )
+      v11 = TESTopic::GetTopic(DialogueType_Miscellaneous, 0);// MenuTopic fallback construction requests Miscellaneous bucket index 0: fixed FormID 00000118 InfoRefusal. /*0x6b8eaa*/
+      StrictMatchingInfo = TESTopic::GetStrictMatchingInfo(v11, speaker, (TESObjectREFR *)reference);// Strict InfoRefusal lookup rejects another low-disposition fallback. When a strict stock InfoRefusal INFO exists, its responses, links, result, owner quest, and topic identity drive the MenuTopic; only the visible label came from the requested topic. /*0x6b8eb8*/
+      if ( StrictMatchingInfo ) /*0x6b8ebf*/
       {
-        v11 = (TESTopic *)TESTopic::GEtTopic(6, 0);
-        v12 = sub_530020(v11, a5, (TESObjectREFR *)TESDataHandler_g_PlayerRef);
-        if ( v12 )
-        {
-          this->unk18 = v12;
-          v16 = v11;
-          a2 = sub_52F570(v11, v12);
-        }
+        this->info = StrictMatchingInfo;        // Replace runtime INFO/topic/owner quest with stock InfoRefusal, but do not recompute infoNotSpoken. The visible new marker still reflects the originally requested INFO; InfoRefusal RunResult also does not set spoken. /*0x6b8ec4*/
+        ownerQuesta = v11; /*0x6b8ec7*/
+        ownerQuest = TESTopic::GetOwnerQuest(v11, StrictMatchingInfo); /*0x6b8ed0*/
       }
     }
-    m_data = a3->fullname.name.m_data;
-    if ( !m_data )
-      m_data = EmptyString;
-    BSStringT_Set(&this->unkString, m_data, 0);
-    if ( !this->isInfoGeneralTopic )
+    m_data = topic->fullname.name.m_data; /*0x6b8ed4*/
+    if ( !m_data ) /*0x6b8ed9*/
+      m_data = EmptyString; /*0x6b8edb*/
+    BSStringT_Set(&this->displayName, m_data, 0); /*0x6b8ee4*/
+    if ( !this->isInfoGeneralTopic ) /*0x6b8ee9*/
     {
-      v14 = *(_DWORD *)(this->unk18 + 0x30);
-      if ( v14 )
+      links = this->info->links; /*0x6b8ef1*/
+      if ( links ) /*0x6b8ef6*/
       {
-        if ( *(_DWORD *)(v14 + 0xC) || *(_DWORD *)(v14 + 8) )
-          v7 = 1;
+        if ( links->linkedTo.node.next || links->linkedTo.node.data ) /*0x6b8efd*/
+          v7 = 1; /*0x6b8f02*/
       }
-      this->unk08 = v7;
+      this->hasLinkedTopics = v7; /*0x6b8f07*/
     }
-    v9 = v16;
-    sub_6B8CF0(&this->unkString, a2, v16, (TESForm *)this->unk18, (TESObjectREFR *)a5);
+    v9 = ownerQuesta; /*0x6b8f11*/
+    MenuTopic::FillResponseList(this, ownerQuest, ownerQuesta, this->info, (TESObjectREFR *)speaker); /*0x6b8f1f*/
   }
-  this->unk14 = (UInt32)a2;
-  this->unk24 = (UInt32)v9;
-  return this;
+  this->ownerQuest = ownerQuest; /*0x6b8f28*/
+  this->topic = v9; /*0x6b8f2b*/
+  return this; /*0x6b8f30*/
 }

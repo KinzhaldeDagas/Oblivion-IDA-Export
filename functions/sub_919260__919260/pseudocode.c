@@ -1,4 +1,4 @@
 int sub_919260()
 {
-  return dword_BA8418;
+  return unk_BA8418; /*0x919265*/
 }

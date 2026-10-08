@@ -1,10 +1,11 @@
-__int16 __thiscall sub_6D0A40(_DWORD *this)
+// Returns morphData->targetCount (+0x08) as UInt16, or zero when morphData is absent.
+unsigned __int16 __thiscall NiGeomMorpherController_GetInterpolatorCount(NiGeomMorpherController *this)
 {
-  int v1; // eax
+  NiMorphData *morphData; // eax
 
-  v1 = *(this + 0x14);
-  if ( v1 )
-    return *(_WORD *)(v1 + 8);
+  morphData = this->morphData; /*0x6d0a40*/
+  if ( morphData ) /*0x6d0a45*/
+    return *((_WORD *)morphData + 4); /*0x6d0a47*/
   else
-    return 0;
+    return 0; /*0x6d0a4c*/
 }

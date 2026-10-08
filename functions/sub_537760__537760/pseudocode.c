@@ -1,4 +1,4 @@
 void sub_537760()
 {
-  dword_BA7A50 = (int)sub_5376E0;
+  unk_BA7A50 = (int)sub_5376E0; /*0x537760*/
 }

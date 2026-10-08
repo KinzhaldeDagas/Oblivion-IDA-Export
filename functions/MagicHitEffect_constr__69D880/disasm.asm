@@ -1,10 +1,10 @@
-0x69D880: fldz
+0x69D880: fldz; Verified MagicHitEffect constructor starts from the 24-byte BSTempEffect base, nulls ownerActiveEffect (+0x18) and targetReference (+0x1C), zeros elapsedSeconds (+0x20) and bFinished (+0x24), establishing a 40-byte base layout.
 0x69D882: push    esi
 0x69D883: push    ecx
-0x69D884: fstp    [esp+8+var_8]; float
-0x69D887: push    0; int
+0x69D884: fstp    [esp+8+durationSeconds]; durationSeconds
+0x69D887: push    0; parentCell
 0x69D889: mov     esi, ecx
-0x69D88B: call    BSTempEff_constr
+0x69D88B: call    BSTempEffect_Constructor; Verified BSTempEffect constructor: initializes NiObject base, stores duration at +0x08 and parent cell at +0x0C, zeros elapsed at +0x10, sets initializeCallbackDone (+0x14) false, and installs BSTempEffect vtable.
 0x69D890: fldz
 0x69D892: fstp    dword ptr [esi+20h]
 0x69D895: mov     dword ptr [esi], offset ??_7MagicHitEffect@@6B@; const MagicHitEffect::`vftable'

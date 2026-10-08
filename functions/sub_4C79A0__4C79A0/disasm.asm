@@ -27,7 +27,7 @@
 0x4C79DF: jz      short loc_4C79EE
 0x4C79E1: push    0FFFFFFFFh; a2
 0x4C79E3: mov     ecx, esi; this
-0x4C79E5: call    TESForm_GetOverrideFile
+0x4C79E5: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4C79EA: test    eax, eax
 0x4C79EC: jnz     short loc_4C79F7
 0x4C79EE: mov     ecx, esi

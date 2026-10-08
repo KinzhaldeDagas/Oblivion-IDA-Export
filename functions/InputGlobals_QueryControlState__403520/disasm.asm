@@ -1,4 +1,4 @@
-0x403520: mov     eax, [esp+a2]
+0x403520: mov     eax, [esp+a2]; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x403524: cmp     eax, 1Dh
 0x403527: push    edi
 0x403528: mov     edi, ecx

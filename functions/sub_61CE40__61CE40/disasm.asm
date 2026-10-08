@@ -1,4 +1,4 @@
-0x61CE40: sub     esp, 10h
+0x61CE40: sub     esp, 10h; Combat dodge selection consumes Actor_GetFatigueFraction; SmartAI reads the same resource without changing actions.
 0x61CE43: push    esi
 0x61CE44: mov     esi, ecx
 0x61CE46: mov     ecx, [esi+3Ch]
@@ -8,32 +8,32 @@
 0x61CE53: test    al, al
 0x61CE55: jnz     loc_61D31B
 0x61CE5B: mov     ecx, esi
-0x61CE5D: call    sub_6135F0
+0x61CE5D: call    CombatController_GetCurrentTarget
 0x61CE62: test    eax, eax
 0x61CE64: jz      loc_61D31B
 0x61CE6A: push    ebx
 0x61CE6B: push    edi
 0x61CE6C: mov     ecx, esi
-0x61CE6E: call    sub_6135F0
+0x61CE6E: call    CombatController_GetCurrentTarget
 0x61CE73: mov     ecx, eax
-0x61CE75: call    Actor_GetCurrentAction
+0x61CE75: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x61CE7A: mov     edi, [esi+3Ch]
 0x61CE7D: cmp     eax, 2
 0x61CE80: setz    byte ptr [esp+1Ch+var_8]
 0x61CE85: mov     ebx, [esp+1Ch+var_8]
 0x61CE89: push    ebx; float
 0x61CE8A: mov     ecx, edi; this
-0x61CE8C: call    Actor_GetFatigueFraction
+0x61CE8C: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x61CE91: push    ecx
 0x61CE92: mov     ecx, edi
-0x61CE94: fstp    [esp+24h+var_24]; float
-0x61CE97: call    sub_5E3590
-0x61CE9C: call    Double_To_SInt32
+0x61CE94: fstp    [esp+24h+value2]; Dodge selection reads Actor_GetFatigueFraction and feeds it into CombatStyle_CalculateDodgeScore.
+0x61CE97: call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.
+0x61CE9C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x61CEA1: push    eax; int
 0x61CEA2: mov     ecx, edi
-0x61CEA4: call    sub_5E0F50
+0x61CEA4: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61CEA9: push    eax; int
-0x61CEAA: call    sub_546A40
+0x61CEAA: call    CombatStyle_CalculateDodgeScore
 0x61CEAF: fstp    [esp+2Ch+var_10]
 0x61CEB3: fldz
 0x61CEB5: add     esp, 10h
@@ -81,11 +81,11 @@
 0x61CF43: cmp     eax, 3
 0x61CF46: jnz     short loc_61CF7E
 0x61CF48: mov     ecx, esi
-0x61CF4A: call    sub_6135F0
+0x61CF4A: call    CombatController_GetCurrentTarget
 0x61CF4F: cmp     eax, ds:0B333C4h
 0x61CF55: jz      short loc_61CF7E
 0x61CF57: mov     ecx, esi
-0x61CF59: call    sub_6135F0
+0x61CF59: call    CombatController_GetCurrentTarget
 0x61CF5E: mov     edx, [eax]
 0x61CF60: mov     ecx, eax
 0x61CF62: mov     eax, [edx+334h]
@@ -97,7 +97,7 @@
 0x61CF74: fsub    qword ptr ds:0A309F0h
 0x61CF7A: fstp    [esp+1Ch+var_10]
 0x61CF7E: push    0; Seed
-0x61CF80: call    GetRandomLargeInteger?
+0x61CF80: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61CF85: cdq
 0x61CF86: mov     ecx, 64h ; 'd'
 0x61CF8B: idiv    ecx
@@ -110,15 +110,15 @@
 0x61CFA0: test    ah, 1
 0x61CFA3: jnz     loc_61D2A4
 0x61CFA9: mov     ecx, [esi+3Ch]
-0x61CFAC: call    Actor_GetCurrentAction
+0x61CFAC: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x61CFB1: cmp     eax, 2
 0x61CFB4: setz    dl
 0x61CFB7: mov     ecx, esi
 0x61CFB9: mov     byte ptr [esp+1Ch+var_4], dl
-0x61CFBD: call    sub_615980
+0x61CFBD: call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.
 0x61CFC2: fstp    [esp+1Ch+var_10]
-0x61CFC6: mov     ecx, esi
-0x61CFC8: call    sub_615520
+0x61CFC6: mov     ecx, esi; this
+0x61CFC8: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x61CFCD: fstp    [esp+1Ch+var_C]
 0x61CFD1: cmp     byte ptr [esi+159h], 0
 0x61CFD8: jnz     short loc_61CFE7
@@ -148,7 +148,7 @@
 0x61D01F: fstp    [esp+30h+var_30]; float
 0x61D022: push    ebx; float
 0x61D023: push    eax; float
-0x61D024: call    sub_5E0F50
+0x61D024: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D029: push    eax; int
 0x61D02A: call    sub_546E10
 0x61D02F: movzx   ebx, ax
@@ -173,10 +173,10 @@
 0x61D071: jz      loc_61D0FE
 0x61D077: sub     eax, 4
 0x61D07A: jz      short loc_61D0BC
-0x61D07C: call    sub_5E0F50
+0x61D07C: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D081: mov     ecx, [esi+3Ch]
 0x61D084: mov     ebp, eax
-0x61D086: call    sub_5E0F50
+0x61D086: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D08B: mov     edx, [ebp+0]
 0x61D08E: mov     [esp+20h+var_4], eax
 0x61D092: mov     eax, [edx+0F4h]
@@ -184,19 +184,19 @@
 0x61D09A: call    eax
 0x61D09C: push    ecx
 0x61D09D: mov     ecx, [esp+24h+var_4]
-0x61D0A1: fstp    [esp+24h+var_24]; float
+0x61D0A1: fstp    [esp+24h+value2]; value2
 0x61D0A4: mov     edx, [ecx]
 0x61D0A6: mov     eax, [edx+0F0h]
 0x61D0AC: call    eax
 0x61D0AE: push    ecx
-0x61D0AF: fstp    [esp+28h+var_28]; float
-0x61D0B2: call    sub_546B20
+0x61D0AF: fstp    [esp+28h+value1]; value1
+0x61D0B2: call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.
 0x61D0B7: jmp     loc_61D16B
 0x61D0BC: mov     edi, 6
-0x61D0C1: call    sub_5E0F50
+0x61D0C1: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D0C6: mov     ecx, [esi+3Ch]
 0x61D0C9: mov     ebp, eax
-0x61D0CB: call    sub_5E0F50
+0x61D0CB: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D0D0: mov     edx, [ebp+0]
 0x61D0D3: mov     [esp+20h+var_4], eax
 0x61D0D7: mov     eax, [edx+0ECh]
@@ -204,19 +204,19 @@
 0x61D0DF: call    eax
 0x61D0E1: push    ecx
 0x61D0E2: mov     ecx, [esp+24h+var_4]
-0x61D0E6: fstp    [esp+24h+var_24]; float
+0x61D0E6: fstp    [esp+24h+value2]; value2
 0x61D0E9: mov     edx, [ecx]
 0x61D0EB: mov     eax, [edx+0E8h]
 0x61D0F1: call    eax
 0x61D0F3: push    ecx
-0x61D0F4: fstp    [esp+28h+var_28]; float
-0x61D0F7: call    sub_546B20
+0x61D0F4: fstp    [esp+28h+value1]; value1
+0x61D0F7: call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.
 0x61D0FC: jmp     short loc_61D16B
 0x61D0FE: mov     edi, 5
-0x61D103: call    sub_5E0F50
+0x61D103: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D108: mov     ecx, [esi+3Ch]
 0x61D10B: mov     ebp, eax
-0x61D10D: call    sub_5E0F50
+0x61D10D: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D112: mov     edx, [ebp+0]
 0x61D115: mov     ebx, eax
 0x61D117: mov     eax, [edx+0ECh]
@@ -226,10 +226,10 @@
 0x61D123: mov     eax, [edx+0E8h]
 0x61D129: jmp     short loc_61D156
 0x61D12B: mov     edi, 4
-0x61D130: call    sub_5E0F50
+0x61D130: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D135: mov     ecx, [esi+3Ch]
 0x61D138: mov     ebp, eax
-0x61D13A: call    sub_5E0F50
+0x61D13A: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D13F: mov     edx, [ebp+0]
 0x61D142: mov     ebx, eax
 0x61D144: mov     eax, [edx+0FCh]
@@ -239,21 +239,21 @@
 0x61D150: mov     eax, [edx+0F8h]
 0x61D156: push    ecx
 0x61D157: mov     ecx, ebx
-0x61D159: fstp    [esp+24h+var_24]; float
+0x61D159: fstp    [esp+24h+value2]; value2
 0x61D15C: call    eax
 0x61D15E: push    ecx
-0x61D15F: fstp    [esp+28h+var_28]; float
-0x61D162: call    sub_546B20
+0x61D15F: fstp    [esp+28h+value1]; value1
+0x61D162: call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.
 0x61D167: mov     ebx, [esp+28h+var_C]
-0x61D16B: mov     ecx, [esi+3Ch]
+0x61D16B: mov     ecx, [esi+3Ch]; this
 0x61D16E: fstp    [esp+28h+var_10]
 0x61D172: add     esp, 8
-0x61D175: push    0
-0x61D177: push    0
-0x61D179: push    edi
-0x61D17A: call    Actor_LoadAnimGroup?
+0x61D175: push    0; forceWeaponPrefix
+0x61D177: push    0; weaponEntryDataArg
+0x61D179: push    edi; groupID
+0x61D17A: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x61D17F: push    eax
-0x61D180: call    sub_51AA00
+0x61D180: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x61D185: add     esp, 4
 0x61D188: cmp     eax, edi
 0x61D18A: pop     ebp
@@ -279,7 +279,7 @@
 0x61D1C7: push    ebx
 0x61D1C8: call    eax
 0x61D1CA: push    0; Seed
-0x61D1CC: call    GetRandomLargeInteger?
+0x61D1CC: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61D1D1: cdq
 0x61D1D2: mov     ecx, 64h ; 'd'
 0x61D1D7: idiv    ecx
@@ -289,7 +289,7 @@
 0x61D1E5: fild    [esp+14h+arg_0]
 0x61D1E9: fstp    [esp+14h+arg_0]
 0x61D1ED: jz      short loc_61D20D
-0x61D1EF: mov     ecx, offset unk_B36D90
+0x61D1EF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+0B8h)
 0x61D1F4: call    GameSetting_GetSafeFloatPointer
 0x61D1F9: fld     [esp+14h+arg_0]
 0x61D1FD: fld     dword ptr [eax]
@@ -349,10 +349,10 @@
 0x61D2A4: cmp     dword ptr [esi+6Ch], 1
 0x61D2A8: jz      short loc_61D319
 0x61D2AA: mov     ecx, [esi+3Ch]
-0x61D2AD: call    sub_5E0F50
+0x61D2AD: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D2B2: mov     ecx, [esi+3Ch]
 0x61D2B5: mov     edi, eax
-0x61D2B7: call    sub_5E0F50
+0x61D2B7: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D2BC: mov     edx, [edi]
 0x61D2BE: mov     ebx, eax
 0x61D2C0: mov     eax, [edx+104h]
@@ -362,11 +362,11 @@
 0x61D2CC: mov     eax, [edx+100h]
 0x61D2D2: push    ecx
 0x61D2D3: mov     ecx, ebx
-0x61D2D5: fstp    [esp+20h+var_20]; float
+0x61D2D5: fstp    [esp+20h+var_20]; value2
 0x61D2D8: call    eax
 0x61D2DA: push    ecx
-0x61D2DB: fstp    [esp+24h+var_24]; float
-0x61D2DE: call    sub_546B20
+0x61D2DB: fstp    [esp+24h+value2]; value1
+0x61D2DE: call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.
 0x61D2E3: fstp    [esp+24h+var_4]
 0x61D2E7: add     esp, 8
 0x61D2EA: fld     dword ptr [esi+44h]

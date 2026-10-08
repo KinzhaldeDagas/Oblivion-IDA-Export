@@ -10,7 +10,6 @@
 0x8BB9B2: mov     [esp+210h+var_204], eax
 0x8BB9B6: jz      short loc_8BB9F7
 0x8BB9B8: jmp     short loc_8BB9C0
-0x8BB9BA: align 10h
 0x8BB9C0: and     eax, 3FFFFFFFh
 0x8BB9C5: cmp     ecx, eax
 0x8BB9C7: jnz     short loc_8BB9DC

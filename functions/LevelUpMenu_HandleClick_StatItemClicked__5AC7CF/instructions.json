@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5AC7CF",
-    "line": "cmp     eax, 3",
+    "line": "cmp     eax, 3; Attribute-row toggle logic for LevelUpMenu. It displays base plus the oldest bucket's derived bonus, enforces the native cap of 100, and permits at most three selected attributes.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5AC808",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x5AC810",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x5AC81E",
-    "line": "fstp    [esp+10h+a2]; a3",
+    "line": "fstp    [esp+10h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC821",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5AC82A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x5AC844",
-    "line": "call    Player_GetAttributeLevelingBonus",
+    "line": "call    Player_GetAttributeLevelingBonus; Player_GetAttributeLevelingBonus: for attribute AV 0..7, read the attribute's skill-increase count and convert it through LevelUp_GetAttributeMultiplierFromCount; otherwise return 1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5AC849",
-    "line": "add     edi, eax",
+    "line": "add     edi, eax; Store min(base attribute + derived level-up multiplier, 100) as the selected row's result.",
     "mnemonic": "add",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5AC84F",
-    "line": "mov     [esp+8+arg_4], edi",
+    "line": "mov     [esp+8+arg_4], edi; Selected row displays min(base attribute + derived level-up multiplier, 100).",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x5AC864",
-    "line": "fstp    [esp+0Ch+var_C]; a3",
+    "line": "fstp    [esp+0Ch+var_C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC867",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AC86C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5AC88B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5AC893",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; Level-up stat click maps the selected tile's group 0 offset back to an Oblivion attribute actor value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x5AC89D",
-    "line": "fstp    [esp+0Ch+var_C]; a3",
+    "line": "fstp    [esp+0Ch+var_C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC8A0",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5AC8A9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x5AC8C5",
-    "line": "fstp    [esp+0Ch+var_C]; a3",
+    "line": "fstp    [esp+0Ch+var_C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC8C8",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AC8CD",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x5AC8F6",
-    "line": "fstp    [esp+0Ch+var_C]; a3",
+    "line": "fstp    [esp+0Ch+var_C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC8F9",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AC8FE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5AC92A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x5AC932",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; Level-up stat click maps each attribute tile's group 0 offset back to an Oblivion attribute actor value before checking current base.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x5AC946",
-    "line": "cmp     eax, 64h ; 'd'",
+    "line": "cmp     eax, 64h ; 'd'; Disable selection for attribute rows whose current base is already 100.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x5AC94A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; Rows at the native attribute cap of 100 are unavailable for selection.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -769,19 +769,19 @@
   },
   {
     "ea": "0x5AC978",
-    "line": "fstp    [esp+0Ch+var_C]; a3",
+    "line": "fstp    [esp+0Ch+var_C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5AC97B",
-    "line": "push    0FB4h; a2",
+    "line": "push    0FB4h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5AC980",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

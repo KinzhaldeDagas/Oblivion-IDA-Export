@@ -3,12 +3,12 @@
 0x6A6CE5: push    eax
 0x6A6CE6: mov     esi, ecx
 0x6A6CE8: call    ActiveEffect_Base_LoadEffect
-0x6A6CED: mov     ecx, ds:0B33B00h
+0x6A6CED: mov     ecx, ds:0B33B00h; self
 0x6A6CF3: cmp     byte ptr [ecx+7Ch], 71h ; 'q'
 0x6A6CF7: jb      short loc_6A6D04
-0x6A6CF9: push    4; Size
+0x6A6CF9: push    4; byteCount
 0x6A6CFB: add     esi, 38h ; '8'
-0x6A6CFE: push    esi; Dst
-0x6A6CFF: call    SaveLoad_LoadData
+0x6A6CFE: push    esi; destination
+0x6A6CFF: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x6A6D04: pop     esi
 0x6A6D05: retn    4

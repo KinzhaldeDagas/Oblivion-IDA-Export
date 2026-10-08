@@ -1,11 +1,11 @@
-0x79BE80: sub     esp, 8
-0x79BE83: mov     edx, [esp+8+arg_8]
+0x79BE80: sub     esp, 8; Thin checked/STL wrapper around forward SFrondGuide range copy-assignment; returns destination end.
+0x79BE83: mov     edx, [esp+8+destinationFirst]
 0x79BE87: push    ebx
-0x79BE88: mov     ebx, [esp+0Ch+arg_0]
+0x79BE88: mov     ebx, [esp+0Ch+first]
 0x79BE8C: push    esi
-0x79BE8D: mov     esi, [esp+10h+arg_4]
+0x79BE8D: mov     esi, [esp+10h+last]
 0x79BE91: push    edi
-0x79BE92: mov     edi, [esp+14h+arg_8]
+0x79BE92: mov     edi, [esp+14h+destinationFirst]
 0x79BE96: xor     al, al
 0x79BE98: mov     byte ptr [esp+14h+var_4], al
 0x79BE9C: mov     ecx, [esp+14h+var_4]
@@ -14,10 +14,10 @@
 0x79BEA8: push    eax
 0x79BEA9: push    ecx
 0x79BEAA: push    edx
-0x79BEAB: push    edi
-0x79BEAC: push    esi
-0x79BEAD: push    ebx
-0x79BEAE: call    sub_79B700
+0x79BEAB: push    edi; destinationFirst
+0x79BEAC: push    esi; last
+0x79BEAD: push    ebx; first
+0x79BEAE: call    OB_SFrondGuide_CopyAssignRangeForward_010201A0; Forward copy-assignment of initialized compact 0x30-byte SFrondGuide records. Deep-assigns each embedded SFrondVertex vector, then copies the eight scalar fields.
 0x79BEB3: sub     esi, ebx
 0x79BEB5: mov     eax, 2AAAAAABh
 0x79BEBA: imul    esi

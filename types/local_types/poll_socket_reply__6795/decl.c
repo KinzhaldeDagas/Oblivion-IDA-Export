@@ -1,1 +1,6 @@
-poll_socket_reply
+struct poll_socket_reply
+{
+reply_header __header;
+obj_handle_t wait;
+unsigned int options;
+};

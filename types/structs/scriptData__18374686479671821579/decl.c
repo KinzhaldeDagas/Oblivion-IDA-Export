@@ -1,1 +1,1 @@
-scriptData
+typedef _scriptData scriptData;

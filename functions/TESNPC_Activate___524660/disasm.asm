@@ -1,4 +1,4 @@
-0x524660: sub     esp, 214h
+0x524660: sub     esp, 214h; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Block control 6 held submits player yield request.
 0x524666: mov     eax, ds:0B30AACh
 0x52466B: xor     eax, esp
 0x52466D: mov     [esp+214h+var_4], eax
@@ -82,7 +82,7 @@
 0x524770: cmp     byte ptr [eax+20h], 16h
 0x524774: jnz     short loc_5247BF
 0x524776: mov     ecx, esi; this
-0x524778: call    sub_5E6C60
+0x524778: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x52477D: test    al, al
 0x52477F: jz      loc_52535E
 0x524785: mov     ecx, esi
@@ -90,7 +90,7 @@
 0x52478C: test    al, al
 0x52478E: jz      loc_52535E
 0x524794: mov     esi, [ebp+0]
-0x524797: mov     ecx, offset TimeGlobals
+0x524797: mov     ecx, 0B332E0h
 0x52479C: call    TimeGlobals_GetGameHour
 0x5247A1: fsub    qword ptr ds:0A2F928h
 0x5247A7: mov     edx, [esi+1Ch]
@@ -109,15 +109,15 @@
 0x5247CD: test    al, al
 0x5247CF: jz      short loc_5247DD
 0x5247D1: mov     ecx, esi; this
-0x5247D3: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x5247D3: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x5247D8: cmp     eax, 6
 0x5247DB: jnz     short loc_524846
 0x5247DD: mov     ecx, esi; this
-0x5247DF: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x5247DF: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x5247E4: cmp     eax, 3
 0x5247E7: jz      loc_52531D
 0x5247ED: mov     ecx, esi; this
-0x5247EF: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x5247EF: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x5247F4: cmp     eax, 6
 0x5247F7: jz      loc_52531D
 0x5247FD: push    0
@@ -138,7 +138,7 @@
 0x524828: test    al, al
 0x52482A: jz      short loc_52483B
 0x52482C: mov     ecx, ds:0B333C4h
-0x524832: call    Actor_IsBlocking
+0x524832: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x524837: test    al, al
 0x524839: jz      short loc_524846
 0x52483B: mov     edx, ds:0B38B20h
@@ -164,8 +164,8 @@
 0x52487E: call    eax
 0x524880: test    al, al
 0x524882: jnz     loc_524965
-0x524888: mov     ecx, esi
-0x52488A: call    sub_5E0F30
+0x524888: mov     ecx, esi; this
+0x52488A: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x52488F: test    al, al
 0x524891: jz      loc_524965
 0x524897: cmp     edi, ds:0B333C4h
@@ -207,7 +207,7 @@
 0x52491A: jmp     loc_525360
 0x52491F: mov     ecx, ds:0B333C4h
 0x524925: mov     ds:0B362D0h, esi
-0x52492B: call    Actor_IsSneaking
+0x52492B: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x524930: mov     ecx, ds:0B394B0h
 0x524936: mov     edx, ds:0B394A8h
 0x52493C: test    al, al
@@ -259,7 +259,7 @@
 0x5249CA: cmp     eax, 4
 0x5249CD: jnz     loc_5251AB
 0x5249D3: mov     ecx, esi; this
-0x5249D5: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x5249D5: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x5249DA: cmp     eax, 4
 0x5249DD: jz      loc_52535E
 0x5249E3: mov     eax, [esi]
@@ -270,7 +270,7 @@
 0x5249F1: test    al, al
 0x5249F3: jnz     loc_52513B
 0x5249F9: mov     ecx, esi; this
-0x5249FB: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x5249FB: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x524A00: cmp     eax, 5
 0x524A03: jz      loc_524B12
 0x524A09: mov     eax, [esi]
@@ -327,7 +327,7 @@
 0x524A8D: mov     al, 1
 0x524A8F: jmp     loc_525360
 0x524A94: mov     ecx, esi; this
-0x524A96: call    sub_5E6C60
+0x524A96: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x524A9B: test    al, al
 0x524A9D: jnz     short loc_524B12
 0x524A9F: push    64h ; 'd'; responsibility
@@ -358,7 +358,7 @@
 0x524ADC: test    eax, eax
 0x524ADE: jle     short loc_524B12
 0x524AE0: mov     ecx, edi
-0x524AE2: call    Actor_IsSneaking
+0x524AE2: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x524AE7: test    al, al
 0x524AE9: jnz     short loc_524B12
 0x524AEB: mov     ecx, [esi+58h]
@@ -382,18 +382,18 @@
 0x524B19: jz      loc_524DE5
 0x524B1F: cmp     esi, eax
 0x524B21: jnz     short loc_524B5B
-0x524B23: mov     ecx, edi
-0x524B25: call    sub_5E0380
-0x524B2A: mov     ecx, eax
-0x524B2C: call    sub_567770
+0x524B23: mov     ecx, edi; this
+0x524B25: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x524B2A: mov     ecx, eax; this
+0x524B2C: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x524B31: test    al, al
 0x524B33: jnz     loc_524DD9
-0x524B39: mov     ecx, edi
-0x524B3B: call    sub_5E0380
+0x524B39: mov     ecx, edi; this
+0x524B3B: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524B40: cmp     byte ptr [eax+20h], 0
 0x524B44: jz      loc_524DD9
-0x524B4A: mov     ecx, edi
-0x524B4C: call    sub_5E0380
+0x524B4A: mov     ecx, edi; this
+0x524B4C: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524B51: cmp     byte ptr [eax+20h], 9
 0x524B55: jz      loc_524DD9
 0x524B5B: test    ebx, ebx
@@ -431,8 +431,8 @@
 0x524BAB: call    edx
 0x524BAD: mov     al, 1
 0x524BAF: jmp     loc_525360
-0x524BB4: mov     ecx, edi
-0x524BB6: call    sub_5E0380
+0x524BB4: mov     ecx, edi; this
+0x524BB6: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524BBB: mov     ebx, 2
 0x524BC0: cmp     [eax+20h], bl
 0x524BC3: jnz     short loc_524BDB
@@ -444,12 +444,12 @@
 0x524BD2: call    edx
 0x524BD4: mov     al, 1
 0x524BD6: jmp     loc_525360
-0x524BDB: mov     ecx, edi
-0x524BDD: call    sub_5E0380
+0x524BDB: mov     ecx, edi; this
+0x524BDD: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524BE2: test    eax, eax
 0x524BE4: jz      short loc_524C03
-0x524BE6: mov     ecx, edi
-0x524BE8: call    sub_5E0380
+0x524BE6: mov     ecx, edi; this
+0x524BE8: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524BED: cmp     byte ptr [eax+20h], 1
 0x524BF1: jz      short loc_524C03
 0x524BF3: mov     ecx, [edi+58h]
@@ -462,16 +462,16 @@
 0x524C09: jz      loc_524E9C
 0x524C0F: cmp     esi, edi
 0x524C11: jz      short loc_524C47
-0x524C13: mov     ecx, esi
-0x524C15: call    sub_5E0380
+0x524C13: mov     ecx, esi; this
+0x524C15: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524C1A: test    eax, eax
 0x524C1C: jz      short loc_524C47
-0x524C1E: mov     ecx, esi
-0x524C20: call    sub_5E0380
+0x524C1E: mov     ecx, esi; this
+0x524C20: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524C25: cmp     byte ptr [eax+20h], 1
 0x524C29: jz      short loc_524C47
-0x524C2B: mov     ecx, esi
-0x524C2D: call    sub_5E0380
+0x524C2B: mov     ecx, esi; this
+0x524C2D: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524C32: cmp     [eax+20h], bl
 0x524C35: jz      short loc_524C47
 0x524C37: mov     eax, [ebp+0]
@@ -495,7 +495,7 @@
 0x524C67: call    sub_4121A0
 0x524C6C: lea     ecx, [esp+220h+var_200]
 0x524C70: push    ecx
-0x524C71: call    sub_683CB0
+0x524C71: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x524C76: fstp    [esp+224h+var_210]
 0x524C7A: add     esp, 4
 0x524C7D: cmp     esi, edi
@@ -514,7 +514,7 @@
 0x524C9C: call    sub_685530
 0x524CA1: add     esp, 0Ch
 0x524CA4: mov     ecx, edi
-0x524CA6: call    sub_5E6B40
+0x524CA6: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x524CAB: test    al, al
 0x524CAD: jnz     loc_524DC2
 0x524CB3: mov     ecx, edi; this
@@ -556,10 +556,10 @@
 0x524D1B: call    eax
 0x524D1D: cmp     edi, esi
 0x524D1F: jz      loc_524DAC
-0x524D25: mov     ecx, [ebp+8]
+0x524D25: mov     ecx, [ebp+8]; self
 0x524D28: test    ecx, ecx
 0x524D2A: jz      short loc_524D6F
-0x524D2C: call    sub_5660A0
+0x524D2C: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x524D31: test    al, al
 0x524D33: jnz     short loc_524D6F
 0x524D35: mov     edx, [ebp+0]
@@ -594,11 +594,11 @@
 0x524D89: call    edx
 0x524D8B: push    1; a4
 0x524D8D: push    0; a3
-0x524D8F: mov     ecx, edi
-0x524D91: call    sub_5E0380
+0x524D8F: mov     ecx, edi; this
+0x524D91: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x524D96: push    eax; a2
 0x524D97: mov     ecx, esi; this
-0x524D99: call    Actor_AddPackage?
+0x524D99: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x524D9E: mov     eax, [esi]
 0x524DA0: mov     edx, [eax+17Ch]
 0x524DA6: push    0
@@ -633,14 +633,14 @@
 0x524DFC: test    al, al
 0x524DFE: jz      short loc_524E13
 0x524E00: mov     ecx, ds:0B333C4h
-0x524E06: call    Actor_IsSneaking
+0x524E06: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x524E0B: test    al, al
 0x524E0D: jz      loc_524EA3
 0x524E13: mov     ecx, esi; this
 0x524E15: call    Actor_IsGhost
 0x524E1A: test    al, al
 0x524E1C: jnz     loc_524EA3
-0x524E22: call    InterfaceManager_IsMenuMode
+0x524E22: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x524E27: test    al, al
 0x524E29: jnz     short loc_524EA3
 0x524E2B: mov     eax, [esi]
@@ -724,7 +724,7 @@
 0x524F08: call    sub_4121A0
 0x524F0D: lea     ecx, [esp+224h+var_204]
 0x524F11: push    ecx
-0x524F12: call    sub_683CB0
+0x524F12: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x524F17: fstp    [esp+228h+var_214]
 0x524F1B: fld     [esp+228h+var_214]
 0x524F1F: add     esp, 4
@@ -737,10 +737,10 @@
 0x524F31: xor     ebx, ebx
 0x524F33: cmp     edi, ds:0B333C4h
 0x524F39: jnz     loc_52505B
-0x524F3F: mov     ecx, edi
-0x524F41: call    sub_5F8460
-0x524F46: mov     ecx, esi
-0x524F48: call    sub_5F8460
+0x524F3F: mov     ecx, edi; this
+0x524F41: call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.
+0x524F46: mov     ecx, esi; this
+0x524F48: call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.
 0x524F4D: mov     ecx, esi
 0x524F4F: call    sub_5EAE10
 0x524F54: cmp     eax, ds:0B333C4h
@@ -792,7 +792,7 @@
 0x524FE5: test    ah, 41h
 0x524FE8: jnz     short loc_524FFC
 0x524FEA: mov     ecx, esi; this
-0x524FEC: call    sub_5E6C60
+0x524FEC: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x524FF1: test    al, al
 0x524FF3: jz      short loc_524FFC
 0x524FF5: mov     byte ptr ds:0B3BB18h, 1
@@ -801,10 +801,10 @@
 0x525005: mov     ecx, ebp
 0x525007: call    eax
 0x525009: cmp     eax, 9
-0x52500C: push    0
+0x52500C: push    0; forcedTopic
 0x52500E: jz      short loc_525030
-0x525010: push    esi
-0x525011: call    sub_57AB00
+0x525010: push    esi; speaker
+0x525011: call    Interface__CreateDialogMenu
 0x525016: mov     ecx, [esp+228h+var_20C]
 0x52501A: mov     eax, [ecx]
 0x52501C: mov     edx, [eax+98h]
@@ -845,16 +845,16 @@
 0x525097: push    0
 0x525099: push    0
 0x52509B: call    sub_6AE860
-0x5250A0: mov     ecx, edi
-0x5250A2: call    sub_5F8460
-0x5250A7: mov     ecx, esi
-0x5250A9: call    sub_5F8460
+0x5250A0: mov     ecx, edi; this
+0x5250A2: call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.
+0x5250A7: mov     ecx, esi; this
+0x5250A9: call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.
 0x5250AE: push    0; int
 0x5250B0: push    offset ??_R0?AVDialoguePackage@@@8; struct TypeDescriptor *
 0x5250B5: push    offset ??_R0?AVTESPackage@@@8; struct _s_RTTICompleteObjectLocator *
 0x5250BA: push    0; int
-0x5250BC: mov     ecx, edi
-0x5250BE: call    sub_5E0380
+0x5250BC: mov     ecx, edi; this
+0x5250BE: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x5250C3: push    eax; void *
 0x5250C4: call    OblivionDynamicCast
 0x5250C9: add     esp, 14h
@@ -886,9 +886,9 @@
 0x525110: call    sub_5F01B0
 0x525115: mov     ecx, edi
 0x525117: call    sub_5F01B0
-0x52511C: push    ebx
-0x52511D: push    edi
-0x52511E: call    sub_57AB00
+0x52511C: push    ebx; forcedTopic
+0x52511D: push    edi; speaker
+0x52511E: call    Interface__CreateDialogMenu
 0x525123: mov     eax, [edi]
 0x525125: mov     edx, [eax+98h]
 0x52512B: add     esp, 8
@@ -984,7 +984,7 @@
 0x525242: mov     ecx, [eax+20h]; this
 0x525245: push    0; a3
 0x525247: push    6; a2
-0x525249: call    InputGlobals__QueryControlState
+0x525249: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x52524E: test    eax, eax
 0x525250: jz      loc_524E9C
 0x525256: mov     edx, [esi]
@@ -1008,7 +1008,7 @@
 0x52528E: mov     ecx, esi
 0x525290: call    eax
 0x525292: mov     ecx, esi; this
-0x525294: call    sub_5E6C60
+0x525294: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x525299: test    al, al
 0x52529B: jz      short loc_5252C7
 0x52529D: mov     edx, [edi]

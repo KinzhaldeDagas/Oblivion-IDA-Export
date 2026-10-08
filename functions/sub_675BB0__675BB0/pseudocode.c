@@ -1,23 +1,27 @@
-int __thiscall sub_675BB0(_DWORD *this, unsigned int a2, int a3)
+// Verified: finds first category-list record with number at28. Guard admits category6 though six owned lists are established; do not extend array based on this guard. Semantic crimeNumber corroborated by query and Fallout analogous symbol.
+Crime *__thiscall ActorProcessManager_FindCrimeByNumber(
+        ActorProcessManager *self,
+        OblivionCrimeType category,
+        unsigned int number)
 {
-  int *v3; // ecx
-  int result; // eax
-  int v5; // edx
+  CrimeListNode *v3; // ecx
+  Crime *result; // eax
+  Crime *crime; // edx
 
-  if ( a2 > 6 )
-    return 0;
-  v3 = (int *)*(this + a2 + 0xA);
-  result = 0;
-  while ( v3 )
+  if ( (unsigned int)category > (kCrime_Murder|kCrime_Trespass) ) /*0x675bb7*/
+    return 0; /*0x675be4*/
+  v3 = self->crimeLists[category]; /*0x675bb9*/
+  result = 0; /*0x675bbd*/
+  while ( v3 ) /*0x675bc1*/
   {
-    v5 = *v3;
-    if ( !*v3 )
-      break;
-    if ( result )
-      break;
-    v3 = (int *)v3[1];
-    if ( *(_DWORD *)(v5 + 0x28) == a3 )
-      result = v5;
+    crime = v3->crime; /*0x675bc8*/
+    if ( !v3->crime ) /*0x675bc8*/
+      break; /*0x675bcc*/
+    if ( result ) /*0x675bd0*/
+      break; /*0x675bd0*/
+    v3 = v3->next; /*0x675bd5*/
+    if ( crime->crimeNumber == number ) /*0x675bd8*/
+      result = crime; /*0x675bda*/
   }
-  return result;
+  return result; /*0x675be1*/
 }

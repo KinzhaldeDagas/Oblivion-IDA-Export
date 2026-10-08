@@ -1,1 +1,1 @@
-HPOWERNOTIFY
+typedef void *HPOWERNOTIFY;

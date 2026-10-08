@@ -1,9 +1,10 @@
-void __cdecl sub_A24550()
+// [Controller decode 2026-07-10] atexit cleanup for registered Xenon-era Controls INI setting.
+void __cdecl INISetting_Destroy_fXenonMenuMouseXYMult()
 {
-  BSSimpleList_Remove(dword_B07CFC, (int)&aRia9Uj);
-  if ( off_B13584 )
+  BSSimpleList_Remove(dword_B07CFC, (int)&fXenonMenuMouseXYMult); /*0xa2455a*/
+  if ( fXenonMenuMouseXYMultSettingName ) /*0xa24566*/
   {
-    if ( *off_B13584 == 0x53 )
-      FormHeapFree((unsigned int)off_B13584);
+    if ( *fXenonMenuMouseXYMultSettingName == 0x53 ) /*0xa2456b*/
+      FormHeapFree((unsigned int)fXenonMenuMouseXYMultSettingName); /*0xa2456e*/
   }
 }

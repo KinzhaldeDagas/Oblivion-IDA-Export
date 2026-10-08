@@ -1,4 +1,4 @@
-0x588D90: sub     esp, 8
+0x588D90: sub     esp, 8; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.
 0x588D93: push    esi
 0x588D94: push    edi
 0x588D95: push    0FABh
@@ -12,7 +12,6 @@
 0x588DB3: test    eax, eax
 0x588DB5: jz      short loc_588DF3
 0x588DB7: jmp     short loc_588DC0
-0x588DB9: align 10h
 0x588DC0: mov     edx, [eax+8]
 0x588DC3: lea     ecx, [eax+8]
 0x588DC6: movzx   ecx, word ptr [edx+18h]

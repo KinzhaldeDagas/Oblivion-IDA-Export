@@ -1,4 +1,4 @@
-0x79F040: sub     esp, 8
+0x79F040: sub     esp, 8; Oblivion st_vector<SFrondTexture>::push_back. Constructs directly at end when capacity remains; otherwise delegates to checked insert-one. Called by CFrondEngine::Parse after a complete 14000-series texture record.
 0x79F043: push    esi
 0x79F044: mov     esi, ecx
 0x79F046: push    edi
@@ -27,18 +27,18 @@
 0x79F080: add     eax, edx
 0x79F082: cmp     ecx, eax
 0x79F084: jnb     short loc_79F0B7
-0x79F086: mov     ecx, [esp+10h+arg_0]
-0x79F08A: mov     edx, [esp+10h+arg_0]
+0x79F086: mov     ecx, [esp+10h+value]
+0x79F08A: mov     edx, [esp+10h+value]
 0x79F08E: mov     edi, [esi+8]
-0x79F091: mov     byte ptr [esp+10h+var_8], 0
-0x79F096: mov     eax, [esp+10h+var_8]
+0x79F091: mov     byte ptr [esp+10h+result.owner], 0
+0x79F096: mov     eax, [esp+10h+result.owner]
 0x79F09A: push    eax
 0x79F09B: push    ecx
 0x79F09C: push    esi
-0x79F09D: push    edx
-0x79F09E: push    1
-0x79F0A0: push    edi
-0x79F0A1: call    sub_79B620
+0x79F09D: push    edx; value
+0x79F09E: push    1; count
+0x79F0A0: push    edi; destination
+0x79F0A1: call    OB_SFrondTexture_UninitializedFillN_010201A0; Exception-safe uninitialized_fill_n for SFrondTexture. Placement-copy-constructs count records; the SEH cleanup landing path destroys the constructed prefix before rethrowing.
 0x79F0A6: add     esp, 18h
 0x79F0A9: add     edi, 2Ch ; ','
 0x79F0AC: mov     [esi+8], edi
@@ -51,11 +51,16 @@
 0x79F0BB: cmp     edi, ebx
 0x79F0BD: jbe     short loc_79F0C4
 0x79F0BF: call    __invalid_parameter_noinfo
-0x79F0C4: mov     eax, [esp+14h+arg_0]
-0x79F0C8: push    eax
-0x79F0C9: push    ebx
-0x79F0CA: push    esi
-0x79F0CB: lea     ecx, [esp+20h+var_8]
-0x79F0CF: push    ecx
-0x79F0D0: mov     ecx, esi
-0x79F0D2: call    sub_79EB00
+0x79F0C4: mov     eax, [esp+14h+value]
+0x79F0C8: push    eax; value
+0x79F0C9: push    ebx; position
+0x79F0CA: push    esi; expectedOwner
+0x79F0CB: lea     ecx, [esp+20h+result]
+0x79F0CF: push    ecx; result
+0x79F0D0: mov     ecx, esi; this
+0x79F0D2: call    OB_stVector_SFrondTexture_InsertOne_010201A0; Checked single-element insert for st_vector<SFrondTexture>. Preserves the insertion index across possible reallocation, delegates to insert-fill(count=1), then returns an owner/current iterator.
+0x79F0D7: pop     ebx
+0x79F0D8: pop     edi
+0x79F0D9: pop     esi
+0x79F0DA: add     esp, 8
+0x79F0DD: retn    4

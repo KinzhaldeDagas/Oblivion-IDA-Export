@@ -2,7 +2,7 @@
 0x763D14: jz      short loc_763D6A
 0x763D16: mov     ecx, [ebp+ebx*4+0]
 0x763D1A: push    ecx
-0x763D1B: call    FormHeapFree
+0x763D1B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x763D20: mov     eax, [esi+0Ch]
 0x763D23: mov     ecx, ds:0B42154h
 0x763D29: mov     edx, [ecx]
@@ -25,7 +25,7 @@
 0x763D57: test    eax, eax
 0x763D59: jz      short loc_763D66
 0x763D5B: push    esi
-0x763D5C: call    FormHeapFree
+0x763D5C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x763D61: add     esp, 4
 0x763D64: xor     esi, esi
 0x763D66: mov     [ebp+ebx*4+0], esi

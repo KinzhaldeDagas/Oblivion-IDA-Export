@@ -1,5 +1,5 @@
-0x4290A0: push    ebx
-0x4290A1: mov     ebx, [esp+4+arg_0]
+0x4290A0: push    ebx; Verified ExtraRank virtual comparison: dynamic-casts the other payload to ExtraRank, returns different when type/base fields differ, or when the stored 32-bit rank differs.
+0x4290A1: mov     ebx, [esp+4+other]
 0x4290A5: push    esi
 0x4290A6: push    edi
 0x4290A7: push    0; int

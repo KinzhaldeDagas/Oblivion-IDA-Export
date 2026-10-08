@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4E76D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified debug-render root setter. Updates g_PathGridDebugRenderingEnabled. Enabling creates a shared NiNode, attaches DebugRender_GetOrCreateVertexColorProperty, and adds the root to TES/ObjectLODRoot; disabling removes the root, clears its child objects, releases it, and nulls g_PathGridDebugRenderRoot. Called by TESPathGrid_ToggleDebugRendering before per-cell render rebuild/clear.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E76D2",
-    "line": "push    offset SEH_6E3250",
+    "line": "push    offset ExtraDataList_SetReferencePointer_SEH",
     "mnemonic": "push",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4E76F2",
-    "line": "mov     al, byte ptr [esp+18h+arg_0]",
+    "line": "mov     al, [esp+18h+enabled]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4E7718",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     dword ptr [esp+18h+enabled], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4E7736",
-    "line": "mov     ecx, offset dword_B35F88; this",
+    "line": "mov     ecx, offset g_PathGridDebugRenderRoot; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4E774E",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4E7756",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x4E779D",
-    "line": "lea     eax, [esp+1Ch+arg_0]",
+    "line": "lea     eax, [esp+1Ch+enabled]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4E77A4",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, dword ptr [esp+18h+enabled]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x4E77D2",
-    "line": "add     ecx, 0ACh ; '¬'",
+    "line": "add     ecx, 0ACh ; '¬'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x4E77D8",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -628,5 +628,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3090",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3093",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3094",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3099",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C309A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C309B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C309F",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30A2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30A5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C30A7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30AC",
+    "line": "mov     eax, offset stru_AEBD48",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30B1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

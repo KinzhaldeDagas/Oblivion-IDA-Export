@@ -5,23 +5,23 @@
 0x51A526: mov     esi, ecx
 0x51A528: mov     ecx, ds:0B33B00h
 0x51A52E: xor     edi, edi
-0x51A530: mov     [esp+18h+var_4], edi
+0x51A530: mov     [esp+18h+source], edi
 0x51A534: mov     ebp, [ecx+14h]
 0x51A537: mov     [esp+18h+var_C], edi
-0x51A53B: call    sub_45A170
+0x51A53B: call    TESSaveLoadGame_UseSaveGameBlocks
 0x51A540: test    al, al
 0x51A542: jz      short loc_51A577
-0x51A544: mov     ecx, ds:0B33B00h
-0x51A54A: push    4; Size
+0x51A544: mov     ecx, ds:0B33B00h; self
+0x51A54A: push    4; byteCount
 0x51A54C: lea     eax, [esp+1Ch+Src]
-0x51A550: push    eax; Src
+0x51A550: push    eax; source
 0x51A551: mov     [esp+20h+Src], 4B4F4C42h
 0x51A559: call    SaveLoad_SaveData
-0x51A55E: mov     ecx, ds:0B33B00h
+0x51A55E: mov     ecx, ds:0B33B00h; self
 0x51A564: mov     edx, [ecx+14h]
-0x51A567: push    2; Size
-0x51A569: lea     eax, [esp+1Ch+var_4]
-0x51A56D: push    eax; Src
+0x51A567: push    2; byteCount
+0x51A569: lea     eax, [esp+1Ch+source]
+0x51A56D: push    eax; source
 0x51A56E: mov     [esp+20h+var_C], edx
 0x51A572: call    SaveLoad_SaveData
 0x51A577: mov     ecx, ds:0B33B00h
@@ -32,14 +32,14 @@
 0x51A588: push    ebx; a2
 0x51A589: mov     ecx, esi; this
 0x51A58B: call    TESForm_SaveModifiedForm
-0x51A590: push    ebx
-0x51A591: lea     ecx, [esi+88h]
+0x51A590: push    ebx; changeMask
+0x51A591: lea     ecx, [esi+88h]; self
 0x51A597: call    TESAttributes_SaveModified
-0x51A59C: push    ebx
-0x51A59D: lea     ecx, [esi+24h]
+0x51A59C: push    ebx; changeMask
+0x51A59D: lea     ecx, [esi+24h]; self
 0x51A5A0: call    TESActorBaseData_SaveModifiedComponent
-0x51A5A5: push    ebx
-0x51A5A6: lea     ecx, [esi+54h]
+0x51A5A5: push    ebx; changeMask
+0x51A5A6: lea     ecx, [esi+54h]; self
 0x51A5A9: call    TESSpellList_SaveModifiedComponent
 0x51A5AE: push    ebx
 0x51A5AF: lea     ecx, [esi+68h]
@@ -47,15 +47,15 @@
 0x51A5B7: test    bl, 4
 0x51A5BA: jz      short loc_51A5D4
 0x51A5BC: mov     edx, [esi+84h]
-0x51A5C2: push    4; a2
+0x51A5C2: push    4; byteCount
 0x51A5C4: lea     eax, [esp+20h+a2]
-0x51A5C8: push    eax; a1
-0x51A5C9: mov     ecx, esi
+0x51A5C8: push    eax; source
+0x51A5C9: mov     ecx, esi; self
 0x51A5CB: mov     dword ptr [esp+24h+a2], edx
 0x51A5CF: call    TESForm_SaveDataToCurrentSaveGame
 0x51A5D4: test    ebx, 10000000h
 0x51A5DA: jz      short loc_51A5E7
-0x51A5DC: lea     ecx, [esi+0D0h]
+0x51A5DC: lea     ecx, [esi+0D0h]; self
 0x51A5E2: call    AVCollection_Save
 0x51A5E7: test    bl, bl
 0x51A5E9: pop     ebx
@@ -71,20 +71,20 @@
 0x51A604: add     eax, 1
 0x51A607: test    cl, cl
 0x51A609: jnz     short loc_51A602
-0x51A60B: push    1; a2
+0x51A60B: push    1; byteCount
 0x51A60D: lea     ecx, [esp+1Ch+a2]
 0x51A611: sub     eax, edx
-0x51A613: push    ecx; a1
-0x51A614: mov     ecx, esi
+0x51A613: push    ecx; source
+0x51A614: mov     ecx, esi; self
 0x51A616: mov     [esp+20h+a2], al
 0x51A61A: call    TESForm_SaveDataToCurrentSaveGame
 0x51A61F: mov     al, [esp+18h+a2]
 0x51A623: test    al, al
 0x51A625: jz      short loc_51A633
 0x51A627: movzx   edx, al
-0x51A62A: push    edx; a2
-0x51A62B: push    edi; a1
-0x51A62C: mov     ecx, esi
+0x51A62A: push    edx; byteCount
+0x51A62B: push    edi; source
+0x51A62C: mov     ecx, esi; self
 0x51A62E: call    TESForm_SaveDataToCurrentSaveGame
 0x51A633: cmp     byte ptr ds:0B05BACh, 0
 0x51A63A: jz      short loc_51A6A3
@@ -95,7 +95,7 @@
 0x51A64C: jz      short loc_51A689
 0x51A64E: mov     eax, [edi]
 0x51A650: push    eax; a1
-0x51A651: call    TESForm_LookupByFormID
+0x51A651: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x51A656: mov     ecx, [edi+5]
 0x51A659: mov     edx, [eax]
 0x51A65B: add     esp, 4
@@ -122,7 +122,7 @@
 0x51A69B: call    sub_40FEC0
 0x51A6A0: add     esp, 10h
 0x51A6A3: mov     ecx, ds:0B33B00h
-0x51A6A9: call    sub_45A170
+0x51A6A9: call    TESSaveLoadGame_UseSaveGameBlocks
 0x51A6AE: test    al, al
 0x51A6B0: jz      short loc_51A6E5
 0x51A6B2: mov     edx, ds:0B33B00h

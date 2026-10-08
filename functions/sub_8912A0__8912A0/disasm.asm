@@ -15,7 +15,7 @@
 0x8912CA: call    edx
 0x8912CC: test    eax, eax
 0x8912CE: jz      short loc_8912DE
-0x8912D0: cmp     eax, offset dword_BA7FD8
+0x8912D0: cmp     eax, offset stru_BA7FD8
 0x8912D5: jz      short loc_8912FA
 0x8912D7: mov     eax, [eax+4]
 0x8912DA: test    eax, eax
@@ -44,24 +44,24 @@
 0x891318: fxch    st(1)
 0x89131A: fstp    [esp+40h+var_34]
 0x89131E: jnz     short loc_891325
-0x891320: mov     ecx, offset stru_BA7A40
+0x891320: mov     ecx, offset unk_BA7A40
 0x891325: test    eax, eax
 0x891327: movaps  xmm0, xmmword ptr [ecx]
 0x89132A: movaps  [esp+40h+var_30], xmm0
 0x89132F: lea     ecx, [eax+20h]
 0x891332: jnz     short loc_891339
-0x891334: mov     ecx, offset stru_BA7A40
+0x891334: mov     ecx, offset unk_BA7A40
 0x891339: test    eax, eax
 0x89133B: fld     dword ptr [esp+40h+var_30+8]
 0x89133F: fld     [esp+40h+var_34]
 0x891343: movaps  xmm0, xmmword ptr [ecx]
 0x891346: fld     st
-0x891348: movaps  [esp+40h+var_20], xmm0
+0x891348: movaps  xmmword ptr [esp+40h+var_20.x], xmm0
 0x89134D: faddp   st(2), st
 0x89134F: fxch    st(1)
 0x891351: fstp    dword ptr [esp+40h+var_30+8]
-0x891355: fsubr   dword ptr [esp+40h+var_20+8]
-0x891359: fstp    dword ptr [esp+40h+var_20+8]
+0x891355: fsubr   [esp+40h+var_20.z]
+0x891359: fstp    [esp+40h+var_20.z]
 0x89135D: jz      short loc_89136E
 0x89135F: movaps  xmm0, [esp+40h+var_30]
 0x891364: fld     dword ptr [eax+0Ch]
@@ -70,7 +70,7 @@
 0x89136E: mov     eax, [edx+8]
 0x891371: test    eax, eax
 0x891373: jz      short loc_891384
-0x891375: movaps  xmm0, [esp+40h+var_20]
+0x891375: movaps  xmm0, xmmword ptr [esp+40h+var_20.x]
 0x89137A: fld     dword ptr [eax+0Ch]
 0x89137D: movaps  xmmword ptr [eax+20h], xmm0
 0x891381: fstp    dword ptr [eax+2Ch]

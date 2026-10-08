@@ -1,7 +1,7 @@
 0x98F0F9: push    ebp
 0x98F0FA: mov     ebp, esp
 0x98F0FC: sub     esp, 10h
-0x98F0FF: mov     eax, dword_BAA7B8
+0x98F0FF: mov     eax, dword_BA9E10+9A8h
 0x98F104: push    ebx
 0x98F105: xor     ebx, ebx
 0x98F107: push    esi
@@ -204,7 +204,7 @@
 0x98F372: xor     eax, eax
 0x98F374: jmp     short loc_98F396
 0x98F376: mov     eax, [ebp+arg_C]
-0x98F379: inc     dword_BA9E14
+0x98F379: inc     dword_BA9E10+4
 0x98F37F: mov     ecx, [ebp+var_4]
 0x98F382: mov     [eax+0Ch], ecx
 0x98F385: mov     ecx, [ebp+var_10]

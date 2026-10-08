@@ -13,7 +13,7 @@
 0x4B0608: test    bl, bl
 0x4B060A: jbe     short loc_4B0639
 0x4B060C: push    0; Seed
-0x4B060E: call    GetRandomLargeInteger?
+0x4B060E: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4B0613: mov     ecx, eax
 0x4B0615: mov     eax, 51EB851Fh
 0x4B061A: imul    ecx
@@ -78,7 +78,7 @@
 0x4B06C4: cmp     [esp+18h+var_8], 0
 0x4B06C9: jz      loc_4B075D
 0x4B06CF: push    0; Seed
-0x4B06D1: call    GetRandomLargeInteger?
+0x4B06D1: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4B06D6: cdq
 0x4B06D7: idiv    ebp
 0x4B06D9: mov     eax, [esp+1Ch+var_8]

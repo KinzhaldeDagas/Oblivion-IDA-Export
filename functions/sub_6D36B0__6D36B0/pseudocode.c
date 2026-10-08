@@ -6,10 +6,10 @@ double __cdecl sub_6D36B0(float a1, float a2, float a3, float a4, float a5)
   float v9; // [esp+10h] [ebp+10h]
   float v10; // [esp+10h] [ebp+10h]
 
-  v5 = a4 - a2;
-  v6 = dbl_A3D0C0;
-  v9 = a3 + a5 - v5 * v6;
-  v7 = v9 * a1;
-  v10 = v5 * dbl_A30E48 - (a5 + v6 * a3);
-  return (float)(a1 * (a3 + (v7 + v10) * a1) + a2);
+  v5 = a4 - a2; /*0x6d36ba*/
+  v6 = dbl_A3D0C0; /*0x6d36d4*/
+  v9 = a3 + a5 - v5 * v6; /*0x6d36d8*/
+  v7 = v9 * a1; /*0x6d36f8*/
+  v10 = v5 * dbl_A30E48 - (a5 + v6 * a3); /*0x6d36fc*/
+  return (float)(a1 * (a3 + (v7 + v10) * a1) + a2); /*0x6d3714*/
 }

@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MRUINFOA",
+  "definition": "struct MRUINFOA\n{\nDWORD cbSize;\nUINT uMax;\nUINT fFlags;\nHKEY hKey;\nLPSTR lpszSubKey;\n$E1B144C911F0B467E04275A0121CADBC u;\n}\n",
   "id": 18374686479672040782,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uMax",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fFlags",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hKey",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HKEY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszSubKey",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LPSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "$E1B144C911F0B467E04275A0121CADBC"
     }
   ],
   "name": "MRUINFOA",
+  "ordinal": 6201,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

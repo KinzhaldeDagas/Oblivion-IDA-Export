@@ -16,9 +16,9 @@
 0xA13DF3: mov     byte ptr [esp+0F0h+var_E4+2], al
 0xA13DF7: mov     byte ptr [esp+0F0h+var_E4+3], cl
 0xA13DFB: mov     edx, [esp+0F0h+var_E4]
-0xA13DFF: mov     dword_BA84FC, offset aHkpoweredragdo; "hkPoweredRagdollConstraintData" ...
-0xA13E09: mov     dword_BA8500, offset sub_924F20
-0xA13E13: mov     dword_BA8504, edx
+0xA13DFF: mov     dword ptr unk_BA84FC, offset aHkpoweredragdo; "hkPoweredRagdollConstraintData" ...
+0xA13E09: mov     dword ptr unk_BA8500, offset sub_924F20
+0xA13E13: mov     dword ptr unk_BA8504, edx
 0xA13E19: mov     esp, ebp
 0xA13E1B: pop     ebp
 0xA13E1C: retn

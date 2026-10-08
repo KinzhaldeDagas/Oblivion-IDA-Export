@@ -1,98 +1,121 @@
-void __thiscall sub_526FA0(_DWORD *this, int a2, char *Src, unsigned int a4, int *a5)
+// Oblivion 1.2.0.416: compiler-emitted vector<float>::insert(position,count,value) body used by the checked float insert-one wrapper; 4-byte stride, 1.5x growth, alias-safe local fill value, in-place shift or FormHeap reallocation. Named CompilerCopy because equivalent specializations also exist at other addresses.
+void __thiscall OB_stVectorFloat_InsertFill_CompilerCopy_010201A0(
+        OB_stVectorFloat_010201A0 *this,
+        OB_stVectorFloatIterator_010201A0 position,
+        unsigned int count,
+        const float *value)
 {
-  int v6; // edx
-  unsigned int v7; // eax
+  float *begin; // edx
+  unsigned int v6; // eax
+  int v8; // ecx
   int v9; // ecx
-  int v10; // ecx
-  unsigned int v11; // eax
-  int v12; // ecx
-  int v13; // eax
-  char *v14; // edi
+  unsigned int v10; // eax
+  int v11; // ecx
+  int v12; // eax
+  unsigned int *v13; // edi
+  float *v14; // eax
   float *v15; // eax
-  void *v16; // eax
-  int v17; // eax
-  int v18; // ecx
-  unsigned int v19; // ebx
-  _BYTE *v20; // ebp
-  bool v21; // cf
-  int v22; // eax
-  int v23; // ebx
-  int v24; // [esp+14h] [ebp+Ch]
-  int v25; // [esp+14h] [ebp+Ch]
+  float *v16; // eax
+  int v17; // ecx
+  unsigned int v18; // ebx
+  float *end; // ebp
+  bool v20; // cf
+  unsigned int v21; // eax
+  const unsigned int *v22; // ebx
+  unsigned int counta; // [esp+14h] [ebp+Ch]
+  unsigned int countb; // [esp+14h] [ebp+Ch]
 
-  a5 = *(int **)a5;
-  v6 = *(this + 1);
-  if ( v6 )
-    v7 = (*(this + 3) - v6) >> 2;
+  value = *(const float **)value; /*0x526fa8*/
+  begin = this->begin; /*0x526fae*/
+  if ( begin ) /*0x526fb3*/
+    v6 = this->capacity - begin; /*0x526fbe*/
   else
-    v7 = 0;
-  if ( a4 )
+    v6 = 0; /*0x526fb5*/
+  if ( count ) /*0x526fc7*/
   {
-    if ( v6 )
-      v9 = (*(this + 2) - v6) >> 2;
+    if ( begin ) /*0x526fcf*/
+      v8 = this->end - begin; /*0x526fda*/
     else
-      v9 = 0;
-    if ( 0xFFFFFFFF - v9 < a4 )
-      sub_790B90();
-    if ( v6 )
-      v10 = (*(this + 2) - v6) >> 2;
+      v8 = 0; /*0x526fd1*/
+    if ( 0xFFFFFFFF - v8 < count ) /*0x526fe5*/
+      OB_stVector_ThrowLengthError_010201A0(0xFFFFFFFF - v8); /*0x526fe7*/
+    if ( begin ) /*0x526fee*/
+      v9 = this->end - begin; /*0x526ff9*/
     else
-      v10 = 0;
-    if ( v7 >= a4 + v10 )
+      v9 = 0; /*0x526ff0*/
+    if ( v6 >= count + v9 ) /*0x527001*/
     {
-      v20 = (_BYTE *)*(this + 2);
-      v21 = (v20 - Src) >> 2 < a4;
-      v22 = 4 * a4;
-      v25 = 4 * a4;
-      if ( v21 )
+      end = this->end; /*0x5270bc*/
+      v20 = end - position.current < count; /*0x5270ca*/
+      v21 = 4 * count; /*0x5270cc*/
+      countb = 4 * count; /*0x5270d5*/
+      if ( v20 ) /*0x5270d9*/
       {
-        sub_7A25C0(Src, (int)v20, &Src[v22]);
-        sub_784B30((float *)*(this + 2), a4 - ((*(this + 2) - (int)Src) >> 2), (float *)&a5);
-        *(this + 2) += v25;
-        sub_523AF0((int)Src, *(this + 2) - v25, (float *)&a5);
+        OB_stVector4_UninitializedCopyRange_010201A0( /*0x5270e0*/
+          (const unsigned int *)position.current,
+          (const unsigned int *)end,
+          (unsigned int *)&position.current[v21 / 4]);
+        OB_stVectorFloat_UninitializedFillN_010201A0( /*0x5270fa*/
+          this->end,
+          count - (this->end - position.current),
+          (const float *)&value);
+        this->end = (float *)((char *)this->end + countb); /*0x527103*/
+        OB_stVectorFloat_CopyFillRange_010201A0( /*0x527112*/
+          position.current,
+          &this->end[countb / 0xFFFFFFFC],
+          (const float *)&value);
       }
       else
       {
-        v23 = (int)&v20[-v22];
-        *(this + 2) = sub_7A25C0(&v20[-v22], (int)v20, v20);
-        sub_5254A0(Src, v23, (int)v20);
-        sub_523AF0((int)Src, (int)&Src[v25], (float *)&a5);
+        v22 = (const unsigned int *)&end[v21 / 0xFFFFFFFC]; /*0x527124*/
+        this->end = (float *)OB_stVector4_UninitializedCopyRange_010201A0( /*0x527130*/
+                               (const unsigned int *)&end[v21 / 0xFFFFFFFC],
+                               (const unsigned int *)end,
+                               (unsigned int *)end);
+        OB_stVector4_CopyBackwardRange_010201A0((const unsigned int *)position.current, v22, (unsigned int *)end); /*0x527133*/
+        OB_stVectorFloat_CopyFillRange_010201A0(position.current, &position.current[countb / 4], (const float *)&value); /*0x527145*/
       }
     }
     else
     {
-      if ( 0xFFFFFFFF - (v7 >> 1) >= v7 )
-        v11 = (v7 >> 1) + v7;
+      if ( 0xFFFFFFFF - (v6 >> 1) >= v6 ) /*0x527012*/
+        v10 = (v6 >> 1) + v6; /*0x527018*/
       else
-        v11 = 0;
-      if ( v6 )
-        v12 = (*(this + 2) - v6) >> 2;
+        v10 = 0; /*0x527014*/
+      if ( begin ) /*0x52701c*/
+        v11 = this->end - begin; /*0x527027*/
       else
-        v12 = 0;
-      if ( v11 < a4 + v12 )
+        v11 = 0; /*0x52701e*/
+      if ( v10 < count + v11 ) /*0x52702e*/
       {
-        if ( v6 )
-          v13 = (*(this + 2) - v6) >> 2;
+        if ( begin ) /*0x527032*/
+          v12 = this->end - begin; /*0x52703d*/
         else
-          v13 = 0;
-        v11 = a4 + v13;
+          v12 = 0; /*0x527034*/
+        v10 = count + v12; /*0x527040*/
       }
-      v24 = 4 * v11;
-      v14 = (char *)FormHeapAlloc(4 * v11);
-      v15 = (float *)sub_7A25C0((void *)*(this + 1), (int)Src, v14);
-      v16 = (void *)sub_784B30(v15, a4, (float *)&a5);
-      sub_7A25C0(Src, *(this + 2), v16);
-      v17 = *(this + 1);
-      if ( v17 )
-        v18 = (*(this + 2) - v17) >> 2;
+      counta = v10; /*0x527047*/
+      v13 = (unsigned int *)FormHeapAlloc(4 * v10); /*0x52705a*/
+      v14 = (float *)OB_stVector4_UninitializedCopyRange_010201A0( /*0x527061*/
+                       (const unsigned int *)this->begin,
+                       (const unsigned int *)position.current,
+                       v13);
+      v15 = OB_stVectorFloat_UninitializedFillN_010201A0(v14, count, (const float *)&value); /*0x52706f*/
+      OB_stVector4_UninitializedCopyRange_010201A0( /*0x52707c*/
+        (const unsigned int *)position.current,
+        (const unsigned int *)this->end,
+        (unsigned int *)v15);
+      v16 = this->begin; /*0x527081*/
+      if ( v16 ) /*0x527086*/
+        v17 = this->end - v16; /*0x527091*/
       else
-        v18 = 0;
-      v19 = v18 + a4;
-      if ( v17 )
-        FormHeapFree(*(this + 1));
-      *(this + 1) = v14;
-      *(this + 3) = &v14[v24];
-      *(this + 2) = &v14[4 * v19];
+        v17 = 0; /*0x527088*/
+      v18 = v17 + count; /*0x527094*/
+      if ( v16 ) /*0x527098*/
+        FormHeapFree((unsigned int)this->begin); /*0x52709b*/
+      this->begin = (float *)v13; /*0x5270ad*/
+      this->capacity = (float *)&v13[counta]; /*0x5270b1*/
+      this->end = (float *)&v13[v18]; /*0x5270b4*/
     }
   }
 }

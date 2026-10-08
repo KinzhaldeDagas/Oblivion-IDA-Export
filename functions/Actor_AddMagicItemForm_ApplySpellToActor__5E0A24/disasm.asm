@@ -12,7 +12,7 @@
 0x5E0A40: mov     ecx, esi
 0x5E0A42: mov     bl, 1
 0x5E0A44: call    edx
-0x5E0A46: mov     ecx, [esp+0Ch+arg_4]
+0x5E0A46: mov     ecx, [esp+14h]
 0x5E0A4A: mov     eax, [esi]
 0x5E0A4C: mov     edx, [eax+4]
 0x5E0A4F: push    0

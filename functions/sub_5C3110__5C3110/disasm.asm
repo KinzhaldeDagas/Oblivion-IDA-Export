@@ -20,7 +20,7 @@
 0x5C3149: jnz     short loc_5C316D
 0x5C314B: mov     esi, [esi+40h]
 0x5C314E: push    edi
-0x5C314F: call    FormHeapFree
+0x5C314F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C3154: add     esp, 4
 0x5C3157: mov     eax, esi
 0x5C3159: mov     ecx, [esp+18h+var_C]
@@ -39,7 +39,7 @@
 0x5C317F: jnz     short loc_5C31A3
 0x5C3181: mov     esi, [esi+44h]
 0x5C3184: push    edi
-0x5C3185: call    FormHeapFree
+0x5C3185: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C318A: add     esp, 4
 0x5C318D: mov     eax, esi
 0x5C318F: mov     ecx, [esp+18h+var_C]
@@ -52,13 +52,13 @@
 0x5C31A3: mov     edx, ds:0B38F88h
 0x5C31A9: push    edx; unsigned __int8 *
 0x5C31AA: push    edi; unsigned __int8 *
-0x5C31AB: call    __mbscmp
+0x5C31AB: call    __mbscmp; sHair maps to the cached Hair category Tile at RaceSexMenu+0x48.
 0x5C31B0: add     esp, 8
 0x5C31B3: test    eax, eax
 0x5C31B5: jnz     short loc_5C31D9
 0x5C31B7: mov     esi, [esi+48h]
 0x5C31BA: push    edi
-0x5C31BB: call    FormHeapFree
+0x5C31BB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C31C0: add     esp, 4
 0x5C31C3: mov     eax, esi
 0x5C31C5: mov     ecx, [esp+18h+var_C]
@@ -77,7 +77,7 @@
 0x5C31EA: jnz     short loc_5C320E
 0x5C31EC: mov     esi, [esi+4Ch]
 0x5C31EF: push    edi
-0x5C31F0: call    FormHeapFree
+0x5C31F0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C31F5: add     esp, 4
 0x5C31F8: mov     eax, esi
 0x5C31FA: mov     ecx, [esp+18h+var_C]
@@ -261,3 +261,12 @@
 0x5C342D: pop     esi
 0x5C342E: add     esp, 0Ch
 0x5C3431: retn    8
+0x9C0F80: lea     ecx, [ebp+4]; void *
+0x9C0F83: jmp     BSStringT_Clear
+0x9C0F88: mov     edx, [esp+arg_4]
+0x9C0F8C: lea     eax, [edx-8]
+0x9C0F8F: mov     ecx, [edx-0Ch]
+0x9C0F92: xor     ecx, eax
+0x9C0F94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0F99: mov     eax, offset stru_AEA0A8
+0x9C0F9E: jmp     ___CxxFrameHandler3

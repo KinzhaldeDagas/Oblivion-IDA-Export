@@ -1,4 +1,4 @@
-0x6AA320: push    esi
+0x6AA320: push    esi; NiTList AddHead used by native RenderPass producers, including the 0x177..0x17A Lighting30 path.
 0x6AA321: mov     esi, ecx
 0x6AA323: mov     eax, [esi]
 0x6AA325: mov     edx, [eax+4]
@@ -8,7 +8,7 @@
 0x6AA330: mov     [eax+8], edx
 0x6AA333: mov     dword ptr [eax+4], 0
 0x6AA33A: mov     ecx, [esi+4]
-0x6AA33D: mov     [eax], ecx
+0x6AA33D: mov     [eax], ecx; Install the previous head as newNode->next. Repeated AddHead calls therefore reverse producer iteration order.
 0x6AA33F: mov     ecx, [esi+4]
 0x6AA342: test    ecx, ecx
 0x6AA344: jz      short loc_6AA354

@@ -1,1 +1,1 @@
-0x68F330: jmp     ??1ActiveEffect@@UAE@XZ; ActiveEffect::~ActiveEffect(void)
+0x68F330: jmp     ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.

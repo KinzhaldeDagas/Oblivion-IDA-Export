@@ -3,7 +3,7 @@
 0x6DEE42: mov     edi, [esp+8+arg_0]
 0x6DEE46: push    edi
 0x6DEE47: mov     esi, ecx
-0x6DEE49: call    sub_6EC5B0
+0x6DEE49: call    j_NiSingleInterpController_SaveBinary
 0x6DEE4E: mov     eax, [edi+220h]
 0x6DEE54: mov     edx, [eax+8]
 0x6DEE57: push    1

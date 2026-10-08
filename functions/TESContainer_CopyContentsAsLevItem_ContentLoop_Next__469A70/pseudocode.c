@@ -14,9 +14,9 @@ int __userpurge TESContainer_CopyContentsAsLevItem_::ContentLoop_Next@<eax>(
 {
   _DWORD *v12; // ebp
 
-  v12 = *(_DWORD **)(a1 + 4);
-  if ( v12 )
-    return TESContainer_CopyContentsAsLevItem_::ContentLoop(v12, a2, a3, _C, a5, a6, a7, a8, a9, a10, a11, a12);
+  v12 = *(_DWORD **)(a1 + 4); /*0x469a70*/
+  if ( v12 ) /*0x469a75*/
+    return TESContainer_CopyContentsAsLevItem_::ContentLoop(v12, a2, a3, _C, a5, a6, a7, a8, a9, a10, a11, a12); /*0x469a75*/
   else
-    return TESContainer_CopyContentsAsLevItem_::MarkModified(a2, a3, _C, a5, a6, a7, a8, a9, a10, a11, a12);
+    return TESContainer_CopyContentsAsLevItem_::MarkModified(a2, a3, _C, a5, a6, a7, a8, a9, a10, a11, a12); /*0x469a76*/
 }

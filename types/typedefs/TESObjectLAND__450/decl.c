@@ -1,1 +1,1 @@
-TESObjectLAND
+struct TESObjectLAND;

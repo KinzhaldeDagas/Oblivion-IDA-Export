@@ -1,4 +1,4 @@
-0x6B9250: cmp     [esp+arg_0], 0
+0x6B9250: cmp     [esp+clearAll], 0; ClearData owns ordinary MenuTopics but deliberately does not destroy isInfoGeneralTopic entries. Those are actor-specific caches owned by ExtraInfoGeneralTopic (0x59).
 0x6B9255: push    esi
 0x6B9256: mov     dword ptr [ecx], 0
 0x6B925C: lea     esi, [ecx+4]
@@ -19,10 +19,10 @@
 0x6B9280: jnz     short loc_6B9296
 0x6B9282: test    edi, edi
 0x6B9284: jz      short loc_6B9296
-0x6B9286: mov     ecx, edi
-0x6B9288: call    sub_6B8F50
+0x6B9286: mov     ecx, edi; this
+0x6B9288: call    MenuTopic__Destroy; Ordinary MenuTopics destroy every DialogueResponse. INFOGENERAL skips response destruction here because ExtraInfoGeneralTopic owns the cached object; that owner's destructor clears isInfoGeneralTopic first, then calls this routine for full cleanup.
 0x6B928D: push    edi
-0x6B928E: call    FormHeapFree
+0x6B928E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B9293: add     esp, 4
 0x6B9296: mov     eax, [esi+4]
 0x6B9299: test    eax, eax
@@ -32,7 +32,7 @@
 0x6B92A3: mov     edx, [eax]
 0x6B92A5: push    eax
 0x6B92A6: mov     [esi], edx
-0x6B92A8: call    FormHeapFree
+0x6B92A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B92AD: add     esp, 4
 0x6B92B0: jmp     short loc_6B9270
 0x6B92B2: mov     dword ptr [esi], 0

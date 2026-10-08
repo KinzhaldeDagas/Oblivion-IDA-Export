@@ -1,1 +1,1 @@
-0x8646B0: jmp     sub_717710
+0x8646B0: jmp     OB_NiTriShape_CreateClone

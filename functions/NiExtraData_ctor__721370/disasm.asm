@@ -53,3 +53,12 @@
 0x721404: pop     ebx
 0x721405: add     esp, 10h
 0x721408: retn    4
+0x9CA330: mov     ecx, [ebp-10h]
+0x9CA333: jmp     NiRefObject_destr
+0x9CA338: mov     edx, [esp+arg_4]
+0x9CA33C: lea     eax, [edx-10h]
+0x9CA33F: mov     ecx, [edx-14h]
+0x9CA342: xor     ecx, eax
+0x9CA344: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA349: mov     eax, offset stru_AF2A60
+0x9CA34E: jmp     ___CxxFrameHandler3

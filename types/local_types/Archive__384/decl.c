@@ -1,1 +1,1 @@
-Archive
+struct Archive;

@@ -1,1 +1,1 @@
-IClassActivator_0
+typedef IClassActivator IClassActivator_0;

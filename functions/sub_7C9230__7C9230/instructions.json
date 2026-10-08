@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C9230",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion ShadowLight geometry constants. Mode-5 selectors 6..9 consume PointLightPos0 c16 from B44FD8; c16.w is the depth divisor with rigid object-scale correction.",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7C9288",
-    "line": "call    NiDX9Renderer__CalculateBoneMatrixes",
+    "line": "call    NiDX9Renderer__CalculateBoneMatrixes; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x7C92A7",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x7C92F5",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x7C9672",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x7C9841",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x7C9941",
-    "line": "cmp     byte ptr [ecx+0F5h], 0",
+    "line": "cmp     byte ptr [ecx+0F5h], 0; ShadowSceneLight +0xF5 selects the special-light shader-matrix branch; zero continues ordinary selector-specific handling.",
     "mnemonic": "cmp",
     "size": 7
   },

@@ -1,1 +1,1 @@
-HairShader
+struct HairShader;

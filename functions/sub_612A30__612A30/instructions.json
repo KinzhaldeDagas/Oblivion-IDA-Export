@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x612A30",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+actionOrIdle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,31 +49,31 @@
   },
   {
     "ea": "0x612A42",
-    "line": "push    ecx",
+    "line": "push    ecx; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x612A43",
-    "line": "push    eax",
+    "line": "push    eax; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x612A44",
-    "line": "push    11h",
+    "line": "push    11h; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x612A46",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x612A48",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x612A6B",
-    "line": "lea     ecx, [esp+0Ch+arg_4]",
+    "line": "lea     ecx, [esp+0Ch+actionOrIdle]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x612A73",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },

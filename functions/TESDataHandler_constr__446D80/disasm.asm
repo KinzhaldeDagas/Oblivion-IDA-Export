@@ -1,4 +1,4 @@
-0x446D80: push    0FFFFFFFFh
+0x446D80: push    0FFFFFFFFh; Verified constructor store: [TESDataHandler+0xCD1] (activeFileState.retainActiveFile) is initialized to zero at 0x446EF4. A whole-code scan for the direct x86 displacement found this as the only store to +0xCD1; the other direct references are reads in Clear, LoadFormRecord, and LoadFiles. No direct nonzero writer has been identified; any alias/indirect setter remains Unknown.
 0x446D82: push    offset TESDataHandler_constr_SEH
 0x446D87: mov     eax, large fs:0
 0x446D8D: push    eax
@@ -121,7 +121,7 @@
 0x446F70: jz      short loc_446F7D
 0x446F72: push    1
 0x446F74: mov     ecx, eax
-0x446F76: call    TESRegionList_constr
+0x446F76: call    TESRegionList_constr; Verified: mode byte at +0xC controls ownership and shared region-data cache lifetime. Owning lists reset cache on first owner and increment the manager/list refcount.
 0x446F7B: jmp     short loc_446F7F
 0x446F7D: xor     eax, eax
 0x446F7F: mov     byte ptr [esp+28h+var_4], 1
@@ -180,3 +180,41 @@
 0x44703E: pop     ebx
 0x44703F: add     esp, 14h
 0x447042: retn
+0x9AD600: mov     ecx, [ebp-10h]
+0x9AD603: add     ecx, 0C0h ; 'À'
+0x9AD609: jmp     sub_446D00
+0x9AD60E: push    offset ??1TESSkill@@UAE@XZ; void (__thiscall *)(void *)
+0x9AD613: push    15h; int
+0x9AD615: push    60h ; '`'; unsigned int
+0x9AD617: mov     eax, [ebp-10h]
+0x9AD61A: add     eax, 0D8h ; 'Ø'
+0x9AD61F: push    eax; void *
+0x9AD620: call    $LN21
+0x9AD625: retn
+0x9AD626: mov     eax, [ebp-14h]
+0x9AD629: push    eax
+0x9AD62A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD62F: pop     ecx
+0x9AD630: retn
+0x9AD631: mov     eax, [ebp-14h]
+0x9AD634: push    eax
+0x9AD635: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD63A: pop     ecx
+0x9AD63B: retn
+0x9AD63C: mov     eax, [ebp-14h]
+0x9AD63F: push    eax
+0x9AD640: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD645: pop     ecx
+0x9AD646: retn
+0x9AD647: mov     eax, [ebp-14h]
+0x9AD64A: push    eax
+0x9AD64B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD650: pop     ecx
+0x9AD651: retn
+0x9AD652: mov     edx, [esp+arg_4]
+0x9AD656: lea     eax, [edx-18h]
+0x9AD659: mov     ecx, [edx-1Ch]
+0x9AD65C: xor     ecx, eax
+0x9AD65E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD663: mov     eax, offset stru_ADA16C
+0x9AD668: jmp     ___CxxFrameHandler3

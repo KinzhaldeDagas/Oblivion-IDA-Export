@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x728280",
+      "0x7282E8"
+    ]
+  ],
+  "chunks_sha256": "0f6029e9f58357769a1c3e6b83136c63d4f6013a451a6f83651befa86f6ee44b",
+  "comment_regular": "Ensure NiGeometryData normal storage exists and optionally clear it. Allocates one NiPoint3 per vertex, or three per vertex when format & 0xF000 indicates NBT data. Clearing an NBT buffer also zeros binormal/tangent planes.\n\nVerified Prettier Faces audit: allocate 12*vertexCount bytes or 36*vertexCount when format at +0x2C has any 0xF000 bits. clearStorage clears all allocated planes. TriShape/TriStrips UpdateNormals both request clearing but rebuild only first plane; plugin's NBT exclusion preserves tangent/binormal storage. Prototype corrected to NiGeometryData*, bool.",
+  "comment_repeatable": "Verified Prettier Faces audit: allocate 12*vertexCount bytes or 36*vertexCount when format at +0x2C has any 0xF000 bits. clearStorage clears all allocated planes. TriShape/TriStrips UpdateNormals both request clearing but rebuild only first plane; plugin's NBT exclusion preserves tangent/binormal storage. Prototype corrected to NiGeometryData*, bool.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_728280",
+  "display_name": "NiGeometryData_AllocateAndClearNormals",
   "end_ea": "0x7282E8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_728280",
+  "name": "NiGeometryData_AllocateAndClearNormals",
   "segment": ".text",
   "sha256": "0f6029e9f58357769a1c3e6b83136c63d4f6013a451a6f83651befa86f6ee44b",
   "size": 104,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x728280",
-  "type": "void __thiscall(int this, char)",
+  "total_chunk_size": 104,
+  "type": "void __thiscall(NiGeometryData *self, bool clearStorage)",
   "xrefs_from_count": 41,
   "xrefs_to_count": 3
 }

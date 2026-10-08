@@ -1,4 +1,4 @@
-BSStringT *sub_A121C0()
+NiRTTI *sub_A121C0()
 {
-  return sub_70E220((BSStringT *)dword_BA7D10, "bhkUnaryAction", (int)dword_BA7D04);
+  return NiRTTI_Constructor(&stru_BA7D10, "bhkUnaryAction", &stru_BA7D04); /*0xa121d4*/
 }

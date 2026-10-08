@@ -16,7 +16,7 @@
 0x58191F: cmp     byte ptr [edi+4], 0
 0x581923: mov     [esp+1Ch+var_4], 1
 0x58192B: jnz     short loc_581932
-0x58192D: call    sub_58DA70
+0x58192D: call    Tile__Release; Verified: marks subtree release-in-progress (+5), clears matching interface active/drag references, marks released (+4), detaches parent, destroys each Value, detaches model, then deletes children. Native loop at 0x58DA90 advances child iterator EDX before call; pseudocode may omit this advance.
 0x581932: mov     esi, [edi+44h]
 0x581935: test    esi, esi
 0x581937: mov     byte ptr [esp+1Ch+var_4], 0
@@ -43,3 +43,15 @@
 0x581976: pop     esi
 0x581977: add     esp, 10h
 0x58197A: retn
+0x9BEC20: mov     ecx, [ebp-10h]; this
+0x9BEC23: jmp     ??1Tile@@UAE@XZ; Tile::~Tile(void)
+0x9BEC28: mov     ecx, [ebp-10h]
+0x9BEC2B: add     ecx, 44h ; 'D'; slot
+0x9BEC2E: jmp     NiPointerSlot_Release
+0x9BEC33: mov     edx, [esp+arg_4]
+0x9BEC37: lea     eax, [edx-0Ch]
+0x9BEC3A: mov     ecx, [edx-10h]
+0x9BEC3D: xor     ecx, eax
+0x9BEC3F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BEC44: mov     eax, offset stru_AE82BC
+0x9BEC49: jmp     ___CxxFrameHandler3

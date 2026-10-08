@@ -1,4 +1,4 @@
-0x7F1170: sub     esp, 18h
+0x7F1170: sub     esp, 18h; Leaf shader global leafData updater: copies camera/right/up style vectors from dword_B43124 into B46758..B46774.
 0x7F1173: mov     eax, ds:0B43124h
 0x7F1178: fld     dword ptr [eax+68h]
 0x7F117B: fstp    [esp+18h+var_18]

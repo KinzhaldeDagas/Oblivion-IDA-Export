@@ -30,14 +30,14 @@
 0x913FB7: test    ah, 44h
 0x913FBA: jnp     short loc_913FCF
 0x913FBC: mov     esi, [esi+10h]
-0x913FBF: fld     dword ptr [esp+30h+var_24]
+0x913FBF: fld     [esp+30h+var_24]
 0x913FC3: movaps  xmm0, [esp+30h+var_20]
 0x913FC8: movaps  xmmword ptr [esi+10h], xmm0
 0x913FCC: fstp    dword ptr [esi+1Ch]
 0x913FCF: sub     dword ptr ds:0BA83FCh, 1
 0x913FD6: jnz     short loc_913FE2
 0x913FD8: mov     dword ptr ds:0BA83F8h, 0
-0x913FE2: push    offset stru_BA8380; lpCriticalSection
+0x913FE2: push    offset unk_BA8380; lpCriticalSection
 0x913FE7: call    dword ptr ds:0A28074h
 0x913FED: mov     ecx, [esp+30h+var_4]
 0x913FF1: pop     edi

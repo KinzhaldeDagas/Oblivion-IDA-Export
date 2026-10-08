@@ -1,19 +1,19 @@
-0x5982A0: push    ecx
+0x5982A0: push    ecx; Container-menu close/resolution handler. When the opened container is an actor and the pickpocket state applies, it awards Sneak useValue1 before the native detection/crime comparison.
 0x5982A1: push    0
 0x5982A3: push    401h
-0x5982A8: call    sub_5790E0
+0x5982A8: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5982AD: add     esp, 8
 0x5982B0: test    al, al
 0x5982B2: jnz     loc_59863B
 0x5982B8: push    0
 0x5982BA: push    3F8h
-0x5982BF: call    sub_5790E0
+0x5982BF: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5982C4: add     esp, 8
 0x5982C7: test    al, al
 0x5982C9: jnz     loc_59863B
 0x5982CF: push    0
 0x5982D1: push    3E9h
-0x5982D6: call    sub_5790E0
+0x5982D6: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5982DB: add     esp, 8
 0x5982DE: test    al, al
 0x5982E0: jnz     loc_59863B
@@ -44,22 +44,22 @@
 0x598335: push    ecx; void *
 0x598336: call    OblivionDynamicCast
 0x59833B: mov     dl, [edi+63h]
-0x59833E: mov     ecx, [edi+44h]; this
+0x59833E: mov     ecx, [edi+44h]; reference
 0x598341: add     esp, 14h
 0x598344: mov     ebx, eax
 0x598346: mov     [esp+14h+var_1], dl
-0x59834A: call    TESObjectREFR_GetOwner
+0x59834A: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x59834F: fld     dword ptr ds:0A379B4h
 0x598355: push    ecx
-0x598356: fstp    [esp+18h+a2]; a3
-0x598359: push    1772h; a2
+0x598356: fstp    [esp+18h+a2]; value
+0x598359: push    1772h; propertyCode
 0x59835E: mov     ecx, esi; this
 0x598360: mov     ebp, eax
-0x598362: call    Tile_SetFloat
+0x598362: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x598367: mov     ecx, esi
 0x598369: call    Tile_GetParentMenu
 0x59836E: mov     ecx, eax; int
-0x598370: call    sub_584740
+0x598370: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x598375: test    ebx, ebx
 0x598377: mov     dword ptr ds:0B13E94h, 0FFFFFFFFh
 0x598381: jz      short loc_5983A0
@@ -89,10 +89,10 @@
 0x5983D3: mov     eax, [ecx]
 0x5983D5: mov     edx, [eax+39Ch]
 0x5983DB: push    ecx
-0x5983DC: fstp    [esp+18h+a2]
+0x5983DC: fstp    [esp+18h+a2]; luckValue
 0x5983DF: push    1
 0x5983E1: push    1Fh
-0x5983E3: call    edx
+0x5983E3: call    edx; Actor-container/pickpocket resolution: Sneak (0x1F), useValue1, identity scale (0.0).
 0x5983E5: mov     ecx, ds:0B333C4h
 0x5983EB: mov     eax, [ecx]
 0x5983ED: mov     edx, [eax+284h]
@@ -102,11 +102,11 @@
 0x5983FD: push    eax
 0x5983FE: mov     eax, [ecx]
 0x598400: mov     edx, [eax+284h]
-0x598406: push    1Fh
+0x598406: push    1Fh; luckValue
 0x598408: call    edx
-0x59840A: push    eax
-0x59840B: call    Calc_LuckModifiedSkill
-0x598410: call    Double_To_SInt32
+0x59840A: push    eax; skillValue
+0x59840B: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
+0x598410: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x598415: push    0; int
 0x598417: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x59841C: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
@@ -128,9 +128,9 @@
 0x59844A: push    1Fh
 0x59844C: mov     ecx, esi
 0x59844E: call    eax
-0x598450: push    eax
-0x598451: call    Calc_LuckModifiedSkill
-0x598456: call    Double_To_SInt32
+0x598450: push    eax; skillValue
+0x598451: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
+0x598456: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59845B: fldz
 0x59845D: add     esp, 4
 0x598460: fstp    [esp+18h+a2]; float
@@ -139,7 +139,7 @@
 0x598465: call    sub_546660
 0x59846A: push    0; Seed
 0x59846C: mov     ebp, eax
-0x59846E: call    GetRandomLargeInteger?
+0x59846E: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x598473: mov     ecx, eax
 0x598475: mov     eax, 51EB851Fh
 0x59847A: imul    ecx
@@ -195,18 +195,18 @@
 0x59850C: jz      short loc_59852C
 0x59850E: mov     ecx, ebp
 0x598510: call    Tile_GetParentMenu
-0x598515: mov     ecx, ebx
+0x598515: mov     ecx, ebx; this
 0x598517: mov     esi, eax
-0x598519: call    sub_5EF930
+0x598519: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x59851E: mov     ecx, esi
 0x598520: mov     byte ptr [esi+96h], 1
 0x598527: call    sub_59E030
 0x59852C: fld     dword ptr ds:0A379B4h
 0x598532: push    ecx
-0x598533: fstp    [esp+18h+a2]; a3
-0x598536: push    0FA1h; a2
+0x598533: fstp    [esp+18h+a2]; value
+0x598536: push    0FA1h; propertyCode
 0x59853B: mov     ecx, ebp; this
-0x59853D: call    Tile_SetFloat
+0x59853D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x598542: jmp     short loc_598550
 0x598544: mov     eax, ds:0B333C4h
 0x598549: mov     byte ptr [eax+10Ch], 0
@@ -273,7 +273,7 @@
 0x598612: mov     ecx, esi; this
 0x598614: call    sub_6B73E0
 0x598619: push    esi
-0x59861A: call    FormHeapFree
+0x59861A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x59861F: add     esp, 4
 0x598622: mov     edx, ds:0B333C4h
 0x598628: mov     dword ptr ds:0B3B27Ch, 0

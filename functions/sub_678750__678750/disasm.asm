@@ -1,6 +1,6 @@
-0x678750: sub     esp, 64h
+0x678750: sub     esp, 64h; BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.
 0x678753: add     ecx, 68h ; 'h'; this
-0x678756: call    sub_7616D0
+0x678756: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67875B: mov     ecx, ds:0B333A0h
 0x678761: add     ecx, 80h ; '€'
 0x678767: test    eax, eax
@@ -24,8 +24,8 @@
 0x6787A0: mov     esi, [edi]
 0x6787A2: test    esi, esi
 0x6787A4: jz      loc_678CE9
-0x6787AA: mov     ecx, esi
-0x6787AC: call    sub_5E32D0
+0x6787AA: mov     ecx, esi; this
+0x6787AC: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x6787B1: test    al, al
 0x6787B3: jz      loc_678CE9
 0x6787B9: mov     edx, [esi]
@@ -50,8 +50,8 @@
 0x6787F6: mov     ecx, esi
 0x6787F8: fstp    [esp+78h+var_78]
 0x6787FB: call    eax
-0x6787FD: mov     ecx, esi
-0x6787FF: call    sub_4D8AF0
+0x6787FD: mov     ecx, esi; this
+0x6787FF: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x678804: mov     ecx, esi
 0x678806: mov     [esp+74h+var_54], eax
 0x67880A: xor     ebp, ebp
@@ -60,9 +60,9 @@
 0x678816: mov     ecx, esi
 0x678818: mov     ebx, eax
 0x67881A: call    sub_5E2E00
-0x67881F: mov     ecx, esi
+0x67881F: mov     ecx, esi; this
 0x678821: mov     edi, eax
-0x678823: call    sub_5E0380
+0x678823: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x678828: test    ebx, ebx
 0x67882A: mov     [esp+74h+var_4C], eax
 0x67882E: mov     [esp+74h+var_50], ebp
@@ -82,8 +82,8 @@
 0x67885C: call    sub_4D74B0
 0x678861: test    al, al
 0x678863: jz      short loc_678872
-0x678865: mov     ecx, edi
-0x678867: call    sub_4D8AF0
+0x678865: mov     ecx, edi; this
+0x678867: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x67886C: cmp     eax, [esp+74h+var_54]
 0x678870: jz      short loc_678892
 0x678872: mov     edi, [esp+74h+var_50]
@@ -93,8 +93,8 @@
 0x67887C: call    sub_4D74B0
 0x678881: test    al, al
 0x678883: jz      short loc_6788DA
-0x678885: mov     ecx, edi
-0x678887: call    sub_4D8AF0
+0x678885: mov     ecx, edi; this
+0x678887: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x67888C: cmp     eax, [esp+74h+var_54]
 0x678890: jnz     short loc_6788DA
 0x678892: mov     edx, [edi]
@@ -108,14 +108,14 @@
 0x6788A9: jz      short loc_6788B0
 0x6788AB: mov     [esp+74h+var_62], 1
 0x6788B0: mov     ecx, edi
-0x6788B2: call    sub_4D73F0
+0x6788B2: call    sub_4D73F0; BunkFix: plugin activation assist uses this same engine helper to find a free marker before calling SetSleepState; assist does not clear or forge ExtraUsedMarkers.
 0x6788B7: cmp     eax, 0FFFFFFFFh
 0x6788BA: mov     [esp+74h+var_5C], eax
 0x6788BE: jz      loc_678CE9
 0x6788C4: push    ebx
 0x6788C5: push    eax
 0x6788C6: mov     ecx, edi
-0x6788C8: call    sub_4DB9D0
+0x6788C8: call    sub_4DB9D0; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.
 0x6788CD: test    al, al
 0x6788CF: jnz     loc_678AE3
 0x6788D5: jmp     loc_678CE9
@@ -133,8 +133,8 @@
 0x6788FF: call    sub_566DC0
 0x678904: test    al, al
 0x678906: jz      loc_6789E9
-0x67890C: mov     ecx, esi
-0x67890E: call    sub_5E0F30
+0x67890C: mov     ecx, esi; this
+0x67890E: call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x678913: test    al, al
 0x678915: jnz     short loc_678926
 0x678917: mov     ecx, [esi+58h]
@@ -154,18 +154,18 @@
 0x678947: test    ebp, ebp
 0x678949: jnz     loc_678AEB
 0x67894F: mov     edi, [eax]
-0x678951: mov     ecx, edi
-0x678953: call    sub_4D8AF0
+0x678951: mov     ecx, edi; this
+0x678953: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x678958: cmp     eax, [esp+74h+var_54]
 0x67895C: jnz     short loc_6789B2
-0x67895E: mov     ecx, edi; this
-0x678960: call    TESObjectREFR_GetOwner
+0x67895E: mov     ecx, edi; reference
+0x678960: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x678965: test    eax, eax
 0x678967: jz      short loc_678977
-0x678969: push    1
-0x67896B: push    esi
-0x67896C: mov     ecx, edi
-0x67896E: call    TESOBjectREFR_IsOwnedBy
+0x678969: push    1; useFactionOwnership
+0x67896B: push    esi; actorReference
+0x67896C: mov     ecx, edi; reference
+0x67896E: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x678973: test    al, al
 0x678975: jz      short loc_6789B2
 0x678977: mov     edx, [edi]
@@ -177,14 +177,14 @@
 0x67898A: test    al, al
 0x67898C: jz      short loc_6789B2
 0x67898E: mov     ecx, edi
-0x678990: call    sub_4D73F0
+0x678990: call    sub_4D73F0; BunkFix: plugin activation assist uses this same engine helper to find a free marker before calling SetSleepState; assist does not clear or forge ExtraUsedMarkers.
 0x678995: cmp     eax, 0FFFFFFFFh
 0x678998: mov     [esp+74h+var_5C], eax
 0x67899C: jz      short loc_6789CD
 0x67899E: push    ebx
 0x67899F: push    eax
 0x6789A0: mov     ecx, edi
-0x6789A2: call    sub_4DB9D0
+0x6789A2: call    sub_4DB9D0; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.
 0x6789A7: test    al, al
 0x6789A9: jz      short loc_6789CD
 0x6789AB: mov     ebp, edi
@@ -238,20 +238,20 @@
 0x678A56: test    ebp, ebp
 0x678A58: jnz     loc_678AEB
 0x678A5E: mov     edi, [eax]
-0x678A60: mov     ecx, edi
-0x678A62: call    sub_4D8AF0
+0x678A60: mov     ecx, edi; this
+0x678A62: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x678A67: cmp     eax, [esp+74h+var_54]
 0x678A6B: jnz     short loc_678ACD
 0x678A6D: test    edi, edi
 0x678A6F: jz      short loc_678ACD
-0x678A71: mov     ecx, edi; this
-0x678A73: call    TESObjectREFR_GetOwner
+0x678A71: mov     ecx, edi; reference
+0x678A73: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x678A78: test    eax, eax
 0x678A7A: jz      short loc_678A8A
-0x678A7C: push    1
-0x678A7E: push    esi
-0x678A7F: mov     ecx, edi
-0x678A81: call    TESOBjectREFR_IsOwnedBy
+0x678A7C: push    1; useFactionOwnership
+0x678A7E: push    esi; actorReference
+0x678A7F: mov     ecx, edi; reference
+0x678A81: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x678A86: test    al, al
 0x678A88: jz      short loc_678ACD
 0x678A8A: mov     edx, [edi]
@@ -263,14 +263,14 @@
 0x678A9D: test    al, al
 0x678A9F: jz      short loc_678ACD
 0x678AA1: mov     ecx, edi
-0x678AA3: call    sub_4D73F0
+0x678AA3: call    sub_4D73F0; BunkFix: plugin activation assist uses this same engine helper to find a free marker before calling SetSleepState; assist does not clear or forge ExtraUsedMarkers.
 0x678AA8: cmp     eax, 0FFFFFFFFh
 0x678AAB: mov     [esp+74h+var_5C], eax
 0x678AAF: jz      loc_678C6F
 0x678AB5: push    ebx
 0x678AB6: push    eax
 0x678AB7: mov     ecx, edi
-0x678AB9: call    sub_4DB9D0
+0x678AB9: call    sub_4DB9D0; BunkFix: plugin activation assist uses this helper as a guard to ensure the selected free marker has a resolvable BSFurnitureMarker transform before applying SetSleepState.
 0x678ABE: test    al, al
 0x678AC0: jz      loc_678C6F
 0x678AC6: mov     ebp, edi
@@ -325,13 +325,13 @@
 0x678B6A: movzx   eax, word ptr [ebx+0Ch]
 0x678B6E: mov     [esp+60h+var_38], eax
 0x678B72: push    ecx
-0x678B73: lea     ecx, [esp+64h+var_10]
+0x678B73: lea     ecx, [esp+64h+var_10]; this
 0x678B77: fild    [esp+64h+var_38]
 0x678B7B: fdiv    qword ptr ds:0A2FC70h
 0x678B81: fstp    [esp+64h+var_38]
 0x678B85: fld     [esp+64h+var_38]
-0x678B89: fstp    dword ptr [esp]; float
-0x678B8C: call    NiMatrix33_InitRotationTransform
+0x678B89: fstp    dword ptr [esp]; angleZ
+0x678B8C: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x678B91: lea     ecx, [esp+60h+var_34]
 0x678B95: push    ecx
 0x678B96: lea     edx, [esp+64h+var_1C]
@@ -368,9 +368,9 @@
 0x678BFF: call    edx
 0x678C01: push    ebx; a2
 0x678C02: mov     ecx, esi; this
-0x678C04: call    MobileObject_GetCharProxy
+0x678C04: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x678C09: mov     ecx, eax; this
-0x678C0B: call    sub_452A10
+0x678C0B: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x678C10: movzx   eax, byte ptr [ebx+0Eh]
 0x678C14: push    eax
 0x678C15: mov     eax, [ebp+0]

@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_4A9560",
+  "chunks": [
+    [
+      "0x4A9560",
+      "0x4A96B5"
+    ],
+    [
+      "0x9B5BD0",
+      "0x9B5BF3"
+    ]
+  ],
+  "chunks_sha256": "c6f6a770c59b3af3ecee3ca94c7c95e1ae70c4cf547b60e94f5054c70d02cf7a",
+  "comment_regular": "TESAmmo 3D creator. Builds the generic bound-object clone, reads ExtraCount, and removes ArrowQuiver/ArrowN children so visible quiver arrows match the represented stack count.",
+  "comment_repeatable": "TESAmmo 3D creator. Builds the generic bound-object clone, reads ExtraCount, and removes ArrowQuiver/ArrowN children so visible quiver arrows match the represented stack count.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TESAmmo_CreateQuiver3D",
   "end_ea": "0x4A96B5",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_4A9560",
+  "name": "TESAmmo_CreateQuiver3D",
   "segment": ".text",
   "sha256": "939d537e8dfd3c2160becaff8c97a0425503026f260d9bff0317eb23cb44dc04",
   "size": 341,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A9560",
-  "type": "NiNode *__thiscall(void *this, int, int)",
-  "xrefs_from_count": 134,
+  "total_chunk_size": 376,
+  "type": "NiNode *__thiscall(TESBoundObject *this, TESObjectREFR *reference, int arg1)",
+  "xrefs_from_count": 145,
   "xrefs_to_count": 1
 }

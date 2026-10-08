@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7EE5D0",
-    "line": "push    ebx",
+    "line": "push    ebx; BloodOnDeath decode 2026-05-30: shader-property diagnostic dump; no spawn, lifetime, or projection cap is enforced here.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7EE5DA",
-    "line": "call    sub_7E28E0",
+    "line": "call    sub_7E28E0; Shader/property diagnostic dumper. Prints pass names via BSShaderProperty_GetRenderPassName; BSSM_FRONDS from this path is diagnostic text only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x7EE654",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7EE656",
-    "line": "call    sub_7ED5D0",
+    "line": "call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7EE6A4",
-    "line": "call    TESOutput_PrintLabeledUnsignedInt",
+    "line": "call    TESOutput_PrintLabeledUnsignedInt; BloodOnDeath decode: \"number of decals\" is diagnostic shader-property state, not a trail density cap.",
     "mnemonic": "call",
     "size": 5
   },

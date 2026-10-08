@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x5E4080",
+      "0x5E409D"
+    ]
+  ],
+  "chunks_sha256": "2a02d576b0c2d0be91fdc164faa02f951334704603aa38912171223886b885cb",
+  "comment_regular": "Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.",
+  "comment_repeatable": "Returns TESPackageNames[currentPackage->members.type] when Actor.process and process.currentPackage exist; otherwise null.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5E4080",
+  "display_name": "Actor::GetCurrentPackageTypeName",
   "end_ea": "0x5E409D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5E4080",
+  "name": "Actor::GetCurrentPackageTypeName",
   "segment": ".text",
   "sha256": "2a02d576b0c2d0be91fdc164faa02f951334704603aa38912171223886b885cb",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E4080",
-  "type": "char *__thiscall(_DWORD *this)",
+  "total_chunk_size": 29,
+  "type": "const char *__thiscall(Actor *this)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 5
 }

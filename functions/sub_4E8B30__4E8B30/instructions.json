@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E8B30",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified local ROAD grouping: TESRoad stores its owner TESWorldSpace at +0x2C. Direct ROAD membership is GRUP type 1 labeled with the owner WRLD FormID24; with include_parent set, it first delegates to the owning WRLD's group matcher.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4E8B32",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+group_header]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4E8B46",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+include_parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4E8B52",
-    "line": "mov     ecx, [esp+0Ch+arg_8]",
+    "line": "mov     ecx, [esp+0Ch+match_flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x4E8B74",
-    "line": "push    eax",
+    "line": "push    eax; candidate_form_id",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E8B75",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E8B77",
-    "line": "call    sub_46AF50",
+    "line": "call    TESForm_FormIDMatchesObjectID24; Direct ROAD membership requires groupType=1 and label == owning WRLD object ID (low FormID24).",
     "mnemonic": "call",
     "size": 5
   },

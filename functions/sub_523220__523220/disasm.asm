@@ -39,17 +39,17 @@
 0x52328A: jnz     short loc_5232C7
 0x52328C: cmp     dword ptr [esi+1D8h], 0
 0x523293: jnz     short loc_5232C7
-0x523295: mov     ecx, [esi+0E8h]
+0x523295: mov     ecx, [esi+0E8h]; this
 0x52329B: test    ecx, ecx
 0x52329D: jz      short loc_5232C7
-0x52329F: mov     edx, [esp+0Ch+arg_4]
-0x5232A3: mov     eax, [esp+0Ch+arg_0]
-0x5232A7: push    0
-0x5232A9: push    1
-0x5232AB: push    esi
-0x5232AC: push    edx
-0x5232AD: push    eax
-0x5232AE: call    sub_52DED0
+0x52329F: mov     edx, [esp+0Ch+outSkinnedNode]
+0x5232A3: mov     eax, [esp+0Ch+outBipedNode]
+0x5232A7: push    0; preferBipedGeometry
+0x5232A9: push    1; applyAppearance
+0x5232AB: push    esi; npc
+0x5232AC: push    edx; outSkinnedNode
+0x5232AD: push    eax; outBipedNode
+0x5232AE: call    TESRace_CreateFaceGenNodes; Create the paired BSFaceGenNiNodeBiped and BSFaceGenNiNodeSkinned nodes with shared animation data, build a FaceGenRenderState, populate head geometry, and optionally apply the resulting appearance to both nodes.
 0x5232B3: mov     ecx, [esi+0E8h]
 0x5232B9: mov     dx, [ecx+2FCh]
 0x5232C0: mov     [esi+1E0h], dx

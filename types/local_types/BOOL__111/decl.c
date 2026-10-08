@@ -1,1 +1,1 @@
-BOOL
+typedef int BOOL;

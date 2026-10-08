@@ -88,3 +88,19 @@
 0x4BCEE6: pop     ebx
 0x4BCEE7: add     esp, 10h
 0x4BCEEA: retn
+0x9B4270: mov     ecx, [ebp-10h]
+0x9B4273: add     ecx, 0Ch
+0x9B4276: jmp     ??1?$NiTPointerMap@PAVTESBoundObject@@PAUDISTANT_3D_DATA@@@@UAE@XZ; NiTPointerMap<TESBoundObject *,DISTANT_3D_DATA *>::~NiTPointerMap<TESBoundObject *,DISTANT_3D_DATA *>(void)
+0x9B427B: mov     ecx, [ebp-10h]
+0x9B427E: add     ecx, 1Ch; slot
+0x9B4281: jmp     NiPointerSlot_Release
+0x9B4286: mov     ecx, [ebp-10h]
+0x9B4289: add     ecx, 20h ; ' '; slot
+0x9B428C: jmp     NiPointerSlot_Release
+0x9B4291: mov     edx, [esp+arg_4]
+0x9B4295: lea     eax, [edx-14h]
+0x9B4298: mov     ecx, [edx-18h]
+0x9B429B: xor     ecx, eax
+0x9B429D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B42A2: mov     eax, offset stru_ADF9A0
+0x9B42A7: jmp     ___CxxFrameHandler3

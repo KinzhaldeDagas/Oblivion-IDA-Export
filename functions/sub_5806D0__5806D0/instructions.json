@@ -361,31 +361,31 @@
   },
   {
     "ea": "0x5807A7",
-    "line": "lea     ecx, [esp+0E4h+var_84]",
+    "line": "lea     ecx, [esp+0E4h+var_84]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5807AB",
-    "line": "fstp    [esp+0E4h+var_E4]; float",
+    "line": "fstp    [esp+0E4h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5807AE",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5807B3",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5807B9",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,55 +397,55 @@
   },
   {
     "ea": "0x5807BF",
-    "line": "lea     ecx, [esp+0E4h+var_30]",
+    "line": "lea     ecx, [esp+0E4h+right]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5807C6",
-    "line": "fstp    [esp+0E4h+var_E4]; float",
+    "line": "fstp    [esp+0E4h+angleZ]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5807C9",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5807CE",
-    "line": "lea     ecx, [esp+0E0h+var_30]",
+    "line": "lea     ecx, [esp+0E0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5807D5",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5807D6",
-    "line": "lea     edx, [esp+0E4h+var_60]",
+    "line": "lea     edx, [esp+0E4h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5807DD",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5807DE",
-    "line": "lea     ecx, [esp+0E8h+var_84]",
+    "line": "lea     ecx, [esp+0E8h+var_84]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5807E2",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5807F4",
-    "line": "fld     [esp+0E0h+var_80]",
+    "line": "fld     [esp+0E0h+var_84.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5807FC",
-    "line": "fld     [esp+0E0h+var_74]",
+    "line": "fld     [esp+0E0h+var_84.data+10h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x580804",
-    "line": "fld     [esp+0E0h+var_68]",
+    "line": "fld     [esp+0E0h+var_84.data+1Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x5808A4",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x5808B4",
-    "line": "call    sub_57E270",
+    "line": "call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5808B9",
-    "line": "mov     ecx, offset dword_B135A0",
+    "line": "mov     ecx, offset fActivatePickSphereRadius; [Controller decode 2026-07-10] Uses fActivatePickSphereRadius:Interface through GameSetting_GetSafeFloatPointer; this is not a live reference to fXenonMenuDpadRepeatSpeed.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x580909",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x580918",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x58093B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x580968",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,13 +1135,13 @@
   },
   {
     "ea": "0x5809BC",
-    "line": "lea     ecx, [esp+0E0h+var_60]",
+    "line": "lea     ecx, [esp+0E0h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x5809C3",
-    "line": "call    sub_959BC0",
+    "line": "call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x5809DA",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x5809F9",
-    "line": "lea     edx, [esp+0F0h+var_60]",
+    "line": "lea     edx, [esp+0F0h+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x580A0A",
-    "line": "cmp     [esp+0E0h+var_3E], 0",
+    "line": "cmp     word ptr [esp+0E0h+out.data+22h], 0",
     "mnemonic": "cmp",
     "size": 9
   },
@@ -1278,14 +1278,8 @@
     "size": 2
   },
   {
-    "ea": "0x580A17",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x580A20",
-    "line": "mov     eax, [esp+0E0h+var_44]",
+    "line": "mov     eax, [esp+0E0h+out.data+1Ch]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1309,7 +1303,7 @@
   },
   {
     "ea": "0x580A2D",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1333,7 @@
   },
   {
     "ea": "0x580A3F",
-    "line": "movzx   ecx, [esp+0E0h+var_3E]",
+    "line": "movzx   ecx, word ptr [esp+0E0h+out.data+22h]",
     "mnemonic": "movzx",
     "size": 8
   },
@@ -1375,7 +1369,7 @@
   },
   {
     "ea": "0x580A52",
-    "line": "mov     edx, [esp+0E0h+var_44]",
+    "line": "mov     edx, [esp+0E0h+out.data+1Ch]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1399,7 +1393,7 @@
   },
   {
     "ea": "0x580A63",
-    "line": "lea     ecx, [esp+0E0h+var_60]",
+    "line": "lea     ecx, [esp+0E0h+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1411,7 +1405,7 @@
   },
   {
     "ea": "0x580A75",
-    "line": "call    sub_959EC0",
+    "line": "call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1894,5 +1888,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BEB90",
+    "line": "lea     ecx, [ebp-60h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BEB93",
+    "line": "jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEB98",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BEB9C",
+    "line": "lea     eax, [edx-0D0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BEBA2",
+    "line": "mov     ecx, [edx-0D4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BEBA8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BEBAA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEBAF",
+    "line": "mov     eax, offset stru_AE8228",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BEBB4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

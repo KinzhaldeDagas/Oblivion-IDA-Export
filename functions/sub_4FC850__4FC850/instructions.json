@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x4FC8DD",
-    "line": "call    sub_4F9DF0",
+    "line": "call    Script_SetCompiledData; Replace Script compiled data: free old pointer at Script+0x30, clear it, set ScriptInfo compiledSize at +0x20, then allocate/zero/copy exactly Size bytes when nonzero. A zero-size call clears compiled storage and size.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x4FC8E4",
-    "line": "call    sub_4FC730",
+    "line": "call    Script_ClearReferenceList; Hot Reload OBSE decode: script ref-list cleanup. Clears executing-script cache if needed, frees each RefVariable name buffer and payload, removes extra list nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x4FC8EB",
-    "line": "call    sub_4FC6C0",
+    "line": "call    Script_ClearVariableList; Hot Reload OBSE decode: script variable-list cleanup. Frees each VariableInfo name buffer and payload, removes extra list nodes, leaves script->varList empty.",
     "mnemonic": "call",
     "size": 5
   },

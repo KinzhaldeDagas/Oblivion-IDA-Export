@@ -1,4 +1,4 @@
-0x85E300: push    0FFFFFFFFh
+0x85E300: push    0FFFFFFFFh; Branch render helper used by dword_B42E90 mode 0x129. Uses/appends branch pass dword_B477F8 (index 26) and binds texture data from the current property/helper path.
 0x85E302: push    offset SEH_85E160
 0x85E307: mov     eax, large fs:0
 0x85E30D: push    eax
@@ -29,7 +29,7 @@
 0x85E350: push    ecx
 0x85E351: mov     ecx, esi
 0x85E353: mov     [esp+28h+arg_8], ebx
-0x85E357: call    sub_848FD0
+0x85E357: call    sub_848FD0; SpeedTreeOBSE 2026-05-31 branch normal map apply evidence: second branch render helper fetches property texture index 0 through 0x848FD0/vtable +0x8C, so the guarded OBSE writer targets +0xC0[0] only.
 0x85E35C: mov     ebx, [ebx+4]
 0x85E35F: mov     ebp, eax
 0x85E361: cmp     ebx, ebp
@@ -61,24 +61,24 @@
 0x85E3A3: push    edx
 0x85E3A4: mov     ecx, esi
 0x85E3A6: call    sub_848FA0
-0x85E3AB: cmp     byte ptr [esp+20h+arg_10], 0
+0x85E3AB: cmp     byte ptr [esp+20h+value], 0
 0x85E3B0: jnz     short loc_85E3ED
 0x85E3B2: mov     ebx, 1
 0x85E3B7: add     [edi+60h], ebx
-0x85E3BA: mov     [esp+20h+arg_10], edi
+0x85E3BA: mov     [esp+20h+value], edi
 0x85E3BE: mov     ecx, [esi+38h]
-0x85E3C1: lea     eax, [esp+20h+arg_10]
-0x85E3C5: push    eax
-0x85E3C6: push    ecx
-0x85E3C7: lea     ecx, [esi+40h]
+0x85E3C1: lea     eax, [esp+20h+value]
+0x85E3C5: push    eax; value
+0x85E3C6: push    ecx; index
+0x85E3C7: lea     ecx, [esi+40h]; this
 0x85E3CA: mov     [esp+28h+var_4], 0
-0x85E3D2: call    sub_76CE40
+0x85E3D2: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x85E3D7: or      eax, 0FFFFFFFFh
 0x85E3DA: add     [edi+60h], eax
 0x85E3DD: mov     [esp+20h+var_4], eax
 0x85E3E1: jnz     short loc_85E3EA
 0x85E3E3: mov     ecx, edi
-0x85E3E5: call    sub_7604D0
+0x85E3E5: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x85E3EA: add     [esi+38h], ebx
 0x85E3ED: mov     ecx, dword ptr [esp+20h+var_C]
 0x85E3F1: mov     large fs:0, ecx
@@ -89,3 +89,12 @@
 0x85E3FC: pop     ebx
 0x85E3FD: add     esp, 0Ch
 0x85E400: retn    14h
+0x9D4610: lea     ecx, [ebp+14h]; void *
+0x9D4613: jmp     sub_4027D0
+0x9D4618: mov     edx, [esp+arg_4]
+0x9D461C: lea     eax, [edx-10h]
+0x9D461F: mov     ecx, [edx-14h]
+0x9D4622: xor     ecx, eax
+0x9D4624: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D4629: mov     eax, offset stru_AFC698
+0x9D462E: jmp     ___CxxFrameHandler3

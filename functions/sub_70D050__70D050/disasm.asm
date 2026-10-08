@@ -8,12 +8,12 @@
 0x70D05D: push    ebp
 0x70D05E: mov     ebx, ecx
 0x70D060: call    sub_707E90
-0x70D065: push    40h ; '@'; Size
+0x70D065: push    40h ; '@'; byteCount
 0x70D067: lea     ecx, [ebx+0ACh]
-0x70D06D: push    ecx; Src
+0x70D06D: push    ecx; source
 0x70D06E: lea     edx, [ebp+0ACh]
-0x70D074: push    edx; Dst
-0x70D075: call    _memcpy
+0x70D074: push    edx; destination
+0x70D075: call    _memcpy;
 0x70D07A: mov     eax, [ebx+88h]
 0x70D080: mov     [ebp+88h], eax
 0x70D086: mov     ecx, [ebx+8Ch]

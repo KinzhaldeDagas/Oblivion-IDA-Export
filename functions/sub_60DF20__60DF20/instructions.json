@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x60DFB7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60DFB9",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x60DFCF",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x60DFE2",
-    "line": "mov     ecx, offset stru_B3B880",
+    "line": "mov     ecx, offset unk_B3B880",
     "mnemonic": "mov",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x60DFED",
-    "line": "mov     ecx, offset dword_B3B800",
+    "line": "mov     ecx, offset unk_B3B800",
     "mnemonic": "mov",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x60DFF7",
-    "line": "mov     ecx, offset stru_B3B880; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B3B880; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

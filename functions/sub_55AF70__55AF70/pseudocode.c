@@ -1,18 +1,24 @@
-void __thiscall sub_55AF70(_DWORD **this, _DWORD *a2, int a3, float a4)
+// Validate the locked vertex stream, vertex count, and nonnegative length, then delegate position deformation to the owned hair-morph array.
+void __thiscall BSFaceGenMorphDataHair_ApplyLengthToVertices(
+        BSFaceGenMorphDataHair *self,
+        NiStridedVertexStream *vertices,
+        unsigned int vertexCount,
+        float hairLength)
 {
-  if ( *(this + 2) )
+  if ( *((_DWORD *)self + 2) ) /*0x55af70*/
   {
-    if ( *a2 )
+    if ( vertices->data ) /*0x55af7b*/
     {
-      if ( a3 )
+      if ( vertexCount ) /*0x55af86*/
       {
-        if ( a4 >= 0.0 )
-          (*(void (__thiscall **)(_DWORD, _DWORD *, int, _DWORD, _DWORD))(**(this + 2) + 4))(
-            *(this + 2),
-            a2,
-            a3,
+        if ( hairLength >= 0.0 ) /*0x55af97*/
+          (*(void (__thiscall **)(_DWORD, NiStridedVertexStream *, unsigned int, _DWORD, _DWORD))(**((_DWORD **)self + 2) /*0x55afa9*/
+                                                                                                + 4))(
+            *((_DWORD *)self + 2),
+            vertices,
+            vertexCount,
             0,
-            LODWORD(a4));
+            LODWORD(hairLength));
       }
     }
   }

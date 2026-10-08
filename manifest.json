@@ -1,12 +1,13 @@
 {
   "analysis_passes": [
     {
-      "completed_at": "2026-10-08T16:34:34.153203+00:00",
-      "manifest": "Findings/OctoberPass/manifest.json",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "focused_manifest": "Findings/OctoberPass/manifest.json",
+      "manifest": "Findings/OctoberPass/database_delta/manifest.json",
       "name": "OctoberPass"
     }
   ],
-  "completed_at": "2026-03-27T19:57:13.386371+00:00",
+  "completed_at": "2026-10-08T22:16:07.584363+00:00",
   "config": {
     "emit_chunked_jsonl": true,
     "emit_root_overview_markdown": true,
@@ -19,47 +20,52 @@
     "export_strings_metadata": true,
     "jsonl_chunk_size": 25000,
     "max_inline_bytes_preview": 64,
-    "output_root": "C:\\Users\\mello\\Downloads\\output",
-    "reset_requested": true,
+    "output_root": "H:\\src\\IDAs\\Oblivion-IDA-Export",
+    "reset_requested": false,
     "resume_enabled": true,
-    "selected_profile": "massive",
-    "wait_for_autoanalysis": true
+    "selected_profile": "OctoberPass_complete_snapshot",
+    "wait_for_autoanalysis": false
   },
   "created_at": "2026-03-27T19:20:00.981174+00:00",
   "database": {
+    "fingerprint_scope": "Legacy exporter identity retained; current input bytes identified separately by input_sha256.",
     "fingerprint_sha256": "b9d3dc548aebbf53cb8115a24e7964f38f086d547824579cfcdf08f18e435c70",
+    "input_sha256": "afe430894d29dbf0e615b8c8b0bfd6f03dcbc0667378a7f0ea740e0c9af843d9",
     "program": {
       "bitness_32": true,
       "bitness_64": false,
-      "enum_backend": "idc_fallback",
+      "database_path": "C:\\Users\\mello\\Desktop\\IDA\\Oblivion\\OblivionNew.exe_20260908001948.i64",
+      "enum_backend": "ida_typeinf",
       "filetype": 11,
       "hexrays_available": true,
       "imagebase": "0x400000",
       "input_file_path": "C:\\Games\\Oblivion\\Oblivion.exe",
+      "input_sha256": "afe430894d29dbf0e615b8c8b0bfd6f03dcbc0667378a7f0ea740e0c9af843d9",
       "is_dll": false,
       "kernel_version": "9.3",
-      "max_ea": "0xBAF000",
+      "max_ea": "0xbaf000",
       "min_ea": "0x401000",
       "processor": "metapc",
       "root_filename": "Oblivion.exe",
-      "struct_backend": "idc_idautils_fallback"
+      "struct_backend": "ida_typeinf"
     }
   },
   "exporter": {
-    "name": "ida_repo_exporter_9x",
-    "version": "2.3.0"
+    "name": "ida_octoberpass_annotation_sync",
+    "version": "1.0.0"
   },
   "outputs": {
     "jsonl": {
       "chunk_size": 25000,
       "enabled": true,
       "stream_chunk_counts": {
+        "enums": 1,
         "function_prototypes": 1,
         "functions": 2,
-        "graph_call_edges": 14,
+        "graph_call_edges": 6,
         "graph_dataflow_edges": 3,
-        "graph_symbol_edges": 15,
-        "graph_symbol_nodes": 3,
+        "graph_symbol_edges": 9,
+        "graph_symbol_nodes": 4,
         "local_types": 1,
         "metadata_entrypoints": 1,
         "metadata_imports": 1,
@@ -71,47 +77,70 @@
         "typedefs": 1
       }
     },
-    "root": "C:\\Users\\mello\\Downloads\\output"
+    "root": "H:\\src\\IDAs\\Oblivion-IDA-Export"
+  },
+  "previous_exporter": {
+    "name": "ida_repo_exporter_9x",
+    "version": "2.3.0"
   },
   "stages": {
     "enums": {
-      "completed_at": "2026-03-27T19:20:56.521461+00:00",
-      "started_at": "2026-03-27T19:20:56.520301+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
-        "enums": 0
+        "enums": 754
       },
       "status": "completed"
     },
     "finalize": {
-      "completed_at": "2026-03-27T19:57:13.385777+00:00",
-      "started_at": "2026-03-27T19:57:12.619957+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
-        "enums": 0,
+        "enums": 754,
         "function_prototypes": 9,
-        "functions": 35669,
-        "local_types": 9684,
-        "named_items": 26554,
-        "structs": 6850,
-        "typedefs": 9684
+        "functions": 35597,
+        "local_types": 10147,
+        "named_items": 27062,
+        "structs": 7272,
+        "typedefs": 10147
+      },
+      "status": "completed"
+    },
+    "function_prototypes": {
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
+      "stats": {
+        "function_prototypes": 9
       },
       "status": "completed"
     },
     "functions": {
-      "completed_at": "2026-03-27T19:54:39.496064+00:00",
-      "started_at": "2026-03-27T19:21:47.501259+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
-        "functions": 35669
+        "functions": 35597
       },
       "status": "completed"
     },
     "graphs": {
-      "completed_at": "2026-03-27T19:56:48.386455+00:00",
-      "started_at": "2026-03-27T19:54:39.497263+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
-        "callgraph_edges": 325742,
-        "dataflow_edges": 68267,
-        "symbol_edges": 359635,
-        "symbol_nodes": 62223
+        "edge_count": 208034,
+        "function_nodes": 35597,
+        "named_code_nodes": 25,
+        "named_data_nodes": 27037,
+        "named_item_nodes": 27062,
+        "node_count": 75806,
+        "uncatalogued_data_nodes": 13147
+      },
+      "status": "completed"
+    },
+    "local_types": {
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
+      "stats": {
+        "local_types": 10147
       },
       "status": "completed"
     },
@@ -126,22 +155,17 @@
       "status": "completed"
     },
     "markdown": {
-      "completed_at": "2026-03-27T19:57:12.618929+00:00",
-      "started_at": "2026-03-27T19:56:48.388669+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
-        "enums": 0,
-        "function_prototypes": 9,
-        "functions": 35669,
-        "local_types": 9684,
-        "named_items": 26554,
-        "structs": 6850,
-        "typedefs": 9684
+        "pass_reports": 2,
+        "root_overview": 1
       },
       "status": "completed"
     },
     "metadata": {
-      "completed_at": "2026-03-27T19:20:02.397572+00:00",
-      "started_at": "2026-03-27T19:20:00.993479+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
         "entrypoints": 1,
         "imports": 230,
@@ -151,22 +175,30 @@
       "status": "completed"
     },
     "named_items": {
-      "completed_at": "2026-03-27T19:21:47.500080+00:00",
-      "started_at": "2026-03-27T19:20:56.527427+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
-        "named_items": 26554
+        "named_items": 27062
       },
       "status": "completed"
     },
     "structs": {
-      "completed_at": "2026-03-27T19:20:56.519200+00:00",
-      "started_at": "2026-03-27T19:20:41.386533+00:00",
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
       "stats": {
-        "structs": 6850
+        "structs": 7272
+      },
+      "status": "completed"
+    },
+    "typedefs": {
+      "completed_at": "2026-10-08T22:16:07.584363+00:00",
+      "started_at": "2026-10-08T16:58:41.417765+00:00",
+      "stats": {
+        "typedefs": 10147
       },
       "status": "completed"
     }
   },
   "status": "completed",
-  "updated_at": "2026-03-27T19:57:13.386439+00:00"
+  "updated_at": "2026-10-08T22:16:07.584363+00:00"
 }

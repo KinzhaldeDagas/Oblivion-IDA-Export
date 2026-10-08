@@ -1,1 +1,1 @@
-IServiceProvider_0
+typedef IServiceProvider IServiceProvider_0;

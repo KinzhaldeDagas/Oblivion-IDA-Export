@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7763DF",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7763F9",
-    "line": "mov     [esp+2Ch+arg_0], 0",
+    "line": "mov     [esp+2Ch+node], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -210,14 +210,8 @@
     "size": 2
   },
   {
-    "ea": "0x776409",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x776410",
-    "line": "cmp     [esp+2Ch+arg_0], 8",
+    "line": "cmp     [esp+2Ch+node], 8",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -331,7 +325,7 @@
   },
   {
     "ea": "0x776459",
-    "line": "mov     eax, [edx+84h]",
+    "line": "mov     eax, [edx+84h];",
     "mnemonic": "mov",
     "size": 6
   },
@@ -649,13 +643,13 @@
   },
   {
     "ea": "0x7764FE",
-    "line": "call    sub_6AA320",
+    "line": "call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x776503",
-    "line": "add     [esp+2Ch+arg_0], 1",
+    "line": "add     [esp+2Ch+node], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -733,7 +727,7 @@
   },
   {
     "ea": "0x776530",
-    "line": "mov     [esp+28h+arg_0], esi",
+    "line": "mov     [esp+28h+node], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,19 +793,19 @@
   },
   {
     "ea": "0x77654C",
-    "line": "lea     ecx, [esp+28h+arg_0]",
+    "line": "lea     ecx, [esp+28h+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x776550",
-    "line": "push    ecx",
+    "line": "push    ecx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776551",
-    "line": "lea     ecx, [ebx+10h]",
+    "line": "lea     ecx, [ebx+10h]; list",
     "mnemonic": "lea",
     "size": 3
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x776558",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,13 +847,13 @@
   },
   {
     "ea": "0x77656B",
-    "line": "fnstcw  word ptr [esp+28h+arg_0]",
+    "line": "fnstcw  word ptr [esp+28h+node]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x77656F",
-    "line": "movzx   eax, word ptr [esp+28h+arg_0]",
+    "line": "movzx   eax, word ptr [esp+28h+node]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -919,7 +913,7 @@
   },
   {
     "ea": "0x776596",
-    "line": "fldcw   word ptr [esp+28h+arg_0]",
+    "line": "fldcw   word ptr [esp+28h+node]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -943,13 +937,13 @@
   },
   {
     "ea": "0x7765A8",
-    "line": "fnstcw  word ptr [esp+28h+arg_0]",
+    "line": "fnstcw  word ptr [esp+28h+node]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x7765AC",
-    "line": "movzx   eax, word ptr [esp+28h+arg_0]",
+    "line": "movzx   eax, word ptr [esp+28h+node]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -997,7 +991,7 @@
   },
   {
     "ea": "0x7765CE",
-    "line": "fldcw   word ptr [esp+28h+arg_0]",
+    "line": "fldcw   word ptr [esp+28h+node]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -1021,13 +1015,13 @@
   },
   {
     "ea": "0x7765DD",
-    "line": "fnstcw  word ptr [esp+28h+arg_0]",
+    "line": "fnstcw  word ptr [esp+28h+node]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x7765E1",
-    "line": "movzx   eax, word ptr [esp+28h+arg_0]",
+    "line": "movzx   eax, word ptr [esp+28h+node]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1069,7 +1063,7 @@
   },
   {
     "ea": "0x776600",
-    "line": "fldcw   word ptr [esp+28h+arg_0]",
+    "line": "fldcw   word ptr [esp+28h+node]",
     "mnemonic": "fldcw",
     "size": 4
   },

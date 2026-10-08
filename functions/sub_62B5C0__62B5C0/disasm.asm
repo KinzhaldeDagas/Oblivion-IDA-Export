@@ -63,9 +63,9 @@
 0x62B673: call    Actor_IsNPC
 0x62B678: test    al, al
 0x62B67A: jz      short loc_62B6C0
-0x62B67C: push    3
-0x62B67E: push    4
-0x62B680: call    TESTopic__GEtTopic
+0x62B67C: push    3; index
+0x62B67E: push    4; topicType
+0x62B680: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x62B685: mov     ebx, eax
 0x62B687: add     esp, 8
 0x62B68A: test    ebx, ebx
@@ -108,7 +108,7 @@
 0x62B6FD: call    TESObjectREFR_GetWorldSpace
 0x62B702: mov     ecx, [esi+2Ch]; this
 0x62B705: push    eax
-0x62B706: call    TESObjectREFR_GetParentCell
+0x62B706: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62B70B: mov     ecx, [ebx]
 0x62B70D: mov     edx, [ebx+4]
 0x62B710: push    eax
@@ -148,7 +148,7 @@
 0x62B778: call    TESObjectREFR_GetWorldSpace
 0x62B77D: mov     ecx, [esi+2Ch]; this
 0x62B780: push    eax
-0x62B781: call    TESObjectREFR_GetParentCell
+0x62B781: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x62B786: mov     edx, [ebx+414h]
 0x62B78C: push    eax
 0x62B78D: lea     ecx, [esi+0D4h]

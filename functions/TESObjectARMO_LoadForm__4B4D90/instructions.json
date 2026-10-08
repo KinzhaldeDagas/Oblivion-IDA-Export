@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B4D90",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion ARMO stream loader. It iterates every serialized chunk; duplicate SCRI/BMDT/DATA chunks are not first-selected.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B4DBD",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -172,12 +172,6 @@
     "line": "jmp     short loc_4B4DE0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4B4DDD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4B4DE0",
@@ -295,7 +289,7 @@
   },
   {
     "ea": "0x4B4E33",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +361,7 @@
   },
   {
     "ea": "0x4B4E5D",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +439,7 @@
   },
   {
     "ea": "0x4B4E8B",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x4B4EC5",
-    "line": "call    TESForm_LoadGenericComponents",
+    "line": "call    TESForm_LoadGenericComponents; Each ARMO DATA occurrence calls TESForm_LoadGenericComponents with fixed prefix size 2. Repeated DATA chunks overlay the current component state in stream order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +583,7 @@
   },
   {
     "ea": "0x4B4EE1",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +643,7 @@
   },
   {
     "ea": "0x4B4F03",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +727,7 @@
   },
   {
     "ea": "0x4B4F37",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x4B4F50",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x4B4F69",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +883,7 @@
   },
   {
     "ea": "0x4B4F99",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,13 +943,13 @@
   },
   {
     "ea": "0x4B4FB6",
-    "line": "mov     [ebp+var_8], ebx",
+    "line": "mov     [ebp+var_8], ebx; Each SCRI occurrence zero-initializes a local u32 before reading, then overwrites ARMO script FormID at +0x34. Last serialized SCRI wins.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4B4FB9",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +973,7 @@
   },
   {
     "ea": "0x4B4FC5",
-    "line": "mov     [edi+34h], edx",
+    "line": "mov     [edi+34h], edx; Overwrite ARMO script FormID with this SCRI; then relink scriptable component.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x4B5007",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1111,7 @@
   },
   {
     "ea": "0x4B5015",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1159,7 @@
   },
   {
     "ea": "0x4B5031",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1309,7 @@
   },
   {
     "ea": "0x4B5086",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,7 +1369,7 @@
   },
   {
     "ea": "0x4B50A4",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1519,7 @@
   },
   {
     "ea": "0x4B50EC",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Each BMDT occurrence copies four bytes directly to ARMO+0x68. Last serialized BMDT wins.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1561,7 @@
   },
   {
     "ea": "0x4B50FF",
-    "line": "call    sub_46D940",
+    "line": "call    TESModel_LoadTextureHashSubrecord",
     "mnemonic": "call",
     "size": 5
   },

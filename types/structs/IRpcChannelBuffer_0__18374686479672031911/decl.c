@@ -1,1 +1,1 @@
-IRpcChannelBuffer_0
+typedef IRpcChannelBuffer IRpcChannelBuffer_0;

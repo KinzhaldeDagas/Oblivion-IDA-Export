@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x80E730",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; SpeedTreeFrondShader pass builder. Creates renderer-owned pass at +0x94, creates one texture stage with 0x801110(stage,0,3,2), assigns default VS +0x7C and PS +0x8C.",
     "mnemonic": "push",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x80E73E",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; CRASH CORRECTION: SUB ESP,8 spans80E73E..80E740. 80E740 is NOT an entry point; old plugin call into its immediate bypassed the preceding SEH prologue.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x80E75E",
-    "line": "call    sub_7606A0",
+    "line": "call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x80E784",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x80E7B7",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x80E7C1",
-    "line": "call    sub_772630",
+    "line": "call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x80E7D9",
-    "line": "call    sub_801110",
+    "line": "call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x80E7F0",
-    "line": "call    sub_760010",
+    "line": "call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x80E898",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -778,5 +778,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CD690",
+    "line": "lea     ecx, [ebp-10h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD693",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD698",
+    "line": "lea     ecx, [ebp-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD69B",
+    "line": "jmp     loc_75FA70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD6A0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CD6A4",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD6A7",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CD6AA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CD6AC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD6B1",
+    "line": "mov     eax, offset stru_AF6934",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CD6B6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

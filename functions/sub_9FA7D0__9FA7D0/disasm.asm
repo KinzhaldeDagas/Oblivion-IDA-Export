@@ -1,4 +1,4 @@
-0x9FA7D0: fld     ds:flt_A34A80
+0x9FA7D0: fld     ds:flt_A34A80; Verified: registers GameSetting float fRoadPointReachDistance with default 500.0. No direct use of this setting is established in TESRoad_FindNearestConnectedPointInNearbyCells, whose dbl_A3A5B0 is the FLT_MAX sentinel; keep the relationship Candidate until a consumer is found.
 0x9FA7D6: push    ecx
 0x9FA7D7: fstp    [esp+4+var_4]; float
 0x9FA7DA: push    offset aFroadpointreac; "fRoadPointReachDistance"

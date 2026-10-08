@@ -29,7 +29,6 @@
 0x481EA6: cmp     [esi+0Ch], ebx
 0x481EA9: jbe     short loc_481EF2
 0x481EAB: jmp     short loc_481EB0
-0x481EAD: align 10h
 0x481EB0: mov     edi, [esi+0Ch]
 0x481EB3: mov     eax, [esi]
 0x481EB5: mov     edx, [eax+18h]

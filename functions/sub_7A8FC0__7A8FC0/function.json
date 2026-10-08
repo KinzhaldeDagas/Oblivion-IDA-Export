@@ -1,19 +1,36 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A8FC0",
+  "chunks": [
+    [
+      "0x7A8FC0",
+      "0x7A9239"
+    ],
+    [
+      "0x9CCEE0",
+      "0x9CCF22"
+    ]
+  ],
+  "chunks_sha256": "447cb2a2f17db8c5b8a38e2e8934f1bf9dbe6f3add09e5e40038cc6257305456",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-24): Builds a lower explicit leaf LOD from selected source-leaf pairs. Clones the first leaf, averages pair positions, decodes and averages their packed RGB, then calls CBillboardLeaf::SetColor with applyDimming=false. This avoids applying colorScaleByte a second time.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-24): Builds a lower explicit leaf LOD from selected source-leaf pairs. Clones the first leaf, averages pair positions, decodes and averages their packed RGB, then calls CBillboardLeaf::SetColor with applyDimming=false. This avoids applying colorScaleByte a second time.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_CLeafLodEngine_BuildNewLeaves_010201A0",
   "end_ea": "0x7A9239",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A8FC0",
+  "name": "OB_CLeafLodEngine_BuildNewLeaves_010201A0",
   "segment": ".text",
   "sha256": "04137485d037566077f2b003e834f388a5eaa6cc5381a579b33cb4b6b0e6e2a0",
   "size": 633,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A8FC0",
-  "type": "unsigned int *__thiscall(float *this, unsigned int *)",
-  "xrefs_from_count": 230,
+  "total_chunk_size": 699,
+  "type": "OB_stVectorBillboardLeafPtr_010201A0 *__thiscall(OB_CLeafLodEngine_010201A0 *this, OB_stVectorBillboardLeafPtr_010201A0 *result)",
+  "xrefs_from_count": 251,
   "xrefs_to_count": 1
 }

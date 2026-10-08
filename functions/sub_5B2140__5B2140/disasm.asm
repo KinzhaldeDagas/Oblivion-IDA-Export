@@ -13,8 +13,8 @@
 0x5B2162: fld     [esp+arg_0]
 0x5B2166: fstp    [esp+arg_0]
 0x5B216A: fld     [esp+arg_0]
-0x5B216E: jmp     Double_To_SInt32
+0x5B216E: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B2173: fld     dword ptr ds:0A30634h
 0x5B2179: fstp    [esp+arg_0]
 0x5B217D: fld     [esp+arg_0]
-0x5B2181: jmp     Double_To_SInt32
+0x5B2181: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

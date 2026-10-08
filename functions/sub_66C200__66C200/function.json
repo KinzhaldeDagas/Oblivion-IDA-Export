@@ -1,19 +1,32 @@
 {
-  "callees_count": 29,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x66C200",
+      "0x66C3DD"
+    ]
+  ],
+  "chunks_sha256": "e4c49b65fb2389e4591e66ba65d10a2def81b3920b555ddff975d6b81705ee75",
+  "comment_regular": "Reinitializes post-character-generation skill progression: resets skill-increase statistics/buckets, recomputes required progress for all 21 skills, clears native skill progress and specialization counters, then replays deferred chargen usage. Major/minor behavior during replay comes from the same TESClass seven-slot predicate.",
+  "comment_repeatable": "Reinitializes post-character-generation skill progression: resets skill-increase statistics/buckets, recomputes required progress for all 21 skills, clears native skill progress and specialization counters, then replays deferred chargen usage. Major/minor behavior during replay comes from the same TESClass seven-slot predicate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_66C200",
+  "display_name": "Player_ReplayDeferredCharGenSkillUsage",
   "end_ea": "0x66C3DD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_66C200",
+  "name": "Player_ReplayDeferredCharGenSkillUsage",
   "segment": ".text",
   "sha256": "e4c49b65fb2389e4591e66ba65d10a2def81b3920b555ddff975d6b81705ee75",
   "size": 477,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x66C200",
-  "type": "void __usercall(PlayerCharacter *@<ecx>, unsigned int@<ebx>)",
+  "total_chunk_size": 477,
+  "type": "void __thiscall(PlayerCharacter *this)",
   "xrefs_from_count": 181,
   "xrefs_to_count": 2
 }

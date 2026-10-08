@@ -1,1 +1,1 @@
-GLbyte
+typedef char GLbyte;

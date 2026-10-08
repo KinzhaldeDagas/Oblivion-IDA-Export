@@ -1,19 +1,36 @@
 {
-  "callees_count": 34,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_78ADE0",
+  "chunks": [
+    [
+      "0x78ADE0",
+      "0x78B0B6"
+    ],
+    [
+      "0x9CB510",
+      "0x9CB52B"
+    ]
+  ],
+  "chunks_sha256": "da6a9b3f3eabd23675b9879c399e9878e51f6b88f61a3fd3ca0858f42be7bca6",
+  "comment_regular": "Oblivion vector<collision-record>::insert(position,count,value): authoritative 0x1C record stride, checked maximum 0x09249249, 1.5x growth, alias-safe in-place/reallocation paths, and FormHeap ownership.",
+  "comment_repeatable": "Oblivion vector<collision-record>::insert(position,count,value): authoritative 0x1C record stride, checked maximum 0x09249249, 1.5x growth, alias-safe in-place/reallocation paths, and FormHeap ownership.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_CollisionObject_InsertFill_010201A0",
   "end_ea": "0x78B0B6",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78ADE0",
+  "name": "OB_stVector_CollisionObject_InsertFill_010201A0",
   "segment": ".text",
   "sha256": "0de6eb7d41d605139b6058d0084550e455430cc1b10ba9d024d716452ba912ea",
   "size": 726,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78ADE0",
-  "type": "void __thiscall(unsigned int *this, int, char *, unsigned int, const void *)",
-  "xrefs_from_count": 304,
+  "total_chunk_size": 753,
+  "type": "void __thiscall(OB_stVector_CollisionObject_010201A0 *this, OB_stVector_CollisionObjectIterator_010201A0 position, unsigned int count, const OB_CollisionObject_010201A0 *value)",
+  "xrefs_from_count": 313,
   "xrefs_to_count": 1
 }

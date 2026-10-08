@@ -261,7 +261,7 @@
 0x5E4DA8: mov     ecx, edi
 0x5E4DAA: call    ContainerEntryExtraData_DestroyDataTable
 0x5E4DAF: push    edi
-0x5E4DB0: call    FormHeapFree
+0x5E4DB0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E4DB5: add     esp, 4
 0x5E4DB8: add     ebx, 4
 0x5E4DBB: cmp     ebx, 28h ; '('

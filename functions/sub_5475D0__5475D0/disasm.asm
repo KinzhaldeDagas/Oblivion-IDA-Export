@@ -1,11 +1,11 @@
-0x5475D0: sub     esp, 8
-0x5475D3: mov     eax, [esp+8+arg_4]
-0x5475D7: mov     ecx, [esp+8+arg_0]
+0x5475D0: sub     esp, 8; ODismemberment combat decode: knockdown chance formula. Combines luck-modified skill, fatigue factor, incoming damage, and fKnockdown* settings, clamped by fKnockdownChance.
+0x5475D3: mov     eax, [esp+8+luckValue]
+0x5475D7: mov     ecx, [esp+8+skillValue]
 0x5475DB: push    ebx
-0x5475DC: push    eax
-0x5475DD: push    ecx
+0x5475DC: push    eax; luckValue
+0x5475DD: push    ecx; skillValue
 0x5475DE: xor     bl, bl
-0x5475E0: call    Calc_LuckModifiedSkill
+0x5475E0: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x5475E5: fstp    [esp+14h+var_8]
 0x5475E9: fld     [esp+14h+arg_8]
 0x5475ED: add     esp, 4
@@ -38,7 +38,7 @@
 0x547654: fld     [esp+0Ch+arg_C]
 0x547658: push    0; Seed
 0x54765A: fstp    [esp+10h+var_8]
-0x54765E: call    GetRandomLargeInteger?
+0x54765E: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x547663: cdq
 0x547664: mov     ecx, 64h ; 'd'
 0x547669: idiv    ecx

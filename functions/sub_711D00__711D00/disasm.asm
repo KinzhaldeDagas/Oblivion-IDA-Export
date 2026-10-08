@@ -3,7 +3,7 @@
 0x711D02: mov     edi, [esp+8+arg_0]
 0x711D06: push    edi
 0x711D07: mov     esi, ecx
-0x711D09: call    nullsub_returnvVoid_1arg
+0x711D09: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x711D0E: mov     ecx, [esi+8]
 0x711D11: mov     eax, [edi]
 0x711D13: mov     edx, [eax+2Ch]

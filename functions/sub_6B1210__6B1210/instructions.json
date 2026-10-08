@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B1210",
-    "line": "sub     esp, 88h",
+    "line": "sub     esp, 88h; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6B138D",
-    "line": "call    sub_51CEC0",
+    "line": "call    TESCreature_SelectSoundForAnimEnum; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x6B143A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x6B1484",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x6B1488",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x6B14AE",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x6B14C4",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x6B155C",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x6B1567",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x6B15B9",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x6B15C4",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x6B15FF",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x6B16DD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x6B188A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x6B18A3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

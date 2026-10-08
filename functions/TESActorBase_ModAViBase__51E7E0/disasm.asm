@@ -1,4 +1,4 @@
-0x51E7E0: push    ebx
+0x51E7E0: push    ebx; TESActorBase_ModAViBase reads current base AV via vtbl +0x128, adds the signed delta, then calls vtbl +0x134 SetAViBase. AVU clamps the delta so player skill/attribute bases cannot underflow below 0 or overflow past the safe cap.
 0x51E7E1: mov     ebx, [esp+4+arg_0]
 0x51E7E5: push    esi
 0x51E7E6: push    edi

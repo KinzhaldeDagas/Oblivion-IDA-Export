@@ -6,23 +6,23 @@ char __thiscall sub_7000F0(NiRenderTargetGroup *this, int a2)
   int v6; // esi
   Ni2DBuffer *v7; // ecx
 
-  result = sub_700650(this, a2);
-  if ( result )
+  result = sub_700650(this, a2); /*0x7000f9*/
+  if ( result ) /*0x700100*/
   {
-    for ( i = 0; i < LOWORD(this->members.RenderTargets[3]); ++i )
+    for ( i = 0; i < LOWORD(this->members.RenderTargets[3]); ++i ) /*0x70010a*/
     {
-      v5 = this->members.RenderTargets[2];
-      v6 = *((_DWORD *)&v5->__vftable + i);
-      if ( v6 )
+      v5 = this->members.RenderTargets[2]; /*0x700111*/
+      v6 = *((_DWORD *)&v5->__vftable + i); /*0x700117*/
+      if ( v6 ) /*0x70011c*/
       {
-        if ( (*(unsigned __int8 (__thiscall **)(_DWORD))(*(_DWORD *)v6 + 0x4C))(*((_DWORD *)&v5->__vftable + i)) )
-          (*(void (__thiscall **)(int, int))(*(_DWORD *)v6 + 0x24))(v6, a2);
+        if ( (*(unsigned __int8 (__thiscall **)(_DWORD))(*(_DWORD *)v6 + 0x4C))(*((_DWORD *)&v5->__vftable + i)) ) /*0x700125*/
+          (*(void (__thiscall **)(int, int))(*(_DWORD *)v6 + 0x24))(v6, a2); /*0x700133*/
       }
     }
-    v7 = this->members.RenderTargets[1];
-    if ( v7 )
-      (*((void (__thiscall **)(Ni2DBuffer *, int))v7->__vftable + 9))(v7, a2);
-    return 1;
+    v7 = this->members.RenderTargets[1]; /*0x70013f*/
+    if ( v7 ) /*0x700145*/
+      (*((void (__thiscall **)(Ni2DBuffer *, int))v7->__vftable + 9))(v7, a2); /*0x70014d*/
+    return 1; /*0x700150*/
   }
-  return result;
+  return result; /*0x700102*/
 }

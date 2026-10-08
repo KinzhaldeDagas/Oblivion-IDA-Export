@@ -1,5 +1,5 @@
 0x556FC0: mov     eax, [esp+arg_0]
-0x556FC4: push    offset sub_794EB0; void (__thiscall *)(void *)
+0x556FC4: push    offset OB_stVector4_DestroyThiscall_010201A0; void (__thiscall *)(void *)
 0x556FC9: push    3; int
 0x556FCB: push    10h; unsigned int
 0x556FCD: add     eax, 10h

@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5F6333",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,19 +229,19 @@
   },
   {
     "ea": "0x5F639E",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F63A0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F63A2",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x5F63B8",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5F63BD",
-    "line": "call    sub_67C880",
+    "line": "call    CombatGroupManager_BuildFriendlyEntryList; Builds temporary BSSimpleList of combat-group friendly entry pointers: same team byte, mount/rider equivalence, and shouldActorFight<=0. arg=0 disables process-level filter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x5F6407",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5F640D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x5F6418",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x5F6457",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x5F646D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x5F650D",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },

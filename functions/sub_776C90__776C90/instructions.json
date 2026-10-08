@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x776C90",
-    "line": "push    ecx",
+    "line": "push    ecx; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776C91",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+buffer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x776C96",
-    "line": "mov     ebp, [esp+8+arg_C]",
+    "line": "mov     ebp, [esp+8+flags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x776CA6",
-    "line": "mov     edx, [esp+18h+arg_4]",
+    "line": "mov     edx, [esp+18h+offsetBytes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x776CFA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x776D1D",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D1E",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D1F",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D20",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

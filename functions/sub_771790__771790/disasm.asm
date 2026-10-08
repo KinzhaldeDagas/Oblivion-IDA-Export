@@ -1,4 +1,4 @@
-0x771790: push    esi
+0x771790: push    esi; Disable and clear every texture stage after the active pass range.
 0x771791: mov     esi, [esp+4+arg_0]
 0x771795: cmp     esi, ds:0B28CB0h
 0x77179B: jnb     short loc_771803
@@ -39,7 +39,6 @@
 0x771803: cmp     esi, ds:0B28CB8h
 0x771809: jnb     short loc_77182E
 0x77180B: jmp     short loc_771810
-0x77180D: align 10h
 0x771810: mov     ecx, ds:0B42758h
 0x771816: mov     eax, [ecx]
 0x771818: mov     edx, [eax+0E0h]

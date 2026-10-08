@@ -1,5 +1,5 @@
-0x590330: push    ecx
-0x590331: mov     eax, [esp+4+arg_0]
+0x590330: push    ecx; Verified injection consequence: no ID/name deduplication in this builder. Plugin retry must query expected child and parent before another ReadFile; return value identifies first created node, not the entire fragment.
+0x590331: mov     eax, [esp+4+tileTemplate]
 0x590335: push    ebx
 0x590336: mov     ebx, [eax+10h]
 0x590339: test    ebx, ebx
@@ -17,7 +17,7 @@
 0x59035B: mov     ebx, [ebx]
 0x59035D: jnz     short loc_5903A5
 0x59035F: fld     dword ptr [edi+4]
-0x590362: call    Double_To_SInt32
+0x590362: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x590367: push    eax; int
 0x590368: push    ebp; TileWindow *
 0x590369: call    sub_5902A0

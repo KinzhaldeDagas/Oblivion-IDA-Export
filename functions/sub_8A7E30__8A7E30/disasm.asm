@@ -29,7 +29,7 @@
 0x8A7E81: push    ecx
 0x8A7E82: lea     edx, [esp+1Ch+var_C]
 0x8A7E86: push    edx
-0x8A7E87: call    sub_43F3E0
+0x8A7E87: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A7E8C: add     esp, 8
 0x8A7E8F: push    offset aWorldtotalsize; "WorldTotalSize"
 0x8A7E94: lea     ecx, [esp+1Ch+var_C]
@@ -53,7 +53,7 @@
 0x8A7ECE: lea     eax, [esp+18h+var_C]
 0x8A7ED2: push    ebx
 0x8A7ED3: push    eax
-0x8A7ED4: call    sub_43F3E0
+0x8A7ED4: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A7ED9: add     esp, 8
 0x8A7EDC: push    offset aBordersize; "BorderSize"
 0x8A7EE1: lea     ecx, [esp+1Ch+var_C]

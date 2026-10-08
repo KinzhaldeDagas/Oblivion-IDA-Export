@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6C4000",
+      "0x6C4058"
+    ]
+  ],
+  "chunks_sha256": "83a373df1f68e620e7bb0fb28576407e7b2092fbc5f8a8fc5e82804dc3ebefdc",
+  "comment_regular": "Cross-fades from an active source sequence to an inactive destination: deactivates the source with the requested ease time, then activates the destination with the same transition time and caller-supplied priority/start/weight/time-sync values. Returns false unless source is active and destination inactive.",
+  "comment_repeatable": "Cross-fades from an active source sequence to an inactive destination: deactivates the source with the requested ease time, then activates the destination with the same transition time and caller-supplied priority/start/weight/time-sync values. Returns false unless source is active and destination inactive.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C4000",
+  "display_name": "NiControllerSequence_CrossFade",
   "end_ea": "0x6C4058",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C4000",
+  "name": "NiControllerSequence_CrossFade",
   "segment": ".text",
   "sha256": "83a373df1f68e620e7bb0fb28576407e7b2092fbc5f8a8fc5e82804dc3ebefdc",
   "size": 88,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C4000",
-  "type": "char __stdcall(int, _DWORD *, float, int, char, float, int)",
+  "total_chunk_size": 88,
+  "type": "char __stdcall(NiControllerSequence *, NiControllerSequence *, float easeOutTime, char priority, char startOver, float weight, NiControllerSequence *timeSyncSequence)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 1
 }

@@ -10,7 +10,7 @@
 0x942CC7: call    sub_8B0F40
 0x942CCC: cmp     eax, 1
 0x942CCF: jnz     short loc_942CFA
-0x942CD1: push    offset dword_BA8788
+0x942CD1: push    offset unk_BA8788
 0x942CD6: push    esi
 0x942CD7: call    sub_9531A0
 0x942CDC: mov     ecx, [esp+14h+arg_4]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E4FE0",
+      "0x4E5034"
+    ]
+  ],
+  "chunks_sha256": "b3d94a163c41dd12ffeb0b0a6279347e8d196eb8fe290d961e16a011592a2879",
+  "comment_regular": "Verified PGRI row creation writes local point index in low u16 and remote point XYZ at +4; bytes +2..+3 are left unwritten here and ignored by inspected readers, so their intended meaning remains Unknown.",
+  "comment_repeatable": "Verified PGRI row creation writes local point index in low u16 and remote point XYZ at +4; bytes +2..+3 are left unwritten here and ignored by inspected readers, so their intended meaning remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E4FE0",
+  "display_name": "TESPathGrid_AddPGRICrossCellLinkRequest",
   "end_ea": "0x4E5034",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E4FE0",
+  "name": "TESPathGrid_AddPGRICrossCellLinkRequest",
   "segment": ".text",
   "sha256": "b3d94a163c41dd12ffeb0b0a6279347e8d196eb8fe290d961e16a011592a2879",
   "size": 84,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E4FE0",
-  "type": "void __thiscall(unsigned __int16 **this, int, float *)",
+  "total_chunk_size": 84,
+  "type": "void __thiscall(TESPathGrid *this, TESPathGridPoint *point, const NiPoint3 *neighborPosition)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 1
 }

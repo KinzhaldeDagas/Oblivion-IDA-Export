@@ -13,9 +13,9 @@ TESObjectREFR *__userpurge sub_6A1CA0@<eax>(
         int a12,
         int a13)
 {
-  sub_69F360(a1, a2, a3, a4, a5, a6, a7, *(float *)&a8, *(float *)&a9, *(float *)&a10, a11, a12, a13);
-  a1->vtbl = (TESObjectREFRVtbl *)&MagicSprayProjectile::`vftable'{for `MagicSprayProjectile'};
-  a1->member.childCell.GetChildCell = (TESObjectCELL *(__thiscall *)(TESChildCELL *))&MagicSprayProjectile::`vftable'{for `TESChildCell'};
-  sub_65B750((int *)a1);
-  return a1;
+  sub_69F360(a1, a2, a3, a4, a5, a6, a7, *(float *)&a8, *(float *)&a9, *(float *)&a10, a11, a12, a13); /*0x6a1d10*/
+  a1->vtbl = (TESObjectREFRVtbl *)&MagicSprayProjectile::`vftable'{for `MagicSprayProjectile'}; /*0x6a1d1f*/
+  a1->member.childCell.GetChildCell = (TESObjectCELL *(__thiscall *)(TESChildCELL *))&MagicSprayProjectile::`vftable'{for `TESChildCell'}; /*0x6a1d25*/
+  MobileObject_EnsureActorCharacterController((int *)a1); /*0x6a1d2c*/
+  return a1; /*0x6a1d33*/
 }

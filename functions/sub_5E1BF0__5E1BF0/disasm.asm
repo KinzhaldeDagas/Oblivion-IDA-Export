@@ -1,4 +1,4 @@
-0x5E1BF0: push    ebx
+0x5E1BF0: push    ebx; Verified Actor blood-particle path dispatch: resolves actor base, checks actor form, then invokes actor-base virtual +0x40. For creatures this reaches their NoBloodSpray/per-creature model override.
 0x5E1BF1: push    esi
 0x5E1BF2: mov     esi, ecx
 0x5E1BF4: mov     eax, [esi]

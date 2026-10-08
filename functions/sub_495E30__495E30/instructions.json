@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x495FF0",
-    "line": "cmp     eax, offset dword_BA7D38",
+    "line": "cmp     eax, offset stru_BA7D38",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x496047",
-    "line": "cmp     eax, offset dword_BA7D84",
+    "line": "cmp     eax, offset stru_BA7D84",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1135,25 +1135,25 @@
   },
   {
     "ea": "0x496084",
-    "line": "lea     ecx, [esp+0B0h+var_88]",
+    "line": "lea     ecx, [esp+0B0h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x496088",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x496089",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x49608B",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x4960AA",
-    "line": "mov     esi, [esp+0B0h+var_88]",
+    "line": "mov     esi, [esp+0B0h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1333,19 +1333,19 @@
   },
   {
     "ea": "0x4960DB",
-    "line": "push    eax",
+    "line": "push    eax; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4960DC",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4960DE",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x496143",
-    "line": "cmp     eax, offset dword_BA7D78",
+    "line": "cmp     eax, offset stru_BA7D78",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x496162",
-    "line": "push    offset dword_BA7D68",
+    "line": "push    offset stru_BA7D68",
     "mnemonic": "push",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x496196",
-    "line": "push    offset dword_BA7D5C",
+    "line": "push    offset stru_BA7D5C",
     "mnemonic": "push",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x496204",
-    "line": "push    offset dword_BA7D44",
+    "line": "push    offset stru_BA7D44",
     "mnemonic": "push",
     "size": 5
   },
@@ -2023,7 +2023,7 @@
   },
   {
     "ea": "0x496227",
-    "line": "push    offset stru_BA7D50",
+    "line": "push    0BA7D50h",
     "mnemonic": "push",
     "size": 5
   },
@@ -2236,5 +2236,113 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B0270",
+    "line": "mov     eax, [ebp-8Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0276",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B0277",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B027C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B027D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B027E",
+    "line": "lea     ecx, [ebp-8Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0284",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0289",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B028D",
+    "line": "lea     eax, [edx-0A0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0293",
+    "line": "mov     ecx, [edx-0A4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B0299",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B029B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B02A0",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B02A3",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B02A6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B02A8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B02AD",
+    "line": "mov     eax, offset stru_ADC620",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B02B2",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

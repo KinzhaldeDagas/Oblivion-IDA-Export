@@ -1,1 +1,1 @@
-_FP64
+typedef double _FP64;

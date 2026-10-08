@@ -1,4 +1,4 @@
-0x7F0380: sub     esp, 3E0h
+0x7F0380: sub     esp, 3E0h; OBLIVION AUTHORITY (2026-08-24): Declares SpeedTree leaf vertex input. v3.z carries a nonnegative packed selector: integer part = corner + 4*leafCardIndex for LeafBase addressing; fractional part = packed-color green/255 (255 forced to 0.99). VS1.1 EXPP.y extracts the fractional component; it is not exponentiation/exp2.
 0x7F0386: mov     eax, ds:0B30AACh
 0x7F038B: xor     eax, esp
 0x7F038D: mov     [esp+3E0h+var_4], eax
@@ -14,7 +14,7 @@
 0x7F03A6: mov     edi, offset aSpeedtreeLeaf_; "speedtree\\leaf.v.hlsl"
 0x7F03AB: push    eax
 0x7F03AC: mov     [esp+3FCh+var_3D8], ebx
-0x7F03B0: mov     [esp+3FCh+var_33C], edi
+0x7F03B0: mov     [esp+3FCh+var_33C], edi; OBLIVION AUTHORITY (2026-08-24): Leaf shader descriptor for v3.z packing. Legacy VS1.1 EXPP.y extracts frac(v3.z), not exp/exp2. Base VS multiplies the complete ambient+directional result by that fraction; point variants add their point-light term separately. Packed green 0 therefore yields RGB black when no nonzero point term survives, while sampled alpha can remain nonzero.
 0x7F03B7: mov     [esp+3FCh+var_338], ebp
 0x7F03BE: mov     [esp+3FCh+var_334], ebp
 0x7F03C5: mov     [esp+3FCh+var_330], ebp
@@ -56,7 +56,7 @@
 0x7F048C: push    ebp
 0x7F048D: mov     edi, offset aSpeedtreeLea_0; "speedtree\\leaf.p.hlsl"
 0x7F0492: push    ecx
-0x7F0493: mov     [esp+42Ch+var_3D4], edi
+0x7F0493: mov     [esp+42Ch+var_3D4], edi; Oblivion leaf PS variants load from speedtree\\leaf.p.hlsl. Runtime chooses legacy STLEAF%03i.pso ps_1_3 when shader-package class <2, otherwise STLEAF2%03i.pso ps_2_0.
 0x7F0497: mov     [esp+42Ch+var_3D0], ebp
 0x7F049B: mov     [esp+42Ch+var_3CC], ebp
 0x7F049F: mov     [esp+42Ch+var_3C8], ebp
@@ -65,7 +65,7 @@
 0x7F04AA: lea     edx, [esp+430h+var_374]
 0x7F04B1: push    ebp
 0x7F04B2: push    edx
-0x7F04B3: mov     [esp+438h+var_388], edi
+0x7F04B3: mov     [esp+438h+var_388], edi; Second fog pixel descriptor is always constructed. Installed Oblivion shaderpackage001 contains STLEAF000.pso only (no STLEAF001.pso); packages 002..019 contain both STLEAF2000/2001 and their bytecode hashes are identical across all 18 modern packages.
 0x7F04BA: mov     [esp+438h+var_384], offset off_A90D88
 0x7F04C5: mov     [esp+438h+var_380], esi
 0x7F04CC: mov     [esp+438h+var_37C], ebp
@@ -101,7 +101,7 @@
 0x7F0541: lea     ecx, [esp+404h+FileName]
 0x7F0548: push    ecx; lpFileName
 0x7F0549: mov     ecx, [esp+408h+var_3D8]
-0x7F054D: call    CreateVertexShader
+0x7F054D: call    CreateVertexShader; Creates one of four vs_1_1 leaf variants. Indices map to {base, fog, point, point+fog}; all emit texture UV in oT0 and lighting in oT1.
 0x7F0552: mov     esi, [ebx]
 0x7F0554: mov     edi, eax
 0x7F0556: cmp     esi, edi
@@ -161,7 +161,6 @@
 0x7F05ED: jl      loc_7F06D7
 0x7F05F3: mov     [esp+3F0h+var_3E0], edi
 0x7F05F7: jmp     short loc_7F0600
-0x7F05F9: align 10h
 0x7F0600: mov     eax, [edi]
 0x7F0602: cmp     eax, ebp
 0x7F0604: jz      loc_7F068C
@@ -185,7 +184,7 @@
 0x7F0641: lea     ecx, [esp+404h+FileName]
 0x7F0648: push    ecx; lpFileName
 0x7F0649: mov     ecx, [esp+408h+var_3D8]
-0x7F064D: call    CreatePixelShader
+0x7F064D: call    CreatePixelShader; Creates modern STLEAF2%03i.pso (ps_2_0). Variant 0: out.rgb=sample(s0,t0).rgb*t1.rgb and out.a=sample.a. Variant 1 applies shader fog: lerp(litTexture.rgb,t2.rgb,t2.w), preserving sample alpha.
 0x7F0652: mov     esi, [ebx]
 0x7F0654: mov     edi, eax
 0x7F0656: cmp     esi, edi
@@ -239,7 +238,6 @@
 0x7F06D2: jmp     loc_7F07B2
 0x7F06D7: mov     [esp+3F0h+var_3E0], edi
 0x7F06DB: jmp     short loc_7F06E0
-0x7F06DD: align 10h
 0x7F06E0: mov     eax, [edi]
 0x7F06E2: cmp     eax, ebp
 0x7F06E4: jz      loc_7F076C
@@ -263,7 +261,7 @@
 0x7F0721: lea     ecx, [esp+404h+FileName]
 0x7F0728: push    ecx; lpFileName
 0x7F0729: mov     ecx, [esp+408h+var_3D8]
-0x7F072D: call    CreatePixelShader
+0x7F072D: call    CreatePixelShader; Creates legacy STLEAF%03i.pso (ps_1_3). STLEAF000 has the same contract: r0.rgb=t0.rgb*t1.rgb; r0.a=t0.a.
 0x7F0732: mov     esi, [ebx]
 0x7F0734: mov     edi, eax
 0x7F0736: cmp     esi, edi

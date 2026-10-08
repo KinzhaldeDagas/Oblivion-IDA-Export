@@ -1,1 +1,1 @@
-IShellFolder_0
+typedef IShellFolder IShellFolder_0;

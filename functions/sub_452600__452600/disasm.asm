@@ -1,13 +1,13 @@
-0x452600: mov     edx, [esp+arg_4]
+0x452600: mov     edx, [esp+keyOut]; MEF PERF 2026-10-02 PASS2: Verified generic U32/pointer iterator: outputs current node key+4/value+8, advances via next+0 or hashes old key and scans increasing bucket indices. Not TESObjectCELL-specific. Recovered 12-byte node/16-byte map views and typed prototype remove misleading cell payload types. EAX is incidental iteration arithmetic, not a verified success boolean.
 0x452604: push    esi
 0x452605: push    edi
-0x452606: mov     edi, [esp+8+arg_0]
+0x452606: mov     edi, [esp+8+position]
 0x45260A: mov     eax, [edi]
 0x45260C: mov     esi, ecx
 0x45260E: mov     ecx, [eax+4]
 0x452611: mov     [edx], ecx
 0x452613: mov     ecx, [eax+8]
-0x452616: mov     edx, [esp+8+arg_8]
+0x452616: mov     edx, [esp+8+valueOut]
 0x45261A: mov     [edx], ecx
 0x45261C: mov     ecx, [eax]
 0x45261E: test    ecx, ecx

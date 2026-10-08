@@ -1,19 +1,19 @@
 0x77A5B0: sub     esp, 14h
 0x77A5B3: mov     eax, ds:0B29F84h
-0x77A5B8: mov     ecx, [esp+14h+arg_4]
+0x77A5B8: mov     ecx, [esp+14h+geometry]
 0x77A5BC: push    ebx
 0x77A5BD: push    ebp
 0x77A5BE: push    esi
 0x77A5BF: push    edi
 0x77A5C0: push    eax
 0x77A5C1: call    sub_6FFAC0
-0x77A5C6: mov     ebx, [esp+24h+arg_0]
+0x77A5C6: mov     ebx, [esp+24h+shader]
 0x77A5CA: mov     eax, [ebx+30h]
 0x77A5CD: xor     esi, esi
 0x77A5CF: xor     ebp, ebp
 0x77A5D1: cmp     eax, esi
 0x77A5D3: mov     [esp+24h+var_C], ebp
-0x77A5D7: mov     [esp+24h+var_14], esi
+0x77A5D7: mov     [esp+24h+pixelCapacity], esi
 0x77A5DB: mov     [esp+24h+var_10], esi
 0x77A5DF: jz      short loc_77A627
 0x77A5E1: movzx   edi, word ptr [eax+18h]
@@ -57,13 +57,13 @@
 0x77A64A: and     eax, 0F0000000h
 0x77A64F: cmp     eax, 30000000h
 0x77A654: jnz     short loc_77A65B
-0x77A656: add     [esp+24h+var_14], 1
+0x77A656: add     [esp+24h+pixelCapacity], 1
 0x77A65B: add     esi, 1
 0x77A65E: cmp     esi, edi
 0x77A660: jb      short loc_77A638
 0x77A662: movzx   ecx, word ptr [ebx+4Ah]
-0x77A666: imul    ecx, [esp+24h+var_14]
-0x77A66B: mov     [esp+24h+var_14], ecx
+0x77A666: imul    ecx, [esp+24h+pixelCapacity]
+0x77A66B: mov     [esp+24h+pixelCapacity], ecx
 0x77A66F: movzx   edi, word ptr [ebx+4Ah]
 0x77A673: xor     eax, eax
 0x77A675: test    edi, edi
@@ -92,11 +92,11 @@
 0x77A6B5: and     eax, 0F0000000h
 0x77A6BA: cmp     eax, 30000000h
 0x77A6BF: jnz     short loc_77A6C6
-0x77A6C1: add     [esp+24h+var_14], 1
+0x77A6C1: add     [esp+24h+pixelCapacity], 1
 0x77A6C6: add     esi, 1
 0x77A6C9: cmp     esi, ebx
 0x77A6CB: jb      short loc_77A6A4
-0x77A6CD: mov     ebx, [esp+24h+arg_0]
+0x77A6CD: mov     ebx, [esp+24h+shader]
 0x77A6D1: mov     edi, [ebp+48h]
 0x77A6D4: test    edi, edi
 0x77A6D6: jz      short loc_77A711
@@ -119,7 +119,7 @@
 0x77A706: add     esi, 1
 0x77A709: cmp     esi, ebx
 0x77A70B: jb      short loc_77A6E2
-0x77A70D: mov     ebx, [esp+24h+arg_0]
+0x77A70D: mov     ebx, [esp+24h+shader]
 0x77A711: mov     eax, [esp+24h+var_8]
 0x77A715: mov     edi, [esp+24h+var_4]
 0x77A719: add     eax, 1
@@ -129,20 +129,20 @@
 0x77A728: mov     ebp, [esp+24h+var_C]
 0x77A72C: test    ebp, ebp
 0x77A72E: ja      short loc_77A73B
-0x77A730: cmp     [esp+24h+var_14], 0
+0x77A730: cmp     [esp+24h+pixelCapacity], 0
 0x77A735: jbe     loc_77A9A1
 0x77A73B: push    24h ; '$'; Size
 0x77A73D: call    FormHeapAlloc
 0x77A742: add     esp, 4
 0x77A745: test    eax, eax
 0x77A747: jz      short loc_77A761
-0x77A749: mov     edx, [esp+24h+var_14]
+0x77A749: mov     edx, [esp+24h+pixelCapacity]
 0x77A74D: mov     ecx, ds:0B29F84h
-0x77A753: push    edx; int
-0x77A754: push    ebp; int
-0x77A755: push    ecx; Src
-0x77A756: mov     ecx, eax
-0x77A758: call    sub_9A22E0
+0x77A753: push    edx; pixelCapacity
+0x77A754: push    ebp; vertexCapacity
+0x77A755: push    ecx; name
+0x77A756: mov     ecx, eax; this
+0x77A758: call    NiSCMExtraData_Constructor; Verified NiSCMExtraData constructor, 2026-09-30: calls NiExtraData initialization, installs vtable AB2914, and assigns the supplied name. Stores two capacities at+C/+10, zeros used counts at+14/+18, and allocates two arrays of 8-byte elements at+1C/+20 (null for zero capacity). Comparative Fallout constructor82C1F748 has an expanded program-type layout; its offsets must not be copied. Capacity0/1 are probably vertex/pixel from the family correspondence, but confirm Oblivion AddEntry indexing before promoting those member names.
 0x77A75D: mov     esi, eax
 0x77A75F: jmp     short loc_77A763
 0x77A761: xor     esi, esi
@@ -165,7 +165,7 @@
 0x77A798: test    ebp, ebp
 0x77A79A: jbe     short loc_77A805
 0x77A79C: lea     esp, [esp+0]
-0x77A7A0: mov     ecx, [esp+24h+arg_0]
+0x77A7A0: mov     ecx, [esp+24h+shader]
 0x77A7A4: mov     ecx, [ecx+2Ch]
 0x77A7A7: mov     edx, [ecx]
 0x77A7A9: mov     eax, [edx+3Ch]
@@ -179,9 +179,9 @@
 0x77A7BE: cmp     ecx, 30000000h
 0x77A7C4: jnz     short loc_77A7FE
 0x77A7C6: mov     eax, [edi+0Ch]
-0x77A7C9: mov     ecx, [esp+24h+arg_4]
+0x77A7C9: mov     ecx, [esp+24h+geometry]
 0x77A7CD: push    eax
-0x77A7CE: call    NiObjectNET_GetExtraData
+0x77A7CE: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x77A7D3: test    eax, eax
 0x77A7D5: jz      short loc_77A7FE
 0x77A7D7: mov     ecx, ds:0AB2908h
@@ -198,7 +198,7 @@
 0x77A7FE: add     ebx, 1
 0x77A801: cmp     ebx, ebp
 0x77A803: jb      short loc_77A7A0
-0x77A805: mov     edx, [esp+24h+arg_0]
+0x77A805: mov     edx, [esp+24h+shader]
 0x77A809: mov     eax, [edx+30h]
 0x77A80C: xor     ebp, ebp
 0x77A80E: test    eax, eax
@@ -210,7 +210,7 @@
 0x77A820: xor     ebx, ebx
 0x77A822: test    ebp, ebp
 0x77A824: jbe     short loc_77A88B
-0x77A826: mov     ecx, [esp+24h+arg_0]
+0x77A826: mov     ecx, [esp+24h+shader]
 0x77A82A: mov     ecx, [ecx+30h]
 0x77A82D: mov     edx, [ecx]
 0x77A82F: mov     eax, [edx+3Ch]
@@ -224,9 +224,9 @@
 0x77A844: cmp     ecx, 30000000h
 0x77A84A: jnz     short loc_77A884
 0x77A84C: mov     eax, [edi+0Ch]
-0x77A84F: mov     ecx, [esp+24h+arg_4]
+0x77A84F: mov     ecx, [esp+24h+geometry]
 0x77A853: push    eax
-0x77A854: call    NiObjectNET_GetExtraData
+0x77A854: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x77A859: test    eax, eax
 0x77A85B: jz      short loc_77A884
 0x77A85D: mov     ecx, ds:0AB2908h
@@ -265,9 +265,9 @@
 0x77A8BD: cmp     eax, 30000000h
 0x77A8C2: jnz     short loc_77A8F9
 0x77A8C4: mov     eax, [edi+0Ch]
-0x77A8C7: mov     ecx, [esp+24h+arg_4]
+0x77A8C7: mov     ecx, [esp+24h+geometry]
 0x77A8CB: push    eax
-0x77A8CC: call    NiObjectNET_GetExtraData
+0x77A8CC: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x77A8D1: test    eax, eax
 0x77A8D3: jz      short loc_77A8F9
 0x77A8D5: mov     ecx, ds:0AB2908h
@@ -294,7 +294,6 @@
 0x77A915: mov     [esp+24h+var_C], eax
 0x77A919: jbe     short loc_77A97E
 0x77A91B: jmp     short loc_77A920
-0x77A91D: align 10h
 0x77A920: mov     eax, [ebp+0]
 0x77A923: mov     edx, [eax+3Ch]
 0x77A926: push    ebx
@@ -308,9 +307,9 @@
 0x77A939: cmp     eax, 30000000h
 0x77A93E: jnz     short loc_77A975
 0x77A940: mov     eax, [edi+0Ch]
-0x77A943: mov     ecx, [esp+24h+arg_4]
+0x77A943: mov     ecx, [esp+24h+geometry]
 0x77A947: push    eax
-0x77A948: call    NiObjectNET_GetExtraData
+0x77A948: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x77A94D: test    eax, eax
 0x77A94F: jz      short loc_77A975
 0x77A951: mov     ecx, ds:0AB2908h
@@ -327,15 +326,15 @@
 0x77A975: add     ebx, 1
 0x77A978: cmp     ebx, [esp+24h+var_C]
 0x77A97C: jb      short loc_77A920
-0x77A97E: mov     ebx, [esp+24h+arg_0]
+0x77A97E: mov     ebx, [esp+24h+shader]
 0x77A982: mov     eax, [esp+24h+var_8]
 0x77A986: add     eax, 1
 0x77A989: cmp     eax, [esp+24h+var_4]
 0x77A98D: mov     [esp+24h+var_8], eax
 0x77A991: jb      loc_77A771
-0x77A997: mov     ecx, [esp+24h+arg_4]
+0x77A997: mov     ecx, [esp+24h+geometry]
 0x77A99B: push    esi
-0x77A99C: call    NiNode_AddNiExtraData
+0x77A99C: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x77A9A1: pop     edi
 0x77A9A2: pop     esi
 0x77A9A3: pop     ebp

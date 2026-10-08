@@ -11,7 +11,7 @@
 0x405313: add     esp, 8
 0x405316: test    eax, eax
 0x405318: jnz     short loc_40534D
-0x40531A: push    offset byte_B34FC8
+0x40531A: push    0B34FC8h
 0x40531F: lea     eax, [esp+208h+Text]
 0x405323: push    offset aFailedToInit_0; "Failed to initialize renderer.\n%s"
 0x405328: push    eax

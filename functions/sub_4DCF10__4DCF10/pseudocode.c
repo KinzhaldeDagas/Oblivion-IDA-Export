@@ -1,30 +1,24 @@
-void __userpurge sub_4DCF10(
-        TESObjectREFR *this@<ecx>,
-        char bp0@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        char a6)
+void __userpurge sub_4DCF10(TESObjectREFR *this@<ecx>, char bp0@<bpl>, char firstPerson)
 {
-  char *v7; // eax
+  char *SkinInfoByPerspective; // eax
   PlayerCharacter *v8; // ecx
 
-  if ( this->member.niNode )
+  if ( this->member.niNode ) /*0x4dcf13*/
   {
-    v7 = (char *)((int (__thiscall *)(TESObjectREFR *))this->vtbl->Unk_5A)(this);
-    v8 = TESDataHandler_g_PlayerRef;
-    if ( this == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+    SkinInfoByPerspective = (char *)((int (__thiscall *)(TESObjectREFR *))this->vtbl->GetActiveSkinInfo)(this); /*0x4dcf22*/
+    v8 = reference; /*0x4dcf24*/
+    if ( this == (TESObjectREFR *)reference ) /*0x4dcf30*/
     {
-      if ( v7 )
+      if ( SkinInfoByPerspective ) /*0x4dcf34*/
       {
-        sub_478E80(v7, bp0, a3, a4, a5, a6);
-        v8 = TESDataHandler_g_PlayerRef;
+        ActorSkinInfo_ClearRingSlot(SkinInfoByPerspective, firstPerson); /*0x4dcf39*/
+        v8 = reference; /*0x4dcf3e*/
       }
-      v7 = (char *)sub_6600D0(v8, v8->isThirdPerson);
+      SkinInfoByPerspective = (char *)Actor_GetSkinInfoByPerspective((Actor *)v8, v8->isThirdPerson); /*0x4dcf53*/
     }
-    if ( v7 )
-      sub_478E80(v7, bp0, a3, a4, a5, a6);
-    if ( this->vtbl->IsActor(this) )
-      sub_5EA1A0((int)this, bp0, (_DWORD *)this->member.niNode);
+    if ( SkinInfoByPerspective ) /*0x4dcf5a*/
+      ActorSkinInfo_ClearRingSlot(SkinInfoByPerspective, firstPerson); /*0x4dcf5f*/
+    if ( this->vtbl->IsActor(this) ) /*0x4dcf6e*/
+      sub_5EA1A0((int)this, bp0, (_DWORD *)this->member.niNode); /*0x4dcf7b*/
   }
 }

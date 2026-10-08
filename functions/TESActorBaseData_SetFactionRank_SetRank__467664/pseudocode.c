@@ -5,6 +5,6 @@ __int64 __userpurge TESActorBaseData_SetFactionRank_::SetRank@<edx:eax>(
         int a3,
         int a4)
 {
-  *(_BYTE *)(a2 + 4) = BYTE4(result);
-  return result;
+  *(_BYTE *)(a2 + 4) = BYTE4(result); /*0x467665*/
+  return result; /*0x467669*/
 }

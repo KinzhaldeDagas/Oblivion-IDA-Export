@@ -4,9 +4,9 @@
 0x5755D8: mov     eax, [ecx]
 0x5755DA: test    eax, eax
 0x5755DC: jz      short loc_5755F4
-0x5755DE: push    edx; Str2
-0x5755DF: push    eax; Str1
-0x5755E0: call    __strcmp
+0x5755DE: push    edx; right
+0x5755DF: push    eax; left
+0x5755E0: call    CRT_StricmpLocaleDispatch
 0x5755E5: xor     ecx, ecx
 0x5755E7: add     esp, 8
 0x5755EA: test    eax, eax

@@ -1,4 +1,4 @@
-0x7AE070: push    0FFFFFFFFh
+0x7AE070: push    0FFFFFFFFh; Culling.dll decode: BSShaderAccumulator flush entry at vtable slot +0x50. Sorts and dispatches queued render passes, processes query/refraction/special lists, then clears pending state via 0x733830.
 0x7AE072: push    offset BSShaderAccumulator__vtable_entry_0x14_SEH
 0x7AE077: mov     eax, large fs:0
 0x7AE07D: push    eax
@@ -23,33 +23,33 @@
 0x7AE0BC: mov     [esi+2268h], bl
 0x7AE0C2: mov     eax, ds:0B3F928h
 0x7AE0C7: mov     ebp, 5
-0x7AE0CC: cmp     ds:0B42EACh, bp
+0x7AE0CC: cmp     ds:0B42EACh, bp; Mode-5 accumulator flush selects the dedicated shadow-production bucket path.
 0x7AE0D3: mov     [esp+4Ch+var_20], eax
 0x7AE0D7: mov     ds:0B42CDDh, bl
 0x7AE0DD: jnz     short loc_7AE131
-0x7AE0DF: mov     edi, 6
+0x7AE0DF: mov     edi, 6; Mode-5 path begins its first and only ordinary bucket range, selectors 6..9.
 0x7AE0E4: mov     edx, [esi]
 0x7AE0E6: mov     eax, [edx+60h]
 0x7AE0E9: push    ebx
 0x7AE0EA: push    edi
 0x7AE0EB: mov     ecx, esi
-0x7AE0ED: call    eax
+0x7AE0ED: call    eax; Flush mode-5 pass buckets 6 through 9.
 0x7AE0EF: add     edi, 1
 0x7AE0F2: cmp     edi, 9
 0x7AE0F5: jle     short loc_7AE0E4
-0x7AE0F7: mov     edi, 154h
+0x7AE0F7: mov     edi, 154h; Mode-5 path begins its second bucket range, selectors 0x154..0x155.
 0x7AE0FC: lea     esp, [esp+0]
 0x7AE100: mov     edx, [esi]
 0x7AE102: mov     eax, [edx+60h]
 0x7AE105: push    ebx
 0x7AE106: push    edi
 0x7AE107: mov     ecx, esi
-0x7AE109: call    eax
+0x7AE109: call    eax; Flush mode-5 pass buckets 0x154 through 0x155.
 0x7AE10B: add     edi, 1
 0x7AE10E: cmp     edi, 155h
 0x7AE114: jle     short loc_7AE100
-0x7AE116: mov     ecx, esi
-0x7AE118: call    sub_7AB6F0
+0x7AE116: mov     ecx, esi; After the six mode-5 buckets, reset all 0x1A3 buckets. Residual 0x177..0x17A entries are discarded without draw.
+0x7AE118: call    BSShaderAccumulator_ClearAccumulatedPasses; Clear all accumulator pass buckets/lists after mode-5 shadow submission.
 0x7AE11D: mov     ecx, dword ptr [esp+4Ch+var_C]
 0x7AE121: mov     large fs:0, ecx
 0x7AE128: pop     ecx
@@ -60,7 +60,7 @@
 0x7AE12D: add     esp, 38h
 0x7AE130: retn
 0x7AE131: push    1; a1
-0x7AE133: call    GetShaderDefinition
+0x7AE133: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x7AE138: mov     edi, [esi+68h]
 0x7AE13B: mov     ecx, [eax+4]
 0x7AE13E: add     eax, 4
@@ -86,9 +86,9 @@
 0x7AE182: cmp     ds:0B42EACh, bp
 0x7AE189: jz      short loc_7AE1A3
 0x7AE18B: mov     ecx, esi
-0x7AE18D: call    sub_7A9E10
+0x7AE18D: call    sub_7A9E10; Diagnostic RenderPasses scene-node builder. Calls BSShaderProperty_GetRenderPassName for pass bucket names, so BSSM_FRONDS here is debug/display evidence only, not geometry attachment.
 0x7AE192: push    eax; a2
-0x7AE193: mov     ecx, offset RenderWindowNiNode; this
+0x7AE193: mov     ecx, 0B42CF4h; this
 0x7AE198: call    NiSmartPointer_Set??
 0x7AE19D: mov     ds:0B42CD9h, bl
 0x7AE1A3: cmp     ds:0B42E97h, bl
@@ -98,7 +98,7 @@
 0x7AE1B2: mov     [esp+4Ch+var_34], eax
 0x7AE1B6: mov     eax, [esi+2Ch]
 0x7AE1B9: mov     [esp+4Ch+var_38], ecx
-0x7AE1BD: mov     [esp+4Ch+var_30], edx
+0x7AE1BD: mov     dword ptr [esp+4Ch+selector], edx
 0x7AE1C1: mov     [esp+4Ch+var_24], eax
 0x7AE1C5: jz      loc_7AE4F1
 0x7AE1CB: mov     eax, [esi+150h]
@@ -135,13 +135,13 @@
 0x7AE23D: mov     eax, [esi+8]
 0x7AE240: fld     dword ptr [eax+64h]
 0x7AE243: add     esp, 8
-0x7AE246: fstp    [esp+4Ch+var_1C]
+0x7AE246: fstp    [esp+4Ch+outPass.geometry_00]
 0x7AE24A: xor     edi, edi
 0x7AE24C: cmp     ebp, ebx
 0x7AE24E: fld     dword ptr [eax+70h]
-0x7AE251: fstp    [esp+4Ch+var_18]
+0x7AE251: fstp    dword ptr [esp+4Ch+outPass.selector_04]
 0x7AE255: fld     dword ptr [eax+7Ch]
-0x7AE258: fstp    [esp+4Ch+var_14]
+0x7AE258: fstp    dword ptr [esp+4Ch+outPass.lightCount_08]
 0x7AE25C: jz      short loc_7AE2A4
 0x7AE25E: mov     edi, edi
 0x7AE260: mov     ecx, [esi+28h]
@@ -153,7 +153,7 @@
 0x7AE270: mov     eax, [esi+28h]
 0x7AE273: mov     eax, [eax+edi*4]
 0x7AE276: fld     dword ptr [eax+2Ch]
-0x7AE279: lea     ecx, [esp+4Ch+var_1C]
+0x7AE279: lea     ecx, [esp+4Ch+outPass]
 0x7AE27D: push    ecx
 0x7AE27E: fstp    [esp+50h+var_2C]
 0x7AE282: lea     ecx, [eax+20h]
@@ -211,7 +211,7 @@
 0x7AE343: cmp     eax, edx
 0x7AE345: jl      short loc_7AE330
 0x7AE347: push    edi
-0x7AE348: call    FormHeapFree
+0x7AE348: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AE34D: mov     ax, [esi+21E4h]
 0x7AE354: add     esp, 4
 0x7AE357: mov     [esi+21E6h], ax
@@ -222,7 +222,7 @@
 0x7AE368: push    edi
 0x7AE369: push    3
 0x7AE36B: mov     dword ptr [esi+30h], 1
-0x7AE372: call    sub_7D1320
+0x7AE372: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7AE377: mov     ebp, [esp+54h+var_28]
 0x7AE37B: mov     ecx, [ebp+30h]
 0x7AE37E: mov     edx, [ecx]
@@ -244,12 +244,12 @@
 0x7AE3B2: mov     [esp+4Ch+var_4], edi
 0x7AE3B6: jz      short loc_7AE3CB
 0x7AE3B8: push    edi
-0x7AE3B9: push    edi
-0x7AE3BA: push    1
-0x7AE3BC: push    edi
-0x7AE3BD: push    edi
-0x7AE3BE: push    eax
-0x7AE3BF: call    sub_7E2370
+0x7AE3B9: push    edi; lightCount
+0x7AE3BA: push    1; byte6
+0x7AE3BC: push    edi; selector
+0x7AE3BD: push    edi; geometry
+0x7AE3BE: push    eax; outPass
+0x7AE3BF: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x7AE3C4: add     esp, 18h
 0x7AE3C7: mov     ebp, eax
 0x7AE3C9: jmp     short loc_7AE3CD
@@ -271,7 +271,7 @@
 0x7AE400: mov     eax, [edx+1D8h]
 0x7AE406: push    9
 0x7AE408: push    ecx
-0x7AE409: call    eax
+0x7AE409: call    eax; DX11 migration audit: IDirect3DDevice9::CreateQuery(D3DQUERYTYPE_OCCLUSION=9), device vtable +0x1D8 (slot 118).
 0x7AE40B: mov     ecx, [esi+21E8h]
 0x7AE411: mov     eax, [edi+ecx]
 0x7AE414: mov     edx, [eax]
@@ -279,10 +279,10 @@
 0x7AE418: push    eax
 0x7AE419: mov     eax, [edx+18h]
 0x7AE41C: call    eax
-0x7AE41E: push    3; float
-0x7AE420: push    ebp; int
+0x7AE41E: push    3; selector
+0x7AE420: push    ebp; entry
 0x7AE421: mov     ecx, esi
-0x7AE423: call    sub_7A9820
+0x7AE423: call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.
 0x7AE428: add     dword ptr ds:0B42CCCh, 1
 0x7AE42F: mov     eax, [ebp+0]
 0x7AE432: mov     ecx, [eax+0B4h]
@@ -309,12 +309,12 @@
 0x7AE472: test    ebx, ebx
 0x7AE474: mov     [esi+30h], eax
 0x7AE477: jnz     loc_7AE3E9
-0x7AE47D: mov     ecx, ebp
-0x7AE47F: call    sub_7E2400
+0x7AE47D: mov     ecx, ebp; this
+0x7AE47F: call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.
 0x7AE484: push    ebp
-0x7AE485: call    FormHeapFree
+0x7AE485: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AE48A: add     esp, 4
-0x7AE48D: cmp     byte ptr ds:0B42CDAh, 0
+0x7AE48D: cmp     byte ptr ds:0B42CDAh, 0; Frozen replay in render mode 0 suppresses reset of the temporary occlusion/render list; other modes or active accumulation reset it normally.
 0x7AE494: jz      short loc_7AE4A0
 0x7AE496: cmp     word ptr ds:0B42EACh, 0
 0x7AE49E: jz      short loc_7AE4AB
@@ -328,20 +328,20 @@
 0x7AE4BD: mov     [esp+4Ch+var_38], eax
 0x7AE4C1: mov     eax, [esi+24h]
 0x7AE4C4: mov     [esi+28h], edx
-0x7AE4C7: mov     edx, [esp+4Ch+var_30]
-0x7AE4CB: mov     [esp+4Ch+var_30], eax
+0x7AE4C7: mov     edx, dword ptr [esp+4Ch+selector]
+0x7AE4CB: mov     dword ptr [esp+4Ch+selector], eax
 0x7AE4CF: mov     eax, [esi+2Ch]
 0x7AE4D2: push    eax
 0x7AE4D3: mov     [esi+20h], ecx
 0x7AE4D6: mov     [esi+24h], edx
-0x7AE4D9: call    FormHeapFree
+0x7AE4D9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AE4DE: mov     eax, [esp+50h+var_24]
 0x7AE4E2: add     esp, 4
 0x7AE4E5: mov     [esi+2Ch], eax
 0x7AE4E8: mov     ebp, 5
 0x7AE4ED: xor     ebx, ebx
 0x7AE4EF: jmp     short loc_7AE50A
-0x7AE4F1: cmp     ds:0B42CDAh, bl
+0x7AE4F1: cmp     ds:0B42CDAh, bl; When renderer accumulation is not frozen, reset the temporary list immediately on the non-query path.
 0x7AE4F7: jnz     short loc_7AE50A
 0x7AE4F9: lea     ecx, [esi+140h]
 0x7AE4FF: call    sub_7AA6C0
@@ -364,7 +364,7 @@
 0x7AE550: mov     edx, [esp+4Ch+var_38]
 0x7AE554: mov     ebx, [esi+28h]
 0x7AE557: mov     [esi+28h], ecx
-0x7AE55A: mov     ecx, [esp+4Ch+var_30]
+0x7AE55A: mov     ecx, dword ptr [esp+4Ch+selector]
 0x7AE55E: mov     [esp+4Ch+var_38], eax
 0x7AE562: mov     eax, [esi+24h]
 0x7AE565: xor     ebp, ebp
@@ -380,7 +380,7 @@
 0x7AE58F: mov     eax, [edi+edx]
 0x7AE592: mov     ecx, [eax]
 0x7AE594: push    4
-0x7AE596: lea     edx, [esp+54h+var_30]
+0x7AE596: lea     edx, [esp+54h+selector]
 0x7AE59A: push    edx
 0x7AE59B: push    eax
 0x7AE59C: mov     eax, [ecx+1Ch]
@@ -388,7 +388,6 @@
 0x7AE5A1: cmp     eax, 1
 0x7AE5A4: jnz     short loc_7AE5D6
 0x7AE5A6: jmp     short loc_7AE5B0
-0x7AE5A8: align 10h
 0x7AE5B0: add     dword ptr ds:0B42CA8h, 1
 0x7AE5B7: mov     ecx, [esi+21E8h]
 0x7AE5BD: mov     eax, [edi+ecx]
@@ -396,19 +395,19 @@
 0x7AE5C2: mov     edx, [edx+1Ch]
 0x7AE5C5: push    1
 0x7AE5C7: push    4
-0x7AE5C9: lea     ecx, [esp+54h+var_30]
+0x7AE5C9: lea     ecx, [esp+54h+selector]
 0x7AE5CD: push    ecx
 0x7AE5CE: push    eax
-0x7AE5CF: call    edx
+0x7AE5CF: call    edx; DX11 migration audit: GetData(&DWORD,4,FLUSH=1); S_FALSE=1 branches back to 0x7AE5B0. Query progress is required within this render call, before Present.
 0x7AE5D1: cmp     eax, 1
 0x7AE5D4: jz      short loc_7AE5B0
-0x7AE5D6: cmp     [esp+4Ch+var_30], 0
+0x7AE5D6: cmp     dword ptr [esp+4Ch+selector], 0
 0x7AE5DB: jnz     short loc_7AE5F5
 0x7AE5DD: mov     eax, [esi+28h]
 0x7AE5E0: add     eax, edi
-0x7AE5E2: push    eax
-0x7AE5E3: lea     ecx, [esi+21ECh]
-0x7AE5E9: call    sub_7ABDE0
+0x7AE5E2: push    eax; payloadAddress
+0x7AE5E3: lea     ecx, [esi+21ECh]; this
+0x7AE5E9: call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.
 0x7AE5EE: add     dword ptr ds:0B42CB8h, 1
 0x7AE5F5: movzx   ecx, word ptr [esi+21E4h]
 0x7AE5FC: add     ebp, 1
@@ -416,14 +415,14 @@
 0x7AE601: jl      loc_7AE580
 0x7AE607: cmp     dword ptr [esi+21E8h], 0
 0x7AE60E: jz      short loc_7AE622
-0x7AE610: cmp     byte ptr ds:0B42CDAh, 0
+0x7AE610: cmp     byte ptr ds:0B42CDAh, 0; Non-frozen flush clears the retained occlusion-query count; frozen replay preserves it.
 0x7AE617: jnz     short loc_7AE622
 0x7AE619: mov     word ptr [esi+21E4h], 0
 0x7AE622: cmp     dword ptr [esi+20h], 0
 0x7AE626: jle     short loc_7AE634
 0x7AE628: mov     eax, [esi+28h]
 0x7AE62B: push    eax
-0x7AE62C: call    FormHeapFree
+0x7AE62C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AE631: add     esp, 4
 0x7AE634: mov     edx, [esp+4Ch+var_38]
 0x7AE638: mov     eax, [esp+4Ch+var_24]
@@ -431,19 +430,19 @@
 0x7AE63F: mov     [esi+20h], edx
 0x7AE642: mov     [esi+24h], eax
 0x7AE645: xor     ebx, ebx
-0x7AE647: cmp     byte ptr ds:0B42CDAh, 0
-0x7AE64E: jz      short loc_7AE660
+0x7AE647: cmp     byte ptr ds:0B42CDAh, 0; If FreezeRenderAccumulation is active in render mode 0, set the retained-scene latch used by subsequent AccumulateGeometry entry filtering.
+0x7AE64E: jz      short BSShaderAccumulator_FlushPassBuckets4_17B; Flush selector buckets in ascending order for 4 <= selector < 0x17C: base Lighting30 0x12D..0x146 precedes SimpleShadow 0x14E..0x151.
 0x7AE650: cmp     ds:0B42EACh, bx
-0x7AE657: jnz     short loc_7AE660
+0x7AE657: jnz     short BSShaderAccumulator_FlushPassBuckets4_17B; Flush selector buckets in ascending order for 4 <= selector < 0x17C: base Lighting30 0x12D..0x146 precedes SimpleShadow 0x14E..0x151.
 0x7AE659: mov     byte ptr ds:0B42CDBh, 1
-0x7AE660: mov     edi, 4
+0x7AE660: mov     edi, 4; Ordinary flush loop covers selectors 4 through 0x17B with specialMode 0; this necessarily reaches 0x177..0x17A.
 0x7AE665: mov     edx, [esi]
 0x7AE667: mov     eax, [edx+60h]
 0x7AE66A: push    ebx
 0x7AE66B: push    edi
 0x7AE66C: mov     ecx, esi
 0x7AE66E: call    eax
-0x7AE670: add     edi, 1
+0x7AE670: add     edi, 1;
 0x7AE673: cmp     edi, 17Ch
 0x7AE679: jl      short loc_7AE665
 0x7AE67B: mov     eax, [esi+78h]
@@ -454,29 +453,29 @@
 0x7AE687: push    ebx
 0x7AE688: push    eax
 0x7AE689: mov     ecx, esi
-0x7AE68B: call    sub_7ABAC0
+0x7AE68B: call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.
 0x7AE690: mov     eax, [esi+8Ch]
 0x7AE696: cmp     eax, ebx
 0x7AE698: jbe     short loc_7AE6B7
 0x7AE69A: lea     edi, [esi+7Ch]
-0x7AE69D: push    offset sub_7AA390
-0x7AE6A2: mov     ecx, edi
-0x7AE6A4: call    sub_7AA550
+0x7AE69D: push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare
+0x7AE6A2: mov     ecx, edi; self
+0x7AE6A4: call    BSTPersistentRenderPassList_StableMergeSort; MEF PERF 2026-10-07 PASS5: PERF-15 Flush direct sorts at7AE6A4 and7AE6CC use7AA390 before specialized rendering paths. Eight direct sort calls examined use only7A9A90 or7AA390; this does not prove there are no indirect/plugin callers with other comparators. Unknown comparator must retain native behavior/call sequence.
 0x7AE6A9: mov     ecx, [esi+2264h]
 0x7AE6AF: push    76h ; 'v'
 0x7AE6B1: push    edi
-0x7AE6B2: call    sub_7F8DB0
+0x7AE6B2: call    sub_7F8DB0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).
 0x7AE6B7: cmp     [esi+0A0h], ebx
-0x7AE6BD: jbe     short loc_7AE6E2
+0x7AE6BD: jbe     short BSShaderAccumulator_FlushPassBuckets17C_197
 0x7AE6BF: lea     edi, [esi+90h]
-0x7AE6C5: push    offset sub_7AA390
-0x7AE6CA: mov     ecx, edi
-0x7AE6CC: call    sub_7AA550
-0x7AE6D1: mov     ecx, [esi+2264h]
-0x7AE6D7: push    195h
-0x7AE6DC: push    edi
-0x7AE6DD: call    sub_7F9410
-0x7AE6E2: mov     edi, 17Ch
+0x7AE6C5: push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare
+0x7AE6CA: mov     ecx, edi; self
+0x7AE6CC: call    BSTPersistentRenderPassList_StableMergeSort
+0x7AE6D1: mov     ecx, [esi+2264h]; Call ABI setup: ECX=[BSShaderAccumulator+0x2264] is batchScratch; stack args are renderPassList=[accumulator+0x90] and shaderIndex=0x195. Full gated sequence through the call is 8B 8E 64 22 00 00 68 95 01 00 00 57 E8 2E AD 04 00.
+0x7AE6D7: push    195h; shaderIndex
+0x7AE6DC: push    edi; renderPassList
+0x7AE6DD: call    OB_DrawLODTreePassList_WithMipBias_010201A0; Sole code xref to 0x7F9410. Exact bytes E8 2E AD 04 00; ECX=[accumulator+0x2264], stack args list and 0x195; caller ignores EAX and performs no sampler0 state8 reset.
+0x7AE6E2: mov     edi, 17Ch; Next ordinary bucket range covers 0x17C..0x197. The earlier 4..0x17B loop fully owns the target 0x177..0x17A selectors.
 0x7AE6E7: mov     edx, [esi]
 0x7AE6E9: mov     eax, [edx+60h]
 0x7AE6EC: push    ebx
@@ -497,10 +496,10 @@
 0x7AE710: push    ebx
 0x7AE711: push    ebp
 0x7AE712: mov     ecx, esi
-0x7AE714: call    sub_7ABAC0
+0x7AE714: call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.
 0x7AE719: push    ebp
 0x7AE71A: mov     dword ptr [ebp+0], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
-0x7AE721: call    FormHeapFree
+0x7AE721: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AE726: mov     ecx, [edi+4]
 0x7AE729: mov     eax, [ecx]
 0x7AE72B: add     esp, 4
@@ -525,8 +524,8 @@
 0x7AE75A: cmp     byte ptr ds:0B42CDBh, 0
 0x7AE761: jnz     short loc_7AE77F
 0x7AE763: lea     edi, [esi+21ECh]
-0x7AE769: mov     ecx, edi
-0x7AE76B: call    sub_7A9C30
+0x7AE769: mov     ecx, edi; this
+0x7AE76B: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AE770: mov     edx, [edi+4]
 0x7AE773: mov     [edi+0Ch], edx
 0x7AE776: mov     [edi+4], ebx
@@ -568,8 +567,8 @@
 0x7AE808: add     ecx, 3
 0x7AE80B: mov     ebp, ecx
 0x7AE80D: push    ebp
-0x7AE80E: mov     [esp+54h+var_30], ebp
-0x7AE812: call    sub_7D1320
+0x7AE80E: mov     dword ptr [esp+54h+selector], ebp
+0x7AE812: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7AE817: mov     ecx, [edi+30h]
 0x7AE81A: mov     edx, [ecx]
 0x7AE81C: mov     eax, [edx+48h]
@@ -595,8 +594,8 @@
 0x7AE852: add     ecx, 12Ah
 0x7AE858: mov     ebp, ecx
 0x7AE85A: push    ebp
-0x7AE85B: mov     [esp+54h+var_30], ebp
-0x7AE85F: call    sub_7FD260
+0x7AE85B: mov     dword ptr [esp+54h+selector], ebp
+0x7AE85F: call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.
 0x7AE864: mov     ecx, [edi+30h]
 0x7AE867: mov     edx, [ecx]
 0x7AE869: mov     eax, [edx+48h]
@@ -608,21 +607,20 @@
 0x7AE879: mov     ecx, edi
 0x7AE87B: call    eax
 0x7AE87D: jmp     short loc_7AE883
-0x7AE87F: mov     ebp, [esp+4Ch+var_30]
+0x7AE87F: mov     ebp, dword ptr [esp+4Ch+selector]
 0x7AE883: push    0
-0x7AE885: push    0
-0x7AE887: push    0
-0x7AE889: push    ebp
-0x7AE88A: lea     ecx, [esp+5Ch+var_1C]
-0x7AE88E: push    ebx
-0x7AE88F: push    ecx
-0x7AE890: call    sub_7E2370
+0x7AE885: push    0; lightCount
+0x7AE887: push    0; byte6
+0x7AE889: push    ebp; selector
+0x7AE88A: lea     ecx, [esp+5Ch+outPass]
+0x7AE88E: push    ebx; geometry
+0x7AE88F: push    ecx; outPass
+0x7AE890: call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.
 0x7AE895: add     esp, 18h
 0x7AE898: cmp     [esp+4Ch+var_38], 0
 0x7AE89D: mov     [esp+4Ch+var_4], 1
 0x7AE8A5: jz      loc_7AE9FE
 0x7AE8AB: jmp     short loc_7AE8B0
-0x7AE8AD: align 10h
 0x7AE8B0: mov     ecx, [esp+4Ch+var_38]
 0x7AE8B4: mov     edi, [ecx+8]
 0x7AE8B7: test    edi, edi
@@ -710,12 +708,12 @@
 0x7AE9AC: call    edx
 0x7AE9AE: test    eax, eax
 0x7AE9B0: jnz     short loc_7AE9D7
-0x7AE9B2: mov     eax, [esp+4Ch+var_30]
-0x7AE9B6: push    eax; float
-0x7AE9B7: lea     ecx, [esp+50h+var_1C]
-0x7AE9BB: push    ecx; int
+0x7AE9B2: mov     eax, dword ptr [esp+4Ch+selector]
+0x7AE9B6: push    eax; selector
+0x7AE9B7: lea     ecx, [esp+50h+outPass]
+0x7AE9BB: push    ecx; entry
 0x7AE9BC: mov     ecx, esi
-0x7AE9BE: call    sub_7A9820
+0x7AE9BE: call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.
 0x7AE9C3: mov     ebp, [ebp+0]
 0x7AE9C6: mov     byte ptr [edi+19h], 1
 0x7AE9CA: mov     edx, [ebp+0]
@@ -736,13 +734,13 @@
 0x7AE9EF: mov     byte ptr [edi+18h], 0
 0x7AE9F3: cmp     [esp+4Ch+var_38], 0
 0x7AE9F8: jnz     loc_7AE8B0
-0x7AE9FE: lea     ecx, [esp+4Ch+var_1C]
+0x7AE9FE: lea     ecx, [esp+4Ch+outPass]; this
 0x7AEA02: mov     [esp+4Ch+var_4], 0FFFFFFFFh
-0x7AEA0A: call    sub_7E2400
+0x7AEA0A: call    RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.
 0x7AEA0F: mov     dword ptr [esi+223Ch], 0
 0x7AEA19: mov     byte ptr [esi+2240h], 0
 0x7AEA20: mov     ecx, esi
-0x7AEA22: call    sub_7ACF40
+0x7AEA22: call    sub_7ACF40; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.
 0x7AEA27: cmp     byte ptr ds:0B42CE2h, 0
 0x7AEA2E: jz      short loc_7AEA3B
 0x7AEA30: lea     ecx, [esi+2244h]
@@ -755,9 +753,9 @@
 0x7AEA49: mov     ecx, esi
 0x7AEA4B: call    edx
 0x7AEA4D: mov     ecx, esi
-0x7AEA4F: call    sub_7ACF40
-0x7AEA54: mov     edi, 198h
-0x7AEA59: mov     [esp+4Ch+var_30], edi
+0x7AEA4F: call    sub_7ACF40; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.
+0x7AEA54: mov     edi, 198h; Final ordinary bucket range covers 0x198..0x19F with the special argument set; selector buckets 0x1A0..0x1A2 are not part of these flush loops.
+0x7AEA59: mov     dword ptr [esp+4Ch+selector], edi
 0x7AEA5D: mov     ebp, 1
 0x7AEA62: mov     eax, [esi]
 0x7AEA64: mov     edx, [eax+60h]
@@ -779,7 +777,7 @@
 0x7AEA9B: mov     ecx, esi
 0x7AEA9D: call    eax
 0x7AEA9F: mov     ecx, esi
-0x7AEAA1: call    sub_7ACF40
+0x7AEAA1: call    sub_7ACF40; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.
 0x7AEAA6: xor     ebx, ebx
 0x7AEAA8: cmp     [esi+58h], ebx
 0x7AEAAB: mov     dword ptr [esi+1Ch], 0
@@ -792,10 +790,10 @@
 0x7AEAC1: push    1
 0x7AEAC3: push    ebp
 0x7AEAC4: mov     ecx, esi
-0x7AEAC6: call    sub_7ABAC0
+0x7AEAC6: call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.
 0x7AEACB: push    ebp
 0x7AEACC: mov     dword ptr [ebp+0], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
-0x7AEAD3: call    FormHeapFree
+0x7AEAD3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AEAD8: mov     ecx, [edi+4]
 0x7AEADB: mov     eax, [ecx]
 0x7AEADD: add     esp, 4
@@ -831,20 +829,20 @@
 0x7AEB2D: call    eax
 0x7AEB2F: cmp     edi, ebx
 0x7AEB31: jnz     short loc_7AEB20
-0x7AEB33: mov     edi, [esp+4Ch+var_30]
+0x7AEB33: mov     edi, dword ptr [esp+4Ch+selector]
 0x7AEB37: mov     [ebp+0Ch], ebx
 0x7AEB3A: mov     [ebp+4], ebx
 0x7AEB3D: mov     [ebp+8], ebx
 0x7AEB40: mov     ebp, 1
 0x7AEB45: add     edi, ebp
 0x7AEB47: cmp     edi, 19Fh
-0x7AEB4D: mov     [esp+4Ch+var_30], edi
+0x7AEB4D: mov     dword ptr [esp+4Ch+selector], edi
 0x7AEB51: jle     loc_7AEA62
 0x7AEB57: push    ebp
 0x7AEB58: lea     ecx, [esi+0A4h]
 0x7AEB5E: push    ecx
 0x7AEB5F: mov     ecx, esi
-0x7AEB61: call    sub_7ABAC0
+0x7AEB61: call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.
 0x7AEB66: cmp     word ptr ds:0B42EACh, 4
 0x7AEB6E: jnz     loc_7AEBF7
 0x7AEB74: mov     ebx, [esp+4Ch+var_20]
@@ -861,13 +859,13 @@
 0x7AEBA1: push    0
 0x7AEBA3: mov     ecx, ebx
 0x7AEBA5: call    eax
-0x7AEBA7: mov     edi, offset dword_B42CF8
+0x7AEBA7: mov     edi, offset unk_B42CF8
 0x7AEBAC: lea     esp, [esp+0]
 0x7AEBB0: mov     ecx, [edi]; this
 0x7AEBB2: push    ebx
-0x7AEBB3: call    sub_709C60
+0x7AEBB3: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x7AEBB8: add     edi, 4
-0x7AEBBB: cmp     edi, offset dword_B42D3C
+0x7AEBBB: cmp     edi, offset unk_B42D3C
 0x7AEBC1: jl      short loc_7AEBB0
 0x7AEBC3: cmp     [ebx+200h], ebp
 0x7AEBC9: jz      short loc_7AEBD3
@@ -884,7 +882,7 @@
 0x7AEBEC: mov     ecx, [esi+8]
 0x7AEBEF: push    ecx
 0x7AEBF0: mov     ecx, ebx
-0x7AEBF2: call    SetCameraViewProj
+0x7AEBF2: call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.
 0x7AEBF7: mov     ecx, esi
 0x7AEBF9: call    sub_733830
 0x7AEBFE: mov     ecx, dword ptr [esp+4Ch+var_C]
@@ -896,3 +894,17 @@
 0x7AEC0D: pop     ebx
 0x7AEC0E: add     esp, 38h
 0x7AEC11: retn
+0x9CD4C0: mov     eax, [ebp-2Ch]
+0x9CD4C3: push    eax
+0x9CD4C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CD4C9: pop     ecx
+0x9CD4CA: retn
+0x9CD4CB: lea     ecx, [ebp-1Ch]; this
+0x9CD4CE: jmp     RenderPass_Destroy; Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.
+0x9CD4D3: mov     edx, [esp+arg_4]
+0x9CD4D7: lea     eax, [edx-3Ch]
+0x9CD4DA: mov     ecx, [edx-40h]
+0x9CD4DD: xor     ecx, eax
+0x9CD4DF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD4E4: mov     eax, offset stru_AF67BC
+0x9CD4E9: jmp     ___CxxFrameHandler3

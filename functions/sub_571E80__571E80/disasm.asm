@@ -51,7 +51,7 @@
 0x571F24: mov     [esi-8], ebp
 0x571F27: mov     ecx, [esi-4]
 0x571F2A: push    ecx
-0x571F2B: call    FormHeapFree
+0x571F2B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x571F30: fld     dword ptr ds:0A30634h
 0x571F36: mov     [esi-4], ebp
 0x571F39: mov     [esi+2], bp
@@ -71,3 +71,20 @@
 0x571F61: pop     ebx
 0x571F62: add     esp, 14h
 0x571F65: retn
+0x9BDEA0: push    offset sub_571DF0; void (__thiscall *)(void *)
+0x9BDEA5: push    0C8h ; 'È'; int
+0x9BDEAA: push    1Ch; unsigned int
+0x9BDEAC: mov     eax, [ebp-10h]
+0x9BDEAF: push    eax; void *
+0x9BDEB0: call    $LN21
+0x9BDEB5: retn
+0x9BDEB6: mov     ecx, [ebp-10h]
+0x9BDEB9: add     ecx, 15E0h
+0x9BDEBF: jmp     j_??1?$NiTList@PAUDebugTextData@DebugText@@@@UAE@XZ; NiTList<DebugText::DebugTextData *>::~NiTList<DebugText::DebugTextData *>(void)
+0x9BDEC4: mov     edx, [esp+arg_4]
+0x9BDEC8: lea     eax, [edx-18h]
+0x9BDECB: mov     ecx, [edx-1Ch]
+0x9BDECE: xor     ecx, eax
+0x9BDED0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDED5: mov     eax, offset stru_AE7708
+0x9BDEDA: jmp     ___CxxFrameHandler3

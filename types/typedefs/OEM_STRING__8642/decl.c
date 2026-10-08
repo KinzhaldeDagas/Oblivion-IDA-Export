@@ -1,1 +1,1 @@
-OEM_STRING
+typedef STRING OEM_STRING;

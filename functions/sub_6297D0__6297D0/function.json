@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6297D0",
+      "0x6297DD"
+    ]
+  ],
+  "chunks_sha256": "de3559b163d4fabfa2dbab9c6518fc3143ba672dd022e95a6ff6dbf6cd8ece62",
+  "comment_regular": "Assign HighProcess+0x230, the action-5 idle-window timer. The action-5 handler decrements it before scanning and reseeds it to 1.000..5.999 seconds only after it becomes nonpositive.",
+  "comment_repeatable": "Assign HighProcess+0x230, the action-5 idle-window timer. The action-5 handler decrements it before scanning and reseeds it to 1.000..5.999 seconds only after it becomes nonpositive.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6297D0",
+  "display_name": "HighProcess::SetAction5IdleTimer",
   "end_ea": "0x6297DD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6297D0",
+  "name": "HighProcess::SetAction5IdleTimer",
   "segment": ".text",
   "sha256": "de3559b163d4fabfa2dbab9c6518fc3143ba672dd022e95a6ff6dbf6cd8ece62",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6297D0",
-  "type": "void __thiscall(float *this, float)",
+  "total_chunk_size": 13,
+  "type": "void __thiscall(HighProcess *this, float value)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 1
 }

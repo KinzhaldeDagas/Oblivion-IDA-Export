@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CD960",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Verified cell linking: calls ExtraDataList_ResolveLoadedFormIDs before ownership policy. XOWN case 0x27 rebases the stored FormID, resolves it via TESForm_LookupByFormID, and stores the TESForm*; missing owners remove the extra. For an exterior cell (interior flag bit 0 clear) with direct XOWN, LinkForm logs a removal and clears XOWN, XRNK, and XGLB. Interior cells keep those ownership fields.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4CD9CA",
-    "line": "lea     ecx, [esi+28h]",
+    "line": "lea     ecx, [esi+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x4CD9D5",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+northRotation]; northRotation",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4CD9D8",
-    "line": "call    sub_420C60",
+    "line": "call    ExtraDataList_SetNorthRotation; Sets north rotation; 0.0 removes type 0x4C, otherwise updates or creates ExtraNorthRotation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4CD9E8",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,19 +373,19 @@
   },
   {
     "ea": "0x4CDA1B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4CDA21",
-    "line": "push    esi",
+    "line": "push    esi; cell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CDA22",
-    "line": "call    sub_464910",
+    "line": "call    TESSaveLoadGame_LoadReferencesForCell; Verified: cell restore dispatcher runs after virtual LoadForm for map-selected CELL references, but before ExtraDataList_ResolveLoadedFormIDs (4CDAB7) and before TESForm_SetIsLinked (4CDB9E). Its interior/exterior map draining is part of CELL LinkForm lifecycle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x4CDA59",
-    "line": "call    sub_45FDA0",
+    "line": "call    TESSaveLoadGame_FinalizeLoadedForms; MEF SAVE PERF PASS2 2026-10-08: PERF-20 manager-queue drain is reached from TESObjectCELL_LinkForm with null supplied queue/player record;45FDA0 selects manager+1C. Another null-queue caller is444595; full LoadGame4668A6 instead supplies its local array and separate player record. Preserve these lifetimes and callback phase schedules; no single process-wide retained queue assumed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x4CDAB7",
-    "line": "call    ExtraDataList_Link?",
+    "line": "call    ExtraDataList_ResolveLoadedFormIDs; CELL LinkForm invokes ExtraDataList_LinkFormIDs 0x426270 with the CELL owner. Guard0x4CDA89 tests internal linked bit0x8, not deleted0x20; setter0x46AB80 corroborates. Loader resets that linked bit at0x4CD940. Deleted CELL payload may therefore replay and link. Runtime post-link differs from TESCS for XLOC/XTEL; both remove CELL XESP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x4CDAC6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CDAC8",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,55 +955,55 @@
   },
   {
     "ea": "0x4CDB5C",
-    "line": "push    0",
+    "line": "push    0; owner",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CDB5E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CDB60",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4CDB65",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; rank",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CDB67",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CDB69",
-    "line": "call    sub_4237E0",
+    "line": "call    ExtraDataList_SetRank; Verified ExtraRank lifecycle writer: rank -1 removes the payload; every other signed 32-bit value updates or allocates ExtraRank. XRNK loading supplies a bounded 4-byte value into a zero-initialized local, so empty/short chunks become zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4CDB6E",
-    "line": "push    0",
+    "line": "push    0; global",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CDB70",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CDB72",
-    "line": "call    sub_423720",
+    "line": "call    ExtraDataList_SetGlobal; Verified XGLB mutator: update the stored TESGlobal* when nonnull; remove the extra when null; otherwise allocate a 16-byte ExtraGlobal payload. During plugin load the stored dword is a FormID temporarily; ExtraDataList_ResolveLoadedFormIDs rebases, looks it up, RTTI-checks TESGlobal, and removes missing/wrong-type entries.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x4CDB81",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x687E8D",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x687F03",
-    "line": "mov     [esp+74h+var_3C], ecx",
+    "line": "mov     [esp+74h+start.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x687F0B",
-    "line": "mov     [esp+74h+var_38], edx",
+    "line": "mov     [esp+74h+start.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x687F0F",
-    "line": "mov     [esp+74h+var_34], eax",
+    "line": "mov     [esp+74h+start.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x687F13",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x687F1A",
-    "line": "mov     [esp+74h+var_48], edi",
+    "line": "mov     [esp+74h+end.x], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x687F1E",
-    "line": "fld     [esp+74h+var_48]",
+    "line": "fld     [esp+74h+end.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x687F22",
-    "line": "fsub    [esp+74h+var_3C]",
+    "line": "fsub    [esp+74h+start.x]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x687F29",
-    "line": "mov     [esp+74h+var_44], ebp",
+    "line": "mov     [esp+74h+end.y], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -703,19 +703,19 @@
   },
   {
     "ea": "0x687F38",
-    "line": "fld     [esp+74h+var_44]",
+    "line": "fld     [esp+74h+end.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x687F3C",
-    "line": "mov     [esp+74h+var_40], ebx",
+    "line": "mov     [esp+74h+end.z], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x687F40",
-    "line": "fsub    [esp+74h+var_38]",
+    "line": "fsub    [esp+74h+start.y]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x687F5E",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x687F67",
-    "line": "fld     [esp+74h+var_40]",
+    "line": "fld     [esp+74h+end.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x687F6D",
-    "line": "fld     [esp+74h+var_34]",
+    "line": "fld     [esp+74h+start.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x687FB0",
-    "line": "mov     ecx, [esp+74h+var_48]",
+    "line": "mov     ecx, [esp+74h+end.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x687FB4",
-    "line": "mov     edx, [esp+74h+var_44]",
+    "line": "mov     edx, [esp+74h+end.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x687FB8",
-    "line": "mov     eax, [esp+74h+var_40]",
+    "line": "mov     eax, [esp+74h+end.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x687FDC",
-    "line": "push    ecx",
+    "line": "push    ecx; endColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x687FDF",
-    "line": "lea     edx, [esp+78h+var_48]",
+    "line": "lea     edx, [esp+78h+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x687FE7",
-    "line": "push    edx",
+    "line": "push    edx; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x687FF4",
-    "line": "push    eax",
+    "line": "push    eax; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x687FF9",
-    "line": "lea     ecx, [esp+80h+var_3C]",
+    "line": "lea     ecx, [esp+80h+start]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x688001",
-    "line": "push    ecx",
+    "line": "push    ecx; start",
     "mnemonic": "push",
     "size": 1
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x68800A",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x688014",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x68801C",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x688037",
-    "line": "lea     ecx, [esp+74h+var_20]; void *",
+    "line": "lea     ecx, [esp+74h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x688043",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x688076",
-    "line": "lea     edx, [esp+78h+var_48]",
+    "line": "lea     edx, [esp+78h+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x68807B",
-    "line": "lea     eax, [esp+7Ch+var_3C]",
+    "line": "lea     eax, [esp+7Ch+start]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x68809B",
-    "line": "push    edx",
+    "line": "push    edx; endColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x6880A0",
-    "line": "lea     eax, [esp+78h+var_48]",
+    "line": "lea     eax, [esp+78h+end]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x6880A6",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x6880B3",
-    "line": "push    ecx",
+    "line": "push    ecx; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x6880B8",
-    "line": "lea     edx, [esp+80h+var_3C]",
+    "line": "lea     edx, [esp+80h+start]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x6880C0",
-    "line": "push    edx",
+    "line": "push    edx; start",
     "mnemonic": "push",
     "size": 1
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x6880C9",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x6880D3",
-    "line": "call    sub_4E70B0",
+    "line": "call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x6880DB",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x6880F6",
-    "line": "lea     ecx, [esp+74h+var_20]; void *",
+    "line": "lea     ecx, [esp+74h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x688102",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1612,5 +1612,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5080",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5083",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5088",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C508C",
+    "line": "lea     eax, [edx-64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C508F",
+    "line": "mov     ecx, [edx-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5092",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5094",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5099",
+    "line": "mov     eax, offset stru_AED8D0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C509E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

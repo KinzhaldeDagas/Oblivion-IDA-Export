@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6334D8",
-    "line": "mov     ecx, [esi+edi*4+220h]",
+    "line": "mov     ecx, [esi+edi*4+220h]; this",
     "mnemonic": "mov",
     "size": 7
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6334E3",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x633518",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

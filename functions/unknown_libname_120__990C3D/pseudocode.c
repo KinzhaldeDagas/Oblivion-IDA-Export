@@ -1,7 +1,5 @@
-int unknown_libname_120()
+void __usercall unknown_libname_120(int a1@<ebp>)
 {
-  double v0; // st7
-
-  v0 = unknown_libname_131();
-  return unknown_libname_116_::unknown_libname_118(v0);
+  unknown_libname_131(a1); /*0x990c3d*/
+  unknown_libname_116_::unknown_libname_118(); /*0x990c42*/
 }

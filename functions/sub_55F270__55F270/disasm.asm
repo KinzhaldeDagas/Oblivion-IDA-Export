@@ -1,4 +1,4 @@
-0x55F270: sub     esp, 8
+0x55F270: sub     esp, 8; LockFreeMap remove core: finds key, atomically unlinks node, places node on retired/free list, clears thread-local traversal slots.
 0x55F273: push    ebx
 0x55F274: mov     ebx, ds:0A2813Ch
 0x55F27A: push    ebp

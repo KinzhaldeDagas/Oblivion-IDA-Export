@@ -1,32 +1,32 @@
-void __thiscall sub_523220(_DWORD *this, int *a2, int *a3)
+void __thiscall sub_523220(TESNPC *this, NiObjectNET **outBipedNode, NiObjectNET **outSkinnedNode)
 {
   LONG (__stdcall *v3)(volatile LONG *); // ebx
-  int v5; // edi
-  int v6; // edi
-  int *v7; // ecx
+  BSFaceGenNiNode *face0; // edi
+  BSFaceGenNiNode *face1; // edi
+  TESRace *race; // ecx
 
-  v3 = InterlockedDecrement;
-  v5 = *(this + 0x75);
-  if ( v5 )
+  v3 = InterlockedDecrement; /*0x523221*/
+  face0 = this->member.face0; /*0x52322b*/
+  if ( face0 ) /*0x523233*/
   {
-    if ( !v3((volatile LONG *)(v5 + 4)) )
-      (**(void (__thiscall ***)(int, int))v5)(v5, 1);
-    *(this + 0x75) = 0;
+    if ( !v3((volatile LONG *)face0 + 1) ) /*0x523239*/
+      (**(void (__thiscall ***)(BSFaceGenNiNode *, int))face0)(face0, 1); /*0x52324b*/
+    this->member.face0 = 0; /*0x52324d*/
   }
-  v6 = *(this + 0x76);
-  if ( v6 )
+  face1 = this->member.face1; /*0x523257*/
+  if ( face1 ) /*0x52325f*/
   {
-    if ( !v3((volatile LONG *)(v6 + 4)) )
-      (**(void (__thiscall ***)(int, int))v6)(v6, 1);
-    *(this + 0x76) = 0;
+    if ( !v3((volatile LONG *)face1 + 1) ) /*0x523265*/
+      (**(void (__thiscall ***)(BSFaceGenNiNode *, int))face1)(face1, 1); /*0x523277*/
+    this->member.face1 = 0; /*0x523279*/
   }
-  if ( !*(this + 0x75) && !*(this + 0x76) )
+  if ( !this->member.face0 && !this->member.face1 ) /*0x52328c*/
   {
-    v7 = (int *)*(this + 0x3A);
-    if ( v7 )
+    race = this->member.form.race; /*0x523295*/
+    if ( race ) /*0x52329d*/
     {
-      sub_52DED0(v7, a2, a3, (int)this, 1, 0);
-      *((_WORD *)this + 0xF0) = *(_WORD *)(*(this + 0x3A) + 0x2FC);
+      TESRace_CreateFaceGenNodes(race, outBipedNode, outSkinnedNode, this, 1, 0); /*0x5232ae*/
+      LOWORD(this->member.unk7) = this->member.form.race->unk13; /*0x5232c0*/
     }
   }
 }

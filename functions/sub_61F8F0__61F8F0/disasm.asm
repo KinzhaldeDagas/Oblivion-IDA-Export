@@ -1,11 +1,11 @@
-0x61F8F0: push    ecx
+0x61F8F0: push    ecx; Combat action choice consumes fatigue and current target state; SmartAI v0.3 only re-ranks existing targets.
 0x61F8F1: mov     eax, [esp+4+arg_1C]
 0x61F8F5: push    esi
 0x61F8F6: push    edi
 0x61F8F7: mov     esi, ecx
 0x61F8F9: mov     byte ptr [eax], 0
 0x61F8FC: mov     edi, 0FFh
-0x61F901: call    sub_6135F0
+0x61F901: call    CombatController_GetCurrentTarget
 0x61F906: test    eax, eax
 0x61F908: jz      loc_61FAB9
 0x61F90E: mov     ecx, [esi+3Ch]; this
@@ -14,8 +14,8 @@
 0x61F913: call    Actor_IsNPC
 0x61F918: test    al, al
 0x61F91A: jz      short loc_61F932
-0x61F91C: mov     ecx, [esi+3Ch]
-0x61F91F: call    Actor_IsSwimming
+0x61F91C: mov     ecx, [esi+3Ch]; this
+0x61F91F: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x61F924: test    al, al
 0x61F926: jz      short loc_61F932
 0x61F928: mov     ebp, [esp+14h+arg_18]
@@ -23,7 +23,7 @@
 0x61F930: jmp     short loc_61F98B
 0x61F932: mov     ebx, [esi+3Ch]
 0x61F935: mov     ecx, esi
-0x61F937: call    sub_6135F0
+0x61F937: call    CombatController_GetCurrentTarget
 0x61F93C: mov     ecx, [esi+3Ch]
 0x61F93F: mov     edx, [ebx]
 0x61F941: mov     ebp, eax
@@ -41,13 +41,13 @@
 0x61F967: push    eax; char
 0x61F968: push    ecx; char
 0x61F969: mov     ecx, ebx; this
-0x61F96B: call    Actor_GetFatigueFraction
+0x61F96B: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x61F970: push    ecx
 0x61F971: mov     ecx, ebx
-0x61F973: fstp    [esp+24h+var_24]; float
-0x61F976: call    sub_5E0F50
+0x61F973: fstp    [esp+24h+var_24]; Combat attack/action selection reads Actor_GetFatigueFraction before CombatStyle_RollAttackChance.
+0x61F976: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61F97B: push    eax; int
-0x61F97C: call    sub_546930
+0x61F97C: call    CombatStyle_RollAttackChance
 0x61F981: mov     ebp, [esp+28h+arg_18]
 0x61F985: add     esp, 14h
 0x61F988: mov     [ebp+0], al
@@ -57,7 +57,7 @@
 0x61F997: push    0; Seed
 0x61F999: fadd    [esp+18h+arg_8]
 0x61F99D: fstp    [esp+18h+arg_8]
-0x61F9A1: call    GetRandomLargeInteger?
+0x61F9A1: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61F9A6: cdq
 0x61F9A7: mov     ecx, 64h ; 'd'
 0x61F9AC: idiv    ecx
@@ -68,13 +68,13 @@
 0x61F9BA: fadd    qword ptr ds:0A309F0h
 0x61F9C0: fstp    [esp+14h+arg_8]
 0x61F9C4: fld     [esp+14h+arg_8]
-0x61F9C8: push    0; int
+0x61F9C8: push    0; unused
 0x61F9CA: sub     esp, 8
-0x61F9CD: fstp    [esp+20h+var_1C]; float
-0x61F9D1: mov     ecx, esi
+0x61F9CD: fstp    [esp+20h+maximumDistance]; maximumDistance
+0x61F9D1: mov     ecx, esi; this
 0x61F9D3: fld     [esp+20h+arg_4]
-0x61F9D7: fstp    [esp+20h+var_20]; float
-0x61F9DA: call    sub_613440
+0x61F9D7: fstp    [esp+20h+surfaceDistance]; surfaceDistance
+0x61F9DA: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x61F9DF: cmp     [esp+14h+arg_0], 0
 0x61F9E4: mov     bl, al
 0x61F9E6: jnz     short loc_61FA31
@@ -92,7 +92,7 @@
 0x61FA10: mov     ecx, esi
 0x61FA12: call    edx
 0x61FA14: mov     ecx, eax
-0x61FA16: call    sub_4727E0
+0x61FA16: call    ActorAnimData_GetNextTextKeySuffixChar; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with "m:" and compared with suffix 'l' to choose left/right attacks.
 0x61FA1B: xor     ecx, ecx
 0x61FA1D: cmp     al, 6Ch ; 'l'
 0x61FA1F: setnz   cl
@@ -108,10 +108,10 @@
 0x61FA31: mov     ecx, [esi+3Ch]
 0x61FA34: mov     edx, [ecx]
 0x61FA36: mov     eax, [edx+164h]
-0x61FA3C: push    3
+0x61FA3C: push    3; slot
 0x61FA3E: call    eax
-0x61FA40: mov     ecx, eax
-0x61FA42: call    ActorAnimData_GetSomethingFromField8Value
+0x61FA40: mov     ecx, eax; this
+0x61FA42: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x61FA47: cmp     eax, 2
 0x61FA4A: jnz     short loc_61FAB7
 0x61FA4C: cmp     byte ptr [ebp+0], 0
@@ -126,7 +126,7 @@
 0x61FA68: push    3; MaxCount
 0x61FA6A: call    eax
 0x61FA6C: mov     ecx, eax
-0x61FA6E: call    sub_472720
+0x61FA6E: call    ActorAnimData_FindFirstTextKeyWithPrefix; Searches the active BSAnimGroupSequence at ActorAnimData +0xA0 + 4*slot. Walks its NiTextKeyExtraData [time,string] entries and returns the zero-based index of the first case-insensitive string-prefix match; optionally writes that key's time. Returns 0xFFFFFFFF for a missing sequence/prefix, empty prefix, or no match. Observed with prefix "a:l" in combat/player attack selection.
 0x61FA73: mov     ecx, [esp+14h+arg_1C]
 0x61FA77: mov     edi, eax
 0x61FA79: sub     edi, 0FFFFFFFFh
@@ -152,7 +152,7 @@
 0x61FAA7: mov     ecx, esi
 0x61FAA9: fld     [esp+28h+arg_4]
 0x61FAAD: fstp    [esp+28h+var_28]; float
-0x61FAB0: call    sub_61E0F0
+0x61FAB0: call    CombatController_SelectPowerAttack; Selects normal/directional power attack from combat style, reach/distance, movement, and chance data.
 0x61FAB5: mov     edi, eax
 0x61FAB7: pop     ebp
 0x61FAB8: pop     ebx

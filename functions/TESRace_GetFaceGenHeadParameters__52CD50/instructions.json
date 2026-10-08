@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52CD50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x52CD7D",
-    "line": "mov     esi, [esp+2Ch+arg_0]",
+    "line": "mov     esi, [esp+2Ch+npc]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x52CD85",
-    "line": "mov     ebp, [esp+2Ch+arg_4]",
+    "line": "mov     ebp, [esp+2Ch+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52CD89",
-    "line": "push    ebp",
+    "line": "push    ebp; outAbsolute",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52CD8A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52CD8C",
-    "line": "call    sub_5221C0",
+    "line": "call    TESNPC_BuildAbsoluteFaceGenParameters; NPC path: build absolute FaceGen coefficients from race bases plus NPC offsets into outState->parameters.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x52CD97",
-    "line": "mov     [ebp+60h], eax",
+    "line": "mov     [ebp+60h], eax; Copy the NPC hair selection into the render state.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x52CDAA",
-    "line": "fstp    dword ptr [ebp+68h]",
+    "line": "fstp    dword ptr [ebp+68h]; Copy TESNPC hairLength (+0x1CC) into FaceGenRenderState::hairLength (+0x68).",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x52CDB3",
-    "line": "mov     [ebp+64h], eax",
+    "line": "mov     [ebp+64h], eax; Pack the NPC hair RGB bytes into render-state hairColorRGB.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x52CDBC",
-    "line": "mov     [ebp+6Ch], eax",
+    "line": "mov     [ebp+6Ch], eax; Copy the NPC eye selection into the render state.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x52CDC4",
-    "line": "mov     [ebp+70h], eax",
+    "line": "mov     [ebp+70h], eax; Record NPC sex for sex-specific head parts, age textures, and later shading.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -253,37 +253,37 @@
   },
   {
     "ea": "0x52CDE1",
-    "line": "call    sub_5538D0",
+    "line": "call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52CDE6",
-    "line": "mov     ecx, [esp+2Ch+arg_4]",
+    "line": "mov     ecx, [esp+2Ch+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52CDEA",
-    "line": "push    ecx",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52CDEB",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52CDEC",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52CDF1",
-    "line": "mov     ebp, [esp+34h+arg_4]",
+    "line": "mov     ebp, [esp+34h+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -318,14 +318,8 @@
     "size": 2
   },
   {
-    "ea": "0x52CE0A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x52CE10",
-    "line": "mov     ebp, [esp+2Ch+arg_4]",
+    "line": "mov     ebp, [esp+2Ch+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +349,7 @@
   },
   {
     "ea": "0x52CE1F",
-    "line": "call    sub_52BC50",
+    "line": "call    sub_52BC50; Begin resolving the nine FaceGen head-part model slots.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +565,7 @@
   },
   {
     "ea": "0x52CE8C",
-    "line": "mov     [eax+esi*4], edi",
+    "line": "mov     [eax+esi*4], edi; Append the resolved model for this head-part slot to headModels.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -769,13 +763,13 @@
   },
   {
     "ea": "0x52CEF0",
-    "line": "mov     [ecx+esi*4], edi",
+    "line": "mov     [ecx+esi*4], edi; Append the resolved texture for this head-part slot to headTextures.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x52CEF3",
-    "line": "mov     edi, [esp+2Ch+arg_4]",
+    "line": "mov     edi, [esp+2Ch+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -967,7 +961,7 @@
   },
   {
     "ea": "0x52CF61",
-    "line": "mov     ecx, [esp+2Ch+arg_0]",
+    "line": "mov     ecx, [esp+2Ch+npc]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -985,7 +979,7 @@
   },
   {
     "ea": "0x52CF6A",
-    "line": "mov     [edx+esi*4], ebp",
+    "line": "mov     [edx+esi*4], ebp; Append the engine's canonical node name for this head-part slot to nodeNames.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x52CF8D",
-    "line": "mov     esi, [esp+2Ch+arg_4]",
+    "line": "mov     esi, [esp+2Ch+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1099,19 +1093,19 @@
   },
   {
     "ea": "0x52CFB7",
-    "line": "push    ecx",
+    "line": "push    ecx; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52CFB8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52CFBA",
-    "line": "call    sub_523B10",
+    "line": "call    NiTObjectArray_Resize16",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1129,7 @@
   },
   {
     "ea": "0x52CFC3",
-    "line": "call    sub_5254D0",
+    "line": "call    sub_5254D0; When enabled, append this head part's NiTexture override; ApplyHeadParameters consumes the parallel override array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1267,7 @@
   },
   {
     "ea": "0x52D00A",
-    "line": "mov     ebx, [esp+2Ch+arg_4]",
+    "line": "mov     ebx, [esp+2Ch+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1291,7 +1285,7 @@
   },
   {
     "ea": "0x52D018",
-    "line": "mov     [ebx+0B4h], cl",
+    "line": "mov     [ebx+0B4h], cl; Persist whether textureOverrides is populated and should supersede model texture paths.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1543,13 +1537,13 @@
   },
   {
     "ea": "0x52D0A7",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52D0A8",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch; Missing-eye fallback uses Characters\\\\Eyes\\\\EyeDefault.dds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1654,5 +1648,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D6B00",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B03",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B08",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D6B0C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B0F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6B12",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6B14",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B19",
+    "line": "mov     eax, offset stru_AFE864",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6B1E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

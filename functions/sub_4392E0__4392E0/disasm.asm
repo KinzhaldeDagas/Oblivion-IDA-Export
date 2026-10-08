@@ -14,9 +14,9 @@
 0x4392FC: mov     eax, [ecx+esi*4]
 0x4392FF: test    eax, eax
 0x439301: jz      short loc_43930F
-0x439303: mov     ecx, ioManager
-0x439309: push    eax
-0x43930A: call    sub_432130
+0x439303: mov     ecx, ds:0B33A10h
+0x439309: push    eax; task
+0x43930A: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
 0x43930F: add     esi, 1
 0x439312: cmp     esi, ebx
 0x439314: jb      short loc_4392F6

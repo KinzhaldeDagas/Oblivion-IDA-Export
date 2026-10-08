@@ -1,6 +1,6 @@
 BOOL __thiscall sub_595300(_DWORD *this)
 {
-  return *(this + 0xA)
+  return *(this + 0xA) /*0x595347*/
       && *(this + 0xB)
       && *(this + 0xC)
       && *(this + 0xD)

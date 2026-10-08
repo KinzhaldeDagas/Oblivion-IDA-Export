@@ -16,7 +16,7 @@
 0x50D486: push    eax; a2
 0x50D487: push    ecx; a1
 0x50D488: mov     dword ptr [esp+24h+var_4], 0
-0x50D490: call    Script_ExtractArgs
+0x50D490: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50D495: add     esp, 20h
 0x50D498: test    al, al
 0x50D49A: jnz     short loc_50D49E
@@ -25,7 +25,7 @@
 0x50D49E: cmp     dword ptr [esp+4+var_4], 0
 0x50D4A2: mov     eax, ds:0B333C4h
 0x50D4A7: setnz   dl
-0x50D4AA: mov     [eax+5A9h], dl
+0x50D4AA: mov     [eax+5A9h], dl; EnableFastTravel script command writes PlayerCharacter+0x5A9 (BYTE1 unk5A8). PlayerCharacter_CanStartFastTravel requires this byte nonzero.
 0x50D4B0: mov     al, 1
 0x50D4B2: pop     ecx
 0x50D4B3: retn

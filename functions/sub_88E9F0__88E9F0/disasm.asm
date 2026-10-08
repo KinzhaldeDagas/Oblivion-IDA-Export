@@ -8,29 +8,29 @@
 0x88E9FE: call    sub_88EDC0
 0x88EA03: lea     esi, [ebx+28h]
 0x88EA06: mov     ecx, 9
-0x88EA0B: lea     edi, [esp+78h+var_6C]
+0x88EA0B: lea     edi, [esp+78h+right]
 0x88EA0F: rep movsd
 0x88EA11: mov     ecx, ebx
-0x88EA13: call    sub_452A60
+0x88EA13: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x88EA18: mov     ecx, ebx
 0x88EA1A: mov     esi, eax
-0x88EA1C: call    sub_452A60
+0x88EA1C: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x88EA21: mov     eax, [eax+1Ch]
-0x88EA24: lea     ecx, [esp+78h+var_6C]
-0x88EA28: push    ecx
+0x88EA24: lea     ecx, [esp+78h+right]
+0x88EA28: push    ecx; right
 0x88EA29: lea     edx, [esp+7Ch+var_48]
-0x88EA2D: push    edx
+0x88EA2D: push    edx; out
 0x88EA2E: add     esi, 30h ; '0'
-0x88EA31: push    esi
-0x88EA32: lea     ecx, [esp+84h+var_24]
-0x88EA36: push    ecx
-0x88EA37: lea     ecx, [eax+64h]
-0x88EA3A: call    NiMAtrix33_Multiply
-0x88EA3F: mov     ecx, eax
-0x88EA41: call    NiMAtrix33_Multiply
+0x88EA31: push    esi; right
+0x88EA32: lea     ecx, [esp+84h+out]
+0x88EA36: push    ecx; out
+0x88EA37: lea     ecx, [eax+64h]; this
+0x88EA3A: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
+0x88EA3F: mov     ecx, eax; this
+0x88EA41: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x88EA46: mov     ecx, ebx
 0x88EA48: mov     esi, eax
-0x88EA4A: call    sub_452A60
+0x88EA4A: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x88EA4F: lea     edi, [eax+64h]
 0x88EA52: mov     ecx, 9
 0x88EA57: rep movsd

@@ -1,4 +1,4 @@
-0x55F550: push    0FFFFFFFFh
+0x55F550: push    0FFFFFFFFh; Verified manager teardown: clears the form/seed model cache and pending reference-node map, releases default render properties and canopy resources. This is lifecycle teardown, not per-cell DistantLOD cleanup.
 0x55F552: push    offset SEH_55F550
 0x55F557: mov     eax, large fs:0
 0x55F55D: push    eax
@@ -13,9 +13,9 @@
 0x55F570: mov     large fs:0, eax
 0x55F576: mov     edi, ecx
 0x55F578: mov     [esp+24h+var_10], edi
-0x55F57C: push    0
+0x55F57C: push    0; unusedModelsOnly
 0x55F57E: mov     [esp+28h+var_4], 5
-0x55F586: call    sub_55E390
+0x55F586: call    BSTreeManager_ClearModelCache; Verified cache maintenance: with unusedModelsOnly=true removes tree-form/seed model entries whose model is null or only map-owned; false releases and clears every model cache entry. Called during TES destruction and BSTreeManager destruction.
 0x55F58B: mov     eax, ds:0B43108h
 0x55F590: mov     ebp, ds:0A2807Ch
 0x55F596: add     esp, 4
@@ -59,17 +59,17 @@
 0x55F600: push    1; a2
 0x55F602: mov     ecx, esi; this
 0x55F604: mov     dword ptr [esi], offset ??_7?$LockFreeMap@PAVTESObjectREFR@@PAVBSTreeNode@@@@6B@; const LockFreeMap<TESObjectREFR *,BSTreeNode *>::`vftable'
-0x55F60A: call    sub_55F3C0
+0x55F60A: call    sub_55F3C0; LockFreeMap teardown/clear: drains thread-local manager and all buckets; callback vtable slot +0x20 releases keys before freeing nodes.
 0x55F60F: mov     eax, [esi+0Ch]
 0x55F612: push    eax
-0x55F613: call    FormHeapFree
+0x55F613: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55F618: mov     ecx, [esi+4]
 0x55F61B: mov     dword ptr [esp+28h+var_14], ecx
 0x55F61F: mov     edx, dword ptr [esp+28h+var_14]
 0x55F623: push    edx
-0x55F624: call    FormHeapFree
+0x55F624: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55F629: push    esi
-0x55F62A: call    FormHeapFree
+0x55F62A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x55F62F: add     esp, 0Ch
 0x55F632: mov     esi, [edi+18h]
 0x55F635: test    esi, esi
@@ -175,3 +175,28 @@
 0x55F71B: pop     ebp
 0x55F71C: add     esp, 14h
 0x55F71F: retn
+0x9BCC50: mov     ecx, [ebp-10h]
+0x9BCC53: add     ecx, 4; slot
+0x9BCC56: jmp     NiPointerSlot_Release
+0x9BCC5B: mov     ecx, [ebp-10h]
+0x9BCC5E: add     ecx, 8; slot
+0x9BCC61: jmp     NiPointerSlot_Release
+0x9BCC66: mov     ecx, [ebp-10h]
+0x9BCC69: add     ecx, 0Ch; slot
+0x9BCC6C: jmp     NiPointerSlot_Release
+0x9BCC71: mov     ecx, [ebp-10h]
+0x9BCC74: add     ecx, 10h; slot
+0x9BCC77: jmp     NiPointerSlot_Release
+0x9BCC7C: mov     ecx, [ebp-10h]
+0x9BCC7F: add     ecx, 14h; slot
+0x9BCC82: jmp     NiPointerSlot_Release
+0x9BCC87: mov     ecx, [ebp-10h]
+0x9BCC8A: add     ecx, 18h; slot
+0x9BCC8D: jmp     NiPointerSlot_Release
+0x9BCC92: mov     edx, [esp+arg_4]
+0x9BCC96: lea     eax, [edx-14h]
+0x9BCC99: mov     ecx, [edx-18h]
+0x9BCC9C: xor     ecx, eax
+0x9BCC9E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BCCA3: mov     eax, offset stru_AE67A4
+0x9BCCA8: jmp     ___CxxFrameHandler3

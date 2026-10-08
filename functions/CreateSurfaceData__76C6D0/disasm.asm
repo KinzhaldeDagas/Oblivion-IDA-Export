@@ -10,7 +10,7 @@
 0x76C6E8: mov     eax, [esp+4+a1]
 0x76C6EC: push    esi; a2
 0x76C6ED: push    eax; a1
-0x76C6EE: call    D3DFMTToTextureFormat
+0x76C6EE: call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
 0x76C6F3: add     esp, 8
 0x76C6F6: mov     eax, esi
 0x76C6F8: pop     esi
@@ -19,7 +19,7 @@
 0x76C6FE: xor     esi, esi
 0x76C700: push    esi; a2
 0x76C701: push    eax; a1
-0x76C702: call    D3DFMTToTextureFormat
+0x76C702: call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
 0x76C707: add     esp, 8
 0x76C70A: mov     eax, esi
 0x76C70C: pop     esi

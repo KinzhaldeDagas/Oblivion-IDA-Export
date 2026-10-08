@@ -1,4 +1,4 @@
-BSStringT *sub_A0DC10()
+NiRTTI *sub_A0DC10()
 {
-  return sub_70E220((BSStringT *)dword_B4140C, "NiPSysFieldMagnitudeCtlr", (int)dword_B41F8C);
+  return NiRTTI_Constructor(&stru_B4140C, "NiPSysFieldMagnitudeCtlr", &stru_B41F8C); /*0xa0dc24*/
 }

@@ -15,7 +15,7 @@
 0x652A47: jz      short loc_652AC7
 0x652A49: fld     dword ptr ds:0A30634h
 0x652A4F: push    ecx
-0x652A50: fstp    [esp+50h+var_50]; float
+0x652A50: fstp    [esp+50h+angleZ]; float
 0x652A53: push    0; char
 0x652A55: push    esi; int
 0x652A56: mov     ecx, ebx
@@ -66,9 +66,9 @@
 0x652ACC: push    eax
 0x652ACD: mov     ecx, ebx
 0x652ACF: call    sub_566B30
-0x652AD4: push    eax
-0x652AD5: mov     ecx, esi
-0x652AD7: call    sub_4D7E30
+0x652AD4: push    eax; pointXYZ
+0x652AD5: mov     ecx, esi; this
+0x652AD7: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x652ADC: fstp    dword ptr [esp+4Ch+var_3C]
 0x652AE0: push    1
 0x652AE2: push    esi
@@ -158,7 +158,7 @@
 0x652BF2: fldz
 0x652BF4: push    ecx
 0x652BF5: lea     ebx, [edi+128h]
-0x652BFB: fstp    [esp+50h+var_50]; float
+0x652BFB: fstp    [esp+50h+angleZ]; float
 0x652BFE: mov     ecx, ebx
 0x652C00: mov     dword ptr [edi+120h], 0
 0x652C0A: call    sub_6FAEE0
@@ -178,7 +178,7 @@
 0x652C43: jmp     loc_6534FB
 0x652C48: fld     dword ptr ds:0A30634h
 0x652C4E: push    ecx
-0x652C4F: fstp    [esp+50h+var_50]; float
+0x652C4F: fstp    [esp+50h+angleZ]; float
 0x652C52: push    0; char
 0x652C54: push    esi; int
 0x652C55: mov     ecx, ebx
@@ -291,7 +291,7 @@
 0x652DA4: mov     eax, [ebx+18h]
 0x652DA7: mov     ebp, [edi]
 0x652DA9: push    eax
-0x652DAA: call    sub_673980
+0x652DAA: call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x652DAF: sub     eax, 1
 0x652DB2: add     esp, 4
 0x652DB5: push    eax
@@ -327,7 +327,7 @@
 0x652E19: lea     ecx, [edi+0D4h]
 0x652E1F: call    sub_4121A0
 0x652E24: mov     ecx, eax
-0x652E26: call    sub_404C90
+0x652E26: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x652E2B: fstp    [esp+4Ch+arg_8]
 0x652E2F: mov     ecx, offset flt_B36A88
 0x652E34: call    GameSetting_GetSafeFloatPointer
@@ -356,7 +356,7 @@
 0x652E7F: call    TESObjectREFR_GetWorldSpace
 0x652E84: push    eax
 0x652E85: mov     ecx, ebp; this
-0x652E87: call    TESObjectREFR_GetParentCell
+0x652E87: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x652E8C: mov     ecx, [esp+50h+arg_8]
 0x652E90: mov     edx, [ecx]
 0x652E92: push    eax
@@ -385,9 +385,9 @@
 0x652EDB: mov     eax, [eax+8]
 0x652EDE: mov     [edi+0DCh], eax
 0x652EE4: push    3Ah ; ':'; a1
-0x652EE6: call    TESForm_LookupByFormID
+0x652EE6: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x652EEB: add     esp, 4
-0x652EEE: mov     ecx, offset TimeGlobals
+0x652EEE: mov     ecx, 0B332E0h
 0x652EF3: mov     ebp, eax
 0x652EF5: call    TimeGlobals_GetGameHour
 0x652EFA: fstp    [esp+4Ch+arg_8]
@@ -416,7 +416,7 @@
 0x652F47: fstp    [esp+54h+arg_8]
 0x652F4B: call    sub_5677B0
 0x652F50: sub     esp, 8
-0x652F53: fstp    [esp+54h+var_50]
+0x652F53: fstp    [esp+54h+angleZ]
 0x652F57: mov     ecx, ebx
 0x652F59: fld     [esp+54h+arg_8]
 0x652F5D: fdivr   qword ptr ds:0A2F938h
@@ -457,7 +457,7 @@
 0x652FBB: fld     dword ptr ds:0A5B6C0h
 0x652FC1: mov     edx, [eax+174h]
 0x652FC7: push    esi; a7
-0x652FC8: push    offset sub_645A30; a6
+0x652FC8: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6
 0x652FCD: push    ecx
 0x652FCE: mov     ecx, esi
 0x652FD0: fstp    [esp+58h+a5]; a5
@@ -472,7 +472,7 @@
 0x652FEA: call    edx
 0x652FEC: push    eax; a2
 0x652FED: mov     ecx, esi; this
-0x652FEF: call    TESObjectREFR_GetParentCell
+0x652FEF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x652FF4: mov     ecx, ds:0B33A98h
 0x652FFA: push    eax; a1
 0x652FFB: call    sub_446B90
@@ -485,7 +485,7 @@
 0x653014: fld     dword ptr ds:0A5B6C0h
 0x65301A: mov     edx, [eax+174h]
 0x653020: push    esi; a7
-0x653021: push    offset sub_645AF0; a6
+0x653021: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x653026: push    ecx
 0x653027: mov     ecx, esi
 0x653029: fstp    [esp+58h+a5]; a5
@@ -500,7 +500,7 @@
 0x653043: call    edx
 0x653045: push    eax; a2
 0x653046: mov     ecx, esi; this
-0x653048: call    TESObjectREFR_GetParentCell
+0x653048: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65304D: mov     ecx, ds:0B33A98h
 0x653053: push    eax; a1
 0x653054: call    sub_446B90
@@ -621,7 +621,7 @@
 0x6531D6: fdiv    qword ptr ds:0A2FC70h
 0x6531DC: fstp    [esp+50h+arg_0]
 0x6531E0: fld     [esp+50h+arg_0]
-0x6531E4: fstp    [esp+50h+var_50]
+0x6531E4: fstp    [esp+50h+angleZ]
 0x6531E7: call    edx
 0x6531E9: movzx   eax, byte ptr [ebp+0Eh]
 0x6531ED: mov     edx, [esi]
@@ -631,7 +631,7 @@
 0x6531FB: call    eax
 0x6531FD: push    ecx
 0x6531FE: mov     ecx, [esp+50h+arg_0]
-0x653202: fstp    [esp+50h+var_50]; float
+0x653202: fstp    [esp+50h+angleZ]; float
 0x653205: push    ecx; int
 0x653206: mov     ecx, [esp+54h+arg_8]
 0x65320A: lea     edx, [esp+54h+var_3C]
@@ -640,13 +640,13 @@
 0x653214: movzx   eax, word ptr [ebp+0Ch]
 0x653218: mov     [esp+4Ch+arg_0], eax
 0x65321C: push    ecx
-0x65321D: lea     ecx, [esp+50h+var_24]
+0x65321D: lea     ecx, [esp+50h+var_24]; this
 0x653221: fild    [esp+50h+arg_0]
 0x653225: fdiv    qword ptr ds:0A2FC70h
 0x65322B: fstp    [esp+50h+arg_0]
 0x65322F: fld     [esp+50h+arg_0]
-0x653233: fstp    [esp+50h+var_50]; float
-0x653236: call    NiMatrix33_InitRotationTransform
+0x653233: fstp    [esp+50h+angleZ]; angleZ
+0x653236: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x65323B: lea     ecx, [esp+4Ch+var_3C]
 0x65323F: push    ecx
 0x653240: lea     edx, [esp+50h+var_30]
@@ -685,7 +685,7 @@
 0x6532B0: call    sub_4AEBE0
 0x6532B5: push    ecx
 0x6532B6: mov     ecx, esi
-0x6532B8: fstp    [esp+50h+var_50]; float
+0x6532B8: fstp    [esp+50h+angleZ]; float
 0x6532BB: call    sub_659B90
 0x6532C0: cmp     byte ptr [ebx+20h], 4
 0x6532C4: mov     byte ptr [esp+4Ch+arg_8], 0
@@ -878,7 +878,7 @@
 0x6534BD: mov     edx, [eax+1E8h]
 0x6534C3: push    ecx
 0x6534C4: mov     ecx, esi
-0x6534C6: fstp    [esp+50h+var_50]
+0x6534C6: fstp    [esp+50h+angleZ]
 0x6534C9: call    edx
 0x6534CB: mov     eax, [edi]
 0x6534CD: mov     edx, [eax+194h]

@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x42AD70",
+      "0x42ADA1"
+    ]
+  ],
+  "chunks_sha256": "9b0c333eebaccedebadb6de1de8733a9f899d63dc6e6548b123a269fa9facbe9",
+  "comment_regular": "Verified ExtraLock destructor: frees the ExtraLockData* payload at +0x0C before optionally freeing the 16-byte wrapper.",
+  "comment_repeatable": "Verified ExtraLock destructor: frees the ExtraLockData* payload at +0x0C before optionally freeing the 16-byte wrapper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "ExtraLock::`scalar deleting destructor'(uint)",
   "end_ea": "0x42ADA1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??_GExtraLock@@UAEPAXI@Z",
   "segment": ".text",
   "sha256": "9b0c333eebaccedebadb6de1de8733a9f899d63dc6e6548b123a269fa9facbe9",
   "size": 49,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42AD70",
+  "total_chunk_size": 49,
   "type": "ExtraLock *__thiscall(ExtraLock *this, char)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1

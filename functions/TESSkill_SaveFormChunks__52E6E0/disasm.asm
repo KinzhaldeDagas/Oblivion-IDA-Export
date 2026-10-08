@@ -1,4 +1,4 @@
-0x52E6E0: push    esi
+0x52E6E0: push    esi; Oblivion SKIL save: DATA is exactly 0x14 bytes = actorValue, governingAttribute, specialization, useValue0, useValue1. Major membership is not stored here; TESClass owns seven major-skill AVs.
 0x52E6E1: push    edi
 0x52E6E2: mov     esi, ecx
 0x52E6E4: call    TESForm_InitializeFormRecord
@@ -6,14 +6,14 @@
 0x52E6EB: lea     edi, [esi+2Ch]
 0x52E6EE: push    edi; Src
 0x52E6EF: push    58444E49h; int
-0x52E6F4: call    TESForm_PutFormRecordChunkData
+0x52E6F4: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x52E6F9: add     esp, 0Ch
 0x52E6FC: lea     ecx, [esi+18h]
 0x52E6FF: call    TESDescription_Save
 0x52E704: push    4E4F4349h
 0x52E709: lea     ecx, [esi+20h]
 0x52E70C: call    TESTexture_Save
-0x52E711: push    14h; Size
+0x52E711: push    14h; Persist the fixed five-dword SKIL DATA payload: actorValue, governingAttribute, specialization, and two skill-specific use values.
 0x52E713: push    edi; Src
 0x52E714: mov     ecx, esi; this
 0x52E716: call    TESForm_SaveGenericComponents

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59E2B0",
-    "line": "push    ecx",
+    "line": "push    ecx; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x59E2D7",
-    "line": "fstp    [esp+10h+a2]; a3",
+    "line": "fstp    [esp+10h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E2DA",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E2DF",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x59E2EC",
-    "line": "fstp    [esp+10h+a2]; a3",
+    "line": "fstp    [esp+10h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E2EF",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E2F4",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x59E313",
-    "line": "fstp    [esp+10h+a2]; a3",
+    "line": "fstp    [esp+10h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E316",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E31B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x59E332",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59E334",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x59E385",
-    "line": "fstp    [esp+14h+var_14]; a3",
+    "line": "fstp    [esp+14h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E388",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E38D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x59E3BD",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x59E3C0",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x59E3CD",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59E3CF",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59E3D1",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,13 +577,13 @@
   },
   {
     "ea": "0x59E3E3",
-    "line": "push    0",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59E3E5",
-    "line": "push    eax",
+    "line": "push    eax; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -601,25 +601,25 @@
   },
   {
     "ea": "0x59E3EF",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59E3F0",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59E3F1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59E3F3",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,19 +697,19 @@
   },
   {
     "ea": "0x59E41E",
-    "line": "fstp    [esp+14h+var_14]; a3",
+    "line": "fstp    [esp+14h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E421",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E426",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,19 +787,19 @@
   },
   {
     "ea": "0x59E453",
-    "line": "fstp    [esp+14h+var_14]; a3",
+    "line": "fstp    [esp+14h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E456",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E45B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,19 +871,19 @@
   },
   {
     "ea": "0x59E484",
-    "line": "fstp    [esp+14h+var_14]; a3",
+    "line": "fstp    [esp+14h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E487",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E48C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,19 +985,19 @@
   },
   {
     "ea": "0x59E4C6",
-    "line": "fstp    [esp+14h+var_14]; a3",
+    "line": "fstp    [esp+14h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59E4C9",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59E4CE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

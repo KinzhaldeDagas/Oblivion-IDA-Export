@@ -22,52 +22,52 @@ int __thiscall sub_8DFFB0(struct _RTL_CRITICAL_SECTION *this, _DWORD *a2, int a3
   int v25; // [esp+58h] [ebp-20h]
   int v26; // [esp+5Ch] [ebp-1Ch]
 
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v5 = TlsIndex;
-  v6 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) )
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8dffb5*/
+  v5 = MEMORY[0xBA9DE4]; /*0x8dffbe*/
+  v6 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8dffc4*/
+  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) ) /*0x8dffd8*/
   {
-    v8 = ThreadLocalStoragePointer[TlsIndex];
-    v9 = *(_DWORD **)(v6 + 0x1A4);
-    *v9 = "TtSimulate";
-    v10 = __rdtsc();
-    v9[1] = v10;
-    *(_DWORD *)(v8 + 0x1A4) = v9 + 3;
+    v8 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8dffda*/
+    v9 = *(_DWORD **)(v6 + 0x1A4); /*0x8dffdc*/
+    *v9 = "TtSimulate"; /*0x8dffe2*/
+    v10 = __rdtsc(); /*0x8dffe8*/
+    v9[1] = v10; /*0x8dfff2*/
+    *(_DWORD *)(v8 + 0x1A4) = v9 + 3; /*0x8dfff8*/
   }
-  sub_8A7720((LPCRITICAL_SECTION)this + 6);
-  v11 = *((_DWORD *)this + 0x24) + 1;
-  *((_DWORD *)this + 0x24) = v11;
-  if ( v11 == 1 )
+  sub_8A7720((LPCRITICAL_SECTION)this + 6); /*0x8e0006*/
+  v11 = *((_DWORD *)this + 0x24) + 1; /*0x8e0012*/
+  *((_DWORD *)this + 0x24) = v11; /*0x8e0017*/
+  if ( v11 == 1 ) /*0x8e001d*/
   {
-    sub_8DFB70(*(float *)&this, (int)this, v5, (int)(this + 8), (int)a2, a3, a4);
+    sub_8DFB70((int)this, (int)this, v5, (int)(this + 8), (int)a2, a3, a4); /*0x8e0036*/
   }
   else
   {
-    LeaveCriticalSection((LPCRITICAL_SECTION)this + 6);
-    v12 = (const void *)a2[0x1D];
-    v13 = a2[0x9A];
-    v20[0] = (int)a2;
-    v20[1] = (int)this;
-    v20[2] = 1;
-    qmemcpy(v21, v12, sizeof(v21));
-    v22 = a2[0x99];
-    v26 = a2[0x9C];
-    v23 = v13;
-    v14 = a2[0x5B];
-    v24 = a2[0x5A];
-    v25 = v14;
-    sub_8DF6B0(this, v20);
-    v5 = TlsIndex;
+    LeaveCriticalSection((LPCRITICAL_SECTION)this + 6); /*0x8e003e*/
+    v12 = (const void *)a2[0x1D]; /*0x8e0048*/
+    v13 = a2[0x9A]; /*0x8e004b*/
+    v20[0] = (int)a2; /*0x8e0051*/
+    v20[1] = (int)this; /*0x8e0055*/
+    v20[2] = 1; /*0x8e0059*/
+    qmemcpy(v21, v12, sizeof(v21)); /*0x8e006a*/
+    v22 = a2[0x99]; /*0x8e0072*/
+    v26 = a2[0x9C]; /*0x8e007c*/
+    v23 = v13; /*0x8e0080*/
+    v14 = a2[0x5B]; /*0x8e008a*/
+    v24 = a2[0x5A]; /*0x8e0097*/
+    v25 = v14; /*0x8e009b*/
+    sub_8DF6B0(this, v20); /*0x8e009f*/
+    v5 = MEMORY[0xBA9DE4]; /*0x8e00a4*/
   }
-  v15 = ThreadLocalStoragePointer[v5];
-  if ( *(_DWORD *)(v15 + 0x1A4) < *(_DWORD *)(v15 + 0x1A8) )
+  v15 = ThreadLocalStoragePointer[v5]; /*0x8e00aa*/
+  if ( *(_DWORD *)(v15 + 0x1A4) < *(_DWORD *)(v15 + 0x1A8) ) /*0x8e00ba*/
   {
-    v16 = ThreadLocalStoragePointer[v5];
-    v17 = *(_DWORD **)(v15 + 0x1A4);
-    *v17 = "Et";
-    v18 = __rdtsc();
-    v17[1] = v18;
-    *(_DWORD *)(v16 + 0x1A4) = v17 + 3;
+    v16 = ThreadLocalStoragePointer[v5]; /*0x8e00bc*/
+    v17 = *(_DWORD **)(v15 + 0x1A4); /*0x8e00be*/
+    *v17 = "Et"; /*0x8e00c4*/
+    v18 = __rdtsc(); /*0x8e00ca*/
+    v17[1] = v18; /*0x8e00d4*/
+    *(_DWORD *)(v16 + 0x1A4) = v17 + 3; /*0x8e00da*/
   }
-  return 0;
+  return 0; /*0x8e00e0*/
 }

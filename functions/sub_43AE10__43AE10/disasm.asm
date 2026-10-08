@@ -1,4 +1,4 @@
-0x43AE10: sub     esp, 24h
+0x43AE10: sub     esp, 24h; Verified shared queued-reference callback: the same implementation appears in QueuedReference, QueuedTree, QueuedCharacter, QueuedCreature, and QueuedPlayer vtables. It stores the generated NiNode on the reference, refreshes/attaches its 3D, then sets bit 0x80000; off-main-thread calls enqueue AttachDistant3DTask. Fallout's named QueuedReference::AttachDistant3D follows the same flow and calls TESObjectREFR::SetHasTemp3D.
 0x43AE13: push    ebx
 0x43AE14: mov     ebx, ecx
 0x43AE16: mov     ecx, [ebx+20h]
@@ -9,7 +9,7 @@
 0x43AE23: push    edi
 0x43AE24: call    edx
 0x43AE26: mov     ecx, [eax]
-0x43AE28: mov     ebp, [esp+34h+arg_0]
+0x43AE28: mov     ebp, [esp+34h+node]
 0x43AE2C: mov     [ebp+54h], ecx
 0x43AE2F: mov     edx, [eax+4]
 0x43AE32: mov     [ebp+58h], edx
@@ -28,29 +28,29 @@
 0x43AE59: mov     eax, [edx+0ECh]
 0x43AE5F: call    eax
 0x43AE61: fabs
-0x43AE63: fstp    [esp+34h+arg_0]
-0x43AE67: fld     [esp+34h+arg_0]
+0x43AE63: fstp    [esp+34h+node]
+0x43AE67: fld     [esp+34h+node]
 0x43AE6B: fstp    dword ptr [ebp+60h]
-0x43AE6E: mov     ecx, OSGlobals
+0x43AE6E: mov     ecx, ds:0B33398h
 0x43AE74: mov     esi, [ecx+10h]
 0x43AE77: call    ds:GetCurrentThreadId
 0x43AE7D: cmp     esi, eax
 0x43AE7F: jnz     short loc_43AEBA
-0x43AE81: mov     ecx, [ebx+20h]
-0x43AE84: push    ebp
-0x43AE85: call    sub_4D7D10
+0x43AE81: mov     ecx, [ebx+20h]; this
+0x43AE84: push    ebp; node
+0x43AE85: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
 0x43AE8A: mov     ecx, [ebx+20h]; this
 0x43AE8D: push    0; a8
 0x43AE8F: push    0; a7
-0x43AE91: call    TESObjectREFR_GetParentCell
+0x43AE91: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x43AE96: mov     edx, [ebx+20h]
-0x43AE99: mov     ecx, TES; ecx0
+0x43AE99: mov     ecx, ds:0B333A0h; ecx0
 0x43AE9F: push    eax; a6
 0x43AEA0: push    edx; a1
 0x43AEA1: call    sub_441EF0
-0x43AEA6: mov     ecx, [ebx+20h]
-0x43AEA9: push    1
-0x43AEAB: call    sub_4D7010
+0x43AEA6: mov     ecx, [ebx+20h]; this
+0x43AEA9: push    1; enabled
+0x43AEAB: call    TESObjectREFR_SetTemp3DFlag; Verified: after assigning the generated NiNode and refreshing cell attachment, the shared QueuedReference_AttachDistant3D callback sets bit 0x80000. Probable role is HasTemp3D, matching Fallout's named setter.
 0x43AEB0: pop     edi
 0x43AEB1: pop     esi
 0x43AEB2: pop     ebp
@@ -68,8 +68,8 @@
 0x43AECF: mov     ecx, esi; this
 0x43AED1: call    sub_436500
 0x43AED6: mov     dword ptr [esi], offset ??_7AttachDistant3DTask@@6B@; const AttachDistant3DTask::`vftable'
-0x43AEDC: mov     [esi+18h], edi
-0x43AEDF: mov     [esi+1Ch], ebp
+0x43AEDC: mov     [esi+18h], edi; Verified AttachDistant3DTask layout: constructor stores the TESObjectREFR at task+0x18 and the generated NiNode at task+0x1C; Run transfers this node to the reference on the main thread.
+0x43AEDF: mov     [esi+1Ch], ebp; Verified: task+0x1C holds the AddRef'd NiNode awaiting main-thread assignment to TESObjectREFR.niNode.
 0x43AEE2: add     ebp, 4
 0x43AEE5: push    ebp; lpAddend
 0x43AEE6: call    ds:InterlockedIncrement
@@ -81,10 +81,10 @@
 0x43AEF6: call    sub_4BCB70
 0x43AEFB: mov     eax, [ebx]
 0x43AEFD: test    eax, eax
-0x43AEFF: mov     esi, ModelLoaderPtr
+0x43AEFF: mov     esi, ds:0B33A1Ch
 0x43AF05: push    ecx
 0x43AF06: mov     ecx, esp
-0x43AF08: mov     [esp+38h+arg_0], esp
+0x43AF08: mov     [esp+38h+node], esp
 0x43AF0C: mov     [ecx], eax
 0x43AF0E: jz      short loc_43AF1A
 0x43AF10: add     eax, 8

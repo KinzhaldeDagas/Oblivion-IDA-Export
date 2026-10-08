@@ -10,19 +10,19 @@ void __userpurge sub_5AE140(
   double v9; // st7
   double v11; // [esp+8h] [ebp-8h]
 
-  _EDI = InterfaceManager_GetSingleton(0, 1);
-  sub_57D7F0();
-  __asm { fstp    [esp+10h+var_8] }
-  v9 = sub_57D7F0();
-  __asm
+  _EDI = InterfaceManager_GetSingleton(0, 1); /*0x5ae153*/
+  UI_GetVirtualScreenHeight(); /*0x5ae155*/
+  __asm { fstp    [esp+10h+var_8] } /*0x5ae15a*/
+  v9 = UI_GetVirtualScreenHeight(); /*0x5ae15e*/
+  __asm /*0x5ae163*/
   {
     fmul    qword ptr ds:0A2FAA0h
     fadd    dword ptr [edi+28h]
     fsubr   [esp+10h+var_8]
   }
-  LODWORD(v11) = Double_To_SInt32(v9);
-  sub_588CF0(*(_DWORD **)(a1 + 0x38));
-  __asm { fisub   dword ptr [esp+10h+var_8] }
+  LODWORD(v11) = Double_To_SInt32(v9); /*0x5ae178*/
+  sub_588CF0(*(_DWORD **)(a1 + 0x38)); /*0x5ae17c*/
+  __asm { fisub   dword ptr [esp+10h+var_8] } /*0x5ae181*/
   __asm { fstp    dword ptr [esi+50h] }
-  *(float *)(a1 + 0x50) = _ET1;
+  *(float *)(a1 + 0x50) = _ET1; /*0x5ae186*/
 }

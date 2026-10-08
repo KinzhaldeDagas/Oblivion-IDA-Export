@@ -1,18 +1,18 @@
-0x62A660: sub     esp, 0Ch
+0x62A660: sub     esp, 0Ch; RadiantAI: action code 20 from Trespass row. Creates trespass/warning dialogue info and calls Actor::InitDialogue.
 0x62A663: push    esi; int
 0x62A664: mov     esi, ecx
 0x62A666: mov     ecx, ds:0B333C4h; this
 0x62A66C: call    PlayerCharacter__IsSleeping?
 0x62A671: test    al, al
 0x62A673: jz      short loc_62A685
-0x62A675: mov     ecx, [esp+10h+arg_0]; int
-0x62A679: call    sub_5EAE70
+0x62A675: mov     ecx, [esp+10h+speaker]; int
+0x62A679: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x62A67E: pop     esi
 0x62A67F: add     esp, 0Ch
 0x62A682: retn    4
 0x62A685: cmp     dword ptr [esi+2Ch], 0
 0x62A689: push    edi
-0x62A68A: mov     edi, [esp+14h+arg_0]
+0x62A68A: mov     edi, [esp+14h+speaker]
 0x62A68E: jnz     short loc_62A69D
 0x62A690: mov     eax, [esi]
 0x62A692: mov     edx, [eax+558h]
@@ -60,9 +60,9 @@
 0x62A70E: call    edx
 0x62A710: test    al, al
 0x62A712: jnz     loc_62A7EC
-0x62A718: push    3
-0x62A71A: push    6
-0x62A71C: call    TESTopic__GEtTopic
+0x62A718: push    3; index
+0x62A71A: push    6; topicType
+0x62A71C: call    TESTopic__GetTopic; Hardcoded miscellaneous topic bucket 6 index 3: stock 0000011B / Corpse. Null skips DialogueItem creation and Actor::InitDialogue.
 0x62A721: mov     ebx, eax
 0x62A723: add     esp, 8
 0x62A726: test    ebx, ebx
@@ -73,12 +73,12 @@
 0x62A738: mov     ecx, esi
 0x62A73A: call    edx
 0x62A73C: mov     eax, [esi+2Ch]
-0x62A73F: push    0
-0x62A741: push    0
-0x62A743: push    eax
-0x62A744: push    edi
-0x62A745: mov     ecx, ebx
-0x62A747: call    TESTopic__CreateDialogueInfo
+0x62A73F: push    0; conversation
+0x62A741: push    0; previousTopic
+0x62A743: push    eax; target
+0x62A744: push    edi; speaker
+0x62A745: mov     ecx, ebx; this
+0x62A747: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x62A74C: mov     edx, [esi]
 0x62A74E: mov     edx, [edx+484h]
 0x62A754: mov     ebx, eax
@@ -89,10 +89,10 @@
 0x62A760: call    edx
 0x62A762: test    ebx, ebx
 0x62A764: jz      short loc_62A7CF
-0x62A766: mov     ecx, ebx
-0x62A768: call    sub_6B7BA0
-0x62A76D: mov     ecx, ebx
-0x62A76F: call    sub_6B7C20
+0x62A766: mov     ecx, ebx; this
+0x62A768: call    DialogueItem__FirstResponse
+0x62A76D: mov     ecx, ebx; this
+0x62A76F: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x62A774: test    eax, eax
 0x62A776: jz      short loc_62A7CF
 0x62A778: mov     cl, ds:0B1490Ch
@@ -130,7 +130,7 @@
 0x62A7D7: push    1
 0x62A7D9: mov     ecx, esi
 0x62A7DB: mov     [esi+250h], ebx
-0x62A7E1: mov     byte ptr [esi+228h], 1
+0x62A7E1: mov     byte ptr [esi+228h], 1; Corpse/reaction dialogue sets HighProcess.dialogueActive=1 after assigning activeDialogueItem; completion clears both fields.
 0x62A7E8: call    eax
 0x62A7EA: jmp     short loc_62A849
 0x62A7EC: fldz
@@ -143,17 +143,17 @@
 0x62A807: fstp    dword ptr [esi+21Ch]
 0x62A80D: jmp     short loc_62A816
 0x62A80F: mov     byte ptr ds:0B3B92Ch, 1
-0x62A816: mov     ecx, [esi+250h]; int
+0x62A816: mov     ecx, [esi+250h]; this
 0x62A81C: test    ecx, ecx
 0x62A81E: jz      short loc_62A849
-0x62A820: call    sub_6B7C30
+0x62A820: call    DialogueItem__RunResult; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.
 0x62A825: mov     ebx, [esi+250h]
 0x62A82B: test    ebx, ebx
 0x62A82D: jz      short loc_62A83F
-0x62A82F: mov     ecx, ebx
-0x62A831: call    sub_6B81D0
+0x62A82F: mov     ecx, ebx; this
+0x62A831: call    DialogueItem__Destroy
 0x62A836: push    ebx
-0x62A837: call    FormHeapFree
+0x62A837: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62A83C: add     esp, 4
 0x62A83F: mov     dword ptr [esi+250h], 0
 0x62A849: cmp     byte ptr ds:0B3B92Ch, 0
@@ -184,7 +184,7 @@
 0x62A899: test    eax, eax
 0x62A89B: jz      loc_62A97A
 0x62A8A1: mov     ecx, eax
-0x62A8A3: call    sub_472EA0
+0x62A8A3: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x62A8A8: test    al, al
 0x62A8AA: jz      loc_62A97A
 0x62A8B0: mov     ecx, [ebp+58h]
@@ -217,17 +217,17 @@
 0x62A908: push    0
 0x62A90A: mov     ecx, esi
 0x62A90C: call    eax
-0x62A90E: mov     ecx, eax
-0x62A910: call    sub_6B7260
+0x62A90E: mov     ecx, eax; this
+0x62A910: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x62A915: test    al, al
 0x62A917: jnz     short loc_62A97A
 0x62A919: mov     ebx, [ebp+0]
 0x62A91C: mov     ecx, [ebx]
-0x62A91E: mov     [esp+1Ch+arg_0], ecx
+0x62A91E: mov     [esp+1Ch+speaker], ecx
 0x62A922: mov     ecx, ebp
-0x62A924: call    sub_67F100
+0x62A924: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x62A929: push    ebx
-0x62A92A: call    FormHeapFree
+0x62A92A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62A92F: mov     edx, [esi]
 0x62A931: mov     eax, [edx+0BCh]
 0x62A937: add     esp, 4
@@ -241,7 +241,7 @@
 0x62A94B: mov     ecx, esi
 0x62A94D: call    eax
 0x62A94F: mov     edx, [esi]
-0x62A951: mov     edi, [esp+1Ch+arg_0]
+0x62A951: mov     edi, [esp+1Ch+speaker]
 0x62A955: mov     eax, [edx+184h]
 0x62A95B: mov     ecx, esi
 0x62A95D: mov     [esi+2Ch], edi

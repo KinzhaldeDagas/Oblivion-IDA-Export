@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_6FFE90",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x6FFE90",
+      "0x6FFFCA"
+    ],
+    [
+      "0x9C9350",
+      "0x9C937B"
+    ]
+  ],
+  "chunks_sha256": "07dc52b2748373cb6edef83be09442bc8211fc1510324676182df1d82f5c1830",
+  "comment_regular": "Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.",
+  "comment_repeatable": "Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "NiObjectNET_RemoveController",
   "end_ea": "0x6FFFCA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6FFE90",
+  "name": "NiObjectNET_RemoveController",
   "segment": ".text",
   "sha256": "d076f023d677d142acd4740125cece27f6aaa2417f189e1ed44d7e8b549f08b7",
   "size": 314,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6FFE90",
+  "total_chunk_size": 357,
   "type": "void __thiscall(Ni2DBuffer **this, Ni2DBuffer *)",
-  "xrefs_from_count": 127,
+  "xrefs_from_count": 140,
   "xrefs_to_count": 14
 }

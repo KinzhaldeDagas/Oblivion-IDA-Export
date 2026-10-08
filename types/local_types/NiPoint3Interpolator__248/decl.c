@@ -1,1 +1,1 @@
-NiPoint3Interpolator
+struct NiPoint3Interpolator;

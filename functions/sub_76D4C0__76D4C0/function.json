@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76D4C0",
+      "0x76D4EE"
+    ]
+  ],
+  "chunks_sha256": "706b0f15a4785bb8e57a4982a39c954e7e79cece2cda9caca79380355a2dcad3",
+  "comment_regular": "Unbinds the cached implicit depth/stencil surface with IDirect3DDevice9::SetDepthStencilSurface(NULL), then clears g_D3D9BoundDepthStencilSurface.",
+  "comment_repeatable": "Unbinds the cached implicit depth/stencil surface with IDirect3DDevice9::SetDepthStencilSurface(NULL), then clears g_D3D9BoundDepthStencilSurface.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76D4C0",
+  "display_name": "NiDX92DBufferData::UnsetDepthStencilSurface",
   "end_ea": "0x76D4EE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76D4C0",
+  "name": "NiDX92DBufferData::UnsetDepthStencilSurface",
   "segment": ".text",
   "sha256": "706b0f15a4785bb8e57a4982a39c954e7e79cece2cda9caca79380355a2dcad3",
   "size": 46,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76D4C0",
-  "type": "char __cdecl(int)",
+  "total_chunk_size": 46,
+  "type": "bool __cdecl(IDirect3DDevice9 *device)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 1
 }

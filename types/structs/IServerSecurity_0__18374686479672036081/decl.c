@@ -1,1 +1,1 @@
-IServerSecurity_0
+typedef IServerSecurity IServerSecurity_0;

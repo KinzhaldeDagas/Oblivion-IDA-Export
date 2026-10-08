@@ -1,33 +1,32 @@
-int __thiscall sub_787CD0(_DWORD *this, float a2)
+// Maps normalized/current tree LOD to leaf LOD; includes one synthetic billboard level only when global drop-to-billboard is enabled.
+unsigned __int16 __thiscall CSpeedTreeRT__GetDiscreteLeafLodLevel(OB_CSpeedTreeRT_010201A0 *this, float lod)
 {
   double v2; // st7
-  int v3; // eax
-  double v4; // st7
+  OB_STreeInstanceData *instanceData; // eax
+  double lodLevel; // st7
   double v5; // st7
-  int v6; // ecx
-  int result; // eax
-  int v8; // [esp+0h] [ebp-4h]
-  float v9; // [esp+8h] [ebp+4h]
+  int leafLodLevelCount_low; // ecx
+  unsigned __int16 result; // ax
+  float loda; // [esp+8h] [ebp+4h]
 
-  v2 = a2;
-  if ( a2 == flt_A30634 )
+  v2 = lod; /*0x787cdf*/
+  if ( lod == kTerrainLODQuadRayDirectionZ ) /*0x787ce4*/
   {
-    v3 = *(this + 0xD);
-    if ( v3 )
-      v4 = *(float *)(v3 + 0x10);
+    instanceData = this->instanceData; /*0x787ce6*/
+    if ( instanceData ) /*0x787ced*/
+      lodLevel = instanceData->lodLevel; /*0x787cef*/
     else
-      v4 = *(float *)(*this + 0x14);
-    v9 = v4;
-    v2 = v9;
+      lodLevel = this->treeEngine->currentLod; /*0x787cf6*/
+    loda = lodLevel; /*0x787cf9*/
+    v2 = loda; /*0x787d05*/
   }
-  v5 = 1.0 - v2;
-  if ( byte_B4297C )
-    v6 = *(unsigned __int16 *)(*this + 0xC0) + 1;
+  v5 = 1.0 - v2; /*0x787d12*/
+  if ( CSpeedTreeRT__s_dropToBillboard ) /*0x787d09*/
+    leafLodLevelCount_low = LOWORD(this->treeEngine->?) + 1; /*0x787d1f*/
   else
-    v6 = *(unsigned __int16 *)(*this + 0xC0);
-  v8 = (int)(v5 * (double)v6);
-  result = (unsigned __int16)v8;
-  if ( (unsigned __int16)v8 == v6 )
-    return (unsigned __int16)v8 + 0xFFFF;
-  return result;
+    leafLodLevelCount_low = LOWORD(this->treeEngine->?); /*0x787d4d*/
+  result = (int)(v5 * (double)leafLodLevelCount_low); /*0x787d7b*/
+  if ( result == leafLodLevelCount_low ) /*0x787d83*/
+    --result; /*0x787d85*/
+  return result; /*0x787d8b*/
 }

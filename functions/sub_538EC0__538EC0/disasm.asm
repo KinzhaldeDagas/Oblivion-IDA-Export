@@ -79,7 +79,7 @@
 0x538FE2: fld     dword ptr ds:0A563E4h
 0x538FE8: fstp    dword ptr [ecx]
 0x538FEA: lea     ecx, [esp+584h+var_500]
-0x538FF1: call    sub_959BC0
+0x538FF1: call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.
 0x538FF6: mov     dword ptr ds:0B3A6E4h, 0DADh
 0x539000: fld     dword ptr [esi]
 0x539002: fld     qword ptr ds:0A39088h
@@ -121,7 +121,7 @@
 0x5390A8: test    esi, esi
 0x5390AA: jz      short loc_5390DD
 0x5390AC: mov     ecx, edi
-0x5390AE: call    sub_89F570
+0x5390AE: call    bhkRefObject_UpdateHavokObject
 0x5390B3: mov     edx, [esi]
 0x5390B5: mov     edx, [edx+30h]
 0x5390B8: push    0
@@ -134,14 +134,14 @@
 0x5390D2: mov     ecx, esi
 0x5390D4: call    edx
 0x5390D6: mov     ecx, edi
-0x5390D8: call    sub_89F570
+0x5390D8: call    bhkRefObject_UpdateHavokObject
 0x5390DD: xor     esi, esi
 0x5390DF: cmp     [esp+584h+var_34C], esi
 0x5390E6: setnle  al
 0x5390E9: test    al, al
 0x5390EB: jz      short loc_5390FB
 0x5390ED: lea     ecx, [esp+584h+var_360]
-0x5390F4: call    sub_8AF890
+0x5390F4: call    hkpCdPointCollector_SortHitsByDistance; TES4 authoritative: sorts collector contact hits by entry+0x1C when more than one hit is present.
 0x5390F9: mov     bl, 1
 0x5390FB: fld     dword ptr ds:0A563E4h
 0x539101: mov     al, ds:0B11908h
@@ -167,7 +167,6 @@
 0x539155: xor     ebx, ebx
 0x539157: mov     [esp+584h+var_55C], ebx
 0x53915B: jmp     short loc_539160
-0x53915D: align 10h
 0x539160: mov     eax, [esp+584h+var_350]
 0x539167: mov     dword ptr ds:0B3A6E4h, 0DAFh
 0x539171: mov     esi, [ebx+eax+28h]
@@ -183,7 +182,7 @@
 0x53919E: mov     dword ptr ds:0B3A6E4h, 0DB1h
 0x5391A8: jz      short loc_5391B7
 0x5391AA: push    eax
-0x5391AB: call    sub_4DC270
+0x5391AB: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x5391B0: add     esp, 4
 0x5391B3: mov     [esp+584h+var_568], eax
 0x5391B7: mov     eax, [esp+584h+var_568]
@@ -415,7 +414,7 @@
 0x539529: fstp    st
 0x53952B: lea     ecx, [esp+584h+anonymous_1]; this
 0x539532: fstp    st
-0x539534: call    bhkWorldRayCastData__Init
+0x539534: call    bhkWorldRayCastData__Init; TES4 authoritative: bhkWorldRayCastData::Init. Raycast input From at +0x00, To at +0x10, enable/filter at +0x20/+0x24, output hit fraction at +0x44, root collidable at +0x50, extra collector pointers at +0x70/+0x74/+0x78.
 0x539539: mov     eax, [esp+584h+var_520]
 0x53953D: mov     ecx, [eax]
 0x53953F: lea     edx, [esp+584h+var_508]
@@ -451,7 +450,7 @@
 0x5395DF: test    eax, eax
 0x5395E1: jz      short loc_53964B
 0x5395E3: push    eax
-0x5395E4: call    sub_4DC270
+0x5395E4: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x5395E9: add     esp, 4
 0x5395EC: test    eax, eax
 0x5395EE: jz      short loc_53964B
@@ -506,7 +505,7 @@
 0x5396BA: mov     eax, [eax]
 0x5396BC: push    eax
 0x5396BD: mov     dword ptr ds:0B3A6E4h, 0DB7h
-0x5396C7: call    sub_4DC270
+0x5396C7: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x5396CC: mov     esi, [esp+588h+var_54C]
 0x5396D0: mov     dword ptr ds:0B3A6E4h, 0DB8h
 0x5396DA: mov     [esp+588h+var_564], eax
@@ -584,7 +583,7 @@
 0x5397B6: mov     ebx, eax
 0x5397B8: lea     ecx, [esp+584h+var_500]
 0x5397BF: mov     byte ptr [esp+584h+var_4], 0
-0x5397C7: call    sub_959EC0
+0x5397C7: call    NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
 0x5397CC: lea     ecx, [esp+584h+var_360]; this
 0x5397D3: mov     [esp+584h+var_4], 0FFFFFFFFh
 0x5397DE: call    ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
@@ -601,3 +600,20 @@
 0x539805: mov     esp, ebp
 0x539807: pop     ebp
 0x539808: retn    14h
+0x9B9450: lea     ecx, [ebp+var_360]; this
+0x9B9456: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9B945B: lea     ecx, [ebp+var_500]
+0x9B9461: jmp     NiPickContext_dtor; Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.
+0x9B9466: lea     ecx, [ebp+var_1C0]
+0x9B946C: jmp     sub_538C80
+0x9B9471: mov     edx, [esp-4+arg_4]
+0x9B9475: lea     eax, [edx-574h]
+0x9B947B: mov     ecx, [edx-578h]
+0x9B9481: xor     ecx, eax
+0x9B9483: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9488: add     eax, 0Ch
+0x9B948B: mov     ecx, [edx-8]
+0x9B948E: xor     ecx, eax
+0x9B9490: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9495: mov     eax, offset stru_AE37E8
+0x9B949A: jmp     ___CxxFrameHandler3

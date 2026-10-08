@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x69E0E6",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x69E164",
-    "line": "push    ecx",
+    "line": "push    ecx; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69E165",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69E167",
-    "line": "call    sub_7C7DC0",
+    "line": "call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x69E19B",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -784,5 +784,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5CA0",
+    "line": "mov     ecx, [ebp-10h]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5CA3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5CA8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5CAB",
+    "line": "add     ecx, 8; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5CAE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5CB3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5CB7",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5CBA",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5CBD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5CBF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5CC4",
+    "line": "mov     eax, offset stru_AEE36C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5CC9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

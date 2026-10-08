@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B9F90",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified destructor releases the seed table's backing buffer from TESObjectTREE+0x4C after restoring the NiTArray<unsigned int> vtable at +0x48, then destroys TESIconTree, TESModelTree, and TESObject bases.",
     "mnemonic": "push",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4B9FE4",
-    "line": "push    eax",
+    "line": "push    eax; Verified destructor restores the embedded NiTArray<unsigned int> vtable at +0x48 then frees its backing pointer at +0x4C. Constructor starts the array empty; no Oblivion TREE record path that populates this array was found in TESObjectTREE_LoadFormRecord.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4B9FEC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -262,5 +262,221 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x4B9D50",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4B9D53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4B9D54",
+    "line": "mov     dword ptr [ecx], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4B9D5A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4B9D5F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4B9D60",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3DF0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DF3",
+    "line": "jmp     TESObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3DF8",
+    "line": "cmp     dword ptr [ebp-10h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3DFC",
+    "line": "jz      loc_9B3E10",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3E02",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E05",
+    "line": "add     eax, 24h ; '$'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E08",
+    "line": "mov     [ebp-14h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E0B",
+    "line": "jmp     loc_9B3E17",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E10",
+    "line": "mov     dword ptr [ebp-14h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x9B3E17",
+    "line": "mov     ecx, [ebp-14h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E1A",
+    "line": "jmp     j_??1TESModel@@UAE@XZ; TESModel::~TESModel(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E1F",
+    "line": "cmp     dword ptr [ebp-10h], 0",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3E23",
+    "line": "jz      loc_9B3E37",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3E29",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E2C",
+    "line": "add     eax, 3Ch ; '<'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E2F",
+    "line": "mov     [ebp-18h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E32",
+    "line": "jmp     loc_9B3E3E",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E37",
+    "line": "mov     dword ptr [ebp-18h], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x9B3E3E",
+    "line": "mov     ecx, [ebp-18h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E41",
+    "line": "jmp     j_TESTexture_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E46",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E49",
+    "line": "add     ecx, 48h ; 'H'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E4C",
+    "line": "jmp     loc_4B9D50",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E51",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3E55",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E58",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3E5B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3E5D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E62",
+    "line": "mov     eax, offset stru_ADF6D4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3E67",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

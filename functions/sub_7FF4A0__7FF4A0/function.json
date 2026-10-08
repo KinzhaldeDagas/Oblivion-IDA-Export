@@ -1,19 +1,36 @@
 {
-  "callees_count": 142,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_7FF4A0",
+  "chunks": [
+    [
+      "0x7FF4A0",
+      "0x8000EF"
+    ],
+    [
+      "0x9D0640",
+      "0x9D0663"
+    ]
+  ],
+  "chunks_sha256": "5002a6cd23e7df2cec60dd7a34d2f87a6d58d1b5ab91a876e4a9334e657865fd",
+  "comment_regular": "Oblivion Lighting30 per-geometry pass setup. It begins through vtable +0x80 by clearing all queued passes, CurrentPass, PassCount, and CurrentPassIndex. For SimpleShadow selectors 0x14E..0x151 it binds the admitted ShadowSceneLight R32F texture and constructs the receiver pass. It then resolves the selector to a NiD3DPass; a null result exits without inserting a pass or incrementing PassCount. Therefore stock 0x177..0x17A selectors cannot reuse stale pass state and produce a zero-pass geometry submission. Valid receivers use ZENABLE TRUE, LESSEQUAL, ZWRITE FALSE and DESTCOLOR/ZERO.\n\nLighting30 consumer resets the queue then resolves only its own selector domain. Normal Lighting30 refraction 0x156..0x158 is valid; 0x160..0x162 and 0x177..0x17A resolve no pass, but neither family is stock-produced by exact Lighting30's +0x5C builder.",
+  "comment_repeatable": "Lighting30 consumer resets the queue then resolves only its own selector domain. Normal Lighting30 refraction 0x156..0x158 is valid; 0x160..0x162 and 0x177..0x17A resolve no pass, but neither family is stock-produced by exact Lighting30's +0x5C builder.\nDX11 GPU-world refresh verification 2026-09-30: NiD3DPass queue/current pointers are mutable per-geometry setup outputs, not frame-stable material ownership. 7FFFA5 tests shader property DWORD+1C bit80000 in the ordinary setup path (mode5 already returns earlier). For admitted ordinary selectors 12D..146, final authored RS175/RS195 writes are 0/0 when clear, and float1.0 / current float at A77830 (IDB bits3A03126F) when set, save flag0. Refresh must derive these from the current owned property and seal the constant, not reread last CurrentPass. Other selectors and all other pass writes require their own producer proof. Older comments calling this exact block mode5 must not override the observed early-return ordering.\nDX11 ordinary PS-choice inputs verified: variant=(DWORD B42F40 &8)!=0 AND (property DWORD+1C &1)!=0. For selector<147, pass entry byte+8 count and positive B2DCFC limit produce c6.x=1, c6.y=count?min(count,limit)-1:0. Therefore total=count?min(count,limit):1 in the supported positive bounded limit domain. This precedes862B40/862AD0 and can be rebuilt from the owned entry without scratch globals.\nDX11 ordinary texture construction 2026-09-30: after862B40, selectors12D..146 take property virtual+88(0) for stage-array element0 and virtual+8C(0), or global B430DC when null, for element1. Inline stage+4 refcount transfer matches76C910. Neither pooled CurrentPass nor the old stage+4 texture is authoritative for independently constructing these assignments.\nDX11 current material source audit 2026-10-01: for ordinary selectors12D..146 (the branch below selector147), read RenderPass byte+8 total and B2DCFC limit; zero total gives remaining=0, otherwise remaining=min(total,limit)-1. Writes source B46FD8={1,remaining,NiMaterialProperty+4C,geometry-data+24 nonnull}. Critically, also writes DWORD[DWORD(shader+9C)+20]=11+2*remaining before map application; this count is geometry-dependent and must not be copied from the previous draw. Prepared routing now projects this count into all pass/main aliases and final bookkeeping retains the last accepted occurrence value. Other light-enable-byte and selector effects remain separate obligations.\nCurrent ordinary material rows, verified 2026-10-01: B46FA8 copies the B25AE0 default float4 and replaces X by min(material alpha at+50,1); the special property-alpha branch is limited to selectors147..14D and does not apply to12D..146. B46FC8 writes mask B42F40 bits0/1/2 as floats and W=(bit3 AND BSShaderProperty flag bit0). B46FD8 is the light/material row documented above. New owned source images regenerate these rows from current sealed properties and entry light counts, independent of shader-reflection consumption; they do not read the globals left by prior geometry or populate the unknown B46FB8 gap.\nGPU map-order audit 2026-10-01: ordinary selector12D..146 setup writes paired bytes B4693A+2*i then B46939+2*i for every i<B2DCFC: enable the first remaining+1 slots (one even for total zero), disable the rest. Then disables entry byte+8 through B46C18 (decal proj) followed by B46C14 (decal fade); names verified in7FCC80 GetEntry string lookups. It subsequently invokes SortByEnabled(+48) on active shader vertex map+30 and then pixel map+2C BEFORE resolving/applying the pass. Thus the bucket-level sort in7AC9A0 is not the final map order. Preserve per-occurrence state through repeated RenderPass payloads; noncanonical enabled bytes can make repeated sorts change order. Private pass maps are not independently sorted here, although shared entry flag writes affect their application prefix.\nOrdered source-state audit 2026-10-01: active glow emission writes pixel row4 B46FB8; inactive/non-glow emission leaves that row unchanged while other material/ambient processing may proceed. Ordinary valid-pass setup resets pixel row7 B46FE8 from B25AD0..DC; later SimpleShadow modifications are outside the12D..146 profile. A source baseline captured immediately before the bucket is distinct from old draw-packed constants and from device register state. Only explicitly verified no-write rows may inherit it; unmodeled writers invalidate source knowledge for that occurrence.\nDX11 queue capture profile 2026-10-01: mode WORD B42EAC==5 selects BuildMode5ShadowPass before ordinary setup; the ordinary one-pass queue replay explicitly excludes it. Ordinary successful selector insertion increments selected pass for a temporary NiPointer, SetAt retains array ownership, temporary release follows, then PassCount increments.\nDX11 current-geometry declaration audit 2026-10-01: inline7FFA75..7FFAC2 chooses shader+90 if effective Lighting30 property+1C bit1 is set, otherwise shader+8C. This selected NiDX9ShaderDeclaration replaces active shader+24 with release-old/publish/retain-new ordering before BeginPassLoop. Reading active+24 before SetupRenderPass can reuse a prior geometry declaration; pre-draw capture must derive the current selected owner instead. Declared OblivionLighting30DeclarationOwnersPrefix is a verified partial layout, not a full class-size claim. Repeated rigid occurrences select the same owner after the first transfer; a zero old count invokes destruction and needs separate lifetime handling.\nComparative boundary 2026-10-01: Fallout DetermineShaderDeclaration828D4A88 belongs to this declaration family but adds geometry-compression NC/VC remapping of an already-active declaration. No equivalent compressed-variant policy is inferred here. Oblivion selection is verified directly at7FFA75 from property bit1 and shader+8C/+90.\nState-group audit 2026-10-01: ordinary property flag80000 writes slope175=1.0 and depth195 fromA77830; clear flag writes both0. Both use savePrevious=false. Category moves must be reflected in both pass application and restoration; if shader+28 aliases pass+30, shader finish uses the projected saved list too. Missing nodes/groups still require pool allocation.\nDX11 projected-state integration 2026-10-01: recompute slope/depth bias for each geometry from its current property flags even when reading a projected group shape. Bucket-final bias values belong only to final metadata; they must not be reused for all draws or overwritten with older frame values after fresh capture. Pool shape preparation and native write authorization remain separate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 31,
+  "display_name": "Lighting30Shader_SetupRenderPass",
   "end_ea": "0x8000EF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FF4A0",
+  "name": "Lighting30Shader_SetupRenderPass",
   "segment": ".text",
   "sha256": "4875299a49de2a870cd67f5e70a3227c7660093fec961c473946a0b8cde09a37",
   "size": 3151,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FF4A0",
-  "type": "int __thiscall(NiTArray_NiD3DPass *this, float, int, int, float, int, int, int)",
-  "xrefs_from_count": 976,
+  "total_chunk_size": 3186,
+  "type": "int __userpurge@<eax>(NiTArray_NiD3DPass *this@<ecx>, double@<st0>, float, int, int, float, int, int, int)",
+  "xrefs_from_count": 1014,
   "xrefs_to_count": 1
 }

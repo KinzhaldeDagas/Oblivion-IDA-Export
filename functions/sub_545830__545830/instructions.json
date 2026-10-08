@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x545866",
-    "line": "fstp    [esp+0B8h+var_B8]",
+    "line": "fstp    [esp+0B8h+angleZ]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x545878",
-    "line": "call    nullsub_returnVoid_2arg",
+    "line": "call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x5458D3",
-    "line": "lea     ecx, [esp+0B8h+var_6C]",
+    "line": "lea     ecx, [esp+0B8h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x5458DF",
-    "line": "fstp    [esp+0B8h+var_B8]; float",
+    "line": "fstp    [esp+0B8h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5458E2",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x545907",
-    "line": "lea     ecx, [esp+0B8h+var_48]",
+    "line": "lea     ecx, [esp+0B8h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -373,49 +373,49 @@
   },
   {
     "ea": "0x545913",
-    "line": "fstp    [esp+0B8h+var_B8]; float",
+    "line": "fstp    [esp+0B8h+angleZ]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x545916",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x54591B",
-    "line": "lea     eax, [esp+0B4h+var_48]",
+    "line": "lea     eax, [esp+0B4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x54591F",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545920",
-    "line": "lea     ecx, [esp+0B8h+var_24]",
+    "line": "lea     ecx, [esp+0B8h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x545927",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545928",
-    "line": "lea     ecx, [esp+0BCh+var_6C]",
+    "line": "lea     ecx, [esp+0BCh+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x54592C",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x545946",
-    "line": "fst     [esp+0B4h+var_60]",
+    "line": "fst     [esp+0B4h+var_6C.data+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x54594A",
-    "line": "fstp    [esp+0B4h+var_54]",
+    "line": "fstp    [esp+0B4h+var_6C.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x545A3B",
-    "line": "lea     ecx, [esp+0B8h+var_6C]",
+    "line": "lea     ecx, [esp+0B8h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -853,13 +853,13 @@
   },
   {
     "ea": "0x545A47",
-    "line": "fstp    [esp+0B8h+var_B8]; float",
+    "line": "fstp    [esp+0B8h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x545A4A",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x545A6F",
-    "line": "lea     ecx, [esp+0B8h+var_48]",
+    "line": "lea     ecx, [esp+0B8h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -937,49 +937,49 @@
   },
   {
     "ea": "0x545A7B",
-    "line": "fstp    [esp+0B8h+var_B8]; float",
+    "line": "fstp    [esp+0B8h+angleZ]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x545A7E",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x545A83",
-    "line": "lea     ecx, [esp+0B4h+var_48]",
+    "line": "lea     ecx, [esp+0B4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x545A87",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545A88",
-    "line": "lea     edx, [esp+0B8h+var_24]",
+    "line": "lea     edx, [esp+0B8h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x545A8F",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x545A90",
-    "line": "lea     ecx, [esp+0BCh+var_6C]",
+    "line": "lea     ecx, [esp+0BCh+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x545A94",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,13 +1027,13 @@
   },
   {
     "ea": "0x545AB3",
-    "line": "fst     [esp+0B4h+var_60]",
+    "line": "fst     [esp+0B4h+var_6C.data+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x545AB7",
-    "line": "fstp    [esp+0B4h+var_54]",
+    "line": "fstp    [esp+0B4h+var_6C.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x545B79",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x545B84",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,7 +2245,7 @@
   },
   {
     "ea": "0x545D1C",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x545D2A",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x545D4B",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x545D95",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x545DA3",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2587,7 +2587,7 @@
   },
   {
     "ea": "0x545DC4",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3319,7 +3319,7 @@
   },
   {
     "ea": "0x545F30",
-    "line": "fstp    [esp+0B4h+var_6C]",
+    "line": "fstp    [esp+0B4h+var_6C.data]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3355,7 +3355,7 @@
   },
   {
     "ea": "0x545F46",
-    "line": "fstp    [esp+0B4h+var_60]",
+    "line": "fstp    [esp+0B4h+var_6C.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3379,7 +3379,7 @@
   },
   {
     "ea": "0x545F56",
-    "line": "fstp    [esp+0B4h+var_54]",
+    "line": "fstp    [esp+0B4h+var_6C.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3601,7 +3601,7 @@
   },
   {
     "ea": "0x546007",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },

@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x654604",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x654606",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x654627",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x65466A",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x6546DD",
-    "line": "call    sub_88D070",
+    "line": "call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6546E8",
-    "line": "call    sub_8A5580",
+    "line": "call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,25 +559,25 @@
   },
   {
     "ea": "0x6546F2",
-    "line": "fstp    [esp+44h+var_44]; float",
+    "line": "fstp    [esp+44h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6546F5",
-    "line": "push    5; int",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6546F7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6546F9",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x654700",
-    "line": "call    sub_4728C0",
+    "line": "call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x654725",
-    "line": "call    sub_4723A0",
+    "line": "call    ActorAnimData_GetMovementVector; Computes the actor movement vector from ActorAnimData +0x0C/+0x10/+0x14. For non-creature ground-movement groups, clamps the vector by TESAnimGroup root-motion magnitude scaled by +0xBC and, when the blend sequence at +0xAC is active, +0xC0; optionally transforms the result and can suppress Z.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x6547AF",
-    "line": "call    sub_8AB440",
+    "line": "call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x6547BA",
-    "line": "call    sub_8A5580",
+    "line": "call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x654824",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x654826",
-    "line": "call    sub_5EF930",
+    "line": "call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,25 +1237,25 @@
   },
   {
     "ea": "0x65485C",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+var_50]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65485F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x654861",
-    "line": "push    5; int",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x654863",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x65486A",
-    "line": "call    sub_4728C0",
+    "line": "call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x6548AC",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x6548BF",
-    "line": "call    sub_521450",
+    "line": "call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x6548D1",
-    "line": "call    sub_475300",
+    "line": "call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x654904",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,13 +1669,13 @@
   },
   {
     "ea": "0x65491C",
-    "line": "fstp    [esp+44h+var_34]",
+    "line": "fstp    [esp+44h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x654920",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x654932",
-    "line": "fld     [esp+44h+var_34]",
+    "line": "fld     [esp+44h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1753,19 +1753,19 @@
   },
   {
     "ea": "0x65494B",
-    "line": "fstp    [esp+44h+var_34]",
+    "line": "fstp    [esp+44h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x65494F",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x654954",
-    "line": "fld     [esp+44h+var_34]",
+    "line": "fld     [esp+44h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x65495C",
-    "line": "call    sub_4029D0",
+    "line": "call    TimeGlobals_GetTimeScale; Returns TimeGlobals field +5 TESGlobal value (time scale). Observed callers use it for magic cooldown and fast-travel time calculations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,13 +1825,13 @@
   },
   {
     "ea": "0x65497C",
-    "line": "fld     [esp+44h+var_34]",
+    "line": "fld     [esp+44h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x654980",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x654989",
-    "line": "call    sub_4029D0",
+    "line": "call    TimeGlobals_GetTimeScale; Returns TimeGlobals field +5 TESGlobal value (time scale). Observed callers use it for magic cooldown and fast-travel time calculations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x654A0E",
-    "line": "call    sub_521450",
+    "line": "call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x654A4C",
-    "line": "call    sub_475300",
+    "line": "call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,7 +2335,7 @@
   },
   {
     "ea": "0x654A89",
-    "line": "call    sub_4711F0",
+    "line": "call    ActorAnimData_IsCurrentIdleReady; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,19 +2353,19 @@
   },
   {
     "ea": "0x654A96",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x654A98",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x654A9A",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,19 +2383,19 @@
   },
   {
     "ea": "0x654AA3",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x654AA5",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x654AA7",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -2413,13 +2413,13 @@
   },
   {
     "ea": "0x654AB6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x654AB8",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2449,7 +2449,7 @@
   },
   {
     "ea": "0x654AC4",
-    "line": "call    sub_477E50",
+    "line": "call    ActorAnimData_StartQueuedIdleAction; Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2485,7 +2485,7 @@
   },
   {
     "ea": "0x654AD3",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2521,19 +2521,19 @@
   },
   {
     "ea": "0x654AEA",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x654AEC",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x654AEE",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -2743,7 +2743,7 @@
   },
   {
     "ea": "0x654B60",
-    "line": "lea     ecx, [esp+48h+var_34]; this",
+    "line": "lea     ecx, [esp+48h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x654B67",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x654BBD",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2995,7 +2995,7 @@
   },
   {
     "ea": "0x654BE7",
-    "line": "call    sub_8A5580",
+    "line": "call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3169,7 +3169,7 @@
   },
   {
     "ea": "0x654C3D",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },

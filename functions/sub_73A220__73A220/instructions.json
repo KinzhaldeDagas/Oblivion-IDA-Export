@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x73A220",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass226/227: NiScreenSpaceCamera copy/clone path; copies texture array pointers, not screen-texture records.",
     "mnemonic": "push",
     "size": 2
   },
@@ -178,12 +178,6 @@
     "line": "jmp     short loc_73A290",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x73A28A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x73A290",
@@ -636,12 +630,6 @@
     "size": 2
   },
   {
-    "ea": "0x73A389",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x73A390",
     "line": "mov     eax, [ebp+138h]",
     "mnemonic": "mov",
@@ -823,7 +811,7 @@
   },
   {
     "ea": "0x73A3EB",
-    "line": "call    sub_7395A0",
+    "line": "call    sub_7395A0; Pass226/227: NiScreenSpaceCamera texture-array element setter; AddRefs/Releases NiScreenTexture pointers and updates array counts only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +985,7 @@
   },
   {
     "ea": "0x73A449",
-    "line": "call    sub_7395A0",
+    "line": "call    sub_7395A0; Pass226/227: NiScreenSpaceCamera texture-array element setter; AddRefs/Releases NiScreenTexture pointers and updates array counts only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1156,5 +1144,119 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CAC40",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC43",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC48",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC4B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC50",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC53",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC58",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC5B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC60",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC63",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC68",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC6B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC70",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAC74",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC77",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAC7A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAC7C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC81",
+    "line": "mov     eax, offset stru_AF326C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAC86",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x70A0D0",
+      "0x70A187"
+    ]
+  ],
+  "chunks_sha256": "148ed66c4916e3c7b65796856c6fe0c3938c0e5bd1aa3e52138b2818d6ffb629",
+  "comment_regular": "NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.",
+  "comment_repeatable": "NiNode virtual UpdateDownwardPass (+0x60). Optionally updates this node's properties/controllers, invokes virtual UpdateWorldTransform (+0x74), clears its world-bound radius, recursively updates every non-null child in +0xB0/count +0xB6, and copies/merges nonempty child spheres into the node bound.\nNiNode_UpdateDownwardPass: synchronous controller/property call (47C930), vfunc+74 world transform, child vfunc+60 loop at 70A12D, and bound merge complete before RET 8. No queue/dispatch in this function body. DX11 V220 foreign barrier tag 2 identifies this observed full-call producer, not an uncounted tail. Completion only fences synchronous descendants on the same thread; it does not prove arbitrary virtual implementations or another worker completed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_70A0D0",
+  "display_name": "NiNode_UpdateDownwardPass",
   "end_ea": "0x70A187",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_70A0D0",
+  "name": "NiNode_UpdateDownwardPass",
   "segment": ".text",
   "sha256": "148ed66c4916e3c7b65796856c6fe0c3938c0e5bd1aa3e52138b2818d6ffb629",
   "size": 183,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70A0D0",
+  "total_chunk_size": 183,
   "type": "unsigned int __thiscall(float *this, float, int)",
   "xrefs_from_count": 76,
   "xrefs_to_count": 16

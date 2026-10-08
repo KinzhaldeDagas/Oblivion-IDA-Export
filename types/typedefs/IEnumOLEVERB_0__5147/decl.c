@@ -1,1 +1,1 @@
-IEnumOLEVERB_0
+typedef IEnumOLEVERB IEnumOLEVERB_0;

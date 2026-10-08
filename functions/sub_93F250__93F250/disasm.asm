@@ -110,7 +110,7 @@
 0x93F3EC: call    sub_93C690
 0x93F3F1: test    eax, eax
 0x93F3F3: jnz     loc_93F57C
-0x93F3F9: lea     ecx, [esp+50h]
+0x93F3F9: lea     ecx, [esp+270h+var_220]
 0x93F3FD: push    ecx
 0x93F3FE: lea     edx, [esp+274h+var_1A0]
 0x93F405: push    edx
@@ -118,11 +118,11 @@
 0x93F40D: call    sub_93B740
 0x93F412: mov     ecx, [ebp+arg_0]
 0x93F415: mov     edx, [ecx+8]
-0x93F418: lea     eax, [esp+50h]
+0x93F418: lea     eax, [esp+270h+var_220]
 0x93F41C: push    eax
 0x93F41D: push    edx
 0x93F41E: lea     ecx, [esp+98h]
-0x93F425: call    sub_88FE00
+0x93F425: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x93F42A: fld     [esp+270h+anonymous_1]
 0x93F42E: fsub    dword ptr [esi+0Ch]
 0x93F431: mov     eax, [ebp+arg_8]
@@ -134,7 +134,7 @@
 0x93F442: test    ah, 5
 0x93F445: jp      loc_93F57A
 0x93F44B: fld     dword ptr [esi+0Ch]
-0x93F44E: movaps  xmm2, xmmword ptr [esp+50h]
+0x93F44E: movaps  xmm2, [esp+270h+var_220]
 0x93F453: movaps  xmm3, [esp+270h+anonymous_4]
 0x93F458: fchs
 0x93F45A: movaps  xmm5, [esp+270h+anonymous_2]
@@ -158,7 +158,7 @@
 0x93F49E: addps   xmm0, xmm4
 0x93F4A1: movaps  xmm4, [esp+270h+anonymous_3]
 0x93F4A6: subps   xmm0, xmm3
-0x93F4A9: movaps  xmm3, xmmword ptr [esp+270h+var_260]
+0x93F4A9: movaps  xmm3, [esp+270h+var_260]
 0x93F4AE: movaps  xmm1, xmm3
 0x93F4B1: shufps  xmm1, xmm5, 44h ; 'D'
 0x93F4B5: shufps  xmm3, xmm5, 0EEh ; 'î'

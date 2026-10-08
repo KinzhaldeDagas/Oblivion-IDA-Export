@@ -1,4 +1,4 @@
-0x543A00: sub     esp, 18h
+0x543A00: sub     esp, 18h; Throttled Oblivion sky reflection-cube refresh, called only from ShadowPass. For interiors it temporarily forces sky mode 2, refreshes colors/fog, updates atmosphere/clouds, hides moons, substitutes the sky vector, renders the sky root through ShadowSceneNode mode 3, then restores every altered state.
 0x543A03: push    ebx
 0x543A04: push    esi
 0x543A05: mov     esi, ecx
@@ -13,7 +13,7 @@
 0x543A24: jz      short loc_543A46
 0x543A26: cmp     [esi+100h], bl
 0x543A2C: jnz     short loc_543A46
-0x543A2E: fld     [esp+20h+arg_0]
+0x543A2E: fld     [esp+20h+deltaTime]
 0x543A32: fadd    dword ptr [esi+0F0h]
 0x543A38: fstp    dword ptr [esi+0F0h]
 0x543A3E: pop     esi
@@ -32,15 +32,15 @@
 0x543A68: jz      loc_543B16
 0x543A6E: cmp     dword ptr [eax+34h], 0
 0x543A72: jz      loc_543B16
-0x543A78: mov     dword ptr [esi+0DCh], 2
-0x543A82: call    sub_5418F0
-0x543A87: mov     ecx, esi
-0x543A89: call    sub_541DD0
+0x543A78: mov     dword ptr [esi+0DCh], 2; Exterior fog decode boundary: reflection/interior-style sky path temporarily forces mode 2 and calls 0x541DD0; not the normal exterior world update path.
+0x543A82: call    Sky__UpdateColors; Oblivion Sky color synthesis. Interior mode reads TESObjectCELL lighting colors; exterior modes blend current/next TESWeather colors, update Sky color vectors, and publish the active fog color. Fallout was consulted afterward and corroborates the conventional Sky::UpdateColors label.
+0x543A87: mov     ecx, esi; this
+0x543A89: call    Sky__UpdateFog; Exterior fog decode boundary: temporary/reflection path calls 0x541DD0 after forcing mode 2; distinguish from normal 0x542F20 exterior update.
 0x543A8E: mov     ecx, [esi+20h]
 0x543A91: test    ecx, ecx
 0x543A93: jz      short loc_543AA5
 0x543A95: mov     eax, [ecx]
-0x543A97: fld     [esp+24h+arg_0]
+0x543A97: fld     [esp+24h+deltaTime]
 0x543A9B: mov     edx, [eax+0Ch]
 0x543A9E: push    ecx
 0x543A9F: fstp    [esp+28h+var_28]
@@ -50,7 +50,7 @@
 0x543AA8: test    ecx, ecx
 0x543AAA: jz      short loc_543ABC
 0x543AAC: mov     eax, [ecx]
-0x543AAE: fld     [esp+24h+arg_0]
+0x543AAE: fld     [esp+24h+deltaTime]
 0x543AB2: mov     edx, [eax+0Ch]
 0x543AB5: push    ecx
 0x543AB6: fstp    [esp+28h+var_28]
@@ -86,11 +86,11 @@
 0x543B2B: mov     ecx, [ecx+0DCh]
 0x543B31: mov     edi, [esi+4]
 0x543B34: add     esp, 4
-0x543B37: push    edx
-0x543B38: push    ecx
-0x543B39: push    edi
-0x543B3A: mov     ecx, eax
-0x543B3C: call    sub_7C6310
+0x543B37: push    edx; releasePreviousTarget
+0x543B38: push    ecx; unused
+0x543B39: push    edi; source
+0x543B3A: mov     ecx, eax; self
+0x543B3C: call    ShadowSceneNode_RenderMode3CubeFaceForSource; Oblivion mode-3 cube-face path: own target type 0x18, position the cube camera at the source, render one face or all faces, and preserve the source cull bit.
 0x543B41: cmp     byte ptr [esi+100h], 0
 0x543B48: mov     ds:0B3667Dh, al
 0x543B4D: pop     edi
@@ -103,10 +103,10 @@
 0x543B64: jz      short loc_543B9E
 0x543B66: fldz
 0x543B68: push    ecx
-0x543B69: mov     ecx, esi
-0x543B6B: fstp    [esp+28h+var_28]; float
+0x543B69: mov     ecx, esi; this
+0x543B6B: fstp    [esp+28h+var_28]; deltaTime
 0x543B6E: mov     [esi+0DCh], ebp
-0x543B74: call    sub_542F20
+0x543B74: call    Sky__Update; Oblivion's normal Sky frame update: determines underwater state and sky visibility, advances weather/time, calls UpdateColors and UpdateFog, updates wind/effects and every active sky child, publishes the sky vector, and clears transient flags.
 0x543B79: mov     esi, [esi+8]
 0x543B7C: test    esi, esi
 0x543B7E: jz      short loc_543B91

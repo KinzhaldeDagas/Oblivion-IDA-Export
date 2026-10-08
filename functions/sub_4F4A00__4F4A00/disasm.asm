@@ -25,7 +25,7 @@
 0x4F4A3D: jz      short loc_4F4A51
 0x4F4A3F: push    edi; a2
 0x4F4A40: mov     ecx, eax; this
-0x4F4A42: call    ContainerExtraData_GetItemCount
+0x4F4A42: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
 0x4F4A47: mov     [esp+0Ch+arg_C], eax
 0x4F4A4B: fild    [esp+0Ch+arg_C]
 0x4F4A4F: fstp    qword ptr [ebx]

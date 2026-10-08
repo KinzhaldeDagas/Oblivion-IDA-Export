@@ -1,1 +1,1 @@
-NiNIFImageReader
+struct NiNIFImageReader;

@@ -1,96 +1,107 @@
-void __thiscall sub_4ADC90(float *this, int a2, float a3, float a4, float a5, float a6)
+// Verified (Oblivion): animates fillColor_2C into currentFillColor_0C and edgeColor_3C into currentEdgeColor_1C, including independent alpha timing/pulse, then accumulates textureOffsetU_4C/textureOffsetV_50. Fallout's NiColorA names CurrentFillColor/CurrentRimColor and their base FillColor/RimColor at the same offsets, corroborating these grouped fields; Oblivion's source fields use Edge terminology.
+void __thiscall TESEffectShader_AnimateTextureEffect(
+        TESEffectShader *this,
+        OblivionTextureEffectData *textureEffectData,
+        float deltaSeconds,
+        float visualElapsedSeconds,
+        float activeElapsedSeconds,
+        bool bFinished)
 {
-  int v8; // ecx
-  int v9; // edx
-  int v10; // eax
+  float fillColorBaseG_30; // ecx
+  float fillColorBaseB_34; // edx
+  float fillAlphaCurrent_38; // eax
   double v11; // st7
-  double v12; // st7
+  double fillAlphaOutput_18; // st7
   bool v13; // c0
   bool v14; // c3
-  int v15; // edx
-  int v16; // eax
-  int v17; // ecx
+  float edgeColorBaseG_40; // edx
+  float edgeColorBaseB_44; // eax
+  float edgeAlphaCurrent_48; // ecx
   double v18; // st7
-  double v19; // st7
-  float v20; // [esp+34h] [ebp+4h]
-  float v21; // [esp+34h] [ebp+4h]
-  float v22; // [esp+3Ch] [ebp+Ch]
-  float v23; // [esp+3Ch] [ebp+Ch]
+  double edgeAlphaOutput_28; // st7
+  float textureEffectDataa; // [esp+34h] [ebp+4h]
+  float textureEffectDatab; // [esp+34h] [ebp+4h]
+  float visualElapsedSecondsa; // [esp+3Ch] [ebp+Ch]
+  float visualElapsedSecondsb; // [esp+3Ch] [ebp+Ch]
 
-  if ( a2 )
+  if ( textureEffectData ) /*0x4adc9a*/
   {
-    *(float *)(a2 + 0x38) = sub_4ACE30(
-                              *(float *)(a2 + 0x38),
-                              a3,
-                              a4,
-                              a6,
-                              *(this + 0xB),
-                              *(this + 0xD),
-                              *(this + 0xC),
-                              *(this + 0x1B),
-                              *(this + 0xE));
-    v8 = *(_DWORD *)(a2 + 0x30);
-    v9 = *(_DWORD *)(a2 + 0x34);
-    *(_DWORD *)(a2 + 0xC) = *(_DWORD *)(a2 + 0x2C);
-    v10 = *(_DWORD *)(a2 + 0x38);
-    *(_DWORD *)(a2 + 0x10) = v8;
-    *(_DWORD *)(a2 + 0x14) = v9;
-    *(_DWORD *)(a2 + 0x18) = v10;
-    v20 = sub_4ACDE0(this, a5) * *(float *)(a2 + 0x18) + *(float *)(a2 + 0x18);
-    v11 = v20;
-    *(float *)(a2 + 0x18) = v20;
-    if ( v20 < 0.0 )
-      v20 = 0.0;
-    if ( v20 <= dbl_A2F928 )
+    textureEffectData->? = TESEffectShader_AnimateValue( /*0x4adce9*/
+                             textureEffectData->?,
+                             deltaSeconds,
+                             visualElapsedSeconds,
+                             bFinished,
+                             this->Data.fFillAlphaFadeInTime,
+                             this->Data.fFillAlphaFadeOutTime,
+                             this->Data.fFillAlphaFullTime,
+                             this->Data.fFillAlphaFullPercent,
+                             this->Data.fFillAlphaPersistentPercent);
+    fillColorBaseG_30 = textureEffectData->?; /*0x4adcef*/
+    fillColorBaseB_34 = textureEffectData->?; /*0x4adcf6*/
+    textureEffectData->currentFillColor_0C = textureEffectData->fillColor_2C; /*0x4adcf9*/
+    fillAlphaCurrent_38 = textureEffectData->?; /*0x4adcfc*/
+    textureEffectData->? = fillColorBaseG_30; /*0x4adcff*/
+    textureEffectData->? = fillColorBaseB_34; /*0x4add03*/
+    textureEffectData->? = fillAlphaCurrent_38; /*0x4add0b*/
+    textureEffectDataa = TESEffectShader_CalculateFillEffectPulse(this, activeElapsedSeconds) * textureEffectData->? /*0x4add19*/
+                       + textureEffectData->?;
+    v11 = textureEffectDataa; /*0x4add1d*/
+    textureEffectData->? = textureEffectDataa; /*0x4add21*/
+    if ( textureEffectDataa < 0.0 ) /*0x4add2f*/
+      textureEffectDataa = 0.0; /*0x4add31*/
+    if ( textureEffectDataa <= dbl_A2F928 ) /*0x4add4e*/
     {
-      v13 = v11 > 0.0;
-      v14 = 0.0 == v11;
-      v12 = 0.0;
-      if ( v13 || v14 )
-        v12 = *(float *)(a2 + 0x18);
+      v13 = v11 > 0.0; /*0x4add5c*/
+      v14 = 0.0 == v11; /*0x4add5c*/
+      fillAlphaOutput_18 = 0.0; /*0x4add60*/
+      if ( v13 || v14 ) /*0x4add62*/
+        fillAlphaOutput_18 = textureEffectData->?; /*0x4add69*/
     }
     else
     {
-      v12 = 1.0;
+      fillAlphaOutput_18 = 1.0; /*0x4add56*/
     }
-    v21 = v12;
-    *(float *)(a2 + 0x18) = v21;
-    *(float *)(a2 + 0x48) = sub_4ACE30(
-                              *(float *)(a2 + 0x48),
-                              a3,
-                              a4,
-                              a6,
-                              *(this + 0x15),
-                              *(this + 0x17),
-                              *(this + 0x16),
-                              *(this + 0x1C),
-                              *(this + 0x18));
-    v15 = *(_DWORD *)(a2 + 0x40);
-    v16 = *(_DWORD *)(a2 + 0x44);
-    *(_DWORD *)(a2 + 0x1C) = *(_DWORD *)(a2 + 0x3C);
-    v17 = *(_DWORD *)(a2 + 0x48);
-    *(_DWORD *)(a2 + 0x20) = v15;
-    *(_DWORD *)(a2 + 0x24) = v16;
-    *(_DWORD *)(a2 + 0x28) = v17;
-    v22 = sub_4ACD90(this, a5) * *(float *)(a2 + 0x28) + *(float *)(a2 + 0x28);
-    v18 = v22;
-    *(float *)(a2 + 0x28) = v22;
-    if ( v22 < 0.0 )
-      v22 = 0.0;
-    if ( v22 <= dbl_A2F928 )
+    textureEffectDatab = fillAlphaOutput_18; /*0x4add6c*/
+    textureEffectData->? = textureEffectDatab; /*0x4add79*/
+    textureEffectData->? = TESEffectShader_AnimateValue( /*0x4addbd*/
+                             textureEffectData->?,
+                             deltaSeconds,
+                             visualElapsedSeconds,
+                             bFinished,
+                             this->Data.fEdgeAlphaFadeInTime,
+                             this->Data.fEdgeAlphaFadeOutTime,
+                             this->Data.fEdgeAlphaFullTime,
+                             this->Data.fEdgeAlphaFullPercent,
+                             this->Data.fEdgeAlphaPersistentPercent);
+    edgeColorBaseG_40 = textureEffectData->?; /*0x4addc3*/
+    edgeColorBaseB_44 = textureEffectData->?; /*0x4addca*/
+    textureEffectData->currentEdgeColor_1C = textureEffectData->edgeColor_3C; /*0x4addcd*/
+    edgeAlphaCurrent_48 = textureEffectData->?; /*0x4addd0*/
+    textureEffectData->? = edgeColorBaseG_40; /*0x4addd3*/
+    textureEffectData->? = edgeColorBaseB_44; /*0x4addd6*/
+    textureEffectData->? = edgeAlphaCurrent_48; /*0x4addda*/
+    visualElapsedSecondsa = TESEffectShader_CalculateEdgeEffectPulse(this, activeElapsedSeconds) * textureEffectData->? /*0x4addee*/
+                          + textureEffectData->?;
+    v18 = visualElapsedSecondsa; /*0x4addf2*/
+    textureEffectData->? = visualElapsedSecondsa; /*0x4addf6*/
+    if ( visualElapsedSecondsa < 0.0 ) /*0x4ade02*/
+      visualElapsedSecondsa = 0.0; /*0x4ade06*/
+    if ( visualElapsedSecondsa <= dbl_A2F928 ) /*0x4ade23*/
     {
-      if ( v18 >= 0.0 )
-        v19 = *(float *)(a2 + 0x28);
+      if ( v18 >= 0.0 ) /*0x4ade34*/
+        edgeAlphaOutput_28 = textureEffectData->?; /*0x4ade3a*/
       else
-        v19 = 0.0;
+        edgeAlphaOutput_28 = 0.0; /*0x4ade36*/
     }
     else
     {
-      v19 = 1.0;
+      edgeAlphaOutput_28 = 1.0; /*0x4ade29*/
     }
-    v23 = v19;
-    *(float *)(a2 + 0x28) = v23;
-    *(float *)(a2 + 0x4C) = *(this + 0x11) * a3 + *(float *)(a2 + 0x4C);
-    *(float *)(a2 + 0x50) = a3 * *(this + 0x12) + *(float *)(a2 + 0x50);
+    visualElapsedSecondsb = edgeAlphaOutput_28; /*0x4ade3d*/
+    textureEffectData->? = visualElapsedSecondsb; /*0x4ade45*/
+    textureEffectData->textureOffsetU_4C = this->Data.fFillTextureUAnimSpeed * deltaSeconds /*0x4ade5a*/
+                                         + textureEffectData->textureOffsetU_4C;
+    textureEffectData->textureOffsetV_50 = deltaSeconds * this->Data.fFillTextureVAnimSpeed /*0x4ade63*/
+                                         + textureEffectData->textureOffsetV_50;
   }
 }

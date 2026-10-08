@@ -6,10 +6,10 @@ _DWORD *__cdecl _SEH_prolog4(int a1, int a2)
   _UNKNOWN *retaddr; // [esp+0h] [ebp+0h]
   unsigned int v9; // [esp+4h] [ebp+4h]
 
-  v7[1] = _except_handler4;
-  v7[0] = NtCurrentTeb()->Tib.ExceptionList;
-  v4 = alloca(a2);
-  v9 = 0xFFFFFFFE;
-  retaddr = v6;
-  return v7;
+  v7[1] = _except_handler4; /*0x98c5a0*/
+  v7[0] = NtCurrentTeb()->Tib.ExceptionList; /*0x98c5a5*/
+  v4 = alloca(a2); /*0x98c5b8*/
+  v9 = 0xFFFFFFFE; /*0x98c5d1*/
+  retaddr = v6; /*0x98c5d8*/
+  return v7; /*0x98c5ce*/
 }

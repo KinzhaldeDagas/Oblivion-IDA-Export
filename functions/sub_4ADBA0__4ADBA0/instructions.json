@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4ADBA0",
-    "line": "fld     dword ptr [ecx+98h]",
+    "line": "fld     dword ptr [ecx+98h]; Verified (Oblivion): returns the animated particle-level value using TESEffectShader::Data fade-in/full/fade-out times, full/persistent values, deltaSeconds, elapsedSeconds, and finished state. MagicShaderHitEffect_Update writes this result to ParticleShaderProperty::currentParticleLevel_80.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x4ADBA6",
-    "line": "mov     eax, [esp+arg_C]",
+    "line": "mov     eax, dword ptr [esp+bFinished]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4ADBAD",
-    "line": "fstp    [esp+14h+var_4]; float",
+    "line": "fstp    [esp+14h+persistentValue]; persistentValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4ADBB7",
-    "line": "fstp    [esp+14h+var_8]; float",
+    "line": "fstp    [esp+14h+fullValue]; fullValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4ADBC1",
-    "line": "fstp    [esp+14h+var_C]; float",
+    "line": "fstp    [esp+14h+fullTime]; fullTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4ADBCB",
-    "line": "fstp    [esp+14h+var_10]; float",
+    "line": "fstp    [esp+14h+fadeOutTime]; fadeOutTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x4ADBD5",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+fadeInTime]; fadeInTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADBD8",
-    "line": "push    eax; float",
+    "line": "push    eax; bFinished",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADBD9",
-    "line": "fld     [esp+18h+arg_8]",
+    "line": "fld     [esp+18h+elapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -91,37 +91,37 @@
   },
   {
     "ea": "0x4ADBE0",
-    "line": "fstp    [esp+24h+var_1C]; float",
+    "line": "fstp    [esp+24h+var_1C]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ADBE4",
-    "line": "fld     [esp+24h+arg_4]",
+    "line": "fld     [esp+24h+deltaSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ADBE8",
-    "line": "fstp    [esp+24h+var_20]; float",
+    "line": "fstp    [esp+24h+var_20]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ADBEC",
-    "line": "fld     [esp+24h+arg_0]",
+    "line": "fld     [esp+24h+currentValue]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4ADBF0",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+var_24]; currentValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADBF3",
-    "line": "call    sub_4ACE30",
+    "line": "call    TESEffectShader_AnimateValue; Verified (Oblivion): generic animation helper interpolates from zero through the configured full value to the persistent value across fade-in/full/fade-out intervals; when finished it applies the fade-out interpolation.",
     "mnemonic": "call",
     "size": 5
   },

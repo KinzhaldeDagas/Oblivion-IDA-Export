@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x588B38",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x588B40",
-    "line": "call    sub_588B20",
+    "line": "call    Tile__MarkSubtreeReleasing; Verified: sets Tile byte +5 recursively for unreleased/non-releasing descendants. Value calculation tests owner +5 to suppress evaluation during teardown.",
     "mnemonic": "call",
     "size": 5
   },

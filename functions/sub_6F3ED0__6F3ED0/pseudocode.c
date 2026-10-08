@@ -20,40 +20,40 @@ void __thiscall sub_6F3ED0(
   bool v18; // cc
   _DWORD v19[5]; // [esp+14h] [ebp-14h] BYREF
 
-  v11 = (unsigned int)*(this + 1);
-  v12 = 0;
-  v19[4] = 0;
-  if ( v11 )
-    v13 = (int)&(*(this + 2))[-v11] >> 5;
+  v11 = (unsigned int)*(this + 1); /*0x6f3ef9*/
+  v12 = 0; /*0x6f3efc*/
+  v19[4] = 0; /*0x6f3f00*/
+  if ( v11 ) /*0x6f3f04*/
+    v13 = (int)&(*(this + 2))[-v11] >> 5; /*0x6f3f0f*/
   else
-    v13 = 0;
-  if ( v13 < a2 )
+    v13 = 0; /*0x6f3f06*/
+  if ( v13 < a2 ) /*0x6f3f18*/
   {
-    if ( v11 )
-      v12 = (int)&(*(this + 2))[-v11] >> 5;
-    v14 = *(this + 2);
-    if ( v11 > (unsigned int)v14 )
-      _invalid_parameter_noinfo();
-    sub_6F38A0(this, (int)this, v14, a2 - v12, &a3);
+    if ( v11 ) /*0x6f3f1c*/
+      v12 = (int)&(*(this + 2))[-v11] >> 5; /*0x6f3f23*/
+    v14 = *(this + 2); /*0x6f3f26*/
+    if ( v11 > (unsigned int)v14 ) /*0x6f3f2b*/
+      _invalid_parameter_noinfo(); /*0x6f3f2d*/
+    sub_6F38A0(this, (int)this, v14, a2 - v12, &a3); /*0x6f3f3e*/
   }
-  if ( v11 )
+  if ( v11 ) /*0x6f3f47*/
   {
-    v15 = *(this + 2);
-    if ( a2 < (int)&v15[-v11] >> 5 )
+    v15 = *(this + 2); /*0x6f3f49*/
+    if ( a2 < (int)&v15[-v11] >> 5 ) /*0x6f3f55*/
     {
-      if ( v11 > (unsigned int)v15 )
-        _invalid_parameter_noinfo();
-      v16 = (unsigned int)*(this + 1);
-      if ( v16 > (unsigned int)*(this + 2) )
-        _invalid_parameter_noinfo();
-      v17 = (char *)(v16 + 0x20 * a2);
-      v18 = v17 <= *(this + 2);
-      v19[1] = v16;
-      if ( !v18 || v17 < *(this + 1) )
-        _invalid_parameter_noinfo();
-      sub_6F3470(this, v19, (int)this, v17, (int)this, v15);
+      if ( v11 > (unsigned int)v15 ) /*0x6f3f59*/
+        _invalid_parameter_noinfo(); /*0x6f3f5b*/
+      v16 = (unsigned int)*(this + 1); /*0x6f3f60*/
+      if ( v16 > (unsigned int)*(this + 2) ) /*0x6f3f66*/
+        _invalid_parameter_noinfo(); /*0x6f3f68*/
+      v17 = (char *)(v16 + 0x20 * a2); /*0x6f3f70*/
+      v18 = v17 <= *(this + 2); /*0x6f3f72*/
+      v19[1] = v16; /*0x6f3f75*/
+      if ( !v18 || v17 < *(this + 1) ) /*0x6f3f7e*/
+        _invalid_parameter_noinfo(); /*0x6f3f80*/
+      sub_6F3470(this, v19, (int)this, v17, (int)this, v15); /*0x6f3f90*/
     }
   }
-  if ( a10 >= 0x10 )
-    FormHeapFree(a5);
+  if ( a10 >= 0x10 ) /*0x6f3f9a*/
+    FormHeapFree(a5); /*0x6f3fa1*/
 }

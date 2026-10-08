@@ -27,7 +27,6 @@
 0x51D2B4: lea     edx, [edi+104h]
 0x51D2BA: push    esi
 0x51D2BB: jmp     short loc_51D2C0
-0x51D2BD: align 10h
 0x51D2C0: mov     esi, [edx]
 0x51D2C2: cmp     esi, [ecx]
 0x51D2C4: jnz     short loc_51D2D8

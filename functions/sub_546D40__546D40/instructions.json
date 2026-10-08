@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x546D43",
-    "line": "mov     eax, [esp+0Ch+arg_8]",
+    "line": "mov     eax, [esp+0Ch+luckValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x546D47",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x546D4D",
-    "line": "push    eax",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x546D4E",
-    "line": "push    ecx",
+    "line": "push    ecx; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x546D4F",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },

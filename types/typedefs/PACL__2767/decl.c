@@ -1,1 +1,1 @@
-PACL
+typedef _ACL *PACL;

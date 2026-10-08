@@ -1,5 +1,5 @@
 0x73BAD0: push    ebx
-0x73BAD1: mov     ebx, dword ptr [esp+4+ArgList]
+0x73BAD1: mov     ebx, [esp+4+ArgList]
 0x73BAD5: push    esi
 0x73BAD6: mov     eax, ebx
 0x73BAD8: push    edi

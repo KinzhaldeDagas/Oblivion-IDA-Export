@@ -39,7 +39,6 @@
 0x6FA232: lea     eax, [esp+238h+Dir]
 0x6FA239: mov     edx, eax
 0x6FA23B: jmp     short loc_6FA240
-0x6FA23D: align 10h
 0x6FA240: mov     cl, [eax]
 0x6FA242: add     eax, 1
 0x6FA245: cmp     cl, bl

@@ -21,7 +21,6 @@
 0x7750B8: jz      short loc_7750DE
 0x7750BA: push    edi
 0x7750BB: jmp     short loc_7750C0
-0x7750BD: align 10h
 0x7750C0: mov     edi, [ecx+8]
 0x7750C3: lea     eax, [ecx+8]
 0x7750C6: mov     ecx, [ecx]

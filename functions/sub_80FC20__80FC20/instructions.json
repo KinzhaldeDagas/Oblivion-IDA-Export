@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x80FC20",
-    "line": "push    ebx",
+    "line": "push    ebx; SpeedTreeBranchShader setup-program virtual: reuses shader definition 1 constant maps for current branch pass, then forwards to generic SetupShaderPrograms.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x80FC28",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x80FCCA",
-    "line": "call    SetupShaderPrograms",
+    "line": "call    NiD3DShader_SetupShaderPrograms; Verified (Oblivion): common NiD3DShader pass setup first invokes the current NiD3DPass bind/apply virtual, then applies this shader object's PixelConstantMap to CurrentPass->PixelShader and VertexConstantMap to CurrentPass->VertexShader. ShadowLightShader's vtable slot +0x38 points here, and its slot +0x88 builds those maps; this closes the map ownership path for its 0x18C..0x18F texture-effect selectors.",
     "mnemonic": "call",
     "size": 5
   },

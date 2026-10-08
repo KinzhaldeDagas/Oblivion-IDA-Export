@@ -1,1 +1,4 @@
-NiMatrix33
+struct NiMatrix33
+{
+float data[3][3];
+};

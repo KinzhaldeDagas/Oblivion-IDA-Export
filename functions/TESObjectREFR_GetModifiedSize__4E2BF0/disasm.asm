@@ -11,7 +11,7 @@
 0x4E2C09: mov     di, ax
 0x4E2C0C: mov     [esp+10h+arg_0], eax
 0x4E2C10: movzx   ebp, di
-0x4E2C13: call    sub_45A170
+0x4E2C13: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E2C18: test    al, al
 0x4E2C1A: jz      short loc_4E2C26
 0x4E2C1C: add     [esp+10h+arg_0], 6
@@ -35,7 +35,7 @@
 0x4E2C5D: push    esi
 0x4E2C5E: push    ebx
 0x4E2C5F: lea     ecx, [esi+44h]
-0x4E2C62: call    ExtraDataList_GetSaveSize
+0x4E2C62: call    ExtraDataList_GetSaveSize; Verified save-game modified-size estimator has no ExtraDistantData case. Its callers are the save-game modified-form path; this does not contradict the separate XLOD plugin-record writer. ExtraDistantData save-game policy remains Unknown.
 0x4E2C67: add     di, ax
 0x4E2C6A: mov     word ptr [esp+10h+arg_0], di
 0x4E2C6F: test    ebx, 2000000h
@@ -73,7 +73,7 @@
 0x4E2CDF: jz      short loc_4E2D2A
 0x4E2CE1: mov     ecx, [esi]
 0x4E2CE3: push    ecx; a1
-0x4E2CE4: call    TESForm_LookupByFormID
+0x4E2CE4: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E2CE9: mov     edx, [esi+5]
 0x4E2CEC: add     esp, 4
 0x4E2CEF: push    offset a__TesSharedT_7; "..\\TES Shared\\TESObjectREFR.cpp"

@@ -1,38 +1,38 @@
-0x6B7690: sub     esp, 18h
+0x6B7690: sub     esp, 18h; Conversation serialization writes UInt16 item count, every DialogueItem, and a UInt16 index for the list-internal current-item cursor. This is distinct from DialoguePackage's external currentItem/currentResponse indices.
 0x6B7693: cmp     byte ptr ds:0B05BACh, 0
 0x6B769A: push    ebp
 0x6B769B: push    esi
 0x6B769C: push    edi
 0x6B769D: mov     edi, ecx
 0x6B769F: mov     ecx, ds:0B33B00h
-0x6B76A5: mov     [esp+24h+var_4], 0
+0x6B76A5: mov     [esp+24h+source], 0
 0x6B76AD: mov     eax, [ecx+14h]
 0x6B76B0: mov     [esp+24h+var_C], 0
 0x6B76B8: mov     [esp+24h+var_14], eax
 0x6B76BC: jz      short loc_6B76C2
 0x6B76BE: mov     [esp+24h+var_14], eax
-0x6B76C2: call    sub_45A170
+0x6B76C2: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6B76C7: test    al, al
 0x6B76C9: jz      short loc_6B76FE
-0x6B76CB: mov     ecx, ds:0B33B00h
-0x6B76D1: push    4; Size
+0x6B76CB: mov     ecx, ds:0B33B00h; self
+0x6B76D1: push    4; byteCount
 0x6B76D3: lea     eax, [esp+28h+Src]
-0x6B76D7: push    eax; Src
+0x6B76D7: push    eax; source
 0x6B76D8: mov     [esp+2Ch+Src], 4B4F4C42h
 0x6B76E0: call    SaveLoad_SaveData
-0x6B76E5: mov     ecx, ds:0B33B00h
+0x6B76E5: mov     ecx, ds:0B33B00h; self
 0x6B76EB: mov     edx, [ecx+14h]
-0x6B76EE: push    2; Size
-0x6B76F0: lea     eax, [esp+28h+var_4]
-0x6B76F4: push    eax; Src
+0x6B76EE: push    2; byteCount
+0x6B76F0: lea     eax, [esp+28h+source]
+0x6B76F4: push    eax; source
 0x6B76F5: mov     [esp+2Ch+var_C], edx
 0x6B76F9: call    SaveLoad_SaveData
-0x6B76FE: mov     ecx, ds:0B33B00h
-0x6B7704: push    2; Size
+0x6B76FE: mov     ecx, ds:0B33B00h; self
+0x6B7704: push    2; byteCount
 0x6B7706: lea     edx, [esp+28h+var_18]
 0x6B770A: mov     [esp+28h+var_18], 0
 0x6B7712: mov     ebp, [ecx+14h]
-0x6B7715: push    edx; Src
+0x6B7715: push    edx; source
 0x6B7716: call    SaveLoad_SaveData
 0x6B771B: test    edi, edi
 0x6B771D: mov     esi, edi
@@ -41,8 +41,8 @@
 0x6B7725: jnz     short loc_6B772C
 0x6B7727: cmp     dword ptr [esi], 0
 0x6B772A: jz      short loc_6B773F
-0x6B772C: mov     ecx, [esi]
-0x6B772E: call    sub_6B7D30
+0x6B772C: mov     ecx, [esi]; this
+0x6B772E: call    DialogueItem__SaveGame; DialogueItem serialization writes UInt8 response count, each DialogueResponse, UInt8 internal current-response index (FF=null), then INFO/topic/ownerQuest/speaker FormIDs.
 0x6B7733: add     [esp+24h+var_18], 1
 0x6B7738: mov     esi, [esi+4]
 0x6B773B: test    esi, esi
@@ -54,15 +54,15 @@
 0x6B774D: mov     [esp+24h+var_10], 0FFFFFFFFh
 0x6B7755: jz      short loc_6B7768
 0x6B7757: mov     eax, [eax]
-0x6B7759: push    eax
-0x6B775A: mov     ecx, edi
-0x6B775C: call    sub_6B7520
+0x6B7759: push    eax; item
+0x6B775A: mov     ecx, edi; this
+0x6B775C: call    Conversation__GetDialogueItemIndex
 0x6B7761: movzx   ecx, ax
 0x6B7764: mov     [esp+24h+var_10], ecx
-0x6B7768: mov     ecx, ds:0B33B00h
-0x6B776E: push    2; Size
+0x6B7768: mov     ecx, ds:0B33B00h; self
+0x6B776E: push    2; byteCount
 0x6B7770: lea     edx, [esp+28h+var_10]
-0x6B7774: push    edx; Src
+0x6B7774: push    edx; source
 0x6B7775: call    SaveLoad_SaveData
 0x6B777A: cmp     byte ptr ds:0B05BACh, 0
 0x6B7781: jz      short loc_6B77EE
@@ -73,7 +73,7 @@
 0x6B7793: jz      short loc_6B77D2
 0x6B7795: mov     eax, [edi]
 0x6B7797: push    eax; a1
-0x6B7798: call    TESForm_LookupByFormID
+0x6B7798: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6B779D: mov     ecx, [edi+5]
 0x6B77A0: mov     edx, [eax]
 0x6B77A2: add     esp, 4
@@ -100,7 +100,7 @@
 0x6B77E6: call    sub_40FEC0
 0x6B77EB: add     esp, 10h
 0x6B77EE: mov     ecx, ds:0B33B00h
-0x6B77F4: call    sub_45A170
+0x6B77F4: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6B77F9: test    al, al
 0x6B77FB: jz      short loc_6B7830
 0x6B77FD: mov     edx, ds:0B33B00h

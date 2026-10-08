@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6267A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; DialoguePackage cursor/playback state machine. Speak(true) performs audible HighProcess playback; Speak(false) advances silently with no new timer. With waitingForLip clear, each false call advances one response cursor and can commit an exhausted item while selecting the next. With waitingForLip set, false calls cannot clear the flag or advance, so MiddleHigh execution stalls until HighProcess playback resumes or the package is destroyed.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6267CB",
-    "line": "cmp     [esi+4Ch], bl",
+    "line": "cmp     [esi+4Ch], bl; waitingForLip suppresses the normal response/item cursor advance. The later code can clear this flag only inside the startSpeech=true branch; Speak(false) returns without progress while it remains set.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6267D4",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x6267DB",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -217,19 +217,19 @@
   },
   {
     "ea": "0x626807",
-    "line": "call    sub_6B74B0",
+    "line": "call    Conversation__FirstItem",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62680C",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x62680F",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Shared cursor getter (identical layout): here the function named DialogueItem::GetCurrentResponse is operating on ConversationView and returns the current DialogueItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x62681B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62681D",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x626831",
-    "line": "call    edx",
+    "line": "call    edx; Empty/null conversation completion: mark the initiating speaker procedure completed.",
     "mnemonic": "call",
     "size": 2
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x626840",
-    "line": "call    edx",
+    "line": "call    edx; Empty/null conversation completion: mark the target procedure completed as well; the process handler subsequently cleans up the shared package.",
     "mnemonic": "call",
     "size": 2
   },
@@ -343,25 +343,25 @@
   },
   {
     "ea": "0x626847",
-    "line": "jz      short loc_62685E",
+    "line": "jz      short loc_62685E; Normal completed-response path: advance currentItem's response cursor. A modern save restores this cursor, preventing previously completed responses from being selected again.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x626849",
-    "line": "call    sub_6B7C00",
+    "line": "call    DialogueItem__NextResponse; One normal Speak call advances one response cursor. In MiddleHigh mode no replacement response timer is installed, so repeated process updates consume the chain at update cadence.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62684E",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626851",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x62685E",
-    "line": "mov     ecx, [esi+54h]; int",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -403,31 +403,31 @@
   },
   {
     "ea": "0x626865",
-    "line": "call    sub_6B7C30",
+    "line": "call    DialogueItem__RunResult; Commit a deferred ambient INFO only when advancing past its exhausted response list; even a response-less item commits on the next Speak update. Goodbye does not terminate here, and RunForRumors does not gate the result.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62686A",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x62686D",
-    "line": "call    sub_6B74C0",
+    "line": "call    Conversation__NextItem; Conversation::NextItem selects the next speaker/topic item.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x626872",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626875",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Shared cursor getter used on ConversationView; result becomes DialoguePackage.currentItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x62687D",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x62688D",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x626892",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626895",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x6268B0",
-    "line": "call    PrintError",
+    "line": "call    PrintError; No-response item is diagnosed but retained. On the next Speak update its deferred result is committed and the conversation advances; a chain can therefore execute response-less INFO results without audible dialogue.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6268EB",
-    "line": "jz      loc_626BEF",
+    "line": "jz      loc_626BEF; Only startSpeech=true enters voice/LIP initialization and establishes response timing. startSpeech=false leaves the selected response queued but silent; the next call advances it, unless waitingForLip has already frozen the state.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x6268FF",
-    "line": "mov     ecx, [esi+48h]",
+    "line": "mov     ecx, [esi+48h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x62690A",
-    "line": "call    sub_5EF930",
+    "line": "call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x626982",
-    "line": "call    Actor__InitDialogue",
+    "line": "call    Actor__InitDialogue; 3DTheft 2026-05-17: DialoguePackage execution calls Actor::InitDialogue for the initiating/async path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x626A25",
-    "line": "call    Actor__InitDialogue",
+    "line": "call    Actor__InitDialogue; Start audible ambient response and receive its active sound handle at DialoguePackage+0x3C. HighProcess waits SoundHandle::IsPlaying before advancing or cleaning the package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x626A90",
-    "line": "call    sub_521450",
+    "line": "call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x626A9F",
-    "line": "call    sub_520200",
+    "line": "call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x626AAC",
-    "line": "call    sub_477DB0",
+    "line": "call    ActorAnimData_QueueIdle; Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x626AD2",
-    "line": "call    sub_521450",
+    "line": "call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x626AE1",
-    "line": "call    sub_520200",
+    "line": "call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x626AF0",
-    "line": "call    sub_477DB0",
+    "line": "call    ActorAnimData_QueueIdle; Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,13 +1771,13 @@
   },
   {
     "ea": "0x626B1A",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626B1D",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1795,25 +1795,25 @@
   },
   {
     "ea": "0x626B26",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626B29",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x626B2E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x626B30",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,25 +1831,25 @@
   },
   {
     "ea": "0x626B39",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626B3C",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x626B41",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x626B43",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1879,25 +1879,25 @@
   },
   {
     "ea": "0x626B56",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x626B59",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x626B5E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x626B60",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x626BCF",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; No current item remains: set procedureCompleted=true on both participants. This does not itself destroy the DialoguePackage; the owning process update observes the flag and performs cleanup.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2212,5 +2212,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3630",
+    "line": "lea     ecx, [ebp-1Ch]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3633",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3638",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C363C",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C363F",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3642",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3644",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3649",
+    "line": "mov     eax, offset stru_AEC210",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C364E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

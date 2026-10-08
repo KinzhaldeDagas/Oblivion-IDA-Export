@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x61860D",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6186E9",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x6187EF",
-    "line": "call    sub_616980",
+    "line": "call    CombatController_SelectAttackSpellByMode",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x61882E",
-    "line": "call    sub_616980",
+    "line": "call    CombatController_SelectAttackSpellByMode",
     "mnemonic": "call",
     "size": 5
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x6189B5",
-    "line": "call    sub_6162D0",
+    "line": "call    CombatController_RemoveTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x6189D4",
-    "line": "jmp     sub_5EAE70",
+    "line": "jmp     sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "jmp",
     "size": 5
   }

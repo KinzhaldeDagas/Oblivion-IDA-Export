@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MIDL_SERVER_INFO",
+  "definition": "typedef _MIDL_SERVER_INFO_ MIDL_SERVER_INFO\n",
   "id": 18374686479671831361,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pStubDesc",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PMIDL_STUB_DESC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DispatchTable",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "const SERVER_ROUTINE *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProcString",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "PFORMAT_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FmtStringOffset",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "const unsigned __int16 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ThunkTable",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "const STUB_THUNK *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pTransferSyntax",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "PRPC_SYNTAX_IDENTIFIER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nCount",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "ULONG_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pSyntaxInfo",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "PMIDL_SYNTAX_INFO"
     }
   ],
   "name": "MIDL_SERVER_INFO",
+  "ordinal": 2972,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

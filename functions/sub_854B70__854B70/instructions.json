@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x854B70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): shared by PP-lighting class-1 and Hair pass builders. When renderStateClass's low byte is 1, constructs and appends a 0x10-byte RenderPass: passInfo bit 0x02 clear selects 0x18C, set selects 0x18D; otherwise it increments passCount and clears the pending pass flag. BSShaderProperty_GetRenderPassName maps these to \"BSSM_TEXEFFECT\" and \"BSSM_TEXEFFECT_S\". The PP-lighting caller invokes it only when TextureEffectData at +0xE0 is non-null. Fallout's AddTextureEffectPass_1x uses separate IDs 0x2E9/0x2EA and a direct abSkinned input; numeric pass IDs differ across versions.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x854B94",
-    "line": "cmp     [esp+18h+arg_10], 0",
+    "line": "cmp     [esp+18h+bPassInfoBit2], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x854B9F",
-    "line": "cmp     byte ptr [esp+18h+arg_8], 1",
+    "line": "cmp     byte ptr [esp+18h+renderStateClass], 1",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x854BB0",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     [esp+18h+renderStateClass], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x854BB6",
-    "line": "mov     esi, [esp+18h+arg_C]",
+    "line": "mov     esi, [esp+18h+passFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x854BC7",
-    "line": "mov     edx, [esp+18h+arg_0]",
+    "line": "mov     edx, [esp+18h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,37 +163,37 @@
   },
   {
     "ea": "0x854BCD",
-    "line": "push    0",
+    "line": "push    0; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x854BCF",
-    "line": "push    ecx",
+    "line": "push    ecx; byte6",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x854BD0",
-    "line": "push    18Dh",
+    "line": "push    18Dh; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x854BD5",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x854BD6",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x854BD7",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x854BE3",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     [esp+18h+renderStateClass], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x854BE7",
-    "line": "lea     eax, [esp+18h+arg_8]",
+    "line": "lea     eax, [esp+18h+renderStateClass]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x854BF7",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x854C13",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, [esp+18h+passCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x854C17",
-    "line": "mov     ecx, [esp+18h+arg_C]",
+    "line": "mov     ecx, [esp+18h+passFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x854C36",
-    "line": "cmp     byte ptr [esp+18h+arg_8], 1",
+    "line": "cmp     byte ptr [esp+18h+renderStateClass], 1",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x854C47",
-    "line": "mov     [esp+18h+arg_8], eax",
+    "line": "mov     [esp+18h+renderStateClass], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x854C4D",
-    "line": "mov     esi, [esp+18h+arg_C]",
+    "line": "mov     esi, [esp+18h+passFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x854C5E",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,37 +445,37 @@
   },
   {
     "ea": "0x854C64",
-    "line": "push    0",
+    "line": "push    0; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x854C66",
-    "line": "push    edx",
+    "line": "push    edx; byte6",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x854C67",
-    "line": "push    18Ch",
+    "line": "push    18Ch; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x854C6C",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x854C6D",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x854C6E",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x854C7A",
-    "line": "lea     edx, [esp+18h+arg_8]",
+    "line": "lea     edx, [esp+18h+renderStateClass]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x854C8A",
-    "line": "mov     [esp+1Ch+arg_8], eax",
+    "line": "mov     [esp+1Ch+renderStateClass], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x854C8E",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x854CAA",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, [esp+18h+passCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x854CB2",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, [esp+18h+passFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -646,5 +646,107 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D3AB0",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3AB3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3AB4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3AB9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3ABA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3ABB",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3ABE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3ABF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3AC4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3AC5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D3AC6",
+    "line": "mov     edx, [esp+passCount]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D3ACA",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3ACD",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3AD0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D3AD2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3AD7",
+    "line": "mov     eax, offset stru_AFBD98",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3ADC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

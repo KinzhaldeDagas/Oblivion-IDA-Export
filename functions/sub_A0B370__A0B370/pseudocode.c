@@ -1,4 +1,4 @@
-BSStringT *sub_A0B370()
+NiRTTI *sub_A0B370()
 {
-  return sub_70E220((BSStringT *)dword_B40A28, "NiPSysMeshUpdateModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B40A28, "NiPSysMeshUpdateModifier", &stru_B40D08); /*0xa0b384*/
 }

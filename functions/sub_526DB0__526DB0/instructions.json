@@ -120,14 +120,8 @@
     "size": 2
   },
   {
-    "ea": "0x526DEA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x526DF0",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -163,37 +157,37 @@
   },
   {
     "ea": "0x526E07",
-    "line": "mov     byte ptr [esp+14h+var_4], al",
+    "line": "mov     [esp+14h+firstPerson], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x526E0B",
-    "line": "mov     edx, [esp+14h+var_4]",
+    "line": "mov     edx, dword ptr [esp+14h+firstPerson]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x526E0F",
-    "line": "push    edx",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x526E10",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x526E15",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x526E1B",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +199,7 @@
   },
   {
     "ea": "0x526E1F",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +265,7 @@
   },
   {
     "ea": "0x526E3C",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +337,7 @@
   },
   {
     "ea": "0x526E5B",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,13 +1,15 @@
-void __thiscall sub_77DAF0(NiGeometryGroup *this, NiGeometryData *a2)
+//
+// DX11 authority audit 2026-10-01: Shared target of static A8AF5C+14 and unshared A8AF88+14 vtables. Reads geometryData+38; detaches buffer from group via 782930, destroys buffer via 778110, FormHeapFree, clears geometryData+38. No local lock acquisition. Verified Fallout 827D2858 family; Fallout data buffer offset+34 and virtual deleting destructor differ.
+void __thiscall NiStaticGeometryGroup_RemoveGeometryData(NiGeometryGroup *this, NiGeometryData *data)
 {
   NiGeometryBufferData *BuffData; // esi
 
-  BuffData = a2->member.BuffData;
-  if ( BuffData )
+  BuffData = data->member.BuffData; /*0x77daf6*/
+  if ( BuffData ) /*0x77dafb*/
   {
-    sub_782930(this, a2->member.BuffData);
-    sub_778110(BuffData);
-    FormHeapFree((unsigned int)BuffData);
-    a2->member.BuffData = 0;
+    NiGeometryGroup_RemoveBufferData(this, data->member.BuffData); /*0x77dafe*/
+    NiGeometryBufferData_Destroy(BuffData); /*0x77db05*/
+    FormHeapFree((unsigned int)BuffData); /*0x77db0b*/
+    data->member.BuffData = 0; /*0x77db13*/
   }
 }

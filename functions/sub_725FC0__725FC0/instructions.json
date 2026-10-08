@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x725FC0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+explicitBuffer];",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x725FD1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

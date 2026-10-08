@@ -29,7 +29,7 @@
 0x984538: push    ecx; lpFindFileData
 0x984539: push    eax; lpFileName
 0x98453A: call    dword ptr ds:0A2812Ch
-0x984540: mov     ebx, eax
+0x984540: mov     ebx, eax; MEF v50 ownership proof: _findfirst64i32 directly returns the raw HANDLE produced by FindFirstFileA; there is no CRT wrapper allocation. A successful result may be released with Win32 FindClose.
 0x984542: cmp     ebx, 0FFFFFFFFh
 0x984545: jnz     short loc_98458C
 0x984547: call    dword ptr ds:0A281ECh

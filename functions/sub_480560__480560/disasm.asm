@@ -46,7 +46,7 @@
 0x4805D7: jz      short loc_480615
 0x4805D9: push    4
 0x4805DB: mov     ecx, esi
-0x4805DD: call    NiNode_GetNiPropertyByID
+0x4805DD: call    NiNode_GetNiPropertyByID;
 0x4805E2: mov     esi, eax
 0x4805E4: test    esi, esi
 0x4805E6: jz      short loc_480615

@@ -1,5 +1,5 @@
 int sub_9F7270()
 {
-  GameSetting_ConstrAndReg(&dword_B39210, (int)"sNosesellionthin", (int)"Nose sellion thin/wide");
-  return atexit(sub_A22B40);
+  GameSetting_ConstrAndReg(&stru_B39210, "sNosesellionthin", "Nose sellion thin/wide"); /*0x9f727f*/
+  return atexit(sub_A22B40); /*0x9f728f*/
 }

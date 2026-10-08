@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ICatRegisterVtbl",
+  "definition": "struct ICatRegisterVtbl\n{\nHRESULT_0 (*QueryInterface)(ICatRegister_0 *, const IID *const, void **);\nULONG (*AddRef)(ICatRegister_0 *);\nULONG (*Release)(ICatRegister_0 *);\nHRESULT_0 (*RegisterCategories)(ICatRegister_0 *, ULONG, CATEGORYINFO *);\nHRESULT_0 (*UnRegisterCategories)(ICatRegister_0 *, ULONG, CATID *);\nHRESULT_0 (*RegisterClassImplCategories)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *);\nHRESULT_0 (*UnRegisterClassImplCategories)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *);\nHRESULT_0 (*RegisterClassReqCategories)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *);\nHRESULT_0 (*UnRegisterClassReqCategories)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *);\n}\n",
   "id": 18374686479672037764,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ICatRegister_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(ICatRegister_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(ICatRegister_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RegisterCategories",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(ICatRegister_0 *, ULONG, CATEGORYINFO *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnRegisterCategories",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ICatRegister_0 *, ULONG, CATID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RegisterClassImplCategories",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnRegisterClassImplCategories",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RegisterClassReqCategories",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnRegisterClassReqCategories",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(ICatRegister_0 *, const CLSID *const, ULONG, CATID *)"
     }
   ],
   "name": "ICatRegisterVtbl",
+  "ordinal": 5070,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 36
 }

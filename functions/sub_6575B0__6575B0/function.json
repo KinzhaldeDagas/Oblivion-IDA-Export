@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_6575B0",
+  "chunks": [
+    [
+      "0x6575B0",
+      "0x657881"
+    ],
+    [
+      "0x9C3BA0",
+      "0x9C3BD1"
+    ]
+  ],
+  "chunks_sha256": "e76328b05668fd4053507bce3b771ba4b9e6f4d2ef743b2119c60316ffee8a6d",
+  "comment_regular": "Verified (Oblivion): the same method is present in HighProcess and MiddleHighProcess vtable groups. It refreshes per-target enchantment shader state and the PlayerCharacter cache; the exact shared subobject interface name remains Candidate.",
+  "comment_repeatable": "Verified (Oblivion): the same method is present in HighProcess and MiddleHighProcess vtable groups. It refreshes per-target enchantment shader state and the PlayerCharacter cache; the exact shared subobject interface name remains Candidate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "Process_UpdateWeaponEnchantmentShader",
   "end_ea": "0x657881",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6575B0",
+  "name": "Process_UpdateWeaponEnchantmentShader",
   "segment": ".text",
   "sha256": "4a315b0643f98cb6fe9f86e06dadf20c635db1b8f1bf56657c5581704b04bb60",
   "size": 721,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6575B0",
-  "type": "void __thiscall(_BYTE *this, PlayerCharacter *, char, char, char)",
-  "xrefs_from_count": 275,
+  "total_chunk_size": 770,
+  "type": "void __thiscall(void *processOrCaster, TESObjectREFR *targetReference, bool arg3, bool arg4, bool arg5)",
+  "xrefs_from_count": 294,
   "xrefs_to_count": 2
 }

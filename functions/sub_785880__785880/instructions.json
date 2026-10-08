@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785880",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion 1.2.0.416: vector<float>::insert(position,value) wrapper returning a checked iterator; the called 0x526FA0 helper is the folded 4-byte insert-fill core.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x785883",
-    "line": "mov     ebp, [esp+0Ch+arg_4]",
+    "line": "mov     ebp, [esp+0Ch+position.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7858B8",
-    "line": "mov     ebx, [esp+14h+Src]",
+    "line": "mov     ebx, [esp+14h+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,25 +169,25 @@
   },
   {
     "ea": "0x7858C1",
-    "line": "mov     edx, [esp+14h+arg_C]",
+    "line": "mov     edx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7858C5",
-    "line": "mov     eax, [esp+14h+Src]",
+    "line": "mov     eax, [esp+14h+position.current]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7858C9",
-    "line": "push    edx; int",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7858CA",
-    "line": "push    1; int",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x7858CD",
-    "line": "push    ebp; int",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7858CE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7858D0",
-    "line": "call    sub_526FA0",
+    "line": "call    OB_stVectorFloat_InsertFill_CompilerCopy_010201A0; Oblivion 1.2.0.416: compiler-emitted vector<float>::insert(position,count,value) body used by the checked float insert-one wrapper; 4-byte stride, 1.5x growth, alias-safe local fill value, in-place shift or FormHeap reallocation. Named CompilerCopy because equivalent specializations also exist at other addresses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7858E2",
-    "line": "mov     [esp+14h+Src], edi",
+    "line": "mov     [esp+14h+position.current], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7858F8",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },

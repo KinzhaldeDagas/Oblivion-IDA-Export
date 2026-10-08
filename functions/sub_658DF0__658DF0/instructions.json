@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x658DF0",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x658DF6",
-    "line": "mov     ebp, [esp+8+arg_0]",
+    "line": "mov     ebp, [esp+8+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,31 +49,31 @@
   },
   {
     "ea": "0x658E02",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658E03",
-    "line": "push    ecx",
+    "line": "push    ecx; currentFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658E04",
-    "line": "push    ebp",
+    "line": "push    ebp; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658E05",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x658E07",
-    "line": "call    sub_647450",
+    "line": "call    LowProcess_LoadGame",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x658E14",
-    "line": "mov     [esp+10h+arg_8], ebx",
+    "line": "mov     [esp+10h+destination], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x658E18",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x658E25",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x658E2B",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x658E31",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658E32",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x658E53",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x658EA9",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -361,31 +361,31 @@
   },
   {
     "ea": "0x658EB2",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x658EB4",
-    "line": "lea     eax, [esp+14h+arg_8]",
+    "line": "lea     eax, [esp+14h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x658EB8",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658EB9",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x658EBE",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x658EC6",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658EC7",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x658ECD",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x658EDA",
-    "line": "lea     ecx, [edi+94h]",
+    "line": "lea     ecx, [edi+94h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x658EEB",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x658F12",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x658F19",
-    "line": "movzx   eax, word ptr [esp+14h+arg_8]",
+    "line": "movzx   eax, word ptr [esp+14h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x658F3C",
-    "line": "movzx   edx, word ptr [esp+18h+arg_8]",
+    "line": "movzx   edx, word ptr [esp+18h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x658F7F",
-    "line": "movzx   ecx, word ptr [esp+18h+arg_8]",
+    "line": "movzx   ecx, word ptr [esp+18h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x658FAB",
-    "line": "movzx   eax, word ptr [esp+10h+arg_8]",
+    "line": "movzx   eax, word ptr [esp+10h+destination]",
     "mnemonic": "movzx",
     "size": 5
   },

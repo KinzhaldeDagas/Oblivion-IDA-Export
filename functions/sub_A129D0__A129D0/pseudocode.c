@@ -1,4 +1,4 @@
-BSStringT *sub_A129D0()
+NiRTTI *sub_A129D0()
 {
-  return sub_70E220((BSStringT *)dword_BA8150, "bhkConvexVerticesShape", (int)dword_BA7F54);
+  return NiRTTI_Constructor(&stru_BA8150, "bhkConvexVerticesShape", &stru_BA7F54); /*0xa129e4*/
 }

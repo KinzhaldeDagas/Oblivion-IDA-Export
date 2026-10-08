@@ -1,8 +1,18 @@
-int __cdecl sub_7A5A50(int a1, int a2, int a3)
+// Overlap-safe backward deep-copy assignment of compact SIdvLeafTexture records.
+OB_SIdvLeafTexture_010201A0 *__cdecl OB_SIdvLeafTexture_CopyAssignRangeBackward_010201A0(
+        OB_SIdvLeafTexture_010201A0 *first,
+        OB_SIdvLeafTexture_010201A0 *last,
+        OB_SIdvLeafTexture_010201A0 *destinationEnd)
 {
-  int i; // esi
+  OB_SIdvLeafTexture_010201A0 *i; // esi
 
-  for ( i = a2; i != a1; sub_7A3470((float *)(i + a3 - a2), i) )
-    i -= 0x54;
-  return a3 - 0x54 * ((a2 - a1) / 0x54);
+  for ( i = last; /*0x7a5a53*/
+        i != first;
+        OB_SIdvLeafTexture_CopyAssign_010201A0(
+          (OB_SIdvLeafTexture_010201A0 *)((char *)i + (char *)destinationEnd - (char *)last),
+          i) )
+  {
+    i += 0xFFFFFFFF; /*0x7a5a82*/
+  }
+  return &destinationEnd[-(last - first)]; /*0x7a5a92*/
 }

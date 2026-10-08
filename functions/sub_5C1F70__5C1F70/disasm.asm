@@ -1,115 +1,115 @@
-0x5C1F70: sub     esp, 8
+0x5C1F70: sub     esp, 8; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Quick1..Quick8 controls 18..25 pressed and held/repeat paths.
 0x5C1F73: mov     eax, ds:0B33398h
 0x5C1F78: push    ebx
 0x5C1F79: push    esi
 0x5C1F7A: mov     esi, [eax+20h]
 0x5C1F7D: push    edi
-0x5C1F7E: call    InterfaceManager_IsMenuMode
+0x5C1F7E: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5C1F83: xor     edi, edi
 0x5C1F85: push    edi
 0x5C1F86: push    3EAh
 0x5C1F8B: mov     bl, al
-0x5C1F8D: call    sub_5790E0
+0x5C1F8D: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5C1F92: push    edi
 0x5C1F93: push    3FEh
 0x5C1F98: mov     [esp+24h+var_6], al
-0x5C1F9C: call    sub_5790E0
+0x5C1F9C: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5C1FA1: add     esp, 10h
 0x5C1FA4: push    1; a3
 0x5C1FA6: push    12h; a2
 0x5C1FA8: mov     ecx, esi; this
 0x5C1FAA: mov     [esp+1Ch+var_5], al
-0x5C1FAE: call    InputGlobals__QueryControlState
+0x5C1FAE: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C1FB3: test    eax, eax
 0x5C1FB5: jnz     loc_5C213E
 0x5C1FBB: push    edi; a3
 0x5C1FBC: push    12h; a2
 0x5C1FBE: mov     ecx, esi; this
-0x5C1FC0: call    InputGlobals__QueryControlState
+0x5C1FC0: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C1FC5: test    eax, eax
 0x5C1FC7: jnz     loc_5C213E
 0x5C1FCD: push    1; a3
 0x5C1FCF: push    13h; a2
 0x5C1FD1: mov     ecx, esi; this
-0x5C1FD3: call    InputGlobals__QueryControlState
+0x5C1FD3: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C1FD8: test    eax, eax
 0x5C1FDA: jnz     loc_5C2132
 0x5C1FE0: push    edi; a3
 0x5C1FE1: push    13h; a2
 0x5C1FE3: mov     ecx, esi; this
-0x5C1FE5: call    InputGlobals__QueryControlState
+0x5C1FE5: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C1FEA: test    eax, eax
 0x5C1FEC: jnz     loc_5C2132
 0x5C1FF2: push    1; a3
 0x5C1FF4: push    14h; a2
 0x5C1FF6: mov     ecx, esi; this
-0x5C1FF8: call    InputGlobals__QueryControlState
+0x5C1FF8: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C1FFD: test    eax, eax
 0x5C1FFF: jnz     loc_5C2123
 0x5C2005: push    edi; a3
 0x5C2006: push    14h; a2
 0x5C2008: mov     ecx, esi; this
-0x5C200A: call    InputGlobals__QueryControlState
+0x5C200A: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C200F: test    eax, eax
 0x5C2011: jnz     loc_5C2123
 0x5C2017: push    1; a3
 0x5C2019: push    15h; a2
 0x5C201B: mov     ecx, esi; this
-0x5C201D: call    InputGlobals__QueryControlState
+0x5C201D: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C2022: test    eax, eax
 0x5C2024: jnz     loc_5C2114
 0x5C202A: push    edi; a3
 0x5C202B: push    15h; a2
 0x5C202D: mov     ecx, esi; this
-0x5C202F: call    InputGlobals__QueryControlState
+0x5C202F: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C2034: test    eax, eax
 0x5C2036: jnz     loc_5C2114
 0x5C203C: push    1; a3
 0x5C203E: push    16h; a2
 0x5C2040: mov     ecx, esi; this
-0x5C2042: call    InputGlobals__QueryControlState
+0x5C2042: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C2047: test    eax, eax
 0x5C2049: jnz     loc_5C2105
 0x5C204F: push    edi; a3
 0x5C2050: push    16h; a2
 0x5C2052: mov     ecx, esi; this
-0x5C2054: call    InputGlobals__QueryControlState
+0x5C2054: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C2059: test    eax, eax
 0x5C205B: jnz     loc_5C2105
 0x5C2061: push    1; a3
 0x5C2063: push    17h; a2
 0x5C2065: mov     ecx, esi; this
-0x5C2067: call    InputGlobals__QueryControlState
+0x5C2067: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C206C: test    eax, eax
 0x5C206E: jnz     loc_5C20F6
 0x5C2074: push    edi; a3
 0x5C2075: push    17h; a2
 0x5C2077: mov     ecx, esi; this
-0x5C2079: call    InputGlobals__QueryControlState
+0x5C2079: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C207E: test    eax, eax
 0x5C2080: jnz     short loc_5C20F6
 0x5C2082: push    1; a3
 0x5C2084: push    18h; a2
 0x5C2086: mov     ecx, esi; this
-0x5C2088: call    InputGlobals__QueryControlState
+0x5C2088: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C208D: test    eax, eax
 0x5C208F: jnz     short loc_5C20E7
 0x5C2091: push    edi; a3
 0x5C2092: push    18h; a2
 0x5C2094: mov     ecx, esi; this
-0x5C2096: call    InputGlobals__QueryControlState
+0x5C2096: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C209B: test    eax, eax
 0x5C209D: jnz     short loc_5C20E7
 0x5C209F: push    1; a3
 0x5C20A1: push    19h; a2
 0x5C20A3: mov     ecx, esi; this
-0x5C20A5: call    InputGlobals__QueryControlState
+0x5C20A5: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C20AA: test    eax, eax
 0x5C20AC: jnz     short loc_5C20D8
 0x5C20AE: push    edi; a3
 0x5C20AF: push    19h; a2
 0x5C20B1: mov     ecx, esi; this
-0x5C20B3: call    InputGlobals__QueryControlState
+0x5C20B3: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x5C20B8: test    eax, eax
 0x5C20BA: jnz     short loc_5C20D8
 0x5C20BC: cmp     dword ptr ds:0B3B430h, 0FFFFFFFFh
@@ -183,19 +183,19 @@
 0x5C21E3: test    bl, bl
 0x5C21E5: jnz     loc_5C254D
 0x5C21EB: mov     byte ptr ds:0B3B420h, 1
-0x5C21F2: call    sub_5C1900
+0x5C21F2: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5C21F7: call    sub_5C1100
 0x5C21FC: shl     eax, 4
-0x5C21FF: cmp     ds:dword_B3B44C[eax], edi
+0x5C21FF: cmp     dword ptr ds:unk_B3B44C[eax], edi
 0x5C2205: jz      loc_5C252D
 0x5C220B: push    ebp
 0x5C220C: call    sub_5C1100
 0x5C2211: shl     eax, 4
-0x5C2214: mov     esi, ds:dword_B3B44C[eax]
+0x5C2214: mov     esi, dword ptr ds:unk_B3B44C[eax]
 0x5C221A: call    sub_5C1100
 0x5C221F: shl     eax, 4
 0x5C2222: cmp     esi, edi
-0x5C2224: mov     ebp, ds:dword_B3B444[eax]
+0x5C2224: mov     ebp, dword ptr ds:unk_B3B444[eax]
 0x5C222A: jbe     loc_5C252C
 0x5C2230: mov     ecx, ds:0B333C4h
 0x5C2236: mov     [esp+18h+var_4], esi
@@ -303,14 +303,14 @@
 0x5C2388: test    bl, bl
 0x5C238A: jz      loc_5C24A5
 0x5C2390: mov     ecx, ds:0B333C4h
-0x5C2396: call    Actor_GetCurrentAction
+0x5C2396: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5C239B: cmp     eax, 0FFFFFFFFh
 0x5C239E: jnz     loc_5C24A5
 0x5C23A4: push    0
 0x5C23A6: push    1
 0x5C23A8: call    sub_5C1100
 0x5C23AD: shl     eax, 4
-0x5C23B0: mov     eax, ds:dword_B3B444[eax]
+0x5C23B0: mov     eax, dword ptr ds:unk_B3B444[eax]
 0x5C23B6: mov     ecx, [eax+8]
 0x5C23B9: push    ecx
 0x5C23BA: call    sub_5C16E0
@@ -322,8 +322,8 @@
 0x5C23CB: push    0
 0x5C23CD: push    0
 0x5C23CF: push    eax
-0x5C23D0: mov     ecx, esi
-0x5C23D2: call    TESHealthForm_GetHealth
+0x5C23D0: mov     ecx, esi; this
+0x5C23D2: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5C23D7: mov     ecx, ds:0B333C4h
 0x5C23DD: push    eax
 0x5C23DE: push    edi
@@ -331,7 +331,7 @@
 0x5C23E4: push    0
 0x5C23E6: push    0
 0x5C23E8: jmp     loc_5C249A
-0x5C23ED: call    Actor_GetCurrentAction
+0x5C23ED: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5C23F2: cmp     eax, 0FFFFFFFFh
 0x5C23F5: jz      short loc_5C244A
 0x5C23F7: mov     al, [edi+4]
@@ -369,7 +369,7 @@
 0x5C2453: mov     byte ptr ds:0B3B420h, 1
 0x5C245A: call    sub_5C1100
 0x5C245F: shl     eax, 4
-0x5C2462: mov     edx, ds:dword_B3B444[eax]
+0x5C2462: mov     edx, dword ptr ds:unk_B3B444[eax]
 0x5C2468: mov     eax, [edx+8]
 0x5C246B: push    eax
 0x5C246C: call    sub_5C16E0
@@ -380,12 +380,12 @@
 0x5C247B: push    0
 0x5C247D: push    1
 0x5C247F: push    eax
-0x5C2480: mov     ecx, esi
-0x5C2482: call    TESHealthForm_GetHealth
+0x5C2480: mov     ecx, esi; this
+0x5C2482: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5C2487: mov     ecx, ds:0B333C4h
 0x5C248D: push    eax
 0x5C248E: push    edi
-0x5C248F: call    Actor_EquipItem
+0x5C248F: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5C2494: mov     edx, [esi+8]
 0x5C2497: push    0
 0x5C2499: push    edx
@@ -394,7 +394,7 @@
 0x5C24A5: mov     ecx, esi
 0x5C24A7: call    ContainerEntryExtraData_DestroyDataTable
 0x5C24AC: push    esi
-0x5C24AD: call    FormHeapFree
+0x5C24AD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C24B2: add     esp, 4
 0x5C24B5: jmp     short loc_5C24FB
 0x5C24B7: call    sub_65D4C0

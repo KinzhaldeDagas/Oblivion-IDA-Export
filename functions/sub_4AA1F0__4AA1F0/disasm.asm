@@ -69,9 +69,9 @@
 0x4AA2E8: add     ebx, [esp+164h+arg_4]
 0x4AA2EF: jmp     loc_4ABB16
 0x4AA2F4: mov     ecx, [esp+164h+var_138]
-0x4AA2F8: call    sub_5E0F50
+0x4AA2F8: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x4AA2FD: mov     esi, eax
-0x4AA2FF: cmp     esi, offset dword_B35788
+0x4AA2FF: cmp     esi, offset unk_B35788
 0x4AA305: jnz     short loc_4AA30E
 0x4AA307: mov     eax, offset aDefault; " (default)"
 0x4AA30C: jmp     short loc_4AA31A
@@ -112,7 +112,7 @@
 0x4AA388: mov     edx, [eax+0DCh]
 0x4AA38E: add     ebx, edi
 0x4AA390: add     esp, 14h
-0x4AA393: mov     ecx, offset dword_B35788
+0x4AA393: mov     ecx, offset unk_B35788
 0x4AA398: mov     [esp+164h+var_150], ebx
 0x4AA39C: call    edx
 0x4AA39E: mov     edx, [esi]
@@ -148,7 +148,7 @@
 0x4AA400: mov     edx, [eax+10Ch]
 0x4AA406: add     ebx, edi
 0x4AA408: add     esp, 14h
-0x4AA40B: mov     ecx, offset dword_B35788
+0x4AA40B: mov     ecx, offset unk_B35788
 0x4AA410: mov     [esp+164h+var_150], ebx
 0x4AA414: call    edx
 0x4AA416: mov     edx, [esi]
@@ -184,7 +184,7 @@
 0x4AA478: mov     edx, [eax+110h]
 0x4AA47E: add     ebx, edi
 0x4AA480: add     esp, 14h
-0x4AA483: mov     ecx, offset dword_B35788
+0x4AA483: mov     ecx, offset unk_B35788
 0x4AA488: mov     [esp+164h+var_150], ebx; float
 0x4AA48C: call    edx
 0x4AA48E: mov     eax, [esi]
@@ -220,7 +220,7 @@
 0x4AA4F1: mov     eax, [edx+114h]
 0x4AA4F7: add     ebx, edi
 0x4AA4F9: add     esp, 14h
-0x4AA4FC: mov     ecx, offset dword_B35788
+0x4AA4FC: mov     ecx, offset unk_B35788
 0x4AA501: mov     [esp+160h+var_14C], ebx
 0x4AA505: call    eax
 0x4AA507: mov     edx, [esi]
@@ -256,7 +256,7 @@
 0x4AA56A: mov     eax, [edx+118h]
 0x4AA570: add     ebx, edi
 0x4AA572: add     esp, 14h
-0x4AA575: mov     ecx, offset dword_B35788
+0x4AA575: mov     ecx, offset unk_B35788
 0x4AA57A: mov     [esp+15Ch+var_148], ebx
 0x4AA57E: call    eax
 0x4AA580: mov     edx, [esi]
@@ -304,7 +304,7 @@
 0x4AA60C: mov     eax, [edx+11Ch]
 0x4AA612: add     ebx, edi
 0x4AA614: add     esp, 14h
-0x4AA617: mov     ecx, offset dword_B35788
+0x4AA617: mov     ecx, offset unk_B35788
 0x4AA61C: mov     [esp+158h+var_144], ebx
 0x4AA620: call    eax
 0x4AA622: mov     edx, [esi]
@@ -340,7 +340,7 @@
 0x4AA684: mov     edx, [eax+120h]
 0x4AA68A: add     ebx, edi
 0x4AA68C: add     esp, 14h
-0x4AA68F: mov     ecx, offset dword_B35788
+0x4AA68F: mov     ecx, offset unk_B35788
 0x4AA694: mov     [esp+154h+var_140], ebx
 0x4AA698: call    edx
 0x4AA69A: mov     eax, [esi]
@@ -376,7 +376,7 @@
 0x4AA6FD: mov     eax, [edx+124h]
 0x4AA703: add     ebx, edi
 0x4AA705: add     esp, 14h
-0x4AA708: mov     ecx, offset dword_B35788
+0x4AA708: mov     ecx, offset unk_B35788
 0x4AA70D: mov     [esp+150h+var_13C], ebx
 0x4AA711: call    eax
 0x4AA713: mov     edx, [esi]
@@ -431,7 +431,7 @@
 0x4AA7B5: mov     eax, [edx+128h]
 0x4AA7BB: add     ebx, edi
 0x4AA7BD: add     esp, 14h
-0x4AA7C0: mov     ecx, offset dword_B35788
+0x4AA7C0: mov     ecx, offset unk_B35788
 0x4AA7C5: mov     [esp+150h+var_13C], ebx
 0x4AA7C9: call    eax
 0x4AA7CB: mov     edx, [esi]
@@ -467,7 +467,7 @@
 0x4AA82D: mov     edx, [eax+12Ch]
 0x4AA833: add     ebx, edi
 0x4AA835: add     esp, 14h
-0x4AA838: mov     ecx, offset dword_B35788
+0x4AA838: mov     ecx, offset unk_B35788
 0x4AA83D: mov     [esp+150h+var_13C], ebx
 0x4AA841: call    edx
 0x4AA843: mov     edx, [esi]
@@ -484,7 +484,7 @@
 0x4AA85E: call    sub_4A9930
 0x4AA863: mov     eax, ds:0B35788h
 0x4AA868: mov     edx, [eax+130h]
-0x4AA86E: mov     ecx, offset dword_B35788
+0x4AA86E: mov     ecx, offset unk_B35788
 0x4AA873: call    edx
 0x4AA875: mov     edx, [esi]
 0x4AA877: movsx   eax, al
@@ -521,7 +521,7 @@
 0x4AA8DD: mov     eax, [edx+134h]
 0x4AA8E3: add     ebx, edi
 0x4AA8E5: add     esp, 14h
-0x4AA8E8: mov     ecx, offset dword_B35788
+0x4AA8E8: mov     ecx, offset unk_B35788
 0x4AA8ED: mov     [esp+150h+var_13C], ebx
 0x4AA8F1: call    eax
 0x4AA8F3: mov     edx, [esi]
@@ -538,7 +538,7 @@
 0x4AA90E: call    sub_4A9930
 0x4AA913: mov     eax, ds:0B35788h
 0x4AA918: mov     edx, [eax+138h]
-0x4AA91E: mov     ecx, offset dword_B35788
+0x4AA91E: mov     ecx, offset unk_B35788
 0x4AA923: call    edx
 0x4AA925: mov     edx, [esi]
 0x4AA927: movsx   eax, al
@@ -577,7 +577,7 @@
 0x4AA994: mov     eax, [edx+13Ch]
 0x4AA99A: add     ebx, edi
 0x4AA99C: add     esp, 14h
-0x4AA99F: mov     ecx, offset dword_B35788
+0x4AA99F: mov     ecx, offset unk_B35788
 0x4AA9A4: mov     [esp+150h+var_13C], ebx
 0x4AA9A8: call    eax
 0x4AA9AA: mov     edx, [esi]
@@ -594,7 +594,7 @@
 0x4AA9C5: call    sub_4A98D0
 0x4AA9CA: mov     edx, ds:0B35788h
 0x4AA9D0: mov     eax, [edx+140h]
-0x4AA9D6: mov     ecx, offset dword_B35788
+0x4AA9D6: mov     ecx, offset unk_B35788
 0x4AA9DB: call    eax
 0x4AA9DD: mov     edx, [esi]
 0x4AA9DF: mov     eax, [edx+140h]
@@ -642,7 +642,7 @@
 0x4AAA69: mov     edx, [eax+0DCh]
 0x4AAA6F: add     ebp, edi
 0x4AAA71: add     esp, 14h
-0x4AAA74: mov     ecx, offset dword_B35788
+0x4AAA74: mov     ecx, offset unk_B35788
 0x4AAA79: mov     [esp+150h+var_140], ebp
 0x4AAA7D: call    edx
 0x4AAA7F: mov     edx, [esi]
@@ -678,7 +678,7 @@
 0x4AAAE1: mov     edx, [eax+0E4h]
 0x4AAAE7: add     ebp, edi
 0x4AAAE9: add     esp, 14h
-0x4AAAEC: mov     ecx, offset dword_B35788
+0x4AAAEC: mov     ecx, offset unk_B35788
 0x4AAAF1: mov     [esp+150h+var_140], ebp
 0x4AAAF5: call    edx
 0x4AAAF7: mov     edx, [esi]
@@ -714,7 +714,7 @@
 0x4AAB59: mov     edx, [eax+0E0h]
 0x4AAB5F: add     ebp, edi
 0x4AAB61: add     esp, 14h
-0x4AAB64: mov     ecx, offset dword_B35788
+0x4AAB64: mov     ecx, offset unk_B35788
 0x4AAB69: mov     [esp+150h+var_140], ebp
 0x4AAB6D: call    edx
 0x4AAB6F: mov     edx, [esi]
@@ -750,7 +750,7 @@
 0x4AABD1: mov     edx, [eax+100h]
 0x4AABD7: add     ebp, edi
 0x4AABD9: add     esp, 14h
-0x4AABDC: mov     ecx, offset dword_B35788
+0x4AABDC: mov     ecx, offset unk_B35788
 0x4AABE1: mov     [esp+150h+var_140], ebp
 0x4AABE5: call    edx
 0x4AABE7: mov     eax, [esi]
@@ -767,7 +767,7 @@
 0x4AAC02: call    sub_4A98D0
 0x4AAC07: mov     edx, ds:0B35788h
 0x4AAC0D: mov     eax, [edx+104h]
-0x4AAC13: mov     ecx, offset dword_B35788
+0x4AAC13: mov     ecx, offset unk_B35788
 0x4AAC18: call    eax
 0x4AAC1A: mov     edx, [esi]
 0x4AAC1C: mov     eax, [edx+104h]
@@ -804,7 +804,7 @@
 0x4AAC81: mov     edx, [eax+0E8h]
 0x4AAC87: add     ebp, edi
 0x4AAC89: add     esp, 14h
-0x4AAC8C: mov     ecx, offset dword_B35788
+0x4AAC8C: mov     ecx, offset unk_B35788
 0x4AAC91: mov     [esp+150h+var_140], ebp
 0x4AAC95: call    edx
 0x4AAC97: mov     eax, [esi]
@@ -821,7 +821,7 @@
 0x4AACB2: call    sub_4A98D0
 0x4AACB7: mov     edx, ds:0B35788h
 0x4AACBD: mov     eax, [edx+0ECh]
-0x4AACC3: mov     ecx, offset dword_B35788
+0x4AACC3: mov     ecx, offset unk_B35788
 0x4AACC8: call    eax
 0x4AACCA: mov     edx, [esi]
 0x4AACCC: mov     eax, [edx+0ECh]
@@ -858,7 +858,7 @@
 0x4AAD31: mov     edx, [eax+0F0h]
 0x4AAD37: add     ebp, edi
 0x4AAD39: add     esp, 14h
-0x4AAD3C: mov     ecx, offset dword_B35788
+0x4AAD3C: mov     ecx, offset unk_B35788
 0x4AAD41: mov     [esp+150h+var_140], ebp
 0x4AAD45: call    edx
 0x4AAD47: mov     eax, [esi]
@@ -875,7 +875,7 @@
 0x4AAD62: call    sub_4A98D0
 0x4AAD67: mov     edx, ds:0B35788h
 0x4AAD6D: mov     eax, [edx+0F4h]
-0x4AAD73: mov     ecx, offset dword_B35788
+0x4AAD73: mov     ecx, offset unk_B35788
 0x4AAD78: call    eax
 0x4AAD7A: mov     edx, [esi]
 0x4AAD7C: mov     eax, [edx+0F4h]
@@ -912,7 +912,7 @@
 0x4AADE1: mov     edx, [eax+0F8h]
 0x4AADE7: add     ebp, edi
 0x4AADE9: add     esp, 14h
-0x4AADEC: mov     ecx, offset dword_B35788
+0x4AADEC: mov     ecx, offset unk_B35788
 0x4AADF1: mov     [esp+150h+var_140], ebp
 0x4AADF5: call    edx
 0x4AADF7: mov     eax, [esi]
@@ -929,7 +929,7 @@
 0x4AAE12: call    sub_4A98D0
 0x4AAE17: mov     edx, ds:0B35788h
 0x4AAE1D: mov     eax, [edx+0FCh]
-0x4AAE23: mov     ecx, offset dword_B35788
+0x4AAE23: mov     ecx, offset unk_B35788
 0x4AAE28: call    eax
 0x4AAE2A: mov     edx, [esi]
 0x4AAE2C: mov     eax, [edx+0FCh]
@@ -966,7 +966,7 @@
 0x4AAE91: mov     edx, [eax+144h]
 0x4AAE97: add     ebp, edi
 0x4AAE99: add     esp, 14h
-0x4AAE9C: mov     ecx, offset dword_B35788
+0x4AAE9C: mov     ecx, offset unk_B35788
 0x4AAEA1: mov     [esp+150h+var_140], ebp
 0x4AAEA5: call    edx
 0x4AAEA7: mov     eax, [esi]
@@ -1002,7 +1002,7 @@
 0x4AAF0A: mov     eax, [edx+148h]
 0x4AAF10: add     ebp, edi
 0x4AAF12: add     esp, 14h
-0x4AAF15: mov     ecx, offset dword_B35788
+0x4AAF15: mov     ecx, offset unk_B35788
 0x4AAF1A: mov     [esp+150h+var_140], ebp
 0x4AAF1E: call    eax
 0x4AAF20: mov     edx, [esi]
@@ -1038,7 +1038,7 @@
 0x4AAF83: mov     eax, [edx+14Ch]
 0x4AAF89: add     ebp, edi
 0x4AAF8B: add     esp, 14h
-0x4AAF8E: mov     ecx, offset dword_B35788
+0x4AAF8E: mov     ecx, offset unk_B35788
 0x4AAF93: mov     [esp+150h+var_140], ebp
 0x4AAF97: call    eax
 0x4AAF99: mov     edx, [esi]
@@ -1074,7 +1074,7 @@
 0x4AAFFC: mov     eax, [edx+150h]
 0x4AB002: add     ebp, edi
 0x4AB004: add     esp, 14h
-0x4AB007: mov     ecx, offset dword_B35788
+0x4AB007: mov     ecx, offset unk_B35788
 0x4AB00C: mov     [esp+150h+var_140], ebp
 0x4AB010: call    eax
 0x4AB012: mov     edx, [esi]
@@ -1110,7 +1110,7 @@
 0x4AB075: mov     eax, [edx+154h]
 0x4AB07B: add     ebp, edi
 0x4AB07D: add     esp, 14h
-0x4AB080: mov     ecx, offset dword_B35788
+0x4AB080: mov     ecx, offset unk_B35788
 0x4AB085: mov     [esp+150h+var_140], ebp
 0x4AB089: call    eax
 0x4AB08B: mov     edx, [esi]
@@ -1146,7 +1146,7 @@
 0x4AB0EE: mov     eax, [edx+158h]
 0x4AB0F4: add     ebp, edi
 0x4AB0F6: add     esp, 14h
-0x4AB0F9: mov     ecx, offset dword_B35788
+0x4AB0F9: mov     ecx, offset unk_B35788
 0x4AB0FE: mov     [esp+150h+var_140], ebp
 0x4AB102: call    eax
 0x4AB104: mov     edx, [esi]
@@ -1182,7 +1182,7 @@
 0x4AB167: mov     eax, [edx+15Ch]
 0x4AB16D: add     ebp, edi
 0x4AB16F: add     esp, 14h
-0x4AB172: mov     ecx, offset dword_B35788
+0x4AB172: mov     ecx, offset unk_B35788
 0x4AB177: mov     [esp+150h+var_140], ebp
 0x4AB17B: call    eax
 0x4AB17D: mov     edx, [esi]
@@ -1383,7 +1383,7 @@
 0x4AB3ED: call    InterfaceMgr_DebugTextLine
 0x4AB3F2: add     ebx, edi
 0x4AB3F4: add     esp, 14h
-0x4AB3F7: mov     ecx, offset dword_B35788
+0x4AB3F7: mov     ecx, offset unk_B35788
 0x4AB3FC: mov     [esp+164h+var_150], ebx
 0x4AB400: mov     [esp+164h+var_154], ebx
 0x4AB404: call    sub_4A9F70
@@ -1397,7 +1397,7 @@
 0x4AB41C: push    ecx; int
 0x4AB41D: mov     ecx, esi
 0x4AB41F: call    sub_4A98D0
-0x4AB424: mov     ecx, offset dword_B35788
+0x4AB424: mov     ecx, offset unk_B35788
 0x4AB429: call    sub_4A9F30
 0x4AB42E: push    ecx
 0x4AB42F: mov     ecx, esi
@@ -1430,7 +1430,7 @@
 0x4AB486: call    InterfaceMgr_DebugTextLine
 0x4AB48B: add     ebx, edi
 0x4AB48D: add     esp, 14h
-0x4AB490: mov     ecx, offset dword_B35788
+0x4AB490: mov     ecx, offset unk_B35788
 0x4AB495: mov     [esp+164h+var_150], ebx
 0x4AB499: mov     ebp, ebx
 0x4AB49B: call    sub_4AA070
@@ -1444,7 +1444,7 @@
 0x4AB4B3: push    ecx; int
 0x4AB4B4: mov     ecx, esi
 0x4AB4B6: call    sub_4A98D0
-0x4AB4BB: mov     ecx, offset dword_B35788
+0x4AB4BB: mov     ecx, offset unk_B35788
 0x4AB4C0: call    sub_4AA030
 0x4AB4C5: push    ecx
 0x4AB4C6: mov     ecx, esi
@@ -1477,7 +1477,7 @@
 0x4AB51D: call    InterfaceMgr_DebugTextLine
 0x4AB522: add     ebx, edi
 0x4AB524: add     esp, 14h
-0x4AB527: mov     ecx, offset dword_B35788
+0x4AB527: mov     ecx, offset unk_B35788
 0x4AB52C: mov     [esp+164h+var_150], ebx
 0x4AB530: call    sub_4AA170
 0x4AB535: push    ecx
@@ -1490,7 +1490,7 @@
 0x4AB548: push    ecx; int
 0x4AB549: mov     ecx, esi
 0x4AB54B: call    sub_4A98D0
-0x4AB550: mov     ecx, offset dword_B35788
+0x4AB550: mov     ecx, offset unk_B35788
 0x4AB555: call    sub_4AA1B0
 0x4AB55A: push    ecx
 0x4AB55B: mov     ecx, esi
@@ -1523,7 +1523,7 @@
 0x4AB5B2: call    InterfaceMgr_DebugTextLine
 0x4AB5B7: add     ebx, edi
 0x4AB5B9: add     esp, 14h
-0x4AB5BC: mov     ecx, offset dword_B35788
+0x4AB5BC: mov     ecx, offset unk_B35788
 0x4AB5C1: mov     [esp+164h+var_150], ebx
 0x4AB5C5: call    sub_4AA0B0
 0x4AB5CA: push    ecx
@@ -1555,7 +1555,7 @@
 0x4AB61D: call    InterfaceMgr_DebugTextLine
 0x4AB622: add     ebx, edi
 0x4AB624: add     esp, 14h
-0x4AB627: mov     ecx, offset dword_B35788
+0x4AB627: mov     ecx, offset unk_B35788
 0x4AB62C: mov     [esp+164h+var_150], ebx
 0x4AB630: call    sub_4AA130
 0x4AB635: push    ecx
@@ -1587,7 +1587,7 @@
 0x4AB688: call    InterfaceMgr_DebugTextLine
 0x4AB68D: add     ebx, edi
 0x4AB68F: add     esp, 14h
-0x4AB692: mov     ecx, offset dword_B35788
+0x4AB692: mov     ecx, offset unk_B35788
 0x4AB697: mov     [esp+164h+var_150], ebx
 0x4AB69B: call    sub_4A9FB0
 0x4AB6A0: push    ecx
@@ -1619,7 +1619,7 @@
 0x4AB6F3: call    InterfaceMgr_DebugTextLine
 0x4AB6F8: add     ebx, edi
 0x4AB6FA: add     esp, 14h
-0x4AB6FD: mov     ecx, offset dword_B35788
+0x4AB6FD: mov     ecx, offset unk_B35788
 0x4AB702: mov     [esp+164h+var_150], ebx
 0x4AB706: call    sub_4A9FF0
 0x4AB70B: push    ecx
@@ -1650,7 +1650,7 @@
 0x4AB75D: push    ecx; int
 0x4AB75E: call    InterfaceMgr_DebugTextLine
 0x4AB763: add     esp, 14h
-0x4AB766: mov     ecx, offset dword_B35788
+0x4AB766: mov     ecx, offset unk_B35788
 0x4AB76B: add     ebx, edi
 0x4AB76D: call    sub_4A9CF0
 0x4AB772: push    ecx
@@ -1663,7 +1663,7 @@
 0x4AB785: push    edx; int
 0x4AB786: mov     ecx, esi
 0x4AB788: call    sub_4A98D0
-0x4AB78D: mov     ecx, offset dword_B35788
+0x4AB78D: mov     ecx, offset unk_B35788
 0x4AB792: call    sub_4A9CB0
 0x4AB797: push    ecx
 0x4AB798: mov     ecx, esi
@@ -1695,7 +1695,7 @@
 0x4AB7EE: push    ecx; int
 0x4AB7EF: call    InterfaceMgr_DebugTextLine
 0x4AB7F4: add     esp, 14h
-0x4AB7F7: mov     ecx, offset dword_B35788
+0x4AB7F7: mov     ecx, offset unk_B35788
 0x4AB7FC: mov     [esp+164h+var_154], ebp
 0x4AB800: call    sub_4A9D30
 0x4AB805: push    ecx
@@ -1708,7 +1708,7 @@
 0x4AB818: push    edx; int
 0x4AB819: mov     ecx, esi
 0x4AB81B: call    sub_4A98D0
-0x4AB820: mov     ecx, offset dword_B35788
+0x4AB820: mov     ecx, offset unk_B35788
 0x4AB825: call    sub_4A9D70
 0x4AB82A: push    ecx
 0x4AB82B: mov     ecx, esi
@@ -1741,7 +1741,7 @@
 0x4AB882: call    InterfaceMgr_DebugTextLine
 0x4AB887: add     ebp, edi
 0x4AB889: add     esp, 14h
-0x4AB88C: mov     ecx, offset dword_B35788
+0x4AB88C: mov     ecx, offset unk_B35788
 0x4AB891: mov     [esp+164h+var_154], ebp
 0x4AB895: call    sub_4A9DB0
 0x4AB89A: push    ecx
@@ -1774,7 +1774,7 @@
 0x4AB8F2: add     esp, 14h
 0x4AB8F5: add     ebp, edi
 0x4AB8F7: mov     [esp+164h+var_154], ebp
-0x4AB8FB: mov     ecx, offset dword_B35788
+0x4AB8FB: mov     ecx, offset unk_B35788
 0x4AB900: call    sub_4A9DF0
 0x4AB905: push    ecx
 0x4AB906: mov     ecx, esi
@@ -1805,7 +1805,7 @@
 0x4AB958: call    InterfaceMgr_DebugTextLine
 0x4AB95D: add     ebp, edi
 0x4AB95F: add     esp, 14h
-0x4AB962: mov     ecx, offset dword_B35788
+0x4AB962: mov     ecx, offset unk_B35788
 0x4AB967: mov     [esp+164h+var_154], ebp
 0x4AB96B: call    sub_4A9E30
 0x4AB970: push    ecx
@@ -1837,7 +1837,7 @@
 0x4AB9C3: call    InterfaceMgr_DebugTextLine
 0x4AB9C8: add     ebp, edi
 0x4AB9CA: add     esp, 14h
-0x4AB9CD: mov     ecx, offset dword_B35788
+0x4AB9CD: mov     ecx, offset unk_B35788
 0x4AB9D2: mov     [esp+164h+var_154], ebp
 0x4AB9D6: call    sub_4A9E70
 0x4AB9DB: push    ecx
@@ -1869,7 +1869,7 @@
 0x4ABA2E: call    InterfaceMgr_DebugTextLine
 0x4ABA33: add     ebp, edi
 0x4ABA35: add     esp, 14h
-0x4ABA38: mov     ecx, offset dword_B35788
+0x4ABA38: mov     ecx, offset unk_B35788
 0x4ABA3D: mov     [esp+164h+var_154], ebp
 0x4ABA41: call    sub_4A9EB0
 0x4ABA46: push    ecx
@@ -1901,7 +1901,7 @@
 0x4ABA99: call    InterfaceMgr_DebugTextLine
 0x4ABA9E: add     ebp, edi
 0x4ABAA0: add     esp, 14h
-0x4ABAA3: mov     ecx, offset dword_B35788
+0x4ABAA3: mov     ecx, offset unk_B35788
 0x4ABAA8: mov     [esp+164h+var_154], ebp
 0x4ABAAC: call    sub_4A9EF0
 0x4ABAB1: push    ecx

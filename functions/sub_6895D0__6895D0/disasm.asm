@@ -13,14 +13,14 @@
 0x6895ED: lea     eax, [esp+78h+var_C]
 0x6895F1: mov     large fs:0, eax
 0x6895F7: mov     edi, ecx
-0x6895F9: mov     esi, [esp+78h+arg_0]
+0x6895F9: mov     esi, [esp+78h+actor]
 0x6895FD: test    esi, esi
 0x6895FF: jz      loc_6899A6
-0x689605: mov     ebp, [esp+78h+arg_4]
-0x68960C: push    ebp
+0x689605: mov     ebp, [esp+78h+other]
+0x68960C: push    ebp; other
 0x68960D: call    sub_68A160
-0x689612: mov     ecx, eax
-0x689614: call    sub_8AA390
+0x689612: mov     ecx, eax; this
+0x689614: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x689619: test    al, al
 0x68961B: jnz     short loc_68962E
 0x68961D: mov     eax, [edi]
@@ -85,59 +85,59 @@
 0x6896CC: test    eax, eax
 0x6896CE: jl      loc_689787
 0x6896D4: lea     ebx, [edi+14h]
-0x6896D7: mov     ecx, ebx
-0x6896D9: call    TESHealthForm_GetHealth
+0x6896D7: mov     ecx, ebx; this
+0x6896D9: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x6896DE: test    eax, eax
 0x6896E0: jz      short loc_6896FF
 0x6896E2: mov     ecx, eax
-0x6896E4: call    sub_6899C0
+0x6896E4: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6896E9: mov     ecx, [eax]
-0x6896EB: mov     [esp+78h+var_58], ecx
+0x6896EB: mov     [esp+78h+start.x], ecx
 0x6896EF: mov     edx, [eax+4]
-0x6896F2: mov     [esp+78h+var_54], edx
+0x6896F2: mov     [esp+78h+start.y], edx
 0x6896F6: mov     eax, [eax+8]
-0x6896F9: mov     [esp+78h+var_50], eax
+0x6896F9: mov     [esp+78h+start.z], eax
 0x6896FD: jmp     short loc_68972B
 0x6896FF: mov     edx, [esi]
 0x689701: mov     eax, [edx+174h]
 0x689707: mov     ecx, esi
 0x689709: call    eax
 0x68970B: mov     ecx, [eax]
-0x68970D: mov     [esp+78h+var_58], ecx
+0x68970D: mov     [esp+78h+start.x], ecx
 0x689711: mov     edx, [eax+4]
-0x689714: lea     ecx, [esp+78h+var_58]
-0x689718: mov     [esp+78h+var_54], edx
+0x689714: lea     ecx, [esp+78h+start]
+0x689718: mov     [esp+78h+start.y], edx
 0x68971C: mov     eax, [eax+8]
 0x68971F: push    ecx
 0x689720: mov     ecx, ebx
-0x689722: mov     [esp+7Ch+var_50], eax
+0x689722: mov     [esp+7Ch+start.z], eax
 0x689726: call    sub_68BED0
-0x68972B: lea     ecx, [esp+78h+var_38]
+0x68972B: lea     ecx, [esp+78h+segmentQuery]
 0x68972F: call    sub_67D760
 0x689734: mov     dl, [edi+10h]
-0x689737: push    0; float
-0x689739: push    esi; int
-0x68973A: push    ebp; int
-0x68973B: lea     eax, [esp+84h+var_58]
-0x68973F: push    eax; int
-0x689740: lea     ecx, [esp+88h+var_38]
+0x689737: push    0; extraCost
+0x689739: push    esi; actor
+0x68973A: push    ebp; end
+0x68973B: lea     eax, [esp+84h+start]
+0x68973F: push    eax; start
+0x689740: lea     ecx, [esp+88h+segmentQuery]; segmentQuery
 0x689744: mov     [esp+88h+var_4], 1
 0x68974F: mov     [esp+88h+var_20], dl
-0x689753: call    sub_67EB60
+0x689753: call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.
 0x689758: push    ebx
-0x689759: lea     ecx, [esp+7Ch+var_38]
+0x689759: lea     ecx, [esp+7Ch+segmentQuery]
 0x68975D: call    sub_67E090
 0x689762: mov     ecx, ebx
 0x689764: call    sub_68C1B0
 0x689769: push    esi
 0x68976A: mov     ecx, edi
 0x68976C: call    sub_684000
-0x689771: lea     ecx, [esp+78h+var_38]; void *
+0x689771: lea     ecx, [esp+78h+segmentQuery]; this
 0x689775: mov     [esp+78h+var_4], 0FFFFFFFFh
-0x68977D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x68977D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x689782: jmp     loc_68998E
-0x689787: lea     ecx, [edi+14h]
-0x68978A: call    sub_42B410
+0x689787: lea     ecx, [edi+14h]; this
+0x68978A: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68978F: fld     dword ptr ds:0A32048h
 0x689795: fstp    [esp+78h+var_64]
 0x689799: mov     ebx, eax
@@ -147,7 +147,7 @@
 0x6897A3: fstp    [esp+78h+var_5C]
 0x6897A7: jz      short loc_6897C4
 0x6897A9: mov     ecx, ebx
-0x6897AB: call    sub_6899C0
+0x6897AB: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6897B0: mov     ecx, [eax]
 0x6897B2: mov     [esp+78h+var_64], ecx
 0x6897B6: mov     edx, [eax+4]
@@ -155,7 +155,7 @@
 0x6897BD: mov     eax, [eax+8]
 0x6897C0: mov     [esp+78h+var_5C], eax
 0x6897C4: test    ebx, ebx
-0x6897C6: mov     byte ptr [esp+78h+arg_0], 0
+0x6897C6: mov     byte ptr [esp+78h+actor], 0
 0x6897CB: jnz     short loc_6897F3
 0x6897CD: fld     dword ptr ds:0A34A80h
 0x6897D3: mov     edx, [esi]
@@ -185,7 +185,7 @@
 0x689813: add     esp, 0Ch
 0x689816: test    eax, eax
 0x689818: jge     short loc_68981F
-0x68981A: mov     byte ptr [esp+78h+arg_0], 1
+0x68981A: mov     byte ptr [esp+78h+actor], 1
 0x68981F: mov     edx, [edi]
 0x689821: mov     eax, [edx+14h]
 0x689824: push    0
@@ -194,7 +194,7 @@
 0x689828: mov     ecx, edi
 0x68982A: call    eax
 0x68982C: xor     bl, bl
-0x68982E: cmp     byte ptr [esp+78h+arg_0], bl
+0x68982E: cmp     byte ptr [esp+78h+actor], bl
 0x689832: jz      loc_689931
 0x689838: push    4
 0x68983A: lea     ecx, [edi+14h]
@@ -219,19 +219,19 @@
 0x689881: mov     ecx, esi
 0x689883: call    eax
 0x689885: mov     ecx, [eax]
-0x689887: mov     [esp+78h+var_58], ecx
+0x689887: mov     [esp+78h+start.x], ecx
 0x68988B: mov     edx, [eax+4]
-0x68988E: mov     [esp+78h+var_54], edx
+0x68988E: mov     [esp+78h+start.y], edx
 0x689892: mov     eax, [eax+8]
 0x689895: mov     ecx, esi
-0x689897: mov     [esp+78h+var_50], eax
-0x68989B: call    sub_5E0660
-0x6898A0: fadd    [esp+78h+var_50]
+0x689897: mov     [esp+78h+start.z], eax
+0x68989B: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
+0x6898A0: fadd    [esp+78h+start.z]
 0x6898A4: lea     ecx, [esp+78h+var_4C]
-0x6898A8: fstp    [esp+78h+var_50]
-0x6898AC: call    sub_6899C0
+0x6898A8: fstp    [esp+78h+start.z]
+0x6898AC: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6898B1: push    eax
-0x6898B2: lea     ecx, [esp+7Ch+var_58]
+0x6898B2: lea     ecx, [esp+7Ch+start]
 0x6898B6: push    ecx
 0x6898B7: call    sub_6859A0
 0x6898BC: add     esp, 8
@@ -240,7 +240,7 @@
 0x6898C3: mov     ecx, edi
 0x6898C5: call    sub_684EC0
 0x6898CA: lea     ecx, [esp+78h+var_4C]
-0x6898CE: call    sub_6899C0
+0x6898CE: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6898D3: push    eax
 0x6898D4: lea     ecx, [edi+14h]
 0x6898D7: call    sub_68BED0
@@ -264,9 +264,9 @@
 0x689914: push    eax
 0x689915: call    sub_68CAF0
 0x68991A: mov     bl, 1
-0x68991C: lea     ecx, [esp+78h+var_4C]; void *
+0x68991C: lea     ecx, [esp+78h+var_4C]; this
 0x689920: mov     [esp+78h+var_4], 0FFFFFFFFh
-0x689928: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x689928: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x68992D: test    bl, bl
 0x68992F: jnz     short loc_68998E
 0x689931: fld     [esp+78h+var_64]
@@ -282,8 +282,8 @@
 0x689951: test    al, al
 0x689953: jnz     short loc_68998E
 0x689955: lea     ebp, [edi+14h]
-0x689958: mov     ecx, ebp
-0x68995A: call    sub_42B410
+0x689958: mov     ecx, ebp; this
+0x68995A: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x68995F: mov     ebx, eax
 0x689961: test    ebx, ebx
 0x689963: jz      short loc_68998E
@@ -293,7 +293,7 @@
 0x68996F: call    edx
 0x689971: push    eax
 0x689972: mov     ecx, ebx
-0x689974: call    sub_6899C0
+0x689974: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x689979: mov     ecx, eax
 0x68997B: call    sub_8AA350
 0x689980: test    al, al
@@ -318,3 +318,14 @@
 0x6899B5: pop     ebx
 0x6899B6: add     esp, 64h
 0x6899B9: retn    8
+0x9C5160: lea     ecx, [ebp-38h]; this
+0x9C5163: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C5168: lea     ecx, [ebp-4Ch]; this
+0x9C516B: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C5170: mov     edx, [esp+other]
+0x9C5174: lea     eax, [edx-68h]
+0x9C5177: mov     ecx, [edx-6Ch]
+0x9C517A: xor     ecx, eax
+0x9C517C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5181: mov     eax, offset stru_AED988
+0x9C5186: jmp     ___CxxFrameHandler3

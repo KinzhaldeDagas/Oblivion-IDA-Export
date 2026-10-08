@@ -1,4 +1,4 @@
-0x5E3920: sub     esp, 10h
+0x5E3920: sub     esp, 10h; Swim walk-speed branch used by sub_5E65B0 when swim 0x800 is set without run 0x200. Calls Calc_SwimSpeed and applies same package-target limiting pattern.
 0x5E3923: push    esi
 0x5E3924: mov     esi, ecx
 0x5E3926: mov     eax, [esi]
@@ -99,7 +99,7 @@
 0x5E3A51: cmp     dword ptr [edi+58h], 0
 0x5E3A55: jz      short loc_5E3AC0
 0x5E3A57: mov     ecx, edi
-0x5E3A59: call    sub_5E3920
+0x5E3A59: call    sub_5E3920; Swim walk-speed branch used by sub_5E65B0 when swim 0x800 is set without run 0x200. Calls Calc_SwimSpeed and applies same package-target limiting pattern.
 0x5E3A5E: fstp    [esp+18h+var_10]
 0x5E3A62: fldz
 0x5E3A64: fcomp   [esp+18h+var_10]

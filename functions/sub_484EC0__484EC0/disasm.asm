@@ -27,8 +27,8 @@
 0x484EF5: call    ExtraDataList_IsExtraDefaultForContainer
 0x484EFA: test    al, al
 0x484EFC: jz      short loc_484F09
-0x484EFE: mov     ecx, edi
-0x484F00: call    ExtraDataList_GetOwner
+0x484EFE: mov     ecx, edi; this
+0x484F00: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x484F05: test    eax, eax
 0x484F07: jz      short loc_484EE9
 0x484F09: pop     edi

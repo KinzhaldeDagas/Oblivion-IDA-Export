@@ -6,7 +6,7 @@
 0xA146AD: push    0
 0xA146AF: push    0
 0xA146B1: push    30h ; '0'
-0xA146B3: push    offset dword_BA8620
+0xA146B3: push    offset unk_BA8620
 0xA146B8: push    offset aHkstiffsprin_0; "hkStiffSpringConstraintData"
 0xA146BD: mov     ecx, offset unk_BA8B54
 0xA146C2: call    sub_90D190

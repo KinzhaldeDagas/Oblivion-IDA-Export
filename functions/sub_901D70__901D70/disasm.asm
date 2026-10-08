@@ -18,7 +18,7 @@
 0x901D9C: push    eax
 0x901D9D: call    dword ptr [edx+1Ch]
 0x901DA0: mov     edx, [ebx]
-0x901DA2: mov     ecx, dword ptr [esp+14h+var_8]
+0x901DA2: mov     ecx, [esp+14h+var_8]
 0x901DA6: add     edx, ecx
 0x901DA8: mov     [ebx], edx
 0x901DAA: mov     eax, [edi+14h]

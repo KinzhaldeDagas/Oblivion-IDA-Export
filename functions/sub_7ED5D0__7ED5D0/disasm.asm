@@ -1,4 +1,4 @@
-0x7ED5D0: mov     ecx, [ecx+70h]
+0x7ED5D0: mov     ecx, [ecx+70h]; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.
 0x7ED5D3: xor     eax, eax
 0x7ED5D5: test    ecx, ecx
 0x7ED5D7: jz      short locret_7ED5FD

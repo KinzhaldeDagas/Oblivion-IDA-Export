@@ -35,13 +35,13 @@
 0x999E4E: mov     [ebp+var_1C], ebx
 0x999E51: cmp     esi, 0FFFFFFE0h
 0x999E54: ja      short loc_999EBF
-0x999E56: cmp     dword_BAABC0, 3
+0x999E56: cmp     dword ptr unk_BAABC0, 3
 0x999E5D: jnz     short loc_999EAA
 0x999E5F: add     esi, 0Fh
 0x999E62: and     esi, 0FFFFFFF0h
 0x999E65: mov     [ebp+arg_4], esi
 0x999E68: mov     eax, [ebp+arg_0]
-0x999E6B: cmp     eax, dword_BAABCC
+0x999E6B: cmp     eax, dword ptr unk_BAABCC
 0x999E71: ja      short loc_999EAA
 0x999E73: push    4
 0x999E75: call    __lock
@@ -53,3 +53,11 @@
 0x999E87: mov     [ebp+var_1C], eax
 0x999E8A: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x999E91: call    __calloc_impl___$LN24_5
+0x999EF0: xor     edi, edi
+0x999EF2: mov     esi, [ebp+arg_4]
+0x999EF5: push    4
+0x999EF7: call    __unlock
+0x999EFC: pop     ecx
+0x999EFD: retn
+0x999F11: call    __SEH_epilog4
+0x999F16: retn

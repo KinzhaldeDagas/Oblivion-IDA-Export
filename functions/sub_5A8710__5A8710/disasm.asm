@@ -9,15 +9,15 @@
 0x5A8736: mov     ecx, ds:0B3B350h; this
 0x5A873C: jnz     short loc_5A8767
 0x5A873E: fld1
-0x5A8740: fstp    [esp+8+a2]; a3
-0x5A8743: push    0FA1h; a2
-0x5A8748: call    Tile_SetFloat
+0x5A8740: fstp    [esp+8+a2]; value
+0x5A8743: push    0FA1h; propertyCode
+0x5A8748: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A874D: fld1
 0x5A874F: push    ecx
-0x5A8750: fstp    [esp+8+a2]; a3
+0x5A8750: fstp    [esp+8+a2]; value
 0x5A8753: mov     ecx, ds:0B3B354h; this
-0x5A8759: push    0FA1h; a2
-0x5A875E: call    Tile_SetFloat
+0x5A8759: push    0FA1h; propertyCode
+0x5A875E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A8763: fld1
 0x5A8765: jmp     short loc_5A87AA
 0x5A8767: xor     eax, eax
@@ -26,21 +26,21 @@
 0x5A8772: add     eax, 1
 0x5A8775: mov     [esp+8+var_4], eax; a3
 0x5A8779: fild    [esp+8+var_4]
-0x5A877D: fstp    [esp+8+a2]; a3
-0x5A8780: push    0FA1h; a2
-0x5A8785: call    Tile_SetFloat
+0x5A877D: fstp    [esp+8+a2]; value
+0x5A8780: push    0FA1h; propertyCode
+0x5A8785: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A878A: fld     dword ptr ds:0A379B4h
 0x5A8790: push    ecx
 0x5A8791: mov     ecx, ds:0B3B354h; this
-0x5A8797: fstp    [esp+8+a2]; a3
-0x5A879A: push    0FA1h; a2
-0x5A879F: call    Tile_SetFloat
+0x5A8797: fstp    [esp+8+a2]; value
+0x5A879A: push    0FA1h; propertyCode
+0x5A879F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A87A4: fld     dword ptr ds:0A379B4h
 0x5A87AA: push    ecx
 0x5A87AB: mov     ecx, ds:0B3B358h; this
-0x5A87B1: fstp    [esp+8+a2]; a3
-0x5A87B4: push    0FA1h; a2
-0x5A87B9: call    Tile_SetFloat
+0x5A87B1: fstp    [esp+8+a2]; value
+0x5A87B4: push    0FA1h; propertyCode
+0x5A87B9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A87BE: mov     ecx, ds:0B3B350h
 0x5A87C4: push    0FB0h
 0x5A87C9: call    sub_5894A0
@@ -65,7 +65,7 @@
 0x5A8803: mov     ecx, ds:0B333C4h
 0x5A8809: cmp     byte ptr [ecx+5C0h], 0
 0x5A8810: jnz     loc_5A899B
-0x5A8816: call    Actor_IsSneaking
+0x5A8816: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5A881B: fld     dword ptr ds:0B140C4h
 0x5A8821: mov     ecx, ds:0B3B354h
 0x5A8827: sub     esp, 8

@@ -1,60 +1,57 @@
-void __fastcall sub_606E10(TESForm::ModReferenceList *ecx0)
+// Verified package persistence virtual LoadGame from vtable slot E4, matching paired implementations, package source-file diagnostics and BaseProcess dispatch. ECX object, no stack arguments. Previous indexed-vtable casts into TESForm components were caused by missing package-tail type.
+// Verified: reads UInt16 count then3-byte crime references, resolves via675D00, inserts only nonnull results into head at+3C. Does not allocate Crime payloads here; allocates only8-byte list nodes as needed.
+void __thiscall AlarmPackage_LoadGame(AlarmPackage *self)
 {
-  UInt32 v2; // ebx
-  UInt32 *v3; // esi
+  unsigned __int8 *bufferCursor; // ebx
+  UInt32 *currentlyLoadingFormHeader; // esi
   TESForm *v4; // eax
   const char *v5; // eax
-  int v6; // edi
+  Crime *CrimeByIndex; // edi
   TESForm::ModReferenceList *next; // esi
   TESForm::ModReferenceList *v8; // eax
-  TESSaveLoad *v9; // ecx
+  TESSaveLoadGame_SerializationView *v9; // ecx
   UInt32 *v10; // edi
-  UInt32 v11; // esi
+  unsigned __int8 *v11; // esi
   TESForm *v12; // ecx
-  UInt32 v13; // eax
+  unsigned __int8 *v13; // eax
   const char *v14; // eax
   const char *v15; // eax
-  UInt32 v16; // edx
+  unsigned __int8 *v16; // edx
   int v17; // [esp-8h] [ebp-34h]
   int v18; // [esp-8h] [ebp-34h]
   int v19; // [esp-8h] [ebp-34h]
-  size_t v20; // [esp-4h] [ebp-30h]
-  size_t v21; // [esp-4h] [ebp-30h]
+  int v20; // [esp-4h] [ebp-30h]
+  int v21; // [esp-4h] [ebp-30h]
   int v22; // [esp-4h] [ebp-30h]
-  size_t v23; // [esp-4h] [ebp-30h]
-  size_t v24; // [esp-4h] [ebp-30h]
-  int v25; // [esp-4h] [ebp-30h]
-  int v26; // [esp-4h] [ebp-30h]
   char Dst; // [esp+13h] [ebp-19h] BYREF
   TESForm a1; // [esp+14h] [ebp-18h] BYREF
 
-  a1.member.modlist.next = ecx0;
-  sub_567F70(ecx0);
-  *(_DWORD *)&a1.member.type = 0;
-  v2 = 0;
-  if ( sub_45A170() )
+  a1.member.modlist.next = (TESForm::ModReferenceList *)self; /*0x606e19*/
+  TESPackage_LoadGame(&self->base); /*0x606e1d*/
+  *(_DWORD *)&a1.member.type = 0; /*0x606e2a*/
+  bufferCursor = 0; /*0x606e2e*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v20) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a1.member.refID, v20);
+    SaveLoad_LoadData(g_TESSaveLoadGame, &a1.member.refID, 4u); /*0x606e4a*/
     if ( a1.member.refID != 0x4B4F4C42 )
     {
-      v3 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v3 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x606e5e*/
+      if ( currentlyLoadingFormHeader )
       {
-        v4 = TESForm_LookupByFormID(*v3);
-        v5 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v4->vtbl->GetEditorName)(
+        v4 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x606e6b*/
+        v5 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v4->vtbl->GetEditorName)( /*0x606e86*/
                              v4,
-                             *((unsigned __int8 *)v3 + 9),
-                             *(UInt32 *)((char *)v3 + 5));
+                             *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                             *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           ".\\AI\\AlarmPackage.cpp",
           0x21E,
-          *v3,
+          *currentlyLoadingFormHeader,
           v5,
           v17,
-          v22);
+          v20);
       }
       else
       {
@@ -62,116 +59,115 @@ void __fastcall sub_606E10(TESForm::ModReferenceList *ecx0)
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\AI\\AlarmPackage.cpp",
           0x21E,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    v2 = SaveLoad_CurrentSavegame->unk000[5];
-    LODWORD(v21) = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a1.member, v21);
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x606ec7*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &a1.member, 2u); /*0x606ed1*/
   }
-  LODWORD(v20) = 2;
-  TESForm_LoadDataFromCurrentSaveGame(&a1, v20);
-  a1.member.flags = 0;
-  if ( LOWORD(a1.vtbl) )
+  TESForm_LoadDataFromCurrentSaveGame((TESForm *)self, &a1, 2u); /*0x606edf*/
+  a1.member.flags = 0; /*0x606ee9*/
+  if ( LOWORD(a1.vtbl) ) /*0x606eed*/
   {
-    do
+    do /*0x606f73*/
     {
-      LODWORD(v23) = 1;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v23);
-      LODWORD(v24) = 2;
-      SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a1.member.modlist, v24);
-      v6 = sub_675D00(&ActorProcessManager_ptr, Dst, (__int16)a1.member.modlist.data);
-      if ( v6 )
+      SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 1u); /*0x606f00*/
+      SaveLoad_LoadData(g_TESSaveLoadGame, &a1.member.modlist, 2u); /*0x606f12*/
+      CrimeByIndex = ActorProcessManager_GetCrimeByIndex( /*0x606f2c*/
+                       (ActorProcessManager *)&qword_B3BB2C[0x75],
+                       Dst,
+                       (unsigned __int16)a1.member.modlist.data);
+      if ( CrimeByIndex ) /*0x606f30*/
       {
-        next = a1.member.modlist.next[7].next;
-        if ( next->data )
+        next = a1.member.modlist.next[7].next; /*0x606f36*/
+        if ( next->data ) /*0x606f39*/
         {
-          v8 = (TESForm::ModReferenceList *)FormHeapAlloc(8u);
-          if ( v8 )
+          v8 = (TESForm::ModReferenceList *)FormHeapAlloc(8u); /*0x606f3f*/
+          if ( v8 ) /*0x606f49*/
           {
-            v8->data = next->data;
-            v8->next = 0;
+            v8->data = next->data; /*0x606f4d*/
+            v8->next = 0; /*0x606f4f*/
           }
           else
           {
-            v8 = 0;
+            v8 = 0; /*0x606f54*/
           }
-          v8->next = next->next;
-          next->next = v8;
+          v8->next = next->next; /*0x606f59*/
+          next->next = v8; /*0x606f5c*/
         }
-        next->data = (Data *)v6;
+        next->data = (Data *)CrimeByIndex; /*0x606f5f*/
       }
-      ++a1.member.flags;
+      ++a1.member.flags; /*0x606f6f*/
     }
-    while ( a1.member.flags < LOWORD(a1.vtbl) );
+    while ( a1.member.flags < LOWORD(a1.vtbl) ); /*0x606f73*/
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x606f7f*/
   {
-    v9 = SaveLoad_CurrentSavegame;
-    v10 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v11 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v10 )
+    v9 = g_TESSaveLoadGame; /*0x606f8c*/
+    v10 = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x606f92*/
+    v11 = g_TESSaveLoadGame->bufferCursor; /*0x606f9a*/
+    if ( v10 ) /*0x606f9d*/
     {
-      v12 = TESForm_LookupByFormID(*v10);
-      v13 = v2 + *(unsigned __int16 *)&a1.member.type;
-      if ( v11 <= v13 )
+      v12 = TESForm_LookupByFormID(*v10); /*0x606fab*/
+      v13 = &bufferCursor[*(unsigned __int16 *)&a1.member.type]; /*0x606fb2*/
+      if ( v11 <= v13 ) /*0x606fb9*/
       {
-        if ( v11 < v13 )
+        if ( v11 < v13 ) /*0x606ffb*/
         {
-          v15 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)(
+          v15 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)( /*0x607012*/
                                 v12,
                                 *((unsigned __int8 *)v10 + 9),
                                 *(UInt32 *)((char *)v10 + 5));
-          PrintError(
+          PrintError( /*0x607031*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
             "%i and flags %08X",
-            v2 + *(unsigned __int16 *)&a1.member.type - v11,
+            &bufferCursor[*(unsigned __int16 *)&a1.member.type - (_DWORD)v11],
             ".\\AI\\AlarmPackage.cpp",
             0x232,
             *v10,
             v15,
             v19,
-            v26);
+            v22);
         }
       }
       else
       {
-        v14 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)(
+        v14 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)( /*0x606fcc*/
                               v12,
                               *((unsigned __int8 *)v10 + 9),
                               *(UInt32 *)((char *)v10 + 5));
-        PrintError(
+        PrintError( /*0x606feb*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-          v11 - *(unsigned __int16 *)&a1.member.type - v2,
+          &v11[-*(unsigned __int16 *)&a1.member.type] - bufferCursor,
           ".\\AI\\AlarmPackage.cpp",
           0x232,
           *v10,
           v14,
           v18,
-          v25);
+          v21);
       }
     }
     else
     {
-      v16 = *(unsigned __int16 *)&a1.member.type + v2;
-      if ( v11 <= v16 )
+      v16 = &bufferCursor[*(unsigned __int16 *)&a1.member.type]; /*0x607046*/
+      if ( v11 <= v16 ) /*0x60704b*/
       {
-        if ( v11 < v16 )
-          PrintError(
+        if ( v11 < v16 ) /*0x607076*/
+          PrintError( /*0x607091*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-            v2 + *(unsigned __int16 *)&a1.member.type - v11,
+            &bufferCursor[*(unsigned __int16 *)&a1.member.type - (_DWORD)v11],
             ".\\AI\\AlarmPackage.cpp",
             0x232,
-            LOBYTE(v9[1].createdObjectList.next));
+            v9->currentVersion);
       }
       else
       {
-        PrintError(
+        PrintError( /*0x607066*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-          v11 - *(unsigned __int16 *)&a1.member.type - v2,
+          &v11[-*(unsigned __int16 *)&a1.member.type] - bufferCursor,
           ".\\AI\\AlarmPackage.cpp",
           0x232,
-          LOBYTE(v9[1].createdObjectList.next));
+          v9->currentVersion);
       }
     }
   }

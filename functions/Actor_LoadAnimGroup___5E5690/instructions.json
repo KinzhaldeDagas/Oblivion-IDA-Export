@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E5690",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5E56B8",
-    "line": "mov     edi, [esp+14h+arg_4]",
+    "line": "mov     edi, [esp+14h+actionOrIdle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x5E56DC",
-    "line": "call    edx",
+    "line": "call    edx; Movement prefix priority from process flags: Swimming 0x0800 -> 2, else Flying 0x2000 -> 3, else Sneaking 0x0400 -> 1, otherwise 0.",
     "mnemonic": "call",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x5E56EA",
-    "line": "jz      short loc_5E56F6",
+    "line": "jz      short loc_5E56F6; Swimming overrides Flying and Sneaking when building encoded animation-key movement bits.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5E56FB",
-    "line": "jz      short loc_5E5707",
+    "line": "jz      short loc_5E5707; Flying is selected only when Swimming was not set; it overrides Sneaking.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x5E570E",
-    "line": "mov     [esp+14h+var_8], 1",
+    "line": "mov     [esp+14h+var_8], 1; Sneaking supplies movement prefix 1 only when neither Swimming nor Flying was selected.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x5E5725",
-    "line": "mov     bl, [esp+18h+arg_8]",
+    "line": "mov     bl, byte ptr [esp+18h+forceBaseMovement]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x5E5773",
-    "line": "cmp     [esp+18h+arg_4], ebp",
+    "line": "cmp     [esp+18h+actionOrIdle], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x5E57B1",
-    "line": "mov     ebp, ds:0B086B8h[ecx*4]",
+    "line": "mov     ebp, ds:0B086B8h[ecx*4]; For an equipped weapon entry, read TESObjectWEAP::type byte at form +0x90 and map types 0..5 through g_weaponTypeToAnimWeaponPrefix: 2,3,2,3,4,5.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x5E57C3",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+groupID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x5E57E5",
-    "line": "jg      short loc_5E57E9",
+    "line": "jg      short loc_5E57E9; With an equipped shield, BlockIdle (27) and BlockHit (28) force weapon prefix 0 before key construction.",
     "mnemonic": "jg",
     "size": 2
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x5E5819",
-    "line": "call    eax",
+    "line": "call    eax; For TorchIdle through CastTouchAlt (groups 34..39), clear a nonzero weapon prefix when the weapon is not drawn or process virtual +0x138 reports true.",
     "mnemonic": "call",
     "size": 2
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x5E5828",
-    "line": "call    sub_51A9B0",
+    "line": "call    AnimKey_Make; Compose group | (weaponPrefix << 8) | (movementPrefix << 12). Movement priority is Swim > Fly > Sneak; weapon type table values are Blade1H=2, Blade2H=3, Blunt1H=2, Blunt2H=3, Staff=4, Bow=5, subject to the group/state prefix-clearing gates above.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5E582D",
-    "line": "mov     ecx, [esp+20h+var_4]",
+    "line": "mov     ecx, [esp+20h+var_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -883,19 +883,19 @@
   },
   {
     "ea": "0x5E5837",
-    "line": "push    0",
+    "line": "push    0; fallbackPass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5E5839",
-    "line": "push    eax",
+    "line": "push    eax; requestedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E583A",
-    "line": "call    sub_470D20",
+    "line": "call    ActorAnimData_ResolveAnimKeyFallback; Native caller consumes the resolved fallback key, not necessarily the initially requested movement/weapon/group combination.",
     "mnemonic": "call",
     "size": 5
   },

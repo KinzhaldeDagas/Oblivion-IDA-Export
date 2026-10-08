@@ -1,27 +1,27 @@
-0x658DF0: mov     eax, [esp+arg_8]
+0x658DF0: mov     eax, [esp+destination]
 0x658DF4: push    ebx
 0x658DF5: push    ebp
-0x658DF6: mov     ebp, [esp+8+arg_0]
+0x658DF6: mov     ebp, [esp+8+changeMask]
 0x658DFA: push    esi
 0x658DFB: push    edi
 0x658DFC: mov     edi, ecx
 0x658DFE: mov     ecx, [esp+10h+Dst]
-0x658E02: push    eax
-0x658E03: push    ecx
-0x658E04: push    ebp
-0x658E05: mov     ecx, edi
-0x658E07: call    sub_647450
+0x658E02: push    eax; owner
+0x658E03: push    ecx; currentFlags
+0x658E04: push    ebp; changeMask
+0x658E05: mov     ecx, edi; self
+0x658E07: call    LowProcess_LoadGame
 0x658E0C: mov     ecx, ds:0B33B00h
 0x658E12: xor     ebx, ebx
-0x658E14: mov     [esp+10h+arg_8], ebx
-0x658E18: call    sub_45A170
+0x658E14: mov     [esp+10h+destination], ebx
+0x658E18: call    TESSaveLoadGame_UseSaveGameBlocks
 0x658E1D: test    al, al
 0x658E1F: jz      loc_658EBE
-0x658E25: mov     ecx, ds:0B33B00h
-0x658E2B: push    4; Size
+0x658E25: mov     ecx, ds:0B33B00h; self
+0x658E2B: push    4; byteCount
 0x658E2D: lea     edx, [esp+14h+Dst]
-0x658E31: push    edx; Dst
-0x658E32: call    SaveLoad_LoadData
+0x658E31: push    edx; destination
+0x658E32: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x658E37: cmp     [esp+10h+Dst], 4B4F4C42h
 0x658E3F: jz      short loc_658EA9
 0x658E41: mov     eax, ds:0B33B00h
@@ -30,7 +30,7 @@
 0x658E4E: jz      short loc_658E8D
 0x658E50: mov     eax, [esi]
 0x658E52: push    eax; a1
-0x658E53: call    TESForm_LookupByFormID
+0x658E53: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x658E58: mov     ecx, [esi+5]
 0x658E5B: movzx   edx, byte ptr [esi+9]
 0x658E5F: add     esp, 4
@@ -56,23 +56,23 @@
 0x658E9C: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x658EA1: call    PrintError
 0x658EA6: add     esp, 10h
-0x658EA9: mov     ecx, ds:0B33B00h
+0x658EA9: mov     ecx, ds:0B33B00h; self
 0x658EAF: mov     ebx, [ecx+14h]
-0x658EB2: push    2; Size
-0x658EB4: lea     eax, [esp+14h+arg_8]
-0x658EB8: push    eax; Dst
-0x658EB9: call    SaveLoad_LoadData
-0x658EBE: push    4; Size
+0x658EB2: push    2; byteCount
+0x658EB4: lea     eax, [esp+14h+destination]
+0x658EB8: push    eax; destination
+0x658EB9: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x658EBE: push    4; byteCount
 0x658EC0: lea     ecx, [edi+90h]
-0x658EC6: push    ecx; Dst
-0x658EC7: mov     ecx, ds:0B33B00h
-0x658ECD: call    SaveLoad_LoadData
+0x658EC6: push    ecx; destination
+0x658EC7: mov     ecx, ds:0B33B00h; self
+0x658ECD: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x658ED2: test    ebp, 100000h
 0x658ED8: jz      short loc_658EE5
-0x658EDA: lea     ecx, [edi+94h]
+0x658EDA: lea     ecx, [edi+94h]; self
 0x658EE0: call    AVCollection_Load
 0x658EE5: mov     ecx, ds:0B33B00h
-0x658EEB: call    sub_45A170
+0x658EEB: call    TESSaveLoadGame_UseSaveGameBlocks
 0x658EF0: test    al, al
 0x658EF2: jz      loc_659002
 0x658EF8: mov     ecx, ds:0B33B00h
@@ -82,9 +82,9 @@
 0x658F09: jz      loc_658FAB
 0x658F0F: mov     edx, [edi]
 0x658F11: push    edx; a1
-0x658F12: call    TESForm_LookupByFormID
+0x658F12: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x658F17: mov     ecx, eax
-0x658F19: movzx   eax, word ptr [esp+14h+arg_8]
+0x658F19: movzx   eax, word ptr [esp+14h+destination]
 0x658F1E: add     eax, ebx
 0x658F20: add     esp, 4
 0x658F23: cmp     esi, eax
@@ -97,7 +97,7 @@
 0x658F32: mov     eax, [edx+0D4h]
 0x658F38: call    eax
 0x658F3A: mov     ecx, [edi]
-0x658F3C: movzx   edx, word ptr [esp+18h+arg_8]
+0x658F3C: movzx   edx, word ptr [esp+18h+destination]
 0x658F41: push    eax
 0x658F42: push    ecx
 0x658F43: push    25Dh
@@ -121,7 +121,7 @@
 0x658F76: push    edx
 0x658F77: mov     edx, [eax+0D4h]
 0x658F7D: call    edx
-0x658F7F: movzx   ecx, word ptr [esp+18h+arg_8]
+0x658F7F: movzx   ecx, word ptr [esp+18h+destination]
 0x658F84: push    eax
 0x658F85: mov     eax, [edi]
 0x658F87: push    eax
@@ -138,7 +138,7 @@
 0x658FA6: pop     ebp
 0x658FA7: pop     ebx
 0x658FA8: retn    0Ch
-0x658FAB: movzx   eax, word ptr [esp+10h+arg_8]
+0x658FAB: movzx   eax, word ptr [esp+10h+destination]
 0x658FB0: lea     edx, [eax+ebx]
 0x658FB3: cmp     esi, edx
 0x658FB5: jbe     short loc_658FDF

@@ -1,7 +1,7 @@
 0x716830: sub     esp, 8
 0x716833: push    ebx
 0x716834: push    esi
-0x716835: mov     esi, [esp+10h+arg_0]
+0x716835: mov     esi, [esp+10h+position]
 0x716839: push    edi
 0x71683A: push    esi
 0x71683B: mov     edi, ecx
@@ -13,14 +13,14 @@
 0x716851: movzx   ecx, word ptr [esi+8]
 0x716855: add     esp, 4
 0x716858: cmp     ebx, ecx
-0x71685A: mov     [esp+14h+arg_0], eax
+0x71685A: mov     [esp+14h+position], eax
 0x71685E: jb      short loc_71686E
 0x716860: movzx   edx, word ptr [esi+0Eh]
 0x716864: add     edx, ebx
 0x716866: push    edx
 0x716867: mov     ecx, esi
 0x716869: call    NiTArray_SetSize
-0x71686E: lea     eax, [esp+14h+arg_0]
+0x71686E: lea     eax, [esp+14h+position]
 0x716872: push    eax
 0x716873: push    ebx
 0x716874: mov     ecx, esi
@@ -31,7 +31,7 @@
 0x716885: mov     ecx, [ecx+8]
 0x716888: add     esp, 4
 0x71688B: test    ecx, ecx
-0x71688D: mov     [esp+14h+arg_0], eax
+0x71688D: mov     [esp+14h+position], eax
 0x716891: jnz     short loc_716898
 0x716893: mov     ecx, offset aUnknown; "UNKNOWN"
 0x716898: push    ecx
@@ -48,7 +48,7 @@
 0x7168B9: push    eax
 0x7168BA: mov     ecx, esi
 0x7168BC: call    NiTArray_SetSize
-0x7168C1: lea     ecx, [esp+14h+arg_0]
+0x7168C1: lea     ecx, [esp+14h+position]
 0x7168C5: push    ecx
 0x7168C6: push    ebx
 0x7168C7: mov     ecx, esi
@@ -72,19 +72,19 @@
 0x716901: jb      short loc_7168F0
 0x716903: xor     eax, eax
 0x716905: test    eax, eax
-0x716907: mov     [esp+18h+arg_0], eax
+0x716907: mov     [esp+18h+position], eax
 0x71690B: jz      loc_7169B0
-0x716911: lea     edx, [esp+18h+var_4]
-0x716915: push    edx
-0x716916: lea     eax, [esp+1Ch+var_8]
-0x71691A: push    eax
-0x71691B: lea     ecx, [esp+20h+arg_0]
-0x71691F: push    ecx
-0x716920: mov     ecx, ebp
-0x716922: call    sub_452600
+0x716911: lea     edx, [esp+18h+valueOut]
+0x716915: push    edx; valueOut
+0x716916: lea     eax, [esp+1Ch+keyOut]
+0x71691A: push    eax; keyOut
+0x71691B: lea     ecx, [esp+20h+position]
+0x71691F: push    ecx; position
+0x716920: mov     ecx, ebp; self
+0x716922: call    NiTMap_U32Pointer_GetNextEntry
 0x716927: push    60h ; '`'; Size
 0x716929: call    FormHeapAlloc
-0x71692E: mov     edx, [esp+1Ch+var_8]
+0x71692E: mov     edx, [esp+1Ch+keyOut]
 0x716932: push    edx
 0x716933: mov     ebx, eax
 0x716935: push    offset aS; "%s"
@@ -122,7 +122,7 @@
 0x716993: cmp     dword ptr [edx+edi*4], 0
 0x716997: jz      short loc_71699F
 0x716999: add     word ptr [esi+0Ch], 0FFFFh
-0x71699F: cmp     [esp+18h+arg_0], 0
+0x71699F: cmp     [esp+18h+position], 0
 0x7169A4: mov     eax, [esi+4]
 0x7169A7: mov     [eax+edi*4], ebx
 0x7169AA: jnz     loc_716911

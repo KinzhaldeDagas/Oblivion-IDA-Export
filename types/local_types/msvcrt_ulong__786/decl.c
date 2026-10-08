@@ -1,1 +1,1 @@
-__msvcrt_ulong
+typedef unsigned int __msvcrt_ulong;

@@ -3,7 +3,7 @@
 0x6E7AC2: mov     edi, [esp+8+arg_0]
 0x6E7AC6: push    edi
 0x6E7AC7: mov     esi, ecx
-0x6E7AC9: call    nullsub_returnvVoid_1arg
+0x6E7AC9: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6E7ACE: mov     eax, [edi+220h]
 0x6E7AD4: mov     edx, [eax+8]
 0x6E7AD7: push    1

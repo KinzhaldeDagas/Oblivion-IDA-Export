@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_790B00",
+  "chunks": [
+    [
+      "0x790B00",
+      "0x790B56"
+    ]
+  ],
+  "chunks_sha256": "cc5d679711f5939b3fa8ceec2a8ab0dbd6c75cfdaf8fd1bf16a4e01fe843c0ea",
+  "comment_regular": "Clears the global/static compact branch-info vector used by CTreeEngine::Compute before rebuilding the recursive branch-info table.\n\nSource-match: CBranch::ClearBranchInfo/static branch-info clear helper. Clears the global/static branch info vector used by branch parsing/compute.",
+  "comment_repeatable": "Source-match: CBranch::ClearBranchInfo/static branch-info clear helper. Clears the global/static branch info vector used by branch parsing/compute.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "OB_CBranch_ClearStaticBranchInfoVector_010201A0",
   "end_ea": "0x790B56",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_790B00",
+  "name": "OB_CBranch_ClearStaticBranchInfoVector_010201A0",
   "segment": ".text",
   "sha256": "cc5d679711f5939b3fa8ceec2a8ab0dbd6c75cfdaf8fd1bf16a4e01fe843c0ea",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x790B00",
-  "type": "_DWORD *()",
+  "total_chunk_size": 86,
+  "type": "_DWORD *__cdecl()",
   "xrefs_from_count": 38,
   "xrefs_to_count": 1
 }

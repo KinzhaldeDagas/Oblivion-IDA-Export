@@ -22,7 +22,7 @@
 0x9A1BFD: mov     [esi+24h], edi
 0x9A1C00: call    sub_701B00
 0x9A1C05: mov     [esi+30h], edi
-0x9A1C08: push    offset sub_7016A0; a5
+0x9A1C08: push    offset NiPointerSlot_Release; a5
 0x9A1C0D: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x9A1C12: push    6; size
 0x9A1C14: push    4; a2
@@ -40,3 +40,12 @@
 0x9A1C3B: pop     esi
 0x9A1C3C: add     esp, 10h
 0x9A1C3F: retn
+0x9D7D00: mov     ecx, [ebp-10h]; this
+0x9D7D03: jmp     ??1NiRenderedTexture@@UAE@XZ; NiRenderedTexture::~NiRenderedTexture(void)
+0x9D7D08: mov     edx, [esp+arg_4]
+0x9D7D0C: lea     eax, [edx-0Ch]
+0x9D7D0F: mov     ecx, [edx-10h]
+0x9D7D12: xor     ecx, eax
+0x9D7D14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7D19: mov     eax, offset stru_B001F4
+0x9D7D1E: jmp     ___CxxFrameHandler3

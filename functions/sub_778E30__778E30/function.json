@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x778E30",
+      "0x778E7A"
+    ]
+  ],
+  "chunks_sha256": "ac7a50f697c62d11e7d991d490fe73a9c098001affede460674ee127db8d79e1",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nDX11 authority audit 2026-10-01: Verified manager vtable A8A778+1C; this pointer unused in body, RET8. For skin+0C delegates partition removal to 778C20. Ordinary data+38 buffer leads to buffer+4 group; group virtual+14 removes data, group+4 zero triggers destructor. No lock is acquired here. Called after renderer/precache unlock in 767860. Verified Fallout 827C27A8 family has data buffer offset+34 instead of Oblivion+38. Group virtual cleanup must be audited before treating renderer lock as whole-lifetime exclusion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_778E30",
+  "display_name": "NiD3DGeometryGroupManager_RemoveObjectFromGroup",
   "end_ea": "0x778E7A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_778E30",
+  "name": "NiD3DGeometryGroupManager_RemoveObjectFromGroup",
   "segment": ".text",
   "sha256": "ac7a50f697c62d11e7d991d490fe73a9c098001affede460674ee127db8d79e1",
   "size": 74,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x778E30",
-  "type": "char __stdcall(int, int)",
+  "total_chunk_size": 74,
+  "type": "bool __thiscall(NiD3DGeometryGroupManager *this, NiGeometryData *data, NiSkinInstance *skin)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 1
 }

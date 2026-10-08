@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F03D0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+reference]; Verified: WorldSpace wrapper that removes a reference from its persistentCell via TESObjectCELL_RemoveReference; this removes it from the +0x64 persistent-reference index when applicable. It does not touch the separate SubSpace spatial index at +0x60.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4F03D8",
-    "line": "mov     ecx, [ecx+34h]",
+    "line": "mov     ecx, [ecx+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x4F03DF",
-    "line": "mov     [esp+arg_0], eax",
+    "line": "mov     [esp+reference], eax; reference",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4F03E3",
-    "line": "jmp     sub_4CECD0",
+    "line": "jmp     TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "jmp",
     "size": 5
   },

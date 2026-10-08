@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_IMAGE_RESOURCE_DIRECTORY_ENTRY",
+  "definition": "struct _IMAGE_RESOURCE_DIRECTORY_ENTRY\n{\n$CE65D9746D9158A73CC3AC4CC659626F u;\n$D36F00BE1EC35083CA06F3A9EF37809C u2;\n}\n",
   "id": 18374686479672043142,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "$CE65D9746D9158A73CC3AC4CC659626F"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u2",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "$D36F00BE1EC35083CA06F3A9EF37809C"
     }
   ],
   "name": "_IMAGE_RESOURCE_DIRECTORY_ENTRY",
+  "ordinal": 7388,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

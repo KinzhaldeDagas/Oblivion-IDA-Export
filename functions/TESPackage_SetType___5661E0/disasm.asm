@@ -27,23 +27,23 @@
 0x56622B: mov     ecx, edi
 0x56622D: call    TESPackage_LocationData_destr
 0x566232: push    edi
-0x566233: call    FormHeapFree
+0x566233: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x566238: add     esp, 4
 0x56623B: mov     dword ptr [esi+24h], 0
 0x566242: jmp     short loc_56626B
 0x566244: mov     edi, [esi+28h]
 0x566247: test    edi, edi
 0x566249: jz      short loc_56625B
-0x56624B: mov     ecx, edi; void *
-0x56624D: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x56624B: mov     ecx, edi; this
+0x56624D: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x566252: push    edi
-0x566253: call    FormHeapFree
+0x566253: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x566258: add     esp, 4
 0x56625B: mov     dword ptr [esi+28h], 0
 0x566262: cmp     ebx, 9; switch 10 cases
 0x566265: ja      TESPackage_SetType?___def_566272; jumptable 00566272 default case, cases 3,4
 0x56626B: movzx   ecx, ds:byte_566368[ebx]
-0x566272: jmp     ds:jpt_566272[ecx*4]; switch jump
+0x566272: jmp     ds:jpt_566272[ecx*4]; TESPackage_SetType switch: package types 0,1,7,8,9 allocate target data; type 9 is Ambush and is target-driven.
 0x566279: mov     eax, [esi+28h]; jumptable 00566272 case 2
 0x56627C: test    eax, eax
 0x56627E: jnz     short loc_5662B0
@@ -55,7 +55,7 @@
 0x566290: mov     [esp+1Ch+var_4], 2
 0x566298: jz      short loc_5662A3
 0x56629A: mov     ecx, eax
-0x56629C: call    TESPackage_TargetData_constr
+0x56629C: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x5662A1: jmp     short loc_5662A5
 0x5662A3: xor     eax, eax
 0x5662A5: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -72,7 +72,7 @@
 0x5662D4: mov     ecx, eax
 0x5662D6: call    TESPackage_LocationData_constr
 0x5662DB: jmp     short loc_56633B
-0x5662DD: cmp     dword ptr [esi+28h], 0; jumptable 00566272 cases 0,1,7-9
+0x5662DD: cmp     dword ptr [esi+28h], 0; 3DTheft decode 2026-05-16: TESPackage_SetType allocates TargetData for package types 0,1,7,8,9; direct Follow (type 1) has package->target allocated before target rewrite.
 0x5662E1: jnz     short TESPackage_SetType?___def_566272; jumptable 00566272 default case, cases 3,4
 0x5662E3: push    0Ch; Size
 0x5662E5: call    FormHeapAlloc
@@ -82,7 +82,7 @@
 0x5662F3: mov     [esp+1Ch+var_4], 4
 0x5662FB: jz      short loc_566309
 0x5662FD: mov     ecx, eax
-0x5662FF: call    TESPackage_TargetData_constr
+0x5662FF: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x566304: mov     [esi+28h], eax
 0x566307: jmp     short TESPackage_SetType?___def_566272; jumptable 00566272 default case, cases 3,4
 0x566309: xor     eax, eax
@@ -103,3 +103,30 @@
 0x566339: xor     eax, eax
 0x56633B: mov     [esi+24h], eax
 0x56633E: mov     [esi+20h], bl; jumptable 00566272 default case, cases 3,4
+0x9BD6E0: mov     eax, [ebp+4]
+0x9BD6E3: push    eax
+0x9BD6E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD6E9: pop     ecx
+0x9BD6EA: retn
+0x9BD6EB: mov     eax, [ebp+4]
+0x9BD6EE: push    eax
+0x9BD6EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD6F4: pop     ecx
+0x9BD6F5: retn
+0x9BD6F6: mov     eax, [ebp+4]
+0x9BD6F9: push    eax
+0x9BD6FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD6FF: pop     ecx
+0x9BD700: retn
+0x9BD701: mov     eax, [ebp+4]
+0x9BD704: push    eax
+0x9BD705: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD70A: pop     ecx
+0x9BD70B: retn
+0x9BD70C: mov     edx, [esp+arg_4]
+0x9BD710: lea     eax, [edx-0Ch]
+0x9BD713: mov     ecx, [edx-10h]
+0x9BD716: xor     ecx, eax
+0x9BD718: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD71D: mov     eax, offset stru_AE7014
+0x9BD722: jmp     ___CxxFrameHandler3

@@ -84,7 +84,6 @@
 0x74602D: mov     [esp+30h+var_4], edx
 0x746031: lea     esi, [eax+ecx*2+0B34h]
 0x746038: jmp     short loc_746040
-0x74603A: align 10h
 0x746040: mov     ecx, [esp+30h+var_4]
 0x746044: cmp     word ptr [eax+ecx*2+0B34h], 0
 0x74604D: lea     edx, [eax+ecx*2+0B34h]

@@ -1,112 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MagicCasterVtbl",
+  "definition": "struct __declspec(align(4)) MagicCasterVtbl\n{\nvoid (__thiscall *AddAbility)(MagicCaster *this, MagicItemForm *ability, bool noHitFX);\nvoid (__thiscall *AddDisease)(MagicCaster *this, MagicItemForm *disease, MagicTarget *target, bool noHitFX);\nvoid (__thiscall *AddObjectEnchantment)(MagicCaster *this, MagicItem *arg0, TESBoundObject *sourceObj, bool noHitFX);\nMagicTarget *(__thiscall *FindTouchTarget)(MagicCaster *this, MagicCaster *this);\nvoid (__thiscall *PlayTargettedCastAnim)(MagicCaster *this, MagicCaster *this);\nvoid (__thiscall *PlayCastingAnim)(MagicCaster *this, MagicCaster *this);\nvoid (__thiscall *ApplyMagicItemCost)(MagicCaster *this, MagicItem *ite, bool applyStatChanges);\nbool (__thiscall *IsMagicItemUsable)(MagicCaster *this, MagicItem *magicItem, float *wortcraftSkill, UInt32 *faliureCode, bool useBaseMagicka);\nTESObjectREFR *(__thiscall *GetParentRefr)(MagicCaster *this);\nNiNode *(__thiscall *GetMagicNode)(MagicCaster *this, MagicCaster *this);\nvoid (__thiscall *AddEffectToSelf)(MagicCaster *this, ActiveEffect *effect);\nfloat (__thiscall *GetSpellEffectiveness)(MagicCaster *this, bool ignoreFatigue, float currentFatigue);\nMagicItem *(__thiscall *GetActiveMagicItem)(MagicCaster *this);\nvoid (__thiscall *SetActiveMagicItem)(MagicCaster *this, MagicItem *item);\nMagicTarget (__thiscall *GetCastingTarget)(MagicCaster *this, MagicCaster *this);\nvoid (__thiscall *SetCastingTarget)(MagicCaster *this, MagicTarget *target);\nActiveEffect *(__thiscall *CreateActiveMagicEffect)(MagicCaster *this, MagicItem *magicItem, EffectItem *effect, TESBoundObject *src);\n}\n",
   "id": 18374686479671982437,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddAbility",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItemForm *ability, bool noHitFX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddDisease",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItemForm *disease, MagicTarget *target, bool noHitFX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddObjectEnchantment",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItem *arg0, TESBoundObject *sourceObj, bool noHitFX)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FindTouchTarget",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "MagicTarget *(__thiscall *)(MagicCaster *this, MagicCaster *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PlayTargettedCastAnim",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicCaster *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PlayCastingAnim",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicCaster *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ApplyMagicItemCost",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItem *ite, bool applyStatChanges)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsMagicItemUsable",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "bool (__thiscall *)(MagicCaster *this, MagicItem *magicItem, float *wortcraftSkill, UInt32 *faliureCode, bool useBaseMagicka)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetParentRefr",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "TESObjectREFR *(__thiscall *)(MagicCaster *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetMagicNode",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *(__thiscall *)(MagicCaster *this, MagicCaster *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddEffectToSelf",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, ActiveEffect *effect)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSpellEffectiveness",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "float (__thiscall *)(MagicCaster *this, bool ignoreFatigue, float currentFatigue)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetActiveMagicItem",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "MagicItem *(__thiscall *)(MagicCaster *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetActiveMagicItem",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicItem *item)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCastingTarget",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "MagicTarget (__thiscall *)(MagicCaster *this, MagicCaster *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetCastingTarget",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "void (__thiscall *)(MagicCaster *this, MagicTarget *target)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateActiveMagicEffect",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "ActiveEffect *(__thiscall *)(MagicCaster *this, MagicItem *magicItem, EffectItem *effect, TESBoundObject *src)"
     }
   ],
   "name": "MagicCasterVtbl",
+  "ordinal": 9087,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

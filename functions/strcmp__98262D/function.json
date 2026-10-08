@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
-  "callers_count": 120,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 196,
+  "chunks": [
+    [
+      "0x98262D",
+      "0x98267D"
+    ]
+  ],
+  "chunks_sha256": "79bb9a750374bbd64f5ca6958408beb6740de70735c1c5886a62479bd06054c4",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-09-07: Corrected naming/ABI from Oblivion assembly: CRT_StricmpLocaleDispatch is cdecl two string arguments/plainRET; it does not read incomingEBX/EDI. BA9E10==0 tailcalls982525 ASCII fold; nonzero calls98255A with null locale. Previous strcmp label/spurious register parameters must not drive a case-sensitive hash index.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "__strcmp",
+  "display_name": "CRT_StricmpLocaleDispatch",
   "end_ea": "0x98267D",
+  "evidence_confidence": "Unknown",
   "flags": 21588,
   "has_pseudocode": true,
-  "name": "__strcmp",
+  "name": "CRT_StricmpLocaleDispatch",
   "segment": ".text",
   "sha256": "79bb9a750374bbd64f5ca6958408beb6740de70735c1c5886a62479bd06054c4",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x98262D",
-  "type": "int __cdecl(unsigned __int8 *Str1, unsigned __int8 *Str2)",
+  "total_chunk_size": 80,
+  "type": "int __cdecl(const char *left, const char *right)",
   "xrefs_from_count": 37,
   "xrefs_to_count": 196
 }

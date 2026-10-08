@@ -9,8 +9,8 @@ bool __usercall sub_504341@<al>(ParamInfo *a1@<eax>)
   Script *v6; // [esp-20h] [ebp-20h]
   ScriptEventList *v7; // [esp-1Ch] [ebp-1Ch]
 
-  result = Script_ExtractArgs(a1, v2, v3, v4, v5, v6, v7);
-  if ( result )
-    JUMPOUT(0x50439D);
-  return result;
+  result = Script_ExtractArgs(a1, v2, v3, v4, v5, v6, v7); /*0x504352*/
+  if ( result ) /*0x50435c*/
+    JUMPOUT(0x50439D); /*0x50439d*/
+  return result; /*0x504363*/
 }

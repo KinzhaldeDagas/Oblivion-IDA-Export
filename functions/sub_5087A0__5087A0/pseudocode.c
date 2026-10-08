@@ -1,5 +1,5 @@
 char sub_5087A0()
 {
-  byte_B42F3C = byte_B42F3C != 1;
-  return 1;
+  OB_RendererGlobalState_010201A0.pad_00D[0x96] = OB_RendererGlobalState_010201A0.pad_00D[0x96] != 1; /*0x5087ab*/
+  return 1; /*0x5087b1*/
 }

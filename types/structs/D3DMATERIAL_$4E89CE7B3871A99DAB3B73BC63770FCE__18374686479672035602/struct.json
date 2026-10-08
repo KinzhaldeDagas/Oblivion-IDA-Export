@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DMATERIAL::$4E89CE7B3871A99DAB3B73BC63770FCE",
+  "definition": "union _D3DMATERIAL::$4E89CE7B3871A99DAB3B73BC63770FCE\n{\nD3DCOLORVALUE emissive;\nD3DCOLORVALUE dcvEmissive;\n}\n",
   "id": 18374686479672035602,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "emissive",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dcvEmissive",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "D3DCOLORVALUE"
     }
   ],
   "name": "_D3DMATERIAL::$4E89CE7B3871A99DAB3B73BC63770FCE",
+  "ordinal": 4183,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 16
 }

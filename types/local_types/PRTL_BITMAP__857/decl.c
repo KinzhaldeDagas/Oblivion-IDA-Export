@@ -1,1 +1,1 @@
-PRTL_BITMAP
+typedef tagRTL_BITMAP *PRTL_BITMAP;

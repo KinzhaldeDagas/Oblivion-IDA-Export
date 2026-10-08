@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4AD630",
+      "0x4AD990"
+    ]
+  ],
+  "chunks_sha256": "9911c406a1091be8e64e03ddd39ec351d6f0ad56358e000e54ad1e119c0a8c5e",
+  "comment_regular": "Verified (Oblivion): maps TESEffectShaderData fields into ParticleShaderProperty parameters and retains a NiSourceTexture*. The member labels in TESEffectShaderData are Probable correspondences to Fallout's named fields, corroborated by these direct Oblivion copies and the initializer.",
+  "comment_repeatable": "Verified (Oblivion): maps TESEffectShaderData fields into ParticleShaderProperty parameters and retains a NiSourceTexture*. The member labels in TESEffectShaderData are Probable correspondences to Fallout's named fields, corroborated by these direct Oblivion copies and the initializer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4AD630",
+  "display_name": "TESEffectShader_ConfigureVisualProperty",
   "end_ea": "0x4AD990",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4AD630",
+  "name": "TESEffectShader_ConfigureVisualProperty",
   "segment": ".text",
   "sha256": "9911c406a1091be8e64e03ddd39ec351d6f0ad56358e000e54ad1e119c0a8c5e",
   "size": 864,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4AD630",
-  "type": "int __thiscall(float *this, int, int)",
+  "total_chunk_size": 864,
+  "type": "void __thiscall(TESEffectShader *this, ParticleShaderProperty *property, NiSourceTexture *sourceTexture)",
   "xrefs_from_count": 206,
   "xrefs_to_count": 1
 }

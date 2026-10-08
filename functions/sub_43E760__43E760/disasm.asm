@@ -48,7 +48,7 @@
 0x43E7ED: call    eax
 0x43E7EF: push    eax; LONG
 0x43E7F0: mov     ecx, esi
-0x43E7F2: call    sub_55F120
+0x43E7F2: call    sub_55F120; LockFreeMap insert/update core: insert new 12-byte node or update existing value when replace flag is set.
 0x43E7F7: mov     ecx, [esp+3FCh+var_4]
 0x43E7FE: pop     edi
 0x43E7FF: pop     esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4FAE80",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4FAE94",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; Reads the compiled argument count word at scriptData+*opcodeOffset, then advances the offset by two bytes before per-argument extraction.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4FAED0",
-    "line": "lea     ebx, [ecx+eax*4+4]",
+    "line": "lea     ebx, [ecx+eax*4+4]; Per-argument loop indexes ParamInfo records with 0x0C-byte stride and dispatches by ParamInfo.typeID.",
     "mnemonic": "lea",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4FAED6",
-    "line": "cmp     byte ptr ds:0B0A54Dh[eax*8], 0",
+    "line": "cmp     byte ptr ds:0B0A54Dh[eax*8], 0; Type table byte at 0xB0A54D+(8*typeID) selects the form/ref-variable extraction path.",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4FAF16",
-    "line": "call    Script_GetRefVariableByIndex",
+    "line": "call    Script_GetRefVariableByIndex; Hot Reload OBSE decode: Script ref-variable lookup. Uses globals B361B0/B361B4/B361B8/B09E1C as a last-ref cache.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x4FB1C1",
-    "line": "movzx   ebx, word ptr [eax+ecx]",
+    "line": "movzx   ebx, word ptr [eax+ecx]; Param typeID 0 extracts a string: compiled form stores uint16 length followed by bytes.",
     "mnemonic": "movzx",
     "size": 4
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x4FB1E3",
-    "line": "push    ebp; Size",
+    "line": "push    ebp; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -1459,19 +1459,19 @@
   },
   {
     "ea": "0x4FB1E9",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FB1EA",
-    "line": "push    edi; Dst",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4FB1EB",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x4FB20A",
-    "line": "fstp    [esp+28h+var_14]",
+    "line": "fstp    [esp+28h+var_14]; Param typeID 1/0x17 extracts an integer through ExecuteScriptInstruction_ expression evaluation, then writes SInt32 to the caller output.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x4FB250",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x4FB263",
-    "line": "fstp    [esp+28h+var_8]",
+    "line": "fstp    [esp+28h+var_8]; Param typeID 2 extracts a float through ExecuteScriptInstruction_ expression evaluation, then writes float to the caller output.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2059,7 +2059,7 @@
   },
   {
     "ea": "0x4FB313",
-    "line": "movzx   ecx, word ptr [eax+ecx]",
+    "line": "movzx   ecx, word ptr [eax+ecx]; Param typeID 5/0xA/0x12/0x1C extracts a uint16 enum/id style value, used by Actor Value and similar parameter kinds.",
     "mnemonic": "movzx",
     "size": 4
   },

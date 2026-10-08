@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4A2A30",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x4A2A30",
+      "0x4A2A60"
+    ]
+  ],
+  "chunks_sha256": "51bf098d584bfd47eb90198e73ab8fef5d1f2fc953defbaca1bf9f0c71df0249",
+  "comment_regular": "Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
+  "comment_repeatable": "Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESForm_GetLODMult",
   "end_ea": "0x4A2A60",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4A2A30",
+  "name": "TESForm_GetLODMult",
   "segment": ".text",
   "sha256": "51bf098d584bfd47eb90198e73ab8fef5d1f2fc953defbaca1bf9f0c71df0249",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4A2A30",
-  "type": "signed int __cdecl(int)",
+  "total_chunk_size": 48,
+  "type": "int __cdecl(TESForm *form)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 7
 }

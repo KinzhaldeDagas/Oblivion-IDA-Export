@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x797570",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-30): Constructs vector<vector<unsigned short*>> with count empty inner vectors; CombineStrips uses it for temporary per-LOD strip-pointer storage.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,19 +85,19 @@
   },
   {
     "ea": "0x797599",
-    "line": "mov     [esp+28h+var_18], edi",
+    "line": "mov     [esp+28h+value.begin], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79759D",
-    "line": "mov     [esp+28h+var_14], edi",
+    "line": "mov     [esp+28h+value.end], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7975A1",
-    "line": "mov     [esp+28h+var_10], edi",
+    "line": "mov     [esp+28h+value.capacityEnd], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x7975A9",
-    "line": "lea     eax, [esp+28h+var_1C]",
+    "line": "lea     eax, [esp+28h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7975AD",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7975AE",
-    "line": "push    ecx; char *",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7975AF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x7975B5",
-    "line": "call    sub_796F20",
+    "line": "call    OB_stVector_stVectorUShortPtr_FillCtor_010201A0; OBLIVION AUTHORITY (2026-08-30): Fill constructor for vector<vector<unsigned short*>>. Its inner owner is structurally identical to vector<float>, explaining reuse of the already-decoded shared 4-byte-element fill helper.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7975BA",
-    "line": "mov     eax, [esp+28h+var_18]",
+    "line": "mov     eax, [esp+28h+value.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7975C3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -226,5 +226,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBD60",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD63",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBD68",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBD6C",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD6F",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD72",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBD74",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBD79",
+    "line": "mov     eax, offset stru_AF4CA0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBD7E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

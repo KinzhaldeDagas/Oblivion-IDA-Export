@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4CAA37",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4CAA48",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x4CAA8B",
-    "line": "push    esi",
+    "line": "push    esi; detachTime",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CAA8C",
-    "line": "lea     ecx, [edi+28h]",
+    "line": "lea     ecx, [edi+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4CAA8F",
-    "line": "call    ExtraDataList?_SetDetachTime",
+    "line": "call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.",
     "mnemonic": "call",
     "size": 5
   },

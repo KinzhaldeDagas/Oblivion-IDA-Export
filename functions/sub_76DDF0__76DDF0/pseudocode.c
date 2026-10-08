@@ -1,4 +1,4 @@
-void *sub_76DDF0()
+NiRTTI *sub_76DDF0()
 {
-  return &unk_B42624;
+  return &stru_B42624; /*0x76ddf5*/
 }

@@ -1,6 +1,6 @@
 0x666B50: push    esi
 0x666B51: mov     esi, ecx
-0x666B53: call    MobileObject_GetCharProxy
+0x666B53: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x666B58: test    eax, eax
 0x666B5A: jz      short loc_666BA7
 0x666B5C: mov     eax, [eax+364h]

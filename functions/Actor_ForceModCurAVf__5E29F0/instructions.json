@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5E29F2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5E2A20",
-    "line": "push    1",
+    "line": "push    1; allowPositive",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x5E2A23",
-    "line": "fstp    [esp+10h+var_10]",
+    "line": "fstp    [esp+10h+delta]; delta",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5E2A26",
-    "line": "push    edi",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5E2A27",
-    "line": "lea     ecx, [esi+88h]",
+    "line": "lea     ecx, [esi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x5E2A2D",
-    "line": "call    AVCollection_ModAVLimited",
+    "line": "call    AVCollection_AdjustValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5E2A51",
-    "line": "mov     ecx, [esp+0Ch+arg_8]",
+    "line": "mov     ecx, [esp+0Ch+a4]",
     "mnemonic": "mov",
     "size": 4
   },

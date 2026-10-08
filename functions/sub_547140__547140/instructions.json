@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x547192",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x5471C7",
-    "line": "call    Calc_WeaponDamage",
+    "line": "call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x5471E6",
-    "line": "call    EffectItemList_HasHostile",
+    "line": "call    EffectItemList_HasHostile; Engine combat threat adds hostile enchantment magicka cost to physical weapon damage using separate combat-style weights.",
     "mnemonic": "call",
     "size": 5
   },

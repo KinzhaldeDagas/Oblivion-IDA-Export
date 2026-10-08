@@ -1,4 +1,4 @@
-0x7F1410: push    0FFFFFFFFh
+0x7F1410: push    0FFFFFFFFh; Creates ShaderDefinition for SpeedTree leaf shader (GetShaderDefinition id 6): declaration id 4, SpeedTreeLeafShader object, programs/pass/constant maps.
 0x7F1412: push    offset SEH_8122A0
 0x7F1417: mov     eax, large fs:0
 0x7F141D: push    eax
@@ -23,11 +23,11 @@
 0x7F144E: call    ShaderDefinition__Init
 0x7F1453: mov     esi, eax
 0x7F1455: mov     eax, ds:0B43104h
-0x7F145A: push    1; StreamCount
-0x7F145C: push    4; a2
-0x7F145E: push    eax; a1
+0x7F145A: push    1; streamCount
+0x7F145C: push    4; elementCount
+0x7F145E: push    eax; renderer
 0x7F145F: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x7F1467: call    CreateDX9ShaderDeclaration
+0x7F1467: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7F146C: mov     edi, [esi]
 0x7F146E: mov     ebx, eax
 0x7F1470: add     esp, 0Ch
@@ -61,7 +61,7 @@
 0x7F14B2: push    0
 0x7F14B4: push    0
 0x7F14B6: push    0
-0x7F14B8: call    eax
+0x7F14B8: call    eax; Leaf declaration element 0 is POSITION float3.
 0x7F14BA: mov     ecx, [esi]
 0x7F14BC: mov     edx, [ecx]
 0x7F14BE: mov     eax, [edx+50h]
@@ -70,7 +70,7 @@
 0x7F14C5: push    3
 0x7F14C7: push    3
 0x7F14C9: push    1
-0x7F14CB: call    eax
+0x7F14CB: call    eax; Leaf declaration element 1 is NORMAL float3.
 0x7F14CD: mov     ecx, [esi]
 0x7F14CF: mov     edx, [ecx]
 0x7F14D1: mov     eax, [edx+50h]
@@ -79,7 +79,7 @@
 0x7F14D8: push    5
 0x7F14DA: push    7
 0x7F14DC: push    2
-0x7F14DE: call    eax
+0x7F14DE: call    eax; Leaf declaration element 2 is TEXCOORD float2.
 0x7F14E0: mov     ecx, [esi]
 0x7F14E2: mov     edx, [ecx]
 0x7F14E4: mov     eax, [edx+4Ch]
@@ -91,7 +91,7 @@
 0x7F14F4: push    8
 0x7F14F6: push    3
 0x7F14F8: push    0
-0x7F14FA: call    eax
+0x7F14FA: call    eax; Leaf declaration element 3 supplies packed BLENDINDICES/card-wind data. No D3DDECLUSAGE_COLOR element is created, matching STLEAF VS bytecode's lack of vertex color input.
 0x7F14FC: mov     ecx, [esi]
 0x7F14FE: test    ecx, ecx
 0x7F1500: jz      short loc_7F151E
@@ -101,7 +101,7 @@
 0x7F1509: test    eax, eax
 0x7F150B: jz      short loc_7F151E
 0x7F150D: lea     ecx, [ecx+0]
-0x7F1510: cmp     eax, offset dword_B3F684
+0x7F1510: cmp     eax, offset stru_B3F684
 0x7F1515: jz      short loc_7F151E
 0x7F1517: mov     eax, [eax+4]
 0x7F151A: test    eax, eax
@@ -114,7 +114,7 @@
 0x7F1531: mov     [esp+20h+var_4], 1
 0x7F1539: jz      short loc_7F1546
 0x7F153B: mov     ecx, eax; this
-0x7F153D: call    ??0SpeedTreeLeafShader@@QAE@XZ; SpeedTreeLeafShader::SpeedTreeLeafShader(void)
+0x7F153D: call    ??0SpeedTreeLeafShader@@QAE@XZ; SpeedTreeLeafShader ctor: BSShader base, four vertex-shader refs at +0x37C, two pixel-shader refs at +0x38C, pass +0x394, clears 0x300-byte leaf constant block and initializes global leaf wind/color scalars.
 0x7F1542: mov     edi, eax
 0x7F1544: jmp     short loc_7F1548
 0x7F1546: xor     edi, edi
@@ -128,7 +128,7 @@
 0x7F1564: mov     ecx, edi
 0x7F1566: call    eax
 0x7F1568: mov     ecx, edi
-0x7F156A: call    sub_7F09D0
+0x7F156A: call    OB_SpeedTreeLeafPass_Build_010201A0; SpeedTree leaf pass builder: texture stage uses wrap+linear; render states set ZENABLE=TRUE, ZFUNC=LESSEQUAL, ZWRITEENABLE=TRUE.
 0x7F156F: mov     edx, [edi]
 0x7F1571: mov     eax, [edx+88h]
 0x7F1577: mov     ecx, edi
@@ -169,3 +169,20 @@
 0x7F15CC: pop     ebx
 0x7F15CD: add     esp, 10h
 0x7F15D0: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

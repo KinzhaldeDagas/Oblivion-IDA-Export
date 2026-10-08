@@ -57,8 +57,8 @@
 0x584932: jz      short loc_584944
 0x584934: fldz
 0x584936: push    ecx
-0x584937: fstp    [esp+0Ch+a2]; a3
-0x58493A: push    0FDDh; a2
-0x58493F: call    Tile_SetFloat
+0x584937: fstp    [esp+0Ch+a2]; value
+0x58493A: push    0FDDh; propertyCode
+0x58493F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x584944: mov     dword ptr [edi+98h], 0
 0x58494E: mov     dword ptr [edi+9Ch], 0

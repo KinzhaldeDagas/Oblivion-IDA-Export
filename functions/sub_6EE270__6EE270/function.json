@@ -1,19 +1,36 @@
 {
-  "callees_count": 85,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 38,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_6EE270",
+  "chunks": [
+    [
+      "0x6EE270",
+      "0x6EEA07"
+    ],
+    [
+      "0x9C84C0",
+      "0x9C8509"
+    ]
+  ],
+  "chunks_sha256": "798742de54c6e2c59f713e47736f8033f56b1a0f942b88e91bd91fa66d4d5f1f",
+  "comment_regular": "CTL FanControls loader/precompute at manager+0xC8. First block: 20 FaceGenFanProjectionRecord records at +0x25C, indexed [fan 0..4][control 0..1][channel 0..1], strides 0x80/0x40/0x20. Each contains basis 1 x dimensions[2*channel], reciprocalSquaredLength (+0x18), and projectionOffset (+0x1C). Offset meaning verified in runtime getter. Later pair data/projection/inverse precomputation remains partially decoded. Initialized byte set after completion.",
+  "comment_repeatable": "CTL FanControls loader/precompute at manager+0xC8. First block: 20 FaceGenFanProjectionRecord records at +0x25C, indexed [fan 0..4][control 0..1][channel 0..1], strides 0x80/0x40/0x20. Each contains basis 1 x dimensions[2*channel], reciprocalSquaredLength (+0x18), and projectionOffset (+0x1C). Offset meaning verified in runtime getter. Later pair data/projection/inverse precomputation remains partially decoded. Initialized byte set after completion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 27,
+  "display_name": "FanControls_ReadCtlDataAndPrecompute",
   "end_ea": "0x6EEA07",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6EE270",
+  "name": "FanControls_ReadCtlDataAndPrecompute",
   "segment": ".text",
   "sha256": "3e1db7c704be016a7dd4becb0b0d8649dabf3a9531120dd604d01793ff2adb62",
   "size": 1943,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EE270",
-  "type": "char __thiscall(_BYTE *this, float *, _DWORD *)",
-  "xrefs_from_count": 653,
+  "total_chunk_size": 2016,
+  "type": "bool __thiscall(void *this, BSFaceGenBinaryFile *file, const unsigned int *basisDimensions)",
+  "xrefs_from_count": 696,
   "xrefs_to_count": 1
 }

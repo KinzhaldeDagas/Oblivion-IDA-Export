@@ -8,7 +8,7 @@
 0x60831F: mov     ecx, ds:0B33B00h
 0x608325: movzx   esi, ax
 0x608328: movzx   ebx, si
-0x60832B: call    sub_45A170
+0x60832B: call    TESSaveLoadGame_UseSaveGameBlocks
 0x608330: test    al, al
 0x608332: jz      short loc_608337
 0x608334: add     esi, 6
@@ -46,7 +46,7 @@
 0x60838E: jz      short loc_6083D8
 0x608390: mov     ecx, [edi]
 0x608392: push    ecx; a1
-0x608393: call    TESForm_LookupByFormID
+0x608393: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x608398: mov     edx, [edi+5]
 0x60839B: add     esp, 4
 0x60839E: push    offset a_AiArrowprojec; ".\\AI\\ArrowProjectile.cpp"

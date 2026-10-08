@@ -1,49 +1,49 @@
-unsigned int __thiscall NiTArray_AddItem(int this, LONG *a2)
+unsigned int __thiscall NiTObjectArray_AddFirstEmpty(MEF_RefPointerArray16 *self, void **element)
 {
-  unsigned __int16 v4; // di
+  unsigned __int16 usedEnd; // di
   unsigned __int16 v5; // ax
-  int v6; // ebp
-  int v7; // ebx
-  int v8; // edi
-  LONG v9; // eax
+  void **data; // ebp
+  unsigned int v7; // ebx
+  volatile LONG *v8; // edi
+  volatile LONG *v9; // eax
   bool v10; // zf
 
-  if ( !*a2 )
-    return 0xFFFFFFFF;
-  v4 = *(_WORD *)(this + 0xA);
-  v5 = 0;
-  if ( v4 )
+  if ( !*element ) /*0x4b3685*/
+    return 0xFFFFFFFF; /*0x4b3694*/
+  usedEnd = self->usedEnd; /*0x4b369d*/
+  v5 = 0; /*0x4b36a1*/
+  if ( usedEnd ) /*0x4b36a6*/
   {
-    v6 = *(_DWORD *)(this + 4);
-    while ( *(_DWORD *)(v6 + 4 * v5) )
+    data = self->data; /*0x4b36a8*/
+    while ( data[v5] ) /*0x4b36bd*/
     {
-      if ( ++v5 >= *(_WORD *)(this + 0xA) )
-        goto LABEL_7;
+      if ( ++v5 >= self->usedEnd ) /*0x4b36c6*/
+        goto LABEL_7; /*0x4b36c6*/
     }
-    v7 = v5;
-    v8 = *(_DWORD *)(v6 + 4 * v5);
-    if ( v8 != *a2 )
+    v7 = v5; /*0x4b36f3*/
+    v8 = (volatile LONG *)data[v5]; /*0x4b36f6*/
+    if ( v8 != *element ) /*0x4b36fc*/
     {
-      if ( v8 )
+      if ( v8 ) /*0x4b3700*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) )
-          (**(void (__thiscall ***)(int, int))v8)(v8, 1);
+        if ( !InterlockedDecrement(v8 + 1) ) /*0x4b3706*/
+          (**(void (__thiscall ***)(void *, int))v8)((void *)v8, 1); /*0x4b371c*/
       }
-      v9 = *a2;
-      v10 = *a2 == 0;
-      *(_DWORD *)(v6 + 4 * v7) = *a2;
-      if ( !v10 )
-        InterlockedIncrement((volatile LONG *)(v9 + 4));
+      v9 = (volatile LONG *)*element; /*0x4b3722*/
+      v10 = *element == 0; /*0x4b3724*/
+      data[v7] = *element; /*0x4b3726*/
+      if ( !v10 ) /*0x4b372a*/
+        InterlockedIncrement(v9 + 1); /*0x4b3730*/
     }
-    ++*(_WORD *)(this + 0xC);
-    return v7;
+    ++self->occupiedCount; /*0x4b3736*/
+    return v7; /*0x4b373e*/
   }
   else
   {
 LABEL_7:
-    if ( v4 >= (unsigned int)*(unsigned __int16 *)(this + 8) )
-      sub_523B10((unsigned __int16 *)this, v4 + *(unsigned __int16 *)(this + 0xE));
-    sub_4B34E0((_DWORD *)this, v4, a2);
-    return v4;
+    if ( usedEnd >= (unsigned int)self->capacity ) /*0x4b36d1*/
+      NiTObjectArray_Resize16(self, usedEnd + self->growBy); /*0x4b36dc*/
+    NiTObjectArray_SetAt(self, usedEnd, element); /*0x4b36e5*/
+    return usedEnd; /*0x4b36ea*/
   }
 }

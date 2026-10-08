@@ -43,10 +43,19 @@
 0x57C3F7: call    Console_FormatPrint
 0x57C3FC: mov     edx, [esp+10h+Format]
 0x57C400: push    edx
-0x57C401: call    FormHeapFree
+0x57C401: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57C406: add     esp, 4
 0x57C409: mov     ecx, [esp+10h+var_C]
 0x57C40D: mov     large fs:0, ecx
 0x57C414: pop     ecx
 0x57C415: add     esp, 0Ch
 0x57C418: retn
+0x9BE7F0: lea     ecx, [ebp+4]; void *
+0x9BE7F3: jmp     BSStringT_Clear
+0x9BE7F8: mov     edx, [esp+arg_4]
+0x9BE7FC: lea     eax, [edx]
+0x9BE7FE: mov     ecx, [edx-4]
+0x9BE801: xor     ecx, eax
+0x9BE803: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE808: mov     eax, offset stru_AE7EF0
+0x9BE80D: jmp     ___CxxFrameHandler3

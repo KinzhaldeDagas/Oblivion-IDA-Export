@@ -12,7 +12,7 @@
 0x5AB9A0: jz      loc_5ABBAC
 0x5AB9A6: push    0FB9h
 0x5AB9AB: call    Tile_GetFloat
-0x5AB9B0: call    Double_To_SInt32
+0x5AB9B0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5AB9B5: mov     ecx, ds:0B333C4h; this
 0x5AB9BB: push    0; a3
 0x5AB9BD: push    eax; a2
@@ -37,7 +37,7 @@
 0x5AB9F0: add     esp, 0Ch
 0x5AB9F3: retn
 0x5AB9F4: mov     ecx, ds:0B333C4h
-0x5AB9FA: call    Actor_GetCurrentAction
+0x5AB9FA: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5AB9FF: cmp     eax, 0FFFFFFFFh
 0x5ABA02: jz      short loc_5ABA33
 0x5ABA04: push    0
@@ -115,9 +115,9 @@
 0x5ABAD5: call    sub_66E0D0
 0x5ABADA: test    al, al
 0x5ABADC: jz      loc_5ABB85
-0x5ABAE2: mov     ecx, esi
+0x5ABAE2: mov     ecx, esi; this
 0x5ABAE4: mov     byte ptr ds:0B3B3DAh, 1
-0x5ABAEB: call    TESHealthForm_GetHealth
+0x5ABAEB: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x5ABAF0: push    0
 0x5ABAF2: push    1
 0x5ABAF4: push    1; arg1
@@ -138,13 +138,13 @@
 0x5ABB23: call    InterfaceManager_GetSingleton
 0x5ABB28: add     esp, 8
 0x5ABB2B: mov     ecx, eax
-0x5ABB2D: call    sub_5821F0
+0x5ABB2D: call    InterfaceManager_ProcessGlobalHotkeys
 0x5ABB32: push    1; arg1
 0x5ABB34: push    0; canCreate
 0x5ABB36: call    InterfaceManager_GetSingleton
 0x5ABB3B: add     esp, 8
 0x5ABB3E: mov     ecx, eax
-0x5ABB40: call    sub_583F40
+0x5ABB40: call    InterfaceManager__UpdateMenuFades; Verified: reads GetTimerPercent and Menu fade state +0x24. State 2 completion sets state 4; if root trait 0x1772==2, destroys MenuTopicManager for DialogMenu at 0x584230 then invokes root tile deleting destructor at 0x584255. Otherwise hides root. State 8 completion sets state 1. This is the normal deferred destruction path, separate from StartFadeOut.
 0x5ABB45: call    sub_57CC00
 0x5ABB4A: mov     ecx, [esp+10h+var_C]
 0x5ABB4E: mov     edx, [esp+10h+var_8]

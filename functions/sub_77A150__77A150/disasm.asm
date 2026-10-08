@@ -1,4 +1,4 @@
-0x77A150: push    esi
+0x77A150: push    esi; MoonSugarEffect decode: NiD3DShader vtable +0x28 begin/check. Requires IsRenderSet, updates render state/light manager, applies shader render-state group.
 0x77A151: mov     esi, ecx
 0x77A153: cmp     byte ptr [esi+1Ch], 0
 0x77A157: jnz     short loc_77A160
@@ -31,7 +31,7 @@
 0x77A19E: test    ecx, ecx
 0x77A1A0: pop     edi
 0x77A1A1: jz      short loc_77A1A8
-0x77A1A3: call    NiD3DRenderStateGroup__SetRenderStates
+0x77A1A3: call    NiD3DRenderStateGroup__SetRenderStates;
 0x77A1A8: xor     eax, eax
 0x77A1AA: pop     esi
 0x77A1AB: retn    1Ch

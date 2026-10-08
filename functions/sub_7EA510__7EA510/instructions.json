@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7EA510",
-    "line": "sub     esp, 510h",
+    "line": "sub     esp, 510h; MoonSugarEffect decode: BlurShader_P20 loads TES4 image-space copy/blur_20/blend_P20 shader programs as ps_2_0/vs_1_1. Use as reference, not direct state ownership.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -684,12 +684,6 @@
     "size": 2
   },
   {
-    "ea": "0x7EA71A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x7EA720",
     "line": "lea     edi, [esp+eax+520h+var_388]",
     "mnemonic": "lea",
@@ -841,7 +835,7 @@
   },
   {
     "ea": "0x7EA778",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1135,7 @@
   },
   {
     "ea": "0x7EA80F",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
     "mnemonic": "call",
     "size": 5
   },

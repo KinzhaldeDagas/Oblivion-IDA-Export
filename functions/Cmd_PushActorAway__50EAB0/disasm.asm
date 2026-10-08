@@ -24,7 +24,7 @@
 0x50EAE5: push    ecx; a1
 0x50EAE6: mov     dword ptr [esp+40h+var_C], edi
 0x50EAEA: mov     [esp+40h+var_8], edi
-0x50EAEE: call    Script_ExtractArgs
+0x50EAEE: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50EAF3: add     esp, 24h
 0x50EAF6: test    al, al
 0x50EAF8: jnz     short loc_50EB02
@@ -50,7 +50,7 @@
 0x50EB31: mov     ecx, dword ptr [esp+1Ch+var_C]; this
 0x50EB35: push    edx; int
 0x50EB36: mov     esi, ecx
-0x50EB38: call    Actor_GetFatigueFraction
+0x50EB38: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x50EB3D: mov     eax, [esi]
 0x50EB3F: mov     edx, [eax+284h]
 0x50EB45: push    ecx

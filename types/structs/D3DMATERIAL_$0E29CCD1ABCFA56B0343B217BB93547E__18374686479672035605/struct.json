@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DMATERIAL::$0E29CCD1ABCFA56B0343B217BB93547E",
+  "definition": "union _D3DMATERIAL::$0E29CCD1ABCFA56B0343B217BB93547E\n{\nD3DVALUE power;\nD3DVALUE dvPower;\n}\n",
   "id": 18374686479672035605,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "power",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "D3DVALUE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dvPower",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "D3DVALUE"
     }
   ],
   "name": "_D3DMATERIAL::$0E29CCD1ABCFA56B0343B217BB93547E",
+  "ordinal": 4184,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

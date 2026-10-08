@@ -11,7 +11,7 @@
 0x41B5C6: mov     edi, ecx
 0x41B5C8: push    edi
 0x41B5C9: mov     ecx, ebx; this
-0x41B5CB: call    TESFile_InitializeFormFromRecord
+0x41B5CB: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x41B5D0: mov     ecx, ebx
 0x41B5D2: call    TESFile_GetChunkType
 0x41B5D7: test    eax, eax

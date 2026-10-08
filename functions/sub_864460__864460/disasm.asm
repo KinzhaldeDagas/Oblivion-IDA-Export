@@ -1,4 +1,4 @@
-0x864460: mov     eax, [esp+arg_0]
+0x864460: mov     eax, [esp+arg_0]; Stores the supplied local NiBound in both the persistent local-bound fields (+0xC4..+0xD0) and current world-bound fields (+0x20..+0x2C). Fallout was consulted only after this behavior was observed and supplies the conventional SetLocalBound label.
 0x864464: mov     edx, [esp+arg_4]
 0x864468: push    esi
 0x864469: mov     esi, [esp+4+arg_8]

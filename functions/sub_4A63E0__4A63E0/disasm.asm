@@ -1,9 +1,9 @@
-0x4A63E0: test    ecx, ecx
+0x4A63E0: test    ecx, ecx; Verified: linear search over region list comparing TESRegion formID at object offset +0x0C.
 0x4A63E2: jz      short loc_4A6402
 0x4A63E4: lea     eax, [ecx+4]
 0x4A63E7: test    eax, eax
 0x4A63E9: jz      short loc_4A6402
-0x4A63EB: mov     edx, [esp+arg_0]
+0x4A63EB: mov     edx, [esp+formID]
 0x4A63EF: nop
 0x4A63F0: mov     ecx, [eax]
 0x4A63F2: test    ecx, ecx

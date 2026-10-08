@@ -18,9 +18,9 @@
 0x5D86EA: mov     esi, eax
 0x5D86EC: call    InterfaceManager_GetDepth
 0x5D86F1: fstp    [esp+0Ch+var_4]
-0x5D86F5: mov     ecx, [esi+68h]; TileWindow *
+0x5D86F5: mov     ecx, [esi+68h]; this
 0x5D86F8: push    offset aDataMenusDia_7; "Data\\Menus\\dialog\\Spellmaking.xml"
-0x5D86FD: call    Menu_LoadXML
+0x5D86FD: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5D8702: mov     ebp, eax
 0x5D8704: mov     ecx, ebp
 0x5D8706: call    Tile_GetParentMenu
@@ -71,20 +71,20 @@
 0x5D879A: jp      short loc_5D87B0
 0x5D879C: fld     [esp+14h+var_4]
 0x5D87A0: push    ecx
-0x5D87A1: fstp    [esp+18h+a3]; a3
-0x5D87A4: push    0FABh; a2
+0x5D87A1: fstp    [esp+18h+a3]; value
+0x5D87A4: push    0FABh; propertyCode
 0x5D87A9: mov     ecx, ebp; this
-0x5D87AB: call    Tile_SetFloat
+0x5D87AB: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D87B0: call    EffectSetting_Create
 0x5D87B5: mov     edi, eax
 0x5D87B7: or      dword ptr [edi+58h], 200800h
 0x5D87BE: mov     ecx, [ebx+58h]
 0x5D87C1: test    ecx, ecx
 0x5D87C3: jz      short loc_5D87D6
-0x5D87C5: call    BSSimpleList_Clear
+0x5D87C5: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5D87CA: mov     ecx, [ebx+58h]
 0x5D87CD: push    ecx
-0x5D87CE: call    FormHeapFree
+0x5D87CE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D87D3: add     esp, 4
 0x5D87D6: push    1
 0x5D87D8: push    0
@@ -107,9 +107,9 @@
 0x5D880E: fild    [esp+14h+var_4]
 0x5D8812: push    ecx
 0x5D8813: mov     ecx, [ebx+4]; this
-0x5D8816: fstp    [esp+18h+a3]; a3
-0x5D8819: push    0FB5h; a2
-0x5D881E: call    Tile_SetFloat
+0x5D8816: fstp    [esp+18h+a3]; value
+0x5D8819: push    0FB5h; propertyCode
+0x5D881E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D8823: mov     ecx, ebx
 0x5D8825: call    sub_5D8180
 0x5D882A: push    0; char

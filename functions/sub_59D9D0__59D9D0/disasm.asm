@@ -1,4 +1,4 @@
-0x59D9D0: push    esi
+0x59D9D0: push    esi; Verified DoGamepad vtable +0x38: if top DialogMenu and response-continue tile +0x34 visible==2, consumes only button codes9..12 by DoClick(ID4,tile). Code15 LB is not consumed here and can continue to XML navigation binding. Fallout DoGamepad 0x8252E8C0 uses different response/ListBox semantics.
 0x59D9D1: mov     esi, ecx
 0x59D9D3: mov     eax, [esi]
 0x59D9D5: mov     edx, [eax+34h]
@@ -17,7 +17,7 @@
 0x59D9FD: fnstsw  ax
 0x59D9FF: test    ah, 44h
 0x59DA02: jp      short loc_59DA26
-0x59DA04: mov     eax, [esp+8+arg_0]
+0x59DA04: mov     eax, [esp+8+button]
 0x59DA08: add     eax, 0FFFFFFF7h
 0x59DA0B: cmp     eax, 3
 0x59DA0E: ja      short loc_59DA26

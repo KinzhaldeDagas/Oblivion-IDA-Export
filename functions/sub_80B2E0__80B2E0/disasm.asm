@@ -1,1 +1,1 @@
-0x80B2E0: jmp     sub_7C9110
+0x80B2E0: jmp     ShadowLightShader_PrepareGeometryRenderState; ShadowLight vtable +0x28 geometry-state preparation. Applies the geometry property-state stencil/cull and wireframe/fill entries. Mode-5 alpha property handling is performed later by ShadowLightShader__SetupRenderPass for selectors 6..9.

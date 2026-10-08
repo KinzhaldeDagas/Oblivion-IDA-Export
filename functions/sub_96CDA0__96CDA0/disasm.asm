@@ -4,7 +4,7 @@
 0x96CDAA: test    eax, eax
 0x96CDAC: jz      short loc_96CDC1
 0x96CDAE: fld1
-0x96CDB0: push    offset Vector3_InitValue?; int
+0x96CDB0: push    offset g_zeroNiPoint3; int
 0x96CDB5: push    ecx
 0x96CDB6: fstp    [esp+8+var_8]; float
 0x96CDB9: mov     ecx, eax

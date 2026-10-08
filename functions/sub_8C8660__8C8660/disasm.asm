@@ -84,7 +84,7 @@
 0x8C8767: fstp    [esp+88h+var_14]
 0x8C876B: call    sub_4D68A0
 0x8C8770: add     esp, 8
-0x8C8773: push    offset unk_A996C4; ArgList
+0x8C8773: push    offset aVa; ArgList
 0x8C8778: lea     ecx, [esp+84h+var_6C]
 0x8C877C: call    sub_707280
 0x8C8781: movzx   edi, word ptr [esi+0Ah]
@@ -116,7 +116,7 @@
 0x8C87D2: fstp    [esp+88h+var_14]
 0x8C87D6: call    sub_4D68A0
 0x8C87DB: add     esp, 8
-0x8C87DE: push    offset unk_A996C0; ArgList
+0x8C87DE: push    offset aVb; ArgList
 0x8C87E3: lea     ecx, [esp+84h+var_6C]
 0x8C87E7: call    sub_707280
 0x8C87EC: movzx   edi, word ptr [esi+0Ah]

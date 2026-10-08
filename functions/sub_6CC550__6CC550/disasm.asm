@@ -15,7 +15,6 @@
 0x6CC575: mov     ecx, [ecx+14h]
 0x6CC578: add     ecx, 8
 0x6CC57B: jmp     short loc_6CC580
-0x6CC57D: align 10h
 0x6CC580: fld     dword ptr [ecx]
 0x6CC582: fld     [esp+0Ch+var_4]
 0x6CC586: fcompp

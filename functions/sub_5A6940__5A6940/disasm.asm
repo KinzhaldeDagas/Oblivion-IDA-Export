@@ -8,18 +8,18 @@
 0x5A6954: push    0; canCreate
 0x5A6956: call    InterfaceManager_GetSingleton
 0x5A695B: mov     esi, eax
-0x5A695D: call    sub_57D7F0
+0x5A695D: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5A6962: fstp    [esp+18h+var_8]
-0x5A6966: call    sub_57D7F0
+0x5A6966: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5A696B: fmul    qword ptr ds:0A2FAA0h
 0x5A6971: fadd    dword ptr [esi+28h]
 0x5A6974: fsubr   [esp+18h+var_8]
-0x5A6978: call    Double_To_SInt32
+0x5A6978: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A697D: mov     [esp+18h+arg_0], eax
-0x5A6981: call    sub_57D7A0
+0x5A6981: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5A6986: fmul    qword ptr ds:0A2FAA0h
 0x5A698C: fadd    dword ptr [esi+20h]
-0x5A698F: call    Double_To_SInt32
+0x5A698F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A6994: fld     dword ptr [edi+6Ch]
 0x5A6997: fisub   [esp+18h+arg_0]
 0x5A699B: mov     dword ptr [esp+18h+var_8], eax
@@ -33,20 +33,20 @@
 0x5A69BA: fstp    [esp+18h+var_18]; float
 0x5A69BD: call    sub_5A5900
 0x5A69C2: add     esp, 8
-0x5A69C5: call    sub_57D7A0
+0x5A69C5: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5A69CA: fmul    qword ptr ds:0A2FAA0h
 0x5A69D0: fadd    dword ptr [esi+20h]
-0x5A69D3: call    Double_To_SInt32
+0x5A69D3: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A69D8: mov     [esp+10h+arg_0], eax
 0x5A69DC: fild    [esp+10h+arg_0]
 0x5A69E0: fstp    dword ptr [edi+68h]
-0x5A69E3: call    sub_57D7F0
+0x5A69E3: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5A69E8: fstp    [esp+10h+var_8]
-0x5A69EC: call    sub_57D7F0
+0x5A69EC: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5A69F1: fmul    qword ptr ds:0A2FAA0h
 0x5A69F7: fadd    dword ptr [esi+28h]
 0x5A69FA: fsubr   [esp+10h+var_8]
-0x5A69FE: call    Double_To_SInt32
+0x5A69FE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A6A03: mov     [esp+10h+arg_0], eax
 0x5A6A07: fild    [esp+10h+arg_0]
 0x5A6A0B: pop     esi

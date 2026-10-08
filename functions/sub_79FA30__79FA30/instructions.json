@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79FA30",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x79FA34",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79FA3B",
-    "line": "mov     edi, [esp+18h+arg_4]",
+    "line": "mov     edi, [esp+18h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x79FA5D",
-    "line": "mov     esi, [esp+18h+arg_8]",
+    "line": "mov     esi, [esp+18h+depthLimit]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x79FA69",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, dword ptr [esp+18h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,37 +133,37 @@
   },
   {
     "ea": "0x79FA6E",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FA6F",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79FA73",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FA74",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FA75",
-    "line": "call    sub_79E790",
+    "line": "call    OB_SFrondGuide_PartitionByFuzzyArea_010201A0; Three-way partition of 0x30-byte SFrondGuide records around a sampled fuzzySurfaceArea pivot, descending. Groups values greater than, equal to, and less than the pivot and returns the lower/upper bounds of the equal partition.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79FA7A",
-    "line": "mov     ebp, [esp+28h+var_4]",
+    "line": "mov     ebp, [esp+28h+result.upper]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x79FA99",
-    "line": "mov     ecx, [esp+28h+var_8]",
+    "line": "mov     ecx, [esp+28h+result.lower]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x79FAA7",
-    "line": "mov     [esp+28h+arg_4], eax",
+    "line": "mov     [esp+28h+last], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x79FAB4",
-    "line": "mov     ecx, [esp+28h+arg_4]",
+    "line": "mov     ecx, [esp+28h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,43 +349,43 @@
   },
   {
     "ea": "0x79FAC9",
-    "line": "mov     ecx, [esp+18h+arg_C]",
+    "line": "mov     ecx, dword ptr [esp+18h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79FACD",
-    "line": "mov     edx, [esp+18h+var_8]",
+    "line": "mov     edx, [esp+18h+result.lower]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79FAD1",
-    "line": "push    ecx",
+    "line": "push    ecx; sorterState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAD2",
-    "line": "push    esi",
+    "line": "push    esi; partitionBudget",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAD3",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAD4",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAD5",
-    "line": "call    sub_79FA30",
+    "line": "call    OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0; Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,43 +403,43 @@
   },
   {
     "ea": "0x79FADE",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, dword ptr [esp+18h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79FAE2",
-    "line": "push    eax",
+    "line": "push    eax; sorterState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAE3",
-    "line": "push    esi",
+    "line": "push    esi; partitionBudget",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAE4",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAE5",
-    "line": "push    ebp",
+    "line": "push    ebp; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FAE6",
-    "line": "call    sub_79FA30",
+    "line": "call    OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0; Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79FAEB",
-    "line": "mov     edi, [esp+28h+var_8]",
+    "line": "mov     edi, [esp+28h+result.lower]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x79FB15",
-    "line": "mov     ecx, [esp+18h+arg_C]",
+    "line": "mov     ecx, dword ptr [esp+18h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x79FB1A",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB1B",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB1C",
-    "line": "call    sub_79E9F0",
+    "line": "call    OB_SFrondGuide_InsertionSortByFuzzyArea_010201A0; Insertion-sort cleanup for short SFrondGuide ranges (threshold 32 in the caller). Finds the descending fuzzySurfaceArea insertion point and rotates whole guide ranges to preserve embedded vector ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x79FB4B",
-    "line": "mov     edx, [esp+18h+arg_C]",
+    "line": "mov     edx, dword ptr [esp+18h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -685,25 +685,25 @@
   },
   {
     "ea": "0x79FB53",
-    "line": "push    edx",
+    "line": "push    edx; sorterState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB54",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB55",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB56",
-    "line": "call    sub_79E2E0",
+    "line": "call    OB_SFrondGuide_MakeHeap_010201A0; Builds a heap over [first,last) SFrondGuide records by walking parent holes backward from count/2 and applying the guide adjust-heap primitive.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,31 +715,31 @@
   },
   {
     "ea": "0x79FB5E",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, dword ptr [esp+18h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79FB62",
-    "line": "push    eax",
+    "line": "push    eax; sorterState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB63",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB64",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FB65",
-    "line": "call    sub_79EF40",
+    "line": "call    OB_SFrondGuide_SortHeapByFuzzyArea_010201A0; Sorts an SFrondGuide heap by repeatedly popping the last heap element and repairing the shortened heap. Used as the introsort worst-case fallback.",
     "mnemonic": "call",
     "size": 5
   },

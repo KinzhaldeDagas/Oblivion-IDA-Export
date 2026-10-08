@@ -1,1 +1,1 @@
-IConnectionPoint_0
+typedef IConnectionPoint IConnectionPoint_0;

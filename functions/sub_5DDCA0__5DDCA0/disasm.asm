@@ -8,5 +8,5 @@
 0x5DDCB8: test    eax, eax
 0x5DDCBA: jz      short locret_5DDCC3
 0x5DDCBC: mov     ecx, eax; int
-0x5DDCBE: jmp     sub_584390
+0x5DDCBE: jmp     Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5DDCC3: retn

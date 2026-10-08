@@ -1,1 +1,1 @@
-IShellLinkWVtbl_0
+typedef IShellLinkWVtbl IShellLinkWVtbl_0;

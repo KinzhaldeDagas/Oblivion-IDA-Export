@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x624610",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x624667",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x62469F",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x6246A7",
-    "line": "call    sub_6162D0",
+    "line": "call    CombatController_RemoveTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x6246AE",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x6246EA",
-    "line": "call    sub_624480",
+    "line": "call    CombatController_InitializeCombatState",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x6246F8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6246FA",
-    "line": "call    sub_61C6E0",
+    "line": "call    ActorMovement_BuildPathGridWaypointList; Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x62473B",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x624758",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x624798",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x62479C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62479E",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x6247A4",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x6247D7",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x6247E8",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x624843",
-    "line": "call    sub_624030",
+    "line": "call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x624857",
-    "line": "call    sub_612D30",
+    "line": "call    CombatController_UpdateBlockingAllyTimer; Clears blocking-ally flag +0x15A when elapsed controller time exceeds duration +0x168.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x62497A",
-    "line": "call    sub_612DE0",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x624981",
-    "line": "call    sub_622180",
+    "line": "call    CombatController_UpdateActiveMode; Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x62498A",
-    "line": "call    sub_614290",
+    "line": "call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1909,13 +1909,13 @@
   },
   {
     "ea": "0x624993",
-    "line": "push    edi",
+    "line": "push    edi; mode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x624994",
-    "line": "call    sub_612690",
+    "line": "call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x6249B6",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x6249E5",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2443,7 +2443,7 @@
   },
   {
     "ea": "0x624A88",
-    "line": "call    sub_622180",
+    "line": "call    CombatController_UpdateActiveMode; Executes the live combat mode. Mode 3 validates selected touch/melee spell at +0x7C; mode 4 validates selected ranged spell at +0x80; invalid choices transition to mode 0xD.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2551,19 +2551,19 @@
   },
   {
     "ea": "0x624ABF",
-    "line": "push    2",
+    "line": "push    2; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x624AC1",
-    "line": "push    4",
+    "line": "push    4; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x624AC3",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x624B1A",
-    "line": "call    sub_623C00",
+    "line": "call    CombatController_UpdateMovementAndReachability",
     "mnemonic": "call",
     "size": 5
   },
@@ -3421,7 +3421,7 @@
   },
   {
     "ea": "0x624C31",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },

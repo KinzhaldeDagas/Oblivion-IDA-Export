@@ -1,1 +1,1 @@
-InventoryMenu
+struct InventoryMenu;

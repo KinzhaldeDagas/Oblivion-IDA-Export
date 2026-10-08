@@ -1,7 +1,7 @@
 0x67B5F0: push    esi
 0x67B5F1: mov     esi, ecx
 0x67B5F3: push    esi
-0x67B5F4: mov     ecx, offset ActorProcessManager_ptr
+0x67B5F4: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x67B5F9: call    sub_674FD0
 0x67B5FE: mov     eax, [esi]
 0x67B600: test    eax, eax
@@ -10,7 +10,7 @@
 0x67B606: test    eax, eax
 0x67B608: jz      short loc_67B63D
 0x67B60A: push    eax
-0x67B60B: call    FormHeapFree
+0x67B60B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67B610: mov     eax, [esi]
 0x67B612: mov     ecx, [eax+4]
 0x67B615: add     esp, 4
@@ -21,7 +21,7 @@
 0x67B622: mov     edx, [ecx]
 0x67B624: push    ecx
 0x67B625: mov     [eax], edx
-0x67B627: call    FormHeapFree
+0x67B627: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67B62C: add     esp, 4
 0x67B62F: jmp     short loc_67B637
 0x67B631: mov     dword ptr [eax], 0
@@ -30,11 +30,11 @@
 0x67B63B: jnz     short loc_67B604
 0x67B63D: mov     eax, [esi]
 0x67B63F: push    eax
-0x67B640: call    FormHeapFree
+0x67B640: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67B645: mov     ecx, [esi+8]
 0x67B648: add     esp, 4
 0x67B64B: push    1
-0x67B64D: call    sub_566830
+0x67B64D: call    sub_566830; 3DTheft decode: dynamic package marker only sets packageFlags bit 0x800 when TESDataHandler_IsFormIDCreated_(formID) returns true. Do not force 0x800 on arbitrary heap packages before Actor_AddPackage_.
 0x67B652: mov     ecx, [esi+8]
 0x67B655: test    ecx, ecx
 0x67B657: pop     esi

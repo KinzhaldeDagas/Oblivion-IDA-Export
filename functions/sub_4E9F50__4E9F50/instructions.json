@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E9F50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified root-data initializer allocates a 0x60-byte TESTerrainLODQuad object, initializes its root pointer and fields, and stores it in TESTerrainLODQuadRoot.quadData.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x4E9F8E",
-    "line": "push    esi",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9F8F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E9F91",
-    "line": "call    sub_4EC650",
+    "line": "call    TESTerrainLODQuad_ctor; Verified quad-data layout at 0x60 bytes: root pointer +0, state +8, world origin +0x18/+0x1C, terrain mesh node +0x2C, and four child-quad pointers +0x30..+0x3C. The remaining bytes are Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -196,5 +196,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D62E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D62EF",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D62F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62FC",
+    "line": "mov     eax, offset stru_AFE21C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6301",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

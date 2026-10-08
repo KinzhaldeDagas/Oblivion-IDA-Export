@@ -1,4 +1,4 @@
-0x5FC2B0: push    ebp
+0x5FC2B0: push    ebp; ODismemberment combat decode: block-side disarm perk attempt. Uses block/weapon skill mastery and iPerkBlockDisarmChance to make the blocker disarm the attacker.
 0x5FC2B1: mov     ebp, ecx
 0x5FC2B3: mov     eax, [ebp+0]
 0x5FC2B6: mov     edx, [eax+170h]
@@ -35,8 +35,8 @@
 0x5FC307: push    0Fh
 0x5FC309: mov     ecx, ebp
 0x5FC30B: call    Actor_GetBaseCalcAVi
-0x5FC310: push    eax
-0x5FC311: call    Calc_MasteryFromSkill
+0x5FC310: push    eax; skillValue
+0x5FC311: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5FC316: add     esp, 4
 0x5FC319: cmp     eax, 4
 0x5FC31C: jl      short loc_5FC335
@@ -57,13 +57,13 @@
 0x5FC33D: push    11h
 0x5FC33F: mov     ecx, ebp
 0x5FC341: call    Actor_GetBaseCalcAVi
-0x5FC346: push    eax
-0x5FC347: call    Calc_MasteryFromSkill
+0x5FC346: push    eax; skillValue
+0x5FC347: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5FC34C: add     esp, 4
 0x5FC34F: cmp     eax, 4
 0x5FC352: jl      short loc_5FC335
 0x5FC354: push    0; Seed
-0x5FC356: call    GetRandomLargeInteger?
+0x5FC356: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5FC35B: cdq
 0x5FC35C: mov     ecx, 64h ; 'd'
 0x5FC361: idiv    ecx
@@ -110,7 +110,7 @@
 0x5FC3BB: call    sub_4DC000
 0x5FC3C0: add     esp, 8
 0x5FC3C3: mov     ecx, esi
-0x5FC3C5: call    Actor_GetCurrentAction
+0x5FC3C5: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x5FC3CA: test    eax, eax
 0x5FC3CC: jl      short loc_5FC406
 0x5FC3CE: cmp     eax, 5
@@ -126,15 +126,15 @@
 0x5FC3E9: call    eax
 0x5FC3EB: test    eax, eax
 0x5FC3ED: jnz     short loc_5FC406
-0x5FC3EF: push    eax; float
-0x5FC3F0: mov     ecx, esi
-0x5FC3F2: call    sub_5F4AE0
+0x5FC3EF: push    eax; shouldBlock
+0x5FC3F0: mov     ecx, esi; this
+0x5FC3F2: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x5FC3F7: test    al, al
 0x5FC3F9: jnz     short loc_5FC406
-0x5FC3FB: push    0
-0x5FC3FD: push    0FFFFFFFFh
-0x5FC3FF: mov     ecx, esi
-0x5FC401: call    HighPRocess_DoAction?????
+0x5FC3FB: push    0; sequence
+0x5FC3FD: push    0FFFFFFFFh; action
+0x5FC3FF: mov     ecx, esi; this
+0x5FC401: call    Actor_SetCurrentActionWithBowVisualCleanup; Void Actor action-transition wrapper. Performs transition-specific bow/held-arrow visual cleanup, then commits action and sequence through process vtable +0x2D8. It has no success/result contract; callers/plugins must not consume EAX, so Crossbow's UInt32 HighProcessDoActionFn typedef is incorrect. Meaningful current-action state is HighProcess-only: HighProcess +0x2D0/+0x2D8 read/store +0x1F4/+0x1F8, while MiddleHigh returns None (-1) and its setter is a no-op; Crossbow's process-level-0 action filter therefore matches Oblivion. External Crossbow state-machine contrast: Equip-as-Cocked/first-shot-loaded is plugin policy, repeated action 4 while Reloading can flip state to Cocked and rebuild controller tracking, and interruption/cancellation actions are not modeled, leaving stale Reloading/Cocked phases.
 0x5FC406: mov     edx, [esi]
 0x5FC408: mov     eax, [edx+330h]
 0x5FC40E: mov     ecx, esi

@@ -18,12 +18,12 @@ int __usercall MagicTarget_AddEffect_::GetAlwaysApplies_PlayerOverride@<eax>(
 {
   bool v16; // al
 
-  v16 = a1 == TESDataHandler_g_PlayerRef
+  v16 = a1 == reference /*0x6a28d3*/
      && !*(_DWORD *)(*(_DWORD *)(a2 + 0xC) + 0x10)
      && (!(*(int (__thiscall **)(int))(*(_DWORD *)a3 + 0x18))(a3)
       || (*(int (__thiscall **)(int))(*(_DWORD *)a3 + 0x18))(a3) == 2
       || (*(int (__thiscall **)(int))(*(_DWORD *)a3 + 0x18))(a3) == 3);
-  HIBYTE(a10) |= v16;
+  HIBYTE(a10) |= v16; /*0x6a28dc*/
   return MagicTarget_AddEffect_::GetResistanceFactor(
            a2,
            edi0,

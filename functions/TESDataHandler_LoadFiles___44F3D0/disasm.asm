@@ -1,4 +1,4 @@
-0x44F3D0: sub     esp, 0Ch
+0x44F3D0: sub     esp, 0Ch; Verified TESDataHandler_LoadFiles behavior: when activeFileState.retainActiveFile is nonzero, reopens the retained TESFile and rebuilds its loaded-master array before completing the file load. The flag's writer remains Unknown.
 0x44F3D3: cmp     [esp+0Ch+arg_0], 0
 0x44F3D8: mov     eax, ds:0BA9DE4h
 0x44F3DD: push    ebx
@@ -61,7 +61,7 @@
 0x44F4A6: add     eax, 8C8h
 0x44F4AB: push    eax
 0x44F4AC: mov     ecx, ebx
-0x44F4AE: call    TESFile_BuildLoadedMasterArray
+0x44F4AE: call    TESFile_BuildLoadedMasterArray; MEF PERF 2026-09-08: PERF-5 actual loading caller: TESDataHandler_LoadFiles iterates loaded TESFiles, opens each then resolves its masters using DataHandler+8C8 candidate list. Repeated master resolution is a startup/resource-loading cost; not an established per-frame bottleneck.
 0x44F4B3: mov     ecx, ebx
 0x44F4B5: call    TESFile__IsFileVersionTooHigh
 0x44F4BA: test    al, al
@@ -76,7 +76,7 @@
 0x44F4D0: lea     ebp, [esi+1]
 0x44F4D3: push    ebp
 0x44F4D4: mov     ecx, ebx
-0x44F4D6: call    TESFile_GetMasterByIndex
+0x44F4D6: call    TESFile_GetMasterByIndex; Oblivion TESFile_GetMasterByIndex returns masterFiles[slot-1] for a one-based MAST index, bounded by masterCount. FormID owner-byte resolution can therefore select distinct alias slots for duplicate filenames.
 0x44F4DB: mov     edi, eax
 0x44F4DD: test    edi, edi
 0x44F4DF: jz      loc_44F5B2
@@ -107,7 +107,6 @@
 0x44F539: mov     byte ptr ds:0B06B18h, 1
 0x44F540: jz      loc_44F659
 0x44F546: jmp     short loc_44F550
-0x44F548: align 10h
 0x44F550: mov     edi, [ebp+0]
 0x44F553: test    edi, edi
 0x44F555: jz      loc_44F659
@@ -279,7 +278,6 @@
 0x44F7A7: test    edi, edi
 0x44F7A9: jz      short loc_44F7C4
 0x44F7AB: jmp     short loc_44F7B0
-0x44F7AD: align 10h
 0x44F7B0: mov     ecx, [edi]
 0x44F7B2: test    ecx, ecx
 0x44F7B4: jz      short loc_44F7C4
@@ -384,7 +382,6 @@
 0x44F8A7: test    edi, edi
 0x44F8A9: jz      short loc_44F8C4
 0x44F8AB: jmp     short loc_44F8B0
-0x44F8AD: align 10h
 0x44F8B0: mov     ecx, [edi]
 0x44F8B2: test    ecx, ecx
 0x44F8B4: jz      short loc_44F8C4
@@ -413,10 +410,10 @@
 0x44F8EE: jnz     short loc_44F8F4
 0x44F8F0: mov     bl, 1
 0x44F8F2: jmp     short loc_44F8FE
-0x44F8F4: push    0
-0x44F8F6: call    sub_52F6D0
+0x44F8F4: push    0; topics
+0x44F8F6: call    SortTopicListByDisplayName; Case-insensitive bubble sort of a TESTopic list by TESFullName display text. A null argument sorts DataHandler's master topic list; player additions pass the known-topic list explicitly.
 0x44F8FB: add     esp, 4
-0x44F8FE: mov     ecx, offset TimeGlobals
+0x44F8FE: mov     ecx, 0B332E0h
 0x44F903: call    sub_402860
 0x44F908: lea     edi, [esi+7Ch]
 0x44F90B: test    edi, edi
@@ -433,11 +430,11 @@
 0x44F922: jnz     short loc_44F910
 0x44F924: test    bl, bl
 0x44F926: jnz     short loc_44F932
-0x44F928: push    0
-0x44F92A: call    sub_52FAE0
+0x44F928: push    0; questOrNull
+0x44F92A: call    SortTopicQuestInfoEntriesForQuest; After form loading, sorts TESTopic quest-entry buckets by QUST priority before dialogue selection begins.
 0x44F92F: add     esp, 4
-0x44F932: mov     ecx, [esi]
-0x44F934: call    TESHealthForm_GetHealth
+0x44F932: mov     ecx, [esi]; this
+0x44F934: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x44F939: mov     edi, eax
 0x44F93B: test    edi, edi
 0x44F93D: jz      short loc_44F956
@@ -457,7 +454,6 @@
 0x44F967: test    edi, edi
 0x44F969: jz      short loc_44F992
 0x44F96B: jmp     short loc_44F970
-0x44F96D: align 10h
 0x44F970: cmp     dword ptr [edi+8], 0
 0x44F974: jnz     short loc_44F97C
 0x44F976: cmp     dword ptr [edi+4], 0
@@ -476,11 +472,10 @@
 0x44F997: test    edi, edi
 0x44F999: jz      short loc_44F9B2
 0x44F99B: jmp     short loc_44F9A0
-0x44F99D: align 10h
-0x44F9A0: mov     ecx, [edi]
+0x44F9A0: mov     ecx, [edi]; this
 0x44F9A2: test    ecx, ecx
 0x44F9A4: jz      short loc_44F9AB
-0x44F9A6: call    sub_4EF290
+0x44F9A6: call    TESWorldSpace_IndexPersistentCellSubSpaces; Verified SubSpace index build pass: during TESDataHandler_LoadFiles, after form loading and prior to returning to the initialization caller, iterates worldspaceList and builds each +0x60 index from its persistent cell. This is the observed full-load reconstruction path; no post-CreateDuplicateForm rebuild call is established.
 0x44F9AB: mov     edi, [edi+4]
 0x44F9AE: test    edi, edi
 0x44F9B0: jnz     short loc_44F9A0

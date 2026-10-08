@@ -14,7 +14,7 @@
 0x648CCF: mov     large fs:0, eax
 0x648CD5: mov     esi, ecx
 0x648CD7: mov     [esp+24h+var_10], esi
-0x648CDB: mov     dword ptr [esi], offset ??_7LowProcess@@6B@; const LowProcess::`vftable'
+0x648CDB: mov     dword ptr [esi], offset ??_7LowProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.
 0x648CE1: mov     ecx, [esi+34h]
 0x648CE4: xor     ebx, ebx
 0x648CE6: cmp     ecx, ebx
@@ -24,10 +24,10 @@
 0x648CF4: mov     edx, [eax]
 0x648CF6: push    1
 0x648CF8: call    edx
-0x648CFA: mov     ecx, [esi+8]
+0x648CFA: mov     ecx, [esi+8]; self
 0x648CFD: cmp     ecx, ebx
 0x648CFF: jz      short loc_648D3A
-0x648D01: call    sub_5660A0
+0x648D01: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x648D06: test    al, al
 0x648D08: jz      short loc_648D3A
 0x648D0A: mov     ecx, ds:0B33B00h
@@ -35,9 +35,9 @@
 0x648D15: test    al, al
 0x648D17: jz      short loc_648D2A
 0x648D19: mov     eax, [esi+8]
-0x648D1C: mov     ecx, ds:0B33B00h
-0x648D22: push    eax
-0x648D23: call    sub_45C7A0
+0x648D1C: mov     ecx, ds:0B33B00h; self
+0x648D22: push    eax; form
+0x648D23: call    TESSaveLoadGame_DeleteForm
 0x648D28: jmp     short loc_648D3A
 0x648D2A: mov     ecx, [esi+8]
 0x648D2D: cmp     ecx, ebx
@@ -54,14 +54,14 @@
 0x648D47: jnz     short loc_648D4C
 0x648D49: mov     [esi+48h], ebx
 0x648D4C: push    eax
-0x648D4D: call    FormHeapFree
+0x648D4D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648D52: add     esp, 4
 0x648D55: mov     [esi+44h], ebx
 0x648D58: mov     eax, [esi+48h]
 0x648D5B: cmp     eax, ebx
 0x648D5D: jz      short loc_648D6B
 0x648D5F: push    eax
-0x648D60: call    FormHeapFree
+0x648D60: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648D65: add     esp, 4
 0x648D68: mov     [esi+48h], ebx
 0x648D6B: lea     edi, [esi+3Ch]
@@ -76,7 +76,7 @@
 0x648D81: cmp     ebp, ebx
 0x648D83: jz      short loc_648D6E
 0x648D85: push    ebp
-0x648D86: call    FormHeapFree
+0x648D86: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648D8B: add     esp, 4
 0x648D8E: jmp     short loc_648D6E
 0x648D90: cmp     [esi+50h], ebx
@@ -84,7 +84,7 @@
 0x648D95: mov     eax, [esi+50h]
 0x648D98: mov     edi, [eax+4]
 0x648D9B: push    eax
-0x648D9C: call    FormHeapFree
+0x648D9C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648DA1: add     esp, 4
 0x648DA4: cmp     edi, ebx
 0x648DA6: mov     [esi+50h], edi
@@ -103,17 +103,16 @@
 0x648DC7: cmp     ebp, ebx
 0x648DC9: jz      short loc_648DB4
 0x648DCB: push    ebp
-0x648DCC: call    FormHeapFree
+0x648DCC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648DD1: add     esp, 4
 0x648DD4: jmp     short loc_648DB4
 0x648DD6: cmp     [esi+60h], ebx
 0x648DD9: jz      short loc_648DF6
 0x648DDB: jmp     short loc_648DE0
-0x648DDD: align 10h
 0x648DE0: mov     eax, [esi+60h]
 0x648DE3: mov     edi, [eax+4]
 0x648DE6: push    eax
-0x648DE7: call    FormHeapFree
+0x648DE7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648DEC: add     esp, 4
 0x648DEF: cmp     edi, ebx
 0x648DF1: mov     [esi+60h], edi
@@ -126,7 +125,7 @@
 0x648E02: mov     eax, [edx+10h]
 0x648E05: push    1
 0x648E07: call    eax
-0x648E09: lea     ecx, [esi+70h]
+0x648E09: lea     ecx, [esi+70h]; self
 0x648E0C: mov     byte ptr [esp+24h+var_4], bl
 0x648E10: call    AVCollection_destr
 0x648E15: mov     ecx, esi
@@ -141,3 +140,15 @@
 0x648E33: pop     ebx
 0x648E34: add     esp, 10h
 0x648E37: retn
+0x9C3A30: mov     ecx, [ebp-10h]
+0x9C3A33: jmp     sub_60CDA0
+0x9C3A38: mov     ecx, [ebp-10h]
+0x9C3A3B: add     ecx, 70h ; 'p'; self
+0x9C3A3E: jmp     AVCollection_destr
+0x9C3A43: mov     edx, [esp+arg_4]
+0x9C3A47: lea     eax, [edx-14h]
+0x9C3A4A: mov     ecx, [edx-18h]
+0x9C3A4D: xor     ecx, eax
+0x9C3A4F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3A54: mov     eax, offset stru_AEC5A0
+0x9C3A59: jmp     ___CxxFrameHandler3

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_SID_AND_ATTRIBUTES",
+  "definition": "struct __declspec(align(8)) _SID_AND_ATTRIBUTES\n{\nPSID Sid;\nDWORD Attributes;\n}\n",
   "id": 18374686479672031458,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Sid",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PSID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Attributes",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "_SID_AND_ATTRIBUTES",
+  "ordinal": 2776,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

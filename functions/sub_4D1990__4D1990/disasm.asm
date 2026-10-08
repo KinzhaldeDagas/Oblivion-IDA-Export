@@ -36,7 +36,7 @@
 0x4D19F0: cmp     dword ptr [edi+0Ch], 8
 0x4D19F4: jnz     short loc_4D1A0A
 0x4D19F6: mov     ecx, esi
-0x4D19F8: call    TESFile__NextGroup
+0x4D19F8: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x4D19FD: push    edi
 0x4D19FE: call    sub_4CCD00
 0x4D1A03: add     esp, 4
@@ -45,7 +45,7 @@
 0x4D1A0A: cmp     dword ptr [edi+0Ch], 0Ah
 0x4D1A0E: jnz     short loc_4D1A24
 0x4D1A10: mov     ecx, esi
-0x4D1A12: call    TESFile__NextGroup
+0x4D1A12: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x4D1A17: push    edi
 0x4D1A18: call    sub_4CCD00
 0x4D1A1D: add     esp, 4

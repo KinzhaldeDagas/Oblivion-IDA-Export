@@ -1,4 +1,4 @@
-0x4EB1A0: push    ebp
+0x4EB1A0: push    ebp; Verified available-file scan iterates signed quad coordinates [-32,31], uses terrainLODQuadOwner (+0x48 TESWorldSpace backpointer) to read the owning FormID, and checks `Meshes\\Landscape\\LOD\\<worldspaceFormID>.<quadX*32>.<quadY*32>.32.NIF`. Only existing files create map roots; this scan does not load NIFs.
 0x4EB1A1: mov     ebp, esp
 0x4EB1A3: and     esp, 0FFFFFFF8h
 0x4EB1A6: push    0FFFFFFFFh
@@ -27,7 +27,6 @@
 0x4EB1F2: mov     ebx, 0FFFFFFE0h
 0x4EB1F7: mov     [esp+3Ch+var_24], edi
 0x4EB1FB: jmp     short loc_4EB200
-0x4EB1FD: align 10h
 0x4EB200: mov     eax, [ebp+10h]
 0x4EB203: mov     eax, [eax+0Ch]
 0x4EB206: push    20h ; ' '
@@ -39,7 +38,7 @@
 0x4EB210: lea     edx, [esp+4Ch+var_18]
 0x4EB214: push    offset a_DataMeshesLan; ".\\Data\\Meshes\\Landscape\\LOD\\%i.%02"...
 0x4EB219: push    edx; int
-0x4EB21A: call    BSStringT_Static_Format
+0x4EB21A: call    BSStringT_Static_Format; Verified the terrain-quad NIF path's first numeric component is `terrainLODQuadOwner->formID` (TESForm +0x0C), followed by tileFileX, tileFileY, and 32.
 0x4EB21F: mov     ecx, ds:0B33A04h
 0x4EB225: add     esp, 18h
 0x4EB228: cmp     ecx, esi
@@ -70,9 +69,9 @@
 0x4EB272: cmp     eax, esi
 0x4EB274: mov     byte ptr [esp+3Ch+var_4], 2
 0x4EB279: jz      short loc_4EB28F
-0x4EB27B: push    edi
-0x4EB27C: mov     ecx, eax
-0x4EB27E: call    sub_4EC650
+0x4EB27B: push    edi; root
+0x4EB27C: mov     ecx, eax; this
+0x4EB27E: call    TESTerrainLODQuad_ctor; Verified quad-data layout at 0x60 bytes: root pointer +0, state +8, world origin +0x18/+0x1C, terrain mesh node +0x2C, and four child-quad pointers +0x30..+0x3C. The remaining bytes are Unknown.
 0x4EB283: mov     [edi], eax
 0x4EB285: mov     [edi+8], si
 0x4EB289: mov     [edi+0Ah], si
@@ -137,7 +136,7 @@
 0x4EB33C: jl      loc_4EB1EB
 0x4EB342: mov     edx, [esp+3Ch+var_18]
 0x4EB346: push    edx
-0x4EB347: call    FormHeapFree
+0x4EB347: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EB34C: add     esp, 4
 0x4EB34F: mov     ecx, dword ptr [esp+3Ch+var_C]
 0x4EB353: mov     large fs:0, ecx
@@ -149,3 +148,22 @@
 0x4EB35F: mov     esp, ebp
 0x4EB361: pop     ebp
 0x4EB362: retn
+0x9B6180: lea     ecx, [ebp-18h]; void *
+0x9B6183: jmp     BSStringT_Clear
+0x9B6188: mov     eax, [ebp-20h]
+0x9B618B: push    eax
+0x9B618C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6191: pop     ecx
+0x9B6192: retn
+0x9B6193: mov     eax, [ebp-1Ch]
+0x9B6196: push    eax
+0x9B6197: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B619C: pop     ecx
+0x9B619D: retn
+0x9B619E: mov     edx, [esp-4+arg_4]
+0x9B61A2: lea     eax, [edx-2Ch]
+0x9B61A5: mov     ecx, [edx-30h]
+0x9B61A8: xor     ecx, eax
+0x9B61AA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B61AF: mov     eax, offset stru_AE10CC
+0x9B61B4: jmp     ___CxxFrameHandler3

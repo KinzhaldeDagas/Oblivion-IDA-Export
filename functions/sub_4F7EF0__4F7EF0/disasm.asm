@@ -12,8 +12,8 @@
 0x4F7F10: call    edx
 0x4F7F12: test    al, al
 0x4F7F14: jz      short loc_4F7F2C
-0x4F7F16: mov     ecx, esi
-0x4F7F18: call    sub_5E0380
+0x4F7F16: mov     ecx, esi; this
+0x4F7F18: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x4F7F1D: test    eax, eax
 0x4F7F1F: jz      short loc_4F7F2C
 0x4F7F21: cmp     byte ptr [eax+20h], 11h

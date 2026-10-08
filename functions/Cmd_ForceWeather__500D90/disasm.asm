@@ -19,7 +19,7 @@
 0x500DBE: push    edx; a1
 0x500DBF: mov     dword ptr [esp+2Ch+var_4], 0
 0x500DC7: mov     [esp+2Ch+var_8], 0
-0x500DCF: call    Script_ExtractArgs
+0x500DCF: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x500DD4: add     esp, 24h
 0x500DD7: test    al, al
 0x500DD9: jnz     short loc_500DDF
@@ -32,7 +32,7 @@
 0x500DEB: push    ecx
 0x500DEC: call    Sky_CreateOrGetGlobalObject
 0x500DF1: mov     ecx, eax
-0x500DF3: call    ForceWeather
+0x500DF3: call    ForceWeather; ForceWeather script command resolves args then calls Sky::ForceWeather(weather, overrideFlag). Useful naming reference after the Sky field behavior is observed in Oblivion IDA.
 0x500DF8: mov     al, 1
 0x500DFA: add     esp, 8
 0x500DFD: retn

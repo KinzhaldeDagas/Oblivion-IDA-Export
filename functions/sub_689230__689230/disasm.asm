@@ -4,7 +4,7 @@
 0x68923B: retn
 0x68923C: cmp     dword ptr ds:0B33A1Ch, 0
 0x689243: push    ebp
-0x689244: mov     ebp, [esp+4+arg_4]
+0x689244: mov     ebp, [esp+4+worldXY]
 0x689248: push    esi
 0x689249: push    edi
 0x68924A: mov     edi, [esp+0Ch+arg_8]
@@ -16,10 +16,10 @@
 0x689261: test    eax, eax
 0x689263: jz      short loc_6892BF
 0x689265: mov     ecx, ds:0B333A0h
-0x68926B: push    ebp; float *
+0x68926B: push    ebp; worldXY
 0x68926C: call    TES__GetCurrentWorldspace
 0x689271: mov     ecx, eax; this
-0x689273: call    TESWorldSpace__GetCellAtPos
+0x689273: call    TESWorldSpace_GetCellAtWorldPosition
 0x689278: mov     esi, eax
 0x68927A: test    esi, esi
 0x68927C: jz      short loc_6892B9
@@ -29,10 +29,10 @@
 0x68928A: test    al, al
 0x68928C: jnz     short loc_6892B9
 0x68928E: mov     ecx, ds:0B333A0h
-0x689294: push    edi; float *
+0x689294: push    edi; worldXY
 0x689295: call    TES__GetCurrentWorldspace
 0x68929A: mov     ecx, eax; this
-0x68929C: call    TESWorldSpace__GetCellAtPos
+0x68929C: call    TESWorldSpace_GetCellAtWorldPosition
 0x6892A1: cmp     eax, esi
 0x6892A3: jz      short loc_6892BF
 0x6892A5: test    eax, eax

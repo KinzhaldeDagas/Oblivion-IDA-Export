@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x583D02",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+index]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x583D3D",
-    "line": "mov     [esp+arg_0], eax",
+    "line": "mov     [esp+index], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x583D41",
-    "line": "jmp     FormHeapFree",
+    "line": "jmp     FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "jmp",
     "size": 5
   }

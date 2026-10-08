@@ -30,13 +30,13 @@
 0x8B9FCF: mov     ecx, [edi+8]
 0x8B9FD2: test    ecx, ecx
 0x8B9FD4: jz      short loc_8B9FDD
-0x8B9FD6: call    sub_8AC070
+0x8B9FD6: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x8B9FDB: jmp     short loc_8B9FE2
-0x8B9FDD: mov     eax, offset stru_BA7A40
+0x8B9FDD: mov     eax, offset unk_BA7A40
 0x8B9FE2: push    eax
 0x8B9FE3: lea     ecx, [esp+1Ch+var_C]
 0x8B9FE7: push    ecx
-0x8B9FE8: call    sub_43F3E0
+0x8B9FE8: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8B9FED: add     esp, 8
 0x8B9FF0: push    offset off_A981C4; ArgList
 0x8B9FF5: lea     ecx, [esp+1Ch+var_C]
@@ -61,11 +61,11 @@
 0x8BA02D: mov     ecx, [edi+8]
 0x8BA030: test    ecx, ecx
 0x8BA032: jz      short loc_8BA047
-0x8BA034: call    sub_8AC0A0
+0x8BA034: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x8BA039: push    eax
 0x8BA03A: lea     edx, [esp+1Ch+var_C]
 0x8BA03E: push    edx
-0x8BA03F: call    sub_43F3E0
+0x8BA03F: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8BA044: add     esp, 8
 0x8BA047: push    offset off_A981C0; ArgList
 0x8BA04C: lea     ecx, [esp+1Ch+var_C]

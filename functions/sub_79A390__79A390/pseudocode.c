@@ -1,20 +1,25 @@
-void __thiscall sub_79A390(_DWORD *this, unsigned __int16 a2, __int16 a3, _DWORD *a4)
+// SpeedTree decode: stock CFrondEngine::ComputeBlade. For each blade, emits one strip over the shared highest-LOD vertices for the requested LOD. Fade-hint storage from later 4.1 is not visible in this compact stock writer path.
+void __thiscall OB_CFrondEngine_ComputeBlade_010201A0(
+        _DWORD *this,
+        unsigned __int16 lodLevel,
+        __int16 a3,
+        _DWORD *stripLength)
 {
   unsigned int i; // ebp
-  int v6; // ebx
+  unsigned __int16 *v6; // ebx
   unsigned int j; // esi
-  unsigned __int16 v9; // [esp+10h] [ebp+Ch]
+  unsigned __int16 stripLengtha; // [esp+10h] [ebp+Ch]
 
   if ( *this )
   {
     for ( i = 0; i < *(this + 0xB); ++i )
     {
-      v9 = 2 * sub_799EE0(a4);
-      v6 = FormHeapAlloc((unsigned __int64)v9 >> 0x1F != 0 ? 0xFFFFFFFF : 2 * v9);
-      for ( j = 0; j < 2 * sub_799EE0(a4); ++j )
-        *(_WORD *)(v6 + 2 * j) = j + a3 + 2 * i * sub_799EE0(a4);
-      sub_796100((_DWORD *)*this, a2, v6, v9);
-      ++*(_WORD *)(*this + 0x26);
+      stripLengtha = 2 * OB_stVector_SFrondVertex_Size_010201A0(stripLength); /*0x79a3bc*/
+      v6 = (unsigned __int16 *)FormHeapAlloc((unsigned __int64)stripLengtha >> 0x1F != 0 ? 0xFFFFFFFF : 2 * stripLengtha);
+      for ( j = 0; j < 2 * OB_stVector_SFrondVertex_Size_010201A0(stripLength); ++j ) /*0x79a3e7*/
+        v6[j] = j + a3 + 2 * i * OB_stVector_SFrondVertex_Size_010201A0(stripLength); /*0x79a403*/
+      OB_CIndexedGeometry_AddStrip_010201A0((OB_CIndexedGeometry_010201A0 *)*this, lodLevel, v6, stripLengtha); /*0x79a428*/
+      ++*(_WORD *)(*this + 0x26); /*0x79a42f*/
     }
   }
 }

@@ -1,4 +1,4 @@
-0x420F00: push    esi
+0x420F00: push    esi; Removes ExtraFollower (type 0x23) when present.
 0x420F01: push    23h ; '#'; a2
 0x420F03: mov     esi, ecx
 0x420F05: call    BaseExtraList_GetExtraData

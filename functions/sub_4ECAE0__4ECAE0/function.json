@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x4ECAE0",
+      "0x4ECB6E"
+    ]
+  ],
+  "chunks_sha256": "0841800651e569ea0fa10528d74fbfbf4f553dda637ab67826052fd94f25b6c1",
+  "comment_regular": "Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
+  "comment_repeatable": "Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4ECAE0",
+  "display_name": "TESTerrainLODQuad_AdvanceUnloadState",
   "end_ea": "0x4ECB6E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ECAE0",
+  "name": "TESTerrainLODQuad_AdvanceUnloadState",
   "segment": ".text",
   "sha256": "0841800651e569ea0fa10528d74fbfbf4f553dda637ab67826052fd94f25b6c1",
   "size": 142,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ECAE0",
-  "type": "void __thiscall(_DWORD *this, volatile LONG *)",
+  "total_chunk_size": 142,
+  "type": "void __thiscall(TESTerrainLODQuad_OblivionComplete_060 *this, NiNode *landLODParent)",
   "xrefs_from_count": 63,
   "xrefs_to_count": 6
 }

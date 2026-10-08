@@ -10,47 +10,47 @@ LONG __userpurge sub_7B2180@<eax>(_DWORD *a1@<ecx>, int a2, int a3, int a4)
   _DWORD *v12; // [esp+1Ch] [ebp-Ch]
   unsigned int v13; // [esp+24h] [ebp-4h]
 
-  v5 = *(int (__thiscall **)(_DWORD *, int))(*a1 + 4);
-  v13 = 0;
-  v6 = v5(a1, a2);
-  v7 = *(_DWORD **)(a1[2] + 4 * v6);
-  if ( v7 )
+  v5 = *(int (__thiscall **)(_DWORD *, int))(*a1 + 4); /*0x7b21ad*/
+  v13 = 0; /*0x7b21b1*/
+  v6 = v5(a1, a2); /*0x7b21bb*/
+  v7 = *(_DWORD **)(a1[2] + 4 * v6); /*0x7b21c0*/
+  if ( v7 ) /*0x7b21c5*/
   {
-    while ( !(*(unsigned __int8 (__thiscall **)(_DWORD *, int, _DWORD))(*a1 + 8))(a1, a2, v7[1]) )
+    while ( !(*(unsigned __int8 (__thiscall **)(_DWORD *, int, _DWORD))(*a1 + 8))(a1, a2, v7[1]) ) /*0x7b21d7*/
     {
-      v7 = (_DWORD *)*v7;
-      if ( !v7 )
-        goto LABEL_4;
+      v7 = (_DWORD *)*v7; /*0x7b21dd*/
+      if ( !v7 ) /*0x7b21e1*/
+        goto LABEL_4; /*0x7b21e1*/
     }
-    (*(void (__thiscall **)(_DWORD *, _DWORD *, _DWORD))(*a1 + 0x10))(a1, v7, v11[0]);
-    v8 = a4;
-    v12 = v11;
-    v11[0] = a4;
-    if ( a4 )
-      InterlockedIncrement((volatile LONG *)(a4 + 4));
-    result = (*(int (__thiscall **)(_DWORD *, _DWORD *, int))(*a1 + 0xC))(a1, v7, a3);
+    (*(void (__thiscall **)(_DWORD *, _DWORD *, _DWORD))(*a1 + 0x10))(a1, v7, v11[0]); /*0x7b226c*/
+    v8 = a4; /*0x7b226e*/
+    v12 = v11; /*0x7b2277*/
+    v11[0] = a4; /*0x7b227b*/
+    if ( a4 ) /*0x7b227d*/
+      InterlockedIncrement((volatile LONG *)(a4 + 4)); /*0x7b2283*/
+    result = (*(int (__thiscall **)(_DWORD *, _DWORD *, int))(*a1 + 0xC))(a1, v7, a3); /*0x7b2296*/
   }
   else
   {
 LABEL_4:
-    v8 = a4;
-    v9 = (_DWORD *)(*(int (__thiscall **)(_DWORD *, _DWORD))(*a1 + 0x14))(a1, v11[0]);
-    v12 = v11;
-    v11[0] = a4;
-    if ( a4 )
-      InterlockedIncrement((volatile LONG *)(a4 + 4));
-    (*(void (__thiscall **)(_DWORD *, _DWORD *, int))(*a1 + 0xC))(a1, v9, a3);
-    result = a1[2];
-    *v9 = *(_DWORD *)(result + 4 * v6);
-    *(_DWORD *)(a1[2] + 4 * v6) = v9;
-    ++a1[3];
+    v8 = a4; /*0x7b21e3*/
+    v9 = (_DWORD *)(*(int (__thiscall **)(_DWORD *, _DWORD))(*a1 + 0x14))(a1, v11[0]); /*0x7b21f3*/
+    v12 = v11; /*0x7b21f7*/
+    v11[0] = a4; /*0x7b21fb*/
+    if ( a4 ) /*0x7b21fd*/
+      InterlockedIncrement((volatile LONG *)(a4 + 4)); /*0x7b2203*/
+    (*(void (__thiscall **)(_DWORD *, _DWORD *, int))(*a1 + 0xC))(a1, v9, a3); /*0x7b2216*/
+    result = a1[2]; /*0x7b2218*/
+    *v9 = *(_DWORD *)(result + 4 * v6); /*0x7b221e*/
+    *(_DWORD *)(a1[2] + 4 * v6) = v9; /*0x7b2223*/
+    ++a1[3]; /*0x7b2226*/
   }
-  v13 = 0xFFFFFFFF;
-  if ( v8 )
+  v13 = 0xFFFFFFFF; /*0x7b222c*/
+  if ( v8 ) /*0x7b2234*/
   {
-    result = InterlockedDecrement((volatile LONG *)(v8 + 4));
-    if ( !result )
-      return (**(LONG (__thiscall ***)(int, int))v8)(v8, 1);
+    result = InterlockedDecrement((volatile LONG *)(v8 + 4)); /*0x7b223a*/
+    if ( !result ) /*0x7b2242*/
+      return (**(LONG (__thiscall ***)(int, int))v8)(v8, 1); /*0x7b224c*/
   }
-  return result;
+  return result; /*0x7b224e*/
 }

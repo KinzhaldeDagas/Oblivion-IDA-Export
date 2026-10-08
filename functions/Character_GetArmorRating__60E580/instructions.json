@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60E580",
-    "line": "sub     esp, 50h",
+    "line": "sub     esp, 50h; Character_GetArmorRating authority and cached-rating boundary (Character +0x108). Native Light Master behavior is retained for true Light sets; Medium mastery must be layered only after blocking Medium at the native Light purity call and must invalidate this cache when runtime classification changes.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -142,12 +142,6 @@
     "line": "jmp     short loc_60E5D4",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x60E5CC",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
   },
   {
     "ea": "0x60E5D0",
@@ -325,7 +319,7 @@
   },
   {
     "ea": "0x60E62A",
-    "line": "call    sub_488CB0",
+    "line": "call    ContainerEntryExtraData_CalcRoundedArmorRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +343,7 @@
   },
   {
     "ea": "0x60E63C",
-    "line": "call    sub_488CB0",
+    "line": "call    ContainerEntryExtraData_CalcRoundedArmorRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +607,7 @@
   },
   {
     "ea": "0x60E6B4",
-    "line": "call    sub_488CB0",
+    "line": "call    ContainerEntryExtraData_CalcRoundedArmorRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +631,7 @@
   },
   {
     "ea": "0x60E6C3",
-    "line": "call    sub_488CB0",
+    "line": "call    ContainerEntryExtraData_CalcRoundedArmorRating",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +679,7 @@
   },
   {
     "ea": "0x60E6DF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

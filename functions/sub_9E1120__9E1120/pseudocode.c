@@ -1,5 +1,5 @@
 int sub_9E1120()
 {
-  GameSetting_ConstrAndReg(&dword_B35760, (int)"iAIDefaultMeleeAlertAllowed", 0);
-  return atexit(sub_A1ADF0);
+  GameSetting_ConstrAndReg(&stru_B35760, "iAIDefaultMeleeAlertAllowed", 0); /*0x9e112c*/
+  return atexit(sub_A1ADF0); /*0x9e113c*/
 }

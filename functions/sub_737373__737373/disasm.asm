@@ -48,7 +48,7 @@
 0x73740A: cmp     eax, [ebp+108h]
 0x737410: jnz     short loc_73741D
 0x737412: mov     eax, [edi+6Ch]
-0x737415: mov     ebx, dword ptr [esp+arg_14]
+0x737415: mov     ebx, [esp+arg_14]
 0x737419: cmp     eax, ebx
 0x73741B: jz      short loc_737478
 0x73741D: push    70h ; 'p'; Size
@@ -58,7 +58,7 @@
 0x73742E: test    eax, eax
 0x737430: mov     [esp+arg_7C], 0
 0x73743B: jz      short loc_737465
-0x73743D: mov     ecx, dword ptr [esp+arg_14]
+0x73743D: mov     ecx, [esp+arg_14]
 0x737441: mov     edx, [ebp+108h]
 0x737447: push    ecx
 0x737448: push    edx
@@ -72,7 +72,7 @@
 0x73745E: call    NiPixelData__NiPixelData
 0x737463: jmp     short loc_737467
 0x737465: xor     eax, eax
-0x737467: mov     ebx, dword ptr [esp+arg_14]
+0x737467: mov     ebx, [esp+arg_14]
 0x73746B: mov     [esp+arg_7C], 0FFFFFFFFh
 0x737476: mov     edi, eax
 0x737478: mov     edx, [edi+60h]
@@ -100,3 +100,20 @@
 0x7374CF: jmp     short loc_7374DA
 0x7374D1: mov     ebx, 5; jumptable 007374AE case 4
 0x7374D6: jmp     short loc_7374DA
+0x73754E: test    ebx, ebx
+0x737550: jbe     loc_7376CE
+0x737556: or      eax, 0FFFFFFFFh
+0x737559: mov     [esp+arg_18], eax
+0x73755D: cmp     eax, 4; switch 5 cases
+0x737560: ja      short def_737562
+0x737562: jmp     ds:jpt_737562[eax*4]; switch jump
+0x737569: mov     ebx, 1; jumptable 00737562 case 0
+0x73756E: jmp     short loc_73758E
+0x737570: mov     ebx, 2; jumptable 00737562 case 1
+0x737575: jmp     short loc_73758E
+0x737577: mov     ebx, 3; jumptable 00737562 case 2
+0x73757C: jmp     short loc_73758E
+0x73757E: mov     ebx, 4; jumptable 00737562 case 3
+0x737583: jmp     short loc_73758E
+0x737585: mov     ebx, 5; jumptable 00737562 case 4
+0x73758A: jmp     short loc_73758E

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5DC630",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Creates exactly 21 native Stats-menu skill rows (AV 0x0C..0x20). Major rows are placed first; every skill absent from majorSkills[7] is placed after the separator as non-major.",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5DC683",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x5DC693",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x5DC6A2",
-    "line": "push    ebp",
+    "line": "push    ebp; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DC6A3",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DC6A8",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5DC6AA",
-    "line": "call    sub_51C090",
+    "line": "call    TESClass_IsMajorSkillAV; Stats menu counts only native AVs matching majorSkills[7]; every failed match is displayed in the lower non-major section.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x5DC6CA",
-    "line": "fstp    [esp+14Ch+a2]; a3",
+    "line": "fstp    [esp+14Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DC6CD",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DC6D2",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -346,12 +346,6 @@
     "line": "jmp     short loc_5DC6F8",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5DC6ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x5DC6F0",
@@ -427,25 +421,25 @@
   },
   {
     "ea": "0x5DC71E",
-    "line": "push    esi",
+    "line": "push    esi; lastTile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DC71F",
-    "line": "push    eax",
+    "line": "push    eax; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DC720",
-    "line": "push    ecx",
+    "line": "push    ecx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DC721",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -457,7 +451,7 @@
   },
   {
     "ea": "0x5DC72A",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,13 +535,13 @@
   },
   {
     "ea": "0x5DC74C",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DC751",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x5DC75C",
-    "line": "push    ebp",
+    "line": "push    ebp; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -577,7 +571,7 @@
   },
   {
     "ea": "0x5DC761",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -628,12 +622,6 @@
     "line": "jmp     short loc_5DC780",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5DC77D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x5DC780",
@@ -763,7 +751,7 @@
   },
   {
     "ea": "0x5DC7B4",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -775,19 +763,19 @@
   },
   {
     "ea": "0x5DC7B8",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DC7B9",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DC7BA",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +817,7 @@
   },
   {
     "ea": "0x5DC7D5",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,25 +841,25 @@
   },
   {
     "ea": "0x5DC7E4",
-    "line": "push    edi",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DC7E5",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DC7EA",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5DC7EC",
-    "line": "call    sub_51C090",
+    "line": "call    TESClass_IsMajorSkillAV; Place matching majors before the separator and all other native skills after it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +937,7 @@
   },
   {
     "ea": "0x5DC816",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,19 +997,19 @@
   },
   {
     "ea": "0x5DC831",
-    "line": "fstp    [esp+14Ch+a2]; a3",
+    "line": "fstp    [esp+14Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DC834",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DC839",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,19 +1069,19 @@
   },
   {
     "ea": "0x5DC85A",
-    "line": "fstp    [esp+14Ch+a2]; a3",
+    "line": "fstp    [esp+14Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DC85D",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DC862",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1093,7 @@
   },
   {
     "ea": "0x5DC868",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,19 +1177,19 @@
   },
   {
     "ea": "0x5DC895",
-    "line": "fstp    [esp+14Ch+a2]; a3",
+    "line": "fstp    [esp+14Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DC898",
-    "line": "push    0FB4h; a2",
+    "line": "push    0FB4h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DC89D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,19 +1237,19 @@
   },
   {
     "ea": "0x5DC8B9",
-    "line": "fstp    [esp+14Ch+a2]; a3",
+    "line": "fstp    [esp+14Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DC8BC",
-    "line": "push    0FB5h; a2",
+    "line": "push    0FB5h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DC8C1",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1267,7 @@
   },
   {
     "ea": "0x5DC8CB",
-    "line": "call    sub_5DA1A0",
+    "line": "call    StatsMenu_UpdateAttributesAndSkills; Full refresh (actorValue == -1) scans exactly 21 native Oblivion skills, counts strict TESClass major matches, publishes that count to the Stats XML, and orders major rows before one optional separator and all non-major rows. A targeted refresh updates only the requested native actor value and does not reorder rows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1291,7 @@
   },
   {
     "ea": "0x5DC8E0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1375,7 @@
   },
   {
     "ea": "0x5DC918",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1468,5 +1456,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2120",
+    "line": "lea     ecx, [ebp-12Ch]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2126",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C212B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C212F",
+    "line": "lea     eax, [edx-138h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2135",
+    "line": "mov     ecx, [edx-13Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C213B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C213D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2142",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2145",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2148",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C214A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C214F",
+    "line": "mov     eax, offset stru_AEB054",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2154",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

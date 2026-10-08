@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A7AC0",
-    "line": "push    ebp",
+    "line": "push    ebp; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Attack 4 and Block 6 held adjust or cancel telekinesis strength.",
     "mnemonic": "push",
     "size": 1
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6A7B1A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6A7B2F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x6A7B38",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x6A7B66",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x6A7B7B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x6A7B84",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x6A7BE1",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x6A7BF7",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x6A7C03",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveAccelerate",
+    "line": "mov     ecx, (offset flt_B37ED0+160h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x6A7C13",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveBase",
+    "line": "mov     ecx, (offset flt_B37ED0+158h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x6A7C40",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x6A7C57",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x6A7C63",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveBase",
+    "line": "mov     ecx, (offset flt_B37ED0+158h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x6A7C7E",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveBase",
+    "line": "mov     ecx, (offset flt_B37ED0+158h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x6A7C8D",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveAccelerate",
+    "line": "mov     ecx, (offset flt_B37ED0+160h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x6A7C9C",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveMax",
+    "line": "mov     ecx, (offset flt_B37ED0+168h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x6A7CC7",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveMax",
+    "line": "mov     ecx, (offset flt_B37ED0+168h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x6A7CE4",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x6A7CF4",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveBase",
+    "line": "mov     ecx, (offset flt_B37ED0+158h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x6A7D11",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveBase",
+    "line": "mov     ecx, (offset flt_B37ED0+158h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x6A7D25",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveAccelerate",
+    "line": "mov     ecx, (offset flt_B37ED0+160h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x6A7D35",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveMax",
+    "line": "mov     ecx, (offset flt_B37ED0+168h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x6A7D62",
-    "line": "mov     ecx, offset fMagicTelekinesisMoveMax",
+    "line": "mov     ecx, (offset flt_B37ED0+168h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x6A7D89",
-    "line": "mov     ecx, offset fMagicTelekinesisDistanceMin",
+    "line": "mov     ecx, (offset flt_B37ED0+170h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x6A7DAD",
-    "line": "mov     ecx, offset fMagicTelekinesisDistanceMin",
+    "line": "mov     ecx, (offset flt_B37ED0+170h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x6A7DBF",
-    "line": "mov     ecx, offset fMagicUnitsPerFoot",
+    "line": "mov     ecx, 0B37DB8h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x6A7DD6",
-    "line": "mov     ecx, offset fMagicTelekinesiDistanceMult",
+    "line": "mov     ecx, (offset flt_B37ED0+1C8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x6A7DFC",
-    "line": "mov     ecx, offset fMagicUnitsPerFoot",
+    "line": "mov     ecx, 0B37DB8h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x6A7E0E",
-    "line": "mov     ecx, offset fMagicTelekinesiDistanceMult",
+    "line": "mov     ecx, (offset flt_B37ED0+1C8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x6A7E5F",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
     "mnemonic": "call",
     "size": 5
   },

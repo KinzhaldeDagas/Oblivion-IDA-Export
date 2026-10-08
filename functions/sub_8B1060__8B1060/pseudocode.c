@@ -7,26 +7,26 @@ int __thiscall sub_8B1060(char **this, int a2)
   unsigned int v7; // eax
   int *v9; // [esp+14h] [ebp+4h]
 
-  v3 = *this;
-  v4 = (int)(*(this + 2) + 1);
-  v5 = (char *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)dword_BA7D98 + 0x10))(dword_BA7D98, 8 * a2, 0x14);
-  *this = v5;
-  sub_8B18C0(a2, v5, 0, 4 * a2);
-  *(this + 2) = (char *)(a2 - 1);
-  v6 = 0;
-  *(this + 1) = 0;
-  if ( v4 > 0 )
+  v3 = *this; /*0x8b1075*/
+  v4 = (int)(*(this + 2) + 1); /*0x8b1081*/
+  v5 = (char *)(*(int (__thiscall **)(int, int, int))(*(_DWORD *)unk_BA7D98 + 0x10))(unk_BA7D98, 8 * a2, 0x14); /*0x8b1082*/
+  *this = v5; /*0x8b1090*/
+  sub_8B18C0(a2, v5, 0, 4 * a2); /*0x8b1092*/
+  *(this + 2) = (char *)(a2 - 1); /*0x8b109b*/
+  v6 = 0; /*0x8b109e*/
+  *(this + 1) = 0; /*0x8b10a2*/
+  if ( v4 > 0 ) /*0x8b10a9*/
   {
-    v9 = (int *)&v3[4 * v4];
-    do
+    v9 = (int *)&v3[4 * v4]; /*0x8b10af*/
+    do /*0x8b10d8*/
     {
-      v7 = *(_DWORD *)&v3[4 * v6];
-      if ( v7 )
-        sub_8B0E80(this, v7, *v9);
-      ++v6;
-      ++v9;
+      v7 = *(_DWORD *)&v3[4 * v6]; /*0x8b10b3*/
+      if ( v7 ) /*0x8b10b9*/
+        sub_8B0E80(this, v7, *v9); /*0x8b10c5*/
+      ++v6; /*0x8b10ce*/
+      ++v9; /*0x8b10d4*/
     }
-    while ( v6 < v4 );
+    while ( v6 < v4 ); /*0x8b10d8*/
   }
-  return (*(int (__thiscall **)(int, char *, int, int))(*(_DWORD *)dword_BA7D98 + 0x14))(dword_BA7D98, v3, 8 * v4, 0x14);
+  return (*(int (__thiscall **)(int, char *, int, int))(*(_DWORD *)unk_BA7D98 + 0x14))(unk_BA7D98, v3, 8 * v4, 0x14); /*0x8b10f0*/
 }

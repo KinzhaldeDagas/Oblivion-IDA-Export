@@ -808,5 +808,131 @@
     "line": "mov     byte ptr [esp+68h+arg_0], al",
     "mnemonic": "mov",
     "size": 4
+  },
+  {
+    "ea": "0x575720",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x575721",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x575723",
+    "line": "mov     eax, [esi+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x575726",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x575727",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x57572C",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x57572E",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x575731",
+    "line": "mov     [esi+1Ch], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x575734",
+    "line": "mov     [esi+22h], ax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x575738",
+    "line": "mov     [esi+20h], ax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x57573C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x57573D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE6A0",
+    "line": "lea     ecx, [ebp-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE6A3",
+    "line": "jmp     loc_575720",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE6A8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BE6AC",
+    "line": "lea     eax, [edx-58h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE6AF",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE6B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BE6B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE6B9",
+    "line": "mov     eax, offset stru_AE7DB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE6BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

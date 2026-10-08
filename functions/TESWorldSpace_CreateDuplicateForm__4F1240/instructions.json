@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F1240",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified: the special TESFormVtbl +0x38 CreateDuplicateForm override clones worldspace cells and persistentCell but does not build +0x60. Full plugin/game loading later reconstructs +0x60 via TESDataHandler_LoadFiles; Candidate concern is only for queries made after duplication and before any full-load reconstruction. Whether that interval occurs in live callers is Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4F125F",
-    "line": "call    TESForm_Clone",
+    "line": "call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -174,12 +174,6 @@
     "size": 2
   },
   {
-    "ea": "0x4F128A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4F1290",
     "line": "cmp     dword ptr [esi], 0",
     "mnemonic": "cmp",
@@ -253,25 +247,25 @@
   },
   {
     "ea": "0x4F12B4",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F12B5",
-    "line": "mov     ecx, [ebx+30h]",
+    "line": "mov     ecx, [ebx+30h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F12B8",
-    "line": "lea     edx, [esp+18h+var_4]",
+    "line": "lea     edx, [esp+18h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F12BC",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -283,7 +277,7 @@
   },
   {
     "ea": "0x4F12C1",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,7 +289,7 @@
   },
   {
     "ea": "0x4F12CA",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,19 +433,19 @@
   },
   {
     "ea": "0x4F130C",
-    "line": "push    esi",
+    "line": "push    esi; cell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F130D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F130F",
-    "line": "call    sub_4EFEF0",
+    "line": "call    TESWorldSpace_RegisterExteriorCell; Verified: external cell registration separates one quest-item exterior cell into persistentCell; normal exterior cells are stored in cellMap under packed signed X/Y.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x4F1358",
-    "line": "mov     ecx, [edi+34h]",
+    "line": "mov     ecx, [edi+34h]; persistentCell",
     "mnemonic": "mov",
     "size": 3
   },
@@ -625,19 +619,19 @@
   },
   {
     "ea": "0x4F135F",
-    "line": "push    edi",
+    "line": "push    edi; destinationWorldSpace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F1360",
-    "line": "call    sub_4D3A00",
+    "line": "call    TESWorldSpace_DistributePersistentCellReferences; Verified clone-path call: after cloning the WorldSpace persistentCell, CreateDuplicateForm calls TESWorldSpace_DistributePersistentCellReferences to attach its references to cloned cells. No SubSpace index rebuild occurs in this call path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F1365",
-    "line": "mov     ecx, [ebx+54h]",
+    "line": "mov     ecx, [ebx+54h]; Verified WorldSpace duplication clones the TESRoad at +0x54, releases any destination road, assigns the clone, and resets its owning WorldSpace backpointer at TESRoad+0x2C. The serialized ROAD loader similarly attaches through TESWorldSpace_SetRoad and writes this owner pointer.",
     "mnemonic": "mov",
     "size": 3
   },

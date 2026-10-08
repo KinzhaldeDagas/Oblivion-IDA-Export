@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x6A2A57",
+      "0x6A2A72"
+    ]
+  ],
+  "chunks_sha256": "264de184a88167b75ac0afe0db483e1184a12672074e8012ded76737ead48e3b",
+  "comment_regular": "OBMEFix verification 2026-05-30: MagicTarget_AddEffect loads ActiveEffect vtable +0x34, pushes MagicTarget (edi), sets ecx=ActiveEffect (ebp), and calls IsTargetValid before insertion.",
+  "comment_repeatable": "OBMEFix verification 2026-05-30: MagicTarget_AddEffect loads ActiveEffect vtable +0x34, pushes MagicTarget (edi), sets ecx=ActiveEffect (ebp), and calls IsTargetValid before insertion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "MagicTarget_AddEffect:::CheckValidTarget",
   "end_ea": "0x6A2A72",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
   "name": "MagicTarget_AddEffect:::CheckValidTarget",
   "segment": ".text",
   "sha256": "264de184a88167b75ac0afe0db483e1184a12672074e8012ded76737ead48e3b",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A2A57",
-  "type": "int __usercall@<eax>(int@<ebp>, int@<edi>, int, int, int)",
+  "total_chunk_size": 27,
+  "type": "int __usercall@<eax>(_DWORD *@<ebp>, int@<edi>, int@<esi>, int, int, int, int, int, int, int, void *, float)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 3
 }

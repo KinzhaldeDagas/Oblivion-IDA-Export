@@ -1,6 +1,5 @@
 int sub_9FE680()
 {
-  qword_B3BE2C = *(_QWORD *)&Vector3_InitValue_;
-  dword_B3BE34 = LODWORD(dword_B3F9B0);
-  return LODWORD(Vector3_InitValue_);
+  MEMORY[0xB3BE00].destinationPosition = g_zeroNiPoint3; /*0x9fe691*/
+  return LODWORD(g_zeroNiPoint3.x); /*0x9fe6a2*/
 }

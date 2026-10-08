@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6CE320",
+      "0x6CE34F"
+    ]
+  ],
+  "chunks_sha256": "07379cb8e52cefe02cfa3f649a09ae3422a35e5545f3480bfdc44eff951d1d0a",
+  "comment_regular": "Loads NiTimeController state. For stream versions >= 0x0A010068, reads and smart-assigns the serialized interpolator reference at +0x3C; older formats leave concrete controllers to migrate legacy data.",
+  "comment_repeatable": "Loads NiTimeController state. For stream versions >= 0x0A010068, reads and smart-assigns the serialized interpolator reference at +0x3C; older formats leave concrete controllers to migrate legacy data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6CE320",
+  "display_name": "NiSingleInterpController_LoadBinary",
   "end_ea": "0x6CE34F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CE320",
+  "name": "NiSingleInterpController_LoadBinary",
   "segment": ".text",
   "sha256": "07379cb8e52cefe02cfa3f649a09ae3422a35e5545f3480bfdc44eff951d1d0a",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CE320",
+  "total_chunk_size": 47,
   "type": "_DWORD *__thiscall(int *this, _DWORD *)",
   "xrefs_from_count": 19,
   "xrefs_to_count": 4

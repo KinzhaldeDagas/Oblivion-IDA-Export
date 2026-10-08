@@ -1,4 +1,4 @@
-0x7F0250: push    0FFFFFFFFh
+0x7F0250: push    0FFFFFFFFh; SpeedTreeLeafShader dtor: releases four STLEAF vertex shaders, two STLEAF pixel shaders, pass +0x394, then BSShader base.
 0x7F0252: push    offset ??1SpeedTreeLeafShader@@UAE@XZ_SEH
 0x7F0257: mov     eax, large fs:0
 0x7F025D: push    eax
@@ -65,15 +65,15 @@
 0x7F0310: jz      short loc_7F031C
 0x7F0312: add     [ecx+60h], esi
 0x7F0315: jnz     short loc_7F031C
-0x7F0317: call    sub_7604D0
-0x7F031C: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7F0317: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
+0x7F031C: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7F0321: push    2; int
 0x7F0323: push    4; unsigned int
 0x7F0325: lea     eax, [ebp+38Ch]
 0x7F032B: push    eax; void *
 0x7F032C: mov     byte ptr [esp+34h+var_4], 1
 0x7F0331: call    $LN21
-0x7F0336: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7F0336: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7F033B: push    4; int
 0x7F033D: push    4; unsigned int
 0x7F033F: lea     eax, [ebp+37Ch]
@@ -82,7 +82,7 @@
 0x7F034B: call    $LN21
 0x7F0350: mov     ecx, ebp; this
 0x7F0352: mov     [esp+24h+var_4], esi
-0x7F0356: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x7F0356: call    ??1BSShader@@UAE@XZ;
 0x7F035B: mov     ecx, [esp+24h+var_C]
 0x7F035F: mov     large fs:0, ecx
 0x7F0366: pop     ecx
@@ -92,3 +92,31 @@
 0x7F036A: pop     ebx
 0x7F036B: add     esp, 10h
 0x7F036E: retn
+0x9CFCF0: mov     ecx, [ebp-10h]; this
+0x9CFCF3: jmp     ??1BSShader@@UAE@XZ;
+0x9CFCF8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CFCFD: push    4; int
+0x9CFCFF: push    4; unsigned int
+0x9CFD01: mov     eax, [ebp-10h]
+0x9CFD04: add     eax, 37Ch
+0x9CFD09: push    eax; void *
+0x9CFD0A: call    $LN21
+0x9CFD0F: retn
+0x9CFD10: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CFD15: push    2; int
+0x9CFD17: push    4; unsigned int
+0x9CFD19: mov     eax, [ebp-10h]
+0x9CFD1C: add     eax, 38Ch
+0x9CFD21: push    eax; void *
+0x9CFD22: call    $LN21
+0x9CFD27: retn
+0x9CFD28: mov     ecx, [ebp-10h]
+0x9CFD2B: add     ecx, 394h; void *
+0x9CFD31: jmp     sub_4027D0
+0x9CFD36: mov     edx, [esp+arg_4]
+0x9CFD3A: lea     eax, [edx-14h]
+0x9CFD3D: mov     ecx, [edx-18h]
+0x9CFD40: xor     ecx, eax
+0x9CFD42: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFD47: mov     eax, offset stru_AF8840
+0x9CFD4C: jmp     ___CxxFrameHandler3

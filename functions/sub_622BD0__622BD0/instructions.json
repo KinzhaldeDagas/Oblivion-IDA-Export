@@ -79,31 +79,31 @@
   },
   {
     "ea": "0x622BF5",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x622BF7",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x622BFC",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622BFD",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622BFE",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x622C15",
-    "line": "lea     eax, [esp+10h+var_8]",
+    "line": "lea     eax, [esp+10h+outMaximumDistance]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -151,43 +151,43 @@
   },
   {
     "ea": "0x622C1D",
-    "line": "push    eax",
+    "line": "push    eax; outMaximumDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622C1E",
-    "line": "lea     ecx, [esp+14h+var_C]",
+    "line": "lea     ecx, [esp+14h+outOptimalDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x622C22",
-    "line": "push    ecx",
+    "line": "push    ecx; outOptimalDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x622C23",
-    "line": "fst     [esp+18h+var_C]",
+    "line": "fst     [esp+18h+outOptimalDistance]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x622C27",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x622C29",
-    "line": "fstp    [esp+18h+var_8]",
+    "line": "fstp    [esp+18h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x622C2D",
-    "line": "call    sub_6142D0",
+    "line": "call    CombatController_GetRangedDistanceBounds; Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x622C4A",
-    "line": "fld     [esp+10h+var_C]",
+    "line": "fld     [esp+10h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x622C57",
-    "line": "fld     [esp+10h+var_8]",
+    "line": "fld     [esp+10h+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x622C66",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x622C6A",
-    "line": "call    sub_6213D0",
+    "line": "call    CombatController_UpdateCombatModeState",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x622CCB",
-    "line": "call    sub_614290",
+    "line": "call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x622D25",
-    "line": "call    sub_616980",
+    "line": "call    CombatController_SelectAttackSpellByMode",
     "mnemonic": "call",
     "size": 5
   },

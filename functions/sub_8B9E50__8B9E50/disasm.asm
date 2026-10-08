@@ -24,7 +24,7 @@
 0x8B9E98: push    ebx
 0x8B9E99: mov     ecx, eax
 0x8B9E9B: mov     [esp+24h+var_4], 0
-0x8B9EA3: call    sub_8B9CA0
+0x8B9EA3: call    sub_8B9CA0; Initializes ahkCharacterProxy side data and default up vector to (0,0,1,0) at this+0x40. Controller states later fetch runtime up/gravity basis via vtable+0x58 and context+0x20.
 0x8B9EA8: mov     esi, eax
 0x8B9EAA: mov     eax, [edi]
 0x8B9EAC: mov     edx, [eax+4Ch]
@@ -56,3 +56,15 @@
 0x8B9EF3: pop     ebx
 0x8B9EF4: add     esp, 10h
 0x8B9EF7: retn    4
+0x9D7120: mov     eax, [ebp-10h]
+0x9D7123: push    eax
+0x9D7124: call    sub_8903B0
+0x9D7129: pop     ecx
+0x9D712A: retn
+0x9D712B: mov     edx, [esp+arg_4]
+0x9D712F: lea     eax, [edx-10h]
+0x9D7132: mov     ecx, [edx-14h]
+0x9D7135: xor     ecx, eax
+0x9D7137: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D713C: mov     eax, offset stru_AFEDB0
+0x9D7141: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x629E20: push    esi
+0x629E20: push    esi; Oblivion movement helper for path/procedure movement: defaults -1 to 0x101, reads current package flags +0x1C, package AlwaysRun bit 0x2000 forces 0x201, preserves movement flags 0x0C00, then writes movement flags via vfunc +0x2C8.
 0x629E21: mov     esi, ecx
 0x629E23: mov     eax, [esi]
 0x629E25: mov     edx, [eax+34Ch]

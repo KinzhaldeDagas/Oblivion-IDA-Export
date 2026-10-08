@@ -4,7 +4,7 @@
 0x4A3548: mov     dword ptr [esi], offset ??_7TESRegionData@@6B@; const TESRegionData::`vftable'
 0x4A354E: jz      short loc_4A3559
 0x4A3550: push    esi
-0x4A3551: call    FormHeapFree
+0x4A3551: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A3556: add     esp, 4
 0x4A3559: mov     eax, esi
 0x4A355B: pop     esi

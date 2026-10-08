@@ -1,28 +1,33 @@
-unsigned int **__thiscall sub_799780(unsigned int *this, unsigned int **a2)
+// vector<float>::push_back(const float&). Appends directly when end!=capacity; otherwise builds the checked end iterator and delegates to single-element insert.
+void __thiscall OB_stVectorFloat_PushBack_010201A0(OB_stVectorFloat_010201A0 *this, const float *value)
 {
-  unsigned int v3; // edx
-  unsigned int v4; // ecx
-  unsigned int **result; // eax
-  char *v6; // edi
-  int v7; // [esp+4h] [ebp-8h] BYREF
+  int v2; // ebx
+  float *begin; // edx
+  unsigned int size; // ecx
+  float *newEnd; // eax
+  float *end; // edi
+  OB_stVectorFloatIterator_010201A0 iteratorResult; // [esp+4h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) >> 2;
+  begin = this->begin; /*0x799786*/
+  if ( begin ) /*0x79978b*/
+    size = this->end - begin; /*0x799796*/
   else
-    v4 = 0;
-  if ( v3 && v4 < (int)(*(this + 3) - v3) >> 2 )
+    size = 0; /*0x79978d*/
+  if ( begin && size < this->capacity - begin ) /*0x7997a7*/
   {
-    result = (unsigned int **)(*(this + 2) + 4);
-    result[0xFFFFFFFF] = *a2;
-    *(this + 2) = (unsigned int)result;
+    newEnd = this->end + 1; /*0x7997b2*/
+    newEnd[0xFFFFFFFF] = *value; /*0x7997b5*/
+    this->end = newEnd; /*0x7997b8*/
   }
   else
   {
-    v6 = (char *)*(this + 2);
-    if ( v3 > (unsigned int)v6 )
-      _invalid_parameter_noinfo();
-    return sub_7996F0(this, (unsigned int **)&v7, this, v6, a2);
+    end = this->end; /*0x7997c3*/
+    if ( begin > end ) /*0x7997c8*/
+      _invalid_parameter_noinfo(v2, (int)end, (int)this); /*0x7997ca*/
+    OB_stVectorFloat_InsertOne_010201A0( /*0x7997dd*/
+      this,
+      &iteratorResult,
+      (OB_stVectorFloatIterator_010201A0)__PAIR64__((unsigned int)end, (unsigned int)this),
+      value);
   }
-  return result;
 }

@@ -20,11 +20,11 @@
 0x60E3FC: jle     short loc_60E41B
 0x60E3FE: push    esi
 0x60E3FF: push    2
-0x60E401: call    ActorValue_GetGroupOffsetFromAV
-0x60E406: mov     ecx, ds:0B33A98h
+0x60E401: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
+0x60E406: mov     ecx, ds:0B33A98h; this
 0x60E40C: add     esp, 8
-0x60E40F: push    eax
-0x60E410: call    TESDataHandler_GetTESSkillByCode
+0x60E40F: push    eax; skillIndex
+0x60E410: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x60E415: mov     [esp+14h+var_4], eax
 0x60E419: mov     ebx, edi
 0x60E41B: add     esi, 1

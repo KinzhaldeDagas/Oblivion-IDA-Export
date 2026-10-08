@@ -1,8 +1,9 @@
-int sub_9F22F0()
+// Static GameSetting constructor only; not the runtime validation callback.
+int InitGameSetting_sNoFastTravelScriptBlock()
 {
-  GameSetting_ConstrAndReg(
-    &dword_B38B48,
-    (int)"sNoFastTravelScriptBlock",
-    (int)"Fast travel is currently unavaliable from this location.");
-  return atexit(sub_A21DB0);
+  GameSetting_ConstrAndReg( /*0x9f22ff*/
+    &stru_B38B48,
+    "sNoFastTravelScriptBlock",
+    "Fast travel is currently unavaliable from this location.");
+  return atexit(sub_A21DB0); /*0x9f230f*/
 }

@@ -11,7 +11,7 @@
 0x767825: test    eax, eax
 0x767827: jz      short loc_76783E
 0x767829: lea     esp, [esp+0]
-0x767830: cmp     eax, offset dword_B3FD14
+0x767830: cmp     eax, offset stru_B3FD14
 0x767835: jz      short loc_767859
 0x767837: mov     eax, [eax+4]
 0x76783A: test    eax, eax

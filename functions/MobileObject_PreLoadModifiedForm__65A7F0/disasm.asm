@@ -5,8 +5,8 @@
 0x65A7FC: mov     esi, ecx
 0x65A7FE: jz      short loc_65A81C
 0x65A800: call    UnequipWeapon
-0x65A805: mov     ecx, esi
-0x65A807: call    sub_4DCCF0
+0x65A805: mov     ecx, esi; this
+0x65A807: call    TESObjectREFR_ClearEquippedAmmo3D; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.
 0x65A80C: push    0
 0x65A80E: mov     ecx, esi
 0x65A810: call    sub_4DC8F0
@@ -49,7 +49,7 @@
 0x65A878: call    edx
 0x65A87A: push    eax
 0x65A87B: push    esi
-0x65A87C: mov     ecx, offset ActorProcessManager_ptr
+0x65A87C: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x65A881: call    sub_674550
 0x65A886: mov     ecx, [esi+58h]
 0x65A889: test    ecx, ecx

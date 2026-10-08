@@ -1,34 +1,35 @@
-BOOL __thiscall sub_4A5390(int *this)
+// Verified: clears embedded TESRegionDataSound.sounds linked list and frees each owned OblivionTESRegionSoundRecord.
+bool __thiscall TESRegionDataSound_ClearRecords(TESRegionDataSound *self)
 {
-  int *v1; // edi
+  TESRegionSoundNode *p_sounds; // edi
   unsigned int *v2; // eax
   unsigned int v3; // esi
   unsigned int *v4; // ecx
 
-  v1 = this + 3;
-  v2 = (unsigned int *)(this + 3);
-  if ( this != (int *)0xFFFFFFF4 )
+  p_sounds = &self->sounds; /*0x4a5391*/
+  v2 = (unsigned int *)&self->sounds; /*0x4a5394*/
+  if ( self != (TESRegionDataSound *)0xFFFFFFF4 ) /*0x4a5398*/
   {
-    do
+    do /*0x4a53d5*/
     {
-      v3 = *v2;
-      if ( !*v2 )
-        break;
-      v4 = (unsigned int *)v2[1];
-      if ( v4 )
+      v3 = *v2; /*0x4a53a0*/
+      if ( !*v2 ) /*0x4a53a0*/
+        break; /*0x4a53a4*/
+      v4 = (unsigned int *)v2[1]; /*0x4a53a6*/
+      if ( v4 ) /*0x4a53ab*/
       {
-        v2[1] = v4[1];
-        *v2 = *v4;
-        FormHeapFree((unsigned int)v4);
+        v2[1] = v4[1]; /*0x4a53b0*/
+        *v2 = *v4; /*0x4a53b6*/
+        FormHeapFree((unsigned int)v4); /*0x4a53b8*/
       }
       else
       {
-        *v2 = 0;
+        *v2 = 0; /*0x4a53c2*/
       }
-      FormHeapFree(v3);
-      v2 = (unsigned int *)v1;
+      FormHeapFree(v3); /*0x4a53c9*/
+      v2 = (unsigned int *)p_sounds; /*0x4a53ce*/
     }
-    while ( v1 );
+    while ( p_sounds ); /*0x4a53d5*/
   }
-  return !v1[1] && !*v1;
+  return !p_sounds->next && !p_sounds->record; /*0x4a53e8*/
 }

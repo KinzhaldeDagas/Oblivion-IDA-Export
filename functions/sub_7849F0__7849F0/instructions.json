@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7849F0",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion 1.2.0.416: destroys [first,last) in 0x18-byte steps through the folded trivial record destructor.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7849F1",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7849F6",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x784A00",
-    "line": "mov     ecx, esi; void *",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x784A02",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

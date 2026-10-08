@@ -1,4 +1,4 @@
-0x4F7280: fld     qword ptr ds:0A3D360h
+0x4F7280: fld     qword ptr ds:0A3D360h; GetFactionRank_Eval (index 73 / opcode 0x1049): returns TESActorBaseData_GetFactionRank numerically, including -1 for a faction absent from the subject's base-data list.
 0x4F7286: push    esi
 0x4F7287: mov     esi, [esp+4+arg_0]
 0x4F728B: test    esi, esi

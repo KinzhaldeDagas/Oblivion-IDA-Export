@@ -1,9 +1,9 @@
-0x4A6410: test    ecx, ecx
+0x4A6410: test    ecx, ecx; Verified: compares region-list membership; used to decide whether cached region-data selection remains valid.
 0x4A6412: jz      short loc_4A6419
 0x4A6414: add     ecx, 4
 0x4A6417: jmp     short loc_4A641B
 0x4A6419: xor     ecx, ecx
-0x4A641B: mov     eax, [esp+arg_0]
+0x4A641B: mov     eax, [esp+other]
 0x4A641F: test    eax, eax
 0x4A6421: jz      short loc_4A6428
 0x4A6423: add     eax, 4

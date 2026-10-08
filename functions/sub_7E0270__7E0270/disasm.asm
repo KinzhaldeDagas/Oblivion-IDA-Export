@@ -69,7 +69,6 @@
 0x7E0331: sar     eax, 1
 0x7E0333: mov     [esp+40h+var_14], eax
 0x7E0337: jmp     short loc_7E0344
-0x7E0339: align 10h
 0x7E0340: mov     eax, [esp+40h+var_14]
 0x7E0344: cmp     ecx, esi
 0x7E0346: jle     short loc_7E0360
@@ -134,10 +133,10 @@
 0x7E03F1: mov     esi, [esp+40h+Src]
 0x7E03F5: mov     ecx, [esp+40h+Dst]
 0x7E03F9: lea     eax, [edi+edi]
-0x7E03FC: push    eax; Size
-0x7E03FD: push    esi; Src
-0x7E03FE: push    ecx; Dst
-0x7E03FF: call    _memcpy
+0x7E03FC: push    eax; byteCount
+0x7E03FD: push    esi; source
+0x7E03FE: push    ecx; destination
+0x7E03FF: call    _memcpy;
 0x7E0404: mov     edx, [ebx]
 0x7E0406: mov     eax, [edx+50h]
 0x7E0409: add     esp, 0Ch
@@ -145,9 +144,9 @@
 0x7E040E: push    ebx
 0x7E040F: call    eax
 0x7E0411: push    ebp
-0x7E0412: call    FormHeapFree
+0x7E0412: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E0417: push    esi
-0x7E0418: call    FormHeapFree
+0x7E0418: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E041D: mov     ecx, [esp+48h+var_1C]
 0x7E0421: mov     eax, [ecx+0E0h]
 0x7E0427: add     esp, 8
@@ -346,10 +345,10 @@
 0x7E067A: push    edi
 0x7E067B: call    ecx
 0x7E067D: mov     edx, [esp+40h+Dst]
-0x7E0681: push    esi; Size
-0x7E0682: push    ebx; Src
-0x7E0683: push    edx; Dst
-0x7E0684: call    _memcpy
+0x7E0681: push    esi; byteCount
+0x7E0682: push    ebx; source
+0x7E0683: push    edx; destination
+0x7E0684: call    _memcpy;
 0x7E0689: mov     eax, [edi]
 0x7E068B: mov     ecx, [eax+50h]
 0x7E068E: add     esp, 0Ch
@@ -357,7 +356,7 @@
 0x7E0693: push    edi
 0x7E0694: call    ecx
 0x7E0696: push    ebx
-0x7E0697: call    FormHeapFree
+0x7E0697: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E069C: add     esp, 4
 0x7E069F: pop     edi
 0x7E06A0: pop     esi

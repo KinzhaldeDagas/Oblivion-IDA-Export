@@ -1,4 +1,4 @@
-int __usercall EffectItem_CopyFrom_::CopyDuration@<eax>(
+int __userpurge EffectItem_CopyFrom_::CopyDuration@<eax>(
         int a1@<ebp>,
         int a2@<edi>,
         int a3@<esi>,
@@ -12,14 +12,14 @@ int __usercall EffectItem_CopyFrom_::CopyDuration@<eax>(
 {
   int v10; // eax
 
-  if ( (*(_DWORD *)(*(_DWORD *)(a2 + 0x1C) + 0x58) & 0x80) != 0 )
-    v10 = 0;
+  if ( (*(_DWORD *)(*(_DWORD *)(a2 + 0x1C) + 0x58) & 0x80) != 0 ) /*0x414065*/
+    v10 = 0; /*0x414067*/
   else
-    v10 = *(_DWORD *)(a2 + 0xC);
-  if ( (*(_DWORD *)(a4 + 0x58) & 0x80) == 0 && v10 >= a1 )
+    v10 = *(_DWORD *)(a2 + 0xC); /*0x41406b*/
+  if ( (*(_DWORD *)(a4 + 0x58) & 0x80) == 0 && v10 >= a1 ) /*0x41407b*/
   {
-    *(float *)(a3 + 0x20) = a5;
-    *(_DWORD *)(a3 + 0xC) = v10;
+    *(float *)(a3 + 0x20) = a5; /*0x41407d*/
+    *(_DWORD *)(a3 + 0xC) = v10; /*0x414080*/
   }
   return EffectItem_CopyFrom_::CopyParam(a1, a2, a3, _4, _8, a8, a9, a10);
 }

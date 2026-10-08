@@ -47,3 +47,18 @@
 0x4F9AD5: pop     ebx
 0x4F9AD6: add     esp, 10h
 0x4F9AD9: retn
+0x9B6B00: mov     ecx, [ebp-10h]; this
+0x9B6B03: jmp     TESForm_destr
+0x9B6B08: mov     ecx, [ebp-10h]
+0x9B6B0B: add     ecx, 18h; void *
+0x9B6B0E: jmp     TESTexture_destr
+0x9B6B13: mov     ecx, [ebp-10h]
+0x9B6B16: add     ecx, 34h ; '4'; void *
+0x9B6B19: jmp     BSStringT_Clear
+0x9B6B1E: mov     edx, [esp+arg_4]
+0x9B6B22: lea     eax, [edx-14h]
+0x9B6B25: mov     ecx, [edx-18h]
+0x9B6B28: xor     ecx, eax
+0x9B6B2A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6B2F: mov     eax, offset stru_AE18BC
+0x9B6B34: jmp     ___CxxFrameHandler3

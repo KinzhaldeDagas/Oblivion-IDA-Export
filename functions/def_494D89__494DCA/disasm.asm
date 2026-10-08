@@ -38,7 +38,7 @@
 0x494E4A: cmp     [esp+arg_8], 4
 0x494E4F: jnz     short loc_494E59
 0x494E51: mov     [esp+arg_8], 5
-0x494E59: mov     ecx, offset TimeInfo
+0x494E59: mov     ecx, 0B33E90h
 0x494E5E: call    sub_47D0F0
 0x494E63: mov     eax, [esp+arg_8]
 0x494E67: pop     esi

@@ -216,14 +216,14 @@
 0x97AE82: mov     ecx, edi
 0x97AE84: call    sub_97A9D0
 0x97AE89: push    ebx
-0x97AE8A: call    FormHeapFree
+0x97AE8A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x97AE8F: push    ebp
-0x97AE90: call    FormHeapFree
+0x97AE90: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x97AE95: mov     eax, [esp+7Ch+var_58]
 0x97AE99: push    eax
-0x97AE9A: call    FormHeapFree
+0x97AE9A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x97AE9F: push    esi
-0x97AEA0: call    FormHeapFree
+0x97AEA0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x97AEA5: add     esp, 10h
 0x97AEA8: mov     dword ptr [edi+88h], 0
 0x97AEB2: mov     eax, edi

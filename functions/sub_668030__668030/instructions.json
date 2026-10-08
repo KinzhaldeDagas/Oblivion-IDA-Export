@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x668030",
-    "line": "push    esi",
+    "line": "push    esi; Clears the 21-entry PlayerCharacter skill-use progress array for native skill AVs 0x0C..0x20.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x668039",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x66804C",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.",
     "mnemonic": "call",
     "size": 5
   },

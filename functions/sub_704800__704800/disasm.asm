@@ -36,7 +36,7 @@
 0x704871: call    FormHeapAlloc
 0x704876: mov     [esi+4], eax
 0x704879: mov     eax, [esp+28h+a1]
-0x70487D: push    offset dword_B256D0; a2
+0x70487D: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x704882: push    eax; a1
 0x704883: mov     byte ptr [esp+30h+var_4], 1
 0x704888: mov     [edi+2Ch], ebx
@@ -59,7 +59,7 @@
 0x7048BE: call    dword ptr ds:0A28078h
 0x7048C4: mov     cx, [ebp+4]
 0x7048C8: and     cx, 0F100h
-0x7048CD: or      cx, 3100h
+0x7048CD: or      cx, 3100h; Initial map mode 0x3100 = WrapS|WrapT|Bilerp with texcoord set 0.
 0x7048D2: mov     [ebp+0Ch], ebx
 0x7048D5: mov     [ebp+4], cx
 0x7048D9: jmp     short loc_7048DD
@@ -187,3 +187,21 @@
 0x704A4D: retn    4
 0x704A50: or      esi, 1
 0x704A53: jmp     short loc_704A24
+0x703C00: mov     eax, [ecx+4]
+0x703C03: push    eax
+0x703C04: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVMap@NiTexturingProperty@@@@6B@; const NiTArray<NiTexturingProperty::Map *>::`vftable'
+0x703C0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x703C0F: pop     ecx
+0x703C10: retn
+0x9C95B0: mov     ecx, [ebp-10h]; this
+0x9C95B3: jmp     j_??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C95B8: mov     ecx, [ebp-10h]
+0x9C95BB: add     ecx, 1Ch
+0x9C95BE: jmp     loc_703C00
+0x9C95C3: mov     edx, [esp+arg_4]
+0x9C95C7: lea     eax, [edx-14h]
+0x9C95CA: mov     ecx, [edx-18h]
+0x9C95CD: xor     ecx, eax
+0x9C95CF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C95D4: mov     eax, offset stru_AF1E78
+0x9C95D9: jmp     ___CxxFrameHandler3

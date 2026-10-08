@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6541A0",
-    "line": "push    ebx",
+    "line": "push    ebx; Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6541CC",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+skinInstance]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x6541DE",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6541E0",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x6541F3",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6541F5",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x654275",
-    "line": "push    edx",
+    "line": "push    edx; rootNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x654285",
-    "line": "call    sub_480770",
+    "line": "call    NiNode_RemoveScbChildAlongFadeNodeChain; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x654310",
-    "line": "push    eax",
+    "line": "push    eax; rootNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x65431B",
-    "line": "call    sub_480770",
+    "line": "call    NiNode_RemoveScbChildAlongFadeNodeChain; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x654337",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x654339",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x654348",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65434A",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },

@@ -5,7 +5,7 @@
 0x4F5F7C: mov     dl, 8
 0x4F5F7E: jz      short loc_4F5FB6
 0x4F5F80: test    [eax+53h], dl
-0x4F5F83: jz      short loc_4F5FB6
+0x4F5F83: jz      short loc_4F5FB6; Snow helper tests TESWeather+0x53 bit 3 on firstWeather and compares Sky+0xD8 against TESWeather+0x4E threshold.
 0x4F5F85: movzx   eax, byte ptr [eax+4Eh]
 0x4F5F89: fld     dword ptr [ecx+0D8h]
 0x4F5F8F: mov     [esp+4+var_4], eax
@@ -27,7 +27,7 @@
 0x4F5FB9: test    eax, eax
 0x4F5FBB: jz      short loc_4F6001
 0x4F5FBD: test    [eax+53h], dl
-0x4F5FC0: jz      short loc_4F6001
+0x4F5FC0: jz      short loc_4F6001; Snow helper also tests secondWeather bit 3 and TESWeather+0x4F threshold.
 0x4F5FC2: fld     dword ptr [ecx+0D8h]
 0x4F5FC8: movzx   ecx, byte ptr [eax+4Fh]
 0x4F5FCC: mov     [esp+4+var_4], ecx

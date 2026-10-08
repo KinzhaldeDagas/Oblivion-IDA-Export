@@ -1,1 +1,1 @@
-TrainingMenu
+struct TrainingMenu;

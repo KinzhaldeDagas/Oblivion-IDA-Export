@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x677280",
+      "0x6772DD"
+    ]
+  ],
+  "chunks_sha256": "7e9ac89ad4b7593ffbc97a48a453a128b9072194d417b202cdd608ff2aaf3540",
+  "comment_regular": "Verified: six-list owning clear; calls Crime destructor then FormHeapFree for every record, frees list nodes while retaining allocated sentinel heads. Distinct from AlarmPackage borrowed Crime references.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_677280",
+  "display_name": "ActorProcessManager_ClearCrimes",
   "end_ea": "0x6772DD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_677280",
+  "name": "ActorProcessManager_ClearCrimes",
   "segment": ".text",
   "sha256": "7e9ac89ad4b7593ffbc97a48a453a128b9072194d417b202cdd608ff2aaf3540",
   "size": 93,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x677280",
-  "type": "void __thiscall(int *this)",
+  "total_chunk_size": 93,
+  "type": "void __thiscall(ActorProcessManager *self)",
   "xrefs_from_count": 45,
   "xrefs_to_count": 2
 }

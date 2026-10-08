@@ -8,4 +8,4 @@
 0x548312: fstp    [esp+arg_0]
 0x548316: fadd    [esp+arg_0]
 0x54831A: fmul    [esp+arg_8]
-0x54831E: jmp     Double_To_SInt32
+0x54831E: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

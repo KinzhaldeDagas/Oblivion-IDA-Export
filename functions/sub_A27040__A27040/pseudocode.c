@@ -1,6 +1,7 @@
-void __cdecl sub_A27040()
+// CRT atexit destructor for the process-global Oblivion CWindMatrices object; clears the count, frees the transform array, and nulls the pointer.
+void __cdecl OB_CWindMatrices_GlobalDtor_010201A0()
 {
-  word_B42A10 = 0;
-  FormHeapFree(dword_B42A14);
-  dword_B42A14 = 0;
+  CWindEngine__s_windMatrixContainer.matrixCount = 0; /*0xa27046*/
+  FormHeapFree((unsigned int)CWindEngine__s_windMatrixContainer.matrices); /*0xa2704f*/
+  CWindEngine__s_windMatrixContainer.matrices = 0; /*0xa27057*/
 }

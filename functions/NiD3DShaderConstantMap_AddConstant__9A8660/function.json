@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x9A8660",
+      "0x9A87F9"
+    ]
+  ],
+  "chunks_sha256": "b9951edb89c2111cb8b83dd24e337a6275f1c5a32b3fa824b39b7318dcd8f526",
+  "comment_regular": "DeferredRendering: NiD3DShaderConstantMap::AddConstant routes by high nibble of flags; constant bindings are map metadata, not runtime light values.",
+  "comment_repeatable": "DeferredRendering: NiD3DShaderConstantMap::AddConstant routes by high nibble of flags; constant bindings are map metadata, not runtime light values.\nDX11 writer ABI audit 2026-10-01: AddConstant is thiscall with TEN raw DWORD stack arguments and RET28h. It can insert/replace entries and their backing allocation. A seven-word observer packet is insufficient; preserve all10 words and complete the call/unwind before closing mutation activity.\nVerified family correlation 2026-10-01: AddEntry dispatcher corresponds to Fallout821FE3C0 through category mask F0000000 and six virtual family branches. Oblivion duplicate-name status is80000020 and unsupported category80000040; Fallout uses plain32/64 and an extra comparison of existing entry Extra. Oblivion case20000000 calls AddPredefinedEntry9A8800 with four arguments. Existing full hook ABI remains ten raw DWORDs and RET28h.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiD3DShaderConstantMap::AddConstant",
+  "display_name": "NiD3DShaderConstantMap_AddEntry",
   "end_ea": "0x9A87F9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiD3DShaderConstantMap::AddConstant",
+  "name": "NiD3DShaderConstantMap_AddEntry",
   "segment": ".text",
   "sha256": "b9951edb89c2111cb8b83dd24e337a6275f1c5a32b3fa824b39b7318dcd8f526",
   "size": 409,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A8660",
+  "total_chunk_size": 409,
   "type": "int __thiscall(NiD3DShaderConstantMap *this, char *constName, int flags, int extra, int register_1, int boh, char *sawEmpty, int size, int number, void *a10, int a11)",
   "xrefs_from_count": 168,
   "xrefs_to_count": 3

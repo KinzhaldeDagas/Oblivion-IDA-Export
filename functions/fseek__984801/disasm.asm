@@ -37,3 +37,7 @@
 0x984864: mov     [ebp+var_1C], eax
 0x984867: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98486E: call    _fseek___$LN11_2
+0x98487C: push    [ebp+File]
+0x98487F: call    __unlock_file
+0x984884: pop     ecx
+0x984885: retn

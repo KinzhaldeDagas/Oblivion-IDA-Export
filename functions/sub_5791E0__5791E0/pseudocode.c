@@ -10,12 +10,12 @@ void __usercall sub_5791E0(
 {
   InterfaceManager *Singleton; // eax
 
-  if ( InterfaceManager_GetSingleton(0, 1) )
+  if ( InterfaceManager_GetSingleton(0, 1) ) /*0x5791e4*/
   {
-    if ( InterfaceManager_GetSingleton(0, 1)->cursor )
+    if ( InterfaceManager_GetSingleton(0, 1)->cursor ) /*0x5791fc*/
     {
-      Singleton = InterfaceManager_GetSingleton(0, 1);
-      sub_5821F0(Singleton, a1, a2, a3, a4, a5, a6, a7, a8);
+      Singleton = InterfaceManager_GetSingleton(0, 1); /*0x579206*/
+      InterfaceManager_ProcessGlobalHotkeys(Singleton, a1, a2, a3, a4, a5, a6, a7, a8); /*0x579210*/
     }
   }
 }

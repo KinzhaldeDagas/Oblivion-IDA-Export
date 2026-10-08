@@ -1,4 +1,4 @@
-void *sub_8C47B0()
+NiRTTI *sub_8C47B0()
 {
-  return &unk_BA8118;
+  return &stru_BA8118; /*0x8c47b5*/
 }

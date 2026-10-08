@@ -13,7 +13,7 @@
 0x6FF838: test    edi, edi
 0x6FF83A: jz      short loc_6FF88D
 0x6FF83C: mov     ecx, edi
-0x6FF83E: call    sub_452A60
+0x6FF83E: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6FF843: test    eax, eax
 0x6FF845: mov     ecx, edi
 0x6FF847: jnz     short loc_6FF85D
@@ -26,7 +26,7 @@
 0x6FF858: pop     esi
 0x6FF859: pop     ebx
 0x6FF85A: retn    8
-0x6FF85D: call    sub_452A60
+0x6FF85D: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6FF862: mov     ecx, esi
 0x6FF864: mov     dl, [ecx]
 0x6FF866: cmp     dl, [eax]

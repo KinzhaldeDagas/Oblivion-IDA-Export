@@ -1,5 +1,5 @@
 0x4F6A70: call    Sky_CreateOrGetGlobalObject
-0x4F6A75: fld     dword ptr [eax+0D8h]
+0x4F6A75: fld     dword ptr [eax+0D8h]; GetCurrentWeatherPercent reads Sky+0xD8.
 0x4F6A7B: mov     eax, [esp+arg_C]
 0x4F6A7F: fst     qword ptr [eax]
 0x4F6A81: cmp     byte ptr ds:0B361ACh, 0

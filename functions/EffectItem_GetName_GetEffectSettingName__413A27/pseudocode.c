@@ -8,11 +8,11 @@ int __userpurge EffectItem_GetName_::GetEffectSettingName@<eax>(
         int a7,
         int a8,
         int a9,
-        int a10)
+        BSStringT *a10)
 {
   BSStringT *Name; // eax
 
-  Name = EffectSetting_GetName(*(this + 7), &a5);
+  Name = EffectSetting_GetName(*(this + 7), &a5); /*0x413a2f*/
   return EffectItem_GetName_::CopyName(
            (const char **)&Name->m_data,
            1,

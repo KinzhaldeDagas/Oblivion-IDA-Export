@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43CB90",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified QueuedTree vtable QueueModels override (+0x2C). Reads its reference at +0x20, gets the base TESObjectTREE, computes a form-specific LOD multiplier with TESForm_GetLODMult, optionally substitutes value 6 when TESObjectREFR_HasVisibleDistantFlag is true, then attaches a QueuedTreeModel child with the same reference/tree and inherited priority. Probable visible-distant association is supported by Fallout's named getter and identical 0x8000 check; Oblivion helper does not test the base form bit.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x43CBA5",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43CBA6",
-    "line": "call    sub_4A2A30",
+    "line": "call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43CBAB",
-    "line": "mov     ecx, [esi+20h]",
+    "line": "mov     ecx, [esi+20h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x43CBB7",
-    "line": "call    sub_4D6FD0",
+    "line": "call    TESObjectREFR_HasVisibleDistantFlag; Probable: the reference's 0x8000 TESForm flag is the visible-distant flag. Oblivion promotes this queued tree task's LOD multiplier to 6 when set. Fallout's GetVisibleDistant checks the same bit on the reference and then its base form; this helper checks only the reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x43CBCB",
-    "line": "push    ebx",
+    "line": "push    ebx; unknownArg",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43CBCC",
-    "line": "push    esi",
+    "line": "push    esi; parent",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,49 +175,49 @@
   },
   {
     "ea": "0x43CBDA",
-    "line": "push    eax",
+    "line": "push    eax; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43CBDB",
-    "line": "push    edi",
+    "line": "push    edi; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43CBDC",
-    "line": "push    ecx",
+    "line": "push    ecx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43CBDD",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x43CBE3",
-    "line": "lea     edx, [esp+24h+var_4]",
+    "line": "lea     edx, [esp+24h+outTask]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43CBE7",
-    "line": "push    edx",
+    "line": "push    edx; outTask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43CBE8",
-    "line": "call    sub_43B780",
+    "line": "call    QueuedTreeModel_CreateAndQueue; Verified: caller passes the form-derived LOD multiplier (or 6 for a reference carrying TESObjectREFR flag 0x8000) into QueuedTreeModel+0x30; constructor now labels that field lodMultiplier. Fallout QueueModels also calls GetIsImposter in addition to GetVisibleDistant, an observed call-path divergence whose effect is not yet established.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43CBED",
-    "line": "mov     eax, [esp+10h+var_4]",
+    "line": "mov     eax, [esp+10h+outTask]",
     "mnemonic": "mov",
     "size": 4
   },

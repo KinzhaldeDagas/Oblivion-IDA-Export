@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x690A25",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; magicItem",
     "mnemonic": "mov",
     "size": 3
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x690A3C",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x690A3E",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x690A54",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x690A5C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; compactString",
     "mnemonic": "mov",
     "size": 2
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x690A60",
-    "line": "call    sub_449190",
+    "line": "call    OB_CompactString_Length_010201A0; Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x690A80",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x690ADE",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
     "mnemonic": "call",
     "size": 5
   },

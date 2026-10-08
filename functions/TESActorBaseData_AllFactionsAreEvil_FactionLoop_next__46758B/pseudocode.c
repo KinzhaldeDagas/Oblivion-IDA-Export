@@ -2,7 +2,7 @@ void __usercall TESActorBaseData_AllFactionsAreEvil_::FactionLoop_next(_DWORD *t
 {
   _DWORD *v2; // ecx
 
-  v2 = (_DWORD *)*(this + 1);
-  if ( v2 )
-    TESActorBaseData_AllFactionsAreEvil_::FactionLoop(v2, a2);
+  v2 = (_DWORD *)*(this + 1); /*0x46758b*/
+  if ( v2 ) /*0x467590*/
+    TESActorBaseData_AllFactionsAreEvil_::FactionLoop(v2, a2); /*0x467590*/
 }

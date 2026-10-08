@@ -9,11 +9,11 @@
 0x56B23A: lea     eax, [eax+eax*4]
 0x56B23D: add     eax, eax
 0x56B23F: add     eax, eax
-0x56B241: movzx   edx, ds:Script_CommandList?.numParams[eax+eax]
+0x56B241: movzx   edx, ds:Script_CommandList.numParams[eax+eax]
 0x56B249: add     eax, eax
 0x56B24B: cmp     ecx, edx
 0x56B24D: jnb     short loc_56B2CE
-0x56B24F: mov     eax, ds:Script_CommandList?.params[eax]
+0x56B24F: mov     eax, ds:Script_CommandList.params[eax]
 0x56B255: lea     edx, [ecx+ecx*2]
 0x56B258: mov     edx, [eax+edx*4+4]
 0x56B25C: cmp     byte ptr ds:0B0A54Dh[edx*8], 0

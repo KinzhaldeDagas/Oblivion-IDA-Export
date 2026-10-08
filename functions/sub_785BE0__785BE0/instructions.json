@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785BE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
     "mnemonic": "push",
     "size": 2
   },
@@ -220,5 +220,119 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CB060",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB063",
+    "line": "add     ecx, 0Ch; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB066",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB06B",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB06E",
+    "line": "add     ecx, 1Ch; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB071",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB076",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB079",
+    "line": "add     ecx, 2Ch ; ','; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB07C",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB081",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB084",
+    "line": "add     ecx, 3Ch ; '<'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB087",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB08C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB090",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB093",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB096",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB098",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB09D",
+    "line": "mov     eax, offset stru_AF374C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB0A2",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

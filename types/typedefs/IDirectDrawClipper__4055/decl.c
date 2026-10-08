@@ -1,1 +1,4 @@
-IDirectDrawClipper
+struct IDirectDrawClipper
+{
+IDirectDrawClipperVtbl *lpVtbl;
+};

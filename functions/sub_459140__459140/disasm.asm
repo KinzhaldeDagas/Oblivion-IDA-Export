@@ -1,4 +1,4 @@
-0x459140: sub     esp, 1Ch
+0x459140: sub     esp, 1Ch; MEF PERF 2026-10-02 PASS2: Verified character-controller drain: bucket-order iteration, MobileObject/HighProcess checks, temporary controller reference, cursor substitution/restoration, blob free and key removal. No evidence that callback order may be changed by rehash.
 0x459143: push    esi
 0x459144: push    edi
 0x459145: mov     edi, ecx
@@ -10,7 +10,6 @@
 0x459153: mov     esi, [edx+8]
 0x459156: mov     edx, esi
 0x459158: jmp     short loc_459160
-0x45915A: align 10h
 0x459160: cmp     dword ptr [edx], 0
 0x459163: jnz     loc_459280
 0x459169: add     eax, 1
@@ -19,25 +18,25 @@
 0x459171: jb      short loc_459160
 0x459173: xor     eax, eax
 0x459175: test    eax, eax
-0x459177: mov     [esp+24h+var_14], eax
+0x459177: mov     [esp+24h+position], eax
 0x45917B: jz      loc_4592EA
 0x459181: push    ebx
 0x459182: push    ebp
-0x459183: lea     eax, [esp+2Ch+var_1C]
-0x459187: push    eax
+0x459183: lea     eax, [esp+2Ch+valueOut]
+0x459187: push    eax; valueOut
 0x459188: lea     ecx, [esp+30h+a1]
-0x45918C: push    ecx
-0x45918D: mov     ecx, [edi+5Ch]
-0x459190: lea     edx, [esp+34h+var_14]
-0x459194: push    edx
-0x459195: call    sub_452600
+0x45918C: push    ecx; keyOut
+0x45918D: mov     ecx, [edi+5Ch]; self
+0x459190: lea     edx, [esp+34h+position]
+0x459194: push    edx; position
+0x459195: call    NiTMap_U32Pointer_GetNextEntry
 0x45919A: mov     eax, [esp+2Ch+a1]
 0x45919E: push    0; int
 0x4591A0: push    offset ??_R0?AVMobileObject@@@8; struct TypeDescriptor *
 0x4591A5: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4591AA: push    0; int
 0x4591AC: push    eax; a1
-0x4591AD: call    TESForm_LookupByFormID
+0x4591AD: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4591B2: add     esp, 4
 0x4591B5: push    eax; void *
 0x4591B6: call    OblivionDynamicCast
@@ -57,7 +56,7 @@
 0x4591E4: test    esi, esi
 0x4591E6: jz      loc_4592C1
 0x4591EC: mov     ecx, [edi+14h]
-0x4591EF: mov     edx, [esp+2Ch+var_1C]
+0x4591EF: mov     edx, [esp+2Ch+valueOut]
 0x4591F3: mov     [edi+14h], edx
 0x4591F6: mov     [esp+2Ch+var_4], ecx
 0x4591FA: mov     ecx, ds:0B33B00h
@@ -93,8 +92,8 @@
 0x459252: jz      short loc_459288
 0x459254: push    ebx; Dst
 0x459255: mov     ecx, esi
-0x459257: call    sub_657340
-0x45925C: mov     edx, [esp+2Ch+var_1C]
+0x459257: call    MobileObject_LoadCharacterProxyState
+0x45925C: mov     edx, [esp+2Ch+valueOut]
 0x459260: movzx   ecx, bp
 0x459263: lea     eax, [ecx+edx+2]
 0x459267: cmp     eax, [edi+14h]
@@ -127,7 +126,7 @@
 0x4592B7: add     esp, 0Ch
 0x4592BA: mov     ecx, [esp+2Ch+var_4]
 0x4592BE: mov     [edi+14h], ecx
-0x4592C1: mov     edx, [esp+2Ch+var_1C]
+0x4592C1: mov     edx, [esp+2Ch+valueOut]
 0x4592C5: push    edx; void *
 0x4592C6: mov     ecx, offset FormHeap
 0x4592CB: call    MemoryHeap_Free_checked
@@ -135,7 +134,7 @@
 0x4592D4: mov     ecx, [edi+5Ch]
 0x4592D7: push    eax
 0x4592D8: call    NiTMap_RemoveAt
-0x4592DD: cmp     [esp+2Ch+var_14], 0
+0x4592DD: cmp     [esp+2Ch+position], 0
 0x4592E2: jnz     loc_459183
 0x4592E8: pop     ebp
 0x4592E9: pop     ebx

@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x68D240",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+baseDistance]; baseDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x68D243",
-    "line": "call    Calc_GetCombatDistance",
+    "line": "call    Calc_GetCombatDistance; Converts a base reach/distance value to world combat distance using the Oblivion combat-distance game-setting multiplier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x68D276",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.",
     "mnemonic": "call",
     "size": 5
   },

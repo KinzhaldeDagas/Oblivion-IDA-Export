@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RPC_SERVER_INTERFACE",
+  "definition": "typedef _RPC_SERVER_INTERFACE RPC_SERVER_INTERFACE\n",
   "id": 18374686479672032386,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Length",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InterfaceId",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 20
+      "size": 20,
+      "type": "RPC_SYNTAX_IDENTIFIER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TransferSyntax",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 20
+      "size": 20,
+      "type": "RPC_SYNTAX_IDENTIFIER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DispatchTable",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "PRPC_DISPATCH_TABLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RpcProtseqEndpointCount",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RpcProtseqEndpoint",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "PRPC_PROTSEQ_ENDPOINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DefaultManagerEpv",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "InterpreterInfo",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "const void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flags",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     }
   ],
   "name": "RPC_SERVER_INTERFACE",
+  "ordinal": 3107,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

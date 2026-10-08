@@ -167,3 +167,32 @@
 0x53D436: pop     ebx
 0x53D437: add     esp, 10h
 0x53D43A: retn    1Ch
+0x9BA420: mov     ecx, [ebp-10h]; this
+0x9BA423: jmp     ??1SkyObject@@UAE@XZ; SkyObject::~SkyObject(void)
+0x9BA428: mov     ecx, [ebp-10h]
+0x9BA42B: add     ecx, 8; slot
+0x9BA42E: jmp     NiPointerSlot_Release
+0x9BA433: mov     ecx, [ebp-10h]
+0x9BA436: add     ecx, 0Ch; slot
+0x9BA439: jmp     NiPointerSlot_Release
+0x9BA43E: mov     ecx, [ebp-10h]
+0x9BA441: add     ecx, 10h; slot
+0x9BA444: jmp     NiPointerSlot_Release
+0x9BA449: mov     ecx, [ebp-10h]
+0x9BA44C: add     ecx, 14h; slot
+0x9BA44F: jmp     NiPointerSlot_Release
+0x9BA454: push    offset BSStringT_Clear; void (__thiscall *)(void *)
+0x9BA459: push    8; int
+0x9BA45B: push    8; unsigned int
+0x9BA45D: mov     eax, [ebp-10h]
+0x9BA460: add     eax, 18h
+0x9BA463: push    eax; void *
+0x9BA464: call    $LN21
+0x9BA469: retn
+0x9BA46A: mov     edx, [esp+arg_4]
+0x9BA46E: lea     eax, [edx-14h]
+0x9BA471: mov     ecx, [edx-18h]
+0x9BA474: xor     ecx, eax
+0x9BA476: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA47B: mov     eax, offset stru_AE45C0
+0x9BA480: jmp     ___CxxFrameHandler3

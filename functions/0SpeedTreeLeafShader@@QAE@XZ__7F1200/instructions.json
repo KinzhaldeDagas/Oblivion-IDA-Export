@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F1200",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; SpeedTreeLeafShader ctor: BSShader base, four vertex-shader refs at +0x37C, two pixel-shader refs at +0x38C, pass +0x394, clears 0x300-byte leaf constant block and initializes global leaf wind/color scalars.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7F122F",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7F1257",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -568,5 +568,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CFD90",
+    "line": "mov     ecx, [ebp-20h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFD93",
+    "line": "jmp     ??1BSShader@@UAE@XZ;",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFD98",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFD9D",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CFD9F",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9CFDA1",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFDA4",
+    "line": "add     eax, 37Ch",
+    "mnemonic": "add",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFDA9",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CFDAA",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFDAF",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CFDB0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CFDB4",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFDB7",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CFDBA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CFDBC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFDC1",
+    "line": "mov     eax, offset stru_AF88A0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CFDC6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

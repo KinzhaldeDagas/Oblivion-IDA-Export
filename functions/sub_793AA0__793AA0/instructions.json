@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x793AA0",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; Oblivion stRotTransform::RotateZ. Converts degrees to radians, builds the Z-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place; used by the legacy billboard camera-direction path.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x793AA3",
-    "line": "fld     [esp+4Ch+arg_0]",
+    "line": "fld     [esp+4Ch+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x793AB1",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+angleDegrees]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793AB5",
-    "line": "fld     [esp+54h+arg_0]",
+    "line": "fld     [esp+54h+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x793ACA",
-    "line": "fld     [esp+54h+arg_0]",
+    "line": "fld     [esp+54h+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -85,31 +85,31 @@
   },
   {
     "ea": "0x793AD3",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+angleDegrees]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793AD7",
-    "line": "fld     [esp+54h+arg_0]",
+    "line": "fld     [esp+54h+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x793ADB",
-    "line": "push    edi",
+    "line": "push    edi; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793ADC",
-    "line": "fstp    [esp+58h+arg_0]",
+    "line": "fstp    [esp+58h+angleDegrees]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793AE0",
-    "line": "lea     eax, [esp+58h+var_24]",
+    "line": "lea     eax, [esp+58h+outTransform]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -121,31 +121,31 @@
   },
   {
     "ea": "0x793AE8",
-    "line": "push    eax",
+    "line": "push    eax; outTransform",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793AE9",
-    "line": "fst     [esp+5Ch+var_48]",
+    "line": "fst     [esp+5Ch+var_48.m]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x793AED",
-    "line": "lea     ecx, [esp+5Ch+var_48]",
+    "line": "lea     ecx, [esp+5Ch+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x793AF1",
-    "line": "fld     [esp+5Ch+arg_0]",
+    "line": "fld     [esp+5Ch+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x793AF5",
-    "line": "fst     [esp+5Ch+var_44]",
+    "line": "fst     [esp+5Ch+var_48.m+4]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x793AFB",
-    "line": "fst     [esp+5Ch+var_40]",
+    "line": "fst     [esp+5Ch+var_48.m+8]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x793B03",
-    "line": "fstp    [esp+5Ch+var_3C]",
+    "line": "fstp    [esp+5Ch+var_48.m+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -187,25 +187,25 @@
   },
   {
     "ea": "0x793B09",
-    "line": "fstp    [esp+5Ch+var_38]",
+    "line": "fstp    [esp+5Ch+var_48.m+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793B0D",
-    "line": "fst     [esp+5Ch+var_34]",
+    "line": "fst     [esp+5Ch+var_48.m+14h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x793B11",
-    "line": "fst     [esp+5Ch+var_30]",
+    "line": "fst     [esp+5Ch+var_48.m+18h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x793B15",
-    "line": "fstp    [esp+5Ch+var_2C]",
+    "line": "fstp    [esp+5Ch+var_48.m+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x793B1B",
-    "line": "fstp    [esp+5Ch+var_28]",
+    "line": "fstp    [esp+5Ch+var_48.m+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793B1F",
-    "line": "call    sub_78EDD0",
+    "line": "call    OB_stRotTransform_MultiplyCopy_010201A0; Oblivion stRotTransform 3x3 multiply (C++ operator* with an explicit hidden result pointer). Computes this*rhs into the supplied 0x24-byte output transform.",
     "mnemonic": "call",
     "size": 5
   },

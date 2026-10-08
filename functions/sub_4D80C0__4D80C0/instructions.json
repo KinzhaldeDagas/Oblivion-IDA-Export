@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D80C0",
-    "line": "push    edi",
+    "line": "push    edi; Register ExtraLight or ExtraSpellEffectLight backing NiLight in the native full-light list with trackBackingPosition=false. All five retail direct callers pass useSpellEffectExtraLight=false; no code/data xref selects this helper's true branch.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4D80D7",
-    "line": "cmp     [esp+4+arg_0], 0",
+    "line": "cmp     [esp+4+useSpellEffectExtraLight], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4D80E1",
-    "line": "call    sub_41E670",
+    "line": "call    ExtraDataList_GetSpellEffectLight; Returns the secondary/spell-effect REFR_LIGHT payload from extra type 0x49; TESObjectREF_UpdateLights processes it separately from normal ExtraLight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4D80E8",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x4D80F8",
-    "line": "push    0",
+    "line": "push    0; trackBackingPosition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D80FA",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x4D8105",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D8107",
-    "line": "call    sub_7C6AE0",
+    "line": "call    ShadowSceneNode_FindOrCreateFullLightForSource; Find or create a native full-list ShadowSceneLight for a backing NiLight. The third argument is the proved trackBackingPosition boolean, not a ShadowSceneLight pointer or admission selector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4D810E",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Find/create the attached reference light with trackBackingPosition=false.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4D811A",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; Retail TESObjectREFR vtable slot +0x170 resolves to TESObjectREFR_GetBaseForm at 0x004D9B40; the following +0x80/+0x84 reads are from the reference's Oblivion base form.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x4D8124",
-    "line": "call    sub_7D3370",
+    "line": "call    ShadowSceneLight_SetPerSourceProjectorMode; Retail reference-light registration explicitly calls ShadowSceneLight_SetPerSourceProjectorMode(..., false). No TESObjectLIGH flag test precedes this constant.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D8129",
-    "line": "mov     byte ptr [esi+120h], 0",
+    "line": "mov     byte ptr [esi+120h], 0; Retail reference-light registration clears ShadowSceneLight::renderGateOverride_120; TESObjectLIGH editor bits 0x200/0x400 are not consulted in this decoded path.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4D8136",
-    "line": "fstp    dword ptr [esi+128h]",
+    "line": "fstp    dword ptr [esi+128h]; Copy the Oblivion TESObjectLIGH DATA falloff exponent at base-form +0x80 into ShadowSceneLight falloffExponent_128. The game executable proves the copy/default path; the Oblivion Construction Set Light dialog labels the corresponding DATA field 'Falloff Exponent'.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4D8142",
-    "line": "fstp    dword ptr [esi+124h]",
+    "line": "fstp    dword ptr [esi+124h]; Copy Oblivion base-light DATA field at object +0x84 into ShadowSceneLight projectorFovDegrees +0x124. LIGH load defaults this source field to 90.0.",
     "mnemonic": "fstp",
     "size": 6
   },

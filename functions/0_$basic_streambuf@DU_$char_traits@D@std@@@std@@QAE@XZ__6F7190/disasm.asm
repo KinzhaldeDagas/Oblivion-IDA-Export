@@ -51,3 +51,13 @@
 0x6F7230: pop     ebx
 0x6F7231: add     esp, 14h
 0x6F7234: retn
+0x9C8D70: mov     ecx, [ebp-10h]
+0x9C8D73: add     ecx, 4
+0x9C8D76: jmp     ??1?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAE@XZ___??1_Mutex@std@@QAE@XZ
+0x9C8D7B: mov     edx, [esp+arg_4]
+0x9C8D7F: lea     eax, [edx-14h]
+0x9C8D82: mov     ecx, [edx-18h]
+0x9C8D85: xor     ecx, eax
+0x9C8D87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8D8C: mov     eax, offset stru_AF1670
+0x9C8D91: jmp     ___CxxFrameHandler3

@@ -1,33 +1,33 @@
-void __thiscall sub_612C70(unsigned int *this)
+void __thiscall sub_612C70(unsigned int **this)
 {
   unsigned int *v2; // esi
   unsigned int v3; // eax
 
-  v2 = (unsigned int *)*(this + 0x46);
-  if ( v2 )
+  v2 = *(this + 0x46); /*0x612c74*/
+  if ( v2 ) /*0x612c7c*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x612c84*/
     {
-      v3 = *v2;
-      if ( !v2[1] )
-        break;
-      if ( v3 )
-        goto LABEL_6;
+      v3 = *v2; /*0x612c84*/
+      if ( !v2[1] ) /*0x612c80*/
+        break; /*0x612c80*/
+      if ( v3 ) /*0x612c90*/
+        goto LABEL_6; /*0x612c90*/
 LABEL_7:
-      v2 = (unsigned int *)v2[1];
-      if ( !v2 )
+      v2 = (unsigned int *)v2[1]; /*0x612c9b*/
+      if ( !v2 ) /*0x612ca0*/
       {
 LABEL_8:
-        BSSimpleList_Clear((_DWORD *)*(this + 0x46));
-        FormHeapFree(*(this + 0x46));
-        *(this + 0x46) = 0;
-        return;
+        BSSimpleList_Clear(*(this + 0x46)); /*0x612ca2*/
+        FormHeapFree((unsigned int)*(this + 0x46)); /*0x612cb4*/
+        *(this + 0x46) = 0; /*0x612cbc*/
+        return; /*0x612cbc*/
       }
     }
-    if ( !v3 )
-      goto LABEL_8;
+    if ( !v3 ) /*0x612c8a*/
+      goto LABEL_8; /*0x612c8a*/
 LABEL_6:
-    FormHeapFree(*v2);
-    goto LABEL_7;
+    FormHeapFree(*v2); /*0x612c92*/
+    goto LABEL_7; /*0x612c93*/
   }
 }

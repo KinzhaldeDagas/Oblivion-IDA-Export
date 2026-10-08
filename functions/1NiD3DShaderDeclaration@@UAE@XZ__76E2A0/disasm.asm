@@ -15,7 +15,7 @@
 0x76E2C5: jz      short loc_76E2D3
 0x76E2C7: mov     eax, [eax+8]
 0x76E2CA: push    eax
-0x76E2CB: call    FormHeapFree
+0x76E2CB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76E2D0: add     esp, 4
 0x76E2D3: add     edi, 1
 0x76E2D6: add     ebx, 10h
@@ -24,7 +24,7 @@
 0x76E2DE: pop     ebx
 0x76E2DF: mov     ecx, [esi+24h]
 0x76E2E2: push    ecx
-0x76E2E3: call    FormHeapFree
+0x76E2E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76E2E8: add     esp, 4
 0x76E2EB: pop     edi
 0x76E2EC: mov     eax, [esi+10h]

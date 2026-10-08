@@ -11,27 +11,26 @@ int __userpurge SaveLoad_SaveCreatedObjects_::SaveEnchantment_@<eax>(
         int a10,
         __int64 a11,
         int a12,
-        int a13,
+        __int64 a13,
         int a14,
-        int a15,
-        int a16)
+        int a15)
 {
-  int v16; // ebp
-  int v17; // edx
+  int v15; // ebp
+  int v16; // edx
 
-  (*(void (__thiscall **)(int))(*(_DWORD *)a3 + 0x24))(a3);
-  v16 = TESForm_Static_FormRecordSize;
-  sub_45BAB0(a1, a16, (int)TESForm_Static_FormRecordBuffer, TESForm_Static_FormRecordSize);
-  if ( a1[0x10] )
+  (*(void (__thiscall **)(int))(*(_DWORD *)a3 + 0x24))(a3); /*0x45dfe7*/
+  v15 = MEMORY[0xB33C18]; /*0x45dfe9*/
+  sub_45BAB0(a1, a15, (int)MEMORY[0xB33C14], MEMORY[0xB33C18]); /*0x45dffe*/
+  if ( a1[0x10] ) /*0x45e003*/
   {
-    v17 = *(_DWORD *)(a3 + 0xC);
-    LOBYTE(a11) = *(_BYTE *)(a3 + 4);
-    a10 = v17;
-    HIWORD(a11) = v16;
-    *(_DWORD *)((char *)&a11 + 1) = 0;
-    sub_45AD00(&a10);
+    v16 = *(_DWORD *)(a3 + 0xC); /*0x45e00d*/
+    LOBYTE(a11) = *(_BYTE *)(a3 + 4); /*0x45e010*/
+    a10 = v16; /*0x45e019*/
+    HIWORD(a11) = v15; /*0x45e01d*/
+    *(_DWORD *)((char *)&a11 + 1) = 0; /*0x45e022*/
+    sub_45AD00(&a10); /*0x45e02a*/
   }
-  TESFile_ClearFormRecord();
+  TESFile_ClearFormRecord(); /*0x45e031*/
   return SaveLoad_SaveCreatedObjects_::SaveLoop_SaveForm(
            a1,
            a9,
@@ -48,6 +47,5 @@ int __userpurge SaveLoad_SaveCreatedObjects_::SaveEnchantment_@<eax>(
            a12,
            a13,
            a14,
-           a15,
-           a16);
+           a15);
 }

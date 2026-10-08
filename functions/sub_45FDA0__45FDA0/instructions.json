@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x45FE8C",
-    "line": "call    edx",
+    "line": "call    edx; MEF SAVE PERF PASS2 2026-10-08: PERF-20 order constraint: first queue pass calls form virtual+58 in array order, restoring each record's saveVersion before dispatch. Player handled separately45FE22; native second phase later calls virtual+5C and frees each record4602EC. Reserve/growth optimization must preserve pointer order, duplicates, callback phases, player scheduling and exact record ownership; do not replace these two passes with interleaved callbacks.",
     "mnemonic": "call",
     "size": 2
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x45FEB6",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x45FF88",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,13 +1033,13 @@
   },
   {
     "ea": "0x45FFBD",
-    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "line": "push    offset ??_R0?AVTESForm@@@8; a2",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x45FFC2",
-    "line": "push    0; int",
+    "line": "push    0; a1",
     "mnemonic": "push",
     "size": 2
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x45FFC5",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x460068",
-    "line": "push    1; a2",
+    "line": "push    1; disabled",
     "mnemonic": "push",
     "size": 2
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x46006C",
-    "line": "call    TESForm_SetEnabled?",
+    "line": "call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x460094",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,19 +1459,19 @@
   },
   {
     "ea": "0x4600A2",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4600A7",
-    "line": "call    sub_677240",
+    "line": "call    ActorProcessManager_InitLoadedCrimes",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4600AC",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x4600DB",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,19 +1633,19 @@
   },
   {
     "ea": "0x460117",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x46011D",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x46011F",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x4601CF",
-    "line": "push    edx; a2",
+    "line": "push    edx; a3",
     "mnemonic": "push",
     "size": 1
   },
@@ -2083,7 +2083,7 @@
   },
   {
     "ea": "0x46022E",
-    "line": "push    0",
+    "line": "push    0; a4",
     "mnemonic": "push",
     "size": 2
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x460241",
-    "line": "call    sub_4EA6E0",
+    "line": "call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x46025E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2290,12 +2290,6 @@
     "line": "jmp     short loc_4602A0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x46029A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x4602A0",
@@ -2437,7 +2431,7 @@
   },
   {
     "ea": "0x4602DF",
-    "line": "call    edx",
+    "line": "call    edx; MEF SAVE PERF PASS2 2026-10-08: PERF-20 second queue pass: calls form virtual+5C with record loadFlags/previousFlags, restores manager version and frees16-byte record4602EC. Array backing storage remains owned by caller for supplied LoadGame local queue (freed466A31). Manager+1C fallback queue has distinct cleanup4602FF..460337; do not conflate their lifetimes.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2467,7 +2461,7 @@
   },
   {
     "ea": "0x4602EC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2689,7 +2683,7 @@
   },
   {
     "ea": "0x460358",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },

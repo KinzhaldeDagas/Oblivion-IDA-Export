@@ -1,1 +1,1 @@
-IApartmentShutdown_0
+typedef IApartmentShutdown IApartmentShutdown_0;

@@ -1,19 +1,32 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x788430",
+      "0x788625"
+    ]
+  ],
+  "chunks_sha256": "42f28b50d035b2b1cc35546d80f4442fa65367fe0afe361838234394ab81d607",
+  "comment_regular": "CSpeedTreeRT simple/horizontal billboard export used by GetGeometry bit 0x08 when 360 output is disabled or caller requests simple output. Stock TES4 tree builders do not call GetGeometry bit 0x08.\n[2026-10-06 directional billboard] Verified horizontal gap: distance controls active, then alpha is overwritten with global pitch threshold at 0x7885E0. Caller integrating horizontal output must combine distance/pitch fading. No Bethesda native scene consumer for this output was found.\n\nSimple/horizontal billboard runtime export. Uses byte_B4297C synthetic billboard LOD, target alpha at this+0x44, and horizontal fade scalar flt_B2B604.",
+  "comment_repeatable": "Simple/horizontal billboard runtime export. Uses byte_B4297C synthetic billboard LOD, target alpha at this+0x44, and horizontal fade scalar flt_B2B604.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_788430",
+  "display_name": "CSpeedTreeRT__GetSimpleBillboardGeometry",
   "end_ea": "0x788625",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_788430",
+  "name": "CSpeedTreeRT__GetSimpleBillboardGeometry",
   "segment": ".text",
   "sha256": "42f28b50d035b2b1cc35546d80f4442fa65367fe0afe361838234394ab81d607",
   "size": 501,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x788430",
-  "type": "int __thiscall(unsigned __int8 *this, int)",
+  "total_chunk_size": 501,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, OB_SpeedTreeGeometryOutput_010201A0 *geometry)",
   "xrefs_from_count": 156,
   "xrefs_to_count": 2
 }

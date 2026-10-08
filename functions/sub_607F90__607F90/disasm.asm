@@ -1,13 +1,13 @@
-0x607F90: push    ecx
+0x607F90: push    ecx; Scans two ActorProcessManager lists for ArrowProjectile objects matching baseForm and recorded target. Stops at maximumMatches; optionally requires transfer marker +0x95 and either destroys immediately or marks lifecycle state 3.
 0x607F91: push    ebx
 0x607F92: push    ebp
 0x607F93: push    esi
 0x607F94: push    edi
 0x607F95: push    0; a2
-0x607F97: mov     ecx, offset ActorProcessManager_ptr; this
-0x607F9C: call    sub_673A50
+0x607F97: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x607F9C: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x607FA1: mov     ecx, eax; this
-0x607FA3: call    sub_7616D0
+0x607FA3: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x607FA8: mov     ebp, eax
 0x607FAA: xor     ebx, ebx
 0x607FAC: test    ebp, ebp
@@ -19,7 +19,7 @@
 0x607FC4: jnz     short loc_607FCF
 0x607FC6: cmp     dword ptr [edi], 0
 0x607FC9: jz      loc_608070
-0x607FCF: cmp     ebx, [esp+14h+arg_4]
+0x607FCF: cmp     ebx, [esp+14h+maximumMatches]
 0x607FD3: jge     loc_608070
 0x607FD9: mov     eax, [edi]
 0x607FDB: push    0; int
@@ -39,19 +39,19 @@
 0x608001: mov     eax, [eax+28h]
 0x608004: jmp     short loc_608008
 0x608006: xor     eax, eax
-0x608008: cmp     eax, [esp+14h+arg_8]
+0x608008: cmp     eax, [esp+14h+target]
 0x60800C: jnz     short loc_60805F
 0x60800E: mov     eax, [esi]
 0x608010: mov     edx, [eax+170h]
 0x608016: mov     ecx, esi
 0x608018: call    edx
-0x60801A: cmp     eax, [esp+14h+arg_0]
+0x60801A: cmp     eax, [esp+14h+baseForm]
 0x60801E: jnz     short loc_60805F
-0x608020: cmp     [esp+14h+arg_10], 0
+0x608020: cmp     [esp+14h+requireInventoryTransfer], 0
 0x608025: jz      short loc_608030
-0x608027: cmp     byte ptr [esi+95h], 0
+0x608027: cmp     byte ptr [esi+95h], 0; If requireInventoryTransfer is true, accept only matching ArrowProjectile byte +0x95 != 0; this proves +0x95 gates cleanup of actor-inventory-transferred projectiles.
 0x60802E: jz      short loc_60805F
-0x608030: cmp     [esp+14h+arg_C], 0
+0x608030: cmp     [esp+14h+destroyImmediately], 0
 0x608035: jz      short loc_608046
 0x608037: mov     eax, [esi]
 0x608039: mov     edx, [eax+10h]
@@ -74,10 +74,10 @@
 0x608066: mov     ebx, [esp+14h+var_4]
 0x60806A: jnz     loc_607FC0
 0x608070: push    1; a2
-0x608072: mov     ecx, offset ActorProcessManager_ptr; this
-0x608077: call    sub_673A50
+0x608072: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x608077: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x60807C: mov     ecx, eax; this
-0x60807E: call    sub_7616D0
+0x60807E: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x608083: mov     ebp, eax
 0x608085: test    ebp, ebp
 0x608087: mov     edi, ebp
@@ -87,7 +87,7 @@
 0x608094: jnz     short loc_60809B
 0x608096: cmp     dword ptr [edi], 0
 0x608099: jz      short loc_60811A
-0x60809B: cmp     ebx, [esp+14h+arg_4]
+0x60809B: cmp     ebx, [esp+14h+maximumMatches]
 0x60809F: jge     short loc_60811A
 0x6080A1: mov     eax, [edi]
 0x6080A3: push    0; int
@@ -106,17 +106,17 @@
 0x6080C7: mov     eax, [eax+28h]
 0x6080CA: jmp     short loc_6080CE
 0x6080CC: xor     eax, eax
-0x6080CE: cmp     eax, [esp+14h+arg_8]
+0x6080CE: cmp     eax, [esp+14h+target]
 0x6080D2: jnz     short loc_60810D
 0x6080D4: mov     eax, [esi]
 0x6080D6: mov     edx, [eax+170h]
 0x6080DC: mov     ecx, esi
 0x6080DE: call    edx
-0x6080E0: cmp     eax, [esp+14h+arg_0]
+0x6080E0: cmp     eax, [esp+14h+baseForm]
 0x6080E4: jnz     short loc_60810D
-0x6080E6: cmp     [esp+14h+arg_10], 0
+0x6080E6: cmp     [esp+14h+requireInventoryTransfer], 0
 0x6080EB: jz      short loc_6080F6
-0x6080ED: cmp     byte ptr [esi+95h], 0
+0x6080ED: cmp     byte ptr [esi+95h], 0; Second ActorProcessManager list applies the same optional ArrowProjectile +0x95 transfer-marker filter before immediate destruction.
 0x6080F4: jz      short loc_60810D
 0x6080F6: mov     eax, [esi]
 0x6080F8: mov     edx, [eax+10h]

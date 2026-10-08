@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x53791A",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x537925",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x537A25",
-    "line": "mov     ecx, offset unk_B37B48",
+    "line": "mov     ecx, 0B37B48h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x537A65",
-    "line": "mov     ecx, offset fSplashScale3",
+    "line": "mov     ecx, 0B37B50h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x537A94",
-    "line": "fstp    [esp+48h+var_44]; float",
+    "line": "fstp    [esp+48h+scale]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x537A9C",
-    "line": "fstp    dword ptr [esp+48h+var_4C+4]; float",
+    "line": "fstp    [esp+48h+unknownChildName+4]; localPosZ",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x537AC4",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x537AD7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x537AF1",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x537B17",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x537B34",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x537B3B",
-    "line": "call    sub_441800",
+    "line": "call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x537B6A",
-    "line": "push    1; float",
+    "line": "push    1; useCachedClone",
     "mnemonic": "push",
     "size": 2
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x537B6F",
-    "line": "fstp    [esp+50h+var_44]; float",
+    "line": "fstp    [esp+50h+scale]; scale",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1297,13 +1297,13 @@
   },
   {
     "ea": "0x537BA5",
-    "line": "push    edx; float",
+    "line": "push    edx; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x537BA6",
-    "line": "push    edi; int",
+    "line": "push    edi; parentNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -1327,31 +1327,31 @@
   },
   {
     "ea": "0x537BB1",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x537BB4",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x537BB9",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x537BBA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x537BBC",
-    "line": "call    sub_5713F0",
+    "line": "call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,13 +1369,13 @@
   },
   {
     "ea": "0x537BC5",
-    "line": "push    eax",
+    "line": "push    eax; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x537BC6",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x537BD3",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1504,5 +1504,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B9380",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9383",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B9384",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B9389",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B938A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B938B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B938F",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9392",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9395",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B9397",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B939C",
+    "line": "mov     eax, offset stru_AE3718",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B93A1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

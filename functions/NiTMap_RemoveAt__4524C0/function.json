@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
-  "callers_count": 56,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 80,
+  "chunks": [
+    [
+      "0x4524C0",
+      "0x452569"
+    ]
+  ],
+  "chunks_sha256": "323ff864d03d01432485b9fbf631e28418fdc60dbf684eafd2dc135ae9d73b43",
+  "comment_regular": "\n[2026-10-03 frond clone rollback] Verified thiscall(map,key), AL bool, ret4; unlinks node, virtual+10 clears value, virtual+18 frees node, decrements map+C. For NiCloningProcess map vtablesA3CCB0/A3CCD0, +10 is noop68F970 and +18 returns a raw12byte node to its pool(4B2ED0/4B8400). No NiObject release: values are borrowed pointers/flags. Plugin validates these callbacks, checkpoints nodes before group CopyMembers, restores older values/removes introduced entries before destroying failed clone group.",
+  "comment_repeatable": "MEF PERF 2026-10-02 PASS2: Verified removal searches hash bucket, unlinks matching node, calls virtual clear+10 and release+18, decrements count. Normal drain iterates and removes bucket head; nested lookup/removal does not itself establish quadratic drain work.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-11 lifecycle interceptor invalidates map generation before RemoveAt. Verified drain CALLs45CEAD/45CFF4/4592D8/45D150 all reach this entry. Fast insertion indices cannot retain freed/recycled native nodes across these removals.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiTMap_RemoveAt",
   "end_ea": "0x452569",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiTMap_RemoveAt",
   "segment": ".text",
   "sha256": "323ff864d03d01432485b9fbf631e28418fdc60dbf684eafd2dc135ae9d73b43",
   "size": 169,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4524C0",
+  "total_chunk_size": 169,
   "type": "char __thiscall(_DWORD *this, int)",
   "xrefs_from_count": 88,
   "xrefs_to_count": 80

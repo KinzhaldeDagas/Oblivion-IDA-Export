@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5645F0",
+      "0x564607"
+    ]
+  ],
+  "chunks_sha256": "c7723b31a0652a527eb3b6f99ccbd83183d9e44184034c562e7b23b6d90ab22d",
+  "comment_regular": "\n[2026-10-06 directional billboard] Verified: returns child array element 2 if end>2; constructor 0x5640E0 creates NiBillboardNode there with initial -pi/2 X rotation.\n\nVerified separate billboard parent getter: returns BSTreeNode child slot 2 as NiBillboardNode* when the child count exceeds two. This is the parent container named Billboard, not the stored geometry field at BSTreeNode+0xE8.",
+  "comment_repeatable": "Verified separate billboard parent getter: returns BSTreeNode child slot 2 as NiBillboardNode* when the child count exceeds two. This is the parent container named Billboard, not the stored geometry field at BSTreeNode+0xE8.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5645F0",
+  "display_name": "BSTreeNode_GetBillboardParentNode",
   "end_ea": "0x564607",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5645F0",
+  "name": "BSTreeNode_GetBillboardParentNode",
   "segment": ".text",
   "sha256": "c7723b31a0652a527eb3b6f99ccbd83183d9e44184034c562e7b23b6d90ab22d",
   "size": 23,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5645F0",
-  "type": "int __thiscall(int this)",
+  "total_chunk_size": 23,
+  "type": "NiBillboardNode *__thiscall(BSTreeNode_OblivionLayout_0F0 *this)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 1
 }

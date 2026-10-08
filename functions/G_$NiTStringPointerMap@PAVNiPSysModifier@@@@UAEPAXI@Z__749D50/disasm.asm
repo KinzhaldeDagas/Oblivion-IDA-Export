@@ -4,7 +4,7 @@
 0x749D58: test    [esp+4+arg_0], 1
 0x749D5D: jz      short loc_749D68
 0x749D5F: push    esi
-0x749D60: call    FormHeapFree
+0x749D60: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x749D65: add     esp, 4
 0x749D68: mov     eax, esi
 0x749D6A: pop     esi

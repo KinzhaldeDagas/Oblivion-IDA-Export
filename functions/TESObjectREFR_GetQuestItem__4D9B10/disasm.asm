@@ -1,4 +1,4 @@
-0x4D9B10: push    esi
+0x4D9B10: push    esi; TESObjectREFR_GetQuestItem delegates to base form IsQuestItem. For inventory base forms, checking TESForm::IsQuestItem is sufficient.
 0x4D9B11: mov     esi, ecx
 0x4D9B13: mov     eax, [esi]
 0x4D9B15: mov     edx, [eax+170h]

@@ -2,32 +2,24 @@ BSExtraDataVtbl **__thiscall TESObjectREFR_MoveInitPos(
         TESChildCELL *this,
         BSExtraDataVtbl *a2,
         BSExtraDataVtbl *a3,
-        BSExtraData *a4)
+        BSExtraDataVtbl *a4)
 {
-  int v5; // eax
+  BSExtraDataVtbl **v5; // eax
 
-  if ( Vector3_InitValue_ == *(float *)&a2
-    && *(&Vector3_InitValue_ + 1) == *(float *)&a3
-    && dword_B3F9B0 == *(float *)&a4 )
+  if ( g_zeroNiPoint3.x == *(float *)&a2 && g_zeroNiPoint3.y == *(float *)&a3 && g_zeroNiPoint3.z == *(float *)&a4 ) /*0x4dd1db*/
   {
-    v5 = (*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5D))(this);
-    ExtraDataList_SetStartingPosition(
-      (ExtraDataList *)(this + 0x11),
-      &a2,
-      this,
-      *(BSExtraDataVtbl **)v5,
-      *(BSExtraDataVtbl **)(v5 + 4),
-      *(BSExtraData **)(v5 + 8));
+    v5 = (BSExtraDataVtbl **)(*((int (__thiscall **)(TESChildCELL *))this->vtbl + 0x5D))(this); /*0x4dd206*/
+    ExtraDataList_SetStartingPosition((ExtraDataList *)(this + 0x11), &a2, this, *v5, v5[1], v5[2]); /*0x4dd228*/
   }
   else
   {
-    ExtraDataList_SetStartingPosition((ExtraDataList *)(this + 0x11), &a2, this, a2, a3, a4);
+    ExtraDataList_SetStartingPosition((ExtraDataList *)(this + 0x11), &a2, this, a2, a3, a4); /*0x4dd1fc*/
   }
-  return ExtraDataList_SetStartingRotation(
+  return ExtraDataList_SetStartingRotation( /*0x4dd252*/
            (ExtraDataList *)(this + 0x11),
            &a2,
            this,
            *((BSExtraDataVtbl **)this + 8),
            *((BSExtraDataVtbl **)this + 9),
-           *((BSExtraData **)this + 0xA));
+           *((BSExtraDataVtbl **)this + 0xA));
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x580BA0",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Focused verification: inspected directional candidate loop requires visible !=1 and target==2, rejects disabled xdefault sentinel, and tracks visited tiles to avoid loops. Supports excluding hidden Travel topic when both visible/target=1. Does not establish all NorthernUI/custom controller behavior.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x580BD8",
-    "line": "mov     [esp+24h+var_10], esi",
+    "line": "mov     [esp+24h+resolvedTrait], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,13 +373,13 @@
   },
   {
     "ea": "0x580C5A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x580C5C",
-    "line": "call    sub_5893B0",
+    "line": "call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x580D16",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x580D84",
-    "line": "mov     [esp+28h+a3], 0FFDh",
+    "line": "mov     [esp+28h+a3], 0FFDh; Verified LB routing: internal button code15 maps to trait0xFFD (xbuttonlb). This is LB shoulder button, distinct from LT code13/trait0xFFB.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -985,19 +985,19 @@
   },
   {
     "ea": "0x580DAF",
-    "line": "mov     esi, [esp+28h+var_10]",
+    "line": "mov     esi, [esp+28h+resolvedTrait]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x580DB3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x580DB5",
-    "line": "call    sub_5893B0",
+    "line": "call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,31 +1087,31 @@
   },
   {
     "ea": "0x580DDB",
-    "line": "lea     eax, [esp+28h+var_10]",
+    "line": "lea     eax, [esp+28h+resolvedTrait]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x580DDF",
-    "line": "push    eax",
+    "line": "push    eax; resolvedTrait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x580DE0",
-    "line": "push    ecx",
+    "line": "push    ecx; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x580DE1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x580DE3",
-    "line": "call    sub_58E3B0",
+    "line": "call    Tile__ResolveNavigationTrait; Verified root-binding reachability: starts at visible focus candidate, ResolveNavigationTrait climbs ancestors when trait absent. A root xbuttonlb reference can route LB while a descendant topic is focused, unless a nearer binding overrides it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,31 +1177,31 @@
   },
   {
     "ea": "0x580DFF",
-    "line": "lea     edx, [esp+28h+var_10]",
+    "line": "lea     edx, [esp+28h+resolvedTrait]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x580E03",
-    "line": "push    edx",
+    "line": "push    edx; resolvedTrait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x580E04",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x580E05",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x580E07",
-    "line": "call    sub_58E3B0",
+    "line": "call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,13 +1261,13 @@
   },
   {
     "ea": "0x580E26",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x580E28",
-    "line": "call    sub_5893B0",
+    "line": "call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x580E35",
-    "line": "push    0FC9h",
+    "line": "push    0FC9h; Verified activation gate: resolved control must have target trait 0xFC9 ==2 before click/mousedown dispatch. Thus hidden travel with target=1 is blocked in this path regardless of delayed render cull state.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x580E52",
-    "line": "mov     eax, [esp+28h+var_10]",
+    "line": "mov     eax, [esp+28h+resolvedTrait]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x580E7F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,19 +1471,19 @@
   },
   {
     "ea": "0x580EAE",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x580EB1",
-    "line": "push    0FE3h; a2",
+    "line": "push    0FE3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x580EB6",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,13 +1501,13 @@
   },
   {
     "ea": "0x580EBE",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x580EC1",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x580EC8",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,13 +1537,13 @@
   },
   {
     "ea": "0x580ED0",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x580ED3",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x580EDA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x580EE8",
-    "line": "push    esi",
+    "line": "push    esi; Verified click argument divergence: EDI=resolved binding target, ESI=original focus candidate. Push ESI here supplies Tile* argument; ID is read from EDI at 0x580EF7; call at 0x580F08 uses resolved target owning Menu. Do not assume clickedTile matches ID for this path.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x580EFC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,13 +1639,13 @@
   },
   {
     "ea": "0x580F08",
-    "line": "call    edx",
+    "line": "call    edx; Silt Strider LB: root ref can yield ID48 with another topic as Tile* parameter. Plugin ID48 branch correctly ignores passed Tile* and resolves g_routedTravelTopicId itself before calling original DoClick. This verifies native path only; NorthernUI interception/runtime input remains untested.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x580F0A",
-    "line": "cmp     [esp+28h+var_10], 0FDFh",
+    "line": "cmp     [esp+28h+resolvedTrait], 0FDFh",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x580F29",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x580F32",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x580F4A",
-    "line": "push    0FC9h",
+    "line": "push    0FC9h; Verified code-9 fallback activation gate: requires current candidate target==2. Setting target=1 blocks this fallback even if stale focus still refers to the hidden topic.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x580F73",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,19 +1903,19 @@
   },
   {
     "ea": "0x580FA2",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x580FA5",
-    "line": "push    0FE3h; a2",
+    "line": "push    0FE3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x580FAA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,13 +1933,13 @@
   },
   {
     "ea": "0x580FB2",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x580FB5",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x580FBC",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,13 +1969,13 @@
   },
   {
     "ea": "0x580FC4",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x580FC7",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x580FCE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x580FEE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x581000",
-    "line": "call    nullsub_returnvVoid_1arg",
+    "line": "call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x581068",
-    "line": "mov     [esp+28h+var_C], esi",
+    "line": "mov     [esp+28h+maxFocus], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2263,37 +2263,37 @@
   },
   {
     "ea": "0x581072",
-    "line": "push    esi",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x581073",
-    "line": "lea     ecx, [esp+2Ch+var_C]",
+    "line": "lea     ecx, [esp+2Ch+maxFocus]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x581077",
-    "line": "push    ecx",
+    "line": "push    ecx; maxFocus",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x581078",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58107A",
-    "line": "mov     [esp+30h+var_C], 80000000h",
+    "line": "mov     [esp+30h+maxFocus], 80000000h",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x581082",
-    "line": "call    sub_57DA90",
+    "line": "call    InterfaceManager__ScanForMaxFocus; AchievementsNative evidence: default UI hit-test recursively scans visible/non-hidden target tiles, chooses highest depth, and tie-breaks list items by lower listindex; use active/mouseover tile evidence before cursor-sprite coordinate fallbacks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x581093",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x5810A4",
-    "line": "mov     ecx, [esp+28h+var_10]",
+    "line": "mov     ecx, [esp+28h+resolvedTrait]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2365,19 +2365,19 @@
   },
   {
     "ea": "0x5810AC",
-    "line": "push    edx",
+    "line": "push    edx; resolvedTrait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5810AD",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5810AE",
-    "line": "call    sub_58E3B0",
+    "line": "call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x5810C9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2503,19 +2503,19 @@
   },
   {
     "ea": "0x5810F8",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5810FB",
-    "line": "push    0FE3h; a2",
+    "line": "push    0FE3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x581100",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,13 +2533,13 @@
   },
   {
     "ea": "0x581108",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58110B",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x581112",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,13 +2569,13 @@
   },
   {
     "ea": "0x58111A",
-    "line": "fstp    [esp+2Ch+var_2C]; a3",
+    "line": "fstp    [esp+2Ch+var_2C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x58111D",
-    "line": "push    0FE1h; a2",
+    "line": "push    0FE1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -2587,7 +2587,7 @@
   },
   {
     "ea": "0x581124",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2629,7 +2629,7 @@
   },
   {
     "ea": "0x58113B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2707,25 +2707,25 @@
   },
   {
     "ea": "0x581159",
-    "line": "push    eax",
+    "line": "push    eax; resolvedTrait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58115A",
-    "line": "push    ecx",
+    "line": "push    ecx; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58115B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58115D",
-    "line": "call    sub_58E3B0",
+    "line": "call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2755,13 +2755,13 @@
   },
   {
     "ea": "0x58116B",
-    "line": "mov     [esp+2Ch+var_8], ebx",
+    "line": "mov     [esp+2Ch+var_8.firstNode.data], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58116F",
-    "line": "mov     [esp+2Ch+var_4], ebx",
+    "line": "mov     [esp+2Ch+var_8.firstNode.next], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3025,7 +3025,7 @@
   },
   {
     "ea": "0x58120C",
-    "line": "mov     [esp+28h+var_10], ebx",
+    "line": "mov     [esp+28h+resolvedTrait], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3055,13 +3055,13 @@
   },
   {
     "ea": "0x58121B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58121D",
-    "line": "call    sub_5893B0",
+    "line": "call    Tile__IsVisible; AchievementsNative evidence: target eligibility helper returns true when the tile and ancestors are not suppressed by the observed flag path; inventory hover uses it before accepting header/item targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3127,7 +3127,7 @@
   },
   {
     "ea": "0x581242",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x58124D",
-    "line": "mov     [esp+28h+var_10], esi",
+    "line": "mov     [esp+28h+resolvedTrait], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3169,7 +3169,7 @@
   },
   {
     "ea": "0x581255",
-    "line": "cmp     [esp+28h+var_10], ebp",
+    "line": "cmp     [esp+28h+resolvedTrait], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -3181,7 +3181,7 @@
   },
   {
     "ea": "0x58125B",
-    "line": "mov     edi, [esp+28h+var_10]",
+    "line": "mov     edi, [esp+28h+resolvedTrait]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3235,25 +3235,25 @@
   },
   {
     "ea": "0x581275",
-    "line": "push    ecx",
+    "line": "push    ecx; resolvedTrait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x581276",
-    "line": "push    edx",
+    "line": "push    edx; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x581277",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x581279",
-    "line": "call    sub_58E3B0",
+    "line": "call    Tile__ResolveNavigationTrait; AchievementsNative evidence: navigation trait resolver handles prev/next/xlist cases by listindex and target eligibility; use for inventory-style row navigation semantics, not as proof of mouse wheel dispatch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3295,19 +3295,19 @@
   },
   {
     "ea": "0x58128E",
-    "line": "push    edi",
+    "line": "push    edi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58128F",
-    "line": "lea     ecx, [esp+2Ch+var_8]",
+    "line": "lea     ecx, [esp+2Ch+var_8]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x581293",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3463,7 +3463,7 @@
   },
   {
     "ea": "0x5812ED",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3481,7 +3481,7 @@
   },
   {
     "ea": "0x5812F6",
-    "line": "cmp     edi, [esp+28h+var_C]",
+    "line": "cmp     edi, [esp+28h+maxFocus]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -3607,7 +3607,7 @@
   },
   {
     "ea": "0x58133A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3655,7 +3655,7 @@
   },
   {
     "ea": "0x581351",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3709,7 +3709,7 @@
   },
   {
     "ea": "0x581368",
-    "line": "mov     edx, [esp+28h+var_C]",
+    "line": "mov     edx, [esp+28h+maxFocus]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3739,7 +3739,7 @@
   },
   {
     "ea": "0x581373",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },

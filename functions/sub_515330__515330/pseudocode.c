@@ -19,7 +19,7 @@ char __cdecl sub_515330(
   NiPointerList_Node_BSImageSpaceShader *v16; // ecx
   int v17; // eax
   volatile LONG *v18; // esi
-  int v19; // eax
+  NiRTTI *v19; // eax
   char v20; // al
   int v21; // ebx
   NiPointerList_Node_BSImageSpaceShader *start; // ebp
@@ -51,248 +51,248 @@ char __cdecl sub_515330(
   UInt16 v49[256]; // [esp+258h] [ebp-210h] BYREF
   unsigned int v50; // [esp+464h] [ebp-4h]
 
-  a3 = a8;
-  if ( Script_ExtractArgs(a1, a2, a8, a4, argC, a5, l, v49) )
+  a3 = a8; /*0x51539c*/
+  if ( Script_ExtractArgs(a1, a2, a8, a4, argC, a5, l, v49) ) /*0x5153b3*/
   {
-    switch ( LOBYTE(v49[0]) )
+    switch ( LOBYTE(v49[0]) ) /*0x5153d7*/
     {
-      case 'c':
-        v38 = 3;
+      case 'c': /*0x5153d7*/
+        v38 = 3; /*0x5153fb*/
         break;
-      case 'f':
-        v38 = 1;
+      case 'f': /*0x5153d7*/
+        v38 = 1; /*0x5153f1*/
         break;
-      case 's':
-        v38 = 2;
+      case 's': /*0x5153d7*/
+        v38 = 2; /*0x5153e7*/
         break;
       default:
-        v38 = 0;
+        v38 = 0; /*0x5153e1*/
         break;
     }
   }
   else
   {
-    LOBYTE(v49[0]) = 0;
-    v38 = 0;
+    LOBYTE(v49[0]) = 0; /*0x5153c1*/
+    v38 = 0; /*0x5153c8*/
   }
-  v41 = bDisableWarning_MESSAGES;
-  bDisableWarning_MESSAGES = 1;
-  PrintError("<<< DUMPTEXTUREPALETTE results");
-  v8 = dword_B3FAB8 + dword_B42054;
-  v48[0] = 0;
-  if ( (unsigned int)v8 < 0x100000 )
+  v41 = bDisableWarning_MESSAGES; /*0x51540d*/
+  bDisableWarning_MESSAGES = 1; /*0x515411*/
+  PrintError("<<< DUMPTEXTUREPALETTE results"); /*0x515418*/
+  v8 = unk_B3FAB8 + unk_B42054; /*0x515429*/
+  v48[0] = 0; /*0x515434*/
+  if ( (unsigned int)v8 < 0x100000 ) /*0x51543c*/
   {
-    if ( (unsigned int)v8 < 0x400 )
+    if ( (unsigned int)v8 < 0x400 ) /*0x515478*/
     {
-      _sprintf(v48, "%i b", v8);
+      _sprintf(v48, "%i b", v8); /*0x5154bd*/
     }
     else
     {
-      v42 = (NiPointerList_Node_BSImageSpaceShader *)v8;
-      _sprintf(v48, "%.2f Kb", (double)v8 * dbl_A30550);
+      v42 = (NiPointerList_Node_BSImageSpaceShader *)v8; /*0x51547c*/
+      _sprintf(v48, "%.2f Kb", (double)v8 * dbl_A30550); /*0x5154a5*/
     }
   }
   else
   {
-    v42 = (NiPointerList_Node_BSImageSpaceShader *)v8;
-    v9 = (double)v8;
-    if ( v8 < 0 )
-      v9 = v9 + flt_A2FC78;
-    _sprintf(v48, "%.2f Mb", v9 * dbl_A30530);
+    v42 = (NiPointerList_Node_BSImageSpaceShader *)v8; /*0x515440*/
+    v9 = (double)v8; /*0x515444*/
+    if ( v8 < 0 ) /*0x515448*/
+      v9 = v9 + flt_A2FC78; /*0x51544a*/
+    _sprintf(v48, "%.2f Mb", v9 * dbl_A30530); /*0x515469*/
   }
-  PrintError("Textures in Palette : %d : %s", *(_DWORD *)(*(_DWORD *)(dword_B35300 + 0xC) + 0xC), v48);
-  v43 = 0;
-  v10 = *(_DWORD *)(dword_B35300 + 0xC);
-  v11 = *(_DWORD *)(v10 + 4);
-  v12 = 0;
-  v50 = 0;
-  if ( v11 )
+  PrintError("Textures in Palette : %d : %s", *(_DWORD *)(*(_DWORD *)(unk_B35300 + 0xC) + 0xC), v48);
+  v43 = 0; /*0x5154e6*/
+  v10 = *(_DWORD *)(unk_B35300 + 0xC); /*0x5154ef*/
+  v11 = *(_DWORD *)(v10 + 4); /*0x5154f2*/
+  v12 = 0; /*0x5154f5*/
+  v50 = 0; /*0x5154f9*/
+  if ( v11 ) /*0x515500*/
   {
-    v13 = *(_DWORD **)(v10 + 8);
-    v14 = v13;
-    while ( !*v14 )
+    v13 = *(_DWORD **)(v10 + 8); /*0x515502*/
+    v14 = v13; /*0x515505*/
+    while ( !*v14 ) /*0x515509*/
     {
-      ++v12;
-      ++v14;
-      if ( v12 >= v11 )
-        goto LABEL_21;
+      ++v12; /*0x51550f*/
+      ++v14; /*0x515512*/
+      if ( v12 >= v11 ) /*0x515517*/
+        goto LABEL_21; /*0x515517*/
     }
-    v15 = (UInt32 *)v13[v12];
+    v15 = (UInt32 *)v13[v12]; /*0x515660*/
   }
   else
   {
 LABEL_21:
-    v15 = 0;
+    v15 = 0; /*0x515519*/
   }
-  v16 = 0;
-  a3 = v15;
-  v47[0].numItems = 0;
-  v47[0].start = 0;
-  v47[0].end = 0;
-  v47[0].__vftable = (NiTPointerList_BSImageSpaceshaderVtbl *)&NiTPointerList<NiPointer<NiSourceTexture>>::`vftable';
-  LOBYTE(v50) = 1;
+  v16 = 0; /*0x51551b*/
+  a3 = v15; /*0x51551d*/
+  v47[0].numItems = 0; /*0x515521*/
+  v47[0].start = 0; /*0x515525*/
+  v47[0].end = 0; /*0x515529*/
+  v47[0].__vftable = (NiTPointerList_BSImageSpaceshaderVtbl *)&NiTPointerList<NiPointer<NiSourceTexture>>::`vftable'; /*0x51552d*/
+  LOBYTE(v50) = 1; /*0x515537*/
   if ( v15 )
   {
     do
     {
-      sub_7B2600(*(_DWORD **)(dword_B35300 + 0xC), &a3, &v42, (unsigned int *)&v43);
+      sub_7B2600(*(unsigned int ***)(unk_B35300 + 0xC), &a3, &v42, (unsigned int *)&v43); /*0x51555d*/
       if ( v43 )
       {
-        v17 = *((_DWORD *)v43 + 1);
+        v17 = *((_DWORD *)v43 + 1); /*0x515571*/
         if ( v17 )
         {
           if ( v17 != 2 )
           {
-            v18 = v43;
-            v19 = (*(int (__thiscall **)(volatile LONG *))(*v43 + 4))(v43);
-            if ( v19 )
+            v18 = v43; /*0x515585*/
+            v19 = (NiRTTI *)(*(int (__thiscall **)(volatile LONG *))(*v43 + 4))(v43); /*0x51558e*/
+            if ( v19 ) /*0x515592*/
             {
-              while ( (char *)v19 != dword_B3F95C )
+              while ( v19 != &stru_B3F95C ) /*0x515599*/
               {
-                v19 = *(_DWORD *)(v19 + 4);
-                if ( !v19 )
-                  goto LABEL_29;
+                v19 = v19->parent; /*0x51559f*/
+                if ( !v19 ) /*0x5155a4*/
+                  goto LABEL_29; /*0x5155a4*/
               }
-              v20 = 1;
+              v20 = 1; /*0x515668*/
             }
             else
             {
 LABEL_29:
-              v20 = 0;
+              v20 = 0; /*0x5155a6*/
             }
             v21 = v20 != 0 ? (unsigned int)v18 : 0;
-            v45 = v21;
-            if ( v21 )
-              InterlockedIncrement((volatile LONG *)(v21 + 4));
-            start = v47[0].start;
-            v23 = 0;
-            v46 = *(_DWORD *)(*(_DWORD *)(v21 + 0x24) + 0x60);
-            v47[0].unk10 = 0;
-            LOBYTE(v50) = 3;
-            if ( v38 > 0 )
+            v45 = v21; /*0x5155b0*/
+            if ( v21 ) /*0x5155b4*/
+              InterlockedIncrement((volatile LONG *)(v21 + 4)); /*0x5155ba*/
+            start = v47[0].start; /*0x5155c6*/
+            v23 = 0; /*0x5155ca*/
+            v46 = *(_DWORD *)(*(_DWORD *)(v21 + 0x24) + 0x60); /*0x5155cc*/
+            v47[0].unk10 = 0; /*0x5155d0*/
+            LOBYTE(v50) = 3; /*0x5155d8*/
+            if ( v38 > 0 ) /*0x5155e0*/
             {
-              while ( start )
+              while ( start ) /*0x5155e6*/
               {
-                v24 = v23 == (NiGeometry *)start->data;
-                p_data = (NiGeometry **)&start->data;
-                v42 = start;
-                start = start->next;
-                if ( v24 )
+                v24 = v23 == (NiGeometry *)start->data; /*0x5155ee*/
+                p_data = (NiGeometry **)&start->data; /*0x5155f1*/
+                v42 = start; /*0x5155f4*/
+                start = start->next; /*0x5155f8*/
+                if ( v24 ) /*0x5155fb*/
                 {
 LABEL_40:
-                  if ( v23 )
+                  if ( v23 ) /*0x51562f*/
                   {
-                    if ( v38 == 1 )
+                    if ( v38 == 1 ) /*0x515638*/
                     {
-                      if ( strcmp(
+                      if ( strcmp( /*0x515676*/
                              *(const char **)(v21 + 0x38),
                              (const char *)LODWORD(v23->member.super.m_localTransform.rot.data[0][2])) <= 0 )
-                        goto LABEL_51;
+                        goto LABEL_51; /*0x515676*/
                     }
                     else
                     {
-                      if ( v38 == 2 )
-                        v26 = v46 <= *(_DWORD *)(LODWORD(v23->member.super.m_kWorldBound.Center.y) + 0x60);
+                      if ( v38 == 2 ) /*0x515681*/
+                        v26 = v46 <= *(_DWORD *)(LODWORD(v23->member.super.m_kWorldBound.Center.y) + 0x60); /*0x51568a*/
                       else
-                        v26 = *(_DWORD *)(v21 + 4) <= v23->member.super.super.super.m_uiRefCount;
-                      if ( v26 )
+                        v26 = *(_DWORD *)(v21 + 4) <= v23->member.super.super.super.m_uiRefCount; /*0x51569b*/
+                      if ( v26 ) /*0x51569e*/
                       {
 LABEL_51:
-                        if ( !v42 )
-                          break;
-                        sub_7C6A20(v47, (int)v42, &v45);
-                        goto LABEL_54;
+                        if ( !v42 ) /*0x5156aa*/
+                          break; /*0x5156aa*/
+                        NiTRefPointerList_InsertBeforePosition(v47, (int)v42, &v45); /*0x5156b6*/
+                        goto LABEL_54; /*0x5156bb*/
                       }
                     }
                   }
                 }
                 else
                 {
-                  if ( v23 )
+                  if ( v23 ) /*0x5155ff*/
                   {
-                    if ( !InterlockedDecrement((volatile LONG *)&v23->member) )
-                      v23->__vftable->super.super.super.Destructor((NiRefObject *)v23, 1);
+                    if ( !InterlockedDecrement((volatile LONG *)&v23->member) ) /*0x515605*/
+                      v23->__vftable->super.super.super.Destructor((NiRefObject *)v23, 1); /*0x515617*/
                   }
-                  v23 = *p_data;
-                  v47[0].unk10 = *p_data;
-                  if ( v47[0].unk10 )
+                  v23 = *p_data; /*0x515619*/
+                  v47[0].unk10 = *p_data; /*0x51561d*/
+                  if ( v47[0].unk10 ) /*0x515621*/
                   {
-                    InterlockedIncrement((volatile LONG *)&v23->member);
-                    goto LABEL_40;
+                    InterlockedIncrement((volatile LONG *)&v23->member); /*0x515627*/
+                    goto LABEL_40; /*0x515627*/
                   }
                 }
               }
             }
-            sub_7C16B0(v47, &v45);
+            NiTRefPointerList__AddTail(v47, &v45); /*0x5156bd*/
 LABEL_54:
-            LOBYTE(v50) = 2;
-            if ( v23 )
+            LOBYTE(v50) = 2; /*0x5156cb*/
+            if ( v23 ) /*0x5156d5*/
             {
-              if ( !InterlockedDecrement((volatile LONG *)&v23->member) )
-                v23->__vftable->super.super.super.Destructor((NiRefObject *)v23, 1);
+              if ( !InterlockedDecrement((volatile LONG *)&v23->member) ) /*0x5156db*/
+                v23->__vftable->super.super.super.Destructor((NiRefObject *)v23, 1); /*0x5156ed*/
             }
-            LOBYTE(v50) = 1;
-            if ( !InterlockedDecrement((volatile LONG *)(v21 + 4)) )
-              (**(void (__thiscall ***)(int, int))v21)(v21, 1);
+            LOBYTE(v50) = 1; /*0x5156f3*/
+            if ( !InterlockedDecrement((volatile LONG *)(v21 + 4)) ) /*0x5156fb*/
+              (**(void (__thiscall ***)(int, int))v21)(v21, 1); /*0x51570d*/
           }
         }
       }
     }
     while ( a3 );
-    v16 = v47[0].start;
+    v16 = v47[0].start; /*0x51571a*/
   }
-  v27 = 0;
-  v28 = v16;
-  v42 = 0;
-  LOBYTE(v50) = 4;
+  v27 = 0; /*0x51571e*/
+  v28 = v16; /*0x515720*/
+  v42 = 0; /*0x515722*/
+  LOBYTE(v50) = 4; /*0x515728*/
   if ( v16 )
   {
-    v29 = v38;
+    v29 = v38; /*0x515736*/
     do
     {
-      v24 = (BSImageSpaceShader *)v27 == v28->data;
-      v30 = (int *)&v28->data;
-      v28 = v28->next;
-      if ( !v24 )
+      v24 = (BSImageSpaceShader *)v27 == v28->data; /*0x51573a*/
+      v30 = (int *)&v28->data; /*0x51573d*/
+      v28 = v28->next; /*0x515740*/
+      if ( !v24 ) /*0x515743*/
       {
-        if ( v27 )
+        if ( v27 ) /*0x515747*/
         {
-          if ( !InterlockedDecrement((volatile LONG *)(v27 + 4)) )
-            (**(void (__thiscall ***)(int, int))v27)(v27, 1);
+          if ( !InterlockedDecrement((volatile LONG *)(v27 + 4)) ) /*0x51574d*/
+            (**(void (__thiscall ***)(int, int))v27)(v27, 1); /*0x51575f*/
         }
-        v27 = *v30;
-        v42 = (NiPointerList_Node_BSImageSpaceShader *)*v30;
-        if ( !v42 )
-          continue;
-        InterlockedIncrement((volatile LONG *)(v27 + 4));
+        v27 = *v30; /*0x515761*/
+        v42 = (NiPointerList_Node_BSImageSpaceShader *)*v30; /*0x515765*/
+        if ( !v42 ) /*0x515769*/
+          continue; /*0x515769*/
+        InterlockedIncrement((volatile LONG *)(v27 + 4)); /*0x515773*/
       }
       if ( v27 )
       {
-        LOBYTE(v47[0].renderTarget) = 0;
-        v31 = *(_DWORD *)(*(_DWORD *)(v27 + 0x24) + 0x60);
-        v32 = (double)v31;
-        if ( v31 < 0 )
-          v32 = v32 + flt_A2FC78;
-        v39 = v32;
-        v33 = flt_A3F514;
-        if ( v39 < v33 )
+        LOBYTE(v47[0].renderTarget) = 0; /*0x515781*/
+        v31 = *(_DWORD *)(*(_DWORD *)(v27 + 0x24) + 0x60); /*0x515789*/
+        v32 = (double)v31; /*0x51578c*/
+        if ( v31 < 0 ) /*0x515791*/
+          v32 = v32 + flt_A2FC78; /*0x515793*/
+        v39 = v32; /*0x515799*/
+        v33 = flt_A3F514; /*0x5157a0*/
+        if ( v39 < v33 ) /*0x5157b1*/
         {
-          _sprintf((char *)&v47[0].renderTarget, "%.2f b", v39);
+          _sprintf((char *)&v47[0].renderTarget, "%.2f b", v39); /*0x515801*/
         }
         else
         {
-          v40 = v39 * dbl_A30550;
-          if ( v40 < v33 )
+          v40 = v39 * dbl_A30550; /*0x5157bd*/
+          if ( v40 < v33 ) /*0x5157ce*/
           {
-            v37 = v40;
-            v36 = "%.2f Kb";
+            v37 = v40; /*0x5157e7*/
+            v36 = "%.2f Kb"; /*0x5157ea*/
           }
           else
           {
-            v37 = v40 * dbl_A30550;
-            v36 = "%.2f Mb";
+            v37 = v40 * dbl_A30550; /*0x5157d6*/
+            v36 = "%.2f Mb"; /*0x5157d9*/
           }
-          _sprintf((char *)&v47[0].renderTarget, v36, v37);
+          _sprintf((char *)&v47[0].renderTarget, v36, v37); /*0x5157df*/
         }
         if ( v29 == 2 )
         {
@@ -310,23 +310,23 @@ LABEL_54:
     }
     while ( v28 );
   }
-  NiTPointerList::FreeAllNodes(v47);
-  PrintError(">>> DUMPTEXTUREPALETTE results");
-  bDisableWarning_MESSAGES = v41;
-  LOBYTE(v50) = 1;
-  if ( v27 )
+  NiTPointerList::FreeAllNodes(v47); /*0x515868*/
+  PrintError(">>> DUMPTEXTUREPALETTE results"); /*0x515876*/
+  bDisableWarning_MESSAGES = v41; /*0x515884*/
+  LOBYTE(v50) = 1; /*0x51588a*/
+  if ( v27 ) /*0x515892*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v27 + 4)) )
-      (**(void (__thiscall ***)(int, int))v27)(v27, 1);
+    if ( !InterlockedDecrement((volatile LONG *)(v27 + 4)) ) /*0x515898*/
+      (**(void (__thiscall ***)(int, int))v27)(v27, 1); /*0x5158aa*/
   }
-  LOBYTE(v50) = 0;
-  NiTPointerList<NiPointer<NiSourceTexture>>::~NiTPointerList<NiPointer<NiSourceTexture>>(v47);
-  v34 = v43;
-  v50 = 0xFFFFFFFF;
-  if ( v43 )
+  LOBYTE(v50) = 0; /*0x5158b0*/
+  NiTPointerList<NiPointer<NiSourceTexture>>::~NiTPointerList<NiPointer<NiSourceTexture>>(v47); /*0x5158b8*/
+  v34 = v43; /*0x5158bd*/
+  v50 = 0xFFFFFFFF; /*0x5158c3*/
+  if ( v43 ) /*0x5158ce*/
   {
-    if ( !InterlockedDecrement(v43 + 1) )
-      (**(void (__thiscall ***)(volatile LONG *, int))v34)(v34, 1);
+    if ( !InterlockedDecrement(v43 + 1) ) /*0x5158d4*/
+      (**(void (__thiscall ***)(volatile LONG *, int))v34)(v34, 1); /*0x5158e6*/
   }
-  return 1;
+  return 1; /*0x5158ea*/
 }

@@ -1,1 +1,4 @@
-tListVoid
+struct tListVoid
+{
+NodeVoid node;
+};

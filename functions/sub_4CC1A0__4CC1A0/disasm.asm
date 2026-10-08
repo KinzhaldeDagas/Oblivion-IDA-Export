@@ -37,12 +37,12 @@
 0x4CC214: fstp    st
 0x4CC216: mov     [esp+20h+var_10], edx
 0x4CC21A: jmp     loc_4CC315
-0x4CC21F: mov     ecx, [esp+20h+arg_4]
+0x4CC21F: mov     ecx, [esp+20h+dataID]
 0x4CC223: fstp    [esp+20h+var_C]
 0x4CC227: mov     eax, [eax+18h]
-0x4CC22A: push    ecx
-0x4CC22B: mov     ecx, eax
-0x4CC22D: call    sub_4A4460
+0x4CC22A: push    ecx; dataID
+0x4CC22B: mov     ecx, eax; dataList
+0x4CC22D: call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
 0x4CC232: mov     esi, eax
 0x4CC234: test    esi, esi
 0x4CC236: jz      loc_4CC30E

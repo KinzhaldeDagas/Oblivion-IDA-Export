@@ -73,7 +73,6 @@
 0x431257: mov     eax, esi
 0x431259: mov     ecx, esi
 0x43125B: jmp     short loc_431260
-0x43125D: align 10h
 0x431260: mov     dl, [eax]
 0x431262: add     eax, 1
 0x431265: test    dl, dl

@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "thunk",
+  "definition": "struct __unaligned __declspec(align(1)) thunk\n{\nBYTE mov_r10[3];\nDWORD index;\nBYTE mov_rax[2];\nvoid *call_stubless;\nBYTE jmp_rax[2];\n}\n",
   "id": 18374686479672032038,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mov_r10",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 3
+      "size": 3,
+      "type": "BYTE[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "index",
       "offset": 3,
       "offset_hex": "0x3",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mov_rax",
       "offset": 7,
       "offset_hex": "0x7",
-      "size": 2
+      "size": 2,
+      "type": "BYTE[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "call_stubless",
       "offset": 9,
       "offset_hex": "0x9",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "jmp_rax",
       "offset": 13,
-      "offset_hex": "0xd",
-      "size": 2
+      "offset_hex": "0xD",
+      "size": 2,
+      "type": "BYTE[2]"
     }
   ],
   "name": "thunk",
+  "ordinal": 3005,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 15
 }

@@ -1,11 +1,11 @@
-0x476080: sub     esp, 110h
+0x476080: sub     esp, 110h; Actor-base KFFZ loader. Iterates TESAnimation_AnimationNode entries, constructs <model-dir>\SpecialAnims\<entry>, loads each KF synchronously, and installs/defer-installs it into this ActorAnimData. Full direct-xref audit found only the creature and NPC branches in Actor_SetupAnimationData; no direct first-person KFFZ load site.
 0x476086: mov     eax, ds:0B30AACh
 0x47608B: xor     eax, esp
 0x47608D: mov     [esp+110h+var_4], eax
-0x476094: mov     eax, [esp+110h+arg_0]
+0x476094: mov     eax, [esp+110h+kffzEntries]
 0x47609B: test    eax, eax
 0x47609D: push    ebx
-0x47609E: mov     ebx, [esp+114h+arg_4]
+0x47609E: mov     ebx, [esp+114h+modelDirectory]
 0x4760A5: push    esi
 0x4760A6: mov     esi, ecx
 0x4760A8: mov     [esp+118h+var_10C], esi
@@ -25,27 +25,27 @@
 0x4760D5: add     esp, 14h
 0x4760D8: lea     edx, [esp+120h+ArgList]
 0x4760DC: push    edx
-0x4760DD: call    sub_439FF0
-0x4760E2: mov     ecx, ds:0B333C4h
+0x4760DD: call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.
+0x4760E2: mov     ecx, ds:0B333C4h; this
 0x4760E8: test    ecx, ecx
 0x4760EA: mov     edi, eax
 0x4760EC: mov     byte ptr [esp+120h+var_110], 1
 0x4760F1: jz      short loc_476161
-0x4760F3: push    0
-0x4760F5: call    PlayerCharacter_GetPlayerNode
+0x4760F3: push    0; firstPerson
+0x4760F5: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x4760FA: test    eax, eax
 0x4760FC: jz      short loc_476161
 0x4760FE: cmp     dword ptr ds:0B06548h, 0
 0x476105: jz      short loc_476161
-0x476107: mov     ecx, ds:0B333C4h
-0x47610D: push    0
-0x47610F: call    PlayerCharacter_GetPlayerNode
+0x476107: mov     ecx, ds:0B333C4h; this
+0x47610D: push    0; firstPerson
+0x47610F: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x476114: cmp     [esi+4], eax
 0x476117: jz      short loc_476161
-0x476119: mov     ecx, ds:0B333C4h
+0x476119: mov     ecx, ds:0B333C4h; this
 0x47611F: mov     esi, [esi+4]
-0x476122: push    1
-0x476124: call    PlayerCharacter_GetPlayerNode
+0x476122: push    1; firstPerson
+0x476124: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x476129: cmp     esi, eax
 0x47612B: jz      short loc_476161
 0x47612D: mov     eax, ds:0B333C4h
@@ -55,11 +55,11 @@
 0x476140: call    sub_45A500
 0x476145: test    al, al
 0x476147: jnz     short loc_476161
-0x476149: call    InterfaceManager_IsMenuMode
+0x476149: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x47614E: test    al, al
 0x476150: jnz     short loc_476161
 0x476152: mov     ecx, ds:0B333A0h
-0x476158: call    sub_404F20
+0x476158: call    sub_404F20; CustomAnimSupport evidence: global loading/update gate checked by KF install/defer decisions; support condition for SpecialAnims install timing.
 0x47615D: test    al, al
 0x47615F: jz      short loc_476166
 0x476161: mov     byte ptr [esp+120h+var_110], 0
@@ -70,7 +70,7 @@
 0x476172: push    ecx
 0x476173: push    edi
 0x476174: mov     ecx, esi; this
-0x476176: call    ??0AnimSequenceSingle@@QAE@XZ; AnimSequenceSingle::AnimSequenceSingle(void)
+0x476176: call    ActorAnimData_InstallKFModel; CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.
 0x47617B: jmp     short loc_476193
 0x47617D: lea     edx, [esp+120h+ArgList]
 0x476181: push    edx; ArgList

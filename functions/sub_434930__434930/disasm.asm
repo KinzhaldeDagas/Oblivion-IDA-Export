@@ -4,7 +4,7 @@
 0x434933: mov     edi, ecx
 0x434935: mov     eax, [edi+8]
 0x434938: push    eax
-0x434939: call    FormHeapFree
+0x434939: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43493E: mov     ebx, [esp+10h+arg_0]
 0x434942: mov     eax, ebx
 0x434944: add     esp, 4

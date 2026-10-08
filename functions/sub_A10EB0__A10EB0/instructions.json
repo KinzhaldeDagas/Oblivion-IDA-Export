@@ -1,13 +1,13 @@
 [
   {
     "ea": "0xA10EB0",
-    "line": "mov     ecx, offset dword_B430D8",
+    "line": "mov     ecx, offset unk_B430D8; [Verified] Global initialization wrapper calls RendererShaderState_ResetGlobals on unk_B430D8 and registers nullsub_23 with atexit. This confirms the reset is in the renderer/shader static startup path; the owning class name remains Unknown.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA10EB5",
-    "line": "call    sub_7B7250",
+    "line": "call    RendererShaderState_ResetGlobals; [Verified] Static-initialization target called with unk_B430D8 by InitializeRendererShaderStateGlobals. Resets renderer/shader state, clears pass-control bytes +1/+2, sets +3=1, resets shader version to 0, and releases cached renderer objects. [Unknown] The owning C++ class for unk_B430D8 is not identified.",
     "mnemonic": "call",
     "size": 5
   },

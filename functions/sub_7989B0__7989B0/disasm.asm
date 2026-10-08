@@ -1,4 +1,4 @@
-0x7989B0: sub     esp, 9Ch
+0x7989B0: sub     esp, 9Ch; Oblivion CLeafGeometry::Update. Lazily regenerates selected LOD raw card XYZ (and CPU leaf wind when selected), marks the cache valid, then publishes the first 0x3C bytes as leaf output. Camera-angle parameters do not rotate these corners in this body; final pose is shader-side. RT4.1 Update differs.
 0x7989B6: push    ebp
 0x7989B7: push    edi
 0x7989B8: mov     edi, ecx
@@ -6,7 +6,7 @@
 0x7989BD: test    ebp, ebp
 0x7989BF: jz      loc_798CAA
 0x7989C5: push    esi
-0x7989C6: mov     esi, [esp+0A8h+arg_4]
+0x7989C6: mov     esi, dword ptr [esp+0A8h+lodLevel]
 0x7989CD: cmp     si, [edi+28h]
 0x7989D1: jnb     loc_798CA9
 0x7989D7: cmp     dword ptr [edi+10h], 0
@@ -25,31 +25,31 @@
 0x798A0E: mov     ecx, ebx
 0x798A10: shl     ecx, 4
 0x798A13: add     ecx, ebx
-0x798A15: cmp     byte ptr [ebp+ecx*4+3Ch], 0
+0x798A15: cmp     byte ptr [ebp+ecx*4+3Ch], 0; Dirty test for generated leaf-card vertex table at SLodGeometry+0x3C. Regeneration below writes vertex data and sets this byte, but never rewrites +0x0C or +0x10.
 0x798A1A: lea     ebp, [ebp+ecx*4+0]
 0x798A1E: mov     [esp+0ACh+var_28], ebx
 0x798A25: mov     [esp+0ACh+var_5C], ebp
 0x798A29: jnz     loc_798C90
 0x798A2F: cmp     dword ptr [eax+10h], 1
 0x798A33: jnz     short loc_798A3D
-0x798A35: push    esi; float
-0x798A36: mov     ecx, edi
-0x798A38: call    sub_7987D0
+0x798A35: push    esi; lodLevel
+0x798A36: mov     ecx, edi; this
+0x798A38: call    OB_CLeafGeometry_ComputeWindEffect_010201A0; Oblivion CPU leaf wind pass: transforms original leaf centers through one selected 4x4 wind matrix and linearly blends by one per-leaf weight.
 0x798A3D: test    si, si
 0x798A40: fld1
 0x798A42: fstp    [esp+0ACh+var_9C]
 0x798A46: jbe     short loc_798A60
 0x798A48: fild    [esp+0ACh+var_28]
-0x798A4F: fmul    [esp+0ACh+arg_10]
+0x798A4F: fmul    [esp+0ACh+leafSizeIncreaseFactor]
 0x798A56: fadd    qword ptr ds:0A2F928h
 0x798A5C: fstp    [esp+0ACh+var_9C]
-0x798A60: push    offset sub_786E40
+0x798A60: push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.
 0x798A65: push    4
 0x798A67: push    0Ch
 0x798A69: lea     edx, [esp+0B8h+var_8C]
 0x798A6D: push    edx
 0x798A6E: call    sub_401080
-0x798A73: push    offset sub_786E40
+0x798A73: push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.
 0x798A78: push    4
 0x798A7A: push    0Ch
 0x798A7C: lea     eax, [esp+0B8h+var_58]
@@ -208,8 +208,8 @@
 0x798C86: fstp    st(2)
 0x798C88: fstp    st(1)
 0x798C8A: fstp    st
-0x798C8C: mov     byte ptr [ebp+3Ch], 1
-0x798C90: mov     eax, [esp+0ACh+arg_0]
+0x798C8C: mov     byte ptr [ebp+3Ch], 1; Marks only the generated vertex table valid after refresh. Per-card alternate texture indices remain the post-Compute allocation created by InitLods.
+0x798C90: mov     eax, [esp+0ACh+outLeaf]
 0x798C97: mov     ecx, 0Fh
 0x798C9C: mov     esi, ebp
 0x798C9E: mov     edi, eax

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65FF10",
-    "line": "cmp     byte ptr ds:0B3BB06h, 0",
+    "line": "cmp     byte ptr ds:0B3BB06h, 0; PlayerCharacter vtable +0x2C4 override. In god mode returns false without changing the equipped item; otherwise forwards EntryData, float damage, and suppression flag to Actor_DamageEquippedItem.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -25,25 +25,25 @@
   },
   {
     "ea": "0x65FF1E",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, dword ptr [esp+suppressArmorSkillModifiers]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x65FF22",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+damage]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x65FF26",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+entry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x65FF2A",
-    "line": "push    eax; float",
+    "line": "push    eax; suppressArmorSkillModifiers",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x65FF2C",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+var_8]; damage",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x65FF2F",
-    "line": "push    edx; int",
+    "line": "push    edx; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65FF30",
-    "line": "call    Actor_DamageEquippedItem?",
+    "line": "call    Actor_DamageEquippedItem; Actor vtable +0x2C4 durability mutation. Applies positive damage to EntryData health, with optional Heavy/Light armor skill modifiers unless suppressed; updates container extras and handles break/unequip at zero. Returns false while item remains usable and true on terminal/break handling paths.",
     "mnemonic": "call",
     "size": 5
   },

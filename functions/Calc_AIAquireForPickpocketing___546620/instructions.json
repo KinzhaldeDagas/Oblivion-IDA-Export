@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x546620",
-    "line": "fild    [esp+arg_4]",
+    "line": "fild    [esp+arg_4]; RadiantAI 2026-07-12: acquire pickpocket score. Callers pass luck-modified Sneak as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=0, mult=-1 => score = luckModifiedSneak - responsibility.",
     "mnemonic": "fild",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x546634",
-    "line": "jmp     Double_To_SInt32",
+    "line": "jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "jmp",
     "size": 5
   }

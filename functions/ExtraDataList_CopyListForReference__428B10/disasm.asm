@@ -14,7 +14,7 @@
 0x428B2F: mov     large fs:0, eax
 0x428B35: mov     ebx, ecx
 0x428B37: push    offset aExtradatalis_1; lpCriticalSection
-0x428B3C: mov     ecx, offset BSExtraDataCS
+0x428B3C: mov     ecx, 0B33800h
 0x428B41: call    NiEnterCriticalSection
 0x428B46: mov     edi, [esp+24h+arg_0]
 0x428B4A: mov     esi, [edi+4]
@@ -29,7 +29,7 @@
 0x428B71: jmp     ds:jpt_428B71[eax*4]; switch jump
 0x428B78: push    esi; jumptable 00428B71 cases 27,34,39-41,43-47,54,55,72
 0x428B79: mov     ecx, ebx
-0x428B7B: call    ExtraDataList_CopyBSExtraData
+0x428B7B: call    ExtraDataList_CopyBSExtraData; Verified extra-data copy lifecycle for ownership state: the copy dispatcher handles kExtraData_Ownership, kExtraData_Global, and kExtraData_Rank through their typed setters, creating/updating separate ExtraOwnership, ExtraGlobal, and ExtraRank payloads rather than sharing the source node.
 0x428B80: cmp     byte ptr [esp+24h+arg_4], 0
 0x428B85: jz      ExtraDataList_CopyListForReference___def_428B71; jumptable 00428B71 default case, cases 19-26,28-33,35-38,42,48-53,56-71
 0x428B8B: push    1
@@ -43,7 +43,7 @@
 0x428BA7: jz      short loc_428BC5
 0x428BA9: push    esi
 0x428BAA: mov     ecx, ebx
-0x428BAC: call    ExtraDataList_CopyBSExtraData
+0x428BAC: call    ExtraDataList_CopyBSExtraData; Verified extra-data copy lifecycle for ownership state: the copy dispatcher handles kExtraData_Ownership, kExtraData_Global, and kExtraData_Rank through their typed setters, creating/updating separate ExtraOwnership, ExtraGlobal, and ExtraRank payloads rather than sharing the source node.
 0x428BB1: push    0
 0x428BB3: push    esi
 0x428BB4: mov     ecx, edi
@@ -99,7 +99,7 @@
 0x428C47: mov     esi, [esi+8]
 0x428C4A: test    esi, esi
 0x428C4C: jnz     loc_428B55
-0x428C52: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x428C52: mov     ecx, 0B33800h; lpCriticalSection
 0x428C57: call    NiLeaveCriticalSection_0
 0x428C5C: mov     ecx, dword ptr [esp+24h+var_C]
 0x428C60: mov     large fs:0, ecx
@@ -110,3 +110,15 @@
 0x428C6B: pop     ebx
 0x428C6C: add     esp, 10h
 0x428C6F: retn    8
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A9800",
+      "0x7A981A"
+    ]
+  ],
+  "chunks_sha256": "6b92b30d40030f8a8833f881a418f81ad0a4059db0a5fd200ea558a1e9954082",
+  "comment_regular": "BSShaderAccumulator begin entry (vtable +0x4C). Stores the camera at +0x8 and sets pending flag +0x2268 only when no accumulation is already pending.\n\nCULLING MainWorld goal 2026-09-27: when pending byte+0x2268 is already set, begin leaves the previous accumulator camera+8 unchanged. Caller/process camera identity alone is therefore insufficient to attribute reused/pending accumulator contents.\n\nMoonSugarEffect decode: BSShaderAccumulator prepare-with-camera entry (+0x4C). Stores camera at accumulator +8 and marks pending flag +0x2268.",
+  "comment_repeatable": "BSShaderAccumulator begin entry (vtable +0x4C). Stores the camera at +0x8 and sets pending flag +0x2268 only when no accumulation is already pending.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A9800",
+  "display_name": "BSShaderAccumulator_BeginAccumulation",
   "end_ea": "0x7A981A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A9800",
+  "name": "BSShaderAccumulator_BeginAccumulation",
   "segment": ".text",
   "sha256": "6b92b30d40030f8a8833f881a418f81ad0a4059db0a5fd200ea558a1e9954082",
   "size": 26,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A9800",
-  "type": "int __thiscall(int this, int)",
+  "total_chunk_size": 26,
+  "type": "void __thiscall(BSShaderAccumulator *this, NiCamera *camera)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 1
 }

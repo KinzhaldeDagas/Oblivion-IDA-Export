@@ -38,11 +38,11 @@
 0x742508: jb      short loc_74252C
 0x74250A: mov     ecx, [ebx+0Ch]
 0x74250D: mov     edx, [esi+2Ch]
-0x742510: push    eax; Size
+0x742510: push    eax; byteCount
 0x742511: sub     ecx, eax
-0x742513: push    ecx; Src
-0x742514: push    edx; Dst
-0x742515: call    _memcpy
+0x742513: push    ecx; source
+0x742514: push    edx; destination
+0x742515: call    _memcpy;
 0x74251A: mov     eax, [esi+20h]
 0x74251D: add     esp, 0Ch
 0x742520: pop     edi
@@ -60,21 +60,21 @@
 0x742537: mov     ecx, [ebx+0Ch]
 0x74253A: mov     edx, [esi+2Ch]
 0x74253D: add     edx, [esi+28h]
-0x742540: push    ebp; Size
+0x742540: push    ebp; byteCount
 0x742541: sub     ecx, edi
-0x742543: push    ecx; Src
-0x742544: push    edx; Dst
-0x742545: call    _memcpy
+0x742543: push    ecx; source
+0x742544: push    edx; destination
+0x742545: call    _memcpy;
 0x74254A: add     esp, 0Ch
 0x74254D: sub     edi, ebp
 0x74254F: jz      short loc_742573
 0x742551: mov     eax, [ebx+0Ch]
 0x742554: mov     ecx, [esi+2Ch]
-0x742557: push    edi; Size
+0x742557: push    edi; byteCount
 0x742558: sub     eax, edi
-0x74255A: push    eax; Src
-0x74255B: push    ecx; Dst
-0x74255C: call    _memcpy
+0x74255A: push    eax; source
+0x74255B: push    ecx; destination
+0x74255C: call    _memcpy;
 0x742561: mov     edx, [esi+20h]
 0x742564: add     esp, 0Ch
 0x742567: mov     [esi+28h], edi

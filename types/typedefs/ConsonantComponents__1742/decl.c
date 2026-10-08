@@ -1,1 +1,1 @@
-ConsonantComponents
+typedef tagConsonantComponents ConsonantComponents;

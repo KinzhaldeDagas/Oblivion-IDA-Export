@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x503B90",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,31 +151,31 @@
   },
   {
     "ea": "0x503BA1",
-    "line": "mov     ecx, ds:0B333C4h; a1",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x503BA7",
-    "line": "push    0; a7",
+    "line": "push    0; notifyPlayer",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x503BA9",
-    "line": "push    1; a6",
+    "line": "push    1; sortImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x503BAB",
-    "line": "push    edx; a5",
+    "line": "push    edx; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x503BAC",
-    "line": "call    sub_669690",
+    "line": "call    PlayerCharacter__AddKnownTopic; Adds one topic to PlayerCharacter.knownTopics. Duplicate suppression is by exact TESTopic pointer; successful new entries are pushed to the head, optional notification is suppressed when DialogMenu is active, and optional immediate sorting is case-insensitive by display name.",
     "mnemonic": "call",
     "size": 5
   },

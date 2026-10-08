@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x65C712",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x65C726",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x65C72A",
-    "line": "push    ebx",
+    "line": "push    ebx; actorValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x65C75C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -844,5 +844,23 @@
     "line": "pop     ebx; jumptable 0065C77D default case, cases 1-3,9,10,12,14-25,27-32,34,35,37-39,42-45,50-55",
     "mnemonic": "pop",
     "size": 1
+  },
+  {
+    "ea": "0x65C856",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x65C857",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x65C858",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

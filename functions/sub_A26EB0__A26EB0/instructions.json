@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA26EB0",
-    "line": "cmp     dword_B2B62C, 10h",
+    "line": "cmp     OB_g_strError_010201A0.capacity, 10h",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0xA26EB9",
-    "line": "mov     eax, dword_B2B618",
+    "line": "mov     eax, dword ptr OB_g_strError_010201A0.storage",
     "mnemonic": "mov",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0xA26EBF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,19 +43,19 @@
   },
   {
     "ea": "0xA26EC9",
-    "line": "mov     dword_B2B62C, 0Fh",
+    "line": "mov     OB_g_strError_010201A0.capacity, 0Fh",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0xA26ED3",
-    "line": "mov     dword_B2B628, eax",
+    "line": "mov     OB_g_strError_010201A0.size, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA26ED8",
-    "line": "mov     byte ptr dword_B2B618, al",
+    "line": "mov     byte ptr OB_g_strError_010201A0.storage, al",
     "mnemonic": "mov",
     "size": 5
   },

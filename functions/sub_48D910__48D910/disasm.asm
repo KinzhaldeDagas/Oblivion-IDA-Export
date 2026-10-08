@@ -10,7 +10,6 @@
 0x48D929: push    esi
 0x48D92A: push    edi
 0x48D92B: jmp     short loc_48D930
-0x48D92D: align 10h
 0x48D930: mov     edi, [ebx]
 0x48D932: test    edi, edi
 0x48D934: jz      loc_48D9F6
@@ -65,13 +64,13 @@
 0x48D9BD: mov     ecx, [edi]
 0x48D9BF: test    ecx, ecx
 0x48D9C1: jz      short loc_48D9C8
-0x48D9C3: call    BSSimpleList_Clear
+0x48D9C3: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48D9C8: mov     ecx, [edi]
 0x48D9CA: push    ecx
-0x48D9CB: call    FormHeapFree
+0x48D9CB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D9D0: push    edi
 0x48D9D1: mov     dword ptr [edi], 0
-0x48D9D7: call    FormHeapFree
+0x48D9D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D9DC: mov     edx, [esp+20h+var_4]
 0x48D9E0: mov     ebx, [edx]
 0x48D9E2: add     esp, 8

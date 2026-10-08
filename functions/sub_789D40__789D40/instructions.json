@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x789D40",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; 2026-05-19 payload-retention pass: stock collision getter exports type, position, and dimensions only. Supplemental 73000 rotations are not exposed by this ABI and must be applied later at the Havok consumer boundary if retained sidecar data is present.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x789D68",
-    "line": "mov     ecx, [ebx+58h]",
+    "line": "mov     ecx, [ebx+58h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x789DC4",
-    "line": "lea     esi, [esp+44h+var_28]",
+    "line": "lea     esi, [esp+44h+result]; result",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x789DC8",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Out-of-range collision diagnostics construct a temporary 28-byte string through OB_IdvFormatString, pass its bytes to CSpeedTreeRT::SetError, then destroy temporary heap storage when SSO capacity is exceeded.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,31 +391,31 @@
   },
   {
     "ea": "0x789DFB",
-    "line": "push    eax; MaxCount",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x789DFC",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x789DFD",
-    "line": "mov     ecx, offset dword_B2B614",
+    "line": "mov     ecx, offset OB_g_strError_010201A0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x789E02",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x789E07",
-    "line": "cmp     [esp+38h+var_10], edi",
+    "line": "cmp     [esp+38h+result.capacity], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x789E11",
-    "line": "mov     eax, [esp+38h+var_24]",
+    "line": "mov     eax, dword ptr [esp+38h+result.storage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x789E16",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x789E33",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x789E34",
-    "line": "call    sub_7876F0",
+    "line": "call    OB_stVector_CollisionObject_At_010201A0; Oblivion checked collision-vector index: validates index against the 0x1C-stride size and returns begin + index*0x1C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x789E3B",
-    "line": "mov     edx, [esp+38h+arg_4]",
+    "line": "mov     edx, [esp+38h+typeOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x789E41",
-    "line": "mov     ecx, [ebx+58h]",
+    "line": "mov     ecx, [ebx+58h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x789E44",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x789E45",
-    "line": "call    sub_7876F0",
+    "line": "call    OB_stVector_CollisionObject_At_010201A0; Oblivion checked collision-vector index: validates index against the 0x1C-stride size and returns begin + index*0x1C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x789E4D",
-    "line": "mov     ecx, [esp+38h+arg_8]",
+    "line": "mov     ecx, [esp+38h+posOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,19 +595,19 @@
   },
   {
     "ea": "0x789E62",
-    "line": "mov     ecx, [ebx+58h]",
+    "line": "mov     ecx, [ebx+58h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x789E65",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x789E66",
-    "line": "call    sub_7876F0",
+    "line": "call    OB_stVector_CollisionObject_At_010201A0; Oblivion checked collision-vector index: validates index against the 0x1C-stride size and returns begin + index*0x1C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x789E6E",
-    "line": "mov     ecx, [esp+38h+arg_C]",
+    "line": "mov     ecx, [esp+38h+dimOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x789E98",
-    "line": "push    2Eh ; '.'; MaxCount",
+    "line": "push    2Eh ; '.'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -721,13 +721,13 @@
   },
   {
     "ea": "0x789E9F",
-    "line": "mov     ecx, offset dword_B2B614",
+    "line": "mov     ecx, offset OB_g_strError_010201A0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x789EA4",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -778,5 +778,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C8EB0",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8EB3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8EB8",
+    "line": "mov     edx, [esp+source]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8EBC",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8EBF",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8EC2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8EC4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8EC9",
+    "line": "mov     eax, offset stru_AF1798",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8ECE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

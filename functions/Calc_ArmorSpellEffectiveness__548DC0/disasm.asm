@@ -14,8 +14,8 @@
 0x548DEA: fld1
 0x548DEC: pop     ecx
 0x548DED: retn
-0x548DEE: push    2
-0x548DF0: call    ActorValue_GetMasterySkill
+0x548DEE: push    2; mastery
+0x548DF0: call    ActorValue_GetMinimumSkillForMastery; Return the minimum skill value for a mastery tier: Novice 0, Apprentice 25, Journeyman 50, Expert 75, Master 100.
 0x548DF5: fldz
 0x548DF7: mov     ecx, [esp+8+arg_0]
 0x548DFB: mov     edx, eax

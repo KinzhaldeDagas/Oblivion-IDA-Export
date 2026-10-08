@@ -15,9 +15,9 @@
 0x5B7120: jz      short loc_5B7132
 0x5B7122: fld1
 0x5B7124: push    ecx
-0x5B7125: fstp    [esp+8+a2]; a3
-0x5B7128: push    0FA1h; a2
-0x5B712D: call    Tile_SetFloat
+0x5B7125: fstp    [esp+8+a2]; value
+0x5B7128: push    0FA1h; propertyCode
+0x5B712D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B7132: or      al, 0FFh
 0x5B7134: add     [esi+84h], al
 0x5B713A: cmp     [esi+84h], al

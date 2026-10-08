@@ -40,7 +40,7 @@
 0x77C630: lea     ecx, [ebx+4]
 0x77C633: push    ecx; lpAddend
 0x77C634: call    dword ptr ds:0A28078h
-0x77C63A: mov     eax, [esp+10h+arg_4]
+0x77C63A: mov     eax, [esp+10h+incoming]
 0x77C63E: mov     edx, [esi]
 0x77C640: mov     edx, [edx+0Ch]
 0x77C643: push    eax
@@ -73,11 +73,11 @@
 0x77C67E: cmp     byte ptr [esi+10h], 0
 0x77C682: jnz     short loc_77C687
 0x77C684: mov     [edi+4], ebx
-0x77C687: lea     eax, [esp+10h+arg_4]
-0x77C68B: push    eax
-0x77C68C: lea     ecx, [edi+8]
-0x77C68F: call    sub_55E2A0
-0x77C694: mov     esi, [esp+10h+arg_4]
+0x77C687: lea     eax, [esp+10h+incoming]
+0x77C68B: push    eax; incoming
+0x77C68C: lea     ecx, [edi+8]; this
+0x77C68F: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x77C694: mov     esi, [esp+10h+incoming]
 0x77C698: test    esi, esi
 0x77C69A: jz      short loc_77C677
 0x77C69C: lea     ecx, [esi+4]

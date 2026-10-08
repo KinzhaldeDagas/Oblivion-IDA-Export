@@ -2,19 +2,19 @@ volatile LONG *__usercall _updatetlocinfoEx_nolock@<eax>(volatile LONG **a1@<eax
 {
   volatile LONG *v2; // esi
 
-  if ( !a2 || !a1 )
-    return 0;
-  v2 = *a1;
-  if ( *a1 != a2 )
+  if ( !a2 || !a1 ) /*0x98a181*/
+    return 0; /*0x98a1b6*/
+  v2 = *a1; /*0x98a184*/
+  if ( *a1 != a2 ) /*0x98a188*/
   {
-    *a1 = a2;
-    __addlocaleref(a2);
-    if ( v2 )
+    *a1 = a2; /*0x98a18b*/
+    __addlocaleref(a2); /*0x98a18d*/
+    if ( v2 ) /*0x98a195*/
     {
-      __removelocaleref(v2);
-      if ( !*v2 && v2 != (volatile LONG *)&unk_B318C0 )
-        __freetlocinfo((char *)v2);
+      __removelocaleref(v2); /*0x98a198*/
+      if ( !*v2 && v2 != (volatile LONG *)&unk_B318C0 ) /*0x98a1a9*/
+        __freetlocinfo((char *)v2); /*0x98a1ac*/
     }
   }
-  return a2;
+  return a2; /*0x98a1b5*/
 }

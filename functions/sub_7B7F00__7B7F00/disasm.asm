@@ -12,7 +12,7 @@
 0x7B7F1A: mov     ecx, edi
 0x7B7F1C: jz      short loc_7B7F69
 0x7B7F1E: push    4
-0x7B7F20: call    NiNode_GetNiPropertyByID
+0x7B7F20: call    NiNode_GetNiPropertyByID;
 0x7B7F25: mov     edi, [edi+0BCh]
 0x7B7F2B: mov     ebx, eax
 0x7B7F2D: test    ebx, ebx

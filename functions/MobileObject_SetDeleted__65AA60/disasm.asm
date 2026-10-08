@@ -5,7 +5,7 @@
 0x65AA67: mov     esi, ecx
 0x65AA69: call    j_TESForm_SetDeleted
 0x65AA6E: push    esi
-0x65AA6F: mov     ecx, offset ActorProcessManager_ptr
+0x65AA6F: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x65AA74: call    sub_6748B0
 0x65AA79: test    bl, bl
 0x65AA7B: jz      short loc_65AAC7

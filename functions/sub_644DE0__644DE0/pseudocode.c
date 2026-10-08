@@ -1,16 +1,16 @@
 void __thiscall sub_644DE0(_DWORD *this)
 {
-  _DWORD *v2; // eax
-  _DWORD *v3; // eax
+  TravelPath *v2; // eax
+  TravelPath *v3; // eax
 
-  if ( !*(this + 0xD) )
+  if ( !*(this + 0xD) ) /*0x644e04*/
   {
-    v2 = (_DWORD *)FormHeapAlloc(0x14u);
-    if ( v2 )
-      v3 = sub_68A9F0(v2);
+    v2 = (TravelPath *)FormHeapAlloc(0x14u); /*0x644e0c*/
+    if ( v2 ) /*0x644e22*/
+      v3 = PathLow_ctor(v2); /*0x644e26*/
     else
-      v3 = 0;
-    *(this + 0xD) = v3;
-    *((_BYTE *)v3 + 0x10) = 0;
+      v3 = 0; /*0x644e2d*/
+    *(this + 0xD) = v3; /*0x644e2f*/
+    v3->initializedByte10 = 0; /*0x644e32*/
   }
 }

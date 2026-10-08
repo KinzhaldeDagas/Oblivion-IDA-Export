@@ -29,7 +29,7 @@
 0x6A258E: jz      short loc_6A25C7
 0x6A2590: push    1
 0x6A2592: mov     ecx, esi
-0x6A2594: call    ActiveEffect_Base_Remove
+0x6A2594: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6A2599: mov     edx, [ebx]
 0x6A259B: mov     eax, [edx+8]
 0x6A259E: push    esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E4800",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified (Oblivion): resets every 0x20-byte particle slot to the inactive sentinel, seeds per-slot lifetime factors from fParticleLifetime_84/fParticleLifeVar_88, sets activeParticleCount_7C to zero, and initializes simulationTime_F8 to newTime. Fallout's RewindTimer instead shifts birth times of already active particles; the lifecycle behavior diverges.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7E4806",
-    "line": "call    sub_7E2D60",
+    "line": "call    ParticleShaderProperty_GetSlotCapacity; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x7E4835",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+newTime]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7E4839",
-    "line": "fstp    dword ptr [esi+0F8h]",
+    "line": "fstp    dword ptr [esi+0F8h]; Verified (Oblivion): simulationTime_F8 is initialized to the requested time; UpdateParticles uses it to calculate elapsed delta and stores the new time after each update. Fallout RewindTimer instead shifts active particle birth times.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -124,12 +124,6 @@
     "line": "jmp     short loc_7E4850",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7E484D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x7E4850",
@@ -247,13 +241,13 @@
   },
   {
     "ea": "0x7E4895",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+newTime], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7E4899",
-    "line": "fild    [esp+14h+arg_0]",
+    "line": "fild    [esp+14h+newTime]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -283,13 +277,13 @@
   },
   {
     "ea": "0x7E48AC",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    [esp+14h+newTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7E48B0",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     [esp+14h+newTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -307,13 +301,13 @@
   },
   {
     "ea": "0x7E48BC",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    [esp+14h+newTime]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7E48C0",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     [esp+14h+newTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -343,7 +337,7 @@
   },
   {
     "ea": "0x7E48CC",
-    "line": "mov     dword ptr [esi+7Ch], 0",
+    "line": "mov     dword ptr [esi+7Ch], 0; Verified (Oblivion): ResetParticleStateAtTime clears activeParticleCount_7C after resetting every slot and random lifetime factor.",
     "mnemonic": "mov",
     "size": 7
   },

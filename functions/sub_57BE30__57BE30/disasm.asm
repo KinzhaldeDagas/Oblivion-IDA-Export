@@ -42,7 +42,7 @@
 0x57BE9F: or      al, 0FFh
 0x57BEA1: push    ebx; arg1
 0x57BEA2: push    0; canCreate
-0x57BEA4: mov     [esp+14h+var_7], al
+0x57BEA4: mov     [esp+14h+source], al
 0x57BEA8: call    InterfaceManager_GetSingleton
 0x57BEAD: add     esp, 8
 0x57BEB0: test    eax, eax
@@ -100,52 +100,52 @@
 0x57BF3C: add     esp, 8
 0x57BF3F: push    1771h
 0x57BF44: call    Tile_GetFloat
-0x57BF49: call    Double_To_SInt32
+0x57BF49: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x57BF4E: jmp     short loc_57BF53
 0x57BF50: or      eax, 0FFFFFFFFh
 0x57BF53: cmp     [esp+0Ch+Src], bl
 0x57BF57: mov     [esp+0Ch+var_4], eax
 0x57BF5B: jge     short loc_57BF61
 0x57BF5D: mov     [esp+0Ch+Src], bl
-0x57BF61: cmp     [esp+0Ch+var_7], bl
+0x57BF61: cmp     [esp+0Ch+source], bl
 0x57BF65: jge     short loc_57BF6B
-0x57BF67: mov     [esp+0Ch+var_7], bl
+0x57BF67: mov     [esp+0Ch+source], bl
 0x57BF6B: cmp     [esp+0Ch+var_6], bl
 0x57BF6F: jge     short loc_57BF75
 0x57BF71: mov     [esp+0Ch+var_6], bl
 0x57BF75: cmp     [esp+0Ch+var_5], bl
 0x57BF79: jge     short loc_57BF7F
 0x57BF7B: mov     [esp+0Ch+var_5], bl
-0x57BF7F: mov     ecx, ds:0B33B00h
-0x57BF85: push    ebx; Size
+0x57BF7F: mov     ecx, ds:0B33B00h; self
+0x57BF85: push    ebx; byteCount
 0x57BF86: lea     eax, [esp+10h+Src]
-0x57BF8A: push    eax; Src
+0x57BF8A: push    eax; source
 0x57BF8B: call    SaveLoad_SaveData
-0x57BF90: push    ebx; Size
-0x57BF91: lea     ecx, [esp+10h+var_7]
-0x57BF95: push    ecx; Src
-0x57BF96: mov     ecx, ds:0B33B00h
+0x57BF90: push    ebx; byteCount
+0x57BF91: lea     ecx, [esp+10h+source]
+0x57BF95: push    ecx; source
+0x57BF96: mov     ecx, ds:0B33B00h; self
 0x57BF9C: call    SaveLoad_SaveData
-0x57BFA1: mov     ecx, ds:0B33B00h
-0x57BFA7: push    ebx; Size
+0x57BFA1: mov     ecx, ds:0B33B00h; self
+0x57BFA7: push    ebx; byteCount
 0x57BFA8: lea     edx, [esp+10h+var_6]
-0x57BFAC: push    edx; Src
+0x57BFAC: push    edx; source
 0x57BFAD: call    SaveLoad_SaveData
-0x57BFB2: mov     ecx, ds:0B33B00h
-0x57BFB8: push    ebx; Size
+0x57BFB2: mov     ecx, ds:0B33B00h; self
+0x57BFB8: push    ebx; byteCount
 0x57BFB9: lea     eax, [esp+10h+var_5]
-0x57BFBD: push    eax; Src
+0x57BFBD: push    eax; source
 0x57BFBE: call    SaveLoad_SaveData
-0x57BFC3: push    4; Size
+0x57BFC3: push    4; byteCount
 0x57BFC5: lea     ecx, [esp+10h+var_4]
-0x57BFC9: push    ecx; Src
-0x57BFCA: mov     ecx, ds:0B33B00h
+0x57BFC9: push    ecx; source
+0x57BFCA: mov     ecx, ds:0B33B00h; self
 0x57BFD0: call    SaveLoad_SaveData
-0x57BFD5: mov     ecx, ds:0B33B00h
+0x57BFD5: mov     ecx, ds:0B33B00h; self
 0x57BFDB: cmp     byte ptr [ecx+7Ch], 5Dh ; ']'
 0x57BFDF: jb      short loc_57BFEC
-0x57BFE1: push    ebx; Size
-0x57BFE2: push    offset byte_B14500; Src
+0x57BFE1: push    ebx; byteCount
+0x57BFE2: push    offset byte_B14500; source
 0x57BFE7: call    SaveLoad_SaveData
 0x57BFEC: pop     ebx
 0x57BFED: add     esp, 8

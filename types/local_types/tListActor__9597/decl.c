@@ -1,1 +1,4 @@
-tListActor
+struct tListActor
+{
+NodeActor node;
+};

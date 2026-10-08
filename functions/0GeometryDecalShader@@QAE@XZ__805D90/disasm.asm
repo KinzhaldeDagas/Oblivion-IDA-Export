@@ -25,7 +25,7 @@
 0x805DD4: mov     [esp+38h+var_4], ebx
 0x805DD8: mov     dword ptr [esi], offset ??_7GeometryDecalShader@@6B@; const GeometryDecalShader::`vftable'
 0x805DDE: call    ArrayConstructor
-0x805DE3: push    offset sub_7016A0; a5
+0x805DE3: push    offset NiPointerSlot_Release; a5
 0x805DE8: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x805DED: push    2; size
 0x805DEF: push    4; a2
@@ -33,7 +33,7 @@
 0x805DF7: push    eax; a1
 0x805DF8: mov     byte ptr [esp+38h+var_4], 1
 0x805DFD: call    ArrayConstructor
-0x805E02: push    offset sub_7016A0; a5
+0x805E02: push    offset NiPointerSlot_Release; a5
 0x805E07: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x805E0C: push    2; size
 0x805E0E: push    4; a2
@@ -101,7 +101,7 @@
 0x805ECB: jz      short loc_805EDA
 0x805ECD: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x805ED1: jnz     short loc_805ED8
-0x805ED3: call    sub_7604D0
+0x805ED3: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x805ED8: mov     [edi], ebx
 0x805EDA: add     edi, 4
 0x805EDD: sub     ebp, 1
@@ -116,3 +116,45 @@
 0x805EF3: pop     ebx
 0x805EF4: add     esp, 10h
 0x805EF7: retn
+0x9D0B40: mov     ecx, [ebp-10h]; this
+0x9D0B43: jmp     ??1BSShader@@UAE@XZ;
+0x9D0B48: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9D0B4D: push    2; int
+0x9D0B4F: push    4; unsigned int
+0x9D0B51: mov     eax, [ebp-10h]
+0x9D0B54: add     eax, 7Ch ; '|'
+0x9D0B57: push    eax; void *
+0x9D0B58: call    $LN21
+0x9D0B5D: retn
+0x9D0B5E: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0B63: push    2; int
+0x9D0B65: push    4; unsigned int
+0x9D0B67: mov     eax, [ebp-10h]
+0x9D0B6A: add     eax, 84h ; '„'
+0x9D0B6F: push    eax; void *
+0x9D0B70: call    $LN21
+0x9D0B75: retn
+0x9D0B76: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0B7B: push    2; int
+0x9D0B7D: push    4; unsigned int
+0x9D0B7F: mov     eax, [ebp-10h]
+0x9D0B82: add     eax, 8Ch ; 'Œ'
+0x9D0B87: push    eax; void *
+0x9D0B88: call    $LN21
+0x9D0B8D: retn
+0x9D0B8E: mov     ecx, [ebp-10h]
+0x9D0B91: add     ecx, 94h ; '”'; slot
+0x9D0B97: jmp     NiPointerSlot_Release
+0x9D0B9C: mov     ecx, [ebp-10h]
+0x9D0B9F: add     ecx, 98h ; '˜'; slot
+0x9D0BA5: jmp     NiPointerSlot_Release
+0x9D0BAA: mov     ecx, [ebp-10h]
+0x9D0BAD: add     ecx, 9Ch ; 'œ'; slot
+0x9D0BB3: jmp     NiPointerSlot_Release
+0x9D0BB8: mov     edx, [esp+arg_4]
+0x9D0BBC: lea     eax, [edx-14h]
+0x9D0BBF: mov     ecx, [edx-18h]
+0x9D0BC2: xor     ecx, eax
+0x9D0BC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0BC9: mov     eax, offset stru_AF93E0
+0x9D0BCE: jmp     ___CxxFrameHandler3

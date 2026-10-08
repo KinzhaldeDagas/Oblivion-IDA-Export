@@ -1,20 +1,16 @@
-_DWORD *__cdecl sub_6EDC90(_DWORD *a1, _DWORD *a2, _DWORD *a3)
+OB_stString28_010201A0 *__cdecl sub_6EDC90(FaceGenMatrix *a1, FaceGenMatrix *a2, FaceGenMatrix *source)
 {
-  _DWORD *v3; // esi
-  _DWORD *v4; // ebx
-  _DWORD *result; // eax
+  FaceGenMatrix *i; // esi
+  OB_stString28_010201A0 *result; // eax
 
-  v3 = a1;
-  if ( a1 != a2 )
+  for ( i = a1; i != a2; i = (FaceGenMatrix *)((char *)i + 0x34) ) /*0x6edc9c*/
   {
-    v4 = a3 + 6;
-    do
-    {
-      sub_5520E0(v3, (int)v4, a3);
-      result = sub_414420((int)(v3 + 6), v4, 0, 0xFFFFFFFF);
-      v3 += 0xD;
-    }
-    while ( v3 != a2 );
+    FaceGenMatrix_Assign(i, source); /*0x6edcaa*/
+    result = OB_stString28_AssignSubstring_010201A0( /*0x6edcb7*/
+               (OB_stString28_010201A0 *)&i[1],
+               (const OB_stString28_010201A0 *)&source[1],
+               0,
+               0xFFFFFFFF);
   }
-  return result;
+  return result; /*0x6edcc5*/
 }

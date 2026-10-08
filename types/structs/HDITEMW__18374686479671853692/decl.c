@@ -1,1 +1,1 @@
-HDITEMW
+typedef _HD_ITEMW HDITEMW;

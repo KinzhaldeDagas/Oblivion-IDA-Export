@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x563963",
-    "line": "call    ??1BSTreeModel@@UAE@XZ; BSTreeModel::~BSTreeModel(void)",
+    "line": "call    BSTreeModel_dtor; BSTreeModel destructor. Clears Gamebryo render resources first, then calls CSpeedTreeRT destructor/refcount cleanup for BSTreeModel+0x0C and frees the 0xA0 object storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x563970",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

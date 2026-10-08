@@ -1,4 +1,4 @@
-0x7CBDC0: push    0FFFFFFFFh
+0x7CBDC0: push    0FFFFFFFFh; MoonSugarEffect decode: shader definition ID 1 builds the base ShadowLightShader with multiple TES4 declarations; Parallax/Skin copy this shader's constant maps via their vtable +0x88 path.
 0x7CBDC2: push    offset SEH_7FC7D0
 0x7CBDC7: mov     eax, large fs:0
 0x7CBDCD: push    eax
@@ -25,11 +25,11 @@
 0x7CBE0A: jmp     short loc_7CBE0E
 0x7CBE0C: xor     ebp, ebp
 0x7CBE0E: mov     eax, ds:0B43104h
-0x7CBE13: push    1; StreamCount
-0x7CBE15: push    6; a2
-0x7CBE17: push    eax; a1
+0x7CBE13: push    1; streamCount
+0x7CBE15: push    6; elementCount
+0x7CBE17: push    eax; renderer
 0x7CBE18: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x7CBE20: call    CreateDX9ShaderDeclaration
+0x7CBE20: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7CBE25: mov     esi, [ebp+0]
 0x7CBE28: mov     edi, eax
 0x7CBE2A: add     esp, 0Ch
@@ -56,22 +56,22 @@
 0x7CBE5B: push    edi; lpAddend
 0x7CBE5C: call    dword ptr ds:0A28078h
 0x7CBE62: mov     ecx, ds:0B43104h
-0x7CBE68: push    1; StreamCount
-0x7CBE6A: push    8; a2
-0x7CBE6C: push    ecx; a1
-0x7CBE6D: call    CreateDX9ShaderDeclaration
+0x7CBE68: push    1; streamCount
+0x7CBE6A: push    8; elementCount
+0x7CBE6C: push    ecx; renderer
+0x7CBE6D: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7CBE72: mov     edx, ds:0B43104h
-0x7CBE78: push    1; StreamCount
-0x7CBE7A: push    4; a2
-0x7CBE7C: push    edx; a1
+0x7CBE78: push    1; streamCount
+0x7CBE7A: push    4; elementCount
+0x7CBE7C: push    edx; renderer
 0x7CBE7D: mov     esi, eax
-0x7CBE7F: call    CreateDX9ShaderDeclaration
-0x7CBE84: push    1; StreamCount
+0x7CBE7F: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
+0x7CBE84: push    1; streamCount
 0x7CBE86: mov     ebx, eax
 0x7CBE88: mov     eax, ds:0B43104h
-0x7CBE8D: push    8; a2
-0x7CBE8F: push    eax; a1
-0x7CBE90: call    CreateDX9ShaderDeclaration
+0x7CBE8D: push    8; elementCount
+0x7CBE8F: push    eax; renderer
+0x7CBE90: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7CBE95: mov     ecx, [ebp+0]
 0x7CBE98: mov     edx, [ecx]
 0x7CBE9A: add     esp, 24h
@@ -343,7 +343,7 @@
 0x7CC0EC: call    eax
 0x7CC0EE: test    eax, eax
 0x7CC0F0: jz      short loc_7CC104
-0x7CC0F2: cmp     eax, offset dword_B3F684
+0x7CC0F2: cmp     eax, offset stru_B3F684
 0x7CC0F7: jz      loc_7CC1BD
 0x7CC0FD: mov     eax, [eax+4]
 0x7CC100: test    eax, eax
@@ -360,7 +360,7 @@
 0x7CC11B: test    eax, eax
 0x7CC11D: jz      short loc_7CC132
 0x7CC11F: nop
-0x7CC120: cmp     eax, offset dword_B3F684
+0x7CC120: cmp     eax, offset stru_B3F684
 0x7CC125: jz      loc_7CC1C4
 0x7CC12B: mov     eax, [eax+4]
 0x7CC12E: test    eax, eax
@@ -377,7 +377,7 @@
 0x7CC145: test    eax, eax
 0x7CC147: jz      short loc_7CC15E
 0x7CC149: lea     esp, [esp+0]
-0x7CC150: cmp     eax, offset dword_B3F684
+0x7CC150: cmp     eax, offset stru_B3F684
 0x7CC155: jz      short loc_7CC1CB
 0x7CC157: mov     eax, [eax+4]
 0x7CC15A: test    eax, eax
@@ -393,7 +393,7 @@
 0x7CC16F: call    eax
 0x7CC171: test    eax, eax
 0x7CC173: jz      short loc_7CC183
-0x7CC175: cmp     eax, offset dword_B3F684
+0x7CC175: cmp     eax, offset stru_B3F684
 0x7CC17A: jz      short loc_7CC1CF
 0x7CC17C: mov     eax, [eax+4]
 0x7CC17F: test    eax, eax
@@ -486,3 +486,20 @@
 0x7CC26C: pop     ebx
 0x7CC26D: add     esp, 14h
 0x7CC270: retn
+0x9CE940: mov     eax, [ebp-14h]
+0x9CE943: push    eax
+0x9CE944: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE949: pop     ecx
+0x9CE94A: retn
+0x9CE94B: mov     eax, [ebp-10h]
+0x9CE94E: push    eax
+0x9CE94F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE954: pop     ecx
+0x9CE955: retn
+0x9CE956: mov     edx, [esp+arg_4]
+0x9CE95A: lea     eax, [edx-18h]
+0x9CE95D: mov     ecx, [edx-1Ch]
+0x9CE960: xor     ecx, eax
+0x9CE962: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE967: mov     eax, offset stru_AF7880
+0x9CE96C: jmp     ___CxxFrameHandler3

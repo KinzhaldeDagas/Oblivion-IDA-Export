@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x6F196D",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x6F197D",
-    "line": "mov     [ebp+var_20], ecx",
+    "line": "mov     [ebp+value.parentVertexIndex], ecx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6F1980",
-    "line": "mov     [ebp+var_1C], edx",
+    "line": "mov     [ebp+value.percentBetweenParentVertices], edx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6F1983",
-    "line": "mov     [ebp+var_18], eax",
+    "line": "mov     [ebp+value.childBranch], eax; CBranch*.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x6F19A1",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x6F19D2",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6F1A4F",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x6F1A55",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+last], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F1A59",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x6F1A5D",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+destinationLast], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6F1A60",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x6F1A77",
-    "line": "lea     ecx, [ebp+var_20]",
+    "line": "lea     ecx, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
@@ -769,13 +769,13 @@
   },
   {
     "ea": "0x6F1A87",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+last], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6F1A8B",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x6F1A8F",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x6F1AC6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6F1ACE",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x6F1AF9",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x6F1AFD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x6F1B11",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x6F1B2A",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+destinationLast], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x6F1B36",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+destinationLast], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x6F1B48",
-    "line": "lea     edx, [ebp+var_20]",
+    "line": "lea     edx, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x6F1B72",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x6F1B7B",
-    "line": "lea     ecx, [ebp+var_20]",
+    "line": "lea     ecx, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6F1B7E",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1369,19 +1369,19 @@
   },
   {
     "ea": "0x6F1B81",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1B82",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1B83",
-    "line": "call    sub_790460",
+    "line": "call    OB_stVectorBranchChildRef_FillRange_010201A0; Copies one 0x0C-byte OB_CBranchChildRef value into every record in [first,last) and returns last. Used by both in-place child-vector insert/fill bodies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x6F1BAF",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x6F1BB7",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+destinationLast]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1525,43 +1525,43 @@
   },
   {
     "ea": "0x6F1BBD",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6F1BC0",
-    "line": "push    edx",
+    "line": "push    edx; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1BC1",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1BC2",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1BC3",
-    "line": "call    sub_79AAA0",
+    "line": "call    OB_CBranchChildRef_CopyBackwardThunk_010201A0; OBLIVION AUTHORITY (2026-08-30): Adapter for the 0x0C-byte CBranchChildRef backward-copy routine used by checked vector insertion.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6F1BC8",
-    "line": "lea     ecx, [ebp+var_20]",
+    "line": "lea     ecx, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6F1BCB",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1573,19 +1573,19 @@
   },
   {
     "ea": "0x6F1BCE",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1BCF",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F1BD0",
-    "line": "call    sub_790460",
+    "line": "call    OB_stVectorBranchChildRef_FillRange_010201A0; Copies one 0x0C-byte OB_CBranchChildRef value into every record in [first,last) and returns last. Used by both in-place child-vector insert/fill bodies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1648,5 +1648,47 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C87E0",
+    "line": "mov     edx, [esp-4+first]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C87E4",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C87E7",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C87EA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C87EC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C87F1",
+    "line": "mov     eax, offset stru_AF0D50",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C87F6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

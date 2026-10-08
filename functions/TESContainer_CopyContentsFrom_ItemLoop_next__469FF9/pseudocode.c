@@ -2,9 +2,9 @@ int __userpurge TESContainer_CopyContentsFrom_::ItemLoop_next@<eax>(int a1@<esi>
 {
   int **v3; // esi
 
-  v3 = *(int ***)(a1 + 4);
-  if ( v3 )
-    return TESContainer_CopyContentsFrom_::ItemLoop(a2, v3, a3);
+  v3 = *(int ***)(a1 + 4); /*0x469ff9*/
+  if ( v3 ) /*0x469ffe*/
+    return TESContainer_CopyContentsFrom_::ItemLoop(a2, v3, a3); /*0x469ffe*/
   else
-    return TESContainer_CopyContentsFrom_::Done_(a3);
+    return TESContainer_CopyContentsFrom_::Done_(a3); /*0x469fff*/
 }

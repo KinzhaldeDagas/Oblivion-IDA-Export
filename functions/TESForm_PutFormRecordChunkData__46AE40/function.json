@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
-  "callers_count": 63,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 139,
+  "chunks": [
+    [
+      "0x46AE40",
+      "0x46AEC6"
+    ]
+  ],
+  "chunks_sha256": "2464392c29cd13cd25dc4537bb07f70d477d4f65a09a557d348965e004340b61",
+  "comment_regular": "Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
+  "comment_repeatable": "Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "TESForm_PutFormRecordChunkData",
   "end_ea": "0x46AEC6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESForm_PutFormRecordChunkData",
   "segment": ".text",
   "sha256": "2464392c29cd13cd25dc4537bb07f70d477d4f65a09a557d348965e004340b61",
   "size": 134,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46AE40",
+  "total_chunk_size": 134,
   "type": "void *__cdecl(int, void *Src, size_t Size)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 139

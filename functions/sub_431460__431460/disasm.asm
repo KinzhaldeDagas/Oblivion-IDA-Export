@@ -82,11 +82,11 @@
 0x431550: lea     edx, [eax+esi+1]
 0x431554: push    edx; Size
 0x431555: call    FormHeapAlloc
-0x43155A: push    esi; Size
+0x43155A: push    esi; byteCount
 0x43155B: mov     ebx, eax
-0x43155D: push    ebp; Src
-0x43155E: push    ebx; Dst
-0x43155F: call    _memcpy
+0x43155D: push    ebp; source
+0x43155E: push    ebx; destination
+0x43155F: call    _memcpy;
 0x431564: mov     eax, edi
 0x431566: mov     byte ptr [ebx+esi], 0
 0x43156A: add     esp, 10h
@@ -119,7 +119,7 @@
 0x4315AD: cmp     dword ptr [esi], 0
 0x4315B0: jnz     short loc_4315D5
 0x4315B2: push    esi
-0x4315B3: call    FormHeapFree
+0x4315B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4315B8: add     esp, 4
 0x4315BB: pop     esi
 0x4315BC: pop     ebp

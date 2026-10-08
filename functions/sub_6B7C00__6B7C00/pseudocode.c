@@ -1,9 +1,9 @@
-BOOL __thiscall sub_6B7C00(_DWORD *this)
+bool __thiscall DialogueItem::NextResponse(DialogueItemView *this)
 {
-  int v1; // eax
+  DialogueResponseNode *currentResponseNode; // eax
 
-  v1 = *(this + 2);
-  if ( v1 )
-    *(this + 2) = *(_DWORD *)(v1 + 4);
-  return *(this + 2) != 0;
+  currentResponseNode = this->currentResponseNode; /*0x6b7c00*/
+  if ( currentResponseNode ) /*0x6b7c05*/
+    this->currentResponseNode = currentResponseNode->next; /*0x6b7c0a*/
+  return this->currentResponseNode != 0; /*0x6b7c15*/
 }

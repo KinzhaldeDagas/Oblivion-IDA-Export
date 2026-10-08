@@ -1,4 +1,4 @@
-0x4302B0: push    0FFFFFFFFh
+0x4302B0: push    0FFFFFFFFh; MEF PLAN 2026-09-07: Revalidated read ABI: self in ECX, destination/count stack, RET8. Calls747E80 at43032C and adds returned byte count to owner+148h at430331. EBP/EDI in prior __userpurge prototype were inferred artifacts, not arguments. Prior declaration retained in analysis ledger; corrected to ordinary thiscall.
 0x4302B2: push    offset BSFile_DirectRead_SEH
 0x4302B7: mov     eax, large fs:0
 0x4302BD: push    eax
@@ -10,10 +10,10 @@
 0x4302CB: mov     large fs:0, eax
 0x4302D1: mov     esi, ecx
 0x4302D3: mov     eax, 1
-0x4302D8: test    byte ptr dword_B33A00, al
+0x4302D8: test    byte ptr unk_B33A00, al
 0x4302DE: jnz     short loc_43030D
-0x4302E0: or      dword_B33A00, eax
-0x4302E6: mov     ecx, offset stru_B33980; lpCriticalSection
+0x4302E0: or      dword ptr unk_B33A00, eax
+0x4302E6: mov     ecx, offset unk_B33980; lpCriticalSection
 0x4302EB: mov     [esp+14h+var_4], 0
 0x4302F3: call    NiInitalizeCriticalSection
 0x4302F8: push    offset sub_A17B60; void (__cdecl *)()
@@ -30,9 +30,9 @@
 0x43031E: call    edx
 0x430320: mov     eax, [esp+14h+Count]
 0x430324: mov     ecx, [esp+14h+Dst]
-0x430328: push    eax; Count
-0x430329: push    ecx; Dst
-0x43032A: mov     ecx, esi
+0x430328: push    eax; byteCount
+0x430329: push    ecx; destination
+0x43032A: mov     ecx, esi; self
 0x43032C: call    NiFile_DirectRead
 0x430331: add     [esi+148h], eax
 0x430337: mov     ecx, dword ptr [esp+14h+var_C]
@@ -41,3 +41,14 @@
 0x430343: pop     esi
 0x430344: add     esp, 0Ch
 0x430347: retn    8
+0x9ABDE0: mov     eax, dword ptr unk_B33A00
+0x9ABDE5: and     eax, 0FFFFFFFEh
+0x9ABDE8: mov     dword ptr unk_B33A00, eax
+0x9ABDED: retn
+0x9ABDEE: mov     edx, [esp+Count]
+0x9ABDF2: lea     eax, [edx-4]
+0x9ABDF5: mov     ecx, [edx-8]
+0x9ABDF8: xor     ecx, eax
+0x9ABDFA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABDFF: mov     eax, offset stru_AD8B38
+0x9ABE04: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x4526F0",
+      "0x452707"
+    ]
+  ],
+  "chunks_sha256": "d1f6ac7074bbba3d71a4a7b274b9768eb16d6b3aa02bb88d697941a2da154d1f",
+  "comment_regular": "Verified generic BSSimpleList_Clear implementation frees each successor node and then clears the head node's data pointer. It does not destroy list data objects; callers remain responsible for element lifetime.",
+  "comment_repeatable": "Verified generic BSSimpleList_Clear implementation frees each successor node and then clears the head node's data pointer. It does not destroy list data objects; callers remain responsible for element lifetime.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "BSSimpleList_Clear:::DeleteNextNodeLoop",
   "end_ea": "0x452707",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "BSSimpleList_Clear:::DeleteNextNodeLoop",
   "segment": ".text",
   "sha256": "d1f6ac7074bbba3d71a4a7b274b9768eb16d6b3aa02bb88d697941a2da154d1f",
   "size": 23,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4526F0",
-  "type": "int __usercall@<eax>(int@<esi>)",
+  "total_chunk_size": 23,
+  "type": "void __usercall(_DWORD *@<esi>)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 2
 }

@@ -1,7 +1,7 @@
-float *sub_55CBF0()
+NiPoint3 *sub_55CBF0()
 {
-  if ( dword_B39B84 )
-    return (float *)(dword_B39B84 + 0x88);
+  if ( unk_B39B84 ) /*0x55cbf0*/
+    return (NiPoint3 *)(unk_B39B84 + 0x88); /*0x55cbf9*/
   else
-    return &Vector3_InitValue_;
+    return &g_zeroNiPoint3; /*0x55cbff*/
 }

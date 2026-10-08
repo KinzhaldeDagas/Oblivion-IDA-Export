@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x524660",
-    "line": "sub     esp, 214h",
+    "line": "sub     esp, 214h; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Block control 6 held submits player yield request.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x524778",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x524797",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x5247D3",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x5247DF",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x5247EF",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x524832",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,13 +997,13 @@
   },
   {
     "ea": "0x524888",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52488A",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x52492B",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1567,7 +1567,7 @@
   },
   {
     "ea": "0x5249D5",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x5249FB",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x524A96",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x524AE2",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2305,25 +2305,25 @@
   },
   {
     "ea": "0x524B23",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524B25",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x524B2A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524B2C",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,13 +2341,13 @@
   },
   {
     "ea": "0x524B39",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524B3B",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,13 +2365,13 @@
   },
   {
     "ea": "0x524B4A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524B4C",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2599,13 +2599,13 @@
   },
   {
     "ea": "0x524BB4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524BB6",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,13 +2677,13 @@
   },
   {
     "ea": "0x524BDB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524BDD",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2701,13 +2701,13 @@
   },
   {
     "ea": "0x524BE6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524BE8",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2785,13 +2785,13 @@
   },
   {
     "ea": "0x524C13",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524C15",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2809,13 +2809,13 @@
   },
   {
     "ea": "0x524C1E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524C20",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2833,13 +2833,13 @@
   },
   {
     "ea": "0x524C2B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524C2D",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,7 +2983,7 @@
   },
   {
     "ea": "0x524C71",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -3097,7 +3097,7 @@
   },
   {
     "ea": "0x524CA6",
-    "line": "call    sub_5E6B40",
+    "line": "call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3349,7 +3349,7 @@
   },
   {
     "ea": "0x524D25",
-    "line": "mov     ecx, [ebp+8]",
+    "line": "mov     ecx, [ebp+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x524D2C",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -3577,13 +3577,13 @@
   },
   {
     "ea": "0x524D8F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524D91",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3601,7 +3601,7 @@
   },
   {
     "ea": "0x524D99",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3811,7 +3811,7 @@
   },
   {
     "ea": "0x524E06",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3853,7 +3853,7 @@
   },
   {
     "ea": "0x524E22",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4357,7 +4357,7 @@
   },
   {
     "ea": "0x524F12",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4435,25 +4435,25 @@
   },
   {
     "ea": "0x524F3F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524F41",
-    "line": "call    sub_5F8460",
+    "line": "call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x524F46",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x524F48",
-    "line": "call    sub_5F8460",
+    "line": "call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4765,7 +4765,7 @@
   },
   {
     "ea": "0x524FEC",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4819,7 +4819,7 @@
   },
   {
     "ea": "0x52500C",
-    "line": "push    0",
+    "line": "push    0; forcedTopic",
     "mnemonic": "push",
     "size": 2
   },
@@ -4831,13 +4831,13 @@
   },
   {
     "ea": "0x525010",
-    "line": "push    esi",
+    "line": "push    esi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x525011",
-    "line": "call    sub_57AB00",
+    "line": "call    Interface__CreateDialogMenu",
     "mnemonic": "call",
     "size": 5
   },
@@ -5083,25 +5083,25 @@
   },
   {
     "ea": "0x5250A0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5250A2",
-    "line": "call    sub_5F8460",
+    "line": "call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5250A7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5250A9",
-    "line": "call    sub_5F8460",
+    "line": "call    Actor_ResetAttackStateAndBowVisuals; Cancels attack/block animation slots, clears current action, releases transient ArrowBone children for applicable perspectives, and refreshes quiver arrow visibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5131,13 +5131,13 @@
   },
   {
     "ea": "0x5250BC",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5250BE",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5329,19 +5329,19 @@
   },
   {
     "ea": "0x52511C",
-    "line": "push    ebx",
+    "line": "push    ebx; forcedTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52511D",
-    "line": "push    edi",
+    "line": "push    edi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52511E",
-    "line": "call    sub_57AB00",
+    "line": "call    Interface__CreateDialogMenu",
     "mnemonic": "call",
     "size": 5
   },
@@ -5917,7 +5917,7 @@
   },
   {
     "ea": "0x525249",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6061,7 +6061,7 @@
   },
   {
     "ea": "0x525294",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },

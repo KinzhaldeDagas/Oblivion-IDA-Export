@@ -1,1 +1,1 @@
-IID
+typedef GUID IID;

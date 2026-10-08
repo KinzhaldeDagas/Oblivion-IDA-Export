@@ -1,1 +1,1 @@
-SkinShader
+struct SkinShader;

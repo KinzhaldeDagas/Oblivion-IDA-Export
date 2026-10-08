@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x42B470",
+      "0x42B4AC"
+    ]
+  ],
+  "chunks_sha256": "714d39ea33d34e93fad61dee97fa321353dc94dbca9beeaf70089e0520c3da52",
+  "comment_regular": "Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
+  "comment_repeatable": "Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_42B470",
+  "display_name": "TeleportData_GetLinkedDoorWorldspace",
   "end_ea": "0x42B4AC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_42B470",
+  "name": "TeleportData_GetLinkedDoorWorldspace",
   "segment": ".text",
   "sha256": "714d39ea33d34e93fad61dee97fa321353dc94dbca9beeaf70089e0520c3da52",
   "size": 60,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42B470",
-  "type": "TESWorldSpace *__thiscall(TESObjectREFR **this)",
+  "total_chunk_size": 60,
+  "type": "TESWorldSpace *__thiscall(TESObjectREFR **linkedDoor)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 13
 }

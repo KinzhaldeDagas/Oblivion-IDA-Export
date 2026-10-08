@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5B16B9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x5B16F9",
-    "line": "call    sub_588D90",
+    "line": "call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x5B1710",
-    "line": "fstp    [esp+24h+a2]; a3",
+    "line": "fstp    [esp+24h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B1713",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B1718",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x5B1748",
-    "line": "fstp    [esp+24h+a2]; a3",
+    "line": "fstp    [esp+24h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B174B",
-    "line": "push    0FCBh; a2",
+    "line": "push    0FCBh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B1750",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,19 +451,19 @@
   },
   {
     "ea": "0x5B1771",
-    "line": "fstp    [esp+24h+a2]; a3",
+    "line": "fstp    [esp+24h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B1774",
-    "line": "push    0FCAh; a2",
+    "line": "push    0FCAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B1779",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5B1788",
-    "line": "call    sub_588C50",
+    "line": "call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x5B1795",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,19 +547,19 @@
   },
   {
     "ea": "0x5B17AE",
-    "line": "fstp    [esp+24h+a2]; a3",
+    "line": "fstp    [esp+24h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B17B1",
-    "line": "push    0FADh; a2",
+    "line": "push    0FADh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B17B6",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x5B17BD",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,19 +607,19 @@
   },
   {
     "ea": "0x5B17D2",
-    "line": "fstp    [esp+24h+a2]; a3",
+    "line": "fstp    [esp+24h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B17D5",
-    "line": "push    0FACh; a2",
+    "line": "push    0FACh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B17DA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,19 +643,19 @@
   },
   {
     "ea": "0x5B17E9",
-    "line": "fstp    [esp+24h+a2]; a3",
+    "line": "fstp    [esp+24h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B17EC",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B17F1",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x5B1811",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x5B1838",
-    "line": "call    sub_57D7F0",
+    "line": "call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x5B1861",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x5B189E",
-    "line": "call    sub_588D90",
+    "line": "call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x5B18E5",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x5B1939",
-    "line": "call    sub_588D90",
+    "line": "call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x5B195B",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x5B19BE",
-    "line": "call    sub_588D90",
+    "line": "call    sub_588D90; AchievementsNative evidence: stock tile depth helper starts with tile depth and adds parent depth for locus ancestors / top menu child; InventoryMenu hover sets focus box depth to this value minus 0.5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x5B19DB",
-    "line": "call    sub_588CF0",
+    "line": "call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.",
     "mnemonic": "call",
     "size": 5
   },

@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x52BFAA",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x52BFF3",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x52C073",
-    "line": "call    sub_46BA10",
+    "line": "call    TESForm_AddChunk; Appends a six-byte empty CHUNK header (four-byte chunk ID plus zero 16-bit payload length) to the global TESForm save buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x52C0D5",
-    "line": "call    sub_46BA10",
+    "line": "call    TESForm_AddChunk; Appends a six-byte empty CHUNK header (four-byte chunk ID plus zero 16-bit payload length) to the global TESForm save buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x52C0FC",
-    "line": "call    sub_46BA10",
+    "line": "call    TESForm_AddChunk; Appends a six-byte empty CHUNK header (four-byte chunk ID plus zero 16-bit payload length) to the global TESForm save buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x52C1DB",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x52C1E1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x52C25B",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x52C261",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x52C2EC",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x52C380",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x52C414",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x52C435",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },

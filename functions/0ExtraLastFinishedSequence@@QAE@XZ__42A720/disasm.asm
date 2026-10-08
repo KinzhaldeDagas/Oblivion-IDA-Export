@@ -20,7 +20,6 @@
 0x42A762: mov     dword ptr [esi], offset ??_7ExtraLastFinishedSequence@@6B@; const ExtraLastFinishedSequence::`vftable'
 0x42A768: lea     edx, [eax+1]
 0x42A76B: jmp     short loc_42A770
-0x42A76D: align 10h
 0x42A770: mov     cl, [eax]
 0x42A772: add     eax, 1
 0x42A775: test    cl, cl
@@ -48,3 +47,12 @@
 0x42A7AF: pop     esi
 0x42A7B0: add     esp, 10h
 0x42A7B3: retn    4
+0x9ABA20: mov     ecx, [ebp-10h]; this
+0x9ABA23: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9ABA28: mov     edx, [esp+arg_4]
+0x9ABA2C: lea     eax, [edx-0Ch]
+0x9ABA2F: mov     ecx, [edx-10h]
+0x9ABA32: xor     ecx, eax
+0x9ABA34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABA39: mov     eax, offset stru_AD881C
+0x9ABA3E: jmp     ___CxxFrameHandler3

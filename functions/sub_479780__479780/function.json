@@ -1,19 +1,36 @@
 {
-  "callees_count": 75,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_479780",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 35,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x479780",
+      "0x479C34"
+    ],
+    [
+      "0x9AF110",
+      "0x9AF16A"
+    ]
+  ],
+  "chunks_sha256": "1c503d983ccbc2b2aa4882333f0eaeadfdbdbd5de28dfe54b8144609705ceb5e",
+  "comment_regular": "Oblivion equipped-WEAP 3D path on perspective-specific ActorSkinInfo. Accepts form type 0x21; WEAP type byte 5 (Bow) uniquely selects equipment/add-on slot 0x0E, others use slot 9. Loads/clones through Prn, stores WeaponForm/WeaponModel/WeaponObject at +0xDC/+0xE0/+0xE4, then reconciles drawn/sheathed state. External Crossbow contrast: native equipped-model identity is this ActorSkinInfo WeaponForm/WeaponObject pair; a whole ActorAnimData-root search for the first object named Weapon is not identity- or generation-safe. Current discovery is action-triggered and one-shot, with no retry for deferred 3D load, perspective creation/switch, graph rebuild, or successful PostLoadGame.",
+  "comment_repeatable": "Oblivion equipped-WEAP 3D path on perspective-specific ActorSkinInfo. Accepts form type 0x21; WEAP type byte 5 (Bow) uniquely selects equipment/add-on slot 0x0E, others use slot 9. Loads/clones through Prn, stores WeaponForm/WeaponModel/WeaponObject at +0xDC/+0xE0/+0xE4, then reconciles drawn/sheathed state. External Crossbow contrast: native equipped-model identity is this ActorSkinInfo WeaponForm/WeaponObject pair; a whole ActorAnimData-root search for the first object named Weapon is not identity- or generation-safe. Current discovery is action-triggered and one-shot, with no retry for deferred 3D load, perspective creation/switch, graph rebuild, or successful PostLoadGame.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "ActorSkinInfo_SetEquippedWeapon3D",
   "end_ea": "0x479C34",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_479780",
+  "name": "ActorSkinInfo_SetEquippedWeapon3D",
   "segment": ".text",
   "sha256": "07fa9487f39f649171afe172053d7eec5781a183169baec90e600a8b2ccde447",
   "size": 1204,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x479780",
-  "type": "void __userpurge(char *this@<ecx>, double st5_0@<st2>, double@<st1>, double@<st0>, int)",
-  "xrefs_from_count": 444,
+  "total_chunk_size": 1294,
+  "type": "void __thiscall(ActorSkinInfo *this, TESForm *weapon)",
+  "xrefs_from_count": 466,
   "xrefs_to_count": 2
 }

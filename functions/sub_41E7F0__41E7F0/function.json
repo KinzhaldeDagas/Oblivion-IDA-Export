@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x41E7F0",
+      "0x41E803"
+    ]
+  ],
+  "chunks_sha256": "dcc2902e358b2b24595376a7b12c0bf0532f82b4f0876b65346047f3a630bfce",
+  "comment_regular": "Verified accessor: returns ExtraRank.rank as signed 32-bit; returns -1 when kExtraData_Rank is absent. Cell ownership compares this required rank against the actor's faction rank.",
+  "comment_repeatable": "Verified accessor: returns ExtraRank.rank as signed 32-bit; returns -1 when kExtraData_Rank is absent. Cell ownership compares this required rank against the actor's faction rank.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_41E7F0",
+  "display_name": "ExtraDataList_GetRank",
   "end_ea": "0x41E803",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_41E7F0",
+  "name": "ExtraDataList_GetRank",
   "segment": ".text",
   "sha256": "dcc2902e358b2b24595376a7b12c0bf0532f82b4f0876b65346047f3a630bfce",
   "size": 19,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41E7F0",
-  "type": "unsigned int __thiscall(ExtraDataList *this)",
+  "total_chunk_size": 19,
+  "type": "SInt32 __thiscall(ExtraDataList *this)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 4
 }

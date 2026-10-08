@@ -1,1 +1,1 @@
-ITEMHDR
+typedef tagITEMHDR ITEMHDR;

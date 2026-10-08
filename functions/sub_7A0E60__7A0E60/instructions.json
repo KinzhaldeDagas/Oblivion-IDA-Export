@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A0E60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Backward ownership move/assignment for overlapping ranges of 16-byte st_vector<SFrondGuide> elements. Swaps the three owned pointer fields while walking from the end.",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x7A0E82",
-    "line": "mov     esi, [esp+18h+arg_0]",
+    "line": "mov     esi, [esp+18h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0E86",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7A0E8C",
-    "line": "mov     eax, [esp+18h+arg_8]",
+    "line": "mov     eax, [esp+18h+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -232,5 +232,47 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CC600",
+    "line": "mov     edx, [esp+last]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC604",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC607",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC60A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC60C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC611",
+    "line": "mov     eax, offset stru_AF5978",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC616",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

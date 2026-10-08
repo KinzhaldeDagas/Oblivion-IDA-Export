@@ -1,1 +1,1 @@
-LPCOLESTR
+typedef const OLECHAR *LPCOLESTR;

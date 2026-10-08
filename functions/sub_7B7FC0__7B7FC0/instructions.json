@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7B7FC0",
-    "line": "push    ebx",
+    "line": "push    ebx; Recursively assigns/infers a BSShader for an NiAVObject tree. Geometry nodes resolve a shader definition, install it through NiGeometry_SetShader, and initialize shader variables; NiNode children are traversed recursively.",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7B7FF4",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7B804A",
-    "line": "mov     ecx, [esp+10h+arg_10]",
+    "line": "mov     ecx, [esp+10h+materialName]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7B8075",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -493,13 +493,13 @@
   },
   {
     "ea": "0x7B8086",
-    "line": "mov     edx, [esp+10h+arg_C]",
+    "line": "mov     edx, dword ptr [esp+10h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7B808A",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, dword ptr [esp+10h+normalMapBypass]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -511,19 +511,19 @@
   },
   {
     "ea": "0x7B808F",
-    "line": "push    eax",
+    "line": "push    eax; normalMapBypass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B8090",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B8091",
-    "line": "call    sub_7D1920",
+    "line": "call    BSShaderManager_InferGeometryShaderID; Generic material shader id inference helper. Checks material/property names including Block and STBB, but the STBB check falls through to default shader id 1; it does not select SpeedTree billboard/frond ids.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7B809E",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x7B80B6",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; shader",
     "mnemonic": "push",
     "size": 1
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7B80B9",
-    "line": "call    sub_4EC910",
+    "line": "call    NiGeometry_SetShader; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x7B80CF",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x7B80D8",
-    "line": "mov     ecx, [esp+10h+arg_10]",
+    "line": "mov     ecx, [esp+10h+materialName]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x7B8100",
-    "line": "mov     ebp, [esp+10h+arg_10]",
+    "line": "mov     ebp, [esp+10h+materialName]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -853,25 +853,25 @@
   },
   {
     "ea": "0x7B8113",
-    "line": "mov     edx, [esp+10h+arg_C]",
+    "line": "mov     edx, dword ptr [esp+10h+arg3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7B8117",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, dword ptr [esp+10h+normalMapBypass]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7B811B",
-    "line": "push    ebp",
+    "line": "push    ebp; materialName",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B811C",
-    "line": "push    edx",
+    "line": "push    edx; arg3",
     "mnemonic": "push",
     "size": 1
   },
@@ -883,25 +883,25 @@
   },
   {
     "ea": "0x7B8121",
-    "line": "push    ecx",
+    "line": "push    ecx; normalMapBypass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B8122",
-    "line": "push    edx",
+    "line": "push    edx; shaderId",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B8123",
-    "line": "push    eax",
+    "line": "push    eax; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B8124",
-    "line": "call    sub_7B7FC0",
+    "line": "call    BSShaderManager_AssignShaderToObjectRecursive; Recursively assigns/infers a BSShader for an NiAVObject tree. Geometry nodes resolve a shader definition, install it through NiGeometry_SetShader, and initialize shader variables; NiNode children are traversed recursively.",
     "mnemonic": "call",
     "size": 5
   },

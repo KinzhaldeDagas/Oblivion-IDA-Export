@@ -13,7 +13,7 @@
 0x8064B3: mov     edi, [esp+1Ch+arg_0]
 0x8064B7: push    4
 0x8064B9: mov     ecx, edi
-0x8064BB: call    NiNode_GetNiPropertyByID
+0x8064BB: call    NiNode_GetNiPropertyByID;
 0x8064C0: test    eax, eax
 0x8064C2: jz      short loc_806511
 0x8064C4: mov     edx, [eax]
@@ -53,15 +53,15 @@
 0x806522: test    eax, eax
 0x806524: mov     [esp+1Ch+var_4], 0
 0x80652C: jz      short loc_806539
-0x80652E: mov     ecx, eax
-0x806530: call    sub_864750
+0x80652E: mov     ecx, eax; this
+0x806530: call    GeometryDecalShaderProperty_Ctor; [Verified] Oblivion GeometryDecalShaderProperty constructor delegates to BSShaderLightingProperty::BSShaderLightingProperty, so it inherits the +0x80 NiTPointerList<DECAL_DATA*> and +0x8C count. Its stream construction helper allocates 0x9C bytes, matching the Oblivion lighting-property layout. Fallout divergence: Fallout's GeometryDecalShaderProperty is 0xF0 bytes and its ExtraDecalRefs path is separate reference metadata; no matching inherited DECAL_DATA list has been established there. Do not infer 1:1 class equivalence.
 0x806535: mov     esi, eax
 0x806537: jmp     short loc_80653B
 0x806539: xor     esi, esi
 0x80653B: push    esi; a2
 0x80653C: mov     ecx, edi; this
 0x80653E: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x806546: call    sub_405680
+0x806546: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x80654B: mov     edx, [esi]
 0x80654D: mov     eax, [edx+58h]
 0x806550: push    edi
@@ -88,3 +88,15 @@
 0x806586: pop     esi
 0x806587: add     esp, 10h
 0x80658A: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

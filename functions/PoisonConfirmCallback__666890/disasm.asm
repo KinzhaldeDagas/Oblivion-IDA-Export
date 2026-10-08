@@ -5,7 +5,7 @@
 0x6668A4: mov     eax, ds:0B333C4h
 0x6668A9: cmp     dword ptr [eax+6E0h], 0
 0x6668B0: jz      loc_6669CC
-0x6668B6: call    sub_578D70
+0x6668B6: call    InterfaceManager_ConsumeMessageButton
 0x6668BB: cmp     al, 2
 0x6668BD: jnz     loc_6669BD
 0x6668C3: push    esi

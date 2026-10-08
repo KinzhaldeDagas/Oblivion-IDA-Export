@@ -1,15 +1,18 @@
-unsigned int **__thiscall sub_7965E0(char *this, int *a2)
+// Oblivion CIndexedGeometry::AddVertexBinormal. Appends one xyz binormal to the indexed vertex stream.
+void __thiscall OB_CIndexedGeometry_AddVertexBinormal_010201A0(
+        OB_CIndexedGeometry_010201A0 *this,
+        const float *binormal)
 {
-  unsigned int *v2; // esi
-  int v4; // [esp+4h] [ebp-Ch] BYREF
-  int v5; // [esp+8h] [ebp-8h] BYREF
-  int v6; // [esp+Ch] [ebp-4h] BYREF
+  OB_stVector16_010201A0 *p_vertexBinormals; // esi
+  float value; // [esp+4h] [ebp-Ch] BYREF
+  float v4; // [esp+8h] [ebp-8h] BYREF
+  float v5; // [esp+Ch] [ebp-4h] BYREF
 
-  v4 = *a2;
-  v2 = (unsigned int *)(this + 0x98);
-  v5 = a2[1];
-  v6 = a2[2];
-  sub_785F30((unsigned int *)this + 0x26, &v4);
-  sub_785F30(v2, &v5);
-  return sub_785F30(v2, &v6);
+  value = *binormal; /*0x7965ea*/
+  p_vertexBinormals = (OB_stVector16_010201A0 *)&this->vertexBinormals; /*0x7965ee*/
+  v4 = binormal[1]; /*0x7965f9*/
+  v5 = binormal[2]; /*0x796605*/
+  OB_stVector_float_PushBack_010201A0((OB_stVector16_010201A0 *)&this->vertexBinormals, &value); /*0x796609*/
+  OB_stVector_float_PushBack_010201A0(p_vertexBinormals, &v4); /*0x796615*/
+  OB_stVector_float_PushBack_010201A0(p_vertexBinormals, &v5); /*0x796621*/
 }

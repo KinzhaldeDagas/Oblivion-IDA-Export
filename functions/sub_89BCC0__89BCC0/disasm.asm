@@ -28,7 +28,6 @@
 0x89BD10: cmp     [esp+2Ch+var_18], ebp
 0x89BD14: jle     short loc_89BD65
 0x89BD16: jmp     short loc_89BD20
-0x89BD18: align 10h
 0x89BD20: mov     ecx, [esp+2Ch+var_1C]
 0x89BD24: mov     edi, [ecx+ebp*4]
 0x89BD27: mov     ecx, [edi+0BCh]

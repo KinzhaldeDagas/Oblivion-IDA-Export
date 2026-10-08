@@ -1,1 +1,1 @@
-vulkan_funcs
+struct vulkan_funcs;

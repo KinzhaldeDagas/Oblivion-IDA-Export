@@ -24,7 +24,7 @@
 0x8FDBC5: mov     esi, [ebp+arg_0]
 0x8FDBC8: mov     eax, [esi]
 0x8FDBCA: mov     edx, [eax+0Ch]
-0x8FDBCD: mov     edi, [ebp+arg_4]
+0x8FDBCD: mov     edi, dword ptr [ebp+arg_4]
 0x8FDBD0: mov     ecx, [edi]
 0x8FDBD2: movaps  xmm1, xmmword ptr [eax+10h]
 0x8FDBD6: mov     eax, [ecx+0Ch]
@@ -45,12 +45,12 @@
 0x8FDC0C: lea     ecx, [esp+1B8h+var_170]
 0x8FDC10: movaps  [esp+1B8h+var_180], xmm1
 0x8FDC15: call    sub_8B1FF0
-0x8FDC1A: mov     eax, [ebp+arg_8]
+0x8FDC1A: mov     eax, dword ptr [ebp+arg_4+4]
 0x8FDC1D: fld     dword ptr [eax+8]
 0x8FDC20: mov     edx, [ebp+arg_C]
 0x8FDC23: movaps  xmm0, [esp+1B0h+var_170]
 0x8FDC28: fst     [esp+1B0h+var_80]
-0x8FDC2F: mov     [esp+1B0h+var_128], eax
+0x8FDC2F: mov     dword ptr [esp+1B0h+var_12C+4], eax
 0x8FDC36: mov     eax, [esp+1B0h+var_194]
 0x8FDC3A: fstp    [esp+1B0h+var_194]
 0x8FDC3E: mov     ecx, [eax+8]
@@ -92,7 +92,7 @@
 0x8FDD05: push    eax
 0x8FDD06: lea     ecx, [esp+1B4h+var_130]
 0x8FDD0D: mov     [esp+1B4h+var_130], esi
-0x8FDD14: mov     [esp+1B4h+var_12C], edi
+0x8FDD14: mov     dword ptr [esp+1B4h+var_12C], edi
 0x8FDD1B: mov     dword ptr [esp+1B4h+var_B8+4], edx
 0x8FDD22: mov     [esp+1B4h+var_7C], 3C23D70Ah
 0x8FDD2D: movaps  [esp+1B4h+var_A0], xmm1

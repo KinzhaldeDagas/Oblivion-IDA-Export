@@ -1,1 +1,1 @@
-HWND
+typedef HWND__ *HWND;

@@ -1,1 +1,1 @@
-IShellFolderVtbl_0
+typedef IShellFolderVtbl IShellFolderVtbl_0;

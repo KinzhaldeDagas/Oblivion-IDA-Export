@@ -1,1 +1,1 @@
-MARGINS
+typedef _MARGINS MARGINS;

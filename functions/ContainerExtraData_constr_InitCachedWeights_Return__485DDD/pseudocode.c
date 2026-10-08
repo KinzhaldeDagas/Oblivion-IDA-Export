@@ -5,8 +5,8 @@ ExtraContainerChanges_Data *__userpurge ContainerExtraData_constr_::InitCachedWe
 {
   double v2; // st7
 
-  v2 = flt_A30634;
-  a1->totalWeight = flt_A30634;
-  a1->armorWeight = v2;
-  return a1;
+  v2 = kTerrainLODQuadRayDirectionZ; /*0x485ddd*/
+  a1->totalWeight = kTerrainLODQuadRayDirectionZ; /*0x485de5*/
+  a1->armorWeight = v2; /*0x485de8*/
+  return a1; /*0x485dfb*/
 }

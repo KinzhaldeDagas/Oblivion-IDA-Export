@@ -2,13 +2,13 @@ void __cdecl sub_A26C20()
 {
   void (__thiscall ***v0)(_DWORD, int); // esi
 
-  v0 = (void (__thiscall ***)(_DWORD, int))dword_B401D8;
-  if ( dword_B401D8 )
+  v0 = (void (__thiscall ***)(_DWORD, int))unk_B401D8; /*0xa26c21*/
+  if ( unk_B401D8 ) /*0xa26c29*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(dword_B401D8 + 4)) )
+    if ( !InterlockedDecrement((volatile LONG *)(unk_B401D8 + 4)) ) /*0xa26c2f*/
     {
-      if ( v0 )
-        (**v0)(v0, 1);
+      if ( v0 ) /*0xa26c3b*/
+        (**v0)(v0, 1); /*0xa26c45*/
     }
   }
 }

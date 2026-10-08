@@ -7,37 +7,37 @@
 0x75340E: push    edi
 0x75340F: add     esi, 64h ; 'd'
 0x753412: mov     ecx, 0Dh
-0x753417: lea     edi, [esp+128h+var_68]
+0x753417: lea     edi, [esp+128h+local]
 0x75341E: rep movsd
 0x753420: mov     esi, [ebx+10h]
 0x753423: add     esi, 64h ; 'd'
 0x753426: mov     ecx, 0Dh
 0x75342B: lea     edi, [esp+128h+var_9C]
-0x753432: lea     eax, [esp+128h+var_34]
+0x753432: lea     eax, [esp+128h+parent]
 0x753439: rep movsd
 0x75343B: push    eax
 0x75343C: lea     ecx, [esp+12Ch+var_9C]
-0x753443: call    sub_718A80
-0x753448: lea     ecx, [esp+128h+var_68]
-0x75344F: push    ecx
-0x753450: lea     edx, [esp+12Ch+var_D0]
-0x753454: push    edx
-0x753455: lea     ecx, [esp+130h+var_34]
-0x75345C: call    sub_53D7A0
-0x753461: mov     eax, [esp+128h+var_AC]
-0x753465: mov     ecx, [esp+128h+var_A8]
-0x75346C: mov     edx, [esp+128h+var_A4]
+0x753443: call    sub_718A80;
+0x753448: lea     ecx, [esp+128h+local]
+0x75344F: push    ecx; local
+0x753450: lea     edx, [esp+12Ch+out]
+0x753454: push    edx; out
+0x753455: lea     ecx, [esp+130h+parent]; parent
+0x75345C: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x753461: mov     eax, [esp+128h+out.pos.x]
+0x753465: mov     ecx, [esp+128h+out.pos.y]
+0x75346C: mov     edx, [esp+128h+out.pos.z]
 0x753473: mov     [esp+128h+var_104], eax
 0x753477: mov     [esp+128h+var_100], ecx
 0x75347B: lea     eax, [ebx+30h]
 0x75347E: push    eax
 0x75347F: lea     ecx, [esp+12Ch+var_DC]
 0x753483: push    ecx
-0x753484: lea     ecx, [esp+130h+var_D0]
+0x753484: lea     ecx, [esp+130h+out]
 0x753488: mov     [esp+130h+var_FC], edx
 0x75348C: call    sub_7101F0
 0x753491: lea     ecx, [esp+128h+var_DC]
-0x753495: call    sub_43F350
+0x753495: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x75349A: fstp    st
 0x75349C: fld     dword ptr [ebx+28h]
 0x75349F: mov     edi, [esp+128h+arg_4]
@@ -47,7 +47,6 @@
 0x7534AE: fstp    [esp+128h+var_EC]
 0x7534B2: jbe     loc_7535FD
 0x7534B8: jmp     short loc_7534C0
-0x7534BA: align 10h
 0x7534C0: mov     eax, [edi+5Ch]
 0x7534C3: fld     [esp+128h+arg_0]
 0x7534CA: movzx   ecx, bp

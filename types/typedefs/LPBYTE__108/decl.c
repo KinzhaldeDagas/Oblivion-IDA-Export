@@ -1,1 +1,1 @@
-LPBYTE
+typedef BYTE *LPBYTE;

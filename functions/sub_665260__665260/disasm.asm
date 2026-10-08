@@ -28,7 +28,6 @@
 0x6652C8: jz      short loc_665339
 0x6652CA: push    esi
 0x6652CB: jmp     short loc_6652D0
-0x6652CD: align 10h
 0x6652D0: mov     ecx, [edi]
 0x6652D2: test    ecx, ecx
 0x6652D4: jz      short loc_665338

@@ -237,3 +237,9 @@
 0x953D67: dec     esi
 0x953D68: jnz     short loc_953D50
 0x953D6A: jmp     loc_953CD0
+0x953DC5: mov     eax, [esp+25Ch+var_244]
+0x953DC9: mov     ecx, [esp+25Ch+arg_C]
+0x953DD0: push    ebp
+0x953DD1: push    eax
+0x953DD2: call    sub_90D3B0
+0x953DD7: jmp     loc_953CD0

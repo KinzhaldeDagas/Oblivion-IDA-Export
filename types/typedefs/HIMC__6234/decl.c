@@ -1,1 +1,1 @@
-HIMC
+typedef HANDLE HIMC;

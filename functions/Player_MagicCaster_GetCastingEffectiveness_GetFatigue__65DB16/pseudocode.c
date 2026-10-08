@@ -13,14 +13,14 @@ double __usercall Player_MagicCaster_GetCastingEffectiveness_::GetFatigue@<st0>(
   int v10; // edi
   int v12; // edi
 
-  if ( *(float *)&a9 <= a4 )
+  if ( *(float *)&a9 <= a4 ) /*0x65db24*/
   {
-    v12 = (*(int (__thiscall **)(int, int, int))(*(_DWORD *)(a3 - 0x5C) + 0x284))(a3 - 0x5C, 0xA, a2);
-    return Player_MagicCaster_GetCastingEffectiveness_::FatigueFactor(a1, v12, a3, a5, a6, a7, v12, a9, a10);
+    v12 = (*(int (__thiscall **)(int, int, int))(*(_DWORD *)(a3 - 0x5C) + 0x284))(a3 - 0x5C, 0xA, a2); /*0x65db45*/
+    return Player_MagicCaster_GetCastingEffectiveness_::FatigueFactor(a1, v12, a3, a5, a6, a7, v12, a9, a10); /*0x65db48*/
   }
   else
   {
-    v10 = Double_To_SInt32(*(float *)&a9);
-    return Player_MagicCaster_GetCastingEffectiveness_::FatigueFactor(a1, v10, a3, a5, a6, a7, a8, v10, a10);
+    v10 = Double_To_SInt32(*(float *)&a9); /*0x65db2b*/
+    return Player_MagicCaster_GetCastingEffectiveness_::FatigueFactor(a1, v10, a3, a5, a6, a7, a8, v10, a10); /*0x65db31*/
   }
 }

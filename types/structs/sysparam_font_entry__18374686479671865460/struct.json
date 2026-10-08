@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "sysparam_font_entry",
+  "definition": "struct sysparam_font_entry\n{\nsysparam_entry hdr;\nUINT weight;\nLOGFONTW val;\nWCHAR_0 fullname[32];\n}\n",
   "id": 18374686479671865460,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "sysparam_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "weight",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "val",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 92
+      "size": 92,
+      "type": "LOGFONTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fullname",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 64
+      "size": 64,
+      "type": "WCHAR_0[32]"
     }
   ],
   "name": "sysparam_font_entry",
+  "ordinal": 7712,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 192
 }

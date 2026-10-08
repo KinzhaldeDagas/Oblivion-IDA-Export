@@ -6,7 +6,7 @@
 0x5368BA: jz      loc_53694F
 0x5368C0: push    esi
 0x5368C1: push    edi
-0x5368C2: call    sub_47FAC0
+0x5368C2: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x5368C7: add     esp, 4
 0x5368CA: test    eax, eax
 0x5368CC: jz      short loc_5368FD

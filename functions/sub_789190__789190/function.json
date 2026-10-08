@@ -1,19 +1,36 @@
 {
-  "callees_count": 24,
-  "callers_count": 19,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_789190",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
+  "callers_count": 47,
+  "chunks": [
+    [
+      "0x789190",
+      "0x78939B"
+    ],
+    [
+      "0x9CB2E0",
+      "0x9CB35A"
+    ]
+  ],
+  "chunks_sha256": "d1561d5982a7cd3aa8756d06c1a947bec07eaef948d17ef9a8723b0c3e74aac5",
+  "comment_regular": "Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
+  "comment_repeatable": "Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 23,
+  "display_name": "OB_IdvFileError_Ctor_010201A0",
   "end_ea": "0x78939B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_789190",
+  "name": "OB_IdvFileError_Ctor_010201A0",
   "segment": ".text",
   "sha256": "6e7295458a9c69c48d513dff4c3454e313b0c00e13391bd96edd64e17a8a12c3",
   "size": 523,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x789190",
-  "type": "std::exception *__thiscall(std::exception *this, _DWORD *, char)",
-  "xrefs_from_count": 163,
+  "total_chunk_size": 645,
+  "type": "OB_IdvFileError_010201A0 *__thiscall(OB_IdvFileError_010201A0 *this, const OB_stString28_010201A0 *details, bool appendSystemError)",
+  "xrefs_from_count": 210,
   "xrefs_to_count": 47
 }

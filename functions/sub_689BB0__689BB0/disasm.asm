@@ -1,11 +1,11 @@
-0x689BB0: push    ebx
+0x689BB0: push    ebx; Copies only reference-type TravelPath nodes into an output BSSimpleList. Fast-travel helper uses this to process teleport refs/current-mount path side effects; it intentionally skips the final destination vector node.
 0x689BB1: mov     ebx, [esp+4+arg_0]
 0x689BB5: test    ebx, ebx
 0x689BB7: push    esi
 0x689BB8: mov     esi, ecx
 0x689BBA: jz      short loc_689BFF
 0x689BBC: mov     ecx, ebx
-0x689BBE: call    BSSimpleList_Clear
+0x689BBE: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x689BC3: add     esi, 4
 0x689BC6: jz      short loc_689BFF
 0x689BC8: push    edi
@@ -19,8 +19,8 @@
 0x689BDF: call    ?status@DName@@QBE?AW4DNameStatus@@XZ; DName::status(void)
 0x689BE4: test    eax, eax
 0x689BE6: jnz     short loc_689BF7
-0x689BE8: mov     ecx, edi
-0x689BEA: call    sub_68B0F0
+0x689BE8: mov     ecx, edi; this
+0x689BEA: call    TravelPathNode_GetReference; Verified returns payload as TESObjectREFR* only when kind==0 (reference node); returns null for position nodes or other kinds.
 0x689BEF: push    eax
 0x689BF0: mov     ecx, ebx
 0x689BF2: call    BSSimpleList_PushBack

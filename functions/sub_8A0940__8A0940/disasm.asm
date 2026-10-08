@@ -79,3 +79,16 @@
 0x8A0A62: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x8A0A67: add     esp, 220h
 0x8A0A6D: retn    4
+0x9D6940: lea     ecx, [ebp-220h]
+0x9D6946: jmp     sub_8BC000
+0x9D694B: mov     edx, [esp+arg_4]
+0x9D694F: lea     eax, [edx-224h]
+0x9D6955: mov     ecx, [edx-228h]
+0x9D695B: xor     ecx, eax
+0x9D695D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6962: add     eax, 10h
+0x9D6965: mov     ecx, [edx-4]
+0x9D6968: xor     ecx, eax
+0x9D696A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D696F: mov     eax, offset stru_AFE6F4
+0x9D6974: jmp     ___CxxFrameHandler3

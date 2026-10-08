@@ -1,5 +1,5 @@
 // attributes: thunk
-double __usercall j_ValueModifierEffect_Remove@<st0>(double a1@<st0>)
+void __thiscall j_ValueModifierEffect_Remove(_DWORD *this, int a2, float a3)
 {
-  return ValueModifierEffect_Remove(a1);
+  ValueModifierEffect_Remove(this, a2, a3); /*0x6a3660*/
 }

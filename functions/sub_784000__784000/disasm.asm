@@ -1,9 +1,9 @@
-0x784000: push    esi
+0x784000: push    esi; Oblivion checked accessor for the compact 16-byte vector of 0x18-byte stVec elements. Validates index against (end-begin)/0x18 and returns begin + index*0x18.
 0x784001: mov     esi, ecx
 0x784003: mov     eax, [esi+4]
 0x784006: test    eax, eax
 0x784008: push    edi
-0x784009: mov     edi, [esp+8+arg_0]
+0x784009: mov     edi, [esp+8+index]
 0x78400D: jz      short loc_784029
 0x78400F: mov     ecx, [esi+8]
 0x784012: sub     ecx, eax

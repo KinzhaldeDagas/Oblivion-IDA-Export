@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B9010",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion appends eligible ordinary MenuTopics in input-list order and performs no topic-priority sort here. Fallout's corresponding FillTopicList (x4y6:0x825E8740) sorts non-choice lists with PrioritySort (0x825E7390) by TESTopic priority; choice lists keep authored order. In Oblivion, the known-topic source is already sorted by display name in PlayerCharacter::AddKnownTopics, while INFO.linkedTo retains its own list order.",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6B9063",
-    "line": "xor     ecx, ecx",
+    "line": "xor     ecx, ecx; Hard seed invariant: count existing MenuTopics and return unless count >= 1. This is not merely a duplicate check; FillTopicList cannot populate an empty manager.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x6B9088",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+topics]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x6B9096",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+topics]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x6B90B2",
-    "line": "mov     [esp+34h+arg_0], ecx",
+    "line": "mov     [esp+34h+topics], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x6B90B8",
-    "line": "mov     ecx, [esp+34h+var_18]",
+    "line": "mov     ecx, [esp+34h+var_18]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B90BC",
-    "line": "call    Actor__IsNoRumor",
+    "line": "call    Actor__IsNoRumor; NoRumors is only an offer gate for player-menu INFOGENERAL D7. It does not invalidate ExtraInfoGeneralTopic (0x59), alter the cached INFO/response/display/unread state, or filter ambient conversation links.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,19 +343,19 @@
   },
   {
     "ea": "0x6B90C8",
-    "line": "lea     ecx, [eax+44h]",
+    "line": "lea     ecx, [eax+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6B90CB",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B90CC",
-    "line": "call    sub_425970",
+    "line": "call    ExtraDataList__GetInfoGeneralTopic; Retrieve the actor-owned INFOGENERAL cache when D7 is encountered in the player choice source. An empty post-load cache reconstructs responses from its stored selection identity; it does not rerun conditions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x6B90E3",
-    "line": "mov     [edi+1Ch], eax",
+    "line": "mov     [edi+1Ch], eax; Rewind the cached INFOGENERAL MenuTopic to its first response before re-appending it. No topic/INFO condition selection is rerun, so clearing NoRumors can resurrect the exact old cached rumor line and UI state.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -439,19 +439,19 @@
   },
   {
     "ea": "0x6B90F4",
-    "line": "push    edi",
+    "line": "push    edi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B90F5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B90F7",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,43 +511,43 @@
   },
   {
     "ea": "0x6B911A",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B911B",
-    "line": "push    ecx",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B911C",
-    "line": "lea     edx, [esp+3Ch+var_14]",
+    "line": "lea     edx, [esp+3Ch+conditionFallback]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B9120",
-    "line": "push    edx",
+    "line": "push    edx; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9121",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B9123",
-    "line": "mov     byte ptr [esp+40h+var_14], 0",
+    "line": "mov     [esp+40h+conditionFallback], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6B9128",
-    "line": "call    sub_52F770",
+    "line": "call    TESTopic__GetMatchingInfo",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,19 +571,19 @@
   },
   {
     "ea": "0x6B9137",
-    "line": "push    ebp",
+    "line": "push    ebp; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9138",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B913A",
-    "line": "call    sub_52F570",
+    "line": "call    TESTopic__GetOwnerQuest",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x6B9152",
-    "line": "jnz     short loc_6B9174",
+    "line": "jnz     short loc_6B9174; Second player-menu INFOGENERAL gate decides whether to construct/cache a fresh Rumors MenuTopic. This logic is separate from ambient HELLO/linked-topic conversation generation.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x6B915B",
-    "line": "mov     ecx, [esp+34h+var_18]",
+    "line": "mov     ecx, [esp+34h+var_18]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B915F",
-    "line": "call    Actor__IsNoRumor",
+    "line": "call    Actor__IsNoRumor; Second NoRumors gate prevents constructing a fresh INFOGENERAL MenuTopic. A previously cached type-0x59 object remains owned by the actor and can reappear if the type-0x5A NoRumors override later clears.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x6B9193",
-    "line": "mov     ecx, [esp+34h+var_14]",
+    "line": "mov     ecx, dword ptr [esp+34h+conditionFallback]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x6B919B",
-    "line": "push    ecx",
+    "line": "push    ecx; substituteInfoRefusal",
     "mnemonic": "push",
     "size": 1
   },
@@ -757,37 +757,37 @@
   },
   {
     "ea": "0x6B919F",
-    "line": "push    ecx",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B91A0",
-    "line": "push    ebp",
+    "line": "push    ebp; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B91A1",
-    "line": "push    esi",
+    "line": "push    esi; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B91A2",
-    "line": "push    ebx",
+    "line": "push    ebx; ownerQuest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B91A3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B91A5",
-    "line": "call    sub_6B8E00",
+    "line": "call    MenuTopic__MenuTopic; Oblivion MenuTopic allocation is 0x28 bytes at its native creator. Fallout counterpart FillTopicList allocates 0x2C bytes before MenuTopic constructor (x4y6:0x825E8740); keep these version-specific class layouts separate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x6B91CB",
-    "line": "jnz     short loc_6B91DF",
+    "line": "jnz     short loc_6B91DF; Fresh INFOGENERAL with SayOnce clear is assigned to actor-owned ExtraInfoGeneralTopic. SayOnce prevents that ownership transfer. If such an uncached Rumors MenuTopic is appended, ClearData still skips destruction because isInfoGeneralTopic remains true, producing a native ownership leak.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -871,19 +871,19 @@
   },
   {
     "ea": "0x6B91D4",
-    "line": "push    edi",
+    "line": "push    edi; menuTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B91D5",
-    "line": "add     ecx, 44h ; 'D'",
+    "line": "add     ecx, 44h ; 'D'; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x6B91D8",
-    "line": "call    sub_422C70",
+    "line": "call    ExtraDataList__SetInfoGeneralTopic; Stores the exact MenuTopic pointer in ExtraInfoGeneralTopic; this is ownership, not a clone. The pointer is installed before the subsequent nonempty-response append test, so authored INFOGENERAL data relies on having at least one usable response.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6B91F9",
-    "line": "lea     eax, [esi+4]",
+    "line": "lea     eax, [esi+4]; Only the cached INFOGENERAL MenuTopic is checked against the existing MenuTopic list before append. Ordinary linkedTo entries have no corresponding duplicate-pointer check, so repeated authored links may render repeated TOPIC tiles.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x6B920B",
-    "line": "push    edi",
+    "line": "push    edi; Append successful MenuTopic to the seeded list and bypass local destruction. For cached INFOGENERAL, ExtraInfoGeneralTopic owns it. A SayOnce INFOGENERAL is deliberately uncached but remains exempt from ClearData destruction.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x6B9216",
-    "line": "test    edi, edi",
+    "line": "test    edi, edi; Non-appended MenuTopic is destroyed here. For a freshly cached INFOGENERAL with no usable response, the actor ExtraInfoGeneralTopic already holds this raw pointer; native data therefore depends on the nonempty-response invariant.",
     "mnemonic": "test",
     "size": 2
   },
@@ -1033,13 +1033,13 @@
   },
   {
     "ea": "0x6B921A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B921C",
-    "line": "call    sub_6B8F50",
+    "line": "call    MenuTopic__Destroy; Ordinary MenuTopics destroy every DialogueResponse. INFOGENERAL skips response destruction here because ExtraInfoGeneralTopic owns the cached object; that owner's destructor clears isInfoGeneralTopic first, then calls this routine for full cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x6B9222",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x6B922A",
-    "line": "cmp     [esp+34h+arg_0], 0",
+    "line": "cmp     [esp+34h+topics], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1126,5 +1126,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6FC0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6FC3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6FC4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6FC9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6FCA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6FCB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C6FCF",
+    "line": "lea     eax, [edx-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6FD2",
+    "line": "mov     ecx, [edx-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6FD5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6FD7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6FDC",
+    "line": "mov     eax, offset stru_AEF44C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6FE1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

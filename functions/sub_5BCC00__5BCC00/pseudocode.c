@@ -8,25 +8,25 @@ char __usercall sub_5BCC00@<al>(
         char *a7,
         _DWORD *a8)
 {
-  char v9; // bl
+  char v8; // bl
   int OpenMenuTile; // eax
-  Tile *v11; // esi
-  double v12; // st7
-  NiObject *v14; // [esp-4h] [ebp-14h]
+  Tile *v10; // esi
+  double v11; // st7
+  NiObject *v13; // [esp-4h] [ebp-14h]
 
-  v9 = sub_5BC8B0(st5_0, st6_0, st7_0, a4, a5, a6, a7, a8);
-  OpenMenuTile = Menu_GetOpenMenuTile(0x3E9);
-  v11 = (Tile *)OpenMenuTile;
-  if ( OpenMenuTile )
+  v8 = sub_5BC8B0(st5_0, st6_0, st7_0, a4, a5, a6, a7, a8); /*0x5bcc25*/
+  OpenMenuTile = Menu_GetOpenMenuTile(0x3E9); /*0x5bcc27*/
+  v10 = (Tile *)OpenMenuTile; /*0x5bcc2c*/
+  if ( OpenMenuTile ) /*0x5bcc33*/
   {
-    v14 = *(NiObject **)(OpenMenuTile + 0x24);
-    InterfaceManager_GetSingleton(0, 1);
-    sub_57EA20(v14, 1.0, 0.0);
-    Tile_SetFloat(v11, (_DWORD *)0xFA1, fConstant_2);
-    v12 = fConstant_2;
-    Tile_SetFloat(v11, (_DWORD *)0x1772, fConstant_2);
-    *(_DWORD *)(Tile_GetParentMenu(v11) + 0x24) = 1;
-    sub_58FBA0((int)v11, st5_0, st6_0, v12, 0);
+    v13 = *(NiObject **)(OpenMenuTile + 0x24); /*0x5bcc46*/
+    InterfaceManager_GetSingleton(0, 1); /*0x5bcc4b*/
+    sub_57EA20(v13, 1.0, 0.0); /*0x5bcc55*/
+    Tile_SetFloat(v10, 0xFA1u, fConstant_2); /*0x5bcc6b*/
+    v11 = fConstant_2; /*0x5bcc70*/
+    Tile_SetFloat(v10, 0x1772u, fConstant_2); /*0x5bcc81*/
+    *(_DWORD *)(Tile_GetParentMenu(v10) + 0x24) = 1; /*0x5bcc91*/
+    sub_58FBA0((int)v10, st5_0, st6_0, v11, 0); /*0x5bcc98*/
   }
-  return v9;
+  return v8; /*0x5bcc9d*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78FB00",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+arg_0]; Allocates count contiguous 0x18-byte OB_CBranchFlareEntry records from FormHeap. Checks count*24 overflow and throws std::bad_alloc before allocation on overflow.",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,4 +1,4 @@
-0x69EF10: mov     eax, [esp+arg_4]
+0x69EF10: mov     eax, [esp+linkContext]; Verified MagicModelHitEffect +0x84 PostLink callback uses owner ActiveEffect and target linkContext to restore model/target state, then calls Update and returns its bool result. ActiveEffect_Base_PostLink ignores that return and registers the object with ActorProcessManager.
 0x69EF14: sub     esp, 8
 0x69EF17: push    ebx
 0x69EF18: push    ebp
@@ -11,7 +11,7 @@
 0x69EF23: mov     esi, ecx
 0x69EF25: call    nullsub_18
 0x69EF2A: test    edi, edi
-0x69EF2C: mov     ebp, [esi+2Ch]
+0x69EF2C: mov     ebp, [esi+2Ch]; Verified (Oblivion): while restoring a save, derived +0x2C is first treated as a serialized payload buffer. PostLink consumes it, frees the buffer, and replaces +0x2C with the owner's model path (or fallback data).
 0x69EF2F: jz      short loc_69EF47
 0x69EF31: mov     ecx, [edi+0Ch]
 0x69EF34: mov     eax, [ecx+1Ch]
@@ -21,7 +21,7 @@
 0x69EF40: call    eax
 0x69EF42: mov     [esi+2Ch], eax
 0x69EF45: jmp     short loc_69EF4E
-0x69EF47: mov     ecx, [esp+18h+arg_8]
+0x69EF47: mov     ecx, [esp+18h+fallbackData]
 0x69EF4B: mov     [esi+2Ch], ecx
 0x69EF4E: mov     edx, [esi]
 0x69EF50: fld     dword ptr [esi+20h]
@@ -37,13 +37,13 @@
 0x69EF6D: jz      loc_69F041
 0x69EF73: mov     eax, ds:0B33B00h
 0x69EF78: mov     ecx, [eax+14h]
-0x69EF7B: push    2; Size
+0x69EF7B: push    2; byteCount
 0x69EF7D: lea     edx, [esp+1Ch+Dst]
 0x69EF81: mov     [esp+1Ch+var_4], ecx
 0x69EF85: mov     [eax+14h], ebp
-0x69EF88: mov     ecx, ds:0B33B00h
-0x69EF8E: push    edx; Dst
-0x69EF8F: call    SaveLoad_LoadData
+0x69EF88: mov     ecx, ds:0B33B00h; self
+0x69EF8E: push    edx; destination
+0x69EF8F: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x69EF94: mov     eax, [esi+30h]
 0x69EF97: test    eax, eax
 0x69EF99: jz      loc_69F029
@@ -55,10 +55,10 @@
 0x69EFB0: test    eax, eax
 0x69EFB2: mov     [esp+18h+var_8], eax
 0x69EFB6: jz      short loc_69F029
-0x69EFB8: mov     ebx, [esp+18h+arg_4]
+0x69EFB8: mov     ebx, [esp+18h+linkContext]
 0x69EFBC: fld     dword ptr ds:0A30634h
 0x69EFC2: test    ebx, ebx
-0x69EFC4: fstp    [esp+18h+arg_8]
+0x69EFC4: fstp    [esp+18h+fallbackData]
 0x69EFC8: jz      short loc_69F010
 0x69EFCA: mov     eax, [ebx]
 0x69EFCC: mov     edx, [eax+190h]
@@ -82,8 +82,8 @@
 0x69F002: test    eax, eax
 0x69F004: jz      short loc_69F010
 0x69F006: fld     dword ptr [eax+94h]
-0x69F00C: fstp    [esp+18h+arg_8]
-0x69F010: fld     [esp+18h+arg_8]
+0x69F00C: fstp    [esp+18h+fallbackData]
+0x69F010: fld     [esp+18h+fallbackData]
 0x69F014: mov     eax, [esi+30h]
 0x69F017: push    ecx
 0x69F018: mov     ecx, [esp+1Ch+var_8]

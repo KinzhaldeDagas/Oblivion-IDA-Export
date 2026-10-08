@@ -17,7 +17,7 @@
 0x501A28: push    edx; a2
 0x501A29: push    eax; a1
 0x501A2A: mov     dword ptr [esp+28h+var_4], 0
-0x501A32: call    Script_ExtractArgs
+0x501A32: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x501A37: add     esp, 20h
 0x501A3A: test    al, al
 0x501A3C: jnz     short loc_501A41
@@ -30,7 +30,7 @@
 0x501A4A: push    0
 0x501A4C: push    edx
 0x501A4D: push    esi
-0x501A4E: call    sub_4F45D0
+0x501A4E: call    Cmd_GetBaseAV_EvalOrConsole; GetBaseAV eval/helper. Requires an actor-like reference, reads base calculated AV, writes the numeric result, and prints to console when active.
 0x501A53: add     esp, 10h
 0x501A56: pop     esi
 0x501A57: pop     ecx

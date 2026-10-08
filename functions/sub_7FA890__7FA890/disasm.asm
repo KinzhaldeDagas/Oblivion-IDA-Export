@@ -37,10 +37,10 @@
 0x7FA8E6: call    dword ptr ds:0A28078h
 0x7FA8EC: mov     ecx, [esi+38h]
 0x7FA8EF: lea     eax, [esi+70h]
-0x7FA8F2: push    eax
-0x7FA8F3: push    ecx
-0x7FA8F4: lea     ecx, [esi+40h]
-0x7FA8F7: call    sub_76CE40
+0x7FA8F2: push    eax; value
+0x7FA8F3: push    ecx; index
+0x7FA8F4: lea     ecx, [esi+40h]; this
+0x7FA8F7: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7FA8FC: add     dword ptr [esi+38h], 1
 0x7FA900: pop     edi
 0x7FA901: pop     esi

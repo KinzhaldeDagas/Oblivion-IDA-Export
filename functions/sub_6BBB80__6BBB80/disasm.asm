@@ -1,4 +1,4 @@
-0x6BBB80: mov     ecx, ds:0B3F9A8h
+0x6BBB80: mov     ecx, ds:0B3F9A8h; Oblivion position evaluator for numeric type 0: ignores segment time and both keys and writes the engine's zero position constant.
 0x6BBB86: mov     eax, [esp+arg_C]
 0x6BBB8A: mov     [eax], ecx
 0x6BBB8C: mov     edx, ds:0B3F9ACh

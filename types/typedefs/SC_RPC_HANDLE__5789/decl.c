@@ -1,1 +1,1 @@
-SC_RPC_HANDLE
+typedef void *SC_RPC_HANDLE;

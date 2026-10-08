@@ -12,7 +12,7 @@
 0x989A1B: push    edi
 0x989A1C: mov     [ebp+var_2C], ebx
 0x989A1F: mov     [ebp+Dst], ebx
-0x989A22: mov     [ebp+var_1C], ebx
+0x989A22: mov     [ebp+destination], ebx
 0x989A25: mov     [ebp+var_28], ebx
 0x989A28: mov     [ebp+Memory], ebx
 0x989A2B: mov     [ebp+var_48], esi
@@ -45,7 +45,7 @@
 0x989A7B: call    unknown_libname_74
 0x989A80: push    1
 0x989A82: push    edi
-0x989A83: mov     [ebp+var_1C], eax
+0x989A83: mov     [ebp+destination], eax
 0x989A86: call    unknown_libname_74
 0x989A8B: push    1
 0x989A8D: push    101h
@@ -59,7 +59,7 @@
 0x989AAC: jz      unknown_libname_70___unknown_libname_71
 0x989AB2: cmp     eax, ebx
 0x989AB4: jz      unknown_libname_70___unknown_libname_71
-0x989ABA: cmp     [ebp+var_1C], ebx
+0x989ABA: cmp     [ebp+destination], ebx
 0x989ABD: jz      unknown_libname_70___unknown_libname_71
 0x989AC3: cmp     [ebp+var_28], ebx
 0x989AC6: jz      unknown_libname_70___unknown_libname_71
@@ -117,7 +117,7 @@
 0x989B5A: add     esp, 20h
 0x989B5D: test    eax, eax
 0x989B5F: jz      unknown_libname_70___unknown_libname_71
-0x989B65: mov     ecx, [ebp+var_1C]
+0x989B65: mov     ecx, [ebp+destination]
 0x989B68: mov     eax, [ebp+Memory]
 0x989B6B: push    ebx; int
 0x989B6C: push    dword ptr [esi+4]; int
@@ -154,7 +154,7 @@
 0x989BBF: jz      unknown_libname_70___unknown_libname_71
 0x989BC5: cmp     [ebp+var_30], 1
 0x989BC9: mov     eax, [ebp+Dst]
-0x989BCC: mov     edi, [ebp+var_1C]
+0x989BCC: mov     edi, [ebp+destination]
 0x989BCF: mov     edx, [ebp+var_28]
 0x989BD2: lea     ecx, [eax+0FEh]
 0x989BD8: mov     [ecx], bx
@@ -171,7 +171,7 @@
 0x989BFC: cmp     [ebp+CPInfo.LeadByte], bl
 0x989BFF: jz      short loc_989C46
 0x989C01: lea     ecx, [ebp+CPInfo.LeadByte+1]
-0x989C04: mov     [ebp+var_1C], ecx
+0x989C04: mov     [ebp+destination], ecx
 0x989C07: mov     dl, [ecx]
 0x989C09: cmp     dl, bl
 0x989C0B: jz      short loc_989C46
@@ -187,32 +187,32 @@
 0x989C2A: inc     edx
 0x989C2B: inc     edx
 0x989C2C: mov     [ebp+Dst], edx
-0x989C2F: mov     edx, [ebp+var_1C]
+0x989C2F: mov     edx, [ebp+destination]
 0x989C32: movzx   edx, byte ptr [edx]
 0x989C35: cmp     ecx, edx
 0x989C37: jle     short loc_989C21
-0x989C39: mov     ecx, [ebp+var_1C]
+0x989C39: mov     ecx, [ebp+destination]
 0x989C3C: inc     ecx
 0x989C3D: inc     ecx
 0x989C3E: cmp     [ecx-1], bl
-0x989C41: mov     [ebp+var_1C], ecx
+0x989C41: mov     [ebp+destination], ecx
 0x989C44: jnz     short loc_989C07
-0x989C46: push    0FEh ; 'þ'; Size
+0x989C46: push    0FEh ; 'þ'; byteCount
 0x989C4B: lea     ecx, [eax+200h]
-0x989C51: push    ecx; Src
-0x989C52: push    eax; Dst
-0x989C53: call    _memcpy
-0x989C58: push    7Fh; Size
+0x989C51: push    ecx; source
+0x989C52: push    eax; destination
+0x989C53: call    _memcpy;
+0x989C58: push    7Fh; byteCount
 0x989C5A: lea     eax, [edi+100h]
-0x989C60: push    eax; Src
-0x989C61: push    edi; Dst
-0x989C62: call    _memcpy
+0x989C60: push    eax; source
+0x989C61: push    edi; destination
+0x989C62: call    _memcpy;
 0x989C67: mov     eax, [ebp+var_28]
-0x989C6A: push    7Fh; Size
+0x989C6A: push    7Fh; byteCount
 0x989C6C: lea     ecx, [eax+100h]
-0x989C72: push    ecx; Src
-0x989C73: push    eax; Dst
-0x989C74: call    _memcpy
+0x989C72: push    ecx; source
+0x989C73: push    eax; destination
+0x989C74: call    _memcpy;
 0x989C79: mov     eax, [esi+0C0h]
 0x989C7F: add     esp, 24h
 0x989C82: cmp     eax, ebx
@@ -255,3 +255,24 @@
 0x989D15: pop     ecx
 0x989D16: mov     eax, ebx
 0x989D18: jmp     short loc_989D87
+0x989D42: lea     edi, [esi+0C0h]
+0x989D48: mov     eax, [edi]
+0x989D4A: cmp     eax, ebx
+0x989D4C: jz      short loc_989D55
+0x989D4E: push    eax; lpAddend
+0x989D4F: call    ds:InterlockedDecrement
+0x989D55: mov     [edi], ebx
+0x989D57: mov     [esi+0C4h], ebx
+0x989D5D: mov     dword ptr [esi+0C8h], offset asc_AA4118
+0x989D67: mov     dword ptr [esi+0CCh], offset unk_AA45A0
+0x989D71: mov     dword ptr [esi+0D0h], offset unk_AA4720
+0x989D7B: mov     dword ptr [esi+0ACh], 1
+0x989D85: xor     eax, eax
+0x989D87: mov     ecx, [ebp+var_4]
+0x989D8A: pop     edi
+0x989D8B: pop     esi
+0x989D8C: xor     ecx, ebp
+0x989D8E: pop     ebx
+0x989D8F: call    @__security_check_cookie@4
+0x989D94: leave
+0x989D95: retn

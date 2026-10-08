@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6AD068",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6AD079",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6AD0E9",
-    "line": "call    TESObjectCELL_GetMusicType",
+    "line": "call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x6AD197",
-    "line": "call    sub_6A8E80",
+    "line": "call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\\Music\\Battle\\*.mp3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -706,12 +706,6 @@
     "line": "jmp     short loc_6AD1D0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6AD1CD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6AD1D0",
@@ -1927,7 +1921,7 @@
   },
   {
     "ea": "0x6AD469",
-    "line": "call    TESObjectCELL_GetMusicType",
+    "line": "call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1975,7 +1969,7 @@
   },
   {
     "ea": "0x6AD47D",
-    "line": "call    sub_6A8E80",
+    "line": "call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\\Music\\Battle\\*.mp3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2833,7 +2827,7 @@
   },
   {
     "ea": "0x6AD64C",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2863,7 +2857,7 @@
   },
   {
     "ea": "0x6AD65D",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3115,7 +3109,7 @@
   },
   {
     "ea": "0x6AD6EA",
-    "line": "call    TESObjectCELL_GetMusicType",
+    "line": "call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3391,7 +3385,7 @@
   },
   {
     "ea": "0x6AD787",
-    "line": "call    sub_6A8E80",
+    "line": "call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\\Music\\Battle\\*.mp3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3478,12 +3472,6 @@
     "line": "jmp     short loc_6AD7C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6AD7BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6AD7C0",
@@ -4981,7 +4969,7 @@
   },
   {
     "ea": "0x6ADAE2",
-    "line": "call    TESObjectCELL_GetMusicType",
+    "line": "call    TESObjectCELL_GetMusicType; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5029,7 +5017,7 @@
   },
   {
     "ea": "0x6ADAF6",
-    "line": "call    sub_6A8E80",
+    "line": "call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\\Music\\Battle\\*.mp3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5116,12 +5104,6 @@
     "line": "jmp     short loc_6ADB30",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6ADB2D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6ADB30",
@@ -5623,7 +5605,7 @@
   },
   {
     "ea": "0x6ADC37",
-    "line": "call    PlayerCharacter_IsPlayerInCombat",
+    "line": "call    PlayerCharacter_IsPlayerInCombat; NoCombatMusic research: PlayerCharacter_IsPlayerInCombat(player, 1) gate for entering battle music.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5635,7 +5617,7 @@
   },
   {
     "ea": "0x6ADC3E",
-    "line": "jz      loc_6ADDF5",
+    "line": "jz      loc_6ADDF5; NoCombatMusic patch site: convert JZ loc_6ADDF5 to unconditional JMP loc_6ADDF5 to skip battle-music transition.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -5899,7 +5881,7 @@
   },
   {
     "ea": "0x6ADCDB",
-    "line": "call    sub_6A8E80",
+    "line": "call    sub_6A8E80; NoCombatMusic research: music type 4 selects Data\\Music\\Battle\\*.mp3.",
     "mnemonic": "call",
     "size": 5
   },

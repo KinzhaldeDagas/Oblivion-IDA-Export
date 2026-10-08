@@ -1,4 +1,4 @@
-0x794AE0: sub     esp, 3Ch
+0x794AE0: sub     esp, 3Ch; Oblivion CPU indexed-geometry wind pass: transforms each referenced original vertex through its primary matrix, blends by primary weight, and computes each vertex once.
 0x794AE3: push    esi
 0x794AE4: mov     esi, ecx
 0x794AE6: xor     al, al
@@ -40,7 +40,7 @@
 0x794B43: fst     [esp+4Ch+var_1C]
 0x794B47: fst     [esp+4Ch+var_20]
 0x794B4B: fstp    [esp+4Ch+var_24]
-0x794B4F: mov     bx, [esp+4Ch+arg_0]
+0x794B4F: mov     bx, [esp+4Ch+lodLevel]
 0x794B54: cmp     bx, 0FFFFh
 0x794B58: mov     [esp+4Ch+var_38], ebp
 0x794B5C: jle     short loc_794B93
@@ -258,7 +258,7 @@
 0x794DD1: mov     eax, [esi+0Ch]
 0x794DD4: mov     byte ptr [ebx+eax], 1
 0x794DD8: add     [esp+4Ch+var_3C], 1
-0x794DDD: mov     bx, [esp+4Ch+arg_0]
+0x794DDD: mov     bx, [esp+4Ch+lodLevel]
 0x794DE2: jmp     loc_794BA8
 0x794DE7: add     ebp, 1
 0x794DEA: jmp     loc_794B4F

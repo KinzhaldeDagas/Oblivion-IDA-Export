@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x529B30",
-    "line": "lea     eax, [ecx+40h]",
+    "line": "lea     eax, [ecx+40h]; TESQuest::IsStageDone scans the quest's stage entries and matches the stored stage byte; on a match it returns that entry's completed byte, otherwise false.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x529B38",
-    "line": "mov     dl, [esp+4+arg_0]",
+    "line": "mov     dl, [esp+4+stage]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x719B60",
+      "0x719B9D"
+    ]
+  ],
+  "chunks_sha256": "0ebe0b1c6232b760653f45f2e5b444c8a2d5f68824bdf52b0a85d9437c1e7020",
+  "comment_regular": "CULLING goal 2026-09-27: NiTriStrips render entry first calls geometry base Render for state/controller work, then only in an active ready scene dispatches renderer virtual +0x164. Distinct renderer entry from triangle-list +0x160; do not import another engine's slot map.\n\nCULLING pipeline clarification 2026-09-27: renderer slot +0x164 resolves to 0x7693E0, shared with TriShape slot +0x160. Do not count these as separate terminal draw implementations.\n\n[v154 draw scope] NiTriStrips vtableA7F27C+84=A7F300 is wrapped for plugin-tagged branch STSP owners with differing UV2. Scope retains shader/declaration/pass refs, uses native render body, and restores modified slots on normal/SEH exit. Other branches retain original path. Native clone, hook execution and unload/reset acceptance remain UNVERIFIED.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_719B60",
   "end_ea": "0x719B9D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_719B60",
   "segment": ".text",
   "sha256": "0ebe0b1c6232b760653f45f2e5b444c8a2d5f68824bdf52b0a85d9437c1e7020",
   "size": 61,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x719B60",
+  "total_chunk_size": 61,
   "type": "int __thiscall(NiGeometry *this, NiDX9Renderer *)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 2

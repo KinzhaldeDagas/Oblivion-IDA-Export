@@ -12,7 +12,7 @@
 0x6DF0AD: retn
 0x6DF0AE: mov     ecx, [esi+14h]
 0x6DF0B1: push    ecx
-0x6DF0B2: call    FormHeapFree
+0x6DF0B2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DF0B7: add     esp, 4
 0x6DF0BA: mov     dword ptr [esi+14h], 0
 0x6DF0C1: xor     al, al

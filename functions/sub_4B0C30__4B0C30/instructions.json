@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B0C30",
-    "line": "fld1",
+    "line": "fld1; Initialize TESObjectLIGH runtime data. The 0x18-byte DATA payload is object +0x70..+0x87: +0x80 is the falloff exponent and +0x84 is projector FOV. The constructor clears the exponent and sets FOV to 90.0; record load normalizes a zero exponent to 1.0.",
     "mnemonic": "fld1",
     "size": 2
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4B0C4C",
-    "line": "fstp    dword ptr [ecx+88h]",
+    "line": "fstp    dword ptr [ecx+88h]; Initialize TESObjectLIGH::fade_88 to 1.0; this field is serialized separately as FNAM.",
     "mnemonic": "fstp",
     "size": 6
   },

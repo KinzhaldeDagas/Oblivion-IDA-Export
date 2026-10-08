@@ -1,1 +1,1 @@
-MenuBGShader
+struct MenuBGShader;

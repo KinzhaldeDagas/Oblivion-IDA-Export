@@ -1,4 +1,4 @@
-0x80A940: sub     esp, 510h
+0x80A940: sub     esp, 510h; MoonSugarEffect decode: SkinShader pixel-program loader. Loads 0x0A SKIN2*.pso ps_2_0 variants into this+0xEC from lighting\2x\p ADTS/AD/DiffusePt HLSL with FACEGENBLEND/LIGHTS/PROJ_SHADOW defines.
 0x80A946: mov     eax, ds:0B30AACh
 0x80A94B: xor     eax, esp
 0x80A94D: mov     [esp+510h+var_4], eax
@@ -136,7 +136,6 @@
 0x80AC30: lea     ebx, [esp+520h+var_500]
 0x80AC34: mov     [esp+520h+var_510], ecx
 0x80AC38: jmp     short loc_80AC40
-0x80AC3A: align 10h
 0x80AC40: mov     eax, [ebx-4]
 0x80AC43: lea     edx, [esp+520h+FileName]
 0x80AC4A: push    edx; int
@@ -158,7 +157,7 @@
 0x80AC7B: lea     ecx, [esp+534h+FileName]
 0x80AC82: push    ecx; lpFileName
 0x80AC83: mov     ecx, [esp+538h+var_508]
-0x80AC87: call    CreatePixelShader
+0x80AC87: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x80AC8C: mov     edx, [esp+520h+var_510]
 0x80AC90: mov     esi, [edx]
 0x80AC92: mov     edi, eax

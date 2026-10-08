@@ -1,4 +1,4 @@
-0x7F1A70: mov     eax, [ecx+0A4h]
+0x7F1A70: mov     eax, [ecx+0A4h]; SpeedTreeShaderLightingProperty STSPData data-pointer accessor: returns STSPData+0x08 from property +0xA4, or 0.
 0x7F1A76: test    eax, eax
 0x7F1A78: jz      short loc_7F1A7E
 0x7F1A7A: mov     eax, [eax+8]

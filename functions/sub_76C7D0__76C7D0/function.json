@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76C7D0",
+      "0x76C816"
+    ]
+  ],
+  "chunks_sha256": "d03d34f506aa5d40598be8479a8ce7bfc10460d526d5d92abed4ef52d5b9d6cc",
+  "comment_regular": "Generic NiD3DShader vtable +0x44 geometry-finish callback used by Lighting30 and other shaders. It restores D3DRS_LIGHTING (state 0x89) from the shader's saved field, then restores every state recorded by the shader render-state group. The renderer invokes it even when BeginPassLoop returned zero.",
+  "comment_repeatable": "Generic NiD3DShader vtable +0x44 geometry-finish callback used by Lighting30 and other shaders. It restores D3DRS_LIGHTING (state 0x89) from the shader's saved field, then restores every state recorded by the shader render-state group. The renderer invokes it even when BeginPassLoop returned zero.\nDX11 geometry-finish audit 2026-10-01: generic NiD3DShader receiver type verified; prior BSImageSpaceShader-specific prototype was too narrow. Calls shader+18 manager SetRenderState(137, shader+60, false), then779790 restores shader+28 saved-state list. Lighting30 uses this through vtable+44 despite its own7FB470 preparation override. Added partial OblivionShaderGeometryFinishPrefix with verified Renderer14/RenderState18/RenderStateGroup28/SavedLighting60; not a full class-size claim.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76C7D0",
+  "display_name": "NiD3DShader_FinishGeometryRender",
   "end_ea": "0x76C816",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76C7D0",
+  "name": "NiD3DShader_FinishGeometryRender",
   "segment": ".text",
   "sha256": "d03d34f506aa5d40598be8479a8ce7bfc10460d526d5d92abed4ef52d5b9d6cc",
   "size": 70,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76C7D0",
-  "type": "int __thiscall(BSImageSpaceShader *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8)",
+  "total_chunk_size": 70,
+  "type": "int __thiscall(NiD3DShader *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 20
 }

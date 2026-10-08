@@ -1,19 +1,36 @@
 {
-  "callees_count": 171,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7977D0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 54,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7977D0",
+      "0x798088"
+    ],
+    [
+      "0x9CC0F0",
+      "0x9CC123"
+    ]
+  ],
+  "chunks_sha256": "d68f5d8bdad9c380099e26f39e17f04cdcc18aa40db93cd407f494968a8487a7",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::CombineStrips stitches per-LOD unsigned-short index arrays, including parity-dependent degenerates when requested, then replaces lengths/pointers/totals through deep vector assignment. RT4.1 corroborates the algorithm only; its 32-bit contiguous storage differs.\n\n[2026-10-02 strip conversion correction] Verified parity-sensitive connector insertion: toggleFaceOrdering adds two connector indices after even source lengths and three after odd lengths. Fallout CIndexedGeometry::CombineStrips 0x828298D8 independently matches this behavior; RT4.1 IndexedGeometry.cpp:90 also preserves parity but uses int indices/paired strip-info storage. Oblivion uses ushort lengths/indices and separate pointer vectors. Triangle-list consumers must advance parity for every source window, including degenerate connector windows, and restart for each distinct strip. SpeedTreeOBSE converter now copies lengths/pointers and each selected strip before converting; it no longer rereads live metadata against an earlier allocation size. Null triangle-bearing strips fail instead of silently producing partial geometry. This is bridge hardening, not a new native synchronization guarantee.\n\n[2026-10-03 composite capacity correction] Native composite length is calculated/allocated in a wider integer, then narrowed at797D95/797DE2 when publishing the ushort length. Frond-only caller78CE00 now preflights every LOD including connector counts. Representable composites still use native code. Oversized results use the same 2/3 connector sequence, split with even-offset/two-index overlap, stage all replacement metadata/buffers before publication, and free old owned strips plus POD length/pointer arrays afterward. Branch caller78CDF6 is unchanged. Native commit/unwind behavior still needs game acceptance.\n\nOBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::CombineStrips stitches per-LOD unsigned-short index arrays, including parity-dependent degenerates when requested, then replaces lengths/pointers/totals through deep vector assignment. RT4.1 corroborates the algorithm only; its 32-bit contiguous storage differs.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::CombineStrips stitches per-LOD unsigned-short index arrays, including parity-dependent degenerates when requested, then replaces lengths/pointers/totals through deep vector assignment. RT4.1 corroborates the algorithm only; its 32-bit contiguous storage differs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 24,
+  "display_name": "OB_CIndexedGeometry_CombineStrips_010201A0",
   "end_ea": "0x798088",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7977D0",
+  "name": "OB_CIndexedGeometry_CombineStrips_010201A0",
   "segment": ".text",
   "sha256": "2852f72283af4a865f665a6818e2423c04704b1216c2c5b26412c50de65609d9",
   "size": 2232,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7977D0",
-  "type": "void __thiscall(_DWORD *this, char)",
-  "xrefs_from_count": 901,
+  "total_chunk_size": 2283,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, unsigned __int8 toggleFaceOrdering)",
+  "xrefs_from_count": 939,
   "xrefs_to_count": 2
 }

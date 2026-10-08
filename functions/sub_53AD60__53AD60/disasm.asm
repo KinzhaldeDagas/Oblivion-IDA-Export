@@ -17,8 +17,7 @@
 0x53AD9E: call    dword ptr ds:0A280B0h
 0x53ADA4: xor     eax, eax
 0x53ADA6: jmp     short loc_53ADB0
-0x53ADA8: align 10h
-0x53ADB0: mov     cl, byte ptr ds:word_B3F280[eax]
+0x53ADB0: mov     cl, byte ptr ds:unk_B3F280[eax]
 0x53ADB6: mov     [esp+eax+148h+var_108], cl
 0x53ADBA: add     eax, 1
 0x53ADBD: test    cl, cl

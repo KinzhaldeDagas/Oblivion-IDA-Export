@@ -18,7 +18,7 @@
 0x60FD5B: mov     edi, [esp+168h+arg_0]
 0x60FD62: mov     esi, ecx
 0x60FD64: cmp     esi, ds:0B333C4h
-0x60FD6A: mov     [esp+168h+var_14C], esi
+0x60FD6A: mov     [esp+168h+actor], esi
 0x60FD6E: mov     [esp+168h+var_140], edi
 0x60FD72: jnz     short loc_60FDB8
 0x60FD74: lea     ebx, [edi+44h]
@@ -48,11 +48,11 @@
 0x60FDC4: cmp     eax, 64h ; 'd'
 0x60FDC7: jnz     short loc_60FDD8
 0x60FDC9: mov     ecx, esi
-0x60FDCB: call    Actor_IsSneaking
+0x60FDCB: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x60FDD0: test    al, al
 0x60FDD2: jnz     loc_60FE77
-0x60FDD8: mov     ecx, edi; this
-0x60FDDA: call    TESObjectREFR_GetOwner
+0x60FDD8: mov     ecx, edi; reference
+0x60FDDA: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x60FDDF: push    30h ; '0'; Size
 0x60FDE1: mov     ebp, eax
 0x60FDE3: call    FormHeapAlloc
@@ -69,12 +69,12 @@
 0x60FE00: push    edi
 0x60FE01: push    5
 0x60FE03: mov     ecx, eax
-0x60FE05: call    sub_6070B0
+0x60FE05: call    sub_6070B0; RadiantAI: crime event record constructor. type field at +4: observed 0=steal item, 1=pickpocket, 2=trespass, 3=attack, 4=murder, 5=horse theft.
 0x60FE0A: mov     edi, eax
 0x60FE0C: jmp     short loc_60FE10
 0x60FE0E: xor     edi, edi
 0x60FE10: push    edi
-0x60FE11: mov     ecx, offset ActorProcessManager_ptr
+0x60FE11: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x60FE16: mov     [esp+16Ch+var_4], 0FFFFFFFFh
 0x60FE21: call    sub_67A290
 0x60FE26: cmp     eax, ebx
@@ -83,10 +83,10 @@
 0x60FE30: jnz     short loc_60FEA5
 0x60FE32: cmp     edi, ebx
 0x60FE34: jz      short loc_60FE46
-0x60FE36: mov     ecx, edi
-0x60FE38: call    sub_605E80
+0x60FE36: mov     ecx, edi; self
+0x60FE38: call    Crime_Destructor
 0x60FE3D: push    edi
-0x60FE3E: call    FormHeapFree
+0x60FE3E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60FE43: add     esp, 4
 0x60FE46: mov     ecx, esi; this
 0x60FE48: call    TESObjectREFR_GetName
@@ -101,7 +101,7 @@
 0x60FE67: add     esp, 10h
 0x60FE6A: mov     edx, [esp+168h+var_154]
 0x60FE6E: push    edx
-0x60FE6F: call    FormHeapFree
+0x60FE6F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60FE74: add     esp, 4
 0x60FE77: mov     ecx, dword ptr [esp+168h+var_C]
 0x60FE7E: mov     large fs:0, ecx
@@ -119,14 +119,14 @@
 0x60FEA5: mov     esi, [eax]
 0x60FEA7: cmp     esi, ebx
 0x60FEA9: jz      loc_60FFDA
-0x60FEAF: mov     ecx, [edi+8]; this
+0x60FEAF: mov     ecx, [edi+8]; reference
 0x60FEB2: cmp     esi, ecx
-0x60FEB4: mov     byte ptr [esp+168h+var_144], bl
+0x60FEB4: mov     [esp+168h+useBase], bl
 0x60FEB8: jz      short loc_60FEC3
-0x60FEBA: call    TESObjectREFR_GetOwner
+0x60FEBA: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x60FEBF: cmp     eax, esi
 0x60FEC1: jnz     short loc_60FEC8
-0x60FEC3: mov     byte ptr [esp+168h+var_144], 1
+0x60FEC3: mov     [esp+168h+useBase], 1
 0x60FEC8: mov     ecx, [esp+168h+var_140]
 0x60FECC: call    sub_4DB760
 0x60FED1: test    al, al
@@ -135,11 +135,11 @@
 0x60FED7: call    sub_4DB760
 0x60FEDC: test    al, al
 0x60FEDE: jz      loc_60FFC7
-0x60FEE4: mov     eax, [esp+168h+var_144]
-0x60FEE8: push    eax
-0x60FEE9: push    esi
-0x60FEEA: mov     ecx, edi
-0x60FEEC: call    sub_605F60
+0x60FEE4: mov     eax, dword ptr [esp+168h+useBase]
+0x60FEE8: push    eax; useBase
+0x60FEE9: push    esi; observer
+0x60FEEA: mov     ecx, edi; self
+0x60FEEC: call    Crime_GetDispositionPenalty
 0x60FEF1: mov     edx, [esi]
 0x60FEF3: mov     edx, [edx+374h]
 0x60FEF9: mov     [esp+168h+var_150], eax
@@ -164,20 +164,20 @@
 0x60FF2A: call    sub_605E20
 0x60FF2F: test    al, al
 0x60FF31: jz      short loc_60FF93
-0x60FF33: mov     ecx, [esp+168h+var_14C]
+0x60FF33: mov     ecx, [esp+168h+actor]
 0x60FF37: call    sub_4DB760
 0x60FF3C: test    al, al
 0x60FF3E: jnz     short loc_60FF80
-0x60FF40: mov     eax, [esp+168h+var_14C]
-0x60FF44: push    eax
-0x60FF45: mov     ecx, edi
+0x60FF40: mov     eax, [esp+168h+actor]
+0x60FF44: push    eax; actor
+0x60FF45: mov     ecx, edi; self
 0x60FF47: mov     ds:0B361C4h, ebp
-0x60FF4D: call    sub_605F00
+0x60FF4D: call    Crime_AddWitness
 0x60FF52: mov     ecx, [edi+0Ch]
-0x60FF55: push    3
-0x60FF57: push    2
+0x60FF55: push    3; index
+0x60FF57: push    2; topicType
 0x60FF59: mov     [esi+0E4h], ecx
-0x60FF5F: call    TESTopic__GEtTopic
+0x60FF5F: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x60FF64: mov     ecx, [esi+58h]
 0x60FF67: mov     edx, [ecx]
 0x60FF69: add     esp, 8
@@ -200,10 +200,10 @@
 0x60FF91: jmp     short loc_60FFC7
 0x60FF93: mov     ds:0B361C4h, ebp
 0x60FF99: mov     ecx, [edi+0Ch]
-0x60FF9C: push    0Eh
-0x60FF9E: push    2
+0x60FF9C: push    0Eh; index
+0x60FF9E: push    2; topicType
 0x60FFA0: mov     [esi+0E4h], ecx
-0x60FFA6: call    TESTopic__GEtTopic
+0x60FFA6: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x60FFAB: mov     ecx, [esi+58h]
 0x60FFAE: mov     edx, [ecx]
 0x60FFB0: add     esp, 8
@@ -221,26 +221,26 @@
 0x60FFD0: mov     [esp+168h+var_154], eax
 0x60FFD4: jnz     loc_60FEA1
 0x60FFDA: mov     ecx, [esp+168h+var_148]
-0x60FFDE: call    BSSimpleList_Clear
+0x60FFDE: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x60FFE3: mov     edx, [esp+168h+var_148]
 0x60FFE7: push    edx
-0x60FFE8: call    FormHeapFree
+0x60FFE8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60FFED: add     esp, 4
-0x60FFF0: mov     ecx, edi
-0x60FFF2: call    sub_605F30
+0x60FFF0: mov     ecx, edi; self
+0x60FFF2: call    Crime_GetWitnessCount
 0x60FFF7: test    eax, eax
 0x60FFF9: jnz     short loc_610018
 0x60FFFB: cmp     edi, ebx
 0x60FFFD: jz      loc_60FE6A
-0x610003: mov     ecx, edi
-0x610005: call    sub_605E80
+0x610003: mov     ecx, edi; self
+0x610005: call    Crime_Destructor
 0x61000A: push    edi
-0x61000B: call    FormHeapFree
+0x61000B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x610010: add     esp, 4
 0x610013: jmp     loc_60FE6A
-0x610018: push    edi
-0x610019: mov     ecx, offset ActorProcessManager_ptr
-0x61001E: call    sub_675B30
+0x610018: push    edi; crime
+0x610019: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x61001E: call    ActorProcessManager_AddCrime
 0x610023: mov     edi, [edi+0Ch]
 0x610026: push    ebx; int
 0x610027: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
@@ -284,3 +284,19 @@
 0x6100A2: lea     ecx, [eax+24h]
 0x6100A5: call    TESActorBaseData_SetSharedPlayerFactionFlags
 0x6100AA: jmp     loc_60FE6A
+0x9C3260: mov     eax, [ebp-150h]
+0x9C3266: push    eax
+0x9C3267: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C326C: pop     ecx
+0x9C326D: retn
+0x9C326E: mov     edx, [esp+arg_4]
+0x9C3272: lea     eax, [edx-158h]
+0x9C3278: mov     ecx, [edx-15Ch]
+0x9C327E: xor     ecx, eax
+0x9C3280: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3285: add     eax, 10h
+0x9C3288: mov     ecx, [edx-4]
+0x9C328B: xor     ecx, eax
+0x9C328D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3292: mov     eax, offset stru_AEBEAC
+0x9C3297: jmp     ___CxxFrameHandler3

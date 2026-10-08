@@ -1,1 +1,1 @@
-bhkPrismaticConstraint
+struct bhkPrismaticConstraint;

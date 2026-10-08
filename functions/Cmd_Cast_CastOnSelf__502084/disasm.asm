@@ -1,8 +1,8 @@
 0x502084: mov     ecx, esi; this
-0x502086: call    TESObjectREFR_GetParentCell
+0x502086: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x50208B: mov     ecx, [esp+arg_10]; this
 0x50208F: mov     esi, eax
-0x502091: call    TESObjectREFR_GetParentCell
+0x502091: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x502096: test    esi, esi
 0x502098: mov     edi, eax
 0x50209A: jz      Cmd_Cast___Done_

@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x584300",
+      "0x584386"
+    ]
+  ],
+  "chunks_sha256": "3ee23e4e243c50a11e0d5d6c7145a3698ba195347a7804e3dc55dac5dc065131",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_584300",
+  "display_name": "InterfaceManager::NewTimer",
   "end_ea": "0x584386",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_584300",
+  "name": "InterfaceManager::NewTimer",
   "segment": ".text",
   "sha256": "3ee23e4e243c50a11e0d5d6c7145a3698ba195347a7804e3dc55dac5dc065131",
   "size": 134,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x584300",
-  "type": "InterfaceManager *__cdecl(int, float)",
+  "total_chunk_size": 134,
+  "type": "void __cdecl(void *index, float duration)",
   "xrefs_from_count": 46,
   "xrefs_to_count": 7
 }

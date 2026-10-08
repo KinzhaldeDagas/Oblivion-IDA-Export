@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x435830",
-    "line": "sub     esp, 10Ch",
+    "line": "sub     esp, 10Ch; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x435844",
-    "line": "mov     ecx, g_idleAnimationMap",
+    "line": "mov     ecx, dword_B361CC+0F4h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x43586A",
-    "line": "mov     ecx, g_idleAnimationMap",
+    "line": "mov     ecx, dword_B361CC+0F4h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x43587E",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF v43 Oblivion-verified KF list head OOM guard: set EBP=0, remove pending size, and return empty list via 0x435920 before any EBP dereference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x4358C1",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF v43 Oblivion-verified KF string OOM guard: remove pending size and skip current source entry at 0x435911 before copy/list mutation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4358F1",
-    "line": "test    eax, eax",
+    "line": "test    eax, eax; MEF v43 Oblivion-verified KF link-node OOM guard: free newly copied EDI string, preserve existing list head/tail, and skip current source entry at 0x435911.",
     "mnemonic": "test",
     "size": 2
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x4359AE",
-    "line": "call    sub_431970",
+    "line": "call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.",
     "mnemonic": "call",
     "size": 5
   },

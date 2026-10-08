@@ -78,12 +78,6 @@
     "size": 2
   },
   {
-    "ea": "0x50EC4D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x50EC50",
     "line": "cmp     dword ptr [esi+4], 0",
     "mnemonic": "cmp",
@@ -121,19 +115,19 @@
   },
   {
     "ea": "0x50EC60",
-    "line": "push    ebx; Str2",
+    "line": "push    ebx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50EC61",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50EC62",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_76B090",
+  "chunks": [
+    [
+      "0x76B090",
+      "0x76B15B"
+    ]
+  ],
+  "chunks_sha256": "334b252d1812a42447b1a77c2488289d62417412b6b04b88032e88d56d65ff00",
+  "comment_regular": "Oblivion-authoritative resize/recreate wrapper. Saves the current 0x38-byte presentation block, substitutes requested width/height, and runs full device recreation. Returns 2 for requested parameters, 1 after successfully restoring originals, or 0 if both attempts fail.",
+  "comment_repeatable": "Oblivion-authoritative resize/recreate wrapper. Saves the current 0x38-byte presentation block, substitutes requested width/height, and runs full device recreation. Returns 2 for requested parameters, 1 after successfully restoring originals, or 0 if both attempts fail.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "NiDX9Renderer_Recreate",
   "end_ea": "0x76B15B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76B090",
+  "name": "NiDX9Renderer_Recreate",
   "segment": ".text",
   "sha256": "334b252d1812a42447b1a77c2488289d62417412b6b04b88032e88d56d65ff00",
   "size": 203,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76B090",
-  "type": "signed int __thiscall(unsigned __int16 *this, int, int)",
+  "total_chunk_size": 203,
+  "type": "int __thiscall(NiDX9Renderer *this, unsigned int width, unsigned int height)",
   "xrefs_from_count": 89,
   "xrefs_to_count": 1
 }

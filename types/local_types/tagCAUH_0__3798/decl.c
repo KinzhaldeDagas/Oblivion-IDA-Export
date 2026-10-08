@@ -1,1 +1,5 @@
-tagCAUH_0
+struct tagCAUH_0
+{
+ULONG cElems;
+ULARGE_INTEGER *pElems;
+};

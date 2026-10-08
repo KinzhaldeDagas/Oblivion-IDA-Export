@@ -1,8 +1,8 @@
 0x548330: sub     esp, 8
 0x548333: push    esi
-0x548334: mov     esi, [esp+0Ch+arg_0]
-0x548338: push    esi
-0x548339: call    Calc_MasteryFromSkill
+0x548334: mov     esi, [esp+0Ch+skillValue]
+0x548338: push    esi; skillValue
+0x548339: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x54833E: mov     ecx, eax
 0x548340: add     esp, 4
 0x548343: cmp     ecx, 4
@@ -11,10 +11,10 @@
 0x54834A: pop     esi
 0x54834B: add     esp, 8
 0x54834E: retn
-0x54834F: mov     eax, [esp+0Ch+arg_4]
-0x548353: push    eax
-0x548354: push    esi
-0x548355: call    Calc_LuckModifiedSkill
+0x54834F: mov     eax, [esp+0Ch+luckValue]
+0x548353: push    eax; luckValue
+0x548354: push    esi; skillValue
+0x548355: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x54835A: fmul    dword ptr ds:0B379C0h
 0x548360: add     esp, 8
 0x548363: cmp     ecx, 1
@@ -25,7 +25,7 @@
 0x548378: fmul    [esp+0Ch+var_8]
 0x54837C: fstp    [esp+0Ch+var_8]
 0x548380: push    0; Seed
-0x548382: call    GetRandomLargeInteger?
+0x548382: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x548387: cdq
 0x548388: mov     ecx, 64h ; 'd'
 0x54838D: idiv    ecx

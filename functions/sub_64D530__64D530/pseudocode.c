@@ -1,102 +1,110 @@
-void __userpurge sub_64D530(TESObjectREFR **this@<ecx>, double a2@<st1>, TESObjectREFR *a3)
+void __userpurge sub_64D530(
+        TESObjectREFR **this@<ecx>,
+        double a2@<st1>,
+        double a3@<st2>,
+        double a4@<st0>,
+        TESObjectREFR *a5)
 {
-  TESPackage *v5; // ebx
+  TESPackage *v7; // ebx
   Atmosphere *target; // ecx
-  double v7; // st7
-  int v8; // eax
-  TESObjectREFR *v9; // eax
-  void *v10; // eax
-  _DWORD *v11; // edi
+  double PointerAtOffset08; // st7
+  int v10; // eax
+  TESObjectREFR *v11; // eax
   void *v12; // eax
-  char v13; // al
-  TESObjectCELL *v14; // ebp
-  TESObjectREFR *v15; // ebx
+  _DWORD *v13; // edi
+  void *v14; // eax
+  char v15; // al
+  BSExtraDataVtbl *v16; // ebp
+  int v17; // ebx
   TESWorldSpace *WorldSpace; // eax
-  TESObjectREFR *v17; // ebx
-  TESWorldSpace *v18; // eax
-  _DWORD v19[3]; // [esp+24h] [ebp-Ch] BYREF
-  float v20; // [esp+34h] [ebp+4h]
+  int v19; // ebx
+  TESWorldSpace *v20; // eax
+  float v21[3]; // [esp+24h] [ebp-Ch] BYREF
+  float v22; // [esp+34h] [ebp+4h]
 
-  v5 = (TESPackage *)((int (__thiscall *)(TESObjectREFR **))LODWORD((*this)[4].member.rot.y))(this);
-  if ( !*(this + 0xB) )
-    ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*this)[0xF].member.pos[1]))(this, a3);
-  ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*this)[0xF].member.pos[2]))(this, a3);
-  target = (Atmosphere *)v5->members.target;
-  if ( target )
+  v7 = (TESPackage *)((int (__usercall *)@<eax>(TESObjectREFR **@<ecx>, double@<st0>))LODWORD((*this)[4].member.rot.y))( /*0x64d54b*/
+                       this,
+                       a4);
+  if ( !*(this + 0xB) ) /*0x64d543*/
+    ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*this)[0xF].member.pos[1]))(this, a5); /*0x64d55a*/
+  ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*this)[0xF].member.pos[2]))(this, a5); /*0x64d567*/
+  target = (Atmosphere *)v7->members.target; /*0x64d569*/
+  if ( target ) /*0x64d56e*/
   {
-    v7 = (double)(int)sub_452A60(target);
+    PointerAtOffset08 = (double)(int)Shared_GetPointerAtOffset08(target); /*0x64d579*/
   }
   else
   {
-    sub_566DB0(v5);
-    v7 = (double)v8;
-    if ( v8 < 0 )
-      v7 = v7 + flt_A2FC78;
+    sub_566DB0(v7); /*0x64d581*/
+    PointerAtOffset08 = (double)v10; /*0x64d58c*/
+    if ( v10 < 0 ) /*0x64d590*/
+      PointerAtOffset08 = PointerAtOffset08 + flt_A2FC78; /*0x64d592*/
   }
-  v9 = *(this + 0xB);
-  v20 = v7;
-  if ( v9 && (a2 = v20, v20 < TesObjectREF_GetDistance(a3, v9, 0)) )
+  v11 = *(this + 0xB); /*0x64d598*/
+  v22 = PointerAtOffset08; /*0x64d59b*/
+  if ( v11 && (a2 = v22, v22 < TesObjectREF_GetDistance(a5, v11, 0)) ) /*0x64d5bc*/
   {
-    ((void (__thiscall *)(TESObjectREFR *, TESObjectREFR *, int, int, _DWORD, _DWORD))a3->vtbl[1].GetBaseForm)(
-      a3,
-      a3,
+    ((void (__thiscall *)(TESObjectREFR *, TESObjectREFR *, int, int, _DWORD, _DWORD))a5->vtbl[1].GetBaseForm)( /*0x64d5d1*/
+      a5,
+      a5,
       1,
       1,
       0,
       0);
-    v10 = (void *)((int (__thiscall *)(TESObjectREFR **))LODWORD((*this)[4].member.rot.y))(this);
-    v11 = OblivionDynamicCast(
-            v10,
+    v12 = (void *)((int (__thiscall *)(TESObjectREFR **))LODWORD((*this)[4].member.rot.y))(this); /*0x64d5eb*/
+    v13 = OblivionDynamicCast( /*0x64d5ff*/
+            v12,
             0,
             (struct _s_RTTICompleteObjectLocator *)&TESPackage `RTTI Type Descriptor',
             &FleePackage `RTTI Type Descriptor',
             0);
-    v12 = OblivionDynamicCast(
+    v14 = OblivionDynamicCast( /*0x64d607*/
             *(this + 0xB),
             0,
             (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
             &Actor `RTTI Type Descriptor',
             0);
-    if ( v11 )
+    if ( v13 ) /*0x64d611*/
     {
-      if ( v12 )
-        sub_626C90(v11, (int)v12);
+      if ( v14 ) /*0x64d619*/
+        sub_626C90(v13, (int)v14); /*0x64d622*/
     }
   }
-  else if ( *(this + 0xB) || (sub_566DC0(v5, flt_A30634, a2, (Actor *)a3, 0, flt_A30634), v13) )
+  else if ( *(this + 0xB) /*0x64d651*/
+         || (sub_566DC0(v7, kTerrainLODQuadRayDirectionZ, a2, a3, (Actor *)a5, 0, kTerrainLODQuadRayDirectionZ), v15) )
   {
-    if ( !*((_BYTE *)this + 0xD0) )
-      ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*this)[4].member.pos[2]))(this, a3);
+    if ( !*((_BYTE *)this + 0xD0) ) /*0x64d6ef*/
+      ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*this)[4].member.pos[2]))(this, a5); /*0x64d703*/
   }
   else
   {
-    v14 = sub_566A40((char **)v5, (Actor *)a3);
-    sub_566B30(v5, (int)v19, (Actor *)a3);
-    if ( *((_BYTE *)this + 0xD0) )
+    v16 = sub_566A40((char **)v7, (Actor *)a5); /*0x64d667*/
+    sub_566B30(v7, v21, (Actor *)a5); /*0x64d669*/
+    if ( *((_BYTE *)this + 0xD0) ) /*0x64d66e*/
     {
-      v15 = *this;
-      WorldSpace = TESObjectREFR_GetWorldSpace(a3);
-      ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, _DWORD, _DWORD, _DWORD, TESObjectCELL *, TESWorldSpace *))v15[0xB].member.super.modlist.next)(
+      v17 = (int)*this; /*0x64d677*/
+      WorldSpace = TESObjectREFR_GetWorldSpace(a5); /*0x64d67b*/
+      (*(void (__thiscall **)(TESObjectREFR **, TESObjectREFR *, _DWORD, _DWORD, _DWORD, BSExtraDataVtbl *, TESWorldSpace *))(v17 + 0x3DC))( /*0x64d6a4*/
         this,
-        a3,
-        v19[0],
-        v19[1],
-        v19[2],
-        v14,
+        a5,
+        LODWORD(v21[0]),
+        LODWORD(v21[1]),
+        LODWORD(v21[2]),
+        v16,
         WorldSpace);
     }
     else
     {
-      ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, int))LODWORD((*this)[6].member.rot.z))(this, a3, 0x201);
-      v17 = *this;
-      v18 = TESObjectREFR_GetWorldSpace(a3);
-      (*(void (__thiscall **)(TESObjectREFR **, TESObjectREFR *, _DWORD *, TESObjectCELL *, TESWorldSpace *, float))v17[0xB].member.baseExtraList.members.m_presenceBitfield)(
+      ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, int))LODWORD((*this)[6].member.rot.z))(this, a5, 0x201); /*0x64d6c0*/
+      v19 = (int)*this; /*0x64d6c6*/
+      v20 = TESObjectREFR_GetWorldSpace(a5); /*0x64d6ce*/
+      (*(void (__thiscall **)(TESObjectREFR **, TESObjectREFR *, float *, BSExtraDataVtbl *, TESWorldSpace *, float))(v19 + 0x414))( /*0x64d6e3*/
         this,
-        a3,
-        v19,
-        v14,
-        v18,
-        COERCE_FLOAT(LODWORD(v20)));
+        a5,
+        v21,
+        v16,
+        v20,
+        COERCE_FLOAT(LODWORD(v22)));
     }
   }
 }

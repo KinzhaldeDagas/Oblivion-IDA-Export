@@ -3,5 +3,5 @@ int __stdcall EffectItemList_GetStrongestItem_::Return(int a1, int a2)
 {
   int v3; // [esp-4h] [ebp-4h]
 
-  return v3;
+  return v3; /*0x41535b*/
 }

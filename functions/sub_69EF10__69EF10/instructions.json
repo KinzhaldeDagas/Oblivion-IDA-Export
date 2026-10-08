@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69EF10",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+linkContext]; Verified MagicModelHitEffect +0x84 PostLink callback uses owner ActiveEffect and target linkContext to restore model/target state, then calls Update and returns its bool result. ActiveEffect_Base_PostLink ignores that return and registers the object with ActorProcessManager.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x69EF2C",
-    "line": "mov     ebp, [esi+2Ch]",
+    "line": "mov     ebp, [esi+2Ch]; Verified (Oblivion): while restoring a save, derived +0x2C is first treated as a serialized payload buffer. PostLink consumes it, frees the buffer, and replaces +0x2C with the owner's model path (or fallback data).",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x69EF47",
-    "line": "mov     ecx, [esp+18h+arg_8]",
+    "line": "mov     ecx, [esp+18h+fallbackData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x69EF7B",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x69EF88",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x69EF8E",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69EF8F",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x69EFB8",
-    "line": "mov     ebx, [esp+18h+arg_4]",
+    "line": "mov     ebx, [esp+18h+linkContext]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x69EFC4",
-    "line": "fstp    [esp+18h+arg_8]",
+    "line": "fstp    [esp+18h+fallbackData]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x69F00C",
-    "line": "fstp    [esp+18h+arg_8]",
+    "line": "fstp    [esp+18h+fallbackData]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x69F010",
-    "line": "fld     [esp+18h+arg_8]",
+    "line": "fld     [esp+18h+fallbackData]",
     "mnemonic": "fld",
     "size": 4
   },

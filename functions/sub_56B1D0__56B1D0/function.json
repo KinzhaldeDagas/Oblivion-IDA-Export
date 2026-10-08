@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_56B1D0",
+  "chunks": [
+    [
+      "0x56B1D0",
+      "0x56B212"
+    ]
+  ],
+  "chunks_sha256": "d20b63b877f7f61e9ee55ba9bc2fb17fd9bb36fba04d6ff809656c5d501b8d15",
+  "comment_regular": "Looks up Script_CommandList[functionIndex]. If paramIndex exists and its ParamInfo type is ObjectReferenceID (4) or Actor (6), a missing condition param1 may fall back to the current resolved/swapped target. Other types (Quest, Global, Class, Race, Sex, etc.) do not use this target fallback.",
+  "comment_repeatable": "Looks up Script_CommandList[functionIndex]. If paramIndex exists and its ParamInfo type is ObjectReferenceID (4) or Actor (6), a missing condition param1 may fall back to the current resolved/swapped target. Other types (Quest, Global, Class, Race, Sex, etc.) do not use this target fallback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "ConditionParamDefaultsToTarget",
   "end_ea": "0x56B212",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_56B1D0",
+  "name": "ConditionParamDefaultsToTarget",
   "segment": ".text",
   "sha256": "d20b63b877f7f61e9ee55ba9bc2fb17fd9bb36fba04d6ff809656c5d501b8d15",
   "size": 66,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x56B1D0",
-  "type": "char __cdecl(unsigned int, unsigned int)",
+  "total_chunk_size": 66,
+  "type": "bool __cdecl(UInt32 functionIndex, UInt32 paramIndex)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

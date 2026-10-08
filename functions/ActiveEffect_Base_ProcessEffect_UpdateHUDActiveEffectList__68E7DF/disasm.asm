@@ -3,7 +3,7 @@
 0x68E7E4: mov     eax, [edx+4]
 0x68E7E7: call    eax
 0x68E7E9: cmp     eax, ds:0B333C4h
-0x68E7EF: jnz     short ActiveEffect_Base_ProcessEffect___InitActvEffect
+0x68E7EF: jnz     short ActiveEffect_Base_ProcessEffect___InitActvEffect; Verified first-application completion: sets ActiveEffect.bApplied=1 and resets timeElapsed to 0 before update processing.
 0x68E7F1: push    3ECh
 0x68E7F6: call    Menu_GetOpenMenuTile
 0x68E7FB: add     esp, 4

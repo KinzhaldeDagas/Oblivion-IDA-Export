@@ -1,5 +1,9 @@
-float *__cdecl sub_79B770(int a1, int a2, float *a3)
+// Checked/STL trampoline around backward SFrondTexture range assignment; returns destination begin.
+OB_SFrondTexture_010201A0 *__cdecl OB_SFrondTexture_CopyAssignRangeBackwardThunk_010201A0(
+        const OB_SFrondTexture_010201A0 *first,
+        const OB_SFrondTexture_010201A0 *last,
+        OB_SFrondTexture_010201A0 *destinationLast)
 {
-  sub_79B510(a1, a2, a3);
-  return &a3[0xFFFFFFF5 * ((a2 - a1) / 0x2C)];
+  OB_SFrondTexture_CopyAssignRangeBackward_010201A0(first, last, destinationLast); /*0x79b79e*/
+  return &destinationLast[-(last - first)]; /*0x79b7c0*/
 }

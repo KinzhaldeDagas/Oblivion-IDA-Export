@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x43CB43",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43CB48",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x43CB5C",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x43CB74",
-    "line": "mov     ecx, ModelLoaderPtr",
+    "line": "mov     ecx, ds:0B33A1Ch",
     "mnemonic": "mov",
     "size": 6
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x43CB85",
-    "line": "jmp     sub_4BD750",
+    "line": "jmp     DistantLODLoaderTask_SubmitToIOManager; Verified submission callback (+0x08 vtable): retains the DistantLODLoaderTask and inserts it into IOManager.taskQueue via sub_43A5F0.",
     "mnemonic": "jmp",
     "size": 5
   }

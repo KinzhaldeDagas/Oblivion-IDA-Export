@@ -1,1 +1,4 @@
-HDDEDATA__
+struct HDDEDATA__
+{
+int unused;
+};

@@ -20,7 +20,7 @@
 0x6DDDF7: mov     [esp+1Ch+var_4], edi
 0x6DDDFB: jz      short loc_6DDE52
 0x6DDDFD: mov     ecx, esi; this
-0x6DDDFF: call    ??0NiTimeController@@QAE@XZ; NiTimeController::NiTimeController(void)
+0x6DDDFF: call    ??0NiTimeController@@QAE@XZ; Constructs a 0x3C-byte NiTimeController. Persistent authored state: flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, target +0x30, next controller +0x34. Initializes runtime start/last/cache values +0x1C..+0x28 to sentinels, update byte +0x2C to 1, and force byte +0x38 to 0.
 0x6DDE04: mov     dword ptr [esi], offset ??_7NiPathController@@6B@; const NiPathController::`vftable'
 0x6DDE0A: mov     [esi+48h], edi
 0x6DDE0D: mov     [esi+4Ch], edi
@@ -52,3 +52,23 @@
 0x6DDE61: pop     esi
 0x6DDE62: add     esp, 10h
 0x6DDE65: retn
+0x9C7E50: mov     eax, [ebp-10h]
+0x9C7E53: push    eax
+0x9C7E54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7E59: pop     ecx
+0x9C7E5A: retn
+0x9C7E5B: mov     ecx, [ebp-10h]; this
+0x9C7E5E: jmp     ??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C7E63: mov     ecx, [ebp-10h]
+0x9C7E66: add     ecx, 48h ; 'H'; slot
+0x9C7E69: jmp     NiPointerSlot_Release
+0x9C7E6E: mov     ecx, [ebp-10h]
+0x9C7E71: add     ecx, 4Ch ; 'L'; slot
+0x9C7E74: jmp     NiPointerSlot_Release
+0x9C7E79: mov     edx, [esp+arg_4]
+0x9C7E7D: lea     eax, [edx-0Ch]
+0x9C7E80: mov     ecx, [edx-10h]
+0x9C7E83: xor     ecx, eax
+0x9C7E85: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7E8A: mov     eax, offset stru_AF01BC
+0x9C7E8F: jmp     ___CxxFrameHandler3

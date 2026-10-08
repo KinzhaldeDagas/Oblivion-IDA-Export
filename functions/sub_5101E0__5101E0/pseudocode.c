@@ -22,90 +22,90 @@ void __cdecl sub_5101E0(
 
   if ( Script_ExtractArgs(a1, a2, a8, a4, argC, a5, l, &Str2) )
   {
-    v8 = 0;
+    v8 = 0; /*0x510251*/
     switch ( Str2 )
     {
       case '1':
-        v8 = 1;
-        sub_7B4890(0);
+        v8 = 1; /*0x51025e*/
+        BSShader_SetRenderMode(0); /*0x510263*/
         if ( strlen(&Str2) == 1 )
-          v8 = (ShaderPackage < 2 ? 0 : 0x20) | 0xF;
+          v8 = (*(_DWORD *)&OB_RendererGlobalState_010201A0[0xAF] < 2 ? 0 : 0x20) | 0xF;
         break;
       case '2':
-        v8 = 1;
-        sub_7B4890(1u);
+        v8 = 1; /*0x5102a7*/
+        BSShader_SetRenderMode(1u); /*0x5102ad*/
         break;
       case '3':
-        v8 = 1;
-        sub_7B4890(2u);
+        v8 = 1; /*0x5102bc*/
+        BSShader_SetRenderMode(2u); /*0x5102c1*/
         break;
       case '4':
-        v8 = 1;
-        sub_7B4890(3u);
+        v8 = 1; /*0x5102d1*/
+        BSShader_SetRenderMode(3u); /*0x5102d6*/
         if ( strlen(&Str2) == 1 )
-          v8 = (ShaderPackage < 2 ? 0 : 0x20) | 0xF;
+          v8 = (*(_DWORD *)&OB_RendererGlobalState_010201A0[0xAF] < 2 ? 0 : 0x20) | 0xF;
         break;
       case '5':
-        v8 = 1;
-        sub_7B4890(4u);
+        v8 = 1; /*0x51031b*/
+        BSShader_SetRenderMode(4u); /*0x510320*/
         break;
       default:
-        LODWORD(v14) = 2;
-        if ( !_strnicmp("sh", &Str2, v14) )
+        LODWORD(v14) = 2; /*0x51032a*/
+        if ( !_strnicmp("sh", &Str2, v14) ) /*0x510335*/
         {
-          v9 = !sub_405A80();
-          v10 = dword_B42F40;
-          if ( v9 )
-            v11 = v10 | 0x10;
+          v9 = !BSShaderManager_IsShadowMappingReady(); /*0x510346*/
+          v10 = *(_DWORD *)&OB_RendererGlobalState_010201A0[0xA7]; /*0x510348*/
+          if ( v9 ) /*0x51034d*/
+            v11 = v10 | 0x10; /*0x51034f*/
           else
-            v11 = v10 & 0xFFEF;
-          if ( (char)v11 < 0 )
-            v8 = v11 & 0xFF7F;
+            v11 = v10 & 0xFFEF; /*0x510354*/
+          if ( (char)v11 < 0 ) /*0x51035c*/
+            v8 = v11 & 0xFF7F; /*0x510369*/
           else
-            v8 = v11 | 0x80;
+            v8 = v11 | 0x80; /*0x51035e*/
         }
         else
         {
-          LODWORD(v15) = 2;
-          if ( !_strnicmp("sc", &Str2, v15) )
+          LODWORD(v15) = 2; /*0x510374*/
+          if ( !_strnicmp("sc", &Str2, v15) ) /*0x51037f*/
           {
-            v8 = dword_B42F40;
-            byte_B43076 = byte_B43076 == 0;
+            v8 = *(_WORD *)&OB_RendererGlobalState_010201A0[0xA7]; /*0x510391*/
+            OB_RendererGlobalState_010201A0[0x1DD] = OB_RendererGlobalState_010201A0[0x1DD] == 0; /*0x51039b*/
           }
           else
           {
-            LODWORD(v16) = 2;
-            if ( !_strnicmp(off_A4D1EC, &Str2, v16) )
+            LODWORD(v16) = 2; /*0x5103a3*/
+            if ( !_strnicmp(off_A4D1EC, &Str2, v16) ) /*0x5103ae*/
             {
-              if ( (dword_B42F40 & 0x20) != 0 )
+              if ( (OB_RendererGlobalState_010201A0[0xA7] & 0x20) != 0 ) /*0x5103c1*/
               {
-                byte_B06CBC = 0;
-                SetTextureCanopyShadowMap(0);
-                dword_B42F40 &= 0xFFDFu;
-                return;
+                byte_B06CBC = 0; /*0x5103e5*/
+                SetTextureCanopyShadowMap(0); /*0x5103eb*/
+                *(_DWORD *)&OB_RendererGlobalState_010201A0[0xA7] &= 0xFFDFu; /*0x5103ff*/
+                return; /*0x510405*/
               }
-              v12 = TES;
-              byte_B06CBC = 1;
-              ShadowCanopyPass(v12->gridCellArray);
-              v13 = LOWORD(dword_B42F40) | 0x20;
-              goto LABEL_39;
+              v12 = MEMORY[0xB333A0]; /*0x5103c3*/
+              byte_B06CBC = 1; /*0x5103c8*/
+              ShadowCanopyPass(v12->gridCellArray); /*0x5103d2*/
+              v13 = *(unsigned __int16 *)&OB_RendererGlobalState_010201A0[0xA7] | 0x20; /*0x5103de*/
+              goto LABEL_39; /*0x5103e1*/
             }
-            if ( Str2 == 0x74 )
-              dword_B2C674 = j__atol(Str);
+            if ( Str2 == 0x74 ) /*0x51040c*/
+              dword_B2C674 = j__atol(Str); /*0x510418*/
           }
         }
         break;
     }
-    if ( Str[0] == 0x31 )
-      v8 |= 2u;
-    if ( Str[1] == 0x31 )
-      v8 |= 4u;
-    if ( Str[2] == 0x31 )
-      v8 |= 8u;
-    if ( ShaderPackage >= 2 && Str[3] != 0x30 )
-      v8 |= 0x20u;
-    v13 = v8;
+    if ( Str[0] == 0x31 ) /*0x510425*/
+      v8 |= 2u; /*0x510427*/
+    if ( Str[1] == 0x31 ) /*0x51042e*/
+      v8 |= 4u; /*0x510430*/
+    if ( Str[2] == 0x31 ) /*0x510438*/
+      v8 |= 8u; /*0x51043a*/
+    if ( *(int *)&OB_RendererGlobalState_010201A0[0xAF] >= 2 && Str[3] != 0x30 ) /*0x51044a*/
+      v8 |= 0x20u; /*0x51044c*/
+    v13 = v8; /*0x51044f*/
 LABEL_39:
-    dword_B42F40 = v13;
+    *(_DWORD *)&OB_RendererGlobalState_010201A0[0xA7] = v13; /*0x510452*/
   }
 }

@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B210",
+      "0x77B273"
+    ]
+  ],
+  "chunks_sha256": "dc7535074e3ec453c51b8bfd26a826ee7cb6d0b88f1c2ae23daae658b446690c",
+  "comment_regular": "DX10OBSE target: ClearTextureList zeroes 16 NiDX9RenderState texture-cache slots at +0xFA0..+0xFDC without D3D9 SetTexture calls; plugin mirrors this cache invalidation into DX10 SRV bindings.",
+  "comment_repeatable": "DX10OBSE target: ClearTextureList zeroes 16 NiDX9RenderState texture-cache slots at +0xFA0..+0xFDC without D3D9 SetTexture calls; plugin mirrors this cache invalidation into DX10 SRV bindings.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ClearTextureList",
   "end_ea": "0x77B273",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ClearTextureList",
   "segment": ".text",
   "sha256": "dc7535074e3ec453c51b8bfd26a826ee7cb6d0b88f1c2ae23daae658b446690c",
   "size": 99,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B210",
+  "total_chunk_size": 99,
   "type": "int __thiscall(NiDX9RenderState *this)",
   "xrefs_from_count": 17,
   "xrefs_to_count": 2

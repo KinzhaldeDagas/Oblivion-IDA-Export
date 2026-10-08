@@ -100,25 +100,25 @@
 0x5228CD: push    2
 0x5228CF: push    edi
 0x5228D0: mov     ecx, esi
-0x5228D2: call    sub_48C870
+0x5228D2: call    ContainerChanges_SelectBestArmorForSlot
 0x5228D7: push    1
 0x5228D9: push    3
 0x5228DB: push    edi
 0x5228DC: mov     ecx, esi
 0x5228DE: mov     dword ptr [esp+58h+arg_10], eax
-0x5228E2: call    sub_48C870
+0x5228E2: call    ContainerChanges_SelectBestArmorForSlot
 0x5228E7: push    1
 0x5228E9: push    5
 0x5228EB: push    edi
 0x5228EC: mov     ecx, esi
 0x5228EE: mov     [esp+58h+a1], eax
-0x5228F2: call    sub_48C870
+0x5228F2: call    ContainerChanges_SelectBestArmorForSlot
 0x5228F7: push    1
 0x5228F9: push    4
 0x5228FB: push    edi
 0x5228FC: mov     ecx, esi
 0x5228FE: mov     [esp+58h+var_28], eax
-0x522902: call    sub_48C870
+0x522902: call    ContainerChanges_SelectBestArmorForSlot
 0x522907: cmp     byte ptr [esp+4Ch+arg_C], bl
 0x52290B: mov     [esp+4Ch+var_24], eax
 0x52290F: jnz     short loc_522940
@@ -126,37 +126,37 @@
 0x522913: push    1
 0x522915: push    edi
 0x522916: mov     ecx, esi
-0x522918: call    sub_48C870
+0x522918: call    ContainerChanges_SelectBestArmorForSlot
 0x52291D: push    1
 0x52291F: push    ebx
 0x522920: push    edi
 0x522921: mov     ecx, esi
 0x522923: mov     [esp+58h+var_20], eax
-0x522927: call    sub_48C870
+0x522927: call    ContainerChanges_SelectBestArmorForSlot
 0x52292C: push    1
 0x52292E: push    0Dh
 0x522930: push    edi
 0x522931: mov     ecx, esi
 0x522933: mov     [esp+58h+var_1C], eax
-0x522937: call    sub_48C870
+0x522937: call    ContainerChanges_SelectBestArmorForSlot
 0x52293C: mov     [esp+4Ch+var_18], eax
 0x522940: push    1
 0x522942: push    6
 0x522944: push    edi
 0x522945: mov     ecx, esi
-0x522947: call    sub_48C870
+0x522947: call    ContainerChanges_SelectBestArmorForSlot
 0x52294C: push    1
 0x52294E: push    7
 0x522950: push    edi
 0x522951: mov     ecx, esi
 0x522953: mov     [esp+58h+var_34], eax
-0x522957: call    sub_48C870
+0x522957: call    ContainerChanges_SelectBestArmorForSlot
 0x52295C: push    1
 0x52295E: push    8
 0x522960: push    edi
 0x522961: mov     ecx, esi
 0x522963: mov     [esp+58h+var_38], eax
-0x522967: call    sub_48C870
+0x522967: call    ContainerChanges_SelectBestArmorForSlot
 0x52296C: mov     [esp+4Ch+var_30], eax
 0x522970: cmp     byte ptr [esp+4Ch+arg_8], bl
 0x522974: fldz
@@ -168,7 +168,7 @@
 0x522984: push    ecx
 0x522985: push    edi
 0x522986: mov     ecx, esi
-0x522988: call    sub_48BDA0
+0x522988: call    sub_48BDA0; Sidecar NPC decode: deeper equippable-item selector carries actor/base interface context used by weapon rating paths. Wrapper must forward four stack args unchanged while pushing/popping owner context.
 0x52298D: mov     [esp+4Ch+var_2C], eax
 0x522991: push    1; float
 0x522993: push    edi; int
@@ -225,7 +225,7 @@
 0x522A2C: call    ContainerEntryExtraData_DestroyDataTable
 0x522A31: mov     edx, [esp+4Ch+arg_4]
 0x522A35: push    edx
-0x522A36: call    FormHeapFree
+0x522A36: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x522A3B: add     esp, 4
 0x522A3E: cmp     [esp+4Ch+a1], ebx
 0x522A42: jz      short loc_522A4A
@@ -252,7 +252,7 @@
 0x522A7A: mov     ecx, ebx
 0x522A7C: call    ContainerEntryExtraData_DestroyDataTable
 0x522A81: push    ebx
-0x522A82: call    FormHeapFree
+0x522A82: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x522A87: add     esp, 4
 0x522A8A: cmp     [esp+4Ch+var_28], 0
 0x522A8F: jnz     short loc_522AA1
@@ -762,12 +762,12 @@
 0x522FA6: mov     eax, [eax]
 0x522FA8: jmp     short loc_522FAC
 0x522FAA: xor     eax, eax
-0x522FAC: mov     ecx, [esp+4Ch+var_2C]
+0x522FAC: mov     ecx, [esp+4Ch+var_2C]; this
 0x522FB0: mov     esi, [ecx+8]
 0x522FB3: mov     edi, [ebp+0]
 0x522FB6: push    0
 0x522FB8: push    eax
-0x522FB9: call    TESHealthForm_GetHealth
+0x522FB9: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x522FBE: push    eax
 0x522FBF: mov     eax, [edi+108h]
 0x522FC5: push    esi
@@ -792,8 +792,8 @@
 0x522FF0: mov     edi, [ebp+0]
 0x522FF3: push    0
 0x522FF5: push    eax
-0x522FF6: mov     ecx, ebx
-0x522FF8: call    TESHealthForm_GetHealth
+0x522FF6: mov     ecx, ebx; this
+0x522FF8: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x522FFD: mov     edx, [edi+108h]
 0x523003: push    eax
 0x523004: push    esi
@@ -808,7 +808,7 @@
 0x523018: mov     ecx, esi
 0x52301A: call    ContainerEntryExtraData_DestroyDataTable
 0x52301F: push    esi
-0x523020: call    FormHeapFree
+0x523020: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x523025: add     esp, 4
 0x523028: mov     esi, [esp+48h+a1]
 0x52302C: test    esi, esi
@@ -816,7 +816,7 @@
 0x523030: mov     ecx, esi
 0x523032: call    ContainerEntryExtraData_DestroyDataTable
 0x523037: push    esi
-0x523038: call    FormHeapFree
+0x523038: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52303D: add     esp, 4
 0x523040: mov     esi, [esp+48h+var_28]
 0x523044: test    esi, esi
@@ -824,7 +824,7 @@
 0x523048: mov     ecx, esi
 0x52304A: call    ContainerEntryExtraData_DestroyDataTable
 0x52304F: push    esi
-0x523050: call    FormHeapFree
+0x523050: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x523055: add     esp, 4
 0x523058: mov     esi, [esp+48h+var_24]
 0x52305C: test    esi, esi
@@ -832,7 +832,7 @@
 0x523060: mov     ecx, esi
 0x523062: call    ContainerEntryExtraData_DestroyDataTable
 0x523067: push    esi
-0x523068: call    FormHeapFree
+0x523068: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52306D: add     esp, 4
 0x523070: mov     esi, [esp+48h+var_20]
 0x523074: test    esi, esi
@@ -840,7 +840,7 @@
 0x523078: mov     ecx, esi
 0x52307A: call    ContainerEntryExtraData_DestroyDataTable
 0x52307F: push    esi
-0x523080: call    FormHeapFree
+0x523080: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x523085: add     esp, 4
 0x523088: mov     esi, [esp+48h+var_1C]
 0x52308C: test    esi, esi
@@ -848,7 +848,7 @@
 0x523090: mov     ecx, esi
 0x523092: call    ContainerEntryExtraData_DestroyDataTable
 0x523097: push    esi
-0x523098: call    FormHeapFree
+0x523098: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52309D: add     esp, 4
 0x5230A0: mov     esi, [esp+48h+var_18]
 0x5230A4: test    esi, esi
@@ -856,7 +856,7 @@
 0x5230A8: mov     ecx, esi
 0x5230AA: call    ContainerEntryExtraData_DestroyDataTable
 0x5230AF: push    esi
-0x5230B0: call    FormHeapFree
+0x5230B0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5230B5: add     esp, 4
 0x5230B8: mov     esi, [esp+48h+var_2C]
 0x5230BC: test    esi, esi
@@ -864,14 +864,14 @@
 0x5230C0: mov     ecx, esi
 0x5230C2: call    ContainerEntryExtraData_DestroyDataTable
 0x5230C7: push    esi
-0x5230C8: call    FormHeapFree
+0x5230C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5230CD: add     esp, 4
 0x5230D0: test    ebx, ebx
 0x5230D2: jz      short loc_5230E4
 0x5230D4: mov     ecx, ebx
 0x5230D6: call    ContainerEntryExtraData_DestroyDataTable
 0x5230DB: push    ebx
-0x5230DC: call    FormHeapFree
+0x5230DC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5230E1: add     esp, 4
 0x5230E4: mov     esi, [esp+48h+var_C]
 0x5230E8: test    esi, esi
@@ -879,7 +879,7 @@
 0x5230EC: mov     ecx, esi
 0x5230EE: call    ContainerEntryExtraData_DestroyDataTable
 0x5230F3: push    esi
-0x5230F4: call    FormHeapFree
+0x5230F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5230F9: add     esp, 4
 0x5230FC: mov     esi, [esp+48h+var_38]
 0x523100: test    esi, esi
@@ -887,7 +887,7 @@
 0x523104: mov     ecx, esi
 0x523106: call    ContainerEntryExtraData_DestroyDataTable
 0x52310B: push    esi
-0x52310C: call    FormHeapFree
+0x52310C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x523111: add     esp, 4
 0x523114: mov     esi, [esp+48h+var_34]
 0x523118: test    esi, esi
@@ -895,7 +895,7 @@
 0x52311C: mov     ecx, esi
 0x52311E: call    ContainerEntryExtraData_DestroyDataTable
 0x523123: push    esi
-0x523124: call    FormHeapFree
+0x523124: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x523129: add     esp, 4
 0x52312C: mov     esi, [esp+48h+var_30]
 0x523130: test    esi, esi
@@ -903,7 +903,7 @@
 0x523134: mov     ecx, esi
 0x523136: call    ContainerEntryExtraData_DestroyDataTable
 0x52313B: push    esi
-0x52313C: call    FormHeapFree
+0x52313C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x523141: add     esp, 4
 0x523144: mov     cl, [esp+48h+var_39]
 0x523148: mov     eax, [esp+48h+var_4]

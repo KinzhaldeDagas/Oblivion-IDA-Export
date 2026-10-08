@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x7D59E0",
+      "0x7D5B14"
+    ]
+  ],
+  "chunks_sha256": "e2bde33c157a4e6ffc2b617bc6f5b51c564c9e046ba2951685d10bc7a8b9f621",
+  "comment_regular": "Recursively traverse a receiver tree while preserving ShadowSceneLight active-plane mask +0x1B0; accepted geometry reaches AssociateReceiverGeometry.",
+  "comment_repeatable": "Recursively traverse a receiver tree while preserving ShadowSceneLight active-plane mask +0x1B0; accepted geometry reaches AssociateReceiverGeometry.\n\nMEF PERF 2026-10-07 PASS2: PERF-13 traversal contract: eligibility, child traversal, AppCulled/radius filtering and +1B0 active-plane save/restore lead to AssociateReceiverGeometry7D5AFC. Tail-index optimization must retain traversal order and every callback; repeated visits must not be globally deduplicated.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "ShadowSceneLight_UpdateLightingProperty",
   "end_ea": "0x7D5B14",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ShadowSceneLight_UpdateLightingProperty",
   "segment": ".text",
   "sha256": "e2bde33c157a4e6ffc2b617bc6f5b51c564c9e046ba2951685d10bc7a8b9f621",
   "size": 308,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D59E0",
+  "total_chunk_size": 308,
   "type": "char __thiscall(int this, float *)",
   "xrefs_from_count": 129,
   "xrefs_to_count": 3

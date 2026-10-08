@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x529840",
-    "line": "cmp     byte ptr [esp+arg_0], 0",
+    "line": "cmp     [esp+completed], 0; TESQuest completed-state setter used by CompleteQuest. Runtime bit 0x02 is saved through the same one-byte questFlags field.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x529856",
-    "line": "mov     [esp+arg_0], 4",
+    "line": "mov     dword ptr [esp+completed], 4",
     "mnemonic": "mov",
     "size": 8
   },

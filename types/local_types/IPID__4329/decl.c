@@ -1,1 +1,1 @@
-IPID
+typedef GUID IPID;

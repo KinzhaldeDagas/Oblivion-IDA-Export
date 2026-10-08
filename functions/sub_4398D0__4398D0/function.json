@@ -1,19 +1,36 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4398D0",
+  "chunks": [
+    [
+      "0x4398D0",
+      "0x4398F0"
+    ],
+    [
+      "0x55DFA0",
+      "0x55DFFF"
+    ]
+  ],
+  "chunks_sha256": "219218bbf1ac5dcc400ba031a6ca4eddc6a0523b59abcf18fe5e49ddf1483ab9",
+  "comment_regular": "Verified queued tree-task cleanup removes a pending reference->BSTreeNode entry after releasing task resources; this prevents a cancelled/completed task result from remaining available for handoff.",
+  "comment_repeatable": "Verified queued tree-task cleanup removes a pending reference->BSTreeNode entry after releasing task resources; this prevents a cancelled/completed task result from remaining available for handoff.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "QueuedTreeModel_RemovePendingReferenceNode",
   "end_ea": "0x4398F0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4398D0",
+  "name": "QueuedTreeModel_RemovePendingReferenceNode",
   "segment": ".text",
   "sha256": "b5e4986e62f6deb50cce1bbf58469553b2e77865f12d37f45504e5d2c3b06b6a",
   "size": 32,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4398D0",
-  "type": "int __thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 12,
+  "total_chunk_size": 127,
+  "type": "int __thiscall(QueuedTreeModel *this, int destructorFlags)",
+  "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

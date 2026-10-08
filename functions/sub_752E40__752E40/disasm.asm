@@ -4,7 +4,7 @@
 0x752E43: mov     edi, [esp+0Ch+arg_0]
 0x752E47: push    edi
 0x752E48: mov     esi, ecx
-0x752E4A: call    nullsub_returnvVoid_1arg
+0x752E4A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x752E4F: mov     eax, [esi+8]
 0x752E52: push    eax
 0x752E53: mov     ecx, edi

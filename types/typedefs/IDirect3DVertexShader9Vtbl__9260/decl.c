@@ -1,1 +1,12 @@
-IDirect3DVertexShader9Vtbl
+struct IDirect3DVertexShader9Vtbl
+{
+HRESULT (__stdcall *QueryInterface)(IDirect3DVertexShader9 *This, const IID *const riid, void **ppvObj);
+ULONG (__stdcall *AddRef)(IDirect3DVertexShader9 *This);
+ULONG (__stdcall *Release)(IDirect3DVertexShader9 *This);
+HRESULT (__stdcall *GetDevice)(IDirect3DVertexShader9 *This, IDirect3DDevice9 **ppDevice);
+HRESULT (__stdcall *GetFunction)(IDirect3DVertexShader9 *This, void *, UINT *pSizeOfData); ///<
+                                                                                           ///<
+                                                                                           ///< [Host shader API evidence 2026-10-02; stage-shader-token-capture/native.log, not an Oblivion call-site discovery] Twelve valid VS/PS model 1/2/3 cases preserve complete original bytecode, including literal 0000FFFF words inside DEF immediate constants and COMMENT payloads. GetFunction with physically sufficient output storage returned S_OK/full exact bytecode/intact following guard for incoming sizes 0,1,required-1,required,required+4,UINT_MAX (72 reads). This local provider treats the size as output for these cases. Duplicate creations from identical words produced distinct live COM identities. Failed Reset returned INVALIDCALL for both existing VS/PS GetFunction and new creation; incoming size=777 remained unchanged. Initial hand-authored VS1 fixture without DCL was rejected INVALIDCALL; adding its input DCL made it valid. Native pointer capture was found to search raw words for END; token-length framing is required so comment/constant data cannot truncate shaders. Capturing framing is not opcode/register/capability legality validation.
+                                                                                           ///<
+                                                                                           ///< [Renderer capture fix validated 2026-10-02, stage-shader-token-capture] Raw-word END search has been replaced in source by bounded SM1 operand-count / SM2+ encoded-length / COMMENT-length framing. Capture and publication registry share this scanner. Release build plus shader publication registry CPU, actual live-hook CPU and native/DX11 pixel/recovery WARP checks passed. Exact public capture/publication comparison preserved all 569 stored shader files (corpus manifest) and 12 native-tested fixtures; truncation, trailing-program and guard-page checks passed. This is transport validation only: shader factory opcode/register/capability admission is still unfinished and native shader allocation remains active. No deployment or live Oblivion suppression/FPS claim.
+};

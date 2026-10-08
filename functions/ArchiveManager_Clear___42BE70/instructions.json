@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42BE70",
-    "line": "mov     ecx, ArchiveList",
+    "line": "mov     ecx, ds:0B338E0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x42BE99",
-    "line": "mov     ecx, ArchiveList",
+    "line": "mov     ecx, ds:0B338E0h",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BE9F",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x42BEA4",
-    "line": "mov     eax, ArchiveList",
+    "line": "mov     eax, ds:0B338E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x42BEAA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x42BEB2",
-    "line": "mov     ArchiveList, edi",
+    "line": "mov     ds:0B338E0h, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BEB8",
-    "line": "mov     ecx, ArchiveInvalidateFilenames",
+    "line": "mov     ecx, ds:0B33930h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x42BED7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x42BEDC",
-    "line": "mov     ecx, ArchiveInvalidateFilenames",
+    "line": "mov     ecx, ds:0B33930h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x42BEF8",
-    "line": "mov     ecx, ArchiveInvalidatedDirPAths",
+    "line": "mov     ecx, ds:0B33934h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x42BF17",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x42BF1C",
-    "line": "mov     ecx, ArchiveInvalidatedDirPAths",
+    "line": "mov     ecx, ds:0B33934h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x42BF38",
-    "line": "mov     FirstLoadedArchiveByType, edi",
+    "line": "mov     ds:0B338E8h, edi",
     "mnemonic": "mov",
     "size": 6
   },
@@ -421,97 +421,97 @@
   },
   {
     "ea": "0x42BF44",
-    "line": "mov     dword_B338EC, edi",
+    "line": "mov     dword ptr unk_B338EC, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF4A",
-    "line": "mov     dword_B33910, edi",
+    "line": "mov     dword ptr unk_B33910, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF50",
-    "line": "mov     dword_B338F0, edi",
+    "line": "mov     dword ptr unk_B338F0, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF56",
-    "line": "mov     dword_B33914, edi",
+    "line": "mov     dword ptr unk_B33914, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF5C",
-    "line": "mov     dword_B338F4, edi",
+    "line": "mov     dword ptr unk_B338F4, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF62",
-    "line": "mov     dword_B33918, edi",
+    "line": "mov     dword ptr unk_B33918, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF68",
-    "line": "mov     dword_B338F8, edi",
+    "line": "mov     dword ptr unk_B338F8, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF6E",
-    "line": "mov     dword_B3391C, edi",
+    "line": "mov     dword ptr unk_B3391C, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF74",
-    "line": "mov     dword_B338FC, edi",
+    "line": "mov     dword ptr unk_B338FC, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF7A",
-    "line": "mov     dword_B33920, edi",
+    "line": "mov     dword ptr unk_B33920, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF80",
-    "line": "mov     dword_B33900, edi",
+    "line": "mov     dword ptr unk_B33900, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF86",
-    "line": "mov     dword_B33924, edi",
+    "line": "mov     dword ptr unk_B33924, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF8C",
-    "line": "mov     dword_B33904, edi",
+    "line": "mov     dword ptr unk_B33904, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF92",
-    "line": "mov     dword_B33928, edi",
+    "line": "mov     dword ptr unk_B33928, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF98",
-    "line": "mov     dword_B33908, edi",
+    "line": "mov     dword ptr unk_B33908, edi",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42BF9E",
-    "line": "mov     dword_B3392C, edi",
+    "line": "mov     dword ptr unk_B3392C, edi",
     "mnemonic": "mov",
     "size": 6
   },

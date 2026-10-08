@@ -1,10 +1,10 @@
-0x7FB250: push    ebx
+0x7FB250: push    ebx; Oblivion Lighting30Shader initialization/reset: initializes the base shader, releases SM3 program tables and 54 pooled passes, then seeds repeated constant blocks from the engine's default color/vector.
 0x7FB251: push    ebp
 0x7FB252: push    esi
 0x7FB253: push    edi
-0x7FB254: call    sub_8025F0
+0x7FB254: call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.
 0x7FB259: mov     ebp, ds:0A2807Ch
-0x7FB25F: mov     edi, offset dword_B47288
+0x7FB25F: mov     edi, offset unk_B47288
 0x7FB264: xor     ebx, ebx
 0x7FB266: mov     esi, [edi]
 0x7FB268: cmp     esi, ebx
@@ -23,10 +23,10 @@
 0x7FB282: call    eax
 0x7FB284: mov     [edi], ebx
 0x7FB286: add     edi, 4
-0x7FB289: cmp     edi, offset dword_B47308
+0x7FB289: cmp     edi, offset unk_B47308
 0x7FB28F: jl      short loc_7FB266
 0x7FB291: xor     edi, edi
-0x7FB293: mov     esi, ds:dword_B46ED8[edi]
+0x7FB293: mov     esi, dword ptr ds:unk_B46ED8[edi]
 0x7FB299: cmp     esi, ebx
 0x7FB29B: jz      short loc_7FB2BB
 0x7FB29D: lea     ecx, [esi+4]
@@ -41,8 +41,8 @@
 0x7FB2AF: push    1
 0x7FB2B1: mov     ecx, esi
 0x7FB2B3: call    eax
-0x7FB2B5: mov     ds:dword_B46ED8[edi], ebx
-0x7FB2BB: mov     esi, ds:dword_B46C20[edi]
+0x7FB2B5: mov     dword ptr ds:unk_B46ED8[edi], ebx
+0x7FB2BB: mov     esi, dword ptr ds:unk_B46C20[edi]
 0x7FB2C1: cmp     esi, ebx
 0x7FB2C3: jz      short loc_7FB2E3
 0x7FB2C5: lea     ecx, [esi+4]
@@ -57,21 +57,21 @@
 0x7FB2D7: push    1
 0x7FB2D9: mov     ecx, esi
 0x7FB2DB: call    eax
-0x7FB2DD: mov     ds:dword_B46C20[edi], ebx
+0x7FB2DD: mov     dword ptr ds:unk_B46C20[edi], ebx
 0x7FB2E3: add     edi, 4
 0x7FB2E6: cmp     edi, 9Ch ; 'œ'
 0x7FB2EC: jl      short loc_7FB293
-0x7FB2EE: mov     esi, offset dword_B473D0
+0x7FB2EE: mov     esi, offset unk_B473D0
 0x7FB2F3: or      edi, 0FFFFFFFFh
 0x7FB2F6: mov     ecx, [esi]
 0x7FB2F8: cmp     ecx, ebx
 0x7FB2FA: jz      short loc_7FB308
 0x7FB2FC: add     [ecx+60h], edi
 0x7FB2FF: jnz     short loc_7FB306
-0x7FB301: call    sub_7604D0
+0x7FB301: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7FB306: mov     [esi], ebx
 0x7FB308: add     esi, 4
-0x7FB30B: cmp     esi, offset dword_B474A8
+0x7FB30B: cmp     esi, offset unk_B474A8
 0x7FB311: jl      short loc_7FB2F6
 0x7FB313: mov     eax, ds:0B25AD0h
 0x7FB318: mov     ebx, ds:0B25AD8h
@@ -81,7 +81,7 @@
 0x7FB32F: mov     ds:0B46CD0h, ebx
 0x7FB335: mov     ds:0B46CD4h, ebp
 0x7FB33B: mov     ecx, 80h ; '€'
-0x7FB340: mov     esi, offset dword_B46CC8
+0x7FB340: mov     esi, offset unk_B46CC8
 0x7FB345: mov     edi, offset unk_B46CD8
 0x7FB34A: mov     ds:0B46CCCh, edx
 0x7FB350: rep movsd
@@ -89,8 +89,8 @@
 0x7FB357: mov     ds:0B46F80h, ebx
 0x7FB35D: mov     ds:0B46F84h, ebp
 0x7FB363: mov     ecx, 0C0h ; 'À'
-0x7FB368: mov     esi, offset dword_B46F78
-0x7FB36D: mov     edi, offset dword_B46F88
+0x7FB368: mov     esi, offset flt_B46F78
+0x7FB36D: mov     edi, offset unk_B46F88
 0x7FB372: mov     ds:0B46F7Ch, edx
 0x7FB378: rep movsd
 0x7FB37A: pop     edi

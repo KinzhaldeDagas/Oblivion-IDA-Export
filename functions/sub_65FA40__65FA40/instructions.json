@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65FA40",
-    "line": "fldz",
+    "line": "fldz; Store raw Oblivion skill-use progress. Negative inputs clamp to 0; only native SkillActorValue 0x0C..0x20 maps into PlayerCharacter::skillExp[21]. This helper does not apply major/minor multipliers.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x65FA43",
-    "line": "fcom    [esp+4+arg_4]",
+    "line": "fcom    [esp+4+progress]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x65FA4E",
-    "line": "jnz     short loc_65FA56",
+    "line": "jnz     short loc_65FA56; Clamp negative progress to 0. Positive progress is not capped at the current requirement, allowing excess to carry across an increase.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x65FA50",
-    "line": "fstp    [esp+4+arg_4]",
+    "line": "fstp    [esp+4+progress]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x65FA58",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x65FA62",
-    "line": "ja      short loc_65FA7D",
+    "line": "ja      short loc_65FA7D; Reject actor values outside the fixed 21-skill range 0x0C..0x20.",
     "mnemonic": "ja",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x65FA67",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 maps native SkillActorValue 0x0C..0x20 to skillExp index 0..20.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65FA6C",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+progress]",
     "mnemonic": "fld",
     "size": 4
   },

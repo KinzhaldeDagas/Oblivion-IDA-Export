@@ -1,4 +1,5 @@
-void *sub_6A07F0()
+// Verified (Oblivion): MagicShaderHitEffect GetType returns NiRTTI_MagicShaderHitEffect; its RTTI parent is MagicHitEffect.
+NiRTTI *__thiscall MagicShaderHitEffect_GetRTTI(MagicShaderHitEffect *this)
 {
-  return &unk_B3C0D4;
+  return (NiRTTI *)&NiRTTI_MagicShaderHitEffect; /*0x6a07f5*/
 }

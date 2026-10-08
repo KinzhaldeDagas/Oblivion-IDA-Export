@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 49,
+  "chunks": [
+    [
+      "0x590420",
+      "0x59057C"
+    ]
+  ],
+  "chunks_sha256": "b2f8c5ca08df4fc59283e1abda755f2e4198203ab3c0f863a627097879152c19",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "Menu_LoadXML",
+  "display_name": "Tile::ReadFile",
   "end_ea": "0x59057C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Menu_LoadXML",
+  "name": "Tile::ReadFile",
   "segment": ".text",
   "sha256": "b2f8c5ca08df4fc59283e1abda755f2e4198203ab3c0f863a627097879152c19",
   "size": 348,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x590420",
-  "type": "BSStringT *__userpurge@<eax>(BSStringT *@<ecx>, double@<st2>, double@<st1>, double@<st0>, char *Str)",
+  "total_chunk_size": 348,
+  "type": "Tile *__thiscall(Tile *this, const char *path)",
   "xrefs_from_count": 143,
   "xrefs_to_count": 49
 }

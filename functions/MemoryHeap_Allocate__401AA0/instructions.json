@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x401AC2",
-    "line": "jnb     short loc_401AD0",
+    "line": "jnb     short loc_401AD0; Initialized MemoryHeap allocations smaller than 8 bytes, including SCDA length zero, are promoted to 8 bytes before allocation.",
     "mnemonic": "jnb",
     "size": 2
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x401B0C",
-    "line": "mov     ecx, g_HeapPoolsBySize[ecx*4]",
+    "line": "mov     ecx, ds:0B33080h[ecx*4]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x401B83",
-    "line": "call    sub_401230",
+    "line": "call    MemoryHeap_SizeToBinIndex; Converts an allocation size to a segregated free-list bin index; valid only for sizes through 0x1000.",
     "mnemonic": "call",
     "size": 5
   },
@@ -798,12 +798,6 @@
     "size": 2
   },
   {
-    "ea": "0x401C18",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x401C20",
     "line": "mov     ebx, [edi+4]",
     "mnemonic": "mov",
@@ -1003,7 +997,7 @@
   },
   {
     "ea": "0x401C79",
-    "line": "call    sub_401690",
+    "line": "call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1129,7 @@
   },
   {
     "ea": "0x401CBA",
-    "line": "call    sub_4015F0",
+    "line": "call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1147,7 @@
   },
   {
     "ea": "0x401CC2",
-    "line": "call    sub_401A30",
+    "line": "call    MemoryHeap_CoalesceFreeEntry; Coalesces a just-freed entry with adjacent free predecessors/successors, then releases any now-free tail region.",
     "mnemonic": "call",
     "size": 5
   },

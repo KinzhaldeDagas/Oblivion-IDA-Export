@@ -3,7 +3,6 @@
 0x540597: test    esi, esi
 0x540599: jz      short loc_5405B4
 0x54059B: jmp     short loc_5405A0
-0x54059D: align 10h
 0x5405A0: mov     eax, [esi]
 0x5405A2: test    eax, eax
 0x5405A4: jz      short loc_5405B4

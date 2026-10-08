@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D7820",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified per-reference seed read. Missing ExtraData_Seed yields index 0xFF, which calls TESObjectTREE_GetRandomSeed. If the tree seed array is empty, that fallback returns 0. Thus an empty array makes getter results 0 and concrete seed writes no-op; runtime array population outside the TREE record loader remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4D784D",
-    "line": "call    sub_41E990",
+    "line": "call    ExtraDataList_GetSeedIndex; Returns the byte stored in ExtraSeed, or 0xFF when no seed extra exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4D7868",
-    "line": "pop     esi",
+    "line": "pop     esi; Verified: dispatches to TESObjectTREE_GetSeedAtIndex (vtable +0x128), with the ExtraData_Seed byte. If that byte is 0xFF or the form has no seed table, the accessor uses TESObjectTREE_GetRandomSeed (vtable +0x130).",
     "mnemonic": "pop",
     "size": 1
   },

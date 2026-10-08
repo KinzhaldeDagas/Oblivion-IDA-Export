@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4651DE",
-    "line": "call    Savegame_Rename",
+    "line": "call    TESSaveLoadGame_ResolveSaveFile; Save path resolver call. CharacterSpecificSaves qualifies quicksave/autosave stems with the active character name and hash.",
     "mnemonic": "call",
     "size": 5
   },
@@ -864,12 +864,6 @@
     "size": 2
   },
   {
-    "ea": "0x4652DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4652E0",
     "line": "cmp     dword ptr [edx], 0",
     "mnemonic": "cmp",
@@ -925,7 +919,7 @@
   },
   {
     "ea": "0x4652F9",
-    "line": "mov     [esp+68h+var_3C], eax",
+    "line": "mov     [esp+68h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -937,13 +931,13 @@
   },
   {
     "ea": "0x465303",
-    "line": "lea     eax, [esp+68h+var_40]",
+    "line": "lea     eax, [esp+68h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x465307",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -955,19 +949,19 @@
   },
   {
     "ea": "0x46530C",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46530D",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x465310",
-    "line": "lea     edx, [esp+70h+var_3C]",
+    "line": "lea     edx, [esp+70h+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -979,13 +973,13 @@
   },
   {
     "ea": "0x465316",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x465317",
-    "line": "mov     [esp+74h+var_40], edi",
+    "line": "mov     [esp+74h+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -997,7 +991,7 @@
   },
   {
     "ea": "0x46531F",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1015,7 @@
   },
   {
     "ea": "0x465330",
-    "line": "mov     eax, [esp+68h+var_40]",
+    "line": "mov     eax, [esp+68h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1063,7 +1057,7 @@
   },
   {
     "ea": "0x465346",
-    "line": "mov     [esp+68h+var_2B], eax",
+    "line": "mov     [esp+68h+changeFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x4653A9",
-    "line": "lea     eax, [esp+6Ch+var_40]",
+    "line": "lea     eax, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1261,7 +1255,7 @@
   },
   {
     "ea": "0x4653B6",
-    "line": "mov     [esp+7Ch+var_40], edi",
+    "line": "mov     [esp+7Ch+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1333,7 +1327,7 @@
   },
   {
     "ea": "0x4653DA",
-    "line": "lea     ecx, [esp+6Ch+var_40]",
+    "line": "lea     ecx, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1369,7 +1363,7 @@
   },
   {
     "ea": "0x4653E7",
-    "line": "mov     [esp+7Ch+var_40], edi",
+    "line": "mov     [esp+7Ch+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1459,7 +1453,7 @@
   },
   {
     "ea": "0x465413",
-    "line": "lea     edx, [esp+6Ch+var_40]",
+    "line": "lea     edx, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1495,7 +1489,7 @@
   },
   {
     "ea": "0x46541E",
-    "line": "mov     [esp+7Ch+var_40], edi",
+    "line": "mov     [esp+7Ch+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1537,7 +1531,7 @@
   },
   {
     "ea": "0x465435",
-    "line": "mov     eax, [esp+68h+var_2B]",
+    "line": "mov     eax, [esp+68h+changeFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1627,7 +1621,7 @@
   },
   {
     "ea": "0x465473",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1651,7 @@
   },
   {
     "ea": "0x465485",
-    "line": "mov     ecx, [esp+68h+var_2B]",
+    "line": "mov     ecx, [esp+68h+changeFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1669,13 +1663,13 @@
   },
   {
     "ea": "0x46548C",
-    "line": "push    ecx",
+    "line": "push    ecx; changeFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46548D",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -1693,13 +1687,13 @@
   },
   {
     "ea": "0x465494",
-    "line": "call    sub_4535A0",
+    "line": "call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x465499",
-    "line": "mov     [esp+68h+var_2B], eax",
+    "line": "mov     [esp+68h+changeFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1765,7 +1759,7 @@
   },
   {
     "ea": "0x4654BE",
-    "line": "lea     eax, [esp+6Ch+var_40]",
+    "line": "lea     eax, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1801,7 +1795,7 @@
   },
   {
     "ea": "0x4654CB",
-    "line": "mov     [esp+7Ch+var_40], ebx",
+    "line": "mov     [esp+7Ch+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1843,7 +1837,7 @@
   },
   {
     "ea": "0x4654E4",
-    "line": "mov     eax, [esp+68h+var_2B]",
+    "line": "mov     eax, [esp+68h+changeFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1873,7 +1867,7 @@
   },
   {
     "ea": "0x4654F0",
-    "line": "mov     ecx, [esp+68h+var_2B]",
+    "line": "mov     ecx, [esp+68h+changeFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1969,7 +1963,7 @@
   },
   {
     "ea": "0x465521",
-    "line": "lea     eax, [esp+6Ch+var_40]",
+    "line": "lea     eax, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2005,7 +1999,7 @@
   },
   {
     "ea": "0x46552E",
-    "line": "mov     [esp+7Ch+var_40], ebx",
+    "line": "mov     [esp+7Ch+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2107,7 +2101,7 @@
   },
   {
     "ea": "0x465568",
-    "line": "mov     eax, [esp+68h+var_2B]",
+    "line": "mov     eax, [esp+68h+changeFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2137,7 +2131,7 @@
   },
   {
     "ea": "0x465573",
-    "line": "call    SaveLoad_SaveFormModifiedFlags??",
+    "line": "call    SaveLoad_SaveFormModifiedFlags??; Main savegame form-save caller of SaveLoad_SaveFormModifiedFlags??. Provenance capture runs here before OBSE plugin co-save callbacks write SPFX.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2143,7 @@
   },
   {
     "ea": "0x46557A",
-    "line": "mov     eax, [esp+68h+var_2B]",
+    "line": "mov     eax, [esp+68h+changeFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2329,7 +2323,7 @@
   },
   {
     "ea": "0x4655DF",
-    "line": "mov     edx, [esp+68h+var_2B]",
+    "line": "mov     edx, [esp+68h+changeFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2485,7 +2479,7 @@
   },
   {
     "ea": "0x465647",
-    "line": "lea     edx, [esp+6Ch+var_40]",
+    "line": "lea     edx, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2521,7 +2515,7 @@
   },
   {
     "ea": "0x465654",
-    "line": "mov     [esp+7Ch+var_40], ebx",
+    "line": "mov     [esp+7Ch+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2599,7 +2593,7 @@
   },
   {
     "ea": "0x465681",
-    "line": "lea     eax, [esp+6Ch+var_40]",
+    "line": "lea     eax, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2635,7 +2629,7 @@
   },
   {
     "ea": "0x46568E",
-    "line": "mov     [esp+7Ch+var_40], ebx",
+    "line": "mov     [esp+7Ch+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2731,7 +2725,7 @@
   },
   {
     "ea": "0x4656C7",
-    "line": "lea     eax, [esp+6Ch+var_40]",
+    "line": "lea     eax, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2767,7 +2761,7 @@
   },
   {
     "ea": "0x4656D6",
-    "line": "mov     [esp+7Ch+var_40], ebx",
+    "line": "mov     [esp+7Ch+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2833,7 +2827,7 @@
   },
   {
     "ea": "0x4656F6",
-    "line": "lea     ecx, [esp+6Ch+var_40]",
+    "line": "lea     ecx, [esp+6Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2869,7 +2863,7 @@
   },
   {
     "ea": "0x465703",
-    "line": "mov     [esp+7Ch+var_40], ebx",
+    "line": "mov     [esp+7Ch+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2887,7 +2881,7 @@
   },
   {
     "ea": "0x46570C",
-    "line": "cmp     [esp+68h+var_3C], 0",
+    "line": "cmp     [esp+68h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2911,7 +2905,7 @@
   },
   {
     "ea": "0x46571A",
-    "line": "call    sub_45FB50",
+    "line": "call    TESSaveLoadGame_SaveTempEffectsList; [Verified] TESSaveLoadGame_SaveTempEffectsList obtains the actor process manager's temp-effect save size, writes a bounded Temp Effects List chunk, calls ActorProcessManager_SaveTempEffects, checks full-buffer consumption, and frees the temporary buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +3001,7 @@
   },
   {
     "ea": "0x46574B",
-    "line": "call    sub_45E220",
+    "line": "call    SaveLoad_SaveIDArrays; MEF SAVE AUDIT 2026-10-08: PERF-19 save orchestration: SaveGame emits ID arrays here after change records and temp effects. Native/v57 slot order remains save-format authority. Suggested growth change belongs in existing checked PerfLookupIDCore, not a global resize policy patch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3343,13 +3337,13 @@
   },
   {
     "ea": "0x4657ED",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; owner",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4657EF",
-    "line": "call    sub_4530A0",
+    "line": "call    SaveLoad_ClearReferenceMapState; Verified: SaveGame clears and frees the same transient reference-map owner as LoadGame, establishing a shared lifecycle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3361,7 +3355,7 @@
   },
   {
     "ea": "0x4657F5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3580,5 +3574,77 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AE740",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE743",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE744",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE749",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE74A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE74B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE74F",
+    "line": "lea     eax, [edx-58h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE752",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE755",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE757",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE75C",
+    "line": "mov     eax, offset stru_ADAF0C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE761",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

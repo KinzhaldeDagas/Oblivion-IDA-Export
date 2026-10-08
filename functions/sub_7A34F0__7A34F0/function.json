@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A34F0",
+  "chunks": [
+    [
+      "0x7A34F0",
+      "0x7A357D"
+    ],
+    [
+      "0x9CC890",
+      "0x9CC8B3"
+    ]
+  ],
+  "chunks_sha256": "416cdaa61770556087228d973bac8dfe64a69a7a3fe8a9dd9a669b0b32c8ee8c",
+  "comment_regular": "Oblivion binary evidence: deep-copies the incoming 28-byte st_string through a temporary, assigns it to CTreeEngine +0x24, then destroys the temporary. Parse calls it with the parsed branch-texture filename. After that observation, SpeedTreeRT 4.1 TreeEngine.h SetBranchTexture(const st_string&) and TreeEngine.cpp Parse corroborate the identity; this is distinct from the public const char* filename setter.",
+  "comment_repeatable": "Oblivion binary evidence: deep-copies the incoming 28-byte st_string through a temporary, assigns it to CTreeEngine +0x24, then destroys the temporary. Parse calls it with the parsed branch-texture filename. After that observation, SpeedTreeRT 4.1 TreeEngine.h SetBranchTexture(const st_string&) and TreeEngine.cpp Parse corroborate the identity; this is distinct from the public const char* filename setter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_CTreeEngine_SetBranchTexture_010201A0",
   "end_ea": "0x7A357D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A34F0",
+  "name": "OB_CTreeEngine_SetBranchTexture_010201A0",
   "segment": ".text",
   "sha256": "db412f6ca1d4d6aa69d4fd63a17e1b844d6953eeeccefccb91b7637bd8d7b1fb",
   "size": 141,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A34F0",
-  "type": "void __thiscall(void *this, _DWORD *)",
-  "xrefs_from_count": 44,
+  "total_chunk_size": 176,
+  "type": "void __thiscall(OB_CTreeEngine_010201A0 *this, const OB_stString28_010201A0 *filename)",
+  "xrefs_from_count": 62,
   "xrefs_to_count": 1
 }

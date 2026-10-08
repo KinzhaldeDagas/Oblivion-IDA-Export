@@ -39,3 +39,8 @@
 0x98A2E8: pop     ecx
 0x98A2E9: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98A2F0: call    __free_locale___$LN11_6
+0x98A30C: mov     esi, [ebp+arg_0]
+0x98A30F: push    0Ch
+0x98A311: call    __unlock
+0x98A316: pop     ecx
+0x98A317: retn

@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A0A50",
+      "0x7A0AFD"
+    ]
+  ],
+  "chunks_sha256": "64fed59ae7ee53d0c10625ced460b556df6a343083f4320855213af8fb2924cf",
+  "comment_regular": "Checked insert-one wrapper for st_vector<SFrondGuide>. Preserves the iterator index across possible reallocation, delegates to InsertFill(count=1), and returns the 8-byte {owner,current} iterator.",
+  "comment_repeatable": "Checked insert-one wrapper for st_vector<SFrondGuide>. Preserves the iterator index across possible reallocation, delegates to InsertFill(count=1), and returns the 8-byte {owner,current} iterator.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A0A50",
-  "end_ea": "0x7A0AC3",
-  "flags": 21505,
+  "display_name": "OB_stVector_SFrondGuide_InsertOne_010201A0",
+  "end_ea": "0x7A0AFD",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A0A50",
+  "name": "OB_stVector_SFrondGuide_InsertOne_010201A0",
   "segment": ".text",
-  "sha256": "f895e9de80372dbc5be45a76dc72d425c9cc1bf60a827a7ad75a942c6b544ab1",
-  "size": 115,
+  "sha256": "64fed59ae7ee53d0c10625ced460b556df6a343083f4320855213af8fb2924cf",
+  "size": 173,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A0A50",
-  "type": "void __thiscall __noreturn(unsigned int *this, int, unsigned int *, int, int)",
-  "xrefs_from_count": 54,
+  "total_chunk_size": 173,
+  "type": "OB_stVectorIterator_SFrondGuide_010201A0 *__thiscall(OB_stVector_SFrondGuide_010201A0 *this, OB_stVectorIterator_SFrondGuide_010201A0 *result, OB_stVector_SFrondGuide_010201A0 *expectedOwner, OB_SFrondGuide_010201A0 *position, const OB_SFrondGuide_010201A0 *value)",
+  "xrefs_from_count": 81,
   "xrefs_to_count": 2
 }

@@ -1,6 +1,6 @@
 0x5C04F0: push    esi
 0x5C04F1: mov     esi, ecx
-0x5C04F3: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5C04F3: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5C04F8: fldz
 0x5C04FA: xor     eax, eax
 0x5C04FC: fstp    dword ptr [esi+54h]

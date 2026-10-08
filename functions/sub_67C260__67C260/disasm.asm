@@ -1,4 +1,4 @@
-0x67C260: push    0FFFFFFFFh
+0x67C260: push    0FFFFFFFFh; RadiantAI: SpectatorPackage constructor, type 0x13. Cut/beta-looking special package; opt-in constructor logging only.
 0x67C262: push    offset SEH_6068D0
 0x67C267: mov     eax, large fs:0
 0x67C26D: push    eax
@@ -34,3 +34,12 @@
 0x67C2D8: pop     esi
 0x67C2D9: add     esp, 10h
 0x67C2DC: retn    4
+0x9C2EA0: mov     ecx, [ebp-10h]; this
+0x9C2EA3: jmp     ??1TESPackage@@UAE@XZ; TESPackage::~TESPackage(void)
+0x9C2EA8: mov     edx, [esp+arg_4]
+0x9C2EAC: lea     eax, [edx-8]
+0x9C2EAF: mov     ecx, [edx-0Ch]
+0x9C2EB2: xor     ecx, eax
+0x9C2EB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2EB9: mov     eax, offset stru_AEBBC0
+0x9C2EBE: jmp     ___CxxFrameHandler3

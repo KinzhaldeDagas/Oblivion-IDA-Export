@@ -1,4 +1,4 @@
-0x702EC0: mov     eax, [esp+arg_0]
+0x702EC0: mov     eax, [esp+arg_0]; MoonSugarEffect decode: sets 4-vertex screen polygon positions. For image-space quad arguments resolve to (-1,1), (-1,-1), (1,-1), (1,1), z=0.
 0x702EC4: test    eax, eax
 0x702EC6: jl      loc_702FB8
 0x702ECC: movzx   edx, word ptr [ecx+60h]

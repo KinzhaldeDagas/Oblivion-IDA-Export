@@ -1,4 +1,4 @@
-0x4B8550: push    0FFFFFFFFh
+0x4B8550: push    0FFFFFFFFh; Verified constructor initializes TESObjectDOORMembr.randomTeleport's inline BSSimpleList head (+0x68/+0x6C in TESObjectDOOR) to empty and doorFlags to zero; installs TESObjectDOOR and base-component vtables.
 0x4B8552: push    offset ??0TESObjectDOOR@@QAE@XZ_SEH
 0x4B8557: mov     eax, large fs:0
 0x4B855D: push    eax
@@ -52,3 +52,18 @@
 0x4B85FE: pop     ebx
 0x4B85FF: add     esp, 10h
 0x4B8602: retn
+0x9B3470: mov     ecx, [ebp-10h]
+0x9B3473: jmp     TESObject_destr
+0x9B3478: mov     ecx, [ebp-10h]
+0x9B347B: add     ecx, 24h ; '$'
+0x9B347E: jmp     TESFullName_Initialize
+0x9B3483: mov     ecx, [ebp-10h]
+0x9B3486: add     ecx, 30h ; '0'; this
+0x9B3489: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B348E: mov     edx, [esp+arg_4]
+0x9B3492: lea     eax, [edx-14h]
+0x9B3495: mov     ecx, [edx-18h]
+0x9B3498: xor     ecx, eax
+0x9B349A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B349F: mov     eax, offset stru_ADF14C
+0x9B34A4: jmp     ___CxxFrameHandler3

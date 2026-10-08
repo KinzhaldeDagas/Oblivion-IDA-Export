@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x49B6C6",
-    "line": "add     ecx, 0ACh ; '¬'",
+    "line": "add     ecx, 0ACh ; '¬'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x49B6CC",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },

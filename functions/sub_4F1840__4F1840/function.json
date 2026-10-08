@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F1840",
+      "0x4F18A6"
+    ]
+  ],
+  "chunks_sha256": "6024e64607acac50aae62746eee4795da3873230908d32a63fab75bebcbe839c",
+  "comment_regular": "Verified exterior-cell removal gate. Requires the cell to belong to this WorldSpace; clears inactive forms in either branch. If the cell has no winning override or its winner is a master file, unloads it from save state, removes it from TESWorldSpace's cell map, and destroys it; otherwise it leaves the overridden cell registered.",
+  "comment_repeatable": "Verified exterior-cell removal gate. Requires the cell to belong to this WorldSpace; clears inactive forms in either branch. If the cell has no winning override or its winner is a master file, unloads it from save state, removes it from TESWorldSpace's cell map, and destroys it; otherwise it leaves the overridden cell registered.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4F1840",
+  "display_name": "TESWorldSpace_UnloadExteriorCellIfEligible",
   "end_ea": "0x4F18A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F1840",
+  "name": "TESWorldSpace_UnloadExteriorCellIfEligible",
   "segment": ".text",
   "sha256": "6024e64607acac50aae62746eee4795da3873230908d32a63fab75bebcbe839c",
   "size": 102,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F1840",
-  "type": "void __thiscall(TESWorldSpace *this, TESForm *)",
+  "total_chunk_size": 102,
+  "type": "void __thiscall(TESWorldSpace *this, TESObjectCELL *cell)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 1
 }

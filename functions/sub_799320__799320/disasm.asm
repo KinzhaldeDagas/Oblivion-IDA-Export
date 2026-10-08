@@ -1,4 +1,4 @@
-0x799320: push    0FFFFFFFFh
+0x799320: push    0FFFFFFFFh; SpeedTree decode: CLeafGeometry::Init. Imports SIdvLeafInfo leaf tables, rocking group count, texture dimensions/origins, allocates vertex-program table (rockingGroups * textureCount * 0x80 bytes), then builds compact per-LOD leaf records.
 0x799322: push    offset SEH_4CCEE0
 0x799327: mov     eax, large fs:0
 0x79932D: push    eax
@@ -12,7 +12,7 @@
 0x79933A: lea     eax, [esp+20h+var_C]
 0x79933E: mov     large fs:0, eax
 0x799344: mov     edi, ecx
-0x799346: mov     esi, [esp+20h+arg_8]
+0x799346: mov     esi, [esp+20h+leafInfo]
 0x79934A: mov     ax, [esi+38h]
 0x79934E: mov     [edi+8], ax
 0x799352: mov     ecx, [esi+4Ch]
@@ -45,11 +45,11 @@
 0x79939B: call    FormHeapAlloc
 0x7993A0: mov     ebx, eax
 0x7993A2: add     esp, 4
-0x7993A5: mov     [esp+20h+arg_8], ebx
+0x7993A5: mov     [esp+20h+leafInfo], ebx
 0x7993A9: test    ebx, ebx
 0x7993AB: mov     [esp+20h+var_4], 0
 0x7993B3: jz      short loc_7993C5
-0x7993B5: push    offset sub_786E40
+0x7993B5: push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.
 0x7993BA: push    ebp
 0x7993BB: push    0Ch
 0x7993BD: push    ebx
@@ -70,11 +70,11 @@
 0x7993E9: call    FormHeapAlloc
 0x7993EE: mov     ebx, eax
 0x7993F0: add     esp, 4
-0x7993F3: mov     [esp+20h+arg_8], ebx
+0x7993F3: mov     [esp+20h+leafInfo], ebx
 0x7993F7: test    ebx, ebx
 0x7993F9: mov     [esp+20h+var_4], 1
 0x799401: jz      short loc_799413
-0x799403: push    offset sub_786E40
+0x799403: push    offset OB_stVec3_ctor_zero_010201A0; SpeedTree decode: stVec3 zero constructor used for CLeafGeometry dimension/origin arrays.
 0x799408: push    ebp
 0x799409: push    0Ch
 0x79940B: push    ebx
@@ -87,7 +87,7 @@
 0x79941C: cmp     [edi+1Ch], bp
 0x799420: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x799428: jbe     loc_7994D3
-0x79942E: mov     [esp+20h+arg_8], ebp
+0x79942E: mov     [esp+20h+leafInfo], ebp
 0x799432: mov     eax, [esi+14h]
 0x799435: test    eax, eax
 0x799437: jz      short loc_799453
@@ -106,7 +106,7 @@
 0x79945B: mov     edx, [eax+ebp+48h]
 0x79945F: lea     ecx, [eax+ebp+48h]
 0x799463: mov     eax, [edi+20h]
-0x799466: add     eax, [esp+20h+arg_8]
+0x799466: add     eax, [esp+20h+leafInfo]
 0x79946A: mov     [eax], edx
 0x79946C: mov     edx, [ecx+4]
 0x79946F: mov     [eax+4], edx
@@ -128,8 +128,8 @@
 0x799499: call    __invalid_parameter_noinfo
 0x79949E: mov     edx, [esi+14h]
 0x7994A1: mov     eax, [edi+24h]
-0x7994A4: add     eax, [esp+20h+arg_8]
-0x7994A8: add     [esp+20h+arg_8], 0Ch
+0x7994A4: add     eax, [esp+20h+leafInfo]
+0x7994A8: add     [esp+20h+leafInfo], 0Ch
 0x7994AD: lea     ecx, [edx+ebp+30h]
 0x7994B1: mov     edx, [ecx]
 0x7994B3: mov     [eax], edx
@@ -154,14 +154,14 @@
 0x7994EF: or      ecx, eax
 0x7994F1: push    ecx; Size
 0x7994F2: call    FormHeapAlloc
-0x7994F7: mov     ecx, [esp+24h+arg_0]
+0x7994F7: mov     ecx, dword ptr [esp+24h+leafLodCount]
 0x7994FB: add     esp, 4
 0x7994FE: mov     [edi+18h], eax
-0x799501: mov     eax, [esp+20h+arg_4]
+0x799501: mov     eax, [esp+20h+allLeaves]
 0x799505: push    eax
 0x799506: push    ecx
 0x799507: mov     ecx, edi
-0x799509: call    sub_798CC0
+0x799509: call    OB_CLeafGeometry_InitLods_010201A0; OBLIVION AUTHORITY (2026-08-24): True CLeafGeometry::InitLods entry (range 0x798CC0..0x799318). Iterates every explicit leaf LOD and copies each CBillboardLeaf+0x14 packed color into that LOD's SLodGeometry+0x24 packedColors array.
 0x79950E: mov     ecx, [esp+20h+var_C]
 0x799512: mov     large fs:0, ecx
 0x799519: pop     ecx
@@ -171,3 +171,20 @@
 0x79951D: pop     ebx
 0x79951E: add     esp, 0Ch
 0x799521: retn    0Ch
+0x9AFC20: mov     eax, [ebp+0Ch]
+0x9AFC23: push    eax
+0x9AFC24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFC29: pop     ecx
+0x9AFC2A: retn
+0x9AFC2B: mov     eax, [ebp+0Ch]
+0x9AFC2E: push    eax
+0x9AFC2F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFC34: pop     ecx
+0x9AFC35: retn
+0x9AFC36: mov     edx, [esp+containerChanges]
+0x9AFC3A: lea     eax, [edx-10h]
+0x9AFC3D: mov     ecx, [edx-14h]
+0x9AFC40: xor     ecx, eax
+0x9AFC42: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFC47: mov     eax, offset stru_ADC10C
+0x9AFC4C: jmp     ___CxxFrameHandler3

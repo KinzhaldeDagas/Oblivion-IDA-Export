@@ -15,7 +15,7 @@
 0x65ADFB: fld     dword ptr [eax+18h]
 0x65ADFE: fchs
 0x65AE00: pop     esi
-0x65AE01: fstp    dword ptr ds:0B3BAACh
+0x65AE01: fstp    dword ptr ds:0B3BAACh; High-process bound minimum = collision bound center minus extents; values are local to reference position.
 0x65AE07: fld     dword ptr [eax+1Ch]
 0x65AE0A: fchs
 0x65AE0C: fstp    dword ptr ds:0B3BAB0h

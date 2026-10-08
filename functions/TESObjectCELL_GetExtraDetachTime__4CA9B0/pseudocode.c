@@ -1,4 +1,4 @@
 void __thiscall TESObjectCELL_GetExtraDetachTime(ExtraDataList *this)
 {
-  ExtraDataList__GetDetachTime(this + 2);
+  ExtraDataList_GetDetachTime(this + 2); /*0x4ca9b3*/
 }

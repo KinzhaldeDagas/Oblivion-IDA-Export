@@ -29,7 +29,7 @@
 0x488529: push    eax; int
 0x48852A: lea     ecx, [edi+24h]; this
 0x48852D: mov     [esp+10h+arg_2C], 0
-0x488535: call    TESLeveledList_CalcLeveledForm
+0x488535: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x48853A: mov     ecx, [esp+8+arg_C]
 0x48853E: push    ecx
 0x48853F: push    ebx

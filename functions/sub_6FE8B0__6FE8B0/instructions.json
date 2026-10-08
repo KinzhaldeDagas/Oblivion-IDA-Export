@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x6FE93E",
-    "line": "mov     [esp+30h+var_14], esi",
+    "line": "mov     [esp+30h+element], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,25 +307,25 @@
   },
   {
     "ea": "0x6FE94E",
-    "line": "lea     edx, [esp+30h+var_14]",
+    "line": "lea     edx, [esp+30h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6FE952",
-    "line": "push    edx",
+    "line": "push    edx; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FE953",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FE954",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x6FE95E",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },
@@ -616,5 +616,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C92F0",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C92F3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C92F8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C92FC",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C92FF",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9302",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C9304",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9309",
+    "line": "mov     eax, offset stru_AF1BF4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C930E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

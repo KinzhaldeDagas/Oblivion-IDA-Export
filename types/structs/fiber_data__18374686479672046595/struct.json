@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "fiber_data",
+  "definition": "struct fiber_data\n{\nLPVOID param;\nvoid *except;\nvoid *stack_base;\nvoid *stack_limit;\nvoid *stack_allocation;\n__declspec(align(16)) CONTEXT_2 context;\nDWORD flags;\nLPFIBER_START_ROUTINE start;\nvoid *fls_slots;\n}\n",
   "id": 18374686479672046595,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "param",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "except",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stack_base",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stack_limit",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stack_allocation",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "context",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 1232
+      "size": 1232,
+      "type": "CONTEXT_2"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 1264,
-      "offset_hex": "0x4f0",
-      "size": 4
+      "offset_hex": "0x4F0",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "start",
       "offset": 1268,
-      "offset_hex": "0x4f4",
-      "size": 4
+      "offset_hex": "0x4F4",
+      "size": 4,
+      "type": "LPFIBER_START_ROUTINE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fls_slots",
       "offset": 1272,
-      "offset_hex": "0x4f8",
-      "size": 4
+      "offset_hex": "0x4F8",
+      "size": 4,
+      "type": "void *"
     }
   ],
   "name": "fiber_data",
+  "ordinal": 8549,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 1280
 }

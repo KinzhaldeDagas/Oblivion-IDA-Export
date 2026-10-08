@@ -1,19 +1,36 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_7A8250",
+  "chunks": [
+    [
+      "0x7A8250",
+      "0x7A8454"
+    ],
+    [
+      "0x9CCE60",
+      "0x9CCE8E"
+    ]
+  ],
+  "chunks_sha256": "38846dc2f86e6f5b5666aa1111a44d6b711ccc17a70306d4340fc4e2ab49b37b",
+  "comment_regular": "Static Oblivion billboard-leaf parser for the compact 0x4C record.\n\n2026-05-21 SpeedTreeOBSE billboard-leaf core/tail load pass: Oblivion CBillboardLeaf::Parse allocates the compact 0x4C stock record and consumes post-core 7004 payloads until 7005. Accepted cursor tokens are 7006 padded color, byte tokens 7007/7008/7011/7012, vec3 tokens 7010/7015, u32 token 7013, and discarded float 7016. Local-only 7009/7014 are not stock grammar and remain malformed. Compatibility cursor fixtures now mirror this before known-family supplemental-tail sanitizing.\nSpeedTreeOBSE v166 parsed-leaf capture reads completed native primary weight at+44 and group at+48. Native7012 byte/255 and7013 int agree with reference Parse; secondary values come from the verified RT4.1 default ctor. Parsed source is admitted only when CTreeEngine parsedLeafLodFlag+D8 is1.",
+  "comment_repeatable": "2026-05-21 SpeedTreeOBSE billboard-leaf core/tail load pass: Oblivion CBillboardLeaf::Parse allocates the compact 0x4C stock record and consumes post-core 7004 payloads until 7005. Accepted cursor tokens are 7006 padded color, byte tokens 7007/7008/7011/7012, vec3 tokens 7010/7015, u32 token 7013, and discarded float 7016. Local-only 7009/7014 are not stock grammar and remain malformed. Compatibility cursor fixtures now mirror this before known-family supplemental-tail sanitizing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_CBillboardLeaf_Parse_010201A0",
   "end_ea": "0x7A8454",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A8250",
+  "name": "OB_CBillboardLeaf_Parse_010201A0",
   "segment": ".text",
   "sha256": "5a178c6fedf3c9b0fdd5780c76158999fe2baf9dfed77a308773e2e8038ee0ce",
   "size": 516,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A8250",
-  "type": "float *__cdecl(unsigned int *)",
-  "xrefs_from_count": 197,
+  "total_chunk_size": 562,
+  "type": "OB_CBillboardLeaf_010201A0 *__cdecl(OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 217,
   "xrefs_to_count": 1
 }

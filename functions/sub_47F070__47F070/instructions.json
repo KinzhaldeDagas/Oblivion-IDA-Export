@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x47F070",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x47F09C",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, [esp+20h+start]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x47F0B0",
-    "line": "mov     eax, [esp+20h+arg_8]",
+    "line": "mov     eax, [esp+20h+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x47F0D1",
-    "line": "mov     [esp+1Ch+arg_0], esi",
+    "line": "mov     [esp+1Ch+start], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x47F0F4",
-    "line": "mov     eax, [esp+1Ch+arg_4]",
+    "line": "mov     eax, [esp+1Ch+startColor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x47F10B",
-    "line": "mov     eax, [esp+1Ch+arg_C]",
+    "line": "mov     eax, [esp+1Ch+endColor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x47F14F",
-    "line": "mov     [esp+1Ch+arg_0], eax",
+    "line": "mov     [esp+1Ch+start], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,55 +451,55 @@
   },
   {
     "ea": "0x47F15F",
-    "line": "push    ebp",
+    "line": "push    ebp; lineFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47F160",
-    "line": "push    0",
+    "line": "push    0; arg7",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47F162",
-    "line": "push    0",
+    "line": "push    0; arg6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47F164",
-    "line": "push    0",
+    "line": "push    0; arg5",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47F166",
-    "line": "push    esi",
+    "line": "push    esi; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47F167",
-    "line": "push    edi",
+    "line": "push    edi; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47F168",
-    "line": "push    2",
+    "line": "push    2; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47F16A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47F16C",
-    "line": "call    sub_7177E0",
+    "line": "call    NiLines_ctorWithGeometryData; Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -604,5 +604,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B3B90",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3B93",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B94",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3B99",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B9A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B9B",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3B9E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B9F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3BA4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3BA5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3BA6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3BAA",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3BAD",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3BB0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3BB2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3BB7",
+    "line": "mov     eax, offset stru_ADF520",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3BBC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

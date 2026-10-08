@@ -1,4 +1,4 @@
-0x794730: push    ecx
+0x794730: push    ecx; CIndexedGeometry::GetVertexCoord: returns &coords[index*3] from the coord float vector.
 0x794731: push    esi
 0x794732: mov     esi, ecx
 0x794734: mov     eax, [esi+6Ch]
@@ -9,7 +9,7 @@
 0x794740: sar     ecx, 2
 0x794743: jnz     short loc_79474A
 0x794745: call    __invalid_parameter_noinfo
-0x79474A: mov     eax, [esp+8+arg_0]
+0x79474A: mov     eax, [esp+8+vertexIndex]
 0x79474E: lea     edx, [eax+eax*2]
 0x794751: mov     eax, [esi+6Ch]
 0x794754: lea     eax, [eax+edx*4]

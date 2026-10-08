@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x4073D0",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; Strict retail shadow lifecycle: builds the engine active list, admits player/process actors within the native map budget, partitions lights, renders maps/receivers, and performs native cleanup. No TESObjectSTAT cell enumeration occurs here.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x4073D3",
-    "line": "cmp     ShaderPackage, 3",
+    "line": "cmp     dword ptr OB_RendererGlobalState_010201A0.shaderPackageVersion_le, 3; First ShadowPass readiness condition: BSSM shader package version must be >= 3.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x4073DA",
-    "line": "mov     cl, byte_B333B8",
+    "line": "mov     cl, byte ptr unk_B333B8",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4073F3",
-    "line": "test    byte ptr dword_B42F40, bl",
+    "line": "test    OB_RendererGlobalState_010201A0.pad_00D+9Ah, bl; Second ShadowPass readiness condition: BSShaderFeatureMask bit 0x10 must be set.",
     "mnemonic": "test",
     "size": 6
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x407409",
-    "line": "and     dword_B42F40, 0FFFFFFEFh",
+    "line": "and     dword ptr OB_RendererGlobalState_010201A0.pad_00D+9Ah, 0FFFFFFEFh",
     "mnemonic": "and",
     "size": 7
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x407412",
-    "line": "mov     byte_B333F6, al",
+    "line": "mov     g_bShadowMapDisableLatched, al",
     "mnemonic": "mov",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x407421",
-    "line": "call    sub_7C5EF0",
+    "line": "call    ShadowSceneNode_DiscardAllActiveShadowMaps; Discard/release every active light map +0x114 and clear the texture manager's current shadow-map slot.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x407426",
-    "line": "mov     eax, g_Renderer",
+    "line": "mov     eax, dword ptr renderer",
     "mnemonic": "mov",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x407430",
-    "line": "cmp     byte_B333F6, 0",
+    "line": "cmp     g_bShadowMapDisableLatched, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -193,25 +193,25 @@
   },
   {
     "ea": "0x40743D",
-    "line": "or      dword_B42F40, ebx",
+    "line": "or      dword ptr OB_RendererGlobalState_010201A0.pad_00D+9Ah, ebx",
     "mnemonic": "or",
     "size": 6
   },
   {
     "ea": "0x407443",
-    "line": "mov     eax, dword_B06F04",
+    "line": "mov     eax, g_iActorShadowCountInteriorSetting",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x407448",
-    "line": "mov     byte_B333F6, cl",
+    "line": "mov     g_bShadowMapDisableLatched, cl",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40744E",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -229,49 +229,49 @@
   },
   {
     "ea": "0x40745A",
-    "line": "mov     eax, dword_B06EFC",
+    "line": "mov     eax, g_iActorShadowCountExteriorSetting",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x40745F",
-    "line": "mov     edx, g_Renderer",
+    "line": "mov     edx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x407465",
-    "line": "push    eax",
+    "line": "push    eax; desiredCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x407466",
-    "line": "push    edx",
+    "line": "push    edx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x407467",
-    "line": "mov     ecx, g_textureManager",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40746D",
-    "line": "call    BSTextureManager_ReserveShadowMaps",
+    "line": "call    BSTextureManager__ReserveFrustumShadowTextures; Oblivion frustum-shadow pool reservation. Creates default render target type 0x17, attaches the shared shadow depth-stencil, and adds each texture to the unused shadowMaps list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x407472",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x407477",
-    "line": "cmp     byte_B42CDB, 0",
+    "line": "cmp     byte ptr unk_B42CDB, 0; Shared accumulator suppression gate: nonzero B42CDB exits the complete native ShadowPass before map budget selection or caster admission.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x407484",
-    "line": "cmp     ShaderPackage, 3",
+    "line": "cmp     dword ptr OB_RendererGlobalState_010201A0.shaderPackageVersion_le, 3; Complete-pass shader-package gate: values below 3 exit before any native shadow admission/presentation.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x407491",
-    "line": "test    byte ptr dword_B42F40, bl",
+    "line": "test    OB_RendererGlobalState_010201A0.pad_00D+9Ah, bl; Complete-pass feature gate: a clear shadow-map bit 0x10 exits before any native shadow admission/presentation.",
     "mnemonic": "test",
     "size": 6
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x4074A7",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4074AC",
-    "line": "call    sub_6747C0",
+    "line": "call    ProcessLists__TrimShadowCandidateListToLimit; MEF v56 ShadowPass trim CALL returns exact embedded head. Dense unique shape is verified using temporary process-heap pointer set; current chain is re-traversed after allocation. Prefix retained and suffix detached before freeing nodes; borrowed actors not destroyed. Unsupported/aux OOM delegates unchanged6747C0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4074B4",
-    "line": "mov     ebp, eax",
+    "line": "mov     ebp, eax; Trim the ProcessLists shadow candidate list to the native candidate cap; the returned BSSimpleList is then consumed in order until the interior/exterior map budget is exhausted.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -385,25 +385,25 @@
   },
   {
     "ea": "0x4074C6",
-    "line": "call    sub_7C5BE0",
+    "line": "call    ShadowSceneNode_DiscardActiveMapsAndMarkSourcesCulled; ShadowPass frame cleanup: releases stale active-light shadow-map/receiver presentation state before admission.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4074CB",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4074D0",
-    "line": "cmp     [eax+34h], edi",
+    "line": "cmp     [eax+34h], edi; Read current cell/world mode once from [0x00B333A0]+0x34 to select the exterior or interior actor-shadow count setting.",
     "mnemonic": "cmp",
     "size": 3
   },
   {
     "ea": "0x4074D3",
-    "line": "mov     esi, dword_B06F04",
+    "line": "mov     esi, g_iActorShadowCountInteriorSetting; Native ShadowPass selects iActorShadowCountInt (B06F04) for interior cells; exact map budget.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -415,49 +415,49 @@
   },
   {
     "ea": "0x4074DB",
-    "line": "mov     esi, dword_B06EFC",
+    "line": "mov     esi, g_iActorShadowCountExteriorSetting; Native ShadowPass selects iActorShadowCountExt (B06EFC) for exterior cells; exact map budget.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4074E1",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4074E7",
-    "line": "push    esi",
+    "line": "push    esi; desiredCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4074E8",
-    "line": "push    ecx",
+    "line": "push    ecx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4074E9",
-    "line": "mov     ecx, g_textureManager",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4074EF",
-    "line": "mov     [esp+64h+var_44], esi",
+    "line": "mov     [esp+64h+var_44], esi; Latch the selected exterior/interior shadow-map count in pass-local state.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4074F3",
-    "line": "call    BSTextureManager_ReserveShadowMaps",
+    "line": "call    BSTextureManager__ReserveFrustumShadowTextures; Reserve exactly the setting-derived shadow-map count through BSTextureManager_ReserveShadowMaps.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4074F8",
-    "line": "cmp     esi, edi",
+    "line": "cmp     esi, edi; The selected interior/exterior actor-shadow count is the exact map/admission budget; zero takes the active-list reset path.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x4074FE",
-    "line": "call    sub_7C7880",
+    "line": "call    ShadowSceneNode_ResetActiveLightList; Count-zero terminal path: reset the active ShadowSceneLight list and exit before player, actor, receiver, or map rendering work.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x407508",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x407528",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x40753C",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x407551",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x407566",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x40757B",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef; this",
+    "line": "mov     ecx, dword ptr reference; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x40758A",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -763,19 +763,19 @@
   },
   {
     "ea": "0x4075B1",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4075B7",
-    "line": "push    edi",
+    "line": "push    edi; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4075B8",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x4075C0",
-    "line": "call    ShadowSceneNodeAddShadowCaster",
+    "line": "call    ShadowSceneNodeAddShadowCaster; Retail AddShadowCaster call for the player NiNode, subject to native pass state and remaining budget.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x4075E0",
-    "line": "cmp     edi, [esp+5Ch+var_44]",
+    "line": "cmp     edi, [esp+5Ch+var_44]; Native actor/player caster admission stops when admitted count reaches the selected shadow-map budget.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -883,13 +883,13 @@
   },
   {
     "ea": "0x4075FA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4075FC",
-    "line": "call    sub_5EA5E0",
+    "line": "call    Actor__PassesBaseShadowEligibility; Apply Oblivion's base actor shadow eligibility gate (process-derived state plus ExtraGhost rejection) before the separate sitting, refraction, invisibility, and budget gates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x407663",
-    "line": "call    ShadowSceneNodeAddShadowCaster",
+    "line": "call    ShadowSceneNodeAddShadowCaster; Retail AddShadowCaster call for process-list Actor NiNodes, subject to remaining native budget.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,25 +1171,25 @@
   },
   {
     "ea": "0x407684",
-    "line": "call    sub_7C6DE0",
+    "line": "call    ShadowSceneNode_SeedAndPartitionActiveLights; Seed/partition active lights after native player/process-actor admission. No retail per-reference interior/static enumerator occurs in this interval.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x407689",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40768F",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x407691",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x4076A2",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x4076B6",
-    "line": "mov     al, byte ptr dword_B35C00",
+    "line": "mov     al, byte ptr unk_B35C00",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x4076C0",
-    "line": "push    esi",
+    "line": "push    esi; activeExteriorCellsOnly",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4076C1",
-    "line": "push    0",
+    "line": "push    0; show",
     "mnemonic": "push",
     "size": 2
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x4076C7",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x4076CF",
-    "line": "push    0",
+    "line": "push    0; nodeCategory",
     "mnemonic": "push",
     "size": 2
   },
@@ -1291,25 +1291,25 @@
   },
   {
     "ea": "0x4076D5",
-    "line": "call    sub_442A30",
+    "line": "call    TES__ShowCellNode; Temporarily hide loaded Actor cell nodes during shadow-light culling/receiver preparation; prior mask state is restored at 0x4079E2.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4076DA",
-    "line": "mov     eax, dword_B35C00",
+    "line": "mov     eax, dword ptr unk_B35C00",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4076DF",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4076E5",
-    "line": "push    esi",
+    "line": "push    esi; activeExteriorCellsOnly",
     "mnemonic": "push",
     "size": 1
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x4076E9",
-    "line": "push    0",
+    "line": "push    0; show",
     "mnemonic": "push",
     "size": 2
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x4076ED",
-    "line": "push    3",
+    "line": "push    3; nodeCategory",
     "mnemonic": "push",
     "size": 2
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x4076F3",
-    "line": "call    sub_442A30",
+    "line": "call    TES__ShowCellNode; Temporarily hide loaded Water Quad cell nodes during shadow-light culling/receiver preparation; prior mask state is restored at 0x4079FA.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4076F8",
-    "line": "mov     eax, TES",
+    "line": "mov     eax, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x407722",
-    "line": "mov     eax, dword_B36094",
+    "line": "mov     eax, dword ptr unk_B36094",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x407756",
-    "line": "call    sub_7C5AB0",
+    "line": "call    ShadowSceneNode_BeginActiveLightIteration; Begin native saved-next iteration over the prepared active ShadowSceneLight list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1555,7 +1555,7 @@
   },
   {
     "ea": "0x407777",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x4077DB",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x407833",
-    "line": "push    1",
+    "line": "push    1; Transition branch passes mode 1 when the direct source is also culled.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x407841",
-    "line": "lea     eax, [esp+5Ch+var_20]",
+    "line": "lea     eax, [esp+5Ch+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x407848",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,19 +2011,19 @@
   },
   {
     "ea": "0x407855",
-    "line": "lea     ecx, [esp+5Ch+var_20]; this",
+    "line": "lea     ecx, [esp+5Ch+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x407859",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40785E",
-    "line": "push    0; float",
+    "line": "push    0; Transition branch passes mode 0 after the resolved source clears the native budget/state gate.",
     "mnemonic": "push",
     "size": 2
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x407868",
-    "line": "call    sub_7D1ED0",
+    "line": "call    ShadowSceneLight_UpdateTransitionState; ShadowPass updates this light's native transition target/timer through ShadowSceneLight_UpdateTransitionState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x407875",
-    "line": "jge     short loc_4078A0",
+    "line": "jge     short loc_4078A0; Before projector setup, ShadowPass requires both backing NiLight and exact caster-root AppCulled bits to be clear.",
     "mnemonic": "jge",
     "size": 2
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x40787E",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2269,7 +2269,7 @@
   },
   {
     "ea": "0x4078D2",
-    "line": "test    bl, bl",
+    "line": "test    bl, bl; Pre-render predicate gate before projection, CullProcess, and receiver association.",
     "mnemonic": "test",
     "size": 2
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x407901",
-    "line": "call    ShadowLight_LightProjection?",
+    "line": "call    ShadowSceneLight_UpdatePerSourceProjection; Sole direct ShadowPass call to ShadowSceneLight_UpdatePerSourceProjection; projection commits before culling and receiver reconciliation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2383,13 +2383,13 @@
   },
   {
     "ea": "0x40790D",
-    "line": "call    ShadowSceneLight_CullProcess",
+    "line": "call    ShadowSceneLight_CullProcess; Run ShadowSceneLight_CullProcess at its true entry 0x007D6390.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x407912",
-    "line": "cmp     word ptr [esi+118h], 0FFh",
+    "line": "cmp     word ptr [esi+118h], 0FFh; Reject this light when committed cull status light+0x118 equals 0x00FF.",
     "mnemonic": "cmp",
     "size": 9
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x40791D",
-    "line": "fld     dword ptr [esi+0D8h]",
+    "line": "fld     dword ptr [esi+0D8h]; Reject this light when committed visibility/fade light+0xD8 is below 0.05.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2431,25 +2431,25 @@
   },
   {
     "ea": "0x407930",
-    "line": "add     [esp+5Ch+var_40], 1",
+    "line": "add     [esp+5Ch+var_40], 1; Increment the native accepted-light count before receiver reconciliation.",
     "mnemonic": "add",
     "size": 5
   },
   {
     "ea": "0x407935",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x407937",
-    "line": "call    sub_7D5ED0",
+    "line": "call    ShadowSceneLight_BeginReceiverReconciliation; Begin receiver reconciliation by seeding/reusing the fence at +0x148 and cursor at +0x144.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40793C",
-    "line": "mov     edx, g_worldScenegraph",
+    "line": "mov     edx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2467,19 +2467,19 @@
   },
   {
     "ea": "0x407945",
-    "line": "call    ShadowSceneLight_AddToScene????",
+    "line": "call    ShadowSceneLight_AddToScene; Associate the native world scene receiver root through ShadowSceneLight_AddToScene.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40794A",
-    "line": "cmp     byte_B06F0C, 0",
+    "line": "cmp     g_bShadowSourceAsReceiverSetting, 0",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x407951",
-    "line": "jz      short loc_407961",
+    "line": "jz      short loc_407961; Test the native self-shadow/source-as-receiver setting.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -2503,19 +2503,19 @@
   },
   {
     "ea": "0x40795C",
-    "line": "call    ShadowSceneLight_AddToScene????",
+    "line": "call    ShadowSceneLight_AddToScene; When enabled, submit the exact caster root light+0x130 as an additional receiver root.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x407961",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x407963",
-    "line": "call    sub_7D6A40",
+    "line": "call    ShadowSceneLight_RemoveStaleReceivers; Finalize receiver reconciliation by removing the stale cursor tail.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2545,7 +2545,7 @@
   },
   {
     "ea": "0x407971",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x407978",
-    "line": "or      word ptr [eax+18h], 1",
+    "line": "or      word ptr [eax+18h], 1; Set source NiAVObject flags+0x18 bit0 on this consumed/culled path.",
     "mnemonic": "or",
     "size": 5
   },
@@ -2593,7 +2593,7 @@
   },
   {
     "ea": "0x40798A",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x407991",
-    "line": "or      word ptr [eax+18h], 1",
+    "line": "or      word ptr [eax+18h], 1; Set source NiAVObject flags+0x18 bit0 on this consumed/culled path.",
     "mnemonic": "or",
     "size": 5
   },
@@ -2713,7 +2713,7 @@
   },
   {
     "ea": "0x4079C0",
-    "line": "call    sub_7C5B50",
+    "line": "call    ShadowSceneNode_NextActiveLight; Advance the native saved-next active-light iterator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2749,31 +2749,31 @@
   },
   {
     "ea": "0x4079D6",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4079DC",
-    "line": "push    1",
+    "line": "push    1; activeExteriorCellsOnly",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4079DE",
-    "line": "push    1",
+    "line": "push    1; show",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4079E0",
-    "line": "push    0",
+    "line": "push    0; nodeCategory",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4079E2",
-    "line": "call    sub_442A30",
+    "line": "call    TES__ShowCellNode; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2791,31 +2791,31 @@
   },
   {
     "ea": "0x4079EE",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4079F4",
-    "line": "push    1",
+    "line": "push    1; activeExteriorCellsOnly",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4079F6",
-    "line": "push    1",
+    "line": "push    1; show",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4079F8",
-    "line": "push    3",
+    "line": "push    3; nodeCategory",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4079FA",
-    "line": "call    sub_442A30",
+    "line": "call    TES__ShowCellNode; Oblivion TES cell-node visibility controller. Updates the six-bit node mask and applies AppCulled to loaded interior/exterior cell categories. Categories are identified by Oblivion's own console command as Actor, Marker, Land Quad, Water Quad, Static Quad, and Active Quad. ShadowPass temporarily hides Actor (0) and Water Quad (3), then restores their prior mask states. Fallout was consulted only afterward and corroborates the conventional TES::ShowCellNode name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2827,7 +2827,7 @@
   },
   {
     "ea": "0x407A04",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2911,13 +2911,13 @@
   },
   {
     "ea": "0x407A33",
-    "line": "mov     byte_B0727C, 1",
+    "line": "mov     byte_B0727C, 1; Restore native culling-process state byte 0x00B0727C to 1 immediately before active shadow-map rendering.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x407A3A",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2947,7 +2947,7 @@
   },
   {
     "ea": "0x407A4B",
-    "line": "call    sub_7C6770",
+    "line": "call    ShadowSceneNode_RenderActiveShadowLights_Mode5; Render the prepared active-light list only after projection, culling, and receiver reconciliation finish.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2959,7 +2959,7 @@
   },
   {
     "ea": "0x407A52",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x407A72",
-    "line": "cmp     bDynWinRelfections?, 0",
+    "line": "cmp     OB_RendererGlobalState_010201A0.pad_1DB+39h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3019,7 +3019,7 @@
   },
   {
     "ea": "0x407A7B",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x407A8D",
-    "line": "mov     ecx, dword_B3A6B0",
+    "line": "mov     ecx, dword ptr unk_B3A6B0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3115,7 +3115,7 @@
   },
   {
     "ea": "0x407AB3",
-    "line": "fmul    flt_B33E9C",
+    "line": "fmul    dword ptr ds:0B33E9Ch",
     "mnemonic": "fmul",
     "size": 6
   },
@@ -3133,7 +3133,7 @@
   },
   {
     "ea": "0x407AC1",
-    "line": "fstp    [esp+60h+var_60]; float",
+    "line": "fstp    [esp+60h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3145,13 +3145,13 @@
   },
   {
     "ea": "0x407AC9",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x407ACB",
-    "line": "call    sub_543A00",
+    "line": "call    Sky__RenderReflectionCubeMapIfNeeded; Throttled Oblivion sky reflection-cube refresh, called only from ShadowPass. For interiors it temporarily forces sky mode 2, refreshes colors/fog, updates atmosphere/clouds, hides moons, substitutes the sky vector, renders the sky root through ShadowSceneNode mode 3, then restores every altered state.",
     "mnemonic": "call",
     "size": 5
   },

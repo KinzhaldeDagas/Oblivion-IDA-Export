@@ -11,7 +11,6 @@
 0x7B8555: xor     esi, esi
 0x7B8557: push    edi
 0x7B8558: jmp     short loc_7B8560
-0x7B855A: align 10h
 0x7B8560: mov     eax, ds:0B42EC0h[esi*4]
 0x7B8567: cmp     eax, ebx
 0x7B8569: jz      short loc_7B85A7
@@ -30,7 +29,7 @@
 0x7B8590: mov     ecx, edi
 0x7B8592: call    sub_7B7170
 0x7B8597: push    edi
-0x7B8598: call    FormHeapFree
+0x7B8598: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7B859D: add     esp, 4
 0x7B85A0: mov     ds:0B42EC0h[esi*4], ebx
 0x7B85A7: add     esi, 1
@@ -315,18 +314,18 @@
 0x7B8868: cmp     ecx, ebx
 0x7B886A: jz      short loc_7B8882
 0x7B886C: mov     esi, ecx
-0x7B886E: call    ImageSpaceShaderList__Destroy
+0x7B886E: call    ImageSpaceShaderList__Destroy; MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.
 0x7B8873: push    esi
-0x7B8874: call    FormHeapFree
+0x7B8874: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7B8879: add     esp, 4
 0x7B887C: mov     ds:0B42D7Ch, ebx
 0x7B8882: mov     ecx, ds:0B42F50h; this
 0x7B8888: cmp     ecx, ebx
 0x7B888A: jz      short loc_7B88A2
 0x7B888C: mov     esi, ecx
-0x7B888E: call    BSTextureManager_Delete
+0x7B888E: call    BSTextureManager_Delete; MoonSugarEffect decode: BSTextureManager destructor/delete path. Releases available/in-use rendered textures, shadow maps, cached buffers, and manager lists.
 0x7B8893: push    esi
-0x7B8894: call    FormHeapFree
+0x7B8894: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7B8899: add     esp, 4
 0x7B889C: mov     ds:0B42F50h, ebx
 0x7B88A2: mov     esi, ds:0B430FCh
@@ -346,7 +345,7 @@
 0x7B88C2: call    eax
 0x7B88C4: mov     ds:0B430FCh, ebx
 0x7B88CA: push    ebx
-0x7B88CB: call    sub_7AB1D0
+0x7B88CB: call    sub_7AB1D0; MoonSugarEffect decode: mode-4 helper creates/releases global screen-element quads at B42CF8..B42D3C with vertex/z/alpha/stencil/material props; not a Moon Sugar mask API.
 0x7B88D0: add     esp, 4
 0x7B88D3: mov     ds:0B42F31h, bl
 0x7B88D9: mov     esi, ds:0B43104h

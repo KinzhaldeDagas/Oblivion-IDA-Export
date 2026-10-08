@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x42A180",
+      "0x42A19D"
+    ]
+  ],
+  "chunks_sha256": "69638c2262de39ed9ac67cacefc16386edf534970dc85daa5fee0c3ff70bec19",
+  "comment_regular": "Construct 0x10-byte ExtraReferencePointer: BSExtraData header/type 0x22 plus TESObjectREFR pointer at +0x0C.",
+  "comment_repeatable": "Construct 0x10-byte ExtraReferencePointer: BSExtraData header/type 0x22 plus TESObjectREFR pointer at +0x0C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "ExtraReferencePointer_constr",
+  "display_name": "ExtraReferencePointer_ctor",
   "end_ea": "0x42A19D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "ExtraReferencePointer_constr",
+  "name": "ExtraReferencePointer_ctor",
   "segment": ".text",
   "sha256": "69638c2262de39ed9ac67cacefc16386edf534970dc85daa5fee0c3ff70bec19",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42A180",
-  "type": "_BYTE *__thiscall(_BYTE *this, int)",
+  "total_chunk_size": 29,
+  "type": "ExtraReferencePointer *__thiscall(ExtraReferencePointer *this, TESObjectREFR *reference)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 1
 }

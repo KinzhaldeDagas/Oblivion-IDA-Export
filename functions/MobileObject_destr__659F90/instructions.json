@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x659FD8",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x65A008",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x65A02B",
-    "line": "call    TESObjectREFR_destr",
+    "line": "call    TESObjectREFR_destr; Verified reference destruction lifecycle: TESObjectREFR_destr calls TESForm_SetDeleted(this, true) before removing the reference from its cell and destroying its ExtraDataList.",
     "mnemonic": "call",
     "size": 5
   },
@@ -322,5 +322,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3C10",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3C13",
+    "line": "jmp     TESObjectREFR_destr; Verified reference destruction lifecycle: TESObjectREFR_destr calls TESForm_SetDeleted(this, true) before removing the reference from its cell and destroying its ExtraDataList.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3C18",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3C1C",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3C1F",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3C22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3C24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3C29",
+    "line": "mov     eax, offset stru_AEC75C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3C2E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

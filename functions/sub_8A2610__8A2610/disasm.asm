@@ -13,7 +13,7 @@
 0x8A262B: push    edx
 0x8A262C: mov     ecx, esi
 0x8A262E: call    sub_89D7B0
-0x8A2633: mov     ecx, dword ptr [esp+8+var_4]
+0x8A2633: mov     ecx, [esp+8+var_4]
 0x8A2637: mov     eax, [esi]
 0x8A2639: mov     edx, [eax+64h]
 0x8A263C: push    ecx

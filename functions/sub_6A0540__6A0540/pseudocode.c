@@ -1,21 +1,26 @@
-int __thiscall sub_6A0540(float *this, int a2, int a3, int a4)
+// Verified MagicShaderHitEffect +0x84 PostLink callback derives its shader from the owning ActiveEffect's MagicItem when available, restores target attachment, runs Update and returns its bool result. ActiveEffect_Base_PostLink ignores that result and registers the object with ActorProcessManager.
+bool __thiscall MagicShaderHitEffect_PostLink(
+        MagicShaderHitEffect *this,
+        ActiveEffect *ownerActiveEffect,
+        TESObjectREFR *linkContext,
+        TESEffectShader *fallbackEffectShader)
 {
-  char v5; // bl
-  int v6; // eax
-  int (__thiscall *v7)(float *, _DWORD); // edx
-  float v9; // [esp+18h] [ebp+8h]
+  bool bFinished; // bl
+  BSTempEffectVtbl *vtable; // eax
+  bool (__thiscall *Update)(_DWORD, _DWORD); // edx
+  float linkContexta; // [esp+18h] [ebp+8h]
 
-  nullsub_18(a2, a3, 0);
-  if ( a2 )
-    *(this + 0xD) = *(float *)(MagicItem_GetFXEffect(*(_DWORD **)(a2 + 8), 0) + 0x78);
+  nullsub_18((int)ownerActiveEffect, (int)linkContext, 0); /*0x6a0551*/
+  if ( ownerActiveEffect )                      // Verified (Oblivion): PostLink sets effectShader_34 from EffectSetting::effectShader at +0x78 or the TESEffectShader* fallback. EffectSetting_LinkForm resolves the persisted form ID through a direct TESEffectShader RTTI cast. /*0x6a0558*/
+    this->effectShader_34 = MagicItem_GetFXEffect(ownerActiveEffect->members.item, 0)->effectShader; /*0x6a0567*/
   else
-    *((_DWORD *)this + 0xD) = a4;
-  v9 = *(this + 8);
-  v5 = *((_BYTE *)this + 0x24);
-  (*(void (__thiscall **)(float *))(*(_DWORD *)this + 0x68))(this);
-  v6 = *(_DWORD *)this;
-  *(this + 8) = v9;
-  v7 = *(int (__thiscall **)(float *, _DWORD))(v6 + 0x50);
-  *((_BYTE *)this + 0x24) = v5;
-  return v7(this, 0.0);
+    this->effectShader_34 = fallbackEffectShader; /*0x6a0570*/
+  linkContexta = this->super.elapsedSeconds; /*0x6a057b*/
+  bFinished = this->super.bFinished; /*0x6a057f*/
+  ((void (__thiscall *)(MagicShaderHitEffect *))this->super.super.vtable[1].super.super.Destructor)(this); /*0x6a0584*/
+  vtable = this->super.super.vtable; /*0x6a058a*/
+  this->super.elapsedSeconds = linkContexta; /*0x6a058c*/
+  Update = (bool (__thiscall *)(_DWORD, _DWORD))vtable->Update; /*0x6a0591*/
+  this->super.bFinished = bFinished; /*0x6a059a*/
+  return Update(this, 0.0); /*0x6a059f*/
 }

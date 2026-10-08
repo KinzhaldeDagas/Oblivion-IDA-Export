@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E7690",
+      "0x4E76D0"
+    ]
+  ],
+  "chunks_sha256": "cb912030dbac59a31f2c1de054e49470bb3d2db9939b41df9c885433fb51b1f6",
+  "comment_regular": "Verified cell-unload graph cleanup: if a point array exists, clear rendered geometry; when the TESPathGrid has no winning override or its primary override file is inactive, destroy graph point/reference structures and clear the per-PathGrid 512-unit spatial bucket map. Called from cell deactivation at 0x447BF6. Override-selection semantics beyond the observed predicates remain Unknown.",
+  "comment_repeatable": "Verified cell-unload graph cleanup: if a point array exists, clear rendered geometry; when the TESPathGrid has no winning override or its primary override file is inactive, destroy graph point/reference structures and clear the per-PathGrid 512-unit spatial bucket map. Called from cell deactivation at 0x447BF6. Override-selection semantics beyond the observed predicates remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E7690",
+  "display_name": "TESPathGrid_ClearGraphOnCellUnload",
   "end_ea": "0x4E76D0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E7690",
+  "name": "TESPathGrid_ClearGraphOnCellUnload",
   "segment": ".text",
   "sha256": "cb912030dbac59a31f2c1de054e49470bb3d2db9939b41df9c885433fb51b1f6",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E7690",
+  "total_chunk_size": 64,
   "type": "void __thiscall(TESForm *this)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 1

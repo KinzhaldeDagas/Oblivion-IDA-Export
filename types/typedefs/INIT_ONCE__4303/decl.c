@@ -1,1 +1,1 @@
-INIT_ONCE
+typedef RTL_RUN_ONCE INIT_ONCE;

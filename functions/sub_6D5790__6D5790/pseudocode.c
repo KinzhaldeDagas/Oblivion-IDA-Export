@@ -1,15 +1,15 @@
-char __thiscall sub_6D5790(_DWORD *this, int a2)
+char __thiscall sub_6D5790(NiRenderTargetGroup *this, int a2)
 {
   char result; // al
   int v4; // ecx
 
-  result = sub_715F10(this, a2);
-  if ( result )
+  result = NiTimeController_RegisterStreamables(this, a2); /*0x6d5799*/
+  if ( result ) /*0x6d57a0*/
   {
-    v4 = *(this + 0x14);
-    if ( v4 )
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 0x24))(v4, a2);
-    return 1;
+    v4 = *((_DWORD *)this + 0x14); /*0x6d57a7*/
+    if ( v4 ) /*0x6d57ac*/
+      (*(void (__thiscall **)(int, int))(*(_DWORD *)v4 + 0x24))(v4, a2); /*0x6d57b4*/
+    return 1; /*0x6d57b7*/
   }
-  return result;
+  return result; /*0x6d57a2*/
 }

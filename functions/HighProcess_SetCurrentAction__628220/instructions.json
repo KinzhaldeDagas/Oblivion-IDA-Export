@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x628220",
-    "line": "mov     ax, [esp+arg_0]",
+    "line": "mov     ax, [esp+action]; Stores the 16-bit current action at HighProcess+0x1F4 and its BSAnimGroupSequence pointer at +0x1F8; returns the stored action in AX.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x628225",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+sequence]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x628229",
-    "line": "mov     [ecx+1F4h], ax",
+    "line": "mov     [ecx+1F4h], ax; HighProcess::SetCurrentAction is a plain store of the signed action ID; it has no timer, sequence-end test, or automatic follow-through clear.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x628230",
-    "line": "mov     [ecx+1F8h], edx",
+    "line": "mov     [ecx+1F8h], edx; Store the associated BSAnimGroupSequence pointer unchanged; the post-release 5->3 call passes the current action sequence.",
     "mnemonic": "mov",
     "size": 6
   },

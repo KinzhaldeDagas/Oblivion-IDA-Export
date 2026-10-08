@@ -1,44 +1,45 @@
-char __cdecl sub_4F7FA0(_DWORD *a1, int a2, int a3, double *a4)
+// GetIsCurrentPackage_Eval requires an actor subject and Package parameter (form type 0x3D). It reads the subject's current package; for a temporary-override package it prefers the actor's ExtraPackage when present, then pointer-compares against the parameter.
+char __cdecl GetIsCurrentPackage_Eval(TESObjectREFR *subject, TESPackage *package, TESForm *param2, double *value)
 {
-  _DWORD *v7; // edi
-  int v8; // ebx
-  TESPackage *v9; // eax
+  TESObjectREFR *v4; // edi
+  TESPackage *v5; // ebx
+  TESPackage *v6; // eax
   BSExtraDataVtbl *ExtraPackage; // esi
-  ExtraDataList *v11; // edi
+  ExtraDataList *p_baseExtraList; // edi
 
-  *a4 = 0.0;
-  v7 = 0;
-  if ( a1 )
+  *value = 0.0; /*0x4f7fa7*/
+  v4 = 0; /*0x4f7fb0*/
+  if ( subject ) /*0x4f7fb4*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(_DWORD *))(*a1 + 0x190))(a1) )
-      v7 = a1;
+    if ( subject->vtbl->IsActor(subject) ) /*0x4f7fc0*/
+      v4 = subject; /*0x4f7fc6*/
   }
-  v8 = 0;
-  if ( a2 )
+  v5 = 0; /*0x4f7fcd*/
+  if ( package ) /*0x4f7fd1*/
   {
-    if ( *(_BYTE *)(a2 + 4) == 0x3D )
-      v8 = a2;
+    if ( package->members.super.type == kFormType_Package ) /*0x4f7fd7*/
+      v5 = package; /*0x4f7fd9*/
   }
-  if ( v7 )
+  if ( v4 ) /*0x4f7fdd*/
   {
-    if ( v8 )
+    if ( v5 ) /*0x4f7fe1*/
     {
-      v9 = (TESPackage *)sub_5E03A0(v7);
-      ExtraPackage = (BSExtraDataVtbl *)v9;
-      if ( v9 )
+      v6 = (TESPackage *)sub_5E03A0(v4); /*0x4f7fe5*/
+      ExtraPackage = (BSExtraDataVtbl *)v6; /*0x4f7fea*/
+      if ( v6 ) /*0x4f7fee*/
       {
-        if ( sub_5660A0(v9) )
+        if ( TESPackage_IsRuntimePackage(v6) ) /*0x4f7ff2*/
         {
-          v11 = (ExtraDataList *)(v7 + 0x11);
-          if ( ExtraDataList::GetExtraPackage(v11) )
-            ExtraPackage = ExtraDataList::GetExtraPackage(v11);
+          p_baseExtraList = &v4->member.baseExtraList; /*0x4f7ffb*/
+          if ( ExtraDataList::GetExtraPackage(p_baseExtraList) ) /*0x4f8000*/
+            ExtraPackage = ExtraDataList::GetExtraPackage(p_baseExtraList); /*0x4f8010*/
         }
       }
-      if ( ExtraPackage == (BSExtraDataVtbl *)v8 )
-        *a4 = 1.0;
+      if ( ExtraPackage == (BSExtraDataVtbl *)v5 ) /*0x4f8014*/
+        *value = 1.0; /*0x4f8018*/
     }
   }
-  if ( IsConsoleMode )
-    Interface_ConsolePrint("GetIsCurrentPackage >> %0.2f", *a4);
-  return 1;
+  if ( MEMORY[0xB361AC] ) /*0x4f801b*/
+    Interface_ConsolePrint("GetIsCurrentPackage >> %0.2f", *value); /*0x4f8033*/
+  return 1; /*0x4f803f*/
 }

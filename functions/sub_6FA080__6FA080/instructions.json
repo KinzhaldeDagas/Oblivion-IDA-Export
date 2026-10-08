@@ -318,12 +318,6 @@
     "size": 2
   },
   {
-    "ea": "0x6FA10D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x6FA110",
     "line": "mov     cl, [eax]",
     "mnemonic": "mov",
@@ -403,7 +397,7 @@
   },
   {
     "ea": "0x6FA131",
-    "line": "mov     ebp, offset byte_B25374",
+    "line": "mov     ebp, offset left",
     "mnemonic": "mov",
     "size": 5
   },
@@ -421,19 +415,19 @@
   },
   {
     "ea": "0x6FA13C",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FA13D",
-    "line": "push    ebp; Str1",
+    "line": "push    ebp; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6FA13E",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

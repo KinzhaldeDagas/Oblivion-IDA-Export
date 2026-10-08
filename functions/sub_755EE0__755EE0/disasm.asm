@@ -4,7 +4,7 @@
 0x755EE9: push    ecx
 0x755EEA: fstp    [esp+0FCh+var_FC]; float
 0x755EED: mov     ebx, ecx
-0x755EEF: push    offset Vector3_InitValue?; int
+0x755EEF: push    offset g_zeroNiPoint3; int
 0x755EF4: lea     ecx, [esp+100h+var_E0]
 0x755EF8: call    sub_716DE0
 0x755EFD: fld     dword ptr [ebx+58h]
@@ -82,7 +82,7 @@
 0x755FD5: fmul    dword ptr [ebx+44h]
 0x755FD8: fsubp   st(1), st
 0x755FDA: fstp    [esp+104h+var_E4]
-0x755FDE: call    sub_43F350
+0x755FDE: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x755FE3: mov     eax, [ebx+2Ch]
 0x755FE6: fstp    st
 0x755FE8: test    eax, eax
@@ -93,34 +93,34 @@
 0x755FF8: jz      loc_7560DD
 0x755FFE: lea     esi, [eax+64h]
 0x756001: mov     ecx, 0Dh
-0x756006: lea     edi, [esp+104h+var_9C]
+0x756006: lea     edi, [esp+104h+local]
 0x75600A: rep movsd
 0x75600C: mov     ecx, [ebx+24h]
 0x75600F: mov     eax, [ecx+10h]
 0x756012: lea     esi, [eax+64h]
 0x756015: mov     ecx, 0Dh
 0x75601A: lea     edi, [esp+104h+var_68]
-0x756021: lea     edx, [esp+104h+var_34]
+0x756021: lea     edx, [esp+104h+parent]
 0x756028: rep movsd
 0x75602A: push    edx
 0x75602B: lea     ecx, [esp+108h+var_68]
-0x756032: call    sub_718A80
-0x756037: lea     eax, [esp+104h+var_9C]
-0x75603B: push    eax
-0x75603C: lea     ecx, [esp+108h+var_D0]
-0x756040: push    ecx
-0x756041: lea     ecx, [esp+10Ch+var_34]
-0x756048: call    sub_53D7A0
-0x75604D: mov     edx, [esp+104h+var_AC]
-0x756051: mov     eax, [esp+104h+var_A8]
-0x756055: mov     ecx, [esp+104h+var_A4]
+0x756032: call    sub_718A80;
+0x756037: lea     eax, [esp+104h+local]
+0x75603B: push    eax; local
+0x75603C: lea     ecx, [esp+108h+out]
+0x756040: push    ecx; out
+0x756041: lea     ecx, [esp+10Ch+parent]; parent
+0x756048: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x75604D: mov     edx, [esp+104h+out.pos.x]
+0x756051: mov     eax, [esp+104h+out.pos.y]
+0x756055: mov     ecx, [esp+104h+out.pos.z]
 0x756059: mov     [ebp+0], edx
 0x75605C: mov     [ebp+4], eax
 0x75605F: mov     [ebp+8], ecx
 0x756062: lea     eax, [ebx+74h]
 0x756065: mov     edi, eax
 0x756067: mov     ecx, 9
-0x75606C: lea     esi, [esp+104h+var_D0]
+0x75606C: lea     esi, [esp+104h+out]
 0x756070: rep movsd
 0x756072: lea     edx, [esp+104h+var_EC]
 0x756076: push    edx
@@ -135,13 +135,13 @@
 0x756090: mov     edx, [eax+8]
 0x756093: lea     ecx, [esp+104h+var_EC]
 0x756097: mov     [esp+104h+var_E4], edx
-0x75609B: call    sub_43F350
+0x75609B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7560A0: fstp    st
 0x7560A2: lea     edi, [ebx+98h]
-0x7560A8: fld     [esp+104h+var_A0]
+0x7560A8: fld     [esp+104h+out.scale]
 0x7560AC: mov     ecx, 0Dh
 0x7560B1: fld     st
-0x7560B3: lea     esi, [esp+104h+var_9C]
+0x7560B3: lea     esi, [esp+104h+local]
 0x7560B7: fmul    [esp+104h+var_F0]
 0x7560BB: rep movsd
 0x7560BD: fstp    [esp+104h+var_F0]

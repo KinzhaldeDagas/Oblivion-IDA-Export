@@ -1,4 +1,4 @@
-0x4B9CB0: fldz
+0x4B9CB0: fldz; Probable member mapping: float +0x78 behaves like Fallout's TESObjectTREE::BillboardSize.x and +0x7C like BillboardSize.y. Oblivion directly applies the same >200/>350 cutoff pair; Fallout named IsLargeEnoughForDistantLOD uses those exact fields/thresholds. +0x7C also sizes the quad in TESObjectTREE_BuildBillboardQuadData. Roles are strongly supported; names remain inferred across versions.
 0x4B9CB2: fcom    dword ptr [ecx+78h]
 0x4B9CB5: fnstsw  ax
 0x4B9CB7: test    ah, 5

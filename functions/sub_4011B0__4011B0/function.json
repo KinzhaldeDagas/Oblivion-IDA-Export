@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4011B0",
+      "0x4011D4"
+    ]
+  ],
+  "chunks_sha256": "ad59443d285c27a07981d3258399ed363c4708e44846f3843678d2107766b90c",
+  "comment_regular": "Checks whether an address lies in this pool's backing range: base at +0x40 through base + size at +0x110. Called by MemoryHeap_Free before dispatching to MemoryPool_Free.",
+  "comment_repeatable": "Checks whether an address lies in this pool's backing range: base at +0x40 through base + size at +0x110. Called by MemoryHeap_Free before dispatching to MemoryPool_Free.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4011B0",
+  "display_name": "MemoryPool_ContainsAddress",
   "end_ea": "0x4011D4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4011B0",
+  "name": "MemoryPool_ContainsAddress",
   "segment": ".text",
   "sha256": "ad59443d285c27a07981d3258399ed363c4708e44846f3843678d2107766b90c",
   "size": 36,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4011B0",
+  "total_chunk_size": 36,
   "type": "BOOL __thiscall(unsigned int *this, unsigned int)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 1

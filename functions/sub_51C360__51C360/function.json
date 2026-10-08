@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51C360",
+      "0x51C3A4"
+    ]
+  ],
+  "chunks_sha256": "be028eb5a540ce9699a8d591436c3cf856ce4cb8b3b465353882b952ccba0a2c",
+  "comment_regular": "Returns save-game payload size for the fixed 0x34-byte TESClass DATA block plus length-prefixed name and icon strings.",
+  "comment_repeatable": "Returns save-game payload size for the fixed 0x34-byte TESClass DATA block plus length-prefixed name and icon strings.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_51C360",
+  "display_name": "TESClass_GetSaveGameSize",
   "end_ea": "0x51C3A4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51C360",
+  "name": "TESClass_GetSaveGameSize",
   "segment": ".text",
   "sha256": "be028eb5a540ce9699a8d591436c3cf856ce4cb8b3b465353882b952ccba0a2c",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51C360",
-  "type": "unsigned int __thiscall(const char **this)",
+  "total_chunk_size": 68,
+  "type": "UInt32 __thiscall(TESClass *this)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1
 }

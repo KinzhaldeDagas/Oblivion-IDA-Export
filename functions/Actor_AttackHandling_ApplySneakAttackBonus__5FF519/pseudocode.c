@@ -30,8 +30,8 @@ int __usercall Actor_AttackHandling_::ApplySneakAttackBonus@<eax>(
   float v28; // [esp+18h] [ebp+18h]
   int v29; // [esp+3Ch] [ebp+3Ch]
 
-  v28 = a9 * *(float *)&a17;
-  *(float *)&v29 = *(float *)&a17 * a18;
+  v28 = a9 * *(float *)&a17; /*0x5ff531*/
+  *(float *)&v29 = *(float *)&a17 * a18; /*0x5ff539*/
   return Actor_AttackHandling_::__(
            *(int (**)(void))(*a1 + 0x214),
            *a1,

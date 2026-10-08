@@ -12,8 +12,8 @@
 0x5E323B: jz      short loc_5E3259
 0x5E323D: cmp     byte ptr [esi+20h], 1
 0x5E3241: jnz     short loc_5E324E
-0x5E3243: mov     ecx, esi
-0x5E3245: call    sub_5660A0
+0x5E3243: mov     ecx, esi; self
+0x5E3245: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x5E324A: test    al, al
 0x5E324C: jz      short loc_5E3254
 0x5E324E: cmp     byte ptr [esi+20h], 1Fh

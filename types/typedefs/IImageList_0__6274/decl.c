@@ -1,1 +1,1 @@
-IImageList_0
+typedef IImageList IImageList_0;

@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x762600",
+      "0x762634"
+    ]
+  ],
+  "chunks_sha256": "5ae99379b1031f941fbf2eab9498f4d74de2c8127ca4a47c7d253cabb3fde1bb",
+  "comment_regular": "DeferredRendering implementation: EndScene is the opt-in full-screen lighting resolve point because IDA shows native drawing is complete before the D3D EndScene call. Resolve remains disabled by default until G-buffer material replacement is exact-gated.",
+  "comment_repeatable": "DeferredRendering implementation: EndScene is the opt-in full-screen lighting resolve point because IDA shows native drawing is complete before the D3D EndScene call. Resolve remains disabled by default until G-buffer material replacement is exact-gated.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiDX9Renderer::EndScene",
   "end_ea": "0x762634",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiDX9Renderer::EndScene",
   "segment": ".text",
   "sha256": "5ae99379b1031f941fbf2eab9498f4d74de2c8127ca4a47c7d253cabb3fde1bb",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x762600",
+  "total_chunk_size": 52,
   "type": "char __thiscall(int this)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1

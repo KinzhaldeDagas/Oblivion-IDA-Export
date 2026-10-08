@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E0CF0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+owner]; Classify owner/base form into retail shadow category 0..6: unresolved, architecture, furniture, actors, items, misc, other.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4E0CFC",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },

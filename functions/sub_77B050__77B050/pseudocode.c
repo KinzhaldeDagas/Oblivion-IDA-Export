@@ -1,4 +1,4 @@
 int __thiscall sub_77B050(_DWORD *this, int a2)
 {
-  return *(this + 2 * a2 + 0x48);
+  return *(this + 2 * a2 + 0x48); /*0x77b05b*/
 }

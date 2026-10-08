@@ -1,5 +1,5 @@
-int sub_9E9C60()
+int GameSetting_Init_iArrowMaxRefCount()
 {
-  GameSetting_ConstrAndReg(&dword_B370D0, (int)"iArrowMaxRefCount", 0xF);
-  return atexit(sub_A1E8C0);
+  GameSetting_ConstrAndReg((int *)&g_GameSettingStringPointers_B36CD8[0xFE], (int)"iArrowMaxRefCount", 0xF);// Register integer game setting iArrowMaxRefCount with default value 15. This pass does not yet assign its exact pruning caller. /*0x9e9c6c*/
+  return atexit(sub_A1E8C0); /*0x9e9c7c*/
 }

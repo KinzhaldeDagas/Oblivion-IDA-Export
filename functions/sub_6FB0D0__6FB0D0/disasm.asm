@@ -127,7 +127,7 @@
 0x6FB253: mov     [esi+4], ebx
 0x6FB256: mov     eax, [esp+44h+arg_0]
 0x6FB25A: push    eax
-0x6FB25B: call    FormHeapFree
+0x6FB25B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6FB260: add     esp, 4
 0x6FB263: mov     ecx, [esp+44h+var_C]
 0x6FB267: mov     large fs:0, ecx
@@ -138,3 +138,15 @@
 0x6FB272: pop     ebx
 0x6FB273: add     esp, 30h
 0x6FB276: retn    4
+0x9C95E0: mov     eax, [ebp-30h]
+0x9C95E3: push    eax
+0x9C95E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C95E9: pop     ecx
+0x9C95EA: retn
+0x9C95EB: mov     edx, [esp+sourceTexture]
+0x9C95EF: lea     eax, [edx-34h]
+0x9C95F2: mov     ecx, [edx-38h]
+0x9C95F5: xor     ecx, eax
+0x9C95F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C95FC: mov     eax, offset stru_AF1EA4
+0x9C9601: jmp     ___CxxFrameHandler3

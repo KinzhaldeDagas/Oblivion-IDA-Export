@@ -1,12 +1,12 @@
-void __thiscall sub_725FC0(int this, unsigned int a2)
+void __thiscall OB_NiAGDDataBlock_Free(OB_NiAGDDataBlock *this, void *explicitBuffer)
 {
-  unsigned int v2; // eax
+  void *data; // eax
 
-  v2 = a2;
-  if ( !a2 )
+  data = explicitBuffer; /*0x725fc0*/
+  if ( !explicitBuffer ) /*0x725fc6*/
   {
-    if ( *(_BYTE *)(this + 0xC) )
-      v2 = *(_DWORD *)(this + 8);
+    if ( this->ownsData ) /*0x725fc8*/
+      data = this->data; /*0x725fcd*/
   }
-  FormHeapFree(v2);
+  FormHeapFree((unsigned int)data); /*0x725fd1*/
 }

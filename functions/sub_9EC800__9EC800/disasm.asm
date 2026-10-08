@@ -2,7 +2,7 @@
 0x9EC806: push    ecx
 0x9EC807: fstp    [esp+4+var_4]; float
 0x9EC80A: push    offset aFdemandmult; "fDemandMult"
-0x9EC80F: mov     ecx, offset fDemandMult
+0x9EC80F: mov     ecx, 0B378E0h
 0x9EC814: call    GameSetting_ConstrAndReg_float
 0x9EC819: push    offset sub_A1F8E0; void (__cdecl *)()
 0x9EC81E: call    _atexit

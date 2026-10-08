@@ -27,12 +27,12 @@
 0x5B2A6E: call    BSStringT_Set
 0x5B2A73: mov     ebp, [esp+12Ch+var_118.m_data]
 0x5B2A77: mov     eax, [esi+2Ch]
-0x5B2A7A: push    ebx
-0x5B2A7B: push    ebp
-0x5B2A7C: push    eax
-0x5B2A7D: mov     ecx, esi
+0x5B2A7A: push    ebx; lastTile
+0x5B2A7B: push    ebp; name
+0x5B2A7C: push    eax; parent
+0x5B2A7D: mov     ecx, esi; this
 0x5B2A7F: mov     [esp+138h+var_4], ebx
-0x5B2A86: call    Menu_CreateTileFromTemplate
+0x5B2A86: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5B2A8B: mov     esi, eax
 0x5B2A8D: cmp     esi, ebx
 0x5B2A8F: jz      short loc_5B2ADB
@@ -63,11 +63,11 @@
 0x5B2ADB: fild    [esp+12Ch+arg_4]
 0x5B2AE2: push    ecx
 0x5B2AE3: mov     ecx, esi; this
-0x5B2AE5: fstp    [esp+130h+a2]; a3
-0x5B2AE8: push    0FA8h; a2
-0x5B2AED: call    Tile_SetFloat
+0x5B2AE5: fstp    [esp+130h+a2]; value
+0x5B2AE8: push    0FA8h; propertyCode
+0x5B2AED: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B2AF2: push    ebp
-0x5B2AF3: call    FormHeapFree
+0x5B2AF3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B2AF8: add     esp, 4
 0x5B2AFB: mov     eax, esi
 0x5B2AFD: mov     ecx, [esp+12Ch+var_C]
@@ -82,3 +82,16 @@
 0x5B2B19: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5B2B1E: add     esp, 118h
 0x5B2B24: retn    8
+0x9C0900: lea     ecx, [ebp-118h]; void *
+0x9C0906: jmp     BSStringT_Clear
+0x9C090B: mov     edx, [esp+arg_4]
+0x9C090F: lea     eax, [edx-11Ch]
+0x9C0915: mov     ecx, [edx-120h]
+0x9C091B: xor     ecx, eax
+0x9C091D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0922: add     eax, 10h
+0x9C0925: mov     ecx, [edx-4]
+0x9C0928: xor     ecx, eax
+0x9C092A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C092F: mov     eax, offset stru_AE9B44
+0x9C0934: jmp     ___CxxFrameHandler3

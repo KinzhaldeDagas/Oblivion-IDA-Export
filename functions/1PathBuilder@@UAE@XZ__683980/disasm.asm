@@ -32,3 +32,21 @@
 0x6839FD: pop     esi
 0x6839FE: add     esp, 10h
 0x683A01: retn
+0x9C4DE0: mov     ecx, [ebp-10h]; this
+0x9C4DE3: jmp     ??1BackgroundLoader@@UAE@XZ
+0x9C4DE8: mov     ecx, [ebp-10h]
+0x9C4DEB: add     ecx, 10h
+0x9C4DEE: jmp     ??1?$NiTPointerMap@PAVActor@@PAUPathingData@@@@UAE@XZ
+0x9C4DF3: mov     ecx, [ebp-10h]
+0x9C4DF6: add     ecx, 20h ; ' '
+0x9C4DF9: jmp     ??1?$NiTPointerMap@PAVActor@@PAUPathingData@@@@UAE@XZ
+0x9C4DFE: mov     ecx, [ebp-10h]
+0x9C4E01: add     ecx, 30h ; '0'
+0x9C4E04: jmp     ??1?$NiTPointerMap@PAVActor@@PAUPathingData@@@@UAE@XZ
+0x9C4E09: mov     edx, [esp+arg_4]
+0x9C4E0D: lea     eax, [edx-8]
+0x9C4E10: mov     ecx, [edx-0Ch]
+0x9C4E13: xor     ecx, eax
+0x9C4E15: call    @__security_check_cookie@4
+0x9C4E1A: mov     eax, offset stru_AED6AC
+0x9C4E1F: jmp     ___CxxFrameHandler3

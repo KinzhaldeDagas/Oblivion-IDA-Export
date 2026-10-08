@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4D6FD0",
+      "0x4D6FD9"
+    ]
+  ],
+  "chunks_sha256": "d07d5a4cb6f2254fdb227926fdb5fe207af5103d3bac7038ae9f580fe5c7578f",
+  "comment_regular": "Verified local operation: returns whether TESForm flags at +0x08 contain bit 0x8000. Probable role: visible-distant flag, corroborated by the identical local bit check in Fallout's named TESObjectREFR::GetVisibleDistant and by Oblivion's distant model queue callers. Divergence: Fallout also falls back to the base form's bit when the reference bit is clear; this Oblivion helper checks only the reference's own flags.",
+  "comment_repeatable": "Verified local operation: returns whether TESForm flags at +0x08 contain bit 0x8000. Probable role: visible-distant flag, corroborated by the identical local bit check in Fallout's named TESObjectREFR::GetVisibleDistant and by Oblivion's distant model queue callers. Divergence: Fallout also falls back to the base form's bit when the reference bit is clear; this Oblivion helper checks only the reference's own flags.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D6FD0",
+  "display_name": "TESObjectREFR_HasVisibleDistantFlag",
   "end_ea": "0x4D6FD9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D6FD0",
+  "name": "TESObjectREFR_HasVisibleDistantFlag",
   "segment": ".text",
   "sha256": "d07d5a4cb6f2254fdb227926fdb5fe207af5103d3bac7038ae9f580fe5c7578f",
   "size": 9,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D6FD0",
-  "type": "bool __thiscall(_DWORD *this)",
+  "total_chunk_size": 9,
+  "type": "bool __thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 3,
   "xrefs_to_count": 4
 }

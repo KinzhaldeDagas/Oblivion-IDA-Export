@@ -1,5 +1,5 @@
 0x5CF9B0: push    ecx; a3
-0x5CF9B1: call    sub_578D70
+0x5CF9B1: call    InterfaceManager_ConsumeMessageButton
 0x5CF9B6: cmp     al, 1
 0x5CF9B8: jnz     loc_5CFAFA
 0x5CF9BE: push    ebx
@@ -20,7 +20,7 @@
 0x5CF9F1: push    0FB9h
 0x5CF9F6: mov     ebx, eax
 0x5CF9F8: call    Tile_GetFloat
-0x5CF9FD: call    Double_To_SInt32
+0x5CF9FD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5CFA02: mov     ecx, ds:0B333C4h; this
 0x5CFA08: push    0; a3
 0x5CFA0A: push    eax; a2
@@ -77,12 +77,12 @@
 0x5CFAB3: jz      short loc_5CFAB7
 0x5CFAB5: mov     edx, [ecx]
 0x5CFAB7: fild    [esp+10h+var_4]
-0x5CFABB: push    edx; int
-0x5CFABC: push    eax; int
+0x5CFABB: push    edx; targetStack
+0x5CFABC: push    eax; containerChanges
 0x5CFABD: push    ecx
-0x5CFABE: mov     ecx, esi
-0x5CFAC0: fstp    [esp+1Ch+var_1C]; float
-0x5CFAC3: call    sub_488AA0
+0x5CFABE: mov     ecx, esi; this
+0x5CFAC0: fstp    [esp+1Ch+newCharge]; newCharge
+0x5CFAC3: call    EquippedEntryData_SetCharge; Set per-instance charge for a specific EntryData stack. Creates ExtraDataList/ExtraCharge as needed, or removes redundant charge data when newCharge exceeds the base maximum. containerChanges identifies the owning inventory; targetStack selects the equipped instance.
 0x5CFAC8: mov     ecx, ds:0B333C4h
 0x5CFACE: call    sub_65DD20
 0x5CFAD3: push    0; ArgList
@@ -92,7 +92,7 @@
 0x5CFADD: mov     ecx, esi
 0x5CFADF: call    ContainerEntryExtraData_DestroyDataTable
 0x5CFAE4: push    esi
-0x5CFAE5: call    FormHeapFree
+0x5CFAE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5CFAEA: add     esp, 4
 0x5CFAED: push    1
 0x5CFAEF: mov     ecx, ebx
@@ -115,9 +115,9 @@
 0x5CFB26: jge     short loc_5CFB2E
 0x5CFB28: fadd    dword ptr ds:0A2FC78h
 0x5CFB2E: mov     ecx, ds:0B3B708h; this
-0x5CFB34: fstp    [esp+14h+a2]; a3
+0x5CFB34: fstp    [esp+14h+a2]; value
 0x5CFB38: add     esp, 0Ch
-0x5CFB3B: push    0FF0h; a2
-0x5CFB40: call    Tile_SetFloat
+0x5CFB3B: push    0FF0h; propertyCode
+0x5CFB40: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CFB45: pop     ecx
 0x5CFB46: retn

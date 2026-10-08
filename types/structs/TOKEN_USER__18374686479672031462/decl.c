@@ -1,1 +1,4 @@
-_TOKEN_USER
+struct _TOKEN_USER
+{
+SID_AND_ATTRIBUTES User;
+};

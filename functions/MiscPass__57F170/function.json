@@ -1,18 +1,31 @@
 {
-  "callees_count": 54,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 22,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "chunks": [
+    [
+      "0x57F170",
+      "0x57F485"
+    ]
+  ],
+  "chunks_sha256": "ea0183e0656fc78671dc52084d0f27b057676a67167916843b65c79448e10c8d",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused route decode: constructs stack BSCullingProcess at 0x57F1B8..0x57F1C7 using a1[1]->process.VisibleGeo, then disables its frustum byte. First call 0x57F2C3 uses a1[1] scene and that scene's own process. Second call 0x57F3F3 DIRECTLY calls base Process on temporary BSCullingProcess with *a1 scene/camera. CULLING Process-vtable scope and exact-world-owner tests do not authorize its second traversal. This is not evidence of a main-world rendering leak; preserve UI/other-view semantics.\n\nMoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.",
+  "comment_repeatable": "MoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
   "display_name": "MiscPass",
   "end_ea": "0x57F485",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "MiscPass",
   "segment": ".text",
   "sha256": "ea0183e0656fc78671dc52084d0f27b057676a67167916843b65c79448e10c8d",
   "size": 789,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x57F170",
+  "total_chunk_size": 789,
   "type": "void __userpurge(int *@<ecx>, double@<st2>, double st6_0@<st1>, BSRenderedTexture *)",
   "xrefs_from_count": 296,
   "xrefs_to_count": 4

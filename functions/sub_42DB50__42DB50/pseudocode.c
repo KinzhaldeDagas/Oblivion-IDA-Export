@@ -6,7 +6,7 @@ _DWORD *__cdecl sub_42DB50(int a1, unsigned int a2, _DWORD *a3, unsigned int *a4
   unsigned int v10; // edi
   char *v11; // ebp
   void *v12; // eax
-  int v13; // eax
+  void *v13; // eax
   int v14; // ebp
   bool v15; // zf
   _DWORD *v16; // esi
@@ -28,105 +28,105 @@ _DWORD *__cdecl sub_42DB50(int a1, unsigned int a2, _DWORD *a3, unsigned int *a4
   unsigned __int64 v33; // [esp+28h] [ebp-14h]
   unsigned int v34; // [esp+38h] [ebp-4h]
 
-  v7 = (_RTL_CRITICAL_SECTION_0 *)(a1 + 0x200);
-  v32 = (_RTL_CRITICAL_SECTION_0 *)(a1 + 0x200);
-  NiEnterCriticalSection((struct _RTL_CRITICAL_SECTION *)(a1 + 0x200), (int)&aArchivemanager);
+  v7 = (_RTL_CRITICAL_SECTION_0 *)(a1 + 0x200); /*0x42db7b*/
+  v32 = (_RTL_CRITICAL_SECTION_0 *)(a1 + 0x200); /*0x42db88*/
+  NiEnterCriticalSection((struct _RTL_CRITICAL_SECTION *)(a1 + 0x200), (int)&aArchivemanager); /*0x42db8c*/
   if ( Archive_ContainsFolder(a1, a4, (signed int *)&v30, 0) )
   {
     if ( !a3 )
     {
       if ( a2 )
       {
-        v8 = a6;
+        v8 = a6; /*0x42dbdb*/
         v9 = (_DWORD *)FormHeapAlloc((unsigned __int64)a2 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * a2);
-        v10 = 0;
-        a3 = v9;
-        do
+        v10 = 0; /*0x42dbe4*/
+        a3 = v9; /*0x42dbe8*/
+        do /*0x42dc2f*/
         {
-          v11 = *v8;
-          v12 = (void *)FormHeapAlloc(8u);
-          v31 = (int)v12;
-          v34 = 0;
-          if ( v12 )
-            v13 = BSHash_constr(v12, v11, 0);
+          v11 = *v8; /*0x42dbf0*/
+          v12 = (void *)FormHeapAlloc(8u); /*0x42dbf4*/
+          v31 = (int)v12; /*0x42dbfc*/
+          v34 = 0; /*0x42dc02*/
+          if ( v12 ) /*0x42dc0a*/
+            v13 = BSHash_constr(v12, v11, 0); /*0x42dc11*/
           else
-            v13 = 0;
-          v9[v10] = v13;
-          v8 = (char **)v8[1];
-          ++v10;
-          v34 = 0xFFFFFFFF;
+            v13 = 0; /*0x42dc18*/
+          v9[v10] = v13; /*0x42dc1a*/
+          v8 = (char **)v8[1]; /*0x42dc1d*/
+          ++v10; /*0x42dc20*/
+          v34 = 0xFFFFFFFF; /*0x42dc27*/
         }
-        while ( v10 < a2 );
-        sub_42BFB0((int)v9, 0, a2 - 1);
+        while ( v10 < a2 ); /*0x42dc2f*/
+        sub_42BFB0((int)v9, 0, a2 - 1); /*0x42dc3c*/
       }
     }
-    v14 = *(_DWORD *)(a1 + 0x178) + 0x10 * v30;
-    v15 = *(_DWORD *)(v14 + 8) == 0;
-    v31 = v14;
-    v28 = 0;
-    if ( !v15 )
+    v14 = *(_DWORD *)(a1 + 0x178) + 0x10 * v30; /*0x42dc4f*/
+    v15 = *(_DWORD *)(v14 + 8) == 0; /*0x42dc57*/
+    v31 = v14; /*0x42dc5a*/
+    v28 = 0; /*0x42dc5e*/
+    if ( !v15 ) /*0x42dc62*/
     {
-      v29 = 0;
-      do
+      v29 = 0; /*0x42dc68*/
+      do /*0x42dc6f*/
       {
-        v16 = (_DWORD *)(v29 + *(_DWORD *)(v14 + 0xC));
-        if ( (((*(_BYTE *)(a1 + 0x194) >> 3) ^ ((int)v16[3] < 0)) & 1) == 0 && (v16[3] & 0x7FFFFFFF) != 0 )
+        v16 = (_DWORD *)(v29 + *(_DWORD *)(v14 + 0xC)); /*0x42dc6f*/
+        if ( (((*(_BYTE *)(a1 + 0x194) >> 3) ^ ((int)v16[3] < 0)) & 1) == 0 && (v16[3] & 0x7FFFFFFF) != 0 ) /*0x42dc98*/
         {
-          v17 = sub_42BC50(a5, v29 + *(_DWORD *)(v14 + 0xC));
-          if ( !v17 )
+          v17 = sub_42BC50(a5, v29 + *(_DWORD *)(v14 + 0xC)); /*0x42dca3*/
+          if ( !v17 ) /*0x42dcaa*/
           {
-            v18 = a2;
-            if ( !a2 )
+            v18 = a2; /*0x42dcb0*/
+            if ( !a2 ) /*0x42dcb6*/
             {
 LABEL_23:
-              v25 = (const char *)sub_42CC00((_DWORD *)a1, v30, v28);
-              v26 = (char *)FormHeapAlloc(strlen(v25) + strlen(a7) + 1);
-              strcpy(v26, a7);
-              strcat(v26, v25);
-              BSSimpleList_PushFront(a6, (int)v26);
-              goto LABEL_27;
+              v25 = (const char *)Archive_GetFileNameByFolderAndIndex((_DWORD *)a1, v30, v28); /*0x42dd0e*/
+              v26 = (char *)FormHeapAlloc(strlen(v25) + strlen(a7) + 1); /*0x42dd52*/
+              strcpy(v26, a7); /*0x42dd5c*/
+              strcat(v26, v25); /*0x42dd91*/
+              BSSimpleList_PushFront(a6, (int)v26); /*0x42dd9f*/
+              goto LABEL_27; /*0x42dda4*/
             }
-            v19 = v16[1];
-            v20 = 0;
-            LODWORD(v33) = *v16;
-            HIDWORD(v33) = v19;
-            while ( 1 )
+            v19 = v16[1]; /*0x42dcba*/
+            v20 = 0; /*0x42dcbd*/
+            LODWORD(v33) = *v16; /*0x42dcbf*/
+            HIDWORD(v33) = v19; /*0x42dcc3*/
+            while ( 1 ) /*0x42dccf*/
             {
-              v21 = (v18 - v20) >> 1;
-              v22 = (unsigned int *)a3[v21 + v20];
-              v23 = *v22;
-              v24 = v22[1];
-              if ( v33 < __PAIR64__(v24, v23) )
+              v21 = (v18 - v20) >> 1; /*0x42dccf*/
+              v22 = (unsigned int *)a3[v21 + v20]; /*0x42dcd4*/
+              v23 = *v22; /*0x42dcd7*/
+              v24 = v22[1]; /*0x42dcd9*/
+              if ( v33 < __PAIR64__(v24, v23) ) /*0x42dce8*/
               {
-                v18 = v21 + v20;
+                v18 = v21 + v20; /*0x42dd04*/
               }
               else
               {
-                if ( v33 <= __PAIR64__(v24, v23) )
+                if ( v33 <= __PAIR64__(v24, v23) ) /*0x42dcfa*/
                 {
-                  v14 = v31;
-                  goto LABEL_27;
+                  v14 = v31; /*0x42ddaa*/
+                  goto LABEL_27; /*0x42ddaa*/
                 }
-                v20 += v21;
+                v20 += v21; /*0x42dd00*/
               }
-              if ( !v21 )
+              if ( !v21 ) /*0x42dd08*/
               {
-                v14 = v31;
-                goto LABEL_23;
+                v14 = v31; /*0x42dd0a*/
+                goto LABEL_23; /*0x42dd0a*/
               }
             }
           }
-          if ( v17 < 0 )
-            break;
+          if ( v17 < 0 ) /*0x42dda6*/
+            break; /*0x42dda6*/
         }
 LABEL_27:
-        v29 += 0x10;
-        ++v28;
+        v29 += 0x10; /*0x42ddae*/
+        ++v28; /*0x42ddbd*/
       }
-      while ( v28 < *(_DWORD *)(v14 + 8) );
+      while ( v28 < *(_DWORD *)(v14 + 8) ); /*0x42dc6f*/
     }
-    v7 = v32;
+    v7 = v32; /*0x42ddc7*/
   }
-  NiLeaveCriticalSection_0(v7);
-  return a3;
+  NiLeaveCriticalSection_0(v7); /*0x42ddcd*/
+  return a3; /*0x42ddd6*/
 }

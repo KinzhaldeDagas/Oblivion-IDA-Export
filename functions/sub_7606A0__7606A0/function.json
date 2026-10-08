@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
-  "callers_count": 30,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 46,
+  "chunks": [
+    [
+      "0x7606A0",
+      "0x7606F4"
+    ]
+  ],
+  "chunks_sha256": "91f83085adee645ecbfd2d7bb3227d265a690986539e8511788bc8b089e3cfab",
+  "comment_regular": "Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.",
+  "comment_repeatable": "Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.\nDX11 restricted replacement lifetime audit 2026-10-01: native allocator reads global B42044, pops pool data[--count], and performs plain ADD at pass+60. These native reference operations are not interlocked; using CAS externally does not itself provide writer exclusion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7606A0",
+  "display_name": "NiD3DPassPool_Acquire",
   "end_ea": "0x7606F4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7606A0",
+  "name": "NiD3DPassPool_Acquire",
   "segment": ".text",
   "sha256": "91f83085adee645ecbfd2d7bb3227d265a690986539e8511788bc8b089e3cfab",
   "size": 84,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7606A0",
+  "total_chunk_size": 84,
   "type": "NiD3DPass **__cdecl(NiD3DPass **)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 46

@@ -10,9 +10,9 @@
 0x4A37DF: mov     ecx, eax
 0x4A37E1: call    NiDX92DBufferData__GetSurfaceData
 0x4A37E6: mov     ebx, eax
-0x4A37E8: mov     ecx, esi
+0x4A37E8: mov     ecx, esi; self
 0x4A37EA: mov     [esp+10h+var_4], ebx
-0x4A37EE: call    sub_4A3560
+0x4A37EE: call    TESRegionData_SaveHeader; Verified: serializes region-data type/override/priority base header into RDAT.
 0x4A37F3: test    ebx, ebx
 0x4A37F5: jz      short loc_4A3873
 0x4A37F7: mov     eax, [esi]
@@ -73,12 +73,12 @@
 0x4A387A: push    ecx; Size
 0x4A387B: push    ebp; Src
 0x4A387C: push    53474452h; int
-0x4A3881: call    TESForm_PutFormRecordChunkData
+0x4A3881: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4A3886: add     esp, 0Ch
 0x4A3889: test    ebx, ebx
 0x4A388B: jz      short loc_4A3896
 0x4A388D: push    ebp
-0x4A388E: call    FormHeapFree
+0x4A388E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A3893: add     esp, 4
 0x4A3896: pop     esi
 0x4A3897: pop     ebp

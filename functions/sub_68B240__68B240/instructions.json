@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x68B262",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,25 +193,25 @@
   },
   {
     "ea": "0x68B28F",
-    "line": "mov     esi, offset Vector3_InitValue?",
+    "line": "mov     esi, offset g_zeroNiPoint3",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x68B294",
-    "line": "push    esi",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68B295",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x68B297",
-    "line": "call    sub_68B200",
+    "line": "call    TravelPathNode_SetOwnedPosition; Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.",
     "mnemonic": "call",
     "size": 5
   },

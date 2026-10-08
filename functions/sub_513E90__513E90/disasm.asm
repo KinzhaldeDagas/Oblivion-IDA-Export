@@ -27,7 +27,7 @@
 0x513EDB: xor     esi, esi
 0x513EDD: push    ecx; a1
 0x513EDE: mov     dword ptr [esp+44h+var_1C], esi
-0x513EE2: call    Script_ExtractArgs
+0x513EE2: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x513EE7: add     esp, 20h
 0x513EEA: test    al, al
 0x513EEC: jnz     short loc_513EFF
@@ -82,7 +82,7 @@
 0x513F92: push    ecx
 0x513F93: call    sub_57C980
 0x513F98: push    esi
-0x513F99: call    FormHeapFree
+0x513F99: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x513F9E: add     esp, 8
 0x513FA1: mov     al, 1
 0x513FA3: mov     ecx, [esp+24h+var_C]
@@ -91,3 +91,12 @@
 0x513FAF: pop     esi
 0x513FB0: add     esp, 1Ch
 0x513FB3: retn
+0x9B7140: lea     ecx, [ebp-14h]; void *
+0x9B7143: jmp     BSStringT_Clear
+0x9B7148: mov     edx, [esp+arg_4]
+0x9B714C: lea     eax, [edx-14h]
+0x9B714F: mov     ecx, [edx-18h]
+0x9B7152: xor     ecx, eax
+0x9B7154: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7159: mov     eax, offset stru_AE1DB4
+0x9B715E: jmp     ___CxxFrameHandler3

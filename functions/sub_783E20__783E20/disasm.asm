@@ -21,7 +21,6 @@
 0x783E55: add     esp, 0Ch
 0x783E58: lea     edx, [eax+1]
 0x783E5B: jmp     short loc_783E60
-0x783E5D: align 10h
 0x783E60: mov     cl, [eax]
 0x783E62: add     eax, 1
 0x783E65: test    cl, cl

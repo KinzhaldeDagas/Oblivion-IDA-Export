@@ -1,19 +1,32 @@
 {
-  "callees_count": 23,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x5ED730",
+      "0x5ED860"
+    ]
+  ],
+  "chunks_sha256": "8471e79a07dff7c01e396beedb84c9475f5df2933340ae1a6fff36d1ac881358",
+  "comment_regular": "Oblivion social eligibility predicate used only by the two random-conversation scans. Requires a process; in interiors requires |Z(this)-Z(other)| <= 90; rejects process current-package flag 0x1000, dead actors, process mode 9, sub_5E6FA0 state, sleep states other than None/Sitting, and package types accepted by sub_567770; final process metric at vslot +0x15C must be <= 0.",
+  "comment_repeatable": "Oblivion social eligibility predicate used only by the two random-conversation scans. Requires a process; in interiors requires |Z(this)-Z(other)| <= 90; rejects process current-package flag 0x1000, dead actors, process mode 9, sub_5E6FA0 state, sleep states other than None/Sitting, and package types accepted by sub_567770; final process metric at vslot +0x15C must be <= 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5ED730",
+  "display_name": "Actor::CanStartSocialConversationWith",
   "end_ea": "0x5ED860",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5ED730",
+  "name": "Actor::CanStartSocialConversationWith",
   "segment": ".text",
   "sha256": "8471e79a07dff7c01e396beedb84c9475f5df2933340ae1a6fff36d1ac881358",
   "size": 304,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5ED730",
-  "type": "double __userpurge@<st0>(TESObjectREFR *this@<ecx>, double result@<st0>, int)",
+  "total_chunk_size": 304,
+  "type": "bool __thiscall(Actor *this, Actor *other)",
   "xrefs_from_count": 128,
   "xrefs_to_count": 4
 }

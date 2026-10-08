@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E71A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4E71D4",
-    "line": "call    sub_4E5400",
+    "line": "call    TESPathGrid_ClearRenderedPointGeometry; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x4E7256",
-    "line": "mov     ecx, [ecx+esi*4]",
+    "line": "mov     ecx, [ecx+esi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x4E725D",
-    "line": "push    1",
+    "line": "push    1; includeAllNeighbors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4E725F",
-    "line": "push    ebx",
+    "line": "push    ebx; grid",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E7260",
-    "line": "call    sub_4E82E0",
+    "line": "call    TESPathGridPoint_RebuildRenderGeometry; Verified renderer loop invokes TESPathGridPoint_RebuildRenderGeometry for each non-null point, passing the owning TESPathGrid and includeAllNeighbors=true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x4E7302",
-    "line": "push    edx; int",
+    "line": "push    edx; vertexColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x4E7318",
-    "line": "fstp    [esp+48h+a2]; float",
+    "line": "fstp    [esp+48h+a2]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4E731B",
-    "line": "call    sub_47FD30",
+    "line": "call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,25 +991,25 @@
   },
   {
     "ea": "0x4E737B",
-    "line": "push    ecx",
+    "line": "push    ecx; endColor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E737C",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E737E",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E7383",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x4E738A",
-    "line": "push    edx",
+    "line": "push    edx; startColor",
     "mnemonic": "push",
     "size": 1
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x4E7395",
-    "line": "push    eax",
+    "line": "push    eax; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E7396",
-    "line": "call    sub_47F070",
+    "line": "call    NiLines_CreateSegment; Verified edge-render call: NiLines_CreateSegment receives the PathGrid point position and its adjacent point position, with the same vertex color for both endpoints; the resulting segment is added under TESPathGrid.renderNode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x4E7411",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,13 +1315,13 @@
   },
   {
     "ea": "0x4E742A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E742C",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x4E745F",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x4E7480",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x4E7493",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1552,5 +1552,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5E30",
+    "line": "mov     eax, [ebp-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E33",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E34",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E39",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E3A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E3B",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E3E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E3F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E44",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E45",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E46",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5E4A",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E4D",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E50",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5E52",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E57",
+    "line": "mov     eax, offset stru_AE0DBC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E5C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

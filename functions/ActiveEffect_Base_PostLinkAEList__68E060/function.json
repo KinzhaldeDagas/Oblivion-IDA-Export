@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68E060",
+      "0x68E0AB"
+    ]
+  ],
+  "chunks_sha256": "45cab56fc765c4642f6bf23670a9158c1529de9fafd442e6f86759956d231eea",
+  "comment_regular": "Verified post-link entry iterates the target ActiveEffect EffectNode list and dispatches each ActiveEffect virtual +0x1C with the target/reference linkContext. TESObjectREFR_PostLinkModifiedExtraList calls this for a linked NonActorMagicTarget list (null context); actor/player post-link paths pass their reference context.",
+  "comment_repeatable": "Verified post-link entry iterates the target ActiveEffect EffectNode list and dispatches each ActiveEffect virtual +0x1C with the target/reference linkContext. TESObjectREFR_PostLinkModifiedExtraList calls this for a linked NonActorMagicTarget list (null context); actor/player post-link paths pass their reference context.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_PostLinkAEList",
   "end_ea": "0x68E0AB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_PostLinkAEList",
   "segment": ".text",
   "sha256": "45cab56fc765c4642f6bf23670a9158c1529de9fafd442e6f86759956d231eea",
   "size": 75,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E060",
-  "type": "int __cdecl(_DWORD *, int)",
+  "total_chunk_size": 75,
+  "type": "int __cdecl(EffectNode *activeEffectList, TESObjectREFR *linkContext)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 3
 }

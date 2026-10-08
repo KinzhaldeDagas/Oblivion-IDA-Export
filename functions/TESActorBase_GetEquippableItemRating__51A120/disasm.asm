@@ -1,6 +1,6 @@
-0x51A120: sub     esp, 0Ch
+0x51A120: sub     esp, 0Ch; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.
 0x51A123: fldz
-0x51A125: mov     eax, [esp+0Ch+arg_0]
+0x51A125: mov     eax, [esp+0Ch+item]
 0x51A129: test    eax, eax
 0x51A12B: fstp    [esp+0Ch+var_C]
 0x51A12E: push    ebx
@@ -53,13 +53,13 @@
 0x51A1C5: test    eax, eax
 0x51A1C7: jz      TESActorBase_GetEquippableItemRating___Return; jumptable 0051A150 default case, cases 21,23-25,27-32
 0x51A1CD: mov     ebx, [esi]
-0x51A1CF: mov     ecx, edi
-0x51A1D1: call    TESObjectWEAP_GetWeaponSkillAV
+0x51A1CF: mov     ecx, edi; this
+0x51A1D1: call    TESObjectWEAP_GetWeaponSkillAV; BladeSkillsRestored schema-4 owner decode: ECX is TESObjectWEAP and ESI is TESActorBase. Call returns at 0x51A1D6; paired Calc_WeaponDamage returns at 0x51A271. Patch resolves ESI as TESNPC and uses its carrier/co-save sidecar level; non-NPC or missing rows remain native.
 0x51A1D6: mov     edx, [ebx+12Ch]
 0x51A1DC: push    eax
 0x51A1DD: mov     ecx, esi
 0x51A1DF: call    edx
-0x51A1E1: fstp    dword ptr [esp+18h+var_4]
+0x51A1E1: fstp    [esp+18h+var_4]
 0x51A1E5: mov     eax, [esi]
 0x51A1E7: mov     edx, [eax+12Ch]
 0x51A1ED: push    7
@@ -71,15 +71,15 @@
 0x51A1FF: push    0
 0x51A201: mov     ecx, esi
 0x51A203: call    edx
-0x51A205: mov     [esp+18h+arg_0], eax
-0x51A209: fild    [esp+18h+arg_0]
+0x51A205: mov     [esp+18h+item], eax
+0x51A209: fild    [esp+18h+item]
 0x51A20D: mov     eax, [esi]
 0x51A20F: mov     edx, [eax+12Ch]
 0x51A215: push    0Ah
 0x51A217: mov     ecx, esi
 0x51A219: fstp    [esp+1Ch+var_C]
 0x51A21D: call    edx
-0x51A21F: fstp    [esp+18h+arg_0]
+0x51A21F: fstp    [esp+18h+item]
 0x51A223: mov     eax, [edi+88h]
 0x51A229: mov     edx, [eax+10h]
 0x51A22C: lea     ecx, [edi+88h]
@@ -91,19 +91,19 @@
 0x51A23F: movzx   eax, ax
 0x51A242: fstp    [esp+24h+var_24]; float
 0x51A245: push    eax; int
-0x51A246: fld     [esp+28h+arg_0]
+0x51A246: fld     [esp+28h+item]
 0x51A24A: push    ecx
 0x51A24B: fstp    [esp+2Ch+var_2C]; float
 0x51A24E: fld     [esp+2Ch+var_C]
-0x51A252: call    Double_To_SInt32
+0x51A252: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x51A257: fld     [esp+2Ch+var_8]
 0x51A25B: push    eax; int
-0x51A25C: call    Double_To_SInt32
-0x51A261: fld     dword ptr [esp+30h+var_4]
+0x51A25C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x51A261: fld     [esp+30h+var_4]
 0x51A265: push    eax; int
-0x51A266: call    Double_To_SInt32
+0x51A266: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x51A26B: push    eax; int
-0x51A26C: call    Calc_WeaponDamage
+0x51A26C: call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.
 0x51A271: fstp    [esp+38h+var_C]
 0x51A275: fld     [esp+38h+var_C]
 0x51A279: add     esp, 20h
@@ -159,7 +159,7 @@
 0x51A305: push    ecx
 0x51A306: mov     ecx, edi
 0x51A308: fstp    [esp+1Ch+var_1C]; float
-0x51A30B: call    TESObjectARMO_GetArmorSkillAV
+0x51A30B: call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 7/7: TESActorBase armor-item evaluation selects the armor skill AV; consumer is Calc_ArmorRating at 0x51A34A. The receiver supplies the base-NPC context for authored NPC sidecar values.
 0x51A310: push    eax; float
 0x51A311: mov     eax, [ebx+12Ch]
 0x51A317: mov     ecx, esi
@@ -168,16 +168,16 @@
 0x51A31C: mov     ecx, edi
 0x51A31E: fstp    [esp+24h+var_24]; float
 0x51A321: call    TESObjectARMO_GetArmorRating
-0x51A326: fnstcw  word ptr [esp+24h+arg_0]
-0x51A32A: movzx   eax, word ptr [esp+24h+arg_0]
+0x51A326: fnstcw  word ptr [esp+24h+item]
+0x51A32A: movzx   eax, word ptr [esp+24h+item]
 0x51A32F: or      eax, 0C00h
-0x51A334: mov     dword ptr [esp+24h+var_4], eax
-0x51A338: fldcw   [esp+24h+var_4]
-0x51A33C: fistp   dword ptr [esp+24h+var_4]
-0x51A340: movzx   ecx, [esp+24h+var_4]
+0x51A334: mov     [esp+24h+var_4], eax
+0x51A338: fldcw   word ptr [esp+24h+var_4]
+0x51A33C: fistp   [esp+24h+var_4]
+0x51A340: movzx   ecx, word ptr [esp+24h+var_4]
 0x51A345: push    ecx; int
-0x51A346: fldcw   word ptr [esp+28h+arg_0]
-0x51A34A: call    Calc_ArmorRating
+0x51A346: fldcw   word ptr [esp+28h+item]
+0x51A34A: call    Calc_ArmorRating; Paired Medium boundary 7/7: TESActorBase_GetEquippableItemRating armor consumer. Use an authored NPC Medium sidecar level only when the receiver resolves to a TESNPC; otherwise preserve the engine-supplied fallback skill.
 0x51A34F: fstp    [esp+28h+var_C]
 0x51A353: fld     [esp+28h+var_C]
 0x51A357: add     esp, 10h

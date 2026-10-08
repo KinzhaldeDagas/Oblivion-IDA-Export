@@ -1,1 +1,1 @@
-LONG
+typedef int LONG;

@@ -43,23 +43,23 @@ void __userpurge def_7374AE(
   int v40; // edx
   int v41; // [esp-Ch] [ebp-Ch]
 
-  v37 = a37;
-  v38 = 0;
-  if ( a37 )
+  v37 = a37; /*0x7374da*/
+  v38 = 0; /*0x7374e1*/
+  if ( a37 ) /*0x7374e5*/
   {
-    do
+    do /*0x73752f*/
     {
-      v39 = a2[0x17];
-      v41 = *(_DWORD *)(v39 + 4 * v38 + 4) - *(_DWORD *)(v39 + 4 * v38);
-      v40 = a2[0x14] + *(_DWORD *)(v39 + 4 * v38);
-      a11 = 1;
-      (*(void (__cdecl **)(int, int, int, int *, int))(a36 + 4))(a36, v40, v41, &a11, 1);
-      ++v38;
+      v39 = a2[0x17]; /*0x7374f0*/
+      v41 = *(_DWORD *)(v39 + 4 * v38 + 4) - *(_DWORD *)(v39 + 4 * v38); /*0x737504*/
+      v40 = a2[0x14] + *(_DWORD *)(v39 + 4 * v38); /*0x737515*/
+      a11 = 1; /*0x737518*/
+      (*(void (__cdecl **)(int, int, int, int *, int))(a36 + 4))(a36, v40, v41, &a11, 1); /*0x737525*/
+      ++v38; /*0x737527*/
     }
-    while ( v38 < v37 );
-    a1 = a9;
+    while ( v38 < v37 ); /*0x73752f*/
+    a1 = a9; /*0x737531*/
   }
-  if ( a1 + 2 >= a8 )
-    JUMPOUT(0x7376CA);
-  JUMPOUT(0x7374A9);
+  if ( a1 + 2 >= a8 ) /*0x737543*/
+    JUMPOUT(0x7376CA); /*0x7376ca*/
+  JUMPOUT(0x7374A9); /*0x7374a9*/
 }

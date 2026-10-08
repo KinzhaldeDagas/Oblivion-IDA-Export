@@ -1,1 +1,1 @@
-NiD3DShaderProgramCreatorHLSL
+struct NiD3DShaderProgramCreatorHLSL;

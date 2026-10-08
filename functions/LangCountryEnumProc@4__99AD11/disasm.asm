@@ -33,9 +33,9 @@
 0x99AD68: inc     eax
 0x99AD69: jmp     loc_99AED0
 0x99AD6E: lea     eax, [ebp+LCData]
-0x99AD71: push    eax; Str2
-0x99AD72: push    dword ptr [esi+4]; Str1
-0x99AD75: call    __strcmp
+0x99AD71: push    eax; right
+0x99AD72: push    dword ptr [esi+4]; left
+0x99AD75: call    CRT_StricmpLocaleDispatch
 0x99AD7A: test    eax, eax
 0x99AD7C: pop     ecx
 0x99AD7D: pop     ecx
@@ -54,9 +54,9 @@
 0x99AD9F: test    eax, eax
 0x99ADA1: jz      short loc_99AD62
 0x99ADA3: lea     eax, [ebp+LCData]
-0x99ADA6: push    eax; Str2
-0x99ADA7: push    dword ptr [esi]; Str1
-0x99ADA9: call    __strcmp
+0x99ADA6: push    eax; right
+0x99ADA7: push    dword ptr [esi]; left
+0x99ADA9: call    CRT_StricmpLocaleDispatch
 0x99ADAE: test    eax, eax
 0x99ADB0: pop     ecx
 0x99ADB1: pop     ecx
@@ -116,9 +116,9 @@
 0x99AE42: test    eax, eax
 0x99AE44: jz      loc_99AD62
 0x99AE4A: lea     eax, [ebp+LCData]
-0x99AE4D: push    eax; Str2
-0x99AE4E: push    dword ptr [esi]; Str1
-0x99AE50: call    __strcmp
+0x99AE4D: push    eax; right
+0x99AE4E: push    dword ptr [esi]; left
+0x99AE50: call    CRT_StricmpLocaleDispatch
 0x99AE55: pop     ecx
 0x99AE56: xor     ebx, ebx
 0x99AE58: test    eax, eax
@@ -145,9 +145,9 @@
 0x99AE91: cmp     [esi+0Ch], ebx
 0x99AE94: jz      short loc_99AEC5
 0x99AE96: lea     eax, [ebp+LCData]
-0x99AE99: push    eax; Str2
-0x99AE9A: push    dword ptr [esi]; Str1
-0x99AE9C: call    __strcmp
+0x99AE99: push    eax; right
+0x99AE9A: push    dword ptr [esi]; left
+0x99AE9C: call    CRT_StricmpLocaleDispatch
 0x99AEA1: test    eax, eax
 0x99AEA3: pop     ecx
 0x99AEA4: pop     ecx

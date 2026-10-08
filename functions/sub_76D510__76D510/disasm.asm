@@ -1,4 +1,4 @@
-0x76D510: mov     eax, ecx
+0x76D510: mov     eax, ecx; Return whether this depth/stencil buffer's surface format advertises a stencil component; used to gate D3DCLEAR_STENCIL.
 0x76D512: mov     ecx, [eax+10h]
 0x76D515: test    ecx, ecx
 0x76D517: jz      short loc_76D52C

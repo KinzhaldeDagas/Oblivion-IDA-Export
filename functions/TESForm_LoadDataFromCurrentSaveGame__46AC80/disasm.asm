@@ -1,2 +1,2 @@
-0x46AC80: mov     ecx, ds:0B33B00h
-0x46AC86: jmp     SaveLoad_LoadData
+0x46AC80: mov     ecx, ds:0B33B00h; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x46AC86: jmp     SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.

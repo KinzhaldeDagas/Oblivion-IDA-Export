@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESActorBaseVtbl",
+  "definition": "struct TESActorBaseVtbl\n{\nTESBoundObjectVtbl super;\nvoid *(__thiscall *GetCombatStyle)(TESActorBase *This);\nvoid (__thiscall *SetCombatStyle)(TESActorBase *This, void *style);\nUInt32 (__thiscall *GetActorValue)(TESActorBase *This, UInt32 avCode);\nfloat (__thiscall *GetActorValue_F)(TESActorBase *This, UInt32 avCode);\nvoid (__thiscall *SetActorValue_F)(TESActorBase *This, UInt32 avCode, float value);\nvoid (__thiscall *SetActorValue)(TESActorBase *This, UInt32 avCode, SInt32 value);\nvoid (__thiscall *ModActorValue_F)(TESActorBase *This, UInt32 avCode, float value);\nvoid (__thiscall *ModActorValue)(TESActorBase *This, UInt32 avCode, SInt32 value);\n}\n",
   "id": 18374686479672049975,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 220
+      "size": 220,
+      "type": "TESBoundObjectVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "GetCombatStyle",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "void *(__thiscall *)(TESActorBase *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "SetCombatStyle",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "void (__thiscall *)(TESActorBase *This, void *style)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "GetActorValue",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 4
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(TESActorBase *This, UInt32 avCode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "GetActorValue_F",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "float (__thiscall *)(TESActorBase *This, UInt32 avCode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "SetActorValue_F",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "void (__thiscall *)(TESActorBase *This, UInt32 avCode, float value)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "SetActorValue",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "void (__thiscall *)(TESActorBase *This, UInt32 avCode, SInt32 value)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "ModActorValue_F",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "void (__thiscall *)(TESActorBase *This, UInt32 avCode, float value)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "ModActorValue",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "void (__thiscall *)(TESActorBase *This, UInt32 avCode, SInt32 value)"
     }
   ],
   "name": "TESActorBaseVtbl",
+  "ordinal": 9661,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 252
 }

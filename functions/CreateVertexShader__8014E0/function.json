@@ -1,19 +1,36 @@
 {
-  "callees_count": 99,
-  "callers_count": 28,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 33,
+  "callers_count": 45,
+  "chunks": [
+    [
+      "0x8014E0",
+      "0x801C89"
+    ],
+    [
+      "0x9D06F0",
+      "0x9D072C"
+    ]
+  ],
+  "chunks_sha256": "30fa976034ea31e447c8a75b17b86ebb60fb23544ffe47a02d1567fd0d676556",
+  "comment_regular": "\n\n[2026-10-03 frond program correction] Verified lookup CALL 0x801581 -> NiTMap_GetAtIndex 0x7DAC70 (ECX map, one stack name). On a found record, bytecode is record+0x104; borrowed package bytes are not freed. They reach IDirect3DDevice9::CreateVertexShader 0x801B93, then native NiD3DVertexShader ctor 0x780D80 and virtual+44 adopt the GPU object. SpeedTreeOBSE intercepts only named STFROND records here with static embedded bytecode, forwarding all other names. This replaces unsafe scans near NiD3D program objects; those objects are not established bytecode containers.\n[2026-10-03 runtime readiness] At80156E the temporary package record map B430B8 is tested; null jumps over CALL801581. Consequently the plugin embedded-record hook cannot intercept new shader creation after that map is released. A complete cached ShaderDefinition remains valid: GetShaderDefinition7B4290 returns it before factory/lookup work. Prior runtime log had all six embedded frond loads followed by misleading package7 missing-record prewarm error. Plugin now inspects cached frond definition/GPU handles/stages before requesting creation.\n\nOblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.\n\n[2026-10-04 resident actor shadow authority] Oblivion-side decompilation confirms this is generic shader CREATION: package/file bytes reach IDirect3DDevice9::CreateVertexShader/CreatePixelShader, then a NiD3D program wrapper adopts the resulting COM object. Caller xrefs include the Lighting30/ShadowLight family LoadVertex/LoadPixel routines. The renderer closed actor-shadow session does not invoke this routine; it reads already resident family slots, verifies exact wrapper/getter identity and canonical owned COM payload/revision, rechecks metadata/programs and both final code seals under existing shader mutation/lifetime exclusion. A proposed resident-only code catalog separates these two c",
+  "comment_repeatable": "Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 29,
   "display_name": "CreateVertexShader",
   "end_ea": "0x801C89",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "CreateVertexShader",
   "segment": ".text",
   "sha256": "32f5cc6b2bbd1f7586b78d823018e93b3e6f9c67c363c1d3424ff190c91564e3",
   "size": 1961,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8014E0",
+  "total_chunk_size": 2021,
   "type": "NiD3DShaderProgram *__stdcall(char *lpFileName, _DWORD *, const char *, const char *, int, int)",
-  "xrefs_from_count": 719,
+  "xrefs_from_count": 738,
   "xrefs_to_count": 45
 }

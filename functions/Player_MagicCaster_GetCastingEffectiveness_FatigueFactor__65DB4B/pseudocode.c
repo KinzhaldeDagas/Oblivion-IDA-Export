@@ -9,21 +9,23 @@ double __userpurge Player_MagicCaster_GetCastingEffectiveness_::FatigueFactor@<s
         int a8,
         signed int a9)
 {
+  int *v9; // esi
   int BaseCalcAVi; // eax
-  float v11; // [esp+Ch] [ebp+8h]
   float v12; // [esp+Ch] [ebp+8h]
-  float v13; // [esp+1Ch] [ebp+18h]
+  float v13; // [esp+Ch] [ebp+8h]
+  float v14; // [esp+1Ch] [ebp+18h]
 
-  BaseCalcAVi = Actor_GetBaseCalcAVi((int *)(a3 - 0x5C), a1, a2, a3 - 0x5C, 0xA);
-  if ( !BaseCalcAVi || BaseCalcAVi == a2 )
+  v9 = (int *)(a3 - 0x5C); /*0x65db4b*/
+  BaseCalcAVi = Actor_GetBaseCalcAVi(v9, a1, a2, (int)v9, 0xA); /*0x65db52*/
+  if ( !BaseCalcAVi || BaseCalcAVi == a2 ) /*0x65db67*/
   {
-    v11 = 1.0;
-    return Player_MagicCaster_GetCastingEffectiveness_::ArmorFactor(a4, SLOBYTE(v11));
+    v12 = 1.0; /*0x65db5b*/
+    return Player_MagicCaster_GetCastingEffectiveness_::ArmorFactor(v9, a4, SLOBYTE(v12)); /*0x65db67*/
   }
   else
   {
-    v13 = (double)a9 / (double)BaseCalcAVi;
-    v12 = Calc_FatigueSpellEffectiveness(v13);
-    return Player_MagicCaster_GetCastingEffectiveness_::ArmorFactor(a4, SLOBYTE(v12));
+    v14 = (double)a9 / (double)BaseCalcAVi; /*0x65db72*/
+    v13 = Calc_FatigueSpellEffectiveness(v14); /*0x65db82*/
+    return Player_MagicCaster_GetCastingEffectiveness_::ArmorFactor(v9, a4, SLOBYTE(v13)); /*0x65db87*/
   }
 }

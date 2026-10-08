@@ -6,7 +6,7 @@
 0xA132AD: push    0
 0xA132AF: push    0
 0xA132B1: push    70h ; 'p'
-0xA132B3: push    offset dword_BA8218
+0xA132B3: push    offset unk_BA8218
 0xA132B8: push    offset aHkstoragesampl; "hkStorageSampledHeightFieldShape"
 0xA132BD: mov     ecx, offset unk_BA81F4
 0xA132C2: call    sub_90D190

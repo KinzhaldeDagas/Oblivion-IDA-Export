@@ -11,9 +11,13 @@ int __userpurge EffectItemList_CopyFrom_::FindLastEntry@<eax>(
         int a10,
         int a11)
 {
-  if ( edi0 == a1 )
-    return EffectItemList_CopyFrom_::UpdateHostileCount((int)a1, a2, edi0, a4, a5, a6, a7, a8);
-  if ( *(_DWORD **)(a8 + 8) == a1 )
-    return EffectItemList_CopyFrom_::AppendNewEffectItem(a4);
-  return EffectItemList_CopyFrom_::FindLastEntry_Loop(a4);
+  _DWORD *v11; // esi
+
+  if ( edi0 == a1 ) /*0x414e39*/
+    return EffectItemList_CopyFrom_::UpdateHostileCount((int)a1, a2, edi0, a4, a5, a6, a7, a8); /*0x414e39*/
+  v11 = (_DWORD *)(a8 + 4); /*0x414e3f*/
+  if ( *(_DWORD **)(a8 + 8) == a1 ) /*0x414e45*/
+    return EffectItemList_CopyFrom_::AppendNewEffectItem(a1, a2, edi0, v11, a4, a5, a6, a7, a8); /*0x414e45*/
+  else
+    return EffectItemList_CopyFrom_::FindLastEntry_Loop((int)a1, (int)v11, a4); /*0x414e46*/
 }

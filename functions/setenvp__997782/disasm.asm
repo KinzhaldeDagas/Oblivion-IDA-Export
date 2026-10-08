@@ -1,11 +1,11 @@
 0x997782: push    ebx
 0x997783: xor     ebx, ebx
-0x997785: cmp     dword_BABC14, ebx
+0x997785: cmp     dword ptr unk_BABC14, ebx
 0x99778B: push    esi
 0x99778C: push    edi
 0x99778D: jnz     short loc_997794
 0x99778F: call    ___initmbctable
-0x997794: mov     esi, dword_BA9DF8
+0x997794: mov     esi, dword ptr unk_BA9DF8
 0x99779A: xor     edi, edi
 0x99779C: cmp     esi, ebx
 0x99779E: jnz     short loc_9977B8
@@ -29,9 +29,9 @@
 0x9977C9: cmp     edi, ebx
 0x9977CB: pop     ecx
 0x9977CC: pop     ecx
-0x9977CD: mov     dword_BA9DB4, edi
+0x9977CD: mov     dword ptr unk_BA9DB4, edi
 0x9977D3: jz      short loc_9977A0
-0x9977D5: mov     esi, dword_BA9DF8
+0x9977D5: mov     esi, dword ptr unk_BA9DF8
 0x9977DB: push    ebp; Src
 0x9977DC: jmp     short loc_99781E
 0x9977DE: push    esi; Str
@@ -67,11 +67,11 @@
 0x99781C: add     esi, ebp
 0x99781E: cmp     [esi], bl
 0x997820: jnz     short loc_9977DE
-0x997822: push    dword_BA9DF8; Memory
+0x997822: push    dword ptr unk_BA9DF8; Memory
 0x997828: call    _free
-0x99782D: mov     dword_BA9DF8, ebx
+0x99782D: mov     dword ptr unk_BA9DF8, ebx
 0x997833: mov     [edi], ebx
-0x997835: mov     dword_BABC08, 1
+0x997835: mov     dword ptr unk_BABC08, 1
 0x99783F: xor     eax, eax
 0x997841: pop     ecx
 0x997842: pop     ebp
@@ -79,8 +79,8 @@
 0x997844: pop     esi
 0x997845: pop     ebx
 0x997846: retn
-0x997847: push    dword_BA9DB4; Memory
+0x997847: push    dword ptr unk_BA9DB4; Memory
 0x99784D: call    _free
-0x997852: mov     dword_BA9DB4, ebx
+0x997852: mov     dword ptr unk_BA9DB4, ebx
 0x997858: or      eax, 0FFFFFFFFh
 0x99785B: jmp     short loc_997841

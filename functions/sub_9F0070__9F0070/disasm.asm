@@ -1,7 +1,7 @@
 0x9F0070: push    offset aYouRealizeTh_0; "You realize that you are catching on to"...
 0x9F0075: push    offset aSlevelup3; "sLevelUp3"
-0x9F007A: mov     ecx, offset dword_B38308
-0x9F007F: call    GameSetting_ConstrAndReg
+0x9F007A: mov     ecx, offset stru_B38308; self
+0x9F007F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F0084: push    offset sub_A20D30; void (__cdecl *)()
 0x9F0089: call    _atexit
 0x9F008E: pop     ecx

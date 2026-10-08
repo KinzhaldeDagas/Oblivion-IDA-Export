@@ -19,7 +19,7 @@
 0x6D477D: mov     ecx, [esi+10h]
 0x6D4780: mov     ecx, ds:0B3D2C8h[ecx*4]
 0x6D4787: push    eax
-0x6D4788: call    ecx ; dword_B3D2C8
+0x6D4788: call    ecx ; unk_B3D2C8
 0x6D478A: add     esp, 4
 0x6D478D: mov     eax, [esi+18h]
 0x6D4790: test    eax, eax
@@ -27,7 +27,7 @@
 0x6D4794: mov     edx, [esi+1Ch]
 0x6D4797: mov     ecx, ds:0B3D2C8h[edx*4]
 0x6D479E: push    eax
-0x6D479F: call    ecx ; dword_B3D2C8
+0x6D479F: call    ecx ; unk_B3D2C8
 0x6D47A1: add     esp, 4
 0x6D47A4: mov     eax, [esi+24h]
 0x6D47A7: test    eax, eax
@@ -35,7 +35,7 @@
 0x6D47AB: mov     ecx, [esi+28h]
 0x6D47AE: mov     ecx, ds:0B3D2C8h[ecx*4]
 0x6D47B5: push    eax
-0x6D47B6: call    ecx ; dword_B3D2C8
+0x6D47B6: call    ecx ; unk_B3D2C8
 0x6D47B8: add     esp, 4
 0x6D47BB: mov     eax, [esi+30h]
 0x6D47BE: test    eax, eax
@@ -43,7 +43,7 @@
 0x6D47C2: mov     edx, [esi+34h]
 0x6D47C5: mov     ecx, ds:0B3D2C8h[edx*4]
 0x6D47CC: push    eax
-0x6D47CD: call    ecx ; dword_B3D2C8
+0x6D47CD: call    ecx ; unk_B3D2C8
 0x6D47CF: add     esp, 4
 0x6D47D2: mov     ecx, esi
 0x6D47D4: mov     [esp+18h+var_4], 0FFFFFFFFh
@@ -54,3 +54,12 @@
 0x6D47ED: pop     esi
 0x6D47EE: add     esp, 10h
 0x6D47F1: retn
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

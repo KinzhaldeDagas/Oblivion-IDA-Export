@@ -1,4 +1,4 @@
-0x7EB010: sub     esp, 8
+0x7EB010: sub     esp, 8; MoonSugarEffect decode: triggers native Gethit/double-vision if byte_B2D91C is set. Uses configured blocked/nonblocked offsets and updates flt_B46124/flt_B46120.
 0x7EB013: cmp     byte ptr ds:0B2D91Ch, 0
 0x7EB01A: jz      short loc_7EB077
 0x7EB01C: cmp     [esp+8+arg_0], 0

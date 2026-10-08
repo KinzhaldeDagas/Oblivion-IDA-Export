@@ -66,3 +66,18 @@
 0x708534: pop     ebx
 0x708535: add     esp, 10h
 0x708538: retn
+0x9C9790: mov     ecx, [ebp-10h]; this
+0x9C9793: jmp     ??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C9798: mov     ecx, [ebp-10h]
+0x9C979B: add     ecx, 98h ; '˜'
+0x9C97A1: jmp     j_??1?$NiTPointerList@V?$NiPointer@VNiProperty@@@@@@UAE@XZ; NiTPointerList<NiPointer<NiProperty>>::~NiTPointerList<NiPointer<NiProperty>>(void)
+0x9C97A6: mov     ecx, [ebp-10h]
+0x9C97A9: add     ecx, 0A8h ; '¨'; slot
+0x9C97AF: jmp     NiPointerSlot_Release
+0x9C97B4: mov     edx, [esp+arg_4]
+0x9C97B8: lea     eax, [edx-10h]
+0x9C97BB: mov     ecx, [edx-14h]
+0x9C97BE: xor     ecx, eax
+0x9C97C0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C97C5: mov     eax, offset stru_AF2038
+0x9C97CA: jmp     ___CxxFrameHandler3

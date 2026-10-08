@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4B7490",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x4B7493",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+accessFlagOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4B7499",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x4B74D9",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B74DE",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4B74E2",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4B74E9",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+doorReference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4B74F9",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4B750A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x4B7515",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B751A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B751C",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4B7525",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x4B7528",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B752D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B752F",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x4B7540",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B7542",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,19 +361,19 @@
   },
   {
     "ea": "0x4B754F",
-    "line": "push    esi",
+    "line": "push    esi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B7550",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B7552",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,25 +385,25 @@
   },
   {
     "ea": "0x4B755C",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B755E",
-    "line": "push    esi",
+    "line": "push    esi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B755F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B7561",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4B7570",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4B75A4",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x4B75B7",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x4B75C4",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B75C6",
-    "line": "call    sub_4C9830",
+    "line": "call    TESObjectCELL_HasPublicFlag20; Verified getter: returns whether TESObjectCELL flags0 bit 0x20 is set. Its uses include door access/trespass checks and IsOffLimitToThePlayer. Probable semantic identity: Public; Fallout independently names the corresponding bit SetPublic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x4B7601",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B7603",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x4B760E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B7610",
-    "line": "call    sub_428E70",
+    "line": "call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x4B7619",
-    "line": "mov     eax, [edi+4]",
+    "line": "mov     eax, [edi+4]; Verified field use: reads ExtraLockData.key, now typed TESKey* from the XLOC post-load RTTI resolver; passes it to the actor inventory query before testing lockpick tools.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x4B7637",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B7639",
-    "line": "call    sub_429990",
+    "line": "call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x4B7673",
-    "line": "call    sub_5E4A00",
+    "line": "call    sub_5E4A00; Verified mustLockpickOut condition: after a lock-specific key fails, an effective lock level below 100 plus inventory presence of TESDataHandler_g_Lockpick or TESDataHandler_g_SkeletonKey returns accessible and sets mustLockpickOut=1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x4B767C",
-    "line": "mov     eax, [esp+18h+arg_8]",
+    "line": "mov     eax, [esp+18h+accessFlagOut]",
     "mnemonic": "mov",
     "size": 4
   },

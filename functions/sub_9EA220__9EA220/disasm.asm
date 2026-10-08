@@ -2,7 +2,7 @@
 0x9EA226: push    ecx
 0x9EA227: fstp    [esp+4+var_4]; float
 0x9EA22A: push    offset aFdeathforced_0; "fDeathForceDamageMax"
-0x9EA22F: mov     ecx, offset flt_B371F8
+0x9EA22F: mov     ecx, 0B371F8h
 0x9EA234: call    GameSetting_ConstrAndReg_float
 0x9EA239: push    offset sub_A1EB10; void (__cdecl *)()
 0x9EA23E: call    _atexit

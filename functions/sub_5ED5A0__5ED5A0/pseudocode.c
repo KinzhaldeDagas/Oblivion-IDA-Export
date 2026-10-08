@@ -1,112 +1,83 @@
-void __userpurge sub_5ED5A0(
-        PlayerCharacter *a1@<ecx>,
-        char a2@<bpl>,
-        int a3@<edi>,
-        double a4@<st1>,
-        double a5@<st0>,
-        int a6)
+void __userpurge sub_5ED5A0(Actor *a1@<ecx>, int a2@<edi>, double a3@<st1>, double a4@<st0>, EntryData *a5)
 {
-  int v8; // eax
-  bool v9; // zf
-  int v10; // eax
-  int v11; // edi
-  double v12; // st5
-  double v13; // st7
-  int v14; // eax
-  int v15; // eax
-  MagicTarget *v16; // eax
-  _DWORD *v17; // edi
-  TESObjectREFRVtbl *process; // ecx
-  int FXEffect; // eax
-  int v20; // edi
-  _DWORD *v21; // eax
-  _DWORD *v22; // eax
-  unsigned int v23; // esi
-  int *v24; // [esp-4h] [ebp-18h]
-  int v25; // [esp+4h] [ebp-10h]
-  float v26; // [esp+18h] [ebp+4h]
+  TESForm *type; // eax
+  bool v8; // zf
+  TESForm *v9; // eax
+  int v10; // edi
+  int v11; // eax
+  int CurrentTarget; // eax
+  MagicTarget *v13; // eax
+  MagicItem *v14; // edi
+  LowProcess *process; // ecx
+  EffectSetting *FXEffect; // eax
+  EffectSetting *v17; // edi
+  _DWORD *v18; // eax
+  _DWORD *v19; // eax
+  unsigned int v20; // esi
+  int *refID; // [esp-4h] [ebp-18h]
 
-  if ( a6 )
+  if ( a5 ) /*0x5ed5ac*/
   {
-    v8 = *(_DWORD *)(a6 + 8);
-    if ( v8 )
+    type = a5->type; /*0x5ed5b2*/
+    if ( type ) /*0x5ed5b7*/
     {
-      if ( *(_BYTE *)(v8 + 4) == 0x21 )
+      if ( type->member.type == kFormType_Weapon ) /*0x5ed5c1*/
       {
-        v9 = v8 == 0xFFFFFFA0;
-        v10 = v8 + 0x60;
-        v25 = a3;
-        if ( v9 )
-          v11 = 0;
+        v8 = &type[4] == 0; /*0x5ed5c7*/
+        v9 = type + 4; /*0x5ed5c7*/
+        if ( v8 ) /*0x5ed5cb*/
+          v10 = 0; /*0x5ed5d2*/
         else
-          v11 = *(_DWORD *)(v10 + 4);
-        if ( v11 )
+          v10 = *(_DWORD *)&v9->member.type; /*0x5ed5cd*/
+        if ( v10 ) /*0x5ed5d6*/
         {
-          v12 = sub_4849C0((void **)a6);
-          v26 = a5;
-          v13 = v26;
-          (**(void (__thiscall ***)(int, PlayerCharacter *))(v11 + 0x24))(v11 + 0x24, a1);
-          if ( v12 <= v26 )
+          EquippedEntryData_GetCharge(a5); /*0x5ed5dc*/
+          (**(void (__thiscall ***)(int, Actor *))(v10 + 0x24))(v10 + 0x24, a1); /*0x5ed5f6*/
+          if ( a1 != (Actor *)reference && a1->vtbl->IsInCombat(a1, 1) ) /*0x5ed61b*/
           {
-            if ( a1 != TESDataHandler_g_PlayerRef && a1->vtbl->super.IsInCombat((Actor *)a1, 1) )
-            {
-              v14 = ((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, int, double@<st0>, double@<st1>))a1->vtbl->super.GetCombatController)(
-                      a1,
-                      v25,
-                      v13,
-                      a4);
-              if ( v14 && (v15 = sub_6135F0(v14)) != 0 )
-                v16 = (MagicTarget *)(v15 + 0x68);
-              else
-                v16 = 0;
-              a1->super.super.magicCaster.vtbl->SetCastingTarget(&a1->super.super.magicCaster, v16);
-            }
-            v17 = (_DWORD *)(v11 + 0x18);
-            ((void (__usercall *)(MagicCaster *@<ecx>, _DWORD *, int, double@<st0>, double@<st1>))a1->super.super.magicCaster.vtbl->SetActiveMagicItem)(
-              &a1->super.super.magicCaster,
-              v17,
-              v25,
-              v13,
-              a4);
-            process = (TESObjectREFRVtbl *)a1->super.super.super.process;
-            if ( process )
-              (*((void (__thiscall **)(TESObjectREFRVtbl *, int))process->super.super.InitializeComponent + 0xAF))(
-                process,
-                1);
-            FXEffect = MagicItem_GetFXEffect(v17, 0);
-            v20 = FXEffect;
-            if ( FXEffect )
-            {
-              if ( *(_DWORD *)(FXEffect + 0x80) )
-              {
-                if ( a1->vtbl->super.GetCombatController(a1) )
-                {
-                  v24 = *(int **)(*(_DWORD *)(v20 + 0x80) + 0xC);
-                  v21 = (_DWORD *)((int (__usercall *)@<eax>(PlayerCharacter *@<ecx>, double@<st0>, double@<st1>))a1->vtbl->super.GetCombatController)(
-                                    a1,
-                                    v13,
-                                    a4);
-                  sub_619FA0(v21, v24, 0);
-                }
-                else if ( a1 == TESDataHandler_g_PlayerRef )
-                {
-                  sub_663520(
-                    (LONG)TESDataHandler_g_PlayerRef,
+            v11 = ((int (__usercall *)@<eax>(Actor *@<ecx>, int, double@<st0>, double@<st1>))a1->vtbl->GetCombatController)( /*0x5ed62b*/
+                    a1,
                     a2,
-                    v12,
                     a4,
-                    v13,
-                    *(_DWORD *)(*(_DWORD *)(v20 + 0x80) + 0xC));
-                }
-                else
+                    a3);
+            if ( v11 && (CurrentTarget = CombatController_GetCurrentTarget(v11)) != 0 ) /*0x5ed63a*/
+              v13 = (MagicTarget *)(CurrentTarget + 0x68); /*0x5ed63c*/
+            else
+              v13 = 0; /*0x5ed641*/
+            a1->members.magicCaster.vtbl->SetCastingTarget(&a1->members.magicCaster, v13); /*0x5ed64d*/
+          }
+          v14 = (MagicItem *)(v10 + 0x18); /*0x5ed658*/
+          a1->members.magicCaster.vtbl->SetActiveMagicItem(&a1->members.magicCaster, v14); /*0x5ed65c*/
+          process = a1->members.super.process; /*0x5ed65e*/
+          if ( process ) /*0x5ed663*/
+            ((void (__thiscall *)(LowProcess *, int))process->Unk_AE)(process, 1); /*0x5ed66f*/
+          FXEffect = MagicItem_GetFXEffect(v14, 0); /*0x5ed675*/
+          v17 = FXEffect; /*0x5ed67a*/
+          if ( FXEffect ) /*0x5ed67e*/
+          {
+            if ( FXEffect->castingSound ) /*0x5ed684*/
+            {
+              if ( a1->vtbl->GetCombatController(a1) ) /*0x5ed69b*/
+              {
+                refID = (int *)v17->castingSound->super.member.super.refID; /*0x5ed6ae*/
+                v18 = (_DWORD *)((int (__usercall *)@<eax>(Actor *@<ecx>, double@<st0>, double@<st1>))a1->vtbl->GetCombatController)( /*0x5ed6b7*/
+                                  a1,
+                                  a4,
+                                  a3);
+                sub_619FA0(v18, refID, 0); /*0x5ed6bb*/
+              }
+              else if ( a1 == (Actor *)reference ) /*0x5ed6d0*/
+              {
+                sub_663520((LONG)reference, v17->castingSound->super.member.super.refID); /*0x5ed6e4*/
+              }
+              else
+              {
+                v19 = (_DWORD *)sub_65AC50(a1, v17->castingSound->super.member.super.refID, 0, 0x102, 1); /*0x5ed6fe*/
+                v20 = (unsigned int)v19; /*0x5ed703*/
+                if ( v19 ) /*0x5ed707*/
                 {
-                  v22 = (_DWORD *)sub_65AC50(a1, *(_DWORD *)(*(_DWORD *)(v20 + 0x80) + 0xC), 0, 0x102, 1);
-                  v23 = (unsigned int)v22;
-                  if ( v22 )
-                  {
-                    sub_6B73E0(v22);
-                    FormHeapFree(v23);
-                  }
+                  sub_6B73E0(v19); /*0x5ed70b*/
+                  FormHeapFree(v20); /*0x5ed711*/
                 }
               }
             }

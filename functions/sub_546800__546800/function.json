@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x546800",
+      "0x546925"
+    ]
+  ],
+  "chunks_sha256": "7b8f517a5697dcb14215c0a26e2409bde2d17a3ef2a95826211a457e8486f41d",
+  "comment_regular": "Calculates an attack desirability score from luck-modified skill, CombatStyle weights, target action-state flags, power/regular attack multiplier, and the attack-during-block multiplier.",
+  "comment_repeatable": "Calculates an attack desirability score from luck-modified skill, CombatStyle weights, target action-state flags, power/regular attack multiplier, and the attack-during-block multiplier.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_546800",
+  "display_name": "CombatStyle_CalculateAttackScore",
   "end_ea": "0x546925",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_546800",
+  "name": "CombatStyle_CalculateAttackScore",
   "segment": ".text",
   "sha256": "7b8f517a5697dcb14215c0a26e2409bde2d17a3ef2a95826211a457e8486f41d",
   "size": 293,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x546800",
-  "type": "double __cdecl(_DWORD *, int, int, char, float, float, float, char)",
+  "total_chunk_size": 293,
+  "type": "float __cdecl(void *combatStyle, int skillValue, int luckValue, char usePowerAttack, float targetAttacking, float targetStaggered, float targetKnockedDown, char targetBlocking)",
   "xrefs_from_count": 98,
   "xrefs_to_count": 5
 }

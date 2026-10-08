@@ -1,25 +1,25 @@
 [
   {
     "ea": "0x6517B2",
-    "line": "mov     ecx, [edi+174h]",
+    "line": "mov     ecx, [edi+174h]; Verified LowProcess load-link path calls ActiveEffect_Base_LinkAEList on its embedded active-effect EffectNode chain before resolving other saved references. Fallout uses its separate staged ActiveEffect load callbacks rather than this Oblivion link slot.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6517B8",
-    "line": "push    ebx",
+    "line": "push    ebx; linkContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6517B9",
-    "line": "push    ecx",
+    "line": "push    ecx; activeEffectList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6517BA",
-    "line": "call    ActiveEffect_Base_LinkAEList",
+    "line": "call    ActiveEffect_Base_LinkAEList; Verified this helper takes EffectNode* and explicit TESObjectREFR* linkContext, while preserving incoming EBX and forwarding it as the second stack argument to each hit-effect vtable +0x80 callback. That callback's third argument is directly typed TESChildCELL* and updates parentCell. The hidden EBX value is the owner reference in the modified-extra load path; Player_LinkModifiedForm reaches this helper with EBX as a saved-reference-list cursor, so a universal owner-reference interpretation remains Candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -82,12 +82,6 @@
     "line": "jmp     short loc_6517E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6517DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6517E0",
@@ -163,7 +157,7 @@
   },
   {
     "ea": "0x651800",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +379,7 @@
   },
   {
     "ea": "0x651861",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

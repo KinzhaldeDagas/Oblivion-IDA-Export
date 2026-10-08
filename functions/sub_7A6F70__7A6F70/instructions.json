@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A6F70",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion Normal scalar-deleting destructor. Applies shared-table count/ownership handling, runs the PosGen/Random base teardown, and conditionally frees the object.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7A6F96",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7A6F9F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A6FA7",
-    "line": "test    [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+flags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7A6FB5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

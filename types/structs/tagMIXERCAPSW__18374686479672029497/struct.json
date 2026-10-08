@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagMIXERCAPSW",
+  "definition": "struct tagMIXERCAPSW\n{\nWORD wMid;\nWORD wPid;\nMMVERSION vDriverVersion;\nWCHAR_0 szPname[32];\nDWORD fdwSupport;\nDWORD cDestinations;\n}\n",
   "id": 18374686479672029497,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wMid",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wPid",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vDriverVersion",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "MMVERSION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szPname",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 64
+      "size": 64,
+      "type": "WCHAR_0[32]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fdwSupport",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cDestinations",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "tagMIXERCAPSW",
+  "ordinal": 2160,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 80
 }

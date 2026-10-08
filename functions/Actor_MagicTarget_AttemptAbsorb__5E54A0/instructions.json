@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E54A0",
-    "line": "push    ecx",
+    "line": "push    ecx; AVU decode: MagicTarget::AttemptAbsorb. ECX is MagicTarget subobject; owning Actor is ECX-0x68. Rolls Game_RandomLargeInteger()%100 against current AV 0x34 SpellAbsorbChance.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x5E54A7",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5E54CA",
-    "line": "cmp     [esp+0Ch+arg_C], 0",
+    "line": "cmp     [esp+0Ch+arg_C], 0; AVU hook site: EAX holds current SpellAbsorbChance from actor vtbl+0x284, EDI holds 0..99 roll. Original code checks reflected flag at stack arg_C before comparing.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5E54D5",
-    "line": "fild    [esp+0Ch+var_4]",
+    "line": "fild    [esp+0Ch+var_4]; If reflected flag is set, vanilla multiplies the integer absorb chance by fReflectedAbsorbChanceReduction, then calls Double_To_SInt32 before the roll compare.",
     "mnemonic": "fild",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x5E54DF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5E54E4",
-    "line": "cmp     edi, eax",
+    "line": "cmp     edi, eax; Spell absorption succeeds when the 0..99 engine roll is below current actor value 0x34; success negates the effect and refunds its magicka cost.",
     "mnemonic": "cmp",
     "size": 2
   },

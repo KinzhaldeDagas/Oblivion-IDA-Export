@@ -1,1 +1,1 @@
-bhkBallAndSocketConstraint
+struct bhkBallAndSocketConstraint;

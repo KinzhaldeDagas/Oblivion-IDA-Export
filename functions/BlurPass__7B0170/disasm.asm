@@ -10,16 +10,16 @@
 0x7B0186: xor     ebp, ebp
 0x7B0188: push    eax; a2
 0x7B0189: mov     [esp+40h+var_14], ebp
-0x7B018D: call    BSTextureManager_GetDefaultRenderTarget
+0x7B018D: call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.
 0x7B0192: mov     ecx, ds:0B43104h
 0x7B0198: push    0Fh; a3
 0x7B019A: push    ecx; a2
 0x7B019B: mov     ecx, ds:0B42F50h; this
 0x7B01A1: mov     [esp+40h+a2], eax
-0x7B01A5: call    BSTextureManager_GetDefaultRenderTarget
+0x7B01A5: call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.
 0x7B01AA: mov     ecx, ds:0B3F928h
 0x7B01B0: mov     edx, [ecx]
-0x7B01B2: mov     [esp+38h+var_24], eax
+0x7B01B2: mov     [esp+38h+texture], eax
 0x7B01B6: mov     eax, [edx+7Ch]
 0x7B01B9: call    eax
 0x7B01BB: mov     ebx, [esp+38h+arg_4]
@@ -116,13 +116,13 @@
 0x7B02E8: mov     [esi+90h], eax
 0x7B02EE: mov     eax, [edx]
 0x7B02F0: push    eax; a2
-0x7B02F1: call    sub_802890
+0x7B02F1: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x7B02F6: mov     edi, [esp+38h+a2]
 0x7B02FA: mov     ecx, edi
-0x7B02FC: call    BSRenderedTexture__UseTextureToRender
+0x7B02FC: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7B0301: push    eax; a2
 0x7B0302: push    ebx; a1
-0x7B0303: call    NiRenderer_BeginScene
+0x7B0303: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7B0308: mov     ecx, ds:0B3F928h
 0x7B030E: add     esp, 8
 0x7B0311: cmp     [ecx+200h], ebx
@@ -138,8 +138,8 @@
 0x7B0335: mov     ecx, ds:0B3F928h
 0x7B033B: push    ecx
 0x7B033C: mov     ecx, ebp; this
-0x7B033E: call    sub_709C60
-0x7B0343: call    NiRenderer_EndScene
+0x7B033E: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
+0x7B0343: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7B0348: fld1
 0x7B034A: cmp     dword ptr ds:0B2C1E8h, 0
 0x7B0351: fst     dword ptr ds:0B2C2D4h
@@ -153,12 +153,12 @@
 0x7B037F: fst     dword ptr ds:0B2C2E4h
 0x7B0385: fstp    dword ptr ds:0B2C2E8h
 0x7B038B: jbe     loc_7B04B0
-0x7B0391: mov     ecx, [esp+38h+var_24]
-0x7B0395: call    BSRenderedTexture__UseTextureToRender
+0x7B0391: mov     ecx, [esp+38h+texture]
+0x7B0395: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7B039A: mov     ecx, [esp+38h+a1]
 0x7B039E: push    eax; a2
 0x7B039F: push    ecx; a1
-0x7B03A0: call    NiRenderer_BeginScene
+0x7B03A0: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7B03A5: mov     ecx, ds:0B3F928h
 0x7B03AB: add     esp, 8
 0x7B03AE: cmp     [ecx+200h], ebx
@@ -173,25 +173,25 @@
 0x7B03D0: call    eax
 0x7B03D2: push    edi; a2
 0x7B03D3: mov     ecx, esi; this
-0x7B03D5: call    sub_802890
+0x7B03D5: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x7B03DA: mov     [esi+0ACh], ebx
 0x7B03E0: mov     [esi+90h], ebx
 0x7B03E6: mov     ecx, ds:0B3F928h
 0x7B03EC: push    ecx
 0x7B03ED: mov     ecx, ebp; this
-0x7B03EF: call    sub_709C60
+0x7B03EF: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x7B03F4: mov     dword ptr [esi+0ACh], 2
 0x7B03FE: mov     edx, ds:0B3F928h
 0x7B0404: push    edx
 0x7B0405: mov     ecx, ebp; this
-0x7B0407: call    sub_709C60
-0x7B040C: call    NiRenderer_EndScene
+0x7B0407: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
+0x7B040C: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7B0411: mov     ecx, edi
-0x7B0413: call    BSRenderedTexture__UseTextureToRender
+0x7B0413: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7B0418: push    eax; a2
 0x7B0419: mov     eax, [esp+3Ch+a1]
 0x7B041D: push    eax; a1
-0x7B041E: call    NiRenderer_BeginScene
+0x7B041E: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7B0423: mov     ecx, ds:0B3F928h
 0x7B0429: add     esp, 8
 0x7B042C: cmp     [ecx+200h], ebx
@@ -204,21 +204,21 @@
 0x7B0446: mov     eax, [edx+144h]
 0x7B044C: push    0
 0x7B044E: call    eax
-0x7B0450: mov     ecx, [esp+38h+var_24]
+0x7B0450: mov     ecx, [esp+38h+texture]
 0x7B0454: push    ecx; a2
 0x7B0455: mov     ecx, esi; this
-0x7B0457: call    sub_802890
+0x7B0457: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x7B045C: mov     dword ptr [esi+0ACh], 3
 0x7B0466: mov     edx, ds:0B3F928h
 0x7B046C: push    edx
 0x7B046D: mov     ecx, ebp; this
-0x7B046F: call    sub_709C60
+0x7B046F: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x7B0474: mov     dword ptr [esi+0ACh], 4
 0x7B047E: mov     eax, ds:0B3F928h
 0x7B0483: push    eax
 0x7B0484: mov     ecx, ebp; this
-0x7B0486: call    sub_709C60
-0x7B048B: call    NiRenderer_EndScene
+0x7B0486: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
+0x7B048B: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7B0490: mov     eax, [esp+38h+arg_0]
 0x7B0494: add     eax, ebx
 0x7B0496: cmp     eax, ds:0B2C1E8h
@@ -232,7 +232,7 @@
 0x7B04B1: mov     ecx, esi; this
 0x7B04B3: mov     dword ptr [esi+0ACh], 0
 0x7B04BD: mov     dword ptr [esi+90h], 2
-0x7B04C7: call    sub_802890
+0x7B04C7: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x7B04CC: mov     ecx, [esp+38h+arg_4]
 0x7B04D0: mov     eax, [ecx]
 0x7B04D2: test    eax, eax
@@ -334,14 +334,14 @@
 0x7B05FE: mov     ecx, [edi]
 0x7B0600: test    ecx, ecx
 0x7B0602: jz      short loc_7B0612
-0x7B0604: call    BSRenderedTexture__UseTextureToRender
+0x7B0604: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7B0609: push    eax; a2
 0x7B060A: push    ebx; a1
-0x7B060B: call    NiRenderer_BeginScene
+0x7B060B: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x7B0610: jmp     short loc_7B061A
 0x7B0612: push    0; a2
 0x7B0614: push    ebx; a1
-0x7B0615: call    NiRenderer_BeginScene1
+0x7B0615: call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.
 0x7B061A: mov     ecx, ds:0B3F928h
 0x7B0620: add     esp, 8
 0x7B0623: cmp     [ecx+200h], ebx
@@ -358,10 +358,10 @@
 0x7B064A: mov     ecx, ds:0B3F928h
 0x7B0650: push    ecx
 0x7B0651: mov     ecx, ebp; this
-0x7B0653: call    sub_709C60
+0x7B0653: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
 0x7B0658: cmp     dword ptr [edi], 0
 0x7B065B: jz      short loc_7B0662
-0x7B065D: call    NiRenderer_EndScene
+0x7B065D: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x7B0662: mov     edi, [esi+0E0h]
 0x7B0668: test    edi, edi
 0x7B066A: jz      short loc_7B0691
@@ -379,13 +379,13 @@
 0x7B0685: call    eax
 0x7B0687: mov     dword ptr [esi+0E0h], 0
 0x7B0691: mov     ecx, [esp+38h+a2]
-0x7B0695: push    ecx; a2
+0x7B0695: push    ecx; texture
 0x7B0696: mov     ecx, ds:0B42F50h; this
-0x7B069C: call    sub_7C1EE0
-0x7B06A1: mov     edx, [esp+38h+var_24]
+0x7B069C: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
+0x7B06A1: mov     edx, [esp+38h+texture]
 0x7B06A5: mov     ecx, ds:0B42F50h; this
-0x7B06AB: push    edx; a2
-0x7B06AC: call    sub_7C1EE0
+0x7B06AB: push    edx; texture
+0x7B06AC: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7B06B1: pop     edi
 0x7B06B2: pop     esi
 0x7B06B3: pop     ebp

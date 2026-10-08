@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x5308D0",
+      "0x5308E0"
+    ]
+  ],
+  "chunks_sha256": "39b009ce018e278d9b297d90755bf75b5e1038e94a6265eff4c05767392be508",
+  "comment_regular": "Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.",
+  "comment_repeatable": "Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5308D0",
+  "display_name": "TESTopicInfo::AddTopicList",
   "end_ea": "0x5308E0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5308D0",
+  "name": "TESTopicInfo::AddTopicList",
   "segment": ".text",
   "sha256": "39b009ce018e278d9b297d90755bf75b5e1038e94a6265eff4c05767392be508",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5308D0",
-  "type": "void __thiscall(int)",
+  "total_chunk_size": 16,
+  "type": "void __thiscall(OblivionTopicInfo *this)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 8
 }

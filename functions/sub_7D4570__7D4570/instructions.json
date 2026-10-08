@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D4570",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Special ShadowSceneLight renderer selected only when +0xF5 is nonzero. Uses a BSCubeMapCamera and the light-local category/object list; it is separate from the normal exact-caster-root map renderer.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7D4590",
-    "line": "jp      loc_7D46AD",
+    "line": "jp      loc_7D46AD; Special render requires a non-null cube camera and positive committed visibility/fade at ShadowSceneLight+0xD8.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7D45AF",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Lazily obtain default render target type 0x16 for the special cube/object-list path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7D45B8",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7D45BF",
-    "line": "mov     ecx, ds:0B42F50h",
+    "line": "mov     ecx, ds:0B42F50h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7D45CC",
-    "line": "call    sub_7C1360",
+    "line": "call    BSTextureManager__GetOrCreateShadowDepthStencil; Oblivion shadow depth-stencil allocator. Ensures a square depth-stencil at least ShadowSurfaceRes, deriving compatible renderer surface data from the shadow target format before creation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x7D45DA",
-    "line": "push    edi",
+    "line": "push    edi; shadowMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D45DB",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D45DD",
-    "line": "call    sub_499310",
+    "line": "call    ShadowSceneLight_SetShadowMap; Strong-own the special path render target at ShadowSceneLight+0x114.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7D45EB",
-    "line": "call    sub_7C5A60",
+    "line": "call    sub_7C5A60; Attach/configure ShadowSceneLight+0x114 on the supplied BSCubeMapCamera.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7D4608",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7D4615",
-    "line": "fld     dword ptr [edx+0F8h]",
+    "line": "fld     dword ptr [edx+0F8h]; Copy backing NiPointLight range +0xF8 into the cube camera frustum Far value.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7D4648",
-    "line": "call    Camera_SetFrustum",
+    "line": "call    Camera_SetFrustum; Commit the cube camera frustum after replacing Far with the backing light range.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,13 +451,13 @@
   },
   {
     "ea": "0x7D4654",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4659",
-    "line": "mov     eax, [eax]",
+    "line": "mov     eax, [eax]; Read backing light world position +0x88..+0x90 and place the cube camera there.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x7D46A3",
-    "line": "mov     [ebx+144h], ebp",
+    "line": "mov     [ebx+144h], ebp; Set BSCubeMapCamera+0x144 to the current ShadowSceneLight before virtual render dispatch.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D46A9",
-    "line": "call    edx",
+    "line": "call    edx; Invoke BSCubeMapCamera virtual slot +0x84 with -1; the concrete dispatcher is 0x00814340.",
     "mnemonic": "call",
     "size": 2
   },

@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiInterpControllerVtbl",
+  "definition": "struct NiInterpControllerVtbl\n{\nNiTimeControllerVtbl super;\nUInt16 (__thiscall *GetNumInterpolators)(NiInterpController *);\nchar *(__thiscall *GetInterpolatorName)(NiInterpController *, UInt16 idx);\nUInt16 (__thiscall *GetInterpolatorIdx)(NiInterpController *, char *name);\nNiInterpolator *(__thiscall *GetInterpolator)(NiInterpController *, UInt16 idx);\nvoid (__thiscall *SetInterpolator)(NiInterpController *, NiInterpolator *interpolator, UInt16 idx);\nvoid (__thiscall *Unk_22)(NiInterpController *);\nchar *(__thiscall *GetName)(NiInterpController *);\nvoid (__thiscall *Unk_24)(NiInterpController *, UInt16 idx);\nvoid (__thiscall *Unk_25)(NiInterpController *);\nvoid (__thiscall *Unk_26)(NiInterpController *, UInt16 idx);\nvoid (__thiscall *Unk_27)(NiInterpController *);\nvoid (__thiscall *Unk_28)(NiInterpController *, void *arg, UInt16 idx);\n}\n",
   "id": 18374686479671999692,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 116
+      "size": 116,
+      "type": "NiTimeControllerVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "GetNumInterpolators",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "UInt16 (__thiscall *)(NiInterpController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "GetInterpolatorName",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "char *(__thiscall *)(NiInterpController *, UInt16 idx)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "GetInterpolatorIdx",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "UInt16 (__thiscall *)(NiInterpController *, char *name)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "GetInterpolator",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "NiInterpolator *(__thiscall *)(NiInterpController *, UInt16 idx)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "SetInterpolator",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiInterpController *, NiInterpolator *interpolator, UInt16 idx)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "Unk_22",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiInterpController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "GetName",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "char *(__thiscall *)(NiInterpController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "Unk_24",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiInterpController *, UInt16 idx)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "Unk_25",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiInterpController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "Unk_26",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiInterpController *, UInt16 idx)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000514.",
       "name": "Unk_27",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiInterpController *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "Unk_28",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "void (__thiscall *)(NiInterpController *, void *arg, UInt16 idx)"
     }
   ],
   "name": "NiInterpControllerVtbl",
+  "ordinal": 9621,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 164
 }

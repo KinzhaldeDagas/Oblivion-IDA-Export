@@ -1,4 +1,4 @@
-0x4A51F0: push    0FFFFFFFFh
+0x4A51F0: push    0FFFFFFFFh; Verified: accepts RDMD and RDSD chunks; RDMD populates TESRegionDataSound.regionSoundMetadata (+8), and RDSD builds the embedded TESRegionSoundNode list at +0xC.
 0x4A51F2: push    offset SEH_690310
 0x4A51F7: mov     eax, large fs:0
 0x4A51FD: push    eax
@@ -33,7 +33,7 @@
 0x4A5257: add     esi, 8
 0x4A525A: push    esi
 0x4A525B: mov     ecx, ebp
-0x4A525D: call    TESFile_GetChunkData4
+0x4A525D: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4A5262: mov     al, 1
 0x4A5264: jmp     loc_4A536E
 0x4A5269: mov     ecx, [ebp+254h]
@@ -71,7 +71,7 @@
 0x4A52C5: push    ebx; Dst
 0x4A52C6: mov     ecx, ebp; a1
 0x4A52C8: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x4A52D0: call    TESFile_GetChunkData
+0x4A52D0: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4A52D5: test    esi, esi
 0x4A52D7: jbe     loc_4A535F
 0x4A52DD: mov     edi, ebx
@@ -112,13 +112,13 @@
 0x4A5347: call    BSSimpleList_PushBack
 0x4A534C: jmp     short loc_4A5357
 0x4A534E: push    esi
-0x4A534F: call    FormHeapFree
+0x4A534F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A5354: add     esp, 4
 0x4A5357: add     edi, 0Ch
 0x4A535A: sub     ebp, 1
 0x4A535D: jnz     short loc_4A52E1
 0x4A535F: push    ebx
-0x4A5360: call    FormHeapFree
+0x4A5360: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A5365: add     esp, 4
 0x4A5368: mov     al, 1
 0x4A536A: jmp     short loc_4A536E
@@ -132,3 +132,15 @@
 0x4A537D: pop     ebx
 0x4A537E: add     esp, 10h
 0x4A5381: retn    4
+0x9BD8A0: mov     eax, [ebp+4]
+0x9BD8A3: push    eax
+0x9BD8A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD8A9: pop     ecx
+0x9BD8AA: retn
+0x9BD8AB: mov     edx, [esp+arg_4]
+0x9BD8AF: lea     eax, [edx-14h]
+0x9BD8B2: mov     ecx, [edx-18h]
+0x9BD8B5: xor     ecx, eax
+0x9BD8B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD8BC: mov     eax, offset stru_AE71E0
+0x9BD8C1: jmp     ___CxxFrameHandler3

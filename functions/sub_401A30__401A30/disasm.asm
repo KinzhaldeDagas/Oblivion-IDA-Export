@@ -1,4 +1,4 @@
-0x401A30: push    ebx
+0x401A30: push    ebx; Coalesces a just-freed entry with adjacent free predecessors/successors, then releases any now-free tail region.
 0x401A31: push    esi
 0x401A32: mov     esi, [esp+8+arg_0]
 0x401A36: test    esi, esi
@@ -16,17 +16,16 @@
 0x401A50: push    esi
 0x401A51: push    edi
 0x401A52: mov     ecx, ebx
-0x401A54: call    sub_4018F0
+0x401A54: call    MemoryHeap_MergeFreeEntries; Merges two adjacent free blocks: unlinks both, increases the first block's size by second+header, fixes trailing/last-block links, then reinserts it.
 0x401A59: test    edi, edi
 0x401A5B: mov     esi, edi
 0x401A5D: jnz     short loc_401A40
 0x401A5F: pop     edi
 0x401A60: mov     ecx, ebx
-0x401A62: call    sub_4019A0
+0x401A62: call    MemoryHeap_ReleaseTrailingFreeEntries; Releases consecutive free blocks at the high end of the heap backing buffer, reducing committed heap usage and updating the tail pointer.
 0x401A67: pop     esi
 0x401A68: pop     ebx
 0x401A69: retn    4
-0x401A6C: align 10h
 0x401A70: cmp     esi, [ebx+24h]
 0x401A73: jz      short loc_401A5F
 0x401A75: mov     ecx, [esi+4]
@@ -40,5 +39,5 @@
 0x401A90: push    eax
 0x401A91: push    esi
 0x401A92: mov     ecx, ebx
-0x401A94: call    sub_4018F0
+0x401A94: call    MemoryHeap_MergeFreeEntries; Merges two adjacent free blocks: unlinks both, increases the first block's size by second+header, fixes trailing/last-block links, then reinserts it.
 0x401A99: jmp     short loc_401A70

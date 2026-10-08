@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_789EC0",
+  "chunks": [
+    [
+      "0x789EC0",
+      "0x789FDF"
+    ],
+    [
+      "0x9CB420",
+      "0x9CB44B"
+    ]
+  ],
+  "chunks_sha256": "2cbd46140692e39aa31db9ca6c21b0002ca650cfbac55326065aa5f095227d4e",
+  "comment_regular": "CSpeedTreeRT::DeleteFrondGeometry. After Compute, deletes frond geometry only for non-instance trees when the shared instance refcount is exactly one; MakeBase calls this after TES4 render-resource build.",
+  "comment_repeatable": "CSpeedTreeRT::DeleteFrondGeometry. After Compute, deletes frond geometry only for non-instance trees when the shared instance refcount is exactly one; MakeBase calls this after TES4 render-resource build.\n\n[v111 retry audit] DeleteFrondGeometry clears RT+60 geometry, not RT+5C CFrondEngine texture filename metadata. CTreeEngine transient cleanup7A2620 separately frees generated branches/leaf LOD vectors/branch parameters without removing CFrondEngine texture names. This permits compact-name rediscovery on deferred material retry; mesh rebuild still uses owned exports.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "CSpeedTreeRT__DeleteFrondGeometry",
   "end_ea": "0x789FDF",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_789EC0",
+  "name": "CSpeedTreeRT__DeleteFrondGeometry",
   "segment": ".text",
   "sha256": "816f13246c855b8209d95696ff303a0dfcf3bb1a81b210416e6f80fc40fd1f69",
   "size": 287,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x789EC0",
-  "type": "void __thiscall(int this)",
-  "xrefs_from_count": 124,
+  "total_chunk_size": 330,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this)",
+  "xrefs_from_count": 137,
   "xrefs_to_count": 1
 }

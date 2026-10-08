@@ -1,1 +1,6 @@
-_IMAGE_NT_HEADERS
+struct _IMAGE_NT_HEADERS
+{
+DWORD Signature;
+IMAGE_FILE_HEADER FileHeader;
+IMAGE_OPTIONAL_HEADER32 OptionalHeader;
+};

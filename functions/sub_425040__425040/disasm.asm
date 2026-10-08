@@ -74,7 +74,7 @@
 0x42510C: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x425111: push    0; int
 0x425113: push    eax; a1
-0x425114: call    TESForm_LookupByFormID
+0x425114: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x425119: add     esp, 4
 0x42511C: push    eax; void *
 0x42511D: call    OblivionDynamicCast
@@ -104,7 +104,7 @@
 0x42515E: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x425163: push    0; int
 0x425165: push    eax; a1
-0x425166: call    TESForm_LookupByFormID
+0x425166: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x42516B: add     esp, 4
 0x42516E: push    eax; void *
 0x42516F: call    OblivionDynamicCast
@@ -113,7 +113,7 @@
 0x425179: jz      short loc_425183
 0x42517B: push    eax
 0x42517C: mov     ecx, ebp
-0x42517E: call    sub_41EFD0
+0x42517E: call    ExtraDataList_SetPoison; ExtraPoison setter always creates/updates raw serialized FormID, including zero. Post-load resolution removes zero/unresolved/non-AlchemyItem targets.
 0x425183: cmp     [esp+1Ch+var_9], 0
 0x425188: jz      loc_4252DC
 0x42518E: push    1Fh; a2
@@ -124,7 +124,7 @@
 0x42519B: jz      short loc_4251F2
 0x42519D: mov     eax, [esi+0Ch]
 0x4251A0: mov     eax, [eax+0Ch]
-0x4251A3: mov     ecx, TESDataHandler
+0x4251A3: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x4251A9: push    eax; _DWORD
 0x4251AA: call    TESDataHandler_IsFormIDCreated?
 0x4251AF: test    al, al
@@ -134,7 +134,7 @@
 0x4251B8: mov     eax, [edx+0E8h]
 0x4251BE: call    eax
 0x4251C0: mov     ecx, [esi+0Ch]
-0x4251C3: call    sub_5672A0
+0x4251C3: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x4251C8: mov     eax, [esi+14h]
 0x4251CB: test    eax, eax
 0x4251CD: jz      short loc_4251F2
@@ -143,7 +143,7 @@
 0x4251D6: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4251DB: push    0; int
 0x4251DD: push    eax; a1
-0x4251DE: call    TESForm_LookupByFormID
+0x4251DE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4251E3: add     esp, 4
 0x4251E6: push    eax; void *
 0x4251E7: call    OblivionDynamicCast
@@ -183,7 +183,7 @@
 0x425248: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x42524D: push    0; int
 0x42524F: push    eax; a1
-0x425250: call    TESForm_LookupByFormID
+0x425250: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x425255: add     esp, 4
 0x425258: push    eax; void *
 0x425259: call    OblivionDynamicCast
@@ -198,7 +198,7 @@
 0x425272: mov     edx, [eax]
 0x425274: push    eax
 0x425275: mov     [esi], edx
-0x425277: call    FormHeapFree
+0x425277: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42527C: add     esp, 4
 0x42527F: jmp     short loc_42528E
 0x425281: mov     dword ptr [esi], 0
@@ -221,7 +221,7 @@
 0x4252BB: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4252C0: push    0; int
 0x4252C2: push    eax; a1
-0x4252C3: call    TESForm_LookupByFormID
+0x4252C3: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4252C8: add     esp, 4
 0x4252CB: push    eax; void *
 0x4252CC: call    OblivionDynamicCast
@@ -239,7 +239,7 @@
 0x4252FA: call    BaseExtraList_GetExtraData
 0x4252FF: push    eax; void *
 0x425300: call    OblivionDynamicCast
-0x425305: mov     ebx, eax
+0x425305: mov     ebx, eax; targetReference
 0x425307: add     esp, 14h
 0x42530A: test    ebx, ebx
 0x42530C: jz      loc_4253A4
@@ -291,7 +291,7 @@
 0x425383: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x425388: push    0; int
 0x42538A: push    eax; a1
-0x42538B: call    TESForm_LookupByFormID
+0x42538B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x425390: add     esp, 4
 0x425393: push    eax; void *
 0x425394: call    OblivionDynamicCast
@@ -324,21 +324,21 @@
 0x4253E4: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4253E9: push    0; int
 0x4253EB: push    eax; a1
-0x4253EC: call    TESForm_LookupByFormID
+0x4253EC: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4253F1: add     esp, 4
 0x4253F4: push    eax; void *
 0x4253F5: call    OblivionDynamicCast
 0x4253FA: add     esp, 14h
-0x4253FD: push    eax
-0x4253FE: mov     ecx, esi
-0x425400: call    sub_6A32C0
+0x4253FD: push    eax; parentReference
+0x4253FE: mov     ecx, esi; this
+0x425400: call    NonActorMagicTarget_SetParentReference; Verified setter for NonActorMagicTarget.parentReference at +0x14; the sole direct caller is the modified-extra load path.
 0x425405: mov     eax, [edi]
 0x425407: mov     edx, [eax+8]
-0x42540A: push    0
+0x42540A: push    0; linkContext
 0x42540C: mov     ecx, edi
 0x42540E: call    edx
-0x425410: push    eax
-0x425411: call    ActiveEffect_Base_LinkAEList
+0x425410: push    eax; activeEffectList
+0x425411: call    ActiveEffect_Base_LinkAEList; Verified earlier modified-extra Link phase calls ActiveEffect_Base_LinkAEList on NonActorMagicTarget's active-effect list with null explicit context while EBX still carries the owning reference. TESObjectREFR_PostLinkModifiedExtraList later performs the post-link pass at 0x422B8B.
 0x425416: add     esp, 8
 0x425419: test    [esp+1Ch+arg_0], 100000h
 0x425421: jz      short loc_425440
@@ -352,7 +352,7 @@
 0x425437: xor     eax, eax
 0x425439: mov     ecx, eax
 0x42543B: call    sub_42B550
-0x425440: mov     eax, SaveLoad_CurrentSavegame
+0x425440: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x425445: cmp     byte ptr [eax+7Ch], 46h ; 'F'
 0x425449: mov     ebx, [esp+1Ch+var_8]
 0x42544D: jnb     loc_425507
@@ -380,7 +380,7 @@
 0x42548E: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x425493: push    0; int
 0x425495: push    eax; a1
-0x425496: call    TESForm_LookupByFormID
+0x425496: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x42549B: add     esp, 4
 0x42549E: push    eax; void *
 0x42549F: call    OblivionDynamicCast
@@ -397,7 +397,7 @@
 0x4254BC: mov     edx, [eax]
 0x4254BE: push    eax
 0x4254BF: mov     [esi], edx
-0x4254C1: call    FormHeapFree
+0x4254C1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4254C6: add     esp, 4
 0x4254C9: jmp     short loc_4254D1
 0x4254CB: mov     dword ptr [esi], 0
@@ -415,12 +415,12 @@
 0x4254EF: push    ecx
 0x4254F0: lea     ecx, [eax+44h]
 0x4254F3: mov     [esi], eax
-0x4254F5: call    sub_4203E0
+0x4254F5: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x4254FA: mov     ebp, esi
 0x4254FC: mov     esi, [esi+4]
 0x4254FF: test    esi, esi
 0x425501: jnz     loc_425470
-0x425507: mov     edx, SaveLoad_CurrentSavegame
+0x425507: mov     edx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x42550D: cmp     byte ptr [edx+7Ch], 46h ; 'F'
 0x425511: jb      short loc_425562
 0x425513: push    41h ; 'A'; a2
@@ -436,7 +436,7 @@
 0x42552E: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x425533: push    0; int
 0x425535: push    eax; a1
-0x425536: call    TESForm_LookupByFormID
+0x425536: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x42553B: add     esp, 4
 0x42553E: push    eax; void *
 0x42553F: call    OblivionDynamicCast
@@ -444,7 +444,7 @@
 0x425547: mov     esi, eax
 0x425549: push    esi
 0x42554A: mov     ecx, ebx
-0x42554C: call    sub_4203E0
+0x42554C: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x425551: test    esi, esi
 0x425553: jz      short loc_425562
 0x425555: mov     eax, [esp+1Ch+arg_8]
@@ -476,7 +476,7 @@
 0x42559F: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4255A4: push    0; int
 0x4255A6: push    eax; a1
-0x4255A7: call    TESForm_LookupByFormID
+0x4255A7: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4255AC: add     esp, 4
 0x4255AF: push    eax; void *
 0x4255B0: call    OblivionDynamicCast
@@ -492,14 +492,14 @@
 0x4255CB: mov     edx, [eax]
 0x4255CD: push    eax
 0x4255CE: mov     [esi], edx
-0x4255D0: call    FormHeapFree
+0x4255D0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4255D5: add     esp, 4
 0x4255D8: jmp     short loc_4255E0
 0x4255DA: mov     dword ptr [esi], 0
-0x4255E0: mov     ecx, edi; void *
-0x4255E2: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x4255E0: mov     ecx, edi; this
+0x4255E2: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x4255E7: push    edi
-0x4255E8: call    FormHeapFree
+0x4255E8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4255ED: add     esp, 4
 0x4255F0: jmp     short loc_4255F5
 0x4255F2: mov     esi, [esi+4]
@@ -519,7 +519,7 @@
 0x425618: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x42561D: push    0; int
 0x42561F: push    eax; a1
-0x425620: call    TESForm_LookupByFormID
+0x425620: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x425625: add     esp, 4
 0x425628: push    eax; void *
 0x425629: call    OblivionDynamicCast

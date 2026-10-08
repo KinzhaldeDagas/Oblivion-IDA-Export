@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiD3DShaderMembr",
+  "definition": "struct NiD3DShaderMembr\n{\nNiD3DShaderInterfaceMembr super;\nUInt8 IsInitialized;\nUInt8 Unk021;\nUInt8 pad021[2];\nNiD3DShaderDeclaration *ShaderDeclaration;\nNiD3DRenderStateGroup *RenderStateGroup;\nNiD3DShaderConstantMap *PixelConstantMap;\nNiD3DShaderConstantMap *VertexConstantMap;\nUInt32 CurrentPassIndex;\nUInt32 PassCount;\nNiD3DPass *CurrentPass;\nNiTArray_NiD3DPass Passes;\nUInt32 Unk050[8];\n}\n",
   "id": 18374686479671984356,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 28
+      "size": 28,
+      "type": "NiD3DShaderInterfaceMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IsInitialized",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 1
+      "offset_hex": "0x1C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk021",
       "offset": 29,
-      "offset_hex": "0x1d",
-      "size": 1
+      "offset_hex": "0x1D",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad021",
       "offset": 30,
-      "offset_hex": "0x1e",
-      "size": 2
+      "offset_hex": "0x1E",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ShaderDeclaration",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DShaderDeclaration *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RenderStateGroup",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DRenderStateGroup *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PixelConstantMap",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DShaderConstantMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VertexConstantMap",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "NiD3DShaderConstantMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentPassIndex",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PassCount",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentPass",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DPass *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Passes",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 16
+      "offset_hex": "0x3C",
+      "size": 16,
+      "type": "NiTArray_NiD3DPass"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk050",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 32
+      "offset_hex": "0x4C",
+      "size": 32,
+      "type": "UInt32[8]"
     }
   ],
   "name": "NiD3DShaderMembr",
+  "ordinal": 9329,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 108
 }

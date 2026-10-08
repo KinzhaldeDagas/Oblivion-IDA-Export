@@ -1,4 +1,4 @@
-0x51AE20: push    esi
+0x51AE20: push    esi; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.
 0x51AE21: push    edi
 0x51AE22: mov     edi, dword ptr [esp+8+ArgList]
 0x51AE26: test    edi, edi

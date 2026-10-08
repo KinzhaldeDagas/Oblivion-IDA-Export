@@ -3,7 +3,7 @@
 0x506C8B: test    al, al
 0x506C8D: mov     ecx, ds:0B333C4h; this
 0x506C93: jz      short loc_506CA4
-0x506C95: call    TESObjectREFR_GetParentCell
+0x506C95: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x506C9A: mov     ecx, eax
 0x506C9C: call    sub_4CBBF0
 0x506CA1: mov     al, 1

@@ -3,7 +3,7 @@
 0x715E42: mov     edi, [esp+8+arg0]
 0x715E46: push    edi; arg0
 0x715E47: mov     esi, ecx
-0x715E49: call    sub_700750
+0x715E49: call    sub_700750; Pass227: NiScreenTexture vtable +0x38 map insertion helper; inserts object into map context, not a draw call.
 0x715E4E: mov     ecx, [esi+34h]
 0x715E51: test    ecx, ecx
 0x715E53: jz      short loc_715E5D

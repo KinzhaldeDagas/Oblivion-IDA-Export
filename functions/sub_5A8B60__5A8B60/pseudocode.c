@@ -1,17 +1,16 @@
 float *__fastcall sub_5A8B60(int a1)
 {
   float *result; // eax
-  size_t v2; // [esp-4h] [ebp-8h] BYREF
+  float Dst; // [esp+0h] [ebp-4h] BYREF
 
-  HIDWORD(v2) = a1;
-  LODWORD(v2) = 4;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (char *)&v2 + 4, v2);
-  result = (float *)Player_HUDHealthBarTile_;
-  if ( Player_HUDHealthBarTile_ )
+  Dst = *(float *)&a1; /*0x5a8b60*/
+  SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 4u); /*0x5a8b6e*/
+  result = (float *)dword_B3B0B4[0xA9]; /*0x5a8b73*/
+  if ( dword_B3B0B4[0xA9] ) /*0x5a8b73*/
   {
-    if ( !bHealthBarShowing_Gameplay )
-      result[0x16] = *((float *)&v2 + 1);
+    if ( !bHealthBarShowing_Gameplay ) /*0x5a8b7e*/
+      result[0x16] = Dst; /*0x5a8b89*/
   }
-  Player_HUDHealthBarTarget_ = 0;
-  return result;
+  dword_B3B0B4[0xAC] = 0; /*0x5a8b8c*/
+  return result; /*0x5a8b93*/
 }

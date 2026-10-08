@@ -1,6 +1,6 @@
 int sub_5888A0()
 {
-  memset(dword_B3AF10, 0, sizeof(dword_B3AF10));
-  dword_B3B0AC = 0;
-  return 0;
+  memset(g_TileValueEvaluationStack, 0, sizeof(g_TileValueEvaluationStack)); /*0x5888ad*/
+  g_TileValueEvaluationDepth = 0; /*0x5888af*/
+  return 0; /*0x5888b4*/
 }

@@ -1,1 +1,1 @@
-PUINT
+typedef unsigned int *PUINT;

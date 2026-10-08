@@ -83,12 +83,12 @@
 0x98F785: test    cl, 1
 0x98F788: jz      short loc_98F798
 0x98F78A: or      byte ptr [esi+eax+1Dh], 10h
-0x98F78F: mov     cl, byte ptr [ebp+eax+49Ch+var_204]
+0x98F78F: mov     cl, [ebp+eax+49Ch+var_204]
 0x98F796: jmp     short loc_98F7A9
 0x98F798: test    cl, 2
 0x98F79B: jz      short loc_98F7B2
 0x98F79D: or      byte ptr [esi+eax+1Dh], 20h
-0x98F7A2: mov     cl, byte ptr [ebp+eax+49Ch+var_304]
+0x98F7A2: mov     cl, [ebp+eax+49Ch+var_304]
 0x98F7A9: mov     [esi+eax+11Dh], cl
 0x98F7B0: jmp     short loc_98F7BA
 0x98F7B2: mov     byte ptr [esi+eax+11Dh], 0

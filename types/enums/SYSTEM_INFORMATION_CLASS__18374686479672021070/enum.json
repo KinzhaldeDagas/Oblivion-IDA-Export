@@ -1,0 +1,1383 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "_SYSTEM_INFORMATION_CLASS",
+  "definition": "enum _SYSTEM_INFORMATION_CLASS : __int32\n{\nSystemBasicInformation = 0x0,\nSystemCpuInformation = 0x1,\nSystemPerformanceInformation = 0x2,\nSystemTimeOfDayInformation = 0x3,\nSystemPathInformation = 0x4,\nSystemProcessInformation = 0x5,\nSystemCallCountInformation = 0x6,\nSystemDeviceInformation = 0x7,\nSystemProcessorPerformanceInformation = 0x8,\nSystemFlagsInformation = 0x9,\nSystemCallTimeInformation = 0xA,\nSystemModuleInformation = 0xB,\nSystemLocksInformation = 0xC,\nSystemStackTraceInformation = 0xD,\nSystemPagedPoolInformation = 0xE,\nSystemNonPagedPoolInformation = 0xF,\nSystemHandleInformation = 0x10,\nSystemObjectInformation = 0x11,\nSystemPageFileInformation = 0x12,\nSystemVdmInstemulInformation = 0x13,\nSystemVdmBopInformation = 0x14,\nSystemFileCacheInformation = 0x15,\nSystemPoolTagInformation = 0x16,\nSystemInterruptInformation = 0x17,\nSystemDpcBehaviorInformation = 0x18,\nSystemFullMemoryInformation = 0x19,\nSystemNotImplemented6 = 0x19,\nSystemLoadGdiDriverInformation = 0x1A,\nSystemUnloadGdiDriverInformation = 0x1B,\nSystemTimeAdjustmentInformation = 0x1C,\nSystemTimeAdjustment = 0x1C,\nSystemSummaryMemoryInformation = 0x1D,\nSystemMirrorMemoryInformation = 0x1E,\nSystemPerformanceTraceInformation = 0x1F,\nSystemObsolete0 = 0x20,\nSystemExceptionInformation = 0x21,\nSystemCrashDumpStateInformation = 0x22,\nSystemKernelDebuggerInformation = 0x23,\nSystemContextSwitchInformation = 0x24,\nSystemRegistryQuotaInformation = 0x25,\nSystemExtendServiceTableInformation = 0x26,\nSystemPrioritySeperation = 0x27,\nSystemVerifierAddDriverInformation = 0x28,\nSystemVerifierRemoveDriverInformation = 0x29,\nSystemProcessorIdleInformation = 0x2A,\nSystemLegacyDriverInformation = 0x2B,\nSystemCurrentTimeZoneInformation = 0x2C,\nSystemLookasideInformation = 0x2D,\nSystemTimeSlipNotification = 0x2E,\nSystemSessionCreate = 0x2F,\nSystemSessionDetach = 0x30,\nSystemSessionInformation = 0x31,\nSystemRangeStartInformation = 0x32,\nSystemVerifierInformation = 0x33,\nSystemVerifierThunkExtend = 0x34,\nSystemSessionProcessesInformation = 0x35,\nSystemLoadGdiDriverInSystemSpace = 0x36,\nSystemNumaProcessorMap = 0x37,\nSystemPrefetcherInformation = 0x38,\nSystemExtendedProcessInformation = 0x39,\nSystemRecommendedSharedDataAlignment = 0x3A,\nSystemComPlusPackage = 0x3B,\nSystemNumaAvailableMemory = 0x3C,\nSystemProcessorPowerInformation = 0x3D,\nSystemEmulationBasicInformation = 0x3E,\nSystemEmulationProcessorInformation = 0x3F,\nSystemExtendedHandleInformation = 0x40,\nSystemLostDelayedWriteInformation = 0x41,\nSystemBigPoolInformation = 0x42,\nSystemSessionPoolTagInformation = 0x43,\nSystemSessionMappedViewInformation = 0x44,\nSystemHotpatchInformation = 0x45,\nSystemObjectSecurityMode = 0x46,\nSystemWatchdogTimerHandler = 0x47,\nSystemWatchdogTimerInformation = 0x48,\nSystemLogicalProcessorInformation = 0x49,\nSystemWow64SharedInformationObsolete = 0x4A,\nSystemRegisterFirmwareTableInformationHandler = 0x4B,\nSystemFirmwareTableInformation = 0x4C,\nSystemModuleInformationEx = 0x4D,\nSystemVerifierTriageInformation = 0x4E,\nSystemSuperfetchInformation = 0x4F,\nSystemMemoryListInformation = 0x50,\nSystemFileCacheInformationEx = 0x51,\nSystemThreadPriorityClientIdInformation = 0x52,\nSystemProcessorIdleCycleTimeInformation = 0x53,\nSystemVerifierCancellationInformation = 0x54,\nSystemProcessorPowerInformationEx = 0x55,\nSystemRefTraceInformation = 0x56,\nSystemSpecialPoolInformation = 0x57,\nSystemProcessIdInformation = 0x58,\nSystemErrorPortInformation = 0x59,\nSystemBootEnvironmentInformation = 0x5A,\nSystemHypervisorInformation = 0x5B,\nSystemVerifierInformationEx = 0x5C,\nSystemTimeZoneInformation = 0x5D,\nSystemImageFileExecutionOptionsInformation = 0x5E,\nSystemCoverageInformation = 0x5F,\nSystemPrefetchPatchInformation = 0x60,\nSystemVerifierFaultsInformation = 0x61,\nSystemSystemPartitionInformation = 0x62,\nSystemSystemDiskInformation = 0x63,\nSystemProcessorPerformanceDistribution = 0x64,\nSystemNumaProximityNodeInformation = 0x65,\nSystemDynamicTimeZoneInformation = 0x66,\nSystemCodeIntegrityInformation = 0x67,\nSystemProcessorMicrocodeUpdateInformation = 0x68,\nSystemProcessorBrandString = 0x69,\nSystemVirtualAddressInformation = 0x6A,\nSystemLogicalProcessorInformationEx = 0x6B,\nSystemProcessorCycleTimeInformation = 0x6C,\nSystemStoreInformation = 0x6D,\nSystemRegistryAppendString = 0x6E,\nSystemAitSamplingValue = 0x6F,\nSystemVhdBootInformation = 0x70,\nSystemCpuQuotaInformation = 0x71,\nSystemNativeBasicInformation = 0x72,\nSystemErrorPortTimeouts = 0x73,\nSystemLowPriorityIoInformation = 0x74,\nSystemTpmBootEntropyInformation = 0x75,\nSystemVerifierCountersInformation = 0x76,\nSystemPagedPoolInformationEx = 0x77,\nSystemSystemPtesInformationEx = 0x78,\nSystemNodeDistanceInformation = 0x79,\nSystemAcpiAuditInformation = 0x7A,\nSystemBasicPerformanceInformation = 0x7B,\nSystemQueryPerformanceCounterInformation = 0x7C,\nSystemSessionBigPoolInformation = 0x7D,\nSystemBootGraphicsInformation = 0x7E,\nSystemScrubPhysicalMemoryInformation = 0x7F,\nSystemBadPageInformation = 0x80,\nSystemProcessorProfileControlArea = 0x81,\nSystemCombinePhysicalMemoryInformation = 0x82,\nSystemEntropyInterruptTimingInformation = 0x83,\nSystemConsoleInformation = 0x84,\nSystemPlatformBinaryInformation = 0x85,\nSystemPolicyInformation = 0x86,\nSystemHypervisorProcessorCountInformation = 0x87,\nSystemDeviceDataInformation = 0x88,\nSystemDeviceDataEnumerationInformation = 0x89,\nSystemMemoryTopologyInformation = 0x8A,\nSystemMemoryChannelInformation = 0x8B,\nSystemBootLogoInformation = 0x8C,\nSystemProcessorPerformanceInformationEx = 0x8D,\nSystemCriticalProcessErrorLogInformation = 0x8E,\nSystemSecureBootPolicyInformation = 0x8F,\nSystemPageFileInformationEx = 0x90,\nSystemSecureBootInformation = 0x91,\nSystemEntropyInterruptTimingRawInformation = 0x92,\nSystemPortableWorkspaceEfiLauncherInformation = 0x93,\nSystemFullProcessInformation = 0x94,\nSystemKernelDebuggerInformationEx = 0x95,\nSystemBootMetadataInformation = 0x96,\nSystemSoftRebootInformation = 0x97,\nSystemElamCertificateInformation = 0x98,\nSystemOfflineDumpConfigInformation = 0x99,\nSystemProcessorFeaturesInformation = 0x9A,\nSystemRegistryReconciliationInformation = 0x9B,\nSystemEdidInformation = 0x9C,\nSystemManufacturingInformation = 0x9D,\nSystemEnergyEstimationConfigInformation = 0x9E,\nSystemHypervisorDetailInformation = 0x9F,\nSystemProcessorCycleStatsInformation = 0xA0,\nSystemVmGenerationCountInformation = 0xA1,\nSystemTrustedPlatformModuleInformation = 0xA2,\nSystemKernelDebuggerFlags = 0xA3,\nSystemCodeIntegrityPolicyInformation = 0xA4,\nSystemIsolatedUserModeInformation = 0xA5,\nSystemHardwareSecurityTestInterfaceResultsInformation = 0xA6,\nSystemSingleModuleInformation = 0xA7,\nSystemAllowedCpuSetsInformation = 0xA8,\nSystemVsmProtectionInformation = 0xA9,\nSystemInterruptCpuSetsInformation = 0xAA,\nSystemSecureBootPolicyFullInformation = 0xAB,\nSystemCodeIntegrityPolicyFullInformation = 0xAC,\nSystemAffinitizedInterruptProcessorInformation = 0xAD,\nSystemRootSiloInformation = 0xAE,\nSystemCpuSetInformation = 0xAF,\nSystemCpuSetTagInformation = 0xB0,\nSystemWin32WerStartCallout = 0xB1,\nSystemSecureKernelProfileInformation = 0xB2,\nSystemCodeIntegrityPlatformManifestInformation = 0xB3,\nSystemInterruptSteeringInformation = 0xB4,\nSystemSupportedProcessorArchitectures = 0xB5,\nSystemMemoryUsageInformation = 0xB6,\nSystemCodeIntegrityCertificateInformation = 0xB7,\nSystemPhysicalMemoryInformation = 0xB8,\nSystemControlFlowTransition = 0xB9,\nSystemKernelDebuggingAllowed = 0xBA,\nSystemActivityModerationExeState = 0xBB,\nSystemActivityModerationUserSettings = 0xBC,\nSystemCodeIntegrityPoliciesFullInformation = 0xBD,\nSystemCodeIntegrityUnlockInformation = 0xBE,\nSystemIntegrityQuotaInformation = 0xBF,\nSystemFlushInformation = 0xC0,\nSystemProcessorIdleMaskInformation = 0xC1,\nSystemSecureDumpEncryptionInformation = 0xC2,\nSystemWriteConstraintInformation = 0xC3,\nSystemKernelVaShadowInformation = 0xC4,\nSystemHypervisorSharedPageInformation = 0xC5,\nSystemFirmwareBootPerformanceInformation = 0xC6,\nSystemCodeIntegrityVerificationInformation = 0xC7,\nSystemFirmwarePartitionInformation = 0xC8,\nSystemSpeculationControlInformation = 0xC9,\nSystemDmaGuardPolicyInformation = 0xCA,\nSystemEnclaveLaunchControlInformation = 0xCB,\nSystemWorkloadAllowedCpuSetsInformation = 0xCC,\nSystemCodeIntegrityUnlockModeInformation = 0xCD,\nSystemLeapSecondInformation = 0xCE,\nSystemFlags2Information = 0xCF,\nSystemSecurityModelInformation = 0xD0,\nSystemCodeIntegritySyntheticCacheInformation = 0xD1,\nSystemFeatureConfigurationInformation = 0xD2,\nSystemFeatureConfigurationSectionInformation = 0xD3,\nSystemFeatureUsageSubscriptionInformation = 0xD4,\nSystemSecureSpeculationControlInformation = 0xD5,\nSystemSpacesBootInformation = 0xD6,\nSystemFwRamdiskInformation = 0xD7,\nSystemWheaIpmiHardwareInformation = 0xD8,\nSystemDifSetRuleClassInformation = 0xD9,\nSystemDifClearRuleClassInformation = 0xDA,\nSystemDifApplyPluginVerificationOnDriver = 0xDB,\nSystemDifRemovePluginVerificationOnDriver = 0xDC,\nSystemShadowStackInformation = 0xDD,\nSystemBuildVersionInformation = 0xDE,\nSystemWineVersionInformation = 0x3E8,\n}\n",
+  "id": 18374686479672021070,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBasicInformation",
+      "value": 0
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCpuInformation",
+      "value": 1
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPerformanceInformation",
+      "value": 2
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemTimeOfDayInformation",
+      "value": 3
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPathInformation",
+      "value": 4
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessInformation",
+      "value": 5
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCallCountInformation",
+      "value": 6
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDeviceInformation",
+      "value": 7
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorPerformanceInformation",
+      "value": 8
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFlagsInformation",
+      "value": 9
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCallTimeInformation",
+      "value": 10
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemModuleInformation",
+      "value": 11
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLocksInformation",
+      "value": 12
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemStackTraceInformation",
+      "value": 13
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPagedPoolInformation",
+      "value": 14
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemNonPagedPoolInformation",
+      "value": 15
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemHandleInformation",
+      "value": 16
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemObjectInformation",
+      "value": 17
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPageFileInformation",
+      "value": 18
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVdmInstemulInformation",
+      "value": 19
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVdmBopInformation",
+      "value": 20
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFileCacheInformation",
+      "value": 21
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPoolTagInformation",
+      "value": 22
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemInterruptInformation",
+      "value": 23
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDpcBehaviorInformation",
+      "value": 24
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFullMemoryInformation",
+      "value": 25
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemNotImplemented6",
+      "value": 25
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLoadGdiDriverInformation",
+      "value": 26
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemUnloadGdiDriverInformation",
+      "value": 27
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemTimeAdjustmentInformation",
+      "value": 28
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemTimeAdjustment",
+      "value": 28
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSummaryMemoryInformation",
+      "value": 29
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemMirrorMemoryInformation",
+      "value": 30
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPerformanceTraceInformation",
+      "value": 31
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemObsolete0",
+      "value": 32
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemExceptionInformation",
+      "value": 33
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCrashDumpStateInformation",
+      "value": 34
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemKernelDebuggerInformation",
+      "value": 35
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemContextSwitchInformation",
+      "value": 36
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRegistryQuotaInformation",
+      "value": 37
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemExtendServiceTableInformation",
+      "value": 38
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPrioritySeperation",
+      "value": 39
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierAddDriverInformation",
+      "value": 40
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierRemoveDriverInformation",
+      "value": 41
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorIdleInformation",
+      "value": 42
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLegacyDriverInformation",
+      "value": 43
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCurrentTimeZoneInformation",
+      "value": 44
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLookasideInformation",
+      "value": 45
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemTimeSlipNotification",
+      "value": 46
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSessionCreate",
+      "value": 47
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSessionDetach",
+      "value": 48
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSessionInformation",
+      "value": 49
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRangeStartInformation",
+      "value": 50
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierInformation",
+      "value": 51
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierThunkExtend",
+      "value": 52
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSessionProcessesInformation",
+      "value": 53
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLoadGdiDriverInSystemSpace",
+      "value": 54
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemNumaProcessorMap",
+      "value": 55
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPrefetcherInformation",
+      "value": 56
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemExtendedProcessInformation",
+      "value": 57
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRecommendedSharedDataAlignment",
+      "value": 58
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemComPlusPackage",
+      "value": 59
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemNumaAvailableMemory",
+      "value": 60
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorPowerInformation",
+      "value": 61
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemEmulationBasicInformation",
+      "value": 62
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemEmulationProcessorInformation",
+      "value": 63
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemExtendedHandleInformation",
+      "value": 64
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLostDelayedWriteInformation",
+      "value": 65
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBigPoolInformation",
+      "value": 66
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSessionPoolTagInformation",
+      "value": 67
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSessionMappedViewInformation",
+      "value": 68
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemHotpatchInformation",
+      "value": 69
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemObjectSecurityMode",
+      "value": 70
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWatchdogTimerHandler",
+      "value": 71
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWatchdogTimerInformation",
+      "value": 72
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLogicalProcessorInformation",
+      "value": 73
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWow64SharedInformationObsolete",
+      "value": 74
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRegisterFirmwareTableInformationHandler",
+      "value": 75
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFirmwareTableInformation",
+      "value": 76
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemModuleInformationEx",
+      "value": 77
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierTriageInformation",
+      "value": 78
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSuperfetchInformation",
+      "value": 79
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemMemoryListInformation",
+      "value": 80
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFileCacheInformationEx",
+      "value": 81
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemThreadPriorityClientIdInformation",
+      "value": 82
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorIdleCycleTimeInformation",
+      "value": 83
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierCancellationInformation",
+      "value": 84
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorPowerInformationEx",
+      "value": 85
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRefTraceInformation",
+      "value": 86
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSpecialPoolInformation",
+      "value": 87
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessIdInformation",
+      "value": 88
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemErrorPortInformation",
+      "value": 89
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBootEnvironmentInformation",
+      "value": 90
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemHypervisorInformation",
+      "value": 91
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierInformationEx",
+      "value": 92
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemTimeZoneInformation",
+      "value": 93
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemImageFileExecutionOptionsInformation",
+      "value": 94
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCoverageInformation",
+      "value": 95
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPrefetchPatchInformation",
+      "value": 96
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierFaultsInformation",
+      "value": 97
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSystemPartitionInformation",
+      "value": 98
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSystemDiskInformation",
+      "value": 99
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorPerformanceDistribution",
+      "value": 100
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemNumaProximityNodeInformation",
+      "value": 101
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDynamicTimeZoneInformation",
+      "value": 102
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityInformation",
+      "value": 103
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorMicrocodeUpdateInformation",
+      "value": 104
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorBrandString",
+      "value": 105
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVirtualAddressInformation",
+      "value": 106
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLogicalProcessorInformationEx",
+      "value": 107
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorCycleTimeInformation",
+      "value": 108
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemStoreInformation",
+      "value": 109
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRegistryAppendString",
+      "value": 110
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemAitSamplingValue",
+      "value": 111
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVhdBootInformation",
+      "value": 112
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCpuQuotaInformation",
+      "value": 113
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemNativeBasicInformation",
+      "value": 114
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemErrorPortTimeouts",
+      "value": 115
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLowPriorityIoInformation",
+      "value": 116
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemTpmBootEntropyInformation",
+      "value": 117
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVerifierCountersInformation",
+      "value": 118
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPagedPoolInformationEx",
+      "value": 119
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSystemPtesInformationEx",
+      "value": 120
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemNodeDistanceInformation",
+      "value": 121
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemAcpiAuditInformation",
+      "value": 122
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBasicPerformanceInformation",
+      "value": 123
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemQueryPerformanceCounterInformation",
+      "value": 124
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSessionBigPoolInformation",
+      "value": 125
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBootGraphicsInformation",
+      "value": 126
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemScrubPhysicalMemoryInformation",
+      "value": 127
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBadPageInformation",
+      "value": 128
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorProfileControlArea",
+      "value": 129
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCombinePhysicalMemoryInformation",
+      "value": 130
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemEntropyInterruptTimingInformation",
+      "value": 131
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemConsoleInformation",
+      "value": 132
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPlatformBinaryInformation",
+      "value": 133
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPolicyInformation",
+      "value": 134
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemHypervisorProcessorCountInformation",
+      "value": 135
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDeviceDataInformation",
+      "value": 136
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDeviceDataEnumerationInformation",
+      "value": 137
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemMemoryTopologyInformation",
+      "value": 138
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemMemoryChannelInformation",
+      "value": 139
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBootLogoInformation",
+      "value": 140
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorPerformanceInformationEx",
+      "value": 141
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCriticalProcessErrorLogInformation",
+      "value": 142
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSecureBootPolicyInformation",
+      "value": 143
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPageFileInformationEx",
+      "value": 144
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSecureBootInformation",
+      "value": 145
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemEntropyInterruptTimingRawInformation",
+      "value": 146
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPortableWorkspaceEfiLauncherInformation",
+      "value": 147
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFullProcessInformation",
+      "value": 148
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemKernelDebuggerInformationEx",
+      "value": 149
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBootMetadataInformation",
+      "value": 150
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSoftRebootInformation",
+      "value": 151
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemElamCertificateInformation",
+      "value": 152
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemOfflineDumpConfigInformation",
+      "value": 153
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorFeaturesInformation",
+      "value": 154
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRegistryReconciliationInformation",
+      "value": 155
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemEdidInformation",
+      "value": 156
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemManufacturingInformation",
+      "value": 157
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemEnergyEstimationConfigInformation",
+      "value": 158
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemHypervisorDetailInformation",
+      "value": 159
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorCycleStatsInformation",
+      "value": 160
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVmGenerationCountInformation",
+      "value": 161
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemTrustedPlatformModuleInformation",
+      "value": 162
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemKernelDebuggerFlags",
+      "value": 163
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityPolicyInformation",
+      "value": 164
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemIsolatedUserModeInformation",
+      "value": 165
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemHardwareSecurityTestInterfaceResultsInformation",
+      "value": 166
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSingleModuleInformation",
+      "value": 167
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemAllowedCpuSetsInformation",
+      "value": 168
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemVsmProtectionInformation",
+      "value": 169
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemInterruptCpuSetsInformation",
+      "value": 170
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSecureBootPolicyFullInformation",
+      "value": 171
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityPolicyFullInformation",
+      "value": 172
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemAffinitizedInterruptProcessorInformation",
+      "value": 173
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemRootSiloInformation",
+      "value": 174
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCpuSetInformation",
+      "value": 175
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCpuSetTagInformation",
+      "value": 176
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWin32WerStartCallout",
+      "value": 177
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSecureKernelProfileInformation",
+      "value": 178
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityPlatformManifestInformation",
+      "value": 179
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemInterruptSteeringInformation",
+      "value": 180
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSupportedProcessorArchitectures",
+      "value": 181
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemMemoryUsageInformation",
+      "value": 182
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityCertificateInformation",
+      "value": 183
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemPhysicalMemoryInformation",
+      "value": 184
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemControlFlowTransition",
+      "value": 185
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemKernelDebuggingAllowed",
+      "value": 186
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemActivityModerationExeState",
+      "value": 187
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemActivityModerationUserSettings",
+      "value": 188
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityPoliciesFullInformation",
+      "value": 189
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityUnlockInformation",
+      "value": 190
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemIntegrityQuotaInformation",
+      "value": 191
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFlushInformation",
+      "value": 192
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemProcessorIdleMaskInformation",
+      "value": 193
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSecureDumpEncryptionInformation",
+      "value": 194
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWriteConstraintInformation",
+      "value": 195
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemKernelVaShadowInformation",
+      "value": 196
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemHypervisorSharedPageInformation",
+      "value": 197
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFirmwareBootPerformanceInformation",
+      "value": 198
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityVerificationInformation",
+      "value": 199
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFirmwarePartitionInformation",
+      "value": 200
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSpeculationControlInformation",
+      "value": 201
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDmaGuardPolicyInformation",
+      "value": 202
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemEnclaveLaunchControlInformation",
+      "value": 203
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWorkloadAllowedCpuSetsInformation",
+      "value": 204
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegrityUnlockModeInformation",
+      "value": 205
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemLeapSecondInformation",
+      "value": 206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFlags2Information",
+      "value": 207
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSecurityModelInformation",
+      "value": 208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemCodeIntegritySyntheticCacheInformation",
+      "value": 209
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFeatureConfigurationInformation",
+      "value": 210
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFeatureConfigurationSectionInformation",
+      "value": 211
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFeatureUsageSubscriptionInformation",
+      "value": 212
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSecureSpeculationControlInformation",
+      "value": 213
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemSpacesBootInformation",
+      "value": 214
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemFwRamdiskInformation",
+      "value": 215
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWheaIpmiHardwareInformation",
+      "value": 216
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDifSetRuleClassInformation",
+      "value": 217
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDifClearRuleClassInformation",
+      "value": 218
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDifApplyPluginVerificationOnDriver",
+      "value": 219
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemDifRemovePluginVerificationOnDriver",
+      "value": 220
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemShadowStackInformation",
+      "value": 221
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemBuildVersionInformation",
+      "value": 222
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SystemWineVersionInformation",
+      "value": 1000
+    }
+  ],
+  "name": "_SYSTEM_INFORMATION_CLASS",
+  "ordinal": 2656,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

@@ -26,7 +26,7 @@
 0x73905E: mov     esi, [esi+8]
 0x739061: push    esi
 0x739062: mov     ecx, eax
-0x739064: call    sub_731620
+0x739064: call    sub_731620; Fog property propagation decode: NiPropertyState copy constructor preserves all ten slots, including inherited fog slot +0x0C.
 0x739069: mov     edi, eax
 0x73906B: jmp     short loc_73906F
 0x73906D: xor     edi, edi
@@ -62,3 +62,15 @@
 0x7390BD: pop     ebx
 0x7390BE: add     esp, 0Ch
 0x7390C1: retn    8
+0x9AFB80: mov     eax, [ebp+8]
+0x9AFB83: push    eax
+0x9AFB84: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFB89: pop     ecx
+0x9AFB8A: retn
+0x9AFB8B: mov     edx, [esp+arg_4]
+0x9AFB8F: lea     eax, [edx-0Ch]
+0x9AFB92: mov     ecx, [edx-10h]
+0x9AFB95: xor     ecx, eax
+0x9AFB97: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFB9C: mov     eax, offset stru_ADC078
+0x9AFBA1: jmp     ___CxxFrameHandler3

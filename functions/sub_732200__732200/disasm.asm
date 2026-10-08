@@ -1,4 +1,4 @@
-0x732200: mov     eax, [esp+this]
+0x732200: mov     eax, [esp+this]; MoonSugarEffect decode: visible-array grow helper. Resizes pointer array and preserves current count; OnVisible grows capacity by capacity+grow field.
 0x732204: push    esi
 0x732205: mov     esi, ecx
 0x732207: cmp     eax, [esi+8]
@@ -25,20 +25,20 @@
 0x73223C: test    esi, esi
 0x73223E: jz      short loc_732266
 0x732240: lea     ecx, ds:0[esi*4]
-0x732247: push    ecx; Size
-0x732248: push    edi; Src
-0x732249: push    eax; Dst
-0x73224A: call    _memcpy
+0x732247: push    ecx; byteCount
+0x732248: push    edi; source
+0x732249: push    eax; destination
+0x73224A: call    _memcpy;
 0x73224F: add     esp, 0Ch
 0x732252: push    edi
-0x732253: call    FormHeapFree
+0x732253: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x732258: add     esp, 4
 0x73225B: pop     edi
 0x73225C: pop     esi
 0x73225D: retn    4
 0x732260: mov     dword ptr [esi], 0
 0x732266: push    edi
-0x732267: call    FormHeapFree
+0x732267: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73226C: add     esp, 4
 0x73226F: pop     edi
 0x732270: pop     esi

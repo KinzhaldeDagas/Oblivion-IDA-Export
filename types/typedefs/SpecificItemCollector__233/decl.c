@@ -1,1 +1,1 @@
-SpecificItemCollector
+struct SpecificItemCollector;

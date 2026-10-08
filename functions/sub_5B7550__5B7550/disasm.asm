@@ -23,7 +23,7 @@
 0x5B7598: mov     eax, [esi+4]
 0x5B759B: mov     edi, [eax+4]
 0x5B759E: push    eax
-0x5B759F: call    FormHeapFree
+0x5B759F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B75A4: add     esp, 4
 0x5B75A7: test    edi, edi
 0x5B75A9: mov     [esi+4], edi
@@ -46,7 +46,7 @@
 0x5B75D9: pop     ebp
 0x5B75DA: retn
 0x5B75DB: push    3
-0x5B75DD: call    nullsub_returnTrue_0arg
+0x5B75DD: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5B75E2: movzx   eax, word ptr [ebp+0B6h]
 0x5B75E9: mov     ebx, ds:0A2807Ch
 0x5B75EF: add     esp, 4
@@ -87,7 +87,7 @@
 0x5B7648: cmp     eax, esi
 0x5B764A: ja      short loc_5B75FC
 0x5B764C: push    2
-0x5B764E: call    nullsub_returnTrue_0arg
+0x5B764E: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5B7653: mov     ecx, ds:0B333C4h
 0x5B7659: mov     eax, [ecx]
 0x5B765B: mov     edx, [eax+174h]
@@ -123,12 +123,12 @@
 0x5B76D3: fstp    [esp+17Ch+var_DC]
 0x5B76DA: cmp     byte ptr [esp+17Ch+var_164+3], 0
 0x5B76DF: jz      loc_5B7771
-0x5B76E5: push    0; char
-0x5B76E7: push    1; char
-0x5B76E9: lea     edx, [esp+184h+var_124]
+0x5B76E5: push    0; requireMipmaps
+0x5B76E7: push    1; loadFromCache
+0x5B76E9: lea     edx, [esp+184h+outTexture]
 0x5B76ED: push    offset aDataTextures_4; "Data\\Textures\\Menus\\Map\\local\\MapP"...
-0x5B76F2: push    edx; int
-0x5B76F3: call    sub_7B8200
+0x5B76F2: push    edx; outTexture
+0x5B76F3: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x5B76F8: add     esp, 10h
 0x5B76FB: mov     ebp, eax
 0x5B76FD: mov     esi, ds:0B42D44h
@@ -156,7 +156,7 @@
 0x5B773C: add     ebp, 4
 0x5B773F: push    ebp; lpAddend
 0x5B7740: call    dword ptr ds:0A28078h
-0x5B7746: mov     esi, [esp+17Ch+var_124]
+0x5B7746: mov     esi, [esp+17Ch+outTexture]
 0x5B774A: test    esi, esi
 0x5B774C: mov     [esp+17Ch+var_4], 0FFFFFFFFh
 0x5B7757: jz      short loc_5B7771
@@ -220,15 +220,13 @@
 0x5B7846: call    j_MemoryHeap_Alloc
 0x5B784B: cmp     edi, ebp
 0x5B784D: mov     [esp+17Ch+var_134], eax
-0x5B7851: mov     [esp+17Ch+var_148], ebp
+0x5B7851: mov     [esp+17Ch+texture], ebp
 0x5B7855: jle     loc_5B793D
 0x5B785B: jmp     short loc_5B7860
-0x5B785D: align 10h
 0x5B7860: mov     [esp+17Ch+var_14C], 0
 0x5B7868: jmp     short loc_5B7870
-0x5B786A: align 10h
 0x5B7870: mov     ecx, [esp+17Ch+var_14C]
-0x5B7874: mov     edx, [esp+17Ch+var_148]
+0x5B7874: mov     edx, [esp+17Ch+texture]
 0x5B7878: mov     eax, ds:0B333A0h
 0x5B787D: push    ecx
 0x5B787E: mov     ecx, [eax+8]
@@ -242,8 +240,8 @@
 0x5B7892: xor     ebx, ebx
 0x5B7894: mov     esi, 8
 0x5B7899: lea     esp, [esp+0]
-0x5B78A0: mov     ecx, [edi]; this
-0x5B78A2: call    TESObjectCELL_GetNiNode?
+0x5B78A0: mov     ecx, [edi]; object
+0x5B78A2: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x5B78A7: test    eax, eax
 0x5B78A9: jz      short loc_5B78DA
 0x5B78AB: movzx   ecx, word ptr [eax+0B6h]
@@ -281,15 +279,15 @@
 0x5B7917: cmp     eax, ecx
 0x5B7919: mov     [esp+17Ch+var_14C], eax
 0x5B791D: jl      loc_5B7870
-0x5B7923: mov     eax, [esp+17Ch+var_148]
+0x5B7923: mov     eax, [esp+17Ch+texture]
 0x5B7927: add     eax, 1
 0x5B792A: cmp     eax, ecx
-0x5B792C: mov     [esp+17Ch+var_148], eax
+0x5B792C: mov     [esp+17Ch+texture], eax
 0x5B7930: jl      loc_5B7860
 0x5B7936: mov     esi, [esp+17Ch+var_E8]
 0x5B793D: xor     eax, eax
 0x5B793F: cmp     [esp+17Ch+var_140], eax
-0x5B7943: mov     [esp+17Ch+var_124], eax
+0x5B7943: mov     [esp+17Ch+outTexture], eax
 0x5B7947: jle     loc_5B85AE
 0x5B794D: fldz
 0x5B794F: fst     [esp+17Ch+var_AC]
@@ -305,7 +303,7 @@
 0x5B7989: fstp    dword ptr [esp+17Ch+var_80+4]
 0x5B7990: xor     edx, edx
 0x5B7992: div     dword ptr ds:0B06A2Ch
-0x5B7998: mov     [esp+17Ch+var_148], 0
+0x5B7998: mov     [esp+17Ch+texture], 0
 0x5B79A0: mov     ebx, edx
 0x5B79A2: mov     [esp+17Ch+var_D8], ebx
 0x5B79A9: mov     [esp+17Ch+var_14C], eax
@@ -321,7 +319,7 @@
 0x5B79E0: test    al, al
 0x5B79E2: mov     ecx, ds:0B333C4h; this
 0x5B79E8: jz      loc_5B7B4D
-0x5B79EE: call    TESObjectREFR_GetParentCell
+0x5B79EE: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5B79F3: mov     ebp, eax
 0x5B79F5: test    ebp, ebp
 0x5B79F7: jz      loc_5B7C5F
@@ -382,7 +380,7 @@
 0x5B7AE0: mov     eax, [eax]
 0x5B7AE2: test    eax, eax
 0x5B7AE4: jz      short loc_5B7AF4
-0x5B7AE6: mov     [esp+17Ch+var_148], eax
+0x5B7AE6: mov     [esp+17Ch+texture], eax
 0x5B7AEA: add     eax, 4
 0x5B7AED: push    eax; lpAddend
 0x5B7AEE: call    dword ptr ds:0A28078h
@@ -406,9 +404,9 @@
 0x5B7B28: jz      loc_5B7C5F
 0x5B7B2E: mov     ecx, [esp+17Ch+var_F4]
 0x5B7B35: mov     edx, [ecx+0C8h]
-0x5B7B3B: push    edx
-0x5B7B3C: mov     ecx, ebp
-0x5B7B3E: call    sub_4CBDB0
+0x5B7B3B: push    edx; outDoors
+0x5B7B3C: mov     ecx, ebp; this
+0x5B7B3E: call    TESObjectCELL_CollectDoorsForTeleportProcessing; Verified: scans cell object references, filters out references with deleted/disabled flags, then collects door references whose ExtraTeleport exists or whose TESObjectDOOR.randomTeleport list is nonempty. This list feeds teleport-link processing.
 0x5B7B43: mov     byte ptr [esp+17Ch+var_15C+2], 0
 0x5B7B48: jmp     loc_5B7C5F
 0x5B7B4D: call    TESObjectREFR_GetWorldSpace
@@ -446,8 +444,8 @@
 0x5B7BD5: mov     ecx, [esp+17Ch+var_6C]
 0x5B7BDC: mov     [esp+17Ch+var_100], ecx
 0x5B7BE0: jz      short loc_5B7C5F
-0x5B7BE2: push    esi; signed int
-0x5B7BE3: push    edx; signed int
+0x5B7BE2: push    esi; cellY
+0x5B7BE3: push    edx; cellX
 0x5B7BE4: mov     ecx, eax; this
 0x5B7BE6: call    TESWorldSpace__GetCellAtCellCoord
 0x5B7BEB: mov     esi, eax
@@ -462,7 +460,7 @@
 0x5B7C07: mov     eax, [eax]
 0x5B7C09: test    eax, eax
 0x5B7C0B: jz      short loc_5B7C1B
-0x5B7C0D: mov     [esp+17Ch+var_148], eax
+0x5B7C0D: mov     [esp+17Ch+texture], eax
 0x5B7C11: add     eax, 4
 0x5B7C14: push    eax; lpAddend
 0x5B7C15: call    dword ptr ds:0A28078h
@@ -484,9 +482,9 @@
 0x5B7C48: call    eax
 0x5B7C4A: mov     ecx, [esp+17Ch+var_F4]
 0x5B7C51: mov     edx, [ecx+0C8h]
-0x5B7C57: push    edx
-0x5B7C58: mov     ecx, esi
-0x5B7C5A: call    sub_4CBDB0
+0x5B7C57: push    edx; outDoors
+0x5B7C58: mov     ecx, esi; this
+0x5B7C5A: call    TESObjectCELL_CollectDoorsForTeleportProcessing; Verified: scans cell object references, filters out references with deleted/disabled flags, then collects door references whose ExtraTeleport exists or whose TESObjectDOOR.randomTeleport list is nonempty. This list feeds teleport-link processing.
 0x5B7C5F: xor     ecx, ecx
 0x5B7C61: mov     eax, 121h
 0x5B7C66: mov     edx, 0Ch
@@ -507,7 +505,7 @@
 0x5B7C93: or      ecx, eax
 0x5B7C95: push    ecx; Size
 0x5B7C96: call    FormHeapAlloc
-0x5B7C9B: mov     [esp+184h+var_144], eax
+0x5B7C9B: mov     [esp+184h+source], eax
 0x5B7C9F: xor     ecx, ecx
 0x5B7CA1: mov     eax, 121h
 0x5B7CA6: mov     edx, 8
@@ -558,7 +556,7 @@
 0x5B7D2D: cmp     byte ptr [esp+17Ch+var_164+3], 0
 0x5B7D32: mov     esi, eax
 0x5B7D34: mov     [esp+17Ch+Dst], ebx
-0x5B7D3B: mov     [esp+17Ch+var_F0], ebx
+0x5B7D3B: mov     [esp+17Ch+destination], ebx
 0x5B7D42: mov     [esp+17Ch+var_110], ebx
 0x5B7D46: mov     [esp+17Ch+var_C8], ebx
 0x5B7D4D: jz      loc_5B7DDB
@@ -581,7 +579,7 @@
 0x5B7D88: or      ecx, eax
 0x5B7D8A: push    ecx; Size
 0x5B7D8B: call    FormHeapAlloc
-0x5B7D90: mov     [esp+184h+var_F0], eax
+0x5B7D90: mov     [esp+184h+destination], eax
 0x5B7D97: xor     ecx, ecx
 0x5B7D99: mov     eax, 121h
 0x5B7D9E: mov     edx, 8
@@ -638,13 +636,13 @@
 0x5B7E5A: jz      short loc_5B7E76
 0x5B7E5C: mov     eax, [esp+17Ch+Src]
 0x5B7E60: mov     ecx, [esp+17Ch+Dst]
-0x5B7E67: push    0D8Ch; Size
-0x5B7E6C: push    eax; Src
-0x5B7E6D: push    ecx; Dst
-0x5B7E6E: call    _memcpy
+0x5B7E67: push    0D8Ch; byteCount
+0x5B7E6C: push    eax; source
+0x5B7E6D: push    ecx; destination
+0x5B7E6E: call    _memcpy;
 0x5B7E73: add     esp, 0Ch
 0x5B7E76: fld     [esp+17Ch+var_100]
-0x5B7E7A: mov     edx, [esp+17Ch+var_144]
+0x5B7E7A: mov     edx, [esp+17Ch+source]
 0x5B7E7E: fadd    qword ptr ds:0A2FC68h
 0x5B7E84: mov     eax, [esp+17Ch+var_EC]
 0x5B7E8B: mov     ecx, [esp+17Ch+var_10C]
@@ -786,18 +784,18 @@
 0x5B80FD: fstp    st
 0x5B80FF: fstp    st
 0x5B8101: jz      short loc_5B8134
-0x5B8103: mov     ecx, [esp+17Ch+var_144]
-0x5B8107: mov     edx, [esp+17Ch+var_F0]
-0x5B810E: push    0D8Ch; Size
-0x5B8113: push    ecx; Src
-0x5B8114: push    edx; Dst
-0x5B8115: call    _memcpy
+0x5B8103: mov     ecx, [esp+17Ch+source]
+0x5B8107: mov     edx, [esp+17Ch+destination]
+0x5B810E: push    0D8Ch; byteCount
+0x5B8113: push    ecx; source
+0x5B8114: push    edx; destination
+0x5B8115: call    _memcpy;
 0x5B811A: mov     eax, [esp+188h+var_EC]
 0x5B8121: mov     ecx, [esp+188h+var_110]
-0x5B8125: push    908h; Size
-0x5B812A: push    eax; Src
-0x5B812B: push    ecx; Dst
-0x5B812C: call    _memcpy
+0x5B8125: push    908h; byteCount
+0x5B812A: push    eax; source
+0x5B812B: push    ecx; destination
+0x5B812C: call    _memcpy;
 0x5B8131: add     esp, 18h
 0x5B8134: xor     eax, eax
 0x5B8136: xor     ecx, ecx
@@ -820,7 +818,6 @@
 0x5B8163: add     edi, ecx
 0x5B8165: jmp     short loc_5B8174
 0x5B8167: jmp     short loc_5B8170
-0x5B8169: align 10h
 0x5B8170: mov     ebx, [esp+17Ch+var_160]
 0x5B8174: mov     ecx, ebp
 0x5B8176: and     ecx, 80000001h
@@ -875,10 +872,10 @@
 0x5B821F: cmp     byte ptr [esp+17Ch+var_164+3], 0
 0x5B8224: jz      loc_5B8385
 0x5B822A: mov     ebp, [esp+17Ch+var_C8]
-0x5B8231: push    0C00h; Size
-0x5B8236: push    esi; Src
-0x5B8237: push    ebp; Dst
-0x5B8238: call    _memcpy
+0x5B8231: push    0C00h; byteCount
+0x5B8236: push    esi; source
+0x5B8237: push    ebp; destination
+0x5B8238: call    _memcpy;
 0x5B823D: push    0D0h ; 'Ð'; Size
 0x5B8242: call    FormHeapAlloc
 0x5B8247: mov     edi, eax
@@ -887,15 +884,15 @@
 0x5B8250: test    edi, edi
 0x5B8252: mov     byte ptr [esp+17Ch+var_4], 4
 0x5B825A: jz      short loc_5B82A7
-0x5B825C: call    sub_57D7F0
-0x5B8261: call    Double_To_SInt32
+0x5B825C: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
+0x5B8261: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B8266: push    eax
-0x5B8267: call    sub_57D7A0
-0x5B826C: call    Double_To_SInt32
+0x5B8267: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
+0x5B826C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B8271: mov     edx, [esp+180h+var_110]
 0x5B8275: mov     ecx, [esp+180h+Dst]
 0x5B827C: push    eax
-0x5B827D: mov     eax, [esp+184h+var_F0]
+0x5B827D: mov     eax, [esp+184h+destination]
 0x5B8284: push    0
 0x5B8286: push    0
 0x5B8288: push    ebp
@@ -926,19 +923,19 @@
 0x5B82D4: jmp     short loc_5B82D8
 0x5B82D6: xor     ebp, ebp
 0x5B82D8: mov     edx, ds:0B42D44h
-0x5B82DE: push    edx
-0x5B82DF: mov     ecx, ebp
+0x5B82DE: push    edx; texture
+0x5B82DF: mov     ecx, ebp; this
 0x5B82E1: mov     byte ptr [esp+180h+var_4], 1
-0x5B82E9: call    NiTexturingProperty__SetUnk08
-0x5B82EE: push    0
-0x5B82F0: mov     ecx, ebp
-0x5B82F2: call    sub_405870
+0x5B82E9: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x5B82EE: push    0; value
+0x5B82F0: mov     ecx, ebp; this
+0x5B82F2: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x5B82F7: and     word ptr [ebp+18h], 0FFF1h
 0x5B82FD: push    ebp; a2
 0x5B82FE: mov     ecx, edi; this
-0x5B8300: call    sub_405680
+0x5B8300: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5B8305: mov     ecx, edi; this
-0x5B8307: call    NiAVObject_InitializePropertyState
+0x5B8307: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5B830C: mov     ebx, [esp+17Ch+var_D8]
 0x5B8313: mov     ecx, [esp+17Ch+var_14C]
 0x5B8317: mov     eax, ebx
@@ -978,15 +975,15 @@
 0x5B839F: test    edi, edi
 0x5B83A1: mov     byte ptr [esp+17Ch+var_4], 6
 0x5B83A9: jz      short loc_5B83F6
-0x5B83AB: call    sub_57D7F0
-0x5B83B0: call    Double_To_SInt32
+0x5B83AB: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
+0x5B83B0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B83B5: push    eax
-0x5B83B6: call    sub_57D7A0
-0x5B83BB: call    Double_To_SInt32
+0x5B83B6: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
+0x5B83BB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B83C0: mov     ecx, [esp+180h+var_EC]
 0x5B83C7: mov     edx, [esp+180h+var_10C]
 0x5B83CB: push    eax
-0x5B83CC: mov     eax, [esp+184h+var_144]
+0x5B83CC: mov     eax, [esp+184h+source]
 0x5B83D0: push    0
 0x5B83D2: push    0
 0x5B83D4: push    esi
@@ -1004,7 +1001,7 @@
 0x5B83F2: mov     esi, eax
 0x5B83F4: jmp     short loc_5B83F8
 0x5B83F6: xor     esi, esi
-0x5B83F8: mov     ebp, [esp+17Ch+var_148]
+0x5B83F8: mov     ebp, [esp+17Ch+texture]
 0x5B83FC: test    ebp, ebp
 0x5B83FE: mov     byte ptr [esp+17Ch+var_4], 1
 0x5B8406: jz      short loc_5B8480
@@ -1020,20 +1017,20 @@
 0x5B8429: mov     edi, eax
 0x5B842B: jmp     short loc_5B842F
 0x5B842D: xor     edi, edi
-0x5B842F: push    ebp
-0x5B8430: mov     ecx, edi
+0x5B842F: push    ebp; texture
+0x5B8430: mov     ecx, edi; this
 0x5B8432: mov     byte ptr [esp+180h+var_4], 1
-0x5B843A: call    NiTexturingProperty__SetUnk08
-0x5B843F: push    0
-0x5B8441: mov     ecx, edi
-0x5B8443: call    sub_405870
+0x5B843A: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x5B843F: push    0; value
+0x5B8441: mov     ecx, edi; this
+0x5B8443: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x5B8448: mov     dx, [edi+18h]
 0x5B844C: and     dx, 0FFF5h
 0x5B8451: or      dx, 4
 0x5B8455: push    edi; a2
 0x5B8456: mov     ecx, esi; this
 0x5B8458: mov     [edi+18h], dx
-0x5B845C: call    sub_405680
+0x5B845C: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5B8461: lea     eax, [ebp+4]
 0x5B8464: push    eax; lpAddend
 0x5B8465: call    dword ptr ds:0A2807Ch
@@ -1045,16 +1042,16 @@
 0x5B8476: mov     ecx, ebp
 0x5B8478: call    eax
 0x5B847A: xor     ebp, ebp
-0x5B847C: mov     [esp+17Ch+var_148], ebp
+0x5B847C: mov     [esp+17Ch+texture], ebp
 0x5B8480: push    7
 0x5B8482: mov     ecx, esi
-0x5B8484: call    NiNode_GetNiPropertyByID
+0x5B8484: call    NiNode_GetNiPropertyByID;
 0x5B8489: test    eax, eax
 0x5B848B: jnz     short loc_5B849A
-0x5B848D: call    sub_4E70B0
+0x5B848D: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x5B8492: push    eax; a2
 0x5B8493: mov     ecx, esi; this
-0x5B8495: call    sub_405680
+0x5B8495: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5B849A: cmp     byte ptr [esp+17Ch+var_164+3], 0
 0x5B849F: jz      short loc_5B84FA
 0x5B84A1: push    1Ch; Size
@@ -1079,9 +1076,9 @@
 0x5B84EA: push    edi; a2
 0x5B84EB: mov     ecx, esi; this
 0x5B84ED: mov     byte ptr [esp+180h+var_4], 1
-0x5B84F5: call    sub_405680
+0x5B84F5: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5B84FA: mov     ecx, esi; this
-0x5B84FC: call    NiAVObject_InitializePropertyState
+0x5B84FC: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5B8501: mov     eax, [esp+17Ch+var_14C]
 0x5B8505: shl     ebx, 9
 0x5B8508: mov     [esp+17Ch+var_160], ebx
@@ -1121,10 +1118,10 @@
 0x5B858A: push    1
 0x5B858C: mov     ecx, ebp
 0x5B858E: call    eax
-0x5B8590: mov     eax, [esp+17Ch+var_124]
+0x5B8590: mov     eax, [esp+17Ch+outTexture]
 0x5B8594: add     eax, 1
 0x5B8597: cmp     eax, [esp+17Ch+var_140]
-0x5B859B: mov     [esp+17Ch+var_124], eax
+0x5B859B: mov     [esp+17Ch+outTexture], eax
 0x5B859F: jl      loc_5B7990
 0x5B85A5: mov     esi, [esp+17Ch+var_E8]
 0x5B85AC: jmp     short loc_5B85B2
@@ -1134,11 +1131,11 @@
 0x5B85BA: cmp     [ecx+34h], edi
 0x5B85BD: jnz     loc_5B86A6
 0x5B85C3: cmp     [esp+17Ch+var_12C], edi
-0x5B85C7: mov     [esp+17Ch+var_144], edi
+0x5B85C7: mov     [esp+17Ch+source], edi
 0x5B85CB: jle     loc_5B868C
 0x5B85D1: mov     [esp+17Ch+var_140], 0
 0x5B85D9: mov     edx, [esp+17Ch+var_140]
-0x5B85DD: mov     eax, [esp+17Ch+var_144]
+0x5B85DD: mov     eax, [esp+17Ch+source]
 0x5B85E1: mov     ecx, ds:0B333A0h
 0x5B85E7: mov     ecx, [ecx+8]
 0x5B85EA: push    edx
@@ -1154,8 +1151,8 @@
 0x5B8604: mov     edx, [esp+17Ch+var_134]
 0x5B8608: cmp     byte ptr [edi+edx], 0
 0x5B860C: jz      short loc_5B8654
-0x5B860E: mov     ecx, [ebp+0]; this
-0x5B8611: call    TESObjectCELL_GetNiNode?
+0x5B860E: mov     ecx, [ebp+0]; object
+0x5B8611: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x5B8616: test    eax, eax
 0x5B8618: jz      short loc_5B8649
 0x5B861A: movzx   ecx, word ptr [eax+0B6h]
@@ -1186,10 +1183,10 @@
 0x5B866D: cmp     eax, ecx
 0x5B866F: mov     [esp+17Ch+var_140], eax
 0x5B8673: jl      loc_5B85D9
-0x5B8679: mov     eax, [esp+17Ch+var_144]
+0x5B8679: mov     eax, [esp+17Ch+source]
 0x5B867D: add     eax, 1
 0x5B8680: cmp     eax, ecx
-0x5B8682: mov     [esp+17Ch+var_144], eax
+0x5B8682: mov     [esp+17Ch+source], eax
 0x5B8686: jl      loc_5B85D1
 0x5B868C: mov     edx, [esp+17Ch+var_134]
 0x5B8690: push    edx; void *
@@ -1233,30 +1230,30 @@
 0x5B8731: fld1
 0x5B8733: mov     esi, [esp+17Ch+var_F4]
 0x5B873A: push    ecx
-0x5B873B: fstp    [esp+180h+a3]; a3
+0x5B873B: fstp    [esp+180h+a3]; value
 0x5B873E: mov     ecx, [esi+64h]; this
-0x5B8741: push    0FC8h; a2
-0x5B8746: call    Tile_SetFloat
+0x5B8741: push    0FC8h; propertyCode
+0x5B8746: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B874B: fld     dword ptr ds:0A379B4h
 0x5B8751: push    ecx
 0x5B8752: mov     ecx, [esi+64h]; this
-0x5B8755: fstp    [esp+180h+a3]; a3
-0x5B8758: push    0FC8h; a2
-0x5B875D: call    Tile_SetFloat
+0x5B8755: fstp    [esp+180h+a3]; value
+0x5B8758: push    0FC8h; propertyCode
+0x5B875D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8762: fild    [esp+17Ch+var_120]
 0x5B8766: push    ecx
 0x5B8767: mov     ecx, [esi+64h]; this
 0x5B876A: fstp    [esp+180h+var_130]
 0x5B876E: fld     [esp+180h+var_130]
-0x5B8772: fstp    [esp+180h+a3]; a3
-0x5B8775: push    0FAEh; a2
-0x5B877A: call    Tile_SetFloat
+0x5B8772: fstp    [esp+180h+a3]; value
+0x5B8775: push    0FAEh; propertyCode
+0x5B877A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B877F: fld     [esp+17Ch+var_130]
 0x5B8783: push    ecx
 0x5B8784: mov     ecx, [esi+64h]; this
-0x5B8787: fstp    [esp+180h+a3]; a3
-0x5B878A: push    0FAFh; a2
-0x5B878F: call    Tile_SetFloat
+0x5B8787: fstp    [esp+180h+a3]; value
+0x5B878A: push    0FAFh; propertyCode
+0x5B878F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8794: mov     eax, ebx
 0x5B8796: mov     ecx, [esp+17Ch+var_C]
 0x5B879D: mov     large fs:0, ecx
@@ -1268,3 +1265,43 @@
 0x5B87A9: mov     esp, ebp
 0x5B87AB: pop     ebp
 0x5B87AC: retn
+0x9C0BD0: lea     ecx, [ebp-124h]; slot
+0x9C0BD6: jmp     NiPointerSlot_Release
+0x9C0BDB: lea     ecx, [ebp-148h]; slot
+0x9C0BE1: jmp     NiPointerSlot_Release
+0x9C0BE6: lea     ecx, [ebp-98h]; slot
+0x9C0BEC: jmp     NiPointerSlot_Release
+0x9C0BF1: lea     ecx, [ebp-5Ch]; slot
+0x9C0BF4: jmp     NiPointerSlot_Release
+0x9C0BF9: mov     eax, [ebp-160h]
+0x9C0BFF: push    eax
+0x9C0C00: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0C05: pop     ecx
+0x9C0C06: retn
+0x9C0C07: mov     eax, [ebp-160h]
+0x9C0C0D: push    eax
+0x9C0C0E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0C13: pop     ecx
+0x9C0C14: retn
+0x9C0C15: mov     eax, [ebp-160h]
+0x9C0C1B: push    eax
+0x9C0C1C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0C21: pop     ecx
+0x9C0C22: retn
+0x9C0C23: mov     eax, [ebp-160h]
+0x9C0C29: push    eax
+0x9C0C2A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0C2F: pop     ecx
+0x9C0C30: retn
+0x9C0C31: mov     eax, [ebp-160h]
+0x9C0C37: push    eax
+0x9C0C38: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0C3D: pop     ecx
+0x9C0C3E: retn
+0x9C0C3F: mov     edx, [esp-4+arg_4]
+0x9C0C43: lea     eax, [edx-16Ch]
+0x9C0C49: mov     ecx, [edx-170h]
+0x9C0C4F: xor     ecx, eax
+0x9C0C51: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0C56: mov     eax, offset stru_AE9D6C
+0x9C0C5B: jmp     ___CxxFrameHandler3

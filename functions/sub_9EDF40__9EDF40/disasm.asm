@@ -2,7 +2,7 @@
 0x9EDF46: push    ecx
 0x9EDF47: fstp    [esp+4+var_4]; float
 0x9EDF4A: push    offset aFmaxarmorratin; "fMaxArmorRating"
-0x9EDF4F: mov     ecx, offset fMaxArmorRating
+0x9EDF4F: mov     ecx, 0B37D20h
 0x9EDF54: call    GameSetting_ConstrAndReg_float
 0x9EDF59: push    offset sub_A20160; void (__cdecl *)()
 0x9EDF5E: call    _atexit

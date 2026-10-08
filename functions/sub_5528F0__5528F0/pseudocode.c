@@ -1,51 +1,52 @@
-void __cdecl sub_5528F0(int *a1, int a2)
+// Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
+void __cdecl FaceGenHeadParameters_Copy(const FaceGenHeadParameters *source, FaceGenHeadParameters *destination)
 {
-  int *v2; // edi
-  char *v3; // ebx
-  _DWORD *v4; // esi
+  FaceGenHeadParameters *v2; // edi
+  int v3; // ebx
+  unsigned int *p_columns; // esi
   int v5; // ebp
-  int v6; // eax
-  int v7; // ecx
-  char *v8; // [esp+14h] [ebp-4h]
-  int v9; // [esp+1Ch] [ebp+4h]
+  unsigned int rows; // eax
+  unsigned int v7; // ecx
+  int v8; // [esp+14h] [ebp-4h]
+  int sourcea; // [esp+1Ch] [ebp+4h]
 
-  v2 = a1;
-  if ( a1 )
+  v2 = (FaceGenHeadParameters *)source; /*0x5528f2*/
+  if ( source ) /*0x5528f8*/
   {
-    if ( a2 )
+    if ( destination ) /*0x552904*/
     {
-      v3 = (char *)a1 - a2;
-      v8 = (char *)a1 - a2;
-      v4 = (_DWORD *)(a2 + 4);
-      v9 = 2;
-      do
+      v3 = (char *)source - (char *)destination; /*0x55290e*/
+      v8 = (char *)source - (char *)destination; /*0x552911*/
+      p_columns = &destination->matrices[0].columns; /*0x552915*/
+      sourcea = 2; /*0x552918*/
+      do /*0x552984*/
       {
-        v5 = 2;
-        do
+        v5 = 2; /*0x552920*/
+        do /*0x55297d*/
         {
-          v6 = *v2;
-          if ( *v2 && (v7 = *(_DWORD *)((char *)v4 + (_DWORD)v3)) != 0 )
+          rows = v2->matrices[0].rows; /*0x552925*/
+          if ( v2->matrices[0].rows && (v7 = *(unsigned int *)((char *)p_columns + v3)) != 0 ) /*0x552932*/
           {
-            v4[0xFFFFFFFF] = v6;
-            *v4 = v7;
-            sub_527160(v4 + 1, v7 * v6, COERCE_INT(0.0));
-            sub_5520E0(v4 + 0xFFFFFFFF, (int)(v4 + 0xFFFFFFFF), v2);
-            v3 = v8;
+            p_columns[0xFFFFFFFF] = rows; /*0x552937*/
+            *p_columns = v7; /*0x55293d*/
+            FaceGenFloatVector_ResizeFill(p_columns + 1, (int)v2, v7 * rows, COERCE_INT(0.0)); /*0x552946*/
+            FaceGenMatrix_Assign(p_columns + 0xFFFFFFFF, (int)(p_columns + 0xFFFFFFFF), v2); /*0x55294e*/
+            v3 = v8; /*0x552953*/
           }
           else
           {
-            v4[0xFFFFFFFF] = 0;
-            *v4 = 0;
-            sub_527160(v4 + 1, 0, COERCE_INT(0.0));
+            p_columns[0xFFFFFFFF] = 0; /*0x552962*/
+            *p_columns = 0; /*0x552969*/
+            FaceGenFloatVector_ResizeFill(p_columns + 1, (int)v2, 0, COERCE_INT(0.0)); /*0x55296f*/
           }
-          v2 += 6;
-          v4 += 6;
-          --v5;
+          v2 = (FaceGenHeadParameters *)((char *)v2 + 0x18); /*0x552974*/
+          p_columns += 6; /*0x552977*/
+          --v5; /*0x55297a*/
         }
-        while ( v5 );
-        --v9;
+        while ( v5 ); /*0x55297d*/
+        --sourcea; /*0x55297f*/
       }
-      while ( v9 );
+      while ( sourcea ); /*0x552984*/
     }
   }
 }

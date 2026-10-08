@@ -1,6 +1,6 @@
-0x79A8F0: mov     ecx, [esp+arg_4]
+0x79A8F0: mov     ecx, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Copies CBranchChildRef records backward from [first,last) into the range ending at destinationLast. Each record is exactly 0x0C bytes (three dwords: parent vertex index, interpolation fraction, child pointer); returns the first destination record. RT4.1 StructsSupport.h:131-147 corroborates the already-observed SIdvBranch layout.
 0x79A8F4: push    esi
-0x79A8F5: mov     esi, [esp+4+arg_0]
+0x79A8F5: mov     esi, [esp+4+first]
 0x79A8F9: mov     edx, ecx
 0x79A8FB: sub     edx, esi
 0x79A8FD: mov     eax, 2AAAAAABh
@@ -9,7 +9,7 @@
 0x79A906: mov     eax, edx
 0x79A908: shr     eax, 1Fh
 0x79A90B: add     eax, edx
-0x79A90D: mov     edx, [esp+4+arg_8]
+0x79A90D: mov     edx, [esp+4+destinationLast]
 0x79A911: lea     eax, [eax+eax*2]
 0x79A914: add     eax, eax
 0x79A916: add     eax, eax

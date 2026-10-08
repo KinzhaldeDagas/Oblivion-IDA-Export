@@ -1,1 +1,1 @@
-BSFaceGenMorphDataHead
+struct BSFaceGenMorphDataHead;

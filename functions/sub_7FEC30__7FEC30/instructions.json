@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FEC30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Creates the 54-entry Oblivion Lighting30Shader pooled-pass table, preserving refcounts, then presets the SM3 stages.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7FEC65",
-    "line": "call    sub_7606A0",
+    "line": "call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x7FEC6F",
-    "line": "mov     ecx, ds:dword_B473D0[edi]",
+    "line": "mov     ecx, dword ptr ds:unk_B473D0[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7FEC8A",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7FEC93",
-    "line": "mov     ds:dword_B473D0[edi], eax",
+    "line": "mov     dword ptr ds:unk_B473D0[edi], eax",
     "mnemonic": "mov",
     "size": 6
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7FECB8",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7FECCC",
-    "line": "call    sub_85E660",
+    "line": "call    Lighting30Shader_InitializePassPool; Oblivion Lighting30 pass-pool initializer. SimpleShadow pool rows 36..39/selectors 0x14E..0x151 use SM3013..SM3016 with SM3023, seven stages, Z test LESS_EQUAL with no Z write, alpha blend DESTCOLOR/ZERO, stencil disabled, and six clip planes enabled. Mode-5 pool rows 42/43/selectors 0x154/0x155 use SM3018/SM3019 with SM3026, one BaseMap stage, alpha blending and stencil disabled, and Z test/write LESS_EQUAL. Alpha-test state is supplied by Lighting30 geometry-state preparation, not these pass groups.",
     "mnemonic": "call",
     "size": 5
   },
@@ -358,5 +358,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D5850",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5853",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5858",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D585C",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D585F",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5862",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D5864",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5869",
+    "line": "mov     eax, offset stru_AFD868",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D586E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

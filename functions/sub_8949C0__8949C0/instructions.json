@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x894A17",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x894AA3",
-    "line": "call    sub_891440",
+    "line": "call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x894AAB",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x894B5D",
-    "line": "call    sub_891560",
+    "line": "call    bhkCharacterController_WriteRelativePosition; TES4 authoritative: writes proxy position. Adds metadata/world transform basis offset, then writes to collision object through 0x8AC080.",
     "mnemonic": "call",
     "size": 5
   },
@@ -790,5 +790,107 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x890230",
+    "line": "mov     dword ptr [ecx], offset ??_7hkCdPointCollector@@6B@; const hkCdPointCollector::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x890236",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6520",
+    "line": "lea     ecx, [ebp+var_200]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6526",
+    "line": "jmp     loc_890230",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D652B",
+    "line": "lea     ecx, [ebp+var_1C0]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6531",
+    "line": "jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6536",
+    "line": "mov     edx, dword ptr [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D653A",
+    "line": "lea     eax, [edx-244h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6540",
+    "line": "mov     ecx, [edx-248h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D6546",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6548",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D654D",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6550",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6553",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6555",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D655A",
+    "line": "mov     eax, offset stru_AFE3B0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D655F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

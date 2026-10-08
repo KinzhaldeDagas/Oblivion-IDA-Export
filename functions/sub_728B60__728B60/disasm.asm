@@ -36,19 +36,19 @@
 0x728BB8: call    sub_726320
 0x728BBD: mov     ecx, [esp+24h+var_18]
 0x728BC1: cmp     ecx, ebx
-0x728BC3: jnz     short loc_728BE2
+0x728BC3: jnz     short loc_728BE2; When additional geometry supplies a locked stream, return its buffer pointer and stride. This writable morph stream is not guaranteed to alias NiGeometryData::m_pkVertex.
 0x728BC5: mov     ecx, [edi+1Ch]
-0x728BC8: mov     eax, [esp+24h+arg_0]
+0x728BC8: mov     eax, [esp+24h+outVertices]
 0x728BCC: pop     esi
 0x728BCD: mov     edx, 0Ch
 0x728BD2: pop     edi
 0x728BD3: mov     [eax+8], bl
-0x728BD6: mov     [eax], ecx
+0x728BD6: mov     [eax], ecx; Fallback only: without an additional-geometry stream, expose m_pkVertex with the native 12-byte NiPoint3 stride.
 0x728BD8: mov     [eax+4], edx
 0x728BDB: pop     ebx
 0x728BDC: add     esp, 18h
 0x728BDF: retn    4
-0x728BE2: mov     eax, [esp+24h+arg_0]
+0x728BE2: mov     eax, [esp+24h+outVertices]
 0x728BE6: mov     edx, [esp+24h+var_14]
 0x728BEA: mov     [eax], ecx
 0x728BEC: mov     [eax+4], edx

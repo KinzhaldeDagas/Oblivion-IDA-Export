@@ -1,7 +1,8 @@
-int __thiscall sub_680760(_WORD *this)
+// Verified: returns the spatial TESForm stored at state +8 for this link's searchNodeIndex. The route expansion uses it to select the opposite endpoint.
+TESForm *__thiscall TravelPath_SearchState_GetArrivalSpace(TravelPathSpaceDoorLink *node)
 {
-  if ( *this >= (unsigned __int16)word_B3BF04 )
-    return *(_DWORD *)8;
+  if ( node->searchNodeIndex >= LOWORD(qword_B3BB2C[0xF6]) ) /*0x68076c*/
+    return *(TESForm **)8; /*0x68077e*/
   else
-    return *((_DWORD *)dword_B3BF00 + 4 * (unsigned __int16)*this + 2);
+    return *(TESForm **)(LODWORD(qword_B3BB2C[0xF5]) + 0x10 * node->searchNodeIndex + 8); /*0x68077a*/
 }

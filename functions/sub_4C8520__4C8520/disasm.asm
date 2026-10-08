@@ -52,11 +52,11 @@
 0x4C85BC: mov     edx, [ecx+ebp]
 0x4C85BF: mov     eax, [eax+24h]
 0x4C85C2: mov     ecx, [eax+0Ch]
-0x4C85C5: push    1210h; Size
-0x4C85CA: push    edx; Src
+0x4C85C5: push    1210h; byteCount
+0x4C85CA: push    edx; source
 0x4C85CB: mov     edx, [ecx+ebp]
-0x4C85CE: push    edx; Dst
-0x4C85CF: call    _memcpy
+0x4C85CE: push    edx; destination
+0x4C85CF: call    _memcpy;
 0x4C85D4: mov     eax, [ebx+24h]
 0x4C85D7: mov     edx, [eax+10h]
 0x4C85DA: mov     eax, [esp+20h+var_4]
@@ -72,11 +72,11 @@
 0x4C85F9: mov     edx, [ecx]
 0x4C85FB: mov     eax, [eax+24h]
 0x4C85FE: mov     ecx, [eax+ebp+40h]
-0x4C8602: push    2420h; Size
-0x4C8607: push    edx; Src
+0x4C8602: push    2420h; byteCount
+0x4C8607: push    edx; source
 0x4C8608: mov     edx, [ecx]
-0x4C860A: push    edx; Dst
-0x4C860B: call    _memcpy
+0x4C860A: push    edx; destination
+0x4C860B: call    _memcpy;
 0x4C8610: mov     eax, [esp+2Ch+var_4]
 0x4C8614: mov     edx, [ebx+24h]
 0x4C8617: mov     edi, [eax+24h]

@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x694BD0",
+      "0x694C3B"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "1cd9a868c376b9187743752f5b90a38013c7ee4e96e2443fdef8682632327213",
+  "comment_regular": "Verified LockEffect factory: allocates an ActiveEffect-sized 0x38-byte object, calls ActiveEffect_Ctor with caster/magic/effect item, installs LockEffect_vftable, and returns it as the concrete LockEffect subclass.",
+  "comment_repeatable": "Verified LockEffect factory: allocates an ActiveEffect-sized 0x38-byte object, calls ActiveEffect_Ctor with caster/magic/effect item, installs LockEffect_vftable, and returns it as the concrete LockEffect subclass.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "LockEffect_Make",
   "end_ea": "0x694C3B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "LockEffect_Make",
   "segment": ".text",
   "sha256": "ad6eea2fe411bc366ca34b0c157d271d404f1c5684b6ea716c3a1479faefb220",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x694BD0",
-  "type": "ActiveEffect *__cdecl(MagicCaster *, MagicItem *, EffectItem *)",
-  "xrefs_from_count": 40,
+  "total_chunk_size": 145,
+  "type": "LockEffect *__cdecl(MagicCaster *caster, MagicItem *magicItem, EffectItem *effectItem)",
+  "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

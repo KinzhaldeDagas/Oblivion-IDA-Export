@@ -1,4 +1,4 @@
-0x4A0920: push    0FFFFFFFFh
+0x4A0920: push    0FFFFFFFFh; Retail BSFadeNode OnVisible entry. Uses the current culling camera and category/visibility state to decide whether and how to traverse children.
 0x4A0922: push    offset SEH_6E16A0
 0x4A0927: mov     eax, large fs:0
 0x4A092D: push    eax
@@ -14,11 +14,11 @@
 0x4A0946: mov     esi, ecx
 0x4A0948: cmp     byte ptr ds:0B0727Ch, 0
 0x4A094F: mov     ebp, [esp+30h+a2]
-0x4A0953: mov     eax, [ebp+0Ch]
+0x4A0953: mov     eax, [ebp+0Ch]; BSFadeNode visibility calculations read the current NiCullingProcess camera.
 0x4A0956: mov     byte ptr [esp+30h+a2], 0
 0x4A095B: jz      loc_4A0CEA
 0x4A0961: fld     dword ptr [eax+120h]
-0x4A0967: movzx   edi, byte ptr [esi+0ECh]
+0x4A0967: movzx   edi, byte ptr [esi+0ECh]; Read BSFadeNode category byte +0xEC for native OnVisible dispatch.
 0x4A096E: fstp    [esp+30h+var_20]
 0x4A0972: fld     dword ptr [esi+88h]
 0x4A0978: fsub    dword ptr [eax+88h]
@@ -30,11 +30,11 @@
 0x4A0998: fsub    dword ptr [eax+90h]
 0x4A099E: lea     eax, [edi-2]; switch 6 cases
 0x4A09A1: cmp     eax, 5
-0x4A09A4: fstp    [esp+30h+var_10]
+0x4A09A4: fstp    [esp+30h+slot]
 0x4A09A8: ja      short CullingBSFadeNode___def_4A09AA; jumptable 004A09AA default case, cases 4,5
 0x4A09AA: jmp     ds:jpt_4A09AA[eax*4]; switch jump
-0x4A09B1: push    ebp; jumptable 004A09AA case 7
-0x4A09B2: call    NiNode__OnVisible
+0x4A09B1: push    ebp; Retail category 7 branch enters ordinary NiNode OnVisible child traversal.
+0x4A09B2: call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x4A09B7: mov     ecx, [esp+30h+var_C]
 0x4A09BB: mov     large fs:0, ecx
 0x4A09C2: pop     ecx
@@ -70,7 +70,7 @@
 0x4A0A2D: fstp    [esp+30h+var_20]
 0x4A0A31: fld     [esp+30h+var_18]
 0x4A0A35: fld     [esp+30h+var_14]
-0x4A0A39: fld     [esp+30h+var_10]
+0x4A0A39: fld     [esp+30h+slot]
 0x4A0A3D: fld     st(1)
 0x4A0A3F: fmulp   st(2), st
 0x4A0A41: fld     st(2)
@@ -79,15 +79,15 @@
 0x4A0A47: faddp   st(2), st
 0x4A0A49: fmul    st, st
 0x4A0A4B: faddp   st(1), st
-0x4A0A4D: fstp    [esp+30h+var_10]
-0x4A0A51: fld     [esp+30h+var_10]
+0x4A0A4D: fstp    [esp+30h+slot]
+0x4A0A51: fld     [esp+30h+slot]
 0x4A0A55: call    __CIsqrt
-0x4A0A5A: fstp    [esp+30h+var_10]
-0x4A0A5E: fld     [esp+30h+var_10]
-0x4A0A62: fstp    [esp+30h+var_10]
+0x4A0A5A: fstp    [esp+30h+slot]
+0x4A0A5E: fld     [esp+30h+slot]
+0x4A0A62: fstp    [esp+30h+slot]
 0x4A0A66: fld     dword ptr [esi+2Ch]
 0x4A0A69: fstp    [esp+30h+var_14]
-0x4A0A6D: fld     [esp+30h+var_10]
+0x4A0A6D: fld     [esp+30h+slot]
 0x4A0A71: fsub    [esp+30h+var_14]
 0x4A0A75: fstp    [esp+30h+var_1C]
 0x4A0A79: fldz
@@ -103,15 +103,15 @@
 0x4A0A96: fmul    st, st
 0x4A0A98: fmul    st, st(1)
 0x4A0A9A: fmulp   st(1), st
-0x4A0A9C: fstp    [esp+30h+var_10]
+0x4A0A9C: fstp    [esp+30h+slot]
 0x4A0AA0: fld1
 0x4A0AA2: fst     [esp+30h+var_20]
-0x4A0AA6: fld     [esp+30h+var_10]
+0x4A0AA6: fld     [esp+30h+slot]
 0x4A0AAA: fld     dword ptr [esi+0E4h]
 0x4A0AB0: fcomp   st(1)
 0x4A0AB2: fnstsw  ax
 0x4A0AB4: test    ah, 5
-0x4A0AB7: jp      short loc_4A0AD8
+0x4A0AB7: jp      short loc_4A0AD8; When camera-scaled surface distance exceeds BSFadeNode far threshold +0xE4, alpha becomes zero and OnVisible can return before child traversal.
 0x4A0AB9: fstp    st
 0x4A0ABB: fstp    st
 0x4A0ABD: fstp    dword ptr [esi+0E8h]
@@ -130,10 +130,10 @@
 0x4A0AE5: jp      short loc_4A0B11
 0x4A0AE7: fld     dword ptr [esi+0E4h]
 0x4A0AED: fsub    dword ptr [esi+0E0h]
-0x4A0AF3: fstp    [esp+30h+var_10]
+0x4A0AF3: fstp    [esp+30h+slot]
 0x4A0AF7: fld     dword ptr [esi+0E0h]
 0x4A0AFD: fsubp   st(1), st
-0x4A0AFF: fdivr   [esp+30h+var_10]
+0x4A0AFF: fdivr   [esp+30h+slot]
 0x4A0B03: fld1
 0x4A0B05: fld     st
 0x4A0B07: fdivrp  st(2), st
@@ -167,12 +167,12 @@
 0x4A0B5C: fstp    st
 0x4A0B5E: push    offset off_A3FA90
 0x4A0B63: mov     ecx, esi
-0x4A0B65: call    NiObjectNET_GetExtraData
+0x4A0B65: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4A0B6A: test    eax, eax
 0x4A0B6C: jz      short loc_4A0BB8
 0x4A0B6E: fld     dword ptr [eax+0Ch]
-0x4A0B71: fstp    [esp+30h+var_10]
-0x4A0B75: fld     [esp+30h+var_10]
+0x4A0B71: fstp    [esp+30h+slot]
+0x4A0B75: fld     [esp+30h+slot]
 0x4A0B79: fmul    [esp+30h+var_20]
 0x4A0B7D: fstp    [esp+30h+var_20]
 0x4A0B81: fld1
@@ -183,7 +183,7 @@
 0x4A0B8E: mov     eax, ds:0B3F928h
 0x4A0B93: mov     edi, [eax+8]
 0x4A0B96: push    edi
-0x4A0B97: push    offset dword_B42CEC
+0x4A0B97: push    offset stru_B42CEC
 0x4A0B9C: call    NiRTTI__IsObjectOfRTTIType
 0x4A0BA1: add     esp, 8
 0x4A0BA4: test    al, al
@@ -205,25 +205,25 @@
 0x4A0BD6: push    0
 0x4A0BD8: fstp    st
 0x4A0BDA: mov     ecx, esi
-0x4A0BDC: call    NiNode_GetNiPropertyByID
+0x4A0BDC: call    NiNode_GetNiPropertyByID;
 0x4A0BE1: test    eax, eax
 0x4A0BE3: jz      loc_4A0CE0
 0x4A0BE9: push    0
-0x4A0BEB: lea     edx, [esp+34h+var_10]
+0x4A0BEB: lea     edx, [esp+34h+slot]
 0x4A0BEF: push    edx
 0x4A0BF0: mov     ecx, esi
 0x4A0BF2: call    sub_708560
-0x4A0BF7: lea     ecx, [esp+30h+var_10]; this
-0x4A0BFB: call    sub_7016A0
+0x4A0BF7: lea     ecx, [esp+30h+slot]; slot
+0x4A0BFB: call    NiPointerSlot_Release
 0x4A0C00: push    2
-0x4A0C02: lea     eax, [esp+34h+var_10]
+0x4A0C02: lea     eax, [esp+34h+slot]
 0x4A0C06: push    eax
 0x4A0C07: mov     ecx, esi
 0x4A0C09: call    sub_708560
-0x4A0C0E: lea     ecx, [esp+30h+var_10]; this
-0x4A0C12: call    sub_7016A0
+0x4A0C0E: lea     ecx, [esp+30h+slot]; slot
+0x4A0C12: call    NiPointerSlot_Release
 0x4A0C17: mov     ecx, esi; this
-0x4A0C19: call    NiAVObject_InitializePropertyState
+0x4A0C19: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4A0C1E: fld1
 0x4A0C20: push    ecx
 0x4A0C21: fstp    [esp+34h+var_34]; float
@@ -243,7 +243,7 @@
 0x4A0C4B: add     esp, 8
 0x4A0C4E: push    0
 0x4A0C50: mov     ecx, esi
-0x4A0C52: call    NiNode_GetNiPropertyByID
+0x4A0C52: call    NiNode_GetNiPropertyByID;
 0x4A0C57: test    eax, eax
 0x4A0C59: jnz     short loc_4A0CC8
 0x4A0C5B: push    eax
@@ -251,16 +251,16 @@
 0x4A0C60: push    ecx
 0x4A0C61: mov     ecx, esi
 0x4A0C63: call    sub_708560
-0x4A0C68: lea     ecx, [esp+30h+var_14]; this
-0x4A0C6C: call    sub_7016A0
+0x4A0C68: lea     ecx, [esp+30h+var_14]; slot
+0x4A0C6C: call    NiPointerSlot_Release
 0x4A0C71: mov     edx, ds:0B35290h
 0x4A0C77: push    edx; a2
 0x4A0C78: mov     ecx, esi; this
-0x4A0C7A: call    sub_405680
+0x4A0C7A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4A0C7F: push    5Ch ; '\'; Size
 0x4A0C81: call    FormHeapAlloc
 0x4A0C86: add     esp, 4
-0x4A0C89: mov     [esp+30h+var_10], eax
+0x4A0C89: mov     [esp+30h+slot], eax
 0x4A0C8D: test    eax, eax
 0x4A0C8F: mov     [esp+30h+var_4], 0
 0x4A0C97: jz      short loc_4A0CA2
@@ -274,13 +274,13 @@
 0x4A0CAD: fstp    dword ptr [eax+50h]
 0x4A0CB0: mov     ecx, esi; this
 0x4A0CB2: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x4A0CBA: call    sub_405680
+0x4A0CBA: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4A0CBF: mov     ecx, esi; this
-0x4A0CC1: call    NiAVObject_InitializePropertyState
+0x4A0CC1: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4A0CC6: jmp     short loc_4A0CE0
 0x4A0CC8: push    2
 0x4A0CCA: mov     ecx, esi
-0x4A0CCC: call    NiNode_GetNiPropertyByID
+0x4A0CCC: call    NiNode_GetNiPropertyByID;
 0x4A0CD1: fld     [esp+30h+var_20]
 0x4A0CD5: add     dword ptr [eax+54h], 1
 0x4A0CD9: fstp    dword ptr [eax+50h]
@@ -290,7 +290,7 @@
 0x4A0CE4: fstp    dword ptr [esi+0E8h]
 0x4A0CEA: push    ebp; a2
 0x4A0CEB: mov     ecx, esi; this
-0x4A0CED: call    NiNode__OnVisible
+0x4A0CED: call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x4A0CF2: cmp     byte ptr [esp+30h+a2], 0
 0x4A0CF7: jz      short loc_4A0D06
 0x4A0CF9: mov     eax, ds:0B3F928h
@@ -304,3 +304,15 @@
 0x4A0D14: pop     ebp
 0x4A0D15: add     esp, 20h
 0x4A0D18: retn    4
+0x9C33E0: mov     eax, [ebp-10h]
+0x9C33E3: push    eax
+0x9C33E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C33E9: pop     ecx
+0x9C33EA: retn
+0x9C33EB: mov     edx, [esp+arg_4]
+0x9C33EF: lea     eax, [edx-20h]
+0x9C33F2: mov     ecx, [edx-24h]
+0x9C33F5: xor     ecx, eax
+0x9C33F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C33FC: mov     eax, offset stru_AEC000
+0x9C3401: jmp     ___CxxFrameHandler3

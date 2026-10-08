@@ -62,3 +62,15 @@
 0x55CE4C: pop     ebx
 0x55CE4D: add     esp, 10h
 0x55CE50: retn
+0x9BCAD0: mov     ecx, [ebp-10h]; this
+0x9BCAD3: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9BCAD8: mov     ecx, [ebp-10h]
+0x9BCADB: add     ecx, 0DCh ; 'Ü'; slot
+0x9BCAE1: jmp     NiPointerSlot_Release
+0x9BCAE6: mov     edx, [esp+arg_4]
+0x9BCAEA: lea     eax, [edx-14h]
+0x9BCAED: mov     ecx, [edx-18h]
+0x9BCAF0: xor     ecx, eax
+0x9BCAF2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BCAF7: mov     eax, offset stru_AE6670
+0x9BCAFC: jmp     ___CxxFrameHandler3

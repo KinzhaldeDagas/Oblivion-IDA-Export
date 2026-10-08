@@ -1,5 +1,5 @@
 // attributes: thunk
-int __stdcall sub_6D4460(int a1)
+bool __thiscall j_j_NiSingleInterpController_IsEqual(_DWORD *this, int a2)
 {
-  return sub_6EC5C0(a1);
+  return j_NiSingleInterpController_IsEqual(this, a2);
 }

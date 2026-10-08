@@ -1,456 +1,497 @@
-void __thiscall sub_79FD10(void **this, int a2)
+//
+//
+// [2026-10-03 material ownership] Verified guide+2C receives generated profile vector length and +28 receives indexed vertex counter. Emits spinePoints*profileWidth vertices; passes guide map byte+18 to diffuse writer. Fallout 0x82830F40 matches. Typed this/guide prototype and engine geometry/lighting pointers improve field propagation without importing later-source layouts.
+void __thiscall OB_CFrondEngine_BuildExtrusionVertices_010201A0(
+        OB_CFrondEngine_010201A0 *this,
+        OB_SFrondGuide_010201A0 *guide)
 {
-  int v3; // eax
-  double v4; // st7
+  OB_CIndexedGeometry_010201A0 *v2; // edi
+  OB_stVectorFloat_010201A0 *p_capacity; // esi
+  unsigned int v4; // eax
   double v5; // st7
-  bool v6; // zf
-  double v7; // st7
+  double v6; // st7
+  bool v7; // zf
   double v8; // st7
-  double v9; // st6
-  int v10; // eax
-  int v11; // eax
-  unsigned int v12; // esi
-  float *v13; // esi
-  double v14; // st7
-  int v15; // edi
-  unsigned int v16; // ecx
+  double v9; // st7
+  double verticesPerGuideVertex; // st6
+  void *begin; // eax
+  char *v12; // eax
+  unsigned int v13; // esi
+  OB_stRotTransform_010201A0 *v14; // esi
+  double offsetAngle; // st7
+  int end; // edi
   int v17; // esi
-  float *v18; // eax
-  float *v19; // edx
-  double v20; // st6
-  int v21; // eax
-  double v22; // rt0
-  float *v23; // eax
-  unsigned int *v24; // ecx
-  float v25; // edx
-  char **v26; // ecx
-  unsigned int v27; // ecx
-  float *v28; // eax
-  double v29; // st6
-  unsigned int *v30; // ecx
-  int v31; // eax
-  int v32; // eax
-  bool v33; // cf
-  int v34; // ecx
-  int v35; // edx
-  int v36; // esi
-  float *v37; // edi
-  float *v38; // eax
-  char *v39; // esi
-  unsigned int v40; // esi
-  unsigned int **v41; // edi
+  unsigned int *v18; // ecx
+  OB_stVectorFloat_010201A0 *owner; // esi
+  float *v20; // eax
+  float *v21; // edx
+  double v22; // st6
+  void *v23; // eax
+  double v24; // rt0
+  float *v25; // eax
+  OB_CIndexedGeometry_010201A0 *indexedGeometry; // ecx
+  __int16 frondMapIndex; // dx
+  OB_CIndexedGeometry_010201A0 *v28; // ecx
+  unsigned int *v29; // ecx
+  float *v30; // eax
+  double v31; // st6
+  OB_CIndexedGeometry_010201A0 *v32; // ecx
+  void *v33; // eax
+  float v34; // eax
+  bool v35; // cf
+  unsigned int v36; // ecx
+  unsigned int sharedVertexStartIndex; // edx
+  unsigned int v38; // esi
+  const float *VertexCoord_010201A0; // edi
+  const float *v40; // eax
+  float *v41; // esi
   unsigned int v42; // esi
-  unsigned __int16 v43; // ax
-  double v44; // st7
-  unsigned int v45; // eax
-  float v46; // eax
+  float *v43; // esi
+  OB_CFrondEngine_010201A0 *v44; // edi
+  unsigned int v45; // esi
+  unsigned __int16 v46; // ax
   double v47; // st7
-  char **v48; // ecx
-  unsigned int *v49; // ebx
-  unsigned int *v50; // esi
-  float v51; // [esp+4h] [ebp-138h]
-  int v52; // [esp+18h] [ebp-124h]
-  float v53; // [esp+18h] [ebp-124h]
-  float v54; // [esp+18h] [ebp-124h]
-  float v55; // [esp+18h] [ebp-124h]
-  float v56; // [esp+18h] [ebp-124h]
+  OB_stVectorFloat_010201A0 *v48; // eax
+  float *v49; // eax
+  OB_CIndexedGeometry_010201A0 *v50; // ecx
+  OB_stVectorFloat_010201A0 *v51; // ebx
+  unsigned int *v52; // esi
+  OB_stVectorFloatIterator_010201A0 _FFFFFFFC; // [esp-4h] [ebp-140h]
+  OB_stVectorFloatIterator_010201A0 _FFFFFFFCa; // [esp-4h] [ebp-140h]
+  float angleDegrees; // [esp+4h] [ebp-138h]
+  __int16 angleDegreesa; // [esp+4h] [ebp-138h]
   float v57; // [esp+18h] [ebp-124h]
   float v58; // [esp+18h] [ebp-124h]
   float v59; // [esp+18h] [ebp-124h]
   float v60; // [esp+18h] [ebp-124h]
   float v61; // [esp+18h] [ebp-124h]
-  int v62; // [esp+18h] [ebp-124h]
-  _DWORD *v63; // [esp+18h] [ebp-124h]
-  float *v64; // [esp+18h] [ebp-124h]
+  float v62; // [esp+18h] [ebp-124h]
+  float v63; // [esp+18h] [ebp-124h]
+  float v64; // [esp+18h] [ebp-124h]
+  float v65; // [esp+18h] [ebp-124h]
+  float v66; // [esp+18h] [ebp-124h]
+  int v67; // [esp+18h] [ebp-124h]
+  float **p_begin; // [esp+18h] [ebp-124h]
+  float *v69; // [esp+18h] [ebp-124h]
   unsigned int i; // [esp+1Ch] [ebp-120h]
-  unsigned int v66; // [esp+1Ch] [ebp-120h]
-  float v67; // [esp+20h] [ebp-11Ch]
-  float v68; // [esp+20h] [ebp-11Ch]
-  float v69; // [esp+20h] [ebp-11Ch]
-  float v70; // [esp+20h] [ebp-11Ch]
-  float v71; // [esp+20h] [ebp-11Ch]
-  float v72; // [esp+20h] [ebp-11Ch]
+  int v71; // [esp+1Ch] [ebp-120h]
+  unsigned int v72; // [esp+1Ch] [ebp-120h]
   float v73; // [esp+20h] [ebp-11Ch]
   float v74; // [esp+20h] [ebp-11Ch]
-  int v75; // [esp+24h] [ebp-118h] BYREF
-  int v76; // [esp+28h] [ebp-114h]
-  float v77; // [esp+2Ch] [ebp-110h]
-  int v78; // [esp+30h] [ebp-10Ch] BYREF
-  float v79; // [esp+38h] [ebp-104h]
-  int v80; // [esp+3Ch] [ebp-100h] BYREF
-  int v81; // [esp+40h] [ebp-FCh]
-  int v82; // [esp+44h] [ebp-F8h]
-  int v83; // [esp+48h] [ebp-F4h]
-  float v84; // [esp+50h] [ebp-ECh]
-  unsigned int **v85; // [esp+54h] [ebp-E8h]
-  int v86; // [esp+58h] [ebp-E4h] BYREF
-  float v87; // [esp+5Ch] [ebp-E0h]
-  void *Src; // [esp+60h] [ebp-DCh]
-  int v89; // [esp+64h] [ebp-D8h]
-  float v90; // [esp+6Ch] [ebp-D0h]
-  void *v91; // [esp+70h] [ebp-CCh]
-  int v92; // [esp+74h] [ebp-C8h]
-  int v93; // [esp+78h] [ebp-C4h] BYREF
-  int v94; // [esp+7Ch] [ebp-C0h]
-  unsigned int v95; // [esp+80h] [ebp-BCh] BYREF
-  unsigned int *v96; // [esp+84h] [ebp-B8h]
-  unsigned int *v97; // [esp+88h] [ebp-B4h]
-  int v98; // [esp+8Ch] [ebp-B0h]
-  unsigned int v99; // [esp+90h] [ebp-ACh] BYREF
-  unsigned int v100; // [esp+94h] [ebp-A8h]
-  int v101; // [esp+98h] [ebp-A4h]
-  int v102; // [esp+9Ch] [ebp-A0h]
-  unsigned int v103; // [esp+A0h] [ebp-9Ch] BYREF
-  unsigned int v104; // [esp+A4h] [ebp-98h]
-  int v105; // [esp+A8h] [ebp-94h]
-  int v106; // [esp+ACh] [ebp-90h]
-  float v107; // [esp+B0h] [ebp-8Ch] BYREF
-  float v108; // [esp+B4h] [ebp-88h]
-  float v109; // [esp+B8h] [ebp-84h]
-  float v110[9]; // [esp+BCh] [ebp-80h] BYREF
-  float v111; // [esp+E0h] [ebp-5Ch] BYREF
-  float v112; // [esp+E4h] [ebp-58h]
-  float v113; // [esp+E8h] [ebp-54h]
-  float v114[9]; // [esp+ECh] [ebp-50h] BYREF
-  int v115[3]; // [esp+110h] [ebp-2Ch] BYREF
-  float v116[5]; // [esp+11Ch] [ebp-20h] BYREF
-  int v117; // [esp+138h] [ebp-4h]
+  float v75; // [esp+20h] [ebp-11Ch]
+  float v76; // [esp+20h] [ebp-11Ch]
+  float v77; // [esp+20h] [ebp-11Ch]
+  float v78; // [esp+20h] [ebp-11Ch]
+  float v79; // [esp+20h] [ebp-11Ch]
+  float v80; // [esp+20h] [ebp-11Ch]
+  float v81; // [esp+24h] [ebp-118h] BYREF
+  float v82; // [esp+28h] [ebp-114h]
+  float v83; // [esp+2Ch] [ebp-110h]
+  OB_stVectorFloatIterator_010201A0 result; // [esp+30h] [ebp-10Ch] BYREF
+  float v85; // [esp+38h] [ebp-104h]
+  int value; // [esp+3Ch] [ebp-100h] BYREF
+  int v87; // [esp+40h] [ebp-FCh]
+  float v88; // [esp+44h] [ebp-F8h]
+  OB_stVectorFloatIterator_010201A0 v89; // [esp+48h] [ebp-F4h] BYREF
+  float v90; // [esp+50h] [ebp-ECh]
+  OB_CFrondEngine_010201A0 *v91; // [esp+54h] [ebp-E8h]
+  OB_stVectorFloat_010201A0 binormal; // [esp+58h] [ebp-E4h] BYREF
+  OB_stVectorFloat_010201A0 lengths; // [esp+68h] [ebp-D4h] BYREF
+  OB_stVectorFloatIterator_010201A0 diffuseST; // [esp+78h] [ebp-C4h] BYREF
+  OB_stVector_stVectorFloat_010201A0 runningLengths; // [esp+80h] [ebp-BCh] BYREF
+  OB_stVector4_010201A0 v96; // [esp+90h] [ebp-ACh] BYREF
+  OB_stVector4_010201A0 v97; // [esp+A0h] [ebp-9Ch] BYREF
+  float normal; // [esp+B0h] [ebp-8Ch] BYREF
+  float v99; // [esp+B4h] [ebp-88h]
+  float v100; // [esp+B8h] [ebp-84h]
+  OB_stRotTransform_010201A0 v101; // [esp+BCh] [ebp-80h] BYREF
+  float tangent; // [esp+E0h] [ebp-5Ch] BYREF
+  float v103; // [esp+E4h] [ebp-58h]
+  float v104; // [esp+E8h] [ebp-54h]
+  OB_stRotTransform_010201A0 v105; // [esp+ECh] [ebp-50h] BYREF
+  float coord[3]; // [esp+110h] [ebp-2Ch] BYREF
+  float rgba[5]; // [esp+11Ch] [ebp-20h] BYREF
+  int v108; // [esp+138h] [ebp-4h]
 
-  v85 = (unsigned int **)this;
-  if ( *this )
+  v2 = (OB_CIndexedGeometry_010201A0 *)this; /*0x79fd42*/
+  v91 = this; /*0x79fd44*/
+  p_capacity = 0; /*0x79fd48*/
+  if ( this->indexedGeometry ) /*0x79fd4a*/
   {
-    if ( *(this + 1) )
+    if ( this->lightingEngine ) /*0x79fd52*/
     {
-      v100 = 0;
-      v101 = 0;
-      v102 = 0;
-      v117 = 1;
-      v104 = 0;
-      v105 = 0;
-      v106 = 0;
-      sub_79DA10(this, a2, &v99, &v103);
-      if ( v100 )
-        v3 = (int)(v101 - v100) / 0xC;
+      memset(&v96.begin, 0, 0xC); /*0x79fd5b*/
+      v108 = 1; /*0x79fd70*/
+      memset(&v97.begin, 0, 0xC); /*0x79fd77*/
+      OB_CFrondEngine_BuildProfileVectors_010201A0(this, (unsigned int)guide, &v96.allocatorState, &v97.allocatorState); /*0x79fdaa*/
+      if ( v96.begin ) /*0x79fdb8*/
+        v4 = ((char *)v96.end - (char *)v96.begin) / 0xC; /*0x79fdd5*/
       else
-        v3 = 0;
-      *(_DWORD *)(a2 + 0x2C) = v3;
-      *(_DWORD *)(a2 + 0x28) = *((unsigned __int16 *)*this + 0x11);
-      for ( i = 0; i < sub_799EE0((_DWORD *)a2); ++i )
+        v4 = 0; /*0x79fdba*/
+      guide->verticesPerGuideVertex = v4; /*0x79fdd7*/
+      guide->sharedVertexStartIndex = *(unsigned __int16 *)(*(_DWORD *)&v2->retainTexcoords + 0x22); /*0x79fde5*/
+      for ( i = 0; /*0x79fdec*/
+            i < OB_stVector_SFrondVertex_Size_010201A0(&guide->vertexVector);
+            p_capacity = (OB_stVectorFloat_010201A0 *)i )
       {
-        v4 = (double)(int)i;
-        if ( (int)i < 0 )
-          v4 = v4 + flt_A2FC78;
-        *(float *)&v78 = v4;
-        *(float *)&v80 = COERCE_FLOAT(sub_799EE0((_DWORD *)a2));
-        v5 = (double)v80;
-        if ( v80 < 0 )
-          v5 = v5 + flt_A2FC78;
-        v6 = *(_DWORD *)(a2 + 0x2C) == 0;
-        v7 = v5 - dbl_A2F928;
-        *(float *)&v75 = 0.0;
-        *(float *)&v80 = *(float *)&v78 / v7;
-        if ( !v6 )
+        v5 = (double)(int)i; /*0x79fe04*/
+        if ( (int)i < 0 ) /*0x79fe0a*/
+          v5 = v5 + flt_A2FC78; /*0x79fe0c*/
+        *(float *)&result.owner = v5; /*0x79fe14*/
+        *(float *)&value = COERCE_FLOAT(OB_stVector_SFrondVertex_Size_010201A0(&guide->vertexVector)); /*0x79fe1f*/
+        v6 = (double)value; /*0x79fe23*/
+        if ( value < 0 ) /*0x79fe27*/
+          v6 = v6 + flt_A2FC78; /*0x79fe29*/
+        v7 = guide->verticesPerGuideVertex == 0; /*0x79fe2f*/
+        v8 = v6 - dbl_A2F928; /*0x79fe33*/
+        v81 = 0.0; /*0x79fe39*/
+        *(float *)&value = *(float *)&result.owner / v8; /*0x79fe45*/
+        if ( !v7 ) /*0x79fe49*/
         {
-          v81 = 0x38 * i;
-          *(float *)&v78 = 0.0;
-          do
+          v87 = 0x38 * i; /*0x79fe62*/
+          result.owner = 0; /*0x79fe66*/
+          do /*0x7a05eb*/
           {
-            v8 = (double)v75;
-            if ( v75 < 0 )
-              v8 = v8 + flt_A2FC78;
-            v9 = (double)*(int *)(a2 + 0x2C);
-            if ( *(int *)(a2 + 0x2C) < 0 )
-              v9 = v9 + flt_A2FC78;
-            v10 = *(_DWORD *)(a2 + 4);
-            *(float *)&v52 = v8 / (v9 - dbl_A2F928);
-            if ( !v10 || i >= (*(_DWORD *)(a2 + 8) - v10) / 0x38 )
-              _invalid_parameter_noinfo();
-            v11 = *(_DWORD *)(a2 + 4);
-            qmemcpy(v110, (const void *)(v81 + v11 + 0xC), sizeof(v110));
-            if ( i )
+            v9 = (double)SLODWORD(v81); /*0x79fe72*/
+            if ( v81 < 0.0 ) /*0x79fe78*/
+              v9 = v9 + flt_A2FC78; /*0x79fe7a*/
+            verticesPerGuideVertex = (double)(int)guide->verticesPerGuideVertex; /*0x79fe83*/
+            if ( (int)guide->verticesPerGuideVertex < 0 ) /*0x79fe88*/
+              verticesPerGuideVertex = verticesPerGuideVertex + flt_A2FC78; /*0x79fe8a*/
+            begin = guide->vertexVector.begin; /*0x79fe96*/
+            v57 = v9 / (verticesPerGuideVertex - dbl_A2F928); /*0x79fe9d*/
+            if ( !begin || i >= ((char *)guide->vertexVector.end - (char *)begin) / 0x38 ) /*0x79febf*/
+              _invalid_parameter_noinfo((int)guide, (int)v2, (int)p_capacity); /*0x79fec1*/
+            v12 = (char *)guide->vertexVector.begin; /*0x79feca*/
+            qmemcpy(&v101, &v12[v87 + 0xC], sizeof(v101)); /*0x79fedd*/
+            if ( i ) /*0x79fee5*/
             {
-              v12 = i - 1;
-              if ( !v11 || v12 >= (*(_DWORD *)(a2 + 8) - v11) / 0x38 )
-                _invalid_parameter_noinfo();
-              v13 = (float *)(*(_DWORD *)(a2 + 4) + 0x38 * v12 + 0xC);
+              v13 = i - 1; /*0x79fee9*/
+              if ( !v12 || v13 >= ((char *)guide->vertexVector.end - (char *)v12) / 0x38 ) /*0x79ff08*/
+                _invalid_parameter_noinfo((int)guide, (int)&tangent, v13); /*0x79ff0a*/
+              v14 = (OB_stRotTransform_010201A0 *)((char *)guide->vertexVector.begin + 0x38 * v13 + 0xC); /*0x79ff1b*/
             }
             else
             {
-              v13 = v110;
+              v14 = &v101; /*0x79ff21*/
             }
-            v14 = *(float *)(a2 + 0x1C);
-            qmemcpy(v114, v13, sizeof(v114));
-            v51 = v14;
-            sub_793A00(v110, v51);
-            sub_793A00(v114, *(float *)(a2 + 0x1C));
-            if ( !v100 || (v15 = v101, v16 = v100, v75 >= (unsigned int)((int)(v101 - v100) / 0xC)) )
+            offsetAngle = guide->offsetAngle; /*0x79ff28*/
+            qmemcpy(&v105, v14, sizeof(v105)); /*0x79ff37*/
+            v17 = (int)&v14[1]; /*0x79ff37*/
+            end = (int)coord; /*0x79ff37*/
+            angleDegrees = offsetAngle; /*0x79ff41*/
+            OB_stRotTransform_RotateXDegrees_010201A0(&v101, angleDegrees); /*0x79ff44*/
+            OB_stRotTransform_RotateXDegrees_010201A0(&v105, guide->offsetAngle); /*0x79ff57*/
+            if ( !v96.begin /*0x79ff8c*/
+              || (end = (int)v96.end, v18 = v96.begin, LODWORD(v81) >= ((char *)v96.end - (char *)v96.begin) / 0xC) )
             {
-              _invalid_parameter_noinfo();
-              v15 = v101;
-              v16 = v100;
+              _invalid_parameter_noinfo((int)guide, end, v17); /*0x79ff8e*/
+              end = (int)v96.end; /*0x79ff93*/
+              v18 = v96.begin; /*0x79ff9a*/
             }
-            v17 = v78;
-            *(float *)&v83 = v110[3] * *(float *)(v16 + v78 + 4)
-                           + v110[0] * *(float *)(v16 + v78)
-                           + v110[6] * *(float *)(v16 + v78 + 8);
-            *(float *)&v82 = v110[4] * *(float *)(v16 + v78 + 4)
-                           + v110[1] * *(float *)(v16 + v78)
-                           + v110[7] * *(float *)(v16 + v78 + 8);
-            *(float *)&v76 = v110[5] * *(float *)(v16 + v78 + 4)
-                           + v110[2] * *(float *)(v16 + v78)
-                           + v110[8] * *(float *)(v16 + v78 + 8);
-            if ( !v16 || v75 >= (unsigned int)((int)(v15 - v16) / 0xC) )
+            owner = result.owner; /*0x79ffaa*/
+            *(float *)&v89.owner = v101.m[3] * *(float *)((char *)v18 + (unsigned int)result.owner + 4) /*0x79ffcb*/
+                                 + v101.m[0] * *(float *)((char *)v18 + (unsigned int)result.owner)
+                                 + v101.m[6] * *(float *)((char *)v18 + (unsigned int)result.owner + 8);
+            v88 = v101.m[4] * *(float *)((char *)v18 + (unsigned int)result.owner + 4) /*0x79fff3*/
+                + v101.m[1] * *(float *)((char *)v18 + (unsigned int)result.owner)
+                + v101.m[7] * *(float *)((char *)v18 + (unsigned int)result.owner + 8);
+            v82 = v101.m[5] * *(float *)((char *)v18 + (unsigned int)result.owner + 4) /*0x7a001b*/
+                + v101.m[2] * *(float *)((char *)v18 + (unsigned int)result.owner)
+                + v101.m[8] * *(float *)((char *)v18 + (unsigned int)result.owner + 8);
+            if ( !v18 || (end -= (int)v18, LODWORD(v81) >= end / 0xC) ) /*0x7a0037*/
             {
-              _invalid_parameter_noinfo();
-              v16 = v100;
+              _invalid_parameter_noinfo((int)guide, end, (int)result.owner); /*0x7a0039*/
+              v18 = v96.begin; /*0x7a003e*/
             }
-            v18 = (float *)(v16 + v78 + 4);
-            v19 = (float *)(v16 + v78 + 8);
-            *(float *)&v78 = v114[3] * *v18 + v114[0] * *(float *)(v16 + v78) + v114[6] * *v19;
-            v84 = v114[1] * *(float *)(v16 + v17) + v114[4] * *v18 + v114[7] * *v19;
-            v20 = v114[5] * *v18;
-            v21 = *(_DWORD *)(a2 + 4);
-            v79 = v114[2] * *(float *)(v16 + v17) + v20 + v114[8] * *v19;
-            v77 = *(float *)&v78 + *(float *)&v83;
-            *(float *)&v83 = v84 + *(float *)&v82;
-            v82 = v83;
-            *(float *)&v78 = v79 + *(float *)&v76;
-            v76 = v78;
-            v22 = dbl_A2FAA0;
-            v67 = v77 * v22;
-            v79 = *(float *)&v83 * v22;
-            *(float *)&v76 = v22 * *(float *)&v78;
-            if ( !v21 || i >= (*(_DWORD *)(a2 + 8) - v21) / 0x38 )
-              _invalid_parameter_noinfo();
-            v23 = (float *)(v81 + *(_DWORD *)(a2 + 4));
-            v68 = *v23 + v67;
-            v79 = v23[1] + v79;
-            *(float *)&v76 = v23[2] + *(float *)&v76;
-            *(float *)v115 = v68;
-            *(float *)&v115[1] = v79;
-            v115[2] = v76;
-            v69 = *(float *)&v83 * *(float *)&v83 + v77 * v77 + *(float *)&v78 * *(float *)&v78;
-            v70 = sqrt(v69);
-            v24 = *v85;
-            v71 = 1.0 / v70;
-            v111 = v77 * v71;
-            v112 = *(float *)&v83 * v71;
-            v113 = v71 * *(float *)&v78;
-            sub_796260((char *)v24, v115);
-            LOWORD(v25) = *(unsigned __int8 *)(a2 + 0x18);
-            v26 = (char **)*v85;
-            v93 = v52;
-            v94 = v80;
-            sub_796320(v26, (float *)&v93, v25);
-            v27 = v104;
-            if ( !v104 || v75 >= (unsigned int)((int)(v105 - v104) / 0xC) )
+            v20 = (float *)((char *)v18 + (unsigned int)result.owner + 4); /*0x7a004c*/
+            v21 = (float *)((char *)v18 + (unsigned int)result.owner + 8); /*0x7a0052*/
+            *(float *)&result.owner = v105.m[3] * *v20 /*0x7a006d*/
+                                    + v105.m[0] * *(float *)((char *)v18 + (unsigned int)result.owner)
+                                    + v105.m[6] * *v21;
+            v90 = v105.m[1] * *(float *)((char *)&owner->allocatorState + (_DWORD)v18) /*0x7a0091*/
+                + v105.m[4] * *v20
+                + v105.m[7] * *v21;
+            v22 = v105.m[5] * *v20; /*0x7a00a6*/
+            v23 = guide->vertexVector.begin; /*0x7a00a8*/
+            v85 = v105.m[2] * *(float *)((char *)&owner->allocatorState + (_DWORD)v18) + v22 + v105.m[8] * *v21; /*0x7a00ba*/
+            v83 = *(float *)&result.owner + *(float *)&v89.owner; /*0x7a00c6*/
+            *(float *)&v89.owner = v90 + v88; /*0x7a00da*/
+            v88 = *(float *)&v89.owner; /*0x7a00e2*/
+            *(float *)&result.owner = v85 + v82; /*0x7a00ee*/
+            v82 = *(float *)&result.owner; /*0x7a00f6*/
+            v24 = dbl_A2FAA0; /*0x7a0106*/
+            v73 = v83 * v24; /*0x7a0108*/
+            v85 = *(float *)&v89.owner * v24; /*0x7a0112*/
+            v82 = v24 * *(float *)&result.owner; /*0x7a011a*/
+            if ( !v23 || i >= ((char *)guide->vertexVector.end - (char *)v23) / 0x38 ) /*0x7a013c*/
+              _invalid_parameter_noinfo((int)guide, end, (int)owner); /*0x7a013e*/
+            v25 = (float *)((char *)guide->vertexVector.begin + v87); /*0x7a0146*/
+            v74 = *v25 + v73; /*0x7a0150*/
+            v85 = v25[1] + v85; /*0x7a015b*/
+            v82 = v25[2] + v82; /*0x7a0166*/
+            coord[0] = v74; /*0x7a016e*/
+            coord[1] = v85; /*0x7a0179*/
+            coord[2] = v82; /*0x7a0184*/
+            v75 = *(float *)&v89.owner * *(float *)&v89.owner /*0x7a01bf*/
+                + v83 * v83
+                + *(float *)&result.owner * *(float *)&result.owner;
+            v76 = sqrt(v75); /*0x7a01cc*/
+            indexedGeometry = v91->indexedGeometry; /*0x7a01e4*/
+            v77 = 1.0 / v76; /*0x7a01e6*/
+            tangent = v83 * v77; /*0x7a01f8*/
+            v103 = *(float *)&v89.owner * v77; /*0x7a0205*/
+            v104 = v77 * *(float *)&result.owner; /*0x7a0210*/
+            OB_CIndexedGeometry_AddVertexCoord_010201A0(indexedGeometry, coord); /*0x7a0217*/
+            frondMapIndex = guide->frondMapIndex; /*0x7a021c*/
+            v28 = v91->indexedGeometry; /*0x7a0225*/
+            *(float *)&diffuseST.owner = v57; /*0x7a0227*/
+            diffuseST.current = (float *)value; /*0x7a0233*/
+            OB_CIndexedGeometry_AddVertexTexCoord0_010201A0(v28, (const float *)&diffuseST, frondMapIndex); /*0x7a0239*/
+            v29 = v97.begin; /*0x7a023e*/
+            if ( !v97.begin || LODWORD(v81) >= ((char *)v97.end - (char *)v97.begin) / 0xC ) /*0x7a0266*/
             {
-              _invalid_parameter_noinfo();
-              v27 = v104;
+              _invalid_parameter_noinfo((int)guide, (int)v91, (int)owner); /*0x7a0268*/
+              v29 = v97.begin; /*0x7a026d*/
             }
-            v72 = *(float *)(v27 + v17) * v110[0]
-                + v110[3] * *(float *)(v27 + v17 + 4)
-                + v110[6] * *(float *)(v27 + v17 + 8);
-            v79 = v110[1] * *(float *)(v27 + v17)
-                + v110[4] * *(float *)(v27 + v17 + 4)
-                + v110[7] * *(float *)(v27 + v17 + 8);
-            v84 = v110[2] * *(float *)(v27 + v17)
-                + v110[5] * *(float *)(v27 + v17 + 4)
-                + v110[8] * *(float *)(v27 + v17 + 8);
-            if ( !v27 || v75 >= (unsigned int)((int)(v105 - v27) / 0xC) )
+            v78 = *(float *)((char *)&owner->allocatorState + (_DWORD)v29) * v101.m[0] /*0x7a029a*/
+                + v101.m[3] * *(float *)((char *)&owner->begin + (_DWORD)v29)
+                + v101.m[6] * *(float *)((char *)&owner->end + (_DWORD)v29);
+            v85 = v101.m[1] * *(float *)((char *)&owner->allocatorState + (_DWORD)v29) /*0x7a02c2*/
+                + v101.m[4] * *(float *)((char *)&owner->begin + (_DWORD)v29)
+                + v101.m[7] * *(float *)((char *)&owner->end + (_DWORD)v29);
+            v90 = v101.m[2] * *(float *)((char *)&owner->allocatorState + (_DWORD)v29) /*0x7a02ea*/
+                + v101.m[5] * *(float *)((char *)&owner->begin + (_DWORD)v29)
+                + v101.m[8] * *(float *)((char *)&owner->end + (_DWORD)v29);
+            if ( !v29 || LODWORD(v81) >= ((char *)v97.end - (char *)v29) / 0xC ) /*0x7a030f*/
             {
-              _invalid_parameter_noinfo();
-              v27 = v104;
+              _invalid_parameter_noinfo((int)guide, (int)v91, (int)owner); /*0x7a0311*/
+              v29 = v97.begin; /*0x7a0316*/
             }
-            v28 = (float *)(v27 + v17 + 8);
-            v53 = v114[3] * *(float *)(v27 + v17 + 4) + v114[0] * *(float *)(v27 + v17) + v114[6] * *v28;
-            *(float *)&v76 = v114[4] * *(float *)(v27 + v17 + 4) + v114[1] * *(float *)(v27 + v17) + v114[7] * *v28;
-            *(float *)&v82 = v114[5] * *(float *)(v27 + v17 + 4) + v114[2] * *(float *)(v27 + v17) + v114[8] * *v28;
-            v54 = v53 + v72;
-            v73 = *(float *)&v76 + v79;
-            *(float *)&v76 = *(float *)&v82 + v84;
-            v29 = dbl_A2FAA0;
-            *(float *)&v78 = v54 * v29;
-            *(float *)&v83 = v73 * v29;
-            v77 = v29 * *(float *)&v76;
-            v55 = *(float *)&v83 * *(float *)&v83 + *(float *)&v78 * *(float *)&v78 + v77 * v77;
-            v56 = sqrt(v55);
-            v57 = 1.0 / v56;
-            v107 = *(float *)&v78 * v57;
-            v108 = *(float *)&v83 * v57;
-            v109 = v57 * v77;
-            v116[3] = 1.0;
-            v116[2] = 1.0;
-            v116[1] = 1.0;
-            v116[0] = 1.0;
-            sub_796230(*v85, v116);
-            sub_7962F0((char *)*v85, (int *)&v107);
-            sub_796590((char *)*v85, (int *)&v111);
-            *(float *)&v78 = v108 * v113 - v109 * v112;
-            *(float *)&v83 = v109 * v111 - v113 * v107;
-            v77 = v112 * v107 - v108 * v111;
-            v58 = *(float *)&v78 * *(float *)&v78 + *(float *)&v83 * *(float *)&v83 + v77 * v77;
-            v59 = sqrt(v58);
-            v30 = *v85;
-            v60 = 1.0 / v59;
-            *(float *)&v86 = *(float *)&v78 * v60;
-            v87 = *(float *)&v83 * v60;
-            *(float *)&Src = v60 * v77;
-            sub_7965E0((char *)v30, &v86);
-            if ( *((_BYTE *)*v85 + 8) )
+            v30 = (float *)((char *)&owner->end + (_DWORD)v29); /*0x7a0324*/
+            v58 = v105.m[3] * *(float *)((char *)&owner->begin + (_DWORD)v29) /*0x7a0343*/
+                + v105.m[0] * *(float *)((char *)&owner->allocatorState + (_DWORD)v29)
+                + v105.m[6] * *v30;
+            v82 = v105.m[4] * *(float *)((char *)&owner->begin + (_DWORD)v29) /*0x7a0369*/
+                + v105.m[1] * *(float *)((char *)&owner->allocatorState + (_DWORD)v29)
+                + v105.m[7] * *v30;
+            v88 = v105.m[5] * *(float *)((char *)&owner->begin + (_DWORD)v29) /*0x7a038f*/
+                + v105.m[2] * *(float *)((char *)&owner->allocatorState + (_DWORD)v29)
+                + v105.m[8] * *v30;
+            v59 = v58 + v78; /*0x7a039b*/
+            v79 = v82 + v85; /*0x7a03a7*/
+            v82 = v88 + v90; /*0x7a03b3*/
+            v31 = dbl_A2FAA0; /*0x7a03bb*/
+            *(float *)&result.owner = v59 * v31; /*0x7a03c5*/
+            *(float *)&v89.owner = v79 * v31; /*0x7a03cf*/
+            v83 = v31 * v82; /*0x7a03d7*/
+            v60 = *(float *)&v89.owner * *(float *)&v89.owner /*0x7a03f7*/
+                + *(float *)&result.owner * *(float *)&result.owner
+                + v83 * v83;
+            v61 = sqrt(v60); /*0x7a0404*/
+            v62 = 1.0 / v61; /*0x7a0410*/
+            normal = *(float *)&result.owner * v62; /*0x7a0422*/
+            v99 = *(float *)&v89.owner * v62; /*0x7a042f*/
+            v100 = v62 * v83; /*0x7a043a*/
+            rgba[3] = 1.0; /*0x7a0443*/
+            rgba[2] = 1.0; /*0x7a044a*/
+            rgba[1] = 1.0; /*0x7a0451*/
+            rgba[0] = 1.0; /*0x7a045f*/
+            OB_CIndexedGeometry_AddVertexColor_010201A0(v91->indexedGeometry, rgba); /*0x7a0469*/
+            OB_CIndexedGeometry_AddVertexNormal_010201A0(v91->indexedGeometry, &normal); /*0x7a0478*/
+            OB_CIndexedGeometry_AddVertexTangent_010201A0(v91->indexedGeometry, &tangent); /*0x7a0487*/
+            *(float *)&result.owner = v99 * v104 - v100 * v103; /*0x7a04b8*/
+            *(float *)&v89.owner = v100 * tangent - v104 * normal; /*0x7a04d8*/
+            v83 = v103 * normal - v99 * tangent; /*0x7a04e2*/
+            v63 = *(float *)&result.owner * *(float *)&result.owner /*0x7a0502*/
+                + *(float *)&v89.owner * *(float *)&v89.owner
+                + v83 * v83;
+            v64 = sqrt(v63); /*0x7a050f*/
+            v32 = v91->indexedGeometry; /*0x7a0520*/
+            v65 = 1.0 / v64; /*0x7a0522*/
+            *(float *)&binormal.allocatorState = *(float *)&result.owner * v65; /*0x7a0534*/
+            *(float *)&binormal.begin = *(float *)&v89.owner * v65; /*0x7a053e*/
+            *(float *)&binormal.end = v65 * v83; /*0x7a0546*/
+            OB_CIndexedGeometry_AddVertexBinormal_010201A0(v32, (const float *)&binormal.allocatorState); /*0x7a054a*/
+            if ( v91->indexedGeometry->vertexWeighting ) /*0x7a0551*/
             {
-              v31 = *(_DWORD *)(a2 + 4);
-              if ( !v31 || i >= (*(_DWORD *)(a2 + 8) - v31) / 0x38 )
-                _invalid_parameter_noinfo();
-              v78 = *(int *)(a2 + 4);
-              if ( *(float *)&v78 == 0.0 || i >= (*(_DWORD *)(a2 + 8) - v78) / 0x38 )
-                _invalid_parameter_noinfo();
-              sub_796540(*v85, COERCE_INT(*(float *)(*(_DWORD *)(a2 + 4) + v81 + 0x30)), *(_BYTE *)(v81 + v78 + 0x34));
+              v33 = guide->vertexVector.begin; /*0x7a0557*/
+              if ( !v33 || i >= ((char *)guide->vertexVector.end - (char *)v33) / 0x38 ) /*0x7a057a*/
+                _invalid_parameter_noinfo((int)guide, (int)v91, (int)owner); /*0x7a057c*/
+              result.owner = (OB_stVectorFloat_010201A0 *)guide->vertexVector.begin; /*0x7a0586*/
+              if ( !result.owner || i >= ((OB_stVectorFloat_010201A0 *)guide->vertexVector.end - result.owner) / 0x38 ) /*0x7a05a8*/
+                _invalid_parameter_noinfo((int)guide, (int)v91, (int)owner); /*0x7a05aa*/
+              OB_CIndexedGeometry_AddVertexWind_010201A0( /*0x7a05ca*/
+                v91->indexedGeometry,
+                *(float *)((char *)guide->vertexVector.begin + v87 + 0x30),
+                *((_BYTE *)&result.owner[3].begin + v87));
             }
-            v32 = v75;
-            ++*((_WORD *)*v85 + 0x11);
-            v33 = (unsigned int)++v32 < *(_DWORD *)(a2 + 0x2C);
-            v75 = v32;
-            v78 = v17 + 0xC;
+            v34 = v81; /*0x7a05cf*/
+            v2 = v91->indexedGeometry; /*0x7a05d3*/
+            ++v91->indexedGeometry->currentVertexWriteCounter; /*0x7a05d5*/
+            ++LODWORD(v34); /*0x7a05da*/
+            p_capacity = (OB_stVectorFloat_010201A0 *)&owner->capacity; /*0x7a05dd*/
+            v35 = LODWORD(v34) < guide->verticesPerGuideVertex; /*0x7a05e0*/
+            v81 = v34; /*0x7a05e3*/
+            result.owner = p_capacity; /*0x7a05e7*/
           }
-          while ( v33 );
+          while ( v35 ); /*0x7a05eb*/
         }
+        ++i; /*0x7a05fa*/
       }
-      v90 = 0.0;
-      v91 = 0;
-      v92 = 0;
-      v96 = 0;
-      v97 = 0;
-      v98 = 0;
-      v6 = *(_DWORD *)(a2 + 0x2C) == 0;
-      LOBYTE(v117) = 3;
-      if ( !v6 )
+      memset(&lengths.begin, 0, 0xC);           // Initializes the local vector<float> holding total length for each extrusion-profile lane (RT4.1 m_vLengths). /*0x7a060d*/
+      memset(&runningLengths.begin, 0, 0xC);    // Initializes the local vector<vector<float>> holding cumulative lengths per extrusion-profile lane (RT4.1 m_vRunningLengths). /*0x7a0619*/
+      v7 = guide->verticesPerGuideVertex == 0; /*0x7a062b*/
+      LOBYTE(v108) = 3; /*0x7a062e*/
+      v71 = 0; /*0x7a0636*/
+      if ( !v7 ) /*0x7a063a*/
       {
-        *(float *)&v80 = 0.0;
-        v87 = 0.0;
-        *(float *)&v75 = 0.0;
-        *(float *)&Src = 0.0;
-        v89 = 0;
-        LOBYTE(v117) = 4;
-        sub_7996F0((unsigned int *)&v86, (unsigned int **)&v93, (unsigned int *)&v86, 0, &v80);
-        v81 = 1;
-        if ( (unsigned int)sub_799EE0((_DWORD *)a2) > 1 )
+        *(float *)&value = 0.0; /*0x7a0644*/
+        do /*0x7a083e*/
         {
-          do
+          memset(&binormal.begin, 0, 0xC); /*0x7a064a*/
+          v81 = 0.0; /*0x7a064e*/
+          LOBYTE(v108) = 4; /*0x7a0670*/
+          OB_stVectorFloat_InsertOne_010201A0( /*0x7a0678*/
+            &binormal,
+            &diffuseST,
+            (OB_stVectorFloatIterator_010201A0)(unsigned int)&binormal,
+            (const float *)&value);
+          v87 = 1; /*0x7a067f*/
+          if ( OB_stVector_SFrondVertex_Size_010201A0(&guide->vertexVector) > 1 ) /*0x7a068f*/
           {
-            v34 = *(_DWORD *)(a2 + 0x2C);
-            v35 = *(_DWORD *)(a2 + 0x28);
-            v36 = v35 + v34 * (v81 - 1);
-            v37 = (float *)sub_794730(*v85, v35 + v34 * v81);
-            v38 = (float *)sub_794730(*v85, v36);
-            v39 = (char *)Src;
-            v79 = *v37;
-            v74 = v37[1];
-            v84 = v37[2];
-            v76 = *(int *)v38;
-            v61 = v38[1];
-            v82 = *((int *)v38 + 2);
-            *(float *)&v62 = (v61 - v74) * (v61 - v74)
-                           + (*(float *)&v76 - v79) * (*(float *)&v76 - v79)
-                           + (*(float *)&v82 - v84) * (*(float *)&v82 - v84);
-            *(float *)&v75 = COERCE_FLOAT((v62 >> 1) + 0x1FC00000) + *(float *)&v75;
-            if ( v87 == 0.0 || ((int)Src - LODWORD(v87)) >> 2 >= (unsigned int)((v89 - LODWORD(v87)) >> 2) )
+            do /*0x7a07a4*/
             {
-              if ( LODWORD(v87) > (unsigned int)Src )
-                _invalid_parameter_noinfo();
-              sub_7996F0((unsigned int *)&v86, (unsigned int **)&v78, (unsigned int *)&v86, v39, &v75);
-            }
-            else
-            {
-              *(float *)Src = *(float *)&v75;
-              Src = v39 + 4;
-            }
-            v40 = ++v81;
-          }
-          while ( v40 < sub_799EE0((_DWORD *)a2) );
-        }
-        sub_79F670(&v95, (int)&v86);
-      }
-      v66 = 0;
-      if ( *(_DWORD *)(a2 + 0x2C) )
-      {
-        v41 = v85;
-        do
-        {
-          v42 = 1;
-          if ( (unsigned int)sub_799EE0((_DWORD *)a2) > 1 )
-          {
-            v80 = 0x10 * v66;
-            do
-            {
-              v43 = *(_WORD *)(a2 + 0x28) + v66 + v42 * *(_WORD *)(a2 + 0x2C);
-              *((_WORD *)*v41 + 0x11) = v43;
-              v44 = *(float *)sub_794760(*v41, v43);
-              v45 = (unsigned int)v96;
-              *(float *)&v93 = v44;
-              if ( !v96 || v66 >= ((char *)v97 - (char *)v96) >> 4 )
+              v36 = guide->verticesPerGuideVertex; /*0x7a0695*/
+              sharedVertexStartIndex = guide->sharedVertexStartIndex; /*0x7a069c*/
+              v38 = v71 + sharedVertexStartIndex + v36 * (v87 - 1); /*0x7a06bb*/
+              VertexCoord_010201A0 = OB_CIndexedGeometry_GetVertexCoord_010201A0( /*0x7a06c9*/
+                                       v91->indexedGeometry,
+                                       v71 + sharedVertexStartIndex + v36 * v87);
+              v40 = OB_CIndexedGeometry_GetVertexCoord_010201A0(v91->indexedGeometry, v38); /*0x7a06cb*/
+              v41 = binormal.end; /*0x7a06d2*/
+              v85 = *VertexCoord_010201A0; /*0x7a06d6*/
+              v80 = VertexCoord_010201A0[1]; /*0x7a06dd*/
+              v90 = VertexCoord_010201A0[2]; /*0x7a06e4*/
+              v82 = *v40; /*0x7a06ea*/
+              v66 = v40[1]; /*0x7a06f1*/
+              v88 = v40[2]; /*0x7a06f8*/
+              *(float *)&v67 = (v66 - v80) * (v66 - v80) + (v82 - v85) * (v82 - v85) + (v88 - v90) * (v88 - v90); /*0x7a0724*/
+              v81 = COERCE_FLOAT((v67 >> 1) + 0x1FC00000) + v81; /*0x7a0745*/
+              if ( binormal.begin && binormal.end - binormal.begin < (unsigned int)(binormal.capacity - binormal.begin) ) /*0x7a075d*/
               {
-                _invalid_parameter_noinfo();
-                v45 = (unsigned int)v96;
+                *binormal.end = v81; /*0x7a0768*/
+                binormal.end = v41 + 1; /*0x7a076a*/
               }
-              v63 = (_DWORD *)(v45 + v80 + 4);
-              if ( !*v63 || v42 >= (*(_DWORD *)(v45 + v80 + 8) - *v63) >> 2 )
-                _invalid_parameter_noinfo();
-              v46 = v90;
-              v64 = (float *)(*v63 + 4 * v42);
-              if ( v90 == 0.0 || v66 >= ((int)v91 - LODWORD(v90)) >> 2 )
+              else
               {
-                _invalid_parameter_noinfo();
-                v46 = v90;
+                if ( binormal.begin > binormal.end ) /*0x7a0772*/
+                  _invalid_parameter_noinfo((int)guide, (int)VertexCoord_010201A0, (int)binormal.end); /*0x7a0774*/
+                _FFFFFFFC.current = v41; /*0x7a0782*/
+                _FFFFFFFC.owner = &binormal; /*0x7a0783*/
+                OB_stVectorFloat_InsertOne_010201A0(&binormal, &result, _FFFFFFFC, &v81); /*0x7a078b*/
               }
-              v47 = *v64 / *(float *)(LODWORD(v46) + 4 * v66);
-              LOWORD(v46) = *(unsigned __int8 *)(a2 + 0x18);
-              v48 = (char **)*v41;
-              *(float *)&v94 = v47 * dbl_A3F460;
-              sub_796320(v48, (float *)&v93, v46);
-              ++*((_WORD *)*v41 + 0x11);
-              ++v42;
+              v42 = ++v87; /*0x7a0794*/
             }
-            while ( v42 < sub_799EE0((_DWORD *)a2) );
+            while ( v42 < OB_stVector_SFrondVertex_Size_010201A0(&guide->vertexVector) ); /*0x7a07a4*/
           }
-          ++v66;
-        }
-        while ( v66 < *(_DWORD *)(a2 + 0x2C) );
-      }
-      if ( v96 )
-      {
-        v49 = v97;
-        if ( v96 != v97 )
-        {
-          v50 = v96 + 1;
-          do
+          OB_stVector_stVectorFloat_PushBack_010201A0(&runningLengths, &binormal);// OBLIVION AUTHORITY (2026-08-30): Appends the just-built inner vector<float> of cumulative extrusion distances to the outer vector<vector<float>>. This is the executable's m_vRunningLengths construction; RT4.1 FrondEngine.h:242 and FrondEngine.cpp:770-793 corroborate the already-observed role. /*0x7a07b5*/
+          v43 = lengths.end; /*0x7a07c0*/
+          if ( lengths.begin && lengths.end - lengths.begin < (unsigned int)(lengths.capacity - lengths.begin) ) /*0x7a07d8*/
           {
-            if ( *v50 )
-              FormHeapFree(*v50);
-            *v50 = 0;
-            v50[1] = 0;
-            v50[2] = 0;
-            v50 += 4;
+            *lengths.end = v81; /*0x7a07e3*/
+            lengths.end = v43 + 1; /*0x7a07e5*/
           }
-          while ( v50 + 0xFFFFFFFF != v49 );
+          else
+          {
+            if ( lengths.begin > lengths.end ) /*0x7a07ed*/
+              _invalid_parameter_noinfo((int)guide, 0, (int)lengths.end); /*0x7a07ef*/
+            _FFFFFFFCa.current = v43; /*0x7a07fd*/
+            _FFFFFFFCa.owner = &lengths; /*0x7a07fe*/
+            OB_stVectorFloat_InsertOne_010201A0(&lengths, &v89, _FFFFFFFCa, &v81); /*0x7a0806*/
+          }
+          LOBYTE(v108) = 3; /*0x7a0811*/
+          if ( binormal.begin ) /*0x7a0819*/
+            FormHeapFree((unsigned int)binormal.begin); /*0x7a081c*/
+          v35 = v71 + 1 < guide->verticesPerGuideVertex; /*0x7a082b*/
+          memset(&binormal.begin, 0, 0xC); /*0x7a082e*/
+          ++v71; /*0x7a083a*/
         }
-        FormHeapFree((unsigned int)v96);
+        while ( v35 ); /*0x7a083e*/
       }
-      v96 = 0;
-      v97 = 0;
-      v98 = 0;
-      if ( v90 != 0.0 )
-        FormHeapFree(LODWORD(v90));
-      v90 = 0.0;
-      v91 = 0;
-      v92 = 0;
-      if ( v104 )
-        FormHeapFree(v104);
-      v104 = 0;
-      v105 = 0;
-      v106 = 0;
-      if ( v100 )
-        FormHeapFree(v100);
+      v72 = 0; /*0x7a0849*/
+      if ( guide->verticesPerGuideVertex ) /*0x7a0846*/
+      {
+        v44 = v91; /*0x7a0853*/
+        do /*0x7a096f*/
+        {
+          v45 = 1; /*0x7a0862*/
+          if ( OB_stVector_SFrondVertex_Size_010201A0(&guide->vertexVector) > 1 ) /*0x7a086e*/
+          {
+            value = 0x10 * v72; /*0x7a087b*/
+            do /*0x7a095b*/
+            {
+              v46 = LOWORD(guide->sharedVertexStartIndex) + v72 + v45 * LOWORD(guide->verticesPerGuideVertex); /*0x7a0893*/
+              v44->indexedGeometry->currentVertexWriteCounter = v46; /*0x7a0899*/
+              v47 = *OB_CIndexedGeometry_GetVertexTexCoord0_010201A0(v44->indexedGeometry, v46); /*0x7a08a5*/
+              v48 = runningLengths.begin; /*0x7a08a7*/
+              *(float *)&diffuseST.owner = v47; /*0x7a08ad*/
+              if ( !runningLengths.begin || v72 >= runningLengths.end - runningLengths.begin ) /*0x7a08c3*/
+              {
+                _invalid_parameter_noinfo((int)guide, (int)v44, v45); /*0x7a08c5*/
+                v48 = runningLengths.begin; /*0x7a08ca*/
+              }
+              p_begin = &v48[value / 0x10u].begin; /*0x7a08d6*/
+              if ( !*p_begin || v45 >= v48[value / 0x10u].end - *p_begin ) /*0x7a08eb*/
+                _invalid_parameter_noinfo((int)guide, (int)v44, v45); /*0x7a08ed*/
+              v49 = lengths.begin; /*0x7a08f8*/
+              v69 = &(*p_begin)[v45]; /*0x7a0901*/
+              if ( !lengths.begin || v72 >= lengths.end - lengths.begin ) /*0x7a0914*/
+              {
+                _invalid_parameter_noinfo((int)guide, (int)v44, v45); /*0x7a0916*/
+                v49 = lengths.begin; /*0x7a091b*/
+              }
+              angleDegreesa = guide->frondMapIndex; /*0x7a0935*/
+              v50 = v44->indexedGeometry; /*0x7a0937*/
+              *(float *)&diffuseST.current = *v69 / v49[v72] * dbl_A3F460; /*0x7a093f*/
+              OB_CIndexedGeometry_AddVertexTexCoord0_010201A0(v50, (const float *)&diffuseST, angleDegreesa); /*0x7a0943*/
+              ++v44->indexedGeometry->currentVertexWriteCounter; /*0x7a094a*/
+              ++v45; /*0x7a0951*/
+            }
+            while ( v45 < OB_stVector_SFrondVertex_Size_010201A0(&guide->vertexVector) ); /*0x7a095b*/
+          }
+          ++v72; /*0x7a096b*/
+        }
+        while ( v72 < guide->verticesPerGuideVertex ); /*0x7a096f*/
+      }
+      if ( runningLengths.begin ) /*0x7a097d*/
+      {
+        v51 = runningLengths.end; /*0x7a097f*/
+        if ( runningLengths.begin != runningLengths.end ) /*0x7a0988*/
+        {
+          v52 = (unsigned int *)&runningLengths.begin->begin; /*0x7a098a*/
+          do /*0x7a09af*/
+          {
+            if ( *v52 ) /*0x7a0990*/
+              FormHeapFree(*v52); /*0x7a0997*/
+            *v52 = 0; /*0x7a099f*/
+            v52[1] = 0; /*0x7a09a1*/
+            v52[2] = 0; /*0x7a09a4*/
+            v52 += 4; /*0x7a09a7*/
+          }
+          while ( v52 + 0xFFFFFFFF != (unsigned int *)v51 ); /*0x7a09af*/
+        }
+        FormHeapFree((unsigned int)runningLengths.begin); /*0x7a09b6*/
+      }
+      memset(&runningLengths.begin, 0, 0xC); /*0x7a09c4*/
+      if ( lengths.begin ) /*0x7a09d6*/
+        FormHeapFree((unsigned int)lengths.begin); /*0x7a09d9*/
+      memset(&lengths.begin, 0, 0xC); /*0x7a09ea*/
+      if ( v97.begin ) /*0x7a09f6*/
+        FormHeapFree((unsigned int)v97.begin); /*0x7a09f9*/
+      memset(&v97.begin, 0, 0xC); /*0x7a0a0a*/
+      if ( v96.begin ) /*0x7a0a1f*/
+        FormHeapFree((unsigned int)v96.begin); /*0x7a0a22*/
     }
   }
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70DFB0",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion NiCullingProcess process-cull entry for native scene traversal.",
     "mnemonic": "push",
     "size": 1
   },
@@ -126,12 +126,6 @@
     "size": 2
   },
   {
-    "ea": "0x70DFDD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x70DFE0",
     "line": "mov     esi, 1",
     "mnemonic": "mov",
@@ -169,19 +163,19 @@
   },
   {
     "ea": "0x70DFF5",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; plane",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70DFF6",
-    "line": "add     ecx, 20h ; ' '; this",
+    "line": "add     ecx, 20h ; ' '; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x70DFF9",
-    "line": "call    sub_47DA70",
+    "line": "call    NiBound_ClassifyAgainstPlane",
     "mnemonic": "call",
     "size": 5
   },

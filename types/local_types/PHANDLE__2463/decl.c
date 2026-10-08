@@ -1,1 +1,1 @@
-PHANDLE
+typedef HANDLE *PHANDLE;

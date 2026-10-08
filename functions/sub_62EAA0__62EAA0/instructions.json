@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x62EAA4",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x62EAE3",
-    "line": "push    ebx",
+    "line": "push    ebx; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62EAE4",
-    "line": "mov     ecx, offset unk_B3B94C",
+    "line": "mov     ecx, offset stru_B3B94C; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x62EAE9",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x62EB4E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x62EB59",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x62EB60",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x62EB90",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    [esp+14h+item]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x62EB94",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     [esp+14h+item]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x62EB9A",
-    "line": "fstp    [esp+14h+arg_0]",
+    "line": "fstp    [esp+14h+item]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x62EB9E",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     [esp+14h+item]",
     "mnemonic": "fld",
     "size": 4
   },

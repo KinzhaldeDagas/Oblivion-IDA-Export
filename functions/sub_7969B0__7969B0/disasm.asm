@@ -1,4 +1,4 @@
-0x7969B0: sub     esp, 0Ch
+0x7969B0: sub     esp, 0Ch; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::DeleteIndexData frees every owned unsigned-short strip buffer, nulls the pointer slots, clears each inner pointer vector, then empties the per-LOD strip container.
 0x7969B3: push    ebx
 0x7969B4: push    ebp
 0x7969B5: push    esi
@@ -59,7 +59,7 @@
 0x796A51: mov     eax, [edi+4]
 0x796A54: mov     ecx, [eax+ebx*4]
 0x796A57: push    ecx
-0x796A58: call    FormHeapFree
+0x796A58: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x796A5D: mov     ecx, [esi+4Ch]
 0x796A60: add     esp, 4
 0x796A63: test    ecx, ecx
@@ -151,11 +151,10 @@
 0x796B66: sub     eax, edi
 0x796B68: mov     [esp+1Ch+var_4], eax
 0x796B6C: jmp     short loc_796B74
-0x796B6E: align 10h
 0x796B70: mov     eax, [esp+1Ch+var_4]
-0x796B74: push    edi
-0x796B75: lea     ecx, [eax+edi]
-0x796B78: call    sub_79B2F0
+0x796B74: push    edi; source
+0x796B75: lea     ecx, [eax+edi]; this
+0x796B78: call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.
 0x796B7D: add     edi, 10h
 0x796B80: cmp     edi, ebp
 0x796B82: jnz     short loc_796B70
@@ -168,7 +167,7 @@
 0x796B92: test    eax, eax
 0x796B94: jz      short loc_796B9F
 0x796B96: push    eax
-0x796B97: call    FormHeapFree
+0x796B97: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x796B9C: add     esp, 4
 0x796B9F: xor     eax, eax
 0x796BA1: mov     [edi], eax

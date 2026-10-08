@@ -28,9 +28,9 @@
 0x85BEFC: mov     [eax+4], ecx
 0x85BEFF: mov     ecx, [esp+24h+var_8]
 0x85BF03: mov     [eax+8], ecx
-0x85BF06: push    1Fh
+0x85BF06: push    1Fh; slot
 0x85BF08: mov     [eax+0Ch], edx
-0x85BF0B: call    sub_7ECAE0
+0x85BF0B: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x85BF10: add     esp, 14h
 0x85BF13: pop     esi
 0x85BF14: add     esp, 10h

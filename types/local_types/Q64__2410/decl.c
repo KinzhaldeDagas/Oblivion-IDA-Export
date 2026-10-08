@@ -1,1 +1,1 @@
-_Q64
+typedef __int64 _Q64;

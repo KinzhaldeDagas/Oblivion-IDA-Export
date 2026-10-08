@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F4CE0",
+      "0x4F4D49"
+    ]
+  ],
+  "chunks_sha256": "74ed65a30d5bb5d22f72b665ecb73ea730d9f415f5ef1b6b996055860277aa89",
+  "comment_regular": "GetIsID_Eval (index 72 / opcode 0x1048): ObjectID ParamInfo is a TESForm pointer. The parameter must pass TESForm::IsActor (base implementation at 0x69D990 returns false); then the function pointer-compares it with the subject reference's BaseForm. No editor-ID/name comparison occurs.",
+  "comment_repeatable": "GetIsID_Eval (index 72 / opcode 0x1048): ObjectID ParamInfo is a TESForm pointer. The parameter must pass TESForm::IsActor (base implementation at 0x69D990 returns false); then the function pointer-compares it with the subject reference's BaseForm. No editor-ID/name comparison occurs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F4CE0",
+  "display_name": "GetIsID_Eval",
   "end_ea": "0x4F4D49",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F4CE0",
+  "name": "GetIsID_Eval",
   "segment": ".text",
   "sha256": "74ed65a30d5bb5d22f72b665ecb73ea730d9f415f5ef1b6b996055860277aa89",
   "size": 105,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F4CE0",
+  "total_chunk_size": 105,
   "type": "char __cdecl(int, int, int, double *)",
   "xrefs_from_count": 49,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

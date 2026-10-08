@@ -1,61 +1,55 @@
-unsigned int *__userpurge Menu_CreateTileFromTemplate@<eax>(
-        _DWORD *this@<ecx>,
-        double st5_0@<st2>,
-        double a3@<st1>,
-        double st7_0@<st0>,
-        TileWindow *a5,
-        char *Str2,
-        int a7)
+// Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
+Tile *__thiscall Menu::RenderTemplate(Menu *this, Tile *parent, const char *name, Tile *lastTile)
 {
-  char ***v7; // edi
-  char **v8; // esi
-  int v10; // ebp
-  int *v11; // eax
-  int *v12; // edi
-  unsigned int *v13; // ebx
-  unsigned int *v14; // edi
-  unsigned int v15; // esi
+  OblivionTileTemplate **p_templateHead; // edi
+  OblivionTileTemplate *v5; // esi
+  OblivionTileBuildStorage *v7; // ebp
+  OblivionTileBuildStorage *v8; // eax
+  OblivionTileBuildStorage *v9; // edi
+  OblivionTileTemplate *mainTemplate; // ebx
+  Tile *v11; // edi
+  OblivionTileBuildStorage *v12; // esi
 
-  if ( a7 )
-    *(this + 4) = a7;
-  v7 = (char ***)(this + 2);
-  if ( this == (_DWORD *)0xFFFFFFF8 )
-    return 0;
+  if ( lastTile ) /*0x58543c*/
+    this->members.templateContextTile = lastTile; /*0x58543e*/
+  p_templateHead = &this->members.templateHead; /*0x585441*/
+  if ( this == (Menu *)0xFFFFFFF8 ) /*0x585446*/
+    return 0; /*0x585446*/
   do
   {
-    v8 = *v7;
-    if ( *v7 )
+    v5 = *p_templateHead; /*0x585450*/
+    if ( *p_templateHead )
     {
-      if ( !(Str2 && *v8 ? _strcmp(*v8, Str2) : 2 * (Str2 == 0) - 1) )
-        break;
+      if ( !(name && v5->name.m_data ? CRT_StricmpLocaleDispatch(v5->name.m_data, name) : 2 * (name == 0) - 1) )
+        break; /*0x585479*/
     }
-    v7 = (char ***)v7[1];
+    p_templateHead = (OblivionTileTemplate **)p_templateHead[1]; /*0x58547b*/
   }
-  while ( v7 );
-  if ( !v8 )
-    return 0;
-  v10 = dword_B3B0A8;
-  v11 = (int *)FormHeapAlloc(0x14u);
-  v12 = 0;
-  if ( v11 )
-    v12 = sub_58CD30(v11);
-  dword_B3B0A8 = (int)v12;
-  v13 = (unsigned int *)*v12;
-  if ( *v12 )
+  while ( p_templateHead );
+  if ( !v5 ) /*0x585484*/
+    return 0; /*0x58551a*/
+  v7 = g_TileBuildStorage; /*0x58548a*/
+  v8 = (OblivionTileBuildStorage *)FormHeapAlloc(0x14u); /*0x585492*/
+  v9 = 0; /*0x58549e*/
+  if ( v8 ) /*0x5854a6*/
+    v9 = Tile::BuildStorage::Initialize(v8); /*0x5854af*/
+  g_TileBuildStorage = v9; /*0x5854b1*/
+  mainTemplate = v9->mainTemplate; /*0x5854b7*/
+  if ( v9->mainTemplate ) /*0x5854b7*/
   {
-    sub_5852C0(v13);
-    FormHeapFree((unsigned int)v13);
+    Tile::TileTemplate::Destroy(mainTemplate); /*0x5854c7*/
+    FormHeapFree((unsigned int)mainTemplate); /*0x5854cd*/
   }
-  *v12 = (int)v8;
-  v14 = sub_590330(a5, (int)v8);
-  sub_58CF40(st5_0, a3, st7_0, (int)v8);
-  *(_DWORD *)dword_B3B0A8 = 0;
-  v15 = dword_B3B0A8;
-  if ( dword_B3B0A8 )
+  v9->mainTemplate = v5; /*0x5854da*/
+  v11 = Tile::BuildAndNameTree(parent, v5); /*0x5854e1*/
+  Tile::ConnectTraitsToTree(v11, v5); /*0x5854e6*/
+  g_TileBuildStorage->mainTemplate = 0; /*0x5854f0*/
+  v12 = g_TileBuildStorage; /*0x5854fe*/
+  if ( g_TileBuildStorage ) /*0x5854f6*/
   {
-    sub_58CDB0((unsigned int **)dword_B3B0A8);
-    FormHeapFree(v15);
+    Tile::BuildStorage::Destroy(g_TileBuildStorage); /*0x585502*/
+    FormHeapFree((unsigned int)v12); /*0x585508*/
   }
-  dword_B3B0A8 = v10;
-  return v14;
+  g_TileBuildStorage = v7; /*0x585510*/
+  return v11; /*0x58551c*/
 }

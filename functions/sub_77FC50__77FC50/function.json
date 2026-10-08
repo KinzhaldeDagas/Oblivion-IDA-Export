@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77FC50",
+      "0x77FD41"
+    ]
+  ],
+  "chunks_sha256": "c2ced20a4be47d455b12aa99bfd18fc72ea97bbbe118fc9975f01226b8d88e53",
+  "comment_regular": "Apply NiStencilProperty to DX9 render state: stencil enable/ops/function/reference/mask plus D3DRS_CULLMODE selected from the native face-draw-mode table. Mode-5 caster pass groups later disable stencil but retain this property-driven cull mode.",
+  "comment_repeatable": "Apply NiStencilProperty to DX9 render state: stencil enable/ops/function/reference/mask plus D3DRS_CULLMODE selected from the native face-draw-mode table. Mode-5 caster pass groups later disable stencil but retain this property-driven cull mode.\nDX11 verified ordered writes: enabled flags bit0 => RS52=1, RS56 from manager+9C+4*(flags>>12), RS57 property+1C, RS58 property+20, RS53/54/55 from manager+BC indexed by flag fields1..3,4..6,7..9. Disabled writes only RS52=0. Always RS22 from manager+D4+4*(2*((flags>>10)&3)+DWORD(manager+F4)); +F4 is projection flip index. Other stencil states remain inherited.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77FC50",
+  "display_name": "NiD3DRenderState_ApplyStencilProperty",
   "end_ea": "0x77FD41",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77FC50",
+  "name": "NiD3DRenderState_ApplyStencilProperty",
   "segment": ".text",
   "sha256": "c2ced20a4be47d455b12aa99bfd18fc72ea97bbbe118fc9975f01226b8d88e53",
   "size": 241,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77FC50",
+  "total_chunk_size": 241,
   "type": "int __thiscall(_DWORD *this, int)",
   "xrefs_from_count": 92,
   "xrefs_to_count": 2

@@ -5,7 +5,7 @@
 0x4A76FB: test    esi, esi
 0x4A76FD: jz      short loc_4A7708
 0x4A76FF: push    esi
-0x4A7700: call    FormHeapFree
+0x4A7700: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A7705: add     esp, 4
 0x4A7708: pop     esi
 0x4A7709: retn

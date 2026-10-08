@@ -1,4 +1,4 @@
-0x6805C0: mov     ecx, ds:0B3BF00h
+0x6805C0: mov     ecx, ds:0B3BF00h; Verified: Clears the transient TravelPath A* search-node table as 0x10 bytes per configured node. The other per-record fields and exact table capacity semantics remain Unknown.
 0x6805C6: test    ecx, ecx
 0x6805C8: jz      short locret_6805E7
 0x6805CA: mov     ax, ds:0B3BF04h

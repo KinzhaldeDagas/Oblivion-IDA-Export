@@ -1,7 +1,8 @@
-char __thiscall sub_772400(NiD3DTextureStage *this)
-{
-  if ( sub_773440(*((NiD3DTextureStage **)this + 3), (NiD3DTextureStage *)this->Stage) )
-    return 0;
-  sub_7721E0(this);
-  return 1;
+// Oblivion NiD3DTextureStage pass application: apply its tracked stage/sampler state group, then bind the resolved texture and commit the texture transform.
+unsigned __int8 __thiscall OB_NiD3DTextureStage_ApplyForPass_010201A0(void *this)
+{                                               // Apply the authored texture-stage and five sampler states immediately before binding the stage texture.
+  if ( OB_NiD3DTextureStageStateGroup_ApplyAllStates_010201A0(*((void **)this + 3), *(_DWORD *)this) ) /*0x772409*/
+    return 0; /*0x772412*/
+  OB_NiD3DTextureStage_BindTextureAndTransform_010201A0(this); /*0x772418*/
+  return 1; /*0x772414*/
 }

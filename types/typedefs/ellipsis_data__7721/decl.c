@@ -1,1 +1,1 @@
-ellipsis_data
+typedef tag_ellipsis_data ellipsis_data;

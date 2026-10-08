@@ -2,7 +2,7 @@
 0x9EDAA6: push    ecx
 0x9EDAA7: fstp    [esp+4+var_4]; float
 0x9EDAAA: push    offset aFrumbleblockti; "fRumbleBlockTime"
-0x9EDAAF: mov     ecx, offset unk_B37C18
+0x9EDAAF: mov     ecx, 0B37C18h
 0x9EDAB4: call    GameSetting_ConstrAndReg_float
 0x9EDAB9: push    offset sub_A1FF50; void (__cdecl *)()
 0x9EDABE: call    _atexit

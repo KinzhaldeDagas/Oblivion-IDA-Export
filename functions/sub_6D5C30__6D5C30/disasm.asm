@@ -1,4 +1,4 @@
-0x6D5C30: push    ebx
+0x6D5C30: push    ebx; Oblivion NiTransformInterpolator construction from a supplied 0x20-byte transform. Copies the transform to +0x0C, leaves data +0x2C null, and zeroes all three authored-key cursors.
 0x6D5C31: push    esi
 0x6D5C32: push    edi
 0x6D5C33: mov     ebx, ecx

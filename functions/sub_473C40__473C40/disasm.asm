@@ -1,4 +1,4 @@
-0x473C40: push    ecx
+0x473C40: push    ecx; Writes the 2-byte actor-animation payload length, then delegates to ActorAnimData_SaveState when animation data exists and the actor is eligible. Mirrors Actor_GetAnimationSaveStateSize.
 0x473C41: push    esi
 0x473C42: mov     esi, [esp+8+arg_0]
 0x473C46: push    edi
@@ -15,13 +15,13 @@
 0x473C67: jnz     short loc_473C78
 0x473C69: push    esi
 0x473C6A: mov     ecx, edi
-0x473C6C: call    sub_473420
+0x473C6C: call    ActorAnimData_GetSaveStateSize; Computes ActorAnimData serialized size from fixed slot/key/action fields plus variable active sequence and current/queued idle state.
 0x473C71: movzx   eax, ax
 0x473C74: mov     [esp+0Ch+Src], eax
-0x473C78: push    2; Size
+0x473C78: push    2; byteCount
 0x473C7A: lea     ecx, [esp+10h+Src]
-0x473C7E: push    ecx; Src
-0x473C7F: mov     ecx, ds:0B33B00h
+0x473C7E: push    ecx; source
+0x473C7F: mov     ecx, ds:0B33B00h; self
 0x473C85: call    SaveLoad_SaveData
 0x473C8A: test    edi, edi
 0x473C8C: jz      short loc_473CA8
@@ -34,7 +34,7 @@
 0x473C9E: jnz     short loc_473CA8
 0x473CA0: push    esi; int
 0x473CA1: mov     ecx, edi; int
-0x473CA3: call    sub_473600
+0x473CA3: call    ActorAnimData_SaveState; Serializes ActorAnimData active/queued keys, action state, sequence timing blocks, movement/root state, and current/queued idle records.
 0x473CA8: pop     edi
 0x473CA9: pop     esi
 0x473CAA: pop     ecx

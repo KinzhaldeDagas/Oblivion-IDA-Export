@@ -1,4 +1,4 @@
-0x7C7340: push    0FFFFFFFFh
+0x7C7340: push    0FFFFFFFFh; ShadowSceneNode constructor. Initializes full list (+0xE4..+0xF0), active list (+0xF4..+0x100), iterator/partition anchors, and persistent lights at +0x110/+0x114.
 0x7C7342: push    offset ??0ShadowSceneNode@@QAE@XZ_SEH
 0x7C7347: mov     eax, large fs:0
 0x7C734D: push    eax
@@ -24,7 +24,7 @@
 0x7C738B: mov     [edi+0Ch], ebx
 0x7C738E: mov     [edi+4], ebx
 0x7C7391: mov     [edi+8], ebx
-0x7C7394: mov     dword ptr [edi], offset ??_7?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@6B@; const NiTPointerList<NiPointer<ShadowSceneLight>>::`vftable'
+0x7C7394: mov     dword ptr [edi], offset ??_7?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@6B@; MEF LARGE PERF 2026-09-08: PERF-6 native ownership: full list atShadowSceneNode+E4 has vtableA9048C, head+E8,tail+EC,count+F0. Allocate slotA90490->4F0F60 pool; releaseA90494->7C3190 decrements owned light ref, clearsnode+8 and returns node to pool. Fast path must preserve final refs/list layout and restrict native contracts.
 0x7C739A: lea     ebp, [esi+0F4h]
 0x7C73A0: mov     [ebp+0Ch], ebx
 0x7C73A3: mov     [ebp+4], ebx
@@ -39,9 +39,9 @@
 0x7C73CF: mov     byte ptr [esp+2Ch+var_4], 7
 0x7C73D4: call    NiObjectNET_SetName
 0x7C73D9: mov     ecx, edi
-0x7C73DB: call    NiTPointerList__FreeAllNodes
+0x7C73DB: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7C73E0: mov     ecx, ebp
-0x7C73E2: call    NiTPointerList__FreeAllNodes
+0x7C73E2: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7C73E7: mov     [esi+118h], ebx
 0x7C73ED: mov     edi, [esi+120h]
 0x7C73F3: cmp     edi, ebx
@@ -86,8 +86,8 @@
 0x7C746D: mov     byte ptr [esp+28h+var_4], 8
 0x7C7472: jz      short loc_7C747F
 0x7C7474: mov     ecx, eax; this
-0x7C7476: call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight::ShadowSceneLight(void)
-0x7C747B: mov     ebp, eax
+0x7C7476: call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight constructor. Initializes projection/transition/status fields, object/receiver list ownership, map/camera state, and source pointers.
+0x7C747B: mov     ebp, eax; Construct the first persistent ShadowSceneNode-owned ShadowSceneLight stored at node+0x110; no post-construction unresolved-field writes occur here.
 0x7C747D: jmp     short loc_7C7481
 0x7C747F: xor     ebp, ebp
 0x7C7481: mov     edi, [esi+110h]
@@ -122,8 +122,8 @@
 0x7C74D7: mov     byte ptr [esp+28h+var_4], 9
 0x7C74DC: jz      short loc_7C74E9
 0x7C74DE: mov     ecx, eax; this
-0x7C74E0: call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight::ShadowSceneLight(void)
-0x7C74E5: mov     ebp, eax
+0x7C74E0: call    ??0ShadowSceneLight@@QAE@XZ; ShadowSceneLight constructor. Initializes projection/transition/status fields, object/receiver list ownership, map/camera state, and source pointers.
+0x7C74E5: mov     ebp, eax; Construct the second persistent ShadowSceneNode-owned ShadowSceneLight stored at node+0x114; no post-construction unresolved-field writes occur here.
 0x7C74E7: jmp     short loc_7C74EB
 0x7C74E9: xor     ebp, ebp
 0x7C74EB: mov     edi, [esi+114h]
@@ -162,3 +162,43 @@
 0x7C754B: pop     ebx
 0x7C754C: add     esp, 14h
 0x7C754F: retn
+0x9CE7A0: mov     ecx, [ebp-14h]; this
+0x9CE7A3: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9CE7A8: mov     ecx, [ebp-14h]
+0x9CE7AB: add     ecx, 0DCh ; 'Ü'; slot
+0x9CE7B1: jmp     NiPointerSlot_Release
+0x9CE7B6: mov     ecx, [ebp-14h]
+0x9CE7B9: add     ecx, 0E4h ; 'ä'
+0x9CE7BF: jmp     j_??1?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@UAE@XZ; NiTPointerList<NiPointer<ShadowSceneLight>>::~NiTPointerList<NiPointer<ShadowSceneLight>>(void)
+0x9CE7C4: mov     ecx, [ebp-14h]
+0x9CE7C7: add     ecx, 0F4h ; 'ô'
+0x9CE7CD: jmp     j_??1?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@UAE@XZ; NiTPointerList<NiPointer<ShadowSceneLight>>::~NiTPointerList<NiPointer<ShadowSceneLight>>(void)
+0x9CE7D2: mov     ecx, [ebp-14h]
+0x9CE7D5: add     ecx, 110h; slot
+0x9CE7DB: jmp     NiPointerSlot_Release
+0x9CE7E0: mov     ecx, [ebp-14h]
+0x9CE7E3: add     ecx, 114h; slot
+0x9CE7E9: jmp     NiPointerSlot_Release
+0x9CE7EE: mov     ecx, [ebp-14h]
+0x9CE7F1: add     ecx, 120h; slot
+0x9CE7F7: jmp     NiPointerSlot_Release
+0x9CE7FC: mov     ecx, [ebp-14h]
+0x9CE7FF: add     ecx, 124h; slot
+0x9CE805: jmp     NiPointerSlot_Release
+0x9CE80A: mov     eax, [ebp-10h]
+0x9CE80D: push    eax
+0x9CE80E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE813: pop     ecx
+0x9CE814: retn
+0x9CE815: mov     eax, [ebp-10h]
+0x9CE818: push    eax
+0x9CE819: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE81E: pop     ecx
+0x9CE81F: retn
+0x9CE820: mov     edx, [esp+arg_4]
+0x9CE824: lea     eax, [edx-18h]
+0x9CE827: mov     ecx, [edx-1Ch]
+0x9CE82A: xor     ecx, eax
+0x9CE82C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE831: mov     eax, offset stru_AF7730
+0x9CE836: jmp     ___CxxFrameHandler3

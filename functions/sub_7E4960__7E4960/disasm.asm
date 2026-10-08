@@ -1,4 +1,4 @@
-0x7E4960: sub     esp, 50h
+0x7E4960: sub     esp, 50h; Verified (Oblivion): samples NiGeometryData vertices/normals from a target geometry and writes a new particle instance record at slotIndex. This is emitterType_70 value 0, kParticleShaderEmitter_Geometry.
 0x7E4963: mov     eax, ds:0B3F9A8h
 0x7E4968: mov     edx, ds:0B3F9B0h
 0x7E496E: push    ebx
@@ -67,18 +67,18 @@
 0x7E4A59: fstp    [esp+60h+var_28]
 0x7E4A5D: fld     [esp+60h+var_30]
 0x7E4A61: fadd    [esp+60h+var_24]
-0x7E4A65: fstp    [esp+60h+var_18]
-0x7E4A69: mov     ecx, [esp+60h+var_18]
+0x7E4A65: fstp    [esp+60h+outVertices.data]
+0x7E4A69: mov     ecx, [esp+60h+outVertices.data]
 0x7E4A6D: fld     [esp+60h+var_2C]
 0x7E4A71: mov     dword ptr [esp+60h+var_48], ecx
 0x7E4A75: fadd    [esp+60h+var_20]
-0x7E4A79: fstp    [esp+60h+var_14]
-0x7E4A7D: mov     edx, [esp+60h+var_14]
+0x7E4A79: fstp    [esp+60h+outVertices.stride]
+0x7E4A7D: mov     edx, [esp+60h+outVertices.stride]
 0x7E4A81: fld     [esp+60h+var_28]
 0x7E4A85: mov     dword ptr [esp+60h+var_48+4], edx
 0x7E4A89: fadd    [esp+60h+var_1C]
-0x7E4A8D: fstp    [esp+60h+var_10]
-0x7E4A91: mov     eax, [esp+60h+var_10]
+0x7E4A8D: fstp    dword ptr [esp+60h+outVertices.unknown08]
+0x7E4A91: mov     eax, dword ptr [esp+60h+outVertices.unknown08]
 0x7E4A95: mov     [esp+60h+var_40], eax
 0x7E4A99: call    _rand
 0x7E4A9E: mov     [esp+60h+var_50], eax
@@ -103,11 +103,11 @@
 0x7E4AED: fstp    [esp+60h+var_8]
 0x7E4AF1: fld     [esp+60h+var_4C]
 0x7E4AF5: fstp    [esp+60h+var_4]
-0x7E4AF9: call    sub_43F350
+0x7E4AF9: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7E4AFE: fstp    st
 0x7E4B00: lea     ecx, [esp+60h+var_C]
 0x7E4B04: push    ecx
-0x7E4B05: lea     edx, [esp+64h+var_18]
+0x7E4B05: lea     edx, [esp+64h+outVertices]
 0x7E4B09: push    edx
 0x7E4B0A: lea     ecx, [edi+64h]
 0x7E4B0D: call    sub_7101F0
@@ -137,28 +137,28 @@
 0x7E4B63: test    al, al
 0x7E4B65: jz      loc_7E4BF5
 0x7E4B6B: xor     eax, eax
-0x7E4B6D: push    1
-0x7E4B6F: mov     ecx, esi
-0x7E4B71: mov     [esp+64h+var_18], eax
-0x7E4B75: mov     [esp+64h+var_14], eax
-0x7E4B79: mov     byte ptr [esp+64h+var_10], al
+0x7E4B6D: push    1; writeAccess
+0x7E4B6F: mov     ecx, esi; self
+0x7E4B71: mov     [esp+64h+outVertices.data], eax
+0x7E4B75: mov     [esp+64h+outVertices.stride], eax
+0x7E4B79: mov     [esp+64h+outVertices.unknown08], al
 0x7E4B7D: mov     [esp+64h+var_24], eax
 0x7E4B81: mov     [esp+64h+var_20], eax
 0x7E4B85: mov     byte ptr [esp+64h+var_1C], al
-0x7E4B89: call    sub_728AB0
+0x7E4B89: call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.
 0x7E4B8E: test    al, al
 0x7E4B90: jz      loc_7E4C45
-0x7E4B96: lea     ecx, [esp+60h+var_18]
-0x7E4B9A: push    ecx
-0x7E4B9B: mov     ecx, esi
-0x7E4B9D: call    sub_728B60
+0x7E4B96: lea     ecx, [esp+60h+outVertices]
+0x7E4B9A: push    ecx; outVertices
+0x7E4B9B: mov     ecx, esi; self
+0x7E4B9D: call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.
 0x7E4BA2: lea     edx, [esp+60h+var_24]
 0x7E4BA6: push    edx
 0x7E4BA7: mov     ecx, esi
 0x7E4BA9: call    sub_728D00
-0x7E4BAE: mov     eax, [esp+60h+var_14]
+0x7E4BAE: mov     eax, [esp+60h+outVertices.stride]
 0x7E4BB2: imul    eax, ebx
-0x7E4BB5: add     eax, [esp+60h+var_18]
+0x7E4BB5: add     eax, [esp+60h+outVertices.data]
 0x7E4BB9: mov     ecx, [eax]
 0x7E4BBB: mov     dword ptr [esp+60h+var_48], ecx
 0x7E4BBF: mov     edx, [eax+4]
@@ -173,9 +173,9 @@
 0x7E4BDE: mov     edx, [eax+4]
 0x7E4BE1: mov     dword ptr [esp+60h+var_3C+4], edx
 0x7E4BE5: mov     eax, [eax+8]
-0x7E4BE8: mov     ecx, esi
+0x7E4BE8: mov     ecx, esi; self
 0x7E4BEA: mov     [esp+60h+var_34], eax
-0x7E4BEE: call    sub_728B20
+0x7E4BEE: call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.
 0x7E4BF3: jmp     short loc_7E4C45
 0x7E4BF5: mov     eax, [esi+1Ch]
 0x7E4BF8: test    eax, eax
@@ -183,7 +183,7 @@
 0x7E4BFC: lea     ecx, [ebx+ebx*2]
 0x7E4BFF: lea     eax, [eax+ecx*4]
 0x7E4C02: jmp     short loc_7E4C09
-0x7E4C04: mov     eax, offset Vector3_InitValue?
+0x7E4C04: mov     eax, offset g_zeroNiPoint3
 0x7E4C09: mov     edx, [eax]
 0x7E4C0B: mov     dword ptr [esp+60h+var_48], edx
 0x7E4C0F: mov     ecx, [eax+4]
@@ -196,14 +196,14 @@
 0x7E4C24: lea     eax, [ebx+ebx*2]
 0x7E4C27: lea     eax, [esi+eax*4]
 0x7E4C2A: jmp     short loc_7E4C31
-0x7E4C2C: mov     eax, offset Vector3_InitValue?
+0x7E4C2C: mov     eax, offset g_zeroNiPoint3
 0x7E4C31: mov     ecx, [eax]
 0x7E4C33: mov     dword ptr [esp+60h+var_3C], ecx
 0x7E4C37: mov     edx, [eax+4]
 0x7E4C3A: mov     dword ptr [esp+60h+var_3C+4], edx
 0x7E4C3E: mov     eax, [eax+8]
 0x7E4C41: mov     [esp+60h+var_34], eax
-0x7E4C45: cmp     byte ptr [ebp+78h], 0
+0x7E4C45: cmp     byte ptr [ebp+78h], 0; Verified (Oblivion): when bWorldspace_78 is true, geometry/skinned-geometry samples are transformed by the source geometry's transform.
 0x7E4C49: jz      short loc_7E4CB2
 0x7E4C4B: lea     ecx, [esp+60h+var_48]
 0x7E4C4F: push    ecx
@@ -211,7 +211,7 @@
 0x7E4C54: lea     esi, [edi+64h]
 0x7E4C57: push    edx
 0x7E4C58: mov     ecx, esi
-0x7E4C5A: call    sub_53D4B0
+0x7E4C5A: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x7E4C5F: mov     ecx, [eax]
 0x7E4C61: mov     dword ptr [esp+60h+var_48], ecx
 0x7E4C65: mov     edx, [eax+4]
@@ -239,7 +239,7 @@
 0x7E4CAE: mov     [esp+60h+var_34], edx
 0x7E4CB2: mov     ecx, [ebp+6Ch]
 0x7E4CB5: fld     dword ptr [esp+60h+var_48]
-0x7E4CB9: mov     eax, [esp+60h+arg_0]
+0x7E4CB9: mov     eax, [esp+60h+slotIndex]
 0x7E4CBD: shl     eax, 5
 0x7E4CC0: fstp    dword ptr [eax+ecx]
 0x7E4CC3: mov     edx, [ebp+6Ch]

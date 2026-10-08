@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ED6C0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+lightSlot];",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7ED6D4",
-    "line": "mov     ebp, [esp+3Ch+arg_4]",
+    "line": "mov     ebp, [esp+3Ch+shadowSceneLight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7ED6F1",
-    "line": "add     eax, offset dword_B46498",
+    "line": "add     eax, offset flt_B46498",
     "mnemonic": "add",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7ED71C",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7ED743",
-    "line": "push    1",
+    "line": "push    1; w",
     "mnemonic": "push",
     "size": 2
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x7ED749",
-    "line": "mov     bl, [ebp+0FCh]",
+    "line": "mov     bl, [ebp+0FCh]; ShadowSceneLight+0xFC is the proven backingIsNiPointLight classification byte written by ShadowSceneLight_SetBackingLight at 0x7D3468. Zero selects directional vector+ambient path; nonzero selects point position/attenuation path.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7ED74F",
-    "line": "fld     [esp+3Ch+arg_8]",
+    "line": "fld     [esp+3Ch+dimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x7ED787",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x7ED7CC",
-    "line": "mov     eax, [esp+4Ch+arg_0]",
+    "line": "mov     eax, [esp+4Ch+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x7ED7D3",
-    "line": "push    eax",
+    "line": "push    eax; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ED7D4",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7ED7D9",
-    "line": "fld     [esp+50h+arg_8]",
+    "line": "fld     [esp+50h+dimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x7ED7EC",
-    "line": "push    offset dword_B40224",
+    "line": "push    offset stru_B40224",
     "mnemonic": "push",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x7ED7F6",
-    "line": "fld     [esp+44h+arg_8]",
+    "line": "fld     [esp+44h+dimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7ED95E",
-    "line": "mov     eax, [esp+4Ch+arg_0]",
+    "line": "mov     eax, [esp+4Ch+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1201,13 +1201,13 @@
   },
   {
     "ea": "0x7ED965",
-    "line": "push    eax",
+    "line": "push    eax; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ED966",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x7ED9E7",
-    "line": "mov     ds:0B46498h, ecx",
+    "line": "mov     ds:0B46498h, ecx; Directional-light path writes shared AmbientColor c5 RGB. Leaf pixel shader later multiplies sampled RGB by VS-computed lighting; black c5 plus zero diffuse produces black RGB with alpha intact.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x7EDB7D",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x7EDB90",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x7EDBAD",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2275,7 +2275,7 @@
   },
   {
     "ea": "0x7EDBCA",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x7EDBFD",
-    "line": "mov     ecx, [esp+3Ch+arg_0]",
+    "line": "mov     ecx, [esp+3Ch+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x7EDC22",
-    "line": "add     eax, offset dword_B46498",
+    "line": "add     eax, offset flt_B46498; Writes shared light color slot (slot0 -> leaf c6; slot1 -> c7). This is the material/light-constant route capable of blackening a correctly colored texture.",
     "mnemonic": "add",
     "size": 5
   },
@@ -2599,7 +2599,7 @@
   },
   {
     "ea": "0x7EDC91",
-    "line": "add     eax, offset dword_B46498",
+    "line": "add     eax, offset flt_B46498",
     "mnemonic": "add",
     "size": 5
   },

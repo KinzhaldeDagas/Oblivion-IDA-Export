@@ -19,9 +19,9 @@
 0x593A85: fld     dword ptr ds:0A379B4h
 0x593A8B: push    ecx
 0x593A8C: mov     ecx, [esi+3Ch]; this
-0x593A8F: fstp    [esp+4+a2]; a3
-0x593A92: push    0FA1h; a2
-0x593A97: call    Tile_SetFloat
+0x593A8F: fstp    [esp+4+a2]; value
+0x593A92: push    0FA1h; propertyCode
+0x593A97: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x593A9C: mov     eax, ds:0B38900h
 0x593AA1: mov     ecx, [esi+0A0h]
 0x593AA7: push    eax

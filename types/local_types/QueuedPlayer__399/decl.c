@@ -1,1 +1,1 @@
-QueuedPlayer
+struct QueuedPlayer;

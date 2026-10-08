@@ -1,4 +1,4 @@
-void *sub_72F170()
+NiRTTI *sub_72F170()
 {
-  return &unk_B3FF2C;
+  return &stru_B3FF2C; /*0x72f175*/
 }

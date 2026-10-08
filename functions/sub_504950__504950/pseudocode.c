@@ -7,8 +7,8 @@ char __cdecl sub_504950(
         int a6,
         double *a7)
 {
-  if ( a3 )
-    return sub_4F76B0(a3, 0, 0, a7);
+  if ( a3 ) /*0x504956*/
+    return sub_4F76B0(a3, 0, 0, a7); /*0x504962*/
   else
-    return 1;
+    return 1; /*0x50496b*/
 }

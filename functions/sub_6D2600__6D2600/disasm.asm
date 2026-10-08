@@ -14,7 +14,6 @@
 0x6D2623: mov     ebp, [esp+18h+arg_4]
 0x6D2627: push    edi
 0x6D2628: jmp     short loc_6D2632
-0x6D262A: align 10h
 0x6D2630: fldz
 0x6D2632: movzx   eax, bl
 0x6D2635: lea     edi, [eax+eax*2]

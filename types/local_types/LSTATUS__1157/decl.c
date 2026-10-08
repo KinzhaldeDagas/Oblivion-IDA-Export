@@ -1,1 +1,1 @@
-LSTATUS
+typedef LONG LSTATUS;

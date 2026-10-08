@@ -8,11 +8,11 @@
 0x4E0AC4: push    edi
 0x4E0AC5: mov     esi, ecx
 0x4E0AC7: jnb     short loc_4E0AE2
-0x4E0AC9: push    1; a2
+0x4E0AC9: push    1; byteCount
 0x4E0ACB: lea     ecx, [esp+44h+a1.vtbl+1]
-0x4E0ACF: push    ecx; a1
-0x4E0AD0: mov     ecx, esi
-0x4E0AD2: call    TESForm_LoadDataFromCurrentSaveGame
+0x4E0ACF: push    ecx; destination
+0x4E0AD0: mov     ecx, esi; self
+0x4E0AD2: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4E0AD7: cmp     byte ptr [esp+40h+a1.vtbl+1], bl
 0x4E0ADB: jz      short loc_4E0AE2
 0x4E0ADD: or      byte ptr [esp+40h+a1.vtbl], 1
@@ -22,33 +22,33 @@
 0x4E0AED: mov     edx, ds:0B33B00h
 0x4E0AF3: cmp     byte ptr [edx+7Ch], 2Bh ; '+'
 0x4E0AF7: jb      short loc_4E0B07
-0x4E0AF9: push    1; a2
+0x4E0AF9: push    1; byteCount
 0x4E0AFB: lea     eax, [esp+44h+a1]
-0x4E0AFF: push    eax; a1
-0x4E0B00: mov     ecx, esi
-0x4E0B02: call    TESForm_LoadDataFromCurrentSaveGame
+0x4E0AFF: push    eax; destination
+0x4E0B00: mov     ecx, esi; self
+0x4E0B02: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4E0B07: mov     ecx, ds:0B33B00h
 0x4E0B0D: mov     al, [ecx+7Ch]
 0x4E0B10: cmp     al, 16h
 0x4E0B12: jb      short loc_4E0B31
 0x4E0B14: cmp     al, 2Bh ; '+'
 0x4E0B16: jnb     short loc_4E0B31
-0x4E0B18: push    1; a2
+0x4E0B18: push    1; byteCount
 0x4E0B1A: lea     edx, [esp+44h+a1.vtbl+1]
-0x4E0B1E: push    edx; a1
-0x4E0B1F: mov     ecx, esi
-0x4E0B21: call    TESForm_LoadDataFromCurrentSaveGame
+0x4E0B1E: push    edx; destination
+0x4E0B1F: mov     ecx, esi; self
+0x4E0B21: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4E0B26: cmp     byte ptr [esp+40h+a1.vtbl+1], bl
 0x4E0B2A: jz      short loc_4E0B31
 0x4E0B2C: or      byte ptr [esp+40h+a1.vtbl], 1
 0x4E0B31: mov     eax, ds:0B33B00h
 0x4E0B36: cmp     byte ptr [eax+7Ch], 18h
 0x4E0B3A: jb      loc_4E0BF2
-0x4E0B40: push    1; a2
+0x4E0B40: push    1; byteCount
 0x4E0B42: lea     ecx, [esp+44h+a1.vtbl+1]
-0x4E0B46: push    ecx; a1
-0x4E0B47: mov     ecx, esi
-0x4E0B49: call    TESForm_LoadDataFromCurrentSaveGame
+0x4E0B46: push    ecx; destination
+0x4E0B47: mov     ecx, esi; self
+0x4E0B49: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x4E0B4E: lea     edx, [esp+40h+a1.vtbl+2]
 0x4E0B52: push    edx
 0x4E0B53: mov     ecx, esi
@@ -82,7 +82,7 @@
 0x4E0BAF: add     esp, 14h
 0x4E0BB2: push    ecx
 0x4E0BB3: mov     ecx, ds:0B33B00h
-0x4E0BB9: call    SaveLoad_AdvanceBufferOffset
+0x4E0BB9: call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.
 0x4E0BBE: mov     edx, [esi]
 0x4E0BC0: mov     eax, [edx+190h]
 0x4E0BC6: mov     ecx, esi
@@ -94,9 +94,9 @@
 0x4E0BD5: push    ecx
 0x4E0BD6: fstp    [esp+48h+a2]; float
 0x4E0BD9: push    1; int
-0x4E0BDB: push    offset Vector3_InitValue?; int
+0x4E0BDB: push    offset g_zeroNiPoint3; int
 0x4E0BE0: push    edi; int
-0x4E0BE1: call    sub_8AB440
+0x4E0BE1: call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.
 0x4E0BE6: add     esp, 14h
 0x4E0BE9: pop     edi
 0x4E0BEA: pop     esi
@@ -132,12 +132,12 @@
 0x4E0C4B: jz      short loc_4E0C9E
 0x4E0C4D: push    1
 0x4E0C4F: push    edi
-0x4E0C50: call    sub_8A5580
+0x4E0C50: call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x4E0C55: push    ebx; a4
 0x4E0C56: push    1; a3
 0x4E0C58: push    1; a2
 0x4E0C5A: push    edi; a1
-0x4E0C5B: call    sub_88D070
+0x4E0C5B: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x4E0C60: mov     eax, [esi]
 0x4E0C62: mov     edx, [eax+164h]
 0x4E0C68: add     esp, 18h
@@ -148,10 +148,10 @@
 0x4E0C73: jz      short loc_4E0C9E
 0x4E0C75: fldz
 0x4E0C77: push    ecx
-0x4E0C78: fstp    [esp+44h+var_44]; float
-0x4E0C7B: mov     ecx, esi
-0x4E0C7D: push    5; int
-0x4E0C7F: call    sub_470FC0
+0x4E0C78: fstp    dword ptr [esp+44h+var_44]; easeOutTime
+0x4E0C7B: mov     ecx, esi; this
+0x4E0C7D: push    5; slot
+0x4E0C7F: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x4E0C84: mov     eax, ds:0B3F9A8h
 0x4E0C89: mov     [esi+18h], eax
 0x4E0C8C: mov     ecx, ds:0B3F9ACh
@@ -163,7 +163,7 @@
 0x4E0CA1: push    ecx
 0x4E0CA2: fstp    [esp+48h+a2]; a2
 0x4E0CA5: mov     ecx, edi; this
-0x4E0CA7: call    NiAVObject_UpdateNiAVObject
+0x4E0CA7: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E0CAC: pop     edi
 0x4E0CAD: pop     esi
 0x4E0CAE: pop     ebx
@@ -182,7 +182,7 @@
 0x4E0CD5: mov     ecx, ds:0B33B00h
 0x4E0CDB: add     esp, 0Ch
 0x4E0CDE: push    eax
-0x4E0CDF: call    SaveLoad_AdvanceBufferOffset
+0x4E0CDF: call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.
 0x4E0CE4: pop     edi
 0x4E0CE5: pop     esi
 0x4E0CE6: pop     ebx

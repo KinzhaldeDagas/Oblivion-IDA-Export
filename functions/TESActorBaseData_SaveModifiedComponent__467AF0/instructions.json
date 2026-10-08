@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x467B00",
-    "line": "mov     [esp+1Ch+var_8], edi",
+    "line": "mov     [esp+1Ch+source], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x467B0B",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x467B14",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467B1A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x467B20",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x467B2E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x467B37",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x467B39",
-    "line": "lea     eax, [esp+20h+var_8]",
+    "line": "lea     eax, [esp+20h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x467B3D",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x467B48",
-    "line": "mov     bl, [esp+20h+arg_0]",
+    "line": "mov     bl, byte ptr [esp+20h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x467B51",
-    "line": "push    10h; Size",
+    "line": "push    10h; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x467B56",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467B57",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x467B67",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467B6D",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x467B7A",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x467B9E",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x467BA4",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467BA5",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -355,37 +355,37 @@
   },
   {
     "ea": "0x467BAF",
-    "line": "mov     [esp+28h+arg_0], al",
+    "line": "mov     byte ptr [esp+28h+changeMask], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x467BB3",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x467BB8",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467BBE",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467BBF",
-    "line": "lea     edx, [esp+24h+arg_0]",
+    "line": "lea     edx, [esp+24h+changeMask]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x467BC3",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x467BFB",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x467C53",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

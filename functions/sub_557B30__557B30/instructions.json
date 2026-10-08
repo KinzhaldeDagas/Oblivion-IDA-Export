@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x557B3D",
-    "line": "push    ecx",
+    "line": "push    ecx; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x557B3E",
-    "line": "push    eax",
+    "line": "push    eax; begin",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x557B41",
-    "line": "call    sub_557740",
+    "line": "call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x557B4A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

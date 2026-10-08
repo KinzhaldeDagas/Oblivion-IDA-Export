@@ -1,12 +1,12 @@
-0x784B30: push    esi
-0x784B31: mov     esi, [esp+4+arg_4]
+0x784B30: push    esi; vector<float> uninitialized-fill primitive: constructs count four-byte float elements at destination from *value and returns destination+count. Identified from Oblivion call shape and four-byte stride.
+0x784B31: mov     esi, [esp+4+count]
 0x784B35: test    esi, esi
 0x784B37: push    edi
-0x784B38: mov     edi, [esp+8+arg_0]
+0x784B38: mov     edi, [esp+8+destination]
 0x784B3C: mov     eax, esi
 0x784B3E: mov     ecx, edi
 0x784B40: jbe     short loc_784B54
-0x784B42: mov     edx, [esp+8+arg_8]
+0x784B42: mov     edx, [esp+8+value]
 0x784B46: fld     dword ptr [edx]
 0x784B48: sub     eax, 1
 0x784B4B: fstp    dword ptr [ecx]

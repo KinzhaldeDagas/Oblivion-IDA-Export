@@ -1,1 +1,1 @@
-SecPkgInfoW
+typedef _SecPkgInfoW SecPkgInfoW;

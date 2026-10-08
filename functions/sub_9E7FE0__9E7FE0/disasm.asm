@@ -1,4 +1,4 @@
-0x9E7FE0: fld     ds:flt_A3D65C
+0x9E7FE0: fld     ds:kHeadBodyNormalMatchRadius
 0x9E7FE6: push    ecx
 0x9E7FE7: fstp    [esp+4+var_4]; float
 0x9E7FEA: push    offset aFchase3rdperso; "fChase3rdPersonVanityXYMult"

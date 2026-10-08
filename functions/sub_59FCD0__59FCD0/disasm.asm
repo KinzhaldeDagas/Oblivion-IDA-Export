@@ -20,10 +20,10 @@
 0x59FCFC: call    sub_59FA20
 0x59FD01: test    eax, eax
 0x59FD03: jz      short loc_59FD3A
-0x59FD05: call    sub_57D7A0
+0x59FD05: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x59FD0A: fmul    qword ptr ds:0A2FAA0h
 0x59FD10: fadd    dword ptr [ebx+20h]
-0x59FD13: call    Double_To_SInt32
+0x59FD13: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x59FD18: mov     [esp+14h+arg_0], eax
 0x59FD1C: fild    [esp+14h+arg_0]
 0x59FD20: push    edi
@@ -31,7 +31,7 @@
 0x59FD23: call    sub_59FA20
 0x59FD28: mov     ecx, eax
 0x59FD2A: fstp    [esp+14h+var_8]
-0x59FD2E: call    sub_588C50
+0x59FD2E: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
 0x59FD33: fsubr   [esp+14h+var_8]
 0x59FD37: fstp    dword ptr [esi+74h]
 0x59FD3A: pop     edi

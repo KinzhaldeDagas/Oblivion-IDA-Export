@@ -1,1 +1,1 @@
-HDITEMA
+typedef _HD_ITEMA HDITEMA;

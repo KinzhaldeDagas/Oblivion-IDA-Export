@@ -50,7 +50,7 @@
 0x57C698: and     eax, 0Bh
 0x57C69B: push    eax
 0x57C69C: push    3FEh
-0x57C6A1: call    sub_5790E0
+0x57C6A1: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x57C6A6: add     esp, 18h
 0x57C6A9: cmp     [esp+10h+arg_0], 0
 0x57C6AE: jz      loc_57C76A
@@ -61,19 +61,19 @@
 0x57C6C0: mov     ecx, edi
 0x57C6C2: call    Tile_GetParentMenu
 0x57C6C7: mov     ecx, eax; int
-0x57C6C9: call    sub_584740
+0x57C6C9: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C6CE: test    ebx, ebx
 0x57C6D0: jz      short loc_57C6E0
 0x57C6D2: mov     ecx, ebx
 0x57C6D4: call    Tile_GetParentMenu
 0x57C6D9: mov     ecx, eax; int
-0x57C6DB: call    sub_584740
+0x57C6DB: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C6E0: test    ebp, ebp
 0x57C6E2: jz      short loc_57C6F2
 0x57C6E4: mov     ecx, ebp
 0x57C6E6: call    Tile_GetParentMenu
 0x57C6EB: mov     ecx, eax; int
-0x57C6ED: call    sub_584740
+0x57C6ED: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C6F2: test    esi, esi
 0x57C6F4: jnz     short loc_57C701
 0x57C6F6: call    sub_57A180
@@ -85,10 +85,10 @@
 0x57C705: call    InterfaceManager_GetSingleton
 0x57C70A: fld     dword ptr ds:0A68C08h
 0x57C710: mov     ecx, [eax+68h]; this
-0x57C713: fstp    [esp+18h+var_14]; a3
+0x57C713: fstp    [esp+18h+var_14]; value
 0x57C717: add     esp, 4
-0x57C71A: push    1771h; a2
-0x57C71F: call    Tile_SetFloat
+0x57C71A: push    1771h; propertyCode
+0x57C71F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57C724: push    1; arg1
 0x57C726: push    0; canCreate
 0x57C728: call    InterfaceManager_GetSingleton
@@ -101,14 +101,14 @@
 0x57C745: jz      short loc_57C799
 0x57C747: mov     ecx, esi
 0x57C749: call    Tile_GetParentMenu
-0x57C74E: mov     ecx, [eax+4Ch]
+0x57C74E: mov     ecx, [eax+4Ch]; this
 0x57C751: test    ecx, ecx
 0x57C753: jz      short loc_57C75A
-0x57C755: call    sub_58E7D0
+0x57C755: call    Tile__RequestNavigationScroll; Verified descriptive name: resolves parent xscroll trait 0xFF5, then pulses resolved target user5 (0xFB3) with sentinel, selected tile xscroll value, then zero. Navigation resolution has scroll side effects; not a pure lookup.
 0x57C75A: mov     ecx, esi
 0x57C75C: call    Tile_GetParentMenu
 0x57C761: mov     ecx, eax; int
-0x57C763: call    sub_584390
+0x57C763: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x57C768: jmp     short loc_57C799
 0x57C76A: test    al, al
 0x57C76C: jz      short loc_57C799
@@ -117,7 +117,7 @@
 0x57C772: mov     ecx, esi
 0x57C774: call    Tile_GetParentMenu
 0x57C779: mov     ecx, eax; int
-0x57C77B: call    sub_584740
+0x57C77B: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x57C780: push    1; arg1
 0x57C782: push    0; canCreate
 0x57C784: call    InterfaceManager_GetSingleton
@@ -134,7 +134,7 @@
 0x57C7A9: push    ecx
 0x57C7AA: mov     ecx, [eax+60h]; this
 0x57C7AD: fstp    [esp+18h+a2]; a2
-0x57C7B0: call    NiAVObject_UpdateNiAVObject
+0x57C7B0: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x57C7B5: pop     edi
 0x57C7B6: pop     esi
 0x57C7B7: pop     ebp

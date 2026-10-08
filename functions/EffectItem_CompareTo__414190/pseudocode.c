@@ -13,5 +13,5 @@ int __thiscall EffectItem_CompareTo(
         int a12,
         int a13)
 {
-  return EffectItem_CompareTo_::CompareEffectCodes();
+  return EffectItem_CompareTo_::CompareEffectCodes(a2, this, (int)a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 }

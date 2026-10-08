@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6ED850",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion CTL loader called twice at most by FaceGenManager_Construct for FaceGen\\\\si.ctl. Uses FRCTL001 format marker, reads 0x18-byte header (two scalar outputs + four basis dimensions), loads four named control basis banks, then FanControls data/precomputation. Returns false on read/load failure; destroys binary file on all observed return paths. Header scalar meanings remain unresolved.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,31 +103,31 @@
   },
   {
     "ea": "0x6ED885",
-    "line": "mov     ecx, [esp+94h+arg_8]",
+    "line": "mov     ecx, [esp+94h+outHeader1]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6ED88C",
-    "line": "mov     eax, [esp+94h+arg_4]",
+    "line": "mov     eax, [esp+94h+outHeader0]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6ED893",
-    "line": "mov     edx, [esp+94h+arg_10]",
+    "line": "mov     edx, [esp+94h+namedControlBanks]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6ED89A",
-    "line": "mov     esi, [esp+94h+arg_0]",
+    "line": "mov     esi, [esp+94h+source]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x6ED8A1",
-    "line": "mov     edi, [esp+94h+arg_C]",
+    "line": "mov     edi, [esp+94h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6ED8AF",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6ED8B9",
-    "line": "mov     eax, [esp+0B0h+arg_14]",
+    "line": "mov     eax, [esp+0B0h+fanControls]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6ED8C2",
-    "line": "push    8; MaxCount",
+    "line": "push    8; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x6ED8DF",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x6ED8F2",
-    "line": "mov     ecx, esp",
+    "line": "mov     ecx, esp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x6ED8FE",
-    "line": "push    ebp",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6ED8FF",
-    "line": "push    ebx",
+    "line": "push    ebx; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x6ED903",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x6ED90E",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -438,12 +438,6 @@
     "size": 2
   },
   {
-    "ea": "0x6ED958",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x6ED960",
     "line": "mov     ecx, 2",
     "mnemonic": "mov",
@@ -553,7 +547,7 @@
   },
   {
     "ea": "0x6ED99B",
-    "line": "push    edi",
+    "line": "push    edi; basisDimensions",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,13 +559,13 @@
   },
   {
     "ea": "0x6ED9A0",
-    "line": "push    ecx",
+    "line": "push    ecx; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6ED9A1",
-    "line": "mov     ecx, [esp+9Ch+var_74]",
+    "line": "mov     ecx, [esp+9Ch+var_74]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -589,7 +583,7 @@
   },
   {
     "ea": "0x6ED9AB",
-    "line": "call    sub_6EF020",
+    "line": "call    FaceGen_ReadNamedControlBasisBanks; Reads four control-basis banks (2x2 traversal), each with an entry count. Each 0x34-byte entry contains a 1 x basisDimensions[bank] float matrix followed by a length-prefixed string. Reads coefficient floats, string length, then string bytes; any failed read returns false. Do not assume these banks are texture-only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,13 +601,13 @@
   },
   {
     "ea": "0x6ED9B8",
-    "line": "mov     ecx, [esp+94h+var_80]",
+    "line": "mov     ecx, [esp+94h+var_80]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6ED9BC",
-    "line": "push    edi",
+    "line": "push    edi; basisDimensions",
     "mnemonic": "push",
     "size": 1
   },
@@ -625,13 +619,13 @@
   },
   {
     "ea": "0x6ED9C1",
-    "line": "push    edx",
+    "line": "push    edx; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6ED9C2",
-    "line": "call    sub_6EE270",
+    "line": "call    FanControls_ReadCtlDataAndPrecompute; CTL FanControls loader/precompute at manager+0xC8. First block: 20 FaceGenFanProjectionRecord records at +0x25C, indexed [fan 0..4][control 0..1][channel 0..1], strides 0x80/0x40/0x20. Each contains basis 1 x dimensions[2*channel], reciprocalSquaredLength (+0x18), and projectionOffset (+0x1C). Offset meaning verified in runtime getter. Later pair data/projection/inverse precomputation remains partially decoded. Initialized byte set after completion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -742,5 +736,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C83F0",
+    "line": "lea     ecx, [ebp-54h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C83F3",
+    "line": "jmp     ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C83F8",
+    "line": "mov     edx, [esp+outHeader0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C83FC",
+    "line": "lea     eax, [edx-84h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8402",
+    "line": "mov     ecx, [edx-88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C8408",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C840A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C840F",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8412",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8415",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C8417",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C841C",
+    "line": "mov     eax, offset stru_AF06A0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8421",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

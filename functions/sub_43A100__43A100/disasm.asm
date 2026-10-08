@@ -27,7 +27,7 @@
 0x43A149: movsx   ecx, byte ptr [esi+9]
 0x43A14D: sub     ecx, 12h
 0x43A150: push    ecx; a1
-0x43A151: call    TESForm_LookupByFormID
+0x43A151: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x43A156: add     esp, 4
 0x43A159: jmp     short loc_43A182
 0x43A15B: movsx   edx, byte ptr [esi+9]
@@ -41,7 +41,7 @@
 0x43A171: call    _tolower
 0x43A176: sub     eax, 39h ; '9'
 0x43A179: push    eax; a1
-0x43A17A: call    TESForm_LookupByFormID
+0x43A17A: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x43A17F: add     esp, 8
 0x43A182: mov     ebx, eax
 0x43A184: mov     ecx, [ebp+0]
@@ -70,7 +70,7 @@
 0x43A1BF: call    eax
 0x43A1C1: push    eax
 0x43A1C2: mov     ecx, ebp
-0x43A1C4: call    sub_439EB0
+0x43A1C4: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x43A1C9: test    eax, eax
 0x43A1CB: jz      short loc_43A1FD
 0x43A1CD: mov     ecx, [ebp+0]
@@ -107,7 +107,7 @@
 0x43A221: mov     edx, [eax+4]
 0x43A224: mov     ecx, esi
 0x43A226: call    edx
-0x43A228: cmp     eax, offset dword_B3FAB0
+0x43A228: cmp     eax, offset parent
 0x43A22D: setz    al
 0x43A230: test    al, al
 0x43A232: jz      short loc_43A23C

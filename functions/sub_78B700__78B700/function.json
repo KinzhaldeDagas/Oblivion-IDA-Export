@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_78B700",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x78B700",
+      "0x78B820"
+    ],
+    [
+      "0x9CB620",
+      "0x9CB64B"
+    ]
+  ],
+  "chunks_sha256": "47b63293870c244fdb20a355fee1a4a664d887c4b05f8da6d01f7ad86f9bbc2f",
+  "comment_regular": "CSpeedTreeRT::SetNumLeafRockingGroups. Before Compute, stores at CTreeEngine+0xBC and coerces zero to one; after Compute reports the stock no-effect error.",
+  "comment_repeatable": "CSpeedTreeRT::SetNumLeafRockingGroups. Before Compute, stores at CTreeEngine+0xBC and coerces zero to one; after Compute reports the stock no-effect error.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "CSpeedTreeRT__SetNumLeafRockingGroups",
   "end_ea": "0x78B820",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78B700",
+  "name": "CSpeedTreeRT__SetNumLeafRockingGroups",
   "segment": ".text",
   "sha256": "2fc9ecf5c73cbb475fb729af2ef99302aed216f2f3ff946e2cecb8fca7362d9c",
   "size": 288,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78B700",
-  "type": "int __userpurge@<eax>(_BYTE *this@<ecx>, int@<edi>, _DWORD *)",
-  "xrefs_from_count": 114,
+  "total_chunk_size": 331,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, unsigned int groupCount)",
+  "xrefs_from_count": 127,
   "xrefs_to_count": 2
 }

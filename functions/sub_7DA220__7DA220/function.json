@@ -1,19 +1,36 @@
 {
-  "callees_count": 162,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 48,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 15,
-  "display_name": "sub_7DA220",
+  "chunks": [
+    [
+      "0x7DA220",
+      "0x7DAAF6"
+    ],
+    [
+      "0x9CEF50",
+      "0x9CEF8C"
+    ]
+  ],
+  "chunks_sha256": "e293793b3f913b31ee824934cde8d11bf6f89232aa8303297320f109c7801d96",
+  "comment_regular": "Shared PP-lighting geometry/material setup. Oblivion parses NiProperty ID 2 name tokens here: exact 'Refract' sets passInfo 0x8000; exact 'RefractF' sets 0x10000, invalidates the cached pass key, enables refraction state, and clears conflicting alpha flag 1. Shared wrapper ownership proves Lighting30 and Hair inherit this parser.",
+  "comment_repeatable": "Shared PP-lighting geometry/material setup. Oblivion parses NiProperty ID 2 name tokens here: exact 'Refract' sets passInfo 0x8000; exact 'RefractF' sets 0x10000, invalidates the cached pass key, enables refraction state, and clears conflicting alpha flag 1. Shared wrapper ownership proves Lighting30 and Hair inherit this parser.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 21,
+  "display_name": "BSShaderPPLightingProperty_SetupGeometry",
   "end_ea": "0x7DAAF6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7DA220",
+  "name": "BSShaderPPLightingProperty_SetupGeometry",
   "segment": ".text",
   "sha256": "8bbe72c76c7847088d4a811fef13c0bea90ca2bb07442e8f57ab4dbc084029f1",
   "size": 2262,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7DA220",
-  "type": "char __thiscall(_DWORD *this, NiAVObject *)",
-  "xrefs_from_count": 885,
+  "total_chunk_size": 2322,
+  "type": "bool __thiscall(BSShaderProperty *this, NiAVObject *geometry)",
+  "xrefs_from_count": 904,
   "xrefs_to_count": 4
 }

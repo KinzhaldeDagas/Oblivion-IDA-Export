@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x449190",
+      "0x4491B0"
+    ]
+  ],
+  "chunks_sha256": "64b27e8f02b78d4e1d20dfa92d5e1a4e7a835fa9d198525d4ab66eca1787a855",
+  "comment_regular": "Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
+  "comment_repeatable": "Bethesda compact string length helper. If inline length marker is 0xFFFF, strlen(heap string); otherwise returns the 16-bit stored length. Used here to gate optional TESObjectTREE leaf texture.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_449190",
+  "display_name": "OB_CompactString_Length_010201A0",
   "end_ea": "0x4491B0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_449190",
+  "name": "OB_CompactString_Length_010201A0",
   "segment": ".text",
   "sha256": "64b27e8f02b78d4e1d20dfa92d5e1a4e7a835fa9d198525d4ab66eca1787a855",
   "size": 32,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x449190",
-  "type": "unsigned int __thiscall(int this)",
+  "total_chunk_size": 32,
+  "type": "unsigned int __thiscall(void *compactString)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 15
 }

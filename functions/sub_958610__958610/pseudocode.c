@@ -1,4 +1,4 @@
-int __thiscall sub_958610(int **this, __m128 *a2, __m128 *a3, unsigned int a4, int a5, int a6)
+int __thiscall sub_958610(int **this, __m128 *a2, __m128 *a3, float a4, int a5, int a6)
 {
   __m128 v7; // xmm2
   __m128 v8; // xmm0
@@ -16,26 +16,26 @@ int __thiscall sub_958610(int **this, __m128 *a2, __m128 *a3, unsigned int a4, i
   __m128 v21; // [esp+60h] [ebp-20h]
   __m128 v22; // [esp+70h] [ebp-10h]
 
-  v7 = *a3;
-  v21 = a3[1];
-  *(float *)&v16 = -*(float *)&a4;
-  v22 = a3[2];
-  v8 = *a2;
-  v19 = (__m128)a4;
-  v18 = _mm_sub_ps(v8, _mm_mul_ps(_mm_shuffle_ps((__m128)a4, (__m128)a4, 0), v7));
-  v9 = *this;
-  v17 = _mm_sub_ps(v8, _mm_mul_ps(_mm_shuffle_ps((__m128)v16, (__m128)v16, 0), v7));
-  v10 = *v9;
-  v20 = (__m128)v16;
-  (*(void (__thiscall **)(int *, __m128 *, __m128 *, int, int))(v10 + 0x1C))(v9, &v18, &v17, a5, a6);
-  v11 = *a2;
-  v12 = *this;
-  v18 = _mm_sub_ps(*a2, _mm_mul_ps(_mm_shuffle_ps(v19, v19, 0), v21));
-  v17 = _mm_sub_ps(v11, _mm_mul_ps(_mm_shuffle_ps(v20, v20, 0), v21));
-  (*(void (__thiscall **)(int *, __m128 *, __m128 *, int, int))(*v12 + 0x1C))(v12, &v18, &v17, a5, a6);
-  v13 = *a2;
-  v18 = _mm_sub_ps(*a2, _mm_mul_ps(_mm_shuffle_ps(v19, v19, 0), v22));
-  v14 = *this;
-  v17 = _mm_sub_ps(v13, _mm_mul_ps(_mm_shuffle_ps(v20, v20, 0), v22));
-  return (*(int (__thiscall **)(int *, __m128 *, __m128 *, int, int))(*v14 + 0x1C))(v14, &v18, &v17, a5, a6);
+  v7 = *a3; /*0x95862a*/
+  v21 = a3[1]; /*0x958630*/
+  *(float *)&v16 = -a4; /*0x958646*/
+  v22 = a3[2]; /*0x958657*/
+  v8 = *a2; /*0x95865c*/
+  v19 = (__m128)LODWORD(a4); /*0x95865f*/
+  v18 = _mm_sub_ps(v8, _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(a4), (__m128)LODWORD(a4), 0), v7)); /*0x95866f*/
+  v9 = *this; /*0x958681*/
+  v17 = _mm_sub_ps(v8, _mm_mul_ps(_mm_shuffle_ps((__m128)v16, (__m128)v16, 0), v7)); /*0x958692*/
+  v10 = *v9; /*0x958697*/
+  v20 = (__m128)v16; /*0x95869a*/
+  (*(void (__thiscall **)(int *, __m128 *, __m128 *, int, int))(v10 + 0x1C))(v9, &v18, &v17, a5, a6); /*0x95869f*/
+  v11 = *a2; /*0x9586a7*/
+  v12 = *this; /*0x9586ad*/
+  v18 = _mm_sub_ps(*a2, _mm_mul_ps(_mm_shuffle_ps(v19, v19, 0), v21)); /*0x9586ca*/
+  v17 = _mm_sub_ps(v11, _mm_mul_ps(_mm_shuffle_ps(v20, v20, 0), v21)); /*0x9586e6*/
+  (*(void (__thiscall **)(int *, __m128 *, __m128 *, int, int))(*v12 + 0x1C))(v12, &v18, &v17, a5, a6); /*0x9586ee*/
+  v13 = *a2; /*0x9586f6*/
+  v18 = _mm_sub_ps(*a2, _mm_mul_ps(_mm_shuffle_ps(v19, v19, 0), v22)); /*0x958713*/
+  v14 = *this; /*0x958725*/
+  v17 = _mm_sub_ps(v13, _mm_mul_ps(_mm_shuffle_ps(v20, v20, 0), v22)); /*0x958735*/
+  return (*(int (__thiscall **)(int *, __m128 *, __m128 *, int, int))(*v14 + 0x1C))(v14, &v18, &v17, a5, a6); /*0x958740*/
 }

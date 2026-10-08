@@ -1,4 +1,4 @@
-0x56A300: mov     eax, [esp+arg_0]
+0x56A300: mov     eax, [esp+skillValue]; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x56A304: cmp     eax, ds:0B3A4F8h
 0x56A30A: jge     short loc_56A30F
 0x56A30C: xor     eax, eax

@@ -28,13 +28,13 @@
 0x48C8BD: mov     ecx, [esi]
 0x48C8BF: test    ecx, ecx
 0x48C8C1: jz      short loc_48C8C8
-0x48C8C3: call    BSSimpleList_Clear
+0x48C8C3: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48C8C8: mov     edx, [esi]
 0x48C8CA: push    edx
-0x48C8CB: call    FormHeapFree
+0x48C8CB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C8D0: push    esi
 0x48C8D1: mov     dword ptr [esi], 0
-0x48C8D7: call    FormHeapFree
+0x48C8D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48C8DC: add     esp, 8
 0x48C8DF: mov     ecx, [edi+4]; this
 0x48C8E2: test    ecx, ecx
@@ -90,12 +90,12 @@
 0x48C96C: mov     esi, [eax]
 0x48C96E: test    esi, esi
 0x48C970: jz      short loc_48C98E
-0x48C972: mov     ecx, esi
-0x48C974: call    ExtraDataList_GetOwner
+0x48C972: mov     ecx, esi; this
+0x48C974: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C979: test    eax, eax
 0x48C97B: jz      short loc_48C98E
-0x48C97D: mov     ecx, esi
-0x48C97F: call    ExtraDataList_GetOwner
+0x48C97D: mov     ecx, esi; this
+0x48C97F: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C984: jmp     short loc_48C990
 0x48C986: test    eax, eax
 0x48C988: jz      short loc_48C95A
@@ -109,10 +109,10 @@
 0x48C99C: mov     esi, [edi]
 0x48C99E: test    esi, esi
 0x48C9A0: jz      short loc_48C9BB
-0x48C9A2: mov     ecx, [esi]
+0x48C9A2: mov     ecx, [esi]; this
 0x48C9A4: test    ecx, ecx
 0x48C9A6: jz      short loc_48C9BB
-0x48C9A8: call    ExtraDataList_GetOwner
+0x48C9A8: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C9AD: test    eax, eax
 0x48C9AF: jz      short loc_48C9B4
 0x48C9B1: add     ebp, 1
@@ -125,12 +125,12 @@
 0x48C9C1: mov     esi, [eax]
 0x48C9C3: test    esi, esi
 0x48C9C5: jz      short loc_48C9F0
-0x48C9C7: mov     ecx, esi
-0x48C9C9: call    ExtraDataList_GetOwner
+0x48C9C7: mov     ecx, esi; this
+0x48C9C9: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C9CE: test    eax, eax
 0x48C9D0: jz      short loc_48C9F0
-0x48C9D2: mov     ecx, esi
-0x48C9D4: call    ExtraDataList_GetOwner
+0x48C9D2: mov     ecx, esi; this
+0x48C9D4: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48C9D9: test    eax, eax
 0x48C9DB: jz      short loc_48C9F0
 0x48C9DD: mov     ecx, [esp+28h+var_10]
@@ -170,16 +170,15 @@
 0x48CA52: mov     esi, eax
 0x48CA54: mov     [esp+28h+var_C], esi
 0x48CA58: jmp     short loc_48CA60
-0x48CA5A: align 10h
 0x48CA60: mov     edi, [esi]
 0x48CA62: test    edi, edi
 0x48CA64: jz      loc_48CD15
-0x48CA6A: mov     ecx, edi
-0x48CA6C: call    ExtraDataList_GetOwner
+0x48CA6A: mov     ecx, edi; this
+0x48CA6C: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CA71: test    eax, eax
 0x48CA73: jz      short loc_48CA84
-0x48CA75: mov     ecx, edi
-0x48CA77: call    ExtraDataList_GetOwner
+0x48CA75: mov     ecx, edi; this
+0x48CA77: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CA7C: cmp     eax, ebp
 0x48CA7E: jnz     loc_48CBF8
 0x48CA84: push    2Bh ; '+'; a2
@@ -223,7 +222,7 @@
 0x48CB03: push    ecx
 0x48CB04: mov     ecx, ebx
 0x48CB06: fstp    [esp+2Ch+var_2C]; float
-0x48CB09: call    TESObjectARMO_GetArmorSkillAV
+0x48CB09: call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 3/7 in ContainerChanges_SelectBestArmorForSlot; armor skill selection precedes Calc_ArmorRating at 0x48CB41.
 0x48CB0E: mov     edx, [esi]
 0x48CB10: push    eax; float
 0x48CB11: mov     ecx, ebp
@@ -240,7 +239,7 @@
 0x48CB37: movzx   eax, word ptr [esp+34h+var_4]
 0x48CB3C: push    eax; int
 0x48CB3D: fldcw   word ptr [esp+38h+arg_8]
-0x48CB41: call    Calc_ArmorRating
+0x48CB41: call    Calc_ArmorRating; Paired Medium boundary 3/7: candidate armor rating used while selecting the best armor for a slot.
 0x48CB46: fstp    [esp+38h+arg_8]
 0x48CB4A: fld     [esp+38h+arg_8]
 0x48CB4E: add     esp, 10h
@@ -256,13 +255,13 @@
 0x48CB6E: mov     ecx, [esi]
 0x48CB70: test    ecx, ecx
 0x48CB72: jz      short loc_48CB79
-0x48CB74: call    BSSimpleList_Clear
+0x48CB74: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48CB79: mov     ecx, [esi]
 0x48CB7B: push    ecx
-0x48CB7C: call    FormHeapFree
+0x48CB7C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48CB81: push    esi
 0x48CB82: mov     dword ptr [esi], 0
-0x48CB88: call    FormHeapFree
+0x48CB88: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48CB8D: add     esp, 8
 0x48CB90: push    0Ch; Size
 0x48CB92: call    FormHeapAlloc
@@ -331,7 +330,7 @@
 0x48CC62: push    ecx
 0x48CC63: mov     ecx, ebx
 0x48CC65: fstp    [esp+2Ch+var_2C]; float
-0x48CC68: call    TESObjectARMO_GetArmorSkillAV
+0x48CC68: call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 4/7 in ContainerChanges_SelectBestArmorForSlot; consumer is Calc_ArmorRating at 0x48CCA0.
 0x48CC6D: push    eax; float
 0x48CC6E: mov     eax, [esi]
 0x48CC70: mov     ecx, edi
@@ -348,7 +347,7 @@
 0x48CC96: movzx   ecx, word ptr [esp+34h+var_4]
 0x48CC9B: push    ecx; int
 0x48CC9C: fldcw   word ptr [esp+38h+arg_8]
-0x48CCA0: call    Calc_ArmorRating
+0x48CCA0: call    Calc_ArmorRating; Paired Medium boundary 4/7: candidate armor rating used while selecting the best armor for a slot.
 0x48CCA5: fstp    [esp+38h+arg_8]
 0x48CCA9: fld     [esp+38h+arg_8]
 0x48CCAD: add     esp, 10h
@@ -365,13 +364,13 @@
 0x48CCCB: mov     ecx, [esi]
 0x48CCCD: cmp     ecx, edi
 0x48CCCF: jz      short loc_48CCD6
-0x48CCD1: call    BSSimpleList_Clear
+0x48CCD1: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48CCD6: mov     edx, [esi]
 0x48CCD8: push    edx
-0x48CCD9: call    FormHeapFree
+0x48CCD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48CCDE: push    esi
 0x48CCDF: mov     [esi], edi
-0x48CCE1: call    FormHeapFree
+0x48CCE1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48CCE6: add     esp, 8
 0x48CCE9: push    0Ch; Size
 0x48CCEB: call    FormHeapAlloc
@@ -424,12 +423,12 @@
 0x48CD82: mov     esi, [eax]
 0x48CD84: test    esi, esi
 0x48CD86: jz      short loc_48CDCF
-0x48CD88: mov     ecx, esi
-0x48CD8A: call    ExtraDataList_GetOwner
+0x48CD88: mov     ecx, esi; this
+0x48CD8A: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CD8F: test    eax, eax
 0x48CD91: jz      short loc_48CDCF
-0x48CD93: mov     ecx, esi
-0x48CD95: call    ExtraDataList_GetOwner
+0x48CD93: mov     ecx, esi; this
+0x48CD95: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CD9A: test    eax, eax
 0x48CD9C: jz      short loc_48CDCF
 0x48CD9E: mov     eax, [ebp+0]
@@ -438,12 +437,12 @@
 0x48CDA5: mov     esi, [eax]
 0x48CDA7: test    esi, esi
 0x48CDA9: jz      short loc_48CDBF
-0x48CDAB: mov     ecx, esi
-0x48CDAD: call    ExtraDataList_GetOwner
+0x48CDAB: mov     ecx, esi; this
+0x48CDAD: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CDB2: test    eax, eax
 0x48CDB4: jz      short loc_48CDBF
-0x48CDB6: mov     ecx, esi
-0x48CDB8: call    ExtraDataList_GetOwner
+0x48CDB6: mov     ecx, esi; this
+0x48CDB8: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CDBD: jmp     short loc_48CDC1
 0x48CDBF: xor     eax, eax
 0x48CDC1: mov     ebx, [esp+28h+arg_0]
@@ -485,12 +484,12 @@
 0x48CE43: mov     ebp, [eax]
 0x48CE45: test    ebp, ebp
 0x48CE47: jz      loc_48D0EA
-0x48CE4D: mov     ecx, ebp
-0x48CE4F: call    ExtraDataList_GetOwner
+0x48CE4D: mov     ecx, ebp; this
+0x48CE4F: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CE54: test    eax, eax
 0x48CE56: jz      short loc_48CE67
-0x48CE58: mov     ecx, ebp
-0x48CE5A: call    ExtraDataList_GetOwner
+0x48CE58: mov     ecx, ebp; this
+0x48CE5A: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x48CE5F: cmp     eax, ebx
 0x48CE61: jnz     loc_48CFCD
 0x48CE67: push    2Bh ; '+'; a2
@@ -534,7 +533,7 @@
 0x48CEE4: push    ecx
 0x48CEE5: mov     ecx, edi
 0x48CEE7: fstp    [esp+2Ch+var_2C]; float
-0x48CEEA: call    TESObjectARMO_GetArmorSkillAV
+0x48CEEA: call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 5/7 in ContainerChanges_SelectBestArmorForSlot; consumer is Calc_ArmorRating at 0x48CF22.
 0x48CEEF: mov     edx, [esi]
 0x48CEF1: push    eax; float
 0x48CEF2: mov     ecx, ebx
@@ -551,7 +550,7 @@
 0x48CF18: movzx   eax, word ptr [esp+34h+var_4]
 0x48CF1D: push    eax; int
 0x48CF1E: fldcw   word ptr [esp+38h+arg_8]
-0x48CF22: call    Calc_ArmorRating
+0x48CF22: call    Calc_ArmorRating; Paired Medium boundary 5/7: candidate armor rating used while selecting the best armor for a slot.
 0x48CF27: fstp    [esp+38h+arg_8]
 0x48CF2B: fld     [esp+38h+arg_8]
 0x48CF2F: add     esp, 10h
@@ -567,13 +566,13 @@
 0x48CF4F: mov     ecx, [esi]
 0x48CF51: test    ecx, ecx
 0x48CF53: jz      short loc_48CF5A
-0x48CF55: call    BSSimpleList_Clear
+0x48CF55: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48CF5A: mov     ecx, [esi]
 0x48CF5C: push    ecx
-0x48CF5D: call    FormHeapFree
+0x48CF5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48CF62: push    esi
 0x48CF63: mov     dword ptr [esi], 0
-0x48CF69: call    FormHeapFree
+0x48CF69: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48CF6E: add     esp, 8
 0x48CF71: push    0Ch; Size
 0x48CF73: call    FormHeapAlloc
@@ -639,7 +638,7 @@
 0x48D037: push    ecx
 0x48D038: mov     ecx, edi
 0x48D03A: fstp    [esp+2Ch+var_2C]; float
-0x48D03D: call    TESObjectARMO_GetArmorSkillAV
+0x48D03D: call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 6/7 in ContainerChanges_SelectBestArmorForSlot; consumer is Calc_ArmorRating at 0x48D075.
 0x48D042: mov     edx, [esi]
 0x48D044: push    eax; float
 0x48D045: mov     ecx, ebx
@@ -656,7 +655,7 @@
 0x48D06B: movzx   eax, word ptr [esp+34h+var_4]
 0x48D070: push    eax; int
 0x48D071: fldcw   word ptr [esp+38h+arg_8]
-0x48D075: call    Calc_ArmorRating
+0x48D075: call    Calc_ArmorRating; Paired Medium boundary 6/7: candidate armor rating used while selecting the best armor for a slot.
 0x48D07A: fstp    [esp+38h+arg_8]
 0x48D07E: fld     [esp+38h+arg_8]
 0x48D082: add     esp, 10h
@@ -673,13 +672,13 @@
 0x48D0A0: mov     ecx, [esi]
 0x48D0A2: cmp     ecx, ebx
 0x48D0A4: jz      short loc_48D0AB
-0x48D0A6: call    BSSimpleList_Clear
+0x48D0A6: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x48D0AB: mov     ecx, [esi]
 0x48D0AD: push    ecx
-0x48D0AE: call    FormHeapFree
+0x48D0AE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D0B3: push    esi
 0x48D0B4: mov     [esi], ebx
-0x48D0B6: call    FormHeapFree
+0x48D0B6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48D0BB: add     esp, 8
 0x48D0BE: push    0Ch; Size
 0x48D0C0: call    FormHeapAlloc

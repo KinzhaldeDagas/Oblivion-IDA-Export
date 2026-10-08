@@ -8,7 +8,7 @@
 0x9A49B2: push    edx; int
 0x9A49B3: push    eax; Src
 0x9A49B4: mov     [esp+14h+var_4], 4
-0x9A49BC: call    sub_9A47E0
+0x9A49BC: call    sub_9A47E0; MoonSugarEffect decode: NiD3DSCM_Vertex constant-name lookup. Parses a constant name and looks it up in the global table at B32590; entries map names like World/WorldViewProj/BoneMatrix4/time to enum ids used by sub_9A56D0.
 0x9A49C1: add     esp, 0Ch
 0x9A49C4: test    al, al
 0x9A49C6: jnz     short loc_9A49D2
@@ -21,8 +21,8 @@
 0x9A49DA: push    ebx
 0x9A49DB: push    edx
 0x9A49DC: push    ecx
-0x9A49DD: call    sub_9A48B0
-0x9A49E2: movzx   eax, byte_B4294C[eax]
+0x9A49DD: call    sub_9A48B0; MoonSugarEffect decode: NiD3DSCM_Vertex enum type classifier. Matrix and texture-transform constants become float3x3/float4x4 write families; material/light/time vectors become float4-style constants.
+0x9A49E2: movzx   eax, byte ptr unk_B4294C[eax]
 0x9A49E9: mov     ebx, [esi+14h]
 0x9A49EC: and     ebx, 0FFFFFF00h
 0x9A49F2: or      eax, ebx

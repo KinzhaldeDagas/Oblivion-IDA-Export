@@ -23,7 +23,7 @@
 0x41CB08: mov     eax, [ecx+60h]
 0x41CB0B: jmp     short loc_41CB0F
 0x41CB0D: xor     eax, eax
-0x41CB0F: mov     ecx, TESDataHandler
+0x41CB0F: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x41CB15: push    eax
 0x41CB16: call    TESDataHandler_LookupFormByID
 0x41CB1B: mov     esi, eax
@@ -33,7 +33,7 @@
 0x41CB29: mov     eax, [eax+60h]
 0x41CB2C: jmp     short loc_41CB30
 0x41CB2E: xor     eax, eax
-0x41CB30: mov     ecx, TESDataHandler
+0x41CB30: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x41CB36: push    edi
 0x41CB37: push    eax
 0x41CB38: call    TESDataHandler_LookupFormByID

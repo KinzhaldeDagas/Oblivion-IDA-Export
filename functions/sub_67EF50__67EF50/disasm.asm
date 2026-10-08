@@ -1,18 +1,18 @@
-0x67EF50: sub     esp, 10h
+0x67EF50: sub     esp, 10h; Verified graph-node Euclidean distance helper; used by Road and PathGrid graph operations. Null inputs return FLT_MAX.
 0x67EF53: fld     dword ptr ds:0A32048h
 0x67EF59: push    edi
-0x67EF5A: mov     edi, [esp+14h+arg_0]
+0x67EF5A: mov     edi, [esp+14h+a]
 0x67EF5E: fstp    [esp+14h+var_10]
 0x67EF62: test    edi, edi
 0x67EF64: jz      short loc_67EFCF
-0x67EF66: mov     ecx, [esp+14h+arg_4]
+0x67EF66: mov     ecx, [esp+14h+b]; this
 0x67EF6A: test    ecx, ecx
 0x67EF6C: jz      short loc_67EFCF
 0x67EF6E: push    esi
-0x67EF6F: call    sub_4BEF40
-0x67EF74: mov     ecx, edi
+0x67EF6F: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
+0x67EF74: mov     ecx, edi; this
 0x67EF76: mov     esi, eax
-0x67EF78: call    sub_4BEF40
+0x67EF78: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x67EF7D: fld     dword ptr [eax]
 0x67EF7F: fsub    dword ptr [esi]
 0x67EF81: fstp    [esp+18h+var_C]
@@ -33,11 +33,11 @@
 0x67EFAF: faddp   st(2), st
 0x67EFB1: fmul    st, st
 0x67EFB3: faddp   st(1), st
-0x67EFB5: fstp    [esp+18h+arg_0]
-0x67EFB9: fld     [esp+18h+arg_0]
+0x67EFB5: fstp    [esp+18h+a]
+0x67EFB9: fld     [esp+18h+a]
 0x67EFBD: call    __CIsqrt
-0x67EFC2: fstp    [esp+18h+arg_0]
-0x67EFC6: fld     [esp+18h+arg_0]
+0x67EFC2: fstp    [esp+18h+a]
+0x67EFC6: fld     [esp+18h+a]
 0x67EFCA: pop     esi
 0x67EFCB: fstp    [esp+14h+var_10]
 0x67EFCF: fld     [esp+14h+var_10]

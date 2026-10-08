@@ -45,7 +45,7 @@
 0x483986: mov     byte ptr [esp+24h+var_4], 1
 0x48398B: jz      short loc_4839A7
 0x48398D: push    offset sub_483600; a5
-0x483992: push    offset sub_6D73E0; a4
+0x483992: push    offset NiTextKey_Construct; a4
 0x483997: push    edi; size
 0x483998: lea     ebp, [eax+4]
 0x48399B: push    10h; a2
@@ -63,10 +63,10 @@
 0x4839BA: cmp     [esi+0Ch], edi
 0x4839BD: jbe     short loc_4839D1
 0x4839BF: nop
-0x4839C0: push    edi
-0x4839C1: push    ebp
-0x4839C2: mov     ecx, esi
-0x4839C4: call    sub_483680
+0x4839C0: push    edi; cellY
+0x4839C1: push    ebp; cellX
+0x4839C2: mov     ecx, esi; this
+0x4839C4: call    GridDistantArray_UnloadCell; Verified exterior-cell unload: cancels that cell's in-flight DistantLODLoaderTask, removes queued model-usage counts for its packed cell label, releases the cell slot, and clears its coordinates.
 0x4839C9: add     edi, 1
 0x4839CC: cmp     edi, [esi+0Ch]
 0x4839CF: jb      short loc_4839C0
@@ -126,3 +126,17 @@
 0x483A8F: pop     ebp
 0x483A90: add     esp, 14h
 0x483A93: retn
+0x9AF8C0: mov     ecx, [ebp-14h]
+0x9AF8C3: jmp     sub_481DF0
+0x9AF8C8: mov     eax, [ebp-10h]
+0x9AF8CB: push    eax
+0x9AF8CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF8D1: pop     ecx
+0x9AF8D2: retn
+0x9AF8D3: mov     edx, [esp+arg_4]
+0x9AF8D7: lea     eax, [edx-14h]
+0x9AF8DA: mov     ecx, [edx-18h]
+0x9AF8DD: xor     ecx, eax
+0x9AF8DF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF8E4: mov     eax, offset stru_ADBDF8
+0x9AF8E9: jmp     ___CxxFrameHandler3

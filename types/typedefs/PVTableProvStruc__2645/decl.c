@@ -1,1 +1,1 @@
-PVTableProvStruc
+typedef _VTableProvStruc *PVTableProvStruc;

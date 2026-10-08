@@ -1,4 +1,4 @@
-0x680B40: push    esi
+0x680B40: push    esi; Verified: Returns/removes the head (minimum-fitness) AStarWorldNodeList item only when its fitness is below the caller's current bound; empty or fitness >= bound returns null. Fallout's homologous TeleportDoorSearch queue instead scans the first non-empty of 20 fitness buckets.
 0x680B41: mov     esi, ecx
 0x680B43: xor     eax, eax
 0x680B45: cmp     [esi+0Ch], eax
@@ -13,7 +13,7 @@
 0x680B60: shl     eax, 4
 0x680B63: add     eax, ds:0B3BF00h
 0x680B69: fld     dword ptr [eax]
-0x680B6B: fld     [esp+8+arg_0]
+0x680B6B: fld     [esp+8+fitnessBound]
 0x680B6F: fcompp
 0x680B71: fnstsw  ax
 0x680B73: test    ah, 41h

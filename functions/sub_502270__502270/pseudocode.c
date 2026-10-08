@@ -1,22 +1,19 @@
-char __usercall sub_502270@<al>(
-        char bp0@<bpl>,
-        double a2@<st1>,
-        double st7_0@<st0>,
+char __cdecl sub_502270(
         ParamInfo *a1,
-        UInt8 *a5,
+        UInt8 *a2,
         TESObjectREFR *a4,
-        TESObjectREFR *a7,
-        Script *a8,
+        TESObjectREFR *argC,
+        Script *a5,
         ScriptEventList *l,
-        double *a10,
+        double *a7,
         UInt32 *a3)
 {
   char result; // al
   UInt16 v12[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v12 = 0;
-  result = Script_ExtractArgs(a1, a5, a3, a4, a7, a8, l, v12);
-  if ( result )
-    return sub_4F4570(bp0, a2, st7_0, 0, *(int *)v12, 0, a10);
-  return result;
+  *(_DWORD *)v12 = 0; /*0x502298*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v12); /*0x5022a0*/
+  if ( result ) /*0x5022aa*/
+    return sub_4F4570(0, *(int *)v12, 0, a7); /*0x5022bb*/
+  return result; /*0x5022ad*/
 }

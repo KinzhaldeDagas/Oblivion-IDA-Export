@@ -79,9 +79,9 @@
 0x4C1F7A: call    eax
 0x4C1F7C: test    al, al
 0x4C1F7E: jz      short loc_4C1FC8
-0x4C1F80: push    1
-0x4C1F82: mov     ecx, esi
-0x4C1F84: call    sub_728AB0
+0x4C1F80: push    1; writeAccess
+0x4C1F82: mov     ecx, esi; self
+0x4C1F84: call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.
 0x4C1F89: test    al, al
 0x4C1F8B: jz      short loc_4C1FC8
 0x4C1F8D: lea     ecx, [esp+10h+var_C]
@@ -98,8 +98,8 @@
 0x4C1FB1: mov     [ecx+4], edx
 0x4C1FB4: mov     eax, [eax+8]
 0x4C1FB7: mov     [ecx+8], eax
-0x4C1FBA: mov     ecx, esi
-0x4C1FBC: call    sub_728B20
+0x4C1FBA: mov     ecx, esi; self
+0x4C1FBC: call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.
 0x4C1FC1: pop     esi
 0x4C1FC2: add     esp, 0Ch
 0x4C1FC5: retn    0Ch

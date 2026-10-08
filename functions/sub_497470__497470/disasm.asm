@@ -1,4 +1,4 @@
-0x497470: push    ebx
+0x497470: push    ebx; XRGD singleton loader: count=(size/28)&0xFF, then size % count is tested instead of %28. count==0 faults (including 0..27 and canonical 256-bone size); nonzero remainder cleanly fails and the caller removes the singleton; remainder zero with size!=count*28 is accepted, allocates count*28, then reads size and overflows. Safe success is 1..255 complete 28-byte bones. Successful repeats replace count/buffer and leak the prior buffer.
 0x497471: push    ebp
 0x497472: mov     ebp, [esp+8+a1]
 0x497476: push    edi
@@ -38,7 +38,7 @@
 0x4974CD: push    eax; Dst
 0x4974CE: mov     ecx, ebp; a1
 0x4974D0: mov     [edi+4], eax
-0x4974D3: call    TESFile_GetChunkData
+0x4974D3: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4974D8: pop     esi
 0x4974D9: pop     edi
 0x4974DA: pop     ebp

@@ -17,7 +17,7 @@
 0x4D5E5D: cmp     ebx, esi
 0x4D5E5F: jz      short loc_4D5E6C
 0x4D5E61: push    ebx; a2
-0x4D5E62: mov     ecx, offset stru_B35C80; this
+0x4D5E62: mov     ecx, offset unk_B35C80; this
 0x4D5E67: call    sub_496EA0
 0x4D5E6C: test    byte ptr ds:0B35E48h, 1
 0x4D5E73: jnz     short loc_4D5EA5
@@ -53,8 +53,8 @@
 0x4D5F0D: add     dword ptr ds:0B35E34h, 1
 0x4D5F14: lea     eax, [esp+40h+a2]
 0x4D5F18: push    eax
-0x4D5F19: mov     ecx, offset dword_B35E38
-0x4D5F1E: call    sub_5B1E20
+0x4D5F19: mov     ecx, offset unk_B35E38
+0x4D5F1E: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x4D5F23: xor     edi, edi
 0x4D5F25: mov     [esp+40h+var_10], esi
 0x4D5F29: mov     [esp+40h+var_18], edi
@@ -80,7 +80,7 @@
 0x4D5F79: mov     edx, [esi]
 0x4D5F7B: mov     eax, [edx+174h]
 0x4D5F81: push    ecx
-0x4D5F82: mov     ecx, [esp+44h+arg_4]
+0x4D5F82: mov     ecx, [esp+44h+pointXYZ]
 0x4D5F86: fstp    [esp+44h+var_44]; float
 0x4D5F89: push    ecx; int
 0x4D5F8A: mov     ecx, esi
@@ -104,7 +104,7 @@
 0x4D5FBF: jp      short loc_4D5FD3
 0x4D5FC1: mov     ecx, [esp+40h+arg_C]
 0x4D5FC5: push    ecx
-0x4D5FC6: mov     ecx, [esp+44h+arg_4]
+0x4D5FC6: mov     ecx, [esp+44h+pointXYZ]
 0x4D5FCA: call    sub_8AA350
 0x4D5FCF: test    al, al
 0x4D5FD1: jnz     short loc_4D6001
@@ -145,15 +145,15 @@
 0x4D6037: cmp     eax, ds:0B35EBCh
 0x4D603D: jz      loc_4D61B6
 0x4D6043: mov     ecx, esi; this
-0x4D6045: call    GetTeleportExtraData
+0x4D6045: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4D604A: mov     edi, eax
 0x4D604C: test    edi, edi
 0x4D604E: jz      loc_4D61B6
-0x4D6054: mov     ecx, edi
-0x4D6056: call    sub_42B470
+0x4D6054: mov     ecx, edi; linkedDoor
+0x4D6056: call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.
 0x4D605B: mov     ecx, edi
 0x4D605D: mov     ebp, eax
-0x4D605F: call    sub_42B460
+0x4D605F: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4D6064: test    eax, eax
 0x4D6066: jz      short loc_4D6070
 0x4D6068: test    byte ptr [eax+24h], 1
@@ -171,12 +171,12 @@
 0x4D6092: fstp    st(1)
 0x4D6094: test    ah, 44h
 0x4D6097: jnp     short loc_4D60CE
-0x4D6099: mov     ecx, [esp+40h+arg_4]
+0x4D6099: mov     ecx, [esp+40h+pointXYZ]
 0x4D609D: fstp    st
-0x4D609F: push    ecx
+0x4D609F: push    ecx; pointXYZ
 0x4D60A0: fstp    [esp+44h+var_24]
-0x4D60A4: mov     ecx, esi
-0x4D60A6: call    sub_4D7E30
+0x4D60A4: mov     ecx, esi; this
+0x4D60A6: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x4D60AB: fsubr   [esp+40h+var_24]
 0x4D60AF: fstp    dword ptr [esp+40h+var_24]
 0x4D60B3: fld     dword ptr [esp+40h+var_24]
@@ -204,9 +204,9 @@
 0x4D60EE: jnp     short loc_4D611F
 0x4D60F0: mov     edx, [esp+40h+arg_C]
 0x4D60F4: fstp    [esp+40h+var_24]
-0x4D60F8: push    edx
-0x4D60F9: mov     ecx, esi
-0x4D60FB: call    sub_4D7E30
+0x4D60F8: push    edx; pointXYZ
+0x4D60F9: mov     ecx, esi; this
+0x4D60FB: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x4D6100: fsubr   [esp+40h+var_24]
 0x4D6104: fstp    dword ptr [esp+40h+var_24]
 0x4D6108: fld     dword ptr [esp+40h+var_24]
@@ -229,7 +229,7 @@
 0x4D613D: fld     [esp+40h+var_28]
 0x4D6141: mov     ecx, edi
 0x4D6143: fstp    dword ptr ds:0B097B4h
-0x4D6149: call    sub_6899C0
+0x4D6149: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x4D614E: mov     ecx, [eax]
 0x4D6150: mov     ds:0B35E28h, ecx
 0x4D6156: mov     edx, [eax+4]
@@ -254,14 +254,14 @@
 0x4D6190: lea     ecx, [esp+40h+var_24]
 0x4D6194: push    ecx
 0x4D6195: lea     ecx, [esp+44h+var_1C]
-0x4D6199: call    sub_5B1E20
+0x4D6199: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x4D619E: jmp     short loc_4D61B6
 0x4D61A0: test    esi, esi
 0x4D61A2: jnz     short loc_4D61B6
 0x4D61A4: lea     ecx, [esp+40h+var_24]
 0x4D61A8: push    ecx
 0x4D61A9: lea     ecx, [esp+44h+var_1C]
-0x4D61AD: call    sub_5B1E20
+0x4D61AD: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x4D61B2: jmp     short loc_4D61B6
 0x4D61B4: fstp    st
 0x4D61B6: test    ebx, ebx
@@ -281,8 +281,8 @@
 0x4D61F2: xor     esi, esi
 0x4D61F4: cmp     ds:0B35E34h, esi
 0x4D61FA: jnz     short loc_4D6249
-0x4D61FC: mov     ecx, offset dword_B35E38
-0x4D6201: call    NiTPointerList__FreeAllNodes
+0x4D61FC: mov     ecx, offset unk_B35E38
+0x4D6201: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x4D6206: cmp     [esp+40h+var_29], 0
 0x4D620B: jnz     short loc_4D6249
 0x4D620D: mov     ecx, ds:0B35E24h
@@ -300,13 +300,13 @@
 0x4D6230: fld     dword ptr ds:0B097B4h
 0x4D6236: push    ecx
 0x4D6237: fstp    [esp+54h+var_54]; float
-0x4D623A: push    offset qword_B35E28; int
+0x4D623A: push    offset unk_B35E28; int
 0x4D623F: call    sub_4F0750
 0x4D6244: mov     [esp+40h+var_29], 1
 0x4D6249: cmp     ebx, esi
 0x4D624B: jz      short loc_4D6258
 0x4D624D: push    ebx; a2
-0x4D624E: mov     ecx, offset stru_B35C80; this
+0x4D624E: mov     ecx, offset unk_B35C80; this
 0x4D6253: call    sub_496F50
 0x4D6258: xor     eax, eax
 0x4D625A: cmp     [esp+40h+var_29], al
@@ -321,7 +321,6 @@
 0x4D6271: add     esp, 2Ch
 0x4D6274: retn
 0x4D6275: jmp     short loc_4D6280
-0x4D6277: align 10h
 0x4D6280: fld     [esp+40h+arg_8]
 0x4D6284: cmp     [esp+40h+var_29], 0
 0x4D6289: jnz     loc_4D61D4
@@ -339,12 +338,12 @@
 0x4D62B5: fstp    st(1)
 0x4D62B7: test    ah, 44h
 0x4D62BA: jnp     short loc_4D62F1
-0x4D62BC: mov     edx, [esp+40h+arg_4]
+0x4D62BC: mov     edx, [esp+40h+pointXYZ]
 0x4D62C0: fstp    st
-0x4D62C2: push    edx
+0x4D62C2: push    edx; pointXYZ
 0x4D62C3: fstp    [esp+44h+var_24]
-0x4D62C7: mov     ecx, esi
-0x4D62C9: call    sub_4D7E30
+0x4D62C7: mov     ecx, esi; this
+0x4D62C9: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x4D62CE: fsubr   [esp+40h+var_24]
 0x4D62D2: fstp    dword ptr [esp+40h+var_24]
 0x4D62D6: fld     dword ptr [esp+40h+var_24]
@@ -372,9 +371,9 @@
 0x4D6311: jnp     short loc_4D6342
 0x4D6313: mov     eax, [esp+40h+arg_C]
 0x4D6317: fstp    [esp+40h+var_24]
-0x4D631B: push    eax
-0x4D631C: mov     ecx, esi
-0x4D631E: call    sub_4D7E30
+0x4D631B: push    eax; pointXYZ
+0x4D631C: mov     ecx, esi; this
+0x4D631E: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x4D6323: fsubr   [esp+40h+var_24]
 0x4D6327: fstp    dword ptr [esp+40h+var_24]
 0x4D632B: fld     dword ptr [esp+40h+var_24]
@@ -387,7 +386,7 @@
 0x4D6340: jmp     short loc_4D6344
 0x4D6342: fstp    st
 0x4D6344: mov     ecx, esi; this
-0x4D6346: call    GetTeleportExtraData
+0x4D6346: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4D634B: fld     dword ptr ds:0A32048h
 0x4D6351: mov     ecx, [esp+40h+arg_18]
 0x4D6355: mov     edx, [esp+40h+arg_C]
@@ -401,10 +400,10 @@
 0x4D6366: push    ecx
 0x4D6367: mov     ecx, esi
 0x4D6369: fstp    [esp+54h+var_54]; float
-0x4D636C: call    sub_6899C0
+0x4D636C: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x4D6371: push    eax; int
 0x4D6372: mov     ecx, esi
-0x4D6374: call    sub_42B460
+0x4D6374: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4D6379: push    eax; int
 0x4D637A: call    sub_4D5E30
 0x4D637F: add     esp, 1Ch
@@ -416,3 +415,12 @@
 0x4D638F: test    edi, edi
 0x4D6391: jnz     loc_4D6280
 0x4D6397: jmp     loc_4D61D6
+0x9B58F0: lea     ecx, [ebp-1Ch]
+0x9B58F3: jmp     j_??1?$NiTList@PAVTESObjectREFR@@@@UAE@XZ; NiTList<TESObjectREFR *>::~NiTList<TESObjectREFR *>(void)
+0x9B58F8: mov     edx, [esp+pointXYZ]
+0x9B58FC: lea     eax, [edx-30h]
+0x9B58FF: mov     ecx, [edx-34h]
+0x9B5902: xor     ecx, eax
+0x9B5904: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5909: mov     eax, offset stru_AE091C
+0x9B590E: jmp     ___CxxFrameHandler3

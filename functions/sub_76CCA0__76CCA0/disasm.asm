@@ -27,7 +27,7 @@
 0x76CCE8: jz      short loc_76CCFB
 0x76CCEA: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76CCEE: jnz     short loc_76CCF5
-0x76CCF0: call    sub_7604D0
+0x76CCF0: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76CCF5: mov     dword ptr [esi], 0
 0x76CCFB: add     word ptr [edi+0Ch], 0FFFFh
 0x76CD01: add     ebx, 1
@@ -57,7 +57,7 @@
 0x76CD48: add     esp, 4
 0x76CD4B: test    eax, eax
 0x76CD4D: jz      short loc_76CD64
-0x76CD4F: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Concurrency::details::_NonReentrantLock::_Release(void)
+0x76CD4F: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Pass222: NiPropertyState slot constructor callback; zeroes one dword smart-pointer slot.
 0x76CD54: push    esi
 0x76CD55: lea     ebp, [eax+4]
 0x76CD58: push    4
@@ -83,7 +83,7 @@
 0x76CD8B: jz      short loc_76CD98
 0x76CD8D: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76CD91: jnz     short loc_76CD98
-0x76CD93: call    sub_7604D0
+0x76CD93: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76CD98: mov     eax, [esp+10h+arg_0]
 0x76CD9C: mov     esi, [esi+eax]
 0x76CD9F: test    esi, esi
@@ -105,7 +105,7 @@
 0x76CDCD: jz      short loc_76CDE0
 0x76CDCF: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76CDD3: jnz     short loc_76CDDA
-0x76CDD5: call    sub_7604D0
+0x76CDD5: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76CDDA: mov     dword ptr [ebx], 0
 0x76CDE0: add     esi, 1
 0x76CDE3: cmp     si, [edi+8]
@@ -126,11 +126,11 @@
 0x76CE10: jz      short loc_76CE1D
 0x76CE12: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x76CE16: jnz     short loc_76CE1D
-0x76CE18: call    sub_7604D0
+0x76CE18: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x76CE1D: sub     edi, 1
 0x76CE20: jns     short loc_76CE08
 0x76CE22: push    ebp
-0x76CE23: call    FormHeapFree
+0x76CE23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76CE28: add     esp, 4
 0x76CE2B: pop     esi
 0x76CE2C: pop     ebx

@@ -55,7 +55,7 @@
 0x7DB300: jz      short loc_7DB313
 0x7DB302: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7DB306: jnz     short loc_7DB30D
-0x7DB308: call    sub_7604D0
+0x7DB308: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7DB30D: mov     dword ptr [edi], 0
 0x7DB313: add     edi, 4
 0x7DB316: sub     ebx, 1
@@ -141,7 +141,7 @@
 0x7DB3DE: push    1
 0x7DB3E0: mov     ecx, esi
 0x7DB3E2: call    eax
-0x7DB3E4: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7DB3E4: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7DB3E9: push    10h; int
 0x7DB3EB: push    4; unsigned int
 0x7DB3ED: lea     ecx, [ebp+0C4h]
@@ -189,7 +189,7 @@
 0x7DB45E: call    $LN21
 0x7DB463: mov     ecx, ebp; this
 0x7DB465: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7DB46D: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x7DB46D: call    ??1BSShader@@UAE@XZ;
 0x7DB472: mov     ecx, dword ptr [esp+24h+var_C]
 0x7DB476: mov     large fs:0, ecx
 0x7DB47D: pop     ecx
@@ -199,3 +199,49 @@
 0x7DB481: pop     ebx
 0x7DB482: add     esp, 10h
 0x7DB485: retn
+0x9CF000: mov     ecx, [ebp-10h]; this
+0x9CF003: jmp     ??1BSShader@@UAE@XZ;
+0x9CF008: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9CF00D: push    10h; int
+0x9CF00F: push    4; unsigned int
+0x9CF011: mov     eax, [ebp-10h]
+0x9CF014: add     eax, 7Ch ; '|'
+0x9CF017: push    eax; void *
+0x9CF018: call    $LN21
+0x9CF01D: retn
+0x9CF01E: mov     ecx, [ebp-10h]
+0x9CF021: add     ecx, 0BCh ; '¼'; slot
+0x9CF027: jmp     NiPointerSlot_Release
+0x9CF02C: mov     ecx, [ebp-10h]
+0x9CF02F: add     ecx, 0C0h ; 'À'; slot
+0x9CF035: jmp     NiPointerSlot_Release
+0x9CF03A: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF03F: push    10h; int
+0x9CF041: push    4; unsigned int
+0x9CF043: mov     eax, [ebp-10h]
+0x9CF046: add     eax, 0C4h ; 'Ä'
+0x9CF04B: push    eax; void *
+0x9CF04C: call    $LN21
+0x9CF051: retn
+0x9CF052: mov     ecx, [ebp-10h]
+0x9CF055: add     ecx, 104h; slot
+0x9CF05B: jmp     NiPointerSlot_Release
+0x9CF060: mov     ecx, [ebp-10h]
+0x9CF063: add     ecx, 108h; slot
+0x9CF069: jmp     NiPointerSlot_Release
+0x9CF06E: mov     ecx, [ebp-10h]
+0x9CF071: add     ecx, 10Ch; slot
+0x9CF077: jmp     NiPointerSlot_Release
+0x9CF07C: mov     ecx, [ebp-10h]
+0x9CF07F: add     ecx, 110h; slot
+0x9CF085: jmp     NiPointerSlot_Release
+0x9CF08A: mov     ecx, [ebp-10h]
+0x9CF08D: add     ecx, 114h; slot
+0x9CF093: jmp     NiPointerSlot_Release
+0x9CF098: mov     edx, [esp+arg_4]
+0x9CF09C: lea     eax, [edx-14h]
+0x9CF09F: mov     ecx, [edx-18h]
+0x9CF0A2: xor     ecx, eax
+0x9CF0A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF0A9: mov     eax, offset stru_AF7D94
+0x9CF0AE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x422DF0: lea     eax, [ecx+0Ch]
+0x422DF0: lea     eax, [ecx+0Ch]; Structural response-list emptiness check: counts all DialogueResponse nodes, independent of currentResponseNode position. An exhausted but still populated cache does not trigger a rebuild; only a truly empty list does.
 0x422DF3: xor     edx, edx
 0x422DF5: test    eax, eax
 0x422DF7: jz      short loc_422E0F

@@ -42,7 +42,7 @@
 0x466C6E: call    TESObjectREFR_GetWorldSpace
 0x466C73: mov     ecx, ds:0B333C4h; this
 0x466C79: push    eax; a3
-0x466C7A: call    TESObjectREFR_GetParentCell
+0x466C7A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x466C7F: mov     ecx, ds:0B333C4h
 0x466C85: mov     edx, [ecx]
 0x466C87: push    eax; a2
@@ -52,7 +52,7 @@
 0x466C91: mov     ecx, ds:0B33A98h
 0x466C97: push    eax
 0x466C98: push    ebx
-0x466C99: call    TESDataHandler_PlaceObjectRef
+0x466C99: call    TESDataHandler_PlaceObjectRef; Verified object-reference placement helper accepts an interior cell or exterior WorldSpace and sets/reuses a reference base form. New reference attachment proceeds through cell lifecycle methods; this helper itself does not write the WorldSpace SubSpace index.
 0x466C9E: mov     esi, eax
 0x466CA0: mov     edx, [esi]
 0x466CA2: mov     eax, [edx+174h]

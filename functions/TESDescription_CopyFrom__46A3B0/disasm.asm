@@ -20,7 +20,7 @@
 0x46A3E3: mov     ecx, esi
 0x46A3E5: call    eax
 0x46A3E7: push    eax; a2
-0x46A3E8: mov     ecx, offset TESDescription_CachedDesc; this
+0x46A3E8: mov     ecx, 0B33C08h; this
 0x46A3ED: call    BSStringT_Set
 0x46A3F2: mov     ecx, [esi+4]
 0x46A3F5: mov     [edi+4], ecx

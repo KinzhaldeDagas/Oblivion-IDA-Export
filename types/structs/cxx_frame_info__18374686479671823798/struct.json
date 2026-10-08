@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "cxx_frame_info",
+  "definition": "struct cxx_frame_info\n{\nframe_info frame_info;\nEXCEPTION_RECORD_0 *rec __offset(OFF64|AUTO);\nCONTEXT_0 *context __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671823798,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "frame_info",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "frame_info"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rec",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "EXCEPTION_RECORD_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "context",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "CONTEXT_0 *"
     }
   ],
   "name": "cxx_frame_info",
+  "ordinal": 2395,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

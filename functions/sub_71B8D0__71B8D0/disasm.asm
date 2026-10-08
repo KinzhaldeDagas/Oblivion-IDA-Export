@@ -1,4 +1,4 @@
-0x71B8D0: push    0FFFFFFFFh
+0x71B8D0: push    0FFFFFFFFh; Stock fallback mip synthesis averages RGBA independently with no alpha-coverage preservation. For cutout atlases this can drive terminal mip alpha below ref84 even when surviving high-resolution texels have correct nonblack RGB.
 0x71B8D2: push    offset SEH_71B8D0
 0x71B8D7: mov     eax, large fs:0
 0x71B8DD: push    eax
@@ -14,7 +14,7 @@
 0x71B8F1: mov     large fs:0, eax
 0x71B8F7: mov     esi, ecx
 0x71B8F9: mov     [esp+7Ch+var_58], esi
-0x71B8FD: mov     ebx, [esp+7Ch+arg_0]
+0x71B8FD: mov     ebx, [esp+7Ch+srcPixelData]
 0x71B904: lea     ecx, [esp+7Ch+var_50]
 0x71B908: lea     edi, [ebx+8]
 0x71B90B: call    InitSurfacEData
@@ -35,7 +35,7 @@
 0x71B92F: test    al, al
 0x71B931: jz      loc_71BE10
 0x71B937: mov     esi, offset unk_B25E00
-0x71B93C: mov     ebp, [esp+7Ch+arg_4]
+0x71B93C: mov     ebp, [esp+7Ch+reusePixelData]
 0x71B943: test    ebp, ebp
 0x71B945: mov     ecx, 11h
 0x71B94A: lea     edi, [esp+7Ch+var_50]
@@ -55,7 +55,7 @@
 0x71B971: push    70h ; 'p'; Size
 0x71B973: call    FormHeapAlloc
 0x71B978: add     esp, 4
-0x71B97B: mov     [esp+7Ch+arg_4], eax
+0x71B97B: mov     [esp+7Ch+reusePixelData], eax
 0x71B982: test    eax, eax
 0x71B984: mov     [esp+7Ch+var_4], 0
 0x71B98C: jz      short loc_71B9AE
@@ -71,7 +71,7 @@
 0x71B9A3: push    esi
 0x71B9A4: push    edi
 0x71B9A5: mov     ecx, eax
-0x71B9A7: call    NiPixelData__NiPixelData
+0x71B9A7: call    NiPixelData__NiPixelData; Constructs NiPixelData with requested levelCount=0. NiPixelData resolves zero to floor(log2(max(width,height)))+1 via 0x70E2F0.
 0x71B9AC: jmp     short loc_71B9B0
 0x71B9AE: xor     eax, eax
 0x71B9B0: mov     [esp+7Ch+var_4], 0FFFFFFFFh
@@ -90,7 +90,7 @@
 0x71B9D4: test    al, al
 0x71B9D6: jz      loc_71BE10
 0x71B9DC: cmp     dword ptr [ebx+6Ch], 0
-0x71B9E0: mov     [esp+7Ch+arg_4], 0
+0x71B9E0: mov     [esp+7Ch+reusePixelData], 0
 0x71B9EB: jbe     loc_71BE0C
 0x71B9F1: jmp     short loc_71B9F7
 0x71B9F3: mov     esi, [esp+7Ch+var_68]
@@ -106,7 +106,7 @@
 0x71BA1E: mov     edx, [ebp+5Ch]
 0x71BA21: mov     eax, [ebp+60h]
 0x71BA24: mov     eax, [edx+eax*4]
-0x71BA27: imul    eax, [esp+7Ch+arg_4]
+0x71BA27: imul    eax, [esp+7Ch+reusePixelData]
 0x71BA2F: mov     esi, [edx+ebx*4-4]
 0x71BA33: mov     ecx, [ebp+50h]
 0x71BA36: add     esi, ecx
@@ -125,7 +125,7 @@
 0x71BA5A: mov     [esp+7Ch+var_64], edi
 0x71BA5E: lea     edi, [eax+eax*2]
 0x71BA61: mov     [esp+7Ch+var_54], edi
-0x71BA65: jnz     short loc_71BAB3
+0x71BA65: jnz     short loc_71BAB3; RGB one-dimensional mip tail: when previous width is 1, average two vertically adjacent RGB texels per output; this is a 1x2 filter, not a four-sample box.
 0x71BA67: mov     edi, [esp+7Ch+var_64]
 0x71BA6B: test    edi, edi
 0x71BA6D: jbe     loc_71BBB5
@@ -152,7 +152,7 @@
 0x71BAAC: jnz     short loc_71BA73
 0x71BAAE: jmp     loc_71BBB5
 0x71BAB3: cmp     dword ptr [edx-4], 1
-0x71BAB7: jnz     short loc_71BB05
+0x71BAB7: jnz     short loc_71BB05; RGB one-dimensional mip tail: when previous height is 1, average two horizontally adjacent RGB texels per output; this is a 2x1 filter.
 0x71BAB9: mov     edi, [esp+7Ch+var_60]
 0x71BABD: test    edi, edi
 0x71BABF: jbe     loc_71BBB5
@@ -183,7 +183,6 @@
 0x71BB0B: jbe     loc_71BBB5
 0x71BB11: mov     [esp+7Ch+var_5C], eax
 0x71BB15: jmp     short loc_71BB20
-0x71BB17: align 10h
 0x71BB20: mov     edx, [esp+7Ch+var_60]
 0x71BB24: test    edx, edx
 0x71BB26: jbe     loc_71BBA8
@@ -198,7 +197,7 @@
 0x71BB45: movzx   ebx, byte ptr [esi]
 0x71BB48: add     edx, ebx
 0x71BB4A: shr     edx, 2
-0x71BB4D: mov     [ecx], dl
+0x71BB4D: mov     [ecx], dl; RGB 2x2 box filter: each destination channel is the integer average of the four corresponding source bytes.
 0x71BB4F: movzx   ebx, byte ptr [edi+eax+4]
 0x71BB54: movzx   edx, byte ptr [edi+eax+1]
 0x71BB59: add     edx, ebx
@@ -246,7 +245,7 @@
 0x71BBF2: mov     edx, [ebp+5Ch]
 0x71BBF5: mov     eax, [ebp+60h]
 0x71BBF8: mov     eax, [edx+eax*4]
-0x71BBFB: imul    eax, [esp+7Ch+arg_4]
+0x71BBFB: imul    eax, [esp+7Ch+reusePixelData]
 0x71BC03: mov     esi, [edx+ebx*4-4]
 0x71BC07: mov     ecx, [ebp+50h]
 0x71BC0A: add     esi, ecx
@@ -265,12 +264,11 @@
 0x71BC2E: mov     [esp+7Ch+var_58], edi
 0x71BC32: lea     edi, ds:0[eax*4]
 0x71BC39: mov     [esp+7Ch+var_54], edi
-0x71BC3D: jnz     short loc_71BCA2
+0x71BC3D: jnz     short loc_71BCA2; RGBA one-dimensional mip tail: previous width 1 uses a two-sample vertical average for R,G,B,A independently.
 0x71BC3F: mov     edi, [esp+7Ch+var_58]
 0x71BC43: test    edi, edi
 0x71BC45: jbe     loc_71BDDA
 0x71BC4B: jmp     short loc_71BC50
-0x71BC4D: align 10h
 0x71BC50: movzx   edx, byte ptr [esi]
 0x71BC53: movzx   eax, byte ptr [esi+4]
 0x71BC57: add     eax, edx
@@ -300,7 +298,7 @@
 0x71BC9B: jnz     short loc_71BC50
 0x71BC9D: jmp     loc_71BDDA
 0x71BCA2: cmp     dword ptr [edx-4], 1
-0x71BCA6: jnz     short loc_71BD06
+0x71BCA6: jnz     short loc_71BD06; RGBA one-dimensional mip tail: previous height 1 uses a two-sample horizontal average for R,G,B,A independently.
 0x71BCA8: mov     edi, [esp+7Ch+var_5C]
 0x71BCAC: test    edi, edi
 0x71BCAE: jbe     loc_71BDDA
@@ -337,7 +335,6 @@
 0x71BD0C: jbe     loc_71BDDA
 0x71BD12: mov     [esp+7Ch+var_60], eax
 0x71BD16: jmp     short loc_71BD20
-0x71BD18: align 10h
 0x71BD20: mov     edx, [esp+7Ch+var_5C]
 0x71BD24: test    edx, edx
 0x71BD26: jbe     loc_71BDCD
@@ -352,7 +349,7 @@
 0x71BD45: movzx   ebx, byte ptr [eax]
 0x71BD48: add     edx, ebx
 0x71BD4A: shr     edx, 2
-0x71BD4D: mov     [ecx], dl
+0x71BD4D: mov     [ecx], dl; RGBA 2x2 box filter: each destination channel is the integer average of the four corresponding source bytes. Alpha is treated exactly like R/G/B.
 0x71BD4F: movzx   ebx, byte ptr [edi+eax+5]
 0x71BD54: movzx   edx, byte ptr [edi+eax+1]
 0x71BD59: add     edx, ebx
@@ -397,11 +394,11 @@
 0x71BDDD: cmp     ebx, [esp+7Ch+var_68]
 0x71BDE1: mov     [esp+7Ch+var_64], ebx
 0x71BDE5: jb      loc_71BBF2
-0x71BDEB: mov     ebx, [esp+7Ch+arg_0]
-0x71BDF2: mov     eax, [esp+7Ch+arg_4]
+0x71BDEB: mov     ebx, [esp+7Ch+srcPixelData]
+0x71BDF2: mov     eax, [esp+7Ch+reusePixelData]
 0x71BDF9: add     eax, 1
 0x71BDFC: cmp     eax, [ebx+6Ch]
-0x71BDFF: mov     [esp+7Ch+arg_4], eax
+0x71BDFF: mov     [esp+7Ch+reusePixelData], eax
 0x71BE06: jb      loc_71B9F3
 0x71BE0C: mov     eax, ebp
 0x71BE0E: jmp     short loc_71BE12
@@ -415,3 +412,15 @@
 0x71BE21: pop     ebx
 0x71BE22: add     esp, 68h
 0x71BE25: retn    8
+0x9C9F80: mov     eax, [ebp+8]
+0x9C9F83: push    eax
+0x9C9F84: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C9F89: pop     ecx
+0x9C9F8A: retn
+0x9C9F8B: mov     edx, [esp+reusePixelData]
+0x9C9F8F: lea     eax, [edx-6Ch]
+0x9C9F92: mov     ecx, [edx-70h]
+0x9C9F95: xor     ecx, eax
+0x9C9F97: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9F9C: mov     eax, offset stru_AF2740
+0x9C9FA1: jmp     ___CxxFrameHandler3

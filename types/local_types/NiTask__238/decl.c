@@ -1,1 +1,1 @@
-NiTask
+struct NiTask;

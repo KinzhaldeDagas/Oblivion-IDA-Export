@@ -1,1 +1,1 @@
-VARDESC
+typedef tagVARDESC VARDESC;

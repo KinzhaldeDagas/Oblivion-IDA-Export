@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x8B49B2",
-    "line": "call    sub_8B1B00",
+    "line": "call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x8B49C0",
-    "line": "call    sub_8B1DD0",
+    "line": "call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x8B4D3A",
-    "line": "call    sub_88FE00",
+    "line": "call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,7 +2569,7 @@
   },
   {
     "ea": "0x8B4F97",
-    "line": "call    sub_88FE00",
+    "line": "call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.",
     "mnemonic": "call",
     "size": 5
   },

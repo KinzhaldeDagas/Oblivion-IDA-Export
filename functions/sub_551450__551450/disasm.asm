@@ -13,7 +13,7 @@
 0x55146D: lea     eax, [esp+28h+var_C]
 0x551471: mov     large fs:0, eax
 0x551477: mov     ebx, ecx
-0x551479: push    offset stru_B39C00; lpCriticalSection
+0x551479: push    offset unk_B39C00; lpCriticalSection
 0x55147E: call    dword ptr ds:0A2806Ch
 0x551484: call    dword ptr ds:0A2808Ch
 0x55148A: mov     edi, 1
@@ -31,7 +31,7 @@
 0x5514B7: sub     ds:0B39C7Ch, edi
 0x5514BD: jnz     short loc_5514C5
 0x5514BF: mov     ds:0B39C78h, esi
-0x5514C5: push    offset stru_B39C00; lpCriticalSection
+0x5514C5: push    offset unk_B39C00; lpCriticalSection
 0x5514CA: call    dword ptr ds:0A28074h
 0x5514D0: jmp     loc_551594
 0x5514D5: push    10h; Size
@@ -42,7 +42,7 @@
 0x5514E7: cmp     edi, esi
 0x5514E9: jz      short loc_55151F
 0x5514EB: lea     eax, [edi+4]
-0x5514EE: push    offset NiRefObject_objcount; lpAddend
+0x5514EE: push    0B3FD64h; lpAddend
 0x5514F3: mov     dword ptr [edi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x5514F9: mov     [esp+2Ch+lpAddend], eax
 0x5514FD: mov     dword ptr [eax], 0
@@ -77,7 +77,7 @@
 0x551559: sub     dword ptr ds:0B39C7Ch, 1
 0x551560: jnz     short loc_55156C
 0x551562: mov     dword ptr ds:0B39C78h, 0
-0x55156C: push    offset stru_B39C00; lpCriticalSection
+0x55156C: push    offset unk_B39C00; lpCriticalSection
 0x551571: call    dword ptr ds:0A28074h
 0x551577: push    edi; lpAddend
 0x551578: mov     [esp+2Ch+var_4], 0FFFFFFFFh
@@ -98,3 +98,12 @@
 0x5515A3: pop     ebx
 0x5515A4: add     esp, 14h
 0x5515A7: retn    8
+0x9D7770: lea     ecx, [ebp-14h]; slot
+0x9D7773: jmp     NiPointerSlot_Release
+0x9D7778: mov     edx, [esp+arg_4]
+0x9D777C: lea     eax, [edx-18h]
+0x9D777F: mov     ecx, [edx-1Ch]
+0x9D7782: xor     ecx, eax
+0x9D7784: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7789: mov     eax, offset stru_AFF32C
+0x9D778E: jmp     ___CxxFrameHandler3

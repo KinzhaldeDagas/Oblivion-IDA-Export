@@ -30,7 +30,7 @@
 0x662FBB: mov     ecx, ds:0B33A1Ch
 0x662FC1: push    1; int
 0x662FC3: push    eax; char *
-0x662FC4: call    sub_435830
+0x662FC4: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x662FC9: mov     edi, [esp+10h+arg_4]
 0x662FCD: mov     ebx, [esp+10h+arg_0]
 0x662FD1: mov     ecx, ds:0B33A1Ch
@@ -41,7 +41,7 @@
 0x662FDD: push    esi
 0x662FDE: call    sub_43BDA0
 0x662FE3: push    esi
-0x662FE4: call    FormHeapFree
+0x662FE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x662FE9: mov     ecx, ds:0B36BB8h
 0x662FEF: add     esp, 4
 0x662FF2: push    0
@@ -77,7 +77,7 @@
 0x66303B: mov     ecx, ds:0B33A1Ch
 0x663041: add     esp, 4
 0x663044: push    eax; char *
-0x663045: call    sub_435830
+0x663045: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x66304A: mov     ecx, ds:0B33A1Ch
 0x663050: push    0
 0x663052: push    edi
@@ -86,7 +86,7 @@
 0x663056: push    esi
 0x663057: call    sub_43BDA0
 0x66305C: push    esi
-0x66305D: call    FormHeapFree
+0x66305D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x663062: add     esp, 4
 0x663065: pop     edi
 0x663066: pop     esi

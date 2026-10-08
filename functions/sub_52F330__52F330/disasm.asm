@@ -1,4 +1,4 @@
-0x52F330: push    ecx
+0x52F330: push    ecx; Stable descending sort of TESTopic.questInfoEntries by TESQuest.priority (+0x3D). Higher-priority running quests are scanned first by SelectInfoForSpeaker; equal priorities preserve their prior insertion order.
 0x52F331: push    ebp
 0x52F332: lea     ebp, [ecx+28h]
 0x52F335: mov     eax, ebp
@@ -45,7 +45,7 @@
 0x52F392: jmp     short loc_52F397
 0x52F394: or      ecx, 0FFFFFFFFh
 0x52F397: cmp     ecx, ebx
-0x52F399: jle     short loc_52F39F
+0x52F399: jle     short loc_52F39F; Swap adjacent quest buckets only when the following quest has strictly greater priority, making the descending sort stable for equal-priority quests.
 0x52F39B: mov     [eax], edx
 0x52F39D: mov     [esi], edi
 0x52F39F: mov     eax, [eax+4]

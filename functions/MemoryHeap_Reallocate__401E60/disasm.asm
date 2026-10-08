@@ -28,10 +28,10 @@
 0x401EA3: mov     esi, eax
 0x401EA5: jle     short loc_401EA9
 0x401EA7: mov     ebp, edi
-0x401EA9: push    ebp; Size
-0x401EAA: push    ebx; Src
-0x401EAB: push    esi; Dst
-0x401EAC: call    _memcpy
+0x401EA9: push    ebp; byteCount
+0x401EAA: push    ebx; source
+0x401EAB: push    esi; destination
+0x401EAC: call    _memcpy;
 0x401EB1: add     esp, 0Ch
 0x401EB4: test    ebx, ebx
 0x401EB6: jz      short loc_401EC3

@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x5B64DD",
-    "line": "jmp     ds:jpt_5B64DD[ecx*4]; switch jump",
+    "line": "jmp     ds:jpt_5B64DD[ecx*4]; MainMenu button dispatch: 2 Continue, 3 New, 4 Load, 5 Options, 6 Credits, 7 Quit.",
     "mnemonic": "jmp",
     "size": 7
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x5B6552",
-    "line": "call    sub_5AEA60",
+    "line": "call    LoadgameMenu_Open; CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.",
     "mnemonic": "call",
     "size": 5
   },

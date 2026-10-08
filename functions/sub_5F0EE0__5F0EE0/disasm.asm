@@ -51,7 +51,7 @@
 0x5F0F80: lea     eax, [esp+64h+a2]
 0x5F0F84: push    eax
 0x5F0F85: mov     ecx, edi
-0x5F0F87: call    sub_53D4B0
+0x5F0F87: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x5F0F8C: mov     ecx, [eax]
 0x5F0F8E: mov     edx, [eax+4]
 0x5F0F91: mov     eax, [eax+8]
@@ -61,12 +61,12 @@
 0x5F0F9D: mov     ecx, esi; this
 0x5F0F9F: mov     dword ptr [esp+64h+var_48+4], edx
 0x5F0FA3: mov     [esp+64h+var_40], eax
-0x5F0FA7: call    sub_5E6A40
+0x5F0FA7: call    Actor_GetWeaponTipLocalPointForHit; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.
 0x5F0FAC: push    eax
 0x5F0FAD: lea     edx, [esp+64h+var_2C]
 0x5F0FB1: push    edx
 0x5F0FB2: mov     ecx, edi
-0x5F0FB4: call    sub_53D4B0
+0x5F0FB4: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x5F0FB9: mov     ecx, [eax]
 0x5F0FBB: mov     edx, [eax+4]
 0x5F0FBE: mov     eax, [eax+8]
@@ -89,7 +89,7 @@
 0x5F1001: fstp    [esp+60h+var_34]
 0x5F1005: mov     eax, [esp+60h+var_34]
 0x5F1009: mov     [esp+60h+var_4C], eax
-0x5F100D: call    sub_43F350
+0x5F100D: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5F1012: fstp    st
 0x5F1014: fld     dword ptr [esp+60h+var_54]
 0x5F1018: push    ecx
@@ -113,7 +113,7 @@
 0x5F1059: fstp    [esp+64h+var_4C]
 0x5F105D: fld     [ebp+arg_4]
 0x5F1060: fstp    [esp+64h+var_64]; float
-0x5F1063: call    sub_547770
+0x5F1063: call    Calc_DeathForceFromDamage; ODismemberment combat decode: maps hit/death damage magnitude into a force scalar using fDeathForceDamageMin/Max and fDeathForceForceMin/Max.
 0x5F1068: push    ebx
 0x5F1069: fstp    [esp+68h+var_30]
 0x5F106D: call    sub_8B8700
@@ -121,14 +121,14 @@
 0x5F1074: push    1; a3
 0x5F1076: push    1; a2
 0x5F1078: push    ebx; a1
-0x5F1079: call    sub_88D070
+0x5F1079: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x5F107E: fldz
 0x5F1080: add     esp, 18h
 0x5F1083: push    0; a3
 0x5F1085: push    ecx
 0x5F1086: mov     ecx, ebx; this
 0x5F1088: fstp    [esp+68h+var_68]; a2
-0x5F108B: call    NiAVObject_UpdateNiAVObject
+0x5F108B: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5F1090: fld     dword ptr [esp+60h+var_54]
 0x5F1094: fld     qword ptr ds:0A39088h
 0x5F109A: push    ecx

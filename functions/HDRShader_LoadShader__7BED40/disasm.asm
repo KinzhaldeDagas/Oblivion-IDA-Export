@@ -148,7 +148,6 @@
 0x7BEFF6: add     esp, 30h
 0x7BEFF9: xor     esi, esi
 0x7BEFFB: jmp     short loc_7BF000
-0x7BEFFD: align 10h
 0x7BF000: mov     edi, esi
 0x7BF002: imul    edi, 4Ch ; 'L'
 0x7BF005: mov     eax, [esp+edi+6E4h+FullPath]
@@ -175,7 +174,7 @@
 0x7BF053: lea     edx, [esp+6F8h+FileName]
 0x7BF05A: push    edx; lpFileName
 0x7BF05B: mov     ecx, ebp
-0x7BF05D: call    CreateVertexShader
+0x7BF05D: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7BF062: mov     edi, [ebp+esi*4+90h]
 0x7BF069: cmp     edi, eax
 0x7BF06B: mov     [esp+6E4h+var_6D0], eax
@@ -207,14 +206,14 @@
 0x7BF0B8: cmp     esi, ebx
 0x7BF0BA: mov     word ptr [esp+6E4h+var_6D0], 34h ; '4'
 0x7BF0C1: jnz     short loc_7BF0D5
-0x7BF0C3: cmp     ds:0B43071h, bl
+0x7BF0C3: cmp     ds:0B43071h, bl; [Verified] HDRShader::LoadShader uses the FP16ARGB filtering capability at RendererGlobalState+0x1D8 to choose an alternate configuration for HDR pixel-program index 0 before CreatePixelShader.
 0x7BF0C9: jz      short loc_7BF0E9
 0x7BF0CB: lea     ecx, [esp+6E4h+var_6D0]
 0x7BF0CF: mov     [esp+6E4h+var_6C4], ecx
 0x7BF0D3: jmp     short loc_7BF0E9
 0x7BF0D5: cmp     esi, 4
 0x7BF0D8: jnz     short loc_7BF0E9
-0x7BF0DA: cmp     ds:0B43071h, bl
+0x7BF0DA: cmp     ds:0B43071h, bl; [Verified] HDRShader::LoadShader uses the FP16ARGB filtering capability at RendererGlobalState+0x1D8 to change the SWFILTER configuration for HDR pixel-program index 4.
 0x7BF0E0: jz      short loc_7BF0E9
 0x7BF0E2: mov     [esp+6E4h+var_588], ebx
 0x7BF0E9: mov     eax, [esp+edi+6E4h+var_6CC]
@@ -238,7 +237,7 @@
 0x7BF125: lea     ecx, [esp+6F8h+FileName]
 0x7BF12C: push    ecx; lpFileName
 0x7BF12D: mov     ecx, ebp
-0x7BF12F: call    CreatePixelShader
+0x7BF12F: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x7BF134: mov     edi, [ebp+esi*4+0B0h]
 0x7BF13B: cmp     edi, eax
 0x7BF13D: mov     [esp+6E4h+var_6D4], eax

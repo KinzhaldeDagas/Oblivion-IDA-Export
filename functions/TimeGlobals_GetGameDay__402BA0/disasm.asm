@@ -6,9 +6,9 @@
 0x402BAB: fstp    [esp+4+var_4]
 0x402BAE: fld     [esp+4+var_4]
 0x402BB1: add     esp, 4
-0x402BB4: jmp     Double_To_SInt32
+0x402BB4: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x402BB9: fld     ds:flt_A2F944
 0x402BBF: fstp    [esp+4+var_4]
 0x402BC2: fld     [esp+4+var_4]
 0x402BC5: add     esp, 4
-0x402BC8: jmp     Double_To_SInt32
+0x402BC8: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

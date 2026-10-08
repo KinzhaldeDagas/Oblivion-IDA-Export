@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4730B0",
-    "line": "push    ebp",
+    "line": "push    ebp; Walks every controller-manager sequence, RTTI-filters to the Oblivion animation-group sequence class, and clears the +8 pointer in each 0x10-byte controlled-block record through 0x49F520. Kept conservatively unnamed because the exact field type is not yet recovered.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4730F0",
-    "line": "cmp     eax, offset dword_B35270",
+    "line": "cmp     eax, 0B35270h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x47310A",
-    "line": "call    sub_49F520",
+    "line": "call    sub_49F520; For each 0x10-byte controlled-block record owned by this sequence, clears the pointer at record +8. Called only by ActorAnimData's manager-wide controlled-block reset pass at 0x4730B0.",
     "mnemonic": "call",
     "size": 5
   },

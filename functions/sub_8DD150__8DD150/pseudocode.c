@@ -27,48 +27,48 @@ int __cdecl sub_8DD150(__m128 *a1, float a2, __m128 *a3)
   unsigned int v28; // [esp+4h] [ebp-14h]
   __m128 v29; // [esp+8h] [ebp-10h] BYREF
 
-  v3 = a1[3];
-  v4 = _mm_add_ps(a1[2], v3);
-  v5 = _mm_mul_ps(v4, v4);
-  v6 = _mm_add_ps(_mm_shuffle_ps(v5, v5, 0x4E), v5);
-  v25 = v6.m128_f32[0] + _mm_shuffle_ps(v6, v6, 0xB1).m128_f32[0];
-  v24 = (a2 - a1->m128_f32[3]) * a1[1].m128_f32[3];
-  v7 = flt_A41328 - v25 * flt_A9A480;
-  *(float *)&v26 = (flt_A35AA4 - v25 * v7 * v7 * flt_A3D65C) * v7;
-  v8 = _mm_mul_ps(_mm_shuffle_ps((__m128)v26, (__m128)v26, 0), v4);
-  v10 = v24 + v24;
-  if ( v11 | v12 )
+  v3 = a1[3]; /*0x8dd168*/
+  v4 = _mm_add_ps(a1[2], v3); /*0x8dd16f*/
+  v5 = _mm_mul_ps(v4, v4); /*0x8dd175*/
+  v6 = _mm_add_ps(_mm_shuffle_ps(v5, v5, 0x4E), v5); /*0x8dd17f*/
+  v25 = v6.m128_f32[0] + _mm_shuffle_ps(v6, v6, 0xB1).m128_f32[0]; /*0x8dd193*/
+  v24 = (a2 - a1->m128_f32[3]) * a1[1].m128_f32[3]; /*0x8dd197*/
+  v7 = flt_A41328 - v25 * flt_A9A480; /*0x8dd1a5*/
+  *(float *)&v26 = (flt_A35AA4 - v25 * v7 * v7 * kHeadBodyNormalMatchRadius) * v7; /*0x8dd1c1*/
+  v8 = _mm_mul_ps(_mm_shuffle_ps((__m128)v26, (__m128)v26, 0), v4); /*0x8dd1e1*/
+  v10 = v24 + v24; /*0x8dd1e8*/
+  if ( v11 | v12 ) /*0x8dd1ec*/
   {
-    *(float *)&v27 = v10;
-    v13 = _mm_shuffle_ps((__m128)v27, (__m128)v27, 0);
-    v14 = _mm_mul_ps(v13, v8);
-    v15 = _mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v13), a1[2]);
+    *(float *)&v27 = v10; /*0x8dd1f1*/
+    v13 = _mm_shuffle_ps((__m128)v27, (__m128)v27, 0); /*0x8dd1fb*/
+    v14 = _mm_mul_ps(v13, v8); /*0x8dd202*/
+    v15 = _mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v13), a1[2]); /*0x8dd212*/
   }
   else
   {
-    *(float *)&v28 = v10 - fConstant_1;
-    v16 = _mm_shuffle_ps((__m128)v28, (__m128)v28, 0);
-    v14 = _mm_mul_ps(v16, v3);
-    v15 = _mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v16), v8);
+    *(float *)&v28 = v10 - fConstant_1; /*0x8dd224*/
+    v16 = _mm_shuffle_ps((__m128)v28, (__m128)v28, 0); /*0x8dd22e*/
+    v14 = _mm_mul_ps(v16, v3); /*0x8dd23b*/
+    v15 = _mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v16), v8); /*0x8dd23e*/
   }
-  v17 = _mm_add_ps(v15, v14);
-  v18 = _mm_mul_ps(v17, v17);
-  v19 = _mm_add_ps(_mm_shuffle_ps(v18, v18, 0x4E), v18);
-  v19.m128_f32[0] = v19.m128_f32[0] + _mm_shuffle_ps(v19, v19, 0xB1).m128_f32[0];
-  v18.m128_f32[0] = 1.0 / fsqrt(v19.m128_f32[0]);
-  v20 = 3.0 - (float)((float)(v19.m128_f32[0] * v18.m128_f32[0]) * v18.m128_f32[0]);
-  v21 = (__m128)0x3F000000u;
-  v21.m128_f32[0] = (float)(0.5 * v18.m128_f32[0]) * v20;
-  v29 = _mm_mul_ps(_mm_shuffle_ps(v21, v21, 0), v17);
-  result = sub_8B1DD0(a3->m128_f32, v29.m128_f32);
-  v23 = _mm_shuffle_ps((__m128)LODWORD(v24), (__m128)LODWORD(v24), 0);
-  a3[3] = _mm_add_ps(_mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v23), *a1), _mm_mul_ps(v23, a1[1]));
-  a3[3] = _mm_sub_ps(
+  v17 = _mm_add_ps(v15, v14); /*0x8dd244*/
+  v18 = _mm_mul_ps(v17, v17); /*0x8dd24a*/
+  v19 = _mm_add_ps(_mm_shuffle_ps(v18, v18, 0x4E), v18); /*0x8dd254*/
+  v19.m128_f32[0] = v19.m128_f32[0] + _mm_shuffle_ps(v19, v19, 0xB1).m128_f32[0]; /*0x8dd25e*/
+  v18.m128_f32[0] = 1.0 / fsqrt(v19.m128_f32[0]); /*0x8dd270*/
+  v20 = 3.0 - (float)((float)(v19.m128_f32[0] * v18.m128_f32[0]) * v18.m128_f32[0]); /*0x8dd28b*/
+  v21 = (__m128)0x3F000000u; /*0x8dd297*/
+  v21.m128_f32[0] = (float)(0.5 * v18.m128_f32[0]) * v20; /*0x8dd2a1*/
+  v29 = _mm_mul_ps(_mm_shuffle_ps(v21, v21, 0), v17); /*0x8dd2b6*/
+  result = hkMatrix3_SetFromQuaternion(a3->m128_f32, v29.m128_f32); /*0x8dd2bb*/
+  v23 = _mm_shuffle_ps((__m128)LODWORD(v24), (__m128)LODWORD(v24), 0); /*0x8dd2d9*/
+  a3[3] = _mm_add_ps(_mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v23), *a1), _mm_mul_ps(v23, a1[1])); /*0x8dd2ef*/
+  a3[3] = _mm_sub_ps( /*0x8dd32e*/
             a3[3],
             _mm_add_ps(
               _mm_add_ps(
                 _mm_mul_ps(*a3, _mm_shuffle_ps(a1[4], a1[4], 0)),
                 _mm_mul_ps(a3[1], _mm_shuffle_ps(a1[4], a1[4], 0x55))),
               _mm_mul_ps(a3[2], _mm_shuffle_ps(a1[4], a1[4], 0xAA))));
-  return result;
+  return result; /*0x8dd333*/
 }

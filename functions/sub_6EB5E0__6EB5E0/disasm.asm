@@ -15,7 +15,6 @@
 0x6EB608: push    esi
 0x6EB609: jmp     short loc_6EB612
 0x6EB60B: jmp     short loc_6EB610
-0x6EB60D: align 10h
 0x6EB610: fldz
 0x6EB612: movzx   eax, bl
 0x6EB615: lea     esi, [eax+eax*2]

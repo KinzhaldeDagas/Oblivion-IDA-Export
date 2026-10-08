@@ -1,1 +1,1 @@
-ComCallData
+typedef tagComCallData ComCallData;

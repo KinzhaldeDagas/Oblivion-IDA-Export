@@ -1,4 +1,4 @@
-0x45CEE0: sub     esp, 10h
+0x45CEE0: sub     esp, 10h; MEF PERF 2026-09-08: Map tuning qualification: attached-animation drain starts at first occupied bucket, traverses through452600 and removes processed keys. Rehashing can change execution order; no order-independence proof was established. Retain existing behavior while evaluating the separately verified ID-array/master-list bottlenecks.
 0x45CEE3: push    esi
 0x45CEE4: mov     esi, ecx
 0x45CEE6: mov     ecx, [esi+58h]
@@ -10,7 +10,6 @@
 0x45CEF3: mov     edi, [ecx+8]
 0x45CEF6: mov     ecx, edi
 0x45CEF8: jmp     short loc_45CF00
-0x45CEFA: align 10h
 0x45CF00: cmp     dword ptr [ecx], 0
 0x45CF03: jnz     loc_45CF8F
 0x45CF09: add     eax, 1
@@ -19,29 +18,29 @@
 0x45CF11: jb      short loc_45CF00
 0x45CF13: xor     eax, eax
 0x45CF15: test    eax, eax
-0x45CF17: mov     [esp+18h+var_8], eax
+0x45CF17: mov     [esp+18h+position], eax
 0x45CF1B: jz      loc_45D006
 0x45CF21: push    ebx
 0x45CF22: push    ebp
-0x45CF23: lea     eax, [esp+20h+var_10]
-0x45CF27: push    eax
+0x45CF23: lea     eax, [esp+20h+valueOut]
+0x45CF27: push    eax; valueOut
 0x45CF28: lea     ecx, [esp+24h+a1]
-0x45CF2C: push    ecx
-0x45CF2D: mov     ecx, [esi+58h]
-0x45CF30: lea     edx, [esp+28h+var_8]
-0x45CF34: push    edx
-0x45CF35: call    sub_452600
+0x45CF2C: push    ecx; keyOut
+0x45CF2D: mov     ecx, [esi+58h]; self
+0x45CF30: lea     edx, [esp+28h+position]
+0x45CF34: push    edx; position
+0x45CF35: call    NiTMap_U32Pointer_GetNextEntry
 0x45CF3A: mov     ebp, [esp+20h+a1]
 0x45CF3E: push    0; int
 0x45CF40: push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *
 0x45CF45: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x45CF4A: push    0; int
 0x45CF4C: push    ebp; a1
-0x45CF4D: call    TESForm_LookupByFormID
+0x45CF4D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x45CF52: add     esp, 4
 0x45CF55: push    eax; void *
 0x45CF56: call    OblivionDynamicCast
-0x45CF5B: mov     ebx, [esp+34h+var_10]
+0x45CF5B: mov     ebx, [esp+34h+valueOut]
 0x45CF5F: mov     edi, eax
 0x45CF61: add     esp, 14h
 0x45CF64: test    edi, edi
@@ -51,15 +50,15 @@
 0x45CF6E: mov     eax, ebx
 0x45CF70: push    eax
 0x45CF71: lea     ecx, [edi+44h]
-0x45CF74: call    sub_4210E0
+0x45CF74: call    ExtraDataList_SetSavedAttachedAnimation; Gets/creates Oblivion ExtraSavedMovementData and stores the saved-attached-animation pointer; replacement is diagnosed at runtime.
 0x45CF79: mov     ecx, [esi+4]
 0x45CF7C: test    ecx, ecx
-0x45CF7E: push    1000000h
-0x45CF83: push    edi
+0x45CF7E: push    1000000h; flags
+0x45CF83: push    edi; form
 0x45CF84: jnz     short loc_45CF88
-0x45CF86: mov     ecx, [esi]
-0x45CF88: call    sub_452C20
-0x45CF8D: jmp     short loc_45CFF0
+0x45CF86: mov     ecx, [esi]; self
+0x45CF88: call    ChangesMap_AddFormChangeFlags;
+0x45CF8D: jmp     short loc_45CFF0; MEF PERF 2026-10-02 PASS2: Rejected performance allegation: this JMP targets45CFF0, so the no-scene-node ownership-transfer branch skips blob free but DOES call NiTMap_RemoveAt at45CFF4. Pseudocode continue must not be interpreted as retaining the map entry. Dense ordinary drain repeatedly removes bucket heads.
 0x45CF8F: mov     eax, [edi+eax*4]
 0x45CF92: jmp     loc_45CF15
 0x45CF97: mov     ecx, [esi+14h]
@@ -91,7 +90,7 @@
 0x45CFF0: mov     ecx, [esi+58h]
 0x45CFF3: push    ebp
 0x45CFF4: call    NiTMap_RemoveAt
-0x45CFF9: cmp     [esp+20h+var_8], 0
+0x45CFF9: cmp     [esp+20h+position], 0
 0x45CFFE: jnz     loc_45CF23
 0x45D004: pop     ebp
 0x45D005: pop     ebx

@@ -1,5 +1,5 @@
 // positive sp value has been detected, the output may be wrong!
 char EffectItemList_AllEffectsHostile_::Return_True()
 {
-  return 1;
+  return 1; /*0x414ef4*/
 }

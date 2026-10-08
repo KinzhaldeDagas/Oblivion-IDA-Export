@@ -21,15 +21,14 @@ int __usercall Actor_AttackHandling_::ApplyNormalWeaponResistance@<eax>(
         int a20,
         int a21,
         int a22,
-        int a23)
+        int a23,
+        int a24,
+        int a25)
 {
-  float v24; // [esp+18h] [ebp+18h]
+  int v26; // [esp+18h] [ebp+18h]
 
-  if ( !a1 || (unsigned int)(a11 - 1) > 0x62 )
-    return Actor_AttackHandling_::ApplyWeaponDamage_Check_(a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
-  if ( !a15 && !a12 )
-    return Actor_AttackHandling_::ApplyWeaponDamage_Check(
-             0,
+  if ( !a1 || (unsigned int)(a11 - 1) > 0x62 ) /*0x5ff56c*/
+    return Actor_AttackHandling_::ApplyWeaponDamage_Check_( /*0x5ff560*/
              edi0,
              esi0,
              a4,
@@ -38,6 +37,31 @@ int __usercall Actor_AttackHandling_::ApplyNormalWeaponResistance@<eax>(
              a7,
              a8,
              *(float *)&a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             a23);
+  if ( !a15 && !a12 ) /*0x5ff57a*/
+    return Actor_AttackHandling_::ApplyWeaponDamage_Check( /*0x5ff57a*/
+             0,
+             edi0,
+             esi0,
+             a4,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
              a10,
              a11,
              0,
@@ -51,8 +75,10 @@ int __usercall Actor_AttackHandling_::ApplyNormalWeaponResistance@<eax>(
              a20,
              a21,
              a22,
-             a23);
-  v24 = (1.0 - (double)a11 / fCostant_100) * *(float *)&a9;
+             a23,
+             a24,
+             a25);
+  *(float *)&v26 = (1.0 - (double)a11 / fCostant_100) * *(float *)&a9; /*0x5ff58e*/
   return Actor_AttackHandling_::ApplyWeaponDamage_Check(
            a15,
            edi0,
@@ -62,7 +88,7 @@ int __usercall Actor_AttackHandling_::ApplyNormalWeaponResistance@<eax>(
            a6,
            a7,
            a8,
-           v24,
+           v26,
            a10,
            a11,
            a12,
@@ -76,5 +102,7 @@ int __usercall Actor_AttackHandling_::ApplyNormalWeaponResistance@<eax>(
            a20,
            a21,
            a22,
-           a23);
+           a23,
+           a24,
+           a25);
 }

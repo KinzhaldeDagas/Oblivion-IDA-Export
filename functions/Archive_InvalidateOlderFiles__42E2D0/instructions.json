@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x42E2E4",
-    "line": "mov     eax, ArchiveInvalidatedDirPAths",
+    "line": "mov     eax, ds:0B33934h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x42E2FA",
-    "line": "cmp     ArchiveInvalidateFilenames, ecx",
+    "line": "cmp     ds:0B33930h, ecx",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x42E351",
-    "line": "mov     eax, ArchiveInvalidatedDirPAths",
+    "line": "mov     eax, ds:0B33934h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x42E3DB",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; MEF v39 caller proof: Archive_InvalidateOlderFiles immediately performs a strlen-like scan on Archive_LoadFolderNames result without null/length guard.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -660,12 +660,6 @@
     "size": 2
   },
   {
-    "ea": "0x42E438",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x42E440",
     "line": "mov     edx, [ebp+0Ch]",
     "mnemonic": "mov",
@@ -673,7 +667,7 @@
   },
   {
     "ea": "0x42E443",
-    "line": "mov     eax, ArchiveInvalidateFilenames",
+    "line": "mov     eax, ds:0B33930h",
     "mnemonic": "mov",
     "size": 5
   },

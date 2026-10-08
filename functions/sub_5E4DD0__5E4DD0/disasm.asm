@@ -37,7 +37,7 @@
 0x5E4E23: jnz     short loc_5E4E2E
 0x5E4E25: push    0
 0x5E4E27: mov     ecx, esi
-0x5E4E29: call    sub_41A610
+0x5E4E29: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x5E4E2E: mov     edi, [edi+4]
 0x5E4E31: test    edi, edi
 0x5E4E33: jnz     short loc_5E4E00
@@ -72,7 +72,7 @@
 0x5E4E7B: jnz     short loc_5E4E86
 0x5E4E7D: push    0
 0x5E4E7F: mov     ecx, esi
-0x5E4E81: call    sub_41A610
+0x5E4E81: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x5E4E86: mov     edi, [edi+4]
 0x5E4E89: test    edi, edi
 0x5E4E8B: jnz     short loc_5E4E58
@@ -123,7 +123,7 @@
 0x5E4F03: jnz     short loc_5E4F0E
 0x5E4F05: push    0
 0x5E4F07: mov     ecx, esi
-0x5E4F09: call    sub_41A610
+0x5E4F09: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x5E4F0E: mov     edi, [edi+4]
 0x5E4F11: test    edi, edi
 0x5E4F13: jnz     short loc_5E4EE0
@@ -175,13 +175,13 @@
 0x5E4F8D: jz      short loc_5E4F99
 0x5E4F8F: push    0
 0x5E4F91: lea     ecx, [eax+18h]
-0x5E4F94: call    sub_41A610
+0x5E4F94: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x5E4F99: test    esi, esi
 0x5E4F9B: jz      short loc_5E4FAD
 0x5E4F9D: mov     ecx, esi
 0x5E4F9F: call    ContainerEntryExtraData_DestroyDataTable
 0x5E4FA4: push    esi
-0x5E4FA5: call    FormHeapFree
+0x5E4FA5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E4FAA: add     esp, 4
 0x5E4FAD: add     edi, 4
 0x5E4FB0: cmp     edi, 28h ; '('

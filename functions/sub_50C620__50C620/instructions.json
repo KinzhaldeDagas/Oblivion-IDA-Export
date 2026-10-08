@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x50C652",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x50C67A",
-    "line": "mov     ecx, dword ptr [esp+20h+var_4]",
+    "line": "mov     ecx, dword ptr [esp+20h+var_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x50C687",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },

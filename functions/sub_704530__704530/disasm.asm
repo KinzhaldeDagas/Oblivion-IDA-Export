@@ -41,7 +41,7 @@
 0x7045B2: push    1; char
 0x7045B4: mov     byte ptr [esp+28h+var_4], 1
 0x7045B9: mov     [edi+2Ch], ebx
-0x7045BC: push    offset dword_B256D0; int
+0x7045BC: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x7045C1: jz      short loc_704620
 0x7045C3: push    eax
 0x7045C4: call    NiSourceTexture__LoadTextureNothing
@@ -78,7 +78,7 @@
 0x70461E: jmp     short loc_704631
 0x704620: mov     ecx, [esp+2Ch+Src]
 0x704624: push    ecx; Src
-0x704625: call    NiSourceTexture__LoadTextureByFilename
+0x704625: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x70462A: add     esp, 0Ch
 0x70462D: mov     [esp+24h+Src], eax
 0x704631: push    10h; Size
@@ -226,3 +226,23 @@
 0x7047ED: retn    8
 0x7047F0: or      esi, 1
 0x7047F3: jmp     short loc_7047C4
+0x703C00: mov     eax, [ecx+4]
+0x703C03: push    eax
+0x703C04: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVMap@NiTexturingProperty@@@@6B@; const NiTArray<NiTexturingProperty::Map *>::`vftable'
+0x703C0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x703C0F: pop     ecx
+0x703C10: retn
+0x9C9570: mov     ecx, [ebp-10h]; this
+0x9C9573: jmp     j_??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C9578: mov     ecx, [ebp-10h]
+0x9C957B: add     ecx, 1Ch
+0x9C957E: jmp     loc_703C00
+0x9C9583: lea     ecx, [ebp+8]; slot
+0x9C9586: jmp     NiPointerSlot_Release
+0x9C958B: mov     edx, [esp+arg_4]
+0x9C958F: lea     eax, [edx-14h]
+0x9C9592: mov     ecx, [edx-18h]
+0x9C9595: xor     ecx, eax
+0x9C9597: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C959C: mov     eax, offset stru_AF1E44
+0x9C95A1: jmp     ___CxxFrameHandler3

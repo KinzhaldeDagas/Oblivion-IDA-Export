@@ -21,7 +21,7 @@
 0x47D098: mov     ecx, edi; lpCriticalSection
 0x47D09A: call    NiDeleteCriticalSection
 0x47D09F: push    edi
-0x47D0A0: call    FormHeapFree
+0x47D0A0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x47D0A5: add     esp, 4
 0x47D0A8: pop     edi
 0x47D0A9: mov     [esi+4], ebx

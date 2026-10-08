@@ -15,7 +15,7 @@
 0x8CFAA7: cmp     eax, 3
 0x8CFAAA: jnz     short loc_8CFAC5
 0x8CFAAC: mov     ecx, esi
-0x8CFAAE: call    sub_890720
+0x8CFAAE: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CFAB3: pop     esi
 0x8CFAB4: mov     ecx, [esp+4Ch+var_4]
 0x8CFAB8: xor     ecx, esp
@@ -23,11 +23,11 @@
 0x8CFABF: mov     esp, ebp
 0x8CFAC1: pop     ebp
 0x8CFAC2: retn    4
-0x8CFAC5: or      dword ptr [esi+1F4h], 2000h
+0x8CFAC5: or      dword ptr [esi+1F4h], 2000h; Jumping state sets controller flag 0x2000 before computing jump velocity; climb ledge impulses should avoid forcing this unless intentionally invoking vanilla jump semantics.
 0x8CFACF: mov     eax, [esi]
 0x8CFAD1: mov     edx, [eax+58h]
 0x8CFAD4: mov     ecx, esi
-0x8CFAD6: call    edx
+0x8CFAD6: call    edx; Jumping fetches runtime context through vtable +0x58 before reading +0x20 up/gravity vector for launch direction.
 0x8CFAD8: mov     eax, [esi]
 0x8CFADA: mov     edx, [eax+58h]
 0x8CFADD: mov     ecx, esi
@@ -36,13 +36,13 @@
 0x8CFAE5: mov     eax, [esi]
 0x8CFAE7: mov     edx, [eax+58h]
 0x8CFAEA: mov     ecx, esi
-0x8CFAEC: movaps  [esp+50h+var_30], xmm0
+0x8CFAEC: movaps  [esp+50h+var_30], xmm0; Reads runtime up/gravity basis vector from context+0x20 for jump launch math.
 0x8CFAF1: call    edx
-0x8CFAF3: fld     dword ptr [esi+31Ch]
+0x8CFAF3: fld     dword ptr [esi+31Ch]; MorrowindMovements jump correction source: Jumping state reads proxy+0x31C before computing launch velocity; pre-state hook at 0x89638D can reduce this field without replacing vanilla jump semantics.
 0x8CFAF9: movss   xmm1, dword ptr [esi+328h]
 0x8CFB01: fabs
 0x8CFB03: movss   xmm4, dword ptr ds:0A46C30h
-0x8CFB0B: fstp    [esp+50h+var_44]
+0x8CFB0B: fstp    [esp+50h+var_44]; Jumping velocity uses abs(proxy+0x31C) and gravity/up basis to compute sqrt(2 * jumpHeight * |gravity|).
 0x8CFB0F: fld     [esp+50h+var_44]
 0x8CFB13: xorps   xmm0, xmm0
 0x8CFB16: movss   xmm0, xmm1
@@ -95,10 +95,10 @@
 0x8CFBD4: mulps   xmm0, xmm1
 0x8CFBD7: movaps  [esp+50h+var_30], xmm0
 0x8CFBDC: jz      short loc_8CFBEA
-0x8CFBDE: call    sub_8AC0A0
+0x8CFBDE: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x8CFBE3: movaps  xmm0, [esp+50h+var_30]
 0x8CFBE8: jmp     short loc_8CFBEF
-0x8CFBEA: mov     eax, offset stru_BA7A40
+0x8CFBEA: mov     eax, offset unk_BA7A40
 0x8CFBEF: movaps  xmm1, xmmword ptr [eax]
 0x8CFBF2: fldz
 0x8CFBF4: movaps  [esp+50h+var_30], xmm1
@@ -107,8 +107,8 @@
 0x8CFC02: addps   xmm1, xmm0
 0x8CFC05: mov     ecx, esi
 0x8CFC07: movaps  xmmword ptr [esi+2E0h], xmm1
-0x8CFC0E: mov     dword ptr [esi+2A0h], 2
-0x8CFC18: call    sub_890720
+0x8CFC0E: mov     dword ptr [esi+2A0h], 2; Jumping state writes state 2 InAir after applying upward velocity.
+0x8CFC18: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CFC1D: and     dword ptr [esi+1F4h], 0FFFDFEFFh
 0x8CFC27: mov     eax, [esi+1ECh]
 0x8CFC2D: mov     ecx, [esi+1E8h]

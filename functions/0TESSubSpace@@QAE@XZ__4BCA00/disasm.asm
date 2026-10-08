@@ -1,4 +1,4 @@
-0x4BCA00: push    0FFFFFFFFh
+0x4BCA00: push    0FFFFFFFFh; Verified TESSubSpace constructor and layout: 0x30-byte TESBoundObject-derived form type 0x29. Defaults are dimensions 400/400/200 and bound radius 300. Record persistence is DNAM with three float dimensions; loading truncates them to UInt16 and recomputes the radius.
 0x4BCA02: push    offset ??0TESObjectSTAT@@QAE@XZ_SEH
 0x4BCA07: mov     eax, large fs:0
 0x4BCA0D: push    eax
@@ -33,3 +33,12 @@
 0x4BCA7F: pop     esi
 0x4BCA80: add     esp, 14h
 0x4BCA83: retn
+0x9AB050: mov     ecx, [ebp-10h]
+0x9AB053: jmp     TESObject_destr
+0x9AB058: mov     edx, [esp+arg_4]
+0x9AB05C: lea     eax, [edx-0Ch]
+0x9AB05F: mov     ecx, [edx-10h]
+0x9AB062: xor     ecx, eax
+0x9AB064: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB069: mov     eax, offset stru_AD7F10
+0x9AB06E: jmp     ___CxxFrameHandler3

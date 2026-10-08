@@ -262,10 +262,10 @@
 0x54DD8C: mov     eax, [esp+0A84h+var_A1C]
 0x54DD90: cmp     byte ptr ds:0B11F8Ch, 0
 0x54DD97: jz      short loc_54DDD0
-0x54DD99: push    0
-0x54DD9B: push    eax
-0x54DD9C: lea     ecx, [esp+0A8Ch+var_A00]
-0x54DDA3: call    sub_71B8D0
+0x54DD99: push    0; reusePixelData
+0x54DD9B: push    eax; srcPixelData
+0x54DD9C: lea     ecx, [esp+0A8Ch+var_A00]; this
+0x54DDA3: call    OB_NiDevImageConverter_GenerateMipChain_Box_010201A0; Stock fallback mip synthesis averages RGBA independently with no alpha-coverage preservation. For cutout atlases this can drive terminal mip alpha below ref84 even when surviving high-resolution texels have correct nonblack RGB.
 0x54DDA8: mov     ecx, [esp+0A84h+var_A1C]
 0x54DDAC: mov     esi, eax
 0x54DDAE: mov     eax, [ecx]
@@ -277,7 +277,7 @@
 0x54DDBF: push    esi
 0x54DDC0: call    sub_47F590
 0x54DDC5: add     esp, 4
-0x54DDC8: push    offset dword_B256D0
+0x54DDC8: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0
 0x54DDCD: push    esi
 0x54DDCE: jmp     short loc_54DDEC
 0x54DDD0: cmp     byte ptr ds:0B05244h, 0
@@ -286,7 +286,7 @@
 0x54DDDA: call    sub_47F590
 0x54DDDF: mov     eax, [esp+0A88h+var_A1C]
 0x54DDE3: add     esp, 4
-0x54DDE6: push    offset dword_B256D0; a2
+0x54DDE6: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x54DDEB: push    eax; a1
 0x54DDEC: call    NiSourceTexture__LoadTexturePixelData
 0x54DDF1: add     esp, 8
@@ -299,9 +299,9 @@
 0x54DE0A: jnz     short loc_54DE1E
 0x54DE0C: mov     edi, [esp+0A84h+var_A10]
 0x54DE10: lea     eax, [esp+0A84h+var_A18]
-0x54DE14: push    eax
-0x54DE15: mov     ecx, edi
-0x54DE17: call    sub_55E2A0
+0x54DE14: push    eax; incoming
+0x54DE15: mov     ecx, edi; this
+0x54DE17: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x54DE1C: jmp     short loc_54DE36
 0x54DE1E: push    eax
 0x54DE1F: push    esi
@@ -314,9 +314,9 @@
 0x54DE36: cmp     dword ptr [edi], 0
 0x54DE39: jnz     short loc_54DE47
 0x54DE3B: lea     ecx, [esp+0A84h+var_A18]
-0x54DE3F: push    ecx
-0x54DE40: mov     ecx, edi
-0x54DE42: call    sub_55E2A0
+0x54DE3F: push    ecx; incoming
+0x54DE40: mov     ecx, edi; this
+0x54DE42: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x54DE47: test    esi, esi
 0x54DE49: mov     byte ptr [esp+0A84h+var_4], 0
 0x54DE51: jz      short loc_54DE6B
@@ -348,3 +348,23 @@
 0x54DEA8: mov     esp, ebp
 0x54DEAA: pop     ebp
 0x54DEAB: retn    10h
+0x9BB9C0: lea     ecx, [ebp+var_A00]; this
+0x9BB9C6: jmp     ??1NiDevImageConverter@@UAE@XZ; NiDevImageConverter::~NiDevImageConverter(void)
+0x9BB9CB: lea     ecx, [ebp+var_A18]; slot
+0x9BB9D1: jmp     NiPointerSlot_Release
+0x9BB9D6: mov     eax, [ebp+var_A20]
+0x9BB9DC: push    eax
+0x9BB9DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BB9E2: pop     ecx
+0x9BB9E3: retn
+0x9BB9E4: mov     edx, [esp-4+arg_4]
+0x9BB9E8: lea     eax, [edx-0A74h]
+0x9BB9EE: mov     ecx, [edx-0A78h]
+0x9BB9F4: xor     ecx, eax
+0x9BB9F6: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BB9FB: add     eax, 0Ch
+0x9BB9FE: mov     ecx, [edx-78h]
+0x9BBA01: xor     ecx, eax
+0x9BBA03: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBA08: mov     eax, offset stru_AE56E4
+0x9BBA0D: jmp     ___CxxFrameHandler3

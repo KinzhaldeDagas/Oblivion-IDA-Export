@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x6434C0",
+      "0x6434E4"
+    ]
+  ],
+  "chunks_sha256": "dca273c3f98fb9b4c8e8988814ca1d81e57dec9375c6ee0d67dd52396b37bc8f",
+  "comment_regular": "Verified: accepts only IDs8..10, converts integer delta to float and adjusts LowProcess collection +0x70 with allowPositive=0.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "LowProcess_ModAViCur",
   "end_ea": "0x6434E4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "LowProcess_ModAViCur",
   "segment": ".text",
   "sha256": "dca273c3f98fb9b4c8e8988814ca1d81e57dec9375c6ee0d67dd52396b37bc8f",
   "size": 36,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6434C0",
-  "type": "int __thiscall(_DWORD *this, int, int, signed int)",
+  "total_chunk_size": 36,
+  "type": "void __thiscall(LowProcess *self, int context, int actorValue, int delta)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 1
 }

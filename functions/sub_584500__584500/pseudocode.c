@@ -1,47 +1,47 @@
-int __thiscall sub_584500(char *this, EntryData *a2, EntryData *a3)
+int __userpurge sub_584500@<eax>(char *this@<ecx>, int a2@<ebx>, EntryData *a3, EntryData *a4)
 {
-  CHAR *v4; // esi
-  CHAR *v5; // eax
-  int v6; // eax
-  double v8; // st7
-  float v9; // [esp+0h] [ebp-10h]
+  CHAR *v5; // esi
+  CHAR *v6; // eax
+  int v7; // eax
+  double v9; // st7
   float v10; // [esp+0h] [ebp-10h]
-  double v11; // [esp+8h] [ebp-8h]
+  float v11; // [esp+0h] [ebp-10h]
   double v12; // [esp+8h] [ebp-8h]
   double v13; // [esp+8h] [ebp-8h]
+  double v14; // [esp+8h] [ebp-8h]
   double HealthFracOrUses; // [esp+8h] [ebp-8h]
-  int v15; // [esp+14h] [ebp+4h]
+  int v16; // [esp+14h] [ebp+4h]
 
-  switch ( *this & 0x7F )
+  switch ( *this & 0x7F ) /*0x584518*/
   {
-    case 0:
-      v4 = sub_488DF0(a3);
-      v5 = sub_488DF0(a2);
-      v6 = _mbsicmp((const unsigned __int8 *)v5, (const unsigned __int8 *)v4);
-      return def_584518(this, v6, (int)a2, (int)a3);
-    case 1:
-      v11 = sub_488E50((void **)&a2->extendData, 0, 0, 0, v9);
-      v8 = v11 - sub_488E50((void **)&a3->extendData, 0, 0, 0, v10);
-      goto LABEL_7;
-    case 2:
-      v12 = sub_485260((void **)&a2->extendData, 0, 0, 0);
-      v8 = v12 - sub_485260((void **)&a3->extendData, 0, 0, 0);
-      goto LABEL_7;
-    case 3:
-      v13 = sub_4891C0(a2, 0, 0, 0);
-      v8 = v13 - sub_4891C0(a3, 0, 0, 0);
-      goto LABEL_7;
-    case 4:
-      HealthFracOrUses = ContainerEntryExtraData_GetHealthFracOrUses((void **)&a2->extendData, 1, 0, 0.0);
-      v8 = HealthFracOrUses - ContainerEntryExtraData_GetHealthFracOrUses((void **)&a3->extendData, 1, 0, 0.0);
+    case 0: /*0x584518*/
+      v5 = sub_488DF0(a4); /*0x58452c*/
+      v6 = sub_488DF0(a3); /*0x58452e*/
+      v7 = _mbsicmp((const unsigned __int8 *)v6, (const unsigned __int8 *)v5); /*0x584535*/
+      return def_584518(this, v7, (int)a3, (int)a4); /*0x58453f*/
+    case 1: /*0x584518*/
+      v12 = sub_488E50((void **)&a3->extendData, 0, 0, 0, v10); /*0x584553*/
+      v9 = v12 - sub_488E50((void **)&a4->extendData, 0, 0, 0, v11); /*0x584566*/
+      goto LABEL_7; /*0x58456a*/
+    case 2: /*0x584518*/
+      v13 = sub_485260((void **)&a3->extendData, 0, 0, 0); /*0x58457b*/
+      v9 = v13 - sub_485260((void **)&a4->extendData, 0, 0, 0); /*0x58458e*/
+      goto LABEL_7; /*0x584592*/
+    case 3: /*0x584518*/
+      v14 = Player_CalcInventoryEntryRating(a3, a2, 0, 0, 0); /*0x5845a3*/
+      v9 = v14 - Player_CalcInventoryEntryRating(a4, a2, 0, 0, 0); /*0x5845b6*/
+      goto LABEL_7; /*0x5845ba*/
+    case 4: /*0x584518*/
+      HealthFracOrUses = ContainerEntryExtraData_GetHealthFracOrUses((void **)&a3->extendData, 1, 0, 0.0); /*0x5845cd*/
+      v9 = HealthFracOrUses - ContainerEntryExtraData_GetHealthFracOrUses((void **)&a4->extendData, 1, 0, 0.0); /*0x5845e2*/
 LABEL_7:
-      *(float *)&v15 = v8;
-      if ( *(float *)&v15 < 0.0 )
-        return def_584518(this, 0xFFFFFFFF, v15, (int)a3);
-      if ( *(float *)&v15 <= 0.0 )
+      *(float *)&v16 = v9; /*0x5845e6*/
+      if ( *(float *)&v16 < 0.0 ) /*0x5845f7*/
+        return def_584518(this, 0xFFFFFFFF, v16, (int)a4); /*0x584600*/
+      if ( *(float *)&v16 <= 0.0 ) /*0x584609*/
 LABEL_11:
-        JUMPOUT(0x584610);
-      return def_584518(this, 1, v15, (int)a3);
+        JUMPOUT(0x584610); /*0x584610*/
+      return def_584518(this, 1, v16, (int)a4);
     default:
       goto LABEL_11;
   }

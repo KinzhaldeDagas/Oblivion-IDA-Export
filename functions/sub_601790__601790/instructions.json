@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x601793",
-    "line": "push    ebx",
+    "line": "push    ebx; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x601794",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x60179F",
-    "line": "push    edi",
+    "line": "push    edi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6017D1",
-    "line": "fstp    [esp+30h+var_C]",
+    "line": "fstp    [esp+30h+var_C]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x6017D9",
-    "line": "fstp    [esp+30h+var_8]",
+    "line": "fstp    [esp+30h+var_8]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x6017E1",
-    "line": "fstp    [esp+30h+var_4]",
+    "line": "fstp    [esp+30h+var_4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6017E5",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6017EC",
-    "line": "fstp    [esp+30h+var_18]",
+    "line": "fstp    [esp+30h+var_18]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x601807",
-    "line": "mov     [esp+2Ch+var_14], ebx",
+    "line": "mov     [esp+2Ch+var_14], ebx; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x60181B",
-    "line": "mov     [esp+2Ch+var_1C], eax",
+    "line": "mov     [esp+2Ch+var_1C], eax; float",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x601846",
-    "line": "fstp    [esp+2Ch+var_10]",
+    "line": "fstp    [esp+2Ch+var_10]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x601872",
-    "line": "fstp    [esp+34h+var_34]; float",
+    "line": "fstp    [esp+34h+arg0]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x6018F4",
-    "line": "fstp    [esp+2Ch+arg_4]",
+    "line": "fstp    [esp+2Ch+arg_4]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x601908",
-    "line": "fstp    [esp+30h+var_30]",
+    "line": "fstp    [esp+30h+arg1]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x601918",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,25 +835,25 @@
   },
   {
     "ea": "0x601935",
-    "line": "fst     [esp+34h+var_30]; int",
+    "line": "fst     [esp+34h+arg1]; arg1",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x601939",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60193B",
-    "line": "fstp    [esp+34h+var_34]; float",
+    "line": "fstp    [esp+34h+arg0]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60193E",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x60194C",
-    "line": "fstp    [esp+34h+var_30]; float",
+    "line": "fstp    [esp+34h+arg1]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -889,19 +889,19 @@
   },
   {
     "ea": "0x601958",
-    "line": "fstp    [esp+34h+var_34]; float",
+    "line": "fstp    [esp+34h+arg0]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60195B",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60195C",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller; supports broad scheduler classification.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,13 +1033,13 @@
   },
   {
     "ea": "0x60199D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60199F",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x601A70",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x601AC5",
-    "line": "fstp    [esp+34h+var_34]",
+    "line": "fstp    [esp+34h+arg0]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x601AD0",
-    "line": "fstp    [esp+34h+var_34]",
+    "line": "fstp    [esp+34h+arg0]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x601B03",
-    "line": "fstp    [esp+30h+var_30]",
+    "line": "fstp    [esp+30h+arg1]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x601B3C",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x601B52",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,13 +1921,13 @@
   },
   {
     "ea": "0x601B5B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x601B5D",
-    "line": "call    sub_4CB6C0",
+    "line": "call    TESObjectCELL_UpdateAttachedReferenceLights; Walk this cell object list, select references whose base form type is TESObjectLIGH, retrieve ordinary ExtraLight type 0x30, and update its attached NiLight payload. This is a source-light animation/update enumerator, not a static/reference shadow-caster admission loop.",
     "mnemonic": "call",
     "size": 5
   },

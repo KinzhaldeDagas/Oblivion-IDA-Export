@@ -14,16 +14,16 @@
 0x5C44A1: mov     large fs:0, eax
 0x5C44A7: mov     edi, ecx
 0x5C44A9: mov     eax, ds:0B3B5D4h
-0x5C44AE: mov     ebp, [esp+2Ch+arg_0]
+0x5C44AE: mov     ebp, [esp+2Ch+parent]
 0x5C44B2: xor     ebx, ebx
-0x5C44B4: push    ebx
+0x5C44B4: push    ebx; lastTile
 0x5C44B5: add     eax, 1
 0x5C44B8: push    offset aRace_templat_0; "race_template_button"
-0x5C44BD: push    ebp
+0x5C44BD: push    ebp; parent
 0x5C44BE: mov     [esp+38h+var_4], 1
 0x5C44C6: mov     ds:0B3B5D4h, eax
 0x5C44CB: mov     [esp+38h+a3], eax; a3
-0x5C44CF: call    Menu_CreateTileFromTemplate
+0x5C44CF: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5C44D4: mov     esi, eax
 0x5C44D6: mov     [esp+2Ch+a2], ebx
 0x5C44DA: mov     [esp+2Ch+var_10], bx
@@ -38,7 +38,7 @@
 0x5C44FD: mov     edx, [esp+38h+a2]
 0x5C4501: add     esp, 4
 0x5C4504: mov     ecx, esp; this
-0x5C4506: mov     [esp+34h+arg_0], esp
+0x5C4506: mov     [esp+34h+parent], esp
 0x5C450A: push    ebx; a3
 0x5C450B: push    edx; a2
 0x5C450C: mov     [ecx], ebx
@@ -50,26 +50,26 @@
 0x5C4522: fild    [esp+2Ch+a3]
 0x5C4526: push    ecx
 0x5C4527: mov     ecx, esi; this
-0x5C4529: fstp    [esp+30h+var_30]; a3
-0x5C452C: push    0FA8h; a2
-0x5C4531: call    Tile_SetFloat
+0x5C4529: fstp    [esp+30h+var_30]; value
+0x5C452C: push    0FA8h; propertyCode
+0x5C4531: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C4536: push    0FD0h
 0x5C453B: mov     ecx, ebp
 0x5C453D: call    Tile_GetFloat
 0x5C4542: fsub    qword ptr ds:0A2F928h
 0x5C4548: push    ecx
 0x5C4549: mov     ecx, esi; this
-0x5C454B: fstp    [esp+30h+arg_0]
-0x5C454F: fld     [esp+30h+arg_0]
-0x5C4553: fstp    [esp+30h+var_30]; a3
-0x5C4556: push    0FAAh; a2
-0x5C455B: call    Tile_SetFloat
+0x5C454B: fstp    [esp+30h+parent]
+0x5C454F: fld     [esp+30h+parent]
+0x5C4553: fstp    [esp+30h+var_30]; value
+0x5C4556: push    0FAAh; propertyCode
+0x5C455B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C4560: fldz
 0x5C4562: push    ecx
-0x5C4563: fstp    [esp+30h+var_30]; a3
-0x5C4566: push    0FAFh; a2
+0x5C4563: fstp    [esp+30h+var_30]; value
+0x5C4566: push    0FAFh; propertyCode
 0x5C456B: mov     ecx, esi; this
-0x5C456D: call    Tile_SetFloat
+0x5C456D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C4572: cmp     [esp+2Ch+arg_14], bl
 0x5C4576: mov     ecx, esi
 0x5C4578: jz      short loc_5C4581
@@ -81,16 +81,16 @@
 0x5C458B: call    Tile_SetString
 0x5C4590: fld     dword ptr ds:0A6D2D8h
 0x5C4596: push    ecx
-0x5C4597: fstp    [esp+30h+var_30]; a3
-0x5C459A: push    0FB1h; a2
+0x5C4597: fstp    [esp+30h+var_30]; value
+0x5C459A: push    0FB1h; propertyCode
 0x5C459F: mov     ecx, esi; this
-0x5C45A1: call    Tile_SetFloat
+0x5C45A1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C45A6: fldz
 0x5C45A8: push    ecx
-0x5C45A9: fstp    [esp+30h+var_30]; a3
-0x5C45AC: push    0FB1h; a2
+0x5C45A9: fstp    [esp+30h+var_30]; value
+0x5C45AC: push    0FB1h; propertyCode
 0x5C45B1: mov     ecx, esi; this
-0x5C45B3: call    Tile_SetFloat
+0x5C45B3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C45B8: mov     ebp, [esp+2Ch+arg_C]
 0x5C45BC: push    ebp
 0x5C45BD: push    0FB4h
@@ -100,20 +100,20 @@
 0x5C45CD: jz      short loc_5C45E5
 0x5C45CF: fld     dword ptr ds:0A379B4h
 0x5C45D5: push    ecx
-0x5C45D6: fstp    [esp+30h+var_30]; a3
-0x5C45D9: push    0FF0h; a2
+0x5C45D6: fstp    [esp+30h+var_30]; value
+0x5C45D9: push    0FF0h; propertyCode
 0x5C45DE: mov     ecx, esi; this
-0x5C45E0: call    Tile_SetFloat
+0x5C45E0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C45E5: mov     edx, [esp+2Ch+a2]
 0x5C45E9: mov     ecx, [esp+2Ch+a3]
 0x5C45ED: push    edx
 0x5C45EE: mov     [edi+ecx*4+94h], esi
-0x5C45F5: call    FormHeapFree
+0x5C45F5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C45FA: mov     eax, [esp+30h+ArgList]
 0x5C45FE: push    eax
-0x5C45FF: call    FormHeapFree
+0x5C45FF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C4604: push    ebp
-0x5C4605: call    FormHeapFree
+0x5C4605: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C460A: add     esp, 0Ch
 0x5C460D: mov     eax, esi
 0x5C460F: mov     ecx, [esp+2Ch+var_C]
@@ -125,3 +125,16 @@
 0x5C461E: pop     ebx
 0x5C461F: add     esp, 18h
 0x5C4622: retn    1Ch
+0x9C10E0: lea     ecx, [ebp+10h]; void *
+0x9C10E3: jmp     BSStringT_Clear
+0x9C10E8: lea     ecx, [ebp+8]; void *
+0x9C10EB: jmp     BSStringT_Clear
+0x9C10F0: lea     ecx, [ebp-14h]; void *
+0x9C10F3: jmp     BSStringT_Clear
+0x9C10F8: mov     edx, [esp+ArgList]
+0x9C10FC: lea     eax, [edx-1Ch]
+0x9C10FF: mov     ecx, [edx-20h]
+0x9C1102: xor     ecx, eax
+0x9C1104: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1109: mov     eax, offset stru_AEA218
+0x9C110E: jmp     ___CxxFrameHandler3

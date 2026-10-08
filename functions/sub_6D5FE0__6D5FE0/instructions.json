@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D5FE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Clones the interpolator, replaces cloned authored data with NiTransformData_CloneTimeRange(start,end), resets all three key cursors, and balances the temporary data reference.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6D6017",
-    "line": "call    sub_6EBA60",
+    "line": "call    NiInterpolator_CloneTimeRange; Default range clone: clone through the NiObject pointer map, then invoke the clone's post-clone/collapse virtual. Subclasses override when authored data must be sliced.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x6D603E",
-    "line": "call    sub_6E1FC0",
+    "line": "call    NiTransformData_CloneTimeRange; Oblivion NiTransformData time-range clone. Creates the destination through the native clone path, slices each nonempty channel to [start,end] through the generic key-range copier (content selectors rotation=2, translation=1, scale=0), then transfers each produced array through the matching ownership setter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -388,5 +388,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C7B10",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7B13",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7B18",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C7B1C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7B1F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C7B22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C7B24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7B29",
+    "line": "mov     eax, offset stru_AEFED8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C7B2E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

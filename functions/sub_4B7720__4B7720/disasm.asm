@@ -3,7 +3,7 @@
 0x4B7729: push    esi
 0x4B772A: push    edi
 0x4B772B: add     ecx, 44h ; 'D'
-0x4B772E: call    GetExtraDataFollower
+0x4B772E: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x4B7733: mov     esi, eax
 0x4B7735: xor     edi, edi
 0x4B7737: cmp     esi, edi
@@ -83,10 +83,10 @@
 0x4B7800: cmp     al, 7
 0x4B7802: jnz     short loc_4B7837
 0x4B7804: mov     ecx, esi; this
-0x4B7806: call    Actor__GetProcessLevel
+0x4B7806: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x4B780B: mov     edi, [esi+58h]
 0x4B780E: mov     esi, [edi]
-0x4B7810: mov     ecx, offset TimeGlobals
+0x4B7810: mov     ecx, 0B332E0h
 0x4B7815: add     esi, 1Ch
 0x4B7818: call    TimeGlobals_GetGameHour
 0x4B781D: fsub    qword ptr ds:0A2F928h
@@ -130,14 +130,14 @@
 0x4B788B: mov     ecx, ds:0B333C4h
 0x4B7891: push    eax
 0x4B7892: add     ecx, 44h ; 'D'
-0x4B7895: call    sub_424D00
+0x4B7895: call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.
 0x4B789A: mov     esi, [esi+4]
 0x4B789D: test    esi, esi
 0x4B789F: jnz     short loc_4B7885
 0x4B78A1: mov     ecx, edi
-0x4B78A3: call    BSSimpleList_Clear
+0x4B78A3: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x4B78A8: push    edi
-0x4B78A9: call    FormHeapFree
+0x4B78A9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B78AE: mov     ecx, [esp+1Ch+var_4]
 0x4B78B2: mov     eax, [ecx+0Ch]
 0x4B78B5: add     esp, 4
@@ -150,7 +150,7 @@
 0x4B78CA: add     ecx, 44h ; 'D'
 0x4B78CD: pop     esi
 0x4B78CE: add     esp, 10h
-0x4B78D1: jmp     sub_420F00
+0x4B78D1: jmp     ExtraDataList_RemoveFollowerExtra; Removes ExtraFollower (type 0x23) when present.
 0x4B78D6: pop     edi
 0x4B78D7: pop     esi
 0x4B78D8: add     esp, 10h

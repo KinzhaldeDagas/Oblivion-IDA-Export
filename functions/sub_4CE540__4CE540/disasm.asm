@@ -31,7 +31,7 @@
 0x4CE596: lea     eax, [esp+10h+var_4]
 0x4CE59A: push    eax
 0x4CE59B: push    edi
-0x4CE59C: call    TESObjectCELL__CreateCanopyShadowMaskForCell
+0x4CE59C: call    TESObjectCELL__CreateCanopyShadowMaskForCell; Create/update the native cell canopy-shadow mask.
 0x4CE5A1: add     esp, 0Ch
 0x4CE5A4: mov     eax, [esi]
 0x4CE5A6: test    eax, eax
@@ -39,7 +39,7 @@
 0x4CE5AA: cmp     dword ptr [eax+4], 0
 0x4CE5AE: jnz     short loc_4CE5E3
 0x4CE5B0: push    3
-0x4CE5B2: call    nullsub_returnTrue_0arg
+0x4CE5B2: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4CE5B7: mov     ecx, [esp+10h+var_4]
 0x4CE5BB: mov     ecx, [ecx+24h]
 0x4CE5BE: mov     edx, [ecx]
@@ -56,7 +56,7 @@
 0x4CE5D4: mov     eax, [ecx+4Ch]
 0x4CE5D7: call    eax
 0x4CE5D9: push    2
-0x4CE5DB: call    nullsub_returnTrue_0arg
+0x4CE5DB: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4CE5E0: add     esp, 4
 0x4CE5E3: mov     ecx, [esi]
 0x4CE5E5: mov     eax, [ecx+4]

@@ -28,3 +28,25 @@
 0x49D198: pop     esi
 0x49D199: add     esp, 10h
 0x49D19C: retn
+0x9B1AD0: mov     ecx, [ebp-10h]
+0x9B1AD3: add     ecx, 4; slot
+0x9B1AD6: jmp     NiPointerSlot_Release
+0x9B1ADB: mov     ecx, [ebp-10h]
+0x9B1ADE: add     ecx, 10h; slot
+0x9B1AE1: jmp     NiPointerSlot_Release
+0x9B1AE6: mov     ecx, [ebp-10h]
+0x9B1AE9: add     ecx, 1Ch; slot
+0x9B1AEC: jmp     NiPointerSlot_Release
+0x9B1AF1: mov     ecx, [ebp-10h]
+0x9B1AF4: add     ecx, 20h ; ' '; slot
+0x9B1AF7: jmp     NiPointerSlot_Release
+0x9B1AFC: mov     ecx, [ebp-10h]
+0x9B1AFF: add     ecx, 24h ; '$'; slot
+0x9B1B02: jmp     NiPointerSlot_Release
+0x9B1B07: mov     edx, [esp+arg_4]
+0x9B1B0B: lea     eax, [edx-8]
+0x9B1B0E: mov     ecx, [edx-0Ch]
+0x9B1B11: xor     ecx, eax
+0x9B1B13: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1B18: mov     eax, offset stru_ADDBE8
+0x9B1B1D: jmp     ___CxxFrameHandler3

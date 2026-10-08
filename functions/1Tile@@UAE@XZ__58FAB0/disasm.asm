@@ -21,10 +21,10 @@
 0x58FAED: call    InterfaceManager_GetSingleton
 0x58FAF2: add     esp, 8
 0x58FAF5: cmp     [eax+98h], esi
-0x58FAFB: jnz     short loc_58FB09
+0x58FAFB: jnz     short loc_58FB09; Verified: compare InterfaceManager +0x88 (focus pointer used by SetCurrentFocusTarget) with this; clear on match at 0x58FB11. Thus deleting an old topic clears matching focus before native post-build default-focus selection.
 0x58FAFD: mov     [eax+98h], ebx
 0x58FB03: mov     [eax+9Ch], ebx
-0x58FB09: cmp     [eax+88h], esi
+0x58FB09: cmp     [eax+88h], esi; Verified: compare InterfaceManager +0x88 (focus pointer used by SetCurrentFocusTarget) with this; clear on match at 0x58FB11. Thus deleting an old topic clears matching focus before native post-build default-focus selection.
 0x58FB0F: jnz     short loc_58FB17
 0x58FB11: mov     [eax+88h], ebx
 0x58FB17: cmp     [esi+4], bl
@@ -32,8 +32,8 @@
 0x58FB1C: push    offset aWarningBaseTil; "WARNING: Base tile should have been rel"...
 0x58FB21: call    sub_40FEC0
 0x58FB26: add     esp, 4
-0x58FB29: mov     ecx, esi
-0x58FB2B: call    sub_58DA70
+0x58FB29: mov     ecx, esi; this
+0x58FB2B: call    Tile__Release; Verified: marks subtree release-in-progress (+5), clears matching interface active/drag references, marks released (+4), detaches parent, destroys each Value, detaches model, then deletes children. Native loop at 0x58DA90 advances child iterator EDX before call; pseudocode may omit this advance.
 0x58FB30: mov     eax, [esi+28h]
 0x58FB33: cmp     eax, ebx
 0x58FB35: jz      short loc_58FB50
@@ -42,7 +42,7 @@
 0x58FB3C: mov     edi, [ecx+14h]
 0x58FB3F: jz      short loc_58FB4A
 0x58FB41: push    eax
-0x58FB42: call    FormHeapFree
+0x58FB42: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58FB47: add     esp, 4
 0x58FB4A: cmp     edi, ebx
 0x58FB4C: mov     eax, edi
@@ -55,7 +55,7 @@
 0x58FB64: call    ??1?$NiTList@PAVValue@Tile@@@@UAE@XZ; NiTList<Tile::Value *>::~NiTList<Tile::Value *>(void)
 0x58FB69: mov     edx, [esi+8]
 0x58FB6C: push    edx
-0x58FB6D: call    FormHeapFree
+0x58FB6D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58FB72: add     esp, 4
 0x58FB75: mov     [esi+8], ebx
 0x58FB78: mov     [esi+0Eh], bx
@@ -68,3 +68,19 @@
 0x58FB8E: pop     ebx
 0x58FB8F: add     esp, 10h
 0x58FB92: retn
+0x9BF9C0: mov     ecx, [ebp-10h]
+0x9BF9C3: add     ecx, 8; void *
+0x9BF9C6: jmp     BSStringT_Clear
+0x9BF9CB: mov     ecx, [ebp-10h]
+0x9BF9CE: add     ecx, 14h
+0x9BF9D1: jmp     j_??1?$NiTList@PAVValue@Tile@@@@UAE@XZ; NiTList<Tile::Value *>::~NiTList<Tile::Value *>(void)
+0x9BF9D6: mov     ecx, [ebp-10h]
+0x9BF9D9: add     ecx, 30h ; '0'
+0x9BF9DC: jmp     j_??1?$NiTList@PAVTile@@@@UAE@XZ; NiTList<Tile *>::~NiTList<Tile *>(void)
+0x9BF9E1: mov     edx, [esp+arg_4]
+0x9BF9E5: lea     eax, [edx-10h]
+0x9BF9E8: mov     ecx, [edx-14h]
+0x9BF9EB: xor     ecx, eax
+0x9BF9ED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF9F2: mov     eax, offset stru_AE8E90
+0x9BF9F7: jmp     ___CxxFrameHandler3

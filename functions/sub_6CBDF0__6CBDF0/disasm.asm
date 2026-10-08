@@ -1,4 +1,4 @@
-0x6CBDF0: sub     esp, 10h
+0x6CBDF0: sub     esp, 10h; Oblivion: evaluates the sole active 0x18-byte blend item. Honors the blend time-override flag, writes invalid TRS sentinels on failure/sentinel time, and normalizes a valid quaternion.
 0x6CBDF3: test    byte ptr [ecx+0Ch], 1
 0x6CBDF7: jz      short loc_6CBE00
 0x6CBDF9: fld     dword ptr [ecx+20h]

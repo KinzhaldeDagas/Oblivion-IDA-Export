@@ -1,1 +1,1 @@
-NiLightDimmerController
+struct NiLightDimmerController;

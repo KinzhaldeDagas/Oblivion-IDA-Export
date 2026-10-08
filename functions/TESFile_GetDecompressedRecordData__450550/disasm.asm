@@ -1,4 +1,4 @@
-0x450550: sub     esp, 38h
+0x450550: sub     esp, 38h; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.
 0x450553: push    esi
 0x450554: mov     esi, ecx
 0x450556: cmp     dword ptr [esi+240h], 0
@@ -23,14 +23,14 @@
 0x4505AD: mov     edi, eax
 0x4505AF: test    edi, edi
 0x4505B1: jz      loc_450708
-0x4505B7: mov     ecx, [esi+10h]
+0x4505B7: mov     ecx, [esi+10h]; self
 0x4505BA: push    ebx
 0x4505BB: mov     ebx, [esi+240h]
 0x4505C1: push    ebp; ArgList
 0x4505C2: mov     eax, ebx
-0x4505C4: push    eax
-0x4505C5: push    edi
-0x4505C6: call    ReadFile??
+0x4505C4: push    eax; byteCount
+0x4505C5: push    edi; destination
+0x4505C6: call    Archive_ReadBytes
 0x4505CB: cmp     eax, ebx
 0x4505CD: jz      short loc_4505EF
 0x4505CF: push    offset aTesfileFailedT; "TESFile: Failed to read in buffer data "...
@@ -45,7 +45,7 @@
 0x4505EA: pop     esi
 0x4505EB: add     esp, 38h
 0x4505EE: retn
-0x4505EF: mov     ebp, [edi]
+0x4505EF: mov     ebp, [edi]; MEF v20 fix: validate compressed TES record header before reading advertised decompressed length. Requires compressed length >= 4 and advertised length in sane range; invalid data resumes at existing cleanup/fail path 0x4506F6.
 0x4505F1: push    ebp; int
 0x4505F2: mov     byte ptr [ebx+edi], 0
 0x4505F6: call    MemoryHeap_Alloc_ZlibCallback

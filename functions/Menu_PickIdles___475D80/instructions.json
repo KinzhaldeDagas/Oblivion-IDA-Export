@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x475D80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.",
     "mnemonic": "push",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x475DDD",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x475EBE",
-    "line": "call    sub_439FF0",
+    "line": "call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x475ED0",
-    "line": "call    TESAnimGroup_IsPowerAttack",
+    "line": "call    TESAnimGroup_IsPowerAttack; TESAnimGroup power-attack test: native group id 0x16-0x1A inclusive.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x475EEF",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x475F02",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x475F04",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,19 +661,19 @@
   },
   {
     "ea": "0x475F16",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x475F1C",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x475F1E",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,19 +697,19 @@
   },
   {
     "ea": "0x475F2B",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x475F31",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x475F33",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x475F59",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x475F68",
-    "line": "call    sub_404F20",
+    "line": "call    sub_404F20; CustomAnimSupport evidence: global loading/update gate checked by KF install/defer decisions; support condition for SpecialAnims install timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x475F7A",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x475F93",
-    "line": "call    ??0AnimSequenceSingle@@QAE@XZ; AnimSequenceSingle::AnimSequenceSingle(void)",
+    "line": "call    ActorAnimData_InstallKFModel; CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x475F9D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x475FB8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x475FEF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x476004",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,13 +1171,13 @@
   },
   {
     "ea": "0x476024",
-    "line": "push    0; int",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x476026",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -1189,13 +1189,13 @@
   },
   {
     "ea": "0x47602B",
-    "line": "fstp    [esp+50h+var_4C]; float",
+    "line": "fstp    [esp+50h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x47602F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1207,25 +1207,25 @@
   },
   {
     "ea": "0x476033",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x476036",
-    "line": "push    1; char",
+    "line": "push    1; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x476038",
-    "line": "push    64h ; 'd'; int",
+    "line": "push    64h ; 'd'; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47603A",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x47604E",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x476055",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -1291,19 +1291,19 @@
   },
   {
     "ea": "0x476058",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x47605A",
-    "line": "fstp    [esp+48h+a2]; float",
+    "line": "fstp    [esp+48h+a2]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x47605D",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1378,5 +1378,77 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AEE80",
+    "line": "mov     eax, [ebp-28h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE83",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEE84",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE89",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEE8A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEE8B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AEE8F",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE92",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE95",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEE97",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE9C",
+    "line": "mov     eax, offset stru_ADB548",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEEA1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

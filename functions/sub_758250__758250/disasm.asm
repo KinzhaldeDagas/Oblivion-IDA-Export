@@ -23,7 +23,7 @@
 0x758289: test    eax, eax
 0x75828B: jz      short loc_75829E
 0x75828D: lea     ecx, [ecx+0]
-0x758290: cmp     eax, offset dword_B40B50
+0x758290: cmp     eax, offset stru_B40B50
 0x758295: jz      short loc_7582A5
 0x758297: mov     eax, [eax+4]
 0x75829A: test    eax, eax

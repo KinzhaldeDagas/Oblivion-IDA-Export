@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x570C00",
-    "line": "push    esi",
+    "line": "push    esi; CustomAnimSupport decode: plays named SpecialIdle sequence directly on a controller manager; projectile/effect special idles do not query actor KFFZ/animsMap.",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x570C58",
-    "line": "push    0; int",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x570C5A",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x570C5F",
-    "line": "fstp    [esp+18h+var_14]; float",
+    "line": "fstp    [esp+18h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x570C63",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x570C67",
-    "line": "fstp    [esp+18h+var_18]; float",
+    "line": "fstp    [esp+18h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x570C6A",
-    "line": "push    0; char",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x570C6C",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x570C6E",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },

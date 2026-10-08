@@ -23,7 +23,7 @@
 0x49DD51: or      dword ptr ds:0B3526Ch, 1
 0x49DD58: push    80h ; '€'
 0x49DD5D: push    offset aUsurfacetextur; "uSurfaceTextureSize:Water"
-0x49DD62: mov     ecx, offset dword_B35264
+0x49DD62: mov     ecx, 0B35264h
 0x49DD67: mov     [esp+168h+var_4], 0
 0x49DD72: call    sub_444060
 0x49DD77: push    offset sub_A1A660; void (__cdecl *)()
@@ -56,7 +56,7 @@
 0x49DDD0: test    eax, eax
 0x49DDD2: mov     [esp+160h+var_4], 1
 0x49DDDD: jz      short loc_49DDF9
-0x49DDDF: push    offset sub_7016A0; a5
+0x49DDDF: push    offset NiPointerSlot_Release; a5
 0x49DDE4: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x49DDE9: push    esi; size
 0x49DDEA: lea     edi, [eax+4]
@@ -100,20 +100,20 @@
 0x49DE73: cmp     dword ptr [ebp+10h], 0
 0x49DE77: lea     edi, [ebp+10h]
 0x49DE7A: jnz     short loc_49DEDB
-0x49DE7C: push    0; char
-0x49DE7E: push    1; char
+0x49DE7C: push    0; searchArchives
+0x49DE7E: push    1; allowMissing
 0x49DE80: lea     ecx, [esp+168h+ArgList]
-0x49DE84: push    ecx; ArgList
+0x49DE84: push    ecx; path
 0x49DE85: mov     ecx, ds:0B333A0h
-0x49DE8B: lea     edx, [esp+16Ch+var_148]
-0x49DE8F: push    edx; int
-0x49DE90: call    sub_442890
+0x49DE8B: lea     edx, [esp+16Ch+outTexture]
+0x49DE8F: push    edx; outTexture
+0x49DE90: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x49DE95: mov     eax, [eax]
 0x49DE97: push    eax; a2
 0x49DE98: mov     ecx, edi; this
 0x49DE9A: mov     [esp+164h+var_4], 2
 0x49DEA5: call    NiSmartPointer_Set??
-0x49DEAA: mov     eax, [esp+160h+var_148]
+0x49DEAA: mov     eax, [esp+160h+outTexture]
 0x49DEAE: test    eax, eax
 0x49DEB0: mov     [esp+160h+var_4], 0FFFFFFFFh
 0x49DEBB: jz      short loc_49DEDB
@@ -168,13 +168,13 @@
 0x49DF56: call    __sprintf
 0x49DF5B: mov     ecx, ds:0B333A0h
 0x49DF61: add     esp, 10h
-0x49DF64: push    0; char
-0x49DF66: push    1; char
+0x49DF64: push    0; searchArchives
+0x49DF66: push    1; allowMissing
 0x49DF68: lea     edx, [esp+168h+ArgList]
-0x49DF6C: push    edx; ArgList
+0x49DF6C: push    edx; path
 0x49DF6D: lea     eax, [esp+16Ch+var_124]
-0x49DF71: push    eax; int
-0x49DF72: call    sub_442890
+0x49DF71: push    eax; outTexture
+0x49DF72: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x49DF77: mov     eax, [esp+160h+var_124]
 0x49DF7B: test    eax, eax
 0x49DF7D: mov     [esp+160h+var_4], 4
@@ -216,10 +216,10 @@
 0x49DFF5: and     word ptr [esi+8], 0FFF9h
 0x49DFFB: fld     [esp+160h+var_140]
 0x49DFFF: fld     st
-0x49E001: call    Double_To_SInt32
+0x49E001: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x49E006: mov     edx, ds:0B35264h
-0x49E00C: mov     [esp+160h+var_148], eax
-0x49E010: fild    [esp+160h+var_148]
+0x49E00C: mov     [esp+160h+outTexture], eax
+0x49E010: fild    [esp+160h+outTexture]
 0x49E014: mov     eax, edx
 0x49E016: test    eax, eax
 0x49E018: mov     [esp+160h+a2], eax
@@ -231,8 +231,8 @@
 0x49E032: movzx   eax, word ptr [esp+160h+var_144]
 0x49E037: fdivp   st(1), st
 0x49E039: or      eax, 0C00h
-0x49E03E: mov     [esp+160h+var_148], eax
-0x49E042: fldcw   word ptr [esp+160h+var_148]
+0x49E03E: mov     [esp+160h+outTexture], eax
+0x49E042: fldcw   word ptr [esp+160h+outTexture]
 0x49E046: fistp   [esp+160h+var_120]
 0x49E04A: mov     eax, dword ptr [esp+160h+var_120]
 0x49E04E: cmp     eax, 1
@@ -244,8 +244,8 @@
 0x49E064: mov     ecx, [ecx+54h]
 0x49E067: push    1; float
 0x49E069: push    1; int
-0x49E06B: fstp    [esp+168h+var_148]
-0x49E06F: fld     [esp+168h+var_148]
+0x49E06B: fstp    [esp+168h+outTexture]
+0x49E06F: fld     [esp+168h+outTexture]
 0x49E073: push    eax; int
 0x49E074: push    edx; int
 0x49E075: sub     esp, 8
@@ -261,7 +261,7 @@
 0x49E097: fstp    dword ptr [esp+160h+var_134+4]
 0x49E09B: mov     [esp+160h+var_144], eax
 0x49E09F: fld     [esp+160h+var_140]
-0x49E0A3: mov     [esp+160h+var_148], eax
+0x49E0A3: mov     [esp+160h+outTexture], eax
 0x49E0A7: fadd    st, st
 0x49E0A9: fstp    [esp+160h+var_140]
 0x49E0AD: jbe     loc_49E238
@@ -278,9 +278,9 @@
 0x49E0E0: mov     [esp+160h+var_4], 5
 0x49E0EB: jz      short loc_49E0FD
 0x49E0ED: mov     edx, [esp+160h+a2]
-0x49E0F1: push    edx; a2
+0x49E0F1: push    edx; data
 0x49E0F2: mov     ecx, eax; this
-0x49E0F4: call    NiTriShape_NiTriShape
+0x49E0F4: call    OB_NiTriShape_ctorWithData_010201A0
 0x49E0F9: mov     edi, eax
 0x49E0FB: jmp     short loc_49E0FF
 0x49E0FD: xor     edi, edi
@@ -333,13 +333,13 @@
 0x49E193: jmp     short loc_49E197
 0x49E195: xor     esi, esi
 0x49E197: mov     ecx, [ebp+10h]
-0x49E19A: push    ecx
-0x49E19B: mov     ecx, esi
+0x49E19A: push    ecx; texture
+0x49E19B: mov     ecx, esi; this
 0x49E19D: mov     [esp+164h+var_4], 0FFFFFFFFh
-0x49E1A8: call    NiTexturingProperty__SetUnk08
+0x49E1A8: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x49E1AD: push    2; a2
 0x49E1AF: mov     ecx, esi; this
-0x49E1B1: call    sub_405900
+0x49E1B1: call    NiTexturingProperty_SetBaseMapFilterMode
 0x49E1B6: mov     dx, [esi+18h]
 0x49E1BA: and     dx, 0FFF5h
 0x49E1BF: or      dx, 4
@@ -353,7 +353,7 @@
 0x49E1D5: or      word ptr [eax+8], 8
 0x49E1DA: push    esi; a2
 0x49E1DB: mov     ecx, edi; this
-0x49E1DD: call    sub_405680
+0x49E1DD: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49E1E2: mov     ecx, [esp+160h+var_118]
 0x49E1E6: mov     eax, [ecx]
 0x49E1E8: mov     edx, [eax+84h]
@@ -370,11 +370,11 @@
 0x49E20E: mov     [esp+160h+var_12C], eax
 0x49E212: jb      loc_49E0CD
 0x49E218: fld     dword ptr [esp+160h+var_134]
-0x49E21C: mov     eax, [esp+160h+var_148]
+0x49E21C: mov     eax, [esp+160h+outTexture]
 0x49E220: fadd    [esp+160h+var_140]
 0x49E224: add     eax, 1
 0x49E227: cmp     eax, [ebp+18h]
-0x49E22A: mov     [esp+160h+var_148], eax
+0x49E22A: mov     [esp+160h+outTexture], eax
 0x49E22E: fstp    dword ptr [esp+160h+var_134]
 0x49E232: jb      loc_49E0B3
 0x49E238: cmp     [esp+160h+var_149], 0
@@ -394,3 +394,42 @@
 0x49E268: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x49E26D: add     esp, 14Ch
 0x49E273: retn    8
+0x9B1B70: mov     eax, ds:0B3526Ch
+0x9B1B75: and     eax, 0FFFFFFFEh
+0x9B1B78: mov     ds:0B3526Ch, eax
+0x9B1B7D: retn
+0x9B1B7E: mov     eax, [ebp-13Ch]
+0x9B1B84: push    eax
+0x9B1B85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1B8A: pop     ecx
+0x9B1B8B: retn
+0x9B1B8C: lea     ecx, [ebp-148h]; slot
+0x9B1B92: jmp     NiPointerSlot_Release
+0x9B1B97: mov     eax, [ebp-13Ch]
+0x9B1B9D: push    eax
+0x9B1B9E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1BA3: pop     ecx
+0x9B1BA4: retn
+0x9B1BA5: lea     ecx, [ebp-124h]; slot
+0x9B1BAB: jmp     NiPointerSlot_Release
+0x9B1BB0: mov     eax, [ebp-120h]
+0x9B1BB6: push    eax
+0x9B1BB7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1BBC: pop     ecx
+0x9B1BBD: retn
+0x9B1BBE: mov     eax, [ebp-120h]
+0x9B1BC4: push    eax
+0x9B1BC5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1BCA: pop     ecx
+0x9B1BCB: retn
+0x9B1BCC: mov     edx, [esp+arg_4]
+0x9B1BD0: lea     eax, [edx-150h]
+0x9B1BD6: mov     ecx, [edx-154h]
+0x9B1BDC: xor     ecx, eax
+0x9B1BDE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1BE3: add     eax, 10h
+0x9B1BE6: mov     ecx, [edx-4]
+0x9B1BE9: xor     ecx, eax
+0x9B1BEB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1BF0: mov     eax, offset stru_ADDC70
+0x9B1BF5: jmp     ___CxxFrameHandler3

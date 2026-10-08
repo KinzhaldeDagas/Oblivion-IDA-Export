@@ -1,15 +1,24 @@
-int __thiscall sub_474BE0(_DWORD **this, int a2, _DWORD *a3)
+// Native first-person source-sync helper. Resolves encodedKey in this ActorAnimData, rejects single map entries through vtable +0x0C, finds the first case-sensitive last-backslash suffix match in an AnimSequenceMultiple, and calls ActorAnimData_PlaySequence. Returns zero on any miss.
+unsigned int __thiscall ActorAnimData_PlayFirstPersonBySource(
+        ActorAnimData *this,
+        BSAnimGroupSequence *sourceSequence,
+        unsigned int encodedKey)
 {
-  float v6; // edi
-  _DWORD *v8; // ebx
-  char *v9; // eax
+  unsigned int requestedKey; // edi
+  AnimSequenceMultiple *multipleEntry; // ebx
+  BSAnimGroupSequence *matchedSequence; // eax
 
-  v6 = *(float *)&a3;
-  if ( (_WORD)a3 == 0xFF || !sub_470960(this[0x27], (int)a3, &a3) )
-    return 0;
-  v8 = a3;
-  if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *))(*a3 + 0xC))(a3) && (v9 = sub_470C40(v8, a2)) != 0 )
-    return sub_474530(this, (int)v9, v6, 0xFFFFFFFF);
+  requestedKey = encodedKey; /*0x474be2*/
+  if ( (_WORD)encodedKey == 0xFF || !ActorAnimData_FindAnimMapEntry((_DWORD *)this->animsMap, encodedKey, &encodedKey) )// Only the low 16 bits are the encoded animation key; native sentinel group 0x00FF is rejected before map lookup. /*0x474bfb*/
+    return 0; /*0x474c40*/
+  multipleEntry = (AnimSequenceMultiple *)encodedKey; /*0x474c05*/
+  if ( !(*(unsigned __int8 (__thiscall **)(unsigned int))(*(_DWORD *)encodedKey + 0xC))(encodedKey) /*0x474c24*/
+    && (matchedSequence = AnimSequenceMultiple_FindBySourceBasename(multipleEntry, sourceSequence)) != 0 )// Multiple-entry-only source match. Selection is first list-order candidate with exact case-sensitive final-backslash suffix equality.
+  {
+    return (unsigned int)ActorAnimData_PlaySequence(this, matchedSequence, requestedKey, 0xFFFFFFFF);// Matched first-person sequence is played directly, bypassing ActorAnimData_PlayEncodedGroup/random selection. /*0x474c34*/
+  }
   else
-    return 0;
+  {
+    return 0; /*0x474c28*/
+  }
 }

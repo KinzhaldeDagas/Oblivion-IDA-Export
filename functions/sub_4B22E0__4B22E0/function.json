@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x4B22E0",
+      "0x4B2314"
+    ]
+  ],
+  "chunks_sha256": "1272cf96b32741d25bc139c085d7015d065c285b358f454c90e066d49826373f",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Retain payload->backingLight_00 and forward the light plus &payload->targetDimmer_04 to TESObjectLIGH_UpdateAttachedLightState. All six direct retail caller sites pass optionalContext=null.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B22E0",
+  "display_name": "TESObjectLIGH_UpdateAttachedLightPayload",
   "end_ea": "0x4B2314",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B22E0",
+  "name": "TESObjectLIGH_UpdateAttachedLightPayload",
   "segment": ".text",
   "sha256": "1272cf96b32741d25bc139c085d7015d065c285b358f454c90e066d49826373f",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B22E0",
-  "type": "char __thiscall(float *this, float *, int)",
+  "total_chunk_size": 52,
+  "type": "bool __thiscall(TESObjectLIGH_DecodedLayout *self, AttachedLightPayload_Decoded *payload, void *optionalContext)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 6
 }

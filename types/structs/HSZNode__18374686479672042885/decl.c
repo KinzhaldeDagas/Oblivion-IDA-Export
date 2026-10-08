@@ -1,1 +1,1 @@
-HSZNode
+typedef tagHSZNode HSZNode;

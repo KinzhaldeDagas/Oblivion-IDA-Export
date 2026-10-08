@@ -1,4 +1,4 @@
-0x99946F: inc     dword_BA9E14
+0x99946F: inc     dword_BA9E10+4
 0x999475: push    1000h
 0x99947A: call    unknown_libname_72
 0x99947F: test    eax, eax

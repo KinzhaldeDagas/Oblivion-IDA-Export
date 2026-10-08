@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 87,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 135,
+  "chunks": [
+    [
+      "0x7C88A0",
+      "0x7C88A7"
+    ]
+  ],
+  "chunks_sha256": "92eb3b367d6ee91190fb0a8be2e0959e6ee590dca281c332dfc805ffe6f846d2",
+  "comment_regular": "Pass222: NiPropertyState slot constructor callback; zeroes one dword smart-pointer slot.",
+  "comment_repeatable": "Pass222: NiPropertyState slot constructor callback; zeroes one dword smart-pointer slot.\n\nMEF PERF 2026-10-08: PERF-17 initializer decode: body is MOV DWORD PTR [ECX],0; RET. Used as pointer-slot constructor by4B2D30/523B10, despite existing Concurrency-named symbol. No lock release occurs in this body in the examined array context. Original shared symbol name preserved.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Concurrency::details::_NonReentrantLock::_Release(void)",
   "end_ea": "0x7C88A7",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
   "name": "?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ",
   "segment": ".text",
   "sha256": "92eb3b367d6ee91190fb0a8be2e0959e6ee590dca281c332dfc805ffe6f846d2",
   "size": 7,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C88A0",
+  "total_chunk_size": 7,
   "type": "void __thiscall(Concurrency::details::_NonReentrantLock *__hidden this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 135

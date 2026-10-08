@@ -1,1 +1,1 @@
-RpcQualityOfService
+typedef _RpcQualityOfService RpcQualityOfService;

@@ -61,14 +61,14 @@
 0x5EB4A9: mov     ebx, [eax+4]
 0x5EB4AC: mov     ebp, [eax+8]
 0x5EB4AF: mov     ecx, esi; this
-0x5EB4B1: call    TESObjectREFR_GetParentCell
+0x5EB4B1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EB4B6: test    eax, eax
 0x5EB4B8: jz      short loc_5EB4E9
 0x5EB4BA: push    0; a4
 0x5EB4BC: push    0; a3
 0x5EB4BE: push    0; a2
 0x5EB4C0: mov     ecx, esi; this
-0x5EB4C2: call    TESObjectREFR_GetParentCell
+0x5EB4C2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EB4C7: push    eax; int
 0x5EB4C8: sub     esp, 0Ch
 0x5EB4CB: mov     eax, esp
@@ -78,7 +78,7 @@
 0x5EB4D4: mov     [eax+4], ebx
 0x5EB4D7: mov     ecx, esi
 0x5EB4D9: mov     [eax+8], ebp
-0x5EB4DC: call    sub_5E2E20
+0x5EB4DC: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x5EB4E1: mov     edi, [eax]
 0x5EB4E3: mov     ebx, [eax+4]
 0x5EB4E6: mov     ebp, [eax+8]

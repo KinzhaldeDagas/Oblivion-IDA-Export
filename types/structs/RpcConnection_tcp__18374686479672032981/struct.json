@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RpcConnection_tcp",
+  "definition": "typedef _RpcConnection_tcp RpcConnection_tcp\n",
   "id": 18374686479672032981,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "common",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 144
+      "size": 144,
+      "type": "RpcConnection"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sock",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sock_event",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cancel_event",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     }
   ],
   "name": "RpcConnection_tcp",
+  "ordinal": 3324,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 160
 }

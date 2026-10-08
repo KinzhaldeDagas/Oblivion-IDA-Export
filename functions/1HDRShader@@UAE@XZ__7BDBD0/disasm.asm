@@ -61,15 +61,15 @@
 0x7BDC84: jz      short loc_7BDC97
 0x7BDC86: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7BDC8A: jnz     short loc_7BDC91
-0x7BDC8C: call    sub_7604D0
+0x7BDC8C: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7BDC91: mov     dword ptr [esi], 0
 0x7BDC97: add     esi, 4
 0x7BDC9A: sub     edi, 1
 0x7BDC9D: jnz     short loc_7BDC80
 0x7BDC9F: mov     ecx, ds:0B43328h
-0x7BDCA5: push    ecx; a2
+0x7BDCA5: push    ecx; texture
 0x7BDCA6: mov     ecx, ds:0B42F50h; this
-0x7BDCAC: call    sub_7C1EE0
+0x7BDCAC: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7BDCB1: mov     esi, [ebp+118h]
 0x7BDCB7: mov     edi, ds:0A2807Ch
 0x7BDCBD: xor     ebx, ebx
@@ -159,14 +159,14 @@
 0x7BDD8E: push    eax; void *
 0x7BDD8F: mov     byte ptr [esp+34h+var_4], 2
 0x7BDD94: call    $LN21
-0x7BDD99: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7BDD99: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7BDD9E: push    8; int
 0x7BDDA0: push    4; unsigned int
 0x7BDDA2: lea     eax, [ebp+0B0h]
 0x7BDDA8: push    eax; void *
 0x7BDDA9: mov     byte ptr [esp+34h+var_4], 1
 0x7BDDAE: call    $LN21
-0x7BDDB3: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7BDDB3: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7BDDB8: push    8; int
 0x7BDDBA: push    4; unsigned int
 0x7BDDBC: lea     ecx, [ebp+90h]
@@ -175,7 +175,7 @@
 0x7BDDC8: call    $LN21
 0x7BDDCD: mov     ecx, ebp; this
 0x7BDDCF: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7BDDD7: call    ??1BSImageSpaceShader@@UAE@XZ; BSImageSpaceShader::~BSImageSpaceShader(void)
+0x7BDDD7: call    ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
 0x7BDDDC: mov     ecx, dword ptr [esp+24h+var_C]
 0x7BDDE0: mov     large fs:0, ecx
 0x7BDDE7: pop     ecx
@@ -185,3 +185,42 @@
 0x7BDDEB: pop     ebx
 0x7BDDEC: add     esp, 10h
 0x7BDDEF: retn
+0x9CDEE0: mov     ecx, [ebp-10h]; this
+0x9CDEE3: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CDEE8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CDEED: push    8; int
+0x9CDEEF: push    4; unsigned int
+0x9CDEF1: mov     eax, [ebp-10h]
+0x9CDEF4: add     eax, 90h
+0x9CDEF9: push    eax; void *
+0x9CDEFA: call    $LN21
+0x9CDEFF: retn
+0x9CDF00: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CDF05: push    8; int
+0x9CDF07: push    4; unsigned int
+0x9CDF09: mov     eax, [ebp-10h]
+0x9CDF0C: add     eax, 0B0h ; '°'
+0x9CDF11: push    eax; void *
+0x9CDF12: call    $LN21
+0x9CDF17: retn
+0x9CDF18: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9CDF1D: push    0Dh; int
+0x9CDF1F: push    4; unsigned int
+0x9CDF21: mov     eax, [ebp-10h]
+0x9CDF24: add     eax, 0D4h ; 'Ô'
+0x9CDF29: push    eax; void *
+0x9CDF2A: call    $LN21
+0x9CDF2F: retn
+0x9CDF30: mov     ecx, [ebp-10h]
+0x9CDF33: add     ecx, 118h; slot
+0x9CDF39: jmp     NiPointerSlot_Release
+0x9CDF3E: mov     ecx, [ebp-10h]
+0x9CDF41: add     ecx, 11Ch; slot
+0x9CDF47: jmp     NiPointerSlot_Release
+0x9CDF4C: mov     edx, [esp+arg_4]
+0x9CDF50: lea     eax, [edx-14h]
+0x9CDF53: mov     ecx, [edx-18h]
+0x9CDF56: xor     ecx, eax
+0x9CDF58: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDF5D: mov     eax, offset stru_AF6F98
+0x9CDF62: jmp     ___CxxFrameHandler3

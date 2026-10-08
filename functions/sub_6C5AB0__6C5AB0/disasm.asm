@@ -13,7 +13,7 @@
 0x6C5AD3: mov     esi, ecx
 0x6C5AD5: mov     ebx, [esp+1Ch+arg_0]
 0x6C5AD9: push    ebx
-0x6C5ADA: call    sub_715F10
+0x6C5ADA: call    NiTimeController_RegisterStreamables; Registers the NiObject base first and, on success, registers the refcounted next-controller object at +0x34. The target at +0x30 is a link, not recursively registered here.
 0x6C5ADF: test    al, al
 0x6C5AE1: jnz     short loc_6C5AF8
 0x6C5AE3: mov     ecx, [esp+1Ch+var_C]
@@ -94,3 +94,15 @@
 0x6C5BA9: pop     ebx
 0x6C5BAA: add     esp, 0Ch
 0x6C5BAD: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

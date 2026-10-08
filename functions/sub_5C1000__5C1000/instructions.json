@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x5C102B",
-    "line": "fstp    [esp+8+var_8]; a3",
+    "line": "fstp    [esp+8+var_8]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C102E",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C1033",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5C103B",
-    "line": "fstp    [esp+8+var_8]; a3",
+    "line": "fstp    [esp+8+var_8]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x5C1041",
-    "line": "push    0FA7h; a2",
+    "line": "push    0FA7h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C1046",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,6 +175,162 @@
   },
   {
     "ea": "0x5C1059",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D20",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D21",
+    "line": "push    416h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5C0D26",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5C0D2B",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D2D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5C0D30",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D32",
+    "line": "jz      short loc_5C0D5E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D34",
+    "line": "push    edi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D35",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D37",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5C0D3C",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D3E",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D40",
+    "line": "jz      short loc_5C0D5D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D42",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D44",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D45",
+    "line": "fstp    [esp+0Ch+a3]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5C0D48",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D4A",
+    "line": "push    1772h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5C0D4F",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5C0D54",
+    "line": "mov     ecx, edi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5C0D56",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D57",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D58",
+    "line": "jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x5C0D5D",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D5E",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5C0D5F",
     "line": "retn",
     "mnemonic": "retn",
     "size": 1

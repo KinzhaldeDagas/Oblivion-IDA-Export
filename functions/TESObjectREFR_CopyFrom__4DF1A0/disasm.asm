@@ -16,7 +16,7 @@
 0x4DF1C7: mov     [esp+34h+var_28], ebx
 0x4DF1CB: jz      loc_4DF697
 0x4DF1D1: mov     ecx, ebx; this
-0x4DF1D3: call    TESObjectREFR_IsPersistent?
+0x4DF1D3: call    TESObjectREFR_IsPersistent
 0x4DF1D8: mov     ecx, ebp
 0x4DF1DA: push    eax
 0x4DF1DB: call    TESObjectREFR_SetPersistance
@@ -130,12 +130,12 @@
 0x4DF31E: fstp    [esp+40h+var_40]; a2
 0x4DF321: call    edx
 0x4DF323: mov     ecx, eax; this
-0x4DF325: call    NiAVObject_UpdateNiAVObject
-0x4DF32A: mov     ecx, [ebx+40h]
+0x4DF325: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x4DF32A: mov     ecx, [ebx+40h]; this
 0x4DF32D: test    ecx, ecx
 0x4DF32F: jz      short loc_4DF357
-0x4DF331: push    ebp; Concurrency::details::SchedulerBase *
-0x4DF332: call    sub_4D35D0
+0x4DF331: push    ebp; reference
+0x4DF332: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x4DF337: mov     eax, [ebp+0]
 0x4DF33A: mov     edx, [eax+154h]
 0x4DF340: mov     ecx, ebp
@@ -146,11 +146,11 @@
 0x4DF34E: push    5
 0x4DF350: call    sub_434020
 0x4DF355: jmp     short loc_4DF364
-0x4DF357: mov     ecx, [ebp+40h]
+0x4DF357: mov     ecx, [ebp+40h]; this
 0x4DF35A: test    ecx, ecx
 0x4DF35C: jz      short loc_4DF364
-0x4DF35E: push    ebp
-0x4DF35F: call    sub_4CECD0
+0x4DF35E: push    ebp; reference
+0x4DF35F: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x4DF364: lea     ecx, [ebp+44h]; this
 0x4DF367: call    ExtraDataList_GetTeleport
 0x4DF36C: mov     esi, eax
@@ -160,15 +160,15 @@
 0x4DF375: call    ExtraDataList_GetTeleport
 0x4DF37A: test    eax, eax
 0x4DF37C: jz      short loc_4DF392
-0x4DF37E: mov     ecx, eax
-0x4DF380: call    sub_42B410
-0x4DF385: mov     ecx, esi
+0x4DF37E: mov     ecx, eax; this
+0x4DF380: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
+0x4DF385: mov     ecx, esi; this
 0x4DF387: mov     edi, eax
-0x4DF389: call    sub_42B410
+0x4DF389: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4DF38E: cmp     edi, eax
 0x4DF390: jz      short loc_4DF3BA
-0x4DF392: mov     ecx, esi
-0x4DF394: call    sub_42B410
+0x4DF392: mov     ecx, esi; this
+0x4DF394: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4DF399: mov     edi, eax
 0x4DF39B: lea     ecx, [edi+44h]
 0x4DF39E: call    sub_41F5E0
@@ -307,17 +307,17 @@
 0x4DF529: mov     ecx, ebp
 0x4DF52B: call    eax
 0x4DF52D: mov     edx, [ebp+0]
-0x4DF530: push    eax
+0x4DF530: push    eax; referenceRoot
 0x4DF531: mov     eax, [edx+170h]
-0x4DF537: push    ebp
+0x4DF537: push    ebp; reference
 0x4DF538: mov     ecx, ebp
 0x4DF53A: call    eax
-0x4DF53C: mov     ecx, eax
-0x4DF53E: call    sub_4B1600
+0x4DF53C: mov     ecx, eax; self
+0x4DF53E: call    TESObjectLIGH_ConfigureReferencePointLight; Create/find and configure the NiPointLight attached to a TESObjectLIGH reference. lightFlags_7C bit 0x20 ('Off by default') suppresses the normal non-actor path; bit 0x04 ('Negative') negates RGB. The routine registers the source with ShadowSceneNode and seeds attenuation/dimmer, but does not read editor bits 0x200/0x400 and does not admit shadow casters.
 0x4DF543: lea     edi, [ebp+44h]
-0x4DF546: push    8
-0x4DF548: mov     ecx, edi
-0x4DF54A: call    sub_41F830
+0x4DF546: push    8; mask
+0x4DF548: mov     ecx, edi; this
+0x4DF54A: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4DF54F: test    al, al
 0x4DF551: push    1; char
 0x4DF553: mov     ecx, ebp
@@ -343,13 +343,13 @@
 0x4DF58A: fstp    [esp+40h+var_40]; a2
 0x4DF58D: call    eax
 0x4DF58F: mov     ecx, eax; this
-0x4DF591: call    NiAVObject_UpdateNiAVObject
+0x4DF591: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DF596: mov     edx, [ebp+0]
 0x4DF599: mov     eax, [edx+154h]
 0x4DF59F: mov     ecx, ebp
 0x4DF5A1: call    eax
 0x4DF5A3: mov     ecx, eax; this
-0x4DF5A5: call    NiAVObject_InitializePropertyState
+0x4DF5A5: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4DF5AA: mov     edx, [ebp+0]
 0x4DF5AD: mov     eax, [edx+154h]
 0x4DF5B3: mov     ecx, ebp
@@ -370,8 +370,8 @@
 0x4DF5E1: shr     ecx, 0Eh
 0x4DF5E4: test    cl, 1
 0x4DF5E7: jnz     loc_4DF696
-0x4DF5ED: mov     ecx, eax
-0x4DF5EF: call    sub_42B410
+0x4DF5ED: mov     ecx, eax; this
+0x4DF5EF: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4DF5F4: mov     esi, eax
 0x4DF5F6: test    esi, esi
 0x4DF5F8: jnz     short loc_4DF60B
@@ -384,7 +384,7 @@
 0x4DF605: add     esp, 28h
 0x4DF608: retn    4
 0x4DF60B: mov     ecx, esi; this
-0x4DF60D: call    TESObjectREFR_IsPersistent?
+0x4DF60D: call    TESObjectREFR_IsPersistent
 0x4DF612: test    al, al
 0x4DF614: jnz     short loc_4DF61F
 0x4DF616: push    1
@@ -402,26 +402,26 @@
 0x4DF637: call    TeleportData__SetLinkedDoor
 0x4DF63C: mov     ecx, edi; this
 0x4DF63E: mov     byte ptr [esp+38h+a2], 0
-0x4DF643: call    sub_41E690
+0x4DF643: call    ExtraDataList_GetLock; Verified: looks up BSExtraData type 0x31 (ExtraLock) and returns its ExtraLockData* payload at wrapper offset +0x0C, or null. The returned value is the 12-byte lock-data structure, not the ExtraLock wrapper.
 0x4DF648: test    eax, eax
 0x4DF64A: jz      short loc_4DF663
 0x4DF64C: mov     ecx, ebx; this
-0x4DF64E: call    sub_41E690
+0x4DF64E: call    ExtraDataList_GetLock; Verified: looks up BSExtraData type 0x31 (ExtraLock) and returns its ExtraLockData* payload at wrapper offset +0x0C, or null. The returned value is the 12-byte lock-data structure, not the ExtraLock wrapper.
 0x4DF653: test    eax, eax
 0x4DF655: jz      short loc_4DF663
 0x4DF657: mov     ecx, ebx
 0x4DF659: call    sub_41F5D0
 0x4DF65E: mov     byte ptr [esp+38h+a2], 1
-0x4DF663: mov     ecx, edi
-0x4DF665: call    ExtraDataList_GetOwner
+0x4DF663: mov     ecx, edi; this
+0x4DF665: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4DF66A: test    eax, eax
 0x4DF66C: jz      short loc_4DF682
-0x4DF66E: mov     ecx, ebx
-0x4DF670: call    ExtraDataList_GetOwner
+0x4DF66E: mov     ecx, ebx; this
+0x4DF670: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4DF675: test    eax, eax
 0x4DF677: jz      short loc_4DF682
-0x4DF679: mov     ecx, esi
-0x4DF67B: call    sub_4DB900
+0x4DF679: mov     ecx, esi; reference
+0x4DF67B: call    TESObjectREFR_ClearOwnershipOnSelfAndLinkedDoor; Verified CopyFrom conflict case: source and linked-door references both have XOWN, so calls TESObjectREFR_ClearOwnershipOnSelfAndLinkedDoor, which clears XOWN/XGLB/XRNK on the linked pair; the same block removes conflicting ExtraLock when both endpoints have locks.
 0x4DF680: jmp     short loc_4DF689
 0x4DF682: cmp     byte ptr [esp+38h+a2], 0
 0x4DF687: jz      short loc_4DF696

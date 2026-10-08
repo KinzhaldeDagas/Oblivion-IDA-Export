@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51BFE0",
+      "0x51C021"
+    ]
+  ],
+  "chunks_sha256": "84b0186ce3ad1374f7fbac737ffb6f342adb2a71a3c8fe6c3d6d7c93928de756",
+  "comment_regular": "Copies all TESForm components, then copies exactly the fixed 0x34-byte TESClass DATA block at +0x38. Major storage remains seven dwords; no minor array is copied.",
+  "comment_repeatable": "Copies all TESForm components, then copies exactly the fixed 0x34-byte TESClass DATA block at +0x38. Major storage remains seven dwords; no minor array is copied.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_51BFE0",
+  "display_name": "TESClass_CopyFrom",
   "end_ea": "0x51C021",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51BFE0",
+  "name": "TESClass_CopyFrom",
   "segment": ".text",
   "sha256": "84b0186ce3ad1374f7fbac737ffb6f342adb2a71a3c8fe6c3d6d7c93928de756",
   "size": 65,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51BFE0",
-  "type": "void __thiscall(TESForm *this, TESForm *)",
+  "total_chunk_size": 65,
+  "type": "void __thiscall(TESClass *this, TESForm *source)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x7B7070: mov     eax, ds:0B42F48h
+0x7B7070: mov     eax, ds:0B42F48h; [Verified] BSShaderManager_GetShaderVersionName maps values 0–7 to BSSM_SV_NONE, BSSM_SV_1_X, BSSM_SV_2_0, BSSM_SV_2_A96, BSSM_SV_2_B96, BSSM_SV_2_A, BSSM_SV_2_B and BSSM_SV_3_0.
 0x7B7075: cmp     eax, 7; switch 8 cases
 0x7B7078: ja      short def_7B707A
 0x7B707A: jmp     ds:jpt_7B707A[eax*4]; switch jump

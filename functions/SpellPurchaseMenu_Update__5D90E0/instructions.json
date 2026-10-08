@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5D914E",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5D917F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,31 +745,31 @@
   },
   {
     "ea": "0x5D9246",
-    "line": "mov     edx, [esp+138h+var_108]",
+    "line": "mov     edx, [esp+138h+parent]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5D924A",
-    "line": "push    ebp",
+    "line": "push    ebp; lastTile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5D924B",
-    "line": "push    ecx",
+    "line": "push    ecx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5D924C",
-    "line": "mov     ecx, [esp+140h+var_118]",
+    "line": "mov     ecx, [esp+140h+var_118]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5D9250",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x5D9258",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,13 +913,13 @@
   },
   {
     "ea": "0x5D92A9",
-    "line": "fstp    [esp+13Ch+var_13C]; a3",
+    "line": "fstp    [esp+13Ch+var_13C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D92AC",
-    "line": "push    0FF0h; a2",
+    "line": "push    0FF0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x5D92B3",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,19 +955,19 @@
   },
   {
     "ea": "0x5D92BF",
-    "line": "fstp    [esp+13Ch+var_13C]; a3",
+    "line": "fstp    [esp+13Ch+var_13C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D92C2",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D92C7",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,19 +1003,19 @@
   },
   {
     "ea": "0x5D92DD",
-    "line": "fstp    [esp+13Ch+var_13C]; a3",
+    "line": "fstp    [esp+13Ch+var_13C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D92E0",
-    "line": "push    0FA8h; a2",
+    "line": "push    0FA8h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D92E5",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x5D92F2",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x5D9388",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,19 +1381,19 @@
   },
   {
     "ea": "0x5D93A0",
-    "line": "fstp    [esp+140h+var_140]; a3",
+    "line": "fstp    [esp+140h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D93A3",
-    "line": "push    0FB3h; a2",
+    "line": "push    0FB3h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D93A8",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x5D93B7",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x5D93FD",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,19 +1561,19 @@
   },
   {
     "ea": "0x5D9415",
-    "line": "fstp    [esp+140h+var_140]; a3",
+    "line": "fstp    [esp+140h+value]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D9418",
-    "line": "push    0FB7h; a2",
+    "line": "push    0FB7h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D941D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x5D9442",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x5D9557",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2236,5 +2236,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2060",
+    "line": "lea     ecx, [ebp-130h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2066",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C206B",
+    "line": "lea     ecx, [ebp-130h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2071",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2076",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C207A",
+    "line": "lea     eax, [edx-138h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2080",
+    "line": "mov     ecx, [edx-13Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2086",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2088",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C208D",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2090",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2093",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2095",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C209A",
+    "line": "mov     eax, offset stru_AEAFC4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C209F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

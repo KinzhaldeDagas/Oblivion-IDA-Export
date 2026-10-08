@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A8090",
+      "0x7A824B"
+    ]
+  ],
+  "chunks_sha256": "00eb4053aeb4e1d33a9a10025e3404f7c7407f8103bb9aba137cf0b31fec7629",
+  "comment_regular": "Adjusts the single Oblivion billboard-leaf packed color for dominant-light shadow simulation.\n\nOblivion billboard-leaf shadow adjustment: compares normalized tree-center-to-leaf and tree-center-to-dominant-light directions, interpolates a scalar, scales the one packed leaf color, and reapplies dimming. Later 4.1 source performs this per corner; Oblivion does not.",
+  "comment_repeatable": "Oblivion billboard-leaf shadow adjustment: compares normalized tree-center-to-leaf and tree-center-to-dominant-light directions, interpolates a scalar, scales the one packed leaf color, and reapplies dimming. Later 4.1 source performs this per corner; Oblivion does not.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7A8090",
+  "display_name": "OB_CBillboardLeaf_AdjustStaticLighting_010201A0",
   "end_ea": "0x7A824B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A8090",
+  "name": "OB_CBillboardLeaf_AdjustStaticLighting_010201A0",
   "segment": ".text",
   "sha256": "00eb4053aeb4e1d33a9a10025e3404f7c7407f8103bb9aba137cf0b31fec7629",
   "size": 443,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A8090",
-  "type": "int __thiscall(float *this, float *, float *, float)",
+  "total_chunk_size": 443,
+  "type": "void __thiscall(OB_CBillboardLeaf_010201A0 *this, const OB_stVec3_010201A0 *treeCenter, const OB_stVec3_010201A0 *lightPosition, float lightScalar)",
   "xrefs_from_count": 145,
   "xrefs_to_count": 1
 }

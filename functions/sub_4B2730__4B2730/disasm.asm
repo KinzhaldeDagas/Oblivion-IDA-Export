@@ -1,21 +1,21 @@
-0x4B2730: push    ebp
-0x4B2731: mov     ebp, [esp+4+arg_0]
+0x4B2730: push    ebp; Verified Oblivion usage cache direction: packed exterior cell label -> BSSimpleList of (TESBoundObject*, instanceCount), used to retain/release queued model-loader paths per cell. Fallout's inspected DistantLODShaderProperty::AddDistantLOD instead finds CachedDistantLOD by base-object FormID and records cell keys on that object entry; these are different ownership maps, not offset homologs.
+0x4B2731: mov     ebp, [esp+4+model]
 0x4B2735: test    ebp, ebp
 0x4B2737: jz      loc_4B27EA
-0x4B273D: cmp     [esp+4+arg_4], 0
+0x4B273D: cmp     [esp+4+usageCount], 0
 0x4B2742: jz      loc_4B27EA
 0x4B2748: push    esi
 0x4B2749: mov     esi, [esp+8+a2]
 0x4B274D: push    edi
-0x4B274E: lea     eax, [esp+0Ch+arg_0]
+0x4B274E: lea     eax, [esp+0Ch+model]
 0x4B2752: push    eax
 0x4B2753: push    esi
-0x4B2754: mov     ecx, offset off_B08300
-0x4B2759: mov     [esp+14h+arg_0], 0
+0x4B2754: mov     ecx, offset g_DistantLODCellModelUsageMap
+0x4B2759: mov     [esp+14h+model], 0
 0x4B2761: call    NiTMap_GetAt
 0x4B2766: test    al, al
 0x4B2768: jz      short loc_4B2772
-0x4B276A: mov     edi, [esp+0Ch+arg_0]
+0x4B276A: mov     edi, [esp+0Ch+model]
 0x4B276E: test    edi, edi
 0x4B2770: jnz     short loc_4B279F
 0x4B2772: push    8; Size
@@ -29,7 +29,7 @@
 0x4B278F: xor     eax, eax
 0x4B2791: push    eax; a3
 0x4B2792: push    esi; a2
-0x4B2793: mov     ecx, offset off_B08300; this
+0x4B2793: mov     ecx, offset g_DistantLODCellModelUsageMap; this
 0x4B2798: mov     edi, eax
 0x4B279A: call    NiTMap_SetAt
 0x4B279F: test    edi, edi
@@ -50,7 +50,7 @@
 0x4B27BE: mov     esi, edx
 0x4B27C0: test    esi, esi
 0x4B27C2: jnz     short loc_4B27E1
-0x4B27C4: push    8; Size
+0x4B27C4: push    8; Verified new per-model usage entry allocation: 8 bytes for boundObject pointer + usageCount; inserted into the current exterior-cell list.
 0x4B27C6: call    FormHeapAlloc
 0x4B27CB: mov     esi, eax
 0x4B27CD: add     esp, 4
@@ -59,7 +59,7 @@
 0x4B27D3: mov     [esi], ebp
 0x4B27D5: mov     dword ptr [esi+4], 0
 0x4B27DC: call    BSSimpleList_PushFront
-0x4B27E1: mov     eax, [esp+0Ch+arg_4]
+0x4B27E1: mov     eax, [esp+0Ch+usageCount]; Verified increments this cell's reference-model usage count by the number of queued distant instances.
 0x4B27E5: add     [esi+4], eax
 0x4B27E8: pop     edi
 0x4B27E9: pop     esi

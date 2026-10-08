@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x42C3E0",
+      "0x42C49B"
+    ]
+  ],
+  "chunks_sha256": "ebabb1160ed87627a166d4772d1c1ac04a82b695275f5842862933748a61ad0d",
+  "comment_regular": "EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.",
+  "comment_repeatable": "EnginePatch v5 CTD hotfix: bug remains verified here (raw-read clamp can underflow), but the full archive raw-read replacement is disabled by default because this asset-stream primitive is load-critical.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "sub_42C3E0",
   "end_ea": "0x42C49B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_42C3E0",
   "segment": ".text",
   "sha256": "ebabb1160ed87627a166d4772d1c1ac04a82b695275f5842862933748a61ad0d",
   "size": 187,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42C3E0",
+  "total_chunk_size": 187,
   "type": "int __userpurge@<eax>(FILE **this@<ecx>, void *DstBuf, size_t Count, int)",
   "xrefs_from_count": 69,
   "xrefs_to_count": 4

@@ -1,4 +1,5 @@
-bool __thiscall sub_680410(_DWORD *this, int a2)
+// Verified endpoint predicate: returns true when the supplied TESObjectREFR equals either referenceA or referenceB in the AStarWorldNode.
+bool __thiscall AStarWorldNode_ContainsReference(AStarWorldNode *this, TESObjectREFR *reference)
 {
-  return a2 == *(this + 1) || a2 == *(this + 3);
+  return reference == this->referenceA || reference == this->referenceB; /*0x680420*/
 }

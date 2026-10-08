@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA18500",
-    "line": "mov     eax, dword_B06150",
+    "line": "mov     eax, TESForm_ActiveFileFormList.data; MEF PERF 2026-10-08: Verified active-form array raw32 layout; loaded initializer has capacity32,grow32,used0,occupied0,data0 before init9DBF70 allocates128 bytes. Field types are not runtime population evidence. This array's fixed-growth copying is separate from dense-hole search and existing PERF4 save-ID arrays.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0xA18506",
-    "line": "mov     TESForm_ActiveFileFormList, offset ??_7?$NiTLargeArray@PAVTESForm@@@@6B@; const NiTLargeArray<TESForm *>::`vftable' ...",
+    "line": "mov     TESForm_ActiveFileFormList.vtable, offset ??_7?$NiTLargeArray@PAVTESForm@@@@6B@; MEF PERF 2026-10-08: Verified active-form array raw32 layout; loaded initializer has capacity32,grow32,used0,occupied0,data0 before init9DBF70 allocates128 bytes. Field types are not runtime population evidence. This array's fixed-growth copying is separate from dense-hole search and existing PERF4 save-ID arrays.",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0xA18510",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

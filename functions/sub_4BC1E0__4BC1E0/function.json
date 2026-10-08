@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BC1E0",
+      "0x4BC23B"
+    ]
+  ],
+  "chunks_sha256": "77b3d2759fab1a762ce427c097ba3f776e10dda0ec3ce28b49203203d6155c6d",
+  "comment_regular": "Verified record-save virtual (vtable +0x24): this is ECX, save flag is BPL, return is EAX. Writes a 12-byte DNAM payload containing the three UInt16 dimensions converted to floats, then finalizes the record.",
+  "comment_repeatable": "Verified record-save virtual (vtable +0x24): this is ECX, save flag is BPL, return is EAX. Writes a 12-byte DNAM payload containing the three UInt16 dimensions converted to floats, then finalizes the record.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BC1E0",
+  "display_name": "TESSubSpace_SaveFormRecord",
   "end_ea": "0x4BC23B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BC1E0",
+  "name": "TESSubSpace_SaveFormRecord",
   "segment": ".text",
   "sha256": "77b3d2759fab1a762ce427c097ba3f776e10dda0ec3ce28b49203203d6155c6d",
   "size": 91,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BC1E0",
+  "total_chunk_size": 91,
   "type": "UInt32 __usercall@<eax>(TESForm *this@<ecx>, char@<bpl>)",
   "xrefs_from_count": 29,
   "xrefs_to_count": 1

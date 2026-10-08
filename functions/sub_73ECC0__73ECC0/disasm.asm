@@ -68,7 +68,6 @@
 0x73ED83: mov     [esp+40h+var_8], edi
 0x73ED87: jbe     loc_73EE37
 0x73ED8D: jmp     short loc_73ED94
-0x73ED8F: align 10h
 0x73ED90: mov     edi, [esp+40h+var_8]
 0x73ED94: push    80h ; '€'; Size
 0x73ED99: call    FormHeapAlloc

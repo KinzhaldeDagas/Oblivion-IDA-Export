@@ -1,77 +1,77 @@
-int *sub_9F54D0()
+GameSettingString *sub_9F54D0()
 {
-  int *v0; // eax
-  int *v1; // eax
-  int *v2; // eax
-  int *v3; // eax
-  int *v4; // eax
-  int *v5; // eax
-  int *v6; // eax
-  int *v7; // eax
-  int *v8; // eax
-  int *v9; // eax
-  int *v10; // eax
-  int *v11; // eax
-  int *v12; // eax
-  int *v13; // eax
-  int *v14; // eax
-  int *v15; // eax
-  int *v16; // eax
-  int *result; // eax
+  GameSettingString *v0; // eax
+  GameSettingString *v1; // eax
+  GameSettingString *v2; // eax
+  GameSettingString *v3; // eax
+  GameSettingString *v4; // eax
+  GameSettingString *v5; // eax
+  GameSettingString *v6; // eax
+  GameSettingString *v7; // eax
+  GameSettingString *v8; // eax
+  GameSettingString *v9; // eax
+  GameSettingString *v10; // eax
+  GameSettingString *v11; // eax
+  GameSettingString *v12; // eax
+  GameSettingString *v13; // eax
+  GameSettingString *v14; // eax
+  GameSettingString *v15; // eax
+  GameSettingString *v16; // eax
+  GameSettingString *result; // eax
 
-  v0 = (int *)FormHeapAlloc(8u);
-  if ( v0 )
-    v1 = GameSetting_ConstrAndReg(v0, (int)"sMouseLeftButton", (int)"L-Button");
+  v0 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f54f4*/
+  if ( v0 ) /*0x9f550a*/
+    v1 = GameSetting_ConstrAndReg(v0, "sMouseLeftButton", "L-Button"); /*0x9f5518*/
   else
-    v1 = 0;
-  dword_B39554[0] = (int)v1;
-  v2 = (int *)FormHeapAlloc(8u);
-  if ( v2 )
-    v3 = GameSetting_ConstrAndReg(v2, (int)"sMouseRightButton", (int)"R-Button");
+    v1 = 0; /*0x9f551f*/
+  unk_B39554[0] = (int)v1; /*0x9f552a*/
+  v2 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f552f*/
+  if ( v2 ) /*0x9f5545*/
+    v3 = GameSetting_ConstrAndReg(v2, "sMouseRightButton", "R-Button"); /*0x9f5553*/
   else
-    v3 = 0;
-  dword_B39558 = (int)v3;
-  v4 = (int *)FormHeapAlloc(8u);
-  if ( v4 )
-    v5 = GameSetting_ConstrAndReg(v4, (int)"sMouseMiddleButton", (int)"Wheel");
+    v3 = 0; /*0x9f555a*/
+  unk_B39558 = v3; /*0x9f5562*/
+  v4 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f5567*/
+  if ( v4 ) /*0x9f557d*/
+    v5 = GameSetting_ConstrAndReg(v4, "sMouseMiddleButton", "Wheel"); /*0x9f558b*/
   else
-    v5 = 0;
-  dword_B3955C = (int)v5;
-  v6 = (int *)FormHeapAlloc(8u);
-  if ( v6 )
-    v7 = GameSetting_ConstrAndReg(v6, (int)"sMouseButton3", (int)"Button 3");
+    v5 = 0; /*0x9f5592*/
+  unk_B3955C = v5; /*0x9f559a*/
+  v6 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f559f*/
+  if ( v6 ) /*0x9f55b5*/
+    v7 = GameSetting_ConstrAndReg(v6, "sMouseButton3", "Button 3"); /*0x9f55c3*/
   else
-    v7 = 0;
-  dword_B39560 = (int)v7;
-  v8 = (int *)FormHeapAlloc(8u);
-  if ( v8 )
-    v9 = GameSetting_ConstrAndReg(v8, (int)"sMouseButton4", (int)"Button 4");
+    v7 = 0; /*0x9f55ca*/
+  unk_B39560 = v7; /*0x9f55d2*/
+  v8 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f55d7*/
+  if ( v8 ) /*0x9f55ed*/
+    v9 = GameSetting_ConstrAndReg(v8, "sMouseButton4", "Button 4"); /*0x9f55fb*/
   else
-    v9 = 0;
-  dword_B39564 = (int)v9;
-  v10 = (int *)FormHeapAlloc(8u);
-  if ( v10 )
-    v11 = GameSetting_ConstrAndReg(v10, (int)"sMouseButton5", (int)"Button 5");
+    v9 = 0; /*0x9f5602*/
+  unk_B39564 = v9; /*0x9f560a*/
+  v10 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f560f*/
+  if ( v10 ) /*0x9f5625*/
+    v11 = GameSetting_ConstrAndReg(v10, "sMouseButton5", "Button 5"); /*0x9f5633*/
   else
-    v11 = 0;
-  dword_B39568 = (int)v11;
-  v12 = (int *)FormHeapAlloc(8u);
-  if ( v12 )
-    v13 = GameSetting_ConstrAndReg(v12, (int)"sMouseButton6", (int)"Button 6");
+    v11 = 0; /*0x9f563a*/
+  unk_B39568 = v11; /*0x9f5642*/
+  v12 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f5647*/
+  if ( v12 ) /*0x9f565d*/
+    v13 = GameSetting_ConstrAndReg(v12, "sMouseButton6", "Button 6"); /*0x9f566b*/
   else
-    v13 = 0;
-  dword_B3956C = (int)v13;
-  v14 = (int *)FormHeapAlloc(8u);
-  if ( v14 )
-    v15 = GameSetting_ConstrAndReg(v14, (int)"sMouseButton7", (int)"Button 7");
+    v13 = 0; /*0x9f5672*/
+  unk_B3956C = v13; /*0x9f567a*/
+  v14 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f567f*/
+  if ( v14 ) /*0x9f5695*/
+    v15 = GameSetting_ConstrAndReg(v14, "sMouseButton7", "Button 7"); /*0x9f56a3*/
   else
-    v15 = 0;
-  dword_B39570 = (int)v15;
-  v16 = (int *)FormHeapAlloc(8u);
-  if ( v16 )
-    result = GameSetting_ConstrAndReg(v16, (int)"sMouseButton8", (int)"Button 8");
+    v15 = 0; /*0x9f56aa*/
+  unk_B39570 = v15; /*0x9f56b2*/
+  v16 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f56b7*/
+  if ( v16 ) /*0x9f56cd*/
+    result = GameSetting_ConstrAndReg(v16, "sMouseButton8", "Button 8"); /*0x9f56db*/
   else
-    result = 0;
-  dword_B39574 = (int)result;
-  return result;
+    result = 0; /*0x9f56e2*/
+  unk_B39574 = result; /*0x9f56e4*/
+  return result; /*0x9f56e9*/
 }

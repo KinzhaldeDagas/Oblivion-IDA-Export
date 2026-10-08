@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x58CD30",
+      "0x58CDA1"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "9fbfe29f915ba954b9b201aa558bbf7707f7ac59f9d41af1dda21c0fa4a683e0",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_58CD30",
+  "comment_repeatable": "Verified: BuildStorage0x14 layout: mainTemplate+0,embedded subtemplate list+4/+8,currentTemplate+0xC,ownsSubTemplates+0x10. Creates main template with name main and back-pointer. Fallout0x827DECA0 shares storage offsets but allocates smaller template.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "Tile::BuildStorage::Initialize",
   "end_ea": "0x58CDA1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58CD30",
+  "name": "Tile::BuildStorage::Initialize",
   "segment": ".text",
   "sha256": "71b1502a2f106f3221d9dc783aaa696b0c57ee18c5ca20ceeab3e8a23bfc5de4",
   "size": 113,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58CD30",
-  "type": "int *__thiscall(int *this)",
-  "xrefs_from_count": 44,
+  "total_chunk_size": 151,
+  "type": "OblivionTileBuildStorage *__thiscall(OblivionTileBuildStorage *this)",
+  "xrefs_from_count": 58,
   "xrefs_to_count": 2
 }

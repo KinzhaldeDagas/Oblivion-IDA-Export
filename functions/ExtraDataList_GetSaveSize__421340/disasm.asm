@@ -1,13 +1,13 @@
-0x421340: push    ecx
+0x421340: push    ecx; Verified save-game modified-size estimator has no ExtraDistantData case. Its callers are the save-game modified-form path; this does not contradict the separate XLOD plugin-record writer. ExtraDistantData save-game policy remains Unknown.
 0x421341: push    esi
 0x421342: push    edi
 0x421343: mov     esi, ecx
 0x421345: push    offset aExtradatalistG; lpCriticalSection
-0x42134A: mov     ecx, offset BSExtraDataCS
+0x42134A: mov     ecx, 0B33800h
 0x42134F: call    NiEnterCriticalSection
-0x421354: mov     ecx, SaveLoad_CurrentSavegame
+0x421354: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x42135A: xor     edi, edi
-0x42135C: call    sub_45A170
+0x42135C: call    TESSaveLoadGame_UseSaveGameBlocks
 0x421361: test    al, al
 0x421363: jz      short loc_42136A
 0x421365: mov     edi, 6
@@ -21,7 +21,6 @@
 0x421381: push    ebp
 0x421382: mov     esi, 4
 0x421387: jmp     short loc_421390
-0x421389: align 10h
 0x421390: movzx   eax, byte ptr [edi+4]
 0x421394: movzx   ebp, word ptr [esp+14h+var_4]
 0x421399: add     eax, 0FFFFFFEFh; switch 76 cases
@@ -89,7 +88,7 @@
 0x4214B1: push    0; int
 0x4214B3: push    edi; void *
 0x4214B4: call    OblivionDynamicCast
-0x4214B9: mov     ecx, SaveLoad_CurrentSavegame
+0x4214B9: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x4214BF: add     [esp+28h+var_4], 0Eh
 0x4214C4: add     esp, 14h
 0x4214C7: cmp     byte ptr [ecx+7Ch], 40h ; '@'
@@ -97,7 +96,7 @@
 0x4214CD: jb      short loc_4214FB
 0x4214CF: mov     edx, [esi+0Ch]
 0x4214D2: mov     eax, [edx+0Ch]
-0x4214D5: mov     ecx, TESDataHandler
+0x4214D5: mov     ecx, g_TESDataHandler; Verified singleton pointer: allocated as TESDataHandler (0xCE0 bytes) and published at TES_constr 441B8A; passed to LoadFiles and form APIs; TES_destr 446915 destroys and clears it. Field +0x74 is the Global list head used by TESSaveLoadGame_LoadGlobalValues; surrounding layout remains Unknown.
 0x4214DB: push    eax; _DWORD
 0x4214DC: call    TESDataHandler_IsFormIDCreated?
 0x4214E1: test    al, al
@@ -272,7 +271,7 @@
 0x421748: call    edx
 0x42174A: test    al, al
 0x42174C: jz      loc_42183F
-0x421752: cmp     esi, TESDataHandler_g_PlayerRef
+0x421752: cmp     esi, dword ptr reference
 0x421758: jz      loc_42183F
 0x42175E: add     [esp+14h+var_4], 4
 0x421763: jmp     loc_4214FB
@@ -284,7 +283,7 @@
 0x421780: push    0; int
 0x421782: push    edi; void *
 0x421783: call    OblivionDynamicCast
-0x421788: mov     ecx, SaveLoad_CurrentSavegame
+0x421788: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x42178E: mov     esi, eax
 0x421790: mov     eax, [esi+10h]
 0x421793: add     esp, 14h
@@ -294,10 +293,10 @@
 0x42179F: add     ax, 6
 0x4217A3: add     word ptr [esp+14h+var_4], ax
 0x4217A8: push    ecx
-0x4217A9: mov     ecx, SaveLoad_CurrentSavegame
+0x4217A9: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x4217AF: call    sub_4522F0
 0x4217B4: mov     edx, [esi+18h]
-0x4217B7: mov     ecx, SaveLoad_CurrentSavegame
+0x4217B7: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x4217BD: add     word ptr [esp+14h+var_4], ax
 0x4217C2: push    edx
 0x4217C3: call    sub_4522F0
@@ -331,11 +330,11 @@
 0x42181E: push    0; int
 0x421820: push    edi; void *
 0x421821: call    OblivionDynamicCast
-0x421826: mov     ecx, [eax+0Ch]
+0x421826: mov     ecx, [eax+0Ch]; this
 0x421829: add     esp, 14h
 0x42182C: test    ecx, ecx
 0x42182E: jz      short loc_42183F
-0x421830: call    sub_6B86A0
+0x421830: call    MenuTopic__GetSaveSize; ExtraDataList save-size case 0x59: includes MenuTopic::GetSaveSize only when ExtraInfoGeneralTopic owns a non-null cached MenuTopic.
 0x421835: add     word ptr [esp+14h+var_4], ax
 0x42183A: jmp     loc_421500
 0x42183F: mov     esi, 4
@@ -371,13 +370,13 @@
 0x421895: cmp     Global_DebugSaveBuffer, 0
 0x42189C: mov     di, word ptr [esp+0Ch+var_4]
 0x4218A1: jz      short loc_42191B
-0x4218A3: mov     edx, SaveLoad_CurrentSavegame
+0x4218A3: mov     edx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x4218A9: mov     esi, [edx+84h]
 0x4218AF: test    esi, esi
 0x4218B1: jz      short loc_421900
 0x4218B3: mov     eax, [esi]
 0x4218B5: push    eax; a1
-0x4218B6: call    TESForm_LookupByFormID
+0x4218B6: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4218BB: mov     ecx, [esi+5]
 0x4218BE: mov     edx, [eax]
 0x4218C0: add     esp, 4
@@ -395,7 +394,7 @@
 0x4218E0: push    offset aGetsavesize5iF; "GetSaveSize(): %-5i for form %08X %s wi"...
 0x4218E5: call    sub_40FEC0
 0x4218EA: add     esp, 1Ch
-0x4218ED: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x4218ED: mov     ecx, 0B33800h; lpCriticalSection
 0x4218F2: call    NiLeaveCriticalSection_0
 0x4218F7: mov     ax, di
 0x4218FA: pop     edi
@@ -409,7 +408,7 @@
 0x42190E: push    offset aGetsavesize5iE; "GetSaveSize(): %-5i ending at line %i i"...
 0x421913: call    sub_40FEC0
 0x421918: add     esp, 10h
-0x42191B: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x42191B: mov     ecx, 0B33800h; lpCriticalSection
 0x421920: call    NiLeaveCriticalSection_0
 0x421925: mov     ax, di
 0x421928: pop     edi

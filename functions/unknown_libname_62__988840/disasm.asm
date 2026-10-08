@@ -66,7 +66,7 @@
 0x9888F1: pop     ecx
 0x9888F2: cmp     eax, ebx
 0x9888F4: jnz     short loc_988902
-0x9888F6: inc     dword_BA9E14
+0x9888F6: inc     dword_BA9E10+4
 0x9888FC: or      [ebp+var_1C], 0FFFFFFFFh
 0x988900: jmp     short unknown_libname_62___unknown_libname_63
 0x988902: or      dword ptr [esi+0Ch], 408h
@@ -77,3 +77,9 @@
 0x988917: mov     [esi+8], eax
 0x98891A: mov     [esi], eax
 0x98891C: mov     [esi+4], ebx
+0x98892E: call    __SEH_epilog4
+0x988933: retn
+0x988934: push    [ebp+File]
+0x988937: call    __unlock_file
+0x98893C: pop     ecx
+0x98893D: retn

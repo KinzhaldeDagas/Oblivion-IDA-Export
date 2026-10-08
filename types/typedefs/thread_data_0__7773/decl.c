@@ -1,1 +1,46 @@
-__thread_data_0
+struct __thread_data_0
+{
+DWORD tid;
+HANDLE handle;
+int thread_errno;
+__msvcrt_ulong thread_doserrno;
+int unk1;
+unsigned int random_seed;
+char *strtok_next;
+wchar_t *wcstok_next;
+unsigned __int8 *mbstok_next;
+char *strerror_buffer;
+wchar_t *wcserror_buffer;
+char *tmpnam_buffer;
+wchar_t *wtmpnam_buffer;
+void *unk2[2];
+char *asctime_buffer;
+wchar_t *wasctime_buffer;
+tm *time_buffer;
+char *efcvt_buffer;
+int unk3[2];
+void *unk4[3];
+EXCEPTION_POINTERS *xcptinfo;
+int fpecode;
+pthreadmbcinfo mbcinfo;
+pthreadlocinfo_2 locinfo;
+int locale_flags;
+int unk5[1];
+terminate_function terminate_handler;
+unexpected_function unexpected_handler;
+_se_translator_function se_translator;
+void *unk6;
+EXCEPTION_RECORD_0 *exc_record;
+CONTEXT_0 *ctx_record;
+int processing_throw;
+frame_info *frame_info_head;
+void *unk8[6];
+LCID cached_lcid;
+BOOL cached_sname;
+int unk9[2];
+DWORD cached_cp;
+char cached_locale[131];
+void *unk10[100];
+_invalid_parameter_handler invalid_parameter_handler;
+HMODULE module;
+};

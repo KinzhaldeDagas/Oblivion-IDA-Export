@@ -4,7 +4,7 @@
 0x547F8A: mov     [esp+arg_4], ecx
 0x547F8E: fild    [esp+arg_4]
 0x547F92: fmul    dword ptr ds:0B37BE8h
-0x547F98: call    Double_To_SInt32
+0x547F98: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x547F9D: cmp     byte ptr [esp+arg_C], 0
 0x547FA2: mov     ecx, ds:0B37BE0h
 0x547FA8: jz      short loc_547FAD
@@ -40,4 +40,4 @@
 0x548008: fstp    [esp+arg_C]
 0x54800C: fild    [esp+arg_4]
 0x548010: fmul    [esp+arg_C]
-0x548014: jmp     Double_To_SInt32
+0x548014: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

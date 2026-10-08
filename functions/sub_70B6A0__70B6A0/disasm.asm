@@ -59,7 +59,6 @@
 0x70B757: test    edi, edi
 0x70B759: jz      short loc_70B776
 0x70B75B: jmp     short loc_70B760
-0x70B75D: align 10h
 0x70B760: mov     edx, [esi]
 0x70B762: mov     edx, [edx+2Ch]
 0x70B765: lea     eax, [edi+8]

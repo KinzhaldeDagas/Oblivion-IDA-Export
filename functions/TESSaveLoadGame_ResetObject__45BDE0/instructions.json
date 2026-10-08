@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x45BDE7",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x45BE34",
-    "line": "test    [esp+18h+arg_8], 0Ch",
+    "line": "test    [esp+18h+mode], 0Ch",
     "mnemonic": "test",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x45BE49",
-    "line": "and     [esp+18h+arg_4], 7FFFFFF3h",
+    "line": "and     [esp+18h+changeFlags], 7FFFFFF3h",
     "mnemonic": "and",
     "size": 8
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x45BE70",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x45BEBA",
-    "line": "cmp     [esp+18h+arg_4], 0",
+    "line": "cmp     [esp+18h+changeFlags], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x45BEE3",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x45BF3E",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x45BF4D",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,25 +967,25 @@
   },
   {
     "ea": "0x45BFCE",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; dataHandler",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x45BFD4",
-    "line": "push    0",
+    "line": "push    0; firstFileLowFormFilter",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45BFD6",
-    "line": "push    ebp",
+    "line": "push    ebp; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45BFD7",
-    "line": "call    TESDataHandler_LoadFormRecord",
+    "line": "call    TESDataHandler_LoadFormRecord; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
-0x6517B2: mov     ecx, [edi+174h]
-0x6517B8: push    ebx
-0x6517B9: push    ecx
-0x6517BA: call    ActiveEffect_Base_LinkAEList
+0x6517B2: mov     ecx, [edi+174h]; Verified LowProcess load-link path calls ActiveEffect_Base_LinkAEList on its embedded active-effect EffectNode chain before resolving other saved references. Fallout uses its separate staged ActiveEffect load callbacks rather than this Oblivion link slot.
+0x6517B8: push    ebx; linkContext
+0x6517B9: push    ecx; activeEffectList
+0x6517BA: call    ActiveEffect_Base_LinkAEList; Verified this helper takes EffectNode* and explicit TESObjectREFR* linkContext, while preserving incoming EBX and forwarding it as the second stack argument to each hit-effect vtable +0x80 callback. That callback's third argument is directly typed TESChildCELL* and updates parentCell. The hidden EBX value is the owner reference in the modified-extra load path; Player_LinkModifiedForm reaches this helper with EBX as a saved-reference-list cursor, so a universal owner-reference interpretation remains Candidate.
 0x6517BF: mov     edx, ds:0B33B00h
 0x6517C5: add     esp, 8
 0x6517C8: cmp     byte ptr [edx+7Ch], 65h ; 'e'
@@ -12,7 +12,6 @@
 0x6517D7: test    esi, esi
 0x6517D9: jz      short loc_651820
 0x6517DB: jmp     short loc_6517E0
-0x6517DD: align 10h
 0x6517E0: cmp     dword ptr [esi+4], 0
 0x6517E4: jnz     short loc_6517EB
 0x6517E6: cmp     dword ptr [esi], 0
@@ -25,7 +24,7 @@
 0x6517F8: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x6517FD: push    0; int
 0x6517FF: push    ebx; a1
-0x651800: call    TESForm_LookupByFormID
+0x651800: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x651805: add     esp, 4
 0x651808: push    eax; void *
 0x651809: call    OblivionDynamicCast
@@ -62,7 +61,7 @@
 0x65185C: mov     edx, [eax]
 0x65185E: push    eax
 0x65185F: mov     [esi], edx
-0x651861: call    FormHeapFree
+0x651861: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x651866: add     esp, 4
 0x651869: jmp     short loc_65181C
 0x65186B: mov     dword ptr [esi], 0

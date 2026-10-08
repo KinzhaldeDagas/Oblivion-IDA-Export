@@ -1,19 +1,32 @@
 {
-  "callees_count": 46,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x645280",
+      "0x6454F4"
+    ]
+  ],
+  "chunks_sha256": "f55ffa5f38b87f05c16625fc415841a848a425db0ca8f938d14549ed3650087a",
+  "comment_regular": "3DTheft decode 2026-05-18: process path execution helper used by Follow/travel movement. Builds path when needed, advances PathLow, and returns without invoking Actor::EvaluatePackage.",
+  "comment_repeatable": "3DTheft decode 2026-05-18: process path execution helper used by Follow/travel movement. Builds path when needed, advances PathLow, and returns without invoking Actor::EvaluatePackage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_645280",
   "end_ea": "0x6454F4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_645280",
   "segment": ".text",
   "sha256": "f55ffa5f38b87f05c16625fc415841a848a425db0ca8f938d14549ed3650087a",
   "size": 628,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x645280",
-  "type": "char __userpurge@<al>(MiddleLowProcess *@<ecx>, float ***@<ebp>, double@<st1>, double@<st0>, TESObjectREFR *, int *, TESObjectREFR *, int, float, float)",
+  "total_chunk_size": 628,
+  "type": "char __userpurge@<al>(MiddleLowProcess *@<ecx>, double@<st1>, double@<st0>, TESObjectREFR *sourceRef, int *destinationPosition, TESObjectCELL *destinationCell, float destinationWorldspace, float, float)",
   "xrefs_from_count": 266,
   "xrefs_to_count": 4
 }

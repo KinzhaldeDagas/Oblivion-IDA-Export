@@ -1,4 +1,4 @@
-0x6CD0F0: push    ecx
+0x6CD0F0: push    ecx; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.
 0x6CD0F1: mov     al, [ecx+0Ch]
 0x6CD0F4: test    al, 4
 0x6CD0F6: jz      loc_6CD3C7
@@ -17,7 +17,7 @@
 0x6CD11A: cmp     al, 2
 0x6CD11C: jnz     short loc_6CD126
 0x6CD11E: add     esp, 4
-0x6CD121: jmp     sub_6CC900
+0x6CD121: jmp     NiBlendInterpolator_NormalizeTwoItems; Oblivion: special two-active-item normalization. Combines item+4 base weight with item+0x10 ease weight, accounts for item+0x0C priority, then applies highest-only flag or blend threshold.
 0x6CD126: fld     dword ptr [ecx+24h]
 0x6CD129: push    ebx
 0x6CD12A: fld     dword ptr ds:0A7DEB4h

@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x68EBD2",
-    "line": "cmp     eax, 4F505543h",
+    "line": "cmp     eax, 4F505543h; Verified nested FourCC mappings CUPO -> Alloc_CurePoison, CUDI -> Alloc_CureDisease, and ABSK -> the downstream AbsorbEffect selector.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x68EBD7",
-    "line": "jg      short ActiveEffect_Base_CreateDynamic___SwitchEffectCodes_3",
+    "line": "jg      short ActiveEffect_Base_CreateDynamic___SwitchEffectCodes_3; Verified nested FourCC mappings ABSP -> Alloc_Absorb and ABAT -> the downstream AbsorbEffect selector; other codes continue to CheckUseCreature/CheckUseWeapon fallback.",
     "mnemonic": "jg",
     "size": 2
   },
   {
     "ea": "0x68EBD9",
-    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_CurePoison",
+    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_CurePoison; Verified (Oblivion fallback code): CUPO routes to the shared CureEffect constructor with internal type value 3.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x68EBE0",
-    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_CureDisease",
+    "line": "jz      short ActiveEffect_Base_CreateDynamic___Alloc_CureDisease; Verified (Oblivion fallback code): CUDI routes to the shared CureEffect constructor with internal type value 2.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x68EBE7",
-    "line": "jmp     short ActiveEffect_Base_CreateDynamic___SwitchEffectCodes_4",
+    "line": "jmp     short ActiveEffect_Base_CreateDynamic___SwitchEffectCodes_4; Verified ABSK/ABAT selector: when the decoded boolean is true it allocates AbsorbEffect; otherwise it continues to CheckUseCreature.",
     "mnemonic": "jmp",
     "size": 2
   }

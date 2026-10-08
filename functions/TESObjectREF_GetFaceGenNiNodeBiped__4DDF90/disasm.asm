@@ -17,7 +17,7 @@
 0x4DDFB7: mov     esi, [esi+3Ch]
 0x4DDFBA: push    offset aBsfacegenninod; "BSFaceGenNiNodeBiped"
 0x4DDFBF: push    esi; a1
-0x4DDFC0: call    NiObjectNET_LookupObjectByName
+0x4DDFC0: call    NiObjectNET_LookupObjectByName; ODismemberment: FaceGen biped node is resolved by name under actor root; runtime decap can app-cull this node without a body-part partition.
 0x4DDFC5: add     esp, 8
 0x4DDFC8: pop     esi
 0x4DDFC9: retn    4

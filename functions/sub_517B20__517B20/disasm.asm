@@ -5,9 +5,9 @@
 0x517B2A: mov     ecx, [ecx]
 0x517B2C: test    ecx, ecx
 0x517B2E: jz      short loc_517B46
-0x517B30: push    eax; Str2
-0x517B31: push    ecx; Str1
-0x517B32: call    __strcmp
+0x517B30: push    eax; right
+0x517B31: push    ecx; left
+0x517B32: call    CRT_StricmpLocaleDispatch
 0x517B37: xor     edx, edx
 0x517B39: add     esp, 8
 0x517B3C: test    eax, eax

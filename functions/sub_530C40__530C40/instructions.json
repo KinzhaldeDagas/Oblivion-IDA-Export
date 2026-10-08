@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x530C40",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x530C76",
-    "line": "jz      loc_530D84",
+    "line": "jz      loc_530D84; Per-topic shared response cache: same TESTopicInfo reuses the current list; switching topics clears and reconstructs it.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x530C7C",
-    "line": "mov     ds:0B36528h, ebx",
+    "line": "mov     ds:0B36528h, ebx; Only one TESTopicInfo's lazy response stream is cached globally at a time. Switching INFO clears the previous shared cache; runtime MenuTopics/DialogueItems survive because CollectResponses deep-clones before consuming it.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x530C82",
-    "line": "call    sub_530620",
+    "line": "call    TESTopicInfo_ClearSharedResponseCache",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x530C8B",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; GetOverrideFile(-1) walks the form file list and returns the final/winning override file used for lazy response reread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x530C9A",
-    "line": "cmp     [ebx+34h], esi",
+    "line": "cmp     [ebx+34h], esi; Require the stored winning INFO record offset. This makes the runtime response view single-record/patch-local even when the form itself was loaded as a no-reset partial override.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x530CA5",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x530CDC",
-    "line": "mov     [ebp+var_14], esi",
+    "line": "mov     [ebp+var_14], esi; Reset currentResponse to null for every lazy reconstruction. Leading NAM1 is ignored; no inherited response cursor crosses record/invocation boundaries.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -301,25 +301,25 @@
   },
   {
     "ea": "0x530CEC",
-    "line": "cmp     eax, 314D414Eh",
+    "line": "cmp     eax, 314D414Eh; NAM1 is the only runtime text chunk. If currentResponse exists it replaces that response's text, even after unrelated intervening chunks; repeated NAM1 is last-write-wins. NAM2 is not dispatched.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x530CF1",
-    "line": "jz      short loc_530D3A",
+    "line": "jz      short loc_530D3A; NAM1 chunk: attach its text to the most recently parsed TESResponse.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x530CF3",
-    "line": "cmp     eax, 54445254h",
+    "line": "cmp     eax, 54445254h; Every TRDT allocates a fresh TESResponse, loads its fixed data, appends it, and becomes currentResponse. Serialized response order is preserved.",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x530CF8",
-    "line": "jnz     short loc_530D68",
+    "line": "jnz     short loc_530D68; TRDT chunk: allocate a 0x18-byte TESResponse, load the fixed 16-byte TRDT payload, and append it before a following NAM1 supplies responseText.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x530D0E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x530D10",
-    "line": "call    sub_52E150",
+    "line": "call    TESResponse__TESResponse; TESResponse defaults before TRDT overlay: DWORD0=0, DWORD4=50, DWORD8=0, byte12=0; bytes13..15 are not explicitly initialized. Response text starts empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x530D17",
-    "line": "push    edi",
+    "line": "push    edi; file",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x530D18",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x530D21",
-    "line": "mov     [ebp+var_14], esi",
+    "line": "mov     [ebp+var_14], esi; Install the new TRDT response as currentResponse before appending; subsequent NAM1 attaches until a later TRDT replaces the cursor.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x530D24",
-    "line": "call    sub_52E0D0",
+    "line": "call    TESResponse__LoadTRDT; TRDT loader delegates to GetChunkData with max 16. Size 0 is a successful no-op; sizes 1..16 prefix-overlay constructor state; sizes >16 truncate to 15 bytes and force byte 15 to NUL while logging.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x530D2A",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x530D2C",
-    "line": "call    sub_530C40",
+    "line": "call    TESTopicInfo__GetResponseList; Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x530D33",
-    "line": "call    BSSimpleList_PushBack",
+    "line": "call    BSSimpleList_PushBack; Append each TRDT response to the shared response list in encounter order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x530D3A",
-    "line": "cmp     [ebp+var_14], esi",
+    "line": "cmp     [ebp+var_14], esi; NAM1 guard: with null currentResponse (for example before the first TRDT) the chunk is ignored.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x530D52",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Read exactly NAM1 chunk length into an equally sized stack buffer, then BSStringT_Set(...,0) calls strlen. No terminator is synthesized; malformed non-NUL or zero-length NAM1 can read beyond the serialized buffer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x530D68",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; All non-TRDT/non-NAM1 chunks fall through without clearing currentResponse. This includes NAM2, DATA, QSTI, CTDA/CTDT, links, and script chunks.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x530D84",
-    "line": "mov     eax, offset dword_B36580",
+    "line": "mov     eax, offset g_cachedTopicInfoResponseList",
     "mnemonic": "mov",
     "size": 5
   },
@@ -682,5 +682,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B8B90",
+    "line": "mov     eax, [ebp+var_14]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8B93",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8B94",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8B99",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8B9A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8B9B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B8B9F",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8BA2",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8BA5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8BA7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8BAC",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8BAF",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8BB1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8BB6",
+    "line": "mov     eax, offset stru_AE3028",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8BBB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

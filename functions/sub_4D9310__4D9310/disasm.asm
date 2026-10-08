@@ -25,7 +25,7 @@
 0x4D9361: jnz     loc_4D93F7
 0x4D9367: lea     ebp, [esi+44h]
 0x4D936A: mov     ecx, ebp
-0x4D936C: call    sub_41E960
+0x4D936C: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x4D9371: mov     edi, eax
 0x4D9373: test    edi, edi
 0x4D9375: jz      short loc_4D93A4
@@ -86,7 +86,7 @@
 0x4D9416: jnz     loc_4D94AC
 0x4D941C: lea     ebp, [esi+44h]
 0x4D941F: mov     ecx, ebp
-0x4D9421: call    sub_41E960
+0x4D9421: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x4D9426: mov     edi, eax
 0x4D9428: test    edi, edi
 0x4D942A: jz      short loc_4D9459
@@ -147,7 +147,7 @@
 0x4D94CB: jnz     loc_4D9564
 0x4D94D1: lea     ebp, [esi+44h]
 0x4D94D4: mov     ecx, ebp
-0x4D94D6: call    sub_41E960
+0x4D94D6: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x4D94DB: mov     edi, eax
 0x4D94DD: test    edi, edi
 0x4D94DF: jz      short loc_4D950E
@@ -203,7 +203,7 @@
 0x4D9570: cmp     byte ptr [eax+4], 0Ah
 0x4D9574: jnz     loc_4D96DF
 0x4D957A: lea     ecx, [esi+44h]
-0x4D957D: call    sub_41E960
+0x4D957D: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x4D9582: mov     edi, eax
 0x4D9584: test    edi, edi
 0x4D9586: jz      short loc_4D95A1
@@ -247,7 +247,7 @@
 0x4D95F3: mov     ecx, esi; this
 0x4D95F5: call    sub_6B73E0
 0x4D95FA: push    esi
-0x4D95FB: call    FormHeapFree
+0x4D95FB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4D9600: add     esp, 4
 0x4D9603: pop     edi
 0x4D9604: pop     esi
@@ -313,7 +313,7 @@
 0x4D96B6: jnz     short loc_4D96DF
 0x4D96B8: add     esi, 44h ; 'D'
 0x4D96BB: mov     ecx, esi
-0x4D96BD: call    sub_41E960
+0x4D96BD: call    ExtraDataList_GetExtraSound; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x4D96C2: mov     edi, eax
 0x4D96C4: test    edi, edi
 0x4D96C6: jz      short loc_4D96DF

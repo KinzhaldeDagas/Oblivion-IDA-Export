@@ -1,4 +1,4 @@
-BSStringT *sub_A0C180()
+NiRTTI *sub_A0C180()
 {
-  return sub_70E220((BSStringT *)dword_B40D88, "NiPSysVortexFieldModifier", (int)dword_B41E68);
+  return NiRTTI_Constructor(&stru_B40D88, "NiPSysVortexFieldModifier", &stru_B41E68); /*0xa0c194*/
 }

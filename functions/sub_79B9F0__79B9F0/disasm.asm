@@ -1,4 +1,4 @@
-0x79B9F0: push    0FFFFFFFFh
+0x79B9F0: push    0FFFFFFFFh; Heap push/up operation for 0x30-byte SFrondGuide records ordered by fuzzySurfaceArea at +0x24. Moves parent guides down with deep vector assignment until the saved by-value guide reaches its heap position.
 0x79B9F2: push    offset SEH_79C130
 0x79B9F7: mov     eax, large fs:0
 0x79B9FD: push    eax
@@ -11,21 +11,21 @@
 0x79BA09: push    eax
 0x79BA0A: lea     eax, [esp+20h+var_C]
 0x79BA0E: mov     large fs:0, eax
-0x79BA14: mov     ecx, [esp+20h+arg_4]
-0x79BA18: mov     ebp, [esp+20h+arg_0]
+0x79BA14: mov     ecx, [esp+20h+holeIndex]
+0x79BA18: mov     ebp, [esp+20h+base]
 0x79BA1C: lea     eax, [ecx-1]
 0x79BA1F: cdq
 0x79BA20: sub     eax, edx
 0x79BA22: mov     ebx, eax
 0x79BA24: sar     ebx, 1
-0x79BA26: cmp     [esp+20h+arg_8], ecx
+0x79BA26: cmp     [esp+20h+topIndex], ecx
 0x79BA2A: mov     [esp+20h+var_4], 0
 0x79BA32: jge     short loc_79BAA0
 0x79BA34: lea     eax, [ebx+ebx*2]
 0x79BA37: shl     eax, 4
 0x79BA3A: fld     dword ptr [eax+ebp+24h]
 0x79BA3E: lea     edi, [eax+ebp]
-0x79BA41: fld     [esp+20h+arg_30]
+0x79BA41: fld     [esp+20h+value.fuzzySurfaceArea]; Randomized surface-area key used for guide LOD ordering.
 0x79BA45: fcompp
 0x79BA47: fnstsw  ax
 0x79BA49: test    ah, 5
@@ -33,9 +33,9 @@
 0x79BA4E: lea     esi, [ecx+ecx*2]
 0x79BA51: shl     esi, 4
 0x79BA54: add     esi, ebp
-0x79BA56: push    edi
-0x79BA57: mov     ecx, esi
-0x79BA59: call    sub_79B160
+0x79BA56: push    edi; source
+0x79BA57: mov     ecx, esi; this
+0x79BA59: call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.
 0x79BA5E: fld     dword ptr [edi+10h]
 0x79BA61: fstp    dword ptr [esi+10h]
 0x79BA64: fld     dword ptr [edi+14h]
@@ -57,37 +57,37 @@
 0x79BA93: cdq
 0x79BA94: sub     eax, edx
 0x79BA96: sar     eax, 1
-0x79BA98: cmp     [esp+20h+arg_8], ecx
+0x79BA98: cmp     [esp+20h+topIndex], ecx
 0x79BA9C: mov     ebx, eax
 0x79BA9E: jl      short loc_79BA34
 0x79BAA0: lea     esi, [ecx+ecx*2]
 0x79BAA3: shl     esi, 4
-0x79BAA6: lea     ecx, [esp+20h+arg_C]
+0x79BAA6: lea     ecx, [esp+20h+value]
 0x79BAAA: add     esi, ebp
-0x79BAAC: push    ecx
-0x79BAAD: mov     ecx, esi
-0x79BAAF: call    sub_79B160
-0x79BAB4: fld     [esp+20h+arg_1C]
-0x79BAB8: mov     eax, [esp+20h+arg_34]
+0x79BAAC: push    ecx; source
+0x79BAAD: mov     ecx, esi; this
+0x79BAAF: call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.
+0x79BAB4: fld     [esp+20h+value.guideLength]; Computed centerline length.
+0x79BAB8: mov     eax, [esp+20h+value.sharedVertexStartIndex]; Start index in shared indexed geometry.
 0x79BABC: fstp    dword ptr [esi+10h]
-0x79BABF: fld     [esp+20h+arg_20]
-0x79BAC3: mov     dl, [esp+20h+arg_24]
-0x79BAC7: mov     ecx, [esp+20h+arg_38]
+0x79BABF: fld     [esp+20h+value.radius]; Frond radius.
+0x79BAC3: mov     dl, [esp+20h+value.frondMapIndex]; Selected frond texture/map index.
+0x79BAC7: mov     ecx, [esp+20h+value.verticesPerGuideVertex]; Generated geometry vertices associated with each guide vertex.
 0x79BACB: fstp    dword ptr [esi+14h]
-0x79BACE: fld     [esp+20h+arg_28]
+0x79BACE: fld     [esp+20h+value.offsetAngle]; Rotation offset around the guide centerline.
 0x79BAD2: mov     [esi+28h], eax
-0x79BAD5: mov     eax, [esp+20h+arg_10]
+0x79BAD5: mov     eax, [esp+20h+value.vertexVector.begin]; Oblivion compact guide storage: direct 16-byte vector of 0x38-byte SFrondVertex records. Local RT 4.1 stock stack-vertex fields are absent.
 0x79BAD9: fstp    dword ptr [esi+1Ch]
 0x79BADC: test    eax, eax
-0x79BADE: fld     [esp+20h+arg_2C]
+0x79BADE: fld     [esp+20h+value.surfaceArea]; Computed surface area used for LOD.
 0x79BAE2: fstp    dword ptr [esi+20h]
 0x79BAE5: mov     [esi+18h], dl
-0x79BAE8: fld     [esp+20h+arg_30]
+0x79BAE8: fld     [esp+20h+value.fuzzySurfaceArea]; Randomized surface-area key used for guide LOD ordering.
 0x79BAEC: mov     [esi+2Ch], ecx
 0x79BAEF: fstp    dword ptr [esi+24h]
 0x79BAF2: jz      short loc_79BAFD
 0x79BAF4: push    eax
-0x79BAF5: call    FormHeapFree
+0x79BAF5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79BAFA: add     esp, 4
 0x79BAFD: mov     ecx, [esp+20h+var_C]
 0x79BB01: mov     large fs:0, ecx
@@ -98,3 +98,12 @@
 0x79BB0C: pop     ebx
 0x79BB0D: add     esp, 0Ch
 0x79BB10: retn
+0x9CC2D0: lea     ecx, [ebp+10h]; this
+0x9CC2D3: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CC2D8: mov     edx, [esp+holeIndex]
+0x9CC2DC: lea     eax, [edx-10h]
+0x9CC2DF: mov     ecx, [edx-14h]
+0x9CC2E2: xor     ecx, eax
+0x9CC2E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC2E9: mov     eax, offset stru_AF542C
+0x9CC2EE: jmp     ___CxxFrameHandler3

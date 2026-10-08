@@ -65,7 +65,7 @@
 0x71C901: jnz     short loc_71C8C8
 0x71C903: mov     eax, [esp+10h+arg_10]
 0x71C907: push    eax
-0x71C908: call    FormHeapFree
+0x71C908: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71C90D: add     esp, 4
 0x71C910: pop     edi
 0x71C911: pop     ebp
@@ -81,7 +81,6 @@
 0x71C927: jbe     short loc_71C95E
 0x71C929: mov     edi, ebp
 0x71C92B: jmp     short loc_71C930
-0x71C92D: align 10h
 0x71C930: movzx   edx, byte ptr [eax]
 0x71C933: movzx   edx, byte ptr [esi+edx*4+2]
 0x71C938: mov     [ecx], dl
@@ -101,7 +100,7 @@
 0x71C961: jnz     short loc_71C925
 0x71C963: mov     eax, [esp+10h+arg_10]
 0x71C967: push    eax
-0x71C968: call    FormHeapFree
+0x71C968: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71C96D: add     esp, 4
 0x71C970: pop     edi
 0x71C971: pop     ebp

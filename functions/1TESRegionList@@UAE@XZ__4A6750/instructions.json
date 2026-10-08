@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4A675A",
-    "line": "call    sub_4A6380",
+    "line": "call    TESRegionList_Clear; Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4A6771",
-    "line": "mov     ecx, ds:dword_B35420[esi]",
+    "line": "mov     ecx, dword ptr ds:g_OblivionRegionDataCache.selectedData[esi]; Verified selected TESRegionData pointer used as cache value for a region-data ID.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4A677B",
-    "line": "mov     ds:dword_B35420[esi], ebx",
+    "line": "mov     dword ptr ds:g_OblivionRegionDataCache.selectedData[esi], ebx; Verified selected TESRegionData pointer used as cache value for a region-data ID.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4A6789",
-    "line": "mov     ecx, ds:dword_B35424[esi]",
+    "line": "mov     ecx, ds:g_OblivionRegionDataCache.activeRegionList[esi]; Verified active TESRegionList used to decide cache reuse and compare current input list.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4A6793",
-    "line": "mov     ds:dword_B35424[esi], ebx",
+    "line": "mov     ds:g_OblivionRegionDataCache.activeRegionList[esi], ebx; Verified active TESRegionList used to decide cache reuse and compare current input list.",
     "mnemonic": "mov",
     "size": 6
   },

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x9E3940",
-    "line": "mov     ecx, offset stru_B36100; lpCriticalSection",
+    "line": "mov     ecx, offset g_TESWorldSpaceReferenceIndexLock; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9E3945",
-    "line": "call    NiInitalizeCriticalSection",
+    "line": "call    NiInitalizeCriticalSection; Verified: initializes g_TESWorldSpaceReferenceIndexLock during module initialization; registered atexit cleanup calls NiDeleteCriticalSection.",
     "mnemonic": "call",
     "size": 5
   },

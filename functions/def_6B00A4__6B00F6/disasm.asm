@@ -163,14 +163,14 @@
 0x6B02E1: mov     ecx, esi; this
 0x6B02E3: call    sub_6B73E0
 0x6B02E8: push    esi
-0x6B02E9: call    FormHeapFree
+0x6B02E9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B02EE: add     esp, 4
 0x6B02F1: test    edi, edi
 0x6B02F3: jz      short loc_6B0305
 0x6B02F5: mov     ecx, edi; this
 0x6B02F7: call    sub_6B73E0
 0x6B02FC: push    edi
-0x6B02FD: call    FormHeapFree
+0x6B02FD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B0302: add     esp, 4
 0x6B0305: pop     edi
 0x6B0306: pop     esi

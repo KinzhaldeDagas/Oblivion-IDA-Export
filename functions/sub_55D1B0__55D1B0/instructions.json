@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x55D1C3",
-    "line": "mov     [esp+58h+var_1C], 0",
+    "line": "mov     [esp+58h+outVertices.data], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x55D1CB",
-    "line": "mov     [esp+58h+var_18], 0",
+    "line": "mov     [esp+58h+outVertices.stride], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x55D1D3",
-    "line": "mov     [esp+58h+var_14], 0",
+    "line": "mov     [esp+58h+outVertices.unknown08], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x55D210",
-    "line": "mov     [esp+58h+var_20], eax",
+    "line": "mov     [esp+58h+object], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x55D23C",
-    "line": "mov     ecx, [esp+58h+var_20]",
+    "line": "mov     ecx, [esp+58h+object]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55D240",
-    "line": "push    ecx",
+    "line": "push    ecx; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55D241",
-    "line": "call    sub_5508A0",
+    "line": "call    NiObjectNET_FindFaceGenBaseVertexData; Scan NiObjectNET extra data and return the FaceGen base-vertex data object used to restore authored positions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,25 +253,25 @@
   },
   {
     "ea": "0x55D255",
-    "line": "mov     edx, [esp+58h+var_20]",
+    "line": "mov     edx, [esp+58h+object]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55D259",
-    "line": "mov     ecx, [edx+0B4h]",
+    "line": "mov     ecx, [edx+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x55D25F",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55D261",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,31 +289,31 @@
   },
   {
     "ea": "0x55D26E",
-    "line": "mov     ecx, [esp+58h+var_20]",
+    "line": "mov     ecx, [esp+58h+object]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55D272",
-    "line": "mov     ecx, [ecx+0B4h]",
+    "line": "mov     ecx, [ecx+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x55D278",
-    "line": "lea     eax, [esp+58h+var_1C]",
+    "line": "lea     eax, [esp+58h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55D27C",
-    "line": "push    eax",
+    "line": "push    eax; outVertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55D27D",
-    "line": "call    sub_728B60",
+    "line": "call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x55D287",
-    "line": "mov     eax, [esp+58h+var_20]",
+    "line": "mov     eax, [esp+58h+object]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,25 +367,25 @@
   },
   {
     "ea": "0x55D2A4",
-    "line": "lea     edx, [esp+58h+var_1C]",
+    "line": "lea     edx, [esp+58h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55D2A8",
-    "line": "push    edx",
+    "line": "push    edx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55D2A9",
-    "line": "push    eax",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55D2AA",
-    "line": "call    sub_5508F0",
+    "line": "call    NiGeometry_RestoreFaceGenBaseVertices; Copy authored FaceGen base positions into a writable strided vertex stream and mark only the position channel dirty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x55D30C",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x55D370",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x55D399",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x55D3A7",
-    "line": "lea     ecx, [esp+58h+var_20]",
+    "line": "lea     ecx, [esp+58h+object]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x55D3BC",
-    "line": "lea     edx, [esp+58h+var_20]",
+    "line": "lea     edx, [esp+58h+object]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x55D3C8",
-    "line": "lea     eax, [esp+58h+var_20]",
+    "line": "lea     eax, [esp+58h+object]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x55D3D4",
-    "line": "lea     ecx, [esp+58h+var_20]",
+    "line": "lea     ecx, [esp+58h+object]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x55D440",
-    "line": "lea     ecx, [esp+58h+var_20]",
+    "line": "lea     ecx, [esp+58h+object]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1255,19 +1255,19 @@
   },
   {
     "ea": "0x55D490",
-    "line": "mov     ecx, [esp+58h+var_20]",
+    "line": "mov     ecx, [esp+58h+object]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55D494",
-    "line": "mov     ecx, [ecx+0B4h]",
+    "line": "mov     ecx, [ecx+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x55D49A",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },

@@ -3,109 +3,109 @@ signed int __cdecl sub_774EE0(signed int a1)
   signed int result; // eax
   bool v2; // zf
 
-  if ( a1 > 0x3154454D )
+  if ( a1 > 0x3154454D ) /*0x774ee9*/
   {
-    if ( a1 > 0x34545844 )
+    if ( a1 > 0x34545844 ) /*0x774f2d*/
     {
-      if ( a1 > 0x47424752 )
+      if ( a1 > 0x47424752 ) /*0x774f54*/
       {
-        v2 = a1 == 0x59565955;
+        v2 = a1 == 0x59565955; /*0x774f66*/
       }
       else
       {
-        if ( a1 == 0x47424752 || a1 == 0x35545844 )
-          return 0;
-        v2 = a1 == 0x42475247;
+        if ( a1 == 0x47424752 || a1 == 0x35545844 ) /*0x774f5d*/
+          return 0; /*0x774f5d*/
+        v2 = a1 == 0x42475247; /*0x774f5f*/
       }
     }
     else
     {
-      if ( a1 == 0x34545844 )
-        return 0;
-      if ( a1 > 0x32595559 )
+      if ( a1 == 0x34545844 ) /*0x774f2f*/
+        return 0; /*0x774f2f*/
+      if ( a1 > 0x32595559 ) /*0x774f36*/
       {
-        v2 = a1 == 0x33545844;
+        v2 = a1 == 0x33545844; /*0x774f48*/
       }
       else
       {
-        if ( a1 == 0x32595559 || a1 == 0x31545844 )
-          return 0;
-        v2 = a1 == 0x32545844;
+        if ( a1 == 0x32595559 || a1 == 0x31545844 ) /*0x774f3f*/
+          return 0; /*0x774f3f*/
+        v2 = a1 == 0x32545844; /*0x774f41*/
       }
     }
-    if ( !v2 )
-      return 0xFFFFFFFF;
-    return 0;
+    if ( !v2 ) /*0x774f6b*/
+      return 0xFFFFFFFF; /*0x774f70*/
+    return 0; /*0x774f6b*/
   }
-  if ( a1 == 0x3154454D )
-    return 0;
-  switch ( a1 )
+  if ( a1 == 0x3154454D ) /*0x774eeb*/
+    return 0; /*0x774f71*/
+  switch ( a1 ) /*0x774efd*/
   {
-    case 0:
-    case 0x64:
+    case 0: /*0x774efd*/
+    case 0x64: /*0x774efd*/
       return 0;
-    case 0x14:
-      result = 0x18;
-      break;
-    case 0x15:
-    case 0x16:
-    case 0x1F:
-    case 0x20:
-    case 0x21:
-    case 0x23:
-    case 0x3E:
-    case 0x3F:
-    case 0x40:
-    case 0x43:
-    case 0x47:
-    case 0x4B:
-    case 0x4D:
-    case 0x4F:
-    case 0x52:
-    case 0x53:
-    case 0x66:
-    case 0x70:
-    case 0x72:
-      result = 0x20;
-      break;
-    case 0x17:
-    case 0x18:
-    case 0x19:
-    case 0x1A:
-    case 0x1D:
-    case 0x1E:
-    case 0x22:
-    case 0x28:
-    case 0x33:
-    case 0x3C:
-    case 0x3D:
-    case 0x46:
-    case 0x49:
-    case 0x50:
-    case 0x51:
-    case 0x65:
-    case 0x6F:
-    case 0x75:
-      result = 0x10;
-      break;
-    case 0x1B:
-    case 0x1C:
-    case 0x29:
-    case 0x32:
-    case 0x34:
-      result = 8;
-      break;
-    case 0x24:
-    case 0x6E:
-    case 0x71:
-    case 0x73:
-      result = 0x40;
-      break;
-    case 0x74:
-      result = 0x80;
-      break;
+    case 0x14: /*0x774efd*/
+      result = 0x18; /*0x774f10*/
+      break; /*0x774f15*/
+    case 0x15: /*0x774efd*/
+    case 0x16: /*0x774efd*/
+    case 0x1F: /*0x774efd*/
+    case 0x20: /*0x774efd*/
+    case 0x21: /*0x774efd*/
+    case 0x23: /*0x774efd*/
+    case 0x3E: /*0x774efd*/
+    case 0x3F: /*0x774efd*/
+    case 0x40: /*0x774efd*/
+    case 0x43: /*0x774efd*/
+    case 0x47: /*0x774efd*/
+    case 0x4B: /*0x774efd*/
+    case 0x4D: /*0x774efd*/
+    case 0x4F: /*0x774efd*/
+    case 0x52: /*0x774efd*/
+    case 0x53: /*0x774efd*/
+    case 0x66: /*0x774efd*/
+    case 0x70: /*0x774efd*/
+    case 0x72: /*0x774efd*/
+      result = 0x20; /*0x774f16*/
+      break; /*0x774f1b*/
+    case 0x17: /*0x774efd*/
+    case 0x18: /*0x774efd*/
+    case 0x19: /*0x774efd*/
+    case 0x1A: /*0x774efd*/
+    case 0x1D: /*0x774efd*/
+    case 0x1E: /*0x774efd*/
+    case 0x22: /*0x774efd*/
+    case 0x28: /*0x774efd*/
+    case 0x33: /*0x774efd*/
+    case 0x3C: /*0x774efd*/
+    case 0x3D: /*0x774efd*/
+    case 0x46: /*0x774efd*/
+    case 0x49: /*0x774efd*/
+    case 0x50: /*0x774efd*/
+    case 0x51: /*0x774efd*/
+    case 0x65: /*0x774efd*/
+    case 0x6F: /*0x774efd*/
+    case 0x75: /*0x774efd*/
+      result = 0x10; /*0x774f0a*/
+      break; /*0x774f0f*/
+    case 0x1B: /*0x774efd*/
+    case 0x1C: /*0x774efd*/
+    case 0x29: /*0x774efd*/
+    case 0x32: /*0x774efd*/
+    case 0x34: /*0x774efd*/
+      result = 8; /*0x774f04*/
+      break; /*0x774f09*/
+    case 0x24: /*0x774efd*/
+    case 0x6E: /*0x774efd*/
+    case 0x71: /*0x774efd*/
+    case 0x73: /*0x774efd*/
+      result = 0x40; /*0x774f1c*/
+      break; /*0x774f21*/
+    case 0x74: /*0x774efd*/
+      result = 0x80; /*0x774f22*/
+      break; /*0x774f27*/
     default:
       return 0xFFFFFFFF;
   }
-  return result;
+  return result; /*0x774f09*/
 }

@@ -1,4 +1,4 @@
-0x4A59E0: push    ecx
+0x4A59E0: push    ecx; Verified: TESRegionGrassObject stores TESGrass at +4 and parent TESLandTexture at +8; loader resolves FormIDs and rejects non-Grass/non-LandTexture classes.
 0x4A59E1: push    ebx
 0x4A59E2: push    ebp
 0x4A59E3: mov     ebp, ecx
@@ -26,35 +26,35 @@
 0x4A5A22: mov     [esp+14h+a1], ecx
 0x4A5A26: push    0FFFFFFFFh; a2
 0x4A5A28: mov     ecx, eax; this
-0x4A5A2A: call    TESForm_GetOverrideFile
+0x4A5A2A: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4A5A2F: mov     esi, eax
 0x4A5A31: lea     edx, [esp+14h+a1]
 0x4A5A35: push    esi; a2
 0x4A5A36: push    edx; a1
-0x4A5A37: call    TESForm_ResolveFormID
+0x4A5A37: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4A5A3C: mov     eax, [esp+1Ch+a1]
 0x4A5A40: push    eax; a1
-0x4A5A41: call    TESForm_LookupByFormID
+0x4A5A41: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4A5A46: mov     ecx, [ebx+4]
 0x4A5A49: lea     edx, [esp+20h+a1]
 0x4A5A4D: push    esi; a2
 0x4A5A4E: push    edx; a1
 0x4A5A4F: mov     edi, eax
 0x4A5A51: mov     [esp+28h+a1], ecx
-0x4A5A55: call    TESForm_ResolveFormID
+0x4A5A55: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4A5A5A: mov     eax, [esp+28h+a1]
 0x4A5A5E: push    eax; a1
-0x4A5A5F: call    TESForm_LookupByFormID
+0x4A5A5F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4A5A64: add     esp, 18h
 0x4A5A67: jmp     short loc_4A5A83
 0x4A5A69: mov     esi, [esp+14h+arg_0]
 0x4A5A6D: mov     ecx, [esi]
 0x4A5A6F: push    ecx; a1
-0x4A5A70: call    TESForm_LookupByFormID
+0x4A5A70: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4A5A75: mov     edx, [esi+4]
 0x4A5A78: push    edx; a1
 0x4A5A79: mov     edi, eax
-0x4A5A7B: call    TESForm_LookupByFormID
+0x4A5A7B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4A5A80: add     esp, 8
 0x4A5A83: test    edi, edi
 0x4A5A85: mov     ebx, eax

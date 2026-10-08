@@ -1,36 +1,41 @@
-char *__cdecl sub_6C1AD0(signed int a1, unsigned int size)
+char *__cdecl sub_6C1AD0(signed int a1, int size)
 {
-  unsigned int v2; // edi
+  int v2; // edi
   unsigned int v3; // ecx
-  unsigned int *v4; // eax
-  char *v5; // esi
+  int v4; // eax
+  int v5; // esi
   char *v6; // ebp
   char *v7; // esi
 
-  v2 = size;
-  v3 = (0x1C * (unsigned __int64)size) >> 0x20 != 0 ? 0xFFFFFFFF : 0x1C * size;
-  v4 = (unsigned int *)FormHeapAlloc(__CFADD__(v3, 4) ? 0xFFFFFFFF : v3 + 4);
-  if ( v4 )
+  v2 = size; /*0x6c1af4*/
+  v3 = (0x1C * (unsigned __int64)(unsigned int)size) >> 0x20 != 0 ? 0xFFFFFFFF : 0x1C * size;
+  v4 = FormHeapAlloc(__CFADD__(v3, 4) ? 0xFFFFFFFF : v3 + 4);
+  if ( v4 ) /*0x6c1b2d*/
   {
-    v5 = (char *)(v4 + 1);
-    *v4 = size;
-    ArrayConstructor(v4 + 1, 0x1Cu, size, (int)sub_7616D0, TESTexture::ClearComponentReferences);
-    v6 = v5;
+    v5 = v4 + 4; /*0x6c1b3a*/
+    *(_DWORD *)v4 = size; /*0x6c1b40*/
+    ArrayConstructor( /*0x6c1b42*/
+      (char *)(v4 + 4),
+      0x1Cu,
+      size,
+      (void (__thiscall *)(char *))ActorList_ReturnHead,
+      Shared_NoOpVirtual_60D0A0);
+    v6 = (char *)v5; /*0x6c1b47*/
   }
   else
   {
-    v6 = 0;
+    v6 = 0; /*0x6c1b4b*/
   }
-  if ( size )
+  if ( size ) /*0x6c1b57*/
   {
-    v7 = v6;
-    do
+    v7 = v6; /*0x6c1b5d*/
+    do /*0x6c1b6e*/
     {
-      sub_6C19D0(v7, a1);
-      v7 += 0x1C;
-      --v2;
+      sub_6C19D0(v7, a1); /*0x6c1b63*/
+      v7 += 0x1C; /*0x6c1b68*/
+      --v2; /*0x6c1b6b*/
     }
-    while ( v2 );
+    while ( v2 ); /*0x6c1b6e*/
   }
-  return v6;
+  return v6; /*0x6c1b72*/
 }

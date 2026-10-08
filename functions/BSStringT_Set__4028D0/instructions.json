@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4028F6",
-    "line": "ja      short loc_4028FA",
+    "line": "ja      short loc_4028FA; CNAM/SNAM callers pass a3=0, so BSStringT_Set computes strlen(a2). Payloads lacking an embedded NUL at sizes <=0x200 can read stack bytes past the chunk; native assignment is not deterministically bounded by currentChunk.length.",
     "mnemonic": "ja",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x402922",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x402973",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

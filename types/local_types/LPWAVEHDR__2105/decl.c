@@ -1,1 +1,1 @@
-LPWAVEHDR
+typedef wavehdr_tag *LPWAVEHDR;

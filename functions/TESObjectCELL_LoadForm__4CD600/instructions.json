@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CD600",
-    "line": "push    ebp",
+    "line": "push    ebp; Authoritative CELL deletion note: the record-header deleted flag does not short-circuit TESObjectCELL payload dispatch; serialized DATA/direct fields and shared ExtraDataList chunks are still replayed in stream order.",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4CD648",
-    "line": "call    TESFile_InitializeFormFromRecord",
+    "line": "call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4CD6B7",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x4CD70C",
-    "line": "call    sub_423FF0",
+    "line": "call    ExtraDataList_SetWaterHeight",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x4CD716",
-    "line": "cmp     byte ptr [eax+0CD1h], 0",
+    "line": "cmp     byte ptr [eax+0CD1h], 0; Verified cell-load gate: when activeFileState.retainActiveFile is zero, TESObjectCELL_LoadForm clears flags0 bit 0x40; when nonzero it preserves the serialized bit. This bit is toggled by linked-door lock/unlock and tested with bit 0x20 in public-cell access decisions. Probable semantic label is TempPublic; the exact historical/runtime reason for the DataHandler gate remains Unknown.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x4CD760",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x4CD7B3",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x4CD854",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x4CD867",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x4CD878",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,25 +1357,25 @@
   },
   {
     "ea": "0x4CD923",
-    "line": "push    edi",
+    "line": "push    edi; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CD924",
-    "line": "push    ebx",
+    "line": "push    ebx; tesFile",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CD925",
-    "line": "lea     ecx, [edi+28h]",
+    "line": "lea     ecx, [edi+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4CD928",
-    "line": "call    ExtraDataList_Load",
+    "line": "call    ExtraDataList_Load; Common ExtraDataList single-chunk dispatcher reached by REFR/ACHR/ACRE. TESFile_GetChunkData(max) semantics at 0x450C20: length 0 leaves destination unchanged; <=max copies a prefix only; >max copies max-1 and writes a terminal zero. Each explicitly zeroed scratch therefore gives deterministic malformed-width behavior; singleton setters make repeats last-wins/remove as noted per branch.",
     "mnemonic": "call",
     "size": 5
   },

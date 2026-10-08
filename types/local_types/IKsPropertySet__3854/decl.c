@@ -1,1 +1,4 @@
-IKsPropertySet
+struct IKsPropertySet
+{
+const IKsPropertySetVtbl *lpVtbl;
+};

@@ -1,1 +1,1 @@
-ExtraSound
+struct ExtraSound;

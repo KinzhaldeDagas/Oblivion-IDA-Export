@@ -1,4 +1,4 @@
-bool __thiscall sub_755010(float *this, int a2)
+bool __thiscall sub_755010(NiTriBasedGeomData *this, int a2)
 {
-  return sub_75E890(this, a2) != 0;
+  return sub_75E890(this, a2); /*0x75501f*/
 }

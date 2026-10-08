@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F7330",
+      "0x4F7370"
+    ]
+  ],
+  "chunks_sha256": "38f8eb56f436c7eb6498cc352c72ee87df89888dc0614999f6354fa6fde1e7e8",
+  "comment_regular": "GetGlobalValue_Eval (index 74 / opcode 0x104A): parameter must be TESGlobal (form type 0x04); returns its float value at +0x24, otherwise numeric 0.",
+  "comment_repeatable": "GetGlobalValue_Eval (index 74 / opcode 0x104A): parameter must be TESGlobal (form type 0x04); returns its float value at +0x24, otherwise numeric 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F7330",
+  "display_name": "GetGlobalValue_Eval",
   "end_ea": "0x4F7370",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F7330",
+  "name": "GetGlobalValue_Eval",
   "segment": ".text",
   "sha256": "38f8eb56f436c7eb6498cc352c72ee87df89888dc0614999f6354fa6fde1e7e8",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F7330",
-  "type": "char __cdecl(int, int, int, double *)",
+  "total_chunk_size": 64,
+  "type": "char __cdecl(TESObjectREFR *subject, TESGlobal *global, TESForm *param2, double *value)",
   "xrefs_from_count": 24,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

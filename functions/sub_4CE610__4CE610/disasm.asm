@@ -1,11 +1,11 @@
-0x4CE610: sub     esp, 0C0h
+0x4CE610: sub     esp, 0C0h; Per-cell canopy shadow mask updater; ensures global canopy shadow texture via 0x55FDF0 then paints mask pixels across current/neighbor cells.
 0x4CE616: push    esi
 0x4CE617: mov     esi, ecx
 0x4CE619: test    byte ptr [esi+24h], 1
 0x4CE61D: jnz     loc_4CEABA
 0x4CE623: push    ebx
 0x4CE624: push    edi
-0x4CE625: call    sub_55FDF0
+0x4CE625: call    BSTreeManager_GetCanopyShadow; Verified canopy-shadow path plus version difference: both games use Data\\Textures\\Trees\\CanopyShadow.dds and a white 16x16 fallback. Fallout loads through TES::CreateTextureImage and also updates BSShaderManager::pProjectedShadowTexture; Oblivion loads through OB_TES_LoadOrFindSourceTexture and stores through its renderer helper. Oblivion's adjacent renderer-resource global remains Unknown.
 0x4CE62A: xor     ebx, ebx
 0x4CE62C: lea     eax, [esp+0CCh+var_B0]
 0x4CE630: push    eax
@@ -36,7 +36,7 @@
 0x4CE689: lea     eax, [esp+0D0h+var_BC]
 0x4CE68D: push    eax
 0x4CE68E: push    esi
-0x4CE68F: call    TESObjectCELL__CreateCanopyShadowMaskForCell
+0x4CE68F: call    TESObjectCELL__CreateCanopyShadowMaskForCell; Create/update the native cell canopy-shadow mask.
 0x4CE694: add     esp, 0Ch
 0x4CE697: mov     ecx, esi; this
 0x4CE699: call    sub_4CE3C0
@@ -72,7 +72,7 @@
 0x4CE70D: cmp     [edx+4], ebx
 0x4CE710: jnz     short loc_4CE748
 0x4CE712: push    3
-0x4CE714: call    nullsub_returnTrue_0arg
+0x4CE714: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4CE719: mov     eax, [esp+0D0h+var_BC]
 0x4CE71D: mov     ecx, [eax+24h]
 0x4CE720: mov     edx, [ecx]
@@ -89,7 +89,7 @@
 0x4CE735: mov     eax, [ecx+4Ch]
 0x4CE738: call    eax
 0x4CE73A: push    2
-0x4CE73C: call    nullsub_returnTrue_0arg
+0x4CE73C: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4CE741: mov     ecx, [esp+0D0h+var_BC]
 0x4CE745: add     esp, 4
 0x4CE748: mov     edx, [esp+0CCh+var_B0]
@@ -113,7 +113,7 @@
 0x4CE781: fld     st
 0x4CE783: fsubp   st(2), st
 0x4CE785: fxch    st(1)
-0x4CE787: call    Double_To_SInt32
+0x4CE787: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4CE78C: mov     edi, eax
 0x4CE78E: mov     [esp+0D0h+var_B4], edi
 0x4CE792: fild    [esp+0D0h+var_B4]
@@ -128,7 +128,7 @@
 0x4CE7AD: fld     [esp+0D0h+var_A4]
 0x4CE7B1: fld     st
 0x4CE7B3: fsub    st, st(5)
-0x4CE7B5: call    Double_To_SInt32
+0x4CE7B5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4CE7BA: faddp   st(4), st
 0x4CE7BC: mov     ebx, edi
 0x4CE7BE: fxch    st(3)
@@ -181,7 +181,7 @@
 0x4CE855: jnz     loc_4CEA23
 0x4CE85B: fld     dword ptr ds:0A468E8h
 0x4CE861: push    ecx
-0x4CE862: fstp    [esp+0D4h+var_D4]; float
+0x4CE862: fstp    dword ptr [esp+0D4h+var_D4]; float
 0x4CE865: lea     ebp, [ebx+edi-40h]
 0x4CE869: call    Rand5
 0x4CE86E: fsubr   qword ptr ds:0A3DDD8h

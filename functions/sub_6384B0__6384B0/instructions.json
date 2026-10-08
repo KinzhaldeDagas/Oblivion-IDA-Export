@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6384B0",
-    "line": "sub     esp, 180h",
+    "line": "sub     esp, 180h; HighProcess package-procedure action 1. Its random-social scan is explicitly gated by conversationScanCooldown, decrements that field once when gated or unsuccessful, and resets it to fAItalktoNPCtimer only after successful package creation. Its early radius gate unusually admits a dead candidate long enough to consume chance/recent-target suppression before final rejection.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6384C9",
-    "line": "cmp     byte ptr [esi+228h], 0",
+    "line": "cmp     byte ptr [esi+228h], 0; RadiantAI action-1 does not run its normal package/social scan while HighProcess.dialogueActive is set; it dispatches the dialogue-update path at vslot +0x194 instead.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6385FD",
-    "line": "lea     ecx, [esp+194h+var_14C]",
+    "line": "lea     ecx, [esp+194h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x638645",
-    "line": "mov     [esp+190h+var_14C], ecx",
+    "line": "mov     [esp+190h+pointXYZ], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x638789",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1729,19 +1729,19 @@
   },
   {
     "ea": "0x63886C",
-    "line": "push    ebx",
+    "line": "push    ebx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63886D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63886F",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x6388AF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2137,13 +2137,13 @@
   },
   {
     "ea": "0x63894A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63894C",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x638972",
-    "line": "fcomp   dword ptr [esi+1A8h]",
+    "line": "fcomp   dword ptr [esi+1A8h]; Action-1 random social scan requires conversationScanCooldown <= 0, plus the surrounding package/global/process gates. Its timer is reset only after StartConversationPackage succeeds.",
     "mnemonic": "fcomp",
     "size": 6
   },
@@ -2527,7 +2527,7 @@
   },
   {
     "ea": "0x638A4C",
-    "line": "fld     dword ptr ds:0A57FB8h",
+    "line": "fld     dword ptr ds:0A57FB8h; Second scan's radius cap is 600.0 when the preceding mode flag is clear; otherwise a dynamic cap computed just above is retained.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x638A56",
-    "line": "mov     ecx, offset fAISocialRadiusToTriggerConversation",
+    "line": "mov     ecx, (offset flt_B36778+178h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2563,13 +2563,13 @@
   },
   {
     "ea": "0x638A64",
-    "line": "fstp    [esp+190h+var_17C]",
+    "line": "fstp    [esp+190h+var_17C]; Second HighProcess social scan uses the same exterior/interior conversation-radius GameSettings.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x638A68",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x638A6F",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2599,7 +2599,7 @@
   },
   {
     "ea": "0x638A78",
-    "line": "mov     ecx, offset fAISocialRadiusToTriggerConversationInt",
+    "line": "mov     ecx, (offset flt_B36778+180h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x638A88",
-    "line": "fld     [esp+190h+a1]",
+    "line": "fld     [esp+190h+a1]; Second-scan Oblivion radius quirk: compare the selected exterior/interior social radius with the current cap; if selected radius is smaller, replace the cap with the EXTERIOR radius even in an interior cell.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2659,7 +2659,7 @@
   },
   {
     "ea": "0x638A99",
-    "line": "mov     ecx, offset fAISocialRadiusToTriggerConversation",
+    "line": "mov     ecx, (offset flt_B36778+178h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2683,25 +2683,25 @@
   },
   {
     "ea": "0x638AA9",
-    "line": "lea     ecx, [esp+190h+var_14C]",
+    "line": "lea     ecx, [esp+190h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x638AAD",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x638AAE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638AB0",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; TESObjectREFR::GetDistanceToPoint returns candidate distance to the scan point; reject when it exceeds the effective cap/radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2737,19 +2737,19 @@
   },
   {
     "ea": "0x638AC6",
-    "line": "push    edi",
+    "line": "push    edi; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x638AC7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638AC9",
-    "line": "call    sub_5ED730",
+    "line": "call    Actor__CanStartSocialConversationWith; Action-1 preliminary eligibility is (CanStartSocialConversationWith(candidate, initiator) || candidate.IsDead()). Dead candidates therefore continue into recent-target cooldown and chance processing instead of being rejected here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2761,7 +2761,7 @@
   },
   {
     "ea": "0x638AD0",
-    "line": "jnz     short loc_638AE9",
+    "line": "jnz     short loc_638AE9; If normal social eligibility fails, accept the candidate provisionally only when IsDead is true. Final eligibility later rejects death, but only after the pair may already be recorded in both recent-target lists.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x638AFA",
-    "line": "mov     ecx, offset unk_B36AA8",
+    "line": "mov     ecx, (offset flt_B36A88+20h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2863,7 +2863,7 @@
   },
   {
     "ea": "0x638B08",
-    "line": "fld     dword ptr [esi+198h]",
+    "line": "fld     dword ptr [esi+198h]; With a nonempty recent-target list, decrement recentSocialTargetCooldown once per candidate reaching this block; multiple candidates can consume multiple frame deltas during one scan, as in action 5.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x638B2B",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2929,7 +2929,7 @@
   },
   {
     "ea": "0x638B32",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2995,25 +2995,25 @@
   },
   {
     "ea": "0x638B52",
-    "line": "mov     [esp+190h+a1], ecx",
+    "line": "mov     [esp+190h+a1], ecx; Compiler-expanded rand() % 100 produces the second 0..99 social-conversation chance roll.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x638B56",
-    "line": "push    ebp",
+    "line": "push    ebp; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x638B57",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638B59",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3031,7 +3031,7 @@
   },
   {
     "ea": "0x638B62",
-    "line": "mov     ecx, offset fAISocialchanceForConversation",
+    "line": "mov     ecx, (offset flt_B36778+188h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3055,13 +3055,13 @@
   },
   {
     "ea": "0x638B70",
-    "line": "fstp    [esp+190h+var_17C]",
+    "line": "fstp    [esp+190h+var_17C]; Second social trigger uses the same exterior/interior fAISocialchanceForConversation threshold.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x638B74",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x638B7B",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3091,7 +3091,7 @@
   },
   {
     "ea": "0x638B84",
-    "line": "mov     ecx, offset fAISocialchanceForConversationInterior",
+    "line": "mov     ecx, (offset flt_B36778+190h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3115,7 +3115,7 @@
   },
   {
     "ea": "0x638B94",
-    "line": "fild    [esp+190h+a1]",
+    "line": "fild    [esp+190h+a1]; Second scan uses the same strict threshold: conversation chance must be greater than rand()%100; equality fails.",
     "mnemonic": "fild",
     "size": 4
   },
@@ -3199,7 +3199,7 @@
   },
   {
     "ea": "0x638BC4",
-    "line": "call    BSSimpleList_PushFront",
+    "line": "call    BSSimpleList_PushFront; Record the candidate before final eligibility. This includes the action-1 dead-candidate provisional path, so a dead or otherwise later-rejected actor can consume the random roll and remain suppressed until the recent-target timer clears the list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3229,19 +3229,19 @@
   },
   {
     "ea": "0x638BD5",
-    "line": "call    eax",
+    "line": "call    eax; Second scan also records the initiator in the candidate's recentSocialTargets before final eligibility.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x638BD7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638BD9",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3295,13 +3295,13 @@
   },
   {
     "ea": "0x638BFB",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638BFD",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3325,7 +3325,7 @@
   },
   {
     "ea": "0x638C0C",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3343,19 +3343,19 @@
   },
   {
     "ea": "0x638C1A",
-    "line": "push    edi",
+    "line": "push    edi; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x638C1B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638C1D",
-    "line": "call    sub_5ED730",
+    "line": "call    Actor__CanStartSocialConversationWith; Oblivion social eligibility predicate used only by the two random-conversation scans. Requires a process; in interiors requires |Z(this)-Z(other)| <= 90; rejects process current-package flag 0x1000, dead actors, process mode 9, sub_5E6FA0 state, sleep states other than None/Sitting, and package types accepted by sub_567770; final process metric at vslot +0x15C must be <= 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3547,13 +3547,13 @@
   },
   {
     "ea": "0x638C91",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638C93",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Second social scan applies the same TESPackage::IsTemporaryOverrideType rejection before starting an ambient conversation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3607,7 +3607,7 @@
   },
   {
     "ea": "0x638CAF",
-    "line": "call    eax",
+    "line": "call    eax; Second authoritative ambient handoff: Actor::StartConversationPackage(initiator, candidate, false, null), beginning at stock HELLO FormID 000000D2.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3631,7 +3631,7 @@
   },
   {
     "ea": "0x638CBB",
-    "line": "mov     ecx, offset unk_B36AB0",
+    "line": "mov     ecx, (offset flt_B36A88+28h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3655,7 +3655,7 @@
   },
   {
     "ea": "0x638CCD",
-    "line": "fstp    dword ptr [esi+1A8h]",
+    "line": "fstp    dword ptr [esi+1A8h]; Action 1 reaches this write only after StartConversationPackage returned true; failed starts leave the cooldown unreset and fall through to the single frame-delta decrement at 0x638DDA.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -3763,13 +3763,13 @@
   },
   {
     "ea": "0x638D08",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638D0A",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3787,13 +3787,13 @@
   },
   {
     "ea": "0x638D13",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638D15",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3937,13 +3937,13 @@
   },
   {
     "ea": "0x638D61",
-    "line": "mov     ecx, [eax+8]",
+    "line": "mov     ecx, [eax+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x638D64",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4105,13 +4105,13 @@
   },
   {
     "ea": "0x638DAB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x638DAD",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4129,7 +4129,7 @@
   },
   {
     "ea": "0x638DB5",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; Mirrored partner handoff in the second social trigger: share the initiator's DialoguePackage as the partner's editorPackage, mark it dynamic, then notify the partner process.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4195,7 +4195,7 @@
   },
   {
     "ea": "0x638DDA",
-    "line": "fld     dword ptr [esi+1A8h]",
+    "line": "fld     dword ptr [esi+1A8h]; Action-1 gated/no-success epilogue: subtract exactly one frame delta from conversationScanCooldown. Candidate count does not multiply this decrement.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -4333,7 +4333,7 @@
   },
   {
     "ea": "0x638E34",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4405,7 +4405,7 @@
   },
   {
     "ea": "0x638E62",
-    "line": "fld     [esp+190h+var_14C]",
+    "line": "fld     [esp+190h+pointXYZ]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4483,7 +4483,7 @@
   },
   {
     "ea": "0x638E98",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4543,7 +4543,7 @@
   },
   {
     "ea": "0x638EB9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4555,7 +4555,7 @@
   },
   {
     "ea": "0x638EC0",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4579,7 +4579,7 @@
   },
   {
     "ea": "0x638ECF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4927,7 +4927,7 @@
   },
   {
     "ea": "0x638F83",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5335,7 +5335,7 @@
   },
   {
     "ea": "0x63905D",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5383,19 +5383,19 @@
   },
   {
     "ea": "0x63907A",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63907B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63907D",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5473,13 +5473,13 @@
   },
   {
     "ea": "0x6390AB",
-    "line": "mov     ecx, offset dword_B3B94C",
+    "line": "mov     ecx, offset stru_B3B94C",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6390B0",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5527,7 +5527,7 @@
   },
   {
     "ea": "0x6390C8",
-    "line": "mov     ecx, offset dword_B3B94C",
+    "line": "mov     ecx, offset stru_B3B94C",
     "mnemonic": "mov",
     "size": 5
   },
@@ -5599,7 +5599,7 @@
   },
   {
     "ea": "0x6390EF",
-    "line": "lea     ecx, [esp+19Ch+var_14C]",
+    "line": "lea     ecx, [esp+19Ch+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -6139,7 +6139,7 @@
   },
   {
     "ea": "0x63922E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6295,7 +6295,7 @@
   },
   {
     "ea": "0x63927A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6433,7 +6433,7 @@
   },
   {
     "ea": "0x6392C2",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6541,7 +6541,7 @@
   },
   {
     "ea": "0x6392F2",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6793,7 +6793,7 @@
   },
   {
     "ea": "0x63937F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6805,7 +6805,7 @@
   },
   {
     "ea": "0x639386",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6847,7 +6847,7 @@
   },
   {
     "ea": "0x6393A7",
-    "line": "fsub    [esp+190h+var_14C]",
+    "line": "fsub    [esp+190h+pointXYZ]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -6913,7 +6913,7 @@
   },
   {
     "ea": "0x6393D6",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6979,7 +6979,7 @@
   },
   {
     "ea": "0x639400",
-    "line": "mov     edx, [esp+190h+var_14C]",
+    "line": "mov     edx, [esp+190h+pointXYZ]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7075,7 +7075,7 @@
   },
   {
     "ea": "0x639435",
-    "line": "fsub    [esp+1A8h+var_14C]",
+    "line": "fsub    [esp+1A8h+pointXYZ]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -7339,7 +7339,7 @@
   },
   {
     "ea": "0x6394C1",
-    "line": "push    ecx; float *",
+    "line": "push    ecx; worldXY",
     "mnemonic": "push",
     "size": 1
   },
@@ -7363,7 +7363,7 @@
   },
   {
     "ea": "0x6394CB",
-    "line": "call    TESWorldSpace__GetCellAtPos",
+    "line": "call    TESWorldSpace_GetCellAtWorldPosition",
     "mnemonic": "call",
     "size": 5
   },
@@ -7441,7 +7441,7 @@
   },
   {
     "ea": "0x6394F1",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7645,7 +7645,7 @@
   },
   {
     "ea": "0x639573",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7747,19 +7747,19 @@
   },
   {
     "ea": "0x6395A5",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6395A6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6395A8",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7807,7 +7807,7 @@
   },
   {
     "ea": "0x6395C0",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8095,7 +8095,7 @@
   },
   {
     "ea": "0x639669",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8197,19 +8197,19 @@
   },
   {
     "ea": "0x63969B",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63969C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63969E",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8245,7 +8245,7 @@
   },
   {
     "ea": "0x6396B6",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },

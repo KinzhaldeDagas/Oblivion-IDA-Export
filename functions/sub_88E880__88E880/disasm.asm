@@ -40,7 +40,7 @@
 0x88E8F6: fstp    dword ptr [esi+14h]
 0x88E8F9: mov     eax, [edi+20h]
 0x88E8FC: mov     [esi+20h], eax
-0x88E8FF: call    sub_452A60
+0x88E8FF: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x88E904: mov     edx, [ebp+4Ch]
 0x88E907: push    eax
 0x88E908: mov     ecx, esi
@@ -67,3 +67,12 @@
 0x88E93F: pop     ebx
 0x88E940: add     esp, 10h
 0x88E943: retn    4
+0x9C7C90: lea     ecx, [ebp-10h]; slot
+0x9C7C93: jmp     NiPointerSlot_Release
+0x9C7C98: mov     edx, [esp+arg_4]
+0x9C7C9C: lea     eax, [edx-14h]
+0x9C7C9F: mov     ecx, [edx-18h]
+0x9C7CA2: xor     ecx, eax
+0x9C7CA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7CA9: mov     eax, offset stru_AF0030
+0x9C7CAE: jmp     ___CxxFrameHandler3

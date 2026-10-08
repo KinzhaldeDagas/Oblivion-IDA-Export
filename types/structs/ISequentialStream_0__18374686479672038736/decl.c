@@ -1,1 +1,1 @@
-ISequentialStream_0
+typedef ISequentialStream ISequentialStream_0;

@@ -20,7 +20,7 @@
 0x56A9A7: push    edi; Dst
 0x56A9A8: mov     ecx, esi; a1
 0x56A9AA: setz    bl
-0x56A9AD: call    TESFile_GetChunkData
+0x56A9AD: call    TESFile_GetChunkData; Copy the serialized 0x18-byte CTDA/CTDT body directly into ConditionEntry::Data; no function-index bounds or eval-callback validation occurs during load.
 0x56A9B2: mov     [edi+14h], bl
 0x56A9B5: pop     ebx
 0x56A9B6: pop     edi

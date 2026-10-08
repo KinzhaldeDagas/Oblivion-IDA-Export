@@ -1,7 +1,7 @@
-0x4E4C20: push    ebx
+0x4E4C20: push    ebx; Verified PathGrid child-record predicate. For a candidate TESChildCell, compares its child cell with TESPathGrid.parentCell and delegates on mismatch. For the owning cell, only REFR/ACHR/ACRE records are accepted, and only when the reference is nonpersistent; other record types return false.
 0x4E4C21: push    esi
 0x4E4C22: push    edi
-0x4E4C23: mov     edi, [esp+0Ch+arg_0]
+0x4E4C23: mov     edi, [esp+0Ch+candidate]
 0x4E4C27: movzx   eax, byte ptr [edi+4]
 0x4E4C2B: push    eax
 0x4E4C2C: mov     esi, ecx
@@ -53,7 +53,7 @@
 0x4E4CA5: test    eax, eax
 0x4E4CA7: jz      short loc_4E4C85
 0x4E4CA9: mov     ecx, eax; this
-0x4E4CAB: call    TESObjectREFR_IsPersistent?
+0x4E4CAB: call    TESObjectREFR_IsPersistent
 0x4E4CB0: test    al, al
 0x4E4CB2: jnz     short loc_4E4C85
 0x4E4CB4: pop     ebp

@@ -4,5 +4,5 @@
 0x565E88: mov     ecx, edi
 0x565E8A: call    TESPackage_LocationData_destr
 0x565E8F: push    edi
-0x565E90: call    FormHeapFree
+0x565E90: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x565E95: add     esp, 4

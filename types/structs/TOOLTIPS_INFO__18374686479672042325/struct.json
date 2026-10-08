@@ -1,148 +1,234 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TOOLTIPS_INFO",
+  "definition": "struct TOOLTIPS_INFO\n{\nHWND hwndSelf;\nWCHAR_0 szTipText[1024];\nBOOL bActive;\nBOOL bTrackActive;\nUINT uNumTools;\nCOLORREF clrBk;\nCOLORREF clrText;\nHFONT hFont;\nHFONT hTitleFont;\nINT xTrackPos;\nINT yTrackPos;\nINT nMaxTipWidth;\nINT nTool;\nINT nCurrentTool;\nINT nTrackTool;\nINT nReshowTime;\nINT nAutoPopTime;\nINT nInitialTime;\nRECT rcMargin;\nBOOL bToolBelow;\nLPWSTR pszTitle;\nHICON hTitleIcon;\nTTTOOL_INFO *tools;\n}\n",
   "id": 18374686479672042325,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndSelf",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szTipText",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2048
+      "size": 2048,
+      "type": "WCHAR_0[1024]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bActive",
       "offset": 2052,
       "offset_hex": "0x804",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bTrackActive",
       "offset": 2056,
       "offset_hex": "0x808",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uNumTools",
       "offset": 2060,
-      "offset_hex": "0x80c",
-      "size": 4
+      "offset_hex": "0x80C",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrBk",
       "offset": 2064,
       "offset_hex": "0x810",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrText",
       "offset": 2068,
       "offset_hex": "0x814",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hFont",
       "offset": 2072,
       "offset_hex": "0x818",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hTitleFont",
       "offset": 2076,
-      "offset_hex": "0x81c",
-      "size": 4
+      "offset_hex": "0x81C",
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "xTrackPos",
       "offset": 2080,
       "offset_hex": "0x820",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "yTrackPos",
       "offset": 2084,
       "offset_hex": "0x824",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nMaxTipWidth",
       "offset": 2088,
       "offset_hex": "0x828",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nTool",
       "offset": 2092,
-      "offset_hex": "0x82c",
-      "size": 4
+      "offset_hex": "0x82C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nCurrentTool",
       "offset": 2096,
       "offset_hex": "0x830",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nTrackTool",
       "offset": 2100,
       "offset_hex": "0x834",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nReshowTime",
       "offset": 2104,
       "offset_hex": "0x838",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nAutoPopTime",
       "offset": 2108,
-      "offset_hex": "0x83c",
-      "size": 4
+      "offset_hex": "0x83C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nInitialTime",
       "offset": 2112,
       "offset_hex": "0x840",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rcMargin",
       "offset": 2116,
       "offset_hex": "0x844",
-      "size": 16
+      "size": 16,
+      "type": "RECT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bToolBelow",
       "offset": 2132,
       "offset_hex": "0x854",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszTitle",
       "offset": 2136,
       "offset_hex": "0x858",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hTitleIcon",
       "offset": 2140,
-      "offset_hex": "0x85c",
-      "size": 4
+      "offset_hex": "0x85C",
+      "size": 4,
+      "type": "HICON"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "tools",
       "offset": 2144,
       "offset_hex": "0x860",
-      "size": 4
+      "size": 4,
+      "type": "TTTOOL_INFO *"
     }
   ],
   "name": "TOOLTIPS_INFO",
+  "ordinal": 6573,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 2148
 }

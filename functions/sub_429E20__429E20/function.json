@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x429E20",
+      "0x429E3D"
+    ]
+  ],
+  "chunks_sha256": "673f331dc2d5a567b40a1442243d5180c6d2aca917bee2e76dfd2644cb553af2",
+  "comment_regular": "Verified ExtraGlobal constructor: initializes BSExtraData type 0x28, clears next, installs ExtraGlobal vtable, and stores TESGlobal* at +0x0C; payload size is 16 bytes.",
+  "comment_repeatable": "Verified ExtraGlobal constructor: initializes BSExtraData type 0x28, clears next, installs ExtraGlobal vtable, and stores TESGlobal* at +0x0C; payload size is 16 bytes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_429E20",
+  "display_name": "ExtraGlobal_ctor",
   "end_ea": "0x429E3D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_429E20",
+  "name": "ExtraGlobal_ctor",
   "segment": ".text",
   "sha256": "673f331dc2d5a567b40a1442243d5180c6d2aca917bee2e76dfd2644cb553af2",
   "size": 29,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x429E20",
-  "type": "_BYTE *__thiscall(_BYTE *this, int)",
+  "total_chunk_size": 29,
+  "type": "ExtraGlobal *__thiscall(ExtraGlobal *this, TESGlobal *global)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 1
 }

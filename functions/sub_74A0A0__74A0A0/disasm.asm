@@ -8,29 +8,29 @@
 0x74A0B6: push    edi
 0x74A0B7: lea     esi, [eax+64h]
 0x74A0BA: mov     ecx, 0Dh
-0x74A0BF: lea     edi, [esp+0F8h+var_9C]
+0x74A0BF: lea     edi, [esp+0F8h+local]
 0x74A0C3: rep movsd
 0x74A0C5: mov     esi, [ebx+10h]
 0x74A0C8: add     esi, 64h ; 'd'
 0x74A0CB: mov     ecx, 0Dh
 0x74A0D0: lea     edi, [esp+0F8h+var_68]
-0x74A0D7: lea     eax, [esp+0F8h+var_34]
+0x74A0D7: lea     eax, [esp+0F8h+parent]
 0x74A0DE: rep movsd
 0x74A0E0: push    eax
 0x74A0E1: lea     ecx, [esp+0FCh+var_68]
-0x74A0E8: call    sub_718A80
-0x74A0ED: lea     ecx, [esp+0F8h+var_9C]
-0x74A0F1: push    ecx
-0x74A0F2: lea     edx, [esp+0FCh+var_D0]
-0x74A0F6: push    edx
-0x74A0F7: lea     ecx, [esp+100h+var_34]
-0x74A0FE: call    sub_53D7A0
+0x74A0E8: call    sub_718A80;
+0x74A0ED: lea     ecx, [esp+0F8h+local]
+0x74A0F1: push    ecx; local
+0x74A0F2: lea     edx, [esp+0FCh+out]
+0x74A0F6: push    edx; out
+0x74A0F7: lea     ecx, [esp+100h+parent]; parent
+0x74A0FE: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x74A103: mov     esi, [esp+0F8h+arg_4]
 0x74A10A: push    esi
 0x74A10B: lea     eax, [esp+0FCh+var_DC]
 0x74A10F: push    eax
-0x74A110: lea     ecx, [esp+100h+var_D0]
-0x74A114: call    sub_53D4B0
+0x74A110: lea     ecx, [esp+100h+out]
+0x74A114: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x74A119: mov     ecx, [eax]
 0x74A11B: mov     [esi], ecx
 0x74A11D: mov     edx, [eax+4]
@@ -48,7 +48,7 @@
 0x74A14A: push    ecx
 0x74A14B: lea     edx, [esp+0FCh+var_DC]
 0x74A14F: push    edx
-0x74A150: lea     ecx, [esp+100h+var_D0]
+0x74A150: lea     ecx, [esp+100h+out]
 0x74A154: call    sub_7101F0
 0x74A159: call    _rand
 0x74A15E: mov     [esp+0F8h+var_EC], eax
@@ -61,7 +61,7 @@
 0x74A17E: fmul    dword ptr [ebx+1Ch]
 0x74A181: fadd    dword ptr [ebx+18h]
 0x74A184: fstp    [esp+0F8h+var_EC]
-0x74A188: call    sub_43F350
+0x74A188: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x74A18D: mov     eax, [esp+0F8h+arg_8]
 0x74A194: fstp    st
 0x74A196: fld     [esp+0F8h+var_DC]
@@ -109,7 +109,7 @@
 0x74A22D: fdiv    qword ptr ds:0A3D5A8h
 0x74A233: fsub    qword ptr ds:0A2F928h
 0x74A239: fstp    dword ptr [esi+8]
-0x74A23C: call    sub_43F350
+0x74A23C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x74A241: fstp    st
 0x74A243: call    _rand
 0x74A248: mov     [esp+0F8h+var_EC], eax
@@ -141,7 +141,7 @@
 0x74A29D: push    esi
 0x74A29E: lea     edx, [esp+0FCh+var_E8]
 0x74A2A2: push    edx
-0x74A2A3: lea     ecx, [esp+100h+var_D0]
+0x74A2A3: lea     ecx, [esp+100h+out]
 0x74A2A7: call    sub_7101F0
 0x74A2AC: mov     ecx, [eax]
 0x74A2AE: mov     [esi], ecx

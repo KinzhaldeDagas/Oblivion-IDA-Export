@@ -1,4 +1,4 @@
-0x4F9F60: fld     [esp+arg_8]
+0x4F9F60: fld     [esp+arg_8]; Wrapper for ScriptEffectUpdate: calls ScriptRunner_RunEvent with start=0, finish=0, elapsedSeconds=delta.
 0x4F9F64: mov     eax, [esp+a6]
 0x4F9F68: mov     edx, [esp+a5]
 0x4F9F6C: push    ecx
@@ -12,5 +12,5 @@
 0x4F9F7A: push    ecx; a4
 0x4F9F7B: call    ScriptRunner_GetSingleton
 0x4F9F80: mov     ecx, eax; this
-0x4F9F82: call    Script_RunEvent??
+0x4F9F82: call    ScriptRunner_RunEvent
 0x4F9F87: retn    0Ch

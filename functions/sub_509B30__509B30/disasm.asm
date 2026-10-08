@@ -22,7 +22,7 @@
 0x509B5B: push    eax; a2
 0x509B5C: push    ecx; a1
 0x509B5D: mov     dword ptr [esp+60h+var_14], 0
-0x509B65: call    Script_ExtractArgs
+0x509B65: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x509B6A: add     esp, 20h
 0x509B6D: test    al, al
 0x509B6F: jnz     short loc_509B78
@@ -62,9 +62,9 @@
 0x509BD5: push    eax
 0x509BD6: push    offset aRunning?S; "Running?       %s"
 0x509BDB: call    Interface_ConsolePrint
-0x509BE0: mov     ecx, dword ptr [esp+48h+var_14]
+0x509BE0: mov     ecx, dword ptr [esp+48h+var_14]; this
 0x509BE4: add     esp, 8
-0x509BE7: call    sub_529750
+0x509BE7: call    TESQuest__GetCurrentStage
 0x509BEC: push    eax
 0x509BED: push    offset aCurrentStageD; "Current stage: %d"
 0x509BF2: call    Interface_ConsolePrint
@@ -96,13 +96,13 @@
 0x509C34: mov     ecx, ebx
 0x509C36: call    sub_4FA1B0
 0x509C3B: test    al, al
-0x509C3D: push    0; a3
+0x509C3D: push    0; sourceScript
 0x509C3F: jz      short loc_509C92
 0x509C41: mov     eax, [esi]
-0x509C43: push    eax; ArgList
+0x509C43: push    eax; variableID
 0x509C44: mov     ecx, ebx; this
 0x509C46: mov     [esp+48h+var_C], 0
-0x509C4E: call    sub_4FA110
+0x509C4E: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x509C53: fstp    [esp+40h+var_8]
 0x509C57: lea     ecx, [esp+40h+var_8]
 0x509C5B: push    ecx
@@ -128,11 +128,11 @@
 0x509C96: mov     ecx, [esi+18h]
 0x509C99: mov     edx, [esi]
 0x509C9B: mov     [esp+44h+var_C], ecx
-0x509C9F: push    edx; ArgList
+0x509C9F: push    edx; variableID
 0x509CA0: mov     ecx, ebx; this
 0x509CA2: jz      short loc_509CD7
-0x509CA4: call    sub_4FA110
-0x509CA9: call    Double_To_SInt32
+0x509CA4: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
+0x509CA9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x509CAE: mov     edx, [edi]
 0x509CB0: push    eax
 0x509CB1: mov     eax, [esp+44h+var_C]
@@ -146,7 +146,7 @@
 0x509CCB: mov     eax, [esp+50h+var_10]
 0x509CCF: add     esp, 10h
 0x509CD2: jmp     loc_509C20
-0x509CD7: call    sub_4FA110
+0x509CD7: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x509CDC: mov     eax, [esp+40h+var_C]
 0x509CE0: mov     edx, [edi]
 0x509CE2: sub     esp, 8

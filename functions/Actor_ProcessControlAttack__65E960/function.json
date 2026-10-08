@@ -1,19 +1,32 @@
 {
-  "callees_count": 155,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 60,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "Actor_ProcessControlAttack",
+  "chunks": [
+    [
+      "0x65E960",
+      "0x65F07C"
+    ]
+  ],
+  "chunks_sha256": "b01a87c22e8e9e78163c3b1ce3f2d02f1553f13f4c4fde8c1d074d6d9fd8a534",
+  "comment_regular": "[Controller decode 2026-07-09] Non-player QueryControlState consumer: Attack control 4 held/pressed gates actor weapon attack handling.\n\nTop-level PlayerCharacter attack-control handler; sole direct caller is Player_OnInput at 0x672664. Native ABI is bool __thiscall with no x87/stack arguments. It reads the current process attack gate (vtable +0x138), handles ordinary attack control, and in the Bow lane coordinates AttackBow Hold/release state across third- and first-person ActorAnimData. The prior ST0/ST1 parameters and non-player description were decompiler artifacts.",
+  "comment_repeatable": "Top-level PlayerCharacter attack-control handler; sole direct caller is Player_OnInput at 0x672664. Native ABI is bool __thiscall with no x87/stack arguments. It reads the current process attack gate (vtable +0x138), handles ordinary attack control, and in the Bow lane coordinates AttackBow Hold/release state across third- and first-person ActorAnimData. The prior ST0/ST1 parameters and non-player description were decompiler artifacts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "PlayerCharacter_ProcessAttackControl",
   "end_ea": "0x65F07C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Actor_ProcessControlAttack",
+  "name": "PlayerCharacter_ProcessAttackControl",
   "segment": ".text",
   "sha256": "b01a87c22e8e9e78163c3b1ce3f2d02f1553f13f4c4fde8c1d074d6d9fd8a534",
   "size": 1820,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65E960",
-  "type": "char __usercall@<al>(Actor *@<ecx>, double@<st2>, double@<st1>, double@<st0>)",
+  "total_chunk_size": 1820,
+  "type": "bool __thiscall(PlayerCharacter *this)",
   "xrefs_from_count": 693,
   "xrefs_to_count": 1
 }

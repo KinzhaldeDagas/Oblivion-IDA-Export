@@ -7,9 +7,9 @@
 0x9A55CD: mov     ebx, [esp+0Ch+Str1]
 0x9A55D1: mov     edi, offset unk_B328F0
 0x9A55D6: mov     eax, [edi+4]
-0x9A55D9: push    eax; Str2
-0x9A55DA: push    ebx; Str1
-0x9A55DB: call    __strcmp
+0x9A55D9: push    eax; right
+0x9A55DA: push    ebx; left
+0x9A55DB: call    CRT_StricmpLocaleDispatch
 0x9A55E0: add     esp, 8
 0x9A55E3: test    eax, eax
 0x9A55E5: jz      short loc_9A55FB

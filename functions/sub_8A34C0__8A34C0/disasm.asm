@@ -156,7 +156,7 @@
 0x8A36CC: lea     ecx, [esp+98h+var_84+4]
 0x8A36D0: call    sub_889470
 0x8A36D5: lea     ecx, [esp+90h+var_84+4]
-0x8A36D9: call    sub_4D6830
+0x8A36D9: call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
 0x8A36DE: movaps  xmm0, xmmword ptr ds:0BA7A40h
 0x8A36E5: lea     ecx, [esp+90h+var_84+4]
 0x8A36E9: movaps  [esp+90h+var_70], xmm0
@@ -240,7 +240,7 @@
 0x8A37FB: mov     ecx, [eax+50h]
 0x8A37FE: add     ecx, 0D0h ; 'Ð'
 0x8A3804: jmp     short loc_8A380B
-0x8A3806: mov     ecx, offset stru_BA7A40
+0x8A3806: mov     ecx, offset unk_BA7A40
 0x8A380B: test    eax, eax
 0x8A380D: movaps  xmm2, xmmword ptr ds:0A6DFE0h
 0x8A3814: movaps  xmm5, xmmword ptr [ecx]
@@ -256,7 +256,7 @@
 0x8A3836: mov     eax, [eax+50h]
 0x8A3839: add     eax, 0E0h ; 'à'
 0x8A383E: jmp     short loc_8A3845
-0x8A3840: mov     eax, offset stru_BA7A40
+0x8A3840: mov     eax, offset unk_BA7A40
 0x8A3845: movaps  xmm0, xmmword ptr [eax]
 0x8A3848: mov     eax, [esi]
 0x8A384A: mov     edx, [eax+58h]
@@ -283,7 +283,7 @@
 0x8A388F: test    edi, edi
 0x8A3891: jz      short loc_8A38B7
 0x8A3893: mov     ecx, esi
-0x8A3895: call    sub_89F570
+0x8A3895: call    bhkRefObject_UpdateHavokObject
 0x8A389A: mov     ecx, edi
 0x8A389C: call    sub_8A6410
 0x8A38A1: mov     ecx, [edi+50h]
@@ -293,12 +293,12 @@
 0x8A38AD: push    edx
 0x8A38AE: call    eax
 0x8A38B0: mov     ecx, esi
-0x8A38B2: call    sub_89F570
+0x8A38B2: call    bhkRefObject_UpdateHavokObject
 0x8A38B7: mov     edi, [esi+8]
 0x8A38BA: test    edi, edi
 0x8A38BC: jz      short loc_8A38E2
 0x8A38BE: mov     ecx, esi
-0x8A38C0: call    sub_89F570
+0x8A38C0: call    bhkRefObject_UpdateHavokObject
 0x8A38C5: mov     ecx, edi
 0x8A38C7: call    sub_8A6410
 0x8A38CC: mov     ecx, [edi+50h]
@@ -308,7 +308,7 @@
 0x8A38D8: push    eax
 0x8A38D9: call    edx
 0x8A38DB: mov     ecx, esi
-0x8A38DD: call    sub_89F570
+0x8A38DD: call    bhkRefObject_UpdateHavokObject
 0x8A38E2: mov     ecx, [esp+90h+var_4]
 0x8A38E9: pop     edi
 0x8A38EA: pop     esi

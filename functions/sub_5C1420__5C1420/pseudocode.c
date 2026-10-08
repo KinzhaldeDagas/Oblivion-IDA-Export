@@ -1,68 +1,67 @@
 void __usercall sub_5C1420(int ebp0@<ebp>)
 {
-  UInt32 *v2; // esi
-  TESForm *v3; // eax
-  const char *v4; // eax
-  TESSaveLoad *v5; // ecx
-  _DWORD *v6; // esi
-  _DWORD *v7; // edi
-  _DWORD *v8; // eax
-  TESSaveLoad *v9; // ecx
-  TESForm *v10; // edi
-  _DWORD *v11; // eax
-  int v12; // ecx
-  TESSaveLoad *v13; // ecx
-  UInt32 *v14; // edi
-  UInt32 v15; // esi
-  TESForm *v16; // eax
-  int v17; // ebx
-  TESForm *v18; // ecx
-  UInt32 v19; // eax
+  UInt32 *currentlyLoadingFormHeader; // esi
+  TESForm *v2; // eax
+  const char *v3; // eax
+  TESSaveLoadGame_SerializationView *v4; // ecx
+  char *v5; // esi
+  _DWORD *v6; // edi
+  _DWORD *v7; // eax
+  TESSaveLoadGame_SerializationView *v8; // ecx
+  TESForm *v9; // edi
+  _DWORD *v10; // eax
+  int v11; // ecx
+  TESSaveLoadGame_SerializationView *v12; // ecx
+  UInt32 *v13; // edi
+  unsigned __int8 *bufferCursor; // esi
+  TESForm *v15; // eax
+  int v16; // ebx
+  TESForm *v17; // ecx
+  unsigned int v18; // eax
+  const char *v19; // eax
   const char *v20; // eax
-  const char *v21; // eax
-  UInt32 v22; // edx
+  unsigned int v21; // edx
+  int v22; // [esp-14h] [ebp-38h]
   int v23; // [esp-14h] [ebp-38h]
-  int v24; // [esp-14h] [ebp-38h]
+  int v24; // [esp-10h] [ebp-34h]
   int v25; // [esp-10h] [ebp-34h]
-  int v26; // [esp-10h] [ebp-34h]
-  size_t v27; // [esp-Ch] [ebp-30h]
-  int v28; // [esp-8h] [ebp-2Ch]
-  size_t v29; // [esp-4h] [ebp-28h]
-  size_t v30; // [esp-4h] [ebp-28h]
-  int v31; // [esp-4h] [ebp-28h]
-  int v32; // [esp+4h] [ebp-20h]
-  int v33; // [esp+8h] [ebp-1Ch] BYREF
-  int v34; // [esp+Ch] [ebp-18h]
-  int v35; // [esp+10h] [ebp-14h] BYREF
+  int v26; // [esp-8h] [ebp-2Ch]
+  int v27; // [esp-4h] [ebp-28h]
+  int v28; // [esp-4h] [ebp-28h]
+  unsigned __int8 v29; // [esp+2h] [ebp-22h]
+  unsigned __int8 v30; // [esp+3h] [ebp-21h]
+  unsigned __int16 v31; // [esp+4h] [ebp-20h]
+  int v32; // [esp+8h] [ebp-1Ch] BYREF
+  int v33; // [esp+Ch] [ebp-18h]
+  int destination; // [esp+10h] [ebp-14h] BYREF
   int a1; // [esp+14h] [ebp-10h]
-  int v37; // [esp+18h] [ebp-Ch]
-  _DWORD Dst[2]; // [esp+1Ch] [ebp-8h] BYREF
+  int v36; // [esp+18h] [ebp-Ch]
+  unsigned int Dst[2]; // [esp+1Ch] [ebp-8h] BYREF
 
-  v35 = 0;
-  a1 = 0;
-  if ( sub_45A170() )
+  destination = 0; /*0x5c142e*/
+  a1 = 0; /*0x5c1432*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v29) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, Dst, v29);
+    SaveLoad_LoadData(g_TESSaveLoadGame, Dst, 4u); /*0x5c1450*/
     if ( Dst[0] != 0x4B4F4C42 )
     {
-      v2 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v2 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x5c1464*/
+      if ( currentlyLoadingFormHeader )
       {
-        v3 = TESForm_LookupByFormID(*v2);
-        v4 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v3->vtbl->GetEditorName)(
-                             v3,
-                             *((unsigned __int8 *)v2 + 9),
-                             *(UInt32 *)((char *)v2 + 5));
+        v2 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x5c1471*/
+        v3 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v2->vtbl->GetEditorName)( /*0x5c148c*/
+                             v2,
+                             *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                             *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           ".\\Interface\\Menus\\QuickKeysMenu.cpp",
           0x38F,
-          *v2,
-          v4,
-          v28,
-          v31);
+          *currentlyLoadingFormHeader,
+          v3,
+          v26,
+          v27);
       }
       else
       {
@@ -70,132 +69,128 @@ void __usercall sub_5C1420(int ebp0@<ebp>)
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\Interface\\Menus\\QuickKeysMenu.cpp",
           0x38F,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    v5 = SaveLoad_CurrentSavegame;
-    LODWORD(v30) = 2;
-    a1 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_LoadData((int)v5, &v35, v30);
+    v4 = g_TESSaveLoadGame; /*0x5c14c7*/
+    a1 = (int)g_TESSaveLoadGame->bufferCursor; /*0x5c14d7*/
+    SaveLoad_LoadData(v4, &destination, 2u); /*0x5c14db*/
   }
-  v6 = &quickKeyList_ptr;
-  v37 = 8;
-  LODWORD(v29) = ebp0;
-  do
+  v5 = MEMORY[0xB3B440]; /*0x5c14e0*/
+  v36 = 8; /*0x5c14e5*/
+  v28 = ebp0; /*0x5c14ed*/
+  do /*0x5c1597*/
   {
-    v7 = (_DWORD *)v6[1];
-    while ( v7 )
+    v6 = *((_DWORD **)v5 + 1); /*0x5c14f0*/
+    while ( v6 ) /*0x5c14f5*/
     {
-      v8 = v7;
-      v7 = (_DWORD *)*v7;
-      HIDWORD(v27) = v8;
-      (*(void (__thiscall **)(_DWORD *))(*v6 + 8))(v6);
+      v7 = v6; /*0x5c14f9*/
+      v6 = (_DWORD *)*v6; /*0x5c14fb*/
+      (*(void (__thiscall **)(char *, _DWORD *, int))(*(_DWORD *)v5 + 8))(v5, v7, v28); /*0x5c1503*/
     }
-    LODWORD(v27) = 1;
-    v9 = SaveLoad_CurrentSavegame;
-    v6[3] = 0;
-    v6[1] = 0;
-    v6[2] = 0;
-    SaveLoad_LoadData((int)v9, (char *)&v33 + 3, v27);
-    BYTE2(v33) = 0;
-    if ( HIBYTE(v33) )
+    v8 = g_TESSaveLoadGame; /*0x5c1514*/
+    *((_DWORD *)v5 + 3) = 0; /*0x5c151a*/
+    *((_DWORD *)v5 + 1) = 0; /*0x5c151d*/
+    *((_DWORD *)v5 + 2) = 0; /*0x5c1520*/
+    SaveLoad_LoadData(v8, (char *)&v32 + 3, 1u); /*0x5c1523*/
+    BYTE2(v32) = 0; /*0x5c152c*/
+    if ( HIBYTE(v32) ) /*0x5c1530*/
     {
-      do
+      do /*0x5c158e*/
       {
-        LODWORD(v27) = 4;
-        SaveLoad_LoadFormID(Dst, v27, v29, SHIDWORD(v29), v32);
-        v10 = TESForm_LookupByFormID(a1);
-        if ( v10 )
+        SaveLoad_LoadFormID(g_TESSaveLoadGame, Dst, 4u); /*0x5c153f*/
+        v9 = TESForm_LookupByFormID(a1); /*0x5c154e*/
+        if ( v9 ) /*0x5c1555*/
         {
-          v11 = (_DWORD *)(*(int (__thiscall **)(_DWORD *))(*v6 + 4))(v6);
-          v11[2] = v10;
-          v11[1] = 0;
-          *v11 = v6[1];
-          v12 = v6[1];
-          if ( v12 )
-            *(_DWORD *)(v12 + 4) = v11;
+          v10 = (_DWORD *)(*(int (__thiscall **)(char *))(*(_DWORD *)v5 + 4))(v5); /*0x5c155e*/
+          v10[2] = v9; /*0x5c1560*/
+          v10[1] = 0; /*0x5c1563*/
+          *v10 = *((_DWORD *)v5 + 1); /*0x5c1569*/
+          v11 = *((_DWORD *)v5 + 1); /*0x5c156b*/
+          if ( v11 ) /*0x5c1570*/
+            *(_DWORD *)(v11 + 4) = v10; /*0x5c1572*/
           else
-            v6[2] = v11;
-          ++v6[3];
-          v6[1] = v11;
+            *((_DWORD *)v5 + 2) = v10; /*0x5c1577*/
+          ++*((_DWORD *)v5 + 3); /*0x5c157a*/
+          *((_DWORD *)v5 + 1) = v10; /*0x5c157d*/
         }
-        ++BYTE6(v29);
+        ++v29; /*0x5c158a*/
       }
-      while ( BYTE6(v29) < HIBYTE(v29) );
+      while ( v29 < v30 ); /*0x5c158e*/
     }
-    v6 += 4;
-    --v34;
+    v5 += 0x10; /*0x5c1590*/
+    --v33; /*0x5c1593*/
   }
-  while ( v34 );
-  if ( sub_45A170() )
+  while ( v33 ); /*0x5c1597*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x5c15a3*/
   {
-    v13 = SaveLoad_CurrentSavegame;
-    v14 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v15 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v14 )
+    v12 = g_TESSaveLoadGame; /*0x5c15b1*/
+    v13 = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x5c15b7*/
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x5c15bf*/
+    if ( v13 ) /*0x5c15c2*/
     {
-      v16 = TESForm_LookupByFormID(*v14);
-      v17 = v33;
-      v18 = v16;
-      v19 = v33 + (unsigned __int16)v32;
-      if ( v15 <= v19 )
+      v15 = TESForm_LookupByFormID(*v13); /*0x5c15cb*/
+      v16 = v32; /*0x5c15d0*/
+      v17 = v15; /*0x5c15d4*/
+      v18 = v32 + v31; /*0x5c15db*/
+      if ( (unsigned int)bufferCursor <= v18 ) /*0x5c15e2*/
       {
-        if ( v15 < v19 )
+        if ( (unsigned int)bufferCursor < v18 ) /*0x5c1623*/
         {
-          v21 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v18->vtbl->GetEditorName)(
-                                v18,
-                                *((unsigned __int8 *)v14 + 9),
-                                *(UInt32 *)((char *)v14 + 5));
-          PrintError(
+          v20 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v17->vtbl->GetEditorName)( /*0x5c163a*/
+                                v17,
+                                *((unsigned __int8 *)v13 + 9),
+                                *(UInt32 *)((char *)v13 + 5));
+          PrintError( /*0x5c1659*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
             "%i and flags %08X",
-            v17 + (unsigned __int16)v32 - v15,
+            v16 + v31 - (_DWORD)bufferCursor,
             ".\\Interface\\Menus\\QuickKeysMenu.cpp",
             0x3A3,
-            *v14,
-            v21,
-            v24,
-            v26);
+            *v13,
+            v20,
+            v23,
+            v25);
         }
       }
       else
       {
-        v20 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v18->vtbl->GetEditorName)(
-                              v18,
-                              *((unsigned __int8 *)v14 + 9),
-                              *(UInt32 *)((char *)v14 + 5));
-        PrintError(
+        v19 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v17->vtbl->GetEditorName)( /*0x5c15f5*/
+                              v17,
+                              *((unsigned __int8 *)v13 + 9),
+                              *(UInt32 *)((char *)v13 + 5));
+        PrintError( /*0x5c1614*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-          v15 - (unsigned __int16)v32 - v17,
+          &bufferCursor[-v31 - v16],
           ".\\Interface\\Menus\\QuickKeysMenu.cpp",
           0x3A3,
-          *v14,
-          v20,
-          v23,
-          v25);
+          *v13,
+          v19,
+          v22,
+          v24);
       }
     }
     else
     {
-      v22 = (unsigned __int16)v32 + v33;
-      if ( v15 <= v22 )
+      v21 = v31 + v32; /*0x5c1671*/
+      if ( (unsigned int)bufferCursor <= v21 ) /*0x5c1676*/
       {
-        if ( v15 < v22 )
-          PrintError(
+        if ( (unsigned int)bufferCursor < v21 ) /*0x5c16a0*/
+          PrintError( /*0x5c16bb*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-            v33 + (unsigned __int16)v32 - v15,
+            v32 + v31 - (_DWORD)bufferCursor,
             ".\\Interface\\Menus\\QuickKeysMenu.cpp",
             0x3A3,
-            LOBYTE(v13[1].createdObjectList.next));
+            v12->currentVersion);
       }
       else
       {
-        PrintError(
+        PrintError( /*0x5c1691*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-          v15 - (unsigned __int16)v32 - v33,
+          &bufferCursor[-v31 - v32],
           ".\\Interface\\Menus\\QuickKeysMenu.cpp",
           0x3A3,
-          LOBYTE(v13[1].createdObjectList.next));
+          v12->currentVersion);
       }
     }
   }

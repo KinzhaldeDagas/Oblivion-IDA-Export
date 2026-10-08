@@ -1,4 +1,4 @@
-0x49A200: push    0FFFFFFFFh
+0x49A200: push    0FFFFFFFFh; Pass202/205: WaterSurfaceLoop. Native producer for persistent water height/depth target and updater of WaterShaderProperty pass-data fields for water grid cells.
 0x49A202: push    offset WaterSurfaceLoop_SEH
 0x49A207: mov     eax, large fs:0
 0x49A20D: push    eax
@@ -42,7 +42,7 @@
 0x49A2A6: fstp    [esp+130h+var_114]
 0x49A2AA: add     esp, 8
 0x49A2AD: fld     [esp+128h+var_114]
-0x49A2B1: call    Double_To_SInt32
+0x49A2B1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x49A2B6: mov     ebp, eax
 0x49A2B8: mov     [esp+128h+var_F0], ebp
 0x49A2BC: xor     ebx, ebx
@@ -94,14 +94,14 @@
 0x49A339: push    0Dh; a3
 0x49A33B: push    ecx; a2
 0x49A33C: mov     ecx, ds:0B42F50h; this
-0x49A342: call    BSTextureManager_GetDefaultRenderTarget
+0x49A342: call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.
 0x49A347: push    eax; a2
 0x49A348: mov     ecx, ebx; this
 0x49A34A: call    NiSmartPointer_Set??
 0x49A34F: movzx   edx, word ptr ds:0B42EACh
 0x49A356: push    5
 0x49A358: mov     [esp+12Ch+var_10C], edx
-0x49A35C: call    sub_7B4890
+0x49A35C: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x49A361: push    124h; Size
 0x49A366: call    FormHeapAlloc
 0x49A36B: add     esp, 8
@@ -196,9 +196,9 @@
 0x49A4C8: push    edx; a2
 0x49A4C9: mov     ecx, ebp; this
 0x49A4CB: call    Camera_SetFrustum
-0x49A4D0: push    0
-0x49A4D2: lea     ecx, [esp+12Ch+var_9C]
-0x49A4D9: call    NiCullingProcess_NiCullingProcess
+0x49A4D0: push    0; visibleArray
+0x49A4D2: lea     ecx, [esp+12Ch+self]; self
+0x49A4D9: call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
 0x49A4DE: lea     eax, [esp+128h+a2]
 0x49A4E2: push    eax; a2
 0x49A4E3: mov     ecx, ebp; this
@@ -209,28 +209,28 @@
 0x49A4F6: push    ecx
 0x49A4F7: mov     ecx, ebp; this
 0x49A4F9: fstp    [esp+130h+var_130]; a2
-0x49A4FC: call    NiAVObject_UpdateNiAVObject
+0x49A4FC: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x49A501: lea     ecx, [ebp+0ECh]
 0x49A507: push    ecx; a2
-0x49A508: lea     ecx, [esp+12Ch+var_9C]; this
-0x49A50F: mov     [esp+12Ch+var_9C.Camera], ebp
-0x49A516: call    NiCullingProcess__SetFrustum
+0x49A508: lea     ecx, [esp+12Ch+self]; this
+0x49A50F: mov     [esp+12Ch+self.Camera], ebp
+0x49A516: call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.
 0x49A51B: push    3
-0x49A51D: call    nullsub_returnTrue_0arg
+0x49A51D: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x49A522: fild    dword ptr ds:0B070E8h
 0x49A528: add     esp, 4
 0x49A52B: fstp    dword ptr ds:0B44EE4h
 0x49A531: mov     ecx, [ebx]
-0x49A533: call    BSRenderedTexture__UseTextureToRender
+0x49A533: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x49A538: push    eax; a2
 0x49A539: push    7; a1
-0x49A53B: call    NiRenderer_BeginScene
+0x49A53B: call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.
 0x49A540: mov     ecx, ds:0B3F928h
 0x49A546: add     esp, 8
 0x49A549: push    ebp
-0x49A54A: call    SetCameraViewProj
+0x49A54A: call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.
 0x49A54F: mov     ebx, ds:0B3F928h
-0x49A555: call    InitBSShaderAccumulator
+0x49A555: call    BSShaderAccumulator_GetOrCreateGlobal
 0x49A55A: mov     esi, [ebx+8]
 0x49A55D: mov     edi, eax
 0x49A55F: cmp     esi, edi
@@ -255,13 +255,13 @@
 0x49A58A: add     edi, 4
 0x49A58D: push    edi; lpAddend
 0x49A58E: call    dword ptr ds:0A28078h
-0x49A594: call    InitBSShaderAccumulator
+0x49A594: call    BSShaderAccumulator_GetOrCreateGlobal
 0x49A599: mov     edx, [eax]
 0x49A59B: mov     ecx, eax
 0x49A59D: mov     eax, [edx+4Ch]
 0x49A5A0: push    ebp
 0x49A5A1: call    eax
-0x49A5A3: call    InitBSShaderAccumulator
+0x49A5A3: call    BSShaderAccumulator_GetOrCreateGlobal
 0x49A5A8: mov     byte ptr [eax+21E0h], 1
 0x49A5AF: mov     eax, ds:0B06A2Ch
 0x49A5B4: xor     ebp, ebp
@@ -282,7 +282,7 @@
 0x49A5E5: mov     eax, [edx+8]
 0x49A5E8: mov     ecx, [eax]
 0x49A5EA: push    4
-0x49A5EC: call    NiNode_GetNiPropertyByID
+0x49A5EC: call    NiNode_GetNiPropertyByID;
 0x49A5F1: mov     ecx, [esp+128h+var_F0]
 0x49A5F5: cmp     ebp, ecx
 0x49A5F7: mov     esi, eax
@@ -307,12 +307,12 @@
 0x49A63F: shr     edx, 1
 0x49A641: test    dl, 1
 0x49A644: jz      loc_49A6D9
-0x49A64A: mov     byte ptr [esi+72h], 1
+0x49A64A: mov     byte ptr [esi+72h], 1; Pass205: WaterSurfaceLoop sets WaterShaderProperty +0x72=1 for cells with cell->flags0 bit 1 set.
 0x49A64E: xor     ebp, ebp
 0x49A650: mov     ecx, [ebx]
 0x49A652: push    0
 0x49A654: push    ebp
-0x49A655: call    sub_441800
+0x49A655: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x49A65A: mov     edi, eax
 0x49A65C: cmp     word ptr [edi+0B6h], 0
 0x49A664: jbe     short loc_49A6B8
@@ -321,7 +321,7 @@
 0x49A66E: test    ecx, ecx
 0x49A670: jz      short loc_49A6B8
 0x49A672: push    4
-0x49A674: call    NiNode_GetNiPropertyByID
+0x49A674: call    NiNode_GetNiPropertyByID;
 0x49A679: mov     esi, eax
 0x49A67B: test    esi, esi
 0x49A67D: jz      short loc_49A6B4
@@ -343,21 +343,21 @@
 0x49A6A8: fsubr   qword ptr ds:0A3F3C8h
 0x49A6AE: fstp    dword ptr [esi+0A0h]
 0x49A6B4: mov     esi, [esp+128h+var_F4]
-0x49A6B8: lea     ecx, [esp+128h+var_9C]
+0x49A6B8: lea     ecx, [esp+128h+self]
 0x49A6BF: push    ecx; a2
 0x49A6C0: mov     ecx, edi; this
-0x49A6C2: call    NiAVObject_Render
+0x49A6C2: call    NiAVObject_Render; Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.
 0x49A6C7: add     ebp, 1
 0x49A6CA: cmp     ebp, 4
 0x49A6CD: jl      short loc_49A650
 0x49A6CF: mov     edi, [esp+128h+var_110]
 0x49A6D3: mov     ebp, [esp+128h+var_114]
 0x49A6D7: jmp     short loc_49A6DD
-0x49A6D9: mov     byte ptr [esi+72h], 0
+0x49A6D9: mov     byte ptr [esi+72h], 0; Pass205: WaterSurfaceLoop clears WaterShaderProperty +0x72 when current cell flag is not set.
 0x49A6DD: mov     eax, [esp+128h+var_104]
 0x49A6E1: mov     edx, [esp+128h+var_108]
-0x49A6E5: mov     [esi+74h], eax
-0x49A6E8: mov     [esi+78h], edx
+0x49A6E5: mov     [esi+74h], eax; Pass205: WaterSurfaceLoop writes WaterShaderProperty +0x74 from rolling cell/grid counter v57.
+0x49A6E8: mov     [esi+78h], edx; Pass205: WaterSurfaceLoop writes WaterShaderProperty +0x78 from rolling cell/grid counter v56.
 0x49A6EB: mov     ecx, ds:0B070E0h
 0x49A6F1: add     eax, 1
 0x49A6F4: add     ecx, 0FFFFFFFFh
@@ -369,27 +369,27 @@
 0x49A709: mov     [esp+128h+var_104], 0
 0x49A711: add     edi, 1
 0x49A714: jmp     loc_49A5C4
-0x49A719: mov     byte ptr [esi+72h], 0
+0x49A719: mov     byte ptr [esi+72h], 0; Pass205: WaterSurfaceLoop clears WaterShaderProperty +0x72 on out-of-range/break path.
 0x49A71D: mov     eax, ds:0B06A2Ch
 0x49A722: add     edi, 1
 0x49A725: jmp     loc_49A5C4
 0x49A72A: add     ebp, 1
 0x49A72D: jmp     loc_49A5B6
-0x49A732: call    InitBSShaderAccumulator
+0x49A732: call    BSShaderAccumulator_GetOrCreateGlobal
 0x49A737: mov     byte ptr [eax+21E1h], 1
-0x49A73E: call    InitBSShaderAccumulator
+0x49A73E: call    BSShaderAccumulator_GetOrCreateGlobal
 0x49A743: mov     edx, [eax]
 0x49A745: mov     ecx, eax
 0x49A747: mov     eax, [edx+50h]
 0x49A74A: call    eax
-0x49A74C: call    NiRenderer_EndScene
+0x49A74C: call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.
 0x49A751: mov     ecx, [esp+128h+var_10C]
 0x49A755: push    ecx
-0x49A756: call    sub_7B4890
+0x49A756: call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.
 0x49A75B: fldz
 0x49A75D: push    2
 0x49A75F: fstp    dword ptr ds:0B44EE4h
-0x49A765: call    nullsub_returnTrue_0arg
+0x49A765: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x49A76A: mov     edx, ds:0B333A0h
 0x49A770: mov     ecx, [edx+8]
 0x49A773: add     esp, 8
@@ -423,7 +423,7 @@
 0x49A7D7: lea     eax, [esp+128h+var_114]
 0x49A7DB: mov     [esp+128h+var_FC], 1
 0x49A7E3: test    byte ptr [esp+128h+var_FC], 1
-0x49A7E8: mov     edi, [eax]
+0x49A7E8: mov     edi, [eax]; Pass202: Begins native copy of rendered water target into WaterShader::Unk104[2] global slot 0x00B45DCC.
 0x49A7EA: jz      short loc_49A808
 0x49A7EC: test    esi, esi
 0x49A7EE: jz      short loc_49A808
@@ -461,10 +461,10 @@
 0x49A842: jz      short loc_49A84E
 0x49A844: add     edi, 4
 0x49A847: push    edi; lpAddend
-0x49A848: call    dword ptr ds:0A28078h
-0x49A84E: lea     ecx, [esp+128h+var_9C]; this
+0x49A848: call    dword ptr ds:0A28078h; Pass202: Completes/refcounts native WaterShader::Unk104[2] height/depth texture assignment.
+0x49A84E: lea     ecx, [esp+128h+self]; this
 0x49A855: mov     byte ptr [esp+128h+var_4], 1
-0x49A85D: call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)
+0x49A85D: call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
 0x49A862: mov     esi, [esp+128h+var_100]
 0x49A866: lea     ecx, [esi+4]
 0x49A869: push    ecx; lpAddend
@@ -486,3 +486,19 @@
 0x49A89B: pop     ebx
 0x49A89C: add     esp, 114h
 0x49A8A2: retn
+0x9B18E0: mov     eax, [ebp-114h]
+0x9B18E6: push    eax
+0x9B18E7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B18EC: pop     ecx
+0x9B18ED: retn
+0x9B18EE: lea     ecx, [ebp-0C4h]; slot
+0x9B18F4: jmp     NiPointerSlot_Release
+0x9B18F9: lea     ecx, [ebp-9Ch]; this
+0x9B18FF: jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.
+0x9B1904: mov     edx, [esp+arg_4]
+0x9B1908: lea     eax, [edx-118h]
+0x9B190E: mov     ecx, [edx-11Ch]
+0x9B1914: xor     ecx, eax
+0x9B1916: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B191B: mov     eax, offset stru_ADDA64
+0x9B1920: jmp     ___CxxFrameHandler3

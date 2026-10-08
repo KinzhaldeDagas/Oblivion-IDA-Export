@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4CA9D1",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+detachTime]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x4CA9DB",
-    "line": "push    edi",
+    "line": "push    edi; detachTime",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CA9DC",
-    "line": "lea     ecx, [esi+28h]",
+    "line": "lea     ecx, [esi+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4CA9DF",
-    "line": "call    ExtraDataList?_SetDetachTime",
+    "line": "call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x806210: push    0FFFFFFFFh
+0x806210: push    0FFFFFFFFh; BloodOnDeath decode 2026-05-30: registers/builds GeometryDecalShader. Static/skinned declarations and render passes only; no blood emission or trail count is decided here.
 0x806212: push    offset SEH_806210
 0x806217: mov     eax, large fs:0
 0x80621D: push    eax
@@ -25,11 +25,11 @@
 0x806258: jmp     short loc_80625C
 0x80625A: xor     edi, edi
 0x80625C: mov     eax, ds:0B43104h
-0x806261: push    1; StreamCount
-0x806263: push    2; a2
-0x806265: push    eax; a1
+0x806261: push    1; streamCount
+0x806263: push    2; elementCount
+0x806265: push    eax; renderer
 0x806266: mov     [esp+30h+var_4], 0FFFFFFFFh
-0x80626E: call    CreateDX9ShaderDeclaration
+0x80626E: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x806273: mov     ebp, ds:0A2807Ch
 0x806279: mov     esi, eax
 0x80627B: mov     eax, ds:0B47604h
@@ -84,10 +84,10 @@
 0x8062EC: push    ebx; lpAddend
 0x8062ED: call    dword ptr ds:0A28078h
 0x8062F3: mov     ecx, ds:0B43104h
-0x8062F9: push    1; StreamCount
-0x8062FB: push    4; a2
-0x8062FD: push    ecx; a1
-0x8062FE: call    CreateDX9ShaderDeclaration
+0x8062F9: push    1; streamCount
+0x8062FB: push    4; elementCount
+0x8062FD: push    ecx; renderer
+0x8062FE: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x806303: mov     esi, eax
 0x806305: mov     eax, ds:0B47608h
 0x80630A: add     esp, 0Ch
@@ -176,7 +176,7 @@
 0x8063D0: call    eax
 0x8063D2: test    eax, eax
 0x8063D4: jz      short loc_8063E4
-0x8063D6: cmp     eax, offset dword_B3F684
+0x8063D6: cmp     eax, offset stru_B3F684
 0x8063DB: jz      short loc_8063E4
 0x8063DD: mov     eax, [eax+4]
 0x8063E0: test    eax, eax
@@ -199,9 +199,9 @@
 0x806418: mov     [esp+24h+var_4], 0FFFFFFFFh
 0x806420: call    eax
 0x806422: mov     ecx, esi
-0x806424: call    sub_805320
+0x806424: call    sub_805320; BloodOnDeath decode: compiles/binds geometry-decal shader programs; MAXDECALS lives inside shader setup.
 0x806429: mov     ecx, esi
-0x80642B: call    sub_805670
+0x80642B: call    sub_805670; BloodOnDeath decode: allocates/configures render passes. Draw plumbing, not decal spawn throttling.
 0x806430: mov     edx, [esi]
 0x806432: mov     eax, [edx+88h]
 0x806438: mov     ecx, esi
@@ -243,3 +243,20 @@
 0x806489: pop     ebx
 0x80648A: add     esp, 10h
 0x80648D: retn
+0x9C57A0: mov     eax, [ebp-10h]
+0x9C57A3: push    eax
+0x9C57A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57A9: pop     ecx
+0x9C57AA: retn
+0x9C57AB: mov     eax, [ebp-10h]
+0x9C57AE: push    eax
+0x9C57AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57B4: pop     ecx
+0x9C57B5: retn
+0x9C57B6: mov     edx, [esp+arg_4]
+0x9C57BA: lea     eax, [edx-14h]
+0x9C57BD: mov     ecx, [edx-18h]
+0x9C57C0: xor     ecx, eax
+0x9C57C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C57C7: mov     eax, offset stru_AEDF40
+0x9C57CC: jmp     ___CxxFrameHandler3

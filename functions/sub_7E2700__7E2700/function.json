@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7E2700",
+      "0x7E27E4"
+    ],
+    [
+      "0x9D7DE0",
+      "0x9D7E06"
+    ]
+  ],
+  "chunks_sha256": "f5d7590f5a98a5f5dcefca9fd979c1e7551709479c2ae43b851a9c5a2b3d696f",
+  "comment_regular": "\n\n[2026-10-03 render mode correction] Global 0xB42EAC is render mode for alternate pass-list selection, not shader-package/profile identity. Modes5/6 return lists+38/+48 without normal pass construction. Plugin delegates these cases to this native routine. Pixel-profile branch in Frond LoadPrograms uses separate DWORD 0xB42F48 at 0x80E314.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_7E2700",
   "end_ea": "0x7E27E4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_7E2700",
   "segment": ".text",
   "sha256": "d8c121349689ed80ad361256d5181b6dcf6d1571db6be472d0ff906bcbf797a4",
   "size": 228,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E2700",
-  "type": "NiTList_NiProperty *__thiscall(BSShaderProperty *this, int, int, int, int)",
-  "xrefs_from_count": 79,
+  "total_chunk_size": 266,
+  "type": "NiTList_NiProperty *__thiscall(BSShaderProperty *this, void *vtable, RenderPass_DecodedLayout *, int, int)",
+  "xrefs_from_count": 93,
   "xrefs_to_count": 3
 }

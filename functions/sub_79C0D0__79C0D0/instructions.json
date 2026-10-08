@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79C0D0",
-    "line": "push    esi",
+    "line": "push    esi; Orders three SFrondGuide samples in descending fuzzySurfaceArea order using full-guide swaps. This is the median/pivot primitive for the guide introsort partitioner.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C0D1",
-    "line": "mov     esi, [esp+4+arg_4]",
+    "line": "mov     esi, [esp+4+middle]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x79C0D9",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x79C0E9",
-    "line": "push    edi",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C0EA",
-    "line": "push    esi",
+    "line": "push    esi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C0EB",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x79C0F3",
-    "line": "mov     ecx, [esp+8+arg_8]",
+    "line": "mov     ecx, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x79C106",
-    "line": "push    esi",
+    "line": "push    esi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C107",
-    "line": "push    ecx",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C108",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,19 +187,19 @@
   },
   {
     "ea": "0x79C11F",
-    "line": "push    edi",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C120",
-    "line": "push    esi",
+    "line": "push    esi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79C121",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },

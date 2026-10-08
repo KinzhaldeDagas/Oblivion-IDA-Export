@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x46B4C0",
+      "0x46B4FA"
+    ]
+  ],
+  "chunks_sha256": "e3cead839b584ef20eba3e508245ffdc45a9cf3b265778cb157c73b91d3e6d27",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "0x46B4CB: Oblivion outer save/tombstone branch verified 2026-10-01: TESForm_SaveForm tests PARTIAL flag0x4000 here and returns false at0x46B4CD without invoking the virtual form writer. Otherwise deleted flag0x20 selects TESFile_WriteEmptyFormRecord at0x46B4E1 then closes; it never invokes TESWorldSpace_WriteRecord. A deleted WRLD emits no SNAM/payload, and partial+deleted is skipped. Non-deleted WRLD zero/nonzero SNAM policy is at TESWorldSpace_WriteRecord0x4F1214.\n\n0x46b4cb: WRLD-SNAM deleted-save behavior verified 2026-10-01: TESForm_SaveForm at0x46B4C0 returns false for PARTIAL flag0x4000 at0x46B4CB. Otherwise deleted flag0x20 selects TESFile_WriteEmptyFormRecord/CloseForm and bypasses the virtual full WRLD writer. Deleted music candidates may replay on load, but the native saved shape has no SNAM; partial+deleted is not saved by this entry point.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESForm_SaveForm",
   "end_ea": "0x46B4FA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESForm_SaveForm",
   "segment": ".text",
   "sha256": "e3cead839b584ef20eba3e508245ffdc45a9cf3b265778cb157c73b91d3e6d27",
   "size": 58,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46B4C0",
+  "total_chunk_size": 58,
   "type": "char __thiscall(TESForm *this, Data *file)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 82

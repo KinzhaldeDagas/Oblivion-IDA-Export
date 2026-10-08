@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x608B60",
-    "line": "push    ebp",
+    "line": "push    ebp; ArrowProjectile complete destructor; releases projectile-owned state, then invokes MobileObject destruction and returns this.",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x608BA8",
-    "line": "sub     dword ptr ds:0B3B7D0h, 1",
+    "line": "sub     dword ptr ds:0B3B7D0h, 1; ArrowProjectile destruction decrements g_liveArrowProjectileCount, balancing initialization/construction accounting.",
     "mnemonic": "sub",
     "size": 7
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x608BB0",
-    "line": "mov     ecx, offset ActorProcessManager_ptr.unk4C",
+    "line": "mov     ecx, (offset qword_B3BB2C+224h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x608BD5",
-    "line": "push    eax",
+    "line": "push    eax; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x608BD6",
-    "line": "call    sub_480340",
+    "line": "call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x608C0C",
-    "line": "cmp     byte ptr [esi+94h], 0",
+    "line": "cmp     byte ptr [esi+94h], 0; Destructor skips live target/collision detach notification while +0x94 says the embedded collision link is still an unresolved post-load fixup.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x608C5A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -640,5 +640,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2F30",
+    "line": "mov     ecx, [ebp+var_34]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F33",
+    "line": "jmp     MobileObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F38",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2F3C",
+    "line": "lea     eax, [edx-34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F3F",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F42",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2F44",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F49",
+    "line": "add     eax, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F4C",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2F4F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2F51",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F56",
+    "line": "mov     eax, offset stru_AEBC4C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2F5B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,1 @@
-LDT_ENTRY
+typedef _LDT_ENTRY LDT_ENTRY;

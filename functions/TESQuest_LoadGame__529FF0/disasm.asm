@@ -24,15 +24,15 @@
 0x52A032: xor     ebx, ebx
 0x52A034: mov     [esp+44h+a1.member.flags], edi
 0x52A038: mov     [esp+44h+a1.member.refID], ebx
-0x52A03C: call    sub_45A170
+0x52A03C: call    TESSaveLoadGame_UseSaveGameBlocks
 0x52A041: test    al, al
 0x52A043: jz      loc_52A0EA
-0x52A049: mov     ecx, ds:0B33B00h
-0x52A04F: push    4; Size
-0x52A051: lea     edx, [esp+48h+var_18]
-0x52A055: push    edx; Dst
-0x52A056: call    SaveLoad_LoadData
-0x52A05B: cmp     dword ptr [esp+44h+var_18], 4B4F4C42h
+0x52A049: mov     ecx, ds:0B33B00h; self
+0x52A04F: push    4; byteCount
+0x52A051: lea     edx, [esp+48h+destination]
+0x52A055: push    edx; destination
+0x52A056: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x52A05B: cmp     [esp+44h+destination], 4B4F4C42h
 0x52A063: jz      short loc_52A0CD
 0x52A065: mov     eax, ds:0B33B00h
 0x52A06A: mov     esi, [eax+80h]
@@ -40,7 +40,7 @@
 0x52A072: jz      short loc_52A0B1
 0x52A074: mov     eax, [esi]
 0x52A076: push    eax; a1
-0x52A077: call    TESForm_LookupByFormID
+0x52A077: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52A07C: mov     ecx, [esi+5]
 0x52A07F: movzx   edx, byte ptr [esi+9]
 0x52A083: add     esp, 4
@@ -66,43 +66,43 @@
 0x52A0C0: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x52A0C5: call    PrintError
 0x52A0CA: add     esp, 10h
-0x52A0CD: mov     ecx, ds:0B33B00h
+0x52A0CD: mov     ecx, ds:0B33B00h; self
 0x52A0D3: mov     eax, [ecx+14h]
-0x52A0D6: push    2; Size
+0x52A0D6: push    2; byteCount
 0x52A0D8: lea     edx, [esp+48h+a1.member.flags]
-0x52A0DC: push    edx; Dst
+0x52A0DC: push    edx; destination
 0x52A0DD: mov     [esp+4Ch+a1.member.refID], eax
-0x52A0E1: call    SaveLoad_LoadData
+0x52A0E1: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x52A0E6: mov     ebx, [esp+44h+a1.member.refID]
 0x52A0EA: test    byte ptr [esp+44h+Dst], 4
 0x52A0EF: jz      short loc_52A106
-0x52A0F1: push    1; a2
+0x52A0F1: push    1; byteCount
 0x52A0F3: lea     eax, [esp+48h+a1.vtbl+2]
-0x52A0F7: push    eax; a1
-0x52A0F8: mov     ecx, ebp
-0x52A0FA: call    TESForm_LoadDataFromCurrentSaveGame
+0x52A0F7: push    eax; destination
+0x52A0F8: mov     ecx, ebp; self
+0x52A0FA: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x52A0FF: mov     cl, byte ptr [esp+44h+a1.vtbl+2]
 0x52A103: mov     [ebp+3Ch], cl
 0x52A106: test    [esp+44h+Dst], 10000000h
 0x52A10E: jz      loc_52A2D7
-0x52A114: push    1; a2
+0x52A114: push    1; byteCount
 0x52A116: lea     edx, [esp+48h+a1.vtbl+1]
-0x52A11A: push    edx; a1
-0x52A11B: mov     ecx, ebp
-0x52A11D: call    TESForm_LoadDataFromCurrentSaveGame
+0x52A11A: push    edx; destination
+0x52A11B: mov     ecx, ebp; self
+0x52A11D: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x52A122: cmp     byte ptr [esp+44h+a1.vtbl+1], 0
 0x52A127: mov     [esp+44h+a1.member.modlist.next], edi
 0x52A12B: jbe     loc_52A2CC
-0x52A131: push    1; a2
+0x52A131: push    1; byteCount
 0x52A133: lea     eax, [esp+48h+arg_4]
-0x52A137: push    eax; a1
-0x52A138: mov     ecx, ebp
-0x52A13A: call    TESForm_LoadDataFromCurrentSaveGame
-0x52A13F: push    1; a2
+0x52A137: push    eax; destination
+0x52A138: mov     ecx, ebp; self
+0x52A13A: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x52A13F: push    1; byteCount
 0x52A141: lea     ecx, [esp+48h+a1.vtbl+3]
-0x52A145: push    ecx; a1
-0x52A146: mov     ecx, ebp
-0x52A148: call    TESForm_LoadDataFromCurrentSaveGame
+0x52A145: push    ecx; destination
+0x52A146: mov     ecx, ebp; self
+0x52A148: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x52A14D: lea     eax, [ebp+40h]
 0x52A150: test    eax, eax
 0x52A152: jz      short loc_52A16D
@@ -126,27 +126,27 @@
 0x52A183: push    offset aCouldNotFin_11; "Could not find stage %i in quest %s dur"...
 0x52A188: call    PrintError
 0x52A18D: add     esp, 0Ch
-0x52A190: push    1; a2
+0x52A190: push    1; byteCount
 0x52A192: lea     ecx, [esp+48h+a1]
-0x52A196: push    ecx; a1
-0x52A197: mov     ecx, ebp
-0x52A199: call    TESForm_LoadDataFromCurrentSaveGame
+0x52A196: push    ecx; destination
+0x52A197: mov     ecx, ebp; self
+0x52A199: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
 0x52A19E: cmp     byte ptr [esp+44h+a1.vtbl], 0
 0x52A1A3: mov     [esp+44h+a1.member.modlist.data], 0
 0x52A1AB: jbe     loc_52A2B0
 0x52A1B1: lea     ecx, [esp+44h+a1.member]
 0x52A1B5: call    sub_47D260
-0x52A1BA: push    1; a2
+0x52A1BA: push    1; byteCount
 0x52A1BC: lea     edx, [esp+48h+var_14]
-0x52A1C0: push    edx; a1
-0x52A1C1: mov     ecx, ebp
+0x52A1C0: push    edx; destination
+0x52A1C1: mov     ecx, ebp; self
 0x52A1C3: mov     [esp+4Ch+var_4], 0
-0x52A1CB: call    TESForm_LoadDataFromCurrentSaveGame
-0x52A1D0: mov     ecx, ds:0B33B00h
-0x52A1D6: push    4; Size
+0x52A1CB: call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.
+0x52A1D0: mov     ecx, ds:0B33B00h; self
+0x52A1D6: push    4; byteCount
 0x52A1D8: lea     eax, [esp+48h+a1.member]
-0x52A1DC: push    eax; Dst
-0x52A1DD: call    SaveLoad_LoadData
+0x52A1DC: push    eax; destination
+0x52A1DD: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x52A1E2: test    ebx, ebx
 0x52A1E4: jz      loc_52A287
 0x52A1EA: mov     ecx, [esp+44h+var_14]
@@ -167,10 +167,10 @@
 0x52A21C: mov     edi, [esi+64h]
 0x52A21F: test    edi, edi
 0x52A221: jz      short loc_52A287
-0x52A223: mov     ecx, edi; void *
-0x52A225: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x52A223: mov     ecx, edi; this
+0x52A225: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x52A22A: push    edi
-0x52A22B: call    FormHeapFree
+0x52A22B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52A230: add     esp, 4
 0x52A233: mov     dword ptr [esi+64h], 0
 0x52A23A: jmp     short loc_52A287
@@ -199,9 +199,9 @@
 0x52A280: jmp     short loc_52A284
 0x52A282: xor     eax, eax
 0x52A284: mov     [esi+64h], eax
-0x52A287: lea     ecx, [esp+44h+a1.member]; void *
+0x52A287: lea     ecx, [esp+44h+a1.member]; this
 0x52A28B: mov     [esp+44h+var_4], 0FFFFFFFFh
-0x52A293: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x52A293: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x52A298: mov     eax, [esp+44h+a1.member.modlist.data]
 0x52A29C: movzx   edx, byte ptr [esp+44h+a1.vtbl]
 0x52A2A1: add     eax, 1
@@ -244,14 +244,14 @@
 0x52A323: mov     ecx, esi
 0x52A325: call    ScriptEventList_destr??
 0x52A32A: push    esi
-0x52A32B: call    FormHeapFree
+0x52A32B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x52A330: add     esp, 4
 0x52A333: mov     eax, ds:0B33B00h
 0x52A338: or      [eax+50h], edi
 0x52A33B: jmp     short loc_52A342
 0x52A33D: call    ScriptEventList_Load?
 0x52A342: mov     ecx, ds:0B33B00h
-0x52A348: call    sub_45A170
+0x52A348: call    TESSaveLoadGame_UseSaveGameBlocks
 0x52A34D: test    al, al
 0x52A34F: jz      loc_52A44B
 0x52A355: mov     ecx, ds:0B33B00h
@@ -261,7 +261,7 @@
 0x52A366: jz      loc_52A401
 0x52A36C: mov     edx, [edi]
 0x52A36E: push    edx; a1
-0x52A36F: call    TESForm_LookupByFormID
+0x52A36F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52A374: mov     ecx, eax
 0x52A376: movzx   eax, word ptr [esp+48h+a1.member.flags]
 0x52A37B: add     eax, ebx
@@ -342,3 +342,22 @@
 0x52A45A: pop     ebx
 0x52A45B: add     esp, 30h
 0x52A45E: retn    8
+0x9B8400: lea     ecx, [ebp-2Ch]; this
+0x9B8403: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9B8408: mov     eax, [ebp-10h]
+0x9B840B: push    eax
+0x9B840C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B8411: pop     ecx
+0x9B8412: retn
+0x9B8413: mov     eax, [ebp+4]
+0x9B8416: push    eax
+0x9B8417: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B841C: pop     ecx
+0x9B841D: retn
+0x9B841E: mov     edx, [esp+arg_4.vtbl]
+0x9B8422: lea     eax, [edx-34h]
+0x9B8425: mov     ecx, [edx-38h]
+0x9B8428: xor     ecx, eax
+0x9B842A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B842F: mov     eax, offset stru_AE2AE0
+0x9B8434: jmp     ___CxxFrameHandler3

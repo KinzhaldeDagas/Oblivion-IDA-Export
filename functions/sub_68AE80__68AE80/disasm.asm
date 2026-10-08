@@ -11,9 +11,9 @@
 0x68AE9C: jz      loc_68AF9B
 0x68AEA2: push    ebx
 0x68AEA3: push    3Ah ; ':'; a1
-0x68AEA5: call    TESForm_LookupByFormID
+0x68AEA5: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x68AEAA: add     esp, 4
-0x68AEAD: mov     ecx, offset TimeGlobals
+0x68AEAD: mov     ecx, 0B332E0h
 0x68AEB2: mov     ebx, eax
 0x68AEB4: call    TimeGlobals_GetGameHour
 0x68AEB9: fstp    [esp+14h+arg_0]

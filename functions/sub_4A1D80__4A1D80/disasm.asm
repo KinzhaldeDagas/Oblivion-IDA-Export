@@ -20,7 +20,7 @@
 0x4A1DCE: push    ecx; int
 0x4A1DCF: push    eax; Str1
 0x4A1DD0: mov     [esp+138h+var_4], 0
-0x4A1DDB: call    sub_47D8F0
+0x4A1DDB: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4A1DE0: lea     edx, [esp+138h+var_120]
 0x4A1DE4: push    edx; int
 0x4A1DE5: lea     eax, [esp+13Ch+var_118]
@@ -37,7 +37,7 @@
 0x4A1E03: push    1
 0x4A1E05: call    ArchiveManager_LazyFileLookup
 0x4A1E0A: add     esp, 24h
-0x4A1E0D: push    offset CriticalSection; lpCriticalSection
+0x4A1E0D: push    0B35380h; lpCriticalSection
 0x4A1E12: mov     esi, eax
 0x4A1E14: call    dword ptr ds:0A2806Ch
 0x4A1E1A: call    dword ptr ds:0A2808Ch
@@ -60,7 +60,7 @@
 0x4A1E52: sub     dword ptr ds:0B353FCh, 1
 0x4A1E59: jnz     short loc_4A1E65
 0x4A1E5B: mov     dword ptr ds:0B353F8h, 0
-0x4A1E65: push    offset CriticalSection; lpCriticalSection
+0x4A1E65: push    0B35380h; lpCriticalSection
 0x4A1E6A: call    dword ptr ds:0A28074h
 0x4A1E70: mov     esi, [esp+130h+var_124]
 0x4A1E74: test    esi, esi
@@ -87,3 +87,16 @@
 0x4A1EB7: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4A1EBC: add     esp, 124h
 0x4A1EC2: retn    8
+0x9B2280: lea     ecx, [ebp-124h]; slot
+0x9B2286: jmp     NiPointerSlot_Release
+0x9B228B: mov     edx, [esp+arg_4]
+0x9B228F: lea     eax, [edx-120h]
+0x9B2295: mov     ecx, [edx-124h]
+0x9B229B: xor     ecx, eax
+0x9B229D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B22A2: add     eax, 8
+0x9B22A5: mov     ecx, [edx-4]
+0x9B22A8: xor     ecx, eax
+0x9B22AA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B22AF: mov     eax, offset stru_ADE29C
+0x9B22B4: jmp     ___CxxFrameHandler3

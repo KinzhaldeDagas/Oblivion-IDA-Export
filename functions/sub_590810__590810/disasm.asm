@@ -55,7 +55,6 @@
 0x5908A1: jbe     loc_59095C
 0x5908A7: push    edi
 0x5908A8: jmp     short loc_5908B0
-0x5908AA: align 10h
 0x5908B0: movzx   eax, word ptr [ebx+0B6h]
 0x5908B7: cmp     eax, ebp
 0x5908B9: jbe     loc_590949

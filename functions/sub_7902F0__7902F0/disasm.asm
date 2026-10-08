@@ -1,11 +1,11 @@
-0x7902F0: sub     esp, 8
-0x7902F3: mov     edx, [esp+8+arg_8]
+0x7902F0: sub     esp, 8; Oblivion 1.2.0.416: shared 24-byte copy-backward adapter; invokes the six-dword primitive and returns destinationEnd minus the source record count.
+0x7902F3: mov     edx, [esp+8+destinationEnd]
 0x7902F7: push    ebx
-0x7902F8: mov     ebx, [esp+0Ch+arg_0]
+0x7902F8: mov     ebx, [esp+0Ch+first]
 0x7902FC: push    esi
-0x7902FD: mov     esi, [esp+10h+arg_4]
+0x7902FD: mov     esi, [esp+10h+last]
 0x790301: push    edi
-0x790302: mov     edi, [esp+14h+arg_8]
+0x790302: mov     edi, [esp+14h+destinationEnd]
 0x790306: xor     al, al
 0x790308: mov     byte ptr [esp+14h+var_4], al
 0x79030C: mov     ecx, [esp+14h+var_4]
@@ -14,10 +14,10 @@
 0x790318: push    eax
 0x790319: push    ecx
 0x79031A: push    edx
-0x79031B: push    edi
-0x79031C: push    esi
-0x79031D: push    ebx
-0x79031E: call    sub_7841C0
+0x79031B: push    edi; destinationEnd
+0x79031C: push    esi; last
+0x79031D: push    ebx; first
+0x79031E: call    OB_stVector24_CopyBackwardRange_010201A0; Oblivion 1.2.0.416: backward-copies six-dword records ending at destinationEnd and returns the new destination start.
 0x790323: sub     esi, ebx
 0x790325: mov     eax, 2AAAAAABh
 0x79032A: imul    esi

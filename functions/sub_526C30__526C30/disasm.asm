@@ -1,2 +1,2 @@
-0x526C30: sub     ecx, 88h ; 'ˆ'
-0x526C36: jmp     sub_521BA0
+0x526C30: sub     ecx, 88h ; 'ˆ'; self
+0x526C36: jmp     TESNPC_GetModifiedSize

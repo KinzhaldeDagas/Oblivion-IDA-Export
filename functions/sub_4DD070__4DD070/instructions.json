@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4DD0EB",
-    "line": "lea     ecx, [esp+38h+var_24]",
+    "line": "lea     ecx, [esp+38h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x4DD0F2",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DD0F5",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x4DD11B",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },

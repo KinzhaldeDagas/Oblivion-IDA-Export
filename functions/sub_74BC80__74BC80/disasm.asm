@@ -17,7 +17,7 @@
 0x74BCB4: test    [esp+4+arg_0], 1
 0x74BCB9: jz      short loc_74BCC4
 0x74BCBB: push    esi
-0x74BCBC: call    FormHeapFree
+0x74BCBC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x74BCC1: add     esp, 4
 0x74BCC4: mov     eax, esi
 0x74BCC6: pop     esi

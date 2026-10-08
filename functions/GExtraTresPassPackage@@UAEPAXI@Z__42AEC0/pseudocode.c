@@ -2,8 +2,8 @@ ExtraTresPassPackage *__thiscall ExtraTresPassPackage::`scalar deleting destruct
         ExtraTresPassPackage *this,
         char a2)
 {
-  ExtraTresPassPackage::~ExtraTresPassPackage(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  ExtraTresPassPackage::~ExtraTresPassPackage(this); /*0x42aec3*/
+  if ( (a2 & 1) != 0 ) /*0x42aecd*/
+    FormHeapFree((unsigned int)this); /*0x42aed0*/
+  return this; /*0x42aeda*/
 }

@@ -9,7 +9,7 @@
 0x77C385: test    ecx, ecx
 0x77C387: jz      short loc_77C3C0
 0x77C389: push    esi
-0x77C38A: call    sub_452A60
+0x77C38A: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77C38F: mov     esi, [edi+0BCh]
 0x77C395: test    esi, esi
 0x77C397: jz      short loc_77C3BF

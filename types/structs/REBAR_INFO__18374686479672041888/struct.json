@@ -1,196 +1,306 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "REBAR_INFO",
+  "definition": "struct REBAR_INFO\n{\nCOLORREF clrBk;\nCOLORREF clrText;\nCOLORREF clrBtnText;\nCOLORREF clrBtnFace;\nHIMAGELIST himl;\nUINT uNumBands;\nUINT uNumRows;\nHWND hwndSelf;\nHWND hwndToolTip;\nHWND hwndNotify;\nHFONT hDefaultFont;\nHFONT hFont;\nSIZE imageSize;\nDWORD dwStyle;\nDWORD orgStyle;\nSIZE calcSize;\nBOOL bUnicode;\nBOOL DoRedraw;\nUINT fStatus;\nHCURSOR hcurArrow;\nHCURSOR hcurHorz;\nHCURSOR hcurVert;\nHCURSOR hcurDrag;\nINT iVersion;\nPOINT dragStart;\nPOINT dragNow;\nINT iOldBand;\nINT ihitoffset;\nINT ichevronhotBand;\nINT iGrabbedBand;\nHDPA bands;\n}\n",
   "id": 18374686479672041888,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrBk",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrText",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrBtnText",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clrBtnFace",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "COLORREF"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "himl",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HIMAGELIST"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uNumBands",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uNumRows",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndSelf",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndToolTip",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndNotify",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDefaultFont",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hFont",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HFONT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "imageSize",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 8
+      "size": 8,
+      "type": "SIZE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwStyle",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "orgStyle",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "calcSize",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 8
+      "size": 8,
+      "type": "SIZE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bUnicode",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DoRedraw",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fStatus",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hcurArrow",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HCURSOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hcurHorz",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "HCURSOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hcurVert",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "HCURSOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hcurDrag",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "HCURSOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iVersion",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dragStart",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 8
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dragNow",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 8
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iOldBand",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ihitoffset",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ichevronhotBand",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iGrabbedBand",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "INT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bands",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "HDPA"
     }
   ],
   "name": "REBAR_INFO",
+  "ordinal": 6456,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 140
 }

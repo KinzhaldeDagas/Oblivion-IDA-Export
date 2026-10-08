@@ -15,9 +15,9 @@
 0x78111A: xor     al, al
 0x78111C: pop     ebx
 0x78111D: retn    4
-0x781120: push    esi
+0x781120: push    esi; bytecode
 0x781121: mov     ecx, ebx
-0x781123: call    sub_783C30
+0x781123: call    NiDX9Renderer__CreatePixelShader; Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x781128: test    eax, eax
 0x78112A: jz      short loc_781118
 0x78112C: mov     edx, [edi]

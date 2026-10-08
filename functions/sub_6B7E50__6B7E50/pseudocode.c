@@ -1,156 +1,155 @@
-int __thiscall sub_6B7E50(unsigned int **this)
+// Rebuilds serialized response objects and internal response cursor; resolves INFO/topic/ownerQuest immediately and leaves speaker as a FormID for InitLoadGame. Does not collect live responses or run results.
+void __thiscall DialogueItem::LoadGame(DialogueItemView *this)
 {
-  _WORD *v2; // eax
-  unsigned int *v3; // edi
-  unsigned int **v4; // eax
-  unsigned int **v5; // esi
+  DialogueResponse *v2; // eax
+  DialogueResponse *v3; // edi
+  DialogueResponseNode **p_nextResponseNode; // eax
+  DialogueItemView *v5; // esi
   bool v6; // zf
-  unsigned int **v7; // eax
-  int v8; // eax
-  unsigned int *v9; // ecx
-  unsigned int v10; // edx
+  DialogueResponseNode *v7; // eax
+  DialogueResponse *DialogueResponseByIndex; // eax
+  DialogueResponseNode *v9; // ecx
+  DialogueResponseNode *next; // edx
   TESForm *v11; // eax
   TESForm *v12; // eax
   TESForm *v13; // eax
-  int result; // eax
-  size_t v15; // [esp-1Ch] [ebp-58h]
-  size_t v16; // [esp-14h] [ebp-50h]
-  int v17; // [esp-14h] [ebp-50h]
-  int v18; // [esp-10h] [ebp-4Ch]
-  size_t v19; // [esp-Ch] [ebp-48h]
+  size_t v14; // [esp-1Ch] [ebp-58h]
+  size_t v15; // [esp-14h] [ebp-50h]
+  int v16; // [esp-14h] [ebp-50h]
+  int v17; // [esp-10h] [ebp-4Ch]
+  size_t v18; // [esp-Ch] [ebp-48h]
+  int v19; // [esp-Ch] [ebp-48h]
   int v20; // [esp-Ch] [ebp-48h]
-  int v21; // [esp-Ch] [ebp-48h]
-  int v22; // [esp-8h] [ebp-44h]
+  int v21; // [esp-8h] [ebp-44h]
+  size_t v22; // [esp-4h] [ebp-40h]
   size_t v23; // [esp-4h] [ebp-40h]
   size_t v24; // [esp-4h] [ebp-40h]
-  size_t v25; // [esp-4h] [ebp-40h]
+  int v25; // [esp-4h] [ebp-40h]
   int v26; // [esp-4h] [ebp-40h]
-  int v27; // [esp-4h] [ebp-40h]
-  int v28; // [esp+0h] [ebp-3Ch]
+  int v27; // [esp+0h] [ebp-3Ch]
+  int v28; // [esp+4h] [ebp-38h]
   int v29; // [esp+4h] [ebp-38h]
-  int v30; // [esp+4h] [ebp-38h]
-  int v31; // [esp+8h] [ebp-34h]
-  unsigned int *v32; // [esp+8h] [ebp-34h]
-  int v33; // [esp+Ch] [ebp-30h]
-  UInt32 v34; // [esp+Ch] [ebp-30h]
-  int v35; // [esp+10h] [ebp-2Ch] BYREF
+  int v30; // [esp+8h] [ebp-34h]
+  TESObjectREFR *v31; // [esp+8h] [ebp-34h]
+  int v32; // [esp+Ch] [ebp-30h]
+  UInt32 v33; // [esp+Ch] [ebp-30h]
+  int v34; // [esp+10h] [ebp-2Ch] BYREF
   int a1; // [esp+14h] [ebp-28h] BYREF
   unsigned int i; // [esp+18h] [ebp-24h] BYREF
   _DWORD Dst[5]; // [esp+1Ch] [ebp-20h] BYREF
-  unsigned int v39; // [esp+38h] [ebp-4h]
+  unsigned int v38; // [esp+38h] [ebp-4h]
 
-  LODWORD(v23) = 1;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (char *)&a1 + 2, v23);
-  for ( i = 0; i < BYTE2(a1); ++i )
+  LODWORD(v22) = 1; /*0x6b7e7f*/
+  SaveLoad_LoadData((int)g_TESSaveLoadGame, (char *)&a1 + 2, v22);// EngineFix implementation 2026-05-07: Dialogue Conversation nested choice count is one byte; sub_6B8280 consumes at least 10 bytes per nested entry (two length bytes plus two 4-byte values, with optional string payloads). Registered count clamp uses remaining / 10. /*0x6b7e86*/
+  for ( i = 0; i < BYTE2(a1); ++i ) /*0x6b7e95*/
   {
-    v2 = (_WORD *)FormHeapAlloc(0x18u);
-    Dst[4] = v2;
-    v39 = 0;
-    if ( v2 )
-      v3 = (unsigned int *)sub_6B8390(v2);
+    v2 = (DialogueResponse *)FormHeapAlloc(0x18u); /*0x6b7ea2*/
+    Dst[4] = v2; /*0x6b7eaa*/
+    v38 = 0;                                    // EngineFix implementation 2026-05-07: Dialogue Conversation nested choice allocation-failure hook. If the 0x18 object allocation fails, discard one sub_6B8280 serialized choice entry, restore SEH state, and resume nested loop tail. /*0x6b7eb0*/
+    if ( v2 ) /*0x6b7eb4*/
+      v3 = DialogueResponse::InitializeEmpty(v2); /*0x6b7ebd*/
     else
-      v3 = 0;
-    v39 = 0xFFFFFFFF;
-    sub_6B8280(v3);
-    if ( v3 )
+      v3 = 0; /*0x6b7ec1*/
+    v38 = 0xFFFFFFFF; /*0x6b7ec5*/
+    DialogueResponse::LoadGame(v3); /*0x6b7ecd*/
+    if ( v3 ) /*0x6b7ed4*/
     {
-      v4 = this + 1;
-      v5 = this;
-      if ( *(this + 1) )
+      p_nextResponseNode = &this->nextResponseNode; /*0x6b7ed9*/
+      v5 = this; /*0x6b7edc*/
+      if ( this->nextResponseNode ) /*0x6b7ed6*/
       {
-        do
+        do /*0x6b7ee8*/
         {
-          v5 = (unsigned int **)*v4;
-          v6 = (*v4)[1] == 0;
-          v4 = (unsigned int **)(*v4 + 1);
+          v5 = (DialogueItemView *)*p_nextResponseNode; /*0x6b7ee0*/
+          v6 = (*p_nextResponseNode)->next == 0; /*0x6b7ee2*/
+          p_nextResponseNode = &(*p_nextResponseNode)->next; /*0x6b7ee5*/
         }
-        while ( !v6 );
+        while ( !v6 ); /*0x6b7ee8*/
       }
-      if ( *v5 )
+      if ( v5->firstResponse ) /*0x6b7eea*/
       {
-        v7 = (unsigned int **)FormHeapAlloc(8u);
-        if ( v7 )
+        v7 = (DialogueResponseNode *)FormHeapAlloc(8u); /*0x6b7ef0*/
+        if ( v7 ) /*0x6b7efa*/
         {
-          *v7 = v3;
-          v7[1] = 0;
-          v5[1] = (unsigned int *)v7;
+          v7->item = v3; /*0x6b7efc*/
+          v7->next = 0; /*0x6b7efe*/
+          v5->nextResponseNode = v7; /*0x6b7f01*/
         }
         else
         {
-          v5[1] = 0;
+          v5->nextResponseNode = 0; /*0x6b7f08*/
         }
       }
       else
       {
-        *v5 = v3;
+        v5->firstResponse = v3; /*0x6b7f0d*/
       }
     }
   }
-  LODWORD(v24) = 1;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, (char *)&a1 + 3, v24);
-  if ( HIBYTE(a1) == 0xFF )
+  LODWORD(v23) = 1; /*0x6b7f2d*/
+  SaveLoad_LoadData((int)g_TESSaveLoadGame, (char *)&a1 + 3, v23); /*0x6b7f34*/
+  if ( HIBYTE(a1) == 0xFF ) /*0x6b7f3f*/
   {
-    *(this + 2) = 0;
+    this->currentResponseNode = 0; /*0x6b7f6f*/
   }
   else
   {
-    v8 = sub_6B7CA0(this, SHIBYTE(a1));
-    v9 = (unsigned int *)this;
-    if ( this )
+    DialogueResponseByIndex = DialogueItem::GetDialogueResponseByIndex(this, SHIBYTE(a1)); /*0x6b7f48*/
+    v9 = (DialogueResponseNode *)this; /*0x6b7f4f*/
+    if ( this ) /*0x6b7f51*/
     {
-      do
+      do /*0x6b7f53*/
       {
-        v10 = v9[1];
-        if ( !v10 && !*v9 )
-          break;
-        if ( v8 == *v9 )
+        next = v9->next; /*0x6b7f53*/
+        if ( !next && !v9->item ) /*0x6b7f5a*/
+          break; /*0x6b7f5a*/
+        if ( DialogueResponseByIndex == v9->item ) /*0x6b7f60*/
         {
-          *(this + 2) = v9;
-          break;
+          this->currentResponseNode = v9; /*0x6b7f6a*/
+          break; /*0x6b7f6d*/
         }
-        v9 = (unsigned int *)v9[1];
+        v9 = v9->next; /*0x6b7f62*/
       }
-      while ( v10 );
+      while ( next ); /*0x6b7f53*/
     }
   }
-  LODWORD(v25) = 4;
-  SaveLoad_LoadFormID(Dst, v25, v29, v31, v33);
-  if ( a1 )
+  LODWORD(v24) = 4; /*0x6b7f72*/
+  SaveLoad_LoadFormID(Dst, v24, v28, v30, v32); /*0x6b7f7f*/
+  if ( a1 ) /*0x6b7f8a*/
   {
-    v11 = TESForm_LookupByFormID(a1);
-    *(this + 3) = (unsigned int *)OblivionDynamicCast(
-                                    v11,
-                                    0,
-                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                    &TESTopicInfo `RTTI Type Descriptor',
-                                    0);
+    v11 = TESForm_LookupByFormID(a1); /*0x6b7f99*/
+    this->info = (OblivionTopicInfo *)OblivionDynamicCast( /*0x6b7faa*/
+                                        v11,
+                                        0,
+                                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                        &TESTopicInfo `RTTI Type Descriptor',
+                                        0);
   }
-  LODWORD(v19) = 4;
-  SaveLoad_LoadFormID(&i, v19, v26, v28, v30);
-  if ( v35 )
+  LODWORD(v18) = 4; /*0x6b7fb3*/
+  SaveLoad_LoadFormID(&i, v18, v25, v27, v29); /*0x6b7fba*/
+  if ( v34 ) /*0x6b7fc5*/
   {
-    v12 = TESForm_LookupByFormID(v35);
-    *(this + 4) = (unsigned int *)OblivionDynamicCast(
-                                    v12,
-                                    0,
-                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                    &TESTopic `RTTI Type Descriptor',
-                                    0);
+    v12 = TESForm_LookupByFormID(v34); /*0x6b7fd4*/
+    this->topic = (TESTopic *)OblivionDynamicCast( /*0x6b7fe5*/
+                                v12,
+                                0,
+                                (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                &TESTopic `RTTI Type Descriptor',
+                                0);
   }
-  LODWORD(v16) = 4;
-  SaveLoad_LoadFormID(&a1, v16, v20, v22, v27);
-  if ( v34 )
+  LODWORD(v15) = 4; /*0x6b7fee*/
+  SaveLoad_LoadFormID(&a1, v15, v19, v21, v26); /*0x6b7ff5*/
+  if ( v33 ) /*0x6b8000*/
   {
-    v13 = TESForm_LookupByFormID(v34);
-    *(this + 5) = (unsigned int *)OblivionDynamicCast(
-                                    v13,
-                                    0,
-                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                    &TESQuest `RTTI Type Descriptor',
-                                    0);
+    v13 = TESForm_LookupByFormID(v33); /*0x6b800f*/
+    this->ownerQuest = (TESQuest *)OblivionDynamicCast( /*0x6b8020*/
+                                     v13,
+                                     0,
+                                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                     &TESQuest `RTTI Type Descriptor',
+                                     0);
   }
-  LODWORD(v15) = 4;
-  result = SaveLoad_LoadFormID(&v35, v15, v17, v18, v21);
-  *(this + 6) = v32;
-  return result;
+  LODWORD(v14) = 4; /*0x6b8023*/
+  SaveLoad_LoadFormID(&v34, v14, v16, v17, v20); /*0x6b8030*/
+  this->speaker = v31; /*0x6b8039*/
 }

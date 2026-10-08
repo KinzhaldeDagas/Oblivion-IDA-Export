@@ -1,5 +1,5 @@
 0xA1A9A0: push    esi
-0xA1A9A1: mov     esi, dword_B35414
+0xA1A9A1: mov     esi, g_FallbackCanopyShadowTextureProperty
 0xA1A9A7: test    esi, esi
 0xA1A9A9: jz      short loc_A1A9C7
 0xA1A9AB: lea     eax, [esi+4]

@@ -1,4 +1,4 @@
-0x790420: mov     eax, [esp+arg_4]
+0x790420: mov     eax, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.
 0x790424: mov     edx, [esp+Src]
 0x790428: sub     eax, edx
 0x79042A: push    esi

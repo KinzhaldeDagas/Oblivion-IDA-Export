@@ -1,4 +1,4 @@
-0x4730B0: push    ebp
+0x4730B0: push    ebp; Walks every controller-manager sequence, RTTI-filters to the Oblivion animation-group sequence class, and clears the +8 pointer in each 0x10-byte controlled-block record through 0x49F520. Kept conservatively unnamed because the exact field type is not yet recovered.
 0x4730B1: mov     ebp, ecx
 0x4730B3: mov     eax, [ebp+98h]
 0x4730B9: test    eax, eax
@@ -23,7 +23,7 @@
 0x4730E9: test    eax, eax
 0x4730EB: jz      short loc_4730FE
 0x4730ED: lea     ecx, [ecx+0]
-0x4730F0: cmp     eax, offset dword_B35270
+0x4730F0: cmp     eax, 0B35270h
 0x4730F5: jz      short loc_47311B
 0x4730F7: mov     eax, [eax+4]
 0x4730FA: test    eax, eax
@@ -34,7 +34,7 @@
 0x473104: and     eax, esi
 0x473106: jz      short loc_47310F
 0x473108: mov     ecx, eax
-0x47310A: call    sub_49F520
+0x47310A: call    sub_49F520; For each 0x10-byte controlled-block record owned by this sequence, clears the pointer at record +8. Called only by ActorAnimData's manager-wide controlled-block reset pass at 0x4730B0.
 0x47310F: add     edi, 1
 0x473112: cmp     edi, ebx
 0x473114: jb      short loc_4730D0

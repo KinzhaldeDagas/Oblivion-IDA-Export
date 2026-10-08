@@ -1,34 +1,36 @@
-char __thiscall sub_76D6F0(_DWORD *this, int a2)
+//
+// Verified vtableA8997C slot12/+0x30 (xrefA899AC). Releases previous surface, clears cached RT0/DS bindings, replaces retained device+0x4C, AddRefs it, GetRenderTarget(0)->surface+0x0C, reads desc and updates parent dimensions and SurfaceData+0x10. Retains saved PresentParams+0x14; no sample count is selected here.
+bool __thiscall NiDX9ImplicitBufferData_Recreate(NiDX9ImplicitBufferData *self, IDirect3DDevice9 *device)
 {
-  _DWORD *v3; // edi
-  int v4; // eax
+  IDirect3DSurface9 **p_Surface; // edi
+  IDirect3DDevice9 *v4; // eax
   void *v6; // ecx
   D3DFORMAT a1[8]; // [esp+1Ch] [ebp-20h] BYREF
 
-  v3 = this + 3;
-  if ( *(this + 3) )
-    (*(void (__thiscall **)(_DWORD *))(*this + 0x2C))(this);
-  dword_B42600[0] = 0;
-  dword_B42610 = 0;
-  v4 = *(this + 0x13);
-  if ( v4 )
+  p_Surface = &self->super.Surface; /*0x76d6fb*/
+  if ( self->super.Surface ) /*0x76d6f6*/
+    self->__vftable->ReleaseSurface1((NiDX92DBufferData *)self); /*0x76d705*/
+  g_D3D9BoundRenderTargetSurfaces[0] = 0; /*0x76d707*/
+  g_D3D9BoundDepthStencilSurface = 0; /*0x76d711*/
+  v4 = self->device; /*0x76d71b*/
+  if ( v4 ) /*0x76d720*/
   {
-    (*(void (__stdcall **)(_DWORD))(*(_DWORD *)v4 + 8))(*(this + 0x13));
-    *(this + 0x13) = 0;
+    v4->lpVtbl->Release(self->device); /*0x76d728*/
+    self->device = 0; /*0x76d72a*/
   }
-  *(this + 0x13) = a2;
-  (*(void (__stdcall **)(int))(*(_DWORD *)a2 + 4))(a2);
-  if ( (*(int (__stdcall **)(_DWORD, _DWORD, _DWORD *))(*(_DWORD *)*(this + 0x13) + 0x98))(*(this + 0x13), 0, v3) < 0 )
-    return 0;
-  if ( (*(int (__stdcall **)(_DWORD, D3DFORMAT *))(*(_DWORD *)*v3 + 0x30))(*v3, a1) < 0 )
+  self->device = device; /*0x76d735*/
+  device->lpVtbl->AddRef(device); /*0x76d73e*/
+  if ( (int)self->device->lpVtbl->GetRenderTarget(self->device, 0, p_Surface) < 0 ) /*0x76d753*/
+    return 0; /*0x76d753*/
+  if ( (int)(*p_Surface)->lpVtbl->GetDesc(*p_Surface, (D3DSURFACE_DESC *)a1) < 0 ) /*0x76d766*/
   {
-    (*(void (__stdcall **)(_DWORD))(*(_DWORD *)*v3 + 8))(*v3);
-    *v3 = 0;
-    return 0;
+    (*p_Surface)->lpVtbl->Release(*p_Surface); /*0x76d770*/
+    *p_Surface = 0; /*0x76d772*/
+    return 0; /*0x76d77f*/
   }
-  sub_731E40((_DWORD *)*(this + 2), a1[6], a1[7]);
-  *(this + 4) = CreateSurfaceData(a1[0]);
-  sub_774BD0(a1[0]);
-  TESTexture::ClearComponentReferences(v6);
-  return 1;
+  sub_731E40(&self->super.ParentData->__vftable, a1[6], a1[7]); /*0x76d78f*/
+  self->super.SurfaceData = CreateSurfaceData(a1[0]); /*0x76d79e*/
+  OB_D3DFormat_ToString_010201A0(a1[0]); /*0x76d7a6*/
+  Shared_NoOpVirtual_60D0A0(v6); /*0x76d7b1*/
+  return 1; /*0x76d778*/
 }

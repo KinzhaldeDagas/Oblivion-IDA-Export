@@ -1,4 +1,4 @@
-0x4E48B0: push    ebx
+0x4E48B0: push    ebx;
 0x4E48B1: push    esi
 0x4E48B2: push    edi
 0x4E48B3: mov     edi, ecx
@@ -18,7 +18,7 @@
 0x4E48D7: test    esi, esi
 0x4E48D9: jz      short loc_4E4919
 0x4E48DB: mov     ecx, esi; this
-0x4E48DD: call    TESObjectCELL_IsInterior
+0x4E48DD: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4E48E2: test    al, al
 0x4E48E4: jz      short loc_4E48F0
 0x4E48E6: lea     ecx, [esi+28h]

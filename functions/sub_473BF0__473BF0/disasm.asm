@@ -1,4 +1,4 @@
-0x473BF0: push    ebx
+0x473BF0: push    ebx; Returns the serialized actor-animation block size including its 2-byte length prefix. Null animation data or actors excluded by virtual predicate +0x198 serialize only the zero-length prefix.
 0x473BF1: push    edi
 0x473BF2: mov     edi, [esp+8+arg_4]
 0x473BF6: test    edi, edi
@@ -15,7 +15,7 @@
 0x473C14: jnz     short loc_473C2E
 0x473C16: push    esi
 0x473C17: mov     ecx, edi
-0x473C19: call    sub_473420
+0x473C19: call    ActorAnimData_GetSaveStateSize; Computes ActorAnimData serialized size from fixed slot/key/action fields plus variable active sequence and current/queued idle state.
 0x473C1E: pop     esi
 0x473C1F: add     ax, bx
 0x473C22: pop     edi

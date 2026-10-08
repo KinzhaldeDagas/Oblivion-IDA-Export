@@ -18,7 +18,6 @@
 0x46C49A: mov     ebp, offset off_B05E04; "NONE"
 0x46C49F: mov     [esp+1Ch+var_8], 45h ; 'E'
 0x46C4A7: jmp     short loc_46C4B0
-0x46C4A9: align 10h
 0x46C4B0: mov     eax, [ebp+0]
 0x46C4B3: movsx   edx, byte ptr [eax+3]
 0x46C4B7: movsx   esi, byte ptr [eax+2]
@@ -73,7 +72,7 @@
 0x46C549: add     esp, 4
 0x46C54C: mov     esi, [esp+14h+var_4]
 0x46C550: mov     byte ptr ds:0B33C10h, 1
-0x46C557: mov     byte ptr [esi+4], 0
+0x46C557: mov     byte ptr [esi+4], 0; TESForm layout evidence: +0x04 formType byte, +0x08 flags, +0x0C refID/FormID.
 0x46C55B: mov     dword ptr [esi+8], 8
 0x46C562: mov     dword ptr [esi+0Ch], 0
 0x46C569: mov     ecx, ds:0B33A98h
@@ -92,7 +91,7 @@
 0x46C5A5: jz      short loc_46C5AF
 0x46C5A7: push    eax
 0x46C5A8: mov     ecx, esi
-0x46C5AA: call    sub_46B6C0
+0x46C5AA: call    TESForm_SetFile; Updates TESForm source-file provenance. Thread-safe clones normalize to their root parent; master files replace prior source entries, non-masters append once, and null removes the last source entry.
 0x46C5AF: mov     eax, [esi+0Ch]
 0x46C5B2: cmp     eax, 7FFh
 0x46C5B7: ja      short TESForm_constr___AddToFormIDTable

@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4DBE40",
+      "0x4DBE91"
+    ]
+  ],
+  "chunks_sha256": "4e204bdef4edfbf57981f4665562377a0078c7bb006efca54e237288f514018b",
+  "comment_regular": "Verified lock-state propagation helper: if this reference has an ExtraLock wrapper, sets its locked bit; otherwise follows its linked-door reference and sets that wrapper's locked bit. It then calls TESObjectREFR_MarkLockDataAsModified so the owning reference or linked door records change mask 0x40.",
+  "comment_repeatable": "Verified lock-state propagation helper: if this reference has an ExtraLock wrapper, sets its locked bit; otherwise follows its linked-door reference and sets that wrapper's locked bit. It then calls TESObjectREFR_MarkLockDataAsModified so the owning reference or linked door records change mask 0x40.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4DBE40",
+  "display_name": "TESObjectREFR_SetLockedFlagOnSelfOrLinkedDoor",
   "end_ea": "0x4DBE91",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4DBE40",
+  "name": "TESObjectREFR_SetLockedFlagOnSelfOrLinkedDoor",
   "segment": ".text",
   "sha256": "4e204bdef4edfbf57981f4665562377a0078c7bb006efca54e237288f514018b",
   "size": 81,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DBE40",
-  "type": "void __thiscall(_BYTE *this)",
+  "total_chunk_size": 81,
+  "type": "void __thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 42,
   "xrefs_to_count": 3
 }

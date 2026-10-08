@@ -3,20 +3,20 @@
 0x6A05B4: mov     esi, ecx
 0x6A05B6: mov     eax, [esi+1Ch]
 0x6A05B9: mov     ecx, [eax+0Ch]
-0x6A05BC: push    4
-0x6A05BE: lea     edx, [esp+10h+var_8]
-0x6A05C2: mov     [esp+10h+var_8], ecx
-0x6A05C6: mov     ecx, ds:0B33B00h
-0x6A05CC: push    edx
-0x6A05CD: call    SaveLoad_SaveFormID
+0x6A05BC: push    4; byteCount
+0x6A05BE: lea     edx, [esp+10h+source]
+0x6A05C2: mov     [esp+10h+source], ecx
+0x6A05C6: mov     ecx, ds:0B33B00h; self
+0x6A05CC: push    edx; source
+0x6A05CD: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
 0x6A05D2: mov     eax, [esi+34h]
 0x6A05D5: mov     ecx, [eax+0Ch]
-0x6A05D8: push    4
+0x6A05D8: push    4; byteCount
 0x6A05DA: lea     edx, [esp+10h+var_4]
 0x6A05DE: mov     [esp+10h+var_4], ecx
-0x6A05E2: mov     ecx, ds:0B33B00h
-0x6A05E8: push    edx
-0x6A05E9: call    SaveLoad_SaveFormID
+0x6A05E2: mov     ecx, ds:0B33B00h; self
+0x6A05E8: push    edx; source
+0x6A05E9: call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.
 0x6A05EE: mov     ecx, [esi+1Ch]
 0x6A05F1: mov     eax, [esi]
 0x6A05F3: mov     edx, [eax+78h]

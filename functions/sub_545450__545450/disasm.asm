@@ -65,21 +65,21 @@
 0x54552B: test    eax, eax
 0x54552D: mov     [esp+0Ch+arg_34], 4
 0x545535: jz      short loc_54555E
-0x545537: mov     ecx, [esp+0Ch+arg_4]
-0x54553B: mov     edx, [esp+0Ch+arg_10]
-0x54553F: push    ecx
-0x545540: mov     ecx, [esp+10h+arg_14]
-0x545544: push    ebp
-0x545545: push    0
-0x545547: push    1
-0x545549: push    edx
-0x54554A: mov     edx, [esp+20h+arg_18]
-0x54554E: push    edi
-0x54554F: push    ecx
-0x545550: push    edx
-0x545551: push    4
-0x545553: mov     ecx, eax
-0x545555: call    sub_7174B0
+0x545537: mov     ecx, [esp+0Ch+triangleIndices]
+0x54553B: mov     edx, [esp+0Ch+textureCoordinates]
+0x54553F: push    ecx; triangleIndices
+0x545540: mov     ecx, [esp+10h+normals]
+0x545544: push    ebp; triangleCount
+0x545545: push    0; dataFlags
+0x545547: push    1; hasVertexColors
+0x545549: push    edx; textureCoordinates
+0x54554A: mov     edx, [esp+20h+vertices]
+0x54554E: push    edi; colors
+0x54554F: push    ecx; normals
+0x545550: push    edx; vertices
+0x545551: push    4; vertexCount
+0x545553: mov     ecx, eax; this
+0x545555: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x54555A: mov     edi, eax
 0x54555C: jmp     short loc_545560
 0x54555E: xor     edi, edi
@@ -259,12 +259,12 @@
 0x5457AC: push    30h ; '0'; Size
 0x5457AE: call    FormHeapAlloc
 0x5457B3: add     esp, 4
-0x5457B6: mov     [esp+30h+arg_18], eax
+0x5457B6: mov     [esp+30h+vertices], eax
 0x5457BA: test    eax, eax
-0x5457BC: mov     [esp+30h+arg_10], 7
+0x5457BC: mov     [esp+30h+textureCoordinates], 7
 0x5457C4: jz      short loc_5457CF
 0x5457C6: mov     ecx, eax
-0x5457C8: call    sub_959BC0
+0x5457C8: call    NiPickContext_ctor; Verified NiPick context initializer: initializes the record array, pick flags/root pointers, and default query settings used by TESTerrainLODQuad_PickSurfacePoint.
 0x5457CD: jmp     short loc_5457D1
 0x5457CF: xor     eax, eax
 0x5457D1: mov     [esi+18h], eax
@@ -274,20 +274,20 @@
 0x5457DC: mov     edx, [esi+18h]
 0x5457DF: mov     byte ptr [edx+10h], 1
 0x5457E3: mov     eax, [esi+18h]
-0x5457E6: push    ebp
-0x5457E7: push    0
+0x5457E6: push    ebp; arg3
+0x5457E7: push    0; normalMapBypass
 0x5457E9: mov     byte ptr [eax+11h], 1
 0x5457ED: mov     ecx, [esi+0Ch]
-0x5457F0: push    0Ah
-0x5457F2: push    ecx
-0x5457F3: mov     [esp+40h+arg_10], 0FFFFFFFFh
-0x5457FB: call    sub_7B8940
+0x5457F0: push    0Ah; shaderId
+0x5457F2: push    ecx; root
+0x5457F3: mov     [esp+40h+textureCoordinates], 0FFFFFFFFh
+0x5457FB: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x545800: mov     edx, [esi+8]
-0x545803: push    ebp
-0x545804: push    0
-0x545806: push    0Ah
-0x545808: push    edx
-0x545809: call    sub_7B8940
+0x545803: push    ebp; arg3
+0x545804: push    0; normalMapBypass
+0x545806: push    0Ah; shaderId
+0x545808: push    edx; root
+0x545809: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x54580E: add     esp, 20h
 0x545811: mov     ecx, [esp+30h+arg_8]
 0x545815: mov     large fs:0, ecx

@@ -89,7 +89,6 @@
 0x8DDDB6: fstp    dword ptr [esi+30h]
 0x8DDDB9: jle     short loc_8DDDF3
 0x8DDDBB: jmp     short loc_8DDDC0
-0x8DDDBD: align 10h
 0x8DDDC0: mov     ecx, [esi+34h]
 0x8DDDC3: mov     edx, [ecx+edi*4]
 0x8DDDC6: lea     eax, [ecx+edi*4]

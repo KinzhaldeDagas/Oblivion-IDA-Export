@@ -1,4 +1,18 @@
-char __stdcall sub_470B20(_DWORD *a1, int a2, char a3, float a4, float a5, int a6)
+// BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
+char __stdcall BSAnimGroupSequence_Activate(
+        BSAnimGroupSequence *sequence,
+        char priority,
+        char startOver,
+        float weight,
+        float easeInTime,
+        BSAnimGroupSequence *timeSyncSequence)
 {
-  return sub_6C9BA0(a1, a2, a3, a4, a5, a6, 0);
+  return NiControllerSequence_Activate( /*0x470b4c*/
+           (NiD3DPass *)sequence,
+           priority,
+           startOver,
+           LODWORD(weight),
+           (char *)LODWORD(easeInTime),
+           (float **)timeSyncSequence,
+           0);
 }

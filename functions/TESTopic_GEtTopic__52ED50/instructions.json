@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52ED50",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+index]; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x52ED5B",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+topicType]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -4,7 +4,7 @@
 0x724044: xor     eax, eax
 0x724046: cmp     [esi+0B6h], ax
 0x72404D: push    edi
-0x72404E: mov     edi, [esp+0Ch+arg_4]
+0x72404E: mov     edi, [esp+0Ch+arg1]
 0x724052: mov     [esp+0Ch+var_4], 0
 0x72405A: mov     dword ptr [esi+0E8h], 1
 0x724064: jbe     short loc_7240CB
@@ -35,11 +35,11 @@
 0x7240BF: jnz     short loc_7240CB
 0x7240C1: add     ecx, 0FFFFFFFFh
 0x7240C4: mov     [esi+0F6h], cx
-0x7240CB: push    edi
-0x7240CC: mov     edi, [esp+10h+arg_0]
-0x7240D0: push    edi
-0x7240D1: mov     ecx, esi
-0x7240D3: call    NiNode__RemoveObject
+0x7240CB: push    edi; child
+0x7240CC: mov     edi, [esp+10h+child]
+0x7240D0: push    edi; outChild
+0x7240D1: mov     ecx, esi; this
+0x7240D3: call    NiNode__RemoveObject; Removes child from this NiNode and clears/detaches the child's parent relationship.
 0x7240D8: mov     eax, [esi+0E0h]
 0x7240DE: cmp     eax, 0FFFFFFFFh
 0x7240E1: jle     short loc_724104

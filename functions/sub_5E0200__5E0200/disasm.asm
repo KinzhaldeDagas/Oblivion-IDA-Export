@@ -14,7 +14,7 @@
 0x5E022C: mov     [esi+0F0h], eax
 0x5E0232: jz      short loc_5E024A
 0x5E0234: mov     ecx, edi; this
-0x5E0236: call    TESObjectCELL_IsInterior
+0x5E0236: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5E023B: test    al, al
 0x5E023D: jz      short loc_5E024A
 0x5E023F: mov     [esi+0F8h], edi

@@ -1,4 +1,4 @@
 void __cdecl sub_A26940()
 {
-  DeleteCriticalSection(&stru_B3F600);
+  DeleteCriticalSection(&unk_B3F600); /*0xa26945*/
 }

@@ -26,7 +26,6 @@
 0x945A9E: mov     [esp+58h+var_48], 1
 0x945AA6: mov     eax, 1388h
 0x945AAB: jmp     short loc_945AB0
-0x945AAD: align 10h
 0x945AB0: mov     ecx, [esp+58h+var_48]
 0x945AB4: mov     edx, [esp+58h+var_48]
 0x945AB8: imul    ecx, edx

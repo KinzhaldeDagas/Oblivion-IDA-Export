@@ -28,11 +28,11 @@
 0x47AC79: jz      loc_47B048
 0x47AC7F: push    2
 0x47AC81: mov     ecx, edi
-0x47AC83: call    NiNode_GetNiPropertyByID
+0x47AC83: call    NiNode_GetNiPropertyByID;
 0x47AC88: push    6
 0x47AC8A: mov     ecx, edi
 0x47AC8C: mov     esi, eax
-0x47AC8E: call    NiNode_GetNiPropertyByID
+0x47AC8E: call    NiNode_GetNiPropertyByID;
 0x47AC93: cmp     esi, ebp
 0x47AC95: mov     [esp+1B4h+var_198], eax
 0x47AC99: jz      loc_47B048
@@ -40,13 +40,13 @@
 0x47ACA2: cmp     esi, ebp
 0x47ACA4: jz      loc_47B048
 0x47ACAA: push    offset aSkin; "skin"
-0x47ACAF: push    esi; Str1
-0x47ACB0: call    __strcmp
+0x47ACAF: push    esi; left
+0x47ACB0: call    CRT_StricmpLocaleDispatch
 0x47ACB5: add     esp, 8
 0x47ACB8: test    eax, eax
 0x47ACBA: jnz     loc_47B048
-0x47ACC0: push    offset sub_43ACE0; a5
-0x47ACC5: push    offset sub_43EB30; a4
+0x47ACC0: push    offset FaceGenMatrix_Destruct; a5
+0x47ACC5: push    offset FaceGenMatrix_Construct; a4
 0x47ACCA: push    4; size
 0x47ACCC: push    18h; a2
 0x47ACCE: lea     eax, [esp+1C4h+a1]
@@ -109,3 +109,32 @@
 0x47ADB4: jmp     short loc_47ADD5
 0x47ADB6: mov     [esp+1B4h+var_1A0], 0Fh; jumptable 0047AD87 case 5
 0x47ADBE: jmp     short loc_47ADD5
+0x9AF1F0: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9AF1F5: push    4; int
+0x9AF1F7: push    18h; unsigned int
+0x9AF1F9: lea     eax, [ebp-174h]
+0x9AF1FF: push    eax; void *
+0x9AF200: call    $LN21
+0x9AF205: retn
+0x9AF206: lea     ecx, [ebp-19Ch]; slot
+0x9AF20C: jmp     NiPointerSlot_Release
+0x9AF211: lea     ecx, [ebp-194h]; slot
+0x9AF217: jmp     NiPointerSlot_Release
+0x9AF21C: lea     ecx, [ebp-1A0h]; slot
+0x9AF222: jmp     NiPointerSlot_Release
+0x9AF227: mov     eax, [ebp-198h]
+0x9AF22D: push    eax
+0x9AF22E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AF233: pop     ecx
+0x9AF234: retn
+0x9AF235: mov     edx, [esp+arg_4]
+0x9AF239: lea     eax, [edx-1A4h]
+0x9AF23F: mov     ecx, [edx-1A8h]
+0x9AF245: xor     ecx, eax
+0x9AF247: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF24C: add     eax, 10h
+0x9AF24F: mov     ecx, [edx-4]
+0x9AF252: xor     ecx, eax
+0x9AF254: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF259: mov     eax, offset stru_ADB850
+0x9AF25E: jmp     ___CxxFrameHandler3

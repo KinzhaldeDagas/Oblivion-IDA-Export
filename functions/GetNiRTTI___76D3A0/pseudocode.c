@@ -1,4 +1,4 @@
-void *GetNiRTTI_()
+NiRTTI *GetNiRTTI_()
 {
-  return &unk_B42654;
+  return &stru_B42654; /*0x76d3a5*/
 }

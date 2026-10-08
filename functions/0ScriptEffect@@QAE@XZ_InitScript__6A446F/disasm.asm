@@ -1,4 +1,4 @@
-0x6A446F: call    EffectItem_GetScript
+0x6A446F: call    EffectItem_GetScript; ScriptEffect ctor tail: store EffectItem_GetScript(effectItem) at +0x38 and clear per-instance ScriptEventList at +0x3C.
 0x6A4474: mov     [esi+38h], eax
 0x6A4477: mov     dword ptr [esi+3Ch], 0
 0x6A447E: mov     eax, esi

@@ -1,6 +1,6 @@
 0x463700: push    esi
 0x463701: mov     esi, ecx
-0x463703: mov     ecx, offset dword_B3BDB0
+0x463703: mov     ecx, (offset qword_B3BB2C+284h)
 0x463708: call    sub_67CF00
 0x46370D: mov     ecx, ds:0B3BF80h
 0x463713: test    ecx, ecx
@@ -25,9 +25,9 @@
 0x463757: call    SaveLoad_ClearCreatedObjList??
 0x46375C: mov     ecx, ds:0B333A0h
 0x463762: call    sub_443300
-0x463767: mov     ecx, offset ActorProcessManager_ptr
-0x46376C: call    sub_677280
-0x463771: mov     ecx, offset ActorProcessManager_ptr
+0x463767: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x46376C: call    ActorProcessManager_ClearCrimes
+0x463771: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x463776: call    sub_67AE90
 0x46377B: mov     ecx, ds:0B33398h
 0x463781: mov     dword ptr ds:0B3B90Ch, 0

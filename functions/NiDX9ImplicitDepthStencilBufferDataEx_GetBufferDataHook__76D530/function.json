@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76D530",
+      "0x76D5B4"
+    ]
+  ],
+  "chunks_sha256": "518a2fa1c19533851c27b97051253a480a607269830c1b4d01c4490176e0338a",
+  "comment_regular": "Recreates renderer data for the device's implicit depth/stencil buffer: releases the prior surface, calls GetDepthStencilSurface, reads its D3DSURFACE_DESC, refreshes NiSurfaceData, and propagates width/height to the parent Ni2DBuffer.",
+  "comment_repeatable": "Recreates renderer data for the device's implicit depth/stencil buffer: releases the prior surface, calls GetDepthStencilSurface, reads its D3DSURFACE_DESC, refreshes NiSurfaceData, and propagates width/height to the parent Ni2DBuffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook",
+  "display_name": "NiDX9ImplicitDepthStencilBufferData::Recreate",
   "end_ea": "0x76D5B4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiDX9ImplicitDepthStencilBufferDataEx_GetBufferDataHook",
+  "name": "NiDX9ImplicitDepthStencilBufferData::Recreate",
   "segment": ".text",
   "sha256": "518a2fa1c19533851c27b97051253a480a607269830c1b4d01c4490176e0338a",
   "size": 132,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76D530",
-  "type": "char __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 132,
+  "type": "bool __thiscall(void *this, IDirect3DDevice9 *device)",
   "xrefs_from_count": 57,
   "xrefs_to_count": 1
 }

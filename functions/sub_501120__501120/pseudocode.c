@@ -7,26 +7,26 @@ char __cdecl sub_501120(int a1, int a2, void *a3)
   char *Name; // eax
   const char *v9; // [esp-4h] [ebp-4h]
 
-  v3 = (TESObjectREFR *)OblivionDynamicCast(
+  v3 = (TESObjectREFR *)OblivionDynamicCast( /*0x501133*/
                           a3,
                           0,
                           (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                           &Actor `RTTI Type Descriptor',
                           0);
-  if ( v3 )
+  if ( v3 ) /*0x50113d*/
   {
-    v4 = LOBYTE(v3[1].member.rot.x) == 0;
-    LOBYTE(v3[1].member.rot.x) = v4;
-    if ( IsConsoleMode )
+    v4 = LOBYTE(v3[1].member.rot.x) == 0; /*0x501143*/
+    LOBYTE(v3[1].member.rot.x) = v4; /*0x501146*/
+    if ( MEMORY[0xB361AC] ) /*0x501149*/
     {
-      v5 = !v4;
-      v6 = (void **)&aOn_0;
-      if ( v5 )
-        v6 = &aOff;
-      v9 = (const char *)v6;
-      Name = TESObjectREFR_GetName(v3);
-      Interface_ConsolePrint("%s processing is  %s", Name, v9);
+      v5 = !v4; /*0x501152*/
+      v6 = (void **)"On"; /*0x501154*/
+      if ( v5 ) /*0x501159*/
+        v6 = &aOff; /*0x50115b*/
+      v9 = (const char *)v6; /*0x501160*/
+      Name = TESObjectREFR_GetName(v3); /*0x501163*/
+      Interface_ConsolePrint("%s processing is  %s", Name, v9); /*0x50116e*/
     }
   }
-  return 1;
+  return 1; /*0x501178*/
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x7E2400",
+      "0x7E2423"
+    ]
+  ],
+  "chunks_sha256": "19671f30dbeebeca062c9bee4a94ad2d786af99765d97210893cf9ff6d4a6b7f",
+  "comment_regular": "Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.\n\nDestroy one RenderPass and its owned light-array storage.",
+  "comment_repeatable": "Destroy the members of one RenderPass: clear selector, free the owned light-pointer array, clear byte +0x09 and array pointer. This function does not free the 0x10-byte RenderPass record itself and does not release the raw geometry/light objects.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7E2400",
+  "display_name": "RenderPass_Destroy",
   "end_ea": "0x7E2423",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E2400",
+  "name": "RenderPass_Destroy",
   "segment": ".text",
   "sha256": "19671f30dbeebeca062c9bee4a94ad2d786af99765d97210893cf9ff6d4a6b7f",
   "size": 35,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E2400",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 35,
+  "type": "void __thiscall(RenderPass_DecodedLayout *this)",
   "xrefs_from_count": 17,
   "xrefs_to_count": 7
 }

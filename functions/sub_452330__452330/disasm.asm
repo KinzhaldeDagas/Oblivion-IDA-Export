@@ -1,9 +1,9 @@
 0x452330: mov     ecx, ds:0B333C4h; this
-0x452336: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x452336: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x45233B: cmp     eax, 2
 0x45233E: jz      short loc_45239A
 0x452340: mov     ecx, ds:0B333C4h; this
-0x452346: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x452346: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x45234B: cmp     eax, 1
 0x45234E: jz      short loc_45239A
 0x452350: mov     ecx, ds:0B333C4h

@@ -1,4 +1,4 @@
-0x5C7BA0: push    0FFFFFFFFh
+0x5C7BA0: push    0FFFFFFFFh; Broad RaceSexMenu state-to-UI synchronization used after Reset Face. Rebuilds localized controls from current player race/sex/head state; suitable native boundary for restoring a captured FaceGen candidate before UI refresh.
 0x5C7BA2: push    offset SEH_5C7BA0
 0x5C7BA7: mov     eax, large fs:0
 0x5C7BAD: push    eax
@@ -49,7 +49,7 @@
 0x5C7C40: mov     [ecx], ebx
 0x5C7C42: mov     [ecx+4], bx
 0x5C7C46: mov     [ecx+6], bx
-0x5C7C4A: push    eax; a2
+0x5C7C4A: push    eax; controlName
 0x5C7C4B: jnz     short loc_5C7C8A
 0x5C7C4D: call    BSStringT_Set
 0x5C7C52: mov     eax, ds:0B38F70h
@@ -63,9 +63,9 @@
 0x5C7C6B: mov     [ecx+4], bx
 0x5C7C6F: mov     [ecx+6], bx
 0x5C7C73: call    BSStringT_Set
-0x5C7C78: mov     ecx, esi
+0x5C7C78: mov     ecx, esi; this
 0x5C7C7A: mov     [esp+0B0h+var_4], edi
-0x5C7C81: call    sub_5C3440
+0x5C7C81: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C7C86: fld1
 0x5C7C88: jmp     short loc_5C7CCD
 0x5C7C8A: call    BSStringT_Set
@@ -80,15 +80,15 @@
 0x5C7CAC: mov     [ecx+4], bx
 0x5C7CB0: mov     [ecx+6], bx
 0x5C7CB4: call    BSStringT_Set
-0x5C7CB9: mov     ecx, esi
+0x5C7CB9: mov     ecx, esi; this
 0x5C7CBB: mov     [esp+0B0h+var_4], edi
-0x5C7CC2: call    sub_5C3440
+0x5C7CC2: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C7CC7: fld     dword ptr ds:0A379B4h
 0x5C7CCD: push    ecx
-0x5C7CCE: fstp    [esp+0A4h+a2]; a3
-0x5C7CD1: push    0FBBh; a2
+0x5C7CCE: fstp    [esp+0A4h+value+4]; value
+0x5C7CD1: push    0FBBh; propertyCode
 0x5C7CD6: mov     ecx, eax; this
-0x5C7CD8: call    Tile_SetFloat
+0x5C7CD8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C7CDD: mov     eax, [esp+0A0h+var_84]
 0x5C7CE1: mov     ecx, [eax]
 0x5C7CE3: cmp     ecx, ebx
@@ -114,7 +114,7 @@
 0x5C7D2E: mov     ecx, esp; this
 0x5C7D30: mov     [esp+0B0h+var_7C], esp
 0x5C7D34: push    ebx; a3
-0x5C7D35: push    eax; a2
+0x5C7D35: push    eax; categoryName
 0x5C7D36: mov     [ecx], ebx
 0x5C7D38: mov     [ecx+4], bx
 0x5C7D3C: mov     [ecx+6], bx
@@ -130,9 +130,9 @@
 0x5C7D62: mov     [ecx+4], bx
 0x5C7D66: mov     [ecx+6], bx
 0x5C7D6A: call    BSStringT_Set
-0x5C7D6F: mov     ecx, esi
+0x5C7D6F: mov     ecx, esi; this
 0x5C7D71: mov     [esp+0B8h+var_4], edi
-0x5C7D78: call    sub_5C3440
+0x5C7D78: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C7D7D: mov     ecx, eax
 0x5C7D7F: call    Tile_SetString
 0x5C7D84: mov     [esi+87Ch], ebx
@@ -152,7 +152,7 @@
 0x5C7DB9: mov     ecx, esp; this
 0x5C7DBB: mov     [esp+0B0h+var_7C+4], esp
 0x5C7DBF: push    ebx; a3
-0x5C7DC0: push    eax; a2
+0x5C7DC0: push    eax; categoryName
 0x5C7DC1: mov     [ecx], ebx
 0x5C7DC3: mov     [ecx+4], bx
 0x5C7DC7: mov     [ecx+6], bx
@@ -168,9 +168,9 @@
 0x5C7DED: mov     [ecx+4], bx
 0x5C7DF1: mov     [ecx+6], bx
 0x5C7DF5: call    BSStringT_Set
-0x5C7DFA: mov     ecx, esi
+0x5C7DFA: mov     ecx, esi; this
 0x5C7DFC: mov     [esp+0B8h+var_4], edi
-0x5C7E03: call    sub_5C3440
+0x5C7E03: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C7E08: mov     ecx, eax
 0x5C7E0A: call    Tile_SetString
 0x5C7E0F: mov     [esi+87Ch], ebp
@@ -198,8 +198,8 @@
 0x5C7E5C: jnz     short loc_5C7E63
 0x5C7E5E: mov     eax, offset EmptyString
 0x5C7E63: push    offset aCharactersEyes; "Characters\\Eyes\\EyeDefault.dds"
-0x5C7E68: push    eax; Str1
-0x5C7E69: call    __strcmp
+0x5C7E68: push    eax; left
+0x5C7E69: call    CRT_StricmpLocaleDispatch
 0x5C7E6E: add     esp, 8
 0x5C7E71: test    eax, eax
 0x5C7E73: jz      short loc_5C7E88
@@ -216,12 +216,12 @@
 0x5C7E8F: mov     eax, offset EmptyString
 0x5C7E94: push    eax; int
 0x5C7E95: mov     eax, ds:0B38F90h
-0x5C7E9A: push    0FB4h; unsigned __int8 *
+0x5C7E9A: push    0FB4h; controlName
 0x5C7E9F: sub     esp, 8
 0x5C7EA2: mov     ecx, esp; this
 0x5C7EA4: mov     [esp+0B0h+var_7C+4], esp
 0x5C7EA8: push    ebx; a3
-0x5C7EA9: push    eax; a2
+0x5C7EA9: push    eax; categoryName
 0x5C7EAA: mov     [ecx], ebx
 0x5C7EAC: mov     [ecx+4], bx
 0x5C7EB0: mov     [ecx+6], bx
@@ -237,9 +237,9 @@
 0x5C7ED6: mov     [ecx+4], bx
 0x5C7EDA: mov     [ecx+6], bx
 0x5C7EDE: call    BSStringT_Set
-0x5C7EE3: mov     ecx, esi
+0x5C7EE3: mov     ecx, esi; this
 0x5C7EE5: mov     [esp+0B8h+var_4], edi
-0x5C7EEC: call    sub_5C3440
+0x5C7EEC: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C7EF1: mov     ecx, eax
 0x5C7EF3: call    Tile_SetString
 0x5C7EF8: mov     ebp, dword ptr [esp+0A0h+var_90+4]
@@ -248,7 +248,7 @@
 0x5C7F04: mov     ecx, esp; this
 0x5C7F06: mov     [esp+0A8h+var_7C+4], esp
 0x5C7F0A: push    ebx; a3
-0x5C7F0B: push    eax; a2
+0x5C7F0B: push    eax; categoryName
 0x5C7F0C: mov     [ecx], ebx
 0x5C7F0E: mov     [ecx+4], bx
 0x5C7F12: mov     [ecx+6], bx
@@ -264,21 +264,21 @@
 0x5C7F38: mov     [ecx+4], bx
 0x5C7F3C: mov     [ecx+6], bx
 0x5C7F40: call    BSStringT_Set
-0x5C7F45: mov     ecx, esi
+0x5C7F45: mov     ecx, esi; this
 0x5C7F47: mov     [esp+0B0h+var_4], edi
-0x5C7F4E: call    sub_5C3440
+0x5C7F4E: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C7F53: fldz
 0x5C7F55: push    ecx
-0x5C7F56: fstp    [esp+0A4h+a2]; a3
-0x5C7F59: push    0FB2h; a2
+0x5C7F56: fstp    [esp+0A4h+value+4]; value
+0x5C7F59: push    0FB2h; propertyCode
 0x5C7F5E: mov     ecx, eax; this
-0x5C7F60: call    Tile_SetFloat
+0x5C7F60: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C7F65: mov     eax, ds:0B38F90h
 0x5C7F6A: sub     esp, 8
 0x5C7F6D: mov     ecx, esp; this
 0x5C7F6F: mov     [esp+0A8h+var_7C+4], esp
-0x5C7F73: push    ebx; a3
-0x5C7F74: push    eax; a2
+0x5C7F73: push    ebx; controlName
+0x5C7F74: push    eax; categoryName
 0x5C7F75: mov     [ecx], ebx
 0x5C7F77: mov     [ecx+4], bx
 0x5C7F7B: mov     [ecx+6], bx
@@ -294,24 +294,24 @@
 0x5C7FA1: mov     [ecx+4], bx
 0x5C7FA5: mov     [ecx+6], bx
 0x5C7FA9: call    BSStringT_Set
-0x5C7FAE: mov     ecx, esi
+0x5C7FAE: mov     ecx, esi; this
 0x5C7FB0: mov     [esp+0B0h+var_4], edi
-0x5C7FB7: call    sub_5C3440
+0x5C7FB7: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C7FBC: add     ebp, 0FFFFFFFFh
 0x5C7FBF: mov     [esp+0A0h+var_7C], ebp
 0x5C7FC3: fild    [esp+0A0h+var_7C]
 0x5C7FC7: push    ecx
 0x5C7FC8: mov     ecx, eax; this
-0x5C7FCA: fstp    [esp+0A4h+a2]; a3
-0x5C7FCD: push    0FB3h; a2
-0x5C7FD2: call    Tile_SetFloat
+0x5C7FCA: fstp    [esp+0A4h+value+4]; value
+0x5C7FCD: push    0FB3h; propertyCode
+0x5C7FD2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C7FD7: mov     eax, ds:0B38F90h
 0x5C7FDC: push    0FAEh
 0x5C7FE1: sub     esp, 8
 0x5C7FE4: mov     ecx, esp; this
 0x5C7FE6: mov     [esp+0ACh+var_7C+4], esp
 0x5C7FEA: push    ebx; a3
-0x5C7FEB: push    eax; a2
+0x5C7FEB: push    eax; categoryName
 0x5C7FEC: mov     [ecx], ebx
 0x5C7FEE: mov     [ecx+4], bx
 0x5C7FF2: mov     [ecx+6], bx
@@ -327,9 +327,9 @@
 0x5C8018: mov     [ecx+4], bx
 0x5C801C: mov     [ecx+6], bx
 0x5C8020: call    BSStringT_Set
-0x5C8025: mov     ecx, esi
+0x5C8025: mov     ecx, esi; this
 0x5C8027: mov     [esp+0B4h+var_4], edi
-0x5C802E: call    sub_5C3440
+0x5C802E: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8033: fild    dword ptr [esi+87Ch]
 0x5C8039: mov     ecx, eax
 0x5C803B: fstp    qword ptr [esp+0A4h+var_74]
@@ -342,10 +342,10 @@
 0x5C8055: mov     eax, ds:0B38F90h
 0x5C805A: sub     esp, 0Ch
 0x5C805D: mov     ecx, esp; this
-0x5C805F: fstp    [esp+0ACh+a2]; float
+0x5C805F: fstp    [esp+0ACh+value+4]; float
 0x5C8063: mov     [esp+0ACh+var_7C+4], esp
-0x5C8067: push    ebx; a3
-0x5C8068: push    eax; a2
+0x5C8067: push    ebx; controlName
+0x5C8068: push    eax; categoryName
 0x5C8069: mov     [ecx], ebx
 0x5C806B: mov     [ecx+4], bx
 0x5C806F: mov     [ecx+6], bx
@@ -361,9 +361,9 @@
 0x5C8095: mov     [ecx+4], bx
 0x5C8099: mov     [ecx+6], bx
 0x5C809D: call    BSStringT_Set
-0x5C80A2: mov     ecx, esi
+0x5C80A2: mov     ecx, esi; this
 0x5C80A4: mov     [esp+0B4h+var_4], edi
-0x5C80AB: call    sub_5C3440
+0x5C80AB: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C80B0: push    eax; int
 0x5C80B1: mov     ecx, esi
 0x5C80B3: call    sub_5C2B50
@@ -391,7 +391,7 @@
 0x5C8108: mov     ecx, esp; this
 0x5C810A: mov     [esp+0B0h+var_7C+4], esp
 0x5C810E: push    ebx; a3
-0x5C810F: push    eax; a2
+0x5C810F: push    eax; categoryName
 0x5C8110: mov     [ecx], ebx
 0x5C8112: mov     [ecx+4], bx
 0x5C8116: mov     [ecx+6], bx
@@ -407,9 +407,9 @@
 0x5C813C: mov     [ecx+4], bx
 0x5C8140: mov     [ecx+6], bx
 0x5C8144: call    BSStringT_Set
-0x5C8149: mov     ecx, esi
+0x5C8149: mov     ecx, esi; this
 0x5C814B: mov     [esp+0B8h+var_4], edi
-0x5C8152: call    sub_5C3440
+0x5C8152: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8157: mov     ecx, eax
 0x5C8159: call    Tile_SetString
 0x5C815E: mov     eax, [ebp+1Ch]
@@ -423,7 +423,7 @@
 0x5C8178: mov     ecx, esp; this
 0x5C817A: mov     [esp+0B0h+var_74], esp
 0x5C817E: push    ebx; a3
-0x5C817F: push    eax; a2
+0x5C817F: push    eax; categoryName
 0x5C8180: mov     [ecx], ebx
 0x5C8182: mov     [ecx+4], bx
 0x5C8186: mov     [ecx+6], bx
@@ -439,9 +439,9 @@
 0x5C81AC: mov     [ecx+4], bx
 0x5C81B0: mov     [ecx+6], bx
 0x5C81B4: call    BSStringT_Set
-0x5C81B9: mov     ecx, esi
+0x5C81B9: mov     ecx, esi; this
 0x5C81BB: mov     [esp+0B8h+var_4], edi
-0x5C81C2: call    sub_5C3440
+0x5C81C2: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C81C7: mov     ecx, eax
 0x5C81C9: call    Tile_SetString
 0x5C81CE: mov     edx, dword ptr [esp+0A0h+var_90+4]
@@ -478,12 +478,12 @@
 0x5C8233: jmp     short loc_5C8269
 0x5C8235: mov     eax, ds:0B38FB0h
 0x5C823A: push    offset word_A36430; a3
-0x5C823F: push    0FB4h; a3
+0x5C823F: push    0FB4h; controlName
 0x5C8244: sub     esp, 8
 0x5C8247: mov     ecx, esp; this
 0x5C8249: mov     [esp+0B0h+var_74], esp
 0x5C824D: push    ebx; a3
-0x5C824E: push    eax; a2
+0x5C824E: push    eax; categoryName
 0x5C824F: mov     [ecx], ebx
 0x5C8251: mov     [ecx+4], bx
 0x5C8255: mov     [ecx+6], bx
@@ -499,9 +499,9 @@
 0x5C827E: push    eax; a2
 0x5C827F: mov     [ecx+6], bx
 0x5C8283: call    BSStringT_Set
-0x5C8288: mov     ecx, esi
+0x5C8288: mov     ecx, esi; this
 0x5C828A: mov     [esp+0B8h+var_4], edi
-0x5C8291: call    sub_5C3440
+0x5C8291: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8296: mov     ecx, eax
 0x5C8298: call    Tile_SetString
 0x5C829D: mov     ebp, [esp+0A0h+var_84]
@@ -518,7 +518,7 @@
 0x5C82C7: mov     ecx, esp; this
 0x5C82C9: mov     [esp+0A8h+var_74], esp
 0x5C82CD: push    ebx; a3
-0x5C82CE: push    eax; a2
+0x5C82CE: push    eax; categoryName
 0x5C82CF: mov     [ecx], ebx
 0x5C82D1: mov     [ecx+4], bx
 0x5C82D5: mov     [ecx+6], bx
@@ -534,21 +534,21 @@
 0x5C82FB: mov     [ecx+4], bx
 0x5C82FF: mov     [ecx+6], bx
 0x5C8303: call    BSStringT_Set
-0x5C8308: mov     ecx, esi
+0x5C8308: mov     ecx, esi; this
 0x5C830A: mov     [esp+0B0h+var_4], edi
-0x5C8311: call    sub_5C3440
+0x5C8311: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8316: fldz
 0x5C8318: push    ecx
-0x5C8319: fstp    [esp+0A4h+a2]; a3
-0x5C831C: push    0FB2h; a2
+0x5C8319: fstp    [esp+0A4h+value+4]; value
+0x5C831C: push    0FB2h; propertyCode
 0x5C8321: mov     ecx, eax; this
-0x5C8323: call    Tile_SetFloat
+0x5C8323: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8328: mov     eax, ds:0B38F78h
 0x5C832D: sub     esp, 8
 0x5C8330: mov     ecx, esp; this
 0x5C8332: mov     [esp+0A8h+var_74], esp
-0x5C8336: push    ebx; a3
-0x5C8337: push    eax; a2
+0x5C8336: push    ebx; controlName
+0x5C8337: push    eax; categoryName
 0x5C8338: mov     [ecx], ebx
 0x5C833A: mov     [ecx+4], bx
 0x5C833E: mov     [ecx+6], bx
@@ -564,25 +564,25 @@
 0x5C8364: mov     [ecx+4], bx
 0x5C8368: mov     [ecx+6], bx
 0x5C836C: call    BSStringT_Set
-0x5C8371: mov     ecx, esi
+0x5C8371: mov     ecx, esi; this
 0x5C8373: mov     [esp+0B0h+var_4], edi
-0x5C837A: call    sub_5C3440
+0x5C837A: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C837F: mov     ecx, dword ptr [esp+0A0h+var_90+4]
 0x5C8383: add     ecx, 0FFFFFFFFh
 0x5C8386: mov     [esp+0A0h+var_7C], ecx; a3
 0x5C838A: fild    [esp+0A0h+var_7C]
 0x5C838E: push    ecx
 0x5C838F: mov     ecx, eax; this
-0x5C8391: fstp    [esp+0A4h+a2]; a3
-0x5C8394: push    0FB3h; a2
-0x5C8399: call    Tile_SetFloat
+0x5C8391: fstp    [esp+0A4h+value+4]; value
+0x5C8394: push    0FB3h; propertyCode
+0x5C8399: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C839E: mov     eax, ds:0B38F78h
 0x5C83A3: push    0FAEh
 0x5C83A8: sub     esp, 8
 0x5C83AB: mov     ecx, esp; this
 0x5C83AD: mov     [esp+0ACh+var_74], esp
 0x5C83B1: push    ebx; a3
-0x5C83B2: push    eax; a2
+0x5C83B2: push    eax; categoryName
 0x5C83B3: mov     [ecx], ebx
 0x5C83B5: mov     [ecx+4], bx
 0x5C83B9: mov     [ecx+6], bx
@@ -598,9 +598,9 @@
 0x5C83DF: mov     [ecx+4], bx
 0x5C83E3: mov     [ecx+6], bx
 0x5C83E7: call    BSStringT_Set
-0x5C83EC: mov     ecx, esi
+0x5C83EC: mov     ecx, esi; this
 0x5C83EE: mov     [esp+0B4h+var_4], edi
-0x5C83F5: call    sub_5C3440
+0x5C83F5: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C83FA: fild    dword ptr [esi+86Ch]
 0x5C8400: mov     ecx, eax
 0x5C8402: fstp    qword ptr [esp+0A4h+var_74]
@@ -613,10 +613,10 @@
 0x5C841C: mov     eax, ds:0B38F78h
 0x5C8421: sub     esp, 0Ch
 0x5C8424: mov     ecx, esp; this
-0x5C8426: fstp    [esp+0ACh+a2]; float
+0x5C8426: fstp    [esp+0ACh+value+4]; float
 0x5C842A: mov     [esp+0ACh+var_74], esp
-0x5C842E: push    ebx; a3
-0x5C842F: push    eax; a2
+0x5C842E: push    ebx; controlName
+0x5C842F: push    eax; categoryName
 0x5C8430: mov     [ecx], ebx
 0x5C8432: mov     [ecx+4], bx
 0x5C8436: mov     [ecx+6], bx
@@ -625,16 +625,16 @@
 0x5C8444: sub     esp, 8
 0x5C8447: mov     ecx, esp; this
 0x5C8449: mov     [esp+0B4h+var_7C+4], esp
-0x5C844D: push    ebx; a3
+0x5C844D: push    ebx; categoryName
 0x5C844E: push    eax; a2
 0x5C844F: mov     [esp+0BCh+var_4], 10h
 0x5C845A: mov     [ecx], ebx
 0x5C845C: mov     [ecx+4], bx
 0x5C8460: mov     [ecx+6], bx
 0x5C8464: call    BSStringT_Set
-0x5C8469: mov     ecx, esi
+0x5C8469: mov     ecx, esi; this
 0x5C846B: mov     [esp+0B4h+var_4], edi
-0x5C8472: call    sub_5C3440
+0x5C8472: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8477: push    eax; int
 0x5C8478: mov     ecx, esi
 0x5C847A: call    sub_5C2B50
@@ -650,7 +650,6 @@
 0x5C84A3: cmp     [eax], ebx
 0x5C84A5: jz      loc_5C86E7
 0x5C84AB: jmp     short loc_5C84B0
-0x5C84AD: align 10h
 0x5C84B0: mov     ebp, [eax]
 0x5C84B2: cmp     ebp, ebx
 0x5C84B4: jz      loc_5C86D6
@@ -688,9 +687,9 @@
 0x5C852C: push    eax
 0x5C852D: mov     [esp+0BCh+var_4], 11h
 0x5C8538: call    BSStringT_constr_str
-0x5C853D: mov     ecx, esi
+0x5C853D: mov     ecx, esi; this
 0x5C853F: mov     [esp+0B8h+var_4], edi
-0x5C8546: call    sub_5C3440
+0x5C8546: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C854B: mov     ecx, eax
 0x5C854D: call    Tile_SetString
 0x5C8552: mov     eax, [ebp+1Ch]
@@ -712,9 +711,9 @@
 0x5C8587: push    eax
 0x5C8588: mov     [esp+0BCh+var_4], 12h
 0x5C8593: call    BSStringT_constr_str
-0x5C8598: mov     ecx, esi
+0x5C8598: mov     ecx, esi; this
 0x5C859A: mov     [esp+0B8h+var_4], edi
-0x5C85A1: call    sub_5C3440
+0x5C85A1: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C85A6: mov     ecx, eax
 0x5C85A8: call    Tile_SetString
 0x5C85AD: mov     [esi+870h], ebx
@@ -733,7 +732,7 @@
 0x5C85E2: mov     ecx, esp; this
 0x5C85E4: mov     [esp+0B0h+var_74], esp
 0x5C85E8: push    ebx; a3
-0x5C85E9: push    eax; a2
+0x5C85E9: push    eax; categoryName
 0x5C85EA: mov     [ecx], ebx
 0x5C85EC: mov     [ecx+4], bx
 0x5C85F0: mov     [ecx+6], bx
@@ -749,9 +748,9 @@
 0x5C8616: mov     [ecx+4], bx
 0x5C861A: mov     [ecx+6], bx
 0x5C861E: call    BSStringT_Set
-0x5C8623: mov     ecx, esi
+0x5C8623: mov     ecx, esi; this
 0x5C8625: mov     [esp+0B8h+var_4], edi
-0x5C862C: call    sub_5C3440
+0x5C862C: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8631: mov     ecx, eax
 0x5C8633: call    Tile_SetString
 0x5C8638: mov     eax, [ebp+1Ch]
@@ -765,7 +764,7 @@
 0x5C8652: mov     ecx, esp; this
 0x5C8654: mov     [esp+0B0h+var_74], esp
 0x5C8658: push    ebx; a3
-0x5C8659: push    eax; a2
+0x5C8659: push    eax; categoryName
 0x5C865A: mov     [ecx], ebx
 0x5C865C: mov     [ecx+4], bx
 0x5C8660: mov     [ecx+6], bx
@@ -781,9 +780,9 @@
 0x5C8686: mov     [ecx+4], bx
 0x5C868A: mov     [ecx+6], bx
 0x5C868E: call    BSStringT_Set
-0x5C8693: mov     ecx, esi
+0x5C8693: mov     ecx, esi; this
 0x5C8695: mov     [esp+0B8h+var_4], edi
-0x5C869C: call    sub_5C3440
+0x5C869C: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C86A1: mov     ecx, eax
 0x5C86A3: call    Tile_SetString
 0x5C86A8: mov     edx, dword ptr [esp+0A0h+var_90+4]
@@ -808,12 +807,12 @@
 0x5C86E7: mov     ecx, ds:0B38B80h
 0x5C86ED: mov     eax, ds:0B38F88h
 0x5C86F2: push    ecx; int
-0x5C86F3: push    0FB4h; unsigned __int8 *
+0x5C86F3: push    0FB4h; controlName
 0x5C86F8: sub     esp, 8
 0x5C86FB: mov     ecx, esp; this
 0x5C86FD: mov     [esp+0B0h+var_74], esp
 0x5C8701: push    ebx; a3
-0x5C8702: push    eax; a2
+0x5C8702: push    eax; categoryName
 0x5C8703: mov     [ecx], ebx
 0x5C8705: mov     [ecx+4], bx
 0x5C8709: mov     [ecx+6], bx
@@ -829,9 +828,9 @@
 0x5C872F: mov     [ecx+4], bx
 0x5C8733: mov     [ecx+6], bx
 0x5C8737: call    BSStringT_Set
-0x5C873C: mov     ecx, esi
+0x5C873C: mov     ecx, esi; this
 0x5C873E: mov     [esp+0B8h+var_4], edi
-0x5C8745: call    sub_5C3440
+0x5C8745: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C874A: mov     ecx, eax
 0x5C874C: call    Tile_SetString
 0x5C8751: mov     eax, ds:0B38FB8h
@@ -839,7 +838,7 @@
 0x5C8759: mov     ecx, esp; this
 0x5C875B: mov     [esp+0A8h+var_74], esp
 0x5C875F: push    ebx; a3
-0x5C8760: push    eax; a2
+0x5C8760: push    eax; categoryName
 0x5C8761: mov     [ecx], ebx
 0x5C8763: mov     [ecx+4], bx
 0x5C8767: mov     [ecx+6], bx
@@ -855,21 +854,21 @@
 0x5C878D: mov     [ecx+4], bx
 0x5C8791: mov     [ecx+6], bx
 0x5C8795: call    BSStringT_Set
-0x5C879A: mov     ecx, esi
+0x5C879A: mov     ecx, esi; this
 0x5C879C: mov     [esp+0B0h+var_4], edi
-0x5C87A3: call    sub_5C3440
+0x5C87A3: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C87A8: fldz
 0x5C87AA: push    ecx
-0x5C87AB: fstp    [esp+0A4h+a2]; a3
-0x5C87AE: push    0FB2h; a2
+0x5C87AB: fstp    [esp+0A4h+value+4]; value
+0x5C87AE: push    0FB2h; propertyCode
 0x5C87B3: mov     ecx, eax; this
-0x5C87B5: call    Tile_SetFloat
+0x5C87B5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C87BA: mov     eax, ds:0B38FB8h
 0x5C87BF: sub     esp, 8
 0x5C87C2: mov     ecx, esp; this
 0x5C87C4: mov     [esp+0A8h+var_74], esp
-0x5C87C8: push    ebx; a3
-0x5C87C9: push    eax; a2
+0x5C87C8: push    ebx; controlName
+0x5C87C9: push    eax; categoryName
 0x5C87CA: mov     [ecx], ebx
 0x5C87CC: mov     [ecx+4], bx
 0x5C87D0: mov     [ecx+6], bx
@@ -885,25 +884,25 @@
 0x5C87F6: mov     [ecx+4], bx
 0x5C87FA: mov     [ecx+6], bx
 0x5C87FE: call    BSStringT_Set
-0x5C8803: mov     ecx, esi
+0x5C8803: mov     ecx, esi; this
 0x5C8805: mov     [esp+0B0h+var_4], edi
-0x5C880C: call    sub_5C3440
+0x5C880C: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8811: mov     edx, dword ptr [esp+0A0h+var_90+4]
 0x5C8815: add     edx, 0FFFFFFFFh
 0x5C8818: mov     [esp+0A0h+var_7C], edx; a3
 0x5C881C: fild    [esp+0A0h+var_7C]
 0x5C8820: push    ecx
 0x5C8821: mov     ecx, eax; this
-0x5C8823: fstp    [esp+0A4h+a2]; a3
-0x5C8826: push    0FB3h; a2
-0x5C882B: call    Tile_SetFloat
+0x5C8823: fstp    [esp+0A4h+value+4]; value
+0x5C8826: push    0FB3h; propertyCode
+0x5C882B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8830: mov     eax, ds:0B38FB8h
 0x5C8835: push    0FAEh
 0x5C883A: sub     esp, 8
 0x5C883D: mov     ecx, esp; this
 0x5C883F: mov     [esp+0ACh+var_74], esp
 0x5C8843: push    ebx; a3
-0x5C8844: push    eax; a2
+0x5C8844: push    eax; categoryName
 0x5C8845: mov     [ecx], ebx
 0x5C8847: mov     [ecx+4], bx
 0x5C884B: mov     [ecx+6], bx
@@ -919,9 +918,9 @@
 0x5C8871: mov     [ecx+4], bx
 0x5C8875: mov     [ecx+6], bx
 0x5C8879: call    BSStringT_Set
-0x5C887E: mov     ecx, esi
+0x5C887E: mov     ecx, esi; this
 0x5C8880: mov     [esp+0B4h+var_4], edi
-0x5C8887: call    sub_5C3440
+0x5C8887: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C888C: fild    dword ptr [esi+870h]
 0x5C8892: mov     ecx, eax
 0x5C8894: fstp    qword ptr [esp+0A4h+var_74]
@@ -934,10 +933,10 @@
 0x5C88AE: mov     eax, ds:0B38FB8h
 0x5C88B3: sub     esp, 0Ch
 0x5C88B6: mov     ecx, esp; this
-0x5C88B8: fstp    [esp+0ACh+a2]; int
+0x5C88B8: fstp    [esp+0ACh+value+4]; int
 0x5C88BC: mov     [esp+0ACh+var_74], esp
 0x5C88C0: push    ebx; a3
-0x5C88C1: push    eax; a2
+0x5C88C1: push    eax; categoryName
 0x5C88C2: mov     [ecx], ebx
 0x5C88C4: mov     [ecx+4], bx
 0x5C88C8: mov     [ecx+6], bx
@@ -953,10 +952,10 @@
 0x5C88EE: mov     [ecx+4], bx
 0x5C88F2: mov     [ecx+6], bx
 0x5C88F6: call    BSStringT_Set
-0x5C88FB: mov     ecx, esi
+0x5C88FB: mov     ecx, esi; this
 0x5C88FD: mov     [esp+0B4h+var_4], edi
-0x5C8904: call    sub_5C3440
-0x5C8909: push    eax; unsigned __int8 *
+0x5C8904: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
+0x5C8909: push    eax; controlName
 0x5C890A: mov     ecx, esi
 0x5C890C: call    sub_5C2B50
 0x5C8911: mov     eax, ds:0B39330h
@@ -964,7 +963,7 @@
 0x5C8919: mov     ecx, esp; this
 0x5C891B: mov     [esp+0A8h+var_74], esp
 0x5C891F: push    ebx; a3
-0x5C8920: push    eax; a2
+0x5C8920: push    eax; categoryName
 0x5C8921: mov     [ecx], ebx
 0x5C8923: mov     [ecx+4], bx
 0x5C8927: mov     [ecx+6], bx
@@ -980,21 +979,21 @@
 0x5C894D: mov     [ecx+4], bx
 0x5C8951: mov     [ecx+6], bx
 0x5C8955: call    BSStringT_Set
-0x5C895A: mov     ecx, esi
+0x5C895A: mov     ecx, esi; this
 0x5C895C: mov     [esp+0B0h+var_4], edi
-0x5C8963: call    sub_5C3440
+0x5C8963: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8968: fldz
 0x5C896A: push    ecx
-0x5C896B: fstp    [esp+0A4h+a2]; a3
-0x5C896E: push    0FB2h; a2
+0x5C896B: fstp    [esp+0A4h+value+4]; value
+0x5C896E: push    0FB2h; propertyCode
 0x5C8973: mov     ecx, eax; this
-0x5C8975: call    Tile_SetFloat
+0x5C8975: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C897A: mov     eax, ds:0B39330h
 0x5C897F: sub     esp, 8
 0x5C8982: mov     ecx, esp; this
 0x5C8984: mov     [esp+0A8h+var_74], esp
-0x5C8988: push    ebx; a3
-0x5C8989: push    eax; a2
+0x5C8988: push    ebx; controlName
+0x5C8989: push    eax; categoryName
 0x5C898A: mov     [ecx], ebx
 0x5C898C: mov     [ecx+4], bx
 0x5C8990: mov     [ecx+6], bx
@@ -1010,22 +1009,22 @@
 0x5C89B6: mov     [ecx+4], bx
 0x5C89BA: mov     [ecx+6], bx
 0x5C89BE: call    BSStringT_Set
-0x5C89C3: mov     ecx, esi
+0x5C89C3: mov     ecx, esi; this
 0x5C89C5: mov     [esp+0B0h+var_4], edi
-0x5C89CC: call    sub_5C3440
+0x5C89CC: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C89D1: fld     dword ptr ds:0A468FCh
 0x5C89D7: push    ecx
-0x5C89D8: fstp    [esp+0A4h+a2]; a3
-0x5C89DB: push    0FB3h; a2
+0x5C89D8: fstp    [esp+0A4h+value+4]; value
+0x5C89DB: push    0FB3h; propertyCode
 0x5C89E0: mov     ecx, eax; this
-0x5C89E2: call    Tile_SetFloat
+0x5C89E2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C89E7: mov     eax, ds:0B39330h
 0x5C89EC: push    0FAEh; int
 0x5C89F1: sub     esp, 8
 0x5C89F4: mov     ecx, esp; this
 0x5C89F6: mov     [esp+0ACh+var_74], esp
 0x5C89FA: push    ebx; a3
-0x5C89FB: push    eax; a2
+0x5C89FB: push    eax; categoryName
 0x5C89FC: mov     [ecx], ebx
 0x5C89FE: mov     [ecx+4], bx
 0x5C8A02: mov     [ecx+6], bx
@@ -1041,13 +1040,13 @@
 0x5C8A2B: push    eax; a2
 0x5C8A2C: mov     [ecx+6], bx
 0x5C8A30: call    BSStringT_Set
-0x5C8A35: mov     ecx, esi
+0x5C8A35: mov     ecx, esi; this
 0x5C8A37: mov     [esp+0B4h+var_4], edi
-0x5C8A3E: call    sub_5C3440
+0x5C8A3E: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8A43: mov     ecx, eax
 0x5C8A45: call    Tile_GetFloat
-0x5C8A4A: call    Double_To_SInt32
-0x5C8A4F: cmp     [esp+0A0h+arg_0], bl
+0x5C8A4A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x5C8A4F: cmp     [esp+0A0h+rebuildLists], bl
 0x5C8A56: mov     [esi+88Ch], eax
 0x5C8A5C: mov     eax, [esp+0A0h+var_88]
 0x5C8A60: mov     eax, [eax+1E8h]
@@ -1066,7 +1065,7 @@
 0x5C8A96: mov     [esp+0A8h+var_74], esp; a3
 0x5C8A9A: fdiv    qword ptr ds:0A3DDD8h
 0x5C8AA0: push    ebx; a3
-0x5C8AA1: push    eax; a2
+0x5C8AA1: push    eax; categoryName
 0x5C8AA2: mov     [ecx], ebx
 0x5C8AA4: mov     [ecx+4], bx
 0x5C8AA8: mov     [ecx+6], bx
@@ -1083,28 +1082,28 @@
 0x5C8AD2: mov     [ecx+4], bx
 0x5C8AD6: mov     [ecx+6], bx
 0x5C8ADA: call    BSStringT_Set
-0x5C8ADF: mov     ecx, esi
+0x5C8ADF: mov     ecx, esi; this
 0x5C8AE1: mov     [esp+0B0h+var_4], edi
-0x5C8AE8: call    sub_5C3440
+0x5C8AE8: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8AED: fld     dword ptr ds:0A6D2D8h
 0x5C8AF3: push    ecx
 0x5C8AF4: mov     ebp, eax
-0x5C8AF6: fstp    [esp+0A4h+a2]; a3
-0x5C8AF9: push    0FB1h; a2
+0x5C8AF6: fstp    [esp+0A4h+value+4]; value
+0x5C8AF9: push    0FB1h; propertyCode
 0x5C8AFE: mov     ecx, ebp; this
-0x5C8B00: call    Tile_SetFloat
+0x5C8B00: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8B05: fld     [esp+0A0h+var_84]
 0x5C8B09: push    ecx
-0x5C8B0A: fstp    [esp+0A4h+a2]; a3
-0x5C8B0D: push    0FB1h; a2
+0x5C8B0A: fstp    [esp+0A4h+value+4]; value
+0x5C8B0D: push    0FB1h; propertyCode
 0x5C8B12: mov     ecx, ebp; this
-0x5C8B14: call    Tile_SetFloat
+0x5C8B14: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8B19: fldz
 0x5C8B1B: push    ecx
-0x5C8B1C: fstp    [esp+0A4h+a2]; a3
-0x5C8B1F: push    0FB1h; a2
+0x5C8B1C: fstp    [esp+0A4h+value+4]; value
+0x5C8B1F: push    0FB1h; propertyCode
 0x5C8B24: mov     ecx, ebp; this
-0x5C8B26: call    Tile_SetFloat
+0x5C8B26: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8B2B: movzx   edx, byte ptr [esi+879h]
 0x5C8B32: mov     [esp+0A0h+var_7C], edx; a3
 0x5C8B36: mov     eax, ds:0B38FC8h
@@ -1114,7 +1113,7 @@
 0x5C8B44: mov     [esp+0A8h+var_74], esp; a3
 0x5C8B48: fdiv    qword ptr ds:0A3DDD8h
 0x5C8B4E: push    ebx; a3
-0x5C8B4F: push    eax; a2
+0x5C8B4F: push    eax; categoryName
 0x5C8B50: mov     [ecx], ebx
 0x5C8B52: mov     [ecx+4], bx
 0x5C8B56: mov     [ecx+6], bx
@@ -1131,28 +1130,28 @@
 0x5C8B80: mov     [ecx+4], bx
 0x5C8B84: mov     [ecx+6], bx
 0x5C8B88: call    BSStringT_Set
-0x5C8B8D: mov     ecx, esi
+0x5C8B8D: mov     ecx, esi; this
 0x5C8B8F: mov     [esp+0B0h+var_4], edi
-0x5C8B96: call    sub_5C3440
+0x5C8B96: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8B9B: mov     ebp, eax
 0x5C8B9D: push    ecx
 0x5C8B9E: fld     dword ptr ds:0A6D2D8h
 0x5C8BA4: mov     ecx, ebp; this
-0x5C8BA6: fstp    [esp+0A4h+a2]; a3
-0x5C8BA9: push    0FB1h; a2
-0x5C8BAE: call    Tile_SetFloat
+0x5C8BA6: fstp    [esp+0A4h+value+4]; value
+0x5C8BA9: push    0FB1h; propertyCode
+0x5C8BAE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8BB3: fld     [esp+0A0h+var_84]
 0x5C8BB7: push    ecx
-0x5C8BB8: fstp    [esp+0A4h+a2]; a3
-0x5C8BBB: push    0FB1h; a2
+0x5C8BB8: fstp    [esp+0A4h+value+4]; value
+0x5C8BBB: push    0FB1h; propertyCode
 0x5C8BC0: mov     ecx, ebp; this
-0x5C8BC2: call    Tile_SetFloat
+0x5C8BC2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8BC7: fldz
 0x5C8BC9: push    ecx
-0x5C8BCA: fstp    [esp+0A4h+a2]; a3
-0x5C8BCD: push    0FB1h; a2
+0x5C8BCA: fstp    [esp+0A4h+value+4]; value
+0x5C8BCD: push    0FB1h; propertyCode
 0x5C8BD2: mov     ecx, ebp; this
-0x5C8BD4: call    Tile_SetFloat
+0x5C8BD4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8BD9: movzx   eax, byte ptr [esi+87Ah]
 0x5C8BE0: mov     [esp+0A0h+var_7C], eax; a3
 0x5C8BE4: mov     eax, ds:0B38FD0h
@@ -1162,7 +1161,7 @@
 0x5C8BF2: mov     [esp+0A8h+var_74], esp; a3
 0x5C8BF6: fdiv    qword ptr ds:0A3DDD8h
 0x5C8BFC: push    ebx; a3
-0x5C8BFD: push    eax; a2
+0x5C8BFD: push    eax; categoryName
 0x5C8BFE: mov     [ecx], ebx
 0x5C8C00: mov     [ecx+4], bx
 0x5C8C04: mov     [ecx+6], bx
@@ -1179,39 +1178,39 @@
 0x5C8C2E: mov     [ecx+4], bx
 0x5C8C32: mov     [ecx+6], bx
 0x5C8C36: call    BSStringT_Set
-0x5C8C3B: mov     ecx, esi
+0x5C8C3B: mov     ecx, esi; this
 0x5C8C3D: mov     [esp+0B0h+var_4], edi
-0x5C8C44: call    sub_5C3440
+0x5C8C44: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8C49: fld     dword ptr ds:0A6D2D8h
 0x5C8C4F: push    ecx
 0x5C8C50: mov     ebp, eax
-0x5C8C52: fstp    [esp+0A4h+a2]; a3
-0x5C8C55: push    0FB1h; a2
+0x5C8C52: fstp    [esp+0A4h+value+4]; value
+0x5C8C55: push    0FB1h; propertyCode
 0x5C8C5A: mov     ecx, ebp; this
-0x5C8C5C: call    Tile_SetFloat
+0x5C8C5C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8C61: fld     [esp+0A0h+var_84]
 0x5C8C65: push    ecx
-0x5C8C66: fstp    [esp+0A4h+a2]; a3
-0x5C8C69: push    0FB1h; a2
+0x5C8C66: fstp    [esp+0A4h+value+4]; value
+0x5C8C69: push    0FB1h; propertyCode
 0x5C8C6E: mov     ecx, ebp; this
-0x5C8C70: call    Tile_SetFloat
+0x5C8C70: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8C75: fldz
 0x5C8C77: push    ecx
-0x5C8C78: fstp    [esp+0A4h+a2]; a3
-0x5C8C7B: push    0FB1h; a2
+0x5C8C78: fstp    [esp+0A4h+value+4]; value
+0x5C8C7B: push    0FB1h; propertyCode
 0x5C8C80: mov     ecx, ebp; this
-0x5C8C82: call    Tile_SetFloat
+0x5C8C82: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8C87: mov     ecx, [esp+0A0h+var_88]
-0x5C8C8B: fld     dword ptr [ecx+1CCh]
+0x5C8C8B: fld     dword ptr [ecx+1CCh]; Load TESNPC::hairLength while initializing the Hair > Length control.
 0x5C8C91: sub     esp, 8
 0x5C8C94: mov     ecx, esp; this
 0x5C8C96: fstp    [esp+0A8h+var_7C]
 0x5C8C9A: fld     [esp+0A8h+var_7C]
 0x5C8C9E: mov     [esp+0A8h+var_74], esp
-0x5C8CA2: fstp    dword ptr [esi+874h]
-0x5C8CA8: mov     eax, ds:0B38FD8h
+0x5C8CA2: fstp    dword ptr [esi+874h]; Cache initial hair length at RaceSexMenu+0x874. Native Randomize Face never rewrites this field.
+0x5C8CA8: mov     eax, ds:0B38FD8h; Load the sLength GameSetting ('Length') for the hair-length slider label.
 0x5C8CAD: push    ebx; a3
-0x5C8CAE: push    eax; a2
+0x5C8CAE: push    eax; controlName
 0x5C8CAF: mov     [ecx], ebx
 0x5C8CB1: mov     [ecx+4], bx
 0x5C8CB5: mov     [ecx+6], bx
@@ -1227,30 +1226,30 @@
 0x5C8CDB: mov     [ecx+4], bx
 0x5C8CDF: mov     [ecx+6], bx
 0x5C8CE3: call    BSStringT_Set
-0x5C8CE8: mov     ecx, esi
+0x5C8CE8: mov     ecx, esi; this
 0x5C8CEA: mov     [esp+0B0h+var_4], edi
-0x5C8CF1: call    sub_5C3440
+0x5C8CF1: call    RaceSexMenu_FindControlTile; Resolve the localized Hair > Length control Tile for initialization.
 0x5C8CF6: fld     dword ptr [esi+874h]
 0x5C8CFC: push    ecx
 0x5C8CFD: fstp    [esp+0A4h+var_7C]; a3
 0x5C8D01: fld     dword ptr ds:0A6D2D8h
 0x5C8D07: mov     ebp, eax
-0x5C8D09: fstp    [esp+0A4h+a2]; a3
-0x5C8D0C: push    0FB1h; a2
+0x5C8D09: fstp    [esp+0A4h+value+4]; value
+0x5C8D0C: push    0FB1h; propertyCode
 0x5C8D11: mov     ecx, ebp; this
-0x5C8D13: call    Tile_SetFloat
+0x5C8D13: call    Tile_SetFloat; Hair slider synchronization step 1: write -2147483648 to Tile user3 (0xFB1) as the XML expression sentinel.
 0x5C8D18: fld     [esp+0A0h+var_7C]
 0x5C8D1C: push    ecx
-0x5C8D1D: fstp    [esp+0A4h+a2]; a3
-0x5C8D20: push    0FB1h; a2
+0x5C8D1D: fstp    [esp+0A4h+value+4]; value
+0x5C8D20: push    0FB1h; propertyCode
 0x5C8D25: mov     ecx, ebp; this
-0x5C8D27: call    Tile_SetFloat
+0x5C8D27: call    Tile_SetFloat; Hair slider synchronization step 2: write TESNPC::hairLength to Tile user3; the XML expression propagates it to user0 and the visible thumb.
 0x5C8D2C: fldz
 0x5C8D2E: push    ecx
-0x5C8D2F: fstp    [esp+0A4h+a2]; a3
-0x5C8D32: push    0FB1h; a2
+0x5C8D2F: fstp    [esp+0A4h+value+4]; value
+0x5C8D32: push    0FB1h; propertyCode
 0x5C8D37: mov     ecx, ebp; this
-0x5C8D39: call    Tile_SetFloat
+0x5C8D39: call    Tile_SetFloat; Hair slider synchronization step 3: reset Tile user3 to 0.
 0x5C8D3E: mov     ebp, [esp+0A0h+var_88]
 0x5C8D42: mov     ecx, ebp
 0x5C8D44: call    TESActorBase_IsFemale
@@ -1265,12 +1264,12 @@
 0x5C8D65: mov     eax, ds:0B39528h
 0x5C8D6A: push    eax; int
 0x5C8D6B: mov     eax, ds:0B38FA8h
-0x5C8D70: push    0FB4h; unsigned __int8 *
+0x5C8D70: push    0FB4h; controlName
 0x5C8D75: sub     esp, 8
 0x5C8D78: mov     ecx, esp; this
 0x5C8D7A: mov     [esp+0B0h+var_74], esp
 0x5C8D7E: push    ebx; a3
-0x5C8D7F: push    eax; a2
+0x5C8D7F: push    eax; categoryName
 0x5C8D80: mov     [ecx], ebx
 0x5C8D82: mov     [ecx+4], bx
 0x5C8D86: mov     [ecx+6], bx
@@ -1286,9 +1285,9 @@
 0x5C8DAC: mov     [ecx+4], bx
 0x5C8DB0: mov     [ecx+6], bx
 0x5C8DB4: call    BSStringT_Set
-0x5C8DB9: mov     ecx, esi
+0x5C8DB9: mov     ecx, esi; this
 0x5C8DBB: mov     [esp+0B8h+var_4], edi
-0x5C8DC2: call    sub_5C3440
+0x5C8DC2: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8DC7: mov     ecx, eax
 0x5C8DC9: call    Tile_SetString
 0x5C8DCE: mov     eax, ds:0B38FA8h
@@ -1296,7 +1295,7 @@
 0x5C8DD6: mov     ecx, esp; this
 0x5C8DD8: mov     [esp+0A8h+var_74], esp
 0x5C8DDC: push    ebx; a3
-0x5C8DDD: push    eax; a2
+0x5C8DDD: push    eax; categoryName
 0x5C8DDE: mov     [ecx], ebx
 0x5C8DE0: mov     [ecx+4], bx
 0x5C8DE4: mov     [ecx+6], bx
@@ -1312,21 +1311,21 @@
 0x5C8E0A: mov     [ecx+4], bx
 0x5C8E0E: mov     [ecx+6], bx
 0x5C8E12: call    BSStringT_Set
-0x5C8E17: mov     ecx, esi
+0x5C8E17: mov     ecx, esi; this
 0x5C8E19: mov     [esp+0B0h+var_4], edi
-0x5C8E20: call    sub_5C3440
+0x5C8E20: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8E25: fldz
 0x5C8E27: push    ecx
-0x5C8E28: fstp    [esp+0A4h+a2]; a3
-0x5C8E2B: push    0FB2h; a2
+0x5C8E28: fstp    [esp+0A4h+value+4]; value
+0x5C8E2B: push    0FB2h; propertyCode
 0x5C8E30: mov     ecx, eax; this
-0x5C8E32: call    Tile_SetFloat
+0x5C8E32: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8E37: mov     eax, ds:0B38FA8h
 0x5C8E3C: sub     esp, 8
 0x5C8E3F: mov     ecx, esp; this
 0x5C8E41: mov     [esp+0A8h+var_74], esp
-0x5C8E45: push    ebx; a3
-0x5C8E46: push    eax; a2
+0x5C8E45: push    ebx; controlName
+0x5C8E46: push    eax; categoryName
 0x5C8E47: mov     [ecx], ebx
 0x5C8E49: mov     [ecx+4], bx
 0x5C8E4D: mov     [ecx+6], bx
@@ -1342,22 +1341,22 @@
 0x5C8E76: mov     [ecx+6], bx
 0x5C8E7A: push    eax; a2
 0x5C8E7B: call    BSStringT_Set
-0x5C8E80: mov     ecx, esi
+0x5C8E80: mov     ecx, esi; this
 0x5C8E82: mov     [esp+0B0h+var_4], edi
-0x5C8E89: call    sub_5C3440
+0x5C8E89: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8E8E: fld1
 0x5C8E90: push    ecx
-0x5C8E91: fstp    [esp+0A4h+a2]; a3
-0x5C8E94: push    0FB3h; a2
+0x5C8E91: fstp    [esp+0A4h+value+4]; value
+0x5C8E94: push    0FB3h; propertyCode
 0x5C8E99: mov     ecx, eax; this
-0x5C8E9B: call    Tile_SetFloat
+0x5C8E9B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C8EA0: mov     eax, ds:0B38FA8h
 0x5C8EA5: push    0FAEh
 0x5C8EAA: sub     esp, 8
 0x5C8EAD: mov     ecx, esp; this
 0x5C8EAF: mov     [esp+0ACh+var_74], esp
 0x5C8EB3: push    ebx; a3
-0x5C8EB4: push    eax; a2
+0x5C8EB4: push    eax; categoryName
 0x5C8EB5: mov     [ecx], ebx
 0x5C8EB7: mov     [ecx+4], bx
 0x5C8EBB: mov     [ecx+6], bx
@@ -1373,9 +1372,9 @@
 0x5C8EE1: mov     [ecx+4], bx
 0x5C8EE5: mov     [ecx+6], bx
 0x5C8EE9: call    BSStringT_Set
-0x5C8EEE: mov     ecx, esi
+0x5C8EEE: mov     ecx, esi; this
 0x5C8EF0: mov     [esp+0B4h+var_4], edi
-0x5C8EF7: call    sub_5C3440
+0x5C8EF7: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8EFC: mov     ecx, eax
 0x5C8EFE: call    Tile_GetFloat
 0x5C8F03: fcomp   dword ptr ds:0A379B4h
@@ -1393,10 +1392,10 @@
 0x5C8F2C: mov     eax, ds:0B38FA8h
 0x5C8F31: sub     esp, 0Ch
 0x5C8F34: mov     ecx, esp; this
-0x5C8F36: fstp    [esp+0ACh+a2]; float
+0x5C8F36: fstp    [esp+0ACh+value+4]; float
 0x5C8F3A: mov     [esp+0ACh+var_74], esp
 0x5C8F3E: push    ebx; a3
-0x5C8F3F: push    eax; a2
+0x5C8F3F: push    eax; categoryName
 0x5C8F40: mov     [ecx], ebx
 0x5C8F42: mov     [ecx+4], bx
 0x5C8F46: mov     [ecx+6], bx
@@ -1412,38 +1411,38 @@
 0x5C8F6C: mov     [ecx+4], bx
 0x5C8F70: mov     [ecx+6], bx
 0x5C8F74: call    BSStringT_Set
-0x5C8F79: mov     ecx, esi
+0x5C8F79: mov     ecx, esi; this
 0x5C8F7B: mov     [esp+0B4h+var_4], edi
-0x5C8F82: call    sub_5C3440
+0x5C8F82: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C8F87: push    eax; int
 0x5C8F88: mov     ecx, esi
 0x5C8F8A: call    sub_5C2B50
-0x5C8F8F: push    offset sub_43ACE0; a5
-0x5C8F94: push    offset sub_43EB30; a4
+0x5C8F8F: push    offset FaceGenMatrix_Destruct; a5
+0x5C8F94: push    offset FaceGenMatrix_Construct; a4
 0x5C8F99: push    4; size
 0x5C8F9B: push    18h; a2
 0x5C8F9D: lea     eax, [esp+0B0h+a1]
 0x5C8FA1: push    eax; a1
 0x5C8FA2: call    ArrayConstructor
 0x5C8FA7: fldz
-0x5C8FA9: mov     ecx, [esp+0A0h+var_88]
+0x5C8FA9: mov     ecx, [esp+0A0h+var_88]; this
 0x5C8FAD: mov     ebp, [ecx+0E8h]
 0x5C8FB3: push    ecx
-0x5C8FB4: fstp    [esp+0A4h+a2]; int
-0x5C8FB7: push    ebx; unsigned __int8 *
+0x5C8FB4: fstp    [esp+0A4h+value+4]; maximumRms
+0x5C8FB7: push    ebx; controlName
 0x5C8FB8: lea     edx, [esp+0A8h+a1]
-0x5C8FBC: push    edx; int
+0x5C8FBC: push    edx; outParameters
 0x5C8FBD: mov     [esp+0ACh+var_4], 26h ; '&'
-0x5C8FC8: call    sub_521A10
-0x5C8FCD: push    eax; int
+0x5C8FC8: call    TESNPC_GetActiveFaceGenDeltaParameters; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.
+0x5C8FCD: push    eax; delta
 0x5C8FCE: add     ebp, 29Ch
-0x5C8FD4: push    ebp; int
-0x5C8FD5: call    sub_552990
-0x5C8FDA: push    ebx
+0x5C8FD4: push    ebp; base
+0x5C8FD5: call    FaceGenHeadParameters_Combine; Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.
+0x5C8FDA: push    ebx; matrixChannel
 0x5C8FDB: lea     eax, [esp+0B8h+a1]
-0x5C8FDF: push    ebx
-0x5C8FE0: push    eax
-0x5C8FE1: call    BSFaceGen_GetAge
+0x5C8FDF: push    ebx; controlIndex
+0x5C8FE0: push    eax; parameters
+0x5C8FE1: call    FaceGenHeadParameters_GetControlValue; Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.
 0x5C8FE6: fstp    [esp+0C0h+var_7C]
 0x5C8FEA: fld1
 0x5C8FEC: add     esp, 18h
@@ -1461,7 +1460,7 @@
 0x5C9012: faddp   st(1), st
 0x5C9014: fstp    dword ptr [esi+880h]
 0x5C901A: mov     eax, ds:0B38F98h
-0x5C901F: push    eax; a2
+0x5C901F: push    eax; categoryName
 0x5C9020: mov     [ecx], ebx
 0x5C9022: mov     [ecx+4], bx
 0x5C9026: mov     [ecx+6], bx
@@ -1477,30 +1476,30 @@
 0x5C9049: mov     [ecx+4], bx
 0x5C904D: mov     [ecx+6], bx
 0x5C9051: call    BSStringT_Set
-0x5C9056: mov     ecx, esi
+0x5C9056: mov     ecx, esi; this
 0x5C9058: mov     byte ptr [esp+0B0h+var_4], 26h ; '&'
-0x5C9060: call    sub_5C3440
+0x5C9060: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C9065: fld     dword ptr [esi+880h]
 0x5C906B: push    ecx
 0x5C906C: fstp    [esp+0A4h+var_7C]
 0x5C9070: fld     dword ptr ds:0A6D2D8h
 0x5C9076: mov     ebp, eax
-0x5C9078: fstp    [esp+0A4h+a2]; a3
-0x5C907B: push    0FB1h; a2
+0x5C9078: fstp    [esp+0A4h+value+4]; value
+0x5C907B: push    0FB1h; propertyCode
 0x5C9080: mov     ecx, ebp; this
-0x5C9082: call    Tile_SetFloat
+0x5C9082: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C9087: fld     [esp+0A0h+var_7C]
 0x5C908B: push    ecx
-0x5C908C: fstp    [esp+0A4h+a2]; a3
-0x5C908F: push    0FB1h; a2
+0x5C908C: fstp    [esp+0A4h+value+4]; value
+0x5C908F: push    0FB1h; propertyCode
 0x5C9094: mov     ecx, ebp; this
-0x5C9096: call    Tile_SetFloat
+0x5C9096: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C909B: fldz
 0x5C909D: push    ecx
-0x5C909E: fstp    [esp+0A4h+a2]; a3
-0x5C90A1: push    0FB1h; a2
+0x5C909E: fstp    [esp+0A4h+value+4]; value
+0x5C90A1: push    0FB1h; propertyCode
 0x5C90A6: mov     ecx, ebp; this
-0x5C90A8: call    Tile_SetFloat
+0x5C90A8: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C90AD: mov     ecx, [esp+0A0h+var_88]
 0x5C90B1: call    TESActorBase_IsFemale
 0x5C90B6: test    eax, eax
@@ -1508,12 +1507,12 @@
 0x5C90BA: fld     dword ptr ds:0A53954h
 0x5C90C0: jmp     short loc_5C90C8
 0x5C90C2: fld     dword ptr ds:0A379B4h
-0x5C90C8: push    ebx; int
+0x5C90C8: push    ebx; matrixChannel
 0x5C90C9: fstp    [esp+0A4h+var_7C]
 0x5C90CD: lea     ecx, [esp+0A4h+a1]
-0x5C90D1: push    1; unsigned __int8 *
-0x5C90D3: push    ecx
-0x5C90D4: call    BSFaceGen_GetAge
+0x5C90D1: push    1; controlIndex
+0x5C90D3: push    ecx; parameters
+0x5C90D4: call    FaceGenHeadParameters_GetControlValue; Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.
 0x5C90D9: fsub    [esp+0ACh+var_7C]
 0x5C90DD: add     esp, 4
 0x5C90E0: mov     ecx, esp; this
@@ -1527,7 +1526,7 @@
 0x5C90FF: fadd    qword ptr ds:0A2FC68h
 0x5C9105: fstp    dword ptr [esi+884h]
 0x5C910B: mov     eax, ds:0B38FA0h
-0x5C9110: push    eax; a2
+0x5C9110: push    eax; categoryName
 0x5C9111: mov     [ecx], ebx
 0x5C9113: mov     [ecx+4], bx
 0x5C9117: mov     [ecx+6], bx
@@ -1543,31 +1542,31 @@
 0x5C913A: mov     [ecx+4], bx
 0x5C913E: mov     [ecx+6], bx
 0x5C9142: call    BSStringT_Set
-0x5C9147: mov     ecx, esi
+0x5C9147: mov     ecx, esi; this
 0x5C9149: mov     byte ptr [esp+0B0h+var_4], 26h ; '&'
-0x5C9151: call    sub_5C3440
+0x5C9151: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C9156: fld     dword ptr [esi+884h]
 0x5C915C: push    ecx
 0x5C915D: fstp    [esp+0A4h+var_7C]
 0x5C9161: fld     dword ptr ds:0A6D2D8h
 0x5C9167: mov     ebx, eax
-0x5C9169: fstp    [esp+0A4h+a2]; a3
-0x5C916C: push    0FB1h; a2
+0x5C9169: fstp    [esp+0A4h+value+4]; value
+0x5C916C: push    0FB1h; propertyCode
 0x5C9171: mov     ecx, ebx; this
-0x5C9173: call    Tile_SetFloat
+0x5C9173: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C9178: fld     [esp+0A0h+var_7C]
 0x5C917C: push    ecx
-0x5C917D: fstp    [esp+0A4h+a2]; a3
-0x5C9180: push    0FB1h; a2
+0x5C917D: fstp    [esp+0A4h+value+4]; value
+0x5C9180: push    0FB1h; propertyCode
 0x5C9185: mov     ecx, ebx; this
-0x5C9187: call    Tile_SetFloat
+0x5C9187: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5C918C: fldz
 0x5C918E: push    ecx
-0x5C918F: fstp    [esp+0A4h+a2]; a3
-0x5C9192: push    0FB1h; a2
+0x5C918F: fstp    [esp+0A4h+value+4]; value
+0x5C9192: push    0FB1h; propertyCode
 0x5C9197: mov     ecx, ebx; this
-0x5C9199: call    Tile_SetFloat
-0x5C919E: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x5C9199: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5C919E: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x5C91A3: push    4; int
 0x5C91A5: push    18h; unsigned int
 0x5C91A7: lea     edx, [esp+0ACh+a1]
@@ -1584,3 +1583,97 @@
 0x5C91CC: pop     ebx
 0x5C91CD: add     esp, 8Ch
 0x5C91D3: retn    4
+0x9C15B0: mov     ecx, [ebp-7Ch]; void *
+0x9C15B3: jmp     BSStringT_Clear
+0x9C15B8: mov     ecx, [ebp-7Ch]; void *
+0x9C15BB: jmp     BSStringT_Clear
+0x9C15C0: mov     ecx, [ebp-7Ch]; void *
+0x9C15C3: jmp     BSStringT_Clear
+0x9C15C8: mov     ecx, [ebp-78h]; void *
+0x9C15CB: jmp     BSStringT_Clear
+0x9C15D0: mov     ecx, [ebp-78h]; void *
+0x9C15D3: jmp     BSStringT_Clear
+0x9C15D8: mov     ecx, [ebp-78h]; void *
+0x9C15DB: jmp     BSStringT_Clear
+0x9C15E0: mov     ecx, [ebp-78h]; void *
+0x9C15E3: jmp     BSStringT_Clear
+0x9C15E8: mov     ecx, [ebp-78h]; void *
+0x9C15EB: jmp     BSStringT_Clear
+0x9C15F0: mov     ecx, [ebp-78h]; void *
+0x9C15F3: jmp     BSStringT_Clear
+0x9C15F8: mov     ecx, [ebp-78h]; void *
+0x9C15FB: jmp     BSStringT_Clear
+0x9C1600: mov     ecx, [ebp-74h]; void *
+0x9C1603: jmp     BSStringT_Clear
+0x9C1608: mov     ecx, [ebp-74h]; void *
+0x9C160B: jmp     BSStringT_Clear
+0x9C1610: mov     ecx, [ebp-74h]; void *
+0x9C1613: jmp     BSStringT_Clear
+0x9C1618: mov     ecx, [ebp-74h]; void *
+0x9C161B: jmp     BSStringT_Clear
+0x9C1620: mov     ecx, [ebp-74h]; void *
+0x9C1623: jmp     BSStringT_Clear
+0x9C1628: mov     ecx, [ebp-74h]; void *
+0x9C162B: jmp     BSStringT_Clear
+0x9C1630: mov     ecx, [ebp-74h]; void *
+0x9C1633: jmp     BSStringT_Clear
+0x9C1638: mov     ecx, [ebp-74h]; void *
+0x9C163B: jmp     BSStringT_Clear
+0x9C1640: mov     ecx, [ebp-74h]; void *
+0x9C1643: jmp     BSStringT_Clear
+0x9C1648: mov     ecx, [ebp-74h]; void *
+0x9C164B: jmp     BSStringT_Clear
+0x9C1650: mov     ecx, [ebp-74h]; void *
+0x9C1653: jmp     BSStringT_Clear
+0x9C1658: mov     ecx, [ebp-74h]; void *
+0x9C165B: jmp     BSStringT_Clear
+0x9C1660: mov     ecx, [ebp-74h]; void *
+0x9C1663: jmp     BSStringT_Clear
+0x9C1668: mov     ecx, [ebp-74h]; void *
+0x9C166B: jmp     BSStringT_Clear
+0x9C1670: mov     ecx, [ebp-74h]; void *
+0x9C1673: jmp     BSStringT_Clear
+0x9C1678: mov     ecx, [ebp-74h]; void *
+0x9C167B: jmp     BSStringT_Clear
+0x9C1680: mov     ecx, [ebp-74h]; void *
+0x9C1683: jmp     BSStringT_Clear
+0x9C1688: mov     ecx, [ebp-74h]; void *
+0x9C168B: jmp     BSStringT_Clear
+0x9C1690: mov     ecx, [ebp-74h]; void *
+0x9C1693: jmp     BSStringT_Clear
+0x9C1698: mov     ecx, [ebp-74h]; void *
+0x9C169B: jmp     BSStringT_Clear
+0x9C16A0: mov     ecx, [ebp-74h]; void *
+0x9C16A3: jmp     BSStringT_Clear
+0x9C16A8: mov     ecx, [ebp-74h]; void *
+0x9C16AB: jmp     BSStringT_Clear
+0x9C16B0: mov     ecx, [ebp-74h]; void *
+0x9C16B3: jmp     BSStringT_Clear
+0x9C16B8: mov     ecx, [ebp-74h]; void *
+0x9C16BB: jmp     BSStringT_Clear
+0x9C16C0: mov     ecx, [ebp-74h]; void *
+0x9C16C3: jmp     BSStringT_Clear
+0x9C16C8: mov     ecx, [ebp-74h]; void *
+0x9C16CB: jmp     BSStringT_Clear
+0x9C16D0: mov     ecx, [ebp-74h]; void *
+0x9C16D3: jmp     BSStringT_Clear
+0x9C16D8: mov     ecx, [ebp-74h]; void *
+0x9C16DB: jmp     BSStringT_Clear
+0x9C16E0: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9C16E5: push    4; int
+0x9C16E7: push    18h; unsigned int
+0x9C16E9: lea     eax, [ebp-6Ch]
+0x9C16EC: push    eax; void *
+0x9C16ED: call    $LN21
+0x9C16F2: retn
+0x9C16F3: mov     ecx, [ebp-74h]; void *
+0x9C16F6: jmp     BSStringT_Clear
+0x9C16FB: mov     ecx, [ebp-74h]; void *
+0x9C16FE: jmp     BSStringT_Clear
+0x9C1703: mov     edx, [esp+arg_4]
+0x9C1707: lea     eax, [edx-90h]
+0x9C170D: mov     ecx, [edx-94h]
+0x9C1713: xor     ecx, eax
+0x9C1715: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C171A: mov     eax, offset stru_AEA5E4
+0x9C171F: jmp     ___CxxFrameHandler3

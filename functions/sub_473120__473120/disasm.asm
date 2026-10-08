@@ -12,7 +12,7 @@
 0x47313C: call    edx
 0x47313E: test    eax, eax
 0x473140: jz      short loc_473150
-0x473142: cmp     eax, offset dword_B3CCB0
+0x473142: cmp     eax, offset stru_B3CCB0
 0x473147: jz      short loc_47316C
 0x473149: mov     eax, [eax+4]
 0x47314C: test    eax, eax
@@ -38,7 +38,7 @@
 0x473179: test    eax, eax
 0x47317B: jz      short loc_47318E
 0x47317D: lea     ecx, [ecx+0]
-0x473180: cmp     eax, offset dword_B3CD7C
+0x473180: cmp     eax, offset stru_B3CD7C
 0x473185: jz      short loc_4731CA
 0x473187: mov     eax, [eax+4]
 0x47318A: test    eax, eax

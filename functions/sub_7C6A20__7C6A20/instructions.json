@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6A20",
-    "line": "push    ebx",
+    "line": "push    ebx; MEF v57 IMPLEMENTED 2026-10-08: v57 ref-list InsertBefore mutation wrapper preserves native allocator/refs/links and synchronizes known indexed lists. In receiver scope, insertion before fence does not add a searchable old-tail entry; unsupported placements disable scoped index.",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7C6A73",
-    "line": "mov     [esi], eax",
+    "line": "mov     [esi], eax; MEF LARGE PERF 2026-09-08: PERF-6 InsertBeforePosition links newly acquired node.next=position and node.prev=position.prev, fixes predecessor/head and position.prev, incrementscount. Paired with predecessor removal7C72B8, it restores that payload before its original successor. Node acquisition/ref traffic may still occur.",
     "mnemonic": "mov",
     "size": 2
   },

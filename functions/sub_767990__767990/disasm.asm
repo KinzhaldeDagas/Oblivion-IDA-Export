@@ -26,7 +26,7 @@
 0x7679E5: cmp     dword ptr [eax], 0
 0x7679E8: jz      loc_767B09
 0x7679EE: mov     ecx, ebx; this
-0x7679F0: call    sub_763FE0
+0x7679F0: call    NiDX9Renderer_EnterRendererAndPrecache
 0x7679F5: mov     eax, [esi+1Ch]
 0x7679F8: xor     edi, edi
 0x7679FA: test    eax, eax
@@ -76,7 +76,7 @@
 0x767A7A: call    NiTMap_RemoveAt
 0x767A7F: push    esi
 0x767A80: mov     dword ptr [esi+20h], 0
-0x767A87: call    FormHeapFree
+0x767A87: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x767A8C: mov     esi, edi
 0x767A8E: mov     edi, [esp+2Ch+var_8]
 0x767A92: add     esp, 4

@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 8,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4ED0D0",
+  "chunks": [
+    [
+      "0x4ED0D0",
+      "0x4ED1A6"
+    ],
+    [
+      "0x9B6590",
+      "0x9B65C9"
+    ]
+  ],
+  "chunks_sha256": "be85da52a079f93792aa73bef9c80a2f818260a13eeac2710696fbb8ddb119cd",
+  "comment_regular": "Verified worker path: obtains the queued/archive file, loads the TerrainLODQuad NIF through NiStream/BSStream, and stores the loaded object in TerrainLODQuadLoadTask.loadedTerrainNode (+0x3C).",
+  "comment_repeatable": "Verified worker path: obtains the queued/archive file, loads the TerrainLODQuad NIF through NiStream/BSStream, and stores the loaded object in TerrainLODQuadLoadTask.loadedTerrainNode (+0x3C).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TerrainLODQuadLoadTask_LoadNIF",
   "end_ea": "0x4ED1A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ED0D0",
+  "name": "TerrainLODQuadLoadTask_LoadNIF",
   "segment": ".text",
   "sha256": "cb4dd176c32f5769e1644fb76c4c39b57e6de7e6eb400c77abead160960a440c",
   "size": 214,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ED0D0",
-  "type": "void __thiscall(Ni2DBuffer **this)",
-  "xrefs_from_count": 59,
+  "total_chunk_size": 271,
+  "type": "void __thiscall(TerrainLODQuadLoadTask_OblivionLayout_048Verified *this)",
+  "xrefs_from_count": 75,
   "xrefs_to_count": 1
 }

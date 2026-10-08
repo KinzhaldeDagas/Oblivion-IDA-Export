@@ -1,7 +1,7 @@
-0x9F7A70: push    1E1F40h
+0x9F7A70: push    1E1F40h; defaultValue
 0x9F7A75: push    offset aIhaircolor11; "iHairColor11"
-0x9F7A7A: mov     ecx, offset dword_B39410
-0x9F7A7F: call    GameSetting_ConstrAndReg
+0x9F7A7A: mov     ecx, offset stru_B39410; self
+0x9F7A7F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F7A84: push    offset sub_A22F40; void (__cdecl *)()
 0x9F7A89: call    _atexit
 0x9F7A8E: pop     ecx

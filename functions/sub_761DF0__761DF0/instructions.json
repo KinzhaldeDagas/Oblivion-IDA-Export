@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x761DF0",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion-authoritative: lazily loads D3D9.DLL, resolves Direct3DCreate9, and creates the process IDirect3D9 singleton with SDK version 0x20. Returns 0 on success, -1 on failure.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x761E2F",
-    "line": "call    eax ; dword_B42158",
+    "line": "call    eax ; g_Direct3DCreate9",
     "mnemonic": "call",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x761E3F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x761E51",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

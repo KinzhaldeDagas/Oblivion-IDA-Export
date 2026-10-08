@@ -11,11 +11,11 @@
 0x7DAB1A: push    eax; Size
 0x7DAB1B: call    FormHeapAlloc
 0x7DAB20: mov     ecx, [esi+100h]
-0x7DAB26: push    ecx; Size
-0x7DAB27: push    edi; Src
-0x7DAB28: push    eax; Dst
+0x7DAB26: push    ecx; byteCount
+0x7DAB27: push    edi; source
+0x7DAB28: push    eax; destination
 0x7DAB29: mov     [esi+104h], eax
-0x7DAB2F: call    _memcpy
+0x7DAB2F: call    _memcpy;
 0x7DAB34: add     esp, 10h
 0x7DAB37: jmp     short loc_7DAB43
 0x7DAB39: mov     dword ptr [esi+104h], 0

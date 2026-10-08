@@ -1,154 +1,243 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IMediaObjectVtbl",
+  "definition": "struct IMediaObjectVtbl\n{\nHRESULT_0 (*QueryInterface)(IMediaObject_0 *, const IID *const, void **);\nULONG (*AddRef)(IMediaObject_0 *);\nULONG (*Release)(IMediaObject_0 *);\nHRESULT_0 (*GetStreamCount)(IMediaObject_0 *, DWORD *, DWORD *);\nHRESULT_0 (*GetInputStreamInfo)(IMediaObject_0 *, DWORD, DWORD *);\nHRESULT_0 (*GetOutputStreamInfo)(IMediaObject_0 *, DWORD, DWORD *);\nHRESULT_0 (*GetInputType)(IMediaObject_0 *, DWORD, DWORD, DMO_MEDIA_TYPE *);\nHRESULT_0 (*GetOutputType)(IMediaObject_0 *, DWORD, DWORD, DMO_MEDIA_TYPE *);\nHRESULT_0 (*SetInputType)(IMediaObject_0 *, DWORD, const DMO_MEDIA_TYPE *, DWORD);\nHRESULT_0 (*SetOutputType)(IMediaObject_0 *, DWORD, const DMO_MEDIA_TYPE *, DWORD);\nHRESULT_0 (*GetInputCurrentType)(IMediaObject_0 *, DWORD, DMO_MEDIA_TYPE *);\nHRESULT_0 (*GetOutputCurrentType)(IMediaObject_0 *, DWORD, DMO_MEDIA_TYPE *);\nHRESULT_0 (*GetInputSizeInfo)(IMediaObject_0 *, DWORD, DWORD *, DWORD *, DWORD *);\nHRESULT_0 (*GetOutputSizeInfo)(IMediaObject_0 *, DWORD, DWORD *, DWORD *);\nHRESULT_0 (*GetInputMaxLatency)(IMediaObject_0 *, DWORD, REFERENCE_TIME *);\nHRESULT_0 (*SetInputMaxLatency)(IMediaObject_0 *, DWORD, REFERENCE_TIME);\nHRESULT_0 (*Flush)(IMediaObject_0 *);\nHRESULT_0 (*Discontinuity)(IMediaObject_0 *, DWORD);\nHRESULT_0 (*AllocateStreamingResources)(IMediaObject_0 *);\nHRESULT_0 (*FreeStreamingResources)(IMediaObject_0 *);\nHRESULT_0 (*GetInputStatus)(IMediaObject_0 *, DWORD, DWORD *);\nHRESULT_0 (*ProcessInput)(IMediaObject_0 *, DWORD, IMediaBuffer_0 *, DWORD, REFERENCE_TIME, REFERENCE_TIME);\nHRESULT_0 (*ProcessOutput)(IMediaObject_0 *, DWORD, DWORD, DMO_OUTPUT_DATA_BUFFER *, DWORD *);\nHRESULT_0 (*Lock)(IMediaObject_0 *, LONG);\n}\n",
   "id": 18374686479672034512,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IMediaObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IMediaObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetStreamCount",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD *, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetInputStreamInfo",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetOutputStreamInfo",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetInputType",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD, DMO_MEDIA_TYPE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetOutputType",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD, DMO_MEDIA_TYPE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetInputType",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, const DMO_MEDIA_TYPE *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetOutputType",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, const DMO_MEDIA_TYPE *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetInputCurrentType",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DMO_MEDIA_TYPE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetOutputCurrentType",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DMO_MEDIA_TYPE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetInputSizeInfo",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD *, DWORD *, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetOutputSizeInfo",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD *, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetInputMaxLatency",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, REFERENCE_TIME *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetInputMaxLatency",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, REFERENCE_TIME)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Flush",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Discontinuity",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AllocateStreamingResources",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FreeStreamingResources",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetInputStatus",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProcessInput",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, IMediaBuffer_0 *, DWORD, REFERENCE_TIME, REFERENCE_TIME)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ProcessOutput",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, DWORD, DWORD, DMO_OUTPUT_DATA_BUFFER *, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Lock",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IMediaObject_0 *, LONG)"
     }
   ],
   "name": "IMediaObjectVtbl",
+  "ordinal": 3865,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 96
 }

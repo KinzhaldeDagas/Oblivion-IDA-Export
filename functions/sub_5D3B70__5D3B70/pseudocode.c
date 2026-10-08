@@ -9,95 +9,95 @@ void __usercall sub_5D3B70(
 {
   _DWORD *OpenMenuTile; // eax
   void *ParentMenu; // eax
-  BSStringT *v10; // ebx
-  int v11; // esi
-  _DWORD *v12; // edi
-  _DWORD *v13; // ebp
-  CHAR *v14; // eax
+  BSStringT *v9; // ebx
+  int v10; // esi
+  _DWORD *v11; // edi
+  _DWORD *v12; // ebp
+  CHAR *v13; // eax
   char *m_data; // ecx
-  int v16; // esi
+  int v15; // esi
   double Float; // st7
-  int v18; // eax
-  int v19; // ecx
-  double v20; // st7
-  float v21; // [esp+14h] [ebp-4h]
+  int v17; // eax
+  int v18; // ecx
+  double v19; // st7
+  float v20; // [esp+14h] [ebp-4h]
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40F);
-  ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-  v10 = (BSStringT *)OblivionDynamicCast(
-                       ParentMenu,
-                       0,
-                       (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
-                       &SaveMenu `RTTI Type Descriptor',
-                       0);
-  if ( sub_578D70() == 2 )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40F); /*0x5d3b77*/
+  ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x5d3b81*/
+  v9 = (BSStringT *)OblivionDynamicCast( /*0x5d3b9d*/
+                      ParentMenu,
+                      0,
+                      (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
+                      &SaveMenu `RTTI Type Descriptor',
+                      0);
+  if ( InterfaceManager_ConsumeMessageButton() == 2 ) /*0x5d3ba6*/
   {
-    v11 = *((_DWORD *)v10[9].m_data + 0xE);
-    v12 = 0;
-    v13 = 0;
-    if ( v11 )
+    v10 = *((_DWORD *)v9[9].m_data + 0xE); /*0x5d3bb1*/
+    v11 = 0; /*0x5d3bb5*/
+    v12 = 0; /*0x5d3bb7*/
+    if ( v10 ) /*0x5d3bbb*/
     {
-      do
+      do /*0x5d3c09*/
       {
-        if ( v12 == (_DWORD *)v10[0xB].m_data )
-          break;
-        if ( v12 )
+        if ( v11 == (_DWORD *)v9[0xB].m_data ) /*0x5d3bc4*/
+          break; /*0x5d3bc4*/
+        if ( v11 ) /*0x5d3bc8*/
         {
-          if ( Tile_GetFloat(v12, 0xFA1) != fConstant_1 && Tile_GetFloat(v12, 0xFF0) > *(float *)&SrcStr )
-            v13 = v12;
+          if ( Tile_GetFloat(v11, 0xFA1) != fConstant_1 && Tile_GetFloat(v11, 0xFF0) > *(float *)&SrcStr ) /*0x5d3bfa*/
+            v12 = v11; /*0x5d3bfc*/
         }
-        v12 = *(_DWORD **)(v11 + 8);
-        v11 = *(_DWORD *)(v11 + 4);
+        v11 = *(_DWORD **)(v10 + 8); /*0x5d3bfe*/
+        v10 = *(_DWORD *)(v10 + 4); /*0x5d3c04*/
       }
-      while ( v11 );
-      if ( v12 )
+      while ( v10 ); /*0x5d3c09*/
+      if ( v11 ) /*0x5d3c0d*/
       {
-        if ( !v11 )
-          goto LABEL_16;
-        do
+        if ( !v10 ) /*0x5d3c15*/
+          goto LABEL_16; /*0x5d3c15*/
+        do /*0x5d3c54*/
         {
-          v13 = *(_DWORD **)(v11 + 8);
-          v11 = *(_DWORD *)(v11 + 4);
+          v12 = *(_DWORD **)(v10 + 8); /*0x5d3c17*/
+          v10 = *(_DWORD *)(v10 + 4); /*0x5d3c1d*/
         }
-        while ( v11 && (Tile_GetFloat(v13, 0xFA1) == fConstant_1 || Tile_GetFloat(v12, 0xFF0) <= *(float *)&SrcStr) );
-        if ( v13 && Tile_GetFloat(v13, 0xFA1) != fConstant_1 )
+        while ( v10 && (Tile_GetFloat(v12, 0xFA1) == fConstant_1 || Tile_GetFloat(v11, 0xFF0) <= *(float *)&SrcStr) ); /*0x5d3c54*/
+        if ( v12 && Tile_GetFloat(v12, 0xFA1) != fConstant_1 ) /*0x5d3c71*/
         {
 LABEL_16:
-          if ( v13 )
+          if ( v12 ) /*0x5d3c75*/
           {
-            v14 = sub_588C10(v13, 0xFB1);
-            BSStringT_Set(v10 + 0xA, v14, 0);
+            v13 = sub_588C10(v12, 0xFB1); /*0x5d3c7e*/
+            BSStringT_Set(v9 + 0xA, v13, 0); /*0x5d3c89*/
           }
         }
       }
     }
-    m_data = v10[0xB].m_data;
-    v16 = *(_DWORD *)&v10[9].m_dataLen;
-    if ( m_data )
-      Float = Tile_GetFloat(m_data, 0xFAE);
+    m_data = v9[0xB].m_data; /*0x5d3c8e*/
+    v15 = *(_DWORD *)&v9[9].m_dataLen; /*0x5d3c93*/
+    if ( m_data ) /*0x5d3c96*/
+      Float = Tile_GetFloat(m_data, 0xFAE); /*0x5d3c9d*/
     else
-      Float = flt_A30634;
-    v21 = Float;
-    v18 = Double_To_SInt32(v21);
-    v19 = 1;
-    if ( v16 )
+      Float = kTerrainLODQuadRayDirectionZ; /*0x5d3ca4*/
+    v20 = Float; /*0x5d3caa*/
+    v17 = Double_To_SInt32(v20); /*0x5d3cb2*/
+    v18 = 1; /*0x5d3cb9*/
+    if ( v15 ) /*0x5d3cbe*/
     {
-      while ( *(_DWORD *)v16 )
+      while ( *(_DWORD *)v15 ) /*0x5d3cc3*/
       {
-        if ( v18 == v19 )
+        if ( v17 == v18 ) /*0x5d3cc7*/
         {
-          DeleteSavegame(SaveLoad_CurrentSavegame, v21, a5, a6, a7, a4, a1, a2, a3, *(const char **)v16, 0);
-          break;
+          DeleteSavegame(g_TESSaveLoadGame, v20, a5, a6, a7, a4, a1, a2, a3, *(const char **)v15, 0); /*0x5d3ce0*/
+          break; /*0x5d3ce0*/
         }
-        v16 = *(_DWORD *)(v16 + 4);
-        ++v19;
-        if ( !v16 )
-          break;
+        v15 = *(_DWORD *)(v15 + 4); /*0x5d3cc9*/
+        ++v18; /*0x5d3ccc*/
+        if ( !v15 ) /*0x5d3cd1*/
+          break; /*0x5d3cd1*/
       }
     }
-    v20 = flt_A30634;
-    GameUI_QueueMessage((const char *)dword_B387E0, 0, 1u, flt_A30634);
-    sub_5D38C0(v10, a1, a2, a3, a4, a5, a6, a7, v20, 0);
+    v19 = kTerrainLODQuadRayDirectionZ; /*0x5d3ce5*/
+    GameUI_QueueMessage(stru_B387E0.value, 0, 1u, kTerrainLODQuadRayDirectionZ); /*0x5d3cfa*/
+    sub_5D38C0(v9, a1, a2, a3, a4, a5, a6, a7, v19, 0); /*0x5d3d06*/
   }
-  LOBYTE(v10[0xB].m_dataLen) = 0;
+  LOBYTE(v9[0xB].m_dataLen) = 0; /*0x5d3d0e*/
 }

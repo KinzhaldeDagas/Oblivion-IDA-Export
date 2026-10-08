@@ -7,12 +7,12 @@
 0x89ECCE: mov     eax, [eax+50h]
 0x89ECD1: add     eax, 0D0h ; 'Ð'
 0x89ECD6: jmp     short loc_89ECDD
-0x89ECD8: mov     eax, offset stru_BA7A40
+0x89ECD8: mov     eax, offset unk_BA7A40
 0x89ECDD: push    esi
 0x89ECDE: mov     esi, [esp+4+arg_0]
 0x89ECE2: push    eax
 0x89ECE3: push    esi
-0x89ECE4: call    sub_43F3E0
+0x89ECE4: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x89ECE9: add     esp, 8
 0x89ECEC: mov     eax, esi
 0x89ECEE: pop     esi

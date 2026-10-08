@@ -1,4 +1,4 @@
-0x479780: push    0FFFFFFFFh
+0x479780: push    0FFFFFFFFh; Oblivion equipped-WEAP 3D path on perspective-specific ActorSkinInfo. Accepts form type 0x21; WEAP type byte 5 (Bow) uniquely selects equipment/add-on slot 0x0E, others use slot 9. Loads/clones through Prn, stores WeaponForm/WeaponModel/WeaponObject at +0xDC/+0xE0/+0xE4, then reconciles drawn/sheathed state. External Crossbow contrast: native equipped-model identity is this ActorSkinInfo WeaponForm/WeaponObject pair; a whole ActorAnimData-root search for the first object named Weapon is not identity- or generation-safe. Current discovery is action-triggered and one-shot, with no retry for deferred 3D load, perspective creation/switch, graph rebuild, or successful PostLoadGame.
 0x479782: push    offset SEH_479780
 0x479787: mov     eax, large fs:0
 0x47978D: push    eax
@@ -15,25 +15,25 @@
 0x4797AD: push    eax
 0x4797AE: lea     eax, [esp+0D8h+var_C]
 0x4797B5: mov     large fs:0, eax
-0x4797BB: mov     esi, [esp+0D8h+arg_0]
+0x4797BB: mov     esi, [esp+0D8h+weapon]
 0x4797C2: xor     edi, edi
 0x4797C4: cmp     esi, edi
 0x4797C6: mov     ebx, ecx
 0x4797C8: jz      loc_479C0A
 0x4797CE: cmp     byte ptr [esi+4], 21h ; '!'
 0x4797D2: jnz     loc_479C0A
-0x4797D8: push    edi
-0x4797D9: push    1
+0x4797D8: push    edi; newModelData
+0x4797D9: push    1; replaceMetadata
 0x4797DB: lea     ebp, [ebx+0DCh]
-0x4797E1: push    ebp
-0x4797E2: call    sub_478780
+0x4797E1: push    ebp; slot
+0x4797E2: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x4797E7: lea     eax, [esi+30h]
 0x4797EA: mov     [ebp+0], esi
 0x4797ED: mov     [ebx+0E0h], eax
-0x4797F3: cmp     byte ptr [esi+90h], 5
-0x4797FA: mov     [esp+0D8h+var_BC], 9
+0x4797F3: cmp     byte ptr [esi+90h], 5; Authoritative type gate: TESObjectWEAP weapon-type byte == 5 (Bow) changes the model attachment/add-on slot from 9 to 0x0E. No separate native Crossbow type is tested.
+0x4797FA: mov     [esp+0D8h+slot], 9
 0x479802: jnz     short loc_47980C
-0x479804: mov     [esp+0D8h+var_BC], 0Eh
+0x479804: mov     [esp+0D8h+slot], 0Eh
 0x47980C: mov     ebp, [ebx+150h]
 0x479812: mov     ecx, ds:0B333C4h
 0x479818: cmp     ebp, ecx
@@ -42,25 +42,25 @@
 0x479824: push    ebx
 0x479825: mov     ebp, eax
 0x479827: call    sub_65D770
-0x47982C: mov     ecx, ds:0B333C4h
-0x479832: push    eax
-0x479833: call    PlayerCharacter_GetPlayerNode
-0x479838: mov     ecx, [esp+0D8h+var_BC]
+0x47982C: mov     ecx, ds:0B333C4h; this
+0x479832: push    eax; firstPerson
+0x479833: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
+0x479838: mov     ecx, [esp+0D8h+slot]
 0x47983C: mov     edx, [ebp+0]
-0x47983F: push    eax
+0x47983F: push    eax; skeletonRoot
 0x479840: mov     eax, [ebx+150h]
-0x479846: push    eax
+0x479846: push    eax; actorRef
 0x479847: mov     eax, [edx+14h]
-0x47984A: push    ecx
+0x47984A: push    ecx; slot
 0x47984B: mov     ecx, ebp
 0x47984D: call    eax
-0x47984F: push    eax
-0x479850: call    sub_479450
+0x47984F: push    eax; modelPath
+0x479850: call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.
 0x479855: add     esp, 10h
 0x479858: mov     [ebx+0E4h], eax
-0x47985E: mov     ecx, ds:0B333C4h
-0x479864: push    edi
-0x479865: call    sub_6600D0
+0x47985E: mov     ecx, ds:0B333C4h; this
+0x479864: push    edi; firstPerson
+0x479865: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x47986A: cmp     ebx, eax
 0x47986C: jnz     loc_479B22
 0x479872: mov     [esp+0D8h+Src], edi
@@ -81,7 +81,7 @@
 0x4798AC: push    edx
 0x4798AD: call    sub_57B190
 0x4798B2: push    edi
-0x4798B3: call    FormHeapFree
+0x4798B3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4798B8: add     esp, 18h
 0x4798BB: jmp     loc_479B22
 0x4798C0: mov     edx, [eax]
@@ -101,11 +101,11 @@
 0x4798F0: push    3
 0x4798F2: push    1
 0x4798F4: push    eax
-0x4798F5: call    sub_439EB0
+0x4798F5: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x4798FA: mov     esi, eax
-0x4798FC: lea     ecx, [esp+0D8h+var_AC]
+0x4798FC: lea     ecx, [esp+0D8h+var_AC]; this
 0x479900: mov     [esp+0D8h+Src], esi
-0x479904: call    sub_478B90
+0x479904: call    OB_NiCloningProcess_ctor
 0x479909: fld1
 0x47990B: fst     [esp+0D8h+var_94]
 0x47990F: fst     [esp+0D8h+var_98]
@@ -135,7 +135,7 @@
 0x479965: call    sub_700610
 0x47996A: mov     ebp, eax
 0x47996C: mov     eax, [esp+0D8h+var_B0]
-0x479970: mov     ecx, [esp+0D8h+var_BC]
+0x479970: mov     ecx, [esp+0D8h+slot]
 0x479974: push    eax
 0x479975: push    ecx
 0x479976: push    ebp
@@ -147,7 +147,7 @@
 0x479987: test    ebp, ebp
 0x479989: jz      loc_479AC7
 0x47998F: push    ebp
-0x479990: push    offset dword_B35288
+0x479990: push    0B35288h
 0x479995: call    NiRTTI__IsObjectOfRTTIType
 0x47999A: add     esp, 8
 0x47999D: test    al, al
@@ -178,13 +178,13 @@
 0x4799F1: jmp     loc_479AB5
 0x4799F6: mov     edx, [esp+0D8h+Src]
 0x4799FA: mov     eax, [esp+0D8h+a1]
-0x4799FE: push    0
-0x479A00: push    0FFFFFFFFh
-0x479A02: push    0
-0x479A04: push    edx
-0x479A05: push    ebp
-0x479A06: push    eax
-0x479A07: call    sub_479140
+0x4799FE: push    0; unusedTrailing
+0x479A00: push    0FFFFFFFFh; modelType
+0x479A02: push    0; unusedContext
+0x479A04: push    edx; sourceModelRoot
+0x479A05: push    ebp; modelRoot
+0x479A06: push    eax; skeletonRoot
+0x479A07: call    AttachModelUsingPrnExtraData; Six-argument cdecl helper (all ten native callers push 6 arguments; unusedContext and unusedTrailing are not read). Reads NiStringExtraData 'Prn' from sourceModelRoot, falling back to modelRoot; resolves that exact parent in skeletonRoot and attaches modelRoot. For modelType==7 it forces Prn string byte 6 to 'L' for lookup, then writes it back to 'R'. It then finds exact-name 'Scb' inside modelRoot and attaches that object separately to the same parent, reparenting Scb as modelRoot's sibling before refreshing property/effect state. Missing creature parents invoke the narrow FadeNode-chain Scb removal. Every exit returns the bool result of sub_88D000(modelRoot,1,1), which is not proven to be general attachment success.
 0x479A0C: mov     edx, [ebp+0]
 0x479A0F: mov     eax, [edx+8]
 0x479A12: add     esp, 18h
@@ -193,7 +193,7 @@
 0x479A19: test    eax, eax
 0x479A1B: jz      loc_479AB5
 0x479A21: mov     ecx, [ebp+1Ch]
-0x479A24: mov     edi, [esp+0D8h+var_BC]
+0x479A24: mov     edi, [esp+0D8h+slot]
 0x479A28: xor     esi, esi
 0x479A2A: test    ecx, ecx
 0x479A2C: mov     [esp+0D8h+Src], ecx
@@ -249,7 +249,7 @@
 0x479AB5: mov     ecx, ebp
 0x479AB7: call    NiNode_UpdateDynamicEffectState
 0x479ABC: mov     ecx, ebp; this
-0x479ABE: call    NiAVObject_InitializePropertyState
+0x479ABE: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x479AC3: mov     edi, [esp+0D8h+var_B8]
 0x479AC7: test    edi, edi
 0x479AC9: mov     byte ptr [esp+0D8h+var_4], 1
@@ -314,20 +314,20 @@
 0x479B8D: mov     esi, [ebx+150h]
 0x479B93: cmp     [esi+58h], edi
 0x479B96: jz      short loc_479BFD
-0x479B98: mov     ecx, ds:0B333C4h
+0x479B98: mov     ecx, ds:0B333C4h; this
 0x479B9E: cmp     esi, ecx
 0x479BA0: jnz     short loc_479BD9
-0x479BA2: push    1
-0x479BA4: call    sub_6600D0
+0x479BA2: push    1; firstPerson
+0x479BA4: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x479BA9: cmp     ebx, eax
 0x479BAB: jnz     short loc_479BD9
 0x479BAD: mov     ebp, [esi+58h]
 0x479BB0: mov     edi, [ebp+0]
 0x479BB3: mov     ecx, ds:0B333C4h; this
 0x479BB9: push    esi
-0x479BBA: push    1; a2
+0x479BBA: push    1; firstPerson
 0x479BBC: add     edi, 150h
-0x479BC2: call    Player_GetAnimData
+0x479BC2: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x479BC7: push    eax
 0x479BC8: push    ebx
 0x479BC9: mov     ecx, esi
@@ -340,9 +340,9 @@
 0x479BD9: mov     ebp, [esi+58h]
 0x479BDC: mov     edi, [ebp+0]
 0x479BDF: push    esi
-0x479BE0: mov     ecx, esi
+0x479BE0: mov     ecx, esi; this
 0x479BE2: add     edi, 150h
-0x479BE8: call    TESObjectREFR_GetAnimData
+0x479BE8: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x479BED: push    eax
 0x479BEE: push    ebx
 0x479BEF: mov     ecx, esi
@@ -353,7 +353,7 @@
 0x479BFB: call    eax
 0x479BFD: mov     ecx, [esp+0D8h+Src]
 0x479C01: push    ecx
-0x479C02: call    FormHeapFree
+0x479C02: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x479C07: add     esp, 4
 0x479C0A: mov     ecx, dword ptr [esp+0D8h+var_C]
 0x479C11: mov     large fs:0, ecx
@@ -367,3 +367,22 @@
 0x479C26: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x479C2B: add     esp, 0C4h
 0x479C31: retn    4
+0x9AF110: lea     ecx, [ebp-0C4h]; void *
+0x9AF116: jmp     BSStringT_Clear
+0x9AF11B: lea     ecx, [ebp-0ACh]
+0x9AF121: jmp     sub_4781A0
+0x9AF126: lea     ecx, [ebp-0B8h]; slot
+0x9AF12C: jmp     NiPointerSlot_Release
+0x9AF131: lea     ecx, [ebp-0C4h]; void *
+0x9AF137: jmp     BSStringT_Clear
+0x9AF13C: mov     edx, [esp+arg_4]
+0x9AF140: lea     eax, [edx-0C8h]
+0x9AF146: mov     ecx, [edx-0CCh]
+0x9AF14C: xor     ecx, eax
+0x9AF14E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF153: add     eax, 10h
+0x9AF156: mov     ecx, [edx-4]
+0x9AF159: xor     ecx, eax
+0x9AF15B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF160: mov     eax, offset stru_ADB7B4
+0x9AF165: jmp     ___CxxFrameHandler3

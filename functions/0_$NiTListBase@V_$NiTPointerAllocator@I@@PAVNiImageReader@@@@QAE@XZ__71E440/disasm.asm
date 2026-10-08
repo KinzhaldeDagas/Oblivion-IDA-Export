@@ -4,7 +4,7 @@
 0x71E448: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVNiImageReader@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiImageReader *>::`vftable'
 0x71E44E: jz      short loc_71E459
 0x71E450: push    esi
-0x71E451: call    FormHeapFree
+0x71E451: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71E456: add     esp, 4
 0x71E459: mov     eax, esi
 0x71E45B: pop     esi

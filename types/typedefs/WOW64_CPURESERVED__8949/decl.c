@@ -1,1 +1,5 @@
-_WOW64_CPURESERVED
+struct _WOW64_CPURESERVED
+{
+USHORT Flags;
+USHORT Machine;
+};

@@ -3,5 +3,5 @@ double __stdcall ValueModifierEffect_GetEffectiveMagnitude_::Done(float a1)
 {
   float v2; // [esp-4h] [ebp-4h]
 
-  return v2;
+  return v2; /*0x6a82ed*/
 }

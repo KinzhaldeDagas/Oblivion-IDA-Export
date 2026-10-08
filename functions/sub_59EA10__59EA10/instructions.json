@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59EA10",
-    "line": "push    esi",
+    "line": "push    esi; DialogMenu wrapper around LoadNextTopicList. Every native call site passes clearAll=false; processCurrentInfo is false only for the path that refreshes choices without committing the current INFO.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x59EA14",
-    "line": "call    sub_6B8660",
+    "line": "call    MenuTopicManager__GetSingleton",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x59EA24",
-    "line": "push    1",
+    "line": "push    1; enableActions",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59EA26",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -61,49 +61,49 @@
   },
   {
     "ea": "0x59EA2E",
-    "line": "call    sub_59E2B0",
+    "line": "call    DialogMenu__RefreshActionAvailability; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EA33",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, dword ptr [esp+8+clearAll]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x59EA37",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+8+processCurrentInfo]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x59EA3B",
-    "line": "push    eax",
+    "line": "push    eax; clearAll",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59EA3C",
-    "line": "push    ecx",
+    "line": "push    ecx; processCurrentInfo",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59EA3D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EA3F",
-    "line": "call    sub_6B92C0",
+    "line": "call    MenuTopicManager__LoadNextTopicList; Player-menu post-response transition. AddTopicList is unconditional for a processed INFO. Only INFOGENERAL/D7 without RunForRumors skips Goodbye handling and RunResult; INFOGENERAL always rebuilds from player known topics instead of following INFO links. The 0x40 flag has no effect on ordinary topics.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EA44",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x59EA53",
-    "line": "call    sub_59E680",
+    "line": "call    DialogMenu__LoadTopicsList; Builds player topic-choice tiles by starting at MenuTopicManager::FirstTopic(skipGreeting=true), deliberately omitting the GREETING/current spoken head entry. Each rendered tile receives a zero-based choice index; the manager cursor is restored with FirstTopic(false) afterward.",
     "mnemonic": "call",
     "size": 5
   },

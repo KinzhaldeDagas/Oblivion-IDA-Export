@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x77EE52",
-    "line": "mov     [esp+18h+var_4], eax",
+    "line": "mov     [esp+18h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,67 +169,67 @@
   },
   {
     "ea": "0x77EE63",
-    "line": "mov     ecx, ds:0B428ACh",
+    "line": "mov     ecx, ds:0B428ACh; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x77EE69",
-    "line": "lea     eax, [esp+18h+var_C]",
+    "line": "lea     eax, [esp+18h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77EE6D",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77EE6E",
-    "line": "lea     edx, [esp+1Ch+var_8]",
+    "line": "lea     edx, [esp+1Ch+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77EE72",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77EE73",
-    "line": "lea     eax, [esp+20h+var_4]",
+    "line": "lea     eax, [esp+20h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x77EE77",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77EE78",
-    "line": "mov     [esp+24h+var_8], ebx",
+    "line": "mov     [esp+24h+keyOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77EE7C",
-    "line": "mov     [esp+24h+var_C], ebx",
+    "line": "mov     [esp+24h+valueOut], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77EE80",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x77EE85",
-    "line": "cmp     esi, [esp+18h+var_C]",
+    "line": "cmp     esi, [esp+18h+valueOut]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x77EE8B",
-    "line": "mov     ecx, [esp+18h+var_8]",
+    "line": "mov     ecx, [esp+18h+keyOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x77EE9B",
-    "line": "cmp     [esp+18h+var_4], ebx",
+    "line": "cmp     [esp+18h+position], ebx",
     "mnemonic": "cmp",
     "size": 4
   },

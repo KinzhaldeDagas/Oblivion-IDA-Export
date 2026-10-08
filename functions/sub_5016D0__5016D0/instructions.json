@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5016D0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; SetAV / SetActorValue execute callback. On PlayerCharacter this dispatches to Player_Actor_SetAViBase: direct base-value mutation, UI refresh, and base-change notification; it does not run skill-use or skill-level advancement.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x501711",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x501751",
-    "line": "call    edx",
+    "line": "call    edx; Player skill SetAV reaches the base setter. requiredSkillExp[21] is rebuilt through Player_OnActorValueBaseChanged, but skillAdv, specialization counts, attribute bonuses, and majorSkillAdvances are not awarded.",
     "mnemonic": "call",
     "size": 2
   },

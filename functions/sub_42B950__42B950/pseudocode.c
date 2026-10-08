@@ -1,17 +1,13 @@
-char __thiscall sub_42B950(int *this)
+void __thiscall sub_42B950(int *this)
 {
   int v2; // esi
-  size_t v4; // [esp-4h] [ebp-Ch]
-  size_t v5; // [esp-4h] [ebp-Ch]
-  int v6; // [esp+4h] [ebp-4h] BYREF
+  unsigned int source; // [esp+4h] [ebp-4h] BYREF
 
-  LODWORD(v4) = 0xC;
-  SaveLoad_SaveData(this + 1, v4);
-  LODWORD(v5) = 0xC;
-  SaveLoad_SaveData(this + 4, v5);
-  v2 = *this;
-  v6 = 0;
-  if ( v2 )
-    v6 = *(_DWORD *)(v2 + 0xC);
-  return SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&v6, 4u);
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 1, 0xCu); /*0x42b960*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, this + 4, 0xCu); /*0x42b971*/
+  v2 = *this; /*0x42b976*/
+  source = 0; /*0x42b97a*/
+  if ( v2 ) /*0x42b982*/
+    source = *(_DWORD *)(v2 + 0xC); /*0x42b987*/
+  SaveLoad_SaveFormID(g_TESSaveLoadGame, &source, 4u); /*0x42b998*/
 }

@@ -141,7 +141,7 @@
 0x646BFF: mov     ecx, ebx
 0x646C01: call    ContainerEntryExtraData_DestroyDataTable
 0x646C06: push    ebx
-0x646C07: call    FormHeapFree
+0x646C07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x646C0C: add     esp, 4
 0x646C0F: add     ebp, 1
 0x646C12: cmp     ebp, [esp+10h+arg_0]

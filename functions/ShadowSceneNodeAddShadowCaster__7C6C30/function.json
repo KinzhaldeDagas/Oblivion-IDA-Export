@@ -1,19 +1,36 @@
 {
-  "callees_count": 24,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x7C6C30",
+      "0x7C6DDD"
+    ],
+    [
+      "0x9CE730",
+      "0x9CE769"
+    ]
+  ],
+  "chunks_sha256": "184006769a658f4ccbf9839c6e05a188716e3d4f090017cda94a35304bdd68ea",
+  "comment_regular": "Retail AddShadowCaster. Seven decoded direct callers are player/mobile-object lifecycle paths; no direct loaded-TESObjectSTAT enumerator was found. Duplicate sources refresh ownership/state; new sources create a backing point light and retain exact caster root at +0x130.",
+  "comment_repeatable": "Retail AddShadowCaster. Seven decoded direct callers are player/mobile-object lifecycle paths; no direct loaded-TESObjectSTAT enumerator was found. Duplicate sources refresh ownership/state; new sources create a backing point light and retain exact caster root at +0x130.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "ShadowSceneNodeAddShadowCaster",
   "end_ea": "0x7C6DDD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ShadowSceneNodeAddShadowCaster",
   "segment": ".text",
   "sha256": "9e5dfb3faa315ea376abe05017143e200397bcf044beec643bbc6e8e039d3ec0",
   "size": 429,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C6C30",
+  "total_chunk_size": 486,
   "type": "ShadowSceneLight *__thiscall(_DWORD *this, volatile LONG *)",
-  "xrefs_from_count": 150,
+  "xrefs_from_count": 171,
   "xrefs_to_count": 7
 }

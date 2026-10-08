@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x480035",
-    "line": "lea     ecx, [esp+88h+var_50]",
+    "line": "lea     ecx, [esp+88h+pixelFormat]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x480055",
-    "line": "lea     ecx, [esp+84h+var_50]",
+    "line": "lea     ecx, [esp+84h+pixelFormat]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x480059",
-    "line": "push    ecx",
+    "line": "push    ecx; pixelFormat",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48005A",
-    "line": "call    sub_76BEF0",
+    "line": "call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x480133",
-    "line": "lea     edx, [esp+8Ch+var_50]",
+    "line": "lea     edx, [esp+8Ch+pixelFormat]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x4801CE",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x4801D5",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4801D6",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4801D7",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x480251",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -1183,19 +1183,19 @@
   },
   {
     "ea": "0x480256",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x480257",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x480258",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x48029B",
-    "line": "push    offset dword_B256D0; a2",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2",
     "mnemonic": "push",
     "size": 5
   },
@@ -1498,5 +1498,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9AF5D0",
+    "line": "mov     eax, [ebp-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF5D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF5D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF5D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF5DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AF5DB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AF5DF",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF5E2",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AF5E5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AF5E7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF5EC",
+    "line": "mov     eax, offset stru_ADBB74",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AF5F1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,10 +1,10 @@
-0x705810: push    esi
+0x705810: push    esi; Verified Map deleting destructor frees transform+0C, decrements texture+8 and invokes its virtual deletion only at zero, then frees the map when flags are nonzero. Frond v107 fixture exercises these actual bytes with shared and final texture references.
 0x705811: mov     esi, ecx
 0x705813: mov     eax, [esi+0Ch]
 0x705816: push    edi
 0x705817: push    eax
 0x705818: mov     dword ptr [esi], offset ??_7Map@NiTexturingProperty@@6B@; const NiTexturingProperty::Map::`vftable'
-0x70581E: call    FormHeapFree
+0x70581E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x705823: mov     edi, [esi+8]
 0x705826: add     esp, 4
 0x705829: test    edi, edi
@@ -24,7 +24,7 @@
 0x705849: test    [esp+8+free], 1
 0x70584E: jz      short loc_705859
 0x705850: push    esi
-0x705851: call    FormHeapFree
+0x705851: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x705856: add     esp, 4
 0x705859: pop     edi
 0x70585A: mov     eax, esi

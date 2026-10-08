@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8980",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; OBLIVION AUTHORITY (2026-08-30): Resizes the 0x14-byte vector<bool>: logicalSize is followed by a 0x10-byte vector<unsigned int> word store; unused high bits in the last word are cleared.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7A8984",
-    "line": "mov     ebx, [esp+14h+arg_0]",
+    "line": "mov     ebx, [esp+14h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7A8993",
-    "line": "call    sub_7A8900",
+    "line": "call    OB_stVectorBool_ThrowLengthError_010201A0; OBLIVION AUTHORITY (2026-08-30): Constructs and throws std::length_error(\"vector<bool> too long\") for packed-pairing-bitset overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x7A89D0",
-    "line": "mov     [esp+20h+var_4], ebx",
+    "line": "mov     [esp+20h+result.current], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,49 +223,49 @@
   },
   {
     "ea": "0x7A89E6",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A89E7",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A89E8",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A89E9",
-    "line": "push    esi; int",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A89EA",
-    "line": "lea     eax, [esp+30h+var_8]",
+    "line": "lea     eax, [esp+30h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A89EE",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A89EF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A89F1",
-    "line": "call    sub_439050",
+    "line": "call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7A89FA",
-    "line": "mov     ebx, [esp+20h+arg_0]",
+    "line": "mov     ebx, [esp+20h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },

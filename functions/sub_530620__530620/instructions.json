@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x530630",
-    "line": "mov     ecx, offset dword_B36580",
+    "line": "mov     ecx, offset g_cachedTopicInfoResponseList",
     "mnemonic": "mov",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x530642",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x530644",
-    "line": "call    sub_52E1C0",
+    "line": "call    TESResponse__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x53064A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x530670",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

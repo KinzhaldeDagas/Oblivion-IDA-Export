@@ -1,4 +1,4 @@
-0x8AE890: push    ebp
+0x8AE890: push    ebp; Wrapper around 0x8AE100 using a stack hkAllCdPointCollector; caller passes output block at proxy+0x260.
 0x8AE891: mov     ebp, esp
 0x8AE893: and     esp, 0FFFFFFF0h
 0x8AE896: sub     esp, 1A0h
@@ -14,7 +14,7 @@
 0x8AE8B8: mov     [esp+1ACh+var_188], 80000008h
 0x8AE8C0: mov     [esp+1ACh+var_18C], 0
 0x8AE8C8: mov     [esp+1ACh+var_19C], 7F7FFFFFh
-0x8AE8D0: call    sub_8AE100
+0x8AE8D0: call    bhkCharacterProxy_CheckSupport; TES4 authoritative: character support check. Builds support/contact candidates, classifies support against up direction/slope tolerance, and writes support status/normal data to output block.
 0x8AE8D5: mov     eax, [esp+1A0h+var_188]
 0x8AE8D9: test    eax, eax
 0x8AE8DB: mov     [esp+1A0h+var_1A0], offset ??_7hkAllCdPointCollector@@6B@; const hkAllCdPointCollector::`vftable'

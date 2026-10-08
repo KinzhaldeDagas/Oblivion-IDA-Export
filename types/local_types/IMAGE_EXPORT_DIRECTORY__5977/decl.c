@@ -1,1 +1,14 @@
-_IMAGE_EXPORT_DIRECTORY
+struct _IMAGE_EXPORT_DIRECTORY
+{
+DWORD Characteristics;
+DWORD TimeDateStamp;
+WORD MajorVersion;
+WORD MinorVersion;
+DWORD Name;
+DWORD Base;
+DWORD NumberOfFunctions;
+DWORD NumberOfNames;
+DWORD AddressOfFunctions;
+DWORD AddressOfNames;
+DWORD AddressOfNameOrdinals;
+};

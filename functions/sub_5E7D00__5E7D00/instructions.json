@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x5E7D20",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x5E7E01",
-    "line": "lea     ecx, [edi+88h]",
+    "line": "lea     ecx, [edi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x5E7E6A",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

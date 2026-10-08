@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4DE770",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4DE779",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x4DE787",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DE789",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DE78E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x4DE792",
-    "line": "call    sub_4DB830",
+    "line": "call    TESObjectREFR_GetOwnershipRank; Verified effective ownership-rank lookup order: this reference's XRNK, then linked door XRNK, then parent cell's required rank; missing rank defaults to zero. Fallout's TESObjectREFR::GetOwnershipRank inserts EncounterZone owner-rank between linked-door and parent-cell checks; Oblivion has no encounter-zone branch here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DE797",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4DE79D",
-    "line": "call    sub_4DB7D0",
+    "line": "call    TESObjectREFR_GetOwnershipGlobal; Verified effective ownership-condition global lookup: use this reference's XGLB first, then the linked door's XGLB, then the parent cell's XGLB. Fallout's TESObjectREFR::GetOwnershipGlobal has the same fallback sequence. This is distinct from TESObjectREFR_GetOwner's owner-form inheritance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4DE7AF",
-    "line": "mov     ebp, [esp+18h+arg_0]",
+    "line": "mov     ebp, [esp+18h+actorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x4DE810",
-    "line": "cmp     [esp+18h+arg_4], 0",
+    "line": "cmp     [esp+18h+useFactionOwnership], 0",
     "mnemonic": "cmp",
     "size": 5
   },

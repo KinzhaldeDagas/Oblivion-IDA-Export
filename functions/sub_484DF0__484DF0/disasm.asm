@@ -1,4 +1,4 @@
-0x484DF0: mov     eax, [ecx]
+0x484DF0: mov     eax, [ecx]; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.
 0x484DF2: push    edi
 0x484DF3: xor     edi, edi
 0x484DF5: test    eax, eax

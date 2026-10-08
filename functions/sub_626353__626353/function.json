@@ -1,19 +1,32 @@
 {
-  "callees_count": 40,
-  "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 10,
-  "display_name": "sub_626353",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x626353",
+      "0x6265F9"
+    ]
+  ],
+  "chunks_sha256": "3243b1f040436fc7eb9f334b46f64a1b229d68aa7584aedc4c8e99128eb8db01",
+  "comment_regular": "Compiler/IDA-split continuation of DialoguePackage::LoadGame, entered by fallthrough from 0x626351. Stores saved activeSpeaker/speaker/target identities and startingTopic, then dispatches modern versus legacy conversation restoration.",
+  "comment_repeatable": "Compiler/IDA-split continuation of DialoguePackage::LoadGame, entered by fallthrough from 0x626351. Stores saved activeSpeaker/speaker/target identities and startingTopic, then dispatches modern versus legacy conversation restoration.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 54,
+  "display_name": "DialoguePackage::LoadGame_Continuation",
   "end_ea": "0x6265F9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_626353",
+  "name": "DialoguePackage::LoadGame_Continuation",
   "segment": ".text",
   "sha256": "3243b1f040436fc7eb9f334b46f64a1b229d68aa7584aedc4c8e99128eb8db01",
   "size": 678,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x626353",
-  "type": "char __usercall@<al>(int@<edx>, int@<ebx>, TESForm::ModReferenceList *@<ebp>, _DWORD *@<esi>, double@<st0>)",
+  "total_chunk_size": 678,
+  "type": "char __usercall@<al>(TESFormVtbl *@<edx>, int@<ebx>, Data *@<ebp>, TESForm *@<esi>, TESForm *@<ecx>)",
   "xrefs_from_count": 309,
   "xrefs_to_count": 2
 }

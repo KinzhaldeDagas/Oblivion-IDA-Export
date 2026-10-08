@@ -1,1 +1,1 @@
-GLsync
+typedef __GLsync *GLsync;

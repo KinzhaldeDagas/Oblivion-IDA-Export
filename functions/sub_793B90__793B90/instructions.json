@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x793B90",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+newStrength]; Sets wind strength, recomputes leaf frequency/throw, preserves phase continuity via timeFrequencyShift, and disables external rocking-angle input.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x793BAA",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+newStrength]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793BAE",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+newStrength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x793BC3",
-    "line": "fmul    [esp+arg_4]",
+    "line": "fmul    [esp+oldStrength]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x793BCA",
-    "line": "fstp    [esp+arg_0]",
+    "line": "fstp    [esp+newStrength]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793BCE",
-    "line": "fld     [esp+arg_0]",
+    "line": "fld     [esp+newStrength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x793BE2",
-    "line": "fld     [esp+arg_8]",
+    "line": "fld     [esp+oldTimeShift]",
     "mnemonic": "fld",
     "size": 4
   },

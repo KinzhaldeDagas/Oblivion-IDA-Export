@@ -32,7 +32,7 @@
 0x5CFE05: push    0; a3
 0x5CFE07: push    0FB9h
 0x5CFE0C: call    Tile_GetFloat
-0x5CFE11: call    Double_To_SInt32
+0x5CFE11: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5CFE16: mov     ecx, ds:0B333C4h; this
 0x5CFE1C: push    eax; a2
 0x5CFE1D: call    GetInventoryEntryOfItem
@@ -106,10 +106,10 @@
 0x5CFEF7: jge     short loc_5CFEFF
 0x5CFEF9: fadd    dword ptr ds:0A2FC78h
 0x5CFEFF: add     esp, 0Ch
-0x5CFF02: fstp    [esp+168h+a2]; a3
-0x5CFF05: push    0FF0h; a2
+0x5CFF02: fstp    [esp+168h+a2]; value
+0x5CFF05: push    0FF0h; propertyCode
 0x5CFF0A: mov     ecx, edi; this
-0x5CFF0C: call    Tile_SetFloat
+0x5CFF0C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5CFF11: mov     eax, [esp+164h+var_140]
 0x5CFF15: cmp     dword ptr [eax+44h], 0
 0x5CFF19: jz      loc_5D0176
@@ -147,14 +147,14 @@
 0x5CFF88: call    ExtraDataList_constr
 0x5CFF8D: mov     esi, eax
 0x5CFF8F: mov     eax, [ebp+8]
-0x5CFF92: push    0
-0x5CFF94: push    1
-0x5CFF96: push    eax
-0x5CFF97: mov     ecx, edi
+0x5CFF92: push    0; referenceFormIDOrZero
+0x5CFF94: push    1; unusedAlwaysOne
+0x5CFF96: push    eax; form
+0x5CFF97: mov     ecx, edi; this
 0x5CFF99: mov     [esp+170h+var_4], 0FFFFFFFFh
-0x5CFFA4: call    ContainerExtraData_GetEntryForForm
+0x5CFFA4: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x5CFFA9: mov     ebp, eax
-0x5CFFAB: mov     eax, [esp+16Ch+var_158]
+0x5CFFAB: mov     eax, [esp+164h+var_150]
 0x5CFFAF: mov     ecx, [eax]
 0x5CFFB1: mov     edi, [ecx]
 0x5CFFB3: mov     ecx, edi
@@ -170,7 +170,7 @@
 0x5CFFCC: call    eax
 0x5CFFCE: mov     esi, edi
 0x5CFFD0: jmp     short loc_5CFFEB
-0x5CFFD2: mov     ecx, [esp+16Ch+var_158]
+0x5CFFD2: mov     ecx, [esp+164h+var_150]
 0x5CFFD6: mov     edx, [ecx]
 0x5CFFD8: mov     eax, [edx]
 0x5CFFDA: push    eax
@@ -187,21 +187,21 @@
 0x5CFFFB: push    ebx
 0x5CFFFC: mov     ecx, edi
 0x5CFFFE: call    ExtraDataList_SetExtraCount
-0x5D0003: mov     ecx, [esp+170h+var_15C]
-0x5D0007: call    sub_4849C0
-0x5D000C: mov     ecx, [esp+170h+var_14C]
+0x5D0003: mov     ecx, [esp+164h+var_150]; this
+0x5D0007: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
+0x5D000C: mov     ecx, [esp+164h+var_140]
 0x5D0010: fiadd   dword ptr [ecx+4Ch]
 0x5D0013: push    ecx
 0x5D0014: mov     ecx, esi
-0x5D0016: fstp    [esp+174h+var_158]
-0x5D001A: fld     [esp+174h+var_158]
-0x5D001E: fstp    [esp+174h+var_174]; float
-0x5D0021: call    sub_41EE90
-0x5D0026: fild    [esp+170h+var_154]
+0x5D0016: fstp    [esp+168h+var_14C]
+0x5D001A: fld     [esp+168h+var_14C]
+0x5D001E: fstp    [esp+168h+a2]; float
+0x5D0021: call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.
+0x5D0026: fild    [esp+164h+var_148]
 0x5D002A: mov     ecx, esi
-0x5D002C: fstp    [esp+170h+var_158]
+0x5D002C: fstp    [esp+164h+var_14C]
 0x5D0030: call    ExtraDataList_GetCharge
-0x5D0035: fld     [esp+170h+var_158]
+0x5D0035: fld     [esp+164h+var_14C]
 0x5D0039: fcompp
 0x5D003B: fnstsw  ax
 0x5D003D: test    ah, 41h
@@ -227,7 +227,7 @@
 0x5D006E: call    InterfaceManager_GetSingleton
 0x5D0073: push    1
 0x5D0075: call    sub_5966F0
-0x5D007A: mov     ecx, [esp+17Ch+var_150]
+0x5D007A: mov     ecx, [esp+170h+var_144]
 0x5D007E: add     esp, 0Ch
 0x5D0081: push    eax
 0x5D0082: push    0FF0h
@@ -240,7 +240,6 @@
 0x5D0097: test    edi, edi
 0x5D0099: jz      short loc_5D00B9
 0x5D009B: jmp     short loc_5D00A0
-0x5D009D: align 10h
 0x5D00A0: mov     ebx, [edi]
 0x5D00A2: test    ebx, ebx
 0x5D00A4: jz      short loc_5D00B9
@@ -255,7 +254,7 @@
 0x5D00B9: mov     ecx, [ebp+0]
 0x5D00BC: push    esi
 0x5D00BD: call    BSSimpleList_PushFront
-0x5D00C2: mov     esi, [esp+174h+var_150]
+0x5D00C2: mov     esi, [esp+164h+var_140]
 0x5D00C6: mov     edx, [esi+44h]
 0x5D00C9: mov     ecx, [edx]
 0x5D00CB: xor     eax, eax
@@ -279,7 +278,7 @@
 0x5D00F7: push    edx
 0x5D00F8: mov     edx, [edi+100h]
 0x5D00FE: call    edx
-0x5D0100: call    sub_5C1900
+0x5D0100: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5D0105: jmp     short loc_5D0127
 0x5D0107: mov     ecx, ebx
 0x5D0109: call    ExtraDataList_GetExtraCount
@@ -307,10 +306,10 @@
 0x5D0156: push    0
 0x5D0158: mov     ecx, esi
 0x5D015A: call    ??0?$NiTPointerListBase@V?$DFALL@PAVRechargeItemAndIndex@@@@PAVRechargeItemAndIndex@@@@QAE@XZ; NiTPointerListBase<DFALL<RechargeItemAndIndex *>,RechargeItemAndIndex *>::NiTPointerListBase<DFALL<RechargeItemAndIndex *>,RechargeItemAndIndex *>(void)
-0x5D015F: mov     ebp, [esp+19Ch+var_188]
+0x5D015F: mov     ebp, [esp+164h+var_150]
 0x5D0163: jmp     loc_5D025E
 0x5D0168: call    sub_5CE9B0
-0x5D016D: mov     ebp, [esp+19Ch+var_188]
+0x5D016D: mov     ebp, [esp+164h+var_150]
 0x5D0171: jmp     loc_5D025E
 0x5D0176: cmp     dword ptr [eax+48h], 0
 0x5D017A: jz      loc_5D025E
@@ -327,8 +326,8 @@
 0x5D01A4: jz      short loc_5D01AE
 0x5D01A6: movzx   eax, word ptr [eax+8]
 0x5D01AA: mov     [esp+164h+var_148], eax
-0x5D01AE: mov     ecx, ebp
-0x5D01B0: call    sub_4849C0
+0x5D01AE: mov     ecx, ebp; this
+0x5D01B0: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5D01B5: sub     esp, 8
 0x5D01B8: fstp    [esp+16Ch+a2]; float
 0x5D01BC: fild    [esp+16Ch+var_148]
@@ -381,7 +380,7 @@
 0x5D025E: mov     ecx, ebp
 0x5D0260: call    ContainerEntryExtraData_DestroyDataTable
 0x5D0265: push    ebp
-0x5D0266: call    FormHeapFree
+0x5D0266: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D026B: add     esp, 4
 0x5D026E: mov     ecx, [esp+164h+var_C]
 0x5D0275: mov     large fs:0, ecx
@@ -395,3 +394,19 @@
 0x5D028A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5D028F: add     esp, 150h
 0x5D0295: retn    8
+0x9C1D00: mov     eax, [ebp-14Ch]
+0x9C1D06: push    eax
+0x9C1D07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C1D0C: pop     ecx
+0x9C1D0D: retn
+0x9C1D0E: mov     edx, [esp+arg_4]
+0x9C1D12: lea     eax, [edx-154h]
+0x9C1D18: mov     ecx, [edx-158h]
+0x9C1D1E: xor     ecx, eax
+0x9C1D20: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1D25: add     eax, 10h
+0x9C1D28: mov     ecx, [edx-4]
+0x9C1D2B: xor     ecx, eax
+0x9C1D2D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1D32: mov     eax, offset stru_AEAD04
+0x9C1D37: jmp     ___CxxFrameHandler3

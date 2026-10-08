@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x6DF562",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,7 +1303,7 @@
   },
   {
     "ea": "0x6DF63B",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x6DF6E8",
-    "line": "fstp    [esp+0F0h+var_AC]",
+    "line": "fstp    [esp+0F0h+var_AC.data]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x6DF6F0",
-    "line": "fstp    [esp+0F0h+var_A0]",
+    "line": "fstp    [esp+0F0h+var_AC.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1651,13 +1651,13 @@
   },
   {
     "ea": "0x6DF6F8",
-    "line": "fstp    [esp+0F0h+var_94]",
+    "line": "fstp    [esp+0F0h+var_AC.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DF6FC",
-    "line": "fstp    [esp+0F0h+var_A8]",
+    "line": "fstp    [esp+0F0h+var_AC.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1669,13 +1669,13 @@
   },
   {
     "ea": "0x6DF702",
-    "line": "fstp    [esp+0F0h+var_9C]",
+    "line": "fstp    [esp+0F0h+var_AC.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DF706",
-    "line": "fstp    [esp+0F0h+var_90]",
+    "line": "fstp    [esp+0F0h+var_AC.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1687,19 +1687,19 @@
   },
   {
     "ea": "0x6DF70E",
-    "line": "fstp    [esp+0F0h+var_A4]",
+    "line": "fstp    [esp+0F0h+var_AC.data+8]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DF712",
-    "line": "fstp    [esp+0F0h+var_98]",
+    "line": "fstp    [esp+0F0h+var_AC.data+14h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DF716",
-    "line": "fstp    [esp+0F0h+var_8C]",
+    "line": "fstp    [esp+0F0h+var_AC.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x6DF723",
-    "line": "fstp    [esp+0F0h+var_AC]",
+    "line": "fstp    [esp+0F0h+var_AC.data]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x6DF72B",
-    "line": "fstp    [esp+0F0h+var_A0]",
+    "line": "fstp    [esp+0F0h+var_AC.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x6DF733",
-    "line": "fstp    [esp+0F0h+var_94]",
+    "line": "fstp    [esp+0F0h+var_AC.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x6DF73B",
-    "line": "fstp    [esp+0F0h+var_A8]",
+    "line": "fstp    [esp+0F0h+var_AC.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x6DF741",
-    "line": "fstp    [esp+0F0h+var_9C]",
+    "line": "fstp    [esp+0F0h+var_AC.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x6DF747",
-    "line": "fstp    [esp+0F0h+var_90]",
+    "line": "fstp    [esp+0F0h+var_AC.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x6DF763",
-    "line": "fstp    [esp+0F0h+var_A4]",
+    "line": "fstp    [esp+0F0h+var_AC.data+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x6DF76B",
-    "line": "fstp    [esp+0F0h+var_98]",
+    "line": "fstp    [esp+0F0h+var_AC.data+14h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x6DF773",
-    "line": "fstp    [esp+0F0h+var_8C]",
+    "line": "fstp    [esp+0F0h+var_AC.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x6DF77D",
-    "line": "fstp    [esp+0F0h+var_AC]",
+    "line": "fstp    [esp+0F0h+var_AC.data]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x6DF783",
-    "line": "fstp    [esp+0F0h+var_A0]",
+    "line": "fstp    [esp+0F0h+var_AC.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x6DF789",
-    "line": "fstp    [esp+0F0h+var_94]",
+    "line": "fstp    [esp+0F0h+var_AC.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1909,19 +1909,19 @@
   },
   {
     "ea": "0x6DF78F",
-    "line": "fstp    [esp+0F0h+var_A8]",
+    "line": "fstp    [esp+0F0h+var_AC.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DF793",
-    "line": "fstp    [esp+0F0h+var_9C]",
+    "line": "fstp    [esp+0F0h+var_AC.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6DF797",
-    "line": "fstp    [esp+0F0h+var_90]",
+    "line": "fstp    [esp+0F0h+var_AC.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x6DF7C4",
-    "line": "lea     eax, [esp+0F4h+var_48]",
+    "line": "lea     eax, [esp+0F4h+right]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2227,55 +2227,55 @@
   },
   {
     "ea": "0x6DF82D",
-    "line": "lea     ecx, [esp+0F4h+var_48]",
+    "line": "lea     ecx, [esp+0F4h+right]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6DF834",
-    "line": "fstp    [esp+0F4h+var_F4]; float",
+    "line": "fstp    [esp+0F4h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6DF837",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6DF83C",
-    "line": "lea     eax, [esp+0F0h+var_48]",
+    "line": "lea     eax, [esp+0F0h+right]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6DF843",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6DF844",
-    "line": "lea     ecx, [esp+0F4h+var_24]",
+    "line": "lea     ecx, [esp+0F4h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6DF84B",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6DF84C",
-    "line": "lea     ecx, [esp+0F8h+var_AC]",
+    "line": "lea     ecx, [esp+0F8h+var_AC]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6DF850",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x6DF8DD",
-    "line": "fstp    [esp+0F4h+var_F4]; float",
+    "line": "fstp    [esp+0F4h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x6DF8E7",
-    "line": "call    sub_6CBC10",
+    "line": "call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,12 +1,12 @@
-0x4CB980: push    ebx
-0x4CB981: mov     ebx, [esp+4+arg_0]
+0x4CB980: push    ebx; Verified: scans only the supplied persistent cell's object list under the cell list lock, filters base-form type kFormType_SubSpace (0x29), and inserts each candidate into the owning WorldSpace index. Sole direct caller is TESWorldSpace_IndexPersistentCellSubSpaces.
+0x4CB981: mov     ebx, [esp+4+worldspace]
 0x4CB985: test    ebx, ebx
 0x4CB987: push    ebp
 0x4CB988: mov     ebp, ecx
 0x4CB98A: jz      short loc_4CB9D4
 0x4CB98C: push    edi
 0x4CB98D: push    ebp; a2
-0x4CB98E: mov     ecx, offset stru_B35C80; this
+0x4CB98E: mov     ecx, offset unk_B35C80; this
 0x4CB993: call    sub_496EA0
 0x4CB998: lea     edi, [ebp+48h]
 0x4CB99B: test    edi, edi
@@ -21,15 +21,15 @@
 0x4CB9B0: call    edx
 0x4CB9B2: cmp     byte ptr [eax+4], 29h ; ')'
 0x4CB9B6: jnz     short loc_4CB9C0
-0x4CB9B8: push    esi
-0x4CB9B9: mov     ecx, ebx
-0x4CB9BB: call    sub_4F1AC0
+0x4CB9B8: push    esi; reference
+0x4CB9B9: mov     ecx, ebx; this
+0x4CB9BB: call    TESWorldSpace_IndexSubSpaceReference; Verified SubSpace spatial-index insertion. Its sole direct caller is TESObjectCELL_IndexSubSpaceReferences, and no direct removal caller was found; current evidence places insertion in the WorldSpace persistent-cell build during TESDataHandler_LoadFiles. Runtime add/remove maintenance beyond this build path is Unknown.
 0x4CB9C0: mov     edi, [edi+4]
 0x4CB9C3: test    edi, edi
 0x4CB9C5: jnz     short loc_4CB9A0
 0x4CB9C7: pop     esi
 0x4CB9C8: push    ebp; a2
-0x4CB9C9: mov     ecx, offset stru_B35C80; this
+0x4CB9C9: mov     ecx, offset unk_B35C80; this
 0x4CB9CE: call    sub_496F50
 0x4CB9D3: pop     edi
 0x4CB9D4: pop     ebp

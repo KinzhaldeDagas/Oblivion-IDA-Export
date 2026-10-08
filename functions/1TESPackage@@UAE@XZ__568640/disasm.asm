@@ -12,14 +12,14 @@
 0x56865D: mov     large fs:0, eax
 0x568663: mov     esi, ecx
 0x568665: mov     [esp+1Ch+var_10], esi
-0x568669: mov     dword ptr [esi], offset ??_7TESPackage@@6B@; const TESPackage::`vftable'
+0x568669: mov     dword ptr [esi], offset ??_7TESPackage@@6B@; Verified complete TESPackage persistence table extentEC; tail DC/E0/E4/E8 is no-argument size/save/load/init-load virtuals. Derived vtable identity from constructor stores and RTTI names. Prior incompleteDC type corrected.
 0x56866F: mov     eax, ds:0B33A98h
 0x568674: mov     al, [eax+0CD4h]
 0x56867A: test    al, al
 0x56867C: mov     [esp+1Ch+var_4], 2
 0x568684: jnz     short loc_568691
 0x568686: push    esi
-0x568687: mov     ecx, offset ActorProcessManager_ptr
+0x568687: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x56868C: call    sub_675090
 0x568691: mov     eax, [esi+0Ch]
 0x568694: mov     ecx, ds:0B33A98h
@@ -34,15 +34,15 @@
 0x5686B2: mov     ecx, edi
 0x5686B4: call    TESPackage_LocationData_destr
 0x5686B9: push    edi
-0x5686BA: call    FormHeapFree
+0x5686BA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5686BF: add     esp, 4
 0x5686C2: mov     edi, [esi+28h]
 0x5686C5: test    edi, edi
 0x5686C7: jz      short loc_5686D9
-0x5686C9: mov     ecx, edi; void *
-0x5686CB: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x5686C9: mov     ecx, edi; this
+0x5686CB: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x5686D0: push    edi
-0x5686D1: call    FormHeapFree
+0x5686D1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5686D6: add     esp, 4
 0x5686D9: lea     edi, [esi+34h]
 0x5686DC: mov     ecx, edi
@@ -52,9 +52,9 @@
 0x5686EA: mov     ecx, edi
 0x5686EC: mov     byte ptr [esp+1Ch+var_4], 1
 0x5686F1: call    sub_56A7A0
-0x5686F6: lea     ecx, [esi+2Ch]; void *
+0x5686F6: lea     ecx, [esi+2Ch]; this
 0x5686F9: mov     byte ptr [esp+1Ch+var_4], 0
-0x5686FE: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x5686FE: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x568703: mov     ecx, esi; this
 0x568705: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x56870D: call    TESForm_destr
@@ -65,3 +65,18 @@
 0x56871F: pop     esi
 0x568720: add     esp, 10h
 0x568723: retn
+0x9BD7C0: mov     ecx, [ebp-10h]; this
+0x9BD7C3: jmp     TESForm_destr
+0x9BD7C8: mov     ecx, [ebp-10h]
+0x9BD7CB: add     ecx, 2Ch ; ','; this
+0x9BD7CE: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9BD7D3: mov     ecx, [ebp-10h]
+0x9BD7D6: add     ecx, 34h ; '4'
+0x9BD7D9: jmp     sub_56A7A0
+0x9BD7DE: mov     edx, [esp+arg_4]
+0x9BD7E2: lea     eax, [edx-0Ch]
+0x9BD7E5: mov     ecx, [edx-10h]
+0x9BD7E8: xor     ecx, eax
+0x9BD7EA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD7EF: mov     eax, offset stru_AE7120
+0x9BD7F4: jmp     ___CxxFrameHandler3

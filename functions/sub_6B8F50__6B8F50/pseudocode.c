@@ -1,38 +1,39 @@
-void __thiscall sub_6B8F50(UInt32 *this)
+// Ordinary MenuTopics destroy every DialogueResponse. INFOGENERAL skips response destruction here because ExtraInfoGeneralTopic owns the cached object; that owner's destructor clears isInfoGeneralTopic first, then calls this routine for full cleanup.
+void __thiscall MenuTopic::Destroy(MenuTopicView *this)
 {
-  UInt32 *v2; // esi
-  unsigned int v3; // edi
-  UInt32 *v4; // eax
+  DialogueResponse **p_firstResponse; // esi
+  DialogueResponse *v3; // edi
+  DialogueResponseNode *nextResponseNode; // eax
 
-  if ( !*((_BYTE *)this + 0x20) )
+  if ( !this->isInfoGeneralTopic ) /*0x6b8f7a*/
   {
-    v2 = this + 3;
-    if ( this != (UInt32 *)0xFFFFFFF4 )
+    p_firstResponse = &this->firstResponse; /*0x6b8f88*/
+    if ( this != (MenuTopicView *)0xFFFFFFF4 ) /*0x6b8f8d*/
     {
-      while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)(this + 3)) )
+      while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)&this->firstResponse) ) /*0x6b8f99*/
       {
-        v3 = *v2;
-        if ( *v2 )
+        v3 = *p_firstResponse; /*0x6b8f9b*/
+        if ( *p_firstResponse ) /*0x6b8f9b*/
         {
-          sub_6B8050((_DWORD *)*v2);
-          FormHeapFree(v3);
+          DialogueResponse::Destroy(*p_firstResponse); /*0x6b8fa3*/
+          FormHeapFree((unsigned int)v3); /*0x6b8fa9*/
         }
-        v4 = (UInt32 *)*(this + 4);
-        if ( v4 )
+        nextResponseNode = this->nextResponseNode; /*0x6b8fb1*/
+        if ( nextResponseNode ) /*0x6b8fb6*/
         {
-          *(this + 4) = v4[1];
-          *v2 = *v4;
-          FormHeapFree((unsigned int)v4);
+          this->nextResponseNode = nextResponseNode->next; /*0x6b8fbb*/
+          *p_firstResponse = nextResponseNode->item; /*0x6b8fc1*/
+          FormHeapFree((unsigned int)nextResponseNode); /*0x6b8fc3*/
         }
         else
         {
-          *v2 = 0;
+          *p_firstResponse = 0; /*0x6b8fcd*/
         }
       }
     }
   }
-  FormHeapFree(*this);
-  *this = 0;
-  *((_WORD *)this + 3) = 0;
-  *((_WORD *)this + 2) = 0;
+  FormHeapFree((unsigned int)this->displayName.m_data); /*0x6b8fd9*/
+  this->displayName.m_data = 0; /*0x6b8fe1*/
+  this->displayName.m_bufLen = 0; /*0x6b8fe8*/
+  this->displayName.m_dataLen = 0; /*0x6b8fee*/
 }

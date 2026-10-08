@@ -25,7 +25,7 @@
 0x646236: add     esp, 8
 0x646239: retn    10h
 0x64623C: mov     ecx, ebp; this
-0x64623E: call    Actor__GetProcessLevel
+0x64623E: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x646243: cmp     eax, 1
 0x646246: jge     short loc_64626A
 0x646248: mov     ecx, edi
@@ -65,7 +65,7 @@
 0x64629D: add     esp, 8
 0x6462A0: retn    10h
 0x6462A3: mov     ecx, edi; this
-0x6462A5: call    sub_5E6C60
+0x6462A5: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x6462AA: test    al, al
 0x6462AC: jz      loc_646224
 0x6462B2: mov     eax, [esi+8]
@@ -119,9 +119,9 @@
 0x646334: fild    [esp+18h+arg_0]
 0x646338: mov     eax, [edx+250h]
 0x64633E: mov     ecx, ebx
-0x646340: fstp    qword ptr [esp+18h+var_8]
+0x646340: fstp    [esp+18h+var_8]
 0x646344: call    eax
-0x646346: fcomp   qword ptr [esp+18h+var_8]
+0x646346: fcomp   [esp+18h+var_8]
 0x64634A: fnstsw  ax
 0x64634C: test    ah, 41h
 0x64634F: jp      short loc_6463BC
@@ -129,7 +129,7 @@
 0x646353: mov     eax, [edx+250h]
 0x646359: mov     ecx, ebx
 0x64635B: call    eax
-0x64635D: call    Double_To_SInt32
+0x64635D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x646362: push    eax
 0x646363: push    edi
 0x646364: mov     ecx, ebx

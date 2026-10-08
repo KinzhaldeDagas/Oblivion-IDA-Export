@@ -46,7 +46,7 @@
 0x761664: jz      short loc_76166E
 0x761666: push    ebx
 0x761667: mov     ecx, esi
-0x761669: call    sub_760CC0
+0x761669: call    OB_NiDX9SourceTextureData_UploadMipLevels_010201A0; DX10OBSE resource decode: fills the D3D9 texture levels from converted NiPixelData by locking each texture level/surface and copying rows/blocks.
 0x76166E: test    ebx, ebx
 0x761670: jz      short loc_761691
 0x761672: lea     esi, [ebx+4]

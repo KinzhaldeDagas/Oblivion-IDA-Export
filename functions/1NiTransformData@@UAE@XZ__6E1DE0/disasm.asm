@@ -1,4 +1,4 @@
-0x6E1DE0: push    0FFFFFFFFh
+0x6E1DE0: push    0FFFFFFFFh; Oblivion NiTransformData destructor. Destroys rotation, translation, and scale arrays through their numeric-type destructor tables; rotation type 4 first destroys its three nested scalar-axis tracks. Then runs the NiRefObject base destructor.
 0x6E1DE2: push    offset ??1NiScreenPolygon@@UAE@XZ_SEH
 0x6E1DE7: mov     eax, large fs:0
 0x6E1DED: push    eax
@@ -21,11 +21,11 @@
 0x6E1E21: cmp     eax, 4
 0x6E1E24: jnz     short loc_6E1E2D
 0x6E1E26: mov     ecx, edi
-0x6E1E28: call    sub_6BE490
+0x6E1E28: call    NiEulerRotKey_DestroyAxisTracks; Oblivion rotation type-4 nested cleanup. Iterates exactly three scalar-axis subtracks in the outer rotation record, destroys each nonnull axis key array through its numeric-type destructor, then clears that axis pointer, count, and type fields.
 0x6E1E2D: mov     eax, [esi+10h]
 0x6E1E30: mov     eax, ds:0B3D2F8h[eax*4]
 0x6E1E37: push    edi
-0x6E1E38: call    eax ; dword_B3D2F8
+0x6E1E38: call    eax ; unk_B3D2F8
 0x6E1E3A: add     esp, 4
 0x6E1E3D: mov     eax, [esi+24h]
 0x6E1E40: test    eax, eax
@@ -33,7 +33,7 @@
 0x6E1E44: mov     ecx, [esi+14h]
 0x6E1E47: mov     ecx, ds:0B3D2E0h[ecx*4]
 0x6E1E4E: push    eax
-0x6E1E4F: call    ecx ; dword_B3D2E0
+0x6E1E4F: call    ecx ; unk_B3D2E0
 0x6E1E51: add     esp, 4
 0x6E1E54: mov     eax, [esi+28h]
 0x6E1E57: test    eax, eax
@@ -41,7 +41,7 @@
 0x6E1E5B: mov     edx, [esi+18h]
 0x6E1E5E: mov     ecx, ds:0B3D2C8h[edx*4]
 0x6E1E65: push    eax
-0x6E1E66: call    ecx ; dword_B3D2C8
+0x6E1E66: call    ecx ; unk_B3D2C8
 0x6E1E68: add     esp, 4
 0x6E1E6B: mov     ecx, esi
 0x6E1E6D: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -53,3 +53,12 @@
 0x6E1E87: pop     esi
 0x6E1E88: add     esp, 10h
 0x6E1E8B: retn
+0x9CA4B0: mov     ecx, [ebp-10h]
+0x9CA4B3: jmp     NiRefObject_destr
+0x9CA4B8: mov     edx, [esp+arg_4]
+0x9CA4BC: lea     eax, [edx-0Ch]
+0x9CA4BF: mov     ecx, [edx-10h]
+0x9CA4C2: xor     ecx, eax
+0x9CA4C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA4C9: mov     eax, offset stru_AF2BA8
+0x9CA4CE: jmp     ___CxxFrameHandler3

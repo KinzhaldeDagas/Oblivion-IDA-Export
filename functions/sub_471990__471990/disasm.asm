@@ -1,4 +1,4 @@
-0x471990: sub     esp, 10h
+0x471990: sub     esp, 10h; CustomAnimSupport decode: removes native power attack groups 0x16..0x1A across movement/weapon key variants before dynamic rebuild.
 0x471993: push    ebx
 0x471994: push    ebp
 0x471995: push    esi
@@ -6,20 +6,17 @@
 0x471997: mov     ebx, ecx
 0x471999: mov     [esp+20h+var_8], 0
 0x4719A1: jmp     short loc_4719B0
-0x4719A3: align 10h
 0x4719B0: mov     [esp+20h+var_C], 0
 0x4719B8: jmp     short loc_4719C0
-0x4719BA: align 10h
 0x4719C0: mov     [esp+20h+var_10], 16h
 0x4719C8: jmp     short loc_4719D0
-0x4719CA: align 10h
 0x4719D0: mov     eax, [esp+20h+var_10]
 0x4719D4: mov     ecx, [esp+20h+var_C]
 0x4719D8: mov     edx, [esp+20h+var_8]
 0x4719DC: push    eax
 0x4719DD: push    ecx
 0x4719DE: push    edx
-0x4719DF: call    sub_51A9B0
+0x4719DF: call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).
 0x4719E4: mov     esi, [ebx+9Ch]
 0x4719EA: movzx   ebp, ax
 0x4719ED: mov     eax, [esi]
@@ -33,7 +30,6 @@
 0x471A00: test    edi, edi
 0x471A02: jz      loc_471B35
 0x471A08: jmp     short loc_471A10
-0x471A0A: align 10h
 0x471A10: movzx   eax, word ptr [edi+4]
 0x471A14: mov     edx, [esi]
 0x471A16: mov     edx, [edx+8]
@@ -67,11 +63,11 @@
 0x471A62: test    eax, eax
 0x471A64: jz      short loc_471A75
 0x471A66: fldz
-0x471A68: push    0; char
+0x471A68: push    0; transition
 0x471A6A: push    ecx
-0x471A6B: fstp    [esp+28h+var_28]; float
-0x471A6E: mov     ecx, eax
-0x471A70: call    sub_6C9CB0
+0x471A6B: fstp    [esp+28h+easeOutTime]; easeOutTime
+0x471A6E: mov     ecx, eax; this
+0x471A70: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x471A75: mov     eax, [ebx+0ACh]
 0x471A7B: cmp     dword ptr [eax+44h], 5
 0x471A7F: jnz     short loc_471A92
@@ -79,13 +75,13 @@
 0x471A83: push    ecx
 0x471A84: mov     ecx, [ebx+98h]
 0x471A8A: fstp    [esp+24h+var_24]; float
-0x471A8D: call    sub_6C4480
+0x471A8D: call    NiControllerManager_DeactivateTransitionSources; Walks the controller manager's active sequence list and deactivates every sequence in native state 4 (transition source) using the caller-supplied ease-out time.
 0x471A92: fldz
-0x471A94: push    0; char
+0x471A94: push    0; transition
 0x471A96: push    ecx
-0x471A97: fstp    [esp+28h+var_28]; float
-0x471A9A: mov     ecx, [ebx+0ACh]
-0x471AA0: call    sub_6C9CB0
+0x471A97: fstp    [esp+28h+easeOutTime]; easeOutTime
+0x471A9A: mov     ecx, [ebx+0ACh]; this
+0x471AA0: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x471AA5: mov     eax, 0FFh
 0x471AAA: mov     dword ptr [ebx+0ACh], 0
 0x471AB4: mov     [ebx+42h], ax
@@ -93,7 +89,7 @@
 0x471ABC: mov     dword ptr [ebx+54h], 0FFFFFFFFh
 0x471AC3: mov     ecx, ds:0B33A1Ch
 0x471AC9: push    esi
-0x471ACA: call    sub_4359D0
+0x471ACA: call    ModelLoader_FindKFModelBySequence; Finds a loaded KF model by BSAnimGroupSequence/source sequence. Used when mapping runtime sequence objects back to model-loader records.
 0x471ACF: test    eax, eax
 0x471AD1: jz      short loc_471ADD
 0x471AD3: add     eax, 0Ch
@@ -101,12 +97,12 @@
 0x471AD7: call    dword ptr ds:0A2807Ch
 0x471ADD: mov     ecx, [ebx+9Ch]
 0x471AE3: push    ebp
-0x471AE4: call    sub_4708B0
+0x471AE4: call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.
 0x471AE9: push    esi
 0x471AEA: lea     ecx, [esp+24h+var_4]
 0x471AEE: push    ecx
 0x471AEF: mov     ecx, [ebx+98h]
-0x471AF5: call    sub_6C4A10
+0x471AF5: call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
 0x471AFA: mov     eax, [esp+20h+var_4]
 0x471AFE: test    eax, eax
 0x471B00: jz      short loc_471B20

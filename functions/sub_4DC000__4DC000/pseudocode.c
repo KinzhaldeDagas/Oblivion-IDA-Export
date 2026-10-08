@@ -1,17 +1,17 @@
-void __cdecl sub_4DC000(int a1, TESForm *a2)
+void __cdecl sub_4DC000(int a1, TESChildCELL *a2)
 {
-  if ( a2 )
+  if ( a2 ) /*0x4dc007*/
   {
-    if ( a1 )
+    if ( a1 ) /*0x4dc010*/
     {
-      if ( (PlayerCharacter *)a1 != TESDataHandler_g_PlayerRef
-        && !TESObjectREFR_IsPersistent_((TESObjectREFR *)a2)
-        && !((unsigned __int8 (__thiscall *)(TESForm *))a2->vtbl->Unk_1E)(a2) )
+      if ( (PlayerCharacter *)a1 != reference /*0x4dc02c*/
+        && !TESObjectREFR_IsPersistent((TESObjectREFR *)a2)
+        && !(*((unsigned __int8 (__thiscall **)(TESChildCELL *))a2->vtbl + 0x1E))(a2) )
       {
-        sub_424B60((ExtraDataList *)(a1 + 0x44), (int)a2);
-        sub_4203E0((ExtraDataList *)&a2[2].member.modlist.next, (BSExtraDataVtbl *)a1);
-        if ( !((unsigned __int8 (__thiscall *)(TESForm *))a2->vtbl->Unk_1E)(a2) )
-          a2->vtbl->MarkAsModified(a2, 0x20000);
+        sub_424B60((ExtraDataList *)(a1 + 0x44), (BSExtraDataVtbl *)a2); /*0x4dc036*/
+        ExtraDataList_SetItemDropper((ExtraDataList *)&a2[0x11], (BSExtraDataVtbl *)a1); /*0x4dc03f*/
+        if ( !(*((unsigned __int8 (__thiscall **)(TESChildCELL *))a2->vtbl + 0x1E))(a2) ) /*0x4dc04b*/
+          (*((void (__thiscall **)(TESChildCELL *, int))a2->vtbl + 0x10))(a2, 0x20000); /*0x4dc05d*/
       }
     }
   }

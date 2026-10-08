@@ -60,9 +60,9 @@
 0x54403A: mov     ecx, esi; this
 0x54403C: mov     byte ptr [esp+24h+var_4], 0
 0x544041: call    NiSmartPointer_Set??
-0x544046: mov     ecx, [esi]
-0x544048: push    edi
-0x544049: call    NiTexturingProperty__SetUnk08
+0x544046: mov     ecx, [esi]; this
+0x544048: push    edi; texture
+0x544049: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x54404E: jmp     short loc_5440AA
 0x544050: mov     eax, [esi+20h]
 0x544053: test    eax, eax
@@ -114,3 +114,22 @@
 0x5440DB: pop     esi
 0x5440DC: add     esp, 14h
 0x5440DF: retn
+0x9BA720: lea     ecx, [ebp-14h]; slot
+0x9BA723: jmp     NiPointerSlot_Release
+0x9BA728: mov     eax, [ebp-10h]
+0x9BA72B: push    eax
+0x9BA72C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA731: pop     ecx
+0x9BA732: retn
+0x9BA733: mov     eax, [ebp-10h]
+0x9BA736: push    eax
+0x9BA737: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BA73C: pop     ecx
+0x9BA73D: retn
+0x9BA73E: mov     edx, [esp+arg_4]
+0x9BA742: lea     eax, [edx-10h]
+0x9BA745: mov     ecx, [edx-14h]
+0x9BA748: xor     ecx, eax
+0x9BA74A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA74F: mov     eax, offset stru_AE4858
+0x9BA754: jmp     ___CxxFrameHandler3

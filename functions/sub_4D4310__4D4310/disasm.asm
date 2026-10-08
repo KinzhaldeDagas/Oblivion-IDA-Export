@@ -27,9 +27,9 @@
 0x4D4349: lea     esp, [esp+0]
 0x4D4350: push    ebp; a2
 0x4D4351: mov     ecx, esi; this
-0x4D4353: call    TESForm_GetOverrideFile
+0x4D4353: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4D4358: mov     ecx, eax
-0x4D435A: call    sub_4520F0
+0x4D435A: call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.
 0x4D435F: mov     edi, eax
 0x4D4361: test    edi, edi
 0x4D4363: jz      short loc_4D43A0

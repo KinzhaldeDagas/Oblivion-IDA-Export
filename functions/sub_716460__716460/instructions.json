@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x71646D",
-    "line": "call    sub_700750",
+    "line": "call    sub_700750; Pass227: NiScreenTexture vtable +0x38 map insertion helper; inserts object into map context, not a draw call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,25 +271,25 @@
   },
   {
     "ea": "0x7164D0",
-    "line": "lea     eax, [esp+1Ch+var_8]",
+    "line": "lea     eax, [esp+1Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7164D4",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7164D5",
-    "line": "lea     ecx, [esp+20h+var_C]",
+    "line": "lea     ecx, [esp+20h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7164D9",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -301,25 +301,25 @@
   },
   {
     "ea": "0x7164DE",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7164DF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7164E1",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7164E6",
-    "line": "mov     esi, [esp+1Ch+var_C]",
+    "line": "mov     esi, [esp+1Ch+keyOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7164EE",
-    "line": "mov     eax, [esp+1Ch+var_8]",
+    "line": "mov     eax, [esp+1Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },

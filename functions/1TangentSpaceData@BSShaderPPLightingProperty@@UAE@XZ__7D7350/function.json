@@ -1,18 +1,31 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7D7350",
+      "0x7D73A6"
+    ]
+  ],
+  "chunks_sha256": "9ff86e3acc87359afa890602fb0fb5c1b78ed9a7a26f8cdcebf99a1c3d609782",
+  "comment_regular": "\n\n[2026-10-02 tangent ownership pass] Verified ownsArrays+8 guards both FormHeap frees at +0x0C/+0x10; clears each pointer, restores NiRefObject vtable and decrements object count. Fallout destructor 0x8288DF58 has matching ownership behavior. Plugin cache arrays must not be borrowed into an owning property; corrected bridge deep-copies them.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
   "display_name": "BSShaderPPLightingProperty::TangentSpaceData::~TangentSpaceData(void)",
   "end_ea": "0x7D73A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1TangentSpaceData@BSShaderPPLightingProperty@@UAE@XZ",
   "segment": ".text",
   "sha256": "9ff86e3acc87359afa890602fb0fb5c1b78ed9a7a26f8cdcebf99a1c3d609782",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D7350",
+  "total_chunk_size": 86,
   "type": "void __thiscall(BSShaderPPLightingProperty::TangentSpaceData *__hidden this)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1

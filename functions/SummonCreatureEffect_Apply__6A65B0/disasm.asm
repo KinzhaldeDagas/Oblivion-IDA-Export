@@ -1,4 +1,4 @@
-0x6A65B0: push    0FFFFFFFFh
+0x6A65B0: push    0FFFFFFFFh; Summon creature effect apply path. Peripheral animation/VFX caller that creates summoned actor state and triggers associated visual/animation setup.
 0x6A65B2: push    offset SummonCreatureEffect_Apply_SEH
 0x6A65B7: mov     eax, large fs:0
 0x6A65BD: push    eax
@@ -39,7 +39,7 @@
 0x6A6622: lea     ecx, [esp+38h+var_18]
 0x6A6626: push    ecx
 0x6A6627: push    edx
-0x6A6628: push    edi; float
+0x6A6628: push    edi; localPosZ
 0x6A6629: mov     ecx, esi
 0x6A662B: mov     [esi+50h], eax
 0x6A662E: call    sub_6A64D0
@@ -89,16 +89,16 @@
 0x6A66CB: fstp    [esp+38h+var_14]
 0x6A66CF: fld     [esp+38h+var_24]
 0x6A66D3: fstp    [esp+38h+var_10]
-0x6A66D7: call    TESObjectREFR_GetParentCell
+0x6A66D7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A66DC: push    edi; TESObjectREFR *
 0x6A66DD: call    sub_4C9BE0
 0x6A66E2: add     esp, 4
 0x6A66E5: push    3
 0x6A66E7: push    eax
 0x6A66E8: mov     ecx, edi; this
-0x6A66EA: call    TESObjectREFR_GetParentCell
+0x6A66EA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A66EF: mov     ecx, eax
-0x6A66F1: call    sub_441800
+0x6A66F1: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x6A66F6: push    20h ; ' '; Size
 0x6A66F8: mov     ebp, eax
 0x6A66FA: call    FormHeapAlloc
@@ -112,10 +112,10 @@
 0x6A6717: fld1
 0x6A6719: mov     eax, [eax+1Ch]
 0x6A671C: mov     edx, [esi+48h]
-0x6A671F: push    0; float
+0x6A671F: push    0; useCachedClone
 0x6A6721: lea     ecx, [eax+18h]
 0x6A6724: sub     esp, 10h
-0x6A6727: fstp    [esp+4Ch+var_40]; float
+0x6A6727: fstp    [esp+4Ch+scale]; scale
 0x6A672B: mov     eax, esp
 0x6A672D: mov     [eax], edx
 0x6A672F: mov     edx, [esi+4Ch]
@@ -134,25 +134,25 @@
 0x6A6756: mov     edx, [eax+14h]
 0x6A6759: call    edx
 0x6A675B: fld1
-0x6A675D: push    eax; float
-0x6A675E: push    ebp; int
+0x6A675D: push    eax; modelPath
+0x6A675E: push    ebp; parentNode
 0x6A675F: push    ecx
 0x6A6760: mov     ecx, edi; this
-0x6A6762: fstp    [esp+64h+var_64]; float
-0x6A6765: call    TESObjectREFR_GetParentCell
-0x6A676A: push    eax; int
-0x6A676B: mov     ecx, ebx
-0x6A676D: call    sub_5713F0
+0x6A6762: fstp    [esp+64h+durationSeconds]; durationSeconds
+0x6A6765: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x6A676A: push    eax; parentCell
+0x6A676B: mov     ecx, ebx; self
+0x6A676D: call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.
 0x6A6772: mov     edi, eax
 0x6A6774: jmp     short loc_6A6778
 0x6A6776: xor     edi, edi
 0x6A6778: push    offset aSpecialidle_su; "SpecialIdle_SummonEffect"
 0x6A677D: mov     ecx, edi
 0x6A677F: mov     [esp+3Ch+var_4], 0FFFFFFFFh
-0x6A6787: call    sub_570C00
-0x6A678C: push    edi
-0x6A678D: mov     ecx, offset ActorProcessManager_ptr
-0x6A6792: call    sub_678D30
+0x6A6787: call    PlaySpecialIdleOnControllerManager; Summon effect path starts SpecialIdle_SummonEffect on spawned effect object's controller manager via sub_570C00; no actor KFFZ lookup.
+0x6A678C: push    edi; effect
+0x6A678D: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x6A6792: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x6A6797: mov     edi, [edi+18h]
 0x6A679A: push    offset aHit; Str2
 0x6A679F: push    offset aSpecialidle_su; "SpecialIdle_SummonEffect"
@@ -166,5 +166,17 @@
 0x6A67B9: test    ecx, ecx
 0x6A67BB: jz      short SummonCreatureEffect_Apply___Done
 0x6A67BD: push    0
-0x6A67BF: call    sub_41A610
+0x6A67BF: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x6A67C4: mov     byte ptr [esi+61h], 1
+0x9C26D0: mov     eax, [ebp-1Ch]
+0x9C26D3: push    eax
+0x9C26D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C26D9: pop     ecx
+0x9C26DA: retn
+0x9C26DB: mov     edx, [esp+arg_4]
+0x9C26DF: lea     eax, [edx-28h]
+0x9C26E2: mov     ecx, [edx-2Ch]
+0x9C26E5: xor     ecx, eax
+0x9C26E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C26EC: mov     eax, offset stru_AEB550
+0x9C26F1: jmp     ___CxxFrameHandler3

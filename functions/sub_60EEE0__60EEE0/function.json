@@ -1,19 +1,36 @@
 {
-  "callees_count": 58,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 36,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_60EEE0",
+  "chunks": [
+    [
+      "0x60EEE0",
+      "0x60F24F"
+    ],
+    [
+      "0x9C30C0",
+      "0x9C3107"
+    ]
+  ],
+  "chunks_sha256": "6c07407b10a5ee966138442c7d912bed81a775dd6d2864694e38cb0db1d00a14",
+  "comment_regular": "OFE ambient vs explicit boundary: non-player target calls Conversation constructor 6B7420 at 60EFA2 with startingTopic unchanged. Null is the native automatic HELLO root. Player target does not build this ambient chain; keep player Greeting and Rumors adapters separate.\n\nRadiantAI conversation-package boundary. Requires both actors at process level 0, builds the Oblivion Conversation first, then creates a shared dynamic DialoguePackage. Native callers must supply nonnull actors and successful allocations: the target null check occurs after dereference, and allocation failures are not safely handled.",
+  "comment_repeatable": "RadiantAI conversation-package boundary. Requires both actors at process level 0, builds the Oblivion Conversation first, then creates a shared dynamic DialoguePackage. Native callers must supply nonnull actors and successful allocations: the target null check occurs after dereference, and allocation failures are not safely handled.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Actor::StartConversationPackage",
   "end_ea": "0x60F24F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_60EEE0",
+  "name": "Actor::StartConversationPackage",
   "segment": ".text",
   "sha256": "e11b1d40981df7950ac0bb6d85d00e160c9e72534b9fcb72a2034a53ad7c4898",
   "size": 879,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60EEE0",
-  "type": "char __thiscall(Actor *this, Actor *, char, int)",
-  "xrefs_from_count": 337,
+  "total_chunk_size": 950,
+  "type": "bool __thiscall(Actor *this, Actor *target, bool incrementProcedure, TESTopic *startingTopic)",
+  "xrefs_from_count": 366,
   "xrefs_to_count": 1
 }

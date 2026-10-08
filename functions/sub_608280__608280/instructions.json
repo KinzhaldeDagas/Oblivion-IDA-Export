@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x608286",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; Arrow gravity reads the shooter's live Luck actor value (AV 7).",
     "mnemonic": "mov",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x608295",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; Arrow gravity reads live Marksman (AV 0x1C); Calc_LuckModifiedSkill combines it with Luck and clamps the result to 0..100.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6082B7",
-    "line": "call    sub_547700",
+    "line": "call    Combat_CalculateArrowGravitySkillScale; Skill gravity scale = max(0, fArrowGravityBase - fArrowGravityMult * clamp(Marksman + Luck*fActorLuckSkillMult + iActorLuckSkillBase, 0, 100)). The caller supplies full-strength weight 1.0, so fArrowWeakGravity is not selected.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6082CB",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; Fetches the shooter's bhkCharacterProxy. Its +0x58 vfunc returns the low-level Havok world/runtime context used below.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6082DF",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x6082ED",
-    "line": "fld     dword ptr [eax+28h]",
+    "line": "fld     dword ptr [eax+28h]; Reads signed Havok world gravity Z at runtimeContext+0x28, converts it by ~7 game units per centimeter, then multiplies by the skill gravity scale.",
     "mnemonic": "fld",
     "size": 3
   },

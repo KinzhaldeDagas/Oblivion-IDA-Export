@@ -49,12 +49,12 @@
 0x4FF03E: mov     [eax+esi+20Ch], di
 0x4FF046: add     dword ptr [esi+40Ch], 2
 0x4FF04D: mov     eax, [esi+40Ch]
-0x4FF053: push    edi; Size
+0x4FF053: push    edi; byteCount
 0x4FF054: lea     ecx, [esp+1914h+Src]
-0x4FF05B: push    ecx; Src
+0x4FF05B: push    ecx; source
 0x4FF05C: lea     edx, [eax+esi+20Ch]
-0x4FF063: push    edx; Dst
-0x4FF064: call    _memcpy
+0x4FF063: push    edx; destination
+0x4FF064: call    _memcpy;
 0x4FF069: add     [esi+40Ch], edi
 0x4FF06F: mov     ecx, [esi+40Ch]
 0x4FF075: xor     edi, edi
@@ -154,7 +154,6 @@
 0x4FF209: mov     dword ptr [esp+1910h+ArgList], 9
 0x4FF211: lea     edi, [esp+1910h+var_12C0]
 0x4FF218: jmp     short loc_4FF220
-0x4FF21A: align 10h
 0x4FF220: push    200h
 0x4FF225: lea     eax, [edi-20Ch]
 0x4FF22B: push    ebx
@@ -169,7 +168,7 @@
 0x4FF243: add     edi, 214h
 0x4FF249: sub     dword ptr [esp+1910h+ArgList], 1
 0x4FF24E: jns     short loc_4FF220
-0x4FF250: lea     edi, [esp+1910h+var_14CC]
+0x4FF250: lea     edi, [esp+1910h+source]
 0x4FF257: mov     ecx, [esp+1910h+var_18F8]
 0x4FF25B: push    ebx
 0x4FF25C: push    ebx
@@ -194,10 +193,9 @@
 0x4FF29B: mov     dword ptr [esp+1910h+ArgList], ebp
 0x4FF29F: jle     loc_4FF419
 0x4FF2A5: mov     eax, dword ptr [esp+1910h+ArgList]
-0x4FF2A9: lea     ebp, [esp+1910h+var_14CC]
+0x4FF2A9: lea     ebp, [esp+1910h+source]
 0x4FF2B0: mov     dword ptr [esp+1910h+ArgList], eax
 0x4FF2B4: jmp     short loc_4FF2C0
-0x4FF2B6: align 10h
 0x4FF2C0: mov     ecx, [esi+40Ch]
 0x4FF2C6: mov     word ptr [ecx+esi+20Ch], 1
 0x4FF2D0: add     dword ptr [esi+40Ch], 2
@@ -213,11 +211,11 @@
 0x4FF2EF: mov     [esi+ecx+20Ch], di
 0x4FF2F7: add     dword ptr [esi+40Ch], 2
 0x4FF2FE: mov     eax, [esi+40Ch]
-0x4FF304: push    edi; Size
+0x4FF304: push    edi; byteCount
 0x4FF305: lea     edx, [esi+eax+20Ch]
-0x4FF30C: push    ebp; Src
-0x4FF30D: push    edx; Dst
-0x4FF30E: call    _memcpy
+0x4FF30C: push    ebp; source
+0x4FF30D: push    edx; destination
+0x4FF30E: call    _memcpy;
 0x4FF313: add     [esi+40Ch], edi
 0x4FF319: add     esp, 0Ch
 0x4FF31C: add     ebp, 214h

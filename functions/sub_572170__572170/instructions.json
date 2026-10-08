@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x572173",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5721F2",
-    "line": "lea     edx, [esp+20h+var_4]",
+    "line": "lea     edx, [esp+20h+node]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5721F9",
-    "line": "mov     eax, [esp+1Ch+var_4]",
+    "line": "mov     eax, [esp+1Ch+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x572252",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x5722AB",
-    "line": "add     ecx, 15E0h",
+    "line": "add     ecx, 15E0h; list",
     "mnemonic": "add",
     "size": 6
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x5722C9",
-    "line": "mov     [esp+1Ch+var_4], edi",
+    "line": "mov     [esp+1Ch+node], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -721,19 +721,19 @@
   },
   {
     "ea": "0x5722CF",
-    "line": "lea     eax, [esp+1Ch+var_4]",
+    "line": "lea     eax, [esp+1Ch+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5722D3",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5722D4",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x5722EB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x572311",
-    "line": "fstp    [esp+1Ch+var_4]",
+    "line": "fstp    [esp+1Ch+node]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x572315",
-    "line": "fld     [esp+1Ch+var_4]",
+    "line": "fld     [esp+1Ch+node]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x5723B4",
-    "line": "mov     [esp+1Ch+var_4], edi",
+    "line": "mov     [esp+1Ch+node], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x5723BE",
-    "line": "lea     edx, [esp+1Ch+var_4]",
+    "line": "lea     edx, [esp+1Ch+node]",
     "mnemonic": "lea",
     "size": 4
   },

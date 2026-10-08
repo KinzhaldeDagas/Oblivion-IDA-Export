@@ -3,7 +3,7 @@
 0x4FA912: push    esi
 0x4FA913: push    8; Size
 0x4FA915: mov     esi, ecx
-0x4FA917: call    FormHeapAlloc
+0x4FA917: call    FormHeapAlloc; Hot Reload OBSE decode: event-list variable builder allocates a 0x8 list head before scanning script->varList; zero-local scripts keep this empty head.
 0x4FA91C: add     esp, 4
 0x4FA91F: test    eax, eax
 0x4FA921: jz      short loc_4FA934
@@ -22,7 +22,7 @@
 0x4FA944: jz      short loc_4FA9AC
 0x4FA946: mov     ebx, [ebx+4]
 0x4FA949: push    18h; Size
-0x4FA94B: call    FormHeapAlloc
+0x4FA94B: call    FormHeapAlloc; Hot Reload OBSE decode: each Script::VariableInfo becomes a 0x18 event-list var payload; fields copied are id +0, data +8, type +0x10.
 0x4FA950: mov     esi, eax
 0x4FA952: add     esp, 4
 0x4FA955: test    esi, esi
@@ -44,7 +44,7 @@
 0x4FA97E: cmp     dword ptr [edi], 0
 0x4FA981: jz      short loc_4FA9A6
 0x4FA983: push    8; Size
-0x4FA985: call    FormHeapAlloc
+0x4FA985: call    FormHeapAlloc; Hot Reload OBSE decode: additional event-list var nodes are 0x8 list entries appended after the allocated head.
 0x4FA98A: add     esp, 4
 0x4FA98D: test    eax, eax
 0x4FA98F: jz      short loc_4FA99F

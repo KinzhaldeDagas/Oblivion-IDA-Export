@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x401750",
-    "line": "push    ebx",
+    "line": "push    ebx; FormHeap shutdown path: destroys all small MemoryPools, unlinks remaining free entries, releases allocator tables/backing state, and clears heap fields.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x401766",
-    "line": "call    sub_4027A0",
+    "line": "call    MemoryPool_DestroyAll; Destroys every registered small MemoryPool; invoked during FormHeap shutdown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4017C5",
-    "line": "call    sub_401690",
+    "line": "call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x4017EC",
-    "line": "call    sub_401690",
+    "line": "call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.",
     "mnemonic": "call",
     "size": 5
   },

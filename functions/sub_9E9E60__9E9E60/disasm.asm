@@ -2,7 +2,7 @@
 0x9E9E66: push    ecx
 0x9E9E67: fstp    [esp+4+var_4]; float
 0x9E9E6A: push    offset aFcombatmaxhold; "fCombatMaxHoldScore"
-0x9E9E6F: mov     ecx, offset fCombatMaxHoldScore
+0x9E9E6F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+450h)
 0x9E9E74: call    GameSetting_ConstrAndReg_float
 0x9E9E79: push    offset sub_A1E970; void (__cdecl *)()
 0x9E9E7E: call    _atexit

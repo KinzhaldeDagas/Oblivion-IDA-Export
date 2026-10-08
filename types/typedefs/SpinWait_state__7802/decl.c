@@ -1,1 +1,7 @@
-SpinWait_state
+enum SpinWait_state : __int32
+{
+SPINWAIT_INIT = 0x0,
+SPINWAIT_SPIN = 0x1,
+SPINWAIT_YIELD = 0x2,
+SPINWAIT_DONE = 0x3,
+};

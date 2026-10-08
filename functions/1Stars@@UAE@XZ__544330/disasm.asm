@@ -59,3 +59,15 @@
 0x5443D5: pop     ebp
 0x5443D6: add     esp, 10h
 0x5443D9: retn
+0x9BA7D0: mov     ecx, [ebp-10h]; this
+0x9BA7D3: jmp     ??1SkyObject@@UAE@XZ; SkyObject::~SkyObject(void)
+0x9BA7D8: mov     ecx, [ebp-10h]
+0x9BA7DB: add     ecx, 8; slot
+0x9BA7DE: jmp     NiPointerSlot_Release
+0x9BA7E3: mov     edx, [esp+arg_4]
+0x9BA7E7: lea     eax, [edx-10h]
+0x9BA7EA: mov     ecx, [edx-14h]
+0x9BA7ED: xor     ecx, eax
+0x9BA7EF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA7F4: mov     eax, offset stru_AE48EC
+0x9BA7F9: jmp     ___CxxFrameHandler3

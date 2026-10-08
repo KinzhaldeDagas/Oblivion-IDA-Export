@@ -11,9 +11,9 @@
 0x99E3C6: mov     [ebp+RootPathName], al
 0x99E3C9: lea     eax, [ebp+RootPathName]
 0x99E3CC: push    eax; lpRootPathName
-0x99E3CD: mov     byte ptr [ebp+9], 3Ah ; ':'
-0x99E3D1: mov     byte ptr [ebp+0Ah], 5Ch ; '\'
-0x99E3D5: mov     byte ptr [ebp+0Bh], 0
+0x99E3CD: mov     [ebp+arg_1], 3Ah ; ':'
+0x99E3D1: mov     [ebp+arg_1+1], 5Ch ; '\'
+0x99E3D5: mov     [ebp+arg_1+2], 0
 0x99E3D9: call    ds:GetDriveTypeA
 0x99E3DF: test    eax, eax
 0x99E3E1: jz      short loc_99E3E8

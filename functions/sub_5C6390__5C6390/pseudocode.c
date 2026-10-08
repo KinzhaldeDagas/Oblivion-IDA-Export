@@ -47,165 +47,179 @@ void __thiscall sub_5C6390(_DWORD *this, int arg0)
   int v46[24]; // [esp+FCh] [ebp-6Ch] BYREF
   unsigned int v47; // [esp+164h] [ebp-4h]
 
-  v2 = this;
-  v43 = this;
-  ArrayConstructor(a1, 0x18u, 4, (int)sub_43EB30, (void (__thiscall *)(void *))sub_43ACE0);
-  v47 = 0;
-  ArrayConstructor(v44, 0x18u, 4, (int)sub_43EB30, (void (__thiscall *)(void *))sub_43ACE0);
-  v3 = TESDataHandler_g_PlayerRef;
-  GetBaseForm = TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetBaseForm;
-  LOBYTE(v47) = 1;
-  *(float *)&a3 = 0.0;
-  v5 = (int)GetBaseForm((TESObjectREFR *)v3);
-  v6 = *(_DWORD *)(v5 + 0xE8);
-  v7 = (char *)sub_521A10((TESNPC *)v5);
-  sub_552990((char *)(v6 + 0x29C), v7, (int)a1, 0, 0.0);
-  v8 = (const char *)dword_B39000;
-  a3 = 0xFA8;
-  LODWORD(Float) = &a2;
-  a2.m_data = 0;
-  *(_DWORD *)&a2.m_dataLen = 0;
-  BSStringT_Set(&a2, v8, 0);
-  v9 = (_DWORD *)sub_5C3110(v2, (unsigned __int8 *)a2.m_data, *(int *)&a2.m_dataLen);
-  Float = Tile_GetFloat((_DWORD *)v2[1], 0xFAE);
-  v10 = Tile_GetFloat(v9, a3);
-  v11 = *(_DWORD *)(v5 + 0xE8);
-  if ( v10 == Float )
+  v2 = this; /*0x5c63bd*/
+  v43 = this; /*0x5c63bf*/
+  ArrayConstructor( /*0x5c63d9*/
+    (char *)a1,
+    0x18u,
+    4,
+    (void (__thiscall *)(char *))FaceGenMatrix_Construct,
+    (void (__thiscall *)(void *))FaceGenMatrix_Destruct);
+  v47 = 0; /*0x5c63f3*/
+  ArrayConstructor( /*0x5c63fa*/
+    (char *)v44,
+    0x18u,
+    4,
+    (void (__thiscall *)(char *))FaceGenMatrix_Construct,
+    (void (__thiscall *)(void *))FaceGenMatrix_Destruct);
+  v3 = reference; /*0x5c63ff*/
+  GetBaseForm = reference->vtbl->super.super.super.GetBaseForm; /*0x5c6407*/
+  LOBYTE(v47) = 1; /*0x5c640d*/
+  *(float *)&a3 = 0.0; /*0x5c641a*/
+  v5 = (int)GetBaseForm((TESObjectREFR *)v3); /*0x5c641d*/
+  v6 = *(_DWORD *)(v5 + 0xE8); /*0x5c641f*/
+  v7 = (char *)TESNPC_GetActiveFaceGenDeltaParameters((TESNPC *)v5); /*0x5c6430*/
+  FaceGenHeadParameters_Combine((char *)(v6 + 0x29C), v7, (int)a1, 0, 0.0); /*0x5c643d*/
+  v8 = (const char *)stru_B39000; /*0x5c6442*/
+  a3 = 0xFA8; /*0x5c644a*/
+  LODWORD(Float) = &a2; /*0x5c6454*/
+  a2.m_data = 0; /*0x5c645a*/
+  *(_DWORD *)&a2.m_dataLen = 0; /*0x5c645c*/
+  BSStringT_Set(&a2, v8, 0); /*0x5c6464*/
+  v9 = (_DWORD *)RaceSexMenu_GetCategoryTileByName(v2, (unsigned __int8 *)a2.m_data, *(int *)&a2.m_dataLen); /*0x5c6478*/
+  Float = Tile_GetFloat((_DWORD *)v2[1], 0xFAE); /*0x5c647f*/
+  v10 = Tile_GetFloat(v9, a3); /*0x5c6485*/
+  v11 = *(_DWORD *)(v5 + 0xE8); /*0x5c648e*/
+  if ( v10 == Float ) /*0x5c649b*/
   {
-    if ( *(float *)(v11 + 0xA4) <= 0.0 )
-      v12 = *(float *)&dword_A46C30;
+    if ( *(float *)(v11 + 0xA4) <= 0.0 ) /*0x5c64a8*/
+      v12 = *(float *)&dword_A46C30; /*0x5c64b2*/
     else
-      v12 = *(float *)(v11 + 0xA4);
+      v12 = *(float *)(v11 + 0xA4); /*0x5c64aa*/
   }
-  else if ( *(float *)(v11 + 0xA0) <= 0.0 )
+  else if ( *(float *)(v11 + 0xA0) <= 0.0 ) /*0x5c64c5*/
   {
-    v12 = flt_A31E2C;
-  }
-  else
-  {
-    v12 = *(float *)(v11 + 0xA0);
-  }
-  v13 = arg0;
-  v38 = v12;
-  v14 = Tile_GetFloat((_DWORD *)v2[arg0 + 0x25], 0xFB6);
-  v15 = Double_To_SInt32(v14);
-  v16 = (_DWORD *)v2[arg0 + 0x25];
-  a3 = 0xFAE;
-  if ( v15 )
-  {
-    *(float *)&v40 = Tile_GetFloat(v16, a3);
-    v17 = (*(float *)&v40 - 0.0) / (1.0 - 0.0) * dbl_A46E48 - dbl_A3F3E8;
+    v12 = flt_A31E2C; /*0x5c64cf*/
   }
   else
   {
-    *(float *)&v40 = Tile_GetFloat(v16, a3);
-    v39 = -v38;
-    v17 = (v38 - v39) * ((*(float *)&v40 - 0.0) / (1.0 - 0.0)) + v39;
+    v12 = *(float *)(v11 + 0xA0); /*0x5c64c7*/
   }
-  v18 = (_DWORD *)v2[arg0 + 0x25];
-  v39 = v17;
-  *(float *)&a3 = v39;
-  v19 = Tile_GetFloat(v18, 0xFB5) - dbl_A2F928;
-  v40 = LOWORD(v38) | 0xC00;
-  *(_QWORD *)&Float = (__int64)v19;
-  *(_DWORD *)&a2.m_dataLen = (__int64)v19;
-  a2.m_data = 0;
-  v20 = Tile_GetFloat(v18, 0xFB6);
-  v21 = Double_To_SInt32(v20);
-  sub_5539E0((int)a1, v21, (int)a2.m_data, *(unsigned int *)&a2.m_dataLen, *(float *)&a3);
-  ArrayConstructor(v46, 0x18u, 4, (int)sub_43EB30, (void (__thiscall *)(void *))sub_43ACE0);
-  LOBYTE(v47) = 2;
-  sub_5221C0((int *)v5, v46);
-  sub_552C10(v46, (int)a1, (int)v44);
-  *(float *)&a3 = 0.0;
-  *(_DWORD *)&a2.m_dataLen = 0;
-  a2.m_data = (char *)sub_521A10((TESNPC *)v5);
-  v22 = (char *)sub_521A10((TESNPC *)v5);
-  sub_552990((char *)v44, v22, (int)a2.m_data, a2.m_dataLen, *(float *)&a3);
-  if ( Tile_GetFloat((_DWORD *)v2[arg0 + 0x25], 0xFB6) == *(float *)&SrcStr )
+  v13 = arg0; /*0x5c64d5*/
+  v38 = v12; /*0x5c64dc*/
+  v14 = Tile_GetFloat((_DWORD *)v2[arg0 + 0x25], 0xFB6); /*0x5c64ec*/
+  v15 = Double_To_SInt32(v14); /*0x5c64f1*/
+  v16 = (_DWORD *)v2[arg0 + 0x25]; /*0x5c64f8*/
+  a3 = 0xFAE; /*0x5c64ff*/
+  if ( v15 ) /*0x5c6504*/
   {
-    v23 = COERCE_FLOAT(
-            ((int (__thiscall *)(PlayerCharacter *, _DWORD))TESDataHandler_g_PlayerRef->vtbl->super.super.super.Unk_4C)(
-              TESDataHandler_g_PlayerRef,
-              0));
-    v38 = v23;
-    if ( v23 != 0.0 )
+    *(float *)&v40 = Tile_GetFloat(v16, a3); /*0x5c653e*/
+    v17 = (*(float *)&v40 - 0.0) / (1.0 - 0.0) * dbl_A46E48 - dbl_A3F3E8; /*0x5c6556*/
+  }
+  else
+  {
+    *(float *)&v40 = Tile_GetFloat(v16, a3); /*0x5c650b*/
+    v39 = -v38; /*0x5c6517*/
+    v17 = (v38 - v39) * ((*(float *)&v40 - 0.0) / (1.0 - 0.0)) + v39; /*0x5c6535*/
+  }
+  v18 = (_DWORD *)v2[arg0 + 0x25]; /*0x5c655c*/
+  v39 = v17; /*0x5c6563*/
+  *(float *)&a3 = v39; /*0x5c656c*/
+  v19 = Tile_GetFloat(v18, 0xFB5) - dbl_A2F928; /*0x5c657b*/
+  v40 = LOWORD(v38) | 0xC00; /*0x5c6591*/
+  *(_QWORD *)&Float = (__int64)v19; /*0x5c6599*/
+  *(_DWORD *)&a2.m_dataLen = (__int64)v19; /*0x5c65a1*/
+  a2.m_data = 0; /*0x5c65a2*/
+  v20 = Tile_GetFloat(v18, 0xFB6); /*0x5c65ad*/
+  v21 = Double_To_SInt32(v20); /*0x5c65b2*/
+  FaceGenHeadParameters_SetSliderValue((int)a1, v21, (int)a2.m_data, *(unsigned int *)&a2.m_dataLen, *(float *)&a3); /*0x5c65c0*/
+  ArrayConstructor( /*0x5c65de*/
+    (char *)v46,
+    0x18u,
+    4,
+    (void (__thiscall *)(char *))FaceGenMatrix_Construct,
+    (void (__thiscall *)(void *))FaceGenMatrix_Destruct);
+  LOBYTE(v47) = 2; /*0x5c65ed*/
+  TESNPC_BuildAbsoluteFaceGenParameters((int *)v5, v46); /*0x5c65f5*/
+  FaceGenHeadParameters_ComputeRaceDelta(v46, (int)a1, (int)v44); /*0x5c660f*/
+  *(float *)&a3 = 0.0; /*0x5c6619*/
+  *(_DWORD *)&a2.m_dataLen = 0; /*0x5c661c*/
+  a2.m_data = (char *)TESNPC_GetActiveFaceGenDeltaParameters((TESNPC *)v5); /*0x5c6625*/
+  v22 = (char *)TESNPC_GetActiveFaceGenDeltaParameters((TESNPC *)v5); /*0x5c6628*/
+  FaceGenHeadParameters_Combine((char *)v44, v22, (int)a2.m_data, a2.m_dataLen, *(float *)&a3); /*0x5c6633*/
+  if ( Tile_GetFloat((_DWORD *)v2[arg0 + 0x25], 0xFB6) == *(float *)&SrcStr ) /*0x5c6657*/
+  {
+    v23 = COERCE_FLOAT(((int (__thiscall *)(PlayerCharacter *, _DWORD))reference->vtbl->super.super.super.Unk_4C)(reference, 0)); /*0x5c666f*/
+    v38 = v23; /*0x5c6673*/
+    if ( v23 != 0.0 ) /*0x5c6677*/
     {
-      v40 = 2;
-      while ( 1 )
+      v40 = 2; /*0x5c667d*/
+      while ( 1 ) /*0x5c6694*/
       {
-        v24 = *(unsigned __int16 *)(LODWORD(v23) + 0xB6);
-        v25 = 0.0;
-        LODWORD(Float) = v24;
-        v39 = 0.0;
-        if ( v24 )
+        v24 = *(unsigned __int16 *)(LODWORD(v23) + 0xB6); /*0x5c6694*/
+        v25 = 0.0; /*0x5c669b*/
+        LODWORD(Float) = v24; /*0x5c669f*/
+        v39 = 0.0; /*0x5c66a3*/
+        if ( v24 ) /*0x5c66a7*/
         {
-          do
+          do /*0x5c6787*/
           {
-            if ( (unsigned int)*(unsigned __int16 *)(LODWORD(v23) + 0xB6) > LODWORD(v25) )
+            if ( (unsigned int)*(unsigned __int16 *)(LODWORD(v23) + 0xB6) > LODWORD(v25) ) /*0x5c66b6*/
             {
-              v26 = *(_DWORD *)(*(_DWORD *)(LODWORD(v23) + 0xB0) + 4 * LODWORD(v25));
-              if ( v26 )
+              v26 = *(_DWORD *)(*(_DWORD *)(LODWORD(v23) + 0xB0) + 4 * LODWORD(v25)); /*0x5c66c2*/
+              if ( v26 ) /*0x5c66c7*/
               {
-                v27 = (*(int (__thiscall **)(int))(*(_DWORD *)v26 + 0x10))(v26);
-                v28 = v27;
-                if ( v27 )
+                v27 = (*(int (__thiscall **)(int))(*(_DWORD *)v26 + 0x10))(v26); /*0x5c66d2*/
+                v28 = v27; /*0x5c66d4*/
+                if ( v27 ) /*0x5c66d8*/
                 {
-                  if ( !strcmp(*(const char **)(v27 + 8), "FaceGenHair") )
+                  if ( !strcmp(*(const char **)(v27 + 8), "FaceGenHair") ) /*0x5c66ed*/
                   {
-                    v41 = *(float *)(v5 + 0x1CC);
-                    sub_550980(v27, v41);
+                    v41 = *(float *)(v5 + 0x1CC); /*0x5c66f8*/
+                    BSFaceGen_ApplyHairLengthMorph(v27, v41);// Apply TESNPC+0x1CC hairLength to this FaceGenHair geometry. /*0x5c6704*/
                   }
-                  v29 = sub_550790(v28);
-                  v30 = v29;
-                  if ( v29 )
+                  v29 = sub_550790(v28); /*0x5c670d*/
+                  v30 = v29; /*0x5c6712*/
+                  if ( v29 ) /*0x5c6719*/
                   {
-                    if ( v29->__vftable[1].Unk_02(v29) )
+                    if ( v29->__vftable[1].Unk_02(v29) ) /*0x5c6722*/
                     {
-                      Unk_02 = v30->__vftable[1].Unk_02;
-                      *(float *)&a3 = 0.0;
-                      *(float *)&a2.m_dataLen = 1.0;
-                      a2.m_data = (char *)v28;
-                      v32 = (char *)Unk_02(v30);
-                      sub_558840(v32, (unsigned int *)v44, (int)a2.m_data, *(float *)&a2.m_dataLen, (float *)a3);
-                      if ( !strcmp(*(const char **)(v28 + 8), "FaceGenHair") )
+                      Unk_02 = v30->__vftable[1].Unk_02; /*0x5c672c*/
+                      *(float *)&a3 = 0.0; /*0x5c672f*/
+                      *(float *)&a2.m_dataLen = 1.0; /*0x5c6732*/
+                      a2.m_data = (char *)v28; /*0x5c6735*/
+                      v32 = (char *)Unk_02(v30); /*0x5c673d*/
+                      BSFaceGenModel_ApplyEGMMorph( /*0x5c6741*/
+                        v32,
+                        (unsigned int *)v44,
+                        (int)a2.m_data,
+                        *(float *)&a2.m_dataLen,
+                        (float *)a3);
+                      if ( !strcmp(*(const char **)(v28 + 8), "FaceGenHair") ) /*0x5c6755*/
                       {
-                        v41 = *(float *)(v5 + 0x1CC);
-                        sub_550980(v28, v41);
+                        v41 = *(float *)(v5 + 0x1CC); /*0x5c6760*/
+                        BSFaceGen_ApplyHairLengthMorph(v28, v41);// Apply TESNPC+0x1CC hairLength to the alternate FaceGenHair geometry. /*0x5c676c*/
                       }
                     }
                   }
-                  v23 = v38;
-                  v25 = v39;
+                  v23 = v38; /*0x5c6774*/
+                  v25 = v39; /*0x5c6778*/
                 }
               }
             }
-            ++LODWORD(v25);
-            v39 = v25;
+            ++LODWORD(v25); /*0x5c677c*/
+            v39 = v25; /*0x5c6783*/
           }
-          while ( LODWORD(v25) < LODWORD(Float) );
-          v2 = v43;
+          while ( LODWORD(v25) < LODWORD(Float) ); /*0x5c6787*/
+          v2 = v43; /*0x5c678d*/
         }
-        v33 = COERCE_FLOAT(
-                ((int (__thiscall *)(PlayerCharacter *, _DWORD))TESDataHandler_g_PlayerRef->vtbl->super.super.super.Unk_4D)(
-                  TESDataHandler_g_PlayerRef,
-                  0));
-        v34 = v40-- == 1;
-        v38 = v33;
-        if ( v34 )
-          break;
-        v23 = v38;
+        v33 = COERCE_FLOAT(((int (__thiscall *)(PlayerCharacter *, _DWORD))reference->vtbl->super.super.super.Unk_4D)(reference, 0)); /*0x5c67a1*/
+        v34 = v40-- == 1; /*0x5c67a3*/
+        v38 = v33; /*0x5c67a8*/
+        if ( v34 ) /*0x5c67ac*/
+          break; /*0x5c67ac*/
+        v23 = v38; /*0x5c6690*/
       }
     }
-    v13 = arg0;
+    v13 = arg0; /*0x5c67b2*/
   }
-  v35 = (Tile *)v2[v13 + 0x25];
-  *(float *)&a3 = Tile_GetFloat(v35, 0xFAE);
-  Tile_SetFloat(v35, (_DWORD *)0xFB8, *(float *)&a3);
-  LOBYTE(v47) = 1;
-  _LN21(v46, 0x18u, 4, (void (__thiscall *)(void *))sub_43ACE0);
-  LOBYTE(v47) = 0;
-  _LN21(v44, 0x18u, 4, (void (__thiscall *)(void *))sub_43ACE0);
-  v47 = 0xFFFFFFFF;
-  _LN21(a1, 0x18u, 4, (void (__thiscall *)(void *))sub_43ACE0);
+  v35 = (Tile *)v2[v13 + 0x25]; /*0x5c67b9*/
+  *(float *)&a3 = Tile_GetFloat(v35, 0xFAE); /*0x5c67cd*/
+  Tile_SetFloat(v35, (_DWORD *)0xFB8, *(float *)&a3); /*0x5c67d7*/
+  LOBYTE(v47) = 1; /*0x5c67ed*/
+  _LN21((char *)v46, 0x18u, 4, (void (__thiscall *)(void *))FaceGenMatrix_Destruct); /*0x5c67f5*/
+  LOBYTE(v47) = 0; /*0x5c6808*/
+  _LN21((char *)v44, 0x18u, 4, (void (__thiscall *)(void *))FaceGenMatrix_Destruct); /*0x5c6810*/
+  v47 = 0xFFFFFFFF; /*0x5c6826*/
+  _LN21((char *)a1, 0x18u, 4, (void (__thiscall *)(void *))FaceGenMatrix_Destruct); /*0x5c6831*/
 }

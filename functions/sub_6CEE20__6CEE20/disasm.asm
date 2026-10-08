@@ -1,4 +1,4 @@
-0x6CEE20: sub     esp, 8Ch
+0x6CEE20: sub     esp, 8Ch; Oblivion: updates the selected accumulation item (+0x0F) at a requested time. On backward/wrapped time it samples the interpolator range endpoints and composes the wrap delta into the per-item 0x68-byte state and blend cache before sampling the requested time.
 0x6CEE26: push    ebx
 0x6CEE27: push    ebp
 0x6CEE28: push    esi
@@ -28,7 +28,7 @@
 0x6CEE70: fstp    st
 0x6CEE72: lea     edi, [ebp+24h]
 0x6CEE75: mov     ecx, edi
-0x6CEE77: call    sub_6CBC10
+0x6CEE77: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CEE7C: test    al, al
 0x6CEE7E: jz      loc_6CEF1B
 0x6CEE84: mov     eax, [ebx]
@@ -41,7 +41,7 @@
 0x6CEE98: call    eax
 0x6CEE9A: lea     ecx, [esp+9Ch+var_80]
 0x6CEE9E: call    sub_470AB0
-0x6CEEA3: fld     dword ptr [esp+9Ch+var_88]
+0x6CEEA3: fld     [esp+9Ch+var_88]
 0x6CEEA7: mov     esi, [esp+9Ch+arg_4]
 0x6CEEAE: mov     edx, [ebx]
 0x6CEEB0: mov     edx, [edx+4Ch]
@@ -54,7 +54,7 @@
 0x6CEEBF: call    edx
 0x6CEEC1: lea     ecx, [esp+9Ch+var_60]
 0x6CEEC5: call    sub_470AB0
-0x6CEECA: fld     dword ptr [esp+9Ch+var_8C]
+0x6CEECA: fld     [esp+9Ch+var_8C]
 0x6CEECE: mov     eax, [ebx]
 0x6CEED0: mov     edx, [eax+4Ch]
 0x6CEED3: lea     ecx, [esp+9Ch+var_60]
@@ -82,7 +82,7 @@
 0x6CEF17: mov     esi, [esp+9Ch+var_84]
 0x6CEF1B: lea     edi, [esi+30h]
 0x6CEF1E: mov     ecx, edi
-0x6CEF20: call    sub_6CBC10
+0x6CEF20: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CEF25: test    al, al
 0x6CEF27: jnz     short loc_6CEF45
 0x6CEF29: lea     eax, [ebp+24h]

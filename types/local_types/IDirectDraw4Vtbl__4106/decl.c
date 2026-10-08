@@ -1,1 +1,31 @@
-IDirectDraw4Vtbl
+struct IDirectDraw4Vtbl
+{
+HRESULT (__stdcall *QueryInterface)(IDirectDraw4 *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);
+ULONG (__stdcall *AddRef)(IDirectDraw4 *This) __offset(OFF64|AUTO);
+ULONG (__stdcall *Release)(IDirectDraw4 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Compact)(IDirectDraw4 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *CreateClipper)(IDirectDraw4 *This, DWORD, LPDIRECTDRAWCLIPPER *, IUnknown *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *CreatePalette)(IDirectDraw4 *This, DWORD, LPPALETTEENTRY, LPDIRECTDRAWPALETTE *, IUnknown *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *CreateSurface)(IDirectDraw4 *This, LPDDSURFACEDESC2, LPDIRECTDRAWSURFACE4 *, IUnknown *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *DuplicateSurface)(IDirectDraw4 *This, LPDIRECTDRAWSURFACE4, LPDIRECTDRAWSURFACE4 *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumDisplayModes)(IDirectDraw4 *This, DWORD, LPDDSURFACEDESC2, LPVOID, LPDDENUMMODESCALLBACK2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumSurfaces)(IDirectDraw4 *This, DWORD, LPDDSURFACEDESC2, LPVOID, LPDDENUMSURFACESCALLBACK2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *FlipToGDISurface)(IDirectDraw4 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetCaps)(IDirectDraw4 *This, LPDDCAPS, LPDDCAPS) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDisplayMode)(IDirectDraw4 *This, LPDDSURFACEDESC2) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetFourCCCodes)(IDirectDraw4 *This, LPDWORD, LPDWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetGDISurface)(IDirectDraw4 *This, LPDIRECTDRAWSURFACE4 *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetMonitorFrequency)(IDirectDraw4 *This, LPDWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetScanLine)(IDirectDraw4 *This, LPDWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetVerticalBlankStatus)(IDirectDraw4 *This, LPBOOL) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Initialize)(IDirectDraw4 *This, GUID *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *RestoreDisplayMode)(IDirectDraw4 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetCooperativeLevel)(IDirectDraw4 *This, HWND, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetDisplayMode)(IDirectDraw4 *This, DWORD, DWORD, DWORD, DWORD, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *WaitForVerticalBlank)(IDirectDraw4 *This, DWORD, HANDLE) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetAvailableVidMem)(IDirectDraw4 *This, LPDDSCAPS2, LPDWORD, LPDWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetSurfaceFromDC)(IDirectDraw4 *This, HDC, LPDIRECTDRAWSURFACE4 *) __offset(OFF64|AUTO);
+HRESULT (__stdcall *RestoreAllSurfaces)(IDirectDraw4 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *TestCooperativeLevel)(IDirectDraw4 *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDeviceIdentifier)(IDirectDraw4 *This, LPDDDEVICEIDENTIFIER, DWORD) __offset(OFF64|AUTO);
+};

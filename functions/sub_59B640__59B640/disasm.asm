@@ -1,4 +1,4 @@
-0x59B640: mov     ecx, [esp+arg_0]
+0x59B640: mov     ecx, [esp+arg_0]; [Controller decode 2026-07-09] Updates Controls menu invert-Y button label from bInvertYValues.
 0x59B644: test    ecx, ecx
 0x59B646: jz      short locret_59B66A
 0x59B648: cmp     byte ptr [esp+arg_4], 0

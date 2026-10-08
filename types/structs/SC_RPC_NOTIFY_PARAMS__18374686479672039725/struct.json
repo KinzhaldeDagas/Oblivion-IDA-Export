@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_SC_RPC_NOTIFY_PARAMS",
+  "definition": "struct _SC_RPC_NOTIFY_PARAMS\n{\nDWORD dwInfoLevel;\n$2DF1E4F3887B98E2D28DF8B710CAB280 _anon_0;\n}\n",
   "id": 18374686479672039725,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwInfoLevel",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_anon_0",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "$2DF1E4F3887B98E2D28DF8B710CAB280"
     }
   ],
   "name": "_SC_RPC_NOTIFY_PARAMS",
+  "ordinal": 5803,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

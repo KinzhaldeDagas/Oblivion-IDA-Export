@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_420E00",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x420E00",
+      "0x420E85"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "6b333efd673fe17d97ba0fa9c028c2e9cbaa6c6a375840d6e3ef84e94ec1b162",
+  "comment_regular": "Oblivion-specific friend-hit behavior: gets/creates ExtraFriendHitList and increments the hit count for the supplied actor, creating a {actor,count,timer} entry if needed.",
+  "comment_repeatable": "Oblivion-specific friend-hit behavior: gets/creates ExtraFriendHitList and increments the hit count for the supplied actor, creating a {actor,count,timer} entry if needed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_AddFriendHit",
   "end_ea": "0x420E85",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_420E00",
+  "name": "ExtraDataList_AddFriendHit",
   "segment": ".text",
   "sha256": "0aa6154389681d31903e284e701529d797baf7429b038e56fe214799c7b4f31e",
   "size": 133,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x420E00",
+  "total_chunk_size": 171,
   "type": "void __thiscall(ExtraDataList *this, int)",
-  "xrefs_from_count": 53,
+  "xrefs_from_count": 67,
   "xrefs_to_count": 2
 }

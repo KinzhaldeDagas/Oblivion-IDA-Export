@@ -20,10 +20,10 @@
 0x4D2763: mov     eax, [esi]
 0x4D2765: mov     edx, [esi+8]
 0x4D2768: mov     [esp+10Ch+var_D4], ecx
-0x4D276C: lea     ecx, [ebx+28h]
+0x4D276C: lea     ecx, [ebx+28h]; this
 0x4D276F: mov     [esp+10Ch+var_D8], eax
 0x4D2773: mov     [esp+10Ch+var_D0], edx
-0x4D2777: call    sub_420C40
+0x4D2777: call    ExtraDataList_GetNorthRotation; Returns ExtraNorthRotation's float payload (type 0x4C), or 0.0.
 0x4D277C: fstp    [esp+10Ch+var_F4]
 0x4D2780: fldz
 0x4D2782: fcomp   [esp+10Ch+var_F4]
@@ -358,7 +358,7 @@
 0x4D2BEF: jnz     loc_4D2CDA
 0x4D2BF5: lea     edi, [ebx+28h]
 0x4D2BF8: mov     ecx, edi
-0x4D2BFA: call    sub_420B50
+0x4D2BFA: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4D2BFF: mov     esi, eax
 0x4D2C01: test    esi, esi
 0x4D2C03: jnz     short loc_4D2C4C
@@ -377,7 +377,7 @@
 0x4D2C2A: mov     ecx, edi
 0x4D2C2C: mov     [esp+110h+var_4], 0FFFFFFFFh
 0x4D2C37: mov     esi, eax
-0x4D2C39: call    sub_420B70
+0x4D2C39: call    ExtraDataList_SetSeenData; Replaces the owned SeenData pointer, destroying the previous object; null removes ExtraSeenData.
 0x4D2C3E: mov     eax, [ebx]
 0x4D2C40: mov     edx, [eax+48h]
 0x4D2C43: push    10000000h
@@ -420,7 +420,7 @@
 0x4D2CAE: jz      short loc_4D2CDA
 0x4D2CB0: push    0
 0x4D2CB2: mov     ecx, edi
-0x4D2CB4: call    sub_420B70
+0x4D2CB4: call    ExtraDataList_SetSeenData; Replaces the owned SeenData pointer, destroying the previous object; null removes ExtraSeenData.
 0x4D2CB9: mov     edx, [ebx]
 0x4D2CBB: mov     eax, [edx+44h]
 0x4D2CBE: and     byte ptr [ebx+25h], 0FEh
@@ -442,3 +442,15 @@
 0x4D2CEC: pop     ebx
 0x4D2CED: add     esp, 0F8h
 0x4D2CF3: retn    4
+0x9B55B0: mov     eax, [ebp-0F8h]
+0x9B55B6: push    eax
+0x9B55B7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B55BC: pop     ecx
+0x9B55BD: retn
+0x9B55BE: mov     edx, [esp+arg_4]
+0x9B55C2: lea     eax, [edx-0FCh]
+0x9B55C8: mov     ecx, [edx-100h]
+0x9B55CE: xor     ecx, eax
+0x9B55D0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B55D5: mov     eax, offset stru_AE0688
+0x9B55DA: jmp     ___CxxFrameHandler3

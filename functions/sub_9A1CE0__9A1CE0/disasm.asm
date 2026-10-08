@@ -76,7 +76,7 @@
 0x9A1DBC: add     ebx, 4
 0x9A1DBF: sub     [esp+24h+var_10], 1
 0x9A1DC4: jnz     short loc_9A1D76
-0x9A1DC6: mov     cl, byte_B3FF00
+0x9A1DC6: mov     cl, byte ptr unk_B3FF00
 0x9A1DCC: mov     [ebp+34h], cl
 0x9A1DCF: mov     edx, dword_B2752C
 0x9A1DD5: mov     ecx, [esp+24h+arg_4]
@@ -114,3 +114,15 @@
 0x9A1E25: pop     ebx
 0x9A1E26: add     esp, 10h
 0x9A1E29: retn
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

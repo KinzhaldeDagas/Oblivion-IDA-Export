@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x784FF0",
-    "line": "push    ebx",
+    "line": "push    ebx; Destroys a cache-map subtree. Recurses through right children while iterating down the left spine; releases heap-backed string storage when capacity>=16, then frees each 0x30-byte node.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x784FF3",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+root]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x785006",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x785009",
-    "line": "call    sub_784FF0",
+    "line": "call    OB_stBezierSplineCacheMap_DestroySubtree_010201A0; Destroys a cache-map subtree. Recurses through right children while iterating down the left spine; releases heap-backed string storage when capacity>=16, then frees each 0x30-byte node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x78501A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x785030",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

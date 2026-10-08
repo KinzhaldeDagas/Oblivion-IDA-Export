@@ -1,13 +1,13 @@
-int __thiscall sub_6DEA70(_BYTE *this, float a2)
+float *__thiscall sub_6DEA70(_BYTE *this, float *a2)
 {
-  switch ( *(this + 0x40) & 7 )
+  switch ( *(this + 0x40) & 7 ) /*0x6dea8f*/
   {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
+    case 0: /*0x6dea8f*/
+    case 1: /*0x6dea8f*/
+    case 2: /*0x6dea8f*/
+    case 3: /*0x6dea8f*/
       return def_6DEA8F(a2);
     default:
-      JUMPOUT(0x6DEACB);
+      JUMPOUT(0x6DEACB); /*0x6deacb*/
   }
 }

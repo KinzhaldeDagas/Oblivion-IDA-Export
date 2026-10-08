@@ -1,1 +1,1 @@
-IContextCallback_0
+typedef IContextCallback IContextCallback_0;

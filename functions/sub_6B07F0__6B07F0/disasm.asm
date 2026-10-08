@@ -1,4 +1,4 @@
-0x6B07F0: sub     esp, 12Ch
+0x6B07F0: sub     esp, 12Ch; Weapon equip/unequip animation sound event dispatcher. Selects sound descriptor by equipped weapon anim type, appends Equip/Unequip variant, positions sound, and adjusts volume/pitch for sneaking/weapon speed.
 0x6B07F6: mov     eax, ds:0B30AACh
 0x6B07FB: xor     eax, esp
 0x6B07FD: mov     [esp+12Ch+var_4], eax
@@ -187,7 +187,7 @@
 0x6B0ADD: mov     [eax+4], cx
 0x6B0AE1: push    ebx
 0x6B0AE2: mov     ecx, esi
-0x6B0AE4: call    Actor_IsSneaking
+0x6B0AE4: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x6B0AE9: mov     ecx, ds:0B3C0F0h
 0x6B0AEF: test    ecx, ecx
 0x6B0AF1: mov     bl, al
@@ -245,6 +245,6 @@
 0x6B0B9C: mov     ecx, esi; this
 0x6B0B9E: call    sub_6B73E0
 0x6B0BA3: push    esi
-0x6B0BA4: call    FormHeapFree
+0x6B0BA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B0BA9: add     esp, 4
 0x6B0BAC: pop     ebx

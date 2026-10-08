@@ -1,1 +1,5 @@
-callback_context
+struct callback_context
+{
+BOOL has_extracted;
+LPCWSTR target;
+};

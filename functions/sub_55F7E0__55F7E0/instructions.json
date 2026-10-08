@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55F7E0",
-    "line": "mov     eax, ds:0B39E04h",
+    "line": "mov     eax, ds:0B39E04h; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x55F7E9",
-    "line": "cmp     [esp+arg_0], al",
+    "line": "cmp     [esp+createIfMissing], al",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x55F7EF",
-    "line": "push    eax",
+    "line": "push    eax; recreate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55F7F0",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67FD70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified add path for a newly allocated AStarWorldNode: under LowPathSearchGlobals.lowPathCriticalSection, insert the same node into the nested space map in both directions. The outer map is keyed by spaceA/spaceB; each inner map keys the opposite space and stores BSSimpleList<AStarWorldNode*>. Existing entries/lists are reused; missing maps/lists are allocated. WorldSpace endpoints create 0xBF-bucket inner maps, other endpoint forms create 0x25-bucket maps; why these bucket counts differ is Unknown. Fallout's TeleportDoorSearch::GetNodeConnections enumerates cell/worldspace door lists during search instead of using this Oblivion cached reciprocal map.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x67FD9C",
-    "line": "mov     ecx, offset g_pathingMutex",
+    "line": "mov     ecx, 0B3BE80h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x67FDA6",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x67FDBA",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Verified at this AStarWorldNode call site: Shared_GetPointerAtOffset08 is a 4-byte getter for [this+8], which is AStarWorldNode.spaceA. The helper's other use cases do not change this call's field meaning.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x67FDC7",
-    "line": "call    NiDX92DBufferData__GetSurfaceData",
+    "line": "call    NiDX92DBufferData__GetSurfaceData; Verified at this AStarWorldNode call site: NiDX92DBufferData::GetSurfaceData is a 4-byte getter for [this+0x10]; here it reads AStarWorldNode.spaceB. The generic helper name reflects other callers, not this node's semantic field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x67FE21",
-    "line": "mov     edx, [esp+28h+arg_0]",
+    "line": "mov     edx, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x67FE32",
-    "line": "mov     edx, [esp+28h+arg_0]",
+    "line": "mov     edx, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x67FE5E",
-    "line": "push    0BFh ; '¿'",
+    "line": "push    0BFh ; '¿'; bucketCount",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x67FE63",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67FE65",
-    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)",
+    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x67FE84",
-    "line": "push    25h ; '%'",
+    "line": "push    25h ; '%'; bucketCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67FE86",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67FE88",
-    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)",
+    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x67FEC5",
-    "line": "mov     ecx, [esp+28h+arg_0]",
+    "line": "mov     ecx, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x67FF26",
-    "line": "mov     edx, [esp+28h+arg_0]",
+    "line": "mov     edx, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x67FF4A",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,19 +1027,19 @@
   },
   {
     "ea": "0x67FF7D",
-    "line": "push    0BFh ; '¿'",
+    "line": "push    0BFh ; '¿'; bucketCount",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x67FF82",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67FF84",
-    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)",
+    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,19 +1087,19 @@
   },
   {
     "ea": "0x67FFA3",
-    "line": "push    25h ; '%'",
+    "line": "push    25h ; '%'; bucketCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x67FFA5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67FFA7",
-    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>::NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *>(void)",
+    "line": "call    ??0?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@QAE@XZ; Verified inner map constructor and vtable identity: NiTPointerMap<TESForm*,BSSimpleList<AStarWorldNode*>*>; initializes vtable, bucket count, zeroed bucket-head array, and entry count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x67FFDC",
-    "line": "mov     ecx, [esp+28h+arg_0]",
+    "line": "mov     ecx, [esp+28h+node]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x67FFF5",
-    "line": "mov     ecx, offset g_pathingMutex; lpCriticalSection",
+    "line": "mov     ecx, 0B3BE80h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1318,5 +1318,167 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C4B50",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4B53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B54",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4B59",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B5A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B5B",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4B5E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B5F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4B64",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B65",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B66",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4B69",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B6A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4B6F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B70",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B71",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4B74",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B75",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4B7A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B7B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4B7C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4B80",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4B83",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4B86",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4B88",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4B8D",
+    "line": "mov     eax, offset stru_AED478",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4B92",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

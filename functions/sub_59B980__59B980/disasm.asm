@@ -1,4 +1,4 @@
-0x59B980: push    ebx
+0x59B980: push    ebx; [Controller decode 2026-07-09] Selects previous available input scheme for Controls menu.
 0x59B981: mov     bl, 3
 0x59B983: mov     eax, [ecx+5Ch]
 0x59B986: test    eax, eax

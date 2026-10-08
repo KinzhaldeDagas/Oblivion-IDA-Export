@@ -1,18 +1,31 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E8E80",
+      "0x4E8F01"
+    ]
+  ],
+  "chunks_sha256": "df5617df533e6b2c8bd9c9a1f1d092e9ea5fee89960984ecbb72554a8b8bbc3a",
+  "comment_regular": "Verified: iterates every connected-point list bucket and calls sub_67EDA0 on each node. That helper clears coordinate/temporary fields and masks the flag byte at +0x10; exact field meanings remain Unknown.",
+  "comment_repeatable": "Verified: iterates every connected-point list bucket and calls sub_67EDA0 on each node. That helper clears coordinate/temporary fields and masks the flag byte at +0x10; exact field meanings remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_4E8E80",
   "end_ea": "0x4E8F01",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_4E8E80",
   "segment": ".text",
   "sha256": "df5617df533e6b2c8bd9c9a1f1d092e9ea5fee89960984ecbb72554a8b8bbc3a",
   "size": 129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E8E80",
+  "total_chunk_size": 129,
   "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 60,
   "xrefs_to_count": 1

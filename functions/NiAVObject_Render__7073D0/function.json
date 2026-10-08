@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x7073D0",
+      "0x7073EA"
+    ]
+  ],
+  "chunks_sha256": "72021dbbcbb7c5361df699cc7fcca0a024c127fe75708cd96d0d511ce15cc4a5",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Checks AppCulled bit 0 at NiAVObject+0x18 before virtual process ProcessCull(+4). CULLING does not clear this bit and cannot observe descendants pruned before its geometry guard. Render-only culling should not set persistent object flags.\nGPU world census audit 2026-09-27: AppCulled is tested on every visited NiAVObject before ProcessCull. GPU candidates must retain inherited node/ancestor conditions, not only the leaf flag.\n\nRetail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.",
+  "comment_repeatable": "Retail visibility dispatch honors NiAVObject AppCulled flag bit 0 before OnVisible traversal.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiAVObject_Render",
   "end_ea": "0x7073EA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiAVObject_Render",
   "segment": ".text",
   "sha256": "72021dbbcbb7c5361df699cc7fcca0a024c127fe75708cd96d0d511ce15cc4a5",
   "size": 26,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7073D0",
+  "total_chunk_size": 26,
   "type": "int __thiscall(NiAVObject *this, NiCullingProcess *a2)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 11

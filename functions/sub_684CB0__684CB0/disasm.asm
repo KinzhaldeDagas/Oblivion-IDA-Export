@@ -9,7 +9,7 @@
 0x684CC9: jz      loc_684EB9
 0x684CCF: push    ebp
 0x684CD0: mov     ecx, ebx; this
-0x684CD2: call    MobileObject_GetCharProxy
+0x684CD2: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x684CD7: mov     ebp, eax
 0x684CD9: test    ebp, ebp
 0x684CDB: jz      loc_684EB1
@@ -21,10 +21,10 @@
 0x684CF7: push    esi
 0x684CF8: mov     [esp+60h+var_44], ecx
 0x684CFC: push    edi
-0x684CFD: mov     ecx, ebp
+0x684CFD: mov     ecx, ebp; this
 0x684CFF: mov     [esp+64h+var_48], eax
 0x684D03: mov     [esp+64h+var_40], edx
-0x684D07: call    sub_8913C0
+0x684D07: call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
 0x684D0C: fstp    [esp+64h+arg_0]
 0x684D10: fldz
 0x684D12: mov     eax, [esp+64h+arg_8]
@@ -47,18 +47,18 @@
 0x684D57: call    eax
 0x684D59: push    ecx
 0x684D5A: fadd    qword ptr ds:0A4D918h
-0x684D60: lea     ecx, [esp+68h+var_24]
+0x684D60: lea     ecx, [esp+68h+var_24]; this
 0x684D64: fstp    [esp+68h+arg_0]
 0x684D68: fld     [esp+68h+arg_0]
-0x684D6C: fstp    [esp+68h+var_68]; float
-0x684D6F: call    NiMatrix33_InitRotationTransform
+0x684D6C: fstp    [esp+68h+angleZ]; angleZ
+0x684D6F: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x684D74: lea     ecx, [esp+64h+var_54]
 0x684D78: push    ecx
 0x684D79: lea     edx, [esp+68h+var_30]
 0x684D7D: push    edx
 0x684D7E: push    1
 0x684D80: lea     eax, [esp+70h+var_24]
-0x684D84: push    offset Vector3_InitValue?
+0x684D84: push    offset g_zeroNiPoint3
 0x684D89: push    eax
 0x684D8A: call    sub_710580
 0x684D8F: fld     [esp+78h+var_48]
@@ -96,18 +96,18 @@
 0x684DFB: call    edx
 0x684DFD: fsub    qword ptr ds:0A4D918h
 0x684E03: push    ecx
-0x684E04: lea     ecx, [esp+68h+var_24]
+0x684E04: lea     ecx, [esp+68h+var_24]; this
 0x684E08: fstp    [esp+68h+arg_0]
 0x684E0C: fld     [esp+68h+arg_0]
-0x684E10: fstp    [esp+68h+var_68]; float
-0x684E13: call    NiMatrix33_InitRotationTransform
+0x684E10: fstp    [esp+68h+angleZ]; angleZ
+0x684E13: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x684E18: lea     eax, [esp+64h+var_54]
 0x684E1C: push    eax
 0x684E1D: lea     ecx, [esp+68h+var_30]
 0x684E21: push    ecx
 0x684E22: push    1
 0x684E24: lea     edx, [esp+70h+var_24]
-0x684E28: push    offset Vector3_InitValue?
+0x684E28: push    offset g_zeroNiPoint3
 0x684E2D: push    edx
 0x684E2E: call    sub_710580
 0x684E33: fld     [esp+78h+var_48]

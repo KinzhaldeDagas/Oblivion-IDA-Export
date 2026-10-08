@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_8647B0",
+  "chunks": [
+    [
+      "0x8647B0",
+      "0x864830"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "23e4039ad84291d8c70d50b542095bfc712f5d8942fcad7bf7e6dbee4f354812",
+  "comment_regular": "[Verified] GeometryDecalShaderProperty vtable slot +0x18 (slot 6) CreateClone. Allocates and constructs a 0x9C-byte GeometryDecalShaderProperty, then calls BSShaderProperty_CopyCloneMembers. The copy helper only copies base fields at +0x1C/+0x20 and resets +0x24; it does not copy the inherited DECAL_DATA* list at +0x80. Clone-time decal-list population/rebuild remains Unknown.",
+  "comment_repeatable": "[Verified] GeometryDecalShaderProperty vtable slot +0x18 (slot 6) CreateClone. Allocates and constructs a 0x9C-byte GeometryDecalShaderProperty, then calls BSShaderProperty_CopyCloneMembers. The copy helper only copies base fields at +0x1C/+0x20 and resets +0x24; it does not copy the inherited DECAL_DATA* list at +0x80. Clone-time decal-list population/rebuild remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "GeometryDecalShaderProperty_CreateClone",
   "end_ea": "0x864830",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_8647B0",
+  "name": "GeometryDecalShaderProperty_CreateClone",
   "segment": ".text",
   "sha256": "7ba213c7be44fe1c63baf7ffc8d0d382d9d9d780957be7bd72bc8457e98cf79e",
   "size": 128,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x8647B0",
-  "type": "BSShaderLightingProperty *__thiscall(char **this, int)",
-  "xrefs_from_count": 45,
+  "total_chunk_size": 166,
+  "type": "BSShaderLightingPropertyLayout_t *__thiscall(BSShaderLightingPropertyLayout_t *this, void *cloneProcess)",
+  "xrefs_from_count": 59,
   "xrefs_to_count": 1
 }

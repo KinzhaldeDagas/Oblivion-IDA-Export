@@ -6,189 +6,193 @@ void __userpurge sub_44D340(
         signed int a5,
         TESObjectREFR *a6)
 {
-  _DWORD *v7; // esi
-  ExtraDataList ***v8; // eax
-  ExtraDataList ***v9; // ebx
-  ExtraDataList **v10; // eax
-  ExtraDataList ***v11; // eax
-  ExtraDataList *v12; // edi
+  _DWORD *v6; // esi
+  EntryData *EntryForForm; // eax
+  EntryData *v8; // ebx
+  void *extendData; // eax
+  EntryData *v10; // eax
+  ExtraDataList *v11; // edi
   signed __int16 ExtraCount; // ax
-  signed int v14; // ebp
-  TESObjectREFR *v15; // esi
-  BaseExtraList *v16; // ebp
+  signed int v13; // ebp
+  TESObjectREFR *OriginalReference; // esi
+  BaseExtraList *v15; // ebp
   ExtraContainerChanges_Data *ContainerChanges; // eax
-  ExtraDataList ***v18; // eax
-  ExtraDataList **v19; // eax
-  ExtraDataList **v20; // ecx
-  ExtraContainerChanges_Data *v21; // eax
-  ExtraDataList ***v22; // eax
-  ExtraDataList **v23; // eax
-  ExtraDataList **v24; // ecx
-  char v25; // [esp+4Eh] [ebp-Eh]
-  char v26; // [esp+4Fh] [ebp-Dh]
-  ExtraDataList **v27; // [esp+50h] [ebp-Ch]
-  signed int v28; // [esp+54h] [ebp-8h]
+  EntryData *v17; // eax
+  tListVoid *v18; // eax
+  ExtraDataList **v19; // ecx
+  ExtraContainerChanges_Data *v20; // eax
+  EntryData *v21; // eax
+  tListVoid *v22; // eax
+  ExtraDataList **v23; // ecx
+  char v24; // [esp+4Eh] [ebp-Eh]
+  char v25; // [esp+4Fh] [ebp-Dh]
+  int *v26; // [esp+50h] [ebp-Ch]
+  signed int v27; // [esp+54h] [ebp-8h]
 
-  v7 = a1;
-  ContainerExtraData_GetEntryForForm((_DWORD **)a1[0x337], *(_DWORD *)(a4 + 8));
-  v9 = v8;
-  if ( v8 )
+  v6 = a1; /*0x44d34e*/
+  EntryForForm = ContainerExtraData_GetEntryForForm( /*0x44d35d*/
+                   (ExtraContainerChanges_Data *)a1[0x337],
+                   *(TESForm **)(a4 + 8),
+                   1,
+                   0);
+  v8 = EntryForForm; /*0x44d362*/
+  if ( EntryForForm ) /*0x44d366*/
   {
-    v10 = *v8;
-    v26 = 0;
-    if ( a5 )
+    extendData = EntryForForm->extendData; /*0x44d36d*/
+    v25 = 0; /*0x44d36f*/
+    if ( a5 ) /*0x44d374*/
     {
-      while ( 1 )
+      while ( 1 ) /*0x44d384*/
       {
-        if ( v10 )
+        if ( extendData ) /*0x44d386*/
         {
-          v12 = *v10;
-          v27 = (ExtraDataList **)v10[1];
-          if ( *v10 )
+          v11 = *(ExtraDataList **)extendData; /*0x44d3d3*/
+          v26 = *((int **)extendData + 1); /*0x44d3da*/
+          if ( *(_DWORD *)extendData ) /*0x44d3d3*/
           {
-            ExtraCount = ExtraDataList_GetExtraCount(v12);
-            v14 = ExtraCount;
-            v28 = ExtraCount;
-            if ( ExtraCount > 0 )
+            ExtraCount = ExtraDataList_GetExtraCount(v11); /*0x44d3e6*/
+            v13 = ExtraCount; /*0x44d3eb*/
+            v27 = ExtraCount; /*0x44d3f0*/
+            if ( ExtraCount > 0 ) /*0x44d3f4*/
             {
-              v15 = (TESObjectREFR *)sub_41E790(v12);
-              if ( a5 < v14 )
-                v28 = a5;
+              OriginalReference = (TESObjectREFR *)ExtraDataList_GetOriginalReference(v11); /*0x44d401*/
+              if ( a5 < v13 ) /*0x44d409*/
+                v27 = a5; /*0x44d414*/
               else
-                sub_4234B0(v12);
-              if ( v15 )
+                sub_4234B0(v11); /*0x44d40d*/
+              if ( OriginalReference ) /*0x44d41a*/
               {
-                if ( TESObjectREFR_GetContainer(v15) )
+                if ( TESObjectREFR_GetContainer(OriginalReference) ) /*0x44d422*/
                 {
-                  v16 = 0;
-                  if ( (unsigned int)BaseExtraList_Count(v12) > 1 || ExtraDataList_GetExtraCount(v12) > 1 )
-                    v16 = (BaseExtraList *)v12;
-                  v15->vtbl->RemoveItem(
+                  v15 = 0; /*0x44d431*/
+                  if ( (unsigned int)BaseExtraList_Count(v11) > 1 || ExtraDataList_GetExtraCount(v11) > 1 ) /*0x44d448*/
+                    v15 = (BaseExtraList *)v11; /*0x44d44a*/
+                  OriginalReference->vtbl->RemoveItem( /*0x44d472*/
+                    OriginalReference,
+                    v8->type,
                     v15,
-                    (TESForm *)v9[2],
-                    v16,
-                    v28,
+                    v27,
                     0,
                     0,
-                    (TESObjectREFR *)TESDataHandler_g_PlayerRef,
+                    (TESObjectREFR *)reference,
                     0,
                     0,
                     1,
                     0);
-                  ContainerChanges = ExtraDataList_GetContainerChanges(&v15->member.baseExtraList);
-                  v25 = 1;
-                  if ( ContainerChanges )
+                  ContainerChanges = ExtraDataList_GetContainerChanges(&OriginalReference->member.baseExtraList); /*0x44d477*/
+                  v24 = 1; /*0x44d47e*/
+                  if ( ContainerChanges ) /*0x44d483*/
                   {
-                    ContainerExtraData_GetEntryForForm(ContainerChanges, (int)v9[2]);
-                    if ( v18 )
+                    v17 = ContainerExtraData_GetEntryForForm(ContainerChanges, v8->type, 1, 0); /*0x44d48f*/
+                    if ( v17 ) /*0x44d496*/
                     {
-                      v19 = *v18;
-                      if ( v19 )
+                      v18 = v17->extendData; /*0x44d498*/
+                      if ( v18 ) /*0x44d49c*/
                       {
-                        v20 = v19;
-                        do
+                        v19 = (ExtraDataList **)v18; /*0x44d49e*/
+                        do /*0x44d4bd*/
                         {
-                          if ( !*v20 )
-                            break;
-                          if ( !v25 )
-                            break;
-                          if ( *v20 == v12 )
-                            v25 = 0;
+                          if ( !*v19 ) /*0x44d4a0*/
+                            break; /*0x44d4a4*/
+                          if ( !v24 ) /*0x44d4ab*/
+                            break; /*0x44d4ab*/
+                          if ( *v19 == v11 ) /*0x44d4af*/
+                            v24 = 0; /*0x44d4b1*/
                           else
-                            v20 = (ExtraDataList **)v20[1];
+                            v19 = (ExtraDataList **)v19[1]; /*0x44d4b8*/
                         }
-                        while ( v20 );
+                        while ( v19 ); /*0x44d4bd*/
                       }
                     }
                   }
-                  v21 = ExtraDataList_GetContainerChanges(&TESDataHandler_g_PlayerRef->super.super.super.super.baseExtraList);
-                  if ( v21 )
+                  v20 = ExtraDataList_GetContainerChanges(&reference->super.super.super.super.baseExtraList); /*0x44d4c8*/
+                  if ( v20 ) /*0x44d4cf*/
                   {
-                    ContainerExtraData_GetEntryForForm(v21, (int)v9[2]);
-                    if ( v22 )
+                    v21 = ContainerExtraData_GetEntryForForm(v20, v8->type, 1, 0); /*0x44d4db*/
+                    if ( v21 ) /*0x44d4e2*/
                     {
-                      v23 = *v22;
-                      if ( v23 )
+                      v22 = v21->extendData; /*0x44d4e4*/
+                      if ( v22 ) /*0x44d4e8*/
                       {
-                        v24 = v23;
-                        do
+                        v23 = (ExtraDataList **)v22; /*0x44d4ea*/
+                        do /*0x44d50d*/
                         {
-                          if ( !*v24 )
-                            break;
-                          if ( !v25 )
-                            goto LABEL_46;
-                          if ( *v24 == v12 )
-                            v25 = 0;
+                          if ( !*v23 ) /*0x44d4f0*/
+                            break; /*0x44d4f4*/
+                          if ( !v24 ) /*0x44d4fb*/
+                            goto LABEL_46; /*0x44d4fb*/
+                          if ( *v23 == v11 ) /*0x44d4ff*/
+                            v24 = 0; /*0x44d501*/
                           else
-                            v24 = (ExtraDataList **)v24[1];
+                            v23 = (ExtraDataList **)v23[1]; /*0x44d508*/
                         }
-                        while ( v24 );
+                        while ( v23 ); /*0x44d50d*/
                       }
                     }
                   }
-                  if ( v25
-                    && (unsigned int)BaseExtraList_Count(v12) < 2
-                    && ExtraDataList_GetExtraCount(v12) <= 1
-                    && !ExtraDataList_GetExtraScript(v12) )
+                  if ( v24 /*0x44d531*/
+                    && (unsigned int)BaseExtraList_Count(v11) < 2
+                    && ExtraDataList_GetExtraCount(v11) <= 1
+                    && !ExtraDataList_GetExtraScript(v11) )
                   {
-                    BSSimpleList_Remove(*v9, (int)v12);
-                    v27 = *v9;
-                    goto LABEL_52;
+                    BSSimpleList_Remove((int *)v8->extendData, (int)v11); /*0x44d53d*/
+                    v26 = (int *)v8->extendData; /*0x44d544*/
+                    goto LABEL_52; /*0x44d548*/
                   }
 LABEL_46:
-                  if ( ExtraDataList_GetExtraCount(v12) <= 1 || (unsigned int)BaseExtraList_Count(v12) >= 2 )
+                  if ( ExtraDataList_GetExtraCount(v11) <= 1 || (unsigned int)BaseExtraList_Count(v11) >= 2 ) /*0x44d564*/
                   {
-                    BaseExtraList_Count(v12);
-                    a5 -= v28;
-                    v7 = a1;
-                    goto LABEL_9;
+                    BaseExtraList_Count(v11); /*0x44d568*/
+                    a5 -= v27; /*0x44d571*/
+                    v6 = a1; /*0x44d575*/
+                    goto LABEL_9; /*0x44d579*/
                   }
                 }
                 else
                 {
-                  ExtraDataList_RemoveOwner(&v15->member.baseExtraList.vtbl);
-                  sub_4234B0(&v15->member.baseExtraList);
-                  ((void (__thiscall *)(PlayerCharacter *, TESObjectREFR *, signed int, _DWORD))TESDataHandler_g_PlayerRef->vtbl->super.Unk_B3)(
-                    TESDataHandler_g_PlayerRef,
-                    v15,
-                    v28,
+                  ExtraDataList_RemoveOwner(&OriginalReference->member.baseExtraList.vtbl); /*0x44d583*/
+                  sub_4234B0(&OriginalReference->member.baseExtraList); /*0x44d58a*/
+                  ((void (__thiscall *)(PlayerCharacter *, TESObjectREFR *, signed int, _DWORD))reference->vtbl->super.Unk_B3)( /*0x44d5a5*/
+                    reference,
+                    OriginalReference,
+                    v27,
                     0);
-                  BSSimpleList_Remove(*v9, (int)v12);
-                  v27 = *v9;
-                  if ( (unsigned int)BaseExtraList_Count(v12) < 2
-                    && ExtraDataList_GetExtraCount(v12) <= 1
-                    && !ExtraDataList_GetExtraScript(v12) )
+                  BSSimpleList_Remove((int *)v8->extendData, (int)v11); /*0x44d5aa*/
+                  v26 = (int *)v8->extendData; /*0x44d5b3*/
+                  if ( (unsigned int)BaseExtraList_Count(v11) < 2 /*0x44d5d0*/
+                    && ExtraDataList_GetExtraCount(v11) <= 1
+                    && !ExtraDataList_GetExtraScript(v11) )
                   {
 LABEL_52:
-                    (*(void (__thiscall **)(ExtraDataList *, int))v12->vtbl)(v12, 1);
+                    (*(void (__thiscall **)(ExtraDataList *, int))v11->vtbl)(v11, 1); /*0x44d5d9*/
                   }
                 }
-                a5 -= v28;
-                v7 = a1;
-                goto LABEL_9;
+                a5 -= v27; /*0x44d5e7*/
+                v6 = a1; /*0x44d5eb*/
+                goto LABEL_9; /*0x44d5ef*/
               }
-              v7 = a1;
+              v6 = a1; /*0x44d5f4*/
             }
           }
-          if ( !v27 )
-            return;
+          if ( !v26 ) /*0x44d5fd*/
+            return; /*0x44d5fd*/
         }
         else
         {
-          if ( v26 )
-            return;
-          sub_448F40(v7, a2, a3, a6);
-          v26 = 1;
-          ContainerExtraData_GetEntryForForm((_DWORD **)v7[0x337], *(_DWORD *)(a4 + 8));
-          v9 = v11;
-          if ( !v11 )
-            return;
-          v27 = *v11;
+          if ( v25 ) /*0x44d38c*/
+            return; /*0x44d38c*/
+          sub_448F40(v6, a2, a3, a6); /*0x44d395*/
+          v25 = 1; /*0x44d3ac*/
+          v10 = ContainerExtraData_GetEntryForForm((ExtraContainerChanges_Data *)v6[0x337], *(TESForm **)(a4 + 8), 1, 0); /*0x44d3b1*/
+          v8 = v10; /*0x44d3b6*/
+          if ( !v10 ) /*0x44d3ba*/
+            return; /*0x44d3ba*/
+          v26 = (int *)v10->extendData; /*0x44d3be*/
         }
 LABEL_9:
-        if ( !a5 )
-          return;
-        v10 = v27;
+        if ( !a5 ) /*0x44d3c7*/
+          return; /*0x44d3c7*/
+        extendData = v26; /*0x44d380*/
       }
     }
   }

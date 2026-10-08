@@ -1,5 +1,5 @@
-0x6ED6D0: mov     eax, [esp+arg_4]
-0x6ED6D4: mov     ecx, dword ptr [esp+ArgList]
+0x6ED6D0: mov     eax, [esp+sourceLine]; FaceGen assertion reporter: PrintError("FR2 ASSERT violation in %s line %i. Code may crash.", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.
+0x6ED6D4: mov     ecx, [esp+ArgList]
 0x6ED6D8: push    eax
 0x6ED6D9: push    ecx; ArgList
 0x6ED6DA: push    offset aFr2AssertViola; "FR2 ASSERT violation in %s line %i. Cod"...

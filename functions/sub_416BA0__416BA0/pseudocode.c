@@ -1,176 +1,168 @@
-char __usercall sub_416BA0@<al>(int a1@<edi>)
+char sub_416BA0()
 {
-  UInt32 v1; // eax
-  UInt32 v2; // edx
-  int v3; // edx
-  unsigned int v4; // ecx
-  int v5; // ebp
-  int v6; // eax
-  _DWORD *v7; // eax
-  _DWORD *v8; // esi
-  int v9; // edi
-  int v10; // eax
-  unsigned int v11; // eax
-  UInt32 *v12; // edi
-  UInt32 v13; // esi
-  TESForm *v14; // eax
-  const char *v15; // eax
+  unsigned __int8 *bufferCursor; // eax
+  int v2; // edx
+  unsigned int v3; // ecx
+  int v4; // ebp
+  int v5; // eax
+  _DWORD *v6; // eax
+  _DWORD *v7; // esi
+  int v8; // edi
+  int v9; // eax
+  unsigned int v10; // eax
+  UInt32 *currentlySavingFormHeader; // edi
+  unsigned __int8 *v12; // esi
+  TESForm *v13; // eax
+  const char *v14; // eax
   char result; // al
-  _WORD *v17; // edi
-  unsigned int v18; // esi
-  int v19; // [esp-18h] [ebp-30h]
-  int v20; // [esp-14h] [ebp-2Ch]
-  size_t v21; // [esp-10h] [ebp-28h]
-  const char *v22; // [esp-10h] [ebp-28h]
-  size_t v23; // [esp+0h] [ebp-18h] BYREF
-  UInt32 v24; // [esp+8h] [ebp-10h]
+  unsigned __int8 *v16; // edi
+  unsigned __int8 *v17; // esi
+  int v18; // [esp-18h] [ebp-30h]
+  int v19; // [esp-14h] [ebp-2Ch]
+  const char *v20; // [esp-10h] [ebp-28h]
+  int v21; // [esp+4h] [ebp-14h] BYREF
+  unsigned __int8 *v22; // [esp+8h] [ebp-10h]
   int Src; // [esp+Ch] [ebp-Ch] BYREF
-  _WORD *v26; // [esp+10h] [ebp-8h]
-  int v27; // [esp+14h] [ebp-4h] BYREF
+  unsigned __int8 *v24; // [esp+10h] [ebp-8h]
+  int source; // [esp+14h] [ebp-4h] BYREF
 
-  v27 = 0;
-  v1 = SaveLoad_CurrentSavegame->unk000[5];
-  v26 = 0;
-  v24 = v1;
-  if ( Global_DebugSaveBuffer )
-    v24 = v1;
-  if ( sub_45A170() )
+  source = 0; /*0x416bb0*/
+  bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x416bb8*/
+  v24 = 0; /*0x416bbb*/
+  v22 = bufferCursor; /*0x416bc3*/
+  if ( Global_DebugSaveBuffer ) /*0x416bc7*/
+    v22 = bufferCursor; /*0x416bc9*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x416bcd*/
   {
-    LODWORD(v23) = 4;
-    Src = 0x4B4F4C42;
-    SaveLoad_SaveData(&Src, v23);
-    v2 = SaveLoad_CurrentSavegame->unk000[5];
-    LODWORD(v23) = 2;
-    v26 = (_WORD *)v2;
-    SaveLoad_SaveData(&v27, v23);
+    Src = 0x4B4F4C42; /*0x416be3*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, &Src, 4u); /*0x416beb*/
+    v24 = g_TESSaveLoadGame->bufferCursor; /*0x416c00*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, &source, 2u); /*0x416c04*/
   }
-  v3 = dword_B33510;
-  v4 = dword_B3350C;
-  v5 = 0;
-  HIDWORD(v21) = a1;
-  HIDWORD(v23) = 0;
-  do
+  v2 = unk_B33510; /*0x416c09*/
+  v3 = unk_B3350C; /*0x416c0f*/
+  v4 = 0; /*0x416c18*/
+  v21 = 0; /*0x416c1b*/
+  do /*0x416d11*/
   {
-    v6 = 0;
-    if ( v4 )
+    v5 = 0; /*0x416c26*/
+    if ( v3 ) /*0x416c2a*/
     {
-      while ( !*(_DWORD *)(v3 + 4 * v6) )
+      while ( !*(_DWORD *)(v2 + 4 * v5) ) /*0x416c34*/
       {
-        if ( ++v6 >= v4 )
-          goto LABEL_9;
+        if ( ++v5 >= v3 ) /*0x416c3b*/
+          goto LABEL_9; /*0x416c3b*/
       }
-      v7 = *(_DWORD **)(v3 + 4 * v6);
+      v6 = *(_DWORD **)(v2 + 4 * v5); /*0x416c68*/
     }
     else
     {
 LABEL_9:
-      v7 = 0;
+      v6 = 0; /*0x416c3d*/
     }
-    v8 = v7;
-    while ( v8 )
+    v7 = v6; /*0x416c41*/
+    while ( v7 ) /*0x416c43*/
     {
-      Src = 0xFFFFFFFF;
-      Src = v8[1];
-      v9 = v8[2];
-      if ( *v8 )
+      Src = 0xFFFFFFFF; /*0x416c50*/
+      Src = v7[1]; /*0x416c57*/
+      v8 = v7[2]; /*0x416c5f*/
+      if ( *v7 ) /*0x416c5b*/
       {
-        v8 = (_DWORD *)*v8;
+        v7 = (_DWORD *)*v7; /*0x416c64*/
       }
       else
       {
-        v10 = (*(int (__thiscall **)(int *, _DWORD))(EffectSettingCollection + 4))(&EffectSettingCollection, v8[1]);
-        v4 = dword_B3350C;
-        v3 = dword_B33510;
-        v11 = v10 + 1;
-        if ( v11 >= dword_B3350C )
+        v9 = (*(int (__thiscall **)(void *, _DWORD))(MEMORY[0xB33508] + 4))(&MEMORY[0xB33508], v7[1]); /*0x416c7f*/
+        v3 = unk_B3350C; /*0x416c81*/
+        v2 = unk_B33510; /*0x416c87*/
+        v10 = v9 + 1; /*0x416c8d*/
+        if ( v10 >= unk_B3350C ) /*0x416c92*/
         {
 LABEL_17:
-          v8 = 0;
+          v7 = 0; /*0x416ca2*/
         }
         else
         {
-          while ( 1 )
+          while ( 1 ) /*0x416c94*/
           {
-            v8 = *(_DWORD **)(dword_B33510 + 4 * v11);
-            if ( v8 )
-              break;
-            if ( ++v11 >= dword_B3350C )
-              goto LABEL_17;
+            v7 = *(_DWORD **)(unk_B33510 + 4 * v10); /*0x416c94*/
+            if ( v7 ) /*0x416c99*/
+              break; /*0x416c99*/
+            if ( ++v10 >= unk_B3350C ) /*0x416ca0*/
+              goto LABEL_17; /*0x416ca0*/
           }
         }
       }
-      if ( v9 )
+      if ( v8 ) /*0x416ca6*/
       {
-        if ( (*(_DWORD *)(v9 + 0x58) & 0x200000) != 0 )
+        if ( (*(_DWORD *)(v8 + 0x58) & 0x200000) != 0 ) /*0x416cb0*/
         {
-          if ( v5 )
+          if ( v4 ) /*0x416cb4*/
           {
-            LODWORD(v21) = 4;
-            SaveLoad_SaveData(&Src, v21);
-            v3 = dword_B33510;
-            v4 = dword_B3350C;
+            SaveLoad_SaveData(g_TESSaveLoadGame, &Src, 4u); /*0x416cca*/
+            v2 = unk_B33510; /*0x416ccf*/
+            v3 = unk_B3350C; /*0x416cd5*/
           }
           else
           {
-            ++HIDWORD(v23);
+            ++v21; /*0x416cb6*/
           }
         }
       }
     }
-    if ( !v5 )
+    if ( !v4 ) /*0x416ce5*/
     {
-      LODWORD(v21) = 4;
-      SaveLoad_SaveData((char *)&v23 + 4, v21);
-      if ( !HIDWORD(v23) )
-        break;
-      v3 = dword_B33510;
-      v4 = dword_B3350C;
+      SaveLoad_SaveData(g_TESSaveLoadGame, &v21, 4u); /*0x416cf4*/
+      if ( !v21 ) /*0x416cfd*/
+        break; /*0x416cfd*/
+      v2 = unk_B33510; /*0x416cff*/
+      v3 = unk_B3350C; /*0x416d05*/
     }
-    ++v5;
+    ++v4; /*0x416d0b*/
   }
-  while ( v5 < 2 );
+  while ( v4 < 2 ); /*0x416d11*/
   if ( Global_DebugSaveBuffer )
   {
-    v12 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    v13 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v12 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x416d25*/
+    v12 = g_TESSaveLoadGame->bufferCursor; /*0x416d2d*/
+    if ( currentlySavingFormHeader )
     {
-      v14 = TESForm_LookupByFormID(*v12);
-      v15 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v14->vtbl->GetEditorName)(
-                            v14,
-                            *(UInt32 *)((char *)v12 + 5),
+      v13 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x416d35*/
+      v14 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v13->vtbl->GetEditorName)( /*0x416d55*/
+                            v13,
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x9D,
                             "..\\TES Shared\\Magic\\EffectSettingCollection.cpp");
       sub_40FEC0(
         "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v13 - v24,
-        *v12,
-        v15,
+        v12 - v22,
+        *currentlySavingFormHeader,
+        v14,
+        v18,
         v19,
-        v20,
-        v22);
+        v20);
     }
     else
     {
       sub_40FEC0(
         "SaveGame(): %-5i ending at line %i in file %s",
-        v13 - v24,
+        v12 - v22,
         0x9D,
         "..\\TES Shared\\Magic\\EffectSettingCollection.cpp");
     }
   }
-  result = sub_45A170();
-  if ( result )
+  result = TESSaveLoadGame_UseSaveGameBlocks(); /*0x416d91*/
+  if ( result ) /*0x416d98*/
   {
-    v17 = v26;
-    v18 = SaveLoad_CurrentSavegame->unk000[5];
-    result = (_BYTE)v26 - 1;
-    if ( v18 > (unsigned int)v26 + 0xFFFF )
-      result = PrintError(
+    v16 = v24; /*0x416da0*/
+    v17 = g_TESSaveLoadGame->bufferCursor; /*0x416da4*/
+    result = (_BYTE)v24 - 1; /*0x416da7*/
+    if ( v17 > v24 + 0xFFFF ) /*0x416daf*/
+      result = PrintError( /*0x416dc0*/
                  "Save Game Block in file %s on line %i is greater than maximum short size",
                  "..\\TES Shared\\Magic\\EffectSettingCollection.cpp",
                  0x9D);
-    *v17 = v18 - (_WORD)v17;
+    *(_WORD *)v16 = (_WORD)v17 - (_WORD)v16; /*0x416dca*/
   }
-  return result;
+  return result; /*0x416dd1*/
 }

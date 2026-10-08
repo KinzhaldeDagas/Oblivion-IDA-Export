@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6088F0",
-    "line": "push    ebp",
+    "line": "push    ebp; Applies the one-shot impact impulse using world-space contact point and normal components. Projectile byte +0x97 prevents duplicate attempts, including unsupported collision objects.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x608905",
-    "line": "mov     esi, [ebp+arg_18]",
+    "line": "mov     esi, [ebp+collisionObject]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x608913",
-    "line": "cmp     byte ptr [edi+97h], 0",
+    "line": "cmp     byte ptr [edi+97h], 0; ArrowProjectile +0x97 is the one-shot impact-impulse guard: only attempt Havok impulse when a collision object is supplied and the guard is clear.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x60895D",
-    "line": "mov     ecx, offset flt_B370E8",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+410h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x608964",
-    "line": "mov     ecx, offset unk_B37100",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+428h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x608976",
-    "line": "mov     ecx, offset flt_B370F0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+418h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x608988",
-    "line": "mov     ecx, offset unk_B370F8",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+420h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x6089FE",
-    "line": "fld     [ebp+arg_C]",
+    "line": "fld     [ebp+normalX]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x608A11",
-    "line": "fld     [ebp+arg_10]",
+    "line": "fld     [ebp+normalY]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x608A1A",
-    "line": "fld     [ebp+arg_14]",
+    "line": "fld     [ebp+normalZ]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x608A28",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+pointX]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x608A42",
-    "line": "fld     [ebp+arg_4]",
+    "line": "fld     [ebp+pointY]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x608A62",
-    "line": "fmul    [ebp+arg_8]",
+    "line": "fmul    [ebp+pointZ]",
     "mnemonic": "fmul",
     "size": 3
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x608AB8",
-    "line": "mov     byte ptr [edi+97h], 1",
+    "line": "mov     byte ptr [edi+97h], 1; Mark +0x97 after the first impact-impulse attempt, including unsupported/no-rigidbody cases, preventing duplicate impulse application.",
     "mnemonic": "mov",
     "size": 7
   },

@@ -18,17 +18,17 @@
 0x66762E: mov     [esp+84h+var_70], edi
 0x667632: xor     esi, esi
 0x667634: mov     [esp+84h+var_60], esi
-0x667638: call    TESObjectREFR_GetParentCell
+0x667638: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66763D: mov     ebx, [ebp+arg_0]
 0x667640: cmp     ebx, eax
-0x667642: jz      loc_667BC2
+0x667642: jz      loc_667BC2; 3DTheft decode: PlayerCharacter::ChangeCell first compares requested newCell with current parent cell; only changed cells enter the body below.
 0x667648: push    ebx
 0x667649: mov     ecx, edi
 0x66764B: call    MobileObject_ChangeCell
 0x667650: cmp     ebx, esi
 0x667652: jz      loc_667BB7
 0x667658: mov     ecx, ebx; this
-0x66765A: call    TESObjectCELL_IsInterior
+0x66765A: call    TESObjectCELL_IsInterior; 3DTheft hook site: EBX is non-null changed newCell. Mark exact player cell change, then chain to current TESObjectCELL_IsInterior call target.
 0x66765F: test    al, al
 0x667661: jnz     short loc_667669
 0x667663: mov     [edi+6E8h], esi
@@ -39,24 +39,24 @@
 0x667674: call    edx
 0x667676: mov     ecx, ds:0B33A1Ch
 0x66767C: call    sub_43DF10
-0x667681: mov     ecx, ebx
-0x667683: call    sub_4CAF90
+0x667681: mov     ecx, ebx; this
+0x667683: call    TESObjectCELL_GetClimate
 0x667688: mov     esi, eax
 0x66768A: test    esi, esi
 0x66768C: jnz     short loc_6676A4
 0x66768E: mov     ecx, ebx; this
-0x667690: call    TESObjectCELL_IsInterior
+0x667690: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x667695: test    al, al
 0x667697: jz      short loc_6676A4
-0x667699: mov     ecx, ebx
-0x66769B: call    sub_4C9820
+0x667699: mov     ecx, ebx; this
+0x66769B: call    TESObjectCELL_HasFlag80
 0x6676A0: test    al, al
 0x6676A2: jz      short loc_6676B3
-0x6676A4: push    0
-0x6676A6: push    esi
+0x6676A4: push    0; forceRefresh
+0x6676A6: push    esi; climate
 0x6676A7: call    Sky_CreateOrGetGlobalObject
-0x6676AC: mov     ecx, eax
-0x6676AE: call    Sky_CreateChildGlobalObjects
+0x6676AC: mov     ecx, eax; this
+0x6676AE: call    Sky_SetClimateAndRefreshChildren; Verified: changed-cell transition obtains destination cell Climate through TESObjectCELL_GetClimate, then calls Sky_SetClimateAndRefreshChildren; this is the runtime bridge from cell/worldspace climate selection into Sky.
 0x6676B3: mov     ecx, ebx; this
 0x6676B5: call    TESObjectCELL_GetWorldSpace
 0x6676BA: mov     ecx, [edi+730h]
@@ -125,7 +125,7 @@
 0x6677A1: fstp    [esp+8Ch+var_8C]; float
 0x6677A4: call    sub_4A6970
 0x6677A9: lea     ecx, [edi+6ECh]
-0x6677AF: call    BSSimpleList_Clear
+0x6677AF: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6677B4: push    1
 0x6677B6: mov     ecx, ebx
 0x6677B8: call    sub_4C9B40
@@ -165,7 +165,6 @@
 0x667832: mov     [esp+84h+var_6C], eax
 0x667836: jmp     short loc_667844
 0x667838: jmp     short loc_667840
-0x66783A: align 10h
 0x667840: mov     edi, [esp+84h+var_70]
 0x667844: mov     esi, [esp+84h+var_6C]
 0x667848: test    esi, esi
@@ -180,9 +179,9 @@
 0x667866: test    al, al
 0x667868: jz      loc_667953
 0x66786E: mov     ebx, [esp+84h+var_68]
-0x667872: mov     ecx, [ebx+18h]
-0x667875: push    7
-0x667877: call    sub_4A4460
+0x667872: mov     ecx, [ebx+18h]; dataList
+0x667875: push    7; dataID
+0x667877: call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
 0x66787C: test    eax, eax
 0x66787E: jz      short loc_6678A4
 0x667880: lea     esi, [eax+0Ch]
@@ -234,13 +233,13 @@
 0x667905: mov     eax, [edi+6E8h]
 0x66790B: test    eax, eax
 0x66790D: jz      short loc_667947
-0x66790F: mov     ecx, [eax+18h]
-0x667912: push    3
-0x667914: call    sub_4A4460
-0x667919: mov     ecx, [ebx+18h]
-0x66791C: push    3
+0x66790F: mov     ecx, [eax+18h]; dataList
+0x667912: push    3; dataID
+0x667914: call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
+0x667919: mov     ecx, [ebx+18h]; dataList
+0x66791C: push    3; dataID
 0x66791E: mov     esi, eax
-0x667920: call    sub_4A4460
+0x667920: call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
 0x667925: test    eax, eax
 0x667927: jz      short loc_66794D
 0x667929: test    esi, esi
@@ -348,7 +347,7 @@
 0x667A86: mov     [esp+88h+var_24], eax
 0x667A8A: call    sub_43F320
 0x667A8F: lea     ecx, [esp+84h+var_2C]
-0x667A93: call    sub_404C90
+0x667A93: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x667A98: fcomp   dword ptr ds:0A2FF44h
 0x667A9E: fnstsw  ax
 0x667AA0: test    ah, 41h
@@ -359,9 +358,9 @@
 0x667AB4: cmp     eax, esi
 0x667AB6: jz      short loc_667ACC
 0x667AB8: mov     eax, [eax+18h]
-0x667ABB: push    4
-0x667ABD: mov     ecx, eax
-0x667ABF: call    sub_4A4460
+0x667ABB: push    4; dataID
+0x667ABD: mov     ecx, eax; dataList
+0x667ABF: call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
 0x667AC4: jmp     short loc_667ACE
 0x667AC6: cmp     esi, ebx
 0x667AC8: jz      short loc_667A5F
@@ -386,7 +385,7 @@
 0x667B08: mov     byte ptr [esp+84h+var_4], 2
 0x667B10: jmp     short loc_667B3D
 0x667B12: push    esi
-0x667B13: call    FormHeapFree
+0x667B13: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x667B18: add     esp, 4
 0x667B1B: mov     [esp+84h+var_5C], esi
 0x667B1F: mov     [esp+84h+var_56], si
@@ -405,14 +404,14 @@
 0x667B54: mov     eax, [esp+84h+var_5C]
 0x667B58: push    eax
 0x667B59: and     ebx, 0FFFFFFFDh
-0x667B5C: call    FormHeapFree
+0x667B5C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x667B61: add     esp, 4
 0x667B64: test    bl, 1
 0x667B67: mov     [esp+84h+var_4], 1
 0x667B72: jz      short loc_667B81
 0x667B74: mov     ecx, [esp+84h+var_2C]
 0x667B78: push    ecx
-0x667B79: call    FormHeapFree
+0x667B79: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x667B7E: add     esp, 4
 0x667B81: lea     edx, [esp+84h+var_20]
 0x667B85: push    edx
@@ -422,7 +421,7 @@
 0x667B90: call    sub_65E860
 0x667B95: mov     eax, [esp+84h+var_1C.m_data]
 0x667B99: push    eax
-0x667B9A: call    FormHeapFree
+0x667B9A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x667B9F: add     esp, 4
 0x667BA2: mov     ecx, [esp+84h+var_C]
 0x667BA6: mov     large fs:0, ecx
@@ -434,7 +433,7 @@
 0x667BB3: pop     ebp
 0x667BB4: retn    4
 0x667BB7: lea     ecx, [edi+6ECh]
-0x667BBD: call    BSSimpleList_Clear
+0x667BBD: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x667BC2: mov     ecx, [esp+84h+var_C]
 0x667BC6: mov     large fs:0, ecx
 0x667BCD: pop     ecx
@@ -444,3 +443,31 @@
 0x667BD1: mov     esp, ebp
 0x667BD3: pop     ebp
 0x667BD4: retn    4
+0x9C3E50: mov     eax, [ebp+var_60]
+0x9C3E53: push    eax
+0x9C3E54: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3E59: pop     ecx
+0x9C3E5A: retn
+0x9C3E5B: lea     ecx, [ebp+var_20]
+0x9C3E5E: jmp     TESFullName_Initialize
+0x9C3E63: mov     eax, [ebp+var_60]
+0x9C3E66: and     eax, 1
+0x9C3E69: jz      locret_9C3E7B
+0x9C3E6F: and     [ebp+var_60], 0FFFFFFFEh
+0x9C3E73: lea     ecx, [ebp+var_2C]; void *
+0x9C3E76: jmp     BSStringT_Clear
+0x9C3E7B: retn
+0x9C3E7C: mov     eax, [ebp+var_60]
+0x9C3E7F: and     eax, 2
+0x9C3E82: jz      locret_9C3E94
+0x9C3E88: and     [ebp+var_60], 0FFFFFFFDh
+0x9C3E8C: lea     ecx, [ebp+var_5C]; void *
+0x9C3E8F: jmp     BSStringT_Clear
+0x9C3E94: retn
+0x9C3E95: mov     edx, [esp-4+arg_4]
+0x9C3E99: lea     eax, [edx-74h]
+0x9C3E9C: mov     ecx, [edx-78h]
+0x9C3E9F: xor     ecx, eax
+0x9C3EA1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3EA6: mov     eax, offset stru_AEC970
+0x9C3EAB: jmp     ___CxxFrameHandler3

@@ -73,8 +73,8 @@
 0x612B50: xor     edi, edi
 0x612B52: test    edi, edi
 0x612B54: jz      short loc_612BA8
-0x612B56: mov     ecx, [esp+20h+arg_4]
-0x612B5A: call    sub_4849C0
+0x612B56: mov     ecx, [esp+20h+arg_4]; this
+0x612B5A: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x612B5F: fstp    [esp+20h+var_8]
 0x612B63: mov     edx, [edi+24h]
 0x612B66: mov     eax, [edx]

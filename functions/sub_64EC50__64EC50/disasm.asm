@@ -1,4 +1,4 @@
-0x64EC50: push    esi
+0x64EC50: push    esi; 3DTheft decode 2026-05-16: Follow procedure execution reads its target ref from procedure state +0x2C/+0xB and drives movement toward that target's cell/worldspace; no plugin-owned actor/package memory is dereferenced at the later 0x0040DECF crash site.
 0x64EC51: mov     esi, ecx
 0x64EC53: cmp     dword ptr [esi+2Ch], 0
 0x64EC57: push    edi
@@ -71,8 +71,8 @@
 0x64ED2D: push    edi
 0x64ED2E: mov     ecx, esi
 0x64ED30: call    eax
-0x64ED32: mov     ecx, [esi+8]
-0x64ED35: call    sub_5660A0
+0x64ED32: mov     ecx, [esi+8]; self
+0x64ED35: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x64ED3A: test    al, al
 0x64ED3C: jz      short loc_64ED77
 0x64ED3E: mov     ecx, [esi+8]
@@ -103,7 +103,7 @@
 0x64ED79: push    edi
 0x64ED7A: mov     ecx, ebx
 0x64ED7C: call    sub_5677B0
-0x64ED81: call    Double_To_SInt32
+0x64ED81: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64ED86: mov     [esp+0Ch+arg_8], eax
 0x64ED8A: mov     eax, [esi+2Ch]
 0x64ED8D: test    eax, eax
@@ -133,7 +133,7 @@
 0x64EDCB: call    TESObjectREFR_GetWorldSpace
 0x64EDD0: mov     ecx, [esi+2Ch]; this
 0x64EDD3: push    eax
-0x64EDD4: call    TESObjectREFR_GetParentCell
+0x64EDD4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64EDD9: mov     edx, [ebx]
 0x64EDDB: push    eax
 0x64EDDC: mov     eax, [edx+174h]

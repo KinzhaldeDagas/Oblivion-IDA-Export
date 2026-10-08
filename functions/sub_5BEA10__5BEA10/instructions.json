@@ -52,5 +52,467 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x5BE270",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE271",
+    "line": "push    40Ah",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE276",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE27B",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE27D",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE280",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE282",
+    "line": "jz      loc_5BE36F",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE288",
+    "line": "push    edi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE289",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE28B",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE290",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE292",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE294",
+    "line": "jz      loc_5BE354",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE29A",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE2A0",
+    "line": "mov     eax, [edi+0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE2A6",
+    "line": "push    ebx; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE2A7",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE2A8",
+    "line": "fstp    [esp+10h+a2]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE2AB",
+    "line": "push    1772h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2B0",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2B2",
+    "line": "mov     dword ptr [eax+70h], 7",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5BE2B9",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2BE",
+    "line": "mov     ecx, edi; int",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2C0",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2C5",
+    "line": "push    3F1h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2CA",
+    "line": "call    Menu_GetOpenMenuTile",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2CF",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE2D2",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2D4",
+    "line": "push    offset ??_R0?AVDialogMenu@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2D9",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2DB",
+    "line": "push    offset ??_R0?AVMenu@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2E0",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2E2",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2E4",
+    "line": "call    Tile_GetParentMenu",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2E9",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE2EA",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE2EF",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE2F2",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2F4",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2F6",
+    "line": "jz      short loc_5BE33D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2F8",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2FA",
+    "line": "jz      short loc_5BE33D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE2FC",
+    "line": "cmp     byte ptr [edi+8Ch], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x5BE303",
+    "line": "jz      short loc_5BE30C",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE305",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE307",
+    "line": "call    sub_59DF70",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE30C",
+    "line": "push    0; clearAll",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE30E",
+    "line": "push    0; processCurrentInfo",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE310",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE312",
+    "line": "mov     byte ptr [ebx+96h], 1; Persuasion/submenu return marks the current topic cursor for abandonment before rebuilding the dialogue choices.",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5BE319",
+    "line": "call    DialogMenu__AdvanceTopicList; Rebuild with processCurrentInfo=false. AdvanceTopicList first nulls the current cursor because +0x96 is set, so the abandoned INFO receives neither AddTopicList nor RunResult; the preserved GREETING seed is used to repopulate choices.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE31E",
+    "line": "push    0; float",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE320",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE322",
+    "line": "call    sub_58FBA0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE327",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE32D",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE32E",
+    "line": "fstp    [esp+10h+a2]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE331",
+    "line": "push    0FA1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE336",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE338",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE33D",
+    "line": "mov     ecx, [edi+0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x5BE343",
+    "line": "call    sub_5E12B0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE348",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE34A",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE34B",
+    "line": "jz      short loc_5BE354",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE34D",
+    "line": "mov     byte ptr [eax+1DBh], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x5BE354",
+    "line": "push    1; arg1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE356",
+    "line": "push    0; canCreate",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE358",
+    "line": "call    InterfaceManager_GetSingleton",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE35D",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x5BE360",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE362",
+    "line": "push    offset aMenusMiscCurso; \"Menus\\\\Misc\\\\cursor.dds\"",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE367",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x5BE369",
+    "line": "call    sub_57DA20",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5BE36E",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE36F",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5BE370",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

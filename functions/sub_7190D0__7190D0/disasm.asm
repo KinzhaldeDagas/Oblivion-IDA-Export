@@ -1,4 +1,4 @@
-0x7190D0: push    esi
+0x7190D0: push    esi; Pass223: Clears default NiStencilProperty global 0x00B3FCF8.
 0x7190D1: mov     esi, ds:0B3FCF8h
 0x7190D7: test    esi, esi
 0x7190D9: jz      short loc_719101

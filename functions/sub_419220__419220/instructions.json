@@ -88,5 +88,587 @@
     "line": "jnz     short loc_419249",
     "mnemonic": "jnz",
     "size": 2
+  },
+  {
+    "ea": "0x419249",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41924A",
+    "line": "mov     edi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x41924E",
+    "line": "mov     eax, [edi+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x419251",
+    "line": "test    eax, 70000h",
+    "mnemonic": "test",
+    "size": 5
+  },
+  {
+    "ea": "0x419256",
+    "line": "jnz     short loc_41925F",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x419258",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x419259",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41925B",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41925C",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x41925F",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x419261",
+    "line": "shr     ecx, 10h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x419264",
+    "line": "test    cl, 1",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x419267",
+    "line": "jz      short loc_419282",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x419269",
+    "line": "push    10000h",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x41926E",
+    "line": "lea     ecx, [ebx+24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x419271",
+    "line": "call    EffectItemList_HasEffectWithFlags",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419276",
+    "line": "neg     al",
+    "mnemonic": "neg",
+    "size": 2
+  },
+  {
+    "ea": "0x419278",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x419279",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41927A",
+    "line": "sbb     eax, eax",
+    "mnemonic": "sbb",
+    "size": 2
+  },
+  {
+    "ea": "0x41927C",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x41927F",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x419282",
+    "line": "shr     eax, 11h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x419285",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419287",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x419288",
+    "line": "jz      loc_41933B",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x41928E",
+    "line": "mov     eax, [edi+98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x419294",
+    "line": "push    48h ; 'H'",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x419296",
+    "line": "lea     esi, [ebx+24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x419299",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41929A",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41929C",
+    "line": "call    EffectItemList_HasEffect",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4192A1",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4192A3",
+    "line": "jnz     loc_419343",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x4192A9",
+    "line": "mov     eax, [edi+60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4192AC",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4192AE",
+    "line": "push    offset ??_R0?AVTESBipedModelForm@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4192B3",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x4192B8",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x4192BA",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4192BB",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4192C0",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4192C3",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4192C4",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4192C9",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4192CB",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4192CE",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4192D0",
+    "line": "jz      short loc_41933B",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4192D2",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4192D4",
+    "line": "jz      short loc_41933B",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4192D6",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4192D8",
+    "line": "jz      short loc_41933B",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4192DA",
+    "line": "lea     ebx, [ebx+0]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x4192E0",
+    "line": "mov     ecx, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4192E3",
+    "line": "mov     esi, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4192E6",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4192E8",
+    "line": "jz      short loc_4192EF",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4192EA",
+    "line": "add     esi, 0FFFFFFFCh",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4192ED",
+    "line": "jmp     short loc_4192F1",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4192EF",
+    "line": "xor     esi, esi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4192F1",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4192F3",
+    "line": "jz      short loc_419337",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4192F5",
+    "line": "mov     edx, [ecx+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4192F8",
+    "line": "mov     eax, [edx+58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4192FB",
+    "line": "shr     eax, 11h",
+    "mnemonic": "shr",
+    "size": 3
+  },
+  {
+    "ea": "0x4192FE",
+    "line": "test    al, 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419300",
+    "line": "jz      short loc_419337",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x419302",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x419304",
+    "line": "push    offset ??_R0?AVTESBipedModelForm@@@8; struct TypeDescriptor *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x419309",
+    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x41930E",
+    "line": "push    0; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x419310",
+    "line": "call    EffectItem_GetSummonedObj?",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419315",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x419316",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x41931B",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x41931E",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41931F",
+    "line": "call    OblivionDynamicCast",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419324",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x419327",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419329",
+    "line": "jz      short loc_419337",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x41932B",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x41932C",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41932E",
+    "line": "call    TESBipedModelForm_SlotOverlap",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x419333",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419335",
+    "line": "jnz     short loc_419343",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x419337",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x419339",
+    "line": "jnz     short loc_4192E0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x41933B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41933C",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x41933D",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x41933F",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x419340",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x419343",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x419344",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x419345",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x419347",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x419348",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

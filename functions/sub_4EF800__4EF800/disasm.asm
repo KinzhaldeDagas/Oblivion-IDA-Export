@@ -100,20 +100,20 @@
 0x4EF947: fstp    st
 0x4EF949: mov     esi, [ebx]
 0x4EF94B: fstp    st
-0x4EF94D: push    edi; int
+0x4EF94D: push    edi; worldspace
 0x4EF94E: sub     esp, 0Ch
 0x4EF951: mov     eax, esp
 0x4EF953: mov     [eax], edx
 0x4EF955: mov     edx, [esp+0B0h+var_78]
 0x4EF959: mov     [eax+4], ecx
-0x4EF95C: push    6; int
+0x4EF95C: push    6; dataID
 0x4EF95E: push    1
 0x4EF960: mov     ecx, ebp
 0x4EF962: add     esi, 18h
 0x4EF965: mov     [eax+8], edx
 0x4EF968: call    sub_4C9B40
-0x4EF96D: mov     ecx, eax
-0x4EF96F: call    sub_4A67B0
+0x4EF96D: mov     ecx, eax; this
+0x4EF96F: call    TESRegionList_SelectDataAtWorldPosition; Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.
 0x4EF974: push    eax
 0x4EF975: mov     eax, [esi]
 0x4EF977: mov     ecx, ebx
@@ -320,7 +320,7 @@
 0x4EFBE7: test    eax, eax
 0x4EFBE9: jz      short loc_4EFBF4
 0x4EFBEB: push    eax
-0x4EFBEC: call    FormHeapFree
+0x4EFBEC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EFBF1: add     esp, 4
 0x4EFBF4: test    ebx, ebx
 0x4EFBF6: mov     dword ptr [esi-4], 0
@@ -356,7 +356,7 @@
 0x4EFC52: test    eax, eax
 0x4EFC54: jz      short loc_4EFC5F
 0x4EFC56: push    eax
-0x4EFC57: call    FormHeapFree
+0x4EFC57: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EFC5C: add     esp, 4
 0x4EFC5F: push    104h; Size
 0x4EFC64: call    FormHeapAlloc
@@ -464,7 +464,7 @@
 0x4EFDC0: mov     [esp+0A0h+var_88], ebx
 0x4EFDC4: jnz     loc_4EFD40
 0x4EFDCA: push    ebp
-0x4EFDCB: call    FormHeapFree
+0x4EFDCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EFDD0: mov     edi, [esp+0A4h+var_84]
 0x4EFDD4: add     esp, 4
 0x4EFDD7: mov     esi, edi
@@ -474,7 +474,7 @@
 0x4EFDE4: jz      short loc_4EFDF6
 0x4EFDE6: mov     esi, [esi+4]
 0x4EFDE9: push    eax
-0x4EFDEA: call    FormHeapFree
+0x4EFDEA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EFDEF: add     esp, 4
 0x4EFDF2: test    esi, esi
 0x4EFDF4: jnz     short loc_4EFDE0
@@ -484,7 +484,7 @@
 0x4EFE00: mov     eax, [edi+4]
 0x4EFE03: mov     esi, [eax+4]
 0x4EFE06: push    eax
-0x4EFE07: call    FormHeapFree
+0x4EFE07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EFE0C: add     esp, 4
 0x4EFE0F: test    esi, esi
 0x4EFE11: mov     [edi+4], esi
@@ -493,7 +493,7 @@
 0x4EFE1C: push    edi
 0x4EFE1D: jmp     short loc_4EFE20
 0x4EFE1F: push    esi
-0x4EFE20: call    FormHeapFree
+0x4EFE20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EFE25: add     esp, 4
 0x4EFE28: pop     edi
 0x4EFE29: pop     esi

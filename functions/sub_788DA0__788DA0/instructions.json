@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x788DA0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; 2026-05-24 SpeedTreeOBSE stock post-load pass: stock user-data parser for top-level 19000. Copies counted 19002 string into CSpeedTreeRT+0x68 until 19001. Compatibility parser should preserve this family byte-exact.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x788DC9",
-    "line": "mov     esi, [esp+3Ch+arg_0]",
+    "line": "mov     esi, [esp+3Ch+file]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x788DCD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x788DCF",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; SpeedTreeOBSE 2026-05-25 stock-tail fidelity pass: 19000 user-data loop reads dword tokens until 19001; token 19002 reads a counted string, other dwords are ignored. Immediate 19001 is not an accepted empty block in this path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,25 +121,25 @@
   },
   {
     "ea": "0x788DDF",
-    "line": "lea     eax, [esp+3Ch+var_28]",
+    "line": "lea     eax, [esp+3Ch+outSmallString]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x788DE3",
-    "line": "push    eax",
+    "line": "push    eax; outSmallString",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788DE4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x788DE6",
-    "line": "call    sub_78EC20",
+    "line": "call    OB_CTreeFileAccess_ReadString_010201A0; CTreeFileAccess::ParseString-style helper. Reads a 4-byte byte count, then consumes that many raw bytes into a small-string object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x788E1A",
-    "line": "push    esi; Size",
+    "line": "push    esi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x788E1D",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788E1E",
-    "line": "push    edi; Dst",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788E1F",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x788E3E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x788E46",
-    "line": "mov     esi, [esp+3Ch+arg_0]",
+    "line": "mov     esi, [esp+3Ch+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x788E5F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x788E61",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -424,5 +424,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB280",
+    "line": "lea     ecx, [ebp-28h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB283",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB288",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB28C",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB28F",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB292",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB294",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB299",
+    "line": "mov     eax, offset stru_AF391C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB29E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

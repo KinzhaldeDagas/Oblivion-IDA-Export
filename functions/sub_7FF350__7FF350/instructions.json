@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FF350",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Ensures a NiNode uses BSShaderPPLightingProperty for Lighting30 rendering: accepts an existing property of shader type 0xA, otherwise removes the incompatible property, creates/attaches a PPLighting property, sets it up, and validates renderer data.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7FF37C",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7FF3A0",
-    "line": "jnz     loc_7FF47B",
+    "line": "jnz     loc_7FF47B; Accept an existing shader property when virtual +0x54 returns subtype 10. The complete 17-vtable native census proves this is retail-class-unique to Lighting30ShaderProperty.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7FF3DB",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocate exactly 0x108 bytes for a newly required Lighting30ShaderProperty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x7FF3F3",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7FF3F5",
-    "line": "call    sub_863430",
+    "line": "call    Lighting30ShaderProperty_Constructor; Constructs an exact 0x108-byte Oblivion Lighting30ShaderProperty after the BSShaderPPLightingProperty base constructor. Stores Lighting30ShaderProperty_vftable (A9576C) at object+0 and zero-initializes derived fields through +0x104.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FF3FA",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Construct the exact Oblivion Lighting30ShaderProperty; its constructor stores vptr A9576C.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x7FF40B",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Attach the newly constructed exact Lighting30ShaderProperty to the NiNode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7FF418",
-    "line": "call    edx",
+    "line": "call    edx; Run exact property virtual +0x58 geometry setup after attachment.",
     "mnemonic": "call",
     "size": 2
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7FF475",
-    "line": "call    eax",
+    "line": "call    eax; Validate renderer data through exact property virtual +0x8C; return success only for a nonzero result.",
     "mnemonic": "call",
     "size": 2
   },
@@ -706,5 +706,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA420",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA423",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA424",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA429",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA42A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA42B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA42F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA432",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA435",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA437",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA43C",
+    "line": "mov     eax, offset stru_AF2B24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA441",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

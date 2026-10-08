@@ -1,4 +1,4 @@
-0x891230: push    ebp
+0x891230: push    ebp; TES4 authoritative: controller vtable +0x84 post-update callback; if secondary bhk object exists, submits current transform position plus alpha/time parameter. Runs after 0x896000 state/integration work.
 0x891231: mov     ebp, esp
 0x891233: and     esp, 0FFFFFFF0h
 0x891236: sub     esp, 6Ch
@@ -12,7 +12,7 @@
 0x891250: mov     ecx, [esi+364h]
 0x891256: lea     eax, [esp+70h+var_50]
 0x89125A: push    eax
-0x89125B: call    sub_6848D0
+0x89125B: call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.
 0x891260: fld     [ebp+arg_4]
 0x891263: mov     ecx, [ebp+arg_0]
 0x891266: movaps  xmm0, [esp+70h+var_20]

@@ -1,11 +1,11 @@
-0x59DD40: push    ecx
+0x59DD40: push    ecx; Close player dialogue and consume any globally parked clicked-Goodbye INFO with RunResult then AddTopicList. This path does not test RunForRumors. Therefore a Goodbye INFOGENERAL lacking RunForRumors can complete without closing, leave its result pending across later ordinary TOPIC choices, and commit only on a later close unless another Goodbye overwrites it.
 0x59DD41: push    ebx
 0x59DD42: push    ebp
 0x59DD43: push    3F1h
 0x59DD48: call    Menu_GetOpenMenuTile
 0x59DD4D: add     esp, 4
 0x59DD50: mov     ebp, eax
-0x59DD52: call    sub_6B8660
+0x59DD52: call    MenuTopicManager__GetSingleton
 0x59DD57: xor     ebx, ebx
 0x59DD59: cmp     ebp, ebx
 0x59DD5B: jz      loc_59DF64
@@ -54,24 +54,24 @@
 0x59DDDB: mov     [eax+112h], bl
 0x59DDE1: fld     dword ptr ds:0A379B4h
 0x59DDE7: push    ecx
-0x59DDE8: fstp    [esp+18h+a2]; a3
-0x59DDEB: push    1772h; a2
+0x59DDE8: fstp    [esp+18h+a2]; value
+0x59DDEB: push    1772h; propertyCode
 0x59DDF0: mov     ecx, ebp; this
-0x59DDF2: call    Tile_SetFloat
+0x59DDF2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59DDF7: mov     ecx, edi; int
-0x59DDF9: call    sub_584740
-0x59DDFE: mov     ecx, ds:0B3B294h
+0x59DDF9: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
+0x59DDFE: mov     ecx, ds:0B3B294h; Check the globally parked clicked-Goodbye INFO. The pointer can outlive its response transition when INFOGENERAL lacked RunForRumors and LoadNextTopicList cleared closePending.
 0x59DE04: cmp     ecx, ebx
 0x59DE06: jz      short loc_59DE25
 0x59DE08: cmp     [esp+14h+var_1], bl
 0x59DE0C: jnz     short loc_59DE25
-0x59DE0E: push    esi
-0x59DE0F: call    sub_531470
-0x59DE14: mov     ecx, ds:0B3B294h; int
-0x59DE1A: call    sub_5308D0
+0x59DE0E: push    esi; speaker
+0x59DE0F: call    TESTopicInfo__RunResult; Close-time Goodbye result executes regardless of topic type or RunForRumors, followed by AddTopicList. For a no-RunForRumors rumor this may be delayed until a later manual close.
+0x59DE14: mov     ecx, ds:0B3B294h; this
+0x59DE1A: call    TESTopicInfo__AddTopicList; Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.
 0x59DE1F: mov     ds:0B3B294h, ebx
-0x59DE25: mov     ecx, esi
-0x59DE27: call    sub_5EF930
+0x59DE25: mov     ecx, esi; this
+0x59DE27: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x59DE2C: mov     edx, [esi]
 0x59DE2E: mov     eax, [edx+234h]
 0x59DE34: push    ebx
@@ -123,18 +123,18 @@
 0x59DEB8: call    eax
 0x59DEBA: push    30h ; '0'
 0x59DEBC: mov     ecx, esi
-0x59DEBE: call    sub_5E05F0
+0x59DEBE: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x59DEC3: mov     ecx, ds:0B333C4h
 0x59DEC9: call    sub_65DA10
-0x59DECE: mov     ecx, ds:0B3B294h
+0x59DECE: mov     ecx, ds:0B3B294h; Second mutually exclusive close-order branch reads the same parked Goodbye pointer after teardown; it likewise ignores RunForRumors.
 0x59DED4: cmp     ecx, ebx
 0x59DED6: jz      short loc_59DF56
 0x59DED8: cmp     [esp+14h+var_1], bl
 0x59DEDC: jz      short loc_59DF56
-0x59DEDE: push    esi
-0x59DEDF: call    sub_531470
-0x59DEE4: mov     ecx, ds:0B3B294h; int
-0x59DEEA: call    sub_5308D0
+0x59DEDE: push    esi; speaker
+0x59DEDF: call    TESTopicInfo__RunResult; Close-state +0x88 != 0 Goodbye commit after teardown: RunResult then close-time AddTopicList. The earlier and later close branches are mutually exclusive; completed Goodbye still had its first AddTopicList in LoadNextTopicList.
+0x59DEE4: mov     ecx, ds:0B3B294h; this
+0x59DEEA: call    TESTopicInfo__AddTopicList; Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.
 0x59DEEF: mov     edx, [esi]
 0x59DEF1: mov     eax, [edx+334h]
 0x59DEF7: push    1
@@ -173,7 +173,7 @@
 0x59DF4A: fld     dword ptr [eax+94h]
 0x59DF50: fstp    dword ptr [edi+94h]
 0x59DF56: call    sub_578DF0
-0x59DF5B: mov     byte ptr ds:0B2D91Ch, 1
+0x59DF5B: mov     byte ptr ds:0B2D91Ch, 1; MoonSugarEffect decode: menu/dialog/player state path enables byte_B2D91C gate for native Gethit triggering.
 0x59DF62: pop     esi
 0x59DF63: pop     edi
 0x59DF64: pop     ebp

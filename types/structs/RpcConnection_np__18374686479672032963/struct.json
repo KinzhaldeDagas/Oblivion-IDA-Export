@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_RpcConnection_np",
+  "definition": "struct __declspec(align(8)) _RpcConnection_np\n{\nRpcConnection common;\nHANDLE pipe;\nHANDLE listen_event;\nchar *listen_pipe;\nIO_STATUS_BLOCK io_status;\nHANDLE event_cache;\nBOOL read_closed;\n}\n",
   "id": 18374686479672032963,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "common",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 144
+      "size": 144,
+      "type": "RpcConnection"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pipe",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "listen_event",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "listen_pipe",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "char *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "io_status",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 16
+      "offset_hex": "0xA0",
+      "size": 16,
+      "type": "IO_STATUS_BLOCK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "event_cache",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "read_closed",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "BOOL"
     }
   ],
   "name": "_RpcConnection_np",
+  "ordinal": 3319,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 184
 }

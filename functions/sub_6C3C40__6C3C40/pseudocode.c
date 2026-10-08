@@ -1,4 +1,5 @@
-void __thiscall sub_6C3C40(int this, float a2)
+// NiTransformController virtual Update (+0x54). Manager-controlled flag 0x20 consumes the sample time already placed at controller +0x28; otherwise uses NiTimeController_IsUpdateUnchanged and interpolator validity. Calls interpolator virtual +0x4C with time, target +0x30, and a transform result. Valid translation writes target local +0x54/+0x58/+0x5C, valid quaternion is converted into local rotation matrix +0x30, and valid scale writes abs(value) to +0x60.
+void __thiscall NiTransformController_Update(int this, float a2)
 {
   int v3; // ecx
   int v4; // ecx
@@ -20,54 +21,54 @@ void __thiscall sub_6C3C40(int this, float a2)
   float v20; // [esp+2Ch] [ebp-4h]
   float v21; // [esp+34h] [ebp+4h]
 
-  if ( (*(_BYTE *)(this + 8) & 0x20) != 0 )
+  if ( (*(_BYTE *)(this + 8) & 0x20) != 0 ) /*0x6c3c4e*/
   {
-    *(float *)(this + 0x28) = flt_A7A164;
+    *(float *)(this + 0x28) = flt_A7A164; /*0x6c3c56*/
 LABEL_6:
-    v4 = *(_DWORD *)(this + 0x3C);
-    if ( v4 )
+    v4 = *(_DWORD *)(this + 0x3C); /*0x6c3c89*/
+    if ( v4 ) /*0x6c3c8e*/
     {
-      v5 = dword_B24260;
-      v6 = dword_B24264;
-      v20 = flt_A79E10;
-      v7 = *(float *)(this + 0x28);
-      v13 = *(float *)&v5;
-      v15 = dword_B24268;
-      v17 = *(float *)&dword_B3CBA8;
-      v8 = dword_B3CBB0;
-      v14 = v6;
-      v9 = dword_B3CBA4;
-      v19 = v8;
-      v16 = v9;
-      v10 = *(_DWORD *)(this + 0x30);
-      v18 = dword_B3CBAC;
-      v12 = v7;
-      if ( (*(unsigned __int8 (__stdcall **)(_DWORD, int, float *))(*(_DWORD *)v4 + 0x4C))(LODWORD(v12), v10, &v13) )
+      v5 = dword_B24260; /*0x6c3c94*/
+      v6 = dword_B24264; /*0x6c3ca0*/
+      v20 = flt_A79E10; /*0x6c3ca5*/
+      v7 = *(float *)(this + 0x28); /*0x6c3ca9*/
+      v13 = *(float *)&v5; /*0x6c3cac*/
+      v15 = dword_B24268; /*0x6c3cb6*/
+      v17 = flt_B3CBA8; /*0x6c3cc0*/
+      v8 = flt_B3CBB0; /*0x6c3cc4*/
+      v14 = v6; /*0x6c3cca*/
+      v9 = flt_B3CBA4; /*0x6c3cce*/
+      v19 = v8; /*0x6c3cd3*/
+      v16 = v9; /*0x6c3cd7*/
+      v10 = *(_DWORD *)(this + 0x30); /*0x6c3ce5*/
+      v18 = flt_B3CBAC; /*0x6c3ce8*/
+      v12 = v7; /*0x6c3cf3*/
+      if ( (*(unsigned __int8 (__stdcall **)(_DWORD, int, float *))(*(_DWORD *)v4 + 0x4C))(LODWORD(v12), v10, &v13) ) /*0x6c3cf6*/
       {
-        v11 = *(_DWORD *)(this + 0x30);
-        if ( -flt_A7DEB4 != v13 )
+        v11 = *(_DWORD *)(this + 0x30); /*0x6c3d00*/
+        if ( -flt_A7DEB4 != v13 ) /*0x6c3d12*/
         {
-          *(float *)(v11 + 0x54) = v13;
-          *(_DWORD *)(v11 + 0x58) = v14;
-          *(_DWORD *)(v11 + 0x5C) = v15;
+          *(float *)(v11 + 0x54) = v13; /*0x6c3d18*/
+          *(_DWORD *)(v11 + 0x58) = v14; /*0x6c3d1f*/
+          *(_DWORD *)(v11 + 0x5C) = v15; /*0x6c3d26*/
         }
-        if ( -flt_A7DEB4 != v17 )
-          sub_47C600((NiTransform *)&v16, (NiTransform *)(v11 + 0x30));
-        if ( -flt_A7DEB4 != v20 )
+        if ( -flt_A7DEB4 != v17 ) /*0x6c3d3c*/
+          sub_47C600((NiTransform *)&v16, (NiTransform *)(v11 + 0x30)); /*0x6c3d46*/
+        if ( -flt_A7DEB4 != v20 ) /*0x6c3d60*/
         {
-          v21 = fabs(v20);
-          *(float *)(v11 + 0x60) = v21;
+          v21 = fabs(v20); /*0x6c3d64*/
+          *(float *)(v11 + 0x60) = v21; /*0x6c3d6c*/
         }
       }
     }
-    return;
+    return; /*0x6c3d6c*/
   }
-  if ( !sub_6C36B0((float *)this, a2) )
-    goto LABEL_6;
-  v3 = *(_DWORD *)(this + 0x3C);
-  if ( v3 )
+  if ( !NiTimeController_IsUpdateUnchanged((float *)this, a2) ) /*0x6c3c63*/
+    goto LABEL_6; /*0x6c3c63*/
+  v3 = *(_DWORD *)(this + 0x3C); /*0x6c3c6c*/
+  if ( v3 ) /*0x6c3c71*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v3 + 0x94))(v3) )
-      goto LABEL_6;
+    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)v3 + 0x94))(v3) ) /*0x6c3c7f*/
+      goto LABEL_6; /*0x6c3c83*/
   }
 }

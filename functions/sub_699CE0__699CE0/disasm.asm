@@ -36,3 +36,12 @@
 0x699D5F: pop     ebx
 0x699D60: add     esp, 10h
 0x699D63: retn    4
+0x9C5BD0: mov     ecx, [ebp-10h]; this
+0x9C5BD3: jmp     ??1bhkPhantom@@UAE@XZ; bhkPhantom::~bhkPhantom(void)
+0x9C5BD8: mov     edx, [esp+arg_4]
+0x9C5BDC: lea     eax, [edx-0Ch]
+0x9C5BDF: mov     ecx, [edx-10h]
+0x9C5BE2: xor     ecx, eax
+0x9C5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5BE9: mov     eax, offset stru_AEE2AC
+0x9C5BEE: jmp     ___CxxFrameHandler3

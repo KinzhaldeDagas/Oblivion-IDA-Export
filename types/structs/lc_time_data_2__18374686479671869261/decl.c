@@ -1,1 +1,1 @@
-__lc_time_data_2
+typedef __lc_time_data_1 __lc_time_data_2;

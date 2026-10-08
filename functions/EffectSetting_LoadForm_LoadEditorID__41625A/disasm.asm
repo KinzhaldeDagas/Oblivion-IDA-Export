@@ -4,7 +4,7 @@
 0x416267: push    200h; a4
 0x41626C: push    esi; Dst
 0x41626D: mov     ecx, edi; a1
-0x41626F: call    TESFile_GetChunkData
+0x41626F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x416274: mov     edx, [ebx]
 0x416276: mov     eax, [edx+0D8h]
 0x41627C: push    esi

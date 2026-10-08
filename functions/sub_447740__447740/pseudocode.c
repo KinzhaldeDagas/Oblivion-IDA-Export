@@ -1,29 +1,29 @@
-TESForm *__thiscall sub_447740(TESWorldSpace **this, signed int a2, signed int a3, TESWorldSpace *a4, char a5)
+TESForm *__thiscall sub_447740(TESWorldSpace **this, signed int cellX, signed int cellY, TESWorldSpace *a4, char a5)
 {
   TESWorldSpace *v5; // esi
   TESForm *result; // eax
 
-  v5 = a4;
-  if ( !a4 )
+  v5 = a4; /*0x447742*/
+  if ( !a4 ) /*0x44774a*/
   {
-    v5 = *(this + 3);
-    if ( !v5 )
-      return 0;
+    v5 = *(this + 3); /*0x44774c*/
+    if ( !v5 ) /*0x447751*/
+      return 0; /*0x447757*/
   }
-  if ( a2 > 0x7FFF || a3 > 0x7FFF || a2 < (int)0xFFFF8000 || a3 < (int)0xFFFF8000 )
+  if ( cellX > 0x7FFF || cellY > 0x7FFF || cellX < (int)0xFFFF8000 || cellY < (int)0xFFFF8000 ) /*0x447782*/
   {
-    PrintError(
+    PrintError( /*0x4477d5*/
       "Trying to get exterior cell for invalid cell coordinate. Values must be between %i and %i.",
       0xFFFF8000,
       0x7FFF);
   }
   else
   {
-    result = (TESForm *)TESWorldSpace::GetCellAtCellCoord(v5, a2, a3);
-    if ( result )
-      return result;
-    if ( !*(_BYTE *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex) + 0x184) && a5 )
-      return sub_4471D0(EmptyString, a2, a3, (int **)v5);
+    result = (TESForm *)TESWorldSpace::GetCellAtCellCoord(v5, cellX, cellY); /*0x447788*/
+    if ( result ) /*0x44778f*/
+      return result; /*0x44778f*/
+    if ( !*(_BYTE *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]) + 0x184) && a5 ) /*0x4477ae*/
+      return sub_4471D0(EmptyString, cellX, cellY, v5); /*0x4477c3*/
   }
-  return 0;
+  return 0; /*0x447753*/
 }

@@ -13,7 +13,7 @@
 0x4235B3: mov     edi, ecx
 0x4235B5: push    33h ; '3'; a2
 0x4235B7: call    BaseExtraList_GetExtraData
-0x4235BC: mov     ebx, [esp+1Ch+arg_0]
+0x4235BC: mov     ebx, [esp+1Ch+data]
 0x4235C0: mov     esi, eax
 0x4235C2: test    esi, esi
 0x4235C4: jz      short loc_423607
@@ -38,7 +38,7 @@
 0x4235F2: mov     ecx, edi; this
 0x4235F4: call    TESFullName_Initialize
 0x4235F9: push    edi
-0x4235FA: call    FormHeapFree
+0x4235FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4235FF: add     esp, 4
 0x423602: mov     [esi+0Ch], ebx
 0x423605: jmp     short loc_423643
@@ -47,7 +47,7 @@
 0x42360B: push    10h; Size
 0x42360D: call    FormHeapAlloc
 0x423612: add     esp, 4
-0x423615: mov     [esp+1Ch+arg_0], eax
+0x423615: mov     [esp+1Ch+data], eax
 0x423619: test    eax, eax
 0x42361B: mov     [esp+1Ch+var_4], 0
 0x423623: jz      short loc_423631
@@ -70,3 +70,15 @@
 0x423653: pop     ebx
 0x423654: add     esp, 0Ch
 0x423657: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

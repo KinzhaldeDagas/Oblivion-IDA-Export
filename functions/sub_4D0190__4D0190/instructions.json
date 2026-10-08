@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D0190",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4D01C5",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x4D0380",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D0382",
-    "line": "lea     ecx, [esp+0ECh+var_9C]",
+    "line": "lea     ecx, [esp+0ECh+cullingProcess]; self",
     "mnemonic": "lea",
     "size": 4
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x4D0388",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x4D03A6",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x4D03D2",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x4D03E3",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x4D03E9",
-    "line": "call    StartUsingRenderTarget",
+    "line": "call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D03EE",
-    "line": "mov     ebp, [esp+0F0h+arg_4]",
+    "line": "mov     ebp, [esp+0F0h+camera]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1027,31 +1027,31 @@
   },
   {
     "ea": "0x4D03FB",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D03FD",
-    "line": "lea     ecx, [esp+0F4h+var_9C]",
+    "line": "lea     ecx, [esp+0F4h+cullingProcess]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D0401",
-    "line": "push    ecx",
+    "line": "push    ecx; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D0402",
-    "line": "push    esi",
+    "line": "push    esi; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D0403",
-    "line": "push    ebp",
+    "line": "push    ebp; camera",
     "mnemonic": "push",
     "size": 1
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x4D040B",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x4D0419",
-    "line": "call    sub_7D7110",
+    "line": "call    NiRenderer_PopRenderTargetGroupAndRestore; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,13 +1165,13 @@
   },
   {
     "ea": "0x4D0450",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D0452",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,13 +1207,13 @@
   },
   {
     "ea": "0x4D046A",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D046C",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x4D047E",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x4D048E",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,49 +1297,49 @@
   },
   {
     "ea": "0x4D049A",
-    "line": "call    StartUsingRenderTarget",
+    "line": "call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D049F",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D04A1",
-    "line": "lea     edx, [esp+0F4h+var_9C]",
+    "line": "lea     edx, [esp+0F4h+cullingProcess]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D04A5",
-    "line": "push    edx",
+    "line": "push    edx; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D04A6",
-    "line": "push    esi",
+    "line": "push    esi; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D04A7",
-    "line": "push    ebp",
+    "line": "push    ebp; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D04A8",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D04AD",
-    "line": "call    sub_7D7110",
+    "line": "call    NiRenderer_PopRenderTargetGroupAndRestore; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,19 +1351,19 @@
   },
   {
     "ea": "0x4D04B3",
-    "line": "call    sub_7B4890",
+    "line": "call    BSShader_SetRenderMode; Update the global renderer mode used by mode-5 shadow-map production and restore.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D04B8",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D04BA",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x4D04E3",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x4D0528",
-    "line": "call    sub_7B4900",
+    "line": "call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x4D053B",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x4D054A",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x4D0568",
-    "line": "lea     ecx, [esp+0E8h+var_9C]; this",
+    "line": "lea     ecx, [esp+0E8h+cullingProcess]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x4D0574",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,13 +1735,13 @@
   },
   {
     "ea": "0x4D058F",
-    "line": "push    edi; a2",
+    "line": "push    edi; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D0590",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1753,13 +1753,13 @@
   },
   {
     "ea": "0x4D059B",
-    "line": "push    esi; a2",
+    "line": "push    esi; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D059C",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x4D05A3",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,7 +1957,7 @@
   },
   {
     "ea": "0x4D0604",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2314,5 +2314,137 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B53C0",
+    "line": "lea     ecx, [ebp-0D0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B53C6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B53CB",
+    "line": "lea     ecx, [ebp-0C4h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B53D1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B53D6",
+    "line": "lea     ecx, [ebp-0C8h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B53DC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B53E1",
+    "line": "lea     ecx, [ebp-9Ch]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B53E7",
+    "line": "jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B53EC",
+    "line": "mov     eax, [ebp-0C0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B53F2",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B53F5",
+    "line": "jz      locret_9B540A",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B53FB",
+    "line": "and     dword ptr [ebp-0C0h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B5402",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5405",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B540A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B540B",
+    "line": "mov     edx, [esp+camera]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B540F",
+    "line": "lea     eax, [edx-0D8h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5415",
+    "line": "mov     ecx, [edx-0DCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B541B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B541D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5422",
+    "line": "mov     eax, offset stru_AE0524",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5427",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

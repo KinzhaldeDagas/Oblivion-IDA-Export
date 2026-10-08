@@ -1,1 +1,1 @@
-DWORD_PTR
+typedef ULONG_PTR DWORD_PTR;

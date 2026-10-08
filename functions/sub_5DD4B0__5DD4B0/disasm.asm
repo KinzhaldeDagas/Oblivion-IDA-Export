@@ -1,4 +1,4 @@
-0x5DD4B0: sub     esp, 13Ch
+0x5DD4B0: sub     esp, 13Ch; Open native TrainingMenu. Resolve the trainer's configured skill and maximum level, calculate cost from the player's current skill, and gate purchase by gold, trainer cap, and per-level session limit.
 0x5DD4B6: mov     eax, ds:0B30AACh
 0x5DD4BB: xor     eax, esp
 0x5DD4BD: mov     [esp+13Ch+var_4], eax
@@ -24,9 +24,9 @@
 0x5DD4F9: mov     esi, eax
 0x5DD4FB: call    InterfaceManager_GetDepth
 0x5DD500: fstp    [esp+148h+var_13C]
-0x5DD504: mov     ecx, [esi+68h]; TileWindow *
+0x5DD504: mov     ecx, [esi+68h]; this
 0x5DD507: push    offset aDataMenusTrain; "Data\\Menus\\training_menu.xml"
-0x5DD50C: call    Menu_LoadXML
+0x5DD50C: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5DD511: mov     ebx, eax
 0x5DD513: mov     ecx, ebx
 0x5DD515: call    Tile_GetParentMenu
@@ -74,49 +74,49 @@
 0x5DD5A4: jp      short loc_5DD5BA
 0x5DD5A6: fld     [esp+148h+var_13C]
 0x5DD5AA: push    ecx
-0x5DD5AB: fstp    [esp+14Ch+a3]; a3
-0x5DD5AE: push    0FABh; a2
+0x5DD5AB: fstp    [esp+14Ch+a3]; value
+0x5DD5AE: push    0FABh; propertyCode
 0x5DD5B3: mov     ecx, ebx; this
-0x5DD5B5: call    Tile_SetFloat
+0x5DD5B5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DD5BA: push    ebp
 0x5DD5BB: push    0; a2
 0x5DD5BD: mov     ecx, edi; this
-0x5DD5BF: mov     [esi+54h], edi
+0x5DD5BF: mov     [esi+54h], edi; Store the trainer Actor at TrainingMenu+0x54.
 0x5DD5C2: call    Actor_GetActorBaseForm
 0x5DD5C7: mov     ecx, eax
-0x5DD5C9: add     ecx, 68h ; 'h'
-0x5DD5CC: call    TESAIForm_GetTrainingSkillAV
+0x5DD5C9: add     ecx, 68h ; 'h'; this
+0x5DD5CC: call    TESAIForm_GetTrainingSkillAV; Decode TESAIForm's one-byte training-skill index at +0x0C into SkillActorValue by adding kSkillAV_Armorer (0x0C).
 0x5DD5D1: push    eax
 0x5DD5D2: push    2
-0x5DD5D4: call    ActorValue_GetGroupOffsetFromAV
-0x5DD5D9: mov     ecx, ds:0B33A98h
+0x5DD5D4: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
+0x5DD5D9: mov     ecx, ds:0B33A98h; this
 0x5DD5DF: add     esp, 8
-0x5DD5E2: push    eax
-0x5DD5E3: call    TESDataHandler_GetTESSkillByCode
+0x5DD5E2: push    eax; skillIndex
+0x5DD5E3: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x5DD5E8: push    0; a2
 0x5DD5EA: mov     ecx, edi; this
-0x5DD5EC: mov     [esi+58h], eax
+0x5DD5EC: mov     [esi+58h], eax; Store the trainer's native TESSkill record at TrainingMenu+0x58.
 0x5DD5EF: call    Actor_GetActorBaseForm
 0x5DD5F4: mov     ecx, eax
 0x5DD5F6: add     ecx, 68h ; 'h'
 0x5DD5F9: call    TESAIForm_GetTrainingLevel
 0x5DD5FE: movzx   ecx, al
-0x5DD601: mov     [esi+60h], ecx
+0x5DD601: mov     [esi+60h], ecx; Store the trainer's maximum teachable skill level at TrainingMenu+0x60.
 0x5DD604: mov     edx, ds:0B333C4h
 0x5DD60A: mov     ebp, [edx]
 0x5DD60C: push    0; a2
 0x5DD60E: mov     ecx, edi; this
 0x5DD610: call    Actor_GetActorBaseForm
 0x5DD615: mov     ecx, eax
-0x5DD617: add     ecx, 68h ; 'h'
-0x5DD61A: call    TESAIForm_GetTrainingSkillAV
+0x5DD617: add     ecx, 68h ; 'h'; this
+0x5DD61A: call    TESAIForm_GetTrainingSkillAV; Decode TESAIForm's one-byte training-skill index at +0x0C into SkillActorValue by adding kSkillAV_Armorer (0x0C).
 0x5DD61F: mov     ecx, ds:0B333C4h
 0x5DD625: push    eax; a3
 0x5DD626: mov     eax, [ebp+288h]
 0x5DD62C: call    eax
 0x5DD62E: fmul    dword ptr ds:0B37748h
-0x5DD634: call    Double_To_SInt32
-0x5DD639: mov     [esi+5Ch], eax
+0x5DD634: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x5DD639: mov     [esi+5Ch], eax; Training cost = current player value of the configured skill multiplied by fTrainingCostMult, converted to integer; store at TrainingMenu+0x5C.
 0x5DD63C: mov     ecx, ds:0B333C4h
 0x5DD642: call    sub_5E4420
 0x5DD647: cmp     [esi+5Ch], eax
@@ -124,14 +124,14 @@
 0x5DD64C: fld1
 0x5DD64E: push    ecx
 0x5DD64F: mov     ecx, [esi+38h]; this
-0x5DD652: fstp    [esp+14Ch+a3]; a3
-0x5DD655: push    0FAFh; a2
-0x5DD65A: call    Tile_SetFloat
+0x5DD652: fstp    [esp+14Ch+a3]; value
+0x5DD655: push    0FAFh; propertyCode
+0x5DD65A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DD65F: mov     ecx, [esi+60h]
-0x5DD662: push    ecx
-0x5DD663: call    Calc_MasteryFromSkill
-0x5DD668: push    eax
-0x5DD669: call    ActorValue_GetMasteryName
+0x5DD662: push    ecx; skillValue
+0x5DD663: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
+0x5DD668: push    eax; mastery
+0x5DD669: call    ActorValue_GetMasteryName; Return the localized mastery-tier name for SkillMasteryLevel 0..4.
 0x5DD66E: mov     edx, ds:0B38D28h
 0x5DD674: mov     ecx, ds:0B333C4h
 0x5DD67A: mov     edi, ds:0B38D20h
@@ -166,7 +166,7 @@
 0x5DD6D6: mov     eax, [esi+58h]
 0x5DD6D9: mov     eax, [eax+2Ch]
 0x5DD6DC: push    eax
-0x5DD6DD: call    ActorValue_GetName
+0x5DD6DD: call    ActorValue_GetName; TrainingMenu writes the resolved native skill name at this exact UI callsite. A separated skill should replace the TrainingMenu tile text locally rather than globally detouring ActorValue_GetName.
 0x5DD6E2: push    eax
 0x5DD6E3: lea     ecx, [esp+150h+var_12C]
 0x5DD6E7: push    offset aS; "%s"
@@ -211,11 +211,11 @@
 0x5DD76B: call    Tile_SetString
 0x5DD770: mov     edx, [esi+58h]
 0x5DD773: mov     eax, [edx+2Ch]
-0x5DD776: mov     ecx, ds:0B333C4h
-0x5DD77C: push    eax
-0x5DD77D: call    Actor_GetSkillMasteryLevel
-0x5DD782: push    eax
-0x5DD783: call    ActorValue_GetMasteryName
+0x5DD776: mov     ecx, ds:0B333C4h; this
+0x5DD77C: push    eax; actorValue
+0x5DD77D: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
+0x5DD782: push    eax; mastery
+0x5DD783: call    ActorValue_GetMasteryName; Return the localized mastery-tier name for SkillMasteryLevel 0..4.
 0x5DD788: mov     ecx, [esi+4Ch]
 0x5DD78B: add     esp, 4
 0x5DD78E: push    eax
@@ -287,13 +287,13 @@
 0x5DD86B: mov     eax, [edx+284h]
 0x5DD871: call    eax
 0x5DD873: cmp     eax, [esi+60h]
-0x5DD876: jl      short loc_5DD880
+0x5DD876: jl      short loc_5DD880; Enable purchase only while the player's current skill is below the trainer's configured maximum level.
 0x5DD878: mov     ecx, ds:0B38580h
 0x5DD87E: jmp     short loc_5DD89A
 0x5DD880: mov     edx, ds:0B333C4h
 0x5DD886: mov     eax, [edx+5BCh]
 0x5DD88C: cmp     eax, ds:0B37728h
-0x5DD892: jl      short loc_5DD8D2
+0x5DD892: jl      short loc_5DD8D2; Also require trainingSessionsUsed < iTrainingSkills for the current player level.
 0x5DD894: mov     ecx, ds:0B38578h
 0x5DD89A: push    ecx
 0x5DD89B: mov     ecx, [esi+48h]
@@ -301,25 +301,25 @@
 0x5DD8A3: call    Tile_SetString
 0x5DD8A8: fld1
 0x5DD8AA: push    ecx
-0x5DD8AB: fstp    [esp+14Ch+a3]; a3
+0x5DD8AB: fstp    [esp+14Ch+a3]; value
 0x5DD8AE: mov     ecx, [esi+38h]; this
-0x5DD8B1: push    0FA1h; a2
-0x5DD8B6: call    Tile_SetFloat
+0x5DD8B1: push    0FA1h; propertyCode
+0x5DD8B6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DD8BB: fld     dword ptr ds:0A379B4h
 0x5DD8C1: push    ecx
 0x5DD8C2: mov     ecx, [esi+48h]; this
-0x5DD8C5: fstp    [esp+14Ch+a3]; a3
-0x5DD8C8: push    0FA1h; a2
-0x5DD8CD: call    Tile_SetFloat
+0x5DD8C5: fstp    [esp+14Ch+a3]; value
+0x5DD8C8: push    0FA1h; propertyCode
+0x5DD8CD: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DD8D2: mov     ecx, [esp+148h+var_138]; int
 0x5DD8D6: push    0; char
 0x5DD8D8: call    EnableMenu
 0x5DD8DD: mov     edx, ds:0B33398h
 0x5DD8E3: mov     ecx, [edx+24h]
 0x5DD8E6: call    sub_6AC3D0
-0x5DD8EB: push    5
-0x5DD8ED: push    5
-0x5DD8EF: call    TESTopic__GEtTopic
+0x5DD8EB: push    5; index
+0x5DD8ED: push    5; topicType
+0x5DD8EF: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5DD8F4: mov     esi, ds:0B333C4h
 0x5DD8FA: mov     ecx, [esp+150h+var_134]
 0x5DD8FE: mov     edx, [ecx]

@@ -1,1 +1,7 @@
-STATUSPARTS
+enum STATUSPARTS : __int32
+{
+STATUSPartFiller0 = 0x0,
+SP_PANE = 0x1,
+SP_GRIPPERPANE = 0x2,
+SP_GRIPPER = 0x3,
+};

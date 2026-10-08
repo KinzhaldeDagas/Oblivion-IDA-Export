@@ -68,7 +68,7 @@
 0x77D546: mov     eax, [edi+20h]
 0x77D549: push    eax
 0x77D54A: mov     dword ptr [edi+1Ch], offset ??_7?$NiTArray@PAVNiVBBlock@@@@6B@; const NiTArray<NiVBBlock *>::`vftable'
-0x77D551: call    FormHeapFree
+0x77D551: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77D556: add     esp, 4
 0x77D559: pop     edi
 0x77D55A: pop     ebp

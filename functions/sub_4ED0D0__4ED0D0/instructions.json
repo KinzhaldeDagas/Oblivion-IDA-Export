@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4ED0D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified worker path: obtains the queued/archive file, loads the TerrainLODQuad NIF through NiStream/BSStream, and stores the loaded object in TerrainLODQuadLoadTask.loadedTerrainNode (+0x3C).",
     "mnemonic": "push",
     "size": 2
   },
@@ -304,5 +304,83 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B6590",
+    "line": "lea     ecx, [ebp-4A0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B6596",
+    "line": "jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B659B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B659F",
+    "line": "lea     eax, [edx-49Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B65A5",
+    "line": "mov     ecx, [edx-4A0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B65AB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B65AD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B65B2",
+    "line": "add     eax, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B65B5",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B65B8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B65BA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B65BF",
+    "line": "mov     eax, offset stru_AE1448",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B65C4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

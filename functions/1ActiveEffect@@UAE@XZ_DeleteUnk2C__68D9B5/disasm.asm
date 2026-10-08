@@ -10,7 +10,7 @@
 0x68D9CC: mov     ecx, edi; this
 0x68D9CE: call    sub_6B73E0
 0x68D9D3: push    edi
-0x68D9D4: call    FormHeapFree
+0x68D9D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68D9D9: add     esp, 4
 0x68D9DC: mov     dword ptr [esi+2Ch], 0
 0x68D9E3: pop     edi

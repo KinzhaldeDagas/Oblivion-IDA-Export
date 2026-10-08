@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x689A00",
-    "line": "push    esi",
+    "line": "push    esi; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x689A21",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x689A23",
-    "line": "call    sub_68B1C0",
+    "line": "call    TravelPathNode_FreeOwnedPosition; Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x689A29",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x689A43",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

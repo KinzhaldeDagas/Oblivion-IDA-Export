@@ -1,10 +1,10 @@
-unsigned int __thiscall sub_5A6AB0(unsigned int *this, _DWORD *a2)
+unsigned int __thiscall NiTLargeArray32_AppendSlot(NiTLargeArrayUInt32 *self, const unsigned int *value)
 {
-  unsigned int v3; // edi
+  unsigned int count; // edi
 
-  v3 = *(this + 3);
-  if ( v3 >= *(this + 2) )
-    sub_452910(this, v3 + *(this + 5));
-  sub_446C50(this, v3, a2);
-  return v3;
+  count = self->count; /*0x5a6ab4*/
+  if ( count >= self->capacity ) /*0x5a6aba*/
+    NiTLargeArray_Resize32((unsigned int *)self, count + self->growBy); /*0x5a6ac2*/
+  NiTLargeArray32_SetSlot(self, count, value); /*0x5a6acf*/
+  return count; /*0x5a6ad6*/
 }

@@ -10,6 +10,6 @@
 0x606B69: cmp     dword ptr [esi], 0
 0x606B6C: jnz     short loc_606B77
 0x606B6E: mov     ecx, [esp+4+arg_4]; int
-0x606B72: call    sub_5EAE70
+0x606B72: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x606B77: pop     esi
 0x606B78: retn    8

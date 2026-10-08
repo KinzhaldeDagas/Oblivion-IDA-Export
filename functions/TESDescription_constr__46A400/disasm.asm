@@ -3,7 +3,7 @@
 0x46A403: mov     dword ptr [esi], offset ??_7TESDescription@@6B@; const TESDescription::`vftable'
 0x46A409: mov     eax, ds:0B33C08h
 0x46A40E: push    eax
-0x46A40F: call    FormHeapFree
+0x46A40F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46A414: xor     eax, eax
 0x46A416: mov     ds:0B33C08h, eax
 0x46A41B: mov     ds:0B33C0Eh, ax

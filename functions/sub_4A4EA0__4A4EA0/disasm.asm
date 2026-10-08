@@ -37,9 +37,9 @@
 0x4A4F19: mov     ecx, [esi]
 0x4A4F1B: test    ecx, ecx
 0x4A4F1D: jz      short loc_4A4F2B
-0x4A4F1F: push    eax; Str2
-0x4A4F20: push    ecx; Str1
-0x4A4F21: call    __strcmp
+0x4A4F1F: push    eax; right
+0x4A4F20: push    ecx; left
+0x4A4F21: call    CRT_StricmpLocaleDispatch
 0x4A4F26: add     esp, 8
 0x4A4F29: jmp     short loc_4A4F38
 0x4A4F2B: xor     ecx, ecx
@@ -54,9 +54,9 @@
 0x4A4F40: push    edi; a2
 0x4A4F41: mov     ecx, esi; this
 0x4A4F43: call    BSStringT_Set
-0x4A4F48: mov     edx, dword ptr [esp+28h+var_14]
+0x4A4F48: mov     edx, [esp+28h+var_14]
 0x4A4F4C: push    edx
-0x4A4F4D: call    FormHeapFree
+0x4A4F4D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A4F52: add     esp, 4
 0x4A4F55: mov     eax, ebx
 0x4A4F57: mov     ecx, dword ptr [esp+28h+var_C]
@@ -67,3 +67,17 @@
 0x4A4F65: pop     ebx
 0x4A4F66: add     esp, 18h
 0x4A4F69: retn    4
+0x9B2850: mov     ecx, [ebp-18h]
+0x9B2853: jmp     TESRegionData_SetBaseVTable
+0x9B2858: mov     ecx, [ebp-18h]
+0x9B285B: add     ecx, 8; void *
+0x9B285E: jmp     BSStringT_Clear
+0x9B2863: lea     ecx, [ebp-14h]; void *
+0x9B2866: jmp     BSStringT_Clear
+0x9B286B: mov     edx, [esp+arg_4]
+0x9B286F: lea     eax, [edx-18h]
+0x9B2872: mov     ecx, [edx-1Ch]
+0x9B2875: xor     ecx, eax
+0x9B2877: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B287C: mov     eax, offset stru_ADE7F4
+0x9B2881: jmp     ___CxxFrameHandler3

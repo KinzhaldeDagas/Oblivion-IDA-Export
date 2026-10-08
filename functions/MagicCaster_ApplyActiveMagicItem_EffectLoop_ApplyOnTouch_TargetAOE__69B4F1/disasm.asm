@@ -1,5 +1,5 @@
 0x69B4F1: mov     ecx, ebp
-0x69B4F3: call    EffectItem_GetArea
+0x69B4F3: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x69B4F8: test    eax, eax
 0x69B4FA: jle     MagicCaster_ApplyActiveMagicItem___EffectLoop_DestroyActvEff
 0x69B500: test    ebx, ebx

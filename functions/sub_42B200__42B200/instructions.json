@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42B200",
-    "line": "push    esi",
+    "line": "push    esi; XMRK companion loader owns cursor advancement. After XMRK it advances once, optionally consumes adjacent FNAM, requires/loads adjacent FULL, then advances and requires/loads adjacent TNAM. A nonmatching chunk at either required position is swallowed from outer dispatch. FNAM max1: empty retains, exact1 replaces, >1 forces 0. TNAM max2: empty retains, exact/short prefix-overlays existing u16, >2 keeps byte0 and forces byte1=0. FULL empty clears; nonempty replaces via unbounded read+strlen and is unsafe without terminal NUL. Existing marker state is reused across repeated/partial sequences.",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x42B23F",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x42B25F",
-    "line": "call    TESFullname_Load",
+    "line": "call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.",
     "mnemonic": "call",
     "size": 5
   },

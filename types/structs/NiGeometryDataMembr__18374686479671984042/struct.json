@@ -1,118 +1,189 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiGeometryDataMembr",
+  "definition": "struct NiGeometryDataMembr\n{\nNiRefObjectMembr super;\nUInt16 m_usVertices;\nUInt16 serial;\nNiBound m_kBound;\nNiPoint3 *m_pkVertex;\nNiPoint3 *m_pkNormal;\nNiColorAlpha *m_pkColor;\nvoid *m_pkTexture;\nUInt16 format;\nUInt16 m_usDirtyFlags;\nUInt8 m_ucKeepFlags;\nUInt8 m_ucCompressFlags;\nUInt8 pad32[2];\nNiAdditionalGeometryData *m_spAdditionalGeomData;\nNiGeometryBufferData *BuffData;\nUInt8 m_bVertexStreamLocked; ///< Set by NiGeometryData_LockVertexStream and cleared only by NiGeometryData_UnlockVertexStream. Several ApplyEGMMorph false-return paths leave it set.\nUInt8 unk3D;\nUInt8 pad3E[2];\n}\n",
   "id": 18374686479671984042,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiRefObjectMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "m_usVertices",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "serial",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "m_kBound",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "NiBound"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "m_pkVertex",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "NiPoint3 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "m_pkNormal",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "NiPoint3 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "m_pkColor",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "NiColorAlpha *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "m_pkTexture",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "format",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000512.",
       "name": "m_usDirtyFlags",
       "offset": 42,
-      "offset_hex": "0x2a",
-      "size": 2
+      "offset_hex": "0x2A",
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000513.",
       "name": "m_ucKeepFlags",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 1
+      "offset_hex": "0x2C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000514.",
       "name": "m_ucCompressFlags",
       "offset": 45,
-      "offset_hex": "0x2d",
-      "size": 1
+      "offset_hex": "0x2D",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "pad32",
       "offset": 46,
-      "offset_hex": "0x2e",
-      "size": 2
+      "offset_hex": "0x2E",
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000516.",
       "name": "m_spAdditionalGeomData",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "NiAdditionalGeometryData *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000517.",
       "name": "BuffData",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "NiGeometryBufferData *"
     },
     {
-      "name": "unk3C",
+      "annotation_confidence": "Unknown",
+      "comment": "Set by NiGeometryData_LockVertexStream and cleared only by NiGeometryData_UnlockVertexStream. Several ApplyEGMMorph false-return paths leave it set.",
+      "name": "m_bVertexStreamLocked",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000519.",
       "name": "unk3D",
       "offset": 57,
       "offset_hex": "0x39",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000520.",
       "name": "pad3E",
       "offset": 58,
-      "offset_hex": "0x3a",
-      "size": 2
+      "offset_hex": "0x3A",
+      "size": 2,
+      "type": "UInt8[2]"
     }
   ],
   "name": "NiGeometryDataMembr",
+  "ordinal": 9315,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 60
 }

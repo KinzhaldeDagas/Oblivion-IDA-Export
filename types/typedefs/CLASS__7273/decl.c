@@ -1,1 +1,1 @@
-CLASS
+typedef tagCLASS CLASS;

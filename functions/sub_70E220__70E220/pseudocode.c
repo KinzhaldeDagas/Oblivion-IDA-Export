@@ -1,6 +1,7 @@
-BSStringT *__thiscall sub_70E220(BSStringT *this, char *a2, int a3)
+// Constructs one Oblivion NiRTTI descriptor: writes the class-name pointer at +0 and parent NiRTTI pointer at +4, then returns this. This is the native NiRTTI constructor used by the SpeedTree shader-property RTTI initializers decoded in Pass 368.
+NiRTTI *__thiscall NiRTTI_Constructor(NiRTTI *this, const char *name, NiRTTI *parent)
 {
-  this->m_data = a2;
-  *(_DWORD *)&this->m_dataLen = a3;
-  return this;
+  this->name = name; /*0x70e22a*/
+  this->parent = parent; /*0x70e22c*/
+  return this; /*0x70e22f*/
 }

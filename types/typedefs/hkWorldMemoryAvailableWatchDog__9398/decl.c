@@ -1,1 +1,1 @@
-hkWorldMemoryAvailableWatchDog
+struct hkWorldMemoryAvailableWatchDog;

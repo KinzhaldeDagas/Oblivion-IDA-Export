@@ -1,4 +1,4 @@
-0x808DF0: push    0FFFFFFFFh
+0x808DF0: push    0FFFFFFFFh; MoonSugarEffect decode: Parallax/Skin vtable +0x88 does not construct maps; it ref/copies PixelConstantMap and VertexConstantMap from GetShaderDefinition(1)->shader plus device/renderer/render-state refs.
 0x808DF2: push    offset SEH_808DF0
 0x808DF7: mov     eax, large fs:0
 0x808DFD: push    eax
@@ -14,7 +14,7 @@
 0x808E11: mov     large fs:0, eax
 0x808E17: mov     edi, ecx
 0x808E19: push    1; a1
-0x808E1B: call    GetShaderDefinition
+0x808E1B: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x808E20: mov     ebx, [eax+4]
 0x808E23: add     eax, 4
 0x808E26: mov     eax, [ebx+2Ch]
@@ -214,3 +214,14 @@
 0x809040: pop     ebx
 0x809041: add     esp, 14h
 0x809044: retn
+0x9D0DD0: lea     ecx, [ebp-14h]; slot
+0x9D0DD3: jmp     NiPointerSlot_Release
+0x9D0DD8: lea     ecx, [ebp-10h]; slot
+0x9D0DDB: jmp     NiPointerSlot_Release
+0x9D0DE0: mov     edx, [esp+arg_4]
+0x9D0DE4: lea     eax, [edx-18h]
+0x9D0DE7: mov     ecx, [edx-1Ch]
+0x9D0DEA: xor     ecx, eax
+0x9D0DEC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0DF1: mov     eax, offset stru_AF95D8
+0x9D0DF6: jmp     ___CxxFrameHandler3

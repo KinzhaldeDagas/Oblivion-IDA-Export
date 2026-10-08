@@ -1,1 +1,6 @@
-_ACL_SIZE_INFORMATION
+struct _ACL_SIZE_INFORMATION
+{
+DWORD AceCount;
+DWORD AclBytesInUse;
+DWORD AclBytesFree;
+};

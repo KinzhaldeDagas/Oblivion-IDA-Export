@@ -1,57 +1,59 @@
-void __cdecl sub_772E30(NiD3DPass *a2)
+//
+// DX11 pool audit 2026-10-01: corrected former NiD3DPass parameter type. This releases a render-state GROUP. RendererOwned byte0 selects pooled return: traverse both lists, return nodes, clear heads/counts, then return the group. Non-owned path destroys list contents and frees the group. Free pooled groups therefore have cleared counts/heads; free nodes can retain old fields.
+void __cdecl NiD3DRenderStateGroup_ReleaseToPool(OblivionPooledRenderStateGroupPrefix *group)
 {
-  NiD3DPass *v1; // edi
-  int v2; // eax
-  int v3; // esi
+  OblivionPooledRenderStateGroupPrefix *v1; // edi
+  OblivionPooledRenderStateGroupPrefix *NoSaveHead08; // eax
+  OblivionRenderStateEntry *v3; // esi
   unsigned int *v4; // ecx
-  int v5; // eax
-  int v6; // esi
+  OblivionPooledRenderStateGroupPrefix *SavedHead10; // eax
+  OblivionRenderStateEntry *v6; // esi
   unsigned int *v7; // ecx
   unsigned int *v8; // ecx
 
-  v1 = a2;
-  if ( a2 )
+  v1 = group; /*0x772e32*/
+  if ( group ) /*0x772e3a*/
   {
-    if ( LOBYTE(a2->__vftable) )
+    if ( group->RendererOwned00 ) /*0x772e40*/
     {
-      v2 = *(_DWORD *)&a2->Name[4];
-      if ( v2 )
+      NoSaveHead08 = (OblivionPooledRenderStateGroupPrefix *)group->NoSaveHead08; /*0x772e44*/
+      if ( NoSaveHead08 ) /*0x772e4a*/
       {
-        do
+        do /*0x772e6b*/
         {
-          v3 = *(_DWORD *)(v2 + 8);
-          v4 = (unsigned int *)dword_B427AC;
-          a2 = (NiD3DPass *)v2;
-          sub_73A5E0(v4, &a2);
-          v2 = v3;
+          v3 = NoSaveHead08->NoSaveHead08; /*0x772e50*/
+          v4 = (unsigned int *)NiD3DRenderStateGroup_EntryPool; /*0x772e53*/
+          group = NoSaveHead08; /*0x772e59*/
+          sub_73A5E0(v4, (NiD3DPass **)&group); /*0x772e62*/
+          NoSaveHead08 = (OblivionPooledRenderStateGroupPrefix *)v3; /*0x772e69*/
         }
-        while ( v3 );
+        while ( v3 ); /*0x772e6b*/
       }
-      v5 = *(_DWORD *)&v1->Name[0xC];
-      *(_DWORD *)&v1->Name[4] = 0;
-      *(_DWORD *)v1->Name = 0;
-      if ( v5 )
+      SavedHead10 = (OblivionPooledRenderStateGroupPrefix *)v1->SavedHead10; /*0x772e6d*/
+      v1->NoSaveHead08 = 0; /*0x772e72*/
+      v1->NoSaveCount04 = 0; /*0x772e75*/
+      if ( SavedHead10 ) /*0x772e78*/
       {
-        do
+        do /*0x772e9b*/
         {
-          v6 = *(_DWORD *)(v5 + 8);
-          v7 = (unsigned int *)dword_B427AC;
-          a2 = (NiD3DPass *)v5;
-          sub_73A5E0(v7, &a2);
-          v5 = v6;
+          v6 = SavedHead10->NoSaveHead08; /*0x772e80*/
+          v7 = (unsigned int *)NiD3DRenderStateGroup_EntryPool; /*0x772e88*/
+          group = SavedHead10; /*0x772e8e*/
+          sub_73A5E0(v7, (NiD3DPass **)&group); /*0x772e92*/
+          SavedHead10 = (OblivionPooledRenderStateGroupPrefix *)v6; /*0x772e99*/
         }
-        while ( v6 );
+        while ( v6 ); /*0x772e9b*/
       }
-      *(_DWORD *)&v1->Name[0xC] = 0;
-      *(_DWORD *)&v1->Name[8] = 0;
-      v8 = (unsigned int *)dword_B427A8;
-      a2 = v1;
-      sub_73A5E0(v8, &a2);
+      v1->SavedHead10 = 0; /*0x772ea1*/
+      v1->SavedCount0C = 0; /*0x772ea4*/
+      v8 = (unsigned int *)NiD3DRenderStateGroup_GroupPool; /*0x772ea7*/
+      group = v1; /*0x772eae*/
+      sub_73A5E0(v8, (NiD3DPass **)&group); /*0x772eb2*/
     }
     else
     {
-      sub_772BB0(a2);
-      FormHeapFree((unsigned int)v1);
+      sub_772BB0(group); /*0x772ebd*/
+      FormHeapFree((unsigned int)v1); /*0x772ec3*/
     }
   }
 }

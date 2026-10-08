@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4DAE81",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4DAED2",
-    "line": "cmp     eax, offset dword_B35288",
+    "line": "cmp     eax, 0B35288h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4DAEED",
-    "line": "push    offset dword_BA7D84",
+    "line": "push    offset stru_BA7D84",
     "mnemonic": "push",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x4DAF1F",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x4DAF2D",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x4DAF61",
-    "line": "lea     ecx, [esp+54h+var_34]",
+    "line": "lea     ecx, [esp+54h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x4DAF6A",
-    "line": "lea     ecx, [esp+50h+var_34]",
+    "line": "lea     ecx, [esp+50h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x4DAF71",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DAF77",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -583,43 +583,43 @@
   },
   {
     "ea": "0x4DAF7D",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DAF7E",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DAF83",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DAF89",
-    "line": "push    10h; Size",
+    "line": "push    10h; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DAF8B",
-    "line": "lea     eax, [esp+54h+var_34]",
+    "line": "lea     eax, [esp+54h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4DAF8F",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DAF90",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x4DAFA1",
-    "line": "lea     edx, [esp+50h+var_34]",
+    "line": "lea     edx, [esp+50h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x4DAFB9",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DAFBF",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x4DAFC5",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DAFC6",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x4DAFD2",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -751,49 +751,49 @@
   },
   {
     "ea": "0x4DAFD8",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DAFD9",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DAFDF",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DAFE4",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DAFEA",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DAFEC",
-    "line": "lea     edx, [esp+54h+var_34]",
+    "line": "lea     edx, [esp+54h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4DAFF0",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DAFF1",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x4DB002",
-    "line": "lea     ecx, [esp+50h+var_34]",
+    "line": "lea     ecx, [esp+50h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x4DB017",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x4DB025",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x4DB03D",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x4DB049",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x4DB062",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x4DB077",
-    "line": "jmp     sub_89F570",
+    "line": "jmp     bhkRefObject_UpdateHavokObject",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -1,70 +1,72 @@
-void __thiscall sub_6B7840(unsigned int ***this)
+// Recreates the serialized DialogueItem list and restores Conversation.currentItemNode from its UInt16 index. It does not call TESTopic::CreateConversation or run INFO results.
+void __thiscall Conversation::LoadGame(ConversationView *this)
 {
-  UInt32 *v3; // esi
-  TESForm *v4; // eax
-  const char *v5; // eax
-  TESSaveLoad *v6; // ecx
-  _DWORD *v7; // eax
-  unsigned int **v8; // edi
-  unsigned int ***v9; // eax
-  unsigned int ***v10; // esi
-  bool v11; // zf
-  unsigned int ***v12; // eax
-  int v13; // eax
-  unsigned int ***v14; // ecx
-  unsigned int **v15; // edx
-  TESSaveLoad *v16; // ecx
-  UInt32 *v17; // edi
-  UInt32 v18; // esi
-  TESForm *v19; // eax
-  UInt32 v20; // ebx
-  TESForm *v21; // ecx
-  UInt32 v22; // eax
+  UInt32 *v2; // esi
+  TESForm *v3; // eax
+  const char *v4; // eax
+  TESSaveLoad *v5; // ecx
+  DialogueItemView *v6; // eax
+  DialogueItemView *v7; // edi
+  DialogueItemNode **p_nextItemNode; // eax
+  ConversationView *v9; // esi
+  bool v10; // zf
+  DialogueItemNode *v11; // eax
+  DialogueItemView *DialogueItemByIndex; // eax
+  DialogueItemNode *v13; // ecx
+  DialogueItemNode *next; // edx
+  TESSaveLoad *v15; // ecx
+  UInt32 *v16; // edi
+  UInt32 v17; // esi
+  TESForm *v18; // eax
+  UInt32 v19; // ebx
+  TESForm *v20; // ecx
+  UInt32 v21; // eax
+  const char *v22; // eax
   const char *v23; // eax
-  const char *v24; // eax
-  UInt32 v25; // edx
+  UInt32 v24; // edx
+  int v25; // [esp-8h] [ebp-44h]
   int v26; // [esp-8h] [ebp-44h]
   int v27; // [esp-8h] [ebp-44h]
-  int v28; // [esp-8h] [ebp-44h]
+  size_t v28; // [esp-4h] [ebp-40h]
   size_t v29; // [esp-4h] [ebp-40h]
-  size_t v30; // [esp-4h] [ebp-40h]
-  int v31; // [esp-4h] [ebp-40h]
-  size_t v32; // [esp-4h] [ebp-40h]
+  int v30; // [esp-4h] [ebp-40h]
+  size_t v31; // [esp-4h] [ebp-40h]
+  int v32; // [esp-4h] [ebp-40h]
   int v33; // [esp-4h] [ebp-40h]
-  int v34; // [esp-4h] [ebp-40h]
-  unsigned __int16 v35; // [esp+14h] [ebp-28h] BYREF
-  int v36; // [esp+18h] [ebp-24h] BYREF
-  UInt32 v37; // [esp+1Ch] [ebp-20h]
+  unsigned __int16 v34; // [esp+14h] [ebp-28h] BYREF
+  int v35; // [esp+18h] [ebp-24h] BYREF
+  UInt32 v36; // [esp+1Ch] [ebp-20h]
   unsigned int i; // [esp+20h] [ebp-1Ch]
   int Dst; // [esp+24h] [ebp-18h] BYREF
-  _DWORD v40[2]; // [esp+28h] [ebp-14h] BYREF
+  SInt16 index[2]; // [esp+28h] [ebp-14h] BYREF
+  DialogueItemView *v40; // [esp+2Ch] [ebp-10h]
   unsigned int v41; // [esp+38h] [ebp-4h]
 
-  v36 = 0;
-  v37 = 0;
-  if ( sub_45A170() )
+  v35 = 0; /*0x6b7871*/
+  v36 = 0; /*0x6b7875*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v29) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v29);
+    LODWORD(v28) = 4; /*0x6b788c*/
+    SaveLoad_LoadData((int)g_TESSaveLoadGame, &Dst, v28); /*0x6b7893*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v3 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v3 )
+      v2 = (UInt32 *)g_TESSaveLoadGame[1].unk030[0]; /*0x6b78a7*/
+      if ( v2 )
       {
-        v4 = TESForm_LookupByFormID(*v3);
-        v5 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v4->vtbl->GetEditorName)(
-                             v4,
-                             *((unsigned __int8 *)v3 + 9),
-                             *(UInt32 *)((char *)v3 + 5));
+        v3 = TESForm_LookupByFormID(*v2); /*0x6b78b4*/
+        v4 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v3->vtbl->GetEditorName)( /*0x6b78cf*/
+                             v3,
+                             *((unsigned __int8 *)v2 + 9),
+                             *(UInt32 *)((char *)v2 + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           ".\\Dialogue\\Conversation.cpp",
           0xE5,
-          *v3,
-          v5,
-          v26,
-          v31);
+          *v2,
+          v4,
+          v25,
+          v30);
       }
       else
       {
@@ -72,157 +74,157 @@ void __thiscall sub_6B7840(unsigned int ***this)
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\Dialogue\\Conversation.cpp",
           0xE5,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          LOBYTE(g_TESSaveLoadGame[1].createdObjectList.next));
       }
     }
-    v6 = SaveLoad_CurrentSavegame;
-    LODWORD(v30) = 2;
-    v37 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_LoadData((int)v6, &v36, v30);
+    v5 = g_TESSaveLoadGame; /*0x6b790a*/
+    LODWORD(v29) = 2; /*0x6b7913*/
+    v36 = g_TESSaveLoadGame->unk000[5]; /*0x6b791a*/
+    SaveLoad_LoadData((int)v5, &v35, v29); /*0x6b791e*/
   }
-  LODWORD(v29) = 2;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v35, v29);
-  for ( i = 0; i < v35; ++i )
+  LODWORD(v28) = 2; /*0x6b7929*/
+  SaveLoad_LoadData((int)g_TESSaveLoadGame, &v34, v28);// EngineFix analysis 2026-05-07: Dialogue Conversation outer saved count; each entry calls sub_6B7E50, which consumes at least 18 bytes even with zero nested choices. Candidate clamp to remaining / 18 after verifying caller constraints. /*0x6b7930*/
+  for ( i = 0; i < v34; ++i ) /*0x6b793e*/
   {
-    v7 = (_DWORD *)FormHeapAlloc(0x1Cu);
-    v40[1] = v7;
-    v41 = 0;
-    if ( v7 )
-      v8 = (unsigned int **)sub_6B7BE0(v7);
+    v6 = (DialogueItemView *)FormHeapAlloc(0x1Cu); /*0x6b7946*/
+    v40 = v6; /*0x6b794e*/
+    v41 = 0;                                    // EngineFix implementation 2026-05-07: Dialogue Conversation outer entry allocation-failure hook. If the 0x1C object allocation fails, discard one full serialized conversation entry (nested choices, selected index, four FormIDs), restore SEH state, and resume loop tail. /*0x6b7954*/
+    if ( v6 ) /*0x6b7958*/
+      v7 = DialogueItem::InitializeEmpty(v6); /*0x6b7961*/
     else
-      v8 = 0;
-    v41 = 0xFFFFFFFF;
-    sub_6B7E50(v8);
-    if ( v8 )
+      v7 = 0; /*0x6b7965*/
+    v41 = 0xFFFFFFFF; /*0x6b7969*/
+    DialogueItem::LoadGame(v7); /*0x6b7971*/
+    if ( v7 ) /*0x6b7978*/
     {
-      v9 = this + 1;
-      v10 = this;
-      if ( *(this + 1) )
+      p_nextItemNode = &this->nextItemNode; /*0x6b797d*/
+      v9 = this; /*0x6b7980*/
+      if ( this->nextItemNode ) /*0x6b797a*/
       {
-        do
+        do /*0x6b798c*/
         {
-          v10 = (unsigned int ***)*v9;
-          v11 = (*v9)[1] == 0;
-          v9 = (unsigned int ***)(*v9 + 1);
+          v9 = (ConversationView *)*p_nextItemNode; /*0x6b7984*/
+          v10 = (*p_nextItemNode)->next == 0; /*0x6b7986*/
+          p_nextItemNode = &(*p_nextItemNode)->next; /*0x6b7989*/
         }
-        while ( !v11 );
+        while ( !v10 ); /*0x6b798c*/
       }
-      if ( *v10 )
+      if ( v9->firstItem ) /*0x6b798e*/
       {
-        v12 = (unsigned int ***)FormHeapAlloc(8u);
-        if ( v12 )
+        v11 = (DialogueItemNode *)FormHeapAlloc(8u); /*0x6b7994*/
+        if ( v11 ) /*0x6b799e*/
         {
-          *v12 = v8;
-          v12[1] = 0;
-          v10[1] = (unsigned int **)v12;
+          v11->item = v7; /*0x6b79a0*/
+          v11->next = 0; /*0x6b79a2*/
+          v9->nextItemNode = v11; /*0x6b79a5*/
         }
         else
         {
-          v10[1] = 0;
+          v9->nextItemNode = 0; /*0x6b79ac*/
         }
       }
       else
       {
-        *v10 = v8;
+        v9->firstItem = v7; /*0x6b79b1*/
       }
     }
   }
-  LODWORD(v32) = 2;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, v40, v32);
-  if ( LOWORD(v40[0]) == 0xFFFF )
+  LODWORD(v31) = 2; /*0x6b79d1*/
+  SaveLoad_LoadData((int)g_TESSaveLoadGame, index, v31); /*0x6b79d8*/
+  if ( index[0] == (SInt16)0xFFFF ) /*0x6b79e5*/
   {
-    *(this + 2) = 0;
+    this->currentItemNode = 0; /*0x6b7a11*/
   }
   else
   {
-    v13 = sub_6B7560(this, v40[0]);
-    v14 = this;
-    if ( this )
+    DialogueItemByIndex = Conversation::GetDialogueItemByIndex(this, index[0]); /*0x6b79ea*/
+    v13 = (DialogueItemNode *)this; /*0x6b79f1*/
+    if ( this ) /*0x6b79f3*/
     {
-      do
+      do /*0x6b79f5*/
       {
-        v15 = v14[1];
-        if ( !v15 && !*v14 )
-          break;
-        if ( (unsigned int **)v13 == *v14 )
+        next = v13->next; /*0x6b79f5*/
+        if ( !next && !v13->item ) /*0x6b79fc*/
+          break; /*0x6b79fc*/
+        if ( DialogueItemByIndex == v13->item ) /*0x6b7a02*/
         {
-          *(this + 2) = (unsigned int **)v14;
-          break;
+          this->currentItemNode = v13; /*0x6b7a0c*/
+          break; /*0x6b7a0f*/
         }
-        v14 = (unsigned int ***)v14[1];
+        v13 = v13->next; /*0x6b7a04*/
       }
-      while ( v15 );
+      while ( next ); /*0x6b79f5*/
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x6b7a1a*/
   {
-    v16 = SaveLoad_CurrentSavegame;
-    v17 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v18 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v17 )
+    v15 = g_TESSaveLoadGame; /*0x6b7a27*/
+    v16 = (UInt32 *)g_TESSaveLoadGame[1].unk030[0]; /*0x6b7a2d*/
+    v17 = g_TESSaveLoadGame->unk000[5]; /*0x6b7a35*/
+    if ( v16 ) /*0x6b7a38*/
     {
-      v19 = TESForm_LookupByFormID(*v17);
-      v20 = v37;
-      v21 = v19;
-      v22 = (unsigned __int16)v36 + v37;
-      if ( v18 <= v22 )
+      v18 = TESForm_LookupByFormID(*v16); /*0x6b7a41*/
+      v19 = v36; /*0x6b7a4b*/
+      v20 = v18; /*0x6b7a4f*/
+      v21 = (unsigned __int16)v35 + v36; /*0x6b7a51*/
+      if ( v17 <= v21 ) /*0x6b7a59*/
       {
-        if ( v18 < v22 )
+        if ( v17 < v21 ) /*0x6b7aa7*/
         {
-          v24 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v21->vtbl->GetEditorName)(
-                                v21,
-                                *((unsigned __int8 *)v17 + 9),
-                                *(UInt32 *)((char *)v17 + 5));
-          PrintError(
+          v23 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v20->vtbl->GetEditorName)( /*0x6b7abe*/
+                                v20,
+                                *((unsigned __int8 *)v16 + 9),
+                                *(UInt32 *)((char *)v16 + 5));
+          PrintError( /*0x6b7add*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
             "%i and flags %08X",
-            v20 + (unsigned __int16)v36 - v18,
+            v19 + (unsigned __int16)v35 - v17,
             ".\\Dialogue\\Conversation.cpp",
             0xFB,
-            *v17,
-            v24,
-            v28,
-            v34);
+            *v16,
+            v23,
+            v27,
+            v33);
         }
       }
       else
       {
-        v23 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v21->vtbl->GetEditorName)(
-                              v21,
-                              *((unsigned __int8 *)v17 + 9),
-                              *(UInt32 *)((char *)v17 + 5));
-        PrintError(
+        v22 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v20->vtbl->GetEditorName)( /*0x6b7a6c*/
+                              v20,
+                              *((unsigned __int8 *)v16 + 9),
+                              *(UInt32 *)((char *)v16 + 5));
+        PrintError( /*0x6b7a8b*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-          v18 - (unsigned __int16)v36 - v20,
+          v17 - (unsigned __int16)v35 - v19,
           ".\\Dialogue\\Conversation.cpp",
           0xFB,
-          *v17,
-          v23,
-          v27,
-          v33);
+          *v16,
+          v22,
+          v26,
+          v32);
       }
     }
     else
     {
-      v25 = (unsigned __int16)v36 + v37;
-      if ( v18 <= v25 )
+      v24 = (unsigned __int16)v35 + v36; /*0x6b7b02*/
+      if ( v17 <= v24 ) /*0x6b7b07*/
       {
-        if ( v18 < v25 )
-          PrintError(
+        if ( v17 < v24 ) /*0x6b7b24*/
+          PrintError( /*0x6b7b3f*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-            v37 + (unsigned __int16)v36 - v18,
+            v36 + (unsigned __int16)v35 - v17,
             ".\\Dialogue\\Conversation.cpp",
             0xFB,
-            LOBYTE(v16[1].createdObjectList.next));
+            LOBYTE(v15[1].createdObjectList.next));
       }
       else
       {
-        PrintError(
+        PrintError( /*0x6b7b22*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-          v18 - (unsigned __int16)v36 - v37,
+          v17 - (unsigned __int16)v35 - v36,
           ".\\Dialogue\\Conversation.cpp",
           0xFB,
-          LOBYTE(v16[1].createdObjectList.next));
+          LOBYTE(v15[1].createdObjectList.next));
       }
     }
   }

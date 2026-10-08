@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x6945C2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6945C9",
-    "line": "call    ActiveEffect_Base_CopyTo",
+    "line": "call    ActiveEffect_Base_CopyTo; Verified ActiveEffect_Base_CopyTo copies fields through object +0x30 (boundObjectOrParentForm) and stops there; it does not copy hitEffectList at +0x34. ActiveEffect_Ctor zeroes +0x34. The registered-effect vtables' copy slots either call this routine directly or call derived copy helpers that chain to it; inspected helpers copy their own fields but do not write +0x34. Therefore standard ActiveEffect clones start with an independent empty hit-effect list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x6945EC",
-    "line": "push    esi",
+    "line": "push    esi; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6945ED",
-    "line": "lea     ecx, [eax+38h]",
+    "line": "lea     ecx, [eax+38h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6945F0",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },

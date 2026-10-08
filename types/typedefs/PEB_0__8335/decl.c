@@ -1,1 +1,1 @@
-PEB_0
+typedef _PEB_0 PEB_0;

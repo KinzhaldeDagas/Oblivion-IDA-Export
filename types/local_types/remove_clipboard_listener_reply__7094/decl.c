@@ -1,1 +1,4 @@
-remove_clipboard_listener_reply
+struct remove_clipboard_listener_reply
+{
+reply_header __header;
+};

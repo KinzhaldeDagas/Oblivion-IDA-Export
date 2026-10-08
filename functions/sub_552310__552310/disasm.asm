@@ -1,17 +1,17 @@
-0x552310: push    ecx
+0x552310: push    ecx; Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.
 0x552311: push    ebx
 0x552312: push    ebp
-0x552313: mov     ebp, [esp+0Ch+arg_0]
+0x552313: mov     ebp, [esp+0Ch+out]
 0x552317: push    esi
 0x552318: mov     esi, ecx
 0x55231A: mov     eax, [esi+4]
 0x55231D: mov     ecx, [esi]
 0x55231F: push    edi
-0x552320: push    eax
-0x552321: push    ecx
-0x552322: mov     ecx, ebp
+0x552320: push    eax; columns
+0x552321: push    ecx; rows
+0x552322: mov     ecx, ebp; this
 0x552324: mov     [esp+1Ch+var_4], 0
-0x55232C: call    sub_552240
+0x55232C: call    FaceGenMatrix_InitializeDimensions; Initialize FaceGenMatrix dimensions and resize to rows*columns floats. The product is computed in 32 bits without overflow validation.
 0x552331: lea     edi, [esi+8]
 0x552334: mov     esi, [edi+4]
 0x552337: cmp     esi, [edi+8]
@@ -24,13 +24,13 @@
 0x55234E: mov     edi, edi
 0x552350: mov     eax, [edi+8]
 0x552353: cmp     [edi+4], eax
-0x552356: mov     [esp+14h+arg_0], eax
+0x552356: mov     [esp+14h+out], eax
 0x55235A: jbe     short loc_552361
 0x55235C: call    __invalid_parameter_noinfo
 0x552361: cmp     edi, edi
 0x552363: jz      short loc_55236A
 0x552365: call    __invalid_parameter_noinfo
-0x55236A: cmp     esi, [esp+14h+arg_0]
+0x55236A: cmp     esi, [esp+14h+out]
 0x55236E: jz      short loc_5523A8
 0x552370: cmp     esi, [edi+8]
 0x552373: jb      short loc_55237A
@@ -39,7 +39,7 @@
 0x55237D: jb      short loc_552384
 0x55237F: call    __invalid_parameter_noinfo
 0x552384: fld     dword ptr [esi]
-0x552386: fmul    [esp+14h+arg_4]
+0x552386: fmul    [esp+14h+scale]
 0x55238A: fstp    dword ptr [ebx]
 0x55238C: cmp     esi, [edi+8]
 0x55238F: jb      short loc_552396

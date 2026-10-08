@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6005F0",
-    "line": "push    ebp",
+    "line": "push    ebp; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x60062A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x600632",
-    "line": "call    sub_5EF930",
+    "line": "call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x6006B4",
-    "line": "mov     ecx, offset fEssentialDeathTime",
+    "line": "mov     ecx, 0B37D08h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x6006DF",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x600751",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x600767",
-    "line": "mov     ecx, offset flt_B37D10",
+    "line": "mov     ecx, offset unk_B37D10",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1339,13 +1339,13 @@
   },
   {
     "ea": "0x6008B3",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6008B5",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x6008EC",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1891,31 +1891,31 @@
   },
   {
     "ea": "0x6009D2",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6009D4",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6009D6",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6009D8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6009DA",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x6009E3",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,31 +1981,31 @@
   },
   {
     "ea": "0x6009FC",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; repeatOrAction",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6009FE",
-    "line": "push    1",
+    "line": "push    1; playImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x600A00",
-    "line": "push    ebx",
+    "line": "push    ebx; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x600A01",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x600A03",
-    "line": "call    ActorAnimData_PlayAnimGroup",
+    "line": "call    ActorAnimData_PlayAnimGroup; Native group dispatcher. Reads fixed group-table slot (+0x08) and note-template class (+0x0C), normalizing slot aliases 5->0 and 6->3. For note classes 0/1, playImmediately=0 stores only the encoded key at ActorAnimData +0x70[slot] and repeat/action value at +0x7C[slot]; playImmediately=1 clears that queue and plays now. Classes 2..7 play immediately. No queued sequence pointer or path is stored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,7 +2317,7 @@
   },
   {
     "ea": "0x600AA9",
-    "line": "call    sub_51CEC0",
+    "line": "call    TESCreature_SelectSoundForAnimEnum; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x600B40",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x600B61",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState; BloodOnDeath death hook: chains Actor_HandleDeathState, then queues corpse blood on the first nonzero death transition. Emission is deferred to the frame hook; each cycle lasts fLeakSeconds (default 8s) and completed cycles do not restart unless death/corpse-hit queues a new cycle.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3055,7 +3055,7 @@
   },
   {
     "ea": "0x600C1A",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x600C42",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3409,7 +3409,7 @@
   },
   {
     "ea": "0x600CD2",
-    "line": "mov     ebx, [esi+3Ch]",
+    "line": "mov     ebx, [esi+3Ch]; ODismemberment: after Actor_HandleDeathState(actor,1), Actor_Kill uses actor+0x3C as the root NiNode for post-death Havok/ragdoll work. This is the authoritative pre-ragdoll visual window used by the plugin.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3421,7 +3421,7 @@
   },
   {
     "ea": "0x600CD7",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; ODismemberment: reads the MobileObject character proxy before post-death Havok processing; if present, its bhk world-object velocity is sampled and converted from Havok units.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3445,7 +3445,7 @@
   },
   {
     "ea": "0x600CE2",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3487,7 +3487,7 @@
   },
   {
     "ea": "0x600CF4",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; ODismemberment: bhkWorldObject_GetLinearVelocityPtr returns object+0x10. Actor_Kill converts this vector with HavokVector_ToWorldVector before later collision processing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3511,7 +3511,7 @@
   },
   {
     "ea": "0x600CFF",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -3775,7 +3775,7 @@
   },
   {
     "ea": "0x600D94",
-    "line": "push    0",
+    "line": "push    0; ODismemberment: recursive collision-object helper toggles bhkConstraint objects under actor root before death impulse work. Arg0 here means the remove/disable path observed in sub_8A53E0.",
     "mnemonic": "push",
     "size": 2
   },
@@ -3787,7 +3787,7 @@
   },
   {
     "ea": "0x600D97",
-    "line": "call    sub_8A5580",
+    "line": "call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3829,19 +3829,19 @@
   },
   {
     "ea": "0x600DAC",
-    "line": "lea     ecx, [esp+144h+var_104]",
+    "line": "lea     ecx, [esp+144h+var_104]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x600DB0",
-    "line": "fstp    [esp+144h+duration]; float",
+    "line": "fstp    [esp+144h+duration]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x600DB3",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3991,13 +3991,13 @@
   },
   {
     "ea": "0x600E07",
-    "line": "push    ebx",
+    "line": "push    ebx; ODismemberment: recursive helper applies a transformed vector to bhk collision objects through bhkRefObject_UpdateHavokObject and a Havok vfunc +0x54.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x600E08",
-    "line": "call    sub_536660",
+    "line": "call    sub_536660; ODismemberment: recursively walks NiAVObject children and pushes a translated vector into each bhkCollisionObject-backed Havok object via sub_4D6AF0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4045,19 +4045,19 @@
   },
   {
     "ea": "0x600E1F",
-    "line": "lea     ecx, [esp+144h+var_104]",
+    "line": "lea     ecx, [esp+144h+var_104]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x600E23",
-    "line": "fstp    [esp+144h+duration]; float",
+    "line": "fstp    [esp+144h+duration]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x600E26",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4189,7 +4189,7 @@
   },
   {
     "ea": "0x600E69",
-    "line": "call    sub_88D070",
+    "line": "call    sub_88D070; ODismemberment: calls bhkBlendCollisionObject traversal helper with blend state 6 and enabled flag; this requires existing bhkBlendCollisionObject data on the Ni tree.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4249,7 +4249,7 @@
   },
   {
     "ea": "0x600E81",
-    "line": "call    sub_8AB440",
+    "line": "call    sub_8AB440; ODismemberment: recursive death impulse/force path. It creates or updates bhkBlendController/bhkForceController and applies force to collision/blend objects already present under the actor root.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4369,7 +4369,7 @@
   },
   {
     "ea": "0x600EBD",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4513,7 +4513,7 @@
   },
   {
     "ea": "0x600F0B",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4525,7 +4525,7 @@
   },
   {
     "ea": "0x600F13",
-    "line": "mov     ecx, [ecx+8]",
+    "line": "mov     ecx, [ecx+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4543,7 +4543,7 @@
   },
   {
     "ea": "0x600F1A",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },

@@ -29,16 +29,16 @@
 0x530E00: lea     ecx, [esi+18h]
 0x530E03: call    sub_56A750
 0x530E08: mov     ecx, esi
-0x530E0A: call    sub_530620
+0x530E0A: call    TESTopicInfo_ClearSharedResponseCache
 0x530E0F: mov     ecx, esi
 0x530E11: call    sub_530690
 0x530E16: lea     ecx, [esp+68h+var_5C]
 0x530E1A: call    Script_Constructor
 0x530E1F: lea     ecx, [esp+68h+var_5C]
 0x530E23: push    ecx
-0x530E24: mov     ecx, offset stru_B36530
+0x530E24: mov     ecx, offset g_cachedTopicInfoResultScript
 0x530E29: mov     [esp+6Ch+var_4], 0
-0x530E31: call    sub_4FC7A0
+0x530E31: call    Script_CopyFrom; Deep-copy Script state from another Script: copy the five ScriptInfo dwords, replace compiled data through Script_SetCompiledData, copy variables/references/source text, and mirror linked state. TESTopicInfo::GetResultScript uses this to reset its shared cache from a freshly constructed default Script before scanning the winning INFO record.
 0x530E36: lea     ecx, [esp+68h+var_5C]
 0x530E3A: mov     [esp+68h+var_4], 0FFFFFFFFh
 0x530E42: call    Script_StaticDestructor
@@ -50,7 +50,7 @@
 0x530E62: mov     ecx, edi
 0x530E64: call    sub_530500
 0x530E69: push    edi
-0x530E6A: call    FormHeapFree
+0x530E6A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x530E6F: add     esp, 4
 0x530E72: mov     ecx, esi
 0x530E74: call    j_TESForm_ClearComponentReferences
@@ -61,3 +61,12 @@
 0x530E86: pop     esi
 0x530E87: add     esp, 5Ch
 0x530E8A: retn
+0x9B8BC0: lea     ecx, [ebp-5Ch]
+0x9B8BC3: jmp     Script_StaticDestructor
+0x9B8BC8: mov     edx, [esp+arg_4]
+0x9B8BCC: lea     eax, [edx-58h]
+0x9B8BCF: mov     ecx, [edx-5Ch]
+0x9B8BD2: xor     ecx, eax
+0x9B8BD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8BD9: mov     eax, offset stru_AE3054
+0x9B8BDE: jmp     ___CxxFrameHandler3

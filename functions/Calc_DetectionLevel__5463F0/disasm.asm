@@ -1,1 +1,1 @@
-0x5463F0: sub     esp, 10h
+0x5463F0: sub     esp, 10h; Entry to Oblivion's staged detection formula. Inputs include detector/target Sneak, LOS, distance, Blindness, target light, Chameleon/Invisibility, boot weight, movement, combat/attack, running, underwater/sleep, and exterior state.

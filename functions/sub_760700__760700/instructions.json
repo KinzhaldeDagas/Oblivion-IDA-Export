@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x760700",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; DX10OBSE resource decode: NiDX9SourceTextureData creates D3DPOOL_MANAGED IDirect3DTexture9 using converted D3DFORMAT, mip-skip policy, width/height, and level count.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x76070A",
-    "line": "push    eax",
+    "line": "push    eax; pixelFormat",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76070B",
-    "line": "call    sub_76BEF0",
+    "line": "call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x760767",
-    "line": "mov     [esi+5Ch], ecx",
+    "line": "mov     [esi+5Ch], ecx; Authoritative Oblivion texture path: for supported power-of-two sources, NiDX9SourceTextureData takes the converted NiPixelData stored mip-level count from +0x60; it does not force a base-only texture.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7607BC",
-    "line": "push    1",
+    "line": "push    1; Out of Memory Fix target: original source texture CreateTexture args push D3DPOOL_MANAGED / Usage=0. Plugin detours this block to use D3DPOOL_DEFAULT with D3DUSAGE_DYNAMIC.",
     "mnemonic": "push",
     "size": 2
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7607E3",
-    "line": "call    edx",
+    "line": "call    edx; CreateTexture receives Levels = sourceLevelCount - rendererLevelsSkipped. A complete generated DDS mip chain therefore becomes real D3D9 texture levels.",
     "mnemonic": "call",
     "size": 2
   },
@@ -697,13 +697,13 @@
   },
   {
     "ea": "0x760834",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x760835",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x760840",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

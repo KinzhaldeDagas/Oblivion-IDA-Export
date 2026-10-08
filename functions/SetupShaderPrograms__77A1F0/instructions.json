@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77A1F0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified (Oblivion): common NiD3DShader pass setup first invokes the current NiD3DPass bind/apply virtual, then applies this shader object's PixelConstantMap to CurrentPass->PixelShader and VertexConstantMap to CurrentPass->VertexShader. ShadowLightShader's vtable slot +0x38 points here, and its slot +0x88 builds those maps; this closes the map ownership path for its 0x18C..0x18F texture-effect selectors.",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x77A208",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x77A247",
-    "line": "call    edx",
+    "line": "call    edx; Current NiD3DPass binds pixel/vertex programs and applies pass-owned constant maps.",
     "mnemonic": "call",
     "size": 2
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x77A28E",
-    "line": "call    edx",
+    "line": "call    edx; Apply shader-level PixelConstantMap to the bound pass pixel shader.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x77A290",
-    "line": "mov     ecx, [esi+30h]",
+    "line": "mov     ecx, [esi+30h]; DX11 authority correction: shader+30 vertex map applies after pass-owned vertex map at pass+48 (75FC4C); pass+58 is vertex program. Older +50 comment was incorrect.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x77A2D1",
-    "line": "call    edx",
+    "line": "call    edx; Apply shader-level VertexConstantMap to the bound pass vertex shader.",
     "mnemonic": "call",
     "size": 2
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x77A2EC",
-    "line": "call    eax",
+    "line": "call    eax; Materialize or reuse the active NiDX9 declaration's IDirect3DVertexDeclaration9.",
     "mnemonic": "call",
     "size": 2
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x77A2F8",
-    "line": "call    edx",
+    "line": "call    edx; Bind the active Lighting30 D3D vertex declaration before drawing pass zero.",
     "mnemonic": "call",
     "size": 2
   },

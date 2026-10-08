@@ -1,1 +1,4 @@
-IDirectInputEffect
+struct IDirectInputEffect
+{
+IDirectInputEffectVtbl *lpVtbl;
+};

@@ -1,1 +1,8 @@
-threadpool_objtype
+enum threadpool_objtype : __int32
+{
+TP_OBJECT_TYPE_SIMPLE = 0x0,
+TP_OBJECT_TYPE_WORK = 0x1,
+TP_OBJECT_TYPE_TIMER = 0x2,
+TP_OBJECT_TYPE_WAIT = 0x3,
+TP_OBJECT_TYPE_IO = 0x4,
+};

@@ -83,7 +83,7 @@
 0x9437C0: lea     ecx, [esp+100h+var_E0]
 0x9437C4: mov     [esi], edi
 0x9437C6: call    sub_9568A0
-0x9437CB: mov     edx, dword ptr [esp+100h+var_70]
+0x9437CB: mov     edx, [esp+100h+var_70]
 0x9437D2: mov     esi, eax
 0x9437D4: lea     eax, [esi+10h]
 0x9437D7: push    eax

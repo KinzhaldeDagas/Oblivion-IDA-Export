@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_420920",
+  "chunks": [
+    [
+      "0x420920",
+      "0x4209B6"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "7866df93549aaa04981e40ef5b35a727ed49bc4eb8e2b523a6a18d6dfe6bba66",
+  "comment_regular": "Set/update only ExtraHasNoRumors (0x5A), the actor-local eligibility override. This does not remove or replace an existing ExtraInfoGeneralTopic cache (0x59); disabling the gate can expose the old cache again.",
+  "comment_repeatable": "Set/update only ExtraHasNoRumors (0x5A), the actor-local eligibility override. This does not remove or replace an existing ExtraInfoGeneralTopic cache (0x59); disabling the gate can expose the old cache again.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList::SetNoRumors",
   "end_ea": "0x4209B6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_420920",
+  "name": "ExtraDataList::SetNoRumors",
   "segment": ".text",
   "sha256": "a498aecf6fec21e00d28091b4ea114bc35d8df4eaf840fa2299f5ad53c1dc371",
   "size": 150,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x420920",
-  "type": "BSExtraData *__thiscall(ExtraDataList *this, char)",
-  "xrefs_from_count": 53,
+  "total_chunk_size": 188,
+  "type": "BSExtraData *__thiscall(ExtraDataList *this, bool noRumors)",
+  "xrefs_from_count": 67,
   "xrefs_to_count": 2
 }

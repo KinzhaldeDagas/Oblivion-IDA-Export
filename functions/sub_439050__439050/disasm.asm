@@ -1,11 +1,11 @@
-0x439050: push    ebp
-0x439051: mov     ebp, [esp+4+arg_4]
+0x439050: push    ebp; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.
+0x439051: mov     ebp, [esp+4+firstOwner]
 0x439055: test    ebp, ebp
 0x439057: push    esi
 0x439058: push    edi
 0x439059: mov     edi, ecx
 0x43905B: jz      short loc_439063
-0x43905D: cmp     ebp, [esp+0Ch+arg_C]
+0x43905D: cmp     ebp, [esp+0Ch+lastOwner]
 0x439061: jz      short loc_439068
 0x439063: call    __invalid_parameter_noinfo
 0x439068: mov     esi, [esp+0Ch+Dst]
@@ -28,7 +28,7 @@
 0x439094: add     esp, 10h
 0x439097: mov     [edi+8], ebx
 0x43909A: pop     ebx
-0x43909B: mov     eax, [esp+0Ch+arg_0]
+0x43909B: mov     eax, [esp+0Ch+result]
 0x43909F: pop     edi
 0x4390A0: mov     [eax+4], esi
 0x4390A3: pop     esi

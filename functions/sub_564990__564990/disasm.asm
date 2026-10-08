@@ -1,4 +1,4 @@
-0x564990: push    ebx
+0x564990: push    ebx; Verified: obtains the child-slot-2 NiBillboardNode parent, removes/releases any previous billboard geometry, attaches the supplied object under that parent, then stores it at +0xE8. Probable NiTriBasedGeom* input type is supported by the local NiTriShape producer and Fallout's getter type.
 0x564991: mov     ebx, [esp+4+a2]
 0x564995: test    ebx, ebx
 0x564997: push    edi

@@ -1,1 +1,6 @@
-tagSTREAM_SEEK
+enum tagSTREAM_SEEK : __int32
+{
+STREAM_SEEK_SET = 0x0,
+STREAM_SEEK_CUR = 0x1,
+STREAM_SEEK_END = 0x2,
+};

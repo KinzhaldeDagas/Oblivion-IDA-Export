@@ -1,8 +1,8 @@
-0x68E060: push    esi
-0x68E061: mov     esi, [esp+4+arg_0]
+0x68E060: push    esi; Verified post-link entry iterates the target ActiveEffect EffectNode list and dispatches each ActiveEffect virtual +0x1C with the target/reference linkContext. TESObjectREFR_PostLinkModifiedExtraList calls this for a linked NonActorMagicTarget list (null context); actor/player post-link paths pass their reference context.
+0x68E061: mov     esi, [esp+4+activeEffectList]
 0x68E065: test    esi, esi
 0x68E067: push    edi
-0x68E068: mov     edi, [esp+8+arg_4]
+0x68E068: mov     edi, [esp+8+linkContext]
 0x68E06C: jz      short loc_68E08C
 0x68E06E: mov     edi, edi
 0x68E070: cmp     dword ptr [esi+4], 0

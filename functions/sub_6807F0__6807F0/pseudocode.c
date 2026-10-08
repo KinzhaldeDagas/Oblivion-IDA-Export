@@ -1,67 +1,70 @@
-double __thiscall sub_6807F0(TESObjectREFR **this, TESObjectREFR *a2)
+// Verified Oblivion route costs: after the access-policy check, a successful TESObjectDOOR_CheckActorAccess with mustLockpickOut=1 adds fPathMustLockpickPenalty (plus zero-valued dbl_A2FC68); a failed check adds fPathImpassableDoorPenalty. Separately, if either endpoint has minimal-use flag and ignore-min-use is false, adds fPathMinimalUseDoorPenalty. Fallout's search uses fixed 409600 penalties for its policy/minimal-use branches, so the numeric behavior differs.
+double __thiscall TravelPath_ComputeDoorTransitionPenalty(
+        TravelPathSpaceDoorLink *doorLink,
+        TESObjectREFR *sourceRefContext)
 {
-  char v3; // al
+  bool IgnoreLocks; // al
   TESObjectREFR *v4; // edi
-  TESObjectREFR *v5; // eax
+  TESObjectREFR *referenceA; // eax
   TESObjectREFR *v6; // ecx
   double v7; // st7
-  TESForm *v8; // ebp
-  TESForm *v9; // edi
+  TESObjectDOOR *v8; // ebp
+  TESObjectDOOR *v9; // edi
   float v11; // [esp+8h] [ebp-4h]
 
-  v11 = 0.0;
-  v3 = sub_67F0A0();
-  v4 = a2;
-  if ( !v3 )
+  v11 = 0.0; /*0x6807f5*/
+  IgnoreLocks = TravelPath_GetIgnoreLocks(); /*0x6807fb*/
+  v4 = sourceRefContext; /*0x680802*/
+  if ( !IgnoreLocks ) /*0x680806*/
   {
-    if ( a2 )
+    if ( sourceRefContext ) /*0x68080a*/
     {
-      v5 = *(this + 1);
-      if ( v5 )
+      referenceA = doorLink->referenceA; /*0x68080c*/
+      if ( referenceA ) /*0x680811*/
       {
-        if ( !sub_4B72C0(v5, a2, 0, 1) )
+        if ( !TESObjectDOOR_CheckActorAccessPolicy(referenceA, (Actor *)sourceRefContext, 0, 1u) ) /*0x680819*/
         {
-          v6 = *(this + 1);
-          LOBYTE(a2) = 0;
-          if ( sub_4B7490(v6, v4, &a2) )
+          v6 = doorLink->referenceA; /*0x680825*/
+          LOBYTE(sourceRefContext) = 0; /*0x680828*/
+          if ( TESObjectDOOR_CheckActorAccess(v6, (Actor *)v4, (UInt8 *)&sourceRefContext) ) /*0x680833*/
           {
-            if ( !(_BYTE)a2 )
-              goto LABEL_10;
-            v7 = *(float *)GameSetting_GetSafeFloatPointer((int *)&unk_B3A438) + dbl_A2FC68;
+            if ( !(_BYTE)sourceRefContext ) /*0x680852*/
+              goto LABEL_10; /*0x680852*/
+            v7 = *GameSetting_GetSafeFloatPointer(&fPathMustLockpickPenalty.value) + dbl_A2FC68; /*0x680860*/
           }
           else
           {
-            v7 = *(float *)GameSetting_GetSafeFloatPointer((int *)&unk_B3A430);
+            v7 = *GameSetting_GetSafeFloatPointer(&fPathImpassableDoorPenalty.value); /*0x680849*/
           }
-          v11 = v7;
+          v11 = v7; /*0x680866*/
         }
       }
     }
   }
 LABEL_10:
-  if ( !sub_67F0C0() )
+  if ( !TravelPath_GetIgnoreMinUse() ) /*0x68086a*/
   {
-    if ( v4 )
+    if ( v4 ) /*0x680879*/
     {
-      if ( *(this + 1) )
+      if ( doorLink->referenceA ) /*0x68087f*/
       {
-        if ( *(this + 3) )
+        if ( doorLink->referenceB ) /*0x680889*/
         {
-          if ( v4 == (TESObjectREFR *)TESDataHandler_g_PlayerRef
+          if ( v4 == (TESObjectREFR *)reference /*0x6808a7*/
             || !((unsigned __int8 (__thiscall *)(TESObjectREFR *, int))v4->vtbl[1].GetSleepState)(v4, 1) )
           {
-            v8 = 0;
-            if ( (*(this + 1))->vtbl->GetBaseForm(*(this + 1))->member.type == kFormType_Door )
-              v8 = (*(this + 1))->vtbl->GetBaseForm(*(this + 1));
-            v9 = 0;
-            if ( (*(this + 3))->vtbl->GetBaseForm(*(this + 3))->member.type == kFormType_Door )
-              v9 = (*(this + 3))->vtbl->GetBaseForm(*(this + 3));
-            if ( sub_4B6D10(v8) || sub_4B6D10(v9) )
-              return (float)(flt_B3A440 + v11);
+            v8 = 0; /*0x6808b9*/
+            if ( doorLink->referenceA->vtbl->GetBaseForm(doorLink->referenceA)->member.type == kFormType_Door ) /*0x6808c1*/
+              v8 = (TESObjectDOOR *)doorLink->referenceA->vtbl->GetBaseForm(doorLink->referenceA); /*0x6808d0*/
+            v9 = 0; /*0x6808dd*/
+            if ( doorLink->referenceB->vtbl->GetBaseForm(doorLink->referenceB)->member.type == kFormType_Door ) /*0x6808e5*/
+              v9 = (TESObjectDOOR *)doorLink->referenceB->vtbl->GetBaseForm(doorLink->referenceB); /*0x6808f4*/
+            if ( TESObjectDOOR_HasMinUseFlag(v8) || TESObjectDOOR_HasMinUseFlag(v9) ) /*0x680904*/
+              return (float)(fPathMinimalUseDoorPenalty.value + v11); /*0x680917*/
           }
         }
       }
     }
   }
-  return v11;
+  return v11; /*0x68091f*/
 }

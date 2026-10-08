@@ -7,11 +7,11 @@
 0x56A14C: push    0FFFFFFFFh; a2
 0x56A14E: mov     ecx, edi; this
 0x56A150: mov     dword ptr [esp+10h+ArgList], eax
-0x56A154: call    TESForm_GetOverrideFile
+0x56A154: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x56A159: push    eax; a2
 0x56A15A: lea     ecx, [esp+10h+ArgList]
 0x56A15E: push    ecx; a1
-0x56A15F: call    TESForm_ResolveFormID
+0x56A15F: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x56A164: movzx   eax, byte ptr [esi]
 0x56A167: add     esp, 8
 0x56A16A: sub     eax, 0
@@ -20,7 +20,7 @@
 0x56A176: jnz     loc_56A289
 0x56A17C: mov     edx, dword ptr [esp+0Ch+ArgList]
 0x56A180: push    edx; a1
-0x56A181: call    TESForm_LookupByFormID
+0x56A181: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56A186: add     esp, 4
 0x56A189: test    eax, eax
 0x56A18B: mov     [esi+4], eax
@@ -71,7 +71,7 @@
 0x56A207: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x56A20C: push    0; int
 0x56A20E: push    ecx; a1
-0x56A20F: call    TESForm_LookupByFormID
+0x56A20F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56A214: add     esp, 4
 0x56A217: push    eax; void *
 0x56A218: call    OblivionDynamicCast

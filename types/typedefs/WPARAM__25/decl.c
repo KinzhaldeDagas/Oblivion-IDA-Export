@@ -1,1 +1,1 @@
-WPARAM
+typedef UINT WPARAM;

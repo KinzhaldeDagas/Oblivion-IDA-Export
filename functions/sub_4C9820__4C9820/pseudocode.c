@@ -1,4 +1,4 @@
-char __thiscall sub_4C9820(_BYTE *this)
+bool __thiscall TESObjectCELL_HasFlag80(TESObjectCELL *this)
 {
-  return *(this + 0x24) >> 7;
+  return this->members.flags0 >> 7; /*0x4c9829*/
 }

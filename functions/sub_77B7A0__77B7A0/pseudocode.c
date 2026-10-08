@@ -1,4 +1,4 @@
-char __thiscall sub_77B7A0(_BYTE *this)
+unsigned __int8 __thiscall NiDX9RenderState_GetCachedSoftwareVertexProcessing(NiDX9RenderState *self)
 {
-  return *(this + 0x1014);
+  return self->member.CachedSoftwareVertexProcessing; /*0x77b7a6*/
 }

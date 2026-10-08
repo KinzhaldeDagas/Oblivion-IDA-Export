@@ -67,7 +67,6 @@
 0x44E9D3: add     esp, 20h
 0x44E9D6: xor     eax, eax
 0x44E9D8: jmp     short loc_44E9E0
-0x44E9DA: align 10h
 0x44E9E0: mov     cl, [esp+eax+FileName]
 0x44E9E4: mov     [esp+eax+Filename], cl
 0x44E9EB: add     eax, 1
@@ -165,7 +164,7 @@
 0x44EB16: call    Interface_ConsolePrint
 0x44EB1B: mov     ecx, ds:0B33398h
 0x44EB21: add     esp, 18h
-0x44EB24: call    sub_40D4D0
+0x44EB24: call    Input_CheckScreenshotHotkey; Verified gamma integration 2026-09-26: frame path tests B34FA4 and calls Renderer_ApplyPendingGammaRamp at40D508 before scene rendering.
 0x44EB29: mov     al, [esi+4]
 0x44EB2C: cmp     al, 23h ; '#'
 0x44EB2E: jnz     short loc_44EB55
@@ -204,7 +203,7 @@
 0x44EBA8: xor     eax, eax
 0x44EBAA: mov     edx, [esp+a2]
 0x44EBAE: mov     esi, eax
-0x44EBB0: push    edx; a2
+0x44EBB0: push    edx; baseForm
 0x44EBB1: mov     ecx, esi; this
 0x44EBB3: mov     [esp+4+arg_6BC], 0FFFFFFFFh
 0x44EBBE: call    TESObjectREFR_SetBaseForm
@@ -282,7 +281,7 @@
 0x44ECA9: mov     ecx, esi
 0x44ECAB: call    eax
 0x44ECAD: push    eax
-0x44ECAE: push    offset dword_B3FAB0
+0x44ECAE: push    offset parent
 0x44ECB3: call    NiRTTI_Cast
 0x44ECB8: mov     ecx, ds:0B333A0h
 0x44ECBE: add     esp, 8
@@ -330,7 +329,7 @@
 0x44ED37: push    eax
 0x44ED38: push    offset aS_2fII_2f_2fI_; "%s\t%.2f\t%i\t%i\t%.2f\t%.2f\t%i\t%.2f"...
 0x44ED3D: push    offset aTestmodelsColl; "TestModels - Collision Info.xls"
-0x44ED42: call    nullsub_return0_0arg
+0x44ED42: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x44ED47: add     esp, 40h
 0x44ED4A: mov     eax, [esi]
 0x44ED4C: mov     edx, [eax+10h]
@@ -345,7 +344,7 @@
 0x44ED65: jle     short loc_44ED77
 0x44ED67: mov     ecx, ds:0B333A0h; this
 0x44ED6D: push    ebx; a2
-0x44ED6E: call    sub_43FC20
+0x44ED6E: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x44ED73: mov     [esp+arg_50], ebx
 0x44ED77: mov     esi, dword ptr [esp+arg_40]
 0x44ED7B: sub     [esp+arg_38], 1

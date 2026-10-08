@@ -28,7 +28,7 @@
 0x56B33A: mov     [esp+50h+var_34], ecx
 0x56B33E: push    0FFFFFFFFh; a2
 0x56B340: mov     ecx, ebp; this
-0x56B342: call    TESForm_GetOverrideFile
+0x56B342: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x56B347: xor     edi, edi
 0x56B349: cmp     [esp+50h+var_34], ebx
 0x56B34D: mov     [esp+50h+a2], eax
@@ -38,18 +38,17 @@
 0x56B35E: mov     [esp+50h+var_3C], ebx
 0x56B362: mov     [esp+50h+arg_0], edx
 0x56B366: jmp     short loc_56B370
-0x56B368: align 10h
 0x56B370: movzx   eax, word ptr [esi]
 0x56B373: cmp     eax, 171h
 0x56B378: jnb     loc_56B643
 0x56B37E: lea     ecx, [eax+eax*4]
 0x56B381: add     ecx, ecx
 0x56B383: add     ecx, ecx
-0x56B385: movzx   edx, ds:Script_CommandList?.numParams[ecx+ecx]
+0x56B385: movzx   edx, ds:Script_CommandList.numParams[ecx+ecx]
 0x56B38D: add     ecx, ecx
 0x56B38F: cmp     edi, edx
 0x56B391: jnb     loc_56B4DF
-0x56B397: mov     ecx, ds:Script_CommandList?.params[ecx]
+0x56B397: mov     ecx, ds:Script_CommandList.params[ecx]
 0x56B39D: mov     edx, [esp+50h+var_3C]
 0x56B3A1: mov     ecx, [ecx+edx+4]
 0x56B3A5: cmp     ds:0B0A54Dh[ecx*8], bl
@@ -63,10 +62,10 @@
 0x56B3C8: push    eax; a2
 0x56B3C9: lea     ecx, [esp+54h+ArgList]
 0x56B3CD: push    ecx; a1
-0x56B3CE: call    TESForm_ResolveFormID
+0x56B3CE: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x56B3D3: mov     edx, dword ptr [esp+58h+ArgList]
 0x56B3D7: push    edx; a1
-0x56B3D8: call    TESForm_LookupByFormID
+0x56B3D8: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x56B3DD: mov     ecx, [esp+5Ch+arg_0]
 0x56B3E1: add     esp, 0Ch
 0x56B3E4: cmp     eax, ebx
@@ -91,7 +90,7 @@
 0x56B41F: mov     edx, [esp+5Ch+var_2C]
 0x56B423: push    edx
 0x56B424: mov     [esp+60h+var_4], 0FFFFFFFFh
-0x56B42C: call    FormHeapFree
+0x56B42C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x56B431: add     esp, 10h
 0x56B434: mov     [esp+50h+var_2C], ebx
 0x56B438: mov     word ptr [esp+50h+var_28+2], bx
@@ -141,11 +140,11 @@
 0x56B4EA: lea     eax, [eax+eax*4]
 0x56B4ED: add     eax, eax
 0x56B4EF: add     eax, eax
-0x56B4F1: movzx   ecx, ds:Script_CommandList?.numParams[eax+eax]
+0x56B4F1: movzx   ecx, ds:Script_CommandList.numParams[eax+eax]
 0x56B4F9: add     eax, eax
 0x56B4FB: cmp     edi, ecx
 0x56B4FD: jnb     loc_56B643
-0x56B503: mov     edx, ds:Script_CommandList?.params[eax]
+0x56B503: mov     edx, ds:Script_CommandList.params[eax]
 0x56B509: mov     eax, [esp+50h+var_3C]
 0x56B50D: cmp     dword ptr [edx+eax+4], 16h
 0x56B512: jnz     loc_56B643
@@ -254,3 +253,18 @@
 0x56B66D: pop     ebx
 0x56B66E: add     esp, 3Ch
 0x56B671: retn
+0x9BD920: lea     ecx, [ebp-2Ch]; void *
+0x9BD923: jmp     BSStringT_Clear
+0x9BD928: lea     ecx, [ebp-24h]; void *
+0x9BD92B: jmp     BSStringT_Clear
+0x9BD930: lea     ecx, [ebp-1Ch]; void *
+0x9BD933: jmp     BSStringT_Clear
+0x9BD938: lea     ecx, [ebp-14h]; void *
+0x9BD93B: jmp     BSStringT_Clear
+0x9BD940: mov     edx, [esp+arg_4]
+0x9BD944: lea     eax, [edx-40h]
+0x9BD947: mov     ecx, [edx-44h]
+0x9BD94A: xor     ecx, eax
+0x9BD94C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD951: mov     eax, offset stru_AE7258
+0x9BD956: jmp     ___CxxFrameHandler3

@@ -3,7 +3,7 @@
 0x441003: mov     ecx, ds:0B33B00h
 0x441009: push    edi
 0x44100A: xor     edi, edi
-0x44100C: call    sub_45A170
+0x44100C: call    TESSaveLoadGame_UseSaveGameBlocks
 0x441011: test    al, al
 0x441013: jz      short loc_44101A
 0x441015: mov     edi, 6
@@ -32,7 +32,7 @@
 0x441064: jz      short loc_4410A6
 0x441066: mov     ecx, [esi]
 0x441068: push    ecx; a1
-0x441069: call    TESForm_LookupByFormID
+0x441069: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x44106E: mov     edx, [esi+5]
 0x441071: add     esp, 4
 0x441074: push    offset a__TesSharedTes; "..\\TES Shared\\TES.cpp"

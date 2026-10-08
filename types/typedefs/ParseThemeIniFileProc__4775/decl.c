@@ -1,1 +1,1 @@
-ParseThemeIniFileProc
+typedef BOOL (*ParseThemeIniFileProc)(DWORD, LPWSTR, LPWSTR, LPWSTR, DWORD, LPVOID);

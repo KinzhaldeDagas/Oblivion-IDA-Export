@@ -1,4 +1,4 @@
-0x49E3FC: fstp    st(5); jumptable 0049E3A3 default case
+0x49E3FC: fstp    st(5); Pass205/206: Internal shared child-creation tail inside 0x0049E280; not standalone function. Later writes +0x71 for LODWaterRoot children.
 0x49E3FE: fstp    st(3)
 0x49E400: fstp    st(1)
 0x49E402: fstp    st
@@ -34,18 +34,18 @@
 0x49E465: push    1
 0x49E467: push    esi
 0x49E468: call    eax
-0x49E46A: push    1
-0x49E46C: push    0
-0x49E46E: push    11h
-0x49E470: push    esi
-0x49E471: call    sub_7B8940
+0x49E46A: push    1; arg3
+0x49E46C: push    0; normalMapBypass
+0x49E46E: push    11h; shaderId
+0x49E470: push    esi; root
+0x49E471: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x49E476: add     esp, 10h
 0x49E479: push    4
 0x49E47B: mov     ecx, esi
-0x49E47D: call    NiNode_GetNiPropertyByID
+0x49E47D: call    NiNode_GetNiPropertyByID;
 0x49E482: add     edi, 1
 0x49E485: cmp     edi, 4
-0x49E488: mov     byte ptr [eax+71h], 1
+0x49E488: mov     byte ptr [eax+71h], 1; Pass205/206: Writes WaterShaderProperty +0x71=1 for generated LODWaterRoot child.
 0x49E48C: jl      loc_49E370
 0x49E492: cmp     byte ptr ds:0B07050h, 0
 0x49E499: jz      short loc_49E4C2
@@ -54,13 +54,13 @@
 0x49E4A4: cmp     dword ptr ds:0B42F48h, 2
 0x49E4AB: jl      short loc_49E4C2
 0x49E4AD: mov     ecx, ds:0B35234h
-0x49E4B3: push    1
-0x49E4B5: push    0
-0x49E4B7: push    11h
-0x49E4B9: push    ecx
-0x49E4BA: call    sub_7B8940
+0x49E4B3: push    1; arg3
+0x49E4B5: push    0; normalMapBypass
+0x49E4B7: push    11h; shaderId
+0x49E4B9: push    ecx; root
+0x49E4BA: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x49E4BF: add     esp, 10h
-0x49E4C2: call    sub_499E40
+0x49E4C2: call    sub_499E40; Pass205: Water-related callsite included in pass-data producer verification; cross-check before naming high-level field semantics.
 0x49E4C7: mov     eax, ds:0B35234h
 0x49E4CC: test    eax, eax
 0x49E4CE: jz      short loc_49E4D6

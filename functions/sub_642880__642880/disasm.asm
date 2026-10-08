@@ -16,7 +16,7 @@
 0x6428AE: test    al, al
 0x6428B0: jnz     short loc_6428EB
 0x6428B2: mov     ecx, esi; this
-0x6428B4: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6428B4: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6428B9: cmp     eax, 4
 0x6428BC: jnz     short loc_6428C9
 0x6428BE: mov     ecx, esi; this
@@ -26,8 +26,8 @@
 0x6428C9: push    esi
 0x6428CA: mov     ecx, edi
 0x6428CC: call    loc_6411E0
-0x6428D1: mov     ecx, offset dword_B3B94C
-0x6428D6: call    BSSimpleList_Clear
+0x6428D1: mov     ecx, offset stru_B3B94C
+0x6428D6: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6428DB: fld     dword ptr ds:0B378A8h
 0x6428E1: fadd    [esp+8+arg_4]
 0x6428E5: fstp    dword ptr [edi+204h]

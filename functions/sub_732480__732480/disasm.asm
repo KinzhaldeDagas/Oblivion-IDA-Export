@@ -20,7 +20,7 @@
 0x7324B5: jz      short loc_7324E2
 0x7324B7: mov     edx, [esi+14h]
 0x7324BA: push    edx
-0x7324BB: call    FormHeapFree
+0x7324BB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7324C0: mov     eax, [edi+0Ch]
 0x7324C3: xor     ecx, ecx
 0x7324C5: mov     [esi+0Ch], eax
@@ -38,10 +38,10 @@
 0x7324E8: mov     edx, [esi+14h]
 0x7324EB: add     eax, eax
 0x7324ED: add     eax, eax
-0x7324EF: push    eax; Size
-0x7324F0: push    ecx; Src
-0x7324F1: push    edx; Dst
-0x7324F2: call    _memcpy
+0x7324EF: push    eax; byteCount
+0x7324F0: push    ecx; source
+0x7324F1: push    edx; destination
+0x7324F2: call    _memcpy;
 0x7324F7: add     esp, 0Ch
 0x7324FA: pop     edi
 0x7324FB: mov     eax, esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D7FE0",
-    "line": "push    ebx",
+    "line": "push    ebx; Build a strong-owned {NiLight*,1.0} payload and install it as the reference's spell-effect attached-light extra-data type 0x49.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4D8002",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x4D803C",
-    "line": "push    edi",
+    "line": "push    edi; payload",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D803D",
-    "line": "lea     ecx, [ebp+44h]",
+    "line": "lea     ecx, [ebp+44h]; self",
     "mnemonic": "lea",
     "size": 3
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x4D8043",
-    "line": "call    sub_4267B0",
+    "line": "call    ExtraDataList_SetSpellEffectLightPayload; Install or replace extra-data type 0x49 with an AttachedLightPayload_Decoded. Replacement releases the old payload's backing NiLight and frees that payload; creation builds an ExtraLight-style node, changes its type to 0x49, and adds it to the list.",
     "mnemonic": "call",
     "size": 5
   },

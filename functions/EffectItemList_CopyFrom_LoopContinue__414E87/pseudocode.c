@@ -1,4 +1,4 @@
-int __userpurge EffectItemList_CopyFrom_::LoopContinue@<eax>(
+void __userpurge EffectItemList_CopyFrom_::LoopContinue(
         int a1@<ebx>,
         int a2@<ebp>,
         int a3,
@@ -14,9 +14,9 @@ int __userpurge EffectItemList_CopyFrom_::LoopContinue@<eax>(
 {
   int v12; // eax
 
-  v12 = *(_DWORD *)(a2 + 8);
-  if ( v12 == a1 || v12 - 4 == a1 )
-    return EffectItemList_CopyFrom_::Done(a3);
+  v12 = *(_DWORD *)(a2 + 8); /*0x414e87*/
+  if ( v12 == a1 || v12 - 4 == a1 ) /*0x414e93*/
+    EffectItemList_CopyFrom_::Done(a3); /*0x414e94*/
   else
-    return EffectItemList_CopyFrom_::LoopBody(a1, v12 - 4, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+    EffectItemList_CopyFrom_::LoopBody(a1, v12 - 4, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); /*0x414e93*/
 }

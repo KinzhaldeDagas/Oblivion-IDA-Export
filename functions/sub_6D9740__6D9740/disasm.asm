@@ -15,7 +15,7 @@
 0x6D976B: fstp    [esp+20h+var_1C]
 0x6D976F: fld     [esp+20h+arg_0]
 0x6D9773: fstp    [esp+20h+var_20]
-0x6D9776: call    sub_6EBA60
+0x6D9776: call    NiInterpolator_CloneTimeRange; Default range clone: clone through the NiObject pointer map, then invoke the clone's post-clone/collapse virtual. Subclasses override when authored data must be sliced.
 0x6D977B: mov     ecx, [edi+1Ch]
 0x6D977E: test    ecx, ecx
 0x6D9780: mov     esi, eax
@@ -58,3 +58,12 @@
 0x6D97F6: pop     esi
 0x6D97F7: add     esp, 0Ch
 0x6D97FA: retn    8
+0x9C80F0: lea     ecx, [ebp+8]; slot
+0x9C80F3: jmp     NiPointerSlot_Release
+0x9C80F8: mov     edx, [esp+a2]
+0x9C80FC: lea     eax, [edx-8]
+0x9C80FF: mov     ecx, [edx-0Ch]
+0x9C8102: xor     ecx, eax
+0x9C8104: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8109: mov     eax, offset stru_AF03E8
+0x9C810E: jmp     ___CxxFrameHandler3

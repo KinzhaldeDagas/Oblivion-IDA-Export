@@ -1,5 +1,5 @@
 0xA27190: push    esi
-0xA27191: mov     esi, dword_B430EC
+0xA27191: mov     esi, flt_B430DC+10h
 0xA27197: test    esi, esi
 0xA27199: jz      short loc_A271B7
 0xA2719B: lea     eax, [esi+4]

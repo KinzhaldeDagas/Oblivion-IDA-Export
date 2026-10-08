@@ -1,4 +1,4 @@
-0x4CAFF0: test    byte ptr [ecx+24h], 1
+0x4CAFF0: test    byte ptr [ecx+24h], 1; Retrieve the cell canopy-shadow mask.
 0x4CAFF4: jz      short loc_4CAFFB
 0x4CAFF6: xor     eax, eax
 0x4CAFF8: retn    8

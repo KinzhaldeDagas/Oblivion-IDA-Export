@@ -13,7 +13,6 @@
 0x93154C: mov     [esp+220h+var_200], edx
 0x931550: mov     [esp+220h+var_208], 1
 0x931558: jmp     short loc_931560
-0x93155A: align 10h
 0x931560: mov     eax, [esp+220h+var_208]
 0x931564: mov     ecx, [esp+220h+var_20C]
 0x931568: mov     esi, [ecx+eax*4-4]
@@ -22,7 +21,6 @@
 0x931571: mov     [esp+220h+var_210], esi
 0x931575: mov     eax, esi
 0x931577: jmp     short loc_931580
-0x931579: align 10h
 0x931580: movzx   edx, word ptr [eax+4]
 0x931584: lea     eax, [ebp+edx*8+0]
 0x931588: movzx   edx, word ptr [eax+6]

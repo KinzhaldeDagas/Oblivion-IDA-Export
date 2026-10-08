@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4D53AE",
-    "line": "mov     [esp+38h+var_1C], ecx",
+    "line": "mov     [esp+38h+var_1C.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4D53B5",
-    "line": "mov     [esp+38h+var_18], edx",
+    "line": "mov     [esp+38h+var_1C.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4D53C1",
-    "line": "mov     [esp+3Ch+var_14], eax",
+    "line": "mov     [esp+3Ch+var_1C.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x4D53CD",
-    "line": "push    offset flt_B35E14",
+    "line": "push    offset other; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x4D53D2",
-    "line": "lea     ecx, [esp+3Ch+var_1C]",
+    "line": "lea     ecx, [esp+3Ch+var_1C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D53D6",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x4D53E3",
-    "line": "mov     ecx, [esp+38h+var_14]",
+    "line": "mov     ecx, [esp+38h+var_1C.z]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D53E7",
-    "line": "mov     edx, [esp+38h+var_1C]",
+    "line": "mov     edx, [esp+38h+var_1C.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D53EB",
-    "line": "mov     eax, [esp+38h+var_18]",
+    "line": "mov     eax, [esp+38h+var_1C.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4D5406",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4D5444",
-    "line": "fld     [esp+40h+var_1C]",
+    "line": "fld     [esp+40h+var_1C.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4D5453",
-    "line": "fld     [esp+40h+var_18]",
+    "line": "fld     [esp+40h+var_1C.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4D5484",
-    "line": "mov     ecx, offset fSeenDataUpdateRadius",
+    "line": "mov     ecx, 0B35C14h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x4D54B6",
-    "line": "fld     [esp+40h+var_1C]",
+    "line": "fld     [esp+40h+var_1C.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x4D54CE",
-    "line": "mov     ecx, offset fSeenDataUpdateRadius",
+    "line": "mov     ecx, 0B35C14h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x4D54DA",
-    "line": "fadd    [esp+40h+var_1C]",
+    "line": "fadd    [esp+40h+var_1C.x]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x4D54F0",
-    "line": "mov     ecx, offset fSeenDataUpdateRadius",
+    "line": "mov     ecx, 0B35C14h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x4D54FA",
-    "line": "fld     [esp+40h+var_18]",
+    "line": "fld     [esp+40h+var_1C.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x4D5517",
-    "line": "mov     ecx, offset fSeenDataUpdateRadius",
+    "line": "mov     ecx, 0B35C14h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x4D5523",
-    "line": "fadd    [esp+40h+var_18]",
+    "line": "fadd    [esp+40h+var_1C.y]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x4D5546",
-    "line": "push    edi; signed int",
+    "line": "push    edi; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x4D554A",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x4D556B",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D556C",
-    "line": "push    esi; signed int",
+    "line": "push    esi; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x4D558B",
-    "line": "push    eax; signed int",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x4D558E",
-    "line": "push    ebp; signed int",
+    "line": "push    ebp; cellX",
     "mnemonic": "push",
     "size": 1
   },

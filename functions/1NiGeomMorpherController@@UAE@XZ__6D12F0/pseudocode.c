@@ -1,28 +1,28 @@
 void __thiscall NiGeomMorpherController::~NiGeomMorpherController(NiGeomMorpherController *this)
 {
-  int v2; // edi
+  NiMorphData *morphData; // edi
   LONG (__stdcall *v3)(volatile LONG *); // ebx
-  int v4; // edi
-  unsigned int v5; // [esp-4h] [ebp-24h]
+  NiMorphData *v4; // edi
+  float *data; // [esp-4h] [ebp-24h]
 
-  *(_DWORD *)this = &NiGeomMorpherController::`vftable';
-  v2 = *((_DWORD *)this + 0x14);
-  v3 = InterlockedDecrement;
-  if ( v2 )
+  this->super.vtbl = (NiTimeControllerVtbl *)&NiGeomMorpherController::`vftable'; /*0x6d131a*/
+  morphData = this->morphData; /*0x6d1320*/
+  v3 = InterlockedDecrement; /*0x6d1325*/
+  if ( morphData ) /*0x6d1333*/
   {
-    if ( !v3((volatile LONG *)(v2 + 4)) )
-      (**(void (__thiscall ***)(int, int))v2)(v2, 1);
-    *((_DWORD *)this + 0x14) = 0;
+    if ( !v3((volatile LONG *)morphData + 1) ) /*0x6d1339*/
+      (**(void (__thiscall ***)(NiMorphData *, int))morphData)(morphData, 1); /*0x6d134b*/
+    this->morphData = 0; /*0x6d134d*/
   }
-  sub_6D10F0((unsigned __int16 *)this, 0.0);
-  v4 = *((_DWORD *)this + 0x14);
-  if ( v4 )
+  sub_6D10F0((unsigned __int16 *)this, 0.0); /*0x6d1358*/
+  v4 = this->morphData; /*0x6d135d*/
+  if ( v4 ) /*0x6d1367*/
   {
-    if ( !v3((volatile LONG *)(v4 + 4)) )
-      (**(void (__thiscall ***)(int, int))v4)(v4, 1);
+    if ( !v3((volatile LONG *)v4 + 1) ) /*0x6d136d*/
+      (**(void (__thiscall ***)(NiMorphData *, int))v4)(v4, 1); /*0x6d137f*/
   }
-  v5 = *((_DWORD *)this + 0x11);
-  *((_DWORD *)this + 0x10) = &NiTArray<float>::`vftable';
-  FormHeapFree(v5);
-  NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(this);
+  data = this->morphWeights.data; /*0x6d1384*/
+  this->morphWeights.vtbl = &NiTArray<float>::`vftable'; /*0x6d1385*/
+  FormHeapFree((unsigned int)data); /*0x6d138c*/
+  NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr((NiPSysResetOnLoopCtlr *)this); /*0x6d139e*/
 }

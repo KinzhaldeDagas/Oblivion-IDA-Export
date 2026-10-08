@@ -5,14 +5,14 @@ bool *__stdcall sub_954D70(bool *a1, int a2, int a3, int a4)
   bool v6; // cc
   bool *result; // eax
 
-  v4 = *(_DWORD *)(a4 + 8) - 8;
-  if ( v4 <= 0 )
-    v4 = 0;
-  v5 = *(_DWORD *)(a3 + 0x24) - v4;
-  if ( v5 > *(_DWORD *)(a3 + 0x24) )
-    v5 = *(_DWORD *)(a3 + 0x24);
-  v6 = v5 <= 2;
-  result = a1;
-  *a1 = !v6;
-  return result;
+  v4 = *(_DWORD *)(a4 + 8) - 8; /*0x954d77*/
+  if ( v4 <= 0 ) /*0x954d7c*/
+    v4 = 0; /*0x954d7e*/
+  v5 = *(_DWORD *)(a3 + 0x24) - v4; /*0x954d8a*/
+  if ( v5 > *(_DWORD *)(a3 + 0x24) ) /*0x954d8e*/
+    v5 = *(_DWORD *)(a3 + 0x24); /*0x954d90*/
+  v6 = v5 <= 2; /*0x954d92*/
+  result = a1; /*0x954d95*/
+  *a1 = !v6; /*0x954da2*/
+  return result; /*0x954d9f*/
 }

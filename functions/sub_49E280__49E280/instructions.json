@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x49E280",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass205/206: LODWaterRoot jump-table loop creates four generated child quads under 0x00B35234 and reaches shared child-creation tail.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x49E2F3",
-    "line": "mov     ecx, offset LodWaterRoot; this",
+    "line": "mov     ecx, 0B35234h; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -378,12 +378,6 @@
     "size": 2
   },
   {
-    "ea": "0x49E368",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x49E370",
     "line": "fld     dword ptr ds:0A3F4E8h",
     "mnemonic": "fld",
@@ -469,7 +463,7 @@
   },
   {
     "ea": "0x49E3A1",
-    "line": "ja      short def_49E3A3",
+    "line": "ja      short def_49E3A3; Pass205/206: Internal shared child-creation tail inside 0x0049E280; not standalone function. Later writes +0x71 for LODWaterRoot children.",
     "mnemonic": "ja",
     "size": 2
   },
@@ -652,5 +646,77 @@
     "line": "jmp     short loc_49E3DE",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9B1C00",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B1C03",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B1C04",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B1C09",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B1C0A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B1C0B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B1C0F",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B1C12",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B1C15",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B1C17",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B1C1C",
+    "line": "mov     eax, offset stru_ADDCD4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B1C21",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

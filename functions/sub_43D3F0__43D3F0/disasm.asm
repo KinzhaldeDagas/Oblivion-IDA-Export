@@ -101,3 +101,14 @@
 0x43D4FF: pop     ebx
 0x43D500: add     esp, 14h
 0x43D503: retn
+0x9ACCE0: lea     ecx, [ebp-14h]; void *
+0x9ACCE3: jmp     sub_4BDDC0
+0x9ACCE8: lea     ecx, [ebp-10h]; void *
+0x9ACCEB: jmp     sub_4BDDC0
+0x9ACCF0: mov     edx, [esp+arg_4]
+0x9ACCF4: lea     eax, [edx-18h]
+0x9ACCF7: mov     ecx, [edx-1Ch]
+0x9ACCFA: xor     ecx, eax
+0x9ACCFC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACD01: mov     eax, offset stru_AD990C
+0x9ACD06: jmp     ___CxxFrameHandler3

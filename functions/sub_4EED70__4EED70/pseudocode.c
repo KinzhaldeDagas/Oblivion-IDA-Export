@@ -1,5 +1,5 @@
 // attributes: thunk
-void __thiscall sub_4EED70(_DWORD *this)
+void __thiscall sub_4EED70(unsigned int *this)
 {
-  sub_5B1D70(this);
+  sub_5B1D70(this); /*0x4eed70*/
 }

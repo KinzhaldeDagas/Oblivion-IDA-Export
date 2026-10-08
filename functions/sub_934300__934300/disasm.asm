@@ -190,7 +190,6 @@
 0x934582: mov     [esp+870h+var_83C], ecx
 0x934586: jle     short loc_9345CA
 0x934588: jmp     short loc_934590
-0x93458A: align 10h
 0x934590: movzx   eax, [esp+edi*2+870h+var_800]
 0x934595: add     eax, 56h ; 'V'
 0x934598: lea     edx, [eax+eax*2]

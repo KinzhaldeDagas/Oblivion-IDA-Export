@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D35D0",
-    "line": "push    esi",
+    "line": "push    esi; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4D35FE",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4D3612",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4D362B",
-    "line": "mov     ecx, [edi+50h]",
+    "line": "mov     ecx, [edi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x4D3632",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D3633",
-    "line": "call    sub_4F0120",
+    "line": "call    TESWorldSpace_IndexReference; Verified: persistent-cell reference indexer routes kFormType_SubSpace references into referencesByCell (+0x64), alongside the other explicit eligible base types. This +0x64 index supports reattachment to exterior cells; the separate +0x60 SubSpace bounds index is built later by TESWorldSpace_IndexPersistentCellSubSpaces.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4D3669",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x4D3672",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D3673",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D3675",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4D367B",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x4D369C",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x4D3703",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x4D3798",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x4D37B2",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -937,19 +937,19 @@
   },
   {
     "ea": "0x4D37BC",
-    "line": "push    0",
+    "line": "push    0; useSpellEffectExtraLight",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D37BE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D37C0",
-    "line": "call    sub_4D80C0",
+    "line": "call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x4D37D6",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,19 +1351,19 @@
   },
   {
     "ea": "0x4D3887",
-    "line": "push    0",
+    "line": "push    0; useSpellEffectExtraLight",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D3889",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D388B",
-    "line": "call    sub_4D80C0",
+    "line": "call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,19 +1519,19 @@
   },
   {
     "ea": "0x4D38D4",
-    "line": "push    0",
+    "line": "push    0; useSpellEffectExtraLight",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D38D6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D38D8",
-    "line": "call    sub_4D80C0",
+    "line": "call    TESObjectREFR_RegisterAttachedLightWithShadowScene; This retail reference/cell lifecycle call passes useSpellEffectExtraLight=false; it registers only ordinary ExtraLight.",
     "mnemonic": "call",
     "size": 5
   },

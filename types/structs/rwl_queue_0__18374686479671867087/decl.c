@@ -1,1 +1,1 @@
-rwl_queue_0
+typedef rwl_queue rwl_queue_0;

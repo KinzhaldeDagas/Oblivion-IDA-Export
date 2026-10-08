@@ -19,7 +19,7 @@
 0x50BF2F: push    edx; a1
 0x50BF30: mov     dword ptr [esp+2Ch+var_8], 0
 0x50BF38: mov     [esp+2Ch+var_4], 0
-0x50BF40: call    Script_ExtractArgs
+0x50BF40: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50BF45: add     esp, 24h
 0x50BF48: test    al, al
 0x50BF4A: jnz     short loc_50BF50

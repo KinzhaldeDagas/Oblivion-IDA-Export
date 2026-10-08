@@ -132,11 +132,11 @@
 0x8B53B5: lea     ecx, [esp+134h+var_120]
 0x8B53B9: push    ecx; int
 0x8B53BA: lea     ecx, [esp+138h+var_F0]
-0x8B53BE: call    sub_8B1B00
+0x8B53BE: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8B53C3: lea     edx, [esp+130h+var_F0]
 0x8B53C7: push    edx
 0x8B53C8: lea     ecx, [esp+134h+var_40]
-0x8B53CF: call    sub_8B1DD0
+0x8B53CF: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8B53D4: movaps  xmm5, [esp+130h+var_100]
 0x8B53D9: jmp     short loc_8B5417
 0x8B53DB: xorps   xmm0, xmm0

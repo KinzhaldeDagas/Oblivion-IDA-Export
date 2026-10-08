@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BD230",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified DistantLODLoaderTaskData destructor: frees every TESBoundObject-keyed cell payload/map, releases instancedLODNode (+0x1C) and cellLODBuffer (+0x20), then destroys the embedded map.",
     "mnemonic": "push",
     "size": 2
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4BD28D",
-    "line": "mov     [esp+30h+var_18], eax",
+    "line": "mov     [esp+30h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -216,68 +216,62 @@
     "size": 2
   },
   {
-    "ea": "0x4BD29A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4BD2A0",
-    "line": "lea     eax, [esp+30h+var_1C]",
+    "line": "lea     eax, [esp+30h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4BD2A4",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD2A5",
-    "line": "lea     ecx, [esp+34h+var_10]",
+    "line": "lea     ecx, [esp+34h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4BD2A9",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD2AA",
-    "line": "lea     edx, [esp+38h+var_18]",
+    "line": "lea     edx, [esp+38h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4BD2AE",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD2AF",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BD2B1",
-    "line": "mov     [esp+3Ch+var_1C], 0",
+    "line": "mov     [esp+3Ch+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4BD2B9",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BD2BE",
-    "line": "mov     esi, [esp+30h+var_1C]",
+    "line": "mov     esi, [esp+30h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +307,7 @@
   },
   {
     "ea": "0x4BD2CD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +331,7 @@
   },
   {
     "ea": "0x4BD2D9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +355,7 @@
   },
   {
     "ea": "0x4BD2E4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +367,7 @@
   },
   {
     "ea": "0x4BD2EA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +379,7 @@
   },
   {
     "ea": "0x4BD2F2",
-    "line": "cmp     [esp+30h+var_18], 0",
+    "line": "cmp     [esp+30h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -409,7 +403,7 @@
   },
   {
     "ea": "0x4BD300",
-    "line": "mov     esi, [ebx+20h]",
+    "line": "mov     esi, [ebx+20h]; Verified DistantLODLoaderTaskData destructor frees the cellObjects map payloads and releases the NiNode scene field at +0x1C and Ni2DBuffer field at +0x20.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -686,6 +680,102 @@
   {
     "ea": "0x4BD374",
     "line": "jmp     loc_4BD28B",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B42E0",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B42E3",
+    "line": "add     ecx, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B42E6",
+    "line": "jmp     ??1?$NiTPointerMap@PAVTESBoundObject@@PAUDISTANT_3D_DATA@@@@UAE@XZ; NiTPointerMap<TESBoundObject *,DISTANT_3D_DATA *>::~NiTPointerMap<TESBoundObject *,DISTANT_3D_DATA *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B42EB",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B42EE",
+    "line": "add     ecx, 1Ch; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B42F1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B42F6",
+    "line": "mov     ecx, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B42F9",
+    "line": "add     ecx, 20h ; ' '; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B42FC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4301",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B4305",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B4308",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B430B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B430D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4312",
+    "line": "mov     eax, offset stru_ADFA08",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B4317",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

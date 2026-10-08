@@ -1,4 +1,4 @@
-0x9E08B0: fld     ds:flt_A3D65C
+0x9E08B0: fld     ds:kHeadBodyNormalMatchRadius
 0x9E08B6: push    ecx
 0x9E08B7: fstp    [esp+4+var_4]; float
 0x9E08BA: push    offset aFaidefaultidle; "fAIDefaultIdleMinTime"

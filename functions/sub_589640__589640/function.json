@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 6,
+  "chunks": [
+    [
+      "0x589640",
+      "0x589681"
+    ]
+  ],
+  "chunks_sha256": "877c3a0e7d6c9cd94584df09d0577d873ac842bcf20b4c5b6056c3c23fe464b5",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF PERF 2026-10-07 PASS3: Verified raw-pointer InsertBeforePosition: allocator virtual+4 obtains node; payload copied to+8 without AddRef, links set before supplied position, head/count adjusted. This differs from refcounted list helpers despite identical 12-byte link layout. Renamed without applying an owning-list type.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_589640",
+  "display_name": "NiTPointerList__InsertBeforePosition",
   "end_ea": "0x589681",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_589640",
+  "name": "NiTPointerList__InsertBeforePosition",
   "segment": ".text",
   "sha256": "877c3a0e7d6c9cd94584df09d0577d873ac842bcf20b4c5b6056c3c23fe464b5",
   "size": 65,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x589640",
+  "total_chunk_size": 65,
   "type": "_DWORD *__thiscall(_DWORD *this, int, _DWORD *)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 6

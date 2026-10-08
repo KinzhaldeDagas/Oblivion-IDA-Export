@@ -27,9 +27,9 @@
 0x76F94C: mov     eax, [esi+8]
 0x76F94F: push    eax
 0x76F950: mov     [esi+4], ebp
-0x76F953: call    FormHeapFree
+0x76F953: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76F958: push    esi
-0x76F959: call    FormHeapFree
+0x76F959: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x76F95E: mov     ecx, ds:0B42700h
 0x76F964: add     esp, 8
 0x76F967: movzx   edx, word ptr [ecx+0Ah]

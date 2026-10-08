@@ -1,4 +1,4 @@
-void *sub_60DD80()
+NiRTTI *sub_60DD80()
 {
-  return &unk_B3B808;
+  return &stru_B3B808; /*0x60dd85*/
 }

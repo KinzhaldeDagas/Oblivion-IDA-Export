@@ -1,7 +1,8 @@
+// Entry to Oblivion's staged detection formula. Inputs include detector/target Sneak, LOS, distance, Blindness, target light, Chameleon/Invisibility, boot weight, movement, combat/attack, running, underwater/sleep, and exterior state.
 int __cdecl Calc_DetectionLevel(
         int a1,
         int a2,
-        int a3,
+        float a3,
         int a4,
         int a5,
         int a6,
@@ -13,14 +14,13 @@ int __cdecl Calc_DetectionLevel(
         int a12,
         int a13,
         int a14,
-        char a15,
+        int a15,
         int a16,
         int a17,
         int a18,
-        int a19,
-        char a20)
+        int a19)
 {
-  return Calc_DetectionLevel_::CheckMaxRange(
+  return Calc_DetectionLevel_CheckMaxRange(
            a1,
            a2,
            a3,
@@ -39,6 +39,5 @@ int __cdecl Calc_DetectionLevel(
            a16,
            a17,
            a18,
-           a19,
-           a20);
+           a19);
 }

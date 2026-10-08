@@ -1,4 +1,4 @@
-0x6FF9C0: cmp     [esp+arg_0], 0
+0x6FF9C0: cmp     [esp+arg_0], 0; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x6FF9C5: push    ebx
 0x6FF9C6: mov     ebx, ecx
 0x6FF9C8: jnz     short loc_6FF9D0
@@ -8,7 +8,7 @@
 0x6FF9D0: push    ebp
 0x6FF9D1: push    esi
 0x6FF9D2: push    edi
-0x6FF9D3: push    offset stru_B3F600; lpCriticalSection
+0x6FF9D3: push    offset unk_B3F600; lpCriticalSection
 0x6FF9D8: call    dword ptr ds:0A2806Ch
 0x6FF9DE: call    dword ptr ds:0A2808Ch
 0x6FF9E4: add     dword ptr ds:0B3F67Ch, 1
@@ -27,7 +27,7 @@
 0x6FFA0F: mov     ecx, [ebx+10h]
 0x6FFA12: movsx   eax, si
 0x6FFA15: mov     ecx, [ecx+eax*4]
-0x6FFA18: call    sub_452A60
+0x6FFA18: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6FFA1D: mov     ecx, [esp+10h+arg_0]
 0x6FFA21: mov     dl, [ecx]
 0x6FFA23: cmp     dl, [eax]
@@ -58,7 +58,7 @@
 0x6FFA5F: sub     dword ptr ds:0B3F67Ch, 1
 0x6FFA66: jnz     short loc_6FFA72
 0x6FFA68: mov     dword ptr ds:0B3F678h, 0
-0x6FFA72: push    offset stru_B3F600; lpCriticalSection
+0x6FFA72: push    offset unk_B3F600; lpCriticalSection
 0x6FFA77: call    dword ptr ds:0A28074h
 0x6FFA7D: pop     edi
 0x6FFA7E: pop     esi
@@ -69,7 +69,7 @@
 0x6FFA86: sub     dword ptr ds:0B3F67Ch, 1
 0x6FFA8D: jnz     short loc_6FFA99
 0x6FFA8F: mov     dword ptr ds:0B3F678h, 0
-0x6FFA99: push    offset stru_B3F600; lpCriticalSection
+0x6FFA99: push    offset unk_B3F600; lpCriticalSection
 0x6FFA9E: call    dword ptr ds:0A28074h
 0x6FFAA4: mov     eax, [ebx+10h]
 0x6FFAA7: pop     edi

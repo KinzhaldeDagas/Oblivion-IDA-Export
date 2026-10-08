@@ -1,4 +1,4 @@
-0x57BB20: push    esi; int
+0x57BB20: push    esi; AchievementsNative evidence: magic-item popup wrapper. Args observed from InventoryMenu hover: data pointer, exposed popup X, source row Y, bottom margin, inventory entry, popup depth; opens/validates MagicPopupMenu then forwards to 0x5B4230.
 0x57BB21: push    edi; int
 0x57BB22: push    1; arg1
 0x57BB24: push    0; canCreate
@@ -42,10 +42,10 @@
 0x57BBA1: jz      short loc_57BBEA
 0x57BBA3: fldz
 0x57BBA5: push    ecx
-0x57BBA6: fstp    [esp+0Ch+a2]; a3
+0x57BBA6: fstp    [esp+0Ch+a2]; value
 0x57BBA9: mov     ecx, esi; this
-0x57BBAB: push    0FABh; a2
-0x57BBB0: call    Tile_SetFloat
+0x57BBAB: push    0FABh; propertyCode
+0x57BBB0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57BBB5: fld     [esp+8+arg_14]
 0x57BBB9: mov     eax, [esp+8+arg_10]
 0x57BBBD: push    ecx
@@ -59,7 +59,7 @@
 0x57BBD5: fld     [esp+1Ch+arg_4]
 0x57BBD9: fstp    [esp+1Ch+var_1C]; float
 0x57BBDC: push    edi; int
-0x57BBDD: call    sub_5B4230
+0x57BBDD: call    sub_5B4230; AchievementsNative evidence: MagicPopupMenu builder for magic/effect items. Sets root user0=source Y, user1=bottom margin, user3=depth; stores exposed popup X at +0x50 and hidden X at +0x54 (exposed X minus background width).
 0x57BBE2: add     esp, 18h
 0x57BBE5: pop     edi
 0x57BBE6: mov     al, 1

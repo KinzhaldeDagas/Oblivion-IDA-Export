@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x61656E",
-    "line": "mov     esi, [esp+2Ch+arg_4]",
+    "line": "mov     esi, [esp+2Ch+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x616580",
-    "line": "mov     ecx, [esp+2Ch+arg_8]",
+    "line": "mov     ecx, [esp+2Ch+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,25 +403,25 @@
   },
   {
     "ea": "0x616606",
-    "line": "mov     ecx, [esp+2Ch+arg_C]",
+    "line": "mov     ecx, [esp+2Ch+index]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x61660A",
-    "line": "push    ecx",
+    "line": "push    ecx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61660B",
-    "line": "push    2",
+    "line": "push    2; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x61660D",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x61661F",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x616626",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x61667B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x616693",
-    "line": "push    0; int",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x6166BB",
-    "line": "mov     eax, [esp+40h+arg_C]",
+    "line": "mov     eax, [esp+40h+index]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1105,37 +1105,37 @@
   },
   {
     "ea": "0x61676C",
-    "line": "mov     edx, [esp+30h+arg_8]",
+    "line": "mov     edx, [esp+30h+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x616770",
-    "line": "push    ebx",
+    "line": "push    ebx; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x616771",
-    "line": "push    edx",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x616772",
-    "line": "push    esi",
+    "line": "push    esi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x616773",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x616775",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x616780",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x616782",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,13 +1183,13 @@
   },
   {
     "ea": "0x61678B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61678D",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,25 +1315,25 @@
   },
   {
     "ea": "0x6167BE",
-    "line": "mov     ecx, ebx; int",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6167C0",
-    "line": "call    sub_6B7C30",
+    "line": "call    DialogueItem__RunResult; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6167C5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6167C7",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x6167CD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1408,5 +1408,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C2A40",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A43",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A48",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2A4C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A4F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2A52",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2A54",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A59",
+    "line": "mov     eax, offset stru_AEB7F4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2A5E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

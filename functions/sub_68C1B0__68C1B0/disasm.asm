@@ -14,10 +14,10 @@
 0x68C1CE: test    esi, esi
 0x68C1D0: jz      loc_68C265
 0x68C1D6: mov     ecx, ebx
-0x68C1D8: call    sub_6899C0
+0x68C1D8: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68C1DD: mov     ecx, esi
 0x68C1DF: mov     edi, eax
-0x68C1E1: call    sub_6899C0
+0x68C1E1: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68C1E6: mov     ecx, eax
 0x68C1E8: fld     dword ptr [ecx]
 0x68C1EA: fld     dword ptr [edi]

@@ -1,10 +1,10 @@
 0x6C42B0: sub     esp, 0Ch
 0x6C42B3: push    ebp
-0x6C42B4: mov     ebp, [esp+10h+arg_0]
+0x6C42B4: mov     ebp, [esp+10h+position]
 0x6C42B8: push    edi
 0x6C42B9: push    ebp
 0x6C42BA: mov     edi, ecx
-0x6C42BC: call    sub_715820
+0x6C42BC: call    NiTimeController_IsEqual; NiTimeController equality compares NiObject state, flags +0x08, frequency/phase/low/high key times +0x0C..+0x18, and only target nullness at +0x30. It excludes target identity, next-controller chain, and runtime time/update caches.
 0x6C42C1: test    al, al
 0x6C42C3: jnz     short loc_6C42CF
 0x6C42C5: pop     edi
@@ -19,20 +19,20 @@
 0x6C42DA: push    esi
 0x6C42DB: lea     esi, [edi+58h]
 0x6C42DE: mov     ecx, esi
-0x6C42E0: call    sub_6A9030
+0x6C42E0: call    NiTMapBase_GetFirstNode
 0x6C42E5: test    eax, eax
-0x6C42E7: mov     [esp+1Ch+arg_0], eax
+0x6C42E7: mov     [esp+1Ch+position], eax
 0x6C42EB: jz      short loc_6C4336
 0x6C42ED: lea     ebx, [ebp+58h]
-0x6C42F0: lea     ecx, [esp+1Ch+var_8]
-0x6C42F4: push    ecx
-0x6C42F5: lea     edx, [esp+20h+var_C]
-0x6C42F9: push    edx
-0x6C42FA: lea     eax, [esp+24h+arg_0]
-0x6C42FE: push    eax
-0x6C42FF: mov     ecx, esi
-0x6C4301: call    sub_452600
-0x6C4306: mov     edx, [esp+1Ch+var_C]
+0x6C42F0: lea     ecx, [esp+1Ch+valueOut]
+0x6C42F4: push    ecx; valueOut
+0x6C42F5: lea     edx, [esp+20h+keyOut]
+0x6C42F9: push    edx; keyOut
+0x6C42FA: lea     eax, [esp+24h+position]
+0x6C42FE: push    eax; position
+0x6C42FF: mov     ecx, esi; self
+0x6C4301: call    NiTMap_U32Pointer_GetNextEntry
+0x6C4306: mov     edx, [esp+1Ch+keyOut]
 0x6C430A: lea     ecx, [esp+1Ch+var_4]
 0x6C430E: push    ecx
 0x6C430F: push    edx
@@ -40,7 +40,7 @@
 0x6C4312: call    NiTMap_GetAt
 0x6C4317: test    al, al
 0x6C4319: jz      short loc_6C4360
-0x6C431B: mov     ecx, [esp+1Ch+var_8]
+0x6C431B: mov     ecx, [esp+1Ch+valueOut]
 0x6C431F: mov     eax, [ecx]
 0x6C4321: mov     edx, [esp+1Ch+var_4]
 0x6C4325: mov     eax, [eax+2Ch]
@@ -48,7 +48,7 @@
 0x6C4329: call    eax
 0x6C432B: test    al, al
 0x6C432D: jz      short loc_6C4360
-0x6C432F: cmp     [esp+1Ch+arg_0], 0
+0x6C432F: cmp     [esp+1Ch+position], 0
 0x6C4334: jnz     short loc_6C42F0
 0x6C4336: xor     esi, esi
 0x6C4338: cmp     [edi+46h], si

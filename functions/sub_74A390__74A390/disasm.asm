@@ -5,22 +5,22 @@
 0x74A3A1: push    ebp
 0x74A3A2: push    esi
 0x74A3A3: push    edi
-0x74A3A4: lea     ecx, [esp+1A0h+var_9C]
+0x74A3A4: lea     ecx, [esp+1A0h+local]
 0x74A3AB: push    ecx
 0x74A3AC: mov     ecx, [eax+10h]
 0x74A3AF: add     ecx, 64h ; 'd'
-0x74A3B2: call    sub_718A80
-0x74A3B7: lea     edx, [esp+1A0h+var_9C]
-0x74A3BE: push    edx
-0x74A3BF: lea     eax, [esp+1A4h+var_128]
-0x74A3C3: push    eax
-0x74A3C4: lea     ecx, [ebx+0Ch]
-0x74A3C7: call    sub_53D7A0
+0x74A3B2: call    sub_718A80;
+0x74A3B7: lea     edx, [esp+1A0h+local]
+0x74A3BE: push    edx; local
+0x74A3BF: lea     eax, [esp+1A4h+out]
+0x74A3C3: push    eax; out
+0x74A3C4: lea     ecx, [ebx+0Ch]; parent
+0x74A3C7: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x74A3CC: mov     edx, ds:0B3F9B0h
 0x74A3D2: mov     esi, eax
 0x74A3D4: mov     eax, ds:0B3F9A8h
 0x74A3D9: mov     ecx, 0Dh
-0x74A3DE: lea     edi, [esp+1A0h+var_D0]
+0x74A3DE: lea     edi, [esp+1A0h+parent]
 0x74A3E5: rep movsd
 0x74A3E7: mov     ecx, [ebx+44h]
 0x74A3EA: mov     ebx, [esp+1A0h+arg_10]
@@ -75,7 +75,6 @@
 0x74A4A2: mov     [esp+1A0h+var_190], ecx
 0x74A4A6: jmp     short loc_74A4B7
 0x74A4A8: jmp     short loc_74A4B0
-0x74A4AA: align 10h
 0x74A4B0: mov     esi, [esp+1A0h+arg_14]
 0x74A4B7: mov     ecx, [ebx+10h]
 0x74A4BA: test    ecx, ecx
@@ -95,27 +94,27 @@
 0x74A4E7: imul    eax, 4Ch ; 'L'
 0x74A4EA: add     eax, [esp+1A0h+var_144]
 0x74A4EE: add     ecx, 64h ; 'd'
-0x74A4F1: push    eax
+0x74A4F1: push    eax; local
 0x74A4F2: lea     eax, [esp+1A4h+var_68]
-0x74A4F9: push    eax
-0x74A4FA: push    ecx
+0x74A4F9: push    eax; out
+0x74A4FA: push    ecx; local
 0x74A4FB: lea     ecx, [esp+1ACh+var_34]
-0x74A502: push    ecx
-0x74A503: lea     ecx, [esp+1B0h+var_D0]
-0x74A50A: call    sub_53D7A0
-0x74A50F: mov     ecx, eax
-0x74A511: call    sub_53D7A0
+0x74A502: push    ecx; out
+0x74A503: lea     ecx, [esp+1B0h+parent]; parent
+0x74A50A: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x74A50F: mov     ecx, eax; parent
+0x74A511: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x74A516: mov     esi, eax
 0x74A518: mov     ecx, 0Dh
-0x74A51D: lea     edi, [esp+1A0h+var_128]
+0x74A51D: lea     edi, [esp+1A0h+out]
 0x74A521: rep movsd
-0x74A523: fld     [esp+1A0h+var_F8]
+0x74A523: fld     [esp+1A0h+out.scale]
 0x74A52A: push    ecx
 0x74A52B: lea     edx, [esp+1A4h+var_F4]
-0x74A532: lea     ecx, [esp+1A4h+var_128]
+0x74A532: lea     ecx, [esp+1A4h+out]
 0x74A536: fstp    [esp+1A4h+var_1A4]; float
 0x74A539: push    edx; int
-0x74A53A: call    sub_710190
+0x74A53A: call    NiMatrix3_ScaleTo
 0x74A53F: mov     eax, [esp+1A0h+var_190]
 0x74A543: mov     ecx, [ebx+8]
 0x74A546: fld     dword ptr [eax+ecx]
@@ -136,7 +135,7 @@
 0x74A57C: fmulp   st(2), st
 0x74A57E: fxch    st(2)
 0x74A580: faddp   st(1), st
-0x74A582: fadd    [esp+1A0h+var_104]
+0x74A582: fadd    [esp+1A0h+out.pos.x]
 0x74A589: fstp    [esp+1A0h+var_174]
 0x74A58D: fld     [esp+1A0h+var_E4]
 0x74A594: fmul    st, st(2)
@@ -146,7 +145,7 @@
 0x74A5A1: fld     [esp+1A0h+var_E0]
 0x74A5A8: fmul    st, st(2)
 0x74A5AA: faddp   st(1), st
-0x74A5AC: fadd    [esp+1A0h+var_100]
+0x74A5AC: fadd    [esp+1A0h+out.pos.y]
 0x74A5B3: fstp    [esp+1A0h+var_170]
 0x74A5B7: fld     [esp+1A0h+var_D8]
 0x74A5BE: fmulp   st(2), st
@@ -156,19 +155,19 @@
 0x74A5CB: faddp   st(2), st
 0x74A5CD: fmul    [esp+1A0h+var_D4]
 0x74A5D4: faddp   st(1), st
-0x74A5D6: fadd    [esp+1A0h+var_FC]
+0x74A5D6: fadd    [esp+1A0h+out.pos.z]
 0x74A5DD: fstp    [esp+1A0h+var_16C]
-0x74A5E1: fld     [esp+1A0h+var_124]
+0x74A5E1: fld     [esp+1A0h+out.rot.data+4]
 0x74A5E5: fld     [esp+1A0h+var_164]
 0x74A5E9: fld     st
 0x74A5EB: fmulp   st(2), st
-0x74A5ED: fld     [esp+1A0h+var_128]
+0x74A5ED: fld     [esp+1A0h+out.rot.data]
 0x74A5F1: fld     [esp+1A0h+var_168]
 0x74A5F5: fld     st
 0x74A5F7: fmulp   st(2), st
 0x74A5F9: fxch    st(3)
 0x74A5FB: faddp   st(1), st
-0x74A5FD: fld     [esp+1A0h+var_120]
+0x74A5FD: fld     [esp+1A0h+out.rot.data+8]
 0x74A604: fld     [esp+1A0h+var_160]
 0x74A608: add     eax, 4
 0x74A60B: fld     st
@@ -177,22 +176,22 @@
 0x74A612: fxch    st(2)
 0x74A614: faddp   st(1), st
 0x74A616: fstp    [esp+1A0h+var_150]
-0x74A61A: fld     [esp+1A0h+var_118]
+0x74A61A: fld     [esp+1A0h+out.rot.data+10h]
 0x74A621: fmul    st, st(2)
-0x74A623: fld     [esp+1A0h+var_11C]
+0x74A623: fld     [esp+1A0h+out.rot.data+0Ch]
 0x74A62A: fmul    st, st(4)
 0x74A62C: faddp   st(1), st
-0x74A62E: fld     [esp+1A0h+var_114]
+0x74A62E: fld     [esp+1A0h+out.rot.data+14h]
 0x74A635: fmul    st, st(2)
 0x74A637: faddp   st(1), st
 0x74A639: fstp    [esp+1A0h+var_14C]
-0x74A63D: fld     [esp+1A0h+var_10C]
+0x74A63D: fld     [esp+1A0h+out.rot.data+1Ch]
 0x74A644: fmulp   st(2), st
-0x74A646: fld     [esp+1A0h+var_110]
+0x74A646: fld     [esp+1A0h+out.rot.data+18h]
 0x74A64D: fmulp   st(3), st
 0x74A64F: fxch    st(1)
 0x74A651: faddp   st(2), st
-0x74A653: fmul    [esp+1A0h+var_108]
+0x74A653: fmul    [esp+1A0h+out.rot.data+20h]
 0x74A65A: faddp   st(1), st
 0x74A65C: fstp    [esp+1A0h+var_148]
 0x74A660: fld     [esp+1A0h+var_174]
@@ -238,7 +237,7 @@
 0x74A6F0: fstp    [esp+1A0h+var_184]
 0x74A6F4: jb      loc_74A4B0
 0x74A6FA: lea     ecx, [esp+1A0h+var_18C]
-0x74A6FE: call    sub_43F350
+0x74A6FE: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x74A703: fstp    st
 0x74A705: mov     eax, [esp+1A0h+arg_0]
 0x74A70C: mov     edx, dword ptr [esp+1A0h+var_180]

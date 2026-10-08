@@ -1,27 +1,27 @@
 0x7D5E16: push    0; jumptable 007D5B69 default case
 0x7D5E18: lea     ecx, [esp+4+arg_3C]; this
-0x7D5E1C: call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera::BSCubeMapCamera(void)
+0x7D5E1C: call    ??0BSCubeMapCamera@@QAE@XZ; BSCubeMapCamera constructor: initializes mode +0x124, six face references +0x128..+0x13C, render/scene fields, cube frustum, and image-space shader list +0x14C.
 0x7D5E21: mov     ecx, [esp+arg_1A0]
 0x7D5E28: mov     eax, [esp+arg_19C]
 0x7D5E2F: mov     edx, [esp+arg_1A4]
 0x7D5E36: mov     [esp+arg_3C.members.m_localTransform.pos.y], ecx
-0x7D5E3D: push    esi
-0x7D5E3E: lea     ecx, [esp+4+arg_3C]
+0x7D5E3D: push    esi; faceIndex
+0x7D5E3E: lea     ecx, [esp+4+arg_3C]; self
 0x7D5E42: mov     [esp+4+arg_194], 0
 0x7D5E4D: mov     [esp+4+arg_3C.members.m_localTransform.pos.x], eax
 0x7D5E54: mov     [esp+4+arg_3C.members.m_localTransform.pos.z], edx
-0x7D5E5B: call    sub_812EF0
+0x7D5E5B: call    BSCubeMapCamera_OrientFace; Orient the BSCubeMapCamera for one of six cube faces using the native axis vectors at 0x00B258D0..0x00B258F0.
 0x7D5E60: fldz
 0x7D5E62: push    1; a3
 0x7D5E64: push    ecx
 0x7D5E65: lea     ecx, [esp+8+arg_3C]; this
 0x7D5E69: fstp    [esp+8+a2]; a2
-0x7D5E6C: call    NiAVObject_UpdateNiAVObject
+0x7D5E6C: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x7D5E71: lea     eax, [esp+arg_3C]
 0x7D5E75: push    eax
 0x7D5E76: push    ebx
 0x7D5E77: mov     ecx, edi
-0x7D5E79: call    sub_7D34C0
+0x7D5E79: call    ShadowCameraVolumesOverlap; Test overlap between two camera/frustum volumes using corners, planes, and edge intersections.
 0x7D5E7E: lea     ecx, [esp+arg_3C]; this
 0x7D5E82: mov     bl, al
 0x7D5E84: mov     [esp+arg_194], 0FFFFFFFFh

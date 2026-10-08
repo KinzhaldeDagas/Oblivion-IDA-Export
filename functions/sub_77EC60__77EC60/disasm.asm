@@ -79,7 +79,6 @@
 0x77ED66: mov     eax, esi
 0x77ED68: lea     edx, [eax+1]
 0x77ED6B: jmp     short loc_77ED70
-0x77ED6D: align 10h
 0x77ED70: mov     cl, [eax]
 0x77ED72: add     eax, 1
 0x77ED75: test    cl, cl

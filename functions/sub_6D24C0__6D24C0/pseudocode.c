@@ -1,4 +1,4 @@
-char *sub_6D24C0()
+NiRTTI *sub_6D24C0()
 {
-  return dword_B3CF5C;
+  return &stru_B3CF5C; /*0x6d24c5*/
 }

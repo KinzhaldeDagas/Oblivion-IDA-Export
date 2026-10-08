@@ -161,29 +161,29 @@
 0x60370B: fstp    st
 0x60370D: mov     ecx, esi
 0x60370F: call    sub_601670
-0x603714: mov     ecx, esi
+0x603714: mov     ecx, esi; this
 0x603716: mov     ebx, eax
-0x603718: call    sub_5E0380
+0x603718: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60371D: test    eax, eax
 0x60371F: jz      short loc_60379D
-0x603721: mov     ecx, esi
-0x603723: call    sub_5E0380
+0x603721: mov     ecx, esi; this
+0x603723: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x603728: cmp     byte ptr [eax+20h], 6
 0x60372C: jz      short loc_60373B
-0x60372E: mov     ecx, esi
-0x603730: call    sub_5E0380
+0x60372E: mov     ecx, esi; this
+0x603730: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x603735: cmp     byte ptr [eax+20h], 9
 0x603739: jnz     short loc_60379D
-0x60373B: mov     ecx, esi
-0x60373D: call    sub_5E0380
+0x60373B: mov     ecx, esi; this
+0x60373D: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x603742: test    eax, eax
 0x603744: jz      short loc_60379D
-0x603746: mov     ecx, esi
-0x603748: call    sub_5E0380
+0x603746: mov     ecx, esi; this
+0x603748: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60374D: cmp     dword ptr [eax+28h], 0
 0x603751: jz      short loc_60379D
-0x603753: mov     ecx, esi
-0x603755: call    sub_5E0380
+0x603753: mov     ecx, esi; this
+0x603755: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60375A: mov     ecx, [eax+28h]
 0x60375D: call    sub_569E60
 0x603762: mov     edi, eax
@@ -254,7 +254,7 @@
 0x60382F: call    sub_4121A0
 0x603834: lea     ecx, [esp+5Ch+var_24]
 0x603838: push    ecx
-0x603839: call    sub_683CB0
+0x603839: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x60383E: fstp    [esp+60h+var_44]
 0x603842: fldz
 0x603844: add     esp, 4
@@ -299,7 +299,7 @@
 0x6038CA: jmp     short loc_6038D5
 0x6038CC: push    30h ; '0'
 0x6038CE: mov     ecx, esi
-0x6038D0: call    sub_5E05F0
+0x6038D0: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x6038D5: mov     ecx, esi
 0x6038D7: call    sub_5E12B0
 0x6038DC: mov     edi, eax
@@ -422,11 +422,11 @@
 0x603A43: jz      short loc_603A9B
 0x603A45: mov     eax, [esi]
 0x603A47: mov     edx, [eax+168h]
-0x603A4D: push    0
+0x603A4D: push    0; nodeIndex
 0x603A4F: mov     ecx, esi
 0x603A51: call    edx
-0x603A53: mov     ecx, eax
-0x603A55: call    sub_477EC0
+0x603A53: mov     ecx, eax; this
+0x603A55: call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.
 0x603A5A: push    eax
 0x603A5B: mov     eax, [esi]
 0x603A5D: mov     edx, [eax+154h]
@@ -440,13 +440,13 @@
 0x603A75: mov     bl, 1
 0x603A77: mov     eax, [esi]
 0x603A79: mov     edx, [eax+164h]
-0x603A7F: push    3
+0x603A7F: push    3; slot
 0x603A81: mov     ecx, esi
 0x603A83: call    edx
-0x603A85: mov     ecx, eax
-0x603A87: call    ActorAnimData_GetAnimGroupFromField8Value
+0x603A85: mov     ecx, eax; this
+0x603A87: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x603A8C: push    eax
-0x603A8D: call    sub_51AC80
+0x603A8D: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x603A92: add     esp, 4
 0x603A95: test    al, al
 0x603A97: jz      short loc_603A9B
@@ -465,7 +465,7 @@
 0x603AC3: call    edx
 0x603AC5: mov     ecx, ds:0B333C4h
 0x603ACB: mov     ebp, eax
-0x603ACD: call    Actor_IsSneaking
+0x603ACD: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x603AD2: test    al, al
 0x603AD4: jz      short loc_603B0C
 0x603AD6: mov     ecx, ds:0B333C4h
@@ -483,7 +483,7 @@
 0x603AFC: push    ecx; int
 0x603AFD: push    0; int
 0x603AFF: mov     ecx, esi; int
-0x603B01: call    Actor_GetDetectionLevel
+0x603B01: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x603B06: test    eax, eax
 0x603B08: jg      short loc_603B0C
 0x603B0A: mov     bl, 1
@@ -535,7 +535,7 @@
 0x603B8C: fldz
 0x603B8E: fstp    [esp+5Ch+var_34]
 0x603B92: lea     ecx, [esp+5Ch+var_3C]
-0x603B96: call    sub_43F350
+0x603B96: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x603B9B: fstp    st
 0x603B9D: mov     ecx, dword ptr [esp+5Ch+var_3C]
 0x603BA1: push    0
@@ -560,7 +560,7 @@
 0x603BE0: mov     ecx, edi
 0x603BE2: call    edx
 0x603BE4: mov     ecx, esi
-0x603BE6: call    sub_5E05B0
+0x603BE6: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x603BEB: test    al, al
 0x603BED: setz    al
 0x603BF0: mov     ecx, edi

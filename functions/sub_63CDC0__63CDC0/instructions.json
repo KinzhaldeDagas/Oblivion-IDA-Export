@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x63CDC0",
-    "line": "push    ecx",
+    "line": "push    ecx; HighProcess vtable+0x318, resolved from 0xA71814. If +0x16C and actor has 3D: removes shadow receivers, calls 0x4E1580, re-adds shadow state, calls TESNPC_RefreshFaceGenForActor3D for NPC actor, performs further actor/render updates, clears +0x16C. Missing NiNode leaves flag pending. Broader than head-only refresh. Decompiler register/x87 arguments remain unreliable; no ABI correction inferred yet. Does not prove a vanilla LoadGame bug.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x63CDFC",
-    "line": "push    eax",
+    "line": "push    eax; object",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x63CE07",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63CE09",
-    "line": "call    sub_7C5E70",
+    "line": "call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x63CEB3",
-    "line": "call    sub_528550",
+    "line": "call    TESNPC_RefreshFaceGenForActor3D",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x63CEF7",
-    "line": "call    ExtraDataList__GetRefractionProperty",
+    "line": "call    ExtraDataList_GetRefractionPropertyExtra; Returns ExtraRefractionProperty itself. Fallout only corroborates the class label; Oblivion type behavior is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,19 +835,19 @@
   },
   {
     "ea": "0x63CF62",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63CF64",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63CF66",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },

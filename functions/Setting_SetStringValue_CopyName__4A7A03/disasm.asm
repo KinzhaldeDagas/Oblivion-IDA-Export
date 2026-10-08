@@ -9,7 +9,7 @@
 0x4A7A17: cmp     byte ptr [eax], 53h ; 'S'
 0x4A7A1A: jnz     short loc_4A7A25
 0x4A7A1C: push    eax
-0x4A7A1D: call    FormHeapFree
+0x4A7A1D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A7A22: add     esp, 4
 0x4A7A25: mov     [edi+4], esi
 0x4A7A28: pop     esi

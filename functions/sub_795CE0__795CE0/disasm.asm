@@ -1,9 +1,9 @@
-0x795CE0: push    ebx
-0x795CE1: mov     ebx, [esp+4+arg_4]
+0x795CE0: push    ebx; OBLIVION AUTHORITY (2026-08-30): Copy-assigns a range of vector<unsigned short*> owners using the structurally shared 4-byte-element vector assignment.
+0x795CE1: mov     ebx, [esp+4+last]
 0x795CE5: push    ebp
-0x795CE6: mov     ebp, [esp+8+arg_8]
+0x795CE6: mov     ebp, [esp+8+destination]
 0x795CEA: push    esi
-0x795CEB: mov     esi, [esp+0Ch+arg_0]
+0x795CEB: mov     esi, [esp+0Ch+source]
 0x795CEF: push    edi
 0x795CF0: mov     edi, ebx
 0x795CF2: sub     edi, esi
@@ -13,9 +13,9 @@
 0x795CFC: cmp     esi, ebx
 0x795CFE: jz      short loc_795D12
 0x795D00: sub     ebp, esi
-0x795D02: push    esi
-0x795D03: lea     ecx, [esi+ebp]
-0x795D06: call    sub_79B2F0
+0x795D02: push    esi; source
+0x795D03: lea     ecx, [esi+ebp]; this
+0x795D06: call    OB_stVector4_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.
 0x795D0B: add     esi, 10h
 0x795D0E: cmp     esi, ebx
 0x795D10: jnz     short loc_795D02

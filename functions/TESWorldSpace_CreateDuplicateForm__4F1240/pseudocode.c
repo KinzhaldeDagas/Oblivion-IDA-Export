@@ -1,123 +1,129 @@
-int __thiscall TESWorldSpace::CreateDuplicateForm(TESWorldSpace *this, int a2, void *cloneMap)
+// Verified: the special TESFormVtbl +0x38 CreateDuplicateForm override clones worldspace cells and persistentCell but does not build +0x60. Full plugin/game loading later reconstructs +0x60 via TESDataHandler_LoadFiles; Candidate concern is only for queries made after duplication and before any full-load reconstruction. Whether that interval occurs in live callers is Unknown.
+TESForm *__thiscall TESWorldSpace::CreateDuplicateForm(TESWorldSpace *this, int duplicateMode, void *cloneMap)
 {
-  double v3; // st5
-  double v4; // st6
-  void *v5; // ebp
-  TESForm *v7; // eax
-  TESWorldSpace *v8; // edi
+  void *v3; // ebp
+  TESForm *v5; // eax
+  TESWorldSpace *v6; // edi
   NiTMap_TESCELL *cellMap; // edx
   UInt32 m_numBuckets; // ecx
-  UInt32 v11; // eax
+  UInt32 v9; // eax
   NiTMap_Entry_TESCELL **m_buckets; // edx
-  NiTMap_Entry_TESCELL **v13; // esi
-  int v14; // eax
-  NiTMap_TESCELL *v15; // ecx
-  void *v16; // eax
-  TESObjectCELL *v17; // eax
-  TESObjectCELL *v18; // esi
-  TESObjectCELL *unk034; // ecx
-  void *v20; // eax
-  TESObjectCELL *v21; // eax
-  TESObjectCELL *v22; // ecx
-  UInt32 v23; // ecx
-  void *v24; // eax
-  _DWORD *v25; // esi
-  UInt32 v26; // ecx
-  void (__thiscall *v27)(_DWORD *, int); // eax
-  void *v29; // [esp+10h] [ebp-4h] BYREF
+  NiTMap_Entry_TESCELL **v11; // esi
+  int v12; // eax
+  NiTMap_TESCELL *v13; // ecx
+  void *v14; // eax
+  TESObjectCELL *v15; // eax
+  TESObjectCELL *v16; // esi
+  TESObjectCELL *persistentCell; // ecx
+  void *v18; // eax
+  TESObjectCELL *v19; // eax
+  TESObjectCELL *v20; // ecx
+  UInt32 v21; // ecx
+  void *v22; // eax
+  _DWORD *v23; // esi
+  UInt32 v24; // ecx
+  void (__thiscall *v25)(_DWORD *, int); // eax
+  unsigned int keyOut; // [esp+10h] [ebp-4h] BYREF
 
-  v5 = cloneMap;
-  v7 = TESForm_Clone((TESForm *)this, a2, cloneMap);
-  v8 = (TESWorldSpace *)OblivionDynamicCast(
-                          v7,
+  v3 = cloneMap; /*0x4f1247*/
+  v5 = TESForm_Clone((TESForm *)this, duplicateMode, cloneMap); /*0x4f125f*/
+  v6 = (TESWorldSpace *)OblivionDynamicCast( /*0x4f126a*/
+                          v5,
                           0,
                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                           &TESWorldSpace `RTTI Type Descriptor',
                           0);
-  NiTMap_Clear(&v8->cellMap->vtbl);
-  cellMap = this->cellMap;
-  m_numBuckets = cellMap->m_numBuckets;
-  v11 = 0;
-  if ( m_numBuckets )
+  NiTMap_Clear(&v6->cellMap->vtbl); /*0x4f1272*/
+  cellMap = this->cellMap; /*0x4f1277*/
+  m_numBuckets = cellMap->m_numBuckets; /*0x4f127a*/
+  v9 = 0; /*0x4f127d*/
+  if ( m_numBuckets ) /*0x4f1281*/
   {
-    m_buckets = cellMap->m_buckets;
-    v13 = m_buckets;
-    while ( !*v13 )
+    m_buckets = cellMap->m_buckets; /*0x4f1283*/
+    v11 = m_buckets; /*0x4f1286*/
+    while ( !*v11 ) /*0x4f1293*/
     {
-      ++v11;
-      ++v13;
-      if ( v11 >= m_numBuckets )
-        goto LABEL_5;
+      ++v9; /*0x4f1299*/
+      ++v11; /*0x4f129c*/
+      if ( v9 >= m_numBuckets ) /*0x4f12a1*/
+        goto LABEL_5; /*0x4f12a1*/
     }
-    v14 = (int)m_buckets[v11];
+    v12 = (int)m_buckets[v9]; /*0x4f13c1*/
   }
   else
   {
 LABEL_5:
-    v14 = 0;
+    v12 = 0; /*0x4f12a3*/
   }
-  a2 = v14;
-  while ( a2 )
+  duplicateMode = v12; /*0x4f12a7*/
+  while ( duplicateMode ) /*0x4f12ab*/
   {
-    v15 = this->cellMap;
-    cloneMap = 0;
-    sub_452600(v15, (NiTMap_Entry_TESCELL **)&a2, &v29, (TESObjectCELL **)&cloneMap);
-    if ( cloneMap )
+    v13 = this->cellMap; /*0x4f12b5*/
+    cloneMap = 0; /*0x4f12c2*/
+    NiTMap_U32Pointer_GetNextEntry( /*0x4f12ca*/
+      (MEF_U32PointerMapLayout32 *)v13,
+      (MEF_U32PointerMapEntry32 **)&duplicateMode,
+      &keyOut,
+      &cloneMap);
+    if ( cloneMap ) /*0x4f12d5*/
     {
-      v16 = (void *)(*(int (__thiscall **)(void *, _DWORD, void *))(*(_DWORD *)cloneMap + 0x38))(cloneMap, 0, v5);
-      v17 = (TESObjectCELL *)OblivionDynamicCast(
-                               v16,
+      v14 = (void *)(*(int (__thiscall **)(void *, _DWORD, void *))(*(_DWORD *)cloneMap + 0x38))(cloneMap, 0, v3); /*0x4f12ed*/
+      v15 = (TESObjectCELL *)OblivionDynamicCast( /*0x4f12f0*/
+                               v14,
                                0,
                                (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                &TESObjectCELL `RTTI Type Descriptor',
                                0);
-      v18 = v17;
-      if ( v17 )
+      v16 = v15; /*0x4f12f5*/
+      if ( v15 ) /*0x4f12fc*/
       {
-        v17->vtbl->SetFromActiveFile((TESForm *)v17, 1);
-        sub_4EFEF0(v8, v18);
+        v15->vtbl->SetFromActiveFile((TESForm *)v15, 1); /*0x4f130a*/
+        TESWorldSpace_RegisterExteriorCell(v6, v16); /*0x4f130f*/
       }
     }
   }
-  unk034 = this->unk034;
-  if ( unk034 )
+  persistentCell = this->persistentCell; /*0x4f131b*/
+  if ( persistentCell ) /*0x4f1320*/
   {
-    v20 = (void *)((int (__thiscall *)(TESObjectCELL *, _DWORD, void *))unk034->vtbl->Unk_0E)(unk034, 0, v5);
-    v21 = (TESObjectCELL *)OblivionDynamicCast(
-                             v20,
+    v18 = (void *)((int (__thiscall *)(TESObjectCELL *, _DWORD, void *))persistentCell->vtbl->Unk_0E)( /*0x4f1338*/
+                    persistentCell,
+                    0,
+                    v3);
+    v19 = (TESObjectCELL *)OblivionDynamicCast( /*0x4f133b*/
+                             v18,
                              0,
                              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                              &TESObjectCELL `RTTI Type Descriptor',
                              0);
-    if ( v21 )
+    if ( v19 ) /*0x4f1345*/
     {
-      v8->unk034 = v21;
-      v21->vtbl->SetFromActiveFile((TESForm *)v21, 1);
+      v6->persistentCell = v19; /*0x4f1347*/
+      v19->vtbl->SetFromActiveFile((TESForm *)v19, 1); /*0x4f1356*/
     }
   }
-  v22 = v8->unk034;
-  if ( v22 )
-    sub_4D3A00((int)v22, v3, v4, v8);
-  v23 = this->unk04C[2];
-  if ( v23 )
+  v20 = v6->persistentCell; /*0x4f1358*/
+  if ( v20 ) /*0x4f135d*/
+    TESWorldSpace_DistributePersistentCellReferences(v20, v6);// Verified clone-path call: after cloning the WorldSpace persistentCell, CreateDuplicateForm calls TESWorldSpace_DistributePersistentCellReferences to attach its references to cloned cells. No SubSpace index rebuild occurs in this call path. /*0x4f1360*/
+  v21 = this->unknown04C[2];                    // Verified WorldSpace duplication clones the TESRoad at +0x54, releases any destination road, assigns the clone, and resets its owning WorldSpace backpointer at TESRoad+0x2C. The serialized ROAD loader similarly attaches through TESWorldSpace_SetRoad and writes this owner pointer. /*0x4f1365*/
+  if ( v21 ) /*0x4f136a*/
   {
-    v24 = (void *)(*(int (__thiscall **)(UInt32, _DWORD, void *))(*(_DWORD *)v23 + 0x38))(v23, 0, v5);
-    v25 = OblivionDynamicCast(
-            v24,
+    v22 = (void *)(*(int (__thiscall **)(UInt32, _DWORD, void *))(*(_DWORD *)v21 + 0x38))(v21, 0, v3); /*0x4f1382*/
+    v23 = OblivionDynamicCast( /*0x4f138a*/
+            v22,
             0,
             (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
             &TESRoad `RTTI Type Descriptor',
             0);
-    if ( v25 )
+    if ( v23 ) /*0x4f1391*/
     {
-      v26 = v8->unk04C[2];
-      if ( v26 )
-        (*(void (__thiscall **)(UInt32, int))(*(_DWORD *)v26 + 0x10))(v26, 1);
-      v8->unk04C[2] = (UInt32)v25;
-      v27 = *(void (__thiscall **)(_DWORD *, int))(*v25 + 0x90);
-      v25[0xB] = v8;
-      v27(v25, 1);
+      v24 = v6->unknown04C[2]; /*0x4f1393*/
+      if ( v24 ) /*0x4f1398*/
+        (*(void (__thiscall **)(UInt32, int))(*(_DWORD *)v24 + 0x10))(v24, 1); /*0x4f13a1*/
+      v6->unknown04C[2] = (UInt32)v23; /*0x4f13a3*/
+      v25 = *(void (__thiscall **)(_DWORD *, int))(*v23 + 0x90); /*0x4f13a8*/
+      v23[0xB] = v6; /*0x4f13b2*/
+      v25(v23, 1); /*0x4f13b5*/
     }
   }
-  return (int)v8;
+  return (TESForm *)v6; /*0x4f13b9*/
 }

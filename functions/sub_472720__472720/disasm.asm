@@ -1,4 +1,4 @@
-0x472720: mov     eax, [esp+arg_8]
+0x472720: mov     eax, [esp+arg_8]; Searches the active BSAnimGroupSequence at ActorAnimData +0xA0 + 4*slot. Walks its NiTextKeyExtraData [time,string] entries and returns the zero-based index of the first case-insensitive string-prefix match; optionally writes that key's time. Returns 0xFFFFFFFF for a missing sequence/prefix, empty prefix, or no match. Observed with prefix "a:l" in combat/player attack selection.
 0x472724: test    eax, eax
 0x472726: jz      short loc_47272C
 0x472728: fldz

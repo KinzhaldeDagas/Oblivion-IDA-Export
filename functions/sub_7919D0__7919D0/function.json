@@ -1,19 +1,36 @@
 {
-  "callees_count": 50,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7919D0",
+  "chunks": [
+    [
+      "0x7919D0",
+      "0x791E77"
+    ],
+    [
+      "0x9CBC80",
+      "0x9CBCA6"
+    ]
+  ],
+  "chunks_sha256": "a0537aa893624e77d411c823c3b5c6ac3ad644101770977065a56db737170fd9",
+  "comment_regular": "\n[Palmetto v136 2026-10-06] v135 runtime reports repeated nonfinite generated orientation, preparedPoses0, and all Palmetto attachments reconstructedPoses=meshCount. Old plugin checked9 floats N/T/B although only N is consumed. Native791DCA..791DE4 computes cross(N,N)=0, then791DE8 calls78ED70, whose1/sqrt(dot) has no zero guard; unused binormal can be NaN. v136 reads/validates only normal+1C..24 and rebuilds T/B. It retains finite/nonzero-normal rejection and validates the resulting frame. NaN-unused-binormal regression and independent review pass; live appearance UNVERIFIED.\n[RT4.1 parity v146 2026-10-07] Native dimming791C03..791C4F uses full-chain complement then cubic, unlike SourceCode/Branch.cpp1042-1061 percentage product limited by dimming depth. v146 wraps only MakeLeaf caller792598 and constructor caller791CBE->7A7D10, computes retained28004 direction/dimming before native generation, preserves random draws, rewrites generated normal+1C with reference color-variance blend and epsilon normalization after creation. No global leaf-info mutation. Original ctor scale is signed16 then low byte+18. Guarded19-site transaction; 514 reference/component checks passed, in-game UNVERIFIED, undeployed.\n\nOBLIVION AUTHORITY 2026-08-27: CBranch::MakeLeaf exact compact signature and dimming path. If leafInfo.dimmingEnabled: A=Accumulate(parentBranch); q=A+(1-A)*percentAlongParent; q3=q*q*q; scale=q3+(1-q3)*(1-leafInfo.dimmingScalar)=1-s+s*q3. Else scale=1. colorScaleByte=trunc(scale*255). Selected texture RGB plus one shared random variance offset is later SetColor(...,true), so green is clamped/quantized after colorScaleByte multiplication. Oblivion differs materially from RT4.1 source's limited-depth multiplicative/linear formula.",
+  "comment_repeatable": "OBLIVION AUTHORITY 2026-08-27: CBranch::MakeLeaf exact compact signature and dimming path. If leafInfo.dimmingEnabled: A=Accumulate(parentBranch); q=A+(1-A)*percentAlongParent; q3=q*q*q; scale=q3+(1-q3)*(1-leafInfo.dimmingScalar)=1-s+s*q3. Else scale=1. colorScaleByte=trunc(scale*255). Selected texture RGB plus one shared random variance offset is later SetColor(...,true), so green is clamped/quantized after colorScaleByte multiplication. Oblivion differs materially from RT4.1 source's limited-depth multiplicative/linear formula.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 33,
+  "display_name": "OB_CBranch_MakeLeaf_010201A0",
   "end_ea": "0x791E77",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7919D0",
+  "name": "OB_CBranch_MakeLeaf_010201A0",
   "segment": ".text",
   "sha256": "85750730b99da250cfbba0e9b08da373413620d53a9cf48bd42e052c5cc44958",
   "size": 1191,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7919D0",
-  "type": "char __stdcall(float *, float, int, float *, float *, float, int, int)",
-  "xrefs_from_count": 419,
+  "total_chunk_size": 1229,
+  "type": "void __thiscall(OB_CBranch_010201A0 *this, const OB_stVec3_010201A0 *position, float percentAlongParent, const OB_CBranch_010201A0 *parentBranch, const OB_stVec3_010201A0 *normal, const OB_stVec3_010201A0 *parentDirection, float primaryWindWeight, int primaryWindGroup, OB_stVectorBillboardLeafPtr_010201A0 *leaves)",
+  "xrefs_from_count": 458,
   "xrefs_to_count": 1
 }

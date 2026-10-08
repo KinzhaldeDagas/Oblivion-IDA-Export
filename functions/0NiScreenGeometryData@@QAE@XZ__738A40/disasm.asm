@@ -11,7 +11,7 @@
 0x738A5C: mov     large fs:0, eax
 0x738A62: mov     esi, ecx
 0x738A64: mov     [esp+18h+var_10], esi
-0x738A68: call    sub_71FBB0
+0x738A68: call    NiTriShapeData_Construct; Default-construct NiTriShapeData with empty triangle and shared-normal storage.
 0x738A6D: xor     ecx, ecx
 0x738A6F: mov     [esi+58h], cl
 0x738A72: mov     [esi+59h], cl
@@ -40,3 +40,12 @@
 0x738AC3: pop     esi
 0x738AC4: add     esp, 10h
 0x738AC7: retn
+0x9CAB30: mov     ecx, [ebp-10h]; self
+0x9CAB33: jmp     NiTriShapeData_Destruct; Destroy NiTriShapeData triangle indices, linked shared-normal index-pool blocks, and the per-entry shared-normal array.
+0x9CAB38: mov     edx, [esp+arg_4]
+0x9CAB3C: lea     eax, [edx-8]
+0x9CAB3F: mov     ecx, [edx-0Ch]
+0x9CAB42: xor     ecx, eax
+0x9CAB44: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAB49: mov     eax, offset stru_AF317C
+0x9CAB4E: jmp     ___CxxFrameHandler3

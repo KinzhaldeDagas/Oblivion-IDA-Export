@@ -1,1 +1,1 @@
-_DBG_STATE
+typedef DBG_STATE _DBG_STATE;

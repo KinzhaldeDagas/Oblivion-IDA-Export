@@ -1,10 +1,10 @@
-0x6A10B0: fld     [esp+arg_0]
+0x6A10B0: fld     [esp+deltaSeconds]; Verified MagicShaderHitEffect_Update calls base lifetime/target checks, updates its model/shader components, uses bFinished to finish their fade/animation, and returns false when the temp effect is done.
 0x6A10B4: sub     esp, 8
 0x6A10B7: push    esi
 0x6A10B8: push    ecx
-0x6A10B9: fstp    [esp+10h+var_10]; float
+0x6A10B9: fstp    [esp+10h+var_10]; deltaSeconds
 0x6A10BC: mov     esi, ecx
-0x6A10BE: call    sub_69D9A0
+0x6A10BE: call    MagicHitEffect_Update; Verified MagicHitEffect_Update accumulates elapsedSeconds at +0x20, rejects missing/unloaded/flagged targetReference at +0x1C, and sets bFinished (+0x24) when durationSeconds (+0x08) is exceeded. Model and shader overrides use bFinished to end their visuals; the field's broad role is Probable 'finished/expired' state.
 0x6A10C3: test    al, al
 0x6A10C5: jz      loc_6A12C4
 0x6A10CB: mov     ecx, [esi+1Ch]
@@ -17,12 +17,12 @@
 0x6A10E2: jz      loc_6A12C4
 0x6A10E8: fld     dword ptr [esi+38h]
 0x6A10EB: mov     eax, [esi]
-0x6A10ED: fadd    [esp+0Ch+arg_0]
+0x6A10ED: fadd    [esp+0Ch+deltaSeconds]
 0x6A10F1: mov     edx, [eax+70h]
 0x6A10F4: push    ebx
 0x6A10F5: mov     bl, [esi+24h]
 0x6A10F8: mov     ecx, esi
-0x6A10FA: fstp    dword ptr [esi+38h]
+0x6A10FA: fstp    dword ptr [esi+38h]; Verified (Oblivion): field +0x38 accumulates deltaSeconds during shader hit-effect update; typed as elapsedVisualSeconds_38. This is distinct from base MagicHitEffect::elapsedSeconds at +0x20.
 0x6A10FD: call    edx
 0x6A10FF: fld1
 0x6A1101: mov     ecx, [esi+1Ch]
@@ -42,7 +42,7 @@
 0x6A1130: call    edx
 0x6A1132: mov     edi, eax
 0x6A1134: push    edi
-0x6A1135: push    offset dword_B35288
+0x6A1135: push    0B35288h
 0x6A113A: call    NiRTTI__IsObjectOfRTTIType
 0x6A113F: add     esp, 8
 0x6A1142: test    al, al
@@ -85,31 +85,31 @@
 0x6A11A9: jz      short loc_6A1217
 0x6A11AB: fld     dword ptr [eax+80h]
 0x6A11B1: movzx   eax, byte ptr [esi+24h]
-0x6A11B5: mov     ecx, [esi+34h]
-0x6A11B8: fstp    [esp+10h+var_4]
+0x6A11B5: mov     ecx, [esi+34h]; this
+0x6A11B8: fstp    [esp+10h+var_4]; Verified (Oblivion): the current particle level at shaderProperty_3C+0x80, deltaSeconds, elapsedVisualSeconds_38, and bFinished are passed to TESEffectShader_AdvanceParticleLevel; its returned level is written back to +0x80. The separately computed target-size ratio is stored at +0x124.
 0x6A11BC: fld     dword ptr [esi+38h]
-0x6A11BF: push    eax; float
+0x6A11BF: push    eax; bFinished
 0x6A11C0: sub     esp, 0Ch
-0x6A11C3: fstp    [esp+20h+var_18]; float
-0x6A11C7: fld     [esp+20h+arg_0]
-0x6A11CB: fstp    [esp+20h+var_1C]; float
+0x6A11C3: fstp    [esp+20h+elapsedSeconds]; elapsedSeconds
+0x6A11C7: fld     [esp+20h+deltaSeconds]
+0x6A11CB: fstp    [esp+20h+visualElapsedSeconds]; deltaSeconds
 0x6A11CF: fld     [esp+20h+var_4]
-0x6A11D3: fstp    [esp+20h+var_20]; float
-0x6A11D6: call    sub_4ADBA0
+0x6A11D3: fstp    [esp+20h+currentValue]; currentParticleLevel
+0x6A11D6: call    TESEffectShader_AdvanceParticleLevel; Verified (Oblivion): ParticleShaderProperty_AdvanceEffectAnimation updates shaderProperty_3C using its current alpha/timer state, deltaSeconds, elapsedVisualSeconds_38 and bFinished.
 0x6A11DB: mov     ecx, [esi+3Ch]
 0x6A11DE: fstp    [esp+10h+var_4]
 0x6A11E2: fld     [esp+10h+var_4]
-0x6A11E6: push    1; char
+0x6A11E6: push    1; allowEmission
 0x6A11E8: fstp    dword ptr [ecx+80h]
 0x6A11EE: mov     edx, [esi+3Ch]
 0x6A11F1: fld     [esp+14h+var_8]
-0x6A11F5: push    0; char
-0x6A11F7: fstp    dword ptr [edx+124h]
+0x6A11F5: push    0; applyWorldOffset
+0x6A11F7: fstp    dword ptr [edx+124h]; Verified (Oblivion): stores the computed, clamped target-to-actor scale ratio at ParticleShaderProperty::targetScaleRatio_124. The field name is Probable; its value is directly derived from the target's visual height and used to scale the shader effect.
 0x6A11FD: push    ecx
 0x6A11FE: fld     dword ptr [esi+38h]
-0x6A1201: mov     ecx, [esi+3Ch]
-0x6A1204: fstp    [esp+1Ch+var_1C]; float
-0x6A1207: call    sub_7E51F0
+0x6A1201: mov     ecx, [esi+3Ch]; this
+0x6A1204: fstp    [esp+1Ch+visualElapsedSeconds]; elapsedSeconds
+0x6A1207: call    ParticleShaderProperty_UpdateParticles; Verified (Oblivion): updates the ParticleShaderProperty particleInstanceBuffer_6C using elapsed time, currentParticleLevel_80 and fParticleLifetime_84; it retires expired slots, increments/decrements activeParticleCount_7C, and dispatches new particles by emitterType_70. Each Oblivion record is 0x20 bytes. Fallout's UpdateParticles uses 0x30-byte ParticleData records and different field offsets.
 0x6A120C: mov     eax, [esi+3Ch]
 0x6A120F: cmp     dword ptr [eax+7Ch], 0
 0x6A1213: jle     short loc_6A1217
@@ -119,16 +119,16 @@
 0x6A121C: jz      short loc_6A127F
 0x6A121E: movzx   ecx, byte ptr [esi+24h]
 0x6A1222: fld     dword ptr [esi+20h]
-0x6A1225: push    ecx; float
-0x6A1226: mov     ecx, [esi+34h]
+0x6A1225: push    ecx; bFinished
+0x6A1226: mov     ecx, [esi+34h]; this
 0x6A1229: sub     esp, 0Ch
-0x6A122C: fstp    [esp+20h+var_18]; float
+0x6A122C: fstp    [esp+20h+elapsedSeconds]; activeElapsedSeconds
 0x6A1230: fld     dword ptr [esi+38h]
-0x6A1233: fstp    [esp+20h+var_1C]; float
-0x6A1237: fld     [esp+20h+arg_0]
-0x6A123B: fstp    [esp+20h+var_20]; float
-0x6A123E: push    eax; int
-0x6A123F: call    sub_4ADC90
+0x6A1233: fstp    [esp+20h+visualElapsedSeconds]; visualElapsedSeconds
+0x6A1237: fld     [esp+20h+deltaSeconds]
+0x6A123B: fstp    [esp+20h+currentValue]; deltaSeconds
+0x6A123E: push    eax; textureEffectData
+0x6A123F: call    TESEffectShader_AnimateTextureEffect; Verified (Oblivion): MagicShaderHitEffect_Update calls TESEffectShader_AnimateTextureEffect with its refcounted textureEffectData_48, deltaSeconds, elapsedVisualSeconds_38, base elapsedSeconds, and bFinished; the updater's writes keep the attached fill/edge texture effect and UV motion synchronized with the shader's animation timeline.
 0x6A1244: mov     eax, [esi+48h]
 0x6A1247: fld     dword ptr [eax+18h]
 0x6A124A: fld     [esp+10h+var_8]

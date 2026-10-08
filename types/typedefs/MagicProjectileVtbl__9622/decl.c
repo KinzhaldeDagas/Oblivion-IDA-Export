@@ -1,1 +1,4 @@
-MagicProjectileVtbl
+struct MagicProjectileVtbl
+{
+MobileObjectVtbl super;
+};

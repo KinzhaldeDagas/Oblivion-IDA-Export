@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8052C0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+arg_4]; MoonSugarEffect decode: GeometryDecalShader transform slot (+0x34). If skinned, prepares bone matrices/vertex blending; then calls sub_765480 with passed NiTransform. Non-skinned wrapper affects decal geometry through normal world matrix path.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x8052ED",
-    "line": "call    NiDX9Renderer__CalculateBoneMatrixes",
+    "line": "call    NiDX9Renderer__CalculateBoneMatrixes; MoonSugar build 39: CalculateBoneMatrixes owns NiSkinInstance cached bone matrix rebuild and camera-relative skin transforms. Do not mutate for Moon Sugar wobble; hook after native setup instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x805307",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },

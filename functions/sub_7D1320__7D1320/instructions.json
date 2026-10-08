@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D1320",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7D1329",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7D1336",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7D1343",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x7D134E",
-    "line": "push    0Dh; a1",
+    "line": "push    0Dh; x",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D1350",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x7D137B",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D137C",
-    "line": "lea     ecx, [esi+2Ch]",
+    "line": "lea     ecx, [esi+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D137F",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x7D138A",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D138B",
-    "line": "lea     ecx, [esi+30h]",
+    "line": "lea     ecx, [esi+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D138E",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,19 +235,19 @@
   },
   {
     "ea": "0x7D139D",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D139E",
-    "line": "lea     ecx, [edi+2Ch]",
+    "line": "lea     ecx, [edi+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D13A1",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x7D13AC",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D13AD",
-    "line": "lea     ecx, [edi+30h]",
+    "line": "lea     ecx, [edi+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D13B0",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x7D13BF",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D13C0",
-    "line": "lea     ecx, [ebx+2Ch]",
+    "line": "lea     ecx, [ebx+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D13C3",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x7D13CE",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D13CF",
-    "line": "lea     ecx, [ebx+30h]",
+    "line": "lea     ecx, [ebx+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D13D2",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,19 +355,19 @@
   },
   {
     "ea": "0x7D13E5",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D13E6",
-    "line": "lea     ecx, [ebp+2Ch]",
+    "line": "lea     ecx, [ebp+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D13E9",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x7D13F4",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D13F5",
-    "line": "lea     ecx, [ebp+30h]",
+    "line": "lea     ecx, [ebp+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D13F8",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,19 +421,19 @@
   },
   {
     "ea": "0x7D140C",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D140D",
-    "line": "lea     ecx, [esi+2Ch]",
+    "line": "lea     ecx, [esi+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D1410",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x7D141B",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D141C",
-    "line": "lea     ecx, [esi+30h]",
+    "line": "lea     ecx, [esi+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D141F",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,19 +481,19 @@
   },
   {
     "ea": "0x7D142E",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D142F",
-    "line": "lea     ecx, [edi+2Ch]",
+    "line": "lea     ecx, [edi+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D1432",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,19 +505,19 @@
   },
   {
     "ea": "0x7D143D",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D143E",
-    "line": "lea     ecx, [edi+30h]",
+    "line": "lea     ecx, [edi+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D1441",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x7D1450",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1451",
-    "line": "lea     ecx, [ebx+2Ch]",
+    "line": "lea     ecx, [ebx+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D1454",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,19 +565,19 @@
   },
   {
     "ea": "0x7D145F",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1460",
-    "line": "lea     ecx, [ebx+30h]",
+    "line": "lea     ecx, [ebx+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D1463",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,19 +601,19 @@
   },
   {
     "ea": "0x7D1472",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1473",
-    "line": "lea     ecx, [ebp+2Ch]",
+    "line": "lea     ecx, [ebp+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D1476",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x7D1481",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D1482",
-    "line": "lea     ecx, [ebp+30h]",
+    "line": "lea     ecx, [ebp+30h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7D1485",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7D14D0",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x7D14E1",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Fog decode: standard shader selector disables fixed-function fog for this shader pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x7D1511",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x7D1552",
-    "line": "push    0",
+    "line": "push    0; restore",
     "mnemonic": "push",
     "size": 2
   },
@@ -1003,25 +1003,25 @@
   },
   {
     "ea": "0x7D1556",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D1558",
-    "line": "mov     ecx, ds:0B455A0h[ebx*4]",
+    "line": "mov     ecx, ds:0B455A0h[ebx*4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7D155F",
-    "line": "push    0A8h ; '¨'",
+    "line": "push    0A8h ; '¨'; state",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7D1564",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,25 +1045,25 @@
   },
   {
     "ea": "0x7D1571",
-    "line": "mov     ecx, ds:0B455ACh",
+    "line": "mov     ecx, ds:0B455ACh; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7D1577",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D1579",
-    "line": "push    0A8h ; '¨'",
+    "line": "push    0A8h ; '¨'; state",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7D157E",
-    "line": "call    sub_76C730",
+    "line": "call    NiD3DPass_SetRenderState; Set or replace one D3D render state on a NiD3DPass. Lazily acquires the pass RenderStateGroup and delegates to NiD3DRenderStateGroup_SetRenderState.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x7D1596",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x7D15AA",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x7D15CA",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x7D15DB",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x7D15ED",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x7D15FE",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x7D1610",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x7D1621",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x7D1633",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x7D1644",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x7D1656",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x7D166C",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,13 +1483,13 @@
   },
   {
     "ea": "0x7D1676",
-    "line": "push    0",
+    "line": "push    0; z",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D1678",
-    "line": "push    34h ; '4'",
+    "line": "push    34h ; '4'; y",
     "mnemonic": "push",
     "size": 2
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x7D167D",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x7D16A8",
-    "line": "call    sub_75FB10",
+    "line": "call    sub_75FB10; MoonSugarEffect decode: NiD3DTextureStage texture getter with AddRef. Used by pass cleanup before comparing against global default texture dword_B43110.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,19 +1741,19 @@
   },
   {
     "ea": "0x7D16EE",
-    "line": "push    3",
+    "line": "push    3; preset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7D16F0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7D16F2",
-    "line": "call    sub_7715E0",
+    "line": "call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x7D172B",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -1957,7 +1957,7 @@
   },
   {
     "ea": "0x7D177A",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x7D17A4",
-    "line": "push    22h ; '\"'",
+    "line": "push    22h ; '\"'; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x7D17A9",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x7D17BA",
-    "line": "mov     ecx, ds:0B2C728h",
+    "line": "mov     ecx, ds:0B2C728h; When shader/pass id is 0x17B, copies globals B2C728..B2C734 into shader global table slot 0x21. This is the SetSTBBColorConstants path for flat STBB rendering, not 360 image selection.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2107,7 +2107,7 @@
   },
   {
     "ea": "0x7D17DF",
-    "line": "push    21h ; '!'",
+    "line": "push    21h ; '!'; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x7D17E4",
-    "line": "call    sub_7ECAE0",
+    "line": "call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "call",
     "size": 5
   },

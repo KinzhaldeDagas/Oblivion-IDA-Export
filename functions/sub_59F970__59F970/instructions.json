@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59F970",
-    "line": "push    esi",
+    "line": "push    esi; External dialog-menu refresh callback: if menu 0x3F1 and its MenuTopicManager are live, processes the current info, rebuilds the topic list, then refreshes topic/service tile availability. It is not the per-response speech-completion callback.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x59F980",
-    "line": "call    sub_6B8660",
+    "line": "call    MenuTopicManager__GetSingleton",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,43 +91,43 @@
   },
   {
     "ea": "0x59F99A",
-    "line": "push    0",
+    "line": "push    0; clearAll",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59F99C",
-    "line": "push    1",
+    "line": "push    1; processCurrentInfo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59F99E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F9A0",
-    "line": "call    sub_59EA10",
+    "line": "call    DialogMenu__AdvanceTopicList; DialogMenu wrapper around LoadNextTopicList. Every native call site passes clearAll=false; processCurrentInfo is false only for the path that refreshes choices without committing the current INFO.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59F9A5",
-    "line": "push    1",
+    "line": "push    1; enableActions",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59F9A7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59F9A9",
-    "line": "call    sub_59E2B0",
+    "line": "call    DialogMenu__RefreshActionAvailability; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.",
     "mnemonic": "call",
     "size": 5
   },

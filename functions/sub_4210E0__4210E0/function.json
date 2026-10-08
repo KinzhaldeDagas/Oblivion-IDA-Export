@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4210E0",
+  "chunks": [
+    [
+      "0x4210E0",
+      "0x4211B9"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "8c524c1cc7fd4f2b58dfdc27da074257cc32405ef040cc80e7fda29eab6a7c63",
+  "comment_regular": "Gets/creates Oblivion ExtraSavedMovementData and stores the saved-attached-animation pointer; replacement is diagnosed at runtime.",
+  "comment_repeatable": "Gets/creates Oblivion ExtraSavedMovementData and stores the saved-attached-animation pointer; replacement is diagnosed at runtime.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "ExtraDataList_SetSavedAttachedAnimation",
   "end_ea": "0x4211B9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4210E0",
+  "name": "ExtraDataList_SetSavedAttachedAnimation",
   "segment": ".text",
   "sha256": "845aca21a439a0295d0a32f580e8efcfa760a7ec9cbd898c05f03363c599e411",
   "size": 217,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4210E0",
+  "total_chunk_size": 255,
   "type": "TESSaveLoad *__thiscall(ExtraDataList *this, BSExtraData *)",
-  "xrefs_from_count": 81,
+  "xrefs_from_count": 95,
   "xrefs_to_count": 3
 }

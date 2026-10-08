@@ -1,10 +1,10 @@
-0x547370: fld     [esp+arg_8]
-0x547374: call    Double_To_SInt32
+0x547370: fld     [esp+arg_8]; Authoritative Oblivion armor-rating formula (luck-modified skill, base/max scale, floor/minimum, condition). MW Medium Armor v20 now substitutes only the sidecar skill and calls a relocated native gateway by default; its old Morrowind base*skill/baseSkill formula is legacy opt-in only.
+0x547374: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x547379: fld     [esp+arg_4]
-0x54737D: push    eax
-0x54737E: call    Double_To_SInt32
-0x547383: push    eax
-0x547384: call    Calc_LuckModifiedSkill
+0x54737D: push    eax; luckValue
+0x54737E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x547383: push    eax; skillValue
+0x547384: call    Calc_LuckModifiedSkill; Worn armor rating uses Calc_LuckModifiedSkill for armor skill. AVU replacement must preserve fractional skill and lower-bound clamp before applying the configurable upper cap.
 0x547389: fstp    [esp+8+arg_8]
 0x54738D: fld     dword ptr ds:0B36EA0h
 0x547393: movzx   eax, word ptr [esp+8+arg_0]
@@ -26,7 +26,7 @@
 0x5473CD: fst     [esp+arg_0]
 0x5473D1: fld     [esp+arg_0]
 0x5473D5: fld     st
-0x5473D7: call    Double_To_SInt32
+0x5473D7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5473DC: mov     [esp+arg_0], eax
 0x5473E0: fild    [esp+arg_0]
 0x5473E4: fstp    [esp+arg_0]
@@ -55,7 +55,7 @@
 0x54741C: fstp    [esp+arg_0]
 0x547420: fld     [esp+arg_0]
 0x547424: fld     st
-0x547426: call    Double_To_SInt32
+0x547426: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x54742B: mov     [esp+arg_0], eax
 0x54742F: fild    [esp+arg_0]
 0x547433: fstp    [esp+arg_0]

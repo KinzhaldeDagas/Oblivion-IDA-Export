@@ -1,1 +1,1 @@
-IOleCache2_0
+typedef IOleCache2 IOleCache2_0;

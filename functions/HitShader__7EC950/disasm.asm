@@ -23,11 +23,11 @@
 0x7EC98E: call    ShaderDefinition__Init
 0x7EC993: mov     edi, eax
 0x7EC995: mov     eax, ds:0B43104h
-0x7EC99A: push    1; StreamCount
-0x7EC99C: push    2; a2
-0x7EC99E: push    eax; a1
+0x7EC99A: push    1; streamCount
+0x7EC99C: push    2; elementCount
+0x7EC99E: push    eax; renderer
 0x7EC99F: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x7EC9A7: call    CreateDX9ShaderDeclaration
+0x7EC9A7: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x7EC9AC: mov     esi, [edi]
 0x7EC9AE: mov     ebx, eax
 0x7EC9B0: add     esp, 0Ch
@@ -80,7 +80,7 @@
 0x7ECA1A: test    eax, eax
 0x7ECA1C: jz      short loc_7ECA2E
 0x7ECA1E: mov     edi, edi
-0x7ECA20: cmp     eax, offset dword_B3F684
+0x7ECA20: cmp     eax, offset stru_B3F684
 0x7ECA25: jz      short loc_7ECA2E
 0x7ECA27: mov     eax, [eax+4]
 0x7ECA2A: test    eax, eax
@@ -93,7 +93,7 @@
 0x7ECA41: mov     [esp+20h+var_4], 1
 0x7ECA49: jz      short loc_7ECA56
 0x7ECA4B: mov     ecx, eax; this
-0x7ECA4D: call    ??0GethitShader@@QAE@XZ; GethitShader::GethitShader(void)
+0x7ECA4D: call    ??0GethitShader@@QAE@XZ; MoonSugarEffect decode: GethitShader ctor owns 3 vertex programs, 3 pixel programs, two pass slots, and uses base source texture +0x7C.
 0x7ECA52: mov     esi, eax
 0x7ECA54: jmp     short loc_7ECA58
 0x7ECA56: xor     esi, esi
@@ -146,3 +146,20 @@
 0x7ECAD5: pop     ebx
 0x7ECAD6: add     esp, 10h
 0x7ECAD9: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

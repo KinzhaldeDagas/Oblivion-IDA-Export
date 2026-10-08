@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4DD4BF",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4DD57B",
-    "line": "call    sub_4212E0",
+    "line": "call    ExtraDataList_RemoveSavedMovementData; Removes the combined Oblivion ExtraSavedMovementData record (type 0x4B).",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4DD5A7",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,37 +541,37 @@
   },
   {
     "ea": "0x4DD5B0",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DD5B1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DD5B3",
-    "line": "call    sub_4F03D0",
+    "line": "call    TESWorldSpace_RemovePersistentCellReference; Verified: WorldSpace wrapper that removes a reference from its persistentCell via TESObjectCELL_RemoveReference; this removes it from the +0x64 persistent-reference index when applicable. It does not touch the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4DD5B8",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DD5B9",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DD5BB",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4DD5E2",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x4DD5FC",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x4DD629",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x4DD639",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,19 +859,19 @@
   },
   {
     "ea": "0x4DD64A",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DD64B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DD64D",
-    "line": "call    sub_4F03D0",
+    "line": "call    TESWorldSpace_RemovePersistentCellReference; Verified: WorldSpace wrapper that removes a reference from its persistentCell via TESObjectCELL_RemoveReference; this removes it from the +0x64 persistent-reference index when applicable. It does not touch the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x4DD69A",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x4DD69E",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1057,19 +1057,19 @@
   },
   {
     "ea": "0x4DD6B0",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DD6B1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DD6B3",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x4DD765",
-    "line": "mov     ecx, [esp+20h+var_10]",
+    "line": "mov     ecx, [esp+20h+var_10]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1429,13 +1429,13 @@
   },
   {
     "ea": "0x4DD76D",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DD76E",
-    "line": "call    sub_4CECD0",
+    "line": "call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x4DD7C9",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x4DD7E5",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -1729,19 +1729,19 @@
   },
   {
     "ea": "0x4DD7FF",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DD805",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DD806",
-    "line": "call    sub_463A90",
+    "line": "call    TESSaveLoadGame_UnloadForm;",
     "mnemonic": "call",
     "size": 5
   },

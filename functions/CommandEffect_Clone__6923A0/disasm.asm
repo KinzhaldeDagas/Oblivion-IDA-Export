@@ -26,7 +26,7 @@
 0x6923EB: push    ecx
 0x6923EC: push    edx
 0x6923ED: mov     ecx, edi; this
-0x6923EF: call    ??0ActiveEffect@@QAE@XZ; ActiveEffect::ActiveEffect(void)
+0x6923EF: call    ActiveEffect_Ctor; Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.
 0x6923F4: mov     dword ptr [edi], offset ??_7CommandEffect@@6B@; const CommandEffect::`vftable'
 0x6923FA: jmp     short loc_6923FE
 0x6923FC: xor     edi, edi
@@ -44,3 +44,15 @@
 0x69241F: pop     esi
 0x692420: add     esp, 10h
 0x692423: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

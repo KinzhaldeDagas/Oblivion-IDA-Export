@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x790B60",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790B61",
-    "line": "mov     esi, [esp+4+arg_4]",
+    "line": "mov     esi, [esp+4+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x790B68",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x790B72",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },

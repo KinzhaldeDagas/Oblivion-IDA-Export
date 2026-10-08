@@ -27,7 +27,7 @@
 0x50D520: push    ecx; a2
 0x50D521: push    eax; a1
 0x50D522: mov     [esp+240h+var_20C], 0
-0x50D52A: call    Script_ExtractArgs
+0x50D52A: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50D52F: add     esp, 24h
 0x50D532: test    al, al
 0x50D534: jz      loc_50D5BC
@@ -42,7 +42,7 @@
 0x50D554: mov     bl, ds:0B42E97h
 0x50D55A: mov     ecx, ds:0B33398h
 0x50D560: mov     byte ptr ds:0B42E97h, 0
-0x50D567: call    sub_40D4D0
+0x50D567: call    Input_CheckScreenshotHotkey; Verified gamma integration 2026-09-26: frame path tests B34FA4 and calls Renderer_ApplyPendingGammaRamp at40D508 before scene rendering.
 0x50D56C: mov     ecx, ds:0B33A10h
 0x50D572: call    sub_432860
 0x50D577: cmp     [esp+21Ch+var_20C], 0

@@ -8,93 +8,93 @@ void __userpurge BoundItemEffect_UpdateEffect(
         double a7@<st0>,
         int a8)
 {
-  double v11; // st1
-  double v12; // st0
-  MagicTarget *v13; // ecx
+  double v9; // st1
+  double v10; // st0
+  MagicTarget *v11; // ecx
   PlayerCharacter *ParentActor; // esi
-  ExtraDataList *v15; // eax
-  ExtraDataList *v16; // ebp
+  ExtraDataList *v13; // eax
+  ExtraDataList *v14; // ebp
   LowProcess *process; // ecx
-  int v18; // eax
-  void *v19; // ebp
+  int v16; // eax
+  void *v17; // ebp
   int ***ContainerExtraDataForRef; // eax
-  ExtraDataList *v21; // eax
-  ExtraDataList *v22; // esi
+  ExtraDataList *v19; // eax
+  ExtraDataList *v20; // esi
 
-  if ( *(_BYTE *)(a1 + 0x84) )
+  if ( *(_BYTE *)(a1 + 0x84) ) /*0x6918d3*/
   {
-    v13 = *(MagicTarget **)(a1 + 0x20);
-    if ( v13 )
-      ParentActor = (PlayerCharacter *)MagicTarget_GetParentActor(v13);
+    v11 = *(MagicTarget **)(a1 + 0x20); /*0x691902*/
+    if ( v11 ) /*0x691908*/
+      ParentActor = (PlayerCharacter *)MagicTarget_GetParentActor(v11); /*0x69190f*/
     else
-      ParentActor = 0;
-    v15 = (ExtraDataList *)OblivionDynamicCast(
+      ParentActor = 0; /*0x691913*/
+    v13 = (ExtraDataList *)OblivionDynamicCast( /*0x691928*/
                              *(void **)(a1 + 0x38),
                              0,
                              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                              &TESObjectWEAP `RTTI Type Descriptor',
                              0);
-    v16 = v15;
-    if ( ParentActor && (process = ParentActor->super.super.super.process) != 0 && v15 )
+    v14 = v13; /*0x691932*/
+    if ( ParentActor && (process = ParentActor->super.super.super.process) != 0 && v13 ) /*0x691947*/
     {
-      ((void (__thiscall *)(LowProcess *, ExtraDataList *))process->Unk_F4)(process, v15);
-      if ( *(_BYTE *)(a1 + 0x88) )
+      ((void (__thiscall *)(LowProcess *, ExtraDataList *))process->Unk_F4)(process, v13); /*0x691956*/
+      if ( *(_BYTE *)(a1 + 0x88) ) /*0x691958*/
       {
-        if ( ParentActor->super.super.super.process->GetEquippedWeaponData(ParentActor->super.super.super.process, 1) )
+        if ( ParentActor->super.super.super.process->GetEquippedWeaponData(ParentActor->super.super.super.process, 1) ) /*0x69196e*/
         {
-          v18 = (int)ParentActor->super.super.super.process->GetEquippedWeaponData(
+          v16 = (int)ParentActor->super.super.super.process->GetEquippedWeaponData( /*0x691981*/
                        ParentActor->super.super.super.process,
                        1);
-          if ( v16 == *(ExtraDataList **)(v18 + 8) )
+          if ( v14 == *(ExtraDataList **)(v16 + 8) ) /*0x691986*/
           {
-            if ( *(_DWORD *)v18 )
+            if ( *(_DWORD *)v16 ) /*0x691988*/
             {
-              *(_BYTE *)(a1 + 0x88) = 0;
-              v16 = **(ExtraDataList ***)v18;
-              sub_41F370(v16, 1);
-              sub_41F2F0(v16);
+              *(_BYTE *)(a1 + 0x88) = 0; /*0x69198d*/
+              v14 = **(ExtraDataList ***)v16; /*0x691996*/
+              ExtraDataList_SetCannotWear(v14, 1); /*0x69199c*/
+              ExtraDataList_AddBoundArmor(v14); /*0x6919a3*/
             }
           }
         }
       }
-      if ( ParentActor == TESDataHandler_g_PlayerRef
+      if ( ParentActor == reference /*0x6919d4*/
         && !ParentActor->super.super.super.process->GetWeaponOut(ParentActor->super.super.super.process)
         && !ParentActor->super.super.super.process->GetCombatMode(ParentActor->super.super.super.process) )
       {
-        ActiveEffect_Base_Remove((ActiveEffect *)a1, (char)v16, a7, 0);
+        ActiveEffect_Base_Remove((ActiveEffect *)a1, (char)v14, a7, 0); /*0x6919de*/
       }
     }
-    else if ( *(_BYTE *)(a1 + 0x88) )
+    else if ( *(_BYTE *)(a1 + 0x88) ) /*0x6919e9*/
     {
-      v19 = OblivionDynamicCast(
+      v17 = OblivionDynamicCast( /*0x691a09*/
               *(void **)(a1 + 0x38),
               0,
               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
               &TESObjectARMO `RTTI Type Descriptor',
               0);
-      if ( v19 )
+      if ( v17 ) /*0x691a10*/
       {
-        TESObjectREFR_GetContainer((TESObjectREFR *)ParentActor);
-        ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)ParentActor);
-        v21 = ExtraContainerChanges_SetEquipped(ContainerExtraDataForRef, (int)v19, 1);
-        v22 = v21;
-        if ( v21 )
+        TESObjectREFR_GetContainer((TESObjectREFR *)ParentActor); /*0x691a14*/
+        ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)ParentActor); /*0x691a1b*/
+        v19 = ExtraContainerChanges_SetEquipped(ContainerExtraDataForRef, (int)v17, 1); /*0x691a28*/
+        v20 = v19; /*0x691a2d*/
+        if ( v19 ) /*0x691a31*/
         {
-          *(_BYTE *)(a1 + 0x88) = 0;
-          sub_41F370(v21, 1);
-          sub_41F2F0(v22);
+          *(_BYTE *)(a1 + 0x88) = 0; /*0x691a37*/
+          ExtraDataList_SetCannotWear(v19, 1); /*0x691a3e*/
+          ExtraDataList_AddBoundArmor(v20); /*0x691a45*/
         }
       }
     }
   }
   else
   {
-    v11 = *(float *)(a1 + 4);
-    v12 = *(float *)(a1 + 0x80);
-    if ( v12 <= v11 )
+    v9 = *(float *)(a1 + 4); /*0x6918dc*/
+    v10 = *(float *)(a1 + 0x80); /*0x6918df*/
+    if ( v10 <= v9 ) /*0x6918ec*/
     {
-      sub_690AF0(a1, v12, v11, a2, a3, a4, a5, a6, a7);
-      *(_BYTE *)(a1 + 0x84) = 1;
+      sub_690AF0(a1, v10, v9, a2, a3, a4, a5, a6, a7); /*0x6918f2*/
+      *(_BYTE *)(a1 + 0x84) = 1; /*0x6918f7*/
     }
   }
 }

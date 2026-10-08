@@ -1,4 +1,4 @@
-0x801C90: push    0FFFFFFFFh
+0x801C90: push    0FFFFFFFFh; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x801C92: push    offset CreatePixelShader_SEH
 0x801C97: mov     eax, large fs:0
 0x801C9D: push    eax
@@ -33,16 +33,16 @@
 0x801D09: mov     [esp+0DBCh+var_D60], esi
 0x801D0D: mov     [esp+0DBCh+var_D54], esi
 0x801D11: mov     [esp+0DBCh+var_D70], esi
-0x801D15: call    sub_801210
+0x801D15: call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.
 0x801D1A: mov     ecx, ds:0B430B8h
 0x801D20: add     esp, 10h
 0x801D23: cmp     ecx, esi
 0x801D25: mov     [esp+0DACh+var_D95], 1
-0x801D2A: jz      short loc_801D34
+0x801D2A: jz      short loc_801D34; Pixel loader likewise skips embedded lookup hook801D2D when package map B430B8 is null.
 0x801D2C: push    ebx
-0x801D2D: call    NiTMap_GetAtIndex
+0x801D2D: call    NiTMap_GetAtIndex; [Verified] Pixel-program loader queries the selected ShaderProgramPackageRecordMap with its requested program key when the map is non-null. A returned entry supplies embedded program payload; otherwise the normal shader cache/source path proceeds.
 0x801D32: mov     esi, eax
-0x801D34: cmp     byte ptr ds:0B2DD4Ch, 0
+0x801D34: cmp     byte ptr ds:0B2DD4Ch, 0; [Verified] If the embedded package lookup did not return an entry and this path is enabled, pixel shader loading continues through the ordinary cache/source-loading path. Package lookup failure is not treated as proof that the shader is unavailable.
 0x801D3B: jz      loc_801E32
 0x801D41: test    esi, esi
 0x801D43: jnz     loc_801E32
@@ -70,7 +70,7 @@
 0x801D86: cmp     ds:0B430AEh, al
 0x801D8C: jz      short loc_801DD8
 0x801D8E: xor     edx, edx
-0x801D90: cmp     edx, offset CacheOrNullString
+0x801D90: cmp     edx, 0B42D80h
 0x801D96: jz      short loc_801DA0
 0x801D98: cmp     ds:0B42D80h, dl
 0x801D9E: jnz     short loc_801DC2
@@ -82,7 +82,7 @@
 0x801DB4: lea     ecx, [esp+0DB8h+Filename]
 0x801DB8: push    ebp
 0x801DB9: push    ecx
-0x801DBA: call    sub_801210
+0x801DBA: call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.
 0x801DBF: add     esp, 14h
 0x801DC2: push    20h ; ' '; int
 0x801DC4: lea     edx, [esp+0DB0h+var_D88]
@@ -106,7 +106,7 @@
 0x801DFE: lea     edx, [esp+0DACh+var_C40]
 0x801E05: push    0; _DWORD
 0x801E07: push    edx; _DWORD
-0x801E08: call    eax ; dword_B42E8C
+0x801E08: call    eax ; unk_B42E8C
 0x801E0A: add     esp, 8
 0x801E0D: test    bl, bl
 0x801E0F: jnz     short loc_801E15
@@ -153,7 +153,7 @@
 0x801EA1: test    eax, eax
 0x801EA3: jnz     short loc_801EBB
 0x801EA5: push    1
-0x801EA7: call    sub_7B4780
+0x801EA7: call    BSShaderManager_GetPixelShaderTargetName
 0x801EAC: add     esp, 4
 0x801EAF: test    eax, eax
 0x801EB1: mov     [esp+0DACh+var_D78], eax
@@ -180,11 +180,11 @@
 0x801EF0: mov     [esp+0DB0h+var_D50], esi
 0x801EF4: call    FormHeapAlloc
 0x801EF9: add     esp, 4
-0x801EFC: push    esi
-0x801EFD: push    eax
-0x801EFE: mov     ecx, ebp
+0x801EFC: push    esi; byteCount
+0x801EFD: push    eax; destination
+0x801EFE: mov     ecx, ebp; self
 0x801F00: mov     dword ptr [esp+0DB4h+var_D80], eax
-0x801F04: call    ReadFile??
+0x801F04: call    Archive_ReadBytes
 0x801F09: mov     ebx, [esp+0DACh+var_D74]
 0x801F0D: add     ebx, 4
 0x801F10: mov     [esp+0DACh+var_D4C], offset ??_7ShaderIncludes@@6B@; const ShaderIncludes::`vftable'
@@ -282,7 +282,7 @@
 0x802044: lea     edx, [esp+0DACh+var_524]
 0x80204B: push    0; _DWORD
 0x80204D: push    edx; _DWORD
-0x80204E: call    eax ; dword_B42E8C
+0x80204E: call    eax ; unk_B42E8C
 0x802050: add     esp, 8
 0x802053: lea     eax, [esp+0DACh+var_D54]
 0x802057: push    eax
@@ -309,7 +309,7 @@
 0x80208E: mov     ecx, ebp
 0x802090: call    edx
 0x802092: push    esi
-0x802093: call    FormHeapFree
+0x802093: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x802098: add     esp, 4
 0x80209B: cmp     [esp+0DACh+var_D90], 0
 0x8020A0: jz      loc_8021F4
@@ -356,7 +356,6 @@
 0x802126: mov     [edi], cx
 0x802129: mov     ecx, eax
 0x80212B: jmp     short loc_802130
-0x80212D: align 10h
 0x802130: mov     dl, [eax]
 0x802132: add     eax, 1
 0x802135: test    dl, dl
@@ -410,7 +409,7 @@
 0x8021D1: lea     ecx, [esp+0DACh+var_524]
 0x8021D8: push    0; _DWORD
 0x8021DA: push    ecx; _DWORD
-0x8021DB: call    eax ; dword_B42E8C
+0x8021DB: call    eax ; unk_B42E8C
 0x8021DD: add     esp, 8
 0x8021E0: mov     eax, [esp+0DACh+var_D90]
 0x8021E4: mov     edx, [eax]
@@ -502,12 +501,12 @@
 0x8022F7: mov     [esp+0DB0h+var_D70], edi
 0x8022FB: call    FormHeapAlloc
 0x802300: add     esp, 4
-0x802303: push    edi
-0x802304: push    eax
-0x802305: mov     ecx, esi
+0x802303: push    edi; byteCount
+0x802304: push    eax; destination
+0x802305: mov     ecx, esi; self
 0x802307: mov     [esp+0DB4h+Src], eax
 0x80230B: mov     [esp+0DB4h+var_D96], 1
-0x802310: call    ReadFile??
+0x802310: call    Archive_ReadBytes
 0x802315: mov     eax, [esi]
 0x802317: mov     edx, [eax]
 0x802319: push    1
@@ -533,7 +532,7 @@
 0x80235B: push    edx
 0x80235C: push    esi
 0x80235D: push    eax
-0x80235E: mov     eax, [ecx+1A8h]
+0x80235E: mov     eax, [ecx+1A8h]; DX10 bridge note: CreatePixelShader vtable call is the authoritative D3D9 bytecode capture boundary for SM1/SM2/SM3 to SM4 companion translation.
 0x802364: call    eax
 0x802366: test    eax, eax
 0x802368: jz      short loc_8023A0
@@ -575,7 +574,7 @@
 0x8023EC: cmp     [esp+0DACh+var_D96], 0
 0x8023F1: jz      short loc_8023FC
 0x8023F3: push    esi
-0x8023F4: call    FormHeapFree
+0x8023F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8023F9: add     esp, 4
 0x8023FC: mov     eax, [esp+0DACh+var_D60]
 0x802400: jmp     short loc_802436
@@ -592,7 +591,7 @@
 0x802425: push    0; _DWORD
 0x802427: lea     edx, [esp+0DB0h+var_C40]
 0x80242E: push    edx; _DWORD
-0x80242F: call    eax ; dword_B42E8C
+0x80242F: call    eax ; unk_B42E8C
 0x802431: add     esp, 8
 0x802434: xor     eax, eax
 0x802436: mov     ecx, [esp+0DACh+var_C]
@@ -607,3 +606,19 @@
 0x802452: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x802457: add     esp, 0D98h
 0x80245D: retn    18h
+0x9D0730: mov     eax, [ebp-0D88h]
+0x9D0736: push    eax
+0x9D0737: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D073C: pop     ecx
+0x9D073D: retn
+0x9D073E: mov     edx, [esp+arg_4]
+0x9D0742: lea     eax, [edx-0D9Ch]
+0x9D0748: mov     ecx, [edx-0DA0h]
+0x9D074E: xor     ecx, eax
+0x9D0750: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0755: add     eax, 10h
+0x9D0758: mov     ecx, [edx-4]
+0x9D075B: xor     ecx, eax
+0x9D075D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0762: mov     eax, offset stru_AF9060
+0x9D0767: jmp     ___CxxFrameHandler3

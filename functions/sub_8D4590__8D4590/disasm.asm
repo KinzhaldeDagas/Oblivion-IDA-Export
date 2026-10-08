@@ -146,9 +146,9 @@
 0x8D4794: mov     edx, [ecx]
 0x8D4796: mov     eax, [eax+8]
 0x8D4799: mov     [esp+60h+var_38], ecx
-0x8D479D: fstp    dword ptr [esp+60h+var_3C]
+0x8D479D: fstp    [esp+60h+var_3C]
 0x8D47A1: push    esi
-0x8D47A2: mov     ecx, dword ptr [esp+64h+var_3C]
+0x8D47A2: mov     ecx, [esp+64h+var_3C]
 0x8D47A6: push    ecx
 0x8D47A7: mov     ecx, [esp+68h+var_38]
 0x8D47AB: push    eax

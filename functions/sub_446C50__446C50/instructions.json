@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x446C50",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+index]; MEF v56 native UInt32 setter boundary suspends/invalidates indices around original routine, preserves two stack args/RET8 and result. Other template array instances pass through without ID-cache invalidation. This covers same-size edits through the supported interface; no pointer-only cache freshness assumption.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x446C5F",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x446C77",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },

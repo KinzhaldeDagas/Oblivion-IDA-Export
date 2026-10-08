@@ -1,4 +1,4 @@
-BSStringT *sub_9FAB90()
+NiRTTI *sub_9FAB90()
 {
-  return sub_70E220((BSStringT *)&unk_B3A580, "BSTECreateTask", (int)&unk_B3FF14);
+  return NiRTTI_Constructor(&stru_B3A580, "BSTECreateTask", &stru_B3FF14); /*0x9faba4*/
 }

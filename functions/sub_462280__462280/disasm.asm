@@ -91,7 +91,7 @@
 0x462381: call    TESObjectREFR_GetWorldSpace
 0x462386: mov     ecx, ds:0B333C4h; this
 0x46238C: mov     ebp, eax
-0x46238E: call    TESObjectREFR_GetParentCell
+0x46238E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x462393: test    ebp, ebp
 0x462395: mov     ebx, eax
 0x462397: jnz     short loc_4623AA
@@ -222,8 +222,8 @@
 0x462515: mov     ecx, offset FormHeap
 0x46251A: call    MemoryHeap_Free_checked
 0x46251F: mov     dword ptr [esi+14h], 0
-0x462526: mov     ecx, offset ActorProcessManager_ptr
-0x46252B: call    sub_677010
+0x462526: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x46252B: call    ActorProcessManager_GetCrimeSaveSize
 0x462530: mov     ecx, [esi+18h]
 0x462533: movzx   eax, ax
 0x462536: shr     ecx, 9
@@ -266,8 +266,8 @@
 0x4625A6: call    sub_404EC0
 0x4625AB: add     esp, 4
 0x4625AE: mov     ebp, [esi+14h]
-0x4625B1: mov     ecx, offset ActorProcessManager_ptr
-0x4625B6: call    sub_677060
+0x4625B1: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x4625B6: call    ActorProcessManager_SaveCrimes
 0x4625BB: mov     ecx, [esi+18h]
 0x4625BE: movzx   eax, word ptr [esp+38h+arg_0]
 0x4625C3: shr     ecx, 9
@@ -289,7 +289,7 @@
 0x4625E9: mov     ecx, offset FormHeap
 0x4625EE: call    MemoryHeap_Free_checked
 0x4625F3: mov     dword ptr [esi+14h], 0
-0x4625FA: mov     ecx, offset dword_B3BDB0
+0x4625FA: mov     ecx, (offset qword_B3BB2C+284h)
 0x4625FF: call    sub_67C000
 0x462604: mov     ecx, [esi+18h]
 0x462607: movzx   eax, ax
@@ -333,7 +333,7 @@
 0x46267A: call    sub_404EC0
 0x46267F: add     esp, 4
 0x462682: mov     ebp, [esi+14h]
-0x462685: mov     ecx, offset dword_B3BDB0
+0x462685: mov     ecx, (offset qword_B3BB2C+284h)
 0x46268A: call    sub_67C0D0
 0x46268F: mov     ecx, [esi+18h]
 0x462692: movzx   eax, word ptr [esp+38h+arg_0]

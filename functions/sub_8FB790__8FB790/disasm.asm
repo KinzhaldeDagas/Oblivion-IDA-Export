@@ -40,7 +40,6 @@
 0x8FB814: sub     eax, ecx
 0x8FB816: mov     edx, 3
 0x8FB81B: jmp     short loc_8FB820
-0x8FB81D: align 10h
 0x8FB820: movaps  xmm0, xmmword ptr [ecx]
 0x8FB823: movaps  xmm5, xmm0
 0x8FB826: shufps  xmm5, xmm0, 0AAh ; 'ª'

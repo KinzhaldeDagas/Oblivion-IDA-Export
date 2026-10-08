@@ -1,1 +1,1 @@
-Concurrency::details::UMSSchedulerProxy
+struct Concurrency::details::UMSSchedulerProxy;

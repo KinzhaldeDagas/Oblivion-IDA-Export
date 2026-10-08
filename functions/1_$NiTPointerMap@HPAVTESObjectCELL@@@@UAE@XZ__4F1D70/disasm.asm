@@ -20,7 +20,7 @@
 0x4F1DBB: call    NiTMap_Clear
 0x4F1DC0: mov     eax, [esi+8]
 0x4F1DC3: push    eax
-0x4F1DC4: call    FormHeapFree
+0x4F1DC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4F1DC9: add     esp, 4
 0x4F1DCC: mov     ecx, [esp+18h+var_C]
 0x4F1DD0: mov     large fs:0, ecx
@@ -28,3 +28,22 @@
 0x4F1DD8: pop     esi
 0x4F1DD9: add     esp, 10h
 0x4F1DDC: retn
+0x4F0E30: push    esi
+0x4F0E31: mov     esi, ecx
+0x4F0E33: mov     dword ptr [esi], offset ??_7?$NiTMapBase@V?$NiTPointerAllocator@I@@HPAVTESObjectCELL@@@@6B@; const NiTMapBase<NiTPointerAllocator<uint>,int,TESObjectCELL *>::`vftable'
+0x4F0E39: call    NiTMap_Clear
+0x4F0E3E: mov     eax, [esi+8]
+0x4F0E41: push    eax
+0x4F0E42: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4F0E47: add     esp, 4
+0x4F0E4A: pop     esi
+0x4F0E4B: retn
+0x9B6880: mov     ecx, [ebp-10h]
+0x9B6883: jmp     loc_4F0E30
+0x9B6888: mov     edx, [esp+arg_4]
+0x9B688C: lea     eax, [edx-8]
+0x9B688F: mov     ecx, [edx-0Ch]
+0x9B6892: xor     ecx, eax
+0x9B6894: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6899: mov     eax, offset stru_AE1680
+0x9B689E: jmp     ___CxxFrameHandler3

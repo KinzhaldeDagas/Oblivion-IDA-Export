@@ -5,10 +5,10 @@
 0x70A198: movzx   eax, byte ptr [edi+18h]
 0x70A19C: shr     al, 3
 0x70A19F: and     eax, 0FFFFFF01h
-0x70A1A4: push    eax; char
+0x70A1A4: push    eax; updateProperties
 0x70A1A5: push    ecx
-0x70A1A6: fstp    [esp+10h+var_10]; float
-0x70A1A9: call    sub_47C930
+0x70A1A6: fstp    [esp+10h+applicationTime]; applicationTime
+0x70A1A9: call    NiAVObject_UpdatePropertiesAndControllers; Update one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.
 0x70A1AE: mov     cl, [edi+18h]
 0x70A1B1: shr     cl, 2
 0x70A1B4: test    cl, 1
@@ -24,7 +24,6 @@
 0x70A1D0: jbe     loc_70A26D
 0x70A1D6: push    esi
 0x70A1D7: jmp     short loc_70A1E0
-0x70A1D9: align 10h
 0x70A1E0: mov     ecx, [edi+0B0h]
 0x70A1E6: mov     esi, [ecx+ebx*4]
 0x70A1E9: test    esi, esi
@@ -38,7 +37,7 @@
 0x70A1FE: shr     al, 4
 0x70A201: push    ecx
 0x70A202: test    al, 1
-0x70A204: fstp    [esp+10h+var_10]
+0x70A204: fstp    [esp+10h+applicationTime]
 0x70A207: mov     eax, [esi]
 0x70A209: mov     ecx, esi
 0x70A20B: jz      short loc_70A212
@@ -68,7 +67,7 @@
 0x70A24A: add     esi, 20h ; ' '
 0x70A24D: push    esi
 0x70A24E: lea     ecx, [edi+20h]
-0x70A251: call    sub_72A6B0
+0x70A251: call    NiSphere_Merge; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.
 0x70A256: jmp     short loc_70A25A
 0x70A258: fstp    st
 0x70A25A: movzx   eax, word ptr [edi+0B6h]

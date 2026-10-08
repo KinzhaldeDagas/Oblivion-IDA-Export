@@ -13,9 +13,9 @@
 0x5D3D46: jz      loc_5D3DFC
 0x5D3D4C: fld1
 0x5D3D4E: push    ecx
-0x5D3D4F: fstp    [esp+0Ch+a2]; a3
-0x5D3D52: push    0FA1h; a2
-0x5D3D57: call    Tile_SetFloat
+0x5D3D4F: fstp    [esp+0Ch+a2]; value
+0x5D3D52: push    0FA1h; propertyCode
+0x5D3D57: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D3D5C: pop     edi
 0x5D3D5D: pop     esi
 0x5D3D5E: retn    8

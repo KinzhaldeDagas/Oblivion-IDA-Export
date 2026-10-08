@@ -109,7 +109,7 @@
 0x696E33: mov     [esi+5Ch], eax
 0x696E36: mov     ecx, [ebp+88h]
 0x696E3C: push    offset dword_A7D0EC
-0x696E41: call    NiObjectNET_GetExtraData
+0x696E41: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x696E46: mov     esi, eax
 0x696E48: test    esi, esi
 0x696E4A: jnz     short loc_696E8C
@@ -153,15 +153,15 @@
 0x696EC3: sub     esp, 0Ch
 0x696EC6: mov     dword ptr [esp+60h+var_3C], edx
 0x696ECA: fld     dword ptr [esp+60h+var_3C]
-0x696ECE: fstp    [esp+60h+var_58]; float
+0x696ECE: fstp    [esp+60h+rollY]; rollY
 0x696ED2: mov     [esp+60h+var_40], ecx
 0x696ED6: fld     [esp+60h+var_40]
 0x696EDA: mov     [esp+60h+var_38], eax
-0x696EDE: fstp    [esp+60h+var_5C]; float
-0x696EE2: lea     ecx, [esp+60h+var_30]
+0x696EDE: fstp    [esp+60h+pitchX]; pitchX
+0x696EE2: lea     ecx, [esp+60h+var_30]; this
 0x696EE6: fld     [esp+60h+var_38]
-0x696EEA: fstp    [esp+60h+var_60]; float
-0x696EED: call    sub_7117C0
+0x696EEA: fstp    [esp+60h+yawZ]; yawZ
+0x696EED: call    NiMatrix33_SetEulerZXY; Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.
 0x696EF2: mov     edi, [ebp+88h]
 0x696EF8: add     edi, 30h ; '0'
 0x696EFB: mov     ecx, 9
@@ -272,3 +272,25 @@
 0x697099: pop     ebp
 0x69709A: add     esp, 44h
 0x69709D: retn
+0x9C5A30: mov     eax, [ebp-44h]
+0x9C5A33: push    eax
+0x9C5A34: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5A39: pop     ecx
+0x9C5A3A: retn
+0x9C5A3B: mov     eax, [ebp-44h]
+0x9C5A3E: push    eax
+0x9C5A3F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5A44: pop     ecx
+0x9C5A45: retn
+0x9C5A46: mov     eax, [ebp-44h]
+0x9C5A49: push    eax
+0x9C5A4A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5A4F: pop     ecx
+0x9C5A50: retn
+0x9C5A51: mov     edx, [esp+arg_4]
+0x9C5A55: lea     eax, [edx-44h]
+0x9C5A58: mov     ecx, [edx-48h]
+0x9C5A5B: xor     ecx, eax
+0x9C5A5D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5A62: mov     eax, offset stru_AEE178
+0x9C5A67: jmp     ___CxxFrameHandler3

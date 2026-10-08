@@ -4,7 +4,7 @@
 0x46D4D6: test    eax, eax
 0x46D4D8: jz      short loc_46D4EA
 0x46D4DA: push    eax
-0x46D4DB: call    FormHeapFree
+0x46D4DB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46D4E0: add     esp, 4
 0x46D4E3: mov     dword ptr [esi+14h], 0
 0x46D4EA: mov     byte ptr [esi+10h], 0

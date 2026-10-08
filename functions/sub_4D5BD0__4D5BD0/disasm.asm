@@ -1,4 +1,4 @@
-0x4D5BD0: push    ecx
+0x4D5BD0: push    ecx;
 0x4D5BD1: push    ebx
 0x4D5BD2: push    esi
 0x4D5BD3: mov     ebx, ecx
@@ -28,13 +28,13 @@
 0x4D5C17: push    ecx
 0x4D5C18: fstp    [esp+14h+a2]; a2
 0x4D5C1B: mov     ecx, esi; this
-0x4D5C1D: call    NiAVObject_UpdateNiAVObject
+0x4D5C1D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4D5C22: mov     ecx, ebx
 0x4D5C24: call    sub_4CB790
 0x4D5C29: jmp     loc_4D5D4C
 0x4D5C2E: push    ebp
 0x4D5C2F: push    ebx; a2
-0x4D5C30: mov     ecx, offset stru_B35C80; this
+0x4D5C30: mov     ecx, offset unk_B35C80; this
 0x4D5C35: call    sub_496EA0
 0x4D5C3A: mov     ecx, ds:0B333A0h
 0x4D5C40: push    0
@@ -100,7 +100,7 @@
 0x4D5CFF: mov     ecx, edi
 0x4D5D01: call    edx
 0x4D5D03: push    edi
-0x4D5D04: mov     ecx, offset ActorProcessManager_ptr
+0x4D5D04: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4D5D09: call    sub_674E10
 0x4D5D0E: mov     eax, [esp+14h+var_4]
 0x4D5D12: mov     ecx, ds:0B33A1Ch
@@ -120,7 +120,7 @@
 0x4D5D39: jnz     loc_4D5C58
 0x4D5D3F: pop     edi
 0x4D5D40: push    ebx; a2
-0x4D5D41: mov     ecx, offset stru_B35C80; this
+0x4D5D41: mov     ecx, offset unk_B35C80; this
 0x4D5D46: call    sub_496F50
 0x4D5D4B: pop     ebp
 0x4D5D4C: cmp     [esp+0Ch+arg_0], 0

@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x4E6D60",
+      "0x4E6DE6"
+    ]
+  ],
+  "chunks_sha256": "b841b4de06f1ee16596076f4572b797f8bd399a01a50493312c053361bfdb20c",
+  "comment_regular": "Verified per-PathGrid point lookup by packed 512-unit X/Y spatial bucket, then scans that bucket's point pointers and compares NiPoint3 positions using fConstant_2 tolerance. The field's existing name pointsByCell is legacy shorthand; this map subdivides world coordinates at 512 units, unlike 4096-unit world cells.",
+  "comment_repeatable": "Verified per-PathGrid point lookup by packed 512-unit X/Y spatial bucket, then scans that bucket's point pointers and compares NiPoint3 positions using fConstant_2 tolerance. The field's existing name pointsByCell is legacy shorthand; this map subdivides world coordinates at 512 units, unlike 4096-unit world cells.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E6D60",
+  "display_name": "TESPathGrid_FindPointByPositionInCell",
   "end_ea": "0x4E6DE6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E6D60",
+  "name": "TESPathGrid_FindPointByPositionInCell",
   "segment": ".text",
   "sha256": "b841b4de06f1ee16596076f4572b797f8bd399a01a50493312c053361bfdb20c",
   "size": 134,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E6D60",
-  "type": "char *__thiscall(_DWORD *this, float *)",
+  "total_chunk_size": 134,
+  "type": "TESPathGridPoint *__thiscall(TESPathGrid *this, const NiPoint3 *position)",
   "xrefs_from_count": 67,
   "xrefs_to_count": 3
 }

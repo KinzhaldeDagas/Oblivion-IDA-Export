@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D7880",
-    "line": "push    esi",
+    "line": "push    esi; Verified per-reference seed writer. For a TREE form, maps the requested uint32 seed through TESObjectTREE_GetIndexForSeed and stores the byte in ExtraData_Seed. If the tree seed array is empty or the seed is absent, the index is 0xFF; ExtraDataList_SetOrRemoveTreeSeed treats 0xFF as remove, so no concrete per-reference seed is retained. Whether another runtime path populates Oblivion's array remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4D78AB",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+seedValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,31 +139,31 @@
   },
   {
     "ea": "0x4D78BC",
-    "line": "mov     byte ptr [esp+8+arg_0], al",
+    "line": "mov     byte ptr [esp+8+seedValue], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D78C0",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+seedValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4D78C4",
-    "line": "push    eax",
+    "line": "push    eax; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D78C5",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D78C7",
-    "line": "call    sub_423BD0",
+    "line": "call    ExtraDataList_SetOrRemoveTreeSeed; Verified singleton ExtraData_Seed behavior: signed byte 0xFF removes the extra; other bytes add or replace it. Combined with TESObjectTREE_GetIndexForSeed, this means an empty/missing tree seed entry cannot be persisted as a concrete per-reference seed.",
     "mnemonic": "call",
     "size": 5
   },

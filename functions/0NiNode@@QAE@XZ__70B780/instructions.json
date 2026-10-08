@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70B780",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [constructor audit] Plugin passes child capacity0. Full NiAVObject/ObjectNET/Object and identity-transform base chain is field initialization without allocation; child-array ctor4B2D30 skips allocation at capacity0. All later child-array growth belongs to scene insertion, whose ownership/failure policy is separate.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x70B7AE",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, dword ptr [esp+1Ch+capacity]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x70B7B2",
-    "line": "push    1",
+    "line": "push    1; grow",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x70B7B6",
-    "line": "push    eax",
+    "line": "push    eax; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B7B7",
-    "line": "lea     ecx, [esi+0ACh]",
+    "line": "lea     ecx, [esi+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x70B7C1",
-    "line": "mov     dword ptr [esi], offset ??_7NiNode@@6B@; const NiNode::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7NiNode@@6B@;",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x70B7C7",
-    "line": "call    sub_4B2D30",
+    "line": "call    OB_NiAVObjectPointerArray_ctor_010201A0; MEF PERF 2026-10-08: PERF-17 Verified NiNode child array constructor receives requested WORD initial capacity and growBy=1 (push1 at70B7B2). BSFade transfer constructor passes initial capacity0. Thus successful dense no-reserve transfers trigger capacities1..N; default growth is established in Oblivion, not inferred from Fallout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -208,5 +208,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C9A00",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9A03",
+    "line": "jmp     ??1NiAVObject@@UAE@XZ; NiAVObject::~NiAVObject(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9A08",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C9A0C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9A0F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9A12",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C9A14",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9A19",
+    "line": "mov     eax, offset stru_AF2250",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9A1E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

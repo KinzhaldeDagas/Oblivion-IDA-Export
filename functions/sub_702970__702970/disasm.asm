@@ -56,13 +56,13 @@
 0x702A18: mov     ebx, eax
 0x702A1A: mov     eax, [esi+58h]
 0x702A1D: add     ecx, ecx
-0x702A1F: push    ecx; Size
-0x702A20: push    eax; Src
-0x702A21: push    ebx; Dst
-0x702A22: call    _memcpy
+0x702A1F: push    ecx; byteCount
+0x702A20: push    eax; source
+0x702A21: push    ebx; destination
+0x702A22: call    _memcpy;
 0x702A27: mov     eax, [esi+58h]
 0x702A2A: push    eax
-0x702A2B: call    FormHeapFree
+0x702A2B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702A30: xor     ecx, ecx
 0x702A32: mov     eax, edi
 0x702A34: mov     edx, 2
@@ -77,10 +77,10 @@
 0x702A4F: mov     ebx, eax
 0x702A51: mov     eax, [esi+5Ch]
 0x702A54: add     ecx, ecx
-0x702A56: push    ecx; Size
-0x702A57: push    eax; Src
-0x702A58: push    ebx; Dst
-0x702A59: call    _memcpy
+0x702A56: push    ecx; byteCount
+0x702A57: push    eax; source
+0x702A58: push    ebx; destination
+0x702A59: call    _memcpy;
 0x702A5E: movzx   eax, word ptr [esi+60h]
 0x702A62: sub     edi, eax
 0x702A64: add     edi, edi
@@ -91,7 +91,7 @@
 0x702A70: call    __memset
 0x702A75: mov     eax, [esi+5Ch]
 0x702A78: push    eax
-0x702A79: call    FormHeapFree
+0x702A79: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702A7E: mov     edx, [esp+74h+var_2C]
 0x702A82: mov     [esi+5Ch], ebx
 0x702A85: mov     ebx, [esp+74h+arg_4]
@@ -114,7 +114,6 @@
 0x702AC2: jbe     short loc_702AF4
 0x702AC4: mov     ecx, [esi+5Ch]
 0x702AC7: jmp     short loc_702AD0
-0x702AC9: align 10h
 0x702AD0: movzx   ebp, ax
 0x702AD3: cmp     word ptr [ecx+ebp*2], 0FFFFh
 0x702AD9: jz      short loc_702AE6
@@ -175,13 +174,13 @@
 0x702B94: mov     eax, [esi+1Ch]
 0x702B97: add     edi, edi
 0x702B99: add     edi, edi
-0x702B9B: push    edi; Size
-0x702B9C: push    eax; Src
-0x702B9D: push    ebx; Dst
-0x702B9E: call    _memcpy
+0x702B9B: push    edi; byteCount
+0x702B9C: push    eax; source
+0x702B9D: push    ebx; destination
+0x702B9E: call    _memcpy;
 0x702BA3: mov     eax, [esi+1Ch]
 0x702BA6: push    eax
-0x702BA7: call    FormHeapFree
+0x702BA7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702BAC: add     esp, 14h
 0x702BAF: cmp     dword ptr [esi+20h], 0
 0x702BB3: mov     [esi+1Ch], ebx
@@ -197,13 +196,13 @@
 0x702BCF: call    FormHeapAlloc
 0x702BD4: mov     ebx, eax
 0x702BD6: mov     eax, [esi+20h]
-0x702BD9: push    edi; Size
-0x702BDA: push    eax; Src
-0x702BDB: push    ebx; Dst
-0x702BDC: call    _memcpy
+0x702BD9: push    edi; byteCount
+0x702BDA: push    eax; source
+0x702BDB: push    ebx; destination
+0x702BDC: call    _memcpy;
 0x702BE1: mov     eax, [esi+20h]
 0x702BE4: push    eax
-0x702BE5: call    FormHeapFree
+0x702BE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702BEA: movzx   eax, word ptr [esi+66h]
 0x702BEE: mov     edx, [esp+54h+var_28]
 0x702BF2: add     esp, 14h
@@ -270,14 +269,14 @@
 0x702CB2: movzx   eax, word ptr [esi+66h]
 0x702CB6: mov     ecx, [esi+24h]
 0x702CB9: shl     eax, 4
-0x702CBC: push    eax; Size
-0x702CBD: push    ecx; Src
-0x702CBE: push    edi; Dst
+0x702CBC: push    eax; byteCount
+0x702CBD: push    ecx; source
+0x702CBE: push    edi; destination
 0x702CBF: mov     [esp+4Ch+var_4], 0FFFFFFFFh
-0x702CC7: call    _memcpy
+0x702CC7: call    _memcpy;
 0x702CCC: mov     edx, [esi+24h]
 0x702CCF: push    edx
-0x702CD0: call    FormHeapFree
+0x702CD0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702CD5: add     esp, 10h
 0x702CD8: mov     [esi+24h], edi
 0x702CDB: movzx   eax, byte ptr [esi+2Ch]
@@ -315,18 +314,18 @@
 0x702D3C: add     eax, eax
 0x702D3E: add     eax, eax
 0x702D40: add     ecx, eax
-0x702D42: push    edi; Size
-0x702D43: push    ecx; Src
+0x702D42: push    edi; byteCount
+0x702D43: push    ecx; source
 0x702D44: add     eax, ebx
-0x702D46: push    eax; Dst
-0x702D47: call    _memcpy
+0x702D46: push    eax; destination
+0x702D47: call    _memcpy;
 0x702D4C: add     esp, 0Ch
 0x702D4F: add     ebp, 1
 0x702D52: sub     [esp+40h+arg_0], 1
 0x702D57: jnz     short loc_702D30
 0x702D59: mov     edx, [esi+28h]
 0x702D5C: push    edx
-0x702D5D: call    FormHeapFree
+0x702D5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702D62: add     esp, 4
 0x702D65: mov     [esi+28h], ebx
 0x702D68: mov     ax, word ptr [esp+40h+var_28]
@@ -381,13 +380,13 @@
 0x702E19: mov     ebx, eax
 0x702E1B: movzx   eax, word ptr [esi+6Ah]
 0x702E1F: add     eax, eax
-0x702E21: push    eax; Size
-0x702E22: push    ecx; Src
-0x702E23: push    ebx; Dst
-0x702E24: call    _memcpy
+0x702E21: push    eax; byteCount
+0x702E22: push    ecx; source
+0x702E23: push    ebx; destination
+0x702E24: call    _memcpy;
 0x702E29: mov     edx, [esi+48h]
 0x702E2C: push    edx
-0x702E2D: call    FormHeapFree
+0x702E2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702E32: mov     ecx, [esp+54h+var_20]
 0x702E36: mov     [esi+48h], ebx
 0x702E39: mov     ebx, [esp+54h+arg_4]
@@ -401,10 +400,10 @@
 0x702E54: jz      short loc_702E68
 0x702E56: lea     ecx, [ecx+ecx*2]
 0x702E59: add     ecx, ecx
-0x702E5B: push    ecx; Size
-0x702E5C: push    edx; Src
-0x702E5D: push    eax; Dst
-0x702E5E: call    _memcpy
+0x702E5B: push    ecx; byteCount
+0x702E5C: push    edx; source
+0x702E5D: push    eax; destination
+0x702E5E: call    _memcpy;
 0x702E63: add     esp, 0Ch
 0x702E66: jmp     short loc_702EA4
 0x702E68: xor     ecx, ecx
@@ -437,3 +436,15 @@
 0x702EB8: pop     ebx
 0x702EB9: add     esp, 2Ch
 0x702EBC: retn    0Ch
+0x9C9470: mov     eax, [ebp+4]
+0x9C9473: push    eax
+0x9C9474: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C9479: pop     ecx
+0x9C947A: retn
+0x9C947B: mov     edx, [esp+arg_4]
+0x9C947F: lea     eax, [edx-30h]
+0x9C9482: mov     ecx, [edx-34h]
+0x9C9485: xor     ecx, eax
+0x9C9487: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C948C: mov     eax, offset stru_AF1D48
+0x9C9491: jmp     ___CxxFrameHandler3

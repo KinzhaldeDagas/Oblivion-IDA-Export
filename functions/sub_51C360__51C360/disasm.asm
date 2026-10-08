@@ -1,4 +1,4 @@
-0x51C360: push    ecx
+0x51C360: push    ecx; Returns save-game payload size for the fixed 0x34-byte TESClass DATA block plus length-prefixed name and icon strings.
 0x51C361: mov     eax, [ecx+1Ch]
 0x51C364: test    eax, eax
 0x51C366: jnz     short loc_51C36D

@@ -1,5 +1,5 @@
-int sub_9F9860()
+int InitSetting_sSkillNameBlunt()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A0B4, (int)"sSkillNameBlunt", (int)&aBlunt);
-  return atexit(sub_A239A0);
+  GameSetting_ConstrAndReg(&g_sSkillNameBlunt, "sSkillNameBlunt", aBlunt); /*0x9f986f*/
+  return atexit(sub_A239A0); /*0x9f987f*/
 }

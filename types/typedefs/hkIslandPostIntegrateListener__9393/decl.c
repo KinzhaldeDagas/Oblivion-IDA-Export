@@ -1,1 +1,1 @@
-hkIslandPostIntegrateListener
+struct hkIslandPostIntegrateListener;

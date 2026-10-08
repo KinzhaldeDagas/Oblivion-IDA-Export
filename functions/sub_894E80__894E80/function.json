@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_894E80",
+  "chunks": [
+    [
+      "0x894E80",
+      "0x89505C"
+    ],
+    [
+      "0x9D6570",
+      "0x9D65A9"
+    ]
+  ],
+  "chunks_sha256": "4b1befd406a67ee02a72ba76a06f9790475a7d072d95bfd273e33ea77c8212ee",
+  "comment_regular": "TES4 authoritative: integrates controller position from proxy velocity +0x2E0 and dt. Single observed caller is 0x896828 after state update and velocity writeback.",
+  "comment_repeatable": "TES4 authoritative: integrates controller position from proxy velocity +0x2E0 and dt. Single observed caller is 0x896828 after state update and velocity writeback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "bhkCharacterController_IntegratePositionFromVelocity",
   "end_ea": "0x89505C",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_894E80",
+  "name": "bhkCharacterController_IntegratePositionFromVelocity",
   "segment": ".text",
   "sha256": "ba074ea7dfa06bbc6a7cd68b9c1a751c205cd7fbf21eea7da6bcdb7d2190914e",
   "size": 476,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x894E80",
+  "total_chunk_size": 533,
   "type": "void __thiscall(__m128 *this, float)",
-  "xrefs_from_count": 151,
+  "xrefs_from_count": 167,
   "xrefs_to_count": 1
 }

@@ -12,7 +12,7 @@
 0x68BE24: push    ecx
 0x68BE25: mov     ecx, esi
 0x68BE27: fstp    [esp+14h+var_14]; float
-0x68BE2A: call    sub_6899C0
+0x68BE2A: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68BE2F: push    eax; int
 0x68BE30: mov     eax, [esp+18h+arg_0]
 0x68BE34: push    eax; int

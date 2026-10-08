@@ -1,12 +1,19 @@
-unsigned int __stdcall sub_9A4AC0(int a1, int a2, int a3)
+unsigned int __stdcall NiD3DVertexConstantMap_ApplyMappedConstant(
+        NiD3DVertexShader *program,
+        const NiD3DShaderConstantMapEntry *entry,
+        unsigned int passIndex)
 {
-  int *v3; // eax
+  const void *v3; // eax
 
-  v3 = sub_9A92E0(a2);
+  v3 = NiD3DShaderConstantMap_ConvertMappedValue(entry); /*0x9a4ac6*/
   if ( v3 )
-    return (*(unsigned __int8 (__thiscall **)(int, int, int *, _DWORD))(*(_DWORD *)a1 + 0x28))(a1, a2, v3, 0) != 0
+    return (*(unsigned __int8 (__thiscall **)(NiD3DVertexShader *, const NiD3DShaderConstantMapEntry *, const void *, _DWORD))(*(_DWORD *)program + 0x28))(
+             program,
+             entry,
+             v3,
+             0) != 0
          ? 0
          : 0x80000050;
   else
-    return 1;
+    return 1; /*0x9a4acf*/
 }

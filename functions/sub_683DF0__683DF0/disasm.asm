@@ -8,8 +8,8 @@
 0x683DFF: add     ebx, 1
 0x683E02: test    edi, edi
 0x683E04: jz      loc_683FDC
-0x683E0A: lea     ecx, [esi+14h]
-0x683E0D: call    sub_42B410
+0x683E0A: lea     ecx, [esi+14h]; this
+0x683E0D: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x683E12: test    eax, eax
 0x683E14: jz      loc_683FDC
 0x683E1A: mov     eax, ebx
@@ -24,11 +24,11 @@
 0x683E3B: mov     edx, [eax+174h]
 0x683E41: mov     ecx, edi
 0x683E43: call    edx
-0x683E45: lea     ecx, [esi+14h]
+0x683E45: lea     ecx, [esi+14h]; this
 0x683E48: mov     ebp, eax
-0x683E4A: call    sub_42B410
+0x683E4A: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x683E4F: mov     ecx, eax
-0x683E51: call    sub_6899C0
+0x683E51: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x683E56: fld     dword ptr [eax]
 0x683E58: fsub    dword ptr [ebp+0]
 0x683E5B: fstp    [esp+20h+var_C]
@@ -40,14 +40,14 @@
 0x683E70: fsub    dword ptr [ebp+8]
 0x683E73: push    eax
 0x683E74: fstp    [esp+24h+var_4]
-0x683E78: call    sub_683CB0
+0x683E78: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x683E7D: fadd    qword ptr ds:0A74C90h
 0x683E83: add     esp, 4
-0x683E86: mov     ecx, edi
+0x683E86: mov     ecx, edi; this
 0x683E88: fstp    [esp+20h+var_10]
 0x683E8C: fld1
 0x683E8E: fstp    [esp+20h+arg_0]
-0x683E92: call    Actor_IsSwimming
+0x683E92: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x683E97: test    al, al
 0x683E99: jz      short loc_683EA5
 0x683E9B: fld     dword ptr ds:0A379B4h
@@ -77,11 +77,11 @@
 0x683EF1: mov     eax, [edx+174h]
 0x683EF7: mov     ecx, edi
 0x683EF9: call    eax
-0x683EFB: lea     ecx, [esi+14h]
+0x683EFB: lea     ecx, [esi+14h]; this
 0x683EFE: mov     ebp, eax
-0x683F00: call    sub_42B410
+0x683F00: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x683F05: mov     ecx, eax
-0x683F07: call    sub_6899C0
+0x683F07: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x683F0C: fld     dword ptr [eax]
 0x683F0E: fsub    dword ptr [ebp+0]
 0x683F11: lea     ecx, [esp+20h+var_C]
@@ -93,14 +93,14 @@
 0x683F24: fld     dword ptr [eax+8]
 0x683F27: fsub    dword ptr [ebp+8]
 0x683F2A: fstp    [esp+24h+var_4]
-0x683F2E: call    sub_683CB0
+0x683F2E: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x683F33: fsub    qword ptr ds:0A74C90h
 0x683F39: add     esp, 4
-0x683F3C: mov     ecx, edi
+0x683F3C: mov     ecx, edi; this
 0x683F3E: fstp    [esp+20h+var_10]
 0x683F42: fld1
 0x683F44: fstp    [esp+20h+arg_0]
-0x683F48: call    Actor_IsSwimming
+0x683F48: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x683F4D: test    al, al
 0x683F4F: jz      short loc_683F5B
 0x683F51: fld     dword ptr ds:0A379B4h

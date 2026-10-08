@@ -1,18 +1,31 @@
 {
-  "callees_count": 50,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7B7250",
+      "0x7B7650"
+    ]
+  ],
+  "chunks_sha256": "dcf74a1b6cb61e8b6542843c95bdfc6fb51c81475b4e43973550d81c2c7ad4d5",
+  "comment_regular": "[Verified] Static-initialization target called with unk_B430D8 by InitializeRendererShaderStateGlobals. Resets renderer/shader state, clears pass-control bytes +1/+2, sets +3=1, resets shader version to 0, and releases cached renderer objects. [Unknown] The owning C++ class for unk_B430D8 is not identified.",
+  "comment_repeatable": "[Verified] Static-initialization target called with unk_B430D8 by InitializeRendererShaderStateGlobals. Resets renderer/shader state, clears pass-control bytes +1/+2, sets +3=1, resets shader version to 0, and releases cached renderer objects. [Unknown] The owning C++ class for unk_B430D8 is not identified.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 16,
-  "display_name": "sub_7B7250",
+  "display_name": "RendererShaderState_ResetGlobals",
   "end_ea": "0x7B7650",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7B7250",
+  "name": "RendererShaderState_ResetGlobals",
   "segment": ".text",
   "sha256": "dcf74a1b6cb61e8b6542843c95bdfc6fb51c81475b4e43973550d81c2c7ad4d5",
   "size": 1024,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7B7250",
+  "total_chunk_size": 1024,
   "type": "void *__thiscall(void *this)",
   "xrefs_from_count": 400,
   "xrefs_to_count": 1

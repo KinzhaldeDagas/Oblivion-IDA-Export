@@ -1,4 +1,4 @@
-0x51BFE0: push    ebx
+0x51BFE0: push    ebx; Copies all TESForm components, then copies exactly the fixed 0x34-byte TESClass DATA block at +0x38. Major storage remains seven dwords; no minor array is copied.
 0x51BFE1: mov     ebx, [esp+4+a2]
 0x51BFE5: push    esi
 0x51BFE6: push    edi

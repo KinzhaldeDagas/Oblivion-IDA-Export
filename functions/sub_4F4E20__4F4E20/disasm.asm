@@ -1,10 +1,10 @@
-0x4F4E20: fldz
+0x4F4E20: fldz; GetDisposition_Eval (index 76 / opcode 0x104C): for valid actor subject and Actor parameter, returns the subject's disposition toward that target. A global one-pair cache reuses the last result; non-actor inputs leave numeric result 0.
 0x4F4E22: push    ebp
-0x4F4E23: mov     ebp, [esp+4+arg_C]
+0x4F4E23: mov     ebp, [esp+4+value]
 0x4F4E27: fstp    qword ptr [ebp+0]
 0x4F4E2A: push    esi
 0x4F4E2B: push    edi
-0x4F4E2C: mov     edi, [esp+0Ch+arg_0]
+0x4F4E2C: mov     edi, [esp+0Ch+subject]
 0x4F4E30: xor     esi, esi
 0x4F4E32: test    edi, edi
 0x4F4E34: jz      short loc_4F4E48
@@ -16,7 +16,7 @@
 0x4F4E44: jz      short loc_4F4E48
 0x4F4E46: mov     esi, edi
 0x4F4E48: push    ebx
-0x4F4E49: mov     ebx, [esp+10h+arg_4]
+0x4F4E49: mov     ebx, [esp+10h+target]
 0x4F4E4D: xor     edi, edi
 0x4F4E4F: test    ebx, ebx
 0x4F4E51: jz      short loc_4F4E65
@@ -44,8 +44,8 @@
 0x4F4E91: push    edi
 0x4F4E92: mov     ecx, esi
 0x4F4E94: call    edx
-0x4F4E96: mov     [esp+0Ch+arg_C], eax
-0x4F4E9A: fild    [esp+0Ch+arg_C]
+0x4F4E96: mov     [esp+0Ch+value], eax
+0x4F4E9A: fild    [esp+0Ch+value]
 0x4F4E9E: mov     ds:0B36184h, edi
 0x4F4EA4: mov     ds:0B36180h, esi
 0x4F4EAA: fst     qword ptr [ebp+0]

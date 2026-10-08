@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x503930",
-    "line": "push    ecx",
+    "line": "push    ecx; CommandInfo.execute wrapper for GetGlobalValue (index 74). Extracts the Global parameter and delegates to GetGlobalValue_Eval, which is also the CTDA callback.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x503962",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x503971",
-    "line": "mov     ecx, [esp+8+arg_18]",
+    "line": "mov     ecx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,31 +169,31 @@
   },
   {
     "ea": "0x503979",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50397A",
-    "line": "push    0",
+    "line": "push    0; param2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x50397C",
-    "line": "push    edx",
+    "line": "push    edx; global",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50397D",
-    "line": "push    esi",
+    "line": "push    esi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50397E",
-    "line": "call    sub_4F7330",
+    "line": "call    GetGlobalValue_Eval; GetGlobalValue_Eval (index 74 / opcode 0x104A): parameter must be TESGlobal (form type 0x04); returns its float value at +0x24, otherwise numeric 0.",
     "mnemonic": "call",
     "size": 5
   },

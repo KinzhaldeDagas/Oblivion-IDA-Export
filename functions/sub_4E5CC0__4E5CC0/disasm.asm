@@ -1,19 +1,19 @@
-0x4E5CC0: sub     esp, 10h
+0x4E5CC0: sub     esp, 10h; Verified load path for linked-point state: reads the u16 count and indices, range-checks each against the point array capacity, then sets linkedPointsDisabled on valid non-null points. Save-block boundary diagnostics are performed after the payload read.
 0x4E5CC3: push    ebx
 0x4E5CC4: push    esi
 0x4E5CC5: push    edi
 0x4E5CC6: mov     edi, ecx
 0x4E5CC8: mov     ecx, ds:0B33B00h
-0x4E5CCE: mov     [esp+1Ch+var_8], 0
+0x4E5CCE: mov     [esp+1Ch+destination], 0
 0x4E5CD6: xor     ebx, ebx
-0x4E5CD8: call    sub_45A170
+0x4E5CD8: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E5CDD: test    al, al
 0x4E5CDF: jz      loc_4E5D7E
-0x4E5CE5: mov     ecx, ds:0B33B00h
-0x4E5CEB: push    4; Size
+0x4E5CE5: mov     ecx, ds:0B33B00h; self
+0x4E5CEB: push    4; byteCount
 0x4E5CED: lea     eax, [esp+20h+Dst]
-0x4E5CF1: push    eax; Dst
-0x4E5CF2: call    SaveLoad_LoadData
+0x4E5CF1: push    eax; destination
+0x4E5CF2: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4E5CF7: cmp     [esp+1Ch+Dst], 4B4F4C42h
 0x4E5CFF: jz      short loc_4E5D69
 0x4E5D01: mov     eax, ds:0B33B00h
@@ -22,7 +22,7 @@
 0x4E5D0E: jz      short loc_4E5D4D
 0x4E5D10: mov     ecx, [esi]
 0x4E5D12: push    ecx; a1
-0x4E5D13: call    TESForm_LookupByFormID
+0x4E5D13: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E5D18: mov     edx, [esi+5]
 0x4E5D1B: movzx   ecx, byte ptr [esi+9]
 0x4E5D1F: add     esp, 4
@@ -48,26 +48,26 @@
 0x4E5D5C: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x4E5D61: call    PrintError
 0x4E5D66: add     esp, 10h
-0x4E5D69: mov     ecx, ds:0B33B00h
+0x4E5D69: mov     ecx, ds:0B33B00h; self
 0x4E5D6F: mov     ebx, [ecx+14h]
-0x4E5D72: push    2; Size
-0x4E5D74: lea     eax, [esp+20h+var_8]
-0x4E5D78: push    eax; Dst
-0x4E5D79: call    SaveLoad_LoadData
-0x4E5D7E: push    2; Size
+0x4E5D72: push    2; byteCount
+0x4E5D74: lea     eax, [esp+20h+destination]
+0x4E5D78: push    eax; destination
+0x4E5D79: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4E5D7E: push    2; byteCount
 0x4E5D80: lea     ecx, [esp+20h+var_10]
-0x4E5D84: push    ecx; Dst
-0x4E5D85: mov     ecx, ds:0B33B00h
-0x4E5D8B: call    SaveLoad_LoadData
-0x4E5D90: xor     esi, esi
+0x4E5D84: push    ecx; destination
+0x4E5D85: mov     ecx, ds:0B33B00h; self
+0x4E5D8B: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4E5D90: xor     esi, esi; EnginePatch v1: byte-checked TESPathGrid modified point-count guard. Clamps save-controlled UInt16 loop count to remaining tracked save buffer bytes / 2 before per-point reads.
 0x4E5D92: cmp     [esp+1Ch+var_10], si
 0x4E5D97: jbe     short loc_4E5DE4
 0x4E5D99: lea     esp, [esp+0]
-0x4E5DA0: mov     ecx, ds:0B33B00h
-0x4E5DA6: push    2; Size
+0x4E5DA0: mov     ecx, ds:0B33B00h; Loading review: per-point path-grid loop driven by save-controlled UInt16 count; plugin clamps count at 0x4E5D90.
+0x4E5DA6: push    2; byteCount
 0x4E5DA8: lea     edx, [esp+20h+var_C]
-0x4E5DAC: push    edx; Dst
-0x4E5DAD: call    SaveLoad_LoadData
+0x4E5DAC: push    edx; destination
+0x4E5DAD: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4E5DB2: mov     eax, [edi+24h]
 0x4E5DB5: test    eax, eax
 0x4E5DB7: jz      short loc_4E5DD8
@@ -76,17 +76,17 @@
 0x4E5DC2: jnb     short loc_4E5DD8
 0x4E5DC4: mov     edx, [eax+4]
 0x4E5DC7: movzx   ecx, cx
-0x4E5DCA: mov     ecx, [edx+ecx*4]
+0x4E5DCA: mov     ecx, [edx+ecx*4]; this
 0x4E5DCD: test    ecx, ecx
 0x4E5DCF: jz      short loc_4E5DD8
-0x4E5DD1: push    1
-0x4E5DD3: call    sub_67ED80
+0x4E5DD1: push    1; value
+0x4E5DD3: call    PathGraphNode_SetLinkedPointsDisabled; Verified sets/clears the PathGrid linked-points-disabled flag (0x20). SetLinkedPointsEnabled stores the inverse of its enabled argument.
 0x4E5DD8: movzx   eax, [esp+1Ch+var_10]
 0x4E5DDD: add     esi, 1
 0x4E5DE0: cmp     esi, eax
 0x4E5DE2: jb      short loc_4E5DA0
 0x4E5DE4: mov     ecx, ds:0B33B00h
-0x4E5DEA: call    sub_45A170
+0x4E5DEA: call    TESSaveLoadGame_UseSaveGameBlocks
 0x4E5DEF: test    al, al
 0x4E5DF1: jz      loc_4E5F02
 0x4E5DF7: mov     ecx, ds:0B33B00h
@@ -96,8 +96,8 @@
 0x4E5E08: jz      loc_4E5EAB
 0x4E5E0E: mov     ecx, [edi]
 0x4E5E10: push    ecx; a1
-0x4E5E11: call    TESForm_LookupByFormID
-0x4E5E16: movzx   edx, word ptr [esp+20h+var_8]
+0x4E5E11: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
+0x4E5E16: movzx   edx, word ptr [esp+20h+destination]
 0x4E5E1B: mov     ecx, eax
 0x4E5E1D: lea     eax, [edx+ebx]
 0x4E5E20: add     esp, 4
@@ -110,7 +110,7 @@
 0x4E5E31: push    edx
 0x4E5E32: mov     edx, [eax+0D4h]
 0x4E5E38: call    edx
-0x4E5E3A: movzx   ecx, word ptr [esp+24h+var_8]
+0x4E5E3A: movzx   ecx, word ptr [esp+24h+destination]
 0x4E5E3F: push    eax
 0x4E5E40: mov     eax, [edi]
 0x4E5E42: push    eax
@@ -136,7 +136,7 @@
 0x4E5E77: mov     eax, [edx+0D4h]
 0x4E5E7D: call    eax
 0x4E5E7F: mov     ecx, [edi]
-0x4E5E81: movzx   edx, word ptr [esp+24h+var_8]
+0x4E5E81: movzx   edx, word ptr [esp+24h+destination]
 0x4E5E86: push    eax
 0x4E5E87: push    ecx
 0x4E5E88: push    0D75h
@@ -152,7 +152,7 @@
 0x4E5EA6: pop     ebx
 0x4E5EA7: add     esp, 10h
 0x4E5EAA: retn
-0x4E5EAB: movzx   eax, word ptr [esp+1Ch+var_8]
+0x4E5EAB: movzx   eax, word ptr [esp+1Ch+destination]
 0x4E5EB0: lea     edx, [eax+ebx]
 0x4E5EB3: cmp     esi, edx
 0x4E5EB5: jbe     short loc_4E5EDF

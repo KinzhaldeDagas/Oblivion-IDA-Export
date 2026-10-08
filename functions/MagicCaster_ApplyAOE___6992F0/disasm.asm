@@ -9,14 +9,14 @@
 0x699302: jz      loc_6994F1
 0x699308: mov     eax, [esp+18h+arg_4]
 0x69930C: mov     ecx, [eax+0Ch]
-0x69930F: call    EffectItem_GetArea
+0x69930F: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x699314: test    eax, eax
 0x699316: mov     [esp+18h+var_8], eax
 0x69931A: jle     loc_6994F1
 0x699320: fld     dword ptr ds:0B37DB8h
 0x699326: fmul    [esp+18h+arg_28]
 0x69932A: fimul   [esp+18h+var_8]
-0x69932E: call    Double_To_SInt32
+0x69932E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x699333: mov     edx, [esi]
 0x699335: mov     [esp+18h+var_8], eax
 0x699339: mov     eax, [edx+20h]
@@ -76,10 +76,10 @@
 0x6993E0: call    eax
 0x6993E2: test    eax, eax
 0x6993E4: jz      loc_6994DE
-0x6993EA: lea     ecx, [esp+18h+arg_C]
-0x6993EE: push    ecx
-0x6993EF: mov     ecx, edi
-0x6993F1: call    sub_4D7E30
+0x6993EA: lea     ecx, [esp+18h+pointXYZ]
+0x6993EE: push    ecx; pointXYZ
+0x6993EF: mov     ecx, edi; this
+0x6993F1: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x6993F6: fild    [esp+18h+var_8]
 0x6993FA: fcompp
 0x6993FC: fnstsw  ax
@@ -104,7 +104,7 @@
 0x699434: test    al, al
 0x699436: jz      loc_6994DE
 0x69943C: mov     ebp, [esp+18h+arg_0]
-0x699440: mov     ecx, [esp+18h+arg_C]
+0x699440: mov     ecx, [esp+18h+pointXYZ]
 0x699444: mov     edx, [esp+18h+arg_10]
 0x699448: push    1
 0x69944A: push    ebx
@@ -156,12 +156,12 @@
 0x6994C2: push    1
 0x6994C4: lea     ecx, [ebp+0Ch]
 0x6994C7: mov     byte ptr [esp+20h+arg_8], 1
-0x6994CC: add     esi, 39Ch
+0x6994CC: add     esi, 39Ch; Advance the actor vtable pointer to Player_ModExperience (+0x39C); this adjusted-pointer form is why ordinary function xrefs miss the later call.
 0x6994D2: call    EffectItemList_GetSchoolAV
 0x6994D7: mov     edx, [esi]
 0x6994D9: push    eax
 0x6994DA: mov     ecx, edi
-0x6994DC: call    edx
+0x6994DC: call    edx; Eligible area magic application: resolved school AV, useValue1, identity scale (0.0).
 0x6994DE: mov     eax, [esp+18h+arg_20]
 0x6994E2: mov     eax, [eax+4]
 0x6994E5: test    eax, eax

@@ -1,20 +1,20 @@
-void __thiscall DarknessEffect_PostLink(_DWORD *this, _DWORD *a2)
+void __thiscall DarknessEffect_PostLink(volatile LONG ***this, _DWORD *a2)
 {
-  int v4; // esi
-  float v5; // [esp+14h] [ebp+4h]
+  NiNode *v3; // esi
+  float v4; // [esp+14h] [ebp+4h]
 
-  ValueModifierEffect_PostLink(this, (int)a2);
-  v5 = 1.0 - ((double (__thiscall *)(_DWORD *, int))*(_DWORD *)(*a2 + 0x288))(a2, 0x46) / fCostant_100;
-  if ( v5 >= 0.0 )
+  ValueModifierEffect_PostLink(this, (int)a2); /*0x692d06*/
+  v4 = 1.0 - ((double (__thiscall *)(_DWORD *, int))*(_DWORD *)(*a2 + 0x288))(a2, 0x46) / fCostant_100; /*0x692d23*/
+  if ( v4 >= 0.0 ) /*0x692d34*/
   {
-    if ( v5 > 1.0 )
-      v5 = 1.0;
+    if ( v4 > 1.0 ) /*0x692d4b*/
+      v4 = 1.0; /*0x692d4d*/
   }
   else
   {
-    v5 = 0.0;
+    v4 = 0.0; /*0x692d38*/
   }
-  v4 = a2[0xF];
-  if ( v4 )
-    sub_7B8440(v4, v5);
+  v3 = (NiNode *)a2[0xF]; /*0x692d55*/
+  if ( v3 ) /*0x692d5a*/
+    sub_7B8440(v3, v4); /*0x692d65*/
 }

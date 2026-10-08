@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x62F8C7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x62F8F3",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x62F904",
-    "line": "push    offset dword_B3B944",
+    "line": "push    offset unk_B3B944",
     "mnemonic": "push",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x62F90A",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x62F927",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x62F98E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62F990",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x62F9B5",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x62F9CA",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x62F9E5",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x62FA4B",
-    "line": "lea     ecx, [esp+48h+var_20]",
+    "line": "lea     ecx, [esp+48h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x62FA4F",
-    "line": "call    sub_68A9F0",
+    "line": "call    PathLow_ctor; Verified PathLow constructor: installs the PathLow vtable at +0, initializes the BSSimpleList at +4/+8 to empty, copies unk_B3A458 to +0x0C, and sets byte +0x10 to 1. +0x0C and byte +0x10 semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x62FAA6",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x62FAB9",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x62FAE0",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x62FAE7",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1447,19 +1447,19 @@
   },
   {
     "ea": "0x62FAF1",
-    "line": "push    0",
+    "line": "push    0; relativeTo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62FAF3",
-    "line": "push    0",
+    "line": "push    0; insertRelative",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62FAF5",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
@@ -1471,31 +1471,31 @@
   },
   {
     "ea": "0x62FAF9",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62FAFE",
-    "line": "push    eax",
+    "line": "push    eax; processLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62FAFF",
-    "line": "push    esi",
+    "line": "push    esi; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62FB00",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x62FB05",
-    "line": "call    sub_673A90",
+    "line": "call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x62FB49",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x62FB4D",
-    "line": "call    sub_606140",
+    "line": "call    Crime_GetGoldValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x62FB84",
-    "line": "lea     ecx, [esp+48h+var_20]",
+    "line": "lea     ecx, [esp+48h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x62FB90",
-    "line": "call    sub_68AA10",
+    "line": "call    PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x62FBA6",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x62FBAC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1852,5 +1852,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3D80",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D83",
+    "line": "jmp     PathLow_dtor; Verified PathLow destructor: restores the PathLow vtable and frees/clears owned TravelPathNode records through TravelPath_ClearNodes. This routine does not free the containing object.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D88",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3D8C",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D8F",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3D92",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3D94",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D99",
+    "line": "mov     eax, offset stru_AEC898",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3D9E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,5 @@
-__int16 __thiscall sub_787200(void *this)
+// CSpeedTreeRT::GetNumLeafLodLevels. Returns the 16-bit leaf LOD count at CTreeEngine+0xC0.
+unsigned __int16 __thiscall CSpeedTreeRT__GetNumLeafLodLevels(const OB_CSpeedTreeRT_010201A0 *this)
 {
-  return *(_WORD *)(*(_DWORD *)this + 0xC0);
+  return *(_WORD *)(this->treeEngine + 0xC0); /*0x787209*/
 }

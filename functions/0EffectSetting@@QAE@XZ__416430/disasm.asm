@@ -54,10 +54,10 @@
 0x416500: mov     [esi+84h], edi
 0x416506: mov     [esi+88h], edi
 0x41650C: mov     [esi+8Ch], edi
-0x416512: fld     fMagicDefaultCEEnchantFactor
+0x416512: fld     dword ptr ds:0B33704h
 0x416518: fstp    dword ptr [esi+90h]
 0x41651E: mov     eax, esi
-0x416520: fld     fMagicDefaultCEBarterFactor
+0x416520: fld     dword ptr ds:0B3370Ch
 0x416526: mov     [esi+9Ch], edi
 0x41652C: fstp    dword ptr [esi+94h]
 0x416532: mov     [esi+0A0h], edi
@@ -74,3 +74,18 @@
 0x416557: pop     ebx
 0x416558: add     esp, 10h
 0x41655B: retn
+0x9AB360: mov     ecx, [ebp-10h]; this
+0x9AB363: jmp     TESForm_destr
+0x9AB368: mov     ecx, [ebp-10h]
+0x9AB36B: add     ecx, 18h; this
+0x9AB36E: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9AB373: mov     ecx, [ebp-10h]
+0x9AB376: add     ecx, 38h ; '8'
+0x9AB379: jmp     TESFullName_Initialize
+0x9AB37E: mov     edx, [esp+arg_4]
+0x9AB382: lea     eax, [edx-14h]
+0x9AB385: mov     ecx, [edx-18h]
+0x9AB388: xor     ecx, eax
+0x9AB38A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB38F: mov     eax, offset stru_AD8250
+0x9AB394: jmp     ___CxxFrameHandler3

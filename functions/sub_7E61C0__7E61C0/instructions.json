@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x7E61C7",
-    "line": "mov     ecx, [esp+3Ch+arg_0]",
+    "line": "mov     ecx, [esp+3Ch+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7E61CB",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7E61D7",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },

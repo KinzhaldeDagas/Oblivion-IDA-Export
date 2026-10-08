@@ -17,7 +17,7 @@
 0x9986A1: and     ax, 7FF0h
 0x9986A5: cmp     ax, 7FF0h
 0x9986A9: push    ecx
-0x9986AA: fstp    [esp+18h+var_18]; int
+0x9986AA: fstp    qword ptr [esp+18h+var_18]; int
 0x9986AD: jnz     short loc_998704
 0x9986AF: call    __sptype
 0x9986B4: test    eax, eax

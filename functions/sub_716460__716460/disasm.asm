@@ -5,7 +5,7 @@
 0x716469: push    esi
 0x71646A: push    ebx; arg0
 0x71646B: mov     esi, ecx
-0x71646D: call    sub_700750
+0x71646D: call    sub_700750; Pass227: NiScreenTexture vtable +0x38 map insertion helper; inserts object into map context, not a draw call.
 0x716472: mov     ecx, [ebx]
 0x716474: lea     eax, [esp+18h+arg0]
 0x716478: push    eax
@@ -43,18 +43,18 @@
 0x7164C9: mov     [esp+1Ch+arg0], eax
 0x7164CD: jz      short loc_71651E
 0x7164CF: nop
-0x7164D0: lea     eax, [esp+1Ch+var_8]
-0x7164D4: push    eax
-0x7164D5: lea     ecx, [esp+20h+var_C]
-0x7164D9: push    ecx
+0x7164D0: lea     eax, [esp+1Ch+valueOut]
+0x7164D4: push    eax; valueOut
+0x7164D5: lea     ecx, [esp+20h+keyOut]
+0x7164D9: push    ecx; keyOut
 0x7164DA: lea     edx, [esp+24h+arg0]
-0x7164DE: push    edx
-0x7164DF: mov     ecx, edi
-0x7164E1: call    sub_452600
-0x7164E6: mov     esi, [esp+1Ch+var_C]
+0x7164DE: push    edx; position
+0x7164DF: mov     ecx, edi; self
+0x7164E1: call    NiTMap_U32Pointer_GetNextEntry
+0x7164E6: mov     esi, [esp+1Ch+keyOut]
 0x7164EA: test    esi, esi
 0x7164EC: jz      short loc_716517
-0x7164EE: mov     eax, [esp+1Ch+var_8]
+0x7164EE: mov     eax, [esp+1Ch+valueOut]
 0x7164F2: test    eax, eax
 0x7164F4: jz      short loc_716517
 0x7164F6: lea     ecx, [esp+1Ch+var_4]

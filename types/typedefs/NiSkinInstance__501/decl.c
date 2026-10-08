@@ -1,1 +1,1 @@
-NiSkinInstance
+struct NiSkinInstance;

@@ -1,4 +1,4 @@
 signed int sub_5A3CD0()
 {
-  return 0x3F3;
+  return 0x3F3; /*0x5a3cd5*/
 }

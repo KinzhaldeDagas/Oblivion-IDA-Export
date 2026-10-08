@@ -22,7 +22,7 @@
 0x489521: mov     eax, [esi+4]
 0x489524: mov     edi, [eax+4]
 0x489527: push    eax
-0x489528: call    FormHeapFree
+0x489528: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48952D: add     esp, 4
 0x489530: test    edi, edi
 0x489532: mov     [esi+4], edi
@@ -30,10 +30,10 @@
 0x489537: mov     dword ptr [esi], 0
 0x48953D: mov     eax, [ebx]
 0x48953F: push    eax
-0x489540: call    FormHeapFree
+0x489540: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x489545: push    ebx
 0x489546: mov     dword ptr [ebx], 0
-0x48954C: call    FormHeapFree
+0x48954C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x489551: mov     edi, [esp+0Ch+arg_8]
 0x489555: add     esp, 8
 0x489558: test    ebp, ebp
@@ -45,7 +45,7 @@
 0x489565: mov     eax, [esi+4]
 0x489568: mov     edi, [eax+4]
 0x48956B: push    eax
-0x48956C: call    FormHeapFree
+0x48956C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x489571: add     esp, 4
 0x489574: test    edi, edi
 0x489576: mov     [esi+4], edi

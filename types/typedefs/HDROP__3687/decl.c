@@ -1,1 +1,1 @@
-HDROP
+typedef HDROP__ *HDROP;

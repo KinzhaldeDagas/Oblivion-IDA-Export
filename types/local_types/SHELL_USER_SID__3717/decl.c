@@ -1,1 +1,6 @@
-SHELL_USER_SID
+struct SHELL_USER_SID
+{
+SID_IDENTIFIER_AUTHORITY sidAuthority;
+DWORD dwUserGroupID;
+DWORD dwUserID;
+};

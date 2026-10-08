@@ -19,16 +19,16 @@
 0x68F48A: mov     large fs:0, eax
 0x68F490: mov     ebx, [ebp+arg_0]
 0x68F493: mov     eax, [ebx+20h]
-0x68F496: push    eax
+0x68F496: push    eax; collidable
 0x68F497: mov     edi, ecx
 0x68F499: mov     [esp+0B8h+var_88], ebx
 0x68F49D: xor     esi, esi
-0x68F49F: call    sub_8AFCE0
+0x68F49F: call    bhkCollidable_ResolveNiAVObject; TES4 authoritative: resolves Havok collidable/contact reference to a NiAVObject when possible. Handles collidable type 1 directly and type 2 with a fallback through v5+0x0C.
 0x68F4A4: add     esp, 4
 0x68F4A7: test    eax, eax
 0x68F4A9: jz      short loc_68F4B6
 0x68F4AB: push    eax
-0x68F4AC: call    sub_4DC270
+0x68F4AC: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x68F4B1: add     esp, 4
 0x68F4B4: mov     esi, eax
 0x68F4B6: push    0; int
@@ -51,14 +51,14 @@
 0x68F4ED: test    al, al
 0x68F4EF: jz      loc_68F93E
 0x68F4F5: mov     eax, [ebx+28h]
-0x68F4F8: push    eax
+0x68F4F8: push    eax; collidable
 0x68F4F9: mov     [esp+0B8h+var_A0], esi
-0x68F4FD: call    sub_8AFCE0
+0x68F4FD: call    bhkCollidable_ResolveNiAVObject; TES4 authoritative: resolves Havok collidable/contact reference to a NiAVObject when possible. Handles collidable type 1 directly and type 2 with a fallback through v5+0x0C.
 0x68F502: add     esp, 4
 0x68F505: cmp     eax, esi
 0x68F507: jz      short loc_68F52E
 0x68F509: push    eax
-0x68F50A: call    sub_4DC270
+0x68F50A: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x68F50F: add     esp, 4
 0x68F512: cmp     eax, esi
 0x68F514: mov     [esp+0B4h+var_A0], eax
@@ -127,7 +127,7 @@
 0x68F5E5: jz      loc_68F81A
 0x68F5EB: push    ebx
 0x68F5EC: lea     ecx, [esp+0B8h+var_50]
-0x68F5F0: call    sub_532210
+0x68F5F0: call    hkpCdPoint_CopyHitEntry30
 0x68F5F5: mov     edi, [esp+0B4h+var_30]
 0x68F5FC: mov     eax, [edi]
 0x68F5FE: test    eax, eax
@@ -170,7 +170,7 @@
 0x68F67A: push    eax
 0x68F67B: lea     eax, [esp+0C0h+var_98]
 0x68F67F: push    eax
-0x68F680: call    sub_43F3E0
+0x68F680: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x68F685: mov     ecx, [esp+0C4h+var_98]
 0x68F689: mov     edx, [esp+0C4h+var_94]
 0x68F68D: mov     eax, [esp+0C4h+var_90]
@@ -178,10 +178,10 @@
 0x68F694: mov     [ebx+58h], edx
 0x68F697: add     esp, 10h
 0x68F69A: mov     [ebx+5Ch], eax
-0x68F69D: call    sub_4E70B0
+0x68F69D: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x68F6A2: push    eax; a2
 0x68F6A3: mov     ecx, ebx; this
-0x68F6A5: call    sub_405680
+0x68F6A5: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x68F6AA: push    1Ch; Size
 0x68F6AC: call    FormHeapAlloc
 0x68F6B1: add     esp, 4
@@ -198,7 +198,7 @@
 0x68F6D7: push    eax; a2
 0x68F6D8: mov     ecx, ebx; this
 0x68F6DA: mov     [esp+0B8h+var_4], 0FFFFFFFFh
-0x68F6E5: call    sub_405680
+0x68F6E5: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x68F6EA: fld     dword ptr ds:0A3D8F0h
 0x68F6F0: push    ecx
 0x68F6F1: mov     ecx, ds:0B333A0h
@@ -249,7 +249,7 @@
 0x68F790: push    eax
 0x68F791: lea     eax, [esp+0C0h+var_98]
 0x68F795: push    eax
-0x68F796: call    sub_43F3E0
+0x68F796: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x68F79B: mov     ecx, [esp+0C4h+var_98]
 0x68F79F: mov     edx, [esp+0C4h+var_94]
 0x68F7A3: mov     eax, [esp+0C4h+var_90]
@@ -257,10 +257,10 @@
 0x68F7AA: mov     [ebx+58h], edx
 0x68F7AD: add     esp, 10h
 0x68F7B0: mov     [ebx+5Ch], eax
-0x68F7B3: call    sub_4E70B0
+0x68F7B3: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x68F7B8: push    eax; a2
 0x68F7B9: mov     ecx, ebx; this
-0x68F7BB: call    sub_405680
+0x68F7BB: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x68F7C0: push    1Ch; Size
 0x68F7C2: call    FormHeapAlloc
 0x68F7C7: add     esp, 4
@@ -276,7 +276,7 @@
 0x68F7ED: push    eax; a2
 0x68F7EE: mov     ecx, ebx; this
 0x68F7F0: mov     [esp+0B8h+var_4], 0FFFFFFFFh
-0x68F7FB: call    sub_405680
+0x68F7FB: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x68F800: fld     dword ptr ds:0A3D8F0h
 0x68F806: push    ecx
 0x68F807: mov     ecx, ds:0B333A0h
@@ -287,7 +287,7 @@
 0x68F81A: lea     ecx, [esp+0B4h+var_98]
 0x68F81E: push    ebx
 0x68F81F: push    ecx
-0x68F820: call    sub_43F3E0
+0x68F820: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x68F825: mov     ebx, [esp+0BCh+var_90]
 0x68F829: add     esp, 8
 0x68F82C: cmp     byte ptr ds:0B15A68h, 0
@@ -295,21 +295,21 @@
 0x68F835: fld1
 0x68F837: lea     edx, [esp+0B4h+var_84]
 0x68F83B: fst     [esp+0B4h+var_84]
-0x68F83F: push    edx; int
+0x68F83F: push    edx; vertexColor
 0x68F840: fldz
 0x68F842: push    ecx
 0x68F843: fst     [esp+0BCh+var_80]
 0x68F847: fstp    [esp+0BCh+var_7C]
 0x68F84B: fstp    [esp+0BCh+var_78]
 0x68F84F: fld     dword ptr ds:0A31E2Ch
-0x68F855: fstp    [esp+0BCh+var_BC]; float
-0x68F858: call    sub_47FD30
+0x68F855: fstp    [esp+0BCh+scale]; scale
+0x68F858: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x68F85D: add     esp, 8
 0x68F860: mov     esi, eax
-0x68F862: call    sub_4E70B0
+0x68F862: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x68F867: push    eax; a2
 0x68F868: mov     ecx, esi; this
-0x68F86A: call    sub_405680
+0x68F86A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x68F86F: fld     dword ptr ds:0A3D8F0h
 0x68F875: mov     ecx, [esp+0B4h+var_94]
 0x68F879: mov     eax, [esp+0B4h+var_98]
@@ -352,7 +352,7 @@
 0x68F8E7: mov     [ecx+4], edx
 0x68F8EA: mov     [ecx+8], ebx
 0x68F8ED: push    eax
-0x68F8EE: mov     ecx, offset ActorProcessManager_ptr
+0x68F8EE: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x68F8F3: call    sub_677760
 0x68F8F8: mov     eax, [esp+0B4h+var_88]
 0x68F8FC: mov     ecx, [eax+28h]
@@ -391,3 +391,34 @@
 0x68F95E: mov     esp, ebp
 0x68F960: pop     ebp
 0x68F961: retn    4
+0x9C5580: mov     eax, [ebp+var_9C]
+0x9C5586: push    eax
+0x9C5587: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C558C: pop     ecx
+0x9C558D: retn
+0x9C558E: mov     eax, [ebp+var_9C]
+0x9C5594: push    eax
+0x9C5595: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C559A: pop     ecx
+0x9C559B: retn
+0x9C559C: mov     eax, [ebp+var_9C]
+0x9C55A2: push    eax
+0x9C55A3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C55A8: pop     ecx
+0x9C55A9: retn
+0x9C55AA: mov     eax, [ebp+var_9C]
+0x9C55B0: push    eax
+0x9C55B1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C55B6: pop     ecx
+0x9C55B7: retn
+0x9C55B8: mov     edx, [esp-4+arg_4]
+0x9C55BC: lea     eax, [edx-0A4h]
+0x9C55C2: mov     ecx, [edx-0A8h]
+0x9C55C8: xor     ecx, eax
+0x9C55CA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C55CF: add     eax, 0Ch
+0x9C55D2: mov     ecx, [edx-8]
+0x9C55D5: xor     ecx, eax
+0x9C55D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C55DC: mov     eax, offset stru_AEDD88
+0x9C55E1: jmp     ___CxxFrameHandler3

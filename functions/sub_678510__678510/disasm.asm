@@ -1,4 +1,4 @@
-0x678510: sub     esp, 8
+0x678510: sub     esp, 8; 3DTheft decode 2026-05-16: frame-loop actor process manager scheduled update dispatch before the second maintenance pass.
 0x678513: push    esi
 0x678514: mov     esi, ecx
 0x678516: mov     ecx, ds:0B3BF80h
@@ -16,14 +16,14 @@
 0x67854B: fstp    [esp+10h+var_4]
 0x67854F: fld     [esp+10h+var_4]
 0x678553: fstp    [esp+10h+var_10]; float
-0x678556: call    sub_673B10
+0x678556: call    sub_673B10; ActorProcessManager accumulates a fractional fast-travel/update remainder in flt_B3BCF0; NaN/large values are reset to 0.
 0x67855B: fld     [esp+0Ch+var_8]
 0x67855F: fld     st
 0x678561: fld1
 0x678563: fld     st
 0x678565: fdivrp  st(2), st
 0x678567: fxch    st(1)
-0x678569: call    Double_To_SInt32
+0x678569: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x67856E: fld     dword ptr [esi+24h]
 0x678571: cmp     eax, 32h ; '2'
 0x678574: fadd    st, st(2)
@@ -83,7 +83,7 @@
 0x678602: push    ecx
 0x678603: mov     ecx, esi
 0x678605: fstp    [esp+14h+var_14]; float
-0x678608: call    sub_673C10
+0x678608: call    sub_673C10; ActorProcessManager process-level-3 list update used during fast-travel time simulation.
 0x67860D: fldz
 0x67860F: mov     dword ptr ds:0B3BCF4h, 82h ; '‚'
 0x678619: cmp     byte ptr [esi+0A3h], 0
@@ -94,7 +94,7 @@
 0x67862D: push    ecx
 0x67862E: mov     ecx, esi
 0x678630: fstp    [esp+14h+var_14]; float
-0x678633: call    sub_673E90
+0x678633: call    sub_673E90; ActorProcessManager process-level-2 list update used during fast-travel time simulation.
 0x678638: fldz
 0x67863A: mov     dword ptr ds:0B3BCF4h, 8Ch ; 'Œ'
 0x678644: cmp     byte ptr [esi+0A2h], 0
@@ -103,7 +103,7 @@
 0x67864F: push    ecx
 0x678650: mov     ecx, esi
 0x678652: fstp    [esp+14h+var_14]; float
-0x678655: call    sub_674200
+0x678655: call    sub_674200; ActorProcessManager process-level-1 list update used during fast-travel time simulation.
 0x67865A: fldz
 0x67865C: mov     dword ptr ds:0B3BCF4h, 0B4h ; '´'
 0x678666: cmp     byte ptr [esi+0A0h], 0
@@ -112,7 +112,7 @@
 0x678671: push    ecx
 0x678672: mov     ecx, esi
 0x678674: fstp    [esp+14h+var_14]; float
-0x678677: call    sub_677EC0
+0x678677: call    sub_677EC0; ActorProcessManager high/process list update used during fast-travel time simulation.
 0x67867C: mov     dword ptr ds:0B3BCF4h, 0BEh ; '¾'
 0x678686: pop     esi
 0x678687: add     esp, 8

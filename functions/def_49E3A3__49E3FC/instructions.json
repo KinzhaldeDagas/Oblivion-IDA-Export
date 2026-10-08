@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x49E3FC",
-    "line": "fstp    st(5); jumptable 0049E3A3 default case",
+    "line": "fstp    st(5); Pass205/206: Internal shared child-creation tail inside 0x0049E280; not standalone function. Later writes +0x71 for LODWaterRoot children.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x49E46A",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x49E46C",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x49E46E",
-    "line": "push    11h",
+    "line": "push    11h; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x49E470",
-    "line": "push    esi",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49E471",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x49E47D",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x49E488",
-    "line": "mov     byte ptr [eax+71h], 1",
+    "line": "mov     byte ptr [eax+71h], 1; Pass205/206: Writes WaterShaderProperty +0x71=1 for generated LODWaterRoot child.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,31 +337,31 @@
   },
   {
     "ea": "0x49E4B3",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x49E4B5",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x49E4B7",
-    "line": "push    11h",
+    "line": "push    11h; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x49E4B9",
-    "line": "push    ecx",
+    "line": "push    ecx; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x49E4BA",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x49E4C2",
-    "line": "call    sub_499E40",
+    "line": "call    sub_499E40; Pass205: Water-related callsite included in pass-data producer verification; cross-check before naming high-level field semantics.",
     "mnemonic": "call",
     "size": 5
   },

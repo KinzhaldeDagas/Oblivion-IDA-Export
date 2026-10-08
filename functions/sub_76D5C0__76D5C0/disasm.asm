@@ -1,4 +1,4 @@
-0x76D5C0: sub     esp, 20h
+0x76D5C0: sub     esp, 20h; Recreates an additional depth/stencil surface after device reset. Validates the stored depth format against the current default framebuffer with IDirect3D9::CheckDeviceFormat, calls CreateDepthStencilSurface using saved width/height/multisample settings, and rebuilds NiSurfaceData.
 0x76D5C3: push    edi
 0x76D5C4: mov     edi, ecx
 0x76D5C6: cmp     dword ptr [edi+0Ch], 0
@@ -45,7 +45,7 @@
 0x76D62B: mov     ebp, [edi+18h]
 0x76D62E: mov     eax, [edi+8]
 0x76D631: mov     ecx, [eax+0Ch]
-0x76D634: mov     edx, [esp+30h+arg_0]
+0x76D634: mov     edx, [esp+30h+device]
 0x76D638: mov     eax, [eax+8]
 0x76D63B: mov     ebx, [edx]
 0x76D63D: push    0
@@ -63,11 +63,11 @@
 0x76D652: call    ecx
 0x76D654: test    eax, eax
 0x76D656: jge     short loc_76D678
-0x76D658: push    eax
-0x76D659: call    sub_7736F0
+0x76D658: push    eax; hresult
+0x76D659: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x76D65E: push    eax
 0x76D65F: push    offset aNidx9additiona; "NiDX9AdditionalDepthStencilBufferData::"...
-0x76D664: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76D664: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76D669: add     esp, 0Ch
 0x76D66C: pop     esi
 0x76D66D: pop     ebp

@@ -58,7 +58,7 @@
 0x7E63FF: push    eax; int
 0x7E6400: lea     edx, [esp+15Ch+var_C0]
 0x7E6407: push    edx; int
-0x7E6408: call    sub_761AE0
+0x7E6408: call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.
 0x7E640D: add     esp, 10h
 0x7E6410: fld     dword ptr ds:0B3F92Ch
 0x7E6416: mov     eax, ds:0B42EB8h
@@ -161,7 +161,7 @@
 0x7E65C6: mov     ecx, [ecx]
 0x7E65C8: lea     edx, [esp+144h+var_C4]
 0x7E65CF: push    edx
-0x7E65D0: call    sub_405AD0
+0x7E65D0: call    ShadowSceneLight_GetLightRef
 0x7E65D5: mov     esi, [eax]
 0x7E65D7: mov     eax, [esp+144h+var_C4]
 0x7E65DE: test    eax, eax

@@ -1,0 +1,1 @@
+struct NiTPointerMap_TESObjectTREE_BSTreeModelArray;

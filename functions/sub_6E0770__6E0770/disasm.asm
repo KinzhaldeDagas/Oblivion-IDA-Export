@@ -1,1 +1,1 @@
-0x6E0770: jmp     sub_75E480
+0x6E0770: jmp     j_NiSingleInterpController_LinkObject

@@ -55,16 +55,16 @@
 0x410212: test    bl, bl
 0x410214: jz      short loc_41021B
 0x410216: mov     esi, 2000h
-0x41021B: mov     eax, OSGlobals
+0x41021B: mov     eax, ds:0B33398h
 0x410220: test    eax, eax
 0x410222: mov     [esp+150h+var_13D], 0
 0x410227: mov     bl, 1
-0x410229: jz      short loc_410252
+0x410229: jz      short loc_410252; ModernWindowsCompatible decode: Bink open path compares current thread id with OSGlobals+0x10 before using OSGlobals+0x14 as the main thread handle for SuspendThread.
 0x41022B: mov     edi, [eax+10h]
 0x41022E: call    ds:GetCurrentThreadId
 0x410234: cmp     eax, edi
 0x410236: jz      short loc_410252
-0x410238: mov     edx, OSGlobals
+0x410238: mov     edx, ds:0B33398h
 0x41023E: mov     eax, [edx+14h]
 0x410241: push    eax; hThread
 0x410242: mov     [esp+154h+var_13D], bl
@@ -87,8 +87,8 @@
 0x410280: mov     dword ptr [ebp+20h], 0
 0x410287: xor     bl, bl
 0x410289: cmp     [esp+150h+var_13D], 0
-0x41028E: jz      short loc_41029F
-0x410290: mov     eax, OSGlobals
+0x41028E: jz      short loc_41029F; ModernWindowsCompatible decode: Bink open path resumes OSGlobals+0x14 after non-main-thread BinkOpen; this verifies the mainThreadHandle consumer for the 0x404A55 patch.
+0x410290: mov     eax, ds:0B33398h
 0x410295: mov     ecx, [eax+14h]
 0x410298: push    ecx; hThread
 0x410299: call    ds:ResumeThread

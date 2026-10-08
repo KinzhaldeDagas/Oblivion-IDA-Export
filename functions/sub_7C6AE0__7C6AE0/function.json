@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C6AE0",
+  "chunks": [
+    [
+      "0x7C6AE0",
+      "0x7C6C29"
+    ],
+    [
+      "0x9CE700",
+      "0x9CE72E"
+    ]
+  ],
+  "chunks_sha256": "213ff2feb8ce0b8bc9112bad4fa6d8260151d11819a46b176d4b040f90915434",
+  "comment_regular": "Find or create a native full-list ShadowSceneLight for a backing NiLight. The third argument is the proved trackBackingPosition boolean, not a ShadowSceneLight pointer or admission selector.",
+  "comment_repeatable": "Find or create a native full-list ShadowSceneLight for a backing NiLight. The third argument is the proved trackBackingPosition boolean, not a ShadowSceneLight pointer or admission selector.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowSceneNode_FindOrCreateFullLightForSource",
   "end_ea": "0x7C6C29",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C6AE0",
+  "name": "ShadowSceneNode_FindOrCreateFullLightForSource",
   "segment": ".text",
   "sha256": "e7f01db9d62bf9265d4949718b728d72854ebb0bc6a05509ad01ee97cd2594b3",
   "size": 329,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C6AE0",
-  "type": "ShadowSceneLight *__thiscall(_DWORD *this, int, ShadowSceneLight *)",
-  "xrefs_from_count": 120,
+  "total_chunk_size": 375,
+  "type": "ShadowSceneLight_DecodedLayout *__thiscall(ShadowSceneNode_DecodedLayout *self, void *backingLight, bool trackBackingPosition)",
+  "xrefs_from_count": 136,
   "xrefs_to_count": 7
 }

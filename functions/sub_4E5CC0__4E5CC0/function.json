@@ -1,19 +1,32 @@
 {
-  "callees_count": 30,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x4E5CC0",
+      "0x4E5F09"
+    ]
+  ],
+  "chunks_sha256": "b800e92a0ed6ff321e4622e58c8a6123548fd9567974cf7bc4a848cdce54000c",
+  "comment_regular": "Verified load path for linked-point state: reads the u16 count and indices, range-checks each against the point array capacity, then sets linkedPointsDisabled on valid non-null points. Save-block boundary diagnostics are performed after the payload read.",
+  "comment_repeatable": "Verified load path for linked-point state: reads the u16 count and indices, range-checks each against the point array capacity, then sets linkedPointsDisabled on valid non-null points. Save-block boundary diagnostics are performed after the payload read.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 12,
-  "display_name": "sub_4E5CC0",
+  "display_name": "TESPathGrid_LoadModifiedForm",
   "end_ea": "0x4E5F09",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E5CC0",
+  "name": "TESPathGrid_LoadModifiedForm",
   "segment": ".text",
   "sha256": "b800e92a0ed6ff321e4622e58c8a6123548fd9567974cf7bc4a848cdce54000c",
   "size": 585,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E5CC0",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 585,
+  "type": "void __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 226,
   "xrefs_to_count": 2
 }

@@ -8,7 +8,7 @@
 0x4DB9B0: cmp     byte ptr [eax+4], 20h ; ' '
 0x4DB9B4: jnz     short loc_4DB9C6
 0x4DB9B6: mov     ecx, esi
-0x4DB9B8: call    sub_4D73F0
+0x4DB9B8: call    sub_4D73F0; BunkFix: plugin activation assist uses this same engine helper to find a free marker before calling SetSleepState; assist does not clear or forge ExtraUsedMarkers.
 0x4DB9BD: cmp     eax, 0FFFFFFFFh
 0x4DB9C0: pop     esi
 0x4DB9C1: setnz   al

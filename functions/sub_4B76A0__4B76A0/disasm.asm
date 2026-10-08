@@ -1,7 +1,7 @@
 0x4B76A0: mov     eax, [esp+arg_0]
 0x4B76A4: push    esi
 0x4B76A5: push    eax
-0x4B76A6: call    sub_4DC270
+0x4B76A6: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x4B76AB: mov     esi, eax
 0x4B76AD: add     esp, 4
 0x4B76B0: test    esi, esi

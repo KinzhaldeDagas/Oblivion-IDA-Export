@@ -1,19 +1,40 @@
 {
-  "callees_count": 74,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 42,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "MAkeTreetopsCollisions?",
+  "chunks": [
+    [
+      "0x565510",
+      "0x565BD6"
+    ],
+    [
+      "0x564CE0",
+      "0x564D20"
+    ],
+    [
+      "0x9BD5C0",
+      "0x9BD671"
+    ]
+  ],
+  "chunks_sha256": "588dd4bd212fb43dd1635a5d139826e808b4981598bb1b792673c525c32aea44",
+  "comment_regular": "2026-05-19 captured 4.x load pass: installed 4.x tree corpus includes files with retained 73000 collision rotations after sanitizing, but this Havok builder still has no enabled sidecar consumer hook in stock.\n[Collision v143 2026-10-07] The5614D8 wrapper now consumes authored rotations/mixed groups. Native bTreetops==1 remains required. Unchanged single shapes and all-sphere groups retain this stock builder. New shapes use native factories, simple phantom/filter40009 and bhkSPCollisionObject tableA655CC. Scaling matches float(source*double hkFactor A39088)*float(B39E18*instanceScale). Box center=p+R*(0,0,height/2); capsule endpoints=p+R*(0,0,r) and p+R*(0,0,height-r). Approved CAD4.2 CBox/CCylinder/CSphere constructors set order4; CVENode DoLocalTransform then calls Z,X,Y in degrees. Independent IdvVector comparison passed in277 focused checks. Build evidence only: in-game shape alignment and teardown UNVERIFIED. User authorized enabling the existing game bTreeTops setting for manual testing.\n[Collision v144 2026-10-07] Empty authored set returns before shape creation (56556D). User confirms Bamboo/Cattail have intentionally no collision and other tested trees have contact. Do not synthesize collision from generated geometry. Multi-volume branch skips type != 0 at56594E but forwards every collected sphere to8B76E0/8F5300. v144 routes >8 spheres through existing native list shapes and blocks unsafe fallback on failure or disabled extension. Up to8 spheres retain stock behavior. New capacity path gameplay remains UNVERIFIED.\n\n2026-05-19 captured 4.x load pass: installed 4.x tree corpus includes files with retained 73000 collision rotations after sanitizing, but this Havok builder still has no enabled sidecar consumer hook in stock.",
+  "comment_repeatable": "2026-05-19 captured 4.x load pass: installed 4.x tree corpus includes files with retained 73000 collision rotations after sanitizing, but this Havok builder still has no enabled sidecar consumer hook in stock.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 39,
+  "display_name": "BSTreeNode__MakeHavokLeaves",
   "end_ea": "0x565BD6",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "MAkeTreetopsCollisions?",
+  "name": "BSTreeNode__MakeHavokLeaves",
   "segment": ".text",
   "sha256": "fa583e298d3584555e1db5bb5bb5963a36fbd2fdee040880c2d81cd6485bdf80",
   "size": 1734,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x565510",
-  "type": "void __thiscall(void *this, _DWORD *, float)",
-  "xrefs_from_count": 527,
+  "total_chunk_size": 1975,
+  "type": "void __thiscall(void *this, OB_CSpeedTreeRT_010201A0 *speedTree, float scale)",
+  "xrefs_from_count": 631,
   "xrefs_to_count": 1
 }

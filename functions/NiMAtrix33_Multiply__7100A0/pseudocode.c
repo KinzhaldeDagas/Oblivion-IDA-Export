@@ -1,13 +1,32 @@
-float *__thiscall NiMAtrix33_Multiply(float *this, float *a2, float *a3)
+// Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
+NiMatrix33 *__thiscall NiMAtrix33_Multiply(NiMatrix33 *this, NiMatrix33 *out, NiMatrix33 *right)
 {
-  *a2 = *a3 * *this + a3[3] * *(this + 1) + a3[6] * *(this + 2);
-  a2[3] = *(this + 4) * a3[3] + *(this + 3) * *a3 + a3[6] * *(this + 5);
-  a2[6] = *(this + 7) * a3[3] + *(this + 6) * *a3 + a3[6] * *(this + 8);
-  a2[1] = a3[1] * *this + a3[4] * *(this + 1) + *(this + 2) * a3[7];
-  a2[4] = a3[4] * *(this + 4) + a3[1] * *(this + 3) + a3[7] * *(this + 5);
-  a2[7] = a3[4] * *(this + 7) + *(this + 6) * a3[1] + a3[7] * *(this + 8);
-  a2[2] = a3[2] * *this + a3[5] * *(this + 1) + *(this + 2) * a3[8];
-  a2[5] = a3[5] * *(this + 4) + a3[2] * *(this + 3) + a3[8] * *(this + 5);
-  a2[8] = a3[5] * *(this + 7) + *(this + 6) * a3[2] + a3[8] * *(this + 8);
-  return a2;
+  out->data[0][0] = right->data[0][0] * this->data[0][0] /*0x7100bc*/
+                  + right->data[1][0] * this->data[0][1]
+                  + right->data[2][0] * this->data[0][2];
+  out->data[1][0] = this->data[1][1] * right->data[1][0] /*0x7100d3*/
+                  + this->data[1][0] * right->data[0][0]
+                  + right->data[2][0] * this->data[1][2];
+  out->data[2][0] = this->data[2][1] * right->data[1][0] /*0x7100eb*/
+                  + this->data[2][0] * right->data[0][0]
+                  + right->data[2][0] * this->data[2][2];
+  out->data[0][1] = right->data[0][1] * this->data[0][0] /*0x710103*/
+                  + right->data[1][1] * this->data[0][1]
+                  + this->data[0][2] * right->data[2][1];
+  out->data[1][1] = right->data[1][1] * this->data[1][1] /*0x71011c*/
+                  + right->data[0][1] * this->data[1][0]
+                  + right->data[2][1] * this->data[1][2];
+  out->data[2][1] = right->data[1][1] * this->data[2][1] /*0x710135*/
+                  + this->data[2][0] * right->data[0][1]
+                  + right->data[2][1] * this->data[2][2];
+  out->data[0][2] = right->data[0][2] * this->data[0][0] /*0x71014d*/
+                  + right->data[1][2] * this->data[0][1]
+                  + this->data[0][2] * right->data[2][2];
+  out->data[1][2] = right->data[1][2] * this->data[1][1] /*0x710166*/
+                  + right->data[0][2] * this->data[1][0]
+                  + right->data[2][2] * this->data[1][2];
+  out->data[2][2] = right->data[1][2] * this->data[2][1] /*0x71017f*/
+                  + this->data[2][0] * right->data[0][2]
+                  + right->data[2][2] * this->data[2][2];
+  return out; /*0x710182*/
 }

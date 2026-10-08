@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6481B0",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; AVU decode: LowProcess_CalcDamage? estimates damage against target actor arg_4. Early path combines ResistNormalWeapons, armor rating, Strength, ResistMagic, weapon/H2H, active effects, distance, target health, and fatigue factors.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6481C2",
-    "line": "push    41h ; 'A'",
+    "line": "push    41h ; 'A'; Reads target current integer AV 0x41 ResistNormalWeapons through actor vtable slot 0x284 and saves it as the resistance contribution.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6481DE",
-    "line": "call    edx",
+    "line": "call    edx; AVU hook site: ECX/ESI both hold target actor. Vanilla calls actor vtable slot 0x348 GetArmorRating, divides returned ST0 by 100, then multiplies by ResistNormalWeapons contribution. AVU overwrites the call+divide and performs both in HndlDiv.",
     "mnemonic": "call",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x6481F2",
-    "line": "fmul    qword ptr [esp+34h+var_C]",
+    "line": "fmul    qword ptr [esp+34h+var_C]; After armor/100 is on ST0, vanilla multiplies by the saved ResistNormalWeapons value and stores the combined target physical resistance estimate.",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x64821A",
-    "line": "call    edx",
+    "line": "call    edx; Reads target current integer AV 0x40 ResistMagic and adds it into the combat damage estimate path after the physical resistance contribution.",
     "mnemonic": "call",
     "size": 2
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x64825D",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x648369",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x648547",
-    "line": "fstp    [esp+68h+var_68]; float",
+    "line": "fstp    [esp+68h+var_68]; Late LowProcess_CalcDamage? estimate calls Actor_GetBaseCalcAVf with AV 8 Health after reading target base health; this is estimate math, not an AVU hook point.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x648560",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x648566",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x648573",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x64857D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

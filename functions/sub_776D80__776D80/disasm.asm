@@ -1,12 +1,12 @@
-0x776D80: push    esi
+0x776D80: push    esi; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.
 0x776D81: mov     esi, ecx
 0x776D83: mov     eax, [esi+4Ch]
 0x776D86: mov     ecx, [esi+40h]
 0x776D89: mov     edx, [esi+48h]
-0x776D8C: push    eax; Size
-0x776D8D: push    ecx; Src
-0x776D8E: push    edx; Dst
-0x776D8F: call    _memcpy
+0x776D8C: push    eax; byteCount
+0x776D8D: push    ecx; source
+0x776D8E: push    edx; destination
+0x776D8F: call    _memcpy;
 0x776D94: xor     ecx, ecx
 0x776D96: lea     eax, [esi+80h]
 0x776D9C: add     esp, 0Ch

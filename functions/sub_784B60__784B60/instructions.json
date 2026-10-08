@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x784B60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x784B89",
-    "line": "lea     ecx, [esi+4Ch]",
+    "line": "lea     ecx, [esi+4Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x784B94",
-    "line": "call    sub_784A20",
+    "line": "call    OB_stVector24_Destroy_010201A0; Oblivion 1.2.0.416: destroys all 0x18-byte elements, frees backing storage, and nulls begin/end/capacity.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x784B99",
-    "line": "lea     ecx, [esi+3Ch]",
+    "line": "lea     ecx, [esi+3Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x784BA1",
-    "line": "call    sub_784A20",
+    "line": "call    OB_stVector24_Destroy_010201A0; Oblivion 1.2.0.416: destroys all 0x18-byte elements, frees backing storage, and nulls begin/end/capacity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x784BB0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x784BB8",
-    "line": "lea     ecx, [esi+1Ch]",
+    "line": "lea     ecx, [esi+1Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x784BC8",
-    "line": "call    sub_784A20",
+    "line": "call    OB_stVector24_Destroy_010201A0; Oblivion 1.2.0.416: destroys all 0x18-byte elements, frees backing storage, and nulls begin/end/capacity.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x784BCD",
-    "line": "lea     ecx, [esi+0Ch]",
+    "line": "lea     ecx, [esi+0Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x784BD8",
-    "line": "call    sub_784A20",
+    "line": "call    OB_stVector24_Destroy_010201A0; Oblivion 1.2.0.416: destroys all 0x18-byte elements, frees backing storage, and nulls begin/end/capacity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -256,5 +256,119 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CAF50",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF53",
+    "line": "add     ecx, 0Ch; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF56",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF5B",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF5E",
+    "line": "add     ecx, 1Ch; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF61",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF66",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF69",
+    "line": "add     ecx, 2Ch ; ','; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF6C",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF71",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF74",
+    "line": "add     ecx, 3Ch ; '<'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF77",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF7C",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CAF80",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF83",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CAF86",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CAF88",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF8D",
+    "line": "mov     eax, offset stru_AF3580",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CAF92",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

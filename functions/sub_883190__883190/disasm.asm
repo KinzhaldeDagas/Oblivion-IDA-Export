@@ -17,10 +17,10 @@
 0x8831BF: nop
 0x8831C0: lea     eax, [esp+24h+var_14]
 0x8831C4: push    eax
-0x8831C5: call    sub_7606A0
+0x8831C5: call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.
 0x8831CA: add     esp, 4
 0x8831CD: mov     esi, eax
-0x8831CF: mov     ecx, ds:dword_B47790[edi]
+0x8831CF: mov     ecx, dword ptr ds:unk_B47790[edi]
 0x8831D5: cmp     ecx, [esi]
 0x8831D7: mov     [esp+24h+var_4], 0
 0x8831DF: jz      short loc_8831FF
@@ -28,10 +28,10 @@
 0x8831E3: jz      short loc_8831EF
 0x8831E5: add     [ecx+60h], ebx
 0x8831E8: jnz     short loc_8831EF
-0x8831EA: call    sub_7604D0
+0x8831EA: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8831EF: mov     eax, [esi]
 0x8831F1: test    eax, eax
-0x8831F3: mov     ds:dword_B47790[edi], eax
+0x8831F3: mov     dword ptr ds:unk_B47790[edi], eax
 0x8831F9: jz      short loc_8831FF
 0x8831FB: add     dword ptr [eax+60h], 1
 0x8831FF: mov     eax, [esp+24h+var_14]
@@ -43,7 +43,7 @@
 0x883210: add     eax, 60h ; '`'
 0x883213: cmp     dword ptr [eax], 0
 0x883216: jnz     short loc_88321D
-0x883218: call    sub_7604D0
+0x883218: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x88321D: add     edi, 4
 0x883220: cmp     edi, 70h ; 'p'
 0x883223: jb      short loc_8831C0
@@ -67,3 +67,12 @@
 0x88325A: pop     ebx
 0x88325B: add     esp, 14h
 0x88325E: retn
+0x9D5850: lea     ecx, [ebp-14h]; void *
+0x9D5853: jmp     sub_4027D0
+0x9D5858: mov     edx, [esp+arg_4]
+0x9D585C: lea     eax, [edx-14h]
+0x9D585F: mov     ecx, [edx-18h]
+0x9D5862: xor     ecx, eax
+0x9D5864: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D5869: mov     eax, offset stru_AFD868
+0x9D586E: jmp     ___CxxFrameHandler3

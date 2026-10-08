@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x520220",
-    "line": "mov     eax, [ecx+18h]",
+    "line": "mov     eax, [ecx+18h]; TESIdleForm model path extension test: true only when the model path extension is exactly .kf.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x52023D",
-    "line": "push    offset a_kf; Str2",
+    "line": "push    offset a_kf; right",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x520242",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x520243",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,76 +1,126 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiD3DShaderConstantMap",
+  "definition": "struct NiD3DShaderConstantMap\n{\nNiD3DSCM_Pixel *_vtbl;\nUInt32 Unk04;\nUInt32 Unk08;\nNiTArray_NiD3DShaderConstantMapEntry Entries;\nUInt8 Modified;\nUInt8 pad1C[3];\nNiD3DShaderProgram *LastShaderProgram;\nUInt32 Unk24;\nIDirect3DDevice9 *Device;\nNiDX9Renderer *Renderer;\nNiDX9RenderState *RenderState;\n}\n",
   "id": 18374686479671988583,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DSCM_Pixel *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk04",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk08",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Entries",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 16
+      "offset_hex": "0xC",
+      "size": 16,
+      "type": "NiTArray_NiD3DShaderConstantMapEntry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Modified",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 1
+      "offset_hex": "0x1C",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad1C",
       "offset": 29,
-      "offset_hex": "0x1d",
-      "size": 3
+      "offset_hex": "0x1D",
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LastShaderProgram",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "NiD3DShaderProgram *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk24",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Device",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "IDirect3DDevice9 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Renderer",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "NiDX9Renderer *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RenderState",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "NiDX9RenderState *"
     }
   ],
   "name": "NiD3DShaderConstantMap",
+  "ordinal": 339,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 52
 }

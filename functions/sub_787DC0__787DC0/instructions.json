@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x787DC0",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; 2026-05-23 75000 supplemental LOD probe boundary: stock old-LOD-to-SGeometry output helper. Uses existing CSpeedTreeRT old LOD fields and shared resolver 0x787220; no decoded stock read of supplemental 75000 branch/frond fade, extrusion fade, or billboard transition sidecar data.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x787DD0",
-    "line": "fst     [esp+28h+var_24]",
+    "line": "fst     [esp+28h+highAlpha]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x787DD5",
-    "line": "fstp    [esp+2Ch+var_1C]",
+    "line": "fstp    [esp+2Ch+lowAlpha]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x787DF1",
-    "line": "lea     edx, [esp+34h+var_20]",
+    "line": "lea     edx, [esp+34h+lowLod]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x787DF5",
-    "line": "push    edx; int",
+    "line": "push    edx; lowLod",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x787DF6",
-    "line": "lea     edx, [esp+38h+var_24]",
+    "line": "lea     edx, [esp+38h+highAlpha]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -127,25 +127,25 @@
   },
   {
     "ea": "0x787E00",
-    "line": "mov     [esp+38h+var_18], eax",
+    "line": "mov     dword ptr [esp+38h+highLod], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787E04",
-    "line": "mov     [esp+38h+var_20], eax",
+    "line": "mov     dword ptr [esp+38h+lowLod], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787E08",
-    "line": "lea     eax, [esp+38h+var_18]",
+    "line": "lea     eax, [esp+38h+highLod]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x787E0C",
-    "line": "push    eax; int",
+    "line": "push    eax; highLod",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x787E14",
-    "line": "lea     ecx, [esp+3Ch+var_1C]",
+    "line": "lea     ecx, [esp+3Ch+lowAlpha]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x787E18",
-    "line": "push    ecx; int",
+    "line": "push    ecx; lowAlpha",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x787E19",
-    "line": "push    edx; int",
+    "line": "push    edx; highAlpha",
     "mnemonic": "push",
     "size": 1
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x787E25",
-    "line": "fstp    [esp+54h+var_48]; float",
+    "line": "fstp    [esp+54h+targetAlpha]; targetAlpha",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x787E2C",
-    "line": "fstp    [esp+54h+var_4C]; float",
+    "line": "fstp    [esp+54h+curveExponent]; curveExponent",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x787E33",
-    "line": "fstp    [esp+54h+var_50]; float",
+    "line": "fstp    [esp+54h+transitionFactor]; transitionFactor",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -235,19 +235,19 @@
   },
   {
     "ea": "0x787E3A",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+overlapRadius]; overlapRadius",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x787E3D",
-    "line": "push    ebp; int",
+    "line": "push    ebp; lodCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x787E3E",
-    "line": "fld     [esp+58h+arg_4]",
+    "line": "fld     [esp+58h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -259,25 +259,25 @@
   },
   {
     "ea": "0x787E43",
-    "line": "fstp    [esp+5Ch+var_5C]; float",
+    "line": "fstp    [esp+5Ch+var_5C]; lodLevel",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x787E46",
-    "line": "call    sub_787220",
+    "line": "call    CSpeedTreeRT__GetTransitionValues; Verified native inputs: leaf transition radius+1C, leaf transition factor+28, curve exponent+20, target alpha+44. 2026-10-03: prior75002/75005 substitution experiment retired after source semantics disproved equivalence; native output is preserved.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x787E4B",
-    "line": "fld     [esp+5Ch+var_24]",
+    "line": "fld     [esp+5Ch+highAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787E4F",
-    "line": "mov     edi, [esp+5Ch+arg_0]",
+    "line": "mov     edi, [esp+5Ch+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x787E58",
-    "line": "mov     ebx, [esp+34h+var_18]",
+    "line": "mov     ebx, dword ptr [esp+34h+highLod]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x787E81",
-    "line": "movsx   edx, word ptr [esp+34h+var_20]",
+    "line": "movsx   edx, [esp+34h+lowLod]",
     "mnemonic": "movsx",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x787E8A",
-    "line": "fld     [esp+34h+var_1C]",
+    "line": "fld     [esp+34h+lowAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x787EC5",
-    "line": "fcomp   [esp+34h+arg_4]",
+    "line": "fcomp   [esp+34h+lodLevel]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x787EFF",
-    "line": "mov     [esp+34h+arg_0], eax",
+    "line": "mov     [esp+34h+geometry], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787F03",
-    "line": "fild    [esp+34h+arg_0]",
+    "line": "fild    [esp+34h+geometry]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -619,19 +619,19 @@
   },
   {
     "ea": "0x787F0F",
-    "line": "mov     [esp+34h+arg_0], ecx",
+    "line": "mov     [esp+34h+geometry], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787F13",
-    "line": "fild    [esp+34h+arg_0]",
+    "line": "fild    [esp+34h+geometry]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x787F17",
-    "line": "fstp    dword ptr [edi+38h]",
+    "line": "fstp    dword ptr [edi+38h]; 2026-05-25 75000 branch-fade opt-in reference: stock writes node-sync branch alpha-test output to SGeometry+0x38. Optional SpeedTreeOBSE branch-fade apply rewrites only this float, leaving leaf/billboard blocks and stock tree fields unchanged.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x787F44",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+geometry]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787F48",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x787F52",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    [esp+34h+lodLevel]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x787F5F",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+geometry]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787F63",
-    "line": "fld     [esp+34h+arg_0]",
+    "line": "fld     [esp+34h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x787F73",
-    "line": "fstp    [esp+34h+arg_0]",
+    "line": "fstp    [esp+34h+geometry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x787F80",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x787F86",
-    "line": "fstp    [esp+40h+var_38]",
+    "line": "fstp    [esp+40h+lod]; leafSizeIncreaseFactor",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -799,43 +799,43 @@
   },
   {
     "ea": "0x787F8D",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787F91",
-    "line": "fstp    [esp+40h+var_3C]",
+    "line": "fstp    [esp+40h+cameraPitchDegrees]; cameraPitchDegrees",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787F95",
-    "line": "fld     [esp+40h+arg_4]",
+    "line": "fld     [esp+40h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787F99",
-    "line": "fstp    [esp+40h+var_40]",
+    "line": "fstp    [esp+40h+cameraAzimuthDegrees]; cameraAzimuthDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x787F9C",
-    "line": "push    0",
+    "line": "push    0; lodLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x787F9E",
-    "line": "push    ebp",
+    "line": "push    ebp; outLeaf",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x787F9F",
-    "line": "call    sub_798630",
+    "line": "call    OB_CLeafGeometry_SmallUpdate_010201A0; Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x787FC9",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -931,55 +931,55 @@
   },
   {
     "ea": "0x787FCF",
-    "line": "fstp    [esp+40h+var_38]",
+    "line": "fstp    [esp+40h+lod]; leafSizeIncreaseFactor",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787FD3",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787FD7",
-    "line": "fstp    [esp+40h+var_3C]",
+    "line": "fstp    [esp+40h+cameraPitchDegrees]; cameraPitchDegrees",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787FDB",
-    "line": "fld     [esp+40h+arg_4]",
+    "line": "fld     [esp+40h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787FDF",
-    "line": "fstp    [esp+40h+var_40]",
+    "line": "fstp    [esp+40h+cameraAzimuthDegrees]; cameraAzimuthDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x787FE2",
-    "line": "push    ebx",
+    "line": "push    ebx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x787FE3",
-    "line": "push    ebp",
+    "line": "push    ebp; outLeaf",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x787FE4",
-    "line": "call    sub_798630",
+    "line": "call    OB_CLeafGeometry_SmallUpdate_010201A0; Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x787FE9",
-    "line": "fld     [esp+34h+var_24]",
+    "line": "fld     [esp+34h+highAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x787FF0",
-    "line": "mov     edx, [esp+34h+var_20]",
+    "line": "mov     edx, dword ptr [esp+34h+lowLod]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x788022",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1093,55 +1093,55 @@
   },
   {
     "ea": "0x788028",
-    "line": "fstp    [esp+40h+var_38]",
+    "line": "fstp    [esp+40h+lod]; leafSizeIncreaseFactor",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78802C",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x788030",
-    "line": "fstp    [esp+40h+var_3C]",
+    "line": "fstp    [esp+40h+cameraPitchDegrees]; cameraPitchDegrees",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x788034",
-    "line": "fld     [esp+40h+arg_4]",
+    "line": "fld     [esp+40h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x788038",
-    "line": "fstp    [esp+40h+var_40]",
+    "line": "fstp    [esp+40h+cameraAzimuthDegrees]; cameraAzimuthDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78803B",
-    "line": "push    edx",
+    "line": "push    edx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78803C",
-    "line": "push    eax",
+    "line": "push    eax; outLeaf",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78803D",
-    "line": "call    sub_798630",
+    "line": "call    OB_CLeafGeometry_SmallUpdate_010201A0; Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x788042",
-    "line": "fld     [esp+34h+var_1C]",
+    "line": "fld     [esp+34h+lowAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x78805E",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x788064",
-    "line": "fstp    [esp+40h+var_38]",
+    "line": "fstp    [esp+40h+lod]; leafSizeIncreaseFactor",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1231,43 +1231,43 @@
   },
   {
     "ea": "0x78806B",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x78806F",
-    "line": "fstp    [esp+40h+var_3C]",
+    "line": "fstp    [esp+40h+cameraPitchDegrees]; cameraPitchDegrees",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x788073",
-    "line": "fld     [esp+40h+arg_4]",
+    "line": "fld     [esp+40h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x788077",
-    "line": "fstp    [esp+40h+var_40]",
+    "line": "fstp    [esp+40h+cameraAzimuthDegrees]; cameraAzimuthDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78807A",
-    "line": "push    0",
+    "line": "push    0; lodLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x78807C",
-    "line": "push    ebx",
+    "line": "push    ebx; outLeaf",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78807D",
-    "line": "call    sub_798630",
+    "line": "call    OB_CLeafGeometry_SmallUpdate_010201A0; Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x788089",
-    "line": "mov     [esp+34h+arg_0], ecx",
+    "line": "mov     [esp+34h+geometry], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x788094",
-    "line": "fild    [esp+34h+arg_0]",
+    "line": "fild    [esp+34h+geometry]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1357,19 +1357,19 @@
   },
   {
     "ea": "0x7880AC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7880AE",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+lod]; lod",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7880B1",
-    "line": "call    sub_787CD0",
+    "line": "call    CSpeedTreeRT__GetDiscreteLeafLodLevel; Maps normalized/current tree LOD to leaf LOD; includes one synthetic billboard level only when global drop-to-billboard is enabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x7880C7",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x7880CD",
-    "line": "fstp    [esp+40h+var_38]",
+    "line": "fstp    [esp+40h+lod]; leafSizeIncreaseFactor",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1429,43 +1429,43 @@
   },
   {
     "ea": "0x7880D4",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+geometry]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7880D8",
-    "line": "fstp    [esp+40h+var_3C]",
+    "line": "fstp    [esp+40h+cameraPitchDegrees]; cameraPitchDegrees",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7880DC",
-    "line": "fld     [esp+40h+arg_4]",
+    "line": "fld     [esp+40h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7880E0",
-    "line": "fstp    [esp+40h+var_40]",
+    "line": "fstp    [esp+40h+cameraAzimuthDegrees]; cameraAzimuthDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7880E3",
-    "line": "push    eax",
+    "line": "push    eax; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7880E4",
-    "line": "push    ebx",
+    "line": "push    ebx; outLeaf",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7880E5",
-    "line": "call    sub_798630",
+    "line": "call    OB_CLeafGeometry_SmallUpdate_010201A0; Oblivion CLeafGeometry::SmallUpdate. After validating backing arrays, copies the stable first 0x3C bytes of one LOD record into the public leaf output and sets active/discreteLodLevel. Camera and size arguments are intentionally unused in this path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,13 +1483,13 @@
   },
   {
     "ea": "0x7880F1",
-    "line": "mov     [esp+34h+arg_0], eax",
+    "line": "mov     [esp+34h+geometry], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7880F5",
-    "line": "fild    [esp+34h+arg_0]",
+    "line": "fild    [esp+34h+geometry]",
     "mnemonic": "fild",
     "size": 4
   },

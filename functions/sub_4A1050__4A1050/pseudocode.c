@@ -1,50 +1,50 @@
-unsigned int __thiscall sub_4A1050(float *this, char *a2)
+unsigned int __userpurge sub_4A1050@<eax>(float *this@<ecx>, int a2@<ebp>, NiTArray_NiTexturingPropertyMap *a3)
 {
-  NiTArray_NiTexturingPropertyMap *v2; // esi
-  char *v4; // eax
+  NiTArray_NiTexturingPropertyMap *v3; // esi
+  char *v5; // eax
   unsigned int end; // ebx
   unsigned int capacity; // ecx
-  char *v7; // eax
-  unsigned int v8; // ebx
-  char *v9; // eax
-  unsigned int v10; // ebx
-  char *v11; // eax
-  unsigned int v12; // edi
-  double v14; // [esp+0h] [ebp-14h]
+  char *v8; // eax
+  unsigned int v9; // ebx
+  char *v10; // eax
+  unsigned int v11; // ebx
+  char *v12; // eax
+  unsigned int v13; // edi
   double v15; // [esp+0h] [ebp-14h]
-  int v16; // [esp+0h] [ebp-14h]
+  double v16; // [esp+0h] [ebp-14h]
+  int v17; // [esp+0h] [ebp-14h]
 
-  v2 = (NiTArray_NiTexturingPropertyMap *)a2;
-  sub_70BAE0(this, (int)a2);
-  v4 = TESOutput_PrintString(*(_DWORD *)dword_B35288);
-  end = v2->end;
-  capacity = v2->capacity;
-  a2 = v4;
-  if ( end >= capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize);
-  NiTArray_SetAt(v2, end, &a2);
-  v7 = (char *)FormHeapAlloc(0x20u);
-  v14 = *(this + 0x38);
-  a2 = v7;
-  _sprintf(v7, "fNearDistSqr = %.2f", v14);
-  v8 = v2->end;
-  if ( v8 >= v2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, v8 + v2->growSize);
-  NiTArray_SetAt(v2, v8, &a2);
-  v9 = (char *)FormHeapAlloc(0x20u);
-  v15 = *(this + 0x39);
-  a2 = v9;
-  _sprintf(v9, "fFarDistSqr = %.2f", v15);
-  v10 = v2->end;
-  if ( v10 >= v2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, v10 + v2->growSize);
-  NiTArray_SetAt(v2, v10, &a2);
-  v11 = (char *)FormHeapAlloc(0x20u);
-  v16 = *((unsigned __int8 *)this + 0xEC);
-  a2 = v11;
-  _sprintf(v11, "cMultType = %d", v16);
-  v12 = v2->end;
-  if ( v12 >= v2->capacity )
-    NiTArray_SetSize((unsigned __int16 *)v2, v12 + v2->growSize);
-  return NiTArray_SetAt(v2, v12, &a2);
+  v3 = a3; /*0x4a1052*/
+  sub_70BAE0(this, a2, a3); /*0x4a105a*/
+  v5 = TESOutput_PrintString(*(char **)&MEMORY[0xB33E90][0x13F8]); /*0x4a1065*/
+  end = v3->end; /*0x4a106a*/
+  capacity = v3->capacity; /*0x4a106e*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v5; /*0x4a1077*/
+  if ( end >= capacity ) /*0x4a107b*/
+    NiTArray_SetSize((unsigned __int16 *)v3, end + v3->growSize); /*0x4a1086*/
+  NiTArray_SetAt(v3, end, &a3); /*0x4a1093*/
+  v8 = (char *)FormHeapAlloc(0x20u); /*0x4a109a*/
+  v15 = *(this + 0x38); /*0x4a10a6*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v8; /*0x4a10af*/
+  _sprintf(v8, "fNearDistSqr = %.2f", v15); /*0x4a10b3*/
+  v9 = v3->end; /*0x4a10b8*/
+  if ( v9 >= v3->capacity ) /*0x4a10c5*/
+    NiTArray_SetSize((unsigned __int16 *)v3, v9 + v3->growSize); /*0x4a10d0*/
+  NiTArray_SetAt(v3, v9, &a3); /*0x4a10dd*/
+  v10 = (char *)FormHeapAlloc(0x20u); /*0x4a10e4*/
+  v16 = *(this + 0x39); /*0x4a10f0*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v10; /*0x4a10f9*/
+  _sprintf(v10, "fFarDistSqr = %.2f", v16); /*0x4a10fd*/
+  v11 = v3->end; /*0x4a1102*/
+  if ( v11 >= v3->capacity ) /*0x4a110f*/
+    NiTArray_SetSize((unsigned __int16 *)v3, v11 + v3->growSize); /*0x4a111a*/
+  NiTArray_SetAt(v3, v11, &a3); /*0x4a1127*/
+  v12 = (char *)FormHeapAlloc(0x20u); /*0x4a112e*/
+  v17 = *((unsigned __int8 *)this + 0xEC); /*0x4a113a*/
+  a3 = (NiTArray_NiTexturingPropertyMap *)v12; /*0x4a1141*/
+  _sprintf(v12, "cMultType = %d", v17); /*0x4a1145*/
+  v13 = v3->end; /*0x4a114a*/
+  if ( v13 >= v3->capacity ) /*0x4a1157*/
+    NiTArray_SetSize((unsigned __int16 *)v3, v13 + v3->growSize); /*0x4a1162*/
+  return NiTArray_SetAt(v3, v13, &a3); /*0x4a1174*/
 }

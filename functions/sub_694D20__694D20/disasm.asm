@@ -46,7 +46,7 @@
 0x694DBE: mov     ecx, edi; this
 0x694DC0: call    sub_6B73E0
 0x694DC5: push    edi
-0x694DC6: call    FormHeapFree
+0x694DC6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x694DCB: add     esp, 4
 0x694DCE: mov     dword ptr [esi+88h], 0
 0x694DD8: mov     edi, [esi+8Ch]
@@ -55,7 +55,7 @@
 0x694DE2: mov     ecx, edi; this
 0x694DE4: call    MagicCaster_CastingVFX_destr
 0x694DE9: push    edi
-0x694DEA: call    FormHeapFree
+0x694DEA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x694DEF: add     esp, 4
 0x694DF2: mov     ecx, esi
 0x694DF4: mov     dword ptr [esi+8Ch], 0
@@ -68,3 +68,12 @@
 0x694E18: pop     esi
 0x694E19: add     esp, 14h
 0x694E1C: retn
+0x9C5870: mov     ecx, [ebp-10h]
+0x9C5873: jmp     sub_69FA60
+0x9C5878: mov     edx, [esp+arg_4]
+0x9C587C: lea     eax, [edx-10h]
+0x9C587F: mov     ecx, [edx-14h]
+0x9C5882: xor     ecx, eax
+0x9C5884: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5889: mov     eax, offset stru_AEE000
+0x9C588E: jmp     ___CxxFrameHandler3

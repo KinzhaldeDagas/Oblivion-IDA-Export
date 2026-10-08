@@ -1,6 +1,6 @@
 int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_Body@<eax>(
         int a1@<edi>,
-        int esi0@<esi>,
+        int *esi0@<esi>,
         TESObjectREFR *ebx0@<ebx>,
         int a4,
         int a5,
@@ -36,12 +36,13 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_Body@<eax>(
 {
   int v34; // ebp
 
-  v34 = *(_DWORD *)(a1 + 4);
-  if ( v34 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment(
+  v34 = *(_DWORD *)(a1 + 4); /*0x69b260*/
+  if ( v34 ) /*0x69b265*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckEnchantment( /*0x69b266*/
              v34,
              esi0,
              ebx0,
+             a1,
              a4,
              a5,
              a6,
@@ -74,9 +75,9 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_Body@<eax>(
              a33,
              a34);
   else
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Next(
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Next( /*0x69b265*/
              a1,
-             esi0,
+             (int)esi0,
              ebx0,
              a4,
              a5,

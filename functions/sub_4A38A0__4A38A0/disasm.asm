@@ -1,4 +1,4 @@
-0x4A38A0: push    0FFFFFFFFh
+0x4A38A0: push    0FFFFFFFFh; Verified: loads RDSG chunks as 8-byte pairs (Grass form ID, parent LandTexture form ID), rejects lengths not divisible by 8, constructs TESRegionGrassObject entries, and appends valid objects to TESRegionGrassObjectList.
 0x4A38A2: push    offset SEH_690310
 0x4A38A7: mov     eax, large fs:0
 0x4A38AD: push    eax
@@ -56,7 +56,7 @@
 0x4A393D: push    ebx; a4
 0x4A393E: push    ebp; Dst
 0x4A393F: mov     ecx, edi; a1
-0x4A3941: call    TESFile_GetChunkData
+0x4A3941: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4A3946: test    esi, esi
 0x4A3948: jbe     short loc_4A39B3
 0x4A394A: mov     edi, ebp
@@ -72,7 +72,7 @@
 0x4A3966: jz      short loc_4A3972
 0x4A3968: push    edi
 0x4A3969: mov     ecx, eax
-0x4A396B: call    sub_4A59E0
+0x4A396B: call    sub_4A59E0; Verified: TESRegionGrassObject stores TESGrass at +4 and parent TESLandTexture at +8; loader resolves FormIDs and rejects non-Grass/non-LandTexture classes.
 0x4A3970: mov     esi, eax
 0x4A3972: test    esi, esi
 0x4A3974: mov     [esp+24h+var_4], 0FFFFFFFFh
@@ -89,7 +89,7 @@
 0x4A3994: push    esi
 0x4A3995: call    edx
 0x4A3997: mov     ecx, eax
-0x4A3999: call    sub_4A5FF0
+0x4A3999: call    sub_4A5FF0; Verified: appends one TESRegionGrassObject pointer to TESRegionGrassObjectList and increments its count at +0x10.
 0x4A399E: jmp     short loc_4A39AB
 0x4A39A0: mov     eax, [esi]
 0x4A39A2: mov     edx, [eax+8]
@@ -100,7 +100,19 @@
 0x4A39AE: sub     ebx, 1
 0x4A39B1: jnz     short loc_4A3950
 0x4A39B3: push    ebp
-0x4A39B4: call    FormHeapFree
+0x4A39B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A39B9: add     esp, 4
 0x4A39BC: mov     al, 1
 0x4A39BE: jmp     loc_4A3902
+0x9BD8A0: mov     eax, [ebp+4]
+0x9BD8A3: push    eax
+0x9BD8A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD8A9: pop     ecx
+0x9BD8AA: retn
+0x9BD8AB: mov     edx, [esp+arg_4]
+0x9BD8AF: lea     eax, [edx-14h]
+0x9BD8B2: mov     ecx, [edx-18h]
+0x9BD8B5: xor     ecx, eax
+0x9BD8B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD8BC: mov     eax, offset stru_AE71E0
+0x9BD8C1: jmp     ___CxxFrameHandler3

@@ -1,19 +1,36 @@
 {
-  "callees_count": 157,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 84,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 10,
-  "display_name": "sub_4E3490",
+  "chunks": [
+    [
+      "0x4E3490",
+      "0x4E3F2E"
+    ],
+    [
+      "0x9B5C40",
+      "0x9B5C8A"
+    ]
+  ],
+  "chunks_sha256": "0c17ee42ea75d220bdc301c0f353b43a011825b616a59ae1495d0311c7546cb0",
+  "comment_regular": "CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\\SpecialAnims.",
+  "comment_repeatable": "CustomAnimSupport decode: actor animation setup creates ActorAnimData, loads default animation data, then for living NPC/CREA actors calls 0x476080 to load actor-base KFFZ entries from <model-dir>\\SpecialAnims.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "Actor_SetupAnimationData",
   "end_ea": "0x4E3F2E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E3490",
+  "name": "Actor_SetupAnimationData",
   "segment": ".text",
   "sha256": "7994391098d9847af92ffa2f6a64a42eb27b5bb32a917ec7ec0f77234ffd4782",
   "size": 2718,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E3490",
+  "total_chunk_size": 2792,
   "type": "void __usercall(TESObjectREFR *@<ecx>, double st5_0@<st2>, double@<st1>, double@<st0>)",
-  "xrefs_from_count": 1006,
+  "xrefs_from_count": 1030,
   "xrefs_to_count": 5
 }

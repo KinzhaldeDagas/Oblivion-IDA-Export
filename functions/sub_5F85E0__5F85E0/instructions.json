@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x5F8627",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F8629",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x5F865C",
-    "line": "lea     ecx, [eax+0ACh]",
+    "line": "lea     ecx, [eax+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x5F8662",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x5F866D",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F866E",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5F86AF",
-    "line": "lea     ecx, [eax+0ACh]",
+    "line": "lea     ecx, [eax+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x5F86B5",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x5F86C9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5F8701",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x5F871B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x5F8732",
-    "line": "lea     ecx, [edi+88h]",
+    "line": "lea     ecx, [edi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },

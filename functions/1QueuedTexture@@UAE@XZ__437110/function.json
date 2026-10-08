@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "QueuedTexture::~QueuedTexture(void)",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x437110",
+      "0x437197"
+    ],
+    [
+      "0x9AC400",
+      "0x9AC423"
+    ]
+  ],
+  "chunks_sha256": "b0a25e43afcf010ea2c09e1efd51f61bc094fae9bbb38e70e88d8481e316d31d",
+  "comment_regular": "QueuedTexture destructor: releases loaded resource at +0x28, frees copied path at +0x20, then chains to queued base.",
+  "comment_repeatable": "QueuedTexture destructor: releases loaded resource at +0x28, frees copied path at +0x20, then chains to queued base.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "QueuedTexture_dtor",
   "end_ea": "0x437197",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "??1QueuedTexture@@UAE@XZ",
+  "name": "QueuedTexture_dtor",
   "segment": ".text",
   "sha256": "f9f67395dd9dd0fd08a843999f0a8619ffeace410ceb5c7f9073d6205bf94ad6",
   "size": 135,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x437110",
+  "total_chunk_size": 170,
   "type": "void __thiscall(QueuedTexture *this)",
-  "xrefs_from_count": 54,
+  "xrefs_from_count": 65,
   "xrefs_to_count": 3
 }

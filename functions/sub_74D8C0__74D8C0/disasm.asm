@@ -1,5 +1,5 @@
 0x74D8C0: push    ebx
-0x74D8C1: mov     ebx, [esp+4+arg_4]
+0x74D8C1: mov     ebx, [esp+4+index]
 0x74D8C5: push    ebp
 0x74D8C6: mov     ebp, ecx
 0x74D8C8: movzx   eax, word ptr [ebp+22h]
@@ -14,18 +14,18 @@
 0x74D8E0: lea     edx, [esi+4]
 0x74D8E3: push    edx; lpAddend
 0x74D8E4: call    dword ptr ds:0A28078h
-0x74D8EA: mov     edi, [esp+10h+arg_8]
+0x74D8EA: mov     edi, [esp+10h+element]
 0x74D8EE: test    edi, edi
-0x74D8F0: mov     [esp+10h+arg_8], edi
+0x74D8F0: mov     [esp+10h+element], edi
 0x74D8F4: jz      short loc_74D900
 0x74D8F6: lea     eax, [edi+4]
 0x74D8F9: push    eax; lpAddend
 0x74D8FA: call    dword ptr ds:0A28078h
-0x74D900: lea     ecx, [esp+10h+arg_8]
-0x74D904: push    ecx
-0x74D905: push    ebx
-0x74D906: lea     ecx, [ebp+18h]
-0x74D909: call    sub_4B34E0
+0x74D900: lea     ecx, [esp+10h+element]
+0x74D904: push    ecx; element
+0x74D905: push    ebx; index
+0x74D906: lea     ecx, [ebp+18h]; self
+0x74D909: call    NiTObjectArray_SetAt
 0x74D90E: test    edi, edi
 0x74D910: mov     ebx, ds:0A2807Ch
 0x74D916: jz      short loc_74D92C
@@ -61,9 +61,9 @@
 0x74D956: pop     ebp
 0x74D957: pop     ebx
 0x74D958: retn    0Ch
-0x74D95B: mov     edi, [esp+10h+arg_8]
+0x74D95B: mov     edi, [esp+10h+element]
 0x74D95F: test    edi, edi
-0x74D961: mov     [esp+10h+arg_8], edi
+0x74D961: mov     [esp+10h+element], edi
 0x74D965: jz      short loc_74D971
 0x74D967: lea     eax, [edi+4]
 0x74D96A: push    eax; lpAddend
@@ -74,14 +74,14 @@
 0x74D97A: jb      short loc_74D98A
 0x74D97C: movzx   edx, word ptr [esi+0Eh]
 0x74D980: add     edx, ebx
-0x74D982: push    edx
-0x74D983: mov     ecx, esi
-0x74D985: call    sub_523B10
-0x74D98A: lea     eax, [esp+10h+arg_8]
-0x74D98E: push    eax
-0x74D98F: push    ebx
-0x74D990: mov     ecx, esi
-0x74D992: call    sub_4B34E0
+0x74D982: push    edx; capacity
+0x74D983: mov     ecx, esi; self
+0x74D985: call    NiTObjectArray_Resize16
+0x74D98A: lea     eax, [esp+10h+element]
+0x74D98E: push    eax; element
+0x74D98F: push    ebx; index
+0x74D990: mov     ecx, esi; self
+0x74D992: call    NiTObjectArray_SetAt
 0x74D997: test    edi, edi
 0x74D999: jz      short loc_74D9B3
 0x74D99B: lea     ecx, [edi+4]

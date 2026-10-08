@@ -1,30 +1,31 @@
-char *__fastcall sub_79BD20(unsigned int *a1, int a2, const void *a3)
+// Oblivion st_vector<SFrondVertex>::push_back. Constructs in place when end<capacityEnd; otherwise delegates to checked insert-one at end.
+void __thiscall OB_stVector_SFrondVertex_PushBack_010201A0(
+        OB_stVector16_010201A0 *this,
+        const OB_SFrondVertex_010201A0 *value)
 {
-  unsigned int v4; // ebx
-  unsigned int v5; // edi
-  char *v6; // edi
-  char *result; // eax
-  char *v8; // edi
-  char *v9; // [esp+Ch] [ebp-8h] BYREF
+  OB_SFrondVertex_010201A0 *begin; // ebx
+  unsigned int size; // edi
+  OB_SFrondVertex_010201A0 *end; // edi
+  OB_SFrondVertex_010201A0 *v6; // edi
+  OB_stVectorIterator_SFrondVertex_010201A0 debugCookie; // [esp+Ch] [ebp-8h] BYREF
 
-  v4 = a1[1];
-  if ( v4 )
-    v5 = (int)(a1[2] - v4) / 0x38;
+  begin = (OB_SFrondVertex_010201A0 *)this->begin; /*0x79bd27*/
+  if ( begin ) /*0x79bd2d*/
+    size = ((char *)this->end - (char *)begin) / 0x38; /*0x79bd49*/
   else
-    v5 = 0;
-  if ( v4 && v5 < (int)(a1[3] - v4) / 0x38 )
+    size = 0; /*0x79bd2f*/
+  if ( begin && size < ((char *)this->capacityEnd - (char *)begin) / 0x38 ) /*0x79bd69*/
   {
-    v6 = (char *)a1[2];
-    LOBYTE(v9) = 0;
-    result = sub_79AA10(v9, v6, 1, a3);
-    a1[2] = (unsigned int)(v6 + 0x38);
+    end = (OB_SFrondVertex_010201A0 *)this->end; /*0x79bd73*/
+    LOBYTE(debugCookie.owner) = 0; /*0x79bd76*/
+    OB_SFrondVertex_UninitializedFillN_010201A0(end, 1u, value, this, value, (unsigned int)debugCookie.owner); /*0x79bd86*/
+    this->end = &end[1]; /*0x79bd91*/
   }
   else
   {
-    v8 = (char *)a1[2];
-    if ( v4 > (unsigned int)v8 )
-      _invalid_parameter_noinfo();
-    return (char *)sub_79B560(a1, (unsigned int **)&v9, a1, v8, a3);
+    v6 = (OB_SFrondVertex_010201A0 *)this->end; /*0x79bd9d*/
+    if ( begin > v6 ) /*0x79bda2*/
+      _invalid_parameter_noinfo((int)begin, (int)v6, (int)this); /*0x79bda4*/
+    OB_stVector_SFrondVertex_InsertOne_010201A0(this, &debugCookie, this, v6, value); /*0x79bdb7*/
   }
-  return result;
 }

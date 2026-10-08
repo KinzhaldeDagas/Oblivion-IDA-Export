@@ -18,7 +18,6 @@
 0x4BF329: lea     esi, ds:30h[esi*4]
 0x4BF330: lea     eax, ds:0[edi*4]
 0x4BF337: jmp     short loc_4BF340
-0x4BF339: align 10h
 0x4BF340: mov     edx, [ecx+24h]
 0x4BF343: mov     edx, [edx+esi]
 0x4BF346: mov     ebp, [edx+eax+4]

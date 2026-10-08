@@ -1,35 +1,38 @@
-_DWORD *__thiscall sub_79AD70(_DWORD *this, int a2)
+// Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.
+OB_stVector16_010201A0 *__thiscall OB_stVector_SFrondVertex_CopyCtor_010201A0(
+        OB_stVector16_010201A0 *this,
+        const OB_stVector16_010201A0 *source)
 {
-  int v4; // eax
-  char *v5; // ebx
+  unsigned int begin; // eax
+  const OB_SFrondVertex_010201A0 *end; // ebx
   bool v6; // cc
-  char *v7; // ecx
+  const OB_SFrondVertex_010201A0 *v7; // ecx
   int v9; // [esp+0h] [ebp-24h] BYREF
   void *v10; // [esp+10h] [ebp-14h]
   int *v11; // [esp+14h] [ebp-10h]
   int v12; // [esp+20h] [ebp-4h]
-  char *v13; // [esp+2Ch] [ebp+8h]
+  const OB_stVector16_010201A0 *sourcea; // [esp+2Ch] [ebp+8h]
 
-  v11 = &v9;
-  v10 = this;
-  v4 = *(_DWORD *)(a2 + 4);
-  if ( v4 )
-    v4 = (*(_DWORD *)(a2 + 8) - v4) / 0x38;
-  if ( sub_79ACC0(this, v4) )
+  v11 = &v9; /*0x79ad98*/
+  v10 = this; /*0x79ad9d*/
+  begin = (unsigned int)source->begin; /*0x79ada3*/
+  if ( begin ) /*0x79ada8*/
+    begin = (int)((int)source->end - begin) / 0x38; /*0x79adc0*/
+  if ( OB_stVector_SFrondVertex_Buy_010201A0(this, begin) ) /*0x79adc5*/
   {
-    v5 = *(char **)(a2 + 8);
-    v6 = *(_DWORD *)(a2 + 4) <= (unsigned int)v5;
-    v12 = 0;
-    if ( !v6 )
-      _invalid_parameter_noinfo();
-    v13 = *(char **)(a2 + 4);
-    v7 = v13;
-    if ( (unsigned int)v13 > *(_DWORD *)(a2 + 8) )
+    end = (const OB_SFrondVertex_010201A0 *)source->end; /*0x79adce*/
+    v6 = source->begin <= end; /*0x79add1*/
+    v12 = 0; /*0x79add4*/
+    if ( !v6 ) /*0x79addb*/
+      _invalid_parameter_noinfo((int)end, (int)this, (int)source); /*0x79addd*/
+    sourcea = (const OB_stVector16_010201A0 *)source->begin; /*0x79ade8*/
+    v7 = (const OB_SFrondVertex_010201A0 *)sourcea; /*0x79ade2*/
+    if ( sourcea > source->end ) /*0x79adeb*/
     {
-      _invalid_parameter_noinfo();
-      v7 = v13;
+      _invalid_parameter_noinfo((int)end, (int)this, (int)source); /*0x79aded*/
+      v7 = (const OB_SFrondVertex_010201A0 *)sourcea; /*0x79adf2*/
     }
-    *(this + 2) = sub_79A9B0(v7, v5, (char *)*(this + 1));
+    this->end = OB_SFrondVertex_UninitializedCopy_010201A0(v7, end, (OB_SFrondVertex_010201A0 *)this->begin); /*0x79ae10*/
   }
-  return this;
+  return this; /*0x79ae15*/
 }

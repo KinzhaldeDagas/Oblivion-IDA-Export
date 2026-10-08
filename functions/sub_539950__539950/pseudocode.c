@@ -1,4 +1,4 @@
-BSStringT *sub_539950()
+NiRTTI *sub_539950()
 {
-  return &stru_BA7D50;
+  return &MEMORY[0xBA7D50]; /*0x539955*/
 }

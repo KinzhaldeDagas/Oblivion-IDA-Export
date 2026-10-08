@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4729B0",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+arg_0]; Resolves an encoded animation key through the ActorAnimData map at +0x9C, selects the entry's sequence, and returns its TESAnimGroup pointer from sequence +0x68; returns null when the key is absent.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4729C0",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },

@@ -24,11 +24,11 @@
 0x722AE3: jmp     short loc_722AF3
 0x722AE5: mov     eax, [esi+0B4h]
 0x722AEB: lea     edx, [esi+64h]
-0x722AEE: push    edx
+0x722AEE: push    edx; transform
 0x722AEF: add     eax, 0Ch
-0x722AF2: push    eax
-0x722AF3: mov     ecx, edi
-0x722AF5: call    sub_72A820
+0x722AF2: push    eax; input
+0x722AF3: mov     ecx, edi; output
+0x722AF5: call    NiBound_TransformInto
 0x722AFA: mov     cl, [esi+18h]
 0x722AFD: shr     cl, 7
 0x722B00: test    cl, 1

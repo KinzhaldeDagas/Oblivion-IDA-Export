@@ -59,7 +59,7 @@
 0x80972A: add     edi, 4
 0x80972D: sub     ebx, 1
 0x809730: jnz     short loc_809702
-0x809732: mov     esi, offset dword_B47718
+0x809732: mov     esi, offset unk_B47718
 0x809737: or      edi, 0FFFFFFFFh
 0x80973A: lea     ebx, [ebx+0]
 0x809740: mov     ecx, [esi]
@@ -67,19 +67,19 @@
 0x809744: jz      short loc_809756
 0x809746: add     [ecx+60h], edi
 0x809749: jnz     short loc_809750
-0x80974B: call    sub_7604D0
+0x80974B: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x809750: mov     dword ptr [esi], 0
 0x809756: add     esi, 4
-0x809759: cmp     esi, offset unk_B47768
+0x809759: cmp     esi, offset stru_B47768
 0x80975F: jl      short loc_809740
-0x809761: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x809761: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x809766: push    0Ah; int
 0x809768: push    4; unsigned int
 0x80976A: push    ebp; void *
 0x80976B: mov     byte ptr [esp+34h+var_4], 1
 0x809770: call    $LN21
 0x809775: mov     eax, [esp+24h+var_10]
-0x809779: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x809779: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x80977E: push    14h; int
 0x809780: push    4; unsigned int
 0x809782: add     eax, 9Ch ; 'œ'
@@ -98,3 +98,28 @@
 0x8097AE: pop     ebx
 0x8097AF: add     esp, 10h
 0x8097B2: retn
+0x9D0D10: mov     ecx, [ebp-10h]; this
+0x9D0D13: jmp     ??1ShadowLightShader@@UAE@XZ; ShadowLightShader::~ShadowLightShader(void)
+0x9D0D18: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0D1D: push    14h; int
+0x9D0D1F: push    4; unsigned int
+0x9D0D21: mov     eax, [ebp-10h]
+0x9D0D24: add     eax, 9Ch ; 'œ'
+0x9D0D29: push    eax; void *
+0x9D0D2A: call    $LN21
+0x9D0D2F: retn
+0x9D0D30: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D0D35: push    0Ah; int
+0x9D0D37: push    4; unsigned int
+0x9D0D39: mov     eax, [ebp-10h]
+0x9D0D3C: add     eax, 0ECh ; 'ì'
+0x9D0D41: push    eax; void *
+0x9D0D42: call    $LN21
+0x9D0D47: retn
+0x9D0D48: mov     edx, [esp+arg_4]
+0x9D0D4C: lea     eax, [edx-14h]
+0x9D0D4F: mov     ecx, [edx-18h]
+0x9D0D52: xor     ecx, eax
+0x9D0D54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0D59: mov     eax, offset stru_AF9548
+0x9D0D5E: jmp     ___CxxFrameHandler3

@@ -1,5 +1,5 @@
 0x4C9B40: push    0FFFFFFFFh
-0x4C9B42: push    offset SEH_6E3250
+0x4C9B42: push    offset ExtraDataList_SetReferencePointer_SEH
 0x4C9B47: mov     eax, large fs:0
 0x4C9B4D: push    eax
 0x4C9B4E: push    esi
@@ -36,14 +36,14 @@
 0x4C9BA8: jz      short loc_4C9BB4
 0x4C9BAA: push    esi
 0x4C9BAB: mov     ecx, eax
-0x4C9BAD: call    TESRegionList_constr
+0x4C9BAD: call    TESRegionList_constr; Verified: mode byte at +0xC controls ownership and shared region-data cache lifetime. Owning lists reset cache on first owner and increment the manager/list refcount.
 0x4C9BB2: jmp     short loc_4C9BB6
 0x4C9BB4: xor     eax, eax
 0x4C9BB6: push    eax
 0x4C9BB7: mov     ecx, edi
 0x4C9BB9: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x4C9BC1: mov     esi, eax
-0x4C9BC3: call    sub_4241E0
+0x4C9BC3: call    ExtraDataList_SetRegionList; 0x4241E0: Named ExtraDataList_SetRegionList after direct decompilation: a nonnull candidate list replaces/frees prior region-list payload; null removes type8. Shared XCLR calls this for placed reference and CELL owners, with no record-kind gate.
 0x4C9BC8: mov     eax, esi
 0x4C9BCA: mov     ecx, [esp+18h+var_C]
 0x4C9BCE: mov     large fs:0, ecx
@@ -52,3 +52,15 @@
 0x4C9BD7: pop     esi
 0x4C9BD8: add     esp, 0Ch
 0x4C9BDB: retn    4
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

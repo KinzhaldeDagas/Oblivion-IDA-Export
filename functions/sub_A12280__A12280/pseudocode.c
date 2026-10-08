@@ -1,4 +1,5 @@
-BSStringT *sub_A12280()
+// ODismemberment: initializes BSFixedString 'bhkConstraint' for class-chain checks.
+NiRTTI *sub_A12280()
 {
-  return sub_70E220(&stru_BA7D50, "bhkConstraint", (int)dword_BA7C00);
+  return NiRTTI_Constructor(&MEMORY[0xBA7D50], "bhkConstraint", &stru_BA7C00); /*0xa12294*/
 }

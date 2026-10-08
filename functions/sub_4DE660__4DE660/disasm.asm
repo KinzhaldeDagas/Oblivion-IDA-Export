@@ -15,9 +15,9 @@
 0x4DE685: cmp     byte ptr [eax+4], 18h
 0x4DE689: jnz     loc_4DE75D
 0x4DE68F: push    ebx
-0x4DE690: push    4
-0x4DE692: lea     ecx, [esi+44h]
-0x4DE695: call    sub_41F830
+0x4DE690: push    4; mask
+0x4DE692: lea     ecx, [esi+44h]; this
+0x4DE695: call    ExtraDataList_TestActionFlagBits; Test ExtraAction flag mask. Missing ExtraAction behaves as default flags byte 1. REFR save calls with 0x08 to decide whether to emit ONAM.
 0x4DE69A: neg     al
 0x4DE69C: mov     ecx, esi
 0x4DE69E: sbb     eax, eax

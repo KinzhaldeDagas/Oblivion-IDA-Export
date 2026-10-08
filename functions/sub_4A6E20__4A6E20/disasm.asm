@@ -5,7 +5,7 @@
 0x4A6E28: lea     eax, [ebp+20h]
 0x4A6E2B: push    eax; Src
 0x4A6E2C: push    494C5052h; int
-0x4A6E31: call    TESForm_PutFormRecordChunkData
+0x4A6E31: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4A6E36: add     esp, 0Ch
 0x4A6E39: cmp     dword ptr [ebp+4], 0
 0x4A6E3D: mov     [esp+10h+var_C], ebp
@@ -60,12 +60,12 @@
 0x4A6ED7: call    FormHeapAlloc
 0x4A6EDC: mov     esi, eax
 0x4A6EDE: lea     eax, ds:0[edi*8]
-0x4A6EE5: push    eax; Size
-0x4A6EE6: push    ebp; Src
-0x4A6EE7: push    esi; Dst
-0x4A6EE8: call    _memcpy
+0x4A6EE5: push    eax; byteCount
+0x4A6EE6: push    ebp; source
+0x4A6EE7: push    esi; destination
+0x4A6EE8: call    _memcpy;
 0x4A6EED: push    ebp
-0x4A6EEE: call    FormHeapFree
+0x4A6EEE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A6EF3: mov     ebp, [esp+30h+var_C]
 0x4A6EF7: mov     ecx, [esp+30h+var_4]
 0x4A6EFB: add     esp, 14h
@@ -79,10 +79,10 @@
 0x4A6F18: push    ecx; Size
 0x4A6F19: push    esi; Src
 0x4A6F1A: push    444C5052h; int
-0x4A6F1F: call    TESForm_PutFormRecordChunkData
+0x4A6F1F: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4A6F24: add     esp, 0Ch
 0x4A6F27: push    esi
-0x4A6F28: call    FormHeapFree
+0x4A6F28: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A6F2D: add     esp, 4
 0x4A6F30: pop     edi
 0x4A6F31: pop     esi

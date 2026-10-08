@@ -16,13 +16,13 @@
 0x44CE12: mov     ecx, edi
 0x44CE14: jz      loc_44CF26
 0x44CE1A: push    4
-0x44CE1C: call    NiNode_GetNiPropertyByID
+0x44CE1C: call    NiNode_GetNiPropertyByID;
 0x44CE21: push    6
 0x44CE23: mov     ecx, edi
 0x44CE25: mov     ebx, eax
-0x44CE27: call    NiNode_GetNiPropertyByID
+0x44CE27: call    NiNode_GetNiPropertyByID;
 0x44CE2C: push    eax
-0x44CE2D: push    offset dword_B3F96C
+0x44CE2D: push    offset stru_B3F96C
 0x44CE32: call    NiRTTI_Cast
 0x44CE37: mov     esi, eax
 0x44CE39: add     esp, 8

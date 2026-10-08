@@ -11,8 +11,8 @@
 0x5AFD6E: mov     esi, eax
 0x5AFD70: test    esi, esi
 0x5AFD72: jz      short loc_5AFD98
-0x5AFD74: mov     ecx, esi
-0x5AFD76: call    sub_6B7260
+0x5AFD74: mov     ecx, esi; this
+0x5AFD76: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5AFD7B: test    al, al
 0x5AFD7D: jnz     short loc_5AFD98
 0x5AFD7F: push    0
@@ -21,7 +21,7 @@
 0x5AFD88: mov     ecx, esi; this
 0x5AFD8A: call    sub_6B73E0
 0x5AFD8F: push    esi
-0x5AFD90: call    FormHeapFree
+0x5AFD90: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5AFD95: add     esp, 4
 0x5AFD98: pop     esi
 0x5AFD99: retn    4

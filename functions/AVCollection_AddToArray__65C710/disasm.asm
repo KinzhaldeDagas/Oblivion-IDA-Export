@@ -1,14 +1,14 @@
 0x65C710: push    esi
 0x65C711: push    edi
-0x65C712: mov     edi, [esp+8+arg_4]
+0x65C712: mov     edi, [esp+8+entry]
 0x65C716: test    edi, edi
 0x65C718: mov     esi, ecx
 0x65C71A: jnz     short loc_65C725
 0x65C71C: cmp     [esi+10h], edi
 0x65C71F: jz      AVCollection_AddToArray___Done
 0x65C725: push    ebx
-0x65C726: mov     ebx, [esp+0Ch+arg_0]
-0x65C72A: push    ebx
+0x65C726: mov     ebx, [esp+0Ch+actorValue]
+0x65C72A: push    ebx; actorValue
 0x65C72B: call    AVCollection_RemoveArrayNode
 0x65C730: test    edi, edi
 0x65C732: jz      AVCollection_AddToArray___def_65C77D; jumptable 0065C77D default case, cases 1-3,9,10,12,14-25,27-32,34,35,37-39,42-45,50-55
@@ -24,7 +24,7 @@
 0x65C755: add     esp, 4
 0x65C758: test    eax, eax
 0x65C75A: jz      short loc_65C765
-0x65C75C: mov     ecx, eax
+0x65C75C: mov     ecx, eax; self
 0x65C75E: call    AVCollection_InitArray
 0x65C763: jmp     short loc_65C767
 0x65C765: xor     eax, eax
@@ -139,3 +139,6 @@
 0x65C84F: mov     eax, [esi+10h]; jumptable 0065C77D case 13
 0x65C852: mov     [eax+44h], edi
 0x65C855: pop     ebx; jumptable 0065C77D default case, cases 1-3,9,10,12,14-25,27-32,34,35,37-39,42-45,50-55
+0x65C856: pop     edi
+0x65C857: pop     esi
+0x65C858: retn    8

@@ -1,5 +1,5 @@
-0x773330: push    ebx
-0x773331: mov     ebx, [esp+4+arg_0]
+0x773330: push    ebx; Oblivion draw-time stage sampler application: exactly five tracked slots (ADDRESSU/V, MAG/MIN/MIP).
+0x773331: mov     ebx, [esp+4+stage]
 0x773335: push    ebp
 0x773336: push    esi
 0x773337: mov     ebp, ecx
@@ -35,7 +35,7 @@
 0x773393: add     esi, 1
 0x773396: add     edi, 4
 0x773399: cmp     esi, 5
-0x77339C: jl      short loc_773340
+0x77339C: jl      short loc_773340; Draw-time stage-state group iterates exactly five sampler entries: ADDRESSU, ADDRESSV, MAGFILTER, MINFILTER, MIPFILTER.
 0x77339E: pop     edi
 0x77339F: pop     esi
 0x7733A0: pop     ebp

@@ -6,16 +6,16 @@
 0x46EC81: mov     ecx, ds:0B33B00h
 0x46EC87: push    ebx
 0x46EC88: push    esi
-0x46EC89: mov     [esp+1Ch+var_10], 0
+0x46EC89: mov     [esp+1Ch+destination], 0
 0x46EC91: xor     ebx, ebx
-0x46EC93: call    sub_45A170
+0x46EC93: call    TESSaveLoadGame_UseSaveGameBlocks
 0x46EC98: test    al, al
 0x46EC9A: jz      loc_46ED39
-0x46ECA0: mov     ecx, ds:0B33B00h
-0x46ECA6: push    4; Size
+0x46ECA0: mov     ecx, ds:0B33B00h; self
+0x46ECA6: push    4; byteCount
 0x46ECA8: lea     eax, [esp+20h+Dst]
-0x46ECAC: push    eax; Dst
-0x46ECAD: call    SaveLoad_LoadData
+0x46ECAC: push    eax; destination
+0x46ECAD: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x46ECB2: cmp     [esp+1Ch+Dst], 4B4F4C42h
 0x46ECBA: jz      short loc_46ED24
 0x46ECBC: mov     eax, ds:0B33B00h
@@ -24,7 +24,7 @@
 0x46ECC9: jz      short loc_46ED08
 0x46ECCB: mov     ecx, [esi]
 0x46ECCD: push    ecx; a1
-0x46ECCE: call    TESForm_LookupByFormID
+0x46ECCE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x46ECD3: mov     edx, [esi+5]
 0x46ECD6: movzx   ecx, byte ptr [esi+9]
 0x46ECDA: add     esp, 4
@@ -50,46 +50,45 @@
 0x46ED17: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x46ED1C: call    PrintError
 0x46ED21: add     esp, 10h
-0x46ED24: mov     ecx, ds:0B33B00h
+0x46ED24: mov     ecx, ds:0B33B00h; self
 0x46ED2A: mov     ebx, [ecx+14h]
-0x46ED2D: push    2; Size
-0x46ED2F: lea     eax, [esp+20h+var_10]
-0x46ED33: push    eax; Dst
-0x46ED34: call    SaveLoad_LoadData
+0x46ED2D: push    2; byteCount
+0x46ED2F: lea     eax, [esp+20h+destination]
+0x46ED33: push    eax; destination
+0x46ED34: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x46ED39: mov     ecx, edi
 0x46ED3B: call    sub_46E600
-0x46ED40: push    2; Size
+0x46ED40: push    2; byteCount
 0x46ED42: lea     ecx, [esp+20h+arg_0]
-0x46ED46: push    ecx; Dst
-0x46ED47: mov     ecx, ds:0B33B00h
-0x46ED4D: call    SaveLoad_LoadData
-0x46ED52: xor     esi, esi
+0x46ED46: push    ecx; destination
+0x46ED47: mov     ecx, ds:0B33B00h; self
+0x46ED4D: call    SaveLoad_LoadData; EngineIssues review: TESReactionForm load reads UInt16 reaction count into stack slot; verify alias with per-entry FormID destination below.
+0x46ED52: xor     esi, esi; EnginePatch v3: TESReactionForm reaction count is clamped before the loop. Follow-up verification showed the earlier stack-alias concern was likely a Hex-Rays labeling artifact.
 0x46ED54: cmp     [esp+1Ch+arg_0], si
 0x46ED59: jbe     short loc_46EDA1
 0x46ED5B: jmp     short loc_46ED60
-0x46ED5D: align 10h
-0x46ED60: mov     ecx, ds:0B33B00h
-0x46ED66: push    4; Size
+0x46ED60: mov     ecx, ds:0B33B00h; self
+0x46ED66: push    4; byteCount
 0x46ED68: lea     edx, [esp+20h+var_4]
-0x46ED6C: push    edx; Dst
-0x46ED6D: call    SaveLoad_LoadFormID
-0x46ED72: mov     ecx, ds:0B33B00h
-0x46ED78: push    4; Size
-0x46ED7A: lea     eax, [esp+28h+var_10]
-0x46ED7E: push    eax; Dst
-0x46ED7F: call    SaveLoad_LoadData
-0x46ED84: mov     ecx, [esp+24h+var_10]
+0x46ED6C: push    edx; destination
+0x46ED6D: call    SaveLoad_LoadFormID; EngineIssues review: TESReactionForm per-entry FormID appears to be read into same effective stack slot as count; loop bound later uses low 16 bits.
+0x46ED72: mov     ecx, ds:0B33B00h; self
+0x46ED78: push    4; byteCount
+0x46ED7A: lea     eax, [esp+28h+destination]
+0x46ED7E: push    eax; destination
+0x46ED7F: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x46ED84: mov     ecx, [esp+24h+destination]
 0x46ED88: mov     edx, [esp+24h+Dst]
 0x46ED8C: push    ecx
 0x46ED8D: push    edx
 0x46ED8E: mov     ecx, edi
 0x46ED90: call    sub_46E900
-0x46ED95: movzx   eax, [esp+24h+var_4]
+0x46ED95: movzx   eax, word ptr [esp+24h+var_4]; EngineIssues review: TESReactionForm loop bound appears to come from low 16 bits of last loaded FormID rather than preserved original count; verify stack slot map.
 0x46ED9A: add     esi, 1
 0x46ED9D: cmp     esi, eax
 0x46ED9F: jb      short loc_46ED60
 0x46EDA1: mov     ecx, ds:0B33B00h
-0x46EDA7: call    sub_45A170
+0x46EDA7: call    TESSaveLoadGame_UseSaveGameBlocks
 0x46EDAC: test    al, al
 0x46EDAE: jz      loc_46EEC5
 0x46EDB4: mov     ecx, ds:0B33B00h
@@ -99,8 +98,8 @@
 0x46EDC5: jz      loc_46EE6C
 0x46EDCB: mov     ecx, [edi]
 0x46EDCD: push    ecx; a1
-0x46EDCE: call    TESForm_LookupByFormID
-0x46EDD3: movzx   edx, [esp+28h+var_18]
+0x46EDCE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
+0x46EDD3: movzx   edx, word ptr [esp+28h+var_18]
 0x46EDD8: mov     ecx, eax
 0x46EDDA: lea     eax, [edx+ebx]
 0x46EDDD: add     esp, 4
@@ -113,7 +112,7 @@
 0x46EDEE: push    edx
 0x46EDEF: mov     edx, [eax+0D4h]
 0x46EDF5: call    edx
-0x46EDF7: movzx   ecx, [esp+2Ch+var_18]
+0x46EDF7: movzx   ecx, word ptr [esp+2Ch+var_18]
 0x46EDFC: push    eax
 0x46EDFD: mov     eax, [edi]
 0x46EDFF: push    eax
@@ -139,7 +138,7 @@
 0x46EE36: mov     eax, [edx+0D4h]
 0x46EE3C: call    eax
 0x46EE3E: mov     ecx, [edi]
-0x46EE40: movzx   edx, [esp+2Ch+var_18]
+0x46EE40: movzx   edx, word ptr [esp+2Ch+var_18]
 0x46EE45: push    eax
 0x46EE46: push    ecx
 0x46EE47: push    52Bh
@@ -155,7 +154,7 @@
 0x46EE65: pop     edi
 0x46EE66: add     esp, 10h
 0x46EE69: retn    8
-0x46EE6C: movzx   eax, [esp+24h+var_18]
+0x46EE6C: movzx   eax, word ptr [esp+24h+var_18]
 0x46EE71: lea     edx, [eax+ebx]
 0x46EE74: cmp     esi, edx
 0x46EE76: jbe     short loc_46EEA2

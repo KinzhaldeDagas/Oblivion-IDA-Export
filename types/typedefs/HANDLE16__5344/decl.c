@@ -1,1 +1,1 @@
-HANDLE16
+typedef UINT16 HANDLE16;

@@ -1,1 +1,1 @@
-WaitForInputIdle_ptr
+typedef DWORD (*WaitForInputIdle_ptr)(HANDLE, DWORD);

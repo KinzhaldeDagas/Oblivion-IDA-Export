@@ -2,9 +2,8 @@
 0x6B7C62: test    ecx, ecx
 0x6B7C64: push    esi; ArgList
 0x6B7C65: jz      short loc_6B7C88
-0x6B7C67: mov     esi, [esp+4+arg_0]
+0x6B7C67: mov     esi, [esp+4+response]
 0x6B7C6B: jmp     short loc_6B7C70
-0x6B7C6D: align 10h
 0x6B7C70: mov     edx, [ecx+4]
 0x6B7C73: test    edx, edx
 0x6B7C75: jnz     short loc_6B7C7B

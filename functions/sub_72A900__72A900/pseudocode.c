@@ -1,4 +1,4 @@
-void *sub_72A900()
+NiRTTI *sub_72A900()
 {
-  return &unk_B3FF04;
+  return &stru_B3FF04; /*0x72a905*/
 }

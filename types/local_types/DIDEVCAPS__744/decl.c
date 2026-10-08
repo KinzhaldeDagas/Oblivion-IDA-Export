@@ -1,1 +1,14 @@
-DIDEVCAPS
+struct DIDEVCAPS
+{
+DWORD dwSize;
+DWORD dwFlags;
+DWORD dwDevType;
+DWORD dwAxes;
+DWORD dwButtons;
+DWORD dwPOVs;
+DWORD dwFFSamplePeriod;
+DWORD dwFFMinTimeResolution;
+DWORD dwFirmwareRevision;
+DWORD dwHardwareRevision;
+DWORD dwFFDriverVersion;
+};

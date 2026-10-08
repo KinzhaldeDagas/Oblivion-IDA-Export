@@ -1,4 +1,4 @@
-0x4F0DE0: mov     eax, [esp+arg_0]
+0x4F0DE0: mov     eax, [esp+bucketCount]; Verified 16-byte NiTPointerMap<unsigned int, BSSimpleList<TESObjectREFR *>> constructor used only by TESWorldSpace_IndexSubSpaceReference in this database. Initializes a bucket array with the caller's bucket count; SubSpace index passes 0x25 (37) buckets.
 0x4F0DE4: push    esi
 0x4F0DE5: mov     esi, ecx
 0x4F0DE7: xor     ecx, ecx

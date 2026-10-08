@@ -1,10 +1,22 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 68,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x8637D0",
+      "0x8643A4"
+    ],
+    [
+      "0x9D47E0",
+      "0x9D48A0"
+    ]
+  ],
   "chunks_sha256": "c495ba38dff95c81854ef58c1d1bf48b55c25df6f23e1eaadb343f4838a7a6ca",
   "comment_regular": "Oblivion Lighting30 property pass producer. Its normal material RenderPass seeds lightCount=1 with the ShadowSceneNode base light, then includes only active iterator lights whose byte +0xF4 is zero; per-source projected-shadow lights are deliberately excluded from that material light array. Normal material selectors are bounded through 0x146 and this function emits no 0x14E..0x151 records. In render mode 5 it builds selector 0x154 rigid or 0x155 skinned.\n\n[Verified] Lighting30ShaderProperty_BuildRenderPasses seeds its 3x decal loop from this->decalDataList_80.numItems (+0x8C), selects 0x152/BSSM_3XDECAL or 0x153/BSSM_3XDECAL_A using property flag 0x100, appends one render pass per batch, and subtracts OB_ShaderPassControl.decalPassBatchSize until exhausted. This is the Lighting30 consumer of the same list registered by BSTempEffect decal creation/build/restore paths.",
   "comment_repeatable": "[Verified] Lighting30ShaderProperty_BuildRenderPasses seeds its 3x decal loop from this->decalDataList_80.numItems (+0x8C), selects 0x152/BSSM_3XDECAL or 0x153/BSSM_3XDECAL_A using property flag 0x100, appends one render pass per batch, and subtracts OB_ShaderPassControl.decalPassBatchSize until exhausted. This is the Lighting30 consumer of the same list registered by BSTempEffect decal creation/build/restore paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "Lighting30ShaderProperty_BuildRenderPasses",
   "end_ea": "0x8643A4",
@@ -15,6 +27,7 @@
   "segment": ".text",
   "sha256": "6bc3cad92fcbc221d4cb253495f161eac5e931fc3fa088945df9d135edb866d2",
   "size": 3028,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x8637D0",
   "total_chunk_size": 3220,
   "type": "NiTPointerList__BSImageSpaceShader *__thiscall(Lighting30ShaderProperty *this, NiGeometry *geometry, int renderFlags, unsigned __int16 *passCount, int emitMode)",

@@ -1,4 +1,4 @@
-TESObjectTREE *__thiscall TESObjectTREE::`scalar deleting destructor'(char *this, unsigned int a2)
+TESForm *__thiscall TESObjectTREE::`scalar deleting destructor'(char *this, char a2)
 {
-  return TESObjectTREE::`scalar deleting destructor'((TESObjectTREE *)(this + 0xFFFFFFDC), a2);
+  return TESObjectTREE::`scalar deleting destructor'((TESForm *)(this + 0xFFFFFFDC), a2);
 }

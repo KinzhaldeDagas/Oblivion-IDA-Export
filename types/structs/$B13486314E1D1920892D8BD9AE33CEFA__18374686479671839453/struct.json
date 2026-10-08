@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$B13486314E1D1920892D8BD9AE33CEFA",
+  "definition": "union $B13486314E1D1920892D8BD9AE33CEFA\n{\nHBITMAP hBitmap __offset(OFF64|AUTO);\nHMETAFILEPICT hMetaFilePict __offset(OFF64|AUTO);\nHENHMETAFILE hEnhMetaFile __offset(OFF64|AUTO);\nHGLOBAL hGlobal __offset(OFF64|AUTO);\nLPOLESTR lpszFileName __offset(OFF64|AUTO);\nIStream_0 *pstm __offset(OFF64|AUTO);\nIStorage_0 *pstg __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671839453,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hBitmap",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HBITMAP"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hMetaFilePict",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HMETAFILEPICT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hEnhMetaFile",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HENHMETAFILE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hGlobal",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HGLOBAL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszFileName",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPOLESTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pstm",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IStream_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pstg",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IStorage_0 *"
     }
   ],
   "name": "$B13486314E1D1920892D8BD9AE33CEFA",
+  "ordinal": 3532,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

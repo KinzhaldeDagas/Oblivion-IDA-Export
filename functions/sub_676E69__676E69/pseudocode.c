@@ -6,42 +6,42 @@ void __usercall sub_676E69(char a1@<zf>, int a2@<ebx>, int *a3@<ebp>, int a4@<es
   char v6; // al
   void *v7; // eax
 
-  if ( !a1 )
+  if ( !a1 ) /*0x676e69*/
   {
-    v4 = *(void **)a4;
-    v5 = (TESObjectREFR *)OblivionDynamicCast(
+    v4 = *(void **)a4; /*0x676e6b*/
+    v5 = (TESObjectREFR *)OblivionDynamicCast( /*0x676e7c*/
                             *(void **)a4,
                             0,
                             (struct _s_RTTICompleteObjectLocator *)&MobileObject `RTTI Type Descriptor',
                             &ArrowProjectile `RTTI Type Descriptor',
                             0);
-    if ( v5 )
+    if ( v5 ) /*0x676e86*/
     {
-      v6 = sub_6092A0(v5);
+      v6 = sub_6092A0(v5); /*0x676e8a*/
     }
     else
     {
-      v7 = OblivionDynamicCast(
+      v7 = OblivionDynamicCast( /*0x676ea0*/
              v4,
              0,
              (struct _s_RTTICompleteObjectLocator *)&MobileObject `RTTI Type Descriptor',
              &MagicProjectile `RTTI Type Descriptor',
              0);
-      if ( !v7 )
-        goto LABEL_9;
-      v6 = (*(int (__thiscall **)(void *))(*(_DWORD *)v7 + 0x220))(v7);
+      if ( !v7 ) /*0x676eaa*/
+        goto LABEL_9; /*0x676eaa*/
+      v6 = (*(int (__thiscall **)(void *))(*(_DWORD *)v7 + 0x220))(v7); /*0x676eb6*/
     }
-    if ( v6 )
+    if ( v6 ) /*0x676eba*/
     {
-      BSSimpleList_Remove(a3, (int)v4);
-      if ( a4 != a2 )
-        a4 = *(_DWORD *)(a2 + 4);
-      goto LABEL_10;
+      BSSimpleList_Remove(a3, (int)v4); /*0x676ebf*/
+      if ( a4 != a2 ) /*0x676ec6*/
+        a4 = *(_DWORD *)(a2 + 4); /*0x676ec8*/
+      goto LABEL_10; /*0x676ecb*/
     }
 LABEL_9:
-    a4 = *(_DWORD *)(a4 + 4);
+    a4 = *(_DWORD *)(a4 + 4); /*0x676ecd*/
 LABEL_10:
-    if ( a4 )
-      JUMPOUT(0x676E60);
+    if ( a4 ) /*0x676ed4*/
+      JUMPOUT(0x676E60); /*0x676e60*/
   }
 }

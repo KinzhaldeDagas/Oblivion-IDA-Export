@@ -1,36 +1,34 @@
-void __thiscall sub_677060(char *this)
+// Verified: writes four-byte header globalB3BCF0, then six UInt16 list counts and Crime_SaveGame payloads, preserving list traversal order; matches manager loader6770F0. Crime order is observable through AlarmPackage category/index references.
+// Verified disassembly address677070 is B3BB2C+1C4 = B3BCF0, a float storage location (name qword_B3BB2C is misleading). Manager loader consumes4 bytes then immediately calls673B10(0.0), resetting this location. Unknown reason for persisting then clearing it.
+void __thiscall ActorProcessManager_SaveCrimes(ActorProcessManager *self)
 {
-  char *v3; // edi
-  TESSaveLoad *v4; // ecx
-  _WORD *v5; // ebx
-  int i; // esi
-  bool v7; // zf
-  size_t v8; // [esp-4h] [ebp-18h]
-  size_t v9; // [esp-4h] [ebp-18h]
+  CrimeListNode **crimeLists; // edi
+  TESSaveLoadGame_SerializationView *v3; // ecx
+  unsigned __int8 *bufferCursor; // ebx
+  CrimeListNode *i; // esi
+  bool v6; // zf
   int Src; // [esp+Ch] [ebp-8h] BYREF
-  int v11; // [esp+10h] [ebp-4h]
+  int v8; // [esp+10h] [ebp-4h]
 
-  LODWORD(v8) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &flt_B3BCF0, v8);
-  v3 = this + 0x28;
-  v11 = 6;
-  do
+  SaveLoad_SaveData(g_TESSaveLoadGame, &qword_B3BB2C[0x71], 4u); /*0x677075*/
+  crimeLists = self->crimeLists; /*0x67707a*/
+  v8 = 6; /*0x67707d*/
+  do /*0x6770e1*/
   {
-    v4 = SaveLoad_CurrentSavegame;
-    LODWORD(v9) = 2;
-    Src = 0;
-    v5 = (_WORD *)v4->unk000[5];
-    SaveLoad_SaveData((int)v4, &Src, v9);
-    for ( i = *(_DWORD *)v3; i; i = *(_DWORD *)(i + 4) )
+    v3 = g_TESSaveLoadGame; /*0x677090*/
+    Src = 0; /*0x67709c*/
+    bufferCursor = v3->bufferCursor; /*0x6770a4*/
+    SaveLoad_SaveData(v3, &Src, 2u); /*0x6770a8*/
+    for ( i = *crimeLists; i; i = i->next ) /*0x6770ad*/
     {
-      if ( !*(_DWORD *)(i + 4) && !*(_DWORD *)i )
-        break;
-      sub_6062B0(*(_DWORD **)i);
-      ++Src;
+      if ( !i->next && !i->crime ) /*0x6770b9*/
+        break; /*0x6770bc*/
+      Crime_SaveGame(i->crime); /*0x6770c0*/
+      ++Src; /*0x6770c5*/
     }
-    v3 += 4;
-    v7 = v11-- == 1;
-    *v5 = Src;
+    ++crimeLists; /*0x6770d6*/
+    v6 = v8-- == 1; /*0x6770d9*/
+    *(_WORD *)bufferCursor = Src; /*0x6770de*/
   }
-  while ( !v7 );
+  while ( !v6 ); /*0x6770e1*/
 }

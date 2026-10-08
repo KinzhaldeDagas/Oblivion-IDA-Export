@@ -1,4 +1,4 @@
-char *sub_6E4460()
+NiRTTI *sub_6E4460()
 {
-  return dword_B3E350;
+  return &stru_B3E350; /*0x6e4465*/
 }

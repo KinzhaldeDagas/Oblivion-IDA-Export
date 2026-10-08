@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BA2A0",
+      "0x4BA2C8"
+    ]
+  ],
+  "chunks_sha256": "d41ac3367d3af2ff2be91170adc1ece708886de5d50d081b8faeb5964ecc543b",
+  "comment_regular": "Verified random/default seed: returns 0 when the seed array count at +0x52 is zero; otherwise returns seedValues[Game_RandomLargeInteger(0) % count]. TESObjectREFR_GetTreeSeed reaches this when no per-reference seed extra exists.",
+  "comment_repeatable": "Verified random/default seed: returns 0 when the seed array count at +0x52 is zero; otherwise returns seedValues[Game_RandomLargeInteger(0) % count]. TESObjectREFR_GetTreeSeed reaches this when no per-reference seed extra exists.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BA2A0",
+  "display_name": "TESObjectTREE_GetRandomSeed",
   "end_ea": "0x4BA2C8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BA2A0",
+  "name": "TESObjectTREE_GetRandomSeed",
   "segment": ".text",
   "sha256": "d41ac3367d3af2ff2be91170adc1ece708886de5d50d081b8faeb5964ecc543b",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BA2A0",
-  "type": "int __thiscall(int this)",
+  "total_chunk_size": 40,
+  "type": "unsigned int __thiscall(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1
 }

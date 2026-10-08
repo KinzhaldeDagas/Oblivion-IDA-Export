@@ -1,11 +1,11 @@
-void __userpurge TESObjectCELL_LoadModifiedForm(int this@<ecx>, double a2@<st0>, int Dst, int a3)
+void __thiscall TESObjectCELL_LoadModifiedForm(int this, int Dst, int a3)
 {
-  UInt32 v5; // ebx
-  UInt32 *v6; // edi
+  unsigned __int8 *bufferCursor; // ebx
+  UInt32 *currentlyLoadingFormHeader; // edi
   TESForm *v7; // eax
   const char *v8; // eax
   char v9; // al
-  BSExtraDataVtbl *v10; // edi
+  BSExtraDataVtbl *SeenData; // edi
   _DWORD *v11; // eax
   BSExtraDataVtbl *v12; // eax
   _DWORD *v13; // eax
@@ -13,62 +13,55 @@ void __userpurge TESObjectCELL_LoadModifiedForm(int this@<ecx>, double a2@<st0>,
   TESPathGrid *v15; // eax
   TESPathGrid *v16; // eax
   int v17; // ecx
-  TESSaveLoad *v18; // ecx
+  TESSaveLoadGame_SerializationView *v18; // ecx
   UInt32 *v19; // edi
-  UInt32 v20; // esi
+  unsigned __int8 *v20; // esi
   TESForm *v21; // ecx
-  UInt32 v22; // eax
+  unsigned __int8 *v22; // eax
   const char *v23; // eax
   const char *v24; // eax
-  UInt32 v25; // edx
+  unsigned __int8 *v25; // edx
   int v26; // [esp-8h] [ebp-144h]
   int v27; // [esp-8h] [ebp-144h]
   int v28; // [esp-8h] [ebp-144h]
   int v29; // [esp-8h] [ebp-144h]
-  size_t v30; // [esp-4h] [ebp-140h]
-  size_t v31; // [esp-4h] [ebp-140h]
+  int v30; // [esp-4h] [ebp-140h]
+  int v31; // [esp-4h] [ebp-140h]
   int v32; // [esp-4h] [ebp-140h]
   int v33; // [esp-4h] [ebp-140h]
-  int v34; // [esp-4h] [ebp-140h]
-  int v35; // [esp-4h] [ebp-140h]
-  int v36; // [esp+4h] [ebp-138h]
-  int v37; // [esp+8h] [ebp-134h]
-  int v38; // [esp+Ch] [ebp-130h]
   _BYTE a1[277]; // [esp+17h] [ebp-125h] BYREF
-  int v40; // [esp+138h] [ebp-4h]
+  int v35; // [esp+138h] [ebp-4h]
 
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x5Au && (Dst & 0x8000000) != 0 )
+  if ( g_TESSaveLoadGame->currentVersion >= 0x5Au && (Dst & 0x8000000) != 0 ) /*0x4d2284*/
   {
-    LODWORD(v30) = 4;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)&a1[5], v30);
-    ExtraDataList__SetDetachTime((ExtraDataList *)(this + 0x28), *(BSExtraDataVtbl **)&a1[5]);
+    TESForm_LoadDataFromCurrentSaveGame((TESForm *)this, &a1[5], 4u); /*0x4d228f*/
+    ExtraDataList_SetDetachTime((ExtraDataList *)(this + 0x28), *(unsigned int *)&a1[5]); /*0x4d229c*/
   }
-  TESForm_LoadModifiedForm((TESForm *)this, Dst, a3);
-  v5 = 0;
-  *(_DWORD *)&a1[1] = 0;
-  if ( sub_45A170() )
+  TESForm_LoadModifiedForm((TESForm *)this, Dst, a3); /*0x4d22b3*/
+  bufferCursor = 0; /*0x4d22be*/
+  *(_DWORD *)&a1[1] = 0; /*0x4d22c0*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v30) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a1[5], v30);
+    SaveLoad_LoadData(g_TESSaveLoadGame, &a1[5], 4u); /*0x4d22de*/
     if ( *(_DWORD *)&a1[5] != 0x4B4F4C42 )
     {
-      v6 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v6 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x4d22f2*/
+      if ( currentlyLoadingFormHeader )
       {
-        v7 = TESForm_LookupByFormID(*v6);
-        v8 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v7->vtbl->GetEditorName)(
+        v7 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x4d22ff*/
+        v8 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v7->vtbl->GetEditorName)( /*0x4d231a*/
                              v7,
-                             *((unsigned __int8 *)v6 + 9),
-                             *(UInt32 *)((char *)v6 + 5));
+                             *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                             *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           "..\\TES Shared\\TESObjectCELL.cpp",
           0x318B,
-          *v6,
+          *currentlyLoadingFormHeader,
           v8,
           v26,
-          v32);
+          v30);
       }
       else
       {
@@ -76,177 +69,169 @@ void __userpurge TESObjectCELL_LoadModifiedForm(int this@<ecx>, double a2@<st0>,
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           "..\\TES Shared\\TESObjectCELL.cpp",
           0x318B,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    v5 = SaveLoad_CurrentSavegame->unk000[5];
-    LODWORD(v31) = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &a1[1], v31);
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x4d235b*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &a1[1], 2u); /*0x4d2365*/
   }
-  if ( (Dst & 8) != 0 )
+  if ( (Dst & 8) != 0 ) /*0x4d2372*/
   {
-    LODWORD(v30) = 1;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)a1, v30);
-    v9 = a1[0];
-    *(_BYTE *)(this + 0x24) ^= (a1[0] ^ *(_BYTE *)(this + 0x24)) & 0x60;
-    *(_BYTE *)(this + 0x25) = v9 & 0x9F;
+    TESForm_LoadDataFromCurrentSaveGame((TESForm *)this, a1, 1u); /*0x4d237d*/
+    v9 = a1[0]; /*0x4d2385*/
+    *(_BYTE *)(this + 0x24) ^= (a1[0] ^ *(_BYTE *)(this + 0x24)) & 0x60; /*0x4d238e*/
+    *(_BYTE *)(this + 0x25) = v9 & 0x9F; /*0x4d2393*/
   }
-  if ( (Dst & 0x10000000) != 0 )
+  if ( (Dst & 0x10000000) != 0 ) /*0x4d23a1*/
   {
-    v10 = sub_420B50((ExtraDataList *)(this + 0x28));
-    if ( v10 )
+    SeenData = ExtraDataList_GetSeenData((ExtraDataList *)(this + 0x28)); /*0x4d23b1*/
+    if ( SeenData ) /*0x4d23b5*/
     {
 LABEL_21:
-      (*((void (__thiscall **)(BSExtraDataVtbl *, int))v10->Destructor + 4))(v10, 0xFFFF);
-      goto LABEL_22;
+      (*((void (__thiscall **)(BSExtraDataVtbl *, int))SeenData->Destructor + 4))(SeenData, 0xFFFF); /*0x4d241e*/
+      goto LABEL_22; /*0x4d242a*/
     }
-    if ( (*(_BYTE *)(this + 0x24) & 1) != 0 )
+    if ( (*(_BYTE *)(this + 0x24) & 1) != 0 ) /*0x4d23bb*/
     {
-      v11 = (_DWORD *)FormHeapAlloc(0x2Cu);
-      *(_DWORD *)&a1[9] = v11;
-      v40 = 0;
-      if ( v11 )
+      v11 = (_DWORD *)FormHeapAlloc(0x2Cu); /*0x4d23bf*/
+      *(_DWORD *)&a1[9] = v11; /*0x4d23c7*/
+      v35 = 0; /*0x4d23cd*/
+      if ( v11 ) /*0x4d23d4*/
       {
-        v12 = (BSExtraDataVtbl *)sub_411F60(v11, 0, 0);
+        v12 = (BSExtraDataVtbl *)sub_411F60(v11, 0, 0); /*0x4d23da*/
 LABEL_20:
-        v10 = v12;
-        v40 = 0xFFFFFFFF;
-        sub_420B70((ExtraDataList *)(this + 0x28), v12);
-        goto LABEL_21;
+        SeenData = v12; /*0x4d2409*/
+        v35 = 0xFFFFFFFF; /*0x4d240e*/
+        ExtraDataList_SetSeenData((ExtraDataList *)(this + 0x28), v12); /*0x4d2419*/
+        goto LABEL_21; /*0x4d2419*/
       }
     }
     else
     {
-      v13 = (_DWORD *)FormHeapAlloc(0x24u);
-      *(_DWORD *)&a1[9] = v13;
-      v40 = 1;
-      if ( v13 )
+      v13 = (_DWORD *)FormHeapAlloc(0x24u); /*0x4d23e3*/
+      *(_DWORD *)&a1[9] = v13; /*0x4d23eb*/
+      v35 = 1; /*0x4d23f1*/
+      if ( v13 ) /*0x4d23fc*/
       {
-        v12 = (BSExtraDataVtbl *)SeenData::SeenData__(v13);
-        goto LABEL_20;
+        v12 = (BSExtraDataVtbl *)SeenData::SeenData__(v13); /*0x4d2400*/
+        goto LABEL_20; /*0x4d2405*/
       }
     }
-    v12 = 0;
-    goto LABEL_20;
+    v12 = 0; /*0x4d2407*/
+    goto LABEL_20; /*0x4d2407*/
   }
 LABEL_22:
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x5Au && (Dst & 0x8000000) != 0 )
+  if ( g_TESSaveLoadGame->currentVersion < 0x5Au && (Dst & 0x8000000) != 0 ) /*0x4d2442*/
   {
-    LODWORD(v30) = 4;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)&a1[0xD], v30);
-    ExtraDataList__SetDetachTime((ExtraDataList *)(this + 0x28), *(BSExtraDataVtbl **)&a1[0xD]);
+    TESForm_LoadDataFromCurrentSaveGame((TESForm *)this, &a1[0xD], 4u); /*0x4d244d*/
+    ExtraDataList_SetDetachTime((ExtraDataList *)(this + 0x28), *(unsigned int *)&a1[0xD]); /*0x4d245a*/
   }
-  if ( (Dst & 0x10) != 0 )
+  if ( (Dst & 0x10) != 0 ) /*0x4d2467*/
   {
-    a2 = _memset(&a1[0x11], 0, 0x104);
-    LODWORD(v30) = 1;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)a1, v30);
-    if ( a1[0] )
+    _memset((int)&a1[0x11], 0, 0x104u); /*0x4d2475*/
+    TESForm_LoadDataFromCurrentSaveGame((TESForm *)this, a1, 1u); /*0x4d2486*/
+    if ( a1[0] ) /*0x4d2491*/
+      TESForm_LoadDataFromCurrentSaveGame((TESForm *)this, &a1[0x11], a1[0]); /*0x4d249e*/
+    BSStringT_Set((BSStringT *)(this + 0x1C), &a1[0x11], 0); /*0x4d24ad*/
+  }
+  if ( (Dst & 0x20) != 0 ) /*0x4d24ba*/
+  {
+    TESForm_LoadFormIDFromCurrentSaveGame((TESForm *)this, (unsigned int *)&a1[9], 4u); /*0x4d24c5*/
+    ExtraDataList::SetOrRemoveExtraOwnership((ExtraDataList *)(this + 0x28), *(TESForm **)&a1[1]); /*0x4d24d2*/
+    (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)this + 0x40))(this, 0x20, v27, v31); /*0x4d24e0*/
+  }
+  if ( (Dst & 0x1000000) != 0 ) /*0x4d24ed*/
+  {
+    v14 = *(_DWORD **)(this + 0x44); /*0x4d24ef*/
+    if ( v14 ) /*0x4d24f4*/
     {
-      LODWORD(v30) = a1[0];
-      TESForm_LoadDataFromCurrentSaveGame((TESForm *)&a1[0x11], v30);
-    }
-    BSStringT_Set((BSStringT *)(this + 0x1C), &a1[0x11], 0);
-  }
-  if ( (Dst & 0x20) != 0 )
-  {
-    LODWORD(v30) = 4;
-    TESForm_LoadFormIDFromCurrentSaveGame((TESForm *)&a1[9], v30, v36, v37, v38);
-    ExtraDataList::SetOrRemoveExtraOwnership((ExtraDataList *)(this + 0x28), *(TESForm **)&a1[1]);
-    (*(void (__thiscall **)(int, int, int, int))(*(_DWORD *)this + 0x40))(this, 0x20, v27, v33);
-  }
-  if ( (Dst & 0x1000000) != 0 )
-  {
-    v14 = *(_DWORD **)(this + 0x44);
-    if ( v14 )
-    {
-      sub_4E5CC0(v14, a2);
+      sub_4E5CC0(v14); /*0x4d24f6*/
     }
     else
     {
-      v15 = (TESPathGrid *)FormHeapAlloc(0x54u);
-      *(_DWORD *)&a1[0xD] = v15;
-      v40 = 2;
-      if ( v15 )
-        v16 = TESPathGrid::TESPathGrid(v15);
+      v15 = (TESPathGrid *)FormHeapAlloc(0x54u); /*0x4d24ff*/
+      *(_DWORD *)&a1[0xD] = v15; /*0x4d2507*/
+      v35 = 2; /*0x4d250d*/
+      if ( v15 ) /*0x4d2518*/
+        v16 = TESPathGrid::TESPathGrid(v15); /*0x4d251c*/
       else
-        v16 = 0;
-      v40 = 0xFFFFFFFF;
-      *(_DWORD *)(this + 0x44) = v16;
-      sub_4E5CC0(v16, a2);
-      v17 = *(_DWORD *)(this + 0x44);
-      if ( v17 )
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v17 + 0x10))(v17, 1);
-      *(_DWORD *)(this + 0x44) = 0;
+        v16 = 0; /*0x4d2523*/
+      v35 = 0xFFFFFFFF; /*0x4d2527*/
+      *(_DWORD *)(this + 0x44) = v16; /*0x4d2532*/
+      sub_4E5CC0(v16); /*0x4d2535*/
+      v17 = *(_DWORD *)(this + 0x44); /*0x4d253a*/
+      if ( v17 ) /*0x4d253f*/
+        (*(void (__thiscall **)(int, int))(*(_DWORD *)v17 + 0x10))(v17, 1); /*0x4d2548*/
+      *(_DWORD *)(this + 0x44) = 0; /*0x4d254a*/
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x4d2557*/
   {
-    v18 = SaveLoad_CurrentSavegame;
-    v19 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v20 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v19 )
+    v18 = g_TESSaveLoadGame; /*0x4d2564*/
+    v19 = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x4d256a*/
+    v20 = g_TESSaveLoadGame->bufferCursor; /*0x4d2572*/
+    if ( v19 ) /*0x4d2575*/
     {
-      v21 = TESForm_LookupByFormID(*v19);
-      v22 = *(unsigned __int16 *)&a1[1] + v5;
-      if ( v20 <= v22 )
+      v21 = TESForm_LookupByFormID(*v19); /*0x4d2588*/
+      v22 = &bufferCursor[*(unsigned __int16 *)&a1[1]]; /*0x4d258a*/
+      if ( v20 <= v22 ) /*0x4d2592*/
       {
-        if ( v20 < v22 )
+        if ( v20 < v22 ) /*0x4d25d1*/
         {
-          v24 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v21->vtbl->GetEditorName)(
+          v24 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v21->vtbl->GetEditorName)( /*0x4d25e8*/
                                 v21,
                                 *((unsigned __int8 *)v19 + 9),
                                 *(UInt32 *)((char *)v19 + 5));
-          PrintError(
+          PrintError( /*0x4d2607*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
             "%i and flags %08X",
-            v5 + *(unsigned __int16 *)&a1[1] - v20,
+            &bufferCursor[*(unsigned __int16 *)&a1[1] - (_DWORD)v20],
             "..\\TES Shared\\TESObjectCELL.cpp",
             0x31D1,
             *v19,
             v24,
             v29,
-            v35);
+            v33);
         }
       }
       else
       {
-        v23 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v21->vtbl->GetEditorName)(
+        v23 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v21->vtbl->GetEditorName)( /*0x4d25a5*/
                               v21,
                               *((unsigned __int8 *)v19 + 9),
                               *(UInt32 *)((char *)v19 + 5));
-        PrintError(
+        PrintError( /*0x4d25c4*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-          v20 - *(unsigned __int16 *)&a1[1] - v5,
+          &v20[-*(unsigned __int16 *)&a1[1]] - bufferCursor,
           "..\\TES Shared\\TESObjectCELL.cpp",
           0x31D1,
           *v19,
           v23,
           v28,
-          v34);
+          v32);
       }
     }
     else
     {
-      v25 = *(unsigned __int16 *)&a1[1] + v5;
-      if ( v20 <= v25 )
+      v25 = &bufferCursor[*(unsigned __int16 *)&a1[1]]; /*0x4d2616*/
+      if ( v20 <= v25 ) /*0x4d261b*/
       {
-        if ( v20 < v25 )
-          PrintError(
+        if ( v20 < v25 ) /*0x4d2638*/
+          PrintError( /*0x4d2653*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-            v5 + *(unsigned __int16 *)&a1[1] - v20,
+            &bufferCursor[*(unsigned __int16 *)&a1[1] - (_DWORD)v20],
             "..\\TES Shared\\TESObjectCELL.cpp",
             0x31D1,
-            LOBYTE(v18[1].createdObjectList.next));
+            v18->currentVersion);
       }
       else
       {
-        PrintError(
+        PrintError( /*0x4d2636*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-          v20 - *(unsigned __int16 *)&a1[1] - v5,
+          &v20[-*(unsigned __int16 *)&a1[1]] - bufferCursor,
           "..\\TES Shared\\TESObjectCELL.cpp",
           0x31D1,
-          LOBYTE(v18[1].createdObjectList.next));
+          v18->currentVersion);
       }
     }
   }

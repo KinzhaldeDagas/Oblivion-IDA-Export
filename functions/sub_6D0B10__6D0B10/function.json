@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D0B10",
+      "0x6D0B5F"
+    ]
+  ],
+  "chunks_sha256": "d480b3ece2c770823466f8c59f3178eafb9ae21d022f313946b60070b70059da",
+  "comment_regular": "Refcount-aware replacement of interpolators[index]: releases the old NiInterpolator, stores the new pointer, and acquires it. Semantically void; prior EAX/LONG output was refcount/index residue.",
+  "comment_repeatable": "Refcount-aware replacement of interpolators[index]: releases the old NiInterpolator, stores the new pointer, and acquires it. Semantically void; prior EAX/LONG output was refcount/index residue.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D0B10",
+  "display_name": "NiGeomMorpherController_SetInterpolator",
   "end_ea": "0x6D0B5F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D0B10",
+  "name": "NiGeomMorpherController_SetInterpolator",
   "segment": ".text",
   "sha256": "d480b3ece2c770823466f8c59f3178eafb9ae21d022f313946b60070b70059da",
   "size": 79,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D0B10",
-  "type": "LONG __thiscall(_DWORD *this, int, unsigned __int16)",
+  "total_chunk_size": 79,
+  "type": "void __thiscall(NiGeomMorpherController *this, NiInterpolator *interpolator, unsigned __int16 index)",
   "xrefs_from_count": 38,
   "xrefs_to_count": 1
 }

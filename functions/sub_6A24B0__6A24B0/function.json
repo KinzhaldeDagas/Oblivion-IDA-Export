@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x6A24B0",
+      "0x6A2548"
+    ]
+  ],
+  "chunks_sha256": "7d61b64a90be4a5035a2cb097f70683c264d340ef68817f68a1ab5f83f4e2970",
+  "comment_regular": "Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
+  "comment_repeatable": "Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6A24B0",
+  "display_name": "MagicTarget_RemoveActiveEffectsByCode",
   "end_ea": "0x6A2548",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6A24B0",
+  "name": "MagicTarget_RemoveActiveEffectsByCode",
   "segment": ".text",
   "sha256": "7d61b64a90be4a5035a2cb097f70683c264d340ef68817f68a1ab5f83f4e2970",
   "size": 152,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A24B0",
-  "type": "char __userpurge@<al>(int@<ecx>, int@<esi>, double@<st0>, int, MagicCaster *)",
+  "total_chunk_size": 152,
+  "type": "void __thiscall(MagicTarget *this, unsigned int effectCode, MagicCaster *casterFilterOrNull)",
   "xrefs_from_count": 82,
   "xrefs_to_count": 12
 }

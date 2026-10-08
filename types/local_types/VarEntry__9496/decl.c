@@ -1,1 +1,5 @@
-VarEntry
+struct VarEntry
+{
+Var *var;
+VarEntry *next;
+};

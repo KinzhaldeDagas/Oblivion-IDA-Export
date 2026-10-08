@@ -1,1 +1,1 @@
-HMONITOR
+typedef HMONITOR__ *HMONITOR;

@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4AD990",
+      "0x4AD9D8"
+    ]
+  ],
+  "chunks_sha256": "22c95c4a2b0006ab37db484114a94f64d08da80a3e918eccd7f19e9d200ba7d6",
+  "comment_regular": "Verified (Oblivion): constructs a ParticleShaderProperty from the TESEffectShader and selected visual nodes, configures it with a NiSourceTexture*, initializes its animation time, and returns the property retained by MagicShaderHitEffect +0x3C.",
+  "comment_repeatable": "Verified (Oblivion): constructs a ParticleShaderProperty from the TESEffectShader and selected visual nodes, configures it with a NiSourceTexture*, initializes its animation time, and returns the property retained by MagicShaderHitEffect +0x3C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4AD990",
+  "display_name": "TESEffectShader_CreateVisualProperty",
   "end_ea": "0x4AD9D8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4AD990",
+  "name": "TESEffectShader_CreateVisualProperty",
   "segment": ".text",
   "sha256": "22c95c4a2b0006ab37db484114a94f64d08da80a3e918eccd7f19e9d200ba7d6",
   "size": 72,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4AD990",
-  "type": "float *__thiscall(float *this, int, int, int, float)",
+  "total_chunk_size": 72,
+  "type": "ParticleShaderProperty *__thiscall(TESEffectShader *this, void *targetNode, void *secondaryNode, NiSourceTexture *sourceTexture, float elapsedSeconds)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1
 }

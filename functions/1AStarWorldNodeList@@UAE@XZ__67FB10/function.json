@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "chunks": [
+    [
+      "0x67FB10",
+      "0x67FB62"
+    ],
+    [
+      "0x9C4AC0",
+      "0x9C4AE3"
+    ]
+  ],
+  "chunks_sha256": "2a9360b4d72e36c29140a516e5e6fd2f832496a97f1af04125862bdeb3a668c5",
+  "comment_regular": "Verified AStarWorldNodeList destructor resets the NiTPointerListBase vtable, frees all list-link nodes through NiTPointerList::FreeAllNodes, then resets the base list vtable; AStarWorldNode records themselves are stored in the separate transient state table.",
+  "comment_repeatable": "Verified AStarWorldNodeList destructor resets the NiTPointerListBase vtable, frees all list-link nodes through NiTPointerList::FreeAllNodes, then resets the base list vtable; AStarWorldNode records themselves are stored in the separate transient state table.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "AStarWorldNodeList::~AStarWorldNodeList(void)",
   "end_ea": "0x67FB62",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1AStarWorldNodeList@@UAE@XZ",
   "segment": ".text",
   "sha256": "9c831273385ed1d5f6e8860c3139169c9fd172427d63db21527dded255c7275f",
   "size": 82,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67FB10",
+  "total_chunk_size": 117,
   "type": "void __thiscall(NiTPointerList__BSImageSpaceShader *this)",
-  "xrefs_from_count": 26,
+  "xrefs_from_count": 37,
   "xrefs_to_count": 3
 }

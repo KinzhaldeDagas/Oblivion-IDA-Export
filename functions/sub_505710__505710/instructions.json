@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x505710",
-    "line": "push    ecx",
+    "line": "push    ecx; HasMagicEffect command execute callback: extracts a magic-effect code parameter and calls the shared object/magic-target evaluator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x505742",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x50575E",
-    "line": "call    sub_4F8300",
+    "line": "call    Cmd_HasMagicEffect_EvalOrConsole; HasMagicEffect evaluator: validates thisObj as a magic target, gets MagicTarget through vfunc +0x124, then queries MagicTarget_HasEffect(effectCode).",
     "mnemonic": "call",
     "size": 5
   },

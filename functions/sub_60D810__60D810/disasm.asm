@@ -1,6 +1,6 @@
 0x60D810: push    esi
 0x60D811: push    edi
-0x60D812: mov     edi, [esp+8+arg_0]
+0x60D812: mov     edi, [esp+8+changeMask]
 0x60D816: test    edi, 20000h
 0x60D81C: mov     esi, ecx
 0x60D81E: jz      short loc_60D858
@@ -16,9 +16,9 @@
 0x60D83A: test    edi, 10000h
 0x60D840: jnz     short loc_60D851
 0x60D842: mov     eax, [esi+8]
-0x60D845: mov     ecx, ds:0B33B00h
-0x60D84B: push    eax
-0x60D84C: call    sub_45C7A0
+0x60D845: mov     ecx, ds:0B33B00h; self
+0x60D84B: push    eax; form
+0x60D84C: call    TESSaveLoadGame_DeleteForm
 0x60D851: mov     dword ptr [esi+8], 0
 0x60D858: pop     edi
 0x60D859: pop     esi

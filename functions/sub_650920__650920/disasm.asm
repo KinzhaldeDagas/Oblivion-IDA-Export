@@ -32,7 +32,7 @@
 0x650975: push    0
 0x650977: push    3
 0x650979: lea     ecx, [eax+0Ch]
-0x65097C: call    EffectItemList_GetStrongestItem
+0x65097C: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x650981: mov     eax, [eax+10h]
 0x650984: cmp     eax, 2
 0x650987: jnz     short loc_6509A6
@@ -59,7 +59,7 @@
 0x6509CF: mov     ecx, esi
 0x6509D1: call    eax
 0x6509D3: mov     ecx, ebp
-0x6509D5: call    sub_565DF0
+0x6509D5: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x6509DA: test    al, al
 0x6509DC: pop     ebx
 0x6509DD: jz      short loc_6509F4

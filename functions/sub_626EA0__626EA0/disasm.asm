@@ -2,11 +2,11 @@
 0x626EA1: push    esi
 0x626EA2: push    edi
 0x626EA3: mov     esi, ecx
-0x626EA5: call    sub_567D20
+0x626EA5: call    TESPackage_GetSaveSize
 0x626EAA: mov     ecx, ds:0B33B00h
 0x626EB0: movzx   edi, ax
 0x626EB3: movzx   ebx, di
-0x626EB6: call    sub_45A170
+0x626EB6: call    TESSaveLoadGame_UseSaveGameBlocks
 0x626EBB: test    al, al
 0x626EBD: jz      short loc_626EC2
 0x626EBF: add     edi, 6
@@ -15,7 +15,6 @@
 0x626EC7: test    eax, eax
 0x626EC9: jz      short loc_626EDF
 0x626ECB: jmp     short loc_626ED0
-0x626ECD: align 10h
 0x626ED0: cmp     dword ptr [eax], 0
 0x626ED3: jz      short loc_626ED8
 0x626ED5: add     ecx, 1
@@ -31,7 +30,7 @@
 0x626EF9: jz      short loc_626F41
 0x626EFB: mov     ecx, [esi]
 0x626EFD: push    ecx; a1
-0x626EFE: call    TESForm_LookupByFormID
+0x626EFE: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x626F03: mov     edx, [esi+5]
 0x626F06: add     esp, 4
 0x626F09: push    offset a_AiFleepackage; ".\\AI\\FleePackage.cpp"

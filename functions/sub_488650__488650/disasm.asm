@@ -3,32 +3,32 @@
 0x488654: push    esi
 0x488655: mov     esi, ecx
 0x488657: mov     ecx, ds:0B33B00h
-0x48865D: mov     [esp+18h+var_4], 0
+0x48865D: mov     [esp+18h+source], 0
 0x488665: mov     ebp, [ecx+14h]
 0x488668: push    edi
 0x488669: mov     [esp+1Ch+var_C], 0
-0x488671: call    sub_45A170
+0x488671: call    TESSaveLoadGame_UseSaveGameBlocks
 0x488676: test    al, al
 0x488678: jz      short loc_4886AD
-0x48867A: mov     ecx, ds:0B33B00h
-0x488680: push    4; Size
+0x48867A: mov     ecx, ds:0B33B00h; self
+0x488680: push    4; byteCount
 0x488682: lea     eax, [esp+20h+Src]
-0x488686: push    eax; Src
+0x488686: push    eax; source
 0x488687: mov     [esp+24h+Src], 4B4F4C42h
 0x48868F: call    SaveLoad_SaveData
-0x488694: mov     ecx, ds:0B33B00h
+0x488694: mov     ecx, ds:0B33B00h; self
 0x48869A: mov     edx, [ecx+14h]
-0x48869D: push    2; Size
-0x48869F: lea     eax, [esp+20h+var_4]
-0x4886A3: push    eax; Src
+0x48869D: push    2; byteCount
+0x48869F: lea     eax, [esp+20h+source]
+0x4886A3: push    eax; source
 0x4886A4: mov     [esp+24h+var_C], edx
 0x4886A8: call    SaveLoad_SaveData
-0x4886AD: mov     ecx, ds:0B33B00h
-0x4886B3: push    2; Size
+0x4886AD: mov     ecx, ds:0B33B00h; self
+0x4886B3: push    2; byteCount
 0x4886B5: lea     edx, [esp+20h+var_10]
 0x4886B9: mov     [esp+20h+var_10], 0
 0x4886C1: mov     edi, [ecx+14h]
-0x4886C4: push    edx; Src
+0x4886C4: push    edx; source
 0x4886C5: call    SaveLoad_SaveData
 0x4886CA: mov     esi, [esi]
 0x4886CC: test    esi, esi
@@ -56,7 +56,7 @@
 0x488713: jz      short loc_488750
 0x488715: mov     ecx, [edi]
 0x488717: push    ecx; a1
-0x488718: call    TESForm_LookupByFormID
+0x488718: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x48871D: mov     edx, [edi+5]
 0x488720: add     esp, 4
 0x488723: push    offset a__TesSharedInv; "..\\TES Shared\\InventoryChanges.cpp"
@@ -83,7 +83,7 @@
 0x488762: call    sub_40FEC0
 0x488767: add     esp, 10h
 0x48876A: mov     ecx, ds:0B33B00h
-0x488770: call    sub_45A170
+0x488770: call    TESSaveLoadGame_UseSaveGameBlocks
 0x488775: test    al, al
 0x488777: jz      short loc_4887AC
 0x488779: mov     edx, ds:0B33B00h

@@ -9,9 +9,9 @@
 0x675C51: test    esi, esi
 0x675C53: jz      short loc_675CA0
 0x675C55: mov     ebx, [esp+10h+arg_14]
-0x675C59: mov     ebp, [esp+10h+arg_8]
+0x675C59: mov     ebp, [esp+10h+actor]
 0x675C5D: lea     ecx, [ecx+0]
-0x675C60: mov     ecx, [esi]
+0x675C60: mov     ecx, [esi]; self
 0x675C62: test    ecx, ecx
 0x675C64: jz      short loc_675CA0
 0x675C66: cmp     [ecx+4], edi
@@ -31,8 +31,8 @@
 0x675C8C: jnz     short loc_675C9C
 0x675C8E: test    ebp, ebp
 0x675C90: jz      short loc_675CA9
-0x675C92: push    ebp
-0x675C93: call    sub_605ED0
+0x675C92: push    ebp; actor
+0x675C93: call    Crime_DoesActorKnow
 0x675C98: test    al, al
 0x675C9A: jnz     short loc_675CA9
 0x675C9C: test    esi, esi

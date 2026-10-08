@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8A7F20",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+arg_4]; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x8A7F3B",
-    "line": "or      ds:0BA7DB0h[eax*4], esi",
+    "line": "or      ds:0BA7DB0h[eax*4], esi; TES4 authoritative: collision layer matrix write at global 0xBA7DB0. Sets both row a1->a2 and symmetric row a2->a1; no save/restore.",
     "mnemonic": "or",
     "size": 7
   },

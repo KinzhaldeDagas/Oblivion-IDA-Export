@@ -6,7 +6,7 @@
 0x5EB15A: push    esi
 0x5EB15B: push    edi
 0x5EB15C: mov     ebx, ecx
-0x5EB15E: call    TESObjectREFR_GetParentCell
+0x5EB15E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EB163: mov     esi, eax
 0x5EB165: test    esi, esi
 0x5EB167: jz      loc_5EB360
@@ -60,15 +60,15 @@
 0x5EB210: test    eax, eax
 0x5EB212: jnz     loc_5EB34E
 0x5EB218: mov     ecx, ebx; this
-0x5EB21A: call    TESObjectREFR_GetParentCell
+0x5EB21A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EB21F: mov     ecx, eax; this
-0x5EB221: call    TESObjectCELL_IsInterior
+0x5EB221: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5EB226: test    al, al
 0x5EB228: jz      loc_5EB2C7
 0x5EB22E: push    2
 0x5EB230: push    0
 0x5EB232: mov     ecx, esi
-0x5EB234: call    sub_441800
+0x5EB234: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x5EB239: test    eax, eax
 0x5EB23B: jz      loc_5EB300
 0x5EB241: mov     ecx, [eax+20h]
@@ -76,28 +76,28 @@
 0x5EB247: mov     esi, [eax+28h]
 0x5EB24A: mov     eax, [eax+2Ch]
 0x5EB24D: mov     [esp+40h+var_10], ecx
-0x5EB251: mov     [esp+40h+var_1C], ecx
-0x5EB255: push    offset Vector3_InitValue?
-0x5EB25A: lea     ecx, [esp+44h+var_1C]
+0x5EB251: mov     [esp+40h+var_1C.x], ecx
+0x5EB255: push    offset g_zeroNiPoint3; other
+0x5EB25A: lea     ecx, [esp+44h+var_1C]; this
 0x5EB25E: mov     [esp+44h+var_C], edx
 0x5EB262: mov     [esp+44h+var_8], esi
 0x5EB266: mov     [esp+44h+var_4], eax
-0x5EB26A: mov     [esp+44h+var_18], edx
-0x5EB26E: mov     [esp+44h+var_14], esi
-0x5EB272: call    sub_8AA390
+0x5EB26A: mov     [esp+44h+var_1C.y], edx
+0x5EB26E: mov     [esp+44h+var_1C.z], esi
+0x5EB272: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x5EB277: test    al, al
 0x5EB279: jz      loc_5EB300
 0x5EB27F: fld     [esp+40h+var_10]
 0x5EB283: lea     ecx, [esp+40h+var_1C]
 0x5EB287: fsub    dword ptr [edi]
-0x5EB289: fstp    [esp+40h+var_1C]
+0x5EB289: fstp    [esp+40h+var_1C.x]
 0x5EB28D: fld     [esp+40h+var_C]
 0x5EB291: fsub    dword ptr [edi+4]
-0x5EB294: fstp    [esp+40h+var_18]
+0x5EB294: fstp    [esp+40h+var_1C.y]
 0x5EB298: fld     [esp+40h+var_8]
 0x5EB29C: fsub    dword ptr [edi+8]
-0x5EB29F: fstp    [esp+40h+var_14]
-0x5EB2A3: call    sub_404C90
+0x5EB29F: fstp    [esp+40h+var_1C.z]
+0x5EB2A3: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x5EB2A8: fld     [esp+40h+var_4]
 0x5EB2AC: fcompp
 0x5EB2AE: fnstsw  ax
@@ -137,7 +137,7 @@
 0x5EB312: test    al, 1
 0x5EB314: jnz     short loc_5EB353
 0x5EB316: mov     ecx, ebx; this
-0x5EB318: call    MobileObject_GetCharProxy
+0x5EB318: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5EB31D: mov     esi, eax
 0x5EB31F: test    esi, esi
 0x5EB321: jz      short loc_5EB353

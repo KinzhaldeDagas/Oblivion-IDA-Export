@@ -34,7 +34,7 @@
 0x6D54C1: push    eax; int
 0x6D54C2: push    ecx
 0x6D54C3: fstp    [esp+44h+var_44]; float
-0x6D54C6: call    sub_6BB270
+0x6D54C6: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6D54CB: fstp    [esp+44h+var_C]
 0x6D54CF: add     esp, 18h
 0x6D54D2: fldz
@@ -61,7 +61,7 @@
 0x6D5508: push    eax; int
 0x6D5509: push    ecx
 0x6D550A: fstp    [esp+44h+var_44]; float
-0x6D550D: call    sub_6BB270
+0x6D550D: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6D5512: fstp    [esp+44h+var_18]
 0x6D5516: add     esp, 18h
 0x6D5519: fld1
@@ -88,7 +88,7 @@
 0x6D554F: push    eax; int
 0x6D5550: push    ecx
 0x6D5551: fstp    [esp+44h+var_44]; float
-0x6D5554: call    sub_6BB270
+0x6D5554: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6D5559: fstp    [esp+44h+var_14]
 0x6D555D: add     esp, 18h
 0x6D5560: fld1
@@ -115,7 +115,7 @@
 0x6D5596: push    eax; int
 0x6D5597: push    ecx
 0x6D5598: fstp    [esp+44h+var_44]; float
-0x6D559B: call    sub_6BB270
+0x6D559B: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6D55A0: fstp    [esp+44h+var_10]
 0x6D55A4: add     esp, 18h
 0x6D55A7: mov     eax, [esi+50h]

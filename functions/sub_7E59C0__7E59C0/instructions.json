@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7E59E5",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7E5A00",
-    "line": "cmp     eax, offset dword_B3FD54",
+    "line": "cmp     eax, offset stru_B3FD54",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7E5A60",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7E5A80",
-    "line": "cmp     eax, offset dword_B4618C",
+    "line": "cmp     eax, offset NiRTTI_BSShaderLightingProperty; Oblivion NiRTTI_BSShaderLightingProperty: native name 'BSShaderLightingProperty'; parent NiRTTI_BSShaderProperty (B46000). Corrected from the oversized OB_ShaderConstantStorage array into an independent eight-byte NiRTTI object.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x7E5AA7",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7E5AB0",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90",
     "mnemonic": "push",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7E5AC5",
-    "line": "mov     [esp+20h+arg_0], esi",
+    "line": "mov     [esp+20h+element], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x7E5ACF",
-    "line": "lea     ecx, [esp+1Ch+arg_0]",
+    "line": "lea     ecx, [esp+1Ch+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7E5AD3",
-    "line": "push    ecx",
+    "line": "push    ecx; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E5AD4",
-    "line": "lea     ecx, [ebx+110h]",
+    "line": "lea     ecx, [ebx+110h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7E5AE2",
-    "line": "call    NiTArray_AddItem",
+    "line": "call    NiTObjectArray_AddFirstEmpty",
     "mnemonic": "call",
     "size": 5
   },
@@ -778,5 +778,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9A9F20",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F23",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F28",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9A9F2C",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F2F",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9A9F32",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9A9F34",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F39",
+    "line": "mov     eax, offset stru_AD6FAC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9A9F3E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

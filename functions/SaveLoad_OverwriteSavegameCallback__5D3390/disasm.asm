@@ -1,7 +1,7 @@
 0x5D3390: push    ecx
 0x5D3391: push    ebx
 0x5D3392: push    edi
-0x5D3393: call    sub_578D70
+0x5D3393: call    InterfaceManager_ConsumeMessageButton
 0x5D3398: push    40Fh
 0x5D339D: mov     bl, al
 0x5D339F: call    Menu_GetOpenMenuTile
@@ -29,7 +29,7 @@
 0x5D33E7: fld     dword ptr ds:0A30634h
 0x5D33ED: fstp    [esp+10h+var_4]
 0x5D33F1: fld     [esp+10h+var_4]
-0x5D33F5: call    Double_To_SInt32
+0x5D33F5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D33FA: test    esi, esi
 0x5D33FC: mov     ecx, 1
 0x5D3401: jz      short loc_5D343D
@@ -45,9 +45,9 @@
 0x5D3418: fld1
 0x5D341A: push    ecx
 0x5D341B: mov     ecx, [edi+40h]; this
-0x5D341E: fstp    [esp+14h+a2]; a3
-0x5D3421: push    0FA1h; a2
-0x5D3426: call    Tile_SetFloat
+0x5D341E: fstp    [esp+14h+a2]; value
+0x5D3421: push    0FA1h; propertyCode
+0x5D3426: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D342B: mov     eax, [esi]
 0x5D342D: mov     ecx, ds:0B33B00h
 0x5D3433: push    0; int

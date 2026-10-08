@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
-  "callers_count": 12,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 17,
+  "chunks": [
+    [
+      "0x605E80",
+      "0x605ED0"
+    ]
+  ],
+  "chunks_sha256": "c1a250707cec0c3497ee95b9a703b78f60b7c4b47ba25077ed04fcea1075c17c",
+  "comment_regular": "Verified 2026-10-04 crime-record family: manager6770F0 allocates30 bytes, calls605E50 then606520; manager677010 calls6061F0;677240 calls6071A0. Embedded witness list at1C, not AlarmPackage crimes pointer at3C. Probable Fallout Crime family; Oblivion allocation, field reads/writes, calls and RTTI fixups establish local identity.\nVerified destructor: conditionally detaches crime from active AlarmPackages through675740, then frees witness-list nodes, not Actor payloads. Does not free Crime storage; manager removal callers separately FormHeapFree(self).",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_605E80",
+  "display_name": "Crime_Destructor",
   "end_ea": "0x605ED0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_605E80",
+  "name": "Crime_Destructor",
   "segment": ".text",
   "sha256": "c1a250707cec0c3497ee95b9a703b78f60b7c4b47ba25077ed04fcea1075c17c",
   "size": 80,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x605E80",
-  "type": "void __thiscall(unsigned int *this)",
+  "total_chunk_size": 80,
+  "type": "void __thiscall(Crime *self)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 17
 }

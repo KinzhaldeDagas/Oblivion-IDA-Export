@@ -1,18 +1,31 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E0000",
+      "0x4E00CC"
+    ]
+  ],
+  "chunks_sha256": "683ae93d1a6812923b8d99f227bf6a86745f5cea81a98029490a000cf9ddc091",
+  "comment_regular": "Runtime corroboration of TESCS 0x545970: construct owning CELL group type 6 from parent types 1/3/5, then construct the direct reference-role group from type 6. Role is 8 if reference Persistent, else 10 if Visible When Distant, else 9; label remains the owning CELL FormID.",
+  "comment_repeatable": "Runtime corroboration of TESCS 0x545970: construct owning CELL group type 6 from parent types 1/3/5, then construct the direct reference-role group from type 6. Role is 8 if reference Persistent, else 10 if Visible When Distant, else 9; label remains the owning CELL FormID.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "TESObjectREFR_CreateGroupRecord",
   "end_ea": "0x4E00CC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_CreateGroupRecord",
   "segment": ".text",
   "sha256": "683ae93d1a6812923b8d99f227bf6a86745f5cea81a98029490a000cf9ddc091",
   "size": 204,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E0000",
+  "total_chunk_size": 204,
   "type": "void __thiscall(TESObjectREFR *this, _DWORD *, int)",
   "xrefs_from_count": 81,
   "xrefs_to_count": 12

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B7C30",
-    "line": "push    esi",
+    "line": "push    esi; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x6B7C33",
-    "line": "mov     ecx, [esi+0Ch]; int",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x6B7C43",
-    "line": "jnz     short loc_6B7C56",
+    "line": "jnz     short loc_6B7C56; ImmediateResult alone suppresses deferred ambient commit because it was already performed during CreateConversation. This test does not inspect Goodbye or RunForRumors.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x6B7C45",
-    "line": "call    sub_5308D0",
+    "line": "call    TESTopicInfo__AddTopicList; Deferred ambient ordering is AddTopicList first, then RunResult. This is the reverse of CreateConversation's ImmediateResult ordering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x6B7C4D",
-    "line": "push    ecx",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B7C4E",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6B7C51",
-    "line": "call    sub_531470",
+    "line": "call    TESTopicInfo__RunResult; Run the deferred result on this DialogueItem's actual routed speaker, unlike ImmediateResult which uses the original conversation initiator.",
     "mnemonic": "call",
     "size": 5
   },

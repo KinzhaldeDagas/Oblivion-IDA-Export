@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4CC9B3",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x4CCA06",
-    "line": "push    0",
+    "line": "push    0; forceWorn",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CCA08",
-    "line": "push    0",
+    "line": "push    0; unusedArg",
     "mnemonic": "push",
     "size": 2
   },
@@ -319,25 +319,25 @@
   },
   {
     "ea": "0x4CCA15",
-    "line": "push    edx",
+    "line": "push    edx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CCA16",
-    "line": "push    esi",
+    "line": "push    esi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CCA17",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CCA19",
-    "line": "call    sub_4DDC40",
+    "line": "call    TESObjectREFR_AddItemFromWorldReference; Add a live world reference to this reference's container by forwarding it to ContainerExtraData_AddItemFromWorldReference. That path derives sourceRef->GetBaseForm() and copies reference instance data; the returned byte is not a verified insertion-success contract and native callers ignore it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x4CCA33",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

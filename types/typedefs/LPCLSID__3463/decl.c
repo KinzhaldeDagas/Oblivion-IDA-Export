@@ -1,1 +1,1 @@
-LPCLSID
+typedef GUID *LPCLSID;

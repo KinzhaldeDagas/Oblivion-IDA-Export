@@ -39,7 +39,7 @@
 0x45A35D: jnz     short loc_45A362
 0x45A35F: mov     [ecx+0Ch], edx
 0x45A362: push    edi
-0x45A363: call    FormHeapFree
+0x45A363: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45A368: add     esp, 4
 0x45A36B: pop     edi
 0x45A36C: pop     ebx

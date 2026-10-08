@@ -1,4 +1,4 @@
-0x57D7A0: sub     esp, 8
+0x57D7A0: sub     esp, 8; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x57D7A3: fild    dword ptr ds:0B06C4Ch
 0x57D7A9: fstp    [esp+8+var_8]
 0x57D7AC: fild    dword ptr ds:0B06C50h

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52E0D0",
-    "line": "push    esi",
+    "line": "push    esi; TRDT loader delegates to GetChunkData with max 16. Size 0 is a successful no-op; sizes 1..16 prefix-overlay constructor state; sizes >16 truncate to 15 bytes and force byte 15 to NUL while logging.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x52E0EF",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Fixed max=16 does not require exact TRDT size. Short chunks leave the constructor/default suffix intact (bytes 13..15 were not explicitly initialized); oversized chunks are accepted after truncation.",
     "mnemonic": "call",
     "size": 5
   },

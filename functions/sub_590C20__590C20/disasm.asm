@@ -70,7 +70,7 @@
 0x590CF3: mov     ecx, [esi+24h]
 0x590CF6: push    eax
 0x590CF7: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x590CFF: call    NiNode_AddNiExtraData
+0x590CFF: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x590D04: mov     eax, [esi+24h]
 0x590D07: mov     ecx, dword ptr [esp+18h+var_C]
 0x590D0B: mov     large fs:0, ecx
@@ -78,3 +78,20 @@
 0x590D13: pop     esi
 0x590D14: add     esp, 10h
 0x590D17: retn
+0x9BFAD0: mov     eax, [ebp-10h]
+0x9BFAD3: push    eax
+0x9BFAD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFAD9: pop     ecx
+0x9BFADA: retn
+0x9BFADB: mov     eax, [ebp-10h]
+0x9BFADE: push    eax
+0x9BFADF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFAE4: pop     ecx
+0x9BFAE5: retn
+0x9BFAE6: mov     edx, [esp+arg_4]
+0x9BFAEA: lea     eax, [edx-8]
+0x9BFAED: mov     ecx, [edx-0Ch]
+0x9BFAF0: xor     ecx, eax
+0x9BFAF2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFAF7: mov     eax, offset stru_AE8F8C
+0x9BFAFC: jmp     ___CxxFrameHandler3

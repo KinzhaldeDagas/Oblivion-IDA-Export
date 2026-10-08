@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D6390",
-    "line": "sub     esp, 0A4h",
+    "line": "sub     esp, 0A4h; Oblivion ShadowSceneLight cull/update path: tests camera/shadow-volume overlap and cube-face visibility, updates category visibility and receiver state, and returns obsolete shadow maps to BSTextureManager.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7D639C",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7D63C6",
-    "line": "fstp    [esp+0B4h+var_90.Radius]",
+    "line": "fstp    [esp+0B4h+self.Radius]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7D63D2",
-    "line": "mov     [esp+0B4h+var_90.Center.x], ecx",
+    "line": "mov     [esp+0B4h+self.Center.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7D63DC",
-    "line": "mov     [esp+0B4h+var_98], 0",
+    "line": "mov     [esp+0B4h+var_98], 0; Initialize pending CullProcess status before camera, face, distance, and frustum tests.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x7D63E9",
-    "line": "mov     [esp+0B4h+var_90.Center.y], edx",
+    "line": "mov     [esp+0B4h+self.Center.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D63ED",
-    "line": "mov     [esp+0B4h+var_90.Center.z], ecx",
+    "line": "mov     [esp+0B4h+self.Center.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7D640B",
-    "line": "call    sub_7D34C0",
+    "line": "call    ShadowCameraVolumesOverlap; Evaluate the special camera/projector overlap predicate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7D641E",
-    "line": "mov     [esp+0B4h+var_98], eax",
+    "line": "mov     [esp+0B4h+var_98], eax; Map camera/projector overlap result to pending cull status 0 or 0x00FF.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x7D6471",
-    "line": "push    eax; a2",
+    "line": "push    eax; plane",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D6472",
-    "line": "lea     ecx, [esp+0B8h+var_90]; this",
+    "line": "lea     ecx, [esp+0B8h+self]; self",
     "mnemonic": "lea",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7D647A",
-    "line": "call    sub_47DA70",
+    "line": "call    NiBound_ClassifyAgainstPlane",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7D6488",
-    "line": "lea     ecx, [esp+0B4h+var_90]",
+    "line": "lea     ecx, [esp+0B4h+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7D64D6",
-    "line": "cmp     byte ptr [ebp+0F5h], 0",
+    "line": "cmp     byte ptr [ebp+0F5h], 0; Only specialCubeDispatch lights enter the native six-face visibility test.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7D64DF",
-    "line": "mov     edi, [esp+0B4h+var_90.Radius]",
+    "line": "mov     edi, [esp+0B4h+self.Radius]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -558,12 +558,6 @@
     "size": 2
   },
   {
-    "ea": "0x7D64E9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7D64F0",
     "line": "mov     edx, [esp+0B4h+arg_0]",
     "mnemonic": "mov",
@@ -571,7 +565,7 @@
   },
   {
     "ea": "0x7D64F7",
-    "line": "mov     ecx, [esp+0B4h+var_90.Center.x]",
+    "line": "mov     ecx, [esp+0B4h+self.Center.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -589,7 +583,7 @@
   },
   {
     "ea": "0x7D64FD",
-    "line": "mov     edx, [esp+0BCh+var_90.Center.y]",
+    "line": "mov     edx, [esp+0BCh+self.Center.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,7 +607,7 @@
   },
   {
     "ea": "0x7D6508",
-    "line": "mov     ecx, [esp+0CCh+var_90.Center.z]",
+    "line": "mov     ecx, [esp+0CCh+self.Center.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -643,7 +637,7 @@
   },
   {
     "ea": "0x7D6517",
-    "line": "call    sub_7D5B20",
+    "line": "call    ShadowSceneLight_TestSpecialCubeFaceVisibility; Test the current cube face against the supplied camera/bound state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +673,7 @@
   },
   {
     "ea": "0x7D6529",
-    "line": "or      [esp+0B4h+var_98], edx",
+    "line": "or      [esp+0B4h+var_98], edx; A failed special-face visibility test sets that face bit in pending status; mode-0 rendering later skips matching bits.",
     "mnemonic": "or",
     "size": 4
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x7D656B",
-    "line": "fld     [esp+0B4h+var_90.Center.x]",
+    "line": "fld     [esp+0B4h+self.Center.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -829,7 +823,7 @@
   },
   {
     "ea": "0x7D6595",
-    "line": "fld     [esp+0B4h+var_90.Center.y]",
+    "line": "fld     [esp+0B4h+self.Center.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -847,7 +841,7 @@
   },
   {
     "ea": "0x7D65A1",
-    "line": "fld     [esp+0B4h+var_90.Center.z]",
+    "line": "fld     [esp+0B4h+self.Center.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -865,7 +859,7 @@
   },
   {
     "ea": "0x7D65AD",
-    "line": "fld     [esp+0B4h+a2.CullingPlanes.Normal.y]",
+    "line": "fld     [esp+0B4h+a2.CullingPlanes.Normal.y]; Begin native base receiver-surface distance calculation.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -961,13 +955,13 @@
   },
   {
     "ea": "0x7D65DE",
-    "line": "fsub    [esp+0B4h+var_90.Radius]",
+    "line": "fsub    [esp+0B4h+self.Radius]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7D65E2",
-    "line": "fstp    [esp+0B4h+var_A4]",
+    "line": "fstp    [esp+0B4h+var_A4]; Complete base surface-distance value used by the following fade/cull thresholds.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -979,7 +973,7 @@
   },
   {
     "ea": "0x7D65EA",
-    "line": "fld     dword ptr ds:0B4307Ch",
+    "line": "fld     dword ptr ds:0B4307Ch; Apply the base fade threshold.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -1027,7 +1021,7 @@
   },
   {
     "ea": "0x7D6603",
-    "line": "fld     dword ptr ds:0B43080h",
+    "line": "fld     dword ptr ds:0B43080h; Apply the base hard-cull threshold.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -1093,7 +1087,7 @@
   },
   {
     "ea": "0x7D6623",
-    "line": "mov     [esp+0B4h+var_98], esi",
+    "line": "mov     [esp+0B4h+var_98], esi; Base-distance hard reject writes pending status 0x00FF and zeros local fade values.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1129,7 +1123,7 @@
   },
   {
     "ea": "0x7D6635",
-    "line": "mov     [esp+0B4h+var_98], 0FFh",
+    "line": "mov     [esp+0B4h+var_98], 0FFh; Active projector-frustum plane reject writes pending status 0x00FF.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1273,7 +1267,7 @@
   },
   {
     "ea": "0x7D6677",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1423,7 @@
   },
   {
     "ea": "0x7D66C8",
-    "line": "cmp     byte ptr [ebp+0F4h], 0",
+    "line": "cmp     byte ptr [ebp+0F4h], 0; Gate the additional fade/cull stage on per-source projector mode +0xF4.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -1441,7 +1435,7 @@
   },
   {
     "ea": "0x7D66D1",
-    "line": "fld     dword ptr ds:0B43084h",
+    "line": "fld     dword ptr ds:0B43084h; Read additional per-source fade parameter.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -1477,7 +1471,7 @@
   },
   {
     "ea": "0x7D66E2",
-    "line": "fld     dword ptr ds:0B43088h",
+    "line": "fld     dword ptr ds:0B43088h; Read additional per-source cull parameter; this stage drives fade separately from the base hard-status producer.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2251,7 +2245,7 @@
   },
   {
     "ea": "0x7D6857",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2341,13 +2335,13 @@
   },
   {
     "ea": "0x7D688A",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D688B",
-    "line": "call    BSTextureManager_DiscardShadowMap",
+    "line": "call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2479,13 +2473,13 @@
   },
   {
     "ea": "0x7D68CF",
-    "line": "fstp    dword ptr [ebp+0D4h]",
+    "line": "fstp    dword ptr [ebp+0D4h]; Commit CullProcess range/fade-distance result to ShadowSceneLight+0xD4.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x7D68D5",
-    "line": "mov     [ebp+118h], cx",
+    "line": "mov     [ebp+118h], cx; Commit pending cull status to ShadowSceneLight+0x118.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2497,7 +2491,7 @@
   },
   {
     "ea": "0x7D68E0",
-    "line": "fstp    dword ptr [ebp+0D8h]",
+    "line": "fstp    dword ptr [ebp+0D8h]; Commit computed visibility/fade result to ShadowSceneLight+0xD8.",
     "mnemonic": "fstp",
     "size": 6
   },

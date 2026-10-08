@@ -93,7 +93,6 @@
 0x737004: mov     [esp+268h+var_208], ecx
 0x737008: mov     [esp+268h+var_254], edi
 0x73700C: jmp     short loc_737014
-0x73700E: align 10h
 0x737010: mov     dl, [esp+268h+var_255]
 0x737014: movzx   eax, word ptr [ebp+0]
 0x737018: and     eax, [esp+268h+var_248]
@@ -255,7 +254,6 @@
 0x7371E2: mov     [esp+268h+var_228], ecx
 0x7371E6: mov     [esp+268h+var_254], edi
 0x7371EA: jmp     short loc_7371F4
-0x7371EC: align 10h
 0x7371F0: mov     dl, [esp+268h+var_258]
 0x7371F4: movzx   eax, word ptr [ebp+0]
 0x7371F8: and     eax, [esp+268h+var_248]

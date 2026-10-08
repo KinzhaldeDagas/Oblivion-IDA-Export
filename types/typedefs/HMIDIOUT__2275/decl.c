@@ -1,1 +1,1 @@
-HMIDIOUT
+typedef HMIDIOUT__ *HMIDIOUT;

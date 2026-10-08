@@ -1,4 +1,4 @@
-BSStringT *sub_A10350()
+NiRTTI *sub_A10350()
 {
-  return sub_70E220((BSStringT *)dword_B41E68, "NiPSysFieldModifier", (int)dword_B40D08);
+  return NiRTTI_Constructor(&stru_B41E68, "NiPSysFieldModifier", &stru_B40D08); /*0xa10364*/
 }

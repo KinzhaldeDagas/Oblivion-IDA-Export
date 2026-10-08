@@ -3,7 +3,7 @@
 0x566152: mov     edi, [esp+8+arg_0]
 0x566156: push    edi
 0x566157: mov     esi, ecx
-0x566159: call    nullsub_returnvVoid_1arg
+0x566159: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x56615E: test    edi, 10000000h
 0x566164: jz      short loc_56616D
 0x566166: and     dword ptr [esi+1Ch], 0FFFF7FFFh

@@ -17,6 +17,7 @@ import http.client
 import json
 import os
 import re
+import stat
 import sys
 import time
 from pathlib import Path
@@ -31,11 +32,24 @@ def now() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat()
 
 
+def ensure_writable(path: Path) -> None:
+    if path.exists():
+        path.chmod(path.stat().st_mode | stat.S_IWRITE)
+
+
+def text_write(path: Path, value: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    ensure_writable(path)
+    path.write_text(value, encoding="utf-8")
+
+
 def json_write(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     tmp = path.with_suffix(path.suffix + ".tmp")
+    ensure_writable(tmp)
     tmp.write_text(payload, encoding="utf-8")
+    ensure_writable(path)
     tmp.replace(path)
 
 

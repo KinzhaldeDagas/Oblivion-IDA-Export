@@ -1,4 +1,4 @@
-0x7D7030: mov     eax, ds:0B45D74h
+0x7D7030: mov     eax, ds:0B45D74h; Release the strong-owned top render-target-group stack entry and decrement the global depth.
 0x7D7035: test    eax, eax
 0x7D7037: jz      short locret_7D7079
 0x7D7039: push    esi

@@ -1,1 +1,1 @@
-MIDIHDR
+typedef midihdr_tag MIDIHDR;

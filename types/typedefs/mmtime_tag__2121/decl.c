@@ -1,1 +1,5 @@
-mmtime_tag
+struct mmtime_tag
+{
+UINT wType;
+$65E1E1F88F474FAEE06A997A57C0E16C u;
+};

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x62DA10",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; HighProcess package-procedure action 5. Its completed/idle branch performs the first random-social scan while the separate +0x230 idle-window timer is positive; it does not test conversationScanCooldown. A nonpositive idle timer skips one scan update and is reseeded to 1.000..5.999 seconds.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x62DA41",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62DA43",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x62DACA",
-    "line": "call    sub_6553E0",
+    "line": "call    sub_6553E0; BunkFix: sleep/eat furniture-reference scanner used by sub_62D750 and sub_62DA10. Scans around package location/actor and populates process candidate list at +0xB0/+0x2C family using sub_6505D0 predicate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x62DB34",
-    "line": "mov     ecx, [esi+120h]; this",
+    "line": "mov     ecx, [esi+120h]; reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x62DB3E",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x62DB52",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x62DBAA",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x62DBF9",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; RadiantAI: equips selected candidate item when no current target remains and candidate list is empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x62DC0E",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x62DCA3",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x62DCB5",
-    "line": "call    Actor_EquipIngredient?",
+    "line": "call    Actor_EquipIngredient?; RadiantAI: state 4 path equips selected edible ingredient from actor inventory/package location result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x62DCCE",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x62DD39",
-    "line": "lea     ebx, [esi+3Ch]",
+    "line": "lea     ebx, [esi+3Ch]; RadiantAI 2026-07-12: accepted-list handoff. Pops head from HighProcess+0x3C, stores selected candidate at +0x44, and marks candidate+0x10 selected.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x62DD61",
-    "line": "cmp     dword ptr [eax+1Ch], 2",
+    "line": "cmp     dword ptr [eax+1Ch], 2; RadiantAI 2026-07-12: only response 2 is special here. ServicePurchase redirects to source actor or resolved type-0x23 owner actor; all other accepted responses target sourceRef directly.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x62DD7A",
-    "line": "mov     ecx, [eax]; this",
+    "line": "mov     ecx, [eax]; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x62DD95",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x62DDAF",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x62DDD9",
-    "line": "call    edx",
+    "line": "call    edx; RadiantAI 2026-07-12: HighProcess vtable +0xD0 -> 0x64AF50 sets follow/source target. Response code does not construct a crime record at this handoff.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x62DE15",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x62DE25",
-    "line": "mov     dword ptr [esi+6Ch], 14h",
+    "line": "mov     dword ptr [esi+6Ch], 14h; RadiantAI: sets process/category filter to 0x14 before acquire scan; sub_568370 maps 0x14 to edible Ingredient/AlchemyItem food cases.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2161,7 +2161,7 @@
   },
   {
     "ea": "0x62DE33",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x62DE44",
-    "line": "mov     ecx, offset fAIAcquireObjectDistance",
+    "line": "mov     ecx, (offset flt_B36778+170h); RadiantAI: outdoor acquire scan radius comes from fAIAcquireObjectDistance.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x62DE94",
-    "line": "call    sub_446B90",
+    "line": "call    sub_446B90; RadiantAI: scans cell/world references with callback sub_646600 to build acquire candidate entries.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x62DE9B",
-    "line": "mov     edx, [eax+568h]",
+    "line": "mov     edx, [eax+568h]; RadiantAI: after food/acquire scan, calls HighProcess vtable +0x568 (0xA71D7C -> sub_635900) to score candidate entries with service/steal/pickpocket/fight logic.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2545,7 +2545,7 @@
   },
   {
     "ea": "0x62DEFD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x62DF01",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2773,7 +2773,7 @@
   },
   {
     "ea": "0x62DF62",
-    "line": "call    Actor_EquipIngredient?",
+    "line": "call    Actor_EquipIngredient?; RadiantAI: alternate path equips selected edible ingredient after acquire scan.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2875,7 +2875,7 @@
   },
   {
     "ea": "0x62DF96",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x62DFAD",
-    "line": "call    eax",
+    "line": "call    eax; Read action-5 idle-window timer (+0x230). Positive enters the decrement-and-social-scan branch; zero/negative performs the alternate idle action and reseeds the timer instead.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x62DFD6",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x62E00A",
-    "line": "call    edx",
+    "line": "call    edx; Nonpositive action-5 idle timer: set +0x230 to rand()%5000 * 0.001 + 1.0 (1.000..5.999 seconds) and return without running the social scan this update.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3163,7 +3163,7 @@
   },
   {
     "ea": "0x62E02A",
-    "line": "call    edx",
+    "line": "call    edx; Positive action-5 idle timer: read +0x230 so the following code can subtract the frame delta.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3229,13 +3229,13 @@
   },
   {
     "ea": "0x62E050",
-    "line": "call    edx",
+    "line": "call    edx; Store action5IdleTimer - frameDelta, then immediately scan detection candidates. This timer creates only a one-update reseed gap at expiry; it is not HighProcess.conversationScanCooldown.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x62E052",
-    "line": "mov     eax, [esi+18Ch]",
+    "line": "mov     eax, [esi+18Ch]; Action-5 social scan begins after decrementing the positive +0x230 idle timer. No read of conversationScanCooldown occurs in this handler, so its later 60-second write does not gate this action-5 scan.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3268,12 +3268,6 @@
     "line": "jmp     short loc_62E070",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x62E06D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x62E070",
@@ -3313,7 +3307,7 @@
   },
   {
     "ea": "0x62E086",
-    "line": "mov     eax, [ebp+0]",
+    "line": "mov     eax, [ebp+0]; Unlike the action-1 scan, action 5 rejects dead candidates before radius, recent-target, and chance processing.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3403,13 +3397,13 @@
   },
   {
     "ea": "0x62E0C0",
-    "line": "fld     dword ptr ds:0A57EF8h",
+    "line": "fld     dword ptr ds:0A57EF8h; First random-conversation scan starts with an engine cap of 200.0 units, then selects fAISocialRadiusToTriggerConversation or its interior variant.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x62E0C6",
-    "line": "mov     ecx, offset fAISocialRadiusToTriggerConversation",
+    "line": "mov     ecx, (offset flt_B36778+178h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3439,13 +3433,13 @@
   },
   {
     "ea": "0x62E0D8",
-    "line": "fstp    [esp+30h+arg_0]",
+    "line": "fstp    [esp+30h+arg_0]; Random-conversation scan loads exterior social radius; interior cells substitute fAISocialRadiusToTriggerConversationInterior.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x62E0DC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3457,7 +3451,7 @@
   },
   {
     "ea": "0x62E0E3",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3475,7 +3469,7 @@
   },
   {
     "ea": "0x62E0EC",
-    "line": "mov     ecx, offset fAISocialRadiusToTriggerConversationInt",
+    "line": "mov     ecx, (offset flt_B36778+180h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3499,7 +3493,7 @@
   },
   {
     "ea": "0x62E0FC",
-    "line": "fld     [esp+30h+arg_0]",
+    "line": "fld     [esp+30h+arg_0]; Observed Oblivion radius quirk: if the selected cell-specific radius is below 200, the effective threshold is replaced with the EXTERIOR radius. Thus exterior uses min(200, exterior); interior uses 200 when interior>=200, but exterior when interior<200.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3529,7 +3523,7 @@
   },
   {
     "ea": "0x62E10D",
-    "line": "mov     ecx, offset fAISocialRadiusToTriggerConversation",
+    "line": "mov     ecx, (offset flt_B36778+178h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3571,7 +3565,7 @@
   },
   {
     "ea": "0x62E122",
-    "line": "call    TesObjectREF_GetDistance",
+    "line": "call    TesObjectREF_GetDistance; Reject candidate when Actor-to-candidate distance exceeds the effective social radius computed above.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3607,19 +3601,19 @@
   },
   {
     "ea": "0x62E138",
-    "line": "push    edi",
+    "line": "push    edi; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62E139",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E13B",
-    "line": "call    sub_5ED730",
+    "line": "call    Actor__CanStartSocialConversationWith; Oblivion social eligibility predicate used only by the two random-conversation scans. Requires a process; in interiors requires |Z(this)-Z(other)| <= 90; rejects process current-package flag 0x1000, dead actors, process mode 9, sub_5E6FA0 state, sleep states other than None/Sitting, and package types accepted by sub_567770; final process metric at vslot +0x15C must be <= 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3667,7 +3661,7 @@
   },
   {
     "ea": "0x62E159",
-    "line": "mov     ecx, offset unk_B36AA8",
+    "line": "mov     ecx, (offset flt_B36A88+20h); Recent-target timer behavior: empty HighProcess.recentSocialTargets initializes recentSocialTargetCooldown from fAItalktosameNPCtimer (120s); otherwise each candidate reaching this block subtracts one frame delta. Multiple candidates can therefore decrement it multiple times in one scan invocation.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3745,7 +3739,7 @@
   },
   {
     "ea": "0x62E18A",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; When HighProcess+0x198 expires, clear the recent-social-target list at +0x190. Candidate membership is checked before the conversation chance threshold.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3757,7 +3751,7 @@
   },
   {
     "ea": "0x62E191",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3823,25 +3817,25 @@
   },
   {
     "ea": "0x62E1B1",
-    "line": "mov     [esp+30h+var_20], ecx",
+    "line": "mov     [esp+30h+var_20], ecx; Compiler-expanded rand() % 100 produces the 0..99 social-conversation chance roll.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x62E1B5",
-    "line": "push    ebp",
+    "line": "push    ebp; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62E1B6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E1B8",
-    "line": "call    sub_446C30",
+    "line": "call    BSSimpleList__Contains; Rejects actors already present in the HighProcess recent-social-target list; the list is cleared only after its cooldown expires.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3859,7 +3853,7 @@
   },
   {
     "ea": "0x62E1C1",
-    "line": "mov     ecx, offset fAISocialchanceForConversation",
+    "line": "mov     ecx, (offset flt_B36778+188h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3883,13 +3877,13 @@
   },
   {
     "ea": "0x62E1CF",
-    "line": "fstp    [esp+30h+arg_0]",
+    "line": "fstp    [esp+30h+arg_0]; Uses fAISocialchanceForConversation, or the interior variant, as a strict percent threshold for this candidate.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x62E1D3",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3901,7 +3895,7 @@
   },
   {
     "ea": "0x62E1DA",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3919,7 +3913,7 @@
   },
   {
     "ea": "0x62E1E3",
-    "line": "mov     ecx, offset fAISocialchanceForConversationInterior",
+    "line": "mov     ecx, (offset flt_B36778+190h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3943,7 +3937,7 @@
   },
   {
     "ea": "0x62E1F3",
-    "line": "fild    [esp+30h+var_20]",
+    "line": "fild    [esp+30h+var_20]; Chance succeeds only when cell-specific fAISocialchanceForConversation > (rand() % 100). Equality fails; the roll range is 0..99.",
     "mnemonic": "fild",
     "size": 4
   },
@@ -4057,13 +4051,13 @@
   },
   {
     "ea": "0x62E228",
-    "line": "call    BSSimpleList_PushFront",
+    "line": "call    BSSimpleList_PushFront; Candidate is recorded in recentSocialTargets immediately after radius/chance pass, before final eligibility. A later-ineligible candidate remains suppressed until recentSocialTargetCooldown expires and clears the list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62E22D",
-    "line": "mov     ecx, [ebp+58h]",
+    "line": "mov     ecx, [ebp+58h]; After chance passes, candidate.process->RememberSocialTarget(initiator) makes recent-target suppression symmetric before the final eligibility checks. The remaining gates require NPC base type, not paralyzed/sleeping/dead-state-3, social eligibility, no active dialogue, not player/dead/no-3D, and no temporary override package.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4087,19 +4081,19 @@
   },
   {
     "ea": "0x62E239",
-    "line": "call    eax",
+    "line": "call    eax; Calls candidate.process->RememberSocialTarget(initiator), making the recent-target exclusion symmetric before final eligibility and before StartConversationPackage.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x62E23B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E23D",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4153,13 +4147,13 @@
   },
   {
     "ea": "0x62E25F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E261",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4183,7 +4177,7 @@
   },
   {
     "ea": "0x62E270",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4201,19 +4195,19 @@
   },
   {
     "ea": "0x62E27E",
-    "line": "push    edi",
+    "line": "push    edi; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62E27F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E281",
-    "line": "call    sub_5ED730",
+    "line": "call    Actor__CanStartSocialConversationWith; Oblivion social eligibility predicate used only by the two random-conversation scans. Requires a process; in interiors requires |Z(this)-Z(other)| <= 90; rejects process current-package flag 0x1000, dead actors, process mode 9, sub_5E6FA0 state, sleep states other than None/Sitting, and package types accepted by sub_567770; final process metric at vslot +0x15C must be <= 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4405,13 +4399,13 @@
   },
   {
     "ea": "0x62E2F5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E2F7",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Reject candidate when its current package is a temporary/internal override type such as Combat, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, mount/dismount, Vampire Feed, Surface, or Movement Blocked.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4465,7 +4459,7 @@
   },
   {
     "ea": "0x62E313",
-    "line": "call    eax",
+    "line": "call    eax; Authoritative ambient start: Actor::StartConversationPackage(initiator, candidate, false, null). Null startingTopic resolves stock HELLO FormID 000000D2; ANY (000000D3) is data-linked rather than hardcoded, and dialogue creation ultimately falls back to GOODBYE (000000D4) on failure.",
     "mnemonic": "call",
     "size": 2
   },
@@ -4525,7 +4519,7 @@
   },
   {
     "ea": "0x62E32F",
-    "line": "mov     ecx, offset unk_B36AB0",
+    "line": "mov     ecx, (offset flt_B36A88+28h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4549,7 +4543,7 @@
   },
   {
     "ea": "0x62E33D",
-    "line": "fstp    dword ptr [esi+1A8h]",
+    "line": "fstp    dword ptr [esi+1A8h]; After every StartConversationPackage attempt, successful or not, action 5 writes fAItalktoNPCtimer (60s) to conversationScanCooldown. This handler never reads that field; the write gates the separate action-1 scan.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -4561,13 +4555,13 @@
   },
   {
     "ea": "0x62E349",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E34B",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4585,13 +4579,13 @@
   },
   {
     "ea": "0x62E354",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E356",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4639,13 +4633,13 @@
   },
   {
     "ea": "0x62E36F",
-    "line": "mov     ecx, [eax+8]",
+    "line": "mov     ecx, [eax+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x62E372",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4807,13 +4801,13 @@
   },
   {
     "ea": "0x62E3B9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62E3BB",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4831,7 +4825,7 @@
   },
   {
     "ea": "0x62E3C3",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; Partner handoff: install the initiator's DialoguePackage pointer as the candidate process's editorPackage (setCurrent=false, markDynamic=true), then signal the partner process via the following virtual call. Both actors reference the same runtime DialoguePackage.",
     "mnemonic": "call",
     "size": 5
   },

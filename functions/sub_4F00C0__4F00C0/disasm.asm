@@ -1,4 +1,4 @@
-0x4F00C0: mov     ecx, [esp+arg_0]
+0x4F00C0: mov     ecx, [esp+reference]; Verified Oblivion allowlist includes TESSubSpace for the +0x64 persistent-reference index. Comparison: Fallout's persistent-reference classification is TESWorldSpace::IsFixedRef with a different explicit set; Fallout IDB has no TESSubSpace-named class/string, so it does not establish an analogue for Oblivion's +0x60 SubSpace spatial index.
 0x4F00C4: push    ebx
 0x4F00C5: xor     bl, bl
 0x4F00C7: test    ecx, ecx

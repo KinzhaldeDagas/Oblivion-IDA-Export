@@ -8,7 +8,7 @@
 0x523F52: push    ebx
 0x523F53: push    esi
 0x523F54: lea     ecx, [esi+0C4h]
-0x523F5A: call    TESScriptableForm_Link
+0x523F5A: call    TESScriptableForm_Link; 3DTheft decode 2026-05-13: TESNPC::LinkForm links TESScriptableForm at NPC+0xC4 before container/AI/base-data components; plugin filters scripted bases for safer spawned thief templates.
 0x523F5F: push    esi
 0x523F60: lea     ecx, [esi+44h]
 0x523F63: call    TESContainer_LinkComponent
@@ -31,19 +31,19 @@
 0x523F9B: push    0FFFFFFFFh; a2
 0x523F9D: mov     ecx, esi; this
 0x523F9F: mov     dword ptr [esp+10h+ArgList], eax
-0x523FA3: call    TESForm_GetOverrideFile
+0x523FA3: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x523FA8: push    eax; a2
 0x523FA9: lea     ecx, [esp+10h+ArgList]
 0x523FAD: push    ecx; a1
-0x523FAE: call    TESForm_ResolveFormID
+0x523FAE: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x523FB3: mov     edx, dword ptr [esp+14h+ArgList]
 0x523FB7: add     esp, 8
 0x523FBA: push    0; int
-0x523FBC: push    offset ??_R0?AVTESClass@@@8; struct TypeDescriptor *
+0x523FBC: push    offset ??_R0?AVTESClass@@@8; TESNPC link resolves stored class FormID at NPC+0x104 into TESClass* via TESForm_LookupByFormID + dynamic cast. Confirms TESNPC::npcClass offset for plugin class checks.
 0x523FC1: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x523FC6: push    0; int
 0x523FC8: push    edx; a1
-0x523FC9: call    TESForm_LookupByFormID
+0x523FC9: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x523FCE: add     esp, 4
 0x523FD1: push    eax; void *
 0x523FD2: call    OblivionDynamicCast
@@ -55,9 +55,9 @@
 0x523FEA: call    edx
 0x523FEC: test    al, al
 0x523FEE: jz      short loc_523FF9
-0x523FF0: push    0
-0x523FF2: mov     ecx, esi
-0x523FF4: call    sub_5222D0
+0x523FF0: push    0; skipDerivedStats
+0x523FF2: mov     ecx, esi; this
+0x523FF4: call    TESNPC_RecalculateAutoStats; Authoritative Oblivion TESNPC auto-stat calculation. For each of 21 skills: major = 25+(level-1), non-major = 5+0.1*(level-1), then add 5+0.5*(level-1) for matching class specialization, then the signed race bonus, cap at 100, and store in TESNPC::baseSkills. The chargen placeholder class suppresses major/specialization contributions. Attributes start from sex-specific race values, add configured +5 class-primary bonuses, then add (level-1) per governed major skill or 0.2*(level-1) per governed non-major skill, capped at 100.
 0x523FF9: mov     eax, [esi]
 0x523FFB: mov     edx, [eax+120h]
 0x524001: mov     ecx, esi
@@ -73,11 +73,11 @@
 0x52401F: jz      short loc_524090
 0x524021: push    0FFFFFFFFh; a2
 0x524023: mov     ecx, esi; this
-0x524025: call    TESForm_GetOverrideFile
+0x524025: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52402A: push    eax; a2
 0x52402B: lea     eax, [esp+10h+ArgList]
 0x52402F: push    eax; a1
-0x524030: call    TESForm_ResolveFormID
+0x524030: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x524035: mov     ecx, dword ptr [esp+14h+ArgList]
 0x524039: add     esp, 8
 0x52403C: push    0; int
@@ -85,7 +85,7 @@
 0x524043: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x524048: push    0; int
 0x52404A: push    ecx; a1
-0x52404B: call    TESForm_LookupByFormID
+0x52404B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x524050: add     esp, 4
 0x524053: push    eax; void *
 0x524054: call    OblivionDynamicCast
@@ -140,7 +140,7 @@
 0x5240DE: pop     ecx
 0x5240DF: retn
 0x5240E0: mov     ecx, esi
-0x5240E2: call    sub_5239C0
+0x5240E2: call    TESNPC_RecomputeBaseVampirismFromSpells; Non-player base vampirism reconstruction: skips formID 7; scans NPC and race spell lists, selects spell-type 4 and VAMP effect code 0x504D4156, sums EffectItem magnitudes, converts to integer, sets base AV 0x45 via virtual+0x134. Supports identifying FaceGen bank selector 0x45 as vampirism, not sex.
 0x5240E7: push    1; a2
 0x5240E9: mov     ecx, esi; this
 0x5240EB: call    TESForm_SetIsLinked

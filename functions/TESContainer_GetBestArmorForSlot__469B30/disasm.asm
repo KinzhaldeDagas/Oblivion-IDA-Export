@@ -33,9 +33,9 @@
 0x469B81: call    TESBipedModelForm_CoversSlot
 0x469B86: test    al, al
 0x469B88: jz      short loc_469BB3
-0x469B8A: mov     ecx, [esp+14h+arg_0]
-0x469B8E: push    esi
-0x469B8F: call    TESActorBase_GetEquippableItemRating
+0x469B8A: mov     ecx, [esp+14h+arg_0]; this
+0x469B8E: push    esi; item
+0x469B8F: call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.
 0x469B94: fstp    [esp+14h+arg_4]
 0x469B98: fld     [esp+14h+arg_4]
 0x469B9C: fld     [esp+14h+var_4]

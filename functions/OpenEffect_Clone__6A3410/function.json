@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x6A3410",
+      "0x6A3494"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "b371b17aa6111324c3813dce1e811d8abaa96724ccad6d48201576005f5c53d6",
+  "comment_regular": "Verified OpenEffect clone: allocates 0x38 bytes, copies the base ActiveEffect state, restores OpenEffect_vftable, invokes the base CopyTo hook, and returns the clone.",
+  "comment_repeatable": "Verified OpenEffect clone: allocates 0x38 bytes, copies the base ActiveEffect state, restores OpenEffect_vftable, invokes the base CopyTo hook, and returns the clone.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "OpenEffect_Clone",
   "end_ea": "0x6A3494",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "OpenEffect_Clone",
   "segment": ".text",
   "sha256": "f3262c6a35c1c9aa4941e86772b6b0bf3cc4a7922b3eb15d5f4c64c19122478b",
   "size": 132,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A3410",
-  "type": "ActiveEffect *__thiscall(_DWORD *this)",
-  "xrefs_from_count": 50,
-  "xrefs_to_count": 1
+  "total_chunk_size": 170,
+  "type": "OpenEffect *__thiscall(OpenEffect *this)",
+  "xrefs_from_count": 64,
+  "xrefs_to_count": 0
 }

@@ -1,4 +1,4 @@
-0x73E150: sub     esp, 20h
+0x73E150: sub     esp, 20h; Pass225/226: NiScreenTexture copy helper; copies records, smart-copies +0x14 texturing property, and preserves +0x18 pending mask.
 0x73E153: mov     eax, [esp+20h+arg_4]
 0x73E157: push    ebx
 0x73E158: mov     ebx, [esp+24h+arg_0]
@@ -48,7 +48,7 @@
 0x73E1E8: mov     eax, 1
 0x73E1ED: push    eax
 0x73E1EE: mov     ecx, ebx
-0x73E1F0: call    sub_73DD70
+0x73E1F0: call    sub_73DD70; Pass226: NiScreenTexture record capacity helper; reallocates/copies 0x1C-byte records. Stock xrefs are load/copy only and do not set +0x18.
 0x73E1F5: mov     eax, [ebx+8]
 0x73E1F8: mov     edx, [ebx]
 0x73E1FA: add     [esp+30h+arg_4], 1Ch
@@ -93,7 +93,7 @@
 0x73E26F: mov     cx, [ebp+18h]
 0x73E273: pop     esi
 0x73E274: pop     ebp
-0x73E275: mov     [ebx+18h], cx
+0x73E275: mov     [ebx+18h], cx; Pass226: NiScreenTexture copy helper copies source +0x18 pending mask to destination.
 0x73E279: pop     ebx
 0x73E27A: add     esp, 20h
 0x73E27D: retn    8
@@ -107,7 +107,7 @@
 0x73E291: mov     ax, [ebp+18h]
 0x73E295: pop     esi
 0x73E296: pop     ebp
-0x73E297: mov     [ebx+18h], ax
+0x73E297: mov     [ebx+18h], ax; Pass226: NiScreenTexture copy helper stores preserved +0x18 mask after record/property copy.
 0x73E29B: pop     ebx
 0x73E29C: add     esp, 20h
 0x73E29F: retn    8

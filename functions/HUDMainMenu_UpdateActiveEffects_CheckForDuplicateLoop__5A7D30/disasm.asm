@@ -76,13 +76,13 @@
 0x5A7E3F: mov     dword ptr [eax+4], 0
 0x5A7E46: jmp     short loc_5A7E4A
 0x5A7E48: xor     eax, eax
-0x5A7E4A: push    0
+0x5A7E4A: push    0; lastTile
 0x5A7E4C: mov     [ebx+4], eax
 0x5A7E4F: mov     edx, [edi+50h]
 0x5A7E52: push    offset aIcon_template; "icon_template"
-0x5A7E57: push    edx
-0x5A7E58: mov     ecx, edi
-0x5A7E5A: call    Menu_CreateTileFromTemplate
+0x5A7E57: push    edx; parent
+0x5A7E58: mov     ecx, edi; this
+0x5A7E5A: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5A7E5F: mov     [ebx], eax
 0x5A7E61: mov     eax, [ebp+0Ch]
 0x5A7E64: mov     eax, [eax+1Ch]
@@ -110,13 +110,13 @@
 0x5A7EAB: fadd    dword ptr ds:0A2FC78h
 0x5A7EB1: push    ecx
 0x5A7EB2: mov     ecx, [ebx]; this
-0x5A7EB4: fstp    [esp+4+a2]; a3
-0x5A7EB7: push    0FAEh; a2
-0x5A7EBC: call    Tile_SetFloat
+0x5A7EB4: fstp    [esp+4+a2]; value
+0x5A7EB7: push    0FAEh; propertyCode
+0x5A7EBC: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A7EC1: lea     eax, [esp+a3]
-0x5A7EC5: push    eax
-0x5A7EC6: lea     ecx, [edi+78h]
-0x5A7EC9: call    sub_5A6AB0
+0x5A7EC5: push    eax; value
+0x5A7EC6: lea     ecx, [edi+78h]; self
+0x5A7EC9: call    NiTLargeArray32_AppendSlot
 0x5A7ECE: mov     ecx, [ebx]
 0x5A7ED0: push    0; float
 0x5A7ED2: mov     esi, eax
@@ -150,10 +150,10 @@
 0x5A7F1F: mov     eax, [edi+7Ch]
 0x5A7F22: fld     dword ptr ds:0A30634h
 0x5A7F28: mov     ecx, [eax+esi*4]
-0x5A7F2B: fstp    [esp-10h+a3]; a3
+0x5A7F2B: fstp    [esp-10h+a3]; value
 0x5A7F2E: mov     ecx, [ecx]; this
-0x5A7F30: push    0FAFh; a2
-0x5A7F35: call    Tile_SetFloat
+0x5A7F30: push    0FAFh; propertyCode
+0x5A7F35: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A7F3A: jmp     short loc_5A7FB7
 0x5A7F3C: fld     dword ptr [ebp+1Ch]
 0x5A7F3F: mov     edx, [edi+7Ch]
@@ -164,9 +164,9 @@
 0x5A7F4E: fld     dword ptr [ebp+1Ch]
 0x5A7F51: fstp    [esp-10h+arg_24]
 0x5A7F55: fld     [esp-10h+arg_20]
-0x5A7F59: fstp    [esp-10h+a3]; a3
-0x5A7F5C: push    0FAFh; a2
-0x5A7F61: call    Tile_SetFloat
+0x5A7F59: fstp    [esp-10h+a3]; value
+0x5A7F5C: push    0FAFh; propertyCode
+0x5A7F61: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A7F66: mov     ecx, [edi+7Ch]
 0x5A7F69: mov     esi, [ecx+esi*4]
 0x5A7F6C: mov     edx, [esi]

@@ -1,1 +1,7 @@
-_DIOBJECTDATAFORMAT
+struct _DIOBJECTDATAFORMAT
+{
+const GUID *pguid;
+DWORD dwOfs;
+DWORD dwType;
+DWORD dwFlags;
+};

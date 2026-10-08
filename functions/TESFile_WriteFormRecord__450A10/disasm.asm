@@ -12,7 +12,7 @@
 0x450A2D: push    edx
 0x450A2E: push    0
 0x450A30: call    eax
-0x450A32: mov     ecx, ds:0B33C18h
+0x450A32: mov     ecx, ds:0B33C18h; TESFile_WriteFormRecord writes B33C14/B33C18; if MEF v25 skips compression, these remain the original uncompressed record buffer and length.
 0x450A38: mov     edx, ds:0B33C14h
 0x450A3E: push    ecx
 0x450A3F: push    edx

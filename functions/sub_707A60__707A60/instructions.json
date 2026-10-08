@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x707A60",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, dword ptr [esp+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,31 +67,31 @@
   },
   {
     "ea": "0x707A7B",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x707A7F",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x707A80",
-    "line": "mov     ecx, [ebx+4]",
+    "line": "mov     ecx, [ebx+4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x707A83",
-    "line": "push    edi",
+    "line": "push    edi; key",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x707A84",
-    "line": "call    sub_4D6760",
+    "line": "call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
     "mnemonic": "call",
     "size": 5
   },

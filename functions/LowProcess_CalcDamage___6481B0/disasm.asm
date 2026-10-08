@@ -1,11 +1,11 @@
-0x6481B0: sub     esp, 20h
+0x6481B0: sub     esp, 20h; AVU decode: LowProcess_CalcDamage? estimates damage against target actor arg_4. Early path combines ResistNormalWeapons, armor rating, Strength, ResistMagic, weapon/H2H, active effects, distance, target health, and fatigue factors.
 0x6481B3: push    ebp
 0x6481B4: push    esi
 0x6481B5: mov     esi, [esp+28h+arg_4]
 0x6481B9: mov     eax, [esi]
 0x6481BB: mov     edx, [eax+284h]
 0x6481C1: push    edi
-0x6481C2: push    41h ; 'A'
+0x6481C2: push    41h ; 'A'; Reads target current integer AV 0x41 ResistNormalWeapons through actor vtable slot 0x284 and saves it as the resistance contribution.
 0x6481C4: mov     ecx, esi
 0x6481C6: call    edx
 0x6481C8: mov     [esp+30h+var_18], eax
@@ -14,13 +14,13 @@
 0x6481D2: mov     edx, [eax+348h]
 0x6481D8: mov     ecx, esi
 0x6481DA: fstp    qword ptr [esp+30h+var_C]
-0x6481DE: call    edx
+0x6481DE: call    edx; AVU hook site: ECX/ESI both hold target actor. Vanilla calls actor vtable slot 0x348 GetArmorRating, divides returned ST0 by 100, then multiplies by ResistNormalWeapons contribution. AVU overwrites the call+divide and performs both in HndlDiv.
 0x6481E0: fdiv    qword ptr ds:0A309F0h
 0x6481E6: mov     eax, [esi]
 0x6481E8: mov     edx, [eax+284h]
 0x6481EE: push    2
 0x6481F0: mov     ecx, esi
-0x6481F2: fmul    qword ptr [esp+34h+var_C]
+0x6481F2: fmul    qword ptr [esp+34h+var_C]; After armor/100 is on ST0, vanilla multiplies by the saved ResistNormalWeapons value and stores the combined target physical resistance estimate.
 0x6481F6: fstp    dword ptr [esp+34h+var_14]
 0x6481FA: call    edx
 0x6481FC: mov     [esp+34h+var_1C], eax
@@ -31,7 +31,7 @@
 0x64820E: fmul    qword ptr ds:0A70398h
 0x648214: mov     ecx, esi
 0x648216: fstp    [esp+38h+var_14+4]
-0x64821A: call    edx
+0x64821A: call    edx; Reads target current integer AV 0x40 ResistMagic and adds it into the combat damage estimate path after the physical resistance contribution.
 0x64821C: mov     edi, [esp+38h+var_C+4]
 0x648220: mov     ecx, [edi+58h]
 0x648223: mov     [esp+38h+var_20], eax
@@ -54,7 +54,7 @@
 0x648258: push    ecx
 0x648259: push    1
 0x64825B: mov     ecx, edi; this
-0x64825D: call    Actor_GetFatigueFraction
+0x64825D: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x648262: mov     edx, [edi]
 0x648264: mov     eax, [edx+284h]
 0x64826A: push    ecx
@@ -145,7 +145,7 @@
 0x648363: push    ebp
 0x648364: push    3
 0x648366: lea     ecx, [esi+24h]
-0x648369: call    EffectItemList_GetStrongestItem
+0x648369: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x64836E: mov     eax, [eax+10h]
 0x648371: cmp     eax, 2
 0x648374: jnz     short loc_6483ED
@@ -306,7 +306,7 @@
 0x64853F: push    8
 0x648541: call    Actor_GetBaseCalcAVf
 0x648546: push    ecx
-0x648547: fstp    [esp+68h+var_68]; float
+0x648547: fstp    [esp+68h+var_68]; Late LowProcess_CalcDamage? estimate calls Actor_GetBaseCalcAVf with AV 8 Health after reading target base health; this is estimate math, not an AVU hook point.
 0x64854A: call    sub_547910
 0x64854F: mov     esi, [esp+68h+var_30]
 0x648553: fstp    [esp+68h+var_20]
@@ -314,16 +314,16 @@
 0x64855A: cmp     esi, ebp
 0x64855C: jz      short loc_64856E
 0x64855E: mov     ecx, esi
-0x648560: call    BSSimpleList_Clear
+0x648560: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x648565: push    esi
-0x648566: call    FormHeapFree
+0x648566: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64856B: add     esp, 4
 0x64856E: mov     ecx, [esp+54h+var_44]
 0x648572: push    ecx
-0x648573: call    FormHeapFree
+0x648573: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648578: mov     edx, [esp+58h+var_24]
 0x64857C: push    edx
-0x64857D: call    FormHeapFree
+0x64857D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x648582: fldz
 0x648584: fld     [esp+5Ch+var_20]
 0x648588: add     esp, 8

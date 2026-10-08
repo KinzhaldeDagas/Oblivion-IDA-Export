@@ -38,3 +38,12 @@
 0x538D06: pop     esi
 0x538D07: add     esp, 10h
 0x538D0A: retn
+0x9B93E0: mov     ecx, [ebp-10h]; void *
+0x9B93E3: jmp     sub_4F5E90
+0x9B93E8: mov     edx, [esp+arg_4]
+0x9B93EC: lea     eax, [edx-8]
+0x9B93EF: mov     ecx, [edx-0Ch]
+0x9B93F2: xor     ecx, eax
+0x9B93F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B93F9: mov     eax, offset stru_AE3770
+0x9B93FE: jmp     ___CxxFrameHandler3

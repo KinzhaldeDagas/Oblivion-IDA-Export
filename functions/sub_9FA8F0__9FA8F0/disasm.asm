@@ -1,4 +1,4 @@
-0x9FA8F0: fld     ds:flt_A3D65C
+0x9FA8F0: fld     ds:kHeadBodyNormalMatchRadius
 0x9FA8F6: push    ecx
 0x9FA8F7: fstp    [esp+4+var_4]; float
 0x9FA8FA: push    offset aFpathpointmaxa; "fPathPointMaxAngleDeltaTurnSpeedScalar"

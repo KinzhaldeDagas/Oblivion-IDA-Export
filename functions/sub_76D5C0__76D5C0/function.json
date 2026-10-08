@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76D5C0",
+      "0x76D6C3"
+    ]
+  ],
+  "chunks_sha256": "587f780d2e1e1ed5667eaa14c41e7869528c8bf083541abac7a749b3237f63ca",
+  "comment_regular": "\n2026-10-08 reverified against instructions: pushes at76D647/76D649 are quality0 and MultiSampleType0 before device slot29 call76D652. No configurable sample preference here. Both initial factory76DE00 and Recreate use NONE/0. Fallout NiXenon explicit sample-preference arguments are a platform divergence, not an Oblivion correspondence.\n\nRecreates an additional depth/stencil surface after device reset. Validates the stored depth format against the current default framebuffer with IDirect3D9::CheckDeviceFormat, calls CreateDepthStencilSurface using saved width/height/multisample settings, and rebuilds NiSurfaceData.",
+  "comment_repeatable": "Recreates an additional depth/stencil surface after device reset. Validates the stored depth format against the current default framebuffer with IDirect3D9::CheckDeviceFormat, calls CreateDepthStencilSurface using parent width/height, literal D3DMULTISAMPLE_NONE and quality0, and saved discard policy, and rebuilds NiSurfaceData.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_76D5C0",
+  "display_name": "NiDX9AdditionalDepthStencilBufferData::Recreate",
   "end_ea": "0x76D6C3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76D5C0",
+  "name": "NiDX9AdditionalDepthStencilBufferData::Recreate",
   "segment": ".text",
   "sha256": "587f780d2e1e1ed5667eaa14c41e7869528c8bf083541abac7a749b3237f63ca",
   "size": 259,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76D5C0",
-  "type": "char __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 259,
+  "type": "bool __thiscall(NiDX9AdditionalDepthStencilBufferData *this, IDirect3DDevice9 *device)",
   "xrefs_from_count": 117,
   "xrefs_to_count": 1
 }

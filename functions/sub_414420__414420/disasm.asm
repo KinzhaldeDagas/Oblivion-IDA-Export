@@ -1,7 +1,7 @@
-0x414420: push    ebx
-0x414421: mov     ebx, [esp+4+arg_0]
+0x414420: push    ebx; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
+0x414421: mov     ebx, [esp+4+source]
 0x414425: push    ebp
-0x414426: mov     ebp, [esp+8+arg_4]
+0x414426: mov     ebp, [esp+8+offset]
 0x41442A: cmp     [ebx+14h], ebp
 0x41442D: push    esi
 0x41442E: push    edi; MaxCount
@@ -9,7 +9,7 @@
 0x414431: jnb     short loc_414438
 0x414433: call    ?_Xran@_String_base@std@@SAXXZ; std::_String_base::_Xran(void)
 0x414438: mov     edi, [ebx+14h]
-0x41443B: mov     eax, [esp+10h+arg_8]
+0x41443B: mov     eax, [esp+10h+count]
 0x41443F: sub     edi, ebp
 0x414441: cmp     eax, edi
 0x414443: jnb     short loc_414447

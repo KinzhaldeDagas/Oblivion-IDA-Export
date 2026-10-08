@@ -3,7 +3,7 @@
 0x771103: mov     eax, [esi+2Ch]
 0x771106: push    eax
 0x771107: mov     dword ptr [esi], offset ??_7NiDX9ShaderDeclaration@@6B@; const NiDX9ShaderDeclaration::`vftable'
-0x77110D: call    FormHeapFree
+0x77110D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x771112: mov     eax, [esi+30h]
 0x771115: add     esp, 4
 0x771118: test    eax, eax
@@ -18,7 +18,7 @@
 0x771132: test    [esp+4+arg_0], 1
 0x771137: jz      short loc_771142
 0x771139: push    esi
-0x77113A: call    FormHeapFree
+0x77113A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77113F: add     esp, 4
 0x771142: mov     eax, esi
 0x771144: pop     esi

@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x6F2097",
-    "line": "fstp    [ebp+var_20]",
+    "line": "fstp    [ebp+value.m_pLeaf]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6F209D",
-    "line": "fstp    [ebp+var_1C]",
+    "line": "fstp    [ebp+value.m_pLeafMatch]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6F20AE",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x6F20D2",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,13 +529,13 @@
   },
   {
     "ea": "0x6F213B",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6F213E",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x6F2162",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x6F2168",
-    "line": "lea     ecx, [ebp+var_20]",
+    "line": "lea     ecx, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x6F2180",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x6F21A3",
-    "line": "mov     ebx, [ebp+arg_8]",
+    "line": "mov     ebx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x6F21AD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x6F21DE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x6F21F2",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+first]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x6F221B",
-    "line": "lea     ecx, [ebp+var_20]",
+    "line": "lea     ecx, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x6F221F",
-    "line": "mov     ecx, [ebp+arg_8]",
+    "line": "mov     ecx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1147,13 +1147,13 @@
   },
   {
     "ea": "0x6F2242",
-    "line": "lea     ecx, [ebp+var_20]",
+    "line": "lea     ecx, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6F2245",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1165,19 +1165,19 @@
   },
   {
     "ea": "0x6F2248",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F2249",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F224A",
-    "line": "call    sub_7A86F0",
+    "line": "call    OB_LeafLodEntry_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one 8-byte SLodEntry value across an initialized destination range; compiler-folded trivial pair helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x6F2279",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+last], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1303,25 +1303,25 @@
   },
   {
     "ea": "0x6F2281",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+last]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6F2284",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F2285",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F2286",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x6F228A",
-    "line": "call    sub_7A8750",
+    "line": "call    OB_LeafLodEntry_CopyBackwardRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies 8-byte SLodEntry values backward for in-place vector insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x6F2292",
-    "line": "lea     eax, [ebp+var_20]",
+    "line": "lea     eax, [ebp+value]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6F2295",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1363,19 +1363,19 @@
   },
   {
     "ea": "0x6F2298",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F2299",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6F229A",
-    "line": "call    sub_7A86F0",
+    "line": "call    OB_LeafLodEntry_CopyFillRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Assigns one 8-byte SLodEntry value across an initialized destination range; compiler-folded trivial pair helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1438,5 +1438,47 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C8820",
+    "line": "mov     edx, [esp-4+first]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C8824",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C8827",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C882A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C882C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8831",
+    "line": "mov     eax, offset stru_AF0E68",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8836",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

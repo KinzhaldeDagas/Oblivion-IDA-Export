@@ -75,7 +75,6 @@
 0x6B3BC3: lea     esi, [ebx+122Ch]
 0x6B3BC9: mov     [esp+0C8h+var_A0], edi
 0x6B3BCD: jmp     short loc_6B3BD4
-0x6B3BCF: align 10h
 0x6B3BD0: mov     edi, [esp+0C8h+var_A4]
 0x6B3BD4: mov     eax, [ebx]
 0x6B3BD6: mov     ecx, [eax+4]
@@ -99,10 +98,8 @@
 0x6B3C10: mov     eax, esi
 0x6B3C12: mov     edx, 20h ; ' '
 0x6B3C17: jmp     short loc_6B3C20
-0x6B3C19: align 10h
 0x6B3C20: mov     ecx, 6
 0x6B3C25: jmp     short loc_6B3C30
-0x6B3C27: align 10h
 0x6B3C30: fld     dword ptr [eax-900h]
 0x6B3C36: add     eax, 0Ch
 0x6B3C39: sub     ecx, 1
@@ -388,7 +385,6 @@
 0x6B4022: lea     ecx, [ebx+1B74h]
 0x6B4028: add     edx, 1
 0x6B402B: jmp     short loc_6B4030
-0x6B402D: align 10h
 0x6B4030: fld     dword ptr [ecx-4]
 0x6B4033: fstp    [esp+0C8h+var_B8]
 0x6B4037: fld     dword ptr [ecx]
@@ -531,7 +527,6 @@
 0x6B422A: mov     [esp+0C8h+var_B0], 0
 0x6B4232: lea     edi, [ebx+2430h]
 0x6B4238: jmp     short loc_6B4244
-0x6B423A: align 10h
 0x6B4240: mov     ebp, [esp+0C8h+var_AC]
 0x6B4244: cmp     dword ptr [ebp+10h], 0
 0x6B4248: jz      short loc_6B425B

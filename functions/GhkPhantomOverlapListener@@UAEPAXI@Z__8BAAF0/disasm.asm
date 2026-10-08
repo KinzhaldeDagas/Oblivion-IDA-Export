@@ -4,7 +4,7 @@
 0x8BAAF8: mov     dword ptr [esi], offset ??_7hkPhantomOverlapListener@@6B@; const hkPhantomOverlapListener::`vftable'
 0x8BAAFE: jz      short loc_8BAB09
 0x8BAB00: push    esi
-0x8BAB01: call    FormHeapFree
+0x8BAB01: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8BAB06: add     esp, 4
 0x8BAB09: mov     eax, esi
 0x8BAB0B: pop     esi

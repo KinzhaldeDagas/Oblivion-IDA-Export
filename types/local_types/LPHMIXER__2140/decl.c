@@ -1,1 +1,1 @@
-LPHMIXER
+typedef HMIXER *LPHMIXER;

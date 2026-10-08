@@ -11,7 +11,7 @@ ActiveEffect *__userpurge ScriptEffect::ScriptEffect@<eax>(
         MagicItem *a10,
         EffectItem *a11)
 {
-  ActiveEffect::ActiveEffect(this, a9, a10, a11);
-  this->vtbl = (ActiveEffectVtbl *)&ScriptEffect::`vftable';
-  return (ActiveEffect *)ScriptEffect::ScriptEffect(a2, a3, this);
+  ActiveEffect_Ctor(this, a9, a10, a11); /*0x6a445a*/
+  this->vtbl = (ActiveEffectVtbl *)&ScriptEffect::`vftable'; /*0x6a4469*/
+  return (ActiveEffect *)ScriptEffect::ScriptEffect((UInt32 **)a11, (int)this, a2, a3, (int)this);
 }

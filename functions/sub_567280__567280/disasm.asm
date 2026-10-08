@@ -1,4 +1,4 @@
-0x567280: mov     ecx, [esp+arg_0]
+0x567280: mov     ecx, [esp+arg_0]; RadiantAI: chooser current-package exclusion helper. Reads actor/process pointer at +0x58 and calls virtual method +0xC0; exact semantic name still unproven.
 0x567284: xor     al, al
 0x567286: test    ecx, ecx
 0x567288: jz      short locret_56729B

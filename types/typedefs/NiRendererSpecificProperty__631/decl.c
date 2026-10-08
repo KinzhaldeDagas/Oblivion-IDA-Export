@@ -1,1 +1,1 @@
-NiRendererSpecificProperty
+struct NiRendererSpecificProperty;

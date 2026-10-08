@@ -114,3 +114,10 @@
 0x99354F: inc     edi
 0x993550: cmp     edi, [ebp+arg_4]
 0x993553: jbe     short loc_993566
+0x993566: mov     [esi], bl
+0x993568: xor     eax, eax
+0x99356A: pop     edi
+0x99356B: pop     esi
+0x99356C: pop     ebx
+0x99356D: leave
+0x99356E: retn

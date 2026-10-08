@@ -2,8 +2,8 @@ DistantLODShaderProperty::CachedGeometry *__thiscall DistantLODShaderProperty::C
         DistantLODShaderProperty::CachedGeometry *this,
         char a2)
 {
-  DistantLODShaderProperty::CachedGeometry::~CachedGeometry(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  DistantLODShaderProperty::CachedGeometry::~CachedGeometry(this); /*0x7b3843*/
+  if ( (a2 & 1) != 0 ) /*0x7b384d*/
+    FormHeapFree((unsigned int)this); /*0x7b3850*/
+  return this; /*0x7b385a*/
 }

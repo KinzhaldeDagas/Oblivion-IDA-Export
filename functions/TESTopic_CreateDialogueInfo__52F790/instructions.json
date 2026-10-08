@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52F790",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x52F7C6",
-    "line": "push    eax; a7",
+    "line": "push    eax; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F7C7",
-    "line": "push    ecx; a6",
+    "line": "push    ecx; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F7C8",
-    "line": "push    1; a5",
+    "line": "push    1; useConversationRules",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x52F7CA",
-    "line": "push    edx; a4",
+    "line": "push    edx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F7CB",
-    "line": "push    ebp; a3",
+    "line": "push    ebp; speaker",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x52F7D0",
-    "line": "push    eax; a2",
+    "line": "push    eax; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x52F7D3",
-    "line": "call    sub_52F010",
+    "line": "call    TESTopic__SelectInfoForSpeaker; Authoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52F7D8",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; Ambient CreateDialogueItem uses conversation rules. It deliberately reuses the already-pushed conversation argument slot as the ignored lowDispositionFailure scratch output; ambient selection never consumes that fallback.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -235,55 +235,55 @@
   },
   {
     "ea": "0x52F7F8",
-    "line": "push    ebp",
+    "line": "push    ebp; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F7F9",
-    "line": "push    edi",
+    "line": "push    edi; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F7FA",
-    "line": "push    esi",
+    "line": "push    esi; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F7FB",
-    "line": "push    edi",
+    "line": "push    edi; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F7FC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F7FE",
-    "line": "call    sub_52F570",
+    "line": "call    TESTopic__GetOwnerQuest",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52F803",
-    "line": "push    eax",
+    "line": "push    eax; ownerQuest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F804",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F806",
-    "line": "call    sub_6B80D0",
+    "line": "call    DialogueItem__DialogueItem; Ambient DialogueItem constructor. Unlike player MenuTopic::FillResponseList, this path appends every collected TESResponse without filtering empty display text and without INFOGENERAL/D7's first-nonempty-response limit. An ambient RUMOR item can therefore retain all authored responses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -352,5 +352,77 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA5A0",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA5A3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA5A4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA5A9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA5AA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA5AB",
+    "line": "mov     edx, [esp+quadY]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA5AF",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA5B2",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA5B5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA5B7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA5BC",
+    "line": "mov     eax, offset stru_AF2C94",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA5C1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

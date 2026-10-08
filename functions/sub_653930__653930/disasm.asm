@@ -64,7 +64,7 @@
 0x6539FF: cmp     eax, 2Ch; switch 45 cases
 0x653A02: ja      def_653A0F; jumptable 00653A0F default case, cases 3,11,16,17,19-22,24,25,31-36,38-40,42,44
 0x653A08: movzx   edx, ds:byte_654170[eax]
-0x653A0F: jmp     ds:jpt_653A0F[edx*4]; switch jump
+0x653A0F: jmp     ds:jpt_653A0F[edx*4]; 3DTheft decode 2026-05-17: high/mid process package scheduler dispatches ProcedureRows[package->procedureArrayIndex][slot] for the actor's current package/procedure slot.
 0x653A16: mov     ecx, [ebx+24h]; jumptable 00653A0F case 0
 0x653A19: xor     ebp, ebp
 0x653A1B: test    ecx, ecx
@@ -88,8 +88,8 @@
 0x653A4F: fstp    [esp+14h+var_14]; float
 0x653A52: push    0; char
 0x653A54: push    edi; int
-0x653A55: mov     ecx, edi
-0x653A57: call    sub_5E0380
+0x653A55: mov     ecx, edi; this
+0x653A57: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x653A5C: mov     ecx, eax
 0x653A5E: call    sub_566DC0
 0x653A63: test    al, al
@@ -113,12 +113,12 @@
 0x653A91: call    edx
 0x653A93: test    eax, eax
 0x653A95: jnz     def_653A0F; jumptable 00653A0F default case, cases 3,11,16,17,19-22,24,25,31-36,38-40,42,44
-0x653A9B: mov     ecx, edi
-0x653A9D: call    sub_5E0380
+0x653A9B: mov     ecx, edi; this
+0x653A9D: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x653AA2: test    eax, eax
 0x653AA4: jz      def_653A0F; jumptable 00653A0F default case, cases 3,11,16,17,19-22,24,25,31-36,38-40,42,44
-0x653AAA: mov     ecx, edi
-0x653AAC: call    sub_5E0380
+0x653AAA: mov     ecx, edi; this
+0x653AAC: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x653AB1: cmp     byte ptr [eax+20h], 6
 0x653AB5: jz      def_653A0F; jumptable 00653A0F default case, cases 3,11,16,17,19-22,24,25,31-36,38-40,42,44
 0x653ABB: fld     dword ptr ds:0A30634h
@@ -126,8 +126,8 @@
 0x653AC2: fstp    [esp+20h+var_20]; float
 0x653AC5: push    0; char
 0x653AC7: push    edi; int
-0x653AC8: mov     ecx, edi
-0x653ACA: call    sub_5E0380
+0x653AC8: mov     ecx, edi; this
+0x653ACA: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x653ACF: mov     ecx, eax
 0x653AD1: call    sub_566DC0
 0x653AD6: test    al, al
@@ -280,13 +280,13 @@
 0x653C90: push    edi
 0x653C91: mov     ecx, esi
 0x653C93: call    sub_64EE60
-0x653C98: mov     ecx, edi
-0x653C9A: call    sub_5E0380
+0x653C98: mov     ecx, edi; this
+0x653C9A: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x653C9F: test    eax, eax
 0x653CA1: jz      def_653A0F; jumptable 00653A0F default case, cases 3,11,16,17,19-22,24,25,31-36,38-40,42,44
 0x653CA7: push    edi
-0x653CA8: mov     ecx, edi
-0x653CAA: call    sub_5E0380
+0x653CA8: mov     ecx, edi; this
+0x653CAA: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x653CAF: mov     ecx, eax
 0x653CB1: call    sub_5687D0
 0x653CB6: test    al, al
@@ -323,8 +323,8 @@
 0x653D1A: fstp    [esp+24h+var_24]
 0x653D1D: push    edi
 0x653D1E: mov     ecx, esi
-0x653D20: call    sub_64EC50
-0x653D25: mov     [esp+1Ch+var_9], al
+0x653D20: call    sub_64EC50; 3DTheft decode 2026-05-16: Follow procedure execution reads its target ref from procedure state +0x2C/+0xB and drives movement toward that target's cell/worldspace; no plugin-owned actor/package memory is dereferenced at the later 0x0040DECF crash site.
+0x653D25: mov     [esp+1Ch+var_9], al; 3DTheft decode 2026-05-17: FOLLOW procedure case dispatches sub_64EC50 after the vfunc +0x36C/+0x1B0 checks.
 0x653D29: jmp     loc_653E18
 0x653D2E: mov     eax, [esi]; jumptable 00653A0F case 7
 0x653D30: mov     edx, [eax+36Ch]
@@ -414,7 +414,7 @@
 0x653E11: call    edx
 0x653E13: mov     [esp+1Ch+var_9], 0; jumptable 00653A0F default case, cases 3,11,16,17,19-22,24,25,31-36,38-40,42,44
 0x653E18: mov     ecx, edi; this
-0x653E1A: call    Actor__GetProcessLevel
+0x653E1A: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x653E1F: cmp     eax, 1
 0x653E22: jnz     loc_6540B3
 0x653E28: mov     eax, [esi]
@@ -463,15 +463,15 @@
 0x653EAF: call    Script_AddEventToExtraScript
 0x653EB4: add     esp, 0Ch
 0x653EB7: mov     ecx, ebx
-0x653EB9: call    sub_565DF0
+0x653EB9: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x653EBE: test    al, al
 0x653EC0: jz      short loc_653ED5
-0x653EC2: mov     ecx, offset TimeGlobals
+0x653EC2: mov     ecx, 0B332E0h
 0x653EC7: call    TimeGlobals_GetGameDay
 0x653ECC: mov     ecx, ebp
 0x653ECE: push    eax
 0x653ECF: push    ebx
-0x653ED0: call    sub_41FFC0
+0x653ED0: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x653ED5: cmp     dword ptr [ebx+30h], 0
 0x653ED9: jnz     loc_6540B3
 0x653EDF: cmp     dword ptr [esi+0C0h], 0
@@ -492,14 +492,14 @@
 0x653F10: call    eax
 0x653F12: mov     dword ptr [esi+0C0h], 0
 0x653F1C: jmp     loc_65405E
-0x653F21: mov     ecx, [esi+8]
-0x653F24: call    sub_5660A0
+0x653F21: mov     ecx, [esi+8]; self
+0x653F24: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x653F29: test    al, al
 0x653F2B: jz      loc_65405E
 0x653F31: mov     ebx, [esi+8]
-0x653F34: mov     ecx, ebx
+0x653F34: mov     ecx, ebx; this
 0x653F36: mov     [esp+1Ch+var_4], ebx
-0x653F3A: call    sub_567770
+0x653F3A: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x653F3F: test    al, al
 0x653F41: jz      loc_654032
 0x653F47: mov     edx, [edi]
@@ -519,17 +519,17 @@
 0x653F74: mov     edx, [ecx+8]
 0x653F77: push    edx
 0x653F78: mov     ecx, edi
-0x653F7A: call    sub_5E8DE0
+0x653F7A: call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.
 0x653F7F: mov     ebx, [edi+58h]
 0x653F82: mov     ecx, ebp
-0x653F84: call    sub_41FB40
+0x653F84: call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.
 0x653F89: mov     [ebx+4], eax
 0x653F8C: mov     eax, [edi+58h]
 0x653F8F: mov     ebx, [eax]
 0x653F91: mov     ecx, ebp
 0x653F93: mov     [esp+10h+arg_0], eax
 0x653F97: add     ebx, 0D0h ; 'Ð'
-0x653F9D: call    sub_41FB60
+0x653F9D: call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.
 0x653FA2: mov     ecx, [esp+10h+arg_0]
 0x653FA6: push    eax
 0x653FA7: mov     eax, [ebx]
@@ -537,7 +537,7 @@
 0x653FAB: mov     ebx, [edi]
 0x653FAD: mov     ecx, ebp
 0x653FAF: add     ebx, 17Ch
-0x653FB5: call    sub_41FB80
+0x653FB5: call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.
 0x653FBA: mov     edx, [ebx]
 0x653FBC: mov     ecx, edi
 0x653FBE: push    eax
@@ -547,7 +547,7 @@
 0x653FC6: mov     ecx, ebp
 0x653FC8: mov     [esp+18h+var_4], eax
 0x653FCC: add     ebx, 394h
-0x653FD2: call    sub_41FBA0
+0x653FD2: call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.
 0x653FD7: mov     ecx, [esp+18h+var_4]
 0x653FDB: push    eax
 0x653FDC: mov     eax, [ebx]
@@ -603,7 +603,7 @@
 0x654063: cmp     eax, ebx
 0x654065: jz      short loc_654070
 0x654067: push    eax
-0x654068: call    FormHeapFree
+0x654068: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65406D: add     esp, 4
 0x654070: mov     [esi+44h], ebx
 0x654073: mov     [esi+24h], ebx
@@ -617,7 +617,7 @@
 0x65408D: test    ebp, ebp
 0x65408F: jz      short loc_65409A
 0x654091: push    ebp
-0x654092: call    FormHeapFree
+0x654092: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x654097: add     esp, 4
 0x65409A: push    ebp
 0x65409B: mov     ecx, ebx
@@ -625,7 +625,7 @@
 0x6540A2: jmp     short loc_654080
 0x6540A4: lea     ecx, [esi+4Ch]
 0x6540A7: mov     dword ptr [esi+30h], 0
-0x6540AE: call    BSSimpleList_Clear
+0x6540AE: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6540B3: cmp     [esp+1Ch+var_9], 0
 0x6540B8: jnz     loc_6539D0
 0x6540BE: cmp     byte ptr ds:0B15800h, 0

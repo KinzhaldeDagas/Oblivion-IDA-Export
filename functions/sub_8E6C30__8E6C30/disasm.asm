@@ -7,7 +7,6 @@
 0x8E6C41: jz      loc_8E6CE4
 0x8E6C47: push    edi
 0x8E6C48: jmp     short loc_8E6C50
-0x8E6C4A: align 10h
 0x8E6C50: mov     eax, [esi+4]
 0x8E6C53: test    eax, eax
 0x8E6C55: jz      loc_8E6CE3

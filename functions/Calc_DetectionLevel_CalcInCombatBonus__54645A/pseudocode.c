@@ -1,7 +1,8 @@
-int __cdecl Calc_DetectionLevel_::CalcInCombatBonus(
-        int a1,
+// Applies fSneakTargetInCombatBonus when the observed target is in combat.
+int __cdecl Calc_DetectionLevel_ApplyCombatBonus(
+        float a1,
         int a2,
-        int a3,
+        float a3,
         int a4,
         int a5,
         int a6,
@@ -19,16 +20,16 @@ int __cdecl Calc_DetectionLevel_::CalcInCombatBonus(
         int a18,
         int a19)
 {
-  __asm { fst     dword ptr [esp+0] }
-  if ( (_BYTE)a16 )
+  __asm { fst     dword ptr [esp+0] } /*0x54645f*/
+  if ( (_BYTE)a16 ) /*0x546462*/
   {
-    __asm
+    __asm /*0x546464*/
     {
       fld     dword ptr ds:0B366E8h
       fstp    dword ptr [esp+0]
     }
   }
-  return Calc_DetectionLevel_::CalcRunningMult(
+  return Calc_DetectionLevel_ApplyRunningMultiplier(
            a1,
            a2,
            a3,

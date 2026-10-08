@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x559AD5",
-    "line": "push    ecx",
+    "line": "push    ecx; end",
     "mnemonic": "push",
     "size": 1
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x559AD8",
-    "line": "push    esi",
+    "line": "push    esi; begin",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x559ADB",
-    "line": "call    sub_557740",
+    "line": "call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x559B17",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x559B18",
-    "line": "push    ebx",
+    "line": "push    ebx; begin",
     "mnemonic": "push",
     "size": 1
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x559B1B",
-    "line": "call    sub_557740",
+    "line": "call    FaceGenEgtBasisRecordArray_Destruct; Destroy the three owned image-channel vectors at +0x10 in every 64-byte EGT basis record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x559B23",
-    "line": "push    offset sub_557B30; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenEgtBasisBank_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -478,5 +478,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BC900",
+    "line": "push    offset FaceGenEgtBasisBank_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC905",
+    "line": "push    2; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC907",
+    "line": "push    10h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC909",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC90C",
+    "line": "add     eax, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC90F",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC910",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC915",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC916",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BC91A",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC91D",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC920",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC922",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC927",
+    "line": "mov     eax, offset stru_AE64CC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC92C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

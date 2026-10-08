@@ -1,1 +1,5 @@
-_D3DTRANSFORMCAPS
+struct _D3DTRANSFORMCAPS
+{
+DWORD dwSize;
+DWORD dwCaps;
+};

@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x863433",
-    "line": "call    ??0BSShaderPPLightingProperty@@QAE@XZ; BSShaderPPLightingProperty::BSShaderPPLightingProperty(void)",
+    "line": "call    ??0BSShaderPPLightingProperty@@QAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty constructor initializes the reference-counted TextureEffectData slot at this+0xE0 (DWORD index 0x38) to null. TextureEffectProperty_SetData replaces that same offset; BSShaderPPLightingProperty destructor releases and clears it before chaining to BSShaderLightingProperty. Fallout's typed property layout calls the member spTexEffectData at the same +0xE0 offset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x86343A",
-    "line": "mov     dword ptr [esi], offset ??_7Lighting30ShaderProperty@@6B@; const Lighting30ShaderProperty::`vftable'",
+    "line": "mov     dword ptr [esi], offset Lighting30ShaderProperty_vftable; Primary live-object creation route: store exact Lighting30ShaderProperty vptr A9576C after the PP-lighting base constructor.",
     "mnemonic": "mov",
     "size": 6
   },

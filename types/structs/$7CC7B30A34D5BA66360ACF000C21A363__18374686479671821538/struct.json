@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$7CC7B30A34D5BA66360ACF000C21A363",
+  "definition": "struct $7CC7B30A34D5BA66360ACF000C21A363\n{\nunsigned __int8 ExtType : 7;\nunsigned __int8 StockFlag : 1;\nUCHAR Generation;\n}\n",
   "id": 18374686479671821538,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ExtType",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.875,
+      "type": "unsigned __int8 : 7"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StockFlag",
-      "offset": 0,
+      "offset": 0.875,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int8 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Generation",
       "offset": 1,
       "offset_hex": "0x1",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     }
   ],
   "name": "$7CC7B30A34D5BA66360ACF000C21A363",
+  "ordinal": 1558,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 2
 }

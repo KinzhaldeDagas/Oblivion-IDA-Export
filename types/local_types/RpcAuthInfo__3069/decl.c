@@ -1,1 +1,1 @@
-RpcAuthInfo
+typedef _RpcAuthInfo RpcAuthInfo;

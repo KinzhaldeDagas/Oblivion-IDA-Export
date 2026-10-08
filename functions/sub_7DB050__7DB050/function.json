@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_7DB050",
+  "chunks": [
+    [
+      "0x7DB050",
+      "0x7DB15E"
+    ],
+    [
+      "0x9CEFC0",
+      "0x9CEFF3"
+    ]
+  ],
+  "chunks_sha256": "30b08f71eff023b17d904d152d5c22bf4f8d3390e8c051f3b1bc3f397332caac",
+  "comment_regular": "[Verified] Initializes a NiTStringPointerMap<ShaderBufferEntry*> with 0x25 buckets and, for a positive package index, formats shaderpackage%03i.sdp. Oblivion then loads that SDP record map for shader creation. [Verified cross-build divergence] Fallout Renderer::Init exposes bCreateShaderPackage and forwards it to BSShaderManager::bCreateNewShaderPackage, while its HLSL creator resolves source files and compiles them; the current Fallout IDB does not establish a same-name Oblivion-style SDP map.",
+  "comment_repeatable": "[Verified] Initializes a NiTStringPointerMap<ShaderBufferEntry*> with 0x25 buckets and, for a positive package index, formats shaderpackage%03i.sdp. Oblivion then loads that SDP record map for shader creation. [Verified cross-build divergence] Fallout Renderer::Init exposes bCreateShaderPackage and forwards it to BSShaderManager::bCreateNewShaderPackage, while its HLSL creator resolves source files and compiles them; the current Fallout IDB does not establish a same-name Oblivion-style SDP map.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "ShaderProgramPackageMap_Ctor",
   "end_ea": "0x7DB15E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7DB050",
+  "name": "ShaderProgramPackageMap_Ctor",
   "segment": ".text",
   "sha256": "594fd907adfeab26702d22c7970f4aba3d852ec7fbbe60231e5dad508c484a9e",
   "size": 270,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7DB050",
-  "type": "int *__thiscall(int *this, int)",
-  "xrefs_from_count": 94,
+  "total_chunk_size": 321,
+  "type": "int *__thiscall(int *this, int packageIndex)",
+  "xrefs_from_count": 111,
   "xrefs_to_count": 1
 }

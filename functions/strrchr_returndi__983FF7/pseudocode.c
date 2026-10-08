@@ -1,4 +1,4 @@
-int strrchr_::returndi()
+void strrchr_::returndi()
 {
-  return strrchr_::toend();
+  strrchr_::toend(); /*0x983ff8*/
 }

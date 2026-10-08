@@ -6,7 +6,7 @@
 0x92B76C: mov     eax, [eax]
 0x92B76E: mov     ecx, [ebp+arg_C]
 0x92B771: push    ebx
-0x92B772: mov     ebx, [ebp+arg_4]
+0x92B772: mov     ebx, dword ptr [ebp+arg_4]
 0x92B775: shl     ecx, 4
 0x92B778: movaps  xmm0, xmmword ptr [ecx+eax]
 0x92B77C: lea     edx, [ecx+eax]
@@ -14,7 +14,7 @@
 0x92B780: movaps  xmm2, xmm0
 0x92B783: shufps  xmm2, xmm0, 0C9h ; 'É'
 0x92B787: push    edi
-0x92B788: mov     edi, [ebp+arg_8]
+0x92B788: mov     edi, dword ptr [ebp+arg_4+4]
 0x92B78B: mov     ecx, edi
 0x92B78D: shl     ecx, 4
 0x92B790: movaps  xmm1, xmmword ptr [ecx+eax]

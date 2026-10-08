@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5630A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified instance copy path: shares the base model at +0x10, copies/refcounts +0x14/+0x18 geometry data and +0x2C/+0x30 cached property slots, while deep-cloning per-LOD shader-property objects at +0x24/+0x28. The leaf cached-property source remains Unknown because no stock writer was found.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x5630CE",
-    "line": "mov     ecx, offset stru_B39F80",
+    "line": "mov     ecx, offset OB_BSTreeModel_MakeInstanceCriticalSection_010201A0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5630D3",
-    "line": "call    NiEnterCriticalSection",
+    "line": "call    NiEnterCriticalSection; Verified: dedicated BSTreeModel instance-construction critical section. The lock spans CSpeedTreeRT::MakeInstance plus render-resource array creation/copy and is released on both success and failure exits. No destructor use is implied.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5630E4",
-    "line": "mov     ecx, [ebp+0Ch]",
+    "line": "mov     ecx, [ebp+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x563107",
-    "line": "call    sub_78DC10",
+    "line": "call    CSpeedTreeRT__MakeInstance; Sole Oblivion code xref to CSpeedTreeRT::MakeInstance. Success returns only after the new object copied the shared +0x30 identity, joined the shared +0x38 list, and incremented the shared count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x56311B",
-    "line": "call    NiSmartPointer_Set??",
+    "line": "call    NiSmartPointer_Set??; Verified: stores an owning NiPointer<BSTreeModel> reference to the base model. The instance destructor releases this reference after its own CSpeedTreeRT wrapper and render resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,25 +223,25 @@
   },
   {
     "ea": "0x563123",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x563124",
-    "line": "lea     ecx, [esi+34h]",
+    "line": "lea     ecx, [esi+34h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x563127",
-    "line": "mov     [esi+8], edi",
+    "line": "mov     [esi+8], edi; Verified: model mode becomes 2 only after CSpeedTreeRT::MakeInstance succeeds; initialization guards reject a target already in mode 2.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x56312A",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x563132",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x563133",
-    "line": "lea     ecx, [esi+38h]",
+    "line": "lea     ecx, [esi+38h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x563136",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,19 +277,19 @@
   },
   {
     "ea": "0x56313E",
-    "line": "push    edx",
+    "line": "push    edx; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56313F",
-    "line": "lea     ecx, [esi+3Ch]",
+    "line": "lea     ecx, [esi+3Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x563142",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x56314A",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x56314B",
-    "line": "lea     ecx, [esi+20h]",
+    "line": "lea     ecx, [esi+20h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x56314E",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; Verified: shares/refcounts the base OB_STLSPData leafShaderStreamData (+0x20); leaf LOD shader-property constructors consume this payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x563191",
-    "line": "call    sub_700610",
+    "line": "call    sub_700610; Verified: when the base model has a collisionShape at +0x40, InitAsInstance deep-clones it with NiObject_CloneWithPointerMap and stores an owning reference in the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x5631BC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5631BE",
-    "line": "call    sub_5601E0",
+    "line": "call    BSTreeModel_GetNumBranchLODLevels; Verified: branch resource array lengths are derived from BSTreeModel_GetNumBranchLODLevels; each LOD slot is copied or cloned from the base model, guarded by source-array presence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x56322B",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x56328C",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x5632EA",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1176,12 +1176,6 @@
     "size": 2
   },
   {
-    "ea": "0x56331D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x563320",
     "line": "mov     ecx, [ebp+14h]",
     "mnemonic": "mov",
@@ -1195,7 +1189,7 @@
   },
   {
     "ea": "0x563325",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
@@ -1207,13 +1201,13 @@
   },
   {
     "ea": "0x563329",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
   {
     "ea": "0x56332B",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; Verified: per branch LOD, InitAsInstance AddRefs/copies the base branchGeometryDataByLOD entry into the instance's corresponding slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x563333",
-    "line": "mov     ecx, [edi+edx]",
+    "line": "mov     ecx, [edi+edx]; Verified: per branch LOD, InitAsInstance clones the base branchShaderPropertiesByLOD NiObject with a pointer map rather than sharing it.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1243,7 +1237,7 @@
   },
   {
     "ea": "0x56333A",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,19 +1297,19 @@
   },
   {
     "ea": "0x563356",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x563357",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
   {
     "ea": "0x563359",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; Verified: per branch LOD, InitAsInstance AddRefs/copies the base branchCachedPropertiesByLOD entry into the corresponding slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1333,7 @@
   },
   {
     "ea": "0x563366",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1357,7 +1351,7 @@
   },
   {
     "ea": "0x563371",
-    "line": "call    sub_787200",
+    "line": "call    CSpeedTreeRT__GetNumLeafLodLevels; Verified: leaf resource array lengths are derived from CSpeedTreeRT_GetNumLeafLodLevels; each LOD slot is copied or cloned from the base model, guarded by source-array presence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,7 +1537,7 @@
   },
   {
     "ea": "0x5633DE",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1729,7 +1723,7 @@
   },
   {
     "ea": "0x56343C",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -1915,7 +1909,7 @@
   },
   {
     "ea": "0x56349A",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -2010,12 +2004,6 @@
     "size": 2
   },
   {
-    "ea": "0x5634CD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5634D0",
     "line": "mov     ecx, [ebp+18h]",
     "mnemonic": "mov",
@@ -2029,7 +2017,7 @@
   },
   {
     "ea": "0x5634D5",
-    "line": "push    ecx",
+    "line": "push    ecx; incoming",
     "mnemonic": "push",
     "size": 1
   },
@@ -2041,13 +2029,13 @@
   },
   {
     "ea": "0x5634D9",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
   {
     "ea": "0x5634DB",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; Verified: per leaf LOD, InitAsInstance AddRefs/copies the base leafGeometryDataByLOD entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,7 +2047,7 @@
   },
   {
     "ea": "0x5634E3",
-    "line": "mov     ecx, [edi+edx]",
+    "line": "mov     ecx, [edi+edx]; Verified: per leaf LOD, InitAsInstance clones the base leafShaderPropertiesByLOD NiObject with a pointer map.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2077,7 +2065,7 @@
   },
   {
     "ea": "0x5634EA",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2137,19 +2125,19 @@
   },
   {
     "ea": "0x563506",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x563507",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
   {
     "ea": "0x563509",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; Verified: per leaf LOD, InitAsInstance AddRefs/copies the base leafCachedPropertiesByLOD entry; CreateArt consumes non-null entries as BSShaderProperty values. No stock writer was established in this pass, so population remains Candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,7 +2161,7 @@
   },
   {
     "ea": "0x563516",
-    "line": "mov     ebp, [ebp+1Ch]",
+    "line": "mov     ebp, [ebp+1Ch]; Verified: InitAsInstance clones billboardShape_STBB (+0x1C) with NiObject_CloneWithPointerMap; its local producer is the NiTriShape named STBB.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2191,13 +2179,13 @@
   },
   {
     "ea": "0x56351D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x56351F",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2221,13 +2209,13 @@
   },
   {
     "ea": "0x56352D",
-    "line": "mov     ecx, offset stru_B39F80; lpCriticalSection",
+    "line": "mov     ecx, offset OB_BSTreeModel_MakeInstanceCriticalSection_010201A0; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x563532",
-    "line": "call    NiLeaveCriticalSection_0",
+    "line": "call    NiLeaveCriticalSection_0; Verified: releases the MakeInstance critical section after the instance's shared CSpeedTree state and available branch/leaf resources have been initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,7 +2233,7 @@
   },
   {
     "ea": "0x56353B",
-    "line": "mov     ecx, offset stru_B39F80; lpCriticalSection",
+    "line": "mov     ecx, offset OB_BSTreeModel_MakeInstanceCriticalSection_010201A0; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2314,5 +2302,239 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BD300",
+    "line": "lea     ecx, [ebp-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD303",
+    "line": "jmp     sub_4781A0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD308",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD30B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD30C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD311",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD312",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD313",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD316",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD317",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD31C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD31D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD31E",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD321",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD322",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD327",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD328",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD329",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD32C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD32D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD332",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD333",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD334",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD337",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD338",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD33D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD33E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD33F",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD342",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD343",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD348",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD349",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BD34A",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD34E",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD351",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD354",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD356",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD35B",
+    "line": "mov     eax, offset stru_AE6D04",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD360",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

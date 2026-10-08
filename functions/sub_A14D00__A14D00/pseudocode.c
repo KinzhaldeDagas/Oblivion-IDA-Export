@@ -1,9 +1,9 @@
 _DWORD *sub_A14D00()
 {
-  return sub_90D190(
-           dword_BA901C,
+  return sub_90D190( /*0xa14d27*/
+           unk_BA901C,
            (int)"hkTriSampledHeightFieldCollection",
-           (int)&unk_BA9450,
+           (int)unk_BA9450,
            0x18,
            0,
            0,

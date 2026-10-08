@@ -1,1 +1,4 @@
-TESChildCELL
+struct TESChildCELL
+{
+void *vtbl;
+};

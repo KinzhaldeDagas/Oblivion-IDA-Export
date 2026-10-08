@@ -1,4 +1,4 @@
-0x8ABCE0: push    ebp
+0x8ABCE0: push    ebp; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x8ABCE1: mov     ebp, esp
 0x8ABCE3: mov     eax, [ecx+50h]
 0x8ABCE6: movaps  xmm1, xmmword ptr [eax+60h]

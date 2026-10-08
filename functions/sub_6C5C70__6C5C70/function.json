@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6C5C70",
+      "0x6C5CB1"
+    ]
+  ],
+  "chunks_sha256": "358201b44ccf509d76556304402f6c4551c18ec60fb6f199b0aef62c1e34d152",
+  "comment_regular": "Creates or reuses a __TempBlendSequence__ for the current pose, then transitions from that temporary pose to the requested destination sequence through 0x6C9D30. ActorAnimData_PlaySequence uses this for player/camera-visible roots when a normal cross-fade cannot be used.",
+  "comment_repeatable": "Creates or reuses a __TempBlendSequence__ for the current pose, then transitions from that temporary pose to the requested destination sequence through 0x6C9D30. ActorAnimData_PlaySequence uses this for player/camera-visible roots when a normal cross-fade cannot be used.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6C5C70",
+  "display_name": "NiControllerManager_BlendFromPose",
   "end_ea": "0x6C5CB1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C5C70",
+  "name": "NiControllerManager_BlendFromPose",
   "segment": ".text",
   "sha256": "358201b44ccf509d76556304402f6c4551c18ec60fb6f199b0aef62c1e34d152",
   "size": 65,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C5C70",
-  "type": "char __thiscall(int **this, int, float, float, int, int)",
+  "total_chunk_size": 65,
+  "type": "char __thiscall(int **this, NiControllerSequence *, float, float, NiD3DPass *, int)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 2
 }

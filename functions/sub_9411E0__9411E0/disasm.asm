@@ -143,7 +143,6 @@
 0x941396: jle     short loc_9413BB
 0x941398: add     esi, 38h ; '8'
 0x94139B: jmp     short loc_9413A0
-0x94139D: align 10h
 0x9413A0: mov     ecx, [esp+70h+var_1C]
 0x9413A4: mov     edx, [ecx+edi*8+4]
 0x9413A8: push    0FFFFFFFFh

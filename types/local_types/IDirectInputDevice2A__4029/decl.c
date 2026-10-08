@@ -1,1 +1,4 @@
-IDirectInputDevice2A
+struct IDirectInputDevice2A
+{
+IDirectInputDevice2AVtbl *lpVtbl;
+};

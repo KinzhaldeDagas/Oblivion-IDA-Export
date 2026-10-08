@@ -1,1 +1,1 @@
-D3DVALUE
+typedef float D3DVALUE;

@@ -1,5 +1,5 @@
 0x70FA00: push    ebx
-0x70FA01: mov     ebx, dword ptr [esp+4+ArgList]
+0x70FA01: mov     ebx, [esp+4+ArgList]
 0x70FA05: push    esi
 0x70FA06: mov     eax, ebx
 0x70FA08: push    edi

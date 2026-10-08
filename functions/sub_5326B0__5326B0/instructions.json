@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5326B0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: player camera collision phantom segment cast. Converts TES/world endpoints to Havok units, calls the first camera bhkSimpleShapePhantom hk object vfunc +0x30 with hkAllCdPointCollector, sorts hits, skips layer 0x14 hits that resolve to swimming MobileObjects, copies first usable 0x30 hit entry to caller, and rewrites the end point to hit position in TES/world units.",
     "mnemonic": "push",
     "size": 1
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x532784",
-    "line": "mov     edi, [esi+8]",
+    "line": "mov     edi, [esi+8]; Uses (*this)->hkObject at +0x08; this function is tied to the camera collision phantom pair, not the actor controller capsule.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x53278D",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x5327A9",
-    "line": "call    edx",
+    "line": "call    edx; Shape/phantom linear cast: hk object vfunc +0x30(startHavok, endHavok, hkAllCdPointCollector, 0).",
     "mnemonic": "call",
     "size": 2
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5327AD",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x5327CE",
-    "line": "call    sub_8AF890",
+    "line": "call    hkpCdPointCollector_SortHitsByDistance; Sort collected hits by entry+0x1C before choosing the first usable hit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x5327ED",
-    "line": "cmp     cl, 14h",
+    "line": "cmp     cl, 14h; Layer 0x14 gets special filtering; swimming mobile-object hits on this layer are skipped.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x5327F2",
-    "line": "push    eax",
+    "line": "push    eax; collidable",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5327F3",
-    "line": "call    sub_8AFCE0",
+    "line": "call    bhkCollidable_ResolveNiAVObject; TES4 authoritative: resolves Havok collidable/contact reference to a NiAVObject when possible. Handles collidable type 1 directly and type 2 with a fallback through v5+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x532800",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x532820",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x532850",
-    "line": "call    sub_532210",
+    "line": "call    hkpCdPoint_CopyHitEntry30; Copies selected 0x30-byte contact entry to caller output.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x53285B",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; Converts selected hit position from Havok to TES/world units and stores it back into the caller's end point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x532877",
-    "line": "mov     al, [esp+214h+var_1F9]",
+    "line": "mov     al, [esp+214h+var_1F9]; Returns whether any raw hit was collected. If all hits were skipped by the layer 0x14 swimming-object filter, caller output may not contain a selected usable hit; do not treat return value alone as a general clearance result.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -904,5 +904,83 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8E00",
+    "line": "lea     ecx, [ebp+var_1C0]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8E06",
+    "line": "jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E0B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B8E0F",
+    "line": "lea     eax, [edx-204h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8E15",
+    "line": "mov     ecx, [edx-208h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8E1B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8E1D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E22",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8E25",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8E28",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8E2A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E2F",
+    "line": "mov     eax, offset stru_AE323C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8E34",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

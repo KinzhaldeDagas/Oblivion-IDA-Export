@@ -1,1 +1,1 @@
-CACLSID
+typedef tagCACLSID CACLSID;

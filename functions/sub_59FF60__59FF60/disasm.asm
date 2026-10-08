@@ -7,7 +7,7 @@
 0x59FF72: mov     ecx, [eax+14h]
 0x59FF75: push    1
 0x59FF77: push    ecx
-0x59FF78: call    sub_5D6390
+0x59FF78: call    SkillsMenu_Create; Creates the shared SkillsMenu. In class-skill mode (mode 0), associates the open ClassMenu, sets selectionCap=7 at SkillsMenu+0x44, populates all 21 native skills, and preselects the seven staged ClassMenu major AVs.
 0x59FF7D: mov     eax, [esp+0Ch+arg_4]
 0x59FF81: mov     edx, [esi]
 0x59FF83: mov     edx, [edx+14h]
@@ -24,7 +24,7 @@
 0x59FF9F: mov     ecx, [eax+14h]
 0x59FFA2: push    0
 0x59FFA4: push    ecx
-0x59FFA5: call    sub_5D6390
+0x59FFA5: call    SkillsMenu_Create; Creates the shared SkillsMenu. In class-skill mode (mode 0), associates the open ClassMenu, sets selectionCap=7 at SkillsMenu+0x44, populates all 21 native skills, and preselects the seven staged ClassMenu major AVs.
 0x59FFAA: mov     eax, [esp+0Ch+arg_4]
 0x59FFAE: mov     edx, [esi]
 0x59FFB0: mov     edx, [edx+14h]
@@ -209,14 +209,13 @@
 0x5A01D2: fld     dword ptr ds:0A379B4h
 0x5A01D8: push    ecx
 0x5A01D9: mov     ecx, [esi+50h]; this
-0x5A01DC: fstp    [esp+10h+a2]; a3
-0x5A01DF: push    0FC1h; a2
-0x5A01E4: call    Tile_SetFloat
+0x5A01DC: fstp    [esp+10h+a2]; value
+0x5A01DF: push    0FC1h; propertyCode
+0x5A01E4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A01E9: fld     dword ptr ds:0A379B4h
 0x5A01EF: jmp     short loc_5A023A
 0x5A01F1: mov     edi, 1
 0x5A01F6: jmp     short loc_5A0200
-0x5A01F8: align 10h
 0x5A0200: mov     ecx, [esi+94h]
 0x5A0206: mov     eax, [ecx+10h]
 0x5A0209: add     eax, edi
@@ -232,15 +231,15 @@
 0x5A0225: fld1
 0x5A0227: push    ecx
 0x5A0228: mov     ecx, [esi+50h]; this
-0x5A022B: fstp    [esp+10h+a2]; a3
-0x5A022E: push    0FC1h; a2
-0x5A0233: call    Tile_SetFloat
+0x5A022B: fstp    [esp+10h+a2]; value
+0x5A022E: push    0FC1h; propertyCode
+0x5A0233: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A0238: fld1
 0x5A023A: push    ecx
 0x5A023B: mov     ecx, [esi+50h]; this
-0x5A023E: fstp    [esp+10h+a2]; a3
-0x5A0241: push    0FA1h; a2
-0x5A0246: call    Tile_SetFloat
+0x5A023E: fstp    [esp+10h+a2]; value
+0x5A0241: push    0FA1h; propertyCode
+0x5A0246: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A024B: pop     ebx
 0x5A024C: pop     edi
 0x5A024D: pop     esi

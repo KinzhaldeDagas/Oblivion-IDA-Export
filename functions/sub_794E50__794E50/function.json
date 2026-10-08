@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x794E50",
+      "0x794E7A"
+    ]
+  ],
+  "chunks_sha256": "8d68fdfd0906c41b024e53836969696284bf0701ceeebeeec562e1a42898b171",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Overlap-safe backward copy for unsigned-short elements; computes destinationEnd-(last-first), memmoves the source range there, and returns the new destination start.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_794E50",
+  "display_name": "OB_stVectorUShort_CopyBackwardRange_010201A0",
   "end_ea": "0x794E7A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": false,
-  "name": "sub_794E50",
+  "name": "OB_stVectorUShort_CopyBackwardRange_010201A0",
   "segment": ".text",
   "sha256": "8d68fdfd0906c41b024e53836969696284bf0701ceeebeeec562e1a42898b171",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x794E50",
-  "type": "int __cdecl(void *Src, int, int)",
+  "total_chunk_size": 42,
+  "type": "unsigned __int16 *__cdecl(const unsigned __int16 *first, const unsigned __int16 *last, unsigned __int16 *destinationEnd)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1
 }

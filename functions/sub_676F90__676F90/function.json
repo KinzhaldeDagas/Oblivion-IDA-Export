@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x676F90",
+      "0x67700A"
+    ]
+  ],
+  "chunks_sha256": "cec339d8b1f0e7011486cd6d08cca8a886a2dd28364fff518608bc17ca5cef0e",
+  "comment_regular": "Verified: scans six lists; if08 or0C matches actor, unlinks/destroys/frees record; otherwise removes actor from witness list via607110. Loop resets index to0 before its increment; behavior preserved, not silently fixed.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_676F90",
+  "display_name": "ActorProcessManager_RemoveActorFromCrimes",
   "end_ea": "0x67700A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_676F90",
+  "name": "ActorProcessManager_RemoveActorFromCrimes",
   "segment": ".text",
   "sha256": "cec339d8b1f0e7011486cd6d08cca8a886a2dd28364fff518608bc17ca5cef0e",
   "size": 122,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x676F90",
-  "type": "void __thiscall(ActorProcessManager *this, Actor *a2)",
+  "total_chunk_size": 122,
+  "type": "void __thiscall(ActorProcessManager *self, Actor *actor)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 1
 }

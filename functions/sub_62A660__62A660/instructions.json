@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x62A660",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; RadiantAI: action code 20 from Trespass row. Creates trespass/warning dialogue info and calls Actor::InitDialogue.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x62A675",
-    "line": "mov     ecx, [esp+10h+arg_0]; int",
+    "line": "mov     ecx, [esp+10h+speaker]; int",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x62A679",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x62A68A",
-    "line": "mov     edi, [esp+14h+arg_0]",
+    "line": "mov     edi, [esp+14h+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,19 +373,19 @@
   },
   {
     "ea": "0x62A718",
-    "line": "push    3",
+    "line": "push    3; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62A71A",
-    "line": "push    6",
+    "line": "push    6; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62A71C",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Hardcoded miscellaneous topic bucket 6 index 3: stock 0000011B / Corpse. Null skips DialogueItem creation and Actor::InitDialogue.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,37 +451,37 @@
   },
   {
     "ea": "0x62A73F",
-    "line": "push    0",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62A741",
-    "line": "push    0",
+    "line": "push    0; previousTopic",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62A743",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62A744",
-    "line": "push    edi",
+    "line": "push    edi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62A745",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62A747",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,25 +547,25 @@
   },
   {
     "ea": "0x62A766",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62A768",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x62A76D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62A76F",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x62A7E1",
-    "line": "mov     byte ptr [esi+228h], 1",
+    "line": "mov     byte ptr [esi+228h], 1; Corpse/reaction dialogue sets HighProcess.dialogueActive=1 after assigning activeDialogueItem; completion clears both fields.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x62A816",
-    "line": "mov     ecx, [esi+250h]; int",
+    "line": "mov     ecx, [esi+250h]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x62A820",
-    "line": "call    sub_6B7C30",
+    "line": "call    DialogueItem__RunResult; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,13 +913,13 @@
   },
   {
     "ea": "0x62A82F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62A831",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x62A837",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x62A8A3",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,13 +1315,13 @@
   },
   {
     "ea": "0x62A90E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62A910",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x62A91E",
-    "line": "mov     [esp+1Ch+arg_0], ecx",
+    "line": "mov     [esp+1Ch+speaker], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x62A924",
-    "line": "call    sub_67F100",
+    "line": "call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x62A92A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x62A951",
-    "line": "mov     edi, [esp+1Ch+arg_0]",
+    "line": "mov     edi, [esp+1Ch+speaker]",
     "mnemonic": "mov",
     "size": 4
   },

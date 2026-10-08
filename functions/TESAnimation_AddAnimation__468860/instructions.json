@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x468860",
-    "line": "push    ebx",
+    "line": "push    ebx; CustomAnimSupport decode: append KFFZ string if absent; heap-copies strlen+1 bytes.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x468869",
-    "line": "call    TESAnimation_HasAnimation",
+    "line": "call    TESAnimation_HasAnimation; TESAnimation has exact animation string: linear strcmp over BSSimpleList, used for dedupe before append.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x6C9BA0: push    esi
+0x6C9BA0: push    esi; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x6C9BA1: mov     esi, ecx
 0x6C9BA3: cmp     dword ptr [esi+44h], 0
 0x6C9BA7: jz      short loc_6C9BAF
@@ -6,7 +6,7 @@
 0x6C9BAB: pop     esi
 0x6C9BAC: retn    18h
 0x6C9BAF: push    edi
-0x6C9BB0: mov     edi, [esp+8+arg_10]
+0x6C9BB0: mov     edi, [esp+8+timeSyncSequence]
 0x6C9BB4: test    edi, edi
 0x6C9BB6: mov     dword ptr [esi+58h], 0
 0x6C9BBD: jz      short loc_6C9BE3
@@ -25,14 +25,14 @@
 0x6C9BDC: test    al, al
 0x6C9BDE: jz      short loc_6C9C23
 0x6C9BE0: mov     [esi+58h], edi
-0x6C9BE3: mov     eax, [esp+8+arg_0]
+0x6C9BE3: mov     eax, dword ptr [esp+8+priority]
 0x6C9BE7: push    eax
 0x6C9BE8: mov     ecx, esi
 0x6C9BEA: call    sub_6C6A50
-0x6C9BEF: fld     [esp+8+arg_8]
+0x6C9BEF: fld     [esp+8+weight]
 0x6C9BF3: fstp    dword ptr [esi+1Ch]
 0x6C9BF6: fldz
-0x6C9BF8: fcomp   [esp+8+arg_C]
+0x6C9BF8: fcomp   [esp+8+easeInTime]
 0x6C9BFC: fnstsw  ax
 0x6C9BFE: test    ah, 5
 0x6C9C01: jp      short loc_6C9C64
@@ -64,7 +64,7 @@
 0x6C9C50: fld     dword ptr ds:0A7DEB4h
 0x6C9C56: fchs
 0x6C9C58: fstp    dword ptr [esi+4Ch]
-0x6C9C5B: fld     [esp+8+arg_C]
+0x6C9C5B: fld     [esp+8+easeInTime]
 0x6C9C5F: fstp    dword ptr [esi+50h]
 0x6C9C62: jmp     short loc_6C9C8A
 0x6C9C64: cmp     dword ptr [esi+44h], 0
@@ -78,7 +78,7 @@
 0x6C9C7E: add     ecx, 4Ch ; 'L'; this
 0x6C9C81: mov     [esp+0Ch+a2], esi
 0x6C9C85: call    sub_73A5E0
-0x6C9C8A: cmp     [esp+8+arg_4], 0
+0x6C9C8A: cmp     [esp+8+startOver], 0
 0x6C9C8F: jz      short loc_6C9C9C
 0x6C9C91: fld     dword ptr ds:0A7DEB4h
 0x6C9C97: fchs

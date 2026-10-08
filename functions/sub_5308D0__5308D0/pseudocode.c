@@ -1,4 +1,5 @@
-void __thiscall sub_5308D0(int this)
+// Adds TESTopicInfo.addedTopics to PlayerCharacter. Pointer-duplicate topics are ignored, each genuinely new topic may show the sTopicAddedText notification outside DialogMenu, and the player's known-topic list is sorted once afterward.
+void __thiscall TESTopicInfo::AddTopicList(OblivionTopicInfo *this)
 {
-  sub_66C6A0(TESDataHandler_g_PlayerRef, (int *)(this + 0x28));
+  PlayerCharacter::AddKnownTopics(reference, &this->addedTopics);// INFO.addedTopics always routes to PlayerCharacter::AddKnownTopics. This call still occurs before the INFOGENERAL RunForRumors gate in LoadNextTopicList, so D7 can teach known topics even when its normal result and Goodbye handling are suppressed. /*0x5308da*/
 }

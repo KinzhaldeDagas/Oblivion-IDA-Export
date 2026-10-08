@@ -1,4 +1,4 @@
-0x724B30: sub     esp, 18h
+0x724B30: sub     esp, 18h; Pass330 decode: NiRangeLODData camera selector. It projects the data center-to-camera vector on camera forward, multiplies by Camera::LODAdjust, takes absolute distance, and selects the matching authored range interval.
 0x724B33: mov     eax, [esp+18h+arg_0]
 0x724B37: fld     dword ptr [ecx+14h]
 0x724B3A: fsub    dword ptr [eax+88h]
@@ -30,7 +30,7 @@
 0x724B97: fstp    [esp+1Ch+arg_0]
 0x724B9B: fld     [esp+1Ch+arg_0]
 0x724B9F: fmul    dword ptr [eax+120h]
-0x724BA5: fstp    [esp+1Ch+arg_0]
+0x724BA5: fstp    [esp+1Ch+arg_0]; Pass332 decode: NiRangeLODData multiplies shadow-camera-relative forward distance by Camera::LODAdjust before selecting an authored interval; this can choose coarse/no caster geometry.
 0x724BA9: fld     [esp+1Ch+arg_0]
 0x724BAD: fabs
 0x724BAF: fstp    [esp+1Ch+arg_0]

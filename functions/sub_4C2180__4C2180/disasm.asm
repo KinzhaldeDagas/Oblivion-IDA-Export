@@ -61,3 +61,21 @@
 0x4C2226: pop     ebx
 0x4C2227: add     esp, 10h
 0x4C222A: retn
+0x9B4760: mov     ecx, [ebp-10h]
+0x9B4763: add     ecx, 14h; slot
+0x9B4766: jmp     NiPointerSlot_Release
+0x9B476B: push    offset ??1?$NiTPointerMap@IPAPAVTESGrassAreaParam@@@@UAE@XZ; void (__thiscall *)(void *)
+0x9B4770: push    4; int
+0x9B4772: push    10h; unsigned int
+0x9B4774: mov     eax, [ebp-10h]
+0x9B4777: add     eax, 54h ; 'T'
+0x9B477A: push    eax; void *
+0x9B477B: call    $LN21
+0x9B4780: retn
+0x9B4781: mov     edx, [esp+arg_4]
+0x9B4785: lea     eax, [edx-10h]
+0x9B4788: mov     ecx, [edx-14h]
+0x9B478B: xor     ecx, eax
+0x9B478D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B4792: mov     eax, offset stru_ADFDB8
+0x9B4797: jmp     ___CxxFrameHandler3

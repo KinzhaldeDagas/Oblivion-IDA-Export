@@ -1,4 +1,4 @@
-BSStringT *sub_A0A750()
+NiRTTI *sub_A0A750()
 {
-  return sub_70E220((BSStringT *)dword_B401EC, "NiIntegersExtraData", (int)dword_B3FD44);
+  return NiRTTI_Constructor(&stru_B401EC, "NiIntegersExtraData", &stru_B3FD44); /*0xa0a764*/
 }

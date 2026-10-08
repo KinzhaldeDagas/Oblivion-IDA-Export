@@ -3,7 +3,7 @@
 0x75E492: mov     edi, [esp+8+arg_0]
 0x75E496: push    edi
 0x75E497: mov     esi, ecx
-0x75E499: call    sub_6CE3A0
+0x75E499: call    NiSingleInterpController_IsEqual; Equality requires equal NiTimeController base state and null-symmetric interpolator state; two non-null interpolators compare through their virtual IsEqual slot (+0x2C).
 0x75E49E: test    al, al
 0x75E4A0: jnz     short loc_75E4A9
 0x75E4A2: pop     edi

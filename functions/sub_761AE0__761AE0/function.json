@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x761AE0",
+      "0x761B5C"
+    ]
+  ],
+  "chunks_sha256": "2c662887bbd5072a5214311e3a02e51aebb8633f9c28357b8d6735b1bf77b8bd",
+  "comment_regular": "MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.",
+  "comment_repeatable": "MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.\nDX11 GPU-world matrix contract (2026-09-27): writes the twelve affine elements only. 3x3 source rotation is transposed into the row-vector D3D matrix and scaled; translation subtracts globals B3F92C/B3F930/B3F934 before projection. Existing destination elements3/7/11/15 are preserved. A rigid profile must prove the usual affine values, not assume arbitrary renderer caches have them.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_761AE0",
   "end_ea": "0x761B5C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_761AE0",
   "segment": ".text",
   "sha256": "2c662887bbd5072a5214311e3a02e51aebb8633f9c28357b8d6735b1bf77b8bd",
   "size": 124,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x761AE0",
+  "total_chunk_size": 124,
   "type": "float *__cdecl(float *, float *, float *, float)",
   "xrefs_from_count": 41,
   "xrefs_to_count": 8

@@ -1,48 +1,53 @@
-void __userpurge sub_5E7C30(TESObjectREFR *this@<ecx>, double st5_0@<st2>, double st6_0@<st1>, _BYTE *a4, char a5)
+void __userpurge sub_5E7C30(
+        TESObjectREFR *this@<ecx>,
+        double st5_0@<st2>,
+        double st6_0@<st1>,
+        TESObjectREFR *a4,
+        char a5)
 {
-  ExtraTeleport *TeleportExtraData; // eax
-  BSExtraDataVtbl *v7; // eax
-  TESObjectREFR **v8; // eax
-  TESObjectREFR **v9; // esi
+  TeleportData *TeleportData; // eax
+  TESObjectREFR *LinkedDoor; // eax
+  TeleportData *v8; // eax
+  TESObjectREFR **p_linkedDoor; // esi
   TESObjectCELL *v10; // ebx
-  TESWorldSpace *v11; // ebp
-  float *v12; // eax
+  TESObjectCELL **LinkedDoorWorldspace; // ebp
+  float *Head; // eax
   char *v13; // eax
   double v14; // st7
   _DWORD *v15; // ecx
   float v16; // [esp+0h] [ebp-18h]
   _UNKNOWN *retaddr; // [esp+18h] [ebp+0h]
 
-  if ( a4 )
+  if ( a4 ) /*0x5e7c3c*/
   {
-    TeleportExtraData = GetTeleportExtraData(a4);
-    v7 = sub_42B410(&TeleportExtraData->super);
-    v8 = (TESObjectREFR **)GetTeleportExtraData(v7);
-    v9 = v8;
-    if ( v8 )
+    TeleportData = TESObjectREFR_GetTeleportData(a4); /*0x5e7c42*/
+    LinkedDoor = TeleportData_GetLinkedDoor(TeleportData); /*0x5e7c49*/
+    v8 = TESObjectREFR_GetTeleportData(LinkedDoor); /*0x5e7c50*/
+    p_linkedDoor = &v8->linkedDoor; /*0x5e7c55*/
+    if ( v8 ) /*0x5e7c59*/
     {
-      v10 = sub_42B460(v8);
-      v11 = sub_42B470(v9);
-      v12 = (float *)sub_6899C0((char *)v9);
-      TESObjectREFR_SetPosition(this, *v12, v12[1], v12[2]);
-      if ( v10 && TESObjectCELL_IsProcessLevel_LowHigh(v10, 0) )
+      v10 = sub_42B460(&v8->linkedDoor); /*0x5e7c68*/
+      LinkedDoorWorldspace = (TESObjectCELL **)TeleportData_GetLinkedDoorWorldspace(p_linkedDoor); /*0x5e7c71*/
+      Head = (float *)EmbeddedList_GetHead((char *)p_linkedDoor); /*0x5e7c73*/
+      TESObjectREFR_SetPosition(this, *Head, Head[1], Head[2]); /*0x5e7c8f*/
+      if ( v10 && TESObjectCELL_IsProcessLevel_LowHigh(v10, 0) ) /*0x5e7ca1*/
       {
-        v13 = sub_42B430((char *)v9);
-        sub_4D8A10(*((float *)v13 + 2));
-        v14 = 0.0;
+        v13 = sub_42B430((char *)p_linkedDoor); /*0x5e7cac*/
+        TESObjectREFR_SetRotationZ(this, *((float *)v13 + 2)); /*0x5e7cba*/
+        v14 = 0.0; /*0x5e7cbf*/
       }
       else
       {
-        v14 = flt_A32048;
+        v14 = flt_A32048; /*0x5e7cc3*/
       }
-      v16 = v14;
-      sub_4D89D0(v16);
-      sub_4DD4B0((int)v10, st5_0, st6_0, v14, (Actor *)this, v10, v11);
-      v15 = *(_DWORD **)(*((_DWORD *)this + 0x16) + 8);
-      if ( v15 )
+      v16 = v14; /*0x5e7ccc*/
+      TESObjectREFR_SetRotationX(this, v16); /*0x5e7ccf*/
+      sub_4DD4B0((int)v10, st5_0, st6_0, v14, (Actor *)this, v10, LinkedDoorWorldspace); /*0x5e7cd7*/
+      v15 = *(_DWORD **)(*((_DWORD *)this + 0x16) + 8); /*0x5e7cdf*/
+      if ( v15 ) /*0x5e7ce7*/
       {
-        if ( (_BYTE)retaddr )
-          sub_5668E0(v15, 1);
+        if ( (_BYTE)retaddr ) /*0x5e7cee*/
+          sub_5668E0(v15, 1); /*0x5e7cf2*/
       }
     }
   }

@@ -1,1 +1,1 @@
-CLIPDATA
+typedef tagCLIPDATA CLIPDATA;

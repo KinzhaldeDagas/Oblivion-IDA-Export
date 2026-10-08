@@ -1,1 +1,1 @@
-BSPlayerDistanceCheckController
+struct BSPlayerDistanceCheckController;

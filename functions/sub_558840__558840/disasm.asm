@@ -1,4 +1,4 @@
-0x558840: push    0FFFFFFFFh
+0x558840: push    0FFFFFFFFh; Native EGM lock defects, statically verified: early failures after stream acquisition can return false without unlock; failed acquisition can still continue via cached base-vertex branch then success unlocks preexisting stream. Preconditions matter; runtime/shipped-asset reachability not established. IDA range +0x944 matches deployed EXE hash 33bcefd2c3f77a074957c9a8a22b445211c7ee83f533fcf8f6cfca843cd4bde0. PF guards source versions 1.19.11, but local PF DLL removed 2026-10-01 at user request. OCO LoadGame root cause remains unresolved.
 0x558842: push    offset SEH_558840
 0x558847: mov     eax, large fs:0
 0x55884D: push    eax
@@ -14,36 +14,36 @@
 0x558861: mov     large fs:0, eax
 0x558867: mov     edi, ecx
 0x558869: mov     [esp+88h+var_68], edi
-0x55886D: mov     ebx, [esp+88h+arg_4]
-0x558874: push    ebx
-0x558875: call    sub_5508A0
+0x55886D: mov     ebx, [esp+88h+geometry]
+0x558874: push    ebx; object
+0x558875: call    NiObjectNET_FindFaceGenBaseVertexData; Scan NiObjectNET extra data and return the FaceGen base-vertex data object used to restore authored positions.
 0x55887A: xor     ebp, ebp
 0x55887C: add     esp, 4
 0x55887F: cmp     [edi+8], ebp
 0x558882: mov     esi, eax
 0x558884: jz      loc_558AFB
-0x55888A: cmp     [esp+88h+arg_0], ebp
+0x55888A: cmp     [esp+88h+parameters], ebp
 0x558891: jnz     short loc_5588A7
-0x558893: call    sub_5538D0
+0x558893: call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.
 0x558898: cmp     eax, ebp
-0x55889A: mov     [esp+88h+arg_0], eax
+0x55889A: mov     [esp+88h+parameters], eax
 0x5588A1: jz      loc_558AFB
 0x5588A7: cmp     ebx, ebp
-0x5588A9: mov     [esp+88h+var_30], ebp
-0x5588AD: mov     [esp+88h+var_2C], ebp
-0x5588B1: mov     [esp+88h+var_28], 0
+0x5588A9: mov     [esp+88h+outVertices.data], ebp
+0x5588AD: mov     [esp+88h+outVertices.stride], ebp
+0x5588B1: mov     [esp+88h+outVertices.unknown08], 0
 0x5588B6: jz      short loc_5588DD
-0x5588B8: mov     ecx, [ebx+0B4h]
+0x5588B8: mov     ecx, [ebx+0B4h]; self
 0x5588BE: cmp     ecx, ebp
 0x5588C0: jz      short loc_5588DD
-0x5588C2: push    1
-0x5588C4: call    sub_728AB0
+0x5588C2: push    1; writeAccess
+0x5588C4: call    NiGeometryData_LockVertexStream; Acquire the target geometry's vertex-stream lock before EGM loading, model serialization, and basis validation.
 0x5588C9: test    al, al
 0x5588CB: jz      short loc_5588DD
-0x5588CD: mov     ecx, [ebx+0B4h]
-0x5588D3: lea     eax, [esp+88h+var_30]
-0x5588D7: push    eax
-0x5588D8: call    sub_728B60
+0x5588CD: mov     ecx, [ebx+0B4h]; self
+0x5588D3: lea     eax, [esp+88h+outVertices]
+0x5588D7: push    eax; outVertices
+0x5588D8: call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.
 0x5588DD: cmp     esi, ebp
 0x5588DF: jz      short loc_55890B
 0x5588E1: mov     edx, [esi]
@@ -64,8 +64,8 @@
 0x558903: call    eax
 0x558905: mov     [esp+88h+var_6C], eax
 0x558909: jmp     short loc_558931
-0x55890B: cmp     [esp+88h+var_30], ebp
-0x55890F: jz      loc_558AFB
+0x55890B: cmp     [esp+88h+outVertices.data], ebp
+0x55890F: jz      loc_558AFB; Failure after lock acquisition: a missing writable stream returns without NiGeometryData_UnlockVertexStream, leaving m_bVertexStreamLocked set when this call acquired it.
 0x558915: mov     eax, [ebx+0B4h]
 0x55891B: movzx   eax, word ptr [eax+8]
 0x55891F: movzx   ecx, ax
@@ -73,7 +73,7 @@
 0x558926: mov     [esp+88h+var_64], ebp
 0x55892A: mov     byte ptr ds:0B39D84h, 1
 0x558931: push    edi
-0x558932: call    sub_551930
+0x558932: call    sub_551930; Lazily load/parse the model's EGM basis data before deformation.
 0x558937: add     esp, 4
 0x55893A: test    al, al
 0x55893C: jnz     short loc_55899A
@@ -82,7 +82,7 @@
 0x558944: jnz     short loc_55898E
 0x558946: call    BSStringT_GetLen
 0x55894B: test    eax, eax
-0x55894D: jz      loc_558AFB
+0x55894D: jz      loc_558AFB; Failure after lock acquisition: empty EGM path returns without unlocking the target vertex stream.
 0x558953: push    24h ; '$'; Size
 0x558955: call    FormHeapAlloc
 0x55895A: add     esp, 4
@@ -102,29 +102,28 @@
 0x55898B: mov     [edx+8], eax
 0x55898E: mov     eax, [edi+8]
 0x558991: cmp     [eax+8], ebp
-0x558994: jz      loc_558AFB
+0x558994: jz      loc_558AFB; Failure after lock acquisition: EGM load/parse failure returns without unlocking the target vertex stream.
 0x55899A: push    0; Comperand
 0x55899C: lea     ebp, [edi+14h]
 0x55899F: push    1; Exchange
 0x5589A1: push    ebp; Destination
 0x5589A2: mov     [esp+94h+Destination], ebp
 0x5589A6: mov     [esp+94h+var_38], ebp
-0x5589AA: call    dword ptr ds:0A2813Ch
+0x5589AA: call    dword ptr ds:0A2813Ch; Model-data serialization is attempted only after the geometry vertex stream is locked. Contention falls through to false without unlocking that stream.
 0x5589B0: test    eax, eax
 0x5589B2: setz    al
 0x5589B5: mov     [esp+88h+var_34], al
 0x5589B9: test    al, al
 0x5589BB: mov     [esp+88h+var_4], 1
 0x5589C6: jz      loc_558AFB
-0x5589CC: mov     ecx, [esp+88h+arg_0]
+0x5589CC: mov     ecx, [esp+88h+parameters]
 0x5589D3: xor     esi, esi
 0x5589D5: mov     [esp+88h+var_74], esi
 0x5589D9: mov     [esp+88h+var_70], ecx
 0x5589DD: jmp     short loc_5589E4
-0x5589DF: align 10h
 0x5589E0: mov     ebp, [esp+88h+Destination]
 0x5589E4: mov     edx, [edi+8]
-0x5589E7: mov     eax, [edx+8]
+0x5589E7: mov     eax, [edx+8]; Validate geometry parameter bank 0 against the first EGM coordinate basis.
 0x5589EA: mov     edx, [eax+esi+8]
 0x5589EE: test    edx, edx
 0x5589F0: lea     eax, [eax+esi+4]
@@ -180,7 +179,7 @@
 0x558A82: shr     eax, 1Fh
 0x558A85: add     eax, edx
 0x558A87: cmp     eax, [esp+88h+var_6C]
-0x558A8B: jb      loc_558B13
+0x558A8B: jb      loc_558B13; Reject an EGM basis whose vertex count does not match the target geometry/model data.
 0x558A91: add     ebp, 1
 0x558A94: add     edi, 14h
 0x558A97: cmp     ebp, ebx
@@ -208,14 +207,14 @@
 0x558ADF: xor     eax, eax
 0x558AE1: jmp     short loc_558B41
 0x558AE3: push    offset aFacegenTried_0; "FaceGen - Tried to apply a coordinate t"...
-0x558AE8: call    PrintError
+0x558AE8: call    PrintError; Validate geometry parameter bank 1 against the second EGM coordinate basis.
 0x558AED: add     esp, 4
 0x558AF0: push    1; Comperand
 0x558AF2: push    0; Exchange
 0x558AF4: push    ebp; Destination
 0x558AF5: call    dword ptr ds:0A2813Ch
 0x558AFB: xor     al, al
-0x558AFD: mov     ecx, [esp+88h+var_C]
+0x558AFD: mov     ecx, [esp+88h+var_C]; Common false return. Native cleanup releases the model-data interlock on validation failures but does not release a vertex-stream lock acquired earlier.
 0x558B01: mov     large fs:0, ecx
 0x558B08: pop     ecx
 0x558B09: pop     edi
@@ -231,7 +230,7 @@
 0x558B24: push    1
 0x558B26: push    0
 0x558B28: push    ecx
-0x558B29: jmp     short loc_558AF5
+0x558B29: jmp     short loc_558AF5; Release the model-data interlock after basis/model mismatch; the target geometry vertex stream remains locked.
 0x558B2B: mov     ecx, [eax+8]
 0x558B2E: sub     ecx, edx
 0x558B30: mov     eax, 66666667h
@@ -245,13 +244,12 @@
 0x558B45: mov     [esp+88h+var_54], eax
 0x558B49: mov     [esp+88h+var_58], ebp
 0x558B4D: jbe     loc_55913B
-0x558B53: mov     eax, [esp+88h+arg_0]
+0x558B53: mov     eax, [esp+88h+parameters]
 0x558B5A: lea     edx, [esi+esi*2]
 0x558B5D: lea     esi, [eax+edx*8]
 0x558B60: mov     [esp+88h+var_4C], esi
 0x558B64: jmp     short loc_558B78
 0x558B66: jmp     short loc_558B70
-0x558B68: align 10h
 0x558B70: mov     esi, [esp+88h+var_4C]
 0x558B74: mov     ebx, [esp+88h+var_48]
 0x558B78: mov     eax, [esi+0Ch]
@@ -286,13 +284,13 @@
 0x558BC9: call    __invalid_parameter_noinfo
 0x558BCE: fld     dword ptr [edi]
 0x558BD0: mov     ecx, [esi+4]
-0x558BD3: fmul    [esp+88h+arg_8]
+0x558BD3: fmul    [esp+88h+morphScale]
 0x558BDA: lea     eax, [ebp+ebp*4+0]
 0x558BDE: add     eax, eax
 0x558BE0: add     eax, eax
 0x558BE2: fmul    dword ptr [ecx+eax]
 0x558BE5: mov     [esp+88h+var_5C], eax
-0x558BE9: fstp    [esp+88h+var_74]
+0x558BE9: fstp    [esp+88h+var_74]; Effective morph weight = FaceGen coefficient * caller morphScale * per-basis-entry scale.
 0x558BED: fldz
 0x558BEF: fcomp   [esp+88h+var_74]
 0x558BF3: fnstsw  ax
@@ -324,11 +322,11 @@
 0x558C46: lea     ebp, [edx+eax+4]
 0x558C4A: jbe     short loc_558C51
 0x558C4C: call    __invalid_parameter_noinfo
-0x558C51: mov     ecx, [esp+88h+arg_4]
+0x558C51: mov     ecx, [esp+88h+geometry]
 0x558C58: mov     edx, [ecx+0B4h]
 0x558C5E: movzx   eax, word ptr [edx+8]
 0x558C62: xor     ecx, ecx
-0x558C64: cmp     [esp+88h+arg_C], ecx
+0x558C64: cmp     [esp+88h+basePositions], ecx
 0x558C6B: mov     [esp+88h+var_40], ebp
 0x558C6F: mov     [esp+88h+var_5C], eax
 0x558C73: jz      loc_558EDA
@@ -345,17 +343,17 @@
 0x558CA2: jb      short loc_558CA9
 0x558CA4: call    __invalid_parameter_noinfo
 0x558CA9: movsx   eax, word ptr [esi]
-0x558CAC: mov     ecx, [esp+88h+arg_C]
+0x558CAC: mov     ecx, [esp+88h+basePositions]
 0x558CB3: mov     [esp+88h+var_44], eax
 0x558CB7: fild    [esp+88h+var_44]
 0x558CBB: fmul    [esp+88h+var_74]
 0x558CBF: fadd    dword ptr [ecx]
-0x558CC1: fstp    dword ptr [edi]
+0x558CC1: fstp    dword ptr [edi]; Accumulate signed int16 EGM XYZ deltas into float vertex positions using the effective morph weight.
 0x558CC3: cmp     esi, [ebp+8]
 0x558CC6: jb      short loc_558CCD
 0x558CC8: call    __invalid_parameter_noinfo
 0x558CCD: movsx   edx, word ptr [esi+2]
-0x558CD1: mov     eax, [esp+88h+arg_C]
+0x558CD1: mov     eax, [esp+88h+basePositions]
 0x558CD8: mov     [esp+88h+var_44], edx
 0x558CDC: fild    [esp+88h+var_44]
 0x558CE0: fmul    [esp+88h+var_74]
@@ -365,16 +363,16 @@
 0x558CED: jb      short loc_558CF4
 0x558CEF: call    __invalid_parameter_noinfo
 0x558CF4: movsx   ecx, word ptr [esi+4]
-0x558CF8: mov     edx, [esp+88h+arg_C]
+0x558CF8: mov     edx, [esp+88h+basePositions]
 0x558CFF: mov     [esp+88h+var_44], ecx
 0x558D03: add     edi, 0Ch
 0x558D06: fild    [esp+88h+var_44]
 0x558D0A: fmul    [esp+88h+var_74]
 0x558D0E: fadd    dword ptr [edx+8]
 0x558D11: fstp    dword ptr [edi-4]
-0x558D14: mov     eax, [esp+88h+var_2C]
+0x558D14: mov     eax, [esp+88h+outVertices.stride]
 0x558D18: imul    eax, [esp+88h+var_70]
-0x558D1D: add     eax, [esp+88h+var_30]
+0x558D1D: add     eax, [esp+88h+outVertices.data]
 0x558D21: mov     ecx, [ebx]
 0x558D23: mov     [eax], ecx
 0x558D25: mov     edx, [ebx+4]
@@ -404,7 +402,7 @@
 0x558D7D: jb      short loc_558D84
 0x558D7F: call    __invalid_parameter_noinfo
 0x558D84: movsx   ecx, word ptr [esi]
-0x558D87: mov     edx, [esp+88h+arg_C]
+0x558D87: mov     edx, [esp+88h+basePositions]
 0x558D8E: mov     eax, [esp+88h+var_40]
 0x558D92: mov     [esp+88h+var_44], ecx
 0x558D96: fild    [esp+88h+var_44]
@@ -415,7 +413,7 @@
 0x558DA5: jb      short loc_558DAC
 0x558DA7: call    __invalid_parameter_noinfo
 0x558DAC: movsx   ecx, word ptr [esi+2]
-0x558DB0: mov     edx, [esp+88h+arg_C]
+0x558DB0: mov     edx, [esp+88h+basePositions]
 0x558DB7: mov     eax, [esp+88h+var_40]
 0x558DBB: mov     [esp+88h+var_44], ecx
 0x558DBF: fild    [esp+88h+var_44]
@@ -426,7 +424,7 @@
 0x558DD0: jb      short loc_558DD7
 0x558DD2: call    __invalid_parameter_noinfo
 0x558DD7: movsx   ecx, word ptr [esi+4]
-0x558DDB: mov     edx, [esp+88h+arg_C]
+0x558DDB: mov     edx, [esp+88h+basePositions]
 0x558DE2: mov     eax, [esp+88h+var_40]
 0x558DE6: mov     [esp+88h+var_44], ecx
 0x558DEA: add     edi, 0Ch
@@ -444,7 +442,7 @@
 0x558E16: xor     ebx, ebx
 0x558E18: cmp     [esp+88h+var_6C], ecx
 0x558E1C: jbe     loc_559122
-0x558E22: mov     edi, [esp+88h+arg_C]
+0x558E22: mov     edi, [esp+88h+basePositions]
 0x558E29: add     edi, 8
 0x558E2C: cmp     [esp+88h+var_40], 0
 0x558E31: jnz     short loc_558E38
@@ -474,13 +472,13 @@
 0x558E87: mov     ecx, [esp+88h+var_18]
 0x558E8B: mov     edx, [esp+88h+var_14]
 0x558E8F: mov     [esp+88h+var_44], eax
-0x558E93: mov     eax, [esp+88h+var_2C]
+0x558E93: mov     eax, [esp+88h+outVertices.stride]
 0x558E97: fild    [esp+88h+var_44]
 0x558E9B: imul    eax, ebx
 0x558E9E: fmul    [esp+88h+var_74]
 0x558EA2: fadd    dword ptr [edi]
 0x558EA4: fstp    [esp+88h+var_10]
-0x558EA8: add     eax, [esp+88h+var_30]
+0x558EA8: add     eax, [esp+88h+outVertices.data]
 0x558EAC: mov     [eax], ecx
 0x558EAE: mov     ecx, [esp+88h+var_10]
 0x558EB2: mov     [eax+4], edx
@@ -531,9 +529,9 @@
 0x558F54: fmul    [esp+88h+var_74]
 0x558F58: fadd    dword ptr [edi-4]
 0x558F5B: fstp    dword ptr [edi-4]
-0x558F5E: mov     eax, [esp+88h+var_2C]
+0x558F5E: mov     eax, [esp+88h+outVertices.stride]
 0x558F62: imul    eax, [esp+88h+var_70]
-0x558F67: add     eax, [esp+88h+var_30]
+0x558F67: add     eax, [esp+88h+outVertices.data]
 0x558F6B: mov     edx, [ebx]
 0x558F6D: mov     [eax], edx
 0x558F6F: mov     ecx, [ebx+4]
@@ -601,9 +599,9 @@
 0x55904D: cmp     [esp+88h+var_6C], ecx
 0x559051: jbe     loc_559122
 0x559057: mov     ebx, [esp+88h+var_6C]
-0x55905B: mov     eax, [esp+88h+var_2C]
+0x55905B: mov     eax, [esp+88h+outVertices.stride]
 0x55905F: imul    eax, edi
-0x559062: add     eax, [esp+88h+var_30]
+0x559062: add     eax, [esp+88h+outVertices.data]
 0x559066: cmp     [esp+88h+var_40], 0
 0x55906B: mov     edx, [eax]
 0x55906D: mov     ecx, [eax+4]
@@ -635,10 +633,10 @@
 0x5590CC: jb      short loc_5590D3
 0x5590CE: call    __invalid_parameter_noinfo
 0x5590D3: movsx   edx, word ptr [esi+4]
-0x5590D7: mov     eax, [esp+88h+var_2C]
+0x5590D7: mov     eax, [esp+88h+outVertices.stride]
 0x5590DB: mov     ecx, [esp+88h+var_24]
 0x5590DF: imul    eax, edi
-0x5590E2: add     eax, [esp+88h+var_30]
+0x5590E2: add     eax, [esp+88h+outVertices.data]
 0x5590E6: mov     [esp+88h+var_44], edx
 0x5590EA: mov     edx, [esp+88h+var_20]
 0x5590EE: fild    [esp+88h+var_44]
@@ -665,14 +663,14 @@
 0x55913B: add     esi, 1
 0x55913E: cmp     esi, 2
 0x559141: mov     [esp+88h+var_50], esi
-0x559145: jb      loc_558AC0
-0x55914B: mov     ecx, [esp+88h+arg_4]
+0x559145: jb      loc_558AC0; EGM geometry deformation consumes exactly FaceGen matrices 0 and 1; matrices 2 and 3 are never vertex inputs.
+0x55914B: mov     ecx, [esp+88h+geometry]
 0x559152: mov     eax, [ecx+0B4h]
 0x559158: cmp     dword ptr [eax+1Ch], 0
 0x55915C: jz      short loc_559163
-0x55915E: or      word ptr [eax+2Eh], 1
-0x559163: mov     ecx, [ecx+0B4h]
-0x559169: call    sub_728B20
+0x55915E: or      word ptr [eax+2Eh], 1; After EGM position writes, mark only the vertex channel dirty. The local NiGeometryData bounding sphere is not recomputed.
+0x559163: mov     ecx, [ecx+0B4h]; self
+0x559169: call    NiGeometryData_UnlockVertexStream; The sole successful-path vertex-stream unlock in ApplyEGMMorph.
 0x55916E: mov     edx, [esp+88h+Destination]
 0x559172: push    1; Comperand
 0x559174: push    0; Exchange
@@ -680,3 +678,17 @@
 0x559177: call    dword ptr ds:0A2813Ch
 0x55917D: mov     al, 1
 0x55917F: jmp     loc_558AFD
+0x9BC7E0: mov     eax, [ebp-44h]
+0x9BC7E3: push    eax
+0x9BC7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BC7E9: pop     ecx
+0x9BC7EA: retn
+0x9BC7EB: lea     ecx, [ebp-38h]
+0x9BC7EE: jmp     sub_5563B0
+0x9BC7F3: mov     edx, [esp+geometry]
+0x9BC7F7: lea     eax, [edx-78h]
+0x9BC7FA: mov     ecx, [edx-7Ch]
+0x9BC7FD: xor     ecx, eax
+0x9BC7FF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC804: mov     eax, offset stru_AE6410
+0x9BC809: jmp     ___CxxFrameHandler3

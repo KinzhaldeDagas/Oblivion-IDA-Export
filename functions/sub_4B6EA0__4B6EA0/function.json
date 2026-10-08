@@ -1,19 +1,32 @@
 {
-  "callees_count": 62,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 30,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B6EA0",
+      "0x4B7120"
+    ]
+  ],
+  "chunks_sha256": "a50df0bc24d7f9c6da32db86dfd57df72545466f1f7c832cd497141a6bd6a4c6",
+  "comment_regular": "Verified TESObjectDOOR LoadForm vtable override (TESObjectDOOR vtable slot +0x1C at 0xA44A70). Checks record type 0x18, loads standard door subrecords, and for TNAM (record chunk code 0x4D414E54) reads each 4-byte FormID and pushes it into super.randomTeleport. This loader stores unresolved IDs; TESObjectDOOR_DoPostFixup performs the resolution.",
+  "comment_repeatable": "Verified TESObjectDOOR LoadForm vtable override (TESObjectDOOR vtable slot +0x1C at 0xA44A70). Checks record type 0x18, loads standard door subrecords, and for TNAM (record chunk code 0x4D414E54) reads each 4-byte FormID and pushes it into super.randomTeleport. This loader stores unresolved IDs; TESObjectDOOR_DoPostFixup performs the resolution.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_4B6EA0",
+  "display_name": "TESObjectDOOR_LoadForm",
   "end_ea": "0x4B7120",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4B6EA0",
+  "name": "TESObjectDOOR_LoadForm",
   "segment": ".text",
   "sha256": "a50df0bc24d7f9c6da32db86dfd57df72545466f1f7c832cd497141a6bd6a4c6",
   "size": 640,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B6EA0",
-  "type": "char __thiscall(TESForm *this, Data *)",
+  "total_chunk_size": 640,
+  "type": "char __thiscall(TESObjectDOOR *this, Data *file)",
   "xrefs_from_count": 265,
   "xrefs_to_count": 1
 }

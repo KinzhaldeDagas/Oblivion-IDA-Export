@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x674F70",
+      "0x674FCE"
+    ]
+  ],
+  "chunks_sha256": "adf3ceb7f02b7373cfc6cce0fa286e50a820d53e41376647556b6bd081ec4f54",
+  "comment_regular": "Verified: scans six lists, unlinks matching target08 records then calls destructor/free. In-loop traversal/restart behavior preserved, not normalized.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_674F70",
+  "display_name": "ActorProcessManager_RemoveCrimesForTarget",
   "end_ea": "0x674FCE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_674F70",
+  "name": "ActorProcessManager_RemoveCrimesForTarget",
   "segment": ".text",
   "sha256": "adf3ceb7f02b7373cfc6cce0fa286e50a820d53e41376647556b6bd081ec4f54",
   "size": 94,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x674F70",
-  "type": "int *__thiscall(int **this, int)",
+  "total_chunk_size": 94,
+  "type": "void __thiscall(ActorProcessManager *self, TESObjectREFR *target)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 1
 }

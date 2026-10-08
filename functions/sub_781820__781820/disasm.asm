@@ -1,4 +1,4 @@
-0x781820: sub     esp, 0Ch
+0x781820: sub     esp, 0Ch; Creates an Oblivion NiD3DHLSLPixelShader: chooses default entry 'main' and the device pixel profile, compiles the source, creates the D3D9 shader object, and retains source/bytecode/profile/constant-table metadata.
 0x781823: push    ebx
 0x781824: push    esi
 0x781825: push    edi
@@ -21,7 +21,7 @@
 0x78185B: mov     [esi+30h], edi
 0x78185E: mov     [esi+34h], edi
 0x781861: mov     [esp+18h+var_4], edi
-0x781865: mov     [esp+18h+var_C], edi
+0x781865: mov     [esp+18h+bytecode], edi
 0x781869: mov     [esp+18h+var_8], edi
 0x78186D: jnz     short loc_781877
 0x78186F: mov     [esp+18h+arg_8], offset aMain; "main"
@@ -39,13 +39,13 @@
 0x781897: lea     eax, [esp+20h+var_4]
 0x78189B: push    eax
 0x78189C: mov     eax, [esp+24h+arg_0]
-0x7818A0: lea     ecx, [esp+24h+var_C]
+0x7818A0: lea     ecx, [esp+24h+bytecode]
 0x7818A4: push    ecx
 0x7818A5: push    ebp
 0x7818A6: push    edx
 0x7818A7: push    eax
 0x7818A8: mov     ecx, ebx
-0x7818AA: call    sub_781170
+0x7818AA: call    NiD3DShaderProgramCreatorHLSL__CompileShaderFromFile; Oblivion-authoritative HLSL compiler path: resolves the shader file, calls D3DXCompileShaderFromFileA with entry/profile and creator flags, returns a heap copy of bytecode plus the optional constant table, and reports compiler diagnostics.
 0x7818AF: test    al, al
 0x7818B1: jnz     short loc_7818D4
 0x7818B3: mov     edx, [esi]
@@ -66,14 +66,14 @@
 0x7818CD: pop     ebx
 0x7818CE: add     esp, 0Ch
 0x7818D1: retn    10h
-0x7818D4: mov     ecx, [esp+1Ch+var_C]
-0x7818D8: push    ecx
+0x7818D4: mov     ecx, [esp+1Ch+bytecode]
+0x7818D8: push    ecx; bytecode
 0x7818D9: mov     ecx, ebx
-0x7818DB: call    sub_783C30
+0x7818DB: call    NiDX9Renderer__CreatePixelShader; Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x7818E0: mov     edi, eax
 0x7818E2: test    edi, edi
 0x7818E4: jnz     short loc_781911
-0x7818E6: mov     edx, dword ptr [esp+1Ch+ArgList]
+0x7818E6: mov     edx, [esp+1Ch+ArgList]
 0x7818EA: push    edx; ArgList
 0x7818EB: push    offset aFailedCreatepi; "Failed CreatePixelShader call on %s\n"
 0x7818F0: push    eax; int
@@ -92,7 +92,7 @@
 0x78190A: pop     ebx
 0x78190B: add     esp, 0Ch
 0x78190E: retn    10h
-0x781911: mov     ecx, dword ptr [esp+1Ch+ArgList]
+0x781911: mov     ecx, [esp+1Ch+ArgList]
 0x781915: mov     eax, [esi]
 0x781917: mov     edx, [eax+8]
 0x78191A: push    ecx
@@ -104,7 +104,7 @@
 0x781928: push    ecx
 0x781929: mov     ecx, esi
 0x78192B: call    edx
-0x78192D: mov     ecx, [esp+1Ch+var_C]
+0x78192D: mov     ecx, [esp+1Ch+bytecode]
 0x781931: mov     eax, [esi]
 0x781933: mov     edx, [esp+1Ch+var_4]
 0x781937: mov     eax, [eax+1Ch]

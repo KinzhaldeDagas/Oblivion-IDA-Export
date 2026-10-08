@@ -1,4 +1,4 @@
-0x57B370: push    ecx
+0x57B370: push    ecx; Native skill-mastery perk presentation entry that opens skill_perk.xml with typed varargs. Synthetic Medium Armor mastery feedback should use this path, with ordinary HUD text only as fallback.
 0x57B371: push    1; arg1
 0x57B373: push    0; canCreate
 0x57B375: call    InterfaceManager_GetSingleton

@@ -44,18 +44,18 @@
 0x5F1463: test    eax, eax
 0x5F1465: jz      short loc_5F1477
 0x5F1467: push    eax
-0x5F1468: call    FormHeapFree
+0x5F1468: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F146D: mov     edi, [edi+4]
 0x5F1470: add     esp, 4
 0x5F1473: test    edi, edi
 0x5F1475: jnz     short loc_5F1461
 0x5F1477: mov     ecx, ebp
-0x5F1479: call    BSSimpleList_Clear
+0x5F1479: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5F147E: push    esi
-0x5F147F: mov     ecx, offset unk_B3BD7C
+0x5F147F: mov     ecx, (offset qword_B3BB2C+250h)
 0x5F1484: call    sub_642B40
 0x5F1489: mov     ecx, esi; int
-0x5F148B: call    sub_5EAE70
+0x5F148B: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5F1490: mov     ecx, ds:0B33A98h
 0x5F1496: mov     al, [ecx+0CD4h]
 0x5F149C: test    al, al
@@ -69,14 +69,14 @@
 0x5F14B2: mov     ecx, esi
 0x5F14B4: call    sub_65A050
 0x5F14B9: push    esi
-0x5F14BA: mov     ecx, offset ActorProcessManager_ptr
+0x5F14BA: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5F14BF: call    sub_679C10
 0x5F14C4: push    esi
-0x5F14C5: mov     ecx, offset dword_B3BDB0
+0x5F14C5: mov     ecx, (offset qword_B3BB2C+284h)
 0x5F14CA: call    sub_67BF00
-0x5F14CF: push    esi
-0x5F14D0: mov     ecx, offset ActorProcessManager_ptr
-0x5F14D5: call    sub_676F90
+0x5F14CF: push    esi; actor
+0x5F14D0: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x5F14D5: call    ActorProcessManager_RemoveActorFromCrimes
 0x5F14DA: mov     ecx, [esi+58h]
 0x5F14DD: test    ecx, ecx
 0x5F14DF: jz      short loc_5F151D
@@ -91,7 +91,7 @@
 0x5F14F5: call    eax
 0x5F14F7: test    eax, eax
 0x5F14F9: jnz     short loc_5F1516
-0x5F14FB: call    InitBSShaderAccumulator
+0x5F14FB: call    BSShaderAccumulator_GetOrCreateGlobal
 0x5F1500: test    eax, eax
 0x5F1502: jz      short loc_5F150F
 0x5F1504: mov     ecx, [esi+0Ch]
@@ -103,19 +103,19 @@
 0x5F1516: mov     ecx, esi
 0x5F1518: call    sub_5F0750
 0x5F151D: push    esi
-0x5F151E: mov     ecx, offset ActorProcessManager_ptr
+0x5F151E: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5F1523: call    sub_674E10
 0x5F1528: mov     ecx, esi
 0x5F152A: call    sub_5E7B90
-0x5F152F: lea     ecx, [esi+88h]
+0x5F152F: lea     ecx, [esi+88h]; self
 0x5F1535: call    AVCollection_ClearArrayAndList
 0x5F153A: push    0; a2
 0x5F153C: mov     ecx, esi; this
 0x5F153E: call    TESObjectREFR_Set3D
-0x5F1543: lea     ecx, [esi+88h]
+0x5F1543: lea     ecx, [esi+88h]; self
 0x5F1549: mov     byte ptr [esp+2Ch+var_4], 2
 0x5F154E: call    AVCollection_destr
-0x5F1553: lea     ecx, [esi+68h]
+0x5F1553: lea     ecx, [esi+68h]; this
 0x5F1556: mov     byte ptr [esp+2Ch+var_4], 1
 0x5F155B: call    MagicTarget_destr
 0x5F1560: mov     ecx, ebx
@@ -133,3 +133,33 @@
 0x5F158A: pop     ebx
 0x5F158B: add     esp, 18h
 0x5F158E: retn
+0x9C27D0: mov     ecx, [ebp-10h]
+0x9C27D3: jmp     MobileObject_destr
+0x9C27D8: cmp     dword ptr [ebp-10h], 0
+0x9C27DC: jz      loc_9C27F0
+0x9C27E2: mov     eax, [ebp-10h]
+0x9C27E5: add     eax, 5Ch ; '\'
+0x9C27E8: mov     [ebp-14h], eax
+0x9C27EB: jmp     loc_9C27F7
+0x9C27F0: mov     dword ptr [ebp-14h], 0
+0x9C27F7: mov     ecx, [ebp-14h]
+0x9C27FA: jmp     MagicCaster_destr
+0x9C27FF: cmp     dword ptr [ebp-10h], 0
+0x9C2803: jz      loc_9C2817
+0x9C2809: mov     eax, [ebp-10h]
+0x9C280C: add     eax, 68h ; 'h'
+0x9C280F: mov     [ebp-18h], eax
+0x9C2812: jmp     loc_9C281E
+0x9C2817: mov     dword ptr [ebp-18h], 0
+0x9C281E: mov     ecx, [ebp-18h]; this
+0x9C2821: jmp     MagicTarget_destr
+0x9C2826: mov     ecx, [ebp-10h]
+0x9C2829: add     ecx, 88h ; 'ˆ'; self
+0x9C282F: jmp     AVCollection_destr
+0x9C2834: mov     edx, [esp+arg_4]
+0x9C2838: lea     eax, [edx-1Ch]
+0x9C283B: mov     ecx, [edx-20h]
+0x9C283E: xor     ecx, eax
+0x9C2840: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2845: mov     eax, offset stru_AEB630
+0x9C284A: jmp     ___CxxFrameHandler3

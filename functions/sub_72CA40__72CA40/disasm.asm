@@ -15,7 +15,7 @@
 0x72CA62: test    bl, 1
 0x72CA65: jz      short loc_72CA70
 0x72CA67: push    edi
-0x72CA68: call    FormHeapFree
+0x72CA68: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72CA6D: add     esp, 4
 0x72CA70: mov     eax, edi
 0x72CA72: pop     edi
@@ -26,7 +26,7 @@
 0x72CA7D: test    bl, 1
 0x72CA80: jz      short loc_72CA8B
 0x72CA82: push    esi
-0x72CA83: call    FormHeapFree
+0x72CA83: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72CA88: add     esp, 4
 0x72CA8B: mov     eax, esi
 0x72CA8D: pop     esi

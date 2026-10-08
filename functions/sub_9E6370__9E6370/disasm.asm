@@ -2,7 +2,7 @@
 0x9E6376: push    ecx
 0x9E6377: fstp    [esp+4+var_4]; float
 0x9E637A: push    offset aFsneakbootweig; "fSneakBootWeightBase"
-0x9E637F: mov     ecx, offset fSneakBootWeightBase
+0x9E637F: mov     ecx, (offset flt_B366D8+18h)
 0x9E6384: call    GameSetting_ConstrAndReg_float
 0x9E6389: push    offset sub_A1D500; void (__cdecl *)()
 0x9E638E: call    _atexit

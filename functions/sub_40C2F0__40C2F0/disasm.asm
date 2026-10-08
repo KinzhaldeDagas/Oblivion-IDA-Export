@@ -8,7 +8,6 @@
 0x40C301: mov     eax, [edi+0ABCh]
 0x40C307: mov     edx, [esp+8+arg_0]
 0x40C30B: jmp     short loc_40C310
-0x40C30D: align 10h
 0x40C310: cmp     [eax], edx
 0x40C312: jz      short loc_40C325
 0x40C314: add     esi, 1

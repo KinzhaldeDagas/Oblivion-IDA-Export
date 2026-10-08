@@ -1,6 +1,6 @@
-0x7A6CD0: push    ecx
+0x7A6CD0: push    ecx; Oblivion Random::Raw Park-Miller step. Advances the shared integer seed with multiplier 16807 modulo 2147483647 and returns seed * 4.656612875e-10 as float.
 0x7A6CD1: fld     qword ptr ds:0B42C90h
-0x7A6CD7: call    Double_To_SInt32
+0x7A6CD7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7A6CDC: mov     ecx, eax
 0x7A6CDE: mov     eax, 834E0B5Fh
 0x7A6CE3: imul    ecx

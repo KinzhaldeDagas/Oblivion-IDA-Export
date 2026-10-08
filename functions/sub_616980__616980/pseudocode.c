@@ -1,133 +1,143 @@
-int *__userpurge sub_616980@<eax>(_DWORD *this@<ecx>, double a2@<st0>, float *a3, int a4, int a5)
+double __userpurge sub_616980@<st0>(
+        _DWORD *this@<ecx>,
+        double result@<st0>,
+        double a3@<st2>,
+        float *a4,
+        int a5,
+        int a6)
 {
-  int *v6; // eax
-  int v7; // ebp
-  int *v8; // esi
-  int *v10; // eax
-  int **v11; // ebx
-  int **v12; // eax
-  int v13; // edx
-  int v14; // eax
-  int **v15; // esi
-  float v16; // [esp+4h] [ebp-1Ch]
-  float v17; // [esp+4h] [ebp-1Ch]
-  float v18; // [esp+4h] [ebp-1Ch]
-  char v19; // [esp+1Bh] [ebp-5h]
-  int *v20; // [esp+1Ch] [ebp-4h]
+  int *v8; // eax
+  int v9; // ebp
+  char v10; // al
+  int *v11; // edx
+  int *v12; // eax
+  char v13; // al
+  int **v14; // ebx
+  int **v15; // eax
+  int *v16; // esi
+  int v17; // edx
+  int v18; // eax
+  int **v19; // esi
+  float v20; // [esp+4h] [ebp-1Ch]
+  float v21; // [esp+4h] [ebp-1Ch]
+  char v22; // [esp+1Bh] [ebp-5h]
+  int *v23; // [esp+1Ch] [ebp-4h]
 
-  v6 = (int *)*(this + 0x20);
-  v7 = 0;
-  v8 = 0;
-  v19 = 0;
-  v20 = 0;
-  if ( v6 && a4 == 4 )
+  v8 = (int *)*(this + 0x20); /*0x61698d*/
+  v9 = 0; /*0x616993*/
+  v22 = 0; /*0x616999*/
+  v23 = 0; /*0x61699e*/
+  if ( v8 && a5 == 4 ) /*0x6169a7*/
   {
-    if ( sub_613BB0(this, v6, a5, 1) )
+    v10 = CombatController_CanUseSpellAgainstCurrentTarget(this, v8, a6, 1); /*0x6169b3*/
+    v11 = (int *)*(this + 0x20); /*0x6169ba*/
+    if ( v10 ) /*0x6169c0*/
     {
-      sub_5E0970((void *)*(this + 0xF), *(_DWORD *)*(this + 0x20));
-      v16 = a2;
-      *a3 = sub_546CA0(v16);
-      return (int *)*(this + 0x20);
+LABEL_4:
+      sub_5E0970((void *)*(this + 0xF), *v11); /*0x6169c2*/
+      v20 = result; /*0x6169ce*/
+      result = sub_546CA0(v20); /*0x6169d1*/
+      *a4 = a3; /*0x6169dd*/
+      return result; /*0x6169ec*/
     }
-    v20 = (int *)*(this + 0x20);
-    v19 = 1;
+    v23 = (int *)*(this + 0x20); /*0x6169ef*/
+    v22 = 1; /*0x6169f3*/
   }
-  v10 = (int *)*(this + 0x1F);
-  if ( v10 && a4 == 3 )
+  v12 = (int *)*(this + 0x1F); /*0x6169f8*/
+  if ( v12 && a5 == 3 ) /*0x616a02*/
   {
-    if ( sub_613BB0(this, v10, a5, 1) )
-    {
-      sub_5E0970((void *)*(this + 0xF), *(_DWORD *)*(this + 0x1F));
-      v17 = a2;
-      *a3 = sub_546CA0(v17);
-      return (int *)*(this + 0x1F);
-    }
-    v20 = (int *)*(this + 0x1F);
-    v19 = 1;
+    v13 = CombatController_CanUseSpellAgainstCurrentTarget(this, v12, a6, 1); /*0x616a0e*/
+    v11 = (int *)*(this + 0x1F); /*0x616a15*/
+    if ( v13 ) /*0x616a18*/
+      goto LABEL_4; /*0x616a18*/
+    v23 = (int *)*(this + 0x1F); /*0x616a44*/
+    v22 = 1; /*0x616a48*/
   }
   else
   {
-    if ( a4 == 4 )
+    if ( a5 == 4 ) /*0x616a52*/
     {
-      v11 = (int **)*(this + 0x17);
-      goto LABEL_15;
+      v14 = (int **)*(this + 0x17); /*0x616a54*/
+      goto LABEL_14; /*0x616a57*/
     }
-    if ( a4 != 3 )
-      return v8;
+    if ( a5 != 3 ) /*0x616a5c*/
+      return result; /*0x616a5c*/
   }
-  v11 = (int **)*(this + 0x18);
-LABEL_15:
-  if ( !v11 )
-    return v8;
-  v12 = v11;
-  do
+  v14 = (int **)*(this + 0x18); /*0x616a62*/
+LABEL_14:
+  if ( !v14 ) /*0x616a67*/
+    return result; /*0x616a67*/
+  v15 = v14; /*0x616a6d*/
+  do /*0x616a7c*/
   {
-    if ( *v12 )
-      ++v7;
-    v12 = (int **)v12[1];
+    if ( *v15 ) /*0x616a70*/
+      ++v9; /*0x616a74*/
+    v15 = (int **)v15[1]; /*0x616a77*/
   }
-  while ( v12 );
-  if ( v7 == 1 )
+  while ( v15 ); /*0x616a7c*/
+  if ( v9 == 1 ) /*0x616a81*/
   {
-    v8 = *v11;
-    goto LABEL_39;
+    v16 = *v14; /*0x616a83*/
+    goto LABEL_38; /*0x616a85*/
   }
-  if ( !v7 )
-    return v8;
-  v13 = GetRandomLargeInteger_(0) % (2 * v7);
-  if ( v13 >= v7 )
-    goto LABEL_35;
-  if ( v13 )
+  if ( !v9 ) /*0x616a8c*/
+    return result; /*0x616a8c*/
+  v17 = Game_RandomLargeInteger(0) % (2 * v9); /*0x616a9e*/
+  if ( v17 >= v9 ) /*0x616aa5*/
+    goto LABEL_34; /*0x616aa5*/
+  if ( v17 ) /*0x616aa9*/
   {
-    v14 = 0;
-    v15 = v11;
-    if ( v13 > 0 )
+    v18 = 0; /*0x616ac8*/
+    v19 = v14; /*0x616acc*/
+    if ( v17 > 0 ) /*0x616ace*/
     {
-      while ( v15 )
+      while ( v19 ) /*0x616ad2*/
       {
-        v15 = (int **)v15[1];
-        if ( ++v14 >= v13 )
-          goto LABEL_31;
+        v19 = (int **)v19[1]; /*0x616ad4*/
+        if ( ++v18 >= v17 ) /*0x616adc*/
+          goto LABEL_30; /*0x616adc*/
       }
-      goto LABEL_35;
+      goto LABEL_34; /*0x616ad2*/
     }
-LABEL_31:
-    if ( v15 && sub_613BB0(this, *v15, a5, 1) )
+LABEL_30:
+    if ( v19 && CombatController_CanUseSpellAgainstCurrentTarget(this, *v19, a6, 1) ) /*0x616aee*/
     {
-      v8 = *v15;
-      goto LABEL_34;
+      v16 = *v19; /*0x616af7*/
+      goto LABEL_33; /*0x616af7*/
     }
-LABEL_35:
-    v8 = (int *)v11;
-    while ( *v8 && !sub_613BB0(this, (int *)*v8, a5, 1) )
-    {
-      v8 = (int *)v8[1];
-      if ( !v8 )
-        goto LABEL_39;
-    }
-    v8 = (int *)*v8;
-LABEL_39:
-    if ( !v8 )
-      return v8;
-    goto LABEL_40;
-  }
-  if ( sub_613BB0(this, *v11, a5, 1) )
-    v8 = *v11;
-  else
-    v8 = 0;
 LABEL_34:
-  if ( !v8 )
-    goto LABEL_35;
-LABEL_40:
-  if ( v8 == v20 && v19 )
-    return 0;
-  sub_5E0970((void *)*(this + 0xF), *v8);
-  v18 = a2;
-  *a3 = sub_546CA0(v18);
-  if ( *v8 )
-  {
-    if ( !sub_419D90((char *)*v8) )
-      sub_41A610((char *)*v8, 0);
+    v16 = (int *)v14; /*0x616afd*/
+    while ( *v16 && !CombatController_CanUseSpellAgainstCurrentTarget(this, (int *)*v16, a6, 1) ) /*0x616b16*/
+    {
+      v16 = (int *)v16[1]; /*0x616b18*/
+      if ( !v16 ) /*0x616b1d*/
+        goto LABEL_38; /*0x616b1d*/
+    }
+    v16 = (int *)*v16; /*0x616b3e*/
+LABEL_38:
+    if ( !v16 ) /*0x616b21*/
+      return result; /*0x616b21*/
+    goto LABEL_39; /*0x616b21*/
   }
-  return v8;
+  if ( CombatController_CanUseSpellAgainstCurrentTarget(this, *v14, a6, 1) ) /*0x616ab7*/
+    v16 = *v14; /*0x616ac0*/
+  else
+    v16 = 0; /*0x616ac4*/
+LABEL_33:
+  if ( !v16 ) /*0x616afb*/
+    goto LABEL_34; /*0x616afb*/
+LABEL_39:
+  if ( v16 != v23 || !v22 ) /*0x616b2e*/
+  {
+    sub_5E0970((void *)*(this + 0xF), *v16); /*0x616b4c*/
+    v21 = result; /*0x616b57*/
+    result = sub_546CA0(v21); /*0x616b5c*/
+    *a4 = a3; /*0x616b6c*/
+    if ( *v16 ) /*0x616b6e*/
+    {
+      if ( !sub_419D90((char *)*v16) ) /*0x616b77*/
+        MagicItem_LoadVFXModels((char *)*v16, 0); /*0x616b84*/
+    }
+  }
+  return result; /*0x6169e5*/
 }

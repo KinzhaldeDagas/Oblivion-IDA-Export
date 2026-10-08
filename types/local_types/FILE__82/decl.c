@@ -1,1 +1,1 @@
-FILE
+typedef _iobuf FILE;

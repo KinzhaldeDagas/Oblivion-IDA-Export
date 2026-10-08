@@ -1,47 +1,50 @@
-int __thiscall sub_55EC20(NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> **this, int a2)
+// Verified BSTreeManager.modelCacheByTree at +0: lazily creates a 37-bucket NiTPointerMap<TESObjectTREE*, NiPointer<BSTreeModel>*> and gives each tree form a one-element smart-pointer array.
+BSTreeModel_OblivionLayout_058 **__thiscall BSTreeManager_GetModelArray(
+        BSTreeManager_OblivionVerifiedLayout *this,
+        TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree)
 {
-  int v3; // esi
+  BSTreeModel_OblivionLayout_058 **v3; // esi
   NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> *v5; // eax
   NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> *v6; // eax
-  _DWORD *v7; // eax
-  NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> *v8; // ecx
-  int v9; // [esp+10h] [ebp-10h] BYREF
+  int v7; // eax
+  NiTPointerMap_TESObjectTREE_BSTreeModelArray *modelCacheByTree; // ecx
+  BSTreeModel_OblivionLayout_058 **v9; // [esp+10h] [ebp-10h] BYREF
   int v10; // [esp+1Ch] [ebp-4h]
 
-  v3 = 0;
-  v9 = 0;
-  if ( !a2 )
-    return 0;
-  if ( !*this )
+  v3 = 0; /*0x55ec4a*/
+  v9 = 0; /*0x55ec4e*/
+  if ( !tree ) /*0x55ec52*/
+    return 0; /*0x55ec54*/
+  if ( !this->modelCacheByTree ) /*0x55ec6b*/
   {
-    v5 = (NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> *)FormHeapAlloc(0x10u);
-    v10 = 0;
-    if ( v5 )
-      v6 = NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *>::NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *>(
+    v5 = (NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *> *)FormHeapAlloc(0x10u); /*0x55ec71*/
+    v10 = 0; /*0x55ec7f*/
+    if ( v5 ) /*0x55ec83*/
+      v6 = NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *>::NiTPointerMap<TESObjectTREE *,NiPointer<BSTreeModel> *>( /*0x55ec89*/
              v5,
              0x25u);
     else
-      v6 = 0;
-    v10 = 0xFFFFFFFF;
-    *this = v6;
+      v6 = 0; /*0x55ec90*/
+    v10 = 0xFFFFFFFF; /*0x55ec92*/
+    this->modelCacheByTree = v6; /*0x55ec9a*/
   }
-  if ( NiTMap_GetAt(*this, a2, &v9) )
-    return v9;
-  v7 = (_DWORD *)FormHeapAlloc(8u);
-  v10 = 1;
-  if ( v7 )
+  if ( NiTMap_GetAt(this->modelCacheByTree, (int)tree, &v9) ) /*0x55eca4*/
+    return v9; /*0x55ecad*/
+  v7 = FormHeapAlloc(8u); /*0x55ecc8*/
+  v10 = 1; /*0x55ecd6*/
+  if ( v7 ) /*0x55ecde*/
   {
-    v3 = (int)(v7 + 1);
-    *v7 = 1;
-    ArrayConstructor(
-      v7 + 1,
+    v3 = (BSTreeModel_OblivionLayout_058 **)(v7 + 4); /*0x55ecec*/
+    *(_DWORD *)v7 = 1; /*0x55ecf2*/
+    ArrayConstructor( /*0x55ecf8*/
+      (char *)(v7 + 4),
       4u,
       1,
-      (int)Concurrency::details::_NonReentrantLock::_Release,
-      (void (__thiscall *)(void *))sub_7016A0);
+      (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+      (void (__thiscall *)(void *))NiPointerSlot_Release);
   }
-  v8 = *this;
-  v10 = 0xFFFFFFFF;
-  NiTMap_SetAt(v8, a2, v3);
-  return v3;
+  modelCacheByTree = this->modelCacheByTree; /*0x55ecfd*/
+  v10 = 0xFFFFFFFF; /*0x55ed01*/
+  NiTMap_SetAt(modelCacheByTree, (int)tree, (int)v3); /*0x55ed09*/
+  return v3; /*0x55ec56*/
 }

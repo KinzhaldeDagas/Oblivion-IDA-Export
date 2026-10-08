@@ -26,3 +26,35 @@
 0x414AAD: jnz     short loc_414AA0
 0x414AAF: cmp     esi, edx
 0x414AB1: jz      short loc_414ABB
+0x414ABB: cmp     dword ptr [ebx+4], 0
+0x414ABF: jnz     short loc_414AC6
+0x414AC1: cmp     dword ptr [ebx], 0
+0x414AC4: jz      short EffectItemList_CompareTo___Return_0
+0x414AC6: test    ecx, ecx
+0x414AC8: mov     esi, ecx
+0x414ACA: jz      short EffectItemList_CompareTo___Return_0
+0x414ACC: lea     esp, [esp+0]
+0x414AD0: mov     ecx, [esi+4]
+0x414AD3: test    ecx, ecx
+0x414AD5: mov     eax, [edi+4]
+0x414AD8: jz      short loc_414AE8
+0x414ADA: test    eax, eax
+0x414ADC: jz      short loc_414AE8
+0x414ADE: push    eax
+0x414ADF: call    EffectItem_CompareTo
+0x414AE4: test    al, al
+0x414AE6: jnz     short EffectItemList_CompareTo___Return_1
+0x414AE8: mov     esi, [esi+8]
+0x414AEB: test    esi, esi
+0x414AED: jz      short loc_414AF4
+0x414AEF: add     esi, 0FFFFFFFCh
+0x414AF2: jmp     short loc_414AF6
+0x414AF4: xor     esi, esi
+0x414AF6: mov     edi, [edi+8]
+0x414AF9: test    edi, edi
+0x414AFB: jz      short loc_414B02
+0x414AFD: add     edi, 0FFFFFFFCh
+0x414B00: jmp     short loc_414B04
+0x414B02: xor     edi, edi
+0x414B04: test    esi, esi
+0x414B06: jnz     short loc_414AD0

@@ -24,7 +24,7 @@
 0x7816B5: mov     [esi+3Ch], edi
 0x7816B8: mov     [esi+40h], edi
 0x7816BB: mov     [esp+18h+var_4], edi
-0x7816BF: mov     [esp+18h+var_C], edi
+0x7816BF: mov     [esp+18h+bytecode], edi
 0x7816C3: mov     [esp+18h+var_8], edi
 0x7816C7: jnz     short loc_7816D1
 0x7816C9: mov     [esp+18h+arg_C], offset aMain; "main"
@@ -40,7 +40,7 @@
 0x7816F0: lea     eax, [esp+1Ch+var_4]
 0x7816F4: push    eax
 0x7816F5: mov     eax, [esp+20h+arg_C]
-0x7816F9: lea     ecx, [esp+20h+var_C]
+0x7816F9: lea     ecx, [esp+20h+bytecode]
 0x7816FD: push    ecx
 0x7816FE: mov     ecx, [esp+24h+arg_4]
 0x781702: push    edx
@@ -63,22 +63,22 @@
 0x781723: pop     ebp
 0x781724: add     esp, 0Ch
 0x781727: retn    20h ; ' '
-0x78172A: mov     eax, [esp+18h+arg_18]
-0x78172E: mov     edx, [esp+18h+var_C]
+0x78172A: mov     eax, [esp+18h+unused3]
+0x78172E: mov     edx, [esp+18h+bytecode]
 0x781732: push    ebx
-0x781733: mov     ebx, [esp+1Ch+arg_1C]
-0x781737: push    ebx
-0x781738: push    edi
-0x781739: push    edi
-0x78173A: push    eax
-0x78173B: lea     ecx, [esp+2Ch+arg_14]
-0x78173F: push    ecx
-0x781740: push    edx
+0x781733: mov     ebx, [esp+1Ch+unused6]
+0x781737: push    ebx; unused6
+0x781738: push    edi; unused5
+0x781739: push    edi; unused4
+0x78173A: push    eax; unused3
+0x78173B: lea     ecx, [esp+2Ch+unused2]
+0x78173F: push    ecx; unused2
+0x781740: push    edx; bytecode
 0x781741: mov     ecx, ebp
-0x781743: call    sub_783BF0
+0x781743: call    NiDX9Renderer__CreateVertexShader; Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x781748: mov     edi, eax
 0x78174A: test    edi, edi
-0x78174C: mov     eax, dword ptr [esp+1Ch+ArgList]
+0x78174C: mov     eax, [esp+1Ch+ArgList]
 0x781750: push    eax; ArgList
 0x781751: jnz     short loc_781779
 0x781753: push    offset aFailedCreateve; "Failed CreateVertexShader call on %s\n"
@@ -107,7 +107,7 @@
 0x781787: push    0
 0x781789: mov     ecx, esi
 0x78178B: call    edx
-0x78178D: mov     ecx, [esp+1Ch+var_C]
+0x78178D: mov     ecx, [esp+1Ch+bytecode]
 0x781791: mov     eax, [esi]
 0x781793: mov     edx, [esp+1Ch+var_4]
 0x781797: mov     eax, [eax+1Ch]
@@ -126,7 +126,7 @@
 0x7817B0: mov     ecx, esi
 0x7817B2: call    eax
 0x7817B4: mov     edx, [esi]
-0x7817B6: mov     eax, [esp+1Ch+arg_18]
+0x7817B6: mov     eax, [esp+1Ch+unused3]
 0x7817BA: mov     edx, [edx+3Ch]
 0x7817BD: push    eax
 0x7817BE: mov     ecx, esi

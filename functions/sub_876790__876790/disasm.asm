@@ -30,7 +30,7 @@
 0x8767E4: mov     ecx, esi
 0x8767E6: call    edx
 0x8767E8: mov     eax, [edi+24h]
-0x8767EB: mov     ecx, [esp+20h+arg_C]
+0x8767EB: mov     ecx, [esp+20h+value]
 0x8767EF: mov     ebx, [eax]
 0x8767F1: mov     edx, [ecx]
 0x8767F3: mov     eax, [edx+88h]
@@ -63,7 +63,7 @@
 0x876838: push    ebp; lpAddend
 0x876839: call    dword ptr ds:0A28078h
 0x87683F: mov     edx, [edi+24h]
-0x876842: mov     eax, [esp+20h+arg_C]
+0x876842: mov     eax, [esp+20h+value]
 0x876846: mov     ebx, [edx+4]
 0x876849: push    0
 0x87684B: push    eax
@@ -101,7 +101,7 @@
 0x8768A0: mov     ebx, [ebp+4]
 0x8768A3: cmp     ebx, eax
 0x8768A5: mov     ecx, eax
-0x8768A7: mov     [esp+20h+arg_C], ecx
+0x8768A7: mov     [esp+20h+value], ecx
 0x8768AB: jz      short loc_8768E2
 0x8768AD: test    ebx, ebx
 0x8768AF: jz      short loc_8768D1
@@ -117,7 +117,7 @@
 0x8768C7: push    1
 0x8768C9: mov     ecx, ebx
 0x8768CB: call    eax
-0x8768CD: mov     ecx, [esp+20h+arg_C]
+0x8768CD: mov     ecx, [esp+20h+value]
 0x8768D1: test    ecx, ecx
 0x8768D3: mov     [ebp+4], ecx
 0x8768D6: jz      short loc_8768E2
@@ -126,20 +126,20 @@
 0x8768DC: call    dword ptr ds:0A28078h
 0x8768E2: mov     ebx, 1
 0x8768E7: add     [edi+60h], ebx
-0x8768EA: mov     [esp+20h+arg_C], edi
+0x8768EA: mov     [esp+20h+value], edi
 0x8768EE: mov     edx, [esi+38h]
-0x8768F1: lea     ecx, [esp+20h+arg_C]
-0x8768F5: push    ecx
-0x8768F6: push    edx
-0x8768F7: lea     ecx, [esi+40h]
+0x8768F1: lea     ecx, [esp+20h+value]
+0x8768F5: push    ecx; value
+0x8768F6: push    edx; index
+0x8768F7: lea     ecx, [esi+40h]; this
 0x8768FA: mov     [esp+28h+var_4], 0
-0x876902: call    sub_76CE40
+0x876902: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x876907: or      eax, 0FFFFFFFFh
 0x87690A: add     [edi+60h], eax
 0x87690D: mov     [esp+20h+var_4], eax
 0x876911: jnz     short loc_87691A
 0x876913: mov     ecx, edi
-0x876915: call    sub_7604D0
+0x876915: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x87691A: add     [esi+38h], ebx
 0x87691D: mov     ecx, [esp+20h+var_C]
 0x876921: mov     large fs:0, ecx
@@ -150,3 +150,12 @@
 0x87692C: pop     ebx
 0x87692D: add     esp, 0Ch
 0x876930: retn    10h
+0x9D3390: lea     ecx, [ebp+10h]; void *
+0x9D3393: jmp     sub_4027D0
+0x9D3398: mov     edx, [esp+arg_4]
+0x9D339C: lea     eax, [edx-10h]
+0x9D339F: mov     ecx, [edx-14h]
+0x9D33A2: xor     ecx, eax
+0x9D33A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D33A9: mov     eax, offset stru_AFB7C0
+0x9D33AE: jmp     ___CxxFrameHandler3

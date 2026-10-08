@@ -1,13 +1,11 @@
-char __usercall sub_521B60@<al>(char a1@<bpl>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+void __usercall sub_521B60(double a1@<st2>, double a2@<st1>, double a3@<st0>)
 {
-  char v4; // al
-  TESObjectREFR *v5; // ecx
-  char result; // al
+  unsigned __int8 v3; // al
+  TESObjectREFR *v4; // ecx
 
-  v4 = sub_578D70(a1, a2, a3, a4);
-  v5 = (TESObjectREFR *)dword_B362D0;
-  dword_B362CC = 2 - (v4 != 1);
-  result = ActivateRef(v5, a2, a3, a4, (TESObjectREFR *)TESDataHandler_g_PlayerRef, 0, 0, 1);
-  dword_B362D0 = 0;
-  return result;
+  v3 = InterfaceManager_ConsumeMessageButton(); /*0x521b60*/
+  v4 = (TESObjectREFR *)dword_B361CC[0x41]; /*0x521b65*/
+  dword_B361CC[0x40] = 2 - (v3 != 1); /*0x521b7a*/
+  ActivateRef(v4, a1, a2, a3, (TESObjectREFR *)reference, 0, 0, 1); /*0x521b85*/
+  dword_B361CC[0x41] = 0; /*0x521b8a*/
 }

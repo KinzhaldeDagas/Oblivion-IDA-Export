@@ -1,1 +1,1 @@
-IDirectSoundBuffer_0
+typedef IDirectSoundBuffer IDirectSoundBuffer_0;

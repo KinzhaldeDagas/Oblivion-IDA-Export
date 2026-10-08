@@ -1,2291 +1,1535 @@
-void __userpurge Player_OnInput(
-        PlayerCharacter *this@<ecx>,
-        double st0_0@<st7>,
-        double a3@<st6>,
-        double a4@<st5>,
-        double a5@<st4>,
-        double a6@<st3>,
-        double a7@<st2>,
-        double a8@<st1>,
-        double a9@<st0>,
-        float a2)
+// [Controller decode 2026-07-09] Player input update. Uses joystick index 0 for look/movement axes. Look axes combine with mouse look; movement axes synthesize logical movement control presses.
+//
+// [Controller decode 2026-07-09] Central decoded PC controller/joystick/IsXBox summary is stored in IDB netnode "$ ControllerStuff"; full external doc is C:\src\OblivionIDA\ControllerStuff.md.
+//
+// [Controller decode 2026-07-09] Controller decode completion estimate stored in IDB netnode "$ ControllerStuff" sup 200. Current overall decoded PC Controller/IsXBox/Joystick knowledge is about 92%.
+//
+// [Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode "$ ControllerStuff" sup 1000..1065; metadata at sup 999; completion estimate at sup 200.
+//
+// [Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode "$ ControllerStuff" sup 1000..1067; metadata at sup 999; completion estimate at sup 200.
+void __thiscall Player_OnInput(PlayerCharacter *this, float deltaTime)
 {
-  SceneGraph *v10; // edx
+  double v2; // st0
+  double v3; // st1
+  double v4; // st2
+  double v5; // st3
+  double v6; // st4
+  double v7; // st5
+  double v8; // st6
+  _DWORD **v9; // edx
   InputGlobal *input; // ecx
-  Actor *v15; // edi
+  Actor *v12; // edi
   bhkCharacterProxy *CharProxy; // eax
-  LowProcess_vtbl *v17; // edx
-  UInt32 v22; // esi
+  bool v14; // c0
+  LowProcess_vtbl *v15; // edx
+  double v16; // st7
+  UInt32 v17; // esi
   InterfaceManager *Singleton; // eax
   TESObjectREFR *ObjectToActivate; // ecx
-  Actor *v25; // eax
+  Actor *v20; // eax
   LowProcess *process; // ecx
-  __int16 v27; // si
+  __int16 v22; // si
+  double v23; // st7
   LONG MouseAxisMovement; // esi
-  LONG v37; // edi
-  __int64 v38; // rdi
-  bool v41; // al
-  double v52; // st7
+  LONG v25; // edi
+  int JoystickAxisMovement; // eax
+  __int64 v27; // rdi
+  double v28; // st6
+  bool v29; // al
+  double v30; // st7
+  double AimPitch; // st7
+  double v32; // st6
+  double v33; // st7
   TESPackage *editorPackage; // ecx
-  int v58; // eax
-  char v67; // al
-  int v68; // ecx
-  UInt8 v69; // al
-  NiAVObjectVtbl *vtbl; // eax
-  float v71; // edx
-  void (__thiscall **p_DumpAttributes)(NiObject *, void *); // esi
-  float v73; // eax
+  int v35; // eax
+  char v36; // al
+  int v37; // ecx
+  UInt8 v38; // al
+  int v39; // eax
+  float v40; // edx
+  const void *v41; // esi
+  float v42; // eax
   TESForm::FormFlags flags; // ecx
-  float v75; // edx
-  int v76; // eax
-  int v77; // esi
-  int v81; // ecx
-  int v82; // edi
-  InputGlobal *v87; // edi
-  double v88; // st7
-  int v89; // eax
-  int v90; // eax
-  int v91; // eax
-  int v92; // eax
-  int v93; // eax
-  MobileObject *v94; // esi
-  __int16 v95; // ax
-  PlayerCharacterVtbl *v104; // edx
+  double v44; // st6
+  int v45; // eax
+  int v46; // esi
+  int v47; // ecx
+  int v48; // edi
+  InputGlobal *v49; // edi
+  double v50; // st5
+  double v51; // st6
+  double v52; // st7
+  int v53; // eax
+  int v54; // eax
+  int v55; // eax
+  int v56; // eax
+  int v57; // eax
+  MobileObject *v58; // esi
+  __int16 v59; // ax
+  PlayerCharacterVtbl *vtbl; // edx
   UInt8 (__thiscall *GetKnockedState)(TESObjectREFR *); // eax
   UInt32 unk57CState; // eax
+  int *v63; // eax
+  TESFormVtbl **v64; // eax
   TESObjectBOOK *book; // eax
-  MagicCasterVtbl *v119; // edi
+  MagicCasterVtbl *v66; // edi
   int CurrentMagicItem; // eax
-  int v121; // eax
-  ActorAnimData *v123; // eax
-  __int16 AnimGroupFromField8Value; // ax
-  bhkCharacterProxy *v125; // eax
-  char v126; // zf
-  char *v129; // ecx
-  int v130; // eax
-  char v131; // al
-  bhkCharacterProxy *v132; // eax
-  bhkCharacterProxy *v133; // eax
-  TESObjectCELL *v134; // eax
-  ActorAnimData *v136; // eax
-  bhkCharacterProxy *v138; // esi
-  _OWORD *v139; // esi
+  int v68; // eax
+  ActorAnimData *v69; // eax
+  unsigned __int16 AnimGroupFromField8Value; // ax
+  bhkCharacterProxy *v71; // eax
+  char v72; // zf
+  char *v73; // ecx
+  float *v74; // eax
+  char v75; // al
+  bhkCharacterProxy *v76; // eax
+  bhkCharacterProxy *v77; // eax
+  UInt32 DwordAtOffset40; // eax
+  ActorAnimData *v79; // esi
+  ActorAnimData *v80; // eax
+  bhkCharacterProxy *v81; // esi
+  _OWORD *v82; // esi
   void (__thiscall *Unk_73)(MobileObject *); // edx
-  double v141; // st7
-  char v143; // dl
-  TESObjectREFR *v146; // esi
-  _DWORD *v147; // eax
-  TESObjectREFRVtbl *v148; // edi
-  TESObjectREFR *v149; // eax
-  void *v150; // ecx
-  Creature *(__thiscall *GetMountedHorse)(Actor *); // edx
-  TESObjectREFR *v152; // eax
+  double v84; // st7
+  char v85; // dl
   int *SafeFloatPointer; // eax
-  void *v167; // ecx
-  double v169; // st7
-  PlayerCharacterVtbl *v170; // esi
+  TESObjectREFR *v87; // esi
+  _DWORD *v88; // eax
+  TESObjectREFRVtbl *v89; // edi
+  TESObjectREFR *v90; // eax
+  void *v91; // ecx
+  Creature *(__thiscall *GetMountedHorse)(Actor *); // edx
+  TESObjectREFR *v93; // eax
+  int *v94; // esi
+  double v95; // st7
+  double v96; // st7
+  double v97; // st7
+  double v98; // st7
+  void *v99; // ecx
+  double v101; // st7
+  double v102; // rt1
+  PlayerCharacterVtbl *v103; // esi
+  ActorAnimData *AnimData; // eax
   ActorAnimData *firstPersonAnimData; // ecx
-  TESObjectCELL *v175; // eax
+  double v106; // st7
+  TESObjectCELL *v107; // eax
+  double v108; // st6
   void (__thiscall *Unk_6F)(MobileObject *, UInt32); // edx
-  void (__thiscall *v179)(MobileObject *, UInt32); // edx
-  LowProcess *v181; // ecx
+  void (__thiscall *v110)(MobileObject *, UInt32); // edx
+  LowProcess *v111; // ecx
   UInt8 (__thiscall *GetSitSleepState)(BaseProcess *__hidden); // edx
-  void (__thiscall *v184)(MobileObject *, UInt32); // edx
-  LowProcess *v186; // ecx
-  UInt8 (__thiscall *v187)(BaseProcess *__hidden); // edx
-  void (__thiscall *v189)(MobileObject *, UInt32); // edx
-  int v193; // esi
-  TESObjectCELL *ParentCell; // [esp+4Ch] [ebp-A8h]
-  float v201; // [esp+4Ch] [ebp-A8h]
+  LowProcess *v113; // ecx
+  UInt8 (__thiscall *v114)(BaseProcess *__hidden); // edx
+  void (__thiscall *v115)(MobileObject *, UInt32); // edx
+  double v116; // st7
+  int v117; // esi
+  int *v118; // eax
+  double v119; // st7
+  double v120; // st7
+  ExtraDataList *arg0_4; // [esp+4Ch] [ebp-A8h]
   float duration; // [esp+50h] [ebp-A4h]
   float durationa; // [esp+50h] [ebp-A4h]
   float durationb; // [esp+50h] [ebp-A4h]
   float durationc; // [esp+50h] [ebp-A4h]
-  float durationd; // [esp+50h] [ebp-A4h]
-  float duratione; // [esp+50h] [ebp-A4h]
-  float durationf; // [esp+50h] [ebp-A4h]
-  float durationg; // [esp+50h] [ebp-A4h]
-  float durationh; // [esp+50h] [ebp-A4h]
-  int durationi; // [esp+50h] [ebp-A4h]
-  float durationj; // [esp+50h] [ebp-A4h]
-  float durationk; // [esp+50h] [ebp-A4h]
-  float durationl; // [esp+50h] [ebp-A4h]
-  float durationm; // [esp+50h] [ebp-A4h]
-  float durationn; // [esp+50h] [ebp-A4h]
-  float durationo; // [esp+50h] [ebp-A4h]
-  float durationp; // [esp+50h] [ebp-A4h]
-  float durationq; // [esp+50h] [ebp-A4h]
-  float durationr; // [esp+50h] [ebp-A4h]
-  float durations; // [esp+50h] [ebp-A4h]
-  float durationt; // [esp+50h] [ebp-A4h]
-  int durationu; // [esp+50h] [ebp-A4h]
-  float durationv; // [esp+50h] [ebp-A4h]
-  float durationw; // [esp+50h] [ebp-A4h]
-  float durationx; // [esp+50h] [ebp-A4h]
-  float durationy; // [esp+50h] [ebp-A4h]
-  float durationz; // [esp+50h] [ebp-A4h]
-  int duration_4; // [esp+54h] [ebp-A0h]
-  char v230; // [esp+67h] [ebp-8Dh]
-  bool v231; // [esp+67h] [ebp-8Dh]
-  int v232; // [esp+68h] [ebp-8Ch]
-  __int16 v233; // [esp+68h] [ebp-8Ch]
-  bool v234; // [esp+6Fh] [ebp-85h]
-  bool v235; // [esp+6Fh] [ebp-85h]
-  LONG v236; // [esp+70h] [ebp-84h]
-  int v239; // [esp+70h] [ebp-84h]
-  bool v243; // [esp+77h] [ebp-7Dh]
-  char v244; // [esp+77h] [ebp-7Dh]
-  InputGlobal *v245; // [esp+78h] [ebp-7Ch]
-  SceneGraph *v246; // [esp+7Ch] [ebp-78h]
-  LONG v247; // [esp+7Ch] [ebp-78h]
-  LONG v248; // [esp+7Ch] [ebp-78h]
-  unsigned int v249; // [esp+7Ch] [ebp-78h]
-  int v250; // [esp+7Ch] [ebp-78h]
-  int v261; // [esp+7Ch] [ebp-78h]
-  int v265; // [esp+7Ch] [ebp-78h]
-  int v266; // [esp+7Ch] [ebp-78h]
-  LONG JoystickAxisMovement; // [esp+8Ch] [ebp-68h]
-  LONG v269; // [esp+8Ch] [ebp-68h]
-  int v273; // [esp+8Ch] [ebp-68h]
-  float v274; // [esp+90h] [ebp-64h] BYREF
+  BOOL duration_4; // [esp+54h] [ebp-A0h]
+  char v127; // [esp+67h] [ebp-8Dh]
+  bool v128; // [esp+67h] [ebp-8Dh]
+  int v129; // [esp+68h] [ebp-8Ch]
+  __int16 v130; // [esp+68h] [ebp-8Ch]
+  bool updated; // [esp+6Fh] [ebp-85h]
+  bool v132; // [esp+6Fh] [ebp-85h]
+  LONG v133; // [esp+70h] [ebp-84h]
+  float v134; // [esp+70h] [ebp-84h]
+  float v135; // [esp+70h] [ebp-84h]
+  int v136; // [esp+70h] [ebp-84h]
+  float v137; // [esp+70h] [ebp-84h]
+  float v138; // [esp+70h] [ebp-84h]
+  float v139; // [esp+70h] [ebp-84h]
+  bool v140; // [esp+77h] [ebp-7Dh]
+  char v141; // [esp+77h] [ebp-7Dh]
+  InputGlobal *v142; // [esp+78h] [ebp-7Ch]
+  _DWORD **v143; // [esp+7Ch] [ebp-78h]
+  int v144; // [esp+7Ch] [ebp-78h]
+  float v145; // [esp+7Ch] [ebp-78h]
+  float v146; // [esp+7Ch] [ebp-78h]
+  float v147; // [esp+7Ch] [ebp-78h]
+  float v148; // [esp+7Ch] [ebp-78h]
+  double worldFoV; // [esp+7Ch] [ebp-78h]
+  double v150; // [esp+7Ch] [ebp-78h]
+  double v151; // [esp+7Ch] [ebp-78h]
+  double v152; // [esp+7Ch] [ebp-78h]
+  double v153; // [esp+7Ch] [ebp-78h]
+  float v154; // [esp+7Ch] [ebp-78h]
+  float v155; // [esp+7Ch] [ebp-78h]
+  float v156; // [esp+84h] [ebp-70h]
+  int v157; // [esp+8Ch] [ebp-68h]
+  float v158; // [esp+8Ch] [ebp-68h]
+  float v159; // [esp+8Ch] [ebp-68h]
+  float v160; // [esp+8Ch] [ebp-68h]
+  int v161; // [esp+8Ch] [ebp-68h]
+  float v162; // [esp+90h] [ebp-64h] BYREF
   float a2a; // [esp+94h] [ebp-60h]
-  int v276; // [esp+98h] [ebp-5Ch]
-  NiPoint3 v277; // [esp+9Ch] [ebp-58h] BYREF
-  Actor *v278; // [esp+A8h] [ebp-4Ch]
+  float v164; // [esp+98h] [ebp-5Ch]
+  NiPoint3 v165; // [esp+9Ch] [ebp-58h] BYREF
+  Actor *v166; // [esp+A8h] [ebp-4Ch]
   UInt8 isThirdPerson; // [esp+ADh] [ebp-47h]
   bool IsBlocking; // [esp+AEh] [ebp-46h]
-  bool v281; // [esp+AFh] [ebp-45h]
-  float v282; // [esp+B0h] [ebp-44h]
-  float v283; // [esp+B4h] [ebp-40h]
-  int v284; // [esp+B8h] [ebp-3Ch]
-  __int64 v285; // [esp+BCh] [ebp-38h]
+  bool v169; // [esp+AFh] [ebp-45h]
+  float v170; // [esp+B0h] [ebp-44h]
+  float v171; // [esp+B4h] [ebp-40h]
+  float v172; // [esp+B8h] [ebp-3Ch]
+  __int64 v173; // [esp+BCh] [ebp-38h]
   float x; // [esp+C4h] [ebp-30h]
-  float v287; // [esp+C8h] [ebp-2Ch]
-  float v288; // [esp+CCh] [ebp-28h]
-  float v289[9]; // [esp+D0h] [ebp-24h] BYREF
+  float v175; // [esp+C8h] [ebp-2Ch]
+  float v176; // [esp+CCh] [ebp-28h]
+  float v177[9]; // [esp+D0h] [ebp-24h] BYREF
   int savedregs; // [esp+F4h] [ebp+0h] BYREF
 
-  __asm { fldz }
-  v10 = g_worldScenegraph;
-  _EBX = this;
-  input = OSGlobals->input;
-  __asm { fst     dword ptr [ebx+7FCh] }
-  *(float *)&_EBX->unk7FC = _ET1;
-  __asm { fstp    dword ptr [ebx+800h] }
-  _EBX->unk800 = _ET1;
-  v245 = input;
-  v15 = 0;
-  v246 = v10;
-  v278 = 0;
-  v230 = 0;
-  sub_667520((MobileObject *)_EBX);
-  CharProxy = MobileObject_GetCharProxy((MobileObject *)_EBX);
-  if ( CharProxy && (*((_DWORD *)CharProxy + 0x7D) & 0x20000) != 0 )
+  v9 = (_DWORD **)g_WorldSceneReceiverRoot; /*0x671633*/
+  input = MEMORY[0xB33398]->input; /*0x67163c*/
+  *(float *)&this->unk7FC = 0.0; /*0x67163f*/
+  this->unk800 = 0.0; /*0x671646*/
+  v142 = input; /*0x67164d*/
+  v12 = 0; /*0x671651*/
+  v143 = v9; /*0x671655*/
+  v166 = 0; /*0x671659*/
+  v127 = 0; /*0x67165d*/
+  sub_667520((MobileObject *)this); /*0x671662*/
+  CharProxy = MobileObject_GetCharProxy((MobileObject *)this); /*0x671669*/
+  if ( CharProxy && (*((_DWORD *)CharProxy + 0x7D) & 0x20000) != 0 ) /*0x67167d*/
   {
-    if ( !_EBX->unk115 )
+    if ( !this->unk115 ) /*0x67167f*/
     {
-      sub_6768C0((int)&ActorProcessManager_ptr, a7, a8);
-      _EBX->unk115 = 1;
+      sub_6768C0((int)&qword_B3BB2C[0x75], v8, 0.0); /*0x67168d*/
+      this->unk115 = 1; /*0x671692*/
     }
   }
   else
   {
-    _EBX->unk115 = 0;
+    this->unk115 = 0; /*0x67169b*/
   }
-  _EBX->super.super.super.process->Unk_12B(_EBX->super.super.super.process);
-  __asm { fldz }
-  __asm { fcom    st(1) }
-  v17 = _EBX->super.super.super.process->__vftable;
-  __asm
-  {
-    fnstsw  ax
-    fstp    st(1)
-  }
-  if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-  {
-    __asm { fstp    [esp+0A4h+duration] }
-    ((void (__stdcall *)(_DWORD))v17->SetUnk2ACCallD5)(LODWORD(duration));
-  }
+  v14 = ((double (__thiscall *)(LowProcess *))this->super.super.super.process->Unk_12B)(this->super.super.super.process) > 0.0; /*0x6716b4*/
+  v15 = this->super.super.super.process->__vftable; /*0x6716b6*/
+  if ( v14 ) /*0x6716bf*/
+    ((void (*)(void))v15->Unk_12A)(); /*0x6716c9*/
   else
+    ((void (__stdcall *)(_DWORD))v15->SetUnk2ACCallD5)(0.0); /*0x6716d7*/
+  if ( LOBYTE(this->unk738) ) /*0x6716d9*/
   {
-    __asm { fstp    st }
-    ((void (*)(void))v17->Unk_12A)();
-  }
-  if ( LOBYTE(_EBX->unk738) )
-  {
-    _EBX->vtbl->super.super.Unk_76((MobileObject *)_EBX);
-    __asm { fcomp   dword ptr ds:0A2FAA8h }
-    __asm { fnstsw  ax }
-    if ( __SETP__(HIBYTE(_AX) & 0x41, 0) )
+    if ( ((double (__thiscall *)(PlayerCharacter *))this->vtbl->super.super.Unk_76)(this) > *(float *)&SrcStr ) /*0x6716fb*/
     {
-      _EBX->vtbl->super.super.Unk_77((MobileObject *)_EBX);
+      this->vtbl->super.super.Unk_77((MobileObject *)this); /*0x671723*/
     }
     else
     {
-      sub_6636B0();
-      __asm { fld     dword ptr ds:0B378A8h }
-      __asm { fstp    [esp+0A4h+duration] }
-      ((void (__stdcall *)(_DWORD))_EBX->super.super.super.process->Unk_6F)(LODWORD(durationa));
+      sub_6636B0(); /*0x6716fd*/
+      ((void (__stdcall *)(_DWORD))this->super.super.super.process->Unk_6F)(MEMORY[0xB378A8]); /*0x671717*/
     }
   }
-  __asm
+  if ( this->unk618 > 0.0 ) /*0x671732*/
   {
-    fldz
-    fcomp   dword ptr [ebx+618h]
-    fnstsw  ax
-  }
-  if ( (_AX & 0x100) != 0 )
-  {
-    __asm
-    {
-      fld     dword ptr [ebx+618h]
-      fsub    dword ptr ds:0B33E9Ch
-    }
+    v16 = this->unk618 - *(float *)&MEMORY[0xB33E90][0xC]; /*0x67174c*/
   }
   else
   {
-    sub_67A230(&ActorProcessManager_ptr);
-    __asm { fld     dword ptr ds:0B36CE0h }
+    ProcessLists_SortActorDistanceCandidatesAndTrim((EntryData *)&qword_B3BB2C[0x75]); /*0x671739*/
+    v16 = g_GameSettingStringPointers_B36CD8[2]; /*0x67173e*/
   }
-  __asm { fstp    dword ptr [ebx+618h] }
-  _EBX->unk618 = _ET1;
-  v22 = dword_B37D30;
-  InterfaceManager_GetSingleton(0, 1)->unk008[2] = v22;
-  Singleton = InterfaceManager_GetSingleton(0, 1);
-  sub_5806D0((int)Singleton, a7, a8, a9);
-  if ( _EBX->pad71E[1] )
+  this->unk618 = v16; /*0x671754*/
+  v17 = stru_B37D30; /*0x67175a*/
+  InterfaceManager_GetSingleton(0, 1)->unk008[2] = v17; /*0x67176b*/
+  Singleton = InterfaceManager_GetSingleton(0, 1); /*0x67176e*/
+  sub_5806D0((int)Singleton, v7, 0.0, v16); /*0x671778*/
+  if ( this->pad71E[1] ) /*0x67177d*/
   {
-    _EBX->pad71E[1] = 0;
-    sub_66FF10((int)_EBX, (char)&savedregs, st0_0, a3, a4, a5, a6, a7, a8, a9, COERCE_FLOAT(1));
+    this->pad71E[1] = 0; /*0x67178a*/
+    PlayerCharacter_ProcessQueuedWorldspaceMove( /*0x671791*/
+      (int)this,
+      (char)&savedregs,
+      v2,
+      v3,
+      v4,
+      v5,
+      v6,
+      v7,
+      0.0,
+      v16,
+      COERCE_FLOAT(1));
   }
-  ObjectToActivate = _EBX->ObjectToActivate;
-  if ( ObjectToActivate )
+  ObjectToActivate = this->ObjectToActivate; /*0x671796*/
+  if ( ObjectToActivate ) /*0x67179e*/
   {
-    ActivateRef(ObjectToActivate, a7, a8, a9, (TESObjectREFR *)_EBX, 0, 0, 1);
-    _EBX->ObjectToActivate = 0;
-    return;
+    ActivateRef(ObjectToActivate, v7, 0.0, v16, (TESObjectREFR *)this, 0, 0, 1); /*0x6717a7*/
+    this->ObjectToActivate = 0; /*0x6717ac*/
+    return; /*0x6717b8*/
   }
-  if ( _EBX->isFlyCam )
-    UpdateFlyCam((float *)_EBX);
-  if ( _EBX->isThirdPerson )
-    _EBX->super.super.super.process->Unk_24(_EBX->super.super.super.process, (UInt32)_EBX);
-  if ( ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetSitSleepState)(_EBX->super.super.super.process) == 4
-    && (v25 = (Actor *)_EBX->vtbl->super.GetMountedHorse((Actor *)_EBX), v15 = v25, (v278 = v25) != 0) )
+  if ( this->isFlyCam ) /*0x6717bb*/
+    UpdateFlyCam((float *)this); /*0x6717c6*/
+  if ( this->isThirdPerson ) /*0x6717cb*/
+    this->super.super.super.process->Unk_24(this->super.super.super.process, (UInt32)this); /*0x6717e0*/
+  if ( ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetSitSleepState)(this->super.super.super.process) == 4 /*0x671808*/
+    && (v20 = (Actor *)this->vtbl->super.GetMountedHorse(this), v12 = v20, (v166 = v20) != 0) )
   {
-    process = v25->members.super.process;
+    process = v20->members.super.process; /*0x67180a*/
   }
   else
   {
-    process = _EBX->super.super.super.process;
+    process = this->super.super.super.process; /*0x67180f*/
   }
-  v27 = process->GetMovementFlags(process);
-  if ( Actor_IsSneaking(_EBX) && !v15 && sub_5E05B0(_EBX) )
+  v22 = process->GetMovementFlags(process); /*0x67181e*/
+  if ( Actor_IsSneaking(this) && !v12 && sub_5E05B0(this) ) /*0x671830*/
   {
-    if ( dword_B3B368 < 3 )
+    if ( dword_B3B0B4[0xAD] < 3 ) /*0x671840*/
     {
-      if ( LOBYTE(_EBX->unk5A8) )
+      if ( LOBYTE(this->unk5A8) ) /*0x671846*/
       {
-        __asm
+        if ( this->unk5A4 <= 1.0 ) /*0x671860*/
         {
-          fld1
-          fcomp   dword ptr [ebx+5A4h]
-          fnstsw  ax
-        }
-        if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-        {
-          __asm
-          {
-            fld     dword ptr ds:0B33E9Ch
-            fadd    dword ptr [ebx+5A4h]
-            fstp    dword ptr [ebx+5A4h]
-          }
-          _EBX->unk5A4 = _ET1;
+          this->unk5A4 = *(float *)&MEMORY[0xB33E90][0xC] + this->unk5A4; /*0x671890*/
         }
         else
         {
-          __asm { fldz }
-          __asm { fstp    [esp+0A4h+duration] }
-          ((void (__thiscall *)(PlayerCharacter *, int, _DWORD, _DWORD))_EBX->vtbl->super.ModExperience)(
-            _EBX,
+          ((void (__thiscall *)(PlayerCharacter *, int, _DWORD, _DWORD))this->vtbl->super.ModExperience)( /*0x671875*/
+            this,
             0x1F,
             0,
-            LODWORD(durationb));
-          __asm
-          {
-            fldz
-            fstp    dword ptr [ebx+5A4h]
-          }
-          _EBX->unk5A4 = _ET1;
+            0.0);
+          this->unk5A4 = 0.0; /*0x671879*/
         }
       }
     }
   }
-  else if ( Actor_IsSwimming(_EBX) && !v15 && sub_5E05B0(_EBX) )
+  else if ( Actor_IsSwimming((Actor *)this) && !v12 && sub_5E05B0(this) ) /*0x6718ac*/
   {
-    __asm
+    if ( this->unk5A0 <= 1.0 ) /*0x6718c2*/
     {
-      fld1
-      fcomp   dword ptr [ebx+5A0h]
-      fnstsw  ax
-    }
-    if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-    {
-      __asm
-      {
-        fld     dword ptr ds:0B33E9Ch
-        fadd    dword ptr [ebx+5A0h]
-        fstp    dword ptr [ebx+5A0h]
-      }
-      _EBX->unk5A0 = _ET1;
+      this->unk5A0 = *(float *)&MEMORY[0xB33E90][0xC] + this->unk5A0; /*0x6718f0*/
     }
     else
     {
-      __asm { fldz }
-      __asm { fstp    [esp+0A4h+duration] }
-      ((void (__thiscall *)(PlayerCharacter *, int, int, _DWORD))_EBX->vtbl->super.ModExperience)(
-        _EBX,
-        0xD,
-        1,
-        LODWORD(durationc));
-      __asm
-      {
-        fldz
-        fstp    dword ptr [ebx+5A0h]
-      }
-      _EBX->unk5A0 = _ET1;
+      ((void (__thiscall *)(PlayerCharacter *, int, int, _DWORD))this->vtbl->super.ModExperience)(this, 0xD, 1, 0.0); /*0x6718d8*/
+      this->unk5A0 = 0.0; /*0x6718dc*/
     }
   }
-  else if ( (v27 & 0x200) != 0 && !v15 && sub_5E05B0(_EBX) )
+  else if ( (v22 & 0x200) != 0 && !v12 && sub_5E05B0(this) ) /*0x671906*/
   {
-    __asm
+    if ( this->unk59C <= 1.0 ) /*0x67191c*/
     {
-      fld1
-      fcomp   dword ptr [ebx+59Ch]
-      fnstsw  ax
-    }
-    if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-    {
-      __asm
-      {
-        fld     dword ptr [ebx+59Ch]
-        fadd    dword ptr ds:0B33E9Ch
-      }
+      v23 = this->unk59C + *(float *)&MEMORY[0xB33E90][0xC]; /*0x67193d*/
     }
     else
     {
-      __asm { fldz }
-      __asm { fstp    [esp+0A4h+duration] }
-      ((void (__thiscall *)(PlayerCharacter *, int, _DWORD, _DWORD))_EBX->vtbl->super.ModExperience)(
-        _EBX,
-        0xD,
-        0,
-        LODWORD(durationd));
-      __asm { fldz }
+      ((void (__thiscall *)(PlayerCharacter *, int, _DWORD, _DWORD))this->vtbl->super.ModExperience)(this, 0xD, 0, 0.0); /*0x671931*/
+      v23 = 0.0; /*0x671933*/
     }
-    __asm { fstp    dword ptr [ebx+59Ch] }
-    _EBX->unk59C = _ET1;
+    this->unk59C = v23; /*0x671943*/
   }
-  v232 = v27 & 0xCC00;
-  MouseAxisMovement = InputGlobals::GetMouseAxisMovement(v245, 1);
-  v37 = InputGlobals::GetMouseAxisMovement(v245, 2);
-  v236 = InputGlobals::GetMouseAxisMovement(v245, 3);
-  JoystickAxisMovement = InputGlobals::GetJoystickAxisMovement(v245, 0, dword_B14EE0);
-  __asm
+  v129 = v22 & 0xCC00; /*0x671957*/
+  MouseAxisMovement = InputGlobals::GetMouseAxisMovement(v142, 1); /*0x671964*/
+  v25 = InputGlobals::GetMouseAxisMovement(v142, 2); /*0x671971*/
+  v133 = InputGlobals::GetMouseAxisMovement(v142, 3); /*0x671985*/
+  JoystickAxisMovement = InputGlobals::GetJoystickAxisMovement(v142, 0, iJoystickLookLeftRight); /*0x671989*/
+  HIDWORD(v27) = Double_To_SInt32((double)JoystickAxisMovement * fJoystickLookLRMult) + MouseAxisMovement; /*0x6719ac*/
+  v157 = InputGlobals::GetJoystickAxisMovement(v142, 0, iJoystickLookUpDown); /*0x6719b9*/
+  LODWORD(v27) = Double_To_SInt32((double)v157 * fJoystickLookUDMult) + v25; /*0x6719cc*/
+  v72 = this->isFlyCam == 0; /*0x6719ce*/
+  v173 = v27; /*0x6719d5*/
+  if ( !v72 ) /*0x6719d9*/
   {
-    fild    [esp+0A0h+var_68]
-    fmul    dword ptr ds:0B14F08h
+    v27 = 0; /*0x6719db*/
+    v173 = 0; /*0x6719e3*/
+    v133 = 0; /*0x6719e7*/
   }
-  HIDWORD(v38) = Double_To_SInt32(a9) + MouseAxisMovement;
-  v269 = InputGlobals::GetJoystickAxisMovement(v245, 0, dword_B14ED8);
-  __asm
+  if ( bInvertYValues ) /*0x6719eb*/
   {
-    fild    [esp+0A0h+var_68]
-    fmul    dword ptr ds:0B14F00h
+    LODWORD(v27) = -(int)v27; /*0x6719f4*/
+    LODWORD(v173) = v27; /*0x6719f6*/
   }
-  LODWORD(v38) = Double_To_SInt32(a9) + v37;
-  v126 = _EBX->isFlyCam == 0;
-  v285 = v38;
-  if ( !v126 )
+  v134 = (float)v133; /*0x6719fe*/
+  v28 = v134; /*0x671a04*/
+  if ( v134 != 0.0 ) /*0x671a11*/
   {
-    v38 = 0;
-    v285 = 0;
-    v236 = 0;
-  }
-  if ( byte_B14F38 )
-  {
-    LODWORD(v38) = -(int)v38;
-    LODWORD(v285) = v38;
-  }
-  __asm
-  {
-    fild    [esp+0A0h+var_84]
-    fstp    [esp+0A0h+var_84]
-    fldz
-    fld     [esp+0A0h+var_84]
-    fucom   st(1)
-    fnstsw  ax
-    fstp    st(1)
-  }
-  if ( __SETP__(HIBYTE(_AX) & 0x44, 0) )
-  {
-    if ( !VanityCamState )
+    if ( MEMORY[0xB3BB04] || (v127 = 1, this->isThirdPerson) ) /*0x671a20*/
     {
-      v230 = 1;
-      if ( !_EBX->isThirdPerson )
-        goto LABEL_66;
-    }
-    __asm { fld     dword ptr ds:0B36B58h }
-    __asm { fmulp   st(1), st }
-    __asm
-    {
-      fsubr   dword ptr ds:0B3BB24h
-      fstp    dword ptr ds:0B3BB24h
-    }
-    *((float *)&qword_B3BB20 + 1) = _ET1;
-    v41 = _EBX->vtbl->super.super.super.IsDead((TESObjectREFR *)_EBX, 0);
-    __asm { fld     dword ptr ds:0B3BB24h }
-    if ( v41 )
-    {
-      __asm
+      *(float *)&unk_B3BB24.vtbl = *(float *)&unk_B3BB24.vtbl - v134 * unk_B36B58; /*0x671a44*/
+      v29 = this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0); /*0x671a52*/
+      v30 = *(float *)&unk_B3BB24.vtbl; /*0x671a54*/
+      if ( v29 ) /*0x671a5c*/
       {
-        fld     dword ptr ds:0B36B80h
-        fcom    st(1)
-        fnstsw  ax
-        fstp    st(1)
+        if ( unk_B36B80 > v30 ) /*0x671a6d*/
+          *(float *)&unk_B3BB24.vtbl = unk_B36B80; /*0x671a6f*/
       }
-      if ( (_AX & 0x4100) != 0 )
+      else if ( unk_B36B60 > v30 ) /*0x671a84*/
       {
-        __asm { fstp    st }
+        if ( !MEMORY[0xB3BB04] ) /*0x671a86*/
+          TogglePOV(this, 1u); /*0x671a93*/
+        *(float *)&unk_B3BB24.vtbl = unk_B36B60; /*0x671a9e*/
       }
+      v28 = unk_B36B68; /*0x671aae*/
+      if ( v28 < *(float *)&unk_B3BB24.vtbl ) /*0x671abd*/
+        *(float *)&unk_B3BB24.vtbl = unk_B36B68; /*0x671abf*/
+    }
+    if ( !this->isThirdPerson && v134 * unk_B36B58 < dbl_A2FC68 ) /*0x671ae7*/
+    {
+      TogglePOV(this, 0); /*0x671aed*/
+      if ( *(float *)&unk_B3BB24.vtbl < dbl_A3F3D0 ) /*0x671b03*/
+        *(float *)&unk_B3BB24.vtbl = flt_A3D8F0; /*0x671b0b*/
+    }
+  }
+  unk_B3BAC8 = this->vtbl->super.super.GetZRotation((MobileObject *)this); /*0x671b21*/
+  AimPitch = Actor_GetAimPitch((Actor *)this); /*0x671b29*/
+  unk_B3BAC4 = AimPitch; /*0x671b2e*/
+  if ( MEMORY[0xB3BB04] /*0x671b4c*/
+    && !((int (__thiscall *)(LowProcess *))this->super.super.super.process->Unk_11E)(this->super.super.super.process) )
+  {
+    v32 = dbl_A31C78; /*0x671b5a*/
+    v6 = unk_B3BB28; /*0x671b71*/
+    v7 = (double)SHIDWORD(v173) * v32 * unk_B36B88 * deltaTime + v6; /*0x671b79*/
+    unk_B3BB28 = v7; /*0x671b7b*/
+    v28 = v32 * (double)(int)v173 * unk_B36B90; /*0x671b85*/
+    v33 = deltaTime * v28 + *(float *)&unk_B3BB20; /*0x671b8d*/
+    *(float *)&unk_B3BB20 = v33; /*0x671b93*/
+    goto LABEL_72; /*0x671b93*/
+  }
+  if ( HIDWORD(v27) || v166 ) /*0x671c4c*/
+  {
+    AimPitch = (double)SHIDWORD(v173) * flt_B14EE8; /*0x671c58*/
+    v135 = AimPitch; /*0x671c5e*/
+    if ( HIDWORD(v27) ) /*0x671c62*/
+    {
+      AimPitch = 0.0; /*0x671c64*/
+      if ( v135 >= 0.0 ) /*0x671c6f*/
+        v129 |= 0x20u; /*0x671c78*/
       else
-      {
-        __asm { fstp    dword ptr ds:0B3BB24h }
-        *((float *)&qword_B3BB20 + 1) = _ET1;
-      }
+        v129 |= 0x10u; /*0x671c71*/
     }
-    else
+    if ( !Actor::GetDeadState((Actor *)this) /*0x671ca9*/
+      && Actor_GetCurrentAction(this) != 8
+      && !this->isWakeUpPackage
+      && !this->isTravelPackage )
     {
-      __asm
+      v35 = ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetSitSleepState)(this->super.super.super.process); /*0x671cc1*/
+      if ( v35 ) /*0x671cc5*/
       {
-        fld     dword ptr ds:0B36B60h
-        fcompp
-        fnstsw  ax
-      }
-      if ( (_AX & 0x4100) == 0 )
-      {
-        if ( !VanityCamState )
-          TogglePOV(_EBX, 1u);
-        __asm
+        if ( v35 != 4 ) /*0x671cca*/
+          goto LABEL_104; /*0x671cca*/
+        v158 = this->unk61C + v135; /*0x671cda*/
+        AimPitch = v158; /*0x671cde*/
+        this->unk61C = v158; /*0x671ce2*/
+        if ( v158 >= dbl_A73DD0 ) /*0x671cf3*/
         {
-          fld     dword ptr ds:0B36B60h
-          fstp    dword ptr ds:0B3BB24h
-        }
-        *((float *)&qword_B3BB20 + 1) = _ET1;
-      }
-    }
-    __asm
-    {
-      fld     dword ptr ds:0B3BB24h
-      fld     dword ptr ds:0B36B68h
-      fcom    st(1)
-      fnstsw  ax
-      fstp    st(1)
-    }
-    if ( !__SETP__(HIBYTE(_AX) & 5, 0) )
-    {
-      __asm { fstp    dword ptr ds:0B3BB24h }
-      *((float *)&qword_B3BB20 + 1) = _ET1;
-    }
-    else
-    {
-LABEL_66:
-      __asm { fstp    st }
-    }
-    if ( !_EBX->isThirdPerson )
-    {
-      __asm
-      {
-        fld     [esp+0A0h+var_84]
-        fmul    dword ptr ds:0B36B58h
-        fcomp   qword ptr ds:0A2FC68h
-        fnstsw  ax
-      }
-      if ( !__SETP__(HIBYTE(_AX) & 5, 0) )
-      {
-        TogglePOV(_EBX, 0);
-        __asm
-        {
-          fld     dword ptr ds:0B3BB24h
-          fcomp   qword ptr ds:0A3F3D0h
-          fnstsw  ax
-        }
-        if ( !__SETP__(HIBYTE(_AX) & 5, 0) )
-        {
-          __asm
-          {
-            fld     dword ptr ds:0A3D8F0h
-            fstp    dword ptr ds:0B3BB24h
-          }
-          *((float *)&qword_B3BB20 + 1) = _ET1;
-        }
-      }
-    }
-  }
-  else
-  {
-    __asm { fstp    st }
-  }
-  _EBX->vtbl->super.super.GetZRotation((MobileObject *)_EBX);
-  __asm { fstp    dword ptr ds:0B3BAC8h }
-  flt_B3BAC8 = _ET1;
-  v52 = sub_4A9720((Actor *)_EBX);
-  __asm { fstp    dword ptr ds:0B3BAC4h }
-  flt_B3BAC4 = _ET1;
-  if ( VanityCamState
-    && !((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->Unk_11E)(_EBX->super.super.super.process) )
-  {
-    __asm
-    {
-      fild    dword ptr [esp+0A0h+var_38+4]
-      fld     qword ptr ds:0A31C78h
-      fmul    st(1), st
-      fld     dword ptr ds:0B36B88h
-      fmulp   st(2), st
-      fld     [ebp+arg_0]
-      fld     st
-      fmulp   st(3), st
-      fld     dword ptr ds:0B3BB28h
-      faddp   st(3), st
-      fxch    st(2)
-      fstp    dword ptr ds:0B3BB28h
-    }
-    flt_B3BB28 = _ET1;
-    __asm
-    {
-      fimul   dword ptr [esp+0A0h+var_38]
-      fmul    dword ptr ds:0B36B90h
-      fmulp   st(1), st
-      fadd    dword ptr ds:0B3BB20h
-      fstp    dword ptr ds:0B3BB20h
-    }
-    *(float *)&qword_B3BB20 = _ET1;
-    goto LABEL_75;
-  }
-  if ( HIDWORD(v38) || v278 )
-  {
-    __asm
-    {
-      fild    dword ptr [esp+0A0h+var_38+4]
-      fmul    dword ptr ds:0B14EE8h
-      fstp    [esp+0A0h+var_84]
-    }
-    if ( HIDWORD(v38) )
-    {
-      __asm
-      {
-        fldz
-        fcomp   [esp+0A0h+var_84]
-        fnstsw  ax
-      }
-      if ( (_AX & 0x4100) != 0 )
-        v232 |= 0x20u;
-      else
-        v232 |= 0x10u;
-    }
-    if ( !Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)_EBX)
-      && Actor_GetCurrentAction(_EBX) != 8
-      && !_EBX->isWakeUpPackage
-      && !_EBX->isTravelPackage )
-    {
-      v58 = ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetSitSleepState)(_EBX->super.super.super.process);
-      if ( v58 )
-      {
-        if ( v58 != 4 )
-          goto LABEL_108;
-        __asm
-        {
-          fld     dword ptr [ebx+61Ch]
-          fadd    [esp+0A0h+var_84]
-          fstp    [esp+0A0h+var_68]
-          fld     [esp+0A0h+var_68]
-          fst     dword ptr [ebx+61Ch]
-        }
-        _EBX->unk61C = _ET1;
-        __asm
-        {
-          fcom    qword ptr ds:0A73DD0h
-          fnstsw  ax
-        }
-        if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-        {
-          __asm
-          {
-            fcomp   qword ptr ds:0A6E740h
-            fnstsw  ax
-          }
-          if ( (_AX & 0x4100) != 0 )
-            goto LABEL_102;
-          __asm { fld     dword ptr ds:0A3F3E0h }
+          if ( AimPitch <= dbl_A6E740 ) /*0x671d0a*/
+            goto LABEL_99; /*0x671d0a*/
+          AimPitch = flt_A3F3E0; /*0x671d0c*/
         }
         else
         {
-          __asm
-          {
-            fstp    st
-            fld     dword ptr ds:0A3721Ch
-          }
+          AimPitch = flt_A3721C; /*0x671cf7*/
         }
-        __asm { fstp    dword ptr [ebx+61Ch] }
-        _EBX->unk61C = _ET1;
-LABEL_102:
-        if ( v278 )
+        this->unk61C = AimPitch; /*0x671d12*/
+LABEL_99:
+        if ( v166 ) /*0x671d1d*/
         {
-          __asm
-          {
-            fld     dword ptr ds:0A35AA4h
-            fstp    dword ptr ds:0B14E5Ch
-          }
-          flt_B14E5C = _ET1;
+          AimPitch = flt_A35AA4; /*0x671d1f*/
+          flt_B14E5C = flt_A35AA4; /*0x671d25*/
         }
-        goto LABEL_108;
+        goto LABEL_104; /*0x671d2b*/
       }
-      _EAX = GameSetting_GetSafeFloatPointer((int *)&flt_B14EE8);
-      __asm
+      AimPitch = v135; /*0x671d37*/
+      v159 = fabs(v135); /*0x671d3f*/
+      v7 = *(float *)GameSetting_GetSafeFloatPointer((int *)&flt_B14EE8) * dbl_A2F920; /*0x671d49*/
+      flt_B14E5C = v159 / v7; /*0x671d51*/
+      v28 = flt_A35AA4; /*0x671d57*/
+      if ( v28 < flt_B14E5C ) /*0x671d68*/
+        flt_B14E5C = flt_A35AA4; /*0x671d6a*/
+      sub_659B90((int *)this, AimPitch, v135); /*0x671d7a*/
+    }
+  }
+LABEL_104:
+  if ( (_DWORD)v27 ) /*0x671d81*/
+  {
+    v160 = (double)(int)v173 * flt_B14EE8; /*0x671d90*/
+    AimPitch = v160; /*0x671d94*/
+    sub_65ABC0((TESObjectREFR *)this, v160); /*0x671d9b*/
+  }
+  v33 = sub_633250((int)this->super.super.super.process, (char)&savedregs, v7, AimPitch, v28, (Actor *)this); /*0x671da4*/
+  if ( v36 ) /*0x671dab*/
+  {
+    if ( this->unk574 ) /*0x671db1*/
+      sub_66A670((TESObjectREFR *)this); /*0x671dbc*/
+    sub_65E900((TESObjectREFR *)this); /*0x671dc3*/
+    this->isThirdPerson = this->isThirdPerson == 0; /*0x671ddb*/
+    sub_603CA0((Actor *)this, v7, v28, deltaTime, deltaTime); /*0x671de1*/
+    this->isThirdPerson = this->isThirdPerson == 0; /*0x671df3*/
+    sub_603CA0((Actor *)this, v7, v28, deltaTime, deltaTime); /*0x671dff*/
+    sub_66B710(this, deltaTime, 0); /*0x671e08*/
+    return; /*0x671e13*/
+  }
+LABEL_72:
+  if ( !this->isWakeUpPackage /*0x671bbf*/
+    && !this->isTravelPackage
+    && !this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0) )
+  {
+    editorPackage = reference->super.super.super.process->editorPackage; /*0x671bd2*/
+    if ( editorPackage ) /*0x671bd7*/
+    {
+      editorPackage->__vftable->super.Destroy((TESForm *)editorPackage, 1); /*0x671be0*/
+      reference->super.super.super.process->editorPackage = 0; /*0x671bea*/
+    }
+    if ( ((int (__thiscall *)(LowProcess *))reference->super.super.super.process->Unk_5C)(reference->super.super.super.process) ) /*0x671c02*/
+      reference->super.super.super.process->SetCurrentPackage(reference->super.super.super.process, 0); /*0x671c1a*/
+    if ( this->bCanLevelUp && byte_B14E88 ) /*0x671c29*/
+    {
+      LevelUpMenu_Open(v7, v28, v33); /*0x671c36*/
+      return; /*0x671c41*/
+    }
+    sub_6606F0((int)this); /*0x671e18*/
+    sub_65DA20(v37); /*0x671e1d*/
+    if ( InputGlobals::QueryControlState(v142, 8, 1) ) /*0x671e2c*/
+    {
+      if ( IsWeaponReady(this) && !this->unk5C0 && Actor_GetCurrentAction(this) == 0xFFFFFFFF ) /*0x671e53*/
       {
-        fld     [esp+0A0h+var_84]
-        fld     st
-        fabs
-        fstp    [esp+0A0h+var_68]
-        fld     [esp+0A0h+var_68]
-        fld     dword ptr [eax]
-        fmul    qword ptr ds:0A2F920h
-        fdivp   st(1), st
-        fstp    dword ptr ds:0B14E5Ch
+        v38 = this->super.super.super.process->GetCombatMode(this->super.super.super.process); /*0x671e60*/
+        sub_5E6D70(this, v38 == 0); /*0x671e6e*/
       }
-      flt_B14E5C = _ET1;
-      __asm
+    }
+    if ( InputGlobals::QueryControlState(v142, 0xB, 1) ) /*0x671e79*/
+      this->AlwaysRun = this->AlwaysRun == 0; /*0x671e8c*/
+    if ( InputGlobals::QueryControlState(v142, 0xC, 1) ) /*0x671e98*/
+      this->AutoMove = this->AutoMove == 0; /*0x671eab*/
+    if ( this->AutoMove ) /*0x671eb1*/
+    {
+      if ( InputGlobals::QueryControlState(v142, 0, 0) /*0x671ef8*/
+        || InputGlobals::QueryControlState(v142, 1, 0)
+        || (InputGlobals::QueryControlState(v142, 3, 0) || InputGlobals::QueryControlState(v142, 2, 0)) && !v166 )
       {
-        fld     dword ptr ds:0A35AA4h
-        fcom    dword ptr ds:0B14E5Ch
-        fnstsw  ax
-      }
-      if ( __SETP__(BYTE1(_EAX) & 5, 0) )
-      {
-        __asm { fstp    st }
+        this->AutoMove = 0; /*0x671f05*/
       }
       else
       {
-        __asm { fstp    dword ptr ds:0B14E5Ch }
-        flt_B14E5C = _ET1;
-      }
-      __asm { fstp    [esp+0A4h+duration]; float }
-      sub_659B90((int *)_EBX, v52, duratione);
-    }
-  }
-LABEL_108:
-  if ( (_DWORD)v38 )
-  {
-    __asm { fild    dword ptr [esp+0A0h+var_38] }
-    __asm
-    {
-      fmul    dword ptr ds:0B14EE8h
-      fstp    [esp+0A4h+var_68]
-      fld     [esp+0A4h+var_68]
-      fstp    [esp+0A4h+duration]; float
-    }
-    sub_65ABC0((TESObjectREFR *)_EBX, durationf);
-  }
-  v52 = sub_633250((int)_EBX->super.super.super.process, (char)&savedregs, a7, v52, a8, (Actor *)_EBX);
-  if ( v67 )
-  {
-    if ( _EBX->unk574 )
-      sub_66A670((TESObjectREFR *)_EBX);
-    sub_65E900((TESObjectREFR *)_EBX);
-    __asm { fld     [ebp+arg_0] }
-    __asm { fstp    [esp+0A4h+duration]; a2 }
-    _EBX->isThirdPerson = _EBX->isThirdPerson == 0;
-    sub_603CA0((Actor *)_EBX, a7, a8, v52, durationg);
-    __asm { fld     [ebp+arg_0] }
-    _EBX->isThirdPerson = _EBX->isThirdPerson == 0;
-    __asm { fstp    [esp+0A4h+duration]; a2 }
-    sub_603CA0((Actor *)_EBX, a7, a8, v52, durationh);
-    sub_66B710(_EBX, v52, a7, 0);
-    return;
-  }
-LABEL_75:
-  if ( !_EBX->isWakeUpPackage
-    && !_EBX->isTravelPackage
-    && !_EBX->vtbl->super.super.super.IsDead((TESObjectREFR *)_EBX, 0) )
-  {
-    editorPackage = TESDataHandler_g_PlayerRef->super.super.super.process->editorPackage;
-    if ( editorPackage )
-    {
-      editorPackage->__vftable->super.Destroy((TESForm *)editorPackage, 1);
-      TESDataHandler_g_PlayerRef->super.super.super.process->editorPackage = 0;
-    }
-    if ( ((int (__thiscall *)(LowProcess *))TESDataHandler_g_PlayerRef->super.super.super.process->Unk_5C)(TESDataHandler_g_PlayerRef->super.super.super.process) )
-      TESDataHandler_g_PlayerRef->super.super.super.process->SetCurrentPackage(
-        TESDataHandler_g_PlayerRef->super.super.super.process,
-        0);
-    if ( _EBX->bCanLevelUp && byte_B14E88 )
-    {
-      sub_5ACE20(a7, a8, v52);
-      return;
-    }
-    sub_6606F0((int)_EBX);
-    sub_65DA20(v68);
-    if ( InputGlobals::QueryControlState(v245, 8, 1) )
-    {
-      if ( IsWeaponReady(_EBX) && !_EBX->unk5C0 && Actor_GetCurrentAction(_EBX) == 0xFFFFFFFF )
-      {
-        v69 = _EBX->super.super.super.process->GetCombatMode(_EBX->super.super.super.process);
-        sub_5E6D70(_EBX, v69 == 0);
+        InputGlobals::SendControlPress(v142, 0); /*0x671efe*/
       }
     }
-    if ( InputGlobals::QueryControlState(v245, 0xB, 1) )
-      _EBX->AlwaysRun = _EBX->AlwaysRun == 0;
-    if ( InputGlobals::QueryControlState(v245, 0xC, 1) )
-      _EBX->AutoMove = _EBX->AutoMove == 0;
-    if ( _EBX->AutoMove )
+    if ( !v166 ) /*0x671f11*/
     {
-      if ( InputGlobals::QueryControlState(v245, 0, 0)
-        || InputGlobals::QueryControlState(v245, 1, 0)
-        || (InputGlobals::QueryControlState(v245, 3, 0) || InputGlobals::QueryControlState(v245, 2, 0)) && !v278 )
+      if ( InputGlobals::QueryControlState(v142, 9, 1) ) /*0x671f19*/
       {
-        _EBX->AutoMove = 0;
-      }
-      else
-      {
-        InputGlobals::SendControlPress(v245, 0);
-      }
-    }
-    if ( !v278 )
-    {
-      if ( InputGlobals::QueryControlState(v245, 9, 1) )
-      {
-        if ( !_EBX->vtbl->super.super.super.HasFatigue((TESObjectREFR *)_EBX)
-          && !_EBX->vtbl->super.super.super.IsDead((TESObjectREFR *)_EBX, 0)
-          && !_EBX->vtbl->super.super.super.GetKnockedState((TESObjectREFR *)_EBX)
-          && Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)_EBX) != (struct Concurrency::details::ScheduleGroupBase *)5
-          && Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)_EBX) != (struct Concurrency::details::ScheduleGroupBase *)3 )
+        if ( !this->vtbl->super.super.super.HasFatigue((TESObjectREFR *)this) /*0x671f6a*/
+          && !this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0)
+          && !this->vtbl->super.super.super.GetKnockedState((TESObjectREFR *)this)
+          && Actor::GetDeadState((Actor *)this) != 5
+          && Actor::GetDeadState((Actor *)this) != 3 )
         {
-          if ( (v232 & 0x400) != 0 )
-            v232 &= 0xFBFFu;
+          if ( (v129 & 0x400) != 0 ) /*0x671f75*/
+            v129 &= 0xFBFFu; /*0x671f77*/
           else
-            v232 |= 0x400u;
+            v129 |= 0x400u; /*0x671f81*/
         }
       }
     }
-    if ( v246->super.children.end )
-      vtbl = v246->super.children.data->vtbl;
+    if ( *((_WORD *)v143 + 0x5B) ) /*0x671f89*/
+      v39 = *v143[0x2C]; /*0x671f9d*/
     else
-      vtbl = 0;
-    __asm { fld1 }
-    v71 = _EBX->super.super.super.super.pos[1];
-    __asm { fstp    [esp+0A0h+var_64] }
-    p_DumpAttributes = &vtbl->super.DumpAttributes;
-    __asm { fldz }
-    v73 = _EBX->super.super.super.super.pos[2];
-    __asm { fst     [esp+0A0h+a2] }
-    __asm { fst     [esp+0A0h+var_5C] }
-    qmemcpy(v289, p_DumpAttributes, sizeof(v289));
-    __asm { fld     [esp+0A0h+var_20] }
-    v277.x = _EBX->super.super.super.super.pos[0];
-    x = v277.x;
-    v282 = v274;
-    flags = _EBX->super.super.super.super.super.flags;
-    __asm
+      v39 = 0; /*0x671f93*/
+    v40 = this->super.super.super.super.pos[1]; /*0x671fa1*/
+    v162 = 1.0; /*0x671fa4*/
+    v41 = (const void *)(v39 + 0x30); /*0x671fa8*/
+    v42 = this->super.super.super.super.pos[2]; /*0x671fad*/
+    a2a = 0.0; /*0x671fb0*/
+    v164 = 0.0; /*0x671fb9*/
+    qmemcpy(v177, v41, sizeof(v177)); /*0x671fc1*/
+    v165.x = this->super.super.super.super.pos[0]; /*0x671fcd*/
+    x = v165.x; /*0x671fd1*/
+    v170 = 1.0; /*0x671fd9*/
+    flags = this->super.super.super.super.super.flags; /*0x671fdd*/
+    v162 = v177[1]; /*0x671fe0*/
+    v165.y = v40; /*0x671feb*/
+    v175 = v40; /*0x671fef*/
+    v165.z = v42; /*0x671ff7*/
+    a2a = v177[4]; /*0x671ffb*/
+    v176 = v42; /*0x671fff*/
+    v44 = v177[7]; /*0x672007*/
+    v164 = v177[7]; /*0x672014*/
+    v171 = 0.0; /*0x672018*/
+    v172 = 0.0; /*0x67201c*/
+    if ( (flags & 0x10) != 0 ) /*0x672020*/
     {
-      fstp    [esp+0A0h+var_64]
-      fld     [esp+0A0h+var_14]
-    }
-    v277.y = v71;
-    v287 = v71;
-    v75 = a2a;
-    v277.z = v73;
-    __asm { fstp    [esp+0A0h+a2] }
-    v288 = v73;
-    v76 = v276;
-    __asm { fld     [esp+0A0h+var_8] }
-    __asm { fstp    [esp+0A0h+var_5C] }
-    v283 = v75;
-    v284 = v76;
-    if ( (flags & 0x10) != 0 )
-    {
-      __asm
-      {
-        fstp    st
-        fld     [esp+0A0h+var_24]
-        fstp    [esp+0A0h+var_44]
-        fld     [esp+0A0h+var_18]
-        fstp    [esp+0A0h+var_40]
-        fld     [esp+0A0h+var_C]
-        fstp    [esp+0A0h+var_3C]
-      }
+      v170 = v177[0]; /*0x672039*/
+      v171 = v177[3]; /*0x672044*/
+      v172 = v177[6]; /*0x67204f*/
     }
     else
     {
-      __asm { fstp    [esp+0A0h+var_5C] }
-      v52 = sub_43F350(&v274);
-      __asm { fstp    st }
+      v164 = 0.0; /*0x672026*/
+      Vector3_NormalizeInPlace(&v162); /*0x67202a*/
     }
-    v234 = 0;
-    if ( _EBX->unk57CState == 2 )
+    updated = 0; /*0x67205a*/
+    if ( this->unk57CState == 2 ) /*0x67205f*/
+      updated = Player_UpdateGrabObjectAttackControl((TESObjectREFR *)this, v7, v44, deltaTime, SLODWORD(deltaTime)); /*0x67206f*/
+    sub_663740((int *)this); /*0x672075*/
+    v45 = InputGlobals::GetJoystickAxisMovement(v142, 0, iJoystickMoveLeftRight); /*0x672089*/
+    v46 = Double_To_SInt32((double)v45 * fJoystickMoveLRMult); /*0x6720a1*/
+    v144 = InputGlobals::GetJoystickAxisMovement(v142, 0, iJoystickMoveFrontBack); /*0x6720b2*/
+    v161 = Double_To_SInt32((double)v144 * fJoystickMoveFBMult); /*0x6720c7*/
+    if ( v46 ) /*0x6720cb*/
     {
-      __asm { fld     [ebp+arg_0] }
-      __asm { fstp    [esp+0A4h+duration]; float }
-      v234 = sub_66DFD0((TESObjectREFR *)_EBX, a7, a8, v52, durationi);
-    }
-    sub_663740((int *)_EBX);
-    v247 = InputGlobals::GetJoystickAxisMovement(v245, 0, dword_B14ED0);
-    __asm
-    {
-      fild    [esp+0A0h+var_78]
-      fmul    dword ptr ds:0B14EF8h
-    }
-    v77 = Double_To_SInt32(v52);
-    v248 = InputGlobals::GetJoystickAxisMovement(v245, 0, dword_B14EC8);
-    __asm
-    {
-      fild    [esp+0A0h+var_78]
-      fmul    dword ptr ds:0B14EF0h
-    }
-    v273 = Double_To_SInt32(v52);
-    if ( v77 )
-    {
-      if ( v77 <= 0 )
-        InputGlobals::SendControlPress(v245, 2);
+      if ( v46 <= 0 ) /*0x6720cd*/
+        InputGlobals::SendControlPress(v142, 2); /*0x6720db*/
       else
-        InputGlobals::SendControlPress(v245, 3);
-      v249 = abs32(v77);
-      __asm
-      {
-        fild    [esp+0A0h+var_78]
-        fmul    qword ptr ds:0A73E80h
-        fstp    dword ptr ds:0B14E5Ch
-      }
-      flt_B14E5C = _ET1;
-      __asm
-      {
-        fld     dword ptr ds:0A35AA4h
-        fcom    dword ptr ds:0B14E5Ch
-        fnstsw  ax
-      }
-      if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-      {
-        __asm { fstp    st }
-      }
-      else
-      {
-        __asm { fstp    dword ptr ds:0B14E5Ch }
-        flt_B14E5C = _ET1;
-      }
+        InputGlobals::SendControlPress(v142, 3); /*0x6720d1*/
+      flt_B14E5C = (double)(int)abs32(v46) * dbl_A73E80; /*0x6720f5*/
+      if ( flt_A35AA4 < (double)flt_B14E5C ) /*0x67210c*/
+        flt_B14E5C = flt_A35AA4; /*0x67210e*/
     }
-    v81 = abs32(v273);
-    v82 = abs32(v77);
-    v239 = v81;
-    v250 = v82;
-    if ( v81 >= v82 )
+    v47 = abs32(v161); /*0x672121*/
+    v48 = abs32(v46); /*0x67212a*/
+    v136 = v47; /*0x67212e*/
+    if ( v47 >= v48 ) /*0x672136*/
     {
-      if ( v273 )
+      if ( v161 ) /*0x672160*/
       {
-        if ( v273 >= 0 )
-          InputGlobals::SendControlPress(v245, 1);
+        if ( v161 >= 0 ) /*0x672162*/
+          InputGlobals::SendControlPress(v142, 1); /*0x672172*/
         else
-          InputGlobals::SendControlPress(v245, 0);
-        v81 = v239;
-        __asm
-        {
-          fild    [esp+0A0h+var_84]
-          fmul    qword ptr ds:0A73E80h
-          fstp    dword ptr ds:0B14E58h
-        }
-        flt_B14E58 = _ET1;
+          InputGlobals::SendControlPress(v142, 0); /*0x672166*/
+        v47 = v136; /*0x672177*/
+        flt_B14E58 = (double)v136 * dbl_A73E80; /*0x672185*/
       }
     }
     else
     {
-      __asm
-      {
-        fild    [esp+0A0h+var_78]
-        fmul    qword ptr ds:0A73E80h
-        fstp    dword ptr ds:0B14E58h
-      }
-      flt_B14E58 = _ET1;
-      if ( v77 >= 0 )
-        v232 |= 8u;
+      flt_B14E58 = (double)v48 * dbl_A73E80; /*0x672144*/
+      if ( v46 >= 0 ) /*0x67214a*/
+        v129 |= 8u; /*0x672153*/
       else
-        v232 |= 4u;
+        v129 |= 4u; /*0x67214c*/
     }
-    __asm
+    if ( flt_B14E58 > 1.0 ) /*0x672198*/
+      flt_B14E58 = 1.0; /*0x67219a*/
+    if ( v48 > 0x62 || v47 > 0x62 ) /*0x6721ac*/
+      InputGlobals::SendControlPress(v142, 0xA); /*0x6721b4*/
+    if ( this->AlwaysRun ) /*0x6721b9*/
     {
-      fld1
-      fcom    dword ptr ds:0B14E58h
-      fnstsw  ax
-    }
-    if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-    {
-      __asm { fstp    st }
-    }
-    else
-    {
-      __asm { fstp    dword ptr ds:0B14E58h }
-      flt_B14E58 = _ET1;
-    }
-    if ( v82 > 0x62 || v81 > 0x62 )
-      InputGlobals::SendControlPress(v245, 0xA);
-    if ( _EBX->AlwaysRun )
-    {
-      v87 = v245;
-      if ( !InputGlobals::QueryControlState(v245, 0xA, 1) && !InputGlobals::QueryControlState(v245, 0xA, 0) )
+      v49 = v142; /*0x6721c6*/
+      if ( !InputGlobals::QueryControlState(v142, 0xA, 1) && !InputGlobals::QueryControlState(v142, 0xA, 0) ) /*0x6721da*/
       {
-        InputGlobals::SendControlPress(v245, 0xA);
-        v232 |= 0x200u;
-LABEL_179:
-        v88 = sub_5E65B0((TESObjectREFR *)_EBX);
-        __asm { fstp    [esp+0A0h+var_78] }
-        v126 = _EBX->isFlyCam == 0;
-        __asm
+        InputGlobals::SendControlPress(v142, 0xA); /*0x6721e7*/
+        v129 |= 0x200u; /*0x6721ec*/
+LABEL_173:
+        v145 = sub_5E65B0((TESObjectREFR *)this); /*0x672223*/
+        v72 = this->isFlyCam == 0; /*0x67222e*/
+        v146 = flt_B14E58 * v145; /*0x67223f*/
+        v170 = v146 * v170; /*0x672255*/
+        v50 = v171 * v146; /*0x67225d*/
+        v171 = v50; /*0x67225f*/
+        v172 = v146 * v172; /*0x672267*/
+        v162 = v146 * v162; /*0x672279*/
+        v51 = a2a * v146; /*0x672281*/
+        a2a = v51; /*0x672283*/
+        v52 = v146 * v164; /*0x672287*/
+        v164 = v52; /*0x67228b*/
+        if ( !v72 ) /*0x67228f*/
+          goto LABEL_194; /*0x67228f*/
+        if ( InputGlobals::QueryControlState(v49, 0, 1) || InputGlobals::QueryControlState(v49, 0, 0) ) /*0x6722a8*/
         {
-          fld     dword ptr ds:0B14E58h
-          fmul    [esp+0A0h+var_78]
-          fstp    [esp+0A0h+var_78]
-          fld     [esp+0A0h+var_78]
-          fst     [esp+0A0h+var_78]
-          fld     [esp+0A0h+var_78]
-          fld     st
-          fmul    [esp+0A0h+var_44]
-          fstp    [esp+0A0h+var_44]
-          fld     [esp+0A0h+var_40]
-          fmul    st, st(1)
-          fstp    [esp+0A0h+var_40]
-          fmul    [esp+0A0h+var_3C]
-          fstp    [esp+0A0h+var_3C]
-          fstp    [esp+0A0h+var_78]
-          fld     [esp+0A0h+var_78]
-          fld     st
-          fmul    [esp+0A0h+var_64]
-          fstp    [esp+0A0h+var_64]
-          fld     [esp+0A0h+a2]
-          fmul    st, st(1)
-          fstp    [esp+0A0h+a2]
-          fmul    [esp+0A0h+var_5C]
-          fstp    [esp+0A0h+var_5C]
+          v53 = v129; /*0x6722b5*/
+          v165.x = v165.x + v162; /*0x6722c2*/
+          v165.y = v165.y + a2a; /*0x6722ce*/
+          v52 = v165.z + v164; /*0x6722d6*/
+          v165.z = v52; /*0x6722da*/
+          if ( (v129 & 0x200) == 0 ) /*0x6722de*/
+            v53 = v129 | 0x100; /*0x6722e0*/
+          v129 = v53 | 1; /*0x6722e8*/
         }
-        if ( !v126 )
-          goto LABEL_200;
-        if ( InputGlobals::QueryControlState(v87, 0, 1) || InputGlobals::QueryControlState(v87, 0, 0) )
+        if ( InputGlobals::QueryControlState(v49, 1, 1) || InputGlobals::QueryControlState(v49, 1, 0) ) /*0x672300*/
         {
-          __asm { fld     [esp+0A0h+var_58.x] }
-          v89 = v232;
-          __asm
-          {
-            fadd    [esp+0A0h+var_64]
-            fstp    [esp+0A0h+var_58.x]
-            fld     [esp+0A0h+var_58.y]
-            fadd    [esp+0A0h+a2]
-            fstp    [esp+0A0h+var_58.y]
-            fld     [esp+0A0h+var_58.z]
-            fadd    [esp+0A0h+var_5C]
-            fstp    [esp+0A0h+var_58.z]
-          }
-          if ( (v232 & 0x200) == 0 )
-            v89 = v232 | 0x100;
-          v232 = v89 | 1;
+          v54 = v129; /*0x67230d*/
+          v165.x = v165.x - v162; /*0x67231a*/
+          v165.y = v165.y - a2a; /*0x672326*/
+          v52 = v165.z - v164; /*0x67232e*/
+          v165.z = v52; /*0x672332*/
+          if ( (v129 & 0x200) == 0 ) /*0x672336*/
+            v54 = v129 | 0x100; /*0x672338*/
+          v129 = v54 | 2; /*0x672340*/
         }
-        if ( InputGlobals::QueryControlState(v87, 1, 1) || InputGlobals::QueryControlState(v87, 1, 0) )
+        if ( InputGlobals::QueryControlState(v49, 2, 1) || InputGlobals::QueryControlState(v49, 2, 0) ) /*0x672358*/
         {
-          __asm { fld     [esp+0A0h+var_58.x] }
-          v90 = v232;
-          __asm
-          {
-            fsub    [esp+0A0h+var_64]
-            fstp    [esp+0A0h+var_58.x]
-            fld     [esp+0A0h+var_58.y]
-            fsub    [esp+0A0h+a2]
-            fstp    [esp+0A0h+var_58.y]
-            fld     [esp+0A0h+var_58.z]
-            fsub    [esp+0A0h+var_5C]
-            fstp    [esp+0A0h+var_58.z]
-          }
-          if ( (v232 & 0x200) == 0 )
-            v90 = v232 | 0x100;
-          v232 = v90 | 2;
+          v55 = v129; /*0x672365*/
+          v165.x = v165.x - v170; /*0x672372*/
+          v165.y = v165.y - v171; /*0x67237e*/
+          v52 = v165.z - v172; /*0x672386*/
+          v165.z = v52; /*0x67238a*/
+          if ( (v129 & 0x200) == 0 ) /*0x67238e*/
+            v55 = v129 | 0x100; /*0x672390*/
+          v129 = v55 | 4; /*0x672398*/
         }
-        if ( InputGlobals::QueryControlState(v87, 2, 1) || InputGlobals::QueryControlState(v87, 2, 0) )
+        if ( InputGlobals::QueryControlState(v49, 3, 1) || InputGlobals::QueryControlState(v49, 3, 0) ) /*0x6723b0*/
         {
-          __asm { fld     [esp+0A0h+var_58.x] }
-          v91 = v232;
-          __asm
-          {
-            fsub    [esp+0A0h+var_44]
-            fstp    [esp+0A0h+var_58.x]
-            fld     [esp+0A0h+var_58.y]
-            fsub    [esp+0A0h+var_40]
-            fstp    [esp+0A0h+var_58.y]
-            fld     [esp+0A0h+var_58.z]
-            fsub    [esp+0A0h+var_3C]
-            fstp    [esp+0A0h+var_58.z]
-          }
-          if ( (v232 & 0x200) == 0 )
-            v91 = v232 | 0x100;
-          v232 = v91 | 4;
-        }
-        if ( InputGlobals::QueryControlState(v87, 3, 1) || InputGlobals::QueryControlState(v87, 3, 0) )
-        {
-          __asm { fld     [esp+0A0h+var_58.x] }
-          v92 = v232;
-          __asm
-          {
-            fadd    [esp+0A0h+var_44]
-            fstp    [esp+0A0h+var_58.x]
-            fld     [esp+0A0h+var_58.y]
-            fadd    [esp+0A0h+var_40]
-            fstp    [esp+0A0h+var_58.y]
-            fld     [esp+0A0h+var_58.z]
-            fadd    [esp+0A0h+var_3C]
-            fstp    [esp+0A0h+var_58.z]
-          }
-          if ( (v232 & 0x200) == 0 )
-            v92 = v232 | 0x100;
-          v93 = v92 | 8;
-          v232 = v93;
+          v56 = v129; /*0x6723bd*/
+          v165.x = v165.x + v170; /*0x6723ca*/
+          v165.y = v165.y + v171; /*0x6723d6*/
+          v52 = v165.z + v172; /*0x6723de*/
+          v165.z = v52; /*0x6723e2*/
+          if ( (v129 & 0x200) == 0 ) /*0x6723e6*/
+            v56 = v129 | 0x100; /*0x6723e8*/
+          v57 = v56 | 8; /*0x6723ed*/
+          v129 = v57; /*0x6723f0*/
         }
         else
         {
-LABEL_200:
-          LOWORD(v93) = v232;
+LABEL_194:
+          LOWORD(v57) = v129; /*0x6723f6*/
         }
-        v94 = (MobileObject *)v278;
-        if ( v278 )
+        v58 = (MobileObject *)v166; /*0x6723fa*/
+        if ( v166 ) /*0x672400*/
         {
-          v95 = v93 & 0xFFCF;
-          v233 = v95;
-          if ( (v95 & 4) != 0 )
+          v59 = v57 & 0xFFCF; /*0x672406*/
+          v130 = v59; /*0x67240d*/
+          if ( (v59 & 4) != 0 ) /*0x672411*/
           {
-            __asm
-            {
-              fild    dword ptr ds:0B37520h
-              fld     [ebp+arg_0]
-              fld     st
-              fmulp   st(2), st
-              fld     dword ptr ds:0B3BCECh
-              faddp   st(2), st
-              fxch    st(1)
-              fstp    dword ptr ds:0B3BCECh
-            }
-            flt_B3BCEC = _ET1;
-            __asm
-            {
-              fild    dword ptr ds:0B37518h
-              fstp    [esp+0A0h+var_84]
-              fld     dword ptr ds:0B3BCECh
-              fld     [esp+0A0h+var_84]
-              fcom    st(1)
-              fnstsw  ax
-              fstp    st(1)
-            }
-            if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-            {
-              __asm { fstp    st }
-            }
-            else
-            {
-              __asm { fstp    dword ptr ds:0B3BCECh }
-              flt_B3BCEC = _ET1;
-            }
-            __asm { fld     dword ptr ds:0B3BCECh }
-            __asm { fmul    qword ptr ds:0A73E78h }
-            __asm
-            {
-              fmulp   st(1), st
-              fmul    dword ptr ds:0B14E5Ch
-              fstp    [esp+0A4h+var_78]
-              fld     [esp+0A4h+var_78]
-              fstp    [esp+0A4h+duration]; float
-            }
-            sub_659B90((int *)v94, v88, durationj);
-            v233 |= 0x10u;
-            LOBYTE(v95) = v233;
+            qword_B3BB2C[0x70] = (double)MEMORY[0xB37520] * deltaTime + qword_B3BB2C[0x70]; /*0x67242a*/
+            v137 = (float)MEMORY[0xB37518]; /*0x672436*/
+            v50 = v137; /*0x672440*/
+            if ( v137 < (double)qword_B3BB2C[0x70] ) /*0x67244d*/
+              qword_B3BB2C[0x70] = v137; /*0x67244f*/
+            v51 = qword_B3BB2C[0x70] * dbl_A73E78; /*0x672460*/
+            v147 = deltaTime * v51 * flt_B14E5C; /*0x672470*/
+            sub_659B90((int *)v58, v147, v147); /*0x67247b*/
+            v130 |= 0x10u; /*0x672480*/
+            LOBYTE(v59) = v130; /*0x672485*/
           }
           else
           {
-            __asm
-            {
-              fldz
-              fstp    dword ptr ds:0B3BCECh
-            }
-            flt_B3BCEC = _ET1;
+            qword_B3BB2C[0x70] = 0.0; /*0x67248d*/
           }
-          if ( (v95 & 8) != 0 )
+          if ( (v59 & 8) != 0 ) /*0x672495*/
           {
-            __asm
-            {
-              fild    dword ptr ds:0B37520h
-              fld     [ebp+arg_0]
-              fld     st
-              fmulp   st(2), st
-              fld     dword ptr ds:0B3BCE8h
-              faddp   st(2), st
-              fxch    st(1)
-              fstp    dword ptr ds:0B3BCE8h
-            }
-            flt_B3BCE8 = _ET1;
-            __asm
-            {
-              fild    dword ptr ds:0B37518h
-              fstp    [esp+0A0h+var_84]
-              fld     dword ptr ds:0B3BCE8h
-              fld     [esp+0A0h+var_84]
-              fcom    st(1)
-              fnstsw  ax
-              fstp    st(1)
-            }
-            if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-            {
-              __asm { fstp    st }
-            }
-            else
-            {
-              __asm { fstp    dword ptr ds:0B3BCE8h }
-              flt_B3BCE8 = _ET1;
-            }
-            __asm { fld     dword ptr ds:0B3BCE8h }
-            __asm { fmul    qword ptr ds:0A31C78h }
-            __asm
-            {
-              fmulp   st(1), st
-              fmul    dword ptr ds:0B14E5Ch
-              fstp    [esp+0A4h+var_78]
-              fld     [esp+0A4h+var_78]
-              fstp    [esp+0A4h+duration]; float
-            }
-            sub_659B90((int *)v94, v88, durationk);
-            v233 |= 0x20u;
+            qword_B3BB2C[0x6F] = (double)MEMORY[0xB37520] * deltaTime + qword_B3BB2C[0x6F]; /*0x6724ae*/
+            v138 = (float)MEMORY[0xB37518]; /*0x6724ba*/
+            v50 = v138; /*0x6724c4*/
+            if ( v138 < (double)qword_B3BB2C[0x6F] ) /*0x6724d1*/
+              qword_B3BB2C[0x6F] = v138; /*0x6724d3*/
+            v51 = qword_B3BB2C[0x6F] * dbl_A31C78; /*0x6724e4*/
+            v148 = deltaTime * v51 * flt_B14E5C; /*0x6724f4*/
+            sub_659B90((int *)v58, v148, v148); /*0x6724ff*/
+            v130 |= 0x20u; /*0x672504*/
           }
           else
           {
-            __asm
-            {
-              fldz
-              fstp    dword ptr ds:0B3BCE8h
-            }
-            flt_B3BCE8 = _ET1;
+            qword_B3BB2C[0x6F] = 0.0; /*0x67250d*/
           }
-          v232 = v233 & 0xFFF3;
-          ((void (__thiscall *)(LowProcess *, int))v94->process->Unk_B1)(v94->process, v232);
-          if ( (v232 & 1) != 0 && (v232 & 0x3E) == 0 )
+          v129 = v130 & 0xFFF3; /*0x672521*/
+          ((void (__thiscall *)(LowProcess *, int))v58->process->Unk_B1)(v58->process, v129); /*0x67252c*/
+          if ( (v129 & 1) != 0 && (v129 & 0x3E) == 0 ) /*0x67253a*/
           {
-            if ( InputGlobals::QueryControlState(v87, 0xD, 1) )
+            if ( InputGlobals::QueryControlState(v49, 0xD, 1) ) /*0x672542*/
             {
-              if ( !((unsigned __int8 (__thiscall *)(PlayerCharacter *))_EBX->vtbl->super.Unk_97)(_EBX) )
+              if ( !((unsigned __int8 (__thiscall *)(PlayerCharacter *))this->vtbl->super.Unk_97)(this) ) /*0x672555*/
               {
-                if ( (*((_DWORD *)MobileObject_GetCharProxy(v94) + 0x7D) & 0x400) != 0 )
-                  v94->vtbl->Jump(v94);
-                v230 = 1;
+                if ( (*((_DWORD *)MobileObject_GetCharProxy(v58) + 0x7D) & 0x400) != 0 ) /*0x67256e*/
+                  v58->vtbl->Jump(v58); /*0x67257a*/
+                v127 = 1; /*0x67257c*/
               }
             }
           }
-          v88 = sub_4A9720((Actor *)_EBX);
-          __asm { fstp    [esp+0A4h+duration]; float }
-          sub_65A650((TESObjectREFR *)v94, durationl);
+          v52 = Actor_GetAimPitch((Actor *)this); /*0x672583*/
+          duration = v52; /*0x67258b*/
+          sub_65A650((TESObjectREFR *)v58, duration); /*0x67258e*/
         }
         else
         {
-          ((void (__thiscall *)(LowProcess *, int))_EBX->super.super.super.process->Unk_B1)(
-            _EBX->super.super.super.process,
-            v232);
+          ((void (__thiscall *)(LowProcess *, int))this->super.super.super.process->Unk_B1)( /*0x6725a5*/
+            this->super.super.super.process,
+            v129);
         }
-        sub_66C650((Concurrency::details::SchedulerBase *)_EBX);
-        v104 = _EBX->vtbl;
-        isThirdPerson = _EBX->isThirdPerson;
-        GetKnockedState = v104->super.super.super.GetKnockedState;
-        _EBX->isThirdPerson = 1;
-        if ( GetKnockedState((TESObjectREFR *)_EBX)
-          || _EBX->unk5C0
-          || _EBX->vtbl->super.super.super.HasFatigue((TESObjectREFR *)_EBX)
-          || Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)_EBX)
-          || Actor_GetCurrentAction(_EBX) == 8
-          || ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetSitSleepState)(_EBX->super.super.super.process) )
+        sub_66C650((Concurrency::details::SchedulerBase *)this); /*0x6725a9*/
+        vtbl = this->vtbl; /*0x6725b4*/
+        isThirdPerson = this->isThirdPerson; /*0x6725b6*/
+        GetKnockedState = vtbl->super.super.super.GetKnockedState; /*0x6725ba*/
+        this->isThirdPerson = 1; /*0x6725c2*/
+        if ( GetKnockedState((TESObjectREFR *)this) /*0x67261d*/
+          || this->unk5C0
+          || this->vtbl->super.super.super.HasFatigue((TESObjectREFR *)this)
+          || Actor::GetDeadState((Actor *)this)
+          || Actor_GetCurrentAction(this) == 8
+          || ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetSitSleepState)(this->super.super.super.process) )
         {
-          ((void (__thiscall *)(LowProcess *, int, _DWORD))_EBX->super.super.super.process->Unk_B0)(
-            _EBX->super.super.super.process,
+          ((void (__thiscall *)(LowProcess *, int, _DWORD))this->super.super.super.process->Unk_B0)( /*0x672bad*/
+            this->super.super.super.process,
             0x33F,
             0);
-          if ( ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetSitSleepState)(_EBX->super.super.super.process) != 4 )
+          if ( ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetSitSleepState)(this->super.super.super.process) != 4 ) /*0x672bbf*/
           {
-            if ( byte_B3B43D )
-              sub_5C1000(a8);
-LABEL_309:
-            if ( InputGlobals::QueryControlState(v87, 0x10, 1) && !_EBX->unk5C0 )
+            if ( unk_B3B43D ) /*0x672bc8*/
+              sub_5C1000(v51); /*0x672bd1*/
+LABEL_300:
+            if ( InputGlobals::QueryControlState(v49, 0x10, 1) && !this->unk5C0 ) /*0x672be9*/
             {
-              if ( _EBX->JailedState )
+              if ( this->JailedState ) /*0x672bf6*/
               {
-                ShowUIMessageBox(
-                  (char *)sOk,
-                  (char)&savedregs,
-                  a7,
-                  a8,
-                  v88,
-                  (const char *)dword_B38AD0,
+                ShowUIMessageBox( /*0x672c13*/
+                  (char *)MEMORY[0xB38CF0],
+                  v50,
+                  v51,
+                  v52,
+                  (char *)stru_B38AD0,
                   0,
                   1,
-                  (const char *)sOk,
+                  (char *)MEMORY[0xB38CF0],
                   0);
-                goto LABEL_330;
+                goto LABEL_321; /*0x672c13*/
               }
-              if ( PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)_EBX, 0) )
+              if ( PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)this, 0) ) /*0x672c1a*/
               {
-                __asm { fld     dword ptr ds:0A379B4h }
-                __asm { fstp    [esp+0A4h+duration]; duration }
-                GameUI_QueueMessage((const char *)dword_B38AE0, 0, 1u, durationp);
-                goto LABEL_330;
+                GameUI_QueueMessage((const char *)stru_B38AE0, 0, 1u, fConstant_2); /*0x672c37*/
+                goto LABEL_321; /*0x672c3f*/
               }
-              if ( _EBX->vtbl->super.IsTresspassing((Actor *)_EBX) )
+              if ( this->vtbl->super.IsTresspassing((Actor *)this) ) /*0x672c4e*/
               {
-                ShowUIMessageBox(
-                  (char *)sOk,
-                  (char)&savedregs,
-                  a7,
-                  a8,
-                  v88,
-                  (const char *)dword_B38AE8,
+                ShowUIMessageBox( /*0x672c68*/
+                  (char *)MEMORY[0xB38CF0],
+                  v50,
+                  v51,
+                  v52,
+                  (char *)stru_B38AE8,
                   0,
                   1,
-                  (const char *)sOk,
+                  (char *)MEMORY[0xB38CF0],
                   0);
-                goto LABEL_330;
+                goto LABEL_321; /*0x672c68*/
               }
-              if ( sub_65D9E0(_EBX) )
+              if ( sub_65D9E0(this) ) /*0x672c6f*/
               {
-                v129 = (char *)dword_B38AD8;
-LABEL_329:
-                ShowUIMessageBox(v129, (char)&savedregs, a7, a8, v88, v129, 0, 1, (const char *)sOk, 0);
-                goto LABEL_330;
+                v73 = (char *)stru_B38AD8; /*0x672c78*/
+LABEL_320:
+                ShowUIMessageBox(v73, v50, v51, v52, v73, 0, 1, (char *)MEMORY[0xB38CF0], 0); /*0x672d7f*/
+                goto LABEL_321; /*0x672d8c*/
               }
-              __asm { fld     dword ptr ds:0A6E688h }
-              __asm { fstp    [esp+0A4h+duration]; float }
-              ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)_EBX);
-              v130 = (int)_EBX->vtbl->super.super.super.GetPos((TESObjectREFR *)_EBX);
-              if ( Actor_IsUnderwater__(_EBX, v130, (ExtraDataList *)ParentCell, durationq) )
+              v52 = flt_A6E688; /*0x672c83*/
+              durationb = flt_A6E688; /*0x672c8c*/
+              arg0_4 = (ExtraDataList *)Shared_GetDwordAtOffset40(this); /*0x672c96*/
+              v74 = this->vtbl->super.super.super.GetPos(this); /*0x672c9f*/
+              if ( Actor_IsUnderwater__(this, (int)v74, arg0_4, durationb) ) /*0x672ca4*/
               {
-                ShowUIMessageBox(
-                  (char *)sOk,
-                  (char)&savedregs,
-                  a7,
-                  a8,
-                  v88,
-                  (const char *)dword_B38AF0,
+                ShowUIMessageBox( /*0x672cc1*/
+                  (char *)MEMORY[0xB38CF0],
+                  v50,
+                  v51,
+                  v52,
+                  (char *)stru_B38AF0,
                   0,
                   1,
-                  (const char *)sOk,
+                  (char *)MEMORY[0xB38CF0],
                   0);
-                goto LABEL_330;
+                goto LABEL_321; /*0x672cc1*/
               }
-              v131 = sub_4D8B90((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-              if ( ActorProcessManager::AreHostilesNEarby(
-                     (int)&ActorProcessManager_ptr,
-                     (signed int)v87,
-                     v131,
-                     *(float *)&duration_4) )
+              v75 = sub_4D8B90((TESObjectREFR *)reference); /*0x672ccc*/
+              if ( ActorProcessManager::AreHostilesNEarby((int)&qword_B3BB2C[0x75], (signed int)v49, v75, duration_4) ) /*0x672cd7*/
               {
-                __asm { fld     dword ptr ds:0A379B4h }
-                __asm { fstp    [esp+0A4h+duration]; duration }
-                GameUI_QueueMessage((const char *)dword_B38AF8, 0, 1u, durationr);
-                goto LABEL_330;
+                GameUI_QueueMessage((const char *)stru_B38AF8, 0, 1u, fConstant_2); /*0x672cf4*/
+                goto LABEL_321; /*0x672cfc*/
               }
-              v132 = MobileObject_GetCharProxy((MobileObject *)TESDataHandler_g_PlayerRef);
-              if ( sub_88D370((_DWORD *)v132 + 0x78) == 1
-                || (v133 = MobileObject_GetCharProxy((MobileObject *)TESDataHandler_g_PlayerRef),
-                    sub_88D370((_DWORD *)v133 + 0x78) == 2) )
+              v76 = MobileObject_GetCharProxy((MobileObject *)reference); /*0x672d07*/
+              if ( hkCharacterContext_GetStateId((_DWORD *)v76 + 0x78) == 1 /*0x672d35*/
+                || (v77 = MobileObject_GetCharProxy((MobileObject *)reference),
+                    hkCharacterContext_GetStateId((_DWORD *)v77 + 0x78) == 2) )
               {
-                v129 = (char *)dword_B38B00;
-                goto LABEL_329;
+                v73 = (char *)stru_B38B00; /*0x672d79*/
+                goto LABEL_320; /*0x672d79*/
               }
-              v134 = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-              if ( sub_4CA6A0((int)v134) )
+              DwordAtOffset40 = Shared_GetDwordAtOffset40(reference); /*0x672d3d*/
+              if ( sub_4CA6A0(DwordAtOffset40) ) /*0x672d44*/
               {
-                ShowUIMessageBox(
-                  (char *)sOk,
-                  (char)&savedregs,
-                  a7,
-                  a8,
-                  v88,
-                  (const char *)dword_B38B08,
+                ShowUIMessageBox( /*0x672d61*/
+                  (char *)MEMORY[0xB38CF0],
+                  v50,
+                  v51,
+                  v52,
+                  (char *)stru_B38B08,
                   0,
                   1,
-                  (const char *)sOk,
+                  (char *)MEMORY[0xB38CF0],
                   0);
               }
               else
               {
-                sub_676EE0((int)&ActorProcessManager_ptr);
-                ShowSleepWaitMenu(0);
+                sub_676EE0((int)&qword_B3BB2C[0x75]); /*0x672d68*/
+                ShowSleepWaitMenu(0); /*0x672d6f*/
               }
             }
-LABEL_330:
-            if ( _EBX->vtbl->super.super.super.GetSleepState((TESObjectREFR *)_EBX) == kSitSleep_Sitting )
+LABEL_321:
+            if ( this->vtbl->super.super.super.GetSleepState((TESObjectREFR *)this) == kSitSleep_Sitting ) /*0x672da3*/
             {
-              if ( v94 )
+              if ( v58 ) /*0x672da7*/
               {
-                _ESI = (int)_EBX->vtbl->super.super.super.GetAnimData((TESObjectREFR *)_EBX);
-                v136 = v278->vtbl->super.super.GetAnimData(v278);
-                if ( v136 )
+                v79 = this->vtbl->super.super.super.GetAnimData(this); /*0x672dbb*/
+                v80 = v166->vtbl->super.super.GetAnimData(v166); /*0x672dc3*/
+                if ( v80 ) /*0x672dc7*/
                 {
-                  if ( _ESI )
-                  {
-                    __asm
-                    {
-                      fld     dword ptr [esi+94h]
-                      fstp    dword ptr [eax+94h]
-                    }
-                    v136->unk94 = _ET1;
-                  }
+                  if ( v79 ) /*0x672dcb*/
+                    v80->unk94 = v79->unk94; /*0x672dd3*/
                 }
-                __asm { fld     [ebp+arg_0] }
-                __asm { fstp    [esp+0A4h+duration] }
-                v88 = ((double (__stdcall *)(_DWORD))v278->vtbl->ProcessControl)(LODWORD(durations));
+                ((void (__stdcall *)(_DWORD))v166->vtbl->ProcessControl)(LODWORD(deltaTime)); /*0x672dec*/
               }
             }
-            _EBX->isThirdPerson = 1;
-            __asm { fld     dword ptr ds:0B14E5Ch }
-            __asm { fstp    [esp+0A8h+duration]; int }
-            __asm
+            this->isThirdPerson = 1; /*0x672dee*/
+            Actor_ProcessAction((Actor *)this, flt_B14E58, flt_B14E5C); /*0x672e0d*/
+            v72 = this->isSleeping == 0; /*0x672e12*/
+            this->isThirdPerson = isThirdPerson; /*0x672e1d*/
+            if ( !v72 ) /*0x672e23*/
+              sub_65F770((MagicTarget *)this, (int)this, (int)v49, v50); /*0x672e27*/
+            if ( MEMORY[0xB33A34] || byte_B14F40 ) /*0x672e35*/
             {
-              fld     dword ptr ds:0B14E58h
-              fstp    [esp+0A8h+anonymous_0+4]; float
-            }
-            Actor_ProcessAction((Actor *)_EBX, a7, a8, v88, v201, durationt);
-            v126 = _EBX->isSleeping == 0;
-            _EBX->isThirdPerson = isThirdPerson;
-            if ( !v126 )
-              sub_65F770((MagicTarget *)_EBX, (int)_EBX, (int)v87, a7);
-            if ( IsCollisionOn || byte_B14F40 )
-            {
-              if ( (_EBX->super.super.super.super.super.flags & 0x10) == 0 )
+              if ( (this->super.super.super.super.super.flags & 0x10) == 0 ) /*0x672e55*/
               {
-                v138 = MobileObject_GetCharProxy((MobileObject *)_EBX);
-                if ( v138 )
+                v81 = MobileObject_GetCharProxy((MobileObject *)this); /*0x672e5e*/
+                if ( v81 ) /*0x672e62*/
                 {
-                  sub_452A10(v138, &v277);
-                  v139 = *((_OWORD **)v138 + 2);
-                  if ( v139 )
-                    sub_8AC0B0(v139, &stru_BA7A40);
+                  sub_452A10(v81, &v165); /*0x672e6b*/
+                  v82 = *((_OWORD **)v81 + 2); /*0x672e70*/
+                  if ( v82 ) /*0x672e75*/
+                    sub_8AC0B0(v82, &unk_BA7A40); /*0x672e7e*/
                 }
-                sub_46A9C0(_EBX, 1);
+                sub_46A9C0(this, 1); /*0x672e87*/
               }
-              __asm { fld     [esp+0A0h+var_58.z] }
-              __asm { fld     [esp+0A0h+var_28] }
-              Unk_73 = _EBX->vtbl->super.super.Unk_73;
-              __asm { fld     st }
-              __asm { fsubp   st(2), st }
-              __asm { fxch    st(1) }
-              __asm
-              {
-                fstp    [esp+0A4h+var_78]
-                fld     [esp+0A4h+var_78]
-                fmul    [ebp+arg_0]
-                fstp    [esp+0A4h+var_70]
-                fld     [esp+0A4h+var_30]
-                fldz
-                fadd    st(1), st
-                fxch    st(1)
-                fstp    [esp+0A4h+var_64]
-                fadd    [esp+0A4h+var_2C]
-                fstp    [esp+0A4h+a2]
-                fadd    [esp+0A4h+var_70]
-                fstp    [esp+0A4h+var_5C]
-              }
-              ((void (__thiscall *)(PlayerCharacter *, float *))Unk_73)(_EBX, &v274);
+              Unk_73 = this->vtbl->super.super.Unk_73; /*0x672e96*/
+              v154 = v165.z - v176; /*0x672ea9*/
+              v156 = v154 * deltaTime; /*0x672eb4*/
+              v50 = x + 0.0; /*0x672ec0*/
+              v162 = v50; /*0x672ec2*/
+              v51 = v175 + 0.0; /*0x672ec6*/
+              a2a = v51; /*0x672eca*/
+              v164 = v176 + v156; /*0x672ed2*/
+              ((void (__thiscall *)(PlayerCharacter *, float *))Unk_73)(this, &v162); /*0x672ed6*/
             }
             else
             {
-              sub_46A9C0(_EBX, 0);
+              sub_46A9C0(this, 0); /*0x672e42*/
             }
-            TESTexture::ClearComponentReferences(_EBX);
-            v141 = ((double (__thiscall *)(LowProcess *, PlayerCharacter *, _DWORD, _DWORD, int))_EBX->super.super.super.process->Unk_B2)(
-                     _EBX->super.super.super.process,
-                     _EBX,
-                     LODWORD(v282),
-                     LODWORD(v283),
-                     v284);
-            sub_6714E0((int)_EBX, st0_0, a3, a4, a5, a6, a7, a8, v141);
-            if ( v285 || (v232 & 0xF) != 0 )
-              v230 = 1;
-            if ( InputGlobals::QueryControlState(v87, 0x1A, 1) )
-              sub_466AD0(
-                (NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *> *)SaveLoad_CurrentSavegame,
-                st0_0,
-                a3,
-                a4,
-                a5,
-                a6,
-                a7,
-                a8);
-            if ( InputGlobals::QueryControlState(v87, 0x1B, 1) )
-              sub_466B00((char *)SaveLoad_CurrentSavegame, (char)&savedregs, st0_0, a3, a4, a5, a6, a7, a8);
-            if ( InputGlobals::QueryControlState(v87, 0xE, 1) || InputGlobals::QueryControlState(v87, 0xE, 0) )
+            Shared_NoOpVirtual_60D0A0(this); /*0x672eda*/
+            v84 = ((double (__thiscall *)(LowProcess *, PlayerCharacter *, _DWORD, _DWORD, _DWORD))this->super.super.super.process->Unk_B2)( /*0x672f04*/
+                    this->super.super.super.process,
+                    this,
+                    LODWORD(v170),
+                    LODWORD(v171),
+                    LODWORD(v172));
+            PlayerCharacter_ProcessQueuedMoveIfAllowed((int)this, v2, v3, v4, v5, v6, v50, v51, v84); /*0x672f08*/
+            if ( v173 || (v129 & 0xF) != 0 ) /*0x672f20*/
+              v127 = 1; /*0x672f22*/
+            if ( InputGlobals::QueryControlState(v49, 0x1A, 1) ) /*0x672f2d*/
+              sub_466AD0( /*0x672f3c*/
+                (NiTMap<unsigned int,NiTSimpleList<ExpiredCellData *> *> *)g_TESSaveLoadGame,
+                v2,
+                v3,
+                v4,
+                v5,
+                v6,
+                v50,
+                v51);
+            if ( InputGlobals::QueryControlState(v49, 0x1B, 1) ) /*0x672f47*/
+              sub_466B00((char *)g_TESSaveLoadGame, (char)&savedregs, v2, v3, v4, v5, v6, v50, v51); /*0x672f56*/
+            if ( InputGlobals::QueryControlState(v49, 0xE, 1) || InputGlobals::QueryControlState(v49, 0xE, 0) ) /*0x672f73*/
             {
-              if ( !InterfaceManager_IsMenuMode() )
+              if ( !InterfaceManager_IsMenuMode() ) /*0x673020*/
               {
-                v230 = 1;
-                _EAX = GameSetting_GetSafeFloatPointer((int *)&unk_B36B50);
-                __asm
+                v127 = 1; /*0x67302e*/
+                SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)unk_B36B50); /*0x673033*/
+                v84 = qword_B3BB2C[0x6D]; /*0x673038*/
+                v51 = *(float *)SafeFloatPointer; /*0x67303e*/
+                if ( v51 > v84 || MEMORY[0xB3BB04] ) /*0x673049*/
                 {
-                  fld     dword ptr ds:0B3BCE0h
-                  fld     dword ptr [eax]
-                  fcomp   st(1)
-                  fnstsw  ax
+                  v84 = v84 + deltaTime; /*0x67306d*/
+LABEL_360:
+                  qword_B3BB2C[0x6D] = v84; /*0x673070*/
+                  goto LABEL_361; /*0x673070*/
                 }
-                if ( __SETP__(BYTE1(_EAX) & 0x41, 0) || VanityCamState )
-                {
-                  __asm { fadd    [ebp+arg_0] }
-LABEL_369:
-                  __asm { fstp    dword ptr ds:0B3BCE0h }
-                  flt_B3BCE0 = _ET1;
-                  goto LABEL_370;
-                }
-                __asm { fstp    st }
-                VanityCamState = 1;
-                byte_B14E4D = 1;
-                ToggleBody(_EBX, 0);
+                MEMORY[0xB3BB04] = 1; /*0x673058*/
+                byte_B14E4D = 1; /*0x67305f*/
+                ToggleBody(this, 0); /*0x673066*/
               }
             }
-            else if ( InputGlobals::QueryControlState(v87, 0xE, 2) || VanityCamState && !byte_B3BB05 )
+            else if ( InputGlobals::QueryControlState(v49, 0xE, 2) || MEMORY[0xB3BB04] && !unk_B3BB05 ) /*0x672f9b*/
             {
-              _EAX = GameSetting_GetSafeFloatPointer((int *)&unk_B36B50);
-              __asm
+              v51 = *(float *)GameSetting_GetSafeFloatPointer((int *)unk_B36B50); /*0x672fb7*/
+              if ( v51 <= qword_B3BB2C[0x6D] ) /*0x672fc0*/
               {
-                fld     dword ptr ds:0B3BCE0h
-                fld     dword ptr [eax]
-                fcompp
-                fnstsw  ax
-              }
-              if ( (BYTE1(_EAX) & 0x41) != 0 )
-              {
-                if ( VanityCamState )
+                if ( MEMORY[0xB3BB04] ) /*0x672fee*/
                 {
-                  byte_B14E4D = 1;
-                  v143 = _EBX->isThirdPerson == 0;
-                  VanityCamState = 0;
-                  ToggleBody(_EBX, v143);
+                  byte_B14E4D = 1; /*0x672ff7*/
+                  v85 = this->isThirdPerson == 0; /*0x673007*/
+                  MEMORY[0xB3BB04] = 0; /*0x67300a*/
+                  ToggleBody(this, v85); /*0x673012*/
                 }
-                __asm { fldz }
-                v230 = 1;
+                v84 = 0.0; /*0x673017*/
+                v127 = 1; /*0x673019*/
               }
               else
               {
-                _EBX->isThirdPerson ^= 1u;
-                byte_B14E4D = 1;
-                ToggleBody(_EBX, _EBX->isThirdPerson == 0);
-                __asm { fldz }
-                v230 = 1;
+                this->isThirdPerson ^= 1u; /*0x672fc2*/
+                byte_B14E4D = 1; /*0x672fc9*/
+                ToggleBody(this, this->isThirdPerson == 0); /*0x672fdd*/
+                v84 = 0.0; /*0x672fe2*/
+                v127 = 1; /*0x672fe4*/
               }
-              goto LABEL_369;
+              goto LABEL_360; /*0x672fe9*/
             }
-LABEL_370:
-            if ( !InputGlobals::QueryControlState(v87, 5, 1)
+LABEL_361:
+            if ( !InputGlobals::QueryControlState(v49, 5, 1) /*0x6730ba*/
               || InterfaceManager_IsMenuMode()
-              || _EBX->unk5C0
-              || _EBX->vtbl->super.super.super.HasFatigue((TESObjectREFR *)_EBX)
-              || v234 )
+              || this->unk5C0
+              || this->vtbl->super.super.super.HasFatigue((TESObjectREFR *)this)
+              || updated )
             {
-LABEL_397:
-              if ( byte_B3BB05 )
+LABEL_388:
+              if ( unk_B3BB05 ) /*0x67322b*/
               {
-                if ( v230 )
+                if ( v127 ) /*0x67323d*/
                 {
-                  v126 = _EBX->isThirdPerson == 0;
-                  __asm { fldz }
-                  __asm { fstp    dword ptr ds:0B3BB08h }
-                  flt_B3BB08 = _ET1;
-                  byte_B3BB05 = 0;
-                  VanityCamState = 0;
-                  ToggleBody(_EBX, v126);
+                  v72 = this->isThirdPerson == 0; /*0x67323f*/
+                  unk_B3BB08 = 0.0; /*0x67324a*/
+                  unk_B3BB05 = 0; /*0x673253*/
+                  MEMORY[0xB3BB04] = 0; /*0x67325a*/
+                  ToggleBody(this, v72); /*0x673262*/
                 }
                 else
                 {
-                  _EAX = GameSetting_GetSafeFloatPointer((int *)&unk_B36BA0);
-                  __asm
-                  {
-                    fld     dword ptr ds:0B3BB34h
-                    fld     dword ptr [eax]
-                  }
-                  __asm
-                  {
-                    fmul    qword ptr ds:0A31C78h
-                    fmul    [ebp+arg_0]
-                    fsubp   st(1), st
-                    fstp    dword ptr ds:0B3BB34h
-                  }
-                  flt_B3BB34 = _ET1;
-                  _EAX = GameSetting_GetSafeFloatPointer((int *)&unk_B36BA8);
-                  __asm { fld     dword ptr [eax] }
-                  __asm
-                  {
-                    fmul    qword ptr ds:0A31C78h
-                    fmul    [ebp+arg_0]
-                    fadd    dword ptr ds:0B3BCDCh
-                    fstp    dword ptr ds:0B3BCDCh
-                  }
-                  flt_B3BCDC = _ET1;
-                  SafeFloatPointer = GameSetting_GetSafeFloatPointer((int *)&unk_B36BB0);
-                  __asm { fld     dword ptr ds:0B3BCDCh }
-                  _ESI = SafeFloatPointer;
-                  v141 = _CIsin(v141);
-                  __asm
-                  {
-                    fstp    [esp+0A0h+var_78]
-                    fld     [esp+0A0h+var_78]
-                    fmul    dword ptr [esi]
-                    fmul    qword ptr ds:0A31C78h
-                    fstp    dword ptr ds:0B3BB2Ch
-                  }
-                  *(float *)&qword_B3BB2C = _ET1;
-                  __asm
-                  {
-                    fld     dword ptr ds:0B3BCDCh
-                    fld     qword ptr ds:0A3D5B0h
-                    fcom    st(1)
-                    fnstsw  ax
-                  }
-                  if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-                  {
-                    __asm
-                    {
-                      fstp    st(1)
-                      fstp    st
-                    }
-                  }
-                  else
-                  {
-                    __asm
-                    {
-                      fsubp   st(1), st
-                      fstp    dword ptr ds:0B3BCDCh
-                    }
-                    flt_B3BCDC = _ET1;
-                  }
+                  qword_B3BB2C[2] = qword_B3BB2C[2] /*0x67328e*/
+                                  - *(float *)GameSetting_GetSafeFloatPointer((int *)unk_B36BA0)
+                                  * dbl_A31C78
+                                  * deltaTime;
+                  qword_B3BB2C[0x6C] = *(float *)GameSetting_GetSafeFloatPointer((int *)unk_B36BA8) /*0x6732af*/
+                                     * dbl_A31C78
+                                     * deltaTime
+                                     + qword_B3BB2C[0x6C];
+                  v94 = GameSetting_GetSafeFloatPointer((int *)unk_B36BB0); /*0x6732c0*/
+                  v155 = sin(qword_B3BB2C[0x6C]); /*0x6732c7*/
+                  qword_B3BB2C[0] = v155 * *(float *)v94 * dbl_A31C78; /*0x6732d7*/
+                  v95 = qword_B3BB2C[0x6C]; /*0x6732dd*/
+                  v51 = dbl_A3D5B0; /*0x6732e3*/
+                  if ( v51 < v95 ) /*0x6732f0*/
+                    qword_B3BB2C[0x6C] = v95 - v51; /*0x6732f8*/
                 }
               }
-              else if ( !VanityCamState )
+              else if ( !MEMORY[0xB3BB04] ) /*0x673303*/
               {
-                if ( v230 )
-                {
-                  __asm { fldz }
-                }
+                if ( v127 ) /*0x673315*/
+                  v96 = 0.0; /*0x673317*/
                 else
+                  v96 = unk_B3BB08 + deltaTime; /*0x673321*/
+                unk_B3BB08 = v96; /*0x673329*/
+                v51 = *(float *)GameSetting_GetSafeFloatPointer((int *)unk_B36B98); /*0x67333a*/
+                if ( v51 < unk_B3BB08 ) /*0x673343*/
                 {
-                  __asm
-                  {
-                    fld     dword ptr ds:0B3BB08h
-                    fadd    [ebp+arg_0]
-                  }
-                }
-                __asm { fstp    dword ptr ds:0B3BB08h }
-                flt_B3BB08 = _ET1;
-                _EAX = GameSetting_GetSafeFloatPointer((int *)&unk_B36B98);
-                __asm
-                {
-                  fld     dword ptr ds:0B3BB08h
-                  fld     dword ptr [eax]
-                  fcompp
-                  fnstsw  ax
-                }
-                if ( !__SETP__(BYTE1(_EAX) & 5, 0) )
-                {
-                  __asm
-                  {
-                    fldz
-                    fst     dword ptr ds:0B3BB34h
-                  }
-                  flt_B3BB34 = _ET1;
-                  if ( _EBX->isThirdPerson )
-                  {
-                    __asm { fstp    st }
-                    v141 = sub_4A9720((Actor *)_EBX);
-                  }
-                  __asm { fstp    dword ptr ds:0B3BB2Ch }
-                  *(float *)&qword_B3BB2C = _ET1;
-                  byte_B14E4D = 1;
-                  v126 = _EBX->isThirdPerson == 0;
-                  byte_B3BB05 = 1;
-                  VanityCamState = 1;
-                  if ( v126 )
-                    ToggleBody(_EBX, 0);
+                  v97 = 0.0; /*0x673345*/
+                  qword_B3BB2C[2] = 0.0; /*0x673347*/
+                  if ( this->isThirdPerson ) /*0x67334d*/
+                    v97 = Actor_GetAimPitch((Actor *)this); /*0x67335a*/
+                  qword_B3BB2C[0] = v97; /*0x67335f*/
+                  byte_B14E4D = 1; /*0x673365*/
+                  v72 = this->isThirdPerson == 0; /*0x67336c*/
+                  unk_B3BB05 = 1; /*0x673373*/
+                  MEMORY[0xB3BB04] = 1; /*0x67337a*/
+                  if ( v72 ) /*0x673381*/
+                    ToggleBody(this, 0); /*0x673387*/
                 }
               }
-              __asm { fld     [ebp+arg_0] }
-              __asm { fstp    [esp+0A4h+duration]; float }
-              sub_671170((int *)_EBX, a7, a8, v141, durationu);
-              v167 = (void *)dword_B3BB1C;
-              if ( dword_B3BB1C )
+              v98 = deltaTime; /*0x673392*/
+              Player_ProcessGrabControl((int *)this, v50, v51, deltaTime, SLODWORD(deltaTime)); /*0x67339b*/
+              v99 = (void *)unk_B3BB1C; /*0x6733a0*/
+              if ( unk_B3BB1C ) /*0x6733a0*/
               {
-                if ( (unsigned int)dword_B3BCD8++ < 0x14 )
+                if ( LODWORD(qword_B3BB2C[0x6B])++ < 0x14u ) /*0x6733b4*/
                 {
-                  __asm
-                  {
-                    fld     [esp+0A0h+var_58.z]
-                    fadd    qword ptr ds:0A3F428h
-                  }
-                  v274 = v277.x;
-                  a2a = v277.y;
-                  __asm
-                  {
-                    fstp    [esp+0A0h+var_5C]
-                    fld     [esp+0A0h+a2]
-                  }
-                  __asm { fld     qword ptr ds:0A4D910h }
-                  __asm
-                  {
-                    fadd    st(1), st
-                    fxch    st(1)
-                    fstp    [esp+0A4h+a2]
-                    fadd    [esp+0A4h+var_64]
-                    fstp    [esp+0A4h+var_64]
-                  }
-                  sub_4D69A0(v167, &v274);
-                  sub_4D9960((int *)dword_B3BB1C, &Vector3_InitValue_);
+                  v101 = v165.z + dbl_A3F428; /*0x6733c6*/
+                  v162 = v165.x; /*0x6733d0*/
+                  a2a = v165.y; /*0x6733d8*/
+                  v164 = v101; /*0x6733e0*/
+                  v102 = dbl_A4D910; /*0x6733f5*/
+                  v51 = v165.y + v102; /*0x6733f5*/
+                  a2a = v51; /*0x6733f7*/
+                  v98 = v102 + v165.x; /*0x6733fb*/
+                  v162 = v98; /*0x6733ff*/
+                  sub_4D69A0(v99, &v162); /*0x673403*/
+                  sub_4D9960((int *)unk_B3BB1C, &g_zeroNiPoint3.x); /*0x673413*/
                 }
               }
-              if ( VanityCamState || _EBX->isThirdPerson || byte_B3BB05 || InterfaceManager_IsMenuMode() )
-                v169 = sub_578CF0((char)&savedregs, a7, a8, v141, a6, 0);
+              if ( MEMORY[0xB3BB04] || this->isThirdPerson || unk_B3BB05 || InterfaceManager_IsMenuMode() ) /*0x673433*/
+                sub_578CF0((char)&savedregs, v50, v51, v98, v6, 0); /*0x673442*/
               else
-                v169 = sub_578CF0((char)&savedregs, a7, a8, v141, a6, 1);
-              if ( !_EBX->vtbl->super.super.super.IsDead((TESObjectREFR *)_EBX, 0)
-                && !_EBX->vtbl->super.super.IsDead((MobileObject *)_EBX) )
+                sub_578CF0((char)&savedregs, v50, v51, v98, v6, 1); /*0x67343e*/
+              if ( !this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0) /*0x673466*/
+                && !this->vtbl->super.super.IsDead((MobileObject *)this) )
               {
-                v170 = _EBX->vtbl;
-                v169 = sub_673B00();
-                __asm { fstp    [esp+0A4h+duration] }
-                ((void (__thiscall *)(PlayerCharacter *, _DWORD))v170->super.Unk_DA)(_EBX, LODWORD(durationv));
+                v103 = this->vtbl; /*0x67346c*/
+                durationc = sub_673B00(); /*0x673481*/
+                ((void (__thiscall *)(PlayerCharacter *, _DWORD))v103->super.Unk_DA)(this, LODWORD(durationc)); /*0x673484*/
               }
-              _EAX = TESObjectREFR_GetAnimData((Actor *)_EBX);
-              __asm { fld     dword ptr [eax+0BCh] }
-              firstPersonAnimData = _EBX->firstPersonAnimData;
-              __asm { fstp    dword ptr [ecx+0BCh] }
-              firstPersonAnimData->unkBC = _ET1;
-              __asm
+              AnimData = TESObjectREFR_GetAnimData((TESObjectREFR *)this); /*0x673488*/
+              firstPersonAnimData = this->firstPersonAnimData; /*0x673493*/
+              firstPersonAnimData->unkBC = AnimData->unkBC; /*0x673499*/
+              firstPersonAnimData->unkC0 = AnimData->unkC0; /*0x6734a6*/
+              SetAimingZoom(this, deltaTime); /*0x6734b4*/
+              this->isThirdPerson = this->isThirdPerson == 0; /*0x6734c6*/
+              sub_603CA0((Actor *)this, v50, v51, deltaTime, deltaTime); /*0x6734d2*/
+              v106 = deltaTime; /*0x6734d7*/
+              this->isThirdPerson = this->isThirdPerson == 0; /*0x6734ea*/
+              sub_603CA0((Actor *)this, v50, v51, deltaTime, deltaTime); /*0x6734f0*/
+              if ( !this->isFlyCam ) /*0x6734f5*/
+                sub_66B710(this, v106, 0); /*0x673502*/
+              if ( ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetKnockedState)(this->super.super.super.process) /*0x673522*/
+                || this->vtbl->super.super.super.HasFatigue((TESObjectREFR *)this) )
               {
-                fld     dword ptr [eax+0C0h]
-                fstp    dword ptr [ecx+0C0h]
-              }
-              firstPersonAnimData->unkC0 = _ET1;
-              __asm
-              {
-                fld     [ebp+arg_0]
-                fstp    [esp+0A4h+duration]; a2
-              }
-              SetAimingZoom(_EBX, durationw);
-              __asm { fld     [ebp+arg_0] }
-              _EBX->isThirdPerson = _EBX->isThirdPerson == 0;
-              __asm { fstp    [esp+0A4h+duration]; a2 }
-              sub_603CA0((Actor *)_EBX, a7, a8, v169, durationx);
-              __asm { fld     [ebp+arg_0] }
-              __asm { fstp    [esp+0A4h+duration]; a2 }
-              _EBX->isThirdPerson = _EBX->isThirdPerson == 0;
-              sub_603CA0((Actor *)_EBX, a7, a8, v169, durationy);
-              if ( !_EBX->isFlyCam )
-                sub_66B710(_EBX, v169, a7, 0);
-              if ( ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetKnockedState)(_EBX->super.super.super.process)
-                || _EBX->vtbl->super.super.super.HasFatigue((TESObjectREFR *)_EBX) )
-              {
-                if ( _EBX->isThirdPerson )
+                if ( this->isThirdPerson ) /*0x673528*/
                 {
-LABEL_433:
-                  sub_4D5370();
-                  if ( !dword_B3BCD4
-                    || (TESObjectCELL *)dword_B3BCD4 != TESObjectREFR_GetParentCell((TESObjectREFR *)_EBX) )
+LABEL_423:
+                  sub_4D5370(); /*0x67355c*/
+                  if ( !LODWORD(qword_B3BB2C[0x6A]) || LODWORD(qword_B3BB2C[0x6A]) != Shared_GetDwordAtOffset40(this) ) /*0x673577*/
                   {
-                    dword_B3BCD4 = (int)TESObjectREFR_GetParentCell((TESObjectREFR *)_EBX);
-                    v175 = TESObjectREFR_GetParentCell((TESObjectREFR *)_EBX);
-                    if ( sub_43E000(ModelLoaderPtr, v175) )
+                    LODWORD(qword_B3BB2C[0x6A]) = Shared_GetDwordAtOffset40(this); /*0x673586*/
+                    v107 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this); /*0x67358b*/
+                    if ( sub_43E000(MEMORY[0xB33A1C], v107) ) /*0x673597*/
                     {
-                      LoadingAreaMessage((char)&savedregs, a6, a7, a8, v169, st0_0, a3, a5, a4);
-                      sub_43DF10(ModelLoaderPtr);
-                      sub_434020(ioManager, a7, a8, v169, 1);
+                      LoadingAreaMessage((char)&savedregs, v6, v50, v51, v106, v2, v3, v5, v4); /*0x6735aa*/
+                      sub_43DF10(MEMORY[0xB33A1C]); /*0x6735b5*/
+                      sub_434020(MEMORY[0xB33A10], v50, v51, v106, 1); /*0x6735c2*/
                     }
                   }
-                  return;
+                  return; /*0x6735cd*/
                 }
-                RestoreCamera(_EBX);
+                RestoreCamera(this); /*0x673533*/
               }
-              if ( !_EBX->isThirdPerson && _EBX->vtbl->super.super.super.IsDead((TESObjectREFR *)_EBX, 0) )
-                TogglePOV(_EBX, 0);
-              goto LABEL_433;
+              if ( !this->isThirdPerson && this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0) ) /*0x67354d*/
+                TogglePOV(this, 0); /*0x673557*/
+              goto LABEL_423; /*0x673557*/
             }
-            v146 = (TESObjectREFR *)sub_579540();
-            if ( _EBX->vtbl->super.GetActorValue((Actor *)_EBX, kActorVal_Invisibility) > 0 )
-              sub_6A24B0((int)&_EBX->super.super.magicTarget, (int)v146, 0x49564E49, 0);
-            v235 = 0;
-            if ( !v146 )
-              goto LABEL_385;
-            if ( ((unsigned __int8 (__thiscall *)(TESObjectREFR *))v146->vtbl->Unk_3A)(v146) )
+            v87 = (TESObjectREFR *)sub_579540(); /*0x6730c5*/
+            if ( this->vtbl->super.GetActorValue((Actor *)this, kActorVal_Invisibility) > 0 ) /*0x6730d7*/
+              MagicTarget_RemoveActiveEffectsByCode(&this->super.super.magicTarget, 0x49564E49u, 0); /*0x6730e3*/
+            v132 = 0; /*0x6730ea*/
+            if ( !v87 ) /*0x6730ef*/
+              goto LABEL_376; /*0x6730ef*/
+            if ( ((unsigned __int8 (__thiscall *)(TESObjectREFR *))v87->vtbl->Unk_3A)(v87) ) /*0x6730fb*/
             {
-              v147 = OblivionDynamicCast(
-                       v146,
-                       0,
-                       (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
-                       &ArrowProjectile `RTTI Type Descriptor',
-                       0);
-              if ( v147 )
-                v235 = v147[0x18] == 0;
+              v88 = OblivionDynamicCast( /*0x673110*/
+                      v87,
+                      0,
+                      (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
+                      &ArrowProjectile `RTTI Type Descriptor',
+                      0);
+              if ( v88 ) /*0x67311a*/
+                v132 = v88[0x18] == 0; /*0x673122*/
             }
-            if ( !v146->vtbl->IsActor(v146)
-              || (v148 = v146[1].vtbl,
-                  (*((int (__thiscall **)(TESObjectREFRVtbl *))v148->super.super.InitializeComponent + 0x11F))(v148) != 5)
-              && (*((int (__thiscall **)(TESObjectREFRVtbl *))v148->super.super.InitializeComponent + 0x11F))(v148) != 6 )
+            if ( !v87->vtbl->IsActor(v87) /*0x67315e*/
+              || (v89 = v87[1].vtbl,
+                  (*((int (__thiscall **)(TESObjectREFRVtbl *))v89->super.super.InitializeComponent + 0x11F))(v89) != 5)
+              && (*((int (__thiscall **)(TESObjectREFRVtbl *))v89->super.super.InitializeComponent + 0x11F))(v89) != 6 )
             {
-              if ( !v235 )
+              if ( !v132 ) /*0x673169*/
               {
-LABEL_385:
-                sub_5A4980(a7, a8, v141, 0, 0, 0);
-                if ( v146 )
+LABEL_376:
+                sub_5A4980(v50, v51, v84, 0, 0, 0); /*0x673175*/
+                if ( v87 ) /*0x67317f*/
                 {
-                  if ( ActivateRef(v146, a7, a8, v141, (TESObjectREFR *)_EBX, 0, 0, 1) )
-                    goto LABEL_396;
-                  if ( _EBX->vtbl->super.GetMountedHorse((Actor *)_EBX) )
+                  if ( ActivateRef(v87, v50, v51, v84, (TESObjectREFR *)this, 0, 0, 1) ) /*0x67318a*/
+                    goto LABEL_387; /*0x673191*/
+                  if ( this->vtbl->super.GetMountedHorse(this) ) /*0x6731a1*/
                   {
-                    if ( GetTeleportExtraData(v146) || v146->vtbl->GetBaseForm(v146)->member.type == kFormType_Activator )
+                    if ( TESObjectREFR_GetTeleportData(v87) /*0x6731c2*/
+                      || v87->vtbl->GetBaseForm(v87)->member.type == kFormType_Activator )
                     {
-                      v149 = (TESObjectREFR *)_EBX->vtbl->super.GetMountedHorse((Actor *)_EBX);
-                      ActivateRef(v149, a7, a8, v141, (TESObjectREFR *)_EBX, 0, 0, 1);
+                      v90 = (TESObjectREFR *)this->vtbl->super.GetMountedHorse(this); /*0x6731d5*/
+                      ActivateRef(v90, v50, v51, v84, (TESObjectREFR *)this, 0, 0, 1); /*0x6731d9*/
                     }
                   }
                 }
-                if ( _EBX->super.super.super.process->GetFurniture(_EBX->super.super.super.process) )
+                if ( this->super.super.super.process->GetFurniture(this->super.super.super.process) ) /*0x6731e9*/
                 {
-                  v150 = _EBX->super.super.super.process;
-                  GetMountedHorse = *(Creature *(__thiscall **)(Actor *))(*(_DWORD *)v150 + 0x378);
-LABEL_395:
-                  v152 = (TESObjectREFR *)((int (__fastcall *)(void *))GetMountedHorse)(v150);
-                  ActivateRef(v152, a7, a8, v141, (TESObjectREFR *)_EBX, 0, 0, 1);
-                  goto LABEL_396;
+                  v91 = this->super.super.super.process; /*0x6731ef*/
+                  GetMountedHorse = *(Creature *(__thiscall **)(Actor *))(*(_DWORD *)v91 + 0x378); /*0x6731f4*/
+LABEL_386:
+                  v93 = (TESObjectREFR *)((int (__fastcall *)(void *))GetMountedHorse)(v91); /*0x673216*/
+                  ActivateRef(v93, v50, v51, v84, (TESObjectREFR *)this, 0, 0, 1); /*0x673221*/
+                  goto LABEL_387; /*0x673221*/
                 }
-                if ( _EBX->vtbl->super.GetMountedHorse((Actor *)_EBX) )
+                if ( this->vtbl->super.GetMountedHorse(this) ) /*0x673206*/
                 {
-                  GetMountedHorse = _EBX->vtbl->super.GetMountedHorse;
-                  v150 = _EBX;
-                  goto LABEL_395;
+                  GetMountedHorse = this->vtbl->super.GetMountedHorse; /*0x67320e*/
+                  v91 = this; /*0x673214*/
+                  goto LABEL_386; /*0x673214*/
                 }
               }
             }
-LABEL_396:
-            v230 = 1;
-            goto LABEL_397;
+LABEL_387:
+            v127 = 1; /*0x673226*/
+            goto LABEL_388; /*0x673226*/
           }
-LABEL_306:
-          sub_5C1F70((int)&savedregs, st0_0, a3, a4, a5, a6, a7, a8, v88);
-          goto LABEL_309;
+LABEL_297:
+          Input_ProcessQuickSlotHotkeys((int)&savedregs, v2, v3, v4, v5, v6, v50, v51, v52); /*0x672bc1*/
+          goto LABEL_300; /*0x672bc6*/
         }
-        unk57CState = _EBX->unk57CState;
-        if ( unk57CState == 2 || unk57CState == 3 )
+        unk57CState = this->unk57CState; /*0x672627*/
+        if ( unk57CState == 2 || unk57CState == 3 ) /*0x672639*/
         {
-          __asm { fldz }
-          dword_B3BAF4 = 0;
-          __asm { fstp    dword ptr ds:0B3BAF8h }
-          flt_B3BAF8 = _ET1;
-          goto LABEL_271;
+          v52 = 0.0; /*0x672927*/
+          unk_B3BAF4 = 0; /*0x672929*/
+          unk_B3BAF8 = 0.0; /*0x672933*/
+          goto LABEL_263; /*0x672933*/
         }
-        if ( ((unsigned __int8 (__thiscall *)(LowProcess *))_EBX->super.super.super.process->Unk_B6)(_EBX->super.super.super.process)
-          && (!VanityCamState || byte_B3BB05) )
-        {
-          if ( Actor_ProcessControlAttack((Actor *)_EBX, a7, a8, v88) )
-            v230 = 1;
+        if ( ((unsigned __int8 (__thiscall *)(LowProcess *))this->super.super.super.process->Unk_B6)(this->super.super.super.process) /*0x672659*/
+          && (!MEMORY[0xB3BB04] || unk_B3BB05) )
+        {                                       // Sole direct caller: Player_OnInput invokes PlayerCharacter_ProcessAttackControl with ECX=PlayerCharacter, pushes no arguments, and consumes only AL.
+          if ( PlayerCharacter_ProcessAttackControl(this) ) /*0x672664*/
+            v127 = 1; /*0x67266d*/
         }
         else
         {
-          __asm { fldz }
-          dword_B3BAF4 = 0;
-          __asm { fstp    dword ptr ds:0B3BAF8h }
-          flt_B3BAF8 = _ET1;
+          v52 = 0.0; /*0x672674*/
+          unk_B3BAF4 = 0; /*0x672676*/
+          unk_B3BAF8 = 0.0; /*0x672680*/
         }
-        if ( (InputGlobals::QueryControlState(v87, 6, 1) || InputGlobals::QueryControlState(v87, 6, 0))
-          && ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetCurrentAction)(_EBX->super.super.super.process) != 6 )
+        if ( (InputGlobals::QueryControlState(v49, 6, 1) || InputGlobals::QueryControlState(v49, 6, 0)) /*0x6726b7*/
+          && ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetCurrentAction)(this->super.super.super.process) != 6 )
         {
-          if ( byte_B1501C && Actor_GetCurrentAction(_EBX) == 5 )
+          if ( byte_B1501C && Actor_GetCurrentAction(this) == 5 ) /*0x6726d4*/
           {
-            LOBYTE(byte_B3BAEA.vtbl) = 1;
-            __asm { fld     dword ptr [ebx+598h] }
-            __asm { fstp    qword ptr [esp+0A0h+var_78] }
-            byte_B1501C = 0;
-            _EAX = GameSetting_GetSafeFloatPointer((int *)&g_DefaulFOV);
-            __asm
+            LOBYTE(unk_B3BAEA.vtbl) = 1; /*0x6726da*/
+            worldFoV = this->worldFoV; /*0x6726ec*/
+            byte_B1501C = 0; /*0x6726f0*/
+            if ( *(float *)GameSetting_GetSafeFloatPointer((int *)&g_DefaulFOV) <= worldFoV ) /*0x672707*/
             {
-              fld     dword ptr [eax]
-              fcomp   qword ptr [esp+0A0h+var_78]
-              fnstsw  ax
-            }
-            if ( (BYTE1(_EAX) & 0x41) != 0 )
-            {
-              _EAX = GameSetting_GetSafeFloatPointer((int *)&flt_B370B0);
-              __asm
+              v63 = GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0xF6]); /*0x67278d*/
+              v52 = *(float *)&unk_B3BAFC.vtbl; /*0x672792*/
+              v51 = *(float *)v63; /*0x672798*/
+              if ( v51 < v52 ) /*0x6727a1*/
               {
-                fld     dword ptr ds:0B3BAFCh
-                fld     dword ptr [eax]
-                fcompp
-                fnstsw  ax
-              }
-              if ( !__SETP__(BYTE1(_EAX) & 5, 0) )
-              {
-                _EAX = GameSetting_GetSafeFloatPointer((int *)&flt_B370B0);
-                __asm
-                {
-                  fld     dword ptr [eax]
-                  fstp    dword ptr ds:0B3BAFCh
-                }
-                flt_B3BAFC.vtbl = _ET1;
+                v64 = (TESFormVtbl **)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0xF6]); /*0x6727a8*/
+                v52 = *(float *)v64; /*0x6727ad*/
+                unk_B3BAFC.vtbl = *v64; /*0x6727af*/
               }
             }
             else
             {
-              _EAX = GameSetting_GetSafeFloatPointer((int *)&g_DefaulFOV);
-              __asm { fld     dword ptr [eax] }
-              __asm { fstp    qword ptr [esp+0A0h+var_78] }
-              _EAX = GameSetting_GetSafeFloatPointer((int *)&flt_B370A0);
-              __asm
-              {
-                fld     dword ptr [eax]
-                fsubr   qword ptr [esp+0A0h+var_78]
-              }
-              __asm
-              {
-                fstp    [esp+0A0h+var_78]
-                fld     [esp+0A0h+var_78]
-                fabs
-                fstp    [esp+0A0h+var_78]
-                fld     [esp+0A0h+var_78]
-                fstp    [esp+0A0h+var_78]
-              }
-              _EAX = GameSetting_GetSafeFloatPointer((int *)&g_DefaulFOV);
-              __asm { fld     dword ptr [eax] }
-              __asm
-              {
-                fsub    dword ptr [ebx+598h]
-                fdiv    [esp+0A0h+var_78]
-                fstp    qword ptr [esp+0A0h+var_78]
-              }
-              _EAX = GameSetting_GetSafeFloatPointer((int *)&flt_B370A8);
-              __asm
-              {
-                fld     dword ptr [eax]
-                fmul    qword ptr [esp+0A0h+var_78]
-              }
-              __asm { fstp    qword ptr [esp+0A0h+var_78] }
-              _EAX = GameSetting_GetSafeFloatPointer((int *)&flt_B370B0);
-              __asm
-              {
-                fld     dword ptr [eax]
-                fadd    qword ptr [esp+0A0h+var_78]
-                fstp    dword ptr ds:0B3BAFCh
-              }
-              flt_B3BAFC.vtbl = _ET1;
+              v150 = *(float *)GameSetting_GetSafeFloatPointer((int *)&g_DefaulFOV); /*0x67271a*/
+              *(float *)&v150 = v150 /*0x67272e*/
+                              - *(float *)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0xF2]);
+              *(float *)&v150 = fabs(*(float *)&v150); /*0x672738*/
+              v151 = (*(float *)GameSetting_GetSafeFloatPointer((int *)&g_DefaulFOV) - this->worldFoV) / *(float *)&v150; /*0x67275a*/
+              v152 = *(float *)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0xF4]) * v151; /*0x67276e*/
+              v52 = *(float *)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0xF6]) + v152; /*0x672779*/
+              *(float *)&unk_B3BAFC.vtbl = v52; /*0x67277d*/
             }
-            goto LABEL_255;
+            goto LABEL_247; /*0x672783*/
           }
-          v126 = LOBYTE(byte_B3BAEA.vtbl) == 0;
-          byte_B1501C = 1;
-          if ( !v126 || VanityCamState && !byte_B3BB05 )
-            goto LABEL_255;
-          sub_5F4AE0((Actor *)_EBX, a7, a8, v88, 1);
+          v72 = LOBYTE(unk_B3BAEA.vtbl) == 0; /*0x6727b7*/
+          byte_B1501C = 1; /*0x6727be*/
+          if ( !v72 || MEMORY[0xB3BB04] && !unk_B3BB05 ) /*0x6727d0*/
+            goto LABEL_247; /*0x6727d7*/
+          Actor_UpdateBlockingState((Actor *)this, 1); /*0x6727db*/
         }
         else
         {
-          if ( !InputGlobals::QueryControlState(v87, 6, 2) && InputGlobals::QueryControlState(v87, 6, 0) )
-            goto LABEL_255;
-          LOBYTE(byte_B3BAEA.vtbl) = 0;
-          if ( ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetCurrentAction)(_EBX->super.super.super.process) != 6 )
-            goto LABEL_255;
-          sub_5F4AE0((Actor *)_EBX, a7, a8, v88, 0);
+          if ( !InputGlobals::QueryControlState(v49, 6, 2) && InputGlobals::QueryControlState(v49, 6, 0) ) /*0x6727f1*/
+            goto LABEL_247; /*0x6727f1*/
+          LOBYTE(unk_B3BAEA.vtbl) = 0; /*0x6727fa*/
+          if ( ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetCurrentAction)(this->super.super.super.process) != 6 ) /*0x672811*/
+            goto LABEL_247; /*0x672811*/
+          Actor_UpdateBlockingState((Actor *)this, 0); /*0x672817*/
         }
-        v230 = 1;
-LABEL_255:
-        if ( Player_GetCurrentMagicItem(_EBX) )
+        v127 = 1; /*0x67281c*/
+LABEL_247:
+        if ( Player_GetCurrentMagicItem(this) ) /*0x672823*/
         {
-          if ( ((unsigned __int8 (__thiscall *)(LowProcess *))_EBX->super.super.super.process->Unk_B6)(_EBX->super.super.super.process) )
+          if ( ((unsigned __int8 (__thiscall *)(LowProcess *))this->super.super.super.process->Unk_B6)(this->super.super.super.process) ) /*0x67283b*/
           {
-            if ( !InputGlobals::QueryControlState(v87, 7, 1) && !InputGlobals::QueryControlState(v87, 7, 0)
-              || Actor_GetCurrentAction(_EBX) == 2
-              || Actor_GetCurrentAction(_EBX) == 4
-              || Actor_GetCurrentAction(_EBX) == 5
-              || Actor_GetCurrentAction(_EBX) == 3 )
+            if ( !InputGlobals::QueryControlState(v49, 7, 1) && !InputGlobals::QueryControlState(v49, 7, 0) /*0x6728a0*/
+              || Actor_GetCurrentAction(this) == 2
+              || Actor_GetCurrentAction(this) == 4
+              || Actor_GetCurrentAction(this) == 5
+              || Actor_GetCurrentAction(this) == 3 )
             {
-              byte_B3BCE4 = 0;
+              LOBYTE(qword_B3BB2C[0x6E]) = 0; /*0x67291e*/
             }
             else
             {
-              book = _EBX->book;
-              if ( book )
+              book = this->book; /*0x6728a2*/
+              if ( book ) /*0x6728aa*/
               {
-                ((void (__thiscall *)(PlayerCharacter *, TESObjectBOOK *, _DWORD))_EBX->vtbl->super.Unk_B4)(
-                  _EBX,
+                ((void (__thiscall *)(PlayerCharacter *, TESObjectBOOK *, _DWORD))this->vtbl->super.Unk_B4)( /*0x6728b9*/
+                  this,
                   book,
                   0);
-                v94 = (MobileObject *)v278;
-                v230 = 1;
+                v58 = (MobileObject *)v166; /*0x6728bb*/
+                v127 = 1; /*0x6728bf*/
               }
               else
               {
-                if ( !byte_B3BCE4 )
+                if ( !LOBYTE(qword_B3BB2C[0x6E]) ) /*0x6728c6*/
                 {
-                  v119 = _EBX->super.super.magicCaster.vtbl;
-                  CurrentMagicItem = Player_GetCurrentMagicItem(_EBX);
-                  v243 = v119->IsMagicItemUsable(&_EBX->super.super.magicCaster, (MagicItem *)CurrentMagicItem, 0, 0, 0);
-                  v121 = Player_GetCurrentMagicItem(_EBX);
-                  MagicCaster_CastMagicItem(&_EBX->super.super.magicCaster.vtbl, v121, 0, 0);
-                  v87 = v245;
-                  if ( !v243 )
-                    byte_B3BCE4 = 1;
+                  v66 = this->super.super.magicCaster.vtbl; /*0x6728cf*/
+                  CurrentMagicItem = Player_GetCurrentMagicItem(this); /*0x6728dd*/
+                  v140 = v66->IsMagicItemUsable(&this->super.super.magicCaster, (MagicItem *)CurrentMagicItem, 0, 0, 0); /*0x6728f0*/
+                  v68 = Player_GetCurrentMagicItem(this); /*0x6728f4*/
+                  MagicCaster_CastMagicItem(&this->super.super.magicCaster.vtbl, v68, 0, 0); /*0x6728fc*/
+                  v49 = v142; /*0x672906*/
+                  if ( !v140 ) /*0x67290a*/
+                    LOBYTE(qword_B3BB2C[0x6E]) = 1; /*0x67290c*/
                 }
-                v94 = (MobileObject *)v278;
-                v230 = 1;
+                v58 = (MobileObject *)v166; /*0x672913*/
+                v127 = 1; /*0x672917*/
               }
             }
           }
         }
-LABEL_271:
-        if ( v94 )
-          goto LABEL_306;
-        if ( !InputGlobals::QueryControlState(v87, 0xD, 1) )
-          goto LABEL_306;
-        if ( ((unsigned __int8 (__thiscall *)(PlayerCharacter *))_EBX->vtbl->super.Unk_97)(_EBX) )
-          goto LABEL_306;
-        v123 = _EBX->vtbl->super.super.super.GetAnimData((TESObjectREFR *)_EBX);
-        AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v123, 3);
-        if ( sub_51ACC0(AnimGroupFromField8Value)
-          || Actor_GetCurrentAction(_EBX) == 9
-          || sub_5E5640(_EBX) && Actor_GetSkillMasteryLevel((int *)_EBX, (int)_EBX, (int)v87, 0x1A) <= 0 )
+LABEL_263:
+        if ( v58 ) /*0x67293b*/
+          goto LABEL_297; /*0x67293b*/
+        if ( !InputGlobals::QueryControlState(v49, 0xD, 1) ) /*0x672947*/
+          goto LABEL_297; /*0x672947*/
+        if ( ((unsigned __int8 (__thiscall *)(PlayerCharacter *))this->vtbl->super.Unk_97)(this) ) /*0x67295e*/
+          goto LABEL_297; /*0x67295e*/
+        v69 = this->vtbl->super.super.super.GetAnimData(this); /*0x672974*/
+        AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v69, 3); /*0x672978*/
+        if ( AnimGroup_UsesPowerOrCastNoteTemplate(AnimGroupFromField8Value) /*0x6729b4*/
+          || Actor_GetCurrentAction(this) == 9
+          || Actor_IsCurrentActionInRange2To5(this)
+          && Actor_GetSkillMasteryLevel((Actor *)this, kSkillAV_Acrobatics) <= kSkillMastery_Novice )
         {
-          goto LABEL_306;
+          goto LABEL_297; /*0x6729b4*/
         }
-        if ( sub_5EC180((MobileObject *)_EBX) || (v244 = 1, Actor_IsSwimming(_EBX)) )
-          v244 = 0;
-        v231 = 0;
-        v281 = InputGlobals::QueryControlState(v87, 6, 0) != 0;
-        IsBlocking = Actor_IsBlocking(_EBX);
-        if ( v281 )
+        if ( MobileObject_IsJumpSuppressedByFallAnimOrInAir((MobileObject *)this) /*0x6729c7*/
+          || (v141 = 1, Actor_IsSwimming((Actor *)this)) )
         {
-          if ( !sub_579540() && Actor_GetSkillMasteryLevel((int *)_EBX, (int)_EBX, (int)v87, 0x1A) >= 2 )
+          v141 = 0; /*0x6729d5*/
+        }
+        v128 = 0; /*0x6729e0*/
+        v169 = InputGlobals::QueryControlState(v49, 6, 0) != 0; /*0x6729ee*/
+        IsBlocking = Actor_IsBlocking(this); /*0x6729fd*/
+        if ( v169 ) /*0x672a01*/
+        {
+          if ( !sub_579540() /*0x672a18*/
+            && Actor_GetSkillMasteryLevel((Actor *)this, kSkillAV_Acrobatics) >= kSkillMastery_Journeyman )
           {
-            v125 = MobileObject_GetCharProxy((MobileObject *)_EBX);
-            if ( sub_88D370((_DWORD *)v125 + 0x78) )
-              goto LABEL_292;
-            v126 = sub_5F5050((Actor *)_EBX, v232) == 0xFF;
-            goto LABEL_291;
+            v71 = MobileObject_GetCharProxy((MobileObject *)this); /*0x672a28*/
+            if ( hkCharacterContext_GetStateId((_DWORD *)v71 + 0x78) ) /*0x672a33*/
+              goto LABEL_284; /*0x672a3a*/
+            v72 = sub_5F5050((Actor *)this, v129) == 0xFF; /*0x672a48*/
+            goto LABEL_283; /*0x672a4d*/
           }
-          if ( IsBlocking || (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)_EBX) + 0x7D) & 0x400) == 0 )
+          if ( IsBlocking || (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)this) + 0x7D) & 0x400) == 0 ) /*0x672a69*/
           {
-LABEL_292:
-            sub_66A670((TESObjectREFR *)_EBX);
-            if ( v244 )
+LABEL_284:
+            sub_66A670((TESObjectREFR *)this); /*0x672aa0*/
+            if ( v141 ) /*0x672aac*/
             {
-              if ( !v231 )
+              if ( !v128 ) /*0x672ab3*/
               {
-LABEL_303:
-                v230 = 1;
-                goto LABEL_306;
+LABEL_294:
+                v127 = 1; /*0x672b8f*/
+                goto LABEL_297; /*0x672b8f*/
               }
-              if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)_EBX) + 0x7D) & 0x400) != 0 )
+              if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)this) + 0x7D) & 0x400) != 0 ) /*0x672acc*/
               {
-                __asm { fldz }
-                __asm { fstp    [esp+0A4h+duration] }
-                ((void (__thiscall *)(PlayerCharacter *, int, _DWORD, _DWORD))_EBX->vtbl->super.ModExperience)(
-                  _EBX,
+                v52 = 0.0; /*0x672ace*/
+                ((void (__thiscall *)(PlayerCharacter *, int, _DWORD, _DWORD))this->vtbl->super.ModExperience)( /*0x672ae2*/
+                  this,
                   0x1A,
                   0,
-                  LODWORD(durationm));
+                  0.0);
               }
             }
-            if ( v231 )
+            if ( v128 ) /*0x672ae9*/
             {
-              v261 = _EBX->vtbl->super.GetActorValue((Actor *)_EBX, kActorVal_Encumbrance);
-              __asm { fild    [esp+0A0h+var_78] }
-              __asm { fstp    qword ptr [esp+0A0h+var_78] }
-              Actor_GetBaseEncumberance((int)_EBX, v88);
-              __asm { fdivr   qword ptr [esp+0A0h+var_78] }
-              __asm
+              v153 = (double)this->vtbl->super.GetActorValue((Actor *)this, kActorVal_Encumbrance); /*0x672b07*/
+              *(float *)&v153 = v153 / Actor_GetBaseEncumberance((int)this, v153); /*0x672b15*/
+              v52 = Calc_FatigueJumpMultiplier_(*(float *)&v153); /*0x672b20*/
+              v139 = v52; /*0x672b25*/
+              if ( Actor_GetSkillMasteryLevel((Actor *)this, kSkillAV_Acrobatics) >= kSkillMastery_Expert ) /*0x672b38*/
               {
-                fstp    [esp+0A4h+var_78]
-                fld     [esp+0A4h+var_78]
-                fstp    [esp+0A4h+duration]; float
+                v52 = v139 * *(float *)GameSetting_GetSafeFloatPointer((int *)MEMORY[0xB37510]); /*0x672b48*/
+                v139 = v52; /*0x672b4a*/
               }
-              v88 = Calc_FatigueJumpMultiplier_(durationn);
-              __asm { fstp    [esp+0A4h+var_84] }
-              if ( Actor_GetSkillMasteryLevel((int *)_EBX, (int)_EBX, (int)v87, 0x1A) >= 3 )
+              if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)this) + 0x7D) & 0x400) != 0 ) /*0x672b61*/
               {
-                _EAX = GameSetting_GetSafeFloatPointer((int *)&fPerkJumpFatigueExpertMult);
-                __asm
+                v51 = v139; /*0x672b65*/
+                v52 = v139; /*0x672b6d*/
+                if ( v139 > 0.0 ) /*0x672b72*/
                 {
-                  fld     [esp+0A0h+var_84]
-                  fmul    dword ptr [eax]
-                  fstp    [esp+0A0h+var_84]
+                  v52 = -v52; /*0x672b75*/
+                  durationa = v52; /*0x672b79*/
+                  Actor_ApplyNegativeFatigueDeltaClamped((Actor *)this, durationa); /*0x672b7c*/
+                  v127 = 1; /*0x672b81*/
+                  Input_ProcessQuickSlotHotkeys((int)&savedregs, v2, v3, v4, v5, v6, v50, v51, v52); /*0x672b86*/
+                  goto LABEL_300; /*0x672b8b*/
                 }
-              }
-              if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)_EBX) + 0x7D) & 0x400) != 0 )
-              {
-                __asm
-                {
-                  fldz
-                  fld     [esp+0A0h+var_84]
-                  fcom    st(1)
-                  fnstsw  ax
-                  fstp    st(1)
-                }
-                if ( (_AX & 0x4100) == 0 )
-                {
-                  __asm { fchs }
-                  __asm { fstp    [esp+0A4h+duration]; float }
-                  Actor_ModFatigue_(_EBX, durationo);
-                  v230 = 1;
-                  sub_5C1F70((int)&savedregs, st0_0, a3, a4, a5, a6, a7, a8, v88);
-                  goto LABEL_309;
-                }
-                __asm { fstp    st }
               }
             }
-            goto LABEL_303;
+            goto LABEL_294; /*0x672b72*/
           }
         }
-        else if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)_EBX) + 0x7D) & 0x400) == 0 )
+        else if ( (*((_DWORD *)MobileObject_GetCharProxy((MobileObject *)this) + 0x7D) & 0x400) == 0 ) /*0x672a8b*/
         {
-          goto LABEL_292;
+          goto LABEL_284; /*0x672a8b*/
         }
-        v126 = ((int (__thiscall *)(PlayerCharacter *))_EBX->vtbl->super.super.Jump)(_EBX) == 0;
-LABEL_291:
-        v231 = !v126;
-        goto LABEL_292;
+        v72 = ((int (__thiscall *)(PlayerCharacter *))this->vtbl->super.super.Jump)(this) == 0; /*0x672a99*/
+LABEL_283:
+        v128 = !v72; /*0x672a9b*/
+        goto LABEL_284; /*0x672a9b*/
       }
     }
-    else if ( InputGlobals::QueryControlState(v245, 0xA, 1) || InputGlobals::QueryControlState(v245, 0xA, 0) )
+    else if ( InputGlobals::QueryControlState(v142, 0xA, 1) || InputGlobals::QueryControlState(v142, 0xA, 0) ) /*0x67220a*/
     {
-      v232 |= 0x200u;
-      v87 = v245;
-      goto LABEL_179;
+      v129 |= 0x200u; /*0x672213*/
+      v49 = v142; /*0x67221b*/
+      goto LABEL_173; /*0x67221d*/
     }
-    v87 = v245;
-    goto LABEL_179;
+    v49 = v142; /*0x67221f*/
+    goto LABEL_173; /*0x67221f*/
   }
-  __asm
+  v108 = unk_B3BAE0; /*0x6735d6*/
+  if ( v108 <= flt_A31C80 ) /*0x6735e5*/
   {
-    fld     dword ptr ds:0A31C80h
-    fld     dword ptr ds:0B3BAE0h
-    fcom    st(1)
-    fnstsw  ax
-    fstp    st(1)
-  }
-  if ( (_AX & 0x4100) == 0 )
-  {
-    __asm { fstp    st }
-    if ( _EBX->isWakeUpPackage
-      && ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetSitSleepState)(_EBX->super.super.super.process) == 4 )
+    if ( this->isTravelPackage ) /*0x6736bd*/
     {
-      v126 = _EBX->isTravelPackage == 0;
-      Unk_6F = _EBX->vtbl->super.super.Unk_6F;
-      _EBX->isWakeUpPackage = 0;
-      if ( v126 )
-        ((void (__stdcall *)(int))Unk_6F)(1);
-      else
-        ((void (__stdcall *)(_DWORD))Unk_6F)(0);
-      _EBX->super.super.super.process->SetCurrentPackage(_EBX->super.super.super.process, 0);
-      __asm
+      v111 = this->super.super.super.process; /*0x6736ca*/
+      GetSitSleepState = v111->GetSitSleepState; /*0x6736d5*/
+      unk_B3BAE0 = v108 + *(float *)&MEMORY[0xB33E90][0xC]; /*0x6736db*/
+      if ( ((int (__thiscall *)(LowProcess *))GetSitSleepState)(v111) == 4 /*0x673705*/
+        || ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetSitSleepState)(this->super.super.super.process) == 9
+        || !this->super.super.super.process->GetCurrentPackage(this->super.super.super.process) )
       {
-        fldz
-        fstp    dword ptr ds:0B3BAE0h
+        v72 = this->isWakeUpPackage == 0; /*0x67370f*/
+        Unk_6F = this->vtbl->super.super.Unk_6F; /*0x673718*/
+        this->isTravelPackage = 0; /*0x67371e*/
+        if ( !v72 ) /*0x673727*/
+          goto LABEL_431; /*0x673727*/
+        goto LABEL_432; /*0x673727*/
       }
-      flt_B3BAE0 = _ET1;
+    }
+    else if ( this->isWakeUpPackage ) /*0x673753*/
+    {
+      v113 = this->super.super.super.process; /*0x67375c*/
+      v114 = v113->GetSitSleepState; /*0x673767*/
+      unk_B3BAE0 = v108 + *(float *)&MEMORY[0xB33E90][0xC]; /*0x67376d*/
+      if ( !((int (__thiscall *)(LowProcess *))v114)(v113) ) /*0x673773*/
+      {
+        v72 = this->isTravelPackage == 0; /*0x673779*/
+        this->isWakeUpPackage = 0; /*0x673780*/
+        v115 = this->vtbl->super.super.Unk_6F; /*0x673788*/
+        if ( v72 ) /*0x673790*/
+          ((void (__stdcall *)(int))v115)(1); /*0x673798*/
+        else
+          ((void (__stdcall *)(_DWORD))v115)(0); /*0x673794*/
+        this->super.super.super.process->SetCurrentPackage(this->super.super.super.process, 0); /*0x6737a7*/
+        unk_B3BAE0 = 0.0; /*0x6737ab*/
+      }
+    }
+    sub_605770((Actor *)this, deltaTime); /*0x6737be*/
+    ((void (__thiscall *)(LowProcess *, PlayerCharacter *, _DWORD, _DWORD, _DWORD))this->super.super.super.process->Unk_B2)( /*0x6737ee*/
+      this->super.super.super.process,
+      this,
+      LODWORD(g_zeroNiPoint3.x),
+      LODWORD(g_zeroNiPoint3.y),
+      LODWORD(g_zeroNiPoint3.z));
+    v116 = 0.0; /*0x6737f0*/
+    if ( unk_B36C90[0] <= 0.0 ) /*0x6737ff*/
+    {
+      if ( Actor::GetDeadState((Actor *)this) == 2 && !unk_B3BB07 ) /*0x6738d9*/
+      {
+        this->vtbl->super.super.Unk_72((MobileObject *)this); /*0x6738ec*/
+        if ( g_TESSaveLoadGame[5].unk030[0] ) /*0x6738f4*/
+          ShowUIMessageBox( /*0x67391a*/
+            (char *)stru_B38C08,
+            v7,
+            v108,
+            0.0,
+            (char *)stru_B38C08,
+            (int)sub_663270,
+            1,
+            (char *)stru_B38C10,
+            stru_B38C18);
+        else
+          MEMORY[0xB33398]->exitToMainMenu = 1; /*0x67392a*/
+        unk_B3BB07 = 1; /*0x67392e*/
+      }
+    }
+    else if ( Actor::GetDeadState((Actor *)this) == 2 || Actor::GetDeadState((Actor *)this) == 1 ) /*0x673819*/
+    {
+      v117 = *(_DWORD *)&MEMORY[0xB33E90][0x10]; /*0x67382e*/
+      if ( flt_B15018 < 0.0 ) /*0x67383f*/
+      {
+        v118 = GameSetting_GetSafeFloatPointer((int *)unk_B36C90); /*0x673846*/
+        v119 = (double)v117; /*0x673853*/
+        if ( v117 < 0 ) /*0x673857*/
+          v119 = v119 + flt_A2FC78; /*0x673859*/
+        flt_B15018 = v119 / dbl_A2FC70 + *(float *)v118; /*0x673867*/
+      }
+      v120 = (double)v117; /*0x673873*/
+      if ( v117 < 0 ) /*0x673877*/
+        v120 = v120 + flt_A2FC78; /*0x673879*/
+      v116 = v120 / dbl_A2FC70; /*0x67387f*/
+      v108 = flt_B15018; /*0x673885*/
+      if ( v108 < v116 ) /*0x673892*/
+      {
+        v116 = kTerrainLODQuadRayDirectionZ; /*0x67389e*/
+        v72 = g_TESSaveLoadGame[5].unk030[0] == 0; /*0x6738a4*/
+        flt_B15018 = kTerrainLODQuadRayDirectionZ; /*0x6738ab*/
+        if ( v72 ) /*0x6738b1*/
+        {
+          MEMORY[0xB33398]->exitToMainMenu = 1; /*0x6738c9*/
+        }
+        else
+        {
+          sub_5BDA90((char)&savedregs, v7, v108, v116); /*0x6738b3*/
+          LoadgameMenu_Open(v2, v3, v4, v5, v6, v7, v108, v116, 0); /*0x6738ba*/
+        }
+      }
     }
     else
     {
-      if ( _EBX->vtbl->super.super.super.IsDead((TESObjectREFR *)_EBX, 0)
-        || !((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetSitSleepState)(_EBX->super.super.super.process) )
-      {
-        sub_5EAE70((Actor *)_EBX, (int)_EBX, v38, duration_4);
-        v126 = _EBX->isWakeUpPackage == 0;
-        v179 = _EBX->vtbl->super.super.Unk_6F;
-        _EBX->isTravelPackage = 0;
-        if ( v126 )
-          ((void (__stdcall *)(int))v179)(1);
-        else
-          ((void (__stdcall *)(_DWORD))v179)(0);
-        _EBX->super.super.super.process->SetSleepState(_EBX->super.super.super.process, (Actor *)_EBX, 0, 0, 0x7F);
-      }
-      __asm
-      {
-        fldz
-        fstp    dword ptr ds:0B3BAE0h
-      }
-      flt_B3BAE0 = _ET1;
+      v116 = kTerrainLODQuadRayDirectionZ; /*0x67381b*/
+      flt_B15018 = kTerrainLODQuadRayDirectionZ; /*0x673821*/
     }
-    return;
-  }
-  if ( _EBX->isTravelPackage )
-  {
-    v181 = _EBX->super.super.super.process;
-    __asm { fadd    dword ptr ds:0B33E9Ch }
-    GetSitSleepState = v181->GetSitSleepState;
-    __asm { fstp    dword ptr ds:0B3BAE0h }
-    flt_B3BAE0 = _ET1;
-    if ( ((int (__thiscall *)(LowProcess *))GetSitSleepState)(v181) == 4
-      || ((int (__thiscall *)(LowProcess *))_EBX->super.super.super.process->GetSitSleepState)(_EBX->super.super.super.process) == 9
-      || !_EBX->super.super.super.process->GetCurrentPackage(_EBX->super.super.super.process) )
+    sub_66B710(this, v116, 0); /*0x673939*/
+    if ( InputGlobals::QueryControlState(v142, 0x1B, 1) ) /*0x673946*/
     {
-      v126 = _EBX->isWakeUpPackage == 0;
-      v184 = _EBX->vtbl->super.super.Unk_6F;
-      _EBX->isTravelPackage = 0;
-      if ( v126 )
-        ((void (__stdcall *)(int))v184)(1);
-      else
-        ((void (__stdcall *)(_DWORD))v184)(0);
-      _EBX->super.super.super.process->SetCurrentPackage(_EBX->super.super.super.process, 0);
-      __asm
-      {
-        fldz
-        fstp    dword ptr ds:0B3BAE0h
-      }
-      flt_B3BAE0 = _ET1;
-      return;
-    }
-  }
-  else if ( _EBX->isWakeUpPackage )
-  {
-    v186 = _EBX->super.super.super.process;
-    __asm { fadd    dword ptr ds:0B33E9Ch }
-    v187 = v186->GetSitSleepState;
-    __asm { fstp    dword ptr ds:0B3BAE0h }
-    flt_B3BAE0 = _ET1;
-    if ( !((int (__thiscall *)(LowProcess *))v187)(v186) )
-    {
-      v126 = _EBX->isTravelPackage == 0;
-      _EBX->isWakeUpPackage = 0;
-      v189 = _EBX->vtbl->super.super.Unk_6F;
-      if ( v126 )
-        ((void (__stdcall *)(int))v189)(1);
-      else
-        ((void (__stdcall *)(_DWORD))v189)(0);
-      _EBX->super.super.super.process->SetCurrentPackage(_EBX->super.super.super.process, 0);
-      __asm
-      {
-        fldz
-        fstp    dword ptr ds:0B3BAE0h
-      }
-      flt_B3BAE0 = _ET1;
+      if ( sub_466B00((char *)g_TESSaveLoadGame, (char)&savedregs, v2, v3, v4, v5, v6, v7, v108) ) /*0x673955*/
+        flt_B15018 = kTerrainLODQuadRayDirectionZ; /*0x673964*/
     }
   }
   else
   {
-    __asm { fstp    st }
-  }
-  __asm { fld     [ebp+arg_0] }
-  __asm { fstp    [esp+0A4h+duration]; float }
-  sub_605770((Actor *)_EBX, durationz);
-  ((void (__thiscall *)(LowProcess *, PlayerCharacter *, _DWORD, _DWORD, _DWORD))_EBX->super.super.super.process->Unk_B2)(
-    _EBX->super.super.super.process,
-    _EBX,
-    LODWORD(Vector3_InitValue_),
-    *((_DWORD *)&Vector3_InitValue_ + 1),
-    LODWORD(dword_B3F9B0));
-  __asm
-  {
-    fldz
-    fcomp   dword ptr ds:0B36C90h
-  }
-  __asm { fnstsw  ax }
-  if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-  {
-    if ( Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)_EBX) == (struct Concurrency::details::ScheduleGroupBase *)2
-      && !byte_B3BB07 )
+    if ( this->isWakeUpPackage /*0x673606*/
+      && ((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetSitSleepState)(this->super.super.super.process) == 4 )
     {
-      _EBX->vtbl->super.super.Unk_72((MobileObject *)_EBX);
-      if ( SaveLoad_CurrentSavegame[5].unk030[0] )
-        ShowUIMessageBox(
-          (char *)dword_B38C08,
-          (char)&savedregs,
-          a7,
-          a8,
-          v52,
-          (const char *)dword_B38C08,
-          (int)sub_663270,
-          1,
-          (const char *)dword_B38C10,
-          dword_B38C18);
+      v72 = this->isTravelPackage == 0; /*0x673608*/
+      Unk_6F = this->vtbl->super.super.Unk_6F; /*0x673611*/
+      this->isWakeUpPackage = 0; /*0x673617*/
+      if ( !v72 ) /*0x673620*/
+      {
+LABEL_431:
+        ((void (__stdcall *)(_DWORD))Unk_6F)(0); /*0x673622*/
+LABEL_433:
+        this->super.super.super.process->SetCurrentPackage(this->super.super.super.process, 0); /*0x67362a*/
+        unk_B3BAE0 = 0.0; /*0x67363d*/
+        return; /*0x673649*/
+      }
+LABEL_432:
+      ((void (__stdcall *)(int))Unk_6F)(1); /*0x673626*/
+      goto LABEL_433; /*0x673628*/
+    }
+    if ( this->vtbl->super.super.super.IsDead((TESObjectREFR *)this, 0) /*0x673669*/
+      || !((int (__thiscall *)(LowProcess *))this->super.super.super.process->GetSitSleepState)(this->super.super.super.process) )
+    {
+      sub_5EAE70((Actor *)this, (int)this, v27, duration_4); /*0x673671*/
+      v72 = this->isWakeUpPackage == 0; /*0x673676*/
+      v110 = this->vtbl->super.super.Unk_6F; /*0x67367f*/
+      this->isTravelPackage = 0; /*0x673685*/
+      if ( v72 ) /*0x67368e*/
+        ((void (__stdcall *)(int))v110)(1); /*0x673696*/
       else
-        OSGlobals->exitToMainMenu = 1;
-      byte_B3BB07 = 1;
+        ((void (__stdcall *)(_DWORD))v110)(0); /*0x673692*/
+      this->super.super.super.process->SetSleepState(this->super.super.super.process, (Actor *)this, 0, 0, 0x7F); /*0x6736aa*/
     }
-  }
-  else if ( Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)_EBX) == (struct Concurrency::details::ScheduleGroupBase *)2
-         || Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)_EBX) == (struct Concurrency::details::ScheduleGroupBase *)1 )
-  {
-    __asm { fldz }
-    v193 = Seed;
-    __asm
-    {
-      fcomp   dword ptr ds:0B15018h
-      fnstsw  ax
-    }
-    if ( (_AX & 0x4100) == 0 )
-    {
-      _EAX = GameSetting_GetSafeFloatPointer((int *)&flt_B36C90);
-      v265 = v193;
-      __asm { fild    [esp+0A0h+var_78] }
-      if ( v193 < 0 )
-        __asm { fadd    dword ptr ds:0A2FC78h }
-      __asm
-      {
-        fdiv    qword ptr ds:0A2FC70h
-        fadd    dword ptr [eax]
-        fstp    dword ptr ds:0B15018h
-      }
-      flt_B15018 = _ET1;
-    }
-    v266 = v193;
-    __asm { fild    [esp+0A0h+var_78] }
-    if ( v193 < 0 )
-      __asm { fadd    dword ptr ds:0A2FC78h }
-    __asm
-    {
-      fdiv    qword ptr ds:0A2FC70h
-      fld     dword ptr ds:0B15018h
-      fcompp
-      fnstsw  ax
-    }
-    if ( !__SETP__(HIBYTE(_AX) & 5, 0) )
-    {
-      __asm { fld     dword ptr ds:0A30634h }
-      v126 = SaveLoad_CurrentSavegame[5].unk030[0] == 0;
-      __asm { fstp    dword ptr ds:0B15018h }
-      flt_B15018 = _ET1;
-      if ( v126 )
-      {
-        OSGlobals->exitToMainMenu = 1;
-      }
-      else
-      {
-        sub_5BDA90((char)&savedregs, a7, a8, v52);
-        sub_5AEA60(st0_0, a3, a4, a5, a6, a7, a8, v52, 0);
-      }
-    }
-  }
-  else
-  {
-    __asm
-    {
-      fld     dword ptr ds:0A30634h
-      fstp    dword ptr ds:0B15018h
-    }
-    flt_B15018 = _ET1;
-  }
-  sub_66B710(_EBX, v52, a7, 0);
-  if ( InputGlobals::QueryControlState(v245, 0x1B, 1) )
-  {
-    if ( sub_466B00((char *)SaveLoad_CurrentSavegame, (char)&savedregs, st0_0, a3, a4, a5, a6, a7, a8) )
-    {
-      __asm
-      {
-        fld     dword ptr ds:0A30634h
-        fstp    dword ptr ds:0B15018h
-      }
-      flt_B15018 = _ET1;
-    }
+    unk_B3BAE0 = 0.0; /*0x6736ae*/
   }
 }

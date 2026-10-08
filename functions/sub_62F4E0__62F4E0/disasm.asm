@@ -1,4 +1,4 @@
-0x62F4E0: sub     esp, 24h
+0x62F4E0: sub     esp, 24h; HighProcess dialogue-procedure update. Turns awake participants toward each other, counts down response timing, waits for the current sound handle, invokes DialoguePackage::Speak(true), and cleans the shared dynamic package after procedureCompleted becomes true.
 0x62F4E3: mov     eax, [ecx]
 0x62F4E5: mov     edx, [eax+184h]
 0x62F4EB: push    ebx
@@ -7,11 +7,11 @@
 0x62F4EE: mov     [esp+30h+var_1C], ecx
 0x62F4F2: call    edx
 0x62F4F4: mov     ebx, eax
-0x62F4F6: mov     ecx, ebx
-0x62F4F8: call    sub_779480
-0x62F4FD: mov     ecx, ebx
+0x62F4F6: mov     ecx, ebx; this
+0x62F4F8: call    DialoguePackage__GetTarget; DialoguePackage participant accessor: returns the target at +0x60.
+0x62F4FD: mov     ecx, ebx; this
 0x62F4FF: mov     esi, eax
-0x62F501: call    NiDX9TextureData__GetLevels
+0x62F501: call    DialoguePackage__GetSpeaker; DialoguePackage participant accessor: returns the original initiating speaker at +0x5C.
 0x62F506: xor     ecx, ecx
 0x62F508: cmp     esi, ecx
 0x62F50A: mov     edi, eax
@@ -25,7 +25,7 @@
 0x62F525: call    edx
 0x62F527: test    eax, eax
 0x62F529: jnz     loc_62F615
-0x62F52F: cmp     esi, [esp+34h+arg_0]
+0x62F52F: cmp     esi, [esp+34h+owner]
 0x62F533: jz      loc_62F615
 0x62F539: mov     eax, [esi]
 0x62F53B: mov     edx, [eax+174h]
@@ -51,7 +51,7 @@
 0x62F579: fstp    [esp+38h+var_8]
 0x62F57D: fld     [esp+38h+var_24]
 0x62F581: fstp    [esp+38h+var_4]
-0x62F585: call    sub_683CB0
+0x62F585: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x62F58A: fstp    [esp+38h+var_20]
 0x62F58E: add     esp, 4
 0x62F591: fldz
@@ -94,7 +94,7 @@
 0x62F60A: jmp     short loc_62F615
 0x62F60C: push    30h ; '0'
 0x62F60E: mov     ecx, esi
-0x62F610: call    sub_5E05F0
+0x62F610: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62F615: mov     edx, [edi]
 0x62F617: mov     eax, [edx+18Ch]
 0x62F61D: mov     ecx, edi
@@ -127,7 +127,7 @@
 0x62F671: fstp    [esp+38h+var_8]
 0x62F675: fld     [esp+38h+var_18]
 0x62F679: fstp    [esp+38h+var_4]
-0x62F67D: call    sub_683CB0
+0x62F67D: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x62F682: fstp    [esp+38h+var_24]
 0x62F686: add     esp, 4
 0x62F689: fldz
@@ -170,12 +170,12 @@
 0x62F702: jmp     short loc_62F70D
 0x62F704: push    30h ; '0'
 0x62F706: mov     ecx, edi
-0x62F708: call    sub_5E05F0
+0x62F708: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62F70D: fldz
 0x62F70F: fcomp   dword ptr [ebx+44h]
 0x62F712: fnstsw  ax
 0x62F714: test    ah, 5
-0x62F717: jp      short loc_62F72F
+0x62F717: jp      short loc_62F72F; High-detail playback is gated by responseTimeRemaining. While positive it is reduced by the frame delta; at zero the sound/procedure state decides whether to speak, wait, or clean up.
 0x62F719: fld     dword ptr [ebx+44h]
 0x62F71C: fsub    dword ptr ds:0B33E9Ch
 0x62F722: fstp    dword ptr [ebx+44h]
@@ -191,29 +191,29 @@
 0x62F73B: call    edx
 0x62F73D: test    al, al
 0x62F73F: jz      loc_62F7C8
-0x62F745: mov     ecx, [ebx+3Ch]
+0x62F745: mov     ecx, [ebx+3Ch]; this
 0x62F748: test    ecx, ecx
 0x62F74A: jz      short loc_62F755
-0x62F74C: call    sub_6B7260
+0x62F74C: call    SoundHandle__IsPlaying; If procedure is not complete, wait while dialogue sound is playing and call Speak(true) only when no live sound handle remains. If procedure is complete and sound is no longer playing, enter package cleanup.
 0x62F751: test    al, al
 0x62F753: jnz     short loc_62F7C8
-0x62F755: mov     ecx, edi
+0x62F755: mov     ecx, edi; this
 0x62F757: xor     bl, bl
-0x62F759: call    sub_5E0380
-0x62F75E: mov     ecx, esi
+0x62F759: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x62F75E: mov     ecx, esi; this
 0x62F760: mov     ebp, eax
-0x62F762: call    sub_5E0380
+0x62F762: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x62F767: cmp     eax, ebp
 0x62F769: jnz     short loc_62F76D
 0x62F76B: mov     bl, 1
-0x62F76D: mov     ebp, [esp+34h+arg_0]
+0x62F76D: mov     ebp, [esp+34h+owner]
 0x62F771: mov     eax, [ebp+0]
 0x62F774: mov     edx, [eax+30Ch]
 0x62F77A: mov     ecx, ebp
-0x62F77C: call    edx
+0x62F77C: call    edx; Completed high-detail conversation: Character::CleanupCurrentPackage restores participant package state and destroys the shared dynamic DialoguePackage/Conversation.
 0x62F77E: push    30h ; '0'
 0x62F780: mov     ecx, esi
-0x62F782: call    sub_5E05F0
+0x62F782: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62F787: test    bl, bl
 0x62F789: jz      short loc_62F7B2
 0x62F78B: cmp     edi, ebp
@@ -241,22 +241,22 @@
 0x62F7C1: pop     ebx
 0x62F7C2: add     esp, 24h
 0x62F7C5: retn    4
-0x62F7C8: mov     ecx, [ebx+3Ch]
+0x62F7C8: mov     ecx, [ebx+3Ch]; this
 0x62F7CB: test    ecx, ecx
 0x62F7CD: jz      short loc_62F7DC
-0x62F7CF: call    sub_6B7260
+0x62F7CF: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x62F7D4: test    al, al
 0x62F7D6: jnz     loc_62F725
-0x62F7DC: push    1; AnimSequenceSingle *
-0x62F7DE: mov     ecx, ebx
-0x62F7E0: call    sub_6267A0
+0x62F7DC: push    1; startSpeech
+0x62F7DE: mov     ecx, ebx; this
+0x62F7E0: call    DialoguePackage__Speak; HighProcess audible advance: starts the selected DialogueResponse, or advances/commits an exhausted item, with startSpeech=true.
 0x62F7E5: pop     ebp
 0x62F7E6: pop     edi
 0x62F7E7: pop     esi
 0x62F7E8: pop     ebx
 0x62F7E9: add     esp, 24h
 0x62F7EC: retn    4
-0x62F7EF: mov     eax, [esp+30h+arg_0]
+0x62F7EF: mov     eax, [esp+30h+owner]
 0x62F7F3: mov     edx, [eax+58h]
 0x62F7F6: pop     edi
 0x62F7F7: mov     [edx+8], ecx

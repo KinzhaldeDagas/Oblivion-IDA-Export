@@ -1,4 +1,4 @@
-0x8037D0: push    0FFFFFFFFh
+0x8037D0: push    0FFFFFFFFh; MoonSugarEffect decode: ImageSpaceShaderList processing builds a temporary active shader list, binds each shader to the shared screen element, and ping-pongs source/destination targets.
 0x8037D2: push    offset SEH_8037D0
 0x8037D7: mov     eax, large fs:0
 0x8037DD: push    eax
@@ -16,7 +16,7 @@
 0x8037F9: xor     ebp, ebp
 0x8037FB: cmp     [edi+10h], ebp
 0x8037FE: jnz     short loc_803805
-0x803800: call    ImageSpaceShaderList__AssignScreenElements
+0x803800: call    ImageSpaceShaderList__AssignScreenElements; MoonSugarEffect decode: creates native image-space screen quad as one 4-vertex NiScreenElements polygon. Coordinates are x=-1,y=1,w=2,h=-2 and UVs 0..1.
 0x803805: mov     eax, [edi+4]
 0x803808: mov     ebx, [eax]
 0x80380A: mov     esi, [eax+8]
@@ -65,8 +65,8 @@
 0x80388D: cmp     eax, ebp
 0x80388F: jz      loc_8039CF
 0x803895: mov     ecx, [edi+10h]; this
-0x803898: push    eax; a2
-0x803899: call    sub_4EC910
+0x803898: push    eax; shader
+0x803899: call    NiGeometry_SetShader; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.
 0x80389E: mov     eax, [edi+10h]
 0x8038A1: mov     ecx, [edi+18h]
 0x8038A4: mov     edx, [ecx]
@@ -90,7 +90,7 @@
 0x8038D4: push    ecx; a2
 0x8038D5: mov     ecx, ds:0B42F50h; this
 0x8038DB: lea     esi, [edi+14h]
-0x8038DE: call    BSTextureManager_GetDefaultRenderTarget
+0x8038DE: call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.
 0x8038E3: push    eax; a2
 0x8038E4: mov     ecx, esi; this
 0x8038E6: call    NiSmartPointer_Set??
@@ -168,8 +168,8 @@
 0x8039BE: xor     ebp, ebp
 0x8039C0: mov     eax, [edi+14h]
 0x8039C3: mov     ecx, ds:0B42F50h; this
-0x8039C9: push    eax; a2
-0x8039CA: call    sub_7C1EE0
+0x8039C9: push    eax; texture
+0x8039CA: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x8039CF: mov     edi, [edi+10h]
 0x8039D2: mov     esi, [edi+0BCh]
 0x8039D8: cmp     esi, ebp
@@ -199,3 +199,12 @@
 0x803A1E: pop     ebx
 0x803A1F: add     esp, 28h
 0x803A22: retn    0Ch
+0x9D0970: lea     ecx, [ebp-1Ch]
+0x9D0973: jmp     j_??1?$NiTPointerList@PAVBSImageSpaceShader@@@@UAE@XZ; NiTPointerList<BSImageSpaceShader *>::~NiTPointerList<BSImageSpaceShader *>(void)
+0x9D0978: mov     edx, [esp+arg_4]
+0x9D097C: lea     eax, [edx-2Ch]
+0x9D097F: mov     ecx, [edx-30h]
+0x9D0982: xor     ecx, eax
+0x9D0984: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0989: mov     eax, offset stru_AF925C
+0x9D098E: jmp     ___CxxFrameHandler3

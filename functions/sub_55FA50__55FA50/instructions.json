@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55FA50",
-    "line": "sub     esp, 30h",
+    "line": "sub     esp, 30h; Verified cross-version update divergence: Fallout obtains tree material tint from D3DX atmosphere shader defines[8..10] and writes NiMaterialProperty.emissive RGB. Oblivion instead calls Sky_GetFogProperty and copies dwords at returned-object +0x20/+0x24/+0x28 into three material color triplets. Both refresh manager material state each non-skipped update; the exact Oblivion color channels represented by the three triplets remain Candidate.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x55FA54",
-    "line": "mov     bl, byte ptr [esp+34h+arg_4]",
+    "line": "mov     bl, [esp+34h+skipTimeAndWindUpdate]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x55FA75",
-    "line": "fstp    [esp+38h+var_38]; float",
+    "line": "fstp    [esp+38h+time]; time",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x55FA78",
-    "line": "call    sub_78D3F0",
+    "line": "call    CSpeedTreeRT__SetTime; Static CSpeedTreeRT::SetTime. Stores global wind time and sends the wind-change invalidation event to all registered unique trees.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x55FA80",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+camera]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x55FA92",
-    "line": "lea     ecx, [esp+34h+var_C]",
+    "line": "lea     ecx, [esp+34h+position3]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55FA96",
-    "line": "fstp    [esp+34h+var_C]",
+    "line": "fstp    [esp+34h+position3]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x55FABF",
-    "line": "lea     eax, [esp+34h+var_18]",
+    "line": "lea     eax, [esp+34h+direction3]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x55FAC7",
-    "line": "push    eax",
+    "line": "push    eax; direction3",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x55FACC",
-    "line": "push    ecx",
+    "line": "push    ecx; position3",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x55FAF1",
-    "line": "fstp    [esp+3Ch+var_18]",
+    "line": "fstp    [esp+3Ch+direction3]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x55FB05",
-    "line": "call    sub_78D140",
+    "line": "call    CSpeedTreeRT__SetCamera; Static CSpeedTreeRT::SetCamera. On a changed non-NULL camera, updates global vectors, invalidates registered tree camera caches, recomputes unit billboard data, and updates clamped horizontal-billboard fade.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,13 +373,13 @@
   },
   {
     "ea": "0x55FB3D",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55FB3F",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x55FB61",
-    "line": "fstp    [esp+34h+arg_4]",
+    "line": "fstp    dword ptr [esp+34h+skipTimeAndWindUpdate]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x55FB67",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55FB69",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x55FB71",
-    "line": "fld     [esp+34h+arg_4]",
+    "line": "fld     dword ptr [esp+34h+skipTimeAndWindUpdate]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x55FB93",
-    "line": "mov     ecx, [edx+5Ch]",
+    "line": "mov     ecx, [edx+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x55FB96",
-    "line": "call    sub_53FB50",
+    "line": "call    Sky_GetFogProperty; Verified by disassembly and the TES constructor callsite: this helper reads Sky+0x20, then returns the pointer at atmosphere+0x0C; TES_constr stores it in TES::fogProperty. BSTreeManager_Update consumes fields at returned-object offsets +0x20/+0x24/+0x28. Identifying those values specifically as fog-derived tree-light colors is Probable; the underlying structure's member names remain unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x55FBA8",
-    "line": "mov     ecx, [eax+5Ch]",
+    "line": "mov     ecx, [eax+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x55FBAD",
-    "line": "call    sub_53FB50",
+    "line": "call    Sky_GetFogProperty; Verified by disassembly and the TES constructor callsite: this helper reads Sky+0x20, then returns the pointer at atmosphere+0x0C; TES_constr stores it in TES::fogProperty. BSTreeManager_Update consumes fields at returned-object offsets +0x20/+0x24/+0x28. Identifying those values specifically as fog-derived tree-light colors is Probable; the underlying structure's member names remain unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x55FBC4",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55FBC6",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x55FBED",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55FBEF",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x55FC16",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55FC18",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x55FC40",
-    "line": "push    0",
+    "line": "push    0; recreate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55FC42",
-    "line": "call    sub_55F750",
+    "line": "call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,13 +811,13 @@
   },
   {
     "ea": "0x55FC4A",
-    "line": "mov     ecx, ds:0B39E04h",
+    "line": "mov     ecx, ds:0B39E04h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x55FC50",
-    "line": "call    sub_55E060",
+    "line": "call    BSTreeManager_UpdateWindMatrices; Only xref to55E060. Native !skipTimeAndWindUpdate gate controls both wind and plugin projected-shadow phase; secondary camera updates skip both.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x55FC6B",
-    "line": "fstp    dword ptr ds:0B44F04h",
+    "line": "fstp    dword ptr ds:0B44F04h; Verified Oblivion dataflow: iCanopyShadowScale.value is converted from signed integer to float (negative values receive a correction constant) and stored in g_CanopyShadowProjectionScale. Fallout's homolog stores the same setting into ShadowProjTransform.w, making that destination role Probable.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x55FC9E",
-    "line": "fstp    dword ptr ds:0B2D860h",
+    "line": "fstp    dword ptr ds:0B2D860h; Verified: clamps fCanopyShadowGrassMult.value into [0,1] and stores the result in g_TallGrassProjectionShadowMultiplier. Fallout's named homolog is TallGrassShader::fProjShadowMult; exact Oblivion consumer remains Unknown.",
     "mnemonic": "fstp",
     "size": 6
   },

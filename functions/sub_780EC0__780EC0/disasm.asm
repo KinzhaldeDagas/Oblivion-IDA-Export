@@ -6,7 +6,7 @@
 0x780ECB: cmp     eax, ebx
 0x780ECD: jz      short loc_780F0E
 0x780ECF: push    eax
-0x780ED0: call    FormHeapFree
+0x780ED0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x780ED5: add     esp, 4
 0x780ED8: test    ebx, ebx
 0x780EDA: jz      short loc_780F0E

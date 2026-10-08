@@ -39,7 +39,7 @@
 0x62B48D: jz      loc_62B51E
 0x62B493: lea     ecx, [esp+30h+var_18]
 0x62B497: mov     [ebp+148h], esi
-0x62B49D: call    TESPackage_TargetData_constr
+0x62B49D: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x62B4A2: cmp     edi, esi
 0x62B4A4: mov     [esp+30h+var_4], esi
 0x62B4A8: jz      short loc_62B4AF
@@ -52,10 +52,10 @@
 0x62B4BB: lea     eax, [esp+30h+var_18]
 0x62B4BF: push    eax
 0x62B4C0: mov     ecx, ebx
-0x62B4C2: call    TESPackage_SetTarget
-0x62B4C7: lea     ecx, [esp+30h+var_18]; void *
+0x62B4C2: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
+0x62B4C7: lea     ecx, [esp+30h+var_18]; this
 0x62B4CB: mov     [esp+30h+var_4], 0FFFFFFFFh
-0x62B4D3: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x62B4D3: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x62B4D8: mov     eax, [ebp+30h]
 0x62B4DB: cmp     eax, esi
 0x62B4DD: jnz     short loc_62B4EB
@@ -66,7 +66,7 @@
 0x62B4EB: mov     [esp+30h+var_1C], eax
 0x62B4EF: mov     esi, [esp+30h+arg_0]
 0x62B4F3: mov     ecx, esi
-0x62B4F5: call    Actor_GetCurrentAction
+0x62B4F5: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x62B4FA: cmp     eax, 0FFFFFFFFh
 0x62B4FD: jnz     short loc_62B559
 0x62B4FF: cmp     byte ptr [ebx+20h], 1Ch
@@ -97,12 +97,12 @@
 0x62B546: push    ecx
 0x62B547: mov     ecx, esi
 0x62B549: fstp    [esp+38h+var_38]; float
-0x62B54C: call    sub_5F25F0
+0x62B54C: call    sub_5F25F0; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.
 0x62B551: cmp     byte ptr [ebx+20h], 1Ch
 0x62B555: jnz     short loc_62B5A0
 0x62B557: jmp     short loc_62B590
 0x62B559: mov     ecx, esi
-0x62B55B: call    Actor_GetCurrentAction
+0x62B55B: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x62B560: cmp     eax, 0FFFFFFFFh
 0x62B563: jnz     short loc_62B5A0
 0x62B565: mov     edi, [esp+30h+var_1C]
@@ -136,3 +136,12 @@
 0x62B5AF: pop     ebx
 0x62B5B0: add     esp, 1Ch
 0x62B5B3: retn    4
+0x9C36E0: lea     ecx, [ebp-18h]; this
+0x9C36E3: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C36E8: mov     edx, [esp+arg_4]
+0x9C36EC: lea     eax, [edx-20h]
+0x9C36EF: mov     ecx, [edx-24h]
+0x9C36F2: xor     ecx, eax
+0x9C36F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C36F9: mov     eax, offset stru_AEC2AC
+0x9C36FE: jmp     ___CxxFrameHandler3

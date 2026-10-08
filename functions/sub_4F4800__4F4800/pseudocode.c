@@ -1,7 +1,7 @@
 char __cdecl sub_4F4800(int a1, int a2, int a3, double *a4)
 {
-  *a4 = 0.0;
-  if ( IsConsoleMode )
+  *a4 = 0.0; /*0x4f4806*/
+  if ( MEMORY[0xB361AC] )
     Interface_ConsolePrint("UNIMPLEMENTED: GetDisease >> %0.2f", 0.0);
-  return 1;
+  return 1; /*0x4f4826*/
 }

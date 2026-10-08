@@ -1,1 +1,1 @@
-PULONG
+typedef unsigned int *PULONG;

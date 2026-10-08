@@ -1,19 +1,32 @@
 {
-  "callees_count": 64,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_76BEF0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
+  "callers_count": 44,
+  "chunks": [
+    [
+      "0x76BEF0",
+      "0x76C29A"
+    ]
+  ],
+  "chunks_sha256": "63ae172dac79a203ede2adb976648e47172f95f0a1661642ccca2f6cd5a7b1de",
+  "comment_regular": "Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.",
+  "comment_repeatable": "Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "NiDX9Renderer_ConvertPixelFormatToD3DFormat",
   "end_ea": "0x76C29A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76BEF0",
+  "name": "NiDX9Renderer_ConvertPixelFormatToD3DFormat",
   "segment": ".text",
   "sha256": "63ae172dac79a203ede2adb976648e47172f95f0a1661642ccca2f6cd5a7b1de",
   "size": 938,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76BEF0",
-  "type": "signed int __cdecl(int)",
+  "total_chunk_size": 938,
+  "type": "D3DFORMAT __cdecl(const void *pixelFormat)",
   "xrefs_from_count": 414,
   "xrefs_to_count": 44
 }

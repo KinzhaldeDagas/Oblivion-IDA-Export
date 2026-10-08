@@ -38,7 +38,7 @@
 0x698C7A: fsub    [esp+2Ch+var_18]
 0x698C7E: fstp    dword ptr ds:0B3C0D0h
 0x698C84: push    esi
-0x698C85: mov     ecx, offset ActorProcessManager_ptr.unk4C
+0x698C85: mov     ecx, (offset qword_B3BB2C+224h)
 0x698C8A: call    BSSimpleList_Remove
 0x698C8F: mov     eax, [esi+7Ch]
 0x698C92: mov     ecx, [esi+88h]
@@ -274,7 +274,7 @@
 0x698EEC: mov     ecx, edi
 0x698EEE: call    sub_696C00
 0x698EF3: push    edi
-0x698EF4: call    FormHeapFree
+0x698EF4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x698EF9: add     esp, 4
 0x698EFC: mov     ecx, [esp+2Ch+var_14]
 0x698F00: cmp     ecx, ebx
@@ -291,7 +291,7 @@
 0x698F2D: mov     ecx, edi; this
 0x698F2F: call    sub_6B73E0
 0x698F34: push    edi
-0x698F35: call    FormHeapFree
+0x698F35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x698F3A: add     esp, 4
 0x698F3D: mov     [esi+9Ch], ebx
 0x698F43: mov     edi, [esi+94h]
@@ -386,3 +386,27 @@
 0x699020: pop     ebx
 0x699021: add     esp, 18h
 0x699024: retn
+0x9C5B60: mov     ecx, [ebp-10h]
+0x9C5B63: jmp     sub_69FA60
+0x9C5B68: mov     ecx, [ebp-10h]
+0x9C5B6B: add     ecx, 7Ch ; '|'; slot
+0x9C5B6E: jmp     NiPointerSlot_Release
+0x9C5B73: mov     ecx, [ebp-10h]
+0x9C5B76: add     ecx, 88h ; 'ˆ'; slot
+0x9C5B7C: jmp     NiPointerSlot_Release
+0x9C5B81: mov     ecx, [ebp-10h]
+0x9C5B84: add     ecx, 8Ch ; 'Œ'; slot
+0x9C5B8A: jmp     NiPointerSlot_Release
+0x9C5B8F: mov     ecx, [ebp-10h]
+0x9C5B92: add     ecx, 90h; slot
+0x9C5B98: jmp     NiPointerSlot_Release
+0x9C5B9D: mov     ecx, [ebp-10h]
+0x9C5BA0: add     ecx, 94h ; '”'; slot
+0x9C5BA6: jmp     NiPointerSlot_Release
+0x9C5BAB: mov     edx, [esp+arg_4]
+0x9C5BAF: lea     eax, [edx-1Ch]
+0x9C5BB2: mov     ecx, [edx-20h]
+0x9C5BB5: xor     ecx, eax
+0x9C5BB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5BBC: mov     eax, offset stru_AEE250
+0x9C5BC1: jmp     ___CxxFrameHandler3

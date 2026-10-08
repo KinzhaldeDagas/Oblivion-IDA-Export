@@ -3,7 +3,7 @@
 0x6160B4: mov     esi, ecx
 0x6160B6: mov     ecx, [esi+3Ch]
 0x6160B9: push    0Fh
-0x6160BB: call    sub_5E05F0
+0x6160BB: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x6160C0: mov     eax, [esi+3Ch]
 0x6160C3: mov     ecx, [eax+58h]
 0x6160C6: mov     edx, [ecx]

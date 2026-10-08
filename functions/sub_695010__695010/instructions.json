@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x695010",
-    "line": "sub     esp, 34h",
+    "line": "sub     esp, 34h; MagicBallProjectile SpecialIdle setup. Synchronizes projectile node transform and starts SpecialIdle_Projectile sequence from the controller-manager text-key map.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x695070",
-    "line": "fstp    [esp+4Ch+var_44]; float",
+    "line": "fstp    [esp+4Ch+easeOutTime]; rollY",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x695080",
-    "line": "fstp    [esp+4Ch+a2]; float",
+    "line": "fstp    [esp+4Ch+a2]; pitchX",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x695084",
-    "line": "lea     ecx, [esp+4Ch+var_24]",
+    "line": "lea     ecx, [esp+4Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x69508C",
-    "line": "fstp    [esp+4Ch+var_4C]; float",
+    "line": "fstp    [esp+4Ch+easeInTime]; yawZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x69508F",
-    "line": "call    sub_7117C0",
+    "line": "call    NiMatrix33_SetEulerZXY; Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x6950CC",
-    "line": "call    NiTMap_GetAt",
+    "line": "call    NiTMap_GetAt; Projectile update directly looks up SpecialIdle_Projectile in projectile NiNode controller manager sequence map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x6950E0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6950E2",
-    "line": "fstp    [esp+44h+var_44]; float",
+    "line": "fstp    [esp+44h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6950E5",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x6950EC",
-    "line": "push    0; int",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6950EE",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x6950F3",
-    "line": "fstp    [esp+50h+var_4C]; float",
+    "line": "fstp    [esp+50h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6950F7",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -463,25 +463,25 @@
   },
   {
     "ea": "0x6950FB",
-    "line": "fstp    [esp+50h+var_50]; float",
+    "line": "fstp    [esp+50h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6950FE",
-    "line": "push    0; char",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x695100",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x695102",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x695133",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x701970",
+      "0x701A0D"
+    ]
+  ],
+  "chunks_sha256": "29a01147d82b104e683ac2b6546737692aad52bace8312cc3e6133a34035cad7",
+  "comment_regular": "MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.\nGPU world camera decode: copies RAW world-rotation columns (right=col2, up=col1, forward=col0) without normalization or transform-scale multiplication; dispatches renderer+140 only when scene1/scene2 at200/204 equals1 and ready byte20C equals1.",
+  "comment_repeatable": "MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "SetCameraViewProj",
   "end_ea": "0x701A0D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "SetCameraViewProj",
   "segment": ".text",
   "sha256": "29a01147d82b104e683ac2b6546737692aad52bace8312cc3e6133a34035cad7",
   "size": 157,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x701970",
+  "total_chunk_size": 157,
   "type": "NiCamera *__thiscall(NiDX9Renderer *this, NiCamera *a2)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 6

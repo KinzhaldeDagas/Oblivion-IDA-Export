@@ -20,7 +20,6 @@
 0x4A0E86: jz      short loc_4A0EA0
 0x4A0E88: mov     edi, [ebp+0]
 0x4A0E8B: jmp     short loc_4A0E90
-0x4A0E8D: align 10h
 0x4A0E90: cmp     edi, [eax+8]
 0x4A0E93: lea     edx, [eax+8]
 0x4A0E96: mov     esi, eax
@@ -81,3 +80,17 @@
 0x4A0F28: pop     ebx
 0x4A0F29: add     esp, 14h
 0x4A0F2C: retn    8
+0x9CEC10: mov     eax, [ebp-14h]
+0x9CEC13: and     eax, 2
+0x9CEC16: jz      locret_9CEC28
+0x9CEC1C: and     dword ptr [ebp-14h], 0FFFFFFFDh
+0x9CEC20: mov     ecx, [ebp+4]; slot
+0x9CEC23: jmp     NiPointerSlot_Release
+0x9CEC28: retn
+0x9CEC29: mov     edx, [esp+arg_4]
+0x9CEC2D: lea     eax, [edx-18h]
+0x9CEC30: mov     ecx, [edx-1Ch]
+0x9CEC33: xor     ecx, eax
+0x9CEC35: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEC3A: mov     eax, offset stru_AF7AA4
+0x9CEC3F: jmp     ___CxxFrameHandler3

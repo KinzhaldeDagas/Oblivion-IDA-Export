@@ -1,4 +1,4 @@
-BSStringT *sub_A11E70()
+NiRTTI *sub_A11E70()
 {
-  return sub_70E220((BSStringT *)dword_B47768, "SkinShader", (int)&stru_B44F90);
+  return NiRTTI_Constructor(&stru_B47768, "SkinShader", &stru_B44F90); /*0xa11e84*/
 }

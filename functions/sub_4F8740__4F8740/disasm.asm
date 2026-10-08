@@ -32,7 +32,7 @@
 0x4F8796: fnstsw  ax
 0x4F8798: test    ah, 5
 0x4F879B: jp      short loc_4F87DF
-0x4F879D: mov     ecx, offset TimeGlobals
+0x4F879D: mov     ecx, 0B332E0h
 0x4F87A2: call    TimeGlobals_GetGameDaysPassed
 0x4F87A7: test    eax, eax
 0x4F87A9: mov     [esp+10h+arg_0], eax
@@ -40,7 +40,7 @@
 0x4F87B1: jge     short loc_4F87B9
 0x4F87B3: fadd    dword ptr ds:0A2FC78h
 0x4F87B9: fmul    qword ptr ds:0A2F920h
-0x4F87BF: mov     ecx, offset TimeGlobals
+0x4F87BF: mov     ecx, 0B332E0h
 0x4F87C4: fstp    [esp+10h+var_C+4]
 0x4F87C8: call    TimeGlobals_GetGameHour
 0x4F87CD: fadd    [esp+10h+var_C+4]

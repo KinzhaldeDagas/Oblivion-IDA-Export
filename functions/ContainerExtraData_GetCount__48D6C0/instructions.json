@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x48D797",
-    "line": "call    sub_4847C0",
+    "line": "call    EntryData_HasDefaultContainerExtraList",
     "mnemonic": "call",
     "size": 5
   },
@@ -828,12 +828,6 @@
     "size": 2
   },
   {
-    "ea": "0x48D84D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x48D850",
     "line": "mov     ecx, [edi]",
     "mnemonic": "mov",
@@ -1063,7 +1057,7 @@
   },
   {
     "ea": "0x48D8B4",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1075,7 @@
   },
   {
     "ea": "0x48D8BC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1093,7 @@
   },
   {
     "ea": "0x48D8C8",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

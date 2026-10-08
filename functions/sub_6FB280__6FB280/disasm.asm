@@ -32,3 +32,21 @@
 0x6FB2F4: pop     esi
 0x6FB2F5: add     esp, 10h
 0x6FB2F8: retn
+0x6FAF80: mov     eax, [ecx+4]
+0x6FAF83: push    eax
+0x6FAF84: mov     dword ptr [ecx], offset ??_7?$NiTArray@VFurnitureMark@@@@6B@; const NiTArray<FurnitureMark>::`vftable'
+0x6FAF8A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x6FAF8F: pop     ecx
+0x6FAF90: retn
+0x9C9170: mov     ecx, [ebp-10h]
+0x9C9173: jmp     NiExtraData_dtor
+0x9C9178: mov     ecx, [ebp-10h]
+0x9C917B: add     ecx, 0Ch
+0x9C917E: jmp     loc_6FAF80
+0x9C9183: mov     edx, [esp+arg_4]
+0x9C9187: lea     eax, [edx-8]
+0x9C918A: mov     ecx, [edx-0Ch]
+0x9C918D: xor     ecx, eax
+0x9C918F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9194: mov     eax, offset stru_AF1AAC
+0x9C9199: jmp     ___CxxFrameHandler3

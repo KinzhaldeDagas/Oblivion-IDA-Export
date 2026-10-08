@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "PARSECOLORSTATE",
+  "definition": "struct PARSECOLORSTATE\n{\nint colorCount;\nint colorElements[31];\nCOLORREF colorRgb[31];\nint captionColors;\n}\n",
   "id": 18374686479671837837,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "colorCount",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "colorElements",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 124
+      "size": 124,
+      "type": "int[31]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "colorRgb",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 124
+      "size": 124,
+      "type": "COLORREF[31]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "captionColors",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "int"
     }
   ],
   "name": "PARSECOLORSTATE",
+  "ordinal": 4651,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 256
 }

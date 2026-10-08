@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F1760",
-    "line": "sub     esp, 40h",
+    "line": "sub     esp, 40h; Updates one global SpeedTree wind matrix. Builds yaw/pitch rotation, transposes it, writes WindMatrixes + 0x40*index; valid indices are 0..3.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7F17E9",
-    "line": "add     edi, offset WindMatrixes",
+    "line": "add     edi, (offset flt_B46638+180h)",
     "mnemonic": "add",
     "size": 6
   },

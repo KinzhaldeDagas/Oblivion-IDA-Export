@@ -1,0 +1,11 @@
+struct OB_CLightingEngine_010201A0
+{
+int branchLightingMethod;
+OB_SSpeedTreeMaterial_010201A0 branchMaterial;
+int leafLightingMethod;
+OB_SSpeedTreeMaterial_010201A0 leafMaterial;
+float leafLightingAdjustmentScalar;
+int staticLightingStyle;
+int frondLightingMethod;
+OB_SSpeedTreeMaterial_010201A0 frondMaterial;
+};

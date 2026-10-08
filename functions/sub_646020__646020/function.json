@@ -1,19 +1,36 @@
 {
-  "callees_count": 33,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_646020",
+  "chunks": [
+    [
+      "0x646020",
+      "0x6461F8"
+    ],
+    [
+      "0x9C39F0",
+      "0x9C3A2C"
+    ]
+  ],
+  "chunks_sha256": "492ffdc53d1e0201cdaf9a75244a44385cc427e1e45efc5d511583138bf8e35c",
+  "comment_regular": "3DTheft release decode 2026-05-18: low-process combat fallback creates CombatLow package and calls Actor_AddPackage_(actor, package, 0, 1), returning AL success. No separate forced EvaluatePackage observed at caller boundary.",
+  "comment_repeatable": "3DTheft release decode 2026-05-18: low-process combat fallback creates CombatLow package and calls Actor_AddPackage_(actor, package, 0, 1), returning AL success. No separate forced EvaluatePackage observed at caller boundary.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "LowProcess_CreateCombatPackage",
   "end_ea": "0x6461F8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_646020",
+  "name": "LowProcess_CreateCombatPackage",
   "segment": ".text",
   "sha256": "5790748073ad3d459708bd8ec61cc38267e316c4d195ce670cfbdaad80a99684",
   "size": 472,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x646020",
-  "type": "char __thiscall(int this, Actor *, int, int, char, int, int, int, int, int, int)",
-  "xrefs_from_count": 182,
+  "total_chunk_size": 532,
+  "type": "char __thiscall(void *this, Actor *, int, int, char, int, int, int, int, int, int)",
+  "xrefs_from_count": 206,
   "xrefs_to_count": 3
 }

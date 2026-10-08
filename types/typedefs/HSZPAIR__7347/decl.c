@@ -1,1 +1,1 @@
-HSZPAIR
+typedef tagHSZPAIR HSZPAIR;

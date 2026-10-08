@@ -1,19 +1,32 @@
 {
-  "callees_count": 91,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 45,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_95C530",
+  "chunks": [
+    [
+      "0x95C530",
+      "0x95D538"
+    ]
+  ],
+  "chunks_sha256": "d0fff2ace074a8e99c53f44821155d2ce03873231ced3cce5007dd3edbd530bc",
+  "comment_regular": "Verified geometry-hit path: computes intersection point/distance and fills the 0x44-byte NiPickRecord. When requested, its +0x28 vector is either a normalized triangle face normal (NiPoint3_CrossProduct of edge vectors) or an interpolated vertex normal; no-normal cases write zero.",
+  "comment_repeatable": "Verified geometry-hit path: computes intersection point/distance and fills the 0x44-byte NiPickRecord. When requested, its +0x28 vector is either a normalized triangle face normal (NiPoint3_CrossProduct of edge vectors) or an interpolated vertex normal; no-normal cases write zero.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "NiPick_ProcessGeometryIntersection",
   "end_ea": "0x95D538",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_95C530",
+  "name": "NiPick_ProcessGeometryIntersection",
   "segment": ".text",
   "sha256": "d0fff2ace074a8e99c53f44821155d2ce03873231ced3cce5007dd3edbd530bc",
   "size": 4104,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x95C530",
+  "total_chunk_size": 4104,
   "type": "char __cdecl(float *a1, float *a2, int a3, NiGeometryData *a4)",
-  "xrefs_from_count": 1101,
+  "xrefs_from_count": 1112,
   "xrefs_to_count": 1
 }

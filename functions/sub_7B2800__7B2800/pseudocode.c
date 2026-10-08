@@ -7,39 +7,39 @@ NiTList_NiProperty *__thiscall sub_7B2800(BSShaderProperty *this, int a2, int a3
   NiTList_Entry_NiProperty *v10; // eax
   NiTList_Entry_NiProperty *start; // ecx
 
-  if ( this->member.lastRenderPassState != a3 )
+  if ( this->member.lastRenderPassState != a3 ) /*0x7b282d*/
   {
-    sub_7E24C0(this);
-    if ( ShaderPackage < 2 || UseHDR )
+    BSShaderProperty_ClearRenderPassLists(this); /*0x7b2833*/
+    if ( *(int *)&OB_RendererGlobalState_010201A0[0xAF] < 2 || OB_RendererGlobalState_010201A0[0x1D7] ) /*0x7b2841*/
     {
-      v8 = FormHeapAlloc(0x10u);
-      if ( v8 )
-        v9 = sub_7E2370(v8, a2, 0x195, 1, 0, 0);
+      v8 = FormHeapAlloc(0x10u); /*0x7b289b*/
+      if ( v8 ) /*0x7b28b1*/
+        v9 = RenderPass_Construct(v8, a2, 0x195, 1, 0, 0); /*0x7b28cc*/
       else
-        v9 = 0;
-      v10 = (NiTList_Entry_NiProperty *)(*((int (__thiscall **)(NiTList_NiProperty *))this->member.passes.vtlb + 1))(&this->member.passes);
-      v10->data = (NiProperty *)v9;
-      v10->prev = 0;
-      v10->next = this->member.passes.start;
-      start = this->member.passes.start;
-      if ( start )
-        start->prev = v10;
+        v9 = 0; /*0x7b28d0*/
+      v10 = (NiTList_Entry_NiProperty *)(*((int (__thiscall **)(NiTList_NiProperty *))this->member.passes.vtlb + 1))(&this->member.passes); /*0x7b28e5*/
+      v10->data = (NiProperty *)v9; /*0x7b28e7*/
+      v10->prev = 0; /*0x7b28ea*/
+      v10->next = this->member.passes.start; /*0x7b28f4*/
+      start = this->member.passes.start; /*0x7b28f6*/
+      if ( start ) /*0x7b28fb*/
+        start->prev = v10; /*0x7b28fd*/
       else
-        this->member.passes.end = v10;
-      ++this->member.passes.numItems;
-      this->member.passes.start = v10;
+        this->member.passes.end = v10; /*0x7b2902*/
+      ++this->member.passes.numItems; /*0x7b2905*/
+      this->member.passes.start = v10; /*0x7b2909*/
     }
     else
     {
-      v6 = FormHeapAlloc(0x10u);
-      if ( v6 )
-        v7 = sub_7E2370(v6, a2, 0xC, 1, 0, 0);
+      v6 = FormHeapAlloc(0x10u); /*0x7b284c*/
+      if ( v6 ) /*0x7b2862*/
+        v7 = RenderPass_Construct(v6, a2, 0xC, 1, 0, 0); /*0x7b2872*/
       else
-        v7 = 0;
-      a2 = v7;
-      sub_6AA320(&this->member.passes.vtlb, &a2);
+        v7 = 0; /*0x7b287c*/
+      a2 = v7; /*0x7b288e*/
+      NiTList_AddHead(&this->member.passes.vtlb, &a2); /*0x7b2892*/
     }
-    this->member.lastRenderPassState = a3 | (LOWORD(dword_B42EAC) << 8);
+    this->member.lastRenderPassState = a3 | (*(unsigned __int16 *)&OB_RendererGlobalState_010201A0[0x13] << 8); /*0x7b291a*/
   }
-  return &this->member.passes;
+  return &this->member.passes; /*0x7b2920*/
 }

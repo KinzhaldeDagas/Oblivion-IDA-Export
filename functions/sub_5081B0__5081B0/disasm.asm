@@ -1,10 +1,10 @@
-0x5081B0: cmp     byte ptr ds:0B42E86h, 0
+0x5081B0: cmp     byte ptr ds:0B42E86h, 0; Console Lite Brite toggle for debug flag B42E84+2. This is the same direct byte tested by leaf setup; the decompiler MEMORY[B42E84][2] form is not a pointer dereference.
 0x5081B7: setz    al
 0x5081BA: cmp     byte ptr ds:0B361ACh, 0
 0x5081C1: mov     ds:0B42E86h, al
 0x5081C6: jz      short loc_5081E4
 0x5081C8: test    al, al
-0x5081CA: mov     eax, offset aOn_0
+0x5081CA: mov     eax, offset aOn_0; "On"
 0x5081CF: jnz     short loc_5081D6
 0x5081D1: mov     eax, offset aOff
 0x5081D6: push    eax

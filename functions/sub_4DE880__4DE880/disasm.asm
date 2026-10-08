@@ -3,7 +3,7 @@
 0x4DE885: xor     bl, bl
 0x4DE887: test    eax, eax
 0x4DE889: jnz     short loc_4DE894
-0x4DE88B: call    TESObjectREFR_GetOwner
+0x4DE88B: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4DE890: test    eax, eax
 0x4DE892: jz      short loc_4DE8BF
 0x4DE894: mov     cl, [eax+4]

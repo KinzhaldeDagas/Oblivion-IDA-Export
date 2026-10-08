@@ -30,3 +30,7 @@
 0x988644: mov     [ebp+var_1C], eax
 0x988647: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98864E: call    _ungetc___$LN8_3
+0x98865C: push    [ebp+File]
+0x98865F: call    __unlock_file
+0x988664: pop     ecx
+0x988665: retn

@@ -13,21 +13,21 @@ bool __cdecl sub_500F70(
   const char *v10; // eax
   UInt16 v11[2]; // [esp+0h] [ebp-4h] BYREF
 
-  byte_B3BD9A = byte_B3BD9A == 0;
-  *(_DWORD *)v11 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v11);
-  if ( result )
+  BYTE2(qword_B3BB2C[0x9B]) = BYTE2(qword_B3BB2C[0x9B]) == 0; /*0x500f8c*/
+  *(_DWORD *)v11 = 0; /*0x500fa7*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v11); /*0x500faf*/
+  if ( result ) /*0x500fb9*/
   {
-    v9 = IsConsoleMode == 0;
-    dword_B3BD9C = *(_DWORD *)v11;
-    if ( !v9 )
+    v9 = MEMORY[0xB361AC] == 0; /*0x500fbd*/
+    qword_B3BB2C[0x9C] = *(float *)v11; /*0x500fc7*/
+    if ( !v9 ) /*0x500fcc*/
     {
-      v10 = (const char *)&aOn_0;
-      if ( !byte_B3BD9A )
-        v10 = (const char *)&aOff;
-      Interface_ConsolePrint("AI Detection stats printing is  %s", v10);
+      v10 = "On"; /*0x500fd5*/
+      if ( !BYTE2(qword_B3BB2C[0x9B]) ) /*0x500fce*/
+        v10 = (const char *)&aOff; /*0x500fdc*/
+      Interface_ConsolePrint("AI Detection stats printing is  %s", v10); /*0x500fe7*/
     }
-    return 1;
+    return 1; /*0x500fef*/
   }
-  return result;
+  return result; /*0x500fbb*/
 }

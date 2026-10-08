@@ -66,7 +66,6 @@
 0x71CA60: lea     eax, [ebp+2]
 0x71CA63: mov     [esp+8Ch+var_4C], ecx
 0x71CA67: jmp     short loc_71CA70
-0x71CA69: align 10h
 0x71CA70: movzx   ebx, byte ptr [eax-2]
 0x71CA74: movzx   ebp, byte ptr [eax-1]
 0x71CA78: mov     cl, dl
@@ -210,7 +209,7 @@
 0x71CC2D: jnz     short loc_71CC10
 0x71CC2F: mov     edx, [esp+8Ch+var_44]
 0x71CC33: push    edx
-0x71CC34: call    FormHeapFree
+0x71CC34: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71CC39: add     esp, 4
 0x71CC3C: pop     edi
 0x71CC3D: pop     esi

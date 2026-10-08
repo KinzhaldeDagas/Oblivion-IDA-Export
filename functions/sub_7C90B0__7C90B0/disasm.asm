@@ -5,7 +5,7 @@
 0x7C90B8: jz      short loc_7C90DC
 0x7C90BA: xor     esi, esi
 0x7C90BC: lea     esp, [esp+0]
-0x7C90C0: mov     ecx, ds:dword_B45290[esi]
+0x7C90C0: mov     ecx, dword ptr ds:unk_B45290[esi]
 0x7C90C6: test    ecx, ecx
 0x7C90C8: jz      short loc_7C90D1
 0x7C90CA: mov     eax, [ecx]
@@ -16,7 +16,7 @@
 0x7C90DA: jb      short loc_7C90C0
 0x7C90DC: xor     esi, esi
 0x7C90DE: mov     edi, edi
-0x7C90E0: mov     ecx, ds:dword_B45088[esi]
+0x7C90E0: mov     ecx, dword ptr ds:unk_B45088[esi]
 0x7C90E6: test    ecx, ecx
 0x7C90E8: jz      short loc_7C90F1
 0x7C90EA: mov     eax, [ecx]

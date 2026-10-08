@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x57FE09",
-    "line": "mov     ecx, [esi+68h]; TileWindow *",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x57FE11",
-    "line": "call    Menu_LoadXML",
+    "line": "call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x57FE1D",
-    "line": "fstp    [esp+8+a2]; a3",
+    "line": "fstp    [esp+8+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x57FE20",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x57FE2D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

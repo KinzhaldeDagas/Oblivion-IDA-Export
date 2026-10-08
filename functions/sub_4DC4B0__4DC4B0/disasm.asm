@@ -2,7 +2,7 @@
 0x4DC4B4: test    ecx, ecx
 0x4DC4B6: jz      short loc_4DC52D
 0x4DC4B8: push    offset off_A7D2CC
-0x4DC4BD: call    NiObjectNET_GetExtraData
+0x4DC4BD: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4DC4C2: test    eax, eax
 0x4DC4C4: jz      short loc_4DC52D
 0x4DC4C6: fld     dword ptr [eax+18h]

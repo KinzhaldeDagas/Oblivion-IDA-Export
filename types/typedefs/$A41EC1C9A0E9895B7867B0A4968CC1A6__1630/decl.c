@@ -1,1 +1,20 @@
-$A41EC1C9A0E9895B7867B0A4968CC1A6
+enum $A41EC1C9A0E9895B7867B0A4968CC1A6 : __int32
+{
+lex_Halant = 0x0,
+lex_Composed_Vowel = 0x1,
+lex_Matra_post = 0x2,
+lex_Matra_pre = 0x3,
+lex_Matra_above = 0x4,
+lex_Matra_below = 0x5,
+lex_ZWJ = 0x6,
+lex_ZWNJ = 0x7,
+lex_NBSP = 0x8,
+lex_Modifier = 0x9,
+lex_Vowel = 0xA,
+lex_Consonant = 0xB,
+lex_Generic = 0xC,
+lex_Ra = 0xD,
+lex_Vedic = 0xE,
+lex_Anudatta = 0xF,
+lex_Nukta = 0x10,
+};

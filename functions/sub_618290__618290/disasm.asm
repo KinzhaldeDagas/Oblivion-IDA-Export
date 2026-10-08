@@ -1,13 +1,13 @@
 0x618290: push    esi
 0x618291: mov     esi, [esp+4+Dst]
-0x618295: push    1; Size
+0x618295: push    1; byteCount
 0x618297: lea     ecx, [esp+8+Dst]
 0x61829B: test    esi, esi
 0x61829D: setnz   al
-0x6182A0: push    ecx; Dst
-0x6182A1: mov     ecx, ds:0B33B00h
+0x6182A0: push    ecx; destination
+0x6182A1: mov     ecx, ds:0B33B00h; self
 0x6182A7: mov     byte ptr [esp+0Ch+Dst], al
-0x6182AB: call    SaveLoad_LoadData
+0x6182AB: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x6182B0: cmp     byte ptr [esp+4+Dst], 0
 0x6182B5: jz      short loc_6182EE
 0x6182B7: push    8; Size

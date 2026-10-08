@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x474AB0",
-    "line": "push    ebx",
+    "line": "push    ebx; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x474AB4",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+slotSelector]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x474ADF",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x474AE2",
-    "line": "push    ebx; int",
+    "line": "push    ebx; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474AE3",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x474AE8",
-    "line": "mov     ebp, [esp+10h+arg_4]",
+    "line": "mov     ebp, [esp+10h+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x474AFD",
-    "line": "lea     eax, [esp+10h+arg_4]",
+    "line": "lea     eax, [esp+10h+encodedKey]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x474B03",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x474B10",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x474B20",
-    "line": "call    edx",
+    "line": "call    edx; Restore resolves the encoded key to an AnimSequenceBase and calls vtable +0x10 with the saved selector. Multiple selector 0xFF/out-of-range (including sign-extended 0x80..0xFE) chooses randomly; single ignores it.",
     "mnemonic": "call",
     "size": 2
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x474B3A",
-    "line": "push    0; int",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x474B3C",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x474B41",
-    "line": "fstp    [esp+20h+var_1C]; float",
+    "line": "fstp    [esp+20h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x474B45",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -331,25 +331,25 @@
   },
   {
     "ea": "0x474B50",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x474B53",
-    "line": "push    0; char",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x474B55",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x474B57",
-    "line": "call    sub_6C9BA0",
+    "line": "call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x474B5E",
-    "line": "mov     ebp, [esp+10h+arg_4]",
+    "line": "mov     ebp, [esp+10h+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x474B68",
-    "line": "lea     eax, [esp+10h+arg_4]",
+    "line": "lea     eax, [esp+10h+encodedKey]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x474B6E",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x474B77",
-    "line": "lea     ecx, [esp+10h+arg_4]",
+    "line": "lea     ecx, [esp+10h+encodedKey]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x474B83",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x474B8C",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+encodedKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,31 +487,31 @@
   },
   {
     "ea": "0x474B9C",
-    "line": "push    edi",
+    "line": "push    edi; slotSelector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474B9D",
-    "line": "push    ebp",
+    "line": "push    ebp; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474B9E",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474B9F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x474BA1",
-    "line": "call    sub_474530",
+    "line": "call    ActorAnimData_PlaySequence; Plays a selected BSAnimGroupSequence. Resolves default slot from fixed group metadata, maps physical slot 5->0 and 6->3 while retaining the requested alias for clear semantics, handles menu/full reset conditions, records active key +0x3C and sequence +0xA0, chooses morph only for matching nonzero morph keys and equal controller counts, otherwise cross-fades or blends from a temporary pose, applies the maximum old/new Blend byte as transition time, and initializes slot action state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x474BB2",
-    "line": "mov     [esi+ebx*2+3Ch], bp",
+    "line": "mov     [esi+ebx*2+3Ch], bp; ModernWindowsCompatible/TragicEngineFix merge decode: RestorePlaySavedSlot writes the saved ActorAnimData+0x94 clock; pre-sample rebase handles large restored clocks before sampling.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x474BB8",
-    "line": "fstp    dword ptr [esi+94h]",
+    "line": "fstp    dword ptr [esi+94h]; TragicEngineFix decode: ActorAnimData_RestorePlaySavedSlot restores saved actor animation clock into [ESI+0x94]. Pre-sample hook at 0x476E86 handles already-large restored clocks before first active-slot sample.",
     "mnemonic": "fstp",
     "size": 6
   },

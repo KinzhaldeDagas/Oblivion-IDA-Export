@@ -1,4 +1,4 @@
-0x7F7EE0: push    0FFFFFFFFh
+0x7F7EE0: push    0FFFFFFFFh; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).
 0x7F7EE2: push    offset SEH_7F7EE0
 0x7F7EE7: mov     eax, large fs:0
 0x7F7EED: push    eax
@@ -15,7 +15,7 @@
 0x7F7F0D: mov     esi, ecx
 0x7F7F0F: mov     [esp+0ECh+var_C4], esi
 0x7F7F13: mov     eax, ds:0B3F928h
-0x7F7F18: mov     edi, [esp+0ECh+arg_4]
+0x7F7F18: mov     edi, [esp+0ECh+shaderIndex]
 0x7F7F1F: push    edi
 0x7F7F20: mov     [esp+0F0h+var_9C], eax
 0x7F7F24: mov     [esp+0F0h+var_D5], 0
@@ -32,7 +32,7 @@
 0x7F7F4D: mov     ecx, [ecx]
 0x7F7F4F: mov     ebp, [ecx]
 0x7F7F51: mov     eax, [ebp+0B4h]
-0x7F7F57: mov     [esp+0ECh+var_C0], ecx
+0x7F7F57: mov     [esp+0ECh+renderEntry], ecx
 0x7F7F5B: lea     esi, [ebp+64h]
 0x7F7F5E: mov     ecx, 0Dh
 0x7F7F63: lea     edi, [esp+0ECh+var_80]
@@ -46,13 +46,13 @@
 0x7F7F7F: mov     eax, [ebp+28h]
 0x7F7F82: mov     [esp+0ECh+var_A4], eax
 0x7F7F86: mov     ecx, [ebp+2Ch]
-0x7F7F89: lea     edx, [esp+0ECh+var_D4]
+0x7F7F89: lea     edx, [esp+0ECh+output]
 0x7F7F8D: mov     [esp+0ECh+var_A0], ecx
-0x7F7F91: push    edx
-0x7F7F92: mov     ecx, ebp
-0x7F7F94: call    sub_405760
+0x7F7F91: push    edx; output
+0x7F7F92: mov     ecx, ebp; this
+0x7F7F94: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F7F99: mov     esi, [eax]
-0x7F7F9B: mov     eax, [esp+0ECh+var_D4]
+0x7F7F9B: mov     eax, [esp+0ECh+output]
 0x7F7F9F: test    eax, eax
 0x7F7FA1: jz      short loc_7F7FC1
 0x7F7FA3: mov     edi, eax
@@ -71,25 +71,25 @@
 0x7F7FC1: mov     ebx, [ebp+0BCh]
 0x7F7FC7: mov     edi, [esi+18h]
 0x7F7FCA: push    1; a1
-0x7F7FCC: call    GetShaderDefinition
-0x7F7FD1: mov     ecx, [esp+0F0h+var_C0]
+0x7F7FCC: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
+0x7F7FD1: mov     ecx, [esp+0F0h+renderEntry]
 0x7F7FD5: add     eax, 4
 0x7F7FD8: mov     eax, [eax]
 0x7F7FDA: mov     [esp+0F0h+var_B4], eax
-0x7F7FDE: movzx   eax, word ptr [esp+0F0h+arg_4]
+0x7F7FDE: movzx   eax, word ptr [esp+0F0h+shaderIndex]
 0x7F7FE6: add     esp, 4
 0x7F7FE9: mov     ds:0B42E90h, eax
 0x7F7FEE: mov     ds:0B42EB8h, ecx
-0x7F7FF4: call    sub_7ECB20
-0x7F7FF9: mov     edx, [esp+0ECh+var_C0]
-0x7F7FFD: mov     eax, [esp+0ECh+arg_4]
-0x7F8004: push    0
-0x7F8006: push    edi
+0x7F7FF4: call    OB_BSShader_ResetLightConstantSlots_010201A0; Oblivion Lighting30 light-bank reset: clears eight diffuse/color slots to (0,0,0,1) and eight source/data slots to (0.001,0,0,0); it does not clear ambient c5.
+0x7F7FF9: mov     edx, [esp+0ECh+renderEntry]
+0x7F7FFD: mov     eax, [esp+0ECh+shaderIndex]
+0x7F8004: push    0; previousRenderEntry
+0x7F8006: push    edi; lightingProperty
 0x7F8007: mov     edi, [esp+0F4h+var_C4]
-0x7F800B: push    edx
-0x7F800C: push    eax
+0x7F800B: push    edx; renderEntry
+0x7F800C: push    eax; shaderIndex
 0x7F800D: mov     ecx, edi
-0x7F800F: call    sub_7F60F0
+0x7F800F: call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0
 0x7F8014: push    ebp
 0x7F8015: mov     ecx, edi
 0x7F8017: call    sub_7F6A30
@@ -118,13 +118,13 @@
 0x7F8059: test    eax, eax
 0x7F805B: mov     [esp+0ECh+var_4], 0FFFFFFFFh
 0x7F8066: jz      short loc_7F808A
-0x7F8068: mov     [esp+0ECh+var_CC], eax
+0x7F8068: mov     [esp+0ECh+previousRenderEntry], eax
 0x7F806C: add     eax, 4
 0x7F806F: push    eax; lpAddend
 0x7F8070: call    dword ptr ds:0A2807Ch
 0x7F8076: test    eax, eax
 0x7F8078: jnz     short loc_7F808A
-0x7F807A: mov     ecx, [esp+0ECh+var_CC]
+0x7F807A: mov     ecx, [esp+0ECh+previousRenderEntry]
 0x7F807E: test    ecx, ecx
 0x7F8080: jz      short loc_7F808A
 0x7F8082: mov     eax, [ecx]
@@ -154,13 +154,13 @@
 0x7F80C0: test    eax, eax
 0x7F80C2: mov     [esp+0ECh+var_4], 0FFFFFFFFh
 0x7F80CD: jz      short loc_7F80F1
-0x7F80CF: mov     [esp+0ECh+var_CC], eax
+0x7F80CF: mov     [esp+0ECh+previousRenderEntry], eax
 0x7F80D3: add     eax, 4
 0x7F80D6: push    eax; lpAddend
 0x7F80D7: call    dword ptr ds:0A2807Ch
 0x7F80DD: test    eax, eax
 0x7F80DF: jnz     short loc_7F80F1
-0x7F80E1: mov     ecx, [esp+0ECh+var_CC]
+0x7F80E1: mov     ecx, [esp+0ECh+previousRenderEntry]
 0x7F80E5: test    ecx, ecx
 0x7F80E7: jz      short loc_7F80F1
 0x7F80E9: mov     eax, [ecx]
@@ -196,13 +196,13 @@
 0x7F8137: test    eax, eax
 0x7F8139: mov     [esp+0ECh+var_4], 0FFFFFFFFh
 0x7F8144: jz      short loc_7F8168
-0x7F8146: mov     [esp+0ECh+var_CC], eax
+0x7F8146: mov     [esp+0ECh+previousRenderEntry], eax
 0x7F814A: add     eax, 4
 0x7F814D: push    eax; lpAddend
 0x7F814E: call    dword ptr ds:0A2807Ch
 0x7F8154: test    eax, eax
 0x7F8156: jnz     short loc_7F8168
-0x7F8158: mov     ecx, [esp+0ECh+var_CC]
+0x7F8158: mov     ecx, [esp+0ECh+previousRenderEntry]
 0x7F815C: test    ecx, ecx
 0x7F815E: jz      short loc_7F8168
 0x7F8160: mov     eax, [ecx]
@@ -233,13 +233,13 @@
 0x7F81A0: test    eax, eax
 0x7F81A2: mov     [esp+0ECh+var_4], 0FFFFFFFFh
 0x7F81AD: jz      short loc_7F81D1
-0x7F81AF: mov     [esp+0ECh+var_CC], eax
+0x7F81AF: mov     [esp+0ECh+previousRenderEntry], eax
 0x7F81B3: add     eax, 4
 0x7F81B6: push    eax; lpAddend
 0x7F81B7: call    dword ptr ds:0A2807Ch
 0x7F81BD: test    eax, eax
 0x7F81BF: jnz     short loc_7F81D1
-0x7F81C1: mov     ecx, [esp+0ECh+var_CC]
+0x7F81C1: mov     ecx, [esp+0ECh+previousRenderEntry]
 0x7F81C5: test    ecx, ecx
 0x7F81C7: jz      short loc_7F81D1
 0x7F81C9: mov     eax, [ecx]
@@ -297,13 +297,13 @@
 0x7F8253: push    ecx
 0x7F8254: mov     ecx, ebp
 0x7F8256: call    edx
-0x7F8258: mov     eax, [esp+0ECh+arg_4]
+0x7F8258: mov     eax, [esp+0ECh+shaderIndex]
 0x7F825F: push    eax
 0x7F8260: call    sub_7D1800
 0x7F8265: mov     edx, ds:0B28CB0h
 0x7F826B: mov     ecx, [esp+0F0h+var_BC]
 0x7F826F: lea     eax, ds:0[edx*4]
-0x7F8276: mov     [esp+0F0h+var_D4], ecx
+0x7F8276: mov     [esp+0F0h+output], ecx
 0x7F827A: mov     ecx, [esp+0F0h+var_C4]
 0x7F827E: mov     edx, [ecx]
 0x7F8280: push    eax
@@ -315,25 +315,24 @@
 0x7F8290: test    eax, eax
 0x7F8292: jz      loc_7F8661
 0x7F8298: jmp     short loc_7F82A4
-0x7F829A: align 10h
 0x7F82A0: mov     eax, [esp+0ECh+var_B0]
-0x7F82A4: mov     ecx, [esp+0ECh+var_C0]
+0x7F82A4: mov     ecx, [esp+0ECh+renderEntry]
 0x7F82A8: mov     edx, [eax]
-0x7F82AA: mov     [esp+0ECh+var_CC], ecx
+0x7F82AA: mov     [esp+0ECh+previousRenderEntry], ecx
 0x7F82AE: lea     ecx, [eax+8]
 0x7F82B1: mov     eax, [ecx]
-0x7F82B3: movzx   ecx, word ptr [esp+0ECh+arg_4]
+0x7F82B3: movzx   ecx, word ptr [esp+0ECh+shaderIndex]
 0x7F82BB: mov     ds:0B42E90h, ecx
 0x7F82C1: mov     ds:0B42EB8h, eax
 0x7F82C6: mov     ebp, [eax]
 0x7F82C8: lea     ecx, [esp+0ECh+var_90]
-0x7F82CC: mov     [esp+0ECh+var_C0], eax
+0x7F82CC: mov     [esp+0ECh+renderEntry], eax
 0x7F82D0: mov     eax, [ebp+0B4h]
-0x7F82D6: push    ecx
-0x7F82D7: mov     ecx, ebp
+0x7F82D6: push    ecx; output
+0x7F82D7: mov     ecx, ebp; this
 0x7F82D9: mov     [esp+0F0h+var_B0], edx
 0x7F82DD: mov     [esp+0F0h+var_BC], eax
-0x7F82E1: call    sub_405760
+0x7F82E1: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F82E6: mov     esi, [eax]
 0x7F82E8: mov     eax, [esp+0ECh+var_90]
 0x7F82EC: test    eax, eax
@@ -353,7 +352,7 @@
 0x7F830E: mov     ecx, edi
 0x7F8310: call    eax
 0x7F8312: mov     ecx, [esi+18h]
-0x7F8315: mov     [esp+0ECh+var_C8], ecx
+0x7F8315: mov     [esp+0ECh+lightingProperty], ecx
 0x7F8319: lea     esi, [ebp+64h]
 0x7F831C: mov     ecx, 0Dh
 0x7F8321: lea     edi, [esp+0ECh+var_80]
@@ -364,7 +363,7 @@
 0x7F8331: mov     [esp+0ECh+var_A8], eax
 0x7F8335: mov     ecx, [ebp+28h]
 0x7F8338: mov     eax, [esp+0ECh+var_BC]
-0x7F833C: cmp     [esp+0ECh+var_D4], eax
+0x7F833C: cmp     [esp+0ECh+output], eax
 0x7F8340: mov     [esp+0ECh+var_A4], ecx
 0x7F8344: mov     edx, [ebp+2Ch]
 0x7F8347: mov     [esp+0ECh+var_A0], edx
@@ -375,7 +374,7 @@
 0x7F835C: mov     edx, [esp+0ECh+var_94]
 0x7F8360: mov     eax, [esp+0ECh+var_98]
 0x7F8364: push    ecx
-0x7F8365: mov     ecx, [esp+0F0h+arg_4]
+0x7F8365: mov     ecx, [esp+0F0h+shaderIndex]
 0x7F836C: push    edx
 0x7F836D: push    eax
 0x7F836E: push    0
@@ -386,19 +385,19 @@
 0x7F837F: mov     ecx, [esp+0ECh+var_C4]
 0x7F8383: push    ebp
 0x7F8384: call    sub_7F6A30
-0x7F8389: mov     eax, [esp+0ECh+var_CC]
+0x7F8389: mov     eax, [esp+0ECh+previousRenderEntry]
 0x7F838D: mov     edx, [esp+0ECh+var_BC]
-0x7F8391: mov     edi, [esp+0ECh+var_C8]
-0x7F8395: mov     ecx, [esp+0ECh+var_C0]
+0x7F8391: mov     edi, [esp+0ECh+lightingProperty]
+0x7F8395: mov     ecx, [esp+0ECh+renderEntry]
 0x7F8399: mov     esi, [edx+38h]
-0x7F839C: mov     edx, [esp+0ECh+arg_4]
-0x7F83A3: push    eax
-0x7F83A4: push    edi
-0x7F83A5: push    ecx
+0x7F839C: mov     edx, [esp+0ECh+shaderIndex]
+0x7F83A3: push    eax; previousRenderEntry
+0x7F83A4: push    edi; lightingProperty
+0x7F83A5: push    ecx; renderEntry
 0x7F83A6: mov     ecx, [esp+0F8h+var_C4]
-0x7F83AA: push    edx
-0x7F83AB: call    sub_7F60F0
-0x7F83B0: mov     eax, [esp+0ECh+arg_4]
+0x7F83AA: push    edx; shaderIndex
+0x7F83AB: call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0
+0x7F83B0: mov     eax, [esp+0ECh+shaderIndex]
 0x7F83B7: mov     ecx, [esp+0ECh+var_C4]
 0x7F83BB: push    ebx
 0x7F83BC: push    edi
@@ -407,7 +406,7 @@
 0x7F83C2: push    eax
 0x7F83C3: push    ebp
 0x7F83C4: call    sub_7F63D0
-0x7F83C9: mov     ecx, [esp+0ECh+var_C0]
+0x7F83C9: mov     ecx, [esp+0ECh+renderEntry]
 0x7F83CD: cmp     byte ptr [ecx+7], 0
 0x7F83D1: jnz     short loc_7F83DB
 0x7F83D3: fldz
@@ -436,13 +435,13 @@
 0x7F8413: test    eax, eax
 0x7F8415: mov     [esp+0ECh+var_4], 0FFFFFFFFh
 0x7F8420: jz      short loc_7F8444
-0x7F8422: mov     [esp+0ECh+var_D4], eax
+0x7F8422: mov     [esp+0ECh+output], eax
 0x7F8426: add     eax, 4
 0x7F8429: push    eax; lpAddend
 0x7F842A: call    dword ptr ds:0A2807Ch
 0x7F8430: test    eax, eax
 0x7F8432: jnz     short loc_7F8444
-0x7F8434: mov     ecx, [esp+0ECh+var_D4]
+0x7F8434: mov     ecx, [esp+0ECh+output]
 0x7F8438: test    ecx, ecx
 0x7F843A: jz      short loc_7F8444
 0x7F843C: mov     eax, [ecx]
@@ -461,24 +460,24 @@
 0x7F8455: lea     ecx, [esp+0ECh+var_88]
 0x7F8459: push    ecx
 0x7F845A: mov     ecx, ebp
-0x7F845C: mov     [esp+0F0h+var_C8], eax
+0x7F845C: mov     [esp+0F0h+lightingProperty], eax
 0x7F8460: call    sub_7016D0
 0x7F8465: mov     edx, [esp+0ECh+var_B8]
 0x7F8469: mov     ecx, [edx+44h]
 0x7F846C: mov     eax, [eax]
-0x7F846E: mov     edx, [esp+0ECh+var_C8]
+0x7F846E: mov     edx, [esp+0ECh+lightingProperty]
 0x7F8472: mov     edx, [edx]
 0x7F8474: mov     edx, [edx+40h]
 0x7F8477: push    1
 0x7F8479: push    0
-0x7F847B: mov     [esp+0F4h+var_D4], ecx
+0x7F847B: mov     [esp+0F4h+output], ecx
 0x7F847F: lea     ecx, [esp+0F4h+var_AC]
 0x7F8483: push    ecx
 0x7F8484: lea     ecx, [esp+0F8h+var_80]
 0x7F8488: push    ecx
-0x7F8489: mov     ecx, [esp+0FCh+var_C8]
+0x7F8489: mov     ecx, [esp+0FCh+lightingProperty]
 0x7F848D: push    eax
-0x7F848E: mov     eax, [esp+100h+var_D4]
+0x7F848E: mov     eax, [esp+100h+output]
 0x7F8492: push    edi
 0x7F8493: push    esi
 0x7F8494: push    0
@@ -491,13 +490,13 @@
 0x7F84AB: test    eax, eax
 0x7F84AD: mov     [esp+0ECh+var_4], 0FFFFFFFFh
 0x7F84B8: jz      short loc_7F84DC
-0x7F84BA: mov     [esp+0ECh+var_D4], eax
+0x7F84BA: mov     [esp+0ECh+output], eax
 0x7F84BE: add     eax, 4
 0x7F84C1: push    eax; lpAddend
 0x7F84C2: call    dword ptr ds:0A2807Ch
 0x7F84C8: test    eax, eax
 0x7F84CA: jnz     short loc_7F84DC
-0x7F84CC: mov     ecx, [esp+0ECh+var_D4]
+0x7F84CC: mov     ecx, [esp+0ECh+output]
 0x7F84D0: test    ecx, ecx
 0x7F84D2: jz      short loc_7F84DC
 0x7F84D4: mov     eax, [ecx]
@@ -508,24 +507,24 @@
 0x7F84DF: lea     ecx, [esp+0ECh+var_84]
 0x7F84E3: push    ecx
 0x7F84E4: mov     ecx, ebp
-0x7F84E6: mov     [esp+0F0h+var_C8], eax
+0x7F84E6: mov     [esp+0F0h+lightingProperty], eax
 0x7F84EA: call    sub_7016D0
 0x7F84EF: mov     edx, [esp+0ECh+var_B8]
 0x7F84F3: mov     ecx, [edx+58h]
 0x7F84F6: mov     eax, [eax]
-0x7F84F8: mov     edx, [esp+0ECh+var_C8]
+0x7F84F8: mov     edx, [esp+0ECh+lightingProperty]
 0x7F84FC: mov     edx, [edx]
 0x7F84FE: mov     edx, [edx+40h]
 0x7F8501: push    1
 0x7F8503: push    0
-0x7F8505: mov     [esp+0F4h+var_D4], ecx
+0x7F8505: mov     [esp+0F4h+output], ecx
 0x7F8509: lea     ecx, [esp+0F4h+var_AC]
 0x7F850D: push    ecx
 0x7F850E: lea     ecx, [esp+0F8h+var_80]
 0x7F8512: push    ecx
-0x7F8513: mov     ecx, [esp+0FCh+var_C8]
+0x7F8513: mov     ecx, [esp+0FCh+lightingProperty]
 0x7F8517: push    eax
-0x7F8518: mov     eax, [esp+100h+var_D4]
+0x7F8518: mov     eax, [esp+100h+output]
 0x7F851C: push    edi
 0x7F851D: push    esi
 0x7F851E: push    0
@@ -559,7 +558,7 @@
 0x7F856E: mov     ecx, [esp+0F8h+var_C4]
 0x7F8572: jmp     loc_7F8648
 0x7F8577: cmp     [esp+0ECh+var_D5], 0
-0x7F857C: mov     edi, [esp+0ECh+arg_4]
+0x7F857C: mov     edi, [esp+0ECh+shaderIndex]
 0x7F8583: mov     esi, [esp+0ECh+var_C4]
 0x7F8587: jnz     short loc_7F85A7
 0x7F8589: mov     edx, [esp+0ECh+var_B4]
@@ -573,16 +572,16 @@
 0x7F859B: mov     ecx, esi
 0x7F859D: call    sub_7F68C0
 0x7F85A2: mov     [esp+0ECh+var_D5], 1
-0x7F85A7: mov     edx, [esp+0ECh+var_CC]
-0x7F85AB: mov     eax, [esp+0ECh+var_C8]
-0x7F85AF: mov     ecx, [esp+0ECh+var_C0]
-0x7F85B3: push    edx
-0x7F85B4: push    eax
-0x7F85B5: push    ecx
-0x7F85B6: push    edi
+0x7F85A7: mov     edx, [esp+0ECh+previousRenderEntry]
+0x7F85AB: mov     eax, [esp+0ECh+lightingProperty]
+0x7F85AF: mov     ecx, [esp+0ECh+renderEntry]
+0x7F85B3: push    edx; previousRenderEntry
+0x7F85B4: push    eax; lightingProperty
+0x7F85B5: push    ecx; renderEntry
+0x7F85B6: push    edi; shaderIndex
 0x7F85B7: mov     ecx, esi
-0x7F85B9: call    sub_7F60F0
-0x7F85BE: mov     edx, [esp+0ECh+var_C8]
+0x7F85B9: call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0
+0x7F85BE: mov     edx, [esp+0ECh+lightingProperty]
 0x7F85C2: mov     eax, [esp+0ECh+var_D0]
 0x7F85C6: push    ebx
 0x7F85C7: push    edx
@@ -591,7 +590,7 @@
 0x7F85CA: push    ebp
 0x7F85CB: mov     ecx, esi
 0x7F85CD: call    sub_7F63D0
-0x7F85D2: mov     ecx, [esp+0ECh+var_C0]
+0x7F85D2: mov     ecx, [esp+0ECh+renderEntry]
 0x7F85D6: cmp     byte ptr [ecx+7], 0
 0x7F85DA: jnz     short loc_7F85E4
 0x7F85DC: fldz
@@ -604,7 +603,7 @@
 0x7F85F5: push    0
 0x7F85F7: lea     eax, [esp+0F0h+var_80]
 0x7F85FB: push    eax
-0x7F85FC: call    sub_765480
+0x7F85FC: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x7F8601: lea     ecx, [esp+0ECh+var_4C]
 0x7F8608: push    ecx
 0x7F8609: lea     edx, [esp+0F0h+var_80]
@@ -632,11 +631,11 @@
 0x7F8649: call    sub_7F6BF0
 0x7F864E: cmp     [esp+0ECh+var_B0], 0
 0x7F8653: mov     eax, [esp+0ECh+var_BC]
-0x7F8657: mov     [esp+0ECh+var_D4], eax
+0x7F8657: mov     [esp+0ECh+output], eax
 0x7F865B: jnz     loc_7F82A0
 0x7F8661: mov     esi, [esp+0ECh+arg_0]
-0x7F8668: mov     ecx, esi
-0x7F866A: call    sub_7A9C30
+0x7F8668: mov     ecx, esi; this
+0x7F866A: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7F866F: mov     ecx, [esi+4]
 0x7F8672: xor     edi, edi
 0x7F8674: mov     [esi+0Ch], ecx
@@ -662,3 +661,26 @@
 0x7F86B0: pop     ebx
 0x7F86B1: add     esp, 0D8h
 0x7F86B7: retn    8
+0x9D0260: lea     ecx, [ebp-0D0h]; slot
+0x9D0266: jmp     NiPointerSlot_Release
+0x9D026B: lea     ecx, [ebp-0D0h]; slot
+0x9D0271: jmp     NiPointerSlot_Release
+0x9D0276: lea     ecx, [ebp-0D0h]; slot
+0x9D027C: jmp     NiPointerSlot_Release
+0x9D0281: lea     ecx, [ebp-0D0h]; slot
+0x9D0287: jmp     NiPointerSlot_Release
+0x9D028C: lea     ecx, [ebp-0D0h]; slot
+0x9D0292: jmp     NiPointerSlot_Release
+0x9D0297: lea     ecx, [ebp-8Ch]; slot
+0x9D029D: jmp     NiPointerSlot_Release
+0x9D02A2: lea     ecx, [ebp-88h]; slot
+0x9D02A8: jmp     NiPointerSlot_Release
+0x9D02AD: lea     ecx, [ebp-84h]; slot
+0x9D02B3: jmp     NiPointerSlot_Release
+0x9D02B8: mov     edx, [esp+shaderIndex]
+0x9D02BC: lea     eax, [edx-0DCh]
+0x9D02C2: mov     ecx, [edx-0E0h]
+0x9D02C8: xor     ecx, eax
+0x9D02CA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D02CF: mov     eax, offset stru_AF8C9C
+0x9D02D4: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-ept_lookup_handle_t
+typedef void *ept_lookup_handle_t;

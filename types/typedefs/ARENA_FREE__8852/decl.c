@@ -1,1 +1,1 @@
-ARENA_FREE
+typedef tagARENA_FREE ARENA_FREE;

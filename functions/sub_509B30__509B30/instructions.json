@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x509B65",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x509BE0",
-    "line": "mov     ecx, dword ptr [esp+48h+var_14]",
+    "line": "mov     ecx, dword ptr [esp+48h+var_14]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x509BE7",
-    "line": "call    sub_529750",
+    "line": "call    TESQuest__GetCurrentStage",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x509C3D",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x509C43",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x509C4E",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x509C9F",
-    "line": "push    edx; ArgList",
+    "line": "push    edx; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x509CA4",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x509CA9",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x509CD7",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },

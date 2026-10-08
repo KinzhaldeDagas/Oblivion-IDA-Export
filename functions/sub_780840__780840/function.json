@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x780840",
+      "0x78089B"
+    ]
+  ],
+  "chunks_sha256": "eea2b14f2c4626b1d3010b4fdd53223b716976c58514dfa10782ff7460792218",
+  "comment_regular": "Apply NiPropertyState in stock order; alpha property is propertyState[2] and is applied before the shader pass.",
+  "comment_repeatable": "Apply NiPropertyState in stock order; alpha property is propertyState[2] and is applied before the shader pass.\nDX11 geometry-state audit 2026-09-30: generic property-state dispatch order is slot+28 wire via manager+24, +18 shade via+18, +08 alpha via+08, +2C Z-buffer via+28, +1C stencil via+20, +10 material via+14. Do not substitute this generic order for Lighting30 7FB470.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_780840",
+  "display_name": "OB_NiD3DRenderState_ApplyPropertyState_010201A0",
   "end_ea": "0x78089B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_780840",
+  "name": "OB_NiD3DRenderState_ApplyPropertyState_010201A0",
   "segment": ".text",
   "sha256": "eea2b14f2c4626b1d3010b4fdd53223b716976c58514dfa10782ff7460792218",
   "size": 91,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x780840",
-  "type": "int __thiscall(void *this, _DWORD *)",
+  "total_chunk_size": 91,
+  "type": "int __thiscall(void *this, void *propertyState)",
   "xrefs_from_count": 42,
   "xrefs_to_count": 2
 }

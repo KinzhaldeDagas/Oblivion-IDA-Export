@@ -1,5 +1,5 @@
-0x4206A0: push    0FFFFFFFFh
-0x4206A2: push    offset SEH_6E3250
+0x4206A0: push    0FFFFFFFFh; Creates/updates ExtraMerchantContainer; null removes type 0x44.
+0x4206A2: push    offset ExtraDataList_SetReferencePointer_SEH
 0x4206A7: mov     eax, large fs:0
 0x4206AD: push    eax
 0x4206AE: push    esi
@@ -56,3 +56,15 @@
 0x42074C: pop     esi
 0x42074D: add     esp, 0Ch
 0x420750: retn    4
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x786AF0",
-    "line": "push    ebp",
+    "line": "push    ebp; stBezierSpline text parser. Accepts strings beginning with BezierSpline, reads min/max/variance, then a braced control-point count followed by point, tangent, and tangent-length float groups.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x786B0A",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+stringObject]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x786BC6",
-    "line": "fstp    [esp+134h+var_110]",
+    "line": "fstp    [esp+134h+point]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x786BF0",
-    "line": "fstp    [esp+13Ch+var_118]",
+    "line": "fstp    [esp+13Ch+tangent]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -589,43 +589,43 @@
   },
   {
     "ea": "0x786C25",
-    "line": "fstp    [esp+134h+var_134]",
+    "line": "fstp    [esp+134h+tangentLength]; tangentLength",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x786C28",
-    "line": "lea     eax, [esp+134h+var_118]",
+    "line": "lea     eax, [esp+134h+tangent]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786C2C",
-    "line": "push    eax",
+    "line": "push    eax; tangent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786C2D",
-    "line": "lea     ecx, [esp+138h+var_110]",
+    "line": "lea     ecx, [esp+138h+point]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786C31",
-    "line": "push    ecx",
+    "line": "push    ecx; point",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786C32",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786C34",
-    "line": "call    sub_7860D0",
+    "line": "call    OB_StBezierSpline_AddControlPoint_010201A0; Oblivion stBezierSpline::AddControlPoint. Builds 2D point/tangent stVecs, normalizes the tangent, appends prior outgoing/current incoming cubic-Bezier controls to splinePoints, then appends the point, tangent, and tangent length. Shipped compact layout: controlPoints@0x0C, tangents@0x1C, lengths@0x2C, splinePoints@0x4C. Binary behavior matches RT4.1 IdvSpline.cpp after observation.",
     "mnemonic": "call",
     "size": 5
   },

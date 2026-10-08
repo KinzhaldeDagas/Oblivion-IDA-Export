@@ -1,1 +1,1 @@
-hkMoppCode
+struct hkMoppCode;

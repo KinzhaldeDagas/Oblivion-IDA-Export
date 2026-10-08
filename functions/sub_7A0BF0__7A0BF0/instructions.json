@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A0BF0",
-    "line": "push    esi",
+    "line": "push    esi; Assigns one st_vector<SFrondGuide> value over [first,last) through the decoded deep vector copy-assignment operator.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A0BF6",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,25 +43,25 @@
   },
   {
     "ea": "0x7A0BFF",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A0C03",
-    "line": "push    ebx",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0C04",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A0C06",
-    "line": "call    sub_79FB80",
+    "line": "call    OB_stVector_SFrondGuide_CopyAssign_010201A0; Deep copy assignment for st_vector<SFrondGuide>. Reuses initialized elements/capacity where possible, destroys surplus guides, or frees and buys exact capacity before exception-safe copy construction.",
     "mnemonic": "call",
     "size": 5
   },

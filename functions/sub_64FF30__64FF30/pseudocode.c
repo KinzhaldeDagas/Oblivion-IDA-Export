@@ -1,32 +1,33 @@
-void __userpurge sub_64FF30(int a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>, Actor *a5)
+// MiddleHighProcess dialogue-procedure update. It counts down the same DialoguePackage timer but has no audible/lip playback; until procedure completion it advances the conversation through DialoguePackage::Speak(false), then cleans both participants sharing the package.
+void __thiscall MiddleHighProcess::UpdateDialogueProcedure(MiddleHighProcess *this, Actor *owner)
 {
-  int v6; // esi
-  Actor *Levels; // ebx
-  TESPackage *v8; // esi
-  int v9; // [esp+10h] [ebp-4h]
+  DialoguePackageRuntimeView *dialoguePackage; // esi
+  Actor *otherParticipant; // ebx
+  TESPackage *sharedPackage; // esi
+  Actor *target; // [esp+10h] [ebp-4h]
 
-  v6 = (*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)a1 + 0x184))(a1, a4, a3);
-  v9 = sub_779480((_DWORD *)v6);
-  Levels = (Actor *)NiDX9TextureData::GetLevels((NiDX9TextureData *)v6);
-  if ( a5 == Levels )
-    Levels = (Actor *)v9;
-  if ( *(float *)(v6 + 0x44) <= 0.0 )
+  dialoguePackage = (DialoguePackageRuntimeView *)this->GetCurrentPackage(this); /*0x64ff41*/
+  target = DialoguePackage::GetTarget(dialoguePackage); /*0x64ff4c*/
+  otherParticipant = DialoguePackage::GetSpeaker(dialoguePackage); /*0x64ff59*/
+  if ( owner == otherParticipant ) /*0x64ff5d*/
+    otherParticipant = target; /*0x64ff5f*/
+  if ( dialoguePackage->responseTimeRemaining <= 0.0 ) /*0x64ff6d*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)a1 + 0xC0))(a1) )
+    if ( this->Unk_2F(this) ) /*0x64ff8d*/
     {
-      a5->vtbl->Unk_C3(a5);
-      v8 = sub_5E0380(Levels);
-      if ( v8 == sub_5E0380(a5) )
-        Levels->vtbl->Unk_C3(Levels);
-      (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)a1 + 0xBC))(a1, 0);
+      owner->vtbl->CleanupCurrentPackage(owner); /*0x64ff9e*/
+      sharedPackage = Actor::GetCurrentPackage(otherParticipant); /*0x64ffa9*/
+      if ( sharedPackage == Actor::GetCurrentPackage(owner) ) /*0x64ffb2*/
+        otherParticipant->vtbl->CleanupCurrentPackage(otherParticipant); /*0x64ffbe*/
+      this->Unk_2E(this, 0); /*0x64ffcc*/
     }
     else
     {
-      sub_6267A0(v6, a2, a3, 0.0, 0);
+      DialoguePackage::Speak(dialoguePackage, 0);// MiddleHigh offscreen advance calls Speak(false). Starting from timer zero, successive updates select then consume responses without audio or text-duration delays and commit deferred item results rapidly. Exception: a package demoted with waitingForLip=true makes no cursor progress until it returns to HighProcess or is destroyed. /*0x64ffda*/
     }
   }
   else
   {
-    *(float *)(v6 + 0x44) = *(float *)(v6 + 0x44) - flt_B33E9C;
+    dialoguePackage->responseTimeRemaining = dialoguePackage->responseTimeRemaining - *(float *)&MEMORY[0xB33E90][0xC]; /*0x64ff79*/
   }
 }

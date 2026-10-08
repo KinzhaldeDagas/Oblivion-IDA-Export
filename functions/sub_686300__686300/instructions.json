@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x686315",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x686373",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x68637E",
-    "line": "lea     ecx, [esi+14h]",
+    "line": "lea     ecx, [esi+14h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x68638F",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6863B1",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x6863B8",
-    "line": "mov     [esp+2Ch+var_C], ecx",
+    "line": "mov     [esp+2Ch+pointXYZ], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x6863BF",
-    "line": "lea     ecx, [esp+2Ch+var_C]",
+    "line": "lea     ecx, [esp+2Ch+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x6863CA",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6863CB",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x6863D1",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x686407",
-    "line": "lea     edx, [esp+2Ch+var_C]",
+    "line": "lea     edx, [esp+2Ch+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },

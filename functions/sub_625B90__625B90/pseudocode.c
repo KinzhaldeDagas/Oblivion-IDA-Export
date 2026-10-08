@@ -1,4 +1,4 @@
 double sub_625B90()
 {
-  return fAIDefaultGroupStandoffDistance;
+  return MEMORY[0xB35690]; /*0x625b96*/
 }

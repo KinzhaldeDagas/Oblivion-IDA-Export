@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x612F50",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x612F54",
-    "line": "mov     esi, [esp+50h+arg_4]",
+    "line": "mov     esi, [esp+50h+to]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x612F64",
-    "line": "mov     edi, [esp+54h+arg_0]",
+    "line": "mov     edi, [esp+54h+from]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x612F72",
-    "line": "fstp    [esp+54h+arg_4]",
+    "line": "fstp    [esp+54h+to]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x612F76",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+to]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x612FB6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x612FB8",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x612FC1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x612FC3",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x613036",
-    "line": "mov     ecx, offset fAICombatSlopeDifference",
+    "line": "mov     ecx, (offset flt_B37328+8)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x613121",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x613126",
-    "line": "fstp    dword ptr [esp+50h+arg_8]",
+    "line": "fstp    dword ptr [esp+50h+useActorProjection]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x61314C",
-    "line": "mov     eax, [esi]",
+    "line": "mov     eax, [esi]; Surface-distance tail reads each reference's boundMax.y via vtable slot 0x57, multiplies by GetScale, integer-converts their sum, and subtracts it from center distance.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x613192",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+to]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1189,19 +1189,19 @@
   },
   {
     "ea": "0x6131AC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6131B1",
-    "line": "mov     [esp+54h+arg_4], eax",
+    "line": "mov     [esp+54h+to], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6131B5",
-    "line": "fild    [esp+54h+arg_4]",
+    "line": "fild    [esp+54h+to]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1213,13 +1213,13 @@
   },
   {
     "ea": "0x6131BD",
-    "line": "fstp    [esp+54h+arg_4]",
+    "line": "fstp    [esp+54h+to]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6131C1",
-    "line": "fld     [esp+54h+arg_4]",
+    "line": "fld     [esp+54h+to]",
     "mnemonic": "fld",
     "size": 4
   },

@@ -31,7 +31,7 @@
 0x4DEF35: jz      loc_4DF18E
 0x4DEF3B: add     esi, 44h ; 'D'
 0x4DEF3E: mov     ecx, esi
-0x4DEF40: call    sub_420260
+0x4DEF40: call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x4DEF45: cmp     eax, edi
 0x4DEF47: jz      short loc_4DEF9F
 0x4DEF49: lea     ecx, [esp+38h+var_28]
@@ -58,14 +58,14 @@
 0x4DEF80: mov     ecx, ebp
 0x4DEF82: call    sub_4DBF60
 0x4DEF87: mov     ecx, esi
-0x4DEF89: call    sub_420340
+0x4DEF89: call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.
 0x4DEF8E: mov     byte ptr [esp+38h+var_28], al
 0x4DEF92: mov     edx, [esp+38h+var_28]
 0x4DEF96: push    edx
 0x4DEF97: lea     ecx, [ebp+44h]
-0x4DEF9A: call    sub_420360
+0x4DEF9A: call    ExtraDataList_SetEnableStateInverse; Sets or clears ExtraEnableStateParent flag bit 0 without changing its parent reference.
 0x4DEF9F: mov     ecx, esi; this
-0x4DEFA1: call    ExtraDataList__GetRandomTeleportMarker
+0x4DEFA1: call    ExtraDataList__GetRandomTeleportMarker; Verified getter: returns ExtraRandomTeleportMarker.teleportRef from this ExtraDataList, or null if the type-0x43 extra is absent.
 0x4DEFA6: cmp     eax, edi
 0x4DEFA8: jz      short loc_4DEFE8
 0x4DEFAA: lea     ecx, [esp+38h+var_28]
@@ -92,7 +92,7 @@
 0x4DEFE1: mov     ecx, ebp
 0x4DEFE3: call    sub_4DBF00
 0x4DEFE8: mov     ecx, esi
-0x4DEFEA: call    sub_420680
+0x4DEFEA: call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.
 0x4DEFEF: cmp     eax, edi
 0x4DEFF1: jz      short loc_4DF031
 0x4DEFF3: lea     edx, [esp+38h+var_28]
@@ -150,15 +150,15 @@
 0x4DF081: mov     ebx, eax
 0x4DF083: cmp     ebx, edi
 0x4DF085: jz      loc_4DF18E
-0x4DF08B: mov     ecx, ebx
-0x4DF08D: call    sub_42B410
+0x4DF08B: mov     ecx, ebx; this
+0x4DF08D: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4DF092: test    eax, eax
 0x4DF094: jz      loc_4DF18E
 0x4DF09A: lea     edx, [esp+38h+var_28]
 0x4DF09E: push    edx
-0x4DF09F: mov     ecx, ebx
+0x4DF09F: mov     ecx, ebx; this
 0x4DF0A1: mov     [esp+3Ch+var_28], edi
-0x4DF0A5: call    sub_42B410
+0x4DF0A5: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4DF0AA: mov     ecx, [esp+3Ch+arg_0]
 0x4DF0AE: push    eax
 0x4DF0AF: call    NiTMap_GetAt
@@ -190,9 +190,9 @@
 0x4DF105: mov     edx, [eax+4]
 0x4DF108: mov     [esp+38h+var_8], edx
 0x4DF10C: mov     eax, [eax+8]
-0x4DF10F: mov     ecx, ebx
+0x4DF10F: mov     ecx, ebx; this
 0x4DF111: mov     [esp+38h+var_4], eax
-0x4DF115: call    sub_42B410
+0x4DF115: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4DF11A: mov     edx, [eax]
 0x4DF11C: mov     ecx, eax
 0x4DF11E: mov     eax, [edx+174h]
@@ -201,7 +201,7 @@
 0x4DF127: lea     ecx, [esp+3Ch+var_24]
 0x4DF12B: push    ecx
 0x4DF12C: mov     ecx, ebx
-0x4DF12E: call    sub_6899C0
+0x4DF12E: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x4DF133: mov     ecx, eax
 0x4DF135: call    sub_4121A0
 0x4DF13A: mov     edx, [esi]

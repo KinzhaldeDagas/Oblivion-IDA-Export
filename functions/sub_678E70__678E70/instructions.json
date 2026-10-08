@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x678E70",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect and marks matching targetReference/TESEffectShader effects finished.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x678E91",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+effectShader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,43 +223,43 @@
   },
   {
     "ea": "0x678EC2",
-    "line": "mov     ebp, [esp+14h+arg_4]",
+    "line": "mov     ebp, [esp+14h+effectShader]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x678EC6",
-    "line": "lea     ecx, [esp+14h+arg_4]",
+    "line": "lea     ecx, [esp+14h+effectShader]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x678ECA",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x678ECB",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x678ECD",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x678ED2",
-    "line": "mov     esi, [eax]",
+    "line": "mov     esi, [eax]; Verified (Oblivion): shader cleanup scan obtains a temporary AddRef for each temp-effect node and releases it after checking the effect.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x678ED4",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+effectShader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -408,14 +408,8 @@
     "size": 2
   },
   {
-    "ea": "0x678F0D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x678F10",
-    "line": "cmp     eax, offset unk_B3C0D4",
+    "line": "cmp     eax, offset NiRTTI_MagicShaderHitEffect",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -451,7 +445,7 @@
   },
   {
     "ea": "0x678F20",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },

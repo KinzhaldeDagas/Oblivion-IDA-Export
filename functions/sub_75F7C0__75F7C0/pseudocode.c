@@ -1,6 +1,6 @@
 bool __thiscall sub_75F7C0(float *this, int a2)
 {
-  return *(float *)a2 == *this
+  return *(float *)a2 == *this /*0x75f832*/
       && *(float *)(a2 + 4) == *(this + 1)
       && *(float *)(a2 + 8) == *(this + 2)
       && *(float *)(a2 + 0xC) == *(this + 3)

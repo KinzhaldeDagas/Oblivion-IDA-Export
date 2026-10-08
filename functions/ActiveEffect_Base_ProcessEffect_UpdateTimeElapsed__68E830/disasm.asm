@@ -1,4 +1,4 @@
-0x68E830: mov     eax, [esi+28h]
+0x68E830: mov     eax, [esi+28h]; ActiveEffect timeElapsed update: advances by frame delta and clamps to duration except for persistent spell types/bound wearable cases.
 0x68E833: fst     [esp+arg_4]
 0x68E837: cmp     eax, 4
 0x68E83A: jz      short loc_68E86E

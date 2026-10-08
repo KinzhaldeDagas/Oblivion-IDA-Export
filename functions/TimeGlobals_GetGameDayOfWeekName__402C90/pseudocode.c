@@ -6,18 +6,18 @@ const char *__thiscall TimeGlobals_GetGameDayOfWeekName(_DWORD *this)
   int v4; // edx
   float v6; // [esp+0h] [ebp-Ch]
 
-  v1 = *(this + 4);
-  if ( v1 )
-    v2 = *(float *)(v1 + 0x24);
+  v1 = *(this + 4); /*0x402c90*/
+  if ( v1 ) /*0x402c98*/
+    v2 = *(float *)(v1 + 0x24); /*0x402c9a*/
   else
-    v2 = 1.0;
-  v6 = v2;
-  v3 = (unsigned int)(__int64)v6 % 7;
-  if ( v3 == 0xFFFFFFFF || v3 >= 7 )
-    return "Bad Day";
-  v4 = (int)*(&off_B06FD4 + v3);
-  if ( v4 )
-    return *(const char **)v4;
+    v2 = 1.0; /*0x402c9f*/
+  v6 = v2; /*0x402ca1*/
+  v3 = (unsigned int)(__int64)v6 % 7; /*0x402cca*/
+  if ( v3 == 0xFFFFFFFF || v3 >= 7 ) /*0x402cd6*/
+    return "Bad Day"; /*0x402cef*/
+  v4 = (int)*(&off_B06FD4 + v3); /*0x402cd8*/
+  if ( v4 ) /*0x402ce1*/
+    return *(const char **)v4; /*0x402ce3*/
   else
-    return 0;
+    return 0; /*0x402ce9*/
 }

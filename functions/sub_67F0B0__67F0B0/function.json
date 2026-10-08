@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x67F0B0",
+      "0x67F0BA"
+    ]
+  ],
+  "chunks_sha256": "36329502e373324dc0f5cb15df8c3f1db07d2efc3c282c89060c19b5d6134402",
+  "comment_regular": "Verified: writes policy byte 0 at qword_B3BB2C[0xBA] and returns the assigned value. The registered CalcLowPathToPoint option description identifies it as ignore locks.",
+  "comment_repeatable": "Verified: writes policy byte 0 at qword_B3BB2C[0xBA] and returns the assigned value. The registered CalcLowPathToPoint option description identifies it as ignore locks.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67F0B0",
+  "display_name": "TravelPath_SetIgnoreLocks",
   "end_ea": "0x67F0BA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67F0B0",
+  "name": "TravelPath_SetIgnoreLocks",
   "segment": ".text",
   "sha256": "36329502e373324dc0f5cb15df8c3f1db07d2efc3c282c89060c19b5d6134402",
   "size": 10,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67F0B0",
-  "type": "char __cdecl(char)",
+  "total_chunk_size": 10,
+  "type": "bool __cdecl(bool enabled)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 14
 }

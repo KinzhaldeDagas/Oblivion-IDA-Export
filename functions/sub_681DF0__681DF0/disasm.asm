@@ -19,16 +19,16 @@
 0x681E2E: mov     ecx, [esp+0E4h+arg_4]
 0x681E35: test    ecx, ecx
 0x681E37: jz      loc_682413
-0x681E3D: call    sub_6899C0
+0x681E3D: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x681E42: mov     ecx, [eax]
 0x681E44: mov     edx, [eax+4]
 0x681E47: mov     esi, [ebp+0]
 0x681E4A: mov     eax, [eax+8]
 0x681E4D: xor     ebx, ebx
 0x681E4F: test    esi, esi
-0x681E51: mov     [esp+0E4h+var_B4], ecx
-0x681E55: mov     [esp+0E4h+var_B0], edx
-0x681E59: mov     [esp+0E4h+var_AC], eax
+0x681E51: mov     [esp+0E4h+start.x], ecx
+0x681E55: mov     [esp+0E4h+start.y], edx
+0x681E59: mov     [esp+0E4h+start.z], eax
 0x681E5D: jz      loc_681F95
 0x681E63: cmp     ds:0B15750h, bl
 0x681E69: jz      loc_681F95
@@ -59,10 +59,10 @@
 0x681EB5: call    ??0NiNode@@QAE@XZ; NiNode::NiNode(void)
 0x681EBA: mov     ebx, eax
 0x681EBC: mov     [esp+0E4h+var_4], 0FFFFFFFFh
-0x681EC7: call    sub_4E70B0
+0x681EC7: call    DebugRender_GetOrCreateVertexColorProperty; Verified shared debug property getter/creator, used by PathGrid debug rendering and the registered TestSeenData/TestLocalMap visualization commands, plus other debug-geometry callers. Lazily constructs NiVertexColorProperty, sets its observed render flags, stores the refcounted global g_DebugRenderVertexColorProperty and returns it.
 0x681ECC: push    eax; a2
 0x681ECD: mov     ecx, ebx; this
-0x681ECF: call    sub_405680
+0x681ECF: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x681ED4: push    offset aAvoidnode; "AvoidNode"
 0x681ED9: mov     ecx, ebx
 0x681EDB: call    NiObjectNET_SetName
@@ -81,7 +81,7 @@
 0x681F0D: push    eax; a2
 0x681F0E: mov     ecx, ebx; this
 0x681F10: mov     [esp+0E8h+var_4], 0FFFFFFFFh
-0x681F1B: call    sub_405680
+0x681F1B: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x681F20: mov     edx, [esi]
 0x681F22: mov     eax, [edx+84h]
 0x681F28: push    1
@@ -120,20 +120,20 @@
 0x681F7A: add     edi, 1
 0x681F7D: cmp     edi, [esp+0E4h+var_C8]
 0x681F81: jb      short loc_681F42
-0x681F83: lea     ecx, [ebx+0ACh]
-0x681F89: call    sub_477EF0
+0x681F83: lea     ecx, [ebx+0ACh]; this
+0x681F89: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x681F8E: mov     edi, [esp+0E4h+arg_0]
 0x681F95: mov     eax, [edi]
 0x681F97: mov     edx, [eax+174h]
 0x681F9D: mov     ecx, edi
 0x681F9F: call    edx
-0x681FA1: fld     [esp+0E4h+var_B0]
+0x681FA1: fld     [esp+0E4h+start.y]
 0x681FA5: fsub    dword ptr [eax+4]
 0x681FA8: fstp    [esp+0E4h+var_D0]
-0x681FAC: fld     [esp+0E4h+var_AC]
+0x681FAC: fld     [esp+0E4h+start.z]
 0x681FB0: fsub    dword ptr [eax+8]
 0x681FB3: fstp    [esp+0E4h+var_C8]
-0x681FB7: fld     [esp+0E4h+var_B4]
+0x681FB7: fld     [esp+0E4h+start.x]
 0x681FBB: fsub    dword ptr [eax]
 0x681FBD: lea     eax, [esp+0E4h+var_8C]
 0x681FC1: push    eax
@@ -142,11 +142,11 @@
 0x681FCA: fstp    [esp+0E8h+var_88]
 0x681FCE: fld     [esp+0E8h+var_C8]
 0x681FD2: fstp    [esp+0E8h+var_84]
-0x681FD6: call    sub_683CB0
+0x681FD6: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x681FDB: fstp    [esp+0E8h+var_D0]
 0x681FDF: mov     ecx, ebp
 0x681FE1: fld     [esp+0E8h+var_D0]
-0x681FE5: fstp    [esp+0E8h+var_E8]; float
+0x681FE5: fstp    [esp+0E8h+angleZ]; float
 0x681FE8: call    sub_680E70
 0x681FED: push    30h ; '0'
 0x681FEF: lea     ecx, [esp+0E8h+var_60]
@@ -184,7 +184,7 @@
 0x682064: test    ah, 41h
 0x682067: jnz     short loc_682084
 0x682069: fstp    dword ptr [ebp+1Ch]
-0x68206C: call    sub_5E05F0
+0x68206C: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x682071: mov     al, [ebp+0Ch]
 0x682074: push    edi
 0x682075: mov     ecx, ebp
@@ -192,7 +192,7 @@
 0x68207A: call    sub_680D30
 0x68207F: jmp     loc_682413
 0x682084: fstp    st
-0x682086: call    sub_5E05F0
+0x682086: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x68208B: fldz
 0x68208D: push    edi
 0x68208E: mov     ecx, ebp
@@ -215,7 +215,7 @@
 0x6820C2: fstp    dword ptr [ebp+20h]
 0x6820C5: mov     ecx, ebp
 0x6820C7: fld     dword ptr [ebp+10h]
-0x6820CA: fstp    [esp+0E8h+var_E8]; float
+0x6820CA: fstp    [esp+0E8h+angleZ]; float
 0x6820CD: call    sub_680E70
 0x6820D2: mov     cl, [ebp+0Ch]
 0x6820D5: mov     [ebp+0Dh], cl
@@ -295,13 +295,13 @@
 0x6821B4: fst     [esp+0E4h+var_90]
 0x6821B8: jz      short loc_6821EE
 0x6821BA: fxch    st(1)
-0x6821BC: fstp    [esp+0E4h+var_C4]
-0x6821C0: mov     eax, [esp+0E4h+var_C4]
+0x6821BC: fstp    [esp+0E4h+end.x]
+0x6821C0: mov     eax, [esp+0E4h+end.x]
 0x6821C4: mov     [esp+0E4h+var_9C], eax
-0x6821C8: fst     [esp+0E4h+var_C0]
-0x6821CC: mov     ecx, [esp+0E4h+var_C0]
-0x6821D0: fst     [esp+0E4h+var_BC]
-0x6821D4: mov     edx, [esp+0E4h+var_BC]
+0x6821C8: fst     [esp+0E4h+end.y]
+0x6821CC: mov     ecx, [esp+0E4h+end.y]
+0x6821D0: fst     [esp+0E4h+end.z]
+0x6821D4: mov     edx, [esp+0E4h+end.z]
 0x6821D8: fstp    [esp+0E4h+var_B8]
 0x6821DC: mov     eax, [esp+0E4h+var_B8]
 0x6821E0: mov     [esp+0E4h+var_98], ecx
@@ -311,13 +311,13 @@
 0x6821EE: cmp     byte ptr [ebp+0Ch], 0
 0x6821F2: jz      short loc_682228
 0x6821F4: fxch    st(1)
-0x6821F6: fst     [esp+0E4h+var_C4]
-0x6821FA: mov     ecx, [esp+0E4h+var_C4]
-0x6821FE: fstp    [esp+0E4h+var_C0]
-0x682202: mov     edx, [esp+0E4h+var_C0]
+0x6821F6: fst     [esp+0E4h+end.x]
+0x6821FA: mov     ecx, [esp+0E4h+end.x]
+0x6821FE: fstp    [esp+0E4h+end.y]
+0x682202: mov     edx, [esp+0E4h+end.y]
 0x682206: mov     [esp+0E4h+var_9C], ecx
-0x68220A: fst     [esp+0E4h+var_BC]
-0x68220E: mov     eax, [esp+0E4h+var_BC]
+0x68220A: fst     [esp+0E4h+end.z]
+0x68220E: mov     eax, [esp+0E4h+end.z]
 0x682212: fstp    [esp+0E4h+var_B8]
 0x682216: mov     ecx, [esp+0E4h+var_B8]
 0x68221A: mov     [esp+0E4h+var_98], edx
@@ -351,7 +351,7 @@
 0x682287: mov     ecx, ebx
 0x682289: call    edx
 0x68228B: mov     ecx, esi; this
-0x68228D: call    NiAVObject_InitializePropertyState
+0x68228D: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x682292: mov     ecx, esi
 0x682294: call    NiNode_UpdateDynamicEffectState
 0x682299: fldz
@@ -359,7 +359,7 @@
 0x68229D: push    ecx
 0x68229E: mov     ecx, esi; this
 0x6822A0: fstp    [esp+0ECh+a2]; a2
-0x6822A3: call    NiAVObject_UpdateNiAVObject
+0x6822A3: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x6822A8: push    ebx
 0x6822A9: lea     eax, [ebp+28h]
 0x6822AC: push    eax
@@ -375,10 +375,10 @@
 0x6822D4: rep movsd
 0x6822D6: fstp    [esp+0F0h+var_A0]
 0x6822DA: fld     dword ptr [ebp+18h]
-0x6822DD: fstp    [esp+0F0h+var_E8]; float
+0x6822DD: fstp    [esp+0F0h+angleZ]; angleZ
 0x6822E1: add     esp, 8
-0x6822E4: lea     ecx, [esp+0E8h+var_30]
-0x6822EB: call    NiMatrix33_InitRotationTransform
+0x6822E4: lea     ecx, [esp+0E8h+var_30]; this
+0x6822EB: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x6822F0: lea     ecx, [esp+0E4h+var_A8]
 0x6822F4: push    ecx
 0x6822F5: lea     edx, [esp+0E8h+var_8C]
@@ -397,45 +397,45 @@
 0x682329: mov     ecx, esi
 0x68232B: call    eax
 0x68232D: mov     ecx, [eax]
-0x68232F: mov     [esp+0E4h+var_B4], ecx
+0x68232F: mov     [esp+0E4h+start.x], ecx
 0x682333: mov     edx, [eax+4]
-0x682336: mov     [esp+0E4h+var_B0], edx
+0x682336: mov     [esp+0E4h+start.y], edx
 0x68233A: mov     eax, [eax+8]
 0x68233D: mov     ecx, esi
-0x68233F: mov     [esp+0E4h+var_AC], eax
-0x682343: call    sub_5E0660
+0x68233F: mov     [esp+0E4h+start.z], eax
+0x682343: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x682348: fmul    qword ptr ds:0A2FAA0h
-0x68234E: fadd    [esp+0E4h+var_AC]
-0x682352: fstp    [esp+0E4h+var_AC]
+0x68234E: fadd    [esp+0E4h+start.z]
+0x682352: fstp    [esp+0E4h+start.z]
 0x682356: fld1
 0x682358: lea     ecx, [esp+0E4h+var_70]
 0x68235C: fst     [esp+0E4h+var_70]
-0x682360: push    ecx
+0x682360: push    ecx; endColor
 0x682361: fst     [esp+0E8h+var_6C]
-0x682365: lea     edx, [esp+0E8h+var_C4]
+0x682365: lea     edx, [esp+0E8h+end]
 0x682369: fldz
-0x68236B: push    edx
+0x68236B: push    edx; end
 0x68236C: fst     [esp+0ECh+var_68]
 0x682373: lea     eax, [esp+0ECh+var_80]
 0x682377: fst     [esp+0ECh+var_64]
-0x68237E: push    eax
+0x68237E: push    eax; startColor
 0x68237F: fld     [esp+0F0h+var_A8]
-0x682383: lea     ecx, [esp+0F0h+var_B4]
-0x682387: fadd    [esp+0F0h+var_B4]
-0x68238B: push    ecx
-0x68238C: fstp    [esp+0F4h+var_C4]
-0x682390: fld     [esp+0F4h+var_B0]
+0x682383: lea     ecx, [esp+0F0h+start]
+0x682387: fadd    [esp+0F0h+start.x]
+0x68238B: push    ecx; start
+0x68238C: fstp    [esp+0F4h+end.x]
+0x682390: fld     [esp+0F4h+start.y]
 0x682394: fadd    [esp+0F4h+var_A4]
-0x682398: fstp    [esp+0F4h+var_C0]
+0x682398: fstp    [esp+0F4h+end.y]
 0x68239C: fld     [esp+0F4h+var_A0]
-0x6823A0: fadd    [esp+0F4h+var_AC]
-0x6823A4: fstp    [esp+0F4h+var_BC]
+0x6823A0: fadd    [esp+0F4h+start.z]
+0x6823A4: fstp    [esp+0F4h+end.z]
 0x6823A8: fxch    st(1)
 0x6823AA: fst     [esp+0F4h+var_80]
 0x6823AE: fstp    [esp+0F4h+var_7C]
 0x6823B2: fst     [esp+0F4h+var_78]
 0x6823B6: fstp    [esp+0F4h+var_74]
-0x6823BD: call    sub_47F070
+0x6823BD: call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.
 0x6823C2: mov     edx, [ebx]
 0x6823C4: add     esp, 10h
 0x6823C7: mov     esi, eax
@@ -445,7 +445,7 @@
 0x6823D2: mov     ecx, ebx
 0x6823D4: call    eax
 0x6823D6: mov     ecx, esi; this
-0x6823D8: call    NiAVObject_InitializePropertyState
+0x6823D8: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x6823DD: mov     ecx, esi
 0x6823DF: call    NiNode_UpdateDynamicEffectState
 0x6823E4: fldz
@@ -453,7 +453,7 @@
 0x6823E8: push    ecx
 0x6823E9: mov     ecx, esi; this
 0x6823EB: fstp    [esp+0ECh+a2]; a2
-0x6823EE: call    NiAVObject_UpdateNiAVObject
+0x6823EE: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x6823F3: mov     edi, [esp+0E4h+arg_0]
 0x6823FA: jmp     short loc_6823FE
 0x6823FC: fstp    st
@@ -473,3 +473,20 @@
 0x682425: pop     ebx
 0x682426: add     esp, 0D0h
 0x68242C: retn    8
+0x9C4C70: mov     eax, [ebp-0D0h]
+0x9C4C76: push    eax
+0x9C4C77: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4C7C: pop     ecx
+0x9C4C7D: retn
+0x9C4C7E: mov     eax, [ebp-0D0h]
+0x9C4C84: push    eax
+0x9C4C85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4C8A: pop     ecx
+0x9C4C8B: retn
+0x9C4C8C: mov     edx, [esp+arg_4]
+0x9C4C90: lea     eax, [edx-0D4h]
+0x9C4C96: mov     ecx, [edx-0D8h]
+0x9C4C9C: xor     ecx, eax
+0x9C4C9E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4CA3: mov     eax, offset stru_AED55C
+0x9C4CA8: jmp     ___CxxFrameHandler3

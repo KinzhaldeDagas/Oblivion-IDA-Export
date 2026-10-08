@@ -17,7 +17,7 @@
 0x501988: push    edx; a2
 0x501989: push    eax; a1
 0x50198A: mov     dword ptr [esp+28h+var_4], 0
-0x501992: call    Script_ExtractArgs
+0x501992: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x501997: add     esp, 20h
 0x50199A: test    al, al
 0x50199C: jnz     short loc_5019A1
@@ -39,7 +39,7 @@
 0x5019C3: fstp    [esp+0Ch+var_C]; int
 0x5019C6: push    ecx; int
 0x5019C7: mov     ecx, eax; int
-0x5019C9: call    Actor_Kill
+0x5019C9: call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.
 0x5019CE: mov     al, 1
 0x5019D0: pop     esi
 0x5019D1: pop     ecx

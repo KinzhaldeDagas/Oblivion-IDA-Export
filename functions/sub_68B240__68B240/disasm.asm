@@ -14,7 +14,7 @@
 0x68B25D: jnz     short loc_68B26A
 0x68B25F: mov     edx, [edi]
 0x68B261: push    edx
-0x68B262: call    FormHeapFree
+0x68B262: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68B267: add     esp, 4
 0x68B26A: mov     dword ptr [edi], 0
 0x68B270: mov     [edi+4], bl
@@ -30,10 +30,10 @@
 0x68B289: mov     esi, [esi]
 0x68B28B: test    esi, esi
 0x68B28D: jnz     short loc_68B294
-0x68B28F: mov     esi, offset Vector3_InitValue?
-0x68B294: push    esi
-0x68B295: mov     ecx, edi
-0x68B297: call    sub_68B200
+0x68B28F: mov     esi, offset g_zeroNiPoint3
+0x68B294: push    esi; position
+0x68B295: mov     ecx, edi; this
+0x68B297: call    TravelPathNode_SetOwnedPosition; Verified for kind 1 allocates a 12-byte NiPoint3 when payload is null and copies xyz from the supplied position; this record owns that copy until cleared.
 0x68B29C: pop     edi
 0x68B29D: pop     esi
 0x68B29E: retn    4

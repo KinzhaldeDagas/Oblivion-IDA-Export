@@ -1,19 +1,32 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7830C0",
+      "0x78317B"
+    ]
+  ],
+  "chunks_sha256": "852b52407cd6fb590c8b859e2a02aeb72a51f03cf8648131193eca26938f81dc",
+  "comment_regular": "\nDX11 GPU-world 2026-10-01: automatic matrix handler9A56D0 passes countOverride0, so this setter uses entry RegisterCount, defaulting zero to1. Source float matrix bits are copied unchanged to the class-selected float/int/BOOL bank; target field does not override stage here. Full map-state replacement must include shader-unread writes and apply map entries in native occurrence order.\nDX11 bridge packing note 2026-10-01: the game numeric BOOL API uses scalar register counts. The DX11 translated-shader layout groups four consecutive raw BOOL slots into one uint4; this is the project transport format, not a newly inferred Oblivion native structure. Preserve raw scalar bits and lane order when packing, and keep current integer registers separate from float banks.\n\nDirectX10OBSE authority: Oblivion NiD3DVertexShader constant setter. Dispatches typed constant entries to D3D SetVertexShaderConstantB/I/F via vtable +0x188/+0x180/+0x178; bridge hooks setters and now seeds active native VS constants after create/reset.",
+  "comment_repeatable": "DirectX10OBSE authority: Oblivion NiD3DVertexShader constant setter. Dispatches typed constant entries to D3D SetVertexShaderConstantB/I/F via vtable +0x188/+0x180/+0x178; bridge hooks setters and now seeds active native VS constants after create/reset.\nDX11 GPU-world constant span (2026-09-27): numeric VS setter7830C0 uses explicit arg4 count when nonzero, otherwise entry+20, otherwise1. Type class is table B428D8[(entry.flags at+14)&FF]:1 writes bool,3 writes int, other classes write float. Map9A8E30 direct mapped target1 writes VS float using raw entry+20 (no default-to1), target2 writes PS float; these distinctions must survive matrix provenance analysis.\nDX11 final-bank audit 2026-10-01: numeric setters affect full device register banks independently of shader read/packing metadata. Dispatch type table B428D8[DWORD(entry+14h)&FFh] value1 selects BOOL, value3 int4, otherwise float4. Non-null source override wins over entry+30. Nonzero count override wins over entry+20, which otherwise defaults to1. Keep exact bank, register span and write order; do not drop an unconsumed register or reinterpret an int/BOOL writer as absent. Logical handoff now supports all six banks, but complete current producer coverage remains required before omitting native setup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7830C0",
+  "display_name": "NiD3DVertexShader_SetNumericConstant",
   "end_ea": "0x78317B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7830C0",
+  "name": "NiD3DVertexShader_SetNumericConstant",
   "segment": ".text",
   "sha256": "852b52407cd6fb590c8b859e2a02aeb72a51f03cf8648131193eca26938f81dc",
   "size": 187,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7830C0",
-  "type": "bool __thiscall(_DWORD *this, _DWORD *, int, signed int)",
+  "total_chunk_size": 187,
+  "type": "bool __thiscall(NiD3DVertexShader *self, const NiD3DShaderConstantMapEntry *entry, const void *sourceOverride, unsigned int countOverride)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 1
 }

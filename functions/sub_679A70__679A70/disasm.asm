@@ -23,9 +23,9 @@
 0x679AA5: jmp     short loc_679AA9
 0x679AA7: push    3; a2
 0x679AA9: mov     ecx, esi; this
-0x679AAB: call    sub_673A50
+0x679AAB: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x679AB0: mov     ecx, eax; this
-0x679AB2: call    sub_7616D0
+0x679AB2: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x679AB7: mov     ebx, eax
 0x679AB9: test    ebx, ebx
 0x679ABB: mov     ebp, ebx
@@ -52,12 +52,12 @@
 0x679AFC: test    eax, eax
 0x679AFE: jz      short loc_679B34
 0x679B00: mov     ecx, esi; this
-0x679B02: call    TESObjectREFR_GetParentCell
+0x679B02: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x679B07: test    eax, eax
 0x679B09: jz      short loc_679B24
 0x679B0B: push    0; a2
 0x679B0D: mov     ecx, esi; this
-0x679B0F: call    TESObjectREFR_GetParentCell
+0x679B0F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x679B14: mov     ecx, ds:0B333A0h
 0x679B1A: push    eax; a1
 0x679B1B: call    TESObjectCELL_IsProcessLevel?LowHigh
@@ -89,22 +89,22 @@
 0x679B64: test    al, 1
 0x679B66: jnz     short loc_679B9D
 0x679B68: mov     ecx, esi; this
-0x679B6A: call    TESObjectREFR_GetParentCell
+0x679B6A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x679B6F: test    eax, eax
 0x679B71: jz      short loc_679B9D
 0x679B73: push    1; a2
 0x679B75: mov     ecx, esi; this
-0x679B77: call    TESObjectREFR_GetParentCell
+0x679B77: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x679B7C: mov     ecx, ds:0B333A0h
 0x679B82: push    eax; a1
 0x679B83: call    TESObjectCELL_IsProcessLevel?LowHigh
 0x679B88: test    al, al
 0x679B8A: jz      short loc_679B9D
-0x679B8C: push    esi; Concurrency::details::SchedulerBase *
+0x679B8C: push    esi; reference
 0x679B8D: mov     ecx, esi; this
-0x679B8F: call    TESObjectREFR_GetParentCell
-0x679B94: mov     ecx, eax
-0x679B96: call    sub_4D35D0
+0x679B8F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x679B94: mov     ecx, eax; this
+0x679B96: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x679B9B: mov     ebx, ebp
 0x679B9D: test    edi, edi
 0x679B9F: jz      short loc_679BC4
@@ -137,7 +137,7 @@
 0x679BF2: mov     ecx, esi
 0x679BF4: pop     esi
 0x679BF5: add     esp, 8
-0x679BF8: jmp     sub_678750
+0x679BF8: jmp     sub_678750; BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.
 0x679BFD: pop     esi
 0x679BFE: add     esp, 8
 0x679C01: retn

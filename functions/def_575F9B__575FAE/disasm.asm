@@ -10,7 +10,7 @@
 0x575FCD: lea     eax, [eax+edx+128h]
 0x575FD4: fld     dword ptr [eax+30h]
 0x575FD7: fadd    dword ptr [eax+24h]
-0x575FDA: call    Double_To_SInt32
+0x575FDA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x575FDF: add     ebx, eax
 0x575FE1: cmp     [esp+arg_E], 20h ; ' '
 0x575FE6: jnz     short loc_575FFB
@@ -66,11 +66,11 @@
 0x576094: add     [esp+0Ch+arg_10], eax
 0x576098: add     esp, 0Ch
 0x57609B: add     esi, eax
-0x57609D: call    Double_To_SInt32
+0x57609D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5760A2: fld     dword ptr [ebp+0B30h]
 0x5760A8: fadd    dword ptr [ebp+0B24h]
 0x5760AE: mov     [esp+arg_20], eax
-0x5760B2: call    Double_To_SInt32
+0x5760B2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5760B7: mov     ecx, [esp+arg_18]
 0x5760BB: sub     ebx, eax
 0x5760BD: push    ebx
@@ -93,7 +93,7 @@
 0x5760F5: fld     dword ptr [eax]
 0x5760F7: fiadd   [esp+arg_44]
 0x5760FB: fiadd   [esp+arg_20]
-0x5760FF: call    Double_To_SInt32
+0x5760FF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x576104: mov     ecx, [esp+arg_48]
 0x576108: push    ecx
 0x576109: mov     ecx, [esp+4+arg_18]
@@ -135,11 +135,11 @@
 0x576192: fiadd   [esp+arg_20]
 0x576196: add     [esp+arg_10], eax
 0x57619A: add     esi, eax
-0x57619C: call    Double_To_SInt32
+0x57619C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5761A1: fld     dword ptr [ebp+0B30h]
 0x5761A7: fadd    dword ptr [ebp+0B24h]
 0x5761AD: mov     [esp+arg_20], eax
-0x5761B1: call    Double_To_SInt32
+0x5761B1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5761B6: mov     ecx, [esp+arg_18]
 0x5761BA: sub     ebx, eax
 0x5761BC: push    ebx
@@ -158,12 +158,12 @@
 0x5761F0: lea     eax, [ebp+ecx*8+128h]
 0x5761F7: fadd    dword ptr [eax+24h]
 0x5761FA: mov     [esp+arg_38], 0
-0x576202: call    Double_To_SInt32
+0x576202: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x576207: mov     ebx, eax
 0x576209: mov     eax, [esp+arg_4C]
 0x57620D: fld     dword ptr [eax+ebp+158h]
 0x576214: fadd    dword ptr [eax+ebp+14Ch]
-0x57621B: call    Double_To_SInt32
+0x57621B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x576220: mov     ebp, [esp+arg_10]
 0x576224: add     ebx, eax
 0x576226: mov     al, [esp+arg_E]
@@ -213,7 +213,7 @@
 0x5762B7: fld     dword ptr [eax]
 0x5762B9: fiadd   [esp+arg_44]
 0x5762BD: fsubp   st(1), st
-0x5762BF: call    Double_To_SInt32
+0x5762BF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5762C4: mov     [esp+arg_20], eax
 0x5762C8: cmp     byte ptr [edi], 0
 0x5762CB: jz      short loc_576317
@@ -251,10 +251,10 @@
 0x576325: fld     dword ptr [ebx+850h]
 0x57632B: mov     esi, 1
 0x576330: mov     [esp+arg_28], esi
-0x576334: call    Double_To_SInt32
+0x576334: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x576339: fld     dword ptr [ebx+84Ch]
 0x57633F: mov     [esp+arg_20], eax
-0x576343: call    Double_To_SInt32
+0x576343: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x576348: mov     ebx, eax
 0x57634A: test    ebx, ebx
 0x57634C: jz      short loc_576395
@@ -263,7 +263,6 @@
 0x576355: cmp     dword ptr [ebp+4], 0
 0x576359: jz      short loc_576369
 0x57635B: jmp     short loc_576360
-0x57635D: align 10h
 0x576360: mov     ebp, [ebp+4]
 0x576363: cmp     dword ptr [ebp+4], 0
 0x576367: jnz     short loc_576360

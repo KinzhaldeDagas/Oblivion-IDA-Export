@@ -12,19 +12,19 @@ float *__cdecl sub_6BFE90(float a1, float *a2, int a3, float *a4)
   float v14; // [esp+20h] [ebp-4h]
   float v15; // [esp+28h] [ebp+4h]
 
-  v15 = a1 * dbl_A3F3A0;
-  v9 = a2[0x10] * v15;
-  v10 = a2[0x11] * v15;
-  v11 = v15 * a2[0x12];
-  v4 = dbl_A3D0C0;
-  v6 = a2[0xD] * v4;
-  v7 = a2[0xE] * v4;
-  v8 = v4 * a2[0xF];
-  v12 = v6 + v9;
-  *a4 = v12;
-  v13 = v10 + v7;
-  a4[1] = v13;
-  v14 = v8 + v11;
-  a4[2] = v14;
-  return a4;
+  v15 = a1 * dbl_A3F3A0; /*0x6bfea1*/
+  v9 = a2[0x10] * v15; /*0x6bfeb2*/
+  v10 = a2[0x11] * v15; /*0x6bfebb*/
+  v11 = v15 * a2[0x12]; /*0x6bfec2*/
+  v4 = dbl_A3D0C0; /*0x6bfed1*/
+  v6 = a2[0xD] * v4; /*0x6bfed3*/
+  v7 = a2[0xE] * v4; /*0x6bfedb*/
+  v8 = v4 * a2[0xF]; /*0x6bfee6*/
+  v12 = v6 + v9; /*0x6bfef1*/
+  *a4 = v12; /*0x6bfefd*/
+  v13 = v10 + v7; /*0x6bff03*/
+  a4[1] = v13; /*0x6bff0f*/
+  v14 = v8 + v11; /*0x6bff16*/
+  a4[2] = v14; /*0x6bff1e*/
+  return a4; /*0x6bff21*/
 }

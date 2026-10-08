@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x4DF9CE",
-    "line": "call    ExtraDataList_Link?",
+    "line": "call    ExtraDataList_ResolveLoadedFormIDs; Verified post-load owner resolution: ExtraOwnership (type 0x27/XOWN) treats its stored dword as a FormID, rebases it with TESForm_ResolveFormID, resolves via TESForm_LookupByFormID, and replaces the slot with TESForm*. Missing owners remove the extra. ExtraGlobal (type 0x28/XGLB) follows the same path with a TESGlobal RTTI cast; missing/wrong-type globals remove their extra. ExtraRank (0x29/XRNK) is an inline signed value and is not FormID-linked.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x4DF9F6",
-    "line": "call    TESObjectREFR__AddToLowPathWorld",
+    "line": "call    TESObjectREFR__AddToLowPathWorld; Verified `LinkDoors` creates reciprocal TeleportData and calls this hook once for a1. The resulting single AStarWorldNode stores both door refs and both spatial forms; its map entries make it reachable from either endpoint space.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x4DFA61",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x4DFA69",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x4DFAD8",
-    "line": "call    sub_420260",
+    "line": "call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x4DFB0C",
-    "line": "call    sub_420340",
+    "line": "call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x4DFB31",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; disabled",
     "mnemonic": "push",
     "size": 1
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x4DFB34",
-    "line": "call    TESForm_SetEnabled?",
+    "line": "call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x4DFB7D",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },

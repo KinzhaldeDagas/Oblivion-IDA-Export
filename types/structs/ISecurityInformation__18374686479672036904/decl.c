@@ -1,1 +1,4 @@
-ISecurityInformation
+struct ISecurityInformation
+{
+const ISecurityInformationVtbl *lpVtbl;
+};

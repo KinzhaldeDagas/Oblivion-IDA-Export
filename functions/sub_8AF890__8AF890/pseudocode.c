@@ -1,11 +1,12 @@
-void __thiscall sub_8AF890(int *this)
+// TES4 authoritative: sorts collector contact hits by entry+0x1C when more than one hit is present.
+void __thiscall hkpCdPointCollector_SortHitsByDistance(int *this)
 {
   int v1; // eax
-  int *v2; // [esp+0h] [ebp-4h]
+  int *flags; // [esp+0h] [ebp-4h]
 
-  v2 = this;
-  v1 = *(this + 5);
-  LOBYTE(v2) = 0;
-  if ( v1 > 1 )
-    sub_8AF760(*(this + 4), 0, v1 - 1, (int)v2);
+  flags = this; /*0x8af890*/
+  v1 = *(this + 5); /*0x8af891*/
+  LOBYTE(flags) = 0; /*0x8af897*/
+  if ( v1 > 1 ) /*0x8af89b*/
+    hkpCdPointEntry30_QuickSortByDistance(*(this + 4), 0, v1 - 1, (int)flags); /*0x8af8a9*/
 }

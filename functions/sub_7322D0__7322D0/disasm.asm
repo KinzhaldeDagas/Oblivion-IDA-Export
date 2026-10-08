@@ -2,7 +2,7 @@
 0x7322D1: mov     esi, ecx
 0x7322D3: mov     eax, [esi+50h]
 0x7322D6: push    eax
-0x7322D7: call    FormHeapFree
+0x7322D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7322DC: xor     eax, eax
 0x7322DE: add     esp, 4
 0x7322E1: mov     [esi+5Ch], eax

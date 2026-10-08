@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x442647",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x442683",
-    "line": "call    sub_7C7E50",
+    "line": "call    ShadowSceneNode_TeardownLightLists; When this TES lifecycle path is not retaining the current world/cell state, tear down native full and active shadow-light lists before rebuild.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4426C1",
-    "line": "call    sub_447BA0",
+    "line": "call    TESObjectCELL_Deactivate; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.",
     "mnemonic": "call",
     "size": 5
   },

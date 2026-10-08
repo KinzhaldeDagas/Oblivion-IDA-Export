@@ -1,1 +1,1 @@
-ICatRegisterVtbl_0
+typedef ICatRegisterVtbl ICatRegisterVtbl_0;

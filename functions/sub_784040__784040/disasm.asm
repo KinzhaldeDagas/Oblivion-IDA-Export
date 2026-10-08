@@ -1,9 +1,9 @@
-0x784040: push    esi
+0x784040: push    esi; Oblivion 1.2.0.416: checked spline-cache iterator equality; rejects null/mismatched owners before comparing node pointers.
 0x784041: mov     esi, ecx
 0x784043: mov     eax, [esi]
 0x784045: test    eax, eax
 0x784047: push    edi
-0x784048: mov     edi, [esp+8+arg_0]
+0x784048: mov     edi, [esp+8+other]
 0x78404C: jz      short loc_784052
 0x78404E: cmp     eax, [edi]
 0x784050: jz      short loc_784057

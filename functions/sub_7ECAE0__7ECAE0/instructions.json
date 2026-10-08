@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7ECAE0",
-    "line": "movzx   eax, [esp+arg_0]",
+    "line": "movzx   eax, [esp+slot]; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.",
     "mnemonic": "movzx",
     "size": 5
   },
   {
     "ea": "0x7ECAE5",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ECAE9",
-    "line": "mov     edx, [esp+arg_8]",
+    "line": "mov     edx, [esp+y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7ECAF0",
-    "line": "add     eax, offset dword_B46498",
+    "line": "add     eax, offset flt_B46498",
     "mnemonic": "add",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7ECAF7",
-    "line": "mov     ecx, [esp+arg_C]",
+    "line": "mov     ecx, [esp+z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7ECAFE",
-    "line": "mov     edx, [esp+arg_10]",
+    "line": "mov     edx, [esp+w]",
     "mnemonic": "mov",
     "size": 4
   },

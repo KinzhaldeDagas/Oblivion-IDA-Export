@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59C5E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Controller decode 2026-07-09] Controls menu action handler. Saves settings when dirty; action 7 toggles bInvertYValues, action 8 swaps joystick movement/look axis selector settings.",
     "mnemonic": "push",
     "size": 2
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x59C699",
-    "line": "call    sub_59B9E0",
+    "line": "call    ControlsMenu_CloseOpenMenu",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x59C72D",
-    "line": "push    offset sub_59B8C0",
+    "line": "push    offset ControlsMenu__ConfirmResetDefaultsCallback",
     "mnemonic": "push",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x59C76A",
-    "line": "call    sub_59B980",
+    "line": "call    ControlsMenu__SelectPreviousAvailableScheme",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x59C771",
-    "line": "call    sub_59B920",
+    "line": "call    ControlsMenu__SelectNextAvailableScheme",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,19 +727,19 @@
   },
   {
     "ea": "0x59C79A",
-    "line": "fstp    [esp+40h+a2]; a3",
+    "line": "fstp    [esp+40h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59C79D",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59C7A2",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x59C7AB",
-    "line": "call    sub_57DE50",
+    "line": "call    sub_57DE50; [Controller decode 2026-07-09] Controls menu action 8: swaps joystick movement/look axis selector settings.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x59C804",
-    "line": "mov     ecx, offset byte_B14F38",
+    "line": "mov     ecx, offset bInvertYValues; [Controller decode 2026-07-09] Controls menu action 7: toggles bInvertYValues.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x59C81B",
-    "line": "call    sub_59B640",
+    "line": "call    ControlsMenu__SetInvertYButtonLabel",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x59C830",
-    "line": "call    sub_59C3F0",
+    "line": "call    ControlsMenu__StartControlRebind",
     "mnemonic": "call",
     "size": 5
   },
@@ -1048,5 +1048,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BFFC0",
+    "line": "lea     ecx, [ebp-28h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFFC3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFFC8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BFFCC",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFFCF",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFFD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BFFD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFFD9",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFFDC",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFFDF",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BFFE1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFFE6",
+    "line": "mov     eax, offset stru_AE9340",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFFEB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

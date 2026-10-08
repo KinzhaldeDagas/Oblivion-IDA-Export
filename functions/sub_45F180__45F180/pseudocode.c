@@ -1,70 +1,72 @@
-void __userpurge sub_45F180(
-        int a1@<ecx>,
-        double a2@<st2>,
-        double a3@<st1>,
-        double a4@<st0>,
-        TESForm *a5,
-        TESChildCELL *a6)
+// Verified: consumes form plus its 8-byte ChangeData entry. Uses form-type-specific masks (0xFFF generally, 0x7FF for REFR), deletes disallowed created forms, calls SaveLoad_NormalizeFormChangeFlags, invokes the form change callback, reloads the winning override through TESSaveLoadGame_ResetObject, runs DoPostFixup, then uses 45C020 to reconnect process/cell state. Called during TESSaveLoadGame_ReconcileExistingChanges (464790). Probable Fallout comparison: BGSSaveLoadGame::RevertCurrentChanges; implementation and flag policy differ.
+void __userpurge TESSaveLoadGame_ResetFormForLoad(
+        TESSaveLoadGame_SerializationView *self@<ecx>,
+        double arg2@<st2>,
+        double arg3@<st1>,
+        double arg4@<st0>,
+        TESForm *form,
+        OblivionChangeData *savedData)
 {
-  unsigned int vtbl; // ebp
-  int v9; // ebx
+  unsigned int changeFlags; // ebp
+  unsigned int v9; // ebx
   signed int v10; // ebp
-  TESObjectCELL *ParentCell; // eax
-  char v12; // [esp+14h] [ebp+4h]
-  TESObjectREFR *v13; // [esp+18h] [ebp+8h]
+  TESObjectCELL *DwordAtOffset40; // eax
+  char forma; // [esp+14h] [ebp+4h]
+  TESChildCELL *v13; // [esp+18h] [ebp+8h]
   TESChildCELL *mainThreadID; // [esp+18h] [ebp+8h]
 
-  vtbl = (unsigned int)a6->vtbl;
-  v9 = (int)a6->vtbl & 0xFFF;
-  if ( OblivionDynamicCast(
-         a5,
+  changeFlags = savedData->changeFlags; /*0x45f186*/
+  v9 = savedData->changeFlags & 0xFFF; /*0x45f1a1*/
+  if ( OblivionDynamicCast( /*0x45f1a7*/
+         form,
          0,
          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
          (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
          0) )
   {
-    v9 = vtbl & 0x7FF;
+    v9 = changeFlags & 0x7FF; /*0x45f1b3*/
   }
-  if ( v9 && TESDataHandler_IsFormIDCreated_(a5->member.refID) )
-    goto LABEL_5;
-  v10 = sub_4535A0(a5, vtbl);
-  *(_DWORD *)(a1 + 0x44) = 0x1FFFF000;
-  ((void (__thiscall *)(TESForm *, int))a5->vtbl->Unk_18)(a5, v10 & 0x1FFFF080);
-  if ( !v9 )
-    goto LABEL_15;
-  TESSaveLoadGame_ResetObject(a1, a2, a3, a4, a5, v9, 0);
-  if ( v10 < 0 )
+  if ( v9 && TESDataHandler_IsFormIDCreated_(form->member.refID) ) /*0x45f1c7*/
+    goto LABEL_5; /*0x45f1ce*/
+  v10 = SaveLoad_NormalizeFormChangeFlags(form, changeFlags); /*0x45f1e8*/
+  self->resetSelector = 0x1FFFF000; /*0x45f1ea*/
+  ((void (__thiscall *)(TESForm *, int))form->vtbl->Unk_18)(form, v10 & 0x1FFFF080); /*0x45f1fe*/
+  if ( !v9 ) /*0x45f202*/
+    goto LABEL_15; /*0x45f202*/
+  TESSaveLoadGame_ResetObject(self, arg2, arg3, arg4, form, v9, 0); /*0x45f20e*/
+  if ( v10 < 0 ) /*0x45f215*/
   {
-    v13 = (TESObjectREFR *)OblivionDynamicCast(
-                             a5,
-                             0,
-                             (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                             (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
-                             0);
-    if ( !TESObjectREFR_GetParentCell(v13)
-      || (ParentCell = TESObjectREFR_GetParentCell(v13), !TESObjectCELL_IsProcessLevel_LowHigh(ParentCell, 0)) )
+    v13 = (TESChildCELL *)OblivionDynamicCast( /*0x45f230*/
+                            form,
+                            0,
+                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                            (struct TypeDescriptor *)&TESObjectREFR `RTTI Type Descriptor',
+                            0);
+    if ( !Shared_GetDwordAtOffset40(v13) /*0x45f24f*/
+      || (DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v13),
+          !TESObjectCELL_IsProcessLevel_LowHigh(DwordAtOffset40, 0)) )
     {
 LABEL_5:
-      sub_45C7A0((char *)a1, a5);
-      return;
+      TESSaveLoadGame_DeleteForm(self, form); /*0x45f1d0*/
+      return; /*0x45f1dc*/
     }
   }
-  v12 = sub_45A500((_BYTE *)a1);
-  if ( a5->member.type == kFormType_Cell )
+  forma = sub_45A500(self); /*0x45f267*/
+  if ( form->member.type == kFormType_Cell ) /*0x45f26b*/
   {
-    mainThreadID = (TESChildCELL *)OSGlobals->mainThreadID;
-    if ( (TESChildCELL *)GetCurrentThreadId() == mainThreadID )
-      *(_DWORD *)(a1 + 0x18) &= ~1u;
+    mainThreadID = (TESChildCELL *)MEMORY[0xB33398]->mainThreadID; /*0x45f275*/
+    if ( (TESChildCELL *)GetCurrentThreadId() == mainThreadID ) /*0x45f283*/
+      self->flags &= ~1u; /*0x45f285*/
     else
-      *(_DWORD *)(a1 + 0x18) &= ~0x40000u;
+      self->flags &= ~0x40000u; /*0x45f28b*/
   }
-  a5->vtbl->DoPostFixup(a5);
-  sub_45A530((_DWORD *)a1, v12);
-  if ( sub_45C020(a1, a2, a3, a4, a5, v9, 0) )
+  form->vtbl->DoPostFixup(form); /*0x45f299*/
+  sub_45A530(self, forma); /*0x45f2a2*/
+  if ( sub_45C020((int)self, form, v9, 0) ) /*0x45f2ad*/
   {
 LABEL_15:
-    *(_DWORD *)(a1 + 0x44) = 0x60000000;
-    ((void (__thiscall *)(TESForm *, int))a5->vtbl->Unk_18)(a5, v10 & 0x60000000);
-    sub_45B7A0(a5, v10);
+    self->resetSelector = 0x60000000; /*0x45f2b6*/
+    ((void (__thiscall *)(TESForm *, int))form->vtbl->Unk_18)(form, v10 & 0x60000000); /*0x45f2cc*/
+    sub_45B7A0(form, v10); /*0x45f2d2*/
   }
 }

@@ -1,18 +1,31 @@
 {
-  "callees_count": 89,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 47,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x4DF1A0",
+      "0x4DF6A0"
+    ]
+  ],
+  "chunks_sha256": "20281fc6177584d28e2f45962dea0d28ac936bf868450d7707bf585c461b7f4d",
+  "comment_regular": "\nGPU static-world lifecycle audit 2026-09-27: CopyFrom ABI supplies destination ECX and source reference, not a cell argument. A mark-only observer cannot infer/dereference a stable target cell from those raw values; unqualified resident ownership invalidation is conservative until reference-to-cell ownership is separately proved.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
   "display_name": "TESObjectREFR_CopyFrom",
   "end_ea": "0x4DF6A0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_CopyFrom",
   "segment": ".text",
   "sha256": "20281fc6177584d28e2f45962dea0d28ac936bf868450d7707bf585c461b7f4d",
   "size": 1280,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DF1A0",
+  "total_chunk_size": 1280,
   "type": "void __thiscall(TESChildCELL *this, TESChildCELL *a2)",
   "xrefs_from_count": 521,
   "xrefs_to_count": 12

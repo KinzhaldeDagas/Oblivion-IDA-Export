@@ -1,1 +1,1 @@
-EnumThemeProc
+typedef BOOL (*EnumThemeProc)(LPVOID, LPCWSTR, LPCWSTR, LPCWSTR, LPVOID, LPVOID);

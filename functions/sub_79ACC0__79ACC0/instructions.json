@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79ACC0",
-    "line": "push    esi",
+    "line": "push    esi; Initializes an empty 16-byte SFrondVertex vector wrapper and, when count is nonzero, buys exact count capacity. Maximum count is 0x04924924 (0xFFFFFFFF/0x38).",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x79ACE6",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x79ACEC",
-    "line": "push    edi; char *",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ACED",
-    "line": "call    sub_799F30",
+    "line": "call    OB_stVector_SFrondVertex_Allocate_010201A0; Oblivion-authoritative allocator for count SFrondVertex elements. Allocates count*0x38 bytes from FormHeap and throws std::bad_alloc on multiplication overflow.",
     "mnemonic": "call",
     "size": 5
   },

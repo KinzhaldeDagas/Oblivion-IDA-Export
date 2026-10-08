@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x732F80",
-    "line": "sub     esp, 34h",
+    "line": "sub     esp, 34h; NiTriStripsData normal rebuild: alternating strip winding, degenerate-triangle skipping, face-direction accumulation, vertex normalization and dirtyFlags |= 2. Confirms Prettier Faces virtual UpdateNormals handles strip dirty state. NBT allocator clears tangent/binormal planes too, so plugin excludes that format.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x732F85",
-    "line": "push    1",
+    "line": "push    1; clearStorage",
     "mnemonic": "push",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x732F89",
-    "line": "call    sub_728280",
+    "line": "call    NiGeometryData_AllocateAndClearNormals; Allocate and zero normal storage before walking triangle strips.",
     "mnemonic": "call",
     "size": 5
   },
@@ -88,12 +88,6 @@
     "line": "jmp     short loc_732FB4",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x732FA9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x732FB0",
@@ -259,7 +253,7 @@
   },
   {
     "ea": "0x733017",
-    "line": "jz      loc_733149",
+    "line": "jz      loc_733149; Ignore degenerate strip triangles, honoring alternating strip winding for valid faces.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -631,7 +625,7 @@
   },
   {
     "ea": "0x7330CF",
-    "line": "call    sub_4BFAA0",
+    "line": "call    NiPoint3_NormalizeApproximateInPlace",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1027,7 @@
   },
   {
     "ea": "0x733191",
-    "line": "call    sub_725890",
+    "line": "call    NiPoint3_NormalizeStridedArray; Normalize every accumulated strip vertex normal with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x733199",
-    "line": "or      word ptr [ebp+2Eh], 2",
+    "line": "or      word ptr [ebp+2Eh], 2; Mark the normal channel dirty (bit 1).",
     "mnemonic": "or",
     "size": 5
   },

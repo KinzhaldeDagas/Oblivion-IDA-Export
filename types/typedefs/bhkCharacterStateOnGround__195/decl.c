@@ -1,1 +1,1 @@
-bhkCharacterStateOnGround
+struct bhkCharacterStateOnGround;

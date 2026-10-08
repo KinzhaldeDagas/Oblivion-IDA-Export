@@ -5,7 +5,7 @@
 0x700467: push    edi
 0x700468: push    ebp
 0x700469: mov     esi, ecx
-0x70046B: call    nullsub_returnvVoid_1arg
+0x70046B: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x700470: mov     eax, [esi+8]
 0x700473: push    eax
 0x700474: mov     ecx, ebp
@@ -15,7 +15,6 @@
 0x700481: mov     [esp+10h+arg_0], 0
 0x700489: jbe     short loc_7004B2
 0x70048B: jmp     short loc_700490
-0x70048D: align 10h
 0x700490: mov     edx, [esi+10h]
 0x700493: movzx   ecx, di
 0x700496: mov     ecx, [edx+ecx*4]

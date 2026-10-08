@@ -1,4 +1,4 @@
-0x765560: push    ebx
+0x765560: push    ebx; MoonSugar build 39: skinned transform upload writes renderer world/bone transform state and D3DTS_WORLD+i for small blend counts. Not a good Moon Sugar detour point; preserve this native path.
 0x765561: push    esi
 0x765562: mov     esi, [esp+8+a4]
 0x765566: push    edi
@@ -16,7 +16,7 @@
 0x765582: lea     ecx, [edi+940h]
 0x765588: push    esi; int
 0x765589: push    ecx; int
-0x76558A: call    sub_761AE0
+0x76558A: call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.
 0x76558F: mov     ebx, [esp+1Ch+a3]
 0x765593: add     esp, 10h
 0x765596: cmp     word ptr [ebx+20h], 4
@@ -26,7 +26,6 @@
 0x7655A2: mov     ebp, [edx+20h]
 0x7655A5: xor     esi, esi
 0x7655A7: jmp     short loc_7655B0
-0x7655A9: align 10h
 0x7655B0: mov     edx, [ebx+4]
 0x7655B3: movzx   edx, word ptr [edx+esi*2]
 0x7655B7: mov     eax, [edi+280h]

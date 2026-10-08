@@ -1,32 +1,32 @@
-void __thiscall sub_440400(_DWORD *this)
+void __thiscall sub_440400(TESObjectCELL **this)
 {
-  _BYTE *v2; // ecx
+  TESObjectCELL *v2; // ecx
   int v3; // edi
   unsigned int v4; // eax
   unsigned int i; // ebx
   unsigned int j; // esi
-  _BYTE *v7; // ecx
+  TESObjectCELL *v7; // ecx
 
-  dword_B33C28 = 0;
-  v2 = (_BYTE *)*(this + 0xD);
-  if ( v2 )
+  unk_B33C28 = 0; /*0x440402*/
+  v2 = *(this + 0xD); /*0x44040c*/
+  if ( v2 ) /*0x440411*/
   {
-    sub_4CCC50(v2);
+    sub_4CCC50(v2); /*0x440413*/
   }
   else
   {
-    v3 = *(this + 2);
-    v4 = *(_DWORD *)(v3 + 0xC);
-    for ( i = 0; i < v4; ++i )
+    v3 = (int)*(this + 2); /*0x482472*/
+    v4 = *(_DWORD *)(v3 + 0xC); /*0x482474*/
+    for ( i = 0; i < v4; ++i ) /*0x48247b*/
     {
-      for ( j = 0; j < v4; ++j )
+      for ( j = 0; j < v4; ++j ) /*0x482484*/
       {
-        v7 = *(_BYTE **)(*(_DWORD *)(v3 + 0x10) + 8 * (j + i * v4));
-        if ( v7 )
-          sub_4CCC50(v7);
-        v4 = *(_DWORD *)(v3 + 0xC);
+        v7 = *(TESObjectCELL **)(*(_DWORD *)(v3 + 0x10) + 8 * (j + i * v4)); /*0x482491*/
+        if ( v7 ) /*0x482495*/
+          sub_4CCC50(v7); /*0x482497*/
+        v4 = *(_DWORD *)(v3 + 0xC); /*0x48249c*/
       }
-      v4 = *(_DWORD *)(v3 + 0xC);
+      v4 = *(_DWORD *)(v3 + 0xC); /*0x4824a6*/
     }
   }
 }

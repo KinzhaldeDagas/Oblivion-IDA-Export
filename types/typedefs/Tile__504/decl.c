@@ -1,1 +1,1 @@
-Tile
+struct Tile;

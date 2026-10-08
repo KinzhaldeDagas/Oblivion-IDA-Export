@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EF3E0",
-    "line": "mov     eax, [esp+a2]",
+    "line": "mov     eax, [esp+a2]; Verified: WorldSpace save-order comparison orders WorldSpace before same-world CELL, REFR/ACHR/ACRE, PGRD, LAND, ROAD and TLOD records; recursively compares owning worlds where relevant and otherwise delegates to TESForm_LessThan. Fallout's newer navmesh index is a separate system and is not evidence about this Oblivion path-grid ordering.",
     "mnemonic": "mov",
     "size": 4
   },

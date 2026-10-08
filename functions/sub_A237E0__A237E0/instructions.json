@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA237E0",
-    "line": "push    offset flt_B12638",
+    "line": "push    offset fCanopyShadowGrassMult_SpeedTree; Verified INI setting cleanup removes fCanopyShadowGrassMult from the setting list and frees a dynamically allocated name if applicable.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA237EF",
-    "line": "mov     eax, off_B1263C; \"fCanopyShadowGrassMult:SpeedTree\"",
+    "line": "mov     eax, fCanopyShadowGrassMult_SpeedTree.name",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA237FE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

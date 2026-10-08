@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 58,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x451210",
+      "0x451296"
+    ]
+  ],
+  "chunks_sha256": "e7dae306d506e2c691850766b9e07b47f01e59ab0c71b36bfc3a0721e0279ca4",
+  "comment_regular": "Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
+  "comment_repeatable": "Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESFile_InitializeFormFromRecord",
   "end_ea": "0x451296",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESFile_InitializeFormFromRecord",
   "segment": ".text",
   "sha256": "e7dae306d506e2c691850766b9e07b47f01e59ab0c71b36bfc3a0721e0279ca4",
   "size": 134,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x451210",
+  "total_chunk_size": 134,
   "type": "void __userpurge(Data *this@<ecx>, TESForm *a2, int a3, int a4)",
   "xrefs_from_count": 49,
   "xrefs_to_count": 58

@@ -1,18 +1,18 @@
-0x53D7A0: sub     esp, 3Ch
+0x53D7A0: sub     esp, 3Ch; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x53D7A3: mov     eax, [esp+3Ch+arg_4]
 0x53D7A7: fld     dword ptr [eax+30h]
 0x53D7AA: push    ebx
 0x53D7AB: push    ebp
-0x53D7AC: mov     ebp, [esp+44h+arg_0]
+0x53D7AC: mov     ebp, [esp+44h+out]
 0x53D7B0: push    esi
 0x53D7B1: push    edi
 0x53D7B2: mov     ebx, ecx
 0x53D7B4: fmul    dword ptr [ebx+30h]
-0x53D7B7: push    eax
+0x53D7B7: push    eax; right
 0x53D7B8: lea     eax, [esp+50h+var_24]
-0x53D7BC: push    eax
+0x53D7BC: push    eax; out
 0x53D7BD: fstp    dword ptr [ebp+30h]
-0x53D7C0: call    NiMAtrix33_Multiply
+0x53D7C0: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x53D7C5: mov     esi, eax
 0x53D7C7: mov     ecx, 9
 0x53D7CC: mov     edi, ebp

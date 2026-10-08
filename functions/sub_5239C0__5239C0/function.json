@@ -1,18 +1,31 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5239C0",
+      "0x523AE8"
+    ]
+  ],
+  "chunks_sha256": "039f437a9c518427fd822c59d13fb8c4f19ca99d85916e2a567e8b5f9efe384b",
+  "comment_regular": "Non-player base vampirism reconstruction: skips formID 7; scans NPC and race spell lists, selects spell-type 4 and VAMP effect code 0x504D4156, sums EffectItem magnitudes, converts to integer, sets base AV 0x45 via virtual+0x134. Supports identifying FaceGen bank selector 0x45 as vampirism, not sex.",
+  "comment_repeatable": "Non-player base vampirism reconstruction: skips formID 7; scans NPC and race spell lists, selects spell-type 4 and VAMP effect code 0x504D4156, sums EffectItem magnitudes, converts to integer, sets base AV 0x45 via virtual+0x134. Supports identifying FaceGen bank selector 0x45 as vampirism, not sex.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5239C0",
+  "display_name": "TESNPC_RecomputeBaseVampirismFromSpells",
   "end_ea": "0x523AE8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5239C0",
+  "name": "TESNPC_RecomputeBaseVampirismFromSpells",
   "segment": ".text",
   "sha256": "039f437a9c518427fd822c59d13fb8c4f19ca99d85916e2a567e8b5f9efe384b",
   "size": 296,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5239C0",
+  "total_chunk_size": 296,
   "type": "void __thiscall(int *this)",
   "xrefs_from_count": 137,
   "xrefs_to_count": 2

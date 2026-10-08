@@ -1,9 +1,9 @@
-0x890740: fld     dword ptr [ecx+324h]
+0x890740: fld     dword ptr [ecx+324h]; Fall timer update: +0x324 always accumulates frame time; +0x320 accumulates only while downward velocity exceeds threshold and flags 0x100/0x200 are clear. Slowfall must suppress +0x320 for softened falls.
 0x890746: fadd    dword ptr [ecx+2D8h]
 0x89074C: fstp    dword ptr [ecx+324h]
 0x890752: fld     dword ptr [ecx+2E8h]
 0x890758: fchs
-0x89075A: fld     dword ptr ds:0B2E778h
+0x89075A: fld     dword ptr ds:0B2E778h; Downward-speed threshold for accumulating fall timer uses flt_B2E778 (0x442F0000 = 700.0), not the registered fJumpFallVelocityMin global at flt_B37470. Treat B2E778 as the observed authoritative timer threshold.
 0x890760: fcompp
 0x890762: fnstsw  ax
 0x890764: test    ah, 41h

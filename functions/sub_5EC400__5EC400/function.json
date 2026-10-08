@@ -1,19 +1,36 @@
 {
-  "callees_count": 65,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 28,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_5EC400",
+  "chunks": [
+    [
+      "0x5EC400",
+      "0x5ECCD0"
+    ],
+    [
+      "0x9C2700",
+      "0x9C272F"
+    ]
+  ],
+  "chunks_sha256": "fb9e5c5f7390a9a3568742653c95d351e7f4aaeee0198d0f57f8a83be0ff6308",
+  "comment_regular": "Verified trap-hit blood visuals use both actor-base channels. Early gate calls Actor_ShouldEmitBloodEffects; each repeated pass projects the receiver actor's blood decal path and, when its virtual +0x40 spray path is non-null/nonempty, allocates a 0x20 BSTempEffectParticle, resolves the receiver's cell NiNode, passes its particle path/direction/contact position/scale to the constructor with cached-clone enabled, then registers the result. This path comes from the struck actor's own base form, not an unrelated trap-source particle setting.",
+  "comment_repeatable": "Verified trap-hit blood visuals use both actor-base channels. Early gate calls Actor_ShouldEmitBloodEffects; each repeated pass projects the receiver actor's blood decal path and, when its virtual +0x40 spray path is non-null/nonempty, allocates a 0x20 BSTempEffectParticle, resolves the receiver's cell NiNode, passes its particle path/direction/contact position/scale to the constructor with cached-clone enabled, then registers the result. This path comes from the struck actor's own base form, not an unrelated trap-source particle setting.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "Actor_SpawnTrapHitBloodDecals",
   "end_ea": "0x5ECCD0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5EC400",
+  "name": "Actor_SpawnTrapHitBloodDecals",
   "segment": ".text",
   "sha256": "671e2dc92ea6c132a99993070cedc4b8671292a75fd9291c2fdaf74faf902a7e",
   "size": 2256,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5EC400",
-  "type": "void __userpurge(TESObjectREFR *this@<ecx>, float@<ebp>, float, float, float, float, int, UInt32, const char *, float, float, float, int)",
-  "xrefs_from_count": 679,
+  "total_chunk_size": 2303,
+  "type": "void __userpurge(TESObjectREFR *this@<ecx>, float@<ebp>, float, float, float, float, int, int, const char *, float, float, float, int)",
+  "xrefs_from_count": 693,
   "xrefs_to_count": 1
 }

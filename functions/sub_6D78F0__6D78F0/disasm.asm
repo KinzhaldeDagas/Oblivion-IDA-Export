@@ -1,4 +1,4 @@
-0x6D78F0: sub     esp, 0Ch
+0x6D78F0: sub     esp, 0Ch; Viewer output reports key count and each ordered record as Time plus Text.
 0x6D78F3: push    ebx
 0x6D78F4: push    ebp
 0x6D78F5: push    esi
@@ -52,7 +52,6 @@
 0x6D7981: mov     [esp+1Ch+arg_0], ebp
 0x6D7985: jbe     loc_6D7ABB
 0x6D798B: jmp     short loc_6D7996
-0x6D798D: align 10h
 0x6D7990: mov     ebp, [esp+1Ch+arg_0]
 0x6D7994: mov     edi, edx
 0x6D7996: mov     edx, [edi+10h]
@@ -138,12 +137,12 @@
 0x6D7A84: mov     edx, [esi+4]
 0x6D7A87: push    eax
 0x6D7A88: mov     [edx+edi*4], ebp
-0x6D7A8B: call    FormHeapFree
+0x6D7A8B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D7A90: mov     ecx, [esp+20h+var_4]
 0x6D7A94: push    ecx
-0x6D7A95: call    FormHeapFree
+0x6D7A95: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D7A9A: push    ebx
-0x6D7A9B: call    FormHeapFree
+0x6D7A9B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6D7AA0: mov     eax, [esp+28h+arg_0]
 0x6D7AA4: mov     edx, [esp+28h+var_8]
 0x6D7AA8: add     eax, 1

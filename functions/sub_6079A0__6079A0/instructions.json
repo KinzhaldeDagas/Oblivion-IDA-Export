@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6079A0",
-    "line": "push    ebp",
+    "line": "push    ebp; Creates or resets projectile collision state 4, records the optional target reference, initializes transform/velocity fields from the character proxy or node transform, and marks collision resolution active.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6079D5",
-    "line": "mov     dword ptr [eax], 4",
+    "line": "mov     dword ptr [eax], 4; Create state 4 fallback/settling record. Optional target reference may be stored at +0x28; this state is also used when active flight decays without a normal embed.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x6079DE",
-    "line": "mov     edx, [ebp+arg_0]",
+    "line": "mov     edx, [ebp+target]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x607A67",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x607A76",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x607A88",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x607A8F",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x607B3A",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },

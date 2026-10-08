@@ -62,7 +62,7 @@
 0x5F3D58: mov     ecx, ebp; this
 0x5F3D5A: call    TESForm_MarkAsModified
 0x5F3D5F: mov     bl, 1
-0x5F3D61: mov     edi, [esp+14h]
+0x5F3D61: mov     edi, [esp+10h+arg_0]
 0x5F3D65: mov     edx, [edi+18h]
 0x5F3D68: mov     eax, [edx+18h]
 0x5F3D6B: add     edi, 18h
@@ -94,7 +94,7 @@
 0x5F3DA9: call    eax
 0x5F3DAB: cmp     eax, 2
 0x5F3DAE: jnz     short Actor_RemoveMagicItemForm___Done
-0x5F3DB0: mov     edi, [esp+24h+var_10]
+0x5F3DB0: mov     edi, [esp+1Ch+var_8]
 0x5F3DB4: push    edi
 0x5F3DB5: mov     ecx, esi
 0x5F3DB7: call    Actor_GetMagicItemCooldown
@@ -110,5 +110,5 @@
 0x5F3DCF: lea     ecx, [esi+9Ch]
 0x5F3DD5: call    BSSimpleList_Remove
 0x5F3DDA: push    edi
-0x5F3DDB: call    FormHeapFree
+0x5F3DDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F3DE0: add     esp, 4

@@ -28,7 +28,6 @@
 0x431086: add     eax, 1
 0x431089: sub     edi, eax
 0x43108B: jmp     short loc_431090
-0x43108D: align 10h
 0x431090: mov     dl, [eax]
 0x431092: mov     [edi+eax], dl
 0x431095: add     eax, 1

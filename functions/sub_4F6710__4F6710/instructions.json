@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F6710",
-    "line": "fldz",
+    "line": "fldz; Shared GetScriptVariable/GetQuestVariable evaluator. For a reference-like form, obtains its ScriptEventList (using the extra reference pointer when present); for QUST, reads its quest ScriptEventList. ArgList identifies the compiled variable ID passed as Param2. Missing IDs log an error and return 0; found Var.data is returned. ScriptEventList::GetVariableValue caches the last event-list/variable-ID pair globally.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x4F673E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F6740",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x4F6749",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F674B",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x4F678B",
-    "line": "push    0; a3",
+    "line": "push    0; sourceScript",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4F678D",
-    "line": "push    ecx; ArgList",
+    "line": "push    ecx; variableID",
     "mnemonic": "push",
     "size": 1
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x4F6790",
-    "line": "call    sub_4FA110",
+    "line": "call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
     "mnemonic": "call",
     "size": 5
   },

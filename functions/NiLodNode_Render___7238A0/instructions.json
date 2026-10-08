@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7238A0",
-    "line": "push    esi",
+    "line": "push    esi; Retail NiLODNode OnVisible entry. Dynamic-LOD flag +0x100 controls whether selected child +0xE0 is recomputed from the current culling camera.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7238A3",
-    "line": "cmp     byte ptr [esi+100h], 0",
+    "line": "cmp     byte ptr [esi+100h], 0; Test NiLODNode dynamic-selection flag +0x100 before recomputing selected child +0xE0 from the current culling camera.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7238C7",
-    "line": "mov     [esi+0E0h], eax",
+    "line": "mov     [esi+0E0h], eax; Store the current camera-derived selected child index at NiLODNode+0xE0.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x723900",
-    "line": "mov     eax, [esi+0E0h]",
+    "line": "mov     eax, [esi+0E0h]; Continue native NiLOD selected-child handling after dynamic selection.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x723926",
-    "line": "call    NiSwitchNode_Render?",
+    "line": "call    NiSwitchNode_OnVisible; Retail NiSwitchNode OnVisible entry.",
     "mnemonic": "call",
     "size": 5
   },

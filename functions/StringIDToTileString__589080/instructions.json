@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x589080",
-    "line": "push    esi",
+    "line": "push    esi; Verified: ID>=10000 uses dynamic-table slot ID%10000 then checks stored ID; lower IDs scan static buckets. Bounds/error behavior for arbitrary invalid IDs remains Unknown. Do not call with an unverified invented custom ID.",
     "mnemonic": "push",
     "size": 1
   },
@@ -168,12 +168,6 @@
     "size": 2
   },
   {
-    "ea": "0x5890CD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5890D0",
     "line": "mov     eax, [edx]",
     "mnemonic": "mov",
@@ -259,7 +253,7 @@
   },
   {
     "ea": "0x5890F0",
-    "line": "cmp     edx, offset byte_B3B274",
+    "line": "cmp     edx, (offset dword_B3B0B4+1C0h)",
     "mnemonic": "cmp",
     "size": 6
   },

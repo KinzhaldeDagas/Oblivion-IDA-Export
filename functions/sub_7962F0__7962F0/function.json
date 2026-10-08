@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x7962F0",
+      "0x79631F"
+    ]
+  ],
+  "chunks_sha256": "423b27b234ab6d16aa52bc3108179df574748cbadc696d61aa17627ed9a9045b",
+  "comment_regular": "\n\nSpeedTreeOBSE v161 native ABI fixture: exact47-byte body runs in isolated x86 process with only785F30 float-vector appends redirected. Confirms destination geometry+88, xyz append order and no currentVertexWriteCounter mutation by this helper; caller increments WORD geometry+22 once per vertex. Real allocator/generation/game execution not covered by this fixture.\n\nOblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.",
+  "comment_repeatable": "Oblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7962F0",
+  "display_name": "OB_CIndexedGeometry_AddVertexNormal_010201A0",
   "end_ea": "0x79631F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7962F0",
+  "name": "OB_CIndexedGeometry_AddVertexNormal_010201A0",
   "segment": ".text",
   "sha256": "423b27b234ab6d16aa52bc3108179df574748cbadc696d61aa17627ed9a9045b",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7962F0",
-  "type": "unsigned int **__thiscall(char *this, int *)",
+  "total_chunk_size": 47,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, const float *normal)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 4
 }

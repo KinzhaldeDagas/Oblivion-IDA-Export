@@ -1,1 +1,1 @@
-mem_size_t
+typedef unsigned __int64 mem_size_t;

@@ -29,4 +29,4 @@
 0x693B34: jnz     short DispelEffect_Apply___EffectLoop_Next
 0x693B36: push    0
 0x693B38: mov     ecx, esi
-0x693B3A: call    ActiveEffect_Base_Remove
+0x693B3A: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.

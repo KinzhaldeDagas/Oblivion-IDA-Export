@@ -6,10 +6,10 @@
 0x5B8D17: push    esi
 0x5B8D18: mov     esi, [esp+108h+arg_0]
 0x5B8D1F: push    edi; a3
-0x5B8D20: push    0
+0x5B8D20: push    0; lastTile
 0x5B8D22: push    offset aItem_template; "item_template"
-0x5B8D27: push    eax
-0x5B8D28: call    Menu_CreateTileFromTemplate
+0x5B8D27: push    eax; parent
+0x5B8D28: call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.
 0x5B8D2D: mov     edi, eax
 0x5B8D2F: test    edi, edi
 0x5B8D31: jz      short loc_5B8D88
@@ -21,7 +21,6 @@
 0x5B8D44: xor     edx, edx
 0x5B8D46: sub     esi, ecx
 0x5B8D48: jmp     short loc_5B8D50
-0x5B8D4A: align 10h
 0x5B8D50: lea     eax, [esp+edx+10Ch+var_104]
 0x5B8D54: mov     cl, [esi+eax]
 0x5B8D57: cmp     cl, 20h ; ' '
@@ -42,9 +41,9 @@
 0x5B8D88: fild    [esp+10Ch+arg_4]
 0x5B8D8F: push    ecx
 0x5B8D90: mov     ecx, edi; this
-0x5B8D92: fstp    [esp+110h+a2]; a3
-0x5B8D95: push    0FA8h; a2
-0x5B8D9A: call    Tile_SetFloat
+0x5B8D92: fstp    [esp+110h+a2]; value
+0x5B8D95: push    0FA8h; propertyCode
+0x5B8D9A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B8D9F: mov     ecx, [esp+10Ch+var_4]
 0x5B8DA6: mov     eax, edi
 0x5B8DA8: pop     edi

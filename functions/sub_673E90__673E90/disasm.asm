@@ -1,11 +1,11 @@
-0x673E90: sub     esp, 14h
+0x673E90: sub     esp, 14h; ActorProcessManager process-level-2 list update used during fast-travel time simulation.
 0x673E93: push    ebx
 0x673E94: push    ebp
 0x673E95: lea     ebx, [ecx+0Ch]
 0x673E98: mov     [esp+1Ch+var_4], ecx
 0x673E9C: push    esi
 0x673E9D: mov     ecx, ebx; this
-0x673E9F: call    sub_7616D0
+0x673E9F: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x673EA4: mov     ebp, eax
 0x673EA6: mov     esi, [ebp+0]
 0x673EA9: push    8; Size
@@ -22,7 +22,7 @@
 0x673ED4: jnz     short loc_673EEC
 0x673ED6: mov     eax, [esp+20h+var_10]
 0x673EDA: push    eax
-0x673EDB: call    FormHeapFree
+0x673EDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x673EE0: add     esp, 4
 0x673EE3: pop     esi
 0x673EE4: pop     ebp
@@ -63,7 +63,7 @@
 0x673F54: test    al, 1
 0x673F56: jnz     loc_674119
 0x673F5C: mov     ecx, esi; this
-0x673F5E: call    Actor__GetProcessLevel
+0x673F5E: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x673F63: cmp     eax, 2
 0x673F66: jnz     loc_674119
 0x673F6C: mov     edx, [esi]
@@ -91,7 +91,7 @@
 0x673FAD: mov     dword ptr ds:0B3BCF4h, 86h ; '†'
 0x673FB7: call    sub_6599B0; Noope the struct asosciated to the this pointer is bigger
 0x673FBC: fstp    [esp+24h+var_C]
-0x673FC0: mov     ecx, offset TimeGlobals
+0x673FC0: mov     ecx, 0B332E0h
 0x673FC5: call    TimeGlobals_GetGameHour
 0x673FCA: fstp    [esp+24h+var_8]
 0x673FCE: fld     dword ptr ds:0A30634h
@@ -170,7 +170,7 @@
 0x6740C6: test    al, al
 0x6740C8: jz      short loc_6740FF
 0x6740CA: mov     ecx, esi; this
-0x6740CC: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6740CC: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6740D1: cmp     eax, 1
 0x6740D4: jnz     short loc_6740FF
 0x6740D6: push    0
@@ -178,16 +178,16 @@
 0x6740D9: mov     ecx, ebx
 0x6740DB: mov     dword ptr ds:0B3BCF4h, 8Ah ; 'Š'
 0x6740E5: call    sub_67B320
-0x6740EA: push    0
-0x6740EC: push    0
-0x6740EE: push    1
-0x6740F0: push    esi
-0x6740F1: mov     ecx, ebx
-0x6740F3: call    sub_67B260
+0x6740EA: push    0; relativeTo
+0x6740EC: push    0; insertRelative
+0x6740EE: push    1; append
+0x6740F0: push    esi; object
+0x6740F1: mov     ecx, ebx; this
+0x6740F3: call    ProcessLevelList_InsertMobileObject; TES4 authoritative helper for inserting a non-player MobileObject into a process-level BSSimpleList. Supports front/back insertion and placement relative to another object; advances the list cursor after insertion.
 0x6740F8: xor     ebp, ebp
 0x6740FA: mov     [esp+24h+var_11], 0
 0x6740FF: mov     ecx, esi; this
-0x674101: call    Actor__GetProcessLevel
+0x674101: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x674106: cmp     eax, 2
 0x674109: jz      short loc_67410D
 0x67410B: xor     ebp, ebp
@@ -214,25 +214,25 @@
 0x674154: cmp     [esp+24h+var_11], 0
 0x674159: jz      short loc_67419F
 0x67415B: mov     ecx, ebx; this
-0x67415D: call    sub_7616D0
+0x67415D: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x674162: test    eax, eax
 0x674164: jz      short loc_67419A
 0x674166: mov     ecx, ebx; this
-0x674168: call    sub_7616D0
+0x674168: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67416D: cmp     dword ptr [eax+4], 0
 0x674171: jnz     short loc_674178
 0x674173: cmp     dword ptr [eax], 0
 0x674176: jz      short loc_67418F
 0x674178: mov     ecx, ebx; this
-0x67417A: call    sub_7616D0
+0x67417A: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67417F: cmp     [eax], esi
 0x674181: jnz     short loc_67418F
 0x674183: mov     ecx, ebx; this
-0x674185: call    sub_7616D0
+0x674185: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67418A: cmp     [eax+4], ebp
 0x67418D: jz      short loc_67419A
 0x67418F: mov     ecx, ebx; this
-0x674191: call    sub_7616D0
+0x674191: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x674196: mov     ebp, eax
 0x674198: jmp     short loc_67419F
 0x67419A: mov     [esp+24h+var_11], 0
@@ -241,7 +241,7 @@
 0x6741A7: mov     edi, [esp+24h+var_4]
 0x6741AB: add     edi, 18h
 0x6741AE: mov     ecx, edi; this
-0x6741B0: call    sub_7616D0
+0x6741B0: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6741B5: mov     ebx, [esp+24h+var_10]
 0x6741B9: test    ebx, ebx
 0x6741BB: mov     esi, ebx
@@ -258,9 +258,9 @@
 0x6741D3: test    esi, esi
 0x6741D5: jnz     short loc_6741C0
 0x6741D7: mov     ecx, ebx
-0x6741D9: call    BSSimpleList_Clear
+0x6741D9: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6741DE: push    ebx
-0x6741DF: call    FormHeapFree
+0x6741DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6741E4: add     esp, 4
 0x6741E7: pop     edi
 0x6741E8: pop     esi

@@ -1,7 +1,8 @@
-double __thiscall sub_6804B0(_WORD *this)
+// Verified: returns fitness from state +0 for the link's searchNodeIndex.
+float __thiscall TravelPath_SearchState_GetFitness(TravelPathSpaceDoorLink *node)
 {
-  if ( *this >= (unsigned __int16)word_B3BF04 )
-    return *(float *)0;
+  if ( node->searchNodeIndex >= LOWORD(qword_B3BB2C[0xF6]) ) /*0x6804bc*/
+    return *(float *)0; /*0x6804cd*/
   else
-    return *((float *)dword_B3BF00 + 4 * (unsigned __int16)*this);
+    return *(float *)(LODWORD(qword_B3BB2C[0xF5]) + 0x10 * node->searchNodeIndex); /*0x6804ca*/
 }

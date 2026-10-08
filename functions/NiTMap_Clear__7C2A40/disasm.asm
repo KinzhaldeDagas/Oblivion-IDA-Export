@@ -1,4 +1,4 @@
-0x7C2A40: push    ebx
+0x7C2A40: push    ebx; MEF v57 IMPLEMENTED 2026-10-08: PERF-11 clear interceptor invalidates supported NumericID map generation before native callbacks/unlinks. Entry replay preserves register/frame semantics. Four bounded TLS indices released on ordinary DLL_THREAD_DETACH without global native mutation or engine callbacks.
 0x7C2A41: push    esi
 0x7C2A42: mov     esi, ecx
 0x7C2A44: xor     ebx, ebx

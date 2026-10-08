@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x530020",
-    "line": "push    ecx",
+    "line": "push    ecx; Returns a normal matching INFO only; rejects the condition-fallback result reported through SelectInfoForSpeaker's out flag. Used for InfoRefusal substitution.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,31 +19,31 @@
   },
   {
     "ea": "0x530029",
-    "line": "push    0; a7",
+    "line": "push    0; conversation",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53002B",
-    "line": "push    0; a6",
+    "line": "push    0; previousTopic",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53002D",
-    "line": "push    0; a5",
+    "line": "push    0; useConversationRules",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53002F",
-    "line": "push    eax; a4",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x530030",
-    "line": "push    edx; a3",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x530035",
-    "line": "push    eax; a2",
+    "line": "push    eax; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x53003B",
-    "line": "call    sub_52F010",
+    "line": "call    TESTopic__SelectInfoForSpeaker; Authoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.",
     "mnemonic": "call",
     "size": 5
   },

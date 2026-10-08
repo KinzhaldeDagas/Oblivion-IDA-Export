@@ -12,7 +12,7 @@
 0x556FF9: retn    4
 0x556FFC: cmp     eax, 0FFFFFFFFh
 0x556FFF: jbe     short loc_557006
-0x557001: call    sub_790B90
+0x557001: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x557006: push    edi
 0x557007: lea     edi, [eax+eax*2]
 0x55700A: add     edi, edi

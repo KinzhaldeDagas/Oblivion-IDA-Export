@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7F1B50",
+      "0x7F1B62"
+    ]
+  ],
+  "chunks_sha256": "1a863ba0f4123f89e2cdbdd29d3d8b2ac76dafa1d9ba4ec73f79ec051964fb24",
+  "comment_regular": "Leaf-property virtual +0xA4. Forwards to STLSPData copy helper through property +0xA8.\n\n[2026-10-02 Fallout comparative pass]\nVerified homolog of Fallout SpeedTreeLeafShaderProperty::SetLeafMaps 0x828CDE30. Vtable +0xA4 (entry 0xA92A70); forwards the two stack arguments to 0x7F18A0 with ECX=property+0xA8 payload, or RET 8 if payload is null. No EDI argument.\n\nthis",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F1B50",
+  "display_name": "OB_SpeedTreeLeafShaderProperty_CopyLeafConstants_010201A0",
   "end_ea": "0x7F1B62",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F1B50",
+  "name": "OB_SpeedTreeLeafShaderProperty_CopyLeafConstants_010201A0",
   "segment": ".text",
   "sha256": "1a863ba0f4123f89e2cdbdd29d3d8b2ac76dafa1d9ba4ec73f79ec051964fb24",
   "size": 18,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F1B50",
-  "type": "void __userpurge(_DWORD *this@<ecx>, int@<edi>, void *, unsigned int)",
+  "total_chunk_size": 18,
+  "type": "void __thiscall(OB_SpeedTreeLeafShaderProperty_010201A0 *this, const float *leafMaps, unsigned int floatCount)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 1
 }

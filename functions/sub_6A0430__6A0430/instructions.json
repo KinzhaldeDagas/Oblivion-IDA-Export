@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A0430",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+source]; Verified (Oblivion): virtual receives owner ActiveEffect* and target TESObjectREFR*. Writes the base hit-effect payload, elapsedVisualSeconds_38 as a float, and for version >=0x37 the weapon-attachment byte, effectCode_2C, and boundObject_30 FormID.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,43 +19,43 @@
   },
   {
     "ea": "0x6A0437",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+contextA]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A043B",
-    "line": "push    eax",
+    "line": "push    eax; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A043C",
-    "line": "push    ecx",
+    "line": "push    ecx; ownerActiveEffect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A043D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A043F",
-    "line": "call    sub_69DBB0",
+    "line": "call    MagicHitEffect_SaveExtraData; Verified (Oblivion): base SaveExtraData receives owner ActiveEffect* and target TESObjectREFR*, writes base elapsedSeconds + finished flag, and writes durationSeconds from version 0x72.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A0444",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A044A",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x6A044F",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6A0455",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6A0461",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6A0466",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6A046C",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x6A0471",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A0472",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6A0482",
-    "line": "mov     [esp+4+arg_4], 0",
+    "line": "mov     [esp+4+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -181,37 +181,37 @@
   },
   {
     "ea": "0x6A048F",
-    "line": "mov     [esp+4+arg_4], edx",
+    "line": "mov     [esp+4+source], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A0493",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6A0499",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A049B",
-    "line": "lea     eax, [esp+8+arg_4]",
+    "line": "lea     eax, [esp+8+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A049F",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A04A0",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },

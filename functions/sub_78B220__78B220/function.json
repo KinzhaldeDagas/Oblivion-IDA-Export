@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
-  "display_name": "sub_78B220",
+  "chunks": [
+    [
+      "0x78B220",
+      "0x78B311"
+    ],
+    [
+      "0x9CB560",
+      "0x9CB58B"
+    ]
+  ],
+  "chunks_sha256": "6a73392a432a801a9e81f51cf451d56f0f2b7fbd2a59a413e0bfce6253c8c1eb",
+  "comment_regular": "CSpeedTreeRT::GetSeed. While transient data is intact, returns CTreeEngine+0x48; otherwise reports the same misleading SetTreeSize/DeleteTransientData error present in local 4.1 source.",
+  "comment_repeatable": "CSpeedTreeRT::GetSeed. While transient data is intact, returns CTreeEngine+0x48; otherwise reports the same misleading SetTreeSize/DeleteTransientData error present in local 4.1 source.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "CSpeedTreeRT__GetSeed",
   "end_ea": "0x78B311",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_78B220",
+  "name": "CSpeedTreeRT__GetSeed",
   "segment": ".text",
   "sha256": "42717d888f9fa01258804821ca53c5997fd8861ab07bf1bf1811336c71016766",
   "size": 241,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78B220",
-  "type": "int __usercall@<eax>(int *this@<ecx>, int@<edi>)",
-  "xrefs_from_count": 99,
+  "total_chunk_size": 284,
+  "type": "unsigned int __thiscall(const OB_CSpeedTreeRT_010201A0 *this)",
+  "xrefs_from_count": 112,
   "xrefs_to_count": 1
 }

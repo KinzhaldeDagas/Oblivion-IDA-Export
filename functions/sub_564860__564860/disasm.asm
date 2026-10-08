@@ -1,4 +1,4 @@
-0x564860: push    0FFFFFFFFh
+0x564860: push    0FFFFFFFFh; BSTreeNode leaf LOD child setter: replaces child under Leaves and updates leaf array. No frond-equivalent setter was found in this node surface.
 0x564862: push    offset SEH_5ACE20
 0x564867: mov     eax, large fs:0
 0x56486D: push    eax
@@ -17,17 +17,17 @@
 0x56488B: mov     [esp+28h+var_14], ebx
 0x56488F: mov     [esp+28h+var_10], bx
 0x564894: mov     [esp+28h+var_E], bx
-0x564899: mov     ecx, [edi+0DCh]
+0x564899: mov     ecx, [edi+0DCh]; this
 0x56489F: cmp     ecx, ebx
-0x5648A1: mov     [esp+28h+var_4], ebx
+0x5648A1: mov     [esp+28h+slot], ebx
 0x5648A5: jz      loc_564961
 0x5648AB: cmp     [edi+0E4h], ebx
 0x5648B1: jz      loc_564961
 0x5648B7: mov     ebp, [esp+28h+arg_4]
 0x5648BB: cmp     ebp, ebx
 0x5648BD: jz      loc_564961
-0x5648C3: call    sub_560200
-0x5648C8: mov     si, [esp+28h+arg_0]
+0x5648C3: call    BSTreeModel_GetNumLeafLODLevels
+0x5648C8: mov     si, word ptr [esp+28h+arg_0]
 0x5648CD: movzx   eax, ax
 0x5648D0: cmp     si, ax
 0x5648D3: jnb     loc_564961
@@ -39,7 +39,7 @@
 0x5648E7: test    ebx, ebx
 0x5648E9: jnz     short loc_5648FE
 0x5648EB: lea     ecx, [esp+28h+var_14]; void *
-0x5648EF: mov     [esp+28h+var_4], 0FFFFFFFFh
+0x5648EF: mov     [esp+28h+slot], 0FFFFFFFFh
 0x5648F7: call    BSStringT_Clear
 0x5648FC: jmp     short loc_56496A
 0x5648FE: mov     eax, [edi+0E4h]
@@ -57,8 +57,8 @@
 0x564921: push    eax
 0x564922: mov     ecx, ebx
 0x564924: call    edx
-0x564926: lea     ecx, [esp+30h+var_4]; this
-0x56492A: call    sub_7016A0
+0x564926: lea     ecx, [esp+30h+slot]; slot
+0x56492A: call    NiPointerSlot_Release
 0x56492F: mov     eax, [ebx]
 0x564931: mov     edx, [eax+84h]
 0x564937: push    1
@@ -66,3 +66,12 @@
 0x56493A: mov     ecx, ebx
 0x56493C: call    edx
 0x56493E: mov     ecx, [edi+0E4h]
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

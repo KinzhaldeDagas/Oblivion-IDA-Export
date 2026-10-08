@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x777F70",
-    "line": "push    esi",
+    "line": "push    esi; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.",
     "mnemonic": "push",
     "size": 1
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x777FCC",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,19 +217,19 @@
   },
   {
     "ea": "0x777FD0",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777FD1",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777FD2",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,25 +247,25 @@
   },
   {
     "ea": "0x777FE1",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777FE2",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777FE3",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777FE4",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x77801C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x778025",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,25 +475,25 @@
   },
   {
     "ea": "0x778047",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778048",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778049",
-    "line": "push    ebp; Dst",
+    "line": "push    ebp; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77804A",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,25 +523,25 @@
   },
   {
     "ea": "0x778059",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77805A",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77805B",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77805C",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

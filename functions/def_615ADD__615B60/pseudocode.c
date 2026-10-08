@@ -1,5 +1,5 @@
 // positive sp value has been detected, the output may be wrong!
-float *__usercall def_615ADD@<eax>(
+float *__usercall Combat_PredictAimPoint_IterateAndSolve@<eax>(
         int a1@<ebx>,
         int a2@<ebp>,
         int a3,
@@ -56,129 +56,129 @@ float *__usercall def_615ADD@<eax>(
   float v52; // [esp+4Ch] [ebp+3Ch]
   float v53; // [esp+50h] [ebp+40h]
 
-  v51 = *((float *)&a11 + 1);
-  v31 = 0;
-  v52 = a12;
-  v53 = a13;
-  if ( 0.0 == *(float *)(a2 + 0x20) )
+  v51 = *((float *)&a11 + 1); /*0x615b71*/
+  v31 = 0; /*0x615b75*/
+  v52 = a12; /*0x615b77*/
+  v53 = a13; /*0x615b7d*/
+  if ( 0.0 == *(float *)(a2 + 0x20) )           // Zero-gravity projectile branch: iteratively recompute distance, flightTime=distance/projectileSpeed, then targetPos += targetVelocity*flightTime. /*0x615b84*/
   {
-    if ( a1 > 0 )
+    if ( a1 > 0 ) /*0x615b8c*/
     {
-      do
+      do /*0x615c7e*/
       {
-        v47 = v51 - *(float *)(a2 + 0xC);
-        v49 = v52 - *(float *)(a2 + 0x10);
-        v50 = v53 - *(float *)(a2 + 0x14);
-        retaddr = v50 * v50 + v47 * v47 + v49 * v49;
-        retaddr = sqrt(retaddr);
-        v32 = retaddr;
-        if ( retaddr < 1.0 )
-          break;
-        if ( flt_A6E730 < v32 )
-          break;
-        ++v31;
-        retaddr = v32 / *(float *)(a2 + 0x1C);
-        v44 = *(float *)&a17 * retaddr;
-        v45 = *(float *)&a18 * retaddr;
-        v46 = retaddr * *(float *)&a19;
-        a23 = v44 + *((float *)&a11 + 1);
-        v51 = a23;
-        a24 = a12 + v45;
-        v52 = a24;
-        a25 = v46 + a13;
-        v53 = a25;
+        v47 = v51 - *(float *)(a2 + 0xC); /*0x615b99*/
+        v49 = v52 - *(float *)(a2 + 0x10); /*0x615ba4*/
+        v50 = v53 - *(float *)(a2 + 0x14); /*0x615baf*/
+        retaddr = v50 * v50 + v47 * v47 + v49 * v49; /*0x615bd1*/
+        retaddr = sqrt(retaddr); /*0x615bde*/
+        v32 = retaddr; /*0x615bf4*/
+        if ( retaddr < 1.0 ) /*0x615bf9*/
+          break; /*0x615bf9*/
+        if ( flt_A6E730 < v32 ) /*0x615c0c*/
+          break; /*0x615c0c*/
+        ++v31; /*0x615c15*/
+        retaddr = v32 / *(float *)(a2 + 0x1C);  // Zero-gravity iteration flight time = current predicted 3D distance / projectile speed. /*0x615c1a*/
+        v44 = *(float *)&a17 * retaddr; /*0x615c2c*/
+        v45 = *(float *)&a18 * retaddr; /*0x615c36*/
+        v46 = retaddr * *(float *)&a19; /*0x615c3e*/
+        a23 = v44 + *((float *)&a11 + 1); /*0x615c4a*/
+        v51 = a23; /*0x615c56*/
+        a24 = a12 + v45; /*0x615c5e*/
+        v52 = a24; /*0x615c6a*/
+        a25 = v46 + a13; /*0x615c72*/
+        v53 = a25; /*0x615c7a*/
       }
-      while ( v31 < a1 );
+      while ( v31 < a1 ); /*0x615c7e*/
     }
   }
-  else if ( a1 > 0 )
+  else if ( a1 > 0 )                            // Nonzero gravity enters the bow-only ballistic lead loop; zero-gravity spells/enchantments use the straight 3D distance branch. /*0x615c8b*/
   {
-    do
+    do /*0x615de7*/
     {
-      a23 = v51 - *(float *)(a2 + 0xC);
-      a24 = v52 - *(float *)(a2 + 0x10);
-      a25 = v53 - *(float *)(a2 + 0x14);
-      retaddr = a24 * a24 + a23 * a23 + 0.0 * 0.0;
-      retaddr = sqrt(retaddr);
-      v33 = flt_A6E730;
-      if ( a25 > v33 )
-        break;
-      if ( retaddr < 1.0 )
-        break;
-      if ( retaddr > v33 )
-        break;
-      v40 = sub_6132D0(retaddr, a25, *(float *)(a2 + 0x1C), *(float *)(a2 + 0x20));
-      v48 = retaddr;
-      retaddr = cos(v40);
-      ++v31;
-      retaddr = v48 / (retaddr * *(float *)(a2 + 0x1C));
-      a26 = *(float *)&a17 * retaddr;
-      a27 = *(float *)&a18 * retaddr;
-      a28 = retaddr * *(float *)&a19;
-      a29 = a26 + *((float *)&a11 + 1);
-      v51 = a29;
-      a30 = a27 + a12;
-      v52 = a30;
-      a31 = a28 + a13;
-      v53 = a31;
+      a23 = v51 - *(float *)(a2 + 0xC); /*0x615ca0*/
+      a24 = v52 - *(float *)(a2 + 0x10); /*0x615cab*/
+      a25 = v53 - *(float *)(a2 + 0x14); /*0x615cb6*/
+      retaddr = a24 * a24 + a23 * a23 + 0.0 * 0.0; /*0x615cce*/
+      retaddr = sqrt(retaddr); /*0x615cdb*/
+      v33 = flt_A6E730; /*0x615ce7*/
+      if ( a25 > v33 ) /*0x615cf8*/
+        break; /*0x615cf8*/
+      if ( retaddr < 1.0 ) /*0x615d0d*/
+        break; /*0x615d0d*/
+      if ( retaddr > v33 ) /*0x615d1c*/
+        break; /*0x615d1c*/
+      v40 = Combat_CalculateBallisticPitch(retaddr, a25, *(float *)(a2 + 0x1C), *(float *)(a2 + 0x20));// Gravity branch solves ballistic pitch, then uses horizontalDistance/(cos(pitch)*projectileSpeed) as target lead time. /*0x615d3f*/
+      v48 = retaddr; /*0x615d4a*/
+      retaddr = cos(v40); /*0x615d57*/
+      ++v31; /*0x615d5f*/
+      retaddr = v48 / (retaddr * *(float *)(a2 + 0x1C)); /*0x615d6b*/
+      a26 = *(float *)&a17 * retaddr; /*0x615d7d*/
+      a27 = *(float *)&a18 * retaddr; /*0x615d87*/
+      a28 = retaddr * *(float *)&a19; /*0x615d8f*/
+      a29 = a26 + *((float *)&a11 + 1); /*0x615d9e*/
+      v51 = a29; /*0x615db0*/
+      a30 = a27 + a12; /*0x615db8*/
+      v52 = a30; /*0x615dcd*/
+      a31 = a28 + a13; /*0x615dd5*/
+      v53 = a31; /*0x615de3*/
     }
-    while ( v31 < a1 );
+    while ( v31 < a1 ); /*0x615de7*/
   }
-  *(float *)&a20 = v51 - *(float *)(a2 + 0xC);
-  a21 = v52 - *(float *)(a2 + 0x10);
-  a22 = v53 - *(float *)(a2 + 0x14);
-  if ( 0.0 == *(float *)(a2 + 0x20) )
+  *(float *)&a20 = v51 - *(float *)(a2 + 0xC); /*0x615dfc*/
+  a21 = v52 - *(float *)(a2 + 0x10); /*0x615e07*/
+  a22 = v53 - *(float *)(a2 + 0x14); /*0x615e12*/
+  if ( 0.0 == *(float *)(a2 + 0x20) ) /*0x615e20*/
   {
-    retaddr = a21 * a21 + *(float *)&a20 * *(float *)&a20 + a22 * a22;
-    retaddr = sqrt(retaddr);
-    retaddr = a22 / retaddr;
-    v34 = retaddr;
-    if ( retaddr <= dbl_A3D360 )
+    retaddr = a21 * a21 + *(float *)&a20 * *(float *)&a20 + a22 * a22; /*0x615e4a*/
+    retaddr = sqrt(retaddr); /*0x615e57*/
+    retaddr = a22 / retaddr; /*0x615e63*/
+    v34 = retaddr; /*0x615e67*/
+    if ( retaddr <= dbl_A3D360 ) /*0x615e76*/
     {
-      v35 = -flt_B3F99C;
+      v35 = -unk_B3F99C; /*0x615ea4*/
     }
-    else if ( v34 >= 1.0 )
+    else if ( v34 >= 1.0 ) /*0x615e81*/
     {
-      v35 = flt_B3F99C;
+      v35 = unk_B3F99C; /*0x615e94*/
     }
     else
     {
-      retaddr = asin(v34);
-      v35 = retaddr;
+      retaddr = asin(v34); /*0x615e88*/
+      v35 = retaddr; /*0x615e8c*/
     }
-    v40 = v35;
+    v40 = v35; /*0x615ea6*/
   }
-  sub_43F350((float *)&a20);
-  retaddr = -v40;
-  v36 = dbl_A3D5B0;
-  if ( retaddr > dbl_A491E0 )
+  Vector3_NormalizeInPlace((float *)&a20); /*0x615eae*/
+  retaddr = -v40; /*0x615ebb*/
+  v36 = dbl_A3D5B0; /*0x615ecb*/
+  if ( retaddr > dbl_A491E0 ) /*0x615ed4*/
   {
-    if ( retaddr > dbl_A3D5B8 )
-      retaddr = retaddr - v36;
+    if ( retaddr > dbl_A3D5B8 ) /*0x615eeb*/
+      retaddr = retaddr - v36; /*0x615eef*/
   }
   else
   {
-    retaddr = retaddr + v36;
+    retaddr = retaddr + v36; /*0x615ed8*/
   }
-  v41 = sub_683CB0((float *)&a20);
-  v37 = v41;
-  if ( v41 <= dbl_A491E0 )
+  v41 = Vector3_CalculateHeadingRadiansXY((float *)&a20); /*0x615f03*/
+  v37 = v41; /*0x615f07*/
+  if ( v41 <= dbl_A491E0 ) /*0x615f19*/
   {
-    v38 = v37 + dbl_A3D5B0;
+    v38 = v37 + dbl_A3D5B0; /*0x615f1b*/
 LABEL_27:
-    v42 = v38;
-    v37 = v42;
-    goto LABEL_28;
+    v42 = v38; /*0x615f36*/
+    v37 = v42; /*0x615f3a*/
+    goto LABEL_28; /*0x615f3a*/
   }
-  if ( v37 > dbl_A3D5B8 )
+  if ( v37 > dbl_A3D5B8 ) /*0x615f2e*/
   {
-    v38 = v37 - dbl_A3D5B0;
-    goto LABEL_27;
+    v38 = v37 - dbl_A3D5B0; /*0x615f30*/
+    goto LABEL_27; /*0x615f30*/
   }
 LABEL_28:
-  result = *(float **)(a2 + 8);
-  *result = retaddr;
-  result[1] = 0.0;
-  result[2] = v37;
-  return result;
+  result = *(float **)(a2 + 8); /*0x615f3e*/
+  *result = retaddr; /*0x615f45*/
+  result[1] = 0.0; /*0x615f4b*/
+  result[2] = v37; /*0x615f4f*/
+  return result; /*0x615f55*/
 }

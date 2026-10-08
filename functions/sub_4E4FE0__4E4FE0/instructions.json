@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4E4FE0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified PGRI row creation writes local point index in low u16 and remote point XYZ at +4; bytes +2..+3 are left unwritten here and ignored by inspected readers, so their intended meaning remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4FE1",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+point]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4E4FE6",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+neighborPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x4E4FEB",
-    "line": "push    esi",
+    "line": "push    esi; neighborPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4FEC",
-    "line": "push    ebx",
+    "line": "push    ebx; point",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4E4FEF",
-    "line": "call    sub_4E4F70",
+    "line": "call    TESPathGrid_HasPGRICrossCellLinkRequest; Verified duplicate check for a deferred cross-cell PGRI request: compares the point-array entry selected by the record's low u16 index and matches the stored neighbor NiPoint3 at +4 using fConstant_2 tolerance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x4E4FF8",
-    "line": "push    ebx",
+    "line": "push    ebx; point",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E4FF9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E4FFB",
-    "line": "call    sub_4E4E90",
+    "line": "call    TESPathGrid_GetPointIndex; Verified scans the TESPathGrid point array for pointer identity and returns its u16 array index; returns 0xFFFFFFFF if no point array or no matching point.",
     "mnemonic": "call",
     "size": 5
   },

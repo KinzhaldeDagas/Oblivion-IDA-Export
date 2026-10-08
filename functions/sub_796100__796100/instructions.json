@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x796100",
-    "line": "push    esi",
+    "line": "push    esi; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::AddStrip receives ownership of a caller FormHeap-allocated unsigned-short array (for example allocation at 0x78F477 before call 0x78F48C), appends its unsigned-short length and pointer to per-LOD nested vectors, then adds the 32-bit result of zero_extend(stripLength)-2 to the per-LOD triangle total. There is no clamp in this function; callers are expected to provide a valid strip length (at least two). RT4.1's later contiguous vector<int> representation is contrast only and was not projected onto Oblivion.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x796109",
-    "line": "movzx   edi, [esp+8+arg_0]",
+    "line": "movzx   edi, [esp+8+lodLevel]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x79612A",
-    "line": "add     ecx, [esi+3Ch]; int",
+    "line": "add     ecx, [esi+3Ch]; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x79612D",
-    "line": "push    0; int",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x796132",
-    "line": "push    eax; int",
+    "line": "push    eax; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796133",
-    "line": "call    sub_795990",
+    "line": "call    OB_stVectorUShort_ResizeFill_010201A0; OBLIVION AUTHORITY (2026-08-30): Resizes vector<unsigned short> with 2-byte arithmetic; grows through insert-fill and shrinks through checked erase.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x796178",
-    "line": "mov     dx, [esp+10h+arg_8]",
+    "line": "mov     dx, [esp+10h+stripLength]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x7961A2",
-    "line": "add     ecx, [esi+4Ch]; int",
+    "line": "add     ecx, [esi+4Ch]; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x7961A5",
-    "line": "push    0; char",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x7961AA",
-    "line": "push    eax; int",
+    "line": "push    eax; newSize",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7961AB",
-    "line": "call    sub_7958D0",
+    "line": "call    OB_stVector4_ResizeFill_010201A0; Oblivion binary evidence: compiler-folded four-byte vector resize(newSize,value). Growth delegates to OB_stVector4_InsertFill; shrink erases the tail. Sole observed caller is CIndexedGeometry::AddStrip, confirming that the implementation is generic rather than leaf-specific.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x7961EF",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+strip]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x796213",
-    "line": "movzx   ecx, [esp+8+arg_8]",
+    "line": "movzx   ecx, [esp+8+stripLength]",
     "mnemonic": "movzx",
     "size": 5
   },

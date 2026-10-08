@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x69A7BC",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x69A80D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x69A825",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x69A82D",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x69A878",
-    "line": "movaps  [esp+0B4h+var_30], xmm0",
+    "line": "movaps  xmmword ptr [esp+0B4h+var_30], xmm0",
     "mnemonic": "movaps",
     "size": 8
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x69A8A7",
-    "line": "fld     dword ptr [ebp+arg_0]",
+    "line": "fld     dword ptr [ebp+pointXYZ]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x69A8B4",
-    "line": "fld     dword ptr [ebp+arg_0+4]",
+    "line": "fld     dword ptr [ebp+pointXYZ+4]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x69A928",
-    "line": "fstp    dword ptr [esp+0B4h+var_30]",
+    "line": "fstp    [esp+0B4h+var_30]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x69A935",
-    "line": "fstp    dword ptr [esp+0B4h+var_30+4]",
+    "line": "fstp    [esp+0B4h+var_30+4]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x69A940",
-    "line": "fstp    dword ptr [esp+0B4h+var_30+8]",
+    "line": "fstp    [esp+0B4h+var_30+8]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x69A975",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x69A9C5",
-    "line": "mov     edx, dword ptr [ebp+arg_0]",
+    "line": "mov     edx, dword ptr [ebp+pointXYZ]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x69A9D4",
-    "line": "mov     edx, dword ptr [ebp+arg_0+4]",
+    "line": "mov     edx, dword ptr [ebp+pointXYZ+4]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1447,25 +1447,25 @@
   },
   {
     "ea": "0x69AA7F",
-    "line": "lea     eax, [ebp+arg_0]",
+    "line": "lea     eax, [ebp+pointXYZ]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x69AA82",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69AA83",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69AA85",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x69AAD4",
-    "line": "mov     edx, dword ptr [ebp+arg_0+4]",
+    "line": "mov     edx, dword ptr [ebp+pointXYZ+4]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x69AAD8",
-    "line": "mov     ecx, dword ptr [ebp+arg_0]",
+    "line": "mov     ecx, dword ptr [ebp+pointXYZ]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1807,25 +1807,25 @@
   },
   {
     "ea": "0x69AB34",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x69AB3A",
-    "line": "lea     eax, [ebp+arg_0]",
+    "line": "lea     eax, [ebp+pointXYZ]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x69AB3D",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69AB3E",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2023,7 +2023,7 @@
   },
   {
     "ea": "0x69ABA2",
-    "line": "mov     edx, dword ptr [ebp+arg_0]",
+    "line": "mov     edx, dword ptr [ebp+pointXYZ]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2035,7 +2035,7 @@
   },
   {
     "ea": "0x69ABA6",
-    "line": "mov     ecx, dword ptr [ebp+arg_0+4]",
+    "line": "mov     ecx, dword ptr [ebp+pointXYZ+4]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2247,6 +2247,96 @@
     "ea": "0x69AC21",
     "line": "call    sub_8A75D0",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5C00",
+    "line": "lea     ecx, [ebp+var_60]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5C03",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5C08",
+    "line": "lea     ecx, [ebp+var_74]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5C0B",
+    "line": "jmp     ??1bhkAabbPhantom@@UAE@XZ; bhkAabbPhantom::~bhkAabbPhantom(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5C10",
+    "line": "mov     edx, dword ptr [esp-4+pointXYZ+4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5C14",
+    "line": "lea     eax, [edx-0A4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5C1A",
+    "line": "mov     ecx, [edx-0A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5C20",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5C22",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5C27",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5C2A",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5C2D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5C2F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5C34",
+    "line": "mov     eax, offset stru_AEE2E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5C39",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

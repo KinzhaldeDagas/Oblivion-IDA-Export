@@ -1,4 +1,4 @@
-0x717A40: sub     esp, 7Ch
+0x717A40: sub     esp, 7Ch; Culling decode: camera transform column 0 builds near/far, column 1 builds top/bottom, column 2 builds left/right planes; use column 2 XY as view-horizontal cell axis.
 0x717A43: mov     eax, [esp+7Ch+a3]
 0x717A4A: fld     dword ptr [eax]
 0x717A4C: push    esi

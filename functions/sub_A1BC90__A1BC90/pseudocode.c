@@ -1,14 +1,15 @@
-void __cdecl sub_A1BC90()
+// Verified module cleanup wrapper decrements/releases g_PathGridDebugRenderRoot if present.
+void __cdecl TESPathGrid_ReleaseDebugRenderRoot()
 {
-  void (__thiscall ***v0)(_DWORD, int); // esi
+  Ni2DBuffer *v0; // esi
 
-  v0 = (void (__thiscall ***)(_DWORD, int))dword_B35F88;
-  if ( dword_B35F88 )
+  v0 = g_PathGridDebugRenderRoot; /*0xa1bc91*/
+  if ( g_PathGridDebugRenderRoot ) /*0xa1bc99*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(dword_B35F88 + 4)) )
+    if ( !InterlockedDecrement((volatile LONG *)&g_PathGridDebugRenderRoot->members) ) /*0xa1bc9f*/
     {
-      if ( v0 )
-        (**v0)(v0, 1);
+      if ( v0 ) /*0xa1bcab*/
+        (*(void (__thiscall **)(Ni2DBuffer *, int))v0->__vftable)(v0, 1); /*0xa1bcb5*/
     }
   }
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_515920",
+  "chunks": [
+    [
+      "0x515920",
+      "0x515AE1"
+    ],
+    [
+      "0x9B5BD0",
+      "0x9B5BF3"
+    ]
+  ],
+  "chunks_sha256": "40a750021844f21818fa5277a5cd2955ab279bb7d341d9f767668a36c2dafd82",
+  "comment_regular": "Verified via SexChange string 0xA50D84 -> CommandInfo 0xB0BC68 -> execute pointer +0x18. Toggles actor base sex bit at NPC+0x28; component virtual +0x50 receives change mask 0x10. With 3D, detaches both face nodes through parent virtual +0x88 and releases temporary refs. Always clears NPC FaceGen nodes, then process virtual +0x5C(), +0x31C(1), +0x318(actor). Double invocation restores sex bit while repeating invalidation. Not proof of load defect or of immediate texture repair; dynamic process targets remain to be traced.",
+  "comment_repeatable": "Verified via SexChange string 0xA50D84 -> CommandInfo 0xB0BC68 -> execute pointer +0x18. Toggles actor base sex bit at NPC+0x28; component virtual +0x50 receives change mask 0x10. With 3D, detaches both face nodes through parent virtual +0x88 and releases temporary refs. Always clears NPC FaceGen nodes, then process virtual +0x5C(), +0x31C(1), +0x318(actor). Double invocation restores sex bit while repeating invalidation. Not proof of load defect or of immediate texture repair; dynamic process targets remain to be traced.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ConsoleCommand_SexChange_Execute",
   "end_ea": "0x515AE1",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_515920",
+  "name": "ConsoleCommand_SexChange_Execute",
   "segment": ".text",
   "sha256": "4f6235ba288414ea7ea1ba1f015c7e794fd48e5196cc39dcc23b1f8b727baf48",
   "size": 449,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x515920",
+  "total_chunk_size": 484,
   "type": "char __cdecl(int, int, int)",
-  "xrefs_from_count": 179,
+  "xrefs_from_count": 190,
   "xrefs_to_count": 1
 }

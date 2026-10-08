@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CAD00",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified: resolves the music type for a cell by using region-data ID 7, virtual sound-type lookup, and a position/cell cache; falls back to worldspace music when no region sound type is selected.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4CAD0A",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4CAD63",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4CAD67",
-    "line": "mov     [esp+1Ch+var_4], ecx",
+    "line": "mov     [esp+1Ch+self], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4CAD82",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x4CAE3C",
-    "line": "push    offset qword_B35E04",
+    "line": "push    offset g_CachedCellMusicPositionX",
     "mnemonic": "push",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4CAE56",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x4CAE8B",
-    "line": "push    eax; int",
+    "line": "push    eax; worldspace",
     "mnemonic": "push",
     "size": 1
   },
@@ -811,19 +811,19 @@
   },
   {
     "ea": "0x4CAE9C",
-    "line": "mov     ecx, [esp+2Ch+var_4]",
+    "line": "mov     ecx, [esp+2Ch+self]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4CAEA0",
-    "line": "push    7; int",
+    "line": "push    7; dataID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CAEA2",
-    "line": "call    sub_4A67B0",
+    "line": "call    TESRegionList_SelectDataAtWorldPosition; Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,25 +1057,25 @@
   },
   {
     "ea": "0x4CAF1F",
-    "line": "push    eax",
+    "line": "push    eax; worldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CAF20",
-    "line": "push    0",
+    "line": "push    0; worldXY",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CAF22",
-    "line": "push    7",
+    "line": "push    7; dataID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4CAF24",
-    "line": "call    sub_4A6460",
+    "line": "call    TESRegionList_SelectDataForLocation",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x4CAF6F",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },

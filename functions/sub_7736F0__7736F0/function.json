@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 17,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 25,
-  "display_name": "sub_7736F0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 21,
+  "chunks": [
+    [
+      "0x7736F0",
+      "0x7737CB"
+    ]
+  ],
+  "chunks_sha256": "2a653b6e38d2a536da49006b79aa98ecdd692149a0619ca5227a6585ce6adc26",
+  "comment_regular": "Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
+  "comment_repeatable": "Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 26,
+  "display_name": "D3D9_HResultToString",
   "end_ea": "0x7737CB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7736F0",
+  "name": "D3D9_HResultToString",
   "segment": ".text",
   "sha256": "2a653b6e38d2a536da49006b79aa98ecdd692149a0619ca5227a6585ce6adc26",
   "size": 219,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7736F0",
-  "type": "const char *__cdecl(unsigned int)",
+  "total_chunk_size": 219,
+  "type": "const char *__cdecl(unsigned int hresult)",
   "xrefs_from_count": 94,
   "xrefs_to_count": 21
 }

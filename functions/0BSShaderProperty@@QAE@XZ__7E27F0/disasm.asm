@@ -1,4 +1,4 @@
-0x7E27F0: push    0FFFFFFFFh
+0x7E27F0: push    0FFFFFFFFh; [constructor audit] Initializes four empty pass lists before calling FreeAllNodes573880; their head pointers are NULL, so those calls perform no virtual callbacks or allocations. Base ObjectNET/Object construction is field initialization. No suballocation in this constructor path.
 0x7E27F2: push    offset ??0BSShaderProperty@@QAE@XZ_SEH
 0x7E27F7: mov     eax, large fs:0
 0x7E27FD: push    eax
@@ -43,13 +43,13 @@
 0x7E287E: mov     byte ptr [esp+24h+var_4], 4
 0x7E2883: mov     [esi+1Ch], edi
 0x7E2886: mov     [esi+24h], edi
-0x7E2889: call    NiTPointerList__FreeAllNodes
+0x7E2889: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7E288E: mov     ecx, ebx
-0x7E2890: call    NiTPointerList__FreeAllNodes
+0x7E2890: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7E2895: mov     ecx, ebp
-0x7E2897: call    NiTPointerList__FreeAllNodes
+0x7E2897: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7E289C: lea     ecx, [esi+58h]
-0x7E289F: call    NiTPointerList__FreeAllNodes
+0x7E289F: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7E28A4: mov     [esi+68h], edi
 0x7E28A7: mov     eax, esi
 0x7E28A9: mov     ecx, [esp+24h+var_C]
@@ -61,3 +61,24 @@
 0x7E28B8: pop     ebx
 0x7E28B9: add     esp, 10h
 0x7E28BC: retn
+0x9CF5D0: mov     ecx, [ebp-10h]; this
+0x9CF5D3: jmp     j_??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9CF5D8: mov     ecx, [ebp-10h]
+0x9CF5DB: add     ecx, 28h ; '('
+0x9CF5DE: jmp     j_??1?$NiTPointerList@PAVRenderPass@BSShaderProperty@@@@UAE@XZ; NiTPointerList<BSShaderProperty::RenderPass *>::~NiTPointerList<BSShaderProperty::RenderPass *>(void)
+0x9CF5E3: mov     ecx, [ebp-10h]
+0x9CF5E6: add     ecx, 38h ; '8'
+0x9CF5E9: jmp     j_??1?$NiTPointerList@PAVRenderPass@BSShaderProperty@@@@UAE@XZ; NiTPointerList<BSShaderProperty::RenderPass *>::~NiTPointerList<BSShaderProperty::RenderPass *>(void)
+0x9CF5EE: mov     ecx, [ebp-10h]
+0x9CF5F1: add     ecx, 48h ; 'H'
+0x9CF5F4: jmp     j_??1?$NiTPointerList@PAVRenderPass@BSShaderProperty@@@@UAE@XZ; NiTPointerList<BSShaderProperty::RenderPass *>::~NiTPointerList<BSShaderProperty::RenderPass *>(void)
+0x9CF5F9: mov     ecx, [ebp-10h]
+0x9CF5FC: add     ecx, 58h ; 'X'
+0x9CF5FF: jmp     j_??1?$NiTPointerList@PAVRenderPass@BSShaderProperty@@@@UAE@XZ; NiTPointerList<BSShaderProperty::RenderPass *>::~NiTPointerList<BSShaderProperty::RenderPass *>(void)
+0x9CF604: mov     edx, [esp+arg_4]
+0x9CF608: lea     eax, [edx-14h]
+0x9CF60B: mov     ecx, [edx-18h]
+0x9CF60E: xor     ecx, eax
+0x9CF610: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF615: mov     eax, offset stru_AF820C
+0x9CF61A: jmp     ___CxxFrameHandler3

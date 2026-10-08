@@ -1,9 +1,9 @@
-0x4D1570: push    ebx
+0x4D1570: push    ebx; Verified inactive-cell form cleanup. Preserves persistent references and references whose winning override is a non-master file; unloads/destroys other nonpersistent references. Also destroys a PathGrid when it has no override or its winning override is a master, clears eligible LAND data, and clears cell flag 0x10. This is called during both interior and exterior teardown.
 0x4D1571: push    ebp
 0x4D1572: mov     ebx, ecx
 0x4D1574: push    esi
 0x4D1575: push    ebx; a2
-0x4D1576: mov     ecx, offset stru_B35C80; this
+0x4D1576: mov     ecx, offset unk_B35C80; this
 0x4D157B: call    sub_496EA0
 0x4D1580: lea     esi, [ebx+48h]
 0x4D1583: xor     ebp, ebp
@@ -17,17 +17,17 @@
 0x4D1599: jz      loc_4D1640
 0x4D159F: mov     edi, [esi]
 0x4D15A1: mov     ecx, edi; this
-0x4D15A3: call    TESObjectREFR_IsPersistent?
+0x4D15A3: call    TESObjectREFR_IsPersistent
 0x4D15A8: test    al, al
 0x4D15AA: jnz     loc_4D1633
 0x4D15B0: push    0FFFFFFFFh; a2
 0x4D15B2: mov     ecx, edi; this
-0x4D15B4: call    TESForm_GetOverrideFile
+0x4D15B4: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4D15B9: test    eax, eax
 0x4D15BB: jz      short loc_4D15D1
 0x4D15BD: push    0FFFFFFFFh; a2
 0x4D15BF: mov     ecx, edi; this
-0x4D15C1: call    TESForm_GetOverrideFile
+0x4D15C1: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4D15C6: mov     ecx, eax
 0x4D15C8: call    TESFile_GetIsMaster
 0x4D15CD: test    al, al
@@ -47,13 +47,13 @@
 0x4D15EF: mov     edx, [eax]
 0x4D15F1: push    eax
 0x4D15F2: mov     [esi], edx
-0x4D15F4: call    FormHeapFree
+0x4D15F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4D15F9: add     esp, 4
 0x4D15FC: jmp     short loc_4D1604
 0x4D15FE: mov     dword ptr [esi], 0
-0x4D1604: mov     ecx, ds:0B33B00h
-0x4D160A: push    edi
-0x4D160B: call    sub_463A90
+0x4D1604: mov     ecx, ds:0B33B00h; self
+0x4D160A: push    edi; form
+0x4D160B: call    TESSaveLoadGame_UnloadForm;
 0x4D1610: mov     eax, [edi]
 0x4D1612: mov     edx, [eax+194h]
 0x4D1618: push    0
@@ -73,14 +73,14 @@
 0x4D163A: jnz     loc_4D1590
 0x4D1640: pop     edi
 0x4D1641: push    ebx; a2
-0x4D1642: mov     ecx, offset stru_B35C80; this
+0x4D1642: mov     ecx, offset unk_B35C80; this
 0x4D1647: call    sub_496F50
 0x4D164C: mov     ecx, [ebx+44h]; this
 0x4D164F: xor     esi, esi
 0x4D1651: cmp     ecx, esi
 0x4D1653: jz      short loc_4D167E
 0x4D1655: push    0FFFFFFFFh; a2
-0x4D1657: call    TESForm_GetOverrideFile
+0x4D1657: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4D165C: cmp     eax, esi
 0x4D165E: jz      short loc_4D166B
 0x4D1660: mov     ecx, eax
@@ -101,7 +101,7 @@
 0x4D1687: jz      short loc_4D16BA
 0x4D1689: push    0FFFFFFFFh; a2
 0x4D168B: mov     ecx, eax; this
-0x4D168D: call    TESForm_GetOverrideFile
+0x4D168D: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x4D1692: cmp     eax, esi
 0x4D1694: jz      short loc_4D16A1
 0x4D1696: mov     ecx, eax

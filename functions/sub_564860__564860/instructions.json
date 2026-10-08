@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x564860",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BSTreeNode leaf LOD child setter: replaces child under Leaves and updates leaf array. No frond-equivalent setter was found in this node surface.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x564899",
-    "line": "mov     ecx, [edi+0DCh]",
+    "line": "mov     ecx, [edi+0DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5648A1",
-    "line": "mov     [esp+28h+var_4], ebx",
+    "line": "mov     [esp+28h+slot], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5648C3",
-    "line": "call    sub_560200",
+    "line": "call    BSTreeModel_GetNumLeafLODLevels",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5648EF",
-    "line": "mov     [esp+28h+var_4], 0FFFFFFFFh",
+    "line": "mov     [esp+28h+slot], 0FFFFFFFFh",
     "mnemonic": "mov",
     "size": 8
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x564926",
-    "line": "lea     ecx, [esp+30h+var_4]; this",
+    "line": "lea     ecx, [esp+30h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x56492A",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -406,5 +406,59 @@
     "line": "mov     ecx, [edi+0E4h]",
     "mnemonic": "mov",
     "size": 6
+  },
+  {
+    "ea": "0x9B5BD0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BD3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BD8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5BDC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BDF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BE9",
+    "line": "mov     eax, offset stru_AE0BB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BEE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -201,10 +201,10 @@
 0x74B63E: call    sub_4BF9B0
 0x74B643: lea     edx, [esp+70h+var_C]
 0x74B647: push    edx
-0x74B648: call    sub_4BFAA0
+0x74B648: call    NiPoint3_NormalizeApproximateInPlace
 0x74B64D: add     esp, 4
 0x74B650: mov     ecx, ebx
-0x74B652: call    sub_404C90
+0x74B652: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x74B657: fstp    [esp+70h+arg_0]
 0x74B65B: fld     [esp+70h+arg_0]
 0x74B65F: lea     eax, [esp+70h+var_C]

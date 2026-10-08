@@ -1,4 +1,4 @@
-char *sub_531F90()
+NiRTTI *sub_531F90()
 {
-  return dword_BA7F6C;
+  return &stru_BA7F6C; /*0x531f95*/
 }

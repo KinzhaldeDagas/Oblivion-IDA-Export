@@ -1,5 +1,5 @@
 int sub_9F8910()
 {
-  InitializeCriticalSection(&stru_B39C00);
-  return atexit(sub_A232F0);
+  InitializeCriticalSection(&unk_B39C00); /*0x9f8915*/
+  return atexit(sub_A232F0); /*0x9f8926*/
 }

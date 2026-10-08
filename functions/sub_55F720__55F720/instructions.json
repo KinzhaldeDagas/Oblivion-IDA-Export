@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x55F720",
-    "line": "mov     ecx, ds:0B39E04h",
+    "line": "mov     ecx, ds:0B39E04h; Verified singleton Destroy: invokes BSTreeManager_dtor, frees the 0x28-byte manager and clears the global instance pointer.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x55F72D",
-    "line": "call    sub_55F550",
+    "line": "call    BSTreeManager_dtor; Verified manager teardown: clears the form/seed model cache and pending reference-node map, releases default render properties and canopy resources. This is lifecycle teardown, not per-cell DistantLOD cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x55F733",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -12,14 +12,14 @@
 0x69443D: mov     large fs:0, eax
 0x694443: mov     esi, ecx
 0x694445: mov     [esp+1Ch+var_10], esi
-0x694449: mov     eax, [esp+1Ch+arg_8]
-0x69444D: mov     ecx, [esp+1Ch+arg_4]
-0x694451: mov     edx, [esp+1Ch+arg_0]
+0x694449: mov     eax, [esp+1Ch+effectItem]
+0x69444D: mov     ecx, [esp+1Ch+item]
+0x694451: mov     edx, [esp+1Ch+caster]
 0x694455: push    eax
 0x694456: push    ecx
 0x694457: push    edx
 0x694458: mov     ecx, esi; this
-0x69445A: call    ??0ActiveEffect@@QAE@XZ; ActiveEffect::ActiveEffect(void)
+0x69445A: call    ActiveEffect_Ctor; Verified Oblivion ActiveEffect is 0x38 bytes and stores HitEffectNode* at +0x34 after TESBoundObject* at +0x30. Fallout ActiveEffect is 0x48 bytes and stores BSSimpleList<MagicHitEffect*> at +0x40 after a 12-byte PersistentSound handle and pSource at +0x3C; Fallout also has pDisplacementSpell at +0x44. Do not copy Fallout offsets into Oblivion.
 0x69445F: mov     dword ptr [esi], offset ??_7LightEffect@@6B@; const LightEffect::`vftable'
 0x694465: mov     [esp+1Ch+var_4], 0
 0x69446D: mov     dword ptr [esi+38h], 0
@@ -48,3 +48,15 @@
 0x6944B2: pop     esi
 0x6944B3: add     esp, 10h
 0x6944B6: retn    0Ch
+0x9C5810: mov     ecx, [ebp-10h]; this
+0x9C5813: jmp     ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
+0x9C5818: mov     ecx, [ebp-10h]
+0x9C581B: add     ecx, 38h ; '8'; slot
+0x9C581E: jmp     NiPointerSlot_Release
+0x9C5823: mov     edx, [esp+item]
+0x9C5827: lea     eax, [edx-0Ch]
+0x9C582A: mov     ecx, [edx-10h]
+0x9C582D: xor     ecx, eax
+0x9C582F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5834: mov     eax, offset stru_AEDFA0
+0x9C5839: jmp     ___CxxFrameHandler3

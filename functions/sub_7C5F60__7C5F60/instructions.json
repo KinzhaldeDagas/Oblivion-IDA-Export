@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7C5F60",
-    "line": "push    ebp",
+    "line": "push    ebp; Reconcile one ordinary source light against current scene receivers. Projector-mode lights are skipped; culled sources clear associations, visible sources begin/add/remove receiver reconciliation.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C5F61",
-    "line": "mov     ebp, [esp+4+arg_0]",
+    "line": "mov     ebp, [esp+4+light]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7C5F77",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+light]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x7C5F7E",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7C5F88",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+light]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7C5FB3",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x7C5FB7",
-    "line": "call    sub_7D21F0",
+    "line": "call    ShadowSceneLight_ClearReceiverAssociations; Remove property-side shadow-light links, reset shader-side state, and free this light's object/receiver list associations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7C5FC3",
-    "line": "call    sub_7D5ED0",
+    "line": "call    ShadowSceneLight_BeginReceiverReconciliation; Create/reuse the fence geometry at +0x148, insert it at object-list head, and set reconciliation cursor +0x144.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7C5FF9",
-    "line": "call    ShadowSceneLight_AddToScene????",
+    "line": "call    ShadowSceneLight_AddToScene; Native receiver-root gate: require a non-null root, non-null world bound, AppCulled clear, and nonzero bound radius, then recurse through ShadowSceneLight_UpdateLightingProperty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x7C600C",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C600E",
-    "line": "call    sub_7D6A40",
+    "line": "call    ShadowSceneLight_RemoveStaleReceivers; Walk the stale reconciliation cursor tail via ShadowSceneLight_RemoveReceiverGeometry, then clear +0x144.",
     "mnemonic": "call",
     "size": 5
   },

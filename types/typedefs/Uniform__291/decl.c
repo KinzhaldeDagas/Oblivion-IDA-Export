@@ -1,1 +1,1 @@
-Uniform
+struct Uniform;

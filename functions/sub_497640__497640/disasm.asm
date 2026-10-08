@@ -14,7 +14,7 @@
 0x497665: cmp     [esi], eax
 0x497667: jnb     loc_49779A
 0x49766D: push    ebx
-0x49766E: call    sub_497420
+0x49766E: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x497673: mov     ebp, eax
 0x497675: add     esp, 4
 0x497678: test    ebp, ebp

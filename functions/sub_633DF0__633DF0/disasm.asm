@@ -3,10 +3,10 @@
 0x633DF4: push    edi
 0x633DF5: mov     edi, [esp+28h+arg_0]
 0x633DF9: mov     esi, ecx
-0x633DFB: push    12h
-0x633DFD: mov     ecx, edi
+0x633DFB: push    12h; actorValue
+0x633DFD: mov     ecx, edi; this
 0x633DFF: mov     [esp+2Ch+var_20], esi
-0x633E03: call    Actor_GetSkillMasteryLevel
+0x633E03: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x633E08: test    eax, eax
 0x633E0A: jge     loc_633ED5
 0x633E10: push    ebx
@@ -55,7 +55,7 @@
 0x633E9E: mov     ecx, ebp
 0x633EA0: call    ContainerEntryExtraData_DestroyDataTable
 0x633EA5: push    ebp
-0x633EA6: call    FormHeapFree
+0x633EA6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x633EAB: mov     esi, [esp+34h+var_20]
 0x633EAF: add     esp, 4
 0x633EB2: push    1

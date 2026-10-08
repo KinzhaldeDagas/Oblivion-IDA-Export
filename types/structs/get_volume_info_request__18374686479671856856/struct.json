@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "get_volume_info_request",
+  "definition": "struct get_volume_info_request\n{\nrequest_header __header;\nobj_handle_t handle;\nasync_data_t async;\nunsigned int info_class;\nchar __pad_60[4];\n}\n",
   "id": 18374686479671856856,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "request_header"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "obj_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "async",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 40
+      "size": 40,
+      "type": "async_data_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "info_class",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__pad_60",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "char[4]"
     }
   ],
   "name": "get_volume_info_request",
+  "ordinal": 6786,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

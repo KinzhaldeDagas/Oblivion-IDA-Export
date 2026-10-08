@@ -1,1 +1,4 @@
-TESObjectDOORVtbl
+struct TESObjectDOORVtbl
+{
+TESBoundObjectVtbl super;
+};

@@ -1,19 +1,32 @@
 {
-  "callees_count": 42,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 28,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B8950",
+      "0x6B8C71"
+    ]
+  ],
+  "chunks_sha256": "36a82d5bde5283f034b2299cced6d6122794d18295c000b4880ead1063d6af44",
+  "comment_regular": "OFE cache persistence verification 2026-10-02: 6B8750 serializes hasLinkedTopics, isInfoGeneralTopic (+20), infoNotSpoken (+21), and ownerQuest/topic/INFO through native SaveFormID. 6B8950 restores flags and resolves all three identities via native save-load fixup. Thus a routed Rumors cache can retain its actual custom topic at +24 and native InfoGeneral role marker without new savegame fields. DialogueResponse lists are reconstructed later by 425970; validate worldspace before using that cache.\n\nRestore only MenuTopic identity/display/UI state; response nodes remain empty. The ExtraDataList loader retains this object when INFO resolves, and GetInfoGeneralTopic later rebuilds responses without rerunning INFO selection conditions.",
+  "comment_repeatable": "Restore only MenuTopic identity/display/UI state; response nodes remain empty. The ExtraDataList loader retains this object when INFO resolves, and GetInfoGeneralTopic later rebuilds responses without rerunning INFO selection conditions.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 18,
-  "display_name": "sub_6B8950",
+  "display_name": "MenuTopic::LoadGame",
   "end_ea": "0x6B8C71",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B8950",
+  "name": "MenuTopic::LoadGame",
   "segment": ".text",
   "sha256": "36a82d5bde5283f034b2299cced6d6122794d18295c000b4880ead1063d6af44",
   "size": 801,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B8950",
-  "type": "void __thiscall(BSStringT *this, int _138)",
+  "total_chunk_size": 801,
+  "type": "void __thiscall(MenuTopicView *this, TESObjectREFR *speaker)",
   "xrefs_from_count": 296,
   "xrefs_to_count": 1
 }

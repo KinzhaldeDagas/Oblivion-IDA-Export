@@ -5,19 +5,19 @@
 0x4D9B55: lea     esi, [ebp+44h]
 0x4D9B58: push    edi
 0x4D9B59: mov     ecx, esi
-0x4D9B5B: call    sub_41E650
+0x4D9B5B: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x4D9B60: mov     edi, eax
 0x4D9B62: test    edi, edi
 0x4D9B64: jz      short loc_4D9BAD
 0x4D9B66: mov     eax, [edi]
 0x4D9B68: test    eax, eax
 0x4D9B6A: jz      short loc_4D9BA6
-0x4D9B6C: push    eax
+0x4D9B6C: push    eax; backingLight
 0x4D9B6D: push    0
 0x4D9B6F: call    GetShadowSceneNode
 0x4D9B74: add     esp, 4
-0x4D9B77: mov     ecx, eax
-0x4D9B79: call    sub_7C7DC0
+0x4D9B77: mov     ecx, eax; self
+0x4D9B79: call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
 0x4D9B7E: mov     ebx, [edi]
 0x4D9B80: test    ebx, ebx
 0x4D9B82: jz      short loc_4D9BA6
@@ -34,10 +34,10 @@
 0x4D9B9C: mov     ecx, ebx
 0x4D9B9E: call    eax
 0x4D9BA0: mov     dword ptr [edi], 0
-0x4D9BA6: mov     ecx, esi
-0x4D9BA8: call    sub_41F5B0
+0x4D9BA6: mov     ecx, esi; self
+0x4D9BA8: call    ExtraDataList_RemoveExtraLight; Remove ordinary attached-light extra-data type 0x30 from this reference extra-data list.
 0x4D9BAD: mov     ecx, esi
-0x4D9BAF: call    sub_41FF80
+0x4D9BAF: call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.
 0x4D9BB4: mov     ecx, ds:0B33B00h
 0x4D9BBA: mov     edx, [ecx+18h]
 0x4D9BBD: shr     edx, 2

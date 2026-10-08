@@ -1,1 +1,1 @@
-RGNDATA
+typedef _RGNDATA RGNDATA;

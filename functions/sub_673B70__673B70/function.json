@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 3,
+  "chunks": [
+    [
+      "0x673B70",
+      "0x673BD0"
+    ]
+  ],
+  "chunks_sha256": "c980f8554a70a2d4004bc79c1669d4f1721e28d6e2815c5b0e5e727b07212b93",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF LARGE PERF 2026-09-08: PERF-7 distance comparator calls GetDistance twice per comparison and returns signed-1/0/+1. Both distance results are rounded tofloat locals before x87 comparison. Corrected prior unsigned prototype to signed int. Avoid precomputed/squared-distance replacement without worldspace/sentinel/virtual GetPos and NaN/rounding proof.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_673B70",
+  "display_name": "CompareActorDistanceToPlayer",
   "end_ea": "0x673BD0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_673B70",
+  "name": "CompareActorDistanceToPlayer",
   "segment": ".text",
   "sha256": "c980f8554a70a2d4004bc79c1669d4f1721e28d6e2815c5b0e5e727b07212b93",
   "size": 96,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x673B70",
-  "type": "unsigned int __cdecl(TESObjectREFR *, TESObjectREFR *)",
+  "total_chunk_size": 96,
+  "type": "int __cdecl(TESObjectREFR *left, TESObjectREFR *right)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 3
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7905D0",
-    "line": "push    ecx",
+    "line": "push    ecx; Compiler/container partition helper used only by the branch-pointer introsort at 0x790C10. Partitions OB_CBranch* iterators into less/equal/greater regions by OB_CBranch+0x2C fuzzyBranchVolume and returns the equal-range boundaries through equalRangeOut.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7905D2",
-    "line": "mov     ebx, [esp+8+arg_8]",
+    "line": "mov     ebx, [esp+8+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7905D7",
-    "line": "mov     ebp, [esp+0Ch+arg_4]",
+    "line": "mov     ebp, [esp+0Ch+begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x7905F5",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7905F6",
-    "line": "push    edi",
+    "line": "push    edi; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7905F7",
-    "line": "push    ebp",
+    "line": "push    ebp; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7905F8",
-    "line": "call    sub_7904B0",
+    "line": "call    OB_BranchPtrVector_MedianGuessByFuzzyVolume_010201A0; Selects the fuzzy-volume pivot sample for branch-pointer partitioning. Sorts three candidates for ranges of at most 40 pointers; larger ranges use four three-way sorts over spaced samples (MSVC median-guess strategy).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x7907F6",
-    "line": "mov     eax, [esp+14h+arg_8]",
+    "line": "mov     eax, [esp+14h+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x790808",
-    "line": "mov     ebx, [esp+14h+arg_8]",
+    "line": "mov     ebx, [esp+14h+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x790840",
-    "line": "cmp     ecx, [esp+14h+arg_8]",
+    "line": "cmp     ecx, [esp+14h+end]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1567,13 +1567,13 @@
   },
   {
     "ea": "0x790855",
-    "line": "mov     ebx, [esp+14h+arg_8]",
+    "line": "mov     ebx, [esp+14h+end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x790859",
-    "line": "mov     edx, [esp+14h+arg_4]",
+    "line": "mov     edx, [esp+14h+begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x790889",
-    "line": "mov     edx, [esp+14h+arg_4]",
+    "line": "mov     edx, [esp+14h+begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x7908CB",
-    "line": "mov     ebx, [esp+14h+arg_8]",
+    "line": "mov     ebx, [esp+14h+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x790916",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+equalRangeOut]",
     "mnemonic": "mov",
     "size": 4
   },

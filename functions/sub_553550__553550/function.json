@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
-  "callers_count": 14,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_553550",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 39,
+  "chunks": [
+    [
+      "0x553550",
+      "0x5535CA"
+    ],
+    [
+      "0x9C74D0",
+      "0x9C74F6"
+    ]
+  ],
+  "chunks_sha256": "34811a89b36587d7784d1a5a8e7c73c62f63c349f589c110a8be04ee84e5aac4",
+  "comment_regular": "Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
+  "comment_repeatable": "Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "FaceGenManager_EnsureInitialized",
   "end_ea": "0x5535CA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_553550",
+  "name": "FaceGenManager_EnsureInitialized",
   "segment": ".text",
   "sha256": "da05518fd5db34df6f55d4ab90ed76d4fd8895681702db6d3e741f43a810b91b",
   "size": 122,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x553550",
-  "type": "void()",
-  "xrefs_from_count": 37,
+  "total_chunk_size": 160,
+  "type": "void __cdecl()",
+  "xrefs_from_count": 51,
   "xrefs_to_count": 39
 }

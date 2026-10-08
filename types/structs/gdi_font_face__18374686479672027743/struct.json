@@ -1,112 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "gdi_font_face",
+  "definition": "struct gdi_font_face\n{\nlist entry;\nunsigned int refcount;\nWCHAR_0 *style_name;\nWCHAR_0 *full_name;\nWCHAR_0 *file;\nvoid *data_ptr;\nSIZE_T data_size;\nUINT face_index;\nFONTSIGNATURE fs;\nDWORD ntmFlags;\nDWORD version;\nDWORD flags;\nBOOL scalable;\nbitmap_font_size size;\ngdi_font_family *family;\ngdi_font_enum_data *cached_enum_data;\nwine_rb_entry full_name_entry;\n}\n",
   "id": 18374686479672027743,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refcount",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "style_name",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "full_name",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "file",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "WCHAR_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data_ptr",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data_size",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "SIZE_T"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "face_index",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fs",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 24
+      "offset_hex": "0x2C",
+      "size": 24,
+      "type": "FONTSIGNATURE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ntmFlags",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "version",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "scalable",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "size",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 24
+      "size": 24,
+      "type": "bitmap_font_size"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "family",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "gdi_font_family *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cached_enum_data",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "gdi_font_enum_data *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "full_name_entry",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 16
+      "size": 16,
+      "type": "wine_rb_entry"
     }
   ],
   "name": "gdi_font_face",
+  "ordinal": 1516,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 136
 }

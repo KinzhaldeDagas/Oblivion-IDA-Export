@@ -3,17 +3,17 @@ int __thiscall SettingCollectionList_BuildOutputArray(char *this, unsigned __int
   char *v2; // esi
   int v3; // edi
 
-  v2 = this + 0x10C;
-  v3 = 0;
-  if ( this != (char *)0xFFFFFEF4 )
+  v2 = this + 0x10C; /*0x4a8532*/
+  v3 = 0; /*0x4a8538*/
+  if ( this != (char *)0xFFFFFEF4 ) /*0x4a853c*/
   {
-    do
+    do /*0x4a8553*/
     {
-      Setting_BuildOutputArray(*(char **)v2, a2);
-      v2 = *((char **)v2 + 1);
-      ++v3;
+      Setting_BuildOutputArray(*(char **)v2, a2); /*0x4a8546*/
+      v2 = *((char **)v2 + 1); /*0x4a854b*/
+      ++v3; /*0x4a854e*/
     }
-    while ( v2 );
+    while ( v2 ); /*0x4a8553*/
   }
-  return v3;
+  return v3; /*0x4a8558*/
 }

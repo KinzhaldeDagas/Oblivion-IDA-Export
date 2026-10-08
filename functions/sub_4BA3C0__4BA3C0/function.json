@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4BA3C0",
+  "chunks": [
+    [
+      "0x4BA3C0",
+      "0x4BA773"
+    ],
+    [
+      "0x9B3E70",
+      "0x9B3EA1"
+    ]
+  ],
+  "chunks_sha256": "51cfb49f83a143b188a370a2cd8a68331b97812c453bb7758752c5b2bf413e4d",
+  "comment_regular": "Verified Oblivion geometry use: reads float at TESObjectTREE+0x7C, defaults local height to 1400 when <=0, uses half that value as horizontal half-width, and full value as vertical extent. Fallout's directly named BillboardSize.y uses the same 1400 fallback and square-plane construction. This supports (Probable) +0x7C = BillboardSize.y; +0x78 is paired as BillboardSize.x via identical 200 threshold predicate.",
+  "comment_repeatable": "Verified Oblivion geometry use: reads float at TESObjectTREE+0x7C, defaults local height to 1400 when <=0, uses half that value as horizontal half-width, and full value as vertical extent. Fallout's directly named BillboardSize.y uses the same 1400 fallback and square-plane construction. This supports (Probable) +0x7C = BillboardSize.y; +0x78 is paired as BillboardSize.x via identical 200 threshold predicate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESObjectTREE_BuildBillboardQuadData",
   "end_ea": "0x4BA773",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BA3C0",
+  "name": "TESObjectTREE_BuildBillboardQuadData",
   "segment": ".text",
   "sha256": "7204b0e662e33423d2f220168b97bf1109880b32f13249bcb5f36a71620182bc",
   "size": 947,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BA3C0",
-  "type": "volatile LONG **__thiscall(float *this, volatile LONG **, char)",
-  "xrefs_from_count": 305,
+  "total_chunk_size": 996,
+  "type": "NiTriShapeData **__thiscall(TESObjectTREE_BillboardTail *this, NiTriShapeData **outData, bool distantPlane)",
+  "xrefs_from_count": 324,
   "xrefs_to_count": 2
 }

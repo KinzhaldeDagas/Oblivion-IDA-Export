@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x451DF0",
-    "line": "mov     [esi+404h], edi",
+    "line": "mov     [esi+404h], edi; TESFile_constr initializes authorName data pointer, dataLen, and bufLen to zero. Missing CNAM therefore retains the empty-string constructor default.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x451E08",
-    "line": "mov     [esi+40Ch], edi",
+    "line": "mov     [esi+40Ch], edi; TESFile_constr initializes description data pointer, dataLen, and bufLen to zero. Missing SNAM therefore retains the empty-string constructor default.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -682,5 +682,83 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AE130",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE133",
+    "line": "add     ecx, 404h; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE139",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE13E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE141",
+    "line": "add     ecx, 40Ch; void *",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE147",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE14C",
+    "line": "mov     edx, [esp+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE150",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE153",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE156",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE158",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE15D",
+    "line": "mov     eax, offset stru_ADAA08",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE162",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,10 +1,18 @@
 {
   "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 29,
+  "chunks": [
+    [
+      "0x7AA860",
+      "0x7AA93E"
+    ]
+  ],
   "chunks_sha256": "dfcb1340c85d5a22d7ed681a64ea997a04ee80e6cf5b287c6917b7e9dacea8bb",
   "comment_regular": "[Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
   "comment_repeatable": "[Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "NiTPointerList_RemoveNode",
   "end_ea": "0x7AA93E",
@@ -15,6 +23,7 @@
   "segment": ".text",
   "sha256": "dfcb1340c85d5a22d7ed681a64ea997a04ee80e6cf5b287c6917b7e9dacea8bb",
   "size": 222,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7AA860",
   "total_chunk_size": 222,
   "type": "void *__thiscall(void *list, void **node)",

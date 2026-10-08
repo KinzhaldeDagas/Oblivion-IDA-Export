@@ -8,11 +8,11 @@
 0x4F6AC0: test    eax, eax
 0x4F6AC2: jz      short loc_4F6ACC
 0x4F6AC4: cmp     byte ptr [eax+4], 2Dh ; '-'
-0x4F6AC8: jnz     short loc_4F6ACC
+0x4F6AC8: jnz     short loc_4F6ACC; Weather validation uses TESForm+0x04 formType == 0x2D (TESWeather). FormID for weather checks is TESForm+0x0C.
 0x4F6ACA: mov     esi, eax
 0x4F6ACC: call    Sky_CreateOrGetGlobalObject
-0x4F6AD1: cmp     esi, [eax+10h]
-0x4F6AD4: jnz     short loc_4F6ADA
+0x4F6AD1: cmp     esi, [eax+10h]; GetIsCurrentWeather compares the requested TESWeather against Sky+0x10 (first/current weather). This is the faithful source for current weather FormID checks.
+0x4F6AD4: jnz     short loc_4F6ADA; Current weather pointer source: Sky+0x10 firstWeather. For FormID-based chances, compare/read ((TESForm*)Sky->firstWeather)->refID at +0x0C.
 0x4F6AD6: fld1
 0x4F6AD8: fstp    qword ptr [edi]
 0x4F6ADA: cmp     byte ptr ds:0B361ACh, 0

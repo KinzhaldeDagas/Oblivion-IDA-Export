@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x802A90",
+      "0x802AD7"
+    ]
+  ],
+  "chunks_sha256": "160810247dcb688bf12ba956cdf2b5127d0f60471647972e05c8399633936b71",
+  "comment_regular": "\n[2026-10-06 directional distant pass] Copies {source path, template scene, form ID} into batch+18/+1C/+20 and clears property flag bits 400/800/1000. Callsite7B3D62 runs before the native scene is attached; filter TREE form IDs and descriptor+30 billboard flag to avoid ordinary static/grass batches.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_802A90",
+  "display_name": "OB_DistantLOD_BindInstanceDescriptor_010201A0",
   "end_ea": "0x802AD7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_802A90",
+  "name": "OB_DistantLOD_BindInstanceDescriptor_010201A0",
   "segment": ".text",
   "sha256": "160810247dcb688bf12ba956cdf2b5127d0f60471647972e05c8399633936b71",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x802A90",
+  "total_chunk_size": 71,
   "type": "int __thiscall(_DWORD *this, _DWORD *)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 1

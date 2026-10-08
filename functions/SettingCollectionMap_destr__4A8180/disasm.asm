@@ -29,3 +29,17 @@
 0x4A81E9: pop     esi
 0x4A81EA: add     esp, 10h
 0x4A81ED: retn
+0x4A8090: mov     dword ptr [ecx], offset ??_7?$BSTCaseInsensitiveStringMap@PAVSetting@@@@6B@; const BSTCaseInsensitiveStringMap<Setting *>::`vftable'
+0x4A8096: jmp     ??1?$NiTStringTemplateMap@V?$NiTMap@PBDPAVSetting@@@@PAVSetting@@@@UAE@XZ; NiTStringTemplateMap<NiTMap<char const *,Setting *>,Setting *>::~NiTStringTemplateMap<NiTMap<char const *,Setting *>,Setting *>(void)
+0x9B2950: mov     ecx, [ebp-10h]
+0x9B2953: jmp     SettingCollection_destr
+0x9B2958: mov     ecx, [ebp-10h]
+0x9B295B: add     ecx, 10Ch
+0x9B2961: jmp     loc_4A8090
+0x9B2966: mov     edx, [esp+arg_4]
+0x9B296A: lea     eax, [edx-0Ch]
+0x9B296D: mov     ecx, [edx-10h]
+0x9B2970: xor     ecx, eax
+0x9B2972: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2977: mov     eax, offset stru_ADE8E0
+0x9B297C: jmp     ___CxxFrameHandler3

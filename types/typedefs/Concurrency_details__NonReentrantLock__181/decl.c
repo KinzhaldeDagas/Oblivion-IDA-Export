@@ -1,1 +1,1 @@
-Concurrency::details::_NonReentrantLock
+struct Concurrency::details::_NonReentrantLock;

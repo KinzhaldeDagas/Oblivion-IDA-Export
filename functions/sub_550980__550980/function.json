@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_550980",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x550980",
+      "0x550A2E"
+    ]
+  ],
+  "chunks_sha256": "d7ed7a3ebfe850383441ad47db2eea9c1b0a5413931a87bf7c881eee1cad0635",
+  "comment_regular": "Applies FaceGenRenderState/TESNPC hair length to a FaceGenHair geometry. Resolves BSFaceGenMorphDataHair, locks the vertex stream, restores base hair vertices, invokes the hair morph-data vfunc with the scalar weight, then unlocks.",
+  "comment_repeatable": "Restore and deform FaceGenHair positions for hair length, then unlock. Native code does not recompute normals or the local NiGeometryData bounding sphere.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "BSFaceGen_ApplyHairLengthMorph",
   "end_ea": "0x550A2E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_550980",
+  "name": "BSFaceGen_ApplyHairLengthMorph",
   "segment": ".text",
   "sha256": "d7ed7a3ebfe850383441ad47db2eea9c1b0a5413931a87bf7c881eee1cad0635",
   "size": 174,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x550980",
-  "type": "void __cdecl(int, float)",
-  "xrefs_from_count": 63,
+  "total_chunk_size": 174,
+  "type": "void __cdecl(NiGeometry *hairGeometry, float hairLength)",
+  "xrefs_from_count": 67,
   "xrefs_to_count": 8
 }

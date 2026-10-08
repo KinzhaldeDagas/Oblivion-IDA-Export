@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69A490",
-    "line": "push    ebp",
+    "line": "push    ebp; Obstruction raycast helper. Configures layer 0x1C collision mask, builds from supplied point to actor mid/upper z, preserves actor collision identity in high 16 filter bits, and returns true when no ray hit occurs.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x69A4D1",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Movement obstruction probe requires actor parent cell before choosing a bhkWorld.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x69A4DC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x69A4E5",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; Interior cells use cell+0x28 extra data -> bhkWorld via 0x424180; exteriors use global bhkWorldM.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x69A504",
-    "line": "push    1",
+    "line": "push    1; Begins temporary collision layer matrix setup for obstruction probe on layer 0x1C. This is the better in-engine pattern for movement/world obstruction checks than Player LOS layer 0x1A.",
     "mnemonic": "push",
     "size": 2
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x69A50A",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; TES4 authoritative: 0x69A490 reasserts layer 0x1C obstruction mask on the global collision matrix before each ray; it is not a scoped local filter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x69A515",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x69A520",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x69A52A",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x69A534",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x69A53E",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x69A54B",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x69A555",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x69A55F",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x69A56A",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x69A574",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x69A57E",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x69A58B",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x69A596",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x69A5A1",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x69A5AB",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x69A5B5",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x69A5C0",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x69A5CD",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x69A5D7",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x69A5E1",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x69A5EB",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x69A5F5",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x69A5FF",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x69A60C",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x69A616",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x69A620",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x69A62A",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x69A654",
-    "line": "call    sub_5E0660",
+    "line": "call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x69A668",
-    "line": "fadd    [esp+0B0h+a2.z]",
+    "line": "fadd    [esp+0B0h+a2.z]; 0x69A490 target z = actor position z + 0.5 * actor vertical extent; source point is caller supplied.",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x69A69F",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,13 +1129,13 @@
   },
   {
     "ea": "0x69A6A8",
-    "line": "mov     ecx, esi; this",
+    "line": "mov     ecx, esi; Obstruction probe derives high 16 bits of filter info from actor/proxy collision metadata when available, then ORs layer 0x1C.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69A6AA",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,13 +1315,13 @@
   },
   {
     "ea": "0x69A706",
-    "line": "mov     [esp+0B4h+var_90.WorldRayCastInput.FilterInfo], eax",
+    "line": "mov     [esp+0B4h+var_90.WorldRayCastInput.FilterInfo], eax; TES4 authoritative: obstruction ray filter info = recovered collision identity high16 plus layer 0x1C.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x69A70A",
-    "line": "call    bhkWorldRayCastData__SetCastInputFrom",
+    "line": "call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x69A718",
-    "line": "call    bhkWorldRayCastData__SetCastInputTo",
+    "line": "call    bhkWorldRayCastData__SetCastInputTo; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x69A72C",
-    "line": "call    edx",
+    "line": "call    edx; Direct bhkWorld/bhkWorldM vtable+0x88 raycast; caller inverts result so true means no obstruction between source and actor midpoint.",
     "mnemonic": "call",
     "size": 2
   },

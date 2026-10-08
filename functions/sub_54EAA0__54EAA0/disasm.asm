@@ -55,7 +55,6 @@
 0x54EB36: cmp     [esi+10h], edi
 0x54EB39: jbe     short loc_54EB7B
 0x54EB3B: jmp     short loc_54EB40
-0x54EB3D: align 10h
 0x54EB40: mov     eax, [ebx]
 0x54EB42: mov     edx, [eax+48h]
 0x54EB45: push    edi
@@ -89,3 +88,14 @@
 0x54EB8B: pop     ebx
 0x54EB8C: add     esp, 10h
 0x54EB8F: retn    4
+0x54E550: mov     dword ptr [ecx], offset ??_7BSFaceGenKeyframe@@6B@; const BSFaceGenKeyframe::`vftable'
+0x54E556: retn
+0x9BBB50: mov     ecx, [ebp-10h]
+0x9BBB53: jmp     loc_54E550
+0x9BBB58: mov     edx, [esp+arg_4]
+0x9BBB5C: lea     eax, [edx-10h]
+0x9BBB5F: mov     ecx, [edx-14h]
+0x9BBB62: xor     ecx, eax
+0x9BBB64: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBB69: mov     eax, offset stru_AE5898
+0x9BBB6E: jmp     ___CxxFrameHandler3

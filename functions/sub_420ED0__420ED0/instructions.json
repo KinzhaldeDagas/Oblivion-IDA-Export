@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x420ED0",
-    "line": "push    esi",
+    "line": "push    esi; Returns the per-actor uint16 friend-hit count, or zero. Confirmed by the Oblivion console path '%s has hit %s ... times'.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,6 +67,126 @@
   },
   {
     "ea": "0x420EE9",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x42AAE0",
+    "line": "mov     ecx, [ecx+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42AAE3",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAE5",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAE7",
+    "line": "jz      short locret_42AB0A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAE9",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x42AAEA",
+    "line": "mov     esi, [esp+4+actor]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x42AAEE",
+    "line": "mov     edi, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAF0",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAF2",
+    "line": "test    edx, edx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAF4",
+    "line": "jz      short loc_42AB09",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAF6",
+    "line": "cmp     [edx], esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAF8",
+    "line": "jz      short loc_42AB05",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAFA",
+    "line": "mov     ecx, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x42AAFD",
+    "line": "test    ecx, ecx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x42AAFF",
+    "line": "jnz     short loc_42AAF0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x42AB01",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42AB02",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x42AB05",
+    "line": "movzx   eax, word ptr [edx+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x42AB09",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x42AB0A",
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3

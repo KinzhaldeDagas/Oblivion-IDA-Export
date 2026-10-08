@@ -1,4 +1,4 @@
-0x78FD30: push    ecx
+0x78FD30: push    ecx; SpeedTreeRT 4.1 source match: CBranch::RoomForLeaf. Rejects generated leaves that are too close to existing local leaves based on largest leaf size and spacing tolerance.
 0x78FD31: push    ebx
 0x78FD32: push    esi
 0x78FD33: mov     esi, ds:0B429B8h
@@ -50,9 +50,9 @@
 0x78FDBA: fld     dword ptr [esi+20h]
 0x78FDBD: mov     esi, [esp+14h+arg_8]
 0x78FDC1: fmul    [esp+14h+arg_4]
-0x78FDC5: mov     ecx, esi
+0x78FDC5: mov     ecx, esi; this
 0x78FDC7: fstp    [esp+14h+arg_4]
-0x78FDCB: call    sub_78FA80
+0x78FDCB: call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.
 0x78FDD0: test    eax, eax
 0x78FDD2: jbe     loc_78FEA4
 0x78FDD8: mov     ebp, [esp+14h+arg_0]
@@ -119,9 +119,9 @@
 0x78FE78: xor     bl, bl
 0x78FE7A: jmp     short loc_78FE7E
 0x78FE7C: fstp    st
-0x78FE7E: mov     ecx, esi
+0x78FE7E: mov     ecx, esi; this
 0x78FE80: add     edi, 1
-0x78FE83: call    sub_78FA80
+0x78FE83: call    OB_stVector4_Size_010201A0; Returns the number of 4-byte elements in an Oblivion vector as (end-begin)/4, or zero when begin is null. Callers use it for branch-pointer and leaf-pointer collections.
 0x78FE88: cmp     edi, eax
 0x78FE8A: jb      loc_78FDE0
 0x78FE90: pop     edi

@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B310",
+      "0x77B31D"
+    ]
+  ],
+  "chunks_sha256": "8cb83e9cc7c95f05ad8e846ea48ee1b13fa73d3244487893a637e3399c478414",
+  "comment_regular": "DX10OBSE runtime log pass 2026-05-24: internal render-state byte flag setter is hot and often writes the existing value. Plugin now keeps the call counter but only marks DX10 constants dirty and logs when the byte value actually changes.",
+  "comment_repeatable": "DX10OBSE runtime log pass 2026-05-24: internal render-state byte flag setter is hot and often writes the existing value. Plugin now keeps the call counter but only marks DX10 constants dirty and logs when the byte value actually changes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_77B310",
   "end_ea": "0x77B31D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_77B310",
   "segment": ".text",
   "sha256": "8cb83e9cc7c95f05ad8e846ea48ee1b13fa73d3244487893a637e3399c478414",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B310",
+  "total_chunk_size": 13,
   "type": "char __thiscall(_BYTE *this, char)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 2

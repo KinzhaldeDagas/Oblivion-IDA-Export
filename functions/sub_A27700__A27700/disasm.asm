@@ -1,5 +1,5 @@
 0xA27700: push    esi
-0xA27701: mov     esi, dword_B45FA8
+0xA27701: mov     esi, OB_ShaderConstantStorage_010201A0+194h
 0xA27707: test    esi, esi
 0xA27709: jz      short loc_A27727
 0xA2770B: lea     eax, [esi+4]

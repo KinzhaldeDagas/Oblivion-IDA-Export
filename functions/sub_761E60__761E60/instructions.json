@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x761E60",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Oblivion-authoritative: builds the 0x38-byte D3DPRESENT_PARAMETERS block. Chooses framebuffer/depth formats, multisample type/quality, swap effect/backbuffer count, windowed/fullscreen mode, refresh rate, and presentation interval; degrades unsupported requests.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x761EB9",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x761EC8",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x761F06",
-    "line": "call    sub_775280",
+    "line": "call    NiDX9DeviceDesc_SelectCompatibleDepthStencilFormat; Select a compatible depth/stencil format from cached DX9 device capabilities. For a surface request above 16 depth bits, normalize the selection target to 24 depth bits and 8 stencil bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x761F20",
-    "line": "push    offset byte_B3F828; Dst",
+    "line": "push    offset unk_B3F828; Dst",
     "mnemonic": "push",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x761F2F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x76203D",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x7620B3",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x7620D0",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

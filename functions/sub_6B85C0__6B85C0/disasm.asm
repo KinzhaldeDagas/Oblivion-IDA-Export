@@ -1,4 +1,4 @@
-0x6B85C0: cmp     [esp+arg_0], 0
+0x6B85C0: cmp     [esp+skipGreeting], 0; FirstTopic(abSkipGreeting). Sets the cursor to the inline head node; when skipGreeting is true it advances once, so callers render/select ordinary TOPIC choices without replaying the greeting.
 0x6B85C5: lea     eax, [ecx+4]
 0x6B85C8: mov     [ecx], eax
 0x6B85CA: jz      short loc_6B85D5

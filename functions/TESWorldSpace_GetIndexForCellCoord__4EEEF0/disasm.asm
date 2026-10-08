@@ -1,18 +1,18 @@
-0x4EEEF0: push    ebx
+0x4EEEF0: push    ebx; EngineFix trace 2026-05-11: GetIndexForCellCoord validates coordinates against worldspace [0xAC..0xB8] bounds. DoPostFixups offset-table allocation is based on [0x98..0xA4], so callers that write into rebuilt tables must separately check index against the allocation rectangle.
 0x4EEEF1: push    ebp
 0x4EEEF2: mov     ebx, ecx
 0x4EEEF4: fld     dword ptr [ebx+0ACh]
 0x4EEEFA: push    esi
 0x4EEEFB: push    edi
-0x4EEEFC: call    Double_To_SInt32
+0x4EEEFC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EEF01: fld     dword ptr [ebx+0B0h]
 0x4EEF07: mov     esi, eax
 0x4EEF09: sar     esi, 0Ch
-0x4EEF0C: call    Double_To_SInt32
+0x4EEF0C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EEF11: fld     dword ptr [ebx+0B4h]
 0x4EEF17: mov     ebp, eax
 0x4EEF19: sar     ebp, 0Ch
-0x4EEF1C: call    Double_To_SInt32
+0x4EEF1C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EEF21: mov     edi, eax
 0x4EEF23: mov     eax, [esp+10h+a2]
 0x4EEF27: sar     edi, 0Ch
@@ -21,7 +21,7 @@
 0x4EEF2E: cmp     eax, esi
 0x4EEF30: jl      short loc_4EEF65
 0x4EEF32: fld     dword ptr [ebx+0B8h]
-0x4EEF38: call    Double_To_SInt32
+0x4EEF38: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EEF3D: mov     ecx, [esp+10h+a3]
 0x4EEF41: sar     eax, 0Ch
 0x4EEF44: cmp     ecx, eax

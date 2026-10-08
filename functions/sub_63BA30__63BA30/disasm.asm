@@ -58,7 +58,7 @@
 0x63BAE8: fnstsw  ax
 0x63BAEA: test    ah, 44h
 0x63BAED: jnp     loc_63BB87
-0x63BAF3: mov     ecx, offset TimeGlobals
+0x63BAF3: mov     ecx, 0B332E0h
 0x63BAF8: call    TimeGlobals_GetGameHour
 0x63BAFD: fstp    [esp+58h+var_40]
 0x63BB01: fld     [esp+58h+var_40]
@@ -94,15 +94,15 @@
 0x63BB65: test    ebp, ebp
 0x63BB67: jz      short loc_63BB87
 0x63BB69: mov     ecx, ebp
-0x63BB6B: call    sub_565DF0
+0x63BB6B: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x63BB70: test    al, al
 0x63BB72: jz      short loc_63BB87
-0x63BB74: mov     ecx, offset TimeGlobals
+0x63BB74: mov     ecx, 0B332E0h
 0x63BB79: call    TimeGlobals_GetGameDay
 0x63BB7E: mov     ecx, ebx
 0x63BB80: push    eax
 0x63BB81: push    ebp
-0x63BB82: call    sub_41FFC0
+0x63BB82: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x63BB87: mov     eax, [esp+58h+var_44]
 0x63BB8B: mov     edx, [esi]
 0x63BB8D: mov     edx, [edx+18h]
@@ -412,7 +412,7 @@
 0x63BF1B: mov     ecx, edi
 0x63BF1D: call    edx
 0x63BF1F: mov     ecx, edi; jumptable 0063BC6F default case, cases 10-12,16,18-21,23-28,30,33-36,38-40,42-44
-0x63BF21: call    Actor__GetProcessLevel
+0x63BF21: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x63BF26: test    eax, eax
 0x63BF28: jnz     loc_63C66C
 0x63BF2E: mov     edx, [esi]
@@ -481,8 +481,8 @@
 0x63BFF8: fstp    [esp+5Ch+var_5C]; float
 0x63BFFB: push    0; char
 0x63BFFD: push    edi; int
-0x63BFFE: mov     ecx, edi
-0x63C000: call    sub_5E0380
+0x63BFFE: mov     ecx, edi; this
+0x63C000: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x63C005: mov     ecx, eax
 0x63C007: call    sub_566DC0
 0x63C00C: test    al, al
@@ -545,7 +545,7 @@
 0x63C0A7: fld     dword ptr ds:0A5B6C0h
 0x63C0AD: mov     edx, [eax+174h]
 0x63C0B3: push    edi; a7
-0x63C0B4: push    offset sub_645A30; a6
+0x63C0B4: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6
 0x63C0B9: push    ecx
 0x63C0BA: mov     ecx, edi
 0x63C0BC: fstp    [esp+64h+a5]; a5
@@ -560,7 +560,7 @@
 0x63C0D6: call    edx
 0x63C0D8: push    eax; a2
 0x63C0D9: mov     ecx, edi; this
-0x63C0DB: call    TESObjectREFR_GetParentCell
+0x63C0DB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63C0E0: mov     ecx, ds:0B33A98h
 0x63C0E6: push    eax; a1
 0x63C0E7: call    sub_446B90
@@ -573,7 +573,7 @@
 0x63C100: fld     dword ptr ds:0A5B6C0h
 0x63C106: mov     edx, [eax+174h]
 0x63C10C: push    edi; a7
-0x63C10D: push    offset sub_645AF0; a6
+0x63C10D: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x63C112: push    ecx
 0x63C113: mov     ecx, edi
 0x63C115: fstp    [esp+64h+a5]; a5
@@ -588,7 +588,7 @@
 0x63C12F: call    edx
 0x63C131: push    eax; a2
 0x63C132: mov     ecx, edi; this
-0x63C134: call    TESObjectREFR_GetParentCell
+0x63C134: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63C139: mov     ecx, ds:0B33A98h
 0x63C13F: push    eax; a1
 0x63C140: call    sub_446B90
@@ -855,15 +855,15 @@
 0x63C430: call    Script_AddEventToExtraScript
 0x63C435: add     esp, 0Ch
 0x63C438: mov     ecx, ebx
-0x63C43A: call    sub_565DF0
+0x63C43A: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x63C43F: test    al, al
 0x63C441: jz      short loc_63C456
-0x63C443: mov     ecx, offset TimeGlobals
+0x63C443: mov     ecx, 0B332E0h
 0x63C448: call    TimeGlobals_GetGameDay
 0x63C44D: mov     ecx, ebp
 0x63C44F: push    eax
 0x63C450: push    ebx
-0x63C451: call    sub_41FFC0
+0x63C451: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x63C456: cmp     dword ptr [ebx+30h], 0
 0x63C45A: jnz     loc_63C66C
 0x63C460: cmp     dword ptr [esi+0C0h], 0
@@ -884,14 +884,14 @@
 0x63C491: call    eax
 0x63C493: mov     dword ptr [esi+0C0h], 0
 0x63C49D: jmp     loc_63C5DF
-0x63C4A2: mov     ecx, [esi+8]
-0x63C4A5: call    sub_5660A0
+0x63C4A2: mov     ecx, [esi+8]; self
+0x63C4A5: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x63C4AA: test    al, al
 0x63C4AC: jz      loc_63C5DF
 0x63C4B2: mov     ebx, [esi+8]
-0x63C4B5: mov     ecx, ebx
+0x63C4B5: mov     ecx, ebx; this
 0x63C4B7: mov     [esp+58h+var_40], ebx
-0x63C4BB: call    sub_567770
+0x63C4BB: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x63C4C0: test    al, al
 0x63C4C2: jz      loc_63C5B3
 0x63C4C8: mov     edx, [edi]
@@ -911,17 +911,17 @@
 0x63C4F5: mov     edx, [ecx+8]
 0x63C4F8: push    edx
 0x63C4F9: mov     ecx, edi
-0x63C4FB: call    sub_5E8DE0
+0x63C4FB: call    sub_5E8DE0; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.
 0x63C500: mov     ebx, [edi+58h]
 0x63C503: mov     ecx, ebp
-0x63C505: call    sub_41FB40
+0x63C505: call    ExtraDataList_GetPackageExtraIndex; Returns ExtraPackage's package index field, or zero when absent.
 0x63C50A: mov     [ebx+4], eax
 0x63C50D: mov     eax, [edi+58h]
 0x63C510: mov     ebx, [eax]
 0x63C512: mov     ecx, ebp
 0x63C514: mov     [esp+58h+arg_4], eax
 0x63C518: add     ebx, 0D0h ; 'Ð'
-0x63C51E: call    sub_41FB60
+0x63C51E: call    ExtraDataList_GetPackageExtraTarget; Returns ExtraPackage's target TESObjectREFR pointer, or null.
 0x63C523: mov     ecx, [esp+58h+arg_4]
 0x63C527: push    eax
 0x63C528: mov     eax, [ebx]
@@ -929,7 +929,7 @@
 0x63C52C: mov     ebx, [edi]
 0x63C52E: mov     ecx, ebp
 0x63C530: add     ebx, 17Ch
-0x63C536: call    sub_41FB80
+0x63C536: call    ExtraDataList_GetPackageExtraComplete; Returns ExtraPackage's completion byte, or false.
 0x63C53B: mov     edx, [ebx]
 0x63C53D: mov     ecx, edi
 0x63C53F: push    eax
@@ -939,7 +939,7 @@
 0x63C547: mov     ecx, ebp
 0x63C549: mov     [esp+58h+arg_4], eax
 0x63C54D: add     ebx, 394h
-0x63C553: call    sub_41FBA0
+0x63C553: call    ExtraDataList_GetPackageExtraActivate; Returns ExtraPackage's activation byte, or false.
 0x63C558: mov     ecx, [esp+58h+arg_4]
 0x63C55C: push    eax
 0x63C55D: mov     eax, [ebx]
@@ -994,7 +994,7 @@
 0x63C5E2: xor     ebx, ebx
 0x63C5E4: cmp     ecx, ebx
 0x63C5E6: jz      short loc_63C60F
-0x63C5E8: call    sub_565DF0
+0x63C5E8: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x63C5ED: test    al, al
 0x63C5EF: jnz     short loc_63C607
 0x63C5F1: mov     eax, [esi+8]
@@ -1012,7 +1012,7 @@
 0x63C612: cmp     eax, ebx
 0x63C614: jz      short loc_63C61F
 0x63C616: push    eax
-0x63C617: call    FormHeapFree
+0x63C617: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63C61C: add     esp, 4
 0x63C61F: mov     [esi+44h], ebx
 0x63C622: mov     [esi+24h], ebx
@@ -1025,7 +1025,7 @@
 0x63C635: test    ebp, ebp
 0x63C637: jz      short loc_63C642
 0x63C639: push    ebp
-0x63C63A: call    FormHeapFree
+0x63C63A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63C63F: add     esp, 4
 0x63C642: push    ebp
 0x63C643: mov     ecx, ebx
@@ -1038,7 +1038,7 @@
 0x63C657: lea     ecx, [esi+4Ch]
 0x63C65A: fstp    dword ptr [esi+198h]
 0x63C660: mov     dword ptr [esi+30h], 0
-0x63C667: call    BSSimpleList_Clear
+0x63C667: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x63C66C: cmp     byte ptr ds:0B15800h, 0
 0x63C673: jz      short loc_63C689
 0x63C675: mov     ecx, ds:0B3BF80h

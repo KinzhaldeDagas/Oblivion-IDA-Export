@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirect3DExecuteBufferVtbl",
+  "definition": "struct IDirect3DExecuteBufferVtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirect3DExecuteBuffer *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);\nULONG (__stdcall *AddRef)(IDirect3DExecuteBuffer *This) __offset(OFF64|AUTO);\nULONG (__stdcall *Release)(IDirect3DExecuteBuffer *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Initialize)(IDirect3DExecuteBuffer *This, LPDIRECT3DDEVICE, LPD3DEXECUTEBUFFERDESC) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Lock)(IDirect3DExecuteBuffer *This, LPD3DEXECUTEBUFFERDESC) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Unlock)(IDirect3DExecuteBuffer *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetExecuteData)(IDirect3DExecuteBuffer *This, LPD3DEXECUTEDATA) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetExecuteData)(IDirect3DExecuteBuffer *This, LPD3DEXECUTEDATA) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Validate)(IDirect3DExecuteBuffer *This, LPDWORD, LPD3DVALIDATECALLBACK, LPVOID, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Optimize)(IDirect3DExecuteBuffer *This, DWORD) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671835377,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DExecuteBuffer *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3DExecuteBuffer *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Initialize",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This, LPDIRECT3DDEVICE, LPD3DEXECUTEBUFFERDESC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Lock",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This, LPD3DEXECUTEBUFFERDESC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unlock",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetExecuteData",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This, LPD3DEXECUTEDATA)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetExecuteData",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This, LPD3DEXECUTEDATA)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Validate",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This, LPDWORD, LPD3DVALIDATECALLBACK, LPVOID, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Optimize",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3DExecuteBuffer *This, DWORD)"
     }
   ],
   "name": "IDirect3DExecuteBufferVtbl",
+  "ordinal": 4197,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

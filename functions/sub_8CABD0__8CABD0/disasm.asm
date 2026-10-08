@@ -4,7 +4,7 @@
 0x8CABD8: mov     dword ptr [esi], offset off_A99B58
 0x8CABDE: jz      short loc_8CABE9
 0x8CABE0: push    esi
-0x8CABE1: call    FormHeapFree
+0x8CABE1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8CABE6: add     esp, 4
 0x8CABE9: mov     eax, esi
 0x8CABEB: pop     esi

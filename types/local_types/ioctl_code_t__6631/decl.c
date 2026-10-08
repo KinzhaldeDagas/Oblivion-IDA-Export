@@ -1,1 +1,1 @@
-ioctl_code_t
+typedef unsigned int ioctl_code_t;

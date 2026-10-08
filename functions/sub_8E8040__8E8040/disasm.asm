@@ -36,7 +36,7 @@
 0x8E809B: mov     dword ptr [esi], offset ??_7hkConstraintCinfo@@6B@; const hkConstraintCinfo::`vftable'
 0x8E80A1: call    sub_8A0200
 0x8E80A6: push    esi
-0x8E80A7: call    FormHeapFree
+0x8E80A7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8E80AC: add     esp, 4
 0x8E80AF: mov     eax, edi
 0x8E80B1: pop     edi

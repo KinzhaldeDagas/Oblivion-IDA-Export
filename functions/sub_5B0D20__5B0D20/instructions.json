@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x5B0D74",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5B0D7A",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5B0D7B",
-    "line": "call    TESObjectREF_GetItemCount",
+    "line": "call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x5B0DA2",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B0DA5",
-    "line": "push    0FAEh; a2",
+    "line": "push    0FAEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B0DAA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x5B0DBC",
-    "line": "mov     ecx, [esi+38h]; this",
+    "line": "mov     ecx, [esi+38h]; reference",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5B0DBF",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x5B0DDA",
-    "line": "mov     ecx, [esi+38h]; this",
+    "line": "mov     ecx, [esi+38h]; reference",
     "mnemonic": "mov",
     "size": 3
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x5B0DDF",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5B0E0B",
-    "line": "call    sub_5B0260",
+    "line": "call    LockPickMenu_TryAutoAttempt",
     "mnemonic": "call",
     "size": 5
   },

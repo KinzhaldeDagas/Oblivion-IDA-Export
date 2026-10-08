@@ -73,7 +73,6 @@
 0x8C723E: mov     [esp+24h+var_14], ecx
 0x8C7242: jbe     loc_8C7391
 0x8C7248: jmp     short loc_8C7254
-0x8C724A: align 10h
 0x8C7250: mov     ebx, [esp+24h+var_8]
 0x8C7254: mov     ecx, [esp+24h+var_14]
 0x8C7258: push    ecx; int
@@ -121,7 +120,7 @@
 0x8C72D3: mov     ecx, [esp+24h+var_14]
 0x8C72D7: lea     ebx, [eax+ecx*8]
 0x8C72DA: jmp     short loc_8C72E1
-0x8C72DC: mov     ebx, offset dword_BA8138
+0x8C72DC: mov     ebx, offset unk_BA8138
 0x8C72E1: mov     eax, [ebx]
 0x8C72E3: test    eax, eax
 0x8C72E5: jz      short loc_8C72F3
@@ -230,7 +229,7 @@
 0x8C7427: mov     edx, [eax+28h]
 0x8C742A: lea     ebp, [edx+ebx*8]
 0x8C742D: jmp     short loc_8C7434
-0x8C742F: mov     ebp, offset dword_BA8138
+0x8C742F: mov     ebp, offset unk_BA8138
 0x8C7434: mov     eax, [ebp+0]
 0x8C7437: test    eax, eax
 0x8C7439: jz      short loc_8C7447

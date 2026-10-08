@@ -1,1 +1,5 @@
-_FILETIME
+struct _FILETIME
+{
+DWORD dwLowDateTime;
+DWORD dwHighDateTime;
+};

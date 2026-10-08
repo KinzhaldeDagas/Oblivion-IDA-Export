@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7610",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Compact stock SIdvBranchInfo constructor. Initializes core branch fields, diffuse texcoord controls, flare defaults at +0x24..+0x4C, and default spline pointers.",
     "mnemonic": "push",
     "size": 2
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x7A76E1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A76E3",
-    "line": "call    sub_785BE0",
+    "line": "call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x7A7710",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7712",
-    "line": "call    sub_785BE0",
+    "line": "call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x7A773C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A773E",
-    "line": "call    sub_785BE0",
+    "line": "call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x7A7768",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A776A",
-    "line": "call    sub_785BE0",
+    "line": "call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x7A7794",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A7796",
-    "line": "call    sub_785BE0",
+    "line": "call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x7A77C0",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A77C2",
-    "line": "call    sub_785BE0",
+    "line": "call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.",
     "mnemonic": "call",
     "size": 5
   },
@@ -910,5 +910,227 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CCDB0",
+    "line": "mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDB3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDB4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCDB9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDBA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDBB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDBE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDBF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCDC4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDC5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDC6",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDC9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDCA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCDCF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDD0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDD1",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDD4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDD5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCDDA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDDB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDDC",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDDF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDE0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCDE5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDE6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDE7",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDEA",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDEB",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCDF0",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDF1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CCDF2",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CCDF6",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDF9",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CCDFC",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CCDFE",
+    "line": "call    @__security_check_cookie@4",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE03",
+    "line": "mov     eax, offset stru_AF61A4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CCE08",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -4,7 +4,7 @@
 0x43ADD3: mov     esi, ecx
 0x43ADD5: call    sub_4378F0
 0x43ADDA: test    esi, esi
-0x43ADDC: mov     edi, ioManager
+0x43ADDC: mov     edi, ds:0B33A10h
 0x43ADE2: push    ecx
 0x43ADE3: mov     eax, esp
 0x43ADE5: mov     [esp+10h+var_4], esp

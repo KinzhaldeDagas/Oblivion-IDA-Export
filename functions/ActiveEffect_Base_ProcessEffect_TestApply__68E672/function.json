@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x68E672",
+      "0x68E69C"
+    ]
+  ],
+  "chunks_sha256": "4a7e4124aa2c6c1fa9072ad7dbc99e04dab1b01ebe4dcec2f2cb03181df69a06",
+  "comment_regular": "Verified apply/update state gate: if duration is expired or bTerminated is set, enters termination handling; otherwise bApplied selects the already-applied update path versus first-application/menu checks.",
+  "comment_repeatable": "Verified apply/update state gate: if duration is expired or bTerminated is set, enters termination handling; otherwise bApplied selects the already-applied update path versus first-application/menu checks.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_ProcessEffect:::TestApply",
   "end_ea": "0x68E69C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_ProcessEffect:::TestApply",
   "segment": ".text",
   "sha256": "4a7e4124aa2c6c1fa9072ad7dbc99e04dab1b01ebe4dcec2f2cb03181df69a06",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68E672",
-  "type": "int __usercall@<eax>(ActiveEffect *a1@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>, float a6)",
+  "total_chunk_size": 42,
+  "type": "void __usercall(ActiveEffect *@<ecx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>, int, float)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 1
 }

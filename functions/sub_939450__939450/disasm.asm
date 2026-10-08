@@ -198,7 +198,7 @@
 0x9396C6: test    edx, edx
 0x9396C8: mov     eax, [ebp+arg_C]
 0x9396CB: mov     edi, [eax]
-0x9396CD: movaps  xmm0, xmmword ptr [esp+1E0h+var_130]
+0x9396CD: movaps  xmm0, [esp+1E0h+var_130]
 0x9396D5: movaps  xmmword ptr [edi], xmm0
 0x9396D8: movaps  xmm0, xmmword ptr [ebx]
 0x9396DB: movaps  xmmword ptr [edi+10h], xmm0

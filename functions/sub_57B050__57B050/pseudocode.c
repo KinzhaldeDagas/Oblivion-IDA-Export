@@ -5,7 +5,7 @@ bool __cdecl sub_57B050(_DWORD *a1)
   void *ParentMenu; // eax
   _DWORD *v4; // eax
 
-  if ( InterfaceManager_GetSingleton(0, 1)
+  if ( InterfaceManager_GetSingleton(0, 1) /*0x57b0dd*/
     && InterfaceManager_GetSingleton(0, 1)->cursor
     && InterfaceManager_GetSingleton(0, 1)->menuRoot
     && (Singleton = InterfaceManager_GetSingleton(0, 1), Tile_GetFloat(Singleton->menuRoot, 0xFAE) == fConstant_2)
@@ -18,10 +18,10 @@ bool __cdecl sub_57B050(_DWORD *a1)
                 &HUDSubtitleMenu `RTTI Type Descriptor',
                 0)) != 0) )
   {
-    return sub_5A8F80(v4, a1);
+    return sub_5A8F80(v4, a1); /*0x57b0e6*/
   }
   else
   {
-    return 0;
+    return 0; /*0x57b0ec*/
   }
 }

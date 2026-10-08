@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4688D0",
-    "line": "push    ebp",
+    "line": "push    ebp; CustomAnimSupport decode: loads only chunk type 0x5A46464B ('KFFZ') as packed nul-terminated animation path strings.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4688EA",
-    "line": "cmp     eax, 5A46464Bh",
+    "line": "cmp     eax, 5A46464Bh; CustomAnimSupport xref: immediate chunk-type test for 0x5A46464B ('KFFZ').",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4688FA",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MEF v37 verified KFFZ buffer fix: allocate chunkLength+1, zero sentinel at [buffer+chunkLength], and on overflow/OOM remove pending size arg then enter cleanup epilogue 0x468940. Prevents null Dst and unterminated packed-string overread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x46890B",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x468910",
-    "line": "cmp     byte ptr [ebx], 0",
+    "line": "cmp     byte ptr [ebx], 0; MEF v37 proof: vanilla packed KFFZ parser uses byte tests/strlen-like scans without bounding them by chunk length; allocator sentinel guarantees termination after the copied chunk.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x468918",
-    "line": "call    TESAnimation_AddAnimation",
+    "line": "call    TESAnimation_AddAnimation; CustomAnimSupport decode: append KFFZ string if absent; heap-copies strlen+1 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x468938",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x468940",
-    "line": "pop     esi",
+    "line": "pop     esi; MEF v37 allocation-failure continuation: buffer does not exist, so enter after FormHeapFree and restore ESI/EBX/EDI/EBP normally.",
     "mnemonic": "pop",
     "size": 1
   },

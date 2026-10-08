@@ -43,9 +43,9 @@
 0x71D941: mov     ecx, [esp+Src]
 0x71D945: mov     edx, [esp+Dst]
 0x71D949: lea     eax, [eax+eax*2]
-0x71D94C: push    eax; Size
-0x71D94D: push    ecx; Src
-0x71D94E: push    edx; Dst
-0x71D94F: call    _memcpy
+0x71D94C: push    eax; byteCount
+0x71D94D: push    ecx; source
+0x71D94E: push    edx; destination
+0x71D94F: call    _memcpy;
 0x71D954: add     esp, 0Ch
 0x71D957: retn

@@ -86,7 +86,7 @@
 0x7F374C: push    ecx; a3
 0x7F374D: push    edx; a2
 0x7F374E: mov     ecx, esi; this
-0x7F3750: call    sub_779710
+0x7F3750: call    sub_779710; MoonSugar build 39: base shader +0x34 transform slot branches skinned partition to CalculateBoneMatrixes/sub_765560, otherwise pass-0 non-skinned to sub_765480. Confirms hardware skin needs separate post-flush hook.
 0x7F3755: pop     edi
 0x7F3756: pop     esi
 0x7F3757: add     esp, 5Ch

@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x469C2A",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x469C2E",
-    "line": "push    esi",
+    "line": "push    esi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x469C2F",
-    "line": "call    TESActorBase_GetEquippableItemRating",
+    "line": "call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
     "mnemonic": "call",
     "size": 5
   },

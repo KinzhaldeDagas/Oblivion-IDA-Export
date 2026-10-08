@@ -26,45 +26,45 @@ int __userpurge TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop@<ea
   int v23; // [esp-4h] [ebp-8h]
   __int16 v24; // [esp+0h] [ebp-4h]
 
-  a14 = a1;
-  a6 = a1;
-  TESLeveledList_SimpleCalcLeveledForm(a2, a5, &a14, &a6, v22, v23, v24);
-  v17 = a16;
-  if ( a16 != a1 )
+  a14 = a1; /*0x46cea2*/
+  a6 = a1; /*0x46cea6*/
+  TESLeveledList_SimpleCalcLeveledForm(a2, a5, &a14, &a6, v22, v23, v24); /*0x46ceaa*/
+  v17 = a16; /*0x46ceaf*/
+  if ( a16 != a1 ) /*0x46ceb5*/
   {
-    v18 = a8;
-    if ( (_WORD)a8 != (_WORD)a1 )
+    v18 = a8; /*0x46ceb7*/
+    if ( (_WORD)a8 != (_WORD)a1 ) /*0x46cebe*/
     {
-      v19 = (TESObject *)OblivionDynamicCast(
+      v19 = (TESObject *)OblivionDynamicCast( /*0x46cecd*/
                            a16,
                            (int)a1,
                            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                            &TESLeveledList `RTTI Type Descriptor',
                            (int)a1);
-      if ( v19 == a1 )
+      if ( v19 == a1 ) /*0x46ced7*/
       {
-        v21 = (TESObject *)OblivionDynamicCast(
+        v21 = (TESObject *)OblivionDynamicCast( /*0x46cefa*/
                              v17,
                              (int)a1,
                              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                              (struct TypeDescriptor *)&TESBoundObject `RTTI Type Descriptor',
                              (int)a1);
-        if ( v21 != a1 )
-          TESContainer_AddValidatedForm((TESContainer *)&a10, v21, (unsigned __int16)v18, (bool)a1);
+        if ( v21 != a1 ) /*0x46cf04*/
+          TESContainer_AddValidatedForm((TESContainer *)&a10, v21, (unsigned __int16)v18, (bool)a1); /*0x46cf10*/
       }
       else
       {
-        TESLeveledList_CalcLeveledForm(v19, a15, v18);
+        TESLeveledList_CalcLeveledForm(v19, a15, v18); /*0x46cee6*/
       }
     }
   }
   return TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop_next(
-           (int)a1,
-           (int)a2,
+           a1,
+           a2,
            a3,
            a4,
            a5,
-           (int)a6,
+           a6,
            a7,
            a8,
            a9,
@@ -75,8 +75,8 @@ int __userpurge TESLeveledList_CalcLeveledForm_::CalcForEachItemInCount_Loop@<ea
            (int)a12.list.data,
            (int)a12.list.next,
            a13,
-           (int)a14,
+           a14,
            a15,
-           (int)a16,
+           a16,
            a17);
 }

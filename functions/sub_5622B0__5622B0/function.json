@@ -1,19 +1,36 @@
 {
-  "callees_count": 121,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 43,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5622B0",
+  "chunks": [
+    [
+      "0x5622B0",
+      "0x562E14"
+    ],
+    [
+      "0x9BD200",
+      "0x9BD2A4"
+    ]
+  ],
+  "chunks_sha256": "ad59ec923d28bcc21b1f6ab72119264879561afd44ebf8b39f4eeccb513e7d38",
+  "comment_regular": "\n\n[2026-10-02 Fallout comparative pass]\nVerified comparison 2026-10-02: Fallout CreateLeafGeometry 0x8246B110 corroborates STLSPData lifecycle and scalar wiring. Oblivion allocates 0x20 bytes, retains at BSTreeModel+0x20, sets payload+0x0C from model+0x44 (Fallout model+0x3C), +0x10/+0x14 from wind engine+0x3C/+0x40, +0x18/+0x1C from treeObject virtual +0x164/+0x16C. Speed writes require tree, wind engine, and treeObject. Constructor leaves those speed fields uninitialized; runtime reachability of missing-input paths remains Unknown.\n[Mesh leaves v126, 2026-10-05] Native builder allocates leaf geometry/properties only when Src.primaryLeaves.leafCount is nonzero (0x56275A). Runtime v125 Cattail reports zero leaf counts for both LODs and null properties; it cannot be converted from native cards. Palmetto reaches conversion but a late CPU array read rejects. Which array was unavailable is UNKNOWN from v125 logs. Plugin v126 captures owned per-LOD map indices, native card positions/normals/UVs/indices/STSP and dimensions at the post-builder 0x563741 boundary AFTER atlas transaction, before CreateArt pre-cache. Conversion consumes these copies; count/data identity guards preserve fallback. End-to-end pixels remain UNVERIFIED.\n[v128 correction 2026-10-06] CONFIRMED: 0x562DA0 invokes CSpeedTreeRT__FreeLeafLODDataArrays before returning. 0x787217 reaches0x798690; 0x7986C8 frees map bytes and0x798752 clears SLodGeometry+10. Thus post-builder map capture in v126/v127 necessarily reads null. v127 logs map indices: native array bounds for Cattail and Palmetto, no MeshLeaves:attached. v128 preserves exact texture*2+mirror bytes at existing0x562744 GetGeometry hook, then forwards owned map vectors to post-builder vertex/UV capture. Native geometry remains fallback when capture fails. User sees upside-down Cattail foliage under v127; mesh orientation was not exercised in that run.\n[Palmetto mesh material v134, 2026-10-06] CONFIRMED native v91 set by differing leaf texture filenames; UV copy0x5629A2 uses V indices7,5,3,1 rather than1,3,5,7. Palmetto_RT authored maps PalmettoLeaf_1/PalmettoLeaf_2 differ; its installed SampleCompositeMap_Diffuse.dds matches supplied SDK pixels/file hash. v134 captures first source card UV before array cleanup, compares with native built card before atlas rebasing, and undoes proved native V reversal only in owned mesh UV interpolation. Unknown order retains stock cards. Cattail direct-order and signed-zero handling remain tested. Live visual correction remains UNVERIFIED.\n[RT4.1 parity v146 2026-10-07] Native fills same normal into all four NiTriShapeData vertices5628DC..562927. STSP third float has integer corner+4*leafCardIndex, fractional green dimming; loop starts corner2 at562985 and advances modulo4. Post-builder v146 smoothing uses actual STSP corner integer, excludes authored mesh maps, validates all LODs before writing native-owned normal arrays, then captures mesh sources. No new scene object ownership. Static/manual lighting still needs four-corner colors and is explicitly deferred.\n[Leaf RGB v148 2026-10-08] Native builder calls property virtual94 at562D4A and assigns returned additional-data at562D4F BEFORE returning; data+34 is already nonnull. v148 replaces it with a validated owned-copy one-stream block while replacing STSP with a tagged owner retaining an isolated shader. This avoids leaving the old additional stream borrowing a freed STSP array. All allocation/preflight completes before publication; no already-uploaded data accepted.\n\nVerified leaf layout: +0x18 leafGeometryDataByLOD and +0x28 leafShaderPropertiesByLOD are allocated by leaf LOD count and populated. +0x30 leafCachedPropertiesByLOD is also allocated/zeroed, but no per-slot write occurs in this stock builder; CreateArt only attaches an entry if present. Its field role is Candidate and population source is Unknown.",
+  "comment_repeatable": "Verified leaf layout: +0x18 leafGeometryDataByLOD and +0x28 leafShaderPropertiesByLOD are allocated by leaf LOD count and populated. +0x30 leafCachedPropertiesByLOD is also allocated/zeroed, but no per-slot write occurs in this stock builder; CreateArt only attaches an entry if present. Its field role is Candidate and population source is Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "BSTreeModel_CreateLeafGeometry",
   "end_ea": "0x562E14",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5622B0",
+  "name": "BSTreeModel_CreateLeafGeometry",
   "segment": ".text",
   "sha256": "63b4416a3f5c9bb33fb5c1033a82b784268541e4db26440a610cf1750db4426b",
   "size": 2916,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5622B0",
-  "type": "int __thiscall(float **this, int)",
-  "xrefs_from_count": 976,
+  "total_chunk_size": 3080,
+  "type": "void __thiscall(BSTreeModel_OblivionLayout_058 *this, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree)",
+  "xrefs_from_count": 1031,
   "xrefs_to_count": 1
 }

@@ -1,0 +1,315 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OB_CTreeEngine_010201A0",
+  "definition": "struct OB_CTreeEngine_010201A0\n{\nvoid *vftable;\nOB_stVec3_010201A0 treePosition;\nfloat billboardSize;\nfloat currentLod;\nfloat overrideTreeSize;\nfloat overrideTreeVariance;\nchar randomPlaceholderByte;\nchar transientDataIntact;\n__int16 pad_22;\nchar branchTextureFilenameSmallString[28];\nfloat treeFarLodDistance;\nfloat treeNearLodDistance;\nint treeRandomSeed;\nfloat treeSizeScalar;\nfloat treeSizeVariance;\nint flareSeed;\nOB_CBranch_010201A0 *trunkBranch;\nOB_CIndexedGeometry_010201A0 *branchGeometry;\nOB_stVector16_010201A0 branchInfoVector;\nint branchLodCount;\nOB_stVectorBillboardLeafPtr_010201A0 generatedBillboardLeaves;\nOB_SIdvLeafInfo_010201A0 leafInfo;\nOB_stVectorBillboardLeafPtr_010201A0 *leafLodVectors;\nchar parsedLeafLodFlag;\nchar pad_D9[3];\nfloat minBranchVolumePercent;\nfloat maxBranchVolumePercent;\nfloat leafReductionPercent;\nfloat branchReductionFuzziness;\nfloat largeBranchPercent;\nint branchWindWeightLevel;\nOB_SIdvWindInfo_010201A0 embeddedWindInfo;\n}\n",
+  "id": 18374686479672083193,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "vftable",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "treePosition",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 12,
+      "type": "OB_stVec3_010201A0"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "billboardSize",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "currentLod",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "overrideTreeSize",
+      "offset": 24,
+      "offset_hex": "0x18",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "overrideTreeVariance",
+      "offset": 28,
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "randomPlaceholderByte",
+      "offset": 32,
+      "offset_hex": "0x20",
+      "size": 1,
+      "type": "char"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "transientDataIntact",
+      "offset": 33,
+      "offset_hex": "0x21",
+      "size": 1,
+      "type": "char"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_22",
+      "offset": 34,
+      "offset_hex": "0x22",
+      "size": 2,
+      "type": "__int16"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "branchTextureFilenameSmallString",
+      "offset": 36,
+      "offset_hex": "0x24",
+      "size": 28,
+      "type": "char[28]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "treeFarLodDistance",
+      "offset": 64,
+      "offset_hex": "0x40",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "treeNearLodDistance",
+      "offset": 68,
+      "offset_hex": "0x44",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "treeRandomSeed",
+      "offset": 72,
+      "offset_hex": "0x48",
+      "size": 4,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "treeSizeScalar",
+      "offset": 76,
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "treeSizeVariance",
+      "offset": 80,
+      "offset_hex": "0x50",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "flareSeed",
+      "offset": 84,
+      "offset_hex": "0x54",
+      "size": 4,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "trunkBranch",
+      "offset": 88,
+      "offset_hex": "0x58",
+      "size": 4,
+      "type": "OB_CBranch_010201A0 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "branchGeometry",
+      "offset": 92,
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "OB_CIndexedGeometry_010201A0 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "branchInfoVector",
+      "offset": 96,
+      "offset_hex": "0x60",
+      "size": 16,
+      "type": "OB_stVector16_010201A0"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "branchLodCount",
+      "offset": 112,
+      "offset_hex": "0x70",
+      "size": 4,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "generatedBillboardLeaves",
+      "offset": 116,
+      "offset_hex": "0x74",
+      "size": 16,
+      "type": "OB_stVectorBillboardLeafPtr_010201A0"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "leafInfo",
+      "offset": 132,
+      "offset_hex": "0x84",
+      "size": 80,
+      "type": "OB_SIdvLeafInfo_010201A0"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "leafLodVectors",
+      "offset": 212,
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "OB_stVectorBillboardLeafPtr_010201A0 *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "parsedLeafLodFlag",
+      "offset": 216,
+      "offset_hex": "0xD8",
+      "size": 1,
+      "type": "char"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "pad_D9",
+      "offset": 217,
+      "offset_hex": "0xD9",
+      "size": 3,
+      "type": "char[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "minBranchVolumePercent",
+      "offset": 220,
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "maxBranchVolumePercent",
+      "offset": 224,
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "leafReductionPercent",
+      "offset": 228,
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "branchReductionFuzziness",
+      "offset": 232,
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "largeBranchPercent",
+      "offset": 236,
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "branchWindWeightLevel",
+      "offset": 240,
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "embeddedWindInfo",
+      "offset": 244,
+      "offset_hex": "0xF4",
+      "size": 28,
+      "type": "OB_SIdvWindInfo_010201A0"
+    }
+  ],
+  "name": "OB_CTreeEngine_010201A0",
+  "ordinal": 9717,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 272
+}

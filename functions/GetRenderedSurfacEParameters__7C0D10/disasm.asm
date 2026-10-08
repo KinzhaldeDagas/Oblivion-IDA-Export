@@ -1,4 +1,4 @@
-0x7C0D10: mov     eax, [esp+arg_14]
+0x7C0D10: mov     eax, [esp+arg_14]; MoonSugarEffect decode: default render-target type map. Type 4 is full default-RT dimensions for image-space source; type 3 is full-size ping-pong; types 0x10/0x13 are blur/hit square temps sized by dword_B2C2B8.
 0x7C0D14: mov     dword ptr [eax], 0
 0x7C0D1A: mov     eax, [esp+arg_4]
 0x7C0D1E: cmp     eax, 18h; switch 25 cases
@@ -35,7 +35,7 @@
 0x7C0D91: jge     short loc_7C0D99
 0x7C0D93: fadd    dword ptr ds:0A2FC78h
 0x7C0D99: fmul    qword ptr ds:0A2FAA0h
-0x7C0D9F: call    Double_To_SInt32
+0x7C0D9F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C0DA4: cmp     eax, 100h
 0x7C0DA9: jge     short loc_7C0DC4
 0x7C0DAB: mov     ecx, [esp+4+arg_C]
@@ -60,7 +60,7 @@
 0x7C0DE2: jge     short loc_7C0DEA
 0x7C0DE4: fadd    dword ptr ds:0A2FC78h
 0x7C0DEA: fmul    qword ptr ds:0A2FAA0h
-0x7C0DF0: call    Double_To_SInt32
+0x7C0DF0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C0DF5: mov     ecx, [esp+4+arg_C]
 0x7C0DF9: mov     edx, [esp+4+arg_10]
 0x7C0DFD: mov     [ecx], eax
@@ -160,8 +160,8 @@
 0x7C0F10: fild    [esp+arg_4]
 0x7C0F14: jge     short loc_7C0F1C
 0x7C0F16: fadd    dword ptr ds:0A2FC78h
-0x7C0F1C: call    Double_To_SInt32
-0x7C0F21: mov     ecx, [esp+arg_C]
+0x7C0F1C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x7C0F21: mov     ecx, [esp+arg_C]; Type-5 case: stores default-RT width through the width output pointer. Hex-Rays can misidentify this because the function reuses the same stack slot as a temporary afterward.
 0x7C0F25: mov     [ecx], eax
 0x7C0F27: mov     edx, [esi]
 0x7C0F29: mov     eax, [edx+7Ch]
@@ -173,12 +173,12 @@
 0x7C0F37: push    0
 0x7C0F39: call    eax
 0x7C0F3B: test    eax, eax
-0x7C0F3D: mov     [esp+4+arg_8], eax
+0x7C0F3D: mov     [esp+4+arg_8], eax; Reuses the no-longer-needed width-pointer stack slot as a temporary for the default-RT height; this does not overwrite the width result.
 0x7C0F41: fild    [esp+4+arg_8]
 0x7C0F45: jge     short loc_7C0F4D
 0x7C0F47: fadd    dword ptr ds:0A2FC78h
-0x7C0F4D: call    Double_To_SInt32
-0x7C0F52: mov     ecx, [esp+4+arg_C]
+0x7C0F4D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x7C0F52: mov     ecx, [esp+4+arg_C]; Type-5 case: loads the distinct height output pointer and stores default-RT height.
 0x7C0F56: mov     [ecx], eax
 0x7C0F58: mov     eax, [esp+4+arg_18]
 0x7C0F5C: mov     ecx, [esp+4+arg_10]
@@ -366,16 +366,16 @@
 0x7C122B: mov     dword ptr [edx], 72h ; 'r'
 0x7C1231: pop     esi
 0x7C1232: retn    1Ch
-0x7C1235: movzx   eax, word ptr ds:0B2C67Ch; jumptable 007C0D28 case 23
+0x7C1235: movzx   eax, word ptr ds:0B2C67Ch; Default target type 0x17 uses unsigned-short ShadowSurfaceRes for both width and height (retail IDB initial value 0x400).
 0x7C123C: mov     ecx, [esp+4+arg_C]
 0x7C1240: mov     edx, [esp+4+arg_8]
 0x7C1244: mov     [ecx], eax
 0x7C1246: mov     ecx, [esp+4+arg_10]
 0x7C124A: mov     [edx], eax
 0x7C124C: mov     eax, [esp+4+arg_18]
-0x7C1250: mov     dword ptr [eax], 6
+0x7C1250: mov     dword ptr [eax], 6; Type 0x17 target flags = 6.
 0x7C1256: mov     edx, ds:0B2C994h
-0x7C125C: mov     [ecx], edx
+0x7C125C: mov     [ecx], edx; Type 0x17 D3D format = ShadowMapRenderTargetD3DFormat, retail value 0x72 (D3DFMT_R32F).
 0x7C125E: pop     esi
 0x7C125F: retn    1Ch
 0x7C1262: mov     eax, [esp+4+arg_C]; jumptable 007C0D28 case 24

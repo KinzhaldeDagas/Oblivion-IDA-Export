@@ -1,1 +1,1 @@
-IEnumSTATDATA_0
+typedef IEnumSTATDATA IEnumSTATDATA_0;

@@ -1,1 +1,1 @@
-IObjectWithSite_0
+typedef IObjectWithSite IObjectWithSite_0;

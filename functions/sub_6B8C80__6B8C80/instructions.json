@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B8C80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Initialize an empty MenuTopic for extra-data loading: clear response nodes/cursors and all identity pointers, then initialize an empty display string.",
     "mnemonic": "push",
     "size": 2
   },
@@ -202,5 +202,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C6F30",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F33",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F38",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C6F3C",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F3F",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F42",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6F44",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F49",
+    "line": "mov     eax, offset stru_AEF3C0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F4E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

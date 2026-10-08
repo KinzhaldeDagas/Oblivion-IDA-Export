@@ -1,1 +1,4 @@
-IDirect3DTexture9
+struct IDirect3DTexture9
+{
+IDirect3DTexture9Vtbl *lpVtbl;
+};

@@ -37,3 +37,12 @@
 0x53424A: pop     ebp
 0x53424B: add     esp, 10h
 0x53424E: retn
+0x9B9110: mov     ecx, [ebp-10h]
+0x9B9113: jmp     sub_4BFC40
+0x9B9118: mov     edx, [esp+arg_4]
+0x9B911C: lea     eax, [edx-10h]
+0x9B911F: mov     ecx, [edx-14h]
+0x9B9122: xor     ecx, eax
+0x9B9124: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9129: mov     eax, offset stru_AE34FC
+0x9B912E: jmp     ___CxxFrameHandler3

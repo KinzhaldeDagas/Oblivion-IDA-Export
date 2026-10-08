@@ -11,29 +11,29 @@ int __cdecl sub_8E8270(int a1, int a2)
   int v10; // [esp-14h] [ebp-1Ch]
   int v11; // [esp+4h] [ebp-4h] BYREF
 
-  v2 = a2;
-  result = 0;
-  if ( a2 )
+  v2 = a2; /*0x8e8272*/
+  result = 0; /*0x8e8276*/
+  if ( a2 ) /*0x8e827a*/
   {
-    a2 = *(_DWORD *)(a2 + 0x24);
-    v9 = *(_DWORD *)(a1 + 0x220);
-    v4 = *(void (__cdecl **)(int, int *, int, int *, int))(v9 + 8);
-    v11 = 4;
-    v4(v9, &a2, 4, &v11, 1);
-    v8 = *(_DWORD *)(a1 + 0x220);
-    v5 = *(void (__cdecl **)(int, int, int, int *, int))(v8 + 8);
-    v11 = 0x10;
-    v5(v8, v2 + 0x10, 0x10, &v11, 1);
-    result = a2;
-    if ( a2 )
+    a2 = *(_DWORD *)(a2 + 0x24); /*0x8e828f*/
+    v9 = *(_DWORD *)(a1 + 0x220); /*0x8e82a0*/
+    v4 = *(void (__cdecl **)(int, int *, int, int *, int))(v9 + 8); /*0x8e82a1*/
+    v11 = 4; /*0x8e82a4*/
+    v4(v9, &a2, 4, &v11, 1); /*0x8e82ac*/
+    v8 = *(_DWORD *)(a1 + 0x220); /*0x8e82c1*/
+    v5 = *(void (__cdecl **)(int, int, int, int *, int))(v8 + 8); /*0x8e82c2*/
+    v11 = 0x10; /*0x8e82c5*/
+    v5(v8, v2 + 0x10, 0x10, &v11, 1); /*0x8e82cd*/
+    result = a2; /*0x8e82cf*/
+    if ( a2 ) /*0x8e82d8*/
     {
-      v6 = *(_DWORD *)(a1 + 0x220);
-      v7 = *(void (__cdecl **)(int, int, int, int *, int))(v6 + 8);
-      v10 = *(_DWORD *)(v2 + 0x20);
-      v11 = 1;
-      v7(v6, v10, a2, &v11, 1);
-      return a2;
+      v6 = *(_DWORD *)(a1 + 0x220); /*0x8e82dd*/
+      v7 = *(void (__cdecl **)(int, int, int, int *, int))(v6 + 8); /*0x8e82eb*/
+      v10 = *(_DWORD *)(v2 + 0x20); /*0x8e82ee*/
+      v11 = 1; /*0x8e82f0*/
+      v7(v6, v10, a2, &v11, 1); /*0x8e82f8*/
+      return a2; /*0x8e82fa*/
     }
   }
-  return result;
+  return result; /*0x8e8302*/
 }

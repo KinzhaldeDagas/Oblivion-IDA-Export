@@ -1,32 +1,33 @@
-BSExtraDataVtbl *__thiscall sub_4DB7D0(_BYTE *this)
+// Verified effective ownership-condition global lookup: use this reference's XGLB first, then the linked door's XGLB, then the parent cell's XGLB. Fallout's TESObjectREFR::GetOwnershipGlobal has the same fallback sequence. This is distinct from TESObjectREFR_GetOwner's owner-form inheritance.
+TESGlobal *__thiscall TESObjectREFR_GetOwnershipGlobal(TESObjectREFR *reference)
 {
-  ExtraDataList *v2; // edi
-  BSExtraDataVtbl *result; // eax
-  void **p_Destructor; // esi
-  BSExtraData *Teleport; // eax
-  BSExtraData *v6; // edi
-  BSExtraDataVtbl *v7; // eax
-  ExtraDataList *v8; // ecx
+  ExtraDataList *p_baseExtraList; // edi
+  TESGlobal *result; // eax
+  TESGlobal *v4; // esi
+  TeleportData *Teleport; // eax
+  TeleportData *v6; // edi
+  TESObjectREFR *LinkedDoor; // eax
+  TESObjectCELL *parentCell; // ecx
 
-  v2 = (ExtraDataList *)(this + 0x44);
-  result = sub_41E7D0((ExtraDataList *)(this + 0x44));
-  p_Destructor = (void **)&result->Destructor;
-  if ( !result )
+  p_baseExtraList = &reference->member.baseExtraList; /*0x4db7d5*/
+  result = ExtraDataList_GetGlobal(&reference->member.baseExtraList); /*0x4db7da*/
+  v4 = result; /*0x4db7df*/
+  if ( !result ) /*0x4db7e3*/
   {
-    Teleport = (BSExtraData *)ExtraDataList_GetTeleport(v2);
-    v6 = Teleport;
-    if ( !Teleport
-      || !sub_42B410(Teleport)
-      || (v7 = sub_42B410(v6),
-          result = sub_41E7D0((ExtraDataList *)&v7[8].CompareTo),
-          (p_Destructor = (void **)&result->Destructor) == 0) )
+    Teleport = ExtraDataList_GetTeleport(p_baseExtraList); /*0x4db7e7*/
+    v6 = Teleport; /*0x4db7ec*/
+    if ( !Teleport /*0x4db810*/
+      || !TeleportData_GetLinkedDoor(Teleport)
+      || (LinkedDoor = TeleportData_GetLinkedDoor(v6),
+          result = ExtraDataList_GetGlobal(&LinkedDoor->member.baseExtraList),
+          (v4 = result) == 0) )
     {
-      v8 = *((ExtraDataList **)this + 0x10);
-      if ( v8 )
-        return sub_41E7D0(v8 + 2);
+      parentCell = reference->member.parentCell; /*0x4db812*/
+      if ( parentCell ) /*0x4db817*/
+        return ExtraDataList_GetGlobal(&parentCell->members.extraData); /*0x4ca983*/
       else
-        return (BSExtraDataVtbl *)p_Destructor;
+        return v4; /*0x4db821*/
     }
   }
-  return result;
+  return result; /*0x4db823*/
 }

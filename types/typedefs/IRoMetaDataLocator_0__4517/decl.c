@@ -1,1 +1,1 @@
-IRoMetaDataLocator_0
+typedef IRoMetaDataLocator IRoMetaDataLocator_0;

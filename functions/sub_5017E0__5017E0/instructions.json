@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5017E0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; ModAV / ModActorValue execute callback. Script execution uses the actor's script-offset modifier; console execution uses the damage modifier. Neither path is native skill advancement.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x501821",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x50186C",
-    "line": "call    edx",
+    "line": "call    edx; Console ModAV dispatches through the integer damage-modifier vfunc.",
     "mnemonic": "call",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x501887",
-    "line": "call    eax",
+    "line": "call    eax; Script ModAV dispatches through the integer script-offset modifier vfunc.",
     "mnemonic": "call",
     "size": 2
   },

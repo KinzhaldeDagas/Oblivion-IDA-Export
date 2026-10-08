@@ -1,8 +1,8 @@
-0x6A12D0: sub     esp, 0B8h
+0x6A12D0: sub     esp, 0B8h; Verified MagicShaderHitEffect UpdateVisualPlacement updates the attached node transform for target/player perspective and detaches/rebinds nodes when perspective or attachment state changes.
 0x6A12D6: push    ebx
 0x6A12D7: push    ebp
 0x6A12D8: mov     ebp, ecx
-0x6A12DA: mov     ecx, ds:0B333C4h
+0x6A12DA: mov     ecx, ds:0B333C4h; this
 0x6A12E0: cmp     [ebp+1Ch], ecx
 0x6A12E3: setz    bl
 0x6A12E6: test    bl, bl
@@ -17,26 +17,26 @@
 0x6A1302: jz      short loc_6A1339
 0x6A1304: test    ecx, ecx
 0x6A1306: jz      short loc_6A1339
-0x6A1308: push    0
-0x6A130A: call    PlayerCharacter_GetPlayerNode
+0x6A1308: push    0; firstPerson
+0x6A130A: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A130F: test    eax, eax
 0x6A1311: jz      short loc_6A1333
-0x6A1313: mov     ecx, ds:0B333C4h
-0x6A1319: push    0
-0x6A131B: call    PlayerCharacter_GetPlayerNode
+0x6A1313: mov     ecx, ds:0B333C4h; this
+0x6A1319: push    0; firstPerson
+0x6A131B: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A1320: test    byte ptr [eax+18h], 1
 0x6A1324: jz      short loc_6A1333
 0x6A1326: mov     ecx, ds:0B333C4h
 0x6A132C: mov     [esp+0C0h+var_B6], 1
 0x6A1331: jmp     short loc_6A133E
-0x6A1333: mov     ecx, ds:0B333C4h
+0x6A1333: mov     ecx, ds:0B333C4h; this
 0x6A1339: mov     [esp+0C0h+var_B6], 0
 0x6A133E: cmp     byte ptr [ebp+28h], 0
 0x6A1342: jnz     short loc_6A1364
 0x6A1344: test    bl, bl
 0x6A1346: jz      short loc_6A1353
-0x6A1348: push    0
-0x6A134A: call    PlayerCharacter_GetPlayerNode
+0x6A1348: push    0; firstPerson
+0x6A134A: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A134F: mov     ebx, eax
 0x6A1351: jmp     short loc_6A1386
 0x6A1353: mov     ecx, [ebp+1Ch]
@@ -56,7 +56,7 @@
 0x6A1379: push    eax
 0x6A137A: push    ecx
 0x6A137B: mov     ecx, ebp
-0x6A137D: call    sub_6A0D90
+0x6A137D: call    MagicShaderHitEffect_ResolveVisualAttachmentTargets; Verified (Oblivion): helper resolves target visual attachment nodes from target actor/player skin, perspective state, effect code, and weapon/torch context; writes two selected visual-node outputs plus geometry/perspective state. Renamed from sub_6A0D90.
 0x6A1382: mov     ebx, [esp+0C0h+var_B4]
 0x6A1386: mov     eax, [ebp+40h]
 0x6A1389: test    eax, eax
@@ -71,7 +71,7 @@
 0x6A13A8: cmp     [esp+0C4h+var_B7], 0
 0x6A13AD: push    edi
 0x6A13AE: mov     ecx, 9
-0x6A13B3: lea     edi, [esp+0C8h+var_9C]
+0x6A13B3: lea     edi, [esp+0C8h+right]
 0x6A13B7: rep movsd
 0x6A13B9: jz      loc_6A143F
 0x6A13BF: mov     esi, [eax+1Ch]
@@ -109,26 +109,26 @@
 0x6A141D: mov     [esi+5Ch], edx
 0x6A1420: mov     edi, [ebp+40h]
 0x6A1423: mov     eax, [edi+1Ch]
-0x6A1426: lea     ecx, [esp+0C8h+var_9C]
-0x6A142A: push    ecx
-0x6A142B: lea     edx, [esp+0CCh+var_6C]
-0x6A142F: push    edx
-0x6A1430: lea     ecx, [eax+64h]
-0x6A1433: call    NiMAtrix33_Multiply
+0x6A1426: lea     ecx, [esp+0C8h+right]
+0x6A142A: push    ecx; right
+0x6A142B: lea     edx, [esp+0CCh+out]
+0x6A142F: push    edx; out
+0x6A1430: lea     ecx, [eax+64h]; this
+0x6A1433: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x6A1438: mov     esi, eax
 0x6A143A: jmp     loc_6A154C
 0x6A143F: cmp     [esp+0C8h+var_B6], 0
 0x6A1444: jz      loc_6A1525
-0x6A144A: mov     ecx, ds:0B333C4h
-0x6A1450: push    1
-0x6A1452: call    PlayerCharacter_GetPlayerNode
+0x6A144A: mov     ecx, ds:0B333C4h; this
+0x6A1450: push    1; firstPerson
+0x6A1452: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A1457: test    eax, eax
 0x6A1459: jz      loc_6A1525
-0x6A145F: mov     ecx, ds:0B333C4h
-0x6A1465: push    1
-0x6A1467: call    PlayerCharacter_GetPlayerNode
+0x6A145F: mov     ecx, ds:0B333C4h; this
+0x6A1465: push    1; firstPerson
+0x6A1467: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A146C: push    eax
-0x6A146D: push    offset dword_B3FAB0
+0x6A146D: push    offset parent
 0x6A1472: call    NiRTTI_Cast
 0x6A1477: add     esp, 8
 0x6A147A: test    eax, eax
@@ -144,16 +144,16 @@
 0x6A1493: call    eax
 0x6A1495: mov     edi, [ebp+40h]
 0x6A1498: mov     eax, [edi+1Ch]
-0x6A149B: lea     ecx, [esp+0C8h+var_9C]
-0x6A149F: push    ecx
-0x6A14A0: lea     edx, [esp+0CCh+var_6C]
-0x6A14A4: push    edx
+0x6A149B: lea     ecx, [esp+0C8h+right]
+0x6A149F: push    ecx; right
+0x6A14A0: lea     edx, [esp+0CCh+out]
+0x6A14A4: push    edx; out
 0x6A14A5: lea     ecx, [esp+0D0h+var_48]
 0x6A14AC: push    ecx
 0x6A14AD: lea     ecx, [eax+64h]
 0x6A14B0: call    sub_7103C0
-0x6A14B5: mov     ecx, eax
-0x6A14B7: call    NiMAtrix33_Multiply
+0x6A14B5: mov     ecx, eax; this
+0x6A14B7: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x6A14BC: mov     esi, eax
 0x6A14BE: add     edi, 30h ; '0'
 0x6A14C1: mov     ecx, 9
@@ -186,7 +186,7 @@
 0x6A1515: mov     [esi+5Ch], eax
 0x6A1518: fstp    [esp+0D0h+a2]; a2
 0x6A151B: mov     ecx, [ebp+40h]; this
-0x6A151E: call    NiAVObject_UpdateNiAVObject
+0x6A151E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x6A1523: jmp     short loc_6A1556
 0x6A1525: mov     eax, [ebp+40h]
 0x6A1528: mov     edx, [ebx+88h]
@@ -198,7 +198,7 @@
 0x6A153F: mov     ecx, [ecx+8]
 0x6A1542: mov     [eax+8], ecx
 0x6A1545: mov     edi, [ebp+40h]
-0x6A1548: lea     esi, [esp+0C8h+var_9C]
+0x6A1548: lea     esi, [esp+0C8h+right]
 0x6A154C: mov     ecx, 9
 0x6A1551: add     edi, 30h ; '0'
 0x6A1554: rep movsd

@@ -1,4 +1,4 @@
-0x473EB0: push    0FFFFFFFFh
+0x473EB0: push    0FFFFFFFFh; Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.
 0x473EB2: push    offset NewActorAnimData_SEH
 0x473EB7: mov     eax, large fs:0
 0x473EBD: push    eax
@@ -122,3 +122,18 @@
 0x474067: pop     ebx
 0x474068: add     esp, 14h
 0x47406B: retn
+0x9AED50: mov     ecx, [ebp-14h]
+0x9AED53: add     ecx, 98h ; '˜'; slot
+0x9AED59: jmp     NiPointerSlot_Release
+0x9AED5E: mov     eax, [ebp-10h]
+0x9AED61: push    eax
+0x9AED62: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AED67: pop     ecx
+0x9AED68: retn
+0x9AED69: mov     edx, [esp+arg_4]
+0x9AED6D: lea     eax, [edx-14h]
+0x9AED70: mov     ecx, [edx-18h]
+0x9AED73: xor     ecx, eax
+0x9AED75: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AED7A: mov     eax, offset stru_ADB444
+0x9AED7F: jmp     ___CxxFrameHandler3

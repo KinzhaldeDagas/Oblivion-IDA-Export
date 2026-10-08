@@ -15,23 +15,23 @@ float *__cdecl sub_6BECE0(float a1, float *a2, float *a3, float *a4)
   float v17; // [esp+2Ch] [ebp-4h]
   float v18; // [esp+34h] [ebp+4h]
 
-  v4 = a1;
-  v18 = 1.0 - a1;
-  v10 = a2[1] * v18;
-  v11 = a2[2] * v18;
-  v12 = a2[3] * v18;
-  v13 = v18 * a2[4];
-  v6 = a3[1] * v4;
-  v7 = a3[2] * v4;
-  v8 = a3[3] * v4;
-  v9 = v4 * a3[4];
-  v14 = v6 + v10;
-  *a4 = v14;
-  v15 = v7 + v11;
-  a4[1] = v15;
-  v16 = v8 + v12;
-  a4[2] = v16;
-  v17 = v9 + v13;
-  a4[3] = v17;
-  return a4;
+  v4 = a1; /*0x6bece3*/
+  v18 = 1.0 - a1; /*0x6bed05*/
+  v10 = a2[1] * v18; /*0x6bed2f*/
+  v11 = a2[2] * v18; /*0x6bed48*/
+  v12 = a2[3] * v18; /*0x6bed52*/
+  v13 = v18 * a2[4]; /*0x6bed5a*/
+  v6 = a3[1] * v4; /*0x6bed63*/
+  v7 = a3[2] * v4; /*0x6bed73*/
+  v8 = a3[3] * v4; /*0x6bed85*/
+  v9 = v4 * a3[4]; /*0x6bed95*/
+  v14 = v6 + v10; /*0x6bedac*/
+  *a4 = v14; /*0x6bedb8*/
+  v15 = v7 + v11; /*0x6bedbe*/
+  a4[1] = v15; /*0x6bedca*/
+  v16 = v8 + v12; /*0x6bedd1*/
+  a4[2] = v16; /*0x6beddd*/
+  v17 = v9 + v13; /*0x6bede4*/
+  a4[3] = v17; /*0x6bedec*/
+  return a4; /*0x6bedef*/
 }

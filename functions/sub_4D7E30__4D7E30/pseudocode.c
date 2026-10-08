@@ -1,13 +1,14 @@
-double __thiscall sub_4D7E30(float *this, float *a2)
+// Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
+float __thiscall TESObjectREFR::GetDistanceToPoint(TESObjectREFR *this, const float *pointXYZ)
 {
-  float v3; // [esp+0h] [ebp-Ch]
-  float v4; // [esp+4h] [ebp-8h]
-  float v5; // [esp+8h] [ebp-4h]
-  float v6; // [esp+10h] [ebp+4h]
+  float v4; // [esp+0h] [ebp-Ch]
+  float v5; // [esp+4h] [ebp-8h]
+  float v6; // [esp+8h] [ebp-4h]
+  float pointXYZa; // [esp+10h] [ebp+4h]
 
-  v3 = *a2 - *(this + 0xB);
-  v4 = a2[1] - *(this + 0xC);
-  v5 = a2[2] - *(this + 0xD);
-  v6 = v3 * v3 + v4 * v4 + v5 * v5;
-  return (float)sqrt(v6);
+  v4 = *pointXYZ - this->member.pos[0]; /*0x4d7e3c*/
+  v5 = pointXYZ[1] - this->member.pos[1]; /*0x4d7e45*/
+  v6 = pointXYZ[2] - this->member.pos[2]; /*0x4d7e4f*/
+  pointXYZa = v4 * v4 + v5 * v5 + v6 * v6; /*0x4d7e6e*/
+  return sqrt(pointXYZa); /*0x4d7e83*/
 }

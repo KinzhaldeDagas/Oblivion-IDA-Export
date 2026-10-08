@@ -1,9 +1,9 @@
-0x41DEA0: mov     eax, TlsIndex
+0x41DEA0: mov     eax, dword ptr byte_BA9DCC+18h
 0x41DEA5: mov     ecx, large fs:2Ch
 0x41DEAC: push    esi
 0x41DEAD: mov     esi, [ecx+eax*4]
 0x41DEB0: push    edi
-0x41DEB1: mov     edi, dword_B33780
+0x41DEB1: mov     edi, dword ptr unk_B33780
 0x41DEB7: cmp     [esi+0Ch], edi
 0x41DEBD: jz      short loc_41DEE5
 0x41DEBF: push    174h

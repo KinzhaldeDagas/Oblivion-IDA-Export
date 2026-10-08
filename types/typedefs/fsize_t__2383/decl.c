@@ -1,1 +1,1 @@
-_fsize_t
+typedef __msvcrt_ulong _fsize_t;

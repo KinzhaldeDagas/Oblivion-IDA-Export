@@ -17,7 +17,7 @@ int __usercall MagicTarget_AddEffect_::ModifyExtraData_@<eax>(
 {
   double v15; // st7
 
-  v15 = Script_AddEventToExtraScript(*(_DWORD *)(*(_DWORD *)(a2 + 0xC) + 0x1C), &a1->member.baseExtraList, 0x2000);
+  v15 = Script_AddEventToExtraScript(*(_DWORD *)(*(_DWORD *)(a2 + 0xC) + 0x1C), &a1->member.baseExtraList, 0x2000); /*0x6a286b*/
   return MagicTarget_AddEffect_::GetSEFFAlwaysApplies(
            a1,
            a2,

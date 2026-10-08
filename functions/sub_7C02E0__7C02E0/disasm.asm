@@ -2,8 +2,8 @@
 0x7C02E5: test    eax, eax
 0x7C02E7: jz      short locret_7C0328
 0x7C02E9: mov     ecx, ds:0B42F50h; this
-0x7C02EF: push    eax; a2
-0x7C02F0: call    sub_7C1EE0
+0x7C02EF: push    eax; texture
+0x7C02F0: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7C02F5: mov     eax, ds:0B43328h
 0x7C02FA: test    eax, eax
 0x7C02FC: jz      short locret_7C0328

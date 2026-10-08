@@ -1,18 +1,26 @@
-char __thiscall sub_7EE330(_DWORD *this, _DWORD *a2, int a3)
+// Insert ShadowSceneLight into BSShaderProperty+0x6C in receiver-distance order and clear property cache/dirty state.
+unsigned __int8 __thiscall BSShaderProperty_AddShadowLight(
+        _DWORD *this,
+        ShadowSceneLight_DecodedLayout *light,
+        MEF_ReceiverBound32 *bound)
 {
-  char result; // al
+  unsigned __int8 result; // al
 
-  result = sub_7ECC60(this, a2, *(float *)&a3, &a3);
-  if ( !result )
+  result = BSShaderProperty_FindShadowLightInsertionPoint( /*0x7ee344*/
+             (MEF_PropertyShadowLightListView32 *)this,
+             light,
+             bound,
+             (MEF_RefListNode32 **)&bound);
+  if ( !result ) /*0x7ee34b*/
   {
-    if ( a3 )
+    if ( bound ) /*0x7ee353*/
     {
-      result = (unsigned __int8)sub_589640(this + 0x1B, a3, &a2);
-      *(this + 9) = 0;
-      return result;
+      result = (unsigned __int8)NiTPointerList__InsertBeforePosition(this + 0x1B, (int)bound, &light); /*0x7ee35e*/
+      *(this + 9) = 0; /*0x7ee363*/
+      return result; /*0x7ee36b*/
     }
-    result = (unsigned __int8)sub_5B1E20((BSTextureManager *)(this + 0x1B), (void **)&a2);
+    result = (unsigned __int8)NiTPointerList__AddTail((BSTextureManager *)(this + 0x1B), (void **)&light); /*0x7ee376*/
   }
-  *(this + 9) = 0;
-  return result;
+  *(this + 9) = 0; /*0x7ee37b*/
+  return result; /*0x7ee36a*/
 }

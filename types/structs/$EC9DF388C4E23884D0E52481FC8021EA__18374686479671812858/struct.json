@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$EC9DF388C4E23884D0E52481FC8021EA",
+  "definition": "union $EC9DF388C4E23884D0E52481FC8021EA\n{\n__WINE_FILTER filter __offset(OFF64|AUTO);\n__WINE_FILTER_CTX filter_ctx __offset(OFF64|AUTO);\n__WINE_FINALLY finally_func __offset(OFF64|AUTO);\n__WINE_FINALLY_CTX finally_func_ctx __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671812858,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "filter",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "__WINE_FILTER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "filter_ctx",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "__WINE_FILTER_CTX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "finally_func",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "__WINE_FINALLY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "finally_func_ctx",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "__WINE_FINALLY_CTX"
     }
   ],
   "name": "$EC9DF388C4E23884D0E52481FC8021EA",
+  "ordinal": 1119,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

@@ -1,4 +1,4 @@
-0x7B4830: fld     [esp+arg_8]
+0x7B4830: fld     [esp+arg_8]; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.
 0x7B4834: mov     eax, [esp+arg_0]
 0x7B4838: mov     ecx, [esp+arg_4]
 0x7B483C: fstp    dword ptr ds:0B2C1ECh

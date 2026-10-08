@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F0030",
+      "0x4F00B8"
+    ]
+  ],
+  "chunks_sha256": "5c1f0b0fd9b917f04222fac41840ee90409f2c0116ecb5ef6ed34e42804a2dd6",
+  "comment_regular": "Verified: clears inline exterior cellMap at +0x30; iterates mapped TESObjectCELL values and destroys them unless the WorldSpace base flag 0x4000 is set, then empties the map.",
+  "comment_repeatable": "Verified: clears inline exterior cellMap at +0x30; iterates mapped TESObjectCELL values and destroys them unless the WorldSpace base flag 0x4000 is set, then empties the map.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4F0030",
+  "display_name": "TESWorldSpace_ClearExteriorCellMap",
   "end_ea": "0x4F00B8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F0030",
+  "name": "TESWorldSpace_ClearExteriorCellMap",
   "segment": ".text",
   "sha256": "5c1f0b0fd9b917f04222fac41840ee90409f2c0116ecb5ef6ed34e42804a2dd6",
   "size": 136,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F0030",
-  "type": "int __thiscall(NiTMap_TESCELL **this)",
+  "total_chunk_size": 136,
+  "type": "int __thiscall(TESWorldSpace *this)",
   "xrefs_from_count": 59,
   "xrefs_to_count": 1
 }

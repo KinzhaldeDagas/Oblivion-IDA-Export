@@ -1,8 +1,8 @@
-0x79E790: push    ebx
+0x79E790: push    ebx; Three-way partition of 0x30-byte SFrondGuide records around a sampled fuzzySurfaceArea pivot, descending. Groups values greater than, equal to, and less than the pivot and returns the lower/upper bounds of the equal partition.
 0x79E791: push    ebp
-0x79E792: mov     ebp, [esp+8+arg_4]
+0x79E792: mov     ebp, [esp+8+first]
 0x79E796: push    esi
-0x79E797: mov     esi, [esp+0Ch+arg_8]
+0x79E797: mov     esi, [esp+0Ch+last]
 0x79E79B: mov     ecx, esi
 0x79E79D: sub     ecx, ebp
 0x79E79F: mov     eax, 2AAAAAABh
@@ -20,11 +20,11 @@
 0x79E7BD: push    eax
 0x79E7BE: shl     edi, 4
 0x79E7C1: add     esi, 0FFFFFFD0h
-0x79E7C4: push    esi
+0x79E7C4: push    esi; last
 0x79E7C5: add     edi, ebp
-0x79E7C7: push    edi
-0x79E7C8: push    ebp
-0x79E7C9: call    sub_79E220
+0x79E7C7: push    edi; middle
+0x79E7C8: push    ebp; first
+0x79E7C9: call    OB_SFrondGuide_SelectPivotByFuzzyArea_010201A0; Selects a robust fuzzySurfaceArea pivot for SFrondGuide partitioning. Small ranges sort first/middle/last; ranges over 40 elements sort multiple evenly spaced triplets before the final three-sample ordering.
 0x79E7CE: add     esp, 10h
 0x79E7D1: cmp     ebp, edi
 0x79E7D3: mov     ebx, edi
@@ -47,7 +47,7 @@
 0x79E7FF: jmp     short loc_79E805
 0x79E801: fstp    st(1)
 0x79E803: fstp    st
-0x79E805: mov     edi, [esp+10h+arg_8]
+0x79E805: mov     edi, [esp+10h+last]
 0x79E809: mov     ecx, edi
 0x79E80B: sub     ecx, esi
 0x79E80D: add     ecx, 2Fh ; '/'
@@ -132,7 +132,7 @@
 0x79E8E0: fstp    st
 0x79E8E2: mov     edi, esi
 0x79E8E4: mov     ebp, ebx
-0x79E8E6: cmp     edi, [esp+10h+arg_8]
+0x79E8E6: cmp     edi, [esp+10h+last]
 0x79E8EA: jnb     short loc_79E926
 0x79E8EC: lea     esp, [esp+0]
 0x79E8F0: fld     dword ptr [ebx+24h]
@@ -146,18 +146,18 @@
 0x79E903: test    ah, 41h
 0x79E906: jz      short loc_79E926
 0x79E908: mov     eax, esi
-0x79E90A: push    edi
-0x79E90B: push    eax
+0x79E90A: push    edi; right
+0x79E90B: push    eax; left
 0x79E90C: add     esi, 30h ; '0'
-0x79E90F: call    sub_79B8D0
+0x79E90F: call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.
 0x79E914: add     esp, 8
 0x79E917: jmp     short loc_79E91D
 0x79E919: fstp    st(1)
 0x79E91B: fstp    st
 0x79E91D: add     edi, 30h ; '0'
-0x79E920: cmp     edi, [esp+10h+arg_8]
+0x79E920: cmp     edi, [esp+10h+last]
 0x79E924: jb      short loc_79E8F0
-0x79E926: mov     ecx, [esp+10h+arg_4]
+0x79E926: mov     ecx, [esp+10h+first]
 0x79E92A: cmp     ebp, ecx
 0x79E92C: jbe     short loc_79E96B
 0x79E92E: mov     edi, edi
@@ -172,11 +172,11 @@
 0x79E943: test    ah, 41h
 0x79E946: jz      short loc_79E969
 0x79E948: lea     eax, [ebp-30h]
-0x79E94B: push    eax
+0x79E94B: push    eax; right
 0x79E94C: sub     ebx, 30h ; '0'
-0x79E94F: push    ebx
-0x79E950: call    sub_79B8D0
-0x79E955: mov     ecx, [esp+18h+arg_4]
+0x79E94F: push    ebx; left
+0x79E950: call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.
+0x79E955: mov     ecx, [esp+18h+first]
 0x79E959: add     esp, 8
 0x79E95C: jmp     short loc_79E962
 0x79E95E: fstp    st(1)
@@ -186,47 +186,47 @@
 0x79E967: jb      short loc_79E930
 0x79E969: cmp     ebp, ecx
 0x79E96B: jnz     short loc_79E99D
-0x79E96D: cmp     edi, [esp+10h+arg_8]
+0x79E96D: cmp     edi, [esp+10h+last]
 0x79E971: jz      short loc_79E9DB
 0x79E973: cmp     esi, edi
 0x79E975: jz      short loc_79E981
-0x79E977: push    esi
-0x79E978: push    ebx
-0x79E979: call    sub_79B8D0
+0x79E977: push    esi; right
+0x79E978: push    ebx; left
+0x79E979: call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.
 0x79E97E: add     esp, 8
 0x79E981: mov     eax, edi
 0x79E983: mov     ecx, ebx
-0x79E985: push    eax
-0x79E986: push    ecx
+0x79E985: push    eax; right
+0x79E986: push    ecx; left
 0x79E987: add     esi, 30h ; '0'
 0x79E98A: add     ebx, 30h ; '0'
 0x79E98D: add     edi, 30h ; '0'
-0x79E990: call    sub_79B8D0
+0x79E990: call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.
 0x79E995: add     esp, 8
 0x79E998: jmp     loc_79E8E6
 0x79E99D: sub     ebp, 30h ; '0'
-0x79E9A0: cmp     edi, [esp+10h+arg_8]
+0x79E9A0: cmp     edi, [esp+10h+last]
 0x79E9A4: jnz     short loc_79E9C9
 0x79E9A6: sub     ebx, 30h ; '0'
 0x79E9A9: cmp     ebp, ebx
 0x79E9AB: jz      short loc_79E9B7
-0x79E9AD: push    ebx
-0x79E9AE: push    ebp
-0x79E9AF: call    sub_79B8D0
+0x79E9AD: push    ebx; right
+0x79E9AE: push    ebp; left
+0x79E9AF: call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.
 0x79E9B4: add     esp, 8
 0x79E9B7: sub     esi, 30h ; '0'
-0x79E9BA: push    esi
-0x79E9BB: push    ebx
-0x79E9BC: call    sub_79B8D0
+0x79E9BA: push    esi; right
+0x79E9BB: push    ebx; left
+0x79E9BC: call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.
 0x79E9C1: add     esp, 8
 0x79E9C4: jmp     loc_79E8E6
-0x79E9C9: push    ebp
-0x79E9CA: push    edi
-0x79E9CB: call    sub_79B8D0
+0x79E9C9: push    ebp; right
+0x79E9CA: push    edi; left
+0x79E9CB: call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.
 0x79E9D0: add     esp, 8
 0x79E9D3: add     edi, 30h ; '0'
 0x79E9D6: jmp     loc_79E8E6
-0x79E9DB: mov     eax, [esp+10h+arg_0]
+0x79E9DB: mov     eax, [esp+10h+result]
 0x79E9DF: pop     edi
 0x79E9E0: mov     [eax+4], esi
 0x79E9E3: pop     esi

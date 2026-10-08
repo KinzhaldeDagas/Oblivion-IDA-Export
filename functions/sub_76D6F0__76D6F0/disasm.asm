@@ -18,7 +18,7 @@
 0x76D727: push    eax
 0x76D728: call    edx
 0x76D72A: mov     dword ptr [esi+4Ch], 0
-0x76D731: mov     eax, [esp+28h+arg_0]
+0x76D731: mov     eax, [esp+28h+device]
 0x76D735: mov     [esi+4Ch], eax
 0x76D738: mov     ecx, [eax]
 0x76D73A: mov     edx, [ecx+4]
@@ -65,10 +65,10 @@
 0x76D79E: mov     [esi+10h], eax
 0x76D7A1: mov     eax, [esp+2Ch+a1]
 0x76D7A5: push    eax
-0x76D7A6: call    sub_774BD0
+0x76D7A6: call    OB_D3DFormat_ToString_010201A0
 0x76D7AB: push    eax
 0x76D7AC: push    offset aNidx9render_26; "NiDX9Renderer::Recreate> Using %s backb"...
-0x76D7B1: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76D7B1: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76D7B6: add     esp, 10h
 0x76D7B9: pop     edi
 0x76D7BA: mov     al, 1

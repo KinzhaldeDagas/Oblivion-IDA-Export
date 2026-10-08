@@ -4,12 +4,12 @@ int __thiscall sub_904E30(_DWORD *this, int a2)
   int i; // esi
   int v5; // ecx
 
-  result = *(this + 4);
-  for ( i = 0; i < result; ++i )
+  result = *(this + 4); /*0x904e34*/
+  for ( i = 0; i < result; ++i ) /*0x904e3b*/
   {
-    v5 = *(_DWORD *)(*(this + 3) + 8 * i + 4);
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v5 + 0x20))(v5, a2);
-    result = *(this + 4);
+    v5 = *(_DWORD *)(*(this + 3) + 8 * i + 4); /*0x904e45*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v5 + 0x20))(v5, a2); /*0x904e4c*/
+    result = *(this + 4); /*0x904e4f*/
   }
-  return result;
+  return result; /*0x904e58*/
 }

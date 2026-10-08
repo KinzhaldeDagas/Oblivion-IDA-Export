@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "dynamic_unwind_entry",
+  "definition": "struct dynamic_unwind_entry\n{\nlist entry;\nULONG_PTR base;\nULONG_PTR end;\nRUNTIME_FUNCTION *table;\nDWORD count;\nDWORD max_count;\nPGET_RUNTIME_FUNCTION_CALLBACK callback;\nPVOID context;\n}\n",
   "id": 18374686479672047756,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "entry",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "base",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "ULONG_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "end",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "ULONG_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "table",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "RUNTIME_FUNCTION *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "count",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "max_count",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "callback",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "PGET_RUNTIME_FUNCTION_CALLBACK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "context",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     }
   ],
   "name": "dynamic_unwind_entry",
+  "ordinal": 8844,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

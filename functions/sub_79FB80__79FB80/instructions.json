@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79FB80",
-    "line": "push    ebp",
+    "line": "push    ebp; Deep copy assignment for st_vector<SFrondGuide>. Reuses initialized elements/capacity where possible, destroys surplus guides, or frees and buys exact capacity before exception-safe copy construction.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x79FBB2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79FBB4",
-    "line": "call    sub_79F630",
+    "line": "call    OB_stVector_SFrondGuide_Clear_010201A0; Oblivion st_vector<SFrondGuide>::clear. Validates begin/end and erases the entire initialized range while retaining capacity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,25 +307,25 @@
   },
   {
     "ea": "0x79FBFE",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FBFF",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FC00",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FC01",
-    "line": "call    sub_79BE80",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeForwardThunk_010201A0; Thin checked/STL wrapper around forward SFrondGuide range copy-assignment; returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,19 +355,19 @@
   },
   {
     "ea": "0x79FC0F",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FC10",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FC11",
-    "line": "call    sub_79E150",
+    "line": "call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x79FC82",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79FC84",
-    "line": "call    sub_799F10",
+    "line": "call    OB_stVector_SFrondGuide_Size_010201A0; Oblivion-authoritative size query for the compact SFrondGuide vector. Computes (end-begin)/0x30; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,25 +685,25 @@
   },
   {
     "ea": "0x79FC94",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FC95",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FC96",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FC97",
-    "line": "call    sub_79E0C0",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeForwardCheckedThunk_010201A0; Checked/STL trampoline for forward SFrondGuide copy-assignment; delegates to 0x79BE80 and returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,31 +727,31 @@
   },
   {
     "ea": "0x79FCA5",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCA6",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCA7",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCA8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79FCAA",
-    "line": "call    sub_79EA70",
+    "line": "call    OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0; Vector-context checked trampoline for exception-safe uninitialized SFrondGuide range copy. The vector owner is used by checked-iterator machinery; constructed records are 0x30 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x79FCC2",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCC3",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x79FCC6",
-    "line": "call    sub_79EAA0",
+    "line": "call    OB_SFrondGuide_DestroyRangeThunk_010201A0; Thin destroy-range trampoline for compact SFrondGuide records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x79FCCF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,31 +865,31 @@
   },
   {
     "ea": "0x79FCD7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79FCD9",
-    "line": "call    sub_799F10",
+    "line": "call    OB_stVector_SFrondGuide_Size_010201A0; Oblivion-authoritative size query for the compact SFrondGuide vector. Computes (end-begin)/0x30; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79FCDE",
-    "line": "push    eax; char *",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCDF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79FCE1",
-    "line": "call    sub_79AD20",
+    "line": "call    OB_stVector_SFrondGuide_Buy_010201A0; Initializes an empty compact SFrondGuide vector wrapper and, when count is nonzero, buys exact count capacity. Maximum count is 0x05555555.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,31 +925,31 @@
   },
   {
     "ea": "0x79FCF3",
-    "line": "push    edx",
+    "line": "push    edx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCF4",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCF5",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79FCF6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79FCF8",
-    "line": "call    sub_79EA70",
+    "line": "call    OB_stVector_SFrondGuide_UninitializedCopyThunk_010201A0; Vector-context checked trampoline for exception-safe uninitialized SFrondGuide range copy. The vector owner is used by checked-iterator machinery; constructed records are 0x30 bytes.",
     "mnemonic": "call",
     "size": 5
   },

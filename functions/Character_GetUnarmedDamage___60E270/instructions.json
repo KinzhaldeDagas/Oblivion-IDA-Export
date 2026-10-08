@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x60E28E",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x60E2D4",
-    "line": "jmp     Double_To_SInt32",
+    "line": "jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "jmp",
     "size": 5
   }

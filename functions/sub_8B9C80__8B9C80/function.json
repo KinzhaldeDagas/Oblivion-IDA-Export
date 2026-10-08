@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x8B9C80",
+      "0x8B9CA0"
+    ]
+  ],
+  "chunks_sha256": "15b39731bed92110b668f127d9a5ce917446124812a956375b1224ff9158e750",
+  "comment_regular": "TES4 authoritative: controller/proxy vtable +0x58 target. Returns runtime context pointer by reading proxy+0x8 collision wrapper, wrapper+0x30 Havok object, then Havok object+0x8. State code reads up/gravity basis at returned+0x20.",
+  "comment_repeatable": "TES4 authoritative: controller/proxy vtable +0x58 target. Returns runtime context pointer by reading proxy+0x8 collision wrapper, wrapper+0x30 Havok object, then Havok object+0x8. State code reads up/gravity basis at returned+0x20.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_8B9C80",
+  "display_name": "bhkCharacterProxy_GetRuntimeContext",
   "end_ea": "0x8B9CA0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_8B9C80",
+  "name": "bhkCharacterProxy_GetRuntimeContext",
   "segment": ".text",
   "sha256": "15b39731bed92110b668f127d9a5ce917446124812a956375b1224ff9158e750",
   "size": 32,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8B9C80",
+  "total_chunk_size": 32,
   "type": "int __thiscall(_DWORD *this)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 4

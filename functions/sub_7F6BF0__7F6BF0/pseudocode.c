@@ -54,24 +54,24 @@ int __thiscall sub_7F6BF0(int *this, NiGeometry *a2, int a3, int a4, int a5)
   unsigned int v57; // [esp+6Ch] [ebp-10h]
   int v58; // [esp+78h] [ebp-4h]
 
-  v49 = this;
-  v5 = a2;
-  v6 = (_DWORD *)a4;
-  BuffData = a2->member.geomData->member.BuffData;
-  renderState = g_Renderer->member.renderState;
-  textureMgr = g_Renderer->member.textureMgr;
-  v9 = *(_DWORD *)(a4 + 0x18);
-  v10 = 0;
-  v48 = 0;
-  v55 = renderState;
-  v50 = textureMgr;
-  v57 = v9;
-  if ( v9 )
+  v49 = this; /*0x7f6c17*/
+  v5 = a2; /*0x7f6c1b*/
+  v6 = (_DWORD *)a4; /*0x7f6c28*/
+  BuffData = a2->member.geomData->member.BuffData; /*0x7f6c2c*/
+  renderState = renderer->member.renderState; /*0x7f6c35*/
+  textureMgr = renderer->member.textureMgr; /*0x7f6c3b*/
+  v9 = *(_DWORD *)(a4 + 0x18); /*0x7f6c41*/
+  v10 = 0; /*0x7f6c44*/
+  v48 = 0; /*0x7f6c48*/
+  v55 = renderState; /*0x7f6c4c*/
+  v50 = textureMgr; /*0x7f6c50*/
+  v57 = v9; /*0x7f6c54*/
+  if ( v9 ) /*0x7f6c58*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x7f6c67*/
     {
-      v11 = *(_DWORD **)(v6[9] + 4 * v10);
-      if ( !v11
+      v11 = *(_DWORD **)(v6[9] + 4 * v10); /*0x7f6c67*/
+      if ( !v11 /*0x7f6c8f*/
         || (v12 = *sub_75FB10(v11, &v52),
             v13 = *v49,
             v48 |= 1u,
@@ -79,89 +79,89 @@ int __thiscall sub_7F6BF0(int *this, NiGeometry *a2, int a3, int a4, int a5)
             LOBYTE(a2) = 1,
             v14) )
       {
-        LOBYTE(a2) = 0;
+        LOBYTE(a2) = 0; /*0x7f6c91*/
       }
-      if ( (v48 & 1) != 0 )
+      if ( (v48 & 1) != 0 ) /*0x7f6c9b*/
       {
-        v15 = (void (__thiscall ***)(_DWORD, int))v52;
-        v48 &= ~1u;
-        if ( v52 )
+        v15 = (void (__thiscall ***)(_DWORD, int))v52; /*0x7f6c9d*/
+        v48 &= ~1u; /*0x7f6ca1*/
+        if ( v52 ) /*0x7f6ca8*/
         {
-          if ( !InterlockedDecrement((volatile LONG *)(v52 + 4)) )
+          if ( !InterlockedDecrement((volatile LONG *)(v52 + 4)) ) /*0x7f6cae*/
           {
-            if ( v15 )
-              (**v15)(v15, 1);
+            if ( v15 ) /*0x7f6cba*/
+              (**v15)(v15, 1); /*0x7f6cc5*/
           }
         }
       }
-      if ( (_BYTE)a2 )
+      if ( (_BYTE)a2 ) /*0x7f6ccc*/
       {
-        v16 = sub_75FB10(v11, &v53);
-        *(_DWORD *)(*v49 + 4 * v10) = *v16;
-        if ( v53 )
+        v16 = sub_75FB10(v11, &v53); /*0x7f6cd9*/
+        *(_DWORD *)(*v49 + 4 * v10) = *v16; /*0x7f6ce6*/
+        if ( v53 ) /*0x7f6cef*/
         {
-          v17 = (void (__thiscall ***)(_DWORD, int))v53;
-          if ( !InterlockedDecrement((volatile LONG *)(v53 + 4)) )
-            (**v17)(v17, 1);
+          v17 = (void (__thiscall ***)(_DWORD, int))v53; /*0x7f6cf1*/
+          if ( !InterlockedDecrement((volatile LONG *)(v53 + 4)) ) /*0x7f6cf7*/
+            (**v17)(v17, 1); /*0x7f6d0e*/
         }
-        LOBYTE(a2) = *sub_75FB10(v11, &v54) != 0;
-        if ( v54 )
+        LOBYTE(a2) = *sub_75FB10(v11, &v54) != 0; /*0x7f6d23*/
+        if ( v54 ) /*0x7f6d2a*/
         {
-          v18 = (void (__thiscall ***)(_DWORD, int))v54;
-          if ( !InterlockedDecrement((volatile LONG *)(v54 + 4)) )
-            (**v18)(v18, 1);
+          v18 = (void (__thiscall ***)(_DWORD, int))v54; /*0x7f6d2c*/
+          if ( !InterlockedDecrement((volatile LONG *)(v54 + 4)) ) /*0x7f6d32*/
+            (**v18)(v18, 1); /*0x7f6d49*/
         }
-        if ( (_BYTE)a2 )
+        if ( (_BYTE)a2 ) /*0x7f6d50*/
         {
-          v19 = sub_75FB10(v11, &v56);
-          v20 = v55;
-          vtbl = v55->vtbl;
-          v22 = *(int (__thiscall **)(NiDX9TextureManager *, int, _BYTE *, _BYTE *, _BYTE *))(*(_DWORD *)v50 + 8);
-          v46 = *v19;
-          v58 = 0;
-          v23 = v22(v50, v46, &v47[2], &v47[1], v47);
-          ((void (__thiscall *)(NiDX9RenderState *, unsigned int, int))vtbl->SetTexture)(v20, v10, v23);
-          v58 = 0xFFFFFFFF;
-          if ( v56 )
+          v19 = sub_75FB10(v11, &v56); /*0x7f6d5d*/
+          v20 = v55; /*0x7f6d68*/
+          vtbl = v55->vtbl; /*0x7f6d6e*/
+          v22 = *(int (__thiscall **)(NiDX9TextureManager *, int, _BYTE *, _BYTE *, _BYTE *))(*(_DWORD *)v50 + 8); /*0x7f6d71*/
+          v46 = *v19; /*0x7f6d87*/
+          v58 = 0; /*0x7f6d88*/
+          v23 = v22(v50, v46, &v47[2], &v47[1], v47); /*0x7f6d96*/
+          ((void (__thiscall *)(NiDX9RenderState *, unsigned int, int))vtbl->SetTexture)(v20, v10, v23); /*0x7f6d9e*/
+          v58 = 0xFFFFFFFF; /*0x7f6da6*/
+          if ( v56 ) /*0x7f6dae*/
           {
-            v24 = (void (__thiscall ***)(_DWORD, int))v56;
-            if ( !InterlockedDecrement((volatile LONG *)(v56 + 4)) )
-              (**v24)(v24, 1);
+            v24 = (void (__thiscall ***)(_DWORD, int))v56; /*0x7f6db0*/
+            if ( !InterlockedDecrement((volatile LONG *)(v56 + 4)) ) /*0x7f6db6*/
+              (**v24)(v24, 1); /*0x7f6dcc*/
           }
         }
       }
-      else if ( !v11 )
+      else if ( !v11 ) /*0x7f6dd2*/
       {
-        break;
+        break; /*0x7f6dd2*/
       }
-      if ( ++v10 >= v57 )
-        break;
-      v6 = (_DWORD *)a4;
+      if ( ++v10 >= v57 ) /*0x7f6ddb*/
+        break; /*0x7f6ddb*/
+      v6 = (_DWORD *)a4; /*0x7f6c60*/
     }
-    v6 = (_DWORD *)a4;
+    v6 = (_DWORD *)a4; /*0x7f6de1*/
   }
-  if ( (_BYTE)a5 )
+  if ( (_BYTE)a5 ) /*0x7f6dea*/
   {
-    v25 = (NiD3DRenderStateGroup *)v6[0xC];
-    if ( v25 )
-      NiD3DRenderStateGroup::SetRenderStates(v25);
+    v25 = (NiD3DRenderStateGroup *)v6[0xC]; /*0x7f6dec*/
+    if ( v25 ) /*0x7f6df1*/
+      NiD3DRenderStateGroup::SetRenderStates(v25); /*0x7f6df3*/
   }
-  if ( v10 < dword_B28CB8 )
-    sub_771790(v10);
-  if ( v6[0x11] )
+  if ( v10 < dword_B28CB8 ) /*0x7f6dfe*/
+    NiD3DTextureStage_DisableUnusedStages(v10); /*0x7f6e01*/
+  if ( v6[0x11] ) /*0x7f6e09*/
   {
-    v26 = *(_DWORD *)(a3 + 0x2C);
-    if ( v26 )
+    v26 = *(_DWORD *)(a3 + 0x2C); /*0x7f6e17*/
+    if ( v26 ) /*0x7f6e1c*/
     {
-      v27 = sub_7016D0(v5, (NiDynamicEffectState **)&a2);
-      v58 = 1;
-      v28 = sub_405760(v5, (volatile LONG **)&a5);
-      v29 = v6[0x11];
-      v30 = *(void (__thiscall **)(int, int, NiGeometry *, _DWORD, _DWORD, NiGeometryBufferData *, volatile LONG *, NiGeometry *, NiTransform *, NiBound *, _DWORD, _DWORD))(*(_DWORD *)v26 + 0x40);
-      v44 = *v27;
-      v42 = *v28;
-      LOBYTE(v58) = 2;
-      v30(
+      v27 = sub_7016D0(v5, (NiDynamicEffectState **)&a2); /*0x7f6e2e*/
+      v58 = 1; /*0x7f6e37*/
+      v28 = NiGeometry_GetPropertyState(v5, (volatile LONG **)&a5); /*0x7f6e3f*/
+      v29 = v6[0x11]; /*0x7f6e44*/
+      v30 = *(void (__thiscall **)(int, int, NiGeometry *, _DWORD, _DWORD, NiGeometryBufferData *, volatile LONG *, NiGeometry *, NiTransform *, NiBound *, _DWORD, _DWORD))(*(_DWORD *)v26 + 0x40); /*0x7f6e4f*/
+      v44 = *v27; /*0x7f6e5c*/
+      v42 = *v28; /*0x7f6e5d*/
+      LOBYTE(v58) = 2; /*0x7f6e6b*/
+      v30( /*0x7f6e70*/
         v26,
         v29,
         v5,
@@ -174,40 +174,40 @@ int __thiscall sub_7F6BF0(int *this, NiGeometry *a2, int a3, int a4, int a5)
         &v5->member.super.m_kWorldBound,
         0,
         0);
-      LOBYTE(v58) = 1;
-      if ( a5 )
+      LOBYTE(v58) = 1; /*0x7f6e78*/
+      if ( a5 ) /*0x7f6e7d*/
       {
-        v31 = (void (__thiscall ***)(_DWORD, int))a5;
-        if ( !InterlockedDecrement((volatile LONG *)(a5 + 4)) )
-          (**v31)(v31, 1);
+        v31 = (void (__thiscall ***)(_DWORD, int))a5; /*0x7f6e7f*/
+        if ( !InterlockedDecrement((volatile LONG *)(a5 + 4)) ) /*0x7f6e85*/
+          (**v31)(v31, 1); /*0x7f6e9b*/
       }
-      v32 = a2;
-      v58 = 0xFFFFFFFF;
-      if ( a2 )
+      v32 = a2; /*0x7f6e9d*/
+      v58 = 0xFFFFFFFF; /*0x7f6ea3*/
+      if ( a2 ) /*0x7f6eab*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)&a2->member) )
+        if ( !InterlockedDecrement((volatile LONG *)&a2->member) ) /*0x7f6eb1*/
         {
-          if ( v32 )
-            v32->__vftable->super.super.super.Destructor((NiRefObject *)v32, 1);
+          if ( v32 ) /*0x7f6ebd*/
+            v32->__vftable->super.super.super.Destructor((NiRefObject *)v32, 1); /*0x7f6ec7*/
         }
       }
     }
   }
-  v33 = a4;
-  if ( *(_DWORD *)(a4 + 0x58) )
+  v33 = a4; /*0x7f6ec9*/
+  if ( *(_DWORD *)(a4 + 0x58) ) /*0x7f6ecd*/
   {
-    v34 = *(_DWORD *)(a3 + 0x30);
-    if ( v34 )
+    v34 = *(_DWORD *)(a3 + 0x30); /*0x7f6edb*/
+    if ( v34 ) /*0x7f6ee0*/
     {
-      v35 = sub_7016D0(v5, (NiDynamicEffectState **)&a3);
-      v58 = 3;
-      v36 = sub_405760(v5, (volatile LONG **)&a4);
-      v37 = *(_DWORD *)(v33 + 0x58);
-      v38 = *(void (__thiscall **)(int, int, NiGeometry *, _DWORD, _DWORD, NiGeometryBufferData *, volatile LONG *, NiGeometry *, NiTransform *, NiBound *, _DWORD, _DWORD))(*(_DWORD *)v34 + 0x40);
-      v45 = *v35;
-      v43 = *v36;
-      LOBYTE(v58) = 4;
-      v38(
+      v35 = sub_7016D0(v5, (NiDynamicEffectState **)&a3); /*0x7f6ef2*/
+      v58 = 3; /*0x7f6efb*/
+      v36 = NiGeometry_GetPropertyState(v5, (volatile LONG **)&a4); /*0x7f6f03*/
+      v37 = *(_DWORD *)(v33 + 0x58); /*0x7f6f08*/
+      v38 = *(void (__thiscall **)(int, int, NiGeometry *, _DWORD, _DWORD, NiGeometryBufferData *, volatile LONG *, NiGeometry *, NiTransform *, NiBound *, _DWORD, _DWORD))(*(_DWORD *)v34 + 0x40); /*0x7f6f13*/
+      v45 = *v35; /*0x7f6f20*/
+      v43 = *v36; /*0x7f6f21*/
+      LOBYTE(v58) = 4; /*0x7f6f2f*/
+      v38( /*0x7f6f34*/
         v34,
         v37,
         v5,
@@ -220,24 +220,24 @@ int __thiscall sub_7F6BF0(int *this, NiGeometry *a2, int a3, int a4, int a5)
         &v5->member.super.m_kWorldBound,
         0,
         0);
-      LOBYTE(v58) = 3;
-      if ( a4 )
+      LOBYTE(v58) = 3; /*0x7f6f3c*/
+      if ( a4 ) /*0x7f6f41*/
       {
-        v39 = (void (__thiscall ***)(_DWORD, int))a4;
-        if ( !InterlockedDecrement((volatile LONG *)(a4 + 4)) )
-          (**v39)(v39, 1);
+        v39 = (void (__thiscall ***)(_DWORD, int))a4; /*0x7f6f43*/
+        if ( !InterlockedDecrement((volatile LONG *)(a4 + 4)) ) /*0x7f6f49*/
+          (**v39)(v39, 1); /*0x7f6f5f*/
       }
-      v40 = (void (__thiscall ***)(_DWORD, int))a3;
-      v58 = 0xFFFFFFFF;
-      if ( a3 )
+      v40 = (void (__thiscall ***)(_DWORD, int))a3; /*0x7f6f61*/
+      v58 = 0xFFFFFFFF; /*0x7f6f67*/
+      if ( a3 ) /*0x7f6f6f*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)(a3 + 4)) )
+        if ( !InterlockedDecrement((volatile LONG *)(a3 + 4)) ) /*0x7f6f75*/
         {
-          if ( v40 )
-            (**v40)(v40, 1);
+          if ( v40 ) /*0x7f6f81*/
+            (**v40)(v40, 1); /*0x7f6f8b*/
         }
       }
     }
   }
-  return ((int (__thiscall *)(NiGeometry *, NiDX9Renderer *))v5->__vftable->Unk_22)(v5, g_Renderer);
+  return ((int (__thiscall *)(NiGeometry *, NiDX9Renderer *))v5->__vftable->Unk_22)(v5, renderer); /*0x7f6f9f*/
 }

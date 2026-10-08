@@ -1,4 +1,4 @@
-0x774280: sub     esp, 20h
+0x774280: sub     esp, 20h; DX10OBSE verified decode: NiDX9TextureData::SetTexture adopts D3D texture/cube/volume, records level count/dimensions, rejects palettized formats, and maps D3DFORMAT to NiSurfaceData.
 0x774283: push    esi
 0x774284: push    edi
 0x774285: mov     edi, [esp+28h+arg_0]
@@ -56,7 +56,7 @@
 0x774304: add     esi, 0Ch
 0x774307: push    esi; a2
 0x774308: push    eax; a1
-0x774309: call    D3DFMTToTextureFormat
+0x774309: call    D3DFMTToTextureFormat; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
 0x77430E: add     esp, 8
 0x774311: pop     edi
 0x774312: mov     al, 1

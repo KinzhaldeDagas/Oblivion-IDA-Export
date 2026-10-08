@@ -4,7 +4,7 @@
 0x980818: push    0; int
 0x98081A: lea     ecx, [ebp+var_4]; this
 0x98081D: call    ??0_Lockit@std@@QAE@H@Z
-0x980822: push    offset dword_BA9B58
+0x980822: push    offset unk_BA9B58
 0x980827: call    __Deletegloballocale
 0x98082C: and     dword ptr ds:0BA9B58h, 0
 0x980833: pop     ecx

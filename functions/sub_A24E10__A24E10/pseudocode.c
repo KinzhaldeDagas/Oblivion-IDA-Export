@@ -1,9 +1,10 @@
-void __cdecl sub_A24E10()
+// [Controller decode 2026-07-10] atexit cleanup for registered Xenon-era Controls INI setting.
+void __cdecl INISetting_Destroy_fXenonMenuStickMapCursorMinSpeed()
 {
-  BSSimpleList_Remove(dword_B07CFC, (int)&unk_B14390);
-  if ( off_B14394[0] )
+  BSSimpleList_Remove(dword_B07CFC, (int)&fXenonMenuStickMapCursorMinSpeed); /*0xa24e1a*/
+  if ( fXenonMenuStickMapCursorMinSpeedSettingName[0] ) /*0xa24e26*/
   {
-    if ( *off_B14394[0] == 0x53 )
-      FormHeapFree((unsigned int)off_B14394[0]);
+    if ( *fXenonMenuStickMapCursorMinSpeedSettingName[0] == 0x53 ) /*0xa24e2b*/
+      FormHeapFree((unsigned int)fXenonMenuStickMapCursorMinSpeedSettingName[0]); /*0xa24e2e*/
   }
 }

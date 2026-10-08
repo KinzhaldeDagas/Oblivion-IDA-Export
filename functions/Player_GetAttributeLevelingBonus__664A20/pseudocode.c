@@ -1,13 +1,14 @@
-signed int __thiscall Player_GetAttributeLevelingBonus(_DWORD *this, unsigned int a2)
+// Player_GetAttributeLevelingBonus: for attribute AV 0..7, read the attribute's skill-increase count and convert it through LevelUp_GetAttributeMultiplierFromCount; otherwise return 1.
+signed int __thiscall Player_GetAttributeLevelingBonus(PlayerCharacter *this, unsigned int attributeAV)
 {
   signed int result; // eax
-  signed int v3; // eax
+  int AttributeBonusSkillIncreaseCount; // eax
 
-  result = 1;
-  if ( a2 <= 7 )
+  result = 1; /*0x664a27*/
+  if ( attributeAV <= 7 ) /*0x664a2c*/
   {
-    v3 = sub_664970(this, a2);
-    return sub_5480A0(v3);
+    AttributeBonusSkillIncreaseCount = Player_GetAttributeBonusSkillIncreaseCount(this, attributeAV); /*0x664a2f*/
+    return LevelUp_GetAttributeMultiplierFromCount(AttributeBonusSkillIncreaseCount); /*0x664a35*/
   }
-  return result;
+  return result; /*0x664a3d*/
 }

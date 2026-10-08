@@ -1,9 +1,9 @@
-0x5CE570: push    ecx
-0x5CE571: push    esi
+0x5CE570: push    ecx; float
+0x5CE571: push    esi; float
 0x5CE572: push    0
 0x5CE574: push    3E9h
 0x5CE579: mov     esi, ecx
-0x5CE57B: call    sub_5790E0
+0x5CE57B: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5CE580: add     esp, 8
 0x5CE583: test    al, al
 0x5CE585: jnz     short loc_5CE5AD
@@ -27,26 +27,26 @@
 0x5CE5BF: mov     ecx, ds:0B333C4h
 0x5CE5C5: mov     eax, [ecx]
 0x5CE5C7: mov     edx, [eax+164h]
-0x5CE5CD: push    edi
+0x5CE5CD: push    edi; float
 0x5CE5CE: call    edx
 0x5CE5D0: mov     edi, eax
 0x5CE5D2: test    edi, edi
 0x5CE5D4: jz      short loc_5CE610
 0x5CE5D6: fld1
-0x5CE5D8: mov     ecx, ds:0B333C4h
+0x5CE5D8: mov     ecx, ds:0B333C4h; this
 0x5CE5DE: sub     esp, 8
-0x5CE5E1: fst     [esp+14h+var_10]; int
-0x5CE5E5: fstp    [esp+14h+a2]; float
-0x5CE5E8: call    Actor_ProcessAction
+0x5CE5E1: fst     [esp+14h+arg1]; arg1
+0x5CE5E5: fstp    [esp+14h+a2]; arg0
+0x5CE5E8: call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.
 0x5CE5ED: fld     dword ptr ds:0A30634h
 0x5CE5F3: mov     eax, ds:0B333C4h
 0x5CE5F8: sub     esp, 8
-0x5CE5FB: fstp    [esp+14h+var_10]; float
+0x5CE5FB: fstp    [esp+14h+arg1]; explicitTimeOrMinusOne
 0x5CE5FF: mov     ecx, edi; this
 0x5CE601: fld     dword ptr ds:0B33E9Ch
-0x5CE607: fstp    [esp+14h+a2]; float
-0x5CE60A: push    eax; int
-0x5CE60B: call    sub_476D10
+0x5CE607: fstp    [esp+14h+a2]; deltaTime
+0x5CE60A: push    eax; ownerActor
+0x5CE60B: call    ActorAnimData_Update; CustomAnimSupport evidence: observed caller of broad ActorAnimData update; supports classification of 0x476D10 as maintenance, not narrow hook.
 0x5CE610: pop     edi
 0x5CE611: mov     ecx, esi
 0x5CE613: call    sub_5CDEF0
@@ -63,7 +63,7 @@
 0x5CE63E: fld     [esp+10h+var_4]
 0x5CE642: fstp    [esp+10h+var_C]; float
 0x5CE646: fld1
-0x5CE648: fstp    [esp+10h+var_10]; int
+0x5CE648: fstp    [esp+10h+arg1]; int
 0x5CE64B: call    Menu_UPdateCamera???
 0x5CE650: mov     ecx, [esi+8ECh]
 0x5CE656: call    sub_57D2F0

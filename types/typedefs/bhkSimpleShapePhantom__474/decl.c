@@ -1,1 +1,1 @@
-bhkSimpleShapePhantom
+struct bhkSimpleShapePhantom;

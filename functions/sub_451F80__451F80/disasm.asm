@@ -1,4 +1,4 @@
-0x451F80: push    0FFFFFFFFh
+0x451F80: push    0FFFFFFFFh; Looks up a TESFile clone by thread ID; if absent, constructs and opens a read-only clone, copies master/index state, assigns the root thread-safe parent, and inserts it into the per-thread map.
 0x451F82: push    offset SEH_803C90
 0x451F87: mov     eax, large fs:0
 0x451F8D: push    eax
@@ -59,7 +59,7 @@
 0x452054: add     eax, 8C8h
 0x452059: push    eax
 0x45205A: mov     ecx, esi
-0x45205C: call    TESFile_BuildLoadedMasterArray
+0x45205C: call    TESFile_BuildLoadedMasterArray; MEF PERF 2026-09-08: PERF-5 also reached from TESFile_GetThreadSafeFileForThread when preparing a thread-local file using global DataHandler+8C8 list. A startup-only global index is not sufficient evidence of validity for this caller. Prefer per-operation or explicitly versioned immutable snapshots with real synchronization.
 0x452061: mov     ecx, [edi+4]
 0x452064: test    ecx, ecx
 0x452066: mov     eax, edi
@@ -107,3 +107,20 @@
 0x4520E7: pop     esi
 0x4520E8: add     esp, 10h
 0x4520EB: retn    4
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

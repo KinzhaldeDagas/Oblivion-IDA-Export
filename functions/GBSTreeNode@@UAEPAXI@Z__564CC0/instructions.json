@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x564CC3",
-    "line": "call    ??1BSTreeNode@@UAE@XZ; BSTreeNode::~BSTreeNode(void)",
+    "line": "call    BSTreeNode_dtor; Verified BSTreeNode destructor frees branchNodesByLOD/leafNodesByLOD array headers, releases billboardNode/treeModel smart references, then chains to NiBSPNode destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x564CD0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

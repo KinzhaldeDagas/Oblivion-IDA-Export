@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6760D7",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x67615E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -358,5 +358,65 @@
     "line": "mov     ecx, eax",
     "mnemonic": "mov",
     "size": 2
+  },
+  {
+    "ea": "0x67617E",
+    "line": "mov     bl, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x676180",
+    "line": "mov     edi, [edi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x676183",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x676185",
+    "line": "jnz     loc_6760F0",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x67618B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x67618C",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x67618D",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x67618E",
+    "line": "mov     al, bl",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x676190",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x676191",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

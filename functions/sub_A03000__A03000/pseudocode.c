@@ -1,4 +1,4 @@
-BSStringT *sub_A03000()
+NiRTTI *sub_A03000()
 {
-  return sub_70E220((BSStringT *)dword_B3CDF8, "NiInterpController", (int)dword_B3FC98);
+  return NiRTTI_Constructor(&stru_B3CDF8, "NiInterpController", &stru_B3FC98); /*0xa03014*/
 }

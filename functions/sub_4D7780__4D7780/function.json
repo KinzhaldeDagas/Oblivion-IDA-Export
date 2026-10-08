@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x4D7780",
+      "0x4D77CB"
+    ]
+  ],
+  "chunks_sha256": "ac658391da07630638909cbe73f79c1a7894d48c4981a0b31f2f5ff7ebc7a42b",
+  "comment_regular": "Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.",
+  "comment_repeatable": "Verified effective lock-level helper: returns 0 when neither this reference nor its linked-door reference has ExtraLockData; otherwise tail-calls ExtraLockData_GetPlayerScaledLockLevel and returns its integer result. Callers feed the result to GetLockLevel or compare lock difficulty for lockpick/open behavior.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4D7780",
+  "display_name": "TESObjectREFR_GetEffectiveDoorLockLevel",
   "end_ea": "0x4D77CB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D7780",
+  "name": "TESObjectREFR_GetEffectiveDoorLockLevel",
   "segment": ".text",
   "sha256": "ac658391da07630638909cbe73f79c1a7894d48c4981a0b31f2f5ff7ebc7a42b",
   "size": 75,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D7780",
-  "type": "void __thiscall(_BYTE *this)",
+  "total_chunk_size": 75,
+  "type": "int __thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 39,
   "xrefs_to_count": 5
 }

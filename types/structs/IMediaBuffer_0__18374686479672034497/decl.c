@@ -1,1 +1,1 @@
-IMediaBuffer_0
+typedef IMediaBuffer IMediaBuffer_0;

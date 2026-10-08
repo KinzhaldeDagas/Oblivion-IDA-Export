@@ -1,4 +1,4 @@
 char *sub_7E56D0()
 {
-  return dword_B46058;
+  return unk_B46058; /*0x7e56d5*/
 }

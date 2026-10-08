@@ -1,4 +1,4 @@
-0x7F18A0: push    ebx
+0x7F18A0: push    ebx; Copy at most 0xC0 floats (192 floats / 0x300 bytes) into the leaf constant table, then zero-fill the remainder.
 0x7F18A1: mov     ebx, ecx
 0x7F18A3: mov     ecx, [esp+4+Src]
 0x7F18A7: test    ecx, ecx
@@ -7,7 +7,7 @@
 0x7F18AE: test    eax, eax
 0x7F18B0: jz      short loc_7F1901
 0x7F18B2: push    esi
-0x7F18B3: mov     esi, [esp+8+arg_4]
+0x7F18B3: mov     esi, [esp+8+floatCount]
 0x7F18B7: test    esi, esi
 0x7F18B9: jz      short loc_7F1900
 0x7F18BB: cmp     esi, 0C0h ; 'À'
@@ -15,10 +15,10 @@
 0x7F18C3: mov     esi, 0C0h ; 'À'
 0x7F18C8: push    edi
 0x7F18C9: lea     edi, ds:0[esi*4]
-0x7F18D0: push    edi; Size
-0x7F18D1: push    ecx; Src
-0x7F18D2: push    eax; Dst
-0x7F18D3: call    _memcpy
+0x7F18D0: push    edi; byteCount
+0x7F18D1: push    ecx; source
+0x7F18D2: push    eax; destination
+0x7F18D3: call    _memcpy;
 0x7F18D8: add     esp, 0Ch
 0x7F18DB: cmp     esi, 0C0h ; 'À'
 0x7F18E1: jnb     short loc_7F18FF

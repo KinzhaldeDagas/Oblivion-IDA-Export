@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6CE380",
-    "line": "push    esi",
+    "line": "push    esi; Saves NiTimeController state, then writes the interpolator object reference at +0x3C through the stream virtual at +0x2C.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6CE389",
-    "line": "call    sub_754EB0",
+    "line": "call    j_NiTimeController_SaveBinary",
     "mnemonic": "call",
     "size": 5
   },

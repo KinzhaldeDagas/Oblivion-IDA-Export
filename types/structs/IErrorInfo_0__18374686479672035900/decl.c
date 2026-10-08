@@ -1,1 +1,1 @@
-IErrorInfo_0
+typedef IErrorInfo IErrorInfo_0;

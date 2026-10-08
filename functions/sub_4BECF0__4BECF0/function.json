@@ -1,19 +1,32 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BECF0",
+      "0x4BEE61"
+    ]
+  ],
+  "chunks_sha256": "735259052b2e4b76b9c17f336032f7a0b1ae69538ff063f7917e516947a146fa",
+  "comment_regular": "Verified: TESClimate record loader handles WLS(T) by passing the list head at +0x30 to the shared TESWeather list parser; climate-owned list has an 8-byte inline BSSimpleList head.",
+  "comment_repeatable": "Verified: TESClimate record loader handles WLS(T) by passing the list head at +0x30 to the shared TESWeather list parser; climate-owned list has an 8-byte inline BSSimpleList head.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4BECF0",
+  "display_name": "TESClimate_LoadRecord",
   "end_ea": "0x4BEE61",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4BECF0",
+  "name": "TESClimate_LoadRecord",
   "segment": ".text",
   "sha256": "735259052b2e4b76b9c17f336032f7a0b1ae69538ff063f7917e516947a146fa",
   "size": 369,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BECF0",
-  "type": "char __thiscall(TESForm *this, Data *)",
+  "total_chunk_size": 369,
+  "type": "bool __thiscall(TESClimate *this, Data *file)",
   "xrefs_from_count": 142,
   "xrefs_to_count": 1
 }

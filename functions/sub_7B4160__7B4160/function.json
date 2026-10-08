@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x7B4160",
+      "0x7B4265"
+    ]
+  ],
+  "chunks_sha256": "65e5e9d779a8956fc945f8f90077b277492bfcb58af12250e9a67ac0b02aa7e2",
+  "comment_regular": "Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\\\ for relative paths.",
+  "comment_repeatable": "Builds a sibling texture variant path. Keeps the original extension, truncates the basename at its final underscore after the last separator, appends the requested suffix, and prefixes Data\\\\ for relative paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_7B4160",
+  "display_name": "BuildTextureVariantPath",
   "end_ea": "0x7B4265",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7B4160",
+  "name": "BuildTextureVariantPath",
   "segment": ".text",
   "sha256": "65e5e9d779a8956fc945f8f90077b277492bfcb58af12250e9a67ac0b02aa7e2",
   "size": 261,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7B4160",
-  "type": "char *__cdecl(char *, const char *, int)",
+  "total_chunk_size": 261,
+  "type": "char *__cdecl(char *outPath, const char *sourcePath, const char *suffix)",
   "xrefs_from_count": 110,
   "xrefs_to_count": 11
 }

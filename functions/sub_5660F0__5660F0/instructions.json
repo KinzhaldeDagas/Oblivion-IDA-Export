@@ -70,5 +70,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x56A080",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x56A081",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x56A083",
+    "line": "cmp     byte ptr [esi], 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x56A086",
+    "line": "ja      short loc_56A097",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x56A088",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x56A08B",
+    "line": "push    eax; a1",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x56A08C",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x56A091",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x56A094",
+    "line": "mov     [esi+4], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x56A097",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x56A098",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
   }
 ]

@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x6E07A0",
+      "0x6E082A"
+    ]
+  ],
+  "chunks_sha256": "2b4f6abaa507f4a3e81c9305471a33db60cb726f78e2c5993c622274430d84d4",
+  "comment_regular": "\nComparative verification 2026-10-01: Fallout NiLightDimmerController::Update 82BACF78 follows the same interpolator -> NiLight target cast -> dimmer store/update-counter family. Fallout stores F0 and increments CC; Oblivion verified instructions6E0819/6E081F use DC/B8. Fallout uses NiUpdateData input, whereas this Oblivion update consumes its own float-time ABI. No foreign offsets or prototypes are imported.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "sub_6E07A0",
   "end_ea": "0x6E082A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_6E07A0",
   "segment": ".text",
   "sha256": "2b4f6abaa507f4a3e81c9305471a33db60cb726f78e2c5993c622274430d84d4",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6E07A0",
+  "total_chunk_size": 138,
   "type": "char __thiscall(int this, float)",
   "xrefs_from_count": 59,
   "xrefs_to_count": 1

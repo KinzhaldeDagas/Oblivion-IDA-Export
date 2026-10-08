@@ -21,7 +21,7 @@
 0x50AD31: xor     bl, bl
 0x50AD33: mov     dword ptr [esp+30h+var_8], 0
 0x50AD3B: mov     [esp+30h+var_4], 0
-0x50AD43: call    Script_ExtractArgs
+0x50AD43: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50AD48: add     esp, 24h
 0x50AD4B: test    al, al
 0x50AD4D: jnz     short loc_50AD54

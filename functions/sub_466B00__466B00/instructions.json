@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x466B31",
-    "line": "call    TESSaveLoadGame_LoadGame",
+    "line": "call    TESSaveLoadGame_LoadGame;  Verified map lifecycle: allocates incomingChangesMap at +4, stores save records there, reconciles pre-load currentChangesMap at +0 after form loading, then swaps in incoming map via 464440. The map roles are based on direct stores/lookups and final pointer assignments.",
     "mnemonic": "call",
     "size": 5
   },

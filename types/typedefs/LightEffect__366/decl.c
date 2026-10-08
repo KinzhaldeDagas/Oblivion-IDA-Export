@@ -1,1 +1,1 @@
-LightEffect
+struct LightEffect;

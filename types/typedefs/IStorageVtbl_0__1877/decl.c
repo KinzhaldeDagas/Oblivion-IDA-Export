@@ -1,1 +1,1 @@
-IStorageVtbl_0
+typedef IStorageVtbl IStorageVtbl_0;

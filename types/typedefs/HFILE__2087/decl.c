@@ -1,1 +1,1 @@
-HFILE
+typedef int HFILE;

@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
+  "chunks": [
+    [
+      "0x6A3310",
+      "0x6A3387"
+    ],
+    [
+      "0x9C60D0",
+      "0x9C60F3"
+    ]
+  ],
+  "chunks_sha256": "9ebe4dd5ff3879755e22e5e7913a6e02120ab6d0f6046101a4bf4eb0d615bd75",
+  "comment_regular": "Verified cross-build layout divergence: Fallout NonActorMagicTarget has MagicTarget size 16 and total size 40; constructor places parent ref at +0x1C and BSSimpleList header at +0x20. Oblivion MagicTarget is 8 bytes and NonActorMagicTarget is 32 bytes, with parent at +0x14 and ActiveEffectList header at +0x18. Fallout's extra IsInvulnerable vtable slot is absent in Oblivion; do not transfer its later vtable offsets or data offsets.",
+  "comment_repeatable": "Verified cross-build layout divergence: Fallout NonActorMagicTarget has MagicTarget size 16 and total size 40; constructor places parent ref at +0x1C and BSSimpleList header at +0x20. Oblivion MagicTarget is 8 bytes and NonActorMagicTarget is 32 bytes, with parent at +0x14 and ActiveEffectList header at +0x18. Fallout's extra IsInvulnerable vtable slot is absent in Oblivion; do not transfer its later vtable offsets or data offsets.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "NonActorMagicTarget_constr",
   "end_ea": "0x6A3387",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
   "name": "NonActorMagicTarget_constr",
   "segment": ".text",
   "sha256": "55dd8106babb6947822ea89fb9e2228679c1a33212ecc553e534c2b59e59f6ce",
   "size": 119,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A3310",
-  "type": "char *__thiscall(char *this, int)",
-  "xrefs_from_count": 42,
+  "total_chunk_size": 154,
+  "type": "NonActorMagicTarget *__thiscall(NonActorMagicTarget *this, TESObjectREFR *parentReference)",
+  "xrefs_from_count": 53,
   "xrefs_to_count": 2
 }

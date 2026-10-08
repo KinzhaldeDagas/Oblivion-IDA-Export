@@ -93,7 +93,7 @@
 0x9A3BCA: mov     eax, off_B329E4; jumptable 009A3A74 cases 3-7
 0x9A3BCF: mov     ecx, [esp+4+arg_8]
 0x9A3BD3: push    eax
-0x9A3BD4: call    NiObjectNET_GetExtraData
+0x9A3BD4: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x9A3BD9: test    eax, eax
 0x9A3BDB: jnz     short loc_9A3BE6
 0x9A3BDD: mov     eax, 80000010h

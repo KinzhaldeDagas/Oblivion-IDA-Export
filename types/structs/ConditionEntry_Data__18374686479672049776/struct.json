@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ConditionEntry::Data",
+  "definition": "struct ConditionEntry::Data\n{\nUInt32 operatorAndFlags;\nfloat comparisonValue;\nUInt16 functionIndex;\nUInt16 unk0A;\nConditionEntry::Data::Param param1;\nConditionEntry::Data::Param param2;\nUInt32 unk14;\n}\n",
   "id": 18374686479672049776,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "operatorAndFlags",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "comparisonValue",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "functionIndex",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0A",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 2
+      "offset_hex": "0xA",
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "param1",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "ConditionEntry::Data::Param"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "param2",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "ConditionEntry::Data::Param"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk14",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "ConditionEntry::Data",
+  "ordinal": 9544,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

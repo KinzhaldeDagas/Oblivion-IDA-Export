@@ -1,1 +1,1 @@
-0x754EB0: jmp     sub_716050
+0x754EB0: jmp     NiTimeController_SaveBinary; Saves the first manager-controlled controller found in the next chain, then flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, and target +0x30. Runtime caches are not serialized.

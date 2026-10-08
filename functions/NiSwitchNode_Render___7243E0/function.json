@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7243E0",
+      "0x724453"
+    ]
+  ],
+  "chunks_sha256": "19777509a0ee4e28e2267be8dc1f3ffc36e420186255f09ec43813e81dbda059",
+  "comment_regular": "CULLING documentation correction 2026-09-27, Oblivion observation: NiSwitchNode selected index(+0xE0) chooses one child. When its selection/update stamp differs, native calls selected child UpdateDownwardPass before NiAVObject_Render. A replacement traversal could skip this update. Preserve native selection/update order; geometry callback readability alone does not prove bound freshness.\nGPU static-world LOD audit 2026-09-27: a plain/frozen switch uses cached signed +E0 directly; a null selected slot is NOT searched backward. For a non-null child, compare child update stamp array+F0[index] with current epoch+E8; mismatch writes the stamp and invokes child downward update using +E4 time before rendering. GPU selection alone cannot suppress these lazy update obligations.\n\nRetail NiSwitchNode OnVisible entry.",
+  "comment_repeatable": "Retail NiSwitchNode OnVisible entry.\nGPU static-world side-effect inputs 2026-09-29: verified assembly 72441A writes NiTArray stamp at parent+EC using selected child index and parent+E8 epoch BEFORE child virtual slot+60. The update receives raw float parent+E4 and boolean (BYTE[parent+DC] & 2)!=0. Apply only to the selected non-null child when its F0[index] stamp differs; never update all reachable LOD alternatives. GPU frontend now retains conditional per-child input records; native execution/selection commit is still required before traversal suppression.\nGPU-world boundary audit 2026-09-30: child render call at 724449 occurs AFTER optional stamp write and child virtual+60. Intercepting only this child dispatch can retain native selection/update order; replacing the entire OnVisible entry would require reproducing those effects. This is a boundary candidate, not proof of resident subtree coverage or omission safety.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiSwitchNode_Render?",
+  "display_name": "NiSwitchNode_OnVisible",
   "end_ea": "0x724453",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiSwitchNode_Render?",
+  "name": "NiSwitchNode_OnVisible",
   "segment": ".text",
   "sha256": "19777509a0ee4e28e2267be8dc1f3ffc36e420186255f09ec43813e81dbda059",
   "size": 115,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7243E0",
+  "total_chunk_size": 115,
   "type": "int __thiscall(NiNode *this, NiCullingProcess *)",
   "xrefs_from_count": 41,
   "xrefs_to_count": 2

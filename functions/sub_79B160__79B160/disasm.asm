@@ -1,5 +1,5 @@
-0x79B160: push    ebp
-0x79B161: mov     ebp, [esp+4+arg_0]
+0x79B160: push    ebp; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.
+0x79B161: mov     ebp, [esp+4+source]
 0x79B165: push    esi
 0x79B166: mov     esi, ecx
 0x79B168: cmp     esi, ebp
@@ -17,8 +17,8 @@
 0x79B18A: shr     ecx, 1Fh
 0x79B18D: add     ecx, edx
 0x79B18F: jnz     short loc_79B19F
-0x79B191: mov     ecx, esi
-0x79B193: call    sub_79ABD0
+0x79B191: mov     ecx, esi; this
+0x79B193: call    OB_stVector_SFrondVertex_Clear_010201A0; Oblivion st_vector<SFrondVertex>::clear. Validates begin/end and erases the entire initialized range without releasing capacity.
 0x79B198: mov     eax, esi
 0x79B19A: pop     esi
 0x79B19B: pop     ebp
@@ -41,19 +41,19 @@
 0x79B1C2: add     eax, edx
 0x79B1C4: cmp     ecx, eax
 0x79B1C6: ja      short loc_79B242
-0x79B1C8: mov     byte ptr [esp+10h+arg_0], 0
-0x79B1CD: mov     eax, [esp+10h+arg_0]
-0x79B1D1: mov     ecx, [esp+10h+arg_0]
-0x79B1D5: mov     edx, [esp+10h+arg_0]
+0x79B1C8: mov     byte ptr [esp+10h+source], 0
+0x79B1CD: mov     eax, [esp+10h+source]
+0x79B1D1: mov     ecx, [esp+10h+source]
+0x79B1D5: mov     edx, [esp+10h+source]
 0x79B1D9: push    eax
 0x79B1DA: mov     eax, [ebp+8]
 0x79B1DD: push    ecx
 0x79B1DE: push    edx
-0x79B1DF: push    edi
-0x79B1E0: push    eax
+0x79B1DF: push    edi; destinationFirst
+0x79B1E0: push    eax; last
 0x79B1E1: mov     eax, [ebp+4]
-0x79B1E4: push    eax
-0x79B1E5: call    sub_79A950
+0x79B1E4: push    eax; first
+0x79B1E5: call    OB_SFrondVertex_CopyForward_010201A0; Forward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into destinationFirst; returns destination end.
 0x79B1EA: mov     eax, [ebp+4]
 0x79B1ED: add     esp, 18h
 0x79B1F0: test    eax, eax
@@ -104,24 +104,24 @@
 0x79B260: add     eax, edx
 0x79B262: cmp     ecx, eax
 0x79B264: ja      short loc_79B2A3
-0x79B266: mov     ecx, esi
-0x79B268: call    sub_799EE0
+0x79B266: mov     ecx, esi; this
+0x79B268: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79B26D: lea     ecx, ds:0[eax*8]
 0x79B274: sub     ecx, eax
 0x79B276: mov     eax, [ebp+4]
 0x79B279: lea     ebx, [eax+ecx*8]
-0x79B27C: push    edi
-0x79B27D: push    ebx
-0x79B27E: push    eax
-0x79B27F: call    sub_79AA40
+0x79B27C: push    edi; destinationFirst
+0x79B27D: push    ebx; last
+0x79B27E: push    eax; first
+0x79B27F: call    OB_SFrondVertex_CopyForwardThunk_010201A0; Thin forward-copy trampoline for initialized SFrondVertex ranges; delegates to 0x79A950.
 0x79B284: mov     edx, [esi+8]
 0x79B287: mov     eax, [ebp+8]
 0x79B28A: add     esp, 0Ch
-0x79B28D: push    edx
-0x79B28E: push    eax
-0x79B28F: push    ebx
+0x79B28D: push    edx; destinationFirst
+0x79B28E: push    eax; last
+0x79B28F: push    ebx; first
 0x79B290: mov     ecx, esi
-0x79B292: call    sub_79AAD0
+0x79B292: call    OB_SFrondVertex_UninitializedCopyThunk_010201A0; Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.
 0x79B297: pop     edi
 0x79B298: mov     [esi+8], eax
 0x79B29B: pop     ebx
@@ -132,23 +132,23 @@
 0x79B2A3: test    edi, edi
 0x79B2A5: jz      short loc_79B2B0
 0x79B2A7: push    edi
-0x79B2A8: call    FormHeapFree
+0x79B2A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79B2AD: add     esp, 4
-0x79B2B0: mov     ecx, ebp
-0x79B2B2: call    sub_799EE0
-0x79B2B7: push    eax; char *
-0x79B2B8: mov     ecx, esi
-0x79B2BA: call    sub_79ACC0
+0x79B2B0: mov     ecx, ebp; this
+0x79B2B2: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
+0x79B2B7: push    eax; count
+0x79B2B8: mov     ecx, esi; this
+0x79B2BA: call    OB_stVector_SFrondVertex_Buy_010201A0; Initializes an empty 16-byte SFrondVertex vector wrapper and, when count is nonzero, buys exact count capacity. Maximum count is 0x04924924 (0xFFFFFFFF/0x38).
 0x79B2BF: test    al, al
 0x79B2C1: jz      short loc_79B2D9
 0x79B2C3: mov     ecx, [esi+4]
 0x79B2C6: mov     edx, [ebp+8]
 0x79B2C9: mov     eax, [ebp+4]
-0x79B2CC: push    ecx
-0x79B2CD: push    edx
-0x79B2CE: push    eax
+0x79B2CC: push    ecx; destinationFirst
+0x79B2CD: push    edx; last
+0x79B2CE: push    eax; first
 0x79B2CF: mov     ecx, esi
-0x79B2D1: call    sub_79AAD0
+0x79B2D1: call    OB_SFrondVertex_UninitializedCopyThunk_010201A0; Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.
 0x79B2D6: mov     [esi+8], eax
 0x79B2D9: pop     edi
 0x79B2DA: pop     ebx

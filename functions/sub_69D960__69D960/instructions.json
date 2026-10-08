@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x69D960",
-    "line": "push    esi",
+    "line": "push    esi; Verified MagicHitEffect vtable +0x80 callback takes a TESChildCELL* targetReference, reads its parent-cell pointer at +0x40, and stores it in BSTempEffect.parentCell at +0x0C. The explicit TESObjectREFR* linkContext parameter is unused in this implementation.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x69D963",
-    "line": "mov     ecx, [esp+4+arg_4]; this",
+    "line": "mov     ecx, [esp+4+targetReference]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x69D96B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },

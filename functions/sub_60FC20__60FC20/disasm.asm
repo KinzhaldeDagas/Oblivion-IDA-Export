@@ -26,7 +26,7 @@
 0x60FC6F: mov     edi, ds:0B333C4h
 0x60FC75: cmp     esi, edi
 0x60FC77: jnz     short loc_60FCF1
-0x60FC79: call    Double_To_SInt32
+0x60FC79: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x60FC7E: push    eax
 0x60FC7F: mov     ecx, edi
 0x60FC81: call    sub_660710
@@ -49,7 +49,7 @@
 0x60FCC3: mov     edx, [ecx]
 0x60FCC5: mov     eax, [edx+250h]
 0x60FCCB: call    eax
-0x60FCCD: call    Double_To_SInt32
+0x60FCCD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x60FCD2: mov     ecx, ds:0B333C4h
 0x60FCD8: mov     [ecx+668h], eax
 0x60FCDE: mov     edx, [esi]

@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x45F9D6",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+stream]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x45FA11",
-    "line": "mov     [esp+48h+var_10], eax",
+    "line": "mov     [esp+48h+var_10], eax; MEF v58 SR1 framing check: native global count is u16, but8*count is narrowed to u16 before allocation/read; counts>8191 cannot represent their whole8-byte record set in that allocation. Covered snapshot preflight rejects this overflow before global-state loading. This is not proof of general malformed global-payload recovery.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x45FA60",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x45FA66",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45FA67",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45FA69",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x45FAC2",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,31 +829,31 @@
   },
   {
     "ea": "0x45FB16",
-    "line": "push    0",
+    "line": "push    0; mode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45FB18",
-    "line": "push    1",
+    "line": "push    1; changeFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x45FB1A",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45FB1B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45FB1D",
-    "line": "call    TESSaveLoadGame_ResetObject",
+    "line": "call    TESSaveLoadGame_ResetObject; Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.",
     "mnemonic": "call",
     "size": 5
   },

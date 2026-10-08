@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7987D0",
-    "line": "sub     esp, 30h",
+    "line": "sub     esp, 30h; Oblivion CPU leaf wind pass: transforms original leaf centers through one selected 4x4 wind matrix and linearly blends by one per-leaf weight.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7987DD",
-    "line": "mov     ax, word ptr [esp+30h+arg_0]",
+    "line": "mov     ax, [esp+30h+lodLevel]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x79882E",
-    "line": "fst     [esp+38h+var_1C]",
+    "line": "fst     [esp+38h+var_24.z]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x798838",
-    "line": "fst     [esp+38h+var_20]",
+    "line": "fst     [esp+38h+var_24.y]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x79883C",
-    "line": "fst     [esp+38h+var_24]",
+    "line": "fst     [esp+38h+var_24.x]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x798877",
-    "line": "lea     edx, [esp+40h+var_C]",
+    "line": "lea     edx, [esp+40h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79887B",
-    "line": "fstp    [esp+40h+var_24]",
+    "line": "fstp    [esp+40h+var_24.x]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79887F",
-    "line": "push    eax",
+    "line": "push    eax; transform",
     "mnemonic": "push",
     "size": 1
   },
@@ -307,19 +307,19 @@
   },
   {
     "ea": "0x798883",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x798884",
-    "line": "fstp    [esp+48h+var_20]",
+    "line": "fstp    [esp+48h+var_24.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x798888",
-    "line": "lea     ecx, [esp+48h+var_24]",
+    "line": "lea     ecx, [esp+48h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x79888F",
-    "line": "fstp    [esp+48h+var_1C]",
+    "line": "fstp    [esp+48h+var_24.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x798893",
-    "line": "call    sub_786ED0",
+    "line": "call    OB_stVec3_TransformPoint_010201A0; Oblivion 1.2.0.416: transforms a point by the 4x4 stTransform including m[12..14] translation. RT4.1 stVec3::operator*(stTransform) corroborates the row/column terms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7988A7",
-    "line": "mov     [esp+40h+var_24], ecx",
+    "line": "mov     [esp+40h+var_24.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,25 +397,25 @@
   },
   {
     "ea": "0x7988B4",
-    "line": "mov     [esp+40h+var_20], edx",
+    "line": "mov     [esp+40h+var_24.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7988B8",
-    "line": "fstp    [esp+40h+arg_0]",
+    "line": "fstp    dword ptr [esp+40h+lodLevel]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7988BC",
-    "line": "mov     [esp+40h+var_1C], eax",
+    "line": "mov     [esp+40h+var_24.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7988C0",
-    "line": "fld     [esp+40h+var_24]",
+    "line": "fld     [esp+40h+var_24.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7988C7",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     dword ptr [esp+40h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x7988EB",
-    "line": "fld     [esp+40h+var_20]",
+    "line": "fld     [esp+40h+var_24.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x798907",
-    "line": "fld     [esp+40h+var_1C]",
+    "line": "fld     [esp+40h+var_24.z]",
     "mnemonic": "fld",
     "size": 4
   },

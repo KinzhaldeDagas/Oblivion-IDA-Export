@@ -1,4 +1,4 @@
-0x7A1660: push    0FFFFFFFFh
+0x7A1660: push    0FFFFFFFFh; Oblivion-authoritative CFrondEngine::BuildGuideLods. Computes total/largest surface area, writes fuzzySurfaceArea at SFrondGuide+0x24, preserves large fronds, invokes the typed descending introsort twice, reinserts retained guides first, and builds per-LOD vectors of 0x30 guide copies. Unlike RT 4.1 source, this executable sorts/moves complete compact SFrondGuide records rather than a vector of SFrondGuide* pointers; no later segment-override/prohibit-reduction field participates.
 0x7A1662: push    offset SEH_7A1660
 0x7A1667: mov     eax, large fs:0
 0x7A166D: push    eax
@@ -93,18 +93,18 @@
 0x7A1768: add     ebx, 30h ; '0'
 0x7A176B: jmp     loc_7A16A0
 0x7A1770: fld     [esp+70h+var_50]
-0x7A1774: lea     ecx, [esp+70h+var_59]
+0x7A1774: lea     ecx, [esp+70h+var_59]; this
 0x7A1778: fmul    st, st
-0x7A177A: fstp    [esp+70h+var_34]
-0x7A177E: call    sub_78EAF0
+0x7A177A: fstp    dword ptr [esp+70h+sorterState]
+0x7A177E: call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).
 0x7A1783: fld     dword ptr [ebp+60h]
 0x7A1786: fld1
 0x7A1788: xor     ecx, ecx
 0x7A178A: fsubrp  st(1), st
 0x7A178C: mov     [esp+70h+var_4], ecx
-0x7A1790: mov     [esp+70h+var_28], ecx
-0x7A1794: mov     [esp+70h+var_24], ecx
-0x7A1798: mov     [esp+70h+var_20], ecx
+0x7A1790: mov     [esp+70h+savedLargeGuides.begin], ecx
+0x7A1794: mov     [esp+70h+savedLargeGuides.end], ecx
+0x7A1798: mov     [esp+70h+savedLargeGuides.capacityEnd], ecx
 0x7A179C: fstp    [esp+70h+var_44]
 0x7A17A0: xor     ebx, ebx
 0x7A17A2: xor     edi, edi
@@ -164,9 +164,9 @@
 0x7A1844: call    __invalid_parameter_noinfo
 0x7A1849: mov     ecx, [esi+4]
 0x7A184C: add     ecx, edi
-0x7A184E: push    ecx
-0x7A184F: lea     ecx, [esp+74h+var_2C]
-0x7A1853: call    sub_7A0B50
+0x7A184E: push    ecx; value
+0x7A184F: lea     ecx, [esp+74h+savedLargeGuides]; this
+0x7A1853: call    OB_stVector_SFrondGuide_PushBack_010201A0; Oblivion st_vector<SFrondGuide>::push_back specialization. Placement-deep-copies at end when capacity remains; otherwise delegates to the decoded checked insert-one path.
 0x7A1858: mov     ebp, [esi+4]
 0x7A185B: cmp     ebp, [esi+8]
 0x7A185E: jbe     short loc_7A1865
@@ -177,20 +177,20 @@
 0x7A186C: cmp     edi, [esi+4]
 0x7A186F: jnb     short loc_7A1876
 0x7A1871: call    __invalid_parameter_noinfo
-0x7A1876: mov     ecx, [esp+70h+var_34]
+0x7A1876: mov     ecx, dword ptr [esp+70h+sorterState]
 0x7A187A: mov     byte ptr [esp+70h+var_40], 0
 0x7A187F: mov     edx, [esp+70h+var_40]
 0x7A1883: push    edx
 0x7A1884: mov     edx, [esi+8]
-0x7A1887: mov     byte ptr [esp+74h+var_3C], 0
-0x7A188C: mov     eax, [esp+74h+var_3C]
+0x7A1887: mov     byte ptr [esp+74h+guideLodVector], 0
+0x7A188C: mov     eax, [esp+74h+guideLodVector]
 0x7A1890: push    eax
 0x7A1891: push    ecx
-0x7A1892: push    edi
-0x7A1893: push    edx
+0x7A1892: push    edi; destinationFirst
+0x7A1893: push    edx; last
 0x7A1894: add     edi, 30h ; '0'
-0x7A1897: push    edi
-0x7A1898: call    sub_79B700
+0x7A1897: push    edi; first
+0x7A1898: call    OB_SFrondGuide_CopyAssignRangeForward_010201A0; Forward copy-assignment of initialized compact 0x30-byte SFrondGuide records. Deep-assigns each embedded SFrondVertex vector, then copies the eight scalar fields.
 0x7A189D: mov     ebp, [esi+8]
 0x7A18A0: lea     edi, [ebp-30h]
 0x7A18A3: add     esp, 18h
@@ -202,7 +202,7 @@
 0x7A18B3: cmp     eax, ecx
 0x7A18B5: jz      short loc_7A18C2
 0x7A18B7: push    eax
-0x7A18B8: call    FormHeapFree
+0x7A18B8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A18BD: add     esp, 4
 0x7A18C0: xor     ecx, ecx
 0x7A18C2: mov     [edi+4], ecx
@@ -222,11 +222,11 @@
 0x7A18F0: jmp     loc_7A17B0
 0x7A18F5: fld     dword ptr [ebp+5Ch]
 0x7A18F8: sub     esp, 8
-0x7A18FB: fstp    [esp+78h+var_74]; float
-0x7A18FF: lea     ecx, [esp+78h+var_59]
+0x7A18FB: fstp    [esp+78h+maxValue]; maxValue
+0x7A18FF: lea     ecx, [esp+78h+var_59]; this
 0x7A1903: fldz
-0x7A1905: fstp    [esp+78h+var_78]; float
-0x7A1908: call    sub_78EA00
+0x7A1905: fstp    [esp+78h+minValue]; minValue
+0x7A1908: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x7A190D: fstp    [esp+70h+var_38]
 0x7A1911: fld     [esp+70h+var_38]
 0x7A1915: mov     eax, [esi+4]
@@ -237,7 +237,7 @@
 0x7A1920: fstp    [esp+70h+var_38]
 0x7A1924: fld     [esp+70h+var_38]
 0x7A1928: fmul    [esp+70h+var_4C]
-0x7A192C: fld     [esp+70h+var_34]
+0x7A192C: fld     dword ptr [esp+70h+sorterState]
 0x7A1930: fmulp   st(2), st
 0x7A1932: faddp   st(1), st
 0x7A1934: fstp    [esp+70h+var_4C]
@@ -264,7 +264,7 @@
 0x7A1976: jmp     loc_7A17B0
 0x7A197B: mov     edi, [esi+8]
 0x7A197E: cmp     [esi+4], edi
-0x7A1981: mov     byte ptr [esp+70h+var_34], 0
+0x7A1981: mov     byte ptr [esp+70h+sorterState], 0
 0x7A1986: jbe     short loc_7A198D
 0x7A1988: call    __invalid_parameter_noinfo
 0x7A198D: mov     ebx, [esi+4]
@@ -274,8 +274,8 @@
 0x7A199A: cmp     esi, esi
 0x7A199C: jz      short loc_7A19A3
 0x7A199E: call    __invalid_parameter_noinfo
-0x7A19A3: mov     ecx, [esp+70h+var_34]
-0x7A19A7: push    ecx
+0x7A19A3: mov     ecx, dword ptr [esp+70h+sorterState]
+0x7A19A7: push    ecx; sorterState
 0x7A19A8: mov     ecx, edi
 0x7A19AA: sub     ecx, ebx
 0x7A19AC: mov     eax, 2AAAAAABh
@@ -284,25 +284,25 @@
 0x7A19B6: mov     eax, edx
 0x7A19B8: shr     eax, 1Fh
 0x7A19BB: add     eax, edx
-0x7A19BD: push    eax
-0x7A19BE: push    edi
-0x7A19BF: push    ebx
-0x7A19C0: call    sub_79FA30
-0x7A19C5: mov     eax, [esp+80h+var_24]
-0x7A19C9: mov     ebx, [esp+80h+var_28]
+0x7A19BD: push    eax; partitionBudget
+0x7A19BE: push    edi; last
+0x7A19BF: push    ebx; first
+0x7A19C0: call    OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0; Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.
+0x7A19C5: mov     eax, [esp+80h+savedLargeGuides.end]
+0x7A19C9: mov     ebx, [esp+80h+savedLargeGuides.begin]
 0x7A19CD: add     esp, 10h
 0x7A19D0: cmp     ebx, eax
-0x7A19D2: mov     byte ptr [esp+70h+var_34], 0
+0x7A19D2: mov     byte ptr [esp+70h+sorterState], 0
 0x7A19D7: mov     edi, eax
 0x7A19D9: jbe     short loc_7A19F1
 0x7A19DB: call    __invalid_parameter_noinfo
-0x7A19E0: mov     eax, [esp+70h+var_24]
-0x7A19E4: mov     ebx, [esp+70h+var_28]
+0x7A19E0: mov     eax, [esp+70h+savedLargeGuides.end]
+0x7A19E4: mov     ebx, [esp+70h+savedLargeGuides.begin]
 0x7A19E8: cmp     ebx, eax
 0x7A19EA: jbe     short loc_7A19F1
 0x7A19EC: call    __invalid_parameter_noinfo
-0x7A19F1: mov     ecx, [esp+70h+var_34]
-0x7A19F5: push    ecx
+0x7A19F1: mov     ecx, dword ptr [esp+70h+sorterState]
+0x7A19F5: push    ecx; sorterState
 0x7A19F6: mov     ecx, edi
 0x7A19F8: sub     ecx, ebx
 0x7A19FA: mov     eax, 2AAAAAABh
@@ -311,17 +311,17 @@
 0x7A1A04: mov     eax, edx
 0x7A1A06: shr     eax, 1Fh
 0x7A1A09: add     eax, edx
-0x7A1A0B: push    eax
-0x7A1A0C: push    edi
-0x7A1A0D: push    ebx
-0x7A1A0E: call    sub_79FA30
+0x7A1A0B: push    eax; partitionBudget
+0x7A1A0C: push    edi; last
+0x7A1A0D: push    ebx; first
+0x7A1A0E: call    OB_CFrondEngine_SortGuidesByFuzzyArea_010201A0; Oblivion CFrondEngine guide introsort used only by BuildGuideLods. Orders full 0x30-byte SFrondGuide records by descending fuzzySurfaceArea: three-way partition while the ideal partition budget remains, insertion sort at <=32 records, and heap fallback on budget exhaustion. RT 4.1 corroborates the descending comparator, but its source sorts SFrondGuide* pointers; the executable moves compact guide records directly.
 0x7A1A13: add     esp, 10h
 0x7A1A16: xor     ebx, ebx
 0x7A1A18: mov     [esp+70h+var_4C], ebx
 0x7A1A1C: lea     esp, [esp+0]
-0x7A1A20: mov     edi, [esp+70h+var_28]
+0x7A1A20: mov     edi, [esp+70h+savedLargeGuides.begin]
 0x7A1A24: test    edi, edi
-0x7A1A26: mov     ebp, [esp+70h+var_24]
+0x7A1A26: mov     ebp, [esp+70h+savedLargeGuides.end]
 0x7A1A2A: jz      short loc_7A1A72
 0x7A1A2C: mov     ecx, ebp
 0x7A1A2E: sub     ecx, edi
@@ -339,13 +339,13 @@
 0x7A1A4F: cmp     edi, [esi+8]
 0x7A1A52: jbe     short loc_7A1A59
 0x7A1A54: call    __invalid_parameter_noinfo
-0x7A1A59: push    ebp
-0x7A1A5A: push    edi
-0x7A1A5B: push    esi
-0x7A1A5C: lea     edx, [esp+7Ch+var_34]
-0x7A1A60: push    edx
-0x7A1A61: mov     ecx, esi
-0x7A1A63: call    sub_7A0A50
+0x7A1A59: push    ebp; value
+0x7A1A5A: push    edi; position
+0x7A1A5B: push    esi; expectedOwner
+0x7A1A5C: lea     edx, [esp+7Ch+sorterState]
+0x7A1A60: push    edx; result
+0x7A1A61: mov     ecx, esi; this
+0x7A1A63: call    OB_stVector_SFrondGuide_InsertOne_010201A0; Checked insert-one wrapper for st_vector<SFrondGuide>. Preserves the iterator index across possible reallocation, delegates to InsertFill(count=1), and returns the 8-byte {owner,current} iterator.
 0x7A1A68: add     ebx, 1
 0x7A1A6B: add     [esp+70h+var_4C], 30h ; '0'
 0x7A1A70: jmp     short loc_7A1A20
@@ -356,7 +356,7 @@
 0x7A1A83: jbe     loc_7A1C5C
 0x7A1A89: mov     ecx, [esp+70h+var_58]
 0x7A1A8D: add     ecx, 18h
-0x7A1A90: mov     [esp+70h+var_3C], ecx
+0x7A1A90: mov     [esp+70h+guideLodVector], ecx
 0x7A1A94: xor     ebx, ebx
 0x7A1A96: cmp     eax, 1
 0x7A1A99: jnz     short loc_7A1AA4
@@ -373,25 +373,25 @@
 0x7A1ABB: fadd    dword ptr ds:0A2FC78h
 0x7A1AC1: add     eax, 0FFFFFFFFh
 0x7A1AC4: test    eax, eax
-0x7A1AC6: mov     [esp+70h+var_34], eax
-0x7A1ACA: fild    [esp+70h+var_34]
+0x7A1AC6: mov     dword ptr [esp+70h+sorterState], eax
+0x7A1ACA: fild    dword ptr [esp+70h+sorterState]
 0x7A1ACE: jge     short loc_7A1AD6
 0x7A1AD0: fadd    dword ptr ds:0A2FC78h
 0x7A1AD6: fdivp   st(1), st
-0x7A1AD8: fstp    [esp+70h+var_34]
+0x7A1AD8: fstp    dword ptr [esp+70h+sorterState]
 0x7A1ADC: fld     dword ptr [ecx+58h]
 0x7A1ADF: fld     [esp+70h+var_38]
 0x7A1AE3: fld     st
 0x7A1AE5: fsubp   st(2), st
 0x7A1AE7: fxch    st(1)
-0x7A1AE9: fmul    [esp+70h+var_34]
+0x7A1AE9: fmul    dword ptr [esp+70h+sorterState]
 0x7A1AED: faddp   st(1), st
 0x7A1AEF: fstp    [esp+70h+var_4C]
-0x7A1AF3: mov     [esp+70h+var_18], ebx
+0x7A1AF3: mov     [esp+70h+lodLevelGuides.begin], ebx
 0x7A1AF7: fld     [esp+70h+var_4C]
-0x7A1AFB: mov     [esp+70h+var_14], ebx
+0x7A1AFB: mov     [esp+70h+lodLevelGuides.end], ebx
 0x7A1AFF: fmul    [esp+70h+var_48]
-0x7A1B03: mov     [esp+70h+var_10], ebx
+0x7A1B03: mov     [esp+70h+lodLevelGuides.capacityEnd], ebx
 0x7A1B07: fstp    [esp+70h+var_54]
 0x7A1B0B: fldz
 0x7A1B0D: fst     [esp+70h+var_4C]
@@ -455,20 +455,20 @@
 0x7A1BBD: call    __invalid_parameter_noinfo
 0x7A1BC2: mov     ecx, [esi+4]
 0x7A1BC5: add     ecx, ebp
-0x7A1BC7: push    ecx
-0x7A1BC8: lea     ecx, [esp+74h+var_1C]
-0x7A1BCC: call    sub_7A0B50
+0x7A1BC7: push    ecx; value
+0x7A1BC8: lea     ecx, [esp+74h+lodLevelGuides]; this
+0x7A1BCC: call    OB_stVector_SFrondGuide_PushBack_010201A0; Oblivion st_vector<SFrondGuide>::push_back specialization. Placement-deep-copies at end when capacity remains; otherwise delegates to the decoded checked insert-one path.
 0x7A1BD1: add     edi, 1
 0x7A1BD4: add     ebp, 30h ; '0'
 0x7A1BD7: jmp     loc_7A1B30
-0x7A1BDC: mov     ecx, [esp+70h+var_3C]
-0x7A1BE0: lea     edx, [esp+70h+var_1C]
-0x7A1BE4: push    edx
-0x7A1BE5: call    sub_7A15D0
-0x7A1BEA: mov     edi, [esp+70h+var_18]
+0x7A1BDC: mov     ecx, [esp+70h+guideLodVector]; this
+0x7A1BE0: lea     edx, [esp+70h+lodLevelGuides]
+0x7A1BE4: push    edx; value
+0x7A1BE5: call    OB_stVector_stVector_SFrondGuide_PushBack_010201A0; BuildGuideLods appends the completed temporary st_vector<SFrondGuide> as one deep-copied CFrondEngine+0x18 LOD level. RT 4.1 corroborates m_vGuideLods intent only; its published pointer-vector representation differs from Oblivion's by-value 0x30 guide copies.
+0x7A1BEA: mov     edi, [esp+70h+lodLevelGuides.begin]
 0x7A1BEE: cmp     edi, ebx
 0x7A1BF0: jz      short loc_7A1C2E
-0x7A1BF2: mov     eax, [esp+70h+var_14]
+0x7A1BF2: mov     eax, [esp+70h+lodLevelGuides.end]
 0x7A1BF6: cmp     edi, eax
 0x7A1BF8: mov     ebp, eax
 0x7A1BFA: jz      short loc_7A1C25
@@ -478,7 +478,7 @@
 0x7A1C02: cmp     eax, ebx
 0x7A1C04: jz      short loc_7A1C0F
 0x7A1C06: push    eax
-0x7A1C07: call    FormHeapFree
+0x7A1C07: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A1C0C: add     esp, 4
 0x7A1C0F: mov     [edi], ebx
 0x7A1C11: mov     [edi+4], ebx
@@ -487,22 +487,22 @@
 0x7A1C1A: lea     eax, [edi-4]
 0x7A1C1D: cmp     eax, ebp
 0x7A1C1F: jnz     short loc_7A1C00
-0x7A1C21: mov     edi, [esp+70h+var_18]
+0x7A1C21: mov     edi, [esp+70h+lodLevelGuides.begin]
 0x7A1C25: push    edi
-0x7A1C26: call    FormHeapFree
+0x7A1C26: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A1C2B: add     esp, 4
 0x7A1C2E: mov     ecx, [esp+70h+var_50]
 0x7A1C32: mov     edx, [esp+70h+var_58]
 0x7A1C36: mov     eax, [edx+50h]
 0x7A1C39: add     ecx, 1
 0x7A1C3C: cmp     ecx, eax
-0x7A1C3E: mov     [esp+70h+var_18], ebx
-0x7A1C42: mov     [esp+70h+var_14], ebx
-0x7A1C46: mov     [esp+70h+var_10], ebx
+0x7A1C3E: mov     [esp+70h+lodLevelGuides.begin], ebx
+0x7A1C42: mov     [esp+70h+lodLevelGuides.end], ebx
+0x7A1C46: mov     [esp+70h+lodLevelGuides.capacityEnd], ebx
 0x7A1C4A: mov     [esp+70h+var_50], ecx
 0x7A1C4E: jb      loc_7A1A96
-0x7A1C54: mov     ebp, [esp+70h+var_24]
-0x7A1C58: mov     edi, [esp+70h+var_28]
+0x7A1C54: mov     ebp, [esp+70h+savedLargeGuides.end]
+0x7A1C58: mov     edi, [esp+70h+savedLargeGuides.begin]
 0x7A1C5C: xor     ebx, ebx
 0x7A1C5E: cmp     edi, ebx
 0x7A1C60: jz      short loc_7A1C9E
@@ -514,7 +514,7 @@
 0x7A1C72: cmp     eax, ebx
 0x7A1C74: jz      short loc_7A1C7F
 0x7A1C76: push    eax
-0x7A1C77: call    FormHeapFree
+0x7A1C77: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A1C7C: add     esp, 4
 0x7A1C7F: mov     [esi], ebx
 0x7A1C81: mov     [esi+4], ebx
@@ -523,16 +523,16 @@
 0x7A1C8A: lea     eax, [esi-4]
 0x7A1C8D: cmp     eax, ebp
 0x7A1C8F: jnz     short loc_7A1C70
-0x7A1C91: mov     edi, [esp+70h+var_28]
+0x7A1C91: mov     edi, [esp+70h+savedLargeGuides.begin]
 0x7A1C95: push    edi
-0x7A1C96: call    FormHeapFree
+0x7A1C96: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A1C9B: add     esp, 4
-0x7A1C9E: lea     ecx, [esp+70h+var_59]; void *
-0x7A1CA2: mov     [esp+70h+var_28], ebx
-0x7A1CA6: mov     [esp+70h+var_24], ebx
-0x7A1CAA: mov     [esp+70h+var_20], ebx
+0x7A1C9E: lea     ecx, [esp+70h+var_59]; this
+0x7A1CA2: mov     [esp+70h+savedLargeGuides.begin], ebx
+0x7A1CA6: mov     [esp+70h+savedLargeGuides.end], ebx
+0x7A1CAA: mov     [esp+70h+savedLargeGuides.capacityEnd], ebx
 0x7A1CAE: mov     [esp+70h+var_4], 0FFFFFFFFh
-0x7A1CB6: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7A1CB6: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7A1CBB: mov     ecx, [esp+70h+var_C]
 0x7A1CBF: mov     large fs:0, ecx
 0x7A1CC6: pop     ecx
@@ -542,3 +542,16 @@
 0x7A1CCA: pop     ebx
 0x7A1CCB: add     esp, 5Ch
 0x7A1CCE: retn
+0x9CC720: lea     ecx, [ebp-59h]; this
+0x9CC723: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9CC728: lea     ecx, [ebp-2Ch]; this
+0x9CC72B: jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.
+0x9CC730: lea     ecx, [ebp-1Ch]; this
+0x9CC733: jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.
+0x9CC738: mov     edx, [esp+arg_4]
+0x9CC73C: lea     eax, [edx-60h]
+0x9CC73F: mov     ecx, [edx-64h]
+0x9CC742: xor     ecx, eax
+0x9CC744: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CC749: mov     eax, offset stru_AF5B04
+0x9CC74E: jmp     ___CxxFrameHandler3

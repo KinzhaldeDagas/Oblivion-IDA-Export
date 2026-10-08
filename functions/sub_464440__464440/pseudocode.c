@@ -1,227 +1,240 @@
-TESWorldSpace *__userpurge sub_464440@<eax>(
-        char *ecx0@<ecx>,
-        int a2@<edi>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        char a6)
+// Verified: LoadGame finalization (caller 466889) ensures incoming map at manager+4, walks current map at +0, reconciles extant forms through sub45F180/ResetObject and reconstructs missing moved references from their old locations, then destroys old current map and promotes incoming map to +0. Probable Fallout homolog BGSSaveLoadGame::RevertCurrentChanges 825F1938: same existing-form reconciliation, missing moved-reference handling, and final map swap. Fallout uses TESForm::Revert and BGSReconstructFormsInAllFilesMap; Oblivion uses sub45F180 plus source-file search at 45C4F0. Note: function also has a separate game/world initialization branch; the map reconciliation and swap are in the save-load branch.
+TESWorldSpace *__userpurge TESSaveLoadGame_ReconcileExistingChanges@<eax>(
+        TESSaveLoadGame_SerializationView *self@<ecx>,
+        int arg2@<edi>,
+        double arg3@<st2>,
+        double arg4@<st1>,
+        double arg5@<st0>,
+        char initializationMode)
 {
   InterfaceManager *Singleton; // eax
-  int v8; // eax
-  PlayerCharacter *v9; // eax
+  int *v8; // eax
+  int *v9; // eax
   DWORD (__stdcall *v10)(); // edi
   UInt32 mainThreadID; // esi
   UInt32 v12; // esi
-  TESObjectCELL *ParentCell; // esi
+  TESObjectCELL *DwordAtOffset40; // esi
   TESWorldSpace *result; // eax
-  int *v15; // esi
+  OblivionTESFormListNode *p_worldspaceList; // esi
   const char *v16; // eax
-  _DWORD *v17; // eax
-  NiTMap_Entry_TESCELL *v18; // eax
+  NiTMap_TESCELL *v17; // eax
+  MEF_U32PointerMapEntry32 *v18; // eax
   ChangesMap *v19; // eax
   char v20; // bl
-  unsigned int v21; // ecx
+  unsigned int bucketCount; // ecx
   unsigned int v22; // eax
-  _DWORD *v23; // esi
-  _DWORD *v24; // edx
-  NiTMap_Entry_TESCELL *v25; // eax
-  NiTMap_TESCELL *v26; // ecx
-  int v27; // ebx
+  OblivionChangesMapNode **buckets; // esi
+  OblivionChangesMapNode **v24; // edx
+  MEF_U32PointerMapEntry32 *v25; // eax
+  ChangesMap *currentChangesMap; // ecx
+  unsigned int v27; // ebx
   TESForm *v28; // eax
-  char *vtbl; // esi
-  UInt32 v30; // esi
-  int v31; // eax
-  unsigned int v32; // edi
+  int v29; // esi
+  unsigned int primaryLocationFormID; // esi
+  NiTLargeArrayUInt32 *irefTable; // eax
+  unsigned int fallbackLocationFormID; // edi
   unsigned int v33; // eax
-  int v34; // eax
+  NiTLargeArrayUInt32 *v34; // eax
   TESForm *v35; // esi
   TESObjectCELL *CellAtCellCoord; // edi
   TESWorldSpace *v37; // eax
   TESObjectREFR *v38; // eax
-  float v39; // [esp+18h] [ebp-50h]
-  TESChildCELL *v40; // [esp+1Ch] [ebp-4Ch] BYREF
+  float v39; // [esp+0h] [ebp-68h]
+  void *valueOut; // [esp+1Ch] [ebp-4Ch] BYREF
   int a1; // [esp+20h] [ebp-48h] BYREF
-  int v42; // [esp+24h] [ebp-44h]
-  int v43; // [esp+28h] [ebp-40h]
-  NiTMap_Entry_TESCELL *v44; // [esp+2Ch] [ebp-3Ch] BYREF
-  _DWORD v45[11]; // [esp+30h] [ebp-38h] BYREF
-  int v46; // [esp+64h] [ebp-4h]
-  char v47; // [esp+6Ch] [ebp+4h]
+  int v43; // [esp+24h] [ebp-44h]
+  int v44; // [esp+28h] [ebp-40h]
+  MEF_U32PointerMapEntry32 *position; // [esp+2Ch] [ebp-3Ch] BYREF
+  OblivionMovedReferenceInitialData data; // [esp+30h] [ebp-38h] BYREF
+  int v47; // [esp+64h] [ebp-4h]
+  char initializationModea; // [esp+6Ch] [ebp+4h]
 
-  if ( OSGlobals->unk04 )
+  if ( MEMORY[0xB33398]->unk04 )
   {
-    *(_BYTE *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex) + 0x184) = 1;
-    sub_4599B0((char)ecx0, a3, a4, a5);
-    sub_463700(ecx0, (char)ecx0, a2, a3, a4, a5);
-    (*(void (__thiscall **)(_DWORD))(**(_DWORD **)ecx0 + 0x1C))(*(_DWORD *)ecx0);
-    sub_462080(ecx0);
-    SaveLoad_ValidateCreatedObj__((BSSimpleList_VoidPtr *)ecx0);
-    Singleton = InterfaceManager_GetSingleton(0, 1);
-    sub_57ECB0(Singleton, a3, a4);
-    sub_67F180();
-    sub_67FCF0();
-    sub_43F6E0((int)TES, a3, a4, a5);
-    sub_43F560(TES);
-    TESDataHandler_Clear((_BYTE *)TESDataHandler);
-    EffectSettingCollection_Reset();
-    sub_5B7150();
-    sub_5A6A80();
-    sub_5AD750(0);
-    sub_44A2B0((char *)TESDataHandler, "Data\\");
-    v8 = FormHeapAlloc(0x804u);
-    v46 = 0;
-    if ( v8 )
-      v9 = (PlayerCharacter *)PlayerCharacter_constr(v8, a3, a4);
+    *(_BYTE *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]) + 0x184) = 1; /*0x46448b*/
+    sub_4599B0((char)self, arg3, arg4, arg5); /*0x464492*/
+    sub_463700((char *)self, arg2, arg3, arg4, arg5); /*0x464499*/
+    self->currentChangesMap->vtbl->removeAllChanges(self->currentChangesMap); /*0x4644a6*/
+    sub_462080((char *)self); /*0x4644aa*/
+    TESSaveLoadGame_ProcessDeferredDeletions(self); /*0x4644b1*/
+    Singleton = InterfaceManager_GetSingleton(0, 1); /*0x4644ba*/
+    sub_57ECB0(Singleton, arg3, arg4); /*0x4644c4*/
+    TravelPath_ClearAllDoorLinkMaps();          // Verified LowPath map lifecycle during save/load reference reconciliation: first TravelPath_ClearAllDoorLinkMaps releases old AStarWorldNodes, state slots, lists, nested maps, and the outer map. /*0x4644c9*/
+    TravelPath_EnsureDoorLinkMapInitialized();  // Verified immediately after clearing old travel-link indices, TravelPath_EnsureDoorLinkMapInitialized recreates the outer space-link map for references being reconciled. /*0x4644ce*/
+    sub_43F6E0((int)MEMORY[0xB333A0], arg3, arg4, arg5); /*0x4644d9*/
+    sub_43F560(MEMORY[0xB333A0]); /*0x4644e4*/
+    TESDataHandler_Clear(g_TESDataHandler); /*0x4644ef*/
+    EffectSettingCollection_Reset(); /*0x4644f4*/
+    sub_5B7150(); /*0x4644f9*/
+    sub_5A6A80(); /*0x4644fe*/
+    sub_5AD750(0); /*0x464505*/
+    sub_44A2B0((char *)g_TESDataHandler, "Data\\"); /*0x464518*/
+    v8 = (int *)FormHeapAlloc(0x804u); /*0x464522*/
+    v47 = 0; /*0x464530*/
+    if ( v8 ) /*0x464538*/
+      v9 = PlayerCharacter_constr(v8, arg3, arg4); /*0x46453c*/
     else
-      v9 = 0;
-    v46 = 0xFFFFFFFF;
-    TESDataHandler_g_PlayerRef = v9;
-    TESForm_SetFormID((TESForm *)v9, 0x14, 1);
-    v10 = GetCurrentThreadId;
-    mainThreadID = OSGlobals->mainThreadID;
-    if ( GetCurrentThreadId() == mainThreadID )
-      v47 = ecx0[0x18] & 1;
+      v9 = 0; /*0x464543*/
+    v47 = 0xFFFFFFFF; /*0x46454b*/
+    reference = (PlayerCharacter *)v9; /*0x464553*/
+    TESForm_SetFormID((TESForm *)v9, 0x14, 1); /*0x464558*/
+    v10 = GetCurrentThreadId; /*0x464563*/
+    mainThreadID = MEMORY[0xB33398]->mainThreadID; /*0x464569*/
+    if ( GetCurrentThreadId() == mainThreadID ) /*0x464570*/
+      initializationModea = self->flags & 1; /*0x464578*/
     else
-      v47 = (*((_DWORD *)ecx0 + 6) & 0x40000) != 0;
-    v12 = OSGlobals->mainThreadID;
-    if ( v10() == v12 )
-      *((_DWORD *)ecx0 + 6) &= ~1u;
+      initializationModea = (self->flags & 0x40000) != 0; /*0x464586*/
+    v12 = MEMORY[0xB33398]->mainThreadID; /*0x464590*/
+    if ( v10() == v12 ) /*0x464597*/
+      self->flags &= ~1u; /*0x464599*/
     else
-      *((_DWORD *)ecx0 + 6) &= ~0x40000u;
-    TESDataHandler_LoadFiles_(TESDataHandler, a3, a4, a5, 0, 0);
-    sub_45A530(ecx0, v47);
-    sub_5AD750(0);
-    ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-    TESObjectREFR_ChangeCell((TESObjectREFR *)TESDataHandler_g_PlayerRef, 0);
-    sub_447D80(TESDataHandler, a3, a4);
-    TESObjectREFR_ChangeCell((TESObjectREFR *)TESDataHandler_g_PlayerRef, (int)ParentCell);
-    sub_4431F0(TES, a3, (char)ecx0, a4, a5, *(TESWorldSpace **)(TESDataHandler + 0xC));
-    result = (TESWorldSpace *)PrintToLog___("Initializing LOD land...");
-    v15 = (int *)(TESDataHandler + 0xC);
-    if ( TESDataHandler != 0xFFFFFFF4 )
+      self->flags &= ~0x40000u; /*0x46459f*/
+    TESDataHandler_LoadFiles_((int)g_TESDataHandler, arg3, arg4, arg5, 0, 0);// Verified game/world initialization path: TESSaveLoadGame_ReconcileExistingChanges calls TESDataHandler_LoadFiles here, then reattaches the player to the saved cell and runs worldspace/LOD initialization. TESDataHandler_LoadFiles rebuilds each WorldSpace's derived SubSpace index from persistentCell, confirming a full load reconstructs +0x60. This does not prove that the CreateDuplicateForm path triggers a reload. /*0x4645b0*/
+    sub_45A530(self, initializationModea); /*0x4645bc*/
+    sub_5AD750(0); /*0x4645c3*/
+    DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(reference); /*0x4645de*/
+    TESObjectREFR_ChangeCell((TESObjectREFR *)reference, 0); /*0x4645e0*/
+    sub_447D80((int)g_TESDataHandler, arg3, arg4); /*0x4645eb*/
+    TESObjectREFR_ChangeCell((TESObjectREFR *)reference, DwordAtOffset40); /*0x4645f7*/
+    sub_4431F0(MEMORY[0xB333A0], arg3, (char)self, arg4, arg5, (TESWorldSpace *)g_TESDataHandler->worldspaceList.item); /*0x46460b*/
+    result = (TESWorldSpace *)PrintToLog___("Initializing LOD land..."); /*0x464615*/
+    p_worldspaceList = &g_TESDataHandler->worldspaceList; /*0x464623*/
+    if ( g_TESDataHandler != (TESDataHandler *)0xFFFFFFF4 ) /*0x464626*/
     {
-      do
+      do /*0x464682*/
       {
-        if ( !v15[1] && !*v15 )
-          break;
-        result = TESWorldSpace_GetParentWorldpsace((TESWorldSpace *)*v15);
-        if ( !result )
+        if ( !p_worldspaceList->next && !p_worldspaceList->item ) /*0x464636*/
+          break; /*0x464639*/
+        result = (TESWorldSpace *)Shared_GetPointerAtOffset7C(p_worldspaceList->item); /*0x464641*/
+        if ( !result ) /*0x464648*/
         {
-          result = (TESWorldSpace *)sub_4EF7E0(*v15);
-          if ( result )
+          result = (TESWorldSpace *)TESWorldSpace_GetRootTerrainLODQuadMap((int)p_worldspaceList->item); /*0x46464c*/
+          if ( result ) /*0x464653*/
           {
-            v16 = (const char *)(*(int (__thiscall **)(int))(*(_DWORD *)*v15 + 0xD4))(*v15);
-            sub_40FEC0("Initializing LOD land for worldspace '%s'", v16);
-            v17 = (_DWORD *)sub_4EF7E0(*v15);
-            result = (TESWorldSpace *)sub_4EBC00(v17);
+            v16 = p_worldspaceList->item->vtbl->GetEditorName(p_worldspaceList->item); /*0x46465f*/
+            sub_40FEC0("Initializing LOD land for worldspace '%s'", v16); /*0x464667*/
+            v17 = (NiTMap_TESCELL *)TESWorldSpace_GetRootTerrainLODQuadMap((int)p_worldspaceList->item); /*0x464671*/
+            result = (TESWorldSpace *)TESWorldSpaceTerrainLODQuadMap_Initialize(v17); /*0x464678*/
           }
         }
-        v15 = (int *)v15[1];
+        p_worldspaceList = p_worldspaceList->next; /*0x46467d*/
       }
-      while ( v15 );
+      while ( p_worldspaceList ); /*0x464682*/
     }
   }
   else
   {
-    if ( !*((_DWORD *)ecx0 + 1) )
+    if ( !self->incomingChangesMap ) /*0x46468b*/
     {
-      v18 = (NiTMap_Entry_TESCELL *)FormHeapAlloc(0x10u);
-      v44 = v18;
-      v46 = 1;
-      if ( v18 )
-        v19 = ChangesMap::ChangesMap((ChangesMap *)v18);
+      v18 = (MEF_U32PointerMapEntry32 *)FormHeapAlloc(0x10u); /*0x464692*/
+      position = v18; /*0x46469a*/
+      v47 = 1; /*0x4646a0*/
+      if ( v18 ) /*0x4646a8*/
+        v19 = ChangesMap::ChangesMap((ChangesMap *)v18); /*0x4646ac*/
       else
-        v19 = 0;
-      v46 = 0xFFFFFFFF;
-      *((_DWORD *)ecx0 + 1) = v19;
+        v19 = 0; /*0x4646b3*/
+      v47 = 0xFFFFFFFF; /*0x4646b5*/
+      self->incomingChangesMap = v19; /*0x4646bd*/
     }
-    v20 = a6;
-    if ( !a6 )
-      sub_45EC50((int)ecx0, (char)ecx0, a3, a4, a5);
-    *((_DWORD *)ecx0 + 6) |= 0x40u;
-    if ( !a6 )
-      sub_463700(ecx0, (char)ecx0, 0, a3, a4, a5);
-    v21 = *(_DWORD *)(*(_DWORD *)ecx0 + 4);
-    v39 = flt_A379CC;
-    v22 = 0;
-    if ( v21 )
+    v20 = initializationMode; /*0x4646c0*/
+    if ( !initializationMode ) /*0x4646c6*/
+      sub_45EC50((int)self, arg3, arg4, arg5); /*0x4646ca*/
+    self->flags |= 0x40u; /*0x4646cf*/
+    if ( !initializationMode ) /*0x4646d5*/
+      sub_463700((char *)self, 0, arg3, arg4, arg5); /*0x4646d9*/
+    __asm { fld     dword ptr ds:0A379CCh } /*0x4646e1*/
+    bucketCount = self->currentChangesMap->bucketCount; /*0x4646e7*/
+    __asm { fstp    [esp+64h+var_50] } /*0x4646ea*/
+    v22 = 0; /*0x4646ee*/
+    if ( bucketCount ) /*0x4646f2*/
     {
-      v23 = *(_DWORD **)(*(_DWORD *)ecx0 + 8);
-      v24 = v23;
-      while ( !*v24 )
+      buckets = self->currentChangesMap->buckets; /*0x4646f4*/
+      v24 = buckets; /*0x4646f7*/
+      while ( !*v24 ) /*0x464702*/
       {
-        ++v22;
-        ++v24;
-        if ( v22 >= v21 )
-          goto LABEL_32;
+        ++v22; /*0x464708*/
+        ++v24; /*0x46470b*/
+        if ( v22 >= bucketCount ) /*0x464710*/
+          goto LABEL_32; /*0x464710*/
       }
-      v25 = (NiTMap_Entry_TESCELL *)v23[v22];
+      v25 = (MEF_U32PointerMapEntry32 *)buckets[v22]; /*0x46479a*/
     }
     else
     {
 LABEL_32:
-      v25 = 0;
+      v25 = 0; /*0x464712*/
     }
-    v44 = v25;
+    position = v25; /*0x464716*/
     if ( v25 )
     {
       do
       {
-        if ( OSGlobals->exitToMainMenu )
+        if ( MEMORY[0xB33398]->exitToMainMenu ) /*0x464726*/
         {
-          v39 = v39 + fConstant_Inv100;
-          sub_57B950((char)ecx0, a3, a4, a5, 2, v39);
+          __asm { fld     [esp+64h+var_50] } /*0x46472c*/
+          __asm
+          {
+            fadd    qword ptr ds:0A3B150h
+            fstp    [esp+68h+var_50]
+            fld     [esp+68h+var_50]
+            fstp    [esp+68h+var_68]; float
+          }
+          sub_57B950((char)self, arg3, arg4, 2, v39); /*0x464744*/
         }
-        v26 = *(NiTMap_TESCELL **)ecx0;
-        v40 = 0;
-        a1 = 0;
-        sub_452600(v26, &v44, (void **)&a1, (TESObjectCELL **)&v40);
-        v27 = a1;
-        v28 = TESForm_LookupByFormID(a1);
-        if ( v28 != (TESForm *)TESDataHandler_g_PlayerRef )
+        currentChangesMap = self->currentChangesMap; /*0x46475b*/
+        valueOut = 0; /*0x46475e*/
+        a1 = 0; /*0x464762*/
+        NiTMap_U32Pointer_GetNextEntry( /*0x464766*/
+          (MEF_U32PointerMapLayout32 *)currentChangesMap,
+          &position,
+          (unsigned int *)&a1,
+          &valueOut);
+        v27 = a1; /*0x46476b*/
+        v28 = TESForm_LookupByFormID(a1); /*0x464770*/
+        if ( v28 != (TESForm *)reference )
         {
           if ( v28 )
           {
-            sub_45F180((int)ecx0, a3, a4, a5, v28, v40);
+            TESSaveLoadGame_ResetFormForLoad(self, arg3, arg4, arg5, v28, (OblivionChangeData *)valueOut); /*0x464790*/
           }
-          else if ( (int)v40->vtbl < 0 )
+          else if ( *(int *)valueOut < 0 )
           {
-            vtbl = (char *)v40[1].vtbl;
-            if ( vtbl )
+            v29 = *((_DWORD *)valueOut + 1); /*0x4647b2*/
+            if ( v29 )
             {
-              qmemcpy(v45, vtbl + 4, sizeof(v45));
-              v30 = v45[0];
-              if ( !TESDataHandler_IsFormIDCreated_(v45[0]) )
+              qmemcpy(&data, (const void *)(v29 + 4), sizeof(data)); /*0x4647c9*/
+              primaryLocationFormID = data.primaryLocationFormID; /*0x4647cb*/
+              if ( !TESDataHandler_IsFormIDCreated_(data.primaryLocationFormID) ) /*0x4647d6*/
               {
-                v31 = *((_DWORD *)ecx0 + 0x1D);
-                if ( v30 <= *(_DWORD *)(v31 + 0xC) )
-                  v30 = *(_DWORD *)(*(_DWORD *)(v31 + 4) + 4 * v30);
+                irefTable = self->irefTable; /*0x4647df*/
+                if ( primaryLocationFormID <= irefTable->count ) /*0x4647e5*/
+                  primaryLocationFormID = irefTable->data[primaryLocationFormID]; /*0x4647ee*/
                 else
-                  v30 = 0;
+                  primaryLocationFormID = 0; /*0x4647e7*/
               }
-              v32 = v45[4];
-              v45[0] = v30;
-              if ( TESDataHandler_IsFormIDCreated_(v45[4]) )
+              fallbackLocationFormID = data.fallbackLocationFormID; /*0x4647f1*/
+              data.primaryLocationFormID = primaryLocationFormID; /*0x4647fc*/
+              if ( TESDataHandler_IsFormIDCreated_(data.fallbackLocationFormID) ) /*0x464800*/
               {
-                v33 = v32;
+                v33 = fallbackLocationFormID; /*0x464809*/
               }
               else
               {
-                v34 = *((_DWORD *)ecx0 + 0x1D);
-                if ( v32 <= *(_DWORD *)(v34 + 0xC) )
-                  v33 = *(_DWORD *)(*(_DWORD *)(v34 + 4) + 4 * v32);
+                v34 = self->irefTable; /*0x46480d*/
+                if ( fallbackLocationFormID <= v34->count ) /*0x464813*/
+                  v33 = v34->data[fallbackLocationFormID]; /*0x46481c*/
                 else
-                  v33 = 0;
+                  v33 = 0; /*0x464815*/
               }
-              v45[4] = v33;
-              v35 = TESForm_LookupByFormID(v30);
-              CellAtCellCoord = (TESObjectCELL *)OblivionDynamicCast(
+              data.fallbackLocationFormID = v33; /*0x464820*/
+              v35 = TESForm_LookupByFormID(primaryLocationFormID); /*0x464835*/
+              CellAtCellCoord = (TESObjectCELL *)OblivionDynamicCast( /*0x46484e*/
                                                    v35,
                                                    0,
                                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                                                    &TESObjectCELL `RTTI Type Descriptor',
                                                    0);
-              v37 = (TESWorldSpace *)OblivionDynamicCast(
+              v37 = (TESWorldSpace *)OblivionDynamicCast( /*0x464850*/
                                        v35,
                                        0,
                                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
@@ -229,38 +242,39 @@ LABEL_32:
                                        0);
               if ( v37 )
               {
-                v43 = (int)*(float *)&v45[1];
-                v42 = (int)*(float *)&v45[2];
-                CellAtCellCoord = (TESObjectCELL *)TESWorldSpace::GetCellAtCellCoord(v37, v43 >> 0xC, v42 >> 0xC);
-              }
-              if ( CellAtCellCoord )
-              {
-                if ( TESObjectCELL_IsProcessLevel_LowHigh(CellAtCellCoord, 0) )
+                __asm
                 {
-                  v38 = sub_45C4F0(v27, (int)v45);
-                  sub_4D35D0(CellAtCellCoord, a3, a4, a5, (TESChildCELL *)v38);
+                  fld     [esp+64h+data.worldX]; Verified: source world X; used when source locator is a TESWorldSpace.
+                  fistp   [esp+64h+var_40]
+                  fld     [esp+64h+data.worldY]; Verified: source world Y; used when source locator is a TESWorldSpace.
+                  fistp   [esp+64h+var_44]
+                }
+                CellAtCellCoord = TESWorldSpace::GetCellAtCellCoord(v37, v44 >> 0xC, v43 >> 0xC); /*0x464883*/
+              }
+              if ( CellAtCellCoord ) /*0x464887*/
+              {
+                if ( TESObjectCELL_IsProcessLevel_LowHigh(CellAtCellCoord, 0) ) /*0x464892*/
+                {
+                  v38 = TESSaveLoadGame_RebuildReferenceFromLocationOverrides(v27, &data); /*0x4648a3*/
+                  TESObjectCELL_AddReference(CellAtCellCoord, v38); /*0x4648ab*/
                 }
               }
             }
           }
         }
       }
-      while ( v44 );
-      v20 = a6;
+      while ( position );
+      v20 = initializationMode; /*0x4648bc*/
     }
-    (*(void (__usercall **)(_DWORD@<ecx>, double@<st0>, double@<st1>, double@<st2>))(**(_DWORD **)ecx0 + 0x1C))(
-      *(_DWORD *)ecx0,
-      a5,
-      a4,
-      a3);
-    if ( *(_DWORD *)ecx0 )
-      (***(void (__thiscall ****)(_DWORD, int))ecx0)(*(_DWORD *)ecx0, 1);
-    result = *((TESWorldSpace **)ecx0 + 1);
-    *((_DWORD *)ecx0 + 6) &= ~0x40u;
-    *(_DWORD *)ecx0 = result;
-    *((_DWORD *)ecx0 + 1) = 0;
-    if ( !v20 )
-      ecx0[0xA8] = 0;
+    self->currentChangesMap->vtbl->removeAllChanges(self->currentChangesMap); /*0x4648c8*/
+    if ( self->currentChangesMap ) /*0x4648ca*/
+      self->currentChangesMap->vtbl->destroy(self->currentChangesMap, 1u); /*0x4648d7*/
+    result = (TESWorldSpace *)self->incomingChangesMap; /*0x4648d9*/
+    self->flags &= ~0x40u; /*0x4648dc*/
+    self->currentChangesMap = (ChangesMap *)result; /*0x4648e2*/
+    self->incomingChangesMap = 0; /*0x4648e5*/
+    if ( !v20 ) /*0x4648e8*/
+      self[1].unknown1C[4] = 0; /*0x4648ea*/
   }
-  return result;
+  return result; /*0x4648f0*/
 }

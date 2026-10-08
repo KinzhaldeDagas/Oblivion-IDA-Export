@@ -79,7 +79,7 @@
 0x57C32C: push    edi
 0x57C32D: call    __sprintf
 0x57C332: push    esi
-0x57C333: call    FormHeapFree
+0x57C333: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57C338: add     esp, 14h
 0x57C33B: pop     esi
 0x57C33C: pop     edi

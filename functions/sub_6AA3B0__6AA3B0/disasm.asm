@@ -109,3 +109,12 @@
 0x6AA4C4: mov     ecx, esi
 0x6AA4C6: call    edx
 0x6AA4C8: jmp     short loc_6AA45A
+0x9CE3D0: lea     ecx, [ebp+8]; slot
+0x9CE3D3: jmp     NiPointerSlot_Release
+0x9CE3D8: mov     edx, [esp+incoming]
+0x9CE3DC: lea     eax, [edx-14h]
+0x9CE3DF: mov     ecx, [edx-18h]
+0x9CE3E2: xor     ecx, eax
+0x9CE3E4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE3E9: mov     eax, offset stru_AF73F0
+0x9CE3EE: jmp     ___CxxFrameHandler3

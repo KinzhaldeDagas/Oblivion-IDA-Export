@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x791870",
-    "line": "mov     eax, ds:0B429F4h",
+    "line": "mov     eax, ds:0B429F4h; SpeedTreeRT 4.1 source match: CBranch::BuildBlossomVectors. Splits leaf texture map indices into blossom and non-blossom global/static vectors from the leaf texture record blossom flag.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x79189A",
-    "line": "mov     esi, offset dword_B429EC",
+    "line": "mov     esi, offset firstOwner",
     "mnemonic": "mov",
     "size": 5
   },
@@ -103,55 +103,55 @@
   },
   {
     "ea": "0x7918A6",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918A7",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918A8",
-    "line": "push    edi; Dst",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918A9",
-    "line": "mov     eax, offset dword_B429EC",
+    "line": "mov     eax, offset firstOwner",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7918AE",
-    "line": "push    eax; int",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918AF",
-    "line": "lea     eax, [esp+2Ch+var_8]",
+    "line": "lea     eax, [esp+2Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7918B3",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918B4",
-    "line": "mov     ecx, offset dword_B429EC",
+    "line": "mov     ecx, offset firstOwner; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7918B9",
-    "line": "call    sub_439050",
+    "line": "call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7918E1",
-    "line": "mov     esi, offset dword_B429CC",
+    "line": "mov     esi, offset stru_B429CC",
     "mnemonic": "mov",
     "size": 5
   },
@@ -235,55 +235,55 @@
   },
   {
     "ea": "0x7918EF",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918F0",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918F1",
-    "line": "mov     eax, offset dword_B429CC",
+    "line": "mov     eax, offset stru_B429CC",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7918F6",
-    "line": "push    edi; Dst",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918F7",
-    "line": "push    eax; int",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918F8",
-    "line": "lea     ecx, [esp+2Ch+var_8]",
+    "line": "lea     ecx, [esp+2Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7918FC",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7918FD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7918FF",
-    "line": "call    sub_439050",
+    "line": "call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,19 +505,19 @@
   },
   {
     "ea": "0x79196E",
-    "line": "lea     ecx, [esp+1Ch+var_8]",
+    "line": "lea     ecx, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x791972",
-    "line": "mov     [esp+1Ch+var_8], ebp",
+    "line": "mov     [esp+1Ch+result.owner], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x791976",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -529,19 +529,19 @@
   },
   {
     "ea": "0x791979",
-    "line": "mov     ecx, offset dword_B429EC",
+    "line": "mov     ecx, offset firstOwner; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79197E",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791983",
-    "line": "mov     ecx, offset dword_B429EC",
+    "line": "mov     ecx, offset firstOwner",
     "mnemonic": "mov",
     "size": 5
   },
@@ -553,25 +553,25 @@
   },
   {
     "ea": "0x79198A",
-    "line": "mov     ecx, offset dword_B429CC",
+    "line": "mov     ecx, offset stru_B429CC; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79198F",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x791994",
-    "line": "mov     ecx, offset dword_B429CC",
+    "line": "mov     ecx, offset stru_B429CC; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x791999",
-    "line": "lea     eax, [esp+1Ch+var_8]",
+    "line": "lea     eax, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -583,19 +583,19 @@
   },
   {
     "ea": "0x7919A0",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7919A1",
-    "line": "mov     [esp+20h+var_8], edx",
+    "line": "mov     [esp+20h+result.owner], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7919A5",
-    "line": "call    sub_791770",
+    "line": "call    OB_stVector4_PushBack_010201A0; Pushes one 4-byte value into an OB_stVector4. Writes directly at end when capacity remains, otherwise calls the checked insert-one helper. Oblivion uses it for CBranch pointers and other pointer-sized SpeedTree lists.",
     "mnemonic": "call",
     "size": 5
   },

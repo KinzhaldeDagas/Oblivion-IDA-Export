@@ -4,5 +4,5 @@
 0x41E819: jz      short loc_41E81F
 0x41E81B: fld     dword ptr [eax+0Ch]
 0x41E81E: retn
-0x41E81F: fld     ds:flt_A30634
+0x41E81F: fld     ds:kTerrainLODQuadRayDirectionZ
 0x41E825: retn

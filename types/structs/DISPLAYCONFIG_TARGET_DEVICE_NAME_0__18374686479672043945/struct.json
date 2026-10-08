@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DISPLAYCONFIG_TARGET_DEVICE_NAME_0",
+  "definition": "typedef DISPLAYCONFIG_TARGET_DEVICE_NAME DISPLAYCONFIG_TARGET_DEVICE_NAME_0\n",
   "id": 18374686479672043945,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "DISPLAYCONFIG_DEVICE_INFO_HEADER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "outputTechnology",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "edidManufactureId",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 2
+      "offset_hex": "0x1C",
+      "size": 2,
+      "type": "UINT16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "edidProductCodeId",
       "offset": 30,
-      "offset_hex": "0x1e",
-      "size": 2
+      "offset_hex": "0x1E",
+      "size": 2,
+      "type": "UINT16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "connectorInstance",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "UINT32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "monitorFriendlyDeviceName",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 128
+      "size": 128,
+      "type": "WCHAR_0[64]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "monitorDevicePath",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 256
+      "offset_hex": "0xA4",
+      "size": 256,
+      "type": "WCHAR_0[128]"
     }
   ],
   "name": "DISPLAYCONFIG_TARGET_DEVICE_NAME_0",
+  "ordinal": 7652,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 420
 }

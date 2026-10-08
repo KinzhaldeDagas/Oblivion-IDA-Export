@@ -1,19 +1,36 @@
 {
-  "callees_count": 36,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_723050",
+  "chunks": [
+    [
+      "0x723050",
+      "0x7232A1"
+    ],
+    [
+      "0x9CA3D0",
+      "0x9CA411"
+    ]
+  ],
+  "chunks_sha256": "ffdff50701c4500c362c96148f947c2e8a5982364be79bfd4baf94752922654e",
+  "comment_regular": "\n[2026-10-03 plugin scene tracking] Private shape ProcessClone wrapper invokes this function after confirming map/source/destination metadata. Afterwards it refreshes destination propertyState+AC->shaderProperty+18 and remaps source node/group through cloningProcess's first map. An uncloned parent is cleared, never borrowed from the source hierarchy. Material/fade/LOD snapshots are value-copied.\n\nCommon NiGeometry clone post-process. Resolves the destination through the clone map, handles geometry-data cloning/sharing, and rebuilds shader/property state only when the source geometry has a shader; a source-null shader leaves the clone shader/property state null.",
+  "comment_repeatable": "Common NiGeometry clone post-process. Resolves the destination through the clone map, handles geometry-data cloning/sharing, and rebuilds shader/property state only when the source geometry has a shader; a source-null shader leaves the clone shader/property state null.\n2026-10-08 clone continuity: source ECX is NOT destination. After base707AB0, first map in cloningProcess resolves source->destination. Writes destination+B8 skin,+BC shader,+AC property state; skin/shader/collision virtual callbacks can mutate further data. Fallout/Xenon821FFE38 strongly corresponds, but uses different offsets/locking. V265 must revoke old poses for unresolved clone scope; normal completion can permit NEW owner-thread update proofs after full activity ends, never revive prior tokens or publish worker poses. Native-unwind/failure remains a hard epoch block.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "NiGeometry_ProcessClone",
   "end_ea": "0x7232A1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_723050",
+  "name": "NiGeometry_ProcessClone",
   "segment": ".text",
   "sha256": "4ec762dfba052f243fc16dde05c7bd0b9e3e010ef9a4ec847cff561267956f3e",
   "size": 593,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x723050",
-  "type": "void __thiscall(NiRenderTargetGroup *this, Ni2DBuffer *)",
-  "xrefs_from_count": 230,
+  "total_chunk_size": 658,
+  "type": "void __thiscall(NiGeometry *this, void *cloningProcess)",
+  "xrefs_from_count": 253,
   "xrefs_to_count": 13
 }

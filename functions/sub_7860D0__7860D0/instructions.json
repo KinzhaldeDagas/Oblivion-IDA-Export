@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7860D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion stBezierSpline::AddControlPoint. Builds 2D point/tangent stVecs, normalizes the tangent, appends prior outgoing/current incoming cubic-Bezier controls to splinePoints, then appends the point, tangent, and tangent length. Shipped compact layout: controlPoints@0x0C, tangents@0x1C, lengths@0x2C, splinePoints@0x4C. Binary behavior matches RT4.1 IdvSpline.cpp after observation.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7860F9",
-    "line": "mov     eax, [esp+80h+arg_0]",
+    "line": "mov     eax, [esp+80h+point]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x786106",
-    "line": "fstp    [esp+88h+var_84]; float",
+    "line": "fstp    [esp+88h+y]; y",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78610A",
-    "line": "lea     ecx, [esp+88h+var_54]",
+    "line": "lea     ecx, [esp+88h+value]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x786110",
-    "line": "fstp    [esp+88h+var_88]; float",
+    "line": "fstp    [esp+88h+x]; x",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x786113",
-    "line": "call    sub_78E5A0",
+    "line": "call    OB_stVec_ctor_xy_010201A0; Oblivion stVec(x,y) constructor: stores x/y, zeros z/w/v, and sets logical size to 2. Exact body corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786118",
-    "line": "mov     eax, [esp+80h+arg_4]",
+    "line": "mov     eax, [esp+80h+tangent]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x786125",
-    "line": "fstp    [esp+88h+var_84]; float",
+    "line": "fstp    [esp+88h+y]; y",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x786129",
-    "line": "lea     ecx, [esp+88h+var_6C]",
+    "line": "lea     ecx, [esp+88h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x78613A",
-    "line": "fstp    [esp+88h+var_88]; float",
+    "line": "fstp    [esp+88h+x]; x",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78613D",
-    "line": "call    sub_78E5A0",
+    "line": "call    OB_stVec_ctor_xy_010201A0; Oblivion stVec(x,y) constructor: stores x/y, zeros z/w/v, and sets logical size to 2. Exact body corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786142",
-    "line": "lea     ecx, [esp+80h+var_6C]",
+    "line": "lea     ecx, [esp+80h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x78614B",
-    "line": "call    sub_78E6A0",
+    "line": "call    OB_stVec_Normalize_010201A0; Oblivion stVec::Normalize: computes Magnitude and, when nonzero, divides every active component by it. Exact behavior corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7861C1",
-    "line": "mov     [esp+80h+arg_0], edx",
+    "line": "mov     [esp+80h+point], edx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7861EC",
-    "line": "mov     eax, [esp+80h+arg_0]",
+    "line": "mov     eax, [esp+80h+point]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x7861FE",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
@@ -583,31 +583,31 @@
   },
   {
     "ea": "0x786201",
-    "line": "lea     edx, [esp+84h+var_24]",
+    "line": "lea     edx, [esp+84h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786205",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+y]; scalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x786208",
-    "line": "push    edx; int",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786209",
-    "line": "call    sub_78E8A0",
+    "line": "call    OB_stVec_Scale_010201A0; Oblivion compiler-lowered stVec::operator*(float): initializes the hidden return object with lhs.size and scales every active component. Exact behavior corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78620E",
-    "line": "mov     [esp+80h+arg_0], eax",
+    "line": "mov     [esp+80h+point], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x786240",
-    "line": "mov     eax, [esp+80h+arg_0]",
+    "line": "mov     eax, [esp+80h+point]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x78624A",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -727,19 +727,19 @@
   },
   {
     "ea": "0x78624F",
-    "line": "add     ecx, edi",
+    "line": "add     ecx, edi; this",
     "mnemonic": "add",
     "size": 2
   },
   {
     "ea": "0x786251",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786252",
-    "line": "call    sub_78E6E0",
+    "line": "call    OB_stVec_Add_010201A0; Oblivion compiler-lowered stVec::operator+: initializes the hidden return object with min(lhs.size,rhs.size), then adds components over lhs.size, matching the shipped RT4.1 source semantics (which assume compatible sizes).",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x78625A",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78625B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -769,13 +769,13 @@
   },
   {
     "ea": "0x786265",
-    "line": "call    sub_785E90",
+    "line": "call    OB_stVector_stVec_PushBack_010201A0; Oblivion compact stVec-vector push_back. Appends a 0x18-byte stVec in place when capacity remains; otherwise delegates to the reallocation/insertion path. Used for synchronized spline control/tangent/control-curve vectors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78626A",
-    "line": "lea     ecx, [esp+80h+var_3C]; void *",
+    "line": "lea     ecx, [esp+80h+var_3C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x786273",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786278",
-    "line": "lea     ecx, [esp+80h+var_24]; void *",
+    "line": "lea     ecx, [esp+80h+result]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -805,13 +805,13 @@
   },
   {
     "ea": "0x786281",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786286",
-    "line": "fld     [esp+80h+arg_8]",
+    "line": "fld     [esp+80h+tangentLength]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -829,43 +829,43 @@
   },
   {
     "ea": "0x786292",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+y]; scalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x786295",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786296",
-    "line": "lea     ecx, [esp+88h+var_6C]",
+    "line": "lea     ecx, [esp+88h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78629A",
-    "line": "call    sub_78E8A0",
+    "line": "call    OB_stVec_Scale_010201A0; Oblivion compiler-lowered stVec::operator*(float): initializes the hidden return object with lhs.size and scales every active component. Exact behavior corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78629F",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7862A0",
-    "line": "lea     ecx, [esp+84h+var_24]",
+    "line": "lea     ecx, [esp+84h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7862A4",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x7862A7",
-    "line": "lea     ecx, [esp+88h+var_54]",
+    "line": "lea     ecx, [esp+88h+value]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -889,19 +889,19 @@
   },
   {
     "ea": "0x7862B2",
-    "line": "call    sub_78E7C0",
+    "line": "call    OB_stVec_Subtract_010201A0; Oblivion compiler-lowered stVec::operator-: initializes the hidden return object with min(lhs.size,rhs.size), then subtracts components over lhs.size, matching the shipped RT4.1 source semantics (which assume compatible sizes).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7862B7",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7862B8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -913,13 +913,13 @@
   },
   {
     "ea": "0x7862C2",
-    "line": "call    sub_785E90",
+    "line": "call    OB_stVector_stVec_PushBack_010201A0; Oblivion compact stVec-vector push_back. Appends a 0x18-byte stVec in place when capacity remains; otherwise delegates to the reallocation/insertion path. Used for synchronized spline control/tangent/control-curve vectors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7862C7",
-    "line": "lea     ecx, [esp+80h+var_24]; void *",
+    "line": "lea     ecx, [esp+80h+result]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x7862CF",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7862D4",
-    "line": "lea     ecx, [esp+80h+var_3C]; void *",
+    "line": "lea     ecx, [esp+80h+var_3C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -949,55 +949,55 @@
   },
   {
     "ea": "0x7862DD",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7862E2",
-    "line": "lea     edx, [esp+80h+var_54]",
+    "line": "lea     edx, [esp+80h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7862E6",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7862E7",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7862E9",
-    "line": "call    sub_785E90",
+    "line": "call    OB_stVector_stVec_PushBack_010201A0; Oblivion compact stVec-vector push_back. Appends a 0x18-byte stVec in place when capacity remains; otherwise delegates to the reallocation/insertion path. Used for synchronized spline control/tangent/control-curve vectors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7862EE",
-    "line": "lea     eax, [esp+80h+var_54]",
+    "line": "lea     eax, [esp+80h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7862F2",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7862F3",
-    "line": "lea     ecx, [esi+4Ch]",
+    "line": "lea     ecx, [esi+4Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7862F6",
-    "line": "call    sub_785E90",
+    "line": "call    OB_stVector_stVec_PushBack_010201A0; Oblivion compact stVec-vector push_back. Appends a 0x18-byte stVec in place when capacity remains; otherwise delegates to the reallocation/insertion path. Used for synchronized spline control/tangent/control-curve vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,49 +1009,49 @@
   },
   {
     "ea": "0x7862FF",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786300",
-    "line": "lea     ecx, [esi+1Ch]",
+    "line": "lea     ecx, [esi+1Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x786303",
-    "line": "call    sub_785E90",
+    "line": "call    OB_stVector_stVec_PushBack_010201A0; Oblivion compact stVec-vector push_back. Appends a 0x18-byte stVec in place when capacity remains; otherwise delegates to the reallocation/insertion path. Used for synchronized spline control/tangent/control-curve vectors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786308",
-    "line": "lea     edx, [esp+80h+arg_8]",
+    "line": "lea     edx, [esp+80h+tangentLength]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x78630F",
-    "line": "push    edx; int",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786310",
-    "line": "lea     ecx, [esi+2Ch]; int",
+    "line": "lea     ecx, [esi+2Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x786313",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786318",
-    "line": "lea     ecx, [esp+80h+var_6C]; void *",
+    "line": "lea     ecx, [esp+80h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1063,13 +1063,13 @@
   },
   {
     "ea": "0x786321",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786326",
-    "line": "lea     ecx, [esp+80h+var_54]; void *",
+    "line": "lea     ecx, [esp+80h+value]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x786332",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1138,5 +1138,119 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB140",
+    "line": "lea     ecx, [ebp-54h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB143",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB148",
+    "line": "lea     ecx, [ebp-6Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB14B",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB150",
+    "line": "lea     ecx, [ebp-24h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB153",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB158",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB15B",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB160",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB163",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB168",
+    "line": "lea     ecx, [ebp-24h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB16B",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB170",
+    "line": "mov     edx, [esp+tangent]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB174",
+    "line": "lea     eax, [edx-70h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB177",
+    "line": "mov     ecx, [edx-74h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB17A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB17C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB181",
+    "line": "mov     eax, offset stru_AF37E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB186",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

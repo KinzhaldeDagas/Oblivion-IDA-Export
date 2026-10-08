@@ -1,6 +1,6 @@
-0x67EFE0: push    esi
+0x67EFE0: push    esi; Verified Oblivion AStarNodeList append uses intrusive nodes and appends at the start/head pointer. Fallout's inspected AStarQueue stores each AStarNode in a sorted linked list within one of 20 F-cost buckets; the two layouts/algorithms are distinct.
 0x67EFE1: push    edi
-0x67EFE2: mov     edi, [esp+8+arg_0]
+0x67EFE2: mov     edi, [esp+8+node]
 0x67EFE6: test    edi, edi
 0x67EFE8: mov     esi, ecx
 0x67EFEA: jz      short loc_67F022

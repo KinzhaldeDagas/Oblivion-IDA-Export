@@ -1,1 +1,1 @@
-RpcStreamImpl_0
+typedef RpcStreamImpl RpcStreamImpl_0;

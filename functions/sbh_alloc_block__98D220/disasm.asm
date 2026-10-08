@@ -1,10 +1,10 @@
 0x98D220: push    ebp
 0x98D221: mov     ebp, esp
 0x98D223: sub     esp, 14h
-0x98D226: mov     eax, dword_BAABC4
+0x98D226: mov     eax, dword ptr unk_BAABC4
 0x98D22B: mov     ecx, [ebp+arg_0]
 0x98D22E: imul    eax, 14h
-0x98D231: add     eax, lpMem
+0x98D231: add     eax, ds:0BAABC8h
 0x98D237: add     ecx, 17h
 0x98D23A: and     ecx, 0FFFFFFF0h
 0x98D23D: mov     [ebp+var_10], ecx
@@ -24,7 +24,7 @@
 0x98D25D: xor     esi, esi
 0x98D25F: shr     edx, cl
 0x98D261: mov     [ebp+var_8], edx
-0x98D264: mov     ecx, dword_BAABD0
+0x98D264: mov     ecx, dword ptr unk_BAABD0
 0x98D26A: mov     ebx, ecx
 0x98D26C: jmp     short loc_98D27F
 0x98D26E: mov     edx, [ebx+4]
@@ -39,7 +39,7 @@
 0x98D284: jb      short loc_98D26E
 0x98D286: cmp     ebx, eax
 0x98D288: jnz     short loc_98D309
-0x98D28A: mov     ebx, lpMem
+0x98D28A: mov     ebx, ds:0BAABC8h
 0x98D290: jmp     short loc_98D2A3
 0x98D292: mov     edx, [ebx+4]
 0x98D295: mov     edi, [ebx]
@@ -62,7 +62,7 @@
 0x98D2BE: jb      short loc_98D2B0
 0x98D2C0: cmp     ebx, eax
 0x98D2C2: jnz     short loc_98D2F5
-0x98D2C4: mov     ebx, lpMem
+0x98D2C4: mov     ebx, ds:0BAABC8h
 0x98D2CA: jmp     short loc_98D2D5
 0x98D2CC: cmp     dword ptr [ebx+8], 0
 0x98D2D0: jnz     short loc_98D2DC
@@ -87,7 +87,7 @@
 0x98D301: mov     eax, [ebx+10h]
 0x98D304: cmp     dword ptr [eax], 0FFFFFFFFh
 0x98D307: jz      short loc_98D2EE
-0x98D309: mov     dword_BAABD0, ebx
+0x98D309: mov     dword ptr unk_BAABD0, ebx
 0x98D30F: mov     eax, [ebx+10h]
 0x98D312: mov     edx, [eax]
 0x98D314: cmp     edx, 0FFFFFFFFh
@@ -245,12 +245,12 @@
 0x98D4D5: lea     edi, [ecx+1]
 0x98D4D8: mov     [esi], edi
 0x98D4DA: jnz     short loc_98D4F6
-0x98D4DC: cmp     ebx, dword_BAA2A8
+0x98D4DC: cmp     ebx, dword_BA9E10+498h
 0x98D4E2: jnz     short loc_98D4F6
 0x98D4E4: mov     ecx, [ebp+var_4]
-0x98D4E7: cmp     ecx, dword_BAABD8
+0x98D4E7: cmp     ecx, dword ptr unk_BAABD8
 0x98D4ED: jnz     short loc_98D4F6
-0x98D4EF: and     dword_BAA2A8, 0
+0x98D4EF: and     dword_BA9E10+498h, 0
 0x98D4F6: mov     ecx, [ebp+var_4]
 0x98D4F9: mov     [eax], ecx
 0x98D4FB: lea     eax, [edx+4]

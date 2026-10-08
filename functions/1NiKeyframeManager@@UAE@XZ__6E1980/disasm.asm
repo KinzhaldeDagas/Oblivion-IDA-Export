@@ -23,3 +23,12 @@
 0x6E19D3: pop     esi
 0x6E19D4: add     esp, 10h
 0x6E19D7: retn
+0x9C80C0: mov     ecx, [ebp-10h]; this
+0x9C80C3: jmp     ??1NiPSysResetOnLoopCtlr@@UAE@XZ; NiPSysResetOnLoopCtlr::~NiPSysResetOnLoopCtlr(void)
+0x9C80C8: mov     edx, [esp+arg_4]
+0x9C80CC: lea     eax, [edx-8]
+0x9C80CF: mov     ecx, [edx-0Ch]
+0x9C80D2: xor     ecx, eax
+0x9C80D4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C80D9: mov     eax, offset stru_AF03BC
+0x9C80DE: jmp     ___CxxFrameHandler3

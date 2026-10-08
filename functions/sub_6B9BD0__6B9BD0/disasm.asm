@@ -13,7 +13,7 @@
 0x6B9BF3: mov     esi, ecx
 0x6B9BF5: mov     [esp+1Ch+var_10], esi
 0x6B9BF9: xor     edi, edi
-0x6B9BFB: push    offset NiRefObject_objcount; lpAddend
+0x6B9BFB: push    0B3FD64h; lpAddend
 0x6B9C00: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x6B9C06: mov     [esi+4], edi
 0x6B9C09: call    dword ptr ds:0A28078h
@@ -43,3 +43,18 @@
 0x6B9C5F: pop     esi
 0x6B9C60: add     esp, 10h
 0x6B9C63: retn    8
+0x9C70D0: mov     ecx, [ebp-10h]
+0x9C70D3: jmp     NiRefObject_destr
+0x9C70D8: mov     ecx, [ebp-10h]
+0x9C70DB: add     ecx, 8; void *
+0x9C70DE: jmp     BSStringT_Clear
+0x9C70E3: mov     ecx, [ebp-10h]
+0x9C70E6: add     ecx, 10h
+0x9C70E9: jmp     j_??1?$NiTPointerList@V?$NiPointer@VAverageEntry@@@@@@UAE@XZ; NiTPointerList<NiPointer<AverageEntry>>::~NiTPointerList<NiPointer<AverageEntry>>(void)
+0x9C70EE: mov     edx, [esp+arg_4]
+0x9C70F2: lea     eax, [edx-0Ch]
+0x9C70F5: mov     ecx, [edx-10h]
+0x9C70F8: xor     ecx, eax
+0x9C70FA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C70FF: mov     eax, offset stru_AEF550
+0x9C7104: jmp     ___CxxFrameHandler3

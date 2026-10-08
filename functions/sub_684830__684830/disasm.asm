@@ -17,7 +17,7 @@
 0x68485B: push    eax
 0x68485C: mov     ecx, esi
 0x68485E: call    edx
-0x684860: mov     eax, dword ptr [esp+10h+var_4]
+0x684860: mov     eax, [esp+10h+var_4]
 0x684864: test    eax, eax
 0x684866: jz      short loc_684884
 0x684868: push    edi
@@ -36,7 +36,7 @@
 0x684881: call    edx
 0x684883: pop     edi
 0x684884: mov     ecx, esi; this
-0x684886: call    NiAVObject_InitializePropertyState
+0x684886: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x68488B: mov     esi, [ebx+28h]
 0x68488E: test    esi, esi
 0x684890: jz      short loc_6848B1

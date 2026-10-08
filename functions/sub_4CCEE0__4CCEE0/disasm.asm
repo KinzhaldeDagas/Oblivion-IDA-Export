@@ -17,7 +17,7 @@
 0x4CCF0C: jz      loc_4CCFDC
 0x4CCF12: lea     ebp, [edi+28h]
 0x4CCF15: mov     ecx, ebp
-0x4CCF17: call    sub_420B50
+0x4CCF17: call    ExtraDataList_GetSeenData; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x4CCF1C: push    0; int
 0x4CCF1E: push    offset ??_R0?AVIntSeenData@@@8; struct TypeDescriptor *
 0x4CCF23: push    offset ??_R0?AVSeenData@@@8; struct _s_RTTICompleteObjectLocator *
@@ -75,7 +75,7 @@
 0x4CCFBC: push    esi
 0x4CCFBD: mov     ecx, ebp
 0x4CCFBF: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x4CCFC7: call    sub_420B70
+0x4CCFC7: call    ExtraDataList_SetSeenData; Replaces the owned SeenData pointer, destroying the previous object; null removes ExtraSeenData.
 0x4CCFCC: mov     eax, [edi]
 0x4CCFCE: mov     edx, [eax+48h]
 0x4CCFD1: push    10000000h
@@ -91,3 +91,20 @@
 0x4CCFEB: pop     ebx
 0x4CCFEC: add     esp, 0Ch
 0x4CCFEF: retn    0Ch
+0x9AFC20: mov     eax, [ebp+0Ch]
+0x9AFC23: push    eax
+0x9AFC24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFC29: pop     ecx
+0x9AFC2A: retn
+0x9AFC2B: mov     eax, [ebp+0Ch]
+0x9AFC2E: push    eax
+0x9AFC2F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFC34: pop     ecx
+0x9AFC35: retn
+0x9AFC36: mov     edx, [esp+containerChanges]
+0x9AFC3A: lea     eax, [edx-10h]
+0x9AFC3D: mov     ecx, [edx-14h]
+0x9AFC40: xor     ecx, eax
+0x9AFC42: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFC47: mov     eax, offset stru_ADC10C
+0x9AFC4C: jmp     ___CxxFrameHandler3

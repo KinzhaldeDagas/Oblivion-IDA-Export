@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B330",
+      "0x77B33D"
+    ]
+  ],
+  "chunks_sha256": "3dba4a83ea5cda04aea676abd7730e1a95c7dfb83118e0c61ef3aed1056f40a1",
+  "comment_regular": "DX10OBSE runtime log pass 2026-05-24: InternalNormalizeNormals byte setter is hot and often writes the existing value. Plugin now suppresses same-value DX10 uploads/log spam while preserving observed Oblivion behavior and frame-summary call counts.",
+  "comment_repeatable": "DX10OBSE runtime log pass 2026-05-24: InternalNormalizeNormals byte setter is hot and often writes the existing value. Plugin now suppresses same-value DX10 uploads/log spam while preserving observed Oblivion behavior and frame-summary call counts.\nDX11 finish integration audit 2026-10-01: native body stores the raw argument byte at manager+FF5 and returns it; no device call. Rigid renderer tail invokes it with0 after shader finish. The DX11 plugin owns a10-byte entry hook that additionally updates canonical tracked private state; verification must attest the exact owned jump and retain the original return-tail check. An equal-value native clear still has this plugin tracking event; model it independently of sparse byte differences.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77B330",
+  "display_name": "NiDX9RenderState_SetInternalNormalizeNormals",
   "end_ea": "0x77B33D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77B330",
+  "name": "NiDX9RenderState_SetInternalNormalizeNormals",
   "segment": ".text",
   "sha256": "3dba4a83ea5cda04aea676abd7730e1a95c7dfb83118e0c61ef3aed1056f40a1",
   "size": 13,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B330",
+  "total_chunk_size": 13,
   "type": "UInt8 __thiscall(NiDX9RenderState *this, UInt8)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 2

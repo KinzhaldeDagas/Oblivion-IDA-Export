@@ -1,4 +1,4 @@
-0x4D8370: push    esi
+0x4D8370: push    esi; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x4D8371: mov     esi, ecx
 0x4D8373: movzx   eax, byte ptr [esi+4]
 0x4D8377: add     eax, 0FFFFFFCEh

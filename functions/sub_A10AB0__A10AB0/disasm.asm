@@ -1,4 +1,4 @@
-0xA10AB0: push    offset stru_B42680; lpCriticalSection
+0xA10AB0: push    offset unk_B42680; lpCriticalSection
 0xA10AB5: call    ds:InitializeCriticalSection
 0xA10ABB: push    offset sub_A26DE0; void (__cdecl *)()
 0xA10AC0: call    _atexit

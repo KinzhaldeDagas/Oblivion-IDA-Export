@@ -11,9 +11,9 @@ char __cdecl sub_503750(
   char result; // al
   UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
-  if ( result )
-    return sub_4F7220((int)a4, *(int *)v9, 0, a7);
-  return result;
+  *(_DWORD *)v9 = 0; /*0x50377a*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x503782*/
+  if ( result ) /*0x50378c*/
+    return sub_4F7220((int)a4, *(int *)v9, 0, a7); /*0x50379e*/
+  return result; /*0x503790*/
 }

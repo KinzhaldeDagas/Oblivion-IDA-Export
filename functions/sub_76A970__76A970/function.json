@@ -1,19 +1,32 @@
 {
-  "callees_count": 122,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_76A970",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 24,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x76A970",
+      "0x76B081"
+    ]
+  ],
+  "chunks_sha256": "f6a170030d98f27e80509d4d2ec2ea2971481a2fef107108895b1bc94a051907",
+  "comment_regular": "Oblivion-authoritative NiDX9 device reset transaction: releases light/index/vertex buffers and RT slots 1-3; invalidates screen RT groups, rendered textures/cubemaps/dynamic textures, shaders and geometry; runs pre-reset callbacks; Reset()s using the default RT group's saved D3DPRESENT_PARAMETERS; increments ResetCounter; rebuilds targets/textures/defaults/shaders/render state; then runs post-reset callbacks. Any failed phase returns false.",
+  "comment_repeatable": "Oblivion-authoritative NiDX9 device reset transaction: releases light/index/vertex buffers and RT slots 1-3; invalidates screen RT groups, rendered textures/cubemaps/dynamic textures, shaders and geometry; runs pre-reset callbacks; Reset()s using the default RT group's saved D3DPRESENT_PARAMETERS; increments ResetCounter; rebuilds targets/textures/defaults/shaders/render state; then runs post-reset callbacks. Any failed phase returns false.\n\nDX11 concurrency audit 2026-09-24: inspected reset transaction does not by itself establish that all plugin native-resource operations are quiescent. DX11 frontend must account for in-flight native calls before native device transition; CPU publication generation checks alone are not execution exclusion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "NiDX9Renderer_RecreateDevice",
   "end_ea": "0x76B081",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76A970",
+  "name": "NiDX9Renderer_RecreateDevice",
   "segment": ".text",
   "sha256": "f6a170030d98f27e80509d4d2ec2ea2971481a2fef107108895b1bc94a051907",
   "size": 1809,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76A970",
-  "type": "char __thiscall(NiDX9Renderer *this)",
+  "total_chunk_size": 1809,
+  "type": "bool __thiscall(NiDX9Renderer *this)",
   "xrefs_from_count": 733,
   "xrefs_to_count": 3
 }

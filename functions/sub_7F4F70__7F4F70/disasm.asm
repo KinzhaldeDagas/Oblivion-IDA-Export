@@ -1,4 +1,4 @@
-0x7F4F70: fldz
+0x7F4F70: fldz; MoonSugarEffect decode: NightEye image-space active predicate; active when flt_B46914 > 0.
 0x7F4F72: fcomp   dword ptr ds:0B46914h
 0x7F4F78: fnstsw  ax
 0x7F4F7A: test    ah, 5

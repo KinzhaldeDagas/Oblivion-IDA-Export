@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4FA917",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Hot Reload OBSE decode: event-list variable builder allocates a 0x8 list head before scanning script->varList; zero-local scripts keep this empty head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4FA94B",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Hot Reload OBSE decode: each Script::VariableInfo becomes a 0x18 event-list var payload; fields copied are id +0, data +8, type +0x10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4FA985",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Hot Reload OBSE decode: additional event-list var nodes are 0x8 list entries appended after the allocated head.",
     "mnemonic": "call",
     "size": 5
   },

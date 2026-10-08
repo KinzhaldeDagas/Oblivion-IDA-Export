@@ -24,11 +24,11 @@
 0x4D7079: test    edi, edi
 0x4D707B: jz      short TESObjectREFR_SetPersistance___Done
 0x4D707D: mov     ecx, edi; this
-0x4D707F: call    TESObjectCELL_IsInterior
+0x4D707F: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4D7084: test    al, al
 0x4D7086: jnz     short TESObjectREFR_SetPersistance___Done
 0x4D7088: mov     ecx, edi; this
-0x4D708A: call    TESForm_GetQuestItem
+0x4D708A: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x4D708F: test    al, al
 0x4D7091: jnz     short TESObjectREFR_SetPersistance___Done
 0x4D7093: mov     ecx, edi; this
@@ -42,14 +42,14 @@
 0x4D70A7: test    edi, edi
 0x4D70A9: jz      short TESObjectREFR_SetPersistance___Done
 0x4D70AB: mov     ecx, edi; this
-0x4D70AD: call    TESForm_GetQuestItem
+0x4D70AD: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x4D70B2: test    al, al
 0x4D70B4: jz      short TESObjectREFR_SetPersistance___Done
 0x4D70B6: mov     ecx, edi; this
 0x4D70B8: call    TESObjectCELL_GetWorldSpace
-0x4D70BD: push    esi
-0x4D70BE: mov     ecx, eax
-0x4D70C0: call    sub_4F03D0
+0x4D70BD: push    esi; reference
+0x4D70BE: mov     ecx, eax; this
+0x4D70C0: call    TESWorldSpace_RemovePersistentCellReference; Verified: WorldSpace wrapper that removes a reference from its persistentCell via TESObjectCELL_RemoveReference; this removes it from the +0x64 persistent-reference index when applicable. It does not touch the separate SubSpace spatial index at +0x60.
 0x4D70C5: mov     eax, [esi]
 0x4D70C7: mov     edx, [eax+90h]
 0x4D70CD: push    1

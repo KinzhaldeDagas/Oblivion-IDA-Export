@@ -1,0 +1,4389 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "CHUNK_ID",
+  "definition": "enum CHUNK_ID : __int32\n{\nNO_CHUNK = 0x0,\nTX00_ID = 0x30305854,\nNAM0_ID = 0x304D414E,\nMSM0_ID = 0x304D534D,\nTX01_ID = 0x31305854,\nNAM1_ID = 0x314D414E,\nMSM1_ID = 0x314D534D,\nCIS1_ID = 0x31534943,\nTX02_ID = 0x32305854,\nMIC2_ID = 0x3243494D,\nPKC2_ID = 0x32434B50,\nPLD2_ID = 0x32444C50,\nBOD2_ID = 0x32444F42,\nMOD2_ID = 0x32444F4D,\nPTD2_ID = 0x32445450,\nPKES_ID = 0x32454B50,\nEPF2_ID = 0x32465045,\nNAM2_ID = 0x324D414E,\nICO2_ID = 0x324F4349,\nPFO2_ID = 0x324F4650,\nAOR2_ID = 0x32524F41,\nCIS2_ID = 0x32534943,\nXIS2_ID = 0x32534958,\nTX03_ID = 0x33305854,\nMOD3_ID = 0x33444F4D,\nEPF3_ID = 0x33465045,\nNAM3_ID = 0x334D414E,\nPKW3_ID = 0x33574B50,\nTX04_ID = 0x34305854,\nMOD4_ID = 0x34444F4D,\nNAM4_ID = 0x344D414E,\nTX05_ID = 0x35305854,\nMOD5_ID = 0x35444F4D,\nNAM5_ID = 0x354D414E,\nTX06_ID = 0x36305854,\nNAM6_ID = 0x364D414E,\nTX07_ID = 0x37305854,\nNAM7_ID = 0x374D414E,\nTX08_ID = 0x38305854,\nNAM8_ID = 0x384D414E,\nTX09_ID = 0x39305854,\nNAM9_ID = 0x394D414E,\nPT2A_ID = 0x41325450,\nPOBA_ID = 0x41424F50,\nALCA_ID = 0x41434C41,\nPOCA_ID = 0x41434F50,\nSCDA_ID = 0x41444353,\nTRDA_ID = 0x41445254,\nCIDA_ID = 0x41445443,\nPTDA_ID = 0x41445450,\nKWDA_ID = 0x4144574B,\nALEA_ID = 0x41454C41,\nPOEA_ID = 0x41454F50,\nALFA_ID = 0x41464C41,\nRAGA_ID = 0x41474152,\nFGGA_ID = 0x41474746,\nIDLA_ID = 0x414C4449,\nALLA_ID = 0x414C4C41,\nDAMA_ID = 0x414D4144,\nNAMA_ID = 0x414D414E,\nALNA_ID = 0x414E4C41,\nXPPA_ID = 0x41505058,\nCVPA_ID = 0x41505643,\nFVPA_ID = 0x41505646,\nCSRA_ID = 0x41525343,\nRDSA_ID = 0x41534452,\nDATA_ID = 0x41544144,\nTPTA_ID = 0x41545054,\nDSTA_ID = 0x41545344,\nQSTA_ID = 0x41545351,\nALUA_ID = 0x41554C41,\nDEVA_ID = 0x41564544,\nCRVA_ID = 0x41565243,\nXCZA_ID = 0x415A4358,\nPRCB_ID = 0x42435250,\nTTEB_ID = 0x42455454,\nRAFB_ID = 0x42464152,\nEPFB_ID = 0x42465045,\nXRFB_ID = 0x42465258,\nXRGB_ID = 0x42475258,\nXLIB_ID = 0x42494C58,\nIDLB_ID = 0x424C4449,\nXGLB_ID = 0x424C4758,\nPCMB_ID = 0x424D4350,\nXLMB_ID = 0x424D4C58,\nBSMB_ID = 0x424D5342,\nMDOB_ID = 0x424F444D,\nRDOB_ID = 0x424F4452,\nFMRB_ID = 0x42524D46,\nMO2C_ID = 0x43324F4D,\nMO3C_ID = 0x43334F4D,\nMO4C_ID = 0x43344F4D,\nMO5C_ID = 0x43354F4D,\nNPAC_ID = 0x4341504E,\nSRAC_ID = 0x43415253,\nALCC_ID = 0x43434C41,\nINCC_ID = 0x43434E49,\nDMDC_ID = 0x43444D44,\nLODC_ID = 0x43444F4C,\nMODC_ID = 0x43444F4D,\nCSDC_ID = 0x43445343,\nACEC_ID = 0x43454341,\nLCEC_ID = 0x4345434C,\nRCEC_ID = 0x43454352,\nTTEC_ID = 0x43455454,\nTIFC_ID = 0x43464954,\nALFC_ID = 0x43464C41,\nTPIC_ID = 0x43495054,\nLLKC_ID = 0x434B4C4C,\nPRKC_ID = 0x434B5250,\nDALC_ID = 0x434C4144,\nXCLC_ID = 0x434C4358,\nIDLC_ID = 0x434C4449,\nDAMC_ID = 0x434D4144,\nXAMC_ID = 0x434D4158,\nITMC_ID = 0x434D5449,\nVENC_ID = 0x434E4556,\nXENC_ID = 0x434E4558,\nTINC_ID = 0x434E4954,\nXLOC_ID = 0x434F4C58,\nRBPC_ID = 0x43504252,\nPFPC_ID = 0x43504650,\nALPC_ID = 0x43504C41,\nMPPC_ID = 0x4350504D,\nXSPC_ID = 0x43505358,\nLTPC_ID = 0x4350544C,\nFMRC_ID = 0x43524D46,\nXMRC_ID = 0x43524D58,\nSDSC_ID = 0x43534453,\nDESC_ID = 0x43534544,\nAGSC_ID = 0x43534741,\nALSC_ID = 0x43534C41,\nXPSC_ID = 0x43535058,\nSTSC_ID = 0x43535453,\nCITC_ID = 0x43544943,\nXFVC_ID = 0x43564658,\nXCZC_ID = 0x435A4358,\nCS2D_ID = 0x44325343,\nND3D_ID = 0x4433444E,\nHEAD_ID = 0x44414548,\nSIAD_ID = 0x44414900,\nEIAD_ID = 0x444149FF,\nXRAD_ID = 0x44415258,\nMPCD_ID = 0x4443504D,\nSADD_ID = 0x44444153,\nPKDD_ID = 0x44444B50,\nSNDD_ID = 0x44444E53,\nMODD_ID = 0x44444F4D,\nXPDD_ID = 0x44445058,\nPKED_ID = 0x44454B50,\nALED_ID = 0x44454C41,\nCOED_ID = 0x44454F43,\nSPED_ID = 0x44455053,\nXSED_ID = 0x44455358,\nTTED_ID = 0x44455454,\nRAFD_ID = 0x44464152,\nAGFD_ID = 0x44464741,\nPKFD_ID = 0x44464B50,\nALFD_ID = 0x44464C41,\nSLFD_ID = 0x44464C53,\nEPFD_ID = 0x44465045,\nXCGD_ID = 0x44474358,\nAPGD_ID = 0x44475041,\nXRGD_ID = 0x44475258,\nCSGD_ID = 0x44475343,\nACID_ID = 0x44494341,\nLCID_ID = 0x4449434C,\nEDID_ID = 0x44494445,\nEFID_ID = 0x44494645,\nPKID_ID = 0x44494B50,\nALID_ID = 0x44494C41,\nMSID_ID = 0x4449534D,\nDTID_ID = 0x44495444,\nHTID_ID = 0x44495448,\nITID_ID = 0x44495449,\nPUID_ID = 0x44495550,\nSAKD_ID = 0x444B4153,\nATKD_ID = 0x444B5441,\nSTKD_ID = 0x444B5453,\nSLLD_ID = 0x444C4C53,\nRPLD_ID = 0x444C5052,\nLVLD_ID = 0x444C564C,\nWAMD_ID = 0x444D4157,\nRDMD_ID = 0x444D4452,\nFIMD_ID = 0x444D4946,\nWZMD_ID = 0x444D5A57,\nOBND_ID = 0x444E424F,\nTEND_ID = 0x444E4554,\nVEND_ID = 0x444E4556,\nTIND_ID = 0x444E4954,\nPKND_ID = 0x444E4B50,\nBPND_ID = 0x444E5042,\nRCOD_ID = 0x444F4352,\nXLOD_ID = 0x444F4C58,\nXPOD_ID = 0x444F5058,\nPROD_ID = 0x444F5250,\nXAPD_ID = 0x44504158,\nMSPD_ID = 0x4450534D,\nSCRD_ID = 0x44524353,\nFMRD_ID = 0x44524D46,\nINRD_ID = 0x44524E49,\nAORD_ID = 0x44524F41,\nXORD_ID = 0x44524F58,\nXPRD_ID = 0x44525058,\nXBSD_ID = 0x44534258,\nRDSD_ID = 0x44534452,\nEFSD_ID = 0x44534645,\nLFSD_ID = 0x4453464C,\nSLSD_ID = 0x44534C53,\nMOSD_ID = 0x44534F4D,\nCUSD_ID = 0x44535543,\nXWSD_ID = 0x44535758,\nDSTD_ID = 0x44545344,\nSLUD_ID = 0x44554C53,\nPLVD_ID = 0x44564C50,\nCS2E_ID = 0x45325343,\nESCE_ID = 0x45435345,\nTSCE_ID = 0x45435354,\nMLDE_ID = 0x45444C4D,\nGREE_ID = 0x45455247,\nALFE_ID = 0x45464C41,\nTTGE_ID = 0x45475454,\nPRKE_ID = 0x454B5250,\nATKE_ID = 0x454B5441,\nDELE_ID = 0x454C4544,\nNAME_ID = 0x454D414E,\nCSME_ID = 0x454D5343,\nITME_ID = 0x454D5449,\nMASE_ID = 0x4553414D,\nROSE_ID = 0x45534F52,\nXUSE_ID = 0x45535558,\nOBTE_ID = 0x4554424F,\nMO2F_ID = 0x46324F4D,\nCS2F_ID = 0x46325343,\nMO3F_ID = 0x46334F4D,\nMO4F_ID = 0x46344F4D,\nMO5F_ID = 0x46354F4D,\nSRAF_ID = 0x46415253,\nAHCF_ID = 0x46434841,\nTTEF_ID = 0x46455454,\nCRIF_ID = 0x46495243,\nPRKF_ID = 0x464B5250,\nBCLF_ID = 0x464C4342,\nHCLF_ID = 0x464C4348,\nTCLF_ID = 0x464C4354,\nIDLF_ID = 0x464C4449,\nLVLF_ID = 0x464C564C,\nLLOF_ID = 0x464F4C4C,\nMPPF_ID = 0x4650504D,\nRPRF_ID = 0x46525052,\nMVRF_ID = 0x4652564D,\nFTSF_ID = 0x46535446,\nOBTF_ID = 0x4654424F,\nDFTF_ID = 0x46544644,\nBPTF_ID = 0x46545042,\nDSTF_ID = 0x46545344,\nPGAG_ID = 0x47414750,\nXRFG_ID = 0x47465258,\nXCHG_ID = 0x47484358,\nPFIG_ID = 0x47494650,\nXLIG_ID = 0x47494C58,\nLVLG_ID = 0x474C564C,\nAVMG_ID = 0x474D5641,\nXWPG_ID = 0x47505758,\nLVSG_ID = 0x4753564C,\nXIVG_ID = 0x47564958,\nCS2H_ID = 0x48325343,\nLODH_ID = 0x48444F4C,\nRALH_ID = 0x484C4152,\nMPAI_ID = 0x4941504D,\nXPCI_ID = 0x49435058,\nNVCI_ID = 0x4943564E,\nALDI_ID = 0x49444C41,\nMLDI_ID = 0x49444C4D,\nCSDI_ID = 0x49445343,\nALFI_ID = 0x49464C41,\nRPLI_ID = 0x494C5052,\nXEMI_ID = 0x494D4558,\nALMI_ID = 0x494D4C41,\nNVMI_ID = 0x494D564E,\nTINI_ID = 0x494E4954,\nBPNI_ID = 0x494E5042,\nMPPI_ID = 0x4950504D,\nSCRI_ID = 0x49524353,\nXCRI_ID = 0x49524358,\nPGRI_ID = 0x49524750,\nFMRI_ID = 0x49524D46,\nXPRI_ID = 0x49525058,\nXTRI_ID = 0x49525458,\nVISI_ID = 0x49534956,\nMLSI_ID = 0x49534C4D,\nTETI_ID = 0x49544554,\nQSTI_ID = 0x49545351,\nQOBJ_ID = 0x4A424F51,\nRDOJ_ID = 0x4A4F4452,\nCS2K_ID = 0x4B325343,\nVTCK_ID = 0x4B435456,\nMSDK_ID = 0x4B44534D,\nXPLK_ID = 0x4B4C5058,\nFNMK_ID = 0x4B4D4E46,\nXRNK_ID = 0x4B4E5258,\nMPPK_ID = 0x4B50504D,\nPERI_ID = 0x4B524550,\nXMRK_ID = 0x4B524D58,\nAVSK_ID = 0x4B535641,\nQUAL_ID = 0x4C415551,\nALCL_ID = 0x4C434C41,\nXSCL_ID = 0x4C435358,\nXEDL_ID = 0x4C444558,\nDMDL_ID = 0x4C444D44,\nMODL_ID = 0x4C444F4D,\nXTEL_ID = 0x4C455458,\nRAFL_ID = 0x4C464152,\nOBFL_ID = 0x4C46424F,\nALFL_ID = 0x4C464C41,\nCSFL_ID = 0x4C465343,\nAVFL_ID = 0x4C465641,\nQTGL_ID = 0x4C475451,\nJAIL_ID = 0x4C49414A,\nRCIL_ID = 0x4C494352,\nPRKL_ID = 0x4C4B5250,\nXCLL_ID = 0x4C4C4358,\nXILL_ID = 0x4C4C4958,\nFULL_ID = 0x4C4C5546,\nOBML_ID = 0x4C4D424F,\nVNML_ID = 0x4C4D4E56,\nTINL_ID = 0x4C4E4954,\nXSOL_ID = 0x4C4F5358,\nSTOL_ID = 0x4C4F5453,\nFCPL_ID = 0x4C504346,\nREPL_ID = 0x4C504552,\nBIPL_ID = 0x4C504942,\nPGRL_ID = 0x4C524750,\nXLRL_ID = 0x4C524C58,\nXPSL_ID = 0x4C535058,\nOBTL_ID = 0x4C54424F,\nDMTL_ID = 0x4C544D44,\nXPTL_ID = 0x4C545058,\nSOUL_ID = 0x4C554F53,\nXCVL_ID = 0x4C564358,\nPKAM_ID = 0x4D414B50,\nANAM_ID = 0x4D414E41,\nBNAM_ID = 0x4D414E42,\nCNAM_ID = 0x4D414E43,\nDNAM_ID = 0x4D414E44,\nENAM_ID = 0x4D414E45,\nFNAM_ID = 0x4D414E46,\nGNAM_ID = 0x4D414E47,\nHNAM_ID = 0x4D414E48,\nINAM_ID = 0x4D414E49,\nJNAM_ID = 0x4D414E4A,\nKNAM_ID = 0x4D414E4B,\nLNAM_ID = 0x4D414E4C,\nMNAM_ID = 0x4D414E4D,\nNNAM_ID = 0x4D414E4E,\nONAM_ID = 0x4D414E4F,\nPNAM_ID = 0x4D414E50,\nCLNM_ID = 0x4D414E51,\nQNAM_ID = 0x4D414E51,\nRNAM_ID = 0x4D414E52,\nSNAM_ID = 0x4D414E53,\nTNAM_ID = 0x4D414E54,\nUNAM_ID = 0x4D414E55,\nVNAM_ID = 0x4D414E56,\nWNAM_ID = 0x4D414E57,\nXNAM_ID = 0x4D414E58,\nYNAM_ID = 0x4D414E59,\nZNAM_ID = 0x4D414E5A,\nXCCM_ID = 0x4D434358,\nAHCM_ID = 0x4D434841,\nXLCM_ID = 0x4D434C58,\nRLDM_ID = 0x4D444C52,\nATDM_ID = 0x4D445441,\nXWEM_ID = 0x4D455758,\nXCIM_ID = 0x4D494358,\nXTIM_ID = 0x4D495458,\nXCLM_ID = 0x4D4C4358,\nLVLM_ID = 0x4D4C564C,\nSGNM_ID = 0x4D4E4753,\nMTNM_ID = 0x4D4E544D,\nXTNM_ID = 0x4D4E5458,\nNVNM_ID = 0x4D4E564E,\nMPPM_ID = 0x4D50504D,\nXLRM_ID = 0x4D524C58,\nRPRM_ID = 0x4D525052,\nXPRM_ID = 0x4D525058,\nNTRM_ID = 0x4D52544E,\nFTSM_ID = 0x4D535446,\nOBTM_ID = 0x4D54424F,\nDFTM_ID = 0x4D544644,\nEITM_ID = 0x4D544945,\nBPTM_ID = 0x4D545042,\nXRTM_ID = 0x4D545258,\nPLCN_ID = 0x4E434C50,\nXLCN_ID = 0x4E434C58,\nXWCN_ID = 0x4E435758,\nALDN_ID = 0x4E444C41,\nLODN_ID = 0x4E444F4C,\nRAFN_ID = 0x4E464152,\nRAGN_ID = 0x4E474152,\nMPGN_ID = 0x4E47504D,\nDMIN_ID = 0x4E494D44,\nFMIN_ID = 0x4E494D46,\nRALN_ID = 0x4E4C4152,\nIDLN_ID = 0x4E4C4449,\nRDLN_ID = 0x4E4C4452,\nBPNN_ID = 0x4E4E5042,\nICON_ID = 0x4E4F4349,\nMPPN_ID = 0x4E50504D,\nSSPN_ID = 0x4E505353,\nXWPN_ID = 0x4E505758,\nPFRN_ID = 0x4E524650,\nFMRN_ID = 0x4E524D46,\nPTRN_ID = 0x4E525450,\nXPSN_ID = 0x4E535058,\nACTN_ID = 0x4E544341,\nPHTN_ID = 0x4E544850,\nBPTN_ID = 0x4E545042,\nATTN_ID = 0x4E545441,\nACUN_ID = 0x4E554341,\nLCUN_ID = 0x4E55434C,\nRCUN_ID = 0x4E554352,\nXOWN_ID = 0x4E574F58,\nXEZN_ID = 0x4E5A4558,\nXMBO_ID = 0x4F424D58,\nMICO_ID = 0x4F43494D,\nALCO_ID = 0x4F434C41,\nXRDO_ID = 0x4F445258,\nSPLO_ID = 0x4F4C5053,\nLVLO_ID = 0x4F4C564C,\nXCMO_ID = 0x4F4D4358,\nRDMO_ID = 0x4F4D4452,\nDEMO_ID = 0x4F4D4544,\nXROO_ID = 0x4F4F5258,\nSCRO_ID = 0x4F524353,\nXATO_ID = 0x4F544158,\nPDTO_ID = 0x4F544450,\nNETO_ID = 0x4F54454E,\nCNTO_ID = 0x4F544E43,\nWMAP_ID = 0x50414D57,\nXMBP_ID = 0x50424D58,\nSLCP_ID = 0x50434C53,\nXOCP_ID = 0x50434F58,\nSTCP_ID = 0x50435453,\nXNDP_ID = 0x50444E58,\nACEP_ID = 0x50454341,\nLCEP_ID = 0x5045434C,\nMPGP_ID = 0x5047504D,\nTTEN_ID = 0x50475454,\nTTGP_ID = 0x50475454,\nXALP_ID = 0x504C4158,\nXLCR_ID = 0x504C4358,\nXHLP_ID = 0x504C4858,\nRDMP_ID = 0x504D4452,\nBMMP_ID = 0x504D4D42,\nBSMP_ID = 0x504D5342,\nLTMP_ID = 0x504D544C,\nTINP_ID = 0x504E4954,\nNTOP_ID = 0x504F544E,\nPTOP_ID = 0x504F5450,\nQTOP_ID = 0x504F5451,\nSTOP_ID = 0x504F5453,\nNVPP_ID = 0x5050564E,\nPGRP_ID = 0x50524750,\nXASP_ID = 0x50534158,\nXESP_ID = 0x50534558,\nLFSP_ID = 0x5053464C,\nALSP_ID = 0x50534C41,\nIMSP_ID = 0x50534D49,\nXMSP_ID = 0x50534D58,\nLVSR_ID = 0x5053564C,\nXATP_ID = 0x50544158,\nXNVP_ID = 0x50564E58,\nUNWP_ID = 0x50574E55,\nETYP_ID = 0x50595445,\nFTYP_ID = 0x50595446,\nMTYP_ID = 0x5059544D,\nMODQ_ID = 0x51444F4D,\nALEQ_ID = 0x51454C41,\nXMBR_ID = 0x52424D58,\nXACR_ID = 0x52434158,\nXDCR_ID = 0x52434458,\nCSCR_ID = 0x52435343,\nISCR_ID = 0x52435349,\nLVCR_ID = 0x5243564C,\nRADR_ID = 0x52444152,\nHEDR_ID = 0x52444548,\nGDRD_ID = 0x52444757,\nXGDR_ID = 0x52444758,\nNVER_ID = 0x5245564E,\nALFR_ID = 0x52464C41,\nCRGR_ID = 0x52475243,\nSCHR_ID = 0x52484353,\nXLKR_ID = 0x524B4C58,\nPRKR_ID = 0x524B5250,\nATKR_ID = 0x524B5441,\nHCLR_ID = 0x524C4348,\nRCLR_ID = 0x524C4352,\nVCLR_ID = 0x524C4356,\nXCLR_ID = 0x524C4358,\nCSLR_ID = 0x524C5343,\nXRMR_ID = 0x524D5258,\nECOR_ID = 0x524F4345,\nOCOR_ID = 0x524F434F,\nPFOR_ID = 0x524F4650,\nXHOR_ID = 0x524F4858,\nSPOR_ID = 0x524F5053,\nGWOR_ID = 0x524F5747,\nXAPR_ID = 0x52504158,\nACPR_ID = 0x52504341,\nLCPR_ID = 0x5250434C,\nRCPR_ID = 0x52504352,\nFNPR_ID = 0x52504E46,\nAPPR_ID = 0x52505041,\nSTPR_ID = 0x52505453,\nPGRC_ID = 0x52524750,\nACSR_ID = 0x52534341,\nLCSR_ID = 0x5253434C,\nRCSR_ID = 0x52534352,\nXATR_ID = 0x52544158,\nWCTR_ID = 0x52544357,\nFLTR_ID = 0x52544C46,\nQSTR_ID = 0x52545351,\nATTR_ID = 0x52545441,\nSCVR_ID = 0x52564353,\nXCVR_ID = 0x52564358,\nIOVR_ID = 0x52564F49,\nXPWR_ID = 0x52575058,\nXLYR_ID = 0x52594C58,\nXCZR_ID = 0x525A4358,\nMO2S_ID = 0x53324F4D,\nMO3S_ID = 0x53334F4D,\nMO4S_ID = 0x53344F4D,\nMO5S_ID = 0x53354F4D,\nXCAS_ID = 0x53414358,\nTIAS_ID = 0x53414954,\nESAS_ID = 0x53415345,\nACBS_ID = 0x53424341,\nXIBS_ID = 0x53424958,\nESBS_ID = 0x53425345,\nALCS_ID = 0x53434C41,\nSLCS_ID = 0x53434C53,\nESCS_ID = 0x53435345,\nXWCS_ID = 0x53435758,\nBIDS_ID = 0x53444942,\nMLDS_ID = 0x53444C4D,\nDMDS_ID = 0x53444D44,\nLODS_ID = 0x53444F4C,\nMODS_ID = 0x53444F4D,\nXRDS_ID = 0x53445258,\nRAFS_ID = 0x53464152,\nRDGS_ID = 0x53474452,\nFGGS_ID = 0x53474746,\nNNGS_ID = 0x53474E4E,\nMPGS_ID = 0x5347504D,\nESHS_ID = 0x53485345,\nANIS_ID = 0x53494E41,\nCRIS_ID = 0x53495243,\nRVIS_ID = 0x53495652,\nATKS_ID = 0x534B5441,\nALLS_ID = 0x534C4C41,\nBSMS_ID = 0x534D5342,\nITMS_ID = 0x534D5449,\nNPOS_ID = 0x534F504E,\nRAPS_ID = 0x53504152,\nMPPS_ID = 0x5350504D,\nPRPS_ID = 0x53505250,\nSCQS_ID = 0x53514353,\nTIQS_ID = 0x53514954,\nSCRS_ID = 0x53524353,\nXHRS_ID = 0x53524858,\nTIRS_ID = 0x53524954,\nFMRS_ID = 0x53524D46,\nOBTS_ID = 0x5354424F,\nFGTS_ID = 0x53544746,\nNNUS_ID = 0x53554E4E,\nNQUS_ID = 0x5355514E,\nBRUS_ID = 0x53555242,\nMO2T_ID = 0x54324F4D,\nMO3T_ID = 0x54334F4D,\nMO4T_ID = 0x54344F4D,\nMO5T_ID = 0x54354F4D,\nRDAT_ID = 0x54414452,\nTWAT_ID = 0x54415754,\nXACT_ID = 0x54434158,\nLLCT_ID = 0x54434C4C,\nBMCT_ID = 0x54434D42,\nCOCT_ID = 0x54434F43,\nSPCT_ID = 0x54435053,\nWBDT_ID = 0x54444257,\nMHDT_ID = 0x5444484D,\nAIDT_ID = 0x54444941,\nPKDT_ID = 0x54444B50,\nPLDT_ID = 0x54444C50,\nBMDT_ID = 0x54444D42,\nDMDT_ID = 0x54444D44,\nGMDT_ID = 0x54444D47,\nBODT_ID = 0x54444F42,\nDODT_ID = 0x54444F44,\nLODT_ID = 0x54444F4C,\nMODT_ID = 0x54444F4D,\nCRDT_ID = 0x54445243,\nTRDT_ID = 0x54445254,\nCSDT_ID = 0x54445343,\nPSDT_ID = 0x54445350,\nQSDT_ID = 0x54445351,\nPTDT_ID = 0x54445450,\nTVDT_ID = 0x54445654,\nXCET_ID = 0x54454358,\nTTET_ID = 0x54455454,\nNIFT_ID = 0x5446494E,\nDOFT_ID = 0x54464F44,\nSOFT_ID = 0x54464F53,\nEPFT_ID = 0x54465045,\nVHGT_ID = 0x54474856,\nWHGT_ID = 0x54474857,\nNNGT_ID = 0x54474E4E,\nDTGT_ID = 0x54475444,\nMWGT_ID = 0x5447574D,\nFCHT_ID = 0x54484346,\nMCHT_ID = 0x5448434D,\nWAIT_ID = 0x54494157,\nSCIT_ID = 0x54494353,\nEFIT_ID = 0x54494645,\nENIT_ID = 0x54494E45,\nSPIT_ID = 0x54495053,\nAVIT_ID = 0x54495641,\nXLKT_ID = 0x544B4C58,\nATKT_ID = 0x544B5441,\nOBLT_ID = 0x544C424F,\nTCLT_ID = 0x544C4354,\nIDLT_ID = 0x544C4449,\nXHLT_ID = 0x544C4858,\nDPLT_ID = 0x544C5044,\nTPLT_ID = 0x544C5054,\nXWLT_ID = 0x544C5758,\nBAMT_ID = 0x544D4142,\nEAMT_ID = 0x544D4145,\nXAMT_ID = 0x544D4158,\nXCMT_ID = 0x544D4358,\nXCNT_ID = 0x544E4358,\nTINT_ID = 0x544E4954,\nALNT_ID = 0x544E4C41,\nBPNT_ID = 0x544E5042,\nXWNT_ID = 0x544E5758,\nRDOT_ID = 0x544F4452,\nNPOT_ID = 0x544F504E,\nSAPT_ID = 0x54504153,\nREPT_ID = 0x54504552,\nPKPT_ID = 0x54504B50,\nMPPT_ID = 0x5450504D,\nLTPT_ID = 0x5450544C,\nSHRT_ID = 0x54524853,\nALRT_ID = 0x54524C41,\nXLRT_ID = 0x54524C58,\nFPRT_ID = 0x54525046,\nMPRT_ID = 0x5452504D,\nMAST_ID = 0x5453414D,\nDEST_ID = 0x54534544,\nOFST_ID = 0x5453464F,\nALST_ID = 0x54534C41,\nWLST_ID = 0x54534C57,\nFTST_ID = 0x54535446,\nINTT_ID = 0x54544E49,\nNNUT_ID = 0x54554E4E,\nJOUT_ID = 0x54554F4A,\nNQUT_ID = 0x5455514E,\nXCWT_ID = 0x54574358,\nRDWT_ID = 0x54574452,\nPHWT_ID = 0x54574850,\nMXWT_ID = 0x5457584D,\nNEXT_ID = 0x5458454E,\nATXT_ID = 0x54585441,\nBTXT_ID = 0x54585442,\nITXT_ID = 0x54585449,\nVTXT_ID = 0x54585456,\nPKCU_ID = 0x55434B50,\nXWCD_ID = 0x55435758,\nMPAV_ID = 0x5641504D,\nCSCV_ID = 0x56435343,\nLODV_ID = 0x56444F4C,\nMSDV_ID = 0x5644534D,\nWLEV_ID = 0x56454C57,\nALFV_ID = 0x56464C41,\nPHKV_ID = 0x564B4850,\nWKMV_ID = 0x564D4B57,\nFLMV_ID = 0x564D4C46,\nRNMV_ID = 0x564D4E52,\nSNMV_ID = 0x564D4E53,\nSPMV_ID = 0x564D5053,\nSWMV_ID = 0x564D5753,\nVENV_ID = 0x564E4556,\nTINV_ID = 0x564E4954,\nMPPV_ID = 0x5650504D,\nSCRV_ID = 0x56524353,\nSTRV_ID = 0x56525453,\nMRSV_ID = 0x5653524D,\nACTV_ID = 0x56544341,\nFLTV_ID = 0x56544C46,\nINTV_ID = 0x56544E49,\nATKW_ID = 0x574B5441,\nXCLW_ID = 0x574C4358,\nXILW_ID = 0x574C4958,\nXHTW_ID = 0x57544858,\nXLTW_ID = 0x57544C58,\nDMAX_ID = 0x58414D44,\nBIDX_ID = 0x58444942,\nWIDX_ID = 0x58444957,\nXIDX_ID = 0x58444958,\nINDX_ID = 0x58444E49,\nSNDX_ID = 0x58444E53,\nCDIX_ID = 0x58494443,\nWTMX_ID = 0x584D5457,\nAGSX_ID = 0x58534741,\n_0TX_ID = 0x58543030,\nSCTX_ID = 0x58544353,\nHLTX_ID = 0x58544C48,\nATTX_ID = 0x58545441,\nXXXX_ID = 0x58585858,\nRCQY_ID = 0x59514352,\nAGTY_ID = 0x59544741,\nKFFZ_ID = 0x5A46464B,\nNIFZ_ID = 0x5A46494E,\nBSIZ_ID = 0x5A495342,\nISIZ_ID = 0x5A495349,\nPRKZ_ID = 0x5A4B5250,\nCLSZ_ID = 0x5A534C43,\n}\n",
+  "id": 18374686479672014111,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NO_CHUNK",
+      "value": 0
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX00_ID",
+      "value": 808474708
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM0_ID",
+      "value": 810369358
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MSM0_ID",
+      "value": 810373965
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX01_ID",
+      "value": 825251924
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM1_ID",
+      "value": 827146574
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MSM1_ID",
+      "value": 827151181
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CIS1_ID",
+      "value": 827541827
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX02_ID",
+      "value": 842029140
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MIC2_ID",
+      "value": 843270477
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKC2_ID",
+      "value": 843270992
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PLD2_ID",
+      "value": 843336784
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BOD2_ID",
+      "value": 843337538
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MOD2_ID",
+      "value": 843337549
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PTD2_ID",
+      "value": 843338832
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKES_ID",
+      "value": 843402064
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EPF2_ID",
+      "value": 843468869
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM2_ID",
+      "value": 843923790
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ICO2_ID",
+      "value": 844055369
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PFO2_ID",
+      "value": 844056144
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AOR2_ID",
+      "value": 844255041
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CIS2_ID",
+      "value": 844319043
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XIS2_ID",
+      "value": 844319064
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX03_ID",
+      "value": 858806356
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MOD3_ID",
+      "value": 860114765
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EPF3_ID",
+      "value": 860246085
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM3_ID",
+      "value": 860701006
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKW3_ID",
+      "value": 861358928
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX04_ID",
+      "value": 875583572
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MOD4_ID",
+      "value": 876891981
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM4_ID",
+      "value": 877478222
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX05_ID",
+      "value": 892360788
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MOD5_ID",
+      "value": 893669197
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM5_ID",
+      "value": 894255438
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX06_ID",
+      "value": 909138004
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM6_ID",
+      "value": 911032654
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX07_ID",
+      "value": 925915220
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM7_ID",
+      "value": 927809870
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX08_ID",
+      "value": 942692436
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM8_ID",
+      "value": 944587086
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TX09_ID",
+      "value": 959469652
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAM9_ID",
+      "value": 961364302
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PT2A_ID",
+      "value": 1093817424
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "POBA_ID",
+      "value": 1094864720
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALCA_ID",
+      "value": 1094929473
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "POCA_ID",
+      "value": 1094930256
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCDA_ID",
+      "value": 1094992723
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TRDA_ID",
+      "value": 1094996564
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CIDA_ID",
+      "value": 1094997059
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PTDA_ID",
+      "value": 1094997072
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "KWDA_ID",
+      "value": 1094997835
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALEA_ID",
+      "value": 1095060545
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "POEA_ID",
+      "value": 1095061328
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFA_ID",
+      "value": 1095126081
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAGA_ID",
+      "value": 1095188818
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FGGA_ID",
+      "value": 1095190342
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IDLA_ID",
+      "value": 1095517257
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALLA_ID",
+      "value": 1095519297
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DAMA_ID",
+      "value": 1095582020
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAMA_ID",
+      "value": 1095582030
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALNA_ID",
+      "value": 1095650369
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPPA_ID",
+      "value": 1095782488
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CVPA_ID",
+      "value": 1095784003
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FVPA_ID",
+      "value": 1095784006
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSRA_ID",
+      "value": 1095914307
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDSA_ID",
+      "value": 1095976018
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DATA_ID",
+      "value": 1096040772
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TPTA_ID",
+      "value": 1096044628
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DSTA_ID",
+      "value": 1096045380
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QSTA_ID",
+      "value": 1096045393
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALUA_ID",
+      "value": 1096109121
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DEVA_ID",
+      "value": 1096172868
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CRVA_ID",
+      "value": 1096176195
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCZA_ID",
+      "value": 1096434520
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRCB_ID",
+      "value": 1111708240
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTEB_ID",
+      "value": 1111839828
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAFB_ID",
+      "value": 1111900498
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EPFB_ID",
+      "value": 1111904325
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRFB_ID",
+      "value": 1111904856
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRGB_ID",
+      "value": 1111970392
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLIB_ID",
+      "value": 1112099928
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IDLB_ID",
+      "value": 1112294473
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XGLB_ID",
+      "value": 1112295256
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PCMB_ID",
+      "value": 1112359760
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLMB_ID",
+      "value": 1112362072
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BSMB_ID",
+      "value": 1112363842
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MDOB_ID",
+      "value": 1112491085
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDOB_ID",
+      "value": 1112491090
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FMRB_ID",
+      "value": 1112689990
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO2C_ID",
+      "value": 1127370573
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO3C_ID",
+      "value": 1127436109
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO4C_ID",
+      "value": 1127501645
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO5C_ID",
+      "value": 1127567181
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NPAC_ID",
+      "value": 1128353870
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SRAC_ID",
+      "value": 1128354387
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALCC_ID",
+      "value": 1128483905
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "INCC_ID",
+      "value": 1128484425
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DMDC_ID",
+      "value": 1128549700
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LODC_ID",
+      "value": 1128550220
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MODC_ID",
+      "value": 1128550221
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSDC_ID",
+      "value": 1128551235
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACEC_ID",
+      "value": 1128612673
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LCEC_ID",
+      "value": 1128612684
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCEC_ID",
+      "value": 1128612690
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTEC_ID",
+      "value": 1128617044
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TIFC_ID",
+      "value": 1128679764
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFC_ID",
+      "value": 1128680513
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TPIC_ID",
+      "value": 1128878164
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LLKC_ID",
+      "value": 1129008204
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRKC_ID",
+      "value": 1129009744
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DALC_ID",
+      "value": 1129070916
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCLC_ID",
+      "value": 1129071448
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IDLC_ID",
+      "value": 1129071689
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DAMC_ID",
+      "value": 1129136452
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XAMC_ID",
+      "value": 1129136472
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ITMC_ID",
+      "value": 1129141321
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VENC_ID",
+      "value": 1129203030
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XENC_ID",
+      "value": 1129203032
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TINC_ID",
+      "value": 1129204052
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLOC_ID",
+      "value": 1129270360
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RBPC_ID",
+      "value": 1129333330
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PFPC_ID",
+      "value": 1129334352
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALPC_ID",
+      "value": 1129335873
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPC_ID",
+      "value": 1129336909
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XSPC_ID",
+      "value": 1129337688
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LTPC_ID",
+      "value": 1129337932
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FMRC_ID",
+      "value": 1129467206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XMRC_ID",
+      "value": 1129467224
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SDSC_ID",
+      "value": 1129530451
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DESC_ID",
+      "value": 1129530692
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AGSC_ID",
+      "value": 1129531201
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALSC_ID",
+      "value": 1129532481
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPSC_ID",
+      "value": 1129533528
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "STSC_ID",
+      "value": 1129534547
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CITC_ID",
+      "value": 1129597251
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XFVC_ID",
+      "value": 1129727576
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCZC_ID",
+      "value": 1129988952
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CS2D_ID",
+      "value": 1144148803
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ND3D_ID",
+      "value": 1144210510
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "HEAD_ID",
+      "value": 1145128264
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SIAD_ID",
+      "value": 1145129216
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EIAD_ID",
+      "value": 1145129471
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRAD_ID",
+      "value": 1145131608
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPCD_ID",
+      "value": 1145262157
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SADD_ID",
+      "value": 1145323859
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKDD_ID",
+      "value": 1145326416
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SNDD_ID",
+      "value": 1145327187
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MODD_ID",
+      "value": 1145327437
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPDD_ID",
+      "value": 1145327704
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKED_ID",
+      "value": 1145391952
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALED_ID",
+      "value": 1145392193
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "COED_ID",
+      "value": 1145392963
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SPED_ID",
+      "value": 1145393235
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XSED_ID",
+      "value": 1145394008
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTED_ID",
+      "value": 1145394260
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAFD_ID",
+      "value": 1145454930
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AGFD_ID",
+      "value": 1145456449
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKFD_ID",
+      "value": 1145457488
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFD_ID",
+      "value": 1145457729
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SLFD_ID",
+      "value": 1145457747
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EPFD_ID",
+      "value": 1145458757
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCGD_ID",
+      "value": 1145520984
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "APGD_ID",
+      "value": 1145524289
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRGD_ID",
+      "value": 1145524824
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSGD_ID",
+      "value": 1145525059
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACID_ID",
+      "value": 1145652033
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LCID_ID",
+      "value": 1145652044
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EDID_ID",
+      "value": 1145652293
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EFID_ID",
+      "value": 1145652805
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKID_ID",
+      "value": 1145654096
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALID_ID",
+      "value": 1145654337
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MSID_ID",
+      "value": 1145656141
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DTID_ID",
+      "value": 1145656388
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "HTID_ID",
+      "value": 1145656392
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ITID_ID",
+      "value": 1145656393
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PUID_ID",
+      "value": 1145656656
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SAKD_ID",
+      "value": 1145782611
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATKD_ID",
+      "value": 1145787457
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "STKD_ID",
+      "value": 1145787475
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SLLD_ID",
+      "value": 1145850963
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RPLD_ID",
+      "value": 1145851986
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVLD_ID",
+      "value": 1145853516
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WAMD_ID",
+      "value": 1145913687
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDMD_ID",
+      "value": 1145914450
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FIMD_ID",
+      "value": 1145915718
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WZMD_ID",
+      "value": 1145920087
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBND_ID",
+      "value": 1145979471
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TEND_ID",
+      "value": 1145980244
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VEND_ID",
+      "value": 1145980246
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TIND_ID",
+      "value": 1145981268
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKND_ID",
+      "value": 1145981776
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BPND_ID",
+      "value": 1145983042
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCOD_ID",
+      "value": 1146045266
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLOD_ID",
+      "value": 1146047576
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPOD_ID",
+      "value": 1146048600
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PROD_ID",
+      "value": 1146049104
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XAPD_ID",
+      "value": 1146110296
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MSPD_ID",
+      "value": 1146114893
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCRD_ID",
+      "value": 1146241875
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FMRD_ID",
+      "value": 1146244422
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "INRD_ID",
+      "value": 1146244681
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AORD_ID",
+      "value": 1146244929
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XORD_ID",
+      "value": 1146244952
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPRD_ID",
+      "value": 1146245208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XBSD_ID",
+      "value": 1146307160
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDSD_ID",
+      "value": 1146307666
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EFSD_ID",
+      "value": 1146308165
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LFSD_ID",
+      "value": 1146308172
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SLSD_ID",
+      "value": 1146309715
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MOSD_ID",
+      "value": 1146310477
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CUSD_ID",
+      "value": 1146312003
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWSD_ID",
+      "value": 1146312536
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DSTD_ID",
+      "value": 1146377028
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SLUD_ID",
+      "value": 1146440787
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PLVD_ID",
+      "value": 1146506320
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CS2E_ID",
+      "value": 1160926019
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ESCE_ID",
+      "value": 1162040133
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TSCE_ID",
+      "value": 1162040148
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MLDE_ID",
+      "value": 1162103885
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "GREE_ID",
+      "value": 1162170951
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFE_ID",
+      "value": 1162234945
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTGE_ID",
+      "value": 1162302548
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRKE_ID",
+      "value": 1162564176
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATKE_ID",
+      "value": 1162564673
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DELE_ID",
+      "value": 1162626372
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NAME_ID",
+      "value": 1162690894
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSME_ID",
+      "value": 1162695491
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ITME_ID",
+      "value": 1162695753
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MASE_ID",
+      "value": 1163084109
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ROSE_ID",
+      "value": 1163087698
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XUSE_ID",
+      "value": 1163089240
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBTE_ID",
+      "value": 1163149903
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO2F_ID",
+      "value": 1177702221
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CS2F_ID",
+      "value": 1177703235
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO3F_ID",
+      "value": 1177767757
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO4F_ID",
+      "value": 1177833293
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO5F_ID",
+      "value": 1177898829
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SRAF_ID",
+      "value": 1178686035
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AHCF_ID",
+      "value": 1178814529
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTEF_ID",
+      "value": 1178948692
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CRIF_ID",
+      "value": 1179210307
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRKF_ID",
+      "value": 1179341392
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BCLF_ID",
+      "value": 1179403074
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "HCLF_ID",
+      "value": 1179403080
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TCLF_ID",
+      "value": 1179403092
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IDLF_ID",
+      "value": 1179403337
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVLF_ID",
+      "value": 1179407948
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LLOF_ID",
+      "value": 1179601996
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPF_ID",
+      "value": 1179668557
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RPRF_ID",
+      "value": 1179799634
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MVRF_ID",
+      "value": 1179801165
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FTSF_ID",
+      "value": 1179866182
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBTF_ID",
+      "value": 1179927119
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DFTF_ID",
+      "value": 1179928132
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BPTF_ID",
+      "value": 1179930690
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DSTF_ID",
+      "value": 1179931460
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PGAG_ID",
+      "value": 1195460432
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRFG_ID",
+      "value": 1195790936
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCHG_ID",
+      "value": 1195918168
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PFIG_ID",
+      "value": 1195984464
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLIG_ID",
+      "value": 1195986008
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVLG_ID",
+      "value": 1196185164
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AVMG_ID",
+      "value": 1196250689
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWPG_ID",
+      "value": 1196447576
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVSG_ID",
+      "value": 1196643916
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XIVG_ID",
+      "value": 1196837208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CS2H_ID",
+      "value": 1211257667
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LODH_ID",
+      "value": 1212436300
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RALH_ID",
+      "value": 1212957010
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPAI_ID",
+      "value": 1229017165
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPCI_ID",
+      "value": 1229148248
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NVCI_ID",
+      "value": 1229149774
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALDI_ID",
+      "value": 1229212737
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MLDI_ID",
+      "value": 1229212749
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSDI_ID",
+      "value": 1229214531
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFI_ID",
+      "value": 1229343809
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RPLI_ID",
+      "value": 1229738066
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XEMI_ID",
+      "value": 1229800792
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALMI_ID",
+      "value": 1229802561
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NVMI_ID",
+      "value": 1229805134
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TINI_ID",
+      "value": 1229867348
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BPNI_ID",
+      "value": 1229869122
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPI_ID",
+      "value": 1230000205
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCRI_ID",
+      "value": 1230127955
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCRI_ID",
+      "value": 1230127960
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PGRI_ID",
+      "value": 1230128976
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FMRI_ID",
+      "value": 1230130502
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPRI_ID",
+      "value": 1230131288
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XTRI_ID",
+      "value": 1230132312
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VISI_ID",
+      "value": 1230195030
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MLSI_ID",
+      "value": 1230195789
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TETI_ID",
+      "value": 1230259540
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QSTI_ID",
+      "value": 1230263121
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QOBJ_ID",
+      "value": 1245859665
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDOJ_ID",
+      "value": 1246708818
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CS2K_ID",
+      "value": 1261589315
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VTCK_ID",
+      "value": 1262703702
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MSDK_ID",
+      "value": 1262768973
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPLK_ID",
+      "value": 1263292504
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FNMK_ID",
+      "value": 1263357510
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRNK_ID",
+      "value": 1263424088
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPK_ID",
+      "value": 1263554637
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PERI_ID",
+      "value": 1263682896
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XMRK_ID",
+      "value": 1263684952
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AVSK_ID",
+      "value": 1263752769
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QUAL_ID",
+      "value": 1279350097
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALCL_ID",
+      "value": 1279478849
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XSCL_ID",
+      "value": 1279480664
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XEDL_ID",
+      "value": 1279542616
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DMDL_ID",
+      "value": 1279544644
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MODL_ID",
+      "value": 1279545165
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XTEL_ID",
+      "value": 1279611992
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAFL_ID",
+      "value": 1279672658
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBFL_ID",
+      "value": 1279672911
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFL_ID",
+      "value": 1279675457
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSFL_ID",
+      "value": 1279677251
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AVFL_ID",
+      "value": 1279678017
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QTGL_ID",
+      "value": 1279743057
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "JAIL_ID",
+      "value": 1279869258
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCIL_ID",
+      "value": 1279869778
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRKL_ID",
+      "value": 1280004688
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCLL_ID",
+      "value": 1280066392
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XILL_ID",
+      "value": 1280067928
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FULL_ID",
+      "value": 1280070982
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBML_ID",
+      "value": 1280131663
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VNML_ID",
+      "value": 1280134742
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TINL_ID",
+      "value": 1280198996
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XSOL_ID",
+      "value": 1280267096
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "STOL_ID",
+      "value": 1280267347
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FCPL_ID",
+      "value": 1280328518
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REPL_ID",
+      "value": 1280329042
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BIPL_ID",
+      "value": 1280330050
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PGRL_ID",
+      "value": 1280460624
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLRL_ID",
+      "value": 1280461912
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPSL_ID",
+      "value": 1280528472
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBTL_ID",
+      "value": 1280590415
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DMTL_ID",
+      "value": 1280593220
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPTL_ID",
+      "value": 1280594008
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SOUL_ID",
+      "value": 1280659283
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCVL_ID",
+      "value": 1280721752
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKAM_ID",
+      "value": 1296124752
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ANAM_ID",
+      "value": 1296125505
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BNAM_ID",
+      "value": 1296125506
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CNAM_ID",
+      "value": 1296125507
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DNAM_ID",
+      "value": 1296125508
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ENAM_ID",
+      "value": 1296125509
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FNAM_ID",
+      "value": 1296125510
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "GNAM_ID",
+      "value": 1296125511
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "HNAM_ID",
+      "value": 1296125512
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "INAM_ID",
+      "value": 1296125513
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "JNAM_ID",
+      "value": 1296125514
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "KNAM_ID",
+      "value": 1296125515
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LNAM_ID",
+      "value": 1296125516
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MNAM_ID",
+      "value": 1296125517
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NNAM_ID",
+      "value": 1296125518
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ONAM_ID",
+      "value": 1296125519
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PNAM_ID",
+      "value": 1296125520
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CLNM_ID",
+      "value": 1296125521
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QNAM_ID",
+      "value": 1296125521
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RNAM_ID",
+      "value": 1296125522
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SNAM_ID",
+      "value": 1296125523
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TNAM_ID",
+      "value": 1296125524
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "UNAM_ID",
+      "value": 1296125525
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VNAM_ID",
+      "value": 1296125526
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WNAM_ID",
+      "value": 1296125527
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XNAM_ID",
+      "value": 1296125528
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "YNAM_ID",
+      "value": 1296125529
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ZNAM_ID",
+      "value": 1296125530
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCCM_ID",
+      "value": 1296253784
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AHCM_ID",
+      "value": 1296255041
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLCM_ID",
+      "value": 1296256088
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RLDM_ID",
+      "value": 1296321618
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATDM_ID",
+      "value": 1296323649
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWEM_ID",
+      "value": 1296389976
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCIM_ID",
+      "value": 1296647000
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XTIM_ID",
+      "value": 1296651352
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCLM_ID",
+      "value": 1296843608
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVLM_ID",
+      "value": 1296848460
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SGNM_ID",
+      "value": 1296975699
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MTNM_ID",
+      "value": 1296979021
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XTNM_ID",
+      "value": 1296979032
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NVNM_ID",
+      "value": 1296979534
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPM_ID",
+      "value": 1297109069
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLRM_ID",
+      "value": 1297239128
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RPRM_ID",
+      "value": 1297240146
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPRM_ID",
+      "value": 1297240152
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NTRM_ID",
+      "value": 1297241166
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FTSM_ID",
+      "value": 1297306694
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBTM_ID",
+      "value": 1297367631
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DFTM_ID",
+      "value": 1297368644
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EITM_ID",
+      "value": 1297369413
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BPTM_ID",
+      "value": 1297371202
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRTM_ID",
+      "value": 1297371736
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PLCN_ID",
+      "value": 1313033296
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLCN_ID",
+      "value": 1313033304
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWCN_ID",
+      "value": 1313036120
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALDN_ID",
+      "value": 1313098817
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LODN_ID",
+      "value": 1313099596
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAFN_ID",
+      "value": 1313227090
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAGN_ID",
+      "value": 1313292626
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPGN_ID",
+      "value": 1313296461
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DMIN_ID",
+      "value": 1313426756
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FMIN_ID",
+      "value": 1313426758
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RALN_ID",
+      "value": 1313620306
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IDLN_ID",
+      "value": 1313621065
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDLN_ID",
+      "value": 1313621074
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BPNN_ID",
+      "value": 1313755202
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ICON_ID",
+      "value": 1313817417
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPN_ID",
+      "value": 1313886285
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SSPN_ID",
+      "value": 1313887059
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWPN_ID",
+      "value": 1313888088
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PFRN_ID",
+      "value": 1314014800
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FMRN_ID",
+      "value": 1314016582
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PTRN_ID",
+      "value": 1314018384
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPSN_ID",
+      "value": 1314082904
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACTN_ID",
+      "value": 1314145089
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PHTN_ID",
+      "value": 1314146384
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BPTN_ID",
+      "value": 1314148418
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATTN_ID",
+      "value": 1314149441
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACUN_ID",
+      "value": 1314210625
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LCUN_ID",
+      "value": 1314210636
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCUN_ID",
+      "value": 1314210642
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XOWN_ID",
+      "value": 1314344792
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XEZN_ID",
+      "value": 1314538840
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XMBO_ID",
+      "value": 1329745240
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MICO_ID",
+      "value": 1329809741
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALCO_ID",
+      "value": 1329810497
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRDO_ID",
+      "value": 1329877592
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SPLO_ID",
+      "value": 1330401363
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVLO_ID",
+      "value": 1330402892
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCMO_ID",
+      "value": 1330463576
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDMO_ID",
+      "value": 1330463826
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DEMO_ID",
+      "value": 1330464068
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XROO_ID",
+      "value": 1330598488
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCRO_ID",
+      "value": 1330791251
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XATO_ID",
+      "value": 1330921816
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PDTO_ID",
+      "value": 1330922576
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NETO_ID",
+      "value": 1330922830
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CNTO_ID",
+      "value": 1330925123
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WMAP_ID",
+      "value": 1346456919
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XMBP_ID",
+      "value": 1346522456
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SLCP_ID",
+      "value": 1346587731
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XOCP_ID",
+      "value": 1346588504
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "STCP_ID",
+      "value": 1346589779
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XNDP_ID",
+      "value": 1346653784
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACEP_ID",
+      "value": 1346716481
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LCEP_ID",
+      "value": 1346716492
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPGP_ID",
+      "value": 1346850893
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTEN_ID",
+      "value": 1346851924
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTGP_ID",
+      "value": 1346851924
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XALP_ID",
+      "value": 1347174744
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLCR_ID",
+      "value": 1347175256
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XHLP_ID",
+      "value": 1347176536
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDMP_ID",
+      "value": 1347241042
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BMMP_ID",
+      "value": 1347243330
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BSMP_ID",
+      "value": 1347244866
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LTMP_ID",
+      "value": 1347245132
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TINP_ID",
+      "value": 1347307860
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NTOP_ID",
+      "value": 1347376206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PTOP_ID",
+      "value": 1347376208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QTOP_ID",
+      "value": 1347376209
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "STOP_ID",
+      "value": 1347376211
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NVPP_ID",
+      "value": 1347442254
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PGRP_ID",
+      "value": 1347569488
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XASP_ID",
+      "value": 1347633496
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XESP_ID",
+      "value": 1347634520
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LFSP_ID",
+      "value": 1347634764
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALSP_ID",
+      "value": 1347636289
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IMSP_ID",
+      "value": 1347636553
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XMSP_ID",
+      "value": 1347636568
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVSR_ID",
+      "value": 1347638860
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XATP_ID",
+      "value": 1347699032
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XNVP_ID",
+      "value": 1347833432
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "UNWP_ID",
+      "value": 1347898965
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ETYP_ID",
+      "value": 1348031557
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FTYP_ID",
+      "value": 1348031558
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MTYP_ID",
+      "value": 1348031565
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MODQ_ID",
+      "value": 1363431245
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALEQ_ID",
+      "value": 1363496001
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XMBR_ID",
+      "value": 1380076888
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XACR_ID",
+      "value": 1380139352
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XDCR_ID",
+      "value": 1380140120
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSCR_ID",
+      "value": 1380143939
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ISCR_ID",
+      "value": 1380143945
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LVCR_ID",
+      "value": 1380144716
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RADR_ID",
+      "value": 1380204882
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "HEDR_ID",
+      "value": 1380205896
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "GDRD_ID",
+      "value": 1380206423
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XGDR_ID",
+      "value": 1380206424
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NVER_ID",
+      "value": 1380275790
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFR_ID",
+      "value": 1380338753
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CRGR_ID",
+      "value": 1380405827
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCHR_ID",
+      "value": 1380467539
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLKR_ID",
+      "value": 1380666456
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRKR_ID",
+      "value": 1380667984
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATKR_ID",
+      "value": 1380668481
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "HCLR_ID",
+      "value": 1380729672
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCLR_ID",
+      "value": 1380729682
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VCLR_ID",
+      "value": 1380729686
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCLR_ID",
+      "value": 1380729688
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSLR_ID",
+      "value": 1380733763
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRMR_ID",
+      "value": 1380799064
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ECOR_ID",
+      "value": 1380926277
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OCOR_ID",
+      "value": 1380926287
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PFOR_ID",
+      "value": 1380927056
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XHOR_ID",
+      "value": 1380927576
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SPOR_ID",
+      "value": 1380929619
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "GWOR_ID",
+      "value": 1380931399
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XAPR_ID",
+      "value": 1380991320
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACPR_ID",
+      "value": 1380991809
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LCPR_ID",
+      "value": 1380991820
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCPR_ID",
+      "value": 1380991826
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FNPR_ID",
+      "value": 1380994630
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "APPR_ID",
+      "value": 1380995137
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "STPR_ID",
+      "value": 1380996179
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PGRC_ID",
+      "value": 1381123920
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACSR_ID",
+      "value": 1381188417
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LCSR_ID",
+      "value": 1381188428
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCSR_ID",
+      "value": 1381188434
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XATR_ID",
+      "value": 1381253464
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WCTR_ID",
+      "value": 1381253975
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FLTR_ID",
+      "value": 1381256262
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QSTR_ID",
+      "value": 1381258065
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATTR_ID",
+      "value": 1381258305
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCVR_ID",
+      "value": 1381385043
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCVR_ID",
+      "value": 1381385048
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IOVR_ID",
+      "value": 1381388105
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XPWR_ID",
+      "value": 1381453912
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLYR_ID",
+      "value": 1381583960
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCZR_ID",
+      "value": 1381647192
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO2S_ID",
+      "value": 1395806029
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO3S_ID",
+      "value": 1395871565
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO4S_ID",
+      "value": 1395937101
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO5S_ID",
+      "value": 1396002637
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCAS_ID",
+      "value": 1396786008
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TIAS_ID",
+      "value": 1396787540
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ESAS_ID",
+      "value": 1396790085
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACBS_ID",
+      "value": 1396851521
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XIBS_ID",
+      "value": 1396853080
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ESBS_ID",
+      "value": 1396855621
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALCS_ID",
+      "value": 1396919361
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SLCS_ID",
+      "value": 1396919379
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ESCS_ID",
+      "value": 1396921157
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWCS_ID",
+      "value": 1396922200
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BIDS_ID",
+      "value": 1396984130
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MLDS_ID",
+      "value": 1396984909
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DMDS_ID",
+      "value": 1396985156
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LODS_ID",
+      "value": 1396985676
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MODS_ID",
+      "value": 1396985677
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XRDS_ID",
+      "value": 1396986456
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAFS_ID",
+      "value": 1397113170
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDGS_ID",
+      "value": 1397179474
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FGGS_ID",
+      "value": 1397180230
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NNGS_ID",
+      "value": 1397182030
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPGS_ID",
+      "value": 1397182541
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ESHS_ID",
+      "value": 1397248837
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ANIS_ID",
+      "value": 1397313089
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CRIS_ID",
+      "value": 1397314115
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RVIS_ID",
+      "value": 1397315154
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATKS_ID",
+      "value": 1397445697
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALLS_ID",
+      "value": 1397509185
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BSMS_ID",
+      "value": 1397576514
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ITMS_ID",
+      "value": 1397576777
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NPOS_ID",
+      "value": 1397706830
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RAPS_ID",
+      "value": 1397768530
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPS_ID",
+      "value": 1397772365
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRPS_ID",
+      "value": 1397772880
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCQS_ID",
+      "value": 1397834579
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TIQS_ID",
+      "value": 1397836116
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCRS_ID",
+      "value": 1397900115
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XHRS_ID",
+      "value": 1397901400
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TIRS_ID",
+      "value": 1397901652
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FMRS_ID",
+      "value": 1397902662
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBTS_ID",
+      "value": 1398030927
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FGTS_ID",
+      "value": 1398032198
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NNUS_ID",
+      "value": 1398099534
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NQUS_ID",
+      "value": 1398100302
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BRUS_ID",
+      "value": 1398100546
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO2T_ID",
+      "value": 1412583245
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO3T_ID",
+      "value": 1412648781
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO4T_ID",
+      "value": 1412714317
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MO5T_ID",
+      "value": 1412779853
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDAT_ID",
+      "value": 1413563474
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TWAT_ID",
+      "value": 1413568340
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XACT_ID",
+      "value": 1413693784
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LLCT_ID",
+      "value": 1413696588
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BMCT_ID",
+      "value": 1413696834
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "COCT_ID",
+      "value": 1413697347
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SPCT_ID",
+      "value": 1413697619
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WBDT_ID",
+      "value": 1413759575
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MHDT_ID",
+      "value": 1413761101
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AIDT_ID",
+      "value": 1413761345
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKDT_ID",
+      "value": 1413761872
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PLDT_ID",
+      "value": 1413762128
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BMDT_ID",
+      "value": 1413762370
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DMDT_ID",
+      "value": 1413762372
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "GMDT_ID",
+      "value": 1413762375
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BODT_ID",
+      "value": 1413762882
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DODT_ID",
+      "value": 1413762884
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LODT_ID",
+      "value": 1413762892
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MODT_ID",
+      "value": 1413762893
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CRDT_ID",
+      "value": 1413763651
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TRDT_ID",
+      "value": 1413763668
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSDT_ID",
+      "value": 1413763907
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PSDT_ID",
+      "value": 1413763920
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "QSDT_ID",
+      "value": 1413763921
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PTDT_ID",
+      "value": 1413764176
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TVDT_ID",
+      "value": 1413764692
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCET_ID",
+      "value": 1413825368
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TTET_ID",
+      "value": 1413829716
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NIFT_ID",
+      "value": 1413892430
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DOFT_ID",
+      "value": 1413893956
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SOFT_ID",
+      "value": 1413893971
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EPFT_ID",
+      "value": 1413894213
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VHGT_ID",
+      "value": 1413957718
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WHGT_ID",
+      "value": 1413957719
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NNGT_ID",
+      "value": 1413959246
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DTGT_ID",
+      "value": 1413960772
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MWGT_ID",
+      "value": 1413961549
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FCHT_ID",
+      "value": 1414021958
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MCHT_ID",
+      "value": 1414021965
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WAIT_ID",
+      "value": 1414086999
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCIT_ID",
+      "value": 1414087507
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EFIT_ID",
+      "value": 1414088261
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ENIT_ID",
+      "value": 1414090309
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SPIT_ID",
+      "value": 1414090835
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AVIT_ID",
+      "value": 1414092353
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLKT_ID",
+      "value": 1414220888
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATKT_ID",
+      "value": 1414222913
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OBLT_ID",
+      "value": 1414283855
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TCLT_ID",
+      "value": 1414284116
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "IDLT_ID",
+      "value": 1414284361
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XHLT_ID",
+      "value": 1414285400
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DPLT_ID",
+      "value": 1414287428
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TPLT_ID",
+      "value": 1414287444
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWLT_ID",
+      "value": 1414289240
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BAMT_ID",
+      "value": 1414349122
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "EAMT_ID",
+      "value": 1414349125
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XAMT_ID",
+      "value": 1414349144
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCMT_ID",
+      "value": 1414349656
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCNT_ID",
+      "value": 1414415192
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TINT_ID",
+      "value": 1414416724
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALNT_ID",
+      "value": 1414417473
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BPNT_ID",
+      "value": 1414418498
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWNT_ID",
+      "value": 1414420312
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDOT_ID",
+      "value": 1414480978
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NPOT_ID",
+      "value": 1414484046
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SAPT_ID",
+      "value": 1414545747
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "REPT_ID",
+      "value": 1414546770
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKPT_ID",
+      "value": 1414548304
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPT_ID",
+      "value": 1414549581
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LTPT_ID",
+      "value": 1414550604
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SHRT_ID",
+      "value": 1414678611
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALRT_ID",
+      "value": 1414679617
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLRT_ID",
+      "value": 1414679640
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FPRT_ID",
+      "value": 1414680646
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPRT_ID",
+      "value": 1414680653
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MAST_ID",
+      "value": 1414742349
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DEST_ID",
+      "value": 1414743364
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "OFST_ID",
+      "value": 1414743631
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALST_ID",
+      "value": 1414745153
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WLST_ID",
+      "value": 1414745175
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FTST_ID",
+      "value": 1414747206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "INTT_ID",
+      "value": 1414811209
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NNUT_ID",
+      "value": 1414876750
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "JOUT_ID",
+      "value": 1414877002
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NQUT_ID",
+      "value": 1414877518
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCWT_ID",
+      "value": 1415005016
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RDWT_ID",
+      "value": 1415005266
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PHWT_ID",
+      "value": 1415006288
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MXWT_ID",
+      "value": 1415010381
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NEXT_ID",
+      "value": 1415071054
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATXT_ID",
+      "value": 1415074881
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BTXT_ID",
+      "value": 1415074882
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ITXT_ID",
+      "value": 1415074889
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VTXT_ID",
+      "value": 1415074902
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PKCU_ID",
+      "value": 1430473552
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XWCD_ID",
+      "value": 1430476632
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPAV_ID",
+      "value": 1447120973
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CSCV_ID",
+      "value": 1447252803
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "LODV_ID",
+      "value": 1447317324
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MSDV_ID",
+      "value": 1447318349
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WLEV_ID",
+      "value": 1447382103
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ALFV_ID",
+      "value": 1447447617
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PHKV_ID",
+      "value": 1447774288
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WKMV_ID",
+      "value": 1447906135
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FLMV_ID",
+      "value": 1447906374
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RNMV_ID",
+      "value": 1447906898
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SNMV_ID",
+      "value": 1447906899
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SPMV_ID",
+      "value": 1447907411
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SWMV_ID",
+      "value": 1447909203
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "VENV_ID",
+      "value": 1447970134
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TINV_ID",
+      "value": 1447971156
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MPPV_ID",
+      "value": 1448104013
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCRV_ID",
+      "value": 1448231763
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "STRV_ID",
+      "value": 1448236115
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "MRSV_ID",
+      "value": 1448301133
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ACTV_ID",
+      "value": 1448362817
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FLTV_ID",
+      "value": 1448365126
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "INTV_ID",
+      "value": 1448365641
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATKW_ID",
+      "value": 1464554561
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XCLW_ID",
+      "value": 1464615768
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XILW_ID",
+      "value": 1464617304
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XHTW_ID",
+      "value": 1465141336
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XLTW_ID",
+      "value": 1465142360
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DMAX_ID",
+      "value": 1480674628
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BIDX_ID",
+      "value": 1480870210
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WIDX_ID",
+      "value": 1480870231
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XIDX_ID",
+      "value": 1480870232
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "INDX_ID",
+      "value": 1480871497
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SNDX_ID",
+      "value": 1480871507
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CDIX_ID",
+      "value": 1481196611
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "WTMX_ID",
+      "value": 1481462871
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AGSX_ID",
+      "value": 1481852737
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "_0TX_ID",
+      "value": 1481912368
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "SCTX_ID",
+      "value": 1481917267
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "HLTX_ID",
+      "value": 1481919560
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ATTX_ID",
+      "value": 1481921601
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "XXXX_ID",
+      "value": 1482184792
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "RCQY_ID",
+      "value": 1498497874
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "AGTY_ID",
+      "value": 1498695489
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "KFFZ_ID",
+      "value": 1514554955
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "NIFZ_ID",
+      "value": 1514555726
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "BSIZ_ID",
+      "value": 1514754882
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "ISIZ_ID",
+      "value": 1514754889
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "PRKZ_ID",
+      "value": 1514885712
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "CLSZ_ID",
+      "value": 1515408451
+    }
+  ],
+  "name": "CHUNK_ID",
+  "ordinal": 9692,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

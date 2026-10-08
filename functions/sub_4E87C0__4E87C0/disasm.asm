@@ -1,4 +1,4 @@
-0x4E87C0: sub     esp, 1Ch
+0x4E87C0: sub     esp, 1Ch; Verified TESRoad RGRP format is 12-byte target XYZ positions flattened across each source point's edge count. This differs from TESPathGrid PGRR, which stores u16 target point indices; PGRP row size is shared but the connection encoding is not.
 0x4E87C3: push    ebp
 0x4E87C4: push    esi
 0x4E87C5: mov     esi, ecx
@@ -28,21 +28,21 @@
 0x4E880C: mov     [esp+2Ch+var_8], ebx
 0x4E8810: mov     [esp+2Ch+var_10], ebp
 0x4E8814: mov     [esp+2Ch+var_14], ebp
-0x4E8818: call    sub_6A9030
+0x4E8818: call    NiTMapBase_GetFirstNode
 0x4E881D: cmp     eax, ebp
-0x4E881F: mov     [esp+2Ch+var_1C], eax
+0x4E881F: mov     [esp+2Ch+position], eax
 0x4E8823: jz      loc_4E88D0
 0x4E8829: lea     esp, [esp+0]
-0x4E8830: lea     eax, [esp+2Ch+var_C]
-0x4E8834: push    eax
-0x4E8835: lea     ecx, [esp+30h+var_4]
-0x4E8839: push    ecx
-0x4E883A: lea     edx, [esp+34h+var_1C]
-0x4E883E: push    edx
-0x4E883F: lea     ecx, [esi+1Ch]
-0x4E8842: mov     [esp+38h+var_C], ebp
-0x4E8846: call    sub_452600
-0x4E884B: mov     edi, [esp+2Ch+var_C]
+0x4E8830: lea     eax, [esp+2Ch+valueOut]
+0x4E8834: push    eax; valueOut
+0x4E8835: lea     ecx, [esp+30h+keyOut]
+0x4E8839: push    ecx; keyOut
+0x4E883A: lea     edx, [esp+34h+position]
+0x4E883E: push    edx; position
+0x4E883F: lea     ecx, [esi+1Ch]; self
+0x4E8842: mov     [esp+38h+valueOut], ebp
+0x4E8846: call    NiTMap_U32Pointer_GetNextEntry
+0x4E884B: mov     edi, [esp+2Ch+valueOut]
 0x4E884F: cmp     edi, ebp
 0x4E8851: jz      short loc_4E88C0
 0x4E8853: mov     esi, [esp+2Ch+var_10]
@@ -54,9 +54,9 @@
 0x4E8866: cmp     dword ptr [edi], 0
 0x4E8869: jz      short loc_4E88BC
 0x4E886B: mov     ebp, [edi]
-0x4E886D: mov     ecx, ebp
+0x4E886D: mov     ecx, ebp; this
 0x4E886F: xor     ebx, ebx
-0x4E8871: call    sub_4E7DE0
+0x4E8871: call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.
 0x4E8876: test    eax, eax
 0x4E8878: jz      short loc_4E888F
 0x4E887A: lea     ebx, [ebx+0]
@@ -66,8 +66,8 @@
 0x4E8888: mov     eax, [eax+4]
 0x4E888B: test    eax, eax
 0x4E888D: jnz     short loc_4E8880
-0x4E888F: mov     ecx, ebp
-0x4E8891: call    sub_4BEF40
+0x4E888F: mov     ecx, ebp; this
+0x4E8891: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x4E8896: mov     ecx, [eax]
 0x4E8898: add     [esp+2Ch+var_14], ebx
 0x4E889C: add     [esp+2Ch+var_10], 1
@@ -84,16 +84,16 @@
 0x4E88BC: mov     esi, [esp+2Ch+var_18]
 0x4E88C0: mov     ebx, [esp+2Ch+var_8]
 0x4E88C4: xor     ebp, ebp
-0x4E88C6: cmp     [esp+2Ch+var_1C], ebp
+0x4E88C6: cmp     [esp+2Ch+position], ebp
 0x4E88CA: jnz     loc_4E8830
 0x4E88D0: mov     ecx, [esi+18h]
 0x4E88D3: shl     ecx, 4
 0x4E88D6: push    ecx; Size
 0x4E88D7: push    ebx; Src
 0x4E88D8: push    50524750h; int
-0x4E88DD: call    TESForm_PutFormRecordChunkData
+0x4E88DD: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4E88E2: push    ebx
-0x4E88E3: call    FormHeapFree
+0x4E88E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E88E8: mov     eax, [esp+3Ch+var_14]
 0x4E88EC: xor     ecx, ecx
 0x4E88EE: mov     edx, 0Ch
@@ -106,21 +106,21 @@
 0x4E8902: mov     edi, eax
 0x4E8904: add     esp, 14h
 0x4E8907: lea     ecx, [esi+1Ch]
-0x4E890A: mov     [esp+2Ch+var_C], edi
+0x4E890A: mov     [esp+2Ch+valueOut], edi
 0x4E890E: xor     ebx, ebx
-0x4E8910: call    sub_6A9030
+0x4E8910: call    NiTMapBase_GetFirstNode
 0x4E8915: cmp     eax, ebp
-0x4E8917: mov     [esp+2Ch+var_1C], eax
+0x4E8917: mov     [esp+2Ch+position], eax
 0x4E891B: jz      loc_4E89B9
 0x4E8921: lea     eax, [esp+2Ch+var_8]
-0x4E8925: push    eax
-0x4E8926: lea     ecx, [esp+30h+var_4]
-0x4E892A: push    ecx
-0x4E892B: lea     edx, [esp+34h+var_1C]
-0x4E892F: push    edx
-0x4E8930: lea     ecx, [esi+1Ch]
+0x4E8925: push    eax; valueOut
+0x4E8926: lea     ecx, [esp+30h+keyOut]
+0x4E892A: push    ecx; keyOut
+0x4E892B: lea     edx, [esp+34h+position]
+0x4E892F: push    edx; position
+0x4E8930: lea     ecx, [esi+1Ch]; self
 0x4E8933: mov     [esp+38h+var_8], 0
-0x4E893B: call    sub_452600
+0x4E893B: call    NiTMap_U32Pointer_GetNextEntry
 0x4E8940: mov     ebp, [esp+2Ch+var_8]
 0x4E8944: test    ebp, ebp
 0x4E8946: jz      short loc_4E89AA
@@ -128,12 +128,12 @@
 0x4E894C: jnz     short loc_4E8954
 0x4E894E: cmp     dword ptr [ebp+0], 0
 0x4E8952: jz      short loc_4E89AA
-0x4E8954: mov     ecx, [ebp+0]
-0x4E8957: call    sub_4E7DE0
+0x4E8954: mov     ecx, [ebp+0]; this
+0x4E8957: call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.
 0x4E895C: mov     esi, eax
 0x4E895E: test    esi, esi
 0x4E8960: jz      short loc_4E899F
-0x4E8962: mov     ecx, [esp+2Ch+var_C]
+0x4E8962: mov     ecx, [esp+2Ch+valueOut]
 0x4E8966: lea     eax, [ebx+ebx*2]
 0x4E8969: lea     edi, [ecx+eax*4]
 0x4E896C: lea     esp, [esp+0]
@@ -141,8 +141,8 @@
 0x4E8974: jnz     short loc_4E897B
 0x4E8976: cmp     dword ptr [esi], 0
 0x4E8979: jz      short loc_4E899F
-0x4E897B: mov     ecx, [esi]
-0x4E897D: call    sub_4BEF40
+0x4E897B: mov     ecx, [esi]; this
+0x4E897D: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x4E8982: mov     edx, [eax]
 0x4E8984: mov     [edi], edx
 0x4E8986: mov     ecx, [eax+4]
@@ -158,9 +158,9 @@
 0x4E89A2: test    ebp, ebp
 0x4E89A4: mov     esi, [esp+2Ch+var_18]
 0x4E89A8: jnz     short loc_4E8948
-0x4E89AA: cmp     [esp+2Ch+var_1C], 0
+0x4E89AA: cmp     [esp+2Ch+position], 0
 0x4E89AF: jnz     loc_4E8921
-0x4E89B5: mov     edi, [esp+2Ch+var_C]
+0x4E89B5: mov     edi, [esp+2Ch+valueOut]
 0x4E89B9: mov     eax, [esp+2Ch+var_14]
 0x4E89BD: lea     eax, [eax+eax*2]
 0x4E89C0: add     eax, eax
@@ -168,9 +168,9 @@
 0x4E89C4: push    eax; Size
 0x4E89C5: push    edi; Src
 0x4E89C6: push    52524750h; int
-0x4E89CB: call    TESForm_PutFormRecordChunkData
+0x4E89CB: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4E89D0: push    edi
-0x4E89D1: call    FormHeapFree
+0x4E89D1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E89D6: add     esp, 10h
 0x4E89D9: pop     edi
 0x4E89DA: pop     ebx

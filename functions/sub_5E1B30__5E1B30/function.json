@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5E1B30",
+      "0x5E1BAC"
+    ]
+  ],
+  "chunks_sha256": "b284b145e7a03613be6334a0b60e6b5f6af64d3c6198b414249e159c3b4adce7",
+  "comment_regular": "\nVerified truth table: returns !(GetNoBloodDecal() && GetNoBloodSpray()), NOT permission for both effects. Component vslots +0x30 and +0x28 are checked with short-circuit evaluation. Fallout HasBlood 0x82616938 has a corresponding terminal two-predicate gate but also gore/child/critical-stage checks absent from this Oblivion helper. Similarity is partial; do not transplant Fallout guards.\n\nODismemberment authority: actor blood effects are allowed only when actor-base blood particle/texture disable predicates permit them.",
+  "comment_repeatable": "ODismemberment authority: actor blood effects are allowed only when actor-base blood particle/texture disable predicates permit them.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5E1B30",
+  "display_name": "Actor_ShouldEmitBloodEffects",
   "end_ea": "0x5E1BAC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5E1B30",
+  "name": "Actor_ShouldEmitBloodEffects",
   "segment": ".text",
   "sha256": "b284b145e7a03613be6334a0b60e6b5f6af64d3c6198b414249e159c3b4adce7",
   "size": 124,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E1B30",
-  "type": "BOOL __thiscall(void *this)",
+  "total_chunk_size": 124,
+  "type": "bool __thiscall(Actor *self)",
   "xrefs_from_count": 59,
   "xrefs_to_count": 2
 }

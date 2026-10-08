@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x474C50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Initializes the 0x2C-byte AnimIdle runtime holder and starts its KF load. Observed layout: +0x00 phase (0 pending/unavailable, 1 ready, 2 active, 3 terminal), +0x04 completion/action mode, +0x08 KFModel, +0x0C requested slot/type, +0x10 played sequence, +0x24 TESIdleForm, +0x28 actor ref. Builds Meshes\\\\<TESIdleForm model path>, loads now or queues asynchronously, binds two actor-specific resources, and marks phase 1 when a KFModel is immediately available.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x474C82",
-    "line": "push    offset sub_7016A0; a5",
+    "line": "push    offset NiPointerSlot_Release; a5",
     "mnemonic": "push",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x474CEF",
-    "line": "call    sub_449040",
+    "line": "call    sub_449040; CustomAnimSupport evidence: queued idle loader resource resolution helper used before Meshes\\<idle-model-path> KF load.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x474D2C",
-    "line": "mov     ebx, [esp+30h+arg_C]",
+    "line": "mov     ebx, [esp+30h+actorRef]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x474D84",
-    "line": "call    sub_4383B0",
+    "line": "call    ModelLoader_QueueKFLoad; Queues asynchronous KF model load through the model loader. Queued idle and actor animation setup paths use this for deferred KF availability.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x474D96",
-    "line": "call    sub_439FF0",
+    "line": "call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,19 +739,19 @@
   },
   {
     "ea": "0x474DC7",
-    "line": "push    0",
+    "line": "push    0; skeletonRoot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x474DC9",
-    "line": "push    ebx",
+    "line": "push    ebx; actorRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474DCA",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -763,13 +763,13 @@
   },
   {
     "ea": "0x474DCE",
-    "line": "push    eax",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x474DCF",
-    "line": "call    sub_479450",
+    "line": "call    Actor_LoadCloneAndAttachModel3D; Loads and clones a model for an actor equipment/add-on slot, binds actor-specific resources, applies the stock attachment transform, attaches through Prn metadata, and initializes render property/dynamic-effect state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x474E28",
-    "line": "call    sub_7165B0",
+    "line": "call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x474E67",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1150,5 +1150,125 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AEE00",
+    "line": "mov     ecx, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE03",
+    "line": "add     ecx, 10h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE06",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE0B",
+    "line": "push    offset NiPointerSlot_Release; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE10",
+    "line": "push    2; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEE12",
+    "line": "push    4; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEE14",
+    "line": "mov     eax, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE17",
+    "line": "add     eax, 1Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE1A",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEE1B",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE20",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AEE21",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE24",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE29",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AEE2D",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE30",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEE33",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEE35",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE3A",
+    "line": "mov     eax, offset stru_ADB4F0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEE3F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

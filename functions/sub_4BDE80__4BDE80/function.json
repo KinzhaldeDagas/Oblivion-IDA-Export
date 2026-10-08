@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4BDE80",
+  "chunks": [
+    [
+      "0x4BDE80",
+      "0x4BDF1B"
+    ],
+    [
+      "0x9B4470",
+      "0x9B4493"
+    ]
+  ],
+  "chunks_sha256": "e1bcbbc5650bce1b88f5ec0c41b2bb1f619f34fa6915ef428133c0e2c73cbd20",
+  "comment_regular": "Verified duplicate-cell check: packs exterior coordinates and performs GetAt through map vtable +0x04. Releases the temporary task smart pointer and returns whether that cell already has a DistantLODLoaderTask.",
+  "comment_repeatable": "Verified duplicate-cell check: packs exterior coordinates and performs GetAt through map vtable +0x04. Releases the temporary task smart pointer and returns whether that cell already has a DistantLODLoaderTask.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "DistantLODLoaderTaskMap_HasCellTask",
   "end_ea": "0x4BDF1B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BDE80",
+  "name": "DistantLODLoaderTaskMap_HasCellTask",
   "segment": ".text",
   "sha256": "3541d2a6752dd6b7cd67458e4b276ca9b4108fe32bbda9543a45e419ca6296da",
   "size": 155,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BDE80",
-  "type": "char __thiscall(void *this, __int16, int)",
-  "xrefs_from_count": 57,
+  "total_chunk_size": 190,
+  "type": "bool __thiscall(LockFreeMap *this, __int16 groupX, unsigned int groupY)",
+  "xrefs_from_count": 68,
   "xrefs_to_count": 2
 }

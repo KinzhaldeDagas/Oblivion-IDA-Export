@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x450550",
-    "line": "sub     esp, 38h",
+    "line": "sub     esp, 38h; EngineIssues review: compressed TES record loader trusts advertised decompressed size and subtracts 4 from compressed length before inflate; verify length>=4 and cap decompressed size.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4505B7",
-    "line": "mov     ecx, [esi+10h]",
+    "line": "mov     ecx, [esi+10h]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x4505C4",
-    "line": "push    eax",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4505C5",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4505C6",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4505EF",
-    "line": "mov     ebp, [edi]",
+    "line": "mov     ebp, [edi]; MEF v20 fix: validate compressed TES record header before reading advertised decompressed length. Requires compressed length >= 4 and advertised length in sane range; invalid data resumes at existing cleanup/fail path 0x4506F6.",
     "mnemonic": "mov",
     "size": 2
   },

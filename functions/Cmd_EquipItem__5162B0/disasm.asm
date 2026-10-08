@@ -33,7 +33,7 @@
 0x516305: push    eax; a1
 0x516306: mov     dword ptr [esp+54h+var_1C], ebx
 0x51630A: mov     [esp+54h+var_10], ebx
-0x51630E: call    Script_ExtractArgs
+0x51630E: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x516313: add     esp, 24h
 0x516316: test    al, al
 0x516318: jnz     short loc_51632E
@@ -69,11 +69,11 @@
 0x516376: cmp     eax, ebx
 0x516378: jz      short loc_5163B0
 0x51637A: mov     ecx, dword ptr [esp+30h+var_1C]
-0x51637E: push    ebx
-0x51637F: push    1
-0x516381: push    ecx
-0x516382: mov     ecx, eax
-0x516384: call    ContainerExtraData_GetEntryForForm
+0x51637E: push    ebx; referenceFormIDOrZero
+0x51637F: push    1; unusedAlwaysOne
+0x516381: push    ecx; form
+0x516382: mov     ecx, eax; this
+0x516384: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x516389: cmp     eax, ebx
 0x51638B: jz      short loc_5163B0
 0x51638D: mov     edi, [eax]
@@ -98,7 +98,7 @@
 0x5163BC: push    1
 0x5163BE: push    ecx
 0x5163BF: mov     ecx, ebp
-0x5163C1: call    Actor_EquipItem
+0x5163C1: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x5163C6: cmp     ebp, ds:0B333C4h
 0x5163CC: jnz     loc_51649C
 0x5163D2: mov     [esp+30h+string], ebx
@@ -109,7 +109,7 @@
 0x5163EA: push    edx
 0x5163EB: push    eax; a1
 0x5163EC: mov     [esp+38h+var_4], ebx
-0x5163F0: call    TESFullName_GetNameForForm
+0x5163F0: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x5163F5: add     esp, 4
 0x5163F8: push    eax; ArgList
 0x5163F9: lea     ecx, [esp+38h+string]
@@ -151,7 +151,7 @@
 0x516474: mov     edx, [esp+30h+string]
 0x516478: push    edx
 0x516479: mov     ecx, esi
-0x51647B: call    sub_41F370
+0x51647B: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x516480: jmp     short loc_51649C
 0x516482: mov     edx, [edi]
 0x516484: mov     eax, [edx+0D4h]
@@ -171,3 +171,12 @@
 0x5164AD: pop     ebx
 0x5164AE: add     esp, 1Ch
 0x5164B1: retn
+0x9B7280: lea     ecx, [ebp-18h]; void *
+0x9B7283: jmp     BSStringT_Clear
+0x9B7288: mov     edx, [esp+arg_4]
+0x9B728C: lea     eax, [edx-20h]
+0x9B728F: mov     ecx, [edx-24h]
+0x9B7292: xor     ecx, eax
+0x9B7294: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7299: mov     eax, offset stru_AE1EB8
+0x9B729E: jmp     ___CxxFrameHandler3

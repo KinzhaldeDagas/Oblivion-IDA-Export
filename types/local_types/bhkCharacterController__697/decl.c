@@ -1,1 +1,1 @@
-bhkCharacterController
+struct bhkCharacterController;

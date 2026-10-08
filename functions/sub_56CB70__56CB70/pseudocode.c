@@ -29,79 +29,79 @@ char __stdcall sub_56CB70(int a1, __int16 a2, char a3, int a4, int a5, int a6)
   int v32; // [esp+14h] [ebp-Ch]
   char v33; // [esp+18h] [ebp-8h]
 
-  v6 = 0.0;
-  v7 = 1.0;
-  v8 = dbl_A2FC80;
-  v31 = 0;
-  v32 = 0;
-  v33 = 0;
-  v9 = 0;
-  v10 = (_WORD *)(a4 + 2 * a1);
+  v6 = 0.0; /*0x56cb7e*/
+  v7 = 1.0; /*0x56cb85*/
+  v8 = dbl_A2FC80; /*0x56cb87*/
+  v31 = 0; /*0x56cb9a*/
+  v32 = 0; /*0x56cb9f*/
+  v33 = 0; /*0x56cba3*/
+  v9 = 0; /*0x56cba7*/
+  v10 = (_WORD *)(a4 + 2 * a1); /*0x56cba9*/
   while ( 1 )
   {
     v12 = a3 ? *v10 : *(_WORD *)(a4 + 2 * (a1 + v9 + 2 * a1));
-    v13 = a2 + v12;
-    if ( a6 )
-      v13 = *(_WORD *)(a6 + 2 * v13);
-    v14 = v8;
-    v15 = v6;
-    v16 = v14;
-    v17 = (float *)(a5 + 0xC * v13);
-    if ( v15 <= *v17 )
+    v13 = a2 + v12; /*0x56cbce*/
+    if ( a6 ) /*0x56cbd1*/
+      v13 = *(_WORD *)(a6 + 2 * v13); /*0x56cbd6*/
+    v14 = v8; /*0x56cbdd*/
+    v15 = v6; /*0x56cbdd*/
+    v16 = v14; /*0x56cbdd*/
+    v17 = (float *)(a5 + 0xC * v13); /*0x56cbe6*/
+    if ( v15 <= *v17 ) /*0x56cbf0*/
     {
-      v18 = v15;
-      v19 = v7;
-      v20 = v18;
-      if ( v19 < *v17 )
-        BYTE1(v32) = 1;
-      v21 = v19;
-      v15 = v20;
-      v7 = v21;
+      v18 = v15; /*0x56cbf9*/
+      v19 = v7; /*0x56cbf9*/
+      v20 = v18; /*0x56cbf9*/
+      if ( v19 < *v17 ) /*0x56cc02*/
+        BYTE1(v32) = 1; /*0x56cc04*/
+      v21 = v19; /*0x56cc09*/
+      v15 = v20; /*0x56cc09*/
+      v7 = v21; /*0x56cc09*/
     }
     else
     {
-      LOBYTE(v32) = 1;
+      LOBYTE(v32) = 1; /*0x56cbf2*/
     }
-    if ( v15 <= v17[1] )
+    if ( v15 <= v17[1] ) /*0x56cc13*/
     {
-      v22 = v15;
-      v23 = v7;
-      v24 = v22;
-      if ( v23 < v17[1] )
-        HIBYTE(v32) = 1;
-      v25 = v23;
-      v15 = v24;
-      v7 = v25;
+      v22 = v15; /*0x56cc1c*/
+      v23 = v7; /*0x56cc1c*/
+      v24 = v22; /*0x56cc1c*/
+      if ( v23 < v17[1] ) /*0x56cc26*/
+        HIBYTE(v32) = 1; /*0x56cc28*/
+      v25 = v23; /*0x56cc2d*/
+      v15 = v24; /*0x56cc2d*/
+      v7 = v25; /*0x56cc2d*/
     }
     else
     {
-      BYTE2(v32) = 1;
+      BYTE2(v32) = 1; /*0x56cc15*/
     }
-    if ( v17[2] > v16 )
-      v33 = 1;
-    if ( v15 < *v17 && v7 > *v17 && v15 < v17[1] )
+    if ( v17[2] > v16 ) /*0x56cc39*/
+      v33 = 1; /*0x56cc3b*/
+    if ( v15 < *v17 && v7 > *v17 && v15 < v17[1] ) /*0x56cc5e*/
     {
-      v26 = v15;
-      v27 = v7;
-      v28 = v26;
-      if ( v27 > v17[1] && v17[2] > v16 )
-        v31 = 1;
-      v29 = v27;
-      v15 = v28;
-      v7 = v29;
+      v26 = v15; /*0x56cc60*/
+      v27 = v7; /*0x56cc60*/
+      v28 = v26; /*0x56cc60*/
+      if ( v27 > v17[1] && v17[2] > v16 ) /*0x56cc76*/
+        v31 = 1; /*0x56cc78*/
+      v29 = v27; /*0x56cc7d*/
+      v15 = v28; /*0x56cc7d*/
+      v7 = v29; /*0x56cc7d*/
     }
-    ++v9;
-    ++v10;
-    if ( v9 >= 3 )
-      break;
-    v11 = v15;
-    v8 = v16;
-    v6 = v11;
+    ++v9; /*0x56cc7f*/
+    ++v10; /*0x56cc82*/
+    if ( v9 >= 3 ) /*0x56cc88*/
+      break; /*0x56cc88*/
+    v11 = v15; /*0x56cbae*/
+    v8 = v16; /*0x56cbae*/
+    v6 = v11; /*0x56cbae*/
   }
-  if ( (!(_BYTE)v32 || !BYTE1(v32)) && (!BYTE2(v32) || !HIBYTE(v32)) )
-    return v31;
-  result = 1;
-  if ( !v33 )
-    return v31;
-  return result;
+  if ( (!(_BYTE)v32 || !BYTE1(v32)) && (!BYTE2(v32) || !HIBYTE(v32)) ) /*0x56ccb2*/
+    return v31; /*0x56ccb2*/
+  result = 1; /*0x56ccb9*/
+  if ( !v33 ) /*0x56ccbb*/
+    return v31; /*0x56ccbd*/
+  return result; /*0x56cc9b*/
 }

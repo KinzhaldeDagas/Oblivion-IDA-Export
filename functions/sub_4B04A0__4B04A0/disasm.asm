@@ -17,7 +17,7 @@
 0x4B04C5: jmp     loc_4B05BB
 0x4B04CA: push    edi
 0x4B04CB: mov     ecx, ebx
-0x4B04CD: call    TESFile_InitializeFormFromRecord
+0x4B04CD: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4B04D2: mov     ecx, ebx
 0x4B04D4: call    TESFile_GetChunkType
 0x4B04D9: cmp     eax, 464C564Ch
@@ -32,7 +32,7 @@
 0x4B04FD: push    eax; Dst
 0x4B04FE: mov     ecx, ebx; a1
 0x4B0500: mov     [ebp+Dst], 0
-0x4B0504: call    TESFile_GetChunkData
+0x4B0504: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B0509: test    [ebp+Dst], 80h
 0x4B050D: lea     esi, [edi+24h]
 0x4B0510: mov     ecx, esi
@@ -53,7 +53,7 @@
 0x4B053D: push    200h; a4
 0x4B0542: push    esi; Dst
 0x4B0543: mov     ecx, ebx; a1
-0x4B0545: call    TESFile_GetChunkData
+0x4B0545: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B054A: mov     edx, [edi]
 0x4B054C: mov     eax, [edx+0D8h]
 0x4B0552: push    esi
@@ -64,7 +64,7 @@
 0x4B055B: lea     ecx, [edi+31h]
 0x4B055E: push    ecx; Dst
 0x4B055F: mov     ecx, ebx; a1
-0x4B0561: call    TESFile_GetChunkData
+0x4B0561: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B0566: jmp     short loc_4B05A1
 0x4B0568: cmp     eax, 4F4C564Ch
 0x4B056D: jnz     short loc_4B05A1
@@ -77,7 +77,7 @@
 0x4B057C: mov     dword ptr [ebp+var_14], eax
 0x4B057F: mov     [ebp+var_10], eax
 0x4B0582: mov     word ptr [ebp+var_C], 1
-0x4B0588: call    TESFile_GetChunkData
+0x4B0588: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B058D: mov     eax, [ebp+var_10]
 0x4B0590: mov     ecx, [ebp+var_C]
 0x4B0593: mov     edx, dword ptr [ebp+var_14]
@@ -85,7 +85,7 @@
 0x4B0597: push    ecx
 0x4B0598: push    edx
 0x4B0599: lea     ecx, [edi+24h]
-0x4B059C: call    TESLeveledList_AddForm
+0x4B059C: call    TESLeveledList_AddForm; CustomAnimSupport decode: TESLeveledList support evidence; leveled lists are not deterministic form-list animation targets and are not expanded for mappings.
 0x4B05A1: mov     ecx, ebx
 0x4B05A3: call    TESFile_GetNextChunk
 0x4B05A8: test    al, al

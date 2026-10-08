@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$CAB53D924484C00E6DE96DD9979BDEF9",
+  "definition": "union $CAB53D924484C00E6DE96DD9979BDEF9\n{\nEXCEPTION_DEBUG_INFO Exception;\nCREATE_THREAD_DEBUG_INFO CreateThread;\nCREATE_PROCESS_DEBUG_INFO CreateProcessInfo;\nEXIT_THREAD_DEBUG_INFO ExitThread;\nEXIT_PROCESS_DEBUG_INFO ExitProcess;\nLOAD_DLL_DEBUG_INFO LoadDll;\nUNLOAD_DLL_DEBUG_INFO UnloadDll;\nOUTPUT_DEBUG_STRING_INFO DebugString;\nRIP_INFO RipInfo;\n}\n",
   "id": 18374686479672046295,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Exception",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 152
+      "size": 152,
+      "type": "EXCEPTION_DEBUG_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateThread",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "CREATE_THREAD_DEBUG_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateProcessInfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "CREATE_PROCESS_DEBUG_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ExitThread",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "EXIT_THREAD_DEBUG_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ExitProcess",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "EXIT_PROCESS_DEBUG_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LoadDll",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "LOAD_DLL_DEBUG_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnloadDll",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UNLOAD_DLL_DEBUG_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DebugString",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "OUTPUT_DEBUG_STRING_INFO"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RipInfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "RIP_INFO"
     }
   ],
   "name": "$CAB53D924484C00E6DE96DD9979BDEF9",
+  "ordinal": 8430,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 152
 }

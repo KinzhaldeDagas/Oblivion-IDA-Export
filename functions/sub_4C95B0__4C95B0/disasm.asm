@@ -63,15 +63,15 @@
 0x4C967A: test    eax, eax
 0x4C967C: jz      short loc_4C968F
 0x4C967E: push    1
-0x4C9680: push    offset dword_B256D0
+0x4C9680: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0
 0x4C9685: lea     ecx, [esp+238h+var_114]
 0x4C968C: push    ecx
 0x4C968D: jmp     short loc_4C969B
 0x4C968F: push    1; char
-0x4C9691: push    offset dword_B256D0; int
+0x4C9691: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x4C9696: lea     edx, [esp+238h+Src]
 0x4C969A: push    edx; Src
-0x4C969B: call    NiSourceTexture__LoadTextureByFilename
+0x4C969B: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x4C96A0: add     esp, 0Ch
 0x4C96A3: push    eax; a2
 0x4C96A4: mov     ecx, esi; this
@@ -92,7 +92,7 @@
 0x4C96CB: mov     al, 1
 0x4C96CD: jmp     short loc_4C9739
 0x4C96CF: push    edi
-0x4C96D0: push    offset dword_B3F95C
+0x4C96D0: push    offset stru_B3F95C
 0x4C96D5: call    NiRTTI_Cast
 0x4C96DA: add     esp, 8
 0x4C96DD: push    eax; a2
@@ -135,3 +135,16 @@
 0x4C9754: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4C9759: add     esp, 220h
 0x4C975F: retn
+0x9B50F0: lea     ecx, [ebp-21Ch]; slot
+0x9B50F6: jmp     NiPointerSlot_Release
+0x9B50FB: mov     edx, [esp+arg_4]
+0x9B50FF: lea     eax, [edx-220h]
+0x9B5105: mov     ecx, [edx-224h]
+0x9B510B: xor     ecx, eax
+0x9B510D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5112: add     eax, 0Ch
+0x9B5115: mov     ecx, [edx-4]
+0x9B5118: xor     ecx, eax
+0x9B511A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B511F: mov     eax, offset stru_AE02E0
+0x9B5124: jmp     ___CxxFrameHandler3

@@ -31,11 +31,11 @@
 0x7327B9: mov     edx, [esp+1Ch+Src]
 0x7327BD: add     ecx, ecx
 0x7327BF: add     ecx, ecx
-0x7327C1: push    ecx; Size
-0x7327C2: push    edx; Src
-0x7327C3: push    eax; Dst
+0x7327C1: push    ecx; byteCount
+0x7327C2: push    edx; source
+0x7327C3: push    eax; destination
 0x7327C4: mov     [esi+14h], eax
-0x7327C7: call    _memcpy
+0x7327C7: call    _memcpy;
 0x7327CC: mov     dword ptr [esi+18h], 0
 0x7327D3: mov     ecx, ds:0B3F928h
 0x7327D9: add     esp, 10h
@@ -54,3 +54,12 @@
 0x732800: pop     esi
 0x732801: add     esp, 10h
 0x732804: retn    0Ch
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

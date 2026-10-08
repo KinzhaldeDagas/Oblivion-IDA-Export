@@ -1,1 +1,1 @@
-ATOM
+typedef WORD ATOM;

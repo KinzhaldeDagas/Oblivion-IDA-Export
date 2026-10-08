@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B8A60",
-    "line": "sub     esp, 134h",
+    "line": "sub     esp, 134h; Probable semantic identity: TESObjectDOOR::Activate. Direct Oblivion evidence: this function is the TESObjectDOOR vtable slot +0xCC target (TESFormVtbl member Unk_33), its typed parameters are TESObjectREFR* doorReference, TESObjectREFR* activatorReference, and UInt32 unk2; the body validates/links the door, checks actor access/locks, plays open/close behavior, and may select a random destination. Fallout independently labels the analogous method Activate and routes FindRandomTeleportTarget/HandlePlayerTeleport through it. Confidence remains Probable because the Oblivion shared slot itself is still named Unk_33.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4B8A77",
-    "line": "mov     esi, [esp+140h+arg_0]",
+    "line": "mov     esi, [esp+140h+refr0]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4B8A81",
-    "line": "mov     edi, [esp+144h+arg_4]",
+    "line": "mov     edi, [esp+144h+refr1]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4B8AA4",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4B8AAB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4B8AB1",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4B8AB8",
-    "line": "mov     [esp+144h+var_12C], eax",
+    "line": "mov     [esp+144h+linkedDoor], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x4B8AFA",
-    "line": "call    sub_4B86C0",
+    "line": "call    DoorTeleport_SelectRandomDestinationDoor; Verified Fallout corroboration for this Oblivion helper pair: Fallout's FindRandomTeleportTarget calls PlayerCharacter::GetLastSpaceForDoor before selecting among the door's RandomTeleports, avoids the previous index when possible, and calls SetLastSpaceForDoor with the selected index. Oblivion independently proves its helper pair operates on the same per-door remembered-space behavior; only this behavior is treated as shared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x4B8B3D",
-    "line": "call    LinkDoors",
+    "line": "call    LinkDoors; Verified lifecycle connection: after creating reciprocal ExtraTeleport records and marker transforms, LinkDoors calls TESObjectREFR::AddToLowPathWorld for a1. That creates one bidirectional AStarWorldNode for the paired doors; the nested maps index it under both endpoint spaces.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x4B8B47",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x4B8BCF",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B8BD4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x4B8BDC",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x4B8BF8",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x4B8C09",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,19 +877,19 @@
   },
   {
     "ea": "0x4B8C14",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B8C19",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8C1B",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x4B8C24",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x4B8C27",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B8C2C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8C2E",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,13 +961,13 @@
   },
   {
     "ea": "0x4B8C3B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8C3D",
-    "line": "call    TESObjectCELL_GetOwner",
+    "line": "call    TESObjectCELL_GetOwner; Verified Oblivion getter: returns only the direct XOWN/ExtraOwnership form stored in the cell extra list at cell+8. Unlike Fallout TESObjectCELL::GetOwner, it does not fall back to an encounter-zone owner.",
     "mnemonic": "call",
     "size": 5
   },
@@ -985,19 +985,19 @@
   },
   {
     "ea": "0x4B8C46",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B8C47",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; cell",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8C49",
-    "line": "call    sub_4CAAC0",
+    "line": "call    TESObjectCELL_IsOwnedByActor; Verified Oblivion owner predicate: reads the cell's XOWN and XRNK extra data; returns true for an NPC owner matching the actor's base form, or for a faction owner when the actor is an NPC whose faction rank meets the cell's required rank. Player identity is passed into faction-rank evaluation for its special handling. Called by door access/trespass policy and other ownership paths. Fallout has the analogous TESObjectCELL::IsActorBaseCellOwner; it takes TESActorBase* and uses a differently exposed faction-rank path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,25 +1027,25 @@
   },
   {
     "ea": "0x4B8C60",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B8C62",
-    "line": "push    edi",
+    "line": "push    edi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B8C63",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8C65",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x4B8CA0",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x4B8CED",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x4B8CFA",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8CFC",
-    "line": "call    sub_4C9830",
+    "line": "call    TESObjectCELL_HasPublicFlag20; Verified getter: returns whether TESObjectCELL flags0 bit 0x20 is set. Its uses include door access/trespass checks and IsOffLimitToThePlayer. Probable semantic identity: Public; Fallout independently names the corresponding bit SetPublic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x4B8D42",
-    "line": "mov     ebp, [esp+144h+var_12C]",
+    "line": "mov     ebp, [esp+144h+linkedDoor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1495,13 +1495,13 @@
   },
   {
     "ea": "0x4B8D4E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8D50",
-    "line": "call    sub_428E70",
+    "line": "call    ExtraLockData_IsLocked; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,13 +1777,13 @@
   },
   {
     "ea": "0x4B8DE1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8DE3",
-    "line": "call    sub_429990",
+    "line": "call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1879,13 +1879,13 @@
   },
   {
     "ea": "0x4B8E1E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; doorReference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8E20",
-    "line": "call    sub_4D77D0",
+    "line": "call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,13 +1903,13 @@
   },
   {
     "ea": "0x4B8E29",
-    "line": "mov     ecx, [eax+0Ch]",
+    "line": "mov     ecx, [eax+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4B8E2C",
-    "line": "call    sub_429990",
+    "line": "call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x4B8E76",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; doorReference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x4B8E7E",
-    "line": "call    sub_4D77D0",
+    "line": "call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2047,25 +2047,25 @@
   },
   {
     "ea": "0x4B8E87",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8E89",
-    "line": "call    sub_428E90",
+    "line": "call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B8E8E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8E90",
-    "line": "call    sub_4D9070",
+    "line": "call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,13 +2239,13 @@
   },
   {
     "ea": "0x4B8EF2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8EF4",
-    "line": "call    sub_429990",
+    "line": "call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2281,7 +2281,7 @@
   },
   {
     "ea": "0x4B8F07",
-    "line": "fstp    [esp+150h+var_150]; float",
+    "line": "fstp    [esp+150h+easeInTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x4B8F47",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x4B8FB2",
-    "line": "fstp    [esp+150h+var_150]; float",
+    "line": "fstp    [esp+150h+easeInTime]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2623,7 +2623,7 @@
   },
   {
     "ea": "0x4B8FCB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,13 +2653,13 @@
   },
   {
     "ea": "0x4B8FE0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; doorReference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8FE2",
-    "line": "call    sub_4D77D0",
+    "line": "call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,13 +2677,13 @@
   },
   {
     "ea": "0x4B8FEF",
-    "line": "mov     ecx, [eax+0Ch]",
+    "line": "mov     ecx, [eax+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4B8FF2",
-    "line": "call    sub_429990",
+    "line": "call    ExtraLockData_GetPlayerScaledLockLevel; Verified player-scaled lock level calculation. This reads ExtraLockData.level as a signed byte; when flags bit 0x04 is set it adds PlayerCharacter::GetLevel() multiplied by GameSettingFloat fLeveledLockMult and clamps to 99. Fallout's REFR_LOCK::GetLevel accepts an owner reference and uses that reference's calculated level when non-null; Oblivion always uses global PlayerCharacter reference. This is a direct implementation divergence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2827,7 +2827,7 @@
   },
   {
     "ea": "0x4B903F",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2953,13 +2953,13 @@
   },
   {
     "ea": "0x4B9085",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; doorReference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B9087",
-    "line": "call    sub_4D77D0",
+    "line": "call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2977,25 +2977,25 @@
   },
   {
     "ea": "0x4B9090",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B9092",
-    "line": "call    sub_428E90",
+    "line": "call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B9097",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B9099",
-    "line": "call    sub_4D9070",
+    "line": "call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3037,7 +3037,7 @@
   },
   {
     "ea": "0x4B90B1",
-    "line": "cmp     [esp+148h+var_12C], 0",
+    "line": "cmp     [esp+148h+linkedDoor], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3091,7 +3091,7 @@
   },
   {
     "ea": "0x4B90E6",
-    "line": "mov     ebx, [esp+148h+var_12C]",
+    "line": "mov     ebx, [esp+148h+linkedDoor]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3409,13 +3409,13 @@
   },
   {
     "ea": "0x4B91B3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; doorReference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B91B5",
-    "line": "call    sub_4D77D0",
+    "line": "call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3433,25 +3433,25 @@
   },
   {
     "ea": "0x4B91BE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B91C0",
-    "line": "call    sub_428E90",
+    "line": "call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B91C5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B91C7",
-    "line": "call    sub_4D9070",
+    "line": "call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3505,7 +3505,7 @@
   },
   {
     "ea": "0x4B91E8",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
@@ -3523,13 +3523,13 @@
   },
   {
     "ea": "0x4B91EE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B91F0",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -3559,7 +3559,7 @@
   },
   {
     "ea": "0x4B9205",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
@@ -3577,13 +3577,13 @@
   },
   {
     "ea": "0x4B920B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B920D",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -3613,7 +3613,7 @@
   },
   {
     "ea": "0x4B9224",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
@@ -3631,13 +3631,13 @@
   },
   {
     "ea": "0x4B922A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B922C",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -3697,13 +3697,13 @@
   },
   {
     "ea": "0x4B9251",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B9253",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3715,7 +3715,7 @@
   },
   {
     "ea": "0x4B925D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3727,7 +3727,7 @@
   },
   {
     "ea": "0x4B9261",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3817,13 +3817,13 @@
   },
   {
     "ea": "0x4B929A",
-    "line": "push    4",
+    "line": "push    4; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B929C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3841,7 +3841,7 @@
   },
   {
     "ea": "0x4B92A6",
-    "line": "call    sub_4D8270",
+    "line": "call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3997,7 +3997,7 @@
   },
   {
     "ea": "0x4B92FE",
-    "line": "fstp    [esp+154h+var_150]; float",
+    "line": "fstp    [esp+154h+easeInTime]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4015,7 +4015,7 @@
   },
   {
     "ea": "0x4B9308",
-    "line": "fstp    [esp+154h+var_154]; float",
+    "line": "fstp    [esp+154h+weight]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4063,7 +4063,7 @@
   },
   {
     "ea": "0x4B9321",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4165,13 +4165,13 @@
   },
   {
     "ea": "0x4B9354",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B9359",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; linkedDoor",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4183,7 +4183,7 @@
   },
   {
     "ea": "0x4B935D",
-    "line": "call    sub_42B470",
+    "line": "call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4381,7 +4381,7 @@
   },
   {
     "ea": "0x4B93CC",
-    "line": "call    sub_4B7B40",
+    "line": "call    TESObjectDOOR_TransitionPlayerThroughLinkedDoor; Verified: player transition helper for a reference using a linked door. Confirms the supplied TESObjectDOOR matches the reference's base form, obtains its TeleportData target, resolves/loads the destination cell when needed, then calls PlayerCharacter_ChangeCellAndPosition with linked destination position/rotation and handles arrival sound/cell cleanup. Called from TESObjectDOOR_Activate and a route-following script-command wrapper; that wrapper's exact command identity remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4417,7 +4417,7 @@
   },
   {
     "ea": "0x4B93E7",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4561,19 +4561,19 @@
   },
   {
     "ea": "0x4B942D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B942F",
-    "line": "fstp    [esp+150h+var_150]; float",
+    "line": "fstp    [esp+150h+easeInTime]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4B9432",
-    "line": "call    sub_4D8A10",
+    "line": "call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4603,19 +4603,19 @@
   },
   {
     "ea": "0x4B9442",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B9444",
-    "line": "fstp    [esp+154h+var_154]; float",
+    "line": "fstp    [esp+154h+weight]; radians",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4B9447",
-    "line": "call    sub_4D89D0",
+    "line": "call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4741,7 +4741,7 @@
   },
   {
     "ea": "0x4B9486",
-    "line": "call    sub_4D82E0",
+    "line": "call    TESObjectREFR_ClearActionFlagBits",
     "mnemonic": "call",
     "size": 5
   },
@@ -4759,7 +4759,7 @@
   },
   {
     "ea": "0x4B9492",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -4771,7 +4771,7 @@
   },
   {
     "ea": "0x4B9497",
-    "line": "fstp    [esp+154h+var_150]; float",
+    "line": "fstp    [esp+154h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4789,31 +4789,31 @@
   },
   {
     "ea": "0x4B949F",
-    "line": "fstp    [esp+154h+var_154]; float",
+    "line": "fstp    [esp+154h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4B94A2",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B94A4",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B94A6",
-    "line": "push    ebp; int",
+    "line": "push    ebp; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B94A7",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4873,13 +4873,13 @@
   },
   {
     "ea": "0x4B94CB",
-    "line": "push    4",
+    "line": "push    4; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B94CD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4891,7 +4891,7 @@
   },
   {
     "ea": "0x4B94D1",
-    "line": "call    sub_4D82E0",
+    "line": "call    TESObjectREFR_ClearActionFlagBits",
     "mnemonic": "call",
     "size": 5
   },
@@ -4909,7 +4909,7 @@
   },
   {
     "ea": "0x4B94DD",
-    "line": "call    sub_4D8270",
+    "line": "call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.",
     "mnemonic": "call",
     "size": 5
   },

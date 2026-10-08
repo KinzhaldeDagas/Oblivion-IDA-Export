@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6C5760",
+  "chunks": [
+    [
+      "0x6C5760",
+      "0x6C5852"
+    ],
+    [
+      "0x9C7470",
+      "0x9C7493"
+    ]
+  ],
+  "chunks_sha256": "84c03f02192c50a42ca3cade4d3c718350509e06d44caf2c58dfa298b4b41a0a",
+  "comment_regular": "Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.",
+  "comment_repeatable": "Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiControllerManager_AddSequence",
   "end_ea": "0x6C5852",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6C5760",
+  "name": "NiControllerManager_AddSequence",
   "segment": ".text",
   "sha256": "877995c1af0ad57aeb4bf57e892f1711b5877c1d1a7a3dc2e643a19ee8f084ae",
   "size": 242,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6C5760",
-  "type": "char __thiscall(_DWORD *this, int, const char *, int)",
-  "xrefs_from_count": 94,
+  "total_chunk_size": 277,
+  "type": "char __thiscall(NiControllerManager *this, NiControllerSequence *sequence, const char *name, char validateControlledBlocks)",
+  "xrefs_from_count": 105,
   "xrefs_to_count": 4
 }

@@ -1,4 +1,4 @@
-0x80EE10: push    0FFFFFFFFh
+0x80EE10: push    0FFFFFFFFh; SpeedTreeFrondShader factory for shader definition id 5. The shader class exists, but current stock tree geometry attachment evidence does not route any NiGeometry to this shader.
 0x80EE12: push    offset SEH_8122A0
 0x80EE17: mov     eax, large fs:0
 0x80EE1D: push    eax
@@ -23,11 +23,11 @@
 0x80EE4E: call    ShaderDefinition__Init
 0x80EE53: mov     esi, eax
 0x80EE55: mov     eax, ds:0B43104h
-0x80EE5A: push    1; StreamCount
-0x80EE5C: push    5; a2
-0x80EE5E: push    eax; a1
+0x80EE5A: push    1; streamCount
+0x80EE5C: push    5; elementCount
+0x80EE5E: push    eax; renderer
 0x80EE5F: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x80EE67: call    CreateDX9ShaderDeclaration
+0x80EE67: call    CreateDX9ShaderDeclaration; Oblivion NiDX9 declaration factory. Allocates a 0x38-byte NiDX9ShaderDeclaration and initializes elementCount internal element records for each streamCount stream.
 0x80EE6C: mov     edi, [esi]
 0x80EE6E: mov     ebx, eax
 0x80EE70: add     esp, 0Ch
@@ -109,7 +109,7 @@
 0x80EF1A: call    eax
 0x80EF1C: test    eax, eax
 0x80EF1E: jz      short loc_80EF2E
-0x80EF20: cmp     eax, offset dword_B3F684
+0x80EF20: cmp     eax, offset stru_B3F684
 0x80EF25: jz      short loc_80EF2E
 0x80EF27: mov     eax, [eax+4]
 0x80EF2A: test    eax, eax
@@ -122,7 +122,7 @@
 0x80EF41: mov     [esp+20h+var_4], 1
 0x80EF49: jz      short loc_80EF56
 0x80EF4B: mov     ecx, eax; this
-0x80EF4D: call    ??0SpeedTreeFrondShader@@QAE@XZ; SpeedTreeFrondShader::SpeedTreeFrondShader(void)
+0x80EF4D: call    ??0SpeedTreeFrondShader@@QAE@XZ; Only observed SpeedTreeFrondShader construction site: GetShaderDefinition(5) factory allocates/constructs the shader object here.
 0x80EF52: mov     edi, eax
 0x80EF54: jmp     short loc_80EF58
 0x80EF56: xor     edi, edi
@@ -135,8 +135,8 @@
 0x80EF6E: mov     eax, [edx+0A8h]
 0x80EF74: mov     ecx, edi
 0x80EF76: call    eax
-0x80EF78: mov     ecx, edi
-0x80EF7A: call    sub_80E730
+0x80EF78: mov     ecx, edi; this
+0x80EF7A: call    OB_SpeedTreeFrondShader_BuildDrawPass_010201A0; Verified rel32 E8 B1 F7 FF FF resolves80E730. Plugin material-pass wrapper must call80E730, never containing-function query address80E740.
 0x80EF7F: mov     edx, [edi]
 0x80EF81: mov     eax, [edx+88h]
 0x80EF87: mov     ecx, edi
@@ -177,3 +177,20 @@
 0x80EFDC: pop     ebx
 0x80EFDD: add     esp, 10h
 0x80EFE0: retn
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

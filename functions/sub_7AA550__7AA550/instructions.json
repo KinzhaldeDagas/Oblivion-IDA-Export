@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7AA550",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; MEF PERF 2026-10-07 PASS5: PERF-15 Verified avoidable ordered-list work: stable bottom-up merge sort, run width starts1 and doubles until one merge group. No already-ordered probe. For sorted/equal-key N=2^k>=2, k rounds emit N*k nodes and perform N*k/2 comparator calls. Proposed adjacent-order check can use N-1 comparisons and skip relinking under stable valid inputs; actual batch sizes/time unmeasured.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x7AA55A",
-    "line": "call    sub_7A9C30",
+    "line": "call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; MEF PERF 2026-10-07 PASS5: PERF-15 mandatory prelude: ReleaseFreeNodesToGlobalPool runs BEFORE checking active list. Returns existing free chain+0C, clears it, terminates active tail.next. A fast return before this call is not equivalent and may leave active list linked into the free chain. Preserve exactly-once cleanup; post-cleanup decision point7AA55F.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AA55F",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; MEF PERF 2026-10-07 PASS5: PERF-15 candidate decision point after mandatory cleanup, before EBX/EBP/EDI pushes. Ordered supported path could return EAX0 through7AA64E (popESI/addESP10/ret4); disorder must enter native code with original flags/stack preserved. This is a design anchor, not an approved overwrite window or emitted bridge.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7AA5DB",
-    "line": "call    [esp+28h+arg_0]",
+    "line": "call    [esp+28h+compare]",
     "mnemonic": "call",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x7AA5E8",
-    "line": "jle     short loc_7AA5F3",
+    "line": "jle     short loc_7AA5F3; MEF PERF 2026-10-07 PASS5: PERF-15 comparator ABI/stability: signed JLE after compare selects LEFT run when result<=0, preserving ties. Comparator return types corrected from unsigned to signed int; keys themselves remain unsigned16 selector or unsigned32 geometry-data address. Do not interpret FFFFFFFF (-1) as positive.",
     "mnemonic": "jle",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x7AA602",
-    "line": "mov     [ecx], eax",
+    "line": "mov     [ecx], eax; MEF PERF 2026-10-07 PASS5: PERF-15 merge costs: each emitted node is relinked (previous tail.next and current.previous; first node uses owner.head). Even already-sorted/equal input undergoes all rounds. Nodes are reused; there is no active-node allocation/rebuild in this sort. Do not call it heap allocation churn.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7AA63E",
-    "line": "mov     [esp+20h+var_C], edx",
+    "line": "mov     [esp+20h+var_C], edx; MEF PERF 2026-10-07 PASS5: PERF-15 verified bottom-up growth: doubles run width; branch7AA642 repeats unless merge-group count is1; final tail stored7AA64A. Powers-of-two count model applies N>=2. Empty input only does cleanup; singleton still executes one emission round with0 comparator calls.",
     "mnemonic": "mov",
     "size": 4
   },

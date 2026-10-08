@@ -1,1 +1,1 @@
-LPCPINFO
+typedef CPINFO *LPCPINFO;

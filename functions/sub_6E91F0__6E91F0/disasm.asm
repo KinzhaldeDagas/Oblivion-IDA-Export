@@ -2,7 +2,7 @@
 0x6E91F4: push    esi
 0x6E91F5: push    eax
 0x6E91F6: mov     esi, ecx
-0x6E91F8: call    nullsub_returnvVoid_1arg
+0x6E91F8: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6E91FD: mov     eax, [esi+3Ch]
 0x6E9200: push    eax
 0x6E9201: mov     ecx, esi

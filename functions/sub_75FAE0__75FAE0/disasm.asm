@@ -9,7 +9,7 @@
 0x75FAF0: jz      short loc_75FAFD
 0x75FAF2: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
 0x75FAF6: jnz     short loc_75FAFD
-0x75FAF8: call    sub_772560
+0x75FAF8: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x75FAFD: mov     eax, [edi]
 0x75FAFF: test    eax, eax
 0x75FB01: mov     [esi], eax

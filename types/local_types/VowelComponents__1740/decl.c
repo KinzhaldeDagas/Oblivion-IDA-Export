@@ -1,1 +1,1 @@
-VowelComponents
+typedef tagVowelComponents VowelComponents;

@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "QUEUEDUPDATES",
+  "definition": "struct QUEUEDUPDATES\n{\nvoid *unknown[6];\nLPWSTR pFileName;\nBOOL bDeleteExistingResources;\nlist root;\n}\n",
   "id": 18374686479672047032,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unknown",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "void *[6]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pFileName",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bDeleteExistingResources",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "root",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "list"
     }
   ],
   "name": "QUEUEDUPDATES",
+  "ordinal": 8688,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

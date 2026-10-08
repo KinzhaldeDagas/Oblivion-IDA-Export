@@ -1,5 +1,5 @@
 int sub_9FCF20()
 {
-  GameSetting_ConstrAndReg((int *)dword_B3B770, (int)"sBloom", (int)"Bloom");
-  return atexit(sub_A252B0);
+  GameSetting_ConstrAndReg((GameSettingString *)&dword_B3B744[0xB], "sBloom", "Bloom"); /*0x9fcf2f*/
+  return atexit(sub_A252B0); /*0x9fcf3f*/
 }

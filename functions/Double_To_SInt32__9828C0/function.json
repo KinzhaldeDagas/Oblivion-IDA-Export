@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 481,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 1042,
+  "chunks": [
+    [
+      "0x9828C0",
+      "0x9828DC"
+    ]
+  ],
+  "chunks_sha256": "a348340fd6ae552ac74d1c34a8bbf3ebcca6c7b571950e60440f06d646b696bc",
+  "comment_regular": "Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
+  "comment_repeatable": "Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Double_To_SInt32",
   "end_ea": "0x9828DC",
+  "evidence_confidence": "Unknown",
   "flags": 23620,
   "has_pseudocode": true,
   "name": "Double_To_SInt32",
   "segment": ".text",
   "sha256": "a348340fd6ae552ac74d1c34a8bbf3ebcca6c7b571950e60440f06d646b696bc",
   "size": 28,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9828C0",
+  "total_chunk_size": 28,
   "type": "int __usercall@<eax>(double result@<st0>)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 1047

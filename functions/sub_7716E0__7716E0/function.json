@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7716E0",
+      "0x771785"
+    ]
+  ],
+  "chunks_sha256": "2cdcc62d334516213d4be7cb430685218945e1c08bbc489e27729b0c35c1021a",
+  "comment_regular": "Conditional NPOT fallback: on the relevant renderer capability path, replace ADDRESSU/V with CLAMP and clear legacy wrap states.",
+  "comment_repeatable": "Conditional NPOT fallback: on the relevant renderer capability path, replace ADDRESSU/V with CLAMP and clear legacy wrap states.\nDX11 GPU-world verified: needsNPOT and flags bit8 clear/bit4 set => ADDRESSU/V=CLAMP(3), then alternating RS(128+i)=0 and RS(198+i)=0 for i0..7. GetFlags is renderer virtual+54, stock 769F20. These effects occur only after nonnull resolution.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7716E0",
+  "display_name": "OB_NiD3DTextureStage_ApplyNPOTAddressFallback_010201A0",
   "end_ea": "0x771785",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7716E0",
+  "name": "OB_NiD3DTextureStage_ApplyNPOTAddressFallback_010201A0",
   "segment": ".text",
   "sha256": "2cdcc62d334516213d4be7cb430685218945e1c08bbc489e27729b0c35c1021a",
   "size": 165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7716E0",
-  "type": "void __thiscall(_DWORD *this, char)",
+  "total_chunk_size": 165,
+  "type": "void __thiscall(void *this, unsigned __int8 needsNPOTFallback)",
   "xrefs_from_count": 61,
   "xrefs_to_count": 1
 }

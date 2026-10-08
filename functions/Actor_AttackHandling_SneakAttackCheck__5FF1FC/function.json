@@ -1,19 +1,32 @@
 {
-  "callees_count": 25,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x5FF1FC",
+      "0x5FF351"
+    ]
+  ],
+  "chunks_sha256": "214b3c3a87136a68f9545962306328ec8877f5f4c939ed2afef313a1d416c0ae",
+  "comment_regular": "Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.",
+  "comment_repeatable": "Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "Actor_AttackHandling:::SneakAttackCheck",
+  "display_name": "Actor_EvaluateSneakAttack",
   "end_ea": "0x5FF351",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Actor_AttackHandling:::SneakAttackCheck",
+  "name": "Actor_EvaluateSneakAttack",
   "segment": ".text",
   "sha256": "214b3c3a87136a68f9545962306328ec8877f5f4c939ed2afef313a1d416c0ae",
   "size": 341,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5FF1FC",
-  "type": "void __usercall(int@<ebx>, PlayerCharacter *@<edi>, TESObjectREFR *@<esi>, int, int, int, int, int, float, int, int, int, int, int, int, float, float, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int string)",
+  "total_chunk_size": 341,
+  "type": "void __usercall(TESObjectREFR *@<edi>, TESObjectREFR *@<esi>, int, int, int, int, int, float, int, int, int, int, int, int, float, float, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int string)",
   "xrefs_from_count": 131,
   "xrefs_to_count": 3
 }

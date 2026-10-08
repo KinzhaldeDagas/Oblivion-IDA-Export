@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x69E730",
+      "0x69E806"
+    ]
+  ],
+  "chunks_sha256": "565a041d95588cd457aeb38fe2c09ff2880ce38a237441e19e2f00d5ed530776",
+  "comment_regular": "Verified (Oblivion): loads base hit-effect data, optionally starts an I/O task using the owner ActiveEffect's model path, then reads a 16-bit length and allocates/stores that many payload bytes at object +0x2C. The payload's precise in-memory semantic type remains Candidate.",
+  "comment_repeatable": "Verified (Oblivion): loads base hit-effect data, optionally starts an I/O task using the owner ActiveEffect's model path, then reads a 16-bit length and allocates/stores that many payload bytes at object +0x2C. The payload's precise in-memory semantic type remains Candidate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_69E730",
+  "display_name": "MagicModelHitEffect_LoadExtraData",
   "end_ea": "0x69E806",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_69E730",
+  "name": "MagicModelHitEffect_LoadExtraData",
   "segment": ".text",
   "sha256": "565a041d95588cd457aeb38fe2c09ff2880ce38a237441e19e2f00d5ed530776",
   "size": 214,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69E730",
-  "type": "unsigned __int16 __userpurge@<ax>(_DWORD *this@<ecx>, char@<bpl>, int, int Dst)",
+  "total_chunk_size": 214,
+  "type": "unsigned __int16 __userpurge@<ax>(MagicHitEffect *this@<ecx>, char@<bpl>, ActiveEffect *ownerActiveEffect, TESObjectREFR *Dst)",
   "xrefs_from_count": 89,
   "xrefs_to_count": 1
 }

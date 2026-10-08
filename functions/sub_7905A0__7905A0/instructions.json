@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7905A0",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion 1.2.0.416: checked-template thunk to the shared 24-byte copy-backward adapter; used by both vector<stVec> and branch-flare insert-fill paths.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7905A1",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7905A5",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7905B1",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7905B6",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x7905BB",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7905BF",
-    "line": "push    eax",
+    "line": "push    eax; destinationEnd",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7905C0",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7905C1",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7905C2",
-    "line": "call    sub_7902F0",
+    "line": "call    OB_stVector24_CopyBackwardRangeAdapter_010201A0; Oblivion 1.2.0.416: shared 24-byte copy-backward adapter; invokes the six-dword primitive and returns destinationEnd minus the source record count.",
     "mnemonic": "call",
     "size": 5
   },

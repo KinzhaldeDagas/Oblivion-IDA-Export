@@ -41,27 +41,27 @@
 0x75C88A: push    edi
 0x75C88B: lea     esi, [ecx+64h]
 0x75C88E: mov     ecx, 0Dh
-0x75C893: lea     edi, [esp+16Ch+var_9C]
+0x75C893: lea     edi, [esp+16Ch+local]
 0x75C89A: rep movsd
 0x75C89C: mov     esi, [ebp+10h]
 0x75C89F: add     esi, 64h ; 'd'
 0x75C8A2: mov     ecx, 0Dh
 0x75C8A7: lea     edi, [esp+16Ch+var_68]
-0x75C8AE: lea     eax, [esp+16Ch+var_34]
+0x75C8AE: lea     eax, [esp+16Ch+parent]
 0x75C8B5: rep movsd
 0x75C8B7: push    eax
 0x75C8B8: lea     ecx, [esp+170h+var_68]
-0x75C8BF: call    sub_718A80
-0x75C8C4: lea     ecx, [esp+16Ch+var_9C]
-0x75C8CB: push    ecx
-0x75C8CC: lea     edx, [esp+170h+var_D0]
-0x75C8D3: push    edx
-0x75C8D4: lea     ecx, [esp+174h+var_34]
-0x75C8DB: call    sub_53D7A0
+0x75C8BF: call    sub_718A80;
+0x75C8C4: lea     ecx, [esp+16Ch+local]
+0x75C8CB: push    ecx; local
+0x75C8CC: lea     edx, [esp+170h+out]
+0x75C8D3: push    edx; out
+0x75C8D4: lea     ecx, [esp+174h+parent]; parent
+0x75C8DB: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x75C8E0: cmp     byte ptr [ebp+60h], 0
-0x75C8E4: mov     edi, [esp+16Ch+var_AC]
-0x75C8EB: mov     eax, [esp+16Ch+var_A8]
-0x75C8F2: mov     ecx, [esp+16Ch+var_A4]
+0x75C8E4: mov     edi, [esp+16Ch+out.pos.x]
+0x75C8EB: mov     eax, [esp+16Ch+out.pos.y]
+0x75C8F2: mov     ecx, [esp+16Ch+out.pos.z]
 0x75C8F9: mov     [esp+16Ch+var_120], edi
 0x75C8FD: mov     [esp+16Ch+var_11C], eax
 0x75C901: mov     [esp+16Ch+var_118], ecx
@@ -70,7 +70,7 @@
 0x75C90A: push    edx
 0x75C90B: lea     eax, [esp+170h+var_114]
 0x75C90F: push    eax
-0x75C910: lea     ecx, [esp+174h+var_D0]
+0x75C910: lea     ecx, [esp+174h+out]
 0x75C917: call    sub_7101F0
 0x75C91C: mov     ecx, [eax]
 0x75C91E: mov     edx, [eax+4]
@@ -87,11 +87,11 @@
 0x75C946: mov     edx, ds:0B3F9ACh
 0x75C94C: mov     dword ptr [esp+16Ch+var_14C], ecx
 0x75C950: lea     esi, [ebp+30h]
-0x75C953: push    offset dword_B28B54
-0x75C958: mov     ecx, esi
+0x75C953: push    offset stru_B28B54; other
+0x75C958: mov     ecx, esi; this
 0x75C95A: mov     dword ptr [esp+170h+var_14C+4], edx
 0x75C95E: mov     [esp+170h+var_144], eax
-0x75C962: call    sub_8AA390
+0x75C962: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x75C967: fld     [esp+16Ch+arg_0]
 0x75C96E: test    al, al
 0x75C970: jz      loc_75CA1F
@@ -197,7 +197,7 @@
 0x75CAC8: lea     ecx, [esp+16Ch+var_134]
 0x75CACC: mov     dword ptr [esp+16Ch+var_134], edx
 0x75CAD0: mov     dword ptr [esp+16Ch+var_134+4], eax
-0x75CAD4: call    sub_43F350
+0x75CAD4: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x75CAD9: fstp    [esp+16Ch+var_D4]
 0x75CAE0: cmp     byte ptr [ebp+62h], 0
 0x75CAE4: jz      short loc_75CB08
@@ -213,7 +213,6 @@
 0x75CB0A: cmp     [ebx+48h], di
 0x75CB0E: jbe     loc_75CE22
 0x75CB14: jmp     short loc_75CB20
-0x75CB16: align 10h
 0x75CB20: mov     eax, [ebx+5Ch]
 0x75CB23: fld     [esp+16Ch+arg_0]
 0x75CB2A: movzx   ecx, di
@@ -281,7 +280,7 @@
 0x75CC12: lea     ecx, [esp+16Ch+var_140]
 0x75CC16: mov     dword ptr [esp+16Ch+var_140], eax
 0x75CC1A: mov     [esp+16Ch+var_138], edx
-0x75CC1E: call    sub_43F350
+0x75CC1E: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x75CC23: fstp    st
 0x75CC25: fld     dword ptr [esp+16Ch+var_134+4]
 0x75CC29: fld     dword ptr [esp+16Ch+var_140+4]

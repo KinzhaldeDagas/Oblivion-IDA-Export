@@ -1,4 +1,4 @@
 char __thiscall sub_4A9800(_BYTE *this)
 {
-  return *(this + 0x5C);
+  return *(this + 0x5C); /*0x4a9803*/
 }

@@ -1,1 +1,1 @@
-PROPSPEC
+typedef tagPROPSPEC PROPSPEC;

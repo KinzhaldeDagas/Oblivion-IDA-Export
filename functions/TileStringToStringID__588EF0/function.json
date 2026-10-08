@@ -1,18 +1,31 @@
 {
-  "callees_count": 18,
-  "callers_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x588EF0",
+      "0x588FBE"
+    ]
+  ],
+  "chunks_sha256": "297917a918f66cf704c7f397c95dce84c6affffc49a2890e3388b7f33c07fcf7",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "comment_repeatable": "Verified: forward lookup is case-insensitive; underscore names scan dynamic table while other names use character buckets. Successful lookup increments entry+4. Custom IDs are runtime registry state; resolve by name rather than assuming deterministic assignment across mod/load order.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "TileStringToStringID",
   "end_ea": "0x588FBE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TileStringToStringID",
   "segment": ".text",
   "sha256": "297917a918f66cf704c7f397c95dce84c6affffc49a2890e3388b7f33c07fcf7",
   "size": 206,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x588EF0",
+  "total_chunk_size": 206,
   "type": "int __cdecl(unsigned __int8 *)",
   "xrefs_from_count": 101,
   "xrefs_to_count": 7

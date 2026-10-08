@@ -61,7 +61,7 @@
 0x6DA625: lea     eax, [esp+30h+var_C]
 0x6DA629: fstp    [esp+30h+var_30]; float
 0x6DA62C: push    eax; int
-0x6DA62D: call    sub_6BBBA0
+0x6DA62D: call    NiPosKey_EvaluateTrack; Oblivion 3-component position/vector key-track evaluator. One key or sentinel time returns key value at +4. Otherwise cursor-assisted bracket search uses the supplied byte stride, normalized segment time selects the interpolation-type dispatch table, and the lower-key cursor is written back.
 0x6DA632: fld     [esp+34h+arg_0]
 0x6DA636: mov     ecx, [eax]
 0x6DA638: mov     [esi+0Ch], ecx

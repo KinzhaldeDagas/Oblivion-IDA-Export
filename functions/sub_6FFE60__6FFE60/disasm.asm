@@ -1,4 +1,4 @@
-0x6FFE60: push    edi
+0x6FFE60: push    edi; Prepends a non-null NiTimeController to NiObjectNET's refcounted controller chain, first setting the controller's next link to the current head.
 0x6FFE61: mov     edi, [esp+4+a2]
 0x6FFE65: test    edi, edi
 0x6FFE67: jz      short loc_6FFE81

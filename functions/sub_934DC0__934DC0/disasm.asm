@@ -74,7 +74,6 @@
 0x934EC1: mov     [esp+15C0h+var_1594], eax; int
 0x934EC5: lea     ebx, [eax+10h]
 0x934EC8: jmp     short loc_934ED0
-0x934ECA: align 10h
 0x934ED0: mov     eax, [ebp+arg_C]
 0x934ED3: test    eax, eax
 0x934ED5: mov     edx, [esp+15C0h+var_159C]
@@ -204,13 +203,13 @@
 0x935040: mov     ecx, [edi]
 0x935042: mov     edx, [ecx]
 0x935044: mov     ecx, [edi+8]
-0x935047: mov     [esp+15E0h+var_15B8], edx
+0x935047: mov     dword ptr [esp+15E0h+var_15B8], edx
 0x93504B: mov     dl, [ecx+0Ch]
 0x93504E: mov     byte ptr [esp+15E0h+var_156C], dl
 0x935052: mov     edx, [eax]
 0x935054: mov     ecx, eax
 0x935056: call    dword ptr [edx+8]
-0x935059: mov     ecx, [esp+15E0h+var_15B8]
+0x935059: mov     ecx, dword ptr [esp+15E0h+var_15B8]
 0x93505D: mov     [esp+15E0h+var_15D0], eax
 0x935061: mov     eax, [ecx]
 0x935063: call    dword ptr [eax+8]
@@ -233,7 +232,7 @@
 0x9350A0: mov     byte ptr [ebx+2], 0
 0x9350A4: cmp     dword ptr [eax+ecx+16C4h], 2
 0x9350AC: mov     [esp+15E0h+var_15D0], edi
-0x9350B0: mov     [esp+15E0h+var_15B8], 0
+0x9350B0: mov     dword ptr [esp+15E0h+var_15B8], 0
 0x9350B8: jnz     short loc_93511A
 0x9350BA: mov     ecx, [edi]
 0x9350BC: mov     eax, [edi+4]
@@ -249,7 +248,7 @@
 0x9350EC: push    ecx
 0x9350ED: xorps   xmm0, xmm1
 0x9350F0: lea     ecx, [esp+15E4h+var_1290]
-0x9350F7: mov     [esp+15E4h+var_15B8], 1
+0x9350F7: mov     dword ptr [esp+15E4h+var_15B8], 1
 0x9350FF: mov     dword ptr [esp+15E4h+var_1298], edx
 0x935106: mov     [esp+15E4h+var_1294], eax
 0x93510D: movaps  [esp+15E4h+var_1248+8], xmm0
@@ -261,7 +260,7 @@
 0x93512C: add     eax, edx
 0x93512E: mov     edx, [esp+15E0h+var_15D0]
 0x935132: test    ecx, ecx
-0x935134: mov     cl, byte ptr [esp+15E0h+var_15B8]
+0x935134: mov     cl, [esp+15E0h+var_15B8]
 0x935138: jz      short loc_935165
 0x93513A: add     cl, 4
 0x93513D: mov     [ebx], cl

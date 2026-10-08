@@ -65,7 +65,6 @@
 0x5860F4: cmp     edx, ebp
 0x5860F6: jle     short loc_586111
 0x5860F8: jmp     short loc_586100
-0x5860FA: align 10h
 0x586100: cmp     [esp+eax+1F90h+Src], 7Ch ; '|'
 0x586108: jz      short loc_586111
 0x58610A: add     eax, 1
@@ -95,7 +94,6 @@
 0x586162: or      ebp, 0FFFFFFFFh
 0x586165: mov     bl, 2Dh ; '-'
 0x586167: jmp     short loc_586170
-0x586169: align 10h
 0x586170: cmp     [esp+eax+1F90h+Src], 0Ah
 0x586178: jnz     short loc_5861B3
 0x58617A: cmp     [esp+eax+1F90h+var_1E39], bl
@@ -227,7 +225,7 @@
 0x58632E: call    Camera_SetFrustum
 0x586333: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586337: push    eax
-0x586338: call    FormHeapFree
+0x586338: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58633D: add     esp, 4
 0x586340: mov     al, 1
 0x586342: jmp     loc_58740B
@@ -243,21 +241,21 @@
 0x586366: push    ecx
 0x586367: lea     edx, [esp+1F94h+var_1F70]
 0x58636B: push    edx
-0x58636C: mov     [esp+1F98h+var_1F70], eax
+0x58636C: mov     dword ptr [esp+1F98h+var_1F70], eax
 0x586370: mov     [esp+1F98h+var_1F74], eax
 0x586374: lea     eax, [esp+1F98h+Src]
 0x58637B: push    offset aUszI; "usz %i"
 0x586380: push    eax; Src
 0x586381: call    _sscanf
 0x586386: mov     ecx, [esp+1FA0h+var_1F74]
-0x58638A: mov     edx, [esp+1FA0h+var_1F70]
+0x58638A: mov     edx, dword ptr [esp+1FA0h+var_1F70]
 0x58638E: push    ecx
 0x58638F: push    edx
 0x586390: call    sub_579370
 0x586395: mov     eax, [esp+1FA8h+var_1F68.m_data]
 0x586399: add     esp, 18h
 0x58639C: push    eax
-0x58639D: call    FormHeapFree
+0x58639D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5863A2: add     esp, 4
 0x5863A5: mov     al, 1
 0x5863A7: jmp     loc_58740B
@@ -305,7 +303,7 @@
 0x586450: mov     ecx, ebp
 0x586452: call    eax
 0x586454: push    eax
-0x586455: push    offset dword_B3FAB0
+0x586455: push    offset parent
 0x58645A: call    NiRTTI_Cast
 0x58645F: add     esp, 8
 0x586462: cmp     eax, esi
@@ -316,7 +314,7 @@
 0x586471: call    eax
 0x586473: mov     eax, [eax+1Ch]
 0x586476: push    eax
-0x586477: push    offset dword_B3FAB0
+0x586477: push    offset parent
 0x58647C: call    NiRTTI_Cast
 0x586481: add     esp, 8
 0x586484: fld     dword ptr ds:0A30634h
@@ -328,11 +326,11 @@
 0x586494: push    eax; int
 0x586495: call    sub_572850
 0x58649A: push    esi
-0x58649B: call    FormHeapFree
+0x58649B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5864A0: mov     eax, [esp+1FA4h+var_1F68.m_data]
 0x5864A4: add     esp, 14h
 0x5864A7: push    eax
-0x5864A8: call    FormHeapFree
+0x5864A8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5864AD: add     esp, 4
 0x5864B0: mov     al, 1
 0x5864B2: jmp     loc_58740B
@@ -354,19 +352,19 @@
 0x5864E1: push    0; int
 0x5864E3: push    offset aDataMenusStrin; "Data\\Menus\\strings.xml"
 0x5864E8: call    sub_584670
-0x5864ED: mov     ecx, [ebp+68h]; TileWindow *
+0x5864ED: mov     ecx, [ebp+68h]; this
 0x5864F0: add     esp, 8
 0x5864F3: push    offset aDataMenusStrin; "Data\\Menus\\strings.xml"
-0x5864F8: call    Menu_LoadXML
+0x5864F8: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5864FD: mov     esi, eax
-0x5864FF: push    0
-0x586501: push    0
-0x586503: mov     ecx, esi
-0x586505: call    sub_58D1C0
+0x5864FF: push    0; sibling
+0x586501: push    0; parent
+0x586503: mov     ecx, esi; this
+0x586505: call    Tile__SetParent; Verified: detaches from old parent list and decrements child-count trait 0xFD0, assigns parent +0x10, increments new parent count, inserts in new parent child list. Optional sibling argument controls placement; null uses AddHead. This is attachment, not a float-value setter.
 0x58650A: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x58650E: push    eax
 0x58650F: mov     [ebp+6Ch], esi
-0x586512: call    FormHeapFree
+0x586512: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586517: add     esp, 4
 0x58651A: mov     al, 1
 0x58651C: jmp     loc_58740B
@@ -384,7 +382,7 @@
 0x586548: mov     eax, [esp+1F94h+var_1F68.m_data]
 0x58654C: add     esp, 4
 0x58654F: push    eax
-0x586550: call    FormHeapFree
+0x586550: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586555: add     esp, 4
 0x586558: mov     al, 1
 0x58655A: jmp     loc_58740B
@@ -402,7 +400,7 @@
 0x586586: mov     eax, [esp+1F94h+var_1F68.m_data]
 0x58658A: add     esp, 4
 0x58658D: push    eax
-0x58658E: call    FormHeapFree
+0x58658E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586593: add     esp, 4
 0x586596: mov     al, 1
 0x586598: jmp     loc_58740B
@@ -418,8 +416,8 @@
 0x5865BD: push    3EEh
 0x5865C2: call    Menu_GetOpenMenuTile
 0x5865C7: add     esp, 4
-0x5865CA: push    eax; int
-0x5865CB: call    sub_58B800
+0x5865CA: push    eax; target
+0x5865CB: call    Tile__GetTileByName; Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.
 0x5865D0: mov     esi, eax
 0x5865D2: add     esp, 8
 0x5865D5: test    esi, esi
@@ -428,20 +426,20 @@
 0x5865E2: mov     ecx, esi
 0x5865E4: call    Tile_GetFloat
 0x5865E9: fcomp   dword ptr ds:0A379B4h
-0x5865EF: mov     [esp+1F90h+var_1F70], 1
+0x5865EF: mov     dword ptr [esp+1F90h+var_1F70], 1
 0x5865F7: fnstsw  ax
 0x5865F9: test    ah, 44h
 0x5865FC: jnp     short loc_586606
-0x5865FE: mov     [esp+1F90h+var_1F70], 2
-0x586606: fild    [esp+1F90h+var_1F70]
+0x5865FE: mov     dword ptr [esp+1F90h+var_1F70], 2
+0x586606: fild    dword ptr [esp+1F90h+var_1F70]
 0x58660A: push    ecx
 0x58660B: mov     ecx, esi; this
-0x58660D: fstp    [esp+1F94h+var_1F94]; a3
-0x586610: push    0FA1h; a2
-0x586615: call    Tile_SetFloat
+0x58660D: fstp    [esp+1F94h+var_1F94]; value
+0x586610: push    0FA1h; propertyCode
+0x586615: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58661A: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x58661E: push    eax
-0x58661F: call    FormHeapFree
+0x58661F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586624: add     esp, 4
 0x586627: mov     al, 1
 0x586629: jmp     loc_58740B
@@ -492,7 +490,7 @@
 0x5866DC: call    sub_587550
 0x5866E1: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x5866E5: push    eax
-0x5866E6: call    FormHeapFree
+0x5866E6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5866EB: add     esp, 4
 0x5866EE: mov     al, 1
 0x5866F0: jmp     loc_58740B
@@ -522,7 +520,7 @@
 0x586747: call    sub_587440
 0x58674C: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586750: push    eax
-0x586751: call    FormHeapFree
+0x586751: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586756: add     esp, 4
 0x586759: mov     al, 1
 0x58675B: jmp     loc_58740B
@@ -548,7 +546,7 @@
 0x58679E: mov     eax, [esp+1F9Ch+var_1F68.m_data]
 0x5867A2: add     esp, 0Ch
 0x5867A5: push    eax
-0x5867A6: call    FormHeapFree
+0x5867A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5867AB: add     esp, 4
 0x5867AE: mov     al, 1
 0x5867B0: jmp     loc_58740B
@@ -583,7 +581,7 @@
 0x586807: jnz     short loc_5867E2
 0x586809: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x58680D: push    eax
-0x58680E: call    FormHeapFree
+0x58680E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586813: add     esp, 4
 0x586816: mov     al, 1
 0x586818: jmp     loc_58740B
@@ -598,7 +596,7 @@
 0x586838: call    CloseAllMenus
 0x58683D: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586841: push    eax
-0x586842: call    FormHeapFree
+0x586842: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586847: add     esp, 4
 0x58684A: mov     al, 1
 0x58684C: jmp     loc_58740B
@@ -615,9 +613,9 @@
 0x586877: push    edx
 0x586878: push    offset aVisibleI; "visible %i"
 0x58687D: push    eax; Src
-0x58687E: mov     [esp+1F9Ch+var_1F70], 0
+0x58687E: mov     dword ptr [esp+1F9Ch+var_1F70], 0
 0x586886: call    _sscanf
-0x58688B: mov     ecx, [esp+1F9Ch+var_1F70]
+0x58688B: mov     ecx, dword ptr [esp+1F9Ch+var_1F70]
 0x58688F: add     esp, 0Ch
 0x586892: push    ecx
 0x586893: push    1
@@ -633,7 +631,7 @@
 0x5868B3: mov     eax, [esp+1F9Ch+var_1F68.m_data]
 0x5868B7: add     esp, 0Ch
 0x5868BA: push    eax
-0x5868BB: call    FormHeapFree
+0x5868BB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5868C0: add     esp, 4
 0x5868C3: mov     al, 1
 0x5868C5: jmp     loc_58740B
@@ -659,7 +657,7 @@
 0x586903: jnz     short loc_5868F0
 0x586905: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586909: push    eax
-0x58690A: call    FormHeapFree
+0x58690A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x58690F: add     esp, 4
 0x586912: mov     al, 1
 0x586914: jmp     loc_58740B
@@ -678,7 +676,7 @@
 0x586944: mov     eax, [esp+1F98h+var_1F68.m_data]
 0x586948: add     esp, 8
 0x58694B: push    eax
-0x58694C: call    FormHeapFree
+0x58694C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586951: add     esp, 4
 0x586954: mov     al, 1
 0x586956: jmp     loc_58740B
@@ -693,7 +691,7 @@
 0x58697A: fldz
 0x58697C: lea     eax, [esp+1F90h+var_1F7C]
 0x586980: push    eax
-0x586981: fst     [esp+1F94h+var_1F70]
+0x586981: fst     dword ptr [esp+1F94h+var_1F70]
 0x586985: lea     ecx, [esp+1F94h+var_1F74]
 0x586989: fst     [esp+1F94h+var_1F74]
 0x58698D: push    ecx
@@ -704,7 +702,7 @@
 0x58699E: push    offset aPlayerposFFF; "playerpos %f %f %f"
 0x5869A3: push    eax; Src
 0x5869A4: call    _sscanf
-0x5869A9: fld     [esp+1FA4h+var_1F70]
+0x5869A9: fld     dword ptr [esp+1FA4h+var_1F70]
 0x5869AD: fstp    [esp+1FA4h+var_1F60]
 0x5869B1: push    1; arg1
 0x5869B3: fld     [esp+1FA8h+var_1F74]
@@ -730,10 +728,10 @@
 0x5869F5: push    ecx
 0x5869F6: mov     ecx, eax; this
 0x5869F8: fstp    [esp+1F98h+var_1F98]; a2
-0x5869FB: call    NiAVObject_UpdateNiAVObject
+0x5869FB: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x586A00: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586A04: push    eax
-0x586A05: call    FormHeapFree
+0x586A05: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586A0A: add     esp, 4
 0x586A0D: mov     al, 1
 0x586A0F: jmp     loc_58740B
@@ -757,11 +755,11 @@
 0x586A50: push    0
 0x586A52: push    5
 0x586A54: push    edx
-0x586A55: call    sub_5D2070
+0x586A55: call    RepairMenu_Create
 0x586A5A: mov     eax, [esp+1FACh+var_1F68.m_data]
 0x586A5E: add     esp, 1Ch
 0x586A61: push    eax
-0x586A62: call    FormHeapFree
+0x586A62: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586A67: add     esp, 4
 0x586A6A: mov     al, 1
 0x586A6C: jmp     loc_58740B
@@ -786,9 +784,9 @@
 0x586AB4: push    ecx; Src
 0x586AB5: call    _sscanf
 0x586ABA: lea     edx, [esp+1FA4h+var_1F38]
-0x586ABE: push    edx; unsigned __int8 *
-0x586ABF: push    0; int
-0x586AC1: call    sub_58B800
+0x586ABE: push    edx; selector
+0x586ABF: push    0; target
+0x586AC1: call    Tile__GetTileByName; Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.
 0x586AC6: mov     esi, eax
 0x586AC8: lea     eax, [esp+1FACh+ArgList]
 0x586ACF: push    eax; unsigned __int8 *
@@ -804,13 +802,13 @@
 0x586AE8: call    sub_585F40
 0x586AED: fld     [esp+1F98h+var_1F7C.m_data]
 0x586AF1: add     esp, 4
-0x586AF4: fstp    [esp+1F94h+var_1F94]; a3
-0x586AF7: push    edi; a2
+0x586AF4: fstp    [esp+1F94h+var_1F94]; value
+0x586AF7: push    edi; propertyCode
 0x586AF8: mov     ecx, esi; this
-0x586AFA: call    Tile_SetFloat
+0x586AFA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x586AFF: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586B03: push    eax
-0x586B04: call    FormHeapFree
+0x586B04: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586B09: add     esp, 4
 0x586B0C: mov     al, 1
 0x586B0E: jmp     loc_58740B
@@ -821,7 +819,7 @@
 0x586B22: call    Console_FormatPrint
 0x586B27: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586B2B: push    eax
-0x586B2C: call    FormHeapFree
+0x586B2C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586B31: add     esp, 4
 0x586B34: mov     al, 1
 0x586B36: jmp     loc_58740B
@@ -832,7 +830,7 @@
 0x586B47: call    Console_FormatPrint
 0x586B4C: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586B50: push    eax
-0x586B51: call    FormHeapFree
+0x586B51: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586B56: add     esp, 4
 0x586B59: mov     al, 1
 0x586B5B: jmp     loc_58740B
@@ -845,7 +843,7 @@
 0x586B77: test    eax, eax
 0x586B79: jnz     short loc_586BD4
 0x586B7B: call    InterfaceManager_GetDepth
-0x586B80: call    Double_To_SInt32
+0x586B80: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x586B85: push    eax; ArgList
 0x586B86: push    offset aMaxDepthI; "Max Depth: %i"
 0x586B8B: push    ebx; int
@@ -858,7 +856,7 @@
 0x586BA0: push    0FABh
 0x586BA5: mov     ecx, eax
 0x586BA7: call    Tile_GetFloat
-0x586BAC: call    Double_To_SInt32
+0x586BAC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x586BB1: push    eax; ArgList
 0x586BB2: push    offset aCursorDepthI; "Cursor Depth: %i"
 0x586BB7: push    ebx; int
@@ -866,7 +864,7 @@
 0x586BBD: mov     eax, [esp+1F9Ch+var_1F68.m_data]
 0x586BC1: add     esp, 0Ch
 0x586BC4: push    eax
-0x586BC5: call    FormHeapFree
+0x586BC5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586BCA: add     esp, 4
 0x586BCD: mov     al, 1
 0x586BCF: jmp     loc_58740B
@@ -882,7 +880,7 @@
 0x586BF4: mov     byte ptr [eax+14h], 1
 0x586BF8: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586BFC: push    eax
-0x586BFD: call    FormHeapFree
+0x586BFD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586C02: add     esp, 4
 0x586C05: mov     al, 1
 0x586C07: jmp     loc_58740B
@@ -898,7 +896,7 @@
 0x586C2C: mov     byte ptr [eax+14h], 0
 0x586C30: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586C34: push    eax
-0x586C35: call    FormHeapFree
+0x586C35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586C3A: add     esp, 4
 0x586C3D: mov     al, 1
 0x586C3F: jmp     loc_58740B
@@ -936,7 +934,7 @@
 0x586CAD: call    sub_596150
 0x586CB2: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586CB6: push    eax
-0x586CB7: call    FormHeapFree
+0x586CB7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586CBC: add     esp, 4
 0x586CBF: mov     al, 1
 0x586CC1: jmp     loc_58740B
@@ -946,7 +944,7 @@
 0x586CD1: mov     eax, [esp+1F98h+var_1F68.m_data]
 0x586CD5: add     esp, 8
 0x586CD8: push    eax
-0x586CD9: call    FormHeapFree
+0x586CD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586CDE: add     esp, 4
 0x586CE1: mov     al, 1
 0x586CE3: jmp     loc_58740B
@@ -984,7 +982,7 @@
 0x586D5C: mov     eax, [esp+1F94h+var_1F68.m_data]
 0x586D60: add     esp, 4
 0x586D63: push    eax
-0x586D64: call    FormHeapFree
+0x586D64: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586D69: add     esp, 4
 0x586D6C: mov     al, 1
 0x586D6E: jmp     loc_58740B
@@ -1109,7 +1107,7 @@
 0x586F08: call    eax
 0x586F0A: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586F0E: push    eax
-0x586F0F: call    FormHeapFree
+0x586F0F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586F14: add     esp, 4
 0x586F17: mov     al, 1
 0x586F19: jmp     loc_58740B
@@ -1163,18 +1161,18 @@
 0x586FC7: call    Script_StaticDestructor
 0x586FCC: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586FD0: push    eax
-0x586FD1: call    FormHeapFree
+0x586FD1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x586FD6: add     esp, 4
 0x586FD9: mov     al, 1
 0x586FDB: jmp     loc_58740B
 0x586FE0: lea     ecx, [ebx+4]
-0x586FE3: call    NiTPointerList__FreeAllNodes
+0x586FE3: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x586FE8: mov     ecx, ebx
 0x586FEA: mov     dword ptr [ebx+2Ch], 0
 0x586FF1: call    sub_585620
 0x586FF6: mov     eax, [esp+1F90h+var_1F68.m_data]
 0x586FFA: push    eax
-0x586FFB: call    FormHeapFree
+0x586FFB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x587000: add     esp, 4
 0x587003: mov     al, 1
 0x587005: jmp     loc_58740B
@@ -1348,7 +1346,6 @@
 0x58727D: jz      loc_587325
 0x587283: jle     short loc_5872A5
 0x587285: jmp     short loc_587290
-0x587287: align 10h
 0x587290: mov     cl, [esp+eax+1F90h+var_1E39]
 0x587297: mov     [esp+eax+1F90h+Src], cl
 0x58729E: sub     eax, 1
@@ -1380,7 +1377,6 @@
 0x5872F7: mov     esi, edx
 0x5872F9: jle     short loc_587315
 0x5872FB: jmp     short loc_587300
-0x5872FD: align 10h
 0x587300: mov     cl, [esp+esi+1F90h+Src]
 0x587307: mov     [esp+esi+1F90h+var_1E37], cl
 0x58730E: sub     esi, 1
@@ -1416,9 +1412,9 @@
 0x587393: push    ecx
 0x587394: mov     ecx, esi
 0x587396: call    sub_585AC0
-0x58739B: mov     edx, [esp+1F90h+var_1F70]
+0x58739B: mov     edx, dword ptr [esp+1F90h+var_1F70]
 0x58739F: push    edx
-0x5873A0: call    FormHeapFree
+0x5873A0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5873A5: add     esp, 4
 0x5873A8: mov     ecx, esi
 0x5873AA: lea     eax, [esp+1F90h+var_1F7C]
@@ -1445,7 +1441,7 @@
 0x5873F3: call    sub_5723E0
 0x5873F8: mov     eax, [esp+1F90h+var_1F7C.m_data]
 0x5873FC: push    eax
-0x5873FD: call    FormHeapFree
+0x5873FD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x587402: add     esp, 4
 0x587405: mov     al, 1
 0x587407: jmp     short loc_58740B
@@ -1462,3 +1458,31 @@
 0x587427: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x58742C: add     esp, 1F7Ch
 0x587432: retn    4
+0x9BF320: lea     ecx, [ebp-1F68h]; void *
+0x9BF326: jmp     BSStringT_Clear
+0x9BF32B: lea     ecx, [ebp-1F7Ch]; void *
+0x9BF331: jmp     BSStringT_Clear
+0x9BF336: mov     eax, [ebp-1F7Ch]
+0x9BF33C: push    eax
+0x9BF33D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BF342: pop     ecx
+0x9BF343: retn
+0x9BF344: lea     ecx, [ebp-1F38h]
+0x9BF34A: jmp     Script_StaticDestructor
+0x9BF34F: lea     ecx, [ebp-1F38h]
+0x9BF355: jmp     Script_StaticDestructor
+0x9BF35A: lea     ecx, [ebp-1F7Ch]; void *
+0x9BF360: jmp     BSStringT_Clear
+0x9BF365: lea     ecx, [ebp-1F7Ch]; void *
+0x9BF36B: jmp     BSStringT_Clear
+0x9BF370: mov     edx, [esp+arg_4]
+0x9BF374: lea     eax, [edx-1F80h]
+0x9BF37A: mov     ecx, [edx-1F84h]
+0x9BF380: xor     ecx, eax
+0x9BF382: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF387: add     eax, 10h
+0x9BF38A: mov     ecx, [edx-4]
+0x9BF38D: xor     ecx, eax
+0x9BF38F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF394: mov     eax, offset stru_AE88E4
+0x9BF399: jmp     ___CxxFrameHandler3

@@ -2,7 +2,7 @@
 0x9F86A6: push    ecx
 0x9F86A7: fstp    [esp+4+var_4]; float
 0x9F86AA: push    offset aFtrackspeed; "fTrackSpeed"
-0x9F86AF: mov     ecx, offset fTrackSpeed
+0x9F86AF: mov     ecx, 0B39AF0h
 0x9F86B4: call    GameSetting_ConstrAndReg_float
 0x9F86B9: push    offset sub_A231F0; void (__cdecl *)()
 0x9F86BE: call    _atexit

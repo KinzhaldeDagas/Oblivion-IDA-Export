@@ -1,1 +1,1 @@
-hkRayShapeCollectionFilter
+struct hkRayShapeCollectionFilter;

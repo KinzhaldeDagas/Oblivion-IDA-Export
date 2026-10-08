@@ -1,1 +1,1 @@
-ExtraRunOncePacks
+struct ExtraRunOncePacks;

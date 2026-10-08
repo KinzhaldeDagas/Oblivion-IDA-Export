@@ -1,16 +1,16 @@
-char __thiscall sub_64B0B0(HighProcess *a1, TESObjectREFR *a5)
+char __thiscall sub_64B0B0(HighProcess *this, TESObjectREFR *a2)
 {
-  AnimSequenceSingle *v6; // ebx
-  unsigned __int8 **v7; // eax
-  UInt32 v8; // edi
-  UInt32 v9; // eax
+  AnimSequenceSingle *v3; // ebx
+  unsigned __int8 **v4; // eax
+  UInt32 v5; // edi
+  UInt32 v6; // eax
 
-  v6 = (AnimSequenceSingle *)a5->vtbl->GetAnimData(a5);
-  v7 = sub_521450((TESObjectREFR *)g_idleAnimationMap, a5, a1->furniture);
-  v8 = (UInt32)v7;
-  if ( !v7 || !v6 )
-    return 0;
-  v9 = sub_520200(v7);
-  sub_4762B0(v6, v8, a5, v9);
-  return 1;
+  v3 = (AnimSequenceSingle *)a2->vtbl->GetAnimData(a2); /*0x64b0cb*/
+  v4 = TESIdleForm_FindIdleForActor((TESObjectREFR *)MEMORY[0xB362C0], a2, this->furniture); /*0x64b0d5*/
+  v5 = (UInt32)v4; /*0x64b0da*/
+  if ( !v4 || !v3 ) /*0x64b0e2*/
+    return 0; /*0x64b0ff*/
+  v6 = TESIdleForm_GetQueuedAnimType(v4); /*0x64b0e6*/
+  ActorAnimData_LoadIdleKFWithoutPlayback(v3, v5, a2, v6); /*0x64b0f0*/
+  return 1; /*0x64b0f5*/
 }

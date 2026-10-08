@@ -1,4 +1,4 @@
-0x7C5BE0: sub     esp, 0Ch
+0x7C5BE0: sub     esp, 0Ch; For active lights, discard/release frame-local shadow map +0x114, mark backing sources culled, and invalidate pending receiver-property state.
 0x7C5BE3: push    ebp
 0x7C5BE4: mov     ebp, [ecx+0F8h]
 0x7C5BEA: test    ebp, ebp
@@ -16,7 +16,7 @@
 0x7C5C0D: lea     eax, [esp+1Ch+var_8]
 0x7C5C11: push    eax
 0x7C5C12: mov     ecx, edi
-0x7C5C14: call    sub_405AD0
+0x7C5C14: call    ShadowSceneLight_GetLightRef
 0x7C5C19: or      [esp+1Ch+var_C], 1
 0x7C5C1E: cmp     dword ptr [eax], 0
 0x7C5C21: jz      short loc_7C5C27
@@ -42,11 +42,11 @@
 0x7C5C55: mov     ecx, esi
 0x7C5C57: call    eax
 0x7C5C59: test    bl, bl
-0x7C5C5B: jz      loc_7C5CE3
+0x7C5C5B: jz      loc_7C5CE3; Next ShadowPass cleanup is driven by backing NiLight cull state and releases map/receiver data; it does not read prior projector transform or range.
 0x7C5C61: mov     ecx, [edi+114h]
-0x7C5C67: push    ecx; a2
+0x7C5C67: push    ecx; texture
 0x7C5C68: mov     ecx, ds:0B42F50h; this
-0x7C5C6E: call    BSTextureManager_DiscardShadowMap
+0x7C5C6E: call    BSTextureManager__ReturnFrustumShadowTexture; Oblivion frustum-shadow pool return. Finds the texture in the used pool, appends it to the unused shadowMaps list, removes the used-list node, and balances strong references.
 0x7C5C73: mov     esi, [edi+114h]
 0x7C5C79: test    esi, esi
 0x7C5C7B: jz      short loc_7C5CA3
@@ -66,7 +66,7 @@
 0x7C5CA3: lea     eax, [esp+1Ch+var_4]
 0x7C5CA7: push    eax
 0x7C5CA8: mov     ecx, edi
-0x7C5CAA: call    sub_405AD0
+0x7C5CAA: call    ShadowSceneLight_GetLightRef
 0x7C5CAF: mov     eax, [eax]
 0x7C5CB1: or      word ptr [eax+18h], 1
 0x7C5CB6: mov     eax, [esp+1Ch+var_4]
@@ -86,7 +86,7 @@
 0x7C5CD8: mov     ecx, esi
 0x7C5CDA: call    eax
 0x7C5CDC: mov     ecx, edi
-0x7C5CDE: call    sub_7D5320
+0x7C5CDE: call    ShadowSceneLight_InvalidatePendingReceiverProperties; Walk unfinished receiver cursor +0x144, invalidate accepted subtype-1..10 shader properties, then clear the cursor.
 0x7C5CE3: test    ebp, ebp
 0x7C5CE5: jnz     loc_7C5C00
 0x7C5CEB: pop     edi

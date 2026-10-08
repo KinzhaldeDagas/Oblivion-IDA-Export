@@ -1,4 +1,4 @@
-0x44FD60: mov     eax, ecx
+0x44FD60: mov     eax, ecx; Oblivion TESFile_GetMasterByIndex returns masterFiles[slot-1] for a one-based MAST index, bounded by masterCount. FormID owner-byte resolution can therefore select distinct alias slots for duplicate filenames.
 0x44FD62: mov     ecx, [esp+arg_0]
 0x44FD66: cmp     ecx, [eax+3F0h]
 0x44FD6C: ja      short loc_44FD83

@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x59CA19",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59CA1C",
-    "line": "push    1772h; a2",
+    "line": "push    1772h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x59CA23",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x59CA2A",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x6D7780: push    0FFFFFFFFh
+0x6D7780: push    0FFFFFFFFh; Loads base NiExtraData, reads a 32-bit key count, allocates count header-backed 0x08-byte records, then loads each float time and owned string.
 0x6D7782: push    offset SEH_6D7780
 0x6D7787: mov     eax, large fs:0
 0x6D778D: push    eax
@@ -51,8 +51,8 @@
 0x6D7811: cmp     eax, ecx
 0x6D7813: mov     [esp+28h+var_4], ecx
 0x6D7817: jz      short loc_6D7837
-0x6D7819: push    offset sub_6EC6B0; a5
-0x6D781E: push    offset sub_6D73E0; a4
+0x6D7819: push    offset NiTextKey_Destroy; a5
+0x6D781E: push    offset NiTextKey_Construct; a4
 0x6D7823: push    esi; size
 0x6D7824: lea     edi, [eax+4]
 0x6D7827: push    8; a2
@@ -70,7 +70,7 @@
 0x6D784D: mov     edi, [esp+28h+var_14]
 0x6D7851: push    ebp
 0x6D7852: mov     ecx, edi
-0x6D7854: call    sub_6EC720
+0x6D7854: call    NiTextKey_LoadBinary; Loads one NiTextKey: reads float time at +0x00 and allocates/loads the string at +0x04.
 0x6D7859: mov     eax, [esp+28h+Size]
 0x6D785D: add     esi, 1
 0x6D7860: add     edi, 8
@@ -88,3 +88,15 @@
 0x6D7880: pop     ebx
 0x6D7881: add     esp, 14h
 0x6D7884: retn    4
+0x9B5200: mov     eax, [ebp-14h]
+0x9B5203: push    eax
+0x9B5204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5209: pop     ecx
+0x9B520A: retn
+0x9B520B: mov     edx, [esp+arg_4]
+0x9B520F: lea     eax, [edx-18h]
+0x9B5212: mov     ecx, [edx-1Ch]
+0x9B5215: xor     ecx, eax
+0x9B5217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B521C: mov     eax, offset stru_AE03C0
+0x9B5221: jmp     ___CxxFrameHandler3

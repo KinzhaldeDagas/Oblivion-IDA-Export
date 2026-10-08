@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x668C30",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion skill-use router. Exhaustive vtable-dispatch scan finds 21 native gameplay callsites: 18 [vtable+0x39C] loads plus three magic paths using an adjusted vtable pointer. It selects TESSkill useValue0/useValue1 and forwards positive progress below skill 100. Major membership affects the required-use denominator, not this raw award.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668C31",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x668C3C",
-    "line": "call    ActorValue_GetGroupOffsetFromAV",
+    "line": "call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 maps the caller-supplied native SkillActorValue to TESSkill index 0..20.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x668C41",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x668C4A",
-    "line": "push    eax",
+    "line": "push    eax; skillIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668C4B",
-    "line": "call    TESDataHandler_GetTESSkillByCode",
+    "line": "call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x668C52",
-    "line": "mov     eax, [esp+0Ch+arg_4]",
+    "line": "mov     eax, [esp+0Ch+useIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x668C56",
-    "line": "fld     dword ptr [esi+eax*4+38h]",
+    "line": "fld     dword ptr [esi+eax*4+38h]; Read TESSkill_Data::useValues[useIndex] at +0x38+(index*4). This routine has no local actorValue/useIndex bounds check before dereference; callers must provide a valid native skill and use slot.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x668C5D",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+actorValue]; Unchecked indexed read beginning at useValue0. SKIL DATA contains exactly two floats and native callers pass only 0 or 1; an out-of-range useIndex would read beyond TESSkill_Data.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x668C61",
-    "line": "call    Actor_GetBaseCalcAVi",
+    "line": "call    Actor_GetBaseCalcAVi; Normal skill-use entry point checks the native base skill cap of 100 before awarding progress.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x668C69",
-    "line": "jge     short loc_668CB4",
+    "line": "jge     short loc_668CB4; Skill-use progress is suppressed once the player's base calculated skill reaches 100.",
     "mnemonic": "jge",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x668C6F",
-    "line": "fld     [esp+0Ch+arg_8]",
+    "line": "fld     [esp+0Ch+scale]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x668C7C",
-    "line": "jnp     short loc_668C88",
+    "line": "jnp     short loc_668C88; scale == 0.0 is the identity/default convention. Any nonzero scale multiplies the selected SKIL use value.",
     "mnemonic": "jnp",
     "size": 2
   },
   {
     "ea": "0x668C7E",
-    "line": "fmul    [esp+0Ch+arg_0]",
+    "line": "fmul    [esp+0Ch+actorValue]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x668C82",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+actorValue]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x668C8C",
-    "line": "jz      short loc_668CB2",
+    "line": "jz      short loc_668CB2; The null check occurs after the indexed SKIL DATA read; native callers therefore rely on a valid SkillActorValue/TESSkill lookup.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x668C8E",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+actorValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -241,49 +241,49 @@
   },
   {
     "ea": "0x668C9B",
-    "line": "jnz     short loc_668CB2",
+    "line": "jnz     short loc_668CB2; Only a strictly positive computed use value reaches the accumulator.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x668C9D",
-    "line": "push    0; char",
+    "line": "push    0; Normal live use passes suppressFeedbackAndDeferredTracking=false.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x668C9F",
-    "line": "push    esi; int",
+    "line": "push    esi; Pass the resolved native TESSkill record to the accumulator.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668CA0",
-    "line": "push    ecx",
+    "line": "push    ecx; Reserve/push the computed float progressDelta before actorValue.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668CA1",
-    "line": "fstp    [esp+18h+var_18]; float",
+    "line": "fstp    [esp+18h+progressDelta]; progressDelta",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x668CA4",
-    "line": "push    ebx; int",
+    "line": "push    ebx; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668CA5",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668CA7",
-    "line": "call    Player_IncreaseSkillExperience?",
+    "line": "call    Player_AddSkillUseProgress; Accumulate actorValue, computed positive progressDelta, resolved TESSkill, and suppression=false. Major/minor classification is deferred to the required threshold and eventual level-increase routine.",
     "mnemonic": "call",
     "size": 5
   },

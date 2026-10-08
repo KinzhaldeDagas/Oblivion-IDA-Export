@@ -1,1 +1,1 @@
-BirthSign
+struct BirthSign;

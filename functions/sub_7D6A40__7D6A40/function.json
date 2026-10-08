@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D6A40",
+      "0x7D6A74"
+    ]
+  ],
+  "chunks_sha256": "f2f6d4bf735126093c9957923b2b5b60a1d1044e2689c25e15fa50dbffba0127",
+  "comment_regular": "Walk the stale reconciliation cursor tail via ShadowSceneLight_RemoveReceiverGeometry, then clear +0x144.",
+  "comment_repeatable": "Walk the stale reconciliation cursor tail via ShadowSceneLight_RemoveReceiverGeometry, then clear +0x144.\n\nMEF PERF 2026-10-07 PASS2: PERF-13 stale cleanup: starts at fence node+144, saves successor before each call, passes payload to7D6940, then clears+144. Each call loses known position and rescans FULL receiver list via7D5F80. With M accepted-prefix nodes and S old stale nodes, fence plus S removals cost (S+1)*(M+1) payload comparisons for distinct payloads/no mutation.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-13 End wrapper releases pending-tail scratch then executes original stale traversal/property cleanup. Shared RemoveFirstByValue index preserves first occurrence and position-removal ownership. Duplicate payload lists remain native. All private index storage uses OS heap, not engine-owned arrays.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D6A40",
+  "display_name": "ShadowSceneLight_RemoveStaleReceivers",
   "end_ea": "0x7D6A74",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D6A40",
+  "name": "ShadowSceneLight_RemoveStaleReceivers",
   "segment": ".text",
   "sha256": "f2f6d4bf735126093c9957923b2b5b60a1d1044e2689c25e15fa50dbffba0127",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D6A40",
-  "type": "void __thiscall(int **this)",
+  "total_chunk_size": 52,
+  "type": "void __thiscall(ShadowSceneLight_DecodedLayout *self)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 2
 }

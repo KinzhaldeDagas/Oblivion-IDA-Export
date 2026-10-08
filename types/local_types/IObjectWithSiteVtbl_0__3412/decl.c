@@ -1,1 +1,1 @@
-IObjectWithSiteVtbl_0
+typedef IObjectWithSiteVtbl IObjectWithSiteVtbl_0;

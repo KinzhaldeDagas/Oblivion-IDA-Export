@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B3210",
+      "0x4B330B"
+    ]
+  ],
+  "chunks_sha256": "2799e9f212f95807345bda7988ca59d918361c33091fa23e2dcea17999c515ad",
+  "comment_regular": "Verified: releases model-loader usage for a bound object/reference. For scaled refs, removes the scale-specific key and may also remove the base key depending on load state.",
+  "comment_repeatable": "Verified: releases model-loader usage for a bound object/reference. For scaled refs, removes the scale-specific key and may also remove the base key depending on load state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B3210",
+  "display_name": "TESBoundObject_ReleaseReferenceModel",
   "end_ea": "0x4B330B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B3210",
+  "name": "TESBoundObject_ReleaseReferenceModel",
   "segment": ".text",
   "sha256": "2799e9f212f95807345bda7988ca59d918361c33091fa23e2dcea17999c515ad",
   "size": 251,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B3210",
-  "type": "void __thiscall(_BYTE *this, TESObjectREFR *)",
+  "total_chunk_size": 251,
+  "type": "void __thiscall(TESBoundObject *this, TESObjectREFR *reference)",
   "xrefs_from_count": 95,
   "xrefs_to_count": 28
 }

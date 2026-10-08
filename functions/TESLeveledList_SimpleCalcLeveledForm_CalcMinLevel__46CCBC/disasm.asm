@@ -2,7 +2,7 @@
 0x46CCC0: push    edi
 0x46CCC1: movzx   edi, [esp+4+arg_C]
 0x46CCC6: mov     [esp+4+arg_4], edi
-0x46CCCA: jz      short loc_46CCE9
+0x46CCCA: jz      short loc_46CCE9; 3DTheft decode 2026-05-14: TESLeveledList flag bit 0x01 (CalcAllLevels) changes the minimum eligible level using the owner GetMaxLevelDiff virtual.
 0x46CCCC: mov     eax, [esi]
 0x46CCCE: mov     edx, [eax+10h]
 0x46CCD1: mov     ecx, esi

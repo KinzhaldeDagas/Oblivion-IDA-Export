@@ -1,1 +1,1 @@
-LOGFONTA
+typedef tagLOGFONTA LOGFONTA;

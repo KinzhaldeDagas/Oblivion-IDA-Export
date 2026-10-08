@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E3750",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5E3824",
-    "line": "call    Calc_RunSpeed",
+    "line": "call    Calc_RunSpeed; TES4 authoritative: Calc_RunSpeed. Starts from Calc_WalkSpeed, then applies fMoveRunAthleticsMult * Athletics * 0.01 + fMoveRunMult. Selected by sub_5E65B0 when process movement flag 0x200 is set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x5E38AA",
-    "line": "call    sub_5E3750",
+    "line": "call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x66C6A0",
-    "line": "push    esi",
+    "line": "push    esi; Batch-add each nonnull TESTopic from an INFO.addedTopics list using pointer deduplication and notification requests. Sort the full known-topic list once if any insertion succeeded.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C6A1",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+topics]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,31 +73,31 @@
   },
   {
     "ea": "0x66C6B6",
-    "line": "push    1; a7",
+    "line": "push    1; notifyPlayer",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66C6B8",
-    "line": "push    0; a6",
+    "line": "push    0; sortImmediately",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66C6BA",
-    "line": "push    eax; a5",
+    "line": "push    eax; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C6BB",
-    "line": "mov     ecx, edi; a1",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C6BD",
-    "line": "call    sub_669690",
+    "line": "call    PlayerCharacter__AddKnownTopic; AddedTopics iteration preserves the authored list traversal for notifications, while each successful topic is inserted at the known-topic head. Duplicate pointers are silently ignored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x66C6D2",
-    "line": "jz      short loc_66C6E3",
+    "line": "jz      short loc_66C6E3; One alphabetical sort follows the whole AddKnownTopics batch; during DialogMenu the same acquired topics remain available without per-topic notifications.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x66C6DA",
-    "line": "push    edi",
+    "line": "push    edi; topics",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C6DB",
-    "line": "call    sub_52F6D0",
+    "line": "call    SortTopicListByDisplayName; Case-insensitive bubble sort of a TESTopic list by TESFullName display text. A null argument sorts DataHandler's master topic list; player additions pass the known-topic list explicitly.",
     "mnemonic": "call",
     "size": 5
   },

@@ -159,10 +159,37 @@
 0x69F68D: test    eax, eax
 0x69F68F: mov     [esp+18h+var_4], 0FFFFFFFFh
 0x69F697: jz      short def_69F4D1
-0x69F699: push    0
-0x69F69B: push    0
-0x69F69D: push    0
-0x69F69F: push    0
-0x69F6A1: push    eax
-0x69F6A2: mov     ecx, offset ActorProcessManager_ptr
-0x69F6A7: call    sub_673A90
+0x69F699: push    0; relativeTo
+0x69F69B: push    0; insertRelative
+0x69F69D: push    0; append
+0x69F69F: push    0; processLevel
+0x69F6A1: push    eax; object
+0x69F6A2: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x69F6A7: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
+0x9C5DB0: mov     eax, [ebp+18h]
+0x9C5DB3: push    eax
+0x9C5DB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5DB9: pop     ecx
+0x9C5DBA: retn
+0x9C5DBB: mov     eax, [ebp+18h]
+0x9C5DBE: push    eax
+0x9C5DBF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5DC4: pop     ecx
+0x9C5DC5: retn
+0x9C5DC6: mov     eax, [ebp+18h]
+0x9C5DC9: push    eax
+0x9C5DCA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5DCF: pop     ecx
+0x9C5DD0: retn
+0x9C5DD1: mov     eax, [ebp+18h]
+0x9C5DD4: push    eax
+0x9C5DD5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5DDA: pop     ecx
+0x9C5DDB: retn
+0x9C5DDC: mov     edx, [esp+arg_4]
+0x9C5DE0: lea     eax, [edx-8]
+0x9C5DE3: mov     ecx, [edx-0Ch]
+0x9C5DE6: xor     ecx, eax
+0x9C5DE8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5DED: mov     eax, offset stru_AEE490
+0x9C5DF2: jmp     ___CxxFrameHandler3

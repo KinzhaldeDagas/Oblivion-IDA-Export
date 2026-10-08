@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_772150",
+  "chunks": [
+    [
+      "0x772150",
+      "0x7721DF"
+    ]
+  ],
+  "chunks_sha256": "a379de7f6ab11798a4549cba1438cf1d896e610444bca86821422b3f1d9f63a4",
+  "comment_regular": "Commit texture transform. Stock leaf stage has transform disabled, so this writes D3DTTFF_DISABLE and no matrix.",
+  "comment_repeatable": "Commit texture transform. Stock leaf stage has transform disabled, so this writes D3DTTFF_DISABLE and no matrix.\nDX11 GPU-world decoding 2026-09-30: stage index +0; enable byte +0x5A. Disabled writes TSS24=0 through B42758 manager +0xC8, without matrix upload. Enabled mode +0x10 high nibble 0 uses inline +0x18 matrix regardless of low bits; 0x10000000 uses matrix pointer at [stage+0x14]+0x18; 0x20000000 uses inline +0x18. For latter two, low28 zero uploads directly; nonzero calls 0x771830 and uploads B42760 scratch only on success. Other high nibbles do not write. SetTransform target is stage+16 via B42750 device. Caller 0x7721E0 invokes this only after nonnull texture resolution: capture does not grant unconditional replay. Derived recipes require fresh camera inputs; never reuse last-draw B42760.\nDX11 fresh pass construction 2026-09-30 limitation: a pre-traversal observation of renderer+A00 is not proof of the inverse view after the caller camera installation. Frame construction currently leaves derived recipes needing that matrix unavailable; direct/disabled/no-write paths and constant recipe4 remain representable. Current-draw capture retains its original inverse-view evaluation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_NiD3DTextureStage_CommitTextureTransform_010201A0",
   "end_ea": "0x7721DF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_772150",
+  "name": "OB_NiD3DTextureStage_CommitTextureTransform_010201A0",
   "segment": ".text",
   "sha256": "a379de7f6ab11798a4549cba1438cf1d896e610444bca86821422b3f1d9f63a4",
   "size": 143,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x772150",
-  "type": "char __thiscall(_DWORD *this)",
+  "total_chunk_size": 143,
+  "type": "unsigned __int8 __thiscall(void *this)",
   "xrefs_from_count": 61,
   "xrefs_to_count": 1
 }

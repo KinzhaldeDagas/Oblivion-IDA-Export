@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x543BB0",
+      "0x543C09"
+    ]
+  ],
+  "chunks_sha256": "149b867a53de0909defbb8e8acefdd26075c703cda8798a9037681dda7a9d552",
+  "comment_regular": "Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.",
+  "comment_repeatable": "Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_543BB0",
+  "display_name": "Sky__SetMode",
   "end_ea": "0x543C09",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_543BB0",
+  "name": "Sky__SetMode",
   "segment": ".text",
   "sha256": "149b867a53de0909defbb8e8acefdd26075c703cda8798a9037681dda7a9d552",
   "size": 89,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x543BB0",
-  "type": "void __thiscall(volatile LONG *this, volatile LONG *)",
+  "total_chunk_size": 89,
+  "type": "void __thiscall(Sky *this, unsigned int mode)",
   "xrefs_from_count": 42,
   "xrefs_to_count": 6
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 136,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 81,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_5EE760",
+  "chunks": [
+    [
+      "0x5EE760",
+      "0x5EF925"
+    ],
+    [
+      "0x9C2770",
+      "0x9C27C5"
+    ]
+  ],
+  "chunks_sha256": "2ad4e53c23d49465551fa19629263aeea668922b79ef531f70f48fb12e74356b",
+  "comment_regular": "BloodOnDeath corpse-hit hook: vanilla Actor_HandleHitVisualEffects runs first through trampoline; if the actor is already dead afterward, BloodOnDeath queues the same 8-second hit-style geometry spill for the corpse.",
+  "comment_repeatable": "BloodOnDeath corpse-hit hook: vanilla Actor_HandleHitVisualEffects runs first through trampoline; if the actor is already dead afterward, BloodOnDeath queues the same 8-second hit-style geometry spill for the corpse.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "Actor_HandleHitVisualEffects",
   "end_ea": "0x5EF925",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_5EE760",
+  "name": "Actor_HandleHitVisualEffects",
   "segment": ".text",
   "sha256": "74a42bb4a7829eab4d2c1ade57b8bb036b20a62989fa04f599c6c42731c63076",
   "size": 4549,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5EE760",
+  "total_chunk_size": 4634,
   "type": "void __thiscall(int this, TESChildCELL *, float, float, NiPoint3 *, NiPoint3 *)",
-  "xrefs_from_count": 1289,
+  "xrefs_from_count": 1318,
   "xrefs_to_count": 4
 }

@@ -1,1 +1,6 @@
-_HD_HITTESTINFO
+struct _HD_HITTESTINFO
+{
+POINT pt;
+UINT flags;
+INT iItem;
+};

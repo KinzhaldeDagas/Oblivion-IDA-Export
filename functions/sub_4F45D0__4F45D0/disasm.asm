@@ -1,4 +1,4 @@
-0x4F45D0: push    esi
+0x4F45D0: push    esi; GetBaseAV eval/helper. Requires an actor-like reference, reads base calculated AV, writes the numeric result, and prints to console when active.
 0x4F45D1: mov     esi, [esp+4+arg_0]
 0x4F45D5: test    esi, esi
 0x4F45D7: jz      short loc_4F4630

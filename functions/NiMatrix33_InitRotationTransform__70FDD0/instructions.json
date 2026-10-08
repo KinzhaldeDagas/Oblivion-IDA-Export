@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x70FDD0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x70FDD3",
-    "line": "fld     [esp+8+arg_0]",
+    "line": "fld     [esp+8+angleZ]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x70FDD9",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+8+var_8]; Verified matrix helper consumes angleZ directly in sin/cos with no degree conversion; its units are radians.",
     "mnemonic": "fstp",
     "size": 3
   },

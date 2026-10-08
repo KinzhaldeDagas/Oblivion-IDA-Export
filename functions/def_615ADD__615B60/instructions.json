@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x615B84",
-    "line": "jp      loc_615C89",
+    "line": "jp      loc_615C89; Zero-gravity projectile branch: iteratively recompute distance, flightTime=distance/projectileSpeed, then targetPos += targetVelocity*flightTime.",
     "mnemonic": "jp",
     "size": 6
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x615C1A",
-    "line": "fstp    [esp+arg_C]",
+    "line": "fstp    [esp+arg_C]; Zero-gravity iteration flight time = current predicted 3D distance / projectile speed.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x615C8B",
-    "line": "jle     loc_615DF5",
+    "line": "jle     loc_615DF5; Nonzero gravity enters the bow-only ballistic lead loop; zero-gravity spells/enchantments use the straight 3D distance branch.",
     "mnemonic": "jle",
     "size": 6
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x615D3A",
-    "line": "call    sub_6132D0",
+    "line": "call    Combat_CalculateBallisticPitch; Low ballistic-pitch solver. It forms the quadratic in cos^2(theta), selects the larger valid root for the low arc, and returns a signed acos(sqrt(root)); invalid trajectories return the engine fallback angle.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x615D3F",
-    "line": "fstp    [esp+10h+arg_8]",
+    "line": "fstp    [esp+10h+arg_8]; Gravity branch solves ballistic pitch, then uses horizontalDistance/(cos(pitch)*projectileSpeed) as target lead time.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x615EAE",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x615EFE",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },

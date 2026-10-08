@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x779790",
-    "line": "mov     ecx, [ecx+28h]; this",
+    "line": "mov     ecx, [ecx+28h]; Load shader+0x28 render-state group. If present, restore its recorded D3D state IDs.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x779797",
-    "line": "call    NiD3DRenderStateGroup__RestoreRenderState",
+    "line": "call    NiD3DRenderStateGroup__RestoreRenderState; Restore every render-state ID saved in the shader's state group. Automatic-constant enable flags are not part of this group.",
     "mnemonic": "call",
     "size": 5
   },

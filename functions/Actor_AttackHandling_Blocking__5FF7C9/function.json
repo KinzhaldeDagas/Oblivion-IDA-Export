@@ -1,18 +1,31 @@
 {
-  "callees_count": 242,
-  "callers_count": 1,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 86,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x5FF7C9",
+      "0x6005B1"
+    ]
+  ],
+  "chunks_sha256": "b274658eaa47e8e5e7e40ad3ea8205826357df20a33728a7c165f9a0f46066be",
+  "comment_regular": "ODismemberment combat decode: Hex-Rays failed here. This tail applies target blocking, block reduction, block/shield/weapon damage, armor durability damage and hit/block sounds, then dispatches hit visuals and calls target vtbl+0x220 Actor_OnPhysicalHit with final health/fatigue damage before post-hit stagger/knockdown/disarm handling.",
   "comment_repeatable": "",
-  "data_refs_count": 7,
-  "display_name": "Actor_AttackHandling:::Blocking",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "Actor_AttackHandling_ApplyBlockArmorDamageAndPostHit",
   "end_ea": "0x6005B1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": false,
-  "name": "Actor_AttackHandling:::Blocking",
+  "name": "Actor_AttackHandling_ApplyBlockArmorDamageAndPostHit",
   "segment": ".text",
   "sha256": "b274658eaa47e8e5e7e40ad3ea8205826357df20a33728a7c165f9a0f46066be",
   "size": 3560,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5FF7C9",
+  "total_chunk_size": 3560,
   "type": "int __cdecl(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD)",
   "xrefs_from_count": 1399,
   "xrefs_to_count": 2

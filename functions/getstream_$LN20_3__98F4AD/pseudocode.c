@@ -1,4 +1,4 @@
 int __usercall _getstream_::_LN20_3@<eax>(int a1@<edi>)
 {
-  return a1;
+  return a1; /*0x98f4af*/
 }

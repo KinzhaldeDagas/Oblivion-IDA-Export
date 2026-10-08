@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x79E120",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked/STL trampoline for overlap-safe backward SFrondTexture range assignment.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E121",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E125",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79E131",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x79E136",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x79E13B",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E13F",
-    "line": "push    eax",
+    "line": "push    eax; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E140",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E141",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E142",
-    "line": "call    sub_79B770",
+    "line": "call    OB_SFrondTexture_CopyAssignRangeBackwardThunk_010201A0; Checked/STL trampoline around backward SFrondTexture range assignment; returns destination begin.",
     "mnemonic": "call",
     "size": 5
   },

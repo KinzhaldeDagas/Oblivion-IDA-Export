@@ -1,1 +1,4 @@
-NiPointer_IOTask
+struct NiPointer_IOTask
+{
+IOTask *data;
+};

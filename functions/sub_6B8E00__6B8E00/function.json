@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6B8E00",
+  "chunks": [
+    [
+      "0x6B8E00",
+      "0x6B8F46"
+    ],
+    [
+      "0x9C6F90",
+      "0x9C6FB3"
+    ]
+  ],
+  "chunks_sha256": "8cd267630120cadabd69461d46504d0bb93b565e7301c8ddbceaadbb1eaca7a7",
+  "comment_regular": "OFE custom Rumors identity: native D7 classification sets MenuTopic+0x20 isInfoGeneral; selected INFO +0x18, ownerQuest +0x14, actual topic +0x24. Native FillResponseList call 6B8F1F takes ECX=self + four stack pointer arguments (ownerQuest,topic,info,speaker), returns void. Preserve isInfoGeneral to keep first-nonempty response behavior, RunForRumors and native continuation semantics.\n\nOblivion MenuTopic allocation is 0x28 bytes at its native creator. Fallout counterpart FillTopicList allocates 0x2C bytes before MenuTopic constructor (x4y6:0x825E8740); keep these version-specific class layouts separate.",
+  "comment_repeatable": "Oblivion MenuTopic allocation is 0x28 bytes at its native creator. Fallout counterpart FillTopicList allocates 0x2C bytes before MenuTopic constructor (x4y6:0x825E8740); keep these version-specific class layouts separate.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "MenuTopic::MenuTopic",
   "end_ea": "0x6B8F46",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B8E00",
+  "name": "MenuTopic::MenuTopic",
   "segment": ".text",
   "sha256": "74605a9433a1e325eb86a8493ef058ee9b8bf38bdceb1c7193fb23a87d0a5d98",
   "size": 326,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B8E00",
-  "type": "UnkBohDialogueTopicBoh *__thiscall(UnkBohDialogueTopicBoh *this, TESQuest *, TESTopic *, UInt32, Actor *, char)",
-  "xrefs_from_count": 129,
+  "total_chunk_size": 361,
+  "type": "MenuTopicView *__thiscall(MenuTopicView *this, TESQuest *ownerQuest, TESTopic *topic, OblivionTopicInfo *info, Actor *speaker, bool substituteInfoRefusal)",
+  "xrefs_from_count": 140,
   "xrefs_to_count": 2
 }

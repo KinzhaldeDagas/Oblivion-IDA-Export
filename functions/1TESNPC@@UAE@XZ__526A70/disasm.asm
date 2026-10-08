@@ -14,7 +14,7 @@
 0x526A94: mov     esi, ecx
 0x526A96: mov     [esp+20h+var_10], esi
 0x526A9A: mov     dword ptr [esi], offset ??_7TESNPC@@6BTESNPC@@@; const TESNPC::`vftable'{for `TESNPC'}
-0x526AA0: mov     dword ptr [esi+24h], offset ??_7TESNPC@@6BTESActorBaseData@@@; const TESNPC::`vftable'{for `TESActorBaseData'}
+0x526AA0: mov     dword ptr [esi+24h], offset ??_7TESNPC@@6BTESActorBaseData@@@; Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.
 0x526AA7: mov     dword ptr [esi+44h], offset ??_7TESNPC@@6BTESContainer@@@; const TESNPC::`vftable'{for `TESContainer'}
 0x526AAE: mov     dword ptr [esi+54h], offset ??_7TESNPC@@6BTESSpellList@@@; const TESNPC::`vftable'{for `TESSpellList'}
 0x526AB5: mov     dword ptr [esi+68h], offset ??_7TESNPC@@6BTESAIForm@@@; const TESNPC::`vftable'{for `TESAIForm'}
@@ -30,7 +30,7 @@
 0x526B0F: mov     eax, [esi+1F4h]
 0x526B15: push    eax
 0x526B16: mov     dword ptr [esi+1F0h], offset ??_7?$NiTArray@PAUFaceGenUndo@@@@6B@; const NiTArray<FaceGenUndo *>::`vftable'
-0x526B20: call    FormHeapFree
+0x526B20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x526B25: mov     edi, [esi+1DCh]
 0x526B2B: mov     ebx, ds:0A2807Ch
 0x526B31: add     esp, 4
@@ -81,14 +81,14 @@
 0x526B9D: push    1
 0x526B9F: mov     ecx, edi
 0x526BA1: call    eax
-0x526BA3: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x526BA3: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x526BA8: push    4; int
 0x526BAA: push    18h; unsigned int
 0x526BAC: lea     ecx, [esi+168h]
 0x526BB2: push    ecx; void *
 0x526BB3: mov     byte ptr [esp+30h+var_4], 1
 0x526BB8: call    $LN21
-0x526BBD: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x526BBD: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x526BC2: push    4; int
 0x526BC4: push    18h; unsigned int
 0x526BC6: lea     edx, [esi+108h]
@@ -106,3 +106,46 @@
 0x526BF4: pop     ebx
 0x526BF5: add     esp, 10h
 0x526BF8: retn
+0x521CF0: mov     eax, [ecx+4]
+0x521CF3: push    eax
+0x521CF4: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAUFaceGenUndo@@@@6B@; const NiTArray<FaceGenUndo *>::`vftable'
+0x521CFA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x521CFF: pop     ecx
+0x521D00: retn
+0x9B8010: mov     ecx, [ebp-10h]; this
+0x9B8013: jmp     ??1TESActorBase@@UAE@XZ; TESActorBase::~TESActorBase(void)
+0x9B8018: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9B801D: push    4; int
+0x9B801F: push    18h; unsigned int
+0x9B8021: mov     eax, [ebp-10h]
+0x9B8024: add     eax, 108h
+0x9B8029: push    eax; void *
+0x9B802A: call    $LN21
+0x9B802F: retn
+0x9B8030: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9B8035: push    4; int
+0x9B8037: push    18h; unsigned int
+0x9B8039: mov     eax, [ebp-10h]
+0x9B803C: add     eax, 168h
+0x9B8041: push    eax; void *
+0x9B8042: call    $LN21
+0x9B8047: retn
+0x9B8048: mov     ecx, [ebp-10h]
+0x9B804B: add     ecx, 1D4h; slot
+0x9B8051: jmp     NiPointerSlot_Release
+0x9B8056: mov     ecx, [ebp-10h]
+0x9B8059: add     ecx, 1D8h; slot
+0x9B805F: jmp     NiPointerSlot_Release
+0x9B8064: mov     ecx, [ebp-10h]
+0x9B8067: add     ecx, 1DCh; slot
+0x9B806D: jmp     NiPointerSlot_Release
+0x9B8072: mov     ecx, [ebp-10h]
+0x9B8075: add     ecx, 1F0h
+0x9B807B: jmp     loc_521CF0
+0x9B8080: mov     edx, [esp+arg_4]
+0x9B8084: lea     eax, [edx-10h]
+0x9B8087: mov     ecx, [edx-14h]
+0x9B808A: xor     ecx, eax
+0x9B808C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8091: mov     eax, offset stru_AE27F0
+0x9B8096: jmp     ___CxxFrameHandler3

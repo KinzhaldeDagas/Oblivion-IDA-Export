@@ -1,1 +1,1 @@
-TerrainLODQuadLoadTask
+struct TerrainLODQuadLoadTask;

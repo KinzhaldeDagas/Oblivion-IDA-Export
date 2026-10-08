@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x48B159",
-    "line": "mov     eax, offset Vector3_InitValue?",
+    "line": "mov     eax, offset g_zeroNiPoint3",
     "mnemonic": "mov",
     "size": 5
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x48B181",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x48B19C",
-    "line": "call    TESDataHandler_PlaceObjectRef",
+    "line": "call    TESDataHandler_PlaceObjectRef; Verified object-reference placement helper accepts an interior cell or exterior WorldSpace and sets/reuses a reference base form. New reference attachment proceeds through cell lifecycle methods; this helper itself does not write the WorldSpace SubSpace index.",
     "mnemonic": "call",
     "size": 5
   },

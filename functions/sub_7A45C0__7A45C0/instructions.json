@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x7A45C0",
-    "line": "push    ecx",
+    "line": "push    ecx; Typed vector wrapper for forward SIdvLeafTexture copy assignment.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A45C1",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A45C5",
-    "line": "mov     edx, [esp+4+arg_4]",
+    "line": "mov     edx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7A45D1",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7A45D6",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x7A45DB",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A45DF",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A45E0",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A45E1",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A45E2",
-    "line": "call    sub_7A3B80",
+    "line": "call    OB_SIdvLeafTexture_CopyAssignRangeForward_010201A0; Forward deep-copy assignment over existing 0x54-byte SIdvLeafTexture records; returns the destination end.",
     "mnemonic": "call",
     "size": 5
   },

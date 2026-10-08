@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x40C386",
-    "line": "mov     LODRoot, ebx",
+    "line": "mov     ds:0B333A8h, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C38C",
-    "line": "mov     ObjectLODRoot, ebx",
+    "line": "mov     ds:0B333ACh, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C392",
-    "line": "mov     MagicProjectileRoot, ebx",
+    "line": "mov     ds:0B333A4h, ebx",
     "mnemonic": "mov",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x40C3A1",
-    "line": "call    sub_4043A0",
+    "line": "call    InputGlobals__ShutdownInputSystem",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x40C3A7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x40C3B2",
-    "line": "mov     ecx, dword_B3339C",
+    "line": "mov     ecx, dword ptr unk_B3339C",
     "mnemonic": "mov",
     "size": 6
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x40C3C4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x40C3CC",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x40C3F9",
-    "line": "mov     g_worldScenegraph, ebx",
+    "line": "mov     g_WorldSceneReceiverRoot, ebx; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C3FF",
-    "line": "mov     esi, dword_B333D8",
+    "line": "mov     esi, dword ptr root",
     "mnemonic": "mov",
     "size": 6
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x40C420",
-    "line": "mov     dword_B333D8, ebx",
+    "line": "mov     dword ptr root, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C426",
-    "line": "mov     esi, dword_B333DC",
+    "line": "mov     esi, dword ptr unk_B333DC",
     "mnemonic": "mov",
     "size": 6
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x40C447",
-    "line": "mov     dword_B333DC, ebx",
+    "line": "mov     dword ptr unk_B333DC, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C44D",
-    "line": "mov     esi, dword_B333E0",
+    "line": "mov     esi, dword ptr unk_B333E0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x40C46E",
-    "line": "mov     dword_B333E0, ebx",
+    "line": "mov     dword ptr unk_B333E0, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C474",
-    "line": "mov     esi, dword_B333E4",
+    "line": "mov     esi, dword ptr unk_B333E4; Fog decode: scene/global teardown release path for B333E4 active fog property.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -727,13 +727,13 @@
   },
   {
     "ea": "0x40C495",
-    "line": "mov     dword_B333E4, ebx",
+    "line": "mov     dword ptr unk_B333E4, ebx; Fog decode: scene/global teardown nulls B333E4 after releasing the active fog property.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C49B",
-    "line": "mov     esi, menuRenderedTexture",
+    "line": "mov     esi, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -823,13 +823,13 @@
   },
   {
     "ea": "0x40C4BC",
-    "line": "mov     menuRenderedTexture, ebx",
+    "line": "mov     dword ptr texture, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C4C2",
-    "line": "mov     esi, ScreenElementsRoot?",
+    "line": "mov     esi, ds:0B333ECh",
     "mnemonic": "mov",
     "size": 6
   },
@@ -919,13 +919,13 @@
   },
   {
     "ea": "0x40C4E3",
-    "line": "mov     ScreenElementsRoot?, ebx",
+    "line": "mov     ds:0B333ECh, ebx",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40C4E9",
-    "line": "mov     ecx, dword_B34D90",
+    "line": "mov     ecx, ds:0B34D90h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x40C500",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x40C510",
-    "line": "mov     edi, dword_B39548[esi]",
+    "line": "mov     edi, dword ptr unk_B39548[esi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x40C522",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x40C534",
-    "line": "mov     esi, dword_B39578[edi]",
+    "line": "mov     esi, dword ptr unk_B39578[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x40C54E",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x40C56D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x40C576",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1236,14 +1236,8 @@
     "size": 2
   },
   {
-    "ea": "0x40C58D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x40C590",
-    "line": "mov     esi, dword_B39554[edi]",
+    "line": "mov     esi, dword ptr unk_B39554[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1297,7 +1291,7 @@
   },
   {
     "ea": "0x40C5AA",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1351,7 +1345,7 @@
   },
   {
     "ea": "0x40C5C9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1363,7 @@
   },
   {
     "ea": "0x40C5D2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1411,7 @@
   },
   {
     "ea": "0x40C5F0",
-    "line": "mov     esi, dword_B39930[edi]",
+    "line": "mov     esi, dword ptr g_joyPOVLabelSetting_Up[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1471,7 +1465,7 @@
   },
   {
     "ea": "0x40C60A",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1525,7 +1519,7 @@
   },
   {
     "ea": "0x40C629",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,7 +1537,7 @@
   },
   {
     "ea": "0x40C632",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,7 +1585,7 @@
   },
   {
     "ea": "0x40C650",
-    "line": "mov     esi, dword_B399D0[edi]",
+    "line": "mov     esi, dword ptr g_controlActionLabelSetting_Forward[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1645,7 +1639,7 @@
   },
   {
     "ea": "0x40C66A",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1699,7 +1693,7 @@
   },
   {
     "ea": "0x40C689",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1711,7 @@
   },
   {
     "ea": "0x40C692",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1753,7 +1747,7 @@
   },
   {
     "ea": "0x40C6A4",
-    "line": "mov     esi, dword_B39A44[edi]",
+    "line": "mov     esi, dword ptr unk_B39A44[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1807,7 +1801,7 @@
   },
   {
     "ea": "0x40C6C2",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1861,7 +1855,7 @@
   },
   {
     "ea": "0x40C6E1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1879,7 +1873,7 @@
   },
   {
     "ea": "0x40C6EA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1915,7 @@
   },
   {
     "ea": "0x40C701",
-    "line": "mov     esi, dword_B39A60[edi]",
+    "line": "mov     esi, dword ptr unk_B39A60[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1975,7 +1969,7 @@
   },
   {
     "ea": "0x40C71B",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2029,7 +2023,7 @@
   },
   {
     "ea": "0x40C73A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2047,7 +2041,7 @@
   },
   {
     "ea": "0x40C743",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,7 +2071,7 @@
   },
   {
     "ea": "0x40C753",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; [Controller decode 2026-07-09] Shutdown loop frees the 31-entry Xbox-style prompt label table at g_xboxPromptSetting_DPadY.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -2095,7 +2089,7 @@
   },
   {
     "ea": "0x40C760",
-    "line": "mov     esi, dword_B39950[edi]",
+    "line": "mov     esi, dword ptr g_xboxPromptSetting_DPadY[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2149,7 +2143,7 @@
   },
   {
     "ea": "0x40C77A",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2203,7 +2197,7 @@
   },
   {
     "ea": "0x40C799",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2221,7 +2215,7 @@
   },
   {
     "ea": "0x40C7A2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2269,7 +2263,7 @@
   },
   {
     "ea": "0x40C7C0",
-    "line": "mov     esi, dword_B39530[edi]",
+    "line": "mov     esi, dword ptr unk_B39530[edi]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2323,7 +2317,7 @@
   },
   {
     "ea": "0x40C7DA",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2377,7 +2371,7 @@
   },
   {
     "ea": "0x40C7F9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,7 +2389,7 @@
   },
   {
     "ea": "0x40C802",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2476,5 +2470,197 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x403BC0",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x403BC3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x403BC5",
+    "line": "jz      short locret_403BD3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403BC7",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403BCA",
+    "line": "jnz     short locret_403BD3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x403BCC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403BCD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x403BD2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403BD3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AA0F0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA0F3",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA0F8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA0FB",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA100",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA103",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA108",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA10B",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA110",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA113",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA118",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA11B",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA120",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA123",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA128",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA12B",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA130",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AA134",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA137",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AA13A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AA13C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA141",
+    "line": "mov     eax, offset stru_AD7104",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AA146",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

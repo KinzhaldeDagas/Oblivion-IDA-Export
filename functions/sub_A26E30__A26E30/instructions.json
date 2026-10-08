@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA26E30",
-    "line": "mov     eax, dword_B42970",
+    "line": "mov     eax, OB_stBezierSpline_CacheMap_010201A0.head; Atexit destructor for Oblivion's inline spline-cache map. Erases the full node range, frees the sentinel head, and clears head/size. Cached spline payloads are expected to have been released by ClearCache before this map teardown.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -25,25 +25,25 @@
   },
   {
     "ea": "0xA26E3B",
-    "line": "push    eax",
+    "line": "push    eax; lastNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0xA26E3C",
-    "line": "mov     ecx, offset dword_B4296C",
+    "line": "mov     ecx, offset OB_stBezierSpline_CacheMap_010201A0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA26E41",
-    "line": "push    ecx",
+    "line": "push    ecx; lastOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0xA26E42",
-    "line": "push    edx",
+    "line": "push    edx; firstNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,31 +55,31 @@
   },
   {
     "ea": "0xA26E45",
-    "line": "push    esi",
+    "line": "push    esi; firstOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0xA26E46",
-    "line": "lea     eax, [esp+1Ch+var_8]",
+    "line": "lea     eax, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0xA26E4A",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0xA26E4B",
-    "line": "call    sub_785910",
+    "line": "call    OB_stBezierSplineCacheMap_EraseRange_010201A0; Erases a [first,last) iterator range from the spline-cache map. Uses whole-tree destruction when the range is begin-to-end; otherwise repeatedly advances and erases individual nodes. Returns the resulting iterator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0xA26E50",
-    "line": "mov     ecx, dword_B42970",
+    "line": "mov     ecx, OB_stBezierSpline_CacheMap_010201A0.head",
     "mnemonic": "mov",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0xA26E57",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0xA26E61",
-    "line": "mov     dword_B42970, eax",
+    "line": "mov     OB_stBezierSpline_CacheMap_010201A0.head, eax",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0xA26E66",
-    "line": "mov     dword_B42974, eax",
+    "line": "mov     OB_stBezierSpline_CacheMap_010201A0.size, eax",
     "mnemonic": "mov",
     "size": 5
   },

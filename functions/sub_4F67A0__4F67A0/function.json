@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F67A0",
+      "0x4F67DB"
+    ]
+  ],
+  "chunks_sha256": "b2a1e78e329376691ee085a9e3d63e425e9e0ff77280c60f924edfff643324ea",
+  "comment_regular": "GetQuestRunning_Eval (index 56 / opcode 0x1038): tests the Quest parameter's questFlags bit 0. It does not inspect stage or completion state.",
+  "comment_repeatable": "GetQuestRunning_Eval (index 56 / opcode 0x1038): tests the Quest parameter's questFlags bit 0. It does not inspect stage or completion state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F67A0",
+  "display_name": "GetQuestRunning_Eval",
   "end_ea": "0x4F67DB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F67A0",
+  "name": "GetQuestRunning_Eval",
   "segment": ".text",
   "sha256": "b2a1e78e329376691ee085a9e3d63e425e9e0ff77280c60f924edfff643324ea",
   "size": 59,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F67A0",
-  "type": "char __cdecl(int, int, int, double *)",
+  "total_chunk_size": 59,
+  "type": "char __cdecl(TESObjectREFR *subject, TESQuest *quest, TESForm *param2, double *value)",
   "xrefs_from_count": 24,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

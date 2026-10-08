@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E8BA0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+out_group_header]; Verified local ROAD grouping. Given the owning WRLD's top-level group type 0, emits a child GRUP type 1 whose label is the owning TESWorldSpace FormID. TESRoad owner pointer is at +0x2C.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4E8BA8",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+current_group_header]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4E8BCF",
-    "line": "mov     dword ptr [eax+0Ch], 1",
+    "line": "mov     dword ptr [eax+0Ch], 1; Canonical ROAD parent emitted here: groupType=1, label=owning WRLD FormID.",
     "mnemonic": "mov",
     "size": 7
   },

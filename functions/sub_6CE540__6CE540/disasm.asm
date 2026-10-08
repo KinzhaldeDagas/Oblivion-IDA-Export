@@ -37,7 +37,7 @@
 0x6CE59F: push    edi
 0x6CE5A0: lea     edi, [ebp+30h]
 0x6CE5A3: mov     ecx, edi
-0x6CE5A5: call    sub_6CBC10
+0x6CE5A5: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CE5AA: test    al, al
 0x6CE5AC: jnz     short loc_6CE5E0
 0x6CE5AE: movzx   eax, [esp+30h+var_21]
@@ -46,7 +46,7 @@
 0x6CE5B9: push    esi
 0x6CE5BA: lea     esi, [eax+ecx+4]
 0x6CE5BE: mov     ecx, esi
-0x6CE5C0: call    sub_6CBC10
+0x6CE5C0: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CE5C5: test    al, al
 0x6CE5C7: jnz     short loc_6CE5DF
 0x6CE5C9: push    esi

@@ -20,11 +20,11 @@
 0x451DDE: mov     [esi+3E4h], edi
 0x451DE4: mov     [esi+3E8h], edi
 0x451DEA: mov     [esi+3ECh], edi
-0x451DF0: mov     [esi+404h], edi
+0x451DF0: mov     [esi+404h], edi; TESFile_constr initializes authorName data pointer, dataLen, and bufLen to zero. Missing CNAM therefore retains the empty-string constructor default.
 0x451DF6: mov     [esi+408h], di
 0x451DFD: mov     [esi+40Ah], di
 0x451E04: mov     [esp+20h+var_4], edi
-0x451E08: mov     [esi+40Ch], edi
+0x451E08: mov     [esi+40Ch], edi; TESFile_constr initializes description data pointer, dataLen, and bufLen to zero. Missing SNAM therefore retains the empty-string constructor default.
 0x451E0E: mov     [esi+410h], di
 0x451E15: mov     [esi+412h], di
 0x451E1C: mov     [esi+414h], edi
@@ -112,3 +112,16 @@
 0x451F73: pop     ebx
 0x451F74: add     esp, 10h
 0x451F77: retn    0Ch
+0x9AE130: mov     ecx, [ebp-10h]
+0x9AE133: add     ecx, 404h; void *
+0x9AE139: jmp     BSStringT_Clear
+0x9AE13E: mov     ecx, [ebp-10h]
+0x9AE141: add     ecx, 40Ch; void *
+0x9AE147: jmp     BSStringT_Clear
+0x9AE14C: mov     edx, [esp+ArgList]
+0x9AE150: lea     eax, [edx-10h]
+0x9AE153: mov     ecx, [edx-14h]
+0x9AE156: xor     ecx, eax
+0x9AE158: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE15D: mov     eax, offset stru_ADAA08
+0x9AE162: jmp     ___CxxFrameHandler3

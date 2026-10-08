@@ -13,7 +13,7 @@
 0x43E10D: lea     eax, [esp+58h+var_C]
 0x43E111: mov     large fs:0, eax
 0x43E117: mov     edi, ecx
-0x43E119: mov     ecx, ioManager
+0x43E119: mov     ecx, ds:0B33A10h
 0x43E11F: call    sub_432860
 0x43E124: xor     ebx, ebx
 0x43E126: mov     [esp+58h+var_3C], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVTESObjectREFR@@V?$NiPointer@VQueuedReference@@@@@@6B@; const LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference>>::LockFreeMapIterator::`vftable'
@@ -22,9 +22,9 @@
 0x43E136: mov     byte ptr [esp+58h+var_30], bl
 0x43E13A: mov     ebp, ds:InterlockedDecrement
 0x43E140: mov     [esp+58h+var_4], ebx
-0x43E144: mov     [esp+58h+var_44], ebx
+0x43E144: mov     [esp+58h+task], ebx
 0x43E148: push    1
-0x43E14A: lea     eax, [esp+5Ch+var_44]
+0x43E14A: lea     eax, [esp+5Ch+task]
 0x43E14E: push    eax
 0x43E14F: lea     ecx, [esp+60h+var_40]
 0x43E153: push    ecx
@@ -34,11 +34,11 @@
 0x43E15C: mov     byte ptr [esp+68h+var_4], 1
 0x43E161: call    sub_642D90
 0x43E166: test    al, al
-0x43E168: mov     esi, [esp+58h+var_44]
+0x43E168: mov     esi, [esp+58h+task]
 0x43E16C: jz      short loc_43E17A
-0x43E16E: mov     ecx, ioManager
-0x43E174: push    esi
-0x43E175: call    sub_432130
+0x43E16E: mov     ecx, ds:0B33A10h
+0x43E174: push    esi; task
+0x43E175: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
 0x43E17A: cmp     esi, ebx
 0x43E17C: mov     byte ptr [esp+58h+var_4], bl
 0x43E180: jz      short loc_43E196
@@ -58,9 +58,9 @@
 0x43E1A5: mov     [esp+58h+var_28], ebx
 0x43E1A9: mov     [esp+58h+var_24], ebx
 0x43E1AD: mov     byte ptr [esp+58h+var_20], bl
-0x43E1B1: mov     [esp+58h+var_44], ebx
+0x43E1B1: mov     [esp+58h+task], ebx
 0x43E1B5: push    1
-0x43E1B7: lea     ecx, [esp+5Ch+var_44]
+0x43E1B7: lea     ecx, [esp+5Ch+task]
 0x43E1BB: push    ecx
 0x43E1BC: mov     ecx, [edi+0Ch]
 0x43E1BF: lea     edx, [esp+60h+var_40]
@@ -70,11 +70,11 @@
 0x43E1C9: mov     byte ptr [esp+68h+var_4], 3
 0x43E1CE: call    sub_642D90
 0x43E1D3: test    al, al
-0x43E1D5: mov     esi, [esp+58h+var_44]
+0x43E1D5: mov     esi, [esp+58h+task]
 0x43E1D9: jz      short loc_43E1E7
-0x43E1DB: mov     ecx, ioManager
-0x43E1E1: push    esi
-0x43E1E2: call    sub_432130
+0x43E1DB: mov     ecx, ds:0B33A10h
+0x43E1E1: push    esi; task
+0x43E1E2: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
 0x43E1E7: cmp     esi, ebx
 0x43E1E9: mov     byte ptr [esp+58h+var_4], 2
 0x43E1EE: jz      short loc_43E204
@@ -95,9 +95,9 @@
 0x43E217: mov     [esp+58h+var_14], ebx
 0x43E21B: mov     [esp+58h+var_10], bl
 0x43E21F: nop
-0x43E220: mov     [esp+58h+var_44], ebx
+0x43E220: mov     [esp+58h+task], ebx
 0x43E224: push    1
-0x43E226: lea     ecx, [esp+5Ch+var_44]
+0x43E226: lea     ecx, [esp+5Ch+task]
 0x43E22A: push    ecx
 0x43E22B: mov     ecx, [edi+10h]
 0x43E22E: lea     edx, [esp+60h+var_40]
@@ -107,11 +107,11 @@
 0x43E238: mov     byte ptr [esp+68h+var_4], 5
 0x43E23D: call    sub_642D90
 0x43E242: test    al, al
-0x43E244: mov     esi, [esp+58h+var_44]
+0x43E244: mov     esi, [esp+58h+task]
 0x43E248: jz      short loc_43E256
-0x43E24A: mov     ecx, ioManager
-0x43E250: push    esi
-0x43E251: call    sub_432130
+0x43E24A: mov     ecx, ds:0B33A10h
+0x43E250: push    esi; task
+0x43E251: call    IOTask_Cancel; Verified generic IOTask cancellation state machine: previous states 0/1/2 atomically transition to 6 and invoke vtable +0x0C with status 0; state 5 transitions to 6 and invokes it with status 1; states 3/4 wait for the worker's state change. Verified local role: state 6 is the cancellation/terminal marker written by IOTask_Cancel. Its canonical enum label remains Unknown.
 0x43E256: cmp     esi, ebx
 0x43E258: mov     byte ptr [esp+58h+var_4], 4
 0x43E25D: jz      short loc_43E273
@@ -127,11 +127,11 @@
 0x43E271: call    eax
 0x43E273: test    [esp+58h+var_10], 2
 0x43E278: jz      short loc_43E220
-0x43E27A: mov     ecx, ioManager
+0x43E27A: mov     ecx, ds:0B33A10h
 0x43E280: mov     edx, [ecx]
 0x43E282: mov     eax, [edx+48h]
 0x43E285: call    eax
-0x43E287: mov     ecx, ioManager
+0x43E287: mov     ecx, ds:0B33A10h
 0x43E28D: call    sub_432890
 0x43E292: mov     ecx, dword ptr [esp+58h+var_C]
 0x43E296: mov     large fs:0, ecx
@@ -142,3 +142,28 @@
 0x43E2A1: pop     ebx
 0x43E2A2: add     esp, 44h
 0x43E2A5: retn
+0x435A60: mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVTESObjectREFR@@V?$NiPointer@VQueuedReference@@@@@@6B@; const LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference>>::LockFreeMapIterator::`vftable'
+0x435A66: retn
+0x435A70: mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVAnimIdle@@V?$NiPointer@VQueuedAnimIdle@@@@@@6B@; const LockFreeMap<AnimIdle *,NiPointer<QueuedAnimIdle>>::LockFreeMapIterator::`vftable'
+0x435A76: retn
+0x435A80: mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVTESObjectREFR@@V?$NiPointer@VQueuedHelmet@@@@@@6B@; const LockFreeMap<TESObjectREFR *,NiPointer<QueuedHelmet>>::LockFreeMapIterator::`vftable'
+0x435A86: retn
+0x9ACE00: lea     ecx, [ebp-3Ch]
+0x9ACE03: jmp     loc_435A60
+0x9ACE08: lea     ecx, [ebp-44h]; void *
+0x9ACE0B: jmp     sub_4BDDC0
+0x9ACE10: lea     ecx, [ebp-2Ch]
+0x9ACE13: jmp     loc_435A70
+0x9ACE18: lea     ecx, [ebp-44h]; void *
+0x9ACE1B: jmp     sub_4BDDC0
+0x9ACE20: lea     ecx, [ebp-1Ch]
+0x9ACE23: jmp     loc_435A80
+0x9ACE28: lea     ecx, [ebp-44h]; void *
+0x9ACE2B: jmp     sub_4BDDC0
+0x9ACE30: mov     edx, [esp+arg_4]
+0x9ACE34: lea     eax, [edx-48h]
+0x9ACE37: mov     ecx, [edx-4Ch]
+0x9ACE3A: xor     ecx, eax
+0x9ACE3C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACE41: mov     eax, offset stru_AD9A68
+0x9ACE46: jmp     ___CxxFrameHandler3

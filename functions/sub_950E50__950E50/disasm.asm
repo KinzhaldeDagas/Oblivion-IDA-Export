@@ -16,7 +16,6 @@
 0x950E7E: jle     loc_950F31
 0x950E84: mov     [esp+240h+var_22C], ebx
 0x950E88: jmp     short loc_950E90
-0x950E8A: align 10h
 0x950E90: mov     ecx, [edi+18h]
 0x950E93: mov     eax, [ecx]
 0x950E95: lea     edx, [esp+240h+var_210]

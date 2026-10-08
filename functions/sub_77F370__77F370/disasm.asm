@@ -53,22 +53,22 @@
 0x77F413: mov     eax, [eax]
 0x77F415: test    eax, eax
 0x77F417: mov     esi, [esi]
-0x77F419: mov     [esp+118h+var_10C], eax
+0x77F419: mov     [esp+118h+data], eax
 0x77F41D: jz      short loc_77F431
 0x77F41F: lea     ecx, [esp+118h+Dst]
-0x77F423: push    ecx; Str2
-0x77F424: push    eax; Str1
-0x77F425: call    __strcmp
+0x77F423: push    ecx; right
+0x77F424: push    eax; left
+0x77F425: call    CRT_StricmpLocaleDispatch
 0x77F42A: add     esp, 8
 0x77F42D: test    eax, eax
 0x77F42F: jz      short loc_77F437
 0x77F431: test    esi, esi
 0x77F433: jnz     short loc_77F410
 0x77F435: jmp     short loc_77F444
-0x77F437: lea     edx, [esp+118h+var_10C]
-0x77F43B: push    edx
-0x77F43C: lea     ecx, [ebx+8]
-0x77F43F: call    sub_776690
+0x77F437: lea     edx, [esp+118h+data]
+0x77F43B: push    edx; data
+0x77F43C: lea     ecx, [ebx+8]; list
+0x77F43F: call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.
 0x77F444: pop     edi
 0x77F445: pop     esi
 0x77F446: mov     ecx, [esp+110h+var_4]

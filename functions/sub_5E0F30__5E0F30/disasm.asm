@@ -1,4 +1,4 @@
-0x5E0F30: cmp     dword ptr [ecx+58h], 0
+0x5E0F30: cmp     dword ptr [ecx+58h], 0; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.
 0x5E0F34: jz      short loc_5E0F4A
 0x5E0F36: mov     ecx, [ecx+58h]
 0x5E0F39: mov     eax, [ecx]

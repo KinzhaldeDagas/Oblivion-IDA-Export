@@ -1,18 +1,31 @@
 {
-  "callees_count": 81,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 24,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x760DA0",
+      "0x761244"
+    ]
+  ],
+  "chunks_sha256": "62351135a160b9d74395a3511ec03b7f2b4a227ae231dcebcd8844264deefd2b",
+  "comment_regular": "DDS/BMP/TGA direct-to-render texture loader. Uses d3dx9_27 D3DXGetImageInfoFromFileInMemory and D3DXCreateTextureFromFileInMemory. DDS mip-skip fast path only understands FourCC DXT1-DXT5; DX10/BC7 cannot be accepted here without replacing/hooking the loader and decoding/transcoding before D3D9 texture creation.",
+  "comment_repeatable": "DDS/BMP/TGA direct-to-render texture loader. Uses d3dx9_27 D3DXGetImageInfoFromFileInMemory and D3DXCreateTextureFromFileInMemory. DDS mip-skip fast path only understands FourCC DXT1-DXT5; DX10/BC7 cannot be accepted here without replacing/hooking the loader and decoding/transcoding before D3D9 texture creation.\n\n[2026-10-04 purple-frond analysis] Direct filename path explicitly accepts .bmp/.tga/.dds at760E35..760E76 and rejects .png before D3DX decode. Current v108 log caches PalmFronds02/03.png and Bamboo01/02.png as nonnull sources. The caller may enter image-converter/replacement fallback; a nonnull texture alone is not proof of authored pixels.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
   "display_name": "NiDX9SourceTextureData_LoadTextureFile",
   "end_ea": "0x761244",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiDX9SourceTextureData_LoadTextureFile",
   "segment": ".text",
   "sha256": "62351135a160b9d74395a3511ec03b7f2b4a227ae231dcebcd8844264deefd2b",
   "size": 1188,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x760DA0",
+  "total_chunk_size": 1188,
   "type": "char __thiscall(NiDX9SourceTextureData *this, char *Src, NiDX9Renderer *a5, _DWORD *a6)",
   "xrefs_from_count": 443,
   "xrefs_to_count": 1

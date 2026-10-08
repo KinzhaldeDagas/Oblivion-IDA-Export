@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78E6E0",
+      "0x78E7B3"
+    ]
+  ],
+  "chunks_sha256": "7e6923940ed2d6f15f771bae60dca58abdab49d065a0ba1b1c117970319749e1",
+  "comment_regular": "Oblivion compiler-lowered stVec::operator+: initializes the hidden return object with min(lhs.size,rhs.size), then adds components over lhs.size, matching the shipped RT4.1 source semantics (which assume compatible sizes).",
+  "comment_repeatable": "Oblivion compiler-lowered stVec::operator+: initializes the hidden return object with min(lhs.size,rhs.size), then adds components over lhs.size, matching the shipped RT4.1 source semantics (which assume compatible sizes).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78E6E0",
+  "display_name": "OB_stVec_Add_010201A0",
   "end_ea": "0x78E7B3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78E6E0",
+  "name": "OB_stVec_Add_010201A0",
   "segment": ".text",
   "sha256": "7e6923940ed2d6f15f771bae60dca58abdab49d065a0ba1b1c117970319749e1",
   "size": 211,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78E6E0",
-  "type": "int __thiscall(_DWORD *this, int, int)",
+  "total_chunk_size": 211,
+  "type": "OB_stVec_010201A0 *__thiscall(const OB_stVec_010201A0 *this, OB_stVec_010201A0 *result, const OB_stVec_010201A0 *rhs)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 1
 }

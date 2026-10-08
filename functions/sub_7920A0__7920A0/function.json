@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7920A0",
+  "chunks": [
+    [
+      "0x7920A0",
+      "0x7925A6"
+    ]
+  ],
+  "chunks_sha256": "90b988bdf323812f2045757e1b04387205525eadce3d8ce2d5644933fd7dd363",
+  "comment_regular": "\n[2026-10-05 root buds] Root candidates at terminal normal branch level follow source bud path when ComputeLeaves is enabled; no root parameter override in that case. RootBud bridge reproduces caller793809 ECX parent, EDI preVertexIndex*48 and ten stack arguments (ret28). Executable ABI fixture verifies register/stack forwarding, not in-game leaf appearance.\n[Palmetto direction correction v137 2026-10-06] Caller793809 supplies current terminal branch as both this/a3. Native792492 walks depth parents; RT4.1 Branch.cpp ComputeBud walks depth-1, retaining the initial base if exhausted. Palmetto core3001=1, retained28004=1, all3 texture color variances4002=0. Thus source direction at depth1 is normalized(leafPos-currentBranchFirstVertexPos); stock uses trunk/ancestor origin and can compress the crown toward vertical. Plugin v137 reconstructs this source direction only for mesh-enabled leaves with positive depth and variance0 before applying hang/rotation. Uses leafPos+4, branch vertices+18/count+1C, first vertex position+C, compact texture stride54 variance+10. Other cases preserve original direction. Targeted tests and independent review pass; visual result pending.\n[24000 research 2026-10-07] Existing bud path evaluates the terminal branch length profile, scales by tree size and divides by segment count at7921B0..1D0; native floor applies before random azimuth and fixed Y rotation. It derives leaf position and normal from the parent transform, then calls MakeLeaf792598. No24000 placement distance/level storage was established in this compact native path; preserve card/mesh generation until historical semantics are verified.\n[24000 historical transfer trace 2026-10-07; reference addresses, not Oblivion ABI] In the approved Desktop/SpeedTree CAD4.2 executable, editor SPT serializer4BEAF0 is called at44CD78; its result and byte count pass via44CD94 to42A670. That wrapper calls runtime LoadTree4E2700 at42A73F and Compute4E1830 at42A7B9; Compute calls engine50C090 at4E1887. The editor serializer omits24000 and its dedicated writer4C1AD0 has no found direct call/pointer reference. Candidate bud4F78E0..4F7E18 reads leaf-info dimming depth+54 and calls MakeLeaf4F8F00 at4F7DDB, with no placement+20/+24 read. This closes the inspected preview transfer hypothesis but does not supply historical24000 generation semantics. No native consumer was invented or deployed. Evidence: out/leaf_placement_24000/cad42_transfer_conclusion.json; goal remains incomplete pending an active historical reference.\n[RT4.1 parity v146 2026-10-07] Source ComputeBud depth0 selects spine direction at int(percent*(count-1)); depth>0 uses origin after depth-1 parent hops and keeps immediate base when exhausted. Native uses leafInfo+2C blossom level and a different ancestor walk. MakeLeaf wrapper at792598 corrects parent direction for retained28000 models. Legacy missing28004 uses native blossom level after7A46DA installs current leafInfo. Native bud minimum segment length at7921B8..7921D0 remains an explicit full-parity gap; do not claim entire bud generation parity.\n\nCBranch::ComputeBud. Builds a two-vertex bud direction from branch profile/parent transform and forwards final position, normal, parent direction, wind weights, and map state to MakeLeaf.",
+  "comment_repeatable": "Bud/leaf path. Builds a two-vertex bud direction from next branch-info profile and parent transform, then forwards final leaf candidate data to OB_CBranch_MakeLeaf_010201A0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 54,
+  "display_name": "OB_CBranch_ComputeBud_010201A0",
   "end_ea": "0x7925A6",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_7920A0",
+  "name": "OB_CBranch_ComputeBud_010201A0",
   "segment": ".text",
   "sha256": "90b988bdf323812f2045757e1b04387205525eadce3d8ce2d5644933fd7dd363",
   "size": 1286,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7920A0",
-  "type": "char __thiscall(void *this, _DWORD *, float, unsigned int, float *, float, float *, float *, int, float, int)",
-  "xrefs_from_count": 373,
+  "total_chunk_size": 1286,
+  "type": "void __userpurge(OB_CBranch_010201A0 *this@<ecx>, int@<edi>, _DWORD *, float, unsigned int, float *, float, float *, float *, OB_stVectorBillboardLeafPtr_010201A0 *, float, int)",
+  "xrefs_from_count": 426,
   "xrefs_to_count": 1
 }

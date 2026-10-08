@@ -1,94 +1,153 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_PERF_DATA_BLOCK",
+  "definition": "struct _PERF_DATA_BLOCK\n{\nWCHAR_0 Signature[4];\nDWORD LittleEndian;\nDWORD Version;\nDWORD Revision;\nDWORD TotalByteLength;\nDWORD HeaderLength;\nDWORD NumObjectTypes;\nDWORD DefaultObject;\nSYSTEMTIME SystemTime;\n__declspec(align(8)) LARGE_INTEGER_0 PerfTime;\nLARGE_INTEGER_0 PerfFreq;\nLARGE_INTEGER_0 PerfTime100nSec;\nDWORD SystemNameLength;\nDWORD SystemNameOffset;\n}\n",
   "id": 18374686479672046160,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Signature",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "WCHAR_0[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LittleEndian",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Version",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Revision",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TotalByteLength",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HeaderLength",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NumObjectTypes",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DefaultObject",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemTime",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 16
+      "size": 16,
+      "type": "SYSTEMTIME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PerfTime",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 8
+      "size": 8,
+      "type": "LARGE_INTEGER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PerfFreq",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 8
+      "size": 8,
+      "type": "LARGE_INTEGER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PerfTime100nSec",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 8
+      "size": 8,
+      "type": "LARGE_INTEGER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemNameLength",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemNameOffset",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "_PERF_DATA_BLOCK",
+  "ordinal": 8378,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 88
 }

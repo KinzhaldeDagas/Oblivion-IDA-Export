@@ -1,4 +1,4 @@
-0x80A180: sub     esp, 808h
+0x80A180: sub     esp, 808h; MoonSugarEffect decode: SkinShader vertex-program loader. Loads 0x14 SKIN2*.vso vs_2_0 variants into this+0x9C from lighting\2x\v ADTS/AD/DiffusePt HLSL with SKIN/FACEGENBLEND/LIGHTS/PROJ_SHADOW defines.
 0x80A186: mov     eax, ds:0B30AACh
 0x80A18B: xor     eax, esp
 0x80A18D: mov     [esp+808h+var_4], eax
@@ -298,7 +298,7 @@
 0x80A886: lea     eax, [esp+824h+var_108]
 0x80A88D: push    offset aSkin203i_vso; "SKIN2%03i.vso"
 0x80A892: push    eax
-0x80A893: call    __sprintf
+0x80A893: call    __sprintf; MoonSugarEffect decode: SkinShader vertex loader cache name SKIN2%03i.vso; slot index maps to object+0x9C+(i*4). SKIN macro variants occupy odd slots and reserve vertex constants c42-c95 for Bones.
 0x80A898: add     esp, 14h
 0x80A89B: push    ebx; int
 0x80A89C: push    ebx; int
@@ -309,7 +309,7 @@
 0x80A8AE: push    ebp; int
 0x80A8AF: lea     edx, [esp+82Ch+FileName]
 0x80A8B6: push    edx; lpFileName
-0x80A8B7: call    CreateVertexShader
+0x80A8B7: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x80A8BC: mov     edi, eax
 0x80A8BE: mov     eax, [esp+818h+var_808]
 0x80A8C2: mov     esi, [eax]

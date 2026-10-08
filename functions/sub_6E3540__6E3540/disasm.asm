@@ -9,7 +9,7 @@
 0x6E354E: mov     ecx, [esi+10h]
 0x6E3551: mov     edx, ds:0B3D2C8h[ecx*4]
 0x6E3558: push    eax
-0x6E3559: call    edx ; dword_B3D2C8
+0x6E3559: call    edx ; unk_B3D2C8
 0x6E355B: add     esp, 4
 0x6E355E: mov     edi, [esp+0Ch+arg_0]
 0x6E3562: cmp     edi, ebx

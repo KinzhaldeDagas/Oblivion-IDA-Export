@@ -5,9 +5,9 @@ Menu *__userpurge HUDReticle::`scalar deleting destructor'@<eax>(
         double a4@<st0>,
         char a5)
 {
-  this->__vftable = (MenuVtbl *)&HUDReticle::`vftable';
-  Menu::~Menu(this, a2, a3, a4);
-  if ( (a5 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  this->__vftable = (MenuVtbl *)&HUDReticle::`vftable'; /*0x5a82a3*/
+  Menu::~Menu(this, a2, a3, a4); /*0x5a82a9*/
+  if ( (a5 & 1) != 0 ) /*0x5a82b3*/
+    FormHeapFree((unsigned int)this); /*0x5a82b6*/
+  return this; /*0x5a82c0*/
 }

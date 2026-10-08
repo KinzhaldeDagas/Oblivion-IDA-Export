@@ -16,7 +16,7 @@
 0x7C1F70: jnz     short loc_7C1F60
 0x7C1F72: mov     eax, [ebp+4]
 0x7C1F75: cmp     eax, ebx
-0x7C1F77: mov     [esp+0Ch+var_4], eax
+0x7C1F77: mov     [esp+0Ch+node], eax
 0x7C1F7B: jz      short loc_7C1FE0
 0x7C1F7D: push    esi
 0x7C1F7E: push    edi
@@ -28,10 +28,10 @@
 0x7C1F8C: jnz     short loc_7C1FD1
 0x7C1F8E: test    byte ptr [edi+0Ch], 20h
 0x7C1F92: jnz     short loc_7C1FD1
-0x7C1F94: lea     edx, [esp+14h+var_4]
-0x7C1F98: push    edx
-0x7C1F99: mov     ecx, ebp
-0x7C1F9B: call    sub_7AA860
+0x7C1F94: lea     edx, [esp+14h+node]
+0x7C1F98: push    edx; node
+0x7C1F99: mov     ecx, ebp; list
+0x7C1F9B: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x7C1FA0: mov     esi, [edi]
 0x7C1FA2: cmp     esi, ebx
 0x7C1FA4: jz      short loc_7C1FC2
@@ -48,13 +48,13 @@
 0x7C1FBE: mov     ecx, esi
 0x7C1FC0: call    eax
 0x7C1FC2: push    edi
-0x7C1FC3: call    FormHeapFree
-0x7C1FC8: mov     eax, [esp+18h+var_4]
+0x7C1FC3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x7C1FC8: mov     eax, [esp+18h+node]
 0x7C1FCC: add     esp, 4
 0x7C1FCF: jmp     short loc_7C1FDA
 0x7C1FD1: mov     [edi+10h], bl
 0x7C1FD4: mov     eax, [eax]
-0x7C1FD6: mov     [esp+14h+var_4], eax
+0x7C1FD6: mov     [esp+14h+node], eax
 0x7C1FDA: cmp     eax, ebx
 0x7C1FDC: jnz     short loc_7C1F80
 0x7C1FDE: pop     edi

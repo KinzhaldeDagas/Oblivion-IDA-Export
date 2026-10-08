@@ -1,0 +1,11 @@
+enum OblivionBSSMShaderVersion
+{
+OB_BSSM_SV_NONE = 0x0,
+OB_BSSM_SV_1_X = 0x1,
+OB_BSSM_SV_2_0 = 0x2,
+OB_BSSM_SV_2_A96 = 0x3,
+OB_BSSM_SV_2_B96 = 0x4,
+OB_BSSM_SV_2_A = 0x5,
+OB_BSSM_SV_2_B = 0x6,
+OB_BSSM_SV_3_0 = 0x7,
+};

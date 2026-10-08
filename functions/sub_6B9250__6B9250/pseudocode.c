@@ -1,40 +1,41 @@
-void __thiscall sub_6B9250(BSSimpleList_VoidPtr **this, char a2)
+// OFE ownership verification: direct callers 6B9335 (post-response), 6B93DF (initialize), 6B94F6 (manager destruction). Native skips freeing isInfoGeneral MenuTopics; custom SayOnce/noncached rumor objects need explicit ownership cleanup after their nodes are removed. Never free an actor-owned cached object here.
+void __thiscall MenuTopicManager::ClearData(MenuTopicManagerView *this, bool clearAll)
 {
-  BSSimpleList_VoidPtr **v2; // esi
-  UInt32 *v3; // edi
-  BSSimpleList_VoidPtr **v4; // eax
+  MenuTopicNode *p_firstTopic; // esi
+  MenuTopicView *item; // edi
+  MenuTopicNode *next; // eax
 
-  *this = 0;
-  v2 = this + 1;
-  if ( !a2 )
+  this->currentTopicNode = 0; /*0x6b9256*/
+  p_firstTopic = (MenuTopicNode *)&this->firstTopic; /*0x6b925c*/
+  if ( !clearAll ) /*0x6b925f*/
   {
-    if ( this == (BSSimpleList_VoidPtr **)0xFFFFFFFC )
-      return;
-    v2 = (BSSimpleList_VoidPtr **)*(this + 2);
+    if ( this == (MenuTopicManagerView *)0xFFFFFFFC ) /*0x6b9263*/
+      return; /*0x6b9263*/
+    p_firstTopic = this->nextTopicNode; /*0x6b9265*/
   }
-  if ( v2 )
+  if ( p_firstTopic ) /*0x6b926a*/
   {
-    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v2) )
+    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)p_firstTopic) ) /*0x6b9279*/
     {
-      v3 = (UInt32 *)*v2;
-      if ( !LOBYTE((*v2)[4].firstNode.data) )
+      item = p_firstTopic->item; /*0x6b927b*/
+      if ( !p_firstTopic->item->isInfoGeneralTopic ) /*0x6b927d*/
       {
-        if ( v3 )
+        if ( item ) /*0x6b9284*/
         {
-          sub_6B8F50((UInt32 *)*v2);
-          FormHeapFree((unsigned int)v3);
+          MenuTopic::Destroy(p_firstTopic->item); /*0x6b9288*/
+          FormHeapFree((unsigned int)item); /*0x6b928e*/
         }
       }
-      v4 = (BSSimpleList_VoidPtr **)v2[1];
-      if ( v4 )
+      next = p_firstTopic->next; /*0x6b9296*/
+      if ( next ) /*0x6b929b*/
       {
-        v2[1] = v4[1];
-        *v2 = *v4;
-        FormHeapFree((unsigned int)v4);
+        p_firstTopic->next = next->next; /*0x6b92a0*/
+        p_firstTopic->item = next->item; /*0x6b92a6*/
+        FormHeapFree((unsigned int)next); /*0x6b92a8*/
       }
       else
       {
-        *v2 = 0;
+        p_firstTopic->item = 0; /*0x6b92b2*/
       }
     }
   }

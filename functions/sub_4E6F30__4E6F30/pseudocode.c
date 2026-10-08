@@ -1,102 +1,107 @@
-void __thiscall sub_4E6F30(int *this)
+// Verified deferred PGRI resolver. For each PGRI row, low u16 is a local point-array index and XYZ at +4 locates the remote point; it adds reciprocal adjacency if absent and emits the reciprocal request on the remote grid. Out-of-range local indices are removed. Caller is TESPathGrid_LoadOrResolveGraph.
+void __thiscall TESPathGrid_ResolveCrossCellLinks(TESPathGrid *this)
 {
-  int *v2; // ebx
+  int *p_PGRIRecords; // ebx
   int *v3; // edi
   DWORD CurrentThreadId; // eax
   unsigned int v5; // esi
   unsigned __int16 v6; // ax
-  TESObjectCELL *v7; // ecx
-  char *v8; // edi
+  TESObjectCELL *parentCell; // ecx
+  TESPathGridPoint *v8; // edi
   TESWorldSpace *WorldSpace; // eax
-  char *v10; // eax
-  char *v11; // esi
-  _DWORD *v12; // eax
-  _DWORD *v13; // eax
-  float *v14; // eax
-  int *v16; // eax
-  unsigned __int16 **v17; // [esp+4h] [ebp-4h] BYREF
+  TESPathGridPoint *PointInNeighborCell; // eax
+  TESPathGridPoint *v11; // esi
+  BSSimpleList_VoidPtr *Connections; // eax
+  BSSimpleList_VoidPtr *v13; // eax
+  NiPoint3 *Position; // eax
+  BSSimpleList_VoidPtr::NodeVoid *next; // eax
+  TESPathGrid *outOwningGrid; // [esp+4h] [ebp-4h] BYREF
 
-  if ( *(this + 9) )
+  if ( this->pointArray ) /*0x4e6f34*/
   {
-    if ( TESObjectCELL_GetWorldSpace((TESObjectCELL *)*(this + 8)) )
+    if ( TESObjectCELL_GetWorldSpace(this->parentCell) ) /*0x4e6f41*/
     {
-      v2 = this + 0xA;
-      v3 = 0;
-      EnterCriticalSection(&stru_B36000);
-      CurrentThreadId = GetCurrentThreadId();
-      ++dword_B3607C;
-      dword_B36078 = CurrentThreadId;
-      if ( this != (int *)0xFFFFFFD8 )
+      p_PGRIRecords = (int *)&this->PGRIRecords; /*0x4e6f55*/
+      v3 = 0; /*0x4e6f58*/
+      EnterCriticalSection(&g_PathGridCriticalSection);// Verified cross-cell PGRI resolution runs under the same g_PathGridCriticalSection as point teardown, updating owner-thread/nesting bookkeeping and preventing concurrent graph mutation. /*0x4e6f5a*/
+      CurrentThreadId = GetCurrentThreadId(); /*0x4e6f60*/
+      ++g_PathGridLockNestingCount; /*0x4e6f66*/
+      g_PathGridLockOwnerThreadId = CurrentThreadId; /*0x4e6f6f*/
+      if ( this != (TESPathGrid *)0xFFFFFFD8 ) /*0x4e6f74*/
       {
-        do
+        do /*0x4e702d*/
         {
-          if ( !v2[1] && !*v2 )
-            break;
-          v5 = *v2;
-          v6 = *(_WORD *)*v2;
-          if ( v6 >= *((_WORD *)this + 0x18) )
+          if ( !p_PGRIRecords[1] && !*p_PGRIRecords ) /*0x4e6f86*/
+            break; /*0x4e6f89*/
+          v5 = *p_PGRIRecords; /*0x4e6f8f*/
+          v6 = *(_WORD *)*p_PGRIRecords; /*0x4e6f91*/
+          if ( v6 >= this->pointCount ) /*0x4e6f98*/
           {
-            if ( v3 )
+            if ( v3 ) /*0x4e7059*/
             {
-              BSSimpleList_Remove(v3, *v2);
-              v2 = (int *)v3[1];
-              FormHeapFree(v5);
+              BSSimpleList_Remove(v3, *p_PGRIRecords); /*0x4e705e*/
+              p_PGRIRecords = (int *)v3[1]; /*0x4e7063*/
+              FormHeapFree(v5); /*0x4e7067*/
             }
             else
             {
-              v16 = (int *)*(this + 0xB);
-              v2 = this + 0xA;
-              if ( v16 )
+              next = this->PGRIRecords.firstNode.next; /*0x4e7071*/
+              p_PGRIRecords = (int *)&this->PGRIRecords; /*0x4e7076*/
+              if ( next ) /*0x4e7079*/
               {
-                *(this + 0xB) = v16[1];
-                *v2 = *v16;
-                FormHeapFree((unsigned int)v16);
+                this->PGRIRecords.firstNode.next = next->next; /*0x4e707e*/
+                *p_PGRIRecords = (int)next->data; /*0x4e7084*/
+                FormHeapFree((unsigned int)next); /*0x4e7086*/
               }
               else
               {
-                *v2 = 0;
+                *p_PGRIRecords = 0; /*0x4e709a*/
               }
-              FormHeapFree(v5);
+              FormHeapFree(v5); /*0x4e708f*/
             }
           }
           else
           {
-            v7 = (TESObjectCELL *)*(this + 8);
-            v8 = *(char **)(*(_DWORD *)(*(this + 9) + 4) + 4 * v6);
-            v17 = 0;
-            WorldSpace = TESObjectCELL_GetWorldSpace(v7);
-            v10 = sub_4E6DF0((float *)(v5 + 4), WorldSpace, &v17, this);
-            v11 = v10;
-            if ( v10 )
+            parentCell = this->parentCell; /*0x4e6fa4*/
+            v8 = this->pointArray->data[v6]; /*0x4e6faa*/
+            outOwningGrid = 0; /*0x4e6fb3*/
+            WorldSpace = TESObjectCELL_GetWorldSpace(parentCell); /*0x4e6fbb*/
+            PointInNeighborCell = TESPathGrid_FindPointInNeighborCell( /*0x4e6fc5*/
+                                    (const NiPoint3 *)(v5 + 4),
+                                    WorldSpace,
+                                    &outOwningGrid,
+                                    this);
+            v11 = PointInNeighborCell; /*0x4e6fca*/
+            if ( PointInNeighborCell ) /*0x4e6fd1*/
             {
-              if ( v10 != v8 )
+              if ( PointInNeighborCell != v8 ) /*0x4e6fd5*/
               {
-                if ( v17 )
+                if ( outOwningGrid ) /*0x4e6fdc*/
                 {
-                  if ( !sub_4E7F80(v8, (int)v10) )
+                  if ( !sub_4E7F80(v8, (int)PointInNeighborCell) ) /*0x4e6fe1*/
                   {
-                    v12 = (_DWORD *)sub_4E7DE0(v8);
-                    BSSimpleList_PushFront(v12, (int)v11);
+                    Connections = PathGraphNode_GetConnections(v8); /*0x4e6fed*/
+                    BSSimpleList_PushFront(Connections, (int)v11); /*0x4e6ff4*/
                   }
-                  if ( !sub_4E7F80(v11, (int)v8) )
+                  if ( !sub_4E7F80(v11, (int)v8) ) /*0x4e6ffc*/
                   {
-                    v13 = (_DWORD *)sub_4E7DE0(v11);
-                    BSSimpleList_PushFront(v13, (int)v8);
-                    v14 = (float *)sub_4BEF40(v8);
-                    sub_4E4FE0(v17, (int)v11, v14);
+                    v13 = PathGraphNode_GetConnections(v11); /*0x4e7008*/
+                    BSSimpleList_PushFront(v13, (int)v8); /*0x4e700f*/
+                    Position = PathGraphNode_GetPosition(v8); /*0x4e7016*/
+                    TESPathGrid_AddPGRICrossCellLinkRequest(outOwningGrid, v11, Position); /*0x4e7021*/
                   }
                 }
               }
             }
-            v3 = v2;
-            v2 = (int *)v2[1];
+            v3 = p_PGRIRecords; /*0x4e7026*/
+            p_PGRIRecords = (int *)p_PGRIRecords[1]; /*0x4e7028*/
           }
         }
-        while ( v2 );
+        while ( p_PGRIRecords ); /*0x4e702d*/
       }
-      if ( dword_B3607C-- == 1 )
-        dword_B36078 = 0;
-      LeaveCriticalSection(&stru_B36000);
+      if ( g_PathGridLockNestingCount-- == 1 ) /*0x4e7034*/
+        g_PathGridLockOwnerThreadId = 0; /*0x4e703f*/
+      LeaveCriticalSection(&g_PathGridCriticalSection); /*0x4e704e*/
     }
   }
 }

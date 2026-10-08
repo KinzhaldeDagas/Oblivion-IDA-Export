@@ -1,1 +1,1 @@
-NiDevImageConverter
+struct NiDevImageConverter;

@@ -1,10 +1,10 @@
-0x452C20: mov     eax, [esp+arg_0]
+0x452C20: mov     eax, [esp+form]
 0x452C24: push    ebx
 0x452C25: mov     ebx, [eax+0Ch]
 0x452C28: push    esi
 0x452C29: push    edi
 0x452C2A: mov     edi, ecx
-0x452C2C: lea     ecx, [esp+0Ch+arg_0]
+0x452C2C: lea     ecx, [esp+0Ch+form]
 0x452C30: push    ecx
 0x452C31: push    ebx
 0x452C32: mov     ecx, edi
@@ -31,11 +31,11 @@
 0x452C6B: mov     esi, eax
 0x452C6D: call    NiTMap_SetAt
 0x452C72: jmp     short loc_452C78
-0x452C74: mov     esi, [esp+0Ch+arg_0]
+0x452C74: mov     esi, [esp+0Ch+form]
 0x452C78: cmp     dword ptr [esi+4], 0
 0x452C7C: mov     eax, esi
 0x452C7E: jnz     short loc_452C86
-0x452C80: mov     edx, [esp+0Ch+arg_4]
+0x452C80: mov     edx, [esp+0Ch+flags]
 0x452C84: or      [esi], edx
 0x452C86: pop     edi
 0x452C87: pop     esi

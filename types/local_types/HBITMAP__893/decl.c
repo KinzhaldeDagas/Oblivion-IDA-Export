@@ -1,1 +1,1 @@
-HBITMAP
+typedef HBITMAP__ *HBITMAP;

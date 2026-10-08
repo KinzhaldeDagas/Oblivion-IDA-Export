@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x58CEF9",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+trait]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x58CEFE",
-    "line": "push    eax",
+    "line": "push    eax; trait",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58CEFF",
-    "line": "call    Tile_GetPropertyByCode?",
+    "line": "call    Tile__GetOrCreateValue; Verified: sorted trait lookup; if absent allocates 0x1C bytes, constructs Value at 0x589DF0, stores owner Tile at +0 and inserts into Tile value list. Corrects misleading existing-property-only interpretation.",
     "mnemonic": "call",
     "size": 5
   },

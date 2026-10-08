@@ -1,57 +1,57 @@
 char __stdcall sub_74FB80(NiObject *a1, __int16 a2)
 {
-  int v2; // eax
-  int v3; // eax
-  int v5; // eax
+  NiRTTI *v2; // eax
+  NiRTTI *v3; // eax
+  NiRTTI *v5; // eax
 
-  if ( a2 )
+  if ( a2 ) /*0x74fb89*/
   {
-    if ( a2 == 1 )
+    if ( a2 == 1 ) /*0x74fbde*/
     {
-      if ( a1 )
+      if ( a1 ) /*0x74fbe6*/
       {
-        v5 = (int)a1->__vftable->GetType(a1);
-        if ( v5 )
+        v5 = a1->__vftable->GetType(a1); /*0x74fbef*/
+        if ( v5 ) /*0x74fbf3*/
         {
-          while ( (char *)v5 != dword_B3E7E8 )
+          while ( v5 != &stru_B3E7E8 ) /*0x74fbfa*/
           {
-            v5 = *(_DWORD *)(v5 + 4);
-            if ( !v5 )
-              goto LABEL_16;
+            v5 = v5->parent; /*0x74fbfc*/
+            if ( !v5 ) /*0x74fc01*/
+              goto LABEL_16; /*0x74fc01*/
           }
-          return 1;
+          return 1; /*0x74fbfa*/
         }
       }
 LABEL_16:
-      if ( NiRTTI::IsObjectOfRTTIType((NiRTTI *)dword_B3EA50, a1) )
-        return 1;
+      if ( NiRTTI::IsObjectOfRTTIType(&stru_B3EA50, a1) ) /*0x74fc09*/
+        return 1; /*0x74fbd7*/
     }
   }
-  else if ( a1 )
+  else if ( a1 ) /*0x74fb91*/
   {
-    v2 = (int)a1->__vftable->GetType(a1);
-    if ( v2 )
+    v2 = a1->__vftable->GetType(a1); /*0x74fb9e*/
+    if ( v2 ) /*0x74fba2*/
     {
-      while ( (char *)v2 != dword_B3CFBC )
+      while ( v2 != &stru_B3CFBC ) /*0x74fba9*/
       {
-        v2 = *(_DWORD *)(v2 + 4);
-        if ( !v2 )
-          goto LABEL_6;
+        v2 = v2->parent; /*0x74fbab*/
+        if ( !v2 ) /*0x74fbb0*/
+          goto LABEL_6; /*0x74fbb0*/
       }
-      return 1;
+      return 1; /*0x74fba9*/
     }
 LABEL_6:
-    v3 = (int)a1->__vftable->GetType(a1);
-    if ( v3 )
+    v3 = a1->__vftable->GetType(a1); /*0x74fbb9*/
+    if ( v3 ) /*0x74fbbd*/
     {
-      while ( (char *)v3 != dword_B3CF5C )
+      while ( v3 != &stru_B3CF5C ) /*0x74fbc5*/
       {
-        v3 = *(_DWORD *)(v3 + 4);
-        if ( !v3 )
-          return 0;
+        v3 = v3->parent; /*0x74fbc7*/
+        if ( !v3 ) /*0x74fbcc*/
+          return 0; /*0x74fbd1*/
       }
-      return 1;
+      return 1; /*0x74fbc5*/
     }
   }
-  return 0;
+  return 0; /*0x74fbd0*/
 }

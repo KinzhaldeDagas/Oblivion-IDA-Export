@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4CC096",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4CC0DC",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4CC0E7",
-    "line": "call    sub_42B460",
+    "line": "call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x4CC134",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -469,37 +469,37 @@
   },
   {
     "ea": "0x4CC153",
-    "line": "lea     eax, [esp+1Ch+var_9]",
+    "line": "lea     eax, [esp+1Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4CC157",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CC158",
-    "line": "push    edi",
+    "line": "push    edi; key",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CC159",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CC15B",
-    "line": "mov     [esp+24h+var_9], 0",
+    "line": "mov     [esp+24h+valueOut], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4CC160",
-    "line": "call    sub_4D6760",
+    "line": "call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4CC169",
-    "line": "cmp     [esp+1Ch+var_9], 0",
+    "line": "cmp     [esp+1Ch+valueOut], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x4CC18C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

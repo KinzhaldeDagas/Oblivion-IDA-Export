@@ -1,4 +1,5 @@
-ExtraTeleport *__thiscall GetTeleportExtraData(_BYTE *this)
+// Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+TeleportData *__thiscall TESObjectREFR_GetTeleportData(TESObjectREFR *this)
 {
-  return (ExtraTeleport *)ExtraDataList_GetTeleport((ExtraDataList *)(this + 0x44));
+  return ExtraDataList_GetTeleport(&this->member.baseExtraList);
 }

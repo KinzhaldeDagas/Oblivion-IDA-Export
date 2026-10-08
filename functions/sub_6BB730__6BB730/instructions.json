@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x6BB774",
-    "line": "call    sub_6D31B0",
+    "line": "call    NiAnimationKey_FindInsertionIndex; Finds the sorted insertion index for a requested key time using the registered record stride. Returns false when an exact timestamp already exists, preventing duplicate boundary insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x6BB7BE",
-    "line": "push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; a5",
+    "line": "push    offset Shared_NoOpVirtual_60D0A0; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6BB7C3",
-    "line": "push    offset sub_7616D0; a4",
+    "line": "push    offset ActorList_ReturnHead; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -373,19 +373,19 @@
   },
   {
     "ea": "0x6BB7DD",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6BB7DE",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6BB7DF",
-    "line": "push    ebx; Dst",
+    "line": "push    ebx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x6BB7E8",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6BB804",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x6BB808",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x6BB80D",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6BB80E",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x6BB90F",
-    "line": "push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; void (__thiscall *)(void *)",
+    "line": "push    offset Shared_NoOpVirtual_60D0A0; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x6BB921",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1156,5 +1156,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C6E70",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6E73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6E74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6E79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6E7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6E7B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C6E7F",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6E82",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6E85",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6E87",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6E8C",
+    "line": "mov     eax, offset stru_AEF300",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6E91",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

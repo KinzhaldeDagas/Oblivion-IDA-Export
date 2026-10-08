@@ -1,4 +1,4 @@
-0x843CF0: push    0FFFFFFFFh
+0x843CF0: push    0FFFFFFFFh;
 0x843CF2: push    offset SEH_851CA0
 0x843CF7: mov     eax, large fs:0
 0x843CFD: push    eax
@@ -14,7 +14,7 @@
 0x843D0F: mov     large fs:0, eax
 0x843D15: mov     edi, ecx
 0x843D17: mov     esi, ds:0B45984h
-0x843D1D: mov     ecx, [esp+24h+arg_C]
+0x843D1D: mov     ecx, [esp+24h+value]
 0x843D21: mov     eax, [esi+24h]
 0x843D24: mov     ebp, [eax]
 0x843D26: push    0
@@ -46,27 +46,27 @@
 0x843D66: add     eax, 4
 0x843D69: push    eax; lpAddend
 0x843D6A: call    dword ptr ds:0A28078h
-0x843D70: mov     eax, [esp+24h+arg_C]
+0x843D70: mov     eax, [esp+24h+value]
 0x843D74: push    eax
 0x843D75: push    ebp
 0x843D76: mov     ecx, edi
 0x843D78: call    sub_848FA0
 0x843D7D: mov     ebx, 1
 0x843D82: add     [esi+60h], ebx
-0x843D85: mov     [esp+24h+arg_C], esi
+0x843D85: mov     [esp+24h+value], esi
 0x843D89: mov     edx, [edi+38h]
-0x843D8C: lea     ecx, [esp+24h+arg_C]
-0x843D90: push    ecx
-0x843D91: push    edx
-0x843D92: lea     ecx, [edi+40h]
+0x843D8C: lea     ecx, [esp+24h+value]
+0x843D90: push    ecx; value
+0x843D91: push    edx; index
+0x843D92: lea     ecx, [edi+40h]; this
 0x843D95: mov     [esp+2Ch+var_4], 0
-0x843D9D: call    sub_76CE40
+0x843D9D: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x843DA2: or      eax, 0FFFFFFFFh
 0x843DA5: add     [esi+60h], eax
 0x843DA8: mov     [esp+24h+var_4], eax
 0x843DAC: jnz     short loc_843DB5
 0x843DAE: mov     ecx, esi
-0x843DB0: call    sub_7604D0
+0x843DB0: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x843DB5: add     [edi+38h], ebx
 0x843DB8: mov     ecx, dword ptr [esp+24h+var_C]
 0x843DBC: mov     large fs:0, ecx
@@ -77,3 +77,12 @@
 0x843DC7: pop     ebx
 0x843DC8: add     esp, 10h
 0x843DCB: retn    10h
+0x9D3360: lea     ecx, [ebp+10h]; void *
+0x9D3363: jmp     sub_4027D0
+0x9D3368: mov     edx, [esp+arg_4]
+0x9D336C: lea     eax, [edx-14h]
+0x9D336F: mov     ecx, [edx-18h]
+0x9D3372: xor     ecx, eax
+0x9D3374: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3379: mov     eax, offset stru_AFB794
+0x9D337E: jmp     ___CxxFrameHandler3

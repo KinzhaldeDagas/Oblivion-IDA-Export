@@ -1,4 +1,4 @@
-0x470820: push    ebx
+0x470820: push    ebx; Insert-or-assign for the ActorAnimData encoded-key map at +0x9C. Hashes UInt16 key, finds an equal node, invokes node cleanup before overwrite, or allocates/links a new node and increments map count.
 0x470821: mov     ebx, [esp+4+arg_0]
 0x470825: push    ebp
 0x470826: push    esi

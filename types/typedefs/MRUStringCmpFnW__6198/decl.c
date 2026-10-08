@@ -1,1 +1,1 @@
-MRUStringCmpFnW
+typedef INT (*MRUStringCmpFnW)(LPCWSTR, LPCWSTR);

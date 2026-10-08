@@ -11,7 +11,7 @@
 0x75E615: test    eax, eax
 0x75E617: jz      short loc_75E62E
 0x75E619: lea     esp, [esp+0]
-0x75E620: cmp     eax, offset dword_B40864
+0x75E620: cmp     eax, offset stru_B40864
 0x75E625: jz      short loc_75E635
 0x75E627: mov     eax, [eax+4]
 0x75E62A: test    eax, eax

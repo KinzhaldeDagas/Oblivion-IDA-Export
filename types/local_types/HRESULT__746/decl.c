@@ -1,1 +1,1 @@
-HRESULT
+typedef void *HRESULT;

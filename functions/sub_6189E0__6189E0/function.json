@@ -1,19 +1,32 @@
 {
-  "callees_count": 130,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6189E0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 56,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x6189E0",
+      "0x6191AB"
+    ]
+  ],
+  "chunks_sha256": "e12b07c863ffe5c2e90c4d86317eff6fec64600a5819705c9cb257b0e69d97e1",
+  "comment_regular": "Central ranged combat-option evaluator. Runs while combat mode +0x74 is 3, obtains target distance bounds, independently classifies Staff type 4 and Bow type 5, scores physical ranged attack versus magic, and transitions to attack, spell, or repositioning modes. The sole stack flag is caller-clean semantic padding/unused in this build.",
+  "comment_repeatable": "Central ranged combat-option evaluator. Runs while combat mode +0x74 is 3, obtains target distance bounds, independently classifies Staff type 4 and Bow type 5, scores physical ranged attack versus magic, and transitions to attack, spell, or repositioning modes. The sole stack flag is caller-clean semantic padding/unused in this build.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "CombatController_EvaluateRangedAttackOptions",
   "end_ea": "0x6191AB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6189E0",
+  "name": "CombatController_EvaluateRangedAttackOptions",
   "segment": ".text",
   "sha256": "e12b07c863ffe5c2e90c4d86317eff6fec64600a5819705c9cb257b0e69d97e1",
   "size": 1995,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6189E0",
-  "type": "void __userpurge(int@<ecx>, int@<ebx>, int@<edi>, int)",
+  "total_chunk_size": 1995,
+  "type": "void __thiscall(void *this, int unusedModeFlag)",
   "xrefs_from_count": 755,
   "xrefs_to_count": 2
 }

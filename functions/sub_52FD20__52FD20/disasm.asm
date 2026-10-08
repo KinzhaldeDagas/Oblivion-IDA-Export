@@ -17,7 +17,7 @@
 0x52FD4F: push    eax
 0x52FD50: mov     ecx, ebp
 0x52FD52: call    sub_52FC40
-0x52FD57: mov     edi, dword ptr [esp+10h+ArgList]
+0x52FD57: mov     edi, [esp+10h+ArgList]
 0x52FD5B: test    edi, edi
 0x52FD5D: mov     esi, eax
 0x52FD5F: jz      loc_52FE5D
@@ -28,11 +28,11 @@
 0x52FD76: jz      short loc_52FD91
 0x52FD78: lea     edx, [esp+10h+ArgList]
 0x52FD7C: movzx   eax, ax
-0x52FD7F: push    edx
-0x52FD80: push    eax
-0x52FD81: lea     ecx, [esi+4]
-0x52FD84: mov     dword ptr [esp+18h+ArgList], 0
-0x52FD8C: call    sub_446C50
+0x52FD7F: push    edx; value
+0x52FD80: push    eax; index
+0x52FD81: lea     ecx, [esi+4]; self
+0x52FD84: mov     [esp+18h+ArgList], 0
+0x52FD8C: call    NiTLargeArray32_SetSlot
 0x52FD91: push    1
 0x52FD93: push    edi
 0x52FD94: mov     ecx, ebp

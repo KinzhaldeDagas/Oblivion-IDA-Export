@@ -49,13 +49,13 @@
 0x5F9547: call    TESPackage_LocationData_SetReference
 0x5F954C: push    ebx
 0x5F954D: mov     ecx, esi
-0x5F954F: call    TESPackage_SetLocation
+0x5F954F: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x5F9554: test    ebx, ebx
 0x5F9556: jz      short loc_5F9568
 0x5F9558: mov     ecx, ebx
 0x5F955A: call    TESPackage_LocationData_destr
 0x5F955F: push    ebx
-0x5F9560: call    FormHeapFree
+0x5F9560: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F9565: add     esp, 4
 0x5F9568: or      dword ptr [esi+1Ch], 2000h
 0x5F956F: push    0Ch; Size
@@ -66,23 +66,23 @@
 0x5F957F: mov     [esp+20h+var_4], 2
 0x5F9587: jz      short loc_5F9592
 0x5F9589: mov     ecx, eax
-0x5F958B: call    TESPackage_TargetData_constr
+0x5F958B: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x5F9590: jmp     short loc_5F9594
 0x5F9592: xor     eax, eax
 0x5F9594: push    eax
 0x5F9595: mov     ecx, esi
 0x5F9597: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x5F959F: call    TESPackage_SetTarget
+0x5F959F: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x5F95A4: mov     ecx, [esi+28h]
 0x5F95A7: push    0
 0x5F95A9: mov     dword ptr [esi+18h], 24h ; '$'
-0x5F95B0: call    TESPackage_TargetData_SetType
+0x5F95B0: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x5F95B5: mov     eax, [esp+20h+arg_0]
 0x5F95B9: mov     ecx, [esi+28h]
 0x5F95BC: push    eax
-0x5F95BD: call    TeSPackage_TargetData_SetTargetREFR
+0x5F95BD: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x5F95C2: fld     dword ptr ds:0B36898h
-0x5F95C8: call    Double_To_SInt32
+0x5F95C8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F95CD: mov     ecx, [esi+28h]
 0x5F95D0: push    eax
 0x5F95D1: call    TESAIForm_SetServiceFlags
@@ -102,7 +102,7 @@
 0x5F95FC: push    1; a3
 0x5F95FE: push    esi; a2
 0x5F95FF: mov     ecx, edi; this
-0x5F9601: call    Actor_AddPackage?
+0x5F9601: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x5F9606: mov     ecx, [esp+20h+var_C]
 0x5F960A: mov     large fs:0, ecx
 0x5F9611: pop     ecx
@@ -111,3 +111,25 @@
 0x5F9614: pop     ebx
 0x5F9615: add     esp, 10h
 0x5F9618: retn    4
+0x9C2A70: mov     eax, [ebp-10h]
+0x9C2A73: push    eax
+0x9C2A74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2A79: pop     ecx
+0x9C2A7A: retn
+0x9C2A7B: mov     eax, [ebp-10h]
+0x9C2A7E: push    eax
+0x9C2A7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2A84: pop     ecx
+0x9C2A85: retn
+0x9C2A86: mov     eax, [ebp-10h]
+0x9C2A89: push    eax
+0x9C2A8A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2A8F: pop     ecx
+0x9C2A90: retn
+0x9C2A91: mov     edx, [esp+arg_4]
+0x9C2A95: lea     eax, [edx-10h]
+0x9C2A98: mov     ecx, [edx-14h]
+0x9C2A9B: xor     ecx, eax
+0x9C2A9D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2AA2: mov     eax, offset stru_AEB830
+0x9C2AA7: jmp     ___CxxFrameHandler3

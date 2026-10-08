@@ -21,7 +21,7 @@
 0x45AAB9: mov     [esi+8], eax
 0x45AABC: call    __memset
 0x45AAC1: add     esp, 10h
-0x45AAC4: mov     dword ptr [esi], offset ??_7ExteriorCellNewReferencesMap@@6B@; const ExteriorCellNewReferencesMap::`vftable'
+0x45AAC4: mov     dword ptr [esi], offset ??_7ExteriorCellNewReferencesMap@@6B@; Verified vtable layout from raw RTTI and function pointers: +0x0 Deleting destructor, +0x4 key hash, +0x8 key equality, +0xC set key/value, +0x10 clear value no-op, +0x14 node-pool allocate, +0x18 node-pool release. Fallout constructor homologs: interior 82601B90, exterior 82601C58; both use 37 buckets, matching Oblivion constructors 45A940/45AA80. Fallout nested-list ownership and exterior record payload differ.
 0x45AACA: mov     eax, esi
 0x45AACC: pop     esi
 0x45AACD: retn

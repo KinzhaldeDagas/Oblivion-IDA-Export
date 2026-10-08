@@ -1,1 +1,1 @@
-hkWorldPostCollideListener
+struct hkWorldPostCollideListener;

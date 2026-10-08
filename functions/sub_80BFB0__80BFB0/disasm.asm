@@ -207,7 +207,7 @@
 0x80C405: lea     ecx, [esp+664h+FileName]
 0x80C40C: push    ecx; lpFileName
 0x80C40D: mov     ecx, [esp+668h+var_638]
-0x80C411: call    CreateVertexShader
+0x80C411: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x80C416: mov     edx, [esp+650h+var_640]
 0x80C41A: mov     esi, [edx]
 0x80C41C: mov     ebx, eax
@@ -269,7 +269,7 @@
 0x80C4D3: push    ebx; int
 0x80C4D4: lea     edx, [esp+664h+FileName]
 0x80C4DB: push    edx; lpFileName
-0x80C4DC: call    CreateVertexShader
+0x80C4DC: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x80C4E1: mov     ebp, eax
 0x80C4E3: mov     eax, [esp+650h+var_640]
 0x80C4E7: mov     esi, [eax]

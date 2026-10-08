@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x7F4B42",
-    "line": "call    sub_71FB40",
+    "line": "call    NiTriShapeData_ConstructWithData; Construct NiTriShapeData around supplied geometry and triangle data; shared-normal storage starts empty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x7F4B82",
-    "line": "call    sub_7263B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,13 +1033,13 @@
   },
   {
     "ea": "0x7F4B8E",
-    "line": "push    1; char",
+    "line": "push    1; copyData",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4B90",
-    "line": "push    edx; Src",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -1051,79 +1051,79 @@
   },
   {
     "ea": "0x7F4B96",
-    "line": "push    eax; char",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F4B97",
-    "line": "push    0; int",
+    "line": "push    0; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4B99",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F4B9B",
-    "line": "call    sub_7260B0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7F4BA0",
-    "line": "push    4",
+    "line": "push    4; stride",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4BA2",
-    "line": "push    4",
+    "line": "push    4; elementSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4BA4",
-    "line": "push    edi",
+    "line": "push    edi; vertexCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F4BA5",
-    "line": "push    1",
+    "line": "push    1; type",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4BA7",
-    "line": "push    0",
+    "line": "push    0; blockOffset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4BA9",
-    "line": "push    0",
+    "line": "push    0; blockIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4BAB",
-    "line": "push    0",
+    "line": "push    0; streamIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7F4BAD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7F4BAF",
-    "line": "call    sub_7262A0",
+    "line": "call    OB_NiAdditionalGeometryData_SetDataStream_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7F4BD9",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x7F4BDC",
-    "line": "call    NiTriShape_NiTriShape",
+    "line": "call    OB_NiTriShape_ctorWithData_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -1498,5 +1498,137 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D0000",
+    "line": "mov     eax, [ebp-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0003",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0004",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0009",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D000A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D000B",
+    "line": "mov     eax, [ebp-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D000E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D000F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0014",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0015",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0016",
+    "line": "mov     eax, [ebp-44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0019",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D001A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D001F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0020",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D0021",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0025",
+    "line": "lea     eax, [edx-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0028",
+    "line": "mov     ecx, [edx-58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D002B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D002D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0032",
+    "line": "mov     eax, offset stru_AF8AC8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0037",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

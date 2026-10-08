@@ -11,3 +11,9 @@
 0x98942F: mov     ebx, ecx
 0x989431: shr     ecx, 2
 0x989434: jnz     short _strncat___main_loop_entrance_0
+0x98945A: mov     [edi], dl
+0x98945C: mov     eax, [esp+arg_C]
+0x989460: pop     ebx
+0x989461: pop     esi
+0x989462: pop     edi
+0x989463: retn

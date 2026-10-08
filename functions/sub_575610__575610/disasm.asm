@@ -41,3 +41,12 @@
 0x57568F: pop     esi
 0x575690: add     esp, 10h
 0x575693: retn    14h
+0x9BE320: mov     ecx, [ebp-10h]; void *
+0x9BE323: jmp     BSStringT_Clear
+0x9BE328: mov     edx, [esp+arg_4]
+0x9BE32C: lea     eax, [edx-0Ch]
+0x9BE32F: mov     ecx, [edx-10h]
+0x9BE332: xor     ecx, eax
+0x9BE334: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE339: mov     eax, offset stru_AE7AA4
+0x9BE33E: jmp     ___CxxFrameHandler3

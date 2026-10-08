@@ -23,7 +23,7 @@
 0x46DB43: jnz     short loc_46DBA9
 0x46DB45: push    esi
 0x46DB46: push    ebx
-0x46DB47: call    sub_46D940
+0x46DB47: call    TESModel_LoadTextureHashSubrecord; Authoritative Oblivion MODT replay entry. Each valid nonempty MODT whose size is divisible by 24 replaces the runtime texture-entry array; malformed/zero MODT does not mutate. Repeated valid chunks are runtime last-valid-wins.
 0x46DB4C: add     esp, 8
 0x46DB4F: lea     esp, [ebp-14h]
 0x46DB52: pop     edi
@@ -41,7 +41,7 @@
 0x46DB70: push    0; a4
 0x46DB72: push    edi; Dst
 0x46DB73: mov     ecx, esi; a1
-0x46DB75: call    TESFile_GetChunkData
+0x46DB75: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x46DB7A: mov     eax, [ebx]
 0x46DB7C: mov     edx, [eax+18h]
 0x46DB7F: push    edi
@@ -60,7 +60,7 @@
 0x46DB98: lea     eax, [ebp+var_8]
 0x46DB9B: push    eax
 0x46DB9C: mov     ecx, esi
-0x46DB9E: call    TESFile_GetChunkData4
+0x46DB9E: call    TESFile_GetChunkData4; Authoritative TESModel MODB replay: this branch runs for every MODB occurrence. GetChunkData4 is a cap4 read into fresh uninitialized stack scratch, then the bound radius is assigned. Exact4 and overlong (>4 => first3 plus zero high byte) are deterministic; size0/short1..3 assign indeterminate remaining bytes. Later occurrences supersede earlier bound state.
 0x46DBA3: fld     [ebp+var_8]
 0x46DBA6: fstp    dword ptr [ebx+0Ch]
 0x46DBA9: lea     esp, [ebp-14h]

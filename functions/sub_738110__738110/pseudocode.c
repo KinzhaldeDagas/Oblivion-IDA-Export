@@ -1,177 +1,176 @@
-float *__thiscall sub_738110(int this)
+// NiTriShapeData::UpdateNormals. Allocate/zero normal storage, accumulate one normalized face normal per triangle into its vertices, propagate contributions through the duplicate-vertex table, normalize all vertex results, and mark normals dirty. On NBT format data the allocator clears three vector planes but this routine repopulates only normals.
+void __thiscall NiTriShapeData_UpdateNormals(NiTriShapeData *self)
 {
-  unsigned __int16 *v2; // esi
-  unsigned __int16 v3; // ax
-  unsigned __int16 v4; // ax
-  unsigned __int16 v5; // cx
-  _WORD *v6; // esi
-  unsigned __int16 v7; // dx
+  UInt16 *m_pusTriList; // esi
+  UInt16 v3; // ax
+  UInt16 v4; // ax
+  UInt16 v5; // cx
+  UInt16 *v6; // esi
+  UInt16 v7; // dx
   int v8; // ebx
-  int v9; // eax
+  NiPoint3 *m_pkVertex; // eax
   int v10; // esi
   int v11; // ebp
-  int v12; // eax
+  NiPoint3 *m_pkNormal; // eax
   double v13; // st7
   float *v14; // eax
   double v15; // st6
   double v16; // st7
   double v17; // st6
   double v18; // st5
-  int v19; // eax
-  double v20; // st4
-  float *v21; // eax
-  int v22; // eax
+  NiPoint3 *v19; // eax
+  double x; // st4
+  float *p_x; // eax
+  NiPoint3 *v22; // eax
   double v23; // st4
   float *v24; // eax
-  int v25; // eax
-  int v26; // ecx
+  NiSharedNormalArrayEntry *m_pkSharedNormals; // eax
+  int count; // ecx
   int v27; // edx
   int v28; // eax
-  float *v29; // eax
-  unsigned __int16 *v30; // eax
+  NiPoint3 *v29; // eax
+  NiSharedNormalArrayEntry *v30; // eax
   int v31; // ecx
   int v32; // edx
   int v33; // eax
-  float *v34; // eax
-  unsigned __int16 *v35; // eax
+  NiPoint3 *v34; // eax
+  NiSharedNormalArrayEntry *v35; // eax
   int v36; // ecx
   int v37; // edx
   int v38; // eax
-  float *v39; // eax
-  unsigned __int16 v40; // ax
-  float *result; // eax
-  int v42; // [esp+8h] [ebp-38h]
-  unsigned __int16 *v43; // [esp+Ch] [ebp-34h]
-  int v44; // [esp+10h] [ebp-30h]
-  int v45; // [esp+14h] [ebp-2Ch]
-  int v46; // [esp+18h] [ebp-28h]
-  float v47; // [esp+1Ch] [ebp-24h] BYREF
-  float v48; // [esp+20h] [ebp-20h]
-  float v49; // [esp+24h] [ebp-1Ch]
-  float v50; // [esp+28h] [ebp-18h]
-  float v51; // [esp+2Ch] [ebp-14h]
-  float v52; // [esp+30h] [ebp-10h]
-  float v53; // [esp+34h] [ebp-Ch]
-  float v54; // [esp+38h] [ebp-8h]
-  float v55; // [esp+3Ch] [ebp-4h]
+  NiPoint3 *v39; // eax
+  UInt16 v40; // ax
+  int v41; // [esp+8h] [ebp-38h]
+  UInt16 *v42; // [esp+Ch] [ebp-34h]
+  int v43; // [esp+10h] [ebp-30h]
+  int v44; // [esp+14h] [ebp-2Ch]
+  int v45; // [esp+18h] [ebp-28h]
+  float v46; // [esp+1Ch] [ebp-24h] BYREF
+  float v47; // [esp+20h] [ebp-20h]
+  float v48; // [esp+24h] [ebp-1Ch]
+  float v49; // [esp+28h] [ebp-18h]
+  float v50; // [esp+2Ch] [ebp-14h]
+  float v51; // [esp+30h] [ebp-10h]
+  float v52; // [esp+34h] [ebp-Ch]
+  float v53; // [esp+38h] [ebp-8h]
+  float v54; // [esp+3Ch] [ebp-4h]
 
-  sub_728280(this, 1);
-  v2 = *(unsigned __int16 **)(this + 0x48);
-  v3 = (*(int (__thiscall **)(int))(*(_DWORD *)this + 0x5C))(this);
-  if ( v3 )
+  NiGeometryData_AllocateAndClearNormals((int)self, 1); /*0x738119*/
+  m_pusTriList = self->member.m_pusTriList; /*0x738123*/
+  v3 = self->__vftable->GetNumTris((NiTriBasedGeomData *)self); /*0x738128*/
+  if ( v3 ) /*0x738130*/
   {
-    v42 = v3;
-    while ( 1 )
+    v41 = v3; /*0x73813b*/
+    while ( 1 ) /*0x738145*/
     {
-      v4 = *v2;
-      v5 = v2[1];
-      v6 = v2 + 1;
-      v7 = v6[1];
-      v43 = v6 + 2;
-      v8 = v4;
-      v9 = *(_DWORD *)(this + 0x1C);
-      v45 = v5;
-      v44 = v8;
-      v10 = 0xC * v5;
-      v8 *= 0xC;
-      v46 = v7;
-      v53 = *(float *)(v10 + v9) - *(float *)(v9 + v8);
-      v11 = 0xC * v7;
-      v54 = *(float *)(v10 + v9 + 4) - *(float *)(v9 + v8 + 4);
-      v55 = *(float *)(v10 + v9 + 8) - *(float *)(v9 + v8 + 8);
-      v50 = *(float *)(v9 + v11) - *(float *)(v10 + v9);
-      v51 = *(float *)(v9 + v11 + 4) - *(float *)(v10 + v9 + 4);
-      v52 = *(float *)(v9 + v11 + 8) - *(float *)(v10 + v9 + 8);
-      v47 = v52 * v54 - v51 * v55;
-      v48 = v55 * v50 - v52 * v53;
-      v49 = v53 * v51 - v50 * v54;
-      sub_4BFAA0(&v47);
-      v12 = *(_DWORD *)(this + 0x20);
-      v13 = *(float *)(v12 + v8);
-      v14 = (float *)(v8 + v12);
-      v15 = v13 + v47;
-      v16 = v47;
-      *v14 = v15;
-      v17 = v48;
-      v14[1] = v48 + v14[1];
-      v18 = v49;
-      v14[2] = v14[2] + v49;
-      v19 = *(_DWORD *)(this + 0x20);
-      v20 = *(float *)(v19 + v10);
-      v21 = (float *)(v10 + v19);
-      *v21 = v20 + v16;
-      v21[1] = v17 + v21[1];
-      v21[2] = v21[2] + v18;
-      v22 = *(_DWORD *)(this + 0x20);
-      v23 = *(float *)(v22 + v11);
-      v24 = (float *)(v11 + v22);
-      *v24 = v23 + v16;
-      v24[1] = v24[1] + v17;
-      v24[2] = v18 + v24[2];
-      v25 = *(_DWORD *)(this + 0x4C);
-      if ( v25 )
+      v4 = *m_pusTriList; /*0x738145*/
+      v5 = m_pusTriList[1]; /*0x738148*/
+      v6 = m_pusTriList + 1; /*0x73814c*/
+      v7 = v6[1]; /*0x73814f*/
+      v42 = v6 + 2; /*0x738159*/
+      v8 = v4; /*0x738160*/
+      m_pkVertex = self->member.super.super.m_pkVertex; /*0x738163*/
+      v44 = v5; /*0x738166*/
+      v43 = v8; /*0x73816a*/
+      v10 = v5; /*0x738176*/
+      v8 *= 0xC; /*0x73817a*/
+      v45 = v7; /*0x738185*/
+      v52 = m_pkVertex[v10].x - *(float *)((char *)&m_pkVertex->x + v8); /*0x73818d*/
+      v11 = v7; /*0x738197*/
+      v53 = m_pkVertex[v10].y - *(float *)((char *)&m_pkVertex->y + v8); /*0x7381a2*/
+      v54 = m_pkVertex[v10].z - *(float *)((char *)&m_pkVertex->z + v8); /*0x7381ae*/
+      v49 = m_pkVertex[v11].x - m_pkVertex[v10].x; /*0x7381b8*/
+      v50 = m_pkVertex[v11].y - m_pkVertex[v10].y; /*0x7381c4*/
+      v51 = m_pkVertex[v11].z - m_pkVertex[v10].z; /*0x7381d0*/
+      v46 = v51 * v53 - v50 * v54; /*0x7381f4*/
+      v47 = v54 * v49 - v51 * v52; /*0x73820e*/
+      v48 = v52 * v50 - v49 * v53; /*0x738218*/
+      NiPoint3_NormalizeApproximateInPlace(&v46); /*0x73821c*/
+      m_pkNormal = self->member.super.super.m_pkNormal; /*0x738221*/
+      v13 = *(float *)((char *)&m_pkNormal->x + v8); /*0x738224*/
+      v14 = (float *)((char *)&m_pkNormal->x + v8); /*0x73822e*/
+      v15 = v13 + v46; /*0x738234*/
+      v16 = v46; /*0x738234*/
+      *v14 = v15; /*0x738236*/
+      v17 = v47; /*0x738238*/
+      v14[1] = v47 + v14[1]; /*0x738241*/
+      v18 = v48; /*0x73824f*/
+      v14[2] = v14[2] + v48; /*0x738251*/
+      v19 = self->member.super.super.m_pkNormal; /*0x738254*/
+      x = v19[v10].x; /*0x738257*/
+      p_x = &v19[v10].x; /*0x73825a*/
+      *p_x = x + v16; /*0x73825e*/
+      p_x[1] = v17 + p_x[1]; /*0x738265*/
+      p_x[2] = p_x[2] + v18; /*0x73826d*/
+      v22 = self->member.super.super.m_pkNormal; /*0x738270*/
+      v23 = v22[v11].x; /*0x738273*/
+      v24 = &v22[v11].x; /*0x738276*/
+      *v24 = v23 + v16; /*0x73827a*/
+      v24[1] = v24[1] + v17; /*0x738281*/
+      v24[2] = v18 + v24[2]; /*0x738289*/
+      m_pkSharedNormals = self->member.m_pkSharedNormals;// When shared-normal entry count equals m_usVertices, add each triangle contribution to the vertex and every UInt16 index in its 8-byte entry. This keeps authored UV-split vertices smooth. /*0x73828c*/
+      if ( m_pkSharedNormals ) /*0x738291*/
       {
-        if ( *(_WORD *)(this + 0x50) == *(_WORD *)(this + 8) )
+        if ( self->member.m_usSharedNormalsArraySize == self->member.super.super.m_usVertices ) /*0x73829f*/
         {
-          v26 = *(unsigned __int16 *)(v25 + 8 * v44);
-          if ( (_WORD)v26 )
+          count = m_pkSharedNormals[v43].count; /*0x7382ad*/
+          if ( (_WORD)count ) /*0x7382b4*/
           {
-            v27 = *(_DWORD *)(v25 + 8 * v44 + 4) + 2 * (unsigned __int16)v26;
-            do
+            v27 = (int)&m_pkSharedNormals[v43].indices[(unsigned __int16)count]; /*0x7382b9*/
+            do /*0x7382eb*/
             {
-              v28 = *(unsigned __int16 *)(v27 - 2);
-              v27 -= 2;
-              v29 = (float *)(*(_DWORD *)(this + 0x20) + 0xC * v28);
-              v26 += 0xFFFF;
-              *v29 = *v29 + v16;
-              v29[1] = v29[1] + v17;
-              v29[2] = v29[2] + v18;
+              v28 = *(unsigned __int16 *)(v27 - 2); /*0x7382bc*/
+              v27 -= 2; /*0x7382c3*/
+              v29 = &self->member.super.super.m_pkNormal[v28]; /*0x7382c9*/
+              count += 0xFFFF; /*0x7382cc*/
+              v29->x = v29->x + v16; /*0x7382d9*/
+              v29->y = v29->y + v17; /*0x7382e0*/
+              v29->z = v29->z + v18; /*0x7382e8*/
             }
-            while ( (_WORD)v26 );
+            while ( (_WORD)count ); /*0x7382eb*/
           }
-          v30 = (unsigned __int16 *)(*(_DWORD *)(this + 0x4C) + 8 * v45);
-          v31 = *v30;
-          if ( (_WORD)v31 )
+          v30 = &self->member.m_pkSharedNormals[v44]; /*0x7382f4*/
+          v31 = v30->count; /*0x7382f7*/
+          if ( (_WORD)v31 ) /*0x738300*/
           {
-            v32 = *((_DWORD *)v30 + 1) + 2 * (unsigned __int16)v31;
-            do
+            v32 = (int)&v30->indices[(unsigned __int16)v31]; /*0x738305*/
+            do /*0x738337*/
             {
-              v33 = *(unsigned __int16 *)(v32 - 2);
-              v32 -= 2;
-              v34 = (float *)(*(_DWORD *)(this + 0x20) + 0xC * v33);
-              v31 += 0xFFFF;
-              *v34 = v16 + *v34;
-              v34[1] = v17 + v34[1];
-              v34[2] = v34[2] + v18;
+              v33 = *(unsigned __int16 *)(v32 - 2); /*0x738308*/
+              v32 -= 2; /*0x738311*/
+              v34 = &self->member.super.super.m_pkNormal[v33]; /*0x738317*/
+              v31 += 0xFFFF; /*0x73831a*/
+              v34->x = v16 + v34->x; /*0x738325*/
+              v34->y = v17 + v34->y; /*0x73832c*/
+              v34->z = v34->z + v18; /*0x738334*/
             }
-            while ( (_WORD)v31 );
+            while ( (_WORD)v31 ); /*0x738337*/
           }
-          v35 = (unsigned __int16 *)(*(_DWORD *)(this + 0x4C) + 8 * v46);
-          v36 = *v35;
-          if ( (_WORD)v36 )
+          v35 = &self->member.m_pkSharedNormals[v45]; /*0x738340*/
+          v36 = v35->count; /*0x738343*/
+          if ( (_WORD)v36 ) /*0x73834c*/
           {
-            v37 = *((_DWORD *)v35 + 1) + 2 * (unsigned __int16)v36;
-            do
+            v37 = (int)&v35->indices[(unsigned __int16)v36]; /*0x738351*/
+            do /*0x738383*/
             {
-              v38 = *(unsigned __int16 *)(v37 - 2);
-              v37 -= 2;
-              v39 = (float *)(*(_DWORD *)(this + 0x20) + 0xC * v38);
-              v36 += 0xFFFF;
-              *v39 = *v39 + v16;
-              v39[1] = v17 + v39[1];
-              v39[2] = v39[2] + v18;
+              v38 = *(unsigned __int16 *)(v37 - 2); /*0x738354*/
+              v37 -= 2; /*0x73835b*/
+              v39 = &self->member.super.super.m_pkNormal[v38]; /*0x738361*/
+              v36 += 0xFFFF; /*0x738364*/
+              v39->x = v39->x + v16; /*0x738371*/
+              v39->y = v17 + v39->y; /*0x738378*/
+              v39->z = v39->z + v18; /*0x738380*/
             }
-            while ( (_WORD)v36 );
+            while ( (_WORD)v36 ); /*0x738383*/
           }
         }
       }
-      if ( !--v42 )
-        break;
-      v2 = v43;
+      if ( !--v41 ) /*0x738390*/
+        break; /*0x738390*/
+      m_pusTriList = v42; /*0x738141*/
     }
   }
-  v40 = (*(int (__thiscall **)(int))(*(_DWORD *)this + 0x50))(this);
-  result = sub_725890(*(float **)(this + 0x20), v40, 0xC);
-  *(_WORD *)(this + 0x2E) |= 2u;
-  return result;
+  v40 = self->__vftable->super.GetNumVertices((NiGeometryData *)self); /*0x7383a1*/
+  NiPoint3_NormalizeStridedArray(&self->member.super.super.m_pkNormal->x, v40, 0xC); /*0x7383ab*/
+  self->member.super.super.m_usDirtyFlags |= 2u; /*0x7383b3*/
 }

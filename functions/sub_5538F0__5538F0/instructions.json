@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5538F0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x5538F3",
-    "line": "cmp     [esp+1Ch+arg_0], 0",
+    "line": "cmp     [esp+1Ch+parameters], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x55390E",
-    "line": "call    sub_553550",
+    "line": "call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x553919",
-    "line": "mov     eax, [esp+20h+arg_8]",
+    "line": "mov     eax, [esp+20h+matrixChannel]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55391D",
-    "line": "mov     ecx, [esp+20h+arg_4]",
+    "line": "mov     ecx, [esp+20h+matrixGroup]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x553953",
-    "line": "mov     ebp, [esp+2Ch+arg_C]",
+    "line": "mov     ebp, [esp+2Ch+sliderIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x553961",
-    "line": "call    sub_553550",
+    "line": "call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x55396C",
-    "line": "mov     eax, [esp+2Ch+arg_0]",
+    "line": "mov     eax, [esp+2Ch+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x553976",
-    "line": "push    ecx",
+    "line": "push    ecx; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553977",
-    "line": "lea     edx, [esp+30h+var_18]",
+    "line": "lea     edx, [esp+30h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55397B",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x553989",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x55398B",
-    "line": "call    sub_5523C0",
+    "line": "call    FaceGenMatrix_Multiply; Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x5539AB",
-    "line": "mov     eax, [esp+2Ch+var_C]",
+    "line": "mov     eax, [esp+2Ch+out.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x5539BA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

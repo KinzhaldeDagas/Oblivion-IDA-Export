@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D7A20",
-    "line": "fld     [esp+arg_C]",
+    "line": "fld     [esp+arg_C]; TESObjectREFR wrapper records package start location from worldspace/cell, position XYZ, and rotZ into ExtraPackageStartLocation.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4D7A3A",
-    "line": "call    sub_41F4C0",
+    "line": "call    ExtraDataList_SetStartLocation; ExtraPackageStartLocation setter: first creation stores selected location FormID, XYZ, and rotZ; updating an extant singleton replaces only location/XYZ and preserves existing rotZ.",
     "mnemonic": "call",
     "size": 5
   },

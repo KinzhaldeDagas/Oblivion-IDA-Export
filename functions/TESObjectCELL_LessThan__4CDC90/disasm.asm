@@ -168,18 +168,18 @@
 0x4CDE3C: call    sub_4CA5F0
 0x4CDE41: cmp     eax, ebp
 0x4CDE43: jnz     short loc_4CDE8A
-0x4CDE45: mov     ecx, edi
-0x4CDE47: call    sub_4CA640
-0x4CDE4C: mov     ecx, esi
+0x4CDE45: mov     ecx, edi; this
+0x4CDE47: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
+0x4CDE4C: mov     ecx, esi; this
 0x4CDE4E: mov     ebp, eax
-0x4CDE50: call    sub_4CA640
+0x4CDE50: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4CDE55: cmp     eax, ebp
 0x4CDE57: jb      short loc_4CDE75
-0x4CDE59: mov     ecx, edi
-0x4CDE5B: call    sub_4CA640
-0x4CDE60: mov     ecx, esi
+0x4CDE59: mov     ecx, edi; this
+0x4CDE5B: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
+0x4CDE60: mov     ecx, esi; this
 0x4CDE62: mov     ebp, eax
-0x4CDE64: call    sub_4CA640
+0x4CDE64: call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.
 0x4CDE69: cmp     eax, ebp
 0x4CDE6B: jnz     short loc_4CDE8A
 0x4CDE6D: mov     eax, [esi+0Ch]

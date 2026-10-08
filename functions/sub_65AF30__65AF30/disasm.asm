@@ -1,4 +1,4 @@
-0x65AF30: push    ebp
+0x65AF30: push    ebp; TES4 authoritative: MobileObject movement step. Builds local movement/update packet and calls CharProxy vtable +0x80; for bhkCharacterController that dispatches to 0x896000. Entry point for per-actor movement discipline injection before controller integration.
 0x65AF31: mov     ebp, esp
 0x65AF33: and     esp, 0FFFFFFC0h
 0x65AF36: sub     esp, 0B4h
@@ -6,7 +6,7 @@
 0x65AF3D: push    esi
 0x65AF3E: push    edi
 0x65AF3F: mov     edi, ecx
-0x65AF41: call    MobileObject_GetCharProxy
+0x65AF41: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65AF46: mov     ebx, eax
 0x65AF48: mov     eax, [edi]
 0x65AF4A: mov     edx, [eax+0E8h]
@@ -25,14 +25,14 @@
 0x65AF79: test    ah, 44h
 0x65AF7C: jnp     loc_65B022
 0x65AF82: sub     esp, 8
-0x65AF85: fstp    [esp+0C8h+X]; X
+0x65AF85: fstp    qword ptr [esp+0C8h+X]; X
 0x65AF88: call    __isnan
 0x65AF8D: add     esp, 8
 0x65AF90: test    eax, eax
 0x65AF92: jnz     loc_65B024
 0x65AF98: fld     [esp+0C0h+var_70]
 0x65AF9C: sub     esp, 8
-0x65AF9F: fstp    [esp+0C8h+X]; X
+0x65AF9F: fstp    qword ptr [esp+0C8h+X]; X
 0x65AFA2: call    __finite
 0x65AFA7: add     esp, 8
 0x65AFAA: test    eax, eax
@@ -43,14 +43,14 @@
 0x65AFBA: test    ah, 44h
 0x65AFBD: jnp     short loc_65B022
 0x65AFBF: sub     esp, 8
-0x65AFC2: fstp    [esp+0C8h+X]; X
+0x65AFC2: fstp    qword ptr [esp+0C8h+X]; X
 0x65AFC5: call    __isnan
 0x65AFCA: add     esp, 8
 0x65AFCD: test    eax, eax
 0x65AFCF: jnz     short loc_65B024
 0x65AFD1: fld     [esp+0C0h+var_AC]
 0x65AFD5: sub     esp, 8
-0x65AFD8: fstp    [esp+0C8h+X]; X
+0x65AFD8: fstp    qword ptr [esp+0C8h+X]; X
 0x65AFDB: call    __finite
 0x65AFE0: add     esp, 8
 0x65AFE3: test    eax, eax
@@ -61,14 +61,14 @@
 0x65AFF3: test    ah, 44h
 0x65AFF6: jnp     short loc_65B022
 0x65AFF8: sub     esp, 8
-0x65AFFB: fstp    [esp+0C8h+X]; X
+0x65AFFB: fstp    qword ptr [esp+0C8h+X]; X
 0x65AFFE: call    __isnan
 0x65B003: add     esp, 8
 0x65B006: test    eax, eax
 0x65B008: jnz     short loc_65B024
 0x65B00A: fld     [esp+0C0h+var_A8]
 0x65B00E: sub     esp, 8
-0x65B011: fstp    [esp+0C8h+X]; X
+0x65B011: fstp    qword ptr [esp+0C8h+X]; X
 0x65B014: call    __finite
 0x65B019: add     esp, 8
 0x65B01C: test    eax, eax
@@ -119,9 +119,9 @@
 0x65B0BB: jz      loc_65B14D
 0x65B0C1: fld     dword ptr [edi+28h]
 0x65B0C4: push    ecx
-0x65B0C5: lea     ecx, [esp+0C4h+var_48]
-0x65B0C9: fstp    dword ptr [esp+0C4h+X+4]; float
-0x65B0CC: call    NiMatrix33_InitRotationTransform
+0x65B0C5: lea     ecx, [esp+0C4h+var_48]; this
+0x65B0C9: fstp    [esp+0C4h+X+4]; angleZ
+0x65B0CC: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x65B0D1: push    esi
 0x65B0D2: lea     eax, [esp+0C4h+a3]
 0x65B0D6: push    eax
@@ -183,7 +183,7 @@
 0x65B17B: fsub    dword ptr [eax+8]
 0x65B17E: fstp    [esp+0C4h+var_AC]
 0x65B182: fld     dword ptr [ecx+54h]
-0x65B185: lea     ecx, [esp+0C4h+var_48]
+0x65B185: lea     ecx, [esp+0C4h+var_48]; this
 0x65B189: fsub    dword ptr [eax]
 0x65B18B: fstp    [esp+0C4h+var_94]
 0x65B18F: fld     [esp+0C4h+var_A8]
@@ -191,8 +191,8 @@
 0x65B197: fld     [esp+0C4h+var_AC]
 0x65B19B: fstp    [esp+0C4h+var_8C]
 0x65B19F: fld     dword ptr [edi+28h]
-0x65B1A2: fstp    dword ptr [esp+0C4h+X+4]; float
-0x65B1A5: call    NiMatrix33_InitRotationTransform
+0x65B1A2: fstp    [esp+0C4h+X+4]; angleZ
+0x65B1A5: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x65B1AA: lea     ecx, [esp+0C0h+var_94]
 0x65B1AE: push    ecx
 0x65B1AF: lea     edx, [esp+0C4h+a3]
@@ -218,7 +218,7 @@
 0x65B1EE: mov     eax, [edx+198h]
 0x65B1F4: push    1
 0x65B1F6: mov     ecx, edi
-0x65B1F8: call    eax
+0x65B1F8: call    eax; TES4 authoritative: MobileObject::Move does not enter the character-controller update when no char proxy exists or TESObjectREFR vtable +0x198 IsDead(this,1) returns true. Movement discipline hook at 0x896000 will not run for this path.
 0x65B1FA: test    al, al
 0x65B1FC: jnz     loc_65B523
 0x65B202: cmp     [esp+0C0h+var_A1], al
@@ -232,7 +232,7 @@
 0x65B21C: call    eax
 0x65B21E: fstp    dword ptr [ebx+310h]
 0x65B224: mov     ecx, edi
-0x65B226: call    sub_4D74D0
+0x65B226: call    TESObjectREFR_HasHorseCreatureBase; 0x4D74D0: Travel-horse target predicate decoded 2026-09-05: reference base pointer+0x1C must be nonnull; GetBaseForm virtual slot+0x170 yields typebyte0x24 CREA; creature byte+0x104 must equal4 (horse). XHRS resolver invokes this at0x426681 after target REFR cast. TESCS peer0x53F310 uses ref+0x28, vslot+0x19C, creature+0x138.
 0x65B22B: test    al, al
 0x65B22D: jz      short loc_65B25B
 0x65B22F: mov     ecx, edi
@@ -240,13 +240,13 @@
 0x65B236: test    al, al
 0x65B238: jz      short loc_65B25B
 0x65B23A: fld     dword ptr [ebx+328h]
-0x65B240: mov     ecx, offset unk_B14E3C
+0x65B240: mov     ecx, offset dword_B14E3C
 0x65B245: fstp    [esp+0C0h+var_A8]
 0x65B249: mov     [esp+0C0h+var_AD], 1
 0x65B24E: call    GameSetting_GetSafeFloatPointer
 0x65B253: fld     dword ptr [eax]
 0x65B255: fstp    dword ptr [ebx+328h]
-0x65B25B: mov     edx, [edi+24h]
+0x65B25B: mov     edx, [edi+24h]; Movement packet build: +0 dt, +4/+8/+C actor rot, +10/+14/+18 desired movement, +1C caller flag. Vector has already been yaw/world adjusted by MobileObject::Move paths when applicable.
 0x65B25E: fld     [ebp+arg_0]
 0x65B261: mov     ecx, [edi+20h]
 0x65B264: fstp    [esp+0C0h+var_6C]
@@ -266,14 +266,14 @@
 0x65B296: mov     [esp+0C0h+var_54], eax
 0x65B29A: mov     [esp+0C0h+var_50], ecx
 0x65B29E: jz      loc_65B41A
-0x65B2A4: mov     eax, [edi]
+0x65B2A4: mov     eax, [edi]; TES4 authoritative: special proxy-position path only when controller flag 0x800 is set and owner is actor.
 0x65B2A6: mov     edx, [eax+190h]
 0x65B2AC: mov     ecx, edi
 0x65B2AE: call    edx
 0x65B2B0: test    al, al
 0x65B2B2: jz      loc_65B33A
 0x65B2B8: mov     eax, [edi]
-0x65B2BA: mov     edx, [eax+380h]
+0x65B2BA: mov     edx, [eax+380h]; TES4 authoritative: Actor vtable +0x380 GetMountedHorse check inside MobileObject::Move special path.
 0x65B2C0: mov     ecx, edi
 0x65B2C2: call    edx
 0x65B2C4: test    eax, eax
@@ -282,7 +282,7 @@
 0x65B2CB: test    ecx, ecx
 0x65B2CD: jz      short loc_65B33A
 0x65B2CF: mov     eax, [ecx]
-0x65B2D1: mov     edx, [eax+36Ch]
+0x65B2D1: mov     edx, [eax+36Ch]; TES4 authoritative: process vtable +0x36C GetSitSleepState; state 4 with GetMountedHorse makes MobileObject::Move snap proxy position to the mount rather than ordinary controller movement.
 0x65B2D7: call    edx
 0x65B2D9: cmp     eax, 4
 0x65B2DC: jnz     short loc_65B33A
@@ -299,7 +299,7 @@
 0x65B2FC: mov     ecx, ebx; this
 0x65B2FE: mov     dword ptr [esp+0C4h+var_84], edx
 0x65B302: mov     dword ptr [esp+0C4h+var_84+4], eax
-0x65B306: call    sub_452A10
+0x65B306: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x65B30B: mov     edx, ds:0B3F9A8h
 0x65B311: mov     [esi], edx
 0x65B313: mov     eax, ds:0B3F9ACh
@@ -314,9 +314,9 @@
 0x65B335: jmp     loc_65B41A
 0x65B33A: fld     dword ptr [edi+28h]
 0x65B33D: push    ecx
-0x65B33E: lea     ecx, [esp+0C4h+var_48]
-0x65B342: fstp    dword ptr [esp+0C4h+X+4]; float
-0x65B345: call    NiMatrix33_InitRotationTransform
+0x65B33E: lea     ecx, [esp+0C4h+var_48]; this
+0x65B342: fstp    [esp+0C4h+X+4]; angleZ
+0x65B345: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x65B34A: push    esi
 0x65B34B: lea     edx, [esp+0C4h+a3]
 0x65B34F: push    edx
@@ -346,7 +346,7 @@
 0x65B39C: fstp    [esp+0C4h+var_98]
 0x65B3A0: mov     eax, [esp+0C4h+var_98]
 0x65B3A4: mov     dword ptr [esp+0C4h+var_84+4], eax
-0x65B3A8: call    sub_5E1500
+0x65B3A8: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
 0x65B3AD: fld     [esp+0C0h+var_A0]
 0x65B3B1: fsub    [esp+0C0h+a3]
 0x65B3B5: push    esi
@@ -388,7 +388,7 @@
 0x65B444: lea     eax, [esp+0C0h+var_6C]
 0x65B448: push    eax
 0x65B449: mov     ecx, ebx
-0x65B44B: call    edx
+0x65B44B: call    edx; Calls CharProxy vtable+0x80 (bhkCharacterController::Update at 0x896000 for actors) with movement packet built above. Caller hook can see MobileObject + desired movement; inner hook is better for velocity mutation after state update.
 0x65B44D: mov     eax, [ebx+1F4h]
 0x65B453: shr     eax, 1
 0x65B455: test    al, 1
@@ -396,21 +396,21 @@
 0x65B459: lea     ecx, [esp+0C0h+a3]
 0x65B45D: push    ecx
 0x65B45E: mov     ecx, ebx
-0x65B460: call    sub_5E1500
-0x65B465: mov     ecx, ebx
-0x65B467: call    sub_8913C0
-0x65B46C: fstp    [esp+0C0h+var_AC]
+0x65B460: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
+0x65B465: mov     ecx, ebx; this
+0x65B467: call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
+0x65B46C: fstp    [esp+0C0h+var_AC]; After controller update, MobileObject::Move reads controller radius via 0x8913C0.
 0x65B470: fld     [esp+0C0h+var_AC]
 0x65B474: mov     edx, [edi]
 0x65B476: fmul    qword ptr ds:0A372E0h
 0x65B47C: mov     edx, [edx+1CCh]
 0x65B482: lea     eax, [esp+0C0h+a3]
 0x65B486: push    eax
-0x65B487: fstp    [esp+0C4h+var_AC]
+0x65B487: fstp    [esp+0C4h+var_AC]; Converts controller radius from Havok to TES/world units using dbl_A372E0 (~6.999 inverse hkFactor).
 0x65B48B: mov     ecx, edi
 0x65B48D: fld     [esp+0C4h+var_AC]
 0x65B491: fadd    st, st
-0x65B493: fstp    [esp+0C4h+var_AC]
+0x65B493: fstp    [esp+0C4h+var_AC]; Uses 2 * world radius as a native capsule diameter scale; suitable as the first climb wall-probe distance scale.
 0x65B497: fld     [esp+0C4h+var_AC]
 0x65B49B: fadd    [esp+0C4h+var_74]
 0x65B49F: fstp    [esp+0C4h+var_74]
@@ -426,7 +426,7 @@
 0x65B4C7: lea     ecx, [esp+0C0h+a2]
 0x65B4CB: push    ecx
 0x65B4CC: mov     ecx, ebx
-0x65B4CE: call    sub_5E1500
+0x65B4CE: call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.
 0x65B4D3: test    byte ptr [ebx+1F4h], 1
 0x65B4DA: jz      loc_65B58A
 0x65B4E0: mov     edx, [edi]
@@ -450,14 +450,14 @@
 0x65B513: mov     eax, [edx+1E8h]
 0x65B519: push    ecx
 0x65B51A: mov     ecx, edi
-0x65B51C: fstp    dword ptr [esp+0C4h+X+4]
+0x65B51C: fstp    [esp+0C4h+X+4]
 0x65B51F: call    eax
 0x65B521: jmp     short loc_65B58A
 0x65B523: fld     dword ptr [edi+28h]
 0x65B526: push    ecx
-0x65B527: lea     ecx, [esp+0C4h+var_48]
-0x65B52B: fstp    dword ptr [esp+0C4h+X+4]; float
-0x65B52E: call    NiMatrix33_InitRotationTransform
+0x65B527: lea     ecx, [esp+0C4h+var_48]; this
+0x65B52B: fstp    [esp+0C4h+X+4]; angleZ
+0x65B52E: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x65B533: push    esi; a4
 0x65B534: lea     ecx, [esp+0C4h+a3]
 0x65B538: push    ecx; a3

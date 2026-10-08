@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "WAVEFORMATEXTENSIBLE",
+  "definition": "struct WAVEFORMATEXTENSIBLE\n{\nWAVEFORMATEX Format;\n$3D85FABA0F577B1F1C48534A7C4FE993 Samples;\nDWORD dwChannelMask;\nGUID SubFormat;\n}\n",
   "id": 18374686479672029631,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Format",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 18
+      "size": 18,
+      "type": "WAVEFORMATEX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Samples",
       "offset": 18,
       "offset_hex": "0x12",
-      "size": 2
+      "size": 2,
+      "type": "$3D85FABA0F577B1F1C48534A7C4FE993"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwChannelMask",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SubFormat",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 16
+      "size": 16,
+      "type": "GUID"
     }
   ],
   "name": "WAVEFORMATEXTENSIBLE",
+  "ordinal": 2198,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

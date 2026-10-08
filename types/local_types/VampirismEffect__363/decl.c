@@ -1,1 +1,1 @@
-VampirismEffect
+struct VampirismEffect;

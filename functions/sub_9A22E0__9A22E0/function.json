@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x9A22E0",
+      "0x9A239A"
+    ],
+    [
+      "0x9D7E10",
+      "0x9D7E33"
+    ]
+  ],
+  "chunks_sha256": "a831fbad589c9f11859ea53c4695e0b94d7bc353f0422731948e6f9810a4b600",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_9A22E0",
+  "comment_repeatable": "Verified NiSCMExtraData constructor, 2026-09-30: calls NiExtraData initialization, installs vtable AB2914, and assigns the supplied name. Stores two capacities at+C/+10, zeros used counts at+14/+18, and allocates two arrays of 8-byte elements at+1C/+20 (null for zero capacity). Comparative Fallout constructor82C1F748 has an expanded program-type layout; its offsets must not be copied. Capacity0/1 are probably vertex/pixel from the family correspondence, but confirm Oblivion AddEntry indexing before promoting those member names.\nVerified stage layout 2026-09-30: vertex/pixel capacities at+C/+10, cursors at+14/+18, and NiSCMConstantEntry arrays at+1C/+20. Stage names are now proved by vertex handler9A61E0 (program numeric setter+28, cursor+14/array+1C) and pixel handler9A35A0 (setter+30, cursor+18/array+20), not merely inferred from Fallout. RTTI atAB2914 identifies NiSCMExtraData -> NiExtraData -> NiObject -> NiRefObject. Typed size24h is verified.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "NiSCMExtraData_Constructor",
   "end_ea": "0x9A239A",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_9A22E0",
+  "name": "NiSCMExtraData_Constructor",
   "segment": ".text",
   "sha256": "d7962676fc443603cf868b31d9b037540f383d32616e9847f118f2dd2eba1e4c",
   "size": 186,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A22E0",
-  "type": "NiObject *__thiscall(NiObject *this, char *Src, int, int)",
-  "xrefs_from_count": 72,
+  "total_chunk_size": 221,
+  "type": "NiSCMExtraData *__thiscall(NiSCMExtraData *this, char *name, unsigned int vertexCapacity, unsigned int pixelCapacity)",
+  "xrefs_from_count": 83,
   "xrefs_to_count": 1
 }

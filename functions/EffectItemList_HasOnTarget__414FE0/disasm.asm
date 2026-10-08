@@ -1,4 +1,4 @@
-0x414FE0: cmp     dword ptr [ecx+8], 0
+0x414FE0: cmp     dword ptr [ecx+8], 0; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.
 0x414FE4: jnz     short loc_414FEF
 0x414FE6: cmp     dword ptr [ecx+4], 0
 0x414FEA: jnz     short loc_414FEF

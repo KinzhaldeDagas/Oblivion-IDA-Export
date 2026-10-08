@@ -1,35 +1,41 @@
-int __thiscall sub_60D780(_DWORD *this, int a2, int a3, int a4)
+// Probable lifecycle phase naming: vtable3FC=InitLoadGame,400=FinishInitLoadGame supported by neighboring save/load/revert roles and Fallout BaseProcess FinishInitLoadGame8265D168 exact actor/no-package/procedure==-1 test. Verified local behavior: 60D780 resolves deferred package and bounds procedure;643810 resolves follow/other references;60CF80 evaluates package for nonplayer actor with missing package and procedure==-1. RET12 proves three stack args. Full external phase scheduling remains Unknown.
+void __thiscall BaseProcess_InitLoadGame(
+        BaseProcess *self,
+        unsigned int changeMask,
+        unsigned int currentFlags,
+        MobileObject *owner)
 {
-  int result; // eax
+  TESPackage *editorPackage; // eax
   TESForm *v6; // eax
+  TESPackage *v7; // eax
+  eProcedure v8; // eax
 
-  result = *(this + 2);
-  if ( result )
+  editorPackage = self->editorPackage; /*0x60d783*/
+  if ( editorPackage ) /*0x60d788*/
   {
-    if ( (a2 & 0x20000) != 0 )
+    if ( (changeMask & 0x20000) != 0 ) /*0x60d794*/
     {
-      if ( (a2 & 0x10000) != 0 )
+      if ( (changeMask & 0x10000) != 0 ) /*0x60d79c*/
       {
-        v6 = TESForm_LookupByFormID(result);
-        *(this + 2) = OblivionDynamicCast(
-                        v6,
-                        0,
-                        (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                        &TESPackage `RTTI Type Descriptor',
-                        0);
+        v6 = TESForm_LookupByFormID((UInt32)editorPackage); /*0x60d7ad*/
+        self->editorPackage = (TESPackage *)OblivionDynamicCast( /*0x60d7be*/
+                                              v6,
+                                              0,
+                                              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                              &TESPackage `RTTI Type Descriptor',
+                                              0);
       }
-      else if ( TESDataHandler_IsFormIDCreated_(*(_DWORD *)(result + 0xC)) )
+      else if ( TESDataHandler_IsFormIDCreated_(editorPackage->members.super.refID) ) /*0x60d7cd*/
       {
-        (*(void (__thiscall **)(_DWORD))(*(_DWORD *)*(this + 2) + 0xE8))(*(this + 2));
+        self->editorPackage->__vftable->InitLoadGame(self->editorPackage); /*0x60d7e1*/
       }
     }
-    result = *(this + 2);
-    if ( result )
+    v7 = self->editorPackage; /*0x60d7e3*/
+    if ( v7 ) /*0x60d7e8*/
     {
-      result = sub_673980(*(_DWORD *)(result + 0x18));
-      if ( *(this + 1) >= result )
-        *(this + 1) = --result;
+      v8 = sub_673980(v7->members.procedureArrayIndex); /*0x60d7ee*/
+      if ( self->editorPackProcedure >= v8 ) /*0x60d7f9*/
+        self->editorPackProcedure = v8 - 1; /*0x60d7fe*/
     }
   }
-  return result;
 }

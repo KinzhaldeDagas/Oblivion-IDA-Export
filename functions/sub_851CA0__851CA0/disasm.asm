@@ -1,4 +1,4 @@
-0x851CA0: push    0FFFFFFFFh
+0x851CA0: push    0FFFFFFFFh; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18C. It binds TextureEffectData's texture and render-state fields into the pass template; the active shader's owned pixel/vertex constant maps are then applied by NiD3DShader_SetupShaderPrograms. ShadowLight's vtable owner is confirmed to build/apply maps from the texture-effect globals.
 0x851CA2: push    offset SEH_851CA0
 0x851CA7: mov     eax, large fs:0
 0x851CAD: push    eax
@@ -13,7 +13,7 @@
 0x851CBB: lea     eax, [esp+24h+var_C]
 0x851CBF: mov     large fs:0, eax
 0x851CC5: mov     [esp+24h+var_10], ecx
-0x851CC9: mov     ebx, [esp+24h+arg_C]
+0x851CC9: mov     ebx, [esp+24h+value]
 0x851CCD: mov     edi, [ebx+0E0h]
 0x851CD3: test    edi, edi
 0x851CD5: mov     esi, ds:0B45BD0h
@@ -37,9 +37,9 @@
 0x851D0F: mov     eax, ds:0B430F0h
 0x851D14: ja      short loc_851D1B
 0x851D16: mov     eax, ds:0B430DCh
-0x851D1B: push    eax; a2
+0x851D1B: push    eax; texture
 0x851D1C: mov     ecx, ebp; this
-0x851D1E: call    sub_76C910
+0x851D1E: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x851D23: test    ebp, ebp
 0x851D25: jz      short loc_851D41
 0x851D27: cmp     byte ptr ds:0B42CDDh, 0
@@ -48,9 +48,9 @@
 0x851D32: mov     eax, [edx+78h]
 0x851D35: mov     ecx, ebx
 0x851D37: call    eax
-0x851D39: push    eax
-0x851D3A: mov     ecx, ebp
-0x851D3C: call    sub_7715E0
+0x851D39: push    eax; preset
+0x851D3A: mov     ecx, ebp; this
+0x851D3C: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x851D41: mov     ecx, [esi+24h]
 0x851D44: mov     eax, [edi+8]
 0x851D47: test    eax, eax
@@ -60,11 +60,11 @@
 0x851D50: push    eax
 0x851D51: jmp     short loc_851D5A
 0x851D53: mov     edx, ds:0B43120h
-0x851D59: push    edx; a2
-0x851D5A: call    sub_76C910
-0x851D5F: push    3
-0x851D61: mov     ecx, ebp
-0x851D63: call    sub_7715E0
+0x851D59: push    edx; texture
+0x851D5A: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
+0x851D5F: push    3; preset
+0x851D61: mov     ecx, ebp; this
+0x851D63: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x851D68: test    ebp, ebp
 0x851D6A: jz      short loc_851D86
 0x851D6C: cmp     byte ptr ds:0B42CDDh, 0
@@ -73,71 +73,71 @@
 0x851D77: mov     edx, [eax+78h]
 0x851D7A: mov     ecx, ebx
 0x851D7C: call    edx
-0x851D7E: push    eax
-0x851D7F: mov     ecx, ebp
-0x851D81: call    sub_7715E0
+0x851D7E: push    eax; preset
+0x851D7F: mov     ecx, ebp; this
+0x851D81: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x851D86: cmp     dword ptr [esi+30h], 0
 0x851D8A: mov     ebp, [edi+5Ch]
 0x851D8D: jnz     short loc_851D97
-0x851D8F: call    sub_772DF0
+0x851D8F: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x851D94: mov     [esi+30h], eax
 0x851D97: mov     ecx, [esi+30h]
 0x851D9A: push    0
 0x851D9C: push    ebp
 0x851D9D: push    13h
-0x851D9F: call    sub_772CD0
+0x851D9F: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x851DA4: cmp     dword ptr [esi+30h], 0
 0x851DA8: mov     ebp, [edi+60h]
 0x851DAB: jnz     short loc_851DB5
-0x851DAD: call    sub_772DF0
+0x851DAD: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x851DB2: mov     [esi+30h], eax
 0x851DB5: mov     ecx, [esi+30h]
 0x851DB8: push    0
 0x851DBA: push    ebp
 0x851DBB: push    14h
-0x851DBD: call    sub_772CD0
+0x851DBD: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x851DC2: cmp     dword ptr [esi+30h], 0
 0x851DC6: mov     ebp, [edi+64h]
 0x851DC9: jnz     short loc_851DD3
-0x851DCB: call    sub_772DF0
+0x851DCB: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x851DD0: mov     [esi+30h], eax
 0x851DD3: mov     ecx, [esi+30h]
 0x851DD6: push    1
 0x851DD8: push    ebp
 0x851DD9: push    0ABh ; '«'
-0x851DDE: call    sub_772CD0
+0x851DDE: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x851DE3: cmp     dword ptr [esi+30h], 0
 0x851DE7: mov     edi, [edi+68h]
 0x851DEA: jnz     short loc_851DF4
-0x851DEC: call    sub_772DF0
+0x851DEC: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x851DF1: mov     [esi+30h], eax
 0x851DF4: mov     ecx, [esi+30h]
 0x851DF7: push    0
 0x851DF9: push    edi
 0x851DFA: push    17h
-0x851DFC: call    sub_772CD0
-0x851E01: mov     eax, [esp+24h+arg_0]
+0x851DFC: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
+0x851E01: mov     eax, [esp+24h+geometry]
 0x851E05: mov     edi, [esp+24h+var_10]
-0x851E09: push    ebx
-0x851E0A: push    eax
+0x851E09: push    ebx; shaderProperty
+0x851E0A: push    eax; geometry
 0x851E0B: mov     ecx, edi
-0x851E0D: call    sub_7D1C90
+0x851E0D: call    BSShaderProperty_SetupTextureEffectConstants; Verified (Oblivion): shared by all four 1x/2x texture-effect pass handlers used from ShadowLight, Skin, and Hair shader setup. Reads TextureEffectData from shaderProperty+0xE0, copies current fill/edge RGBA into ShadowLight shader-map backing, copies U/V offsets and edge exponent, writes the second fVars component as 1.0, then updates separate per-geometry property-state constants.
 0x851E12: mov     ebx, 1
 0x851E17: add     [esi+60h], ebx
-0x851E1A: mov     [esp+24h+arg_C], esi
+0x851E1A: mov     [esp+24h+value], esi
 0x851E1E: mov     edx, [edi+38h]
-0x851E21: lea     ecx, [esp+24h+arg_C]
-0x851E25: push    ecx
-0x851E26: push    edx
-0x851E27: lea     ecx, [edi+40h]
+0x851E21: lea     ecx, [esp+24h+value]
+0x851E25: push    ecx; value
+0x851E26: push    edx; index
+0x851E27: lea     ecx, [edi+40h]; this
 0x851E2A: mov     [esp+2Ch+var_4], 0
-0x851E32: call    sub_76CE40
+0x851E32: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x851E37: or      eax, 0FFFFFFFFh
 0x851E3A: add     [esi+60h], eax
 0x851E3D: mov     [esp+24h+var_4], eax
 0x851E41: jnz     short loc_851E4A
 0x851E43: mov     ecx, esi
-0x851E45: call    sub_7604D0
+0x851E45: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x851E4A: add     [edi+38h], ebx
 0x851E4D: mov     ecx, dword ptr [esp+24h+var_C]
 0x851E51: mov     large fs:0, ecx
@@ -148,3 +148,12 @@
 0x851E5C: pop     ebx
 0x851E5D: add     esp, 10h
 0x851E60: retn    10h
+0x9D3360: lea     ecx, [ebp+10h]; void *
+0x9D3363: jmp     sub_4027D0
+0x9D3368: mov     edx, [esp+arg_4]
+0x9D336C: lea     eax, [edx-14h]
+0x9D336F: mov     ecx, [edx-18h]
+0x9D3372: xor     ecx, eax
+0x9D3374: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3379: mov     eax, offset stru_AFB794
+0x9D337E: jmp     ___CxxFrameHandler3

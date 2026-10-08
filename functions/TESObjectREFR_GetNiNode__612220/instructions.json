@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x612220",
-    "line": "cmp     ecx, ds:0B333C4h",
+    "line": "cmp     ecx, ds:0B333C4h; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x612233",
-    "line": "jz      short locret_612237",
+    "line": "jz      short locret_612237; ODismemberment: GetNiNode returns null for non-player refs whose root has AppCulled set; runtime limb suppression must never app-cull actor root.",
     "mnemonic": "jz",
     "size": 2
   },

@@ -12,7 +12,7 @@
 0x8C683D: shr     edx, 14h
 0x8C6840: lea     eax, [eax+edx*8]
 0x8C6843: jmp     short loc_8C684A
-0x8C6845: mov     eax, offset dword_BA8138
+0x8C6845: mov     eax, offset unk_BA8138
 0x8C684A: mov     eax, [eax]
 0x8C684C: test    eax, eax
 0x8C684E: jz      short loc_8C685D

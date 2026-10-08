@@ -1,19 +1,36 @@
 {
-  "callees_count": 171,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 34,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "chunks": [
+    [
+      "0x9A56D0",
+      "0x9A6046"
+    ],
+    [
+      "0x9A6054",
+      "0x9A60FD"
+    ]
+  ],
+  "chunks_sha256": "bba9b27cfa6c3d651f25bd9f36939e58cad4e4e06ab2d383be6bf831e7aea768",
+  "comment_regular": "\nDX11 GPU-world 2026-10-01: verified complete automatic matrix family: semantics1/2 projection,3/4 view,5/6 world,7/8 world*view,9/10 view*projection,11/12 (world*view)*projection; even member requests in-place D3DX inverse; adding12 requests transpose AFTER inverse. The local matrix pointer is passed as sourceOverride with countOverride0 to program vtable+28 (7830C0 for qualified DX9 vertex program). Thus effective count is entry+20 or1 and parameter class selects float/int/BOOL without numeric conversion. The producer writes the source prefix implied by bank width; not all entries are fixed float4x4 writes. Null-skin semantics25..36 and88 return without setters. Automatic pixel9A3310 is a distinct semantic namespace, not these matrices. Fallout8225D420 corroborates matrix-family ordering at subsystem level but has renderer offsets790/7D0/810 and virtual+74 instead of Oblivion940/980/9C0 and+28; do not transplant those layouts.\n\nMoonSugarEffect decode: NiD3DSCM_Vertex named/global constant applier. Resolves matrix constants such as World, WorldView, WorldViewProj, skin/bone matrices, texture transforms, light/material vectors, EyeDir, time/sin/cos/tan, and ambient light. World-family constants read NiDX9Renderer+0x940/0x980/0x9C0, so sub_765480 world-matrix updates feed programmable vertex shaders too.",
+  "comment_repeatable": "MoonSugarEffect decode: NiD3DSCM_Vertex named/global constant applier. Resolves matrix constants such as World, WorldView, WorldViewProj, skin/bone matrices, texture transforms, light/material vectors, EyeDir, time/sin/cos/tan, and ambient light. World-family constants read NiDX9Renderer+0x940/0x980/0x9C0, so sub_765480 world-matrix updates feed programmable vertex shaders too.\nDX11 GPU-world matrix contract (2026-09-27): renderer+940 is camera-relative world, +980 view, +9C0 projection. Automatic semantics 17/19/21/23 transpose World/WorldView/ViewProj/WorldViewProj. WVP cases11/23 explicitly compute (World*View) into a temporary, then multiply by Projection; do not reassociate as World*(View*Projection) when translating native arithmetic. Skin variants25..32 consume skin-instance+28 and need a separate profile. Register patching must follow the final active constant-map writer, not just a shader hash or conventional c0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
   "display_name": "sub_9A56D0",
   "end_ea": "0x9A6046",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
   "name": "sub_9A56D0",
   "segment": ".text",
   "sha256": "5f1b066f1d292820ebf820427b81feaa7cba48e467dcd6b143649cfb6b5b83a5",
   "size": 2422,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x9A56D0",
+  "total_chunk_size": 2591,
   "type": "unsigned int __thiscall(_DWORD *this, int, int, NiObjectNET *, int, int, int, int, int, int, int, int)",
-  "xrefs_from_count": 911,
+  "xrefs_from_count": 975,
   "xrefs_to_count": 1
 }

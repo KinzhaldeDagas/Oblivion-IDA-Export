@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7903B0",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+holeIndex]; MSVC adjust-heap primitive for CBranch pointers: selects a child by fuzzyBranchVolume, sifts the hole downward, then delegates to the heap-push helper. Used by make-heap and sort-heap.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7903B6",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7903BB",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x790409",
-    "line": "mov     ecx, [esp+0Ch+arg_C]",
+    "line": "mov     ecx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,31 +199,31 @@
   },
   {
     "ea": "0x79040E",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79040F",
-    "line": "push    ebx",
+    "line": "push    ebx; topIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790410",
-    "line": "push    edx",
+    "line": "push    edx; holeIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790411",
-    "line": "push    esi",
+    "line": "push    esi; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790412",
-    "line": "call    sub_78FBC0",
+    "line": "call    OB_BranchPtrVector_PushHeapByFuzzyVolume_010201A0; MSVC heap push primitive for OB_CBranch pointer ranges. Moves parent pointers down until the new pointer fits the ordering defined by CBranch+0x2C fuzzyBranchVolume. This is part of Oblivion's std::sort expansion.",
     "mnemonic": "call",
     "size": 5
   },

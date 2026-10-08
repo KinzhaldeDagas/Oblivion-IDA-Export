@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79A8F0",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+last]; OBLIVION AUTHORITY (2026-08-30): Copies CBranchChildRef records backward from [first,last) into the range ending at destinationLast. Each record is exactly 0x0C bytes (three dwords: parent vertex index, interpolation fraction, child pointer); returns the first destination record. RT4.1 StructsSupport.h:131-147 corroborates the already-observed SIdvBranch layout.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x79A8F5",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x79A90D",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },

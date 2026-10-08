@@ -1,6 +1,6 @@
 0x5F6330: push    esi
 0x5F6331: mov     esi, ecx
-0x5F6333: call    sub_5E6C60
+0x5F6333: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x5F6338: test    al, al
 0x5F633A: jz      short loc_5F6383
 0x5F633C: mov     ecx, ds:0B333C4h
@@ -36,9 +36,9 @@
 0x5F639B: push    ebx
 0x5F639C: push    ebp
 0x5F639D: push    edi
-0x5F639E: push    0; float
-0x5F63A0: mov     ecx, esi
-0x5F63A2: call    sub_5F4AE0
+0x5F639E: push    0; shouldBlock
+0x5F63A0: mov     ecx, esi; this
+0x5F63A2: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x5F63A7: mov     eax, [esi]
 0x5F63A9: mov     edx, [eax+394h]
 0x5F63AF: push    0
@@ -46,8 +46,8 @@
 0x5F63B3: call    edx
 0x5F63B5: push    4
 0x5F63B7: push    esi
-0x5F63B8: mov     ecx, offset dword_B3BDB0
-0x5F63BD: call    sub_67C880
+0x5F63B8: mov     ecx, (offset qword_B3BB2C+284h)
+0x5F63BD: call    CombatGroupManager_BuildFriendlyEntryList; Builds temporary BSSimpleList of combat-group friendly entry pointers: same team byte, mount/rider equivalence, and shouldActorFight<=0. arg=0 disables process-level filter.
 0x5F63C2: mov     edi, eax
 0x5F63C4: test    edi, edi
 0x5F63C6: mov     ebp, edi
@@ -75,13 +75,13 @@
 0x5F6401: test    edi, edi
 0x5F6403: jnz     short loc_5F63D0
 0x5F6405: mov     ecx, ebp
-0x5F6407: call    BSSimpleList_Clear
+0x5F6407: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5F640C: push    ebp
-0x5F640D: call    FormHeapFree
+0x5F640D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F6412: add     esp, 4
 0x5F6415: push    esi
 0x5F6416: push    0Ch
-0x5F6418: mov     ecx, offset dword_B3BDB0
+0x5F6418: mov     ecx, (offset qword_B3BB2C+284h)
 0x5F641D: call    sub_67CF50
 0x5F6422: mov     edi, eax
 0x5F6424: test    edi, edi
@@ -102,14 +102,14 @@
 0x5F6450: mov     eax, [ebx+4]
 0x5F6453: mov     edi, [eax+4]
 0x5F6456: push    eax
-0x5F6457: call    FormHeapFree
+0x5F6457: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F645C: add     esp, 4
 0x5F645F: test    edi, edi
 0x5F6461: mov     [ebx+4], edi
 0x5F6464: jnz     short loc_5F6450
 0x5F6466: push    ebx
 0x5F6467: mov     dword ptr [ebx], 0
-0x5F646D: call    FormHeapFree
+0x5F646D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F6472: mov     ecx, [esi+58h]
 0x5F6475: add     esp, 4
 0x5F6478: test    ecx, ecx
@@ -164,7 +164,7 @@
 0x5F6503: call    Interface_ConsolePrint
 0x5F6508: add     esp, 8
 0x5F650B: mov     ecx, esi; int
-0x5F650D: call    sub_5EAE70
+0x5F650D: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5F6512: mov     ecx, [esi+58h]
 0x5F6515: test    ecx, ecx
 0x5F6517: pop     edi

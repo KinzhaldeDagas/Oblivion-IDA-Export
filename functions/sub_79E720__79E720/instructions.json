@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x79E720",
-    "line": "push    ecx",
+    "line": "push    ecx; Checked/STL trampoline for overlap-safe backward SFrondGuide range assignment.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E721",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E725",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79E731",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x79E736",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x79E73B",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E73F",
-    "line": "push    eax",
+    "line": "push    eax; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E740",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E741",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E742",
-    "line": "call    sub_79C020",
+    "line": "call    OB_SFrondGuide_CopyAssignRangeBackwardThunk_010201A0; Thin backward-copy wrapper for overlap-safe SFrondGuide range assignment; returns destination start.",
     "mnemonic": "call",
     "size": 5
   },

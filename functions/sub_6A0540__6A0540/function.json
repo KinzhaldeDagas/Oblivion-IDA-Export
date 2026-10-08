@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6A0540",
+      "0x6A05A5"
+    ]
+  ],
+  "chunks_sha256": "860386b652f39f6354ec65a4eefe33d1e5f6d25535896565fb161b00efe4acb7",
+  "comment_regular": "Verified MagicShaderHitEffect +0x84 PostLink callback derives its shader from the owning ActiveEffect's MagicItem when available, restores target attachment, runs Update and returns its bool result. ActiveEffect_Base_PostLink ignores that result and registers the object with ActorProcessManager.",
+  "comment_repeatable": "Verified MagicShaderHitEffect +0x84 PostLink callback derives its shader from the owning ActiveEffect's MagicItem when available, restores target attachment, runs Update and returns its bool result. ActiveEffect_Base_PostLink ignores that result and registers the object with ActorProcessManager.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6A0540",
+  "display_name": "MagicShaderHitEffect_PostLink",
   "end_ea": "0x6A05A5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6A0540",
+  "name": "MagicShaderHitEffect_PostLink",
   "segment": ".text",
   "sha256": "860386b652f39f6354ec65a4eefe33d1e5f6d25535896565fb161b00efe4acb7",
   "size": 101,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A0540",
-  "type": "int __thiscall(float *this, int, int, int)",
+  "total_chunk_size": 101,
+  "type": "bool __thiscall(MagicShaderHitEffect *this, ActiveEffect *ownerActiveEffect, TESObjectREFR *linkContext, TESEffectShader *fallbackEffectShader)",
   "xrefs_from_count": 43,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x569E40: mov     eax, ecx
+0x569E40: mov     eax, ecx; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x569E42: xor     ecx, ecx
 0x569E44: mov     byte ptr [eax], 2
 0x569E47: mov     [eax+4], ecx

@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 27,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 212,
+  "chunks": [
+    [
+      "0x46AC80",
+      "0x46AC8B"
+    ]
+  ],
+  "chunks_sha256": "cb5a3d8f7d632bfd6c18641f385377f931dd607c0b6f5d4ec148e1a6c785ad30",
+  "comment_regular": "Verified 2026-10-03: x86 ECX receiver and two 4-byte stack arguments; callee RET 8 (or tail jump to that callee). byteCount is 32-bit; previous 8-byte size_t and inferred extra register/stack arguments distorted callers. Buffer cursor is owner +0x14. Wrapper ECX receiver is replaced by global 0x00B33B00 before tail jump.\n\nMEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
+  "comment_repeatable": "MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESForm_LoadDataFromCurrentSaveGame",
   "end_ea": "0x46AC8B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESForm_LoadDataFromCurrentSaveGame",
   "segment": ".text",
   "sha256": "cb5a3d8f7d632bfd6c18641f385377f931dd607c0b6f5d4ec148e1a6c785ad30",
   "size": 11,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46AC80",
-  "type": "void __stdcall(TESForm *, size_t)",
+  "total_chunk_size": 11,
+  "type": "void *__thiscall(TESForm *self, void *destination, unsigned int byteCount)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 212
 }

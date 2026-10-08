@@ -1,4 +1,4 @@
-0x49FD90: push    0FFFFFFFFh
+0x49FD90: push    0FFFFFFFFh; CustomAnimSupport decode: BSAnimGroupSequence constructor; stores parsed TESAnimGroup at +0x68 and clones controller sequence state.
 0x49FD92: push    offset ??0BSAnimGroupSequence@@QAE@XZ_SEH
 0x49FD97: mov     eax, large fs:0
 0x49FD9D: push    eax
@@ -78,7 +78,7 @@
 0x49FE5C: mov     eax, [esi+5Ch]
 0x49FE5F: mov     ebp, [ebx+5Ch]
 0x49FE62: push    eax
-0x49FE63: call    FormHeapFree
+0x49FE63: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49FE68: add     esp, 4
 0x49FE6B: test    ebp, ebp
 0x49FE6D: mov     dword ptr [esi+5Ch], 0
@@ -86,7 +86,6 @@
 0x49FE76: mov     eax, ebp
 0x49FE78: lea     edx, [eax+1]
 0x49FE7B: jmp     short loc_49FE80
-0x49FE7D: align 10h
 0x49FE80: mov     cl, [eax]
 0x49FE82: add     eax, 1
 0x49FE85: test    cl, cl
@@ -101,8 +100,8 @@
 0x49FE97: mov     [esi+5Ch], eax
 0x49FE9A: call    _strcpy_s
 0x49FE9F: add     esp, 10h
-0x49FEA2: lea     ecx, [esp+34h+var_1C]
-0x49FEA6: call    sub_478B90
+0x49FEA2: lea     ecx, [esp+34h+var_1C]; this
+0x49FEA6: call    OB_NiCloningProcess_ctor
 0x49FEAB: lea     ecx, [esp+34h+var_1C]
 0x49FEAF: push    ecx
 0x49FEB0: push    esi
@@ -134,3 +133,17 @@
 0x49FEF3: pop     ebx
 0x49FEF4: add     esp, 20h
 0x49FEF7: retn    8
+0x9B2150: mov     ecx, [ebp-20h]; this
+0x9B2153: jmp     ??1NiControllerSequence@@UAE@XZ; NiControllerSequence::~NiControllerSequence(void)
+0x9B2158: mov     ecx, [ebp-20h]
+0x9B215B: add     ecx, 68h ; 'h'; slot
+0x9B215E: jmp     NiPointerSlot_Release
+0x9B2163: lea     ecx, [ebp-1Ch]
+0x9B2166: jmp     sub_4781A0
+0x9B216B: mov     edx, [esp+arg_4]
+0x9B216F: lea     eax, [edx-24h]
+0x9B2172: mov     ecx, [edx-28h]
+0x9B2175: xor     ecx, eax
+0x9B2177: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B217C: mov     eax, offset stru_ADE1A8
+0x9B2181: jmp     ___CxxFrameHandler3

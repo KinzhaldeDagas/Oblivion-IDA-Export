@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x589C33",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x589C43",
-    "line": "mov     ecx, [esi+10h]",
+    "line": "mov     ecx, [esi+10h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x589C4A",
-    "line": "call    sub_5888E0",
+    "line": "call    Tile__ActionNode__Unlink;",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x589C50",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x589C66",
-    "line": "mov     eax, [edx+14h]",
+    "line": "mov     eax, [edx+14h]; Verified: incoming reaction action is removed from destination action chain (prev/next) and source reaction chain (+0x10/+0x14), then freed. No selector-based rebinding to a later same-name replacement is performed here.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x589CB6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x589CC6",
-    "line": "mov     ecx, [esi+14h]",
+    "line": "mov     ecx, [esi+14h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x589CCD",
-    "line": "call    sub_5888E0",
+    "line": "call    Tile__ActionNode__Unlink;",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x589CD3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x589CE2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x589CFD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -838,5 +838,65 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BF770",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF773",
+    "line": "add     ecx, 8; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF776",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF77B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BF77F",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF782",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF785",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF787",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF78C",
+    "line": "mov     eax, offset stru_AE8C78",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF791",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

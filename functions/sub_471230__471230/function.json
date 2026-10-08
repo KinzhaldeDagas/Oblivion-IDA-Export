@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x471230",
+      "0x4712A5"
+    ]
+  ],
+  "chunks_sha256": "e131aff8b030a33f813f3ac528619ce1416c1a4f72b3cb124d4cd12cef34384f",
+  "comment_regular": "Samples the actor scene graph while extracting accumulation/root motion. Seeds AccumNode +0x54 from ActorAnimData +0x18, updates RootNode at the requested time, optionally copies the resulting AccumNode translation to the caller, then zeroes AccumNode +0x54. Used after forced play, animation-state restore, and explicit play-group paths.",
+  "comment_repeatable": "Samples the actor scene graph while extracting accumulation/root motion. Seeds AccumNode +0x54 from ActorAnimData +0x18, updates RootNode at the requested time, optionally copies the resulting AccumNode translation to the caller, then zeroes AccumNode +0x54. Used after forced play, animation-state restore, and explicit play-group paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_471230",
+  "display_name": "ActorAnimData_SampleAndExtractRootMotion",
   "end_ea": "0x4712A5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_471230",
+  "name": "ActorAnimData_SampleAndExtractRootMotion",
   "segment": ".text",
   "sha256": "e131aff8b030a33f813f3ac528619ce1416c1a4f72b3cb124d4cd12cef34384f",
   "size": 117,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x471230",
+  "total_chunk_size": 117,
   "type": "int __thiscall(int this, float, _DWORD *, int)",
   "xrefs_from_count": 44,
   "xrefs_to_count": 4

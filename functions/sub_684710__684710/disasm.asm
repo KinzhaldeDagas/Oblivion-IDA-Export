@@ -9,10 +9,10 @@
 0x684728: test    eax, eax
 0x68472A: mov     esi, eax
 0x68472C: jz      short loc_684745
-0x68472E: lea     ecx, [eax+4]; void *
-0x684731: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x68472E: lea     ecx, [eax+4]; this
+0x684731: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x684736: push    esi
-0x684737: call    FormHeapFree
+0x684737: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x68473C: mov     ecx, ds:0B3C098h
 0x684742: add     esp, 4
 0x684745: test    ecx, ecx
@@ -23,7 +23,7 @@
 0x684754: mov     edx, [eax]
 0x684756: push    eax
 0x684757: mov     ds:0B3C094h, edx
-0x68475D: call    FormHeapFree
+0x68475D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x684762: add     esp, 4
 0x684765: jmp     short loc_684711
 0x684767: xor     eax, eax

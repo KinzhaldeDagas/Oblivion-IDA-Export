@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 14,
-  "display_name": "sub_43B0D0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x43B0D0",
+      "0x43B273"
+    ],
+    [
+      "0x9ACA00",
+      "0x9ACA49"
+    ]
+  ],
+  "chunks_sha256": "040f8a6a6486b83897c25be129fe3a5298f1ea7f101787bf6062d0751cbb709b",
+  "comment_regular": "Verified shared texture dependency helper used by tree, landscape, and generated landscape-LOD paths. It queries the texture/resource cache; on a miss it creates and queues a QueuedTexture, while a hit with a parent creates an attached wrapper task so the dependency participates in parent completion. Caller priority and parent task are forwarded.",
+  "comment_repeatable": "Verified shared texture dependency helper used by tree, landscape, and generated landscape-LOD paths. It queries the texture/resource cache; on a miss it creates and queues a QueuedTexture, while a hit with a parent creates an attached wrapper task so the dependency participates in parent completion. Caller priority and parent task are forwarded.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 16,
+  "display_name": "QueuedTexture_QueueOrAttachPath",
   "end_ea": "0x43B273",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43B0D0",
+  "name": "QueuedTexture_QueueOrAttachPath",
   "segment": ".text",
   "sha256": "689f30fb92f922bb8ca8043ab1c179897bcc49b844275c56417f1d10dced7ee0",
   "size": 419,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43B0D0",
-  "type": "char __stdcall(const char *, unsigned __int8, volatile LONG *)",
-  "xrefs_from_count": 181,
+  "total_chunk_size": 492,
+  "type": "bool __stdcall(const char *path, unsigned __int8 priority, IOTask *parent)",
+  "xrefs_from_count": 206,
   "xrefs_to_count": 4
 }

@@ -1,4 +1,4 @@
-BSStringT *sub_9E26C0()
+NiRTTI *sub_9E26C0()
 {
-  return sub_70E220((BSStringT *)dword_B35ACC, "TESObjectExtraData", (int)dword_B3FD44);
+  return NiRTTI_Constructor(&stru_B35ACC, "TESObjectExtraData", &stru_B3FD44); /*0x9e26d4*/
 }

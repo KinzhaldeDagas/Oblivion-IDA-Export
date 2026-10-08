@@ -1,4 +1,4 @@
 char *__thiscall sub_912020(char *this)
 {
-  return this + 0xC;
+  return this + 0xC; /*0x912023*/
 }

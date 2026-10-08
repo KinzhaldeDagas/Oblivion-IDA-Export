@@ -1,7 +1,7 @@
 0x5069D0: sub     esp, 10h
-0x5069D3: mov     ecx, [esp+28h]
+0x5069D3: mov     ecx, dword ptr [esp+10h+arg_10+4]
 0x5069D7: fldz
-0x5069D9: mov     edx, [esp+10h+arg_10]
+0x5069D9: mov     edx, dword ptr [esp+10h+arg_10]
 0x5069DD: fstp    dword ptr [esp+10h+var_C]
 0x5069E1: lea     eax, [esp+10h+var_C]
 0x5069E5: push    eax; UInt16
@@ -17,7 +17,7 @@
 0x5069FE: push    edx; a3
 0x5069FF: push    eax; a2
 0x506A00: push    ecx; a1
-0x506A01: call    Script_ExtractArgs
+0x506A01: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x506A06: add     esp, 20h
 0x506A09: test    al, al
 0x506A0B: jnz     short loc_506A11

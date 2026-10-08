@@ -1,4 +1,4 @@
-0x401690: mov     eax, [esp+arg_4]
+0x401690: mov     eax, [esp+arg_4]; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.
 0x401694: mov     edx, [eax+0Ch]
 0x401697: push    esi
 0x401698: mov     esi, [eax+8]

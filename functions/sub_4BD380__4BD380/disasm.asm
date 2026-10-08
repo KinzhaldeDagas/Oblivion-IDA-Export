@@ -1,4 +1,4 @@
-0x4BD380: push    0FFFFFFFFh
+0x4BD380: push    0FFFFFFFFh; Verified per-cell cancellation path: looks up the packed cell label in g_DistantLODLoaderTasksByCell, cancels the referenced task through generic IOTask cancellation, then releases the lookup reference. GridDistantArray_UnloadCell calls this before clearing the cell slot.
 0x4BD382: push    offset SEH_4BD380
 0x4BD387: mov     eax, large fs:0
 0x4BD38D: push    eax
@@ -9,16 +9,16 @@
 0x4BD397: lea     eax, [esp+14h+var_C]
 0x4BD39B: mov     large fs:0, eax
 0x4BD3A1: mov     esi, ecx
-0x4BD3A3: mov     eax, [esp+14h+arg_4]
-0x4BD3A7: mov     ecx, [esp+14h+arg_0]
-0x4BD3AB: push    eax
-0x4BD3AC: push    ecx
-0x4BD3AD: call    sub_4EF1D0
+0x4BD3A3: mov     eax, dword ptr [esp+14h+group_y]
+0x4BD3A7: mov     ecx, dword ptr [esp+14h+group_x]
+0x4BD3AB: push    eax; group_y
+0x4BD3AC: push    ecx; group_x
+0x4BD3AD: call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.
 0x4BD3B2: add     esp, 8
-0x4BD3B5: mov     [esp+14h+arg_4], 0
+0x4BD3B5: mov     dword ptr [esp+14h+group_y], 0
 0x4BD3BD: mov     edx, [esi]
 0x4BD3BF: mov     edx, [edx+4]
-0x4BD3C2: lea     ecx, [esp+14h+arg_4]
+0x4BD3C2: lea     ecx, [esp+14h+group_y]
 0x4BD3C6: push    ecx
 0x4BD3C7: push    eax
 0x4BD3C8: mov     ecx, esi
@@ -26,11 +26,11 @@
 0x4BD3D2: call    edx
 0x4BD3D4: test    al, al
 0x4BD3D6: jz      short loc_4BD3E8
-0x4BD3D8: mov     eax, [esp+14h+arg_4]
+0x4BD3D8: mov     eax, dword ptr [esp+14h+group_y]
 0x4BD3DC: mov     ecx, ds:0B33A10h
-0x4BD3E2: push    eax
-0x4BD3E3: call    sub_432130
-0x4BD3E8: mov     esi, [esp+14h+arg_4]
+0x4BD3E2: push    eax; task
+0x4BD3E3: call    IOTask_Cancel; Verified cell unload retrieves and cancels the cell's loader task through IOTask_Cancel; the generic state machine transitions active states to 6 before invoking task completion.
+0x4BD3E8: mov     esi, dword ptr [esp+14h+group_y]
 0x4BD3EC: test    esi, esi
 0x4BD3EE: mov     [esp+14h+var_4], 0FFFFFFFFh
 0x4BD3F6: jz      short loc_4BD414
@@ -52,3 +52,12 @@
 0x4BD420: pop     esi
 0x4BD421: add     esp, 0Ch
 0x4BD424: retn    8
+0x9B4320: lea     ecx, [ebp+8]; void *
+0x9B4323: jmp     sub_4BDDC0
+0x9B4328: mov     edx, dword ptr [esp+group_y]
+0x9B432C: lea     eax, [edx-4]
+0x9B432F: mov     ecx, [edx-8]
+0x9B4332: xor     ecx, eax
+0x9B4334: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B4339: mov     eax, offset stru_ADFA34
+0x9B433E: jmp     ___CxxFrameHandler3

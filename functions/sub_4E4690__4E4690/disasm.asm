@@ -4,7 +4,7 @@
 0x4E4696: shr     eax, 0Bh
 0x4E4699: test    al, 1
 0x4E469B: jnz     loc_4E48A0
-0x4E46A1: push    ebx; int
+0x4E46A1: push    ebx; flushTermination
 0x4E46A2: push    esi
 0x4E46A3: call    TESOjectREFR_stuffsWithPArentCell
 0x4E46A8: mov     edx, [edi]
@@ -17,9 +17,9 @@
 0x4E46BB: push    40000000h
 0x4E46C0: mov     ecx, edi
 0x4E46C2: call    eax
-0x4E46C4: push    1; a2
+0x4E46C4: push    1; disabled
 0x4E46C6: mov     ecx, edi; this
-0x4E46C8: call    TESForm_SetEnabled?
+0x4E46C8: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
 0x4E46CD: mov     edx, [edi]
 0x4E46CF: mov     eax, [edx+188h]
 0x4E46D5: mov     ecx, edi
@@ -41,8 +41,8 @@
 0x4E4709: mov     [eax+1E0h], ebx
 0x4E470F: mov     ecx, edi
 0x4E4711: call    sub_5E4B00
-0x4E4716: lea     ecx, [edi+68h]
-0x4E4719: call    MagicTarget_RemoveAllEffects
+0x4E4716: lea     ecx, [edi+68h]; this
+0x4E4719: call    MagicTarget_RemoveAllEffects; Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.
 0x4E471E: cmp     ds:0B3B7D0h, ebx
 0x4E4724: jle     short loc_4E4731
 0x4E4726: push    1
@@ -50,10 +50,10 @@
 0x4E4729: call    sub_607B90
 0x4E472E: add     esp, 8
 0x4E4731: mov     ecx, edi; this
-0x4E4733: call    Actor__GetProcessLevel
+0x4E4733: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x4E4738: push    eax
 0x4E4739: push    edi
-0x4E473A: mov     ecx, offset ActorProcessManager_ptr
+0x4E473A: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4E473F: call    sub_674550
 0x4E4744: mov     eax, [edi+58h]
 0x4E4747: cmp     eax, ebx
@@ -61,8 +61,8 @@
 0x4E474B: mov     eax, [eax+8]
 0x4E474E: cmp     eax, ebx
 0x4E4750: jz      short loc_4E4774
-0x4E4752: mov     ecx, eax
-0x4E4754: call    sub_567770
+0x4E4752: mov     ecx, eax; this
+0x4E4754: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x4E4759: test    al, al
 0x4E475B: jz      short loc_4E4774
 0x4E475D: mov     edx, [edi]
@@ -72,7 +72,7 @@
 0x4E4769: test    al, al
 0x4E476B: jz      short loc_4E4774
 0x4E476D: mov     ecx, edi; int
-0x4E476F: call    sub_5EAE70
+0x4E476F: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x4E4774: mov     ecx, [edi+58h]
 0x4E4777: cmp     ecx, ebx
 0x4E4779: jz      short loc_4E47BF
@@ -113,7 +113,7 @@
 0x4E47D5: call    sub_665260
 0x4E47DA: lea     ebp, [edi+44h]
 0x4E47DD: mov     ecx, ebp
-0x4E47DF: call    sub_4203A0
+0x4E47DF: call    ExtraDataList_GetEnableStateChildren; Returns the embedded child-reference list in ExtraEnableStateChildren, or null.
 0x4E47E4: mov     esi, eax
 0x4E47E6: test    esi, esi
 0x4E47E8: jz      short loc_4E481E
@@ -124,18 +124,18 @@
 0x4E47F9: jz      short loc_4E481E
 0x4E47FB: mov     ebx, [esi]
 0x4E47FD: lea     ecx, [ebx+44h]
-0x4E4800: call    sub_420340
+0x4E4800: call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.
 0x4E4805: test    al, al
 0x4E4807: mov     ecx, ebx
 0x4E4809: jz      short loc_4E4812
-0x4E480B: call    sub_4DD850
+0x4E480B: call    sub_4DD850; Verified enable-state activation: this branch runs when the reference's 0x800 disabled bit is set, performs activation/processing work, then clears the bit through TESForm_SetDisabledFlag. It recursively propagates state through ExtraEnableStateChildren.
 0x4E4810: jmp     short loc_4E4817
 0x4E4812: call    sub_4E4690
 0x4E4817: mov     esi, [esi+4]
 0x4E481A: test    esi, esi
 0x4E481C: jnz     short loc_4E47F0
 0x4E481E: mov     ecx, ebp
-0x4E4820: call    sub_420480
+0x4E4820: call    ExtraDataList_GetDroppedItemList; Returns the embedded reference list in ExtraDroppedItemList type 0x42.
 0x4E4825: mov     ebx, eax
 0x4E4827: test    ebx, ebx
 0x4E4829: pop     ebp
@@ -148,7 +148,7 @@
 0x4E483B: mov     esi, [ebx]
 0x4E483D: push    0
 0x4E483F: lea     ecx, [esi+44h]
-0x4E4842: call    sub_4203E0
+0x4E4842: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x4E4847: mov     edx, [esi]
 0x4E4849: mov     eax, [edx+8Ch]
 0x4E484F: push    1
@@ -172,7 +172,7 @@
 0x4E487E: mov     edx, [eax]
 0x4E4880: push    eax
 0x4E4881: mov     [ebx], edx
-0x4E4883: call    FormHeapFree
+0x4E4883: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4E4888: add     esp, 4
 0x4E488B: jmp     short loc_4E4830
 0x4E488D: mov     dword ptr [ebx], 0

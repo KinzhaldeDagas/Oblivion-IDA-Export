@@ -1,4 +1,4 @@
-0x612690: mov     eax, [esp+arg_0]
+0x612690: mov     eax, [esp+mode]; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x612694: cmp     eax, 2
 0x612697: jz      short loc_6126A1
 0x612699: cmp     eax, 4

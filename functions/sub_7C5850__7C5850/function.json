@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C5850",
+  "chunks": [
+    [
+      "0x7C5850",
+      "0x7C58E5"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "af45e3db4f8ff34f717f0e8dc77e771be6bd0e9fbee1e388356bca2b9fa0e93d",
+  "comment_regular": "Replace ShadowSceneNode+0x118 with a newly constructed ShadowSceneLight wrapper and assign its backing reference light.",
+  "comment_repeatable": "Replace ShadowSceneNode+0x118 with a newly constructed ShadowSceneLight wrapper and assign its backing reference light.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowSceneNode_RecreateLightLevelReference",
   "end_ea": "0x7C58E5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C5850",
+  "name": "ShadowSceneNode_RecreateLightLevelReference",
   "segment": ".text",
   "sha256": "c4a1f4b96ed99ba736635cc9633a1182507a6947607a0b3cfe0a092d3a0ac772",
   "size": 149,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C5850",
-  "type": "char __thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 48,
+  "total_chunk_size": 187,
+  "type": "void __thiscall(ShadowSceneNode_DecodedLayout *self, void *backingLight)",
+  "xrefs_from_count": 62,
   "xrefs_to_count": 2
 }

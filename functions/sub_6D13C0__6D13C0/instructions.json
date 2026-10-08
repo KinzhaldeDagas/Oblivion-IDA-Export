@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D13C0",
-    "line": "push    esi",
+    "line": "push    esi; NiGeomMorpherController::Update. Requires morphData +0x50. Native timing reads NiTimeController.flags at +0x08: bit 0x20 forces cachedScaledTime +0x28 to the sentinel and weightsDirty +0x58; otherwise NiTimeController_IsUpdateUnchanged may recompute +0x28, with +0x5A able to force sampling. If target +0x30 exists and weights are dirty, interpolators are sampled at cachedScaledTime and geometry is queued/committed. Deployed Crossbow meshes prove Base/weight0=released and BowMorph/weight1=cocked, hence Cocked=.333333 and Release=.366667. Critical external Crossbow contrast: controller->flags resolves derived morphFlags +0x3C, not base timing flags +0x08, so current source clears unrelated morpher bits while native timing can overwrite its custom +0x28. If corrected to the base field, clearing 0x20 prevents the manager sentinel and clearing Active 0x08 makes IsUpdateUnchanged reuse the custom time; source-set weightsDirty still causes sampling. Oblivion 0x47C930 dispatches attached-controller Update without an A",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6D13D5",
-    "line": "jz      short loc_6D13E6",
+    "line": "jz      short loc_6D13E6; Test NiTimeController.flags at object +0x08 for bit 0x20 (interpolator/manager-controlled). This is not NiGeomMorpherController.morphFlags at +0x3C.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6D13E1",
-    "line": "fstp    dword ptr [esi+28h]",
+    "line": "fstp    dword ptr [esi+28h]; Manager-controlled path overwrites cachedScaledTime +0x28 with the native sentinel before morph interpolation.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x6D13E6",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+applicationTime]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x6D13EB",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+controllerTime]; applicationTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6D13EE",
-    "line": "call    sub_6C36B0",
+    "line": "call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6D13F7",
-    "line": "cmp     byte ptr [esi+5Ah], 0",
+    "line": "cmp     byte ptr [esi+5Ah], 0; Ordinary path asks NiTimeController_IsUpdateUnchanged; for an active controller whose application time changed, it can recompute and overwrite cachedScaledTime +0x28 before this Update samples weights.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x6D1411",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6D1413",
-    "line": "fstp    [esp+8+var_8]",
+    "line": "fstp    [esp+8+controllerTime]; unusedControllerTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6D1416",
-    "line": "call    sub_6D0B60",
+    "line": "call    NiGeomMorpherController_SampleInterpolators; Samples every morph-target interpolator and writes the resulting floats into morphWeights (+0x40; data +0x44, size +0x4A). Although the ABI consumes one float stack argument (retn 4), the native body does not read it: interpolation uses the controller's cached time at NiTimeController +0x28. Callers pass that same cached value. This is controller time, not a direct morph weight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x6D1424",
-    "line": "call    sub_404DD0",
+    "line": "call    NiParallelUpdateTaskManager_HasPendingSignal; 3DTheft decode 2026-05-16: returns g_NiParallelUpdateTaskManager != 0 && manager->byte+0x1B0 != 0. Used by morph update to decide whether to submit a NiGeomMorpherUpdateTask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x6D1454",
-    "line": "mov     ecx, ds:0B3F940h",
+    "line": "mov     ecx, ds:0B3F940h; 3DTheft decode 2026-05-16: pending manager path submits a NiGeomMorpherUpdateTask through wrapper around manager vfunc +0x60; fallback calls task cleanup vfunc +0x54 if submission fails.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x6D145D",
-    "line": "call    sub_6D0660",
+    "line": "call    NiParallelUpdateTaskManager_SubmitTaskWrapper",
     "mnemonic": "call",
     "size": 5
   },

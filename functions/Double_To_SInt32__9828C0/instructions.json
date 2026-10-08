@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9828C0",
-    "line": "cmp     dword ptr ds:0BAABE0h, 0",
+    "line": "cmp     dword ptr ds:0BAABE0h, 0; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "cmp",
     "size": 7
   },

@@ -25,7 +25,7 @@
 0x61724B: fld     [esp+120h+var_114]
 0x61724F: push    0; Seed
 0x617251: fstp    qword ptr [esp+124h+string]
-0x617255: call    GetRandomLargeInteger?
+0x617255: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61725A: cdq
 0x61725B: mov     ecx, 64h ; 'd'
 0x617260: idiv    ecx
@@ -76,15 +76,15 @@
 0x6172F2: mov     edx, ds:0B38DF8h
 0x6172F8: push    eax
 0x6172F9: push    edx
-0x6172FA: lea     eax, [esp+12Ch+string]
+0x6172FA: lea     eax, [esp+128h+string+4]
 0x6172FE: push    offset aSS; "%s %s"
 0x617303: push    eax
 0x617304: call    __sprintf
 0x617309: fld     dword ptr ds:0A46C30h
 0x61730F: add     esp, 0Ch
-0x617312: fstp    [esp+128h+duration]; duration
+0x617312: fstp    dword ptr [esp+124h+var_124]; duration
 0x617315: push    1; unk2
-0x617317: lea     ecx, [esp+12Ch+string]
+0x617317: lea     ecx, [esp+128h+string+4]
 0x61731B: push    0; unk1
 0x61731D: push    ecx; string
 0x61731E: call    GameUI_QueueMessage

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BDD40",
-    "line": "mov     ecx, ds:0B35B8Ch",
+    "line": "mov     ecx, ds:0B35B8Ch; Verified singleton teardown: destroys and frees g_DistantLODLoaderTasksByCell, then clears the global pointer.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4BDD4D",
-    "line": "call    sub_4BDC50",
+    "line": "call    DistantLODLoaderTaskMap_dtor",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4BDD53",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

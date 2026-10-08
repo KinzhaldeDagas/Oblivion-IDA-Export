@@ -1,37 +1,37 @@
-_DWORD *sub_772970()
+OblivionRenderStatePoolPrefix *sub_772970()
 {
-  _DWORD *v0; // eax
-  _DWORD *result; // eax
+  OblivionRenderStatePoolPrefix *v0; // eax
+  OblivionRenderStatePoolPrefix *result; // eax
 
-  v0 = (_DWORD *)FormHeapAlloc(0x18u);
-  if ( v0 )
+  v0 = (OblivionRenderStatePoolPrefix *)FormHeapAlloc(0x18u); /*0x772973*/
+  if ( v0 ) /*0x77297f*/
   {
-    *v0 = 0;
-    v0[1] = 0;
-    v0[2] = 0;
-    v0[3] = 8;
-    v0[4] = 8;
-    v0[5] = 0;
-    dword_B427A8 = (int)v0;
+    v0->FreeObjects00 = 0; /*0x772986*/
+    v0->Capacity04 = 0; /*0x772988*/
+    v0->FreeCount08 = 0; /*0x77298b*/
+    v0->NextBlockCount0C = 8; /*0x77298e*/
+    v0->Unknown10 = 8; /*0x772991*/
+    v0->Blocks14 = 0; /*0x772994*/
+    NiD3DRenderStateGroup_GroupPool = v0; /*0x772997*/
   }
   else
   {
-    dword_B427A8 = 0;
+    NiD3DRenderStateGroup_GroupPool = 0; /*0x77299e*/
   }
-  result = (_DWORD *)FormHeapAlloc(0x18u);
-  if ( result )
+  result = (OblivionRenderStatePoolPrefix *)FormHeapAlloc(0x18u); /*0x7729a6*/
+  if ( result ) /*0x7729b0*/
   {
-    *result = 0;
-    result[1] = 0;
-    result[2] = 0;
-    result[5] = 0;
-    result[3] = 0x10;
-    result[4] = 0x10;
-    dword_B427AC = (int)result;
+    result->FreeObjects00 = 0; /*0x7729b7*/
+    result->Capacity04 = 0; /*0x7729b9*/
+    result->FreeCount08 = 0; /*0x7729bc*/
+    result->Blocks14 = 0; /*0x7729bf*/
+    result->NextBlockCount0C = 0x10; /*0x7729c2*/
+    result->Unknown10 = 0x10; /*0x7729c5*/
+    NiD3DRenderStateGroup_EntryPool = result; /*0x7729c8*/
   }
   else
   {
-    dword_B427AC = 0;
+    NiD3DRenderStateGroup_EntryPool = 0; /*0x7729cf*/
   }
-  return result;
+  return result; /*0x7729cd*/
 }

@@ -1,41 +1,40 @@
-int __cdecl sub_79EF40(int a1, int a2, char *a3)
+// Sorts an SFrondGuide heap by repeatedly popping the last heap element and repairing the shortened heap. Used as the introsort worst-case fallback.
+void __cdecl OB_SFrondGuide_SortHeapByFuzzyArea_010201A0(
+        OB_SFrondGuide_010201A0 *first,
+        OB_SFrondGuide_010201A0 *last,
+        unsigned __int8 sorterState)
 {
-  int result; // eax
-  int v4; // esi
-  _DWORD v5[12]; // [esp-38h] [ebp-48h] BYREF
-  char *v6; // [esp-8h] [ebp-18h]
-  int v7; // [esp-4h] [ebp-14h]
+  char *cursor; // esi
+  OB_SFrondGuide_010201A0 v4; // [esp-38h] [ebp-48h] BYREF
+  int v5; // [esp-8h] [ebp-18h]
+  int v6; // [esp-4h] [ebp-14h]
 
-  result = (a2 - a1) / 0x30;
-  if ( result > 1 )
+  if ( last - first > 1 ) /*0x79ef64*/
   {
-    v4 = a2 - 0x1C;
-    do
+    cursor = (char *)&last[0xFFFFFFFF].radius; /*0x79ef6f*/
+    do /*0x79efec*/
     {
-      v7 = 0;
-      v6 = a3;
-      sub_79AD70(v5, v4 - 0x14);
-      sub_79C380(
-        a1,
-        v4 - 0x14,
-        v4 - 0x14,
-        v5[0],
-        v5[1],
-        v5[2],
-        v5[3],
-        *(float *)(v4 - 4),
-        *(float *)v4,
-        *(_BYTE *)(v4 + 4),
-        *(float *)(v4 + 8),
-        *(float *)(v4 + 0xC),
-        *(float *)(v4 + 0x10),
-        *(_DWORD *)(v4 + 0x14),
-        *(_DWORD *)(v4 + 0x18),
-        v6);
-      v4 -= 0x30;
-      result = (v4 + 0x1C - a1) / 0x30;
+      v6 = 0; /*0x79ef7d*/
+      v5 = sorterState; /*0x79ef7f*/
+      OB_stVector_SFrondVertex_CopyCtor_010201A0( /*0x79ef8f*/
+        (OB_stVector16_010201A0 *)&v4,
+        (const OB_stVector16_010201A0 *)(cursor + 0xFFFFFFEC));
+      v4.guideLength = *((float *)cursor + 0xFFFFFFFF); /*0x79ef97*/
+      v4.radius = *(float *)cursor; /*0x79ef9e*/
+      v4.frondMapIndex = cursor[4]; /*0x79efa4*/
+      v4.offsetAngle = *((float *)cursor + 2); /*0x79efae*/
+      v4.surfaceArea = *((float *)cursor + 3); /*0x79efb5*/
+      v4.fuzzySurfaceArea = *((float *)cursor + 4); /*0x79efbb*/
+      v4.sharedVertexStartIndex = *((_DWORD *)cursor + 5); /*0x79efc1*/
+      v4.verticesPerGuideVertex = *((_DWORD *)cursor + 6); /*0x79efc7*/
+      OB_SFrondGuide_PopHeap_010201A0( /*0x79efca*/
+        first,
+        (OB_SFrondGuide_010201A0 *)(cursor + 0xFFFFFFEC),
+        (OB_SFrondGuide_010201A0 *)(cursor + 0xFFFFFFEC),
+        v4,
+        v5);
+      cursor += 0xFFFFFFD0; /*0x79efd2*/
     }
-    while ( result > 1 );
+    while ( (int)&cursor[0x1C - (_DWORD)first] / 0x30 > 1 ); /*0x79efec*/
   }
-  return result;
 }

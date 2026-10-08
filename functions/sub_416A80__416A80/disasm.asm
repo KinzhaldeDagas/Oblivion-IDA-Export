@@ -1,17 +1,17 @@
-0x416A80: mov     ecx, SaveLoad_CurrentSavegame
+0x416A80: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x416A86: push    ebx
 0x416A87: push    esi
 0x416A88: xor     ebx, ebx
-0x416A8A: call    sub_45A170
+0x416A8A: call    TESSaveLoadGame_UseSaveGameBlocks
 0x416A8F: test    al, al
 0x416A91: jz      short loc_416A98
 0x416A93: mov     ebx, 6
-0x416A98: mov     ecx, dword_B3350C
+0x416A98: mov     ecx, dword ptr unk_B3350C
 0x416A9E: add     ebx, 4
 0x416AA1: xor     eax, eax
 0x416AA3: test    ecx, ecx
 0x416AA5: jbe     short loc_416ABD
-0x416AA7: mov     edx, dword_B33510
+0x416AA7: mov     edx, dword ptr unk_B33510
 0x416AAD: lea     ecx, [ecx+0]
 0x416AB0: cmp     dword ptr [edx+eax*4], 0
 0x416AB4: jnz     short loc_416AD1
@@ -31,16 +31,16 @@
 0x416AD1: mov     eax, [edx+eax*4]
 0x416AD4: jmp     short loc_416ABF
 0x416AD6: mov     eax, [eax+4]
-0x416AD9: mov     edx, EffectSettingCollection
+0x416AD9: mov     edx, ds:0B33508h
 0x416ADF: push    eax
 0x416AE0: mov     eax, [edx+4]
-0x416AE3: mov     ecx, offset EffectSettingCollection
+0x416AE3: mov     ecx, 0B33508h
 0x416AE8: call    eax
-0x416AEA: mov     edx, dword_B3350C
+0x416AEA: mov     edx, dword ptr unk_B3350C
 0x416AF0: add     eax, 1
 0x416AF3: cmp     eax, edx
 0x416AF5: jnb     short loc_416B0E
-0x416AF7: mov     esi, dword_B33510
+0x416AF7: mov     esi, dword ptr unk_B33510
 0x416AFD: lea     ecx, [ecx+0]
 0x416B00: mov     ecx, [esi+eax*4]
 0x416B03: test    ecx, ecx
@@ -61,13 +61,13 @@
 0x416B26: pop     edi
 0x416B27: cmp     Global_DebugSaveBuffer, 0
 0x416B2E: jz      short loc_416B8E
-0x416B30: mov     edx, SaveLoad_CurrentSavegame
+0x416B30: mov     edx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x416B36: mov     esi, [edx+84h]
 0x416B3C: test    esi, esi
 0x416B3E: jz      short loc_416B79
 0x416B40: mov     eax, [esi]
 0x416B42: push    eax; a1
-0x416B43: call    TESForm_LookupByFormID
+0x416B43: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x416B48: mov     ecx, [esi+5]
 0x416B4B: mov     edx, [eax]
 0x416B4D: add     esp, 4

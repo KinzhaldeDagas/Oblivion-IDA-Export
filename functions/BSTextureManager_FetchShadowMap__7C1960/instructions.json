@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C1960",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Borrows one Oblivion frustum shadow render texture by removing the head of BSTextureManager's unused pool and adding the same refcounted texture to its used pool.",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,37 +127,37 @@
   },
   {
     "ea": "0x7C199F",
-    "line": "lea     eax, [esp+24h+var_10]",
+    "line": "lea     eax, [esp+24h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C19A3",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C19A4",
-    "line": "lea     ecx, [edi+20h]",
+    "line": "lea     ecx, [edi+20h]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7C19A7",
-    "line": "call    sub_7C1740",
+    "line": "call    NiTRefPointerList__RemoveHead; Remove the borrowed texture node from the unused frustum-shadow pool.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C19AC",
-    "line": "push    eax",
+    "line": "push    eax; incoming",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C19AD",
-    "line": "lea     ecx, [esp+28h+var_14]",
+    "line": "lea     ecx, [esp+28h+var_14]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x7C19B6",
-    "line": "call    sub_55E2A0",
+    "line": "call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C19BB",
-    "line": "mov     eax, [esp+24h+var_10]",
+    "line": "mov     eax, [esp+24h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x7C19EA",
-    "line": "call    sub_7C16B0",
+    "line": "call    NiTRefPointerList__AddTail; Append the borrowed texture to the used frustum-shadow pool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -436,5 +436,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE1E0",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1E3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE1E8",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1EB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE1F0",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE1F4",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1F7",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE1FA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE1FC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE201",
+    "line": "mov     eax, offset stru_AF7220",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE206",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IMediaEventVtbl",
+  "definition": "struct IMediaEventVtbl\n{\nHRESULT (__stdcall *QueryInterface)(IMediaEvent *This, const IID *const riid, LPVOID *ppvObj);\nULONG (__stdcall *AddRef)(IMediaEvent *This);\nULONG (__stdcall *Release)(IMediaEvent *This);\nHRESULT (__stdcall *GetTypeInfoCount)(IMediaEvent *This, UINT *pctinfo);\nHRESULT (__stdcall *GetTypeInfo)(IMediaEvent *This, UINT itinfo, LCID lcid, ITypeInfo **pptinfo);\nHRESULT (__stdcall *GetIDsOfNames)(IMediaEvent *This, const IID *const riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid);\nHRESULT (__stdcall *Invoke)(IMediaEvent *This, DISPID dispidMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr);\nHRESULT (__stdcall *GetEventHandle)(IMediaEvent *This, OAEVENT *hEvent);\nHRESULT (__stdcall *GetEvent)(IMediaEvent *This, int *lEventCode, int *lParam1, int *lParam2, int msTimeout);\nHRESULT (__stdcall *WaitForCompletion)(IMediaEvent *This, int msTimeout, int *pEvCode);\nHRESULT (__stdcall *CancelDefaultHandling)(IMediaEvent *This, int lEvCode);\nHRESULT (__stdcall *RestoreDefaultHandling)(IMediaEvent *This, int lEvCode);\nHRESULT (__stdcall *FreeEventParams)(IMediaEvent *This, int lEvCode, int lParam1, int lParam2);\n}\n",
   "id": 18374686479671982707,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IMediaEvent *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IMediaEvent *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTypeInfoCount",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, UINT *pctinfo)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTypeInfo",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, UINT itinfo, LCID lcid, ITypeInfo **pptinfo)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetIDsOfNames",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, const IID *const riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Invoke",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, DISPID dispidMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetEventHandle",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, OAEVENT *hEvent)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetEvent",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, int *lEventCode, int *lParam1, int *lParam2, int msTimeout)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WaitForCompletion",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, int msTimeout, int *pEvCode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CancelDefaultHandling",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, int lEvCode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RestoreDefaultHandling",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, int lEvCode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FreeEventParams",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IMediaEvent *This, int lEvCode, int lParam1, int lParam2)"
     }
   ],
   "name": "IMediaEventVtbl",
+  "ordinal": 9126,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 52
 }

@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x5D6A9C",
-    "line": "fstp    [esp+8+a2]; a3",
+    "line": "fstp    [esp+8+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D6A9F",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D6AA4",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5D6ADE",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5D6B27",
-    "line": "fstp    [esp+8+a2]; a3",
+    "line": "fstp    [esp+8+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x5D6B31",
-    "line": "push    0FC9h; a2",
+    "line": "push    0FC9h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D6B36",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x5D6B49",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -367,19 +367,19 @@
   },
   {
     "ea": "0x5D6B69",
-    "line": "fstp    [esp+8+a2]; a3",
+    "line": "fstp    [esp+8+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D6B6C",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D6B71",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

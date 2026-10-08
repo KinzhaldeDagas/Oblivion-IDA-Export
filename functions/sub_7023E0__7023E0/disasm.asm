@@ -137,7 +137,7 @@
 0x702571: jz      short loc_7025AB
 0x702573: mov     ecx, [edi+38h]
 0x702576: push    ecx
-0x702577: call    FormHeapFree
+0x702577: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x70257C: push    104h; Size
 0x702581: call    FormHeapAlloc
 0x702586: lea     edx, [esp+130h+Src]
@@ -185,7 +185,7 @@
 0x7025FC: jmp     short loc_702665
 0x7025FE: mov     eax, [edi+38h]
 0x702601: push    eax
-0x702602: call    FormHeapFree
+0x702602: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x702607: push    104h; Size
 0x70260C: call    FormHeapAlloc
 0x702611: lea     ecx, [esp+130h+Src]
@@ -238,7 +238,7 @@
 0x702682: mov     eax, [eax+4]
 0x702685: mov     [esp+13Ch+var_114], ebx
 0x702689: call    eax
-0x70268B: mov     ecx, dword ptr [esp+13Ch+var_110]
+0x70268B: mov     ecx, [esp+13Ch+var_110]
 0x70268F: push    ebp
 0x702690: lea     edx, [esp+140h+var_110]
 0x702694: push    edx
@@ -249,7 +249,7 @@
 0x7026A2: lea     ecx, [esp+148h+var_114]
 0x7026A6: push    ecx
 0x7026A7: push    eax
-0x7026A8: mov     dword ptr [esp+150h+var_110], ebx
+0x7026A8: mov     [esp+150h+var_110], ebx
 0x7026AC: call    edx
 0x7026AE: mov     eax, [esp+150h+var_114]
 0x7026B2: push    ebp
@@ -262,7 +262,7 @@
 0x7026C6: push    edx
 0x7026C7: push    eax
 0x7026C8: mov     eax, [eax+4]
-0x7026CB: mov     dword ptr [esp+164h+var_110], ebx
+0x7026CB: mov     [esp+164h+var_110], ebx
 0x7026CF: call    eax
 0x7026D1: mov     ecx, [esp+164h+var_114]
 0x7026D5: mov     [edi+1Ch], ecx
@@ -286,7 +286,7 @@
 0x702711: lea     ecx, [esp+134h+var_10A]
 0x702715: push    ecx
 0x702716: push    eax
-0x702717: mov     dword ptr [esp+13Ch+var_110], ebp
+0x702717: mov     [esp+13Ch+var_110], ebp
 0x70271B: call    edx
 0x70271D: add     esp, 14h
 0x702720: cmp     [esp+128h+var_10A], 0
@@ -303,7 +303,7 @@
 0x702747: lea     edx, [esp+134h+var_118+2]
 0x70274B: push    edx
 0x70274C: push    esi
-0x70274D: mov     dword ptr [esp+13Ch+var_110], ebp
+0x70274D: mov     [esp+13Ch+var_110], ebp
 0x702751: call    eax
 0x702753: add     esp, 14h
 0x702756: cmp     byte ptr [esp+128h+var_118+2], 0

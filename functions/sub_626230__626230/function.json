@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_626230",
+  "chunks": [
+    [
+      "0x626230",
+      "0x626353"
+    ],
+    [
+      "0x9C3600",
+      "0x9C3626"
+    ]
+  ],
+  "chunks_sha256": "5854eab3dc2e4c913b17a55d9a54dbf2702d98610adc913593d4bd73f37d9fd9",
+  "comment_regular": "Loads DialoguePackage resume state. Modern saves (version >=0x20) restore the serialized conversation and exact cursors; no TESTopic selection, AddTopicList, or INFO result script runs in this load phase.",
+  "comment_repeatable": "Loads DialoguePackage resume state. Modern saves (version >=0x20) restore the serialized conversation and exact cursors; no TESTopic selection, AddTopicList, or INFO result script runs in this load phase.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "DialoguePackage::LoadGame",
   "end_ea": "0x626353",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_626230",
+  "name": "DialoguePackage::LoadGame",
   "segment": ".text",
   "sha256": "b8b5107e8e1a3dcd021ca8a8bf0e482f9ec5b8813673ed8d3ed0ee683e55395b",
   "size": 291,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x626230",
-  "type": "int __thiscall(_DWORD *this)",
-  "xrefs_from_count": 110,
+  "total_chunk_size": 329,
+  "type": "void __thiscall(DialoguePackageRuntimeView *this)",
+  "xrefs_from_count": 124,
   "xrefs_to_count": 1
 }

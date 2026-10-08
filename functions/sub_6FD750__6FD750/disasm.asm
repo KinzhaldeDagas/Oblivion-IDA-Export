@@ -3,7 +3,7 @@
 0x6FD755: push    ebp
 0x6FD756: push    eax
 0x6FD757: mov     ebx, ecx
-0x6FD759: call    sub_715E70
+0x6FD759: call    NiTimeController_LinkObject; Resolves streamed next-controller and target links. Next +0x34 is refcounted; target +0x30 is non-owning. For streams older than 0x0A000110, propagates the controller manager-controlled state to the linked target property flags.
 0x6FD75E: xor     ebp, ebp
 0x6FD760: cmp     [ebx+4Eh], bp
 0x6FD764: jbe     short loc_6FD7A8

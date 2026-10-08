@@ -1,6 +1,6 @@
-0x7A9C30: push    ecx
+0x7A9C30: push    ecx; MEF PERF 2026-10-07 PASS5: PERF-15 cleanup cost boundary: F already-free nodes cause F critical-section acquisitions/releases while returning nodes to global pool; active payloads are never destroyed here. Ordered-list fast path must retain this. No claim that native pooling repeatedly reallocates active nodes or that batching locks is proven safe.
 0x7A9C31: push    edi
-0x7A9C32: mov     edi, [ecx+0Ch]
+0x7A9C32: mov     edi, [ecx+0Ch]; Load BSTPersistentList+0x0C free-node chain. This helper releases only already-free bucket nodes, never active RenderPass payloads.
 0x7A9C35: test    edi, edi
 0x7A9C37: mov     [esp+8+var_4], ecx
 0x7A9C3B: jz      short loc_7A9CA3
@@ -12,7 +12,7 @@
 0x7A9C4C: lea     esp, [esp+0]
 0x7A9C50: mov     esi, edi
 0x7A9C52: mov     edi, [edi]
-0x7A9C54: push    offset stru_B33F00; lpCriticalSection
+0x7A9C54: push    0B33F00h; lpCriticalSection
 0x7A9C59: call    ebx ; EnterCriticalSection
 0x7A9C5B: call    ebp ; GetCurrentThreadId
 0x7A9C5D: mov     ds:0B33F78h, eax
@@ -26,7 +26,7 @@
 0x7A9C80: mov     ds:0B33EACh, esi
 0x7A9C86: jnz     short loc_7A9C8D
 0x7A9C88: mov     ds:0B33F78h, eax
-0x7A9C8D: push    offset stru_B33F00; lpCriticalSection
+0x7A9C8D: push    0B33F00h; lpCriticalSection
 0x7A9C92: call    dword ptr ds:0A28074h
 0x7A9C98: test    edi, edi
 0x7A9C9A: jnz     short loc_7A9C50
@@ -34,7 +34,7 @@
 0x7A9CA0: pop     esi
 0x7A9CA1: pop     ebp
 0x7A9CA2: pop     ebx
-0x7A9CA3: mov     dword ptr [ecx+0Ch], 0
+0x7A9CA3: mov     dword ptr [ecx+0Ch], 0; Clear the local free-node chain after returning those nodes to the global pool.
 0x7A9CAA: mov     ecx, [ecx+8]
 0x7A9CAD: test    ecx, ecx
 0x7A9CAF: pop     edi

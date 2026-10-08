@@ -1,1 +1,5 @@
-stringanalysis_flags
+enum stringanalysis_flags : __int32
+{
+SCRIPT_STRING_ANALYSIS_FLAGS_SIZE = 0x1,
+SCRIPT_STRING_ANALYSIS_FLAGS_INVALID = 0x2,
+};

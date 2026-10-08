@@ -9,7 +9,7 @@
 0x684ED3: mov     ecx, edi
 0x684ED5: call    sub_538B60
 0x684EDA: push    edi
-0x684EDB: call    FormHeapFree
+0x684EDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x684EE0: add     esp, 4
 0x684EE3: mov     dword ptr [esi+30h], 0
 0x684EEA: lea     ecx, [esi+14h]

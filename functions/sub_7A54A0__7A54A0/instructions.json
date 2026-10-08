@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A54A0",
-    "line": "sub     esp, 408h",
+    "line": "sub     esp, 408h; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7A54FD",
-    "line": "push    eax; MaxCount",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x7A5502",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A5503",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A5505",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },

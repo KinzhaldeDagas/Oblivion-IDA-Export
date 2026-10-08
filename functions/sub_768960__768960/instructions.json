@@ -28,5 +28,215 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x77A9B0",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x77A9B1",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x77A9B2",
+    "line": "mov     ebx, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9B4",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9B6",
+    "line": "cmp     [ebx+38h], edi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x77A9B9",
+    "line": "jbe     short loc_77AA02",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9BB",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x77A9BC",
+    "line": "lea     esp, [esp+0]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x77A9C0",
+    "line": "mov     eax, [ebx+44h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x77A9C3",
+    "line": "mov     esi, [eax+edi*4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x77A9C6",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9C8",
+    "line": "jz      short loc_77A9F9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9CA",
+    "line": "add     dword ptr [esi+60h], 1",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x77A9CE",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9D0",
+    "line": "call    sub_75F9D0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x77A9D5",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9D7",
+    "line": "jz      short loc_77A9EC",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9D9",
+    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x77A9DD",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9DF",
+    "line": "mov     edx, [edx+98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x77A9E5",
+    "line": "push    0",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9E7",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x77A9E8",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9EA",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9EC",
+    "line": "add     dword ptr [esi+60h], 0FFFFFFFFh",
+    "mnemonic": "add",
+    "size": 4
+  },
+  {
+    "ea": "0x77A9F0",
+    "line": "jnz     short loc_77A9F9",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9F2",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x77A9F4",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x77A9F9",
+    "line": "add     edi, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x77A9FC",
+    "line": "cmp     edi, [ebx+38h]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x77A9FF",
+    "line": "jb      short loc_77A9C0",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x77AA01",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x77AA02",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x77AA03",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x77AA04",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

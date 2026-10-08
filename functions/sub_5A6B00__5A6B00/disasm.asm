@@ -41,9 +41,9 @@
 0x5A6B78: mov     esi, eax
 0x5A6B7A: call    InterfaceManager_GetDepth
 0x5A6B7F: fstp    [esp+2Ch+var_14]
-0x5A6B83: mov     ecx, [esi+68h]; TileWindow *
+0x5A6B83: mov     ecx, [esi+68h]; this
 0x5A6B86: push    offset aDataMenusMai_1; "Data\\Menus\\Main\\hud_main_menu.xml"
-0x5A6B8B: call    Menu_LoadXML
+0x5A6B8B: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5A6B90: mov     ebp, eax
 0x5A6B92: mov     ecx, ebp
 0x5A6B94: call    Tile_GetParentMenu
@@ -97,10 +97,10 @@
 0x5A6C37: jp      short loc_5A6C4D
 0x5A6C39: fld     [esp+2Ch+var_14]
 0x5A6C3D: push    ecx
-0x5A6C3E: fstp    [esp+30h+a2]; a3
-0x5A6C41: push    0FABh; a2
+0x5A6C3E: fstp    [esp+30h+a2]; value
+0x5A6C41: push    0FABh; propertyCode
 0x5A6C46: mov     ecx, ebp; this
-0x5A6C48: call    Tile_SetFloat
+0x5A6C48: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A6C4D: push    8
 0x5A6C4F: mov     ecx, edi
 0x5A6C51: call    sub_5A5B50
@@ -166,15 +166,15 @@
 0x5A6D1E: fild    dword ptr ds:0B37BC0h
 0x5A6D24: push    ecx
 0x5A6D25: mov     ecx, [edi+44h]; this
-0x5A6D28: fstp    [esp+30h+a2]; a3
-0x5A6D2B: push    0FB0h; a2
-0x5A6D30: call    Tile_SetFloat
+0x5A6D28: fstp    [esp+30h+a2]; value
+0x5A6D2B: push    0FB0h; propertyCode
+0x5A6D30: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A6D35: fild    dword ptr ds:0B37BC8h
 0x5A6D3B: push    ecx
 0x5A6D3C: mov     ecx, [edi+44h]; this
-0x5A6D3F: fstp    [esp+30h+a2]; a3
-0x5A6D42: push    0FB1h; a2
-0x5A6D47: call    Tile_SetFloat
+0x5A6D3F: fstp    [esp+30h+a2]; value
+0x5A6D42: push    0FB1h; propertyCode
+0x5A6D47: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A6D4C: cmp     byte ptr [esp+2Ch+var_18+3], 0
 0x5A6D51: jnz     short loc_5A6D62
 0x5A6D53: mov     ecx, ds:0B33D84h
@@ -224,3 +224,12 @@
 0x5A6DCF: pop     ebx
 0x5A6DD0: add     esp, 18h
 0x5A6DD3: retn
+0x9C2A40: lea     ecx, [ebp-14h]; void *
+0x9C2A43: jmp     BSStringT_Clear
+0x9C2A48: mov     edx, [esp+arg_4]
+0x9C2A4C: lea     eax, [edx-1Ch]
+0x9C2A4F: mov     ecx, [edx-20h]
+0x9C2A52: xor     ecx, eax
+0x9C2A54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2A59: mov     eax, offset stru_AEB7F4
+0x9C2A5E: jmp     ___CxxFrameHandler3

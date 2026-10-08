@@ -86,11 +86,147 @@
 0x488F6E: fnstsw  ax
 0x488F70: test    ah, 41h
 0x488F73: jz      short loc_488F83
-0x488F75: push    1Dh
-0x488F77: mov     ecx, esi
-0x488F79: call    Actor_GetSkillMasteryLevel
+0x488F75: push    1Dh; actorValue
+0x488F77: mov     ecx, esi; this
+0x488F79: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x488F7E: cmp     eax, 4
 0x488F81: jl      short loc_488F8B
 0x488F83: fld     [esp+20h+var_C]
 0x488F87: fstp    [esp+20h+var_10]
 0x488F8B: fld     [esp+20h+var_10]
+0x488F99: cmp     [esp+1Ch+var_8], 0
+0x488F9E: jz      loc_4890B0
+0x488FA4: test    esi, esi
+0x488FA6: jz      loc_4890B0
+0x488FAC: cmp     dword ptr [esi+34h], 3
+0x488FB0: jnz     short loc_48902E
+0x488FB2: fild    dword ptr [ebx+4]
+0x488FB5: fstp    [esp+1Ch+var_C]
+0x488FB9: fldz
+0x488FBB: fcomp   [esp+1Ch+var_C]
+0x488FBF: fnstsw  ax
+0x488FC1: test    ah, 44h
+0x488FC4: jnp     loc_488EF4
+0x488FCA: add     esi, 24h ; '$'
+0x488FCD: jz      loc_488EF4
+0x48902E: mov     ecx, [edi+8]
+0x489031: push    ecx; a1
+0x489032: call    TESForm_GetEnchantableFormCharge
+0x489037: movzx   edx, ax
+0x48903A: mov     eax, [esi+24h]
+0x48903D: mov     [esp+20h+var_8], edx
+0x489041: mov     edx, [eax]
+0x489043: lea     ecx, [esi+24h]
+0x489046: fild    [esp+20h+var_8]
+0x48904A: add     esp, 4
+0x48904D: push    0
+0x48904F: fstp    [esp+20h+var_C]
+0x489053: call    edx
+0x489055: mov     eax, [edi+8]
+0x489058: fstp    [esp+20h+var_C]
+0x48905C: cmp     byte ptr [eax+4], 15h
+0x489060: jnz     short loc_489082
+0x489062: mov     ecx, (offset flt_B37ED0+3A8h)
+0x489067: call    GameSetting_GetSafeFloatPointer
+0x48906C: fld     dword ptr [eax]
+0x48906E: fmul    [esp+20h+var_C]
+0x489072: fstp    [esp+20h+var_10]
+0x489076: fild    dword ptr [ebx+4]
+0x489079: fadd    [esp+20h+var_10]
+0x48907D: jmp     loc_488EF0
+0x489082: fld     [esp+20h+var_C]
+0x489086: mov     ecx, [ebx+4]
+0x489089: sub     esp, 0Ch
+0x48908C: fstp    [esp+2Ch+var_24]; float
+0x489090: mov     [esp+2Ch+var_8], ecx
+0x489094: fld     [esp+2Ch+var_10]
+0x489098: fstp    [esp+2Ch+var_28]; float
+0x48909C: fild    [esp+2Ch+var_8]
+0x4890A0: fstp    [esp+2Ch+var_2C]; float
+0x4890A3: call    Calc_EnchantedWeaponStaffValue
+0x4890A8: add     esp, 0Ch
+0x4890AB: jmp     loc_488EF0
+0x4890B0: fild    dword ptr [ebx+4]
+0x4890B3: jmp     loc_488EF0
+0x4890B8: mov     esi, [esp+20h+targetNpc]
+0x4890BC: mov     ecx, ds:0B333C4h; this
+0x4890C2: push    esi; targetNpc
+0x4890C3: call    calculateItemMultiplicationFromDisposition
+0x4890C8: fstp    dword ptr [esp+20h]
+0x4890CC: mov     ecx, ds:0B333C4h; this
+0x4890D2: fild    dword ptr [ecx+11Ch]
+0x4890D8: push    1Dh; actorValue
+0x4890DA: fmul    qword ptr ds:0A3D8E8h
+0x4890E0: fadd    dword ptr [esp+24h]
+0x4890E4: fstp    dword ptr [esp+24h]
+0x4890E8: fld     dword ptr [esp+24h]
+0x4890EC: fmul    [esp+24h+var_10]
+0x4890F0: fstp    [esp+24h+var_10]
+0x4890F4: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
+0x4890F9: cmp     eax, 1
+0x4890FC: jge     short loc_48912E
+0x4890FE: push    1
+0x489100: mov     ecx, edi
+0x489102: call    ContainerEntryExtraData_GetHealth
+0x489107: fstp    dword ptr [esp+20h]
+0x48910B: fldz
+0x48910D: fld     dword ptr [esp+20h]
+0x489111: fcom    st(1)
+0x489113: fnstsw  ax
+0x489115: fstp    st(1)
+0x489117: test    ah, 1
+0x48911A: jnz     short loc_48912C
+0x48911C: fmul    qword ptr ds:0A3B150h
+0x489122: fmul    [esp+20h+var_10]
+0x489126: fstp    [esp+20h+var_10]
+0x48912A: jmp     short loc_48912E
+0x48912C: fstp    st
+0x48912E: fld     [esp+20h+var_10]
+0x489132: push    ecx
+0x489133: fstp    [esp+24h+var_24]; float
+0x489136: call    sub_484370
+0x48913B: fstp    [esp+24h+var_10]
+0x48913F: add     esp, 4
+0x489142: fld     [esp+20h+var_10]
+0x489146: fld     [esp+20h+var_C]
+0x48914A: fcompp
+0x48914C: fnstsw  ax
+0x48914E: test    ah, 5
+0x489151: jnp     short loc_489165
+0x489153: mov     ecx, ds:0B333C4h; this
+0x489159: push    1Dh; actorValue
+0x48915B: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
+0x489160: cmp     eax, 4
+0x489163: jl      short loc_48916D
+0x489165: fld     [esp+20h+var_C]
+0x489169: fstp    [esp+20h+var_10]
+0x48916D: mov     ecx, esi
+0x48916F: call    sub_5FAA70
+0x489174: test    eax, eax
+0x489176: mov     [esp+20h], eax
+0x48917A: fild    dword ptr [esp+20h]
+0x48917E: jge     short loc_489186
+0x489180: fadd    dword ptr ds:0A2FC78h
+0x489186: fstp    dword ptr [esp+20h]
+0x48918A: fld     [esp+20h+var_10]
+0x48918E: fld     dword ptr [esp+20h]
+0x489192: fcom    st(1)
+0x489194: fnstsw  ax
+0x489196: test    ah, 5
+0x489199: jp      short loc_4891AF
+0x48919B: pop     edi
+0x48919C: fstp    st(1)
+0x48919E: pop     esi
+0x48919F: fstp    [esp+18h+var_10]
+0x4891A3: fld     [esp+18h+var_10]
+0x4891A7: pop     ebp
+0x4891A8: pop     ebx
+0x4891A9: add     esp, 0Ch
+0x4891AC: retn    0Ch
+0x4891AF: pop     edi
+0x4891B0: fstp    st
+0x4891B2: pop     esi
+0x4891B3: pop     ebp
+0x4891B4: pop     ebx
+0x4891B5: add     esp, 0Ch
+0x4891B8: retn    0Ch

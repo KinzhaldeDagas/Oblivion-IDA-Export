@@ -1,70 +1,117 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IAudioSessionEventsVtbl_0",
+  "definition": "typedef IAudioSessionEventsVtbl IAudioSessionEventsVtbl_0\n",
   "id": 18374686479672029920,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IAudioSessionEvents_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IAudioSessionEvents_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnDisplayNameChanged",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, LPCWSTR, LPCGUID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnIconPathChanged",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, LPCWSTR, LPCGUID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnSimpleVolumeChanged",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, float, BOOL, LPCGUID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnChannelVolumeChanged",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, DWORD, float *, DWORD, LPCGUID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnGroupingParamChanged",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, LPCGUID, LPCGUID)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnStateChanged",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, AudioSessionState)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "OnSessionDisconnected",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IAudioSessionEvents_0 *, AudioSessionDisconnectReason_0)"
     }
   ],
   "name": "IAudioSessionEventsVtbl_0",
+  "ordinal": 2242,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

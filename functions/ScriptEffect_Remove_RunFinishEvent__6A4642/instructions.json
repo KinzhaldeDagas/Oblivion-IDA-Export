@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A4642",
-    "line": "mov     ecx, [esi+20h]",
+    "line": "mov     ecx, [esi+20h]; RunFinishEvent chunk: resolve target through caster vfunc +4, call ScriptEffect_RunFinishEvent(script,target,eventList), then destroy the event list.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x6A4654",
-    "line": "call    sub_4F9F30",
+    "line": "call    ScriptEffect_RunFinishEvent; Wrapper for ScriptEffectFinish: calls ScriptRunner_RunEvent with start=0, finish=1, elapsedSeconds=0.0.",
     "mnemonic": "call",
     "size": 5
   }

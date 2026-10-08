@@ -6,7 +6,7 @@ int __cdecl sub_76E610(int a1)
   unsigned __int16 v5; // cx
   unsigned __int16 v6; // bp
   int v7; // ebx
-  int v8; // eax
+  unsigned int v8; // eax
   int v10; // edx
   int v11; // ecx
   int v12; // ebp
@@ -15,130 +15,127 @@ int __cdecl sub_76E610(int a1)
   int v15; // edx
   int v16; // edx
   _DWORD *v17; // [esp-8h] [ebp-24h]
-  size_t v18; // [esp-4h] [ebp-20h]
-  int v19; // [esp+10h] [ebp-Ch]
-  int v20; // [esp+14h] [ebp-8h]
-  unsigned int v21; // [esp+14h] [ebp-8h]
-  int v22; // [esp+18h] [ebp-4h]
+  int v18; // [esp+10h] [ebp-Ch]
+  int v19; // [esp+14h] [ebp-8h]
+  unsigned int v20; // [esp+14h] [ebp-8h]
+  int v21; // [esp+18h] [ebp-4h]
+  int v22; // [esp+20h] [ebp+4h]
   int v23; // [esp+20h] [ebp+4h]
-  int v24; // [esp+20h] [ebp+4h]
 
-  v2 = *(_DWORD **)(a1 + 0x10);
-  v3 = *(_DWORD *)(a1 + 0xC);
-  v4 = *(_DWORD **)(a1 + 0x24);
-  v5 = *(_WORD *)(a1 + 4);
-  v6 = 0;
-  v19 = 0;
-  v23 = v3;
-  if ( !v2 )
+  v2 = *(_DWORD **)(a1 + 0x10); /*0x76e61b*/
+  v3 = *(_DWORD *)(a1 + 0xC); /*0x76e61e*/
+  v4 = *(_DWORD **)(a1 + 0x24); /*0x76e621*/
+  v5 = *(_WORD *)(a1 + 4); /*0x76e624*/
+  v6 = 0; /*0x76e628*/
+  v18 = 0; /*0x76e62c*/
+  v22 = v3; /*0x76e630*/
+  if ( !v2 ) /*0x76e634*/
   {
-    v7 = 0;
-    if ( *(_WORD *)(a1 + 8) )
+    v7 = 0; /*0x76e636*/
+    if ( *(_WORD *)(a1 + 8) ) /*0x76e638*/
     {
-      v8 = *(_DWORD *)(a1 + 0x1C);
-      do
+      v8 = *(_DWORD *)(a1 + 0x1C); /*0x76e642*/
+      do /*0x76e662*/
       {
-        _memset(v4, 0, v8);
-        v8 = *(_DWORD *)(a1 + 0x1C);
-        v4 = (_DWORD *)((char *)v4 + *(_DWORD *)(a1 + 0x20));
-        v19 += v8;
-        ++v7;
+        _memset((int)v4, 0, v8); /*0x76e649*/
+        v8 = *(_DWORD *)(a1 + 0x1C); /*0x76e64e*/
+        v4 = (_DWORD *)((char *)v4 + *(_DWORD *)(a1 + 0x20)); /*0x76e651*/
+        v18 += v8; /*0x76e654*/
+        ++v7; /*0x76e658*/
       }
-      while ( (unsigned __int16)v7 < *(_WORD *)(a1 + 8) );
-      return v19;
+      while ( (unsigned __int16)v7 < *(_WORD *)(a1 + 8) ); /*0x76e662*/
+      return v18; /*0x76e66f*/
     }
-    return v19;
+    return v18; /*0x76e7e7*/
   }
-  if ( v3 )
+  if ( v3 ) /*0x76e672*/
   {
-    if ( !*(_WORD *)(a1 + 8) )
-      return v19;
-    v20 = v5;
-    while ( 1 )
+    if ( !*(_WORD *)(a1 + 8) ) /*0x76e678*/
+      return v18; /*0x76e678*/
+    v19 = v5; /*0x76e681*/
+    while ( 1 ) /*0x76e6a7*/
     {
-      LODWORD(v18) = *(_DWORD *)(a1 + 0x14);
-      v17 = &v2[v20 * *(unsigned __int16 *)(v3 + 2 * v6++)];
-      memcpy(v4, v17, v18);
-      v4 = (_DWORD *)((char *)v4 + *(_DWORD *)(a1 + 0x20));
-      v19 += *(_DWORD *)(a1 + 0x1C);
-      if ( v6 >= *(_WORD *)(a1 + 8) )
-        break;
-      v3 = v23;
+      v17 = &v2[v19 * *(unsigned __int16 *)(v3 + 2 * v6++)]; /*0x76e6a7*/
+      memcpy(v4, v17, *(_DWORD *)(a1 + 0x14)); /*0x76e6ac*/
+      v4 = (_DWORD *)((char *)v4 + *(_DWORD *)(a1 + 0x20)); /*0x76e6b4*/
+      v18 += *(_DWORD *)(a1 + 0x1C); /*0x76e6b7*/
+      if ( v6 >= *(_WORD *)(a1 + 8) ) /*0x76e6c2*/
+        break; /*0x76e6c2*/
+      v3 = v22; /*0x76e690*/
     }
-    return v19;
+    return v18; /*0x76e6c4*/
   }
   else
   {
-    v10 = *(_DWORD *)(a1 + 0x14);
-    v11 = *(_DWORD *)(a1 + 0x20);
-    v12 = *(_DWORD *)(a1 + 0x18);
-    v24 = *(_DWORD *)(a1 + 0x1C);
-    v13 = *(unsigned __int16 *)(a1 + 8);
-    v22 = v11;
-    switch ( v10 )
+    v10 = *(_DWORD *)(a1 + 0x14); /*0x76e6d3*/
+    v11 = *(_DWORD *)(a1 + 0x20); /*0x76e6d9*/
+    v12 = *(_DWORD *)(a1 + 0x18); /*0x76e6dc*/
+    v23 = *(_DWORD *)(a1 + 0x1C); /*0x76e6df*/
+    v13 = *(unsigned __int16 *)(a1 + 8); /*0x76e6e3*/
+    v21 = v11; /*0x76e6e7*/
+    switch ( v10 ) /*0x76e6eb*/
     {
-      case 8:
-        if ( *(_WORD *)(a1 + 8) )
+      case 8: /*0x76e6eb*/
+        if ( *(_WORD *)(a1 + 8) ) /*0x76e6e3*/
         {
-          v16 = *(unsigned __int16 *)(a1 + 8);
-          v19 = v24 * v13;
-          do
+          v16 = *(unsigned __int16 *)(a1 + 8); /*0x76e7c9*/
+          v18 = v23 * v13; /*0x76e7d0*/
+          do /*0x76e7e5*/
           {
-            *v4 = *v2;
-            v4[1] = v2[1];
-            v2 = (_DWORD *)((char *)v2 + v12);
-            v4 = (_DWORD *)((char *)v4 + v11);
-            --v16;
+            *v4 = *v2; /*0x76e7d6*/
+            v4[1] = v2[1]; /*0x76e7db*/
+            v2 = (_DWORD *)((char *)v2 + v12); /*0x76e7de*/
+            v4 = (_DWORD *)((char *)v4 + v11); /*0x76e7e0*/
+            --v16; /*0x76e7e2*/
           }
-          while ( v16 );
+          while ( v16 ); /*0x76e7e5*/
         }
-        return v19;
-      case 0xC:
-        if ( !*(_WORD *)(a1 + 8) )
-          return v19;
-        v15 = *(unsigned __int16 *)(a1 + 8);
-        do
+        return v18; /*0x76e7e5*/
+      case 0xC: /*0x76e6eb*/
+        if ( !*(_WORD *)(a1 + 8) ) /*0x76e78d*/
+          return v18; /*0x76e78d*/
+        v15 = *(unsigned __int16 *)(a1 + 8); /*0x76e78f*/
+        do /*0x76e7b7*/
         {
-          *v4 = *v2;
-          v4[1] = v2[1];
-          v4[2] = v2[2];
-          v2 = (_DWORD *)((char *)v2 + v12);
-          v4 = (_DWORD *)((char *)v4 + v11);
-          --v15;
+          *v4 = *v2; /*0x76e7a2*/
+          v4[1] = v2[1]; /*0x76e7a7*/
+          v4[2] = v2[2]; /*0x76e7ad*/
+          v2 = (_DWORD *)((char *)v2 + v12); /*0x76e7b0*/
+          v4 = (_DWORD *)((char *)v4 + v11); /*0x76e7b2*/
+          --v15; /*0x76e7b4*/
         }
-        while ( v15 );
-        return v24 * v13;
-      case 0x10:
-        if ( !*(_WORD *)(a1 + 8) )
-          return v19;
-        v14 = *(unsigned __int16 *)(a1 + 8);
-        do
+        while ( v15 ); /*0x76e7b7*/
+        return v23 * v13; /*0x76e7b9*/
+      case 0x10: /*0x76e6eb*/
+        if ( !*(_WORD *)(a1 + 8) ) /*0x76e74d*/
+          return v18; /*0x76e74d*/
+        v14 = *(unsigned __int16 *)(a1 + 8); /*0x76e753*/
+        do /*0x76e77d*/
         {
-          *v4 = *v2;
-          v4[1] = v2[1];
-          v4[2] = v2[2];
-          v4[3] = v2[3];
-          v2 = (_DWORD *)((char *)v2 + v12);
-          v4 = (_DWORD *)((char *)v4 + v11);
-          --v14;
+          *v4 = *v2; /*0x76e762*/
+          v4[1] = v2[1]; /*0x76e767*/
+          v4[2] = v2[2]; /*0x76e76d*/
+          v4[3] = v2[3]; /*0x76e773*/
+          v2 = (_DWORD *)((char *)v2 + v12); /*0x76e776*/
+          v4 = (_DWORD *)((char *)v4 + v11); /*0x76e778*/
+          --v14; /*0x76e77a*/
         }
-        while ( v14 );
-        return v24 * v13;
+        while ( v14 ); /*0x76e77d*/
+        return v23 * v13; /*0x76e77f*/
       default:
-        v21 = 0;
-        if ( !*(_WORD *)(a1 + 8) )
-          return v19;
-        do
+        v20 = 0; /*0x76e701*/
+        if ( !*(_WORD *)(a1 + 8) ) /*0x76e709*/
+          return v18; /*0x76e709*/
+        do /*0x76e73d*/
         {
-          LODWORD(v18) = *(_DWORD *)(a1 + 0x14);
-          memcpy(v4, v2, v18);
-          v4 = (_DWORD *)((char *)v4 + v22);
-          v19 += v24;
-          v2 = (_DWORD *)((char *)v2 + v12);
-          ++v21;
+          memcpy(v4, v2, *(_DWORD *)(a1 + 0x14)); /*0x76e716*/
+          v4 = (_DWORD *)((char *)v4 + v21); /*0x76e727*/
+          v18 += v23; /*0x76e72b*/
+          v2 = (_DWORD *)((char *)v2 + v12); /*0x76e735*/
+          ++v20; /*0x76e739*/
         }
-        while ( v21 < *(unsigned __int16 *)(a1 + 8) );
-        return v19;
+        while ( v20 < *(unsigned __int16 *)(a1 + 8) ); /*0x76e73d*/
+        return v18; /*0x76e73f*/
     }
   }
 }

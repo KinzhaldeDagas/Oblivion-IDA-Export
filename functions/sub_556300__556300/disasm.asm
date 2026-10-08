@@ -1,4 +1,4 @@
-0x556300: mov     edx, [ecx+4]
+0x556300: mov     edx, [ecx+4]; Return the number of 64-byte EGT basis records in this bank.
 0x556303: test    edx, edx
 0x556305: jnz     short loc_55630A
 0x556307: xor     eax, eax

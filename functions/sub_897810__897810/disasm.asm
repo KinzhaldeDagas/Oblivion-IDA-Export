@@ -5,7 +5,7 @@
 0x897817: mov     esi, ecx
 0x897819: call    sub_711CB0
 0x89781E: mov     ecx, esi
-0x897820: call    sub_452A60
+0x897820: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x897825: test    eax, eax
 0x897827: jz      short loc_89783A
 0x897829: mov     cx, [eax+18h]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x543BB0",
-    "line": "push    esi",
+    "line": "push    esi; Changes Oblivion Sky mode at +0xDC, invoking the appropriate setup/teardown path when crossing between modes 0/1 and 2/3. Fallout was consulted afterward and corroborates Sky::SetMode terminology.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x543BBC",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+mode]",
     "mnemonic": "mov",
     "size": 4
   },

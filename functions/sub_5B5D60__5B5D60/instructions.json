@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x5B5D61",
-    "line": "call    sub_578D70",
+    "line": "call    InterfaceManager_ConsumeMessageButton",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5B5D90",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; ContinueFromLastSave fidelity decode: main-menu Continue loads first/selected entry from SaveLoad_CurrentSavegame+0x6C; this list exists only after save enumeration, not a direct highest-number API.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x5B5DA3",
-    "line": "push    0",
+    "line": "push    0; ContinueFromLastSave decode: main-menu Continue loads selected/current save with TESSaveLoadGame_LoadGame(this, selectedStem, 0), then calls sub_459400 and sub_5B5960 on success.",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5B5DA8",
-    "line": "call    TESSaveLoadGame_LoadGame",
+    "line": "call    TESSaveLoadGame_LoadGame;  Verified map lifecycle: allocates incomingChangesMap at +4, stores save records there, reconciles pre-load currentChangesMap at +0 after form loading, then swaps in incoming map via 464440. The map roles are based on direct stores/lookups and final pointer assignments.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5B5DBE",
-    "line": "jmp     sub_5B5960",
+    "line": "jmp     sub_5B5960; ContinueFromLastSave decode: post-success main-menu Continue cleanup. Sets tile float 0x1772 on menu 0x414 and jumps to Menu close/transition helper sub_584740.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -229,25 +229,25 @@
   },
   {
     "ea": "0x5B5DD0",
-    "line": "push    eax",
+    "line": "push    eax; firstButton",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5B5DD1",
-    "line": "push    0",
+    "line": "push    0; baseButtonIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5B5DD3",
-    "line": "push    0",
+    "line": "push    0; callback",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5B5DD5",
-    "line": "push    ecx",
+    "line": "push    ecx; message",
     "mnemonic": "push",
     "size": 1
   },

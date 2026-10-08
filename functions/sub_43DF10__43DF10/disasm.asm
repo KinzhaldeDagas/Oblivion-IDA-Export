@@ -36,7 +36,7 @@
 0x43DF81: mov     esi, [esp+3Ch+var_28]
 0x43DF85: jz      short loc_43DFC1
 0x43DF87: mov     ecx, [esp+3Ch+var_24]; this
-0x43DF8B: call    TESObjectREFR_GetParentCell
+0x43DF8B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x43DF90: mov     ebp, eax
 0x43DF92: cmp     ebp, ebx
 0x43DF94: jz      short loc_43DFC1
@@ -44,7 +44,7 @@
 0x43DF99: mov     edx, [esi+14h]
 0x43DF9C: mov     cl, 10h
 0x43DF9E: call    __allshr
-0x43DFA3: mov     ecx, TES
+0x43DFA3: mov     ecx, ds:0B333A0h
 0x43DFA9: push    ebx
 0x43DFAA: push    ebp
 0x43DFAB: movzx   edi, al
@@ -80,3 +80,16 @@
 0x43DFFB: pop     ebx
 0x43DFFC: add     esp, 28h
 0x43DFFF: retn
+0x435A60: mov     dword ptr [ecx], offset ??_7LockFreeMapIterator@?$LockFreeMap@PAVTESObjectREFR@@V?$NiPointer@VQueuedReference@@@@@@6B@; const LockFreeMap<TESObjectREFR *,NiPointer<QueuedReference>>::LockFreeMapIterator::`vftable'
+0x435A66: retn
+0x9ACDA0: lea     ecx, [ebp-1Ch]
+0x9ACDA3: jmp     loc_435A60
+0x9ACDA8: lea     ecx, [ebp-28h]; void *
+0x9ACDAB: jmp     sub_4BDDC0
+0x9ACDB0: mov     edx, [esp+arg_4]
+0x9ACDB4: lea     eax, [edx-2Ch]
+0x9ACDB7: mov     ecx, [edx-30h]
+0x9ACDBA: xor     ecx, eax
+0x9ACDBC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACDC1: mov     eax, offset stru_AD9A10
+0x9ACDC6: jmp     ___CxxFrameHandler3

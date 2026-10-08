@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x798CC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-24): True CLeafGeometry::InitLods entry (range 0x798CC0..0x799318). Iterates every explicit leaf LOD and copies each CBillboardLeaf+0x14 packed color into that LOD's SLodGeometry+0x24 packedColors array.",
     "mnemonic": "push",
     "size": 2
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x798D53",
-    "line": "push    offset sub_7981E0; a5",
+    "line": "push    offset OB_CLeafGeometry_SLodGeometry_dtor_010201A0; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x798D58",
-    "line": "push    offset sub_7981C0; a4",
+    "line": "push    offset OB_SLodGeometry_ctor_010201A0; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x798E0D",
-    "line": "mov     [esp+2Ch+var_10], edx",
+    "line": "mov     [esp+2Ch+var_10], edx; InitLods reads CBillboardLeaf texture index byte (+0x40) to address the per-LOD leaf vertex table.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x799023",
-    "line": "mov     [edi+10h], eax",
+    "line": "mov     [edi+10h], eax; Allocates SLodGeometry+0x10 alternate-index byte array once during CLeafGeometry InitLods, called only from first successful CSpeedTreeRT::Compute.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x79904C",
-    "line": "mov     [ebx+edx], al",
+    "line": "mov     [ebx+edx], al; Copies each CBillboardLeaf+0x40 alternate texture-index byte into the persistent SLodGeometry+0x10 array. Later GetGeometry and cache invalidation do not modify this array.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2293,7 +2293,7 @@
   },
   {
     "ea": "0x799128",
-    "line": "add     edx, [ebp+14h]",
+    "line": "add     edx, [ebp+14h]; InitLods selects each card's authored 8-float texcoord table by its alternate texture index: m_pLeafTexCoords + 0x20 * index.",
     "mnemonic": "add",
     "size": 3
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x79915D",
-    "line": "mov     [edi+24h], eax",
+    "line": "mov     [edi+24h], eax; Allocate one packedColors dword per leaf in this LOD at SLodGeometry+0x24.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x799186",
-    "line": "mov     [edx+ebx*4], eax",
+    "line": "mov     [edx+ebx*4], eax; Copy CBillboardLeaf+0x14 packedColor into this LOD's SLodGeometry+0x24 array. This is the authoritative source later sampled by the leaf builder.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3310,5 +3310,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8CE0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CE3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CE4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8CE9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CEA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B8CEB",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B8CEF",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CF2",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B8CF5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B8CF7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8CFC",
+    "line": "mov     eax, offset stru_AE3140",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8D01",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

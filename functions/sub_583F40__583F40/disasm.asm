@@ -24,8 +24,8 @@
 0x583F83: jz      loc_5841CA
 0x583F89: cmp     dword ptr [esi+4], 0
 0x583F8D: jz      loc_5841CA
-0x583F93: push    esi
-0x583F94: call    sub_583D50
+0x583F93: push    esi; index
+0x583F94: call    InterfaceManager__GetTimerPercent; Verified: searches timer by owner/index; missing timer returns 1; positive duration returns elapsed/duration clamped to [0,1]. Consumed by menu fade processing and Tile animation.
 0x583F99: fstp    [esp+28h+var_10]
 0x583F9D: fld     [esp+28h+var_10]
 0x583FA1: add     esp, 4
@@ -74,9 +74,9 @@
 0x584038: fld1
 0x58403A: push    ecx
 0x58403B: mov     ecx, [esi+4]; this
-0x58403E: fstp    [esp+28h+a2]; a3
-0x584041: push    0FA1h; a2
-0x584046: call    Tile_SetFloat
+0x58403E: fstp    [esp+28h+a2]; value
+0x584041: push    0FA1h; propertyCode
+0x584046: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58404B: fldz
 0x58404D: mov     ecx, [esi+4]
 0x584050: mov     edx, [ecx+24h]
@@ -96,11 +96,11 @@
 0x584085: jmp     loc_5841CA
 0x58408A: fld     dword ptr ds:0A379B4h
 0x584090: push    ecx
-0x584091: fstp    [esp+28h+a2]; a3
+0x584091: fstp    [esp+28h+a2]; value
 0x584094: mov     byte ptr [edi+9], 1
 0x584098: mov     ecx, [esi+4]; this
-0x58409B: push    0FA1h; a2
-0x5840A0: call    Tile_SetFloat
+0x58409B: push    0FA1h; propertyCode
+0x5840A0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5840A5: fld     [esp+24h+var_10]
 0x5840A9: fld1
 0x5840AB: mov     eax, [esi+4]
@@ -145,11 +145,11 @@
 0x58412A: cmp     [esp+24h+var_11], 0
 0x58412F: fld     dword ptr ds:0A379B4h
 0x584135: push    ecx
-0x584136: fstp    [esp+28h+a2]; a3
-0x584139: push    0FA1h; a2
+0x584136: fstp    [esp+28h+a2]; value
+0x584139: push    0FA1h; propertyCode
 0x58413E: jz      short loc_584189
 0x584140: mov     ecx, [esi+4]; this
-0x584143: call    Tile_SetFloat
+0x584143: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x584148: fldz
 0x58414A: mov     edx, [esi+4]
 0x58414D: mov     eax, [edx+24h]
@@ -171,7 +171,7 @@
 0x584187: jmp     short loc_5841CA
 0x584189: mov     byte ptr [edi+9], 1
 0x58418D: mov     ecx, [esi+4]; this
-0x584190: call    Tile_SetFloat
+0x584190: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x584195: fldz
 0x584197: mov     ecx, [esi+4]
 0x58419A: mov     edx, [ecx+24h]
@@ -206,18 +206,18 @@
 0x5841FD: call    OblivionDynamicCast
 0x584202: add     esp, 14h
 0x584205: test    eax, eax
-0x584207: jz      short loc_584230
+0x584207: jz      short loc_584230; Verified lifecycle: after completed fade-out with root trait 0x1772 true, DialogMenu class 0x3F1 causes MenuTopicManager::Destroy before root deletion. Any routed topic data is invalid after this point.
 0x584209: mov     ecx, [eax+60h]
 0x58420C: test    ecx, ecx
-0x58420E: jz      short loc_584230
+0x58420E: jz      short loc_584230; Verified lifecycle: after completed fade-out with root trait 0x1772 true, DialogMenu class 0x3F1 causes MenuTopicManager::Destroy before root deletion. Any routed topic data is invalid after this point.
 0x584210: cmp     byte ptr [eax+95h], 0
 0x584217: jz      short loc_584221
 0x584219: mov     [edi+10Ch], ecx
-0x58421F: jmp     short loc_584230
+0x58421F: jmp     short loc_584230; Verified lifecycle: after completed fade-out with root trait 0x1772 true, DialogMenu class 0x3F1 causes MenuTopicManager::Destroy before root deletion. Any routed topic data is invalid after this point.
 0x584221: cmp     byte ptr [eax+94h], 0
-0x584228: jz      short loc_584230
+0x584228: jz      short loc_584230; Verified lifecycle: after completed fade-out with root trait 0x1772 true, DialogMenu class 0x3F1 causes MenuTopicManager::Destroy before root deletion. Any routed topic data is invalid after this point.
 0x58422A: mov     [edi+110h], ecx
-0x584230: call    sub_6B94E0
+0x584230: call    MenuTopicManager__Destroy; Verified lifecycle: after completed fade-out with root trait 0x1772 true, DialogMenu class 0x3F1 causes MenuTopicManager::Destroy before root deletion. Any routed topic data is invalid after this point.
 0x584235: mov     eax, [esi]
 0x584237: mov     edx, [eax+34h]
 0x58423A: mov     ecx, esi
@@ -231,7 +231,7 @@
 0x58424F: mov     edx, [eax]
 0x584251: push    1
 0x584253: mov     ecx, esi
-0x584255: call    edx
+0x584255: call    edx; Verified lifecycle: calls root tile vtable slot 0 with delete flag 1. TileMenu destructor 0x591B70 clears the open-menu slot, clears Menu root binding, then deletes the owned Menu; menu/tile pointers must not survive this path.
 0x584257: test    bl, bl
 0x584259: jz      short loc_584260
 0x58425B: call    sub_5A4510
@@ -256,19 +256,19 @@
 0x584295: or      word ptr [eax+18h], 1
 0x58429A: push    ecx
 0x58429B: mov     ecx, [edi+1Ch]; this
-0x58429E: fstp    [esp+1Ch+a3]; a3
-0x5842A1: push    0FA1h; a2
-0x5842A6: call    Tile_SetFloat
+0x58429E: fstp    [esp+1Ch+a3]; value
+0x5842A1: push    0FA1h; propertyCode
+0x5842A6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5842AB: mov     ecx, [edi+1Ch]
 0x5842AE: call    sub_58E870
 0x5842B3: push    1
 0x5842B5: mov     ecx, edi
 0x5842B7: call    sub_57D940
-0x5842BC: mov     ecx, ds:0B333C4h
+0x5842BC: mov     ecx, ds:0B333C4h; this
 0x5842C2: test    ecx, ecx
 0x5842C4: jz      short loc_5842DD
-0x5842C6: push    0
-0x5842C8: call    PlayerCharacter_GetPlayerNode
+0x5842C6: push    0; firstPerson
+0x5842C8: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x5842CD: test    eax, eax
 0x5842CF: jz      short loc_5842DD
 0x5842D1: push    0

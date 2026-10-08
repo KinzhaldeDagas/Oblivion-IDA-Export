@@ -136,7 +136,6 @@
 0x73FAD1: cmp     [esi+8], bx
 0x73FAD5: jbe     short loc_73FB10
 0x73FAD7: jmp     short loc_73FAE0
-0x73FAD9: align 10h
 0x73FAE0: mov     edx, [esi+54h]
 0x73FAE3: mov     eax, [edi+220h]
 0x73FAE9: push    ebp
@@ -176,7 +175,6 @@
 0x73FB47: jbe     short loc_73FB69
 0x73FB49: xor     ebp, ebp
 0x73FB4B: jmp     short loc_73FB50
-0x73FB4D: align 10h
 0x73FB50: mov     ecx, [esi+58h]
 0x73FB53: push    edi
 0x73FB54: add     ecx, ebp

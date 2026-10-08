@@ -85,14 +85,14 @@
 0x7AFE30: push    1
 0x7AFE32: mov     ecx, esi
 0x7AFE34: call    eax
-0x7AFE36: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7AFE36: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7AFE3B: push    3; int
 0x7AFE3D: push    4; unsigned int
 0x7AFE3F: lea     eax, [ebp+0A0h]
 0x7AFE45: push    eax; void *
 0x7AFE46: mov     byte ptr [esp+34h+var_4], 1
 0x7AFE4B: call    $LN21
-0x7AFE50: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7AFE50: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7AFE55: push    3; int
 0x7AFE57: push    4; unsigned int
 0x7AFE59: lea     ecx, [ebp+94h]
@@ -101,7 +101,7 @@
 0x7AFE65: call    $LN21
 0x7AFE6A: mov     ecx, ebp; this
 0x7AFE6C: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7AFE74: call    ??1BSImageSpaceShader@@UAE@XZ; BSImageSpaceShader::~BSImageSpaceShader(void)
+0x7AFE74: call    ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
 0x7AFE79: mov     ecx, dword ptr [esp+24h+var_C]
 0x7AFE7D: mov     large fs:0, ecx
 0x7AFE84: pop     ecx
@@ -111,3 +111,31 @@
 0x7AFE88: pop     ebx
 0x7AFE89: add     esp, 10h
 0x7AFE8C: retn
+0x9CD620: mov     ecx, [ebp-10h]; this
+0x9CD623: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CD628: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD62D: push    3; int
+0x9CD62F: push    4; unsigned int
+0x9CD631: mov     eax, [ebp-10h]
+0x9CD634: add     eax, 94h ; '”'
+0x9CD639: push    eax; void *
+0x9CD63A: call    $LN21
+0x9CD63F: retn
+0x9CD640: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CD645: push    3; int
+0x9CD647: push    4; unsigned int
+0x9CD649: mov     eax, [ebp-10h]
+0x9CD64C: add     eax, 0A0h ; ' '
+0x9CD651: push    eax; void *
+0x9CD652: call    $LN21
+0x9CD657: retn
+0x9CD658: mov     ecx, [ebp-10h]
+0x9CD65B: add     ecx, 0E0h ; 'à'; slot
+0x9CD661: jmp     NiPointerSlot_Release
+0x9CD666: mov     edx, [esp+arg_4]
+0x9CD66A: lea     eax, [edx-14h]
+0x9CD66D: mov     ecx, [edx-18h]
+0x9CD670: xor     ecx, eax
+0x9CD672: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD677: mov     eax, offset stru_AF6900
+0x9CD67C: jmp     ___CxxFrameHandler3

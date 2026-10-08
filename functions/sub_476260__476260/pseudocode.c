@@ -1,11 +1,20 @@
-int __thiscall sub_476260(_DWORD **this, _DWORD *a2, int a3)
+// CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.
+BSAnimGroupSequence *__thiscall ActorAnimData_PlayEncodedGroup(
+        ActorAnimData *this,
+        _DWORD *encodedKey,
+        int slotSelector)
 {
-  float v6; // edi
-  int v8; // eax
+  _DWORD *v3; // edi
+  BSAnimGroupSequence *v5; // eax
 
-  v6 = *(float *)&a2;
-  if ( (_WORD)a2 == 0xFF || !sub_470960(*(this + 0x27), (int)a2, &a2) )
-    return 0;
-  v8 = (*(int (__thiscall **)(_DWORD *, unsigned int))(*a2 + 0x10))(a2, 0xFFFFFFFF);
-  return sub_474530(this, v8, v6, a3);
+  v3 = encodedKey; /*0x476262*/
+  if ( (_WORD)encodedKey == 0xFF /*0x47627b*/
+    || !ActorAnimData_FindAnimMapEntry((_DWORD *)this->animsMap, (int)encodedKey, &encodedKey) )
+  {
+    return 0; /*0x4762a5*/
+  }
+  v5 = (BSAnimGroupSequence *)(*(int (__thiscall **)(_DWORD *, unsigned int))(*encodedKey + 0x10))( /*0x47628f*/
+                                encodedKey,
+                                0xFFFFFFFF);
+  return ActorAnimData_PlaySequence(this, v5, (unsigned int)v3, slotSelector); /*0x47629f*/
 }

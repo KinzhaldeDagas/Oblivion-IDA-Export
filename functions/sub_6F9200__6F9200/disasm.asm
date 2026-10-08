@@ -37,3 +37,18 @@
 0x6F927F: pop     esi
 0x6F9280: add     esp, 14h
 0x6F9283: retn    0Ch
+0x9C90C0: mov     eax, [ebp-14h]
+0x9C90C3: and     eax, 1
+0x9C90C6: jz      locret_9C90DB
+0x9C90CC: and     dword ptr [ebp-14h], 0FFFFFFFEh
+0x9C90D0: mov     ecx, [ebp-10h]
+0x9C90D3: add     ecx, 4; struct std::ios_base *
+0x9C90D6: jmp     unknown_libname_2
+0x9C90DB: retn
+0x9C90DC: mov     edx, dword ptr [esp+arg_4]
+0x9C90E0: lea     eax, [edx-0Ch]
+0x9C90E3: mov     ecx, [edx-10h]
+0x9C90E6: xor     ecx, eax
+0x9C90E8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C90ED: mov     eax, offset stru_AF1A08
+0x9C90F2: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x4F9470",
+      "0x4F9536"
+    ]
+  ],
+  "chunks_sha256": "35fb940b9a031f84767d3d493bc3c3dd1734c66bf8e8ce505d54823282539dcd",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": " Verified: TESGlobal class loader accepts type-4 form records, initializes base form, reads FNAM one-byte type into member+0x20 and FLTV four-byte float into member+0x24, in addition to EDID. Confirmed by raw TESGlobal RTTI/vtable at A49818/A4981C; slot +0x38 dispatches here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4F9470",
+  "display_name": "TESGlobal_LoadFormRecord",
   "end_ea": "0x4F9536",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4F9470",
+  "name": "TESGlobal_LoadFormRecord",
   "segment": ".text",
   "sha256": "35fb940b9a031f84767d3d493bc3c3dd1734c66bf8e8ce505d54823282539dcd",
   "size": 198,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F9470",
-  "type": "char __thiscall(void *this, Data *)",
+  "total_chunk_size": 198,
+  "type": "char __thiscall(TESGlobal *self, Data *file)",
   "xrefs_from_count": 89,
   "xrefs_to_count": 1
 }

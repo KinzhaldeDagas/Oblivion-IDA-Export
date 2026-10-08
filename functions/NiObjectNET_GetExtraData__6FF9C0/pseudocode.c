@@ -1,3 +1,4 @@
+// NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 NiExtraData *__thiscall NiObjectNET_GetExtraData(NiObjectNET *this, const char *a2)
 {
   DWORD CurrentThreadId; // eax
@@ -7,42 +8,42 @@ NiExtraData *__thiscall NiObjectNET_GetExtraData(NiObjectNET *this, const char *
   int v8; // eax
   bool v9; // zf
 
-  if ( !a2 )
-    return 0;
-  EnterCriticalSection(&stru_B3F600);
-  CurrentThreadId = GetCurrentThreadId();
-  ++dword_B3F67C;
-  dword_B3F678 = CurrentThreadId;
-  v5 = this->members.m_extraDataListLen - 1;
-  v6 = 0;
-  if ( v5 < 0 )
+  if ( !a2 ) /*0x6ff9c8*/
+    return 0; /*0x6ff9ca*/
+  EnterCriticalSection(&unk_B3F600); /*0x6ff9d8*/
+  CurrentThreadId = GetCurrentThreadId(); /*0x6ff9de*/
+  ++unk_B3F67C; /*0x6ff9e4*/
+  unk_B3F678 = CurrentThreadId; /*0x6ff9eb*/
+  v5 = this->members.m_extraDataListLen - 1; /*0x6ff9f8*/
+  v6 = 0; /*0x6ff9fb*/
+  if ( v5 < 0 ) /*0x6ffa00*/
   {
 LABEL_9:
-    v9 = dword_B3F67C-- == 1;
-    if ( v9 )
-      dword_B3F678 = 0;
-    LeaveCriticalSection(&stru_B3F600);
-    return 0;
+    v9 = unk_B3F67C-- == 1; /*0x6ffa5f*/
+    if ( v9 ) /*0x6ffa66*/
+      unk_B3F678 = 0; /*0x6ffa68*/
+    LeaveCriticalSection(&unk_B3F600); /*0x6ffa77*/
+    return 0; /*0x6ffa80*/
   }
   else
   {
-    while ( 1 )
+    while ( 1 ) /*0x6ffa0c*/
     {
-      v7 = (v6 + v5) >> 1;
-      v8 = strcmp(a2, (const char *)sub_452A60((Atmosphere *)this->members.m_extraDataList[v7]));
-      if ( !v8 )
-        break;
-      if ( v8 <= 0 )
-        v5 = v7 - 1;
+      v7 = (v6 + v5) >> 1; /*0x6ffa0c*/
+      v8 = strcmp(a2, (const char *)Shared_GetPointerAtOffset08((Atmosphere *)this->members.m_extraDataList[v7])); /*0x6ffa25*/
+      if ( !v8 ) /*0x6ffa48*/
+        break; /*0x6ffa48*/
+      if ( v8 <= 0 ) /*0x6ffa4a*/
+        v5 = v7 - 1; /*0x6ffa57*/
       else
-        v6 = v7 + 1;
-      if ( v6 > v5 )
-        goto LABEL_9;
+        v6 = v7 + 1; /*0x6ffa4f*/
+      if ( v6 > v5 ) /*0x6ffa5d*/
+        goto LABEL_9; /*0x6ffa5d*/
     }
-    v9 = dword_B3F67C-- == 1;
-    if ( v9 )
-      dword_B3F678 = 0;
-    LeaveCriticalSection(&stru_B3F600);
-    return this->members.m_extraDataList[v7];
+    v9 = unk_B3F67C-- == 1; /*0x6ffa86*/
+    if ( v9 ) /*0x6ffa8d*/
+      unk_B3F678 = 0; /*0x6ffa8f*/
+    LeaveCriticalSection(&unk_B3F600); /*0x6ffa9e*/
+    return this->members.m_extraDataList[v7]; /*0x6ffaab*/
   }
 }

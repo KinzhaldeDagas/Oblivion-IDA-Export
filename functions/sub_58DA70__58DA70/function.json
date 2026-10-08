@@ -1,19 +1,32 @@
 {
-  "callees_count": 29,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 8,
+  "chunks": [
+    [
+      "0x58DA70",
+      "0x58DBD0"
+    ]
+  ],
+  "chunks_sha256": "d4acd59ef1dd668406fe4f0beb8082e8758bea10a441e59973a34cf17ae3f5af",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: marks subtree release-in-progress (+5), clears matching interface active/drag references, marks released (+4), detaches parent, destroys each Value, detaches model, then deletes children. Native loop at 0x58DA90 advances child iterator EDX before call; pseudocode may omit this advance.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_58DA70",
+  "display_name": "Tile::Release",
   "end_ea": "0x58DBD0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58DA70",
+  "name": "Tile::Release",
   "segment": ".text",
   "sha256": "d4acd59ef1dd668406fe4f0beb8082e8758bea10a441e59973a34cf17ae3f5af",
   "size": 352,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58DA70",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 352,
+  "type": "void __thiscall(Tile *this)",
   "xrefs_from_count": 162,
   "xrefs_to_count": 8
 }

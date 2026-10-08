@@ -4,7 +4,7 @@
 0x682ED8: test    [esp+4+arg_0], 1
 0x682EDD: jz      short loc_682EE8
 0x682EDF: push    esi
-0x682EE0: call    FormHeapFree
+0x682EE0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x682EE5: add     esp, 4
 0x682EE8: mov     eax, esi
 0x682EEA: pop     esi

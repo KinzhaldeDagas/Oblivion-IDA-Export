@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x788660",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion collision-vector copy-backward primitive: moves 28-byte records from the end toward the front-safe destination and returns destination start.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x788661",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x788667",
-    "line": "mov     esi, [esp+0Ch+arg_4]",
+    "line": "mov     esi, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78866B",
-    "line": "mov     ebp, [esp+0Ch+arg_8]",
+    "line": "mov     ebp, [esp+0Ch+destinationEnd]",
     "mnemonic": "mov",
     "size": 4
   },

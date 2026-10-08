@@ -50,7 +50,7 @@
 0x63D13E: add     esp, 48h
 0x63D141: retn    4
 0x63D144: push    ebp; Seed
-0x63D145: call    GetRandomLargeInteger?
+0x63D145: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x63D14A: cdq
 0x63D14B: mov     ecx, 64h ; 'd'
 0x63D150: idiv    ecx
@@ -112,7 +112,7 @@
 0x63D1EC: add     esp, 48h
 0x63D1EF: retn    4
 0x63D1F2: mov     ecx, edi
-0x63D1F4: call    Actor_GetCurrentAction
+0x63D1F4: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63D1F9: cmp     eax, 0FFFFFFFFh
 0x63D1FC: jnz     loc_63D352
 0x63D202: test    ebp, ebp
@@ -194,7 +194,7 @@
 0x63D2F1: retn    4
 0x63D2F4: push    30h ; '0'; a4
 0x63D2F6: mov     ecx, edi
-0x63D2F8: call    sub_5E05F0
+0x63D2F8: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x63D2FD: mov     edx, [esi]
 0x63D2FF: mov     eax, [edx+49Ch]
 0x63D305: mov     ecx, esi
@@ -249,7 +249,7 @@
 0x63D396: fstp    [esp+5Ch+var_8]
 0x63D39A: fld     dword ptr [esp+5Ch+var_18]
 0x63D39E: fstp    [esp+5Ch+var_4]
-0x63D3A2: call    sub_683CB0
+0x63D3A2: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x63D3A7: add     esp, 4
 0x63D3AA: fstp    dword ptr [esp+58h+var_18]
 0x63D3AE: fld     dword ptr [esp+58h+var_18]
@@ -291,14 +291,14 @@
 0x63D426: jnz     short loc_63D43C
 0x63D428: mov     ecx, [esp+58h+var_44]
 0x63D42C: add     ecx, 44h ; 'D'
-0x63D42F: call    ExtraDataList__GetExtraXTarget
+0x63D42F: call    ExtraDataList_GetXTarget; Returns the TESObjectREFR target stored by ExtraXTarget (type 0x4D), or null.
 0x63D434: mov     ebx, eax
 0x63D436: mov     dword ptr [esp+58h+var_4C+4], eax
 0x63D43A: jmp     short loc_63D444
 0x63D43C: mov     ebx, [esp+58h+var_44]
 0x63D440: mov     dword ptr [esp+58h+var_4C+4], ebx
 0x63D444: mov     ecx, ebp
-0x63D446: call    sub_452A60
+0x63D446: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x63D44B: mov     ecx, ebp
 0x63D44D: mov     [esp+58h+var_34], eax
 0x63D451: call    TargetData__GetTargetType
@@ -444,12 +444,12 @@
 0x63D611: test    al, al
 0x63D613: jz      loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63D619: mov     ecx, edi
-0x63D61B: call    Actor_IsBlocking
+0x63D61B: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x63D620: test    al, al
 0x63D622: jnz     loc_63ECC2; jumptable 0063D5C2 cases 15,16
-0x63D628: push    1; float
-0x63D62A: mov     ecx, edi
-0x63D62C: call    sub_5F4AE0
+0x63D628: push    1; shouldBlock
+0x63D62A: mov     ecx, edi; this
+0x63D62C: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x63D631: xor     al, al
 0x63D633: pop     edi
 0x63D634: pop     esi
@@ -463,7 +463,7 @@
 0x63D645: cmp     [esi+1CCh], eax
 0x63D64B: jl      short loc_63D65D
 0x63D64D: mov     ecx, edi
-0x63D64F: call    Actor_GetCurrentAction
+0x63D64F: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63D654: cmp     eax, 0FFFFFFFFh
 0x63D657: jz      loc_63EAB9
 0x63D65D: fldz
@@ -472,7 +472,7 @@
 0x63D667: test    ah, 1
 0x63D66A: jnz     short loc_63D6D1
 0x63D66C: mov     ecx, edi
-0x63D66E: call    Actor_GetCurrentAction
+0x63D66E: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63D673: cmp     eax, 0FFFFFFFFh
 0x63D676: jnz     short loc_63D6D1
 0x63D678: mov     ebx, dword ptr [esp+58h+var_4C+4]
@@ -591,7 +591,7 @@
 0x63D7CC: call    eax
 0x63D7CE: push    30h ; '0'; a4
 0x63D7D0: mov     ecx, edi
-0x63D7D2: call    sub_5E05F0
+0x63D7D2: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x63D7D7: mov     edx, [ebx]
 0x63D7D9: mov     eax, [edx+174h]
 0x63D7DF: mov     ecx, ebx
@@ -661,7 +661,7 @@
 0x63D892: push    1
 0x63D894: push    ecx
 0x63D895: mov     ecx, edi
-0x63D897: call    Actor_EquipItem
+0x63D897: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63D89C: cmp     dword ptr [esi+0ECh], 0
 0x63D8A3: jnz     short loc_63D8D4
 0x63D8A5: mov     edx, [edi]
@@ -675,12 +675,12 @@
 0x63D8BA: push    0
 0x63D8BC: push    1
 0x63D8BE: push    0
-0x63D8C0: mov     ecx, ebp
-0x63D8C2: call    TESHealthForm_GetHealth
+0x63D8C0: mov     ecx, ebp; this
+0x63D8C2: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x63D8C7: push    eax
 0x63D8C8: push    ebx
 0x63D8C9: mov     ecx, edi
-0x63D8CB: call    Actor_EquipItem
+0x63D8CB: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63D8D0: mov     ebx, [esp+58h+var_2C]
 0x63D8D4: mov     edx, [esi]
 0x63D8D6: mov     eax, [edx+0F4h]
@@ -698,7 +698,7 @@
 0x63D8FF: mov     ecx, ebp
 0x63D901: call    ContainerEntryExtraData_DestroyDataTable
 0x63D906: push    ebp
-0x63D907: call    FormHeapFree
+0x63D907: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63D90C: add     esp, 4
 0x63D90F: mov     edx, [esi]
 0x63D911: mov     eax, [edx+304h]
@@ -723,7 +723,7 @@
 0x63D945: test    ah, 1
 0x63D948: jnz     loc_63DA01
 0x63D94E: mov     ecx, edi
-0x63D950: call    Actor_GetCurrentAction
+0x63D950: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63D955: cmp     eax, 0FFFFFFFFh
 0x63D958: jnz     loc_63DA01
 0x63D95E: mov     ecx, ds:0B333C4h
@@ -744,8 +744,8 @@
 0x63D98E: jnz     short loc_63DA01
 0x63D990: push    13h
 0x63D992: mov     ecx, edi
-0x63D994: call    sub_5F48D0
-0x63D999: mov     ecx, offset fBowHoldTimer
+0x63D994: call    PlayerCharacter_TryStartAttackAnimGroup; Player attack-animation admission uses Oblivion behavior and preserves a compiler-specific register/FPU ABI. Bow admission requires equipped AMMO and an AttackBow group with the required Start/Attach/Hold/Release/End note contract. Rejects a new bow attack while action 5 (AttackBowArrowAttached) remains at phase <=3; an accepted bow group commits action 4 (AttackBow). This path does not automatically reload: later attack input must admit another AttackBow sequence.
+0x63D999: mov     ecx, (offset flt_B36C58+8)
 0x63D99E: call    GameSetting_GetSafeFloatPointer
 0x63D9A3: fld     dword ptr [eax]
 0x63D9A5: add     dword ptr [esi+1CCh], 1
@@ -851,7 +851,7 @@
 0x63DAC5: call    sub_569E70
 0x63DACA: push    eax
 0x63DACB: mov     ecx, edi
-0x63DACD: call    Actor_EquipItem
+0x63DACD: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63DAD2: jmp     short loc_63DB26
 0x63DAD4: call    TargetData__GetTargetType
 0x63DAD9: test    eax, eax
@@ -880,7 +880,7 @@
 0x63DB18: call    eax
 0x63DB1A: push    eax
 0x63DB1B: mov     ecx, edi
-0x63DB1D: call    Actor_EquipItem
+0x63DB1D: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63DB22: mov     ebx, [esp+58h+var_38]
 0x63DB26: mov     eax, [esp+58h+var_34]
 0x63DB2A: test    eax, eax
@@ -888,7 +888,7 @@
 0x63DB2E: cmp     [esi+1CCh], eax
 0x63DB34: jl      short loc_63DB46
 0x63DB36: mov     ecx, edi
-0x63DB38: call    Actor_GetCurrentAction
+0x63DB38: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63DB3D: cmp     eax, 0FFFFFFFFh
 0x63DB40: jz      loc_63EAB9
 0x63DB46: fldz
@@ -897,7 +897,7 @@
 0x63DB50: test    ah, 1
 0x63DB53: jnz     short loc_63DBBB
 0x63DB55: mov     ecx, edi
-0x63DB57: call    Actor_GetCurrentAction
+0x63DB57: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63DB5C: cmp     eax, 0FFFFFFFFh
 0x63DB5F: jnz     short loc_63DBBB
 0x63DB61: mov     ebp, dword ptr [esp+58h+var_4C+4]
@@ -1015,12 +1015,12 @@
 0x63DC9B: jz      loc_63DD37
 0x63DCA1: mov     edx, [ecx]
 0x63DCA3: mov     eax, [edx+170h]
-0x63DCA9: push    0
-0x63DCAB: push    1
+0x63DCA9: push    0; referenceFormIDOrZero
+0x63DCAB: push    1; unusedAlwaysOne
 0x63DCAD: call    eax
-0x63DCAF: mov     ecx, [esp+60h+var_30]
-0x63DCB3: push    eax
-0x63DCB4: call    ContainerExtraData_GetEntryForForm
+0x63DCAF: mov     ecx, [esp+60h+var_30]; this
+0x63DCB3: push    eax; form
+0x63DCB4: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x63DCB9: mov     ebp, eax
 0x63DCBB: test    ebp, ebp
 0x63DCBD: jz      loc_63DD60
@@ -1033,7 +1033,7 @@
 0x63DCD4: push    1
 0x63DCD6: push    eax
 0x63DCD7: mov     ecx, edi
-0x63DCD9: call    Actor_EquipItem
+0x63DCD9: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63DCDE: mov     edx, [esi]
 0x63DCE0: mov     eax, [edx+0ECh]
 0x63DCE6: push    1
@@ -1090,7 +1090,7 @@
 0x63DD73: mov     ecx, ebp
 0x63DD75: call    ContainerEntryExtraData_DestroyDataTable
 0x63DD7A: push    ebp
-0x63DD7B: call    FormHeapFree
+0x63DD7B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63DD80: add     esp, 4
 0x63DD83: xor     ebp, ebp
 0x63DD85: cmp     dword ptr [esi+0ECh], 0
@@ -1106,12 +1106,12 @@
 0x63DDA3: push    0
 0x63DDA5: push    1
 0x63DDA7: push    0
-0x63DDA9: mov     ecx, ebp
-0x63DDAB: call    TESHealthForm_GetHealth
+0x63DDA9: mov     ecx, ebp; this
+0x63DDAB: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x63DDB0: push    eax
 0x63DDB1: push    ebx
 0x63DDB2: mov     ecx, edi
-0x63DDB4: call    Actor_EquipItem
+0x63DDB4: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63DDB9: mov     ebx, [esp+58h+var_38]
 0x63DDBD: mov     edx, [esi]
 0x63DDBF: mov     eax, [edx+0F4h]
@@ -1143,12 +1143,12 @@
 0x63DE1F: jz      short loc_63DE57
 0x63DE21: mov     edx, [ecx]
 0x63DE23: mov     eax, [edx+170h]
-0x63DE29: push    ebp
-0x63DE2A: push    1
+0x63DE29: push    ebp; referenceFormIDOrZero
+0x63DE2A: push    1; unusedAlwaysOne
 0x63DE2C: call    eax
-0x63DE2E: mov     ecx, [esp+60h+var_30]
-0x63DE32: push    eax
-0x63DE33: call    ContainerExtraData_GetEntryForForm
+0x63DE2E: mov     ecx, [esp+60h+var_30]; this
+0x63DE32: push    eax; form
+0x63DE33: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x63DE38: mov     ebp, eax
 0x63DE3A: test    ebp, ebp
 0x63DE3C: jz      short loc_63DE79
@@ -1161,7 +1161,7 @@
 0x63DE4B: push    1
 0x63DE4D: push    eax
 0x63DE4E: mov     ecx, edi
-0x63DE50: call    Actor_EquipItem
+0x63DE50: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63DE55: jmp     short loc_63DE88
 0x63DE57: mov     eax, [esp+58h+var_3C]
 0x63DE5B: test    eax, eax
@@ -1191,11 +1191,11 @@
 0x63DE95: push    1
 0x63DE97: push    ecx
 0x63DE98: mov     ecx, edi
-0x63DE9A: call    Actor_EquipItem
+0x63DE9A: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63DE9F: mov     ecx, ebp
 0x63DEA1: call    ContainerEntryExtraData_DestroyDataTable
 0x63DEA6: push    ebp
-0x63DEA7: call    FormHeapFree
+0x63DEA7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x63DEAC: add     esp, 4
 0x63DEAF: mov     ebp, [esp+58h+var_44]
 0x63DEB3: test    ebp, ebp
@@ -1260,7 +1260,7 @@
 0x63DF7C: jmp     loc_63D2CB
 0x63DF81: push    30h ; '0'; a4
 0x63DF83: mov     ecx, edi
-0x63DF85: call    sub_5E05F0
+0x63DF85: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x63DF8A: mov     edx, [esi]
 0x63DF8C: mov     eax, [edx+49Ch]
 0x63DF92: mov     ecx, esi
@@ -1292,7 +1292,7 @@
 0x63DFDB: mov     ecx, esi
 0x63DFDD: call    eax
 0x63DFDF: lea     ecx, [ebp+44h]
-0x63DFE2: call    ExtraDataList__GetExtraXTarget
+0x63DFE2: call    ExtraDataList_GetXTarget; Returns the TESObjectREFR target stored by ExtraXTarget (type 0x4D), or null.
 0x63DFE7: mov     ebx, eax
 0x63DFE9: mov     dword ptr [esp+58h+var_4C+4], ebx
 0x63DFED: jmp     short loc_63DFF3
@@ -1314,11 +1314,11 @@
 0x63E022: test    ah, 1
 0x63E025: jnz     loc_63E2EC
 0x63E02B: mov     ecx, edi
-0x63E02D: call    Actor_GetCurrentAction
+0x63E02D: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E032: cmp     eax, 0FFFFFFFFh
 0x63E035: jz      short loc_63E047
 0x63E037: mov     ecx, edi
-0x63E039: call    Actor_GetCurrentAction
+0x63E039: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E03E: cmp     eax, 6
 0x63E041: jnz     loc_63E2EC
 0x63E047: mov     ecx, ds:0B333C4h
@@ -1337,7 +1337,7 @@
 0x63E06E: cmp     byte ptr [esp+58h+a1], 0
 0x63E073: jnz     loc_63E2EC
 0x63E079: push    0; Seed
-0x63E07B: call    GetRandomLargeInteger?
+0x63E07B: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x63E080: cdq
 0x63E081: mov     ecx, 64h ; 'd'
 0x63E086: idiv    ecx
@@ -1378,8 +1378,8 @@
 0x63E0EF: jnz     short loc_63E139
 0x63E0F1: push    13h
 0x63E0F3: mov     ecx, edi
-0x63E0F5: call    sub_5F48D0
-0x63E0FA: mov     ecx, offset fBowHoldTimer
+0x63E0F5: call    PlayerCharacter_TryStartAttackAnimGroup; Player attack-animation admission uses Oblivion behavior and preserves a compiler-specific register/FPU ABI. Bow admission requires equipped AMMO and an AttackBow group with the required Start/Attach/Hold/Release/End note contract. Rejects a new bow attack while action 5 (AttackBowArrowAttached) remains at phase <=3; an accepted bow group commits action 4 (AttackBow). This path does not automatically reload: later attack input must admit another AttackBow sequence.
+0x63E0FA: mov     ecx, (offset flt_B36C58+8)
 0x63E0FF: call    GameSetting_GetSafeFloatPointer
 0x63E104: fld     dword ptr [eax]
 0x63E106: mov     eax, dword ptr [esp+58h+var_4C+4]
@@ -1411,23 +1411,23 @@
 0x63E174: test    al, al
 0x63E176: jz      loc_63E20E
 0x63E17C: mov     ecx, dword ptr [esp+58h+var_4C+4]
-0x63E180: call    sub_5E05B0
+0x63E180: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x63E185: test    al, al
 0x63E187: jnz     loc_63E24B
 0x63E18D: cmp     ebx, 1Eh
 0x63E190: jl      short loc_63E1CF
 0x63E192: mov     ebp, dword ptr [esp+58h+var_4C+4]
 0x63E196: mov     ecx, ebp
-0x63E198: call    Actor_GetCurrentAction
+0x63E198: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E19D: cmp     eax, 2
 0x63E1A0: jz      short loc_63E1AE
 0x63E1A2: mov     ecx, ebp
-0x63E1A4: call    Actor_GetCurrentAction
+0x63E1A4: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E1A9: cmp     eax, 3
 0x63E1AC: jnz     short loc_63E1CF
-0x63E1AE: push    1; float
-0x63E1B0: mov     ecx, edi
-0x63E1B2: call    sub_5F4AE0
+0x63E1AE: push    1; shouldBlock
+0x63E1B0: mov     ecx, edi; this
+0x63E1B2: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x63E1B7: fld     dword ptr ds:0A57414h
 0x63E1BD: fstp    dword ptr [esi+1B0h]
 0x63E1C3: xor     al, al
@@ -1495,7 +1495,7 @@
 0x63E269: jnp     short loc_63E270
 0x63E26B: mov     ebp, 15h
 0x63E270: mov     ecx, edi
-0x63E272: call    Actor_IsSneaking
+0x63E272: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x63E277: test    al, al
 0x63E279: jz      short loc_63E2AB
 0x63E27B: mov     edx, [esi]
@@ -1510,28 +1510,28 @@
 0x63E295: call    eax
 0x63E297: test    al, al
 0x63E299: jnz     short loc_63E2AB
-0x63E29B: mov     ecx, edi
-0x63E29D: call    Actor_IsSwimming
+0x63E29B: mov     ecx, edi; this
+0x63E29D: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x63E2A2: test    al, al
 0x63E2A4: jnz     short loc_63E2AB
 0x63E2A6: mov     ebp, 16h
 0x63E2AB: mov     ecx, edi
-0x63E2AD: call    Actor_IsBlocking
+0x63E2AD: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x63E2B2: test    al, al
 0x63E2B4: jnz     short loc_63E2BE
 0x63E2B6: push    ebp
 0x63E2B7: mov     ecx, edi
-0x63E2B9: call    sub_5F48D0
+0x63E2B9: call    PlayerCharacter_TryStartAttackAnimGroup; Player attack-animation admission uses Oblivion behavior and preserves a compiler-specific register/FPU ABI. Bow admission requires equipped AMMO and an AttackBow group with the required Start/Attach/Hold/Release/End note contract. Rejects a new bow attack while action 5 (AttackBowArrowAttached) remains at phase <=3; an accepted bow group commits action 4 (AttackBow). This path does not automatically reload: later attack input must admit another AttackBow sequence.
 0x63E2BE: fld     dword ptr ds:0A524B0h
 0x63E2C4: fstp    dword ptr [esi+1B0h]
 0x63E2CA: jmp     loc_63E42C
 0x63E2CF: mov     ecx, edi
-0x63E2D1: call    Actor_IsBlocking
+0x63E2D1: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x63E2D6: test    al, al
 0x63E2D8: jz      loc_63E42C
-0x63E2DE: push    0; float
-0x63E2E0: mov     ecx, edi
-0x63E2E2: call    sub_5F4AE0
+0x63E2DE: push    0; shouldBlock
+0x63E2E0: mov     ecx, edi; this
+0x63E2E2: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x63E2E7: jmp     loc_63E42C
 0x63E2EC: fld     dword ptr ds:0A30634h
 0x63E2F2: push    ecx
@@ -1543,7 +1543,7 @@
 0x63E302: test    al, al
 0x63E304: jnz     short loc_63E338
 0x63E306: mov     ecx, edi
-0x63E308: call    Actor_GetCurrentAction
+0x63E308: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E30D: cmp     eax, 0FFFFFFFFh
 0x63E310: jnz     short loc_63E338
 0x63E312: mov     edx, [edi]
@@ -1551,7 +1551,7 @@
 0x63E31A: mov     ecx, edi
 0x63E31C: call    eax
 0x63E31E: mov     ecx, eax
-0x63E320: call    sub_472EA0
+0x63E320: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63E325: test    al, al
 0x63E327: jz      short loc_63E338
 0x63E329: mov     edx, [esi]
@@ -1574,19 +1574,19 @@
 0x63E366: mov     ecx, edi
 0x63E368: call    eax
 0x63E36A: mov     ebp, eax
-0x63E36C: push    3
-0x63E36E: mov     ecx, ebp
-0x63E370: call    ActorAnimData_GetAnimGroupFromField8Value
+0x63E36C: push    3; slot
+0x63E36E: mov     ecx, ebp; this
+0x63E370: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x63E375: push    eax
-0x63E376: call    sub_51AC80
+0x63E376: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x63E37B: add     esp, 4
 0x63E37E: test    al, al
 0x63E380: jz      short loc_63E3EC
-0x63E382: push    3
-0x63E384: mov     ecx, ebp
-0x63E386: call    ActorAnimData_GetAnimGroupFromField8Value
+0x63E382: push    3; slot
+0x63E384: mov     ecx, ebp; this
+0x63E386: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x63E38B: push    eax
-0x63E38C: call    sub_51ACC0
+0x63E38C: call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.
 0x63E391: add     esp, 4
 0x63E394: test    al, al
 0x63E396: jnz     short loc_63E3EC
@@ -1610,14 +1610,14 @@
 0x63E3CC: jnz     short loc_63E3EC
 0x63E3CE: cmp     byte ptr [esp+58h+a1], 0
 0x63E3D3: jz      short loc_63E3EC
-0x63E3D5: push    3
-0x63E3D7: mov     ecx, ebp
-0x63E3D9: call    ActorAnimData_GetSomethingFromField8Value
+0x63E3D5: push    3; slot
+0x63E3D7: mov     ecx, ebp; this
+0x63E3D9: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
 0x63E3DE: cmp     eax, 2
 0x63E3E1: jnz     short loc_63E3EC
-0x63E3E3: push    3
-0x63E3E5: mov     ecx, ebp
-0x63E3E7: call    sub_4706D0
+0x63E3E3: push    3; state
+0x63E3E5: mov     ecx, ebp; this
+0x63E3E7: call    ActorAnimData_SetUpdateState; Oblivion ActorAnimData update-control setter: stores one byte at +0x90. Observed callers write state 3 for attack/action synchronization and state 5 from Cmd_SkipAnim. Do not infer KF unloading or map mutation from this setter.
 0x63E3EC: mov     ecx, ds:0B333C4h
 0x63E3F2: push    0
 0x63E3F4: push    edi
@@ -1736,7 +1736,7 @@
 0x63E53E: push    1
 0x63E540: push    ebp
 0x63E541: mov     ecx, edi
-0x63E543: call    Actor_EquipItem
+0x63E543: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63E548: push    1
 0x63E54A: mov     ecx, edi
 0x63E54C: call    Actor_SetAlerted
@@ -1746,7 +1746,7 @@
 0x63E559: cmp     [esi+1CCh], eax
 0x63E55F: jl      short loc_63E5B7
 0x63E561: mov     ecx, edi
-0x63E563: call    Actor_GetCurrentAction
+0x63E563: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E568: cmp     eax, 0FFFFFFFFh
 0x63E56B: jnz     short loc_63E5B7
 0x63E56D: mov     edx, [edi]
@@ -1754,7 +1754,7 @@
 0x63E575: mov     ecx, edi
 0x63E577: call    eax
 0x63E579: mov     ecx, eax
-0x63E57B: call    sub_472EA0
+0x63E57B: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63E580: test    al, al
 0x63E582: jz      short loc_63E5B7
 0x63E584: mov     edx, [esi]
@@ -1768,9 +1768,9 @@
 0x63E59B: push    edi
 0x63E59C: mov     ecx, esi
 0x63E59E: call    eax
-0x63E5A0: push    0; float
-0x63E5A2: mov     ecx, edi
-0x63E5A4: call    sub_5F4AE0
+0x63E5A0: push    0; shouldBlock
+0x63E5A2: mov     ecx, edi; this
+0x63E5A4: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x63E5A9: push    0
 0x63E5AB: mov     ecx, edi
 0x63E5AD: call    Actor_SetAlerted
@@ -1855,7 +1855,7 @@
 0x63E6A9: retn    4
 0x63E6AC: push    30h ; '0'
 0x63E6AE: mov     ecx, edi
-0x63E6B0: call    sub_5E05F0
+0x63E6B0: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x63E6B5: mov     eax, dword ptr [esp+58h+var_4C+4]
 0x63E6B9: test    eax, eax
 0x63E6BB: jz      short loc_63E6CA
@@ -1873,16 +1873,16 @@
 0x63E6DF: fnstsw  ax
 0x63E6E1: test    ah, 41h
 0x63E6E4: jnz     short loc_63E6FF
-0x63E6E6: push    1; float
-0x63E6E8: mov     ecx, edi
-0x63E6EA: call    sub_5F4AE0
+0x63E6E6: push    1; shouldBlock
+0x63E6E8: mov     ecx, edi; this
+0x63E6EA: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x63E6EF: fld     dword ptr ds:0A35AA4h
 0x63E6F5: fstp    dword ptr [esi+1B4h]
 0x63E6FB: jmp     short loc_63E714
 0x63E6FD: fstp    st
-0x63E6FF: push    0; float
-0x63E701: mov     ecx, edi
-0x63E703: call    sub_5F4AE0
+0x63E6FF: push    0; shouldBlock
+0x63E701: mov     ecx, edi; this
+0x63E703: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x63E708: fld     dword ptr ds:0A524B0h
 0x63E70E: fstp    dword ptr [esi+1B0h]
 0x63E714: fld     dword ptr [esi+1B4h]
@@ -1894,7 +1894,7 @@
 0x63E72E: cmp     [esi+1CCh], eax
 0x63E734: jl      short loc_63E75D
 0x63E736: mov     ecx, edi
-0x63E738: call    Actor_GetCurrentAction
+0x63E738: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E73D: cmp     eax, 0FFFFFFFFh
 0x63E740: jnz     short loc_63E75D
 0x63E742: mov     edx, [edi]
@@ -1902,7 +1902,7 @@
 0x63E74A: mov     ecx, edi
 0x63E74C: call    eax
 0x63E74E: mov     ecx, eax
-0x63E750: call    sub_472EA0
+0x63E750: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63E755: test    al, al
 0x63E757: jnz     loc_63EAB9
 0x63E75D: mov     ebx, [esp+58h+var_44]
@@ -1966,7 +1966,7 @@
 0x63E823: jnp     loc_63E67F
 0x63E829: push    30h ; '0'
 0x63E82B: mov     ecx, edi
-0x63E82D: call    sub_5E05F0
+0x63E82D: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x63E832: mov     edx, [esi]
 0x63E834: mov     eax, [edx+51Ch]
 0x63E83A: push    1
@@ -1978,7 +1978,7 @@
 0x63E845: add     dword ptr [esi+1CCh], 1
 0x63E84C: mov     ebx, [esp+58h+var_40]
 0x63E850: mov     ecx, ebx
-0x63E852: call    sub_565DF0
+0x63E852: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x63E857: test    al, al
 0x63E859: jz      loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63E85F: cmp     dword ptr [ebx+30h], 0
@@ -1988,7 +1988,7 @@
 0x63E871: mov     ecx, edi
 0x63E873: call    eax
 0x63E875: mov     ecx, eax
-0x63E877: call    sub_472EA0
+0x63E877: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63E87C: test    al, al
 0x63E87E: jz      loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63E884: mov     edx, [esi]
@@ -2015,7 +2015,7 @@
 0x63E8B5: cmp     [esi+1CCh], eax
 0x63E8BB: jl      short loc_63E8CD
 0x63E8BD: mov     ecx, edi
-0x63E8BF: call    Actor_GetCurrentAction
+0x63E8BF: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E8C4: cmp     eax, 0FFFFFFFFh
 0x63E8C7: jz      loc_63EAB9
 0x63E8CD: fldz
@@ -2042,7 +2042,7 @@
 0x63E919: push    ebx
 0x63E91A: push    3
 0x63E91C: lea     ecx, [eax+0Ch]
-0x63E91F: call    EffectItemList_GetStrongestItem
+0x63E91F: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x63E924: mov     eax, [eax+10h]
 0x63E927: cmp     eax, 2
 0x63E92A: jnz     short loc_63E959
@@ -2078,7 +2078,7 @@
 0x63E997: jz      short loc_63E9D1
 0x63E999: mov     ecx, edi
 0x63E99B: lea     ebx, [edi+68h]
-0x63E99E: call    Actor_GetCurrentAction
+0x63E99E: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63E9A3: cmp     eax, 0FFFFFFFFh
 0x63E9A6: jnz     short loc_63E9AC
 0x63E9A8: test    ebx, ebx
@@ -2109,7 +2109,7 @@
 0x63E9F9: fstp    dword ptr [esi+1B0h]
 0x63E9FF: mov     ebx, [esp+58h+var_40]
 0x63EA03: mov     ecx, ebx
-0x63EA05: call    sub_565DF0
+0x63EA05: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x63EA0A: test    al, al
 0x63EA0C: jz      loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63EA12: cmp     dword ptr [ebx+30h], 0
@@ -2119,7 +2119,7 @@
 0x63EA24: mov     ecx, edi
 0x63EA26: call    eax
 0x63EA28: mov     ecx, eax
-0x63EA2A: call    sub_472EA0
+0x63EA2A: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63EA2F: test    al, al
 0x63EA31: jz      loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63EA37: mov     edx, [esi]
@@ -2150,7 +2150,7 @@
 0x63EA77: cmp     [esi+1CCh], eax
 0x63EA7D: jl      short loc_63EAF7
 0x63EA7F: mov     ecx, edi
-0x63EA81: call    Actor_GetCurrentAction
+0x63EA81: call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.
 0x63EA86: cmp     eax, 0FFFFFFFFh
 0x63EA89: jnz     short loc_63EAF7
 0x63EA8B: mov     edx, [edi]
@@ -2158,7 +2158,7 @@
 0x63EA93: mov     ecx, edi
 0x63EA95: call    eax
 0x63EA97: mov     ecx, eax
-0x63EA99: call    sub_472EA0
+0x63EA99: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63EA9E: test    al, al
 0x63EAA0: jz      short loc_63EAF7
 0x63EAA2: mov     eax, [esi+24h]
@@ -2170,7 +2170,7 @@
 0x63EAAF: push    1
 0x63EAB1: push    eax
 0x63EAB2: mov     ecx, edi
-0x63EAB4: call    Actor_EquipItem
+0x63EAB4: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63EAB9: mov     edx, [esi]
 0x63EABB: mov     eax, [edx+188h]
 0x63EAC1: push    2
@@ -2256,7 +2256,7 @@
 0x63EBB9: jnp     loc_63D2C7
 0x63EBBF: push    30h ; '0'
 0x63EBC1: mov     ecx, edi
-0x63EBC3: call    sub_5E05F0
+0x63EBC3: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x63EBC8: mov     edx, [esi]
 0x63EBCA: mov     eax, [edx+49Ch]
 0x63EBD0: mov     ecx, esi
@@ -2278,7 +2278,7 @@
 0x63EC01: test    ebp, ebp
 0x63EC03: jz      short loc_63EC71
 0x63EC05: mov     ecx, ebp
-0x63EC07: call    sub_472EA0
+0x63EC07: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63EC0C: test    al, al
 0x63EC0E: jz      short loc_63EC71
 0x63EC10: mov     ecx, [esi+24h]
@@ -2292,7 +2292,7 @@
 0x63EC24: call    eax
 0x63EC26: mov     ebx, [esi]
 0x63EC28: push    0; Seed
-0x63EC2A: call    GetRandomLargeInteger?
+0x63EC2A: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x63EC2F: cdq
 0x63EC30: mov     ecx, 1388h
 0x63EC35: idiv    ecx
@@ -2311,7 +2311,7 @@
 0x63EC67: add     esp, 4
 0x63EC6A: add     dword ptr [esi+1CCh], 1
 0x63EC71: mov     ecx, ebp
-0x63EC73: call    sub_472EA0
+0x63EC73: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63EC78: test    al, al
 0x63EC7A: jz      short loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63EC7C: mov     eax, [esi+24h]
@@ -2323,16 +2323,16 @@
 0x63EC89: push    1
 0x63EC8B: push    eax
 0x63EC8C: mov     ecx, edi
-0x63EC8E: call    Actor_EquipItem
+0x63EC8E: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x63EC93: mov     ebx, [esp+58h+var_40]
 0x63EC97: mov     ecx, ebx
-0x63EC99: call    sub_565DF0
+0x63EC99: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x63EC9E: test    al, al
 0x63ECA0: jz      short loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63ECA2: cmp     dword ptr [ebx+30h], 0
 0x63ECA6: jnz     short loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63ECA8: mov     ecx, ebp
-0x63ECAA: call    sub_472EA0
+0x63ECAA: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x63ECAF: test    al, al
 0x63ECB1: jz      short loc_63ECC2; jumptable 0063D5C2 cases 15,16
 0x63ECB3: mov     eax, [esi]

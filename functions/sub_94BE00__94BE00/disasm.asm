@@ -115,7 +115,6 @@
 0x94BF7E: cmp     esi, 0FFFFFFFFh
 0x94BF81: jz      loc_94CBF1; jumptable 0094BE3A cases 4,8,11,17,19,23
 0x94BF87: jmp     short loc_94BF90
-0x94BF89: align 10h
 0x94BF90: mov     eax, [edi]
 0x94BF92: lea     ecx, [esp+370h+var_210]
 0x94BF99: push    ecx
@@ -194,12 +193,12 @@
 0x94C05C: push    eax
 0x94C05D: push    esi
 0x94C05E: lea     ecx, [esp+378h+var_320]
-0x94C062: call    sub_88FCC0
+0x94C062: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94C067: add     edi, 20h ; ' '
 0x94C06A: push    edi
 0x94C06B: push    esi
 0x94C06C: lea     ecx, [esp+378h+var_350]
-0x94C070: call    sub_88FCC0
+0x94C070: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94C075: movaps  xmm0, [esp+370h+var_320]
 0x94C07A: subps   xmm0, xmmword ptr [esp+370h+var_350]
 0x94C07F: mov     ecx, [esp+370h+var_354]
@@ -858,7 +857,6 @@
 0x94CA24: mov     eax, [esi]
 0x94CA26: jle     short loc_94CA43
 0x94CA28: jmp     short loc_94CA30
-0x94CA2A: align 10h
 0x94CA30: movaps  xmm0, xmmword ptr [eax]
 0x94CA33: movaps  xmmword ptr [ecx], xmm0
 0x94CA36: add     eax, 10h
@@ -907,7 +905,6 @@
 0x94CAC5: jmp     short loc_94CAD0
 0x94CAC7: mov     ecx, [esp+370h+var_350]
 0x94CACB: jmp     short loc_94CAD0
-0x94CACD: align 10h
 0x94CAD0: fld     dword ptr [eax+ecx+0Ch]
 0x94CAD4: add     eax, 10h
 0x94CAD7: dec     esi

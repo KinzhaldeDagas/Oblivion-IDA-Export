@@ -1,1 +1,1 @@
-PSecPkgInfoA
+typedef _SecPkgInfoA *PSecPkgInfoA;

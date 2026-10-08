@@ -14,7 +14,7 @@
 0x8094F4: mov     edi, [esp+20h+arg_0]
 0x8094F8: push    4
 0x8094FA: mov     ecx, edi
-0x8094FC: call    NiNode_GetNiPropertyByID
+0x8094FC: call    NiNode_GetNiPropertyByID;
 0x809501: mov     esi, eax
 0x809503: test    esi, esi
 0x809505: jz      short loc_80955B
@@ -59,14 +59,14 @@
 0x80956E: mov     [esp+20h+var_4], 0
 0x809576: jz      short loc_809583
 0x809578: mov     ecx, eax; this
-0x80957A: call    ??0BSShaderPPLightingProperty@@QAE@XZ; BSShaderPPLightingProperty::BSShaderPPLightingProperty(void)
+0x80957A: call    ??0BSShaderPPLightingProperty@@QAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty constructor initializes the reference-counted TextureEffectData slot at this+0xE0 (DWORD index 0x38) to null. TextureEffectProperty_SetData replaces that same offset; BSShaderPPLightingProperty destructor releases and clears it before chaining to BSShaderLightingProperty. Fallout's typed property layout calls the member spTexEffectData at the same +0xE0 offset.
 0x80957F: mov     esi, eax
 0x809581: jmp     short loc_809585
 0x809583: xor     esi, esi
 0x809585: push    esi; a2
 0x809586: mov     ecx, edi; this
 0x809588: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x809590: call    sub_405680
+0x809590: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x809595: or      dword ptr [esi+1Ch], 800h
 0x80959C: push    0
 0x80959E: lea     ecx, [esp+24h+var_10]
@@ -141,3 +141,15 @@
 0x809656: pop     ebx
 0x809657: add     esp, 10h
 0x80965A: retn    4
+0x9C6200: mov     eax, [ebp+4]
+0x9C6203: push    eax
+0x9C6204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6209: pop     ecx
+0x9C620A: retn
+0x9C620B: mov     edx, [esp+arg_4]
+0x9C620F: lea     eax, [edx-10h]
+0x9C6212: mov     ecx, [edx-14h]
+0x9C6215: xor     ecx, eax
+0x9C6217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C621C: mov     eax, offset stru_AEE7E8
+0x9C6221: jmp     ___CxxFrameHandler3

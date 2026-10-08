@@ -1,1 +1,1 @@
-NiD3DShaderProgram
+struct NiD3DShaderProgram;

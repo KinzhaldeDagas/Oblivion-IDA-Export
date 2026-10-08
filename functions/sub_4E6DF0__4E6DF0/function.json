@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E6DF0",
+      "0x4E6F27"
+    ]
+  ],
+  "chunks_sha256": "92739fc8876d5ef57af9bb72f6cf09deb1a1bcd5ff9ae3b6ebc009e103a91cdd",
+  "comment_regular": "Verified cross-cell endpoint lookup: compute cellX/cellY by arithmetic-shifting world X/Y by 12, search that WorldSpace's pathgrids, and also test the preceding X and/or Y cell when the point lies exactly on a 4096-unit boundary. Excludes the source PathGrid, returns the matching point, and outputs its owning PathGrid.",
+  "comment_repeatable": "Verified cross-cell endpoint lookup: compute cellX/cellY by arithmetic-shifting world X/Y by 12, search that WorldSpace's pathgrids, and also test the preceding X and/or Y cell when the point lies exactly on a 4096-unit boundary. Excludes the source PathGrid, returns the matching point, and outputs its owning PathGrid.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E6DF0",
+  "display_name": "TESPathGrid_FindPointInNeighborCell",
   "end_ea": "0x4E6F27",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E6DF0",
+  "name": "TESPathGrid_FindPointInNeighborCell",
   "segment": ".text",
   "sha256": "92739fc8876d5ef57af9bb72f6cf09deb1a1bcd5ff9ae3b6ebc009e103a91cdd",
   "size": 311,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E6DF0",
-  "type": "char *__cdecl(float *, TESWorldSpace *CurrentWorldspace, _DWORD *, _DWORD *)",
+  "total_chunk_size": 311,
+  "type": "TESPathGridPoint *__cdecl(const NiPoint3 *position, TESWorldSpace *worldspace, TESPathGrid **outOwningGrid, TESPathGrid *excludedGrid)",
   "xrefs_from_count": 119,
   "xrefs_to_count": 1
 }

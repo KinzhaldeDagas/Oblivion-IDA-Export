@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x5D4F4C",
-    "line": "push    eax; a1",
+    "line": "push    eax; formType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5D4F4D",
-    "line": "call    TESForm_CreateDynamic",
+    "line": "call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,19 +265,19 @@
   },
   {
     "ea": "0x5D4F6A",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5D4F70",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5D4F71",
-    "line": "call    TESDataHandler_AddForm",
+    "line": "call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.",
     "mnemonic": "call",
     "size": 5
   },
@@ -604,12 +604,6 @@
     "line": "jmp     short loc_5D5024",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5D501C",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 4
   },
   {
     "ea": "0x5D5020",
@@ -1093,19 +1087,19 @@
   },
   {
     "ea": "0x5D5104",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5D510A",
-    "line": "push    ebx",
+    "line": "push    ebx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5D510B",
-    "line": "call    TESDataHandler_AddForm",
+    "line": "call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,31 +1249,31 @@
   },
   {
     "ea": "0x5D5148",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5D514E",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5D5150",
-    "line": "push    ebp",
+    "line": "push    ebp; extraList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5D5151",
-    "line": "push    edi",
+    "line": "push    edi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5D5152",
-    "line": "call    TESObjectREFR_AddItem_Abbrev",
+    "line": "call    TESObjectREFR_AddItem_Abbrev; Short TESObjectREFR AddItem wrapper: emits the inventory event and delegates item, ExtraDataList, and count to ContainerExtraData_AddItem.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,7 +1369,7 @@
   },
   {
     "ea": "0x5D5176",
-    "line": "call    sub_5C1900",
+    "line": "call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,7 +1411,7 @@
   },
   {
     "ea": "0x5D518A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1642,5 +1636,107 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5660",
+    "line": "mov     eax, [ebp-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5663",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5664",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5669",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C566A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C566B",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C566E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C566F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5674",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5675",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C5676",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C567A",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C567D",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5680",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5682",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5687",
+    "line": "mov     eax, offset stru_AEDE24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C568C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

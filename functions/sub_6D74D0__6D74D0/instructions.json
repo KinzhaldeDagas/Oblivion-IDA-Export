@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D74D0",
-    "line": "push    ebp",
+    "line": "push    ebp; Order-sensitive equality: requires base equality, identical count, and every corresponding 0x08-byte key to have exactly equal float time and case-sensitive text.",
     "mnemonic": "push",
     "size": 1
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6D7516",
-    "line": "call    sub_6D73F0",
+    "line": "call    NiTextKey_IsDifferent; Returns different when float timestamps differ or case-sensitive strcmp of text differs; returns equal only when both match exactly.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-LPSTRRET
+typedef _STRRET_0 *LPSTRRET;

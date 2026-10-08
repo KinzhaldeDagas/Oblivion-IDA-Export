@@ -60,9 +60,9 @@
 0x862715: add     esi, 4
 0x862718: push    esi; lpAddend
 0x862719: call    dword ptr ds:0A28078h
-0x86271F: push    0
-0x862721: mov     ecx, ebx
-0x862723: call    sub_7715E0
+0x86271F: push    0; preset
+0x862721: mov     ecx, ebx; this
+0x862723: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x862728: pop     edi
 0x862729: pop     esi
 0x86272A: pop     ebx

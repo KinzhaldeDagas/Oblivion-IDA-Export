@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E5170",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified — for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4E5174",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4E5193",
-    "line": "mov     bl, [esp+0Ch+arg_4]",
+    "line": "mov     bl, [esp+0Ch+enabled]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4E51AD",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x4E51B4",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E51B5",
-    "line": "call    sub_67ED80",
+    "line": "call    PathGraphNode_SetLinkedPointsDisabled; Verified sets/clears the PathGrid linked-points-disabled flag (0x20). SetLinkedPointsEnabled stores the inverse of its enabled argument.",
     "mnemonic": "call",
     "size": 5
   },

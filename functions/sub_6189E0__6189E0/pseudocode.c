@@ -1,379 +1,404 @@
-void __userpurge sub_6189E0(int a1@<ecx>, int a2@<ebx>, int a3@<edi>, int a4)
+// Central ranged combat-option evaluator. Runs while combat mode +0x74 is 3, obtains target distance bounds, independently classifies Staff type 4 and Bow type 5, scores physical ranged attack versus magic, and transitions to attack, spell, or repositioning modes. The sole stack flag is caller-clean semantic padding/unused in this build.
+void __thiscall CombatController_EvaluateRangedAttackOptions(void *this, int unusedModeFlag)
 {
-  int v5; // eax
-  int v6; // eax
-  _WORD *v7; // eax
-  __int16 AnimGroupFromField8Value; // ax
-  _DWORD *v9; // eax
+  Actor *v2; // edi
+  int v4; // eax
+  TESObjectREFR *v5; // eax
+  ActorAnimData *v6; // eax
+  unsigned __int16 AnimGroupFromField8Value; // ax
+  ActorAnimData *v8; // eax
+  _DWORD **CurrentTarget; // eax
   _DWORD **v10; // eax
   _DWORD **v11; // eax
-  _DWORD **v12; // eax
   int CurrentAction; // eax
-  int v14; // eax
-  _DWORD *v15; // eax
-  int v16; // edi
-  void **v17; // eax
-  char v18; // dl
-  int v19; // ebp
+  int v13; // eax
+  _DWORD *v14; // eax
+  int EquippedWeaponForm; // edi
+  void **v16; // eax
+  char v17; // dl
+  int v18; // ebp
+  int v19; // eax
   int v20; // eax
   int v21; // eax
   int v22; // eax
   int v23; // eax
-  int v24; // eax
-  void *v25; // edi
-  int v26; // eax
-  int *v27; // eax
-  int *v28; // ecx
-  int v29; // eax
-  int *v30; // edi
-  int v31; // ebp
-  int *v32; // eax
+  void *v24; // edi
+  int *EffectiveCombatStyle; // eax
+  int *v26; // ecx
+  int v27; // eax
+  int *v28; // edi
+  int v29; // ebp
+  int *v30; // eax
+  double v31; // st7
+  char v32; // bl
   double v33; // st7
-  char v34; // bl
-  double v35; // st7
-  double v36; // st6
+  double v34; // st6
+  double v35; // st5
+  double v36; // rt1
   double v37; // st5
-  double v38; // rt1
-  double v39; // st5
-  int v40; // edi
-  double v41; // st7
-  double v42; // st5
-  int v43; // ebp
-  double v44; // st6
-  double v45; // st7
-  int v46; // edi
-  double v47; // st6
-  double v48; // st7
+  int v38; // edi
+  double v39; // st7
+  double v40; // st5
+  int v41; // ebp
+  double v42; // st6
+  double v43; // st7
+  int v44; // edi
+  double v45; // st6
+  int v46; // eax
+  double v47; // st7
+  double (__thiscall **v48)(int, int, _DWORD, _DWORD); // edi
   int v49; // eax
-  double v50; // st7
-  double (__thiscall **v51)(int, int, _DWORD, _DWORD); // edi
-  int v52; // eax
-  double v53; // st7
-  double v54; // st6
-  int v55; // eax
-  void *v56; // eax
-  double v57; // st7
-  void *v58; // ecx
-  int *v59; // edi
-  int *v60; // ebx
-  int v61; // [esp+0h] [ebp-58h]
-  int v62; // [esp+0h] [ebp-58h]
-  int v63; // [esp+4h] [ebp-54h]
+  int v50; // eax
+  void *v51; // eax
+  double v52; // st7
+  void *v53; // ecx
+  int *v54; // edi
+  int *v55; // ebx
+  int WeaponSkillLevel; // [esp+0h] [ebp-58h]
+  int v57; // [esp+0h] [ebp-58h]
+  int v58; // [esp+4h] [ebp-54h]
   int SchoolAV; // [esp+4h] [ebp-54h]
-  char v65; // [esp+8h] [ebp-50h]
-  float v66; // [esp+Ch] [ebp-4Ch]
-  float v67; // [esp+10h] [ebp-48h]
-  float v68; // [esp+14h] [ebp-44h]
-  char v69; // [esp+18h] [ebp-40h]
-  float v70; // [esp+18h] [ebp-40h]
-  int v71; // [esp+1Ch] [ebp-3Ch]
-  int v72; // [esp+24h] [ebp-34h]
-  __int16 v73; // [esp+2Eh] [ebp-2Ah]
-  char v74; // [esp+30h] [ebp-28h]
-  char v75; // [esp+31h] [ebp-27h]
-  char v76; // [esp+32h] [ebp-26h]
-  char v77; // [esp+33h] [ebp-25h]
-  double v78; // [esp+34h] [ebp-24h]
-  float v79; // [esp+34h] [ebp-24h]
-  float v80; // [esp+3Ch] [ebp-1Ch]
-  float v81; // [esp+3Ch] [ebp-1Ch]
-  float v82; // [esp+40h] [ebp-18h]
-  float v83; // [esp+40h] [ebp-18h]
-  float v84; // [esp+44h] [ebp-14h] BYREF
-  double v85; // [esp+48h] [ebp-10h] BYREF
-  double v86; // [esp+50h] [ebp-8h]
+  char v60; // [esp+8h] [ebp-50h]
+  float v61; // [esp+Ch] [ebp-4Ch]
+  float v62; // [esp+10h] [ebp-48h]
+  float surfaceDistance; // [esp+14h] [ebp-44h]
+  char maximumDistance; // [esp+18h] [ebp-40h]
+  float maximumDistancea; // [esp+18h] [ebp-40h]
+  int v66; // [esp+1Ch] [ebp-3Ch]
+  int v67; // [esp+24h] [ebp-34h]
+  __int16 v68; // [esp+2Eh] [ebp-2Ah]
+  char v69; // [esp+30h] [ebp-28h]
+  char v70; // [esp+31h] [ebp-27h]
+  char v71; // [esp+32h] [ebp-26h]
+  char v72; // [esp+33h] [ebp-25h]
+  double Charge; // [esp+34h] [ebp-24h]
+  float v74; // [esp+34h] [ebp-24h]
+  float targetKnockedDown; // [esp+3Ch] [ebp-1Ch]
+  float targetKnockedDowna; // [esp+3Ch] [ebp-1Ch]
+  float targetKnockedDown_4; // [esp+40h] [ebp-18h]
+  float targetKnockedDown_4a; // [esp+40h] [ebp-18h]
+  float outMaximumDistance; // [esp+44h] [ebp-14h] BYREF
+  double outOptimalDistance; // [esp+48h] [ebp-10h] BYREF
+  double targetStaggered; // [esp+50h] [ebp-8h]
 
-  if ( *(_DWORD *)(a1 + 0x74) == 3 )
+  if ( *((_DWORD *)this + 0x1D) == 3 )
   {
-    if ( sub_6135F0(a1) )
+    if ( CombatController_GetCurrentTarget((int)this) )
     {
-      v5 = *(_DWORD *)(a1 + 0x6C);
-      v72 = a3;
-      if ( v5 != 4 && v5 != 0xE && v5 != 0xC && v5 != 7
-        || (a3 = *(_DWORD *)(a1 + 0x3C), v6 = sub_6135F0(a1), sub_6131D0(a3, v6, 0)) )
+      v4 = *((_DWORD *)this + 0x1B); /*0x6189fd*/
+      v67 = (int)v2; /*0x618a03*/
+      if ( v4 != 4 && v4 != 0xE && v4 != 0xC && v4 != 7
+        || (v2 = *((Actor **)this + 0xF),
+            v5 = (TESObjectREFR *)CombatController_GetCurrentTarget((int)this),
+            Actor_IsFacingReferenceWithinCombatAngle(v2, v5, 0)) )
       {
-        *(_DWORD *)(a1 + 0x50) = 0xFF;
-        v80 = sub_615980(a1, a3);
-        *(float *)&v85 = 0.0;
-        v84 = 0.0;
-        sub_6142D0((_DWORD *)a1, COERCE_FLOAT(&v85), COERCE_FLOAT(&v84));
-        v7 = (_WORD *)(*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x3C) + 0x164))(*(_DWORD *)(a1 + 0x3C), 3);
-        AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v7, v72);
-        sub_51AC80(AnimGroupFromField8Value);
-        v9 = (_DWORD *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)(a1 + 0x3C) + 0x164))(*(_DWORD *)(a1 + 0x3C));
-        ActorAnimData_GetSomethingFromField8Value(v9, 3);
-        v10 = (_DWORD **)sub_6135F0(a1);
-        BYTE4(v85) = sub_5E5640(v10);
-        v11 = (_DWORD **)sub_6135F0(a1);
-        if ( Actor_GetCurrentAction(v11) == 7
-          || (v12 = (_DWORD **)sub_6135F0(a1),
-              CurrentAction = Actor_GetCurrentAction(v12),
-              LOBYTE(v84) = 0,
+        *((_DWORD *)this + 0x14) = 0xFF; /*0x618a35*/
+        targetKnockedDown = CombatController_GetCachedTargetSurfaceDistance((int)this, (char)v2); /*0x618a41*/
+        *(float *)&outOptimalDistance = 0.0; /*0x618a4c*/
+        outMaximumDistance = 0.0; /*0x618a54*/
+        CombatController_GetRangedDistanceBounds(this, (float *)&outOptimalDistance, &outMaximumDistance); /*0x618a5b*/
+        v6 = (ActorAnimData *)(*(int (__thiscall **)(_DWORD, int))(**((_DWORD **)this + 0xF) + 0x164))( /*0x618a6d*/
+                                *((_DWORD *)this + 0xF),
+                                3);
+        AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v6, v67); /*0x618a71*/
+        AnimGroup_UsesAttackOrCastNoteTemplate(AnimGroupFromField8Value); /*0x618a77*/
+        v8 = (ActorAnimData *)(*(int (__thiscall **)(_DWORD))(**((_DWORD **)this + 0xF) + 0x164))(*((_DWORD *)this + 0xF)); /*0x618a90*/
+        ActorAnimData_GetSlotActionState(v8, 3); /*0x618a94*/
+        CurrentTarget = (_DWORD **)CombatController_GetCurrentTarget((int)this); /*0x618aa3*/
+        BYTE4(outOptimalDistance) = Actor_IsCurrentActionInRange2To5(CurrentTarget); /*0x618ab1*/
+        v10 = (_DWORD **)CombatController_GetCurrentTarget((int)this); /*0x618ab5*/
+        if ( Actor_GetCurrentAction(v10) == 7 /*0x618adc*/
+          || (v11 = (_DWORD **)CombatController_GetCurrentTarget((int)this),
+              CurrentAction = Actor_GetCurrentAction(v11),
+              LOBYTE(outMaximumDistance) = 0,
               CurrentAction == 8) )
         {
-          LOBYTE(v84) = 1;
+          LOBYTE(outMaximumDistance) = 1; /*0x618ade*/
         }
-        v14 = sub_6135F0(a1);
-        v76 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v14 + 0x334))(v14, 1);
-        v15 = (_DWORD *)sub_6135F0(a1);
-        LOBYTE(v86) = Actor_IsBlocking(v15);
-        v16 = sub_612D60((_DWORD *)a1);
-        v73 = 0;
-        v74 = 0;
-        if ( v16 )
+        v13 = CombatController_GetCurrentTarget((int)this); /*0x618ae6*/
+        v71 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v13 + 0x334))(v13, 1); /*0x618afb*/
+        v14 = (_DWORD *)CombatController_GetCurrentTarget((int)this); /*0x618aff*/
+        LOBYTE(targetStaggered) = Actor_IsBlocking(v14); /*0x618b0d*/
+        EquippedWeaponForm = CombatController_GetEquippedWeaponForm(this); /*0x618b16*/
+        v68 = 0; /*0x618b1a*/
+        v69 = 0; /*0x618b24*/
+        if ( EquippedWeaponForm )
         {
-          v17 = (void **)(*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0xEC))(
-                           *(_DWORD *)(*(_DWORD *)(a1 + 0x3C) + 0x58),
+          v16 = (void **)(*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(*((_DWORD *)this + 0xF) + 0x58) + 0xEC))( /*0x618b3f*/
+                           *(_DWORD *)(*((_DWORD *)this + 0xF) + 0x58),
                            1);
-          v18 = *(_BYTE *)(v16 + 0x90);
-          if ( v18 == 4 && (v19 = *(_DWORD *)(v16 + 0x64)) != 0 )
+          v17 = *(_BYTE *)(EquippedWeaponForm + 0x90);// Read equipped TESObjectWEAP.type at +0x90. Type 4 enters Staff charge/magic handling; type 5 is Bow. The Starshooting AI bridge's local DL=5 substitution selects native Bow behavior without mutating the WEAP record or entering Staff logic. /*0x618b41*/
+          if ( v17 == 4 && (v18 = *(_DWORD *)(EquippedWeaponForm + 0x64)) != 0 )// Weapon type 4 (Staff) is handled first in this ranged-distance branch.
           {
-            v78 = sub_4849C0(v17);
-            if ( ((double (__thiscall *)(int, _DWORD))**(_DWORD **)(v19 + 0x24))(v19 + 0x24, 0) > v78
-              || sub_6135F0(a1)
-              && ((v20 = *(_DWORD *)(v16 + 0x64)) == 0 ? (v21 = 0) : (v21 = v20 + 0x18),
-                  v71 = v21,
-                  v22 = sub_6135F0(a1),
-                  (unsigned __int8)MagicTarget_HasMagicItem((void *)(v22 + 0x68), v71)) )
+            Charge = EquippedEntryData_GetCharge(v16); /*0x618b5d*/
+            if ( ((double (__thiscall *)(int, _DWORD))**(_DWORD **)(v18 + 0x24))(v18 + 0x24, 0) > Charge
+              || CombatController_GetCurrentTarget((int)this)
+              && ((v19 = *(_DWORD *)(EquippedWeaponForm + 0x64)) == 0 ? (v20 = 0) : (v20 = v19 + 0x18),
+                  v66 = v20,
+                  v21 = CombatController_GetCurrentTarget((int)this),
+                  (unsigned __int8)MagicTarget_HasMagicItem((void *)(v21 + 0x68), v66)) )
             {
-              LOBYTE(v73) = 1;
+              LOBYTE(v68) = 1; /*0x618ba6*/
             }
-            HIBYTE(v73) = 1;
+            HIBYTE(v68) = 1; /*0x618bab*/
           }
-          else if ( v18 != 5 && v18 != 4 )
+          else if ( v17 != 5 && v17 != 4 )      // Accept native WEAP type 5 (Bow); the following comparison also accepts type 4 (Staff). Oblivion exposes no native crossbow/throwing type here, so companion classification must be an external bridge after observing this type-5 behavior. /*0x618bba*/
           {
-            v74 = 1;
+            v69 = 1; /*0x618bbc*/
           }
         }
-        if ( sub_613440((void **)a1, v80, v84, 0) )
+        if ( CombatController_IsTargetWithinRangedDistance(this, targetKnockedDown, outMaximumDistance, 0) ) /*0x618bd7*/
         {
-          v23 = *(_DWORD *)(a1 + 0x70);
-          v79 = 0.0;
-          if ( v23 == 2 || v23 == 4 )
+          v22 = *((_DWORD *)this + 0x1C); /*0x618be6*/
+          v74 = 0.0; /*0x618bec*/
+          if ( v22 == 2 || v22 == 4 ) /*0x618bfa*/
           {
-            if ( v16 )
+            if ( EquippedWeaponForm ) /*0x618bfe*/
             {
-              if ( !v74 && !(_BYTE)v73 )
+              if ( !v69 && !(_BYTE)v68 ) /*0x618c0c*/
               {
-                v24 = sub_6135F0(a1);
-                v25 = *(void **)(a1 + 0x3C);
-                v69 = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v24 + 0x19C))(v24, LODWORD(v86));
-                v66 = *((float *)&v85 + 1);
-                v63 = (*(int (__thiscall **)(void *))(*(_DWORD *)v25 + 0x284))(v25);
-                sub_613780((void **)a1);
-                v61 = v26;
-                v27 = sub_5E0F50(v25);
-                v79 = sub_546800(v27, v61, v63, 7, v66, 0.0, v82, v69);
+                v23 = CombatController_GetCurrentTarget((int)this); /*0x618c10*/
+                v24 = *((void **)this + 0xF); /*0x618c1b*/
+                maximumDistance = (*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v23 + 0x19C))( /*0x618c2f*/
+                                    v23,
+                                    LODWORD(targetStaggered));
+                v61 = *((float *)&outOptimalDistance + 1); /*0x618c39*/
+                v58 = (*(int (__thiscall **)(void *))(*(_DWORD *)v24 + 0x284))(v24); /*0x618c40*/
+                WeaponSkillLevel = CombatController_GetWeaponSkillLevel(this); /*0x618c48*/
+                EffectiveCombatStyle = Actor_GetEffectiveCombatStyle(v24); /*0x618c4b*/
+                v74 = CombatStyle_CalculateAttackScore( /*0x618c56*/
+                        EffectiveCombatStyle,
+                        WeaponSkillLevel,
+                        v58,
+                        7,
+                        v61,
+                        0.0,
+                        targetKnockedDown_4,
+                        maximumDistance);
               }
             }
           }
-          v28 = *(int **)(a1 + 0x80);
-          v81 = 0.0;
-          if ( v28 )
+          v26 = *((int **)this + 0x20); /*0x618c5f*/
+          targetKnockedDowna = 0.0; /*0x618c67*/
+          if ( v26 ) /*0x618c6b*/
           {
-            if ( *(float *)(a1 + 0x108) < *(float *)(a1 + 0x44) - *(float *)(a1 + 0x104) )
+            if ( *((float *)this + 0x42) < *((float *)this + 0x11) - *((float *)this + 0x41) ) /*0x618c87*/
             {
-              if ( sub_613BB0((_DWORD *)a1, v28, 0, 0) )
+              if ( CombatController_CanUseSpellAgainstCurrentTarget(this, v26, 0, 0) ) /*0x618c90*/
               {
-                v29 = sub_6135F0(a1);
-                v30 = *(int **)(a1 + 0x3C);
-                v31 = *v30;
-                (*(void (__thiscall **)(int, _DWORD, int))(*(_DWORD *)v29 + 0x19C))(v29, 0, a2);
-                v67 = *(float *)&v86;
-                v65 = (*(int (__thiscall **)(int *))(*v30 + 0x284))(v30);
-                SchoolAV = EffectItemList_GetSchoolAV();
-                v62 = (*(int (__thiscall **)(int *))(v31 + 0x284))(v30);
-                v32 = sub_5E0F50(v30);
-                v81 = sub_546800(v32, v62, SchoolAV, v65, COERCE_FLOAT(7), v67, 0.0, SLOBYTE(v82));
+                v27 = CombatController_GetCurrentTarget((int)this); /*0x618c9b*/
+                v28 = *((int **)this + 0xF); /*0x618ca2*/
+                v29 = *v28; /*0x618ca5*/
+                (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v27 + 0x19C))(v27, 0); /*0x618cb1*/
+                v62 = *(float *)&targetStaggered; /*0x618cc3*/
+                v60 = (*(int (__thiscall **)(int *))(*v28 + 0x284))(v28); /*0x618cd2*/
+                SchoolAV = EffectItemList_GetSchoolAV(); /*0x618ce1*/
+                v57 = (*(int (__thiscall **)(int *))(v29 + 0x284))(v28); /*0x618ce6*/
+                v30 = Actor_GetEffectiveCombatStyle(v28); /*0x618ce9*/
+                targetKnockedDowna = CombatStyle_CalculateAttackScore( /*0x618cf4*/
+                                       v30,
+                                       v57,
+                                       SchoolAV,
+                                       v60,
+                                       COERCE_FLOAT(7),
+                                       v62,
+                                       0.0,
+                                       SLOBYTE(targetKnockedDown_4));
               }
             }
           }
-          if ( v76
-            || (PlayerCharacter *)sub_6135F0(a1) == TESDataHandler_g_PlayerRef
-            || (v79 = v79 + fCostant_100, !*(_DWORD *)(a1 + 0x80)) )
+          if ( v71 /*0x618d11*/
+            || (PlayerCharacter *)CombatController_GetCurrentTarget((int)this) == reference
+            || (v74 = v74 + fCostant_100, !*((_DWORD *)this + 0x20)) )
           {
-            v33 = 0.0;
+            v31 = 0.0; /*0x618d47*/
           }
           else
           {
-            v33 = 0.0;
-            if ( v81 > 0.0 )
-              v81 = fCostant_100 + v81;
+            v31 = 0.0; /*0x618d3d*/
+            if ( targetKnockedDowna > 0.0 ) /*0x618d39*/
+              targetKnockedDowna = fCostant_100 + targetKnockedDowna; /*0x618d3f*/
           }
-          if ( v33 < v79 || v33 < v81 )
-            v34 = *(_BYTE *)(a1 + 0x158);
+          if ( v31 < v74 || v31 < targetKnockedDowna ) /*0x618d63*/
+            v32 = *((_BYTE *)this + 0x158); /*0x618d6b*/
           else
-            v34 = 0;
-          if ( (*(unsigned __int8 (__thiscall **)(_DWORD))(**(_DWORD **)(*(_DWORD *)(a1 + 0x3C) + 0x58) + 0x2DC))(*(_DWORD *)(*(_DWORD *)(a1 + 0x3C) + 0x58))
-            && v34 )
+            v32 = 0; /*0x618d65*/
+          if ( (*(unsigned __int8 (__thiscall **)(_DWORD))(**(_DWORD **)(*((_DWORD *)this + 0xF) + 0x58) + 0x2DC))(*(_DWORD *)(*((_DWORD *)this + 0xF) + 0x58)) /*0x618d87*/
+            && v32 )
           {
-            v35 = 0.0;
+            v33 = 0.0; /*0x618d95*/
           }
           else
           {
-            v35 = 0.0;
-            v79 = 0.0;
-            v81 = 0.0;
+            v33 = 0.0; /*0x618d89*/
+            v74 = 0.0; /*0x618d8b*/
+            targetKnockedDowna = 0.0; /*0x618d8f*/
           }
-          v36 = v79;
-          v37 = v81;
-          if ( HIBYTE(v73) )
+          v34 = v74; /*0x618d9c*/
+          v35 = targetKnockedDowna; /*0x618da0*/
+          if ( HIBYTE(v68) ) /*0x618da4*/
           {
-            if ( *(float *)(a1 + 0x1B4) >= *(float *)(a1 + 0x44) - *(float *)(a1 + 0x1B0) )
+            if ( *((float *)this + 0x6D) >= *((float *)this + 0x11) - *((float *)this + 0x6C) ) /*0x618dbc*/
             {
-              v79 = v35;
-              v36 = v79;
-              v37 = v81;
+              v74 = v33; /*0x618dc2*/
+              v34 = v74; /*0x618dca*/
+              v35 = targetKnockedDowna; /*0x618dcc*/
             }
           }
-          if ( v37 > v35 )
+          if ( v35 > v33 ) /*0x618dd5*/
           {
-            v38 = v37;
-            v39 = v36;
-            v36 = v38;
-            if ( v39 > v35 )
+            v36 = v35; /*0x618ddb*/
+            v37 = v34; /*0x618ddb*/
+            v34 = v36; /*0x618ddb*/
+            if ( v37 > v33 ) /*0x618de4*/
             {
-              *(float *)&v86 = v36 - v39;
-              *(float *)&v86 = fabs(*(float *)&v86);
-              LODWORD(v86) = Double_To_SInt32(v35);
-              v40 = Double_To_SInt32(v35);
-              if ( v40 )
+              *(float *)&targetStaggered = v34 - v37; /*0x618dee*/
+              *(float *)&targetStaggered = fabs(*(float *)&targetStaggered); /*0x618df8*/
+              LODWORD(targetStaggered) = Double_To_SInt32(v33); /*0x618e11*/
+              v38 = Double_To_SInt32(v33); /*0x618e1e*/
+              if ( v38 ) /*0x618e22*/
               {
-                if ( v36 <= v39 )
+                if ( v34 <= v37 ) /*0x618e35*/
                 {
-                  LODWORD(v86) = GetRandomLargeInteger_(0) % v40;
-                  v81 = (double)SLODWORD(v86) + v81;
-                  v85 = v79;
-                  LODWORD(v86) = GetRandomLargeInteger_(0) % v40;
-                  v41 = v85 - (double)SLODWORD(v86);
+                  LODWORD(targetStaggered) = Game_RandomLargeInteger(0) % v38; /*0x618e7a*/
+                  targetKnockedDowna = (double)SLODWORD(targetStaggered) + targetKnockedDowna; /*0x618e86*/
+                  outOptimalDistance = v74; /*0x618e8e*/
+                  LODWORD(targetStaggered) = Game_RandomLargeInteger(0) % v38; /*0x618e9d*/
+                  v39 = outOptimalDistance - (double)SLODWORD(targetStaggered); /*0x618ea5*/
                 }
                 else
                 {
-                  v85 = v36;
-                  LODWORD(v86) = GetRandomLargeInteger_(0) % v40;
-                  v81 = v85 - (double)SLODWORD(v86);
-                  LODWORD(v86) = GetRandomLargeInteger_(0) % v40;
-                  v41 = (double)SLODWORD(v86) + v79;
+                  outOptimalDistance = v34; /*0x618e37*/
+                  LODWORD(targetStaggered) = Game_RandomLargeInteger(0) % v38; /*0x618e45*/
+                  targetKnockedDowna = outOptimalDistance - (double)SLODWORD(targetStaggered); /*0x618e51*/
+                  LODWORD(targetStaggered) = Game_RandomLargeInteger(0) % v38; /*0x618e60*/
+                  v39 = (double)SLODWORD(targetStaggered) + v74; /*0x618e68*/
                 }
-                v79 = v41;
-                v36 = v81;
-                v39 = v79;
-                v35 = 0.0;
+                v74 = v39; /*0x618ea9*/
+                v34 = targetKnockedDowna; /*0x618eb1*/
+                v37 = v74; /*0x618eb7*/
+                v33 = 0.0; /*0x618eb7*/
               }
-              if ( v39 >= v36 )
-                v36 = v39;
+              if ( v37 >= v34 ) /*0x618ec0*/
+                v34 = v37; /*0x618ec2*/
             }
           }
-          v83 = v36;
-          v42 = fCostant_100 - v83;
-          if ( fCombatMaxHoldScore >= v42 )
-            v42 = fCombatMaxHoldScore;
-          v43 = 1;
-          v84 = v42;
-          if ( *(_DWORD *)(a1 + 0x6C) == 1 )
-            v84 = v35;
-          if ( v75 )
+          targetKnockedDown_4a = v34; /*0x618ec8*/
+          v40 = fCostant_100 - targetKnockedDown_4a; /*0x618ed2*/
+          if ( g_GameSettingStringPointers_B36CD8[0x114] >= v40 ) /*0x618ee5*/
+            v40 = g_GameSettingStringPointers_B36CD8[0x114]; /*0x618eeb*/
+          v41 = 1; /*0x618eed*/
+          outMaximumDistance = v40; /*0x618ef2*/
+          if ( *((_DWORD *)this + 0x1B) == 1 ) /*0x618ef9*/
+            outMaximumDistance = v33; /*0x618efd*/
+          if ( v70 ) /*0x618f08*/
           {
-            if ( !v77 )
-              v84 = v35;
+            if ( !v72 ) /*0x618f0f*/
+              outMaximumDistance = v33; /*0x618f13*/
           }
-          if ( *(_DWORD *)(a1 + 0x78) == 2 )
+          if ( *((_DWORD *)this + 0x1E) == 2 ) /*0x618f21*/
           {
-            v44 = v35;
-            v45 = v83;
-            v84 = v44;
+            v42 = v33; /*0x618f23*/
+            v43 = targetKnockedDown_4a; /*0x618f23*/
+            outMaximumDistance = v42; /*0x618f25*/
           }
           else
           {
-            v45 = v83;
+            v43 = targetKnockedDown_4a; /*0x618f2b*/
           }
-          v46 = Double_To_SInt32(v45 + v84);
-          if ( v46 <= 0 )
-            v46 = 0x64;
-          *(float *)&v86 = (float)(GetRandomLargeInteger_(0) % v46);
-          v47 = v83;
-          if ( v83 <= (double)*(float *)&v86 || (v42 = v79, v81 > (double)v79) )
+          v44 = Double_To_SInt32(v43 + outMaximumDistance); /*0x618f38*/
+          if ( v44 <= 0 ) /*0x618f3a*/
+            v44 = 0x64; /*0x618f3c*/
+          *(float *)&targetStaggered = (float)(Game_RandomLargeInteger(0) % v44); /*0x618f56*/
+          v45 = targetKnockedDown_4a; /*0x618f5e*/
+          if ( targetKnockedDown_4a <= (double)*(float *)&targetStaggered /*0x618f7e*/
+            || (v40 = v74, targetKnockedDowna > (double)v74) )
           {
-            if ( v47 <= *(float *)&v86 || (v53 = v81, v54 = v79, v79 >= (double)v81) || v75 )
+            if ( v45 <= *(float *)&targetStaggered || v74 >= (double)targetKnockedDowna || v70 ) /*0x619098*/
             {
-              if ( *(_DWORD *)(a1 + 0x78) != 2 )
+              if ( *((_DWORD *)this + 0x1E) != 2 ) /*0x619137*/
               {
-                v58 = *(void **)(a1 + 0x3C);
-                *(_DWORD *)(a1 + 0x78) = *(_DWORD *)(a1 + 0x74);
-                *(_DWORD *)(a1 + 0x74) = 2;
-                v59 = sub_5E0F50(v58);
-                v60 = sub_5E0F50(*(void **)(a1 + 0x3C));
-                v70 = ((double (__thiscall *)(int *))*(_DWORD *)(*v59 + 0x140))(v59);
-                v68 = ((double (__thiscall *)(int *))*(_DWORD *)(*v60 + 0x13C))(v60);
-                *(float *)&v86 = sub_546B20(v68, v70);
-                *(float *)(a1 + 0xE0) = *(float *)(a1 + 0x44);
-                *(float *)(a1 + 0xE4) = *(float *)&v86;
-                *(float *)(a1 + 0xE8) = flt_A30634;
+                v53 = *((void **)this + 0xF); /*0x61913c*/
+                *((_DWORD *)this + 0x1E) = *((_DWORD *)this + 0x1D); /*0x61913f*/
+                *((_DWORD *)this + 0x1D) = 2; /*0x619142*/
+                v54 = Actor_GetEffectiveCombatStyle(v53); /*0x61914d*/
+                v55 = Actor_GetEffectiveCombatStyle(*((void **)this + 0xF)); /*0x619154*/
+                maximumDistancea = ((double (__thiscall *)(int *))*(_DWORD *)(*v54 + 0x140))(v54); /*0x61916d*/
+                surfaceDistance = ((double (__thiscall *)(int *))*(_DWORD *)(*v55 + 0x13C))(v55); /*0x619173*/
+                *(float *)&targetStaggered = RandomFloatBetween(surfaceDistance, maximumDistancea); /*0x61917b*/
+                *((float *)this + 0x38) = *((float *)this + 0x11); /*0x619185*/
+                *((float *)this + 0x39) = *(float *)&targetStaggered; /*0x61918f*/
+                *((float *)this + 0x3A) = kTerrainLODQuadRayDirectionZ; /*0x61919b*/
               }
             }
             else
             {
-              if ( *(_BYTE *)(a1 + 0x49) )
+              if ( *((_BYTE *)this + 0x49) ) /*0x61909e*/
               {
-                sub_5F4AE0(*(Actor **)(a1 + 0x3C), v42, v54, v53, 0);
-                if ( *(_DWORD *)(a1 + 0x74) == 1 )
+                Actor_UpdateBlockingState(*((Actor **)this + 0xF), 0); /*0x6190a9*/
+                if ( *((_DWORD *)this + 0x1D) == 1 ) /*0x6190b1*/
                 {
-                  *(_DWORD *)(a1 + 0x78) = 1;
-                  *(_DWORD *)(a1 + 0x74) = 3;
+                  *((_DWORD *)this + 0x1E) = 1; /*0x6190b3*/
+                  *((_DWORD *)this + 0x1D) = 3; /*0x6190b6*/
                 }
               }
-              v55 = sub_6135F0(a1);
-              if ( v55 )
-                v56 = (void *)(v55 + 0x68);
+              v50 = CombatController_GetCurrentTarget((int)this); /*0x6190bf*/
+              if ( v50 ) /*0x6190c6*/
+                v51 = (void *)(v50 + 0x68); /*0x6190c8*/
               else
-                v56 = 0;
-              if ( sub_617340(a1, v42, v54, v53, *(int **)(a1 + 0x80), v56) )
+                v51 = 0; /*0x6190cd*/
+              if ( CombatController_TryUseMagicItem( /*0x6190d9*/
+                     (int)this,
+                     v40,
+                     v74,
+                     targetKnockedDowna,
+                     *((int **)this + 0x20),
+                     v51) )
               {
-                v57 = *(float *)(a1 + 0x44);
-                *(_DWORD *)(a1 + 0x78) = *(_DWORD *)(a1 + 0x74);
-                *(float *)&v86 = v57;
-                *(_DWORD *)(a1 + 0x74) = 0;
-                *(float *)&v85 = *(float *)GameSetting_GetSafeFloatPointer((int *)&unk_B372E8);
-                *(float *)(a1 + 0x104) = *(float *)&v86;
-                *(float *)(a1 + 0x108) = *(float *)&v85;
-                *(float *)(a1 + 0x10C) = flt_A30634;
+                v52 = *((float *)this + 0x11); /*0x6190e9*/
+                *((_DWORD *)this + 0x1E) = *((_DWORD *)this + 0x1D); /*0x6190ec*/
+                *(float *)&targetStaggered = v52; /*0x6190ef*/
+                *((_DWORD *)this + 0x1D) = 0; /*0x6190f8*/
+                *(float *)&outOptimalDistance = *(float *)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0x184]); /*0x619106*/
+                *((float *)this + 0x41) = *(float *)&targetStaggered; /*0x619110*/
+                *((float *)this + 0x42) = *(float *)&outOptimalDistance; /*0x61911b*/
+                *((float *)this + 0x43) = kTerrainLODQuadRayDirectionZ; /*0x619127*/
               }
             }
           }
           else
           {
-            v48 = v83;
-            if ( *(_BYTE *)(a1 + 0x49) )
+            if ( *((_BYTE *)this + 0x49) ) /*0x618f84*/
             {
-              sub_5F4AE0(*(Actor **)(a1 + 0x3C), v42, v47, v48, 0);
-              if ( *(_DWORD *)(a1 + 0x74) == 1 )
+              Actor_UpdateBlockingState(*((Actor **)this + 0xF), 0); /*0x618f93*/
+              if ( *((_DWORD *)this + 0x1D) == 1 ) /*0x618f9b*/
               {
-                *(_DWORD *)(a1 + 0x78) = 1;
-                *(_DWORD *)(a1 + 0x74) = 3;
+                *((_DWORD *)this + 0x1E) = 1; /*0x618f9d*/
+                *((_DWORD *)this + 0x1D) = 3; /*0x618fa0*/
               }
             }
-            v49 = sub_6135F0(a1);
-            if ( (*(int (__thiscall **)(int))(*(_DWORD *)v49 + 0x154))(v49) )
+            v46 = CombatController_GetCurrentTarget((int)this); /*0x618fa9*/
+            if ( (*(int (__thiscall **)(int))(*(_DWORD *)v46 + 0x154))(v46) ) /*0x618fb8*/
             {
-              sub_616CA0(a1, 1, v42, v47, v48);
-              LODWORD(v86) = GetRandomLargeInteger_(0);
-              v86 = (double)SLODWORD(v86) / dbl_A3D5A8;
-              v50 = *(float *)GameSetting_GetSafeFloatPointer((int *)&fCombatSpeakAttackChance);
-              if ( v50 >= v86 )
+              CombatController_ApplySelectedPoisonToWeapon((int)this, 1, v40, v45, targetKnockedDown_4a); /*0x618fc4*/
+              LODWORD(targetStaggered) = Game_RandomLargeInteger(0); /*0x618fd0*/
+              targetStaggered = (double)SLODWORD(targetStaggered) / dbl_A3D5A8; /*0x618fe6*/
+              v47 = *(float *)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0x98]); /*0x618fef*/
+              if ( v47 >= targetStaggered ) /*0x618ffa*/
               {
-                v43 = *(_DWORD *)(a1 + 0x3C);
-                v51 = (double (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v43 + 0x308);
-                v52 = sub_6135F0(a1);
-                v50 = (*v51)(v43, v52, 0, 0);
+                v41 = *((_DWORD *)this + 0xF); /*0x618ffc*/
+                v48 = (double (__thiscall **)(int, int, _DWORD, _DWORD))(*(_DWORD *)v41 + 0x308); /*0x619008*/
+                v49 = CombatController_GetCurrentTarget((int)this); /*0x61900e*/
+                v47 = (*v48)(v41, v49, 0, 0); /*0x619018*/
               }
-              sub_612BD0(a1, 2, v43, v47, v50, 0x13, 0);
-              if ( HIBYTE(v73) )
+              CombatController_TryStartAttackAction((int)this, 2, v41, v45, v47, 0x13, 0); /*0x619020*/
+              if ( HIBYTE(v68) ) /*0x61902a*/
               {
-                *(float *)&v86 = *(float *)(a1 + 0x44);
-                *(float *)&v85 = *(float *)GameSetting_GetSafeFloatPointer((int *)&unk_B36F78);
-                *(float *)(a1 + 0x1B0) = *(float *)&v86;
-                *(float *)(a1 + 0x1B4) = *(float *)&v85;
-                *(float *)(a1 + 0x1B8) = flt_A30634;
+                *(float *)&targetStaggered = *((float *)this + 0x11); /*0x619038*/
+                *(float *)&outOptimalDistance = *(float *)GameSetting_GetSafeFloatPointer((int *)&g_GameSettingStringPointers_B36CD8[0xA8]); /*0x619044*/
+                *((float *)this + 0x6C) = *(float *)&targetStaggered; /*0x61904e*/
+                *((float *)this + 0x6D) = *(float *)&outOptimalDistance; /*0x619058*/
+                *((float *)this + 0x6E) = kTerrainLODQuadRayDirectionZ; /*0x619064*/
               }
             }
           }

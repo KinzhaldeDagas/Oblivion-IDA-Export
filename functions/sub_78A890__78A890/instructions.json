@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78A890",
-    "line": "push    ebp",
+    "line": "push    ebp; SpeedTreeOBSE 2026-05-31 leaf/frond level pass: compact texture summary exporter returns frond count at summary[3] and frond filename pointer array at summary[4]; reference layer caches these paths by array index/selector before sidecar map-bank candidates.",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x78A8DA",
-    "line": "mov     ebx, [ebp+arg_0]",
+    "line": "mov     ebx, [ebp+texturesOut]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x78A930",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78A932",
-    "line": "call    sub_7876A0",
+    "line": "call    OB_stVector_SIdvLeafTexture_Size_010201A0; Oblivion checked-vector size helper for 0x54-byte SIdvLeafTexture records: returns (end-begin)/0x54 or zero for null storage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x78A9C5",
-    "line": "mov     [ebx+0Ch], eax",
+    "line": "mov     [ebx+0Ch], eax; SpeedTreeOBSE 2026-05-31 texture-index pass: GetTextures summary[3] is compact frond texture count; each frond filename pointer at summary[4][index] is cached with textureIndex=index/selector.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x78AA3C",
-    "line": "mov     [ecx+edi*4], eax",
+    "line": "mov     [ecx+edi*4], eax; SpeedTreeOBSE 2026-05-31 texture-index pass: GetTextures writes compact frond filename pointer to summary[4][j]; plugin treats j as selector textureIndex before map-bank collection-index fallback.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -979,13 +979,13 @@
   },
   {
     "ea": "0x78AA67",
-    "line": "lea     esi, [ebp+var_34]",
+    "line": "lea     esi, [ebp+result]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78AA6A",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,13 +1033,13 @@
   },
   {
     "ea": "0x78AA84",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AA85",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x78AA8D",
-    "line": "lea     ecx, [ebp+var_34]",
+    "line": "lea     ecx, [ebp+result]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78AA90",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,13 +1141,13 @@
   },
   {
     "ea": "0x78AAB9",
-    "line": "lea     esi, [ebp+var_50]",
+    "line": "lea     esi, [ebp+var_50]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78AABC",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,13 +1195,13 @@
   },
   {
     "ea": "0x78AAD6",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78AAD7",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,13 +1213,13 @@
   },
   {
     "ea": "0x78AADF",
-    "line": "lea     ecx, [ebp+var_50]",
+    "line": "lea     ecx, [ebp+var_50]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78AAE2",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,13 +1357,13 @@
   },
   {
     "ea": "0x78AB22",
-    "line": "mov     [ebx+18h], eax",
+    "line": "mov     [ebx+18h], eax;",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78AB25",
-    "line": "mov     eax, [edi+4Ch]",
+    "line": "mov     eax, [edi+4Ch]; GetTextures reads CSpeedTreeRT+0x4C embedded texcoord object to export the legacy composite filename.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x78AB3A",
-    "line": "mov     [ebx+14h], eax",
+    "line": "mov     [ebx+14h], eax; Writes embedded composite filename to texture summary[5]; BSTreeModel legacy texture setup can bind this same composite surface.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1468,5 +1468,71 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB480",
+    "line": "lea     ecx, [ebp+result]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB483",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB488",
+    "line": "lea     ecx, [ebp+var_50]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB48B",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB490",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB494",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB497",
+    "line": "mov     ecx, [edx-54h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB49A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB49C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4A1",
+    "line": "mov     eax, offset stru_AF3BCC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB4A6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

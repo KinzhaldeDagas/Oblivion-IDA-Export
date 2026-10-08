@@ -1,18 +1,31 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x717A40",
+      "0x7181F6"
+    ]
+  ],
+  "chunks_sha256": "9946da30a07461dc78d064907de1acd8d4a9a3eb45671f003083d7c43a992750",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Builds six NiPlane records from NiFrustum and NiTransform. Observed order: 0 near, 1 far, 2 left, 3 right, 4 top, 5 bottom. Camera rotation column 0 is forward, column 2 is horizontal side, column 1 vertical. Handles orthographic and perspective branches. ActivePlanes is set separately by 0x70E040.\n\nCulling decode: camera transform column 0 builds near/far, column 1 builds top/bottom, column 2 builds left/right planes; use column 2 XY as view-horizontal cell axis.\nGPU culling parity: retains raw camera axes; does not normalize final planes. Near/far offset products and points are stored as float; side slope square, sqrt and reciprocal also have explicit float stores. Plane constants remain world-space dot(normal,point). NiTransform scale is not used.",
+  "comment_repeatable": "MoonSugarEffect decode: frustum-plane builder consumes NiFrustum plus NiTransform. Camera sway before NiCullingProcess::Process changes these planes for that traversal.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_717A40",
+  "display_name": "NiFrustumPlanes_SetFromFrustumAndTransform",
   "end_ea": "0x7181F6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_717A40",
+  "name": "NiFrustumPlanes_SetFromFrustumAndTransform",
   "segment": ".text",
   "sha256": "9946da30a07461dc78d064907de1acd8d4a9a3eb45671f003083d7c43a992750",
   "size": 1974,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x717A40",
+  "total_chunk_size": 1974,
   "type": "int __thiscall(NiFrustumPlanes *this, NiFrustum *a2, NiTransform *a3)",
   "xrefs_from_count": 592,
   "xrefs_to_count": 3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CB070",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Verified Oblivion behavior: scans the supplied cell/worldspace, filters deleted (0x20), disabled (0x800), and 0x2000 references, requires a door whose randomTeleport list contains destinationSpace, records an existing ExtraTeleport reference when eligible, and randomly chooses a matching door without ExtraTeleport. 0x2000 meaning and the ultimate high-level caller purpose remain Unknown. Fallout divergence (Verified on each binary independently): Fallout LinkRandomTeleportDoors creates paired DoorTeleportData/ExtraTeleport state; Fallout GetNodeConnections enumerates cell/worldspace door lists during search. Oblivion uses this base-form space list plus a runtime destination-door scan; do not infer function equivalence from naming.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4CB087",
-    "line": "mov     eax, [esp+1Ch+arg_4]",
+    "line": "mov     eax, [esp+1Ch+space]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4CB093",
-    "line": "cmp     [esp+1Ch+arg_8], edi",
+    "line": "cmp     [esp+1Ch+existingTeleportDoorOut], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4CB121",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x4CB1AF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CB1B1",
-    "line": "call    sub_4B78E0",
+    "line": "call    TESObjectDOOR_HasRandomTeleportSpaces; Verified mechanics: returns true iff either pointer in the 8-byte TESObjectDOOR.randomTeleport BSSimpleList head is nonzero. Probable domain meaning: the door has at least one random-teleport destination space, supported by the membership and destination-selection callers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,25 +619,25 @@
   },
   {
     "ea": "0x4CB1BA",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+space]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4CB1BE",
-    "line": "push    eax",
+    "line": "push    eax; space",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CB1BF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CB1C1",
-    "line": "call    sub_4B80A0",
+    "line": "call    TESObjectDOOR_ContainsRandomTeleportSpace; Verified mechanics: rejects null/unsupported candidate spaces, then returns true only when the TESForm* is present in TESObjectDOOR.randomTeleport. Probable domain meaning: this list records spaces in which the door can be selected as a random teleport destination; ExtraRandomTeleportMarker.teleportRef is a separate per-reference marker pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4CB1CC",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x4CB1E6",
-    "line": "mov     ecx, [esp+24h+arg_8]",
+    "line": "mov     ecx, [esp+24h+existingTeleportDoorOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x4CB20F",
-    "line": "mov     edx, [esp+24h+arg_8]",
+    "line": "mov     edx, [esp+24h+existingTeleportDoorOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x4CB229",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x4CB24B",
-    "line": "call    Rand3",
+    "line": "call    Game_RandomIntBelow; Engine RNG upper-bound helper: returns max*rand()/0x7FFF after lazy time seed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x4CB27C",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x4CB295",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },

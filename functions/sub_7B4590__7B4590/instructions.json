@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7B4590",
-    "line": "mov     eax, ds:0B42F48h",
+    "line": "mov     eax, ds:0B42F48h; [Verified] SetDecalPassBatchSizeForShaderPackageVersion writes 6 for package versions 3/4, 8 for 5–7, and 2 otherwise. The value is used as the decal-data batch decrement in both BSSM_DECAL/BSSM_DECAL_A and BSSM_3XDECAL/BSSM_3XDECAL_A loops.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7B45A8",
-    "line": "mov     ds:0B42E88h, ecx; jumptable 007B45A1 cases 3,4",
+    "line": "mov     ds:0B42E88h, ecx; [Verified] Package versions 3 and 4 select decalPassBatchSize=6.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7B45AF",
-    "line": "mov     dword ptr ds:0B42E88h, 8; jumptable 007B45A1 cases 5-7",
+    "line": "mov     dword ptr ds:0B42E88h, 8; [Verified] Package versions 5, 6 and 7 select decalPassBatchSize=8.",
     "mnemonic": "mov",
     "size": 10
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7B45BA",
-    "line": "mov     dword ptr ds:0B42E88h, 2; jumptable 007B45A1 default case, cases 1,2",
+    "line": "mov     dword ptr ds:0B42E88h, 2; [Verified] All other package versions select decalPassBatchSize=2.",
     "mnemonic": "mov",
     "size": 10
   },

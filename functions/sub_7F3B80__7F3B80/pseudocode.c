@@ -1,4 +1,4 @@
-void *sub_7F3B80()
+NiRTTI *sub_7F3B80()
 {
-  return &unk_B46904;
+  return &stru_B46904; /*0x7f3b85*/
 }

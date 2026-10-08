@@ -1,4 +1,4 @@
-0x56A3B0: mov     eax, [esp+arg_0]
+0x56A3B0: mov     eax, [esp+arg_0]; Dialogue condition numeric comparator. Operator IDs from operatorAndFlags>>5: 0 ==, 1 !=, 2 >, 3 >=, 4 <, 5 <=.
 0x56A3B4: cmp     eax, 5; switch 6 cases
 0x56A3B7: ja      short def_56A3B9
 0x56A3B9: jmp     ds:jpt_56A3B9[eax*4]; switch jump

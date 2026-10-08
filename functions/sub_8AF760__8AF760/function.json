@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x8AF760",
+      "0x8AF88F"
+    ]
+  ],
+  "chunks_sha256": "e33c26332668899e515884b89ec23091661322e71a067bbba28bf5cdb77c0dd8",
+  "comment_regular": "TES4 authoritative: quicksort over 0x30-byte contact entries using float at entry+0x1C as the sort key.",
+  "comment_repeatable": "TES4 authoritative: quicksort over 0x30-byte contact entries using float at entry+0x1C as the sort key.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_8AF760",
+  "display_name": "hkpCdPointEntry30_QuickSortByDistance",
   "end_ea": "0x8AF88F",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8AF760",
+  "name": "hkpCdPointEntry30_QuickSortByDistance",
   "segment": ".text",
   "sha256": "e33c26332668899e515884b89ec23091661322e71a067bbba28bf5cdb77c0dd8",
   "size": 303,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8AF760",
-  "type": "void __cdecl(int, int, int, int)",
+  "total_chunk_size": 303,
+  "type": "void __cdecl(int entries, int left, int right, int flags)",
   "xrefs_from_count": 114,
   "xrefs_to_count": 2
 }

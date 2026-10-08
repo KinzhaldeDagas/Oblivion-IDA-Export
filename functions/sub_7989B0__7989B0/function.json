@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7989B0",
+      "0x798CB5"
+    ]
+  ],
+  "chunks_sha256": "7e91ae2987f1c4fd0fa7f18033d61ddbda1ee09cdae3f08af356a14d2baaf379",
+  "comment_regular": "\n\n[2026-10-02 source comparison] Verified divergence from RT4.1 LeafGeometry.cpp Update: Oblivion 0x798ADC..0x798AE5 mirrors origin X for even texture slots (4.1 does so for odd slots). Oblivion 0x798B90..0x798C62 copies raw XYZ corners without the 4.1 RockLeaf transform. Fourth/W floats are not written here. The prior camera-facing entry comment was corrected: camera angles are not consumed to rotate these corners. Shader-side processing remains authoritative for final pose.\n\nOblivion CLeafGeometry::Update. Lazily regenerates selected LOD raw card XYZ (and CPU leaf wind when selected), marks the cache valid, then publishes the first 0x3C bytes as leaf output. Camera-angle parameters do not rotate these corners in this body; final pose is shader-side. RT4.1 Update differs.",
+  "comment_repeatable": "Oblivion CLeafGeometry::Update. Lazily regenerates the selected LOD's camera-facing card vertex table (and CPU leaf wind when selected), marks the cache valid, then publishes the first 0x3C bytes as the leaf output. Caller supplies camera angles in degrees.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7989B0",
+  "display_name": "OB_CLeafGeometry_Update_010201A0",
   "end_ea": "0x798CB5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7989B0",
+  "name": "OB_CLeafGeometry_Update_010201A0",
   "segment": ".text",
   "sha256": "7e91ae2987f1c4fd0fa7f18033d61ddbda1ee09cdae3f08af356a14d2baaf379",
   "size": 773,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7989B0",
-  "type": "void __thiscall(int this, _DWORD *, float, int, int, float)",
+  "total_chunk_size": 773,
+  "type": "void __thiscall(OB_CLeafGeometry_010201A0 *this, OB_SLeafGeometryOutput_010201A0 *outLeaf, unsigned __int16 lodLevel, float cameraAzimuthDegrees, float cameraPitchDegrees, float leafSizeIncreaseFactor)",
   "xrefs_from_count": 244,
   "xrefs_to_count": 1
 }

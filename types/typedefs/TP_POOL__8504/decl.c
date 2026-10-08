@@ -1,1 +1,1 @@
-_TP_POOL
+struct _TP_POOL;

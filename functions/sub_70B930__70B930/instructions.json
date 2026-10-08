@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x70B93E",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x70B95B",
-    "line": "lea     eax, [esp+8+arg_0]",
+    "line": "lea     eax, [esp+8+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70B95F",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B960",
-    "line": "lea     ecx, [edi+0BCh]",
+    "line": "lea     ecx, [edi+0BCh]; list",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x70B966",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },

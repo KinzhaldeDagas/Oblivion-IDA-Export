@@ -1,5 +1,5 @@
 0x5508A0: push    ebx
-0x5508A1: mov     ebx, [esp+4+arg_0]
+0x5508A1: mov     ebx, [esp+4+object]
 0x5508A5: test    ebx, ebx
 0x5508A7: jnz     short loc_5508AD
 0x5508A9: xor     eax, eax
@@ -23,7 +23,7 @@
 0x5508CB: test    eax, eax
 0x5508CD: jz      short loc_5508E1
 0x5508CF: push    eax
-0x5508D0: push    offset unk_B39D90
+0x5508D0: push    offset stru_B39D90
 0x5508D5: call    NiRTTI_Cast
 0x5508DA: add     esp, 8
 0x5508DD: test    eax, eax

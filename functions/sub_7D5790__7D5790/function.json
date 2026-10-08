@@ -1,19 +1,36 @@
 {
-  "callees_count": 33,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7D5790",
+  "chunks": [
+    [
+      "0x7D5790",
+      "0x7D59BD"
+    ],
+    [
+      "0x9CEBB0",
+      "0x9CEBD3"
+    ]
+  ],
+  "chunks_sha256": "5a0552959e6b0efcba2d50f188b3cc56445bdce4e4ed31ee9d63f5f85babe210",
+  "comment_regular": "Associate receiver geometry only after BSShaderProperty RTTI, NiPropertyState+0x18 property-kind-4 lookup, and shader subtype 1..10. Existing links reorder; new links are inserted into both light-local and property-side ownership.",
+  "comment_repeatable": "Associate receiver geometry only after BSShaderProperty RTTI, NiPropertyState+0x18 property-kind-4 lookup, and shader subtype 1..10. Existing links reorder; new links are inserted into both light-local and property-side ownership.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "ShadowSceneLight_AssociateReceiverGeometry",
   "end_ea": "0x7D59BD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D5790",
+  "name": "ShadowSceneLight_AssociateReceiverGeometry",
   "segment": ".text",
   "sha256": "a23bbcdb154ea5800ae9a990fb91d896a377a2dd87faafa71010a8406f57d984",
   "size": 557,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D5790",
-  "type": "void __thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 213,
+  "total_chunk_size": 592,
+  "type": "void __thiscall(ShadowSceneLight_DecodedLayout *self, NiGeometry *geometry)",
+  "xrefs_from_count": 228,
   "xrefs_to_count": 2
 }

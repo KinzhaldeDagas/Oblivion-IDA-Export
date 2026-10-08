@@ -4,7 +4,7 @@
 0x64F14A: push    ebp
 0x64F14B: push    esi
 0x64F14C: mov     ebp, ecx
-0x64F14E: call    Double_To_SInt32
+0x64F14E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x64F153: push    0; int
 0x64F155: push    offset ??_R0?AVActor@@@8; struct TypeDescriptor *
 0x64F15A: push    offset ??_R0?AVTESObjectREFR@@@8; struct _s_RTTICompleteObjectLocator *
@@ -26,14 +26,14 @@
 0x64F190: push    edi
 0x64F191: mov     edi, [esp+18h+arg_0]
 0x64F195: mov     ecx, edi; this
-0x64F197: call    TESObjectREFR_GetParentCell
+0x64F197: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64F19C: test    eax, eax
 0x64F19E: jz      short loc_64F1B8
 0x64F1A0: mov     ecx, esi; this
-0x64F1A2: call    TESObjectREFR_GetParentCell
+0x64F1A2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64F1A7: mov     ecx, edi; this
 0x64F1A9: mov     ebx, eax
-0x64F1AB: call    TESObjectREFR_GetParentCell
+0x64F1AB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64F1B0: cmp     eax, ebx
 0x64F1B2: mov     bl, [esp+18h+var_5]
 0x64F1B6: jz      short loc_64F1D3

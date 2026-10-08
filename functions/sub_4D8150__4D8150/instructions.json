@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4D8150",
-    "line": "add     ecx, 44h ; 'D'",
+    "line": "add     ecx, 44h ; 'D'; Remove ExtraLight or ExtraSpellEffectLight backing NiLight from the native full-light list. Its sole retail direct caller passes useSpellEffectExtraLight=false; no code/data xref selects this helper's true branch.",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x4D8153",
-    "line": "cmp     [esp+arg_0], 0",
+    "line": "cmp     [esp+useSpellEffectExtraLight], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4D815A",
-    "line": "call    sub_41E670",
+    "line": "call    ExtraDataList_GetSpellEffectLight; Returns the secondary/spell-effect REFR_LIGHT payload from extra type 0x49; TESObjectREF_UpdateLights processes it separately from normal ExtraLight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4D8161",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4D8170",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x4D817B",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D817D",
-    "line": "call    sub_7C7DC0",
+    "line": "call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.",
     "mnemonic": "call",
     "size": 5
   },

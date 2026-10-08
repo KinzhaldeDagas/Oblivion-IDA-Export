@@ -1,5 +1,5 @@
 int sub_9F69B0()
 {
-  GameSetting_ConstrAndReg((int *)&dword_B38FE0, (int)"sShape", (int)"Shape");
-  return atexit(sub_A226E0);
+  GameSetting_ConstrAndReg(&stru_B38FE0, "sShape", "Shape"); /*0x9f69bf*/
+  return atexit(sub_A226E0); /*0x9f69cf*/
 }

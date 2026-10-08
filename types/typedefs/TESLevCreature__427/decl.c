@@ -1,1 +1,1 @@
-TESLevCreature
+struct TESLevCreature;

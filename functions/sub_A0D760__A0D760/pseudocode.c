@@ -1,4 +1,4 @@
-BSStringT *sub_A0D760()
+NiRTTI *sub_A0D760()
 {
-  return sub_70E220((BSStringT *)dword_B412EC, "NiPSysGravityStrengthCtlr", (int)dword_B41F8C);
+  return NiRTTI_Constructor(&stru_B412EC, "NiPSysGravityStrengthCtlr", &stru_B41F8C); /*0xa0d774*/
 }

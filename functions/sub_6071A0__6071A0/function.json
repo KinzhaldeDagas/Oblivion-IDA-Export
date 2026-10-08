@@ -1,19 +1,32 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x6071A0",
+      "0x6072BB"
+    ]
+  ],
+  "chunks_sha256": "a3786e2a971ed01615bd07f849f086a1ec8769b55e94e630ebccab02c0bdbc8f",
+  "comment_regular": "Verified 2026-10-04 crime-record family: manager6770F0 allocates30 bytes, calls605E50 then606520; manager677010 calls6061F0;677240 calls6071A0. Embedded witness list at1C, not AlarmPackage crimes pointer at3C. Probable Fallout Crime family; Oblivion allocation, field reads/writes, calls and RTTI fixups establish local identity.\nVerified RTTI fixup:08 -> TESObjectREFR,0C -> Actor,14 -> TESBoundObject,24 -> TESForm. Witness IDs -> Actor pointers; unresolved witnesses removed. Pointer fields transiently contain encoded/resolved FormIDs after LoadGame.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 8,
-  "display_name": "sub_6071A0",
+  "display_name": "Crime_InitLoadGame",
   "end_ea": "0x6072BB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6071A0",
+  "name": "Crime_InitLoadGame",
   "segment": ".text",
   "sha256": "a3786e2a971ed01615bd07f849f086a1ec8769b55e94e630ebccab02c0bdbc8f",
   "size": 283,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6071A0",
-  "type": "void __thiscall(UInt32 *this)",
+  "total_chunk_size": 283,
+  "type": "void __thiscall(Crime *self)",
   "xrefs_from_count": 137,
   "xrefs_to_count": 1
 }

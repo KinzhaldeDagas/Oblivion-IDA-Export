@@ -38,7 +38,7 @@
 0x51E5E8: call    TESAttributes_constr
 0x51E5ED: lea     ecx, [esi+94h]
 0x51E5F3: mov     byte ptr [esp+24h+var_4], 6
-0x51E5F8: call    TESAnimation_constr
+0x51E5F8: call    TESAnimation_constr; TESAnimation constructor: vtable plus BSSimpleList head/tail initialized empty. Used at TESActorBase +0x94.
 0x51E5FD: xor     eax, eax
 0x51E5FF: mov     dword ptr [esi+0A0h], offset ??_7TESFullName@@6B@; const TESFullName::`vftable'
 0x51E609: mov     [esi+0A4h], eax
@@ -50,9 +50,9 @@
 0x51E62D: lea     ecx, [esi+0C4h]
 0x51E633: mov     byte ptr [esp+24h+var_4], 8
 0x51E638: call    TESScriptableForm_constr
-0x51E63D: lea     ecx, [esi+0D0h]
+0x51E63D: lea     ecx, [esi+0D0h]; self
 0x51E643: mov     dword ptr [esi], offset ??_7TESActorBase@@6BTESActorBase@@@; const TESActorBase::`vftable'{for `TESActorBase'}
-0x51E649: mov     dword ptr [edi], offset ??_7TESActorBase@@6BTESActorBaseData@@@; const TESActorBase::`vftable'{for `TESActorBaseData'}
+0x51E649: mov     dword ptr [edi], offset ??_7TESActorBase@@6BTESActorBaseData@@@; Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.
 0x51E64F: mov     dword ptr [ebx], offset ??_7TESActorBase@@6BTESContainer@@@; const TESActorBase::`vftable'{for `TESContainer'}
 0x51E655: mov     dword ptr [ebp+0], offset ??_7TESActorBase@@6BTESSpellList@@@; const TESActorBase::`vftable'{for `TESSpellList'}
 0x51E65C: mov     dword ptr [esi+68h], offset ??_7TESActorBase@@6BTESAIForm@@@; const TESActorBase::`vftable'{for `TESAIForm'}
@@ -73,3 +73,36 @@
 0x51E6B5: pop     ebx
 0x51E6B6: add     esp, 10h
 0x51E6B9: retn
+0x9B77D0: mov     ecx, [ebp-10h]
+0x9B77D3: jmp     TESObject_destr
+0x9B77D8: mov     ecx, [ebp-10h]
+0x9B77DB: add     ecx, 24h ; '$'
+0x9B77DE: jmp     TESActorBaseData_destr
+0x9B77E3: mov     ecx, [ebp-10h]
+0x9B77E6: add     ecx, 44h ; 'D'
+0x9B77E9: jmp     TESContainer_destr
+0x9B77EE: mov     ecx, [ebp-10h]
+0x9B77F1: add     ecx, 54h ; 'T'
+0x9B77F4: jmp     TESSpellList_destr?
+0x9B77F9: mov     ecx, [ebp-10h]
+0x9B77FC: add     ecx, 68h ; 'h'
+0x9B77FF: jmp     TESAIForm_destr
+0x9B7804: mov     ecx, [ebp-10h]
+0x9B7807: add     ecx, 80h ; '€'
+0x9B780D: jmp     TESHealthForm_destr
+0x9B7812: mov     ecx, [ebp-10h]
+0x9B7815: add     ecx, 88h ; 'ˆ'
+0x9B781B: jmp     TESAttributes_destr
+0x9B7820: mov     ecx, [ebp-10h]
+0x9B7823: add     ecx, 0A0h ; ' '
+0x9B7829: jmp     TESFullName_Initialize
+0x9B782E: mov     ecx, [ebp-10h]
+0x9B7831: add     ecx, 0ACh ; '¬'; this
+0x9B7837: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B783C: mov     edx, [esp+arg_4]
+0x9B7840: lea     eax, [edx-14h]
+0x9B7843: mov     ecx, [edx-18h]
+0x9B7846: xor     ecx, eax
+0x9B7848: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B784D: mov     eax, offset stru_AE2278
+0x9B7852: jmp     ___CxxFrameHandler3

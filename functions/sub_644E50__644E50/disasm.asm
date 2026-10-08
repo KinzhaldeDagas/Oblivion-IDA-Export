@@ -120,16 +120,16 @@
 0x644FCC: mov     edx, [eax+4]
 0x644FCF: mov     ecx, [eax]
 0x644FD1: mov     eax, [eax+8]
-0x644FD4: mov     [esp+20h+var_8], edx
+0x644FD4: mov     [esp+20h+destinationPosition.y], edx
 0x644FD8: mov     edx, [edi]
-0x644FDA: mov     [esp+20h+var_C], ecx
-0x644FDE: mov     [esp+20h+var_4], eax
+0x644FDA: mov     [esp+20h+destinationPosition.x], ecx
+0x644FDE: mov     [esp+20h+destinationPosition.z], eax
 0x644FE2: mov     eax, [edx+0CCh]
 0x644FE8: mov     ecx, edi
 0x644FEA: call    eax
-0x644FEC: mov     ecx, esi
+0x644FEC: mov     ecx, esi; this
 0x644FEE: mov     ebx, eax
-0x644FF0: call    Actor_IsSwimming
+0x644FF0: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x644FF5: test    al, al
 0x644FF7: jnz     short loc_64502F
 0x644FF9: test    ebx, ebx
@@ -140,36 +140,36 @@
 0x645007: call    eax
 0x645009: test    al, al
 0x64500B: jz      short loc_64502F
-0x64500D: mov     ecx, ebx
-0x64500F: call    Actor_IsSwimming
+0x64500D: mov     ecx, ebx; this
+0x64500F: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x645014: test    al, al
 0x645016: jz      short loc_64502F
-0x645018: fld     [esp+20h+var_4]
+0x645018: fld     [esp+20h+destinationPosition.z]
 0x64501C: mov     ecx, esi
 0x64501E: fstp    [esp+20h+var_14]
-0x645022: call    sub_5E0660
+0x645022: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x645027: fsubr   [esp+20h+var_14]
-0x64502B: fstp    [esp+20h+var_4]
+0x64502B: fstp    [esp+20h+destinationPosition.z]
 0x64502F: cmp     byte ptr ds:0B15800h, 0
 0x645036: jz      short loc_6450AE
 0x645038: mov     ecx, ds:0B333C4h; this
 0x64503E: call    PlayerCharacter__IsSleeping?
-0x645043: mov     ecx, [esp+20h+var_C]
-0x645047: mov     edx, [esp+20h+var_8]
+0x645043: mov     ecx, [esp+20h+destinationPosition.x]
+0x645047: mov     edx, [esp+20h+destinationPosition.y]
 0x64504B: push    eax
 0x64504C: sub     esp, 0Ch
 0x64504F: mov     eax, esp
 0x645051: mov     [eax], ecx
-0x645053: mov     ecx, [esp+30h+var_4]
+0x645053: mov     ecx, [esp+30h+destinationPosition.z]
 0x645057: mov     [eax+4], edx
-0x64505A: mov     edx, [esp+30h+arg_C]
+0x64505A: mov     edx, [esp+30h+destinationWorldspace]
 0x64505E: mov     [eax+8], ecx
-0x645061: mov     eax, [esp+30h+arg_8]
+0x645061: mov     eax, [esp+30h+destinationCell]
 0x645065: mov     ecx, ds:0B3BF80h
 0x64506B: push    edx
 0x64506C: push    eax
 0x64506D: push    esi
-0x64506E: call    sub_6836E0
+0x64506E: call    sub_6836E0; Verified: path request/cache builder resolves a containing TESSubSpace candidate by interior cell list or WorldSpace +0x60 coordinate lookup, compares candidate identity with the current choice, and rebuilds the path request when it changes.
 0x645073: lea     ecx, [esp+20h+arg_4]
 0x645077: push    ecx
 0x645078: mov     ecx, ds:0B3BF80h
@@ -190,15 +190,15 @@
 0x6450A7: pop     ebx
 0x6450A8: add     esp, 14h
 0x6450AB: retn    14h
-0x6450AE: mov     edx, [esp+20h+arg_C]
-0x6450B2: mov     eax, [esp+20h+arg_8]
-0x6450B6: push    edx
-0x6450B7: push    eax
-0x6450B8: lea     ecx, [esp+28h+var_C]
-0x6450BC: push    ecx
-0x6450BD: mov     ecx, [edi+34h]
-0x6450C0: push    esi
-0x6450C1: call    sub_68B030
+0x6450AE: mov     edx, [esp+20h+destinationWorldspace]
+0x6450B2: mov     eax, [esp+20h+destinationCell]
+0x6450B6: push    edx; destinationWorldspace
+0x6450B7: push    eax; destinationCell
+0x6450B8: lea     ecx, [esp+28h+destinationPosition]
+0x6450BC: push    ecx; destinationPosition
+0x6450BD: mov     ecx, [edi+34h]; this
+0x6450C0: push    esi; sourceRef
+0x6450C1: call    TravelPath_BuildToDestination; Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.
 0x6450C6: test    al, al
 0x6450C8: jmp     short loc_645096
 0x6450CA: mov     edx, [edi+34h]
@@ -228,7 +228,7 @@
 0x64510E: test    ebx, ebx
 0x645110: jz      short loc_645175
 0x645112: mov     ecx, ebx; this
-0x645114: call    GetTeleportExtraData
+0x645114: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x645119: test    eax, eax
 0x64511B: jz      short loc_645175
 0x64511D: push    0
@@ -269,7 +269,7 @@
 0x64517D: fstp    [esp+24h+var_24]; float
 0x645180: call    sub_68A9D0
 0x645185: mov     ecx, esi; this
-0x645187: call    Actor__GetProcessLevel
+0x645187: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x64518C: mov     ecx, [edi+34h]
 0x64518F: mov     edx, [ecx]
 0x645191: mov     ebx, eax
@@ -302,7 +302,7 @@
 0x6451D3: push    esi
 0x6451D4: call    eax
 0x6451D6: mov     ecx, esi; this
-0x6451D8: call    Actor__GetProcessLevel
+0x6451D8: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x6451DD: cmp     ebx, eax
 0x6451DF: jnz     loc_64526E
 0x6451E5: mov     ecx, [edi+34h]
@@ -339,7 +339,7 @@
 0x645238: cmp     dword ptr [edi+34h], 0
 0x64523C: jz      short loc_64526E
 0x64523E: mov     ecx, esi; this
-0x645240: call    Actor__GetProcessLevel
+0x645240: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x645245: cmp     ebx, eax
 0x645247: jnz     short loc_64526E
 0x645249: mov     ecx, esi

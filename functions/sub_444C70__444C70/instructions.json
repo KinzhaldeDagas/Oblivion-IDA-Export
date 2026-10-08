@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x444D2C",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,19 +709,19 @@
   },
   {
     "ea": "0x444DF6",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x444DFB",
-    "line": "call    sub_678750",
+    "line": "call    sub_678750; BunkFix: furniture activation/sit-sleep handoff. For Sleep package, revalidates candidate furniture refs, picks first unused marker via sub_4D73F0, resolves marker transform via sub_4DB9D0, then calls SetSleepState. This is after the actor has already reached/activated the furniture ref.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x444E00",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x444E0A",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x444E34",
-    "line": "push    edx",
+    "line": "push    edx; a3",
     "mnemonic": "push",
     "size": 1
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x444E47",
-    "line": "mov     ecx, [esi+74h]",
+    "line": "mov     ecx, [esi+74h]; worldspace",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x444E4A",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x444E61",
-    "line": "push    1",
+    "line": "push    1; a4",
     "mnemonic": "push",
     "size": 2
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x444E76",
-    "line": "call    sub_4EA6E0",
+    "line": "call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x444E90",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x444E99",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },

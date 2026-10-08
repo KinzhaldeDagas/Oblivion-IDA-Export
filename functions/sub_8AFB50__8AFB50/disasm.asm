@@ -6,7 +6,7 @@
 0x8AFB59: test    esi, esi
 0x8AFB5B: jz      short loc_8AFBCC
 0x8AFB5D: push    esi
-0x8AFB5E: call    sub_47FAC0
+0x8AFB5E: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x8AFB63: mov     ebp, [esp+10h+arg_4]
 0x8AFB67: add     esp, 4
 0x8AFB6A: test    eax, eax

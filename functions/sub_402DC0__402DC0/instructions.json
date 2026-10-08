@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x402DC0",
-    "line": "mov     eax, [ecx+4]",
+    "line": "mov     eax, [ecx+4]; Maps GameMonth 0..11 to a four-season index: 0 for 2..4, 1 for 5..7, 2 for 8..10, 3 for 11/0/1. Used to select seasonal chance data.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x402DCD",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

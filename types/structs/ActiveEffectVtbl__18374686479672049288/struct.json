@@ -1,16 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ActiveEffectVtbl",
+  "definition": "struct ActiveEffectVtbl\n{\nvoid *scalarDeletingDestructor;\nActiveEffect *(__thiscall *clone)(ActiveEffect *this);\nvoid (__thiscall *update)(ActiveEffect *this, float elapsedTime);\nvoid *getSaveSize;\nvoid *saveEffect;\nvoid *loadEffect;\nint (__thiscall *link)(ActiveEffect *this, TESObjectREFR *linkContext);\nint (__thiscall *postLink)(ActiveEffect *this, TESObjectREFR *linkContext);\nvoid *preLoad;\nvoid *unregisterCaster;\nvoid *isActor;\nActiveEffect *(__thiscall *copyTo)(ActiveEffect *this, ActiveEffect *destination);\nvoid *reserved0C;\nbool (__thiscall *validTarget)(ActiveEffect *this, MagicTarget *target);\nvoid *apply;\nvoid *onRemove;\n}\n",
   "id": 18374686479672049288,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
-      "name": "noDef",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "scalarDeletingDestructor",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "clone",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "ActiveEffect *(__thiscall *)(ActiveEffect *this)"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "update",
+      "offset": 8,
+      "offset_hex": "0x8",
+      "size": 4,
+      "type": "void (__thiscall *)(ActiveEffect *this, float elapsedTime)"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "getSaveSize",
+      "offset": 12,
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "saveEffect",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "loadEffect",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "link",
+      "offset": 24,
+      "offset_hex": "0x18",
+      "size": 4,
+      "type": "int (__thiscall *)(ActiveEffect *this, TESObjectREFR *linkContext)"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "postLink",
+      "offset": 28,
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "int (__thiscall *)(ActiveEffect *this, TESObjectREFR *linkContext)"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "preLoad",
+      "offset": 32,
+      "offset_hex": "0x20",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unregisterCaster",
+      "offset": 36,
+      "offset_hex": "0x24",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "isActor",
+      "offset": 40,
+      "offset_hex": "0x28",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "copyTo",
+      "offset": 44,
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "ActiveEffect *(__thiscall *)(ActiveEffect *this, ActiveEffect *destination)"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "reserved0C",
+      "offset": 48,
+      "offset_hex": "0x30",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "validTarget",
+      "offset": 52,
+      "offset_hex": "0x34",
+      "size": 4,
+      "type": "bool (__thiscall *)(ActiveEffect *this, MagicTarget *target)"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "apply",
+      "offset": 56,
+      "offset_hex": "0x38",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "onRemove",
+      "offset": 60,
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "void *"
     }
   ],
   "name": "ActiveEffectVtbl",
-  "size": 4
+  "ordinal": 9418,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 64
 }

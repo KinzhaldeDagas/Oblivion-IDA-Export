@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "WINE_MM_DRIVER",
+  "definition": "typedef tagWINE_MM_DRIVER WINE_MM_DRIVER\n",
   "id": 18374686479671823010,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hDriver",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HDRVR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "drvname",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LPSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bIsMapper",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int32 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parts",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 72
+      "offset_hex": "0xC",
+      "size": 72,
+      "type": "WINE_MM_DRIVER_PART[6]"
     }
   ],
   "name": "WINE_MM_DRIVER",
+  "ordinal": 1828,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 84
 }

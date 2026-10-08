@@ -1,4 +1,4 @@
-int TESLevItem_GetMaxLevelDiff()
+const char *TESLevItem_GetMaxLevelDiff()
 {
-  return iLevItemLevelDifferenceMax;
+  return MEMORY[0xB35AB8].value; /*0x4b0305*/
 }

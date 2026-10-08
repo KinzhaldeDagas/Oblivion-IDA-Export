@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x569020",
-    "line": "sub     esp, 13Ch",
+    "line": "sub     esp, 13Ch; 3DTheft: central TESAIForm package chooser. It resolves procedureArrayIndex only when -1, so runtime packages assigned directly should resolve their procedure row before assignment.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x569051",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x569053",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -132,12 +132,6 @@
     "size": 2
   },
   {
-    "ea": "0x56906D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x569070",
     "line": "mov     eax, [esp+14Ch+var_134]",
     "mnemonic": "mov",
@@ -169,7 +163,7 @@
   },
   {
     "ea": "0x569080",
-    "line": "call    sub_5660E0",
+    "line": "call    sub_5660E0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x8000.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +187,7 @@
   },
   {
     "ea": "0x56908B",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +211,7 @@
   },
   {
     "ea": "0x569096",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +241,7 @@
   },
   {
     "ea": "0x5690A7",
-    "line": "call    sub_4200C0",
+    "line": "call    ExtraDataList_HasRunOncePackage; Returns true when ExtraRunOncePacks contains a record for the supplied TESPackage pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +307,7 @@
   },
   {
     "ea": "0x5690C8",
-    "line": "call    sub_567280",
+    "line": "call    sub_567280; RadiantAI: chooser current-package exclusion helper. Reads actor/process pointer at +0x58 and calls virtual method +0xC0; exact semantic name still unproven.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +397,13 @@
   },
   {
     "ea": "0x5690FF",
-    "line": "call    sub_567C00",
+    "line": "call    sub_567C00; RadiantAI: package day-of-week test used by central package chooser. Supports specific day and combined day masks/cases before month/day/hour condition checks.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x569104",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -475,7 +469,7 @@
   },
   {
     "ea": "0x56912C",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x569152",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x569171",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -667,7 +661,7 @@
   },
   {
     "ea": "0x569190",
-    "line": "call    sub_567C00",
+    "line": "call    sub_567C00; RadiantAI: package day-of-week test used by central package chooser. Supports specific day and combined day masks/cases before month/day/hour condition checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +715,7 @@
   },
   {
     "ea": "0x5691AA",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -763,7 +757,7 @@
   },
   {
     "ea": "0x5691BD",
-    "line": "call    sub_568EB0",
+    "line": "call    sub_568EB0; RadiantAI: package hour-window test used by central package chooser. Handles start+duration and midnight wrap when testing current game hour.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +829,7 @@
   },
   {
     "ea": "0x5691DC",
-    "line": "call    sub_56A950",
+    "line": "call    ConditionList_EvaluateForActor; RadiantAI: TESPackage condition-list wrapper used by central package chooser at 0x569020. Delegates to condition evaluator at 0x56A510 with actor and resolved target form; package selection fails if conditions fail.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1087,7 @@
   },
   {
     "ea": "0x569265",
-    "line": "call    sub_5672A0",
+    "line": "call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1225,7 @@
   },
   {
     "ea": "0x5692A8",
-    "line": "call    sub_424D00",
+    "line": "call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.",
     "mnemonic": "call",
     "size": 5
   },

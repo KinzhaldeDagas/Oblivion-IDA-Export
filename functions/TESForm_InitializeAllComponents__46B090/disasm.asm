@@ -32,12 +32,21 @@
 0x46B0FF: call    FormComponentList_Build
 0x46B104: lea     ecx, [esp+7Ch+var_74]
 0x46B108: call    FormComponentList_Initialize
-0x46B10D: lea     ecx, [esp+7Ch+var_74]; void *
+0x46B10D: lea     ecx, [esp+7Ch+var_74]; this
 0x46B111: mov     [esp+7Ch+var_4], 0FFFFFFFFh
-0x46B119: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x46B119: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x46B11E: mov     ecx, [esp+7Ch+var_C]; jumptable 0046B0C9 cases 13,49-52,54,61
 0x46B122: mov     large fs:0, ecx
 0x46B129: pop     ecx
 0x46B12A: pop     esi
 0x46B12B: add     esp, 74h
 0x46B12E: retn
+0x9AEA60: lea     ecx, [ebp-74h]; this
+0x9AEA63: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9AEA68: mov     edx, [esp+arg_4]
+0x9AEA6C: lea     eax, [edx-6Ch]
+0x9AEA6F: mov     ecx, [edx-70h]
+0x9AEA72: xor     ecx, eax
+0x9AEA74: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEA79: mov     eax, offset stru_ADB188
+0x9AEA7E: jmp     ___CxxFrameHandler3

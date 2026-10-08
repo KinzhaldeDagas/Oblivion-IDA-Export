@@ -1,356 +1,357 @@
 void __usercall sub_6AF880(
         double a1@<st1>,
         double a2@<st0>,
-        Actor *a3,
+        TESObjectREFR *a3,
         float a4,
         int a5,
-        Actor *a6,
+        TESObjectREFR *a6,
         int a7,
         int a8,
         int a9,
         char a10,
         char a11)
 {
-  float *v12; // ebx
-  int *v13; // edi
-  int *v14; // ebp
-  int v15; // eax
-  void *v16; // eax
-  float *v17; // eax
-  int v18; // esi
-  double v19; // st5
-  int v20; // eax
-  int *v21; // eax
-  int *v22; // esi
-  float *v23; // eax
+  float *v11; // ebx
+  int *v12; // edi
+  int *v13; // ebp
+  int v14; // eax
+  void *v15; // eax
+  float *v16; // eax
+  int v17; // esi
+  double v18; // st5
+  int v19; // eax
+  int *v20; // eax
+  int *v21; // esi
+  float *v22; // eax
+  int v23; // eax
   int v24; // eax
-  int v25; // eax
-  char v26; // bl
-  void *v27; // eax
-  _DWORD *v28; // eax
+  char v25; // bl
+  void *v26; // eax
+  _DWORD *v27; // eax
+  int v28; // eax
   int v29; // eax
-  int v30; // eax
-  int *v31; // esi
-  int *v32; // ebx
-  char *v33; // [esp+Ch] [ebp-38h]
-  char v34; // [esp+22h] [ebp-22h]
-  char v35; // [esp+23h] [ebp-21h]
-  int *v36; // [esp+24h] [ebp-20h]
+  int *v30; // esi
+  int *v31; // ebx
+  char *v32; // [esp+Ch] [ebp-38h]
+  char v33; // [esp+22h] [ebp-22h]
+  char v34; // [esp+23h] [ebp-21h]
+  int *v35; // [esp+24h] [ebp-20h]
+  float v36; // [esp+24h] [ebp-20h]
   float v37; // [esp+24h] [ebp-20h]
-  float v38; // [esp+24h] [ebp-20h]
-  float *v39; // [esp+28h] [ebp-1Ch]
+  float *v38; // [esp+28h] [ebp-1Ch]
+  float v39; // [esp+2Ch] [ebp-18h]
   float v40; // [esp+2Ch] [ebp-18h]
   float v41; // [esp+2Ch] [ebp-18h]
   float v42; // [esp+2Ch] [ebp-18h]
   float v43; // [esp+2Ch] [ebp-18h]
-  float v44; // [esp+2Ch] [ebp-18h]
-  float v45; // [esp+30h] [ebp-14h]
-  float v46; // [esp+34h] [ebp-10h]
+  float v44; // [esp+30h] [ebp-14h]
+  float v45; // [esp+34h] [ebp-10h]
+  float v46; // [esp+38h] [ebp-Ch]
   float v47; // [esp+38h] [ebp-Ch]
-  float v48; // [esp+38h] [ebp-Ch]
+  float v48; // [esp+3Ch] [ebp-8h]
   float v49; // [esp+3Ch] [ebp-8h]
-  float v50; // [esp+3Ch] [ebp-8h]
+  float v50; // [esp+40h] [ebp-4h]
   float v51; // [esp+40h] [ebp-4h]
-  float v52; // [esp+40h] [ebp-4h]
+  float v52; // [esp+48h] [ebp+4h]
   float v53; // [esp+48h] [ebp+4h]
   float v54; // [esp+48h] [ebp+4h]
   float v55; // [esp+48h] [ebp+4h]
   float v56; // [esp+48h] [ebp+4h]
   float v57; // [esp+48h] [ebp+4h]
-  float v58; // [esp+48h] [ebp+4h]
 
-  v12 = 0;
+  v11 = 0; /*0x6af888*/
   if ( a3 )
   {
-    if ( dword_B3C20C < (unsigned int)dword_B16304 )
+    if ( unk_B3C20C < (unsigned int)dword_B16304 )
     {
-      if ( !dword_B3C0F0 )
-        dword_B3C0F0 = (int)OSGlobals->sound;
-      v35 = 0;
-      v13 = 0;
-      v14 = 0;
-      v36 = 0;
-      v15 = ((int (__usercall *)@<eax>(LowProcess *@<ecx>, int, double@<st0>, double@<st1>))a3->members.super.process->GetEquippedWeaponData)(
-              a3->members.super.process,
+      if ( !unk_B3C0F0 ) /*0x6af8a4*/
+        unk_B3C0F0 = (int)MEMORY[0xB33398]->sound; /*0x6af8b5*/
+      v34 = 0; /*0x6af8ca*/
+      v12 = 0; /*0x6af8ce*/
+      v13 = 0; /*0x6af8d0*/
+      v35 = 0; /*0x6af8d2*/
+      v14 = (*((int (__usercall **)@<eax>(TESObjectREFRVtbl *@<ecx>, int, double@<st0>, double@<st1>))a3[1].vtbl->super.super.InitializeComponent /*0x6af8d6*/
+             + 0x3B))(
+              a3[1].vtbl,
               1,
               a2,
               a1);
-      v16 = v15 ? *(void **)(v15 + 8) : 0;
-      if ( v16 )
+      v15 = v14 ? *(void **)(v14 + 8) : 0;
+      if ( v15 ) /*0x6af8e5*/
       {
-        v12 = (float *)OblivionDynamicCast(
-                         v16,
+        v11 = (float *)OblivionDynamicCast( /*0x6af8fc*/
+                         v15,
                          0,
                          (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                          &TESObjectWEAP `RTTI Type Descriptor',
                          0);
-        v39 = v12;
+        v38 = v11; /*0x6af8fe*/
       }
       else
       {
-        v39 = 0;
+        v38 = 0; /*0x6af904*/
       }
-      v17 = a3->vtbl->super.super.GetPos((TESObjectREFR *)a3);
-      v18 = dword_B3C0F0;
-      v47 = *v17;
-      v49 = v17[1];
-      v51 = v17[2];
-      if ( !byte_B333B8
-        || (v40 = *(float *)(v18 + 0x80) - v47,
-            v45 = *(float *)(v18 + 0x84) - v49,
-            v46 = *(float *)(v18 + 0x88) - v51,
-            v41 = v40 * v40 + v45 * v45 + v46 * v46,
-            v42 = sqrt(v41),
-            v19 = v42,
-            v43 = flt_B162FC * dbl_A2FAA0,
-            v43 >= v19) )
+      v16 = a3->vtbl->GetPos(a3); /*0x6af915*/
+      v17 = unk_B3C0F0; /*0x6af926*/
+      v46 = *v16; /*0x6af92c*/
+      v48 = v16[1]; /*0x6af930*/
+      v50 = v16[2]; /*0x6af934*/
+      if ( !unk_B333B8 /*0x6af9cc*/
+        || (v39 = *(float *)(v17 + 0x80) - v46,
+            v44 = *(float *)(v17 + 0x84) - v48,
+            v45 = *(float *)(v17 + 0x88) - v50,
+            v40 = v39 * v39 + v44 * v44 + v45 * v45,
+            v41 = sqrt(v40),
+            v18 = v41,
+            v42 = flt_B162FC * dbl_A2FAA0,
+            v42 >= v18) )
       {
-        if ( !a6 )
+        if ( !a6 ) /*0x6af9d6*/
         {
-          if ( !v12 )
+          if ( !v11 ) /*0x6af9de*/
           {
-            v21 = PlaySound___((int *)v18, "WPNSwishHand", 0x4102, 1);
+            v20 = PlaySound___((int *)v17, "WPNSwishHand", 0x4102, 1); /*0x6afab4*/
 LABEL_28:
-            v22 = v21;
-            if ( v21 )
+            v21 = v20; /*0x6afae9*/
+            if ( v20 ) /*0x6afaed*/
             {
-              sub_6B7360(v21, v47, v49, v51);
-              sub_6AC3E0((_DWORD **)dword_B3C0F0, *v22, (LONG)a3);
-              sub_6B7190(v22, 0);
-              sub_6B73E0(v22);
-              FormHeapFree((unsigned int)v22);
+              sub_6B7360(v20, v46, v48, v50); /*0x6afb0f*/
+              sub_6AC3E0((_DWORD **)unk_B3C0F0, *v21, (LONG)a3); /*0x6afb22*/
+              sub_6B7190(v21, 0); /*0x6afb2b*/
+              sub_6B73E0(v21); /*0x6afb32*/
+              FormHeapFree((unsigned int)v21); /*0x6afb38*/
             }
-            return;
+            return; /*0x6afb47*/
           }
-          if ( byte_B162EC )
+          if ( byte_B162EC ) /*0x6af9e4*/
           {
-            v37 = v12[0x25];
-            if ( *(float *)GameSetting_GetSafeFloatPointer(&fMediumWeaponSpeedMax_Audio) >= (double)v37 )
+            v36 = v11[0x25]; /*0x6af9f8*/
+            if ( *GameSetting_GetSafeFloatPointer((float *)&fMediumWeaponSpeedMax_Audio) >= (double)v36 ) /*0x6afa0e*/
             {
-              if ( *(float *)GameSetting_GetSafeFloatPointer(&fMediumWeaponSpeedMax_Audio) <= (double)v37
-                || *(float *)GameSetting_GetSafeFloatPointer(&fLargeWeaponSpeedMax_Audio) >= (double)v37 )
+              if ( *GameSetting_GetSafeFloatPointer((float *)&fMediumWeaponSpeedMax_Audio) <= (double)v36 /*0x6afa44*/
+                || *GameSetting_GetSafeFloatPointer((float *)&fLargeWeaponSpeedMax_Audio) >= (double)v36 )
               {
 LABEL_19:
-                v20 = sub_447490("WPNSwishLarge");
+                v19 = SoundMap_ResolveAnimSoundNote("WPNSwishLarge"); /*0x6afa46*/
 LABEL_26:
-                if ( !v20 )
-                  return;
-                v21 = OSGLobals_PlaySound((int *)dword_B3C0F0, *(void **)(v20 + 0xC), 0x4102, 1);
-                goto LABEL_28;
+                if ( !v19 ) /*0x6afacd*/
+                  return; /*0x6afacd*/
+                v20 = OSGLobals_PlaySound((int *)unk_B3C0F0, *(void **)(v19 + 0xC), 0x4102, 1); /*0x6afae4*/
+                goto LABEL_28; /*0x6afae4*/
               }
 LABEL_23:
-              v20 = sub_447490("WPNSwishMedium");
-              goto LABEL_26;
+              v19 = SoundMap_ResolveAnimSoundNote("WPNSwishMedium"); /*0x6afa9f*/
+              goto LABEL_26; /*0x6afaa4*/
             }
           }
           else
           {
-            v38 = v12[0x1F];
-            if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B162CC) <= (double)v38 )
+            v37 = v11[0x1F]; /*0x6afa55*/
+            if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B162CC) <= (double)v37 ) /*0x6afa6b*/
             {
-              if ( *(float *)GameSetting_GetSafeFloatPointer(&dword_B162CC) >= (double)v38
-                || *(float *)GameSetting_GetSafeFloatPointer(&fLargeWeaponWeightMin_Audio) <= (double)v38 )
+              if ( *GameSetting_GetSafeFloatPointer((float *)&dword_B162CC) >= (double)v37 /*0x6afa9d*/
+                || *GameSetting_GetSafeFloatPointer((float *)&fLargeWeaponWeightMin_Audio) <= (double)v37 )
               {
-                goto LABEL_19;
+                goto LABEL_19; /*0x6afa9d*/
               }
-              goto LABEL_23;
+              goto LABEL_23; /*0x6afa9d*/
             }
           }
-          v20 = sub_447490("WPNSwishSmall");
-          goto LABEL_26;
+          v19 = SoundMap_ResolveAnimSoundNote("WPNSwishSmall"); /*0x6afac6*/
+          goto LABEL_26; /*0x6afac6*/
         }
-        v23 = a6->vtbl->super.super.GetPos((TESObjectREFR *)a6);
-        v52 = v23[2];
-        v48 = *v23;
-        v50 = v23[1];
-        if ( a8 >= 0 )
+        v22 = a6->vtbl->GetPos(a6); /*0x6afb56*/
+        v51 = v22[2]; /*0x6afb60*/
+        v47 = *v22; /*0x6afb6a*/
+        v49 = v22[1]; /*0x6afb6e*/
+        if ( a8 >= 0 ) /*0x6afb72*/
         {
-          if ( a8 )
-            v24 = sub_447490("PHYArmorHitHeavy");
+          if ( a8 ) /*0x6afb7a*/
+            v23 = SoundMap_ResolveAnimSoundNote("PHYArmorHitHeavy"); /*0x6afb81*/
           else
-            v24 = sub_447490("PHYArmorHitLight");
-          goto LABEL_40;
+            v23 = SoundMap_ResolveAnimSoundNote("PHYArmorHitLight"); /*0x6afb88*/
+          goto LABEL_40; /*0x6afb81*/
         }
-        if ( a9 >= 0 )
+        if ( a9 >= 0 ) /*0x6afb90*/
         {
-          if ( !a9 )
+          if ( !a9 ) /*0x6afb95*/
           {
-            v33 = "WPNBlockShieldLight";
-            goto LABEL_39;
+            v32 = "WPNBlockShieldLight"; /*0x6afba3*/
+            goto LABEL_39; /*0x6afba3*/
           }
-          if ( a9 == 1 )
+          if ( a9 == 1 ) /*0x6afb9a*/
           {
-            v33 = "WPNBlockShieldHeavy";
+            v32 = "WPNBlockShieldHeavy"; /*0x6afb9c*/
 LABEL_39:
-            v35 = 1;
-            v24 = sub_447490(v33);
+            v34 = 1; /*0x6afba8*/
+            v23 = SoundMap_ResolveAnimSoundNote(v32); /*0x6afbb3*/
 LABEL_40:
-            if ( v24 )
-              v14 = OSGLobals_PlaySound((int *)dword_B3C0F0, *(void **)(v24 + 0xC), 0x4102, 1);
+            if ( v23 ) /*0x6afbba*/
+              v13 = OSGLobals_PlaySound((int *)unk_B3C0F0, *(void **)(v23 + 0xC), 0x4102, 1); /*0x6afbd2*/
           }
         }
-        v34 = 0;
-        if ( !a10 )
+        v33 = 0; /*0x6afbd4*/
+        if ( !a10 ) /*0x6afbde*/
         {
-          if ( Actor_IsCreature(a6) && LOBYTE(a6[1].vtbl) == 2 )
+          if ( Actor_IsCreature((Actor *)a6) && a6[2].member.baseExtraList.members.m_presenceBitfield[8] == 2 ) /*0x6afbf2*/
           {
-            v25 = sub_447490("PHYDamageBone");
+            v24 = SoundMap_ResolveAnimSoundNote("PHYDamageBone"); /*0x6afbf9*/
           }
           else
           {
-            v34 = 1;
-            if ( Actor_IsCreature(a6) )
-              v25 = sub_447490("PHYDamageFur");
+            v33 = 1; /*0x6afc04*/
+            if ( Actor_IsCreature((Actor *)a6) ) /*0x6afbfd*/
+              v24 = SoundMap_ResolveAnimSoundNote("PHYDamageFur"); /*0x6afc10*/
             else
-              v25 = sub_447490("PHYDamageFlesh");
+              v24 = SoundMap_ResolveAnimSoundNote("PHYDamageFlesh"); /*0x6afc1d*/
           }
-          if ( v25 )
-            v36 = OSGLobals_PlaySound((int *)dword_B3C0F0, *(void **)(v25 + 0xC), 0x4102, 1);
+          if ( v24 ) /*0x6afc24*/
+            v35 = OSGLobals_PlaySound((int *)unk_B3C0F0, *(void **)(v24 + 0xC), 0x4102, 1); /*0x6afc3c*/
         }
-        v26 = 0;
-        if ( a7 < 0 && Actor_IsCreature(a3) )
+        v25 = 0; /*0x6afc44*/
+        if ( a7 < 0 && Actor_IsCreature((Actor *)a3) ) /*0x6afc4e*/
         {
-          v27 = (void *)((int (__usercall *)@<eax>(Actor *@<ecx>, double@<st0>, double@<st1>))a3->vtbl->super.super.GetBaseForm)(
+          v26 = (void *)((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>))a3->vtbl->GetBaseForm)( /*0x6afc63*/
                           a3,
                           a2,
                           a1);
-          v28 = OblivionDynamicCast(
-                  v27,
+          v27 = OblivionDynamicCast( /*0x6afc74*/
+                  v26,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                   &TESCreature `RTTI Type Descriptor',
                   0);
-          v29 = sub_51CEC0(v28, 9u);
-          if ( v29 )
+          v28 = TESCreature_SelectSoundForAnimEnum(v27, 9u); /*0x6afc80*/
+          if ( v28 ) /*0x6afc87*/
           {
-            if ( dword_B3C0F0 )
+            if ( unk_B3C0F0 ) /*0x6afc89*/
             {
-              v13 = OSGLobals_PlaySound((int *)dword_B3C0F0, *(void **)(v29 + 0xC), 0x4102, 1);
-              if ( v13 )
-                goto LABEL_73;
+              v12 = OSGLobals_PlaySound((int *)unk_B3C0F0, *(void **)(v28 + 0xC), 0x4102, 1); /*0x6afca3*/
+              if ( v12 ) /*0x6afca7*/
+                goto LABEL_73; /*0x6afca7*/
             }
           }
         }
-        switch ( a7 )
+        switch ( a7 ) /*0x6afcb2*/
         {
-          case 0:
-          case 1:
-            v26 = 1;
-            if ( a11 )
+          case 0: /*0x6afcb2*/
+          case 1: /*0x6afcb2*/
+            v25 = 1; /*0x6afcbe*/
+            if ( a11 ) /*0x6afcc0*/
             {
-              v30 = sub_447490("WPNHitBladeFleshEnchanted");
+              v29 = SoundMap_ResolveAnimSoundNote("WPNHitBladeFleshEnchanted"); /*0x6afcc7*/
             }
-            else if ( !v34 || v35 )
+            else if ( !v33 || v34 ) /*0x6afcd5*/
             {
-              v30 = sub_447490("WPNHitBlade");
-            }
-            else
-            {
-              v30 = sub_447490("WPNHitBladeFlesh");
-            }
-            break;
-          case 2:
-          case 3:
-            v26 = 1;
-            if ( a11 )
-            {
-              v30 = sub_447490("WPNHitBluntFleshEnchanted");
-            }
-            else if ( !v34 || v35 )
-            {
-              v30 = sub_447490("WPNHitBlunt");
+              v29 = SoundMap_ResolveAnimSoundNote("WPNHitBlade"); /*0x6afce3*/
             }
             else
             {
-              v30 = sub_447490("WPNHitBluntFlesh");
+              v29 = SoundMap_ResolveAnimSoundNote("WPNHitBladeFlesh"); /*0x6afcdc*/
             }
-            break;
-          case 5:
-            v30 = sub_447490("WPNHitArrow");
-            break;
+            break; /*0x6afcc7*/
+          case 2: /*0x6afcb2*/
+          case 3: /*0x6afcb2*/
+            v25 = 1; /*0x6afcea*/
+            if ( a11 ) /*0x6afcec*/
+            {
+              v29 = SoundMap_ResolveAnimSoundNote("WPNHitBluntFleshEnchanted"); /*0x6afcf3*/
+            }
+            else if ( !v33 || v34 ) /*0x6afd01*/
+            {
+              v29 = SoundMap_ResolveAnimSoundNote("WPNHitBlunt"); /*0x6afd0f*/
+            }
+            else
+            {
+              v29 = SoundMap_ResolveAnimSoundNote("WPNHitBluntFlesh"); /*0x6afd08*/
+            }
+            break; /*0x6afcf3*/
+          case 5: /*0x6afcb2*/
+            v29 = SoundMap_ResolveAnimSoundNote("WPNHitArrow"); /*0x6afd16*/
+            break; /*0x6afd16*/
           default:
-            v30 = sub_447490("WPNHitHand");
-            break;
+            v29 = SoundMap_ResolveAnimSoundNote("WPNHitHand"); /*0x6afd23*/
+            break; /*0x6afd23*/
         }
-        if ( v30 && (v13 = OSGLobals_PlaySound((int *)dword_B3C0F0, *(void **)(v30 + 0xC), 0x4102, 1)) != 0 )
+        if ( v29 && (v12 = OSGLobals_PlaySound((int *)unk_B3C0F0, *(void **)(v29 + 0xC), 0x4102, 1)) != 0 ) /*0x6afd4a*/
         {
 LABEL_73:
-          sub_6B7360(v13, v48, v50, v52);
-          if ( a3->members.super.process )
+          sub_6B7360(v12, v47, v49, v51); /*0x6afd6c*/
+          if ( a3[1].vtbl ) /*0x6afd75*/
           {
-            if ( v39 )
+            if ( v38 ) /*0x6afd80*/
             {
-              v53 = dbl_A68610 - Rand5(flt_A2FAAC) + dbl_A2F928;
-              sub_6B7310(v13, v53);
+              v52 = dbl_A68610 - Rand5(kFaceEarNormalMatchRadius) + dbl_A2F928; /*0x6afd9f*/
+              sub_6B7310(v12, v52); /*0x6afdaa*/
             }
           }
-          v54 = sub_517DD0() * dbl_A77428;
-          sub_6B7280(v13, v54);
-          v31 = (int *)a6;
-          sub_6AC3E0((_DWORD **)dword_B3C0F0, *v13, (LONG)a6);
+          v53 = sub_517DD0() * dbl_A77428; /*0x6afdbd*/
+          sub_6B7280(v12, v53); /*0x6afdc8*/
+          v30 = (int *)a6; /*0x6afdcd*/
+          sub_6AC3E0((_DWORD **)unk_B3C0F0, *v12, (LONG)a6); /*0x6afddb*/
         }
         else
         {
-          v31 = (int *)a6;
+          v30 = (int *)a6; /*0x6afde2*/
         }
-        if ( v26 && v34 )
+        if ( v25 && v33 ) /*0x6afdef*/
         {
-          v32 = v36;
-          if ( v36 )
+          v31 = v35; /*0x6afdf1*/
+          if ( v35 ) /*0x6afdf7*/
           {
-            sub_6B73C0(v36);
-            sub_6B73E0(v36);
-            FormHeapFree((unsigned int)v36);
-            v32 = 0;
+            sub_6B73C0(v35); /*0x6afdff*/
+            sub_6B73E0(v35); /*0x6afe06*/
+            FormHeapFree((unsigned int)v35); /*0x6afe0c*/
+            v31 = 0; /*0x6afe14*/
           }
         }
         else
         {
-          v32 = v36;
-          if ( v36 )
+          v31 = v35; /*0x6afe1b*/
+          if ( v35 ) /*0x6afe21*/
           {
-            if ( a4 > 0.0 )
+            if ( a4 > 0.0 ) /*0x6afe36*/
             {
-              v55 = a4 / (double)Actor_GetBaseCalcAVi(v31, (int)v36, (int)v13, (int)v31, 8);
-              if ( v55 > 1.0 )
-                v55 = 1.0;
-              sub_517DF0();
-              v44 = a4 * dbl_A77428;
-              sub_6B7280(v36, v44);
-              sub_6B7360(v36, v48, v50, v52);
-              v56 = 1.0 - v55 / dbl_A3F3E8 - dbl_A68610;
-              sub_6B7310(v36, v56);
-              sub_6AC3E0((_DWORD **)dword_B3C0F0, *v36, (LONG)v31);
+              v54 = a4 / (double)Actor_GetBaseCalcAVi(v30, (int)v35, (int)v12, (int)v30, 8); /*0x6afe55*/
+              if ( v54 > 1.0 ) /*0x6afe64*/
+                v54 = 1.0; /*0x6afe66*/
+              sub_517DF0(); /*0x6afe6e*/
+              v43 = a4 * dbl_A77428; /*0x6afe7c*/
+              sub_6B7280(v35, v43); /*0x6afe87*/
+              sub_6B7360(v35, v47, v49, v51); /*0x6afea8*/
+              v55 = 1.0 - v54 / dbl_A3F3E8 - dbl_A68610; /*0x6afec4*/
+              sub_6B7310(v35, v55); /*0x6afecf*/
+              sub_6AC3E0((_DWORD **)unk_B3C0F0, *v35, (LONG)v30); /*0x6afede*/
             }
           }
         }
-        if ( v14 )
+        if ( v13 ) /*0x6afee9*/
         {
-          sub_6B7360(v14, v48, v50, v52);
-          v57 = (double)(Rand3(4) - 2) / fConst_200 + dbl_A2F928;
-          sub_6B7310(v14, v57);
-          sub_6AC3E0((_DWORD **)dword_B3C0F0, *v14, (LONG)v31);
-          v58 = sub_517DE0() * dbl_A77428;
-          sub_6B7280(v14, v58);
-          sub_6B71C0(v14, 0);
+          sub_6B7360(v13, v47, v49, v51); /*0x6aff0b*/
+          v56 = (double)(Game_RandomIntBelow(4) - 2) / fConst_200 + dbl_A2F928; /*0x6aff30*/
+          sub_6B7310(v13, v56); /*0x6aff3b*/
+          sub_6AC3E0((_DWORD **)unk_B3C0F0, *v13, (LONG)v30); /*0x6aff4b*/
+          v57 = sub_517DE0() * dbl_A77428; /*0x6aff5e*/
+          sub_6B7280(v13, v57); /*0x6aff69*/
+          sub_6B71C0(v13, 0); /*0x6aff72*/
         }
-        if ( v32 )
-          sub_6B71C0(v32, 0);
-        if ( v13 )
+        if ( v31 ) /*0x6aff79*/
+          sub_6B71C0(v31, 0); /*0x6aff7f*/
+        if ( v12 ) /*0x6aff86*/
         {
-          sub_6B71C0(v13, 0);
-          sub_6B73E0(v13);
-          FormHeapFree((unsigned int)v13);
+          sub_6B71C0(v12, 0); /*0x6aff8c*/
+          sub_6B73E0(v12); /*0x6aff93*/
+          FormHeapFree((unsigned int)v12); /*0x6aff99*/
         }
-        if ( v32 )
+        if ( v31 ) /*0x6affa3*/
         {
-          sub_6B73E0(v32);
-          FormHeapFree((unsigned int)v32);
+          sub_6B73E0(v31); /*0x6affa7*/
+          FormHeapFree((unsigned int)v31); /*0x6affad*/
         }
-        if ( v14 )
+        if ( v13 ) /*0x6affb7*/
         {
-          sub_6B73E0(v14);
-          FormHeapFree((unsigned int)v14);
+          sub_6B73E0(v13); /*0x6affbb*/
+          FormHeapFree((unsigned int)v13); /*0x6affc1*/
         }
       }
     }

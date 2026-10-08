@@ -11,7 +11,7 @@
 0x6EC125: test    eax, eax
 0x6EC127: jz      short loc_6EC13E
 0x6EC129: lea     esp, [esp+0]
-0x6EC130: cmp     eax, offset dword_B3CFBC
+0x6EC130: cmp     eax, offset stru_B3CFBC
 0x6EC135: jz      short loc_6EC16D
 0x6EC137: mov     eax, [eax+4]
 0x6EC13A: test    eax, eax

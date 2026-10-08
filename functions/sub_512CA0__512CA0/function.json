@@ -1,19 +1,36 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_512CA0",
+  "chunks": [
+    [
+      "0x512CA0",
+      "0x512F9A"
+    ],
+    [
+      "0x9B6FF0",
+      "0x9B7021"
+    ]
+  ],
+  "chunks_sha256": "b4219e90b9642179d70168ff36ebdad518ce07de674dbe6ca025df979c795e05",
+  "comment_regular": "Hit visual-effect command path. Applies a visual effect to a reference; when the ref has no NiNode yet it spawns a placed effect object and plays SpecialIdle_HitEffect through the controller manager.",
+  "comment_repeatable": "Hit visual-effect command path. Applies a visual effect to a reference; when the ref has no NiNode yet it spawns a placed effect object and plays SpecialIdle_HitEffect through the controller manager.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "Cmd_ApplyHitVisualEffect",
   "end_ea": "0x512F9A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_512CA0",
+  "name": "Cmd_ApplyHitVisualEffect",
   "segment": ".text",
   "sha256": "9292161128bea84562eee6a45ecccfb27acda7d67f2622baf650fbd30fc487db",
   "size": 762,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x512CA0",
-  "type": "void __usercall(double st6_0@<st1>, double@<st0>, ParamInfo *, UInt8 *, TESChildCELL *, TESObjectREFR *, Script *, ScriptEventList *l, int, UInt32 *)",
-  "xrefs_from_count": 288,
-  "xrefs_to_count": 1
+  "total_chunk_size": 811,
+  "type": "void __usercall(double st6_0@<st1>, double@<st0>, ParamInfo *, UInt8 *, TESObjectREFR *, TESObjectREFR *, Script *, ScriptEventList *l, int, UInt32 *)",
+  "xrefs_from_count": 307,
+  "xrefs_to_count": 0
 }

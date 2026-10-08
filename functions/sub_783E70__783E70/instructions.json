@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x783E70",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; Oblivion cubic Bezier interpolation for the first two components of four stVec control records, implemented by de Casteljau lerps and returned as a 2D stVec. Corroborated by RT4.1 IdvSpline.cpp SplineInterpolate after binary observation.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x783E73",
-    "line": "mov     ecx, [esp+20h+arg_4]",
+    "line": "mov     ecx, [esp+20h+p0]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x783E77",
-    "line": "mov     eax, [esp+20h+arg_8]",
+    "line": "mov     eax, [esp+20h+p1]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x783E7D",
-    "line": "fstp    [esp+20h+arg_4]",
+    "line": "fstp    [esp+20h+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x783E8B",
-    "line": "fld     [esp+24h+arg_4]",
+    "line": "fld     [esp+24h+p0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x783E93",
-    "line": "fld     [esp+24h+arg_14]",
+    "line": "fld     [esp+24h+t]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x783EA6",
-    "line": "mov     ecx, [esp+24h+arg_C]",
+    "line": "mov     ecx, [esp+24h+p2]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x783EAA",
-    "line": "fstp    [esp+24h+arg_4]",
+    "line": "fstp    [esp+24h+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x783EB1",
-    "line": "fld     [esp+24h+arg_4]",
+    "line": "fld     [esp+24h+p0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x783EC5",
-    "line": "fstp    [esp+24h+arg_4]",
+    "line": "fstp    [esp+24h+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x783ECB",
-    "line": "fld     [esp+24h+arg_4]",
+    "line": "fld     [esp+24h+p0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x783EE0",
-    "line": "mov     eax, [esp+24h+arg_10]",
+    "line": "mov     eax, [esp+24h+p3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x783EE4",
-    "line": "fstp    [esp+24h+arg_4]",
+    "line": "fstp    [esp+24h+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x783EEB",
-    "line": "fld     [esp+24h+arg_4]",
+    "line": "fld     [esp+24h+p0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x783EFF",
-    "line": "fstp    [esp+24h+arg_4]",
+    "line": "fstp    [esp+24h+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x783F05",
-    "line": "fld     [esp+24h+arg_4]",
+    "line": "fld     [esp+24h+p0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x783F1A",
-    "line": "fstp    [esp+24h+arg_4]",
+    "line": "fstp    [esp+24h+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x783F21",
-    "line": "fld     [esp+24h+arg_4]",
+    "line": "fld     [esp+24h+p0]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x783F59",
-    "line": "mov     esi, [esp+24h+arg_0]",
+    "line": "mov     esi, [esp+24h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x783F62",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -649,19 +649,19 @@
   },
   {
     "ea": "0x783F9C",
-    "line": "fstp    [esp+2Ch+arg_4]",
+    "line": "fstp    [esp+2Ch+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x783FA0",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+p0]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x783FA4",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+y]; y",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -709,25 +709,25 @@
   },
   {
     "ea": "0x783FBA",
-    "line": "fstp    [esp+2Ch+arg_4]",
+    "line": "fstp    [esp+2Ch+p0]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x783FBE",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+p0]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x783FC2",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+x]; x",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x783FC5",
-    "line": "call    sub_78E5A0",
+    "line": "call    OB_stVec_ctor_xy_010201A0; Oblivion stVec(x,y) constructor: stores x/y, zeros z/w/v, and sets logical size to 2. Exact body corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },

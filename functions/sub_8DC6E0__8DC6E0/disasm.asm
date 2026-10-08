@@ -29,7 +29,6 @@
 0x8DC730: mov     eax, edx
 0x8DC732: jge     short loc_8DC75A
 0x8DC734: jmp     short loc_8DC740
-0x8DC736: align 10h
 0x8DC740: mov     ecx, [esi+0E8h]
 0x8DC746: mov     edi, [ecx+eax*4+4]
 0x8DC74A: lea     ecx, [ecx+eax*4]

@@ -1,1 +1,1 @@
-tagCOINIT
+typedef COINIT tagCOINIT;

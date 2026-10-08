@@ -1,4 +1,4 @@
-0x519CE0: cmp     byte ptr [ecx+4], 24h ; '$'
+0x519CE0: cmp     byte ptr [ecx+4], 24h ; '$'; TESActorBase_CanFly: creature base flag 0x20. Actor_FallImpact skips fall damage for can-fly actors; Slowfall/climb discipline should not overwrite natural flying behavior.
 0x519CE4: jnz     short loc_519CEF
 0x519CE6: mov     eax, [ecx+28h]
 0x519CE9: shr     eax, 5

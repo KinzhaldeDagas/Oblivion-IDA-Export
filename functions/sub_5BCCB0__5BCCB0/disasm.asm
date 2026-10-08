@@ -33,7 +33,6 @@
 0x5BCD22: xor     bl, bl
 0x5BCD24: xor     esi, esi
 0x5BCD26: jmp     short loc_5BCD30
-0x5BCD28: align 10h
 0x5BCD30: mov     ax, [esp+38h+var_14.m_dataLen]
 0x5BCD35: cmp     ax, 0FFFFh
 0x5BCD39: jnz     short loc_5BCD4D
@@ -57,14 +56,14 @@
 0x5BCD61: jnz     short loc_5BCD71
 0x5BCD63: push    0
 0x5BCD65: mov     bl, 1
-0x5BCD67: call    FormHeapFree
+0x5BCD67: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BCD6C: add     esp, 4
 0x5BCD6F: jmp     short loc_5BCD93
 0x5BCD71: cmp     al, 3
 0x5BCD73: jnz     short loc_5BCD83
 0x5BCD75: push    0
 0x5BCD77: xor     bl, bl
-0x5BCD79: call    FormHeapFree
+0x5BCD79: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BCD7E: add     esp, 4
 0x5BCD81: jmp     short loc_5BCD93
 0x5BCD83: test    bl, bl
@@ -75,11 +74,11 @@
 0x5BCD96: cmp     esi, [esp+38h+var_18]
 0x5BCD9A: jbe     short loc_5BCD30
 0x5BCD9C: push    0
-0x5BCD9E: call    FormHeapFree
+0x5BCD9E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BCDA3: push    0
-0x5BCDA5: call    FormHeapFree
+0x5BCDA5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BCDAA: push    edi
-0x5BCDAB: call    FormHeapFree
+0x5BCDAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BCDB0: add     esp, 0Ch
 0x5BCDB3: mov     ecx, [esp+38h+var_C]
 0x5BCDB7: mov     large fs:0, ecx
@@ -89,3 +88,16 @@
 0x5BCDC1: pop     ebx
 0x5BCDC2: add     esp, 28h
 0x5BCDC5: retn
+0x9C0E50: lea     ecx, [ebp-14h]; void *
+0x9C0E53: jmp     BSStringT_Clear
+0x9C0E58: lea     ecx, [ebp-20h]; void *
+0x9C0E5B: jmp     BSStringT_Clear
+0x9C0E60: lea     ecx, [ebp-28h]; void *
+0x9C0E63: jmp     BSStringT_Clear
+0x9C0E68: mov     edx, [esp+arg_4]
+0x9C0E6C: lea     eax, [edx-28h]
+0x9C0E6F: mov     ecx, [edx-2Ch]
+0x9C0E72: xor     ecx, eax
+0x9C0E74: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0E79: mov     eax, offset stru_AE9FA0
+0x9C0E7E: jmp     ___CxxFrameHandler3

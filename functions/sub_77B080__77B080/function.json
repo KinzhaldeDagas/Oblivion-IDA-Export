@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B080",
+      "0x77B0C0"
+    ]
+  ],
+  "chunks_sha256": "03f07d5ed56922f01e103ff435e9baf4d68ade13feb2e9165a2395578931551c",
+  "comment_regular": "MoonSugarEffect decode: NiDX9RenderState SetPixelShader cache. Caches current shader at +0xFE8, optional previous at +0xFEC, and only calls D3D SetPixelShader when value changes.",
+  "comment_repeatable": "MoonSugarEffect decode: NiDX9RenderState SetPixelShader cache. Caches current shader at +0xFE8, optional previous at +0xFEC, and only calls D3D SetPixelShader when value changes.\nDX11 GPU bucket program-state audit 2026-10-01: saved shader is updated before the equality test, including equal-cache requests. Native current/saved pairs are VS FE0/FE4 and PS FE8/FEC; device is FF8. A changed cache writes current before tailcalling device SetVertexShader(+170) or SetPixelShader(+1AC); equal-cache requests do not update actual device state. NiD3DPass 75FBA0 uses global B42040 and pushes savePrevious=0 before its zero-argument wrapper getter, then pushes the returned COM shader and calls the manager. Getter RET does not consume that pending save flag.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77B080",
+  "display_name": "NiDX9RenderState_SetPixelShader",
   "end_ea": "0x77B0C0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77B080",
+  "name": "NiDX9RenderState_SetPixelShader",
   "segment": ".text",
   "sha256": "03f07d5ed56922f01e103ff435e9baf4d68ade13feb2e9165a2395578931551c",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B080",
-  "type": "int __thiscall(int this, int, char)",
+  "total_chunk_size": 64,
+  "type": "unsigned int __thiscall(NiDX9RenderState *self, IDirect3DPixelShader9 *shader, unsigned __int8 savePrevious)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 2
 }

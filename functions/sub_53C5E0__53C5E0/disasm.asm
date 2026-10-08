@@ -6,7 +6,7 @@
 0x53C5EF: jz      short loc_53C628
 0x53C5F1: push    esi
 0x53C5F2: movzx   esi, byte ptr [eax+55h]
-0x53C5F6: mov     ecx, offset TimeGlobals
+0x53C5F6: mov     ecx, 0B332E0h
 0x53C5FB: and     esi, 0FFFFFF3Fh
 0x53C601: call    TimeGlobals_GetGameDaysPassed
 0x53C606: xor     edx, edx

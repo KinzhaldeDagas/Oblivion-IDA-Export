@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 48,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 89,
+  "chunks": [
+    [
+      "0x579C10",
+      "0x579CE7"
+    ]
+  ],
+  "chunks_sha256": "4e838005b1a03bdad452bb69a25c4cd116d55db0fefbfe84777953eef223852d",
+  "comment_regular": "Verified aPortable: cdecl varargs message, void callback(), base button index, NULL-terminated button labels. Requires InterfaceManager cursor; mode selects message menu builder. Fallout queued MessageMenu API is architecturally related but is NOT the same calling convention or lifetime.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ShowUIMessageBox",
   "end_ea": "0x579CE7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ShowUIMessageBox",
   "segment": ".text",
   "sha256": "4e838005b1a03bdad452bb69a25c4cd116d55db0fefbfe84777953eef223852d",
   "size": 215,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x579C10",
-  "type": "char __usercall@<al>(char *@<ecx>, char@<bpl>, double st5_0@<st2>, double st6_0@<st1>, double st7_0@<st0>, const char *, int, char, const char *, char)",
+  "total_chunk_size": 215,
+  "type": "bool(const char *message, void (__cdecl *callback)(), unsigned int baseButtonIndex, const char *firstButton, ...)",
   "xrefs_from_count": 88,
   "xrefs_to_count": 89
 }

@@ -1,35 +1,35 @@
-void __thiscall sub_6B81D0(BSSimpleList_VoidPtr *this)
+void __thiscall DialogueItem::Destroy(DialogueItemView *this)
 {
-  unsigned int data; // esi
-  unsigned int *next; // eax
+  DialogueResponse *firstResponse; // esi
+  DialogueResponseNode *nextResponseNode; // eax
 
-  if ( this )
+  if ( this ) /*0x6b81fa*/
   {
-    while ( !BSSimpleList_IsEmpty(this) )
+    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)this) ) /*0x6b8209*/
     {
-      data = (unsigned int)this->firstNode.data;
-      if ( this->firstNode.data )
+      firstResponse = this->firstResponse; /*0x6b820b*/
+      if ( this->firstResponse ) /*0x6b820b*/
       {
-        FormHeapFree(*(_DWORD *)(data + 0x10));
-        *(_DWORD *)(data + 0x10) = 0;
-        *(_WORD *)(data + 0x16) = 0;
-        *(_WORD *)(data + 0x14) = 0;
-        FormHeapFree(*(_DWORD *)data);
-        *(_DWORD *)data = 0;
-        *(_WORD *)(data + 6) = 0;
-        *(_WORD *)(data + 4) = 0;
-        FormHeapFree(data);
+        FormHeapFree((unsigned int)firstResponse->voicePath.m_data); /*0x6b8215*/
+        firstResponse->voicePath.m_data = 0; /*0x6b821a*/
+        firstResponse->voicePath.m_bufLen = 0; /*0x6b821d*/
+        firstResponse->voicePath.m_dataLen = 0; /*0x6b8221*/
+        FormHeapFree((unsigned int)firstResponse->displayText.m_data); /*0x6b8228*/
+        firstResponse->displayText.m_data = 0; /*0x6b822e*/
+        firstResponse->displayText.m_bufLen = 0; /*0x6b8230*/
+        firstResponse->displayText.m_dataLen = 0; /*0x6b8234*/
+        FormHeapFree((unsigned int)firstResponse); /*0x6b8238*/
       }
-      next = (unsigned int *)this->firstNode.next;
-      if ( next )
+      nextResponseNode = this->nextResponseNode; /*0x6b8240*/
+      if ( nextResponseNode ) /*0x6b8245*/
       {
-        this->firstNode.next = (BSSimpleList_VoidPtr::NodeVoid *)next[1];
-        this->firstNode.data = (void *)*next;
-        FormHeapFree((unsigned int)next);
+        this->nextResponseNode = nextResponseNode->next; /*0x6b824a*/
+        this->firstResponse = nextResponseNode->item; /*0x6b8250*/
+        FormHeapFree((unsigned int)nextResponseNode); /*0x6b8252*/
       }
       else
       {
-        this->firstNode.data = 0;
+        this->firstResponse = 0; /*0x6b825c*/
       }
     }
   }

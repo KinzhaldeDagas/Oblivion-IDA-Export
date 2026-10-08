@@ -4,7 +4,6 @@
 0x47D5B6: mov     eax, esi
 0x47D5B8: lea     edx, [eax+1]
 0x47D5BB: jmp     short loc_47D5C0
-0x47D5BD: align 10h
 0x47D5C0: mov     cl, [eax]
 0x47D5C2: add     eax, 1
 0x47D5C5: test    cl, cl

@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 11,
+  "chunks": [
+    [
+      "0x7ED1A0",
+      "0x7ED29E"
+    ]
+  ],
+  "chunks_sha256": "4d3abe5688406cfa43bb640f819a260dc4c887d9512f0d447110d9327631ad4e",
+  "comment_regular": "Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.",
+  "comment_repeatable": "Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.\n\nMEF PERF 2026-10-07 PASS4: LC-1 iterator decode: reads head+70, stores/advances shared cursor+7C and filters cullStatus word+118==FF or backing source AppCulled bit+18. Legacy NonShadowLight name does NOT imply +F4 filtering here; caller863E80 applies +F4 separately. Returns borrowed wrapper. No count/budget-based truncation in this function.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ED1A0",
+  "display_name": "BSShaderLightingProperty__GetFirstActiveNonShadowLight",
   "end_ea": "0x7ED29E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ED1A0",
+  "name": "BSShaderLightingProperty__GetFirstActiveNonShadowLight",
   "segment": ".text",
   "sha256": "4d3abe5688406cfa43bb640f819a260dc4c887d9512f0d447110d9327631ad4e",
   "size": 254,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ED1A0",
-  "type": "_DWORD *__thiscall(_DWORD *this)",
+  "total_chunk_size": 254,
+  "type": "ShadowSceneLight_DecodedLayout *__thiscall(MEF_LightingPropertyIterationView32 *self)",
   "xrefs_from_count": 116,
   "xrefs_to_count": 11
 }

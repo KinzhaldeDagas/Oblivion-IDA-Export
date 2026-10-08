@@ -1,4 +1,4 @@
-0x404F20: cmp     byte ptr [ecx+51h], 0
+0x404F20: cmp     byte ptr [ecx+51h], 0; CustomAnimSupport evidence: global loading/update gate checked by KF install/defer decisions; support condition for SpecialAnims install timing.
 0x404F24: jnz     short loc_404F2F
 0x404F26: cmp     byte ptr [ecx+52h], 0
 0x404F2A: jnz     short loc_404F2F

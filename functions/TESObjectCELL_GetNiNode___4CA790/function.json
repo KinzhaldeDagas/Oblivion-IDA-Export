@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 22,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 35,
+  "chunks": [
+    [
+      "0x4CA790",
+      "0x4CA794"
+    ]
+  ],
+  "chunks_sha256": "9c8eb3adab3133652cdccbd58b010e59bcef792f39806367b4a21f5a9815fbf5",
+  "comment_regular": "Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
+  "comment_repeatable": "Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "TESObjectCELL_GetNiNode?",
+  "display_name": "GetObjectPointerAt_054",
   "end_ea": "0x4CA794",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESObjectCELL_GetNiNode?",
+  "name": "GetObjectPointerAt_054",
   "segment": ".text",
   "sha256": "9c8eb3adab3133652cdccbd58b010e59bcef792f39806367b4a21f5a9815fbf5",
   "size": 4,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CA790",
-  "type": "NiNode *__thiscall(TESObjectCELL *this)",
+  "total_chunk_size": 4,
+  "type": "void *__thiscall(void *object)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 41
 }

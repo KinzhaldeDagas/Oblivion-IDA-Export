@@ -43,31 +43,31 @@
 0x4F26C6: jb      short loc_4F26B5
 0x4F26C8: xor     eax, eax
 0x4F26CA: test    eax, eax
-0x4F26CC: mov     [esp+34h+var_24], eax
+0x4F26CC: mov     [esp+34h+position], eax
 0x4F26D0: jz      short loc_4F270A
-0x4F26D2: lea     eax, [esp+34h+var_28]
-0x4F26D6: push    eax
-0x4F26D7: lea     ecx, [esp+38h+var_20]
-0x4F26DB: push    ecx
-0x4F26DC: mov     ecx, [esi+30h]
-0x4F26DF: lea     edx, [esp+3Ch+var_24]
-0x4F26E3: push    edx
-0x4F26E4: mov     [esp+40h+var_28], 0
-0x4F26EC: call    sub_452600
-0x4F26F1: mov     ecx, [esp+34h+var_28]
+0x4F26D2: lea     eax, [esp+34h+valueOut]
+0x4F26D6: push    eax; valueOut
+0x4F26D7: lea     ecx, [esp+38h+keyOut]
+0x4F26DB: push    ecx; keyOut
+0x4F26DC: mov     ecx, [esi+30h]; self
+0x4F26DF: lea     edx, [esp+3Ch+position]
+0x4F26E3: push    edx; position
+0x4F26E4: mov     [esp+40h+valueOut], 0
+0x4F26EC: call    NiTMap_U32Pointer_GetNextEntry
+0x4F26F1: mov     ecx, [esp+34h+valueOut]
 0x4F26F5: test    ecx, ecx
 0x4F26F7: jz      short loc_4F2703
 0x4F26F9: lea     eax, [esp+34h+var_1C]
 0x4F26FD: push    eax
-0x4F26FE: call    sub_4CBE50
-0x4F2703: cmp     [esp+34h+var_24], 0
+0x4F26FE: call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.
+0x4F2703: cmp     [esp+34h+position], 0
 0x4F2708: jnz     short loc_4F26D2
 0x4F270A: mov     ecx, [esi+34h]
 0x4F270D: test    ecx, ecx
 0x4F270F: jz      short loc_4F271B
 0x4F2711: lea     edx, [esp+34h+var_1C]
 0x4F2715: push    edx
-0x4F2716: call    sub_4CBE50
+0x4F2716: call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.
 0x4F271B: mov     ecx, ds:0B33A98h
 0x4F2721: push    0FFFFFFFFh
 0x4F2723: call    sub_447DB0
@@ -87,3 +87,12 @@
 0x4F275E: retn
 0x4F275F: mov     eax, [edi+eax*4]
 0x4F2762: jmp     loc_4F26CA
+0x9B68F0: lea     ecx, [ebp-1Ch]
+0x9B68F3: jmp     ??1?$NiTPointerMap@PAVTESObjectCELL@@_N@@UAE@XZ; NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(void)
+0x9B68F8: mov     edx, [esp+arg_4]
+0x9B68FC: lea     eax, [edx-24h]
+0x9B68FF: mov     ecx, [edx-28h]
+0x9B6902: xor     ecx, eax
+0x9B6904: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6909: mov     eax, offset stru_AE16E0
+0x9B690E: jmp     ___CxxFrameHandler3

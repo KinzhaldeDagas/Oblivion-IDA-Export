@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x590F80",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+sibling]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x590F84",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,37 +31,37 @@
   },
   {
     "ea": "0x590F8C",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+name]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x590F90",
-    "line": "push    eax",
+    "line": "push    eax; sibling",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x590F91",
-    "line": "push    ecx",
+    "line": "push    ecx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x590F92",
-    "line": "push    edx",
+    "line": "push    edx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x590F93",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x590F95",
-    "line": "call    sub_58DA00",
+    "line": "call    Tile__Init; Verified: initializes base Tile, optionally attaches to supplied parent via 0x58D1C0, then optionally names it. First argument after receiver is Tile* parent, not float; disassembly uses integer pointer test and push.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x590FA1",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x590FA4",
-    "line": "push    0FCCh; a2",
+    "line": "push    0FCCh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x590FAB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x590FB7",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x590FBA",
-    "line": "push    0FCDh; a2",
+    "line": "push    0FCDh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x590FC1",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x590FCD",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x590FD0",
-    "line": "push    0FCEh; a2",
+    "line": "push    0FCEh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x590FD7",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x590FE3",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x590FE6",
-    "line": "push    0FA7h; a2",
+    "line": "push    0FA7h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x590FED",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

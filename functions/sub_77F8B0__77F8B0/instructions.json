@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x77F8B2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+alphaProperty]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x77F916",
-    "line": "jz      short loc_77F956",
+    "line": "jz      short loc_77F956; Authoritative NiAlphaProperty application: flag bit 9 gates D3DRS_ALPHATESTENABLE.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x77F93D",
-    "line": "call    edx",
+    "line": "call    edx; Applies D3DRS_ALPHAFUNC from selector bits 10..12. Tree flags 0x12EC select index 4, mapped to D3DCMP_GREATER by NiD3DRenderState construction.",
     "mnemonic": "call",
     "size": 2
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x77F951",
-    "line": "pop     edi",
+    "line": "pop     edi; Applies NiAlphaProperty reference byte at +0x1A to D3DRS_ALPHAREF. Tree leaf LOD sync updates this byte dynamically.",
     "mnemonic": "pop",
     "size": 1
   },

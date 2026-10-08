@@ -11,13 +11,13 @@
 0x607132: test    esi, esi
 0x607134: jz      short loc_607193
 0x607136: mov     ecx, esi; this
-0x607138: call    sub_5E6C60
+0x607138: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x60713D: test    al, al
 0x60713F: jnz     short loc_60718C
-0x607141: push    0
-0x607143: push    esi
-0x607144: mov     ecx, ebx
-0x607146: call    sub_605F60
+0x607141: push    0; useBase
+0x607143: push    esi; observer
+0x607144: mov     ecx, ebx; self
+0x607146: call    Crime_GetDispositionPenalty
 0x60714B: cmp     esi, [ebx+8]
 0x60714E: mov     [esp+10h+var_4], eax
 0x607152: fild    [esp+10h+var_4]

@@ -1,11 +1,11 @@
-0x79C020: sub     esp, 8
-0x79C023: mov     edx, [esp+8+arg_8]
+0x79C020: sub     esp, 8; Thin backward-copy wrapper for overlap-safe SFrondGuide range assignment; returns destination start.
+0x79C023: mov     edx, [esp+8+destinationLast]
 0x79C027: push    ebx
-0x79C028: mov     ebx, [esp+0Ch+arg_0]
+0x79C028: mov     ebx, [esp+0Ch+first]
 0x79C02C: push    esi
-0x79C02D: mov     esi, [esp+10h+arg_4]
+0x79C02D: mov     esi, [esp+10h+last]
 0x79C031: push    edi
-0x79C032: mov     edi, [esp+14h+arg_8]
+0x79C032: mov     edi, [esp+14h+destinationLast]
 0x79C036: xor     al, al
 0x79C038: mov     byte ptr [esp+14h+var_4], al
 0x79C03C: mov     ecx, [esp+14h+var_4]
@@ -14,10 +14,10 @@
 0x79C048: push    eax
 0x79C049: push    ecx
 0x79C04A: push    edx
-0x79C04B: push    edi
-0x79C04C: push    esi
-0x79C04D: push    ebx
-0x79C04E: call    sub_79B860
+0x79C04B: push    edi; destinationLast
+0x79C04C: push    esi; last
+0x79C04D: push    ebx; first
+0x79C04E: call    OB_SFrondGuide_CopyAssignRangeBackward_010201A0; Overlap-safe backward copy-assignment of compact SFrondGuide records. Deep-assigns each embedded SFrondVertex vector before copying scalar fields.
 0x79C053: sub     esi, ebx
 0x79C055: mov     eax, 2AAAAAABh
 0x79C05A: imul    esi

@@ -164,3 +164,12 @@
 0x54A88D: lea     ecx, [esp+3Ch+var_20]
 0x54A891: call    sub_54F350
 0x54A896: jmp     loc_54A7A8
+0x9BB610: lea     ecx, [ebp-20h]; this
+0x9BB613: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB618: mov     edx, [esp+arg_4]
+0x9BB61C: lea     eax, [edx-28h]
+0x9BB61F: mov     ecx, [edx-2Ch]
+0x9BB622: xor     ecx, eax
+0x9BB624: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BB629: mov     eax, offset stru_AE540C
+0x9BB62E: jmp     ___CxxFrameHandler3

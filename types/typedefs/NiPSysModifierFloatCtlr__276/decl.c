@@ -1,1 +1,1 @@
-NiPSysModifierFloatCtlr
+struct NiPSysModifierFloatCtlr;

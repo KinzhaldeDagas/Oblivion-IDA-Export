@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4C9840",
-    "line": "cmp     byte ptr [esp+arg_0], 0",
+    "line": "cmp     [esp+isPublic], 0; Verified body: sets/clears TESObjectCELL flags0 bit 0x20 and calls MarkAsModified(mask 8). Probable semantic identity: Public flag, supported by TESObjectCELL_HasPublicFlag20 and door trespass-access checks; Fallout independently names the homolog SetPublic. This comment records the confidence boundary; Fallout similarity alone is not treated as proof.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4C9856",
-    "line": "mov     [esp+arg_0], 8",
+    "line": "mov     dword ptr [esp+isPublic], 8",
     "mnemonic": "mov",
     "size": 8
   },

@@ -1,4 +1,4 @@
-0x7A8620: fld     dword ptr ds:0A8CB04h
+0x7A8620: fld     dword ptr ds:0A8CB04h; OBLIVION AUTHORITY (2026-08-30): Initializes the exact 0x34-byte SIdvTreeInfo embedded at CTreeEngine+0x24. The compact layout is stString28 followed by far, near, seed, size, variance, and flareSeed.
 0x7A8626: mov     eax, ecx
 0x7A8628: xor     ecx, ecx
 0x7A862A: mov     dword ptr [eax+18h], 0Fh

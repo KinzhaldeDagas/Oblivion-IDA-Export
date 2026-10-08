@@ -103,7 +103,6 @@
 0x8F0857: add     ebx, ecx
 0x8F0859: shl     ebx, 1
 0x8F085B: jmp     short loc_8F0860
-0x8F085D: align 10h
 0x8F0860: mov     eax, [esi+8]
 0x8F0863: mov     ecx, [esi+4]
 0x8F0866: and     eax, 3FFFFFFFh

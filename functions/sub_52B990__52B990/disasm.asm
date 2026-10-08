@@ -28,7 +28,6 @@
 0x52B9E1: mov     ebp, 2
 0x52B9E6: mov     ebx, 5
 0x52B9EB: jmp     short loc_52B9F0
-0x52B9ED: align 10h
 0x52B9F0: mov     eax, [esi]
 0x52B9F2: mov     edx, [eax+4]
 0x52B9F5: mov     ecx, esi

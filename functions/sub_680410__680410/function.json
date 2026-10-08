@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x680410",
+      "0x680428"
+    ]
+  ],
+  "chunks_sha256": "6a940d1bab26f471276f3bad6ce5aee40897bf8e39df9bb5b0eba1aa5da742ee",
+  "comment_regular": "Verified endpoint predicate: returns true when the supplied TESObjectREFR equals either referenceA or referenceB in the AStarWorldNode.",
+  "comment_repeatable": "Verified endpoint predicate: returns true when the supplied TESObjectREFR equals either referenceA or referenceB in the AStarWorldNode.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680410",
+  "display_name": "AStarWorldNode_ContainsReference",
   "end_ea": "0x680428",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680410",
+  "name": "AStarWorldNode_ContainsReference",
   "segment": ".text",
   "sha256": "6a940d1bab26f471276f3bad6ce5aee40897bf8e39df9bb5b0eba1aa5da742ee",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680410",
-  "type": "bool __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 24,
+  "type": "bool __thiscall(AStarWorldNode *this, TESObjectREFR *reference)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 2
 }

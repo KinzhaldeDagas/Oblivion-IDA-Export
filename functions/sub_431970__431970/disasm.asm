@@ -1,4 +1,4 @@
-0x431970: sub     esp, 14Ch
+0x431970: sub     esp, 14Ch; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.
 0x431976: mov     eax, ___security_cookie
 0x43197B: xor     eax, esp
 0x43197D: mov     [esp+14Ch+var_4], eax
@@ -96,12 +96,12 @@
 0x431A90: sub     eax, edx
 0x431A92: lea     edx, [edi+eax+1]
 0x431A96: push    edx; Size
-0x431A97: call    FormHeapAlloc
-0x431A9C: push    edi; Size
+0x431A97: call    FormHeapAlloc; MEF v42 verified wildcard path allocation guard: reject wrapped total size when total<=directory prefix EDI; on overflow/OOM remove pending size and skip only current file to FindNextFile at 0x431AD8.
+0x431A9C: push    edi; byteCount
 0x431A9D: mov     esi, eax
-0x431A9F: push    ebx; Src
-0x431AA0: push    esi; Dst
-0x431AA1: call    _memcpy
+0x431A9F: push    ebx; source
+0x431AA0: push    esi; destination
+0x431AA1: call    _memcpy;
 0x431AA6: push    5Ch ; '\'; Ch
 0x431AA8: push    esi; Str
 0x431AA9: mov     byte ptr [esi+edi], 0
@@ -121,7 +121,7 @@
 0x431AD0: push    esi
 0x431AD1: mov     ecx, ebp
 0x431AD3: call    BSSimpleList_PushFront
-0x431AD8: mov     ecx, [esp+15Ch+hFindFile]
+0x431AD8: mov     ecx, [esp+15Ch+hFindFile]; MEF v42 per-entry failure continuation: no path/list mutation occurred, so continue enumeration with the next WIN32_FIND_DATA entry.
 0x431ADC: lea     eax, [esp+15Ch+FindFileData]
 0x431AE0: push    eax; lpFindFileData
 0x431AE1: push    ecx; hFindFile
@@ -144,7 +144,7 @@
 0x431B14: cmp     dword ptr [ebp+0], 0
 0x431B18: jnz     short loc_431B25
 0x431B1A: push    ebp
-0x431B1B: call    FormHeapFree
+0x431B1B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x431B20: add     esp, 4
 0x431B23: xor     ebp, ebp
 0x431B25: mov     eax, ebp

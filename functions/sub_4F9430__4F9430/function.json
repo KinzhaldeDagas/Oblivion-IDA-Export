@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x4F9430",
+      "0x4F9463"
+    ]
+  ],
+  "chunks_sha256": "377b4aa768621fce0de748897b0b46a5db161339530745259aa33e32ca05e6d1",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": " Verified: TESGlobal form-record writer; calls TESForm_InitializeFormRecord, writes FNAM from member+0x20 (1 byte) and FLTV from member+0x24 (4 bytes), then finalizes record. Confirmed by raw RTTI/vtable; slot +0x40 dispatches here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4F9430",
+  "display_name": "TESGlobal_SaveFormRecord",
   "end_ea": "0x4F9463",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F9430",
+  "name": "TESGlobal_SaveFormRecord",
   "segment": ".text",
   "sha256": "377b4aa768621fce0de748897b0b46a5db161339530745259aa33e32ca05e6d1",
   "size": 51,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F9430",
+  "total_chunk_size": 51,
   "type": "UInt32 __usercall@<eax>(TESForm *this@<ecx>, char@<bpl>)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 1

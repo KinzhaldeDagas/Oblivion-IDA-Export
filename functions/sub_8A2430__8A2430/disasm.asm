@@ -40,7 +40,7 @@
 0x8A249C: lea     edx, [esp+48h+var_10]
 0x8A24A0: push    ebx
 0x8A24A1: push    edx
-0x8A24A2: call    sub_43F3E0
+0x8A24A2: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A24A7: add     esp, 10h
 0x8A24AA: push    offset aTrans; "Trans"
 0x8A24AF: lea     ecx, [esp+44h+var_10]

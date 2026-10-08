@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8827E0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+cloneProcess]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x8827E5",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+clone]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x8827EC",
-    "line": "push    eax",
+    "line": "push    eax; cloneProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8827ED",
-    "line": "push    ebx",
+    "line": "push    ebx; clone",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x8827F0",
-    "line": "call    sub_7D7AD0",
+    "line": "call    BSShaderPPLightingProperty_CopyCloneMembers; [Verified] BSShaderPPLightingProperty clone-field copier. Calls BSShaderProperty_CopyCloneMembers, resizes/copies the three NiPointer arrays and scalar fields in the PP-lighting extension, and retains refcounted members. It does not copy the inherited BSShaderLightingProperty decal list at +0x80.",
     "mnemonic": "call",
     "size": 5
   },

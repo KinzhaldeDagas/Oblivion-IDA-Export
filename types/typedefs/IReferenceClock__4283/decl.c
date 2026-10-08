@@ -1,1 +1,4 @@
-IReferenceClock
+struct IReferenceClock
+{
+IReferenceClockVtbl *lpVtbl;
+};

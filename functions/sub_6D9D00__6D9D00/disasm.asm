@@ -8,7 +8,7 @@
 0x6D9D10: cmp     esi, eax
 0x6D9D12: jz      short loc_6D9D2F
 0x6D9D14: mov     eax, [esp+8+arg_8]
-0x6D9D18: mov     dl, ds:byte_B3D3EE[eax]
+0x6D9D18: mov     dl, byte ptr ds:unk_B3D3EE[eax]
 0x6D9D1E: mov     [ecx+0Ch], edi
 0x6D9D21: pop     edi
 0x6D9D22: mov     [ecx+8], esi

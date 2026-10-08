@@ -1,4 +1,5 @@
-int __cdecl Calc_DetectionLevel_::CalcSneakFactor(
+// Selects whether the target's sneaking state contributes the alternate sneak factor before skill comparison.
+int __cdecl Calc_DetectionLevel_SelectSneakFactor(
         int a1,
         float a2,
         float a3,
@@ -20,19 +21,19 @@ int __cdecl Calc_DetectionLevel_::CalcSneakFactor(
         int a19,
         float a20)
 {
-  float v21; // [esp+8h] [ebp+8h]
+  int v21; // [esp+8h] [ebp+8h]
 
-  __asm { fst     [esp+arg_4]; float }
-  if ( (_BYTE)a14 )
+  __asm { fst     [esp+arg_4]; float } /*0x546534*/
+  if ( (_BYTE)a14 ) /*0x546538*/
   {
-    __asm
+    __asm /*0x54653a*/
     {
       fxch    st(2)
       fst     [esp+arg_4]
       fxch    st(2)
     }
   }
-  return Calc_DetectionLevel_::CalcSneakSkills(
+  return Calc_DetectionLevel_ApplySneakSkills(
            a1,
            v21,
            a3,

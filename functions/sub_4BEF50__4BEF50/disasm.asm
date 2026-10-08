@@ -1,4 +1,4 @@
-0x4BEF50: mov     eax, [esp+arg_0]
+0x4BEF50: mov     eax, [esp+position]; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.
 0x4BEF54: mov     edx, [eax]
 0x4BEF56: mov     [ecx+14h], edx
 0x4BEF59: mov     edx, [eax+4]

@@ -18,13 +18,13 @@
 0x5BF4A0: test    al, al
 0x5BF4A2: jz      loc_5BF744
 0x5BF4A8: mov     edi, [esi+0D8h]
-0x5BF4AE: mov     ecx, offset TimeGlobals
+0x5BF4AE: mov     ecx, 0B332E0h
 0x5BF4B3: add     edi, 44h ; 'D'
 0x5BF4B6: call    TimeGlobals_GetGameMonth
 0x5BF4BB: push    eax; int
-0x5BF4BC: mov     ecx, offset TimeGlobals
+0x5BF4BC: mov     ecx, 0B332E0h
 0x5BF4C1: call    TimeGlobals_GetGameDay
-0x5BF4C6: mov     ecx, offset TimeGlobals
+0x5BF4C6: mov     ecx, 0B332E0h
 0x5BF4CB: push    eax; char
 0x5BF4CC: call    TimeGlobals_GetGameHour
 0x5BF4D1: sub     esp, 8
@@ -32,7 +32,7 @@
 0x5BF4D8: mov     ecx, edi
 0x5BF4DA: fldz
 0x5BF4DC: fstp    [esp+40h+var_40]; float
-0x5BF4DF: call    sub_420F20
+0x5BF4DF: call    ExtraDataList_SetPersuasionPercentData; Gets/creates ExtraPersuasionPercent (type 0x46) and records the Oblivion persuasion timestamp fields supplied by the caller (year/day/hour/month ordering follows observed stores).
 0x5BF4E4: fld     dword ptr ds:0B38E40h
 0x5BF4EA: mov     ecx, [esi+0D8h]
 0x5BF4F0: fstp    [esp+30h+var_1C]
@@ -74,17 +74,17 @@
 0x5BF56B: push    ecx
 0x5BF56C: fstp    [esp+54h+var_54]; float
 0x5BF56F: call    sub_547B00
-0x5BF574: mov     ecx, ds:0B333C4h
+0x5BF574: mov     ecx, ds:0B333C4h; this
 0x5BF57A: add     esp, 24h
 0x5BF57D: mov     ebp, eax
-0x5BF57F: push    20h ; ' '
+0x5BF57F: push    20h ; ' '; actorValue
 0x5BF581: mov     [esp+34h+var_14], ebp
-0x5BF585: call    Actor_GetSkillMasteryLevel
+0x5BF585: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BF58A: cmp     eax, 4
 0x5BF58D: jnz     short loc_5BF5A0
 0x5BF58F: fild    [esp+30h+var_14]
 0x5BF593: fmul    qword ptr ds:0A2FAA0h
-0x5BF599: call    Double_To_SInt32
+0x5BF599: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BF59E: mov     ebp, eax
 0x5BF5A0: mov     edx, [esi+0D8h]
 0x5BF5A6: fld     dword ptr ds:0B38E30h
@@ -151,25 +151,25 @@
 0x5BF66C: push    eax
 0x5BF66D: mov     eax, [edx+114h]
 0x5BF673: call    eax
-0x5BF675: push    24h ; '$'
-0x5BF677: push    3
-0x5BF679: call    TESTopic__GEtTopic
+0x5BF675: push    24h ; '$'; index
+0x5BF677: push    3; topicType
+0x5BF679: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x5BF67E: mov     ecx, ds:0B333C4h
 0x5BF684: mov     edx, [esi+0D8h]
 0x5BF68A: add     esp, 8
-0x5BF68D: push    ebx
-0x5BF68E: push    ebx
-0x5BF68F: push    ecx
-0x5BF690: push    edx
-0x5BF691: mov     ecx, eax
-0x5BF693: call    TESTopic__CreateDialogueInfo
+0x5BF68D: push    ebx; conversation
+0x5BF68E: push    ebx; previousTopic
+0x5BF68F: push    ecx; target
+0x5BF690: push    edx; speaker
+0x5BF691: mov     ecx, eax; this
+0x5BF693: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x5BF698: mov     edi, eax
 0x5BF69A: cmp     edi, ebx
 0x5BF69C: jz      loc_5BF733
-0x5BF6A2: mov     ecx, edi
-0x5BF6A4: call    sub_6B7BA0
-0x5BF6A9: mov     ecx, edi
-0x5BF6AB: call    sub_6B7C20
+0x5BF6A2: mov     ecx, edi; this
+0x5BF6A4: call    DialogueItem__FirstResponse
+0x5BF6A9: mov     ecx, edi; this
+0x5BF6AB: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x5BF6B0: mov     ebp, eax
 0x5BF6B2: cmp     ebp, ebx
 0x5BF6B4: jz      short loc_5BF723
@@ -203,10 +203,10 @@
 0x5BF71A: push    ebp; string
 0x5BF71B: call    GameUI_QueueMessage
 0x5BF720: add     esp, 10h
-0x5BF723: mov     ecx, edi
-0x5BF725: call    sub_6B81D0
+0x5BF723: mov     ecx, edi; this
+0x5BF725: call    DialogueItem__Destroy
 0x5BF72A: push    edi
-0x5BF72B: call    FormHeapFree
+0x5BF72B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BF730: add     esp, 4
 0x5BF733: push    1
 0x5BF735: call    sub_5BF170
@@ -240,11 +240,11 @@
 0x5BF79D: mov     ecx, [esi+0B8h]; this
 0x5BF7A3: fld1
 0x5BF7A5: push    ecx
-0x5BF7A6: fstp    [esp+34h+a2]; a3
-0x5BF7A9: push    0FAFh; a2
-0x5BF7AE: call    Tile_SetFloat
+0x5BF7A6: fstp    [esp+34h+a2]; value
+0x5BF7A9: push    0FAFh; propertyCode
+0x5BF7AE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5BF7B3: push    edi
-0x5BF7B4: call    FormHeapFree
+0x5BF7B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5BF7B9: add     esp, 4
 0x5BF7BC: mov     ecx, [esp+30h+var_C]
 0x5BF7C0: mov     large fs:0, ecx
@@ -255,3 +255,12 @@
 0x5BF7CB: pop     ebx
 0x5BF7CC: add     esp, 1Ch
 0x5BF7CF: retn
+0x9C08A0: lea     ecx, [ebp-14h]; void *
+0x9C08A3: jmp     BSStringT_Clear
+0x9C08A8: mov     edx, [esp+arg_4]
+0x9C08AC: lea     eax, [edx-20h]
+0x9C08AF: mov     ecx, [edx-24h]
+0x9C08B2: xor     ecx, eax
+0x9C08B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C08B9: mov     eax, offset stru_AE9AEC
+0x9C08BE: jmp     ___CxxFrameHandler3

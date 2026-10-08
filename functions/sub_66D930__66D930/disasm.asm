@@ -34,7 +34,7 @@
 0x66D996: jz      short loc_66D9CE
 0x66D998: cmp     [eax+0Ch], edi
 0x66D99B: jz      short loc_66D9CE
-0x66D99D: call    MobileObject_GetCharProxy
+0x66D99D: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x66D9A2: cmp     eax, edi
 0x66D9A4: mov     [esp+334h+var_30C], eax
 0x66D9A8: jz      short loc_66D9F9
@@ -109,7 +109,7 @@
 0x66DAA1: mov     ecx, ds:0B333C4h
 0x66DAA7: lea     eax, [esp+334h+var_320]
 0x66DAAB: push    eax
-0x66DAAC: call    sub_65ABE0
+0x66DAAC: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x66DAB1: movzx   eax, word ptr [eax+2]
 0x66DAB5: movzx   ecx, si
 0x66DAB8: shl     eax, 10h
@@ -118,7 +118,7 @@
 0x66DAC1: push    ecx
 0x66DAC2: lea     ecx, [esp+338h+var_240]
 0x66DAC9: mov     [esp+338h+var_21C], eax
-0x66DAD0: call    bhkWorldRayCastData__SetCastInputFrom
+0x66DAD0: call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
 0x66DAD5: lea     edx, [esp+334h+var_2FC+0Ch]
 0x66DAD9: fld     [esp+334h+var_308]
 0x66DADD: push    edx
@@ -139,7 +139,7 @@
 0x66DB11: fstp    [esp+338h+var_2EC]
 0x66DB15: fld     [esp+338h+var_320]
 0x66DB19: fstp    dword ptr [esp+338h+var_2E8]
-0x66DB1D: call    sub_663FF0
+0x66DB1D: call    sub_663FF0; bhkWorldRayCastData::SetCastDirectionVector. Converts a world-space direction vector by hkFactor and writes data+0x60. Used by actor movement probes for downward ground snapping instead of an absolute To point.
 0x66DB22: lea     ecx, [esp+334h+var_1C0]
 0x66DB29: call    sub_538C00
 0x66DB2E: mov     ecx, ds:0B333C4h; this
@@ -147,10 +147,10 @@
 0x66DB3B: mov     [esp+334h+var_4], edi
 0x66DB42: mov     [esp+334h+var_1C8], eax
 0x66DB49: mov     [esp+334h+var_1CC], edi
-0x66DB50: call    TESObjectREFR_GetParentCell
+0x66DB50: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66DB55: mov     esi, eax
 0x66DB57: mov     ecx, esi; this
-0x66DB59: call    TESObjectCELL_IsInterior
+0x66DB59: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66DB5E: test    al, al
 0x66DB60: jz      short loc_66DB6C
 0x66DB62: lea     ecx, [esi+28h]
@@ -180,7 +180,7 @@
 0x66DBBD: test    eax, eax
 0x66DBBF: jz      short loc_66DBE1
 0x66DBC1: push    eax
-0x66DBC2: call    sub_4DC270
+0x66DBC2: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x66DBC7: add     esp, 4
 0x66DBCA: test    eax, eax
 0x66DBCC: jz      short loc_66DBE1
@@ -243,7 +243,7 @@
 0x66DCA6: lea     eax, [esp+334h+var_2FC]
 0x66DCAA: push    eax
 0x66DCAB: lea     ecx, [esp+338h+var_2C0]
-0x66DCAF: call    bhkWorldRayCastData__SetCastInputFrom
+0x66DCAF: call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.
 0x66DCB4: mov     ecx, [ebx+578h]
 0x66DCBA: mov     edx, [ecx]
 0x66DCBC: mov     eax, [edx+154h]
@@ -257,16 +257,16 @@
 0x66DCD6: lea     ecx, [esp+338h+var_2C0]; this
 0x66DCDA: mov     [esp+338h+var_2EC], edx
 0x66DCDE: mov     dword ptr [esp+338h+var_2E8], eax
-0x66DCE2: call    bhkWorldRayCastData__SetCastInputTo
+0x66DCE2: call    bhkWorldRayCastData__SetCastInputTo; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.
 0x66DCE7: mov     ecx, ds:0B333C4h; this
-0x66DCED: call    TESObjectREFR_GetParentCell
+0x66DCED: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66DCF2: test    eax, eax
 0x66DCF4: jz      loc_66DD8B
 0x66DCFA: mov     ecx, ds:0B333C4h; this
-0x66DD00: call    TESObjectREFR_GetParentCell
+0x66DD00: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x66DD05: mov     esi, eax
 0x66DD07: mov     ecx, esi; this
-0x66DD09: call    TESObjectCELL_IsInterior
+0x66DD09: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66DD0E: test    al, al
 0x66DD10: jz      short loc_66DD1C
 0x66DD12: lea     ecx, [esi+28h]
@@ -282,9 +282,9 @@
 0x66DD32: test    al, al
 0x66DD34: jz      short loc_66DD87
 0x66DD36: lea     ecx, [esp+334h+var_2C0]
-0x66DD3A: call    sub_889CB0
+0x66DD3A: call    bhkWorldRayCastData_GetHitNiObject; Raycast data -> hit NiAVObject helper via root collidable at +0x50.
 0x66DD3F: push    eax
-0x66DD40: call    sub_4DC270
+0x66DD40: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x66DD45: add     esp, 4
 0x66DD48: cmp     eax, edi
 0x66DD4A: jz      short loc_66DD87
@@ -331,7 +331,7 @@
 0x66DDDC: lea     ecx, [esp+338h+var_2C0]
 0x66DDE0: push    ecx
 0x66DDE1: lea     ecx, [esp+33Ch+var_2FC+0Ch]
-0x66DDE5: call    sub_88FCC0
+0x66DDE5: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x66DDEA: movaps  xmm0, [esp+334h+var_2FC+0Ch]
 0x66DDEF: subps   xmm0, xmmword ptr [esp+334h+var_2D8+8]
 0x66DDF4: movaps  [esp+334h+var_2FC+0Ch], xmm0
@@ -407,10 +407,10 @@
 0x66DEF7: jnz     loc_66DFAF
 0x66DEFD: lea     ecx, [esp+334h+var_2E8+8]
 0x66DF01: fstp    dword ptr [esp+334h+var_2D8]
-0x66DF05: call    sub_43F350
+0x66DF05: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x66DF0A: fstp    [esp+334h+var_318]
-0x66DF0E: mov     ecx, esi
-0x66DF10: call    sub_8913C0
+0x66DF0E: mov     ecx, esi; this
+0x66DF10: call    bhkCharacterController_GetRadius; Controller radius helper. Returns shape radius from proxy+0x374 object when available, else proxy+0x3A0/E8 default. MobileObject::Move converts this from Havok to world with 0xA372E0.
 0x66DF15: fstp    [esp+334h+var_320]
 0x66DF19: fld     [esp+334h+var_320]
 0x66DF1D: fmul    qword ptr ds:0A372E0h
@@ -460,3 +460,16 @@
 0x66DFBB: push    edx
 0x66DFBC: call    sub_605DC0
 0x66DFC1: jmp     loc_66DD6B
+0x9C41B0: lea     ecx, [ebp+var_1C0]
+0x9C41B6: jmp     sub_538C80
+0x9C41BB: mov     edx, [esp-4+arg_4]
+0x9C41BF: lea     eax, [edx-324h]
+0x9C41C5: mov     ecx, [edx-328h]
+0x9C41CB: xor     ecx, eax
+0x9C41CD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C41D2: add     eax, 0Ch
+0x9C41D5: mov     ecx, [edx-8]
+0x9C41D8: xor     ecx, eax
+0x9C41DA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C41DF: mov     eax, offset stru_AECBD4
+0x9C41E4: jmp     ___CxxFrameHandler3

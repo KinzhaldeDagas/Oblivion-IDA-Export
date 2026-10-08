@@ -1,1 +1,1 @@
-NUMBERFMTW
+typedef _numberfmtW NUMBERFMTW;

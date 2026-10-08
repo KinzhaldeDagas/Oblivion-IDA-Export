@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7DE61B",
-    "line": "call    sub_772560",
+    "line": "call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7DE6C2",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -469,19 +469,19 @@
   },
   {
     "ea": "0x7DE6C6",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DE6C7",
-    "line": "lea     ecx, [esi+40h]",
+    "line": "lea     ecx, [esi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7DE6CA",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },

@@ -7,8 +7,6 @@
 0x98C786: shr     ecx, 7
 0x98C789: pxor    xmm0, xmm0
 0x98C78D: jmp     short loc_98C797
-0x98C78F: db 8Dh, 0A4h, 24h, 4 dup(0)
-0x98C796: db 90h
 0x98C797: movdqa  xmmword ptr [edi], xmm0
 0x98C79B: movdqa  xmmword ptr [edi+10h], xmm0
 0x98C7A0: movdqa  xmmword ptr [edi+20h], xmm0

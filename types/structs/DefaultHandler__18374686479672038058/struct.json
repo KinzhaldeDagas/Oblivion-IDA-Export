@@ -1,166 +1,261 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DefaultHandler",
+  "definition": "struct __declspec(align(8)) DefaultHandler\n{\nIOleObject_0 IOleObject_iface;\nIUnknown_0 IUnknown_iface;\nIDataObject_0 IDataObject_iface;\nIRunnableObject_0 IRunnableObject_iface;\nIAdviseSink_0 IAdviseSink_iface;\nIPersistStorage_0 IPersistStorage_iface;\nLONG ref;\nIUnknown_0 *outerUnknown;\nCLSID clsid;\nIUnknown_0 *dataCache;\nIPersistStorage_0 *dataCache_PersistStg;\nIOleClientSite_0 *clientSite;\nIOleAdviseHolder_0 *oleAdviseHolder;\nIDataAdviseHolder_0 *dataAdviseHolder;\nLPWSTR containerApp;\nLPWSTR containerObj;\nIOleObject_0 *pOleDelegate;\nIPersistStorage_0 *pPSDelegate;\nIDataObject_0 *pDataDelegate;\nobject_state object_state;\nULONG in_call;\nDWORD dwAdvConn;\nIStorage_0 *storage;\nstorage_state storage_state;\nIClassFactory_0 *pCFObject;\nBOOL inproc_server;\n}\n",
   "id": 18374686479672038058,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IOleObject_iface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "IOleObject_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IUnknown_iface",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IDataObject_iface",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "IDataObject_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IRunnableObject_iface",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "IRunnableObject_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IAdviseSink_iface",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "IAdviseSink_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IPersistStorage_iface",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "IPersistStorage_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ref",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "outerUnknown",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "IUnknown_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clsid",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 16
+      "size": 16,
+      "type": "CLSID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dataCache",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "IUnknown_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dataCache_PersistStg",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "IPersistStorage_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clientSite",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "IOleClientSite_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "oleAdviseHolder",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "IOleAdviseHolder_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dataAdviseHolder",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "IDataAdviseHolder_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "containerApp",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "containerObj",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pOleDelegate",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "IOleObject_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pPSDelegate",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "IPersistStorage_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pDataDelegate",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "IDataObject_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "object_state",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "object_state"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "in_call",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwAdvConn",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "storage",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "IStorage_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "storage_state",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "storage_state"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pCFObject",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "IClassFactory_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "inproc_server",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     }
   ],
   "name": "DefaultHandler",
+  "ordinal": 5165,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 120
 }

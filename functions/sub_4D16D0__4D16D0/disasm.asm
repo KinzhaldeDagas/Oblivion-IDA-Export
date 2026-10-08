@@ -1,4 +1,4 @@
-0x4D16D0: push    0FFFFFFFFh
+0x4D16D0: push    0FFFFFFFFh; Verified external .lod parser format: each record has a TESBoundObject FormID, count N, then rotationAnglesXYZ (3N floats), positions (3N floats), and scalePercent (N floats). The base-object transform applies rotation components as X, Y, Z radians and scale as abs(floor(scalePercent)/100).
 0x4D16D2: push    offset SEH_4D16D0
 0x4D16D7: mov     eax, large fs:0
 0x4D16DD: push    eax
@@ -14,10 +14,10 @@
 0x4D16F1: mov     large fs:0, eax
 0x4D16F7: xor     al, al
 0x4D16F9: xor     esi, esi
-0x4D16FB: cmp     [esp+3Ch+arg_4], esi
+0x4D16FB: cmp     [esp+3Ch+outMap], esi
 0x4D16FF: mov     byte ptr [esp+3Ch+var_28+3], al
 0x4D1703: jz      loc_4D197A
-0x4D1709: mov     ebp, [esp+3Ch+arg_0]
+0x4D1709: mov     ebp, [esp+3Ch+bsFile]
 0x4D170D: cmp     ebp, esi
 0x4D170F: jz      loc_4D197A
 0x4D1715: mov     eax, [ebp+0]
@@ -78,7 +78,7 @@
 0x4D17B3: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4D17B8: push    esi; int
 0x4D17B9: push    eax; a1
-0x4D17BA: call    TESForm_LookupByFormID
+0x4D17BA: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4D17BF: add     esp, 4
 0x4D17C2: push    eax; void *
 0x4D17C3: call    OblivionDynamicCast
@@ -106,15 +106,15 @@
 0x4D17FE: jz      short loc_4D1816
 0x4D1800: movzx   eax, byte ptr [edi+4]
 0x4D1804: cmp     eax, 1Eh
-0x4D1807: jnz     short loc_4D1816
-0x4D1809: mov     eax, [esp+3Ch+arg_8]
+0x4D1807: jnz     short loc_4D1816; Verified DistantLODLoadMode dispatch: TESObjectTREE forms (type 0x1E) are accepted in TreesOnly (1) or AllBoundObjects (4) mode; other modes skip them.
+0x4D1809: mov     eax, [esp+3Ch+lodMode]
 0x4D180D: cmp     eax, 4
-0x4D1810: jz      short loc_4D1828
+0x4D1810: jz      short loc_4D1828; Verified value 4 bypasses both type-specific exclusions and includes all TESBoundObject forms; values 1 and 2 select the TREE and non-TREE channels respectively.
 0x4D1812: cmp     eax, ebx
 0x4D1814: jmp     short loc_4D1822
-0x4D1816: cmp     [esp+3Ch+arg_8], 4
-0x4D181B: jz      short loc_4D1828
-0x4D181D: cmp     [esp+3Ch+arg_8], 2
+0x4D1816: cmp     [esp+3Ch+lodMode], 4
+0x4D181B: jz      short loc_4D1828; Verified DistantLODLoadMode dispatch: non-TREE TESBoundObject forms are accepted in NonTreeBoundObjectsOnly (2) or AllBoundObjects (4) mode.
+0x4D181D: cmp     [esp+3Ch+lodMode], 2
 0x4D1822: jnz     loc_4D1921
 0x4D1828: cmp     edi, esi
 0x4D182A: jz      loc_4D1921
@@ -127,8 +127,8 @@
 0x4D1848: cmp     eax, esi
 0x4D184A: mov     [esp+3Ch+var_4], esi
 0x4D184E: jz      short loc_4D1859
-0x4D1850: mov     ecx, eax
-0x4D1852: call    sub_4CC7C0
+0x4D1850: mov     ecx, eax; this
+0x4D1852: call    DistantLODCellObjectData_ctor; Verified DistantLODCellObjectData constructor/layout: three NiTArray<float> subobjects at +0x00/+0x10/+0x20 and recordCount +0x30. The arrays are rotationAnglesXYZ, positions, and scalePercent in that order. Base-object queued transforms apply angles X/Y/Z in radians.
 0x4D1857: mov     esi, eax
 0x4D1859: mov     eax, [esp+3Ch+var_24]
 0x4D185D: mov     [esi+30h], eax
@@ -137,17 +137,17 @@
 0x4D1867: push    ecx
 0x4D1868: lea     ecx, [esi+10h]
 0x4D186B: mov     [esp+40h+var_4], 0FFFFFFFFh
-0x4D1873: call    sub_4CA040
+0x4D1873: call    sub_4CA040; Verified: allocates the +0x10 positions array for 3 * recordCount floats.
 0x4D1878: mov     eax, [esp+3Ch+var_24]
 0x4D187C: lea     edx, [eax+eax*2]
 0x4D187F: push    edx
 0x4D1880: mov     ecx, esi
-0x4D1882: call    sub_4CA040
+0x4D1882: call    sub_4CA040; Verified: allocates the +0x00 rotationAngles array for 3 * recordCount floats; cleanup dispatch supplies the triples to the base bound-object rotation builder.
 0x4D1887: mov     eax, [esp+3Ch+var_24]
 0x4D188B: push    eax
 0x4D188C: lea     ecx, [esi+20h]
-0x4D188F: call    sub_4CA040
-0x4D1894: mov     ecx, [esp+3Ch+arg_4]; this
+0x4D188F: call    sub_4CA040; Verified: allocates the +0x20 scalePercent array for recordCount floats; the base distant-instance callback divides each floored value by 100, then the queued transform applies its absolute value as NiAVObject scale.
+0x4D1894: mov     ecx, [esp+3Ch+outMap]; this
 0x4D1898: push    esi; a3
 0x4D1899: push    edi; a2
 0x4D189A: call    NiTMap_SetAt
@@ -246,3 +246,15 @@
 0x4D1989: pop     ebx
 0x4D198A: add     esp, 28h
 0x4D198D: retn
+0x9B5520: mov     eax, [ebp-14h]
+0x9B5523: push    eax
+0x9B5524: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5529: pop     ecx
+0x9B552A: retn
+0x9B552B: mov     edx, [esp+outMap]
+0x9B552F: lea     eax, [edx-2Ch]
+0x9B5532: mov     ecx, [edx-30h]
+0x9B5535: xor     ecx, eax
+0x9B5537: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B553C: mov     eax, offset stru_AE0620
+0x9B5541: jmp     ___CxxFrameHandler3

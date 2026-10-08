@@ -1,7 +1,7 @@
-0x7A36B0: push    ebp
-0x7A36B1: mov     ebp, [esp+4+arg_4]
+0x7A36B0: push    ebp; Destroys [first,last) compact SIdvLeafTexture records at 0x54 stride, releasing each owned filename.
+0x7A36B1: mov     ebp, [esp+4+last]
 0x7A36B5: push    edi
-0x7A36B6: mov     edi, [esp+8+arg_0]
+0x7A36B6: mov     edi, [esp+8+first]
 0x7A36BA: cmp     edi, ebp
 0x7A36BC: jz      short loc_7A36EE
 0x7A36BE: push    ebx
@@ -12,7 +12,7 @@
 0x7A36C8: jb      short loc_7A36D6
 0x7A36CA: mov     eax, [esi-14h]
 0x7A36CD: push    eax
-0x7A36CE: call    FormHeapFree
+0x7A36CE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A36D3: add     esp, 4
 0x7A36D6: mov     dword ptr [esi], 0Fh
 0x7A36DC: mov     [esi-4], ebx

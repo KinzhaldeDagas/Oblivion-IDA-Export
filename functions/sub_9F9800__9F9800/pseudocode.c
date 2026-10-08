@@ -1,5 +1,5 @@
-int sub_9F9800()
+int InitSetting_sSkillNameAthletics()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A09C, (int)"sSkillNameAthletics", (int)"Athletics");
-  return atexit(sub_A23970);
+  GameSetting_ConstrAndReg(&g_sSkillNameAthletics, "sSkillNameAthletics", "Athletics"); /*0x9f980f*/
+  return atexit(sub_A23970); /*0x9f981f*/
 }

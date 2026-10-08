@@ -1,19 +1,32 @@
 {
-  "callees_count": 55,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 34,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_6099D0",
+  "chunks": [
+    [
+      "0x6099D0",
+      "0x609D4F"
+    ]
+  ],
+  "chunks_sha256": "74d7b9c27a4d73dcb57f1001ab13130c85f6e4add50cda97b5641ab70df0e9d9",
+  "comment_regular": "ArrowProjectile save serializer retains projectile/lifecycle, shooter, AMMO enchantment, poison, and collision data, but no originating weapon form. Save/load therefore cannot recover proxy-to-WEAP identity natively.",
+  "comment_repeatable": "ArrowProjectile save serializer retains projectile/lifecycle, shooter, AMMO enchantment, poison, and collision data, but no originating weapon form. Save/load therefore cannot recover proxy-to-WEAP identity natively.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 55,
+  "display_name": "ArrowProjectile_SaveGame",
   "end_ea": "0x609D4F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6099D0",
+  "name": "ArrowProjectile_SaveGame",
   "segment": ".text",
   "sha256": "74d7b9c27a4d73dcb57f1001ab13130c85f6e4add50cda97b5641ab70df0e9d9",
   "size": 895,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6099D0",
-  "type": "void __userpurge(TESObjectREFR *ecx0@<ecx>, double@<st0>, TESForm)",
+  "total_chunk_size": 895,
+  "type": "void __thiscall(ArrowProjectile *this, UInt32 changeFlags)",
   "xrefs_from_count": 398,
   "xrefs_to_count": 1
 }

@@ -29,7 +29,7 @@
 0x524166: jmp     loc_524245
 0x52416B: push    0; a2
 0x52416D: mov     ecx, edi; this
-0x52416F: call    TESForm_GetOverrideFile
+0x52416F: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x524174: mov     ebx, eax
 0x524176: test    ebx, ebx
 0x524178: jz      loc_52423F
@@ -67,29 +67,29 @@
 0x5241DC: call    __sprintf
 0x5241E1: add     esp, 14h
 0x5241E4: mov     edi, 1
-0x5241E9: push    edi; char
-0x5241EA: push    edi; char
+0x5241E9: push    edi; searchArchives
+0x5241EA: push    edi; allowMissing
 0x5241EB: lea     ecx, [esp+140h+ArgList]
-0x5241EF: push    ecx; ArgList
+0x5241EF: push    ecx; path
 0x5241F0: mov     ecx, ds:0B333A0h
-0x5241F6: lea     edx, [esp+144h+var_11C]
-0x5241FA: push    edx; int
-0x5241FB: call    sub_442890
+0x5241F6: lea     edx, [esp+144h+slot]
+0x5241FA: push    edx; outTexture
+0x5241FB: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x524200: mov     eax, [eax]
 0x524202: push    eax
 0x524203: lea     ecx, [esp+13Ch+var_124]
 0x524207: call    sub_405070
-0x52420C: lea     ecx, [esp+138h+var_11C]; this
+0x52420C: lea     ecx, [esp+138h+slot]; slot
 0x524210: mov     [esp+138h+var_4], edi
-0x524217: call    sub_7016A0
+0x524217: call    NiPointerSlot_Release
 0x52421C: lea     eax, [esp+138h+var_124]
 0x524220: push    eax
 0x524221: mov     ecx, esi
 0x524223: call    sub_4A19F0
-0x524228: lea     ecx, [esp+138h+var_124]; this
+0x524228: lea     ecx, [esp+138h+var_124]; slot
 0x52422C: mov     [esp+138h+var_120], edi
 0x524230: mov     byte ptr [esp+138h+var_4], 0
-0x524238: call    sub_7016A0
+0x524238: call    NiPointerSlot_Release
 0x52423D: jmp     short loc_524245
 0x52423F: mov     dword ptr [esi], 0
 0x524245: mov     eax, esi
@@ -105,3 +105,23 @@
 0x524263: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x524268: add     esp, 124h
 0x52426E: retn    8
+0x9B7F00: mov     eax, [ebp-120h]
+0x9B7F06: and     eax, 1
+0x9B7F09: jz      locret_9B7F21
+0x9B7F0F: and     dword ptr [ebp-120h], 0FFFFFFFEh
+0x9B7F16: mov     ecx, [ebp-118h]; slot
+0x9B7F1C: jmp     NiPointerSlot_Release
+0x9B7F21: retn
+0x9B7F22: lea     ecx, [ebp-124h]; slot
+0x9B7F28: jmp     NiPointerSlot_Release
+0x9B7F2D: mov     edx, [esp+arg_4]
+0x9B7F31: lea     eax, [edx-128h]
+0x9B7F37: mov     ecx, [edx-12Ch]
+0x9B7F3D: xor     ecx, eax
+0x9B7F3F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7F44: add     eax, 10h
+0x9B7F47: mov     ecx, [edx-4]
+0x9B7F4A: xor     ecx, eax
+0x9B7F4C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7F51: mov     eax, offset stru_AE2724
+0x9B7F56: jmp     ___CxxFrameHandler3

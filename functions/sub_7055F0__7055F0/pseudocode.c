@@ -1,6 +1,6 @@
 int __thiscall sub_7055F0(NiTexturingProperty_Map *this, int a2)
 {
-  _DWORD *v2; // edi
+  int v2; // edi
   void (__cdecl *v4)(int, NiTexturingProperty_Map *, int, int *, int); // eax
   void (__cdecl *v5)(int, char *, int, int *, int); // eax
   void (__cdecl *v6)(int, char *, int, int *, int); // eax
@@ -14,30 +14,30 @@ int __thiscall sub_7055F0(NiTexturingProperty_Map *this, int a2)
   int v15; // [esp-14h] [ebp-20h]
   int v16; // [esp-14h] [ebp-20h]
 
-  v2 = (_DWORD *)a2;
-  sub_7052F0(this, a2);
-  v15 = v2[0x87];
-  v4 = *(void (__cdecl **)(int, NiTexturingProperty_Map *, int, int *, int))(v15 + 4);
-  a2 = 4;
-  v4(v15, this + 1, 4, &a2, 1);
-  v14 = v2[0x87];
-  v5 = *(void (__cdecl **)(int, char *, int, int *, int))(v14 + 4);
-  a2 = 4;
-  v5(v14, (char *)this + 0x14, 4, &a2, 1);
-  v13 = v2[0x87];
-  v6 = *(void (__cdecl **)(int, char *, int, int *, int))(v13 + 4);
-  a2 = 4;
-  v6(v13, (char *)this + 0x18, 4, &a2, 1);
-  v12 = v2[0x87];
-  v7 = *(void (__cdecl **)(int, char *, int, int *, int))(v12 + 4);
-  a2 = 4;
-  v7(v12, (char *)this + 0x1C, 4, &a2, 1);
-  v16 = v2[0x87];
-  v8 = *(void (__cdecl **)(int, NiTexturingProperty_Map *, int, int *, int))(v16 + 4);
-  a2 = 4;
-  v8(v16, this + 2, 4, &a2, 1);
-  v9 = v2[0x87];
-  v10 = *(int (__cdecl **)(int, char *, int, int *, int))(v9 + 4);
-  a2 = 4;
-  return v10(v9, (char *)this + 0x24, 4, &a2, 1);
+  v2 = a2; /*0x7055f3*/
+  sub_7052F0(this, a2); /*0x7055fa*/
+  v15 = *(_DWORD *)(v2 + 0x21C); /*0x705616*/
+  v4 = *(void (__cdecl **)(int, NiTexturingProperty_Map *, int, int *, int))(v15 + 4); /*0x705617*/
+  a2 = 4; /*0x70561a*/
+  v4(v15, this + 1, 4, &a2, 1); /*0x70561e*/
+  v14 = *(_DWORD *)(v2 + 0x21C); /*0x705632*/
+  v5 = *(void (__cdecl **)(int, char *, int, int *, int))(v14 + 4); /*0x705633*/
+  a2 = 4; /*0x705636*/
+  v5(v14, (char *)this + 0x14, 4, &a2, 1); /*0x70563a*/
+  v13 = *(_DWORD *)(v2 + 0x21C); /*0x70564e*/
+  v6 = *(void (__cdecl **)(int, char *, int, int *, int))(v13 + 4); /*0x70564f*/
+  a2 = 4; /*0x705652*/
+  v6(v13, (char *)this + 0x18, 4, &a2, 1); /*0x705656*/
+  v12 = *(_DWORD *)(v2 + 0x21C); /*0x70566a*/
+  v7 = *(void (__cdecl **)(int, char *, int, int *, int))(v12 + 4); /*0x70566b*/
+  a2 = 4; /*0x70566e*/
+  v7(v12, (char *)this + 0x1C, 4, &a2, 1); /*0x705672*/
+  v16 = *(_DWORD *)(v2 + 0x21C); /*0x705689*/
+  v8 = *(void (__cdecl **)(int, NiTexturingProperty_Map *, int, int *, int))(v16 + 4); /*0x70568a*/
+  a2 = 4; /*0x70568d*/
+  v8(v16, this + 2, 4, &a2, 1); /*0x705691*/
+  v9 = *(_DWORD *)(v2 + 0x21C); /*0x705693*/
+  v10 = *(int (__cdecl **)(int, char *, int, int *, int))(v9 + 4); /*0x705699*/
+  a2 = 4; /*0x7056a9*/
+  return v10(v9, (char *)this + 0x24, 4, &a2, 1); /*0x7056b2*/
 }

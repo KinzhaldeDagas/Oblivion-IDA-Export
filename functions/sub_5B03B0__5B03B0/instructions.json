@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x5B03CD",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5B03D3",
-    "line": "push    eax",
+    "line": "push    eax; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5B03D4",
-    "line": "call    TESObjectREF_GetItemCount",
+    "line": "call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5B0480",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,19 +349,19 @@
   },
   {
     "ea": "0x5B0494",
-    "line": "fstp    [esp+10h+a2]; a3",
+    "line": "fstp    [esp+10h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5B0497",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5B049C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x5B04C4",
-    "line": "mov     ecx, [esi+38h]",
+    "line": "mov     ecx, [esi+38h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5B04C7",
-    "line": "call    sub_4DBEA0",
+    "line": "call    TESObjectREFR_ClearLockedFlagOnSelfOrLinkedDoor; Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,31 +631,31 @@
   },
   {
     "ea": "0x5B056A",
-    "line": "push    2",
+    "line": "push    2; category",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5B056C",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5B056D",
-    "line": "push    ecx",
+    "line": "push    ecx; criminal",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5B056E",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5B0573",
-    "line": "call    sub_675BF0",
+    "line": "call    ActorProcessManager_FindCrime",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x5B057F",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x5B05C3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x5B05D7",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x5B05DD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

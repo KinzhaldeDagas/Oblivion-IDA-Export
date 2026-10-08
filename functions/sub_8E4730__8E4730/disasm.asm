@@ -67,7 +67,6 @@
 0x8E480A: mov     [esp+40h+var_34], 41300000h
 0x8E4812: mov     ecx, 17h
 0x8E4817: jmp     short loc_8E4820
-0x8E4819: align 10h
 0x8E4820: fld     [esp+40h+var_34]
 0x8E4824: fadd    [esp+40h+var_30]
 0x8E4828: fmul    dword ptr ds:0A3D65Ch

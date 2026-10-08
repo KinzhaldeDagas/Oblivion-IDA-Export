@@ -1,4 +1,4 @@
-0x420B50: push    9; a2
+0x420B50: push    9; Returns the owned SeenData pointer from ExtraSeenData (type 0x09), or null.
 0x420B52: call    BaseExtraList_GetExtraData
 0x420B57: test    eax, eax
 0x420B59: jz      short loc_420B5F

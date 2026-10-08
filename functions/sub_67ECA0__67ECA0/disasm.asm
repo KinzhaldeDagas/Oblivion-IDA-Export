@@ -1,4 +1,4 @@
-0x67ECA0: cmp     [esp+arg_0], 0
+0x67ECA0: cmp     [esp+value], 0; Verified sets/clears stateFlags bit 0x02, the graph-search processed/closed marker.
 0x67ECA5: jz      short loc_67ECAE
 0x67ECA7: or      byte ptr [ecx+10h], 2
 0x67ECAB: retn    4

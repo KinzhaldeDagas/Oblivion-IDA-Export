@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x790C10",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Compiler introsort loop for the compact OB_CBranch* vector. Uses 0x7905D0's fuzzyBranchVolume partition, insertion sort for small ranges, and heap-sort fallback when the depth limit expires; branch LOD policy remains in the 0x791410 wrapper/callers.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x790C14",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x790C1B",
-    "line": "mov     edi, [esp+18h+arg_4]",
+    "line": "mov     edi, [esp+18h+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x790C2B",
-    "line": "mov     esi, [esp+18h+arg_8]",
+    "line": "mov     esi, [esp+18h+depthLimit]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x790C38",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, [esp+18h+comparatorState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x790C3D",
-    "line": "push    edi",
+    "line": "push    edi; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C3E",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+equalRangeOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x790C42",
-    "line": "push    ebx",
+    "line": "push    ebx; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C43",
-    "line": "push    ecx",
+    "line": "push    ecx; equalRangeOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C44",
-    "line": "call    sub_7905D0",
+    "line": "call    OB_BranchPtrVector_PartitionByFuzzyVolume_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x790C5D",
-    "line": "mov     eax, [esp+28h+var_8]",
+    "line": "mov     eax, [esp+28h+equalRangeOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,37 +259,37 @@
   },
   {
     "ea": "0x790C76",
-    "line": "mov     edx, [esp+18h+arg_C]",
+    "line": "mov     edx, [esp+18h+comparatorState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x790C7A",
-    "line": "push    edx",
+    "line": "push    edx; comparatorState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C7B",
-    "line": "push    esi",
+    "line": "push    esi; depthLimit",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C7C",
-    "line": "push    eax",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C7D",
-    "line": "push    ebx",
+    "line": "push    ebx; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C7E",
-    "line": "call    sub_790C10",
+    "line": "call    OB_BranchPtrVector_IntrosortByFuzzyVolume_010201A0; Compiler introsort loop for the compact OB_CBranch* vector. Uses 0x7905D0's fuzzyBranchVolume partition, insertion sort for small ranges, and heap-sort fallback when the depth limit expires; branch LOD policy remains in the 0x791410 wrapper/callers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,43 +307,43 @@
   },
   {
     "ea": "0x790C87",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, [esp+18h+comparatorState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x790C8B",
-    "line": "push    eax",
+    "line": "push    eax; comparatorState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C8C",
-    "line": "push    esi",
+    "line": "push    esi; depthLimit",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C8D",
-    "line": "push    edi",
+    "line": "push    edi; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C8E",
-    "line": "push    ebp",
+    "line": "push    ebp; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790C8F",
-    "line": "call    sub_790C10",
+    "line": "call    OB_BranchPtrVector_IntrosortByFuzzyVolume_010201A0; Compiler introsort loop for the compact OB_CBranch* vector. Uses 0x7905D0's fuzzyBranchVolume partition, insertion sort for small ranges, and heap-sort fallback when the depth limit expires; branch LOD policy remains in the 0x791410 wrapper/callers.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x790C94",
-    "line": "mov     edi, [esp+28h+var_8]",
+    "line": "mov     edi, [esp+28h+equalRangeOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x790CAC",
-    "line": "mov     ecx, [esp+18h+arg_C]",
+    "line": "mov     ecx, [esp+18h+comparatorState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x790CB1",
-    "line": "push    edi",
+    "line": "push    edi; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790CB2",
-    "line": "push    ebx",
+    "line": "push    ebx; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790CB3",
-    "line": "call    sub_790930",
+    "line": "call    OB_BranchPtrVector_InsertionSortByFuzzyVolume_010201A0; Insertion-sorts a short CBranch pointer range by fuzzyBranchVolume. Finds the insertion point and rotates [point,current,current+1) through the dedicated pointer-range helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x790CD4",
-    "line": "mov     edx, [esp+18h+arg_C]",
+    "line": "mov     edx, [esp+18h+comparatorState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x790CDD",
-    "line": "push    edi",
+    "line": "push    edi; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790CDE",
-    "line": "push    ebx",
+    "line": "push    ebx; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790CDF",
-    "line": "call    sub_790560",
+    "line": "call    OB_BranchPtrVector_MakeHeapByFuzzyVolume_010201A0; Builds the fuzzy-volume heap for a CBranch pointer range from the bottom non-leaf upward by repeated adjust-heap calls.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x790CE7",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, [esp+18h+comparatorState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,19 +571,19 @@
   },
   {
     "ea": "0x790CEC",
-    "line": "push    edi",
+    "line": "push    edi; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790CED",
-    "line": "push    ebx",
+    "line": "push    ebx; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790CEE",
-    "line": "call    sub_790AB0",
+    "line": "call    OB_BranchPtrVector_SortHeapByFuzzyVolume_010201A0; Completes heap sort for a CBranch pointer range by repeatedly moving the root to the shrinking tail and adjusting the remaining fuzzy-volume heap.",
     "mnemonic": "call",
     "size": 5
   },

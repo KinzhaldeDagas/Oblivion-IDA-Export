@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x66A3D0",
+      "0x66A3F3"
+    ]
+  ],
+  "chunks_sha256": "2b569f877b73829dad8c650bac13da9041f42903fac79724b082cda805c81d9d",
+  "comment_regular": "Apply one purchased training level. The shared Player_SkillLevelIncrease call skips progress consumption but still performs base-skill, requirement, mastery, per-skill, specialization, attribute-bonus, and seven-major side effects; then increment session and training statistics.",
+  "comment_repeatable": "Apply one purchased training level. The shared Player_SkillLevelIncrease call skips progress consumption but still performs base-skill, requirement, mastery, per-skill, specialization, attribute-bonus, and seven-major side effects; then increment session and training statistics.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_66A3D0",
+  "display_name": "Player_TrainSkill",
   "end_ea": "0x66A3F3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_66A3D0",
+  "name": "Player_TrainSkill",
   "segment": ".text",
   "sha256": "2b569f877b73829dad8c650bac13da9041f42903fac79724b082cda805c81d9d",
   "size": 35,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x66A3D0",
-  "type": "void __userpurge(PlayerCharacter *@<ecx>, int@<ebx>, double@<st2>, double@<st1>, double@<st0>, float *)",
+  "total_chunk_size": 35,
+  "type": "void __thiscall(PlayerCharacter *this, TESSkill_RecordView *skill)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 1
 }

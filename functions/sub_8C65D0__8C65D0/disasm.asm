@@ -23,7 +23,7 @@
 0x8C65FD: mov     eax, [eax+28h]
 0x8C6600: lea     eax, [eax+esi*8]
 0x8C6603: jmp     short loc_8C660A
-0x8C6605: mov     eax, offset dword_BA8138
+0x8C6605: mov     eax, offset unk_BA8138
 0x8C660A: mov     ecx, [eax]
 0x8C660C: test    ecx, ecx
 0x8C660E: jz      short loc_8C6618

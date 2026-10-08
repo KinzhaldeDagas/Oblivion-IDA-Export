@@ -23,7 +23,7 @@
 0x7E39E9: test    ecx, ecx
 0x7E39EB: jz      short loc_7E39FC
 0x7E39ED: push    4
-0x7E39EF: call    NiNode_GetNiPropertyByID
+0x7E39EF: call    NiNode_GetNiPropertyByID;
 0x7E39F4: mov     esi, eax
 0x7E39F6: test    esi, esi
 0x7E39F8: jnz     short loc_7E3A02

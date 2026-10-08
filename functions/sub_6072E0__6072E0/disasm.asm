@@ -13,7 +13,7 @@
 0x6072FB: mov     ecx, esi; this
 0x6072FD: mov     ebx, eax
 0x6072FF: mov     ebp, 3
-0x607304: call    TESObjectREFR_GetParentCell
+0x607304: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x607309: cmp     dword ptr [esi+60h], 2
 0x60730D: mov     edi, eax
 0x60730F: jnz     short loc_607346
@@ -38,7 +38,7 @@
 0x60733C: pop     ebx
 0x60733D: pop     ecx
 0x60733E: retn
-0x60733F: call    TESObjectREFR_GetParentCell
+0x60733F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x607344: mov     edi, eax
 0x607346: mov     eax, [esi]
 0x607348: mov     edx, [eax+154h]

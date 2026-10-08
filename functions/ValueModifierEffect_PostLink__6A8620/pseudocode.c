@@ -1,28 +1,34 @@
-int __thiscall ValueModifierEffect_PostLink(volatile LONG ***this, int a2)
+void __thiscall ValueModifierEffect_PostLink(
+        volatile LONG ***this,
+        TESObjectREFR *linkContext,
+        int a3,
+        float a4,
+        int a5,
+        float a6)
 {
-  unsigned __int8 next; // al
-  MagicTarget *v4; // ecx
+  unsigned __int8 currentVersion; // al
+  MagicTarget *v8; // ecx
   TESObjectREFR *ParentActor; // eax
 
-  ActiveEffect_Base_PostLink(this, a2);
-  next = (unsigned __int8)SaveLoad_CurrentSavegame[1].createdObjectList.next;
-  if ( next < 0x5Fu )
-    return ValueModifierEffect_PostLink_::Done(a2);
-  if ( next >= 0x62u )
-    return ValueModifierEffect_PostLink_::Done(a2);
-  v4 = (MagicTarget *)*(this + 8);
-  if ( !v4 )
-    return ValueModifierEffect_PostLink_::Done(a2);
-  ParentActor = (TESObjectREFR *)MagicTarget_GetParentActor(v4);
-  if ( ParentActor
-    && Actor_IsPlayer(ParentActor)
-    && (unsigned __int8)ActiveEffect_Base_IsBoundObjWearable(this)
-    && ((*(this + 3))[7][0x16] & 2) != 0 )
+  ActiveEffect_Base_PostLink((ActiveEffect *)this, linkContext); /*0x6a8628*/
+  currentVersion = g_TESSaveLoadGame->currentVersion; /*0x6a8633*/
+  if ( currentVersion >= 0x5Fu && currentVersion < 0x62u && (v8 = (MagicTarget *)*(this + 8)) != 0 ) /*0x6a864b*/
   {
-    return ValueModifierEffect_PostLink_::GetCasterActor();
+    ParentActor = (TESObjectREFR *)MagicTarget_GetParentActor(v8); /*0x6a8652*/
+    if ( ParentActor /*0x6a8685*/
+      && Actor_IsPlayer(ParentActor)
+      && (unsigned __int8)ActiveEffect_Base_IsBoundObjWearable(this)
+      && ((*(this + 3))[7][0x16] & 2) != 0 )
+    {
+      ValueModifierEffect_PostLink_::GetCasterActor((int)this, (int)linkContext, a3, a4, a5, a6); /*0x6a8686*/
+    }
+    else
+    {
+      ValueModifierEffect_PostLink_::Done_((int)linkContext); /*0x6a865b*/
+    }
   }
   else
   {
-    return ValueModifierEffect_PostLink_::Done_(a2);
+    ValueModifierEffect_PostLink_::Done((int)linkContext); /*0x6a8638*/
   }
 }

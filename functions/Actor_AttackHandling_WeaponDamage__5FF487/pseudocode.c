@@ -1,7 +1,7 @@
-int __cdecl Actor_AttackHandling_::WeaponDamage(
-        int a1,
-        int a2,
-        int a3,
+int __usercall Actor_AttackHandling_::WeaponDamage@<eax>(
+        char a1@<bl>,
+        Actor *a2@<edi>,
+        int a3@<esi>,
         int a4,
         int a5,
         int a6,
@@ -10,23 +10,25 @@ int __cdecl Actor_AttackHandling_::WeaponDamage(
         int a9,
         int a10,
         int a11,
-        int a12,
+        float *a12,
         int a13,
         int a14,
-        int a15,
-        int a16,
+        EntryData *a15,
+        int damageOffset,
         int a17,
-        int a18,
+        float a18,
         int a19,
         int a20,
         int a21,
         int a22,
         int a23,
         int a24,
-        int a25)
+        int a25,
+        int a26,
+        int a27)
 {
-  if ( !a9 )
-    JUMPOUT(0x5FF499);
+  if ( !a12 ) /*0x5ff48c*/
+    JUMPOUT(0x5FF499); /*0x5ff499*/
   return Actor_AttackHandling_::WeaponDamage_(
            a1,
            a2,
@@ -43,7 +45,7 @@ int __cdecl Actor_AttackHandling_::WeaponDamage(
            a13,
            a14,
            a15,
-           a16,
+           damageOffset,
            a17,
            a18,
            a19,
@@ -52,5 +54,7 @@ int __cdecl Actor_AttackHandling_::WeaponDamage(
            a22,
            a23,
            a24,
-           a25);
+           a25,
+           a26,
+           a27);
 }

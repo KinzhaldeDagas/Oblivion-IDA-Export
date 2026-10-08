@@ -11,12 +11,12 @@
 0x634D33: mov     ecx, [esi+17Ch]; jumptable 00634D2C cases 2,4,5
 0x634D39: test    ecx, ecx
 0x634D3B: jz      short loc_634D58; jumptable 00634D2C cases -1,3,6
-0x634D3D: push    1
-0x634D3F: call    sub_4706E0
+0x634D3D: push    1; slotSelector
+0x634D3F: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x634D44: test    eax, eax
 0x634D46: jz      short loc_634D58; jumptable 00634D2C cases -1,3,6
 0x634D48: mov     ecx, [eax+68h]
-0x634D4B: call    TESAnimGroup_GetAnimationGroup
+0x634D4B: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x634D50: add     eax, 0FFFFFFDEh
 0x634D53: cmp     eax, 5
 0x634D56: jbe     short def_634D2C; jumptable 00634D2C default case, cases 0,1

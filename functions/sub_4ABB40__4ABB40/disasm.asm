@@ -24,3 +24,12 @@
 0x4ABB94: pop     esi
 0x4ABB95: add     esp, 10h
 0x4ABB98: retn
+0x9B2B40: mov     ecx, [ebp-10h]; this
+0x9B2B43: jmp     TESForm_destr
+0x9B2B48: mov     edx, [esp+arg_4]
+0x9B2B4C: lea     eax, [edx-8]
+0x9B2B4F: mov     ecx, [edx-0Ch]
+0x9B2B52: xor     ecx, eax
+0x9B2B54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2B59: mov     eax, offset stru_ADE9F0
+0x9B2B5E: jmp     ___CxxFrameHandler3

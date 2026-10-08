@@ -1,7 +1,7 @@
-0x79EB00: push    ecx
+0x79EB00: push    ecx; Checked single-element insert for st_vector<SFrondTexture>. Preserves the insertion index across possible reallocation, delegates to insert-fill(count=1), then returns an owner/current iterator.
 0x79EB01: push    ebx
 0x79EB02: push    ebp
-0x79EB03: mov     ebp, [esp+0Ch+arg_8]
+0x79EB03: mov     ebp, [esp+0Ch+position]
 0x79EB07: push    esi
 0x79EB08: push    edi
 0x79EB09: mov     edi, ecx
@@ -18,13 +18,13 @@
 0x79EB25: shr     eax, 1Fh
 0x79EB28: add     eax, edx
 0x79EB2A: jnz     short loc_79EB34
-0x79EB2C: mov     ebx, [esp+14h+arg_4]
+0x79EB2C: mov     ebx, [esp+14h+expectedOwner]
 0x79EB30: xor     esi, esi
 0x79EB32: jmp     short loc_79EB63
 0x79EB34: cmp     esi, ebx
 0x79EB36: jbe     short loc_79EB3D
 0x79EB38: call    __invalid_parameter_noinfo
-0x79EB3D: mov     ebx, [esp+14h+arg_4]
+0x79EB3D: mov     ebx, [esp+14h+expectedOwner]
 0x79EB41: test    ebx, ebx
 0x79EB43: jz      short loc_79EB49
 0x79EB45: cmp     ebx, edi
@@ -38,10 +38,31 @@
 0x79EB5C: mov     esi, edx
 0x79EB5E: shr     esi, 1Fh
 0x79EB61: add     esi, edx
-0x79EB63: mov     ecx, [esp+14h+arg_C]
-0x79EB67: push    ecx
-0x79EB68: push    1
-0x79EB6A: push    ebp
-0x79EB6B: push    ebx
-0x79EB6C: mov     ecx, edi
-0x79EB6E: call    sub_79E400
+0x79EB63: mov     ecx, [esp+14h+value]
+0x79EB67: push    ecx; value
+0x79EB68: push    1; count
+0x79EB6A: push    ebp; position
+0x79EB6B: push    ebx; expectedOwner
+0x79EB6C: mov     ecx, edi; this
+0x79EB6E: call    OB_stVector_SFrondTexture_InsertFill_010201A0; Oblivion st_vector<SFrondTexture>::insert(position,count,value). Makes an alias-safe value copy, enforces max_size 0x5D1745D, grows capacity by 1.5x when needed, and performs exception-safe deep construction/destruction of 0x2C-byte string-bearing records.
+0x79EB73: mov     ebx, [edi+4]
+0x79EB76: cmp     ebx, [edi+8]
+0x79EB79: jbe     short loc_79EB80
+0x79EB7B: call    __invalid_parameter_noinfo
+0x79EB80: imul    esi, 2Ch ; ','
+0x79EB83: add     esi, ebx
+0x79EB85: cmp     esi, [edi+8]
+0x79EB88: mov     [esp+14h+position], ebx
+0x79EB8C: ja      short loc_79EB93
+0x79EB8E: cmp     esi, [edi+4]
+0x79EB91: jnb     short loc_79EB98
+0x79EB93: call    __invalid_parameter_noinfo
+0x79EB98: mov     eax, [esp+14h+result]
+0x79EB9C: mov     [eax], edi
+0x79EB9E: pop     edi
+0x79EB9F: mov     [eax+4], esi
+0x79EBA2: pop     esi
+0x79EBA3: pop     ebp
+0x79EBA4: pop     ebx
+0x79EBA5: pop     ecx
+0x79EBA6: retn    10h

@@ -139,7 +139,7 @@
 0x802F8C: jz      short loc_802FB7
 0x802F8E: push    edi
 0x802F8F: mov     ecx, eax
-0x802F91: call    sub_864430
+0x802F91: call    TallGrassTriStrips__ctor; Constructs Oblivion TallGrassTriStrips from NiTriStripsData and installs the TallGrassTriStrips vtable.
 0x802F96: jmp     short loc_802FB5
 0x802F98: call    FormHeapAlloc
 0x802F9D: add     esp, 4
@@ -184,13 +184,13 @@
 0x803005: jz      short loc_80300F
 0x803007: mov     ecx, [esi]; this
 0x803009: push    eax; a2
-0x80300A: call    sub_405680
+0x80300A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x80300F: mov     eax, [ebx+24h]
 0x803012: test    eax, eax
 0x803014: jz      short loc_80301E
 0x803016: mov     ecx, [esi]; this
 0x803018: push    eax; a2
-0x803019: call    sub_405680
+0x803019: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x80301E: push    0ACh ; '¬'; Size
 0x803023: call    FormHeapAlloc
 0x803028: add     esp, 4
@@ -244,7 +244,7 @@
 0x8030BE: mov     [edi+24h], eax
 0x8030C1: mov     ecx, [esi]; this
 0x8030C3: push    edi; a2
-0x8030C4: call    sub_405680
+0x8030C4: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x8030C9: mov     ebp, [esi+8]
 0x8030CC: cmp     ebp, edi
 0x8030CE: jz      short loc_8030FE
@@ -267,7 +267,7 @@
 0x8030F7: push    edi; lpAddend
 0x8030F8: call    dword ptr ds:0A28078h
 0x8030FE: push    3; a1
-0x803100: call    GetShaderDefinition
+0x803100: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x803105: mov     ebx, eax
 0x803107: mov     eax, [esi]
 0x803109: mov     ebp, [ebx+4]
@@ -329,24 +329,24 @@
 0x8031A6: push    1
 0x8031A8: mov     ecx, edi
 0x8031AA: mov     byte ptr [esp+28h+var_4], 2
-0x8031AF: call    sub_7263B0
+0x8031AF: call    OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0
 0x8031B4: mov     edx, [ebx+10h]
-0x8031B7: push    0; char
+0x8031B7: push    0; copyData
 0x8031B9: lea     ecx, ds:0[ebp*4]
-0x8031C0: push    ecx; Src
-0x8031C1: push    edx; char
-0x8031C2: push    0; int
-0x8031C4: mov     ecx, edi
-0x8031C6: call    sub_7260B0
-0x8031CB: push    4
-0x8031CD: push    4
-0x8031CF: push    ebp
-0x8031D0: push    1
-0x8031D2: push    0
-0x8031D4: push    0
-0x8031D6: push    0
-0x8031D8: mov     ecx, edi
-0x8031DA: call    sub_7262A0
+0x8031C0: push    ecx; byteCount
+0x8031C1: push    edx; data
+0x8031C2: push    0; blockIndex
+0x8031C4: mov     ecx, edi; this
+0x8031C6: call    OB_NiAdditionalGeometryData_SetDataBlock_010201A0
+0x8031CB: push    4; stride
+0x8031CD: push    4; elementSize
+0x8031CF: push    ebp; vertexCount
+0x8031D0: push    1; type
+0x8031D2: push    0; blockOffset
+0x8031D4: push    0; blockIndex
+0x8031D6: push    0; streamIndex
+0x8031D8: mov     ecx, edi; this
+0x8031DA: call    OB_NiAdditionalGeometryData_SetDataStream_010201A0
 0x8031DF: mov     eax, [esi]
 0x8031E1: mov     ecx, [eax+0B4h]
 0x8031E7: push    edi
@@ -361,3 +361,38 @@
 0x8031FE: pop     ebx
 0x8031FF: add     esp, 10h
 0x803202: retn    0Ch
+0x9D0810: mov     ecx, [ebp-10h]; slot
+0x9D0813: jmp     NiPointerSlot_Release
+0x9D0818: mov     ecx, [ebp-10h]
+0x9D081B: add     ecx, 4; slot
+0x9D081E: jmp     NiPointerSlot_Release
+0x9D0823: mov     ecx, [ebp-10h]
+0x9D0826: add     ecx, 8; slot
+0x9D0829: jmp     NiPointerSlot_Release
+0x9D082E: mov     eax, [ebp+8]
+0x9D0831: push    eax
+0x9D0832: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0837: pop     ecx
+0x9D0838: retn
+0x9D0839: mov     eax, [ebp+8]
+0x9D083C: push    eax
+0x9D083D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0842: pop     ecx
+0x9D0843: retn
+0x9D0844: mov     eax, [ebp+8]
+0x9D0847: push    eax
+0x9D0848: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D084D: pop     ecx
+0x9D084E: retn
+0x9D084F: mov     eax, [ebp+0Ch]
+0x9D0852: push    eax
+0x9D0853: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0858: pop     ecx
+0x9D0859: retn
+0x9D085A: mov     edx, [esp+arg_4]
+0x9D085E: lea     eax, [edx-14h]
+0x9D0861: mov     ecx, [edx-18h]
+0x9D0864: xor     ecx, eax
+0x9D0866: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D086B: mov     eax, offset stru_AF9120
+0x9D0870: jmp     ___CxxFrameHandler3

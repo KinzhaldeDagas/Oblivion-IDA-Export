@@ -34,7 +34,7 @@
 0x478F2C: call    eax
 0x478F2E: test    eax, eax
 0x478F30: jz      short loc_478F44
-0x478F32: cmp     eax, offset unk_B35408
+0x478F32: cmp     eax, offset stru_B35408
 0x478F37: jz      loc_478FD6
 0x478F3D: mov     eax, [eax+4]
 0x478F40: test    eax, eax
@@ -70,7 +70,7 @@
 0x478F9A: push    eax
 0x478F9B: mov     ecx, ebx
 0x478F9D: call    edx
-0x478F9F: mov     eax, dword ptr [esp+28h+var_8]
+0x478F9F: mov     eax, [esp+28h+var_8]
 0x478FA3: test    eax, eax
 0x478FA5: jz      loc_4790E4
 0x478FAB: mov     esi, eax

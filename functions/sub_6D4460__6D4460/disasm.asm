@@ -1,1 +1,1 @@
-0x6D4460: jmp     sub_6EC5C0
+0x6D4460: jmp     j_NiSingleInterpController_IsEqual

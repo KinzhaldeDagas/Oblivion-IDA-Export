@@ -109,7 +109,7 @@
 0x630225: fstp    [esp+2Ch+var_8]
 0x630229: fld     [esp+2Ch+var_18]
 0x63022D: fstp    [esp+2Ch+var_4]
-0x630231: call    sub_683CB0
+0x630231: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x630236: fstp    [esp+2Ch+var_18]
 0x63023A: add     esp, 4
 0x63023D: fldz
@@ -152,10 +152,10 @@
 0x6302B6: jmp     short loc_6302C1
 0x6302B8: push    30h ; '0'
 0x6302BA: mov     ecx, edi
-0x6302BC: call    sub_5E05F0
-0x6302C1: push    3
-0x6302C3: push    2
-0x6302C5: call    TESTopic__GEtTopic
+0x6302BC: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
+0x6302C1: push    3; index
+0x6302C3: push    2; topicType
+0x6302C5: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x6302CA: mov     ecx, ds:0B333C4h
 0x6302D0: add     esp, 8
 0x6302D3: push    1
@@ -193,7 +193,6 @@
 0x63032F: test    esi, esi
 0x630331: jz      loc_6303F0
 0x630337: jmp     short loc_630340
-0x630339: align 10h
 0x630340: mov     ebx, [esi]
 0x630342: test    ebx, ebx
 0x630344: jz      loc_6303F0
@@ -201,11 +200,11 @@
 0x63034E: jnz     short loc_630382
 0x630350: lea     ecx, [edi+44h]
 0x630353: mov     ebp, edi
-0x630355: call    sub_420680
+0x630355: call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.
 0x63035A: test    eax, eax
 0x63035C: jz      short loc_630368
 0x63035E: lea     ecx, [edi+44h]
-0x630361: call    sub_420680
+0x630361: call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.
 0x630366: mov     ebp, eax
 0x630368: mov     ebx, [ebx+24h]
 0x63036B: mov     eax, ds:0B333C4h
@@ -230,7 +229,7 @@
 0x63039B: mov     ecx, edi
 0x63039D: call    edx
 0x63039F: mov     ecx, eax
-0x6303A1: call    sub_472EA0
+0x6303A1: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x6303A6: test    al, al
 0x6303A8: jz      short loc_6303F0
 0x6303AA: lea     ecx, [edi+44h]

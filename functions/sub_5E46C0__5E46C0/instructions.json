@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5E46C0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Actor magic-effect transaction for a weapon hit or ArrowProjectile hit. Selects base weapon enchant/poison for ordinary attacks or projectile-retained AMMO enchantment (+0x7C), poison (+0x84), and paid bow enchantment (+0x80); pays ordinary weapon charge/consumes ordinary poison, applies effects through this Actor's MagicCaster to target, and reports insufficient charge.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5E46C4",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+weaponEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x5E46CB",
-    "line": "mov     ebp, [esp+14h+arg_C]",
+    "line": "mov     ebp, [esp+14h+outInsufficientCharge]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x5E46D0",
-    "line": "mov     esi, [esp+18h+arg_8]",
+    "line": "mov     esi, [esp+18h+projectile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x5E4707",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; Projectile path: obtain retained poison from ArrowProjectile+0x84 instead of consulting current weapon EntryData.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E4709",
-    "line": "call    sub_607410",
+    "line": "call    ArrowProjectile_GetPoison; Return projectile-retained AlchemyItem poison at ArrowProjectile+0x84. The equipped weapon's poison extra is consumed at release.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5E4710",
-    "line": "mov     [esp+1Ch+arg_C], eax",
+    "line": "mov     [esp+1Ch+outInsufficientCharge], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x5E4716",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; Projectile path: shared +0x7C accessor returns retained AMMO enchantment. This call is not a TESWorldSpace operation.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E4718",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x5E472F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E4731",
-    "line": "call    sub_484DF0",
+    "line": "call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5E4736",
-    "line": "mov     [esp+1Ch+arg_C], eax",
+    "line": "mov     [esp+1Ch+outInsufficientCharge], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x5E4743",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; Projectile path: obtain paid bow enchantment from ArrowProjectile+0x80.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E4745",
-    "line": "call    sub_607400",
+    "line": "call    ArrowProjectile_GetBowEnchantment; Return projectile-retained bow EnchantmentItem at ArrowProjectile+0x80. This is captured only when release-time charge covers the shot cost.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5E474A",
-    "line": "mov     [esp+1Ch+arg_8], eax",
+    "line": "mov     [esp+1Ch+projectile], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x5E4750",
-    "line": "mov     [esp+1Ch+arg_8], 0",
+    "line": "mov     [esp+1Ch+projectile], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5E475C",
-    "line": "cmp     [esp+1Ch+arg_C], edi",
+    "line": "cmp     [esp+1Ch+outInsufficientCharge], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x5E4762",
-    "line": "cmp     [esp+1Ch+arg_8], edi",
+    "line": "cmp     [esp+1Ch+projectile], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x5E4774",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; Ordinary non-projectile path only: read current equipped instance charge for the weapon's base enchantment.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5E4776",
-    "line": "call    sub_4849C0",
+    "line": "call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x5E47B3",
-    "line": "push    eax; int",
+    "line": "push    eax; targetStack",
     "mnemonic": "push",
     "size": 1
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x5E47C4",
-    "line": "push    eax; int",
+    "line": "push    eax; containerChanges",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x5E47C6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x5E47D0",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+newCharge]; newCharge",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5E47D3",
-    "line": "call    sub_488AA0",
+    "line": "call    EquippedEntryData_SetCharge; Ordinary non-projectile path only: subtract floored enchantment cost from the selected weapon stack's charge. Projectile bow charge was already paid at release.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x5E47DD",
-    "line": "mov     ebx, [esp+1Ch+arg_4]",
+    "line": "mov     ebx, [esp+1Ch+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x5E483B",
-    "line": "mov     eax, [esp+1Ch+arg_C]",
+    "line": "mov     eax, [esp+1Ch+outInsufficientCharge]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x5E4875",
-    "line": "mov     ecx, [esp+1Ch+arg_0]",
+    "line": "mov     ecx, [esp+1Ch+weaponEntry]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x5E487D",
-    "line": "call    sub_484E50",
+    "line": "call    EquippedEntryData_ConsumePoison; Ordinary non-projectile path consumes weapon poison after applying it. Projectile poison was already consumed at release and is not consumed again here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5E4882",
-    "line": "mov     eax, [esp+1Ch+arg_8]",
+    "line": "mov     eax, [esp+1Ch+projectile]",
     "mnemonic": "mov",
     "size": 4
   },

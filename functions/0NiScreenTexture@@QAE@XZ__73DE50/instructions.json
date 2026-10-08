@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x73DE50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass225/226: NiScreenTexture constructor; allocates 0x20 layout and zeroes records, +0x14 texturing property, +0x18 pending mask, +0x1C renderer buffer cache.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x73DE8D",
-    "line": "mov     [esi+18h], ax",
+    "line": "mov     [esi+18h], ax; Pass226: Constructor clears NiScreenTexture +0x18 pending update mask.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -166,5 +166,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CADA0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADA3",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CADA8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CADAC",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADAF",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CADB2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CADB4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CADB9",
+    "line": "mov     eax, offset stru_AF33C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CADBE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

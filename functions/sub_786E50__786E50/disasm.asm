@@ -1,4 +1,4 @@
-0x786E50: mov     eax, [esp+arg_0]
+0x786E50: mov     eax, [esp+other]; Oblivion 1.2.0.416: stVec3 distance using squared component deltas followed by the IEEE bit approximation (bits>>1)+0x1FC00000. RT4.1 stVec3::Distance and _idv_sqrt1 corroborate the exact formula.
 0x786E54: fld     dword ptr [eax+4]
 0x786E57: fsub    dword ptr [ecx+4]
 0x786E5A: fld     dword ptr [eax]
@@ -13,10 +13,10 @@
 0x786E6E: faddp   st(2), st
 0x786E70: fmul    st, st
 0x786E72: faddp   st(1), st
-0x786E74: fstp    [esp+arg_0]
-0x786E78: mov     eax, [esp+arg_0]
+0x786E74: fstp    [esp+other]
+0x786E78: mov     eax, [esp+other]
 0x786E7C: sar     eax, 1
 0x786E7E: add     eax, 1FC00000h
-0x786E83: mov     [esp+arg_0], eax
-0x786E87: fld     [esp+arg_0]
+0x786E83: mov     [esp+other], eax
+0x786E87: fld     [esp+other]
 0x786E8B: retn    4

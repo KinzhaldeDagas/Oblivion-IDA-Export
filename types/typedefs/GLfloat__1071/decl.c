@@ -1,1 +1,1 @@
-GLfloat
+typedef float GLfloat;

@@ -1,1 +1,1 @@
-TileRect
+struct TileRect;

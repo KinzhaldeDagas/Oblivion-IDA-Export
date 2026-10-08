@@ -1,4 +1,4 @@
-0x43EB30: sub     esp, 8
+0x43EB30: sub     esp, 8; Constructs a 0x18-byte FaceGenMatrix. Embedded vector layout: allocator state +0x08, begin +0x0C, end +0x10, capacity end +0x14.
 0x43EB33: push    ebx
 0x43EB34: xor     eax, eax
 0x43EB36: push    ebp
@@ -19,14 +19,14 @@
 0x43EB5A: cmp     ebp, [esi+8]
 0x43EB5D: jbe     short loc_43EB64
 0x43EB5F: call    __invalid_parameter_noinfo
-0x43EB64: push    ebx; Src
-0x43EB65: push    esi; int
-0x43EB66: push    ebp; Dst
-0x43EB67: push    esi; int
-0x43EB68: lea     eax, [esp+28h+var_8]
-0x43EB6C: push    eax; int
-0x43EB6D: mov     ecx, esi
-0x43EB6F: call    sub_439050
+0x43EB64: push    ebx; last
+0x43EB65: push    esi; last
+0x43EB66: push    ebp; first
+0x43EB67: push    esi; first
+0x43EB68: lea     eax, [esp+28h+result]
+0x43EB6C: push    eax; result
+0x43EB6D: mov     ecx, esi; this
+0x43EB6F: call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.
 0x43EB74: mov     eax, edi
 0x43EB76: pop     edi
 0x43EB77: pop     esi

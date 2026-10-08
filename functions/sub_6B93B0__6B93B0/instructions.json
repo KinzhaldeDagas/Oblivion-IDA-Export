@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B93B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Player-dialogue initializer. Clears the manager, resolves an optional forced topic or stock GREETING 000000C8, selects its INFO without InfoRefusal substitution, and pushes it as the head seed. A Goodbye GREETING is pre-committed (AddTopicList then RunResult) and returns closePending=true, but DialogMenu still plays its responses before closing.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6B93D6",
-    "line": "push    1",
+    "line": "push    1; clearAll",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x6B93DF",
-    "line": "call    sub_6B9250",
+    "line": "call    MenuTopicManager__ClearData; ClearData owns ordinary MenuTopics but deliberately does not destroy isInfoGeneralTopic entries. Those are actor-specific caches owned by ExtraInfoGeneralTopic (0x59).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6B93E4",
-    "line": "mov     edi, [esp+20h+arg_4]",
+    "line": "mov     edi, [esp+20h+forcedGreeting]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6B93EA",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, [esp+20h+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x6B93F3",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B93F4",
-    "line": "push    edi",
+    "line": "push    edi; topicType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B93F5",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Dialog menu initialization requests Topic bucket index 0: fixed FormID 000000C8 GREETING.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x6B9401",
-    "line": "jz      loc_6B94AC",
+    "line": "jz      loc_6B94AC; Null GREETING selects the nominal known-topic source later, but no seed MenuTopic was created. FillTopicList's count>=1 guard therefore leaves the manager empty; the native runtime assumes stock GREETING exists.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -187,37 +187,37 @@
   },
   {
     "ea": "0x6B9410",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9411",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9412",
-    "line": "lea     eax, [esp+28h+arg_0]",
+    "line": "lea     eax, [esp+28h+speaker]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B9416",
-    "line": "push    eax",
+    "line": "push    eax; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9417",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B9419",
-    "line": "call    sub_52F770",
+    "line": "call    TESTopic__GetMatchingInfo; GREETING selection passes a scratch pointer over the now-unused stack copy of the speaker argument. If no normal match exists, SelectInfoForSpeaker may return the last INFO rejected only by GetDisposition >/>= and set this scratch flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,25 +235,25 @@
   },
   {
     "ea": "0x6B9422",
-    "line": "jz      loc_6B94AC",
+    "line": "jz      loc_6B94AC; No matching GREETING INFO has the same consequence as a null GREETING: no seed is pushed, so the later known-topic fallback cannot populate the empty manager.",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x6B9428",
-    "line": "push    ebp",
+    "line": "push    ebp; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9429",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B942B",
-    "line": "call    sub_52F570",
+    "line": "call    TESTopic__GetOwnerQuest",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x6B943C",
-    "line": "mov     [esp+20h+arg_4], eax",
+    "line": "mov     [esp+20h+forcedGreeting], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,43 +313,43 @@
   },
   {
     "ea": "0x6B944F",
-    "line": "push    0",
+    "line": "push    0; GREETING explicitly disables InfoRefusal substitution. Therefore a low-disposition fallback INFO returned at 6B9419 is used as the greeting itself; ordinary TOPIC choices instead pass the fallback flag into MenuTopic and substitute FormID 118 when appropriate.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6B9451",
-    "line": "push    ecx",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9452",
-    "line": "push    ebp",
+    "line": "push    ebp; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9453",
-    "line": "push    edi",
+    "line": "push    edi; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9454",
-    "line": "push    ebx",
+    "line": "push    ebx; ownerQuest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B9455",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B9457",
-    "line": "call    sub_6B8E00",
+    "line": "call    MenuTopic__MenuTopic; Oblivion MenuTopic allocation is 0x28 bytes at its native creator. Fallout counterpart FillTopicList allocates 0x2C bytes before MenuTopic constructor (x4y6:0x825E8740); keep these version-specific class layouts separate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,19 +433,19 @@
   },
   {
     "ea": "0x6B9482",
-    "line": "jz      short loc_6B949A",
+    "line": "jz      short loc_6B949A; Goodbye GREETING is pre-committed, not skipped: AddTopicList and RunResult execute now, before speech, and Initialize returns closePending=true. DialogMenu temporarily masks that close flag while building choices, restores the head cursor, and still plays the GREETING response chain.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x6B9484",
-    "line": "mov     ecx, ebp; int",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B9486",
-    "line": "call    sub_5308D0",
+    "line": "call    TESTopicInfo__AddTopicList; Pre-speech Goodbye GREETING ordering is AddTopicList first, then RunResult. If its response chain completes normally, LoadNextTopicList reaches AddTopicList again before observing Goodbye; known-topic duplicate suppression normally makes that second acquisition idempotent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,19 +457,19 @@
   },
   {
     "ea": "0x6B948E",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B948F",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B9491",
-    "line": "call    sub_531470",
+    "line": "call    TESTopicInfo__RunResult; Run the Goodbye GREETING result immediately on the dialogue speaker, before any GREETING response is played. This early commit is why the later close path does not need the clicked-Goodbye pending-INFO slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x6B9498",
-    "line": "jmp     short loc_6B94C7",
+    "line": "jmp     short loc_6B94C7; Return closePending=true; this is not an immediate no-speech close. DialogMenu::InitializeTopics masks the flag for its initial LoadTopicsList call, then the caller starts the head GREETING response and closes after response exhaustion.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x6B949E",
-    "line": "cmp     byte ptr [edi+8], 0",
+    "line": "cmp     byte ptr [edi+8], 0; GREETING linkedTo entries become the initial TOPIC choice list; without links the source is PlayerCharacter's known-topic list at +0x5E4.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -529,31 +529,31 @@
   },
   {
     "ea": "0x6B94AC",
-    "line": "mov     ebp, ds:0B333C4h",
+    "line": "mov     ebp, ds:0B333C4h; Fallback source is player+0x5E4, the player's known-topic list; dialogue menu initialization continues normally.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B94B2",
-    "line": "add     ebp, 5E4h",
+    "line": "add     ebp, 5E4h; Nominal fallback source is PlayerCharacter.knownTopics. It is effective only when firstTopic already has a seed; after a null/unmatched greeting, FillTopicList immediately returns.",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x6B94B8",
-    "line": "push    ebp",
+    "line": "push    ebp; topics",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B94B9",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B94BB",
-    "line": "call    sub_6B9010",
+    "line": "call    MenuTopicManager__FillTopicList; Oblivion appends eligible ordinary MenuTopics in input-list order and performs no topic-priority sort here. Fallout's corresponding FillTopicList (x4y6:0x825E8740) sorts non-choice lists with PrioritySort (0x825E7390) by TESTopic priority; choice lists keep authored order. In Oblivion, the known-topic source is already sorted by display name in PlayerCharacter::AddKnownTopics, while INFO.linkedTo retains its own list order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -628,5 +628,77 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFB50",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB53",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB54",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB59",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFB5B",
+    "line": "mov     edx, [esp+referenceFormIDOrZero]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFB5F",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB62",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFB65",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFB67",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB6C",
+    "line": "mov     eax, offset stru_ADC04C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFB71",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

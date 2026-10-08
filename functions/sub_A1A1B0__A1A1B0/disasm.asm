@@ -1,5 +1,5 @@
 0xA1A1B0: push    esi
-0xA1A1B1: mov     esi, LodWaterRoot
+0xA1A1B1: mov     esi, ds:0B35234h
 0xA1A1B7: test    esi, esi
 0xA1A1B9: jz      short loc_A1A1D7
 0xA1A1BB: lea     eax, [esi+4]

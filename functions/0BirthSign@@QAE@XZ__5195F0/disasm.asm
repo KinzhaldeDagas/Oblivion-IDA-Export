@@ -52,3 +52,21 @@
 0x5196A3: pop     ebx
 0x5196A4: add     esp, 10h
 0x5196A7: retn
+0x9B7670: mov     ecx, [ebp-10h]; this
+0x9B7673: jmp     TESForm_destr
+0x9B7678: mov     ecx, [ebp-10h]
+0x9B767B: add     ecx, 18h
+0x9B767E: jmp     TESFullName_Initialize
+0x9B7683: mov     ecx, [ebp-10h]
+0x9B7686: add     ecx, 24h ; '$'; void *
+0x9B7689: jmp     TESTexture_destr
+0x9B768E: mov     ecx, [ebp-10h]
+0x9B7691: add     ecx, 38h ; '8'
+0x9B7694: jmp     TESSpellList_destr?
+0x9B7699: mov     edx, [esp+arg_4]
+0x9B769D: lea     eax, [edx-14h]
+0x9B76A0: mov     ecx, [edx-18h]
+0x9B76A3: xor     ecx, eax
+0x9B76A5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B76AA: mov     eax, offset stru_AE21A8
+0x9B76AF: jmp     ___CxxFrameHandler3

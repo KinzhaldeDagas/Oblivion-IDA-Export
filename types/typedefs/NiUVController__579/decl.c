@@ -1,1 +1,1 @@
-NiUVController
+struct NiUVController;

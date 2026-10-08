@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65E960",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Top-level PlayerCharacter attack-control handler; sole direct caller is Player_OnInput at 0x672664. Native ABI is bool __thiscall with no x87/stack arguments. It reads the current process attack gate (vtable +0x138), handles ordinary attack control, and in the Bow lane coordinates AttackBow Hold/release state across third- and first-person ActorAnimData. The prior ST0/ST1 parameters and non-player description were decompiler artifacts.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x65E96E",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x65E99C",
-    "line": "call    eax",
+    "line": "call    eax; Calls process vtable +0x138, implemented for High/MiddleHighProcess by the byte getter at 0x6293C0 (process +0xF4). Its semantic name remains unproven; do not treat this call as an extra function argument.",
     "mnemonic": "call",
     "size": 2
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x65E9AD",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x65E9BD",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x65E9CC",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x65E9F9",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65E9FB",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65E9FD",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x65EA03",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x65EA13",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EA15",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EA17",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x65EA1D",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x65EA3C",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EA3E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x65EA42",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x65EA52",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x65EA5C",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EA5E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EA60",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x65EA70",
-    "line": "mov     ecx, offset flt_B370B0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x65EA92",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x65EAC8",
-    "line": "call    sub_472720",
+    "line": "call    ActorAnimData_FindFirstTextKeyWithPrefix; Searches the active BSAnimGroupSequence at ActorAnimData +0xA0 + 4*slot. Walks its NiTextKeyExtraData [time,string] entries and returns the zero-based index of the first case-insensitive string-prefix match; optionally writes that key's time. Returns 0xFFFFFFFF for a missing sequence/prefix, empty prefix, or no match. Observed with prefix \"a:l\" in combat/player attack selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x65EAF1",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,19 +781,19 @@
   },
   {
     "ea": "0x65EAFB",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EAFD",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EAFF",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x65EB41",
-    "line": "call    sub_4727E0",
+    "line": "call    ActorAnimData_GetNextTextKeySuffixChar; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with \"m:\" and compared with suffix 'l' to choose left/right attacks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x65EB5D",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x65EBA9",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x65EBB5",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,19 +1129,19 @@
   },
   {
     "ea": "0x65EBBF",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EBC1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EBC3",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x65EBCF",
-    "line": "mov     ecx, offset flt_B370B0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1207,19 +1207,19 @@
   },
   {
     "ea": "0x65EBEE",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EBF0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EBF2",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x65EBF8",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x65EC0A",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x65EC38",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,19 +1339,19 @@
   },
   {
     "ea": "0x65EC42",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EC44",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EC46",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x65EC4D",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,13 +1453,13 @@
   },
   {
     "ea": "0x65EC78",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EC7A",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,19 +1477,19 @@
   },
   {
     "ea": "0x65EC83",
-    "line": "push    1Ah",
+    "line": "push    1Ah; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EC85",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EC87",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x65ECA3",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1639,7 +1639,7 @@
   },
   {
     "ea": "0x65ECDE",
-    "line": "call    sub_4727E0",
+    "line": "call    ActorAnimData_GetNextTextKeySuffixChar; Searches the active sequence at ActorAnimData +0xA0 + 4*slot for the first case-insensitive prefix match whose text-key time is >= sequence current time at +0x3C. Optionally writes the matched time and returns tolower(text[prefixLength]); returns 0 when absent. Observed with \"m:\" and compared with suffix 'l' to choose left/right attacks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x65ECFA",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x65ED3C",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x65ED48",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,19 +1849,19 @@
   },
   {
     "ea": "0x65ED52",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65ED54",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65ED56",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x65ED62",
-    "line": "mov     ecx, offset flt_B370B0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1993,19 +1993,19 @@
   },
   {
     "ea": "0x65EDB3",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EDB5",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EDB7",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x65EDBD",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2191,13 +2191,13 @@
   },
   {
     "ea": "0x65EE25",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EE27",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2215,19 +2215,19 @@
   },
   {
     "ea": "0x65EE34",
-    "line": "push    1Ah",
+    "line": "push    1Ah; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EE36",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EE38",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x65EE44",
-    "line": "call    sub_5EC180",
+    "line": "call    MobileObject_IsJumpSuppressedByFallAnimOrInAir; Returns true for swimming/falling style animation groups 0x28..0x2A, or if current character state id == 2 InAir. Player jump path uses this to suppress normal jump handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2269,19 +2269,19 @@
   },
   {
     "ea": "0x65EE51",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EE53",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EE55",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2293,7 +2293,7 @@
   },
   {
     "ea": "0x65EE5B",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,19 +2317,19 @@
   },
   {
     "ea": "0x65EE67",
-    "line": "push    3",
+    "line": "push    3; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EE69",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EE6B",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -2479,7 +2479,7 @@
   },
   {
     "ea": "0x65EEC8",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2557,7 +2557,7 @@
   },
   {
     "ea": "0x65EEF2",
-    "line": "call    sub_5F48D0",
+    "line": "call    PlayerCharacter_TryStartAttackAnimGroup; Accepted later attack input calls PlayerCharacter_TryStartAttackAnimGroup; it schedules a fresh AttackBow cycle. Release processing itself does not reload/nock.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2713,7 +2713,7 @@
   },
   {
     "ea": "0x65EF3E",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2749,7 +2749,7 @@
   },
   {
     "ea": "0x65EF4D",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2851,19 +2851,19 @@
   },
   {
     "ea": "0x65EF90",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EF92",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EF94",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2875,7 +2875,7 @@
   },
   {
     "ea": "0x65EF9A",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2899,19 +2899,19 @@
   },
   {
     "ea": "0x65EFAA",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EFAC",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EFAE",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2923,7 +2923,7 @@
   },
   {
     "ea": "0x65EFB4",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2959,19 +2959,19 @@
   },
   {
     "ea": "0x65EFD1",
-    "line": "push    3",
+    "line": "push    3; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EFD3",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EFD5",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -3019,7 +3019,7 @@
   },
   {
     "ea": "0x65EFF4",
-    "line": "call    eax",
+    "line": "call    eax; Bow-control branch tests the same process +0xF4 flag. When set, slot 3 must be at phase 2 and the attack-input latch must be armed before update state 3 is sent to both perspectives.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3037,19 +3037,19 @@
   },
   {
     "ea": "0x65EFFA",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65EFFC",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65EFFE",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3067,7 +3067,7 @@
   },
   {
     "ea": "0x65F008",
-    "line": "cmp     byte ptr ds:0B3BB84h, 0",
+    "line": "cmp     byte ptr ds:0B3BB84h, 0; Native AttackBow Hold gate: current slot-3 required-note phase must equal 2 and the attack-control latch at 0xB3BB84 must be set.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3163,37 +3163,37 @@
   },
   {
     "ea": "0x65F036",
-    "line": "push    3",
+    "line": "push    3; Control-to-animation bridge: write ActorAnimData update-control state 3 to third-person and first-person data. This does not directly write the slot phase; the required-note scheduler advances it.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65F038",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x65F03A",
-    "line": "call    sub_4706D0",
+    "line": "call    ActorAnimData_SetUpdateState; Oblivion ActorAnimData update-control setter: stores one byte at +0x90. Observed callers write state 3 for attack/action synchronization and state 5 from Cmd_SkipAnim. Do not infer KF unloading or map mutation from this setter.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x65F03F",
-    "line": "mov     ecx, [esp+20h+var_C]",
+    "line": "mov     ecx, [esp+20h+var_C]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x65F043",
-    "line": "push    3",
+    "line": "push    3; state",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x65F045",
-    "line": "call    sub_4706D0",
+    "line": "call    ActorAnimData_SetUpdateState; Oblivion ActorAnimData update-control setter: stores one byte at +0x90. Observed callers write state 3 for attack/action synchronization and state 5 from Cmd_SkipAnim. Do not infer KF unloading or map mutation from this setter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3253,7 +3253,7 @@
   },
   {
     "ea": "0x65F05F",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },

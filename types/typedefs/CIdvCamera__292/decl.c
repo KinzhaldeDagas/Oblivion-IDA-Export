@@ -1,1 +1,1 @@
-CIdvCamera
+struct CIdvCamera;

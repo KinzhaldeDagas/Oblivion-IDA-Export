@@ -13,7 +13,7 @@
 0x68AA3B: lea     eax, [esp+24h+var_C]
 0x68AA3F: mov     large fs:0, eax
 0x68AA45: mov     [esp+24h+var_10], ecx
-0x68AA49: call    sub_689A00
+0x68AA49: call    TravelPath_ClearNodes; Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.
 0x68AA4E: mov     eax, [esp+24h+arg_0]
 0x68AA52: xor     ebp, ebp
 0x68AA54: cmp     eax, ebp
@@ -34,8 +34,8 @@
 0x68AA8B: cmp     eax, ebp
 0x68AA8D: mov     [esp+24h+var_4], ebp
 0x68AA91: jz      short loc_68AA9E
-0x68AA93: mov     ecx, eax
-0x68AA95: call    sub_68B0C0
+0x68AA93: mov     ecx, eax; this
+0x68AA95: call    TravelPathNode_Init; Verified TravelPathNode_Init sets payload +0 to null and kind +4 to 0xFF (uninitialized sentinel); the three bytes at +5..+7 are not written.
 0x68AA9A: mov     edi, eax
 0x68AA9C: jmp     short loc_68AAA0
 0x68AA9E: xor     edi, edi
@@ -83,3 +83,15 @@
 0x68AB10: pop     ebx
 0x68AB11: add     esp, 10h
 0x68AB14: retn    4
+0x9BD8A0: mov     eax, [ebp+4]
+0x9BD8A3: push    eax
+0x9BD8A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD8A9: pop     ecx
+0x9BD8AA: retn
+0x9BD8AB: mov     edx, [esp+arg_4]
+0x9BD8AF: lea     eax, [edx-14h]
+0x9BD8B2: mov     ecx, [edx-18h]
+0x9BD8B5: xor     ecx, eax
+0x9BD8B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD8BC: mov     eax, offset stru_AE71E0
+0x9BD8C1: jmp     ___CxxFrameHandler3

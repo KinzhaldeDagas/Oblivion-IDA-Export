@@ -1,7 +1,7 @@
-0x497420: mov     eax, [esp+arg_0]
+0x497420: mov     eax, [esp+arg_0]; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x497424: push    esi
 0x497425: push    eax
-0x497426: call    sub_47FAC0
+0x497426: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x49742B: mov     esi, eax
 0x49742D: add     esp, 4
 0x497430: test    esi, esi
@@ -14,7 +14,7 @@
 0x49743D: call    eax
 0x49743F: test    eax, eax
 0x497441: jz      short loc_497451
-0x497443: cmp     eax, offset dword_BA7A20
+0x497443: cmp     eax, 0BA7A20h
 0x497448: jz      short loc_49745B
 0x49744A: mov     eax, [eax+4]
 0x49744D: test    eax, eax

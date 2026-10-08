@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F05A0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified: retrieves the +0x60 coordinate bucket using the SubSpace reference's position-derived signed-X/unsigned-Y cell key (shift 12 after engine float-to-int conversion), returning its 8-byte list head. The writer populates every bucket touched by the scaled SubSpace radius.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4F05AE",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4F05BA",
-    "line": "fistp   [esp+0Ch+arg_0]",
+    "line": "fistp   [esp+0Ch+worldPosition]",
     "mnemonic": "fistp",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4F05C1",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+worldPosition]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x4F05EE",
-    "line": "call    NiTMap_GetAt",
+    "line": "call    NiTMap_GetAt; Verified: looks up auxiliary map at WorldSpace +0x60 by packed position-derived cell coordinates; exact mapped payload semantics remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },

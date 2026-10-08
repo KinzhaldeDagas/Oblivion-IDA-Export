@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FD560",
-    "line": "sub     esp, 0B98h",
+    "line": "sub     esp, 0B98h; Loads Oblivion Lighting30Shader vertex programs. Builds SM3Lighting and SimpleShadow/TexEffect variants using SKIN, vertex-color and projected-shadow feature macros; the observed fog register layouts remain Oblivion-specific.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x7FD64E",
-    "line": "mov     [esp+0BE4h+var_A58], offset aProjshadow; \"PROJSHADOW\"",
+    "line": "mov     [esp+0BE4h+var_A58], offset aProjshadow; DeferredRendering projection contract: B47288[4] is SM3Lighting.v.hlsl + PROJSHADOW. Native projected primary VS writes shadow projection as TEXCOORD1 and fog as TEXCOORD7 to the pixel shader.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x7FD919",
-    "line": "mov     [esp+0BB4h+var_7B0], offset aLighting3xSm3s; \"lighting\\\\3x\\\\SM3SimpleShadow.v.hlsl\"",
+    "line": "mov     [esp+0BB4h+var_7B0], offset aLighting3xSm3s; Load Oblivion SM3013 SimpleShadow VS (no macros). Stock bytecode hash F61E9AB7...; inputs POSITION/TEXCOORD0.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x7FD93B",
-    "line": "mov     [esp+0BC0h+var_764], offset aLighting3xSm3s; \"lighting\\\\3x\\\\SM3SimpleShadow.v.hlsl\"",
+    "line": "mov     [esp+0BC0h+var_764], offset aLighting3xSm3s; Load Oblivion SM3014 SimpleShadow VS (VC). Stock bytecode is identical to SM3013 and declares no COLOR input.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x7FD96F",
-    "line": "mov     [esp+0BCCh+var_718], offset aLighting3xSm3s; \"lighting\\\\3x\\\\SM3SimpleShadow.v.hlsl\"",
+    "line": "mov     [esp+0BCCh+var_718], offset aLighting3xSm3s; Load Oblivion SM3015 SimpleShadow VS (SKIN). Stock bytecode hash CC2CA4CC...; inputs POSITION/TEXCOORD0/BLENDWEIGHT/BLENDINDICES.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7FD99F",
-    "line": "mov     [esp+0BD8h+var_6CC], offset aLighting3xSm3s; \"lighting\\\\3x\\\\SM3SimpleShadow.v.hlsl\"",
+    "line": "mov     [esp+0BD8h+var_6CC], offset aLighting3xSm3s; Load Oblivion SM3016 SimpleShadow VS (SKIN+VC). Stock bytecode is identical to SM3015 and declares no COLOR input.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x7FDD0A",
-    "line": "call    sub_7B47E0",
+    "line": "call    BSShaderManager_GetVertexShaderTargetName",
     "mnemonic": "call",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x7FDD63",
-    "line": "call    CreateVertexShader",
+    "line": "call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "call",
     "size": 5
   },

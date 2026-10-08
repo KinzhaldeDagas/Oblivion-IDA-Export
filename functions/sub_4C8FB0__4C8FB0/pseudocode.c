@@ -1,70 +1,70 @@
 void __thiscall sub_4C8FB0(TESForm *this)
 {
-  TESForm *v2; // esi
-  TESForm *v3; // ebx
+  int *v2; // esi
+  int *v3; // ebx
   Data *OverrideFile; // eax
   TESForm *v5; // eax
-  TESFormVtbl *v6; // eax
+  void *v6; // eax
   const char *v7; // eax
-  TESFormVtbl **v8; // eax
+  int *v8; // eax
   int v9; // [esp-Ch] [ebp-14h]
   char ArgList[4]; // [esp+4h] [ebp-4h] BYREF
 
-  if ( (this->member.flags & 8) == 0 )
+  if ( (this->member.flags & 8) == 0 ) /*0x4c8fbc*/
   {
-    v2 = (TESForm *)((char *)this + 0x2C);
-    v3 = 0;
-    if ( this != (TESForm *)0xFFFFFFD4 )
+    v2 = (int *)((char *)this + 0x2C); /*0x4c8fc4*/
+    v3 = 0; /*0x4c8fc7*/
+    if ( this != (TESForm *)0xFFFFFFD4 ) /*0x4c8fcb*/
     {
-      do
+      do /*0x4c908a*/
       {
-        if ( !*(_DWORD *)&v2->member.type && !v2->vtbl )
-          break;
-        *(_DWORD *)ArgList = v2->vtbl;
-        OverrideFile = TESForm_GetOverrideFile(this, 0xFFFFFFFF);
-        TESForm_ResolveFormID((UInt32 *)ArgList, OverrideFile);
-        v5 = TESForm_LookupByFormID(*(UInt32 *)ArgList);
-        v6 = (TESFormVtbl *)OblivionDynamicCast(
-                              v5,
-                              0,
-                              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                              &TESGrass `RTTI Type Descriptor',
-                              0);
-        if ( v6 )
+        if ( !v2[1] && !*v2 ) /*0x4c8fd7*/
+          break; /*0x4c8fda*/
+        *(_DWORD *)ArgList = *v2; /*0x4c8fe2*/
+        OverrideFile = TESForm_GetOverrideFile(this, 0xFFFFFFFF); /*0x4c8fea*/
+        TESForm_ResolveFormID((UInt32 *)ArgList, OverrideFile); /*0x4c8ff5*/
+        v5 = TESForm_LookupByFormID(*(UInt32 *)ArgList); /*0x4c9010*/
+        v6 = OblivionDynamicCast( /*0x4c9019*/
+               v5,
+               0,
+               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+               &TESGrass `RTTI Type Descriptor',
+               0);
+        if ( v6 ) /*0x4c9023*/
         {
-          v2->vtbl = v6;
-          v3 = v2;
-          v2 = *(TESForm **)&v2->member.type;
+          *v2 = (int)v6; /*0x4c9081*/
+          v3 = v2; /*0x4c9083*/
+          v2 = (int *)v2[1]; /*0x4c9085*/
         }
         else
         {
-          v7 = (const char *)((int (__thiscall *)(TESForm *, UInt32))this->vtbl->GetEditorName)(
+          v7 = (const char *)((int (__thiscall *)(TESForm *, UInt32))this->vtbl->GetEditorName)( /*0x4c9033*/
                                this,
                                this->member.refID);
-          PrintError("Could not find Grass (%08X) for LandTexture '%s' (%08X).", *(_DWORD *)ArgList, v7, v9);
-          if ( v3 )
+          PrintError("Could not find Grass (%08X) for LandTexture '%s' (%08X).", *(_DWORD *)ArgList, v7, v9); /*0x4c9040*/
+          if ( v3 ) /*0x4c904a*/
           {
-            BSSimpleList_Remove(v3, *(int *)ArgList);
-            v2 = *(TESForm **)&v3->member.type;
+            BSSimpleList_Remove(v3, *(int *)ArgList); /*0x4c9053*/
+            v2 = (int *)v3[1]; /*0x4c9058*/
           }
           else
           {
-            v8 = *(TESFormVtbl ***)&v2->member.type;
-            if ( v8 )
+            v8 = (int *)v2[1]; /*0x4c905d*/
+            if ( v8 ) /*0x4c9062*/
             {
-              *(_DWORD *)&v2->member.type = v8[1];
-              v2->vtbl = *v8;
-              FormHeapFree((unsigned int)v8);
+              v2[1] = v8[1]; /*0x4c9067*/
+              *v2 = *v8; /*0x4c906d*/
+              FormHeapFree((unsigned int)v8); /*0x4c906f*/
             }
             else
             {
-              v2->vtbl = 0;
+              *v2 = 0; /*0x4c9079*/
             }
           }
         }
       }
-      while ( v2 );
+      while ( v2 ); /*0x4c908a*/
     }
-    TESForm_SetIsLinked(this, 1);
+    TESForm_SetIsLinked(this, 1); /*0x4c9094*/
   }
 }

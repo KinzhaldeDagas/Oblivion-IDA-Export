@@ -1,4 +1,4 @@
-0x498340: push    0FFFFFFFFh
+0x498340: push    0FFFFFFFFh;
 0x498342: push    offset CreateWindowAndInitialize_SEH
 0x498347: mov     eax, large fs:0
 0x49834D: push    eax
@@ -91,7 +91,7 @@
 0x498488: call    dword ptr ds:0A28288h
 0x49848E: mov     ecx, ds:0B34FA8h
 0x498494: cmp     ds:0B06DE4h, bl
-0x49849A: jz      short loc_4984A0
+0x49849A: jz      short loc_4984A0; ImprovedShaders HDR+4xAA cap target: native branch jumps to iMultiSample only when bDoHighDynamicRange is false. Patch 74 04 -> EB 04 preserves iMultiSample under HDR; device creation still validates MSAA support.
 0x49849C: xor     eax, eax
 0x49849E: jmp     short loc_4984B2
 0x4984A0: mov     eax, ds:0B06D0Ch
@@ -165,12 +165,12 @@
 0x498573: mov     eax, [eax+0A94h]
 0x498579: push    ebx
 0x49857A: mov     ecx, eax
-0x49857C: call    nullsub_returnvVoid_1arg
+0x49857C: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x498581: mov     ecx, ds:0B350D8h
 0x498587: mov     eax, [ecx]
 0x498589: mov     edx, [eax+64h]
-0x49858C: push    offset dword_B350DC
-0x498591: call    edx
+0x49858C: push    0B350DCh
+0x498591: call    edx; Fog decode: renderer init consumes startup color vector; not the active FogParam/FogColor shader constant producer.
 0x498593: push    38h ; '8'; Size
 0x498595: call    FormHeapAlloc
 0x49859A: add     esp, 4
@@ -185,7 +185,7 @@
 0x4985B7: mov     ecx, ds:0B350D8h; this
 0x4985BD: push    eax; a2
 0x4985BE: mov     [esp+150h+var_4], ebp
-0x4985C5: call    NiDX9Renderer__SetShaderAccumulator
+0x4985C5: call    NiDX9Renderer__SetShaderAccumulator;
 0x4985CA: cmp     byte ptr ds:0B34FA6h, 0
 0x4985D1: jz      short loc_498614
 0x4985D3: mov     eax, ds:0B350D8h
@@ -203,7 +203,7 @@
 0x4985F9: mov     ds:0B34FC8h, bl
 0x4985FF: xor     eax, eax
 0x498601: mov     cl, ds:byte_A3E2C0[eax]
-0x498607: mov     ds:byte_B34FC8[eax], cl
+0x498607: mov     [eax+0B34FC8h], cl
 0x49860D: add     eax, 1
 0x498610: test    cl, cl
 0x498612: jnz     short loc_498601
@@ -228,7 +228,7 @@
 0x49865C: mov     byte ptr ds:0B256CCh, 1
 0x498663: mov     byte ptr ds:0B3F708h, 0
 0x49866A: jnz     short loc_49867A
-0x49866C: call    sub_763DE0
+0x49866C: call    NiDX9AdapterDescArray_GetSingleton; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.
 0x498671: cmp     eax, ebx
 0x498673: mov     ds:0B34FC4h, eax
 0x498678: jz      short loc_49868E
@@ -247,7 +247,7 @@
 0x49869B: xor     eax, eax
 0x49869D: lea     ecx, [ecx+0]
 0x4986A0: mov     cl, ds:byte_A3E2A4[eax]
-0x4986A6: mov     ds:byte_B34FC8[eax], cl
+0x4986A6: mov     [eax+0B34FC8h], cl
 0x4986AC: add     eax, 1
 0x4986AF: test    cl, cl
 0x4986B1: jnz     short loc_4986A0
@@ -265,7 +265,7 @@
 0x4986D7: xor     eax, eax
 0x4986D9: lea     esp, [esp+0]
 0x4986E0: mov     cl, ds:byte_A3E278[eax]
-0x4986E6: mov     ds:byte_B34FC8[eax], cl
+0x4986E6: mov     [eax+0B34FC8h], cl
 0x4986EC: add     eax, 1
 0x4986EF: test    cl, cl
 0x4986F1: jnz     short loc_4986E0
@@ -280,12 +280,12 @@
 0x498712: jmp     short loc_49871B
 0x498714: mov     byte ptr ds:0B34FA5h, 0
 0x49871B: mov     dl, ds:0B06DA4h
-0x498721: movzx   esi, word ptr [ebp+118h]
+0x498721: movzx   esi, word ptr [ebp+118h]; [Verified] Reads D3DCAPS9.PS20Caps.NumInstructionSlots. This value is later logged as maxPS20inst and passed to SetShaderPackage(maxPS20Instructions).
 0x498728: push    71h ; 'q'
 0x49872A: push    3
 0x49872C: push    80000h
 0x498731: push    16h
-0x498733: lea     edi, [eax+204h]
+0x498733: lea     edi, [eax+204h]; [Verified] pD3DCaps9 is D3DCAPS9*: later accesses at +0xC4/+0xCC read VertexShaderVersion/PixelShaderVersion and +0x40 reads TextureFilterCaps, matching the imported D3DCAPS9 layout.
 0x498739: lea     ebx, [eax+4]
 0x49873C: mov     eax, ds:0B42154h
 0x498741: push    1
@@ -302,7 +302,7 @@
 0x498760: test    eax, eax
 0x498762: setnl   al
 0x498765: push    16h
-0x498767: mov     ds:0B350D6h, al
+0x498767: mov     ds:0B350D6h, al; [Verified] Stores the result of the device CheckDeviceFormat query for format 0x71 and usage 0x80000 in renderer capability state B33E90+0x1246; RendererInfo reports this result as FP16ARGB blending.
 0x49876C: mov     eax, ds:0B42154h
 0x498771: mov     ecx, [eax]
 0x498773: mov     edx, [ecx+28h]
@@ -312,11 +312,11 @@
 0x49877B: call    edx
 0x49877D: test    eax, eax
 0x49877F: setnl   al
-0x498782: mov     ds:0B43071h, al
+0x498782: mov     ds:0B43071h, al; [Verified] Queries device support for format 0x71 with usage 0x20000 and stores the result in RendererGlobalState+0x1D8. The RendererInfo output labels this capability FP16ARGB filtering.
 0x498787: mov     ecx, [ebp+40h]
 0x49878A: shr     ecx, 0Ah
 0x49878D: and     cl, 1
-0x498790: mov     ds:0B43072h, cl
+0x498790: mov     ds:0B43072h, cl; [Verified] Copies (pD3DCaps9->TextureFilterCaps & 0x400) != 0 into RendererGlobalState+0x1D9. [Probable] The D3D9 mask is D3DPTFILTERCAPS_MINFANISOTROPIC (minifying anisotropic filtering).
 0x498796: mov     eax, [ebp+3Ch]
 0x498799: test    al, 2
 0x49879B: jz      short loc_4987A9
@@ -329,17 +329,17 @@
 0x4987BA: jz      short loc_4987D2
 0x4987BC: test    al, al
 0x4987BE: jz      short loc_4987D2
-0x4987C0: cmp     byte ptr ds:0B350D6h, 0
+0x4987C0: cmp     byte ptr ds:0B350D6h, 0; [Verified] HDR mode becomes active only when bIsHDR, bDoImageSpaceEffect, and the earlier FP16ARGB blending query at B33E90+0x1246 are all true; otherwise +0x1D7 is cleared.
 0x4987C7: jz      short loc_4987D2
-0x4987C9: mov     byte ptr ds:0B43070h, 1
+0x4987C9: mov     byte ptr ds:0B43070h, 1; Set HDR-enabled byte only when bDoHighDynamicRange:BlurShaderHDR, bDoImageSpaceEffects:Display, and device HDR capability are all true.
 0x4987D0: jmp     short loc_4987ED
 0x4987D2: test    al, al
-0x4987D4: mov     byte ptr ds:0B43070h, 0
+0x4987D4: mov     byte ptr ds:0B43070h, 0; Clear HDR-enabled byte when the HDR prerequisites fail.
 0x4987DB: jz      short loc_4987ED
-0x4987DD: cmp     byte ptr ds:0B06D34h, 0
-0x4987E4: mov     byte ptr ds:0B43073h, 1
+0x4987DD: cmp     byte ptr ds:0B06D34h, 0; [Verified] When HDR mode prerequisites fail but image-space effects are enabled, bUseBlurShader determines the fallback bloom path: zero clears +0x1DA; nonzero enables the Bloom lighting status.
+0x4987E4: mov     byte ptr ds:0B43073h, 1; MoonSugarEffect decode: sets byte_B43073 when Bloom Lighting is available/enabled during renderer initialization; this is not an effect-duration flag.
 0x4987EB: jnz     short loc_4987F4
-0x4987ED: mov     byte ptr ds:0B43073h, 0
+0x4987ED: mov     byte ptr ds:0B43073h, 0; [Verified] Clears the bloom-lighting field at RendererGlobalState+0x1DA on the HDR path. The adjacent branch sets it from image-space-effect state and byte_B06D34.
 0x4987F4: cmp     [esp+14Ch+var_135], 0
 0x4987F9: jz      short loc_49880B
 0x4987FB: cmp     byte ptr ds:0B06DBCh, 0
@@ -358,15 +358,15 @@
 0x49883C: movzx   ecx, byte ptr ds:0B06DB4h
 0x498843: mov     edx, ds:0B06C48h
 0x498849: movzx   eax, si
-0x49884C: push    eax; int
-0x49884D: push    ebx; Str1
-0x49884E: push    edi; int
-0x49884F: push    ecx; char
+0x49884C: push    eax; maxPS20Instructions
+0x49884D: push    ebx; adapterVendorPrefix
+0x49884E: push    edi; adapterCaps
+0x49884F: push    ecx; bForce1XShaders
 0x498850: mov     [esp+15Ch+var_134], eax; int
 0x498854: mov     eax, ds:0B06C44h
-0x498859: push    edx; int
-0x49885A: push    eax; int
-0x49885B: call    SetShaderPackage
+0x498859: push    edx; shaderCapsB
+0x49885A: push    eax; shaderCapsA
+0x49885B: call    SetShaderPackage; [Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.
 0x498860: add     esp, 18h
 0x498863: cmp     dword ptr ds:0B42F48h, 5
 0x49886A: jge     short loc_498873
@@ -375,7 +375,7 @@
 0x49887A: push    3; MaxCount
 0x49887C: push    offset byte_A3E274; Str2
 0x498881: push    ebx; Str1
-0x498882: mov     ds:0B2C67Ch, cx
+0x498882: mov     ds:0B2C67Ch, cx; Copies iShadowMapResolution (word_B06F1C) into native ShadowSurfaceRes (B2C67C) used by shadow-target creation.
 0x498889: call    __strnicmp
 0x49888E: add     esp, 0Ch
 0x498891: test    eax, eax
@@ -498,7 +498,7 @@
 0x498A30: call    eax
 0x498A32: test    eax, eax
 0x498A34: setnl   cl
-0x498A37: mov     ds:byte_B42E98[esi], cl
+0x498A37: mov     byte ptr ds:unk_B42E98[esi], cl
 0x498A3D: add     esi, 1
 0x498A40: cmp     esi, 0Dh
 0x498A43: jl      loc_4989B0
@@ -519,8 +519,8 @@
 0x498A73: mov     byte ptr ds:0B34FA4h, 1
 0x498A7A: jmp     short loc_498A7E
 0x498A7C: fstp    st
-0x498A7E: call    sub_7B7070
-0x498A83: push    offset word_B3F280
+0x498A7E: call    BSShaderManager_GetShaderVersionName; [Verified] BSShaderManager_GetShaderVersionName maps values 0–7 to BSSM_SV_NONE, BSSM_SV_1_X, BSSM_SV_2_0, BSSM_SV_2_A96, BSSM_SV_2_B96, BSSM_SV_2_A, BSSM_SV_2_B and BSSM_SV_3_0.
+0x498A83: push    offset unk_B3F280
 0x498A88: lea     edx, [esp+150h+Filename]
 0x498A8C: push    offset aSrendererinfo_; "%sRendererInfo.txt"
 0x498A91: push    edx
@@ -554,20 +554,20 @@
 0x498AED: push    offset aVsversionX; "\tVSversion          \t\t: %X\n"
 0x498AF2: push    esi; File
 0x498AF3: call    _fprintf
-0x498AF8: call    sub_7B47E0
+0x498AF8: call    BSShaderManager_GetVertexShaderTargetName
 0x498AFD: push    eax
 0x498AFE: push    offset aVstargetS; "\tVStarget           \t\t: %s\n"
 0x498B03: push    esi; File
 0x498B04: call    _fprintf
 0x498B09: add     esp, 40h
 0x498B0C: push    0
-0x498B0E: call    sub_7B4780
+0x498B0E: call    BSShaderManager_GetPixelShaderTargetName
 0x498B13: push    eax
 0x498B14: push    offset aPstargetS; "\tPStarget           \t\t: %s\n"
 0x498B19: push    esi; File
 0x498B1A: call    _fprintf
 0x498B1F: push    1
-0x498B21: call    sub_7B4780
+0x498B21: call    BSShaderManager_GetPixelShaderTargetName; [Verified] RendererInfo prints maxPS20inst from v93. The same v93 value is passed as SetShaderPackage argument maxPS20Instructions at 0x49885B.
 0x498B26: push    eax
 0x498B27: push    offset aPs2xtargetS; "\tPS2xtarget         \t\t: %s\n"
 0x498B2C: push    esi; File
@@ -614,7 +614,7 @@
 0x498BC2: push    esi; File
 0x498BC3: call    _fprintf
 0x498BC8: add     esp, 0Ch
-0x498BCB: cmp     byte ptr ds:0B43071h, 0
+0x498BCB: cmp     byte ptr ds:0B43071h, 0; [Verified] RendererInfo.txt labels RendererGlobalState+0x1D8 as FP16ARGB filtering.
 0x498BD2: mov     eax, offset off_A3E128
 0x498BD7: jnz     short loc_498BDE
 0x498BD9: mov     eax, offset aNo; "no"
@@ -623,7 +623,7 @@
 0x498BE4: push    esi; File
 0x498BE5: call    _fprintf
 0x498BEA: add     esp, 0Ch
-0x498BED: cmp     byte ptr ds:0B43070h, 0
+0x498BED: cmp     byte ptr ds:0B43070h, 0; [Verified] RendererInfo.txt labels RendererGlobalState+0x1D7 as High dynamic range.
 0x498BF4: mov     eax, offset off_A3E128
 0x498BF9: jnz     short loc_498C00
 0x498BFB: mov     eax, offset aNo; "no"
@@ -632,16 +632,16 @@
 0x498C06: push    esi; File
 0x498C07: call    _fprintf
 0x498C0C: add     esp, 0Ch
-0x498C0F: cmp     byte ptr ds:0B43073h, 0
+0x498C0F: cmp     byte ptr ds:0B43073h, 0; [Verified] RendererInfo.txt labels RendererGlobalState+0x1DA as Bloom lighting.
 0x498C16: mov     eax, offset off_A3E128
 0x498C1B: jnz     short loc_498C22
 0x498C1D: mov     eax, offset aNo; "no"
 0x498C22: push    eax
-0x498C23: push    offset aBloomLightingS; "\tBloom lighting     \t\t: %s\n"
+0x498C23: push    offset aBloomLightingS; MoonSugarEffect decode: renderer report prints byte_B43073 as "Bloom lighting"; confirms Blur active predicate is renderer/bloom ownership.
 0x498C28: push    esi; File
 0x498C29: call    _fprintf
 0x498C2E: add     esp, 0Ch
-0x498C31: cmp     byte ptr ds:0B42E84h, 0
+0x498C31: cmp     byte ptr ds:0B42E84h, 0; [Verified] RendererInfo.txt prints OB_ShaderPassControl.refractionPassEnabled as the Refraction capability/status line.
 0x498C38: mov     eax, offset off_A3E128
 0x498C3D: jnz     short loc_498C44
 0x498C3F: mov     eax, offset aNo; "no"
@@ -711,7 +711,7 @@
 0x498D2E: push    offset aMultisampleTyp; "\tMultisample Type   \t\t: %d\n"
 0x498D33: push    esi; File
 0x498D34: call    _fprintf
-0x498D39: call    sub_7DAB80
+0x498D39: call    GetShaderProgramPackageIndex; [Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0–6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default.
 0x498D3E: push    eax
 0x498D3F: push    offset aShaderPackageD; "\tShader Package     \t\t: %d\n"
 0x498D44: push    esi; File
@@ -728,7 +728,7 @@
 0x498D70: movzx   eax, byte ptr ds:0B06F74h
 0x498D77: fld     dword ptr ds:0B06E4Ch
 0x498D7D: movzx   ecx, byte ptr ds:0B06F84h
-0x498D84: fstp    dword ptr ds:0B42EA8h
+0x498D84: fstp    dword ptr ds:0B42EA8h; Startup writer for rendererGlobal+0x0F (B42EA8): copy fTreeDimmer:BlurShaderHDR setting. Default setting bits are 1.2f.
 0x498D8A: fld     dword ptr ds:0B06E54h
 0x498D90: fstp    dword ptr ds:0B42F44h
 0x498D96: mov     edx, ds:0B06F8Ch
@@ -739,7 +739,7 @@
 0x498DB4: fld     dword ptr ds:0B06EB4h
 0x498DBA: fstp    dword ptr ds:0B43080h
 0x498DC0: fld     dword ptr ds:0B06EBCh
-0x498DC6: mov     ds:0B42E86h, al
+0x498DC6: mov     ds:0B42E86h, al; [Verified] Writes OB_ShaderPassControl.bFullBrightLighting from OB_INI_bFullBrightLighting_Display_010201A0 during renderer initialization.
 0x498DCB: fstp    dword ptr ds:0B43084h
 0x498DD1: xor     eax, eax
 0x498DD3: fld     dword ptr ds:0B06EC4h
@@ -786,3 +786,24 @@
 0x498E9E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x498EA3: add     esp, 138h
 0x498EA9: retn
+0x9B0410: mov     eax, [ebp-134h]
+0x9B0416: push    eax
+0x9B0417: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B041C: pop     ecx
+0x9B041D: retn
+0x9B041E: mov     eax, [ebp-134h]
+0x9B0424: push    eax
+0x9B0425: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B042A: pop     ecx
+0x9B042B: retn
+0x9B042C: mov     edx, [esp+arg_4]
+0x9B0430: lea     eax, [edx-13Ch]
+0x9B0436: mov     ecx, [edx-140h]
+0x9B043C: xor     ecx, eax
+0x9B043E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0443: add     eax, 10h
+0x9B0446: mov     ecx, [edx-4]
+0x9B0449: xor     ecx, eax
+0x9B044B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0450: mov     eax, offset stru_ADC764
+0x9B0455: jmp     ___CxxFrameHandler3

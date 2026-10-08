@@ -1,6 +1,6 @@
 BOOL __thiscall sub_6FAE10(float *this, int a2)
 {
-  return *(float *)a2 == *this
+  return *(float *)a2 == *this /*0x6fae56*/
       && *(float *)(a2 + 4) == *(this + 1)
       && *(float *)(a2 + 8) == *(this + 2)
       && *((_BYTE *)this + 0xE) == *(_BYTE *)(a2 + 0xE)

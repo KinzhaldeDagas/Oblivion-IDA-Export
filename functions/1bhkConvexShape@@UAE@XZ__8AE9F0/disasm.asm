@@ -24,3 +24,12 @@
 0x8AEA4D: pop     esi
 0x8AEA4E: add     esp, 10h
 0x8AEA51: retn
+0x9BD420: mov     ecx, [ebp-10h]; this
+0x9BD423: jmp     ??1bhkSphereRepShape@@UAE@XZ; bhkSphereRepShape::~bhkSphereRepShape(void)
+0x9BD428: mov     edx, [esp+arg_4]
+0x9BD42C: lea     eax, [edx-8]
+0x9BD42F: mov     ecx, [edx-0Ch]
+0x9BD432: xor     ecx, eax
+0x9BD434: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD439: mov     eax, offset stru_AE6DF8
+0x9BD43E: jmp     ___CxxFrameHandler3

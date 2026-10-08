@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x891780",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: recomputes two controller capsule probe/end points at proxy+0x380 and proxy+0x390 from Havok object transform+0x70, capsule height +0x3A4, radius +0x3A0, and vertical base offset +0x248.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x8917AD",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -130,12 +130,6 @@
     "line": "jmp     short loc_8917C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8917BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x8917C0",
@@ -175,7 +169,7 @@
   },
   {
     "ea": "0x8917DB",
-    "line": "fstp    [esp+30h+var_1C]",
+    "line": "fstp    [esp+30h+var_1C]; Local endpoint axial coordinate = capsuleHeight*0.5 - radius.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -217,7 +211,7 @@
   },
   {
     "ea": "0x8917F9",
-    "line": "fstp    [esp+30h+var_1C]",
+    "line": "fstp    [esp+30h+var_1C]; Second endpoint mirrors the axial coordinate by multiplying by -1.0.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -259,7 +253,7 @@
   },
   {
     "ea": "0x89180B",
-    "line": "call    sub_88FCC0",
+    "line": "call    hkTransform_TransformPosition; Transform local capsule endpoint into controller/Havok world space.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +301,7 @@
   },
   {
     "ea": "0x89182F",
-    "line": "fstp    dword ptr [eax]",
+    "line": "fstp    dword ptr [eax]; Add proxy+0x248 vertical/base offset to endpoint z after transform.",
     "mnemonic": "fstp",
     "size": 2
   },

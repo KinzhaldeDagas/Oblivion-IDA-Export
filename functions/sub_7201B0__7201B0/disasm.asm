@@ -1,6 +1,6 @@
 0x7201B0: sub     esp, 8
 0x7201B3: push    ebx
-0x7201B4: mov     ebx, [esp+0Ch+arg_0]
+0x7201B4: mov     ebx, [esp+0Ch+stream]
 0x7201B8: push    ebp
 0x7201B9: push    esi
 0x7201BA: push    edi
@@ -23,17 +23,17 @@
 0x7201EA: lea     ecx, [esp+30h+var_8]
 0x7201EE: push    ecx
 0x7201EF: setnz   al
-0x7201F2: mov     byte ptr [esp+34h+arg_0], al
+0x7201F2: mov     byte ptr [esp+34h+stream], al
 0x7201F6: mov     eax, [ebx+220h]
 0x7201FC: push    1
-0x7201FE: lea     edx, [esp+38h+arg_0]
+0x7201FE: lea     edx, [esp+38h+stream]
 0x720202: push    edx
 0x720203: push    eax
 0x720204: mov     eax, [eax+8]
 0x720207: mov     [esp+40h+var_8], 1
 0x72020F: call    eax
 0x720211: add     esp, 28h
-0x720214: cmp     byte ptr [esp+18h+arg_0], 0
+0x720214: cmp     byte ptr [esp+18h+stream], 0
 0x720219: jz      short loc_720242
 0x72021B: mov     edx, [esi]
 0x72021D: mov     eax, [ebx+220h]
@@ -59,7 +59,7 @@
 0x720257: push    esi
 0x720258: push    eax
 0x720259: mov     [esp+2Ch+var_8], 2
-0x720261: call    edx
+0x720261: call    edx; Write the 16-bit shared-normal entry-array length.
 0x720263: xor     ebp, ebp
 0x720265: add     esp, 14h
 0x720268: cmp     [esi], bp
@@ -75,7 +75,7 @@
 0x720286: push    1
 0x720288: lea     edx, [esp+1Ch+var_4]
 0x72028C: push    edx
-0x72028D: mov     [esp+20h+var_8], ecx
+0x72028D: mov     [esp+20h+var_8], ecx; Write each entry's UInt16 count followed by its pooled vertex-index list.
 0x720291: mov     edx, [eax+8]
 0x720294: push    2
 0x720296: lea     ecx, [esp+24h+var_8]

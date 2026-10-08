@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x625D70",
-    "line": "mov     ecx, [ecx+48h]",
+    "line": "mov     ecx, [ecx+48h]; Stops dialogue playback on activeSpeaker when a DialoguePackage is being torn down or replaced.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x625D77",
-    "line": "jmp     sub_5EF930",
+    "line": "jmp     Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.",
     "mnemonic": "jmp",
     "size": 5
   },

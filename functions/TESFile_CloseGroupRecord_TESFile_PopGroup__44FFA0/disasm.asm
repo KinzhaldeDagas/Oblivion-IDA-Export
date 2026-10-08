@@ -10,16 +10,16 @@
 0x44FFBE: mov     edx, [eax]
 0x44FFC0: push    eax
 0x44FFC1: mov     [ecx+284h], edx
-0x44FFC7: call    FormHeapFree
+0x44FFC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44FFCC: add     esp, 4
 0x44FFCF: push    esi
-0x44FFD0: call    FormHeapFree
+0x44FFD0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44FFD5: add     esp, 4
 0x44FFD8: pop     esi
 0x44FFD9: retn
 0x44FFDA: push    esi
 0x44FFDB: mov     dword ptr [ecx+284h], 0
-0x44FFE5: call    FormHeapFree
+0x44FFE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44FFEA: add     esp, 4
 0x44FFED: pop     esi
 0x44FFEE: retn

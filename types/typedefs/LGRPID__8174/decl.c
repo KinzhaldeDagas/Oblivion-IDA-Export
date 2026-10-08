@@ -1,1 +1,1 @@
-LGRPID
+typedef DWORD LGRPID;

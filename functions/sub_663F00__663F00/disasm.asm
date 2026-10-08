@@ -1,7 +1,7 @@
 0x663F00: mov     ecx, ds:0B333C4h
 0x663F06: push    ebx
 0x663F07: add     ecx, 44h ; 'D'
-0x663F0A: call    GetExtraDataFollower
+0x663F0A: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x663F0F: mov     ebx, eax
 0x663F11: test    ebx, ebx
 0x663F13: jz      short loc_663F4C

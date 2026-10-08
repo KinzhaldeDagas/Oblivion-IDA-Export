@@ -1,4 +1,4 @@
-0x564BF0: push    0FFFFFFFFh
+0x564BF0: push    0FFFFFFFFh; Treetop collision helper: constructs bhkBoxShape from a vector supplied by 0x565510. The caller halves stock SpeedTree box dimensions first and then wraps the box in a translated bhkTransformShape.
 0x564BF2: push    offset ??1bhkConvexTransformShape@@UAE@XZ_SEH
 0x564BF7: mov     eax, large fs:0
 0x564BFD: push    eax
@@ -28,7 +28,7 @@
 0x564C5C: add     ds:0BA7FF4h, ecx
 0x564C62: push    eax
 0x564C63: mov     ecx, esi
-0x564C65: call    sub_564080
+0x564C65: call    OB_bhkBoxShape_SetHalfExtents_010201A0; bhkBoxShape setup helper. Copies caller-provided extents into a temporary vector and invokes the box shape virtual setter; 0x565510 passes half-extents, not full SpeedTree box dimensions.
 0x564C6A: mov     eax, esi
 0x564C6C: mov     ecx, [esp+18h+var_C]
 0x564C70: mov     large fs:0, ecx
@@ -36,3 +36,12 @@
 0x564C78: pop     esi
 0x564C79: add     esp, 10h
 0x564C7C: retn    4
+0x9D6E10: mov     ecx, [ebp-10h]; this
+0x9D6E13: jmp     ??1bhkConvexShape@@UAE@XZ; bhkConvexShape::~bhkConvexShape(void)
+0x9D6E18: mov     edx, [esp+arg_4]
+0x9D6E1C: lea     eax, [edx-8]
+0x9D6E1F: mov     ecx, [edx-0Ch]
+0x9D6E22: xor     ecx, eax
+0x9D6E24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6E29: mov     eax, offset stru_AFEB04
+0x9D6E2E: jmp     ___CxxFrameHandler3

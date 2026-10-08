@@ -4,7 +4,7 @@
 0x532CB8: test    byte ptr [esp+4+arg_0], 1
 0x532CBD: jz      short loc_532CC8
 0x532CBF: push    esi
-0x532CC0: call    FormHeapFree
+0x532CC0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x532CC5: add     esp, 4
 0x532CC8: mov     eax, esi
 0x532CCA: pop     esi

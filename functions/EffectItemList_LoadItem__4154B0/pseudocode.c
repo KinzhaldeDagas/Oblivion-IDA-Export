@@ -13,11 +13,11 @@ int __thiscall EffectItemList_LoadItem(
         int a12,
         int a13,
         int a14,
-        _DWORD *a15,
+        int *a15,
         int a16)
 {
   return EffectItemList_LoadItem_::GetEffectSetting(
-           (int)this,
+           this,
            a2,
            a3,
            a4,

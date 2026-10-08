@@ -1,4 +1,4 @@
-void *sub_8066D0()
+NiRTTI *ParallaxShader_GetRTTI()
 {
-  return &unk_B47614;
+  return &stru_B47614; /*0x8066d5*/
 }

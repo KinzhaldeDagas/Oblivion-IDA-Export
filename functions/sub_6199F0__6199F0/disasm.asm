@@ -1,4 +1,4 @@
-0x6199F0: sub     esp, 0Ch
+0x6199F0: sub     esp, 0Ch; Builds predicted aim point/angles using target torso height and ballistic solver; output rotations are wrapped individually to [-pi,pi].
 0x6199F3: push    ebx
 0x6199F4: push    esi
 0x6199F5: push    edi
@@ -12,7 +12,7 @@
 0x619A0B: mov     eax, [eax+8]
 0x619A0E: mov     ecx, edi
 0x619A10: mov     [esp+18h+var_4], eax
-0x619A14: call    sub_5E0660
+0x619A14: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x619A19: fmul    qword ptr ds:0A31C70h
 0x619A1F: mov     ecx, [esp+18h+arg_14]
 0x619A23: mov     edx, [esp+18h+arg_8]
@@ -33,7 +33,7 @@
 0x619A52: mov     [eax+4], ebx
 0x619A55: push    esi
 0x619A56: mov     [eax+8], ecx
-0x619A59: call    sub_6159C0
+0x619A59: call    Combat_PredictAimPoint_Setup
 0x619A5E: fld     dword ptr [esi]
 0x619A60: fsub    dword ptr [edi+20h]
 0x619A63: add     esp, 20h

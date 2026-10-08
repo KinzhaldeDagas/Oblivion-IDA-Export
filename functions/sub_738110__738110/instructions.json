@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x738110",
-    "line": "sub     esp, 38h",
+    "line": "sub     esp, 38h; NiTriShapeData normal rebuild: clears storage, accumulates normalized triangle directions (including shared-normal groups), normalizes vertices and ORs dirty flags +0x2E with 2. Prettier Faces RefreshMorphedGeometryData relies on this dirty write correctly; no duplicate write needed. NBT exclusion required because allocator clears three planes.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x738115",
-    "line": "push    1",
+    "line": "push    1; clearStorage",
     "mnemonic": "push",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x738119",
-    "line": "call    sub_728280",
+    "line": "call    NiGeometryData_AllocateAndClearNormals; Allocate and zero the normal storage before accumulating unit triangle normals.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x73821C",
-    "line": "call    sub_4BFAA0",
+    "line": "call    NiPoint3_NormalizeApproximateInPlace; Normalize the triangle cross product before adding it to all three vertex accumulators; this produces equal triangle weighting rather than area weighting.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x73828C",
-    "line": "mov     eax, [edi+4Ch]",
+    "line": "mov     eax, [edi+4Ch]; When shared-normal entry count equals m_usVertices, add each triangle contribution to the vertex and every UInt16 index in its 8-byte entry. This keeps authored UV-split vertices smooth.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7383AB",
-    "line": "call    sub_725890",
+    "line": "call    NiPoint3_NormalizeStridedArray; Normalize all accumulated vertex normals with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x7383B3",
-    "line": "or      word ptr [edi+2Eh], 2",
+    "line": "or      word ptr [edi+2Eh], 2; Mark the normal channel dirty (bit 1).",
     "mnemonic": "or",
     "size": 5
   },

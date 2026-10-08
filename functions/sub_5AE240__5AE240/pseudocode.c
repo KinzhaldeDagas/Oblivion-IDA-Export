@@ -1,4 +1,5 @@
-void __userpurge sub_5AE240(
+// Preview path reused by CharacterSpecificSaves: LoadgameMenu+0x54 list, +0x40 TileImage, +0x44 info TileText. Vanilla omits playtime; plugin appends it from ESS header.
+void __userpurge LoadgameMenu_UpdateSavePreview(
         int a1@<ecx>,
         double st0_0@<st7>,
         double a3@<st6>,
@@ -28,43 +29,43 @@ void __userpurge sub_5AE240(
   char v26[4]; // [esp+4C8h] [ebp-25Ch] BYREF
   char v27[4]; // [esp+5F4h] [ebp-130h] BYREF
 
-  if ( (SaveLoad_CurrentSavegame->flags & 0x10000) == 0 )
+  if ( (g_TESSaveLoadGame->flags & 0x10000) == 0 ) /*0x5ae262*/
   {
-    v11 = *(_DWORD *)(a1 + 0x54);
-    if ( a10 == (_DWORD *)0xFFFFFFFF )
+    v11 = *(_DWORD *)(a1 + 0x54); /*0x5ae272*/
+    if ( a10 == (_DWORD *)0xFFFFFFFF ) /*0x5ae275*/
     {
-      __asm { fld1 }
-      a2 = a10;
-      v12 = *(Tile **)(a1 + 0x40);
-      __asm { fstp    [esp+724h+a2]; a3 }
-      Tile_SetFloat(v12, (_DWORD *)0xFA1, *(float *)&a2);
-      Tile_SetString(*(_DWORD **)(a1 + 0x44), (_DWORD *)0xFDE, EmptyString);
+      __asm { fld1 } /*0x5ae277*/
+      a2 = a10; /*0x5ae279*/
+      v12 = *(Tile **)(a1 + 0x40); /*0x5ae27a*/
+      __asm { fstp    [esp+724h+a2]; value } /*0x5ae27d*/
+      Tile_SetFloat(v12, (_DWORD *)0xFA1, *(float *)&a2); /*0x5ae285*/
+      Tile_SetString(*(_DWORD **)(a1 + 0x44), (_DWORD *)0xFDE, EmptyString); /*0x5ae297*/
     }
     else
     {
-      v13 = 0;
-      if ( v11 )
+      v13 = 0; /*0x5ae2a1*/
+      if ( v11 ) /*0x5ae2a5*/
       {
-        while ( *(_DWORD *)v11 )
+        while ( *(_DWORD *)v11 ) /*0x5ae2b3*/
         {
-          if ( a10 == v13 )
+          if ( a10 == v13 ) /*0x5ae2bb*/
           {
-            v14 = (Tile *)OblivionDynamicCast(
+            v14 = (Tile *)OblivionDynamicCast( /*0x5ae2e3*/
                             *(void **)(a1 + 0x40),
                             0,
                             (struct _s_RTTICompleteObjectLocator *)&Tile `RTTI Type Descriptor',
                             &TileImage `RTTI Type Descriptor',
                             0);
-            if ( v14 )
+            if ( v14 ) /*0x5ae2ea*/
             {
-              p_a2 = &a2;
-              sub_591A80(v14, 0);
-              __asm { fld     dword ptr ds:0A379B4h }
-              __asm { fstp    [esp+724h+a2]; a3 }
-              Tile_SetFloat(v14, (_DWORD *)0xFA1, *(float *)&a2);
+              p_a2 = &a2; /*0x5ae2f1*/
+              sub_591A80(v14, 0); /*0x5ae2fb*/
+              __asm { fld     dword ptr ds:0A379B4h } /*0x5ae300*/
+              __asm { fstp    [esp+724h+a2]; value }
+              Tile_SetFloat(v14, (_DWORD *)0xFA1, *(float *)&a2); /*0x5ae311*/
             }
-            v15 = sub_4610F0(
-                    SaveLoad_CurrentSavegame,
+            v15 = TESSaveLoadGame_BuildSavePreview( /*0x5ae354*/
+                    g_TESSaveLoadGame,
                     st0_0,
                     a3,
                     a4,
@@ -83,39 +84,39 @@ void __userpurge sub_5AE240(
                     0,
                     &v20,
                     0);
-            _sprintf(v27, "%s\n%s\n%s\n%s\n%s", Dst, (const char *)&v23, v26, (const char *)&v22, (const char *)&v24);
-            Tile_SetString(*(_DWORD **)(a1 + 0x44), (_DWORD *)0xFDE, v27);
-            __asm { fild    [esp+720h+var_714] }
-            a2 = v16;
-            v17 = *(Tile **)(a1 + 0x40);
-            __asm { fstp    [esp+724h+a2]; a3 }
-            Tile_SetFloat(v17, (_DWORD *)0xFAE, *(float *)&a2);
-            if ( v14 )
+            _sprintf(v27, "%s\n%s\n%s\n%s\n%s", Dst, (const char *)&v23, v26, (const char *)&v22, (const char *)&v24); /*0x5ae388*/
+            Tile_SetString(*(_DWORD **)(a1 + 0x44), (_DWORD *)0xFDE, v27); /*0x5ae3a0*/
+            __asm { fild    [esp+720h+var_714] } /*0x5ae3a5*/
+            a2 = v16; /*0x5ae3a9*/
+            v17 = *(Tile **)(a1 + 0x40); /*0x5ae3aa*/
+            __asm { fstp    [esp+724h+a2]; value } /*0x5ae3ad*/
+            Tile_SetFloat(v17, (_DWORD *)0xFAE, *(float *)&a2); /*0x5ae3b5*/
+            if ( v14 ) /*0x5ae3bc*/
             {
-              a2 = v18;
-              p_a2 = &a2;
-              sub_405070(&a2, (int)v15);
-              sub_591A80(v14, (int)a2);
-              if ( !v15 )
+              a2 = v18; /*0x5ae3be*/
+              p_a2 = &a2; /*0x5ae3c1*/
+              sub_405070(&a2, (int)v15); /*0x5ae3c6*/
+              sub_591A80(v14, (int)a2); /*0x5ae3cd*/
+              if ( !v15 ) /*0x5ae3d4*/
               {
-                __asm { fld1 }
-                __asm { fstp    [esp+724h+a2]; a3 }
-                Tile_SetFloat(v14, (_DWORD *)0xFA1, *(float *)&a2);
-                Tile_SetString(*(_DWORD **)(a1 + 0x44), (_DWORD *)0xFDE, (char *)dword_B38750);
-                return;
+                __asm { fld1 } /*0x5ae3d6*/
+                __asm { fstp    [esp+724h+a2]; value }
+                Tile_SetFloat(v14, (_DWORD *)0xFA1, *(float *)&a2); /*0x5ae3e3*/
+                Tile_SetString(*(_DWORD **)(a1 + 0x44), (_DWORD *)0xFDE, (char *)stru_B38750); /*0x5ae3f6*/
+                return; /*0x5ae3fb*/
               }
             }
-            else if ( !v15 )
+            else if ( !v15 ) /*0x5ae3ff*/
             {
-              return;
+              return; /*0x5ae3ff*/
             }
-            sub_401050((volatile LONG *)v15);
-            return;
+            sub_401050((volatile LONG *)v15); /*0x5ae403*/
+            return; /*0x5ae403*/
           }
-          v11 = *(_DWORD *)(v11 + 4);
-          v13 = (_DWORD *)((char *)v13 + 1);
-          if ( !v11 )
-            return;
+          v11 = *(_DWORD *)(v11 + 4); /*0x5ae2bd*/
+          v13 = (_DWORD *)((char *)v13 + 1); /*0x5ae2c0*/
+          if ( !v11 ) /*0x5ae2c5*/
+            return; /*0x5ae2c5*/
         }
       }
     }

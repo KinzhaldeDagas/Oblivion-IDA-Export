@@ -1,19 +1,36 @@
 {
-  "callees_count": 91,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 32,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A1660",
+  "chunks": [
+    [
+      "0x7A1660",
+      "0x7A1CCF"
+    ],
+    [
+      "0x9CC720",
+      "0x9CC753"
+    ]
+  ],
+  "chunks_sha256": "7eaa7c3180301619ee03e024b946ce525ef2d19813dc48d5836823bd61e71c6a",
+  "comment_regular": "Oblivion-authoritative CFrondEngine::BuildGuideLods. Computes total/largest surface area, writes fuzzySurfaceArea at SFrondGuide+0x24, preserves large fronds, invokes the typed descending introsort twice, reinserts retained guides first, and builds per-LOD vectors of 0x30 guide copies. Unlike RT 4.1 source, this executable sorts/moves complete compact SFrondGuide records rather than a vector of SFrondGuide* pointers; no later segment-override/prohibit-reduction field participates.",
+  "comment_repeatable": "Oblivion-authoritative CFrondEngine::BuildGuideLods. Computes total/largest surface area, writes fuzzySurfaceArea at SFrondGuide+0x24, preserves large fronds, invokes the typed descending introsort twice, reinserts retained guides first, and builds per-LOD vectors of 0x30 guide copies. Unlike RT 4.1 source, this executable sorts/moves complete compact SFrondGuide records rather than a vector of SFrondGuide* pointers; no later segment-override/prohibit-reduction field participates.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 25,
+  "display_name": "OB_CFrondEngine_BuildGuideLods_010201A0",
   "end_ea": "0x7A1CCF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A1660",
+  "name": "OB_CFrondEngine_BuildGuideLods_010201A0",
   "segment": ".text",
   "sha256": "85a4755164fe0f2fd544c20d988d4f0aee95db11853dfaa79b4582f775ffa095",
   "size": 1647,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A1660",
-  "type": "void __thiscall(_DWORD *this)",
-  "xrefs_from_count": 624,
+  "total_chunk_size": 1698,
+  "type": "void __thiscall(OB_CFrondEngine_010201A0 *this)",
+  "xrefs_from_count": 667,
   "xrefs_to_count": 1
 }

@@ -4,14 +4,14 @@
 0x5AFDA5: push    edi
 0x5AFDA6: push    0; Seed
 0x5AFDA8: mov     edi, ecx
-0x5AFDAA: call    GetRandomLargeInteger?
+0x5AFDAA: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5AFDAF: mov     esi, eax
 0x5AFDB1: mov     eax, ds:0B33EA0h
 0x5AFDB6: push    eax; Seed
-0x5AFDB7: call    GetRandomLargeInteger?
+0x5AFDB7: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5AFDBC: push    esi; Seed
 0x5AFDBD: mov     ds:0B3B3FCh, eax
-0x5AFDC2: call    GetRandomLargeInteger?
+0x5AFDC2: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x5AFDC7: mov     eax, ds:0B3B3FCh
 0x5AFDCC: and     eax, 1
 0x5AFDCF: add     esp, 0Ch
@@ -73,8 +73,8 @@
 0x5AFE80: jg      short loc_5AFE87
 0x5AFE82: mov     esi, 9
 0x5AFE87: mov     ecx, [edi+48h]
-0x5AFE8A: push    ecx
-0x5AFE8B: call    GetLockLevel
+0x5AFE8A: push    ecx; numericLockMagnitude
+0x5AFE8B: call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.
 0x5AFE90: add     esp, 4
 0x5AFE93: cmp     eax, 4; switch 5 cases
 0x5AFE96: ja      def_5AFE9C

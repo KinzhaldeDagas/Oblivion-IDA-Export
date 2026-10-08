@@ -16,7 +16,7 @@
 0x4F8D13: jz      short loc_4F8D17
 0x4F8D15: mov     esi, edi
 0x4F8D17: mov     ecx, esi
-0x4F8D19: call    Actor_IsSneaking
+0x4F8D19: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x4F8D1E: test    al, al
 0x4F8D20: jz      short loc_4F8D26
 0x4F8D22: fld1

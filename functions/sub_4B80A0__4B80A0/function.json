@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B80A0",
+      "0x4B80DE"
+    ]
+  ],
+  "chunks_sha256": "e33d29c4eb96f128d4cf6a0a661bd024cd8d1f3cb9cbd6cbb292ebe280b3587c",
+  "comment_regular": "Verified mechanics: rejects null/unsupported candidate spaces, then returns true only when the TESForm* is present in TESObjectDOOR.randomTeleport. Probable domain meaning: this list records spaces in which the door can be selected as a random teleport destination; ExtraRandomTeleportMarker.teleportRef is a separate per-reference marker pointer.",
+  "comment_repeatable": "Verified mechanics: rejects null/unsupported candidate spaces, then returns true only when the TESForm* is present in TESObjectDOOR.randomTeleport. Probable domain meaning: this list records spaces in which the door can be selected as a random teleport destination; ExtraRandomTeleportMarker.teleportRef is a separate per-reference marker pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B80A0",
+  "display_name": "TESObjectDOOR_ContainsRandomTeleportSpace",
   "end_ea": "0x4B80DE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B80A0",
+  "name": "TESObjectDOOR_ContainsRandomTeleportSpace",
   "segment": ".text",
   "sha256": "e33d29c4eb96f128d4cf6a0a661bd024cd8d1f3cb9cbd6cbb292ebe280b3587c",
   "size": 62,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B80A0",
-  "type": "char __thiscall(char *this, unsigned __int8 *)",
+  "total_chunk_size": 62,
+  "type": "bool __thiscall(TESObjectDOOR *this, TESForm *space)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 1
 }

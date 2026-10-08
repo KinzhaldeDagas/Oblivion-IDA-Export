@@ -221,7 +221,7 @@
 0x93716D: inc     byte ptr [esi+20h]
 0x937170: mov     eax, [esp+60h+var_4C]
 0x937174: add     eax, 2
-0x937177: cmp     eax, offset unk_AA1D4E
+0x937177: cmp     eax, offset word_AA1D4E
 0x93717C: mov     [esp+60h+var_4C], eax
 0x937180: jl      loc_936EE0
 0x937186: pop     edi

@@ -111,3 +111,19 @@
 0x478A36: pop     ebx
 0x478A37: add     esp, 14h
 0x478A3A: retn    0Ch
+0x9AF030: mov     eax, [ebp-10h]
+0x9AF033: and     eax, 1
+0x9AF036: jz      locret_9AF048
+0x9AF03C: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9AF040: mov     ecx, [ebp+4]; void *
+0x9AF043: jmp     sub_4BDDC0
+0x9AF048: retn
+0x9AF049: lea     ecx, [ebp+0Ch]; void *
+0x9AF04C: jmp     sub_4BDDC0
+0x9AF051: mov     edx, [esp+arg_4]
+0x9AF055: lea     eax, [edx-18h]
+0x9AF058: mov     ecx, [edx-1Ch]
+0x9AF05B: xor     ecx, eax
+0x9AF05D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF062: mov     eax, offset stru_ADB6DC
+0x9AF067: jmp     ___CxxFrameHandler3

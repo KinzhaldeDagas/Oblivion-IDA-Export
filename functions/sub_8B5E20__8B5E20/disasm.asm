@@ -222,7 +222,7 @@
 0x8B6130: push    edx
 0x8B6131: lea     ecx, [esp+3B8h+var_2F0]
 0x8B6138: movaps  [esp+3B8h+var_2F0], xmm0
-0x8B6140: call    sub_88FCC0
+0x8B6140: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8B6145: mov     eax, [ebx+0Ch]
 0x8B6148: push    eax
 0x8B6149: lea     ecx, [esp+3B4h+var_390]

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4ADC90",
-    "line": "push    esi",
+    "line": "push    esi; Verified (Oblivion): animates fillColor_2C into currentFillColor_0C and edgeColor_3C into currentEdgeColor_1C, including independent alpha timing/pulse, then accumulates textureOffsetU_4C/textureOffsetV_50. Fallout's NiColorA names CurrentFillColor/CurrentRimColor and their base FillColor/RimColor at the same offsets, corroborating these grouped fields; Oblivion's source fields use Edge terminology.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADC91",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+textureEffectData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4ADCA4",
-    "line": "mov     ebx, [esp+0Ch+arg_10]",
+    "line": "mov     ebx, dword ptr [esp+0Ch+bFinished]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4ADCAB",
-    "line": "fstp    [esp+20h+var_10]; float",
+    "line": "fstp    [esp+20h+persistentValue]; persistentValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4ADCB2",
-    "line": "fstp    [esp+20h+var_14]; float",
+    "line": "fstp    [esp+20h+fullValue]; fullValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x4ADCB9",
-    "line": "fstp    [esp+20h+var_18]; float",
+    "line": "fstp    [esp+20h+fullTime]; fullTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4ADCC0",
-    "line": "fstp    [esp+20h+var_1C]; float",
+    "line": "fstp    [esp+20h+fadeOutTime]; fadeOutTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -109,19 +109,19 @@
   },
   {
     "ea": "0x4ADCC7",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+fadeInTime]; fadeInTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADCCA",
-    "line": "push    ebx; float",
+    "line": "push    ebx; bFinished",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADCCB",
-    "line": "fld     [esp+24h+arg_8]",
+    "line": "fld     [esp+24h+visualElapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4ADCD2",
-    "line": "fstp    [esp+30h+var_28]; float",
+    "line": "fstp    [esp+30h+elapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4ADCDA",
-    "line": "fstp    [esp+30h+var_2C]; float",
+    "line": "fstp    [esp+30h+deltaSeconds]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x4ADCE1",
-    "line": "fstp    [esp+30h+var_30]; float",
+    "line": "fstp    [esp+30h+currentValue]; currentValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADCE4",
-    "line": "call    sub_4ACE30",
+    "line": "call    TESEffectShader_AnimateValue; Verified (Oblivion): generic animation helper interpolates from zero through the configured full value to the persistent value across fade-in/full/fade-out intervals; when finished it applies the fade-out interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4ADCF2",
-    "line": "fld     [esp+0Ch+arg_C]",
+    "line": "fld     [esp+0Ch+activeElapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x4ADD06",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+persistentValue]; activeElapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADD09",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4ADD0E",
-    "line": "call    sub_4ACDE0",
+    "line": "call    TESEffectShader_CalculateFillEffectPulse; Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x3C is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x40) * amplitude. TESEffectShader_AnimateTextureEffect multiplies fill alpha by (1 + this pulse) and clamps the result. Fill-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x4ADD19",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+textureEffectData]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ADD1D",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+textureEffectData]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x4ADD31",
-    "line": "fst     [esp+0Ch+arg_0]",
+    "line": "fst     [esp+0Ch+textureEffectData]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x4ADD39",
-    "line": "fst     [esp+0Ch+arg_0]",
+    "line": "fst     [esp+0Ch+textureEffectData]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x4ADD3F",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+textureEffectData]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x4ADD6C",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+textureEffectData]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x4ADD73",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+textureEffectData]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x4ADD7F",
-    "line": "fstp    [esp+20h+var_10]; float",
+    "line": "fstp    [esp+20h+persistentValue]; persistentValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x4ADD86",
-    "line": "fstp    [esp+20h+var_14]; float",
+    "line": "fstp    [esp+20h+fullValue]; fullValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4ADD8D",
-    "line": "fstp    [esp+20h+var_18]; float",
+    "line": "fstp    [esp+20h+fullTime]; fullTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4ADD94",
-    "line": "fstp    [esp+20h+var_1C]; float",
+    "line": "fstp    [esp+20h+fadeOutTime]; fadeOutTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x4ADD9B",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+fadeInTime]; fadeInTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADD9E",
-    "line": "push    ebx; float",
+    "line": "push    ebx; bFinished",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4ADD9F",
-    "line": "fld     [esp+24h+arg_8]",
+    "line": "fld     [esp+24h+visualElapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x4ADDA6",
-    "line": "fstp    [esp+30h+var_28]; float",
+    "line": "fstp    [esp+30h+elapsedSeconds]; elapsedSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x4ADDAE",
-    "line": "fstp    [esp+30h+var_2C]; float",
+    "line": "fstp    [esp+30h+deltaSeconds]; deltaSeconds",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x4ADDB5",
-    "line": "fstp    [esp+30h+var_30]; float",
+    "line": "fstp    [esp+30h+currentValue]; currentValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADDB8",
-    "line": "call    sub_4ACE30",
+    "line": "call    TESEffectShader_AnimateValue; Verified (Oblivion): generic animation helper interpolates from zero through the configured full value to the persistent value across fade-in/full/fade-out intervals; when finished it applies the fade-out interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x4ADDC6",
-    "line": "fld     [esp+0Ch+arg_C]",
+    "line": "fld     [esp+0Ch+activeElapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x4ADDDD",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+persistentValue]; activeElapsedSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4ADDE0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4ADDE2",
-    "line": "call    sub_4ACD90",
+    "line": "call    TESEffectShader_CalculateEdgeEffectPulse; Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x64 is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x68) * amplitude. TESEffectShader_AnimateTextureEffect multiplies edge alpha by (1 + this pulse) and clamps the result. Edge-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x4ADDEE",
-    "line": "fstp    [esp+8+arg_8]",
+    "line": "fstp    [esp+8+visualElapsedSeconds]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ADDF2",
-    "line": "fld     [esp+8+arg_8]",
+    "line": "fld     [esp+8+visualElapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x4ADE06",
-    "line": "fstp    [esp+8+arg_8]",
+    "line": "fstp    [esp+8+visualElapsedSeconds]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x4ADE0E",
-    "line": "fst     [esp+8+arg_8]",
+    "line": "fst     [esp+8+visualElapsedSeconds]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x4ADE14",
-    "line": "fld     [esp+8+arg_8]",
+    "line": "fld     [esp+8+visualElapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -883,13 +883,13 @@
   },
   {
     "ea": "0x4ADE3D",
-    "line": "fstp    [esp+8+arg_8]",
+    "line": "fstp    [esp+8+visualElapsedSeconds]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4ADE41",
-    "line": "fld     [esp+8+arg_8]",
+    "line": "fld     [esp+8+visualElapsedSeconds]",
     "mnemonic": "fld",
     "size": 4
   },

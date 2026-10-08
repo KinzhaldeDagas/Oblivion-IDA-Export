@@ -44,14 +44,14 @@
 0x440380: mov     eax, [esi+4]
 0x440383: mov     edi, [eax+4]
 0x440386: push    eax
-0x440387: call    FormHeapFree
+0x440387: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44038C: add     esp, 4
 0x44038F: test    edi, edi
 0x440391: mov     [esi+4], edi
 0x440394: jnz     short loc_440380
 0x440396: push    esi
 0x440397: mov     dword ptr [esi], 0
-0x44039D: call    FormHeapFree
+0x44039D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4403A2: add     esp, 4
 0x4403A5: call    sub_4FA580
 0x4403AA: pop     edi

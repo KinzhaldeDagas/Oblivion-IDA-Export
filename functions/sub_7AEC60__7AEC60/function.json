@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 27,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 227,
+  "chunks": [
+    [
+      "0x7AEC60",
+      "0x7AECA7"
+    ]
+  ],
+  "chunks_sha256": "b9408bb1b6495cac66caf860105da597292d53fff3ce63e41c19a626ea9e67f7",
+  "comment_regular": "Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
+  "comment_repeatable": "Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.\nDX11 pass-resource audit 2026-10-01: identity-equal assignment is a no-op. Otherwise InterlockedDecrement(old+4) and zero-count virtual destructor execute before pass+44 publication, followed by InterlockedIncrement(new+4). Same transfer shape as texture-stage76C910, whose destination is stage+4. A future combined resource plan must preserve intermediate zero/alias semantics, not only final counts.\nDX11 shared-pass audit 2026-10-01: a pooled NiD3DPass can select different pixel programs for successive geometry occurrences. The old pointer for each setter is the preceding assignment result, not the pre-bucket snapshot each time. Resource replay must aggregate by physical destination/object identity and reject any intermediate zero-reference destructor unless cleanup is explicitly implemented.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7AEC60",
+  "display_name": "NiD3DPass_SetPixelShader",
   "end_ea": "0x7AECA7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7AEC60",
+  "name": "NiD3DPass_SetPixelShader",
   "segment": ".text",
   "sha256": "b9408bb1b6495cac66caf860105da597292d53fff3ce63e41c19a626ea9e67f7",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7AEC60",
-  "type": "void __thiscall(NiD3DPassVtbl **this, NiD3DPixelShader *a2)",
+  "total_chunk_size": 71,
+  "type": "void __thiscall(NiD3DPass *this, NiD3DPixelShader *shader)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 227
 }

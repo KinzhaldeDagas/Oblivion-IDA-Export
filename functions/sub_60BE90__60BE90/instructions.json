@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60BE90",
-    "line": "push    ebx",
+    "line": "push    ebx; Validates projectile collision data and dispatches persisted collision state 0..4 to the corresponding reconstruction helper. Missing node collision data is reported and the stale state record is freed.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x60BEB6",
-    "line": "push    eax",
+    "line": "push    eax; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60BEB7",
-    "line": "call    sub_480340",
+    "line": "call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x60BED1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x60BEF2",
-    "line": "jmp     ds:jpt_60BEF2[ecx*4]; switch jump",
+    "line": "jmp     ds:jpt_60BEF2[ecx*4]; Dispatch persisted projectile collision state 0..4 to distinct actor-attachment, reference/world-collision, placement and impulse reconstruction paths.",
     "mnemonic": "jmp",
     "size": 7
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x60BEFA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60BEFC",
-    "line": "call    sub_608FC0",
+    "line": "call    ArrowProjectile_ResolveActorEmbedState0; State 0 resolver: embed/reparent projectile visual beneath recorded Actor attachment node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x60BF04",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60BF06",
-    "line": "call    sub_609150",
+    "line": "call    ArrowProjectile_ResolveReferenceCollisionState1; State 1 resolver: rebuild collision relationship for a recorded non-Actor reference/node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x60BF0E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60BF10",
-    "line": "call    sub_6094C0",
+    "line": "call    ArrowProjectile_ResolveStaticPlacementState2; State 2 resolver: restore static/world placement and collision filter without target attachment.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x60BF18",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60BF1A",
-    "line": "call    sub_6095B0",
+    "line": "call    ArrowProjectile_ResolveFreeImpactState3; State 3 resolver: restore free impact placement and apply collision-resolved impulse/orientation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x60BF22",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60BF24",
-    "line": "call    sub_6098C0",
+    "line": "call    ArrowProjectile_ResolveFallbackImpactState4; State 4 resolver: fallback target-aware or free settling collision reconstruction.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,6 +1,6 @@
-0x478DD0: push    0
-0x478DD2: push    1
+0x478DD0: push    0; Clear ActorSkinInfo shield equipment slot at +0x11C ({form, model, object3D}); this is biped slot 13 teardown.
+0x478DD2: push    1; replaceMetadata
 0x478DD4: lea     eax, [ecx+11Ch]
-0x478DDA: push    eax
-0x478DDB: call    sub_478780
+0x478DDA: push    eax; slot
+0x478DDB: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x478DE0: retn

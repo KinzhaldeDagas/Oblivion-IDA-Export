@@ -1,122 +1,124 @@
-void *__cdecl sub_4CB070(TESObjectCELL *a2, unsigned __int8 *arg4, TESObjectREFR **a3)
+// Verified Oblivion behavior: scans the supplied cell/worldspace, filters deleted (0x20), disabled (0x800), and 0x2000 references, requires a door whose randomTeleport list contains destinationSpace, records an existing ExtraTeleport reference when eligible, and randomly chooses a matching door without ExtraTeleport. 0x2000 meaning and the ultimate high-level caller purpose remain Unknown. Fallout divergence (Verified on each binary independently): Fallout LinkRandomTeleportDoors creates paired DoorTeleportData/ExtraTeleport state; Fallout GetNodeConnections enumerates cell/worldspace door lists during search. Oblivion uses this base-form space list plus a runtime destination-door scan; do not infer function equivalence from naming.
+TESObjectREFR *__cdecl DoorTeleport_FindRandomDestinationDoor(
+        TESForm *ownerSpace,
+        TESForm *destinationSpace,
+        TESObjectREFR **existingTeleportDoorOut)
 {
-  ObjectListEntry *p_objectList; // ebp
+  TESObjectREFR **p_refr; // ebp
   _DWORD *v5; // ebx
   TESObjectCELL *v6; // eax
   _DWORD *v7; // eax
-  TESObjectREFR *refr; // esi
+  TESObjectREFR *v8; // esi
   TESForm::FormFlags flags; // eax
   TESForm *v10; // eax
-  char *v11; // eax
-  char *v12; // edi
+  TESObjectDOOR *v11; // eax
+  TESObjectDOOR *v12; // edi
   int v13; // eax
   int v14; // esi
   BSSimpleList_VoidPtr *v15; // ecx
   BSSimpleList_VoidPtr::NodeVoid *next; // edx
-  void *data; // [esp+8h] [ebp-14h]
+  TESObjectREFR *data; // [esp+8h] [ebp-14h]
   int v19; // [esp+Ch] [ebp-10h]
   int v20; // [esp+10h] [ebp-Ch]
   BSSimpleList_VoidPtr v21; // [esp+14h] [ebp-8h] BYREF
-  TESObjectCELL *a2a; // [esp+20h] [ebp+4h]
+  TESObjectCELL *a2; // [esp+20h] [ebp+4h]
 
-  data = 0;
-  if ( !a2 || !arg4 || !a3 || a2 == (TESObjectCELL *)arg4 )
-    return 0;
-  v19 = 0;
-  v21.firstNode.data = 0;
-  v21.firstNode.next = 0;
-  p_objectList = 0;
-  v5 = 0;
-  v6 = (TESObjectCELL *)OblivionDynamicCast(
-                          a2,
+  data = 0; /*0x4cb07d*/
+  if ( !ownerSpace || !destinationSpace || !existingTeleportDoorOut || ownerSpace == destinationSpace ) /*0x4cb09f*/
+    return 0; /*0x4cb09f*/
+  v19 = 0; /*0x4cb0b4*/
+  v21.firstNode.data = 0; /*0x4cb0b8*/
+  v21.firstNode.next = 0; /*0x4cb0bc*/
+  p_refr = 0; /*0x4cb0c0*/
+  v5 = 0; /*0x4cb0c2*/
+  v6 = (TESObjectCELL *)OblivionDynamicCast( /*0x4cb0c4*/
+                          ownerSpace,
                           0,
                           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                           &TESObjectCELL `RTTI Type Descriptor',
                           0);
-  v20 = (int)v6;
-  a2a = 0;
-  if ( v6 )
+  v20 = (int)v6; /*0x4cb0ce*/
+  a2 = 0; /*0x4cb0d2*/
+  if ( v6 ) /*0x4cb0d6*/
   {
-    p_objectList = &v6->members.objectList;
+    p_refr = &v6->members.objectList.refr; /*0x4cb0d8*/
 LABEL_10:
-    a2a = v6;
-    goto LABEL_11;
+    a2 = v6; /*0x4cb118*/
+    goto LABEL_11; /*0x4cb118*/
   }
-  v7 = OblivionDynamicCast(
-         a2,
+  v7 = OblivionDynamicCast( /*0x4cb0ec*/
+         ownerSpace,
          0,
          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
          &TESWorldSpace `RTTI Type Descriptor',
          0);
-  v5 = v7;
-  if ( v7 && sub_4EF1E0(v7) )
+  v5 = v7; /*0x4cb0f1*/
+  if ( v7 && sub_4EF1E0(v7) ) /*0x4cb0fc*/
   {
-    p_objectList = (ObjectListEntry *)(sub_4EF1E0(v5) + 0x48);
-    v6 = (TESObjectCELL *)sub_4EF1E0(v5);
-    goto LABEL_10;
+    p_refr = (TESObjectREFR **)(sub_4EF1E0(v5) + 0x48); /*0x4cb110*/
+    v6 = (TESObjectCELL *)sub_4EF1E0(v5); /*0x4cb113*/
+    goto LABEL_10; /*0x4cb113*/
   }
 LABEL_11:
-  sub_496EA0((char *)&stru_B35C80, a2a);
-  for ( ; p_objectList; p_objectList = p_objectList->next )
+  sub_496EA0((char *)&unk_B35C80, a2); /*0x4cb11c*/
+  for ( ; p_refr; p_refr = (TESObjectREFR **)p_refr[1] ) /*0x4cb12d*/
   {
-    if ( !p_objectList->next && !p_objectList->refr )
-      break;
-    refr = p_objectList->refr;
-    if ( p_objectList->refr->vtbl->GetBaseForm(p_objectList->refr)->member.type == kFormType_Door )
+    if ( !p_refr[1] && !*p_refr ) /*0x4cb139*/
+      break; /*0x4cb13d*/
+    v8 = *p_refr; /*0x4cb143*/
+    if ( (*p_refr)->vtbl->GetBaseForm(*p_refr)->member.type == kFormType_Door ) /*0x4cb156*/
     {
-      flags = refr->member.super.flags;
-      if ( (flags & 0x20) == 0 && (flags & 0x800) == 0 && (flags & 0x2000) == 0 )
+      flags = v8->member.super.flags; /*0x4cb15c*/
+      if ( (flags & 0x20) == 0 && (flags & 0x800) == 0 && (flags & 0x2000) == 0 ) /*0x4cb180*/
       {
-        v10 = refr->vtbl->GetBaseForm(refr);
-        v11 = (char *)OblivionDynamicCast(
-                        v10,
-                        0,
-                        (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
-                        &TESObjectDOOR `RTTI Type Descriptor',
-                        0);
-        v12 = v11;
-        if ( v11 )
+        v10 = v8->vtbl->GetBaseForm(v8); /*0x4cb19e*/
+        v11 = (TESObjectDOOR *)OblivionDynamicCast( /*0x4cb1a1*/
+                                 v10,
+                                 0,
+                                 (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
+                                 &TESObjectDOOR `RTTI Type Descriptor',
+                                 0);
+        v12 = v11; /*0x4cb1a6*/
+        if ( v11 ) /*0x4cb1ad*/
         {
-          if ( sub_4B78E0(v11) )
+          if ( TESObjectDOOR_HasRandomTeleportSpaces(v11) /*0x4cb1c1*/
+            && TESObjectDOOR_ContainsRandomTeleportSpace(v12, destinationSpace) )
           {
-            if ( sub_4B80A0(v12, arg4) )
+            if ( TESObjectREFR_GetTeleportData(v8) ) /*0x4cb1cc*/
             {
-              if ( GetTeleportExtraData(refr) )
-              {
-                if ( !*a3 && (v20 && sub_4CA6F0(v20) || v5 && sub_4EF150(v5)) )
-                  *a3 = refr;
-              }
-              else
-              {
-                BSSimpleList_PushFront(&v21, (int)refr);
-                ++v19;
-              }
+              if ( !*existingTeleportDoorOut && (v20 && sub_4CA6F0(v20) || v5 && sub_4EF150(v5)) ) /*0x4cb206*/
+                *existingTeleportDoorOut = v8; /*0x4cb213*/
+            }
+            else
+            {
+              BSSimpleList_PushFront(&v21, (int)v8); /*0x4cb1da*/
+              ++v19; /*0x4cb1df*/
             }
           }
         }
       }
     }
   }
-  sub_496F50(&stru_B35C80, a2a);
-  if ( !v19 || BSSimpleList_IsEmpty(&v21) )
-    return 0;
-  v13 = Rand3(v19);
-  v14 = 0;
-  v15 = &v21;
-  do
+  sub_496F50(&unk_B35C80, a2); /*0x4cb22e*/
+  if ( !v19 || BSSimpleList_IsEmpty(&v21) ) /*0x4cb241*/
+    return 0; /*0x4cb2a4*/
+  v13 = Game_RandomIntBelow(v19); /*0x4cb24b*/
+  v14 = 0; /*0x4cb253*/
+  v15 = &v21; /*0x4cb255*/
+  do /*0x4cb260*/
   {
-    next = v15->firstNode.next;
-    if ( !next && !v15->firstNode.data )
-      break;
-    if ( v14 == v13 )
+    next = v15->firstNode.next; /*0x4cb260*/
+    if ( !next && !v15->firstNode.data ) /*0x4cb267*/
+      break; /*0x4cb267*/
+    if ( v14 == v13 ) /*0x4cb26d*/
     {
-      data = v15->firstNode.data;
-      break;
+      data = (TESObjectREFR *)v15->firstNode.data; /*0x4cb28d*/
+      break; /*0x4cb28d*/
     }
-    v15 = (BSSimpleList_VoidPtr *)v15->firstNode.next;
-    ++v14;
+    v15 = (BSSimpleList_VoidPtr *)v15->firstNode.next; /*0x4cb26f*/
+    ++v14; /*0x4cb271*/
   }
-  while ( next );
-  BSSimpleList_Clear(&v21);
-  return data;
+  while ( next ); /*0x4cb260*/
+  BSSimpleList_Clear(&v21); /*0x4cb278*/
+  return data; /*0x4cb285*/
 }

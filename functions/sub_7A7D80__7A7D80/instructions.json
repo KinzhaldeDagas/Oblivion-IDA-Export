@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7D80",
-    "line": "push    esi",
+    "line": "push    esi; Compact stock CBillboardLeaf default constructor. Initializes only the 0x4C-byte Oblivion layout: position, angle/color/colorScale, one normal/tangent/binormal block, texture index, primary wind weight/group.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7A7D83",
-    "line": "call    sub_78ECF0",
+    "line": "call    OB_CIdvCamera_ctor_010201A0; Constructs the exact 0x10-byte Oblivion CIdvCamera base: installs its vftable and zeros the three-float position at +0x04. Called as the base constructor of both CTreeEngine and CBillboardLeaf. RT4.1 exposes the same layout/behavior under the later name stCamera.",
     "mnemonic": "call",
     "size": 5
   },

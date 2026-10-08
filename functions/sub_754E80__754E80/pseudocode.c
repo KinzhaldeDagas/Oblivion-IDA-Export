@@ -1,5 +1,5 @@
 // attributes: thunk
-__int16 __thiscall sub_754E80(NiRenderer *this, signed int a2)
+__int16 __thiscall j_NiTimeController_LoadBinary(NiRenderer *this, signed int a2)
 {
-  return sub_715F40(this, a2);
+  return NiTimeController_LoadBinary(this, a2);
 }

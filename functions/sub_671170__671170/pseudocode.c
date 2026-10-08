@@ -1,182 +1,194 @@
-void __userpurge sub_671170(int *a1@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>, int a5)
+// [Controller decode 2026-07-09] Non-player QueryControlState consumer: Grab control 28 pressed/held starts, continues, or releases object grab.
+void __userpurge Player_ProcessGrabControl(
+        TESObjectREFR *a1@<ecx>,
+        double a2@<st2>,
+        double a3@<st1>,
+        double a4@<st0>,
+        int a5)
 {
   InputGlobal *input; // esi
-  bool v8; // bl
+  bool v7; // bl
   UInt32 unk090; // eax
-  bool v10; // cl
-  bool v11; // dl
+  bool v9; // cl
+  bool v10; // dl
   InterfaceManager *Singleton; // eax
-  UInt32 v13; // eax
-  TESObjectREFR *v14; // esi
-  int v15; // eax
+  UInt32 v12; // eax
+  TESObjectREFR *v13; // esi
+  NiAVObject *v14; // eax
+  _DWORD *BhkCollisionObjectRecursive; // eax
   int v16; // eax
   int v17; // eax
-  int v18; // eax
-  double v19; // st4
-  TESObjectCELL *ParentCell; // eax
-  double v21; // st7
-  int v22; // ebx
-  BSExtraDataVtbl *Owner; // eax
-  int v24; // eax
-  int v25; // ebx
-  BSExtraDataVtbl *v26; // eax
-  int v27; // eax
-  BSExtraDataVtbl *v28; // eax
-  int v29; // ebx
-  BSExtraDataVtbl *v30; // eax
-  int v31; // eax
-  bool v32; // [esp+19h] [ebp-Bh]
-  bool v33; // [esp+1Ah] [ebp-Ah]
-  bool v34; // [esp+1Bh] [ebp-9h]
+  double v18; // st4
+  TESObjectCELL *DwordAtOffset40; // eax
+  double v20; // st7
+  TESObjectREFRVtbl *vtbl; // ebx
+  TESForm *Owner; // eax
+  int v23; // eax
+  TESObjectREFRVtbl *v24; // ebx
+  TESForm *v25; // eax
+  int v26; // eax
+  TESForm *v27; // eax
+  TESObjectREFRVtbl *v28; // ebx
+  TESForm *v29; // eax
+  int v30; // eax
+  bool v31; // [esp+19h] [ebp-Bh]
+  bool v32; // [esp+1Ah] [ebp-Ah]
+  bool v33; // [esp+1Bh] [ebp-9h]
+  float v34; // [esp+28h] [ebp+4h]
   float v35; // [esp+28h] [ebp+4h]
   float v36; // [esp+28h] [ebp+4h]
-  float v37; // [esp+28h] [ebp+4h]
 
-  input = OSGlobals->input;
-  v8 = InputGlobals::QueryControlState(input, 0x1C, 1) != 0;
-  v32 = InputGlobals::QueryControlState(input, 0x1C, 0) != 0;
-  if ( v8 )
-    InterfaceManager_GetSingleton(0, 1)->unk090 = 0;
-  unk090 = InterfaceManager_GetSingleton(0, 1)->unk090;
-  v10 = unk090 == 1;
-  v11 = unk090 == 2;
-  v33 = unk090 == 1;
-  v34 = unk090 == 2;
-  if ( unk090 == 1 )
+  input = MEMORY[0xB33398]->input; /*0x67117a*/
+  v7 = InputGlobals::QueryControlState(input, 0x1C, 1) != 0; /*0x671193*/
+  v31 = InputGlobals::QueryControlState(input, 0x1C, 0) != 0; /*0x67119d*/
+  if ( v7 ) /*0x6711a4*/
+    InterfaceManager_GetSingleton(0, 1)->unk090 = 0; /*0x6711b2*/
+  unk090 = InterfaceManager_GetSingleton(0, 1)->unk090; /*0x6711c5*/
+  v9 = unk090 == 1; /*0x6711d1*/
+  v10 = unk090 == 2; /*0x6711d7*/
+  v32 = unk090 == 1; /*0x6711dd*/
+  v33 = unk090 == 2; /*0x6711e1*/
+  if ( unk090 == 1 ) /*0x6711e5*/
   {
-    Singleton = InterfaceManager_GetSingleton(0, 1);
-    v10 = v33;
-    v11 = v34;
-    Singleton->unk090 = 2;
+    Singleton = InterfaceManager_GetSingleton(0, 1); /*0x6711ea*/
+    v9 = v32; /*0x6711ef*/
+    v10 = v33; /*0x6711f3*/
+    Singleton->unk090 = 2; /*0x6711fa*/
   }
-  if ( v8 || v32 )
-    goto LABEL_39;
-  if ( a1[0x15D] )
-    goto LABEL_11;
-  if ( v10 || v11 )
+  if ( v7 || v31 ) /*0x67120c*/
+    goto LABEL_39; /*0x67120c*/
+  if ( *(_DWORD *)a1[0xF].member.baseExtraList.members.m_presenceBitfield ) /*0x67120e*/
+    goto LABEL_11; /*0x671215*/
+  if ( v9 || v10 ) /*0x67121d*/
   {
 LABEL_39:
-    if ( a1[0x15D] )
+    if ( *(_DWORD *)a1[0xF].member.baseExtraList.members.m_presenceBitfield ) /*0x671223*/
     {
 LABEL_11:
-      if ( a1[0x15F] == 1 )
+      if ( *(_DWORD *)&a1[0xF].member.baseExtraList.members.m_presenceBitfield[8] == 1 ) /*0x671233*/
       {
-        if ( v32 || v11 )
-          sub_66D930((TESObjectREFR *)a1, a5);
+        if ( v31 || v10 ) /*0x671242*/
+          sub_66D930(a1, a5); /*0x67125e*/
         else
-          sub_66A670((TESObjectREFR *)a1);
+          sub_66A670(a1); /*0x671246*/
       }
-      return;
+      return; /*0x671251*/
     }
-    if ( (v8 || v10) && !a1[0x15F] )
+    if ( (v7 || v9) && !*(_DWORD *)&a1[0xF].member.baseExtraList.members.m_presenceBitfield[8] ) /*0x671278*/
     {
-      v13 = sub_579540();
-      v14 = (TESObjectREFR *)v13;
-      if ( v13 )
+      v12 = sub_579540(); /*0x671285*/
+      v13 = (TESObjectREFR *)v12; /*0x67128a*/
+      if ( v12 ) /*0x67128e*/
       {
-        v15 = (*(int (__thiscall **)(UInt32))(*(_DWORD *)v13 + 0x154))(v13);
-        if ( v15 )
+        v14 = (NiAVObject *)(*(int (__thiscall **)(UInt32))(*(_DWORD *)v12 + 0x154))(v12); /*0x67129e*/
+        if ( v14 ) /*0x6712a2*/
         {
-          v16 = sub_480340(v15);
-          if ( v16 )
+          BhkCollisionObjectRecursive = NiAVObject_FindBhkCollisionObjectRecursive(v14); /*0x6712a9*/
+          if ( BhkCollisionObjectRecursive ) /*0x6712b3*/
           {
-            v17 = *(_DWORD *)(v16 + 0x10);
-            if ( v17 )
+            v16 = BhkCollisionObjectRecursive[4]; /*0x6712b9*/
+            if ( v16 ) /*0x6712be*/
             {
-              v18 = *(_DWORD *)(v17 + 8);
-              if ( v18 )
+              v17 = *(_DWORD *)(v16 + 8); /*0x6712c4*/
+              if ( v17 ) /*0x6712c9*/
               {
-                if ( *(_DWORD *)(v18 + 8) )
+                if ( *(_DWORD *)(v17 + 8) ) /*0x6712cf*/
                 {
-                  v19 = sub_89DA90((float *)*(_DWORD *)(v18 + 0x50));
-                  v35 = a4;
-                  (*(void (__thiscall **)(int *, _DWORD))(*a1 + 0x288))(a1, 0);
-                  if ( v35 <= *(float *)GameSetting_GetSafeFloatPointer((int *)&fGrabPower) * v19 )
+                  v18 = sub_89DA90((float *)*(_DWORD *)(v17 + 0x50)); /*0x6712dc*/
+                  v34 = a4; /*0x6712e1*/
+                  ((void (__thiscall *)(TESObjectREFR *, _DWORD))a1->vtbl[1].Unk_38)(a1, 0); /*0x6712f1*/
+                  if ( v34 <= *GameSetting_GetSafeFloatPointer(&MEMORY[0xB37A58][0x40]) * v18 ) /*0x671312*/
                   {
-                    sub_66D120((int)a1, a2, a3, a4, v14, 1, flt_A342A4);
-                    v14->vtbl->super.MarkAsModified((TESForm *)v14, 8);
-                    if ( a1[0x15D] )
+                    sub_66D120((int)a1, a2, a3, a4, v13, 1, flt_A342A4); /*0x671327*/
+                    v13->vtbl->super.MarkAsModified((TESForm *)v13, 8); /*0x671335*/
+                    if ( *(_DWORD *)a1[0xF].member.baseExtraList.members.m_presenceBitfield ) /*0x671337*/
                     {
-                      if ( TESObjectREFR_GetOwner(v14) )
+                      if ( TESObjectREFR_GetOwner(v13) ) /*0x671346*/
                       {
-                        if ( !TESOBjectREFR_IsOwnedBy(v14, (TESObjectREFR *)TESDataHandler_g_PlayerRef, 1) )
+                        if ( !TESObjectREFR_IsOwnedBy(v13, (TESObjectREFR *)reference, 1) ) /*0x67135e*/
                         {
-                          if ( TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef) )
+                          if ( Shared_GetDwordAtOffset40(reference) ) /*0x671371*/
                           {
-                            ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-                            if ( TESObjectCELL_IsInterior(ParentCell) )
+                            DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(reference); /*0x671384*/
+                            if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x67138b*/
                             {
-                              TESWeightForm_GetWeightForForm_Fast((int)v14);
-                              v36 = a4;
-                              v37 = *(float *)GameSetting_GetSafeFloatPointer((int *)&flt_B36C98) * v36;
-                              v21 = v37;
-                              (*(void (__stdcall **)(_DWORD))(*(_DWORD *)a1[0x16] + 0x354))(LODWORD(v37));
-                              switch ( v14->vtbl->GetBaseForm(v14)->member.type )
+                              TESWeightForm_GetWeightForForm_Fast((int)v13); /*0x671399*/
+                              v35 = a4; /*0x67139e*/
+                              v36 = *GameSetting_GetSafeFloatPointer(&unk_B36C98) * v35; /*0x6713c0*/
+                              v20 = v36; /*0x6713c5*/
+                              (*((void (__stdcall **)(_DWORD))a1[1].vtbl->super.super.InitializeComponent + 0xD5))(LODWORD(v36)); /*0x6713cc*/
+                              switch ( v13->vtbl->GetBaseForm(v13)->member.type ) /*0x6713f1*/
                               {
-                                case kFormType_Activator:
-                                case kFormType_Container:
-                                case kFormType_Door:
-                                case kFormType_Grass:
-                                case kFormType_Tree:
-                                case kFormType_Flora:
-                                case kFormType_Furniture:
-                                  v22 = *a1;
-                                  Owner = TESObjectREFR_GetOwner(v14);
-                                  (*(void (__thiscall **)(int *, PlayerCharacter *, BSExtraDataVtbl *))(v22 + 0x248))(
+                                case kFormType_Activator: /*0x6713f1*/
+                                case kFormType_Container: /*0x6713f1*/
+                                case kFormType_Door: /*0x6713f1*/
+                                case kFormType_Grass: /*0x6713f1*/
+                                case kFormType_Tree: /*0x6713f1*/
+                                case kFormType_Flora: /*0x6713f1*/
+                                case kFormType_Furniture: /*0x6713f1*/
+                                  vtbl = a1->vtbl; /*0x6713f8*/
+                                  Owner = TESObjectREFR_GetOwner(v13); /*0x6713fe*/
+                                  ((void (__thiscall *)(TESObjectREFR *, PlayerCharacter *, TESForm *))vtbl[1].super.Unk_28)( /*0x671413*/
                                     a1,
-                                    TESDataHandler_g_PlayerRef,
+                                    reference,
                                     Owner);
-                                  break;
-                                case kFormType_Apparatus:
-                                case kFormType_Armor:
-                                case kFormType_Book:
-                                case kFormType_Clothing:
-                                case kFormType_Ingredient:
-                                case kFormType_Misc:
-                                case kFormType_Weapon:
-                                case kFormType_Ammo:
-                                case kFormType_SoulGem:
-                                case kFormType_Key:
-                                case kFormType_AlchemyItem:
-                                case kFormType_SigilStone:
-                                  v29 = *a1;
-                                  v30 = TESObjectREFR_GetOwner(v14);
-                                  v31 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, int, _DWORD, BSExtraDataVtbl *, double@<st0>, double@<st1>, double@<st2>))v14->vtbl->GetBaseForm)(
-                                          v14,
+                                  break; /*0x67141b*/
+                                case kFormType_Apparatus: /*0x6713f1*/
+                                case kFormType_Armor: /*0x6713f1*/
+                                case kFormType_Book: /*0x6713f1*/
+                                case kFormType_Clothing: /*0x6713f1*/
+                                case kFormType_Ingredient: /*0x6713f1*/
+                                case kFormType_Misc: /*0x6713f1*/
+                                case kFormType_Weapon: /*0x6713f1*/
+                                case kFormType_Ammo: /*0x6713f1*/
+                                case kFormType_SoulGem: /*0x6713f1*/
+                                case kFormType_Key: /*0x6713f1*/
+                                case kFormType_AlchemyItem: /*0x6713f1*/
+                                case kFormType_SigilStone: /*0x6713f1*/
+                                  v28 = a1->vtbl; /*0x671484*/
+                                  v29 = TESObjectREFR_GetOwner(v13); /*0x671488*/
+                                  v30 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, int, _DWORD, TESForm *, double@<st0>, double@<st1>, double@<st2>))v13->vtbl->GetBaseForm)( /*0x67149c*/
+                                          v13,
                                           1,
                                           0,
-                                          v30,
-                                          v21,
+                                          v29,
+                                          v20,
                                           a3,
                                           a2);
-                                  (*(void (__thiscall **)(int *, TESObjectREFR *, int))(v29 + 0x238))(a1, v14, v31);
-                                  break;
-                                case kFormType_Light:
-                                  v24 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>, double@<st2>))v14->vtbl->GetBaseForm)(
-                                          v14,
-                                          v21,
+                                  ((void (__thiscall *)(TESObjectREFR *, TESObjectREFR *, int))v28[1].super.SetFromActiveFile)( /*0x6714a8*/
+                                    a1,
+                                    v13,
+                                    v30);
+                                  break; /*0x6714a8*/
+                                case kFormType_Light: /*0x6713f1*/
+                                  v23 = ((int (__usercall *)@<eax>(TESObjectREFR *@<ecx>, double@<st0>, double@<st1>, double@<st2>))v13->vtbl->GetBaseForm)( /*0x671428*/
+                                          v13,
+                                          v20,
                                           a3,
                                           a2);
-                                  v25 = *a1;
-                                  if ( (*(_DWORD *)(v24 + 0x7C) & 2) != 0 )
+                                  v24 = a1->vtbl; /*0x67142d*/
+                                  if ( (*(_DWORD *)(v23 + 0x7C) & 2) != 0 ) /*0x671436*/
                                   {
-                                    v26 = TESObjectREFR_GetOwner(v14);
-                                    v27 = ((int (__thiscall *)(TESObjectREFR *, int, _DWORD, BSExtraDataVtbl *))v14->vtbl->GetBaseForm)(
-                                            v14,
+                                    v25 = TESObjectREFR_GetOwner(v13); /*0x671438*/
+                                    v26 = ((int (__thiscall *)(TESObjectREFR *, int, _DWORD, TESForm *))v13->vtbl->GetBaseForm)( /*0x67144c*/
+                                            v13,
                                             1,
                                             0,
-                                            v26);
-                                    (*(void (__thiscall **)(int *, TESObjectREFR *, int))(v25 + 0x238))(a1, v14, v27);
+                                            v25);
+                                    ((void (__thiscall *)(TESObjectREFR *, TESObjectREFR *, int))v24[1].super.SetFromActiveFile)( /*0x671458*/
+                                      a1,
+                                      v13,
+                                      v26);
                                   }
                                   else
                                   {
-                                    v28 = TESObjectREFR_GetOwner(v14);
-                                    (*(void (__thiscall **)(int *, PlayerCharacter *, BSExtraDataVtbl *))(v25 + 0x248))(
+                                    v27 = TESObjectREFR_GetOwner(v13); /*0x671465*/
+                                    ((void (__thiscall *)(TESObjectREFR *, PlayerCharacter *, TESForm *))v24[1].super.Unk_28)( /*0x671479*/
                                       a1,
-                                      TESDataHandler_g_PlayerRef,
-                                      v28);
+                                      reference,
+                                      v27);
                                   }
-                                  break;
+                                  break; /*0x671460*/
                                 default:
                                   return;
                               }

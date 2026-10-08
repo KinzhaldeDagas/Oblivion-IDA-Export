@@ -14,7 +14,7 @@
 0x613D0F: cmp     cl, 6
 0x613D12: jnz     short sub_613D33
 0x613D14: mov     ecx, ebx
-0x613D16: call    sub_6135F0
+0x613D16: call    CombatController_GetCurrentTarget
 0x613D1B: mov     esi, [esi+14h]
 0x613D1E: mov     edx, [eax]
 0x613D20: mov     ecx, eax
@@ -23,3 +23,9 @@
 0x613D29: call    eax
 0x613D2B: cmp     eax, ds:0B37270h
 0x613D31: jl      short loc_613D4A
+0x613D4A: pop     edi
+0x613D4B: pop     esi
+0x613D4C: xor     al, al
+0x613D4E: pop     ebx
+0x613D4F: add     esp, 8
+0x613D52: retn    0Ch

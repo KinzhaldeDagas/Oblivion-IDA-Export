@@ -1,30 +1,33 @@
-unsigned int **__thiscall sub_78D4E0(unsigned int *this, _BYTE *a2)
+// Oblivion byte-vector push_back: appends in available capacity or delegates to checked insert-one at end. Called by CIndexedGeometry::AddVertexWind for matrix indices.
+void __thiscall OB_stVectorByte_PushBack_010201A0(OB_stVectorByte_010201A0 *this, const unsigned __int8 *value)
 {
-  unsigned int v3; // eax
-  unsigned int v4; // edx
-  _BYTE *v5; // eax
-  unsigned int **result; // eax
-  char *v7; // edi
-  int v8; // [esp+4h] [ebp-8h] BYREF
+  int v2; // ebx
+  unsigned __int8 *begin; // eax
+  unsigned __int8 *v5; // edx
+  unsigned __int8 *end; // eax
+  unsigned __int8 *v7; // edi
+  OB_stVectorByteIterator_010201A0 result; // [esp+4h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = *(this + 2) - v3;
+  begin = this->begin; /*0x78d4e6*/
+  if ( begin ) /*0x78d4eb*/
+    v5 = (unsigned __int8 *)(this->end - begin); /*0x78d4f4*/
   else
-    v4 = 0;
-  if ( v3 && v4 < *(this + 3) - v3 )
+    v5 = 0; /*0x78d4ed*/
+  if ( begin && v5 < (unsigned __int8 *)(this->capacityEnd - begin) ) /*0x78d501*/
   {
-    v5 = (_BYTE *)*(this + 2);
-    *v5 = *a2;
-    result = (unsigned int **)(v5 + 1);
-    *(this + 2) = (unsigned int)result;
+    end = this->end; /*0x78d503*/
+    *end = *value; /*0x78d50c*/
+    this->end = end + 1; /*0x78d511*/
   }
   else
   {
-    v7 = (char *)*(this + 2);
-    if ( v3 > (unsigned int)v7 )
-      _invalid_parameter_noinfo();
-    return sub_78C860(this, (unsigned int **)&v8, this, v7, a2);
+    v7 = this->end; /*0x78d51c*/
+    if ( begin > v7 ) /*0x78d521*/
+      _invalid_parameter_noinfo(v2, (int)v7, (int)this); /*0x78d523*/
+    OB_stVectorByte_InsertOne_010201A0( /*0x78d536*/
+      this,
+      &result,
+      (OB_stVectorByteIterator_010201A0)__PAIR64__((unsigned int)v7, (unsigned int)this),
+      value);
   }
-  return result;
 }

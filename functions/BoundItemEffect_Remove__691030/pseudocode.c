@@ -19,105 +19,99 @@ void __usercall BoundItemEffect_Remove(
   double v17; // st7
   int v18; // eax
   unsigned __int16 *v19; // ebp
-  int v20; // eax
-  char *v21; // eax
-  char *v22; // edi
-  int v23; // eax
-  int v24; // edx
-  unsigned int v25; // edi
-  TESForm *v26; // eax
-  _BYTE *v27; // eax
-  int ***v28; // eax
-  ExtraDataList *v29; // eax
-  double v30; // st7
-  int v31; // ebp
-  int *v32; // edi
-  int v33; // eax
+  char *v20; // eax
+  char *v21; // edi
+  int v22; // eax
+  int v23; // edx
+  unsigned int v24; // edi
+  TESForm *v25; // eax
+  _BYTE *v26; // eax
+  int ***v27; // eax
+  ExtraDataList *v28; // eax
+  double v29; // st7
+  int v30; // ebp
+  int *v31; // edi
   ExtraDataList *****ContainerChanges; // eax
   unsigned int *EquippedInstance; // eax
-  int v36; // edx
-  unsigned int *v37; // ebp
-  void *v38; // eax
-  const char **v39; // eax
+  int v34; // edx
+  unsigned int *v35; // ebp
+  void *v36; // eax
+  const char **v37; // eax
   int ModelPath; // eax
-  int v41; // edx
+  int v39; // edx
   LowProcess *process; // ecx
-  _DWORD *v43; // ecx
-  int FXEffect; // ebp
+  void *v41; // ecx
+  EffectSetting *FXEffect; // ebp
   int StrongestItem; // eax
-  int v46; // ecx
-  float *v47; // edi
+  int v44; // ecx
+  NiObject *v45; // edi
+  int v46; // eax
+  NiObject *v47; // edi
   int v48; // eax
-  volatile LONG *v49; // edi
-  int v50; // eax
-  _DWORD *v51; // eax
-  unsigned int v52; // esi
-  float v53; // [esp+2Ch] [ebp-3Ch]
-  int v54; // [esp+30h] [ebp-38h]
-  int v55; // [esp+30h] [ebp-38h]
-  int v56; // [esp+34h] [ebp-34h]
-  int v57; // [esp+34h] [ebp-34h]
-  int v58; // [esp+38h] [ebp-30h]
-  int v59; // [esp+38h] [ebp-30h]
-  int v60; // [esp+3Ch] [ebp-2Ch]
-  int v61; // [esp+40h] [ebp-28h]
-  int v62; // [esp+44h] [ebp-24h]
-  int v63; // [esp+48h] [ebp-20h]
-  int **v64; // [esp+48h] [ebp-20h]
-  int v65; // [esp+4Ch] [ebp-1Ch]
-  ExtraDataList **v66; // [esp+4Ch] [ebp-1Ch]
-  int v67; // [esp+50h] [ebp-18h]
-  int v68; // [esp+50h] [ebp-18h]
-  int v69; // [esp+50h] [ebp-18h]
-  int v70; // [esp+54h] [ebp-14h]
+  _DWORD *v49; // eax
+  unsigned int v50; // esi
+  float v51; // [esp+2Ch] [ebp-3Ch]
+  int v52; // [esp+30h] [ebp-38h]
+  int v53; // [esp+34h] [ebp-34h]
+  int v54; // [esp+38h] [ebp-30h]
+  int v55; // [esp+3Ch] [ebp-2Ch]
+  int v56; // [esp+40h] [ebp-28h]
+  int v57; // [esp+44h] [ebp-24h]
+  int v58; // [esp+48h] [ebp-20h]
+  int **v59; // [esp+48h] [ebp-20h]
+  int v60; // [esp+4Ch] [ebp-1Ch]
+  ExtraDataList **v61; // [esp+4Ch] [ebp-1Ch]
+  int v62; // [esp+50h] [ebp-18h]
+  int v63; // [esp+50h] [ebp-18h]
+  int v64; // [esp+50h] [ebp-18h]
+  int v65; // [esp+54h] [ebp-14h]
   int IsFemale; // [esp+54h] [ebp-14h]
-  int v72; // [esp+58h] [ebp-10h]
-  unsigned __int16 *v73; // [esp+58h] [ebp-10h]
+  int v67; // [esp+58h] [ebp-10h]
+  unsigned __int16 *v68; // [esp+58h] [ebp-10h]
 
-  v10 = *(MagicTarget **)(a1 + 0x20);
-  if ( v10 )
-    ParentActor = MagicTarget_GetParentActor(v10);
+  v10 = *(MagicTarget **)(a1 + 0x20); /*0x691059*/
+  if ( v10 ) /*0x69105e*/
+    ParentActor = MagicTarget_GetParentActor(v10); /*0x691065*/
   else
-    ParentActor = 0;
-  if ( *(_BYTE *)(a1 + 0x84) )
+    ParentActor = 0; /*0x691069*/
+  if ( *(_BYTE *)(a1 + 0x84) ) /*0x69106b*/
   {
-    if ( ParentActor )
+    if ( ParentActor ) /*0x69107a*/
     {
-      v12 = (TESForm *)OblivionDynamicCast(
+      v12 = (TESForm *)OblivionDynamicCast( /*0x6910a3*/
                          *(void **)(a1 + 0x38),
                          0,
                          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                          &TESObjectWEAP `RTTI Type Descriptor',
                          0);
-      v13 = OblivionDynamicCast(
+      v13 = OblivionDynamicCast( /*0x6910ab*/
               *(void **)(a1 + 0x38),
               0,
               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
               &TESObjectARMO `RTTI Type Descriptor',
               0);
-      v14 = (int)v13;
-      if ( v12 )
+      v14 = (int)v13; /*0x6910b5*/
+      if ( v12 ) /*0x6910b7*/
       {
-        Actor_GetActorBaseForm(ParentActor, 0);
-        ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)ParentActor);
-        v16 = ExtraContainerChanges_SetEquipped(ContainerExtraDataForRef, (int)v12, 0);
-        if ( v16 )
-          sub_41F6D0(v16);
-        if ( (unsigned int)Actor_GetCurrentAction(ParentActor) <= 6 )
-          HighPRocess_DoAction_____((PlayerCharacter *)ParentActor, 0xFFFFFFFF, 0);
-        v17 = Actor_UnequipItem((PlayerCharacter *)ParentActor, a9, a7, a8, (char)v12, 1, 0, 0, 0, 0);
-        ParentActor->vtbl->super.super.RemoveItem((TESObjectREFR *)ParentActor, v12, 0, 1, 0, 0, 0, 0, 0, 1, 0);
-        v18 = *(_DWORD *)(a1 + 0x3C);
-        if ( v18 )
+        Actor_GetActorBaseForm(ParentActor, 0); /*0x6910c1*/
+        ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)ParentActor); /*0x6910d3*/
+        v16 = ExtraContainerChanges_SetEquipped(ContainerExtraDataForRef, (int)v12, 0); /*0x6910e0*/
+        if ( v16 ) /*0x6910e7*/
+          sub_41F6D0(v16); /*0x6910eb*/
+        if ( (unsigned int)Actor_GetCurrentAction(ParentActor) <= 6 ) /*0x6910fa*/
+          Actor_SetCurrentActionWithBowVisualCleanup(ParentActor, kActorCurrentAction_None, 0); /*0x691102*/
+        v17 = Actor_UnequipItem(ParentActor, a9, a7, a8, (__int16)v12, 1, 0, 0, 0, 0); /*0x691114*/
+        ParentActor->vtbl->super.super.RemoveItem((TESObjectREFR *)ParentActor, v12, 0, 1, 0, 0, 0, 0, 0, 1, 0); /*0x691136*/
+        v18 = *(_DWORD *)(a1 + 0x3C); /*0x691138*/
+        if ( v18 ) /*0x69113d*/
         {
-          if ( *(_DWORD *)v18 )
-            v19 = **(unsigned __int16 ***)v18;
+          if ( *(_DWORD *)v18 ) /*0x691143*/
+            v19 = **(unsigned __int16 ***)v18; /*0x69114a*/
           else
-            v19 = 0;
-          TESObjectREF_GetItemCount((TESObjectREFR *)ParentActor, *(TESForm **)(v18 + 8), v54, v56, v58);
-          if ( v20 >= 1 )
-            Actor_EquipItem(
-              (PlayerCharacter *)ParentActor,
+            v19 = 0; /*0x69114e*/
+          if ( TESObjectREFR_GetItemCount((TESObjectREFR *)ParentActor, *(TESForm **)(v18 + 8)) >= 1 ) /*0x69115e*/
+            Actor_EquipItem( /*0x691170*/
+              (TESObjectREFR *)ParentActor,
               v19,
               a7,
               a8,
@@ -132,68 +126,68 @@ void __usercall BoundItemEffect_Remove(
               (ExtraDataList **)v19,
               1,
               0,
+              v52,
+              v53,
+              v54,
               v55,
+              v56,
               v57,
-              v59,
+              v58,
               v60,
-              v61,
               v62,
-              v63,
               v65,
-              v67,
-              v70,
-              v72);
-          if ( *(_BYTE *)(a1 + 0x86) )
+              v67);
+          if ( *(_BYTE *)(a1 + 0x86) ) /*0x691175*/
           {
-            v21 = (char *)OblivionDynamicCast(
+            v20 = (char *)OblivionDynamicCast( /*0x691193*/
                             *(void **)(*(_DWORD *)(a1 + 0x3C) + 8),
                             0,
                             (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                             &TESObjectWEAP `RTTI Type Descriptor',
                             0);
-            if ( v21 )
+            if ( v20 ) /*0x69119d*/
             {
-              v22 = v21 + 0x30;
-              if ( sub_449190((int)(v21 + 0x30)) )
+              v21 = v20 + 0x30; /*0x69119f*/
+              if ( OB_CompactString_Length_010201A0(v20 + 0x30) ) /*0x6911a4*/
               {
-                v23 = (*(int (__thiscall **)(char *))(*(_DWORD *)v22 + 0x14))(v22);
-                QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, v23, 0, 1);
+                v22 = (*(int (__thiscall **)(char *))(*(_DWORD *)v21 + 0x14))(v21); /*0x6911b8*/
+                QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], v22, 0, 1); /*0x6911c1*/
               }
             }
-            *(_BYTE *)(a1 + 0x86) = 0;
+            *(_BYTE *)(a1 + 0x86) = 0; /*0x6911c6*/
           }
-          if ( v19 )
-            sub_41F670((ExtraDataList *)v19);
-          ContainerEntryExtraData_ClearDataTable(*(int **)(a1 + 0x3C));
-          v25 = *(_DWORD *)(a1 + 0x3C);
-          if ( v25 )
+          if ( v19 ) /*0x6911cf*/
+            sub_41F670((ExtraDataList *)v19); /*0x6911d3*/
+          ContainerEntryExtraData_ClearDataTable(*(int **)(a1 + 0x3C)); /*0x6911db*/
+          v24 = *(_DWORD *)(a1 + 0x3C); /*0x6911e0*/
+          if ( v24 ) /*0x6911e5*/
           {
-            ContainerEntryExtraData_DestroyDataTable(*(unsigned int **)(a1 + 0x3C), v24);
-            FormHeapFree(v25);
+            ContainerEntryExtraData_DestroyDataTable(*(unsigned int **)(a1 + 0x3C), v23); /*0x6911e9*/
+            FormHeapFree(v24); /*0x6911ef*/
           }
-          *(_DWORD *)(a1 + 0x3C) = 0;
-          ParentActor->members.super.process->SetCombatMode(ParentActor->members.super.process, 1);
+          *(_DWORD *)(a1 + 0x3C) = 0; /*0x6911f7*/
+          ParentActor->members.super.process->SetCombatMode(ParentActor->members.super.process, 1); /*0x69120b*/
         }
       }
-      else if ( v13 )
+      else if ( v13 ) /*0x691214*/
       {
-        IsFemale = 0;
-        v26 = ParentActor->vtbl->super.super.GetBaseForm((TESObjectREFR *)ParentActor);
-        v27 = OblivionDynamicCast(
-                v26,
+        IsFemale = 0; /*0x691232*/
+        v25 = ParentActor->vtbl->super.super.GetBaseForm((TESObjectREFR *)ParentActor); /*0x69123a*/
+        v26 = OblivionDynamicCast( /*0x69123d*/
+                v25,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                 &TESNPC `RTTI Type Descriptor',
                 0);
-        if ( v27 )
-          IsFemale = TESActorBase_IsFemale(v27);
-        Actor_GetActorBaseForm(ParentActor, 0);
-        v28 = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)ParentActor);
-        v29 = ExtraContainerChanges_SetEquipped(v28, v14, 0);
-        if ( v29 )
-          sub_41F6D0(v29);
-        v30 = Actor_UnequipItem((PlayerCharacter *)ParentActor, a9, a7, a8, v14, 1, 0, 0, 0, 0);
-        ParentActor->vtbl->super.super.RemoveItem(
+        if ( v26 ) /*0x691247*/
+          IsFemale = TESActorBase_IsFemale(v26); /*0x691250*/
+        Actor_GetActorBaseForm(ParentActor, 0); /*0x691258*/
+        v27 = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)ParentActor); /*0x69126a*/
+        v28 = ExtraContainerChanges_SetEquipped(v27, v14, 0); /*0x691277*/
+        if ( v28 ) /*0x69127e*/
+          sub_41F6D0(v28); /*0x691282*/
+        v29 = Actor_UnequipItem(ParentActor, a9, a7, a8, v14, 1, 0, 0, 0, 0); /*0x691294*/
+        ParentActor->vtbl->super.super.RemoveItem( /*0x6912b6*/
           (TESObjectREFR *)ParentActor,
           (TESForm *)v14,
           0,
@@ -205,146 +199,155 @@ void __usercall BoundItemEffect_Remove(
           0,
           1,
           0);
-        v31 = 0;
-        v68 = 0;
-        v73 = (unsigned __int16 *)(v14 + 0x64);
-        v64 = (int **)(a1 + 0x40);
-        do
+        v30 = 0; /*0x6912b8*/
+        v63 = 0; /*0x6912c0*/
+        v68 = (unsigned __int16 *)(v14 + 0x64); /*0x6912c4*/
+        v59 = (int **)(a1 + 0x40); /*0x6912c8*/
+        do /*0x6913ff*/
         {
-          if ( TESBipedModelForm_CoversSlot(v73, v31, 0) )
+          if ( TESBipedModelForm_CoversSlot(v68, v30, 0) ) /*0x6912d3*/
           {
-            v32 = *v64;
-            if ( *v64 )
+            v31 = *v59; /*0x6912e4*/
+            if ( *v59 ) /*0x6912e4*/
             {
-              v66 = 0;
-              if ( *v32 )
-                v66 = *(ExtraDataList ***)*v32;
-              HIBYTE(v62) = 0;
-              TESObjectREF_GetItemCount((TESObjectREFR *)ParentActor, (TESForm *)v32[2], v54, v56, v58);
-              if ( v33 >= 1 )
+              v61 = 0; /*0x6912f2*/
+              if ( *v31 ) /*0x6912ee*/
+                v61 = *(ExtraDataList ***)*v31; /*0x6912fe*/
+              HIBYTE(v57) = 0; /*0x691308*/
+              if ( TESObjectREFR_GetItemCount((TESObjectREFR *)ParentActor, (TESForm *)v31[2]) >= 1 ) /*0x691315*/
               {
-                Actor_EquipItem(
-                  (PlayerCharacter *)ParentActor,
-                  (unsigned __int16 *)v31,
+                Actor_EquipItem( /*0x691328*/
+                  (TESObjectREFR *)ParentActor,
+                  (unsigned __int16 *)v30,
                   a7,
                   a8,
                   a5,
-                  v30,
+                  v29,
                   a2,
                   a6,
                   a4,
                   a3,
-                  (TESForm *)v32[2],
+                  (TESForm *)v31[2],
                   1,
-                  v66,
+                  v61,
                   1,
                   0,
+                  v52,
+                  v53,
                   v54,
+                  v55,
                   v56,
-                  v58,
-                  v60,
-                  v61,
-                  v62,
-                  (int)v64,
-                  (int)v66,
-                  v68,
+                  v57,
+                  (int)v59,
+                  (int)v61,
+                  v63,
                   IsFemale,
-                  (int)v73);
-                ContainerChanges = (ExtraDataList *****)ExtraDataList_GetContainerChanges(&ParentActor->members.super.super.baseExtraList);
-                EquippedInstance = ContainerExtraData_GetEquippedInstance(ContainerChanges, v31, 0);
-                v37 = EquippedInstance;
-                if ( !EquippedInstance || EquippedInstance[2] != v32[2] )
-                  HIBYTE(v62) = sub_690310((int)ParentActor, (int)v32, (void **)a1);
-                if ( v37 )
+                  (int)v68);
+                ContainerChanges = (ExtraDataList *****)ExtraDataList_GetContainerChanges(&ParentActor->members.super.super.baseExtraList); /*0x691333*/
+                EquippedInstance = ContainerExtraData_GetEquippedInstance(ContainerChanges, v30, 0); /*0x69133a*/
+                v35 = EquippedInstance; /*0x69133f*/
+                if ( !EquippedInstance || EquippedInstance[2] != v31[2] ) /*0x69134b*/
+                  HIBYTE(v57) = sub_690310((int)ParentActor, (int)v31, (void **)a1); /*0x691358*/
+                if ( v35 ) /*0x69135e*/
                 {
-                  ContainerEntryExtraData_DestroyDataTable(v37, v36);
-                  FormHeapFree((unsigned int)v37);
+                  ContainerEntryExtraData_DestroyDataTable(v35, v34); /*0x691362*/
+                  FormHeapFree((unsigned int)v35); /*0x691368*/
                 }
-                v31 = v69;
+                v30 = v64; /*0x691370*/
               }
-              if ( *(_BYTE *)(a1 + 0x87) )
+              if ( *(_BYTE *)(a1 + 0x87) ) /*0x691374*/
               {
-                v38 = (void *)v32[2];
-                if ( v38 )
+                v36 = (void *)v31[2]; /*0x69137d*/
+                if ( v36 ) /*0x691382*/
                 {
-                  if ( !HIBYTE(v62) )
+                  if ( !HIBYTE(v57) ) /*0x691389*/
                   {
-                    v39 = (const char **)OblivionDynamicCast(
-                                           v38,
+                    v37 = (const char **)OblivionDynamicCast( /*0x69139a*/
+                                           v36,
                                            0,
                                            (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                                            &TESBipedModelForm `RTTI Type Descriptor',
                                            0);
-                    if ( v39 )
+                    if ( v37 ) /*0x6913a4*/
                     {
-                      ModelPath = TESBipedModelForm_GetModelPath(v39, IsFemale);
-                      QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, ModelPath, 0, 1);
+                      ModelPath = TESBipedModelForm_GetModelPath(v37, IsFemale); /*0x6913b1*/
+                      QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], ModelPath, 0, 1); /*0x6913bd*/
                     }
                   }
                 }
               }
-              if ( v66 )
-                sub_41F670((ExtraDataList *)v66);
-              ContainerEntryExtraData_ClearDataTable(v32);
-              ContainerEntryExtraData_DestroyDataTable((unsigned int *)v32, v41);
-              FormHeapFree((unsigned int)v32);
-              *v64 = 0;
+              if ( v61 ) /*0x6913c8*/
+                sub_41F670((ExtraDataList *)v61); /*0x6913ca*/
+              ContainerEntryExtraData_ClearDataTable(v31); /*0x6913d1*/
+              ContainerEntryExtraData_DestroyDataTable((unsigned int *)v31, v39); /*0x6913d8*/
+              FormHeapFree((unsigned int)v31); /*0x6913de*/
+              *v59 = 0; /*0x6913ea*/
             }
           }
-          ++v64;
-          v68 = ++v31;
+          ++v59; /*0x6913f0*/
+          v63 = ++v30; /*0x6913fb*/
         }
-        while ( v31 < 0x10 );
-        *(_BYTE *)(a1 + 0x87) = 0;
+        while ( v30 < 0x10 ); /*0x6913ff*/
+        *(_BYTE *)(a1 + 0x87) = 0; /*0x691405*/
       }
-      if ( ParentActor->vtbl->super.super.GetNiNode((TESObjectREFR *)ParentActor) )
+      if ( ParentActor->vtbl->super.super.GetNiNode((TESObjectREFR *)ParentActor) ) /*0x691416*/
       {
-        process = ParentActor->members.super.process;
-        if ( process )
+        process = ParentActor->members.super.process; /*0x691420*/
+        if ( process ) /*0x691425*/
         {
-          if ( !process->GetProcessLevel(process) )
+          if ( !process->GetProcessLevel(process) ) /*0x691430*/
           {
-            v43 = *(_DWORD **)(a1 + 8);
-            if ( v43 )
+            v41 = *(void **)(a1 + 8); /*0x69143a*/
+            if ( v41 ) /*0x69143f*/
             {
-              if ( *(_DWORD *)(a1 + 0xC) )
+              if ( *(_DWORD *)(a1 + 0xC) ) /*0x691445*/
               {
-                FXEffect = MagicItem_GetFXEffect(v43, 0);
-                StrongestItem = EffectItemList_GetStrongestItem(*(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 0x10), 0);
-                v46 = *(_DWORD *)(a1 + 0xC);
-                if ( v46 == StrongestItem )
+                FXEffect = MagicItem_GetFXEffect(v41, 0); /*0x691457*/
+                StrongestItem = EffectItemList_GetStrongestItem( /*0x691465*/
+                                  (_DWORD *)(*(_DWORD *)(a1 + 8) + 0xC),
+                                  *(_DWORD *)(*(_DWORD *)(a1 + 0xC) + 0x10),
+                                  0,
+                                  v52,
+                                  v53,
+                                  v54,
+                                  v55,
+                                  v56);
+                v44 = *(_DWORD *)(a1 + 0xC); /*0x69146a*/
+                if ( v44 == StrongestItem ) /*0x69146f*/
                 {
-                  if ( sub_449190(*(_DWORD *)(v46 + 0x1C) + 0x18) )
+                  if ( OB_CompactString_Length_010201A0((void *)(*(_DWORD *)(v44 + 0x1C) + 0x18)) ) /*0x69147b*/
                   {
-                    v47 = (float *)FormHeapAlloc(0x38u);
-                    if ( v47 )
+                    v45 = (NiObject *)FormHeapAlloc(0x38u); /*0x69148f*/
+                    if ( v45 ) /*0x6914a2*/
                     {
-                      __asm { fld     dword ptr ds:0A30634h }
+                      __asm { fld     dword ptr ds:0A30634h } /*0x6914a7*/
                       __asm { fstp    [esp+3Ch+var_3C]; float }
-                      v48 = (*(int (**)(void))(*(_DWORD *)(FXEffect + 0x18) + 0x14))();
-                      v49 = (volatile LONG *)MagicModelHitEffect_constr_args2(v47, (int)ParentActor, v48, v53);
+                      v46 = ((int (*)(void))FXEffect->model.vtbl->GetModelPath)(); /*0x6914b7*/
+                      v47 = MagicModelHitEffect_constr_args2(v45, (TESObjectREFR *)ParentActor, v46, v51); /*0x6914c2*/
                     }
                     else
                     {
-                      v49 = 0;
+                      v47 = 0; /*0x6914c6*/
                     }
-                    if ( (*(unsigned __int8 (__thiscall **)(volatile LONG *))(*v49 + 0x68))(v49) )
-                      sub_678D30((int *)&ActorProcessManager_ptr, v49);
+                    if ( ((unsigned __int8 (__thiscall *)(NiObject *))v47->__vftable[1].Load)(v47) ) /*0x6914d7*/
+                      ActorProcessManager_RegisterTempEffect( /*0x6914e3*/
+                        (ActorProcessManager *)&qword_B3BB2C[0x75],
+                        (BSTempEffect *)v47);
                     else
-                      (**(void (__thiscall ***)(volatile LONG *, int))v49)(v49, 1);
-                    if ( *(_BYTE *)(a1 + 0x85) )
+                      v47->__vftable->super.Destructor((NiRefObject *)v47, 1); /*0x6914f2*/
+                    if ( *(_BYTE *)(a1 + 0x85) ) /*0x6914f4*/
                     {
-                      v50 = (*(int (__thiscall **)(int))(*(_DWORD *)(FXEffect + 0x18) + 0x14))(FXEffect + 0x18);
-                      QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, v50, 0, 1);
-                      *(_BYTE *)(a1 + 0x85) = 0;
+                      v48 = (int)FXEffect->model.vtbl->GetModelPath(&FXEffect->model); /*0x69150a*/
+                      QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], v48, 0, 1); /*0x691513*/
+                      *(_BYTE *)(a1 + 0x85) = 0; /*0x691518*/
                     }
                   }
-                  sub_65A970(ParentActor, "ITMBoundDisappear", 0, 0x102, 1);
-                  v52 = (unsigned int)v51;
-                  if ( v51 )
+                  TESObjectREFR_PlayResolvedAnimSoundNote(ParentActor, "ITMBoundDisappear", 0, 0x102, 1); /*0x69152f*/
+                  v50 = (unsigned int)v49; /*0x691534*/
+                  if ( v49 ) /*0x691538*/
                   {
-                    sub_6B73E0(v51);
-                    FormHeapFree(v52);
+                    sub_6B73E0(v49); /*0x69153c*/
+                    FormHeapFree(v50); /*0x691542*/
                   }
                 }
               }
@@ -352,8 +355,8 @@ void __usercall BoundItemEffect_Remove(
           }
         }
       }
-      *(_DWORD *)(a1 + 0x20) = 0;
-      *(_BYTE *)(a1 + 0x84) = 0;
+      *(_DWORD *)(a1 + 0x20) = 0; /*0x69154a*/
+      *(_BYTE *)(a1 + 0x84) = 0; /*0x691551*/
     }
   }
 }

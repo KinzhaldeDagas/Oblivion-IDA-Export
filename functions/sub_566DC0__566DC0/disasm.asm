@@ -38,7 +38,7 @@
 0x566E18: test    edi, edi
 0x566E1A: jz      short loc_566E29
 0x566E1C: mov     ecx, edi; this
-0x566E1E: call    TESObjectCELL_IsInterior
+0x566E1E: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x566E23: test    al, al
 0x566E25: jnz     short loc_566E29
 0x566E27: xor     edi, edi
@@ -47,12 +47,12 @@
 0x566E2C: call    TESObjectREFR_GetWorldSpace
 0x566E31: mov     ecx, esi; this
 0x566E33: mov     ebx, eax
-0x566E35: call    TESObjectREFR_GetParentCell
+0x566E35: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x566E3A: test    eax, eax
 0x566E3C: mov     dword ptr [esp+34h+var_20], eax
 0x566E40: jz      short loc_566E55
 0x566E42: mov     ecx, eax; this
-0x566E44: call    TESObjectCELL_IsInterior
+0x566E44: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x566E49: test    al, al
 0x566E4B: jnz     short loc_566E77
 0x566E4D: mov     dword ptr [esp+34h+var_20], 0
@@ -97,7 +97,7 @@
 0x566EC7: fstp    st(1)
 0x566EC9: test    ah, 44h
 0x566ECC: jnp     short loc_566EDB
-0x566ECE: call    Double_To_SInt32
+0x566ECE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x566ED3: mov     ebx, eax
 0x566ED5: mov     [esp+34h+var_24], ebx
 0x566ED9: jmp     short loc_566EDD
@@ -215,13 +215,13 @@
 0x567044: mov     ecx, edi
 0x567046: call    eax
 0x567048: push    eax
-0x567049: call    sub_46D5C0
+0x567049: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x56704E: add     esp, 4
-0x567051: call    Double_To_SInt32
+0x567051: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567056: mov     [esp+34h+arg_0], eax
 0x56705A: fild    [esp+34h+arg_0]
 0x56705E: fadd    qword ptr ds:0A46E48h
-0x567064: call    Double_To_SInt32
+0x567064: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567069: mov     [esp+34h+var_24], eax
 0x56706D: test    eax, eax
 0x56706F: jnz     short loc_56707B
@@ -279,13 +279,13 @@
 0x56711E: mov     ecx, edi
 0x567120: call    eax
 0x567122: push    eax
-0x567123: call    sub_46D5C0
+0x567123: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x567128: add     esp, 4
-0x56712B: call    Double_To_SInt32
+0x56712B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567130: mov     [esp+34h+arg_8], eax
 0x567134: fild    [esp+34h+arg_8]
 0x567138: fadd    [esp+34h+arg_0]
-0x56713C: call    Double_To_SInt32
+0x56713C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x567141: test    eax, eax
 0x567143: mov     [esp+34h+var_24], eax
 0x567147: jge     loc_56706F
@@ -360,7 +360,7 @@
 0x567223: fld     [esp+34h+var_10]
 0x567227: fsub    dword ptr [eax+8]
 0x56722A: fstp    [esp+34h+var_4]
-0x56722E: call    sub_404C90
+0x56722E: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x567233: fcomp   qword ptr ds:0A309F0h
 0x567239: fnstsw  ax
 0x56723B: test    ah, 5

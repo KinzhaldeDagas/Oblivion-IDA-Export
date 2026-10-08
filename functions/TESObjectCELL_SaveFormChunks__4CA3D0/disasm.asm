@@ -8,7 +8,7 @@
 0x4CA3E3: lea     edi, [esi+24h]
 0x4CA3E6: push    edi
 0x4CA3E7: push    41544144h
-0x4CA3EC: call    j_TESForm_PutCurrentChunkData
+0x4CA3EC: call    j_TESForm_PutCurrentChunkData; Verified CELL plugin-record writer: writes the full TESObjectCELLMembr.flags0 byte as DATA. TESObjectCELL_LoadForm reads that byte and may clear bit 0x40 unless DataHandler retainActiveFile is set.
 0x4CA3F1: mov     eax, [esi+3Ch]
 0x4CA3F4: add     esp, 0Ch
 0x4CA3F7: test    byte ptr [edi], 1
@@ -24,10 +24,10 @@
 0x4CA40E: push    8; Size
 0x4CA410: push    eax; Src
 0x4CA411: push    434C4358h; int
-0x4CA416: call    TESForm_PutFormRecordChunkData
+0x4CA416: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4CA41B: add     esp, 0Ch
 0x4CA41E: lea     ecx, [esi+28h]
-0x4CA421: call    ExtraDataList_Save
+0x4CA421: call    ExtraDataList_Save; CELL writer0x4CA3D0 invokes shared ExtraDataList_Save0x422F10 with cell extra list; shared writer has no owner form or CELL filter. It can serialize surviving runtime CELL XLOC/XTEL; XESP was removed by owner check. Candidate decoding and lossless parser recompile must not be mistaken for this resolved native save.
 0x4CA426: pop     edi
 0x4CA427: mov     ecx, esi
 0x4CA429: pop     esi

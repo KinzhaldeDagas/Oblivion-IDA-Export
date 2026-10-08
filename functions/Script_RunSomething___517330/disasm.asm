@@ -29,7 +29,7 @@
 0x517396: mov     eax, ds:0B36210h
 0x51739B: or      eax, ds:0B36214h
 0x5173A1: jnz     short loc_5173AE
-0x5173A3: push    offset stru_B36208.eventList; lpFrequency
+0x5173A3: push    (offset dword_B361CC+44h); lpFrequency
 0x5173A8: call    dword ptr ds:0A2815Ch
 0x5173AE: lea     ecx, [esp+76Ch+PerformanceCount]
 0x5173B2: push    ecx; lpPerformanceCount
@@ -79,17 +79,17 @@
 0x517453: mov     [esi+4], eax
 0x517456: jmp     short loc_51745B
 0x517458: mov     [esi+4], ebx
-0x51745B: mov     eax, [esp+76Ch+arg_8]
+0x51745B: mov     eax, [esp+76Ch+arg_8]; Event run uses caller-provided ScriptEventList when available; otherwise it creates a temporary event list for this run.
 0x517462: cmp     eax, ebx
 0x517464: jnz     short loc_517471
 0x517466: mov     ecx, edi
 0x517468: call    Script_CreateEventList
 0x51746D: mov     [esp+76Ch+var_738], eax
-0x517471: mov     [esi+8], eax
+0x517471: mov     [esi+8], eax; Hot Reload OBSE decode: ScriptRunner::RunEventScript stores the effective ScriptEventList in runner->eventList here.
 0x517474: cmp     [edi+29h], bl
 0x517477: jz      short loc_5174BF
 0x517479: mov     ecx, eax
-0x51747B: cmp     [ecx+10h], ebx
+0x51747B: cmp     [ecx+10h], ebx; For script-effect scripts, ensure eventList->m_scriptEffectInfo exists before storing event flags/delta.
 0x51747E: jnz     short loc_517490
 0x517480: push    8; Size
 0x517482: call    FormHeapAlloc
@@ -100,15 +100,15 @@
 0x517493: fld     [esp+76Ch+arg_1C]
 0x51749A: mov     ecx, [eax+10h]
 0x51749D: mov     dl, [esp+76Ch+arg_14]
-0x5174A4: mov     [ecx], dl
+0x5174A4: mov     [ecx], dl; Store ScriptEffectStart boolean in low byte of m_scriptEffectInfo->scriptRefID.
 0x5174A6: mov     eax, [esi+8]
 0x5174A9: mov     ecx, [eax+10h]
 0x5174AC: mov     dl, [esp+76Ch+arg_18]
-0x5174B3: mov     [ecx+1], dl
+0x5174B3: mov     [ecx+1], dl; Store ScriptEffectFinish boolean in second byte of m_scriptEffectInfo->scriptRefID.
 0x5174B6: mov     eax, [esi+8]
 0x5174B9: mov     ecx, [eax+10h]
-0x5174BC: fstp    dword ptr [ecx+4]
-0x5174BF: xor     ebp, ebp
+0x5174BC: fstp    dword ptr [ecx+4]; Store ScriptEffectElapsedSeconds/update delta in m_scriptEffectInfo +4.
+0x5174BF: xor     ebp, ebp; Hot Reload OBSE hook point: eventList is valid and bytecode execution has not started. Plugin rebuilds reloaded script event vars here, then restores xor ebp/cmp dataLength.
 0x5174C1: cmp     [edi+20h], ebx
 0x5174C4: mov     dword ptr [esp+76Ch+a9+4], ebx
 0x5174C8: mov     dword ptr [esp+76Ch+a9], ebp
@@ -161,7 +161,7 @@
 0x517549: push    ecx; ArgList
 0x51754A: push    edi; a5
 0x51754B: mov     ecx, esi; a1
-0x51754D: call    CommandInfo_Execute?
+0x51754D: call    ScriptRunner_ExecuteCompiledInstruction; TES4 authoritative script instruction executor. Handles expression/control opcodes directly and dispatches ordinary CommandInfo execute callbacks for vanilla script commands.
 0x517552: test    al, al
 0x517554: jz      short loc_517576
 0x517556: mov     ebp, dword ptr [esp+76Ch+a9]
@@ -186,7 +186,7 @@
 0x51759A: mov     ecx, ebp
 0x51759C: call    ScriptEventList_destr??
 0x5175A1: push    ebp
-0x5175A2: call    FormHeapFree
+0x5175A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5175A7: add     esp, 4
 0x5175AA: cmp     byte ptr [esp+76Ch+var_758+3], bl
 0x5175AE: mov     [esi+14h], ebx
@@ -208,9 +208,9 @@
 0x5175E9: fadd    dword ptr [esp+76Ch+var_740]
 0x5175ED: fstp    dword ptr [edi+34h]
 0x5175F0: mov     bl, [esi+0A1h]
-0x5175F6: lea     ecx, [esp+76Ch+var_720]; void *
+0x5175F6: lea     ecx, [esp+76Ch+var_720]; this
 0x5175FA: mov     [esp+76Ch+var_4], 0FFFFFFFFh
-0x517605: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x517605: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x51760A: mov     al, bl
 0x51760C: jmp     short loc_517610
 0x51760E: xor     al, al
@@ -226,3 +226,16 @@
 0x51762C: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x517631: add     esp, 758h
 0x517637: retn    20h ; ' '
+0x9B7350: lea     ecx, [ebp-720h]; this
+0x9B7356: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9B735B: mov     edx, [esp+arg_4]
+0x9B735F: lea     eax, [edx-75Ch]
+0x9B7365: mov     ecx, [edx-760h]
+0x9B736B: xor     ecx, eax
+0x9B736D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7372: add     eax, 10h
+0x9B7375: mov     ecx, [edx-4]
+0x9B7378: xor     ecx, eax
+0x9B737A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B737F: mov     eax, offset stru_AE1F64
+0x9B7384: jmp     ___CxxFrameHandler3

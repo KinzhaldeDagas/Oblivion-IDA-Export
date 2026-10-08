@@ -1,4 +1,4 @@
-0x7A0B50: sub     esp, 8
+0x7A0B50: sub     esp, 8; Oblivion st_vector<SFrondGuide>::push_back specialization. Placement-deep-copies at end when capacity remains; otherwise delegates to the decoded checked insert-one path.
 0x7A0B53: push    esi
 0x7A0B54: mov     esi, ecx
 0x7A0B56: push    edi
@@ -27,18 +27,18 @@
 0x7A0B90: add     eax, edx
 0x7A0B92: cmp     ecx, eax
 0x7A0B94: jnb     short loc_7A0BC7
-0x7A0B96: mov     ecx, [esp+10h+arg_0]
-0x7A0B9A: mov     edx, [esp+10h+arg_0]
+0x7A0B96: mov     ecx, [esp+10h+value]
+0x7A0B9A: mov     edx, [esp+10h+value]
 0x7A0B9E: mov     edi, [esi+8]
-0x7A0BA1: mov     byte ptr [esp+10h+var_8], 0
-0x7A0BA6: mov     eax, [esp+10h+var_8]
+0x7A0BA1: mov     byte ptr [esp+10h+result.owner], 0
+0x7A0BA6: mov     eax, [esp+10h+result.owner]
 0x7A0BAA: push    eax
 0x7A0BAB: push    ecx
 0x7A0BAC: push    esi
-0x7A0BAD: push    edx
-0x7A0BAE: push    1
-0x7A0BB0: push    edi
-0x7A0BB1: call    sub_79E190
+0x7A0BAD: push    edx; value
+0x7A0BAE: push    1; count
+0x7A0BB0: push    edi; destination
+0x7A0BB1: call    OB_SFrondGuide_UninitializedFillN_010201A0; Exception-safe uninitialized_fill_n for compact SFrondGuide records. Placement-copy-constructs count values; unwind cleanup destroys the constructed prefix before rethrowing.
 0x7A0BB6: add     esp, 18h
 0x7A0BB9: add     edi, 30h ; '0'
 0x7A0BBC: mov     [esi+8], edi
@@ -51,11 +51,16 @@
 0x7A0BCB: cmp     edi, ebx
 0x7A0BCD: jbe     short loc_7A0BD4
 0x7A0BCF: call    __invalid_parameter_noinfo
-0x7A0BD4: mov     eax, [esp+14h+arg_0]
-0x7A0BD8: push    eax
-0x7A0BD9: push    ebx
-0x7A0BDA: push    esi
-0x7A0BDB: lea     ecx, [esp+20h+var_8]
-0x7A0BDF: push    ecx
-0x7A0BE0: mov     ecx, esi
-0x7A0BE2: call    sub_7A0A50
+0x7A0BD4: mov     eax, [esp+14h+value]
+0x7A0BD8: push    eax; value
+0x7A0BD9: push    ebx; position
+0x7A0BDA: push    esi; expectedOwner
+0x7A0BDB: lea     ecx, [esp+20h+result]
+0x7A0BDF: push    ecx; result
+0x7A0BE0: mov     ecx, esi; this
+0x7A0BE2: call    OB_stVector_SFrondGuide_InsertOne_010201A0; Checked insert-one wrapper for st_vector<SFrondGuide>. Preserves the iterator index across possible reallocation, delegates to InsertFill(count=1), and returns the 8-byte {owner,current} iterator.
+0x7A0BE7: pop     ebx
+0x7A0BE8: pop     edi
+0x7A0BE9: pop     esi
+0x7A0BEA: add     esp, 8
+0x7A0BED: retn    4

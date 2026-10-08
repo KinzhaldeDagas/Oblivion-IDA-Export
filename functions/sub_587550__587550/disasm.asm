@@ -21,10 +21,10 @@
 0x587585: call    Tile_GetFloat
 0x58758A: push    ecx
 0x58758B: mov     ecx, esi
-0x58758D: fstp    [esp+0Ch+var_C]; float
+0x58758D: fstp    [esp+0Ch+duration]; duration
 0x587590: call    Tile_GetParentMenu
-0x587595: push    eax; int
-0x587596: call    sub_584300
+0x587595: push    eax; index
+0x587596: call    InterfaceManager__NewTimer; Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.
 0x58759B: add     esp, 8
 0x58759E: mov     ecx, esi
 0x5875A0: call    Tile_GetParentMenu
@@ -42,10 +42,10 @@
 0x5875C9: call    Tile_GetFloat
 0x5875CE: push    ecx
 0x5875CF: mov     ecx, esi
-0x5875D1: fstp    [esp+0Ch+var_C]; float
+0x5875D1: fstp    [esp+0Ch+duration]; duration
 0x5875D4: call    Tile_GetParentMenu
-0x5875D9: push    eax; int
-0x5875DA: call    sub_584300
+0x5875D9: push    eax; index
+0x5875DA: call    InterfaceManager__NewTimer; Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.
 0x5875DF: add     esp, 8
 0x5875E2: mov     ecx, esi
 0x5875E4: call    Tile_GetParentMenu
@@ -63,10 +63,10 @@
 0x58760D: call    Tile_GetFloat
 0x587612: push    ecx
 0x587613: mov     ecx, esi
-0x587615: fstp    [esp+0Ch+var_C]; float
+0x587615: fstp    [esp+0Ch+duration]; duration
 0x587618: call    Tile_GetParentMenu
-0x58761D: push    eax; int
-0x58761E: call    sub_584300
+0x58761D: push    eax; index
+0x58761E: call    InterfaceManager__NewTimer; Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.
 0x587623: add     esp, 8
 0x587626: mov     ecx, esi
 0x587628: call    Tile_GetParentMenu
@@ -84,10 +84,10 @@
 0x587651: call    Tile_GetFloat
 0x587656: push    ecx
 0x587657: mov     ecx, esi
-0x587659: fstp    [esp+0Ch+var_C]; float
+0x587659: fstp    [esp+0Ch+duration]; duration
 0x58765C: call    Tile_GetParentMenu
-0x587661: push    eax; int
-0x587662: call    sub_584300
+0x587661: push    eax; index
+0x587662: call    InterfaceManager__NewTimer; Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.
 0x587667: add     esp, 8
 0x58766A: mov     ecx, esi
 0x58766C: call    Tile_GetParentMenu
@@ -98,7 +98,7 @@
 0x58767C: retn    4
 0x58767F: cmp     edi, 3ECh
 0x587685: jnz     short loc_587693
-0x587687: call    sub_5A6B00
+0x587687: call    HUDMainMenu_Create
 0x58768C: pop     edi
 0x58768D: mov     esi, eax
 0x58768F: pop     esi
@@ -128,7 +128,7 @@
 0x5876D1: retn    4
 0x5876D4: cmp     edi, 414h
 0x5876DA: jnz     short loc_5876E8
-0x5876DC: call    sub_5B6040
+0x5876DC: call    MainMenu_Open
 0x5876E1: pop     edi
 0x5876E2: mov     esi, eax
 0x5876E4: pop     esi
@@ -152,7 +152,7 @@
 0x58771D: push    1
 0x58771F: push    0
 0x587721: push    eax
-0x587722: call    sub_599EE0
+0x587722: call    ContainerMenu_Create
 0x587727: add     esp, 10h
 0x58772A: pop     edi
 0x58772B: mov     esi, eax
@@ -194,7 +194,7 @@
 0x587794: call    eax
 0x587796: push    esi
 0x587797: push    ebx
-0x587798: call    sub_5962C0
+0x587798: call    BookMenu_Create
 0x58779D: add     esp, 8
 0x5877A0: pop     ebx
 0x5877A1: pop     edi

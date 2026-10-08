@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x669690",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Adds one topic to PlayerCharacter.knownTopics. Duplicate suppression is by exact TESTopic pointer; successful new entries are pushed to the head, optional notification is suppressed when DialogMenu is active, and optional immediate sorting is case-insensitive by display name.",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6696EB",
-    "line": "jz      short loc_6696C0",
+    "line": "jz      short loc_6696C0; Known-topic duplicate test compares TESTopic pointer identity only. Same display text/editor ID in another TESTopic object is not treated as the same known topic.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6696F7",
-    "line": "call    BSSimpleList_PushFront",
+    "line": "call    BSSimpleList_PushFront; A new known topic is pushed to the list head before any sorting. Batch AddKnownTopics defers sorting until its loop completes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x669702",
-    "line": "call    sub_578FE0",
+    "line": "call    sub_578FE0; When notifyPlayer is requested, suppress the 'New topic: <name>' message while DialogMenu (menu ID 0x3F1) is topmost; the topic is still learned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x66970E",
-    "line": "mov     [esp+24h+string], ebx",
+    "line": "mov     [esp+24h+string], ebx; The 'New topic' notification is skipped while menu ID 0x3F1 (DialogMenu) is topmost, but AddKnownTopic still inserts the topic.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x669765",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,19 +445,19 @@
   },
   {
     "ea": "0x669771",
-    "line": "jz      short loc_66977C",
+    "line": "jz      short loc_66977C; When requested, sort the player's known-topic list case-insensitively by topic display name after insertion.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x669773",
-    "line": "push    edi",
+    "line": "push    edi; topics",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x669774",
-    "line": "call    sub_52F6D0",
+    "line": "call    SortTopicListByDisplayName; Case-insensitive bubble sort of a TESTopic list by TESFullName display text. A null argument sorts DataHandler's master topic list; player additions pass the known-topic list explicitly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -520,5 +520,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B7140",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7143",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7148",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B714C",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B714F",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B7152",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B7154",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B7159",
+    "line": "mov     eax, offset stru_AE1DB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B715E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,5 @@
-WDML_SIDE
+enum WDML_SIDE : __int32
+{
+WDML_CLIENT_SIDE = 0x0,
+WDML_SERVER_SIDE = 0x1,
+};

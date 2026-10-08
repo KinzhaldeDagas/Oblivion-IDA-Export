@@ -1,1 +1,1 @@
-IAudioSessionManager_0
+typedef IAudioSessionManager IAudioSessionManager_0;

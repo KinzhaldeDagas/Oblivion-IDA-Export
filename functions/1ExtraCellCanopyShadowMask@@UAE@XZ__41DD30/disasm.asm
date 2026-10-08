@@ -19,7 +19,7 @@
 0x41DD63: push    3
 0x41DD65: mov     [esp+28h+var_4], 1
 0x41DD6D: mov     [esi+0Ch], ebx
-0x41DD70: call    nullsub_returnTrue_0arg
+0x41DD70: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x41DD75: mov     edi, [esi+10h]
 0x41DD78: mov     ebp, ds:InterlockedDecrement
 0x41DD7E: add     esp, 4
@@ -39,7 +39,7 @@
 0x41DD9B: call    eax
 0x41DD9D: mov     [esi+10h], ebx
 0x41DDA0: push    2
-0x41DDA2: call    nullsub_returnTrue_0arg
+0x41DDA2: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x41DDA7: mov     [esi+18h], ebx
 0x41DDAA: mov     edi, [esi+10h]
 0x41DDAD: add     esp, 4
@@ -68,3 +68,15 @@
 0x41DDE5: pop     ebx
 0x41DDE6: add     esp, 10h
 0x41DDE9: retn
+0x9AB820: mov     ecx, [ebp-10h]; this
+0x9AB823: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9AB828: mov     ecx, [ebp-10h]
+0x9AB82B: add     ecx, 10h; slot
+0x9AB82E: jmp     NiPointerSlot_Release
+0x9AB833: mov     edx, [esp+arg_4]
+0x9AB837: lea     eax, [edx-14h]
+0x9AB83A: mov     ecx, [edx-18h]
+0x9AB83D: xor     ecx, eax
+0x9AB83F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB844: mov     eax, offset stru_AD867C
+0x9AB849: jmp     ___CxxFrameHandler3

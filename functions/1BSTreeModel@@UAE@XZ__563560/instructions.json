@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x563560",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BSTreeModel destructor. Clears Gamebryo render resources first, then calls CSpeedTreeRT destructor/refcount cleanup for BSTreeModel+0x0C and frees the 0xA0 object storage.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x563598",
-    "line": "call    sub_561520",
+    "line": "call    BSTreeModel_ClearModel; Verified: destructor order is render-resource clear, CSpeedTreeRT shared-object release/free, release of NiPointer resources including the owning base-model reference, then NiRefObject bookkeeping.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x5635A4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5635A6",
-    "line": "call    sub_78C9B0",
+    "line": "call    CSpeedTreeRT__dtor; Normal BSTreeModel destructor release and the second/last Oblivion code xref to CSpeedTreeRT dtor/refcount cleanup. The wrapper storage is freed at the next call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x5635AC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Frees this model's 0xA0 CSpeedTreeRT wrapper immediately after shared cleanup. Raw wrapper addresses can be reused; sidecar identity needs a publication/link generation or the stable shared +0x30 allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x563699",
-    "line": "mov     edi, [esi+10h]",
+    "line": "mov     edi, [esi+10h]; Loads BSTreeModel+0x10, the owning base-model reference installed at 0x56311B. The destructor releases it only after this instance's CSpeedTreeRT cleanup/free and other render references.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x5636A9",
-    "line": "call    ebp ; InterlockedDecrement",
+    "line": "call    ebp ; InterlockedDecrement; Final release of the instance model's owning base BSTreeModel reference. Therefore a live BSTreeModel instance prevents base-wrapper-address reuse for its entire SpeedTree lifetime.",
     "mnemonic": "call",
     "size": 2
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x5636BD",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -904,5 +904,185 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BD370",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD373",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD378",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD37B",
+    "line": "add     ecx, 10h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD37E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD383",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD386",
+    "line": "add     ecx, 1Ch; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD389",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD38E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD391",
+    "line": "add     ecx, 20h ; ' '; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD394",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD399",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD39C",
+    "line": "add     ecx, 34h ; '4'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD39F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD3A4",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3A7",
+    "line": "add     ecx, 38h ; '8'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3AA",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD3AF",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3B2",
+    "line": "add     ecx, 3Ch ; '<'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3B5",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD3BA",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3BD",
+    "line": "add     ecx, 40h ; '@'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3C0",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD3C5",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD3C9",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3CC",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD3CF",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD3D1",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD3D6",
+    "line": "mov     eax, offset stru_AE6D60",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD3DB",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

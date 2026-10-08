@@ -32,7 +32,7 @@
 0x6D878B: mov     eax, [eax+208h]
 0x6D8791: mov     eax, [eax+ecx*4]
 0x6D8794: push    eax
-0x6D8795: push    offset unk_B3DAA8
+0x6D8795: push    offset stru_B3DAA8
 0x6D879A: call    NiRTTI_Cast
 0x6D879F: mov     ebx, eax
 0x6D87A1: xor     ebp, ebp
@@ -67,12 +67,11 @@
 0x6D87F1: mov     [esp+2Ch+var_4], 0FFFFFFFFh
 0x6D87F9: jbe     short loc_6D883B
 0x6D87FB: jmp     short loc_6D8800
-0x6D87FD: align 10h
 0x6D8800: mov     edx, [ebx+10h]
 0x6D8803: movzx   ecx, si
 0x6D8806: mov     eax, [edx+ecx*4]
 0x6D8809: push    eax
-0x6D880A: push    offset dword_B3DA08
+0x6D880A: push    offset stru_B3DA08
 0x6D880F: call    NiRTTI_Cast
 0x6D8814: add     esp, 8
 0x6D8817: cmp     eax, ebp
@@ -114,7 +113,7 @@
 0x6D8888: test    eax, eax
 0x6D888A: jz      short loc_6D889E
 0x6D888C: lea     esp, [esp+0]
-0x6D8890: cmp     eax, offset dword_B3FCC0
+0x6D8890: cmp     eax, offset stru_B3FCC0
 0x6D8895: jz      short loc_6D88B0
 0x6D8897: mov     eax, [eax+4]
 0x6D889A: test    eax, eax
@@ -136,7 +135,7 @@
 0x6D88BC: call    eax
 0x6D88BE: test    eax, eax
 0x6D88C0: jz      short loc_6D88D4
-0x6D88C2: cmp     eax, offset dword_B3CA58
+0x6D88C2: cmp     eax, offset unk_B3CA58
 0x6D88C7: jz      loc_6D89DE
 0x6D88CD: mov     eax, [eax+4]
 0x6D88D0: test    eax, eax
@@ -241,3 +240,19 @@
 0x6D89DD: retn
 0x6D89DE: mov     al, 1
 0x6D89E0: jmp     loc_6D88D6
+0x9C7CC0: mov     eax, [ebp+4]
+0x9C7CC3: push    eax
+0x9C7CC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7CC9: pop     ecx
+0x9C7CCA: retn
+0x9C7CCB: lea     ecx, [ebp-14h]; slot
+0x9C7CCE: jmp     NiPointerSlot_Release
+0x9C7CD3: lea     ecx, [ebp-10h]; slot
+0x9C7CD6: jmp     NiPointerSlot_Release
+0x9C7CDB: mov     edx, [esp+arg_4]
+0x9C7CDF: lea     eax, [edx-1Ch]
+0x9C7CE2: mov     ecx, [edx-20h]
+0x9C7CE5: xor     ecx, eax
+0x9C7CE7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7CEC: mov     eax, offset stru_AF006C
+0x9C7CF1: jmp     ___CxxFrameHandler3

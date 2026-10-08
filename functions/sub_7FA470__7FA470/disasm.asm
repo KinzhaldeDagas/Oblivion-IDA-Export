@@ -1,4 +1,4 @@
-0x7FA470: push    ebp
+0x7FA470: push    ebp; Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.
 0x7FA471: mov     ebp, ecx
 0x7FA473: push    esi
 0x7FA474: or      esi, 0FFFFFFFFh
@@ -43,7 +43,7 @@
 0x7FA4E6: test    eax, eax
 0x7FA4E8: jz      short loc_7FA4FE
 0x7FA4EA: lea     ebx, [ebx+0]
-0x7FA4F0: cmp     eax, offset dword_B3F95C
+0x7FA4F0: cmp     eax, offset stru_B3F95C
 0x7FA4F5: jz      short loc_7FA525
 0x7FA4F7: mov     eax, [eax+4]
 0x7FA4FA: test    eax, eax
@@ -55,8 +55,7 @@
 0x7FA507: test    eax, eax
 0x7FA509: jz      short loc_7FA56D
 0x7FA50B: jmp     short loc_7FA510
-0x7FA50D: align 10h
-0x7FA510: cmp     eax, offset unk_B3FF04
+0x7FA510: cmp     eax, offset stru_B3FF04
 0x7FA515: jz      short loc_7FA537
 0x7FA517: mov     eax, [eax+4]
 0x7FA51A: test    eax, eax

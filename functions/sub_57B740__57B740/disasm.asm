@@ -47,5 +47,5 @@
 0x57B7D3: mov     eax, [edx]
 0x57B7D5: push    1
 0x57B7D7: call    eax
-0x57B7D9: jmp     sub_5962C0
+0x57B7D9: jmp     BookMenu_Create
 0x57B7DE: retn

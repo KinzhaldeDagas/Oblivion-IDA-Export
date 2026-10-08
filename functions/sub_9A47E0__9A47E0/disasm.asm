@@ -1,4 +1,4 @@
-0x9A47E0: sub     esp, 108h
+0x9A47E0: sub     esp, 108h; MoonSugarEffect decode: NiD3DSCM_Vertex constant-name lookup. Parses a constant name and looks it up in the global table at B32590; entries map names like World/WorldViewProj/BoneMatrix4/time to enum ids used by sub_9A56D0.
 0x9A47E6: mov     eax, ___security_cookie
 0x9A47EB: xor     eax, esp
 0x9A47ED: mov     [esp+108h+var_4], eax
@@ -29,10 +29,10 @@
 0x9A4844: mov     edi, offset unk_B32590
 0x9A4849: lea     esp, [esp+0]
 0x9A4850: mov     edx, [edi+4]
-0x9A4853: push    edx; Str2
+0x9A4853: push    edx; right
 0x9A4854: lea     eax, [esp+118h+Str1]
-0x9A4858: push    eax; Str1
-0x9A4859: call    __strcmp
+0x9A4858: push    eax; left
+0x9A4859: call    CRT_StricmpLocaleDispatch
 0x9A485E: add     esp, 8
 0x9A4861: test    eax, eax
 0x9A4863: jz      short loc_9A488D

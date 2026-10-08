@@ -5,7 +5,7 @@
 0x72BDB7: push    edi
 0x72BDB8: push    ebp
 0x72BDB9: mov     esi, ecx
-0x72BDBB: call    nullsub_returnvVoid_1arg
+0x72BDBB: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x72BDC0: mov     ecx, ebp
 0x72BDC2: call    sub_7124A0
 0x72BDC7: mov     edi, [esi+8]

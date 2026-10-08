@@ -1,19 +1,32 @@
 {
-  "callees_count": 611,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 232,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 12,
+  "chunks": [
+    [
+      "0x671620",
+      "0x673973"
+    ]
+  ],
+  "chunks_sha256": "1af5448d43bca6628ef610a7bc5a5c783198b63d5d08eac1ac198017343ef901",
+  "comment_regular": "[Controller decode 2026-07-09] Player input update. Uses joystick index 0 for look/movement axes. Look axes combine with mouse look; movement axes synthesize logical movement control presses.\n\n[Controller decode 2026-07-09] Central decoded PC controller/joystick/IsXBox summary is stored in IDB netnode \"$ ControllerStuff\"; full external doc is C:\\src\\OblivionIDA\\ControllerStuff.md.\n\n[Controller decode 2026-07-09] Controller decode completion estimate stored in IDB netnode \"$ ControllerStuff\" sup 200. Current overall decoded PC Controller/IsXBox/Joystick knowledge is about 92%.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1065; metadata at sup 999; completion estimate at sup 200.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1067; metadata at sup 999; completion estimate at sup 200.\n\nPlayer input update. Native ABI is PlayerCharacter in ECX plus one float deltaTime stack argument.",
+  "comment_repeatable": "Player input update. Native ABI is PlayerCharacter in ECX plus one float deltaTime stack argument.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 58,
   "display_name": "Player_OnInput",
   "end_ea": "0x673973",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
   "name": "Player_OnInput",
   "segment": ".text",
   "sha256": "1af5448d43bca6628ef610a7bc5a5c783198b63d5d08eac1ac198017343ef901",
   "size": 9043,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x671620",
-  "type": "void __userpurge(PlayerCharacter *this@<ecx>, double st0_0@<st7>, double a3@<st6>, double a4@<st5>, double a5@<st4>, double a6@<st3>, double a7@<st2>, double a8@<st1>, double a9@<st0>, float a2)",
+  "total_chunk_size": 9043,
+  "type": "void __thiscall(PlayerCharacter *this, float deltaTime)",
   "xrefs_from_count": 3222,
   "xrefs_to_count": 1
 }

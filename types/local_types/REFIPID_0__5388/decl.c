@@ -1,1 +1,1 @@
-REFIPID_0
+typedef const GUID *REFIPID_0;

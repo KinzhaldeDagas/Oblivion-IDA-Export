@@ -1,7 +1,8 @@
-signed int __stdcall sub_9A35A0(
-        int a1,
-        int a2,
-        NiObjectNET *a3,
+// Verified pixel counterpart to9A61E0: cursor+18 and entry array+20, same key register | (passIndex<<16), program setter vtable+30. Numeric mapped kind10000000 and supported automatic matrix cases do not enter this attribute-cache path; their wrapper reset leaves both cursors at zero.
+int __stdcall NiD3DSCM_Pixel_SetAttributeConstant(
+        NiD3DShaderProgram *shaderProgram,
+        NiD3DShaderConstantMapEntry *entry,
+        NiObjectNET *geometry,
         int a4,
         int a5,
         int a6,
@@ -9,68 +10,82 @@ signed int __stdcall sub_9A35A0(
         int a8,
         int a9,
         int a10,
-        int a11,
+        unsigned int passIndex,
         int a12,
-        int a13)
+        NiSCMExtraData *cache)
 {
-  int v14; // edi
-  _DWORD *v15; // eax
-  NiExtraData *ExtraData; // eax
-  int *v17; // edi
-  int v18; // ebx
-  int v19; // ebx
+  unsigned int pixelCursor; // edi
+  NiSCMConstantEntry *v15; // eax
+  NiExtraData *extraData; // eax
+  void *v17; // edi
+  UInt32 Flags; // ebx
+  UInt32 v19; // ebx
 
-  if ( !a3 )
-    return 1;
-  if ( a13
-    && (v14 = *(_DWORD *)(a13 + 0x18),
-        v15 = (_DWORD *)(*(_DWORD *)(a13 + 0x20) + 8 * v14),
-        *v15 == (*(_DWORD *)(a2 + 0x1C) | (a11 << 0x10)))
-    && (ExtraData = (NiExtraData *)v15[1], *(_DWORD *)(a13 + 0x18) = v14 + 1, ExtraData)
-    || (ExtraData = NiObjectNET_GetExtraData(a3, *(const char **)(a2 + 0xC))) != 0 )
+  if ( !geometry ) /*0x9a35a8*/
+    return 1; /*0x9a35b0*/
+  if ( cache /*0x9a35fb*/
+    && (pixelCursor = cache->pixelCursor,
+        v15 = &cache->pixelEntries[pixelCursor],
+        v15->constantAndPass == (entry->ShaderRegister | (passIndex << 0x10)))
+    && (extraData = v15->extraData, cache->pixelCursor = pixelCursor + 1, extraData)
+    || (extraData = NiObjectNET_GetExtraData(geometry, entry->Key)) != 0 )
   {
-    v17 = sub_9A9040((_DWORD *)a2, (int)ExtraData);
-    if ( !v17 )
-      return 0x80000040;
+    v17 = sub_9A9040(entry, (int)extraData); /*0x9a361f*/
+    if ( !v17 ) /*0x9a3623*/
+      return 0x80000040; /*0x9a362d*/
   }
   else
   {
-    v17 = sub_9A92E0(a2);
-    if ( !v17 )
-      return 0x80000010;
+    v17 = (void *)NiD3DShaderConstantMap_ConvertMappedValue(entry); /*0x9a3605*/
+    if ( !v17 ) /*0x9a3609*/
+      return 0x80000010; /*0x9a3613*/
   }
-  v18 = *(_DWORD *)(a2 + 0x14);
-  if ( !byte_B4295B )
-    sub_783C70();
-  if ( dword_B428D8[(unsigned __int8)v18] == 9 )
+  Flags = entry->Flags; /*0x9a3637*/
+  if ( !g_D3DXParameterDispatchInitialized ) /*0x9a363a*/
+    NiD3DHLSLShader__InitializeParameterClassTables(); /*0x9a363c*/
+  if ( g_D3DXParameterClassDispatch[(unsigned __int8)Flags] == 9 ) /*0x9a364f*/
   {
-    if ( !(*(unsigned __int8 (__thiscall **)(int, int, int *, int))(*(_DWORD *)a1 + 0x30))(a1, a2, v17, 4) )
-      return 0x80000050;
-    return 0;
+    if ( !(*(unsigned __int8 (__thiscall **)(NiD3DShaderProgram *, NiD3DShaderConstantMapEntry *, void *, int))(*(_DWORD *)shaderProgram + 0x30))( /*0x9a365e*/
+            shaderProgram,
+            entry,
+            v17,
+            4) )
+      return 0x80000050; /*0x9a3670*/
+    return 0; /*0x9a3662*/
   }
-  v19 = *(_DWORD *)(a2 + 0x14);
-  if ( !byte_B4295B )
-    sub_783C70();
-  if ( dword_B428D8[(unsigned __int8)v19] != 6
-    && !sub_7833A0((_DWORD *)a2)
-    && !sub_783340((_DWORD *)a2)
-    && !sub_783310((_DWORD *)a2)
-    && !sub_7833D0((_DWORD *)a2)
-    && !sub_7832E0((_DWORD *)a2)
-    && !sub_7832B0((_DWORD *)a2) )
+  v19 = entry->Flags; /*0x9a367a*/
+  if ( !g_D3DXParameterDispatchInitialized ) /*0x9a367d*/
+    NiD3DHLSLShader__InitializeParameterClassTables(); /*0x9a367f*/
+  if ( g_D3DXParameterClassDispatch[(unsigned __int8)v19] != 6 /*0x9a36cd*/
+    && !sub_7833A0(entry)
+    && !sub_783340(entry)
+    && !sub_783310(entry)
+    && !sub_7833D0(entry)
+    && !sub_7832E0(entry)
+    && !sub_7832B0(entry) )
   {
-    if ( sub_782DE0((_DWORD *)a2) )
+    if ( sub_782DE0(entry) ) /*0x9a36d8*/
     {
-      if ( !(*(unsigned __int8 (__thiscall **)(int, int, int *, int))(*(_DWORD *)a1 + 0x30))(a1, a2, v17, 3) )
-        return 0x80000050;
+      if ( !(*(unsigned __int8 (__thiscall **)(NiD3DShaderProgram *, NiD3DShaderConstantMapEntry *, void *, int))(*(_DWORD *)shaderProgram + 0x30))( /*0x9a36ee*/
+              shaderProgram,
+              entry,
+              v17,
+              3) )
+        return 0x80000050; /*0x9a36fc*/
     }
     else
     {
-      sub_9A32B0((_DWORD *)a2);
+      sub_9A32B0(entry); /*0x9a3701*/
     }
-    return 0;
+    return 0; /*0x9a36f2*/
   }
-  if ( (*(unsigned __int8 (__thiscall **)(int, int, int *, _DWORD))(*(_DWORD *)a1 + 0x30))(a1, a2, v17, 0) )
-    return 0;
-  return 0x80000050;
+  if ( (*(unsigned __int8 (__thiscall **)(NiD3DShaderProgram *, NiD3DShaderConstantMapEntry *, void *, _DWORD))(*(_DWORD *)shaderProgram + 0x30))( /*0x9a371b*/
+         shaderProgram,
+         entry,
+         v17,
+         0) )
+  {
+    return 0; /*0x9a370b*/
+  }
+  return 0x80000050; /*0x9a35af*/
 }

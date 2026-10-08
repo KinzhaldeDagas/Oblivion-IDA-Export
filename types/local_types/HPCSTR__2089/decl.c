@@ -1,1 +1,1 @@
-HPCSTR
+typedef LPCSTR HPCSTR;

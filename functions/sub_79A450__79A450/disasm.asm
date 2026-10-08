@@ -1,4 +1,4 @@
-0x79A450: sub     esp, 40h
+0x79A450: sub     esp, 40h; SpeedTree decode: stock CFrondEngine::ComputeExtrusion. Builds a reduced zig-zag strip for one extrusion LOD using min length/cross segment fields and guide vertex counts. Stock 0x6C CFrondEngine has no bProhibitSegmentReduction field.
 0x79A453: push    ebx
 0x79A454: mov     ebx, ecx
 0x79A456: cmp     dword ptr [ebx], 0
@@ -9,8 +9,8 @@
 0x79A469: jnz     short loc_79A46F
 0x79A46B: fld1
 0x79A46D: jmp     short loc_79A49D
-0x79A46F: mov     ecx, [esp+44h+arg_0]
-0x79A473: fild    [esp+44h+arg_0]
+0x79A46F: mov     ecx, [esp+44h+lodLevel]
+0x79A473: fild    [esp+44h+lodLevel]
 0x79A477: test    ecx, ecx
 0x79A479: jge     short loc_79A481
 0x79A47B: fadd    dword ptr ds:0A2FC78h
@@ -66,7 +66,7 @@
 0x79A50B: faddp   st(1), st
 0x79A50D: fstp    [esp+50h+arg_8]
 0x79A511: fld     [esp+50h+arg_8]
-0x79A515: call    Double_To_SInt32
+0x79A515: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x79A51A: test    esi, esi
 0x79A51C: mov     ebp, eax
 0x79A51E: mov     [esp+50h+var_24], ebp
@@ -116,7 +116,7 @@
 0x79A5A6: fxch    st(1)
 0x79A5A8: fstp    [esp+50h+arg_8]
 0x79A5AC: fld     [esp+50h+arg_8]
-0x79A5B0: call    Double_To_SInt32
+0x79A5B0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x79A5B5: lea     ecx, [eax-1]
 0x79A5B8: mov     [esp+50h+var_3C], ecx
 0x79A5BC: fidiv   [esp+50h+var_3C]
@@ -148,24 +148,24 @@
 0x79A610: fld     [esp+50h+var_30]
 0x79A614: fild    [esp+50h+var_40]
 0x79A618: fmul    st, st(1)
-0x79A61A: call    Double_To_SInt32
+0x79A61A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x79A61F: mov     ecx, [esp+50h+var_40]
 0x79A623: add     ecx, 1
 0x79A626: mov     [esp+50h+var_20], ecx
 0x79A62A: fimul   [esp+50h+var_20]
 0x79A62E: mov     [esp+50h+arg_8], eax
-0x79A632: call    Double_To_SInt32
+0x79A632: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x79A637: mov     edx, [esp+50h+var_38]
 0x79A63B: cmp     [esp+50h+var_40], edx
 0x79A63F: mov     ebp, eax
 0x79A641: jz      short loc_79A651
-0x79A643: mov     ecx, edi
-0x79A645: call    sub_799EE0
+0x79A643: mov     ecx, edi; this
+0x79A645: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79A64A: sub     eax, 1
 0x79A64D: cmp     ebp, eax
 0x79A64F: jle     short loc_79A65D
-0x79A651: mov     ecx, edi
-0x79A653: call    sub_799EE0
+0x79A651: mov     ecx, edi; this
+0x79A653: call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.
 0x79A658: mov     ebp, eax
 0x79A65A: sub     ebp, 1
 0x79A65D: mov     ecx, [esp+50h+arg_8]
@@ -279,13 +279,13 @@
 0x79A7DC: mov     [esp+50h+var_40], eax
 0x79A7E0: jl      loc_79A610
 0x79A7E6: mov     ebp, [esp+50h+var_8]
-0x79A7EA: mov     edx, [esp+50h+arg_0]
+0x79A7EA: mov     edx, [esp+50h+lodLevel]
 0x79A7EE: mov     esi, [esp+50h+var_4]
-0x79A7F2: mov     ecx, [esi]
-0x79A7F4: push    ebp
-0x79A7F5: push    ebx
-0x79A7F6: push    edx
-0x79A7F7: call    sub_796100
+0x79A7F2: mov     ecx, [esi]; this
+0x79A7F4: push    ebp; Full DWORD extrusion index count in EBP is pushed here. Native AddStrip reads only WORD; frond-specific replacement reads DWORD and splits before transfer. Verified2026-10-03.
+0x79A7F5: push    ebx; strip
+0x79A7F6: push    edx; lodLevel
+0x79A7F7: call    OB_CIndexedGeometry_AddStrip_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::AddStrip receives ownership of a caller FormHeap-allocated unsigned-short array (for example allocation at 0x78F477 before call 0x78F48C), appends its unsigned-short length and pointer to per-LOD nested vectors, then adds the 32-bit result of zero_extend(stripLength)-2 to the per-LOD triangle total. There is no clamp in this function; callers are expected to provide a valid strip length (at least two). RT4.1's later contiguous vector<int> representation is contrast only and was not projected onto Oblivion.
 0x79A7FC: mov     eax, [esi]
 0x79A7FE: add     word ptr [eax+26h], 1
 0x79A803: pop     edi

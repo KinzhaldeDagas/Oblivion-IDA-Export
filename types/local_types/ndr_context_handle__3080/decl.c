@@ -1,1 +1,5 @@
-ndr_context_handle
+struct ndr_context_handle
+{
+ULONG attributes;
+GUID uuid;
+};

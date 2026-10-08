@@ -1,9 +1,10 @@
-bool __thiscall sub_60E320(TESObjectREFR *this)
+// Verified actor wrapper: returns false if the actor has no current cell; otherwise calls TESObjectCELL_IsActorOwnershipRestricted(currentCell, actor). It is referenced by condition/function tables, but the registered condition identity/name remains Unknown.
+bool __thiscall Actor_IsCurrentCellOwnershipRestricted(Actor *actor)
 {
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
 
-  if ( !TESObjectREFR_GetParentCell(this) )
-    return 0;
-  ParentCell = TESObjectREFR_GetParentCell(this);
-  return sub_4CABC0((ExtraDataList *)ParentCell, (Actor *)this);
+  if ( !Shared_GetDwordAtOffset40(actor) ) /*0x60e326*/
+    return 0; /*0x60e342*/
+  DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(actor); /*0x60e332*/
+  return TESObjectCELL_IsActorOwnershipRestricted(DwordAtOffset40, actor); /*0x60e33e*/
 }

@@ -6,7 +6,7 @@
 0x986145: and     eax, 1F80h
 0x98614A: cmp     eax, 1F80h
 0x98614F: jnz     short __CIacos___jnedef_4
-0x986151: fnstcw  [esp+8+var_8]
-0x986154: mov     ax, [esp+8+var_8]
+0x986151: fnstcw  word ptr [esp+8+var_8]
+0x986154: mov     ax, word ptr [esp+8+var_8]
 0x986158: and     ax, 7Fh
 0x98615C: cmp     ax, 7Fh

@@ -81,10 +81,10 @@
 0x5E9E10: call    TESActorBaseData_AllFactionsAreEvil
 0x5E9E15: test    al, al
 0x5E9E17: jmp     short loc_5E9E5E
-0x5E9E19: push    1
-0x5E9E1B: push    edi
-0x5E9E1C: mov     ecx, esi
-0x5E9E1E: call    TESOBjectREFR_IsOwnedBy
+0x5E9E19: push    1; useFactionOwnership
+0x5E9E1B: push    edi; actorReference
+0x5E9E1C: mov     ecx, esi; reference
+0x5E9E1E: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x5E9E23: test    al, al
 0x5E9E25: jnz     short loc_5E9E60
 0x5E9E27: mov     ecx, [esi+58h]
@@ -96,10 +96,10 @@
 0x5E9E38: call    Actor_IsNPC
 0x5E9E3D: test    al, al
 0x5E9E3F: jz      short loc_5E9E60
-0x5E9E41: push    1
-0x5E9E43: push    esi
-0x5E9E44: mov     ecx, edi
-0x5E9E46: call    TESOBjectREFR_IsOwnedBy
+0x5E9E41: push    1; useFactionOwnership
+0x5E9E43: push    esi; actorReference
+0x5E9E44: mov     ecx, edi; reference
+0x5E9E46: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x5E9E4B: test    al, al
 0x5E9E4D: jnz     short loc_5E9E60
 0x5E9E4F: mov     ecx, [edi+58h]

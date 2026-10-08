@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 285,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 483,
+  "chunks": [
+    [
+      "0x46B250",
+      "0x46B275"
+    ]
+  ],
+  "chunks_sha256": "be742b5b140cc5a176978b46098863c45c34ba31d9b60a213a6f053e0389ffdb",
+  "comment_regular": "MajorSkillsExtender v6 decode: TESForm global form-ID lookup through TESForm_FormIDMap; reference state validates loaded ACHR forms here.",
+  "comment_repeatable": "OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.\n\nMEF LARGE PERF 2026-09-08: Negative scope result: FormID lookup is a thin hash-map GetAt wrapper, not a full-form linear scan. Global map capacity/population/lifetime were not established here, so no large-performance bug is claimed from this wrapper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "TESForm_LookupByFormID",
   "end_ea": "0x46B275",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESForm_LookupByFormID",
   "segment": ".text",
   "sha256": "be742b5b140cc5a176978b46098863c45c34ba31d9b60a213a6f053e0389ffdb",
   "size": 37,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46B250",
+  "total_chunk_size": 37,
   "type": "TESForm *__cdecl(UInt32 a1)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 483

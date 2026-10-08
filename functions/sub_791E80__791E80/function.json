@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_791E80",
+  "chunks": [
+    [
+      "0x791E80",
+      "0x79209B"
+    ]
+  ],
+  "chunks_sha256": "a211ca4ac6cc2cd6513c95ea6499b5a5d8d77bd493c190fec7892f1f0b8a4301",
+  "comment_regular": "CBranch::ComputeFlareEntries. Pushes 0x18-byte SIdvBranchFlare records into vector wrapper at branch+0x30.",
+  "comment_repeatable": "Builds CBranch flare-vector entries from compact SIdvBranchInfo flare fields.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_CBranch_ComputeFlareEntries_010201A0",
   "end_ea": "0x79209B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_791E80",
+  "name": "OB_CBranch_ComputeFlareEntries_010201A0",
   "segment": ".text",
   "sha256": "a211ca4ac6cc2cd6513c95ea6499b5a5d8d77bd493c190fec7892f1f0b8a4301",
   "size": 539,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x791E80",
-  "type": "void __thiscall(char *this, int)",
-  "xrefs_from_count": 165,
+  "total_chunk_size": 539,
+  "type": "void __thiscall(OB_stVector16_010201A0 *this, int)",
+  "xrefs_from_count": 173,
   "xrefs_to_count": 1
 }

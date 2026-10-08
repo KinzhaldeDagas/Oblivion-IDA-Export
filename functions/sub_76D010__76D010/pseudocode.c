@@ -1,4 +1,4 @@
-char *sub_76D010()
+NiRTTI *sub_76D010()
 {
-  return &byte_B42884;
+  return &stru_B42884; /*0x76d015*/
 }

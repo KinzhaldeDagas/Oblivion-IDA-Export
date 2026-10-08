@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5D95C6",
-    "line": "mov     ecx, [esi+68h]; TileWindow *",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5D95CE",
-    "line": "call    Menu_LoadXML",
+    "line": "call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x5D96A7",
-    "line": "fstp    [esp+14h+a3]; a3",
+    "line": "fstp    [esp+14h+a3]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D96AA",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5D96B1",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x5D96CE",
-    "line": "push    1",
+    "line": "push    1; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5D96D0",
-    "line": "push    5",
+    "line": "push    5; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5D96D2",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },

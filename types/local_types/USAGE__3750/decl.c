@@ -1,1 +1,1 @@
-USAGE
+typedef USHORT USAGE;

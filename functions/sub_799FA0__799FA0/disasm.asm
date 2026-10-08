@@ -1,4 +1,4 @@
-0x799FA0: mov     ecx, [esp+arg_0]
+0x799FA0: mov     ecx, [esp+arg_0]; Allocates count compact 0x30-byte SFrondGuide records from FormHeap and throws std::bad_alloc on count*0x30 overflow.
 0x799FA4: sub     esp, 0Ch
 0x799FA7: test    ecx, ecx
 0x799FA9: ja      short loc_799FC0

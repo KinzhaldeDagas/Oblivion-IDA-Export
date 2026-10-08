@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_787830",
+  "chunks": [
+    [
+      "0x787830",
+      "0x7878E7"
+    ],
+    [
+      "0x9C8290",
+      "0x9C82B6"
+    ]
+  ],
+  "chunks_sha256": "6e55fe20ec2bfe15811f885a06e7a274b23b23932d29de90536fe1b75204826b",
+  "comment_regular": "Oblivion CWindMatrices::Resize. Frees the old global transform array, allocates matrixCount contiguous 0x40-byte stTransform objects, constructs them, then explicitly loads identity into every matrix.",
+  "comment_repeatable": "Oblivion CWindMatrices::Resize. Frees the old global transform array, allocates matrixCount contiguous 0x40-byte stTransform objects, constructs them, then explicitly loads identity into every matrix.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_CWindMatrices_Resize_010201A0",
   "end_ea": "0x7878E7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787830",
+  "name": "OB_CWindMatrices_Resize_010201A0",
   "segment": ".text",
   "sha256": "37e7c395d52d6c344e82c8956fcb517f7f0d51728dced912011d430df67d8597",
   "size": 183,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787830",
-  "type": "void __thiscall(unsigned int *this, unsigned __int16)",
-  "xrefs_from_count": 69,
+  "total_chunk_size": 221,
+  "type": "void __thiscall(OB_CWindMatrices_010201A0 *this, unsigned __int16 matrixCount)",
+  "xrefs_from_count": 83,
   "xrefs_to_count": 2
 }

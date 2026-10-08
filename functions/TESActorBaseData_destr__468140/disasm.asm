@@ -1,2 +1,2 @@
-0x468140: mov     dword ptr [ecx], offset ??_7TESActorBaseData@@6B@; const TESActorBaseData::`vftable'
+0x468140: mov     dword ptr [ecx], offset ??_7TESActorBaseData@@6B@; Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.
 0x468146: jmp     TESActorBaseData_ClearFactionList

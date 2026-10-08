@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785E90",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion compact stVec-vector push_back. Appends a 0x18-byte stVec in place when capacity remains; otherwise delegates to the reallocation/insertion path. Used for synchronized spline control/tangent/control-curve vectors.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x785ED6",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x785EDA",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x785EE1",
-    "line": "mov     byte ptr [esp+10h+var_8], 0",
+    "line": "mov     byte ptr [esp+10h+result.owner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x785EE6",
-    "line": "mov     eax, [esp+10h+var_8]",
+    "line": "mov     eax, [esp+10h+result.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,25 +223,25 @@
   },
   {
     "ea": "0x785EED",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785EEE",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x785EF0",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785EF1",
-    "line": "call    sub_7848E0",
+    "line": "call    OB_stVector24_UninitializedFillN_010201A0; Oblivion 1.2.0.416: placement/uninitialized fill of count six-dword records; returns the advanced destination.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x785F14",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x785F18",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -337,31 +337,31 @@
   },
   {
     "ea": "0x785F1A",
-    "line": "push    esi",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785F1B",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x785F1F",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785F20",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x785F22",
-    "line": "call    sub_7857D0",
+    "line": "call    OB_stVector_stVec_InsertOne_010201A0; Oblivion 1.2.0.416: vector<stVec>::insert(position,value) wrapper returning a checked iterator. IDA boundary repaired from 0x7857D0..0x785843 plus false 0x785850 tail to the real 0x7857D0..0x785880 function; false FUNC_NORET cleared.",
     "mnemonic": "call",
     "size": 5
   }

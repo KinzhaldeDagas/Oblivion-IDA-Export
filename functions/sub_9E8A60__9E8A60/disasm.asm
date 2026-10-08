@@ -2,7 +2,7 @@
 0x9E8A66: push    ecx
 0x9E8A67: fstp    [esp+4+var_4]; float
 0x9E8A6A: push    offset aFaipoweratta_1; "fAIPowerAttackRecoilBonus"
-0x9E8A6F: mov     ecx, offset unk_B36DB8
+0x9E8A6F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+0E0h)
 0x9E8A74: call    GameSetting_ConstrAndReg_float
 0x9E8A79: push    offset sub_A1E290; void (__cdecl *)()
 0x9E8A7E: call    _atexit

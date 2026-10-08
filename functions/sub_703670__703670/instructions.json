@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x703674",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+stream]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x703678",
-    "line": "push    edi",
+    "line": "push    edi; stream",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x70367B",
-    "line": "call    sub_7201B0",
+    "line": "call    NiTriShapeData_Save; Save NiTriShapeData triangle indices and serialize each shared-normal entry as a UInt16 count followed by that entry's UInt16 vertex indices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x70368B",
-    "line": "lea     ecx, [esp+14h+arg_0]",
+    "line": "lea     ecx, [esp+14h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x70369B",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7036AD",
-    "line": "lea     ecx, [esp+28h+arg_0]",
+    "line": "lea     ecx, [esp+28h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7036C2",
-    "line": "mov     [esp+38h+arg_0], 8",
+    "line": "mov     [esp+38h+stream], 8",
     "mnemonic": "mov",
     "size": 8
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7036D4",
-    "line": "lea     ecx, [esp+3Ch+arg_0]",
+    "line": "lea     ecx, [esp+3Ch+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7036E6",
-    "line": "mov     [esp+4Ch+arg_0], ebx",
+    "line": "mov     [esp+4Ch+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7036F4",
-    "line": "lea     ecx, [esp+50h+arg_0]",
+    "line": "lea     ecx, [esp+50h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x703702",
-    "line": "mov     [esp+60h+arg_0], ebx",
+    "line": "mov     [esp+60h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x703713",
-    "line": "lea     ecx, [esp+14h+arg_0]",
+    "line": "lea     ecx, [esp+14h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x703721",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x70372F",
-    "line": "lea     ecx, [esp+28h+arg_0]",
+    "line": "lea     ecx, [esp+28h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x70373D",
-    "line": "mov     [esp+38h+arg_0], ebx",
+    "line": "mov     [esp+38h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x703749",
-    "line": "mov     [esp+38h+arg_0], ebx",
+    "line": "mov     [esp+38h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x70374F",
-    "line": "lea     ecx, [esp+3Ch+arg_0]",
+    "line": "lea     ecx, [esp+3Ch+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x703767",
-    "line": "lea     ecx, [esp+50h+arg_0]",
+    "line": "lea     ecx, [esp+50h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x703775",
-    "line": "mov     [esp+60h+arg_0], ebx",
+    "line": "mov     [esp+60h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x703789",
-    "line": "lea     ecx, [esp+14h+arg_0]",
+    "line": "lea     ecx, [esp+14h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x703794",
-    "line": "mov     [esp+24h+arg_0], ebx",
+    "line": "mov     [esp+24h+stream], ebx",
     "mnemonic": "mov",
     "size": 4
   },

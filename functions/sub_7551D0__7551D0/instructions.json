@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x755260",
-    "line": "lea     edi, [esp+130h+var_9C]",
+    "line": "lea     edi, [esp+130h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x75527B",
-    "line": "lea     eax, [esp+130h+var_34]",
+    "line": "lea     eax, [esp+130h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -403,43 +403,43 @@
   },
   {
     "ea": "0x75528C",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x755291",
-    "line": "lea     ecx, [esp+130h+var_9C]",
+    "line": "lea     ecx, [esp+130h+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x755298",
-    "line": "push    ecx",
+    "line": "push    ecx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x755299",
-    "line": "lea     edx, [esp+134h+var_D0]",
+    "line": "lea     edx, [esp+134h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x75529D",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x75529E",
-    "line": "lea     ecx, [esp+138h+var_34]",
+    "line": "lea     ecx, [esp+138h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7552A5",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x755318",
-    "line": "fsub    [esp+130h+var_AC]",
+    "line": "fsub    [esp+130h+out.pos.x]",
     "mnemonic": "fsub",
     "size": 7
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x755335",
-    "line": "fsub    [esp+130h+var_A8]",
+    "line": "fsub    [esp+130h+out.pos.y]",
     "mnemonic": "fsub",
     "size": 7
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x755344",
-    "line": "fsub    [esp+130h+var_A4]",
+    "line": "fsub    [esp+130h+out.pos.z]",
     "mnemonic": "fsub",
     "size": 7
   },

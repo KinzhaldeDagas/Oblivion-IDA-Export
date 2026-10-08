@@ -3,7 +3,7 @@
 0x7DB1B7: mov     ecx, [ecx+14h]
 0x7DB1BA: push    0
 0x7DB1BC: push    eax
-0x7DB1BD: call    sub_765480
+0x7DB1BD: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x7DB1C2: mov     ecx, ds:0B46658h
 0x7DB1C8: mov     edx, ds:0B4665Ch
 0x7DB1CE: mov     eax, ds:0B46660h

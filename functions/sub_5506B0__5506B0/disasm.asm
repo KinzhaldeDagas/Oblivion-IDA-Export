@@ -2,7 +2,7 @@
 0x5506B1: push    ebp
 0x5506B2: push    esi
 0x5506B3: push    edi
-0x5506B4: push    offset stru_B39C00; lpCriticalSection
+0x5506B4: push    offset unk_B39C00; lpCriticalSection
 0x5506B9: mov     edi, ecx
 0x5506BB: xor     ebp, ebp
 0x5506BD: call    dword ptr ds:0A2806Ch
@@ -65,5 +65,5 @@
 0x55076A: pop     ebx
 0x55076B: jnz     short loc_550777
 0x55076D: mov     dword ptr ds:0B39C78h, 0
-0x550777: mov     [esp+arg_0], offset stru_B39C00
+0x550777: mov     [esp+arg_0], offset unk_B39C00
 0x55077F: jmp     dword ptr ds:0A28074h

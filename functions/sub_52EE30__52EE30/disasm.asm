@@ -1,4 +1,4 @@
-0x52EE30: sub     esp, 0Ch
+0x52EE30: sub     esp, 0Ch; TESTopic::LinkForm resolves quest references from questInfoEntries/QSTI structures; this function does not consume TESTopic.unk30/XIDX as a FormID. Do not classify runtime XIDX as a linked FormID slot based only on its U32 shape.
 0x52EE33: push    edi
 0x52EE34: mov     edi, ecx
 0x52EE36: mov     eax, [edi+8]
@@ -28,7 +28,7 @@
 0x52EE85: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x52EE8A: push    0; int
 0x52EE8C: push    eax; a1
-0x52EE8D: call    TESForm_LookupByFormID
+0x52EE8D: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52EE92: add     esp, 4
 0x52EE95: push    eax; void *
 0x52EE96: call    OblivionDynamicCast
@@ -41,11 +41,11 @@
 0x52EEAC: push    0FFFFFFFFh; a2
 0x52EEAE: mov     ecx, edi; this
 0x52EEB0: mov     [esp+20h+a1], eax
-0x52EEB4: call    TESForm_GetOverrideFile
+0x52EEB4: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x52EEB9: push    eax; a2
 0x52EEBA: lea     edx, [esp+20h+a1]
 0x52EEBE: push    edx; a1
-0x52EEBF: call    TESForm_ResolveFormID
+0x52EEBF: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x52EEC4: mov     eax, [esp+24h+a1]
 0x52EEC8: add     esp, 8
 0x52EECB: push    0; int
@@ -53,7 +53,7 @@
 0x52EED2: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x52EED7: push    0; int
 0x52EED9: push    eax; a1
-0x52EEDA: call    TESForm_LookupByFormID
+0x52EEDA: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x52EEDF: add     esp, 4
 0x52EEE2: push    eax; void *
 0x52EEE3: call    OblivionDynamicCast

@@ -1,82 +1,135 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "threadpool",
+  "definition": "struct threadpool\n{\nLONG refcount;\nLONG objcount;\nBOOL shutdown;\nCRITICAL_SECTION cs;\nlist pools[3];\nRTL_CONDITION_VARIABLE update_event;\nint max_workers;\nint min_workers;\nint num_workers;\nint num_busy_workers;\nHANDLE compl_port;\nTP_POOL_STACK_INFORMATION stack_info;\n}\n",
   "id": 18374686479672048491,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refcount",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "objcount",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "shutdown",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cs",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 32
+      "size": 32,
+      "type": "CRITICAL_SECTION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pools",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 24
+      "size": 24,
+      "type": "list[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "update_event",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "RTL_CONDITION_VARIABLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "max_workers",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "min_workers",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_workers",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_busy_workers",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "compl_port",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stack_info",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 16
+      "size": 16,
+      "type": "TP_POOL_STACK_INFORMATION"
     }
   ],
   "name": "threadpool",
+  "ordinal": 9051,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 112
 }

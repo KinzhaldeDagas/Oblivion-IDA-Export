@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x782930",
+      "0x782970"
+    ]
+  ],
+  "chunks_sha256": "bb37e7c5f1991c5e172b831e25dd6f789e54835ada836ee771595688091a24f4",
+  "comment_regular": "Pass225: Unlinks NiGeometryBufferData from owning group; decrements group refcount and clears buffer+0x04.",
+  "comment_repeatable": "Pass225: Unlinks NiGeometryBufferData from owning group; decrements group refcount and clears buffer+0x04.\nDX11 authority audit 2026-10-01: InterlockedDecrement of group+4; clears buffer group pointer+4; calls group virtual+1C ReleaseChip for every buffer StreamCount+1C, then 777F40 index-buffer removal. All six observed direct callers ignore the incidental EAX result. No local lock acquisition. Verified Fallout 827D60B8 family: PPC buffer group+8 and stream count+20 vs Oblivion+4/+1C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_782930",
+  "display_name": "NiGeometryGroup_RemoveBufferData",
   "end_ea": "0x782970",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_782930",
+  "name": "NiGeometryGroup_RemoveBufferData",
   "segment": ".text",
   "sha256": "bb37e7c5f1991c5e172b831e25dd6f789e54835ada836ee771595688091a24f4",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x782930",
-  "type": "IDirect3DIndexBuffer9 *__thiscall(NiGeometryGroup *this, NiGeometryBufferData *)",
+  "total_chunk_size": 64,
+  "type": "void __thiscall(NiGeometryGroup *this, NiGeometryBufferData *buffer)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 6
 }

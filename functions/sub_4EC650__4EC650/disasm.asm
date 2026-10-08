@@ -1,4 +1,4 @@
-0x4EC650: push    0FFFFFFFFh
+0x4EC650: push    0FFFFFFFFh; Verified quad-data layout at 0x60 bytes: root pointer +0, state +8, world origin +0x18/+0x1C, terrain mesh node +0x2C, and four child-quad pointers +0x30..+0x3C. The remaining bytes are Unknown.
 0x4EC652: push    offset SEH_4EC740
 0x4EC657: mov     eax, large fs:0
 0x4EC65D: push    eax
@@ -19,7 +19,7 @@
 0x4EC680: mov     [esp+24h+var_4], edi
 0x4EC684: mov     [esi+2Ch], edi
 0x4EC687: fldz
-0x4EC689: mov     eax, [esp+24h+arg_0]
+0x4EC689: mov     eax, [esp+24h+root]
 0x4EC68D: fst     dword ptr [esi+48h]
 0x4EC690: mov     ebp, ds:0A2807Ch
 0x4EC696: fst     dword ptr [esi+4Ch]
@@ -85,3 +85,16 @@
 0x4EC733: pop     ebx
 0x4EC734: add     esp, 10h
 0x4EC737: retn    4
+0x9B6460: mov     ecx, [ebp-10h]
+0x9B6463: add     ecx, 4; void *
+0x9B6466: jmp     sub_4BDDC0
+0x9B646B: mov     ecx, [ebp-10h]
+0x9B646E: add     ecx, 2Ch ; ','; slot
+0x9B6471: jmp     NiPointerSlot_Release
+0x9B6476: mov     edx, [esp+arg_4]
+0x9B647A: lea     eax, [edx-14h]
+0x9B647D: mov     ecx, [edx-18h]
+0x9B6480: xor     ecx, eax
+0x9B6482: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6487: mov     eax, offset stru_AE1368
+0x9B648C: jmp     ___CxxFrameHandler3

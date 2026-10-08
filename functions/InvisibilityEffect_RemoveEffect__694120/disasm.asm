@@ -189,9 +189,9 @@
 0x69435D: call    eax
 0x69435F: test    al, al
 0x694361: jz      short loc_694381
-0x694363: push    edi
-0x694364: mov     ecx, offset ActorProcessManager_ptr
-0x694369: call    sub_678D30
+0x694363: push    edi; effect
+0x694364: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x694369: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x69436E: mov     ecx, [esp+28h+var_C]
 0x694372: mov     large fs:0, ecx
 0x694379: pop     ecx
@@ -222,3 +222,15 @@
 0x6943AE: pop     ebx
 0x6943AF: add     esp, 18h
 0x6943B2: retn
+0x9AFAA0: mov     eax, [ebp-10h]
+0x9AFAA3: push    eax
+0x9AFAA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAA9: pop     ecx
+0x9AFAAA: retn
+0x9AFAAB: mov     edx, [esp+arg_4]
+0x9AFAAF: lea     eax, [edx-18h]
+0x9AFAB2: mov     ecx, [edx-1Ch]
+0x9AFAB5: xor     ecx, eax
+0x9AFAB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFABC: mov     eax, offset stru_ADBFB0
+0x9AFAC1: jmp     ___CxxFrameHandler3

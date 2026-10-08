@@ -1,54 +1,52 @@
-double __usercall sub_5AE080@<st0>(char a1@<bpl>, double st5_0@<st2>)
+void __usercall sub_5AE080(double st5_0@<st2>)
 {
   Tile *OpenMenuTile; // eax
-  Tile *v4; // edi
+  Tile *v3; // edi
   int ParentMenu; // eax
-  _DWORD *v6; // esi
-  _DWORD *v7; // eax
-  double v8; // st6
-  _DWORD *v9; // eax
-  void *v10; // eax
-  double result; // st7
+  _DWORD *v5; // esi
+  _DWORD *v6; // eax
+  double v7; // st6
+  _DWORD *v8; // eax
+  void *v9; // eax
   _DWORD *a2[4]; // [esp+0h] [ebp-10h] BYREF
 
-  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x40E);
-  v4 = OpenMenuTile;
-  if ( OpenMenuTile )
+  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x40E); /*0x5ae088*/
+  v3 = OpenMenuTile; /*0x5ae08d*/
+  if ( OpenMenuTile ) /*0x5ae094*/
   {
-    ParentMenu = Tile_GetParentMenu(OpenMenuTile);
-    v6 = (_DWORD *)ParentMenu;
-    if ( ParentMenu )
+    ParentMenu = Tile_GetParentMenu(OpenMenuTile); /*0x5ae09c*/
+    v5 = (_DWORD *)ParentMenu; /*0x5ae0a1*/
+    if ( ParentMenu ) /*0x5ae0a5*/
     {
-      v7 = OblivionDynamicCast(
+      v6 = OblivionDynamicCast( /*0x5ae0bd*/
              *(void **)(ParentMenu + 0x40),
              0,
              (struct _s_RTTICompleteObjectLocator *)&Tile `RTTI Type Descriptor',
              &TileImage `RTTI Type Descriptor',
              0);
-      if ( v7 )
+      if ( v6 ) /*0x5ae0c7*/
       {
-        a2[3] = a2;
-        sub_591A80(v7, 0);
+        a2[3] = a2; /*0x5ae0d4*/
+        sub_591A80(v6, 0); /*0x5ae0d8*/
       }
-      v8 = fConstant_2;
-      Tile_SetFloat(v4, (_DWORD *)0x1772, fConstant_2);
-      sub_584740(v6, st5_0, v8);
-      v9 = (_DWORD *)Menu_GetOpenMenuTile(0x3F5);
-      if ( v9 )
+      v7 = fConstant_2; /*0x5ae0dd*/
+      Tile_SetFloat(v3, (_DWORD *)0x1772, fConstant_2); /*0x5ae0ee*/
+      Menu::StartFadeOut(v5, st5_0, v7); /*0x5ae0f5*/
+      v8 = (_DWORD *)Menu_GetOpenMenuTile(0x3F5); /*0x5ae0ff*/
+      if ( v8 ) /*0x5ae109*/
       {
-        a2[0] = 0;
-        v10 = (void *)Tile_GetParentMenu(v9);
-        if ( OblivionDynamicCast(
-               v10,
+        a2[0] = 0; /*0x5ae10b*/
+        v9 = (void *)Tile_GetParentMenu(v8); /*0x5ae11b*/
+        if ( OblivionDynamicCast( /*0x5ae121*/
+               v9,
                0,
                (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
                &PauseMenu `RTTI Type Descriptor',
                (int)a2[0]) )
         {
-          return sub_5BDA20(a1, st5_0, v8);
+          sub_5BDA20(); /*0x5ae132*/
         }
       }
     }
   }
-  return result;
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x781170",
-    "line": "sub     esp, 11Ch",
+    "line": "sub     esp, 11Ch; Oblivion-authoritative HLSL compiler path: resolves the shader file, calls D3DXCompileShaderFromFileA with entry/profile and creator flags, returns a heap copy of bytecode plus the optional constant table, and reports compiler diagnostics.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7812B4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x7812F5",
-    "line": "push    edi; Size",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7812F6",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -805,13 +805,13 @@
   },
   {
     "ea": "0x7812F9",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7812FA",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

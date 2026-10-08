@@ -1,100 +1,162 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "URL_COMPONENTSW",
+  "definition": "struct __declspec(align(8)) URL_COMPONENTSW\n{\nDWORD dwStructSize;\nLPWSTR lpszScheme;\nDWORD dwSchemeLength;\nINTERNET_SCHEME nScheme;\nLPWSTR lpszHostName;\nDWORD dwHostNameLength;\nINTERNET_PORT nPort;\nLPWSTR lpszUserName;\nDWORD dwUserNameLength;\nLPWSTR lpszPassword;\nDWORD dwPasswordLength;\nLPWSTR lpszUrlPath;\nDWORD dwUrlPathLength;\nLPWSTR lpszExtraInfo;\nDWORD dwExtraInfoLength;\n}\n",
   "id": 18374686479672032908,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwStructSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszScheme",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwSchemeLength",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nScheme",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "INTERNET_SCHEME"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszHostName",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwHostNameLength",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nPort",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 2
+      "size": 2,
+      "type": "INTERNET_PORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszUserName",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwUserNameLength",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszPassword",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwPasswordLength",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszUrlPath",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwUrlPathLength",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszExtraInfo",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwExtraInfoLength",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "URL_COMPONENTSW",
+  "ordinal": 3304,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

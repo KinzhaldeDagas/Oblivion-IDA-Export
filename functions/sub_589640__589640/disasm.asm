@@ -1,4 +1,4 @@
-0x589640: push    esi
+0x589640: push    esi; MEF PERF 2026-10-07 PASS3: Verified raw-pointer InsertBeforePosition: allocator virtual+4 obtains node; payload copied to+8 without AddRef, links set before supplied position, head/count adjusted. This differs from refcounted list helpers despite identical 12-byte link layout. Renamed without applying an owning-list type.
 0x589641: mov     esi, ecx
 0x589643: mov     eax, [esi]
 0x589645: mov     edx, [eax+4]

@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4A31A3",
-    "line": "call    ??1TESRegion@@UAE@XZ; TESRegion::~TESRegion(void)",
+    "line": "call    TESRegion_dtor; Verified: destroys the owned region-data list (which destroys each TESRegionData object) and each region-area payload/node before TESForm base destruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4A31B0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x590758",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+sequence]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x590765",
-    "line": "lea     edx, [esp+8+arg_0]",
+    "line": "lea     edx, [esp+8+sequence]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x590777",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+sequence]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x59079F",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x5907A2",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+easeInTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5907A5",
-    "line": "mov     ecx, [esi+44h]",
+    "line": "mov     ecx, [esi+44h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5907A8",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x5907B5",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x5907B8",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+easeInTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5907BB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5907BD",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x5907C7",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x5907CC",
-    "line": "fstp    [esp+14h+var_10]; float",
+    "line": "fstp    [esp+14h+easeInTime]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -307,31 +307,31 @@
   },
   {
     "ea": "0x5907D2",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5907D5",
-    "line": "push    1; int",
+    "line": "push    1; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5907D7",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5907D9",
-    "line": "push    edi; int",
+    "line": "push    edi; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5907DA",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },

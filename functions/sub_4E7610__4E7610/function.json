@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E7610",
+      "0x4E7684"
+    ]
+  ],
+  "chunks_sha256": "29104fb5d3b3e7bd8e7ca89732786e5160e38eb75fee64cbbc0d2cf5429cc702",
+  "comment_regular": "Verified graph lifecycle dispatcher: if pointArray already exists, resolve deferred cross-cell PGRI links and optionally rebuild the render graph; otherwise find the thread-safe override file, load the PathGrid graph chunks, and on successful load perform the same cross-cell resolution/render update.",
+  "comment_repeatable": "Verified graph lifecycle dispatcher: if pointArray already exists, resolve deferred cross-cell PGRI links and optionally rebuild the render graph; otherwise find the thread-safe override file, load the PathGrid graph chunks, and on successful load perform the same cross-cell resolution/render update.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E7610",
+  "display_name": "TESPathGrid_LoadOrResolveGraph",
   "end_ea": "0x4E7684",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E7610",
+  "name": "TESPathGrid_LoadOrResolveGraph",
   "segment": ".text",
   "sha256": "29104fb5d3b3e7bd8e7ca89732786e5160e38eb75fee64cbbc0d2cf5429cc702",
   "size": 116,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E7610",
-  "type": "char __thiscall(int *this)",
+  "total_chunk_size": 116,
+  "type": "bool __thiscall(TESPathGrid *this)",
   "xrefs_from_count": 58,
   "xrefs_to_count": 4
 }

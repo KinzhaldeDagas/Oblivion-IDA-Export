@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7856B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion 1.2.0.416: vector<stVec>::resize(newSize,value), with the 24-byte value passed by value; grows through insert-fill or shrinks through checked erase.",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x785700",
-    "line": "mov     ebx, [esp+28h+arg_0]",
+    "line": "mov     ebx, [esp+28h+newSize]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x78572E",
-    "line": "lea     eax, [esp+28h+arg_4]",
+    "line": "lea     eax, [esp+28h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x785732",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x785735",
-    "line": "push    ebx",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x785737",
-    "line": "push    esi",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785738",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78573A",
-    "line": "call    sub_785050",
+    "line": "call    OB_stVector_stVec_InsertFill_010201A0; Oblivion 1.2.0.416: vector<stVec>::insert(position,count,value); preserves aliasing with a local 24-byte copy, uses 1.5x growth, and handles in-place or reallocated insertion. False FUNC_NORET cleared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x785781",
-    "line": "mov     [esp+28h+var_10], ebp",
+    "line": "mov     [esp+28h+result.current], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x785792",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -523,37 +523,37 @@
   },
   {
     "ea": "0x785794",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x785795",
-    "line": "lea     edx, [esp+38h+var_14]",
+    "line": "lea     edx, [esp+38h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x785799",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78579A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78579C",
-    "line": "call    sub_784AC0",
+    "line": "call    OB_stVector24_EraseRange_010201A0; Oblivion 1.2.0.416: checked erase(first,last) for 0x18-byte records; compacts the tail, destroys remnants, updates end, and returns an iterator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7857A1",
-    "line": "lea     ecx, [esp+28h+arg_4]; void *",
+    "line": "lea     ecx, [esp+28h+value]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x7857AD",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -622,5 +622,59 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB030",
+    "line": "lea     ecx, [ebp+8]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB033",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB038",
+    "line": "mov     edx, [esp+value.data]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB03C",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB03F",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB042",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB044",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB049",
+    "line": "mov     eax, offset stru_AF3708",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB04E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

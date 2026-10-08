@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 17,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 23,
+  "chunks": [
+    [
+      "0x4E7DE0",
+      "0x4E7DE4"
+    ]
+  ],
+  "chunks_sha256": "dadecdeeff0b9454fd9dc08c558a9148187b2b1bec017fe8b92430570b86012a",
+  "comment_regular": "Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
+  "comment_repeatable": "Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4E7DE0",
+  "display_name": "PathGraphNode_GetConnections",
   "end_ea": "0x4E7DE4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E7DE0",
+  "name": "PathGraphNode_GetConnections",
   "segment": ".text",
   "sha256": "dadecdeeff0b9454fd9dc08c558a9148187b2b1bec017fe8b92430570b86012a",
   "size": 4,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E7DE0",
-  "type": "char *__thiscall(char *this)",
+  "total_chunk_size": 4,
+  "type": "BSSimpleList_VoidPtr *__thiscall(void *this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 23
 }

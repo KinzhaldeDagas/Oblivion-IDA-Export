@@ -30,7 +30,7 @@
 0x5195A2: call    TESTexture_destr
 0x5195A7: mov     eax, [esi+1Ch]
 0x5195AA: push    eax
-0x5195AB: call    FormHeapFree
+0x5195AB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5195B0: xor     eax, eax
 0x5195B2: add     esp, 4
 0x5195B5: mov     ecx, esi; this
@@ -47,3 +47,39 @@
 0x5195DD: pop     ebx
 0x5195DE: add     esp, 1Ch
 0x5195E1: retn
+0x9B75D0: mov     ecx, [ebp-10h]; this
+0x9B75D3: jmp     TESForm_destr
+0x9B75D8: cmp     dword ptr [ebp-10h], 0
+0x9B75DC: jz      loc_9B75F0
+0x9B75E2: mov     eax, [ebp-10h]
+0x9B75E5: add     eax, 18h
+0x9B75E8: mov     [ebp-14h], eax
+0x9B75EB: jmp     loc_9B75F7
+0x9B75F0: mov     dword ptr [ebp-14h], 0
+0x9B75F7: mov     ecx, [ebp-14h]
+0x9B75FA: jmp     TESFullName_Initialize
+0x9B75FF: cmp     dword ptr [ebp-10h], 0
+0x9B7603: jz      loc_9B7617
+0x9B7609: mov     eax, [ebp-10h]
+0x9B760C: add     eax, 24h ; '$'
+0x9B760F: mov     [ebp-18h], eax
+0x9B7612: jmp     loc_9B761E
+0x9B7617: mov     dword ptr [ebp-18h], 0
+0x9B761E: mov     ecx, [ebp-18h]; void *
+0x9B7621: jmp     TESTexture_destr
+0x9B7626: cmp     dword ptr [ebp-10h], 0
+0x9B762A: jz      loc_9B763E
+0x9B7630: mov     eax, [ebp-10h]
+0x9B7633: add     eax, 38h ; '8'
+0x9B7636: mov     [ebp-1Ch], eax
+0x9B7639: jmp     loc_9B7645
+0x9B763E: mov     dword ptr [ebp-1Ch], 0
+0x9B7645: mov     ecx, [ebp-1Ch]
+0x9B7648: jmp     TESSpellList_destr?
+0x9B764D: mov     edx, [esp+arg_4]
+0x9B7651: lea     eax, [edx-1Ch]
+0x9B7654: mov     ecx, [edx-20h]
+0x9B7657: xor     ecx, eax
+0x9B7659: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B765E: mov     eax, offset stru_AE2164
+0x9B7663: jmp     ___CxxFrameHandler3

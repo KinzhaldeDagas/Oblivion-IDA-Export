@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x651882",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,25 +85,25 @@
   },
   {
     "ea": "0x6518A1",
-    "line": "push    ebp",
+    "line": "push    ebp; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6518A2",
-    "line": "mov     ebp, [esp+14h+arg_0]",
+    "line": "mov     ebp, [esp+14h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6518A6",
-    "line": "push    ebp",
+    "line": "push    ebp; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6518A7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6518AB",
-    "line": "call    sub_658940",
+    "line": "call    MiddleLowProcess_Revert",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x65192E",
-    "line": "mov     ecx, [esi+0C0h]",
+    "line": "mov     ecx, [esi+0C0h]; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x651938",
-    "line": "call    sub_5660A0",
+    "line": "call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,19 +415,19 @@
   },
   {
     "ea": "0x651947",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x65194D",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x65194E",
-    "line": "call    sub_45C7A0",
+    "line": "call    TESSaveLoadGame_DeleteForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x651986",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x65198B",
-    "line": "call    sub_473AA0",
+    "line": "call    ActorAnimData_ResetAllSequences; Whole ActorAnimData sequence reset. Clears all active slots, deactivates current/controller sequences, restores current and queued key sentinels, resets root motion and idle ownership, clears controlled-block links, then runs the controller-sequence reset/rebind phase. Not safe as scoped replacement cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x651998",
-    "line": "call    ActiveEffect_Base_PreLoadAEList",
+    "line": "call    ActiveEffect_Base_PreLoadAEList; Verified pre-load lifecycle hook: before list restoration, iterates current ActiveEffects and calls vtable slot +0x20 with the supplied load context. This is the preLoad slot in ActiveEffectVtbl; LockEffect and OpenEffect use the shared no-op.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x6519DB",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x651A93",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x651AA2",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x651AAE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

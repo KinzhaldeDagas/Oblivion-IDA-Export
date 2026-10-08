@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x776D80",
-    "line": "push    esi",
+    "line": "push    esi; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,25 +31,25 @@
   },
   {
     "ea": "0x776D8C",
-    "line": "push    eax; Size",
+    "line": "push    eax; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D8D",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D8E",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x776D8F",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

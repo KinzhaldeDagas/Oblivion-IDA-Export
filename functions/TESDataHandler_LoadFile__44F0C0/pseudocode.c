@@ -2,142 +2,144 @@ signed int __userpurge TESDataHandler_LoadFile@<eax>(
         double a1@<st2>,
         double a2@<st1>,
         TESWorldSpace **a3@<ecx>,
-        double a4@<st0>,
-        Data *a5,
-        char a6)
+        Data *file,
+        bool firstFileLowFormFilter)
 {
   TESWorldSpace **v6; // edi
   char Record; // bl
-  int formID; // edi
+  UInt32 formID; // edi
   int v9; // eax
-  TESForm *v10; // eax
-  TESForm *v11; // edi
-  const char *v12; // eax
-  int v13; // eax
-  double v14; // st7
-  int v15; // eax
-  float v17; // [esp+8h] [ebp-130h]
-  char v18; // [esp+1Fh] [ebp-119h]
-  int v19; // [esp+20h] [ebp-118h]
-  int v20; // [esp+24h] [ebp-114h]
-  int v21; // [esp+28h] [ebp-110h]
-  char v23[260]; // [esp+30h] [ebp-108h] BYREF
+  int v10; // eax
+  TESForm *v11; // eax
+  TESForm *v12; // edi
+  const char *v13; // eax
+  int v14; // eax
+  double v15; // st7
+  int v16; // eax
+  float v18; // [esp+8h] [ebp-130h]
+  char v19; // [esp+1Fh] [ebp-119h]
+  int v20; // [esp+20h] [ebp-118h]
+  int v21; // [esp+24h] [ebp-114h]
+  int v22; // [esp+28h] [ebp-110h]
+  char v24[260]; // [esp+30h] [ebp-108h] BYREF
 
-  v6 = a3;
-  if ( !TESFile_OpenBSFileWrapper__((int)a5, 0, 0) )
+  v6 = a3; /*0x44f0e1*/
+  if ( !TESFile_OpenBSFileWrapper__(file, 0, 0) )
     PrintError("DataHandler: internal error");
-  v20 = 1;
-  v21 = 0;
-  dword_B33A9C = 0;
-  dword_B33AA0 = 0;
-  dword_B33AA4 = 0;
-  while ( 1 )
+  v21 = 1; /*0x44f101*/
+  v22 = 0; /*0x44f109*/
+  unk_B33A9C = 0; /*0x44f10d*/
+  unk_B33AA0 = 0; /*0x44f113*/
+  unk_B33AA4 = 0; /*0x44f119*/
+  while ( 1 ) /*0x44f127*/
   {
-    v18 = 1;
-    Record = 1;
-    if ( TESFile_GetRecordType(a5) == 2 )
+    v19 = 1; /*0x44f127*/
+    Record = 1; /*0x44f12c*/
+    if ( TESFile_GetRecordType(file) == 2 ) /*0x44f136*/
     {
-      if ( !sub_448C60(a5, (int)&a5->currentRecord) )
+      if ( !sub_448C60(file, (int)&file->currentRecord) ) /*0x44f142*/
       {
-        v18 = 0;
-        Record = TESFile::NextGroup(a5) != 0;
+        v19 = 0; /*0x44f151*/
+        Record = TESFile::NextGroup(file) != 0; /*0x44f162*/
       }
     }
-    else if ( TESFile_GetRecordType(a5) == 0x44 )
+    else if ( TESFile_GetRecordType(file) == 0x44 ) /*0x44f173*/
     {
-      formID = a5->currentRecord.formID;
-      if ( formID == 0xFFFFFFFF )
+      formID = file->currentRecord.formID; /*0x44f179*/
+      if ( formID == 0xFFFFFFFF ) /*0x44f182*/
       {
-        v18 = 0;
-        Record = 0;
+        v19 = 0; /*0x44f184*/
+        Record = 0; /*0x44f189*/
       }
-      else if ( formID == 0xFFFFFFFE )
+      else if ( formID == 0xFFFFFFFE ) /*0x44f193*/
       {
-        sub_738500(a5->currentRecordOffset + 0x14, a5->currentRecord.chunkInfo.length);
-        v18 = 0;
-        Record = 0;
+        sub_738500(file->currentRecordOffset + 0x14, file->currentRecord.chunkInfo.length); /*0x44f1a8*/
+        v19 = 0; /*0x44f1ad*/
+        Record = 0; /*0x44f1b2*/
       }
-      else if ( dword_B33AA4 )
+      else if ( unk_B33AA4 ) /*0x44f1b9*/
       {
-        *(_DWORD *)(dword_B33AA4 + 0x34) = formID;
+        *(_DWORD *)(unk_B33AA4 + 0x34) = formID; /*0x44f1c2*/
       }
-      else if ( dword_B33AA0 )
+      else if ( unk_B33AA0 ) /*0x44f1ca*/
       {
-        sub_4EF030(dword_B33AA0, formID - a5->currentRecordOffset);
+        sub_4EF030((TESWorldSpace *)unk_B33AA0, formID - file->currentRecordOffset); /*0x44f1db*/
       }
-      else if ( dword_B33A9C )
+      else if ( unk_B33A9C ) /*0x44f1e5*/
       {
-        if ( TESObjectCELL_IsInterior((TESObjectCELL *)dword_B33A9C) )
-          sub_4C9D20((int)dword_B33A9C, formID);
-      }
-    }
-    else if ( TESDataHandler_LoadFormRecord(v6, a1, a2, a4, a5, a6) )
-    {
-      if ( SaveLoad_CurrentSavegame && (SaveLoad_CurrentSavegame->flags & 0x1000) != 0 )
-      {
-        v9 = dword_B33AD8 + 1;
-        dword_B33AD8 = v9;
-        if ( !(_BYTE)v9 )
-          sub_4523A0(0, a1, a2, 1.0, 0, 1.0);
-        v10 = TESForm_LookupByFormID(a5->currentRecord.formID);
-        if ( v10 )
-          sub_461FA0(SaveLoad_CurrentSavegame, (int)v10);
-      }
-      else
-      {
-        v11 = TESForm_LookupByFormID(a5->currentRecord.formID);
-        if ( v11 )
-        {
-          switch ( v11->member.type )
-          {
-            case kFormType_NPC:
-            case kFormType_Creature:
-            case kFormType_REFR:
-            case kFormType_ACHR:
-            case kFormType_ACRE:
-              break;
-            default:
-              v12 = v11->vtbl->GetEditorName(v11);
-              if ( v12 )
-              {
-                if ( strlen(v12) )
-                  sub_412D30(&off_B06164, (int)v12, v11);
-              }
-              break;
-          }
-        }
+        if ( TESObjectCELL_IsInterior((TESObjectCELL *)unk_B33A9C) ) /*0x44f1f3*/
+          sub_4C9D20((int)unk_B33A9C, formID); /*0x44f207*/
       }
     }
     else
     {
-      v20 = 0;
+      LOBYTE(v9) = TESDataHandler_LoadFormRecord(v6, file, firstFileLowFormFilter); /*0x44f21c*/
+      if ( v9 ) /*0x44f223*/
+      {
+        if ( g_TESSaveLoadGame && (g_TESSaveLoadGame->flags & 0x1000) != 0 ) /*0x44f241*/
+        {
+          v10 = unk_B33AD8 + 1; /*0x44f248*/
+          unk_B33AD8 = v10; /*0x44f24d*/
+          if ( !(_BYTE)v10 ) /*0x44f252*/
+            sub_4523A0(0, a1, a2, 1.0, 0, 1.0); /*0x44f25b*/
+          v11 = TESForm_LookupByFormID(file->currentRecord.formID); /*0x44f267*/
+          if ( v11 ) /*0x44f271*/
+            sub_461FA0((unsigned int **)g_TESSaveLoadGame, (int)v11); /*0x44f27a*/
+        }
+        else
+        {
+          v12 = TESForm_LookupByFormID(file->currentRecord.formID); /*0x44f28d*/
+          if ( v12 ) /*0x44f294*/
+          {
+            switch ( v12->member.type ) /*0x44f2a9*/
+            {
+              case kFormType_NPC: /*0x44f2a9*/
+              case kFormType_Creature: /*0x44f2a9*/
+              case kFormType_REFR: /*0x44f2a9*/
+              case kFormType_ACHR: /*0x44f2a9*/
+              case kFormType_ACRE: /*0x44f2a9*/
+                break;
+              default:
+                v13 = v12->vtbl->GetEditorName(v12); /*0x44f2ba*/
+                if ( v13 ) /*0x44f2be*/
+                {
+                  if ( strlen(v13) ) /*0x44f2c2*/
+                    sub_412D30(&off_B06164, (int)v13, v12); /*0x44f2d9*/
+                }
+                break; /*0x44f2d9*/
+            }
+          }
+        }
+      }
+      else
+      {
+        v21 = 0; /*0x44f225*/
+      }
     }
-    v13 = dword_B33A94 + 1;
-    v14 = (double)v13;
-    dword_B33A94 = v13;
-    if ( v13 < 0 )
-      v14 = v14 + flt_A2FC78;
-    a2 = (double)dword_B33A90;
-    if ( dword_B33A90 < 0 )
-      a2 = a2 + flt_A2FC78;
-    a4 = v14 / a2 * fCostant_100;
-    v15 = Double_To_SInt32(a4);
-    v19 = v15;
-    if ( v15 != v21 )
+    v14 = unk_B33A94 + 1; /*0x44f2e0*/
+    v15 = (double)v14; /*0x44f2ee*/
+    unk_B33A94 = v14; /*0x44f2f2*/
+    if ( v14 < 0 ) /*0x44f2f7*/
+      v15 = v15 + flt_A2FC78; /*0x44f2f9*/
+    a2 = (double)unk_B33A90; /*0x44f305*/
+    if ( unk_B33A90 < 0 ) /*0x44f30d*/
+      a2 = a2 + flt_A2FC78; /*0x44f30f*/
+    v16 = Double_To_SInt32(v15 / a2 * fCostant_100); /*0x44f31d*/
+    v20 = v16; /*0x44f326*/
+    if ( v16 != v22 ) /*0x44f32a*/
     {
-      v21 = v15;
-      _sprintf(v23, "Loading Files %d%% (%s)", v15, a5->name);
-      a4 = (double)v19;
-      v17 = a4;
-      sub_57B950(0, a1, a2, a4, 0, v17);
+      v22 = v16; /*0x44f331*/
+      _sprintf(v24, "Loading Files %d%% (%s)", v16, file->name); /*0x44f33f*/
+      v18 = (float)v20; /*0x44f34b*/
+      sub_57B950(0, a1, a2, 0, v18); /*0x44f34f*/
     }
-    if ( v18 )
-      Record = TESFile_NextRecordEx(a5, 1);
-    if ( !Record )
-      break;
-    v6 = a3;
+    if ( v19 ) /*0x44f35c*/
+      Record = TESFile_NextRecordEx(file, 1); /*0x44f367*/
+    if ( !Record ) /*0x44f36b*/
+      break; /*0x44f36b*/
+    v6 = a3; /*0x44f121*/
   }
-  if ( !TESFile_Close(a5) )
+  if ( !TESFile_Close(file) )
     PrintError("DataHandler: internal error");
-  return v20;
+  return v21; /*0x44f37a*/
 }

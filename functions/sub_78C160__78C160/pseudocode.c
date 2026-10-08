@@ -1,22 +1,25 @@
-void __thiscall sub_78C160(int this)
+// CSpeedTreeRT::DeleteBranchGeometry. After Compute, deletes branch geometry only for non-instance trees when the shared instance refcount is exactly one.
+void __thiscall CSpeedTreeRT__DeleteBranchGeometry(OB_CSpeedTreeRT_010201A0 *this)
 {
   bool v2; // zf
-  unsigned int v3; // edi
-  _DWORD v4[23]; // [esp+0h] [ebp-5Ch] BYREF
+  OB_CIndexedGeometry_010201A0 *branchGeometry; // edi
+  int v4; // [esp+0h] [ebp-5Ch] BYREF
+  int *v5; // [esp+4Ch] [ebp-10h]
+  int v6; // [esp+58h] [ebp-4h]
 
-  v4[0x13] = v4;
-  v2 = *(_BYTE *)(this + 0x45) == 0;
-  v4[0x16] = 0;
-  if ( !v2 )
+  v5 = &v4; /*0x78c188*/
+  v2 = this->treeComputedFlag == 0; /*0x78c18f*/
+  v6 = 0; /*0x78c192*/
+  if ( !v2 ) /*0x78c195*/
   {
-    v3 = *(_DWORD *)(this + 4);
-    if ( v3 )
+    branchGeometry = this->branchGeometry; /*0x78c197*/
+    if ( branchGeometry ) /*0x78c19c*/
     {
-      if ( !*(_DWORD *)(this + 0x34) && **(_DWORD **)(this + 0x30) == 1 )
+      if ( !this->instanceData && *this->sharedInstanceRefcount == 1 ) /*0x78c1a9*/
       {
-        sub_797270(*(_DWORD **)(this + 4));
-        FormHeapFree(v3);
-        *(_DWORD *)(this + 4) = 0;
+        OB_CIndexedGeometry_dtor_010201A0(this->branchGeometry); /*0x78c1ad*/
+        FormHeapFree((unsigned int)branchGeometry); /*0x78c1b3*/
+        this->branchGeometry = 0; /*0x78c1bb*/
       }
     }
   }

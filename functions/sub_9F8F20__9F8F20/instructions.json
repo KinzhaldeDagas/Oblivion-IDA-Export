@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F8F20",
-    "line": "fld     ds:flt_A65258",
+    "line": "fld     ds:flt_A65258; Verified GameSettingFloat dynamic initializer: registers fTreeFarDistanceBase with default 16384.0 and registers its destructor via atexit.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9F8F2F",
-    "line": "mov     ecx, offset flt_B39E10",
+    "line": "mov     ecx, offset fTreeFarDistanceBase",
     "mnemonic": "mov",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x9F8F39",
-    "line": "push    offset sub_A23570; void (__cdecl *)()",
+    "line": "push    offset GameSetting_fTreeFarDistanceBase_atexit; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },

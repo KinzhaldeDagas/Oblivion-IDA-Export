@@ -18,7 +18,6 @@
 0x6CCD34: test    al, al
 0x6CCD36: jbe     short loc_6CCD68
 0x6CCD38: jmp     short loc_6CCD40
-0x6CCD3A: align 10h
 0x6CCD40: mov     ecx, [edi+14h]
 0x6CCD43: movzx   eax, bl
 0x6CCD46: lea     eax, [eax+eax*2]

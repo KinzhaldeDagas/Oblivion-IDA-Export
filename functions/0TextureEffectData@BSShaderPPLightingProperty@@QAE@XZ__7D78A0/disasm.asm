@@ -1,4 +1,4 @@
-0x7D78A0: push    0FFFFFFFFh
+0x7D78A0: push    0FFFFFFFFh; Verified (Oblivion): constructor zeroes the four OblivionColorA groups from +0x0C through +0x48 and the U/V offsets, edge exponent and bound diameter; it initializes blend/Z-test parameters to 2,1,1,3. The 0x6C allocation and this field sequence define OblivionTextureEffectData.
 0x7D78A2: push    offset ??0TextureEffectData@BSShaderPPLightingProperty@@QAE@XZ_SEH
 0x7D78A7: mov     eax, large fs:0
 0x7D78AD: push    eax
@@ -14,7 +14,7 @@
 0x7D78C4: mov     esi, ecx
 0x7D78C6: mov     [esp+20h+var_10], esi
 0x7D78CA: xor     ebp, ebp
-0x7D78CC: push    offset NiRefObject_objcount; lpAddend
+0x7D78CC: push    0B3FD64h; lpAddend
 0x7D78D1: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x7D78D7: mov     [esi+4], ebp
 0x7D78DA: call    dword ptr ds:0A28078h
@@ -90,3 +90,15 @@
 0x7D79B6: pop     ebp
 0x7D79B7: add     esp, 10h
 0x7D79BA: retn
+0x9CA7B0: mov     ecx, [ebp-10h]
+0x9CA7B3: jmp     NiRefObject_destr
+0x9CA7B8: mov     ecx, [ebp-10h]
+0x9CA7BB: add     ecx, 8; slot
+0x9CA7BE: jmp     NiPointerSlot_Release
+0x9CA7C3: mov     edx, [esp+arg_4]
+0x9CA7C7: lea     eax, [edx-10h]
+0x9CA7CA: mov     ecx, [edx-14h]
+0x9CA7CD: xor     ecx, eax
+0x9CA7CF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7D4: mov     eax, offset stru_AF2E60
+0x9CA7D9: jmp     ___CxxFrameHandler3

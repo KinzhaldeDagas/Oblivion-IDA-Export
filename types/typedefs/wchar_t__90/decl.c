@@ -1,1 +1,1 @@
-wchar_t
+typedef unsigned __int16 wchar_t;

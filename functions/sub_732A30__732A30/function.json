@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_732A30",
+  "chunks": [
+    [
+      "0x732A30",
+      "0x732AE3"
+    ],
+    [
+      "0x9CA8F0",
+      "0x9CA913"
+    ]
+  ],
+  "chunks_sha256": "aa79c8d941d1cfa7b18a894b0ee6eb93585100ea8a48008246b39b3dabbd42b1",
+  "comment_regular": "Verified NiLinesData constructor: initializes vertex/color buffers through NiGeometryData, assigns NiLinesData vtable, and either stores supplied line-flag bytes or allocates default alternating endpoint flags.",
+  "comment_repeatable": "Verified NiLinesData constructor: initializes vertex/color buffers through NiGeometryData, assigns NiLinesData vtable, and either stores supplied line-flag bytes or allocates default alternating endpoint flags.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiLinesData_ctor",
   "end_ea": "0x732AE3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_732A30",
+  "name": "NiLinesData_ctor",
   "segment": ".text",
   "sha256": "2b5d00c1051867e74b7d6fc0fd8549dbeac7eb6025b3f7f5e8a0c49d9ed60a6f",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x732A30",
-  "type": "NiGeometryData *__thiscall(NiGeometryData *this, unsigned __int16, NiPoint3 *, NiColorAlpha *, void *, char, __int16, int)",
-  "xrefs_from_count": 70,
+  "total_chunk_size": 214,
+  "type": "NiGeometryData *__thiscall(NiGeometryData *this, UInt16 vertexCount, NiPoint3 *vertices, NiColorAlpha *colors, void *arg5, char arg6, __int16 arg7, int lineFlags)",
+  "xrefs_from_count": 81,
   "xrefs_to_count": 1
 }

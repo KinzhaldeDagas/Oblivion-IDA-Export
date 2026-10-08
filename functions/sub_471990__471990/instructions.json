@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x471990",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; CustomAnimSupport decode: removes native power attack groups 0x16..0x1A across movement/weapon key variants before dynamic rebuild.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -48,12 +48,6 @@
     "size": 2
   },
   {
-    "ea": "0x4719A3",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x4719B0",
     "line": "mov     [esp+20h+var_C], 0",
     "mnemonic": "mov",
@@ -66,12 +60,6 @@
     "size": 2
   },
   {
-    "ea": "0x4719BA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4719C0",
     "line": "mov     [esp+20h+var_10], 16h",
     "mnemonic": "mov",
@@ -82,12 +70,6 @@
     "line": "jmp     short loc_4719D0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4719CA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x4719D0",
@@ -127,7 +109,7 @@
   },
   {
     "ea": "0x4719DF",
-    "line": "call    sub_51A9B0",
+    "line": "call    AnimKey_Make; CustomAnimSupport decode: encoded anim key = group_id | (weapon_modifier << 8) | (movement_prefix << 12).",
     "mnemonic": "call",
     "size": 5
   },
@@ -208,12 +190,6 @@
     "line": "jmp     short loc_471A10",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x471A0A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x471A10",
@@ -415,7 +391,7 @@
   },
   {
     "ea": "0x471A68",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -427,19 +403,19 @@
   },
   {
     "ea": "0x471A6B",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x471A6E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x471A70",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +463,7 @@
   },
   {
     "ea": "0x471A8D",
-    "line": "call    sub_6C4480",
+    "line": "call    NiControllerManager_DeactivateTransitionSources; Walks the controller manager's active sequence list and deactivates every sequence in native state 4 (transition source) using the caller-supplied ease-out time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +475,7 @@
   },
   {
     "ea": "0x471A94",
-    "line": "push    0; char",
+    "line": "push    0; transition",
     "mnemonic": "push",
     "size": 2
   },
@@ -511,19 +487,19 @@
   },
   {
     "ea": "0x471A97",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x471A9A",
-    "line": "mov     ecx, [ebx+0ACh]",
+    "line": "mov     ecx, [ebx+0ACh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x471AA0",
-    "line": "call    sub_6C9CB0",
+    "line": "call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +547,7 @@
   },
   {
     "ea": "0x471ACA",
-    "line": "call    sub_4359D0",
+    "line": "call    ModelLoader_FindKFModelBySequence; Finds a loaded KF model by BSAnimGroupSequence/source sequence. Used when mapping runtime sequence objects back to model-loader records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +595,7 @@
   },
   {
     "ea": "0x471AE4",
-    "line": "call    sub_4708B0",
+    "line": "call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +625,7 @@
   },
   {
     "ea": "0x471AF5",
-    "line": "call    sub_6C4A10",
+    "line": "call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x68EA50",
+      "0x68EA87"
+    ],
+    [
+      "0x9C54F0",
+      "0x9C5576"
+    ]
+  ],
+  "chunks_sha256": "27440c722864cbd373a2755c0d16508aee7958b46d4c3b421d3ccf47171c9f3b",
+  "comment_regular": "Verified (Oblivion): reads EffectItem.setting.effectCode; SEFF creates ScriptEffect directly, otherwise looks up the ActiveEffectFactoryCode map and calls its factory. If no factory is registered, it uses the built-in switch fallback.",
+  "comment_repeatable": "Verified (Oblivion): reads EffectItem.setting.effectCode; SEFF creates ScriptEffect directly, otherwise looks up the ActiveEffectFactoryCode map and calls its factory. If no factory is registered, it uses the built-in switch fallback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "ActiveEffect_Base_CreateDynamic",
   "end_ea": "0x68EA87",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_CreateDynamic",
   "segment": ".text",
   "sha256": "ebc4b2589ebfd9550d8625b8f95abb4bfe9c896d26c3313e90723b715d2f6f38",
   "size": 55,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68EA50",
-  "type": "int __cdecl(int, int, int *, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int (__cdecl *)(int, int), int)",
-  "xrefs_from_count": 17,
+  "total_chunk_size": 189,
+  "type": "ActiveEffect *__cdecl(MagicCaster *caster, MagicItem *magicItem, EffectItem *effectItem, TESBoundObject *sourceObject)",
+  "xrefs_from_count": 73,
   "xrefs_to_count": 2
 }

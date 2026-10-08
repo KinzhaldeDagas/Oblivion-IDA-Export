@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4610F0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Builds embedded ESS screenshot NiSourceTexture and formatted name/level/location/days/date. Optional playtime output is HH:MM:SS.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x46110A",
-    "line": "call    Savegame_Rename",
+    "line": "call    TESSaveLoadGame_ResolveSaveFile",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x46112C",
-    "line": "call    sub_45DBC0",
+    "line": "call    TESSaveLoadGame_OpenAndValidateSave",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x4611E8",
-    "line": "call    sub_45D5F0",
+    "line": "call    TESSaveLoadGame_ReadSaveHeader",
     "mnemonic": "call",
     "size": 5
   },

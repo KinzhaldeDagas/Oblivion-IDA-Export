@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78E6E0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Oblivion compiler-lowered stVec::operator+: initializes the hidden return object with min(lhs.size,rhs.size), then adds components over lhs.size, matching the shipped RT4.1 source semantics (which assume compatible sizes).",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x78E6E4",
-    "line": "mov     ebx, [esp+10h+arg_4]",
+    "line": "mov     ebx, [esp+10h+rhs]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x78E6FC",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x78E72D",
-    "line": "sub     eax, [esp+1Ch+arg_0]",
+    "line": "sub     eax, [esp+1Ch+result]",
     "mnemonic": "sub",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x78E784",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

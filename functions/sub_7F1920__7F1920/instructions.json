@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F1920",
-    "line": "push    esi",
+    "line": "push    esi; STLSPData dtor: frees shared leaf shader data buffer at +0x08.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7F1928",
-    "line": "mov     dword ptr [esi], offset ??_7STLSPData@@6B@; const STLSPData::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7STLSPData@@6B@;",
     "mnemonic": "mov",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7F1931",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7F1939",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7F194A",
-    "line": "test    [esp+4+arg_0], 1",
+    "line": "test    [esp+4+freeMemory], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7F1952",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

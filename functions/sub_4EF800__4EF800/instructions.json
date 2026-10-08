@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x4EF94D",
-    "line": "push    edi; int",
+    "line": "push    edi; worldspace",
     "mnemonic": "push",
     "size": 1
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x4EF95C",
-    "line": "push    6; int",
+    "line": "push    6; dataID",
     "mnemonic": "push",
     "size": 2
   },
@@ -685,13 +685,13 @@
   },
   {
     "ea": "0x4EF96D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EF96F",
-    "line": "call    sub_4A67B0",
+    "line": "call    TESRegionList_SelectDataAtWorldPosition; Verified: converts world XYZ input to a 2D point and delegates region-data selection for that location.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x4EFBEC",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x4EFC57",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x4EFDCB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x4EFDEA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x4EFE07",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2971,7 +2971,7 @@
   },
   {
     "ea": "0x4EFE20",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

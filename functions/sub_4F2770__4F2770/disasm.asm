@@ -51,19 +51,19 @@
 0x4F2810: jb      short loc_4F2800
 0x4F2812: xor     eax, eax
 0x4F2814: cmp     eax, ebx
-0x4F2816: mov     [esp+3Ch+var_24], eax
+0x4F2816: mov     [esp+3Ch+position], eax
 0x4F281A: jz      short loc_4F285C
 0x4F281C: lea     esp, [esp+0]
-0x4F2820: lea     eax, [esp+3Ch+var_28]
-0x4F2824: push    eax
-0x4F2825: lea     ecx, [esp+40h+var_20]
-0x4F2829: push    ecx
-0x4F282A: mov     ecx, [edi+30h]
-0x4F282D: lea     edx, [esp+44h+var_24]
-0x4F2831: push    edx
-0x4F2832: mov     [esp+48h+var_28], ebx
-0x4F2836: call    sub_452600
-0x4F283B: mov     ecx, [esp+3Ch+var_28]
+0x4F2820: lea     eax, [esp+3Ch+valueOut]
+0x4F2824: push    eax; valueOut
+0x4F2825: lea     ecx, [esp+40h+keyOut]
+0x4F2829: push    ecx; keyOut
+0x4F282A: mov     ecx, [edi+30h]; self
+0x4F282D: lea     edx, [esp+44h+position]
+0x4F2831: push    edx; position
+0x4F2832: mov     [esp+48h+valueOut], ebx
+0x4F2836: call    NiTMap_U32Pointer_GetNextEntry
+0x4F283B: mov     ecx, [esp+3Ch+valueOut]
 0x4F283F: cmp     ecx, ebx
 0x4F2841: jz      short loc_4F2856
 0x4F2843: lea     eax, [esp+3Ch+var_1C]
@@ -72,7 +72,7 @@
 0x4F284D: test    al, al
 0x4F284F: jz      short loc_4F2856
 0x4F2851: mov     [esp+3Ch+var_29], 1
-0x4F2856: cmp     [esp+3Ch+var_24], ebx
+0x4F2856: cmp     [esp+3Ch+position], ebx
 0x4F285A: jnz     short loc_4F2820
 0x4F285C: mov     ecx, [edi+34h]
 0x4F285F: cmp     ecx, ebx
@@ -100,3 +100,12 @@
 0x4F28A5: retn
 0x4F28A6: mov     eax, [edx+eax*4]
 0x4F28A9: jmp     loc_4F2814
+0x9B6920: lea     ecx, [ebp-1Ch]
+0x9B6923: jmp     ??1?$NiTPointerMap@PAVTESObjectCELL@@_N@@UAE@XZ; NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(void)
+0x9B6928: mov     edx, [esp+arg_4]
+0x9B692C: lea     eax, [edx-2Ch]
+0x9B692F: mov     ecx, [edx-30h]
+0x9B6932: xor     ecx, eax
+0x9B6934: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6939: mov     eax, offset stru_AE170C
+0x9B693E: jmp     ___CxxFrameHandler3

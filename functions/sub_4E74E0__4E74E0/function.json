@@ -1,19 +1,32 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E74E0",
+      "0x4E7610"
+    ]
+  ],
+  "chunks_sha256": "676c94c402b8d6af27d572b34f9d581c21a7c90f427487ad6864e733305343fc",
+  "comment_regular": "Verified TESPathGrid form-type 0x34 loader. It reads DATA pointCount, and on the active file or alternate graph-loading mode delegates remaining PGRI/PGRL/PGRP/PGRR chunks to TESPathGrid_LoadSerializedGraphChunks. The PathGrid is a separate form record associated with its parent cell.",
+  "comment_repeatable": "Verified TESPathGrid form-type 0x34 loader. It reads DATA pointCount, and on the active file or alternate graph-loading mode delegates remaining PGRI/PGRL/PGRP/PGRR chunks to TESPathGrid_LoadSerializedGraphChunks. The PathGrid is a separate form record associated with its parent cell.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4E74E0",
+  "display_name": "TESPathGrid_LoadForm",
   "end_ea": "0x4E7610",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_4E74E0",
+  "name": "TESPathGrid_LoadForm",
   "segment": ".text",
   "sha256": "676c94c402b8d6af27d572b34f9d581c21a7c90f427487ad6864e733305343fc",
   "size": 304,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E74E0",
-  "type": "char __thiscall(TESForm *this, Data *)",
+  "total_chunk_size": 304,
+  "type": "bool __thiscall(TESPathGrid *this, Data *file)",
   "xrefs_from_count": 132,
   "xrefs_to_count": 1
 }

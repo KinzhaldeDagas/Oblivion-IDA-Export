@@ -1,1 +1,1 @@
-RAWHID
+typedef tagRAWHID RAWHID;

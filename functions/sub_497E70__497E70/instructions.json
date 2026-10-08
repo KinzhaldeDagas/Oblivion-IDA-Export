@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x497E70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: display/render resize recreate caller. Recreates Gamebryo render dimensions, then calls RecreateImageSpaceShader before rebuilding accumulators and scenegraphs.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x497EBC",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,25 +355,25 @@
   },
   {
     "ea": "0x497F51",
-    "line": "push    eax",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x497F52",
-    "line": "push    ecx",
+    "line": "push    ecx; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x497F53",
-    "line": "mov     ecx, ds:0B350D8h",
+    "line": "mov     ecx, ds:0B350D8h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x497F59",
-    "line": "call    sub_76B090",
+    "line": "call    NiDX9Renderer_Recreate; Oblivion-authoritative resize/recreate wrapper. Saves the current 0x38-byte presentation block, substitutes requested width/height, and runs full device recreation. Returns 2 for requested parameters, 1 after successfully restoring originals, or 0 if both attempts fail.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x497FE9",
-    "line": "call    RecreateImageSpaceShader",
+    "line": "call    RecreateImageSpaceShader; MoonSugarEffect decode: display/render resize resource fence. sub_497E70 calls RecreateImageSpaceShader after Gamebryo render dimensions are recreated and before installing a new shader accumulator/rebuilding scenegraphs. Good boundary for plugin-owned renderer helper resources to invalidate/rebuild.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x49801E",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x498046",
-    "line": "call    sub_5B6040",
+    "line": "call    MainMenu_Open",
     "mnemonic": "call",
     "size": 5
   },
@@ -826,5 +826,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B03E0",
+    "line": "mov     eax, [ebp-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B03E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B03E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B03E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B03EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B03EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B03EF",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B03F2",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B03F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B03F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B03FC",
+    "line": "mov     eax, offset stru_ADC730",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B0401",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

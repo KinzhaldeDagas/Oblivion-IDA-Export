@@ -26,7 +26,7 @@
 0x6C39AF: push    0
 0x6C39B1: push    0
 0x6C39B3: push    0
-0x6C39B5: call    sub_6E1E90
+0x6C39B5: call    NiTransformData_SetRotationKeys; Oblivion NiTransformData rotation-key ownership setter. Destroys the previous +0x20 array via the destructor table indexed by type +0x10; type 4 first destroys its three nested scalar-axis tracks. Installs count +8, pointer +0x20, type +0x10, and table-derived stride +0x1C, or clears all four fields for null/zero input.
 0x6C39BA: fld     [esp+14h+arg_1C]
 0x6C39BE: fld     st
 0x6C39C0: fld     dword ptr ds:0A7DEB4h
@@ -64,7 +64,7 @@
 0x6C3A21: push    0
 0x6C3A23: push    0
 0x6C3A25: push    0
-0x6C3A27: call    sub_6E1F00
+0x6C3A27: call    NiTransformData_SetTranslationKeys; Oblivion NiTransformData translation-key ownership setter. Destroys previous keys +0x24 through the destructor table indexed by type +0x14, then installs count +0x0A, pointer +0x24, type +0x14, and table-derived stride +0x1D. Null pointer or zero count clears the channel fields.
 0x6C3A2C: pop     esi
 0x6C3A2D: add     esp, 10h
 0x6C3A30: retn    20h ; ' '

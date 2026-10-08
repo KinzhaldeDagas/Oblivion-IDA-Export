@@ -1,5 +1,6 @@
+// SpeedTreeBranchShaderProperty vtable +0x30: branch-local thunk into the inherited PPLighting/Base shader-property diagnostic/map method at 0x7D9890.
 // attributes: thunk
-unsigned int __thiscall sub_7F2060(float *this, NiTArray_NiTexturingPropertyMap *a2)
+unsigned int __thiscall OB_SpeedTreeBranchShaderProperty_Vtbl30Thunk_010201A0(void *this, void *textureMapArray)
 {
-  return sub_7F23A0(this, a2);
+  return OB_BSShaderPPLightingProperty_Vtbl30Thunk_010201A0(this, textureMapArray);
 }

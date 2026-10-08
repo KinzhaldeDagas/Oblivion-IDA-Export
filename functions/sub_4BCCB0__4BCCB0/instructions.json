@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4BCCB0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified completion callback: on taskStatus zero, releases the task-data scene node and Ni2DBuffer; regardless of status, it removes the packed cell key from the owner map at task+0x28. Exact status-code semantics remain Unknown.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BCCB1",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+taskStatus]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4BCCB9",
-    "line": "call    sub_4392E0",
+    "line": "call    QueuedTreeModel_ReleaseBuildResources; Verified DistantLOD task completion callback: status 0 releases the task-data scene node and cellLODBuffer; nonzero status leaves these resources for task destruction. In all cases it removes the packed cell key from the owner map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x4BCD2C",
-    "line": "push    ecx",
+    "line": "push    ecx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BCD2D",
-    "line": "push    eax",
+    "line": "push    eax; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BCD2E",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },

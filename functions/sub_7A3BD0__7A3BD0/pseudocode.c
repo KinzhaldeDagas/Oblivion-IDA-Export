@@ -1,29 +1,33 @@
-void __cdecl __noreturn sub_7A3BD0(int a1, int a2, char *a3)
+// Exception-safe uninitialized deep copy of 0x54-byte SIdvLeafTexture records. Normal completion returns destination end; the separate SEH landing path destroys the constructed prefix and rethrows.
+OB_SIdvLeafTexture_010201A0 *__cdecl OB_SIdvLeafTexture_UninitializedCopy_010201A0(
+        const OB_SIdvLeafTexture_010201A0 *first,
+        const OB_SIdvLeafTexture_010201A0 *last,
+        OB_SIdvLeafTexture_010201A0 *destinationFirst)
 {
-  char *v3; // esi
-  char *i; // esi
-  int v6; // [esp+0h] [ebp-28h] BYREF
-  void *v7; // [esp+10h] [ebp-18h]
-  int v8; // [esp+14h] [ebp-14h]
-  int *v9; // [esp+18h] [ebp-10h]
-  int v10; // [esp+24h] [ebp-4h]
+  OB_SIdvLeafTexture_010201A0 *currentDestination; // esi
+  OB_SIdvLeafTexture_010201A0 *cleanupCurrent; // esi
+  int v7; // [esp+0h] [ebp-28h] BYREF
+  void *v8; // [esp+10h] [ebp-18h]
+  OB_SIdvLeafTexture_010201A0 *constructedBegin; // [esp+14h] [ebp-14h]
+  int *v10; // [esp+18h] [ebp-10h]
+  int v11; // [esp+24h] [ebp-4h]
 
-  v9 = &v6;
-  v3 = a3;
-  v8 = (int)a3;
-  v10 = 0;
-  while ( a1 != a2 )
+  v10 = &v7; /*0x7a3bf8*/
+  currentDestination = destinationFirst; /*0x7a3bfb*/
+  constructedBegin = destinationFirst; /*0x7a3c03*/
+  v11 = 0; /*0x7a3c06*/
+  while ( first != last ) /*0x7a3c13*/
   {
-    v7 = v3;
-    LOBYTE(v10) = 1;
-    if ( v3 )
-      sub_7A2850((float *)v3, a1);
-    v3 += 0x54;
-    LOBYTE(v10) = 0;
-    a3 = v3;
-    a1 += 0x54;
+    v8 = currentDestination; /*0x7a3c18*/
+    LOBYTE(v11) = 1; /*0x7a3c1d*/
+    if ( currentDestination ) /*0x7a3c21*/
+      OB_SIdvLeafTexture_CopyCtor_010201A0(currentDestination, first); /*0x7a3c26*/
+    ++currentDestination; /*0x7a3c2b*/
+    LOBYTE(v11) = 0; /*0x7a3c2e*/
+    destinationFirst = currentDestination; /*0x7a3c31*/
+    ++first; /*0x7a3c34*/
   }
-  for ( i = (char *)v8; i != a3; i += 0x54 )
-    sub_7A3440(i);
-  ThrowException__(0, 0);
+  for ( cleanupCurrent = constructedBegin; cleanupCurrent != destinationFirst; ++cleanupCurrent )// SEH-only cleanup landing path: destroy the prefix already copy-constructed, then rethrow. Normal flow branches to 0x7A3C5E. /*0x7a3c41*/
+    OB_SIdvLeafTexture_Destroy_010201A0(cleanupCurrent); /*0x7a3c49*/
+  ThrowException__(0, 0); /*0x7a3c59*/
 }

@@ -1,30 +1,30 @@
-char __thiscall sub_6803A0(_DWORD *this, int a2, _DWORD *a3)
+// Verified: chooses the link endpoint reference matching the supplied spatial form, calls its position virtual at vtable offset +0x174, and copies the NiPoint3 to outPosition. Returns false for missing/mismatched endpoints.
+bool __thiscall TravelPathSpaceDoorLink_GetPositionInSpace(
+        TravelPathSpaceDoorLink *this,
+        TESForm *space,
+        NiPoint3 *outPosition)
 {
-  char result; // al
-  int v4; // ecx
-  _DWORD *v5; // eax
+  bool result; // al
+  TESObjectREFR *referenceA; // ecx
 
-  result = 0;
-  if ( a2 )
+  result = 0; /*0x6803a4*/
+  if ( space ) /*0x6803a8*/
   {
-    if ( *(this + 2) == a2 )
+    if ( this->spaceA == space ) /*0x6803ad*/
     {
-      v4 = *(this + 1);
+      referenceA = this->referenceA; /*0x6803af*/
     }
     else
     {
-      if ( *(this + 4) != a2 )
-        return result;
-      v4 = *(this + 3);
+      if ( this->spaceB != space ) /*0x6803b7*/
+        return result; /*0x6803b7*/
+      referenceA = this->referenceB; /*0x6803b9*/
     }
-    if ( v4 )
+    if ( referenceA ) /*0x6803be*/
     {
-      v5 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v4 + 0x174))(v4);
-      *a3 = *v5;
-      a3[1] = v5[1];
-      a3[2] = v5[2];
-      return 1;
+      *outPosition = *(NiPoint3 *)referenceA->vtbl->GetPos(referenceA); /*0x6803d0*/
+      return 1; /*0x6803de*/
     }
   }
-  return result;
+  return result; /*0x6803e0*/
 }

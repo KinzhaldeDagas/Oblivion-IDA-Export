@@ -1,19 +1,36 @@
 {
-  "callees_count": 105,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 26,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_483D60",
+  "chunks": [
+    [
+      "0x483D60",
+      "0x4842B0"
+    ],
+    [
+      "0x9AF950",
+      "0x9AF976"
+    ]
+  ],
+  "chunks_sha256": "600fe668d31bbb5acde4b624a03fb4bc6476f91196fbe63fc9eb8fade9247c11",
+  "comment_regular": "Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.",
+  "comment_repeatable": "Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "DistantLOD_UpdateExteriorGrid",
   "end_ea": "0x4842B0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_483D60",
+  "name": "DistantLOD_UpdateExteriorGrid",
   "segment": ".text",
   "sha256": "27c382ea79ba2fb3f39c5d99c8c09cad49c6080867aea0f6c0a75b8f6a3a4b3b",
   "size": 1360,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x483D60",
-  "type": "void __thiscall(unsigned int *this, _DWORD *arg0)",
-  "xrefs_from_count": 503,
+  "total_chunk_size": 1398,
+  "type": "void __thiscall(void *gridDistantArray, TESWorldSpace *worldspace)",
+  "xrefs_from_count": 517,
   "xrefs_to_count": 3
 }

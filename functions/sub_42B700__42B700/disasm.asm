@@ -1,4 +1,4 @@
-0x42B700: push    ebp
+0x42B700: push    ebp; CELL XTEL runtime proof: owner is used for override-file namespace only, not owner-kind validation. Destination must cast TESObjectREFR at0x42B748 and have base type0x18 DOOR at0x42B783. On successful destination link, any nonfinite/NaN position component zeros the full XYZ triple (0x42B868..0x42B884); rotation triple is independently sanitized (0x42B90D..0x42B929). These are post-link effects, not raw bounded-load values.
 0x42B701: mov     ebp, esp
 0x42B703: and     esp, 0FFFFFFC0h
 0x42B706: sub     esp, 34h
@@ -10,11 +10,11 @@
 0x42B712: push    edi; ArgList
 0x42B713: push    0FFFFFFFFh; a2
 0x42B715: mov     dword ptr [esp+44h+ArgList], eax
-0x42B719: call    TESForm_GetOverrideFile
+0x42B719: call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x42B71E: push    eax; a2
 0x42B71F: lea     ecx, [esp+44h+ArgList]
 0x42B723: push    ecx; a1
-0x42B724: call    TESForm_ResolveFormID
+0x42B724: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x42B729: mov     edx, dword ptr [esp+48h+ArgList]
 0x42B72D: add     esp, 8
 0x42B730: push    0; int
@@ -22,7 +22,7 @@
 0x42B737: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x42B73C: push    0; int
 0x42B73E: push    edx; a1
-0x42B73F: call    TESForm_LookupByFormID
+0x42B73F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x42B744: add     esp, 4
 0x42B747: push    eax; void *
 0x42B748: call    OblivionDynamicCast
@@ -131,11 +131,11 @@
 0x42B872: jz      short loc_42B89B
 0x42B874: push    offset aCorruptLocatio; "Corrupt location found in teleport data"...
 0x42B879: call    PrintError
-0x42B87E: mov     ecx, dword ptr Vector3_InitValue?
+0x42B87E: mov     ecx, g_zeroNiPoint3.x
 0x42B884: mov     [esi+4], ecx
-0x42B887: mov     edx, dword ptr Vector3_InitValue?+4
+0x42B887: mov     edx, g_zeroNiPoint3.y
 0x42B88D: mov     [esi+8], edx
-0x42B890: mov     eax, dword_B3F9B0
+0x42B890: mov     eax, g_zeroNiPoint3.z
 0x42B895: add     esp, 4
 0x42B898: mov     [esi+0Ch], eax
 0x42B89B: fld     dword ptr [esi+10h]
@@ -182,11 +182,11 @@
 0x42B917: jz      short loc_42B940
 0x42B919: push    offset aCorruptAngleFo; "Corrupt angle found in teleport data, s"...
 0x42B91E: call    PrintError
-0x42B923: mov     ecx, dword ptr Vector3_InitValue?
+0x42B923: mov     ecx, g_zeroNiPoint3.x
 0x42B929: mov     [esi+10h], ecx
-0x42B92C: mov     edx, dword ptr Vector3_InitValue?+4
+0x42B92C: mov     edx, g_zeroNiPoint3.y
 0x42B932: mov     [esi+14h], edx
-0x42B935: mov     eax, dword_B3F9B0
+0x42B935: mov     eax, g_zeroNiPoint3.z
 0x42B93A: add     esp, 4
 0x42B93D: mov     [esi+18h], eax
 0x42B940: pop     edi

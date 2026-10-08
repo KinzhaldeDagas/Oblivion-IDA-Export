@@ -1,25 +1,23 @@
-float *__thiscall sub_793AA0(float *this, float a2)
+// Oblivion stRotTransform::RotateZ. Converts degrees to radians, builds the Z-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place; used by the legacy billboard camera-direction path.
+void __thiscall OB_stRotTransform_RotateZDegrees_010201A0(OB_stRotTransform_010201A0 *this, float angleDegrees)
 {
-  float *result; // eax
-  float v4; // [esp+0h] [ebp-4Ch]
-  float v5[9]; // [esp+4h] [ebp-48h] BYREF
-  float v6[9]; // [esp+28h] [ebp-24h] BYREF
-  float v7; // [esp+50h] [ebp+4h]
-  float v8; // [esp+50h] [ebp+4h]
+  float v2; // [esp+0h] [ebp-4Ch]
+  OB_stRotTransform_010201A0 v3; // [esp+4h] [ebp-48h] BYREF
+  OB_stRotTransform_010201A0 outTransform; // [esp+28h] [ebp-24h] BYREF
+  float angleDegreesa; // [esp+50h] [ebp+4h]
+  float angleDegreesb; // [esp+50h] [ebp+4h]
 
-  v7 = a2 / dbl_A8BA48;
-  v4 = cos(v7);
-  v8 = sin(v7);
-  v5[0] = v4;
-  v5[1] = v8;
-  v5[2] = 0.0;
-  v5[3] = -v8;
-  v5[4] = v4;
-  v5[5] = 0.0;
-  v5[6] = 0.0;
-  v5[7] = 0.0;
-  v5[8] = 1.0;
-  result = sub_78EDD0(v5, v6, this);
-  qmemcpy(this, result, 0x24u);
-  return result;
+  angleDegreesa = angleDegrees / dbl_A8BA48; /*0x793ab1*/
+  v2 = cos(angleDegreesa); /*0x793abe*/
+  angleDegreesb = sin(angleDegreesa); /*0x793ad3*/
+  v3.m[0] = v2; /*0x793ae9*/
+  v3.m[1] = angleDegreesb; /*0x793af5*/
+  v3.m[2] = 0.0; /*0x793afb*/
+  v3.m[3] = -angleDegreesb; /*0x793b03*/
+  v3.m[4] = v2; /*0x793b09*/
+  v3.m[5] = 0.0; /*0x793b0d*/
+  v3.m[6] = 0.0; /*0x793b11*/
+  v3.m[7] = 0.0; /*0x793b15*/
+  v3.m[8] = 1.0; /*0x793b1b*/
+  qmemcpy(this, OB_stRotTransform_MultiplyCopy_010201A0(&v3, &outTransform, this), sizeof(OB_stRotTransform_010201A0)); /*0x793b2b*/
 }

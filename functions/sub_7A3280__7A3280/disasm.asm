@@ -1,9 +1,9 @@
-0x7A3280: mov     eax, [esp+arg_C]
+0x7A3280: mov     eax, [esp+value]; Oblivion binary evidence: checked-iterator insert of count identical four-byte values. Validates iterator ownership, enforces max_size 0x3FFFFFFF, reuses capacity when possible, otherwise grows by roughly 1.5x and moves trivial ranges. This folded routine services pointer, integer, and float vector specializations.
 0x7A3284: push    ebx
 0x7A3285: push    esi
 0x7A3286: mov     esi, ecx
 0x7A3288: mov     ecx, [eax]
-0x7A328A: mov     [esp+8+arg_C], ecx
+0x7A328A: mov     [esp+8+value], ecx
 0x7A328E: mov     ecx, [esi+4]
 0x7A3291: test    ecx, ecx
 0x7A3293: push    edi
@@ -13,7 +13,7 @@
 0x7A329A: mov     edi, [esi+0Ch]
 0x7A329D: sub     edi, ecx
 0x7A329F: sar     edi, 2
-0x7A32A2: mov     ebx, [esp+0Ch+arg_8]
+0x7A32A2: mov     ebx, [esp+0Ch+count]
 0x7A32A6: test    ebx, ebx
 0x7A32A8: jz      loc_7A342F
 0x7A32AE: test    ecx, ecx
@@ -27,7 +27,7 @@
 0x7A32C3: sub     edx, eax
 0x7A32C5: cmp     edx, ebx
 0x7A32C7: jnb     short loc_7A32CE
-0x7A32C9: call    sub_790B90
+0x7A32C9: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x7A32CE: test    ecx, ecx
 0x7A32D0: jnz     short loc_7A32D6
 0x7A32D2: xor     eax, eax
@@ -67,30 +67,30 @@
 0x7A3321: sar     edi, 2
 0x7A3324: add     edi, ebx
 0x7A3326: push    0
-0x7A3328: push    edi; char *
-0x7A3329: call    sub_78FB60
+0x7A3328: push    edi; count
+0x7A3329: call    OB_stVector4_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.
 0x7A332E: mov     ecx, [esi+4]
 0x7A3331: add     esp, 8
 0x7A3334: mov     ebp, eax
 0x7A3336: mov     eax, [esp+10h+Src]
-0x7A333A: push    ebp; Dst
-0x7A333B: push    eax; int
-0x7A333C: push    ecx; Src
+0x7A333A: push    ebp; destination
+0x7A333B: push    eax; last
+0x7A333C: push    ecx; first
 0x7A333D: mov     ecx, esi
-0x7A333F: call    sub_7A25C0
-0x7A3344: lea     edx, [esp+10h+arg_C]
-0x7A3348: push    edx
-0x7A3349: push    ebx
-0x7A334A: push    eax
+0x7A333F: call    OB_stVector4_UninitializedCopyRange_010201A0
+0x7A3344: lea     edx, [esp+10h+value]
+0x7A3348: push    edx; value
+0x7A3349: push    ebx; count
+0x7A334A: push    eax; destination
 0x7A334B: mov     ecx, esi
-0x7A334D: call    sub_790B60
+0x7A334D: call    OB_stVector4_UninitializedFillN_010201A0; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.
 0x7A3352: mov     ecx, [esp+10h+Src]
-0x7A3356: push    eax; Dst
+0x7A3356: push    eax; destination
 0x7A3357: mov     eax, [esi+8]
-0x7A335A: push    eax; int
-0x7A335B: push    ecx; Src
+0x7A335A: push    eax; last
+0x7A335B: push    ecx; first
 0x7A335C: mov     ecx, esi
-0x7A335E: call    sub_7A25C0
+0x7A335E: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x7A3363: mov     eax, [esi+4]
 0x7A3366: test    eax, eax
 0x7A3368: jnz     short loc_7A336E
@@ -103,7 +103,7 @@
 0x7A3378: test    eax, eax
 0x7A337A: jz      short loc_7A3385
 0x7A337C: push    eax
-0x7A337D: call    FormHeapFree
+0x7A337D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A3382: add     esp, 4
 0x7A3385: lea     edx, [ebp+edi*4+0]
 0x7A3389: lea     eax, [ebp+ebx*4+0]
@@ -122,58 +122,58 @@
 0x7A33A8: sar     ecx, 2
 0x7A33AB: lea     eax, ds:0[ebx*4]
 0x7A33B2: cmp     ecx, ebx
-0x7A33B4: mov     [esp+10h+arg_8], eax
+0x7A33B4: mov     [esp+10h+count], eax
 0x7A33B8: mov     ecx, esi
 0x7A33BA: jnb     short loc_7A3402
 0x7A33BC: add     eax, edi
-0x7A33BE: push    eax; Dst
-0x7A33BF: push    ebp; int
-0x7A33C0: push    edi; Src
-0x7A33C1: call    sub_7A25C0
+0x7A33BE: push    eax; destination
+0x7A33BF: push    ebp; last
+0x7A33C0: push    edi; first
+0x7A33C1: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x7A33C6: mov     eax, [esi+8]
 0x7A33C9: mov     ecx, eax
 0x7A33CB: sub     ecx, edi
 0x7A33CD: sar     ecx, 2
-0x7A33D0: lea     edx, [esp+10h+arg_C]
-0x7A33D4: push    edx
+0x7A33D0: lea     edx, [esp+10h+value]
+0x7A33D4: push    edx; value
 0x7A33D5: sub     ebx, ecx
-0x7A33D7: push    ebx
-0x7A33D8: push    eax
+0x7A33D7: push    ebx; count
+0x7A33D8: push    eax; destination
 0x7A33D9: mov     ecx, esi
-0x7A33DB: call    sub_790B60
-0x7A33E0: mov     eax, [esp+10h+arg_8]
+0x7A33DB: call    OB_stVector4_UninitializedFillN_010201A0; Oblivion binary evidence: uninitialized fill_n for count four-byte slots, returning destination + count. Used by the folded vector insertion implementation.
+0x7A33E0: mov     eax, [esp+10h+count]
 0x7A33E4: add     [esi+8], eax
 0x7A33E7: mov     esi, [esi+8]
-0x7A33EA: lea     edx, [esp+10h+arg_C]
-0x7A33EE: push    edx
+0x7A33EA: lea     edx, [esp+10h+value]
+0x7A33EE: push    edx; value
 0x7A33EF: sub     esi, eax
-0x7A33F1: push    esi
-0x7A33F2: push    edi
-0x7A33F3: call    sub_790490
+0x7A33F1: push    esi; last
+0x7A33F2: push    edi; first
+0x7A33F3: call    OB_stVector4_CopyFillRange_010201A0; Oblivion binary evidence: initialized fill over [first,last), assigning the same four-byte value to each existing slot and returning last.
 0x7A33F8: add     esp, 0Ch
 0x7A33FB: pop     ebp
 0x7A33FC: pop     edi
 0x7A33FD: pop     esi
 0x7A33FE: pop     ebx
 0x7A33FF: retn    10h
-0x7A3402: push    ebp; Dst
+0x7A3402: push    ebp; destination
 0x7A3403: mov     ebx, ebp
 0x7A3405: sub     ebx, eax
-0x7A3407: push    ebp; int
-0x7A3408: push    ebx; Src
-0x7A3409: call    sub_7A25C0
-0x7A340E: push    ebp; int
-0x7A340F: push    ebx; int
-0x7A3410: push    edi; Src
+0x7A3407: push    ebp; last
+0x7A3408: push    ebx; first
+0x7A3409: call    OB_stVector4_UninitializedCopyRange_010201A0
+0x7A340E: push    ebp; destinationEnd
+0x7A340F: push    ebx; last
+0x7A3410: push    edi; first
 0x7A3411: mov     [esi+8], eax
-0x7A3414: call    sub_5254A0
-0x7A3419: mov     ecx, [esp+1Ch+arg_8]
-0x7A341D: lea     eax, [esp+1Ch+arg_C]
-0x7A3421: push    eax
+0x7A3414: call    OB_stVector4_CopyBackwardRange_010201A0
+0x7A3419: mov     ecx, [esp+1Ch+count]
+0x7A341D: lea     eax, [esp+1Ch+value]
+0x7A3421: push    eax; value
 0x7A3422: add     ecx, edi
-0x7A3424: push    ecx
-0x7A3425: push    edi
-0x7A3426: call    sub_790490
+0x7A3424: push    ecx; last
+0x7A3425: push    edi; first
+0x7A3426: call    OB_stVector4_CopyFillRange_010201A0; Oblivion binary evidence: initialized fill over [first,last), assigning the same four-byte value to each existing slot and returning last.
 0x7A342B: add     esp, 18h
 0x7A342E: pop     ebp
 0x7A342F: pop     edi

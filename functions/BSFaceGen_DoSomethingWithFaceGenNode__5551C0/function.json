@@ -1,19 +1,36 @@
 {
-  "callees_count": 56,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "BSFaceGen_DoSomethingWithFaceGenNode",
-  "end_ea": "0x555555",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 52,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x5551C0",
+      "0x5559FB"
+    ],
+    [
+      "0x9BC230",
+      "0x9BC2C7"
+    ]
+  ],
+  "chunks_sha256": "5c2b3dc79afceb1b036746299e4f735a68db44bc33a99250ec3879373382bf11",
+  "comment_regular": "Apply appearance resources to an already-built BSFaceGenNiNode: project/floor age, generate or bind EGT textures, update sex-specific head-part properties, eyes and hair, initialize property state, and update the node. It does not reapply EGM vertex deformation, so construction-time seam normals remain intact.\n\nApplies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
+  "comment_repeatable": "Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 18,
+  "display_name": "BSFaceGen_ApplyHeadParametersToNode",
+  "end_ea": "0x5559FB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "BSFaceGen_DoSomethingWithFaceGenNode",
+  "name": "BSFaceGen_ApplyHeadParametersToNode",
   "segment": ".text",
-  "sha256": "90961ca00917d2c2a8c5992d9327523228fa42b0c71473b50707f7732511b354",
-  "size": 917,
+  "sha256": "8d9659aed1570f2e2a4e19ea6547c592efb7d6c7ca4fad56688f283d8c7c44a9",
+  "size": 2107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5551C0",
-  "type": "int __cdecl(int, _DWORD **)",
-  "xrefs_from_count": 318,
+  "total_chunk_size": 2258,
+  "type": "void __cdecl(BSFaceGenNiNode *faceNode, const FaceGenRenderState *state)",
+  "xrefs_from_count": 809,
   "xrefs_to_count": 15
 }

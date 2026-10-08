@@ -2,7 +2,7 @@
 0x4CED71: mov     ebp, ecx
 0x4CED73: push    edi
 0x4CED74: push    ebp; a2
-0x4CED75: mov     ecx, offset stru_B35C80; this
+0x4CED75: mov     ecx, offset unk_B35C80; this
 0x4CED7A: call    sub_496EA0
 0x4CED7F: lea     edi, [ebp+48h]
 0x4CED82: mov     eax, edi
@@ -28,7 +28,7 @@
 0x4CEDC7: jnz     short loc_4CEDCB
 0x4CEDC9: mov     bl, 1
 0x4CEDCB: mov     ecx, esi; this
-0x4CEDCD: call    TESObjectREFR_IsPersistent?
+0x4CEDCD: call    TESObjectREFR_IsPersistent
 0x4CEDD2: test    al, al
 0x4CEDD4: jz      short loc_4CEDFB
 0x4CEDD6: test    byte ptr [ebp+24h], 1
@@ -62,7 +62,7 @@
 0x4CEE21: mov     edx, [eax]
 0x4CEE23: push    eax
 0x4CEE24: mov     [edi], edx
-0x4CEE26: call    FormHeapFree
+0x4CEE26: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CEE2B: add     esp, 4
 0x4CEE2E: jmp     short loc_4CEE68
 0x4CEE30: mov     dword ptr [edi], 0
@@ -75,7 +75,7 @@
 0x4CEE45: mov     edx, [eax]
 0x4CEE47: push    eax
 0x4CEE48: mov     [edi], edx
-0x4CEE4A: call    FormHeapFree
+0x4CEE4A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CEE4F: add     esp, 4
 0x4CEE52: jmp     short loc_4CEE5A
 0x4CEE54: mov     dword ptr [edi], 0
@@ -90,7 +90,7 @@
 0x4CEE72: pop     esi
 0x4CEE73: pop     ebx
 0x4CEE74: push    ebp; a2
-0x4CEE75: mov     ecx, offset stru_B35C80; this
+0x4CEE75: mov     ecx, offset unk_B35C80; this
 0x4CEE7A: call    sub_496F50
 0x4CEE7F: pop     edi
 0x4CEE80: pop     ebp

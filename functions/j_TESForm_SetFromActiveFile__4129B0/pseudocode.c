@@ -1,5 +1,5 @@
 // attributes: thunk
-UInt32 __thiscall j_TESForm_SetFromActiveFile(TESForm *this, TESForm *a2)
+UInt32 __thiscall j_TESForm_SetFromActiveFile(TESForm *this, bool fromActiveFile)
 {
-  return TESForm_SetFromActiveFile(this, a2);
+  return TESForm_SetFromActiveFile(this, fromActiveFile);
 }

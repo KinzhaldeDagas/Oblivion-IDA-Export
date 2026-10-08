@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x659F30",
-    "line": "push    esi; int",
+    "line": "push    esi; MobileObject GenerateNiNode override. Calls TESObjectREFR_GenerateNiNode, forwards matching model extra data to the process when present, conditionally registers the result as a shadow caster, and returns NiNode*. Native ABI has no stack/x87 inputs.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x659F34",
-    "line": "call    TESObjectREFR_GenerateNiNode",
+    "line": "call    TESObjectREFR_GenerateNiNode; TESObjectREFR vtable GenerateNiNode base implementation. Native ABI has no stack/x87 inputs and returns the generated NiNode*. Prior ST0/ST1/ST2 parameters were decompiler artifacts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x659F4C",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x659F80",
-    "line": "call    ShadowSceneNodeAddShadowCaster",
+    "line": "call    ShadowSceneNodeAddShadowCaster; Direct retail AddShadowCaster caller in MobileObject_GenerateNiNode.",
     "mnemonic": "call",
     "size": 5
   },

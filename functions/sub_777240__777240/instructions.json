@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x777240",
-    "line": "sub     esp, 2Ch",
+    "line": "sub     esp, 2Ch; Pass226: Vertex-buffer upload helper; low mask bits upload screen positions, UVs, and packed colors.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x777249",
-    "line": "mov     [esp+2Ch+var_28], ecx",
+    "line": "mov     [esp+2Ch+self], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x77729D",
-    "line": "call    sub_7780A0",
+    "line": "call    sub_7780A0; MoonSugarEffect decode: NiGeometryBufferData SetFVF-style input ownership. Stores FVF and releases any cached IDirect3DVertexDeclaration9, so callers switch the buffer to fixed-function input mode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x777309",
-    "line": "mov     ecx, [esp+3Ch+var_28]",
+    "line": "mov     ecx, [esp+3Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x777310",
-    "line": "call    NiGeometryBufferData__RefreshVBChips",
+    "line": "call    NiGeometryBufferData__RefreshVBChips; MoonSugarEffect decode: NiGeometryBufferData::RefreshVBChips. Releases the existing geometry-group chip for this stream, creates a replacement chip through NiGeometryGroup, and stores it in VBChip[stream] if stream is in range. This is allocation/lifetime ownership, not a safe mask-pass getter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x777321",
-    "line": "call    sub_761AC0",
+    "line": "call    sub_761AC0; MoonSugarEffect decode: NiGeometryBufferData VBChip getter. Returns VBChip[stream] only when stream < StreamCount; no allocation or refresh. This is the safe read-side primitive for already-packed mask submission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,37 +451,37 @@
   },
   {
     "ea": "0x777336",
-    "line": "push    ecx; int",
+    "line": "push    ecx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x777337",
-    "line": "mov     ecx, [esp+40h+var_28]",
+    "line": "mov     ecx, [esp+40h+self]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77733B",
-    "line": "push    edx; Size",
+    "line": "push    edx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77733C",
-    "line": "push    edi; int",
+    "line": "push    edi; offsetBytes",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77733D",
-    "line": "push    eax; int",
+    "line": "push    eax; buffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77733E",
-    "line": "call    sub_776C90",
+    "line": "call    NiDX9VertexBufferManager_LockToStaging; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x777484",
-    "line": "mov     ecx, [esp+3Ch+var_28]",
+    "line": "mov     ecx, [esp+3Ch+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x777489",
-    "line": "call    sub_776D80",
+    "line": "call    sub_776D80; MoonSugarEffect decode: vertex-buffer-manager unlock/staging helper. Copies the staging buffer back to the locked D3D buffer, clears lock bookkeeping, leaves the critical section, then calls the vertex buffer Unlock vtable slot.",
     "mnemonic": "call",
     "size": 5
   },

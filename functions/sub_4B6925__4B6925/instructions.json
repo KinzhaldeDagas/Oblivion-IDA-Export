@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4B6930",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x4B6975",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; doorReference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B6977",
-    "line": "call    sub_4D77D0",
+    "line": "call    TESObjectREFR_FindLockExtraOnLinkedDoorChain; Verified wrapper lookup: follows linked-door references until it finds an ExtraLock wrapper, returning that wrapper or null when the chain ends without lock data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,25 +169,25 @@
   },
   {
     "ea": "0x4B6980",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B6982",
-    "line": "call    sub_428E90",
+    "line": "call    ExtraLock_ClearLockedFlag; Verified: clears only ExtraLockData.flags bit 0x01 (Locked), preserving bit 0x02. OpenEffect uses this after its lock-category test; this preserves LockEffect's bit-0x02 ownership marker.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B6987",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B6989",
-    "line": "call    sub_4D9070",
+    "line": "call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
     "mnemonic": "call",
     "size": 5
   },

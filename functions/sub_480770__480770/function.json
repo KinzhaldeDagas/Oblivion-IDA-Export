@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_480770",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x480770",
+      "0x480820"
+    ]
+  ],
+  "chunks_sha256": "dd9abe679477588a34a7ca47cb9322cd169d72240a1aff79708d7e09af032f4a",
+  "comment_regular": "Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.",
+  "comment_repeatable": "Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiNode_RemoveScbChildAlongFadeNodeChain",
   "end_ea": "0x480820",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_480770",
+  "name": "NiNode_RemoveScbChildAlongFadeNodeChain",
   "segment": ".text",
   "sha256": "dd9abe679477588a34a7ca47cb9322cd169d72240a1aff79708d7e09af032f4a",
   "size": 176,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x480770",
-  "type": "char __cdecl(int)",
+  "total_chunk_size": 176,
+  "type": "bool __cdecl(NiNode *rootNode)",
   "xrefs_from_count": 87,
   "xrefs_to_count": 4
 }

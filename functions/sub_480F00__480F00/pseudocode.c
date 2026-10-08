@@ -9,38 +9,38 @@ signed int __cdecl sub_480F00(const char **a1, int a2, int a3)
   const char **i; // eax
   size_t v11; // [esp-4h] [ebp-Ch]
 
-  v3 = 0;
-  if ( !a1 )
-    return 0;
-  if ( (*((int (__thiscall **)(const char **))*a1 + 4))(a1) )
+  v3 = 0; /*0x480f06*/
+  if ( !a1 ) /*0x480f0a*/
+    return 0; /*0x480fcb*/
+  if ( (*((int (__thiscall **)(const char **))*a1 + 4))(a1) ) /*0x480f17*/
   {
-    if ( !(_BYTE)a2 || (v4 = a1[2]) != 0 && (LODWORD(v11) = 5, strncmp(v4, "Decal", v11)) )
+    if ( !(_BYTE)a2 || (v4 = a1[2]) != 0 && (LODWORD(v11) = 5, strncmp(v4, "Decal", v11)) ) /*0x480f36*/
     {
-      if ( !(_BYTE)a3 )
-        return 1;
-      LODWORD(v11) = 7;
-      if ( !strncmp(a1[2], "Block (", v11) )
-        return 1;
+      if ( !(_BYTE)a3 ) /*0x480f4a*/
+        return 1; /*0x480f4a*/
+      LODWORD(v11) = 7; /*0x480f4f*/
+      if ( !strncmp(a1[2], "Block (", v11) ) /*0x480f57*/
+        return 1; /*0x480f6a*/
     }
-    return 0;
+    return 0; /*0x480f61*/
   }
-  v6 = (*((int (__thiscall **)(const char **))*a1 + 2))(a1);
-  v7 = v6;
-  if ( !v6 )
-    return 0;
-  v8 = *(unsigned __int16 *)(v6 + 0xB6);
-  v9 = 0;
-  if ( !*(_WORD *)(v7 + 0xB6) )
-    return 0;
-  if ( v8 )
-    goto LABEL_13;
-  for ( i = 0; ; i = *(const char ***)(*(_DWORD *)(v7 + 0xB0) + 4 * v9) )
+  v6 = (*((int (__thiscall **)(const char **))*a1 + 2))(a1); /*0x480f73*/
+  v7 = v6; /*0x480f75*/
+  if ( !v6 ) /*0x480f79*/
+    return 0; /*0x480f79*/
+  v8 = *(unsigned __int16 *)(v6 + 0xB6); /*0x480f7b*/
+  v9 = 0; /*0x480f82*/
+  if ( !*(_WORD *)(v7 + 0xB6) ) /*0x480f7b*/
+    return 0; /*0x480fc6*/
+  if ( v8 ) /*0x480f8f*/
+    goto LABEL_13; /*0x480f8f*/
+  for ( i = 0; ; i = *(const char ***)(*(_DWORD *)(v7 + 0xB0) + 4 * v9) ) /*0x480f91*/
   {
-    v3 += sub_480F00(i, a2, a3);
-    if ( *(unsigned __int16 *)(v7 + 0xB6) <= (unsigned int)++v9 )
-      break;
+    v3 += sub_480F00(i, a2, a3); /*0x480faa*/
+    if ( *(unsigned __int16 *)(v7 + 0xB6) <= (unsigned int)++v9 ) /*0x480fbb*/
+      break; /*0x480fbb*/
 LABEL_13:
-    ;
+    ; /*0x480f95*/
   }
-  return v3;
+  return v3; /*0x480f63*/
 }

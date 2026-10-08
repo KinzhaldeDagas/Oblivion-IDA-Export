@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x5DD3E0",
-    "line": "push    404h",
+    "line": "push    404h; TrainingMenu button handler entry. The first 15 bytes include a rel32 call at +5 to Menu_GetOpenMenuTile (0x589B70); any relocated gateway must re-encode that call and jump back to 0x5DD3EF rather than byte-copying its displacement.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5DD3E5",
-    "line": "call    Menu_GetOpenMenuTile",
+    "line": "call    Menu_GetOpenMenuTile; Rel32 CALL to Menu_GetOpenMenuTile (0x589B70) inside the 15-byte TrainingMenu_HandleButton prologue. Any entry trampoline that steals these bytes must relocate/re-encode this CALL; a raw memcpy trampoline changes the destination.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x5DD442",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5DD448",
-    "line": "push    eax",
+    "line": "push    eax; skill",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DD449",
-    "line": "call    sub_66A3D0",
+    "line": "call    Player_TrainSkill; Train exactly one level in the stored native skill. Player_TrainSkill delegates to the shared skill-level routine, so major/non-major accounting is identical to an ordinary level increase.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x5DD46B",
-    "line": "call    sub_491700",
+    "line": "call    sub_491700; Remove the training price from the player's container after the skill increase succeeds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DD470",
-    "line": "call    sub_5DD340",
+    "line": "call    TrainingMenu_Close; Native TrainingMenu close routine.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5DD4A7",
-    "line": "call    sub_5DD340",
+    "line": "call    TrainingMenu_Close; Native TrainingMenu close routine.",
     "mnemonic": "call",
     "size": 5
   },

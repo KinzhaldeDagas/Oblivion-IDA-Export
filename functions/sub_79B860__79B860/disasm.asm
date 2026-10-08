@@ -1,16 +1,16 @@
-0x79B860: push    ebx
-0x79B861: mov     ebx, [esp+4+arg_0]
+0x79B860: push    ebx; Overlap-safe backward copy-assignment of compact SFrondGuide records. Deep-assigns each embedded SFrondVertex vector before copying scalar fields.
+0x79B861: mov     ebx, [esp+4+first]
 0x79B865: push    esi
-0x79B866: mov     esi, [esp+8+arg_4]
+0x79B866: mov     esi, [esp+8+last]
 0x79B86A: cmp     ebx, esi
 0x79B86C: jz      short loc_79B8BB
 0x79B86E: push    edi
-0x79B86F: mov     edi, [esp+0Ch+arg_8]
+0x79B86F: mov     edi, [esp+0Ch+destinationLast]
 0x79B873: sub     esi, 30h ; '0'
 0x79B876: sub     edi, 30h ; '0'
-0x79B879: push    esi
-0x79B87A: mov     ecx, edi
-0x79B87C: call    sub_79B160
+0x79B879: push    esi; source
+0x79B87A: mov     ecx, edi; this
+0x79B87C: call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.
 0x79B881: fld     dword ptr [esi+10h]
 0x79B884: cmp     esi, ebx
 0x79B886: fstp    dword ptr [edi+10h]
@@ -34,7 +34,7 @@
 0x79B8B8: pop     esi
 0x79B8B9: pop     ebx
 0x79B8BA: retn
-0x79B8BB: mov     eax, [esp+8+arg_8]
+0x79B8BB: mov     eax, [esp+8+destinationLast]
 0x79B8BF: pop     esi
 0x79B8C0: pop     ebx
 0x79B8C1: retn

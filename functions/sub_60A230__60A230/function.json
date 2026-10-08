@@ -1,19 +1,36 @@
 {
-  "callees_count": 56,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 29,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_60A230",
+  "chunks": [
+    [
+      "0x60A230",
+      "0x60A631"
+    ],
+    [
+      "0x9C2F60",
+      "0x9C2FB5"
+    ]
+  ],
+  "chunks_sha256": "c6dc60de421b52bf18e9bcc8f20d7c130da4cb2c25bcae45fc79560c212c9705",
+  "comment_regular": "Ensures a high-process ArrowProjectile owns a sphere-based bhk character proxy. Builds projectile collision layer 6 independently of the visible NIF, derives gravity/collision metadata from shooter and attack strength, attaches the projectile NiNode, and initializes water-height/filter state.",
+  "comment_repeatable": "Ensures a high-process ArrowProjectile owns a sphere-based bhk character proxy. Builds projectile collision layer 6 independently of the visible NIF, derives gravity/collision metadata from shooter and attack strength, attaches the projectile NiNode, and initializes water-height/filter state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ArrowProjectile_EnsureCharacterProxy",
   "end_ea": "0x60A631",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_60A230",
+  "name": "ArrowProjectile_EnsureCharacterProxy",
   "segment": ".text",
   "sha256": "cd141b7b7aed77de05d3141a77ec96293cdb73f5a6614e54f2b3dc7990072f74",
   "size": 1025,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x60A230",
-  "type": "char __thiscall(ArrowProjectile *this, TESObjectREFRVtbl *a2, float a3)",
-  "xrefs_from_count": 351,
+  "total_chunk_size": 1110,
+  "type": "void __thiscall(ArrowProjectile *this, Actor *shooter, float attackStrength)",
+  "xrefs_from_count": 377,
   "xrefs_to_count": 2
 }

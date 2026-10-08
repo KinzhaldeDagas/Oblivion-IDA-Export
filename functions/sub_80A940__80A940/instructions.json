@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x80A940",
-    "line": "sub     esp, 510h",
+    "line": "sub     esp, 510h; MoonSugarEffect decode: SkinShader pixel-program loader. Loads 0x0A SKIN2*.pso ps_2_0 variants into this+0xEC from lighting\\2x\\p ADTS/AD/DiffusePt HLSL with FACEGENBLEND/LIGHTS/PROJ_SHADOW defines.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -828,12 +828,6 @@
     "size": 2
   },
   {
-    "ea": "0x80AC3A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x80AC40",
     "line": "mov     eax, [ebx-4]",
     "mnemonic": "mov",
@@ -961,7 +955,7 @@
   },
   {
     "ea": "0x80AC87",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
     "mnemonic": "call",
     "size": 5
   },

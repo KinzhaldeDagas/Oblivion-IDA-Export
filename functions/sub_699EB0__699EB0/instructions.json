@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x699FD7",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x699FDF",
-    "line": "fstp    [esp+24h+a2]; float",
+    "line": "fstp    [esp+24h+a2]; b",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x699FE9",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+a]; a",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x699FEC",
-    "line": "call    sub_4AC760",
+    "line": "call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,11 +1,12 @@
-int __thiscall sub_6803F0(_DWORD *this, int a2)
+// Verified: if the supplied spatial form matches spaceA or spaceB, returns the opposite spatial TESForm; otherwise returns null.
+TESForm *__thiscall TravelPathSpaceDoorLink_GetOtherSpace(TravelPathSpaceDoorLink *this, TESForm *space)
 {
-  int result; // eax
+  TESForm *result; // eax
 
-  result = *(this + 2);
-  if ( a2 == result )
-    return *(this + 4);
-  if ( a2 != *(this + 4) )
-    return 0;
-  return result;
+  result = this->spaceA; /*0x6803f0*/
+  if ( space == result ) /*0x6803fc*/
+    return this->spaceB; /*0x6803fe*/
+  if ( space != this->spaceB ) /*0x680408*/
+    return 0; /*0x68040a*/
+  return result; /*0x680401*/
 }

@@ -1,230 +1,228 @@
-unsigned int *__thiscall sub_48B660(ExtraDataList *****this, int *a2, float a3)
+unsigned int *__thiscall sub_48B660(ExtraDataList *****this, TESActorBase *a2, float a3)
 {
-  int *v3; // edi
+  ExtraContainerChanges_Data *v3; // edi
   unsigned int *EquippedInstance; // esi
-  TESObjectREFR *v5; // ecx
+  TESObjectREFR *owner; // ecx
   TESContainer *Container; // eax
   TESContainer_Entry *p_list; // ebp
-  unsigned __int8 *v8; // ebx
-  _DWORD *v9; // eax
+  TESForm *v8; // ebx
+  tListEntryData *objList; // eax
   char v10; // dl
-  int v11; // edi
-  ExtraDataList **v12; // eax
+  EntryData *data; // edi
+  ExtraDataList **extendData; // eax
   ExtraDataList *v13; // esi
   ExtraDataList **v14; // eax
   ExtraDataList *v15; // esi
-  BSExtraDataVtbl *Owner; // eax
+  int *v16; // eax
   int count; // eax
-  int *v18; // ebx
-  int v19; // esi
-  unsigned __int8 *v20; // ebp
+  tListEntryData *next; // ebx
+  EntryData *v19; // esi
+  TESForm *v20; // ebp
   ExtraDataList **v21; // eax
   ExtraDataList *v22; // edi
   ExtraDataList **v23; // eax
   ExtraDataList *v24; // edi
-  BSExtraDataVtbl *v25; // eax
+  int *v25; // eax
   TESObjectREFR *v26; // ecx
   TESContainer *v27; // eax
-  unsigned __int8 *v28; // edi
-  int v29; // eax
-  int v30; // edi
-  unsigned int *v31; // eax
-  _DWORD *v32; // eax
-  TESObjectREFR *v34; // ecx
-  TESContainer *v35; // eax
-  unsigned __int8 *v37; // [esp+10h] [ebp-10h]
-  float v38; // [esp+14h] [ebp-Ch]
-  unsigned __int8 *v39; // [esp+18h] [ebp-8h]
-  double v40; // [esp+18h] [ebp-8h]
+  TESForm *v28; // edi
+  EntryData *EntryForForm; // edi
+  unsigned int *v30; // eax
+  _DWORD *v31; // eax
+  TESObjectREFR *v33; // ecx
+  TESContainer *v34; // eax
+  TESForm *form; // [esp+10h] [ebp-10h]
+  float v37; // [esp+14h] [ebp-Ch]
+  TESForm *item; // [esp+18h] [ebp-8h]
+  double itema; // [esp+18h] [ebp-8h]
   float EquippableItemRating; // [esp+28h] [ebp+8h]
-  float v42; // [esp+28h] [ebp+8h]
+  float v41; // [esp+28h] [ebp+8h]
 
-  v38 = flt_A3B888;
-  v3 = (int *)this;
-  v37 = 0;
-  v39 = 0;
-  if ( LOBYTE(a3) )
+  v37 = flt_A3B888; /*0x48b66f*/
+  v3 = (ExtraContainerChanges_Data *)this; /*0x48b674*/
+  form = 0; /*0x48b67a*/
+  item = 0; /*0x48b682*/
+  if ( LOBYTE(a3) ) /*0x48b68a*/
   {
-    EquippedInstance = ContainerExtraData_GetEquippedInstance(this, 0xE, 0);
-    if ( EquippedInstance )
+    EquippedInstance = ContainerExtraData_GetEquippedInstance(this, 0xE, 0); /*0x48b695*/
+    if ( EquippedInstance ) /*0x48b699*/
     {
-      if ( sub_41DF40(*(_BYTE **)*EquippedInstance) )
-        return EquippedInstance;
-      if ( *EquippedInstance )
-        BSSimpleList_Clear((_DWORD *)*EquippedInstance);
-      FormHeapFree(*EquippedInstance);
-      *EquippedInstance = 0;
-      FormHeapFree((unsigned int)EquippedInstance);
+      if ( sub_41DF40(*(_BYTE **)*EquippedInstance) ) /*0x48b69f*/
+        return EquippedInstance; /*0x48b6a6*/
+      if ( *EquippedInstance ) /*0x48b6ac*/
+        BSSimpleList_Clear((_DWORD *)*EquippedInstance); /*0x48b6b2*/
+      FormHeapFree(*EquippedInstance); /*0x48b6ba*/
+      *EquippedInstance = 0; /*0x48b6c0*/
+      FormHeapFree((unsigned int)EquippedInstance); /*0x48b6c6*/
     }
   }
-  v5 = (TESObjectREFR *)v3[1];
-  if ( v5 )
-    Container = TESObjectREFR_GetContainer(v5);
+  owner = v3->owner; /*0x48b6ce*/
+  if ( owner ) /*0x48b6d3*/
+    Container = TESObjectREFR_GetContainer(owner); /*0x48b6d5*/
   else
-    Container = 0;
-  p_list = &Container->list;
+    Container = 0; /*0x48b6dc*/
+  p_list = &Container->list; /*0x48b6e0*/
   if ( Container != (TESContainer *)0xFFFFFFF8 )
   {
     do
     {
       if ( p_list->data )
       {
-        v8 = (unsigned __int8 *)OblivionDynamicCast(
-                                  p_list->data->type,
-                                  0,
-                                  (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
-                                  &TESObjectLIGH `RTTI Type Descriptor',
-                                  0);
+        v8 = (TESForm *)OblivionDynamicCast( /*0x48b712*/
+                          p_list->data->type,
+                          0,
+                          (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
+                          &TESObjectLIGH `RTTI Type Descriptor',
+                          0);
         if ( v8 )
         {
-          v9 = (_DWORD *)*v3;
-          v10 = 1;
-          if ( !*v3 )
-            goto LABEL_35;
-          while ( v10 )
+          objList = v3->objList; /*0x48b71f*/
+          v10 = 1; /*0x48b723*/
+          if ( !v3->objList ) /*0x48b71f*/
+            goto LABEL_35; /*0x48b71f*/
+          while ( v10 ) /*0x48b732*/
           {
-            if ( *v9 && *(unsigned __int8 **)(*v9 + 8) == v8 )
-              v10 = 0;
+            if ( objList->node.data && objList->node.data->type == v8 ) /*0x48b73d*/
+              v10 = 0; /*0x48b73f*/
             else
-              v9 = (_DWORD *)v9[1];
-            if ( !v9 )
-              goto LABEL_35;
+              objList = (tListEntryData *)objList->node.next; /*0x48b743*/
+            if ( !objList ) /*0x48b748*/
+              goto LABEL_35; /*0x48b748*/
           }
-          if ( !v9
-            || (v11 = *v9) == 0
-            || ((v12 = *(ExtraDataList ***)v11) == 0
-             || (v13 = *v12) == 0
-             || !ExtraDataList_GetOwner(*v12)
+          if ( !objList
+            || (data = objList->node.data) == 0
+            || ((extendData = (ExtraDataList **)data->extendData) == 0
+             || (v13 = *extendData) == 0
+             || !ExtraDataList_GetOwner(*extendData)
              || !ExtraDataList_GetOwner(v13)
-             || ((v14 = *(ExtraDataList ***)v11) == 0 || (v15 = *v14) == 0 || !ExtraDataList_GetOwner(*v14)
-               ? (Owner = 0)
-               : (Owner = ExtraDataList_GetOwner(v15)),
-                 Owner == (BSExtraDataVtbl *)a2))
-            && ((count = p_list->data->count, count + *(_DWORD *)(v11 + 4) > 0) || count < 0) )
+             || ((v14 = (ExtraDataList **)data->extendData) == 0 || (v15 = *v14) == 0 || !ExtraDataList_GetOwner(*v14)
+               ? (v16 = 0)
+               : (v16 = (int *)ExtraDataList_GetOwner(v15)),
+                 v16 == (int *)a2))
+            && ((count = p_list->data->count, count + data->countDelta > 0) || count < 0) )
           {
 LABEL_35:
-            EquippableItemRating = TESActorBase_GetEquippableItemRating(a2, v8);
-            if ( v38 < (double)EquippableItemRating )
+            EquippableItemRating = TESActorBase_GetEquippableItemRating(a2, v8); /*0x48b7b2*/
+            if ( v37 < (double)EquippableItemRating ) /*0x48b7cf*/
             {
-              v38 = EquippableItemRating;
-              v37 = v8;
+              v37 = EquippableItemRating; /*0x48b7d1*/
+              form = v8; /*0x48b7d5*/
             }
           }
         }
       }
-      p_list = p_list->next;
-      v3 = (int *)this;
+      p_list = p_list->next; /*0x48b7dd*/
+      v3 = (ExtraContainerChanges_Data *)this; /*0x48b7e2*/
     }
     while ( p_list );
   }
-  v18 = (int *)*v3;
-  if ( *v3 )
+  next = v3->objList; /*0x48b7ec*/
+  if ( v3->objList )
   {
     do
     {
-      v19 = *v18;
-      if ( *v18 )
+      v19 = next->node.data; /*0x48b7f6*/
+      if ( next->node.data )
       {
-        v20 = (unsigned __int8 *)OblivionDynamicCast(
-                                   *(void **)(v19 + 8),
-                                   0,
-                                   (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
-                                   &TESObjectLIGH `RTTI Type Descriptor',
-                                   0);
+        v20 = (TESForm *)OblivionDynamicCast( /*0x48b817*/
+                           v19->type,
+                           0,
+                           (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
+                           &TESObjectLIGH `RTTI Type Descriptor',
+                           0);
         if ( v20 )
         {
-          v21 = *(ExtraDataList ***)v19;
-          if ( !*(_DWORD *)v19
+          v21 = (ExtraDataList **)v19->extendData; /*0x48b824*/
+          if ( !v19->extendData
             || (v22 = *v21) == 0
             || !ExtraDataList_GetOwner(*v21)
             || !ExtraDataList_GetOwner(v22)
-            || ((v23 = *(ExtraDataList ***)v19) == 0 || (v24 = *v23) == 0 || !ExtraDataList_GetOwner(*v23)
+            || ((v23 = (ExtraDataList **)v19->extendData) == 0 || (v24 = *v23) == 0 || !ExtraDataList_GetOwner(*v23)
               ? (v25 = 0)
-              : (v25 = ExtraDataList_GetOwner(v24)),
-                v25 == (BSExtraDataVtbl *)a2) )
+              : (v25 = (int *)ExtraDataList_GetOwner(v24)),
+                v25 == (int *)a2) )
           {
-            if ( *(_DWORD *)(v19 + 4) )
+            if ( v19->countDelta ) /*0x48b86e*/
             {
-              v26 = (TESObjectREFR *)*(this + 1);
-              if ( v26 )
-                v27 = TESObjectREFR_GetContainer(v26);
+              v26 = (TESObjectREFR *)*(this + 1); /*0x48b878*/
+              if ( v26 ) /*0x48b87d*/
+                v27 = TESObjectREFR_GetContainer(v26); /*0x48b87f*/
               else
-                v27 = 0;
-              if ( !TESContainer_HasForm(v27, (TESForm *)v20) )
+                v27 = 0; /*0x48b886*/
+              if ( !TESContainer_HasForm(v27, v20) ) /*0x48b88b*/
               {
-                v42 = TESActorBase_GetEquippableItemRating(a2, v20);
-                if ( v38 < (double)v42 )
+                v41 = TESActorBase_GetEquippableItemRating(a2, v20); /*0x48b89e*/
+                if ( v37 < (double)v41 ) /*0x48b8b1*/
                 {
-                  v38 = v42;
-                  v39 = v20;
+                  v37 = v41; /*0x48b8b3*/
+                  item = v20; /*0x48b8b7*/
                 }
               }
             }
           }
         }
       }
-      v18 = (int *)v18[1];
+      next = (tListEntryData *)next->node.next; /*0x48b8bf*/
     }
-    while ( v18 );
-    v28 = v39;
-    if ( v39 )
+    while ( next );
+    v28 = item; /*0x48b8ca*/
+    if ( item ) /*0x48b8d0*/
     {
-      if ( v39 != v37 )
+      if ( item != form ) /*0x48b8d8*/
       {
-        v40 = TESActorBase_GetEquippableItemRating(a2, v39);
-        if ( TESActorBase_GetEquippableItemRating(a2, v37) < v40 )
-          v37 = v28;
+        itema = TESActorBase_GetEquippableItemRating(a2, item); /*0x48b8e6*/
+        if ( TESActorBase_GetEquippableItemRating(a2, form) < itema ) /*0x48b8fb*/
+          form = v28; /*0x48b8fd*/
       }
     }
-    v3 = (int *)this;
+    v3 = (ExtraContainerChanges_Data *)this; /*0x48b901*/
   }
-  ContainerExtraData_GetEntryForForm((_DWORD **)v3, (int)v37, 1, 0);
-  EquippedInstance = 0;
-  v30 = v29;
-  if ( v37 )
+  EquippedInstance = 0; /*0x48b91b*/
+  EntryForForm = ContainerExtraData_GetEntryForForm(v3, form, 1, 0); /*0x48b91f*/
+  if ( form ) /*0x48b921*/
   {
-    v31 = (unsigned int *)FormHeapAlloc(0xCu);
-    if ( v31 )
+    v30 = (unsigned int *)FormHeapAlloc(0xCu); /*0x48b925*/
+    if ( v30 ) /*0x48b92f*/
     {
-      v31[2] = 0;
-      *v31 = 0;
-      v31[1] = 0;
+      v30[2] = 0; /*0x48b931*/
+      *v30 = 0; /*0x48b934*/
+      v30[1] = 0; /*0x48b936*/
     }
     else
     {
-      v31 = 0;
+      v30 = 0; /*0x48b93b*/
     }
-    EquippedInstance = v31;
+    EquippedInstance = v30; /*0x48b93d*/
   }
-  if ( !v30 )
+  if ( !EntryForForm ) /*0x48b941*/
   {
-    if ( v37 )
+    if ( form ) /*0x48b98c*/
     {
-      EquippedInstance[2] = (unsigned int)v37;
-      v34 = (TESObjectREFR *)*(this + 1);
-      if ( v34 )
-        v35 = TESObjectREFR_GetContainer(v34);
+      EquippedInstance[2] = (unsigned int)form; /*0x48b992*/
+      v33 = (TESObjectREFR *)*(this + 1); /*0x48b995*/
+      if ( v33 ) /*0x48b99a*/
+        v34 = TESObjectREFR_GetContainer(v33); /*0x48b99c*/
       else
-        v35 = 0;
-      EquippedInstance[1] = TESContainer_GetFormCount(v35, (TESForm *)v37);
+        v34 = 0; /*0x48b9a3*/
+      EquippedInstance[1] = TESContainer_GetFormCount(v34, form); /*0x48b9ad*/
     }
-    return EquippedInstance;
+    return EquippedInstance; /*0x48b9ad*/
   }
-  EquippedInstance[2] = *(_DWORD *)(v30 + 8);
-  if ( !*(_DWORD *)v30 || !**(_DWORD **)v30 )
-    return EquippedInstance;
-  v32 = (_DWORD *)FormHeapAlloc(8u);
-  if ( v32 )
+  EquippedInstance[2] = (unsigned int)EntryForForm->type; /*0x48b946*/
+  if ( !EntryForForm->extendData || !EntryForForm->extendData->node.data ) /*0x48b94f*/
+    return EquippedInstance; /*0x48b9b3*/
+  v31 = (_DWORD *)FormHeapAlloc(8u); /*0x48b955*/
+  if ( v31 ) /*0x48b95f*/
   {
-    *v32 = 0;
-    v32[1] = 0;
+    *v31 = 0; /*0x48b961*/
+    v31[1] = 0; /*0x48b963*/
   }
   else
   {
-    v32 = 0;
+    v31 = 0; /*0x48b968*/
   }
-  *EquippedInstance = (unsigned int)v32;
-  BSSimpleList_PushFront(v32, **(_DWORD **)v30);
-  EquippedInstance[1] = *(_DWORD *)(v30 + 4);
-  return EquippedInstance;
+  *EquippedInstance = (unsigned int)v31; /*0x48b96a*/
+  BSSimpleList_PushFront(v31, (int)EntryForForm->extendData->node.data); /*0x48b973*/
+  EquippedInstance[1] = EntryForForm->countDelta; /*0x48b97d*/
+  return EquippedInstance; /*0x48b983*/
 }

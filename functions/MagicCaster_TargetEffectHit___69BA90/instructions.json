@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x69BAE8",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x69BAED",
-    "line": "mov     edx, [esp+28h+arg_8]",
+    "line": "mov     edx, dword ptr [esp+28h+arg_4+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x69BC51",
-    "line": "add     edi, 39Ch",
+    "line": "add     edi, 39Ch; Advance the caster/player vtable pointer to Player_ModExperience (+0x39C) before resolving the target-effect school.",
     "mnemonic": "add",
     "size": 6
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x69BC63",
-    "line": "call    edx",
+    "line": "call    edx; Eligible target-effect hit: resolved school AV, useValue1, identity scale (0.0).",
     "mnemonic": "call",
     "size": 2
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x69BC9D",
-    "line": "mov     edx, [esp+34h+arg_8]",
+    "line": "mov     edx, dword ptr [esp+34h+arg_4+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x69BCB8",
-    "line": "mov     eax, [esp+48h+arg_4]",
+    "line": "mov     eax, dword ptr [esp+48h+arg_4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x69BD1B",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x69BD33",
-    "line": "mov     edx, [esp+28h+arg_4]",
+    "line": "mov     edx, dword ptr [esp+28h+arg_4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x69BD4A",
-    "line": "mov     ecx, [esp+34h+arg_8]",
+    "line": "mov     ecx, dword ptr [esp+34h+arg_4+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x69BDB1",
-    "line": "mov     ecx, [esp+2Ch+arg_8]",
+    "line": "mov     ecx, dword ptr [esp+2Ch+arg_4+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1789,7 +1789,7 @@
   },
   {
     "ea": "0x69BDE4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,118 +1,118 @@
-void __thiscall sub_488100(int this, char a2, char a3)
+void __thiscall sub_488100(_DWORD *this, char a2, char a3)
 {
-  TESObjectREFR *v5; // ecx
+  TESObjectREFR *v4; // ecx
   TESContainer *Container; // eax
   TESContainer_Entry *p_list; // esi
   TESForm *type; // edi
-  int v9; // eax
-  int v10; // ebp
-  int *v11; // ecx
-  char v12; // al
+  int Value; // eax
+  int v9; // ebp
+  int *v10; // ecx
+  char v11; // al
+  int v12; // ecx
   int v13; // ecx
-  int v14; // ecx
-  int *v15; // ebp
-  int v16; // edi
-  TESForm *v17; // esi
+  int *v14; // ebp
+  int v15; // edi
+  TESForm *v16; // esi
+  TESObjectREFR *v17; // ecx
   TESObjectREFR *v18; // ecx
-  TESObjectREFR *v19; // ecx
-  TESContainer *v20; // eax
-  int v21; // eax
-  int v22; // ecx
-  int v23; // [esp+10h] [ebp-4h]
+  TESContainer *v19; // eax
+  int v20; // eax
+  int v21; // ecx
+  int v22; // [esp+10h] [ebp-4h]
 
-  v5 = *(TESObjectREFR **)(this + 4);
-  v23 = 0;
-  if ( v5 )
-    Container = TESObjectREFR_GetContainer(v5);
+  v4 = (TESObjectREFR *)*(this + 1); /*0x488105*/
+  v22 = 0; /*0x48810c*/
+  if ( v4 ) /*0x488114*/
+    Container = TESObjectREFR_GetContainer(v4); /*0x488116*/
   else
-    Container = 0;
-  p_list = &Container->list;
-  if ( Container != (TESContainer *)0xFFFFFFF8 )
+    Container = 0; /*0x48811d*/
+  p_list = &Container->list; /*0x48811f*/
+  if ( Container != (TESContainer *)0xFFFFFFF8 ) /*0x488124*/
   {
-    do
+    do /*0x4881d6*/
     {
-      if ( !p_list->next && !p_list->data )
-        break;
-      type = p_list->data->type;
-      if ( (a2 || !((unsigned __int8 (__thiscall *)(TESForm *))type->vtbl->Unk_1E)(type))
+      if ( !p_list->next && !p_list->data ) /*0x488136*/
+        break; /*0x488139*/
+      type = p_list->data->type; /*0x488146*/
+      if ( (a2 || !((unsigned __int8 (__thiscall *)(TESForm *))type->vtbl->Unk_1E)(type)) /*0x488163*/
         && (a3 || type->member.refID != 0xF) )
       {
-        sub_470520(type);
-        v10 = v9;
-        if ( v9 != 0xFFFFFFFF )
+        Value = TESForm_GetValue(type); /*0x488166*/
+        v9 = Value; /*0x48816b*/
+        if ( Value != 0xFFFFFFFF ) /*0x488173*/
         {
-          if ( v9 )
+          if ( Value ) /*0x488177*/
           {
-            v11 = *(int **)this;
-            v12 = 1;
-            if ( !*(_DWORD *)this )
-              goto LABEL_23;
-            while ( v12 )
+            v10 = (int *)*this; /*0x488179*/
+            v11 = 1; /*0x48817d*/
+            if ( !*this ) /*0x488179*/
+              goto LABEL_23; /*0x488179*/
+            while ( v11 ) /*0x488183*/
             {
-              if ( *v11 && *(TESForm **)(*v11 + 8) == type )
-                v12 = 0;
+              if ( *v10 && *(TESForm **)(*v10 + 8) == type ) /*0x48818e*/
+                v11 = 0; /*0x488190*/
               else
-                v11 = (int *)v11[1];
-              if ( !v11 )
+                v10 = (int *)v10[1]; /*0x488194*/
+              if ( !v10 ) /*0x488199*/
               {
-                v23 += v10 * p_list->data->count;
-                goto LABEL_26;
+                v22 += v9 * p_list->data->count; /*0x4881a2*/
+                goto LABEL_26; /*0x4881a6*/
               }
             }
-            if ( v11 && (v13 = *v11) != 0 )
+            if ( v10 && (v12 = *v10) != 0 ) /*0x4881b0*/
             {
-              v14 = p_list->data->count + *(_DWORD *)(v13 + 4);
-              if ( v14 )
-                v23 += v10 * v14;
+              v13 = p_list->data->count + *(_DWORD *)(v12 + 4); /*0x4881c6*/
+              if ( v13 ) /*0x4881c8*/
+                v22 += v9 * v13; /*0x4881cd*/
             }
             else
             {
 LABEL_23:
-              v23 += v10 * p_list->data->count;
+              v22 += v9 * p_list->data->count; /*0x4881b9*/
             }
           }
         }
       }
 LABEL_26:
-      p_list = p_list->next;
+      p_list = p_list->next; /*0x4881d1*/
     }
-    while ( p_list );
+    while ( p_list ); /*0x4881d6*/
   }
-  v15 = *(int **)this;
-  if ( *(_DWORD *)this )
+  v14 = (int *)*this; /*0x4881dc*/
+  if ( *this )
   {
     do
     {
-      v16 = *v15;
-      if ( !*v15 )
-        break;
-      v17 = *(TESForm **)(v16 + 8);
-      if ( v17 )
+      v15 = *v14; /*0x4881e6*/
+      if ( !*v14 ) /*0x4881e6*/
+        break; /*0x4881eb*/
+      v16 = *(TESForm **)(v15 + 8); /*0x4881ed*/
+      if ( v16 )
       {
-        v18 = *(TESObjectREFR **)(this + 4);
-        if ( !v18
-          || !TESObjectREFR_GetContainer(v18)
-          || ((v19 = *(TESObjectREFR **)(this + 4)) == 0 ? (v20 = 0) : (v20 = TESObjectREFR_GetContainer(v19)),
-              !TESContainer_HasForm(v20, v17)) )
+        v17 = (TESObjectREFR *)*(this + 1); /*0x4881f4*/
+        if ( !v17
+          || !TESObjectREFR_GetContainer(v17)
+          || ((v18 = (TESObjectREFR *)*(this + 1)) == 0 ? (v19 = 0) : (v19 = TESObjectREFR_GetContainer(v18)),
+              !TESContainer_HasForm(v19, v16)) )
         {
-          if ( (a2 || !((unsigned __int8 (__thiscall *)(TESForm *))v17->vtbl->Unk_1E)(v17))
-            && (a3 || v17->member.refID != 0xF) )
+          if ( (a2 || !((unsigned __int8 (__thiscall *)(TESForm *))v16->vtbl->Unk_1E)(v16)) /*0x48823f*/
+            && (a3 || v16->member.refID != 0xF) )
           {
-            sub_470520(v17);
-            if ( v21 != 0xFFFFFFFF )
+            v20 = TESForm_GetValue(v16); /*0x488242*/
+            if ( v20 != 0xFFFFFFFF ) /*0x48824d*/
             {
-              if ( v21 )
+              if ( v20 ) /*0x488251*/
               {
-                v22 = *(_DWORD *)(v16 + 4);
-                if ( v22 )
-                  v23 += v21 * v22;
+                v21 = *(_DWORD *)(v15 + 4); /*0x488253*/
+                if ( v21 ) /*0x488258*/
+                  v22 += v20 * v21; /*0x48825d*/
               }
             }
           }
         }
       }
-      v15 = (int *)v15[1];
+      v14 = (int *)v14[1]; /*0x488261*/
     }
-    while ( v15 );
+    while ( v14 );
   }
 }

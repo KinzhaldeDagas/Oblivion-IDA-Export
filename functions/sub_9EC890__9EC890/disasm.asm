@@ -2,7 +2,7 @@
 0x9EC896: push    ecx
 0x9EC897: fstp    [esp+4+var_4]; float
 0x9EC89A: push    offset aFpersuasionmax; "fPersuasionMaxDisposition"
-0x9EC89F: mov     ecx, offset fPersuasionMaxDisposition
+0x9EC89F: mov     ecx, 0B378F8h
 0x9EC8A4: call    GameSetting_ConstrAndReg_float
 0x9EC8A9: push    offset sub_A1F910; void (__cdecl *)()
 0x9EC8AE: call    _atexit

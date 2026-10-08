@@ -16,7 +16,7 @@
 0x7538B8: cmp     word ptr [ebx+48h], 0
 0x7538BD: jz      loc_753AFB
 0x7538C3: lea     ecx, [esi+30h]
-0x7538C6: push    offset Vector3_InitValue?
+0x7538C6: push    offset g_zeroNiPoint3
 0x7538CB: call    sub_8AA350
 0x7538D0: test    al, al
 0x7538D2: jnz     loc_753AFB
@@ -52,26 +52,26 @@
 0x75391B: mov     eax, [esp+130h+var_11C]
 0x75391F: lea     esi, [ecx+64h]
 0x753922: mov     ecx, 0Dh
-0x753927: lea     edi, [esp+130h+var_9C]
+0x753927: lea     edi, [esp+130h+local]
 0x75392E: rep movsd
 0x753930: mov     esi, [eax+10h]
 0x753933: add     esi, 64h ; 'd'
 0x753936: mov     ecx, 0Dh
 0x75393B: lea     edi, [esp+130h+var_68]
 0x753942: rep movsd
-0x753944: lea     ecx, [esp+130h+var_34]
+0x753944: lea     ecx, [esp+130h+parent]
 0x75394B: push    ecx
 0x75394C: lea     ecx, [esp+134h+var_68]
-0x753953: call    sub_718A80
-0x753958: lea     edx, [esp+130h+var_9C]
-0x75395F: push    edx
-0x753960: lea     eax, [esp+134h+var_D0]
-0x753964: push    eax
-0x753965: lea     ecx, [esp+138h+var_34]
-0x75396C: call    sub_53D7A0
-0x753971: mov     eax, [esp+130h+var_A4]
-0x753978: mov     ecx, [esp+130h+var_AC]
-0x75397F: mov     edx, [esp+130h+var_A8]
+0x753953: call    sub_718A80;
+0x753958: lea     edx, [esp+130h+local]
+0x75395F: push    edx; local
+0x753960: lea     eax, [esp+134h+out]
+0x753964: push    eax; out
+0x753965: lea     ecx, [esp+138h+parent]; parent
+0x75396C: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x753971: mov     eax, [esp+130h+out.pos.z]
+0x753978: mov     ecx, [esp+130h+out.pos.x]
+0x75397F: mov     edx, [esp+130h+out.pos.y]
 0x753986: mov     [esp+130h+var_108], eax
 0x75398A: mov     eax, [esp+130h+var_11C]
 0x75398E: mov     [esp+130h+var_110], ecx
@@ -79,11 +79,11 @@
 0x753995: push    eax
 0x753996: lea     ecx, [esp+134h+var_DC]
 0x75399A: push    ecx
-0x75399B: lea     ecx, [esp+138h+var_D0]
+0x75399B: lea     ecx, [esp+138h+out]
 0x75399F: mov     [esp+138h+var_10C], edx
 0x7539A3: call    sub_7101F0
 0x7539A8: lea     ecx, [esp+130h+var_DC]
-0x7539AC: call    sub_43F350
+0x7539AC: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7539B1: fstp    st
 0x7539B3: xor     esi, esi
 0x7539B5: cmp     [ebx+48h], si
@@ -122,7 +122,7 @@
 0x753A2B: fld     [esp+130h+var_FC]
 0x753A2F: fsub    [esp+130h+var_108]
 0x753A33: fstp    [esp+130h+var_EC]
-0x753A37: call    sub_404C90
+0x753A37: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x753A3C: fstp    [esp+130h+var_120]
 0x753A40: fldz
 0x753A42: fld     [esp+130h+var_120]

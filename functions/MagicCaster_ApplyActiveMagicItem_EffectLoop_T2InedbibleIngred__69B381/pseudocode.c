@@ -43,8 +43,8 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred@<
   float v41; // [esp+14h] [ebp-Ch]
   float v42; // [esp+18h] [ebp-8h]
 
-  if ( al0 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T3InedbibleIngred(
+  if ( al0 ) /*0x69b383*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T3InedbibleIngred( /*0x69b383*/
              a1,
              a2,
              a3,
@@ -58,15 +58,14 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred@<
              a12,
              a13,
              a14,
-             SLODWORD(a15),
-             SLODWORD(a16),
+             a15,
+             a16,
              a17,
-             *(float *)&a18,
+             a18,
              a19,
              a20,
              a21,
              a22,
-             SHIDWORD(a22),
              a23,
              a24,
              a25,
@@ -79,11 +78,11 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred@<
              a32,
              a33,
              a34,
-             *(float *)&a35,
+             a35,
              a36,
              a37);
-  if ( (ch0 & 1) == 0 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T3InedbibleIngred_(
+  if ( (ch0 & 1) == 0 ) /*0x69b38d*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_T3InedbibleIngred_( /*0x69b38d*/
              0,
              a1,
              a2,
@@ -122,7 +121,7 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred@<
              *(float *)&a35,
              a36,
              a37);
-  __asm { fst     [esp+10h+var_8]; float }
+  __asm { fst     [esp+10h+var_8]; float } /*0x69b394*/
   __asm
   {
     fst     [esp+10h+var_C]; float
@@ -135,12 +134,9 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred@<
     fld     [esp+20h+arg_2C]
     fstp    [esp+20h+var_20]; float
   }
-  Calc_T2PotionStrength(&a15, v38, v39, 6, 0, v40, v41, v42, 0);
+  Calc_T2PotionStrength(&a15, v38, v39, 6, 0, v40, v41, v42, 0); /*0x69b3bd*/
   return MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedbibleIngredFinish(
-           a1,
            a2,
-           a3,
-           ebx0,
            a7,
            a8,
            a9,
@@ -154,22 +150,5 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_T2InedbibleIngred@<
            a17,
            a18,
            a19,
-           a20,
-           a21,
-           a22,
-           a23,
-           a24,
-           a25,
-           a26,
-           a27,
-           a28,
-           a29,
-           a30,
-           a31,
-           a32,
-           a33,
-           a34,
-           a35,
-           a36,
-           a37);
+           a20);
 }

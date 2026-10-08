@@ -17,7 +17,7 @@
 0x800D1B: mov     edx, [eax+80h]
 0x800D21: call    edx
 0x800D23: xor     ebp, ebp
-0x800D25: mov     [esp+28h+var_10], ebp
+0x800D25: mov     [esp+28h+value], ebp
 0x800D29: xor     edi, edi
 0x800D2B: mov     [esp+28h+var_4], ebp
 0x800D2F: mov     [esp+28h+var_14], edi
@@ -29,7 +29,7 @@
 0x800D4C: jz      short loc_800D58
 0x800D4E: mov     ebp, eax
 0x800D50: add     dword ptr [ebp+60h], 1
-0x800D54: mov     [esp+28h+var_10], ebp
+0x800D54: mov     [esp+28h+value], ebp
 0x800D58: mov     eax, [ebp+24h]
 0x800D5B: mov     eax, [eax]
 0x800D5D: test    eax, eax
@@ -39,9 +39,9 @@
 0x800D67: mov     [esp+28h+var_14], edi
 0x800D6B: mov     ecx, [esi+7Ch]; this
 0x800D6E: call    BSRenderedTexture__GetInnerTexture
-0x800D73: push    eax; a2
+0x800D73: push    eax; texture
 0x800D74: mov     ecx, edi; this
-0x800D76: call    sub_76C910
+0x800D76: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x800D7B: cmp     dword ptr [esi+0A0h], 0
 0x800D82: jz      short loc_800DBB
 0x800D84: mov     ecx, [ebp+24h]
@@ -53,22 +53,22 @@
 0x800D92: add     dword ptr [edi+5Ch], 0FFFFFFFFh
 0x800D96: jnz     short loc_800D9F
 0x800D98: mov     ecx, edi
-0x800D9A: call    sub_772560
+0x800D9A: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x800D9F: test    ebx, ebx
 0x800DA1: mov     edi, ebx
 0x800DA3: mov     [esp+28h+var_14], edi
 0x800DA7: jz      short loc_800DAD
 0x800DA9: add     dword ptr [ebx+5Ch], 1
 0x800DAD: mov     eax, [esi+0A0h]
-0x800DB3: push    eax; a2
+0x800DB3: push    eax; texture
 0x800DB4: mov     ecx, edi; this
-0x800DB6: call    sub_76C910
+0x800DB6: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x800DBB: mov     eax, [esi+38h]
-0x800DBE: lea     edx, [esp+28h+var_10]
-0x800DC2: push    edx
-0x800DC3: push    eax
-0x800DC4: lea     ecx, [esi+40h]
-0x800DC7: call    sub_76CE40
+0x800DBE: lea     edx, [esp+28h+value]
+0x800DC2: push    edx; value
+0x800DC3: push    eax; index
+0x800DC4: lea     ecx, [esi+40h]; this
+0x800DC7: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x800DCC: add     dword ptr [esi+38h], 1
 0x800DD0: or      esi, 0FFFFFFFFh
 0x800DD3: test    edi, edi
@@ -77,14 +77,14 @@
 0x800DDC: add     [edi+5Ch], esi
 0x800DDF: jnz     short loc_800DE8
 0x800DE1: mov     ecx, edi
-0x800DE3: call    sub_772560
+0x800DE3: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x800DE8: test    ebp, ebp
 0x800DEA: mov     [esp+28h+var_4], esi
 0x800DEE: jz      short loc_800DFC
 0x800DF0: add     [ebp+60h], esi
 0x800DF3: jnz     short loc_800DFC
 0x800DF5: mov     ecx, ebp
-0x800DF7: call    sub_7604D0
+0x800DF7: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x800DFC: xor     eax, eax
 0x800DFE: mov     ecx, [esp+28h+var_C]
 0x800E02: mov     large fs:0, ecx
@@ -95,3 +95,14 @@
 0x800E0D: pop     ebx
 0x800E0E: add     esp, 14h
 0x800E11: retn    1Ch
+0x9CD850: lea     ecx, [ebp-10h]; void *
+0x9CD853: jmp     sub_4027D0
+0x9CD858: lea     ecx, [ebp-14h]
+0x9CD85B: jmp     loc_75FA70
+0x9CD860: mov     edx, [esp+arg_4]
+0x9CD864: lea     eax, [edx-18h]
+0x9CD867: mov     ecx, [edx-1Ch]
+0x9CD86A: xor     ecx, eax
+0x9CD86C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD871: mov     eax, offset stru_AF6A94
+0x9CD876: jmp     ___CxxFrameHandler3

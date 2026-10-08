@@ -6,8 +6,8 @@ _BYTE *__thiscall sub_911280(__m128 *this, _BYTE *a2)
   __m128 v5; // xmm0
   _BYTE *result; // eax
 
-  v2 = _mm_mul_ps(*(this + 2), *(this + 2));
-  if ( fabs(
+  v2 = _mm_mul_ps(*(this + 2), *(this + 2)); /*0x91128d*/
+  if ( fabs( /*0x9113a6*/
          (float)(_mm_shuffle_ps(v2, v2, 0xAA).m128_f32[0]
                + (float)(_mm_shuffle_ps(v2, v2, 0x55).m128_f32[0] + v2.m128_f32[0]))
        - fConstant_1) >= flt_A3C778
@@ -29,14 +29,14 @@ _BYTE *__thiscall sub_911280(__m128 *this, _BYTE *a2)
     || fabs(*((float *)this + 0x1C)) > fConstant_1
     || *((float *)this + 0x1D) > (double)*((float *)this + 0x1E) )
   {
-    result = a2;
+    result = a2; /*0x9113a8*/
 LABEL_8:
-    *result = 0;
-    return result;
+    *result = 0; /*0x9113ab*/
+    return result; /*0x9113b1*/
   }
-  result = a2;
-  if ( *((float *)this + 0x1F) > (double)*((float *)this + 0x20) )
-    goto LABEL_8;
-  *a2 = 1;
-  return result;
+  result = a2; /*0x9113c2*/
+  if ( *((float *)this + 0x1F) > (double)*((float *)this + 0x20) ) /*0x9113c5*/
+    goto LABEL_8; /*0x9113c5*/
+  *a2 = 1; /*0x9113c7*/
+  return result; /*0x9113ae*/
 }

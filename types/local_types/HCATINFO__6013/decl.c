@@ -1,1 +1,1 @@
-HCATINFO
+typedef HANDLE HCATINFO;

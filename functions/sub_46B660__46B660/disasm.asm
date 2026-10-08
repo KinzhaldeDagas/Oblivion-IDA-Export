@@ -1,4 +1,4 @@
-0x46B660: mov     eax, [ecx+0Ch]
+0x46B660: mov     eax, [ecx+0Ch]; Returns true when this TESForm has a built-in FormID in the reserved range 0x00000001..0x000007FF.
 0x46B663: test    eax, eax
 0x46B665: jz      short loc_46B671
 0x46B667: cmp     eax, 7FFh

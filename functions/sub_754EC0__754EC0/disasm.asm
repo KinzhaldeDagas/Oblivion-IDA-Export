@@ -5,8 +5,8 @@
 0x754ECD: jz      short loc_754F19
 0x754ECF: fld     [esp+4+arg_0]
 0x754ED3: push    ecx
-0x754ED4: fstp    [esp+8+var_8]; float
-0x754ED7: call    sub_6C36B0
+0x754ED4: fstp    [esp+8+applicationTime]; applicationTime
+0x754ED7: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x754EDC: test    al, al
 0x754EDE: jnz     short loc_754F19
 0x754EE0: fld     dword ptr [esi+3Ch]

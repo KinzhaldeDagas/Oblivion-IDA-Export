@@ -1,27 +1,25 @@
-void __cdecl sub_6F6BF0(int a1, int a2, void **Src, int a4, int a5, int a6, size_t Size)
+void __cdecl sub_6F6BF0(int a1, int a2, void ***Src, int a4, int a5, int a6, size_t Size)
 {
-  int v7; // esi
+  unsigned int v7; // esi
   bool v8; // cf
-  void **p_Src; // eax
-  size_t v10; // [esp-4h] [ebp-18h]
+  void ***p_Src; // eax
 
-  if ( !dword_B3F068 )
+  if ( !unk_B3F068 ) /*0x6f6c11*/
   {
-    v7 = Size;
-    v8 = (unsigned int)Size < 0x100;
-    dword_B3F068 = a1;
-    if ( !v8 )
+    v7 = Size; /*0x6f6c22*/
+    v8 = (unsigned int)Size < 0x100; /*0x6f6c26*/
+    unk_B3F068 = a1; /*0x6f6c30*/
+    if ( !v8 ) /*0x6f6c35*/
     {
-      sub_6ED6D0(".\\lastError.cpp", 0x41);
-      v7 = 0xFF;
+      FaceGen_ReportAssertionViolation(".\\lastError.cpp", 0x41); /*0x6f6c3e*/
+      v7 = 0xFF; /*0x6f6c46*/
     }
-    p_Src = Src;
-    if ( HIDWORD(Size) < 0x10 )
-      p_Src = (void **)&Src;
-    LODWORD(v10) = v7;
-    memcpy(byte_B3F06C, p_Src, v10);
-    byte_B3F06C[v7] = 0;
+    p_Src = Src; /*0x6f6c50*/
+    if ( HIDWORD(Size) < 0x10 ) /*0x6f6c54*/
+      p_Src = (void ***)&Src; /*0x6f6c56*/
+    memcpy(destination, p_Src, v7); /*0x6f6c61*/
+    destination[v7] = 0; /*0x6f6c69*/
   }
-  if ( HIDWORD(Size) >= 0x10 )
-    FormHeapFree((unsigned int)Src);
+  if ( HIDWORD(Size) >= 0x10 ) /*0x6f6c75*/
+    FormHeapFree((unsigned int)Src); /*0x6f6c7c*/
 }

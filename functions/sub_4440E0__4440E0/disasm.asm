@@ -36,13 +36,13 @@
 0x444141: jz      short loc_444160
 0x444143: mov     ecx, [eax-4]
 0x444146: lea     esi, [eax-4]
-0x444149: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x444149: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x44414E: push    ecx; int
 0x44414F: push    4; unsigned int
 0x444151: push    eax; void *
 0x444152: call    $LN21
 0x444157: push    esi
-0x444158: call    FormHeapFree
+0x444158: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x44415D: add     esp, 4
 0x444160: mov     esi, [edi]
 0x444162: test    esi, esi
@@ -68,3 +68,12 @@
 0x444194: pop     ebx
 0x444195: add     esp, 10h
 0x444198: retn
+0x9C7530: mov     ecx, [ebp-10h]; slot
+0x9C7533: jmp     NiPointerSlot_Release
+0x9C7538: mov     edx, [esp+arg_4]
+0x9C753C: lea     eax, [edx-10h]
+0x9C753F: mov     ecx, [edx-14h]
+0x9C7542: xor     ecx, eax
+0x9C7544: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7549: mov     eax, offset stru_AEF980
+0x9C754E: jmp     ___CxxFrameHandler3

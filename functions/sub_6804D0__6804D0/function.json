@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6804D0",
+      "0x6804F3"
+    ]
+  ],
+  "chunks_sha256": "413b8ca945c2d60368f47346fc9d3d7459f252bfe69d5c47bed37cf9a54ef14e",
+  "comment_regular": "Verified: tests state flag bit 0x02. The main A* loop sets this bit after expanding the popped node, so expanded/closed is Verified.",
+  "comment_repeatable": "Verified: tests state flag bit 0x02. The main A* loop sets this bit after expanding the popped node, so expanded/closed is Verified.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6804D0",
+  "display_name": "TravelPath_SearchState_IsExpanded",
   "end_ea": "0x6804F3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6804D0",
+  "name": "TravelPath_SearchState_IsExpanded",
   "segment": ".text",
   "sha256": "413b8ca945c2d60368f47346fc9d3d7459f252bfe69d5c47bed37cf9a54ef14e",
   "size": 35,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6804D0",
-  "type": "bool __thiscall(unsigned __int16 *this)",
+  "total_chunk_size": 35,
+  "type": "bool __thiscall(TravelPathSpaceDoorLink *node)",
   "xrefs_from_count": 11,
   "xrefs_to_count": 1
 }

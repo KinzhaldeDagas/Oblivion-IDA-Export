@@ -2,42 +2,46 @@ NiTPointerList_Node_void *__thiscall sub_7C1F50(BSTextureManager *this, int a2, 
 {
   NiTPointerList_Node_void *i; // eax
   NiTPointerList_Node_void *result; // eax
-  unsigned int data; // edi
+  _BYTE *data; // edi
   int v7; // esi
-  NiTPointerList_Node_void *start; // [esp+8h] [ebp-4h] BYREF
+  void *node; // [esp+8h] [ebp-4h] BYREF
 
-  for ( i = this->unk10.start; i; i = i->next )
+  for ( i = this->unk10.start; i; i = i->next ) /*0x7c1f5c*/
   {
-    if ( !a3 )
-      *((_BYTE *)i->data + 0x10) = 0;
+    if ( !a3 ) /*0x7c1f64*/
+      *((_BYTE *)i->data + 0x10) = 0; /*0x7c1f69*/
   }
-  start = this->unk00.start;
-  result = start;
-  while ( result )
+  node = this->unk00.start; /*0x7c1f77*/
+  result = (NiTPointerList_Node_void *)node; /*0x7c1f72*/
+  if ( node ) /*0x7c1f7b*/
   {
-    data = (unsigned int)result->data;
-    if ( !a3 )
+    do /*0x7c1f84*/
     {
-      if ( !*(_BYTE *)(data + 0x10) && (*(_BYTE *)(data + 0xC) & 0x20) == 0 )
+      data = result->data; /*0x7c1f84*/
+      if ( !a3 ) /*0x7c1f87*/
       {
-        sub_7AA860(this, &start);
-        v7 = *(_DWORD *)data;
-        if ( *(_DWORD *)data )
+        if ( !data[0x10] && (data[0xC] & 0x20) == 0 ) /*0x7c1f92*/
         {
-          if ( !InterlockedDecrement((volatile LONG *)(v7 + 4)) )
+          NiTPointerList_RemoveNode(this, &node); /*0x7c1f9b*/
+          v7 = *(_DWORD *)data; /*0x7c1fa0*/
+          if ( *(_DWORD *)data ) /*0x7c1fa0*/
           {
-            if ( v7 )
-              (**(void (__thiscall ***)(int, int))v7)(v7, 1);
+            if ( !InterlockedDecrement((volatile LONG *)(v7 + 4)) ) /*0x7c1faa*/
+            {
+              if ( v7 ) /*0x7c1fb6*/
+                (**(void (__thiscall ***)(int, int))v7)(v7, 1); /*0x7c1fc0*/
+            }
           }
+          FormHeapFree((unsigned int)data); /*0x7c1fc3*/
+          result = (NiTPointerList_Node_void *)node; /*0x7c1fc8*/
+          continue; /*0x7c1fcf*/
         }
-        FormHeapFree(data);
-        result = start;
-        continue;
+        data[0x10] = 0; /*0x7c1fd1*/
       }
-      *(_BYTE *)(data + 0x10) = 0;
+      result = result->next; /*0x7c1fd4*/
+      node = result; /*0x7c1fd6*/
     }
-    result = result->next;
-    start = result;
+    while ( result ); /*0x7c1f84*/
   }
-  return result;
+  return result; /*0x7c1fe0*/
 }

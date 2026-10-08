@@ -27,7 +27,7 @@
 0x623A13: cmp     dword ptr [esi+0A8h], 0
 0x623A1A: jnz     short loc_623A36
 0x623A1C: mov     ecx, [esi+3Ch]
-0x623A1F: call    sub_5E0F50
+0x623A1F: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x623A24: mov     edx, [eax]
 0x623A26: mov     ecx, eax
 0x623A28: mov     eax, [edx+168h]
@@ -69,15 +69,15 @@
 0x623A99: mov     edi, [esi+3Ch]
 0x623A9C: mov     ecx, esi
 0x623A9E: mov     dword ptr [esi+70h], 5
-0x623AA5: call    sub_6135F0
+0x623AA5: call    CombatController_GetCurrentTarget
 0x623AAA: mov     ecx, ds:0B362C0h
 0x623AB0: push    eax
 0x623AB1: push    edi
-0x623AB2: call    sub_521450
+0x623AB2: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x623AB7: push    ebp
 0x623AB8: mov     ecx, esi
 0x623ABA: mov     [esi+0C8h], eax
-0x623AC0: call    sub_612DE0
+0x623AC0: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x623AC5: cmp     [esp+10h+arg_4], 0
 0x623ACA: jnz     short loc_623AD6
 0x623ACC: cmp     byte ptr [esi+4Dh], 0
@@ -86,18 +86,18 @@
 0x623AD4: jmp     short loc_623ADB
 0x623AD6: mov     eax, 1
 0x623ADB: cmp     dword ptr [esi+0C8h], 0
-0x623AE2: mov     edx, [esp+10h+arg_0]
+0x623AE2: mov     edx, [esp+10h+outScore]
 0x623AE6: mov     edi, [esi+3Ch]
 0x623AE9: setnz   cl
-0x623AEC: push    ecx
-0x623AED: push    eax
-0x623AEE: push    edx
+0x623AEC: push    ecx; allowYieldEvaluation
+0x623AED: push    eax; skipFleeAndYieldEvaluation
+0x623AEE: push    edx; outScore
 0x623AEF: mov     ecx, esi
-0x623AF1: call    sub_6135F0
-0x623AF6: push    eax
-0x623AF7: push    0
-0x623AF9: push    edi
-0x623AFA: call    sub_621B40
+0x623AF1: call    CombatController_GetCurrentTarget
+0x623AF6: push    eax; target
+0x623AF7: push    0; equippedEntry
+0x623AF9: push    edi; actor
+0x623AFA: call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.
 0x623AFF: add     esp, 18h
 0x623B02: test    ebx, ebx
 0x623B04: mov     edi, eax
@@ -111,7 +111,7 @@
 0x623B17: push    eax
 0x623B18: push    1
 0x623B1A: mov     ecx, esi
-0x623B1C: call    sub_612D60
+0x623B1C: call    CombatController_GetEquippedWeaponForm
 0x623B21: push    eax
 0x623B22: mov     ecx, ebx
 0x623B24: call    Actor_UnequipItem
@@ -146,3 +146,33 @@
 0x623B86: push    edi
 0x623B87: call    sub_5E6D70
 0x623B8C: jmp     short loc_623BB4
+0x623B9C: test    edi, edi
+0x623B9E: jz      short loc_623BB4
+0x623BA0: cmp     edi, 1
+0x623BA3: jz      short loc_623BB4
+0x623BA5: cmp     edi, 3
+0x623BA8: jz      short loc_623BB4
+0x623BAA: cmp     edi, 2
+0x623BAD: jz      short loc_623BB4
+0x623BAF: cmp     edi, 4
+0x623BB2: jnz     short loc_623BDD
+0x623BB4: push    edi
+0x623BB5: mov     ecx, esi
+0x623BB7: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
+0x623BBC: mov     ecx, esi
+0x623BBE: call    sub_61E8A0
+0x623BC3: mov     ecx, esi; this
+0x623BC5: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
+0x623BCA: push    ecx
+0x623BCB: mov     ecx, esi
+0x623BCD: fstp    [esp+14h+var_14]; float
+0x623BD0: call    sub_612EA0
+0x623BD5: push    ebp
+0x623BD6: mov     ecx, esi
+0x623BD8: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
+0x623BDD: mov     eax, edi
+0x623BDF: pop     edi
+0x623BE0: pop     ebp
+0x623BE1: pop     esi
+0x623BE2: pop     ebx
+0x623BE3: retn    8

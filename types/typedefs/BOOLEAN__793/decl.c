@@ -1,1 +1,1 @@
-BOOLEAN
+typedef BYTE BOOLEAN;

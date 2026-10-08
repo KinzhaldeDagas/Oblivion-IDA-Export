@@ -1,1 +1,1 @@
-IDirectWriterLockVtbl_0
+typedef IDirectWriterLockVtbl IDirectWriterLockVtbl_0;

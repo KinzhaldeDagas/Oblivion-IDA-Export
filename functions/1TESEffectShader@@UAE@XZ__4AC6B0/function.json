@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x4AC6B0",
+      "0x4AC72B"
+    ],
+    [
+      "0x9B2BA0",
+      "0x9B2BDF"
+    ]
+  ],
+  "chunks_sha256": "b92f9889ae60e9081b1b978ee52b55583dc2be4590d6526b8f636de06a97be32",
+  "comment_regular": "Verified (Oblivion): destructor destroys embedded TESTexture members at +0x104 and +0xF8 before the TESForm base destructor.",
+  "comment_repeatable": "Verified (Oblivion): destructor destroys embedded TESTexture members at +0x104 and +0xF8 before the TESForm base destructor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "TESEffectShader::~TESEffectShader(void)",
   "end_ea": "0x4AC72B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1TESEffectShader@@UAE@XZ",
   "segment": ".text",
   "sha256": "3f1e03adeed04533427e38a622693025be4afb9043bc2975ff79b55de7ea3dd4",
   "size": 123,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4AC6B0",
-  "type": "void __thiscall(TESForm *this)",
-  "xrefs_from_count": 36,
+  "total_chunk_size": 186,
+  "type": "void __thiscall(TESEffectShader *this)",
+  "xrefs_from_count": 53,
   "xrefs_to_count": 1
 }

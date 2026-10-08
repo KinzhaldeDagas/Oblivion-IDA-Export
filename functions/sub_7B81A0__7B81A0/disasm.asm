@@ -1,6 +1,6 @@
 0x7B81A0: push    esi
 0x7B81A1: push    edi
-0x7B81A2: mov     edi, offset dword_B42EC0
+0x7B81A2: mov     edi, (offset OB_RendererGlobalState_010201A0.pad_00D+1Ah)
 0x7B81A7: mov     eax, [edi]
 0x7B81A9: test    eax, eax
 0x7B81AB: jz      short loc_7B81E5
@@ -13,7 +13,7 @@
 0x7B81BB: call    edx
 0x7B81BD: test    eax, eax
 0x7B81BF: jz      short loc_7B81CF
-0x7B81C1: cmp     eax, offset ImageSpaceShaderRTTI???
+0x7B81C1: cmp     eax, 0B4257Ch
 0x7B81C6: jz      short loc_7B81F3
 0x7B81C8: mov     eax, [eax+4]
 0x7B81CB: test    eax, eax
@@ -28,7 +28,7 @@
 0x7B81DD: mov     eax, [edx+8Ch]
 0x7B81E3: call    eax
 0x7B81E5: add     edi, 4
-0x7B81E8: cmp     edi, offset byte_B42F30
+0x7B81E8: cmp     edi, (offset OB_RendererGlobalState_010201A0.pad_00D+8Ah)
 0x7B81EE: jl      short loc_7B81A7
 0x7B81F0: pop     edi
 0x7B81F1: pop     esi

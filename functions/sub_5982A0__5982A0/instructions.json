@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5982A0",
-    "line": "push    ecx",
+    "line": "push    ecx; Container-menu close/resolution handler. When the opened container is an actor and the pickpocket state applies, it awards Sneak useValue1 before the native detection/crime comparison.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5982A8",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5982BF",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x5982D6",
-    "line": "call    sub_5790E0",
+    "line": "call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x59833E",
-    "line": "mov     ecx, [edi+44h]; this",
+    "line": "mov     ecx, [edi+44h]; reference",
     "mnemonic": "mov",
     "size": 3
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x59834A",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x598356",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x598359",
-    "line": "push    1772h; a2",
+    "line": "push    1772h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x598362",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x598370",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x5983DC",
-    "line": "fstp    [esp+18h+a2]",
+    "line": "fstp    [esp+18h+a2]; luckValue",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x5983E3",
-    "line": "call    edx",
+    "line": "call    edx; Actor-container/pickpocket resolution: Sneak (0x1F), useValue1, identity scale (0.0).",
     "mnemonic": "call",
     "size": 2
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x598406",
-    "line": "push    1Fh",
+    "line": "push    1Fh; luckValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x59840A",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59840B",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x598410",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,19 +781,19 @@
   },
   {
     "ea": "0x598450",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x598451",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x598456",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x59846E",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x598515",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x598519",
-    "line": "call    sub_5EF930",
+    "line": "call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,13 +1231,13 @@
   },
   {
     "ea": "0x598533",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x598536",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x59853D",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x59861A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

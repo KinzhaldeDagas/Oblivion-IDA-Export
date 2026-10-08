@@ -4,7 +4,7 @@
 0x8BC548: xor     cl, cl
 0x8BC54A: test    edi, edi
 0x8BC54C: jz      loc_8BC653
-0x8BC552: mov     al, [esp+20h+arg_10]
+0x8BC552: mov     al, byte ptr [esp+20h+arg_10]
 0x8BC556: test    al, al
 0x8BC558: mov     ecx, ds:0BA7D98h
 0x8BC55E: push    ebx
@@ -23,7 +23,7 @@
 0x8BC57F: mov     ecx, eax
 0x8BC581: mov     word ptr [eax+4], 6Ch ; 'l'
 0x8BC587: call    sub_90D430
-0x8BC58C: mov     edx, dword ptr [esp+20h+arg_10]
+0x8BC58C: mov     edx, [esp+20h+arg_10]
 0x8BC590: lea     ecx, [esp+20h+var_8]
 0x8BC594: push    ecx
 0x8BC595: mov     ecx, [esp+24h+arg_C]

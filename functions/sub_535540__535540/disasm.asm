@@ -29,7 +29,7 @@
 0x53558F: fld     dword ptr [edi+8]
 0x535592: fadd    [esp+60h+var_38]
 0x535596: fstp    [esp+60h+var_44]
-0x53559A: call    sub_535310
+0x53559A: call    bhkShapeProbe_ConfigureLayer1CWideMask; TES4 authoritative: sphere probe path reasserts the wider layer 0x1C mask before casting a shape phantom along a vector.
 0x53559F: mov     ebx, [esi+1A0h]
 0x5355A5: xor     eax, eax
 0x5355A7: cmp     ebx, eax
@@ -63,7 +63,7 @@
 0x53560A: cmp     edi, eax
 0x53560C: jz      short loc_535632
 0x53560E: mov     ecx, ebx
-0x535610: call    sub_89F570
+0x535610: call    bhkRefObject_UpdateHavokObject
 0x535615: mov     eax, [edi]
 0x535617: mov     eax, [eax+30h]
 0x53561A: push    0
@@ -73,13 +73,13 @@
 0x535622: lea     edx, [esp+6Ch+var_40]
 0x535626: push    edx
 0x535627: mov     ecx, edi
-0x535629: call    eax
+0x535629: call    eax; TES4 authoritative: shape phantom linear cast via hk object vfunc +0x30(start,end,collector,0), using TES/world inputs scaled by hkFactor.
 0x53562B: mov     ecx, ebx
-0x53562D: call    sub_89F570
+0x53562D: call    bhkRefObject_UpdateHavokObject
 0x535632: cmp     dword ptr [esi+14h], 0
 0x535636: jle     short loc_535661
 0x535638: mov     ecx, esi
-0x53563A: call    sub_8AF890
+0x53563A: call    hkpCdPointCollector_SortHitsByDistance; TES4 authoritative: sorts collector contact hits by entry+0x1C when more than one hit is present.
 0x53563F: mov     al, 1
 0x535641: pop     edi
 0x535642: pop     esi

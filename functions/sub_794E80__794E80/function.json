@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 2,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x794E80",
+      "0x794EAB"
+    ]
+  ],
+  "chunks_sha256": "ac8fa16a93dc811d9d9959c58f1971ad5bd6580661e168fa95022d746645766c",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Stdcall uninitialized-copy adapter for trivially copyable unsigned-short elements; copies [first,last) and returns the constructed end.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_794E80",
+  "display_name": "OB_stVectorUShort_UninitializedCopyRange_010201A0",
   "end_ea": "0x794EAB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": false,
-  "name": "sub_794E80",
+  "name": "OB_stVectorUShort_UninitializedCopyRange_010201A0",
   "segment": ".text",
   "sha256": "ac8fa16a93dc811d9d9959c58f1971ad5bd6580661e168fa95022d746645766c",
   "size": 43,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x794E80",
-  "type": "char *__stdcall(void *Src, int, void *Dst)",
+  "total_chunk_size": 43,
+  "type": "unsigned __int16 *__stdcall(const unsigned __int16 *first, const unsigned __int16 *last, unsigned __int16 *destination)",
   "xrefs_from_count": 19,
   "xrefs_to_count": 4
 }

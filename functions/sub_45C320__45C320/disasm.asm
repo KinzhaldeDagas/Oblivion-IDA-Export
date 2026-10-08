@@ -26,7 +26,7 @@
 0x45C36A: test    esi, esi
 0x45C36C: jz      loc_45C42A
 0x45C372: mov     ecx, esi; int
-0x45C374: call    EvaluatePackage
+0x45C374: call    EvaluatePackage; Actor::EvaluatePackage. After current package changes, resets/evaluates actor AI state through sub_5EAE70 and process callbacks; plugin calls this after assigning runtime packages.
 0x45C379: mov     ecx, esi; int
 0x45C37B: call    sub_5ED860
 0x45C380: mov     ecx, [esi+58h]
@@ -50,14 +50,14 @@
 0x45C3B8: mov     ebx, [eax+4]
 0x45C3BB: mov     ebp, [eax+8]
 0x45C3BE: mov     ecx, esi; this
-0x45C3C0: call    TESObjectREFR_GetParentCell
+0x45C3C0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45C3C5: test    eax, eax
 0x45C3C7: jz      short loc_45C3F8
 0x45C3C9: push    0; a4
 0x45C3CB: push    0; a3
 0x45C3CD: push    1; a2
 0x45C3CF: mov     ecx, esi; this
-0x45C3D1: call    TESObjectREFR_GetParentCell
+0x45C3D1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45C3D6: push    eax; int
 0x45C3D7: sub     esp, 0Ch
 0x45C3DA: mov     eax, esp
@@ -67,7 +67,7 @@
 0x45C3E4: lea     eax, [esp+3Ch+var_C]
 0x45C3E8: push    eax; int
 0x45C3E9: mov     ecx, esi
-0x45C3EB: call    sub_5E2E20
+0x45C3EB: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x45C3F0: mov     edi, [eax]
 0x45C3F2: mov     ebx, [eax+4]
 0x45C3F5: mov     ebp, [eax+8]
@@ -80,9 +80,9 @@
 0x45C407: call    TESObjectREFR_SetPosition
 0x45C40C: fldz
 0x45C40E: push    ecx
-0x45C40F: fstp    [esp+24h+var_24]; float
-0x45C412: mov     ecx, esi
-0x45C414: call    sub_4D89D0
+0x45C40F: fstp    [esp+24h+radians]; radians
+0x45C412: mov     ecx, esi; this
+0x45C414: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x45C419: mov     edi, [esp+24h+var_14]
 0x45C41D: mov     ecx, [esi+58h]
 0x45C420: mov     edx, [ecx]
@@ -99,7 +99,7 @@
 0x45C43A: mov     edx, [eax]
 0x45C43C: push    eax
 0x45C43D: mov     [esi], edx
-0x45C43F: call    FormHeapFree
+0x45C43F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45C444: add     esp, 4
 0x45C447: jmp     loc_45C340
 0x45C44C: mov     dword ptr [esi], 0

@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 38,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 52,
+  "chunks": [
+    [
+      "0x52ED50",
+      "0x52ED76"
+    ]
+  ],
+  "chunks_sha256": "b2ba16140bf54e59ec0acb21858eb9b34f73dd674c1cf17e89705f423985fc53",
+  "comment_regular": "Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
+  "comment_repeatable": "Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "TESTopic::GEtTopic",
+  "display_name": "TESTopic::GetTopic",
   "end_ea": "0x52ED76",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESTopic::GEtTopic",
+  "name": "TESTopic::GetTopic",
   "segment": ".text",
   "sha256": "b2ba16140bf54e59ec0acb21858eb9b34f73dd674c1cf17e89705f423985fc53",
   "size": 38,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52ED50",
-  "type": "int __cdecl(int, int)",
+  "total_chunk_size": 38,
+  "type": "TESTopic *__cdecl(DialogueType topicType, int index)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 53
 }

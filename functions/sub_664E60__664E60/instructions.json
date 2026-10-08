@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x664EA7",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -139,25 +139,25 @@
   },
   {
     "ea": "0x664EAF",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664EB1",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x664EB6",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x664EBC",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x664EC1",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x664EC6",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x664ECC",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x664ED0",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x664EF6",
-    "line": "mov     ecx, [esi+5DCh]",
+    "line": "mov     ecx, [esi+5DCh]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x664EFC",
-    "line": "push    0",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664EFE",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x664F1C",
-    "line": "call    sub_474AB0",
+    "line": "call    ActorAnimData_RestorePlaySavedSlot; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x664F2D",
-    "line": "push    edx; a2",
+    "line": "push    edx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x664F2E",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x664F36",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,19 +427,19 @@
   },
   {
     "ea": "0x664F52",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x664F54",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x664F56",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },

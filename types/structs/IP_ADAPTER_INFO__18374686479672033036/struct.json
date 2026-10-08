@@ -1,118 +1,189 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_IP_ADAPTER_INFO",
+  "definition": "struct _IP_ADAPTER_INFO\n{\n_IP_ADAPTER_INFO *Next;\nDWORD ComboIndex;\nchar AdapterName[260];\nchar Description[132];\nUINT AddressLength;\nBYTE Address[8];\nDWORD Index;\nUINT Type;\nUINT DhcpEnabled;\nPIP_ADDR_STRING CurrentIpAddress;\nIP_ADDR_STRING IpAddressList;\nIP_ADDR_STRING GatewayList;\nIP_ADDR_STRING DhcpServer;\nBOOL HaveWins;\nIP_ADDR_STRING PrimaryWinsServer;\nIP_ADDR_STRING SecondaryWinsServer;\ntime_t LeaseObtained;\ntime_t LeaseExpires;\n}\n",
   "id": 18374686479672033036,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Next",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "_IP_ADAPTER_INFO *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ComboIndex",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AdapterName",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 260
+      "size": 260,
+      "type": "char[260]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Description",
       "offset": 268,
-      "offset_hex": "0x10c",
-      "size": 132
+      "offset_hex": "0x10C",
+      "size": 132,
+      "type": "char[132]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddressLength",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Address",
       "offset": 404,
       "offset_hex": "0x194",
-      "size": 8
+      "size": 8,
+      "type": "BYTE[8]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Index",
       "offset": 412,
-      "offset_hex": "0x19c",
-      "size": 4
+      "offset_hex": "0x19C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Type",
       "offset": 416,
-      "offset_hex": "0x1a0",
-      "size": 4
+      "offset_hex": "0x1A0",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DhcpEnabled",
       "offset": 420,
-      "offset_hex": "0x1a4",
-      "size": 4
+      "offset_hex": "0x1A4",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentIpAddress",
       "offset": 424,
-      "offset_hex": "0x1a8",
-      "size": 4
+      "offset_hex": "0x1A8",
+      "size": 4,
+      "type": "PIP_ADDR_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IpAddressList",
       "offset": 432,
-      "offset_hex": "0x1b0",
-      "size": 40
+      "offset_hex": "0x1B0",
+      "size": 40,
+      "type": "IP_ADDR_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GatewayList",
       "offset": 472,
-      "offset_hex": "0x1d8",
-      "size": 40
+      "offset_hex": "0x1D8",
+      "size": 40,
+      "type": "IP_ADDR_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DhcpServer",
       "offset": 512,
       "offset_hex": "0x200",
-      "size": 40
+      "size": 40,
+      "type": "IP_ADDR_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HaveWins",
       "offset": 552,
       "offset_hex": "0x228",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PrimaryWinsServer",
       "offset": 560,
       "offset_hex": "0x230",
-      "size": 40
+      "size": 40,
+      "type": "IP_ADDR_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SecondaryWinsServer",
       "offset": 600,
       "offset_hex": "0x258",
-      "size": 40
+      "size": 40,
+      "type": "IP_ADDR_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LeaseObtained",
       "offset": 640,
       "offset_hex": "0x280",
-      "size": 8
+      "size": 8,
+      "type": "time_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LeaseExpires",
       "offset": 648,
       "offset_hex": "0x288",
-      "size": 8
+      "size": 8,
+      "type": "time_t"
     }
   ],
   "name": "_IP_ADAPTER_INFO",
+  "ordinal": 3340,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 656
 }

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x41E710",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x41E712",
-    "line": "push    offset SEH_6E3250",
+    "line": "push    offset ExtraDataList_SetReferencePointer_SEH",
     "mnemonic": "push",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x41E73D",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+originalReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x41E750",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+originalReference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x41E760",
-    "line": "push    edi",
+    "line": "push    edi; originalReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x41E761",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x41E763",
-    "line": "call    sub_429DE0",
+    "line": "call    ExtraOriginalReference_ctor; Construct 0x10-byte ExtraOriginalReference: BSExtraData header/type 0x26 plus original TESObjectREFR pointer at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -244,5 +244,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C3090",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3093",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3094",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3099",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C309A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C309B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C309F",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30A2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30A5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C30A7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30AC",
+    "line": "mov     eax, offset stru_AEBD48",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30B1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,13 +1,7 @@
-TileImage *__userpurge TileImage::`scalar deleting destructor'@<eax>(
-        TileImage *this@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        char a6)
+TileImage *__thiscall TileImage::`scalar deleting destructor'(TileImage *this, char a2)
 {
-  TileImage::~TileImage(this, a2, a3, a4, a5);
-  if ( (a6 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  TileImage::~TileImage(this); /*0x581983*/
+  if ( (a2 & 1) != 0 ) /*0x58198d*/
+    FormHeapFree((unsigned int)this); /*0x581990*/
+  return this; /*0x58199a*/
 }

@@ -1,4 +1,4 @@
-BSStringT *sub_5645A0()
+NiRTTI *sub_5645A0()
 {
-  return &BSTreeNode;
+  return &MEMORY[0xB3A02C]; /*0x5645a5*/
 }

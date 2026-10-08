@@ -1,5 +1,6 @@
+// TallGrassTriStrips CreateClone thunk; delegates to the inherited NiTriStrips clone implementation.
 // attributes: thunk
-NiAVObject *__stdcall sub_864530(int a1)
+NiAVObject *__stdcall TallGrassTriStrips__CreateClone(int a1)
 {
   return sub_719BE0(a1);
 }

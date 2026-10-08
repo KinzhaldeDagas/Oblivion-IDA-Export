@@ -3,7 +3,7 @@
 0x6DF012: mov     edi, ecx
 0x6DF014: mov     eax, [edi+14h]
 0x6DF017: push    eax
-0x6DF018: call    FormHeapFree
+0x6DF018: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DF01D: mov     ebx, [esp+0Ch+Src]
 0x6DF021: add     esp, 4
 0x6DF024: test    ebx, ebx

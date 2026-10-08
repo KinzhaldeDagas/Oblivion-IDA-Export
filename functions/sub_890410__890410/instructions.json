@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x890463",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+info]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x890467",
-    "line": "push    eax",
+    "line": "push    eax; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x890468",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x890470",
-    "line": "call    sub_8A1170",
+    "line": "call    OB_bhkListShape_BuildFromCinfo_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -208,5 +208,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D61E0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D61E3",
+    "line": "jmp     ??1bhkShapeCollection@@UAE@XZ; bhkShapeCollection::~bhkShapeCollection(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D61E8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D61EC",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D61EF",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D61F2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D61F4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D61F9",
+    "line": "mov     eax, offset stru_AFE13C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D61FE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

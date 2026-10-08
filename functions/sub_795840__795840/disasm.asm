@@ -1,7 +1,7 @@
-0x795840: push    ecx
+0x795840: push    ecx; OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned int>; validates owner/position, delegates to insert-fill, and returns an iterator to the inserted value.
 0x795841: push    ebx
 0x795842: push    ebp
-0x795843: mov     ebp, [esp+0Ch+arg_4]
+0x795843: mov     ebp, dword ptr [esp+0Ch+expectedOwner]
 0x795847: push    esi
 0x795848: mov     esi, ecx
 0x79584A: push    edi
@@ -23,29 +23,29 @@
 0x79586F: cmp     ebp, esi
 0x795871: jz      short loc_795878
 0x795873: call    __invalid_parameter_noinfo
-0x795878: mov     ebx, [esp+14h+Src]
+0x795878: mov     ebx, dword ptr [esp+14h+expectedOwner+4]
 0x79587C: sub     ebx, edi
 0x79587E: sar     ebx, 2
-0x795881: mov     edx, [esp+14h+arg_C]
-0x795885: mov     eax, [esp+14h+Src]
-0x795889: push    edx; int
-0x79588A: push    1; int
-0x79588C: push    eax; Src
-0x79588D: push    ebp; int
-0x79588E: mov     ecx, esi
-0x795890: call    sub_7950A0
+0x795881: mov     edx, [esp+14h+value]
+0x795885: mov     eax, dword ptr [esp+14h+expectedOwner+4]
+0x795889: push    edx; value
+0x79588A: push    1; count
+0x79588C: push    eax; count
+0x79588D: push    ebp; position
+0x79588E: mov     ecx, esi; this
+0x795890: call    OB_stVectorUInt32_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): vector<unsigned int> insert-fill core. Handles in-place overlap and 1.5x geometric reallocation while preserving the checked insertion position.
 0x795895: mov     edi, [esi+4]
 0x795898: cmp     edi, [esi+8]
 0x79589B: jbe     short loc_7958A2
 0x79589D: call    __invalid_parameter_noinfo
-0x7958A2: mov     [esp+14h+Src], edi
+0x7958A2: mov     dword ptr [esp+14h+expectedOwner+4], edi
 0x7958A6: lea     edi, [edi+ebx*4]
 0x7958A9: cmp     edi, [esi+8]
 0x7958AC: ja      short loc_7958B3
 0x7958AE: cmp     edi, [esi+4]
 0x7958B1: jnb     short loc_7958B8
 0x7958B3: call    __invalid_parameter_noinfo
-0x7958B8: mov     eax, [esp+14h+arg_0]
+0x7958B8: mov     eax, [esp+14h+result]
 0x7958BC: mov     [eax+4], edi
 0x7958BF: pop     edi
 0x7958C0: mov     [eax], esi

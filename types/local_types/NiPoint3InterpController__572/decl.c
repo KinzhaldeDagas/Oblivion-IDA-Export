@@ -1,1 +1,1 @@
-NiPoint3InterpController
+struct NiPoint3InterpController;

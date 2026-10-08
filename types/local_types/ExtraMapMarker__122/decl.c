@@ -1,1 +1,1 @@
-ExtraMapMarker
+struct ExtraMapMarker;

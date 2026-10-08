@@ -9,116 +9,52 @@ int __userpurge def_573B11@<eax>(
         double a7@<st1>,
         double a8@<st0>,
         int a9,
-        int a10,
+        float a10,
         int a11,
         int a12,
-        int a13,
+        float a13,
         char a14,
         float a15)
 {
-  bool v21; // pf
+  double v15; // st7
+  double v16; // st5
   int result; // eax
-  int v24; // [esp-4h] [ebp-4h]
+  int v18; // [esp-4h] [ebp-4h]
+  float v19; // [esp+Ch] [ebp+Ch]
+  float v20; // [esp+Ch] [ebp+Ch]
 
-  if ( a1 == 9 )
+  if ( a1 == 9 ) /*0x573b52*/
   {
-    __asm
-    {
-      fstp    st(1)
-      fld     dword ptr [esi]
-      fxch    st(1)
-    }
-    unknown_libname_14(a7, a8);
-    __asm
-    {
-      fstp    [esp+arg_1C]
-      fld     [esp+arg_1C]
-    }
-    a2 = a12;
-    __asm
-    {
-      fld     qword ptr ds:0A68950h
-      fld     st
-      fsubrp  st(2), st
-      fxch    st(1)
-      fstp    [esp+arg_1C]
-      fldz
-      fxch    st(1)
-    }
+    v15 = *_ESI; /*0x573b58*/
+    unknown_libname_14(a7, v15); /*0x573b5a*/
+    v20 = v15; /*0x573b5f*/
+    a2 = a12; /*0x573b67*/
+    v19 = dbl_A68950 - v20; /*0x573b77*/
+    a8 = 0.0; /*0x573b7d*/
   }
   else
   {
-    _EAX = *(_DWORD *)(_EDI + 0x38) + 0x38 * a1 + 0x128;
-    __asm
-    {
-      fld     dword ptr [eax+2Ch]
-      fadd    dword ptr [eax+24h]
-      fadd    dword ptr [eax+30h]
-      fstp    [esp+arg_1C]
-    }
+    v19 = *(float *)(*(_DWORD *)(_EDI + 0x38) + 0x38 * a1 + 0x154) /*0x573b4a*/
+        + *(float *)(*(_DWORD *)(_EDI + 0x38) + 0x38 * a1 + 0x14C)
+        + *(float *)(*(_DWORD *)(_EDI + 0x38) + 0x38 * a1 + 0x158);
   }
-  __asm
-  {
-    fld     dword ptr [esi]
-    fadd    [esp+arg_1C]
-    fld     [esp+arg_24]
-    fcompp
-    fnstsw  ax
-  }
-  if ( __SETP__(HIBYTE(_AX) & 5, 0) )
-    goto LABEL_11;
-  if ( a14 )
-  {
-    _ECX = *(_DWORD *)(_EDI + 0x38);
-    __asm
-    {
-      fld     dword ptr [ecx]
-      fadd    dword ptr [ebp+0]
-    }
-  }
+  if ( a13 >= *_ESI + v19 ) /*0x573b90*/
+    goto LABEL_11; /*0x573b90*/
+  if ( a14 ) /*0x573b97*/
+    v16 = **(float **)(_EDI + 0x38) + *_EBP; /*0x573b9e*/
   else
+    v16 = *_EBP + *(float *)(_EDI + 0x2C); /*0x573ba6*/
+  *_EBP = v16; /*0x573bac*/
+  if ( a2 != 0xFFFFFFFE ) /*0x573baf*/
   {
-    __asm
-    {
-      fld     dword ptr [ebp+0]
-      fadd    dword ptr [edi+2Ch]
-    }
-  }
-  __asm { fstp    dword ptr [ebp+0] }
-  *_EBP = _ET1;
-  if ( a2 != 0xFFFFFFFE )
-  {
-    ++v24;
-    __asm
-    {
-      fxch    st(1)
-      fst     dword ptr [esi]
-    }
-    *_ESI = _ET1;
-    __asm { fxch    st(1) }
+    ++v18; /*0x573bb1*/
+    *_ESI = a8; /*0x573bb8*/
 LABEL_11:
-    if ( *a3 )
-      JUMPOUT(0x573A00);
+    if ( *a3 ) /*0x573bbc*/
+      JUMPOUT(0x573A00); /*0x573a00*/
   }
-  __asm { fstp    st }
-  __asm
-  {
-    fstp    st
-    fld     [esp-4+arg_18]
-    fld     dword ptr [esi]
-    fcomp   st(1)
-    fnstsw  ax
-  }
-  v21 = __SETP__(HIBYTE(_AX) & 5, 0);
-  result = v24;
-  if ( v21 )
-  {
-    __asm { fstp    st }
-  }
-  else
-  {
-    __asm { fstp    dword ptr [esi] }
-    *_ESI = _ET1;
-  }
-  return result;
+  result = v18; /*0x573bc5*/
+  if ( *_ESI < (double)a10 ) /*0x573bdb*/
+    *_ESI = a10; /*0x573bde*/
+  return result; /*0x573be3*/
 }

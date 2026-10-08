@@ -1,4 +1,4 @@
-0x7B8200: push    0FFFFFFFFh
+0x7B8200: push    0FFFFFFFFh; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7B8202: push    offset SEH_7B8200
 0x7B8207: mov     eax, large fs:0
 0x7B820D: push    eax
@@ -14,7 +14,7 @@
 0x7B822C: push    eax
 0x7B822D: lea     eax, [esp+220h+var_C]
 0x7B8234: mov     large fs:0, eax
-0x7B823A: mov     ebp, [esp+220h+arg_0]
+0x7B823A: mov     ebp, [esp+220h+outTexture]
 0x7B8241: mov     edi, [esp+220h+Src]
 0x7B8248: xor     esi, esi
 0x7B824A: mov     [esp+220h+var_20C], 0
@@ -37,7 +37,7 @@
 0x7B8282: mov     [esp+224h+var_210], esi
 0x7B8286: call    dword ptr ds:0A28078h
 0x7B828C: mov     ecx, ds:0B42EBCh
-0x7B8292: cmp     [esp+220h+arg_8], 0
+0x7B8292: cmp     [esp+220h+loadFromCache], 0
 0x7B829A: jnz     short loc_7B82A4
 0x7B829C: test    ecx, ecx
 0x7B829E: jnz     loc_7B8393
@@ -50,9 +50,9 @@
 0x7B82B2: test    al, al
 0x7B82B4: jz      short loc_7B82E7
 0x7B82B6: push    1; char
-0x7B82B8: push    offset dword_B256D0; int
+0x7B82B8: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x7B82BD: push    edi; Src
-0x7B82BE: call    NiSourceTexture__LoadTextureByFilename
+0x7B82BE: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x7B82C3: add     esp, 0Ch
 0x7B82C6: push    eax; a2
 0x7B82C7: lea     ecx, [esp+224h+var_210]; this
@@ -66,14 +66,14 @@
 0x7B82E3: push    esi
 0x7B82E4: push    edi
 0x7B82E5: call    edx
-0x7B82E7: cmp     [esp+220h+arg_8], 0
+0x7B82E7: cmp     [esp+220h+loadFromCache], 0
 0x7B82EF: jz      loc_7B8393
-0x7B82F5: cmp     [esp+220h+arg_C], 0
+0x7B82F5: cmp     [esp+220h+requireMipmaps], 0
 0x7B82FD: jz      loc_7B8393
 0x7B8303: test    esi, esi
 0x7B8305: jz      loc_7B8393
 0x7B830B: push    esi
-0x7B830C: push    offset dword_B3F95C
+0x7B830C: push    offset stru_B3F95C
 0x7B8311: call    NiRTTI_Cast
 0x7B8316: mov     ecx, [esi+24h]
 0x7B8319: add     esp, 8
@@ -106,13 +106,13 @@
 0x7B8365: lea     edx, [esp+220h+var_204]
 0x7B8369: push    0
 0x7B836B: push    edx
-0x7B836C: call    eax ; dword_B42E8C
+0x7B836C: call    eax ; unk_B42E8C
 0x7B836E: add     esp, 8
 0x7B8371: mov     dword ptr [ebp+0], 0
-0x7B8378: lea     ecx, [esp+220h+var_210]; this
+0x7B8378: lea     ecx, [esp+220h+var_210]; slot
 0x7B837C: mov     [esp+220h+var_20C], 1
 0x7B8384: mov     byte ptr [esp+220h+var_4], 0
-0x7B838C: call    sub_7016A0
+0x7B838C: call    NiPointerSlot_Release
 0x7B8391: jmp     short loc_7B83D0
 0x7B8393: test    esi, esi
 0x7B8395: mov     [ebp+0], esi
@@ -146,3 +146,23 @@
 0x7B83ED: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7B83F2: add     esp, 210h
 0x7B83F8: retn
+0x9CDAE0: lea     ecx, [ebp-210h]; slot
+0x9CDAE6: jmp     NiPointerSlot_Release
+0x9CDAEB: mov     eax, [ebp-20Ch]
+0x9CDAF1: and     eax, 1
+0x9CDAF4: jz      locret_9CDB0C
+0x9CDAFA: and     dword ptr [ebp-20Ch], 0FFFFFFFEh
+0x9CDB01: mov     ecx, [ebp-208h]; slot
+0x9CDB07: jmp     NiPointerSlot_Release
+0x9CDB0C: retn
+0x9CDB0D: mov     edx, [esp+Src]
+0x9CDB11: lea     eax, [edx-210h]
+0x9CDB17: mov     ecx, [edx-214h]
+0x9CDB1D: xor     ecx, eax
+0x9CDB1F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDB24: add     eax, 0Ch
+0x9CDB27: mov     ecx, [edx-4]
+0x9CDB2A: xor     ecx, eax
+0x9CDB2C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDB31: mov     eax, offset stru_AF6CC4
+0x9CDB36: jmp     ___CxxFrameHandler3

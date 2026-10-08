@@ -1,4 +1,4 @@
-0x791E80: sub     esp, 28h
+0x791E80: sub     esp, 28h; CBranch::ComputeFlareEntries. Pushes 0x18-byte SIdvBranchFlare records into vector wrapper at branch+0x30.
 0x791E83: push    ebx
 0x791E84: push    esi
 0x791E85: mov     esi, [esp+30h+arg_0]
@@ -34,7 +34,6 @@
 0x791EF2: jle     loc_792092
 0x791EF8: add     ebx, 30h ; '0'
 0x791EFB: jmp     short loc_791F00
-0x791EFD: align 10h
 0x791F00: fld     [esp+34h+arg_0]
 0x791F04: fmul    dword ptr [esi+2Ch]
 0x791F07: fstp    [esp+34h+var_20]
@@ -57,22 +56,22 @@
 0x791F44: fld     [esp+34h+var_20]
 0x791F48: fimul   [esp+34h+var_28]
 0x791F4C: fadd    [esp+34h+var_1C]
-0x791F50: fstp    [esp+34h+var_18]
-0x791F54: fld     [esp+34h+var_18]
+0x791F50: fstp    [esp+34h+value.flareAngle]
+0x791F54: fld     [esp+34h+value.flareAngle]
 0x791F58: fld     dword ptr ds:0B2B714h
 0x791F5E: fcom    st(1)
 0x791F60: fnstsw  ax
 0x791F62: test    ah, 5
 0x791F65: jp      short loc_791F6F
 0x791F67: fsubp   st(1), st
-0x791F69: fstp    [esp+34h+var_18]
+0x791F69: fstp    [esp+34h+value.flareAngle]
 0x791F6D: jmp     short loc_791F73
 0x791F6F: fstp    st(1)
 0x791F71: fstp    st
 0x791F73: fld     dword ptr [esi+38h]
-0x791F76: fstp    [esp+34h+var_10]
+0x791F76: fstp    [esp+34h+value.radialExponent]
 0x791F7A: fld     dword ptr [esi+4Ch]
-0x791F7D: fstp    [esp+34h+var_8]
+0x791F7D: fstp    [esp+34h+value.lengthExponent]
 0x791F81: fld     dword ptr [esi+30h]
 0x791F84: fsub    dword ptr [esi+34h]
 0x791F87: fstp    [esp+34h+var_28]
@@ -97,7 +96,7 @@
 0x791FCA: fstp    [esp+34h+var_20]
 0x791FCE: fld     [esp+34h+var_20]
 0x791FD2: fdiv    qword ptr ds:0A8BA48h
-0x791FD8: fstp    [esp+34h+var_14]
+0x791FD8: fstp    [esp+34h+value.radialInfluence]
 0x791FDC: fld     dword ptr [esi+44h]
 0x791FDF: fsub    dword ptr [esi+48h]
 0x791FE2: fstp    [esp+34h+var_28]
@@ -119,7 +118,7 @@
 0x79201D: fld     [esp+34h+var_20]
 0x792021: fmulp   st(2), st
 0x792023: faddp   st(1), st
-0x792025: fstp    [esp+34h+var_C]
+0x792025: fstp    [esp+34h+value.lengthInfluence]
 0x792029: fld     dword ptr [esi+3Ch]
 0x79202C: fsub    dword ptr [esi+40h]
 0x79202F: fstp    [esp+34h+var_28]
@@ -129,9 +128,9 @@
 0x79203D: call    _rand
 0x792042: mov     [esp+34h+var_20], eax
 0x792046: fild    [esp+34h+var_20]
-0x79204A: lea     eax, [esp+34h+var_18]
-0x79204E: push    eax
-0x79204F: mov     ecx, ebx
+0x79204A: lea     eax, [esp+34h+value]
+0x79204E: push    eax; value
+0x79204F: mov     ecx, ebx; this
 0x792051: fdiv    qword ptr ds:0A3D5A8h
 0x792057: fstp    [esp+38h+var_20]
 0x79205B: fld     [esp+38h+var_20]
@@ -144,8 +143,8 @@
 0x792071: fld     [esp+38h+var_20]
 0x792075: fmulp   st(2), st
 0x792077: faddp   st(1), st
-0x792079: fstp    [esp+38h+var_4]
-0x79207D: call    sub_7916D0
+0x792079: fstp    [esp+38h+value.flareDistance]
+0x79207D: call    OB_stVectorBranchFlareEntry_PushBack_010201A0; Pushes one 0x18-byte OB_CBranchFlareEntry. Constructs directly at end when capacity remains; otherwise routes through the checked insertion/reallocation helper. CBranch::ComputeFlareEntries is the authoritative caller.
 0x792082: add     edi, 1
 0x792085: cmp     edi, [esi+28h]
 0x792088: mov     [esp+34h+var_28], edi

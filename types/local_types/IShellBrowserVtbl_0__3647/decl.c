@@ -1,1 +1,1 @@
-IShellBrowserVtbl_0
+typedef IShellBrowserVtbl IShellBrowserVtbl_0;

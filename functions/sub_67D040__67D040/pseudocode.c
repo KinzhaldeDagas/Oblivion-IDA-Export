@@ -1,63 +1,63 @@
 void __thiscall sub_67D040(char ***this)
 {
-  UInt32 v2; // ebx
-  UInt32 *v3; // esi
-  TESForm *v4; // eax
-  const char *v5; // eax
-  float *v6; // eax
-  float *v7; // edi
-  _DWORD *v8; // esi
-  _DWORD *v9; // eax
-  TESSaveLoad *v10; // ecx
-  UInt32 *v11; // edi
-  UInt32 v12; // esi
-  TESForm *v13; // ecx
-  UInt32 v14; // eax
+  UInt32 v1; // ebx
+  UInt32 *v2; // esi
+  TESForm *v3; // eax
+  const char *v4; // eax
+  float *v5; // eax
+  float *v6; // edi
+  _DWORD *v7; // esi
+  _DWORD *v8; // eax
+  TESSaveLoad *v9; // ecx
+  UInt32 *v10; // edi
+  UInt32 v11; // esi
+  TESForm *v12; // ecx
+  UInt32 v13; // eax
+  const char *v14; // eax
   const char *v15; // eax
-  const char *v16; // eax
-  UInt32 v17; // edx
+  UInt32 v16; // edx
+  int v17; // [esp-8h] [ebp-40h]
   int v18; // [esp-8h] [ebp-40h]
   int v19; // [esp-8h] [ebp-40h]
-  int v20; // [esp-8h] [ebp-40h]
+  size_t v20; // [esp-4h] [ebp-3Ch]
   size_t v21; // [esp-4h] [ebp-3Ch]
-  size_t v22; // [esp-4h] [ebp-3Ch]
+  int v22; // [esp-4h] [ebp-3Ch]
   int v23; // [esp-4h] [ebp-3Ch]
   int v24; // [esp-4h] [ebp-3Ch]
-  int v25; // [esp-4h] [ebp-3Ch]
-  unsigned __int16 v26; // [esp+14h] [ebp-24h] BYREF
-  int v27; // [esp+18h] [ebp-20h] BYREF
-  int v28; // [esp+1Ch] [ebp-1Ch]
+  unsigned __int16 v25; // [esp+14h] [ebp-24h] BYREF
+  int v26; // [esp+18h] [ebp-20h] BYREF
+  int v27; // [esp+1Ch] [ebp-1Ch]
   int Dst; // [esp+20h] [ebp-18h] BYREF
-  char ***v30; // [esp+24h] [ebp-14h]
-  float *v31; // [esp+28h] [ebp-10h]
-  unsigned int v32; // [esp+34h] [ebp-4h]
+  char ***v29; // [esp+24h] [ebp-14h]
+  float *v30; // [esp+28h] [ebp-10h]
+  unsigned int v31; // [esp+34h] [ebp-4h]
 
-  v30 = this;
-  v27 = 0;
-  v2 = 0;
-  if ( sub_45A170() )
+  v29 = this; /*0x67d067*/
+  v26 = 0; /*0x67d073*/
+  v1 = 0; /*0x67d077*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v21) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v21);
+    LODWORD(v20) = 4; /*0x67d08c*/
+    SaveLoad_LoadData((int)g_TESSaveLoadGame, &Dst, v20); /*0x67d093*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v3 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v3 )
+      v2 = (UInt32 *)g_TESSaveLoadGame[1].unk030[0]; /*0x67d0a7*/
+      if ( v2 )
       {
-        v4 = TESForm_LookupByFormID(*v3);
-        v5 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v4->vtbl->GetEditorName)(
-                             v4,
-                             *((unsigned __int8 *)v3 + 9),
-                             *(UInt32 *)((char *)v3 + 5));
+        v3 = TESForm_LookupByFormID(*v2); /*0x67d0b4*/
+        v4 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v3->vtbl->GetEditorName)( /*0x67d0cf*/
+                             v3,
+                             *((unsigned __int8 *)v2 + 9),
+                             *(UInt32 *)((char *)v2 + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           ".\\AI\\SpectatorPackage.cpp",
           0x239,
-          *v3,
-          v5,
-          v18,
-          v23);
+          *v2,
+          v4,
+          v17,
+          v22);
       }
       else
       {
@@ -65,120 +65,120 @@ void __thiscall sub_67D040(char ***this)
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\AI\\SpectatorPackage.cpp",
           0x239,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          LOBYTE(g_TESSaveLoadGame[1].createdObjectList.next));
       }
     }
-    v2 = SaveLoad_CurrentSavegame->unk000[5];
-    LODWORD(v22) = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v27, v22);
+    v1 = g_TESSaveLoadGame->unk000[5]; /*0x67d110*/
+    LODWORD(v21) = 2; /*0x67d113*/
+    SaveLoad_LoadData((int)g_TESSaveLoadGame, &v26, v21); /*0x67d11a*/
   }
-  LODWORD(v21) = 2;
-  SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v26, v21);
-  v28 = 0;
-  if ( v26 )
+  LODWORD(v20) = 2; /*0x67d11f*/
+  SaveLoad_LoadData((int)g_TESSaveLoadGame, &v25, v20); /*0x67d12c*/
+  v27 = 0; /*0x67d136*/
+  if ( v25 ) /*0x67d13a*/
   {
-    do
+    do /*0x67d1b6*/
     {
-      v6 = (float *)FormHeapAlloc(0x24u);
-      v31 = v6;
-      v32 = 0;
-      if ( v6 )
-        v7 = sub_67CBC0(v6);
+      v5 = (float *)FormHeapAlloc(0x24u); /*0x67d142*/
+      v30 = v5; /*0x67d14a*/
+      v31 = 0; /*0x67d150*/
+      if ( v5 ) /*0x67d154*/
+        v6 = sub_67CBC0(v5); /*0x67d15d*/
       else
-        v7 = 0;
-      v32 = 0xFFFFFFFF;
-      sub_67BA90((char *)v7);
-      v8 = *v30;
-      if ( v7 )
+        v6 = 0; /*0x67d161*/
+      v31 = 0xFFFFFFFF; /*0x67d165*/
+      sub_67BA90((char *)v6); /*0x67d16d*/
+      v7 = *v29; /*0x67d178*/
+      if ( v6 ) /*0x67d17a*/
       {
-        if ( *v8 )
+        if ( *v7 ) /*0x67d17c*/
         {
-          v9 = (_DWORD *)FormHeapAlloc(8u);
-          if ( v9 )
+          v8 = (_DWORD *)FormHeapAlloc(8u); /*0x67d182*/
+          if ( v8 ) /*0x67d18c*/
           {
-            *v9 = *v8;
-            v9[1] = 0;
+            *v8 = *v7; /*0x67d190*/
+            v8[1] = 0; /*0x67d192*/
           }
           else
           {
-            v9 = 0;
+            v8 = 0; /*0x67d197*/
           }
-          v9[1] = v8[1];
-          v8[1] = v9;
+          v8[1] = v7[1]; /*0x67d19c*/
+          v7[1] = v8; /*0x67d19f*/
         }
-        *v8 = v7;
+        *v7 = v6; /*0x67d1a2*/
       }
-      ++v28;
+      ++v27; /*0x67d1b2*/
     }
-    while ( v28 < v26 );
+    while ( v27 < v25 ); /*0x67d1b6*/
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x67d1be*/
   {
-    v10 = SaveLoad_CurrentSavegame;
-    v11 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-    v12 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v11 )
+    v9 = g_TESSaveLoadGame; /*0x67d1cb*/
+    v10 = (UInt32 *)g_TESSaveLoadGame[1].unk030[0]; /*0x67d1d1*/
+    v11 = g_TESSaveLoadGame->unk000[5]; /*0x67d1d9*/
+    if ( v10 ) /*0x67d1dc*/
     {
-      v13 = TESForm_LookupByFormID(*v11);
-      v14 = v2 + (unsigned __int16)v27;
-      if ( v12 <= v14 )
+      v12 = TESForm_LookupByFormID(*v10); /*0x67d1ea*/
+      v13 = v1 + (unsigned __int16)v26; /*0x67d1f1*/
+      if ( v11 <= v13 ) /*0x67d1f8*/
       {
-        if ( v12 < v14 )
+        if ( v11 < v13 ) /*0x67d246*/
         {
-          v16 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v13->vtbl->GetEditorName)(
-                                v13,
-                                *((unsigned __int8 *)v11 + 9),
-                                *(UInt32 *)((char *)v11 + 5));
-          PrintError(
+          v15 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)( /*0x67d25d*/
+                                v12,
+                                *((unsigned __int8 *)v10 + 9),
+                                *(UInt32 *)((char *)v10 + 5));
+          PrintError( /*0x67d27c*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version "
             "%i and flags %08X",
-            v2 + (unsigned __int16)v27 - v12,
+            v1 + (unsigned __int16)v26 - v11,
             ".\\AI\\SpectatorPackage.cpp",
             0x248,
-            *v11,
-            v16,
-            v20,
-            v25);
+            *v10,
+            v15,
+            v19,
+            v24);
         }
       }
       else
       {
-        v15 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v13->vtbl->GetEditorName)(
-                              v13,
-                              *((unsigned __int8 *)v11 + 9),
-                              *(UInt32 *)((char *)v11 + 5));
-        PrintError(
+        v14 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v12->vtbl->GetEditorName)( /*0x67d20b*/
+                              v12,
+                              *((unsigned __int8 *)v10 + 9),
+                              *(UInt32 *)((char *)v10 + 5));
+        PrintError( /*0x67d22a*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-          v12 - (unsigned __int16)v27 - v2,
+          v11 - (unsigned __int16)v26 - v1,
           ".\\AI\\SpectatorPackage.cpp",
           0x248,
-          *v11,
-          v15,
-          v19,
-          v24);
+          *v10,
+          v14,
+          v18,
+          v23);
       }
     }
     else
     {
-      v17 = (unsigned __int16)v27 + v2;
-      if ( v12 <= v17 )
+      v16 = (unsigned __int16)v26 + v1; /*0x67d29d*/
+      if ( v11 <= v16 ) /*0x67d2a2*/
       {
-        if ( v12 < v17 )
-          PrintError(
+        if ( v11 < v16 ) /*0x67d2bf*/
+          PrintError( /*0x67d2da*/
             "LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-            v2 + (unsigned __int16)v27 - v12,
+            v1 + (unsigned __int16)v26 - v11,
             ".\\AI\\SpectatorPackage.cpp",
             0x248,
-            LOBYTE(v10[1].createdObjectList.next));
+            LOBYTE(v9[1].createdObjectList.next));
       }
       else
       {
-        PrintError(
+        PrintError( /*0x67d2bd*/
           "LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-          v12 - (unsigned __int16)v27 - v2,
+          v11 - (unsigned __int16)v26 - v1,
           ".\\AI\\SpectatorPackage.cpp",
           0x248,
-          LOBYTE(v10[1].createdObjectList.next));
+          LOBYTE(v9[1].createdObjectList.next));
       }
     }
   }

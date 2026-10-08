@@ -40,11 +40,11 @@
 0x45D9B6: mov     [esp+250h+var_238], eax
 0x45D9BA: jnz     short loc_45D9FC
 0x45D9BC: mov     ecx, ds:0B333C4h; this
-0x45D9C2: call    TESObjectREFR_GetParentCell
+0x45D9C2: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45D9C7: test    eax, eax
 0x45D9C9: jz      short loc_45D9E8
 0x45D9CB: mov     ecx, ds:0B333C4h; this
-0x45D9D1: call    TESObjectREFR_GetParentCell
+0x45D9D1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45D9D6: mov     edx, [eax]
 0x45D9D8: mov     ecx, eax
 0x45D9DA: mov     eax, [edx+0D4h]
@@ -141,7 +141,7 @@
 0x45DB0B: lea     edx, [esp+250h+Str]
 0x45DB0F: push    edx
 0x45DB10: push    eax
-0x45DB11: push    offset word_B3F280
+0x45DB11: push    offset unk_B3F280
 0x45DB16: lea     ecx, [esp+25Ch+var_114]
 0x45DB1D: push    offset aSSS_ess; "%s%s%s.ess"
 0x45DB22: push    ecx
@@ -177,7 +177,7 @@
 0x45DB7A: jnz     short loc_45DB70
 0x45DB7C: mov     edx, [esp+250h+var_234]
 0x45DB80: push    edx
-0x45DB81: call    FormHeapFree
+0x45DB81: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45DB86: add     esp, 4
 0x45DB89: mov     ecx, [esp+250h+var_C]
 0x45DB90: mov     large fs:0, ecx
@@ -191,3 +191,16 @@
 0x45DBA5: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x45DBAA: add     esp, 23Ch
 0x45DBB0: retn    4
+0x9AE3F0: lea     ecx, [ebp-234h]; void *
+0x9AE3F6: jmp     BSStringT_Clear
+0x9AE3FB: mov     edx, [esp+arg_4]
+0x9AE3FF: lea     eax, [edx-240h]
+0x9AE405: mov     ecx, [edx-244h]
+0x9AE40B: xor     ecx, eax
+0x9AE40D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE412: add     eax, 10h
+0x9AE415: mov     ecx, [edx-4]
+0x9AE418: xor     ecx, eax
+0x9AE41A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE41F: mov     eax, offset stru_ADAC60
+0x9AE424: jmp     ___CxxFrameHandler3

@@ -487,19 +487,19 @@
   },
   {
     "ea": "0x4C1F80",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4C1F82",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4C1F84",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x4C1FBA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4C1FBC",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },

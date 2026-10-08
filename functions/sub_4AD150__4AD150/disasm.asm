@@ -229,13 +229,13 @@
 0x4AD45E: push    edx
 0x4AD45F: mov     ecx, esi
 0x4AD461: call    sub_4AC7C0
-0x4AD466: push    eax
+0x4AD466: push    eax; other
 0x4AD467: lea     eax, [esp+24h+var_C]
 0x4AD46B: push    eax
 0x4AD46C: mov     ecx, edi
 0x4AD46E: call    sub_4AC7C0
-0x4AD473: mov     ecx, eax
-0x4AD475: call    sub_8AA390
+0x4AD473: mov     ecx, eax; this
+0x4AD475: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x4AD47A: test    al, al
 0x4AD47C: jnz     loc_4AD178
 0x4AD482: fld     dword ptr [edi+0A8h]
@@ -248,13 +248,13 @@
 0x4AD49F: push    ecx
 0x4AD4A0: mov     ecx, esi
 0x4AD4A2: call    sub_4AC7F0
-0x4AD4A7: push    eax
+0x4AD4A7: push    eax; other
 0x4AD4A8: lea     edx, [esp+24h+var_18]
 0x4AD4AC: push    edx
 0x4AD4AD: mov     ecx, edi
 0x4AD4AF: call    sub_4AC7F0
-0x4AD4B4: mov     ecx, eax
-0x4AD4B6: call    sub_8AA390
+0x4AD4B4: mov     ecx, eax; this
+0x4AD4B6: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x4AD4BB: test    al, al
 0x4AD4BD: jnz     loc_4AD178
 0x4AD4C3: fld     dword ptr [edi+0C4h]

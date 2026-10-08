@@ -1,13 +1,17 @@
-_BYTE *__stdcall sub_7890F0(_BYTE *a1, int a2, _BYTE *a3)
+// Oblivion byte-vector uninitialized fill-N primitive: writes count copies of one byte and returns one-past-last.
+unsigned __int8 *__stdcall OB_stVectorByte_UninitializedFillN_010201A0(
+        unsigned __int8 *destination,
+        unsigned int count,
+        const unsigned __int8 *value)
 {
-  int v3; // eax
-  _BYTE *i; // ecx
+  unsigned int v3; // eax
+  unsigned __int8 *i; // ecx
 
-  v3 = a2;
-  for ( i = a1; v3; ++i )
+  v3 = count; /*0x7890fc*/
+  for ( i = destination; v3; ++i ) /*0x789100*/
   {
-    *i = *a3;
-    --v3;
+    *i = *value; /*0x789109*/
+    --v3; /*0x78910b*/
   }
-  return &a1[a2];
+  return &destination[count]; /*0x789119*/
 }

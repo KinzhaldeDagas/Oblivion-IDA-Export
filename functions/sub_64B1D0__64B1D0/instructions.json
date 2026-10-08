@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x64B1D0",
-    "line": "mov     eax, ecx",
+    "line": "mov     eax, ecx; High/MiddleHigh process vtable +0x128. With ActorSkinInfo, returns cached-node index 6 / QuiverNode; with null context, returns process quiver cache +0x10C. Actor_ProcessAction finds Arrow:0 beneath this source and clones it.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64B1D2",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+animData]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x64B1E3",
-    "line": "mov     [esp+arg_0], 6",
+    "line": "mov     [esp+animData], 6; nodeIndex",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x64B1EB",
-    "line": "jmp     sub_477EC0",
+    "line": "jmp     ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "jmp",
     "size": 5
   }

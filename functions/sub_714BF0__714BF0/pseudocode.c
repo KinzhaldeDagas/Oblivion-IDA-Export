@@ -6,13 +6,13 @@ int __thiscall sub_714BF0(char *this, signed int a2)
   int v7; // [esp-28h] [ebp-30h]
   int v8; // [esp-14h] [ebp-1Ch]
 
-  v2 = a2;
-  v3 = *(void (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(a2 + 0x220) + 8);
-  v8 = *(_DWORD *)(a2 + 0x220);
-  a2 = 4;
-  v3(v8, this, 4, &a2, 1);
-  v5 = *(int (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(v2 + 0x220) + 8);
-  v7 = *(_DWORD *)(v2 + 0x220);
-  a2 = 4;
-  return v5(v7, this + 4, 4, &a2, 1);
+  v2 = a2; /*0x714bf2*/
+  v3 = *(void (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(a2 + 0x220) + 8); /*0x714bfc*/
+  v8 = *(_DWORD *)(a2 + 0x220); /*0x714c0b*/
+  a2 = 4; /*0x714c0c*/
+  v3(v8, this, 4, &a2, 1); /*0x714c14*/
+  v5 = *(int (__cdecl **)(int, char *, int, signed int *, int))(*(_DWORD *)(v2 + 0x220) + 8); /*0x714c1c*/
+  v7 = *(_DWORD *)(v2 + 0x220); /*0x714c2c*/
+  a2 = 4; /*0x714c2d*/
+  return v5(v7, this + 4, 4, &a2, 1); /*0x714c3a*/
 }

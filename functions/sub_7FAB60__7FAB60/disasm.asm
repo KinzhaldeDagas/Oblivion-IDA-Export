@@ -1,4 +1,4 @@
-0x7FAB60: sub     esp, 0Ch
+0x7FAB60: sub     esp, 0Ch; Pass238: Lighting30 helper is not the alternate explicit fog writer.
 0x7FAB63: push    esi
 0x7FAB64: mov     esi, [esp+10h+arg_0]
 0x7FAB68: test    esi, esi

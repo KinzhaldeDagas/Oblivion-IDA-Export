@@ -1,1 +1,5 @@
-tagHSZPAIR
+struct tagHSZPAIR
+{
+HSZ hszSvc;
+HSZ hszTopic;
+};

@@ -26,3 +26,15 @@
 0x5318E3: pop     esi
 0x5318E4: add     esp, 10h
 0x5318E7: retn
+0x9B8C70: mov     ecx, [ebp-10h]; this
+0x9B8C73: jmp     TESForm_destr
+0x9B8C78: mov     ecx, [ebp-10h]
+0x9B8C7B: add     ecx, 18h
+0x9B8C7E: jmp     sub_56A7A0
+0x9B8C83: mov     edx, [esp+arg_4]
+0x9B8C87: lea     eax, [edx-8]
+0x9B8C8A: mov     ecx, [edx-0Ch]
+0x9B8C8D: xor     ecx, eax
+0x9B8C8F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8C94: mov     eax, offset stru_AE30E8
+0x9B8C99: jmp     ___CxxFrameHandler3

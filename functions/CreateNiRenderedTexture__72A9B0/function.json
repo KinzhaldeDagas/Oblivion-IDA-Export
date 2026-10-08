@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x72A9B0",
+      "0x72AADB"
+    ],
+    [
+      "0x9CA5A0",
+      "0x9CA5C6"
+    ]
+  ],
+  "chunks_sha256": "f4732656604d3e18709005003f9705b1825a949333a4615afffe87541622e332",
+  "comment_regular": "DX10OBSE resource decode: creates NiRenderedTexture and asks the renderer to create its render-data texture; native render targets can later be sampled through the same stage/sampler SetTexture route.",
+  "comment_repeatable": "DX10OBSE resource decode: creates NiRenderedTexture and asks the renderer to create its render-data texture; native render targets can later be sampled through the same stage/sampler SetTexture route.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "CreateNiRenderedTexture",
   "end_ea": "0x72AADB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "CreateNiRenderedTexture",
   "segment": ".text",
   "sha256": "1577dd2c7592045da99d131cbc2b2cdde5c4101a725a438e0fa9f4261016d32e",
   "size": 299,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x72A9B0",
+  "total_chunk_size": 337,
   "type": "NiRenderedTexture *__cdecl(int a1, int a2, NiDX9Renderer *a3, FormatPrefs *a4)",
-  "xrefs_from_count": 120,
+  "xrefs_from_count": 134,
   "xrefs_to_count": 2
 }

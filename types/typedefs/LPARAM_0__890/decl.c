@@ -1,1 +1,1 @@
-LPARAM_0
+typedef LONG_PTR LPARAM_0;

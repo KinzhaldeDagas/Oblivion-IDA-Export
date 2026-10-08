@@ -17,20 +17,20 @@
 0x503438: push    edx; a2
 0x503439: push    eax; a1
 0x50343A: mov     dword ptr [esp+28h+var_4], 0
-0x503442: call    Script_ExtractArgs
+0x503442: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503447: add     esp, 20h
 0x50344A: test    al, al
 0x50344C: jnz     short loc_503451
 0x50344E: pop     esi
 0x50344F: pop     ecx
 0x503450: retn
-0x503451: mov     ecx, [esp+8+arg_18]
+0x503451: mov     ecx, [esp+8+value]
 0x503455: mov     edx, dword ptr [esp+8+var_4]
-0x503459: push    ecx
-0x50345A: push    0
-0x50345C: push    edx
-0x50345D: push    esi
-0x50345E: call    sub_4F70C0
+0x503459: push    ecx; value
+0x50345A: push    0; param2
+0x50345C: push    edx; param1
+0x50345D: push    esi; subject
+0x50345E: call    GetInFaction_Eval; GetInFaction_Eval (index 71 / opcode 0x1047): the Faction parameter (typeID 0x11) is present when TESActorBaseData_GetFactionRank != -1. This returns a membership predicate, not the numeric rank.
 0x503463: add     esp, 10h
 0x503466: pop     esi
 0x503467: pop     ecx

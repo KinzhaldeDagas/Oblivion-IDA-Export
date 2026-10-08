@@ -6,7 +6,7 @@
 0x8AB050: push    esi
 0x8AB051: push    edi
 0x8AB052: push    ebx
-0x8AB053: call    sub_497420
+0x8AB053: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x8AB058: mov     edx, eax
 0x8AB05A: add     esp, 4
 0x8AB05D: test    edx, edx
@@ -55,7 +55,7 @@
 0x8AB0E5: jnz     short loc_8AB0EC
 0x8AB0E7: fstp    st
 0x8AB0E9: fld     dword ptr [edx+18h]
-0x8AB0EC: push    offset dword_BA7F3C
+0x8AB0EC: push    0BA7F3Ch
 0x8AB0F1: fstp    [esp+40h+var_28]
 0x8AB0F5: mov     ecx, ebx
 0x8AB0F7: call    sub_700010

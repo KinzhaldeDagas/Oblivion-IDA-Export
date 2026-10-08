@@ -66,7 +66,7 @@
 0x489654: cmp     dword ptr [eax], 0
 0x489657: jnz     short loc_48969C
 0x489659: push    eax
-0x48965A: call    FormHeapFree
+0x48965A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48965F: add     esp, 4
 0x489662: cmp     dword ptr [edi+4], 0
 0x489666: mov     dword ptr [edi], 0
@@ -78,13 +78,13 @@
 0x48967A: mov     ecx, [edi]
 0x48967C: test    ecx, ecx
 0x48967E: jz      short loc_489685
-0x489680: call    BSSimpleList_Clear
+0x489680: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x489685: mov     edx, [edi]
 0x489687: push    edx
-0x489688: call    FormHeapFree
+0x489688: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48968D: push    edi
 0x48968E: mov     dword ptr [edi], 0
-0x489694: call    FormHeapFree
+0x489694: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x489699: add     esp, 8
 0x48969C: pop     edi
 0x48969D: pop     esi

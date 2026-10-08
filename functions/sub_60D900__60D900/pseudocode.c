@@ -1,4 +1,4 @@
-char *sub_60D900()
+NiRTTI *sub_60D900()
 {
-  return dword_BA8024;
+  return &stru_BA8024; /*0x60d905*/
 }

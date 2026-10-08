@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x70B286",
-    "line": "mov     ebx, [esp+24h+arg_4]",
+    "line": "mov     ebx, [esp+24h+index]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x70B292",
-    "line": "mov     edi, [esp+24h+arg_8]",
+    "line": "mov     edi, [esp+24h+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x70B29A",
-    "line": "push    ebp",
+    "line": "push    ebp; newParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B29B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x70B29D",
-    "line": "call    sub_7074B0",
+    "line": "call    NiAVObject_SetParentAndDetachFromOld; Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x70B2A4",
-    "line": "mov     [esp+24h+arg_8], edi",
+    "line": "mov     [esp+24h+element], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,49 +235,49 @@
   },
   {
     "ea": "0x70B2D3",
-    "line": "push    eax",
+    "line": "push    eax; capacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B2D4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x70B2D6",
-    "line": "call    sub_523B10",
+    "line": "call    NiTObjectArray_Resize16",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x70B2DB",
-    "line": "lea     ecx, [esp+24h+arg_8]",
+    "line": "lea     ecx, [esp+24h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70B2DF",
-    "line": "push    ecx",
+    "line": "push    ecx; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B2E0",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B2E1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x70B2E3",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x70B326",
-    "line": "mov     [esp+24h+arg_4], esi",
+    "line": "mov     [esp+24h+index], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x70B349",
-    "line": "mov     edi, [esp+24h+arg_8]",
+    "line": "mov     edi, [esp+24h+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,19 +475,19 @@
   },
   {
     "ea": "0x70B351",
-    "line": "push    ebp",
+    "line": "push    ebp; newParent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B352",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x70B354",
-    "line": "call    sub_7074B0",
+    "line": "call    NiAVObject_SetParentAndDetachFromOld; Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x70B35B",
-    "line": "mov     [esp+24h+arg_8], edi",
+    "line": "mov     [esp+24h+element], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,25 +529,25 @@
   },
   {
     "ea": "0x70B36B",
-    "line": "lea     eax, [esp+24h+arg_8]",
+    "line": "lea     eax, [esp+24h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70B36F",
-    "line": "push    eax",
+    "line": "push    eax; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B370",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70B371",
-    "line": "lea     ecx, [ebp+0ACh]",
+    "line": "lea     ecx, [ebp+0ACh]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x70B37C",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },
@@ -832,5 +832,125 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C9960",
+    "line": "lea     ecx, [ebp+0Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9963",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9968",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C996B",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9C996E",
+    "line": "jz      locret_9C9980",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9C9974",
+    "line": "and     dword ptr [ebp-10h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9C9978",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C997B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9980",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C9981",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9984",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9989",
+    "line": "lea     ecx, [ebp+0Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C998C",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C9991",
+    "line": "mov     edx, [esp+index]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C9995",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C9998",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C999B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C999D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C99A2",
+    "line": "mov     eax, offset stru_AF21E8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C99A7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

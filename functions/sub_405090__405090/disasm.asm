@@ -1,7 +1,7 @@
-0x405090: push    ecx
-0x405091: mov     ecx, TES
+0x405090: push    ecx; Verified loaded-cell dispatcher for TESObjectCELL_RemoveTreeModel3DByTrunkLength. Iterates current/interior or exterior-buffer cells; when skipCurrentExteriorNeighbors is true, preserves the active 2x2 exterior neighborhood. Memory_Cleanup supplies trunkLength buckets [-FLT_MAX,100), [100,250), and [250,FLT_MAX); length units are Unknown.
+0x405091: mov     ecx, ds:0B333A0h
 0x405097: call    sub_43FD20
-0x40509C: mov     ecx, TES
+0x40509C: mov     ecx, ds:0B333A0h
 0x4050A2: cmp     dword ptr [ecx+34h], 0
 0x4050A6: mov     [esp+4+var_4], eax
 0x4050A9: jz      short loc_4050B2
@@ -21,14 +21,14 @@
 0x4050CA: mov     esi, [eax+ebx*4]
 0x4050CD: test    esi, esi
 0x4050CF: jz      short loc_40512D
-0x4050D1: cmp     [esp+14h+arg_0], 0
+0x4050D1: cmp     [esp+14h+skipCurrentExteriorNeighbors], 0
 0x4050D6: jz      short loc_40510E
 0x4050D8: mov     ecx, esi; this
 0x4050DA: call    TESObjectCELL_GetXCoordinate
 0x4050DF: mov     ecx, esi; this
 0x4050E1: mov     edi, eax
 0x4050E3: call    TESObjectCELL_GetYCoordinate
-0x4050E8: mov     ecx, TES
+0x4050E8: mov     ecx, ds:0B333A0h
 0x4050EE: mov     ebp, eax
 0x4050F0: mov     eax, [ecx+20h]
 0x4050F3: sub     eax, edi
@@ -44,14 +44,14 @@
 0x405107: sub     eax, edx
 0x405109: cmp     eax, 2
 0x40510C: jl      short loc_40512D
-0x40510E: fld     [esp+14h+arg_8]
+0x40510E: fld     [esp+14h+maximumDistance]
 0x405112: sub     esp, 8
-0x405115: fstp    [esp+1Ch+var_18]; float
-0x405119: mov     ecx, esi
-0x40511B: fld     [esp+1Ch+arg_4]
-0x40511F: fstp    [esp+1Ch+var_1C]; float
-0x405122: call    sub_4D1A90
-0x405127: mov     ecx, TES; this
+0x405115: fstp    [esp+1Ch+upperBound]; upperBound
+0x405119: mov     ecx, esi; this
+0x40511B: fld     [esp+1Ch+minimumDistance]
+0x40511F: fstp    [esp+1Ch+lowerBound]; lowerBound
+0x405122: call    TESObjectCELL_RemoveTreeModel3DByTrunkLength; Verified per-cell tree-model 3D cleanup (not billboard construction): iterates TREE references, casts current NiNode to RTTI BSTreeNode, follows BSTreeNode.treeModel (+0xDC), and checks BSTreeModel.trunkLength (+0x50). Removes the reference 3D and clears the probable HasTemp3D flag when the node/model data is invalid or trunkLength lies in [lowerBound,upperBound). Length units are Unknown.
+0x405127: mov     ecx, ds:0B333A0h; this
 0x40512D: add     ebx, 1
 0x405130: cmp     ebx, [esp+14h+var_4]
 0x405134: jb      short loc_4050C0
@@ -59,7 +59,7 @@
 0x405137: pop     esi
 0x405138: pop     ebp
 0x405139: push    1; a2
-0x40513B: call    sub_43FC20
+0x40513B: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x405140: pop     ebx
 0x405141: pop     ecx
 0x405142: retn

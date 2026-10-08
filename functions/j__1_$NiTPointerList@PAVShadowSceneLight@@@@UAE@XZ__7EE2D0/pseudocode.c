@@ -2,5 +2,5 @@
 void __thiscall NiTPointerList<ShadowSceneLight *>::~NiTPointerList<ShadowSceneLight *>(
         NiTPointerList__BSImageSpaceShader *this)
 {
-  ??1?$NiTPointerList@PAVShadowSceneLight@@@@UAE@XZ(this);
+  ??1?$NiTPointerList@PAVShadowSceneLight@@@@UAE@XZ(this); /*0x7ee2d0*/
 }

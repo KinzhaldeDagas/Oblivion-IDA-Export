@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B9DA0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified Oblivion TESObjectTREE layout through +0x7F. The embedded NiTArray<unsigned int> at +0x48 has data +0x4C, capacity +0x50, end/seed count +0x52, numObjects +0x54, and growSize +0x56; constructor initializes these to 0,0,0,1. The scalar fields +0x58..+0x68 are curveScalar/minimumLeafAngle/maximumLeafAngle/branchDimming/leafDimming, with directly verified consumers/defaults matching Fallout. +0x6C/+0x70/+0x74 remain Unknown; billboard size names at +0x78/+0x7C remain Probable.",
     "mnemonic": "push",
     "size": 2
   },
@@ -193,43 +193,43 @@
   },
   {
     "ea": "0x4B9E15",
-    "line": "mov     dword ptr [esi+48h], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'",
+    "line": "mov     dword ptr [esi+48h], offset ??_7?$NiTArray@I@@6B@; Verified constructor initializes an embedded NiTArray<unsigned int> at TESObjectTREE+0x48, with empty data pointer at +0x4C and zero count at +0x52. Fallout also owns a seed array and serializes it as SNAM; Oblivion's loader has no SNAM branch, so later population is Unknown.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4B9E1C",
-    "line": "mov     [esi+50h], bx",
+    "line": "mov     [esi+50h], bx; Verified embedded NiTArray<unsigned int>. Constructor initializes capacity +0x50 to zero.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B9E20",
-    "line": "mov     word ptr [esi+56h], 1",
+    "line": "mov     word ptr [esi+56h], 1; Verified embedded NiTArray<unsigned int>. Constructor initializes growSize +0x56 to 1.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4B9E26",
-    "line": "mov     [esi+52h], bx",
+    "line": "mov     [esi+52h], bx; Verified embedded NiTArray<unsigned int>. Constructor initializes end/seed count +0x52 to zero; all three seed accessors use this count.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B9E2A",
-    "line": "mov     [esi+54h], bx",
+    "line": "mov     [esi+54h], bx; Verified embedded NiTArray<unsigned int>. Constructor initializes numObjects +0x54 to zero.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B9E2E",
-    "line": "mov     [esi+4Ch], ebx",
+    "line": "mov     [esi+4Ch], ebx; Verified embedded NiTArray<unsigned int>. Constructor initializes data pointer +0x4C to null; destructor frees the backing allocation.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4B9E31",
-    "line": "fstp    dword ptr [esi+58h]",
+    "line": "fstp    dword ptr [esi+58h]; Verified TESObjectTREE+0x58 curveScalar constructor default is 2.5; matches Fallout's named Data.fCurveScalar default. BSTreeModel_ApplyBaseObject passes this value to the CSpeedTree curve-scalar configuration when the INI override is negative.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4B9E3E",
-    "line": "fstp    dword ptr [esi+5Ch]",
+    "line": "fstp    dword ptr [esi+5Ch]; Verified TESObjectTREE+0x5C minimumLeafAngle default is 5.0; matches Fallout's named minimum-angle default and Oblivion's CSpeedTree minimum bud-angle fallback.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4B9E47",
-    "line": "fstp    dword ptr [esi+60h]",
+    "line": "fstp    dword ptr [esi+60h]; Verified TESObjectTREE+0x60 maximumLeafAngle default is 85.0; matches Fallout's named maximum-angle default and Oblivion's CSpeedTree maximum bud-angle fallback.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x4B9E50",
-    "line": "fstp    dword ptr [esi+64h]",
+    "line": "fstp    dword ptr [esi+64h]; Verified TESObjectTREE+0x64 branchDimming default is 0.5; the virtual getter feeds CSpeedTreeRT_SetBranchDimmingScalar when the INI override is invalid. Fallout's named field/getter agrees.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4B9E59",
-    "line": "fstp    dword ptr [esi+68h]",
+    "line": "fstp    dword ptr [esi+68h]; Verified TESObjectTREE+0x68 leafDimming default is 0.7; the virtual getter feeds CSpeedTreeRT_SetLeafDimmingScalar when the INI override is invalid. Fallout's named field/getter agrees.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x4B9E5E",
-    "line": "fst     dword ptr [esi+70h]",
+    "line": "fst     dword ptr [esi+70h]; Unknown: this float is initialized to 1.0 at +0x70. No semantic consumer was established in the current tree path.",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x4B9E61",
-    "line": "fstp    dword ptr [esi+74h]",
+    "line": "fstp    dword ptr [esi+74h]; Unknown: this float is initialized to 1.0 at +0x74. No semantic consumer was established in the current tree path.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x4B9E69",
-    "line": "mov     [esi+78h], eax",
+    "line": "mov     [esi+78h], eax; Probable mapping: constructor copies global value into BillboardSizeX at +0x78. Direct billboard predicate/geometry use and Fallout's named BillboardSize.x support the member role; the source/initialization of this global at runtime is Unknown.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4B9E72",
-    "line": "mov     [esi+7Ch], ecx",
+    "line": "mov     [esi+7Ch], ecx; Probable mapping: constructor copies global value into BillboardSizeY at +0x7C. Direct billboard predicate/geometry use and Fallout's named BillboardSize.y support the member role; the source/initialization of this global at runtime is Unknown.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -388,5 +388,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B3DB0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DB3",
+    "line": "jmp     TESObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3DB8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DBB",
+    "line": "add     ecx, 24h ; '$'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DBE",
+    "line": "jmp     j_??1TESModel@@UAE@XZ; TESModel::~TESModel(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3DC3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DC6",
+    "line": "add     ecx, 3Ch ; '<'; void *",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DC9",
+    "line": "jmp     j_TESTexture_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3DCE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3DD2",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DD5",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3DD8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3DDA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3DDF",
+    "line": "mov     eax, offset stru_ADF690",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3DE4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

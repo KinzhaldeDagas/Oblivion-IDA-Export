@@ -1,11 +1,11 @@
-0x5EDD07: mov     ecx, [esp+arg_24]
+0x5EDD07: mov     ecx, [esp+magicItem]; magicItem
 0x5EDD0B: xor     ebp, ebp
 0x5EDD0D: xor     edi, edi
 0x5EDD0F: test    ecx, ecx
 0x5EDD11: mov     [esp+arg_10], ebp
 0x5EDD15: jz      short Actor_SetupCastingFX?___ProcessMagicCasterFX
-0x5EDD17: push    edi
-0x5EDD18: call    MagicItem_GetFXEffect
+0x5EDD17: push    edi; effectIndex
+0x5EDD18: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x5EDD1D: mov     edi, eax
 0x5EDD1F: test    edi, edi
 0x5EDD21: jz      short Actor_SetupCastingFX?___ProcessMagicCasterFX

@@ -8,11 +8,11 @@
 0x741779: mov     esi, ecx
 0x74177B: jz      loc_7418FB
 0x741781: lea     ebx, [esi+30h]
-0x741784: push    ebx
-0x741785: lea     eax, [esp+0C4h+var_24]
-0x74178C: push    eax
-0x74178D: mov     ecx, ebp
-0x74178F: call    NiMAtrix33_Multiply
+0x741784: push    ebx; right
+0x741785: lea     eax, [esp+0C4h+out]
+0x74178C: push    eax; out
+0x74178D: mov     ecx, ebp; this
+0x74178F: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x741794: push    eax
 0x741795: lea     ecx, [esp+0C4h+var_54]
 0x741799: push    ecx
@@ -50,7 +50,7 @@
 0x7417FE: fstp    [esp+0CCh+var_88]
 0x741802: fld     dword ptr [esi+60h]
 0x741805: fstp    [esp+0CCh+var_AC]
-0x741809: call    sub_710250
+0x741809: call    NiPoint3_MultiplyMatrix3
 0x74180E: fld     [esp+0CCh+var_AC]
 0x741812: add     esp, 0Ch
 0x741815: fld1
@@ -81,7 +81,7 @@
 0x741866: lea     ecx, [esp+0C4h+var_84]
 0x74186A: push    edi
 0x74186B: push    ecx
-0x74186C: call    sub_710250
+0x74186C: call    NiPoint3_MultiplyMatrix3
 0x741871: mov     edx, [eax]
 0x741873: mov     [edi], edx
 0x741875: mov     ecx, [eax+4]
@@ -137,7 +137,7 @@
 0x741912: lea     eax, [esp+0C4h+var_84]
 0x741916: push    edi
 0x741917: push    eax
-0x741918: call    sub_710250
+0x741918: call    NiPoint3_MultiplyMatrix3
 0x74191D: mov     ecx, [eax]
 0x74191F: mov     ebx, [esp+0CCh+arg_4]
 0x741926: mov     [edi], ecx

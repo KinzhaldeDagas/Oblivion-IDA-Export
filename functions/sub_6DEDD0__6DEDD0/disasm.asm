@@ -3,7 +3,7 @@
 0x6DEDD5: push    edi
 0x6DEDD6: push    esi
 0x6DEDD7: mov     edi, ecx
-0x6DEDD9: call    sub_6ECB70
+0x6DEDD9: call    j_NiSingleInterpController_LoadBinary
 0x6DEDDE: cmp     dword ptr [esi+0D8h], 0A000102h
 0x6DEDE8: jnb     short loc_6DEDFF
 0x6DEDEA: mov     ax, [esi+25Ah]

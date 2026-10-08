@@ -7,6 +7,6 @@
 0xA1A468: cmp     byte ptr [eax], 53h ; 'S'
 0xA1A46B: jnz     short locret_A1A474
 0xA1A46D: push    eax
-0xA1A46E: call    FormHeapFree
+0xA1A46E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0xA1A473: pop     ecx
 0xA1A474: retn

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C2710",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Resizes Oblivion's unused frustum-shadow texture pool only while the used pool is empty. New render targets receive the shared shadow depth-stencil; removed targets are detached and returned through the general texture manager.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7C2745",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,31 +151,31 @@
   },
   {
     "ea": "0x7C2754",
-    "line": "lea     eax, [esp+24h+arg_4]",
+    "line": "lea     eax, [esp+24h+texture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7C2758",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C2759",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C275B",
-    "line": "call    sub_7C1740",
+    "line": "call    NiTRefPointerList__RemoveHead; Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C2760",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7C276C",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x7C277C",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C2780",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x7C2783",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C2788",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7C27C8",
-    "line": "mov     [esp+24h+arg_4], ecx",
+    "line": "mov     [esp+24h+texture], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x7C27D5",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Reserve a pooled default render target of type 0x17 for a frustum shadow map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x7C27F8",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7C2801",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7C2806",
-    "line": "call    sub_7C1360",
+    "line": "call    BSTextureManager__GetOrCreateShadowDepthStencil; Obtain the shared shadow depth-stencil sized for ShadowSurfaceRes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7C2810",
-    "line": "call    eax",
+    "line": "call    eax; Attach the shared shadow depth-stencil to the newly reserved frustum shadow texture.",
     "mnemonic": "call",
     "size": 2
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x7C281A",
-    "line": "call    sub_7C16B0",
+    "line": "call    NiTRefPointerList__AddTail; Generic refcounted NiT pointer-list AddTail helper. Allocates a node, assigns/increments its object pointer, links it after the old tail, and updates head/tail/count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7C2843",
-    "line": "sub     [esp+24h+arg_4], 1",
+    "line": "sub     [esp+24h+texture], 1",
     "mnemonic": "sub",
     "size": 5
   },
@@ -694,5 +694,71 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CE2D0",
+    "line": "lea     ecx, [ebp+8]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2D3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2D8",
+    "line": "lea     ecx, [ebp-10h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2DB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2E0",
+    "line": "mov     edx, [esp+texture]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE2E4",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2E7",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE2EA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE2EC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2F1",
+    "line": "mov     eax, offset stru_AF72FC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE2F6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

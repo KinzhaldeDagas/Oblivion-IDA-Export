@@ -131,12 +131,12 @@
 0x91F0C3: test    eax, eax
 0x91F0C5: mov     [esi+14h], ax
 0x91F0C9: jz      loc_91F217
-0x91F0CF: mov     ebx, dword ptr [esp+44h+var_2C]
+0x91F0CF: mov     ebx, [esp+44h+var_2C]
 0x91F0D3: mov     ecx, [ebx+80h]
 0x91F0D9: mov     esi, [ebx+84h]
 0x91F0DF: mov     edx, [ebx+88h]
 0x91F0E5: add     ebx, 80h ; '€'
-0x91F0EB: mov     dword ptr [esp+44h+var_2C], ecx
+0x91F0EB: mov     [esp+44h+var_2C], ecx
 0x91F0EF: lea     ecx, [esi+eax]
 0x91F0F2: and     edx, 3FFFFFFFh
 0x91F0F8: cmp     edx, ecx
@@ -148,7 +148,7 @@
 0x91F105: mov     eax, [esp+50h+var_24]
 0x91F109: add     esp, 0Ch
 0x91F10C: add     esi, eax
-0x91F10E: mov     eax, dword ptr [esp+44h+var_2C]
+0x91F10E: mov     eax, [esp+44h+var_2C]
 0x91F112: mov     [ebx+4], esi
 0x91F115: mov     esi, [ebx]
 0x91F117: mov     edx, esi
@@ -156,10 +156,10 @@
 0x91F11B: xor     eax, eax
 0x91F11D: cmp     ebp, eax
 0x91F11F: mov     [esp+44h+var_28], edx
-0x91F123: mov     dword ptr [esp+44h+var_2C], eax
+0x91F123: mov     [esp+44h+var_2C], eax
 0x91F127: jle     short loc_91F159
 0x91F129: mov     [esp+44h+var_34], eax
-0x91F12D: mov     dword ptr [esp+44h+var_2C], ebp
+0x91F12D: mov     [esp+44h+var_2C], ebp
 0x91F131: mov     ecx, [esp+44h+var_34]
 0x91F135: mov     eax, [edi]
 0x91F137: add     eax, ecx
@@ -188,7 +188,7 @@
 0x91F170: push    eax
 0x91F171: call    j_unknown_libname_16
 0x91F176: movzx   edx, word ptr [ebp+14h]
-0x91F17A: mov     ecx, dword ptr [esp+50h+var_2C]
+0x91F17A: mov     ecx, [esp+50h+var_2C]
 0x91F17E: mov     ebx, [esp+50h+var_28]
 0x91F182: add     esp, 0Ch
 0x91F185: mov     [ebp+18h], esi

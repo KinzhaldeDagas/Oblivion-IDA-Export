@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DefaultFontInfo",
+  "definition": "struct DefaultFontInfo\n{\nUINT charset;\nLOGFONTW SystemFont;\nLOGFONTW DeviceDefaultFont;\nLOGFONTW SystemFixedFont;\nLOGFONTW DefaultGuiFont;\n}\n",
   "id": 18374686479671821548,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "charset",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemFont",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 92
+      "size": 92,
+      "type": "LOGFONTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DeviceDefaultFont",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 92
+      "size": 92,
+      "type": "LOGFONTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemFixedFont",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 92
+      "offset_hex": "0xBC",
+      "size": 92,
+      "type": "LOGFONTW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DefaultGuiFont",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 92
+      "size": 92,
+      "type": "LOGFONTW"
     }
   ],
   "name": "DefaultFontInfo",
+  "ordinal": 1564,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 372
 }

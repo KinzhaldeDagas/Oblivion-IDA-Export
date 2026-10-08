@@ -1,32 +1,32 @@
-BSExtraDataVtbl *__thiscall sub_5F4FD0(Actor *this)
+ActorAnimData *__thiscall Actor_PlayKnockdownAnimGroup(Actor *this)
 {
-  BSExtraDataVtbl *result; // eax
-  ActorAnimData *v6; // ebx
+  ActorAnimData *result; // eax
+  ActorAnimData *v3; // ebx
   unsigned __int16 AnimGroup; // ax
-  _DWORD *v8; // edi
-  PowerListEntry *v9; // eax
+  unsigned int v5; // edi
+  BSAnimGroupSequence *NormalizedSequenceSlot; // eax
 
-  result = TESObjectREFR_GetAnimData(this);
-  v6 = (ActorAnimData *)result;
-  if ( result )
+  result = TESObjectREFR_GetAnimData((TESObjectREFR *)this); /*0x5f4fd4*/
+  v3 = result; /*0x5f4fd9*/
+  if ( result ) /*0x5f4fdd*/
   {
-    if ( this->members.super.process )
+    if ( this->members.super.process ) /*0x5f4fdf*/
     {
-      result = (BSExtraDataVtbl *)this->vtbl->super.super.GetSleepState((TESObjectREFR *)this);
-      if ( !result )
+      result = (ActorAnimData *)this->vtbl->super.super.GetSleepState((TESObjectREFR *)this); /*0x5f4fef*/
+      if ( !result ) /*0x5f4ff3*/
       {
-        AnimGroup = Actor_LoadAnimGroup_((TESObjectREFR *)this, 0x1F, 0, 0);
-        v8 = (_DWORD *)AnimGroup;
-        result = (BSExtraDataVtbl *)sub_51AA00(AnimGroup);
-        if ( result == (BSExtraDataVtbl *)0x1F )
+        AnimGroup = Actor_LoadAnimGroup_(this, 0x1Fu, 0, 0); /*0x5f4ffc*/
+        v5 = AnimGroup; /*0x5f5001*/
+        result = (ActorAnimData *)AnimKey_GetGroupID(AnimGroup); /*0x5f5005*/
+        if ( result == (ActorAnimData *)0x1F ) /*0x5f5010*/
         {
-          ActorAnimData_PlayAnimGroup((int)v6, v8, 1, 0xFFFFFFFF);
-          v9 = sub_4706E0(v6, 0);
-          HighPRocess_DoAction_____((PlayerCharacter *)this, 8, (int)v9);
-          return (BSExtraDataVtbl *)((int (__thiscall *)(Actor *, _DWORD *, int))this->vtbl->Unk_E9)(this, v8, 1);
+          ActorAnimData_PlayAnimGroup(v3, v5, 1u, 0xFFFFFFFF); /*0x5f5019*/
+          NormalizedSequenceSlot = ActorAnimData_GetNormalizedSequenceSlot(v3, 0); /*0x5f5022*/
+          Actor_SetCurrentActionWithBowVisualCleanup(this, (ActorCurrentAction)8u, NormalizedSequenceSlot); /*0x5f502c*/
+          return (ActorAnimData *)((int (__thiscall *)(Actor *, unsigned int, int))this->vtbl->Unk_E9)(this, v5, 1); /*0x5f503e*/
         }
       }
     }
   }
-  return result;
+  return result; /*0x5f5041*/
 }

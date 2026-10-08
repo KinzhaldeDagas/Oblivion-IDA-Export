@@ -1,1 +1,1 @@
-BSAnimGroupSequence
+struct BSAnimGroupSequence;

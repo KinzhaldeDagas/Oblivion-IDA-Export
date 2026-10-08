@@ -10,9 +10,9 @@
 0x5FACB5: jnz     short loc_5FACC6
 0x5FACB7: push    ecx
 0x5FACB8: fchs
-0x5FACBA: mov     ecx, esi
-0x5FACBC: fstp    [esp+4+var_4]; float
-0x5FACBF: call    Actor_ModFatigue?
+0x5FACBA: mov     ecx, esi; this
+0x5FACBC: fstp    [esp+4+delta]; delta
+0x5FACBF: call    Actor_ApplyNegativeFatigueDeltaClamped; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.
 0x5FACC4: jmp     short loc_5FACC8
 0x5FACC6: fstp    st
 0x5FACC8: cmp     esi, ds:0B333C4h
@@ -28,25 +28,25 @@
 0x5FACE6: push    1Ch
 0x5FACE8: mov     ecx, esi
 0x5FACEA: call    Actor_GetBaseCalcAVi
-0x5FACEF: push    eax
-0x5FACF0: call    Calc_MasteryFromSkill
+0x5FACEF: push    eax; skillValue
+0x5FACF0: call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.
 0x5FACF5: add     esp, 4
 0x5FACF8: test    eax, eax
 0x5FACFA: jnz     short loc_5FAD1B
 0x5FACFC: fld     dword ptr ds:0B37010h
 0x5FAD02: push    ecx
 0x5FAD03: fmul    [esp+4+arg_4]
-0x5FAD07: mov     ecx, esi
+0x5FAD07: mov     ecx, esi; this
 0x5FAD09: fstp    [esp+4+arg_8]
 0x5FAD0D: fld     [esp+4+arg_8]
 0x5FAD11: fchs
-0x5FAD13: fstp    [esp+4+var_4]; float
-0x5FAD16: call    Actor_ModFatigue?
+0x5FAD13: fstp    [esp+4+delta]; delta
+0x5FAD16: call    Actor_ApplyNegativeFatigueDeltaClamped; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.
 0x5FAD1B: fld     [esp+arg_4]
 0x5FAD1F: push    ecx
 0x5FAD20: mov     ecx, esi
-0x5FAD22: fstp    [esp+4+var_4]; float
-0x5FAD25: call    sub_5F2720
+0x5FAD22: fstp    [esp+4+delta]; float
+0x5FAD25: call    sub_5F2720; Fast-travel loop player AV update: fatigue regeneration over travel time.
 0x5FAD2A: mov     eax, [esi+5Ch]
 0x5FAD2D: mov     edx, [eax+30h]
 0x5FAD30: lea     ecx, [esi+5Ch]
@@ -85,7 +85,7 @@
 0x5FAD95: fstp    [esp+4+arg_4]
 0x5FAD99: fld     [esp+4+arg_4]
 0x5FAD9D: fld     st
-0x5FAD9F: call    Double_To_SInt32
+0x5FAD9F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5FADA4: mov     [esp+4+arg_4], eax
 0x5FADA8: fild    [esp+4+arg_4]
 0x5FADAC: fstp    [esp+4+arg_4]
@@ -121,7 +121,7 @@
 0x5FAE03: call    edx
 0x5FAE05: push    eax; int
 0x5FAE06: call    Calc_MagickaReturnRate
-0x5FAE0B: fmul    [esp+18h+var_4]
+0x5FAE0B: fmul    [esp+18h+delta]
 0x5FAE0F: add     esp, 0Ch
 0x5FAE12: fstp    dword ptr [esp+0Ch]
 0x5FAE16: fldz
@@ -153,7 +153,7 @@
 0x5FAE60: push    ecx
 0x5FAE61: mov     ecx, esi
 0x5FAE63: fstp    [esp+1Ch+var_1C]
-0x5FAE66: call    sub_5F2530
+0x5FAE66: call    sub_5F2530; Fast-travel loop player AV update: clamps/restores health toward base+modifier over travel time.
 0x5FAE6B: mov     edx, [esi]
 0x5FAE6D: fld     [esp+18h+var_10]
 0x5FAE71: mov     eax, [edx+2D8h]

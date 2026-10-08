@@ -1,4 +1,4 @@
-0x470F40: sub     esp, 8
+0x470F40: sub     esp, 8; For a lower-body movement key (group 3..14) in slot 0, gets the Bip01 node name from ActorAnimData +0x24, queries each active sequence's controlled-block priority for that name, and returns true only when slot 0 has the highest priority. Returns false without slot 0, Bip01, or a movement group.
 0x470F43: cmp     dword ptr [ecx+0A0h], 0
 0x470F4A: push    esi
 0x470F4B: lea     esi, [ecx+0A0h]
@@ -11,7 +11,7 @@
 0x470F62: mov     eax, [eax+8]
 0x470F65: push    ecx
 0x470F66: mov     [esp+10h+var_8], eax
-0x470F6A: call    sub_51AA00
+0x470F6A: call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.
 0x470F6F: add     eax, 0FFFFFFFDh
 0x470F72: add     esp, 4
 0x470F75: cmp     eax, 0Bh
@@ -27,7 +27,7 @@
 0x470F8A: jz      short loc_470F9E
 0x470F8C: mov     edx, [esp+18h+var_8]
 0x470F90: push    edx
-0x470F91: call    sub_49FD20
+0x470F91: call    BSAnimGroupSequence_GetControlledBlockPriority; Finds the controlled-block record whose palette-resolved target name exactly matches the supplied node name and returns that record's priority byte at +0x0D; returns zero when absent.
 0x470F96: cmp     al, bl
 0x470F98: jbe     short loc_470F9E
 0x470F9A: mov     edi, [esi]

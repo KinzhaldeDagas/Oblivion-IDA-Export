@@ -1,1 +1,1 @@
-NiLightColorController
+struct NiLightColorController;

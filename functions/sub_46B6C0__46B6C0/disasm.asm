@@ -1,11 +1,11 @@
-0x46B6C0: push    esi
+0x46B6C0: push    esi; Updates TESForm source-file provenance. Thread-safe clones normalize to their root parent; master files replace prior source entries, non-masters append once, and null removes the last source entry.
 0x46B6C1: mov     esi, [esp+4+arg_0]
 0x46B6C5: test    esi, esi
 0x46B6C7: push    edi
 0x46B6C8: mov     edi, ecx
 0x46B6CA: jz      short loc_46B6DD
 0x46B6CC: mov     ecx, esi
-0x46B6CE: call    sub_44FB90
+0x46B6CE: call    TESFile_GetThreadSafeParent; Returns the topmost thread-safe parent of this TESFile, or null when this file has no parent. Behavior matches the later engine API name after being verified here.
 0x46B6D3: test    eax, eax
 0x46B6D5: jz      short loc_46B6D9
 0x46B6D7: mov     esi, eax
@@ -32,7 +32,7 @@
 0x46B707: mov     edx, [eax]
 0x46B709: push    eax
 0x46B70A: mov     [ecx], edx
-0x46B70C: call    FormHeapFree
+0x46B70C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46B711: add     esp, 4
 0x46B714: pop     edi
 0x46B715: pop     esi
@@ -49,7 +49,7 @@
 0x46B731: mov     ecx, [eax]
 0x46B733: push    eax
 0x46B734: mov     [edx], ecx
-0x46B736: call    FormHeapFree
+0x46B736: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46B73B: add     esp, 4
 0x46B73E: pop     edi
 0x46B73F: pop     esi
@@ -64,7 +64,7 @@
 0x46B758: test    al, al
 0x46B75A: jz      short loc_46B770
 0x46B75C: mov     ecx, edi
-0x46B75E: call    BSSimpleList_Clear
+0x46B75E: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x46B763: push    esi
 0x46B764: mov     ecx, edi
 0x46B766: call    BSSimpleList_PushFront

@@ -1,13 +1,13 @@
 0x5D29E5: fld1; jumptable 005D24AB default case
 0x5D29E7: push    ecx
 0x5D29E8: mov     ecx, [ebp+3Ch]; this
-0x5D29EB: fstp    [esp+4+a2]; a3
-0x5D29EE: push    0FA1h; a2
-0x5D29F3: call    Tile_SetFloat
+0x5D29EB: fstp    [esp+4+a2]; value
+0x5D29EE: push    0FA1h; propertyCode
+0x5D29F3: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D29F8: mov     ecx, esi
 0x5D29FA: call    ContainerEntryExtraData_DestroyDataTable
 0x5D29FF: push    esi
-0x5D2A00: call    FormHeapFree
+0x5D2A00: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5D2A05: add     esp, 4
 0x5D2A08: mov     ecx, [esp+arg_298]
 0x5D2A0F: mov     large fs:0, ecx

@@ -18,7 +18,6 @@
 0x663AD8: push    esi
 0x663AD9: push    edi
 0x663ADA: jmp     short loc_663AE8
-0x663ADC: align 10h
 0x663AE0: mov     ecx, [esp+28h+var_C]
 0x663AE4: mov     ebp, [esp+28h+var_8]
 0x663AE8: mov     eax, [ecx+4]
@@ -63,9 +62,9 @@
 0x663B52: jz      short loc_663B7E
 0x663B54: mov     ecx, edi
 0x663B56: call    EffectItemList_GetSchoolAV
-0x663B5B: mov     ecx, [esp+28h+var_4]
-0x663B5F: push    eax
-0x663B60: call    Actor_GetSkillMasteryLevel
+0x663B5B: mov     ecx, [esp+28h+var_4]; this
+0x663B5F: push    eax; actorValue
+0x663B60: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x663B65: mov     esi, eax
 0x663B67: mov     eax, [edi]
 0x663B69: mov     edx, [eax+8]
@@ -140,10 +139,10 @@
 0x663C2A: test    esi, esi
 0x663C2C: jnz     short loc_663C10
 0x663C2E: mov     ecx, [esp+28h+var_18]
-0x663C32: call    BSSimpleList_Clear
+0x663C32: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x663C37: mov     ecx, [esp+28h+var_18]
 0x663C3B: push    ecx
-0x663C3C: call    FormHeapFree
+0x663C3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x663C41: add     esp, 4
 0x663C44: pop     edi
 0x663C45: pop     esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x476D10",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion ActorAnimData scheduler with exact native ABI: this in ECX plus three 4-byte stack arguments, retn 0x0C. ownerActor is at [EBP+8]; all surveyed callers pass the owning Actor/Player, but the native body never dereferences it, so an interior hook's use of that value is a caller-derived contract. deltaTime at [EBP+0x0C] advances ActorAnimData time +0x94 and sequence offsets. explicitTimeOrMinusOne at [EBP+0x10] uses -1.0 for normal ticking; any other value drives an explicit-time scene update/early return. The function drains deferred KF models, maintains power/idle state, samples five slots, and advances required-note templates (class 4 terminal index 3; class 7 terminal index 4).",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x476D4C",
-    "line": "call    ??0AnimSequenceSingle@@QAE@XZ; AnimSequenceSingle::AnimSequenceSingle(void)",
+    "line": "call    ActorAnimData_InstallKFModel; CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x476D6D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x476D83",
-    "line": "call    sub_471730",
+    "line": "call    ActorAnimData_HasPendingKFModels; Returns whether ActorAnimData has any deferred KFModel install state: first model at +0xB4 or linked-list head at +0xB8. ActorAnimData_Update uses this after each budgeted install.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x476DD0",
-    "line": "call    sub_471990",
+    "line": "call    ActorAnimData_RemovePowerAttackGroups; Remove all power-attack animation groups (0x16-0x1A) across movement 0-3 and weapon 0-5 from ActorAnimData before rebuilding the dynamic power-attack list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x476DDA",
-    "line": "call    sub_476410",
+    "line": "call    ActorAnimData_RebuildPowerAttackKFList; Native Oblivion power-attack rebuild: clears groups 0x16..0x1A, generates movement/weapon/mastery filename candidates, probes the model loader, and installs parsed native power groups. No dynamic weapon type or override registry is consulted.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x476E0D",
-    "line": "call    sub_472ED0",
+    "line": "call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x476E54",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+explicitTimeOrMinusOne]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x476E78",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x476E86",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; ModernWindowsCompatible/TragicEngineFix merge: pre-sample hook site. ESI is ActorAnimData*; rebase ActorAnimData+0x94 and active BSAnimGroupSequence+0x48 offsets before active-slot sampling.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -682,12 +682,6 @@
     "line": "jmp     short loc_476E90",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x476E8A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
   },
   {
     "ea": "0x476E90",
@@ -703,7 +697,7 @@
   },
   {
     "ea": "0x476E96",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +721,7 @@
   },
   {
     "ea": "0x476EA3",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +811,7 @@
   },
   {
     "ea": "0x476ED7",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,31 +859,31 @@
   },
   {
     "ea": "0x476EED",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x476EEF",
-    "line": "push    ebx",
+    "line": "push    ebx; encodedKey",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x476EF0",
-    "line": "push    eax",
+    "line": "push    eax; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x476EF1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x476EF3",
-    "line": "call    sub_474530",
+    "line": "call    ActorAnimData_PlaySequence; Plays a selected BSAnimGroupSequence. Resolves default slot from fixed group metadata, maps physical slot 5->0 and 6->3 while retaining the requested alias for clear semantics, handles menu/full reset conditions, records active key +0x3C and sequence +0xA0, chooses morph only for matching nonzero morph keys and equal controller counts, otherwise cross-fades or blends from a temporary pose, applies the maximum old/new Blend byte as transition time, and initializes slot action state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +907,7 @@
   },
   {
     "ea": "0x476F05",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1045,7 @@
   },
   {
     "ea": "0x476F4D",
-    "line": "call    sub_49F4A0",
+    "line": "call    BSAnimGroupSequence_SampleUpdate; Samples a BSAnimGroupSequence only while native controller state +0x44 is 1, 2, or 3. Passes sequence +0x48 plus ActorAnimData scheduler time +0x94 to NiControllerSequence_AdvanceTime with commit enabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1081,7 @@
   },
   {
     "ea": "0x476F68",
-    "line": "fld     [ebp+arg_8]",
+    "line": "fld     [ebp+explicitTimeOrMinusOne]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1153,7 +1147,7 @@
   },
   {
     "ea": "0x476F85",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,13 +1201,13 @@
   },
   {
     "ea": "0x476F97",
-    "line": "fld     dword ptr [esi+94h]",
+    "line": "fld     dword ptr [esi+94h]; ModernWindowsCompatible/TragicEngineFix merge decode: ActorAnimData+0x94 is incremented by the frame delta here before the post-increment rebase hook.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x476F9D",
-    "line": "fadd    [ebp+arg_4]",
+    "line": "fadd    [ebp+deltaTime]",
     "mnemonic": "fadd",
     "size": 3
   },
@@ -1225,7 +1219,7 @@
   },
   {
     "ea": "0x476FA6",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; ModernWindowsCompatible/TragicEngineFix merge: post-increment hook site replaces mov ecx, ebx; sub ecx, 5, rebases ActorAnimData+0x94, then restores the same ECX/flags for following branches.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1297,7 +1291,7 @@
   },
   {
     "ea": "0x476FCA",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1321,7 +1315,7 @@
   },
   {
     "ea": "0x476FD9",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,13 +1447,13 @@
   },
   {
     "ea": "0x47702A",
-    "line": "fld     dword ptr [esi+0BCh]",
+    "line": "fld     dword ptr [esi+0BCh]; ActorAnimData update tick reads +0xBC as active movement animation playback multiplier before adjusting NiControllerSequence +0x48 offset.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x477030",
-    "line": "fld     [ebp+arg_4]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1507,7 +1501,7 @@
   },
   {
     "ea": "0x477047",
-    "line": "fstp    dword ptr [esp+8Ch+var_6C]",
+    "line": "fstp    dword ptr [esp+8Ch+var_6C]; Active movement animation path stores offset delta after applying ActorAnimData +0xBC multiplier to frame delta; final offset is written to NiControllerSequence +0x48 at 0x4770AE.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1573,7 +1567,7 @@
   },
   {
     "ea": "0x477068",
-    "line": "fsub    [ebp+arg_4]",
+    "line": "fsub    [ebp+deltaTime]",
     "mnemonic": "fsub",
     "size": 3
   },
@@ -1627,13 +1621,13 @@
   },
   {
     "ea": "0x477086",
-    "line": "fld     dword ptr [esi+0C0h]",
+    "line": "fld     dword ptr [esi+0C0h]; ActorAnimData update tick reads +0xC0 as blended/secondary movement animation playback multiplier before adjusting NiControllerSequence +0x48 offset.",
     "mnemonic": "fld",
     "size": 6
   },
   {
     "ea": "0x47708C",
-    "line": "fld     [ebp+arg_4]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1681,7 +1675,7 @@
   },
   {
     "ea": "0x4770A3",
-    "line": "fstp    dword ptr [esp+8Ch+var_6C]",
+    "line": "fstp    dword ptr [esp+8Ch+var_6C]; Blended/secondary movement animation path stores offset delta after applying ActorAnimData +0xC0 multiplier to frame delta; final offset is written to NiControllerSequence +0x48 at 0x4770AE.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1771,7 +1765,7 @@
   },
   {
     "ea": "0x4770E0",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1789,7 +1783,7 @@
   },
   {
     "ea": "0x4770EC",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; noteIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -1813,7 +1807,7 @@
   },
   {
     "ea": "0x4770F9",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1837,7 @@
   },
   {
     "ea": "0x477109",
-    "line": "add     dword ptr [esi+ebx*4+48h], 1",
+    "line": "add     dword ptr [esi+ebx*4+48h], 1; Class-4 required-note scheduler post-increment. For native AttackLeft/AttackRight in normalized slot 3, state progresses -1/0/1/2/3 as before Start / after Start / after Hit / after a: / after End; post-increment state 1 therefore identifies the authored Hit boundary. ESI is ActorAnimData and EBX is the normalized slot. External StarShooting contrast after the native decode: its hybrids map TES3 Shoot Release to Hit. Current authored Hit times are TP Left 0.200000286102, TP Right 0.333333253860, FP Left 0.199999928474, FP Right 0.333333343267. These are asset values, not engine constants, and this is not class-7 AttackBow Release/state 3.",
     "mnemonic": "add",
     "size": 5
   },
@@ -1867,13 +1861,13 @@
   },
   {
     "ea": "0x47711F",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x477122",
-    "line": "push    3; ArgList",
+    "line": "push    3; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -1903,7 +1897,7 @@
   },
   {
     "ea": "0x477132",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1963,7 @@
   },
   {
     "ea": "0x477158",
-    "line": "call    sub_476260",
+    "line": "call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1987,7 @@
   },
   {
     "ea": "0x47716D",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2011,7 +2005,7 @@
   },
   {
     "ea": "0x47717B",
-    "line": "mov     eax, [esi+ebx*4+48h]; jumptable 004770CD case 7",
+    "line": "mov     eax, [esi+ebx*4+48h]; ActorAnimData_Update class-7 scheduler used by AttackBow. effectiveTime = sequence+0x48 + ActorAnimData+0x94. Per update it advances at most one phase, and only when effectiveTime is strictly greater than requiredNote[state+1]; equality or unordered comparison does not advance. Slot-3 states -1/0/1/2/3/4 map before Start / Start / Attach / Hold / Release / End.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2035,7 +2029,7 @@
   },
   {
     "ea": "0x477187",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2053,7 +2047,7 @@
   },
   {
     "ea": "0x477193",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; noteIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -2077,7 +2071,7 @@
   },
   {
     "ea": "0x4771A0",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2107,13 +2101,13 @@
   },
   {
     "ea": "0x4771B0",
-    "line": "add     dword ptr [esi+ebx*4+48h], 1",
+    "line": "add     dword ptr [esi+ebx*4+48h], 1; Advance per-slot action phase after crossing its next required note. AttackBow slot 3 maps -1/0/1/2/3/4 to before Start / Start / Attach / Hold / Release / End crossed.",
     "mnemonic": "add",
     "size": 5
   },
   {
     "ea": "0x4771B5",
-    "line": "cmp     ebx, 3",
+    "line": "cmp     ebx, 3; AttackBow class-7 phase scheduler special case: on the single update that increments normalized slot 3 to state 2 (Hold), discard that update's overshoot and anchor the sequence to the Hold note.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -2143,13 +2137,13 @@
   },
   {
     "ea": "0x4771C6",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4771C9",
-    "line": "push    2; ArgList",
+    "line": "push    2; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -2161,7 +2155,7 @@
   },
   {
     "ea": "0x4771CF",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,13 +2167,13 @@
   },
   {
     "ea": "0x4771D8",
-    "line": "fstp    dword ptr [edi+48h]",
+    "line": "fstp    dword ptr [edi+48h]; Writes sequence+0x48 = requiredNote[2](Hold) - ActorAnimData+0x94, making effective time exactly Hold for this update. This is a one-update overshoot correction, not a persistent pause; later ActorAnimData+0x94 advance moves past Hold normally.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4771DB",
-    "line": "cmp     [esp+8Ch+var_78], 0FFh",
+    "line": "cmp     [esp+8Ch+var_78], 0FFh; AttackBow End handling. Once requiredNote[4] is reached, native code either starts a queued encoded group or routes to slot stop/blend handling. End does not construct/register a projectile, reload/nock, or change process current action.",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -2197,13 +2191,13 @@
   },
   {
     "ea": "0x4771EC",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4771EF",
-    "line": "push    4; ArgList",
+    "line": "push    4; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -2233,7 +2227,7 @@
   },
   {
     "ea": "0x4771FF",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,7 +2293,7 @@
   },
   {
     "ea": "0x477225",
-    "line": "call    sub_476260",
+    "line": "call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2323,7 +2317,7 @@
   },
   {
     "ea": "0x47723A",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,7 +2359,7 @@
   },
   {
     "ea": "0x477254",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2383,7 +2377,7 @@
   },
   {
     "ea": "0x477260",
-    "line": "push    eax; ArgList",
+    "line": "push    eax; noteIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -2407,7 +2401,7 @@
   },
   {
     "ea": "0x47726D",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2461,13 +2455,13 @@
   },
   {
     "ea": "0x477293",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x477296",
-    "line": "push    2; ArgList",
+    "line": "push    2; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -2497,7 +2491,7 @@
   },
   {
     "ea": "0x4772A6",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2521,7 +2515,7 @@
   },
   {
     "ea": "0x4772B8",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2568,12 +2562,6 @@
     "size": 2
   },
   {
-    "ea": "0x4772D9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x4772E0",
     "line": "fld     dword ptr [edi+48h]",
     "mnemonic": "fld",
@@ -2593,13 +2581,13 @@
   },
   {
     "ea": "0x4772ED",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4772F0",
-    "line": "push    edx; ArgList",
+    "line": "push    edx; noteIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -2623,7 +2611,7 @@
   },
   {
     "ea": "0x4772FD",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,13 +2713,13 @@
   },
   {
     "ea": "0x47733A",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x47733D",
-    "line": "push    1; ArgList",
+    "line": "push    1; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -2761,7 +2749,7 @@
   },
   {
     "ea": "0x47734D",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2827,7 +2815,7 @@
   },
   {
     "ea": "0x477373",
-    "line": "call    sub_476260",
+    "line": "call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2851,7 +2839,7 @@
   },
   {
     "ea": "0x477388",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3019,7 +3007,7 @@
   },
   {
     "ea": "0x4773EF",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3031,7 +3019,7 @@
   },
   {
     "ea": "0x4773F8",
-    "line": "push    1; ArgList",
+    "line": "push    1; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -3055,7 +3043,7 @@
   },
   {
     "ea": "0x477406",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3091,7 +3079,7 @@
   },
   {
     "ea": "0x47741E",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3103,7 +3091,7 @@
   },
   {
     "ea": "0x477427",
-    "line": "push    0; ArgList",
+    "line": "push    0; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -3127,7 +3115,7 @@
   },
   {
     "ea": "0x477435",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3181,13 +3169,13 @@
   },
   {
     "ea": "0x47745E",
-    "line": "mov     ecx, [edi+68h]",
+    "line": "mov     ecx, [edi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x477461",
-    "line": "push    1; ArgList",
+    "line": "push    1; noteIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -3217,7 +3205,7 @@
   },
   {
     "ea": "0x477471",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3283,7 +3271,7 @@
   },
   {
     "ea": "0x477493",
-    "line": "call    sub_476260",
+    "line": "call    ActorAnimData_PlayEncodedGroup; CustomAnimSupport hook target: ActorAnimData_PlayEncodedGroup. Resolves encoded key in animsMap, selects single/multiple sequence, then forwards to ActorAnimData_PlaySequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3307,7 +3295,7 @@
   },
   {
     "ea": "0x4774A5",
-    "line": "call    sub_51AE20",
+    "line": "call    TESAnimGroup_GetRequiredNoteTime; Returns a 32-bit required-note time from TESAnimGroup +0x10 by zero-based note index after validating count, storage, and QNaN. Invalid entries report an error and return 0.0f.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3349,7 +3337,7 @@
   },
   {
     "ea": "0x4774B8",
-    "line": "call    sub_4733A0",
+    "line": "call    ActorAnimData_StopSlotWithBlendNote; Calculates native stop ease-out from the current physical slot's TESAnimGroup Blend byte at +0x21 unless ActorAnimData +0xC4 forces zero, then passes the original slot argument to ActorAnimData_ClearSlot. Thus aliases 5/6 retain ClearSlot's multi-slot expansion.",
     "mnemonic": "call",
     "size": 5
   }

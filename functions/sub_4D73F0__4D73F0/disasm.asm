@@ -1,4 +1,4 @@
-0x4D73F0: push    ebp
+0x4D73F0: push    ebp; BunkFix: plugin activation assist uses this same engine helper to find a free marker before calling SetSleepState; assist does not clear or forge ExtraUsedMarkers.
 0x4D73F1: push    esi
 0x4D73F2: mov     esi, ecx
 0x4D73F4: mov     eax, [esi]

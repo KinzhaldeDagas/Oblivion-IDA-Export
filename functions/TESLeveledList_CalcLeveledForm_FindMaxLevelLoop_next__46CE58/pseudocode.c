@@ -1,27 +1,32 @@
-int __usercall TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next@<eax>(
+// local variable allocation has failed, the output may be wrong!
+int __userpurge TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next@<eax>(
         unsigned __int16 **a1@<edx>,
         unsigned __int16 a2@<cx>,
         unsigned __int16 *a3@<ebx>,
-        int a4@<ebp>,
+        unsigned __int8 *a4@<ebp>,
         unsigned int a5@<edi>,
         unsigned __int16 si0@<si>,
         int a7,
         int a8,
-        int a9,
-        int a10,
-        int a11,
+        void *a9,
+        TESObject *a10,
+        TESObject *a11,
         int a12,
-        int a13,
-        char a14,
-        int a15,
+        TESObject *a13,
+        int a14,
+        void *a15,
         int a16,
         int a17,
         int a18,
         int a19,
-        int a20)
+        TESObject *a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24)
 {
-  if ( a1 != (unsigned __int16 **)a3 )
-    return TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop(
+  if ( a1 != (unsigned __int16 **)a3 ) /*0x46ce5c*/
+    return TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop( /*0x46ce5c*/
              a1,
              a2,
              a3,
@@ -41,10 +46,14 @@ int __usercall TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next@<eax>(
              a17,
              a18,
              a19,
-             a20);
-  if ( a2 >= a5 )
-    return TESLeveledList_CalcLeveledForm_::InitContainer(
-             (int)a3,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24);
+  if ( a2 >= a5 ) /*0x46ce63*/
+    return TESLeveledList_CalcLeveledForm_::InitContainer( /*0x46ce63*/
+             (TESObject *)a3,
              a4,
              si0,
              a7,
@@ -56,27 +65,29 @@ int __usercall TESLeveledList_CalcLeveledForm_::FindMaxLevelLoop_next@<eax>(
              a13,
              a14,
              a15,
-             a16,
-             a17,
-             a18,
-             a19,
-             a20);
+             *(TESContainer *)&a16,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24);
   return TESLeveledList_CalcLeveledForm_::InitContainer(
-           (int)a3,
+           (TESObject *)a3,
            a4,
            si0,
            a7,
            a8,
            a9,
            a10,
-           a2,
+           (TESObject *)a2,
            a12,
            a13,
            a14,
            a15,
-           a16,
-           a17,
-           a18,
-           a19,
-           a20);
+           *(TESContainer *)&a16,
+           a20,
+           a21,
+           a22,
+           a23,
+           a24);
 }

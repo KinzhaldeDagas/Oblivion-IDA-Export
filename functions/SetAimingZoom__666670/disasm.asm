@@ -1,4 +1,4 @@
-0x666670: sub     esp, 18h
+0x666670: sub     esp, 18h; [Controller decode 2026-07-09] Non-player QueryControlState consumer: Block control 6 held drives first-person block/aim FOV behavior.
 0x666673: cmp     byte ptr ds:0B14F48h, 0
 0x66667A: push    esi
 0x66667B: mov     esi, ecx
@@ -27,14 +27,14 @@
 0x6666E0: mov     ecx, edi; this
 0x6666E2: push    6; a2
 0x6666E4: jnz     loc_66678F
-0x6666EA: call    InputGlobals__QueryControlState
+0x6666EA: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x6666EF: test    eax, eax
 0x6666F1: jz      loc_6667A1
 0x6666F7: cmp     byte ptr ds:0B3BAEAh, 0
 0x6666FE: jz      loc_666811
-0x666704: push    1Ch
-0x666706: mov     ecx, esi
-0x666708: call    Actor_GetSkillMasteryLevel
+0x666704: push    1Ch; actorValue
+0x666706: mov     ecx, esi; this
+0x666708: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x66670D: cmp     eax, 2
 0x666710: jl      loc_666811
 0x666716: fld     dword ptr ds:0B3BAFCh
@@ -44,7 +44,7 @@
 0x666724: test    ah, 41h
 0x666727: jp      loc_666811
 0x66672D: fld     dword ptr [esi+598h]
-0x666733: mov     ecx, offset flt_B370A0
+0x666733: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3C8h)
 0x666738: fstp    [esp+20h+var_8]
 0x66673C: call    GameSetting_GetSafeFloatPointer
 0x666741: fld     dword ptr [eax]
@@ -73,7 +73,7 @@
 0x666787: fstp    st
 0x666789: fld     [esp+20h+a2]
 0x66678D: jmp     short loc_666804
-0x66678F: call    InputGlobals__QueryControlState
+0x66678F: call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.
 0x666794: test    eax, eax
 0x666796: jz      short loc_6667A1
 0x666798: cmp     byte ptr ds:0B3BAEAh, 0
@@ -112,7 +112,7 @@
 0x666804: push    ecx
 0x666805: mov     ecx, esi
 0x666807: fstp    [esp+24h+var_24]; float
-0x66680A: call    SetCameraFOV
+0x66680A: call    SetCameraFOV; MoonSugarEffect decode: PlayerCharacter SetCameraFOV wrapper writes worldFoV, calls SetCameraFOV_0, then updates particle shader FOV data.
 0x66680F: fstp    st
 0x666811: pop     edi
 0x666812: pop     esi

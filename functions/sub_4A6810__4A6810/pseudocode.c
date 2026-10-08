@@ -5,10 +5,10 @@ double __cdecl sub_4A6810(float a1, float a2, float a3)
   float v6; // [esp+10h] [ebp+4h]
   float v7; // [esp+10h] [ebp+4h]
 
-  v4[1] = a2;
-  v4[0] = a1;
-  v5 = a3;
-  v6 = sub_43F350(v4);
-  v7 = v5 / v6;
-  return (float)acos(v7);
+  v4[1] = a2; /*0x4a681f*/
+  v4[0] = a1; /*0x4a6826*/
+  v5 = a3; /*0x4a6829*/
+  v6 = Vector3_NormalizeInPlace(v4); /*0x4a6832*/
+  v7 = v5 / v6; /*0x4a683e*/
+  return (float)acos(v7); /*0x4a6853*/
 }

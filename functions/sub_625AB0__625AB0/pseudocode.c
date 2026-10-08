@@ -1,4 +1,4 @@
 double sub_625AB0()
 {
-  return flt_B35620;
+  return unk_B35620; /*0x625ab6*/
 }

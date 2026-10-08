@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESObjectREFRMembr",
+  "definition": "struct __declspec(align(4)) TESObjectREFRMembr\n{\nTESFormMembr super;\nTESChildCELLVtbl childCell;\nTESForm *baseForm;\nNiPoint3 rot;\nfloat pos[3];\nfloat scale;\nvoid *niNode;\nTESObjectCELL *parentCell;\nExtraDataList baseExtraList;\n}\n",
   "id": 18374686479671808600,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "TESFormMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "childCell",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "TESChildCELLVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "baseForm",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "TESForm *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "rot",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 12
+      "offset_hex": "0x1C",
+      "size": 12,
+      "type": "NiPoint3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "pos",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 12
+      "size": 12,
+      "type": "float[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "scale",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "niNode",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "parentCell",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "TESObjectCELL *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "baseExtraList",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 20
+      "size": 20,
+      "type": "ExtraDataList"
     }
   ],
   "name": "TESObjectREFRMembr",
+  "ordinal": 729,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 84
 }

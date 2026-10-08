@@ -19,7 +19,7 @@
 0x488CE6: mov     edi, [ebp+8]
 0x488CE9: mov     ebx, [esi]
 0x488CEB: mov     ecx, edi
-0x488CED: call    TESObjectARMO_GetArmorSkillAV
+0x488CED: call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 1/7: classify this armor and fetch its selected skill AV; the same path calls Calc_ArmorRating at 0x488D9D after actor skill/health/condition collection.
 0x488CF2: mov     edx, [ebx+288h]
 0x488CF8: push    eax
 0x488CF9: mov     ecx, esi
@@ -68,7 +68,7 @@
 0x488D93: movzx   ecx, word ptr [esp+30h+var_C]
 0x488D98: push    ecx; int
 0x488D99: fldcw   word ptr [esp+34h+var_4]
-0x488D9D: call    Calc_ArmorRating
+0x488D9D: call    Calc_ArmorRating; Paired Medium boundary 1/7: Calc_ArmorRating consumer for the armor classified at 0x488CED. Used by Character_GetArmorRating through ContainerEntryExtraData_CalcRoundedArmorRating.
 0x488DA2: fstp    [esp+34h+var_14]
 0x488DA6: add     esp, 10h
 0x488DA9: pop     edi
@@ -76,7 +76,7 @@
 0x488DAB: pop     ebx
 0x488DAC: fld     [esp+18h+var_14]
 0x488DB0: fld     st
-0x488DB2: call    Double_To_SInt32
+0x488DB2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x488DB7: mov     [esp+18h+var_4], eax
 0x488DBB: fild    [esp+18h+var_4]
 0x488DBF: pop     ebp

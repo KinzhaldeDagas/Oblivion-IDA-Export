@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "MCI_OVLY_LOAD_PARMSA",
+  "definition": "typedef tagMCI_OVLY_LOAD_PARMSA MCI_OVLY_LOAD_PARMSA\n",
   "id": 18374686479672029281,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dwCallback",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "DWORD_PTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpfilename",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LPCSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rc",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 16
+      "offset_hex": "0xC",
+      "size": 16,
+      "type": "RECT"
     }
   ],
   "name": "MCI_OVLY_LOAD_PARMSA",
+  "ordinal": 2072,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

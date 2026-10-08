@@ -1,1 +1,1 @@
-hkReferencedObject
+struct hkReferencedObject;

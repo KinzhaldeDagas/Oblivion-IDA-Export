@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x784930",
+      "0x7849BC"
+    ]
+  ],
+  "chunks_sha256": "e40bc4523005ce98132511992137eceb9019efb290d1924c318e54e1c7d2f0b9",
+  "comment_regular": "Oblivion-authoritative lower_bound for the spline cache's 28-byte small-string key. Walks the red-black tree from head->parent/root and returns the first node whose key is not less than the requested key, or head.",
+  "comment_repeatable": "Oblivion-authoritative lower_bound for the spline cache's 28-byte small-string key. Walks the red-black tree from head->parent/root and returns the first node whose key is not less than the requested key, or head.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_784930",
+  "display_name": "OB_stBezierSplineCacheMap_LowerBound_010201A0",
   "end_ea": "0x7849BC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_784930",
+  "name": "OB_stBezierSplineCacheMap_LowerBound_010201A0",
   "segment": ".text",
   "sha256": "e40bc4523005ce98132511992137eceb9019efb290d1924c318e54e1c7d2f0b9",
   "size": 140,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x784930",
-  "type": "int *__thiscall(_DWORD *this, int)",
+  "total_chunk_size": 140,
+  "type": "OB_stBezierSplineCacheNode_010201A0 *__thiscall(OB_stBezierSplineCacheMap_010201A0 *this, const OB_stString28_010201A0 *key)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 1
 }

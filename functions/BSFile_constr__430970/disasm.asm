@@ -23,7 +23,7 @@
 0x4309B1: mov     ecx, ebp
 0x4309B3: mov     [esp+24h+var_4], eax
 0x4309B7: mov     dword ptr [esi], offset ??_7BSFile@@6B@; const BSFile::`vftable'
-0x4309BD: mov     dword ptr [esi+4], offset BSFile_ReadFunc
+0x4309BD: mov     dword ptr [esi+4], offset BSFile_ReadFunc; MEF PLAN 2026-09-07: BSFile constructor installs BSFile_ReadFunc430050 at owner+4. Archive ctor subsequently installs A35D74 vtable and invokes SetByteSwap(false)42EF75. Thus cached Archive_ReadBytes uses vanilla read chain430050->vtable+38/A35DAC->4302B0->747E80.
 0x4309C4: mov     dword ptr [esi+8], offset BSFile_WriteFunc
 0x4309CB: mov     [esi+0Ch], edx
 0x4309CE: mov     [esi+10h], eax
@@ -37,7 +37,7 @@
 0x4309F2: mov     [esi+14Ch], eax
 0x4309F8: mov     [esi+28h], al
 0x4309FB: mov     [esi+2Ch], eax
-0x4309FE: mov     dword ptr [esi+30h], 0FFFFFFFFh
+0x4309FE: mov     dword ptr [esi+30h], 0FFFFFFFFh; MEF v57 VERIFY 2026-10-08: VERIFIED archive gate dependency: BSFile constructor writes DWORD stream+30=FFFFFFFF. Together with native Archive vtable, callback430050, mode+20=0, existence flag+24 and handle+1C, this explains v57 PerfAMNativeArchive's supported stream shape.
 0x430A05: mov     [esi+34h], eax
 0x430A08: mov     [esi+38h], eax
 0x430A0B: lea     edi, [ecx+1]
@@ -87,3 +87,12 @@
 0x430A79: mov     ecx, esi
 0x430A7B: call    BSFile_OpenFile
 0x430A80: jmp     short loc_430A41
+0x9ABE40: mov     ecx, [ebp-10h]; this
+0x9ABE43: jmp     ??1NiFile@@UAE@XZ; NiFile::~NiFile(void)
+0x9ABE48: mov     edx, [esp+arg_4]
+0x9ABE4C: lea     eax, [edx-14h]
+0x9ABE4F: mov     ecx, [edx-18h]
+0x9ABE52: xor     ecx, eax
+0x9ABE54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABE59: mov     eax, offset stru_AD8B90
+0x9ABE5E: jmp     ___CxxFrameHandler3

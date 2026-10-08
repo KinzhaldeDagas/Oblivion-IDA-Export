@@ -6,14 +6,14 @@ int __thiscall sub_73D450(char *this, signed int a2)
   int (__cdecl *v6)(int, char *, int, signed int *, int); // edx
   int v8; // [esp-14h] [ebp-1Ch]
 
-  v2 = a2;
-  sub_7256B0(this, a2);
-  v8 = *(_DWORD *)(v2 + 0x220);
-  v4 = *(void (__cdecl **)(int, char *, int, signed int *, int))(v8 + 8);
-  a2 = 4;
-  v4(v8, this + 0x120, 4, &a2, 1);
-  v5 = *(_DWORD *)(v2 + 0x220);
-  v6 = *(int (__cdecl **)(int, char *, int, signed int *, int))(v5 + 8);
-  a2 = 4;
-  return v6(v5, this + 0x124, 4, &a2, 1);
+  v2 = a2; /*0x73d452*/
+  sub_7256B0(this, a2); /*0x73d459*/
+  v8 = *(_DWORD *)(v2 + 0x220); /*0x73d474*/
+  v4 = *(void (__cdecl **)(int, char *, int, signed int *, int))(v8 + 8); /*0x73d475*/
+  a2 = 4; /*0x73d478*/
+  v4(v8, this + 0x120, 4, &a2, 1); /*0x73d480*/
+  v5 = *(_DWORD *)(v2 + 0x220); /*0x73d482*/
+  v6 = *(int (__cdecl **)(int, char *, int, signed int *, int))(v5 + 8); /*0x73d488*/
+  a2 = 4; /*0x73d49c*/
+  return v6(v5, this + 0x124, 4, &a2, 1); /*0x73d4a9*/
 }

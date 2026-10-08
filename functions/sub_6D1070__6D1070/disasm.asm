@@ -25,7 +25,7 @@
 0x6D10B2: call    eax
 0x6D10B4: test    eax, eax
 0x6D10B6: jz      short loc_6D10C6
-0x6D10B8: cmp     eax, offset dword_B3CFBC
+0x6D10B8: cmp     eax, offset stru_B3CFBC
 0x6D10BD: jz      short loc_6D10E1
 0x6D10BF: mov     eax, [eax+4]
 0x6D10C2: test    eax, eax

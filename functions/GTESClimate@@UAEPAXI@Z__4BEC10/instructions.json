@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4BEC13",
-    "line": "call    ??1TESClimate@@UAE@XZ; TESClimate::~TESClimate(void)",
+    "line": "call    TESClimate_dtor; Verified: TESClimate destructor destroys both textures, clears the weather EntryData list at +0x30, then destroys model and TESForm base.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4BEC20",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

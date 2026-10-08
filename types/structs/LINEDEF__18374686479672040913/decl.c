@@ -1,1 +1,1 @@
-LINEDEF
+typedef tagLINEDEF LINEDEF;

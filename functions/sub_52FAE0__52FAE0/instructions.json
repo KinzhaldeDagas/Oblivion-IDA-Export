@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52FAE0",
-    "line": "push    edi",
+    "line": "push    edi; Re-sorts topic quest-entry lists after loading. A null quest sorts every TESTopic; a non-null quest sorts only topics whose quest-entry list contains that quest.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x52FAEF",
-    "line": "mov     ebx, [esp+8+arg_0]",
+    "line": "mov     ebx, [esp+8+questOrNull]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x52FAF4",
-    "line": "mov     ecx, [edi]",
+    "line": "mov     ecx, [edi]; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x52FB23",
-    "line": "call    sub_52F330",
+    "line": "call    TESTopic__SortQuestInfoEntriesByPriority; Stable descending sort of TESTopic.questInfoEntries by TESQuest.priority (+0x3D). Higher-priority running quests are scanned first by SelectInfoForSpeaker; equal priorities preserve their prior insertion order.",
     "mnemonic": "call",
     "size": 5
   },

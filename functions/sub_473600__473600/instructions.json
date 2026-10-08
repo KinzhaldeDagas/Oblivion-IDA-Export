@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x473600",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; Serializes ActorAnimData active/queued keys, action state, sequence timing blocks, movement/root state, and current/queued idle records.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x473617",
-    "line": "mov     [esp+2Ch+var_8], esi",
+    "line": "mov     [esp+2Ch+source], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x47362D",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x473636",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x47363C",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x473642",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x473650",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -157,19 +157,19 @@
   },
   {
     "ea": "0x473659",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47365B",
-    "line": "lea     eax, [esp+34h+var_8]",
+    "line": "lea     eax, [esp+34h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x47365F",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,25 +187,25 @@
   },
   {
     "ea": "0x473669",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47366B",
-    "line": "lea     ecx, [ebp+0BCh]",
+    "line": "lea     ecx, [ebp+0BCh]; ActorAnimData save writes +0xBC playback/root-motion multiplier as persisted 4-byte value.",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x473671",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x473672",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -217,25 +217,25 @@
   },
   {
     "ea": "0x47367D",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x473683",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x473685",
-    "line": "lea     edx, [ebp+0C0h]",
+    "line": "lea     edx, [ebp+0C0h]; ActorAnimData save writes +0xC0 secondary playback/root-motion multiplier as persisted 4-byte value.",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x47368B",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x473691",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x473697",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x47369C",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4736A2",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x4736A7",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4736A8",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x4736B3",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4736B9",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4736C1",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x473700",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x473706",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x473707",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x473747",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x47374D",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x47374F",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x473755",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x47375B",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x473760",
-    "line": "push    edi; Src",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x473766",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x47376F",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x473774",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x47377A",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x473780",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x473785",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -661,19 +661,19 @@
   },
   {
     "ea": "0x47378B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x473791",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x473793",
-    "line": "push    ebx; Src",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x4737AD",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x4737C8",
-    "line": "mov     [esp+30h+var_1E], al",
+    "line": "mov     [esp+30h+var_1E], al; Save obtains the map-entry selector byte through vtable +0x14. For multiple entries this is the list index truncated to 8 bits; only indices 0..127 round-trip exactly through the signed forward selector.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -895,19 +895,19 @@
   },
   {
     "ea": "0x4737FD",
-    "line": "mov     [esp+30h+var_1E], 0FEh ; 'þ'",
+    "line": "mov     [esp+30h+var_1E], 0FEh ; 'þ'; A NULL active sequence forces saved selector 0xFE. This is a save-stream sentinel, not a selectable multiple-entry index.",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x473802",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x473808",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -919,13 +919,13 @@
   },
   {
     "ea": "0x47380E",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x47380F",
-    "line": "call    SaveLoad_SaveData",
+    "line": "call    SaveLoad_SaveData; Writes one selector byte. A non-NULL multiple entry at index 254 also yields 0xFE, colliding with the null marker even though the following BSAnimGroupSequence state block is still written.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x473824",
-    "line": "call    sub_49F570",
+    "line": "call    BSAnimGroupSequence_SaveState; Serializes BSAnimGroupSequence effective sample time, active state, fields +0x34/+0x38 and +0x54; save versions below 0x71 include the legacy extra time copy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x473886",
-    "line": "call    sub_472D10",
+    "line": "call    AnimIdle_SaveState; Serializes current or queued AnimIdle state with debug size accounting; form references remain subject to native save/load resolution.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x47388B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x473894",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x47389B",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x47395A",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x47396A",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x473970",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x473982",
-    "line": "call    sub_49F570",
+    "line": "call    BSAnimGroupSequence_SaveState; Serializes BSAnimGroupSequence effective sample time, active state, fields +0x34/+0x38 and +0x54; save versions below 0x71 include the legacy extra time copy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,13 +1669,13 @@
   },
   {
     "ea": "0x47399B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4739A1",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x4739A7",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x4739AD",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x4739BF",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x4739C5",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x4739EA",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x473A4D",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

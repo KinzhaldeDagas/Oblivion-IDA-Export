@@ -4,11 +4,11 @@ int __thiscall sub_6CBA90(char *this, signed int a2)
   int v4; // edi
   int (__cdecl *v5)(int, char *, int, signed int *, int); // ecx
 
-  v2 = a2;
-  sub_7094A0(this, a2);
-  sub_7154B0((float *)this + 3, v2);
-  v4 = *(_DWORD *)(v2 + 0x220);
-  v5 = *(int (__cdecl **)(int, char *, int, signed int *, int))(v4 + 8);
-  a2 = 4;
-  return v5(v4, this + 0x1C, 4, &a2, 1);
+  v2 = a2; /*0x6cba92*/
+  sub_7094A0(this, a2); /*0x6cba99*/
+  sub_7154B0((float *)this + 3, v2); /*0x6cbaa2*/
+  v4 = *(_DWORD *)(v2 + 0x220); /*0x6cbaa7*/
+  v5 = *(int (__cdecl **)(int, char *, int, signed int *, int))(v4 + 8); /*0x6cbaad*/
+  a2 = 4; /*0x6cbabe*/
+  return v5(v4, this + 0x1C, 4, &a2, 1); /*0x6cbacb*/
 }

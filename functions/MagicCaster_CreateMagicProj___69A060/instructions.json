@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x69A0EB",
-    "line": "call    EffectItemList_GetStrongestItem",
+    "line": "call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x69A0F7",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x69A0FB",
-    "line": "mov     [esp+68h+var_3C], ebp",
+    "line": "mov     [esp+6Ch+var_40], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x69A101",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; magicItem",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69A103",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x69A1B7",
-    "line": "mov     dword ptr [esp+68h+var_1C], ecx",
+    "line": "mov     [esp+68h+var_1C], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x69A1D9",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x69A1DB",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x69A242",
-    "line": "fstp    dword ptr [esp+68h+var_1C]",
+    "line": "fstp    [esp+68h+var_1C]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x69A266",
-    "line": "fadd    dword ptr [esp+68h+var_1C]",
+    "line": "fadd    [esp+68h+var_1C]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -1273,13 +1273,13 @@
   },
   {
     "ea": "0x69A2D2",
-    "line": "fstp    dword ptr [esp+68h+var_1C]",
+    "line": "fstp    [esp+68h+var_1C]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x69A2D6",
-    "line": "mov     ecx, dword ptr [esp+68h+var_1C]",
+    "line": "mov     ecx, [esp+68h+var_1C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x69A396",
-    "line": "mov     ecx, offset flt_B37EE8",
+    "line": "mov     ecx, (offset flt_B37ED0+18h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x69A3F9",
-    "line": "call    sub_6159C0",
+    "line": "call    Combat_PredictAimPoint_Setup",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x69A471",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

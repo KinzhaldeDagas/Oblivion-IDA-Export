@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A2850",
-    "line": "push    esi",
+    "line": "push    esi; Deep copy-constructs one compact 0x54 SIdvLeafTexture, including initialization and assignment of its owned 28-byte small string.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7A2852",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x7A2876",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A2878",
-    "line": "lea     ecx, [esi+14h]",
+    "line": "lea     ecx, [esi+14h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7A287B",
-    "line": "push    eax",
+    "line": "push    eax; offset",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7A2889",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7A288D",
-    "line": "call    sub_414420",
+    "line": "call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.",
     "mnemonic": "call",
     "size": 5
   },

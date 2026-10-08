@@ -73,7 +73,7 @@
 0x936677: pop     edi
 0x936678: pop     ebx
 0x936679: mov     ecx, [esp+0Ch+arg_0]
-0x93667D: mov     eax, offset sub_555555
+0x93667D: mov     eax, offset loc_555555
 0x936682: test    eax, ecx
 0x936684: pop     esi
 0x936685: jg      short loc_93669C

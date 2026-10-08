@@ -1,4 +1,4 @@
-0x411160: fld     [esp+arg_0]
+0x411160: fld     [esp+arg_0]; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.
 0x411164: sub     esp, 24h
 0x411167: cmp     byte ptr [esp+24h+arg_4], 0
 0x41116C: push    esi
@@ -18,7 +18,7 @@
 0x41119E: fstp    [esp+2Ch+arg_4]
 0x4111A2: call    NiFrustum__SetOrtho
 0x4111A7: mov     ecx, esi; this
-0x4111A9: call    GetFarPlane
+0x4111A9: call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.
 0x4111AE: fstp    [esp+28h+var_8]
 0x4111B2: fld     NearDistance
 0x4111B8: mov     eax, [esi+0DCh]
@@ -91,7 +91,7 @@
 0x41129D: push    ecx
 0x41129E: mov     ecx, [esi+0DCh]; this
 0x4112A4: fstp    [esp+30h+a2]; a2
-0x4112A7: call    NiAVObject_UpdateNiAVObject
+0x4112A7: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4112AC: fld     [esp+28h+arg_0]
 0x4112B0: fdiv    g_DefaulFOV
 0x4112B6: mov     edx, [esi+0DCh]

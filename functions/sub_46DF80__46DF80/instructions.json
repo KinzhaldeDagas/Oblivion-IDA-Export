@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46DF80",
-    "line": "push    esi",
+    "line": "push    esi; MEF PERF 2026-09-07: PERF-2 destructor contract: component+4/+8 is embedded head; clear copies following node into head, frees dynamic node and old string, then frees last string. Batch index/scratch memory is separate temporary ownership; never free embedded head or retain pointers after clear. Existing partial-destination OOM semantics need explicit policy before optimization.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x46DFA6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x46DFAF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x46DFC1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

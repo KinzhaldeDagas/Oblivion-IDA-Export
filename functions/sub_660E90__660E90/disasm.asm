@@ -20,7 +20,7 @@
 0x660EC0: test    al, al
 0x660EC2: jnz     short loc_660F08
 0x660EC4: mov     ecx, esi; this
-0x660EC6: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x660EC6: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x660ECB: cmp     eax, 5
 0x660ECE: jz      short loc_660F08
 0x660ED0: mov     ecx, esi

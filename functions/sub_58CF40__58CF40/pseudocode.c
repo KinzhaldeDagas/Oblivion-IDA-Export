@@ -1,180 +1,188 @@
-void __userpurge sub_58CF40(double a1@<st0>, int a2)
+// Verified: second pass over template tokens. On tile-close token 0x2D, traverses current Tile value list and calls Value::CalculateValue(value,true) for every trait except class 0xFA2, then ascends parent. ReadFile therefore initializes properties natively; never call CalculateValue with Tile*. Fallout analogue 0x827E0B28; Fallout adds a critical section and uses other token numbers.
+void __thiscall Tile::ConnectTraitsToTree(Tile *this, OblivionTileTemplate *tileTemplate)
 {
-  _DWORD *v4; // ecx
-  int v5; // ebp
-  _DWORD *v6; // ebx
-  float *v7; // esi
-  float v8; // eax
-  _DWORD *v9; // esi
-  int v10; // ecx
-  unsigned int v11; // eax
-  int v12; // eax
-  double v13; // st4
-  _DWORD *v14; // eax
-  _DWORD *v15; // eax
-  char *v16; // esi
-  unsigned int *PropertyByCode; // eax
-  unsigned int *v18; // eax
-  double v19; // st4
-  float *v20; // eax
-  Tile *v21; // edi
+  OblivionTileTemplateItemNode *head; // ecx
+  unsigned int trait; // ebp
+  _DWORD *v4; // ebx
+  OblivionTileTemplateItem *item; // esi
+  OblivionTileTemplateCommand command; // eax
+  _DWORD *v7; // esi
+  OblivionTileValueView *v8; // ecx
+  unsigned int v9; // eax
+  unsigned int v10; // eax
+  double number; // st7
+  OblivionTileValueView *v12; // eax
+  unsigned int v13; // eax
+  char *m_data; // esi
+  OblivionTileValueView *v15; // eax
+  OblivionTileValueView *v16; // eax
+  double v17; // st7
+  OblivionTileValueView *v18; // eax
+  Tile *TileByName; // edi
+  double v20; // st7
+  unsigned int v21; // eax
   int v22; // eax
-  int v23; // eax
-  BSStringT v24; // [esp+0h] [ebp-20h] BYREF
-  int v25; // [esp+18h] [ebp-8h]
-  float v26; // [esp+1Ch] [ebp-4h]
-  _DWORD *v27; // [esp+24h] [ebp+4h]
+  BSStringT operand; // [esp+0h] [ebp-20h] BYREF
+  unsigned int v24; // [esp+18h] [ebp-8h]
+  float value; // [esp+1Ch] [ebp-4h]
+  OblivionTileTemplate *tileTemplatea; // [esp+24h] [ebp+4h]
 
-  v4 = *(_DWORD **)(a2 + 0x10);
-  v5 = 0;
-  v6 = 0;
-  v25 = 0;
-  if ( v4 )
+  head = tileTemplate->items.head; /*0x58cf47*/
+  trait = 0; /*0x58cf50*/
+  v4 = 0; /*0x58cf52*/
+  v24 = 0; /*0x58cf56*/
+  if ( head )
   {
     while ( 1 )
     {
-      v7 = (float *)v4[2];
-      v8 = *v7;
-      v27 = (_DWORD *)*v4;
-      if ( *(_DWORD *)v7 == 0x28 )
+      item = head->item; /*0x58cf66*/
+      command = item->command; /*0x58cf6c*/
+      tileTemplatea = (OblivionTileTemplate *)head->next; /*0x58cf73*/
+      if ( item->command == OblivionTemplate_BeginTile )
       {
-        v5 = *((_DWORD *)v7 + 4);
-        if ( !v25 )
-          v25 = *((_DWORD *)v7 + 4);
-        byte_B3B0A1 = 1;
+        trait = item->argument.trait; /*0x58cf7d*/
+        if ( !v24 ) /*0x58cf80*/
+          v24 = item->argument.trait; /*0x58cf82*/
+        unk_B3B0A1 = 1; /*0x58cf86*/
       }
       else
       {
-        switch ( LODWORD(v8) )
+        switch ( command )
         {
-          case 0x2D:
-            byte_B3B0A1 = 0;
-            v9 = *(_DWORD **)(v5 + 0x18);
-            while ( v9 )
+          case OblivionTemplate_EndTile:
+            unk_B3B0A1 = 0; /*0x58cf97*/
+            v7 = *(_DWORD **)(trait + 0x18); /*0x58cf9e*/
+            while ( v7 ) /*0x58cfa3*/
             {
-              v10 = v9[2];
-              v9 = (_DWORD *)*v9;
-              if ( *(_WORD *)(v10 + 0x18) != 0xFA2 )
-                DoActionEnumeration((float *)v10, 1);
+              v8 = (OblivionTileValueView *)v7[2]; /*0x58cfb0*/
+              v7 = (_DWORD *)*v7; /*0x58cfbc*/
+              if ( v8->trait != 0xFA2 ) /*0x58cfbe*/
+                Tile::Value::CalculateValue(v8, 1); /*0x58cfc2*/
             }
-            v5 = *(_DWORD *)(v5 + 0x10);
+            trait = *(_DWORD *)(trait + 0x10); /*0x58cfcb*/
             break;
-          case 0x32:
-            if ( v5 )
+          case OblivionTemplate_SetTrait:
+            if ( trait )
             {
-              if ( 0.0 == v7[1]
-                && ((LOWORD(v11) = *((_WORD *)v7 + 6), (_WORD)v11 != 0xFFFF)
-                  ? (v11 = (unsigned __int16)v11)
-                  : (v11 = strlen(*((const char **)v7 + 2))),
-                    v11)
-                || (v12 = *((_DWORD *)v7 + 4), v12 == 0xFDE)
-                || v12 == 0xFE6 )
+              if ( 0.0 == item->number
+                && ((LOWORD(v9) = item->text.m_dataLen, (_WORD)v9 != 0xFFFF)
+                  ? (v9 = (unsigned __int16)v9)
+                  : (v9 = strlen(item->text.m_data)),
+                    v9)
+                || (v10 = item->argument.trait, v10 == 0xFDE)
+                || v10 == 0xFE6 )
               {
-                v15 = *((_DWORD **)v7 + 4);
-                if ( v15 == (_DWORD *)0xBBA )
+                v13 = item->argument.trait; /*0x58d050*/
+                if ( v13 == 0xBBA ) /*0x58d058*/
                 {
-                  v26 = COERCE_FLOAT(&v24);
-                  v24.m_data = 0;
-                  *(_DWORD *)&v24.m_dataLen = 0;
-                  BSStringT_Set(&v24, *((const char **)v7 + 2), 0);
-                  sub_58A020((BSStringT *)v5, v24.m_data, *(int *)&v24.m_dataLen);
+                  value = COERCE_FLOAT(&operand); /*0x58d05f*/
+                  operand.m_data = 0; /*0x58d063*/
+                  *(_DWORD *)&operand.m_dataLen = 0; /*0x58d065*/
+                  BSStringT_Set(&operand, item->text.m_data, 0); /*0x58d072*/
+                  sub_58A020((BSStringT *)trait, operand.m_data, *(int *)&operand.m_dataLen); /*0x58d079*/
                 }
                 else
                 {
-                  v16 = *((char **)v7 + 2);
-                  if ( v15 == (_DWORD *)0xFE6 )
+                  m_data = item->text.m_data; /*0x58d088*/
+                  if ( v13 == 0xFE6 ) /*0x58d08d*/
                   {
-                    PropertyByCode = Tile_GetPropertyByCode_((_DWORD *)v5, (_DWORD *)0xFE6);
-                    if ( PropertyByCode )
-                      sub_58CA50(PropertyByCode, v16);
-                    *(_DWORD *)(v5 + 0x2C) |= 0x20u;
+                    v15 = Tile::GetOrCreateValue((Tile *)trait, 0xFE6u); /*0x58d090*/
+                    if ( v15 ) /*0x58d097*/
+                      sub_58CA50(v15, m_data); /*0x58d09c*/
+                    *(_DWORD *)(trait + 0x2C) |= 0x20u; /*0x58d0a1*/
                   }
                   else
                   {
-                    v18 = Tile_GetPropertyByCode_((_DWORD *)v5, v15);
-                    if ( v18 )
-                      sub_58CA50(v18, v16);
+                    v16 = Tile::GetOrCreateValue((Tile *)trait, v13); /*0x58d0ab*/
+                    if ( v16 ) /*0x58d0b2*/
+                      sub_58CA50(v16, m_data); /*0x58d0bb*/
                   }
                 }
               }
               else
               {
-                v13 = v7[1];
-                *(float *)&v24.m_dataLen = v7[4];
-                v26 = v13;
-                v14 = Tile_GetPropertyByCode_((_DWORD *)v5, *(_DWORD **)&v24.m_dataLen);
-                if ( v14 )
-                  Tile_Property_SetFloatValue_((int)v14, v26);
+                number = item->number; /*0x58d025*/
+                *(_DWORD *)&operand.m_dataLen = item->argument.trait; /*0x58d028*/
+                value = number; /*0x58d02b*/
+                v12 = Tile::GetOrCreateValue((Tile *)trait, *(unsigned int *)&operand.m_dataLen); /*0x58d02f*/
+                if ( v12 ) /*0x58d036*/
+                  Tile::Value::SetFloat(v12, value); /*0x58d046*/
               }
             }
             else
             {
-              PrintError("Trait defined outside of any tile.");
+              PrintError("Trait defined outside of any tile."); /*0x58d0ca*/
             }
             break;
-          case 0x1E:
-            v6 = (_DWORD *)Double_To_SInt32(a1);
-            break;
-          case 0x23:
-            v6 = 0;
-            break;
-          case 0x37:
-            if ( v6 )
+          case OblivionTemplate_BeginTrait:
+            v4 = (_DWORD *)Double_To_SInt32(item->number); /*0x58d0dc*/
+            break; /*0x58d0de*/
+          case OblivionTemplate_EndTrait:
+            v4 = 0; /*0x58d0e8*/
+            break; /*0x58d0ea*/
+          case OblivionTemplate_LiteralAction:
+            if ( v4 ) /*0x58d0f6*/
             {
-              v19 = v7[1];
-              *(float *)&v24.m_dataLen = v7[4];
-              v26 = v19;
-              *(float *)&v24.m_data = v26;
-              v20 = (float *)Tile_GetPropertyByCode_((_DWORD *)v5, v6);
-              sub_58CBE0(v20, *(float *)&v24.m_data, *(int *)&v24.m_dataLen);
+              v17 = item->number; /*0x58d0fb*/
+              *(_DWORD *)&operand.m_dataLen = item->argument.trait; /*0x58d0fe*/
+              value = v17; /*0x58d0ff*/
+              *(float *)&operand.m_data = value; /*0x58d108*/
+              v18 = Tile::GetOrCreateValue((Tile *)trait, (unsigned int)v4); /*0x58d10e*/
+              Tile::Value::AddFloatAction(v18, *(float *)&operand.m_data, *(unsigned int *)&operand.m_dataLen); /*0x58d115*/
             }
             else
             {
-              PrintError("Action defined outside of any trait.");
+              PrintError("Action defined outside of any trait."); /*0x58d124*/
             }
             break;
-          case 0x3C:
-            if ( v6 )
+          case OblivionTemplate_ReferenceAction:
+            if ( v4 ) /*0x58d12d*/
             {
-              v21 = sub_58B800((_DWORD *)v5, *((unsigned __int8 **)v7 + 2));
-              if ( v21 )
+              TileByName = Tile::GetTileByName((Tile *)trait, item->text.m_data); /*0x58d139*/
+              if ( TileByName ) /*0x58d140*/
               {
-                *(float *)&v24.m_dataLen = v7[4];
-                v22 = Double_To_SInt32(a1);
-                sub_58CF10((_DWORD *)v5, v6, v21, v22, *(int *)&v24.m_dataLen);
+                v20 = item->number; /*0x58d145*/
+                *(_DWORD *)&operand.m_dataLen = item->argument.trait; /*0x58d148*/
+                v21 = Double_To_SInt32(v20); /*0x58d149*/
+                Tile::AddReferenceAction( /*0x58d153*/
+                  (Tile *)trait,
+                  (unsigned int)v4,
+                  TileByName,
+                  v21,
+                  *(unsigned int *)&operand.m_dataLen);
               }
             }
             else
             {
-              PrintError("Action link defined outside of any trait.");
+              PrintError("Action link defined outside of any trait."); /*0x58d15f*/
             }
             break;
-          case 0x14:
-            if ( !v6 )
+          case OblivionTemplate_BeginGroup:
+            if ( !v4 ) /*0x58d168*/
             {
-              PrintError("Action begun outside of any trait.");
-              break;
+              PrintError("Action begun outside of any trait."); /*0x58d173*/
+              break; /*0x58d173*/
             }
-            *(_DWORD *)&v24.m_dataLen = 0xA;
-            goto LABEL_54;
-          case 0x19:
-            if ( v6 )
+            *(_DWORD *)&operand.m_dataLen = 0xA; /*0x58d16a*/
+            goto LABEL_54; /*0x58d16c*/
+          case OblivionTemplate_EndGroup:
+            if ( v4 ) /*0x58d17c*/
             {
-              *(_DWORD *)&v24.m_dataLen = 0xF;
+              *(_DWORD *)&operand.m_dataLen = 0xF; /*0x58d17e*/
 LABEL_54:
-              v23 = Double_To_SInt32(a1);
-              sub_58CEF0((_DWORD *)v5, v6, v23, *(int *)&v24.m_dataLen);
-              break;
+              v22 = Double_To_SInt32(item->number); /*0x58d180*/
+              sub_58CEF0((Tile *)trait, v4, v22, *(int *)&operand.m_dataLen); /*0x58d18c*/
+              break; /*0x58d191*/
             }
-            PrintError("Action ended outside of any trait.");
+            PrintError("Action ended outside of any trait."); /*0x58d198*/
             break;
           default:
-            break;
+            break; /*0x58d178*/
         }
       }
-      if ( !v27 )
-        return;
-      v4 = v27;
+      if ( !tileTemplatea ) /*0x58d1a6*/
+        return; /*0x58d1a6*/
+      head = (OblivionTileTemplateItemNode *)tileTemplatea; /*0x58cf62*/
     }
   }
 }

@@ -2,7 +2,7 @@
 0x9E7086: push    ecx
 0x9E7087: fstp    [esp+4+var_4]; float
 0x9E708A: push    offset aFdistancetopla; "fDistancetoPlayerforConversations"
-0x9E708F: mov     ecx, offset fDistancetoPlayerforConversations
+0x9E708F: mov     ecx, (offset flt_B36778+1B8h)
 0x9E7094: call    GameSetting_ConstrAndReg_float
 0x9E7099: push    offset sub_A1D980; void (__cdecl *)()
 0x9E709E: call    _atexit

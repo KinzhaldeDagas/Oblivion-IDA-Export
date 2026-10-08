@@ -1,8 +1,8 @@
 0x987F5B: push    0Ch
 0x987F5D: push    offset stru_AFFB00
 0x987F62: call    __SEH_prolog4
-0x987F67: mov     eax, [ebp+Size]
-0x987F6A: imul    eax, [ebp+Count]
+0x987F67: mov     eax, dword ptr [ebp+Size]
+0x987F6A: imul    eax, dword ptr [ebp+Size+4]
 0x987F6E: test    eax, eax
 0x987F70: jnz     short loc_987F76
 0x987F72: xor     eax, eax
@@ -33,11 +33,15 @@
 0x987FAE: pop     ecx
 0x987FAF: mov     [ebp+ms_exc.registration.TryLevel], esi
 0x987FB2: push    [ebp+File]; Count
-0x987FB5: push    [ebp+Count]; Count
-0x987FB8: push    [ebp+Size]; Size
+0x987FB5: push    dword ptr [ebp+Size+4]; Count
+0x987FB8: push    dword ptr [ebp+Size]; Size
 0x987FBB: push    [ebp+Str]; DstBuf
 0x987FBE: call    __fwrite_nolock
 0x987FC3: add     esp, 10h
 0x987FC6: mov     [ebp+var_1C], eax
 0x987FC9: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x987FD0: call    _fwrite___$LN10_2
+0x987FDE: push    [ebp+File]
+0x987FE1: call    __unlock_file
+0x987FE6: pop     ecx
+0x987FE7: retn

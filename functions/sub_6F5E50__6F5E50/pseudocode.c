@@ -1,27 +1,28 @@
 char __thiscall sub_6F5E50(_DWORD *this, int a2, int a3, int a4)
 {
   void (__thiscall ***v5)(_DWORD, int); // ecx
-  int v7; // [esp-1Ch] [ebp-20h] BYREF
-  void *v8; // [esp-18h] [ebp-1Ch]
-  int v9; // [esp-14h] [ebp-18h]
-  int v10; // [esp-10h] [ebp-14h]
-  int v11; // [esp-Ch] [ebp-10h]
-  size_t v12; // [esp-8h] [ebp-Ch]
-  int v13; // [esp+0h] [ebp-4h]
+  OB_stString28_010201A0 v7; // [esp-1Ch] [ebp-20h] BYREF
 
-  if ( !*(this + 0x10) )
-    return 0;
-  if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *, int, int, int))(*this + 0x10))(this, a2, 1, a4 * a3) )
+  if ( !*(this + 0x10) ) /*0x6f5e57*/
+    return 0; /*0x6f5e57*/
+  if ( !(*(unsigned __int8 (__thiscall **)(_DWORD *, int, int, int))(*this + 0x10))(this, a2, 1, a4 * a3) ) /*0x6f5e71*/
   {
-    v12 = 0xF00000000LL;
-    LOBYTE(v8) = 0;
-    sub_414420((int)&v7, this + 1, 0, 0xFFFFFFFF);
-    sub_6F6BF0(1, v7, v8, v9, v10, v11, v12, v13);
-    v5 = (void (__thiscall ***)(_DWORD, int))*(this + 0x10);
-    if ( v5 )
-      (**v5)(v5, 1);
-    *(this + 0x10) = 0;
-    return 0;
+    *(_QWORD *)&v7.size = 0xF00000000LL; /*0x6f5e8e*/
+    v7.storage.inlineData[0] = 0; /*0x6f5e96*/
+    OB_stString28_AssignSubstring_010201A0(&v7, (const OB_stString28_010201A0 *)(this + 1), 0, 0xFFFFFFFF); /*0x6f5e99*/
+    sub_6F6BF0( /*0x6f5ea0*/
+      1,
+      v7.allocatorState,
+      (void **)v7.storage.heapData,
+      *((int *)&v7.storage.heapData + 1),
+      *((int *)&v7.storage.heapData + 2),
+      *((int *)&v7.storage.heapData + 3),
+      *(size_t *)&v7.size);
+    v5 = (void (__thiscall ***)(_DWORD, int))*(this + 0x10); /*0x6f5ea5*/
+    if ( v5 ) /*0x6f5ead*/
+      (**v5)(v5, 1); /*0x6f5eb5*/
+    *(this + 0x10) = 0; /*0x6f5eb7*/
+    return 0; /*0x6f5ec1*/
   }
-  return 1;
+  return 1; /*0x6f5ec0*/
 }

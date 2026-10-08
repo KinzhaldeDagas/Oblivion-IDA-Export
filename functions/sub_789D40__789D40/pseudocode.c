@@ -1,62 +1,67 @@
-void __userpurge sub_789D40(_DWORD *this@<ecx>, int a2@<edi>, unsigned int ArgList, _DWORD *a4, _DWORD *a5, _DWORD *a6)
+// 2026-05-19 payload-retention pass: stock collision getter exports type, position, and dimensions only. Supplemental 73000 rotations are not exposed by this ABI and must be applied later at the Havok consumer boundary if retained sidecar data is present.
+void __thiscall CSpeedTreeRT__GetCollisionObject(
+        OB_CSpeedTreeRT_010201A0 *this,
+        unsigned int index,
+        int *typeOut,
+        float *positionOut3,
+        float *dimensionsOut3)
 {
-  _DWORD *v7; // ecx
-  int v8; // eax
-  int v9; // eax
-  int v10; // eax
-  bool v11; // cf
-  char *v12; // edx
-  unsigned int v13; // eax
-  int v14; // edx
-  _DWORD *v15; // eax
-  int v16; // edx
-  rsize_t v17; // [esp-4h] [ebp-3Ch]
-  _BYTE v18[4]; // [esp+10h] [ebp-28h] BYREF
-  unsigned int v19; // [esp+14h] [ebp-24h]
-  unsigned int v20; // [esp+28h] [ebp-10h]
-  int v21; // [esp+34h] [ebp-4h]
+  _DWORD *collisionObjectVector; // ecx
+  int v7; // eax
+  int collisionObjectCount; // eax
+  OB_stString28_010201A0 *formattedError; // eax
+  bool usesInlineStorage; // cf
+  const char *inlineData; // edx
+  unsigned int v12; // eax
+  int v13; // edx
+  unsigned int v14; // eax
+  int v15; // edx
+  OB_stString28_010201A0 formattedMessage; // [esp+10h] [ebp-28h] BYREF
+  int v17; // [esp+34h] [ebp-4h]
 
-  v7 = (_DWORD *)*(this + 0x16);
-  if ( v7 )
+  collisionObjectVector = this->collisionObjects; /*0x789d68*/
+  if ( collisionObjectVector ) /*0x789d6d*/
   {
-    v8 = v7[1];
-    if ( v8 && ArgList < (v7[2] - v8) / 0x1C )
+    v7 = collisionObjectVector[1]; /*0x789d73*/
+    if ( v7 && index < (collisionObjectVector[2] - v7) / 0x1C ) /*0x789d98*/
     {
-      *a4 = *(_DWORD *)sub_7876F0(v7, ArgList);
-      v13 = sub_7876F0((_DWORD *)*(this + 0x16), ArgList);
-      v14 = *(_DWORD *)(v13 + 4);
-      v13 += 4;
-      *a5 = v14;
-      a5[1] = *(_DWORD *)(v13 + 4);
-      a5[2] = *(_DWORD *)(v13 + 8);
-      v15 = (_DWORD *)sub_7876F0((_DWORD *)*(this + 0x16), ArgList);
-      v16 = v15[4];
-      v15 += 4;
-      *a6 = v16;
-      a6[1] = v15[1];
-      a6[2] = v15[2];
+      *typeOut = *(_DWORD *)OB_stVector_CollisionObject_At_010201A0(collisionObjectVector, (int)this, index); /*0x789e3f*/
+      v12 = OB_stVector_CollisionObject_At_010201A0((_DWORD *)this->collisionObjects, (int)this, index); /*0x789e45*/
+      v13 = *(_DWORD *)(v12 + 4); /*0x789e4a*/
+      v12 += 4; /*0x789e51*/
+      *(_DWORD *)positionOut3 = v13; /*0x789e54*/
+      positionOut3[1] = *(float *)(v12 + 4); /*0x789e59*/
+      positionOut3[2] = *(float *)(v12 + 8); /*0x789e5f*/
+      v14 = OB_stVector_CollisionObject_At_010201A0((_DWORD *)this->collisionObjects, (int)this, index); /*0x789e66*/
+      v15 = *(_DWORD *)(v14 + 0x10); /*0x789e6b*/
+      v14 += 0x10; /*0x789e72*/
+      *(_DWORD *)dimensionsOut3 = v15; /*0x789e75*/
+      dimensionsOut3[1] = *(float *)(v14 + 4); /*0x789e7a*/
+      dimensionsOut3[2] = *(float *)(v14 + 8); /*0x789e80*/
     }
     else
     {
-      v9 = v7[1];
-      if ( v9 )
-        v9 = (v7[2] - v9) / 0x1C;
-      v10 = sub_7A54A0((int)v18, "collision object index (%d) exceeds maximum index (%d)", ArgList, v9);
-      v11 = *(_DWORD *)(v10 + 0x18) < 0x10u;
-      v21 = 0;
-      if ( v11 )
-        v12 = (char *)(v10 + 4);
+      collisionObjectCount = collisionObjectVector[1]; /*0x789d9e*/
+      if ( collisionObjectCount ) /*0x789da3*/
+        collisionObjectCount = (collisionObjectVector[2] - collisionObjectCount) / 0x1C; /*0x789dbb*/
+      formattedError = OB_IdvFormatString_010201A0( /*0x789dc8*/
+                         &formattedMessage,
+                         "collision object index (%d) exceeds maximum index (%d)",
+                         index,
+                         collisionObjectCount); // Out-of-range collision diagnostics construct a temporary 28-byte string through OB_IdvFormatString, pass its bytes to CSpeedTreeRT::SetError, then destroy temporary heap storage when SSO capacity is exceeded.
+      usesInlineStorage = formattedError->capacity < 0x10; /*0x789dd5*/
+      v17 = 0; /*0x789dd8*/
+      if ( usesInlineStorage ) /*0x789de0*/
+        inlineData = formattedError->storage.inlineData; /*0x789de7*/
       else
-        v12 = *(char **)(v10 + 4);
-      LODWORD(v17) = strlen(v12);
-      sub_414500(&dword_B2B614, 0x10, v12, v17);
-      if ( v20 >= 0x10 )
-        FormHeapFree(v19);
+        inlineData = formattedError->storage.heapData; /*0x789de2*/
+      OB_stString28_AssignBytes_010201A0(&OB_g_strError_010201A0, inlineData, strlen(inlineData)); /*0x789e02*/
+      if ( formattedMessage.capacity >= 0x10 ) /*0x789e0b*/
+        FormHeapFree((unsigned int)formattedMessage.storage.heapData); /*0x789e16*/
     }
   }
   else
   {
-    LODWORD(v17) = 0x2E;
-    sub_414500(&dword_B2B614, a2, "no collision objects are stored with this tree", v17);
+    OB_stString28_AssignBytes_010201A0(&OB_g_strError_010201A0, "no collision objects are stored with this tree", 0x2Eu); /*0x789ea4*/
   }
 }

@@ -1,6 +1,6 @@
-0x7AA390: mov     eax, [esp+arg_0]
+0x7AA390: mov     eax, [esp+left]; MEF PERF 2026-10-07 PASS5: PERF-15 allowed pure comparator: RenderPass** -> geometry at pass+0 -> unsigned DWORD geometry+B4; current Oblivion NiGeometry type identifies+B4 as geomData. Returns signed -1/0/+1 using unsigned key order, no callbacks/writes. Equal geomData addresses retain input order in native merge sort.
 0x7AA394: mov     ecx, [eax]
-0x7AA396: mov     edx, [esp+arg_4]
+0x7AA396: mov     edx, [esp+right]
 0x7AA39A: mov     eax, [edx]
 0x7AA39C: mov     eax, [eax]
 0x7AA39E: mov     ecx, [ecx]

@@ -13,7 +13,6 @@
 0x71E1C4: test    edi, edi
 0x71E1C6: jbe     short loc_71E230
 0x71E1C8: jmp     short loc_71E1D0
-0x71E1CA: align 10h
 0x71E1D0: mov     cl, [edx]
 0x71E1D2: movzx   ebx, byte ptr [edx+1]
 0x71E1D6: movzx   ebp, cl

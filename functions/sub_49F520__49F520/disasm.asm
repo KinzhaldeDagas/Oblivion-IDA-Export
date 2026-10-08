@@ -1,4 +1,4 @@
-0x49F520: xor     eax, eax
+0x49F520: xor     eax, eax; For each 0x10-byte controlled-block record owned by this sequence, clears the pointer at record +8. Called only by ActorAnimData's manager-wide controlled-block reset pass at 0x4730B0.
 0x49F522: cmp     [ecx+0Ch], eax
 0x49F525: jbe     short locret_49F547
 0x49F527: xor     edx, edx

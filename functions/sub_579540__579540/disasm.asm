@@ -1,4 +1,4 @@
-0x579540: push    1; arg1
+0x579540: push    1; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.
 0x579542: push    0; canCreate
 0x579544: call    InterfaceManager_GetSingleton
 0x579549: add     esp, 8

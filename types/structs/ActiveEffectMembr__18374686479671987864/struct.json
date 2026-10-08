@@ -1,106 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ActiveEffectMembr",
+  "definition": "struct ActiveEffectMembr\n{\nfloat timeElapsed;\nMagicItem *item;\nEffectItem *effectItem;\nbool bApplied;\nbool bTerminated;\nbool bRemoved;\nUInt8 pad13;\nUInt32 aeFlags;\nfloat magnitude;\nfloat duration;\nMagicTarget *target;\nMagicCaster *caster;\nUInt32 spellType;\nUInt32 unk2C;\nTESBoundObject *boundObjectOrParentForm;\nHitEffectNode *hitEffectList;\n}\n",
   "id": 18374686479671987864,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "timeElapsed",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "item",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "MagicItem *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "effectItem",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "EffectItem *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bApplied",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 1
+      "offset_hex": "0xC",
+      "size": 1,
+      "type": "bool"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bTerminated",
       "offset": 13,
-      "offset_hex": "0xd",
-      "size": 1
+      "offset_hex": "0xD",
+      "size": 1,
+      "type": "bool"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bRemoved",
       "offset": 14,
-      "offset_hex": "0xe",
-      "size": 1
+      "offset_hex": "0xE",
+      "size": 1,
+      "type": "bool"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pad13",
       "offset": 15,
-      "offset_hex": "0xf",
-      "size": 1
+      "offset_hex": "0xF",
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "aeFlags",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "magnitude",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "duration",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "target",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "MagicTarget *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "caster",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "MagicCaster *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "spellType",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk2C",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "boundObjectOrParentForm",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "TESBoundObject *"
     },
     {
-      "name": "hitEffect",
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "hitEffectList",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HitEffectNode *"
     }
   ],
   "name": "ActiveEffectMembr",
+  "ordinal": 9419,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 52
 }

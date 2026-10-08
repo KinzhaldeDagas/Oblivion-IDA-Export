@@ -10,24 +10,24 @@
 0x97AFD5: mov     ecx, [edi+78h]
 0x97AFD8: add     eax, 10h
 0x97AFDB: lea     ebx, [edi+48h]
-0x97AFDE: fstp    [esp+78h+var_30]
+0x97AFDE: fstp    [esp+78h+other.x]
 0x97AFE2: lea     edx, [esi+60h]
 0x97AFE5: fld     dword ptr [esi+40h]
 0x97AFE8: mov     [esp+78h+var_60], edx
 0x97AFEC: fsub    dword ptr [edi+40h]
-0x97AFEF: fstp    [esp+78h+var_2C]
+0x97AFEF: fstp    [esp+78h+other.y]
 0x97AFF3: fld     dword ptr [esi+44h]
 0x97AFF6: fsub    dword ptr [edi+44h]
-0x97AFF9: fstp    [esp+78h+var_28]
+0x97AFF9: fstp    [esp+78h+other.z]
 0x97AFFD: fld     dword ptr [eax]
 0x97AFFF: fsub    dword ptr [ecx+10h]
-0x97B002: fstp    [esp+78h+var_3C]
+0x97B002: fstp    [esp+78h+var_3C.x]
 0x97B006: fld     dword ptr [eax+4]
 0x97B009: fsub    dword ptr [ecx+14h]
-0x97B00C: fstp    [esp+78h+var_38]
+0x97B00C: fstp    [esp+78h+var_3C.y]
 0x97B010: fld     dword ptr [eax+8]
 0x97B013: fsub    dword ptr [ecx+18h]
-0x97B016: fstp    [esp+78h+var_34]
+0x97B016: fstp    [esp+78h+var_3C.z]
 0x97B01A: fld     dword ptr [ecx+4]
 0x97B01D: lea     ecx, [esi+54h]
 0x97B020: fstp    [esp+78h+var_68]
@@ -59,38 +59,38 @@
 0x97B068: fmul    dword ptr [ebx+8]
 0x97B06B: faddp   st(1), st
 0x97B06D: fstp    [esp+78h+var_1C]
-0x97B071: fld     [esp+78h+var_2C]
+0x97B071: fld     [esp+78h+other.y]
 0x97B075: fld     st
 0x97B077: fmul    dword ptr [ebx+4]
 0x97B07A: fld     dword ptr [ebx]
-0x97B07C: fld     [esp+78h+var_30]
+0x97B07C: fld     [esp+78h+other.x]
 0x97B080: fld     st
 0x97B082: fmulp   st(2), st
 0x97B084: fxch    st(2)
 0x97B086: faddp   st(1), st
 0x97B088: fld     dword ptr [ebx+8]
-0x97B08B: fld     [esp+78h+var_28]
+0x97B08B: fld     [esp+78h+other.z]
 0x97B08F: fld     st
 0x97B091: fmulp   st(2), st
 0x97B093: fxch    st(2)
 0x97B095: faddp   st(1), st
-0x97B097: fstp    [esp+78h+var_54]
-0x97B09B: fld     [esp+78h+var_38]
+0x97B097: fstp    [esp+78h+out.x]
+0x97B09B: fld     [esp+78h+var_3C.y]
 0x97B09F: fld     st
 0x97B0A1: fmul    dword ptr [ebx+4]
 0x97B0A4: fld     dword ptr [ebx]
-0x97B0A6: fld     [esp+78h+var_3C]
+0x97B0A6: fld     [esp+78h+var_3C.x]
 0x97B0AA: fld     st
 0x97B0AC: fmulp   st(2), st
 0x97B0AE: fxch    st(2)
 0x97B0B0: faddp   st(1), st
 0x97B0B2: fld     dword ptr [ebx+8]
-0x97B0B5: fmul    [esp+78h+var_34]
+0x97B0B5: fmul    [esp+78h+var_3C.z]
 0x97B0B9: faddp   st(1), st
 0x97B0BB: fstp    [esp+78h+arg_0]
 0x97B0BF: fld     [esp+78h+arg_0]
 0x97B0C3: fmul    [esp+78h+var_68]
-0x97B0C7: fadd    [esp+78h+var_54]
+0x97B0C7: fadd    [esp+78h+out.x]
 0x97B0CB: fstp    [esp+78h+var_48]
 0x97B0CF: fld     dword ptr [esi+6Ch]
 0x97B0D2: fmul    [esp+78h+var_24]
@@ -120,7 +120,7 @@
 0x97B127: fstp    [esp+78h+arg_0]
 0x97B12B: fadd    [esp+78h+arg_0]
 0x97B12F: fstp    [esp+78h+arg_0]
-0x97B133: fld     [esp+78h+var_54]
+0x97B133: fld     [esp+78h+out.x]
 0x97B137: fld     [esp+78h+arg_0]
 0x97B13B: fcom    st(1)
 0x97B13D: fnstsw  ax
@@ -134,7 +134,7 @@
 0x97B151: jz      short loc_97B18E
 0x97B153: fchs
 0x97B155: fstp    [esp+78h+arg_0]
-0x97B159: fld     [esp+78h+var_54]
+0x97B159: fld     [esp+78h+out.x]
 0x97B15D: fld     [esp+78h+arg_0]
 0x97B161: fcom    st(1)
 0x97B163: fnstsw  ax
@@ -207,19 +207,19 @@
 0x97B202: fld     dword ptr [eax+8]
 0x97B205: fmul    st, st(4)
 0x97B207: faddp   st(1), st
-0x97B209: fstp    [esp+78h+var_50]
+0x97B209: fstp    [esp+78h+out.y]
 0x97B20D: fld     dword ptr [eax+4]
 0x97B210: fmul    st, st(2)
 0x97B212: fld     st(1)
 0x97B214: fmul    dword ptr [eax]
 0x97B216: faddp   st(1), st
 0x97B218: fld     dword ptr [eax+8]
-0x97B21B: fmul    [esp+78h+var_34]
+0x97B21B: fmul    [esp+78h+var_3C.z]
 0x97B21F: faddp   st(1), st
 0x97B221: fstp    [esp+78h+arg_0]
 0x97B225: fld     [esp+78h+arg_0]
 0x97B229: fmul    [esp+78h+var_68]
-0x97B22D: fadd    [esp+78h+var_50]
+0x97B22D: fadd    [esp+78h+out.y]
 0x97B231: fstp    [esp+78h+var_44]
 0x97B235: fld     dword ptr [esi+6Ch]
 0x97B238: fmul    [esp+78h+var_18]
@@ -249,7 +249,7 @@
 0x97B28D: fstp    [esp+78h+arg_0]
 0x97B291: fadd    [esp+78h+arg_0]
 0x97B295: fstp    [esp+78h+arg_0]
-0x97B299: fld     [esp+78h+var_50]
+0x97B299: fld     [esp+78h+out.y]
 0x97B29D: fld     [esp+78h+arg_0]
 0x97B2A1: fcom    st(1)
 0x97B2A3: fnstsw  ax
@@ -263,7 +263,7 @@
 0x97B2B7: jz      loc_97B18E
 0x97B2BD: fchs
 0x97B2BF: fstp    [esp+78h+arg_0]
-0x97B2C3: fld     [esp+78h+var_50]
+0x97B2C3: fld     [esp+78h+out.y]
 0x97B2C7: fld     [esp+78h+arg_0]
 0x97B2CB: fcom    st(1)
 0x97B2CD: fnstsw  ax
@@ -314,19 +314,19 @@
 0x97B346: fld     dword ptr [ebp+8]
 0x97B349: fmul    st, st(4)
 0x97B34B: faddp   st(1), st
-0x97B34D: fstp    [esp+7Ch+var_4C]
+0x97B34D: fstp    [esp+7Ch+out.z]
 0x97B351: fld     dword ptr [ebp+4]
 0x97B354: fmul    st, st(2)
 0x97B356: fld     dword ptr [ebp+0]
 0x97B359: fmul    st, st(2)
 0x97B35B: faddp   st(1), st
 0x97B35D: fld     dword ptr [ebp+8]
-0x97B360: fmul    [esp+7Ch+var_34]
+0x97B360: fmul    [esp+7Ch+var_3C.z]
 0x97B364: faddp   st(1), st
 0x97B366: fstp    [esp+7Ch+arg_0]
 0x97B36D: fld     [esp+7Ch+arg_0]
 0x97B374: fmul    [esp+7Ch+var_68]
-0x97B378: fadd    [esp+7Ch+var_4C]
+0x97B378: fadd    [esp+7Ch+out.z]
 0x97B37C: fstp    [esp+7Ch+var_40]
 0x97B380: fld     dword ptr [esi+6Ch]
 0x97B383: fmul    [esp+7Ch+var_C]
@@ -356,7 +356,7 @@
 0x97B402: fstp    [esp+7Ch+arg_0]
 0x97B409: fadd    [esp+7Ch+arg_0]
 0x97B410: fstp    [esp+7Ch+arg_0]
-0x97B417: fld     [esp+7Ch+var_4C]
+0x97B417: fld     [esp+7Ch+out.z]
 0x97B41B: fld     [esp+7Ch+arg_0]
 0x97B422: fcom    st(1)
 0x97B424: fnstsw  ax
@@ -370,7 +370,7 @@
 0x97B438: jz      loc_97B712
 0x97B43E: fchs
 0x97B440: fstp    [esp+7Ch+arg_0]
-0x97B447: fld     [esp+7Ch+var_4C]
+0x97B447: fld     [esp+7Ch+out.z]
 0x97B44B: fld     [esp+7Ch+arg_0]
 0x97B452: fcom    st(1)
 0x97B454: fnstsw  ax
@@ -438,7 +438,7 @@
 0x97B538: fmul    st, st(2)
 0x97B53A: faddp   st(1), st
 0x97B53C: fld     dword ptr [esi+50h]
-0x97B53F: fmul    [esp+7Ch+var_34]
+0x97B53F: fmul    [esp+7Ch+var_3C.z]
 0x97B543: faddp   st(1), st
 0x97B545: fstp    [esp+7Ch+var_5C]
 0x97B549: fld     [esp+7Ch+var_5C]
@@ -529,7 +529,7 @@
 0x97B682: fmul    dword ptr [ecx]
 0x97B684: faddp   st(1), st
 0x97B686: fld     dword ptr [ecx+8]
-0x97B689: fmul    [esp+7Ch+var_34]
+0x97B689: fmul    [esp+7Ch+var_3C.z]
 0x97B68D: faddp   st(1), st
 0x97B68F: fstp    [esp+7Ch+var_5C]
 0x97B693: fld     [esp+7Ch+var_5C]
@@ -634,7 +634,7 @@
 0x97B7E2: fmulp   st(2), st
 0x97B7E4: faddp   st(1), st
 0x97B7E6: fld     dword ptr [edx+8]
-0x97B7E9: fmul    [esp+7Ch+var_34]
+0x97B7E9: fmul    [esp+7Ch+var_3C.z]
 0x97B7ED: faddp   st(1), st
 0x97B7EF: fstp    [esp+7Ch+var_5C]
 0x97B7F3: fld     [esp+7Ch+var_5C]
@@ -722,10 +722,10 @@
 0x97B926: faddp   st(3), st
 0x97B928: fxch    st(2)
 0x97B92A: fstp    [esp+7Ch+arg_0]
-0x97B931: fld     [esp+7Ch+var_4C]
+0x97B931: fld     [esp+7Ch+out.z]
 0x97B935: fmul    st, st(2)
 0x97B937: fld     st(1)
-0x97B939: fmul    [esp+7Ch+var_50]
+0x97B939: fmul    [esp+7Ch+out.y]
 0x97B93D: fsubp   st(1), st
 0x97B93F: fstp    [esp+7Ch+var_6C]
 0x97B943: fld     [esp+7Ch+var_6C]
@@ -840,10 +840,10 @@
 0x97BABA: faddp   st(3), st
 0x97BABC: fxch    st(2)
 0x97BABE: fstp    [esp+7Ch+arg_0]
-0x97BAC5: fld     [esp+7Ch+var_4C]
+0x97BAC5: fld     [esp+7Ch+out.z]
 0x97BAC9: fmul    st, st(2)
 0x97BACB: fld     st(1)
-0x97BACD: fmul    [esp+7Ch+var_50]
+0x97BACD: fmul    [esp+7Ch+out.y]
 0x97BAD1: fsubp   st(1), st
 0x97BAD3: fstp    [esp+7Ch+var_6C]
 0x97BAD7: fld     [esp+7Ch+var_6C]
@@ -949,10 +949,10 @@
 0x97BC36: faddp   st(3), st
 0x97BC38: fxch    st(2)
 0x97BC3A: fstp    [esp+7Ch+arg_0]
-0x97BC41: fld     [esp+7Ch+var_4C]
+0x97BC41: fld     [esp+7Ch+out.z]
 0x97BC45: fmul    st, st(2)
 0x97BC47: fld     st(1)
-0x97BC49: fmul    [esp+7Ch+var_50]
+0x97BC49: fmul    [esp+7Ch+out.y]
 0x97BC4D: fsubp   st(1), st
 0x97BC4F: fstp    [esp+7Ch+var_6C]
 0x97BC53: fld     [esp+7Ch+var_6C]
@@ -1050,8 +1050,8 @@
 0x97BDA0: fstp    [esp+7Ch+arg_0]
 0x97BDA7: fld     [esp+7Ch+var_C]
 0x97BDAB: fld     st
-0x97BDAD: fmul    [esp+7Ch+var_54]
-0x97BDB1: fld     [esp+7Ch+var_4C]
+0x97BDAD: fmul    [esp+7Ch+out.x]
+0x97BDB1: fld     [esp+7Ch+out.z]
 0x97BDB5: fmul    st, st(5)
 0x97BDB7: fsubp   st(1), st
 0x97BDB9: fstp    [esp+7Ch+var_6C]
@@ -1160,8 +1160,8 @@
 0x97BF25: fstp    [esp+7Ch+arg_0]
 0x97BF2C: fld     [esp+7Ch+var_8]
 0x97BF30: fld     st
-0x97BF32: fmul    [esp+7Ch+var_54]
-0x97BF36: fld     [esp+7Ch+var_4C]
+0x97BF32: fmul    [esp+7Ch+out.x]
+0x97BF36: fld     [esp+7Ch+out.z]
 0x97BF3A: fmul    [esp+7Ch+var_20]
 0x97BF3E: fsubp   st(1), st
 0x97BF40: fstp    [esp+7Ch+var_6C]
@@ -1263,8 +1263,8 @@
 0x97C096: fadd    [esp+7Ch+arg_0]
 0x97C09D: fstp    [esp+7Ch+arg_0]
 0x97C0A4: fld     st
-0x97C0A6: fmul    [esp+7Ch+var_54]
-0x97C0AA: fld     [esp+7Ch+var_4C]
+0x97C0A6: fmul    [esp+7Ch+out.x]
+0x97C0AA: fld     [esp+7Ch+out.z]
 0x97C0AE: fld     [esp+7Ch+var_1C]
 0x97C0B2: fld     st
 0x97C0B4: fmulp   st(2), st
@@ -1374,10 +1374,10 @@
 0x97C219: faddp   st(2), st
 0x97C21B: fxch    st(1)
 0x97C21D: fstp    [esp+7Ch+arg_0]
-0x97C224: fld     [esp+7Ch+var_50]
+0x97C224: fld     [esp+7Ch+out.y]
 0x97C228: fmul    st, st(3)
 0x97C22A: fld     st(1)
-0x97C22C: fmul    [esp+7Ch+var_54]
+0x97C22C: fmul    [esp+7Ch+out.x]
 0x97C230: fsubp   st(1), st
 0x97C232: fstp    [esp+7Ch+var_6C]
 0x97C236: fld     [esp+7Ch+var_6C]
@@ -1492,10 +1492,10 @@
 0x97C3A9: faddp   st(3), st
 0x97C3AB: fxch    st(2)
 0x97C3AD: fstp    [esp+7Ch+arg_0]
-0x97C3B4: fld     [esp+7Ch+var_50]
+0x97C3B4: fld     [esp+7Ch+out.y]
 0x97C3B8: fmul    st, st(2)
 0x97C3BA: fld     st(1)
-0x97C3BC: fmul    [esp+7Ch+var_54]
+0x97C3BC: fmul    [esp+7Ch+out.x]
 0x97C3C0: fsubp   st(1), st
 0x97C3C2: fstp    [esp+7Ch+var_6C]
 0x97C3C6: fld     [esp+7Ch+var_6C]
@@ -1601,10 +1601,10 @@
 0x97C523: faddp   st(3), st
 0x97C525: fxch    st(2)
 0x97C527: fstp    [esp+7Ch+arg_0]
-0x97C52E: fld     [esp+7Ch+var_50]
+0x97C52E: fld     [esp+7Ch+out.y]
 0x97C532: fmul    st, st(2)
 0x97C534: fld     st(1)
-0x97C536: fmul    [esp+7Ch+var_54]
+0x97C536: fmul    [esp+7Ch+out.x]
 0x97C53A: fsubp   st(1), st
 0x97C53C: fstp    [esp+7Ch+var_6C]
 0x97C540: fld     [esp+7Ch+var_6C]
@@ -1663,12 +1663,12 @@
 0x97C5CF: fstp    st(2)
 0x97C5D1: fstp    st(1)
 0x97C5D3: fstp    st
-0x97C5D5: lea     eax, [esp+7Ch+var_30]
-0x97C5D9: push    eax
-0x97C5DA: lea     ecx, [esp+80h+var_54]
-0x97C5DE: push    ecx
-0x97C5DF: lea     ecx, [esp+84h+var_3C]
-0x97C5E3: call    sub_498FE0
+0x97C5D5: lea     eax, [esp+7Ch+other]
+0x97C5D9: push    eax; other
+0x97C5DA: lea     ecx, [esp+80h+out]
+0x97C5DE: push    ecx; out
+0x97C5DF: lea     ecx, [esp+84h+var_3C]; this
+0x97C5E3: call    NiPoint3_CrossProduct
 0x97C5E8: mov     edx, [esp+7Ch+var_64]
 0x97C5EC: push    edx
 0x97C5ED: lea     ecx, [esp+80h+var_3C]
@@ -1679,7 +1679,7 @@
 0x97C5FF: call    sub_47D9E0
 0x97C604: fstp    [esp+7Ch+var_40]
 0x97C608: fld     [esp+7Ch+var_40]
-0x97C60C: lea     eax, [esp+7Ch+var_54]
+0x97C60C: lea     eax, [esp+7Ch+out]
 0x97C610: fabs
 0x97C612: push    eax
 0x97C613: fstp    [esp+80h+arg_0]
@@ -1750,7 +1750,7 @@
 0x97C6EB: call    sub_47D9E0
 0x97C6F0: fstp    [esp+7Ch+var_48]
 0x97C6F4: fld     [esp+7Ch+var_48]
-0x97C6F8: lea     ecx, [esp+7Ch+var_54]
+0x97C6F8: lea     ecx, [esp+7Ch+out]
 0x97C6FC: fabs
 0x97C6FE: push    ecx
 0x97C6FF: mov     ecx, [esp+80h+var_64]
@@ -1813,7 +1813,7 @@
 0x97C7C8: fnstsw  ax
 0x97C7CA: test    ah, 5
 0x97C7CD: jnp     loc_97C5BF
-0x97C7D3: lea     edx, [esp+7Ch+var_54]
+0x97C7D3: lea     edx, [esp+7Ch+out]
 0x97C7D7: push    edx
 0x97C7D8: mov     ecx, ebp
 0x97C7DA: call    sub_47D9E0
@@ -1885,7 +1885,7 @@
 0x97C8EE: call    sub_47D9E0
 0x97C8F3: fstp    [esp+7Ch+var_40]
 0x97C8F7: fld     [esp+7Ch+var_40]
-0x97C8FB: lea     ecx, [esp+7Ch+var_54]
+0x97C8FB: lea     ecx, [esp+7Ch+out]
 0x97C8FF: fabs
 0x97C901: push    ecx
 0x97C902: fstp    [esp+80h+arg_0]
@@ -1957,7 +1957,7 @@
 0x97C9DD: call    sub_47D9E0
 0x97C9E2: fstp    [esp+7Ch+var_48]
 0x97C9E6: fld     [esp+7Ch+var_48]
-0x97C9EA: lea     edx, [esp+7Ch+var_54]
+0x97C9EA: lea     edx, [esp+7Ch+out]
 0x97C9EE: fabs
 0x97C9F0: push    edx
 0x97C9F1: mov     ecx, ebp
@@ -2021,7 +2021,7 @@
 0x97CABA: test    ah, 5
 0x97CABD: jnp     loc_97C5BF
 0x97CAC3: mov     ecx, [esp+7Ch+var_60]
-0x97CAC7: lea     eax, [esp+7Ch+var_54]
+0x97CAC7: lea     eax, [esp+7Ch+out]
 0x97CACB: push    eax
 0x97CACC: call    sub_47D9E0
 0x97CAD1: fabs

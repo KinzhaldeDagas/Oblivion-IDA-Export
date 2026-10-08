@@ -1,5 +1,6 @@
-int sub_9F22B0()
+// Static GameSetting constructor only; not the runtime validation callback.
+int InitGameSetting_sNoFastTravelCombat()
 {
-  GameSetting_ConstrAndReg(&dword_B38B38, (int)"sNoFastTravelCombat", (int)"You cannot fast travel during combat!");
-  return atexit(sub_A21D90);
+  GameSetting_ConstrAndReg(&stru_B38B38, "sNoFastTravelCombat", "You cannot fast travel during combat!"); /*0x9f22bf*/
+  return atexit(sub_A21D90); /*0x9f22cf*/
 }

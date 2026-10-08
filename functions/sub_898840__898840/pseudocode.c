@@ -1,4 +1,4 @@
 signed int __stdcall sub_898840(int a1, int a2, int a3, int a4, int a5, int a6, int a7)
 {
-  return 1;
+  return 1; /*0x898845*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x680460",
-    "line": "movzx   edx, word ptr [ecx]",
+    "line": "movzx   edx, word ptr [ecx]; Verified: stores predecessor link pointer at state +4 and the spatial form used to enter the current link at state +8. Seed links use a null predecessor and source space.",
     "mnemonic": "movzx",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x68047A",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+parentNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x68048F",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+space]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x6804A5",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+space]",
     "mnemonic": "mov",
     "size": 4
   },

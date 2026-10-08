@@ -43,62 +43,62 @@ __m128 *__cdecl sub_8FD7D0(int a1, int a2, __m128 *a3, int a4, int a5)
   unsigned int v46; // [esp+E0h] [ebp-80h]
   int v47; // [esp+E4h] [ebp-7Ch]
 
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v6 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) )
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8fd7dc*/
+  v6 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8fd7e9*/
+  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) ) /*0x8fd7fb*/
   {
-    v7 = ThreadLocalStoragePointer[TlsIndex];
-    v8 = *(_DWORD **)(v6 + 0x1A4);
-    *v8 = "TtBoxBox3";
-    v9 = __rdtsc();
-    v8[1] = v9;
-    *(_DWORD *)(v7 + 0x1A4) = v8 + 3;
+    v7 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8fd7fd*/
+    v8 = *(_DWORD **)(v6 + 0x1A4); /*0x8fd7ff*/
+    *v8 = "TtBoxBox3"; /*0x8fd805*/
+    v9 = __rdtsc(); /*0x8fd80b*/
+    v8[1] = v9; /*0x8fd815*/
+    *(_DWORD *)(v7 + 0x1A4) = v8 + 3; /*0x8fd81b*/
   }
-  v10 = *(__m128 ***)a1;
-  v11 = **(__m128 ***)a1;
-  v12 = v11->m128_i32[3];
-  v13 = v11[1];
-  v14 = *(_DWORD *)(*(_DWORD *)a1 + 8);
-  v15 = **(__m128 ***)(a1 + 4);
-  v16 = v15->m128_i32[3];
-  v17 = v15[1];
-  v18 = *(_DWORD *)(a1 + 4);
-  v31 = v12;
-  v19 = *(_DWORD *)(v18 + 8);
-  v20 = _mm_add_ps(v13, _mm_shuffle_ps((__m128)(unsigned int)v31, (__m128)(unsigned int)v31, 0));
-  v32 = v16;
-  v21 = *(_DWORD *)(a1 + 8);
-  v46 = *(unsigned int *)(v21 + 8);
-  v37 = *(_OWORD *)(a1 + 0x10);
-  v22 = *(_OWORD *)(a1 + 0x20);
-  v33.m128_u64[0] = __PAIR64__(v18, (unsigned int)v10);
-  v23 = *(_DWORD *)(a1 + 0xC);
-  v38 = v22;
-  v39 = *(_OWORD *)(a1 + 0x30);
-  v24 = *(_OWORD *)(a1 + 0x40);
-  v33.m128_u64[1] = __PAIR64__(v23, v21);
-  v41 = v20;
-  v34 = a5;
-  v40 = v24;
-  v42 = _mm_add_ps(v17, _mm_shuffle_ps((__m128)(unsigned int)v32, (__m128)(unsigned int)v32, 0));
-  v43 = _mm_shuffle_ps((__m128)v46, (__m128)v46, 0);
-  v35 = v14;
-  v36 = v19;
-  v47 = 0x3C23D70A;
-  v44 = _mm_add_ps(v43, v20);
-  v45 = _mm_add_ps(v43, v42);
-  sub_9386C0(&v33, a3);
-  v25 = NtCurrentTeb()->ThreadLocalStoragePointer;
-  *(_BYTE *)(a2 + 2) = a3[2].m128_i8[1];
-  v26 = v25[TlsIndex];
-  if ( *(_DWORD *)(v26 + 0x1A4) < *(_DWORD *)(v26 + 0x1A8) )
+  v10 = *(__m128 ***)a1; /*0x8fd824*/
+  v11 = **(__m128 ***)a1; /*0x8fd826*/
+  v12 = v11->m128_i32[3]; /*0x8fd828*/
+  v13 = v11[1]; /*0x8fd82b*/
+  v14 = *(_DWORD *)(*(_DWORD *)a1 + 8); /*0x8fd82f*/
+  v15 = **(__m128 ***)(a1 + 4); /*0x8fd835*/
+  v16 = v15->m128_i32[3]; /*0x8fd837*/
+  v17 = v15[1]; /*0x8fd83a*/
+  v18 = *(_DWORD *)(a1 + 4); /*0x8fd83e*/
+  v31 = v12; /*0x8fd841*/
+  v19 = *(_DWORD *)(v18 + 8); /*0x8fd845*/
+  v20 = _mm_add_ps(v13, _mm_shuffle_ps((__m128)(unsigned int)v31, (__m128)(unsigned int)v31, 0)); /*0x8fd852*/
+  v32 = v16; /*0x8fd855*/
+  v21 = *(_DWORD *)(a1 + 8); /*0x8fd859*/
+  v46 = *(unsigned int *)(v21 + 8); /*0x8fd869*/
+  v37 = *(_OWORD *)(a1 + 0x10); /*0x8fd87b*/
+  v22 = *(_OWORD *)(a1 + 0x20); /*0x8fd880*/
+  v33.m128_u64[0] = __PAIR64__(v18, (unsigned int)v10); /*0x8fd884*/
+  v23 = *(_DWORD *)(a1 + 0xC); /*0x8fd888*/
+  v38 = v22; /*0x8fd88b*/
+  v39 = *(_OWORD *)(a1 + 0x30); /*0x8fd8a1*/
+  v24 = *(_OWORD *)(a1 + 0x40); /*0x8fd8a6*/
+  v33.m128_u64[1] = __PAIR64__(v23, v21); /*0x8fd8b3*/
+  v41 = v20; /*0x8fd8ba*/
+  v34 = a5; /*0x8fd8c5*/
+  v40 = v24; /*0x8fd8cd*/
+  v42 = _mm_add_ps(v17, _mm_shuffle_ps((__m128)(unsigned int)v32, (__m128)(unsigned int)v32, 0)); /*0x8fd8e6*/
+  v43 = _mm_shuffle_ps((__m128)v46, (__m128)v46, 0); /*0x8fd91c*/
+  v35 = v14; /*0x8fd92f*/
+  v36 = v19; /*0x8fd933*/
+  v47 = 0x3C23D70A; /*0x8fd945*/
+  v44 = _mm_add_ps(v43, v20); /*0x8fd950*/
+  v45 = _mm_add_ps(v43, v42); /*0x8fd958*/
+  sub_9386C0(&v33, a3); /*0x8fd960*/
+  v25 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8fd96b*/
+  *(_BYTE *)(a2 + 2) = a3[2].m128_i8[1]; /*0x8fd972*/
+  v26 = v25[MEMORY[0xBA9DE4]]; /*0x8fd97b*/
+  if ( *(_DWORD *)(v26 + 0x1A4) < *(_DWORD *)(v26 + 0x1A8) ) /*0x8fd98a*/
   {
-    v27 = v25[TlsIndex];
-    v28 = *(_DWORD **)(v26 + 0x1A4);
-    *v28 = "Et";
-    v29 = __rdtsc();
-    v28[1] = v29;
-    *(_DWORD *)(v27 + 0x1A4) = v28 + 3;
+    v27 = v25[MEMORY[0xBA9DE4]]; /*0x8fd98c*/
+    v28 = *(_DWORD **)(v26 + 0x1A4); /*0x8fd98e*/
+    *v28 = "Et"; /*0x8fd994*/
+    v29 = __rdtsc(); /*0x8fd99a*/
+    v28[1] = v29; /*0x8fd9a4*/
+    *(_DWORD *)(v27 + 0x1A4) = v28 + 3; /*0x8fd9aa*/
   }
-  return a3 + 5;
+  return a3 + 5; /*0x8fd9b0*/
 }

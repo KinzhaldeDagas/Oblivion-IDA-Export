@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F4B70",
+      "0x4F4BBC"
+    ]
+  ],
+  "chunks_sha256": "760e7913a52b377fc2a1327d0269a468372648425571c72812b02de2f49ffb0f",
+  "comment_regular": "GetStage_Eval (index 58 / opcode 0x103A): returns TESQuest::GetCurrentStage for the Quest parameter; it does not query the stage-done list.",
+  "comment_repeatable": "GetStage_Eval (index 58 / opcode 0x103A): returns TESQuest::GetCurrentStage for the Quest parameter; it does not query the stage-done list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4F4B70",
+  "display_name": "GetStage_Eval",
   "end_ea": "0x4F4BBC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4F4B70",
+  "name": "GetStage_Eval",
   "segment": ".text",
   "sha256": "760e7913a52b377fc2a1327d0269a468372648425571c72812b02de2f49ffb0f",
   "size": 76,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F4B70",
-  "type": "char __cdecl(int, unsigned __int8 *, int, double *)",
+  "total_chunk_size": 76,
+  "type": "char __cdecl(TESObjectREFR *subject, TESQuest *quest, TESForm *param2, double *value)",
   "xrefs_from_count": 30,
-  "xrefs_to_count": 2
+  "xrefs_to_count": 1
 }

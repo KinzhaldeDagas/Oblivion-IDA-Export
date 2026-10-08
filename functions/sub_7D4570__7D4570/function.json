@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D4570",
+      "0x7D46B5"
+    ]
+  ],
+  "chunks_sha256": "e85f91c36b941ddd7b9c36e277fc280dd9e10a6d2dc044a83475c58924431dc3",
+  "comment_regular": "Special ShadowSceneLight renderer selected only when +0xF5 is nonzero. Uses a BSCubeMapCamera and the light-local category/object list; it is separate from the normal exact-caster-root map renderer.",
+  "comment_repeatable": "Special ShadowSceneLight renderer selected only when +0xF5 is nonzero. Uses a BSCubeMapCamera and the light-local category/object list; it is separate from the normal exact-caster-root map renderer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_7D4570",
+  "display_name": "ShadowSceneLight_RenderSpecialCubeObjectList",
   "end_ea": "0x7D46B5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D4570",
+  "name": "ShadowSceneLight_RenderSpecialCubeObjectList",
   "segment": ".text",
   "sha256": "e85f91c36b941ddd7b9c36e277fc280dd9e10a6d2dc044a83475c58924431dc3",
   "size": 325,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D4570",
-  "type": "void __thiscall(float this, NiCamera *arg0, int)",
+  "total_chunk_size": 325,
+  "type": "void __thiscall(ShadowSceneLight_DecodedLayout *self, BSCubeMapCamera_ShadowLayout *cubeCamera, int unused)",
   "xrefs_from_count": 130,
   "xrefs_to_count": 1
 }

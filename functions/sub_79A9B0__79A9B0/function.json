@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x79A9B0",
+      "0x79A9E0"
+    ]
+  ],
+  "chunks_sha256": "42d0ccbb3c86be1511faba4c4758aad393668b829899b0a9b6cebf8135db9d11",
+  "comment_regular": "Copies 0x38-byte SFrondVertex records from [first,last) into uninitialized destination storage and returns the constructed end.",
+  "comment_repeatable": "Copies 0x38-byte SFrondVertex records from [first,last) into uninitialized destination storage and returns the constructed end.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79A9B0",
+  "display_name": "OB_SFrondVertex_UninitializedCopy_010201A0",
   "end_ea": "0x79A9E0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79A9B0",
+  "name": "OB_SFrondVertex_UninitializedCopy_010201A0",
   "segment": ".text",
   "sha256": "42d0ccbb3c86be1511faba4c4758aad393668b829899b0a9b6cebf8135db9d11",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79A9B0",
-  "type": "char *__cdecl(char *, char *, char *)",
+  "total_chunk_size": 48,
+  "type": "OB_SFrondVertex_010201A0 *__cdecl(const OB_SFrondVertex_010201A0 *first, const OB_SFrondVertex_010201A0 *last, OB_SFrondVertex_010201A0 *destinationFirst)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 4
 }

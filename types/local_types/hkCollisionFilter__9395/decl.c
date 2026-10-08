@@ -1,1 +1,1 @@
-hkCollisionFilter
+struct hkCollisionFilter;

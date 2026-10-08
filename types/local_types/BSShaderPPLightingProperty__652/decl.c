@@ -1,1 +1,1 @@
-BSShaderPPLightingProperty
+struct BSShaderPPLightingProperty;

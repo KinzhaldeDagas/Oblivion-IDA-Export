@@ -3,5 +3,5 @@ int def_9A82B7()
 {
   int v1; // [esp-4h] [ebp-4h]
 
-  return v1;
+  return v1; /*0x9a838e*/
 }

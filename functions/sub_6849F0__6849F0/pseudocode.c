@@ -1,74 +1,72 @@
-char __thiscall sub_6849F0(float *this, float *a2, TESObjectREFR *a3)
+char __thiscall sub_6849F0(NiPoint3 *this, NiPoint3 *worldXY, TESObjectREFR *a3)
 {
-  _DWORD *v4; // ebx
-  TESObjectCELL *ParentCell; // ebp
+  TESPathGrid *v4; // ebx
+  TESObjectCELL *DwordAtOffset40; // ebp
   TESWorldSpace *WorldSpace; // edi
-  TESObjectCELL *v8; // eax
-  TESObjectCELL *v9; // eax
-  TESChildCELL *v10; // esi
-  _DWORD *v11; // eax
-  _DWORD *v12; // eax
-  char *v13; // edi
-  char *v14; // eax
+  _DWORD *v8; // eax
+  _DWORD *v9; // eax
+  TESPathGrid *v10; // esi
+  TESObjectCELL *CellAtWorldPosition; // eax
+  TESObjectCELL *v12; // eax
+  TESPathGridPoint *PointByPositionInCell; // edi
+  TESPathGridPoint *v14; // eax
   int v15; // esi
-  char *v16; // eax
-  char **v17; // eax
+  BSSimpleList_VoidPtr *Connections; // eax
+  TESPathGridPoint **v17; // eax
   char v19; // [esp+Bh] [ebp-5h]
   TESChildCELL *v21; // [esp+18h] [ebp+8h]
 
-  v4 = 0;
-  v19 = 0;
-  if ( a3 && *(this + 0xF) != dbl_A3A5B0 )
+  v4 = 0; /*0x6849f9*/
+  v19 = 0; /*0x684a01*/
+  if ( a3 && *((float *)this + 0xF) != dbl_A3A5B0 ) /*0x684a1d*/
   {
-    v21 = 0;
-    ParentCell = TESObjectREFR_GetParentCell(a3);
-    WorldSpace = TESObjectREFR_GetWorldSpace(a3);
-    if ( ParentCell && TESObjectCELL_IsInterior(ParentCell) )
+    v21 = 0; /*0x684a27*/
+    DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a3); /*0x684a32*/
+    WorldSpace = TESObjectREFR_GetWorldSpace(a3); /*0x684a3b*/
+    if ( DwordAtOffset40 && TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x684a41*/
     {
-      v8 = TESObjectREFR_GetParentCell(a3);
-      v4 = (_DWORD *)sub_4AF170(v8);
-      v9 = TESObjectREFR_GetParentCell(a3);
-      v10 = (TESChildCELL *)sub_4AF170(v9);
+      v8 = (_DWORD *)Shared_GetDwordAtOffset40(a3); /*0x684a4c*/
+      v4 = (TESPathGrid *)sub_4AF170(v8); /*0x684a5a*/
+      v9 = (_DWORD *)Shared_GetDwordAtOffset40(a3); /*0x684a5c*/
+      v10 = (TESPathGrid *)sub_4AF170(v9); /*0x684a68*/
     }
     else
     {
-      if ( !WorldSpace )
-        return v19;
-      TESWorldSpace::GetCellAtPos(WorldSpace, this + 0xF);
-      if ( v11 )
-        v4 = (_DWORD *)sub_4AF170(v11);
-      TESWorldSpace::GetCellAtPos(WorldSpace, a2);
-      if ( v12 )
-        v21 = (TESChildCELL *)sub_4AF170(v12);
-      v10 = v21;
+      if ( !WorldSpace ) /*0x684a6e*/
+        return v19; /*0x684a6e*/
+      CellAtWorldPosition = TESWorldSpace_GetCellAtWorldPosition(WorldSpace, (float *)this + 0xF); /*0x684a7e*/
+      if ( CellAtWorldPosition ) /*0x684a85*/
+        v4 = (TESPathGrid *)sub_4AF170(CellAtWorldPosition); /*0x684a8e*/
+      v12 = TESWorldSpace_GetCellAtWorldPosition(WorldSpace, &worldXY->x); /*0x684a97*/
+      if ( v12 ) /*0x684a9e*/
+        v21 = (TESChildCELL *)sub_4AF170(v12); /*0x684aa7*/
+      v10 = (TESPathGrid *)v21; /*0x684aab*/
     }
-    if ( v4 )
+    if ( v4 ) /*0x684ab1*/
     {
-      if ( v10 )
+      if ( v10 ) /*0x684ab5*/
       {
-        v13 = sub_4E6D60(v4, this + 0xF);
-        if ( v13 )
+        PointByPositionInCell = TESPathGrid_FindPointByPositionInCell(v4, this + 5); /*0x684ac6*/
+        if ( PointByPositionInCell ) /*0x684aca*/
         {
-          v14 = sub_4E6D60(v10, a2);
-          v15 = (int)v14;
-          if ( v14 )
+          v14 = TESPathGrid_FindPointByPositionInCell(v10, worldXY); /*0x684ad3*/
+          v15 = (int)v14; /*0x684ad8*/
+          if ( v14 ) /*0x684adc*/
           {
-            v16 = sub_4E7DE0(v14);
-            if ( sub_446C30((BSSimpleList_VoidPtr *)v16, v13) )
+            Connections = PathGraphNode_GetConnections(v14); /*0x684ae1*/
+            if ( BSSimpleList::Contains(Connections, PointByPositionInCell) /*0x684af9*/
+              && !sub_683C70(this, (int)PointByPositionInCell, v15) )
             {
-              if ( !sub_683C70(this, (int)v13, v15) )
-              {
-                v17 = (char **)FormHeapAlloc(8u);
-                *v17 = v13;
-                v17[1] = (char *)v15;
-                BSSimpleList_PushFront((_DWORD *)this + 0xD, (int)v17);
-                return 1;
-              }
+              v17 = (TESPathGridPoint **)FormHeapAlloc(8u); /*0x684b04*/
+              *v17 = PointByPositionInCell; /*0x684b10*/
+              v17[1] = (TESPathGridPoint *)v15; /*0x684b12*/
+              BSSimpleList_PushFront((_DWORD *)this + 0xD, (int)v17); /*0x684b15*/
+              return 1; /*0x684b1a*/
             }
           }
         }
       }
     }
   }
-  return v19;
+  return v19; /*0x684b25*/
 }

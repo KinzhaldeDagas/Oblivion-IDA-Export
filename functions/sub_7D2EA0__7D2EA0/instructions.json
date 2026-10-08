@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D2EA0",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; Receiver eligibility: test geometry bound against active projector planes when +0x14C is present, otherwise source-to-bound surface range.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7D2EC2",
-    "line": "cmp     eax, offset dword_B3FCFC",
+    "line": "cmp     eax, offset stru_B3FCFC",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7D2EE4",
-    "line": "mov     [esp+24h+var_10.Center.x], ecx",
+    "line": "mov     [esp+24h+self.Center.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7D2EEB",
-    "line": "mov     [esp+24h+var_10.Center.y], edx",
+    "line": "mov     [esp+24h+self.Center.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x7D2EF7",
-    "line": "mov     [esp+24h+var_10.Center.z], ecx",
+    "line": "mov     [esp+24h+self.Center.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D2EFB",
-    "line": "mov     [esp+24h+var_10.Radius], edx",
+    "line": "mov     [esp+24h+self.Radius], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -240,12 +240,6 @@
     "size": 2
   },
   {
-    "ea": "0x7D2F0D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x7D2F10",
     "line": "mov     esi, 1",
     "mnemonic": "mov",
@@ -277,19 +271,19 @@
   },
   {
     "ea": "0x7D2F21",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; plane",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D2F22",
-    "line": "lea     ecx, [esp+30h+var_10]; this",
+    "line": "lea     ecx, [esp+30h+self]; self",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D2F26",
-    "line": "call    sub_47DA70",
+    "line": "call    NiBound_ClassifyAgainstPlane",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +409,7 @@
   },
   {
     "ea": "0x7D2F63",
-    "line": "fsub    [esp+24h+var_10.Center.x]",
+    "line": "fsub    [esp+24h+self.Center.x]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -433,7 +427,7 @@
   },
   {
     "ea": "0x7D2F71",
-    "line": "fsub    [esp+24h+var_10.Center.y]",
+    "line": "fsub    [esp+24h+self.Center.y]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -451,7 +445,7 @@
   },
   {
     "ea": "0x7D2F7F",
-    "line": "fsub    [esp+24h+var_10.Center.z]",
+    "line": "fsub    [esp+24h+self.Center.z]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x7D2FBD",
-    "line": "fsub    [esp+24h+var_10.Radius]",
+    "line": "fsub    [esp+24h+self.Radius]",
     "mnemonic": "fsub",
     "size": 4
   },

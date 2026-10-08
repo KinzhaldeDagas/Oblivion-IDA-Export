@@ -1,1 +1,1 @@
-REFIID
+typedef IID *REFIID;

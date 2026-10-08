@@ -42,7 +42,7 @@
 0x43E895: call    eax
 0x43E897: push    eax; LONG
 0x43E898: mov     ecx, esi
-0x43E89A: call    sub_55F270
+0x43E89A: call    sub_55F270; LockFreeMap remove core: finds key, atomically unlinks node, places node on retired/free list, clears thread-local traversal slots.
 0x43E89F: mov     ecx, [esp+3F8h+var_4]
 0x43E8A6: pop     edi
 0x43E8A7: pop     esi

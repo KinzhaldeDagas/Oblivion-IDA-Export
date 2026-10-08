@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4EC870",
+      "0x4EC910"
+    ]
+  ],
+  "chunks_sha256": "6e1251498f5fab41123eda42eb773660cfe75115174b414f5f1cadb593a79dc0",
+  "comment_regular": "Verified geometric distance helper computes 2D Euclidean distance from a point to the axis-aligned square [quadOriginX,quadOriginX+quadWidth] x [quadOriginY,quadOriginY+quadWidth].",
+  "comment_repeatable": "Verified geometric distance helper computes 2D Euclidean distance from a point to the axis-aligned square [quadOriginX,quadOriginX+quadWidth] x [quadOriginY,quadOriginY+quadWidth].",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EC870",
+  "display_name": "TESTerrainLODQuad_DistanceToXYBounds",
   "end_ea": "0x4EC910",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EC870",
+  "name": "TESTerrainLODQuad_DistanceToXYBounds",
   "segment": ".text",
   "sha256": "6e1251498f5fab41123eda42eb773660cfe75115174b414f5f1cadb593a79dc0",
   "size": 160,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EC870",
-  "type": "double __stdcall(float, float, float, float, float)",
+  "total_chunk_size": 160,
+  "type": "double __stdcall(float quadOriginX, float quadOriginY, float quadWidth, float pointX, float pointY)",
   "xrefs_from_count": 66,
   "xrefs_to_count": 1
 }

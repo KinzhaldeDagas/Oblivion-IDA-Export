@@ -1,1 +1,1 @@
-IShellView_0
+typedef IShellView IShellView_0;

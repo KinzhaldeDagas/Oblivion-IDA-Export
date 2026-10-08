@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x4CE206",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CE208",
-    "line": "mov     [esi], eax",
+    "line": "mov     [esi], eax; CELL sub-block container contract: exterior type 5 is the direct parent emitted for a non-persistent exterior CELL.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4CE211",
-    "line": "call    sub_4CA640",
+    "line": "call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4CE223",
-    "line": "retn    8",
+    "line": "retn    8; No further group descriptor is emitted for an unexpected exterior parent; paired constructor yields exact [0,1,4,5] or persistent [0,1] CELL chains.",
     "mnemonic": "retn",
     "size": 3
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4CE242",
-    "line": "mov     edx, ds:0B05E20h",
+    "line": "mov     edx, ds:0B05E20h; CELL block container contract: exterior type 4 emits a type-5 sub-block; records are not direct type-4 children.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x4CE2AD",
-    "line": "retn    8",
+    "line": "retn    8; Interior constructor begins at top CELL and then accepts only type 0 -> 2 -> 3 progression, yielding exact [0,2,3].",
     "mnemonic": "retn",
     "size": 3
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x4CE2CD",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4CE2CF",
-    "line": "mov     [esi], eax",
+    "line": "mov     [esi], eax; CELL sub-block container contract: interior type 3 is the direct parent emitted for a CELL record.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x4CE2D8",
-    "line": "call    sub_4CA640",
+    "line": "call    TESObjectCELL_GetCellGroupSubBlockLabel; Compute the CELL group sub-block label. Interior: decimal FormID bucket ((objectID24 % 100) / 10). Exterior: signed cell coordinates divided by 8 and packed X-high/Y-low. Cross-checks TESCS TESObjectCELL_GetCellGroupSubBlockLabel at 0x533F90.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4CE2F8",
-    "line": "mov     edx, ds:0B05E20h",
+    "line": "mov     edx, ds:0B05E20h; CELL block container contract: interior type 2 emits a type-3 sub-block; records are not direct type-2 children.",
     "mnemonic": "mov",
     "size": 6
   },

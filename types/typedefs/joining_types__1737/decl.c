@@ -1,1 +1,11 @@
-joining_types
+enum joining_types : __int32
+{
+jtU = 0x0,
+jtL = 0x1,
+jtR = 0x2,
+jtD = 0x3,
+jtC = 0x3,
+jgALAPH = 0x4,
+jgDALATH_RISH = 0x5,
+jtT = 0x6,
+};

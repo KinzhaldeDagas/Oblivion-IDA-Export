@@ -1,1 +1,1 @@
-PropPageInfo
+typedef tagPropPageInfo PropPageInfo;

@@ -1,19 +1,36 @@
 {
-  "callees_count": 54,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C78D0",
+  "chunks": [
+    [
+      "0x7C78D0",
+      "0x7C7DB7"
+    ],
+    [
+      "0x9CE840",
+      "0x9CE876"
+    ]
+  ],
+  "chunks_sha256": "a835b772cb3b29c09fda408efdae9557de5c20cd9e58ce0803cf0b6d1f0b8835",
+  "comment_regular": "Oblivion ShadowSceneNode visibility/ranking pass: culls full lights against the current camera, updates per-light visibility/score state, partitions viable lights into active handling, and enforces configured shadow-light budgets.",
+  "comment_repeatable": "Oblivion ShadowSceneNode visibility/ranking pass: culls full lights against the current camera, updates per-light visibility/score state, partitions viable lights into active handling, and enforces configured shadow-light budgets.\nDX11 restricted-bucket authority audit 2026-10-01: the BS accumulator branch of ShadowSceneNode_VisibleCullAndRankFullLights retains the previous renderer accumulator at 7C7D0F, installs current ESI through 405710 at 7C7D22, then invokes Flush via vtable+50 at 7C7D54 (return 7C7D56). Renderer+8 therefore owns a NiPointer reference to ESI throughout that call. Afterward 7C7D5D restores prior accumulator and 7C7D8D drops the current local reference. 405710 uses refcount+4 decrement/destroy then assign/increment. Distinguish the 7C7A79 branch: it allocates a NiAlphaAccumulator, so that return address is not by itself proof of an ordinary BS Lighting30 bucket. Bound accumulator lifetime does not prove mutable list, geometry/material, pool or writer exclusion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ShadowSceneNode_VisibleCullAndRankFullLights",
   "end_ea": "0x7C7DB7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C78D0",
+  "name": "ShadowSceneNode_VisibleCullAndRankFullLights",
   "segment": ".text",
   "sha256": "7a0636e0ab132651ad66216e23395865c109b8e23e8a7c7467e230de0320300c",
   "size": 1255,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C78D0",
+  "total_chunk_size": 1309,
   "type": "void __userpurge(int@<ecx>, double st5_0@<st2>, double@<st1>, double@<st0>, NiCullingProcess *)",
-  "xrefs_from_count": 414,
+  "xrefs_from_count": 432,
   "xrefs_to_count": 1
 }

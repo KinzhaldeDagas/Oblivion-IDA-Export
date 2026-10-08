@@ -38,12 +38,12 @@
 0x7B0D91: mov     [esp+30h+var_18], ebp
 0x7B0D95: mov     ecx, [esi+7Ch]; this
 0x7B0D98: call    BSRenderedTexture__GetInnerTexture
-0x7B0D9D: push    eax; a2
+0x7B0D9D: push    eax; texture
 0x7B0D9E: mov     ecx, ebp; this
-0x7B0DA0: call    sub_76C910
-0x7B0DA5: push    1
-0x7B0DA7: mov     ecx, ebp
-0x7B0DA9: call    sub_771640
+0x7B0DA0: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
+0x7B0DA5: push    1; filterPreset
+0x7B0DA7: mov     ecx, ebp; this
+0x7B0DA9: call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.
 0x7B0DAE: cmp     [esi+0E0h], edi
 0x7B0DB4: jz      loc_7B0EEA
 0x7B0DBA: mov     eax, [esi+70h]
@@ -54,9 +54,9 @@
 0x7B0DC8: call    sub_7AEC20
 0x7B0DCD: mov     eax, [esi+0E0h]
 0x7B0DD3: mov     ebp, [esp+30h+var_18]
-0x7B0DD7: push    eax; a2
+0x7B0DD7: push    eax; texture
 0x7B0DD8: mov     ecx, ebp; this
-0x7B0DDA: call    sub_76C910
+0x7B0DDA: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7B0DDF: push    edi
 0x7B0DE0: jmp     loc_7B0EE3
 0x7B0DE5: mov     [esp+30h+var_10], edi
@@ -71,7 +71,7 @@
 0x7B0DFE: add     dword ptr [ebp+5Ch], 0FFFFFFFFh
 0x7B0E02: jnz     short loc_7B0E0B
 0x7B0E04: mov     ecx, ebp
-0x7B0E06: call    sub_772560
+0x7B0E06: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7B0E0B: test    edi, edi
 0x7B0E0D: mov     ebp, edi
 0x7B0E0F: mov     [esp+30h+var_18], ebp
@@ -126,9 +126,9 @@
 0x7B0E92: add     ebx, 4
 0x7B0E95: push    ebx; lpAddend
 0x7B0E96: call    dword ptr ds:0A28078h
-0x7B0E9C: push    0
-0x7B0E9E: mov     ecx, ebp
-0x7B0EA0: call    sub_771640
+0x7B0E9C: push    0; filterPreset
+0x7B0E9E: mov     ecx, ebp; this
+0x7B0EA0: call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.
 0x7B0EA5: mov     eax, [esp+30h+var_10]
 0x7B0EA9: add     eax, 4
 0x7B0EAC: cmp     eax, 10h
@@ -145,12 +145,12 @@
 0x7B0ECD: mov     [esp+30h+var_18], ebp
 0x7B0ED1: mov     ecx, [esi+7Ch]; this
 0x7B0ED4: call    BSRenderedTexture__GetInnerTexture
-0x7B0ED9: push    eax; a2
+0x7B0ED9: push    eax; texture
 0x7B0EDA: mov     ecx, ebp; this
-0x7B0EDC: call    sub_76C910
-0x7B0EE1: push    1
-0x7B0EE3: mov     ecx, ebp
-0x7B0EE5: call    sub_771640
+0x7B0EDC: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
+0x7B0EE1: push    1; filterPreset
+0x7B0EE3: mov     ecx, ebp; this
+0x7B0EE5: call    NiD3DTextureStage_ApplyFilterPreset; Apply one native filter-preset row to a NiD3DTextureStage: D3DSAMP_MAGFILTER (5) from row.MAG, D3DSAMP_MINFILTER (6) from row.MIN, and D3DSAMP_MIPFILTER (7) from row.MIP. Lighting30 SimpleShadow uses preset 1 = MIN/MAG LINEAR, MIP NONE.
 0x7B0EEA: mov     ecx, [esi+70h]
 0x7B0EED: mov     edx, [esi+90h]
 0x7B0EF3: mov     eax, [esi+edx*4+94h]
@@ -222,7 +222,7 @@
 0x7B0FB1: mov     edi, [ebx]
 0x7B0FB3: cmp     dword ptr [edi+30h], 0
 0x7B0FB7: jnz     short loc_7B0FC1
-0x7B0FB9: call    sub_772DF0
+0x7B0FB9: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7B0FBE: mov     [edi+30h], eax
 0x7B0FC1: push    0
 0x7B0FC3: push    0
@@ -231,38 +231,38 @@
 0x7B0FC9: mov     edi, [ebx]
 0x7B0FCB: cmp     dword ptr [edi+30h], 0
 0x7B0FCF: jnz     short loc_7B0FD9
-0x7B0FD1: call    sub_772DF0
+0x7B0FD1: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7B0FD6: mov     [edi+30h], eax
 0x7B0FD9: mov     ecx, [edi+30h]
 0x7B0FDC: push    0
 0x7B0FDE: push    1
 0x7B0FE0: push    1Bh
-0x7B0FE2: call    sub_772CD0
+0x7B0FE2: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7B0FE7: mov     edi, [ebx]
 0x7B0FE9: cmp     dword ptr [edi+30h], 0
 0x7B0FED: jnz     short loc_7B0FF7
-0x7B0FEF: call    sub_772DF0
+0x7B0FEF: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7B0FF4: mov     [edi+30h], eax
 0x7B0FF7: mov     ecx, [edi+30h]
 0x7B0FFA: push    0
 0x7B0FFC: push    2
 0x7B0FFE: push    13h
-0x7B1000: call    sub_772CD0
+0x7B1000: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7B1005: mov     edi, [ebx]
 0x7B1007: cmp     dword ptr [edi+30h], 0
 0x7B100B: jnz     short loc_7B1015
-0x7B100D: call    sub_772DF0
+0x7B100D: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x7B1012: mov     [edi+30h], eax
 0x7B1015: push    0
 0x7B1017: push    2
 0x7B1019: push    14h
 0x7B101B: mov     ecx, [edi+30h]
-0x7B101E: call    sub_772CD0
+0x7B101E: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x7B1023: mov     edx, [esi+38h]
-0x7B1026: push    ebx
-0x7B1027: push    edx
-0x7B1028: lea     ecx, [esi+40h]
-0x7B102B: call    sub_76CE40
+0x7B1026: push    ebx; value
+0x7B1027: push    edx; index
+0x7B1028: lea     ecx, [esi+40h]; this
+0x7B102B: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7B1030: add     dword ptr [esi+38h], 1
 0x7B1034: or      eax, 0FFFFFFFFh
 0x7B1037: test    ebp, ebp
@@ -271,7 +271,7 @@
 0x7B103F: add     [ebp+5Ch], eax
 0x7B1042: jnz     short loc_7B104B
 0x7B1044: mov     ecx, ebp
-0x7B1046: call    sub_772560
+0x7B1046: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7B104B: xor     eax, eax
 0x7B104D: mov     ecx, [esp+30h+var_C]
 0x7B1051: mov     large fs:0, ecx
@@ -282,3 +282,19 @@
 0x7B105C: pop     ebx
 0x7B105D: add     esp, 1Ch
 0x7B1060: retn    1Ch
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9CD730: lea     ecx, [ebp-18h]
+0x9CD733: jmp     loc_75FA70
+0x9CD738: mov     edx, [esp+arg_4]
+0x9CD73C: lea     eax, [edx-20h]
+0x9CD73F: mov     ecx, [edx-24h]
+0x9CD742: xor     ecx, eax
+0x9CD744: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CD749: mov     eax, offset stru_AF69A4
+0x9CD74E: jmp     ___CxxFrameHandler3

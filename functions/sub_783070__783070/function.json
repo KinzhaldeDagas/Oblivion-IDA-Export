@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x783070",
+      "0x783080"
+    ]
+  ],
+  "chunks_sha256": "e2f0b292be348692a58240b98c652c55495223b059d36910d855e1ea84684335",
+  "comment_regular": "MoonSugarEffect decode: NiD3DVertexShader vtable +0x58 release-live-handle path. If wrapper+0x30 is non-null, calls sub_763090 to clear render-state vertex shader, Release the IDirect3DVertexShader9, and store null through vtable +0x44.",
+  "comment_repeatable": "MoonSugarEffect decode: NiD3DVertexShader vtable +0x58 release-live-handle path. If wrapper+0x30 is non-null, calls sub_763090 to clear render-state vertex shader, Release the IDirect3DVertexShader9, and store null through vtable +0x44.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_783070",
   "end_ea": "0x783080",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_783070",
   "segment": ".text",
   "sha256": "e2f0b292be348692a58240b98c652c55495223b059d36910d855e1ea84684335",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x783070",
+  "total_chunk_size": 16,
   "type": "int __usercall@<eax>(int@<ecx>, int@<esi>)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 2

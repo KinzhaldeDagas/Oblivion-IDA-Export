@@ -1,0 +1,54 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "OblivionChangesMapNode",
+  "definition": "struct OblivionChangesMapNode\n{\nOblivionChangesMapNode *next; ///< Verified: next pointer traversed by NiTMap_GetAt 55E032.\nunsigned int formID; ///< Verified: formID key compared at node+4 in 55E000; form+0xC callers.\nOblivionChangeData *data; ///< Verified: entry pointer returned from node+8 at 55E049.\n}\n",
+  "id": 18374686479672086273,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: next pointer traversed by NiTMap_GetAt 55E032.",
+      "name": "next",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "OblivionChangesMapNode *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: formID key compared at node+4 in 55E000; form+0xC callers.",
+      "name": "formID",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: entry pointer returned from node+8 at 55E049.",
+      "name": "data",
+      "offset": 8,
+      "offset_hex": "0x8",
+      "size": 4,
+      "type": "OblivionChangeData *"
+    }
+  ],
+  "name": "OblivionChangesMapNode",
+  "ordinal": 9986,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 12
+}

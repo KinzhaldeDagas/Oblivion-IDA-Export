@@ -33,7 +33,6 @@
 0x8D2B7E: mov     [esp+30h+var_4], 0
 0x8D2B86: mov     edx, 3
 0x8D2B8B: jmp     short loc_8D2B90
-0x8D2B8D: align 10h
 0x8D2B90: movaps  xmm0, xmmword ptr [eax]
 0x8D2B93: movaps  xmm4, xmm0
 0x8D2B96: shufps  xmm4, xmm0, 0AAh ; 'ª'

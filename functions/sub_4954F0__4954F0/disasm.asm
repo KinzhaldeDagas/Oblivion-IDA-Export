@@ -15,7 +15,7 @@
 0x495517: push    110Ah; Msg
 0x49551C: push    esi; hWnd
 0x49551D: mov     [esp+44h+var_2C], 0Dh
-0x495525: mov     [esp+44h+var_1C], offset unk_B34E98
+0x495525: mov     [esp+44h+var_1C], 0B34E98h
 0x49552D: mov     [esp+44h+var_18], 104h
 0x495535: call    edi ; SendMessageA
 0x495537: test    eax, eax

@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4433B3",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x443476",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x443500",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -703,43 +703,43 @@
   },
   {
     "ea": "0x443508",
-    "line": "call    sub_4029E0",
+    "line": "call    TimeGlobals_AdvanceGameTime; Advances GameHour by TimeScale * elapsedSeconds / 3600; rolls GameDay, GameMonth, GameYear, and DaysPassed after 24-hour boundaries.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44350D",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x443512",
-    "line": "call    sub_674A20",
+    "line": "call    sub_674A20; 3DTheft decode 2026-05-16: frame-loop actor process manager maintenance pass after process updates; removes/destroys invalid refs and refreshes process level state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x443517",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x44351C",
-    "line": "call    sub_678510",
+    "line": "call    sub_678510; 3DTheft decode 2026-05-16: frame-loop actor process manager scheduled update dispatch before the second maintenance pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x443521",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x443526",
-    "line": "call    sub_674A20",
+    "line": "call    sub_674A20; 3DTheft decode 2026-05-16: frame-loop actor process manager maintenance pass after process updates; removes/destroys invalid refs and refreshes process level state.",
     "mnemonic": "call",
     "size": 5
   },

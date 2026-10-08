@@ -4,7 +4,7 @@
 0x7A9B78: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'
 0x7A9B7E: jz      short loc_7A9B89
 0x7A9B80: push    esi
-0x7A9B81: call    FormHeapFree
+0x7A9B81: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7A9B86: add     esp, 4
 0x7A9B89: mov     eax, esi
 0x7A9B8B: pop     esi

@@ -1,132 +1,132 @@
-void __thiscall sub_523B10(unsigned __int16 *this, unsigned int a2)
+void __thiscall NiTObjectArray_Resize16(MEF_RefPointerArray16 *self, unsigned int capacity)
 {
-  unsigned __int16 v4; // ax
-  int v5; // ecx
-  int v6; // ebx
+  unsigned __int16 usedEnd; // ax
+  unsigned int v5; // ecx
+  void **v6; // ebx
   void (__thiscall ***v7)(_DWORD, int); // edi
-  int *v8; // eax
+  char *data; // eax
   unsigned int v9; // ecx
-  _DWORD *v10; // eax
-  _DWORD *v11; // ebx
+  int v10; // eax
+  void **v11; // ebx
   unsigned __int16 v12; // ax
   bool v13; // zf
-  int v14; // ebp
+  void **v14; // ebp
   int v15; // edi
-  int v16; // ebx
-  int *v17; // ebp
-  int v18; // edi
+  volatile LONG *v16; // ebx
+  void **v17; // ebp
+  volatile LONG *v18; // edi
   unsigned __int16 i; // bx
-  int v20; // edx
-  int v21; // edi
-  _DWORD *v22; // ebp
+  void **v20; // edx
+  volatile LONG *v21; // edi
+  void **v22; // ebp
   unsigned int v23; // esi
-  int *v24; // [esp+14h] [ebp-10h]
-  int v25; // [esp+28h] [ebp+4h]
-  unsigned __int16 v26; // [esp+28h] [ebp+4h]
+  char *v24; // [esp+14h] [ebp-10h]
+  unsigned int capacitya; // [esp+28h] [ebp+4h]
+  unsigned __int16 capacityb; // [esp+28h] [ebp+4h]
 
-  if ( a2 != *(this + 4) )
+  if ( capacity != self->capacity )
   {
-    v4 = *(this + 5);
-    if ( a2 < v4 )
+    usedEnd = self->usedEnd; /*0x523b47*/
+    if ( capacity < usedEnd ) /*0x523b50*/
     {
-      v5 = (unsigned __int16)a2;
-      v25 = (unsigned __int16)a2;
-      if ( (unsigned __int16)a2 < v4 )
+      v5 = (unsigned __int16)capacity; /*0x523b55*/
+      capacitya = (unsigned __int16)capacity; /*0x523b58*/
+      if ( (unsigned __int16)capacity < usedEnd ) /*0x523b5c*/
       {
-        do
+        do /*0x523bc1*/
         {
-          v6 = *((_DWORD *)this + 1) + 4 * (unsigned __int16)v5;
-          if ( *(_DWORD *)v6 )
+          v6 = &self->data[(unsigned __int16)v5]; /*0x523b66*/
+          if ( *v6 ) /*0x523b6b*/
           {
-            v7 = *(void (__thiscall ****)(_DWORD, int))v6;
-            if ( !InterlockedDecrement((volatile LONG *)(*(_DWORD *)v6 + 4)) )
+            v7 = (void (__thiscall ***)(_DWORD, int))*v6; /*0x523b78*/
+            if ( !InterlockedDecrement((volatile LONG *)*v6 + 1) ) /*0x523b86*/
             {
-              if ( v7 )
-                (**v7)(v7, 1);
+              if ( v7 ) /*0x523b92*/
+                (**v7)(v7, 1); /*0x523b9c*/
             }
-            v5 = v25;
-            *(_DWORD *)v6 = 0;
-            --*(this + 6);
+            v5 = capacitya; /*0x523b9e*/
+            *v6 = 0; /*0x523ba2*/
+            --self->occupiedCount; /*0x523ba8*/
           }
-          v25 = ++v5;
+          capacitya = ++v5; /*0x523bbd*/
         }
-        while ( (unsigned __int16)v5 < *(this + 5) );
+        while ( (unsigned __int16)v5 < self->usedEnd ); /*0x523bc1*/
       }
-      *(this + 5) = a2;
+      self->usedEnd = capacity; /*0x523bc3*/
     }
-    v8 = *((int **)this + 1);
-    v24 = v8;
-    *(this + 4) = a2;
-    if ( a2 )
+    data = (char *)self->data; /*0x523bc9*/
+    v24 = data; /*0x523bcc*/
+    self->capacity = capacity; /*0x523bd0*/
+    if ( capacity )
     {
-      v9 = (unsigned __int64)(unsigned __int16)a2 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * (unsigned __int16)a2;
-      v10 = (_DWORD *)FormHeapAlloc(__CFADD__(v9, 4) ? 0xFFFFFFFF : v9 + 4);
-      if ( v10 )
+      v9 = (unsigned __int64)(unsigned __int16)capacity >> 0x1E != 0 ? 0xFFFFFFFF : 4 * (unsigned __int16)capacity;
+      v10 = FormHeapAlloc(__CFADD__(v9, 4) ? 0xFFFFFFFF : v9 + 4);
+      if ( v10 ) /*0x523c12*/
       {
-        v11 = v10 + 1;
-        *v10 = (unsigned __int16)a2;
-        ArrayConstructor(
-          v10 + 1,
+        v11 = (void **)(v10 + 4); /*0x523c1f*/
+        *(_DWORD *)v10 = (unsigned __int16)capacity; /*0x523c25*/
+        ArrayConstructor( /*0x523c27*/
+          (char *)(v10 + 4),
           4u,
-          (unsigned __int16)a2,
-          (int)Concurrency::details::_NonReentrantLock::_Release,
-          (void (__thiscall *)(void *))sub_7016A0);
+          (unsigned __int16)capacity,
+          (void (__thiscall *)(char *))Concurrency::details::_NonReentrantLock::_Release,
+          (void (__thiscall *)(void *))NiPointerSlot_Release);
       }
       else
       {
-        v11 = 0;
+        v11 = 0; /*0x523c2e*/
       }
-      v12 = 0;
-      v13 = *(this + 5) == 0;
-      *((_DWORD *)this + 1) = v11;
-      v26 = 0;
-      if ( !v13 )
+      v12 = 0; /*0x523c30*/
+      v13 = self->usedEnd == 0; /*0x523c32*/
+      self->data = v11; /*0x523c3e*/
+      capacityb = 0; /*0x523c41*/
+      if ( !v13 ) /*0x523c45*/
       {
-        do
+        do /*0x523cb0*/
         {
-          v14 = *((_DWORD *)this + 1);
-          v15 = v12;
-          v16 = *(_DWORD *)(v14 + v15 * 4);
-          v17 = (int *)(v15 * 4 + v14);
-          if ( v16 != v24[v15] )
+          v14 = self->data; /*0x523c50*/
+          v15 = v12; /*0x523c5c*/
+          v16 = (volatile LONG *)v14[v15]; /*0x523c5e*/
+          v17 = &v14[v15]; /*0x523c62*/
+          if ( v16 != *(volatile LONG **)&v24[v15 * 4] ) /*0x523c67*/
           {
-            if ( v16 )
+            if ( v16 ) /*0x523c6b*/
             {
-              if ( !InterlockedDecrement((volatile LONG *)(v16 + 4)) )
-                (**(void (__thiscall ***)(int, int))v16)(v16, 1);
+              if ( !InterlockedDecrement(v16 + 1) ) /*0x523c71*/
+                (**(void (__thiscall ***)(void *, int))v16)((void *)v16, 1); /*0x523c87*/
             }
-            v18 = v24[v15];
-            *v17 = v18;
-            if ( v18 )
-              InterlockedIncrement((volatile LONG *)(v18 + 4));
+            v18 = *(volatile LONG **)&v24[v15 * 4]; /*0x523c8d*/
+            *v17 = (void *)v18; /*0x523c92*/
+            if ( v18 ) /*0x523c95*/
+              InterlockedIncrement(v18 + 1); /*0x523c9b*/
           }
-          v12 = ++v26;
+          v12 = ++capacityb; /*0x523ca5*/
         }
-        while ( v26 < *(this + 5) );
+        while ( capacityb < self->usedEnd ); /*0x523cb0*/
       }
-      for ( i = *(this + 5); i < *(this + 4); ++i )
+      for ( i = self->usedEnd; i < self->capacity; ++i ) /*0x523cba*/
       {
-        v20 = *((_DWORD *)this + 1);
-        v21 = *(_DWORD *)(v20 + 4 * i);
-        v22 = (_DWORD *)(v20 + 4 * i);
-        if ( v21 )
+        v20 = self->data; /*0x523cc4*/
+        v21 = (volatile LONG *)v20[i]; /*0x523cca*/
+        v22 = &v20[i]; /*0x523ccf*/
+        if ( v21 ) /*0x523cda*/
         {
-          if ( !InterlockedDecrement((volatile LONG *)(v21 + 4)) )
-            (**(void (__thiscall ***)(int, int))v21)(v21, 1);
-          *v22 = 0;
+          if ( !InterlockedDecrement(v21 + 1) ) /*0x523ce0*/
+            (**(void (__thiscall ***)(void *, int))v21)((void *)v21, 1); /*0x523cf6*/
+          *v22 = 0; /*0x523cf8*/
         }
       }
-      v8 = v24;
+      data = v24; /*0x523d10*/
     }
     else
     {
-      *((_DWORD *)this + 1) = 0;
+      self->data = 0; /*0x523d4b*/
     }
-    if ( v8 )
+    if ( data ) /*0x523d16*/
     {
-      v23 = (unsigned int)(v8 + 0xFFFFFFFF);
-      _LN21(v8, 4u, v8[0xFFFFFFFF], (void (__thiscall *)(void *))sub_7016A0);
-      FormHeapFree(v23);
+      v23 = (unsigned int)(data + 0xFFFFFFFC); /*0x523d1b*/
+      _LN21(data, 4u, *((_DWORD *)data + 0xFFFFFFFF), (void (__thiscall *)(void *))NiPointerSlot_Release); /*0x523d27*/
+      FormHeapFree(v23); /*0x523d2d*/
     }
   }
 }

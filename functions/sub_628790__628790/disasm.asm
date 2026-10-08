@@ -64,7 +64,7 @@
 0x628872: mov     [esi+4], edx
 0x628875: mov     ecx, esi
 0x628877: mov     [esi+8], eax
-0x62887A: call    sub_43F350
+0x62887A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x62887F: fstp    st
 0x628881: fld     dword ptr [esi]
 0x628883: fld     [esp+30h+arg_0]
@@ -93,12 +93,12 @@
 0x6288D0: fstp    [esp+30h+var_10]
 0x6288D4: mov     eax, [esp+30h+var_10]
 0x6288D8: mov     [esi+8], eax
-0x6288DB: call    TESObjectREFR_GetParentCell
+0x6288DB: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6288E0: mov     ebx, eax
 0x6288E2: test    ebx, ebx
 0x6288E4: jz      short loc_628929
 0x6288E6: mov     ecx, ebx; this
-0x6288E8: call    TESObjectCELL_IsInterior
+0x6288E8: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6288ED: test    al, al
 0x6288EF: jz      short loc_628929
 0x6288F1: mov     ecx, [esi]
@@ -116,7 +116,7 @@
 0x62890E: mov     [eax+8], ecx
 0x628911: push    edx; int
 0x628912: mov     ecx, edi
-0x628914: call    sub_5E2E20
+0x628914: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x628919: mov     ecx, [eax]
 0x62891B: mov     [esi], ecx
 0x62891D: mov     edx, [eax+4]

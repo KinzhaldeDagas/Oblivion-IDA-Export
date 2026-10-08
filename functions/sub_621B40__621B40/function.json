@@ -1,19 +1,32 @@
 {
-  "callees_count": 114,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 32,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x621B40",
+      "0x622174"
+    ]
+  ],
+  "chunks_sha256": "614d5cfd50eb020a526031199779ce70e2a99c19a9c208187130c820044d3534",
+  "comment_regular": "Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.",
+  "comment_repeatable": "Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_621B40",
+  "display_name": "CombatSelection_EvaluateWeaponVsHandToHand",
   "end_ea": "0x622174",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_621B40",
+  "name": "CombatSelection_EvaluateWeaponVsHandToHand",
   "segment": ".text",
   "sha256": "614d5cfd50eb020a526031199779ce70e2a99c19a9c208187130c820044d3534",
   "size": 1588,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x621B40",
-  "type": "signed int __usercall@<eax>(SInt32@<edi>, double@<st1>, double@<st0>, Actor *, float, TESObjectREFR *, float *, char, char)",
+  "total_chunk_size": 1588,
+  "type": "int __cdecl(Actor *actor, EntryData *equippedEntry, TESObjectREFR *target, float *outScore, bool skipFleeAndYieldEvaluation, bool allowYieldEvaluation)",
   "xrefs_from_count": 639,
   "xrefs_to_count": 6
 }

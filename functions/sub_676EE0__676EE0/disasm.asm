@@ -3,7 +3,7 @@
 0x676EE2: mov     ebx, ecx
 0x676EE4: push    edi
 0x676EE5: lea     ecx, [ebx+68h]; this
-0x676EE8: call    sub_7616D0
+0x676EE8: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x676EED: mov     edi, eax
 0x676EEF: test    edi, edi
 0x676EF1: jz      short loc_676F3E
@@ -35,12 +35,11 @@
 0x676F3A: test    edi, edi
 0x676F3C: jnz     short loc_676EF3
 0x676F3E: mov     ecx, ebx; this
-0x676F40: call    sub_7616D0
+0x676F40: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x676F45: mov     esi, eax
 0x676F47: test    esi, esi
 0x676F49: jz      short loc_676F82
 0x676F4B: jmp     short loc_676F50
-0x676F4D: align 10h
 0x676F50: mov     eax, [esi]
 0x676F52: push    0; int
 0x676F54: push    offset ??_R0?AVArrowProjectile@@@8; struct TypeDescriptor *

@@ -7,7 +7,7 @@
 0x631D7B: mov     esi, ecx
 0x631D7D: jz      short loc_631DAD
 0x631D7F: mov     ecx, edi
-0x631D81: call    sub_5E6B40
+0x631D81: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x631D86: test    al, al
 0x631D88: jz      short loc_631DAD
 0x631D8A: mov     eax, [esi]

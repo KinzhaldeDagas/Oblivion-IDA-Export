@@ -1,1 +1,1 @@
-IEnumSTATSTGVtbl_0
+typedef IEnumSTATSTGVtbl IEnumSTATSTGVtbl_0;

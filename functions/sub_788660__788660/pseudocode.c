@@ -1,10 +1,18 @@
-int __cdecl sub_788660(char *a1, char *a2, int a3)
+// Oblivion collision-vector copy-backward primitive: moves 28-byte records from the end toward the front-safe destination and returns destination start.
+OB_CollisionObject_010201A0 *__cdecl OB_stVector_CollisionObject_CopyBackwardRange_010201A0(
+        const OB_CollisionObject_010201A0 *first,
+        const OB_CollisionObject_010201A0 *last,
+        OB_CollisionObject_010201A0 *destinationEnd)
 {
-  int result; // eax
-  char *i; // edx
+  OB_CollisionObject_010201A0 *result; // eax
+  const OB_CollisionObject_010201A0 *i; // edx
 
-  result = a3 - 0x1C * ((a2 - a1) / 0x1C);
-  for ( i = a2; i != a1; qmemcpy(&i[a3 - (_DWORD)a2], i, 0x1Cu) )
-    i += 0xFFFFFFE4;
-  return result;
+  result = &destinationEnd[-(last - first)]; /*0x788695*/
+  for ( i = last; /*0x788699*/
+        i != first;
+        qmemcpy((char *)i + (char *)destinationEnd - (char *)last, i, sizeof(const OB_CollisionObject_010201A0)) )
+  {
+    i += 0xFFFFFFFF; /*0x7886a0*/
+  }
+  return result; /*0x7886b4*/
 }

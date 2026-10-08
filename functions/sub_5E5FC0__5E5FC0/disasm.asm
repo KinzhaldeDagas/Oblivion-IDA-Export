@@ -29,9 +29,9 @@
 0x5E601B: pop     esi
 0x5E601C: add     esp, 10h
 0x5E601F: retn    4
-0x5E6022: call    NiObjectNET_GetExtraData
+0x5E6022: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x5E6027: push    eax
-0x5E6028: push    offset dword_B35294
+0x5E6028: push    0B35294h
 0x5E602D: call    NiRTTI_Cast
 0x5E6032: add     esp, 8
 0x5E6035: test    eax, eax
@@ -61,10 +61,22 @@
 0x5E6080: push    eax
 0x5E6081: mov     ecx, esi
 0x5E6083: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x5E608B: call    NiNode_AddNiExtraData
+0x5E608B: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x5E6090: mov     ecx, [esp+18h+var_C]
 0x5E6094: mov     large fs:0, ecx
 0x5E609B: pop     ecx
 0x5E609C: pop     esi
 0x5E609D: add     esp, 10h
 0x5E60A0: retn    4
+0x9D62E0: mov     eax, [ebp-10h]
+0x9D62E3: push    eax
+0x9D62E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D62E9: pop     ecx
+0x9D62EA: retn
+0x9D62EB: mov     edx, [esp+arg_4]
+0x9D62EF: lea     eax, [edx-8]
+0x9D62F2: mov     ecx, [edx-0Ch]
+0x9D62F5: xor     ecx, eax
+0x9D62F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62FC: mov     eax, offset stru_AFE21C
+0x9D6301: jmp     ___CxxFrameHandler3

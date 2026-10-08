@@ -97,13 +97,13 @@
 0x53523D: add     esp, 0Ch
 0x535240: mov     byte ptr [esi+edi+20h], 0
 0x535245: fld     dword ptr ds:0B376F8h
-0x53524B: push    3
+0x53524B: push    3; mastery
 0x53524D: fstp    dword ptr ds:0B2E8A8h
 0x535253: fld     dword ptr ds:0B374B0h
 0x535259: fstp    dword ptr ds:0BA7A60h
 0x53525F: fld     dword ptr ds:0B374B8h
 0x535265: fstp    dword ptr ds:0B2E76Ch
-0x53526B: call    ActorValue_GetMasterySkill
+0x53526B: call    ActorValue_GetMinimumSkillForMastery; Return the minimum skill value for a mastery tier: Novice 0, Apprentice 25, Journeyman 50, Expert 75, Master 100.
 0x535270: mov     ecx, ds:0B11638h
 0x535276: mov     [esp+128h+var_118], eax
 0x53527A: fild    [esp+128h+var_118]
@@ -127,3 +127,19 @@
 0x5352CB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x5352D0: add     esp, 118h
 0x5352D6: retn
+0x9B91F0: mov     eax, [ebp-118h]
+0x9B91F6: push    eax
+0x9B91F7: call    sub_533D60
+0x9B91FC: pop     ecx
+0x9B91FD: retn
+0x9B91FE: mov     edx, [esp+arg_4]
+0x9B9202: lea     eax, [edx-114h]
+0x9B9208: mov     ecx, [edx-118h]
+0x9B920E: xor     ecx, eax
+0x9B9210: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9215: add     eax, 8
+0x9B9218: mov     ecx, [edx-4]
+0x9B921B: xor     ecx, eax
+0x9B921D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9222: mov     eax, offset stru_AE35CC
+0x9B9227: jmp     ___CxxFrameHandler3

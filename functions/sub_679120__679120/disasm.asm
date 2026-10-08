@@ -1,9 +1,9 @@
-0x679120: sub     esp, 8
+0x679120: sub     esp, 8; Verified (Oblivion): walks each temp effect's GetType/parent RTTI chain to NiRTTI_MagicShaderHitEffect, filters by target, unfinished state and clear bWeaponEnchantment_28, and selects the smallest BSTempEffect::elapsedSeconds. A prior candidate with TESEffectShader::Data.cFlags bit 0 can be displaced by one without it. The exact meaning of bit 0 remains Unknown.
 0x679123: push    ebx
 0x679124: push    ebp
 0x679125: xor     eax, eax
 0x679127: push    esi
-0x679128: mov     [esp+14h+var_4], eax
+0x679128: mov     [esp+14h+outData], eax
 0x67912C: fld     dword ptr ds:0A32048h
 0x679132: lea     esi, [ecx+48h]
 0x679135: fstp    [esp+14h+var_8]
@@ -17,7 +17,7 @@
 0x67914A: jnz     short loc_679154
 0x67914C: mov     bl, al
 0x67914E: jmp     short loc_679156
-0x679150: mov     edi, [esp+18h+arg_0]
+0x679150: mov     edi, [esp+18h+targetReference]
 0x679154: xor     bl, bl
 0x679156: test    al, 1
 0x679158: jz      short loc_679176
@@ -38,12 +38,12 @@
 0x67917E: mov     ebx, esi
 0x679180: test    ebx, ebx
 0x679182: jz      loc_679233
-0x679188: lea     ecx, [esp+18h+var_4]
-0x67918C: push    ecx
-0x67918D: mov     ecx, ebx
-0x67918F: call    sub_677C70
-0x679194: mov     esi, [eax]
-0x679196: mov     eax, [esp+18h+var_4]
+0x679188: lea     ecx, [esp+18h+outData]
+0x67918C: push    ecx; outData
+0x67918D: mov     ecx, ebx; this
+0x67918F: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
+0x679194: mov     esi, [eax]; Verified (Oblivion): temp-effect iteration calls NodeVoid_GetDataAddRef before inspecting each effect, then decrements the returned temporary ref after the visit.
+0x679196: mov     eax, [esp+18h+outData]
 0x67919A: test    eax, eax
 0x67919C: jz      short loc_6791BC
 0x67919E: mov     edi, eax
@@ -68,13 +68,13 @@
 0x6791C9: test    eax, eax
 0x6791CB: jz      short loc_679228
 0x6791CD: lea     ecx, [ecx+0]
-0x6791D0: cmp     eax, offset unk_B3C0D4
+0x6791D0: cmp     eax, offset NiRTTI_MagicShaderHitEffect
 0x6791D5: jz      short loc_6791E0
 0x6791D7: mov     eax, [eax+4]
 0x6791DA: test    eax, eax
 0x6791DC: jnz     short loc_6791D0
 0x6791DE: jmp     short loc_679228
-0x6791E0: mov     ecx, [esp+18h+arg_0]
+0x6791E0: mov     ecx, [esp+18h+targetReference]
 0x6791E4: cmp     [esi+1Ch], ecx
 0x6791E7: jnz     short loc_679228
 0x6791E9: cmp     byte ptr [esi+28h], 0
@@ -87,14 +87,14 @@
 0x6791FD: jz      short loc_67921F
 0x6791FF: test    ebp, ebp
 0x679201: jz      short loc_679228
-0x679203: mov     ecx, [ebp+34h]
-0x679206: push    1
-0x679208: call    sub_4AC730
+0x679203: mov     ecx, [ebp+34h]; this
+0x679206: push    1; mask
+0x679208: call    TESEffectShader_HasFlagBits; Verified (Oblivion): TESEffectShader_HasFlagBits(effectShader_34, 1) participates in ranking non-weapon shader effects for a target; when the current candidate has bit 0 and the new candidate does not, the new one is preferred. Exact semantic flag name remains Unknown.
 0x67920D: test    al, al
 0x67920F: jz      short loc_679228
-0x679211: mov     ecx, [esi+34h]
-0x679214: push    1
-0x679216: call    sub_4AC730
+0x679211: mov     ecx, [esi+34h]; this
+0x679214: push    1; mask
+0x679216: call    TESEffectShader_HasFlagBits; Verified (Oblivion): candidate target must match and bWeaponEnchantment_28 must be clear; lower BSTempEffect::elapsedSeconds is preferred. A previous candidate with TESEffectShader::Data.cFlags bit 0 is displaced by a candidate without that bit. Semantic name of bit 0 remains Unknown.
 0x67921B: test    al, al
 0x67921D: jnz     short loc_679228
 0x67921F: fld     dword ptr [esi+10h]

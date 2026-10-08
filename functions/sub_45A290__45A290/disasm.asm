@@ -30,10 +30,10 @@
 0x45A2DC: mov     eax, [edi+14h]
 0x45A2DF: movzx   ebx, bl
 0x45A2E2: add     edi, 14h
-0x45A2E5: push    ebx; Size
-0x45A2E6: push    eax; Src
-0x45A2E7: push    esi; Dst
-0x45A2E8: call    _memcpy
+0x45A2E5: push    ebx; byteCount
+0x45A2E6: push    eax; source
+0x45A2E7: push    esi; destination
+0x45A2E8: call    _memcpy;
 0x45A2ED: add     [edi], ebx
 0x45A2EF: add     esp, 0Ch
 0x45A2F2: pop     edi

@@ -1,4 +1,4 @@
-0x64E240: add     ecx, 3Ch ; '<'
+0x64E240: add     ecx, 3Ch ; '<'; RadiantAI: sorts accepted acquire candidates by entry+0x1C response code ascending; response code acts as priority bucket before distance sort.
 0x64E243: jz      short locret_64E2A5
 0x64E245: xor     edx, edx
 0x64E247: mov     eax, ecx
@@ -18,7 +18,6 @@
 0x64E269: push    ebp
 0x64E26A: push    esi
 0x64E26B: jmp     short loc_64E270
-0x64E26D: align 10h
 0x64E270: test    bl, bl
 0x64E272: jz      short loc_64E2A1
 0x64E274: xor     bl, bl

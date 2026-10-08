@@ -14,7 +14,7 @@
 0x4E0FA1: mov     large fs:0, eax
 0x4E0FA7: mov     ebp, ecx
 0x4E0FA9: mov     eax, [ebp+3Ch]
-0x4E0FAC: mov     edi, [esp+64h+arg_0]
+0x4E0FAC: mov     edi, [esp+64h+node]
 0x4E0FB0: cmp     eax, edi
 0x4E0FB2: jnz     short loc_4E0FCD
 0x4E0FB4: test    edi, edi
@@ -127,16 +127,16 @@
 0x4E1101: mov     ecx, 9
 0x4E1106: lea     edi, [esp+64h+var_30]
 0x4E110A: rep movsd
-0x4E110C: mov     edi, [esp+64h+arg_0]
+0x4E110C: mov     edi, [esp+64h+node]
 0x4E1110: mov     esi, [esp+64h+var_50]
 0x4E1114: mov     [esp+64h+var_38], edx
 0x4E1118: mov     [esp+64h+var_34], eax
-0x4E111C: push    ebx
+0x4E111C: push    ebx; object
 0x4E111D: push    0
 0x4E111F: call    GetShadowSceneNode
 0x4E1124: add     esp, 4
-0x4E1127: mov     ecx, eax
-0x4E1129: call    sub_7C5E70
+0x4E1127: mov     ecx, eax; this
+0x4E1129: call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.
 0x4E112E: mov     edx, [ebp+0]
 0x4E1131: mov     eax, [edx+188h]
 0x4E1137: mov     ecx, ebp
@@ -148,7 +148,7 @@
 0x4E1142: call    GetShadowSceneNode
 0x4E1147: add     esp, 4
 0x4E114A: mov     ecx, eax
-0x4E114C: call    sub_7C76D0
+0x4E114C: call    ShadowSceneNode_RemoveActiveLightByCasterRoot; Pass266 decode correction: TESObjectREFR_Set3D reaches RemoveActiveBySource only inside IsMobileObject. Static plugin sources therefore require explicit bounded retirement at the pre-partition boundary; do not assume Set3D removes TESObjectSTAT lights here.
 0x4E1151: test    edi, edi
 0x4E1153: jnz     loc_4E12F2
 0x4E1159: mov     ecx, ebp
@@ -157,7 +157,7 @@
 0x4E1163: shr     ecx, 5
 0x4E1166: test    cl, 1
 0x4E1169: jnz     short loc_4E11A7
-0x4E116B: test    esi, esi
+0x4E116B: test    esi, esi; DX11 interior observer audit, OblivionNew reverified 2026-09-19: native TESObjectREFR_Set3D block tests ESI; nonzero path invokes [REFR vtable+198h] with EDI, then conditionally calls 45D220 through save-manager [B33B00]. Zero path calls 45D220 and 45D390. Both converge at 4E11A7, which reads ExtraLight from REFR+44h. External-patch evidence: verified EngineBugFixes 2.22 SavedHavokDataFix replaces 7 bytes here with JMP/NOP/NOP to module+EB30 (helper+E8D0), resumes at 4E11A7. The renderer observes the enclosing Set3D scope and requires the exact verified helper/relocations/continuation before accepting this foreign patch.
 0x4E116D: jz      short loc_4E118F
 0x4E116F: mov     edx, [ebp+0]
 0x4E1172: mov     eax, [edx+198h]
@@ -176,20 +176,20 @@
 0x4E119B: mov     ecx, ds:0B33B00h
 0x4E11A1: push    ebp
 0x4E11A2: call    sub_45D390
-0x4E11A7: lea     ecx, [ebp+44h]
-0x4E11AA: call    sub_41E650
+0x4E11A7: lea     ecx, [ebp+44h]; Native Set3D saved-state branches converge here: ECX = REFR(EBP)+44h; call ExtraDataList_GetLight at 4E11AA; optional light processing follows. Also the separately verified EngineBugFixes 2.22 SavedHavokDataFix continuation. Do not infer EBF helper semantics from these retail bytes; external helper evidence is recorded separately.
+0x4E11AA: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x4E11AF: mov     edi, eax
 0x4E11B1: test    edi, edi
 0x4E11B3: jz      short loc_4E1201
 0x4E11B5: mov     eax, [edi]
 0x4E11B7: test    eax, eax
 0x4E11B9: jz      short loc_4E11F5
-0x4E11BB: push    eax
+0x4E11BB: push    eax; backingLight
 0x4E11BC: push    0
 0x4E11BE: call    GetShadowSceneNode
 0x4E11C3: add     esp, 4
-0x4E11C6: mov     ecx, eax
-0x4E11C8: call    sub_7C7DC0
+0x4E11C6: mov     ecx, eax; self
+0x4E11C8: call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.
 0x4E11CD: mov     esi, [edi]
 0x4E11CF: test    esi, esi
 0x4E11D1: jz      short loc_4E11F5
@@ -206,8 +206,8 @@
 0x4E11EB: mov     ecx, esi
 0x4E11ED: call    eax
 0x4E11EF: mov     dword ptr [edi], 0
-0x4E11F5: lea     ecx, [ebp+44h]
-0x4E11F8: call    sub_41F5B0
+0x4E11F5: lea     ecx, [ebp+44h]; self
+0x4E11F8: call    ExtraDataList_RemoveExtraLight; Remove ordinary attached-light extra-data type 0x30 from this reference extra-data list.
 0x4E11FD: mov     esi, [esp+64h+var_50]
 0x4E1201: mov     edx, [ebp+0]
 0x4E1204: mov     eax, [edx+188h]
@@ -250,8 +250,8 @@
 0x4E1268: call    sub_4DC8F0
 0x4E126D: mov     ecx, ebp
 0x4E126F: call    UnequipLight
-0x4E1274: mov     ecx, ebp
-0x4E1276: call    sub_4DCCF0
+0x4E1274: mov     ecx, ebp; this
+0x4E1276: call    TESObjectREFR_ClearEquippedAmmo3D; Clears this reference's equipped-ammunition 3D and related actor-animation ammo slot state. No explicit stack arguments.
 0x4E127B: mov     edx, [ebp+0]
 0x4E127E: mov     eax, [edx+16Ch]
 0x4E1284: push    0
@@ -259,7 +259,7 @@
 0x4E1288: call    eax
 0x4E128A: push    offset dword_A7D0EC
 0x4E128F: mov     ecx, ebx
-0x4E1291: call    NiObjectNET_GetExtraData
+0x4E1291: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4E1296: test    eax, eax
 0x4E1298: jz      short loc_4E12AE
 0x4E129A: mov     ecx, [eax+0Ch]
@@ -272,7 +272,7 @@
 0x4E12AE: test    esi, esi
 0x4E12B0: jz      short loc_4E12D9
 0x4E12B2: mov     ecx, ebp; this
-0x4E12B4: call    MobileObject_GetCharProxy
+0x4E12B4: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x4E12B9: test    eax, eax
 0x4E12BB: jz      short loc_4E12C6
 0x4E12BD: push    0
@@ -293,15 +293,15 @@
 0x4E12E8: push    ecx
 0x4E12E9: fstp    [esp+68h+var_68]; float
 0x4E12EC: push    ebp; int
-0x4E12ED: call    sub_6AC420
+0x4E12ED: call    SoundManager_StopRefLoopingSoundsWithFade; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.
 0x4E12F2: mov     eax, [ebp+40h]
 0x4E12F5: test    eax, eax
 0x4E12F7: jz      short loc_4E12FF
 0x4E12F9: cmp     byte ptr [eax+26h], 1
 0x4E12FD: jz      short loc_4E131E
-0x4E12FF: push    ebp
-0x4E1300: mov     ecx, offset ActorProcessManager_ptr
-0x4E1305: call    sub_678D90
+0x4E12FF: push    ebp; targetReference
+0x4E1300: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x4E1305: call    ActorProcessManager_FinishHitEffectsForTarget; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicHitEffect; for matching targetReference, calls the hit-effect detach virtual and marks the effect finished.
 0x4E130A: cmp     dword ptr ds:0B3B7D0h, 0
 0x4E1311: jle     short loc_4E131E
 0x4E1313: push    1
@@ -327,7 +327,7 @@
 0x4E134D: mov     [esp+64h+var_40], 0
 0x4E1355: call    edx
 0x4E1357: push    3
-0x4E1359: call    nullsub_returnTrue_0arg
+0x4E1359: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4E135E: mov     esi, [ebp+3Ch]
 0x4E1361: add     esp, 4
 0x4E1364: test    esi, esi
@@ -346,9 +346,9 @@
 0x4E1382: call    eax
 0x4E1384: mov     dword ptr [ebp+3Ch], 0
 0x4E138B: push    2
-0x4E138D: call    nullsub_returnTrue_0arg
+0x4E138D: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4E1392: add     esp, 4
-0x4E1395: cmp     [esp+64h+arg_0], 0
+0x4E1395: cmp     [esp+64h+node], 0
 0x4E139A: jnz     short loc_4E13D4
 0x4E139C: cmp     dword ptr [ebp+1Ch], 0
 0x4E13A0: jz      short loc_4E13CB
@@ -368,10 +368,10 @@
 0x4E13CB: push    0
 0x4E13CD: mov     ecx, ebp
 0x4E13CF: call    sub_4D9310
-0x4E13D4: mov     esi, [esp+64h+arg_0]
-0x4E13D8: push    esi
-0x4E13D9: mov     ecx, ebp
-0x4E13DB: call    sub_4D7D10
+0x4E13D4: mov     esi, [esp+64h+node]
+0x4E13D8: push    esi; node
+0x4E13D9: mov     ecx, ebp; this
+0x4E13DB: call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.
 0x4E13E0: test    esi, esi
 0x4E13E2: jz      loc_4E150F
 0x4E13E8: cmp     [esp+64h+var_4C], 0
@@ -403,7 +403,7 @@
 0x4E1439: call    sub_897A20
 0x4E143E: add     esp, 8
 0x4E1441: mov     ecx, ebx; this
-0x4E1443: call    NiAVObject_InitializePropertyState
+0x4E1443: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4E1448: mov     ecx, ebx
 0x4E144A: call    NiNode_UpdateDynamicEffectState
 0x4E144F: fldz
@@ -411,13 +411,13 @@
 0x4E1453: push    ecx
 0x4E1454: mov     ecx, ebx; this
 0x4E1456: fstp    [esp+6Ch+a2]; a2
-0x4E1459: call    NiAVObject_UpdateNiAVObject
-0x4E145E: mov     eax, [ebp+1Ch]
+0x4E1459: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x4E145E: mov     eax, [ebp+1Ch]; TESObjectREFR_Set3D owner-extra-data preparation continues through 0x004E150C. This function is not one of the seven direct retail AddShadowCaster callers.
 0x4E1461: test    eax, eax
 0x4E1463: jz      loc_4E150F
 0x4E1469: cmp     byte ptr [eax+4], 1Eh
 0x4E146D: jz      loc_4E150F
-0x4E1473: mov     ecx, [esp+64h+arg_0]
+0x4E1473: mov     ecx, [esp+64h+node]
 0x4E1477: movzx   eax, word ptr [ecx+14h]
 0x4E147B: movzx   edi, ax
 0x4E147E: xor     ebx, ebx
@@ -426,7 +426,7 @@
 0x4E1484: sub     edi, 1
 0x4E1487: test    ebx, ebx
 0x4E1489: jnz     loc_4E150C
-0x4E148F: mov     eax, [esp+64h+arg_0]
+0x4E148F: mov     eax, [esp+64h+node]
 0x4E1493: mov     ecx, [eax+10h]
 0x4E1496: movzx   edx, di
 0x4E1499: mov     esi, [ecx+edx*4]
@@ -439,7 +439,7 @@
 0x4E14A9: test    eax, eax
 0x4E14AB: jz      short loc_4E14C2
 0x4E14AD: lea     ecx, [ecx+0]
-0x4E14B0: cmp     eax, offset dword_B35ACC
+0x4E14B0: cmp     eax, offset stru_B35ACC
 0x4E14B5: jz      short loc_4E14C0
 0x4E14B7: mov     eax, [eax+4]
 0x4E14BA: test    eax, eax
@@ -460,23 +460,23 @@
 0x4E14E1: push    ebp
 0x4E14E2: mov     ecx, eax
 0x4E14E4: call    sub_4D67C0
-0x4E14E9: mov     ecx, [esp+64h+arg_0]
+0x4E14E9: mov     ecx, [esp+64h+node]
 0x4E14ED: push    eax
 0x4E14EE: mov     byte ptr [esp+68h+var_4], 0
-0x4E14F3: call    NiNode_AddNiExtraData
+0x4E14F3: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x4E14F8: jmp     short loc_4E150F
-0x4E14FA: mov     ecx, [esp+64h+arg_0]
+0x4E14FA: mov     ecx, [esp+64h+node]
 0x4E14FE: xor     eax, eax
 0x4E1500: push    eax
 0x4E1501: mov     byte ptr [esp+68h+var_4], al
-0x4E1505: call    NiNode_AddNiExtraData
+0x4E1505: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x4E150A: jmp     short loc_4E150F
 0x4E150C: mov     [ebx+0Ch], ebp
-0x4E150F: mov     ecx, ds:0B33B00h
+0x4E150F: mov     ecx, ds:0B33B00h; Common continuation after TESObjectREFR owner-extra-data attach/refresh; not a direct retail shadow-caster admission callsite.
 0x4E1515: call    sub_45A500
 0x4E151A: test    al, al
 0x4E151C: jnz     short loc_4E155C
-0x4E151E: cmp     [esp+64h+arg_0], 0
+0x4E151E: cmp     [esp+64h+node], 0
 0x4E1523: jnz     short loc_4E155C
 0x4E1525: add     ebp, 44h ; 'D'
 0x4E1528: mov     ecx, ebp; this
@@ -486,14 +486,14 @@
 0x4E1533: mov     ecx, ebp; this
 0x4E1535: call    ExtraDataList_GetTeleport
 0x4E153A: mov     ecx, eax
-0x4E153C: call    sub_42B460
+0x4E153C: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4E1541: test    eax, eax
 0x4E1543: jz      short loc_4E155C
 0x4E1545: mov     ecx, ebp; this
 0x4E1547: call    ExtraDataList_GetTeleport
 0x4E154C: push    0
 0x4E154E: mov     ecx, eax
-0x4E1550: call    sub_42B460
+0x4E1550: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x4E1555: mov     ecx, eax
 0x4E1557: call    sub_4CCA60
 0x4E155C: mov     ecx, dword ptr [esp+64h+var_C]
@@ -505,3 +505,17 @@
 0x4E156B: pop     ebx
 0x4E156C: add     esp, 50h
 0x4E156F: retn    4
+0x9B5B50: lea     ecx, [ebp-40h]; slot
+0x9B5B53: jmp     NiPointerSlot_Release
+0x9B5B58: mov     eax, [ebp-44h]
+0x9B5B5B: push    eax
+0x9B5B5C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5B61: pop     ecx
+0x9B5B62: retn
+0x9B5B63: mov     edx, [esp+arg_4]
+0x9B5B67: lea     eax, [edx-54h]
+0x9B5B6A: mov     ecx, [edx-58h]
+0x9B5B6D: xor     ecx, eax
+0x9B5B6F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5B74: mov     eax, offset stru_AE0B54
+0x9B5B79: jmp     ___CxxFrameHandler3

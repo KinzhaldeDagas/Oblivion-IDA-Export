@@ -1,1 +1,4 @@
-HWAVEIN__
+struct HWAVEIN__
+{
+int unused;
+};

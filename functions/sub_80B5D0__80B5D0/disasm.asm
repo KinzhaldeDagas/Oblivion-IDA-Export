@@ -3,7 +3,7 @@
 0x80B5D2: push    esi
 0x80B5D3: push    edi
 0x80B5D4: mov     ebp, ecx
-0x80B5D6: call    sub_8025F0
+0x80B5D6: call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.
 0x80B5DB: lea     edi, [ebp+0A4h]
 0x80B5E1: mov     ebx, 7
 0x80B5E6: mov     esi, [edi]
@@ -71,7 +71,6 @@
 0x80B690: lea     edi, [ebp+0E8h]
 0x80B696: mov     ebx, 3
 0x80B69B: jmp     short loc_80B6A0
-0x80B69D: align 10h
 0x80B6A0: mov     esi, [edi]
 0x80B6A2: test    esi, esi
 0x80B6A4: jz      short loc_80B6C8
@@ -100,7 +99,7 @@
 0x80B6E4: jz      short loc_80B6F6
 0x80B6E6: add     [ecx+60h], ebx
 0x80B6E9: jnz     short loc_80B6F0
-0x80B6EB: call    sub_7604D0
+0x80B6EB: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x80B6F0: mov     dword ptr [esi], 0
 0x80B6F6: add     esi, 4
 0x80B6F9: sub     edi, 1

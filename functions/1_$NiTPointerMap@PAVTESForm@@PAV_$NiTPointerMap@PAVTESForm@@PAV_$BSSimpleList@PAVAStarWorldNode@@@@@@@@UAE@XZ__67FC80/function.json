@@ -1,19 +1,40 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
+  "chunks": [
+    [
+      "0x67FC80",
+      "0x67FCED"
+    ],
+    [
+      "0x67FA70",
+      "0x67FA8C"
+    ],
+    [
+      "0x9C4B20",
+      "0x9C4B43"
+    ]
+  ],
+  "chunks_sha256": "61995097158eb7552fdde304001ade12f9aeb84485dd9383e7a630ab0a9e37d0",
+  "comment_regular": "Verified outer map destructor restores its NiTPointerMap/base-map vtables, clears entries, then frees the bucket-head array.",
+  "comment_repeatable": "Verified outer map destructor restores its NiTPointerMap/base-map vtables, clears entries, then frees the bucket-head array.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
   "display_name": "NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *>::~NiTPointerMap<TESForm *,NiTPointerMap<TESForm *,BSSimpleList<AStarWorldNode *> *> *>(void)",
   "end_ea": "0x67FCED",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1?$NiTPointerMap@PAVTESForm@@PAV?$NiTPointerMap@PAVTESForm@@PAV?$BSSimpleList@PAVAStarWorldNode@@@@@@@@UAE@XZ",
   "segment": ".text",
   "sha256": "a1b635c5d59c7d8ce913f9c128eb0f5c236efe166d7acfcb8967a74339305252",
   "size": 109,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67FC80",
-  "type": "void __thiscall(unsigned int *this)",
-  "xrefs_from_count": 35,
+  "total_chunk_size": 172,
+  "type": "void __thiscall(LowPathWorldDoorLinkMap *this)",
+  "xrefs_from_count": 58,
   "xrefs_to_count": 1
 }

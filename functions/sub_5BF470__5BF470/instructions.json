@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5BF4AE",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x5BF4BC",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5BF4C6",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5BF4DF",
-    "line": "call    sub_420F20",
+    "line": "call    ExtraDataList_SetPersuasionPercentData; Gets/creates ExtraPersuasionPercent (type 0x46) and records the Oblivion persuasion timestamp fields supplied by the caller (year/day/hour/month ordering follows observed stores).",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5BF574",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5BF57F",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; actorValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5BF585",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x5BF599",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x5BF675",
-    "line": "push    24h ; '$'",
+    "line": "push    24h ; '$'; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5BF677",
-    "line": "push    3",
+    "line": "push    3; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5BF679",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -955,37 +955,37 @@
   },
   {
     "ea": "0x5BF68D",
-    "line": "push    ebx",
+    "line": "push    ebx; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5BF68E",
-    "line": "push    ebx",
+    "line": "push    ebx; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5BF68F",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5BF690",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5BF691",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5BF693",
-    "line": "call    TESTopic__CreateDialogueInfo",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,25 +1009,25 @@
   },
   {
     "ea": "0x5BF6A2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5BF6A4",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5BF6A9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5BF6AB",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,13 +1231,13 @@
   },
   {
     "ea": "0x5BF723",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5BF725",
-    "line": "call    sub_6B81D0",
+    "line": "call    DialogueItem__Destroy",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x5BF72B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,19 +1453,19 @@
   },
   {
     "ea": "0x5BF7A6",
-    "line": "fstp    [esp+34h+a2]; a3",
+    "line": "fstp    [esp+34h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5BF7A9",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5BF7AE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x5BF7B4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1540,5 +1540,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C08A0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C08A3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C08A8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C08AC",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C08AF",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C08B2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C08B4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C08B9",
+    "line": "mov     eax, offset stru_AE9AEC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C08BE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

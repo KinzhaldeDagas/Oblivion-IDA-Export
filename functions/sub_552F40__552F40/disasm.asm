@@ -19,7 +19,7 @@
 0x552F71: mov     [esp+20h+var_4], ebx
 0x552F75: jz      short loc_552F80
 0x552F77: push    eax
-0x552F78: call    FormHeapFree
+0x552F78: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x552F7D: add     esp, 4
 0x552F80: lea     esi, [edi+68h]
 0x552F83: mov     [edi+7Ch], ebx
@@ -35,9 +35,9 @@
 0x552FA0: call    sub_552D60
 0x552FA5: mov     eax, [esi+4]
 0x552FA8: push    eax
-0x552FA9: call    FormHeapFree
+0x552FA9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x552FAE: add     esp, 4
-0x552FB1: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x552FB1: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x552FB6: push    4; int
 0x552FB8: push    18h; unsigned int
 0x552FBA: add     edi, 8
@@ -55,3 +55,18 @@
 0x552FE2: pop     ebx
 0x552FE3: add     esp, 10h
 0x552FE6: retn
+0x9BBE70: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9BBE75: push    4; int
+0x9BBE77: push    18h; unsigned int
+0x9BBE79: mov     eax, [ebp-10h]
+0x9BBE7C: add     eax, 8
+0x9BBE7F: push    eax; void *
+0x9BBE80: call    $LN21
+0x9BBE85: retn
+0x9BBE86: mov     edx, [esp+arg_4]
+0x9BBE8A: lea     eax, [edx-10h]
+0x9BBE8D: mov     ecx, [edx-14h]
+0x9BBE90: xor     ecx, eax
+0x9BBE92: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBE97: mov     eax, offset stru_AE5B30
+0x9BBE9C: jmp     ___CxxFrameHandler3

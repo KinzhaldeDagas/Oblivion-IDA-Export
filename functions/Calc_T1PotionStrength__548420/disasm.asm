@@ -34,11 +34,11 @@
 0x54849E: jnz     short loc_5484EA
 0x5484A0: cmp     [esp+10h+arg_24], 0
 0x5484A5: jnz     Calc_T1PotionStrength___def_548490
-0x5484AB: mov     ecx, offset fPotionT1RetMagMult
+0x5484AB: mov     ecx, 0B379E8h
 0x5484B0: call    GameSetting_GetSafeFloatPointer
 0x5484B5: fld     dword ptr [eax]
 0x5484B7: fmul    [esp+10h+arg_18]
-0x5484BB: mov     ecx, offset fPotionT1RetDurMult
+0x5484BB: mov     ecx, 0B379F0h
 0x5484C0: fmul    dword ptr [edi]
 0x5484C2: fadd    dword ptr [edi]
 0x5484C4: fstp    dword ptr [edi]
@@ -79,17 +79,17 @@
 0x548526: jz      short loc_548597
 0x548528: cmp     [esp+10h+arg_24], 0
 0x54852D: jnz     short loc_548597
-0x54852F: mov     ecx, offset fPotionT1CalMagMult
+0x54852F: mov     ecx, 0B379F8h
 0x548534: fstp    st
 0x548536: call    GameSetting_GetSafeFloatPointer
 0x54853B: fld     dword ptr [eax]
 0x54853D: fmul    [esp+10h+arg_20]
-0x548541: mov     ecx, offset fPotionT1AleMagMult
+0x548541: mov     ecx, 0B37A08h
 0x548546: fmul    dword ptr [edi]
 0x548548: fstp    [esp+10h+var_8]
 0x54854C: call    GameSetting_GetSafeFloatPointer
 0x548551: fld     dword ptr [eax]
-0x548553: mov     ecx, offset fPotionT1CalMagMult
+0x548553: mov     ecx, 0B379F8h
 0x548558: fmul    [esp+10h+arg_1C]
 0x54855C: fmul    dword ptr [edi]
 0x54855E: fadd    [esp+10h+var_8]
@@ -97,7 +97,7 @@
 0x548564: fstp    dword ptr [edi]
 0x548566: call    GameSetting_GetSafeFloatPointer
 0x54856B: fld     dword ptr [eax]
-0x54856D: mov     ecx, offset fPotionT1AleDurMult
+0x54856D: mov     ecx, 0B37A10h
 0x548572: fmul    [esp+10h+arg_20]
 0x548576: fmul    dword ptr [esi]
 0x548578: fstp    [esp+10h+var_8]
@@ -138,17 +138,17 @@
 0x5485DA: jnz     short loc_54864D
 0x5485DC: cmp     [esp+10h+arg_24], 0
 0x5485E1: jnz     short loc_54864D
-0x5485E3: mov     ecx, offset fPotionT1RetMagMult
+0x5485E3: mov     ecx, 0B379E8h
 0x5485E8: call    GameSetting_GetSafeFloatPointer
 0x5485ED: fld     dword ptr [eax]
 0x5485EF: fld     dword ptr [edi]
-0x5485F1: mov     ecx, offset fPotionT1CalMagMult
+0x5485F1: mov     ecx, 0B379F8h
 0x5485F6: fmul    [esp+10h+arg_18]
 0x5485FA: fmulp   st(1), st
 0x5485FC: fstp    [esp+10h+var_8]
 0x548600: call    GameSetting_GetSafeFloatPointer
 0x548605: fld     dword ptr [esi]
-0x548607: mov     ecx, offset fPotionT1RetDurMult
+0x548607: mov     ecx, 0B379F0h
 0x54860C: fmul    [esp+10h+arg_20]
 0x548610: fmul    dword ptr [eax]
 0x548612: fadd    [esp+10h+var_8]
@@ -156,7 +156,7 @@
 0x548618: fstp    dword ptr [edi]
 0x54861A: call    GameSetting_GetSafeFloatPointer
 0x54861F: fld     dword ptr [eax]
-0x548621: mov     ecx, offset fPotionT1CalMagMult
+0x548621: mov     ecx, 0B379F8h
 0x548626: fld     dword ptr [esi]
 0x548628: fmul    [esp+10h+arg_18]
 0x54862C: fmulp   st(1), st

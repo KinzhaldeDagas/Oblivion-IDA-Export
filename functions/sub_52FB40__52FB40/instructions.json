@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52FB40",
-    "line": "push    esi",
+    "line": "push    esi; TESTopic constructor stores the DialogueType argument in topicType. New runtime DIAL records are constructed with zero at 0x44E49C. LoadForm does not initialize a separate scratch candidate for DATA.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x52FB7A",
-    "line": "mov     [esi+30h], eax",
+    "line": "mov     [esi+30h], eax; TESTopic constructor initializes the runtime XIDX backing field unk30 to zero; topicType is a separate field assigned from the constructor argument at 0x52FB81.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x52FB7D",
-    "line": "mov     al, [esp+4+arg_0]",
+    "line": "mov     al, [esp+4+topicType]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,7 +1,7 @@
 0x9F03D0: push    offset aToIncreaseYour; "To increase your level, make progress l"...
 0x9F03D5: push    offset aSlevelpopuptex; "sLevelPopUpText"
-0x9F03DA: mov     ecx, offset dword_B383E0
-0x9F03DF: call    GameSetting_ConstrAndReg
+0x9F03DA: mov     ecx, offset stru_B383E0; self
+0x9F03DF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F03E4: push    offset sub_A20EE0; void (__cdecl *)()
 0x9F03E9: call    _atexit
 0x9F03EE: pop     ecx

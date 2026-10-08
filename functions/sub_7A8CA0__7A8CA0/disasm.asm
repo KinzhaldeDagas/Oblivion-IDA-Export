@@ -1,10 +1,10 @@
-0x7A8CA0: push    ebx
-0x7A8CA1: mov     ebx, [esp+4+arg_0]
+0x7A8CA0: push    ebx; OBLIVION AUTHORITY (2026-08-30): Fills a vector<bool> iterator range one packed bit at a time, setting or clearing the selected bit in each 32-bit word.
+0x7A8CA1: mov     ebx, [esp+4+first.owner]
 0x7A8CA5: push    ebp
 0x7A8CA6: push    esi
-0x7A8CA7: mov     esi, [esp+0Ch+arg_4]
+0x7A8CA7: mov     esi, [esp+0Ch+first.word]
 0x7A8CAB: push    edi
-0x7A8CAC: mov     edi, [esp+10h+arg_8]
+0x7A8CAC: mov     edi, [esp+10h+first.bitOffset]
 0x7A8CB0: cmp     esi, [esp+10h+arg_10]
 0x7A8CB4: jnz     short loc_7A8CC0
 0x7A8CB6: cmp     edi, [esp+10h+arg_14]
@@ -12,7 +12,7 @@
 0x7A8CC0: test    ebx, ebx
 0x7A8CC2: jnz     short loc_7A8CC9
 0x7A8CC4: call    __invalid_parameter_noinfo
-0x7A8CC9: mov     eax, [esp+10h+arg_18]
+0x7A8CC9: mov     eax, [esp+10h+value]
 0x7A8CCD: cmp     byte ptr [eax], 0
 0x7A8CD0: jz      short loc_7A8D0E
 0x7A8CD2: test    ebx, ebx

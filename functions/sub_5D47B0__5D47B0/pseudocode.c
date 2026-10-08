@@ -8,40 +8,40 @@ void __usercall sub_5D47B0(int a1@<ecx>, int ebx0@<ebx>)
   float a2; // [esp+0h] [ebp-Ch]
   float a2a; // [esp+0h] [ebp-Ch]
 
-  if ( *(_BYTE *)(*(_DWORD *)(*(_DWORD *)(a1 + 0x2C) + 8) + 4) == 0x21 )
+  if ( *(_BYTE *)(*(_DWORD *)(*(_DWORD *)(a1 + 0x2C) + 8) + 4) == 0x21 ) /*0x5d47be*/
   {
-    v3 = *(_DWORD *)(a1 + 0x28);
-    *(_DWORD *)(a1 + 0x7C) = 0;
-    if ( v3 )
+    v3 = *(_DWORD *)(a1 + 0x28); /*0x5d47c4*/
+    *(_DWORD *)(a1 + 0x7C) = 0; /*0x5d47c9*/
+    if ( v3 ) /*0x5d47d0*/
     {
-      v4 = (int *)(v3 + 0x7C);
-      if ( v3 != 0xFFFFFF84 )
+      v4 = (int *)(v3 + 0x7C); /*0x5d47d3*/
+      if ( v3 != 0xFFFFFF84 ) /*0x5d47d8*/
       {
-        do
+        do /*0x5d480a*/
         {
-          v5 = *v4;
-          if ( !*v4 )
-            break;
-          v6 = *(_DWORD *)(v5 + 0x10);
-          if ( v6 == 1 || v6 == 2 )
+          v5 = *v4; /*0x5d47e0*/
+          if ( !*v4 ) /*0x5d47e0*/
+            break; /*0x5d47e4*/
+          v6 = *(_DWORD *)(v5 + 0x10); /*0x5d47e6*/
+          if ( v6 == 1 || v6 == 2 ) /*0x5d47f1*/
           {
-            v7 = EffectItem_MagickaCostForCaster(v5, ebx0, 0);
-            *(_DWORD *)(a1 + 0x7C) = Double_To_SInt32(v7 + (double)*(int *)(a1 + 0x7C));
+            v7 = EffectItem_MagickaCostForCaster(v5, ebx0, 0); /*0x5d47f5*/
+            *(_DWORD *)(a1 + 0x7C) = Double_To_SInt32(v7 + (double)*(int *)(a1 + 0x7C)); /*0x5d4802*/
           }
-          v4 = (int *)v4[1];
+          v4 = (int *)v4[1]; /*0x5d4805*/
         }
-        while ( v4 );
+        while ( v4 ); /*0x5d480a*/
       }
     }
-    a2 = (float)*(int *)(a1 + 0x7C);
-    Tile_SetFloat(*(Tile **)(a1 + 4), (_DWORD *)0xFAE, a2);
-    a2a = (float)*(unsigned __int8 *)(*(_DWORD *)(a1 + 0x28) + 0x74);
-    Tile_SetFloat(*(Tile **)(a1 + 4), (_DWORD *)0xFAF, a2a);
-    *(_DWORD *)(a1 + 0x7C) *= *(unsigned __int8 *)(*(_DWORD *)(a1 + 0x28) + 0x74);
+    a2 = (float)*(int *)(a1 + 0x7C); /*0x5d4814*/
+    Tile_SetFloat(*(Tile **)(a1 + 4), 0xFAEu, a2); /*0x5d481c*/
+    a2a = (float)*(unsigned __int8 *)(*(_DWORD *)(a1 + 0x28) + 0x74); /*0x5d4834*/
+    Tile_SetFloat(*(Tile **)(a1 + 4), 0xFAFu, a2a); /*0x5d483c*/
+    *(_DWORD *)(a1 + 0x7C) *= *(unsigned __int8 *)(*(_DWORD *)(a1 + 0x28) + 0x74); /*0x5d484c*/
   }
   else
   {
-    Tile_SetFloat(*(Tile **)(a1 + 4), (_DWORD *)0xFAE, 0.0);
-    Tile_SetFloat(*(Tile **)(a1 + 4), (_DWORD *)0xFAF, 0.0);
+    Tile_SetFloat(*(Tile **)(a1 + 4), 0xFAEu, 0.0); /*0x5d4860*/
+    Tile_SetFloat(*(Tile **)(a1 + 4), 0xFAFu, 0.0); /*0x5d4873*/
   }
 }

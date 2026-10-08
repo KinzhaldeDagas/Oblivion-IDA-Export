@@ -1,4 +1,4 @@
-0x78C9B0: sub     esp, 8
+0x78C9B0: sub     esp, 8; Xref audit: only 0x56090C (MakeBase load failure) and 0x5635A6 (BSTreeModel destructor) call this function in Oblivion. These are the complete observed shared-ownership release paths.
 0x78C9B3: push    ebx
 0x78C9B4: push    ebp
 0x78C9B5: push    esi
@@ -19,7 +19,7 @@
 0x78C9E9: call    __invalid_parameter_noinfo
 0x78C9EE: mov     ecx, ds:0B42988h
 0x78C9F4: cmp     edi, ebp
-0x78C9F6: mov     eax, offset unk_B42984
+0x78C9F6: mov     eax, offset stru_B42984
 0x78C9FB: mov     ebx, eax
 0x78C9FD: mov     [esp+18h+var_4], edi
 0x78CA01: jz      short loc_78CA0E
@@ -34,7 +34,7 @@
 0x78CA18: call    __invalid_parameter_noinfo
 0x78CA1D: test    ebx, ebx
 0x78CA1F: jz      short loc_78CA29
-0x78CA21: cmp     ebx, offset unk_B42984
+0x78CA21: cmp     ebx, offset stru_B42984
 0x78CA27: jz      short loc_78CA2E
 0x78CA29: call    __invalid_parameter_noinfo
 0x78CA2E: cmp     edi, ebp
@@ -56,7 +56,7 @@
 0x78CA53: sub     dword ptr ds:0B4298Ch, 4
 0x78CA5A: xor     ebx, ebx
 0x78CA5C: mov     eax, [esi+30h]
-0x78CA5F: add     dword ptr [eax], 0FFFFFFFFh
+0x78CA5F: add     dword ptr [eax], 0FFFFFFFFh; Destructor performs a plain -- of the shared count before testing zero. This is the authoritative final-cleanup transition; overlapping same-tree MakeInstance/dtor is not made thread-safe by stock.
 0x78CA62: cmp     [esi+34h], ebx
 0x78CA65: jz      short loc_78CAD0
 0x78CA67: mov     eax, [esi+38h]
@@ -96,47 +96,47 @@
 0x78CABD: add     dword ptr [edi+8], 0FFFFFFFCh
 0x78CAC1: mov     eax, [esi+34h]
 0x78CAC4: push    eax
-0x78CAC5: call    FormHeapFree
+0x78CAC5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CACA: add     esp, 4
 0x78CACD: mov     [esi+34h], ebx
 0x78CAD0: mov     ecx, [esi+30h]
 0x78CAD3: cmp     [ecx], ebx
 0x78CAD5: jnz     loc_78CC4F
-0x78CADB: mov     ecx, [esi]
+0x78CADB: mov     ecx, [esi]; this
 0x78CADD: cmp     byte ptr [ecx+21h], 0
 0x78CAE1: jz      short loc_78CAEA
-0x78CAE3: call    sub_7A2620
+0x78CAE3: call    OB_CTreeEngine_FreeTransientData_010201A0; CTreeEngine::FreeTransientData. Releases compact trunk branch, leaf LOD vectors, branch-info arrays, and related transient generator state, then clears CTreeEngine+0x21.
 0x78CAE8: jmp     short loc_78CAFB
-0x78CAEA: push    3Ah ; ':'; MaxCount
+0x78CAEA: push    3Ah ; ':'; count
 0x78CAEC: push    offset aDeletetransien; "DeleteTransientData() called with no in"...
-0x78CAF1: mov     ecx, offset dword_B2B614
-0x78CAF6: call    sub_414500
+0x78CAF1: mov     ecx, offset OB_g_strError_010201A0; this
+0x78CAF6: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x78CAFB: mov     edi, [esi+4]
 0x78CAFE: cmp     edi, ebx
 0x78CB00: jz      short loc_78CB12
-0x78CB02: mov     ecx, edi
-0x78CB04: call    sub_797270
+0x78CB02: mov     ecx, edi; this
+0x78CB04: call    OB_CIndexedGeometry_dtor_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry destructor releases CPU-wind state, owned per-strip unsigned-short buffers, nested length/pointer vectors, triangle counts, and all vertex-attribute vector storage.
 0x78CB09: push    edi
-0x78CB0A: call    FormHeapFree
+0x78CB0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB0F: add     esp, 4
 0x78CB12: mov     edx, [esi+0Ch]
 0x78CB15: push    edx
-0x78CB16: call    FormHeapFree
+0x78CB16: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB1B: mov     eax, [esi+10h]
 0x78CB1E: push    eax
-0x78CB1F: call    FormHeapFree
+0x78CB1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB24: mov     edi, [esi+8]
 0x78CB27: add     esp, 8
 0x78CB2A: cmp     edi, ebx
 0x78CB2C: jz      short loc_78CB3E
-0x78CB2E: mov     ecx, edi
-0x78CB30: call    sub_798940
+0x78CB2E: mov     ecx, edi; this
+0x78CB30: call    OB_CLeafGeometry_dtor_010201A0; CLeafGeometry destructor: frees texture dimension/origin arrays, invokes each 0x44-byte SLodGeometry destructor, and frees the billboard table.
 0x78CB35: push    edi
-0x78CB36: call    FormHeapFree
+0x78CB36: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB3B: add     esp, 4
 0x78CB3E: mov     ecx, [esi+14h]
 0x78CB41: push    ecx
-0x78CB42: call    FormHeapFree
+0x78CB42: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB47: mov     ecx, [esi]
 0x78CB49: add     esp, 4
 0x78CB4C: cmp     ecx, ebx
@@ -147,7 +147,7 @@
 0x78CB56: call    eax
 0x78CB58: mov     ecx, [esi+30h]
 0x78CB5B: push    ecx
-0x78CB5C: call    FormHeapFree
+0x78CB5C: call    FormHeapFree; Frees the shared +0x30 refcount/identity allocation only on the authoritative transition to shared count zero. Individual instance-wrapper destruction does not free this identity.
 0x78CB61: mov     edi, [esi+38h]
 0x78CB64: add     esp, 4
 0x78CB67: cmp     edi, ebx
@@ -156,17 +156,17 @@
 0x78CB6E: cmp     eax, ebx
 0x78CB70: jz      short loc_78CB7B
 0x78CB72: push    eax
-0x78CB73: call    FormHeapFree
+0x78CB73: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB78: add     esp, 4
 0x78CB7B: push    edi
 0x78CB7C: mov     [edi+4], ebx
 0x78CB7F: mov     [edi+8], ebx
 0x78CB82: mov     [edi+0Ch], ebx
-0x78CB85: call    FormHeapFree
+0x78CB85: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB8A: add     esp, 4
 0x78CB8D: mov     edx, [esi+40h]
 0x78CB90: push    edx
-0x78CB91: call    FormHeapFree
+0x78CB91: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CB96: mov     edi, [esi+58h]
 0x78CB99: add     esp, 4
 0x78CB9C: cmp     edi, ebx
@@ -175,41 +175,41 @@
 0x78CBA3: cmp     eax, ebx
 0x78CBA5: jz      short loc_78CBB0
 0x78CBA7: push    eax
-0x78CBA8: call    FormHeapFree
+0x78CBA8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CBAD: add     esp, 4
 0x78CBB0: push    edi
 0x78CBB1: mov     [edi+4], ebx
 0x78CBB4: mov     [edi+8], ebx
 0x78CBB7: mov     [edi+0Ch], ebx
-0x78CBBA: call    FormHeapFree
+0x78CBBA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CBBF: add     esp, 4
 0x78CBC2: mov     edi, [esi+4Ch]
 0x78CBC5: cmp     edi, ebx
 0x78CBC7: jz      short loc_78CBD9
-0x78CBC9: mov     ecx, edi
-0x78CBCB: call    sub_788B90
+0x78CBC9: mov     ecx, edi; this
+0x78CBCB: call    OB_CSpeedTreeRT_SEmbeddedTexCoords_Dtor_010201A0; Final CSpeedTreeRT destruction path destroys embedded texcoord block at +0x4C via 0x788B90, then frees the 0x54-byte object.
 0x78CBD0: push    edi
-0x78CBD1: call    FormHeapFree
+0x78CBD1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CBD6: add     esp, 4
 0x78CBD9: mov     edi, [esi+5Ch]
 0x78CBDC: cmp     edi, ebx
 0x78CBDE: jz      short loc_78CBF0
-0x78CBE0: mov     ecx, edi
-0x78CBE2: call    sub_7A14E0
+0x78CBE0: mov     ecx, edi; this
+0x78CBE2: call    OB_CFrondEngine_dtor_010201A0; Final shared CSpeedTreeRT cleanup destroys and then frees the owned CFrondEngine at +0x5C.
 0x78CBE7: push    edi
-0x78CBE8: call    FormHeapFree
+0x78CBE8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CBED: add     esp, 4
 0x78CBF0: mov     edi, [esi+60h]
 0x78CBF3: cmp     edi, ebx
 0x78CBF5: jz      short loc_78CC07
-0x78CBF7: mov     ecx, edi
-0x78CBF9: call    sub_797270
+0x78CBF7: mov     ecx, edi; this
+0x78CBF9: call    OB_CIndexedGeometry_dtor_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry destructor releases CPU-wind state, owned per-strip unsigned-short buffers, nested length/pointer vectors, triangle counts, and all vertex-attribute vector storage.
 0x78CBFE: push    edi
-0x78CBFF: call    FormHeapFree
+0x78CBFF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CC04: add     esp, 4
 0x78CC07: mov     eax, [esi+2Ch]
 0x78CC0A: push    eax
-0x78CC0B: call    FormHeapFree
+0x78CC0B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CC10: mov     edi, [esi+50h]
 0x78CC13: add     esp, 4
 0x78CC16: cmp     edi, ebx
@@ -218,17 +218,17 @@
 0x78CC1E: jb      short loc_78CC2C
 0x78CC20: mov     ecx, [edi+28h]
 0x78CC23: push    ecx
-0x78CC24: call    FormHeapFree
+0x78CC24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CC29: add     esp, 4
 0x78CC2C: mov     dword ptr [edi+3Ch], 0Fh
 0x78CC33: mov     [edi+38h], ebx
 0x78CC36: push    edi
 0x78CC37: mov     byte ptr [edi+28h], 0
-0x78CC3B: call    FormHeapFree
+0x78CC3B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CC40: add     esp, 4
 0x78CC43: mov     edx, [esi+68h]
 0x78CC46: push    edx
-0x78CC47: call    FormHeapFree
+0x78CC47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78CC4C: add     esp, 4
 0x78CC4F: pop     edi
 0x78CC50: mov     [esi+4], ebx
@@ -253,6 +253,6 @@
 0x78CC88: pop     ebx
 0x78CC89: jnz     short loc_78CC93
 0x78CC8B: add     esp, 8
-0x78CC8E: jmp     sub_785D30
+0x78CC8E: jmp     OB_StBezierSpline_ClearCache_010201A0; Oblivion stBezierSpline::ClearCache behavior. Iterates the inline global map, destructs and FormHeap-frees every cached 0x5C spline, nulls value slots, destroys all tree nodes, and resets the existing sentinel/map to empty. RT 4.1 source corroborates ownership semantics; Oblivion differs by retaining an inline map rather than deleting a heap map pointer.
 0x78CC93: add     esp, 8
 0x78CC96: retn

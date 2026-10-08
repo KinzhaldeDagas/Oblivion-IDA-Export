@@ -1,5 +1,5 @@
-0x4BF9E0: sub     esp, 0Ch
-0x4BF9E3: mov     eax, [esp+0Ch+arg_4]
+0x4BF9E0: sub     esp, 0Ch; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.
+0x4BF9E3: mov     eax, [esp+0Ch+rhs]
 0x4BF9E7: fld     dword ptr [eax+8]
 0x4BF9EA: fmul    dword ptr [ecx+4]
 0x4BF9ED: fld     dword ptr [eax+4]
@@ -29,24 +29,24 @@
 0x4BFA2D: faddp   st(2), st
 0x4BFA2F: fmul    st, st
 0x4BFA31: faddp   st(1), st
-0x4BFA33: fstp    [esp+0Ch+arg_4]
-0x4BFA37: fld     [esp+0Ch+arg_4]
+0x4BFA33: fstp    [esp+0Ch+rhs]
+0x4BFA37: fld     [esp+0Ch+rhs]
 0x4BFA3B: call    __CIsqrt
-0x4BFA40: fstp    [esp+0Ch+arg_4]
-0x4BFA44: fld     [esp+0Ch+arg_4]
-0x4BFA48: fstp    [esp+0Ch+arg_4]
+0x4BFA40: fstp    [esp+0Ch+rhs]
+0x4BFA44: fld     [esp+0Ch+rhs]
+0x4BFA48: fstp    [esp+0Ch+rhs]
 0x4BFA4C: fld     dword ptr ds:0A372CCh
-0x4BFA52: fld     [esp+0Ch+arg_4]
+0x4BFA52: fld     [esp+0Ch+rhs]
 0x4BFA56: fcom    st(1)
 0x4BFA58: fnstsw  ax
 0x4BFA5A: fstp    st(1)
 0x4BFA5C: test    ah, 41h
-0x4BFA5F: mov     eax, [esp+0Ch+arg_0]
+0x4BFA5F: mov     eax, [esp+0Ch+out]
 0x4BFA63: jnz     short loc_4BFA8E
 0x4BFA65: fld1
 0x4BFA67: fdivrp  st(1), st
-0x4BFA69: fstp    [esp+0Ch+arg_4]
-0x4BFA6D: fld     [esp+0Ch+arg_4]
+0x4BFA69: fstp    [esp+0Ch+rhs]
+0x4BFA6D: fld     [esp+0Ch+rhs]
 0x4BFA71: fld     st
 0x4BFA73: fmul    [esp+0Ch+var_C]
 0x4BFA76: fstp    dword ptr [eax]

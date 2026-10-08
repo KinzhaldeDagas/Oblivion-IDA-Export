@@ -1,4 +1,4 @@
-0x788720: mov     ax, [esp+arg_0]
+0x788720: mov     ax, [esp+lodLevel]; Oblivion CIndexedGeometry::GetStripLengths: validates LOD range and inner vector state, then returns the selected ushort strip-length buffer or null.
 0x788725: test    ax, ax
 0x788728: push    esi
 0x788729: push    edi

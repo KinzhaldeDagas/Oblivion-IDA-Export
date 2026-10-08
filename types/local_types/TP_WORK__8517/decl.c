@@ -1,1 +1,1 @@
-TP_WORK
+typedef _TP_WORK TP_WORK;

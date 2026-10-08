@@ -1,5 +1,5 @@
-0x7FCC80: push    0FFFFFFFFh
-0x7FCC82: push    offset SEH_7FCC80
+0x7FCC80: push    0FFFFFFFFh; Oblivion Lighting30Shader constant-map builder. The principal SM3 map uses grouped constants; alternate/projected maps explicitly bind FogParam/FogColor, shadow projection, material, eye, light, skinning, and texture-effect data.
+0x7FCC82: push    offset MobileObject_LoadModifiedForm_SEH
 0x7FCC87: mov     eax, large fs:0
 0x7FCC8D: push    eax
 0x7FCC8E: push    ecx
@@ -40,7 +40,7 @@
 0x7FCCF9: push    0
 0x7FCCFB: push    20000009h
 0x7FCD00: push    offset aWorldviewprojt; "WorldViewProjTranspose"
-0x7FCD05: call    eax
+0x7FCD05: call    eax; Add automatic main-vertex-map WorldViewProjTranspose at VS c0 (non-skinned matrix c0..c3).
 0x7FCD07: mov     ecx, [esi]
 0x7FCD09: mov     edx, [ecx]
 0x7FCD0B: mov     eax, [edx+38h]
@@ -66,7 +66,7 @@
 0x7FCD3F: mov     ecx, ebp
 0x7FCD41: call    eax
 0x7FCD43: test    edi, edi
-0x7FCD45: mov     ds:0B46B98h, edi
+0x7FCD45: mov     ds:0B46B98h, edi; Retain the WorldViewProjTranspose constant-map entry for selector-mask activation.
 0x7FCD4B: jz      short loc_7FCD57
 0x7FCD4D: add     edi, 4
 0x7FCD50: push    edi; lpAddend
@@ -78,15 +78,15 @@
 0x7FCD63: push    1
 0x7FCD65: push    20000009h
 0x7FCD6A: push    offset aSkinworldviewp; "SkinWorldViewProjTranspose"
-0x7FCD6F: call    eax
+0x7FCD6F: call    eax; Add automatic SkinWorldViewProjTranspose at VS c1 (skinned matrix c1..c4).
 0x7FCD71: mov     ecx, [esi]
 0x7FCD73: mov     edx, [ecx]
 0x7FCD75: mov     eax, [edx+38h]
 0x7FCD78: push    offset aSkinworldviewp; "SkinWorldViewProjTranspose"
 0x7FCD7D: call    eax
 0x7FCD7F: push    eax; a2
-0x7FCD80: mov     ecx, offset dword_B46B9C; this
-0x7FCD85: call    NiSmartPointer_Set??
+0x7FCD80: mov     ecx, offset unk_B46B9C; this
+0x7FCD85: call    NiSmartPointer_Set??; Retain the SkinWorldViewProjTranspose entry for selector-mask activation.
 0x7FCD8A: mov     ecx, [esi]
 0x7FCD8C: mov     edx, [ecx]
 0x7FCD8E: mov     eax, [edx+1Ch]
@@ -94,15 +94,15 @@
 0x7FCD96: push    5
 0x7FCD98: push    20000009h
 0x7FCD9D: push    offset aWorldviewtrans; "WorldViewTranspose"
-0x7FCDA2: call    eax
+0x7FCDA2: call    eax; Add automatic WorldViewTranspose at VS c5.
 0x7FCDA4: mov     ecx, [esi]
 0x7FCDA6: mov     edx, [ecx]
 0x7FCDA8: mov     eax, [edx+38h]
 0x7FCDAB: push    offset aWorldviewtrans; "WorldViewTranspose"
 0x7FCDB0: call    eax
 0x7FCDB2: push    eax; a2
-0x7FCDB3: mov     ecx, offset dword_B46BA4; this
-0x7FCDB8: call    NiSmartPointer_Set??
+0x7FCDB3: mov     ecx, offset unk_B46BA4; this
+0x7FCDB8: call    NiSmartPointer_Set??; Retain the WorldViewTranspose entry for selector-mask activation.
 0x7FCDBD: mov     ecx, [esi]
 0x7FCDBF: mov     edx, [ecx]
 0x7FCDC1: mov     eax, [edx+1Ch]
@@ -110,15 +110,15 @@
 0x7FCDC9: push    6
 0x7FCDCB: push    20000009h
 0x7FCDD0: push    offset aSkinworldviewt; "SkinWorldViewTranspose"
-0x7FCDD5: call    eax
+0x7FCDD5: call    eax; Add automatic SkinWorldViewTranspose at VS c6.
 0x7FCDD7: mov     ecx, [esi]
 0x7FCDD9: mov     edx, [ecx]
 0x7FCDDB: mov     eax, [edx+38h]
 0x7FCDDE: push    offset aSkinworldviewt; "SkinWorldViewTranspose"
 0x7FCDE3: call    eax
 0x7FCDE5: push    eax; a2
-0x7FCDE6: mov     ecx, offset dword_B46BA8; this
-0x7FCDEB: call    NiSmartPointer_Set??
+0x7FCDE6: mov     ecx, offset unk_B46BA8; this
+0x7FCDEB: call    NiSmartPointer_Set??; Retain the SkinWorldViewTranspose entry for selector-mask activation.
 0x7FCDF0: mov     ecx, [esi]
 0x7FCDF2: mov     edx, [ecx]
 0x7FCDF4: mov     eax, [edx+18h]
@@ -132,19 +132,19 @@
 0x7FCE05: push    120000h
 0x7FCE0A: push    20000009h
 0x7FCE0F: push    offset aBonematrix3; "BoneMatrix3"
-0x7FCE14: call    eax
+0x7FCE14: call    eax; Add automatic BoneMatrix3 at VS c31, count 54 registers (18 affine bone matrices at three float4 registers each).
 0x7FCE16: mov     ecx, [esi]
 0x7FCE18: mov     edx, [ecx]
 0x7FCE1A: mov     eax, [edx+38h]
 0x7FCE1D: push    offset aBonematrix3; "BoneMatrix3"
 0x7FCE22: call    eax
 0x7FCE24: push    eax; a2
-0x7FCE25: mov     ecx, offset dword_B46BA0; this
-0x7FCE2A: call    NiSmartPointer_Set??
+0x7FCE25: mov     ecx, offset unk_B46BA0; this
+0x7FCE2A: call    NiSmartPointer_Set??; Retain the BoneMatrix3 entry for selector-mask activation.
 0x7FCE2F: mov     ecx, [esi]
 0x7FCE31: mov     edx, [ecx]
 0x7FCE33: push    0
-0x7FCE35: push    offset flt_B46D68
+0x7FCE35: push    offset unk_B46D68
 0x7FCE3A: push    4
 0x7FCE3C: push    150h
 0x7FCE41: push    offset EmptyString
@@ -154,12 +154,12 @@
 0x7FCE4C: push    10000009h
 0x7FCE51: mov     eax, [edx+18h]
 0x7FCE54: push    offset aConstantgroup; "ConstantGroup"
-0x7FCE59: call    eax
+0x7FCE59: call    eax; Add Lighting30 vertex ConstantGroup at VS c10, count 21, backed by global slot 0x3D5.
 0x7FCE5B: mov     ecx, [esi]
 0x7FCE5D: mov     edx, [ecx]
 0x7FCE5F: mov     eax, [edx+18h]
 0x7FCE62: push    0
-0x7FCE64: push    offset flt_B46218
+0x7FCE64: push    offset unk_B46218
 0x7FCE69: push    4
 0x7FCE6B: push    80h ; '€'
 0x7FCE70: push    offset EmptyString
@@ -175,7 +175,7 @@
 0x7FCE8E: push    offset aDecalFade; "decal fade"
 0x7FCE93: call    eax
 0x7FCE95: push    eax; a2
-0x7FCE96: mov     ecx, offset dword_B46C14; this
+0x7FCE96: mov     ecx, offset g_Lighting30_DecalFadeConstantEntry; this
 0x7FCE9B: call    NiSmartPointer_Set??
 0x7FCEA0: mov     ecx, [esi]
 0x7FCEA2: mov     edx, [ecx]
@@ -197,7 +197,7 @@
 0x7FCED3: push    offset aDecalProj; "decal proj"
 0x7FCED8: call    eax
 0x7FCEDA: push    eax; a2
-0x7FCEDB: mov     ecx, offset dword_B46C18; this
+0x7FCEDB: mov     ecx, offset g_Lighting30_DecalProjectionConstantEntry; this
 0x7FCEE0: call    NiSmartPointer_Set??
 0x7FCEE5: cmp     dword ptr [ebx+2Ch], 0
 0x7FCEE9: lea     edi, [ebx+2Ch]
@@ -223,7 +223,7 @@
 0x7FCF29: mov     edx, [ecx]
 0x7FCF2B: mov     eax, [edx+18h]
 0x7FCF2E: push    0
-0x7FCF30: push    offset dword_B46F78
+0x7FCF30: push    offset flt_B46F78; DeferredRendering near-wall fix: native Lighting30 pixel ConstantGroup remains c0..c48. Plugin scratch constants c220-c222 are outside this native group; c222 carries pixel EyePosition c1 plus an enable flag for specular-family deferred position reconstruction.
 0x7FCF35: push    4
 0x7FCF37: push    310h
 0x7FCF3C: push    offset EmptyString
@@ -232,7 +232,7 @@
 0x7FCF45: push    0
 0x7FCF47: push    10000009h
 0x7FCF4C: push    offset aConstantgroup; "ConstantGroup"
-0x7FCF51: call    eax
+0x7FCF51: call    eax; Build Lighting30 pixel ConstantGroup at PS c0, count 49, backed by global slot 0x459.
 0x7FCF53: mov     ecx, [edi]
 0x7FCF55: mov     edx, [ecx]
 0x7FCF57: mov     eax, [edx+38h]
@@ -341,7 +341,7 @@
 0x7FD090: mov     edx, [ecx]
 0x7FD092: mov     eax, [edx+18h]
 0x7FD095: push    0
-0x7FD097: push    offset dword_B46DA8
+0x7FD097: push    offset unk_B46DA8
 0x7FD09C: push    4
 0x7FD09E: push    10h
 0x7FD0A0: push    offset EmptyString
@@ -350,12 +350,12 @@
 0x7FD0A9: push    0
 0x7FD0AB: push    10000007h
 0x7FD0B0: push    offset aEyeposition; "EyePosition"
-0x7FD0B5: call    eax
+0x7FD0B5: call    eax; DeferredRendering near-wall audit: primary Lighting30 object/projected vertex shaders observed in Oblivion bytecode do not bind EyePosition here; do not use this vertex c8 map for primary G-buffer position. Specular-family pixel c1 is the authoritative eye source.
 0x7FD0B7: mov     ecx, [esi]
 0x7FD0B9: mov     edx, [ecx]
 0x7FD0BB: mov     eax, [edx+18h]
 0x7FD0BE: push    0
-0x7FD0C0: push    offset flt_B46B3C
+0x7FD0C0: push    offset unk_B46B3C
 0x7FD0C5: push    4
 0x7FD0C7: push    4
 0x7FD0C9: push    offset EmptyString
@@ -369,7 +369,7 @@
 0x7FD0E2: mov     edx, [ecx]
 0x7FD0E4: mov     eax, [edx+18h]
 0x7FD0E7: push    0
-0x7FD0E9: push    offset flt_B46B40
+0x7FD0E9: push    offset unk_B46B40
 0x7FD0EE: push    4
 0x7FD0F0: push    4
 0x7FD0F2: push    offset EmptyString
@@ -397,7 +397,7 @@
 0x7FD134: mov     edx, [ecx]
 0x7FD136: mov     eax, [edx+18h]
 0x7FD139: push    0
-0x7FD13B: push    offset dword_B46B88
+0x7FD13B: push    offset unk_B46B88
 0x7FD140: push    4
 0x7FD142: push    10h
 0x7FD144: push    offset EmptyString
@@ -406,12 +406,12 @@
 0x7FD14D: push    0
 0x7FD14F: push    10000007h
 0x7FD154: push    offset aFogparam; "FogParam"
-0x7FD159: call    eax
+0x7FD159: call    eax; Fog constant-map decode: Lighting30 TexEffect alternate declares FogParam at vs c12 from B45E14[0x35D] / B46B88; writer is 0x7FEE40.
 0x7FD15B: mov     ecx, [esi]
 0x7FD15D: mov     edx, [ecx]
 0x7FD15F: mov     eax, [edx+18h]
 0x7FD162: push    0
-0x7FD164: push    offset dword_B46B78
+0x7FD164: push    offset unk_B46B78
 0x7FD169: push    4
 0x7FD16B: push    10h
 0x7FD16D: push    offset EmptyString
@@ -420,7 +420,7 @@
 0x7FD176: push    0
 0x7FD178: push    10000007h
 0x7FD17D: push    offset aFogcolor; "FogColor"
-0x7FD182: call    eax
+0x7FD182: call    eax; Fog constant-map decode: Lighting30 TexEffect alternate declares FogColor at vs c13 from B45E14[0x359] / B46B78; writer is 0x7FEE40.
 0x7FD184: cmp     dword ptr [ebx+7Ch], 0
 0x7FD188: lea     esi, [ebx+7Ch]
 0x7FD18B: jnz     loc_7FD245
@@ -445,7 +445,7 @@
 0x7FD1CC: mov     edx, [ecx]
 0x7FD1CE: mov     eax, [edx+18h]
 0x7FD1D1: push    0
-0x7FD1D3: push    offset dword_B46B48
+0x7FD1D3: push    offset unk_B46B48; Fog decode: Fill Color declaration is serviced by TexEffect writer 0x7FEE40.
 0x7FD1D8: push    4
 0x7FD1DA: push    10h
 0x7FD1DC: push    offset EmptyString
@@ -459,7 +459,7 @@
 0x7FD1F5: mov     edx, [ecx]
 0x7FD1F7: mov     eax, [edx+18h]
 0x7FD1FA: push    0
-0x7FD1FC: push    offset dword_B46B58
+0x7FD1FC: push    offset unk_B46B58; Fog decode: Rim Color declaration is serviced by TexEffect writer 0x7FEE40.
 0x7FD201: push    4
 0x7FD203: push    10h
 0x7FD205: push    offset EmptyString
@@ -473,7 +473,7 @@
 0x7FD21E: mov     edx, [ecx]
 0x7FD220: mov     eax, [edx+18h]
 0x7FD223: push    0
-0x7FD225: push    offset flt_B46B68
+0x7FD225: push    offset unk_B46B68; Fog decode: fVars declaration is serviced by TexEffect writer 0x7FEE40.
 0x7FD22A: push    4
 0x7FD22C: push    10h
 0x7FD22E: push    offset EmptyString
@@ -492,3 +492,30 @@
 0x7FD254: pop     ebx
 0x7FD255: add     esp, 10h
 0x7FD258: retn
+0x9D05C0: mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime
+0x9D05C3: push    eax
+0x9D05C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D05C9: pop     ecx
+0x9D05CA: retn
+0x9D05CB: mov     eax, [ebp-10h]
+0x9D05CE: push    eax
+0x9D05CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D05D4: pop     ecx
+0x9D05D5: retn
+0x9D05D6: mov     eax, [ebp-10h]
+0x9D05D9: push    eax
+0x9D05DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D05DF: pop     ecx
+0x9D05E0: retn
+0x9D05E1: mov     eax, [ebp-10h]
+0x9D05E4: push    eax
+0x9D05E5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D05EA: pop     ecx
+0x9D05EB: retn
+0x9D05EC: mov     edx, [esp+currentFlags]
+0x9D05F0: lea     eax, [edx-14h]
+0x9D05F3: mov     ecx, [edx-18h]
+0x9D05F6: xor     ecx, eax
+0x9D05F8: call    @__security_check_cookie@4
+0x9D05FD: mov     eax, offset stru_AF8F64
+0x9D0602: jmp     ___CxxFrameHandler3

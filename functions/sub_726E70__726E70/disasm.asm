@@ -6,7 +6,7 @@
 0x726E77: mov     edi, [esp+18h+arg_0]
 0x726E7B: push    edi
 0x726E7C: mov     esi, ecx
-0x726E7E: call    nullsub_returnvVoid_1arg
+0x726E7E: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x726E83: mov     eax, [edi+220h]
 0x726E89: push    1
 0x726E8B: lea     edx, [esp+1Ch+arg_0]

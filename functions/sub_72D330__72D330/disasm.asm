@@ -44,7 +44,7 @@
 0x72D3B4: jmp     short loc_72D391
 0x72D3B6: mov     eax, [esi]
 0x72D3B8: push    eax
-0x72D3B9: call    FormHeapFree
+0x72D3B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72D3BE: mov     ecx, [esp+2Ch+var_4]
 0x72D3C2: add     esp, 4
 0x72D3C5: mov     [esi+4], edi

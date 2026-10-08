@@ -1,1 +1,16 @@
-DIEFFECT
+struct DIEFFECT
+{
+DWORD dwSize;
+DWORD dwFlags;
+DWORD dwDuration;
+DWORD dwSamplePeriod;
+DWORD dwGain;
+DWORD dwTriggerButton;
+DWORD dwTriggerRepeatInterval;
+DWORD cAxes;
+LPDWORD rgdwAxes;
+LPLONG rglDirection;
+LPDIENVELOPE lpEnvelope;
+DWORD cbTypeSpecificParams;
+LPVOID lpvTypeSpecificParams;
+};

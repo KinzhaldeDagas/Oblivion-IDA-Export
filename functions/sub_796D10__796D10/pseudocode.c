@@ -1,68 +1,78 @@
-int *__thiscall sub_796D10(int *this, int *a2)
+// OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<vector<unsigned short*>>. The 4-byte inner element type selects the shared inner-vector copy machinery.
+OB_stVector_stVectorUShortPtr_010201A0 *__thiscall OB_stVector_stVectorUShortPtr_CopyAssign_010201A0(
+        OB_stVector_stVectorUShortPtr_010201A0 *this,
+        const OB_stVector_stVectorUShortPtr_010201A0 *source)
 {
-  int v3; // edx
+  OB_stVectorUShortPtr_010201A0 *begin; // edx
   unsigned int v4; // ebx
-  _DWORD *v6; // ecx
+  OB_stVector4_010201A0 *v6; // ecx
   unsigned int v7; // eax
-  _DWORD *v8; // eax
-  int v9; // eax
-  int v10; // edi
+  OB_stVector4_010201A0 *v8; // eax
+  OB_stVectorUShortPtr_010201A0 *v9; // eax
+  OB_stVectorUShortPtr_010201A0 *v10; // edi
   unsigned int v11; // eax
   int v12; // eax
-  int v13; // ebx
-  int v14; // ecx
-  int v15; // eax
+  const OB_stVectorUShortPtr_010201A0 *v13; // ebx
+  OB_stVectorUShortPtr_010201A0 *v14; // ecx
+  unsigned int v15; // eax
 
-  if ( this == a2 )
-    return this;
-  v3 = a2[1];
-  if ( !v3 || (v4 = (a2[2] - v3) >> 4) == 0 )
+  if ( this == source ) /*0x796d1a*/
+    return this; /*0x796d1a*/
+  begin = source->begin; /*0x796d20*/
+  if ( !begin || (v4 = source->end - begin) == 0 ) /*0x796d33*/
   {
-    sub_796890(this);
-    return this;
+    OB_stVector_stVectorUShortPtr_Clear_010201A0(this); /*0x796d35*/
+    return this; /*0x796d40*/
   }
-  v6 = (_DWORD *)*(this + 1);
-  if ( v6 )
-    v7 = (*(this + 2) - (int)v6) >> 4;
+  v6 = (OB_stVector4_010201A0 *)this->begin; /*0x796d43*/
+  if ( v6 ) /*0x796d48*/
+    v7 = ((char *)this->end - (char *)v6) >> 4; /*0x796d53*/
   else
-    v7 = 0;
-  if ( v4 > v7 )
+    v7 = 0; /*0x796d4a*/
+  if ( v4 <= v7 ) /*0x796d58*/
   {
-    if ( v6 )
-      v11 = (*(this + 3) - (int)v6) >> 4;
+    v8 = (OB_stVector4_010201A0 *)OB_stVector_stVectorUShortPtr_CopyAssignRange_010201A0( /*0x796d5d*/
+                                    begin,
+                                    source->end,
+                                    this->begin);
+    OB_stVector4_DestroyRange_010201A0(v8, (OB_stVector4_010201A0 *)this->end); /*0x796d6d*/
+    v9 = source->begin; /*0x796d72*/
+    if ( v9 ) /*0x796d7a*/
+      v10 = &this->begin[source->end - v9]; /*0x796d9b*/
     else
-      v11 = 0;
-    if ( v4 <= v11 )
-    {
-      if ( v6 )
-        v12 = (*(this + 2) - (int)v6) >> 4;
-      else
-        v12 = 0;
-      v13 = v3 + 0x10 * v12;
-      sub_795CE0(v3, v13, *(this + 1));
-      sub_796820(v13, a2[2], (char *)*(this + 2));
-    }
-    if ( v6 )
-    {
-      sub_795820(v6, (_DWORD *)*(this + 2));
-      FormHeapFree(*(this + 1));
-    }
-    v14 = a2[1];
-    if ( v14 )
-      v15 = (a2[2] - v14) >> 4;
-    else
-      v15 = 0;
-    if ( sub_795050(this, (char *)v15) )
-      sub_796820(a2[1], a2[2], (char *)*(this + 1));
-    return this;
+      v10 = this->begin; /*0x796d81*/
+    this->end = v10; /*0x796d86*/
+    return this; /*0x796d8d*/
   }
-  v8 = (_DWORD *)sub_795CE0(v3, a2[2], *(this + 1));
-  sub_794FC0(v8, (_DWORD *)*(this + 2));
-  v9 = a2[1];
-  if ( v9 )
-    v10 = *(this + 1) + 0x10 * ((a2[2] - v9) >> 4);
+  if ( v6 ) /*0x796dac*/
+    v11 = ((char *)this->capacityEnd - (char *)v6) >> 4; /*0x796db7*/
   else
-    v10 = *(this + 1);
-  *(this + 2) = v10;
-  return this;
+    v11 = 0; /*0x796dae*/
+  if ( v4 > v11 ) /*0x796dbc*/
+  {
+    if ( v6 ) /*0x796dfe*/
+    {
+      OB_stVector4_DestroyRangeThunk_010201A0(v6, (OB_stVector4_010201A0 *)this->end); /*0x796e07*/
+      FormHeapFree((unsigned int)this->begin); /*0x796e10*/
+    }
+    v14 = source->begin; /*0x796e18*/
+    if ( v14 ) /*0x796e1d*/
+      v15 = source->end - v14; /*0x796e28*/
+    else
+      v15 = 0; /*0x796e1f*/
+    if ( OB_stVector16_Buy_010201A0((OB_stVector16_010201A0 *)this, v15) ) /*0x796e2e*/
+      this->end = OB_stVector_stVectorUShortPtr_UninitializedCopyRangeThunk_010201A0( /*0x796e4a*/
+                    source->begin,
+                    source->end,
+                    this->begin);
+    return this; /*0x796e50*/
+  }
+  if ( v6 ) /*0x796dc0*/
+    v12 = ((char *)this->end - (char *)v6) >> 4; /*0x796dcb*/
+  else
+    v12 = 0; /*0x796dc2*/
+  v13 = &begin[v12]; /*0x796dd4*/
+  OB_stVector_stVectorUShortPtr_CopyAssignRange_010201A0(begin, v13, this->begin); /*0x796dd8*/
+  this->end = OB_stVector_stVectorUShortPtr_UninitializedCopyRangeThunk_010201A0(v13, source->end, this->end); /*0x796df2*/
+  return this; /*0x796d3c*/
 }

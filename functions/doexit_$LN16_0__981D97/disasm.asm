@@ -6,3 +6,5 @@
 0x981DAA: pop     ecx
 0x981DAB: push    dword ptr [ebp+8]; uExitCode
 0x981DAE: call    ___crtExitProcess
+0x981DC5: call    __SEH_epilog4
+0x981DCA: retn

@@ -1,1 +1,1 @@
-EffectSettingCollection
+struct EffectSettingCollection;

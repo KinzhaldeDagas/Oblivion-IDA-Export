@@ -40,10 +40,10 @@
 0x422B7E: lea     ecx, [eax+0Ch]
 0x422B81: mov     eax, [ecx]
 0x422B83: mov     edx, [eax+8]
-0x422B86: push    0
+0x422B86: push    0; linkContext
 0x422B88: call    edx
-0x422B8A: push    eax
-0x422B8B: call    ActiveEffect_Base_PostLinkAEList
+0x422B8A: push    eax; activeEffectList
+0x422B8B: call    ActiveEffect_Base_PostLinkAEList; Verified TESObjectREFR_PostLinkModifiedExtraList runs the post-link phase for changed NonActorMagicTarget ExtraData (mask 0x200000): obtains its embedded MagicTarget active-effect list and calls ActiveEffect_Base_PostLinkAEList(list, nullptr). The list link phase runs earlier in ExtraDataList_LoadModified.
 0x422B90: add     esp, 8
 0x422B93: pop     esi
 0x422B94: retn    0Ch

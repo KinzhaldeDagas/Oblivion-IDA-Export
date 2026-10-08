@@ -1,28 +1,32 @@
-void __thiscall sub_791630(unsigned int *this, int *a2)
+//
+// [2026-10-05 root ownership] Root extension uses this push on parent+8 after native constructor7915C0 and wrapped branch Compute. ChildPlacement layout index0, fraction4, owned CBranch*8, stride0C. Retained roots then participate in native BuildBranchVector/volume LOD and recursive cleanup790D00. Unretained/pruned root branches are cleaned and freed explicitly.
+void __thiscall OB_CBranch_childVectorPush_010201A0(
+        OB_stVectorBranchChildRef_010201A0 *this,
+        OB_CBranchChildRef_010201A0 *value)
 {
-  unsigned int v3; // edi
+  OB_CBranchChildRef_010201A0 *begin; // edi
   unsigned int v4; // ecx
-  _DWORD *v5; // edi
-  char *v6; // ebx
-  unsigned int *v7; // [esp+8h] [ebp-8h] BYREF
+  OB_CBranchChildRef_010201A0 *end; // edi
+  OB_CBranchChildRef_010201A0 *v6; // ebx
+  OB_stVectorBranchChildRefIterator_010201A0 result; // [esp+8h] [ebp-8h] BYREF
 
-  v3 = *(this + 1);
-  if ( v3 )
-    v4 = (int)(*(this + 2) - v3) / 0xC;
+  begin = this->begin; /*0x791637*/
+  if ( begin ) /*0x79163c*/
+    v4 = this->end - begin; /*0x791655*/
   else
-    v4 = 0;
-  if ( v3 && v4 < (int)(*(this + 3) - v3) / 0xC )
+    v4 = 0; /*0x79163e*/
+  if ( begin && v4 < this->capacityEnd - begin ) /*0x791672*/
   {
-    v5 = (_DWORD *)*(this + 2);
-    LOBYTE(v7) = 0;
-    sub_6F1290(v5, 1, a2);
-    *(this + 2) = (unsigned int)(v5 + 3);
+    end = this->end; /*0x79167c*/
+    LOBYTE(result.owner) = 0; /*0x79167f*/
+    sub_6F1290(end, 1, value); /*0x79168f*/
+    this->end = end + 1; /*0x79169a*/
   }
   else
   {
-    v6 = (char *)*(this + 2);
-    if ( v3 > (unsigned int)v6 )
-      _invalid_parameter_noinfo();
-    sub_791460(this, &v7, this, v6, a2);
+    v6 = this->end; /*0x7916a6*/
+    if ( begin > v6 ) /*0x7916ab*/
+      _invalid_parameter_noinfo(); /*0x7916ad*/
+    OB_stVectorBranchChildRef_InsertOneChecked_010201A0(this, &result, this, v6, value); /*0x7916c0*/
   }
 }

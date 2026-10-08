@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x544450",
-    "line": "or      eax, offset byte_B3668C",
+    "line": "or      eax, offset unk_B3668C",
     "mnemonic": "or",
     "size": 5
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x544457",
-    "line": "adc     eax, offset dword_B36680",
+    "line": "adc     eax, offset stru_B36680",
     "mnemonic": "adc",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x544475",
-    "line": "call    nullsub_returnVoid_2arg",
+    "line": "call    nullsub_returnVoid_2arg; nullsub_returnVoid_2arg; used by Low/MiddleLow movement/package setter slots and MiddleHigh movement flag setter slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x5444AC",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x5444B7",
-    "line": "call    sub_53FC90",
+    "line": "call    sub_53FC90; Exterior fog day/night helper: computes adjusted sunset/night blend end from climate night plus transition padding.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5444C2",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5444CD",
-    "line": "call    sub_53FC10",
+    "line": "call    sub_53FC10; Exterior fog day/night helper: computes adjusted sunrise blend start from climate sunrise minus transition padding.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x5445AC",
-    "line": "mov     [esp+arg_18], eax",
+    "line": "mov     [esp+other.y], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x5445B5",
-    "line": "mov     [esp+arg_14], edx",
+    "line": "mov     [esp+other.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5445B9",
-    "line": "mov     [esp+arg_1C], ecx",
+    "line": "mov     [esp+other.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -808,12 +808,6 @@
     "line": "jmp     short loc_5445E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5445DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x5445E0",
@@ -913,7 +907,7 @@
   },
   {
     "ea": "0x544610",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +937,7 @@
   },
   {
     "ea": "0x54461D",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1015,7 @@
   },
   {
     "ea": "0x54463D",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,25 +1039,25 @@
   },
   {
     "ea": "0x544648",
-    "line": "lea     edx, [esp+4+arg_14]",
+    "line": "lea     edx, [esp+4+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x54464C",
-    "line": "push    edx",
+    "line": "push    edx; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54464D",
-    "line": "mov     ecx, offset dword_B36680",
+    "line": "mov     ecx, offset stru_B36680; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x544652",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1075,7 @@
   },
   {
     "ea": "0x54465B",
-    "line": "fld     [esp+4+arg_14]",
+    "line": "fld     [esp+4+other.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1093,7 +1087,7 @@
   },
   {
     "ea": "0x544662",
-    "line": "fld     [esp+4+arg_18]",
+    "line": "fld     [esp+4+other.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1105,7 +1099,7 @@
   },
   {
     "ea": "0x544669",
-    "line": "fld     [esp+4+arg_1C]",
+    "line": "fld     [esp+4+other.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1153,19 +1147,19 @@
   },
   {
     "ea": "0x544684",
-    "line": "mov     eax, [esp+arg_14]",
+    "line": "mov     eax, [esp+other.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x544688",
-    "line": "mov     ecx, [esp+arg_18]",
+    "line": "mov     ecx, [esp+other.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x54468C",
-    "line": "mov     edx, [esp+arg_1C]",
+    "line": "mov     edx, [esp+other.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1195,7 +1189,7 @@
   },
   {
     "ea": "0x5446A7",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1249,7 +1243,7 @@
   },
   {
     "ea": "0x5446CB",
-    "line": "lea     ecx, [esp+arg_14]",
+    "line": "lea     ecx, [esp+other]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1279,7 +1273,7 @@
   },
   {
     "ea": "0x5446E1",
-    "line": "fstp    [esp+arg_14]",
+    "line": "fstp    [esp+other.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1291,7 +1285,7 @@
   },
   {
     "ea": "0x5446EB",
-    "line": "fstp    [esp+arg_18]",
+    "line": "fstp    [esp+other.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1303,13 +1297,13 @@
   },
   {
     "ea": "0x5446F5",
-    "line": "fstp    [esp+arg_1C]",
+    "line": "fstp    [esp+other.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5446F9",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1333,7 @@
   },
   {
     "ea": "0x544707",
-    "line": "fld     [esp+arg_1C]",
+    "line": "fld     [esp+other.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1357,7 +1351,7 @@
   },
   {
     "ea": "0x544712",
-    "line": "fld     [esp+0Ch+arg_18]",
+    "line": "fld     [esp+0Ch+other.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1369,7 +1363,7 @@
   },
   {
     "ea": "0x54471A",
-    "line": "fld     [esp+0Ch+arg_14]",
+    "line": "fld     [esp+0Ch+other.x]",
     "mnemonic": "fld",
     "size": 4
   },

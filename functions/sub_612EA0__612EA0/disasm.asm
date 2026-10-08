@@ -4,7 +4,7 @@
 0x612EA8: push    edi
 0x612EA9: fld     st
 0x612EAB: mov     esi, ecx
-0x612EAD: call    Double_To_SInt32
+0x612EAD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x612EB2: mov     edi, eax
 0x612EB4: mov     [esp+10h+arg_0], edi
 0x612EB8: fild    [esp+10h+arg_0]

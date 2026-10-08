@@ -12,7 +12,6 @@
 0x93DB63: fst     [esp+170h+var_158]
 0x93DB67: fstp    [esp+170h+var_134]
 0x93DB6B: jmp     short loc_93DB70
-0x93DB6D: align 10h
 0x93DB70: mov     ecx, [esp+170h+var_158]
 0x93DB74: lea     eax, [esp+170h+var_110]
 0x93DB78: push    eax; int

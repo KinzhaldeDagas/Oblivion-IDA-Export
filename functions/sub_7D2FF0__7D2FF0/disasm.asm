@@ -1,4 +1,4 @@
-0x7D2FF0: sub     esp, 34h
+0x7D2FF0: sub     esp, 34h; Compute and cache the camera-relative full-list ranking value at ShadowSceneLight+0xD0.
 0x7D2FF3: mov     eax, [esp+34h+arg_0]
 0x7D2FF7: mov     edx, [eax+8Ch]
 0x7D2FFD: push    esi
@@ -124,7 +124,7 @@
 0x7D3182: fstp    [esp+38h+arg_0]
 0x7D3186: fld     [esp+38h+arg_0]
 0x7D318A: fmul    dword ptr [esi+0D0h]
-0x7D3190: fstp    [esp+38h+arg_0]
+0x7D3190: fstp    [esp+38h+arg_0]; MEF v57 VERIFY 2026-10-08: VERIFIED PERF-6 precision: scorer rounds product through DWORD float stack slot before caching at+ D0 and returning ST0; caller7C721D also stores to float. v57's float score callback/result locals match these observed rounding points; no extended-return precision regression established.
 0x7D3194: fld     [esp+38h+arg_0]
 0x7D3198: fst     dword ptr [esi+0D0h]
 0x7D319E: pop     esi

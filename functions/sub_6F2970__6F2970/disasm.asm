@@ -13,15 +13,15 @@
 0x6F298E: mov     ecx, [esi+4]
 0x6F2991: mov     [edi+4], ecx
 0x6F2994: mov     edx, [esi+8]
-0x6F2997: push    0FFFFFFFFh
+0x6F2997: push    0FFFFFFFFh; count
 0x6F2999: mov     [edi+8], edx
 0x6F299C: mov     eax, [esi+0Ch]
-0x6F299F: push    0
+0x6F299F: push    0; offset
 0x6F29A1: lea     ecx, [esi+10h]
-0x6F29A4: push    ecx
-0x6F29A5: lea     ecx, [edi+10h]
+0x6F29A4: push    ecx; source
+0x6F29A5: lea     ecx, [edi+10h]; this
 0x6F29A8: mov     [edi+0Ch], eax
-0x6F29AB: call    sub_414420
+0x6F29AB: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6F29B0: cmp     esi, ebx
 0x6F29B2: jnz     short loc_6F2983
 0x6F29B4: mov     eax, edi

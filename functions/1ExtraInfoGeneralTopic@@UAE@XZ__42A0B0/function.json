@@ -1,19 +1,36 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "ExtraInfoGeneralTopic::~ExtraInfoGeneralTopic(void)",
+  "chunks": [
+    [
+      "0x42A0B0",
+      "0x42A11A"
+    ],
+    [
+      "0x9ABA20",
+      "0x9ABA43"
+    ]
+  ],
+  "chunks_sha256": "57bf706b5f054001ddafa1a9bd65ac60c60fb2cf9d0829354d7114af85eadf51",
+  "comment_regular": "ExtraInfoGeneralTopic destructor clears the cached MenuTopic's isInfoGeneralTopic ownership marker, destroys its responses/display name, then frees the MenuTopic allocation.",
+  "comment_repeatable": "ExtraInfoGeneralTopic destructor clears the cached MenuTopic's isInfoGeneralTopic ownership marker, destroys its responses/display name, then frees the MenuTopic allocation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "ExtraInfoGeneralTopic::Destructor",
   "end_ea": "0x42A11A",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "??1ExtraInfoGeneralTopic@@UAE@XZ",
+  "name": "ExtraInfoGeneralTopic::Destructor",
   "segment": ".text",
   "sha256": "7df486d258558e4656b777d7f701904bf20a93e5b3e9e34adaff2b93a28d0fea",
   "size": 106,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x42A0B0",
-  "type": "void __thiscall(ExtraInfoGeneralTopic *__hidden this)",
-  "xrefs_from_count": 41,
+  "total_chunk_size": 141,
+  "type": "void __thiscall(ExtraInfoGeneralTopicView *this)",
+  "xrefs_from_count": 52,
   "xrefs_to_count": 1
 }

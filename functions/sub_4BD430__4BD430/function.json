@@ -1,19 +1,36 @@
 {
-  "callees_count": 36,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4BD430",
+  "chunks": [
+    [
+      "0x4BD430",
+      "0x4BD6DA"
+    ],
+    [
+      "0x9B4350",
+      "0x9B43B3"
+    ]
+  ],
+  "chunks_sha256": "de22fe827cbadd72cd0bbedef34d7b21d7508a18b134c2a75efc70d42b1d4aaa",
+  "comment_regular": "Verified DistantLOD cell task producer: allocates a 0x2C DistantLODLoaderTaskData payload and stores cell/worldspace/mode plus instancedLODNode (+0x1C) and cellLODBuffer (+0x20). DistantLOD_UpdateExteriorGrid supplies the global scene node and a per-cell Ni2DBuffer. The generic bound-object callback retains the buffer in queued records; the tree override uses the node and ignores the buffer.",
+  "comment_repeatable": "Verified DistantLOD cell task producer: allocates a 0x2C DistantLODLoaderTaskData payload and stores cell/worldspace/mode plus instancedLODNode (+0x1C) and cellLODBuffer (+0x20). DistantLOD_UpdateExteriorGrid supplies the global scene node and a per-cell Ni2DBuffer. The generic bound-object callback retains the buffer in queued records; the tree override uses the node and ignores the buffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "DistantLOD_QueueCellLoadTask",
   "end_ea": "0x4BD6DA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BD430",
+  "name": "DistantLOD_QueueCellLoadTask",
   "segment": ".text",
   "sha256": "8e70c489ca06650967bcafdb9dc5170d68cd9e6017c121610296facfcec34306",
   "size": 682,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BD430",
-  "type": "void __thiscall(void *this, TESWorldSpace *arg0, int, int, Ni2DBuffer *, Ni2DBuffer *, int, int)",
-  "xrefs_from_count": 233,
+  "total_chunk_size": 781,
+  "type": "void __thiscall(LockFreeMap *this, TESWorldSpace *worldspace, int groupX, int groupY, NiNode *instancedLODNode, Ni2DBuffer *cellLODBuffer, int priorityIndex, DistantLODLoadMode lodMode)",
+  "xrefs_from_count": 264,
   "xrefs_to_count": 1
 }

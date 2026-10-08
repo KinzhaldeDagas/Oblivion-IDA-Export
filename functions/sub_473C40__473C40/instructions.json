@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x473C40",
-    "line": "push    ecx",
+    "line": "push    ecx; Writes the 2-byte actor-animation payload length, then delegates to ActorAnimData_SaveState when animation data exists and the actor is eligible. Mirrors Actor_GetAnimationSaveStateSize.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x473C6C",
-    "line": "call    sub_473420",
+    "line": "call    ActorAnimData_GetSaveStateSize; Computes ActorAnimData serialized size from fixed slot/key/action fields plus variable active sequence and current/queued idle state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x473C78",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x473C7E",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x473C7F",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x473CA3",
-    "line": "call    sub_473600",
+    "line": "call    ActorAnimData_SaveState; Serializes ActorAnimData active/queued keys, action state, sequence timing blocks, movement/root state, and current/queued idle records.",
     "mnemonic": "call",
     "size": 5
   },

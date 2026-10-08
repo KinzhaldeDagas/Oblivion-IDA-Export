@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D34C0",
-    "line": "push    ebp",
+    "line": "push    ebp; Test overlap between two camera/frustum volumes using corners, planes, and edge intersections.",
     "mnemonic": "push",
     "size": 1
   },
@@ -3739,7 +3739,7 @@
   },
   {
     "ea": "0x7D3F12",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
@@ -4081,7 +4081,7 @@
   },
   {
     "ea": "0x7D3FFD",
-    "line": "lea     ecx, [esp+318h+var_188]",
+    "line": "lea     ecx, [esp+318h+self]; self",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4093,13 +4093,13 @@
   },
   {
     "ea": "0x7D400B",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7D4010",
-    "line": "mov     [esp+314h+var_188.Camera], esi",
+    "line": "mov     [esp+314h+self.Camera], esi",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4117,7 +4117,7 @@
   },
   {
     "ea": "0x7D401E",
-    "line": "lea     ecx, [esp+318h+var_188]; this",
+    "line": "lea     ecx, [esp+318h+self]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4129,7 +4129,7 @@
   },
   {
     "ea": "0x7D4030",
-    "line": "call    NiCullingProcess__SetFrustum",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4141,7 +4141,7 @@
   },
   {
     "ea": "0x7D403A",
-    "line": "lea     esi, [esp+314h+var_188.Planes]",
+    "line": "lea     esi, [esp+314h+self.Planes]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4159,7 +4159,7 @@
   },
   {
     "ea": "0x7D404A",
-    "line": "mov     [esp+314h+var_188.Camera], ebx",
+    "line": "mov     [esp+314h+self.Camera], ebx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4177,13 +4177,13 @@
   },
   {
     "ea": "0x7D4058",
-    "line": "lea     ecx, [esp+318h+var_188]; this",
+    "line": "lea     ecx, [esp+318h+self]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7D405F",
-    "line": "call    NiCullingProcess__SetFrustum",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4195,7 +4195,7 @@
   },
   {
     "ea": "0x7D4069",
-    "line": "lea     esi, [esp+314h+var_188.Planes]",
+    "line": "lea     esi, [esp+314h+self.Planes]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4561,7 +4561,7 @@
   },
   {
     "ea": "0x7D413D",
-    "line": "lea     ecx, [esp+314h+var_188]; this",
+    "line": "lea     ecx, [esp+314h+self]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4591,7 +4591,7 @@
   },
   {
     "ea": "0x7D4155",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6121,7 +6121,7 @@
   },
   {
     "ea": "0x7D44C7",
-    "line": "lea     ecx, [esp+314h+var_188]; this",
+    "line": "lea     ecx, [esp+314h+self]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -6145,7 +6145,7 @@
   },
   {
     "ea": "0x7D44DD",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6301,7 +6301,7 @@
   },
   {
     "ea": "0x7D452B",
-    "line": "lea     ecx, [esp+314h+var_188]; this",
+    "line": "lea     ecx, [esp+314h+self]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -6319,7 +6319,7 @@
   },
   {
     "ea": "0x7D453F",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6400,5 +6400,83 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CEAC0",
+    "line": "lea     ecx, [ebp+self]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEAC6",
+    "line": "jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEACB",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEACF",
+    "line": "lea     eax, [edx-304h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEAD5",
+    "line": "mov     ecx, [edx-308h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEADB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEADD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEAE2",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEAE5",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEAE8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEAEA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEAEF",
+    "line": "mov     eax, offset stru_AF7984",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEAF4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

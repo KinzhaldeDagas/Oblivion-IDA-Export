@@ -14,6 +14,6 @@
 0x77D1AC: cmp     dword ptr ds:0B40120h, 0
 0x77D1B3: jnz     short locret_77D1C0
 0x77D1B5: push    offset aFailedToCrea_1; "Failed to create shader factory!"
-0x77D1BA: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x77D1BA: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x77D1BF: pop     ecx
 0x77D1C0: retn

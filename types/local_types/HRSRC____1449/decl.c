@@ -1,1 +1,4 @@
-HRSRC__
+struct HRSRC__
+{
+int unused;
+};

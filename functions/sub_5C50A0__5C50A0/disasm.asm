@@ -19,9 +19,9 @@
 0x5C50DD: call    edx
 0x5C50DF: xor     ebx, ebx
 0x5C50E1: mov     [esp+0F4h+var_DC], eax
-0x5C50E5: mov     [esp+0F4h+var_B4], ebx
+0x5C50E5: mov     [esp+0F4h+texture], ebx
 0x5C50E9: mov     [esp+0F4h+var_4], ebx
-0x5C50F0: mov     [esp+0F4h+var_A8], ebx
+0x5C50F0: mov     [esp+0F4h+slot], ebx
 0x5C50F4: mov     [esp+0F4h+var_D8], ebx
 0x5C50F8: mov     dword ptr [esp+0F4h+ArgList], ebx
 0x5C50FC: mov     [esp+0F4h+var_AC], bx
@@ -47,23 +47,23 @@
 0x5C5157: test    eax, eax
 0x5C5159: jnz     short loc_5C51D3
 0x5C515B: push    ebx
-0x5C515C: call    FormHeapFree
+0x5C515C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5161: push    ebx
-0x5C5162: call    FormHeapFree
+0x5C5162: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5167: mov     eax, [esp+0FCh+var_D4]
 0x5C516B: push    eax
-0x5C516C: call    FormHeapFree
+0x5C516C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5171: mov     ecx, [esp+100h+var_CC]
 0x5C5175: push    ecx
 0x5C5176: mov     [esp+104h+var_D4], ebx
 0x5C517A: mov     word ptr [esp+104h+var_D0+2], bx
 0x5C517F: mov     word ptr [esp+104h+var_D0], bx
-0x5C5184: call    FormHeapFree
+0x5C5184: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5189: push    ebx
 0x5C518A: mov     [esp+108h+var_CC], ebx
 0x5C518E: mov     word ptr [esp+108h+var_C8+2], bx
 0x5C5193: mov     word ptr [esp+108h+var_C8], bx
-0x5C5198: call    FormHeapFree
+0x5C5198: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C519D: mov     esi, [esp+108h+var_D8]
 0x5C51A1: add     esp, 14h
 0x5C51A4: cmp     esi, ebx
@@ -92,7 +92,6 @@
 0x5C51F3: cmp     esi, ebx
 0x5C51F5: jz      loc_5C515B
 0x5C51FB: jmp     short loc_5C5200
-0x5C51FD: align 10h
 0x5C5200: cmp     ebp, [edi+870h]
 0x5C5206: jz      short loc_5C5242
 0x5C5208: cmp     esi, ebx
@@ -130,7 +129,7 @@
 0x5C5266: push    0FB4h
 0x5C526B: sub     esp, 8
 0x5C526E: mov     ecx, esp
-0x5C5270: mov     [esp+104h+var_E0], esp
+0x5C5270: mov     [esp+104h+outTexture], esp
 0x5C5274: push    eax; int
 0x5C5275: call    BSStringT_constr_str
 0x5C527A: mov     edx, ds:0B38F70h
@@ -140,9 +139,9 @@
 0x5C5289: push    edx
 0x5C528A: mov     byte ptr [esp+110h+var_4], 8
 0x5C5292: call    BSStringT_constr_str
-0x5C5297: mov     ecx, edi
+0x5C5297: mov     ecx, edi; this
 0x5C5299: mov     byte ptr [esp+10Ch+var_4], 7
-0x5C52A1: call    sub_5C3440
+0x5C52A1: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C52A6: mov     ecx, eax
 0x5C52A8: call    Tile_SetString
 0x5C52AD: mov     eax, [esi+1Ch]
@@ -160,13 +159,13 @@
 0x5C52D3: mov     edx, ds:0B38F88h
 0x5C52D9: sub     esp, 8
 0x5C52DC: mov     ecx, esp
-0x5C52DE: mov     [esp+10Ch+var_E0], esp
+0x5C52DE: mov     [esp+10Ch+outTexture], esp
 0x5C52E2: push    edx
 0x5C52E3: mov     byte ptr [esp+110h+var_4], 9
 0x5C52EB: call    BSStringT_constr_str
-0x5C52F0: mov     ecx, edi
+0x5C52F0: mov     ecx, edi; this
 0x5C52F2: mov     byte ptr [esp+10Ch+var_4], 7
-0x5C52FA: call    sub_5C3440
+0x5C52FA: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C52FF: mov     ecx, eax
 0x5C5301: call    Tile_SetString
 0x5C5306: mov     eax, [esp+0F4h+var_DC]
@@ -181,7 +180,7 @@
 0x5C5328: movzx   eax, word ptr [eax+0B6h]
 0x5C532F: xor     ebp, ebp
 0x5C5331: cmp     eax, ebx
-0x5C5333: mov     [esp+0F4h+var_E0], eax
+0x5C5333: mov     [esp+0F4h+outTexture], eax
 0x5C5337: jbe     loc_5C5A19
 0x5C533D: lea     ecx, [ecx+0]
 0x5C5340: mov     ecx, ds:0B333C4h
@@ -195,33 +194,33 @@
 0x5C5360: xor     eax, eax
 0x5C5362: jmp     loc_5C53F1
 0x5C5367: push    ebx
-0x5C5368: call    FormHeapFree
+0x5C5368: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C536D: push    ebx
-0x5C536E: call    FormHeapFree
+0x5C536E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5373: mov     ecx, [esp+0FCh+var_D4]
 0x5C5377: push    ecx
-0x5C5378: call    FormHeapFree
+0x5C5378: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C537D: mov     edx, [esp+100h+var_CC]
 0x5C5381: push    edx
 0x5C5382: mov     [esp+104h+var_D4], ebx
 0x5C5386: mov     word ptr [esp+104h+var_D0+2], bx
 0x5C538B: mov     word ptr [esp+104h+var_D0], bx
-0x5C5390: call    FormHeapFree
+0x5C5390: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5395: push    ebx
 0x5C5396: mov     [esp+108h+var_CC], ebx
 0x5C539A: mov     word ptr [esp+108h+var_C8+2], bx
 0x5C539F: mov     word ptr [esp+108h+var_C8], bx
-0x5C53A4: call    FormHeapFree
+0x5C53A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C53A9: add     esp, 14h
-0x5C53AC: lea     ecx, [esp+0F4h+var_D8]; this
+0x5C53AC: lea     ecx, [esp+0F4h+var_D8]; slot
 0x5C53B0: mov     byte ptr [esp+0F4h+var_4], 1
-0x5C53B8: call    sub_7016A0
-0x5C53BD: lea     ecx, [esp+0F4h+var_A8]; this
+0x5C53B8: call    NiPointerSlot_Release
+0x5C53BD: lea     ecx, [esp+0F4h+slot]; slot
 0x5C53C1: mov     byte ptr [esp+0F4h+var_4], bl
-0x5C53C8: call    sub_7016A0
-0x5C53CD: lea     ecx, [esp+0F4h+var_B4]; this
+0x5C53C8: call    NiPointerSlot_Release
+0x5C53CD: lea     ecx, [esp+0F4h+texture]; slot
 0x5C53D1: mov     [esp+0F4h+var_4], 0FFFFFFFFh
-0x5C53DC: call    sub_7016A0
+0x5C53DC: call    NiPointerSlot_Release
 0x5C53E1: xor     al, al
 0x5C53E3: jmp     loc_5C5ADE
 0x5C53E8: mov     edx, [eax+0B0h]
@@ -233,7 +232,7 @@
 0x5C5400: repe cmpsb
 0x5C5402: jz      short loc_5C5416
 0x5C5404: add     ebp, 1
-0x5C5407: cmp     ebp, [esp+0F4h+var_E0]
+0x5C5407: cmp     ebp, [esp+0F4h+outTexture]
 0x5C540B: jb      loc_5C5340
 0x5C5411: jmp     loc_5C5A19
 0x5C5416: mov     edx, [eax]
@@ -245,15 +244,15 @@
 0x5C5423: jz      loc_5C5A19
 0x5C5429: lea     ecx, [ebp+4]
 0x5C542C: push    ecx; lpAddend
-0x5C542D: mov     [esp+0F8h+var_A8], ebp
+0x5C542D: mov     [esp+0F8h+slot], ebp
 0x5C5431: call    dword ptr ds:0A28078h
 0x5C5437: cmp     [esp+0F4h+arg_0], bl
 0x5C543E: push    ecx
 0x5C543F: jz      loc_5C58A5
 0x5C5445: fld     dword ptr ds:0A3721Ch
-0x5C544B: lea     ecx, [esp+0F8h+var_90]
-0x5C544F: fstp    [esp+0F8h+var_F8]; float
-0x5C5452: call    sub_70FD80
+0x5C544B: lea     ecx, [esp+0F8h+var_90]; this
+0x5C544F: fstp    [esp+0F8h+hairLength]; angleY
+0x5C5452: call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.
 0x5C5457: mov     edi, [esp+0F4h+var_DC]
 0x5C545B: mov     ecx, [edi+1C8h]
 0x5C5461: mov     edx, [ecx+24h]
@@ -285,8 +284,8 @@
 0x5C54A6: push    eax
 0x5C54A7: call    sub_553620
 0x5C54AC: add     esp, 18h
-0x5C54AF: push    offset sub_43ACE0; a5
-0x5C54B4: push    offset sub_43EB30; a4
+0x5C54AF: push    offset FaceGenMatrix_Destruct; a5
+0x5C54B4: push    offset FaceGenMatrix_Construct; a4
 0x5C54B9: push    4; size
 0x5C54BB: push    18h; a2
 0x5C54BD: lea     ecx, [esp+104h+a1]
@@ -294,18 +293,18 @@
 0x5C54C5: mov     esi, eax
 0x5C54C7: call    ArrayConstructor
 0x5C54CC: lea     edx, [esp+0F4h+a1]
-0x5C54D3: push    edx
-0x5C54D4: mov     ecx, edi
+0x5C54D3: push    edx; outAbsolute
+0x5C54D4: mov     ecx, edi; this
 0x5C54D6: mov     byte ptr [esp+0F8h+var_4], 0Ah
-0x5C54DE: call    sub_5221C0
+0x5C54DE: call    TESNPC_BuildAbsoluteFaceGenParameters; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.
 0x5C54E3: cmp     esi, ebx
 0x5C54E5: jz      short loc_5C54FB
 0x5C54E7: lea     eax, [esp+0F4h+var_D8]
-0x5C54EB: push    eax
+0x5C54EB: push    eax; outGeometry
 0x5C54EC: lea     ecx, [esp+0F8h+a1]
-0x5C54F3: push    ecx
-0x5C54F4: mov     ecx, esi
-0x5C54F6: call    sub_559870
+0x5C54F3: push    ecx; parameters
+0x5C54F4: mov     ecx, esi; this
+0x5C54F6: call    BSFaceGenModel_CreateMorphedGeometry; Clone model geometry and apply both EGM position banks at scale 1.0. The wrapper returns the deformed geometry without regenerating normals.
 0x5C54FB: mov     ecx, [esp+0F4h+var_D8]
 0x5C54FF: cmp     ecx, ebx
 0x5C5501: jz      loc_5C5882
@@ -313,12 +312,12 @@
 0x5C550C: call    NiObjectNET_SetName
 0x5C5511: fld     dword ptr [edi+1CCh]
 0x5C5517: mov     edx, [esp+0F4h+var_D8]
-0x5C551B: fstp    [esp+0F4h+var_E0]
-0x5C551F: fld     [esp+0F4h+var_E0]
+0x5C551B: fstp    [esp+0F4h+outTexture]
+0x5C551F: fld     [esp+0F4h+outTexture]
 0x5C5523: push    ecx
-0x5C5524: fstp    [esp+0F8h+var_F8]; float
-0x5C5527: push    edx; int
-0x5C5528: call    sub_550980
+0x5C5524: fstp    [esp+0F8h+hairLength]; hairLength
+0x5C5527: push    edx; hairGeometry
+0x5C5528: call    BSFaceGen_ApplyHairLengthMorph; Apply the stored TESNPC hairLength when creating FaceGenHair in the Race/Sex menu.
 0x5C552D: add     esp, 8
 0x5C5530: test    byte ptr [ebp+18h], 1
 0x5C5534: jz      short loc_5C553F
@@ -336,18 +335,18 @@
 0x5C555C: call    BSStringT_Static_Format
 0x5C5561: mov     ecx, dword ptr [esp+100h+ArgList]
 0x5C5565: add     esp, 0Ch
-0x5C5568: push    ebx; char
-0x5C5569: push    ebx; char
-0x5C556A: push    ecx; ArgList
+0x5C5568: push    ebx; searchArchives
+0x5C5569: push    ebx; allowMissing
+0x5C556A: push    ecx; path
 0x5C556B: mov     ecx, ds:0B333A0h
-0x5C5571: lea     edx, [esp+100h+var_E0]
-0x5C5575: push    edx; int
-0x5C5576: call    sub_442890
-0x5C557B: push    eax
-0x5C557C: lea     ecx, [esp+0F8h+var_B4]
+0x5C5571: lea     edx, [esp+100h+outTexture]
+0x5C5575: push    edx; outTexture
+0x5C5576: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x5C557B: push    eax; incoming
+0x5C557C: lea     ecx, [esp+0F8h+texture]; this
 0x5C5580: mov     byte ptr [esp+0F8h+var_4], 0Bh
-0x5C5588: call    sub_55E2A0
-0x5C558D: mov     eax, [esp+0F4h+var_E0]
+0x5C5588: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x5C558D: mov     eax, [esp+0F4h+outTexture]
 0x5C5591: cmp     eax, ebx
 0x5C5593: mov     byte ptr [esp+0F4h+var_4], 0Ah
 0x5C559B: jz      short loc_5C55BB
@@ -364,7 +363,7 @@
 0x5C55B5: push    1
 0x5C55B7: mov     ecx, esi
 0x5C55B9: call    edx
-0x5C55BB: mov     edi, [esp+0F4h+var_B4]
+0x5C55BB: mov     edi, [esp+0F4h+texture]
 0x5C55BF: cmp     edi, ebx
 0x5C55C1: jz      short loc_5C563E
 0x5C55C3: push    30h ; '0'; Size
@@ -379,41 +378,41 @@
 0x5C55E4: mov     esi, eax
 0x5C55E6: jmp     short loc_5C55EA
 0x5C55E8: xor     esi, esi
-0x5C55EA: push    edi
-0x5C55EB: mov     ecx, esi
+0x5C55EA: push    edi; texture
+0x5C55EB: mov     ecx, esi; this
 0x5C55ED: mov     byte ptr [esp+0F8h+var_4], 0Ah
-0x5C55F5: call    NiTexturingProperty__SetUnk08
-0x5C55FA: push    3
-0x5C55FC: mov     ecx, esi
-0x5C55FE: call    sub_405870
+0x5C55F5: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x5C55FA: push    3; value
+0x5C55FC: mov     ecx, esi; this
+0x5C55FE: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x5C5603: push    2; a2
 0x5C5605: mov     ecx, esi; this
-0x5C5607: call    sub_405900
+0x5C5607: call    NiTexturingProperty_SetBaseMapFilterMode
 0x5C560C: mov     ecx, [esp+0F4h+var_D8]
 0x5C5610: push    6
-0x5C5612: call    NiNode_GetNiPropertyByID
+0x5C5612: call    NiNode_GetNiPropertyByID;
 0x5C5617: test    eax, eax
 0x5C5619: jz      short loc_5C5634
 0x5C561B: mov     ecx, [esp+0F4h+var_D8]
 0x5C561F: push    6
-0x5C5621: lea     eax, [esp+0F8h+var_E0]
+0x5C5621: lea     eax, [esp+0F8h+outTexture]
 0x5C5625: push    eax
 0x5C5626: call    sub_708560
-0x5C562B: lea     ecx, [esp+0F4h+var_E0]; this
-0x5C562F: call    sub_7016A0
+0x5C562B: lea     ecx, [esp+0F4h+outTexture]; slot
+0x5C562F: call    NiPointerSlot_Release
 0x5C5634: mov     ecx, [esp+0F4h+var_D8]; this
 0x5C5638: push    esi; a2
-0x5C5639: call    sub_405680
+0x5C5639: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5C563E: mov     ecx, [esp+0F4h+var_D8]
 0x5C5642: push    ebx
-0x5C5643: call    NiNode_GetNiPropertyByID
+0x5C5643: call    NiNode_GetNiPropertyByID;
 0x5C5648: test    eax, eax
 0x5C564A: jnz     short loc_5C565D
 0x5C564C: mov     esi, [esp+0F4h+var_D8]
 0x5C5650: call    sub_550550
 0x5C5655: push    eax; a2
 0x5C5656: mov     ecx, esi; this
-0x5C5658: call    sub_405680
+0x5C5658: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5C565D: mov     edi, [esp+0F4h+var_D8]
 0x5C5661: add     edi, 30h ; '0'
 0x5C5664: mov     ecx, 9
@@ -427,11 +426,11 @@
 0x5C5680: mov     edx, [eax]
 0x5C5682: mov     edx, [edx+88h]
 0x5C5688: push    ebp
-0x5C5689: lea     ecx, [esp+0F8h+var_E0]
+0x5C5689: lea     ecx, [esp+0F8h+outTexture]
 0x5C568D: push    ecx
 0x5C568E: mov     ecx, eax
 0x5C5690: call    edx
-0x5C5692: mov     eax, [esp+0F4h+var_E0]
+0x5C5692: mov     eax, [esp+0F4h+outTexture]
 0x5C5696: cmp     eax, ebx
 0x5C5698: jz      short loc_5C56B8
 0x5C569A: mov     esi, eax
@@ -472,15 +471,15 @@
 0x5C56FB: mov     esi, eax
 0x5C56FD: cmp     esi, ebx
 0x5C56FF: jz      loc_5C5852
-0x5C5705: push    1
-0x5C5707: push    1
-0x5C5709: push    1
-0x5C570B: push    esi
-0x5C570C: call    sub_7B8940
+0x5C5705: push    1; arg3
+0x5C5707: push    1; normalMapBypass
+0x5C5709: push    1; shaderId
+0x5C570B: push    esi; root
+0x5C570C: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x5C5711: add     esp, 10h
 0x5C5714: push    4
 0x5C5716: mov     ecx, esi
-0x5C5718: call    NiNode_GetNiPropertyByID
+0x5C5718: call    NiNode_GetNiPropertyByID;
 0x5C571D: mov     esi, eax
 0x5C571F: cmp     esi, ebx
 0x5C5721: jnz     short loc_5C5727
@@ -586,8 +585,8 @@
 0x5C5878: push    ebx
 0x5C5879: call    eax
 0x5C587B: mov     ecx, eax; this
-0x5C587D: call    NiAVObject_InitializePropertyState
-0x5C5882: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x5C587D: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
+0x5C5882: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x5C5887: push    4; int
 0x5C5889: push    18h; unsigned int
 0x5C588B: lea     ecx, [esp+100h+a1]
@@ -597,15 +596,15 @@
 0x5C58A0: jmp     loc_5C59F9
 0x5C58A5: mov     edi, [esp+0F8h+var_DC]
 0x5C58A9: fld     dword ptr [edi+1CCh]
-0x5C58AF: fstp    [esp+0F8h+var_E0]
-0x5C58B3: fld     [esp+0F8h+var_E0]
-0x5C58B7: fstp    [esp+0F8h+var_F8]; float
-0x5C58BA: push    ebp; int
-0x5C58BB: call    sub_550980
+0x5C58AF: fstp    [esp+0F8h+outTexture]
+0x5C58B3: fld     [esp+0F8h+outTexture]
+0x5C58B7: fstp    [esp+0F8h+hairLength]; hairLength
+0x5C58BA: push    ebp; hairGeometry
+0x5C58BB: call    BSFaceGen_ApplyHairLengthMorph; Reapply TESNPC hairLength after this Race/Sex menu hair-geometry update.
 0x5C58C0: add     esp, 8
 0x5C58C3: push    4
 0x5C58C5: mov     ecx, ebp
-0x5C58C7: call    NiNode_GetNiPropertyByID
+0x5C58C7: call    NiNode_GetNiPropertyByID;
 0x5C58CC: mov     esi, eax
 0x5C58CE: cmp     esi, ebx
 0x5C58D0: jnz     short loc_5C58D6
@@ -625,25 +624,25 @@
 0x5C58EF: jz      short loc_5C5966
 0x5C58F1: mov     ecx, [edi+1E8h]
 0x5C58F7: movzx   edx, cl
-0x5C58FA: mov     [esp+0F4h+var_E0], edx
+0x5C58FA: mov     [esp+0F4h+outTexture], edx
 0x5C58FE: movzx   edx, ch
-0x5C5901: fild    [esp+0F4h+var_E0]
+0x5C5901: fild    [esp+0F4h+outTexture]
 0x5C5905: fld     qword ptr ds:0A3DDD8h
-0x5C590B: mov     [esp+0F4h+var_E0], edx
+0x5C590B: mov     [esp+0F4h+outTexture], edx
 0x5C590F: fdiv    st(1), st
 0x5C5911: shr     ecx, 10h
 0x5C5914: movzx   ecx, cl
 0x5C5917: fxch    st(1)
 0x5C5919: fstp    [esp+0F4h+var_C4]
-0x5C591D: fild    [esp+0F4h+var_E0]
+0x5C591D: fild    [esp+0F4h+outTexture]
 0x5C5921: mov     edx, [esp+0F4h+var_C4]
-0x5C5925: mov     [esp+0F4h+var_E0], ecx
+0x5C5925: mov     [esp+0F4h+outTexture], ecx
 0x5C5929: mov     [eax+0A8h], edx
 0x5C592F: fdiv    st, st(1)
 0x5C5931: fstp    [esp+0F4h+var_C0]
 0x5C5935: mov     ecx, [esp+0F4h+var_C0]
 0x5C5939: mov     [eax+0ACh], ecx
-0x5C593F: fidivr  [esp+0F4h+var_E0]
+0x5C593F: fidivr  [esp+0F4h+outTexture]
 0x5C5943: fstp    [esp+0F4h+var_BC]
 0x5C5947: fld1
 0x5C5949: mov     edx, [esp+0F4h+var_BC]
@@ -670,25 +669,25 @@
 0x5C5987: jz      short loc_5C59F9
 0x5C5989: mov     ecx, [edi+1E8h]
 0x5C598F: movzx   edx, cl
-0x5C5992: mov     [esp+0F4h+var_E0], edx
+0x5C5992: mov     [esp+0F4h+outTexture], edx
 0x5C5996: movzx   edx, ch
-0x5C5999: fild    [esp+0F4h+var_E0]
+0x5C5999: fild    [esp+0F4h+outTexture]
 0x5C599D: fld     qword ptr ds:0A3DDD8h
-0x5C59A3: mov     [esp+0F4h+var_E0], edx
+0x5C59A3: mov     [esp+0F4h+outTexture], edx
 0x5C59A7: fdiv    st(1), st
 0x5C59A9: shr     ecx, 10h
 0x5C59AC: movzx   ecx, cl
 0x5C59AF: fxch    st(1)
 0x5C59B1: fstp    [esp+0F4h+var_C4]
-0x5C59B5: fild    [esp+0F4h+var_E0]
+0x5C59B5: fild    [esp+0F4h+outTexture]
 0x5C59B9: mov     edx, [esp+0F4h+var_C4]
-0x5C59BD: mov     [esp+0F4h+var_E0], ecx
+0x5C59BD: mov     [esp+0F4h+outTexture], ecx
 0x5C59C1: mov     [eax+0F0h], edx
 0x5C59C7: fdiv    st, st(1)
 0x5C59C9: fstp    [esp+0F4h+var_C0]
 0x5C59CD: mov     ecx, [esp+0F4h+var_C0]
 0x5C59D1: mov     [eax+0F4h], ecx
-0x5C59D7: fidivr  [esp+0F4h+var_E0]
+0x5C59D7: fidivr  [esp+0F4h+outTexture]
 0x5C59DB: fstp    [esp+0F4h+var_BC]
 0x5C59DF: fld1
 0x5C59E1: mov     edx, [esp+0F4h+var_BC]
@@ -706,26 +705,26 @@
 0x5C5A0F: push    ebx
 0x5C5A10: call    eax
 0x5C5A12: mov     ecx, eax; this
-0x5C5A14: call    NiAVObject_UpdateNiAVObject
+0x5C5A14: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5C5A19: push    ebx
-0x5C5A1A: call    FormHeapFree
+0x5C5A1A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5A1F: push    ebx
-0x5C5A20: call    FormHeapFree
+0x5C5A20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5A25: mov     ecx, [esp+0FCh+var_D4]
 0x5C5A29: push    ecx
-0x5C5A2A: call    FormHeapFree
+0x5C5A2A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5A2F: mov     edx, [esp+100h+var_CC]
 0x5C5A33: push    edx
 0x5C5A34: mov     [esp+104h+var_D4], ebx
 0x5C5A38: mov     word ptr [esp+104h+var_D0+2], bx
 0x5C5A3D: mov     word ptr [esp+104h+var_D0], bx
-0x5C5A42: call    FormHeapFree
+0x5C5A42: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5A47: mov     eax, dword ptr [esp+104h+ArgList]
 0x5C5A4B: push    eax
 0x5C5A4C: mov     [esp+108h+var_CC], ebx
 0x5C5A50: mov     word ptr [esp+108h+var_C8+2], bx
 0x5C5A55: mov     word ptr [esp+108h+var_C8], bx
-0x5C5A5A: call    FormHeapFree
+0x5C5A5A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C5A5F: mov     eax, [esp+108h+var_D8]
 0x5C5A63: mov     edi, ds:0A2807Ch
 0x5C5A69: add     esp, 14h
@@ -745,7 +744,7 @@
 0x5C5A8C: push    1
 0x5C5A8E: mov     ecx, esi
 0x5C5A90: call    eax
-0x5C5A92: mov     esi, [esp+0F4h+var_A8]
+0x5C5A92: mov     esi, [esp+0F4h+slot]
 0x5C5A96: cmp     esi, ebx
 0x5C5A98: mov     byte ptr [esp+0F4h+var_4], bl
 0x5C5A9F: jz      short loc_5C5AB5
@@ -759,7 +758,7 @@
 0x5C5AAF: push    1
 0x5C5AB1: mov     ecx, esi
 0x5C5AB3: call    eax
-0x5C5AB5: mov     esi, [esp+0F4h+var_B4]
+0x5C5AB5: mov     esi, [esp+0F4h+texture]
 0x5C5AB9: cmp     esi, ebx
 0x5C5ABB: mov     [esp+0F4h+var_4], 0FFFFFFFFh
 0x5C5AC6: jz      short loc_5C5ADC
@@ -783,3 +782,44 @@
 0x5C5AF0: pop     ebx
 0x5C5AF1: add     esp, 0E0h
 0x5C5AF7: retn    4
+0x9C1230: lea     ecx, [ebp-0B4h]; slot
+0x9C1236: jmp     NiPointerSlot_Release
+0x9C123B: lea     ecx, [ebp-0A8h]; slot
+0x9C1241: jmp     NiPointerSlot_Release
+0x9C1246: lea     ecx, [ebp-0D8h]; slot
+0x9C124C: jmp     NiPointerSlot_Release
+0x9C1251: lea     ecx, [ebp-0B0h]; void *
+0x9C1257: jmp     BSStringT_Clear
+0x9C125C: lea     ecx, [ebp-0CCh]; void *
+0x9C1262: jmp     BSStringT_Clear
+0x9C1267: lea     ecx, [ebp-0D4h]; void *
+0x9C126D: jmp     BSStringT_Clear
+0x9C1272: lea     ecx, [ebp-98h]; void *
+0x9C1278: jmp     BSStringT_Clear
+0x9C127D: lea     ecx, [ebp-0A0h]; void *
+0x9C1283: jmp     BSStringT_Clear
+0x9C1288: mov     ecx, [ebp-0E0h]; void *
+0x9C128E: jmp     BSStringT_Clear
+0x9C1293: mov     ecx, [ebp-0A4h]; void *
+0x9C1299: jmp     BSStringT_Clear
+0x9C129E: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
+0x9C12A3: push    4; int
+0x9C12A5: push    18h; unsigned int
+0x9C12A7: lea     eax, [ebp-6Ch]
+0x9C12AA: push    eax; void *
+0x9C12AB: call    $LN21
+0x9C12B0: retn
+0x9C12B1: lea     ecx, [ebp-0E0h]; slot
+0x9C12B7: jmp     NiPointerSlot_Release
+0x9C12BC: mov     eax, [ebp-0A4h]
+0x9C12C2: push    eax
+0x9C12C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C12C8: pop     ecx
+0x9C12C9: retn
+0x9C12CA: mov     edx, [esp+arg_4]
+0x9C12CE: lea     eax, [edx-0E4h]
+0x9C12D4: mov     ecx, [edx-0E8h]
+0x9C12DA: xor     ecx, eax
+0x9C12DC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C12E1: mov     eax, offset stru_AEA334
+0x9C12E6: jmp     ___CxxFrameHandler3

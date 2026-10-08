@@ -11,7 +11,7 @@
 0x5ECCF0: fst     [esp+0B8h+var_A8]
 0x5ECCF4: push    esi
 0x5ECCF5: fst     [esp+0BCh+var_98]
-0x5ECCF9: fst     dword ptr [esp+0BCh+var_A0]
+0x5ECCF9: fst     [esp+0BCh+variableID]
 0x5ECCFD: push    edi
 0x5ECCFE: mov     edi, [eax+0Ch]
 0x5ECD01: fstp    [esp+0C0h+var_AC]
@@ -49,23 +49,23 @@
 0x5ECD73: test    al, al
 0x5ECD75: jz      short loc_5ECD89
 0x5ECD77: mov     eax, dword ptr [esp+0C0h+ArgList]
-0x5ECD7B: push    0; a3
-0x5ECD7D: push    eax; ArgList
+0x5ECD7B: push    0; sourceScript
+0x5ECD7D: push    eax; variableID
 0x5ECD7E: mov     ecx, edi; this
-0x5ECD80: call    sub_4FA110
+0x5ECD80: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x5ECD85: fstp    [esp+0C0h+var_A8]
-0x5ECD89: lea     ecx, [esp+0C0h+var_A0]
+0x5ECD89: lea     ecx, [esp+0C0h+variableID]
 0x5ECD8D: push    ecx
 0x5ECD8E: push    offset aFlevelleddamag; "fLevelledDamage"
 0x5ECD93: mov     ecx, ebx
 0x5ECD95: call    sub_4FAA90
 0x5ECD9A: test    al, al
 0x5ECD9C: jz      short loc_5ECDD6
-0x5ECD9E: mov     edx, dword ptr [esp+0C0h+var_A0]
-0x5ECDA2: push    0; a3
-0x5ECDA4: push    edx; ArgList
+0x5ECD9E: mov     edx, [esp+0C0h+variableID]
+0x5ECDA2: push    0; sourceScript
+0x5ECDA4: push    edx; variableID
 0x5ECDA5: mov     ecx, edi; this
-0x5ECDA7: call    sub_4FA110
+0x5ECDA7: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x5ECDAC: fstp    [esp+0C0h+var_78]
 0x5ECDB0: fld     [esp+0C0h+var_78]
 0x5ECDB4: mov     ecx, esi
@@ -84,11 +84,11 @@
 0x5ECDE2: call    sub_4FAA90
 0x5ECDE7: test    al, al
 0x5ECDE9: jz      short loc_5ECDFD
-0x5ECDEB: mov     edx, dword ptr [esp+0C0h+var_5C]
-0x5ECDEF: push    0; a3
-0x5ECDF1: push    edx; ArgList
+0x5ECDEB: mov     edx, [esp+0C0h+var_5C]
+0x5ECDEF: push    0; sourceScript
+0x5ECDF1: push    edx; variableID
 0x5ECDF2: mov     ecx, edi; this
-0x5ECDF4: call    sub_4FA110
+0x5ECDF4: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x5ECDF9: fstp    [esp+0C0h+var_98]
 0x5ECDFD: lea     eax, [esp+0C0h+var_58]
 0x5ECE01: push    eax
@@ -97,11 +97,11 @@
 0x5ECE09: call    sub_4FAA90
 0x5ECE0E: test    al, al
 0x5ECE10: jz      short loc_5ECE43
-0x5ECE12: mov     ecx, dword ptr [esp+0C0h+var_58]
-0x5ECE16: push    0; a3
-0x5ECE18: push    ecx; ArgList
+0x5ECE12: mov     ecx, [esp+0C0h+var_58]
+0x5ECE16: push    0; sourceScript
+0x5ECE18: push    ecx; variableID
 0x5ECE19: mov     ecx, edi; this
-0x5ECE1B: call    sub_4FA110
+0x5ECE1B: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x5ECE20: fstp    [esp+0C0h+var_AC]
 0x5ECE24: fldz
 0x5ECE26: fld     [esp+0C0h+var_AC]
@@ -121,11 +121,11 @@
 0x5ECE4F: call    sub_4FAA90
 0x5ECE54: test    al, al
 0x5ECE56: jz      short loc_5ECE7D
-0x5ECE58: mov     eax, dword ptr [esp+0C0h+var_74]
-0x5ECE5C: push    0; a3
-0x5ECE5E: push    eax; ArgList
+0x5ECE58: mov     eax, [esp+0C0h+var_74]
+0x5ECE5C: push    0; sourceScript
+0x5ECE5E: push    eax; variableID
 0x5ECE5F: mov     ecx, edi; this
-0x5ECE61: call    sub_4FA110
+0x5ECE61: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x5ECE66: fcomp   qword ptr ds:0A2FC68h
 0x5ECE6C: mov     [esp+0C0h+var_B1], 1
 0x5ECE71: fnstsw  ax
@@ -139,16 +139,16 @@
 0x5ECE89: call    sub_4FAA90
 0x5ECE8E: test    al, al
 0x5ECE90: jz      short loc_5ECEA6
-0x5ECE92: mov     edx, dword ptr [esp+0C0h+var_B0]
-0x5ECE96: push    0; a3
-0x5ECE98: push    edx; ArgList
+0x5ECE92: mov     edx, [esp+0C0h+var_B0]
+0x5ECE96: push    0; sourceScript
+0x5ECE98: push    edx; variableID
 0x5ECE99: mov     ecx, edi; this
-0x5ECE9B: call    sub_4FA110
-0x5ECEA0: fstp    dword ptr [esp+0C0h+var_A0]
+0x5ECE9B: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
+0x5ECEA0: fstp    [esp+0C0h+variableID]
 0x5ECEA4: jmp     short loc_5ECEB4
 0x5ECEA6: fld     [esp+0C0h+var_98]
 0x5ECEAA: fdiv    qword ptr ds:0A3F3E8h
-0x5ECEB0: fstp    dword ptr [esp+0C0h+var_A0]
+0x5ECEB0: fstp    [esp+0C0h+variableID]
 0x5ECEB4: cmp     [esp+0C0h+var_B1], 0
 0x5ECEB9: jnz     short loc_5ECECA
 0x5ECEBB: mov     edi, [esp+0C0h+var_90]
@@ -157,12 +157,12 @@
 0x5ECEC8: jmp     short loc_5ECECE
 0x5ECECA: mov     edi, [esp+0C0h+var_90]
 0x5ECECE: mov     ecx, esi; this
-0x5ECED0: call    MobileObject_GetCharProxy
+0x5ECED0: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x5ECED5: mov     ecx, eax
 0x5ECED7: mov     eax, [esp+0C0h+var_7C]
 0x5ECEDB: mov     eax, [eax+8]
 0x5ECEDE: cmp     byte ptr [eax+18h], 1
-0x5ECEE2: mov     dword ptr [esp+0C0h+var_74], ecx
+0x5ECEE2: mov     [esp+0C0h+var_74], ecx
 0x5ECEE6: jnz     short loc_5ECF04
 0x5ECEE8: mov     ebx, [eax+10h]
 0x5ECEEB: add     ebx, eax
@@ -218,7 +218,7 @@
 0x5ECF9E: jz      loc_5ED027
 0x5ECFA4: fstp    st
 0x5ECFA6: fstp    st
-0x5ECFA8: call    sub_8AC0A0
+0x5ECFA8: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x5ECFAD: fld     [esp+0C0h+var_AC]
 0x5ECFB1: movaps  xmm1, xmmword ptr [esp+0C0h+var_34+4]
 0x5ECFB9: fldz
@@ -252,7 +252,7 @@
 0x5ED018: jp      loc_5ED0C2
 0x5ED01E: fstp    [esp+0C0h+var_A4]
 0x5ED022: jmp     loc_5ED0C4
-0x5ED027: mov     eax, offset stru_BA7A40
+0x5ED027: mov     eax, offset unk_BA7A40
 0x5ED02C: jmp     short loc_5ECFBD
 0x5ED02E: mov     ecx, [eax+8]
 0x5ED031: movaps  xmm0, xmmword ptr [ecx+30h]
@@ -276,13 +276,13 @@
 0x5ED07C: movaps  xmm1, xmmword ptr [esp+0C0h+var_34+4]
 0x5ED084: subps   xmm1, xmm0
 0x5ED087: movaps  xmmword ptr [esp+0C0h+var_34+4], xmm1
-0x5ED08F: call    sub_5E0660
+0x5ED08F: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5ED094: fmul    qword ptr ds:0A2FAA0h
-0x5ED09A: fstp    dword ptr [esp+0C0h+var_B0]
-0x5ED09E: fld     dword ptr [esp+0C0h+var_B0]
+0x5ED09A: fstp    [esp+0C0h+var_B0]
+0x5ED09E: fld     [esp+0C0h+var_B0]
 0x5ED0A2: fmul    qword ptr ds:0A39088h
-0x5ED0A8: fstp    dword ptr [esp+0C0h+var_B0]
-0x5ED0AC: fld     dword ptr [esp+0C0h+var_B0]
+0x5ED0A8: fstp    [esp+0C0h+var_B0]
+0x5ED0AC: fld     [esp+0C0h+var_B0]
 0x5ED0B0: fadd    dword ptr [esp+0C0h+var_34+0Ch]
 0x5ED0B7: fstp    dword ptr [esp+0C0h+var_34+0Ch]
 0x5ED0BE: jmp     short loc_5ED0C4
@@ -307,9 +307,9 @@
 0x5ED0F5: push    43h ; 'C'
 0x5ED0F7: call    edx
 0x5ED0F9: fdiv    qword ptr ds:0A309F0h
-0x5ED0FF: fstp    dword ptr [esp+0C0h+var_B0]
+0x5ED0FF: fstp    [esp+0C0h+var_B0]
 0x5ED103: fld1
-0x5ED105: fld     dword ptr [esp+0C0h+var_B0]
+0x5ED105: fld     [esp+0C0h+var_B0]
 0x5ED109: fcom    st(1)
 0x5ED10B: fnstsw  ax
 0x5ED10D: test    ah, 5
@@ -321,15 +321,15 @@
 0x5ED11C: fld     [esp+0C0h+var_AC]
 0x5ED120: fld1
 0x5ED122: fsubrp  st(1), st
-0x5ED124: fstp    dword ptr [esp+0C0h+var_B0]
-0x5ED128: fld     dword ptr [esp+0C0h+var_B0]
+0x5ED124: fstp    [esp+0C0h+var_B0]
+0x5ED128: fld     [esp+0C0h+var_B0]
 0x5ED12C: jmp     short loc_5ED165
 0x5ED12E: push    41h ; 'A'
 0x5ED130: call    edx
 0x5ED132: fdiv    qword ptr ds:0A309F0h
-0x5ED138: fstp    dword ptr [esp+0C0h+var_B0]
+0x5ED138: fstp    [esp+0C0h+var_B0]
 0x5ED13C: fld1
-0x5ED13E: fld     dword ptr [esp+0C0h+var_B0]
+0x5ED13E: fld     [esp+0C0h+var_B0]
 0x5ED142: fcom    st(1)
 0x5ED144: fnstsw  ax
 0x5ED146: test    ah, 5
@@ -341,8 +341,8 @@
 0x5ED155: fld     [esp+0C0h+var_AC]
 0x5ED159: fld1
 0x5ED15B: fsubrp  st(1), st
-0x5ED15D: fstp    dword ptr [esp+0C0h+var_B0]
-0x5ED161: fld     dword ptr [esp+0C0h+var_B0]
+0x5ED15D: fstp    [esp+0C0h+var_B0]
+0x5ED161: fld     [esp+0C0h+var_B0]
 0x5ED165: fmul    [esp+0C0h+var_A8]
 0x5ED169: fstp    [esp+0C0h+var_A8]
 0x5ED16D: fldz
@@ -352,7 +352,7 @@
 0x5ED177: test    ah, 41h
 0x5ED17A: jnz     loc_5ED57C
 0x5ED180: cmp     [esp+0C0h+var_B1], 0
-0x5ED185: jz      short loc_5ED19B
+0x5ED185: jz      short loc_5ED19B; BloodOnDeath decode 2026-05-30: continuous traps scale damage by frame delta/velocity before applying damage and spawning blood. This native path produces trail-like repeated blood by calling the emitter every continuous update.
 0x5ED187: fld     dword ptr ds:0B33E9Ch
 0x5ED18D: fmul    [esp+0C0h+var_A4]
 0x5ED191: fmulp   st(1), st
@@ -368,13 +368,13 @@
 0x5ED1B0: fstp    dword ptr [esp+0CCh+anonymous_0+4]; float
 0x5ED1B3: call    edx
 0x5ED1B5: mov     ecx, esi
-0x5ED1B7: call    sub_5E0660
+0x5ED1B7: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5ED1BC: fmul    qword ptr ds:0A2FAA0h
 0x5ED1C2: mov     eax, [esi]
 0x5ED1C4: mov     edx, [eax+154h]
-0x5ED1CA: fstp    dword ptr [esp+0C0h+var_B0]
+0x5ED1CA: fstp    [esp+0C0h+var_B0]
 0x5ED1CE: mov     ecx, esi
-0x5ED1D0: fld     dword ptr [esp+0C0h+var_B0]
+0x5ED1D0: fld     [esp+0C0h+var_B0]
 0x5ED1D4: fld     st
 0x5ED1D6: fmul    dword ptr ds:0B258E8h
 0x5ED1DC: fstp    [esp+0C0h+var_70]
@@ -398,7 +398,7 @@
 0x5ED228: push    eax
 0x5ED229: push    ecx; float
 0x5ED22A: fstp    [esp+0C8h+var_84]
-0x5ED22E: call    sub_43F3E0
+0x5ED22E: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x5ED233: add     esp, 8
 0x5ED236: cmp     edi, 10h
 0x5ED239: jz      loc_5ED399
@@ -409,8 +409,8 @@
 0x5ED251: push    0; int
 0x5ED253: sub     esp, 0Ch
 0x5ED256: mov     eax, esp
-0x5ED258: fstp    dword ptr [esp+0D0h+var_B0]
-0x5ED25C: fld     dword ptr [esp+0D0h+var_B0]
+0x5ED258: fstp    [esp+0D0h+var_B0]
+0x5ED25C: fld     [esp+0D0h+var_B0]
 0x5ED260: mov     [eax], edx
 0x5ED262: mov     edx, ds:0B3F9B0h
 0x5ED268: mov     [eax+4], ecx
@@ -434,7 +434,7 @@
 0x5ED2A1: mov     [eax+8], edx
 0x5ED2A4: fstp    [esp+0ECh+var_EC]; float
 0x5ED2A7: mov     ecx, esi
-0x5ED2A9: call    sub_5EC400
+0x5ED2A9: call    Actor_SpawnTrapHitBloodDecals; Verified call-chain anchor: Actor_HandleTrapHitDamage calls Actor_SpawnTrapHitBloodDecals with computed trap-impact vector/point values and damage-scaled emission input; the callee independently checks the victim actor's blood spray/decal eligibility and resolves its particle path.
 0x5ED2AE: cmp     [esp+0C0h+var_B1], 0
 0x5ED2B3: jnz     loc_5ED399
 0x5ED2B9: test    ebx, ebx
@@ -447,7 +447,7 @@
 0x5ED2DA: push    ecx
 0x5ED2DB: lea     edx, [esp+0C4h+var_8C]
 0x5ED2DF: push    edx
-0x5ED2E0: call    sub_43F3E0
+0x5ED2E0: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x5ED2E5: fld     dword ptr ds:0A3D65Ch
 0x5ED2EB: mov     edx, [eax]
 0x5ED2ED: movaps  xmm0, xmmword ptr [esp+0C8h+var_34+4]
@@ -510,13 +510,13 @@
 0x5ED3CD: fstp    st(1)
 0x5ED3CF: test    ah, 41h
 0x5ED3D2: jnz     loc_5ED57E
-0x5ED3D8: fld     dword ptr [esp+0C0h+var_A0]
+0x5ED3D8: fld     [esp+0C0h+variableID]
 0x5ED3DC: fcomp   qword ptr ds:0A37478h
 0x5ED3E2: fnstsw  ax
 0x5ED3E4: test    ah, 41h
 0x5ED3E7: jnz     short loc_5ED3F3
 0x5ED3E9: fld     dword ptr ds:0A57EF8h
-0x5ED3EF: fstp    dword ptr [esp+0C0h+var_A0]
+0x5ED3EF: fstp    [esp+0C0h+variableID]
 0x5ED3F3: test    cl, cl
 0x5ED3F5: jz      loc_5ED4E5
 0x5ED3FB: cmp     esi, ds:0B333C4h
@@ -530,7 +530,7 @@
 0x5ED417: mov     ecx, esi
 0x5ED419: call    eax
 0x5ED41B: push    eax; a1
-0x5ED41C: call    sub_88D070
+0x5ED41C: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x5ED421: mov     edx, [esi]
 0x5ED423: mov     eax, [edx+154h]
 0x5ED429: add     esp, 10h
@@ -538,7 +538,7 @@
 0x5ED42E: call    eax
 0x5ED430: push    eax
 0x5ED431: call    sub_8B8700
-0x5ED436: fld     dword ptr [esp+0C4h+var_A0]
+0x5ED436: fld     [esp+0C4h+variableID]
 0x5ED43A: movaps  xmm2, xmmword ptr [esp+0C4h+var_34+4]
 0x5ED442: fstp    [esp+0C4h+var_C4]; float
 0x5ED445: movss   xmm3, dword ptr ds:0A46C30h
@@ -580,7 +580,7 @@
 0x5ED4D8: call    sub_5364B0
 0x5ED4DD: add     esp, 0Ch
 0x5ED4E0: jmp     loc_5ED580
-0x5ED4E5: mov     esi, dword ptr [esp+0C0h+var_74]
+0x5ED4E5: mov     esi, [esp+0C0h+var_74]
 0x5ED4E9: test    esi, esi
 0x5ED4EB: jz      loc_5ED57E
 0x5ED4F1: fcom    qword ptr ds:0A2FC70h
@@ -606,10 +606,10 @@
 0x5ED53A: push    edx
 0x5ED53B: lea     eax, [esp+0C4h+var_8C]
 0x5ED53F: push    eax
-0x5ED540: call    sub_43F3E0
+0x5ED540: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x5ED545: add     esp, 8
 0x5ED548: lea     ecx, [esp+0C0h+var_8C]
-0x5ED54C: call    sub_43F350
+0x5ED54C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5ED551: fstp    st
 0x5ED553: fld     [esp+0C0h+var_98]
 0x5ED557: push    ecx
@@ -622,7 +622,7 @@
 0x5ED56F: fstp    [esp+0C4h+var_C4]; float
 0x5ED572: push    ecx; int
 0x5ED573: mov     ecx, esi
-0x5ED575: call    sub_8907A0
+0x5ED575: call    bhkCharacterController_SetTransientPushVector; TES4 authoritative: set transient push/knockback channel. Converts caller world vector by hkFactor, divides by duration, and if stronger than current +0x2F0 stores +0x300=duration and +0x2F0=push vector/duration. Not a generic ledge-climb impulse API.
 0x5ED57A: jmp     short loc_5ED580
 0x5ED57C: fstp    st
 0x5ED57E: fstp    st

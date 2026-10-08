@@ -11,7 +11,7 @@
 0x6218F0: movzx   ecx, ax
 0x6218F3: mov     [esp+14h+var_8], ecx
 0x6218F7: mov     ecx, [esi+3Ch]
-0x6218FA: call    sub_5E05B0
+0x6218FA: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x6218FF: test    al, al
 0x621901: jnz     short loc_62191E
 0x621903: push    0
@@ -30,19 +30,19 @@
 0x62192B: jnz     short loc_62194B
 0x62192D: push    edi; a5
 0x62192E: mov     edi, [esi+3Ch]; a1
-0x621931: push    0; a4
+0x621931: push    0; useActorProjection
 0x621933: mov     ecx, esi
-0x621935: call    sub_6135F0
-0x62193A: push    eax; a3
-0x62193B: push    edi; a2
-0x62193C: call    TESObjectREFR_GetDistanceBetween?
+0x621935: call    CombatController_GetCurrentTarget
+0x62193A: push    eax; to
+0x62193B: push    edi; from
+0x62193C: call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x621941: fstp    dword ptr [esi+184h]
 0x621947: add     esp, 0Ch
 0x62194A: pop     edi
 0x62194B: fld     dword ptr [esi+184h]
-0x621951: mov     ecx, esi
+0x621951: mov     ecx, esi; this
 0x621953: fstp    [esp+14h+var_10]
-0x621957: call    sub_615520
+0x621957: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x62195C: fstp    [esp+14h+var_4]
 0x621960: fldz
 0x621962: fcomp   dword ptr [esi+54h]
@@ -70,7 +70,7 @@
 0x62199F: jnz     short loc_6219F5
 0x6219A1: mov     ecx, [esi+3Ch]
 0x6219A4: fstp    st
-0x6219A6: call    sub_5E05B0
+0x6219A6: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x6219AB: test    al, al
 0x6219AD: jz      short loc_6219F1
 0x6219AF: cmp     [esi+58h], bl
@@ -101,10 +101,10 @@
 0x621A09: jnz     short loc_621A1A
 0x621A0B: pop     ebx
 0x621A0C: fstp    dword ptr [esi+54h]
-0x621A0F: mov     ecx, esi
+0x621A0F: mov     ecx, esi; this
 0x621A11: pop     esi
 0x621A12: add     esp, 10h
-0x621A15: jmp     sub_6213D0
+0x621A15: jmp     CombatController_UpdateCombatModeState
 0x621A1A: mov     edx, [esi+3Ch]
 0x621A1D: fstp    st
 0x621A1F: mov     ecx, [edx+58h]
@@ -126,9 +126,9 @@
 0x621A4F: test    ah, 5
 0x621A52: jp      loc_621B33
 0x621A58: fld     [esp+18h+var_4]
-0x621A5C: push    0; int
+0x621A5C: push    0; unused
 0x621A5E: fcom    st(1)
-0x621A60: mov     ecx, esi
+0x621A60: mov     ecx, esi; this
 0x621A62: fnstsw  ax
 0x621A64: test    ah, 1
 0x621A67: jnz     short loc_621A85
@@ -143,16 +143,16 @@
 0x621A81: add     esp, 10h
 0x621A84: retn
 0x621A85: sub     esp, 8
-0x621A88: fstp    [esp+24h+var_20]; float
-0x621A8C: fstp    [esp+24h+var_24]; float
-0x621A8F: call    sub_613440
+0x621A88: fstp    [esp+24h+maximumDistance]; maximumDistance
+0x621A8C: fstp    [esp+24h+surfaceDistance]; surfaceDistance
+0x621A8F: call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.
 0x621A94: test    al, al
 0x621A96: jz      short loc_621A9C
 0x621A98: test    bl, bl
 0x621A9A: jz      short loc_621AB2
 0x621A9C: mov     eax, [esi+70h]
-0x621A9F: push    eax
-0x621AA0: call    sub_612690
+0x621A9F: push    eax; mode
+0x621AA0: call    CombatMode_IsRangedWeaponMode; Returns true only for native combat modes 2 and 4, the two ranged-weapon modes used by the distance and attack-option logic.
 0x621AA5: add     esp, 4
 0x621AA8: test    al, al
 0x621AAA: jz      short loc_621ABF
@@ -170,7 +170,7 @@
 0x621ACA: mov     byte ptr [esi+58h], 0
 0x621ACE: mov     ecx, esi
 0x621AD0: jz      short loc_621AEE
-0x621AD2: call    sub_614290
+0x621AD2: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x621AD7: test    al, al
 0x621AD9: mov     ecx, esi
 0x621ADB: jnz     short loc_621B29
@@ -180,11 +180,11 @@
 0x621AE5: pop     esi
 0x621AE6: add     esp, 10h
 0x621AE9: jmp     sub_61FE90
-0x621AEE: call    sub_614290
+0x621AEE: call    CombatController_CanReachCurrentTarget; Returns current-target reachability at +0x174, additionally forcing false when a non-water-capable actor cannot fight a swimming target.
 0x621AF3: test    al, al
 0x621AF5: jnz     short loc_621B27
 0x621AF7: mov     ecx, [esi+3Ch]
-0x621AFA: call    sub_5E0F50
+0x621AFA: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x621AFF: mov     edx, [eax]
 0x621B01: mov     ecx, eax
 0x621B03: mov     eax, [edx+16Ch]

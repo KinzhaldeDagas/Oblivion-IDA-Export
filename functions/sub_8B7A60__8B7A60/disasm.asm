@@ -74,7 +74,6 @@
 0x8B7B3C: jle     loc_8B7C4D
 0x8B7B42: jmp     short loc_8B7B54
 0x8B7B44: jmp     short loc_8B7B50
-0x8B7B46: align 10h
 0x8B7B50: mov     eax, [esp+60h+var_50]
 0x8B7B54: movaps  xmm0, xmmword ptr [eax]
 0x8B7B57: fld     qword ptr ds:0A372E0h

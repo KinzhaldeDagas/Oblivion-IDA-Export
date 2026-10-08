@@ -1,1 +1,1 @@
-IOleClientSiteVtbl_0
+typedef IOleClientSiteVtbl IOleClientSiteVtbl_0;

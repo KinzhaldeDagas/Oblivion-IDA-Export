@@ -17,10 +17,10 @@
 0x4BD712: test    edi, edi
 0x4BD714: mov     [esp+1Ch+var_4], 0
 0x4BD71C: jz      short loc_4BD72E
-0x4BD71E: mov     ecx, edi
-0x4BD720: call    sub_4BD230
+0x4BD71E: mov     ecx, edi; this
+0x4BD720: call    DistantLODLoaderTaskData_Destroy; Verified DistantLODLoaderTaskData destructor: frees every TESBoundObject-keyed cell payload/map, releases instancedLODNode (+0x1C) and cellLODBuffer (+0x20), then destroys the embedded map.
 0x4BD725: push    edi
-0x4BD726: call    FormHeapFree
+0x4BD726: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4BD72B: add     esp, 4
 0x4BD72E: mov     ecx, esi; this
 0x4BD730: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -32,3 +32,12 @@
 0x4BD74A: pop     esi
 0x4BD74B: add     esp, 10h
 0x4BD74E: retn
+0x9AC400: mov     ecx, [ebp-10h]; this
+0x9AC403: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9AC408: mov     edx, [esp+arg_4]
+0x9AC40C: lea     eax, [edx-0Ch]
+0x9AC40F: mov     ecx, [edx-10h]
+0x9AC412: xor     ecx, eax
+0x9AC414: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC419: mov     eax, offset stru_AD90C8
+0x9AC41E: jmp     ___CxxFrameHandler3

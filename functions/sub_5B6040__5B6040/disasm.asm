@@ -71,9 +71,9 @@
 0x5B610E: mov     esi, eax
 0x5B6110: call    InterfaceManager_GetDepth
 0x5B6115: fstp    [esp+40h+var_2C]; a3
-0x5B6119: mov     ecx, [esi+68h]; TileWindow *
+0x5B6119: mov     ecx, [esi+68h]; this
 0x5B611C: push    offset aDataMenusOptio; "Data\\Menus\\Options\\main_menu.xml"
-0x5B6121: call    Menu_LoadXML
+0x5B6121: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x5B6126: mov     ebp, eax
 0x5B6128: mov     ecx, ebp
 0x5B612A: mov     [esp+40h+var_18], ebp
@@ -147,13 +147,13 @@
 0x5B6204: jp      short loc_5B621A
 0x5B6206: fld     [esp+40h+var_2C]
 0x5B620A: push    ecx
-0x5B620B: fstp    [esp+44h+var_44]; a3
-0x5B620E: push    0FABh; a2
+0x5B620B: fstp    [esp+44h+var_44]; value
+0x5B620E: push    0FABh; propertyCode
 0x5B6213: mov     ecx, ebp; this
-0x5B6215: call    Tile_SetFloat
+0x5B6215: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B621A: push    offset aVersion; "version"
-0x5B621F: push    ebp; int
-0x5B6220: call    sub_58B800
+0x5B621F: push    ebp; target
+0x5B6220: call    Tile__GetTileByName; Verified XML source resolver. sibling() walks parent child list to current tile, returns following list node, and wraps to head if current is last or not found. It does not filter visible, target, or listindex. sibling(name) compares immediate sibling names case-insensitively. Fallout analogue 0x827DC678.
 0x5B6225: add     esp, 8
 0x5B6228: lea     ecx, [esp+40h+dwHandle]
 0x5B622C: push    ecx; lpdwHandle
@@ -188,7 +188,7 @@
 0x5B627E: mov     ecx, edi
 0x5B6280: call    Tile_SetString
 0x5B6285: push    ebp
-0x5B6286: call    FormHeapFree
+0x5B6286: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5B628B: mov     ebp, [esp+44h+var_18]
 0x5B628F: add     esp, 4
 0x5B6292: cmp     byte ptr ds:0B3B408h, 0
@@ -198,9 +198,9 @@
 0x5B629F: fld1
 0x5B62A1: jmp     short loc_5B62A9
 0x5B62A3: fld     dword ptr ds:0A379B4h
-0x5B62A9: fstp    [esp+44h+var_44]; a3
-0x5B62AC: push    0FA1h; a2
-0x5B62B1: call    Tile_SetFloat
+0x5B62A9: fstp    [esp+44h+var_44]; value
+0x5B62AC: push    0FA1h; propertyCode
+0x5B62B1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B62B6: push    0; float
 0x5B62B8: mov     ecx, ebp
 0x5B62BA: call    sub_58FBA0
@@ -237,9 +237,9 @@
 0x5B632F: fstp    dword ptr [ecx+60h]
 0x5B6332: fldz
 0x5B6334: fstp    [esp+48h+a2]; a2
-0x5B6337: call    NiAVObject_UpdateNiAVObject
+0x5B6337: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x5B633C: mov     ecx, ds:0B33B00h
-0x5B6342: call    sub_45D450
+0x5B6342: call    TESSaveLoadGame_EnumerateSaveFiles; Main menu enumerates the complete save set here. CharacterSpecificSaves intentionally leaves this call unfiltered so every character remains selectable at startup.
 0x5B6347: mov     ecx, ds:0B33B00h
 0x5B634D: mov     eax, [ecx+6Ch]
 0x5B6350: test    eax, eax
@@ -249,9 +249,9 @@
 0x5B6359: fld     dword ptr ds:0A379B4h
 0x5B635F: push    ecx
 0x5B6360: mov     ecx, [esi+28h]; this
-0x5B6363: fstp    [esp+44h+var_44]; a3
-0x5B6366: push    0FA1h; a2
-0x5B636B: call    Tile_SetFloat
+0x5B6363: fstp    [esp+44h+var_44]; value
+0x5B6366: push    0FA1h; propertyCode
+0x5B636B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6370: push    1; arg1
 0x5B6372: push    0; canCreate
 0x5B6374: call    InterfaceManager_GetSingleton
@@ -268,9 +268,9 @@
 0x5B6396: fld1
 0x5B6398: push    ecx
 0x5B6399: mov     ecx, [esi+28h]; this
-0x5B639C: fstp    [esp+44h+var_44]; a3
-0x5B639F: push    0FA1h; a2
-0x5B63A4: call    Tile_SetFloat
+0x5B639C: fstp    [esp+44h+var_44]; value
+0x5B639F: push    0FA1h; propertyCode
+0x5B63A4: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B63A9: push    1; arg1
 0x5B63AB: push    0; canCreate
 0x5B63AD: call    InterfaceManager_GetSingleton
@@ -286,9 +286,9 @@
 0x5B63D7: fadd    dword ptr ds:0A2FC78h
 0x5B63DD: add     esp, 0Ch
 0x5B63E0: mov     ecx, [esi+30h]; this
-0x5B63E3: fstp    [esp+44h+var_44]; a3
-0x5B63E6: push    0FF0h; a2
-0x5B63EB: call    Tile_SetFloat
+0x5B63E3: fstp    [esp+44h+var_44]; value
+0x5B63E6: push    0FF0h; propertyCode
+0x5B63EB: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B63F0: test    edi, edi
 0x5B63F2: jz      loc_5B647C
 0x5B63F8: push    0FD2h
@@ -314,9 +314,9 @@
 0x5B643D: mov     ecx, edi; this
 0x5B643F: fstp    [esp+44h+var_18]
 0x5B6443: fld     [esp+44h+var_18]
-0x5B6447: fstp    [esp+44h+var_44]; a3
-0x5B644A: push    0FADh; a2
-0x5B644F: call    Tile_SetFloat
+0x5B6447: fstp    [esp+44h+var_44]; value
+0x5B644A: push    0FADh; propertyCode
+0x5B644F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6454: push    0FACh
 0x5B6459: mov     ecx, edi
 0x5B645B: call    Tile_GetFloat
@@ -325,9 +325,9 @@
 0x5B6465: mov     ecx, edi; this
 0x5B6467: fstp    [esp+44h+var_18]
 0x5B646B: fld     [esp+44h+var_18]
-0x5B646F: fstp    [esp+44h+var_44]; a3
-0x5B6472: push    0FACh; a2
-0x5B6477: call    Tile_SetFloat
+0x5B646F: fstp    [esp+44h+var_44]; value
+0x5B6472: push    0FACh; propertyCode
+0x5B6477: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B647C: push    0; float
 0x5B647E: mov     ecx, ebp
 0x5B6480: call    sub_58FBA0
@@ -352,3 +352,15 @@
 0x5B64B3: pop     ebx
 0x5B64B4: add     esp, 2Ch
 0x5B64B7: retn
+0x9C0B00: mov     eax, [ebp-14h]
+0x9C0B03: push    eax
+0x9C0B04: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C0B09: pop     ecx
+0x9C0B0A: retn
+0x9C0B0B: mov     edx, [esp+arg_4]
+0x9C0B0F: lea     eax, [edx-30h]
+0x9C0B12: mov     ecx, [edx-34h]
+0x9C0B15: xor     ecx, eax
+0x9C0B17: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0B1C: mov     eax, offset stru_AE9CBC
+0x9C0B21: jmp     ___CxxFrameHandler3

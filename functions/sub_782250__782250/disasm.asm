@@ -72,7 +72,7 @@
 0x78231C: call    sub_738460
 0x782321: add     esp, 0Ch
 0x782324: push    esi
-0x782325: call    FormHeapFree
+0x782325: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x78232A: mov     eax, [esp+10h+arg_8]
 0x78232E: add     esp, 4
 0x782331: test    eax, eax
@@ -102,11 +102,11 @@
 0x782366: add     esp, 4
 0x782369: push    eax
 0x78236A: call    edx
-0x78236C: push    edi; Size
-0x78236D: push    eax; Src
+0x78236C: push    edi; byteCount
+0x78236D: push    eax; source
 0x78236E: mov     eax, [esi]
-0x782370: push    eax; Dst
-0x782371: call    _memcpy
+0x782370: push    eax; destination
+0x782371: call    _memcpy;
 0x782376: mov     eax, [esp+18h+arg_8]
 0x78237A: mov     ecx, [eax]
 0x78237C: mov     edx, [ecx+8]

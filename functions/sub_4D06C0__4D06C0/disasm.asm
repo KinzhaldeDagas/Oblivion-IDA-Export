@@ -1,4 +1,4 @@
-0x4D06C0: push    0FFFFFFFFh
+0x4D06C0: push    0FFFFFFFFh; Cell canopy shadow capture path; sets SpeedTree singleton +0x23, updates wind/time via 0x55FA50, renders shadow texture, then restores state.
 0x4D06C2: push    offset SEH_4D06C0
 0x4D06C7: mov     eax, large fs:0
 0x4D06CD: push    eax
@@ -164,19 +164,19 @@
 0x4D0902: push    ecx
 0x4D0903: mov     ecx, ebp; this
 0x4D0905: fstp    [esp+0ACh+var_AC]; a2
-0x4D0908: call    NiAVObject_UpdateNiAVObject
+0x4D0908: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4D090D: fldz
 0x4D090F: push    1; a3
 0x4D0911: push    ecx
 0x4D0912: fstp    [esp+0ACh+var_AC]; a2
 0x4D0915: mov     ecx, ebx; this
-0x4D0917: call    NiAVObject_UpdateNiAVObject
-0x4D091C: push    1
-0x4D091E: call    sub_55F7E0
-0x4D0923: push    1; float
-0x4D0925: push    ebx; int
+0x4D0917: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x4D091C: push    1; createIfMissing
+0x4D091E: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
+0x4D0923: push    1; skipTimeAndWindUpdate
+0x4D0925: push    ebx; camera
 0x4D0926: mov     byte ptr [eax+23h], 1
-0x4D092A: call    sub_55FA50
+0x4D092A: call    BSTreeManager_Update; Verified cross-version update divergence: Fallout obtains tree material tint from D3DX atmosphere shader defines[8..10] and writes NiMaterialProperty.emissive RGB. Oblivion instead calls Sky_GetFogProperty and copies dwords at returned-object +0x20/+0x24/+0x28 into three material color triplets. Both refresh manager material state each non-skipped update; the exact Oblivion color channels represented by the three triplets remain Candidate.
 0x4D092F: mov     edi, [esp+0B0h+var_7C]
 0x4D0933: add     esp, 0Ch
 0x4D0936: mov     ecx, edi
@@ -264,7 +264,7 @@
 0x4D0A51: mov     ecx, [esp+0A8h+var_7C]
 0x4D0A55: push    edx
 0x4D0A56: mov     byte ptr ds:0B0727Ch, 0
-0x4D0A5D: call    sub_4D0190
+0x4D0A5D: call    sub_4D0190; MoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.
 0x4D0A62: cmp     byte ptr ds:0B42D40h, 0
 0x4D0A69: mov     al, byte ptr [esp+0A4h+var_84+3]
 0x4D0A6D: mov     byte ptr [esp+0A4h+var_4], 5
@@ -318,11 +318,11 @@
 0x4D0B10: and     [eax+18h], dx
 0x4D0B14: mov     edx, ds:0B333CCh
 0x4D0B1A: mov     eax, [edx+0DCh]
-0x4D0B20: push    ecx; float
-0x4D0B21: push    eax; int
-0x4D0B22: call    sub_55FA50
-0x4D0B27: push    1
-0x4D0B29: call    sub_55F7E0
+0x4D0B20: push    ecx; skipTimeAndWindUpdate
+0x4D0B21: push    eax; camera
+0x4D0B22: call    BSTreeManager_Update; Verified cross-version update divergence: Fallout obtains tree material tint from D3DX atmosphere shader defines[8..10] and writes NiMaterialProperty.emissive RGB. Oblivion instead calls Sky_GetFogProperty and copies dwords at returned-object +0x20/+0x24/+0x28 into three material color triplets. Both refresh manager material state each non-skipped update; the exact Oblivion color channels represented by the three triplets remain Candidate.
+0x4D0B27: push    1; createIfMissing
+0x4D0B29: call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.
 0x4D0B2E: mov     ecx, [esp+0B0h+var_7C]
 0x4D0B32: add     esp, 0Ch
 0x4D0B35: mov     byte ptr [eax+23h], 0
@@ -410,3 +410,33 @@
 0x4D0C0E: pop     ebx
 0x4D0C0F: add     esp, 90h
 0x4D0C15: retn    4
+0x9B5430: mov     eax, [ebp-5Ch]
+0x9B5433: and     eax, 1
+0x9B5436: jz      locret_9B5448
+0x9B543C: and     dword ptr [ebp-5Ch], 0FFFFFFFEh
+0x9B5440: mov     ecx, [ebp+4]; slot
+0x9B5443: jmp     NiPointerSlot_Release
+0x9B5448: retn
+0x9B5449: mov     eax, [ebp-74h]
+0x9B544C: push    eax
+0x9B544D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5452: pop     ecx
+0x9B5453: retn
+0x9B5454: lea     ecx, [ebp-74h]; slot
+0x9B5457: jmp     NiPointerSlot_Release
+0x9B545C: mov     eax, [ebp-58h]
+0x9B545F: push    eax
+0x9B5460: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5465: pop     ecx
+0x9B5466: retn
+0x9B5467: lea     ecx, [ebp-58h]; slot
+0x9B546A: jmp     NiPointerSlot_Release
+0x9B546F: lea     ecx, [ebp-60h]; slot
+0x9B5472: jmp     NiPointerSlot_Release
+0x9B5477: mov     edx, [esp+arg_4]
+0x9B547B: lea     eax, [edx-94h]
+0x9B5481: mov     ecx, [edx-98h]
+0x9B5487: xor     ecx, eax
+0x9B5489: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B548E: mov     eax, offset stru_AE0570
+0x9B5493: jmp     ___CxxFrameHandler3

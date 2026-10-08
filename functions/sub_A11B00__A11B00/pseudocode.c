@@ -1,4 +1,8 @@
-BSStringT *sub_A11B00()
+// Initializes Oblivion NiRTTI_SpeedTreeBranchShaderProperty with native name 'SpeedTreeBranchShaderProperty' and parent NiRTTI_SpeedTreeShaderPPLightingProperty.
+NiRTTI *__cdecl InitializeRTTI_SpeedTreeBranchShaderProperty()
 {
-  return sub_70E220(&stru_B468C8, "SpeedTreeBranchShaderProperty", (int)&unk_B468DC);
+  return NiRTTI_Constructor( /*0xa11b14*/
+           &NiRTTI_SpeedTreeBranchShaderProperty,
+           "SpeedTreeBranchShaderProperty",
+           &NiRTTI_SpeedTreeShaderPPLightingProperty);
 }

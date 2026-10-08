@@ -1,1 +1,1 @@
-StackItem
+typedef tagStackItem StackItem;

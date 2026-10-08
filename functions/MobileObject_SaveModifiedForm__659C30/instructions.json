@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x659C39",
-    "line": "mov     [esp+0Ch+var_1], 0FFh",
+    "line": "mov     [esp+0Ch+source], 0FFh",
     "mnemonic": "mov",
     "size": 5
   },
@@ -67,31 +67,31 @@
   },
   {
     "ea": "0x659C4A",
-    "line": "mov     [esp+0Ch+var_1], al",
+    "line": "mov     [esp+0Ch+source], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x659C4E",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x659C50",
-    "line": "lea     eax, [esp+10h+var_1]",
+    "line": "lea     eax, [esp+10h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x659C54",
-    "line": "push    eax; a1",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x659C55",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x659C60",
-    "line": "push    edi; Src",
+    "line": "push    edi; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x659C61",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 113,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 49,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79FD10",
+  "chunks": [
+    [
+      "0x79FD10",
+      "0x7A0A42"
+    ],
+    [
+      "0x9CC530",
+      "0x9CC588"
+    ]
+  ],
+  "chunks_sha256": "a7c86efaad9fb773100058d2519307d590c7a4f5089b4122af839ca876ea0418",
+  "comment_regular": "\n\n[2026-10-03 material ownership] Verified guide+2C receives generated profile vector length and +28 receives indexed vertex counter. Emits spinePoints*profileWidth vertices; passes guide map byte+18 to diffuse writer. Fallout 0x82830F40 matches. Typed this/guide prototype and engine geometry/lighting pointers improve field propagation without importing later-source layouts.\n\nSource-match: CFrondEngine::BuildExtrusionVertices. Builds extrusion profile vertices along each guide using profile/normal/tangent vectors, lighting, wind weights, and running-length T-coordinate adjustment.",
+  "comment_repeatable": "Source-match: CFrondEngine::BuildExtrusionVertices. Builds extrusion profile vertices along each guide using profile/normal/tangent vectors, lighting, wind weights, and running-length T-coordinate adjustment.\n\nVerified 2026-10-03 frond color audit: extrusion vertices always append RGBA=(1,1,1,1) at 0x7A0469, followed by normal/tangent/binormal. This native builder has no RT4.1 static-lighting color branch. Fallout homolog 0x82830F40 likewise writes white. Preserve dynamic normal-based lighting in the frond bridge; do not reinterpret packed colors as normals.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 122,
+  "display_name": "OB_CFrondEngine_BuildExtrusionVertices_010201A0",
   "end_ea": "0x7A0A42",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_79FD10",
+  "name": "OB_CFrondEngine_BuildExtrusionVertices_010201A0",
   "segment": ".text",
   "sha256": "8d6aafeddf4eb426e7086f4ea52af59dfc3e55c1e9fe49c298ba60a490d9e063",
   "size": 3378,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79FD10",
-  "type": "void __thiscall(void **this, int)",
-  "xrefs_from_count": 1061,
+  "total_chunk_size": 3466,
+  "type": "void __thiscall(OB_CFrondEngine_010201A0 *this, OB_SFrondGuide_010201A0 *guide)",
+  "xrefs_from_count": 1202,
   "xrefs_to_count": 1
 }

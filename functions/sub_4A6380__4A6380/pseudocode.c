@@ -1,22 +1,23 @@
-void __thiscall sub_4A6380(_DWORD *this)
+// Verified: frees all BSSimpleList nodes and, only when ownsRegionMemory is set, destroys each TESRegion object.
+void __thiscall TESRegionList_Clear(TESRegionList *self)
 {
-  int i; // edi
-  _DWORD *v3; // eax
+  TESForm *i; // edi
+  OblivionRegionListNode *next; // eax
 
-  for ( i = *(this + 1); i; i = *(this + 1) )
+  for ( i = self->regions.regionForm; i; i = self->regions.regionForm ) /*0x4a6389*/
   {
-    v3 = (_DWORD *)*(this + 2);
-    if ( v3 )
+    next = self->regions.next; /*0x4a6390*/
+    if ( next ) /*0x4a6395*/
     {
-      *(this + 2) = v3[1];
-      *(this + 1) = *v3;
-      FormHeapFree((unsigned int)v3);
+      self->regions.next = next->next; /*0x4a639a*/
+      self->regions.regionForm = next->regionForm; /*0x4a63a0*/
+      FormHeapFree((unsigned int)next); /*0x4a63a3*/
     }
     else
     {
-      *(this + 1) = 0;
+      self->regions.regionForm = 0; /*0x4a63ad*/
     }
-    if ( *((_BYTE *)this + 0xC) )
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)i + 0x10))(i, 1);
+    if ( self->ownsRegionMemory ) /*0x4a63b4*/
+      i->vtbl->Destroy(i, 1); /*0x4a63c7*/
   }
 }

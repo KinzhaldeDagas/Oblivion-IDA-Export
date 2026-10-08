@@ -1,6 +1,6 @@
 0x5AC550: push    esi
 0x5AC551: mov     esi, ecx
-0x5AC553: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5AC553: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5AC558: fldz
 0x5AC55A: fstp    dword ptr [esi+30h]
 0x5AC55D: mov     dword ptr [esi], offset ??_7LevelUpMenu@@6B@; const LevelUpMenu::`vftable'

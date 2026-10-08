@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7925B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; 2026-05-19 captured 4.x load pass: recursive branch compute still consumes compact stock SIdvBranchInfo only; no root-support branch parameter or 40007 supplemental-root consumer observed. Captured 23002/23003-in-40007 handling is OBSE sidecar grammar only.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x7925E3",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7925E9",
-    "line": "call    sub_799EA0",
+    "line": "call    OB_CFrondEngine_Enabled_010201A0; SpeedTree decode: CFrondEngine::Enabled. Returns byte at +0x3C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7925F0",
-    "line": "mov     esi, [esp+100h+arg_8]",
+    "line": "mov     esi, [esp+100h+a5]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x7925F9",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x7925FF",
-    "line": "call    ValueModifierEffect_GetAV",
+    "line": "call    Shared_GetDwordAtOffset38; Linker-folded Oblivion accessor: returns the dword at this+0x38. In TESClass auto-stat calls this is primaryAttribute1; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x792626",
-    "line": "mov     [esp+100h+arg_2C], eax",
+    "line": "mov     [esp+100h+a14], eax",
     "mnemonic": "mov",
     "size": 7
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x79263B",
-    "line": "call    sub_791870",
+    "line": "call    OB_CBranch_BuildBlossomVectors_010201A0; Builds global blossom and non-blossom leaf-map index vectors from compact 0x54 SIdvLeafTexture records.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x79266E",
-    "line": "mov     eax, [esp+100h+arg_20]",
+    "line": "mov     eax, [esp+100h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x792681",
-    "line": "fld     [esp+100h+arg_10]",
+    "line": "fld     [esp+100h+a7]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x792690",
-    "line": "call    sub_791E80",
+    "line": "call    OB_CBranch_ComputeFlareEntries_010201A0; CBranch::Compute uses compact SIdvBranchInfo pointer selected from the static branch-info vector; flare setup consumes fields +0x28..+0x4C.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x792695",
-    "line": "mov     ecx, [esi+60h]",
+    "line": "mov     ecx, [esi+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x792698",
-    "line": "fld     [esp+100h+arg_10]",
+    "line": "fld     [esp+100h+a7]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x7926A0",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7926A3",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7926A8",
-    "line": "fmul    [esp+100h+arg_4]",
+    "line": "fmul    [esp+100h+a4]",
     "mnemonic": "fmul",
     "size": 7
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x7926B2",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7926B7",
-    "line": "fstp    [esp+108h+var_98]",
+    "line": "fstp    [esp+108h+var_98]; CBranch::Compute evaluates SIdvBranchInfo length spline pointer at +0x60.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7926C1",
-    "line": "fstp    [esp+108h+var_104]; float",
+    "line": "fstp    [esp+108h+childDistanceAlongBranch]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -463,19 +463,19 @@
   },
   {
     "ea": "0x7926CB",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7926CE",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7926D3",
-    "line": "mov     ecx, [esi+6Ch]",
+    "line": "mov     ecx, [esi+6Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x7926DA",
-    "line": "fld     [esp+100h+arg_10]",
+    "line": "fld     [esp+100h+a7]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -499,19 +499,19 @@
   },
   {
     "ea": "0x7926E2",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7926E5",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7926EA",
-    "line": "mov     ecx, [esi+54h]",
+    "line": "mov     ecx, [esi+54h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x7926F1",
-    "line": "fld     [esp+100h+arg_10]",
+    "line": "fld     [esp+100h+a7]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x7926F9",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7926FC",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x792701",
-    "line": "mov     ecx, [esi+64h]",
+    "line": "mov     ecx, [esi+64h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x79270B",
-    "line": "fld     [esp+100h+arg_10]",
+    "line": "fld     [esp+100h+a7]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -571,25 +571,25 @@
   },
   {
     "ea": "0x792713",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792716",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79271B",
-    "line": "fmul    [esp+100h+arg_4]",
+    "line": "fmul    [esp+100h+a4]",
     "mnemonic": "fmul",
     "size": 7
   },
   {
     "ea": "0x792722",
-    "line": "mov     ecx, [esi+58h]",
+    "line": "mov     ecx, [esi+58h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -607,19 +607,19 @@
   },
   {
     "ea": "0x79272A",
-    "line": "fld     [esp+104h+arg_10]",
+    "line": "fld     [esp+104h+a7]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x792731",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792734",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x792757",
-    "line": "fadd    [esp+100h+arg_10]",
+    "line": "fadd    [esp+100h+a7]",
     "mnemonic": "fadd",
     "size": 7
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x792782",
-    "line": "mov     ecx, [esp+100h+arg_0]",
+    "line": "mov     ecx, [esp+100h+a3]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x7927A8",
-    "line": "fdiv    [esp+100h+arg_4]",
+    "line": "fdiv    [esp+100h+a4]",
     "mnemonic": "fdiv",
     "size": 7
   },
@@ -871,13 +871,13 @@
   },
   {
     "ea": "0x7927C5",
-    "line": "mov     ecx, [esi+68h]",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7927C8",
-    "line": "fstp    [esp+100h+var_8C]",
+    "line": "fstp    [esp+100h+branchBasePosition]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -913,13 +913,13 @@
   },
   {
     "ea": "0x7927DE",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7927E1",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x7927F0",
-    "line": "fld     [esp+100h+arg_30]",
+    "line": "fld     [esp+100h+a15]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x792825",
-    "line": "mov     edi, [esi+4]",
+    "line": "mov     edi, [esi+4];",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x792867",
-    "line": "push    offset sub_78F3E0",
+    "line": "push    offset OB_SIdvBranchVertex_ctor_010201A0; Stock compact SIdvBranchVertex ctor: 0x48-byte element; zeros direction/position, initializes +0x1C..+0x3C 3x3 transform to identity. Radius/running length/wind are filled by CBranch::Compute before use.",
     "mnemonic": "push",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x792870",
-    "line": "call    sub_401080",
+    "line": "call    sub_401080; CBranch::Compute allocates branch vertex array with stock stride 0x48 and constructor 0x78F3E0; this proves Oblivion does not use the larger later-4.1 SIdvBranchVertex tail.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x79288C",
-    "line": "jnz     loc_792984",
+    "line": "jnz     loc_792984;",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x7928AB",
-    "line": "mov     [esp+100h+var_C8], eax",
+    "line": "mov     dword ptr [esp+100h+stripLength], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x7928C8",
-    "line": "mov     ecx, [esp+104h+arg_20]",
+    "line": "mov     ecx, [esp+104h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1639,43 +1639,43 @@
   },
   {
     "ea": "0x792969",
-    "line": "mov     ecx, [esp+100h+var_C8]",
+    "line": "mov     ecx, dword ptr [esp+100h+stripLength]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79296D",
-    "line": "mov     esi, [esp+100h+arg_20]",
+    "line": "mov     esi, [esp+100h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x792974",
-    "line": "push    ecx",
+    "line": "push    ecx; stripLength",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x792975",
-    "line": "push    eax",
+    "line": "push    eax; strip",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x792976",
-    "line": "push    0; double",
+    "line": "push    0; lodLevel",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x792978",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79297A",
-    "line": "call    sub_796100",
+    "line": "call    OB_CIndexedGeometry_AddStrip_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::AddStrip receives ownership of a caller FormHeap-allocated unsigned-short array (for example allocation at 0x78F477 before call 0x78F48C), appends its unsigned-short length and pointer to per-LOD nested vectors, then adds the 32-bit result of zero_extend(stripLength)-2 to the per-LOD triangle total. There is no clamp in this function; callers are expected to provide a valid strip length (at least two). RT4.1's later contiguous vector<int> representation is contrast only and was not projected onto Oblivion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x792984",
-    "line": "mov     eax, [esp+100h+arg_C]",
+    "line": "mov     eax, [esp+100h+a6]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x7929A9",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1765,19 +1765,19 @@
   },
   {
     "ea": "0x7929AD",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7929B0",
-    "line": "call    sub_784370",
+    "line": "call    OB_stBezierSpline_ScaledVariance_010201A0; Oblivion compact stBezierSpline scaled-variance path: samples the 500-entry evenlySpacedPoints vector at +0x3C and returns uniform random variance scaled by the sampled y value and variance@0x08. Confirms the executable's min/max/variance field order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7929B5",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1801,13 +1801,13 @@
   },
   {
     "ea": "0x7929BF",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7929C2",
-    "line": "call    sub_784370",
+    "line": "call    OB_stBezierSpline_ScaledVariance_010201A0; Oblivion compact stBezierSpline scaled-variance path: samples the 500-entry evenlySpacedPoints vector at +0x3C and returns uniform random variance scaled by the sampled y value and variance@0x08. Confirms the executable's min/max/variance field order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x7929CB",
-    "line": "mov     eax, [esp+100h+arg_18]",
+    "line": "mov     eax, [esp+100h+a9]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x7929DE",
-    "line": "rep movsd",
+    "line": "rep movsd;",
     "mnemonic": "movsd",
     "size": 2
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x7929E3",
-    "line": "mov     ecx, [esp+100h+arg_1C]",
+    "line": "mov     ecx, [esp+100h+a10]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x792A17",
-    "line": "fstp    [esp+10Ch+var_C8]",
+    "line": "fstp    dword ptr [esp+10Ch+stripLength]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2041,19 +2041,19 @@
   },
   {
     "ea": "0x792A3A",
-    "line": "fstp    dword ptr [esp+10Ch+var_C4]",
+    "line": "fstp    dword ptr [esp+10Ch+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792A3E",
-    "line": "mov     ecx, dword ptr [esp+10Ch+var_C4]",
+    "line": "mov     ecx, dword ptr [esp+10Ch+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x792A42",
-    "line": "fld     [esp+10Ch+var_C8]",
+    "line": "fld     dword ptr [esp+10Ch+stripLength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2065,13 +2065,13 @@
   },
   {
     "ea": "0x792A48",
-    "line": "fstp    dword ptr [esp+10Ch+var_C4+4]",
+    "line": "fstp    dword ptr [esp+10Ch+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792A4C",
-    "line": "mov     edx, dword ptr [esp+10Ch+var_C4+4]",
+    "line": "mov     edx, dword ptr [esp+10Ch+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2089,13 +2089,13 @@
   },
   {
     "ea": "0x792A57",
-    "line": "fstp    [esp+10Ch+var_BC]",
+    "line": "fstp    dword ptr [esp+10Ch+outPlacement+8]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792A5B",
-    "line": "mov     ecx, [esp+10Ch+var_BC]",
+    "line": "mov     ecx, dword ptr [esp+10Ch+outPlacement+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x792A6C",
-    "line": "call    sub_78F050",
+    "line": "call    OB_Mat3_AxisAngleInPlace_010201A0; In-place axis-angle rotation helper for branch transforms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x792A78",
-    "line": "fstp    [esp+108h+var_104]; float",
+    "line": "fstp    [esp+108h+childDistanceAlongBranch]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2185,13 +2185,13 @@
   },
   {
     "ea": "0x792A8E",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792A91",
-    "line": "call    sub_78EF60",
+    "line": "call    OB_Mat3_RotateYZ_010201A0; Combined Y/Z branch transform rotation helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x792AE0",
-    "line": "fstp    [esp+100h+var_C8]",
+    "line": "fstp    dword ptr [esp+100h+stripLength]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2419,19 +2419,19 @@
   },
   {
     "ea": "0x792AFF",
-    "line": "fstp    dword ptr [esp+100h+var_C4]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792B03",
-    "line": "mov     edx, dword ptr [esp+100h+var_C4]",
+    "line": "mov     edx, dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x792B07",
-    "line": "fld     [esp+100h+var_C8]",
+    "line": "fld     dword ptr [esp+100h+stripLength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2443,13 +2443,13 @@
   },
   {
     "ea": "0x792B0D",
-    "line": "fstp    dword ptr [esp+100h+var_C4+4]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792B11",
-    "line": "mov     eax, dword ptr [esp+100h+var_C4+4]",
+    "line": "mov     eax, dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2467,13 +2467,13 @@
   },
   {
     "ea": "0x792B1C",
-    "line": "fstp    [esp+100h+var_BC]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement+8]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792B20",
-    "line": "mov     ecx, [esp+100h+var_BC]",
+    "line": "mov     ecx, dword ptr [esp+100h+outPlacement+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x792B29",
-    "line": "mov     ecx, [esi+68h]",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2503,13 +2503,13 @@
   },
   {
     "ea": "0x792B2D",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792B30",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2527,7 +2527,7 @@
   },
   {
     "ea": "0x792B3C",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2545,13 +2545,13 @@
   },
   {
     "ea": "0x792B42",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792B45",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2563,13 +2563,13 @@
   },
   {
     "ea": "0x792B51",
-    "line": "push    offset flt_B2B724",
+    "line": "push    offset referenceVector; referenceVector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x792B56",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x792B5C",
-    "line": "call    sub_78FCC0",
+    "line": "call    OB_Vec3_AngleClamped01_010201A0; Vector angle helper. Dot product against reference vector, clamps to [0,1], returns acos result in radians.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2659,7 +2659,7 @@
   },
   {
     "ea": "0x792B91",
-    "line": "fstp    [esp+100h+var_C8]",
+    "line": "fstp    dword ptr [esp+100h+stripLength]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x792C0E",
-    "line": "mov     ecx, [esi+70h]",
+    "line": "mov     ecx, [esi+70h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2971,7 +2971,7 @@
   },
   {
     "ea": "0x792C28",
-    "line": "fstp    dword ptr [esp+104h+var_C4]",
+    "line": "fstp    dword ptr [esp+104h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2989,7 +2989,7 @@
   },
   {
     "ea": "0x792C32",
-    "line": "fstp    dword ptr [esp+104h+var_C4+4]",
+    "line": "fstp    dword ptr [esp+104h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3001,7 +3001,7 @@
   },
   {
     "ea": "0x792C3A",
-    "line": "fstp    [esp+104h+var_BC]",
+    "line": "fstp    dword ptr [esp+104h+outPlacement+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3013,13 +3013,13 @@
   },
   {
     "ea": "0x792C40",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792C43",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3031,13 +3031,13 @@
   },
   {
     "ea": "0x792C4E",
-    "line": "mov     edx, dword ptr [esp+100h+var_C4]",
+    "line": "mov     edx, dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x792C52",
-    "line": "mov     ecx, dword ptr [esp+100h+var_C4+4]",
+    "line": "mov     ecx, dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x792C6B",
-    "line": "fst     [esp+10Ch+var_54]",
+    "line": "fst     [esp+10Ch+rhs.m]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -3097,49 +3097,49 @@
   },
   {
     "ea": "0x792C74",
-    "line": "fst     [esp+10Ch+var_50]",
+    "line": "fst     [esp+10Ch+rhs.m+4]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x792C7B",
-    "line": "fst     [esp+10Ch+var_4C]",
+    "line": "fst     [esp+10Ch+rhs.m+8]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x792C82",
-    "line": "fst     [esp+10Ch+var_48]",
+    "line": "fst     [esp+10Ch+rhs.m+0Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x792C89",
-    "line": "fst     [esp+10Ch+var_40]",
+    "line": "fst     [esp+10Ch+rhs.m+14h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x792C90",
-    "line": "fst     [esp+10Ch+var_3C]",
+    "line": "fst     [esp+10Ch+rhs.m+18h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x792C97",
-    "line": "fstp    [esp+10Ch+var_38]",
+    "line": "fstp    [esp+10Ch+rhs.m+1Ch]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x792C9E",
-    "line": "fst     [esp+10Ch+var_44]",
+    "line": "fst     [esp+10Ch+rhs.m+10h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x792CA5",
-    "line": "fstp    [esp+10Ch+var_34]",
+    "line": "fstp    [esp+10Ch+rhs.m+20h]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x792CB0",
-    "line": "mov     edx, [esp+10Ch+var_BC]",
+    "line": "mov     edx, dword ptr [esp+10Ch+outPlacement+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3187,13 +3187,13 @@
   },
   {
     "ea": "0x792CC6",
-    "line": "lea     ecx, [esp+110h+var_54]",
+    "line": "lea     ecx, [esp+110h+rhs]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x792CCD",
-    "line": "fmul    [esp+110h+var_C8]",
+    "line": "fmul    dword ptr [esp+110h+stripLength]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -3217,49 +3217,49 @@
   },
   {
     "ea": "0x792CDC",
-    "line": "call    sub_78F160",
+    "line": "call    OB_Mat3_AxisAngleBuild_010201A0; Standalone axis-angle 3x3 matrix builder used by branch generation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x792CE1",
-    "line": "lea     eax, [esp+100h+var_54]",
+    "line": "lea     eax, [esp+100h+rhs]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x792CE8",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x792CE9",
-    "line": "lea     ecx, [esp+104h+var_30]",
+    "line": "lea     ecx, [esp+104h+outTransform]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x792CF0",
-    "line": "push    ecx",
+    "line": "push    ecx; outTransform",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x792CF1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x792CF3",
-    "line": "call    sub_78EDD0",
+    "line": "call    OB_stRotTransform_MultiplyCopy_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x792CF8",
-    "line": "cmp     [esp+100h+arg_20], 0",
+    "line": "cmp     [esp+100h+geometry], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -3439,7 +3439,7 @@
   },
   {
     "ea": "0x792D51",
-    "line": "fstp    [esp+100h+var_C8]",
+    "line": "fstp    dword ptr [esp+100h+stripLength]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3505,19 +3505,19 @@
   },
   {
     "ea": "0x792D70",
-    "line": "fstp    dword ptr [esp+100h+var_C4]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792D74",
-    "line": "mov     edx, dword ptr [esp+100h+var_C4]",
+    "line": "mov     edx, dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x792D78",
-    "line": "fld     [esp+100h+var_C8]",
+    "line": "fld     dword ptr [esp+100h+stripLength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3529,13 +3529,13 @@
   },
   {
     "ea": "0x792D7E",
-    "line": "fstp    dword ptr [esp+100h+var_C4+4]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792D82",
-    "line": "mov     eax, dword ptr [esp+100h+var_C4+4]",
+    "line": "mov     eax, dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3553,19 +3553,19 @@
   },
   {
     "ea": "0x792D8D",
-    "line": "mov     eax, [esp+100h+arg_8]",
+    "line": "mov     eax, [esp+100h+a5]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x792D94",
-    "line": "fstp    [esp+100h+var_BC]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement+8]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792D98",
-    "line": "mov     ecx, [esp+100h+var_BC]",
+    "line": "mov     ecx, dword ptr [esp+100h+outPlacement+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3601,7 +3601,7 @@
   },
   {
     "ea": "0x792DA8",
-    "line": "mov     ecx, [esp+100h+arg_20]",
+    "line": "mov     ecx, [esp+100h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3673,7 +3673,7 @@
   },
   {
     "ea": "0x792DD8",
-    "line": "fld     [esp+100h+arg_28]",
+    "line": "fld     [esp+100h+a13]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3757,7 +3757,7 @@
   },
   {
     "ea": "0x792E07",
-    "line": "fst     dword ptr [ebx+44h]",
+    "line": "fst     dword ptr [ebx+44h]; Stock branch vertex +0x44 receives the single cross-section/child wind weight used by Oblivion's branch pipeline.",
     "mnemonic": "fst",
     "size": 3
   },
@@ -3853,7 +3853,7 @@
   },
   {
     "ea": "0x792E38",
-    "line": "cmp     [esp+100h+var_E5], 0",
+    "line": "cmp     [esp+100h+var_E5], 0;",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3889,7 +3889,7 @@
   },
   {
     "ea": "0x792E49",
-    "line": "fld     [esp+100h+arg_14]",
+    "line": "fld     [esp+100h+a8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -3913,7 +3913,7 @@
   },
   {
     "ea": "0x792E5C",
-    "line": "mov     edx, [esp+100h+arg_20]",
+    "line": "mov     edx, [esp+100h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3925,7 +3925,7 @@
   },
   {
     "ea": "0x792E64",
-    "line": "mov     eax, [esp+104h+arg_2C]",
+    "line": "mov     eax, [esp+104h+a14]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -3937,7 +3937,7 @@
   },
   {
     "ea": "0x792E6C",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -3967,7 +3967,7 @@
   },
   {
     "ea": "0x792E79",
-    "line": "lea     ecx, [esp+110h+var_8C]",
+    "line": "lea     ecx, [esp+110h+branchBasePosition]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -4015,13 +4015,13 @@
   },
   {
     "ea": "0x792E8F",
-    "line": "fstp    [esp+124h+var_120]; float",
+    "line": "fstp    [esp+124h+parentDimmingScalar]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x792E93",
-    "line": "fstp    [esp+124h+var_124]; float",
+    "line": "fstp    [esp+124h+percentAlongParent]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4033,7 +4033,7 @@
   },
   {
     "ea": "0x792E97",
-    "line": "call    sub_78FEB0",
+    "line": "call    OB_CBranch_BuildCrossSection_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4045,13 +4045,13 @@
   },
   {
     "ea": "0x792E9E",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x792EA4",
-    "line": "call    sub_7A0EE0",
+    "line": "call    OB_CFrondEngine_StartGuide_010201A0; Oblivion CFrondEngine::StartGuide constructs one zeroed compact 0x30 SFrondGuide and deep-pushes it into CFrondEngine+0x08. Unlike published RT 4.1, the shipped ABI has no vertex-count argument or stack-vertex selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4063,7 +4063,7 @@
   },
   {
     "ea": "0x792EAD",
-    "line": "mov     ecx, [esp+100h+arg_2C]",
+    "line": "mov     ecx, [esp+100h+a14]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4075,7 +4075,7 @@
   },
   {
     "ea": "0x792EB7",
-    "line": "push    ecx; int",
+    "line": "push    ecx; primaryWindGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -4087,7 +4087,7 @@
   },
   {
     "ea": "0x792EBB",
-    "line": "fstp    dword ptr [esp+12Ch+var_10C+4]; float",
+    "line": "fstp    [esp+12Ch+incomingWindWeight+4]; primaryCrossSectionOrWindWeight",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4153,7 +4153,7 @@
   },
   {
     "ea": "0x792EDA",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4165,7 +4165,7 @@
   },
   {
     "ea": "0x792EE3",
-    "line": "call    sub_79C490",
+    "line": "call    OB_CFrondEngine_AddGuideVertex_010201A0; Oblivion-authoritative CFrondEngine::AddGuideVertex. Builds a 0x38-byte vertex from position, 3x3 rotation transform, primary cross-section/wind weight, and primary wind group, then pushes it into the final compact guide. Unlike local RT 4.1 source, Oblivion has no secondary frond wind fields here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4201,7 +4201,7 @@
   },
   {
     "ea": "0x792EF9",
-    "line": "fstp    dword ptr [eax+40h]",
+    "line": "fstp    dword ptr [eax+40h]; First stock branch vertex running length at +0x40 is initialized to 0.0.",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4240,12 +4240,6 @@
     "line": "jmp     short loc_792F20",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x792F18",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x792F20",
@@ -4315,7 +4309,7 @@
   },
   {
     "ea": "0x792F48",
-    "line": "fstp    [esp+100h+var_C8]",
+    "line": "fstp    dword ptr [esp+100h+stripLength]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4327,7 +4321,7 @@
   },
   {
     "ea": "0x792F50",
-    "line": "fld     [esp+100h+var_C8]",
+    "line": "fld     dword ptr [esp+100h+stripLength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4351,7 +4345,7 @@
   },
   {
     "ea": "0x792F61",
-    "line": "mov     ecx, [esi+68h]",
+    "line": "mov     ecx, [esi+68h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4399,13 +4393,13 @@
   },
   {
     "ea": "0x792F7B",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792F7E",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4423,7 +4417,7 @@
   },
   {
     "ea": "0x792F8A",
-    "line": "mov     ecx, [esi+5Ch]",
+    "line": "mov     ecx, [esi+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4441,13 +4435,13 @@
   },
   {
     "ea": "0x792F92",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x792F95",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4477,7 +4471,7 @@
   },
   {
     "ea": "0x792FAB",
-    "line": "fstp    [esp+100h+var_C8]",
+    "line": "fstp    dword ptr [esp+100h+stripLength]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -5329,7 +5323,7 @@
   },
   {
     "ea": "0x79317C",
-    "line": "mov     ecx, [edx+70h]",
+    "line": "mov     ecx, [edx+70h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -5425,13 +5419,13 @@
   },
   {
     "ea": "0x7931B7",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7931BA",
-    "line": "call    sub_784210",
+    "line": "call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5515,7 +5509,7 @@
   },
   {
     "ea": "0x7931F4",
-    "line": "lea     ecx, [esp+110h+var_54]",
+    "line": "lea     ecx, [esp+110h+rhs]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -5563,43 +5557,43 @@
   },
   {
     "ea": "0x793219",
-    "line": "call    sub_78F160",
+    "line": "call    OB_Mat3_AxisAngleBuild_010201A0; Standalone axis-angle 3x3 matrix builder used by branch generation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79321E",
-    "line": "lea     edx, [esp+100h+var_54]",
+    "line": "lea     edx, [esp+100h+rhs]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x793225",
-    "line": "push    edx",
+    "line": "push    edx; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793226",
-    "line": "lea     eax, [esp+104h+var_30]",
+    "line": "lea     eax, [esp+104h+outTransform]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x79322D",
-    "line": "push    eax",
+    "line": "push    eax; outTransform",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79322E",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x793230",
-    "line": "call    sub_78EDD0",
+    "line": "call    OB_stRotTransform_MultiplyCopy_010201A0; Oblivion stRotTransform 3x3 multiply (C++ operator* with an explicit hidden result pointer). Computes this*rhs into the supplied 0x24-byte output transform.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5641,7 +5635,7 @@
   },
   {
     "ea": "0x793248",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -5653,19 +5647,19 @@
   },
   {
     "ea": "0x79324C",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x79324F",
-    "line": "call    sub_784370",
+    "line": "call    OB_stBezierSpline_ScaledVariance_010201A0; Oblivion compact stBezierSpline scaled-variance path: samples the 500-entry evenlySpacedPoints vector at +0x3C and returns uniform random variance scaled by the sampled y value and variance@0x08. Confirms the executable's min/max/variance field order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x793254",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -5689,13 +5683,13 @@
   },
   {
     "ea": "0x793260",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x793263",
-    "line": "call    sub_784370",
+    "line": "call    OB_stBezierSpline_ScaledVariance_010201A0; Oblivion compact stBezierSpline scaled-variance path: samples the 500-entry evenlySpacedPoints vector at +0x3C and returns uniform random variance scaled by the sampled y value and variance@0x08. Confirms the executable's min/max/variance field order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5725,7 +5719,7 @@
   },
   {
     "ea": "0x793275",
-    "line": "fstp    [esp+108h+var_104]; float",
+    "line": "fstp    [esp+108h+childDistanceAlongBranch]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -5737,13 +5731,13 @@
   },
   {
     "ea": "0x79327D",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x793280",
-    "line": "call    sub_78EF60",
+    "line": "call    OB_Mat3_RotateYZ_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
@@ -6163,13 +6157,13 @@
   },
   {
     "ea": "0x79336D",
-    "line": "fstp    dword ptr [esp+100h+var_C4]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793371",
-    "line": "mov     edx, dword ptr [esp+100h+var_C4]",
+    "line": "mov     edx, dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6187,13 +6181,13 @@
   },
   {
     "ea": "0x79337C",
-    "line": "fstp    dword ptr [esp+100h+var_C4+4]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793380",
-    "line": "mov     ecx, dword ptr [esp+100h+var_C4+4]",
+    "line": "mov     ecx, dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6211,19 +6205,19 @@
   },
   {
     "ea": "0x79338B",
-    "line": "fstp    [esp+100h+var_BC]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement+8]; v145 floor hook: this reused stack slot is pending position Z here, consumed by both vertex+14h and frond guide copies. Eight-byte guarded span; resume793393.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x79338F",
-    "line": "mov     eax, [esp+100h+var_BC]",
+    "line": "mov     eax, dword ptr [esp+100h+outPlacement+8]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x793393",
-    "line": "fld     [esp+100h+arg_28]",
+    "line": "fld     [esp+100h+a13]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -6247,7 +6241,7 @@
   },
   {
     "ea": "0x7933A6",
-    "line": "cmp     [esp+100h+arg_8], eax",
+    "line": "cmp     [esp+100h+a5], eax",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -6283,7 +6277,7 @@
   },
   {
     "ea": "0x7933B9",
-    "line": "fld     [esp+100h+var_C8]",
+    "line": "fld     dword ptr [esp+100h+stripLength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -6367,7 +6361,7 @@
   },
   {
     "ea": "0x7933E5",
-    "line": "fmul    [esp+100h+var_C8]",
+    "line": "fmul    dword ptr [esp+100h+stripLength]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -6415,7 +6409,7 @@
   },
   {
     "ea": "0x7933FE",
-    "line": "cmp     [esp+100h+var_E5], 0",
+    "line": "cmp     [esp+100h+var_E5], 0;",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -6427,7 +6421,7 @@
   },
   {
     "ea": "0x793409",
-    "line": "mov     ecx, [esp+100h+arg_8]",
+    "line": "mov     ecx, [esp+100h+a5]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -6541,7 +6535,7 @@
   },
   {
     "ea": "0x793440",
-    "line": "fld     [esp+100h+arg_14]",
+    "line": "fld     [esp+100h+a8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -6565,7 +6559,7 @@
   },
   {
     "ea": "0x793453",
-    "line": "mov     eax, [esp+100h+arg_20]",
+    "line": "mov     eax, [esp+100h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -6583,13 +6577,13 @@
   },
   {
     "ea": "0x79345C",
-    "line": "mov     ecx, [esp+108h+arg_2C]",
+    "line": "mov     ecx, [esp+108h+a14]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x793463",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -6631,7 +6625,7 @@
   },
   {
     "ea": "0x793477",
-    "line": "lea     edx, [esp+110h+var_8C]",
+    "line": "lea     edx, [esp+110h+branchBasePosition]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -6667,7 +6661,7 @@
   },
   {
     "ea": "0x793486",
-    "line": "fstp    [esp+124h+var_120]; float",
+    "line": "fstp    [esp+124h+parentDimmingScalar]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -6679,7 +6673,7 @@
   },
   {
     "ea": "0x79348E",
-    "line": "fstp    [esp+124h+var_124]; float",
+    "line": "fstp    [esp+124h+percentAlongParent]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -6691,7 +6685,7 @@
   },
   {
     "ea": "0x793492",
-    "line": "call    sub_78FEB0",
+    "line": "call    OB_CBranch_BuildCrossSection_010201A0; Builds one branch cross-section from compact branch vertex position/radius/transform, emits diffuse texcoords, tangent/binormal, coord, packed color, and optional primary wind data into CIndexedGeometry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6703,7 +6697,7 @@
   },
   {
     "ea": "0x793499",
-    "line": "mov     eax, [esp+100h+arg_2C]",
+    "line": "mov     eax, [esp+100h+a14]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -6715,7 +6709,7 @@
   },
   {
     "ea": "0x7934A4",
-    "line": "push    eax; int",
+    "line": "push    eax; primaryWindGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -6727,7 +6721,7 @@
   },
   {
     "ea": "0x7934A8",
-    "line": "fstp    dword ptr [esp+12Ch+var_10C+4]; float",
+    "line": "fstp    [esp+12Ch+incomingWindWeight+4]; primaryCrossSectionOrWindWeight",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -6769,7 +6763,7 @@
   },
   {
     "ea": "0x7934BC",
-    "line": "mov     ecx, dword ptr [esp+138h+var_C4+4]",
+    "line": "mov     ecx, dword ptr [esp+138h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6781,7 +6775,7 @@
   },
   {
     "ea": "0x7934C2",
-    "line": "mov     edx, [esp+138h+var_BC]",
+    "line": "mov     edx, dword ptr [esp+138h+outPlacement+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -6793,7 +6787,7 @@
   },
   {
     "ea": "0x7934C9",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -6805,7 +6799,7 @@
   },
   {
     "ea": "0x7934D2",
-    "line": "call    sub_79C490",
+    "line": "call    OB_CFrondEngine_AddGuideVertex_010201A0; Oblivion-authoritative CFrondEngine::AddGuideVertex. Builds a 0x38-byte vertex from position, 3x3 rotation transform, primary cross-section/wind weight, and primary wind group, then pushes it into the final compact guide. Unlike local RT 4.1 source, Oblivion has no secondary frond wind fields here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6871,7 +6865,7 @@
   },
   {
     "ea": "0x7934FD",
-    "line": "fstp    dword ptr [ecx+eax-8]",
+    "line": "fstp    dword ptr [ecx+eax-8]; Per-vertex running length write: next 0x48-byte vertex's +0x40 slot receives accumulated branch length.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -6931,19 +6925,19 @@
   },
   {
     "ea": "0x793521",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x793527",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; lodSizeScalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x79352A",
-    "line": "call    sub_79A000",
+    "line": "call    OB_CFrondEngine_EndGuide_010201A0; SpeedTree decode: stock CFrondEngine::EndGuide. Computes guide length from vertex positions, selects frond texture/aspect/size/angle, writes map index/radius/offset, and stores surface area as lodSizeScalar * length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6973,7 +6967,7 @@
   },
   {
     "ea": "0x79353D",
-    "line": "mov     ecx, [esp+100h+arg_20]",
+    "line": "mov     ecx, [esp+100h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -6991,25 +6985,25 @@
   },
   {
     "ea": "0x79354C",
-    "line": "push    edx",
+    "line": "push    edx; crossSectionSegments",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79354D",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79354E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x793550",
-    "line": "call    sub_78F7A0",
+    "line": "call    OB_CBranch_ComputeBranchNormals_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
@@ -7027,7 +7021,7 @@
   },
   {
     "ea": "0x79355C",
-    "line": "fdiv    [esp+100h+arg_4]",
+    "line": "fdiv    [esp+100h+a4]",
     "mnemonic": "fdiv",
     "size": 7
   },
@@ -7039,13 +7033,13 @@
   },
   {
     "ea": "0x793567",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79356C",
-    "line": "mov     ebx, [esp+100h+arg_8]",
+    "line": "mov     ebx, [esp+100h+a5]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -7201,7 +7195,7 @@
   },
   {
     "ea": "0x7935C9",
-    "line": "mov     edi, [esp+100h+arg_0]",
+    "line": "mov     edi, [esp+100h+a3]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -7213,7 +7207,7 @@
   },
   {
     "ea": "0x7935D2",
-    "line": "fstp    dword ptr [esp+100h+var_C4+4]",
+    "line": "fstp    dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -7225,13 +7219,13 @@
   },
   {
     "ea": "0x7935D8",
-    "line": "mov     dword ptr [esp+100h+var_C4], ecx",
+    "line": "mov     dword ptr [esp+100h+outPlacement], ecx; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7935DC",
-    "line": "mov     [esp+100h+var_BC], ecx",
+    "line": "mov     dword ptr [esp+100h+outPlacement+8], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7249,25 +7243,25 @@
   },
   {
     "ea": "0x7935E5",
-    "line": "push    edi",
+    "line": "push    edi; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7935E6",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7935EB",
-    "line": "mov     [esp+104h+arg_0], edi",
+    "line": "mov     [esp+104h+a3], edi",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7935F2",
-    "line": "call    sub_78EA30",
+    "line": "call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7417,7 +7411,7 @@
   },
   {
     "ea": "0x793645",
-    "line": "fstp    [esp+108h+var_104]",
+    "line": "fstp    [esp+108h+childDistanceAlongBranch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -7447,7 +7441,7 @@
   },
   {
     "ea": "0x793655",
-    "line": "fstp    [esp+108h+var_104]; float",
+    "line": "fstp    [esp+108h+childDistanceAlongBranch]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -7459,25 +7453,25 @@
   },
   {
     "ea": "0x79365C",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x793661",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x793664",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x793669",
-    "line": "fstp    [esp+100h+var_DC]",
+    "line": "fstp    [esp+100h+var_DC];",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -7501,13 +7495,13 @@
   },
   {
     "ea": "0x793676",
-    "line": "lea     eax, [esp+104h+var_C4]",
+    "line": "lea     eax, [esp+104h+outPlacement]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79367A",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -7525,31 +7519,31 @@
   },
   {
     "ea": "0x793684",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; childDistanceAlongBranch",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x793687",
-    "line": "push    eax; int",
+    "line": "push    eax; outPlacement",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793688",
-    "line": "call    sub_78F720",
+    "line": "call    OB_CBranch_FillBranch_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79368D",
-    "line": "fld     [esp+100h+arg_28]",
+    "line": "fld     [esp+100h+a13]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x793694",
-    "line": "mov     esi, dword ptr [esp+100h+var_C4]",
+    "line": "mov     esi, dword ptr [esp+100h+outPlacement]; Parent branch vertex index immediately before child spawn.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -7561,7 +7555,7 @@
   },
   {
     "ea": "0x79369C",
-    "line": "fld     dword ptr [esp+100h+var_C4+4]",
+    "line": "fld     dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -7615,7 +7609,7 @@
   },
   {
     "ea": "0x7936BE",
-    "line": "lea     eax, [edx+ecx*8]",
+    "line": "lea     eax, [edx+ecx*8]; Child branch wind weight interpolation reads parent vertex +0x44 and next vertex +0x44 (+0x8C from current).",
     "mnemonic": "lea",
     "size": 3
   },
@@ -7693,19 +7687,19 @@
   },
   {
     "ea": "0x7936E6",
-    "line": "push    edi",
+    "line": "push    edi; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7936E7",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7936EC",
-    "line": "call    sub_78EA30",
+    "line": "call    OB_stRandom_Reseed_010201A0; Oblivion stRandom::Reseed. Seed -1 derives a nonzero fractional seed from time and either 12345 or an existing uniform sample; explicit seeds <=1 clamp to 1 and use Random::SetLong. Marks the shared generator initialized.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7723,13 +7717,13 @@
   },
   {
     "ea": "0x7936FA",
-    "line": "fstp    [esp+108h+var_104]; float",
+    "line": "fstp    [esp+108h+childDistanceAlongBranch]; maxValue",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7936FE",
-    "line": "mov     ecx, offset unk_B429C9",
+    "line": "mov     ecx, offset stru_B429C9; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7741,13 +7735,13 @@
   },
   {
     "ea": "0x793705",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; minValue",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x793708",
-    "line": "call    sub_78EA00",
+    "line": "call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7759,7 +7753,7 @@
   },
   {
     "ea": "0x79370F",
-    "line": "fld     dword ptr [esp+100h+var_C4+4]",
+    "line": "fld     dword ptr [esp+100h+outPlacement+4]; Interpolation percent between preVertexIndex and preVertexIndex+1.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -7789,7 +7783,7 @@
   },
   {
     "ea": "0x79371D",
-    "line": "add     edi, edi",
+    "line": "add     edi, edi; a2",
     "mnemonic": "add",
     "size": 2
   },
@@ -7975,7 +7969,7 @@
   },
   {
     "ea": "0x793788",
-    "line": "fstp    [esp+100h+var_8C]",
+    "line": "fstp    [esp+100h+branchBasePosition]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -8101,7 +8095,7 @@
   },
   {
     "ea": "0x7937CB",
-    "line": "mov     edx, [esp+100h+arg_2C]",
+    "line": "mov     edx, [esp+100h+a14]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -8119,7 +8113,7 @@
   },
   {
     "ea": "0x7937D8",
-    "line": "mov     eax, [esp+100h+arg_24]",
+    "line": "mov     eax, [esp+100h+a12]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -8137,7 +8131,7 @@
   },
   {
     "ea": "0x7937E1",
-    "line": "fstp    dword ptr [esp+108h+var_10C+4]; float",
+    "line": "fstp    [esp+108h+incomingWindWeight+4]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -8185,13 +8179,13 @@
   },
   {
     "ea": "0x7937F2",
-    "line": "lea     ecx, [esp+118h+var_8C]",
+    "line": "lea     ecx, [esp+118h+branchBasePosition]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7937F9",
-    "line": "fld     [esp+118h+arg_4]",
+    "line": "fld     [esp+118h+a4]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -8215,7 +8209,7 @@
   },
   {
     "ea": "0x793803",
-    "line": "fstp    [esp+124h+var_124]; float",
+    "line": "fstp    [esp+124h+percentAlongParent]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -8233,7 +8227,7 @@
   },
   {
     "ea": "0x793809",
-    "line": "call    sub_7920A0",
+    "line": "call    OB_CBranch_ComputeBud_010201A0; Bud/leaf path. Builds a two-vertex bud direction from next branch-info profile and parent transform, then forwards final leaf candidate data to OB_CBranch_MakeLeaf_010201A0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8311,7 +8305,7 @@
   },
   {
     "ea": "0x793831",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Child CBranch allocation in recursive compute: allocates exactly 0x40 bytes and inlines the compact constructor fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8467,7 +8461,7 @@
   },
   {
     "ea": "0x79387A",
-    "line": "fld     [esp+100h+arg_14]",
+    "line": "fld     [esp+100h+a8]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -8491,7 +8485,7 @@
   },
   {
     "ea": "0x79388C",
-    "line": "mov     [esp+100h+var_BC], esi",
+    "line": "mov     dword ptr [esp+100h+outPlacement+8], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -8587,13 +8581,13 @@
   },
   {
     "ea": "0x7938B8",
-    "line": "mov     ecx, [esp+104h+arg_2C]",
+    "line": "mov     ecx, [esp+104h+a14]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7938BF",
-    "line": "fstp    [esp+104h+var_104]; float",
+    "line": "fstp    [esp+104h+childDistanceAlongBranch]; parentRadius",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -8605,7 +8599,7 @@
   },
   {
     "ea": "0x7938C6",
-    "line": "push    ecx; int",
+    "line": "push    ecx; windGroupIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -8617,13 +8611,13 @@
   },
   {
     "ea": "0x7938C8",
-    "line": "mov     ecx, [esp+10Ch+arg_20]",
+    "line": "mov     ecx, [esp+10Ch+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7938CF",
-    "line": "fstp    dword ptr [esp+10Ch+var_10C]; float",
+    "line": "fstp    [esp+10Ch+incomingWindWeight]; incomingWindWeight",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -8641,25 +8635,25 @@
   },
   {
     "ea": "0x7938D9",
-    "line": "mov     edx, [esp+10Ch+arg_24]",
+    "line": "mov     edx, [esp+10Ch+a12]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7938E0",
-    "line": "push    edx; int",
+    "line": "push    edx; generatedLeafVectorWrapper",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7938E1",
-    "line": "push    ecx; int",
+    "line": "push    ecx; branchGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7938E2",
-    "line": "push    eax; int",
+    "line": "push    eax; parentDirection",
     "mnemonic": "push",
     "size": 1
   },
@@ -8671,13 +8665,13 @@
   },
   {
     "ea": "0x7938E6",
-    "line": "push    eax; int",
+    "line": "push    eax; parentTransform3x3",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7938E7",
-    "line": "mov     eax, [esp+11Ch+arg_0]",
+    "line": "mov     eax, [esp+11Ch+a3]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -8689,37 +8683,37 @@
   },
   {
     "ea": "0x7938F1",
-    "line": "fstp    [esp+124h+var_120]; float",
+    "line": "fstp    [esp+124h+parentDimmingScalar]; parentDimmingScalar",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7938F5",
-    "line": "lea     edx, [esp+124h+var_8C]",
+    "line": "lea     edx, [esp+124h+branchBasePosition]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7938FC",
-    "line": "fstp    [esp+124h+var_124]; float",
+    "line": "fstp    [esp+124h+percentAlongParent]; percentAlongParent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7938FF",
-    "line": "push    edx; int",
+    "line": "push    edx; branchBasePosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793900",
-    "line": "fld     [esp+128h+arg_4]",
+    "line": "fld     [esp+128h+a4]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x793907",
-    "line": "push    ebx; int",
+    "line": "push    ebx; branchLevel",
     "mnemonic": "push",
     "size": 1
   },
@@ -8731,37 +8725,37 @@
   },
   {
     "ea": "0x793909",
-    "line": "fstp    [esp+130h+var_130]; float",
+    "line": "fstp    [esp+130h+treeSizeScalar]; treeSizeScalar",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x79390C",
-    "line": "push    eax; int",
+    "line": "push    eax; rngSeed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79390D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79390F",
-    "line": "call    sub_7925B0",
+    "line": "call    OB_CBranch_Compute_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x793914",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x79391A",
-    "line": "call    sub_799EA0",
+    "line": "call    OB_CFrondEngine_Enabled_010201A0; SpeedTree decode: CFrondEngine::Enabled. Returns byte at +0x3C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8779,13 +8773,13 @@
   },
   {
     "ea": "0x793923",
-    "line": "mov     ecx, ds:0B429C4h",
+    "line": "mov     ecx, ds:0B429C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x793929",
-    "line": "call    ValueModifierEffect_GetAV",
+    "line": "call    Shared_GetDwordAtOffset38; Linker-folded Oblivion accessor: returns the dword at this+0x38. In TESClass auto-stat calls this is primaryAttribute1; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8821,7 +8815,7 @@
   },
   {
     "ea": "0x793938",
-    "line": "call    sub_790D00",
+    "line": "call    OB_CBranch_cleanup_010201A0; Compact CBranch cleanup: frees vertex storage, recursively destroys children, and clears child/flare vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8833,7 +8827,7 @@
   },
   {
     "ea": "0x79393E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8845,7 +8839,7 @@
   },
   {
     "ea": "0x793946",
-    "line": "mov     [esp+100h+var_BC], 0",
+    "line": "mov     dword ptr [esp+100h+outPlacement+8], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -8857,7 +8851,7 @@
   },
   {
     "ea": "0x793950",
-    "line": "lea     ecx, [esp+100h+var_C4]",
+    "line": "lea     ecx, [esp+100h+outPlacement]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -8875,13 +8869,13 @@
   },
   {
     "ea": "0x793958",
-    "line": "call    sub_791630",
+    "line": "call    OB_CBranch_childVectorPush_010201A0; Push helper for compact child-reference vector at CBranch+0x08.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79395D",
-    "line": "mov     eax, [esp+100h+var_B8]",
+    "line": "mov     eax, [esp+100h+var_B8];",
     "mnemonic": "mov",
     "size": 4
   },
@@ -9091,13 +9085,13 @@
   },
   {
     "ea": "0x7939D2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7939D4",
-    "line": "call    sub_78F690",
+    "line": "call    OB_CBranch_ComputeVolume_010201A0; Sums adjacent compact branch-vertex segment lengths times endpoint radius sum and writes CBranch+0x28 branchVolume.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9154,5 +9148,125 @@
     "line": "retn    34h ; '4'",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBCB0",
+    "line": "mov     eax, [ebp-0E0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBCB6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBCB7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBCBC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBCBD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBCBE",
+    "line": "mov     eax, [ebp-0ECh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBCC4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBCC5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBCCA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBCCB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CBCCC",
+    "line": "mov     ecx, [ebp-0ECh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBCD2",
+    "line": "add     ecx, 8; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBCD5",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBCDA",
+    "line": "mov     edx, [esp+a4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBCDE",
+    "line": "lea     eax, [edx-0F0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBCE4",
+    "line": "mov     ecx, [edx-0F4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CBCEA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBCEC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBCF1",
+    "line": "mov     eax, offset stru_AF4C1C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBCF6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

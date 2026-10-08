@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x45132A",
-    "line": "mov     eax, [esi+240h]",
+    "line": "mov     eax, [esi+240h]; MEF v19 candidate/fix: byte-checked TESFile_NextRecord length advance. Validate currentRecordOffset + currentRecord.length + 0x14 against fileSize before resuming at 0x451342; invalid data goes to existing stop path 0x451350.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x451333",
-    "line": "add     [esi+25Ch], eax",
+    "line": "add     [esi+25Ch], eax; EngineIssues review: TESFile_NextRecord advances currentRecordOffset by record length + 0x14 without overflow/progress check before comparing to fileSize.",
     "mnemonic": "add",
     "size": 6
   },

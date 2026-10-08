@@ -1,4 +1,4 @@
-0x479C40: push    0FFFFFFFFh
+0x479C40: push    0FFFFFFFFh; Oblivion equipped-AMMO 3D path on ActorSkinInfo. Clears/rebuilds AmmoForm/AmmoModel/AmmoObject at +0x10C/+0x110/+0x114, attaches through native Prn handling, and caches the loaded 3D.
 0x479C42: push    offset SEH_479F80
 0x479C47: mov     eax, large fs:0
 0x479C4D: push    eax
@@ -20,18 +20,18 @@
 0x479C75: jz      loc_479F60
 0x479C7B: cmp     byte ptr [esi+4], 22h ; '"'
 0x479C7F: jnz     loc_479F60
-0x479C85: push    ebp
-0x479C86: push    1
+0x479C85: push    ebp; newModelData
+0x479C86: push    1; replaceMetadata
 0x479C88: lea     ebx, [edi+10Ch]
-0x479C8E: push    ebx
-0x479C8F: call    sub_478780
+0x479C8E: push    ebx; slot
+0x479C8F: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x479C94: cmp     byte ptr [esi+4], 22h ; '"'
 0x479C98: jnz     short loc_479CB0
-0x479C9A: push    ebp
-0x479C9B: push    1
-0x479C9D: push    ebx
-0x479C9E: mov     ecx, edi
-0x479CA0: call    sub_478780
+0x479C9A: push    ebp; newModelData
+0x479C9B: push    1; replaceMetadata
+0x479C9D: push    ebx; slot
+0x479C9E: mov     ecx, edi; this
+0x479CA0: call    ActorSkinInfo_ClearOrReplaceEquipmentSlot; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.
 0x479CA5: mov     [ebx], esi
 0x479CA7: add     esi, 30h ; '0'
 0x479CAA: mov     [edi+110h], esi
@@ -45,19 +45,19 @@
 0x479CCE: push    edi
 0x479CCF: mov     esi, eax
 0x479CD1: call    sub_65D770
-0x479CD6: mov     ecx, ds:0B333C4h
-0x479CDC: push    eax
-0x479CDD: call    PlayerCharacter_GetPlayerNode
+0x479CD6: mov     ecx, ds:0B333C4h; this
+0x479CDC: push    eax; firstPerson
+0x479CDD: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x479CE2: mov     edx, [esi]
-0x479CE4: push    eax
+0x479CE4: push    eax; skeletonRoot
 0x479CE5: mov     eax, [edi+150h]
-0x479CEB: push    eax
+0x479CEB: push    eax; actorRef
 0x479CEC: mov     eax, [edx+14h]
-0x479CEF: push    0Ch
+0x479CEF: push    0Ch; slot
 0x479CF1: mov     ecx, esi
 0x479CF3: call    eax
-0x479CF5: push    eax
-0x479CF6: call    sub_479450
+0x479CF5: push    eax; modelPath
+0x479CF6: call    Actor_LoadCloneAndAttachModel3D; Player-perspective equipped AMMO/quiver model uses stock attachment/add-on slot 0x0C.
 0x479CFB: add     esp, 10h
 0x479CFE: jmp     loc_479EFD
 0x479D03: mov     edx, [eax]
@@ -77,10 +77,10 @@
 0x479D33: push    3
 0x479D35: push    1
 0x479D37: push    eax
-0x479D38: call    sub_439EB0
-0x479D3D: lea     ecx, [esp+48h+var_28]
+0x479D38: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
+0x479D3D: lea     ecx, [esp+48h+var_28]; this
 0x479D41: mov     ebx, eax
-0x479D43: call    sub_478B90
+0x479D43: call    OB_NiCloningProcess_ctor
 0x479D48: fld1
 0x479D4A: fst     [esp+48h+var_10]
 0x479D4E: fst     [esp+48h+var_14]
@@ -112,7 +112,7 @@
 0x479DA1: mov     ebp, eax
 0x479DA3: push    offset dword_A7D0EC
 0x479DA8: mov     ecx, ebx
-0x479DAA: call    NiObjectNET_GetExtraData
+0x479DAA: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x479DAF: test    eax, eax
 0x479DB1: jz      short loc_479DC6
 0x479DB3: mov     eax, [eax+0Ch]
@@ -127,7 +127,7 @@
 0x479DCD: test    ebp, ebp
 0x479DCF: jz      loc_479EAC
 0x479DD5: push    ebp
-0x479DD6: push    offset dword_B35288
+0x479DD6: push    0B35288h
 0x479DDB: call    NiRTTI__IsObjectOfRTTIType
 0x479DE0: add     esp, 8
 0x479DE3: test    al, al
@@ -157,13 +157,13 @@
 0x479E34: add     esp, 8
 0x479E37: jmp     short loc_479E96
 0x479E39: mov     esi, [esp+48h+a1]
-0x479E3D: push    0
-0x479E3F: push    0FFFFFFFFh
-0x479E41: push    0
-0x479E43: push    ebx
-0x479E44: push    ebp
-0x479E45: push    esi
-0x479E46: call    sub_479140
+0x479E3D: push    0; unusedTrailing
+0x479E3F: push    0FFFFFFFFh; modelType
+0x479E41: push    0; unusedContext
+0x479E43: push    ebx; sourceModelRoot
+0x479E44: push    ebp; modelRoot
+0x479E45: push    esi; skeletonRoot
+0x479E46: call    AttachModelUsingPrnExtraData; Non-player equipped AMMO/quiver model attaches through the same Prn scene-graph contract as weapon models.
 0x479E4B: mov     edx, [ebp+0]
 0x479E4E: mov     eax, [edx+8]
 0x479E51: add     esp, 18h
@@ -195,7 +195,7 @@
 0x479E96: mov     ecx, ebp
 0x479E98: call    NiNode_UpdateDynamicEffectState
 0x479E9D: mov     ecx, ebp; this
-0x479E9F: call    NiAVObject_InitializePropertyState
+0x479E9F: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x479EA4: mov     esi, [esp+48h+arg_0]
 0x479EA8: mov     edi, [esp+48h+Src]
 0x479EAC: test    esi, esi
@@ -254,7 +254,7 @@
 0x479F51: push    esi; Src
 0x479F52: call    NiObjectNET_SetName
 0x479F57: push    esi
-0x479F58: call    FormHeapFree
+0x479F58: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x479F5D: add     esp, 4
 0x479F60: mov     ecx, [esp+48h+var_C]
 0x479F64: mov     large fs:0, ecx
@@ -265,3 +265,16 @@
 0x479F6F: pop     ebx
 0x479F70: add     esp, 34h
 0x479F73: retn    4
+0x9AF170: lea     ecx, [ebp-28h]
+0x9AF173: jmp     sub_4781A0
+0x9AF178: lea     ecx, [ebp+4]; slot
+0x9AF17B: jmp     NiPointerSlot_Release
+0x9AF180: lea     ecx, [ebp-30h]; void *
+0x9AF183: jmp     BSStringT_Clear
+0x9AF188: mov     edx, [esp+arg_4]
+0x9AF18C: lea     eax, [edx-38h]
+0x9AF18F: mov     ecx, [edx-3Ch]
+0x9AF192: xor     ecx, eax
+0x9AF194: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF199: mov     eax, offset stru_ADB7F0
+0x9AF19E: jmp     ___CxxFrameHandler3

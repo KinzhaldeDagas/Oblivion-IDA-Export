@@ -17,7 +17,7 @@
 0x6FBA52: mov     [esp+18h+var_4], 0
 0x6FBA5A: jz      short loc_6FBA67
 0x6FBA5C: mov     ecx, eax
-0x6FBA5E: call    TESBound_constr
+0x6FBA5E: call    BSBound_BSBound; Pass269 native BSBound constructor used only for one of four selected exact-root TESObjectSTAT sources when BBX is absent; center/extents are filled from that source's own world bound.
 0x6FBA63: mov     esi, eax
 0x6FBA65: jmp     short loc_6FBA69
 0x6FBA67: xor     esi, esi
@@ -32,3 +32,15 @@
 0x6FBA88: pop     esi
 0x6FBA89: add     esp, 10h
 0x6FBA8C: retn
+0x9D62E0: mov     eax, [ebp-10h]
+0x9D62E3: push    eax
+0x9D62E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D62E9: pop     ecx
+0x9D62EA: retn
+0x9D62EB: mov     edx, [esp+arg_4]
+0x9D62EF: lea     eax, [edx-8]
+0x9D62F2: mov     ecx, [edx-0Ch]
+0x9D62F5: xor     ecx, eax
+0x9D62F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62FC: mov     eax, offset stru_AFE21C
+0x9D6301: jmp     ___CxxFrameHandler3

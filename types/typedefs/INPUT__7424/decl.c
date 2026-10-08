@@ -1,1 +1,1 @@
-INPUT
+typedef tagINPUT INPUT;

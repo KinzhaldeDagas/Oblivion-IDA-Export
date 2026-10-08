@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x5BE94C",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x5BE957",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; actorValue",
     "mnemonic": "push",
     "size": 2
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x5BE95D",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5BE971",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

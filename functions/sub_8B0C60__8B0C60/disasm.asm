@@ -17,7 +17,6 @@
 0x8B0C93: jle     short loc_8B0CDF
 0x8B0C95: mov     edx, ebx
 0x8B0C97: jmp     short loc_8B0CA0
-0x8B0C99: align 10h
 0x8B0CA0: fld     dword ptr [esi+8]
 0x8B0CA3: fstp    [esp+18h+var_4]
 0x8B0CA7: fld     [esp+18h+var_4]

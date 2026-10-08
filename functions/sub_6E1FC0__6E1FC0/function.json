@@ -1,19 +1,36 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6E1FC0",
+  "chunks": [
+    [
+      "0x6E1FC0",
+      "0x6E2152"
+    ],
+    [
+      "0x9C8120",
+      "0x9C8154"
+    ]
+  ],
+  "chunks_sha256": "2d534201aeb18462c31e350b9fbed9379b1ea201d1c11ad65ad71db1f717ddec",
+  "comment_regular": "Oblivion NiTransformData time-range clone. Creates the destination through the native clone path, slices each nonempty channel to [start,end] through the generic key-range copier (content selectors rotation=2, translation=1, scale=0), then transfers each produced array through the matching ownership setter.",
+  "comment_repeatable": "Oblivion NiTransformData time-range clone. Creates the destination through the native clone path, slices each nonempty channel to [start,end] through the generic key-range copier (content selectors rotation=2, translation=1, scale=0), then transfers each produced array through the matching ownership setter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTransformData_CloneTimeRange",
   "end_ea": "0x6E2152",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6E1FC0",
+  "name": "NiTransformData_CloneTimeRange",
   "segment": ".text",
   "sha256": "704d2e09d610ab28e97da76ebfc3035e27d5f6ee9b6e0ddebf2c816fed2c11b0",
   "size": 402,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6E1FC0",
+  "total_chunk_size": 454,
   "type": "int *__thiscall(void *this, int *, float, float)",
-  "xrefs_from_count": 159,
+  "xrefs_from_count": 175,
   "xrefs_to_count": 1
 }

@@ -36,7 +36,7 @@
 0x7C05D8: mov     eax, [ecx]
 0x7C05DA: jmp     loc_7C0AC7
 0x7C05DF: call    sub_5070E0; jumptable 007C05BA case 1
-0x7C05E4: call    Double_To_SInt32
+0x7C05E4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C05E9: add     eax, 0FFFFFFFFh
 0x7C05EC: cmp     eax, 6
 0x7C05EF: jg      short loc_7C0600
@@ -62,8 +62,8 @@
 0x7C0631: mov     ecx, [ebp+7Ch]; this
 0x7C0634: call    BSRenderedTexture__GetInnerTexture
 0x7C0639: mov     ecx, [esp+30h+var_1C]; this
-0x7C063D: push    eax; a2
-0x7C063E: call    sub_76C910
+0x7C063D: push    eax; texture
+0x7C063E: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7C0643: mov     eax, [ebp+7Ch]
 0x7C0646: mov     ecx, [eax+20h]
 0x7C0649: cmp     ecx, edi
@@ -94,7 +94,7 @@
 0x7C06A1: fld     dword ptr ds:0A8F8F8h[ecx*4]
 0x7C06A8: fld     dword ptr [eax-10h]
 0x7C06AB: add     eax, 50h ; 'P'
-0x7C06AE: cmp     eax, offset flt_B43330
+0x7C06AE: cmp     eax, offset unk_B43330
 0x7C06B3: fdiv    st, st(1)
 0x7C06B5: fstp    dword ptr [eax-60h]
 0x7C06B8: fld     dword ptr [eax-50h]
@@ -113,7 +113,7 @@
 0x7C06DA: fstp    st
 0x7C06DC: jmp     loc_7C0AE3
 0x7C06E1: call    sub_5070E0; jumptable 007C05BA case 2
-0x7C06E6: call    Double_To_SInt32
+0x7C06E6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C06EB: add     eax, 0FFFFFFFFh
 0x7C06EE: cmp     eax, 6
 0x7C06F1: jg      short loc_7C0702
@@ -139,8 +139,8 @@
 0x7C0733: mov     ecx, [ebp+7Ch]; this
 0x7C0736: call    BSRenderedTexture__GetInnerTexture
 0x7C073B: mov     ecx, [esp+30h+var_1C]; this
-0x7C073F: push    eax; a2
-0x7C0740: call    sub_76C910
+0x7C073F: push    eax; texture
+0x7C0740: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7C0745: fldz
 0x7C0747: fstp    dword ptr ds:0B2C794h
 0x7C074D: mov     eax, [ebp+7Ch]
@@ -171,7 +171,7 @@
 0x7C07A3: fld     dword ptr ds:0A8F8F8h[ecx*4]
 0x7C07AA: fld     dword ptr [eax-10h]
 0x7C07AD: add     eax, 50h ; 'P'
-0x7C07B0: cmp     eax, offset flt_B43330
+0x7C07B0: cmp     eax, offset unk_B43330
 0x7C07B5: fdiv    st, st(1)
 0x7C07B7: fstp    dword ptr [eax-60h]
 0x7C07BA: fld     dword ptr [eax-50h]
@@ -202,8 +202,8 @@
 0x7C0806: mov     ecx, [ebp+7Ch]; this
 0x7C0809: call    BSRenderedTexture__GetInnerTexture
 0x7C080E: mov     ecx, [esp+30h+var_1C]; this
-0x7C0812: push    eax; a2
-0x7C0813: call    sub_76C910
+0x7C0812: push    eax; texture
+0x7C0813: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7C0818: mov     eax, [ebp+0D0h]
 0x7C081E: cmp     eax, 3
 0x7C0821: jz      short loc_7C0854
@@ -218,7 +218,7 @@
 0x7C083E: mov     eax, [ebp+94h]
 0x7C0844: push    eax; a2
 0x7C0845: mov     ecx, ebx; this
-0x7C0847: call    sub_7AECB0
+0x7C0847: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7C084C: mov     eax, [ebp+0B4h]
 0x7C0852: jmp     short loc_7C0893
 0x7C0854: cmp     byte ptr ds:0B43071h, 0
@@ -234,11 +234,11 @@
 0x7C087F: mov     eax, [ebp+90h]
 0x7C0885: push    eax; a2
 0x7C0886: mov     ecx, ebx; this
-0x7C0888: call    sub_7AECB0
+0x7C0888: call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.
 0x7C088D: mov     eax, [ebp+0B0h]
-0x7C0893: push    eax; a2
+0x7C0893: push    eax; shader
 0x7C0894: mov     ecx, ebx; this
-0x7C0896: call    sub_7AEC60
+0x7C0896: call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.
 0x7C089B: mov     eax, [ebp+7Ch]
 0x7C089E: mov     ecx, [eax+20h]
 0x7C08A1: test    ecx, ecx
@@ -299,8 +299,8 @@
 0x7C0959: mov     ecx, [ebp+7Ch]; this
 0x7C095C: call    BSRenderedTexture__GetInnerTexture
 0x7C0961: mov     ecx, [esp+30h+var_1C]; this
-0x7C0965: push    eax; a2
-0x7C0966: call    sub_76C910
+0x7C0965: push    eax; texture
+0x7C0966: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7C096B: mov     ecx, [ebx+24h]
 0x7C096E: mov     eax, [ecx+4]
 0x7C0971: push    eax
@@ -308,8 +308,8 @@
 0x7C0976: call    sub_7AEC20
 0x7C097B: mov     eax, [ebp+118h]
 0x7C0981: mov     ecx, [esp+30h+var_1C]; this
-0x7C0985: push    eax; a2
-0x7C0986: call    sub_76C910
+0x7C0985: push    eax; texture
+0x7C0986: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7C098B: mov     edx, [ebx+24h]
 0x7C098E: mov     eax, [edx+8]
 0x7C0991: push    eax
@@ -379,8 +379,8 @@
 0x7C0A79: mov     ecx, [ebp+7Ch]; this
 0x7C0A7C: call    BSRenderedTexture__GetInnerTexture
 0x7C0A81: mov     ecx, [esp+30h+var_1C]; this
-0x7C0A85: push    eax; a2
-0x7C0A86: call    sub_76C910
+0x7C0A85: push    eax; texture
+0x7C0A86: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7C0A8B: mov     ecx, [ebx+24h]
 0x7C0A8E: mov     eax, [ecx+4]
 0x7C0A91: push    eax
@@ -403,14 +403,32 @@
 0x7C0AD1: mov     ecx, [ebp+7Ch]; this
 0x7C0AD4: call    BSRenderedTexture__GetInnerTexture
 0x7C0AD9: mov     ecx, [esp+30h+var_1C]; this
-0x7C0ADD: push    eax; a2
-0x7C0ADE: call    sub_76C910
+0x7C0ADD: push    eax; texture
+0x7C0ADE: call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.
 0x7C0AE3: mov     edx, [ebp+38h]
 0x7C0AE6: lea     ecx, [esp+30h+var_18]
-0x7C0AEA: push    ecx
-0x7C0AEB: push    edx
-0x7C0AEC: lea     ecx, [ebp+40h]
-0x7C0AEF: call    sub_76CE40
+0x7C0AEA: push    ecx; value
+0x7C0AEB: push    edx; index
+0x7C0AEC: lea     ecx, [ebp+40h]; this
+0x7C0AEF: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x7C0AF4: add     dword ptr [ebp+38h], 1
 0x7C0AF8: mov     ecx, [esp+30h+var_1C]
 0x7C0AFC: xor     edi, edi
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9CE0E0: lea     ecx, [ebp-18h]; void *
+0x9CE0E3: jmp     sub_4027D0
+0x9CE0E8: lea     ecx, [ebp-1Ch]
+0x9CE0EB: jmp     loc_75FA70
+0x9CE0F0: mov     edx, [esp+arg_4]
+0x9CE0F4: lea     eax, [edx-20h]
+0x9CE0F7: mov     ecx, [edx-24h]
+0x9CE0FA: xor     ecx, eax
+0x9CE0FC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE101: mov     eax, offset stru_AF7134
+0x9CE106: jmp     ___CxxFrameHandler3

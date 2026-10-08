@@ -1,1 +1,1 @@
-ICallFactoryVtbl_0
+typedef ICallFactoryVtbl ICallFactoryVtbl_0;

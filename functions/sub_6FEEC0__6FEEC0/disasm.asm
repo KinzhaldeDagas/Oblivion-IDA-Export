@@ -4,6 +4,6 @@
 0x6FEEC8: mov     eax, [esp+4+arg_0]
 0x6FEECC: push    eax
 0x6FEECD: mov     ecx, esi
-0x6FEECF: call    nullsub_returnvVoid_1arg
+0x6FEECF: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6FEED4: pop     esi
 0x6FEED5: retn    4

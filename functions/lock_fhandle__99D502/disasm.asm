@@ -7,7 +7,7 @@
 0x99D516: mov     esi, edi
 0x99D518: and     esi, 1Fh
 0x99D51B: imul    esi, 28h ; '('
-0x99D51E: add     esi, dword_BAAAC0[eax*4]
+0x99D51E: add     esi, dword ptr unk_BAAAC0[eax*4]
 0x99D525: mov     [ebp+var_1C], 1
 0x99D52C: xor     ebx, ebx
 0x99D52E: cmp     [esi+8], ebx
@@ -30,3 +30,9 @@
 0x99D55A: inc     dword ptr [esi+8]
 0x99D55D: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x99D564: call    ___lock_fhandle___$LN11_10
+0x99D594: xor     ebx, ebx
+0x99D596: mov     edi, [ebp+arg_0]
+0x99D599: push    0Ah
+0x99D59B: call    __unlock
+0x99D5A0: pop     ecx
+0x99D5A1: retn

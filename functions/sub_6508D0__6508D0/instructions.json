@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x6508D0",
-    "line": "mov     edx, ecx",
+    "line": "mov     edx, ecx; High/MiddleHigh process vtable +0x124. Returns cached BackWeapon for 2H blade, 2H blunt, staff, and bow; SideWeapon otherwise. This accessor is adjacent to, but not called by, the native Arrow:0 clone/attach block.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6508D2",
-    "line": "mov     ecx, [esp+arg_0]",
+    "line": "mov     ecx, [esp+animData]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,25 +91,25 @@
   },
   {
     "ea": "0x6508FD",
-    "line": "mov     [esp+arg_0], 5",
+    "line": "mov     [esp+animData], 5; nodeIndex",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x650905",
-    "line": "jmp     sub_477EC0",
+    "line": "jmp     ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "jmp",
     "size": 5
   },
   {
     "ea": "0x65090A",
-    "line": "mov     [esp+arg_0], 4",
+    "line": "mov     [esp+animData], 4; nodeIndex",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x650912",
-    "line": "jmp     sub_477EC0",
+    "line": "jmp     ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "jmp",
     "size": 5
   },

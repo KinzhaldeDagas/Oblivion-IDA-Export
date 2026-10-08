@@ -1,30 +1,31 @@
-void __thiscall sub_689A00(int *this)
+// Verified clears TravelPath.nodes at +4: frees owned kind-1 position payloads, frees every TravelPathNode record and BSSimpleList link, but leaves kind-0 TESObjectREFR payloads unowned/unreleased.
+void __thiscall TravelPath_ClearNodes(TravelPath *this)
 {
-  int *v1; // esi
-  unsigned int v2; // edi
-  int *v3; // eax
+  BSSimpleList_VoidPtr *p_nodes; // esi
+  TravelPathNode *data; // edi
+  BSSimpleList_VoidPtr::NodeVoid *next; // eax
 
-  v1 = this + 1;
-  if ( this != (int *)0xFFFFFFFC )
+  p_nodes = &this->nodes; /*0x689a01*/
+  if ( this != (TravelPath *)0xFFFFFFFC ) /*0x689a06*/
   {
-    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v1) )
+    while ( !BSSimpleList_IsEmpty(p_nodes) ) /*0x689a19*/
     {
-      v2 = *v1;
-      if ( *v1 )
+      data = (TravelPathNode *)p_nodes->firstNode.data; /*0x689a1b*/
+      if ( p_nodes->firstNode.data ) /*0x689a1b*/
       {
-        sub_68B1C0(*v1);
-        FormHeapFree(v2);
+        TravelPathNode_FreeOwnedPosition((TravelPathNode *)p_nodes->firstNode.data); /*0x689a23*/
+        FormHeapFree((unsigned int)data); /*0x689a29*/
       }
-      v3 = (int *)v1[1];
-      if ( v3 )
+      next = p_nodes->firstNode.next; /*0x689a31*/
+      if ( next ) /*0x689a36*/
       {
-        v1[1] = v3[1];
-        *v1 = *v3;
-        FormHeapFree((unsigned int)v3);
+        p_nodes->firstNode.next = next->next; /*0x689a3b*/
+        p_nodes->firstNode.data = next->data; /*0x689a41*/
+        FormHeapFree((unsigned int)next); /*0x689a43*/
       }
       else
       {
-        *v1 = 0;
+        p_nodes->firstNode.data = 0; /*0x689a4d*/
       }
     }
   }

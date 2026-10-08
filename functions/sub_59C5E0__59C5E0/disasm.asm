@@ -1,4 +1,4 @@
-0x59C5E0: push    0FFFFFFFFh
+0x59C5E0: push    0FFFFFFFFh; [Controller decode 2026-07-09] Controls menu action handler. Saves settings when dirty; action 7 toggles bInvertYValues, action 8 swaps joystick movement/look axis selector settings.
 0x59C5E2: push    offset SEH_59C5E0
 0x59C5E7: mov     eax, large fs:0
 0x59C5ED: push    eax
@@ -20,7 +20,7 @@
 0x59C618: xor     ebx, ebx
 0x59C61A: cmp     [esi+0D8h], ebx
 0x59C620: jnz     loc_59C835
-0x59C626: mov     ebp, dword ptr [esp+3Ch+arg_0]; char
+0x59C626: mov     ebp, [esp+3Ch+arg_0]; char
 0x59C62A: lea     eax, [ebp-1]; switch 13 cases
 0x59C62D: cmp     eax, 0Ch
 0x59C630: ja      def_59C63D; jumptable 0059C63D default case, cases 2-6,11
@@ -46,7 +46,7 @@
 0x59C68B: fstp    dword ptr ds:0B14EE8h
 0x59C691: mov     ecx, [ecx+20h]; this
 0x59C694: call    InputGlobals__SaveControlSettingsToINI
-0x59C699: call    sub_59B9E0
+0x59C699: call    ControlsMenu_CloseOpenMenu
 0x59C69E: call    sub_5BD610
 0x59C6A3: jmp     def_59C63D; jumptable 0059C63D default case, cases 2-6,11
 0x59C6A8: push    1; jumptable 0059C63D case 10
@@ -91,7 +91,7 @@
 0x59C729: push    edx
 0x59C72A: push    eax
 0x59C72B: push    1
-0x59C72D: push    offset sub_59B8C0
+0x59C72D: push    offset ControlsMenu__ConfirmResetDefaultsCallback
 0x59C732: push    ecx
 0x59C733: call    ShowUIMessageBox
 0x59C738: add     esp, 30h
@@ -108,9 +108,9 @@
 0x59C763: cmp     eax, 0Bh
 0x59C766: mov     ecx, esi
 0x59C768: jnz     short loc_59C771
-0x59C76A: call    sub_59B980
+0x59C76A: call    ControlsMenu__SelectPreviousAvailableScheme
 0x59C76F: jmp     short loc_59C776
-0x59C771: call    sub_59B920
+0x59C771: call    ControlsMenu__SelectNextAvailableScheme
 0x59C776: cmp     al, bl
 0x59C778: jz      loc_59C699
 0x59C77E: mov     byte ptr [esi+0D4h], 1
@@ -119,12 +119,12 @@
 0x59C78C: call    sub_57DE50
 0x59C791: fld     dword ptr ds:0A379B4h
 0x59C797: mov     ecx, [esi+4]; this
-0x59C79A: fstp    [esp+40h+a2]; a3
-0x59C79D: push    0FAEh; a2
-0x59C7A2: call    Tile_SetFloat
+0x59C79A: fstp    [esp+40h+a2]; value
+0x59C79D: push    0FAEh; propertyCode
+0x59C7A2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59C7A7: jmp     short def_59C63D; jumptable 0059C63D default case, cases 2-6,11
 0x59C7A9: push    3; jumptable 0059C63D case 8
-0x59C7AB: call    sub_57DE50
+0x59C7AB: call    sub_57DE50; [Controller decode 2026-07-09] Controls menu action 8: swaps joystick movement/look axis selector settings.
 0x59C7B0: mov     ecx, ds:0B14ED8h
 0x59C7B6: mov     eax, ds:0B14EC8h
 0x59C7BB: xor     eax, ecx
@@ -146,21 +146,21 @@
 0x59C7F6: call    sub_57DE50
 0x59C7FB: add     esp, 4
 0x59C7FE: cmp     ds:0B14F38h, bl
-0x59C804: mov     ecx, offset byte_B14F38
+0x59C804: mov     ecx, offset bInvertYValues; [Controller decode 2026-07-09] Controls menu action 7: toggles bInvertYValues.
 0x59C809: setz    dl
 0x59C80C: mov     ds:0B14F38h, dl
 0x59C812: call    sub_404E10
 0x59C817: mov     ecx, esi
 0x59C819: push    eax
 0x59C81A: push    edi
-0x59C81B: call    sub_59B640
+0x59C81B: call    ControlsMenu__SetInvertYButtonLabel
 0x59C820: cmp     ebp, 0Dh; jumptable 0059C63D default case, cases 2-6,11
 0x59C823: jle     short loc_59C835
 0x59C825: cmp     [esi+0E4h], bl
 0x59C82B: jnz     short loc_59C835
 0x59C82D: push    edi
 0x59C82E: mov     ecx, esi
-0x59C830: call    sub_59C3F0
+0x59C830: call    ControlsMenu__StartControlRebind
 0x59C835: mov     ecx, [esp+3Ch+var_C]
 0x59C839: mov     large fs:0, ecx
 0x59C840: pop     ecx
@@ -173,3 +173,16 @@
 0x59C84B: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x59C850: add     esp, 28h
 0x59C853: retn    8
+0x9BFFC0: lea     ecx, [ebp-28h]; void *
+0x9BFFC3: jmp     BSStringT_Clear
+0x9BFFC8: mov     edx, [esp+arg_4]
+0x9BFFCC: lea     eax, [edx-2Ch]
+0x9BFFCF: mov     ecx, [edx-30h]
+0x9BFFD2: xor     ecx, eax
+0x9BFFD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFFD9: add     eax, 10h
+0x9BFFDC: mov     ecx, [edx-4]
+0x9BFFDF: xor     ecx, eax
+0x9BFFE1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFFE6: mov     eax, offset stru_AE9340
+0x9BFFEB: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x616CA0",
-    "line": "push    esi",
+    "line": "push    esi; Applies the CombatController-selected poison item at +0xA4 to the equipped weapon when it has neither poison nor enchantment, removes the consumed poison item, and clears the selection when empty. Private EBP-carried state is preserved in the type.",
     "mnemonic": "push",
     "size": 1
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x616CE3",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x616CE5",
-    "line": "call    sub_484DF0",
+    "line": "call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x616D5B",
-    "line": "call    sub_67F100",
+    "line": "call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x616D8C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

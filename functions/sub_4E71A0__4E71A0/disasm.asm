@@ -1,4 +1,4 @@
-0x4E71A0: push    0FFFFFFFFh
+0x4E71A0: push    0FFFFFFFFh; Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.
 0x4E71A2: push    offset SEH_4E71A0
 0x4E71A7: mov     eax, large fs:0
 0x4E71AD: push    eax
@@ -17,7 +17,7 @@
 0x4E71CD: mov     eax, [ebx+1Ch]
 0x4E71D0: test    eax, eax
 0x4E71D2: jz      short loc_4E71D9
-0x4E71D4: call    sub_4E5400
+0x4E71D4: call    TESPathGrid_ClearRenderedPointGeometry; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.
 0x4E71D9: push    0DCh ; 'Ü'; Size
 0x4E71DE: call    FormHeapAlloc
 0x4E71E3: add     esp, 4
@@ -61,12 +61,12 @@
 0x4E724D: lea     ecx, [ecx+0]
 0x4E7250: mov     eax, [ebx+24h]
 0x4E7253: mov     ecx, [eax+4]
-0x4E7256: mov     ecx, [ecx+esi*4]
+0x4E7256: mov     ecx, [ecx+esi*4]; this
 0x4E7259: test    ecx, ecx
 0x4E725B: jz      short loc_4E7265
-0x4E725D: push    1
-0x4E725F: push    ebx
-0x4E7260: call    sub_4E82E0
+0x4E725D: push    1; includeAllNeighbors
+0x4E725F: push    ebx; grid
+0x4E7260: call    TESPathGridPoint_RebuildRenderGeometry; Verified renderer loop invokes TESPathGridPoint_RebuildRenderGeometry for each non-null point, passing the owning TESPathGrid and includeAllNeighbors=true.
 0x4E7265: movzx   edx, word ptr [ebx+30h]
 0x4E7269: add     esi, 1
 0x4E726C: cmp     esi, edx
@@ -124,15 +124,15 @@
 0x4E72F8: fld1
 0x4E72FA: lea     edx, [esp+40h+var_1C]
 0x4E72FE: fst     [esp+40h+var_1C]
-0x4E7302: push    edx; int
+0x4E7302: push    edx; vertexColor
 0x4E7303: fldz
 0x4E7305: push    ecx
 0x4E7306: fst     [esp+48h+var_18]
 0x4E730A: fstp    [esp+48h+var_10]
 0x4E730E: fstp    [esp+48h+var_14]
 0x4E7312: fld     dword ptr ds:0A31C80h
-0x4E7318: fstp    [esp+48h+a2]; float
-0x4E731B: call    sub_47FD30
+0x4E7318: fstp    [esp+48h+a2]; scale
+0x4E731B: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
 0x4E7320: mov     ebp, eax
 0x4E7322: mov     eax, [esi]
 0x4E7324: mov     edx, [eax+174h]
@@ -163,18 +163,18 @@
 0x4E736F: jz      loc_4E7451
 0x4E7375: mov     ebp, [edi]
 0x4E7377: lea     ecx, [esp+40h+var_1C]
-0x4E737B: push    ecx
-0x4E737C: mov     ecx, ebp
-0x4E737E: call    sub_4BEF40
-0x4E7383: push    eax
+0x4E737B: push    ecx; endColor
+0x4E737C: mov     ecx, ebp; this
+0x4E737E: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
+0x4E7383: push    eax; end
 0x4E7384: mov     eax, [esi]
 0x4E7386: lea     edx, [esp+48h+var_1C]
-0x4E738A: push    edx
+0x4E738A: push    edx; startColor
 0x4E738B: mov     edx, [eax+174h]
 0x4E7391: mov     ecx, esi
 0x4E7393: call    edx
-0x4E7395: push    eax
-0x4E7396: call    sub_47F070
+0x4E7395: push    eax; start
+0x4E7396: call    NiLines_CreateSegment; Verified edge-render call: NiLines_CreateSegment receives the PathGrid point position and its adjacent point position, with the same vertex color for both endpoints; the resulting segment is added under TESPathGrid.renderNode.
 0x4E739B: mov     ecx, [ebx+1Ch]
 0x4E739E: mov     edx, [ecx]
 0x4E73A0: add     esp, 10h
@@ -209,7 +209,7 @@
 0x4E7406: push    ebx; a2
 0x4E7407: mov     ecx, esi; this
 0x4E7409: mov     [esp+44h+var_4], 0FFFFFFFFh
-0x4E7411: call    sub_405680
+0x4E7411: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4E7416: mov     edx, [esp+40h+var_28]
 0x4E741A: mov     ecx, [edx+1Ch]
 0x4E741D: mov     eax, [ecx]
@@ -217,8 +217,8 @@
 0x4E7425: push    1
 0x4E7427: push    esi
 0x4E7428: call    edx
-0x4E742A: mov     ecx, ebp
-0x4E742C: call    sub_4BEF40
+0x4E742A: mov     ecx, ebp; this
+0x4E742C: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x4E7431: mov     ecx, [eax]
 0x4E7433: mov     ebx, [esp+40h+var_28]
 0x4E7437: mov     [esi+54h], ecx
@@ -232,7 +232,7 @@
 0x4E7451: cmp     [esp+40h+var_2C], 0
 0x4E7456: jnz     loc_4E72A0
 0x4E745C: mov     ecx, [ebx+1Ch]; this
-0x4E745F: call    NiAVObject_InitializePropertyState
+0x4E745F: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4E7464: mov     ecx, ds:0B35F88h
 0x4E746A: mov     edx, [ecx]
 0x4E746C: mov     eax, [ebx+1Ch]
@@ -241,13 +241,13 @@
 0x4E7477: push    eax
 0x4E7478: call    edx
 0x4E747A: mov     ecx, ds:0B35F88h; this
-0x4E7480: call    NiAVObject_InitializePropertyState
+0x4E7480: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4E7485: fldz
 0x4E7487: push    0; a3
 0x4E7489: push    ecx
 0x4E748A: mov     ecx, ds:0B35F88h; this
 0x4E7490: fstp    [esp+48h+a2]; a2
-0x4E7493: call    NiAVObject_UpdateNiAVObject
+0x4E7493: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4E7498: mov     ecx, dword ptr [esp+40h+var_C]
 0x4E749C: mov     large fs:0, ecx
 0x4E74A3: pop     ecx
@@ -257,3 +257,20 @@
 0x4E74A7: pop     ebx
 0x4E74A8: add     esp, 2Ch
 0x4E74AB: retn
+0x9B5E30: mov     eax, [ebp-24h]
+0x9B5E33: push    eax
+0x9B5E34: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5E39: pop     ecx
+0x9B5E3A: retn
+0x9B5E3B: mov     eax, [ebp-20h]
+0x9B5E3E: push    eax
+0x9B5E3F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B5E44: pop     ecx
+0x9B5E45: retn
+0x9B5E46: mov     edx, [esp+arg_4]
+0x9B5E4A: lea     eax, [edx-30h]
+0x9B5E4D: mov     ecx, [edx-34h]
+0x9B5E50: xor     ecx, eax
+0x9B5E52: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5E57: mov     eax, offset stru_AE0DBC
+0x9B5E5C: jmp     ___CxxFrameHandler3

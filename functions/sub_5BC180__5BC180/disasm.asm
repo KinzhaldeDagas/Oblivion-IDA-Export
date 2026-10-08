@@ -14,7 +14,7 @@
 0x5BC1A8: jnz     loc_5BC43B
 0x5BC1AE: push    0Bh
 0x5BC1B0: push    3E9h
-0x5BC1B5: call    sub_5790E0
+0x5BC1B5: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5BC1BA: add     esp, 8
 0x5BC1BD: test    al, al
 0x5BC1BF: jnz     loc_5BC43B
@@ -35,7 +35,7 @@
 0x5BC1F1: jnz     loc_5BC43B
 0x5BC1F7: push    0Bh
 0x5BC1F9: push    3E9h
-0x5BC1FE: call    sub_5790E0
+0x5BC1FE: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5BC203: add     esp, 8
 0x5BC206: test    al, al
 0x5BC208: jnz     loc_5BC43B
@@ -79,7 +79,7 @@
 0x5BC2A5: push    0FACh
 0x5BC2AA: call    Tile_GetFloat
 0x5BC2AF: fsubr   [esp+10h+var_C]
-0x5BC2B3: push    offset Vector3_InitValue?
+0x5BC2B3: push    offset g_zeroNiPoint3
 0x5BC2B8: fstp    dword ptr [esi+0D8h]
 0x5BC2BE: mov     eax, ds:0B333C4h
 0x5BC2C3: mov     ecx, [eax+62Ch]
@@ -148,7 +148,7 @@
 0x5BC3B0: push    0FACh
 0x5BC3B5: call    Tile_GetFloat
 0x5BC3BA: fsubr   [esp+10h+var_C]
-0x5BC3BE: push    offset Vector3_InitValue?
+0x5BC3BE: push    offset g_zeroNiPoint3
 0x5BC3C3: lea     edx, [esp+14h+var_C]
 0x5BC3C7: fstp    dword ptr [esi+0D8h]
 0x5BC3CD: mov     ecx, ds:0B333C4h

@@ -2,7 +2,7 @@
 0x4152F3: push    0
 0x4152F5: mov     ecx, esi
 0x4152F7: call    EffectItem_MagickaCostForCaster
-0x4152FC: call    Double_To_SInt32
+0x4152FC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x415301: mov     edi, eax
 0x415303: mov     eax, [esi+1Ch]
 0x415306: mov     ecx, [eax+58h]

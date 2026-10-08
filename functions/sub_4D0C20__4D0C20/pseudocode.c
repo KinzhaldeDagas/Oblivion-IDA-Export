@@ -3,9 +3,9 @@ _DWORD *__thiscall sub_4D0C20(TESObjectCELL *this, _DWORD *arg0, int a3, int a4)
   NiAVObject *v5; // ebp
   int ShadowSceneNode; // eax
   double v7; // st7
-  float v8; // edx
+  float z; // edx
   volatile LONG *v9; // edi
-  float v10; // eax
+  float x; // eax
   double v11; // st5
   double v12; // st6
   NiNode *niNode; // eax
@@ -17,10 +17,10 @@ _DWORD *__thiscall sub_4D0C20(TESObjectCELL *this, _DWORD *arg0, int a3, int a4)
   TESObjectREFR *v19; // eax
   double v20; // st7
   NiNode *v21; // eax
-  NiAVObjectVtbl *v22; // eax
+  NiAVObject *v22; // eax
   char v23; // cl
   NiNode *v24; // eax
-  UInt32 m_uiRefCount; // edi
+  int v25; // edi
   char v26; // al
   int v27; // eax
   int v28; // esi
@@ -30,9 +30,9 @@ _DWORD *__thiscall sub_4D0C20(TESObjectCELL *this, _DWORD *arg0, int a3, int a4)
   int v32; // eax
   bool v33; // zf
   void (__thiscall ***v34)(_DWORD, int); // esi
-  float v36; // [esp+14h] [ebp-E8h]
+  float angleZ; // [esp+14h] [ebp-E8h]
   float v37; // [esp+2Ch] [ebp-D0h]
-  NiAVObjectVtbl *vtbl; // [esp+2Ch] [ebp-D0h]
+  NiAVObject *v38; // [esp+2Ch] [ebp-D0h]
   char v39; // [esp+31h] [ebp-CBh]
   char v40; // [esp+32h] [ebp-CAh]
   char v41; // [esp+33h] [ebp-C9h]
@@ -42,213 +42,213 @@ _DWORD *__thiscall sub_4D0C20(TESObjectCELL *this, _DWORD *arg0, int a3, int a4)
   volatile LONG *v45; // [esp+3Ch] [ebp-C0h] BYREF
   __int64 v46; // [esp+40h] [ebp-BCh] BYREF
   float v47; // [esp+48h] [ebp-B4h]
-  float x; // [esp+4Ch] [ebp-B0h]
+  float v48; // [esp+4Ch] [ebp-B0h]
   float v49; // [esp+50h] [ebp-ACh]
-  float z; // [esp+54h] [ebp-A8h]
+  float v50; // [esp+54h] [ebp-A8h]
   float Radius; // [esp+58h] [ebp-A4h]
   int v52; // [esp+5Ch] [ebp-A0h] BYREF
   void *v53; // [esp+60h] [ebp-9Ch]
   int v54; // [esp+64h] [ebp-98h]
   NiFrustum a2; // [esp+68h] [ebp-94h] BYREF
-  float v56[9]; // [esp+84h] [ebp-78h] BYREF
-  float v57[9]; // [esp+A8h] [ebp-54h] BYREF
-  float v58[9]; // [esp+CCh] [ebp-30h] BYREF
+  NiMatrix33 right; // [esp+84h] [ebp-78h] BYREF
+  NiMatrix33 v57; // [esp+A8h] [ebp-54h] BYREF
+  NiMatrix33 out; // [esp+CCh] [ebp-30h] BYREF
   int v59; // [esp+F8h] [ebp-4h]
 
-  v5 = 0;
-  v54 = 0;
-  if ( (this->members.flags0 & 1) != 0 && this->members.niNode )
+  v5 = 0; /*0x4d0c4f*/
+  v54 = 0; /*0x4d0c51*/
+  if ( (this->members.flags0 & 1) != 0 && this->members.niNode ) /*0x4d0c5f*/
   {
-    ShadowSceneNode = GetShadowSceneNode(0);
-    v7 = flt_B3F9A4;
-    v8 = dword_B3F9B0;
-    v9 = (volatile LONG *)ShadowSceneNode;
-    v10 = Vector3_InitValue_;
-    v11 = -v7 * dbl_A2FAA0;
-    v12 = dbl_A2FAA0;
-    *((float *)&v46 + 1) = *(&Vector3_InitValue_ + 1);
-    v42 = v11;
-    v45 = v9;
-    *(float *)&v46 = v10;
-    v47 = v8;
-    v37 = v7 * v12;
-    sub_711580(v56, v42, v42, v37);
-    NiFrustum::SetOrtho(&a2, 0);
-    niNode = this->members.niNode;
-    a2.Near = flt_A2FE7C;
-    a2.Ortho = 1;
-    y = niNode->members.super.m_kWorldBound.Center.y;
-    x = niNode->members.super.m_kWorldBound.Center.x;
-    z = niNode->members.super.m_kWorldBound.Center.z;
-    v49 = y;
-    Radius = niNode->members.super.m_kWorldBound.Radius;
-    x = z - Radius;
-    v49 = z + Radius;
-    *(float *)&v46 = (float)((a3 << 0xC) + 0x1080);
-    *((float *)&v46 + 1) = (float)((a4 << 0xC) + 0x1080);
-    v47 = v49 + dbl_A46968;
-    sub_4CCE20((ExtraDataList *)this, (float *)&v46, &v46, 0.0);
-    a2.Left = flt_A46964;
-    a2.Right = flt_A46960;
-    a2.Top = a2.Right;
-    a2.Bottom = a2.Left;
-    a2.Far = v47 - x + dbl_A3F3E8;
-    *(float *)&v15 = COERCE_FLOAT(FormHeapAlloc(0x124u));
-    x = *(float *)&v15;
-    v59 = 1;
-    if ( *(float *)&v15 == 0.0 )
+    ShadowSceneNode = GetShadowSceneNode(0); /*0x4d0c69*/
+    v7 = unk_B3F9A4; /*0x4d0c6e*/
+    z = g_zeroNiPoint3.z; /*0x4d0c7c*/
+    v9 = (volatile LONG *)ShadowSceneNode; /*0x4d0c8a*/
+    x = g_zeroNiPoint3.x; /*0x4d0c8c*/
+    v11 = -v7 * dbl_A2FAA0; /*0x4d0c93*/
+    v12 = dbl_A2FAA0; /*0x4d0c93*/
+    HIDWORD(v46) = LODWORD(g_zeroNiPoint3.y); /*0x4d0c98*/
+    v42 = v11; /*0x4d0c9c*/
+    v45 = v9; /*0x4d0ca4*/
+    *(float *)&v46 = x; /*0x4d0caa*/
+    v47 = z; /*0x4d0cae*/
+    v37 = v7 * v12; /*0x4d0cb2*/
+    sub_711580((float *)&right, v42, v42, v37); /*0x4d0cc9*/
+    NiFrustum::SetOrtho(&a2, 0); /*0x4d0cd3*/
+    niNode = this->members.niNode; /*0x4d0cde*/
+    a2.Near = flt_A2FE7C; /*0x4d0ce1*/
+    a2.Ortho = 1; /*0x4d0ce5*/
+    y = niNode->members.super.m_kWorldBound.Center.y; /*0x4d0ced*/
+    v48 = niNode->members.super.m_kWorldBound.Center.x; /*0x4d0cf0*/
+    v50 = niNode->members.super.m_kWorldBound.Center.z; /*0x4d0cf7*/
+    v49 = y; /*0x4d0d08*/
+    Radius = niNode->members.super.m_kWorldBound.Radius; /*0x4d0d16*/
+    v48 = v50 - Radius; /*0x4d0d33*/
+    v49 = v50 + Radius; /*0x4d0d47*/
+    *(float *)&v46 = (float)((a3 << 0xC) + 0x1080); /*0x4d0d56*/
+    *((float *)&v46 + 1) = (float)((a4 << 0xC) + 0x1080); /*0x4d0d5e*/
+    v47 = v49 + dbl_A46968; /*0x4d0d6c*/
+    sub_4CCE20((ExtraDataList *)this, (float *)&v46, &v46, 0.0); /*0x4d0d70*/
+    a2.Left = flt_A46964; /*0x4d0d7b*/
+    a2.Right = flt_A46960; /*0x4d0d85*/
+    a2.Top = a2.Right; /*0x4d0d89*/
+    a2.Bottom = a2.Left; /*0x4d0d8d*/
+    a2.Far = v47 - v48 + dbl_A3F3E8; /*0x4d0da4*/
+    *(float *)&v15 = COERCE_FLOAT(FormHeapAlloc(0x124u)); /*0x4d0da8*/
+    v48 = *(float *)&v15; /*0x4d0db0*/
+    v59 = 1; /*0x4d0db6*/
+    if ( *(float *)&v15 == 0.0 ) /*0x4d0dc1*/
     {
-      v43 = 0;
-      *(float *)&v16 = 0.0;
+      v43 = 0; /*0x4d0dd2*/
+      *(float *)&v16 = 0.0; /*0x4d0dd6*/
     }
     else
     {
-      *(float *)&v16 = COERCE_FLOAT(sub_70D590(v15));
-      v43 = v16;
+      *(float *)&v16 = COERCE_FLOAT(sub_70D590(v15)); /*0x4d0dca*/
+      v43 = v16; /*0x4d0dcc*/
     }
-    x = *(float *)&v16;
-    if ( *(float *)&v16 != 0.0 )
-      InterlockedIncrement((volatile LONG *)&v16->members);
-    v59 = 2;
-    v17 = (NiNode *)FormHeapAlloc(0xDCu);
-    v53 = v17;
-    LOBYTE(v59) = 3;
-    if ( v17 )
-      v5 = (NiAVObject *)NiNode::NiNode(v17, 0);
-    v53 = v5;
-    if ( v5 )
-      InterlockedIncrement((volatile LONG *)&v5->members);
-    Destructor = v5->vtbl[1].super.super.Destructor;
-    LOBYTE(v59) = 4;
-    ((void (__thiscall *)(NiAVObject *, NiCamera *, int))Destructor)(v5, v16, 1);
-    *(_QWORD *)&v5->members.m_localTransform.pos.x = v46;
-    v5->members.m_localTransform.pos.z = v47;
-    (*(void (__thiscall **)(volatile LONG *, NiAVObject *, int))(*v9 + 0x84))(v9, v5, 1);
-    v19 = sub_4CBA80(this, (TESForm *)TESDataHandler_g_NorthMarker, 1);
-    if ( v19 )
+    v48 = *(float *)&v16; /*0x4d0dda*/
+    if ( *(float *)&v16 != 0.0 ) /*0x4d0dde*/
+      InterlockedIncrement((volatile LONG *)&v16->members); /*0x4d0de4*/
+    v59 = 2; /*0x4d0def*/
+    v17 = (NiNode *)FormHeapAlloc(0xDCu); /*0x4d0dfa*/
+    v53 = v17; /*0x4d0e02*/
+    LOBYTE(v59) = 3; /*0x4d0e08*/
+    if ( v17 ) /*0x4d0e10*/
+      v5 = (NiAVObject *)NiNode::NiNode(v17, 0); /*0x4d0e1a*/
+    v53 = v5; /*0x4d0e1e*/
+    if ( v5 ) /*0x4d0e22*/
+      InterlockedIncrement((volatile LONG *)&v5->members); /*0x4d0e28*/
+    Destructor = v5->vtbl[1].super.super.Destructor; /*0x4d0e31*/
+    LOBYTE(v59) = 4; /*0x4d0e3c*/
+    ((void (__thiscall *)(NiAVObject *, NiCamera *, int))Destructor)(v5, v16, 1); /*0x4d0e44*/
+    *(_QWORD *)&v5->members.m_localTransform.pos.x = v46; /*0x4d0e4a*/
+    v5->members.m_localTransform.pos.z = v47; /*0x4d0e58*/
+    (*(void (__thiscall **)(volatile LONG *, NiAVObject *, int))(*v9 + 0x84))(v9, v5, 1); /*0x4d0e68*/
+    v19 = sub_4CBA80(this, (TESForm *)MEMORY[0xB35EB8], 1); /*0x4d0e74*/
+    if ( v19 ) /*0x4d0e7b*/
     {
-      v20 = v19->member.rot.z;
-      if ( v20 != 0.0 )
+      v20 = v19->member.rot.z; /*0x4d0e8e*/
+      if ( v20 != 0.0 ) /*0x4d0e93*/
       {
-        qmemcpy(v57, &stru_B26AF0[0xA].unk2C, sizeof(v57));
-        v36 = v20;
-        NiMatrix33_InitRotationTransform(v57, v36);
-        qmemcpy(v56, NiMAtrix33_Multiply(v57, v58, v56), sizeof(v56));
-        v16 = v43;
+        qmemcpy(&v57, &stru_B26AF0[0xA].unk2C, sizeof(v57)); /*0x4d0ea6*/
+        angleZ = v20; /*0x4d0eb0*/
+        NiMatrix33_InitRotationZ(&v57, angleZ); /*0x4d0eb3*/
+        qmemcpy(&right, NiMAtrix33_Multiply(&v57, &out, &right), sizeof(right)); /*0x4d0edc*/
+        v16 = v43; /*0x4d0ede*/
       }
     }
-    qmemcpy(&v16->members.super.m_localTransform, v56, 0x24u);
-    Camera_SetFrustum(v43, (int)&a2);
-    NiAVObject_UpdateNiAVObject(v5, 0.0, 1);
-    NiAVObject_UpdateNiAVObject((NiAVObject *)v43, 0.0, 1);
-    v21 = this->members.niNode;
-    v41 = 0;
-    v39 = 0;
-    if ( v21 )
+    qmemcpy(&v16->members.super.m_localTransform, &right, 0x24u); /*0x4d0ef2*/
+    Camera_SetFrustum(v43, (int)&a2); /*0x4d0eff*/
+    NiAVObject_UpdateNiAVObject(v5, 0.0, 1); /*0x4d0f12*/
+    NiAVObject_UpdateNiAVObject((NiAVObject *)v43, 0.0, 1); /*0x4d0f20*/
+    v21 = this->members.niNode; /*0x4d0f25*/
+    v41 = 0; /*0x4d0f2a*/
+    v39 = 0; /*0x4d0f2f*/
+    if ( v21 ) /*0x4d0f34*/
     {
-      if ( v21->members.children.end )
+      if ( v21->members.children.end ) /*0x4d0f36*/
       {
-        vtbl = v21->members.children.data->vtbl;
-        v22 = vtbl;
+        v38 = *v21->members.children.data; /*0x4d0f50*/
+        v22 = v38; /*0x4d0f54*/
       }
       else
       {
-        v22 = 0;
-        vtbl = 0;
+        v22 = 0; /*0x4d0f40*/
+        v38 = 0; /*0x4d0f42*/
       }
     }
     else
     {
-      vtbl = 0;
-      v22 = 0;
+      v38 = 0; /*0x4d0f58*/
+      v22 = 0; /*0x4d0f60*/
     }
-    if ( v22 )
+    if ( v22 ) /*0x4d0f66*/
     {
-      v23 = (int)v22->super.Copy & 1;
-      LOWORD(v22->super.Copy) |= 1u;
-      v41 = v23;
+      v23 = v22->members.m_flags & 1; /*0x4d0f6b*/
+      v22->members.m_flags |= 1u; /*0x4d0f6e*/
+      v41 = v23; /*0x4d0f72*/
     }
-    v24 = this->members.niNode;
-    if ( v24 && v24->members.children.end > 1u )
-      m_uiRefCount = v24->members.children.data->members.super.super.m_uiRefCount;
+    v24 = this->members.niNode; /*0x4d0f76*/
+    if ( v24 && v24->members.children.end > 1u ) /*0x4d0f84*/
+      v25 = *((_DWORD *)v24->members.children.data + 1); /*0x4d0f8c*/
     else
-      m_uiRefCount = 0;
-    if ( m_uiRefCount )
+      v25 = 0; /*0x4d0f91*/
+    if ( v25 ) /*0x4d0f95*/
     {
-      v26 = *(_BYTE *)(m_uiRefCount + 0x18) & 1;
-      *(_WORD *)(m_uiRefCount + 0x18) |= 1u;
-      v39 = v26;
+      v26 = *(_BYTE *)(v25 + 0x18) & 1; /*0x4d0f9a*/
+      *(_WORD *)(v25 + 0x18) |= 1u; /*0x4d0f9c*/
+      v39 = v26; /*0x4d0fa0*/
     }
-    v27 = sub_49A140();
-    v28 = v27;
-    v40 = 0;
-    if ( v27 )
+    v27 = sub_49A140(); /*0x4d0fa4*/
+    v28 = v27; /*0x4d0fa9*/
+    v40 = 0; /*0x4d0fad*/
+    if ( v27 ) /*0x4d0fb2*/
     {
-      v29 = *(_BYTE *)(v27 + 0x18) & 1;
-      *(_WORD *)(v28 + 0x18) |= 1u;
-      v40 = v29;
+      v29 = *(_BYTE *)(v27 + 0x18) & 1; /*0x4d0fb7*/
+      *(_WORD *)(v28 + 0x18) |= 1u; /*0x4d0fb9*/
+      v40 = v29; /*0x4d0fbe*/
     }
-    v44 = byte_B0727C;
-    byte_B0727C = 0;
-    sub_4D0190(&v52, v43);
-    byte_B0727C = v44;
-    LOBYTE(v59) = 5;
-    if ( v28 )
+    v44 = byte_B0727C; /*0x4d0fd2*/
+    byte_B0727C = 0; /*0x4d0fd9*/
+    sub_4D0190(&v52, v43); /*0x4d0fe0*/
+    byte_B0727C = v44; /*0x4d0fee*/
+    LOBYTE(v59) = 5; /*0x4d0ff4*/
+    if ( v28 ) /*0x4d1001*/
     {
-      if ( v40 )
-        *(_WORD *)(v28 + 0x18) |= 1u;
+      if ( v40 ) /*0x4d1007*/
+        *(_WORD *)(v28 + 0x18) |= 1u; /*0x4d1009*/
       else
-        *(_WORD *)(v28 + 0x18) &= ~1u;
+        *(_WORD *)(v28 + 0x18) &= ~1u; /*0x4d1010*/
     }
-    if ( vtbl )
+    if ( v38 ) /*0x4d101a*/
     {
-      if ( v41 )
-        LOWORD(vtbl->super.Copy) |= 1u;
+      if ( v41 ) /*0x4d1020*/
+        v38->members.m_flags |= 1u; /*0x4d1022*/
       else
-        LOWORD(vtbl->super.Copy) &= ~1u;
+        v38->members.m_flags &= ~1u; /*0x4d1029*/
     }
-    if ( m_uiRefCount )
+    if ( v25 ) /*0x4d102f*/
     {
-      if ( v39 )
-        *(_WORD *)(m_uiRefCount + 0x18) |= 1u;
+      if ( v39 ) /*0x4d1035*/
+        *(_WORD *)(v25 + 0x18) |= 1u; /*0x4d1037*/
       else
-        *(_WORD *)(m_uiRefCount + 0x18) &= ~1u;
+        *(_WORD *)(v25 + 0x18) &= ~1u; /*0x4d103e*/
     }
-    (*(void (__thiscall **)(volatile LONG *, volatile LONG **, NiAVObject *))(*v45 + 0x88))(v45, &v45, v5);
-    v30 = InterlockedDecrement;
-    if ( v45 )
+    (*(void (__thiscall **)(volatile LONG *, volatile LONG **, NiAVObject *))(*v45 + 0x88))(v45, &v45, v5); /*0x4d1054*/
+    v30 = InterlockedDecrement; /*0x4d105c*/
+    if ( v45 ) /*0x4d1062*/
     {
-      v31 = v45;
-      if ( !v30(v45 + 1) )
-        (**(void (__thiscall ***)(volatile LONG *, int))v31)(v31, 1);
+      v31 = v45; /*0x4d1064*/
+      if ( !v30(v45 + 1) ) /*0x4d106a*/
+        (**(void (__thiscall ***)(volatile LONG *, int))v31)(v31, 1); /*0x4d107c*/
     }
-    if ( !v30((volatile LONG *)&v5->members) )
-      v5->vtbl->super.super.Destructor((NiRefObject *)v5, 1);
-    v53 = 0;
-    if ( !v30((volatile LONG *)&v43->members) )
-      v43->vtbl->super.super.Destructor((NiRefObject *)v43, 1);
-    v32 = v52;
-    v33 = v52 == 0;
-    x = 0.0;
-    *arg0 = v52;
-    if ( !v33 )
+    if ( !v30((volatile LONG *)&v5->members) ) /*0x4d1082*/
+      v5->vtbl->super.super.Destructor((NiRefObject *)v5, 1); /*0x4d1091*/
+    v53 = 0; /*0x4d109b*/
+    if ( !v30((volatile LONG *)&v43->members) ) /*0x4d109f*/
+      v43->vtbl->super.super.Destructor((NiRefObject *)v43, 1); /*0x4d10ad*/
+    v32 = v52; /*0x4d10af*/
+    v33 = v52 == 0; /*0x4d10b3*/
+    v48 = 0.0; /*0x4d10bc*/
+    *arg0 = v52; /*0x4d10c0*/
+    if ( !v33 ) /*0x4d10c3*/
     {
-      InterlockedIncrement((volatile LONG *)(v32 + 4));
-      v32 = v52;
+      InterlockedIncrement((volatile LONG *)(v32 + 4)); /*0x4d10c9*/
+      v32 = v52; /*0x4d10cf*/
     }
-    v54 = 1;
-    LOBYTE(v59) = 4;
-    if ( v32 )
+    v54 = 1; /*0x4d10d5*/
+    LOBYTE(v59) = 4; /*0x4d10dd*/
+    if ( v32 ) /*0x4d10e5*/
     {
-      v34 = (void (__thiscall ***)(_DWORD, int))v32;
-      if ( !v30((volatile LONG *)(v32 + 4)) )
-        (**v34)(v34, 1);
+      v34 = (void (__thiscall ***)(_DWORD, int))v32; /*0x4d10e7*/
+      if ( !v30((volatile LONG *)(v32 + 4)) ) /*0x4d10ed*/
+        (**v34)(v34, 1); /*0x4d10ff*/
     }
-    return arg0;
+    return arg0; /*0x4d1101*/
   }
   else
   {
-    *arg0 = 0;
-    return arg0;
+    *arg0 = 0; /*0x4d110c*/
+    return arg0; /*0x4d1105*/
   }
 }

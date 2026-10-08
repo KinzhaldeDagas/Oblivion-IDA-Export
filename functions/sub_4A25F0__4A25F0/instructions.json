@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4A2638",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4A2640",
-    "line": "push    offset CriticalSection; lpCriticalSection",
+    "line": "push    0B35380h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x4A26AB",
-    "line": "mov     [esp+24Ch+var_234], ebx",
+    "line": "mov     [esp+24Ch+slot], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A26AF",
-    "line": "lea     eax, [esp+24Ch+var_234]",
+    "line": "lea     eax, [esp+24Ch+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x4A26CD",
-    "line": "mov     eax, [esp+24Ch+var_234]",
+    "line": "mov     eax, [esp+24Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x4A26F2",
-    "line": "call    _strrchr",
+    "line": "call    _strrchr; ModernWindowsCompatible decode: _strrchr(Str, '_') for BSTexturePalette path entry processing.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4A26F7",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; ModernWindowsCompatible patch site: vanilla subtracts Str from _strrchr return before checking for NULL; guarded by plugin after byte validation.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x4A27A1",
-    "line": "mov     ecx, [esp+24Ch+var_23C]",
+    "line": "mov     ecx, [esp+24Ch+var_23C]; ModernWindowsCompatible null-result target: existing vanilla fallback/removal path used when underscore position is not positive.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x4A27CF",
-    "line": "mov     esi, [esp+24Ch+var_234]",
+    "line": "mov     esi, [esp+24Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x4A2811",
-    "line": "push    offset CriticalSection; lpCriticalSection",
+    "line": "push    0B35380h; lpCriticalSection",
     "mnemonic": "push",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x4A281E",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1114,5 +1114,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B2390",
+    "line": "lea     ecx, [ebp+slot]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B2396",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B239B",
+    "line": "lea     ecx, [ebp+var_238]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B23A1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B23A6",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B23AA",
+    "line": "lea     eax, [edx-23Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B23B0",
+    "line": "mov     ecx, [edx-240h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B23B6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B23B8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B23BD",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B23C0",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B23C3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B23C5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B23CA",
+    "line": "mov     eax, offset stru_ADE390",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B23CF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

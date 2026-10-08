@@ -1,19 +1,36 @@
 {
-  "callees_count": 25,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A3940",
+  "chunks": [
+    [
+      "0x7A3940",
+      "0x7A3B72"
+    ],
+    [
+      "0x9CC970",
+      "0x9CC99B"
+    ]
+  ],
+  "chunks_sha256": "7cf83f602fedc18256cc8b85f1e7d028527d8566a3f15b69a607172bc2febc01",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-24): Builds generated explicit leaf LODs. Copies highest leaf vector into LOD0, then loops LOD index 1..numLeafLodLevels-1 and calls CLeafLodEngine::ComputeNextLevel on the immediately preceding LOD.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-24): Builds generated explicit leaf LODs. Copies highest leaf vector into LOD0, then loops LOD index 1..numLeafLodLevels-1 and calls CLeafLodEngine::ComputeNextLevel on the immediately preceding LOD.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
+  "display_name": "OB_CTreeEngine_BuildLeafLods_010201A0",
   "end_ea": "0x7A3B72",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A3940",
+  "name": "OB_CTreeEngine_BuildLeafLods_010201A0",
   "segment": ".text",
   "sha256": "73867aff83014424331b3e32fd95b7dfdde3de841c294dd612450ba7d0daf90c",
   "size": 562,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A3940",
-  "type": "void __thiscall(void *this, float)",
-  "xrefs_from_count": 179,
+  "total_chunk_size": 605,
+  "type": "void __thiscall(int this, float)",
+  "xrefs_from_count": 198,
   "xrefs_to_count": 1
 }

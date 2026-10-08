@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x620290",
-    "line": "sub     esp, 40h",
+    "line": "sub     esp, 40h; Evaluates close-combat alternatives while mode +0x74 is 3: caches target surface distance, checks desired range and animation/action state, scores equipped-weapon, magic, and unarmed choices, then starts an action or changes combat mode. Its caller supplies one stack flag that is unused in this build; apparent EBX/EBP/EDI/x87 parameters were decompiler artifacts.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6202A0",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6202C7",
-    "line": "push    0; a4",
+    "line": "push    0; useActorProjection",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x6202CB",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6202D0",
-    "line": "push    eax; a3",
+    "line": "push    eax; to",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6202D1",
-    "line": "push    edi; a2",
+    "line": "push    edi; from",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6202D2",
-    "line": "call    TESObjectREFR_GetDistanceBetween?",
+    "line": "call    TESObjectREFR_GetSurfaceDistance; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x6202E6",
-    "line": "push    ebx",
+    "line": "push    ebx; slot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6202E7",
-    "line": "mov     bl, byte ptr [esp+4Ch+arg_0]",
+    "line": "mov     bl, byte ptr [esp+4Ch+unusedModeFlag]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6202EB",
-    "line": "fstp    [esp+4Ch+var_14]",
+    "line": "fstp    [esp+4Ch+targetAttacking]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x620302",
-    "line": "fstp    qword ptr [esp+4Ch+var_10]",
+    "line": "fstp    qword ptr [esp+4Ch+targetStaggered]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x620312",
-    "line": "fmul    qword ptr [esp+4Ch+var_10]",
+    "line": "fmul    qword ptr [esp+4Ch+targetStaggered]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x620318",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62031A",
-    "line": "call    sub_615520",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x620332",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x620334",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x62033A",
-    "line": "call    sub_51AC80",
+    "line": "call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x620342",
-    "line": "mov     byte ptr [esp+4Ch+var_14], al",
+    "line": "mov     byte ptr [esp+4Ch+targetAttacking], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x620351",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x620355",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x620357",
-    "line": "call    ActorAnimData_GetSomethingFromField8Value",
+    "line": "call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x620367",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x620377",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x620384",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x62039A",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x6203A1",
-    "line": "call    sub_5E5640",
+    "line": "call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x6203AC",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x6203B3",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x6203C0",
-    "line": "mov     byte ptr [esp+48h+var_10+4], al",
+    "line": "mov     byte ptr [esp+48h+targetStaggered+4], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6203C4",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x6203CB",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x6203D7",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x6203DE",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x6203F4",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x62040D",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x620414",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x62041F",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x620428",
-    "line": "push    0; int",
+    "line": "push    0; unused",
     "mnemonic": "push",
     "size": 2
   },
@@ -739,31 +739,31 @@
   },
   {
     "ea": "0x62042D",
-    "line": "fstp    [esp+58h+var_54]; float",
+    "line": "fstp    [esp+58h+maximumDistance]; maximumDistance",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x620431",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x620433",
-    "line": "fld     [esp+58h+var_14]",
+    "line": "fld     [esp+58h+targetAttacking]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x620437",
-    "line": "fstp    [esp+58h+var_58]; float",
+    "line": "fstp    [esp+58h+surfaceDistance]; surfaceDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x62043A",
-    "line": "call    sub_613440",
+    "line": "call    CombatController_IsTargetWithinRangedDistance; Tests surfaceDistance against maximumDistance plus a combat-style-controlled tolerance. Ranged weapon modes 2 and 4 suppress that extra tolerance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x62046C",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x620484",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x620498",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x6204B4",
-    "line": "mov     ecx, [esp+48h+var_18]",
+    "line": "mov     ecx, [esp+48h+targetKnockedDown]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1039,19 +1039,19 @@
   },
   {
     "ea": "0x6204BD",
-    "line": "push    eax; char",
+    "line": "push    eax; targetBlocking",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6204BE",
-    "line": "mov     eax, [esp+4Ch+var_14]",
+    "line": "mov     eax, [esp+4Ch+targetAttacking]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6204C2",
-    "line": "push    ecx; float",
+    "line": "push    ecx; targetKnockedDown",
     "mnemonic": "push",
     "size": 1
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x6204C5",
-    "line": "push    edx; float",
+    "line": "push    edx; targetStaggered",
     "mnemonic": "push",
     "size": 1
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x6204C8",
-    "line": "push    eax; float",
+    "line": "push    eax; targetAttacking",
     "mnemonic": "push",
     "size": 1
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x6204CF",
-    "line": "push    7; char",
+    "line": "push    7; usePowerAttack",
     "mnemonic": "push",
     "size": 2
   },
@@ -1099,25 +1099,25 @@
   },
   {
     "ea": "0x6204D3",
-    "line": "push    eax; int",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6204D4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6204D6",
-    "line": "call    sub_613780",
+    "line": "call    CombatController_GetWeaponSkillLevel; Returns the combat actor's weapon-skill level as an integer. Actor paths read the relevant actor value; creature fallback converts its floating calculation to SInt32 before returning EAX.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6204DB",
-    "line": "push    eax; int",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -1129,19 +1129,19 @@
   },
   {
     "ea": "0x6204DE",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6204E3",
-    "line": "push    eax; int",
+    "line": "push    eax; combatStyle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6204E4",
-    "line": "call    sub_546800",
+    "line": "call    CombatStyle_CalculateAttackScore; Calculates an attack desirability score from luck-modified skill, CombatStyle weights, target action-state flags, power/regular attack multiplier, and the attack-during-block multiplier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x620524",
-    "line": "call    sub_613BB0",
+    "line": "call    CombatController_CanUseSpellAgainstCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x62052F",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x620547",
-    "line": "mov     ecx, [esp+44h+var_14]",
+    "line": "mov     ecx, [esp+44h+targetAttacking]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x62054B",
-    "line": "mov     edx, [esp+44h+var_10]",
+    "line": "mov     edx, [esp+44h+targetStaggered]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1357,19 +1357,19 @@
   },
   {
     "ea": "0x620552",
-    "line": "push    ecx; char",
+    "line": "push    ecx; targetBlocking",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x620553",
-    "line": "push    0; float",
+    "line": "push    0; targetKnockedDown",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x620555",
-    "line": "push    edx; float",
+    "line": "push    edx; targetStaggered",
     "mnemonic": "push",
     "size": 1
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x62055C",
-    "line": "push    7; float",
+    "line": "push    7; targetAttacking",
     "mnemonic": "push",
     "size": 2
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x620562",
-    "line": "push    eax; char",
+    "line": "push    eax; usePowerAttack",
     "mnemonic": "push",
     "size": 1
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x620576",
-    "line": "push    eax; int",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x62057B",
-    "line": "push    eax; int",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -1465,19 +1465,19 @@
   },
   {
     "ea": "0x62057E",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x620583",
-    "line": "push    eax; int",
+    "line": "push    eax; combatStyle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x620584",
-    "line": "call    sub_546800",
+    "line": "call    CombatStyle_CalculateAttackScore; Calculates an attack desirability score from luck-modified skill, CombatStyle weights, target action-state flags, power/regular attack multiplier, and the attack-during-block multiplier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x62059D",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x6205DF",
-    "line": "mov     eax, [esp+48h+var_18]",
+    "line": "mov     eax, [esp+48h+targetKnockedDown]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x62060D",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x620628",
-    "line": "fstp    [esp+50h+arg_0]",
+    "line": "fstp    [esp+50h+unusedModeFlag]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x62062E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x620645",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x62065C",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x620663",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,19 +1957,19 @@
   },
   {
     "ea": "0x62066F",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x620674",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x620676",
-    "line": "call    sub_5E0F30",
+    "line": "call    Actor__IsSleeping; Returns true exactly when Actor.process exists and GetSleepState() == kSitSleep_Sleeping (9). This is a SitSleep-state test, not a combat/procedure test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x620681",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x620688",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x620694",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -2083,7 +2083,7 @@
   },
   {
     "ea": "0x6206AE",
-    "line": "mov     bl, byte ptr [esp+50h+var_18]",
+    "line": "mov     bl, byte ptr [esp+50h+targetKnockedDown]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2107,7 +2107,7 @@
   },
   {
     "ea": "0x6206BA",
-    "line": "fld     [esp+50h+arg_0]",
+    "line": "fld     [esp+50h+unusedModeFlag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x6206E7",
-    "line": "fld     [esp+50h+arg_0]",
+    "line": "fld     [esp+50h+unusedModeFlag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x620703",
-    "line": "fst     [esp+50h+arg_0]",
+    "line": "fst     [esp+50h+unusedModeFlag]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -2401,7 +2401,7 @@
   },
   {
     "ea": "0x620754",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x620761",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x620783",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2515,13 +2515,13 @@
   },
   {
     "ea": "0x62078D",
-    "line": "mov     [esp+58h+arg_0], edx",
+    "line": "mov     [esp+58h+unusedModeFlag], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x620791",
-    "line": "fild    [esp+58h+arg_0]",
+    "line": "fild    [esp+58h+unusedModeFlag]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -2533,13 +2533,13 @@
   },
   {
     "ea": "0x620799",
-    "line": "fstp    [esp+58h+arg_0]",
+    "line": "fstp    [esp+58h+unusedModeFlag]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x62079D",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2593,7 +2593,7 @@
   },
   {
     "ea": "0x6207B8",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2629,13 +2629,13 @@
   },
   {
     "ea": "0x6207CA",
-    "line": "fadd    [esp+58h+arg_0]",
+    "line": "fadd    [esp+58h+unusedModeFlag]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x6207CE",
-    "line": "fstp    [esp+58h+arg_0]",
+    "line": "fstp    [esp+58h+unusedModeFlag]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x6207DA",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2707,7 +2707,7 @@
   },
   {
     "ea": "0x6207F9",
-    "line": "fld     [esp+50h+arg_0]",
+    "line": "fld     [esp+50h+unusedModeFlag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2893,7 +2893,7 @@
   },
   {
     "ea": "0x620850",
-    "line": "push    1Bh",
+    "line": "push    1Bh; encodedKey",
     "mnemonic": "push",
     "size": 2
   },
@@ -2905,13 +2905,13 @@
   },
   {
     "ea": "0x620854",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x620856",
-    "line": "call    sub_470D00",
+    "line": "call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2959,7 +2959,7 @@
   },
   {
     "ea": "0x62086B",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x620883",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -3385,7 +3385,7 @@
   },
   {
     "ea": "0x620938",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3421,7 +3421,7 @@
   },
   {
     "ea": "0x62094A",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3505,7 +3505,7 @@
   },
   {
     "ea": "0x62097A",
-    "line": "fld     [esp+50h+arg_0]",
+    "line": "fld     [esp+50h+unusedModeFlag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3559,19 +3559,19 @@
   },
   {
     "ea": "0x620995",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x620998",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x62099A",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3625,13 +3625,13 @@
   },
   {
     "ea": "0x6209BB",
-    "line": "mov     ecx, [esp+54h+var_10]",
+    "line": "mov     ecx, [esp+54h+targetStaggered]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6209BF",
-    "line": "lea     edx, [esp+54h+arg_0]",
+    "line": "lea     edx, [esp+54h+unusedModeFlag]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3655,7 +3655,7 @@
   },
   {
     "ea": "0x6209C9",
-    "line": "mov     eax, [esp+5Ch+var_18]",
+    "line": "mov     eax, [esp+5Ch+targetKnockedDown]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3691,13 +3691,13 @@
   },
   {
     "ea": "0x6209D8",
-    "line": "fld     [esp+6Ch+var_14]",
+    "line": "fld     [esp+6Ch+targetAttacking]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6209DC",
-    "line": "mov     byte ptr [esp+6Ch+arg_0], 0",
+    "line": "mov     byte ptr [esp+6Ch+unusedModeFlag], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3721,7 +3721,7 @@
   },
   {
     "ea": "0x6209EA",
-    "line": "call    sub_61F8F0",
+    "line": "call    sub_61F8F0; Combat action choice consumes fatigue and current target state; SmartAI v0.3 only re-ranks existing targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3763,7 +3763,7 @@
   },
   {
     "ea": "0x620A0C",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -3811,19 +3811,19 @@
   },
   {
     "ea": "0x620A27",
-    "line": "call    sub_616CA0",
+    "line": "call    CombatController_ApplySelectedPoisonToWeapon; Applies the CombatController-selected poison item at +0xA4 to the equipped weapon when it has neither poison nor enchantment, removes the consumed poison item, and clears the selection when empty. Private EBP-carried state is preserved in the type.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x620A2C",
-    "line": "cmp     byte ptr [esp+50h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+50h+unusedModeFlag], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x620A31",
-    "line": "mov     ecx, offset fCombatSpeakPowerAttackChance",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+268h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3835,7 +3835,7 @@
   },
   {
     "ea": "0x620A38",
-    "line": "mov     ecx, offset fCombatSpeakAttackChance",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+260h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3859,25 +3859,25 @@
   },
   {
     "ea": "0x620A46",
-    "line": "fstp    [esp+54h+var_14]",
+    "line": "fstp    [esp+54h+targetAttacking]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x620A4A",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x620A4F",
-    "line": "mov     [esp+54h+var_10], eax",
+    "line": "mov     [esp+54h+targetStaggered], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x620A53",
-    "line": "fild    [esp+54h+var_10]",
+    "line": "fild    [esp+54h+targetStaggered]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -3895,7 +3895,7 @@
   },
   {
     "ea": "0x620A60",
-    "line": "fld     [esp+50h+var_14]",
+    "line": "fld     [esp+50h+targetAttacking]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3943,7 +3943,7 @@
   },
   {
     "ea": "0x620A79",
-    "line": "cmp     byte ptr [esp+50h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+50h+unusedModeFlag], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3973,7 +3973,7 @@
   },
   {
     "ea": "0x620A86",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -4027,7 +4027,7 @@
   },
   {
     "ea": "0x620A9A",
-    "line": "call    sub_612BD0",
+    "line": "call    CombatController_TryStartAttackAction; Attempts to start the selected attack animation group; on success it saves the prior mode, sets combat mode +0x74 to 0, and records the chosen attack group at +0x50. Private register-carried inputs are retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4075,7 +4075,7 @@
   },
   {
     "ea": "0x620AAB",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -4129,7 +4129,7 @@
   },
   {
     "ea": "0x620ABF",
-    "line": "call    sub_612BD0",
+    "line": "call    CombatController_TryStartAttackAction; Attempts to start the selected attack animation group; on success it saves the prior mode, sets combat mode +0x74 to 0, and records the chosen attack group at +0x50. Private register-carried inputs are retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4195,7 +4195,7 @@
   },
   {
     "ea": "0x620ADB",
-    "line": "fld     [esp+50h+arg_0]",
+    "line": "fld     [esp+50h+unusedModeFlag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4231,7 +4231,7 @@
   },
   {
     "ea": "0x620AF0",
-    "line": "cmp     byte ptr [esp+50h+var_18], 0",
+    "line": "cmp     byte ptr [esp+50h+targetKnockedDown], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -4261,19 +4261,19 @@
   },
   {
     "ea": "0x620B03",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x620B06",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x620B08",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4309,7 +4309,7 @@
   },
   {
     "ea": "0x620B1E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -4369,7 +4369,7 @@
   },
   {
     "ea": "0x620B35",
-    "line": "call    sub_617340",
+    "line": "call    CombatController_TryUseMagicItem",
     "mnemonic": "call",
     "size": 5
   },
@@ -4399,7 +4399,7 @@
   },
   {
     "ea": "0x620B4A",
-    "line": "fstp    [esp+50h+arg_0]",
+    "line": "fstp    [esp+50h+unusedModeFlag]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4423,7 +4423,7 @@
   },
   {
     "ea": "0x620B56",
-    "line": "fstp    [esp+4Ch+var_10]",
+    "line": "fstp    [esp+4Ch+targetStaggered]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4435,7 +4435,7 @@
   },
   {
     "ea": "0x620B5B",
-    "line": "fld     [esp+48h+arg_0]",
+    "line": "fld     [esp+48h+unusedModeFlag]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4453,7 +4453,7 @@
   },
   {
     "ea": "0x620B66",
-    "line": "fld     [esp+44h+var_10]",
+    "line": "fld     [esp+44h+targetStaggered]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4549,19 +4549,19 @@
   },
   {
     "ea": "0x620B9B",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x620B9E",
-    "line": "push    ebp; float",
+    "line": "push    ebp; shouldBlock",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x620B9F",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4663,7 +4663,7 @@
   },
   {
     "ea": "0x620BCA",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4681,7 +4681,7 @@
   },
   {
     "ea": "0x620BD4",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4741,7 +4741,7 @@
   },
   {
     "ea": "0x620BF2",
-    "line": "fstp    [esp+54h+var_54]; float",
+    "line": "fstp    [esp+54h+maximumDistance]; value2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -4759,19 +4759,19 @@
   },
   {
     "ea": "0x620BF8",
-    "line": "fstp    [esp+58h+var_58]; float",
+    "line": "fstp    [esp+58h+surfaceDistance]; value1",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x620BFB",
-    "line": "call    sub_546B20",
+    "line": "call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x620C00",
-    "line": "fstp    [esp+58h+arg_0]",
+    "line": "fstp    [esp+58h+unusedModeFlag]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4795,7 +4795,7 @@
   },
   {
     "ea": "0x620C10",
-    "line": "fld     [esp+50h+arg_0]",
+    "line": "fld     [esp+50h+unusedModeFlag]",
     "mnemonic": "fld",
     "size": 4
   },

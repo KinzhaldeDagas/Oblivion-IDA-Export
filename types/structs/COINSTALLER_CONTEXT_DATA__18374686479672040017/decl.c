@@ -1,1 +1,6 @@
-_COINSTALLER_CONTEXT_DATA
+struct _COINSTALLER_CONTEXT_DATA
+{
+BOOL PostProcessing;
+DWORD InstallResult;
+PVOID PrivateData;
+};

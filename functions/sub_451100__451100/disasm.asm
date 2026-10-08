@@ -11,7 +11,7 @@
 0x451117: mov     ecx, edi
 0x451119: call    TESFile_destr
 0x45111E: push    edi
-0x45111F: call    FormHeapFree
+0x45111F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x451124: add     esp, 4
 0x451127: mov     eax, [esi+4]
 0x45112A: test    eax, eax
@@ -21,7 +21,7 @@
 0x451134: mov     edx, [eax]
 0x451136: push    eax
 0x451137: mov     [esi], edx
-0x451139: call    FormHeapFree
+0x451139: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x45113E: add     esp, 4
 0x451141: jmp     short loc_451149
 0x451143: mov     dword ptr [esi], 0

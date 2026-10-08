@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x77B000",
-    "line": "push    ebx",
+    "line": "push    ebx; DX10 bridge note: Oblivion render-state cache only calls IDirect3DDevice9::SetRenderState through vtable +0xE4 when a cached value changes. The DX10 device vtable hook captures runtime render-state shader variants here; generated fallback pixel shaders use captured alpha-test and fog render states for D3D10 shader-side discard/fog because D3D10 has no fixed-function alpha-test/fog stage.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77B001",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x77B007",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+state]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x77B029",
-    "line": "cmp     [esp+0Ch+arg_8], 0",
+    "line": "cmp     [esp+0Ch+savePrevious], 0",
     "mnemonic": "cmp",
     "size": 5
   },

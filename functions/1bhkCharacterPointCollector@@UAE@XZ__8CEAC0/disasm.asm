@@ -1,4 +1,4 @@
-0x8CEAC0: push    0FFFFFFFFh
+0x8CEAC0: push    0FFFFFFFFh; TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.
 0x8CEAC2: push    offset ??1bhkCharacterPointCollector@@UAE@XZ_SEH
 0x8CEAC7: mov     eax, large fs:0
 0x8CEACD: push    eax
@@ -22,7 +22,6 @@
 0x8CEAFD: mov     [esp+24h+var_4], 3
 0x8CEB05: jle     short loc_8CEB29
 0x8CEB07: jmp     short loc_8CEB10
-0x8CEB09: align 10h
 0x8CEB10: mov     eax, [esi+1A4h]
 0x8CEB16: mov     ecx, [eax+edi*4]
 0x8CEB19: call    sub_8BC730
@@ -160,3 +159,65 @@
 0x8CED14: pop     ebx
 0x8CED15: add     esp, 10h
 0x8CED18: retn
+0x536DD0: mov     edx, ecx
+0x536DD2: mov     eax, [edx+8]
+0x536DD5: test    eax, eax
+0x536DD7: js      short locret_536E0F
+0x536DD9: mov     ecx, ds:0BA9DE4h
+0x536DDF: push    esi
+0x536DE0: mov     esi, large fs:2Ch
+0x536DE7: mov     ecx, [esi+ecx*4]
+0x536DEA: mov     ecx, [ecx+19Ch]
+0x536DF0: test    ecx, ecx
+0x536DF2: pop     esi
+0x536DF3: jnz     short loc_536DFB
+0x536DF5: mov     ecx, ds:0BA7D9Ch
+0x536DFB: mov     edx, [edx]
+0x536DFD: and     eax, 3FFFFFFFh
+0x536E02: add     eax, eax
+0x536E04: push    14h
+0x536E06: add     eax, eax
+0x536E08: push    eax
+0x536E09: push    edx
+0x536E0A: call    sub_8A75D0
+0x536E0F: retn
+0x8D2490: mov     edx, ecx
+0x8D2492: mov     eax, [edx+8]
+0x8D2495: test    eax, eax
+0x8D2497: js      short locret_8D24D1
+0x8D2499: mov     ecx, ds:0BA9DE4h
+0x8D249F: push    esi
+0x8D24A0: mov     esi, large fs:2Ch
+0x8D24A7: mov     ecx, [esi+ecx*4]
+0x8D24AA: mov     ecx, [ecx+19Ch]
+0x8D24B0: test    ecx, ecx
+0x8D24B2: pop     esi
+0x8D24B3: jnz     short loc_8D24BB
+0x8D24B5: mov     ecx, ds:0BA7D9Ch
+0x8D24BB: mov     edx, [edx]
+0x8D24BD: and     eax, 3FFFFFFFh
+0x8D24C2: lea     eax, [eax+eax*2]
+0x8D24C5: push    14h
+0x8D24C7: shl     eax, 4
+0x8D24CA: push    eax
+0x8D24CB: push    edx
+0x8D24CC: call    sub_8A75D0
+0x8D24D1: retn
+0x9D7A70: mov     ecx, [ebp-10h]; this
+0x9D7A73: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9D7A78: mov     ecx, [ebp-10h]
+0x9D7A7B: add     ecx, 1A4h
+0x9D7A81: jmp     loc_536DD0
+0x9D7A86: mov     ecx, [ebp-10h]
+0x9D7A89: add     ecx, 1B0h
+0x9D7A8F: jmp     loc_536DD0
+0x9D7A94: mov     ecx, [ebp-10h]
+0x9D7A97: add     ecx, 1BCh
+0x9D7A9D: jmp     loc_8D2490
+0x9D7AA2: mov     edx, [esp+arg_4]
+0x9D7AA6: lea     eax, [edx-14h]
+0x9D7AA9: mov     ecx, [edx-18h]
+0x9D7AAC: xor     ecx, eax
+0x9D7AAE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7AB3: mov     eax, offset stru_AFF5DC
+0x9D7AB8: jmp     ___CxxFrameHandler3

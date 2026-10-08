@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x4369E0",
-    "line": "lea     eax, [esp+14Ch+var_124]",
+    "line": "lea     eax, [esp+14Ch+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -655,13 +655,13 @@
   },
   {
     "ea": "0x4369E7",
-    "line": "lea     ecx, [esp+144h+var_124]; this",
+    "line": "lea     ecx, [esp+144h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4369EB",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x436A0D",
-    "line": "mov     [esp+144h+var_124], esi",
+    "line": "mov     [esp+144h+slot], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -730,12 +730,6 @@
     "line": "jmp     short loc_436A22",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x436A19",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x436A20",
@@ -1111,7 +1105,7 @@
   },
   {
     "ea": "0x436AD9",
-    "line": "mov     esi, [esp+144h+var_124]",
+    "line": "mov     esi, [esp+144h+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1141,7 +1135,7 @@
   },
   {
     "ea": "0x436AEC",
-    "line": "mov     [esp+144h+var_124], esi",
+    "line": "mov     [esp+144h+slot], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1399,7 @@
   },
   {
     "ea": "0x436B83",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1423,7 @@
   },
   {
     "ea": "0x436B90",
-    "line": "mov     ecx, dword_B3F998",
+    "line": "mov     ecx, dword ptr unk_B3F998",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1591,7 +1585,7 @@
   },
   {
     "ea": "0x436BD8",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1609,7 @@
   },
   {
     "ea": "0x436BE5",
-    "line": "mov     ecx, dword_B3F980",
+    "line": "mov     ecx, dword ptr unk_B3F980",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1903,31 +1897,31 @@
   },
   {
     "ea": "0x436C75",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x436C77",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x436C79",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x436C7B",
-    "line": "push    ecx",
+    "line": "push    ecx; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x436C7C",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic loaded-model preparation assigns shaders recursively with shaderId=1 and normalMapBypass=0. A missing derived normal can therefore leave cloned projectile geometry shaderless.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2008,5 +2002,131 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AC2D0",
+    "line": "mov     eax, [ebp-128h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AC2D6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC2D7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC2DC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC2DD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC2DE",
+    "line": "mov     eax, [ebp-118h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AC2E4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC2E5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC2EA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC2EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC2EC",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC2F0",
+    "line": "lea     eax, [edx-134h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AC2F6",
+    "line": "mov     ecx, [edx-138h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AC2FC",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC2FE",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC303",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC306",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC309",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC30B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC310",
+    "line": "mov     eax, offset stru_AD8FD4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC315",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

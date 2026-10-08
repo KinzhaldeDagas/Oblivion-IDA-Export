@@ -1,129 +1,134 @@
+// CustomAnimSupport decode: debug/dump path for ActorAnimData active slots. Prints slot names and decodes active keys via AnimKey helpers; used by path-specific state diagnostics.
 char __usercall sub_509D70@<al>(int a1@<edi>, int a2, int a3, void *a4)
 {
-  Actor *v9; // esi
+  Actor *v4; // esi
   int ProcessLevel; // eax
   LowProcess *process; // edi
-  unsigned __int8 v12; // al
-  unsigned __int8 v13; // al
+  unsigned __int8 v7; // al
+  unsigned __int8 v8; // al
   int CurrentAction; // eax
   struct Concurrency::details::ScheduleGroupBase *AnonymousScheduleGroup; // eax
-  int v16; // eax
-  int v17; // eax
-  bool v18; // zf
-  const char *v19; // eax
-  int v20; // eax
-  TESObjectREFR *v21; // eax
+  int v11; // eax
+  int v12; // eax
+  bool v13; // zf
+  const char *v14; // eax
+  int v15; // eax
+  TESObjectREFR *v16; // eax
   char *Name; // eax
-  TESObjectREFR *v23; // eax
-  char *v24; // eax
-  ActorAnimData *v25; // ebx
-  int v26; // eax
+  int v18; // eax
+  int v19; // eax
+  TESObjectREFR *v20; // eax
+  char *v21; // eax
+  ActorAnimData *v22; // ebx
+  int v23; // eax
   int i; // edi
   unsigned __int16 AnimGroupFromField8Value; // ax
-  unsigned int v29; // esi
-  unsigned int v30; // eax
-  UInt32 v31; // eax
-  const char *v32; // eax
-  UInt32 v33; // ebx
-  const char *v34; // eax
-  const char *v36; // [esp-10h] [ebp-14h]
-  int v37; // [esp-Ch] [ebp-10h]
-  int v38; // [esp-Ch] [ebp-10h]
-  const char *v39; // [esp-Ch] [ebp-10h]
-  int v41; // [esp-8h] [ebp-Ch]
+  unsigned int v26; // esi
+  int MovementPrefix; // eax
+  UInt32 v28; // eax
+  const char *v29; // eax
+  UInt32 v30; // ebx
+  const char *v31; // eax
+  const char *v33; // [esp-10h] [ebp-14h]
+  int v34; // [esp-Ch] [ebp-10h]
+  int v35; // [esp-Ch] [ebp-10h]
+  const char *v36; // [esp-Ch] [ebp-10h]
+  int v38; // [esp-8h] [ebp-Ch]
 
-  if ( !a4
+  if ( !a4 /*0x509d9b*/
     || !(*(int (__thiscall **)(void *))(*(_DWORD *)a4 + 0x164))(a4)
     || !(*(unsigned __int8 (__thiscall **)(void *))(*(_DWORD *)a4 + 0x190))(a4) )
   {
-    return 1;
+    return 1; /*0x50a04c*/
   }
-  v9 = (Actor *)OblivionDynamicCast(
+  v4 = (Actor *)OblivionDynamicCast( /*0x509dbb*/
                   a4,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                   &Actor `RTTI Type Descriptor',
                   0);
-  if ( v9 )
+  if ( v4 )
   {
-    Interface_ConsolePrint("--- Actor Variables -----------------------------");
-    if ( Actor::GetProcessLevel(v9) != 0xFFFFFFFF )
+    Interface_ConsolePrint("--- Actor Variables -----------------------------"); /*0x509dcd*/
+    if ( Actor::GetProcessLevel(v4) != 0xFFFFFFFF )
     {
-      ProcessLevel = Actor::GetProcessLevel(v9);
+      ProcessLevel = Actor::GetProcessLevel(v4); /*0x509de3*/
       Interface_ConsolePrint("Process Level: %s", *(const char **)(4 * ProcessLevel + 0xB14998));
     }
-    process = v9->members.super.process;
-    v12 = ((int (__thiscall *)(LowProcess *, int))process->GetWeaponOut)(process, a1);
-    v13 = ((int (__thiscall *)(LowProcess *, _DWORD))process->GetCombatMode)(process, v12);
-    Interface_ConsolePrint("Wants Weapon Drawn %d, Weapon Drawn %d", v13, v41);
-    if ( Actor_GetCurrentAction(v9) != 0xFFFFFFFF )
+    process = v4->members.super.process; /*0x509dfd*/
+    v7 = ((int (__thiscall *)(LowProcess *, int))process->GetWeaponOut)(process, a1); /*0x509e0a*/
+    v8 = ((int (__thiscall *)(LowProcess *, _DWORD))process->GetCombatMode)(process, v7); /*0x509e1a*/
+    Interface_ConsolePrint("Wants Weapon Drawn %d, Weapon Drawn %d", v8, v38); /*0x509e25*/
+    if ( Actor_GetCurrentAction(v4) != 0xFFFFFFFF )
     {
-      CurrentAction = Actor_GetCurrentAction(v9);
+      CurrentAction = Actor_GetCurrentAction(v4); /*0x509e3b*/
       Interface_ConsolePrint("Animation Action: %s", *(const char **)(4 * CurrentAction + 0xB14C80));
     }
-    AnonymousScheduleGroup = Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup((Concurrency::details::SchedulerBase *)v9);
+    AnonymousScheduleGroup = Actor::GetDeadState((Concurrency::details::SchedulerBase *)v4); /*0x509e57*/
     Interface_ConsolePrint("Life State: %s", *(const char **)(4 * (_DWORD)AnonymousScheduleGroup + 0xB09EF8));
-    v16 = ((int (__thiscall *)(LowProcess *))v9->members.super.process->GetSitSleepState)(v9->members.super.process);
-    Interface_ConsolePrint("Sit/Sleep State: %s", *(const char **)(4 * v16 + 0xB09F10));
-    v17 = ((int (__thiscall *)(LowProcess *))v9->members.super.process->GetKnockedState)(v9->members.super.process);
-    Interface_ConsolePrint("Knock State: %s", *(const char **)(4 * v17 + 0xB09F3C));
-    v18 = ((unsigned __int8 (__thiscall *)(Actor *))v9->vtbl->Unk_9E)(v9) == 0;
-    v19 = (const char *)&off_A3DAE8;
-    if ( v18 )
-      v19 = "No";
-    Interface_ConsolePrint("Has RagDoll: %s", v19);
-    if ( v9->vtbl->IsInCombat(v9, 1) )
+    v11 = ((int (__thiscall *)(LowProcess *))v4->members.super.process->GetSitSleepState)(v4->members.super.process); /*0x509e7c*/
+    Interface_ConsolePrint("Sit/Sleep State: %s", *(const char **)(4 * v11 + 0xB09F10));
+    v12 = ((int (__thiscall *)(LowProcess *))v4->members.super.process->GetKnockedState)(v4->members.super.process); /*0x509e9e*/
+    Interface_ConsolePrint("Knock State: %s", *(const char **)(4 * v12 + 0xB09F3C));
+    v13 = ((unsigned __int8 (__thiscall *)(Actor *))v4->vtbl->Unk_9E)(v4) == 0; /*0x509ec1*/
+    v14 = (const char *)&off_A3DAE8; /*0x509ec3*/
+    if ( v13 ) /*0x509ec8*/
+      v14 = "No"; /*0x509eca*/
+    Interface_ConsolePrint("Has RagDoll: %s", v14);
+    if ( v4->vtbl->IsInCombat(v4, 1) ) /*0x509ee9*/
     {
-      v20 = (int)v9->vtbl->GetCombatTarget(v9);
-      v21 = (TESObjectREFR *)((int (__thiscall *)(Actor *, _DWORD))v9->vtbl->GetCombatTarget)(
-                               v9,
-                               *(_DWORD *)(v20 + 0xC));
-      Name = TESObjectREFR_GetName(v21);
-      Interface_ConsolePrint("In Combat with \"%s\" (%08x)", Name, v37);
+      v15 = (int)v4->vtbl->GetCombatTarget(v4); /*0x509ef9*/
+      v16 = (TESObjectREFR *)((int (__thiscall *)(Actor *, _DWORD))v4->vtbl->GetCombatTarget)( /*0x509f09*/
+                               v4,
+                               *(_DWORD *)(v15 + 0xC));
+      Name = TESObjectREFR_GetName(v16); /*0x509f0d*/
+      Interface_ConsolePrint("In Combat with \"%s\" (%08x)", Name, v34); /*0x509f18*/
     }
-    if ( sub_5E2E00(v9) )
+    sub_5E2E00(v4); /*0x509f22*/
+    if ( v18 ) /*0x509f29*/
     {
-      v38 = *(_DWORD *)(sub_5E2E00(v9) + 0xC);
-      v23 = (TESObjectREFR *)sub_5E2E00(v9);
-      v24 = TESObjectREFR_GetName(v23);
-      Interface_ConsolePrint("Current package target \"%s\" (%08x)", v24, v38);
+      sub_5E2E00(v4); /*0x509f2d*/
+      v35 = *(_DWORD *)(v19 + 0xC); /*0x509f35*/
+      sub_5E2E00(v4); /*0x509f38*/
+      v21 = TESObjectREFR_GetName(v20); /*0x509f3f*/
+      Interface_ConsolePrint("Current package target \"%s\" (%08x)", v21, v35); /*0x509f4a*/
     }
   }
-  v25 = (ActorAnimData *)(*(int (__thiscall **)(void *))(*(_DWORD *)a4 + 0x164))(a4);
-  if ( v25 )
+  v22 = (ActorAnimData *)(*(int (__thiscall **)(void *))(*(_DWORD *)a4 + 0x164))(a4); /*0x509f5e*/
+  if ( v22 )
   {
-    Interface_ConsolePrint("--- Animation -------------------------------");
-    v26 = sub_4712B0(v25);
-    Interface_ConsolePrint("Anims Loading: %d", v26);
-    for ( i = 0; i < 5; ++i )
+    Interface_ConsolePrint("--- Animation -------------------------------"); /*0x509f6d*/
+    v23 = ActorAnimData_GetPendingKFModelCount(v22); /*0x509f77*/
+    Interface_ConsolePrint("Anims Loading: %d", v23);
+    for ( i = 0; i < 5; ++i ) /*0x509f8a*/
     {
-      if ( sub_4706E0(v25, i) )
+      if ( ActorAnimData_GetNormalizedSequenceSlot(v22, i) ) /*0x509f93*/
       {
-        AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v25, i);
-        v29 = AnimGroupFromField8Value;
-        v39 = *(const char **)(0x24 * sub_51AA00(AnimGroupFromField8Value) + 0xB102E0);
-        v36 = *(const char **)(4 * sub_51A9E0(v29) + 0xB102C8);
-        v30 = sub_51A9D0(v29);
-        Interface_ConsolePrint(
+        AnimGroupFromField8Value = ActorAnimData_GetAnimGroupFromField8Value(v22, i); /*0x509f9f*/
+        v26 = AnimGroupFromField8Value; /*0x509fa4*/
+        v36 = *(const char **)(0x24 * AnimKey_GetGroupID(AnimGroupFromField8Value) + 0xB102E0); /*0x509fba*/
+        v33 = *(const char **)(4 * AnimKey_GetWeaponPrefix(v26) + 0xB102C8); /*0x509fcb*/
+        MovementPrefix = AnimKey_GetMovementPrefix(v26); /*0x509fcd*/
+        Interface_ConsolePrint( /*0x509fea*/
           "%s -> %s/%s/%s",
           *(const char **)(4 * i + 0xB108EC),
-          *(const char **)(4 * v30 + 0xB102B8),
-          v36,
-          v39);
+          *(const char **)(4 * MovementPrefix + 0xB102B8),
+          v33,
+          v36);
       }
     }
-    v31 = v25->unkC8[1];
-    if ( v31 )
+    v28 = v22->unkC8[1]; /*0x509ffa*/
+    if ( v28 )
     {
-      v32 = (const char *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v31 + 0x24) + 0xD4))(*(_DWORD *)(v31 + 0x24));
-      Interface_ConsolePrint("IdleAnim: %s", v32);
+      v29 = (const char *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v28 + 0x24) + 0xD4))(*(_DWORD *)(v28 + 0x24)); /*0x50a011*/
+      Interface_ConsolePrint("IdleAnim: %s", v29);
     }
-    v33 = v25->unkC8[2];
-    if ( v33 )
+    v30 = v22->unkC8[2]; /*0x50a021*/
+    if ( v30 )
     {
-      v34 = (const char *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v33 + 0x24) + 0xD4))(*(_DWORD *)(v33 + 0x24));
-      Interface_ConsolePrint("IdleAnim Queued: %s", v34);
+      v31 = (const char *)(*(int (__thiscall **)(_DWORD))(**(_DWORD **)(v30 + 0x24) + 0xD4))(*(_DWORD *)(v30 + 0x24)); /*0x50a036*/
+      Interface_ConsolePrint("IdleAnim Queued: %s", v31);// DumpActorAnimationState command site. Diagnostic command path for printing actor animation state.
     }
   }
-  return 1;
+  return 1; /*0x50a04a*/
 }

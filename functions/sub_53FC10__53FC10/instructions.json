@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x53FC10",
-    "line": "push    ecx",
+    "line": "push    ecx; Exterior fog day/night helper: computes adjusted sunrise blend start from climate sunrise minus transition padding.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x53FC1F",
-    "line": "jz      short loc_53FC87",
+    "line": "jz      short loc_53FC87; Fog time-boundary decode: adjusted sunrise helper refreshes only when Flags0FC bit 0x1000 marks blend-start dirty.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x53FC57",
-    "line": "fsub    dword ptr ds:0B36668h",
+    "line": "fsub    dword ptr ds:0B36668h; Fog time-boundary decode: candidate adjusted sunrise = cached sunrise - transition padding unk_B36668.",
     "mnemonic": "fsub",
     "size": 6
   },
@@ -157,25 +157,25 @@
   },
   {
     "ea": "0x53FC6C",
-    "line": "call    sub_499140",
+    "line": "call    sub_499140; Exterior fog day/night helper: climate sunrise boundary byte (+0x50) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x53FC71",
-    "line": "fsub    dword ptr ds:0B36668h",
+    "line": "fsub    dword ptr ds:0B36668h; Fog time-boundary decode: adjusted sunrise uses sub_499140() - unk_B36668 when nonnegative; otherwise clamps to 0.",
     "mnemonic": "fsub",
     "size": 6
   },
   {
     "ea": "0x53FC77",
-    "line": "fstp    dword ptr ds:0B36674h",
+    "line": "fstp    dword ptr ds:0B36674h; Fog time-boundary decode: stores adjusted sunrise blend-start in unk_B36674 for 0x5418F0/0x541DD0 interpolation.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x53FC7D",
-    "line": "and     dword ptr [esi+0FCh], 0FFFFEFFFh",
+    "line": "and     dword ptr [esi+0FCh], 0FFFFEFFFh; Fog time-boundary decode: clears adjusted-sunrise dirty bit after updating unk_B36674.",
     "mnemonic": "and",
     "size": 10
   },

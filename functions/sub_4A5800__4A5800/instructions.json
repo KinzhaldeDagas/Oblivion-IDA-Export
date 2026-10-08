@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A5800",
-    "line": "push    esi",
+    "line": "push    esi; Verified: merges only Weather data ID 3 with override/priority rules and delegates weather-list merge to EntryData helpers.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4A5802",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4A5822",
-    "line": "cmp     [esp+8+arg_4], 0",
+    "line": "cmp     [esp+8+mergeMode], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4A5845",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x4A584A",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A584B",
-    "line": "lea     ecx, [esi+8]",
+    "line": "lea     ecx, [esi+8]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4A584E",
-    "line": "call    sub_4EED80",
+    "line": "call    OblivionTESWeatherList_CopyEntries; Verified: clears destination weather list when mode is false, then copies each 8-byte {TESWeather*, sortWeight} payload into a new list node; mode true preserves existing entries and appends.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4A588D",
-    "line": "push    1",
+    "line": "push    1; append",
     "mnemonic": "push",
     "size": 2
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x4A5892",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A5893",
-    "line": "lea     ecx, [esi+8]",
+    "line": "lea     ecx, [esi+8]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4A5896",
-    "line": "call    sub_4EED80",
+    "line": "call    OblivionTESWeatherList_CopyEntries; Verified: clears destination weather list when mode is false, then copies each 8-byte {TESWeather*, sortWeight} payload into a new list node; mode true preserves existing entries and appends.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x4A58B4",
-    "line": "mov     [esp+8+arg_0], edx",
+    "line": "mov     [esp+8+source], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x4A58BF",
-    "line": "fild    [esp+8+arg_0]",
+    "line": "fild    [esp+8+source]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x4A58CD",
-    "line": "mov     [esp+8+arg_0], edx",
+    "line": "mov     [esp+8+source], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -415,19 +415,19 @@
   },
   {
     "ea": "0x4A58D2",
-    "line": "fiadd   [esp+0Ch+arg_0]",
+    "line": "fiadd   [esp+0Ch+source]",
     "mnemonic": "fiadd",
     "size": 4
   },
   {
     "ea": "0x4A58D6",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+source]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4A58DA",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+source]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x4A58E4",
-    "line": "fstp    [esp+0Ch+arg_0]",
+    "line": "fstp    [esp+0Ch+source]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4A58E8",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+source]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x4A58F4",
-    "line": "fnstcw  word ptr [esp+0Ch+arg_0]",
+    "line": "fnstcw  word ptr [esp+0Ch+source]",
     "mnemonic": "fnstcw",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x4A58FB",
-    "line": "movzx   eax, word ptr [esp+8+arg_0]",
+    "line": "movzx   eax, word ptr [esp+8+source]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -487,25 +487,25 @@
   },
   {
     "ea": "0x4A5905",
-    "line": "mov     [esp+8+arg_4], eax",
+    "line": "mov     [esp+8+mergeMode], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A5909",
-    "line": "fldcw   word ptr [esp+8+arg_4]",
+    "line": "fldcw   word ptr [esp+8+mergeMode]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x4A590D",
-    "line": "fistp   [esp+8+arg_4]",
+    "line": "fistp   [esp+8+mergeMode]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x4A5911",
-    "line": "movzx   ecx, byte ptr [esp+8+arg_4]",
+    "line": "movzx   ecx, byte ptr [esp+8+mergeMode]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4A5919",
-    "line": "fldcw   word ptr [esp+0Ch+arg_0]",
+    "line": "fldcw   word ptr [esp+0Ch+source]",
     "mnemonic": "fldcw",
     "size": 4
   },

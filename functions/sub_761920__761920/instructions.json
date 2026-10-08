@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x761920",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion-authoritative NiDX9RenderedTextureData::Create. Allocates renderer data, calls CreateSurf, attaches it to NiRenderedTexture, QueryInterfaces the level-0 resource as IDirect3DTexture9, and wraps its surface in NiDX9TextureBufferData; all failures release partial resources.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x761946",
-    "line": "mov     dword ptr [esi], offset ??_7NiDX9RenderedTextureData@@6B@; const NiDX9RenderedTextureData::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7NiDX9RenderedTextureData@@6B@; NiDX9RenderedTextureData owns the renderable D3D texture resource used for the R32F shadow map.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x76195A",
-    "line": "call    sub_761730",
+    "line": "call    NiDX9RenderedTextureData_CreateSurf; Oblivion string and behavior identify NiDX9RenderedTextureData::CreateSurf. Selects D3D format/usage/pool from NiRenderedTexture settings, creates a one-level texture or render-target surface, records exact byte size, and updates renderer video-memory accounting.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x7619B5",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7619B6",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7619C1",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x7619E6",
-    "line": "call    sub_76D8C0",
+    "line": "call    sub_76D8C0; DX10OBSE resource decode: wraps an existing D3D texture resource as NiDX9TextureBufferData by AddRef, GetSurfaceLevel(0), GetDesc, and attaching/creating Ni2DBuffer parent data.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7619EB",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; Wrap the rendered texture's level-0 D3D surface in NiDX9TextureBufferData; this same texture-backed surface is bound for rendering and later sampled.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x761A0A",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

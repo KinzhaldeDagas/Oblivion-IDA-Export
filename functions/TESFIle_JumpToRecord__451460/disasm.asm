@@ -10,9 +10,9 @@
 0x451476: call    MemoryHeap_Free_checked
 0x45147B: mov     [esi+414h], edi
 0x451481: mov     [esi+418h], edi
-0x451487: mov     eax, [esp+8+Buffer]
+0x451487: mov     eax, [esp+8+Buffer]; MEF v20 fix: validate TESFIle_JumpToRecord target before committing currentRecordOffset. Invalid targets clear record metadata without poisoning parser offset state.
 0x45148B: cmp     eax, [esi+258h]
-0x451491: mov     [esi+25Ch], eax
+0x451491: mov     [esi+25Ch], eax; EngineIssues review: TESFIle_JumpToRecord commits requested target to currentRecordOffset before validating target < fileSize; failed jumps can poison parser state.
 0x451497: jb      short loc_4514C0
 0x451499: xor     eax, eax
 0x45149B: mov     [esi+23Ch], eax

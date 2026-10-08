@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x413E94",
-    "line": "mov     eax, sMagicEffectItemFeet",
+    "line": "mov     eax, ds:0B334A0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x413E9C",
-    "line": "call    EffectItem_GetArea",
+    "line": "call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x413EA1",
-    "line": "mov     ecx, sMagicEffectItemIn",
+    "line": "mov     ecx, ds:0B33470h",
     "mnemonic": "mov",
     "size": 6
   },

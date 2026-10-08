@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x77A5B8",
-    "line": "mov     ecx, [esp+14h+arg_4]",
+    "line": "mov     ecx, [esp+14h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x77A5C6",
-    "line": "mov     ebx, [esp+24h+arg_0]",
+    "line": "mov     ebx, [esp+24h+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x77A5D7",
-    "line": "mov     [esp+24h+var_14], esi",
+    "line": "mov     [esp+24h+pixelCapacity], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x77A656",
-    "line": "add     [esp+24h+var_14], 1",
+    "line": "add     [esp+24h+pixelCapacity], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x77A666",
-    "line": "imul    ecx, [esp+24h+var_14]",
+    "line": "imul    ecx, [esp+24h+pixelCapacity]",
     "mnemonic": "imul",
     "size": 5
   },
   {
     "ea": "0x77A66B",
-    "line": "mov     [esp+24h+var_14], ecx",
+    "line": "mov     [esp+24h+pixelCapacity], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x77A6C1",
-    "line": "add     [esp+24h+var_14], 1",
+    "line": "add     [esp+24h+pixelCapacity], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x77A6CD",
-    "line": "mov     ebx, [esp+24h+arg_0]",
+    "line": "mov     ebx, [esp+24h+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x77A70D",
-    "line": "mov     ebx, [esp+24h+arg_0]",
+    "line": "mov     ebx, [esp+24h+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x77A730",
-    "line": "cmp     [esp+24h+var_14], 0",
+    "line": "cmp     [esp+24h+pixelCapacity], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x77A749",
-    "line": "mov     edx, [esp+24h+var_14]",
+    "line": "mov     edx, [esp+24h+pixelCapacity]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -841,31 +841,31 @@
   },
   {
     "ea": "0x77A753",
-    "line": "push    edx; int",
+    "line": "push    edx; pixelCapacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77A754",
-    "line": "push    ebp; int",
+    "line": "push    ebp; vertexCapacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77A755",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77A756",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x77A758",
-    "line": "call    sub_9A22E0",
+    "line": "call    NiSCMExtraData_Constructor; Verified NiSCMExtraData constructor, 2026-09-30: calls NiExtraData initialization, installs vtable AB2914, and assigns the supplied name. Stores two capacities at+C/+10, zeros used counts at+14/+18, and allocates two arrays of 8-byte elements at+1C/+20 (null for zero capacity). Comparative Fallout constructor82C1F748 has an expanded program-type layout; its offsets must not be copied. Capacity0/1 are probably vertex/pixel from the family correspondence, but confirm Oblivion AddEntry indexing before promoting those member names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x77A7A0",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x77A7C9",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x77A7CE",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x77A805",
-    "line": "mov     edx, [esp+24h+arg_0]",
+    "line": "mov     edx, [esp+24h+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x77A826",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x77A84F",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x77A854",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x77A8C7",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x77A8CC",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1776,12 +1776,6 @@
     "size": 2
   },
   {
-    "ea": "0x77A91D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x77A920",
     "line": "mov     eax, [ebp+0]",
     "mnemonic": "mov",
@@ -1861,7 +1855,7 @@
   },
   {
     "ea": "0x77A943",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1873,7 +1867,7 @@
   },
   {
     "ea": "0x77A948",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1975,7 +1969,7 @@
   },
   {
     "ea": "0x77A97E",
-    "line": "mov     ebx, [esp+24h+arg_0]",
+    "line": "mov     ebx, [esp+24h+shader]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2011,7 +2005,7 @@
   },
   {
     "ea": "0x77A997",
-    "line": "mov     ecx, [esp+24h+arg_4]",
+    "line": "mov     ecx, [esp+24h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2023,7 +2017,7 @@
   },
   {
     "ea": "0x77A99C",
-    "line": "call    NiNode_AddNiExtraData",
+    "line": "call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.",
     "mnemonic": "call",
     "size": 5
   },

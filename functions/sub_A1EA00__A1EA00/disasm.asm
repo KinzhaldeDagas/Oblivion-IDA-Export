@@ -1,2 +1,2 @@
-0xA1EA00: mov     ecx, offset dword_B37170
+0xA1EA00: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+498h)
 0xA1EA05: jmp     GameSetting_destr

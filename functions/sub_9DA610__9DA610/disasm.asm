@@ -2,7 +2,7 @@
 0x9DA616: push    ecx
 0x9DA617: fstp    [esp+4+var_4]; float
 0x9DA61A: push    offset aFmagicfogmaxim; "fMagicFogMaximumDistance"
-0x9DA61F: mov     ecx, offset fMagicFogMaximumDistance
+0x9DA61F: mov     ecx, 0B336C4h
 0x9DA624: call    GameSetting_ConstrAndReg_float
 0x9DA629: push    offset sub_A17870; void (__cdecl *)()
 0x9DA62E: call    _atexit

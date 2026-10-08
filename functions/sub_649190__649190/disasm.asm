@@ -37,7 +37,7 @@
 0x6491F8: mov     ebx, [esp+1Ch+arg_0]
 0x6491FC: jz      loc_6492E5
 0x649202: mov     ecx, ebx; this
-0x649204: call    TESObjectREFR_GetParentCell
+0x649204: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x649209: mov     edx, [ebx]
 0x64920B: mov     [esp+1Ch+arg_0], eax
 0x64920F: mov     eax, [edx+174h]
@@ -64,9 +64,9 @@
 0x64924F: mov     [edi+68h], ebp
 0x649252: call    sub_569830
 0x649257: mov     [edi+6Ch], eax
-0x64925A: mov     ecx, offset fAIAcquireObjectDistance
+0x64925A: mov     ecx, (offset flt_B36778+170h)
 0x64925F: call    GameSetting_GetSafeFloatPointer
-0x649264: mov     ecx, offset fAIAcquireObjectDistance
+0x649264: mov     ecx, (offset flt_B36778+170h)
 0x649269: mov     esi, eax
 0x64926B: call    GameSetting_GetSafeFloatPointer
 0x649270: fld     dword ptr [esi]
@@ -109,7 +109,7 @@
 0x6492D2: mov     edx, [eax]
 0x6492D4: push    eax
 0x6492D5: mov     [esi], edx
-0x6492D7: call    FormHeapFree
+0x6492D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6492DC: add     esp, 4
 0x6492DF: jmp     short loc_6492B6
 0x6492E1: mov     [esi], ebp
@@ -122,7 +122,7 @@
 0x6492F3: mov     eax, [esi]
 0x6492F5: mov     ecx, esi
 0x6492F7: mov     [edi+30h], eax
-0x6492FA: call    sub_67F100
+0x6492FA: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x6492FF: pop     ebx
 0x649300: pop     esi
 0x649301: pop     edi

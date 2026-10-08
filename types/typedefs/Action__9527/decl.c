@@ -1,1 +1,3 @@
-Action
+enum Action : unsigned __int16
+{
+};

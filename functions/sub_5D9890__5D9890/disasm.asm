@@ -10,7 +10,7 @@
 0x5D98B7: mov     esi, ecx
 0x5D98B9: jnz     short loc_5D98CD
 0x5D98BB: lea     ecx, [esi+60h]
-0x5D98BE: call    BSSimpleList_Clear
+0x5D98BE: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x5D98C3: call    sub_5D8980
 0x5D98C8: jmp     loc_5D9AB4
 0x5D98CD: cmp     eax, 6
@@ -79,7 +79,6 @@
 0x5D99A7: test    eax, eax
 0x5D99A9: jz      short loc_5D99BF
 0x5D99AB: jmp     short loc_5D99B0
-0x5D99AD: align 10h
 0x5D99B0: cmp     [eax], edi
 0x5D99B2: jz      loc_5D9A9F
 0x5D99B8: mov     eax, [eax+4]
@@ -91,7 +90,7 @@
 0x5D99D0: push    0FB7h
 0x5D99D5: mov     ecx, ebp
 0x5D99D7: call    Tile_GetFloat
-0x5D99DC: call    Double_To_SInt32
+0x5D99DC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D99E1: mov     [esi+58h], eax
 0x5D99E4: mov     ecx, ds:0B333C4h
 0x5D99EA: call    sub_5E4420
@@ -100,7 +99,7 @@
 0x5D99F4: push    0FAAh
 0x5D99F9: mov     ecx, ebp
 0x5D99FB: call    Tile_GetFloat
-0x5D9A00: call    Double_To_SInt32
+0x5D9A00: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D9A05: mov     [esi+4Ch], eax
 0x5D9A08: mov     [esi+54h], edi
 0x5D9A0B: mov     eax, [ebx+4]

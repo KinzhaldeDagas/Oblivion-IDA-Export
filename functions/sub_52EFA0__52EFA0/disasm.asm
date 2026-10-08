@@ -3,7 +3,6 @@
 0x52EFA5: jz      short loc_52EFCA
 0x52EFA7: mov     edx, [esp+arg_0]
 0x52EFAB: jmp     short loc_52EFB0
-0x52EFAD: align 10h
 0x52EFB0: mov     ecx, [eax]
 0x52EFB2: test    ecx, ecx
 0x52EFB4: jz      short loc_52EFCA

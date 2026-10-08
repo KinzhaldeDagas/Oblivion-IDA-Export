@@ -6,8 +6,8 @@ ActorVtbl *__userpurge sub_69FBD0@<eax>(
         double a5@<st0>,
         char a6)
 {
-  sub_69FA60(a1, a2, a3, a4, a5);
-  if ( (a6 & 1) != 0 )
-    FormHeapFree((unsigned int)a1);
-  return a1;
+  sub_69FA60(a1, a2, a3, a4, a5); /*0x69fbd3*/
+  if ( (a6 & 1) != 0 ) /*0x69fbdd*/
+    FormHeapFree((unsigned int)a1); /*0x69fbe0*/
+  return a1; /*0x69fbea*/
 }

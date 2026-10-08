@@ -48,7 +48,7 @@
 0x492F09: mov     eax, ebx
 0x492F0B: push    0; int
 0x492F0D: push    eax; void *
-0x492F0E: mov     [esp+50h+var_24], ebx
+0x492F0E: mov     [esp+50h+form], ebx
 0x492F12: call    OblivionDynamicCast
 0x492F17: push    ebx
 0x492F18: mov     esi, eax
@@ -96,7 +96,7 @@
 0x492F9A: mov     eax, [edx]
 0x492F9C: mov     eax, [eax]
 0x492F9E: mov     ecx, [esi+4]
-0x492FA1: mov     edx, [esp+3Ch+var_24]
+0x492FA1: mov     edx, [esp+3Ch+form]
 0x492FA5: push    0
 0x492FA7: push    0
 0x492FA9: add     eax, ecx
@@ -123,7 +123,7 @@
 0x492FE8: test    eax, eax
 0x492FEA: mov     dl, 1
 0x492FEC: jz      short loc_49300C
-0x492FEE: mov     esi, [esp+3Ch+var_24]
+0x492FEE: mov     esi, [esp+3Ch+form]
 0x492FF2: test    dl, dl
 0x492FF4: jz      short loc_493014
 0x492FF6: mov     ecx, [eax]
@@ -172,9 +172,9 @@
 0x493060: mov     ebx, eax
 0x493062: test    ebx, ebx
 0x493064: jle     loc_493321
-0x49306A: mov     ecx, [esp+3Ch+var_24]
-0x49306E: push    ecx
-0x49306F: call    sub_470520
+0x49306A: mov     ecx, [esp+3Ch+form]
+0x49306E: push    ecx; form
+0x49306F: call    TESForm_GetValue
 0x493074: imul    eax, ebx
 0x493077: mov     [esp+40h+var_10], eax
 0x49307B: add     esp, 4
@@ -215,7 +215,7 @@
 0x4930F2: cmp     eax, 1
 0x4930F5: jnb     short loc_493119
 0x4930F7: mov     ecx, ebp
-0x4930F9: call    sub_67F100
+0x4930F9: call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.
 0x4930FE: cmp     dword ptr [ebp+4], 0
 0x493102: jnz     short loc_49310E
 0x493104: cmp     dword ptr [ebp+0], 0
@@ -237,19 +237,19 @@
 0x493140: mov     eax, [edx+190h]
 0x493146: call    eax
 0x493148: test    al, al
-0x49314A: mov     ecx, [esp+3Ch+arg_0]; this
+0x49314A: mov     ecx, [esp+3Ch+arg_0]; reference
 0x49314E: jz      short loc_49315C
 0x493150: mov     edx, [ecx]
 0x493152: mov     eax, [edx+170h]
 0x493158: call    eax
 0x49315A: jmp     short loc_493161
-0x49315C: call    TESObjectREFR_GetOwner
+0x49315C: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x493161: cmp     byte ptr [esp+3Ch+arg_8], 0
 0x493166: mov     edi, eax
 0x493168: jnz     short loc_493171
 0x49316A: cmp     [esp+3Ch+arg_C], 0
 0x49316F: jz      short loc_4931AF
-0x493171: mov     ecx, [esp+3Ch+var_24]
+0x493171: mov     ecx, [esp+3Ch+form]
 0x493175: push    ecx
 0x493176: call    sub_469980
 0x49317B: add     esp, 4
@@ -260,24 +260,24 @@
 0x493187: call    sub_4DE880
 0x49318C: test    al, al
 0x49318E: jnz     short loc_4931AF
-0x493190: mov     edx, [esp+3Ch+var_24]
+0x493190: mov     edx, [esp+3Ch+form]
 0x493194: cmp     byte ptr [edx+4], 22h ; '"'
 0x493198: jz      short loc_4931AF
-0x49319A: mov     ecx, esi
-0x49319C: call    ExtraDataList_GetOwner
+0x49319A: mov     ecx, esi; this
+0x49319C: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4931A1: test    eax, eax
 0x4931A3: jnz     short loc_4931F3
-0x4931A5: push    edi
-0x4931A6: mov     ecx, esi
-0x4931A8: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x4931A5: push    edi; owner
+0x4931A6: mov     ecx, esi; this
+0x4931A8: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x4931AD: jmp     short loc_4931F3
 0x4931AF: cmp     [esp+3Ch+arg_10], 0
 0x4931B4: jz      short loc_4931F3
 0x4931B6: mov     ecx, esi
 0x4931B8: call    BaseExtraList_Count
-0x4931BD: mov     ecx, esi
+0x4931BD: mov     ecx, esi; this
 0x4931BF: mov     edi, eax
-0x4931C1: call    ExtraDataList_GetOwner
+0x4931C1: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4931C6: test    eax, eax
 0x4931C8: jz      short loc_4931EC
 0x4931CA: mov     ecx, esi
@@ -308,7 +308,7 @@
 0x49320D: mov     ecx, esi
 0x49320F: sub     ebx, eax
 0x493211: call    ExtraDataList_GetExtraCount
-0x493216: mov     ecx, [esp+58h+var_24]
+0x493216: mov     ecx, [esp+58h+form]
 0x49321A: movsx   edx, ax
 0x49321D: mov     eax, [esp+58h+arg_8]
 0x493221: push    edx
@@ -330,9 +330,9 @@
 0x49324D: jnz     loc_4930E0
 0x493253: jmp     short loc_49326F
 0x493255: mov     ecx, ebp
-0x493257: call    BSSimpleList_Clear
+0x493257: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x49325C: push    ebp
-0x49325D: call    FormHeapFree
+0x49325D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x493262: mov     ecx, [esp+40h+var_1C]
 0x493266: add     esp, 4
 0x493269: mov     dword ptr [ecx], 0
@@ -343,7 +343,7 @@
 0x49327E: cmp     [esp+3Ch+arg_C], 0
 0x493283: jnz     short loc_4932A5
 0x493285: mov     edx, [esp+3Ch+arg_4]
-0x493289: mov     eax, [esp+3Ch+var_24]
+0x493289: mov     eax, [esp+3Ch+form]
 0x49328D: mov     ecx, [esp+3Ch+arg_0]
 0x493291: push    0
 0x493293: push    1
@@ -364,7 +364,7 @@
 0x4932B3: test    eax, eax
 0x4932B5: mov     [esp+3Ch+var_4], 0
 0x4932BD: jz      short loc_4932D0
-0x4932BF: mov     edx, [esp+3Ch+var_24]
+0x4932BF: mov     edx, [esp+3Ch+form]
 0x4932C3: push    ebx
 0x4932C4: push    edx
 0x4932C5: mov     ecx, eax
@@ -394,7 +394,7 @@
 0x493304: call    ExtraDataList_GetExtraCount
 0x493309: mov     edx, [esp+58h+arg_8]
 0x49330D: movsx   ecx, ax
-0x493310: mov     eax, [esp+58h+var_24]
+0x493310: mov     eax, [esp+58h+form]
 0x493314: push    ecx
 0x493315: push    edx
 0x493316: push    eax
@@ -507,9 +507,9 @@
 0x493444: jnz     short loc_493423
 0x493446: mov     eax, [edi+8]
 0x493449: mov     esi, [edi+4]
-0x49344C: push    eax
-0x49344D: mov     [esp+40h+var_24], eax
-0x493451: call    sub_470520
+0x49344C: push    eax; form
+0x49344D: mov     [esp+40h+form], eax
+0x493451: call    TESForm_GetValue
 0x493456: imul    eax, esi
 0x493459: mov     ecx, [ebp+4]; this
 0x49345C: mov     [esp+40h+var_14], eax
@@ -577,7 +577,7 @@
 0x493517: mov     ecx, [eax]
 0x493519: push    eax
 0x49351A: mov     [esi], ecx
-0x49351C: call    FormHeapFree
+0x49351C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x493521: add     esp, 4
 0x493524: jmp     short loc_49352C
 0x493526: mov     dword ptr [esi], 0
@@ -586,9 +586,9 @@
 0x493536: cmp     dword ptr [esi], 0
 0x493539: jnz     loc_4936C9
 0x49353F: mov     ecx, esi
-0x493541: call    BSSimpleList_Clear
+0x493541: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x493546: push    esi
-0x493547: call    FormHeapFree
+0x493547: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x49354C: add     esp, 4
 0x49354F: mov     dword ptr [edi], 0
 0x493555: cmp     [esp+3Ch+var_14], 0
@@ -602,7 +602,7 @@
 0x493574: push    0
 0x493576: push    0
 0x493578: push    edx
-0x493579: mov     edx, [esp+50h+var_24]
+0x493579: mov     edx, [esp+50h+form]
 0x49357D: push    0
 0x49357F: push    0
 0x493581: push    eax
@@ -617,7 +617,6 @@
 0x493594: jmp     loc_4937B5
 0x493599: xor     eax, eax
 0x49359B: jmp     short loc_4935A0
-0x49359D: align 10h
 0x4935A0: cmp     dword ptr [esi], 0
 0x4935A3: jz      short loc_4935A8
 0x4935A5: add     eax, 1
@@ -633,19 +632,19 @@
 0x4935C5: mov     ecx, edi
 0x4935C7: call    eax
 0x4935C9: test    al, al
-0x4935CB: mov     ecx, edi; this
+0x4935CB: mov     ecx, edi; reference
 0x4935CD: jz      short loc_4935DB
 0x4935CF: mov     edx, [edi]
 0x4935D1: mov     eax, [edx+170h]
 0x4935D7: call    eax
 0x4935D9: jmp     short loc_4935E0
-0x4935DB: call    TESObjectREFR_GetOwner
+0x4935DB: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4935E0: cmp     byte ptr [esp+3Ch+arg_8], 0
 0x4935E5: mov     esi, eax
 0x4935E7: jnz     short loc_4935F0
 0x4935E9: cmp     [esp+3Ch+arg_C], 0
 0x4935EE: jz      short loc_493628
-0x4935F0: mov     ebx, [esp+3Ch+var_24]
+0x4935F0: mov     ebx, [esp+3Ch+form]
 0x4935F4: push    ebx
 0x4935F5: call    sub_469980
 0x4935FA: add     esp, 4
@@ -658,22 +657,22 @@
 0x49360B: jnz     short loc_49362C
 0x49360D: cmp     byte ptr [ebx+4], 22h ; '"'
 0x493611: jz      short loc_49362C
-0x493613: mov     ecx, ebp
-0x493615: call    ExtraDataList_GetOwner
+0x493613: mov     ecx, ebp; this
+0x493615: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x49361A: test    eax, eax
 0x49361C: jnz     short loc_49366E
-0x49361E: push    esi
-0x49361F: mov     ecx, ebp
-0x493621: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x49361E: push    esi; owner
+0x49361F: mov     ecx, ebp; this
+0x493621: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x493626: jmp     short loc_49366E
-0x493628: mov     ebx, [esp+3Ch+var_24]
+0x493628: mov     ebx, [esp+3Ch+form]
 0x49362C: cmp     [esp+3Ch+arg_10], 0
 0x493631: jz      short loc_49366E
 0x493633: mov     ecx, ebp
 0x493635: call    BaseExtraList_Count
-0x49363A: mov     ecx, ebp
+0x49363A: mov     ecx, ebp; this
 0x49363C: mov     esi, eax
-0x49363E: call    ExtraDataList_GetOwner
+0x49363E: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x493643: test    eax, eax
 0x493645: jz      short loc_493667
 0x493647: mov     ecx, ebp
@@ -713,13 +712,13 @@
 0x4936A4: push    ebx
 0x4936A5: push    edi
 0x4936A6: call    ContainerExtraData_RemoveForm
-0x4936AB: mov     edx, [esp+3Ch+var_24]
-0x4936AF: mov     ecx, [esp+3Ch+var_20]
+0x4936AB: mov     edx, [esp+3Ch+form]
+0x4936AF: mov     ecx, [esp+3Ch+var_20]; this
 0x4936B3: mov     ebx, [ecx]
-0x4936B5: push    0
-0x4936B7: push    1
-0x4936B9: push    edx
-0x4936BA: call    ContainerExtraData_GetEntryForForm
+0x4936B5: push    0; referenceFormIDOrZero
+0x4936B7: push    1; unusedAlwaysOne
+0x4936B9: push    edx; form
+0x4936BA: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x4936BF: mov     edi, eax
 0x4936C1: test    edi, edi
 0x4936C3: jz      loc_493555
@@ -740,15 +739,15 @@
 0x4936F8: mov     ecx, ebx
 0x4936FA: call    eax
 0x4936FC: jmp     short loc_49370B
-0x4936FE: mov     ecx, [esp+3Ch+arg_0]; this
-0x493702: call    TESObjectREFR_GetOwner
+0x4936FE: mov     ecx, [esp+3Ch+arg_0]; reference
+0x493702: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x493707: mov     ebx, [esp+3Ch+arg_0]
 0x49370B: cmp     byte ptr [esp+3Ch+arg_8], 0
 0x493710: mov     ebp, eax
 0x493712: jnz     short loc_49371B
 0x493714: cmp     [esp+3Ch+arg_C], 0
 0x493719: jz      short loc_493779
-0x49371B: mov     ecx, [esp+3Ch+var_24]
+0x49371B: mov     ecx, [esp+3Ch+form]
 0x49371F: push    ecx
 0x493720: call    sub_469980
 0x493725: add     esp, 4
@@ -759,7 +758,7 @@
 0x49372F: call    sub_4DE880
 0x493734: test    al, al
 0x493736: jnz     short loc_493779
-0x493738: mov     edx, [esp+3Ch+var_24]
+0x493738: mov     edx, [esp+3Ch+form]
 0x49373C: cmp     byte ptr [edx+4], 22h ; '"'
 0x493740: jz      short loc_493779
 0x493742: push    14h; Size
@@ -773,11 +772,11 @@
 0x49375E: call    ExtraDataList_constr
 0x493763: jmp     short loc_493767
 0x493765: xor     eax, eax
-0x493767: push    ebp
-0x493768: mov     ecx, eax
+0x493767: push    ebp; owner
+0x493768: mov     ecx, eax; this
 0x49376A: mov     [esp+40h+var_4], 0FFFFFFFFh
 0x493772: mov     esi, eax
-0x493774: call    ExtraDataList__SetOrRemoveExtraOwnership
+0x493774: call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.
 0x493779: mov     eax, [esp+3Ch+arg_4]
 0x49377D: push    0
 0x49377F: push    1
@@ -788,7 +787,7 @@
 0x493788: push    esi
 0x493789: mov     ecx, [edi+4]
 0x49378C: mov     edx, [esp+58h+arg_8]
-0x493790: mov     eax, [esp+58h+var_24]
+0x493790: mov     eax, [esp+58h+form]
 0x493794: mov     esi, [esp+58h+var_20]
 0x493798: push    ecx
 0x493799: mov     ecx, [esp+5Ch+arg_0]
@@ -815,3 +814,20 @@
 0x4937D0: pop     ebx
 0x4937D1: add     esp, 28h
 0x4937D4: retn    14h
+0x9B0050: mov     eax, [ebp-10h]
+0x9B0053: push    eax
+0x9B0054: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B0059: pop     ecx
+0x9B005A: retn
+0x9B005B: mov     eax, [ebp-14h]
+0x9B005E: push    eax
+0x9B005F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B0064: pop     ecx
+0x9B0065: retn
+0x9B0066: mov     edx, [esp+arg_4]
+0x9B006A: lea     eax, [edx-2Ch]
+0x9B006D: mov     ecx, [edx-30h]
+0x9B0070: xor     ecx, eax
+0x9B0072: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0077: mov     eax, offset stru_ADC460
+0x9B007C: jmp     ___CxxFrameHandler3

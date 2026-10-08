@@ -2,13 +2,13 @@ HANDLE sub_40FDD0()
 {
   HANDLE result; // eax
 
-  result = hHandle;
-  if ( hHandle )
+  result = MEMORY[0xB33434]; /*0x40fdd0*/
+  if ( MEMORY[0xB33434] ) /*0x40fdd7*/
   {
-    byte_B33425 = 1;
-    result = (HANDLE)WaitForSingleObject(hHandle, 0xFFFFFFFF);
-    hHandle = 0;
-    byte_B33425 = 0;
+    unk_B33425 = 1; /*0x40fddc*/
+    result = (HANDLE)WaitForSingleObject(MEMORY[0xB33434], 0xFFFFFFFF); /*0x40fde3*/
+    MEMORY[0xB33434] = 0; /*0x40fde9*/
+    unk_B33425 = 0; /*0x40fdf3*/
   }
-  return result;
+  return result; /*0x40fdfa*/
 }

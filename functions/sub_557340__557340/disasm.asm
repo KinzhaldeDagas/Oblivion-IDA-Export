@@ -18,7 +18,7 @@
 0x557366: jz      short loc_5573BB
 0x557368: cmp     edi, 0FFFFFFFFh
 0x55736B: jbe     short loc_557372
-0x55736D: call    sub_790B90
+0x55736D: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x557372: push    edi; Size
 0x557373: call    FormHeapAlloc
 0x557378: mov     [esi+4], eax

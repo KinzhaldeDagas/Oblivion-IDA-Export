@@ -12,7 +12,7 @@
 0x4A05FA: call    eax
 0x4A05FC: test    eax, eax
 0x4A05FE: jz      short loc_4A060E
-0x4A0600: cmp     eax, offset dword_BA7B80
+0x4A0600: cmp     eax, offset stru_BA7B80
 0x4A0605: jz      short loc_4A0618
 0x4A0607: mov     eax, [eax+4]
 0x4A060A: test    eax, eax

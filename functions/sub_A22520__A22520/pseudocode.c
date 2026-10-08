@@ -1,4 +1,4 @@
-void __cdecl sub_A22520()
+void __cdecl GameSetting_Destroy_sXBox360Controller()
 {
-  GameSetting_destr((int *)&unk_B38F00);
+  GameSetting_destr((int *)&stru_B38F00); /*0xa22525*/
 }

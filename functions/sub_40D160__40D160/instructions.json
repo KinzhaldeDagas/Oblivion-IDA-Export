@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x40D166",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef; this",
+    "line": "mov     ecx, dword ptr reference; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D16C",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x40D179",
-    "line": "mov     ecx, TESDataHandler_g_PlayerRef",
+    "line": "mov     ecx, dword ptr reference",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x40D193",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D198",
-    "line": "mov     eax, menuRenderedTexture",
+    "line": "mov     eax, dword ptr texture",
     "mnemonic": "mov",
     "size": 5
   },
@@ -115,31 +115,31 @@
   },
   {
     "ea": "0x40D1A4",
-    "line": "mov     ecx, g_textureManager; this",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D1AA",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40D1AB",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D1B0",
-    "line": "mov     eax, g_Renderer",
+    "line": "mov     eax, dword ptr renderer",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x40D1B5",
-    "line": "mov     ecx, g_textureManager; this",
+    "line": "mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x40D1BD",
-    "line": "push    5; a3",
+    "line": "push    5; Requests default render-target type 5 for the captured world/menu background. This is not the XML UI render surface.",
     "mnemonic": "push",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x40D1C0",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Menu rendered texture path: creates menuRenderedTexture through BSTextureManager_GetDefaultRenderTarget(..., 5), then NiRenderer_Render uses that texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x40D1C6",
-    "line": "mov     ecx, offset menuRenderedTexture; this",
+    "line": "mov     ecx, offset texture; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x40D1D0",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x40D1DD",
-    "line": "mov     ecx, menuRenderedTexture",
+    "line": "mov     ecx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x40D208",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x40D215",
-    "line": "mov     ecx, menuRenderedTexture",
+    "line": "mov     ecx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x40D244",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x40D251",
-    "line": "mov     ecx, menuRenderedTexture",
+    "line": "mov     ecx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x40D2AB",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x40D2BA",
-    "line": "mov     ecx, menuRenderedTexture",
+    "line": "mov     ecx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x40D307",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x40D318",
-    "line": "mov     ecx, menuRenderedTexture",
+    "line": "mov     ecx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x40D372",
-    "line": "mov     ecx, g_Renderer",
+    "line": "mov     ecx, dword ptr renderer",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x40D381",
-    "line": "mov     ecx, menuRenderedTexture",
+    "line": "mov     ecx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x40D3D0",
-    "line": "mov     ecx, g_worldScenegraph",
+    "line": "mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x40D3E0",
-    "line": "fld     [esp+24h+var_18]",
+    "line": "fld     [esp+24h+output]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x40D412",
-    "line": "mov     edx, menuRenderedTexture",
+    "line": "mov     edx, dword ptr texture",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1417,19 +1417,19 @@
   },
   {
     "ea": "0x40D41B",
-    "line": "call    NiRenderer_Render",
+    "line": "call    NiRenderer_Render;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D420",
-    "line": "cmp     ImageSpaceEffectEnabled, 0",
+    "line": "cmp     OB_RendererGlobalState_010201A0.pad_00D+98h, 0",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x40D427",
-    "line": "mov     byte_B33397, 1",
+    "line": "mov     byte ptr unk_B33397, 1",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1441,31 +1441,31 @@
   },
   {
     "ea": "0x40D430",
-    "line": "mov     ecx, ScreenElementsRoot?",
+    "line": "mov     ecx, ds:0B333ECh; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D436",
-    "line": "lea     eax, [esp+24h+var_18]",
+    "line": "lea     eax, [esp+24h+output]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x40D43A",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40D43B",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D440",
-    "line": "mov     esi, [esp+24h+var_18]",
+    "line": "mov     esi, [esp+24h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1567,31 +1567,31 @@
   },
   {
     "ea": "0x40D469",
-    "line": "mov     ecx, menuRenderedTexture; this",
+    "line": "mov     ecx, dword ptr texture; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x40D46F",
-    "line": "call    BSRenderedTexture__GetInnerTexture",
+    "line": "call    BSRenderedTexture__GetInnerTexture; Gets the captured background texture's inner NiRenderedTexture before binding it to menu-background geometry.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x40D474",
-    "line": "push    eax",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x40D475",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x40D477",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x40D47E",
-    "line": "mov     eax, g_worldScenegraph",
+    "line": "mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x40D4BD",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },

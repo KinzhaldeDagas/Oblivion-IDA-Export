@@ -1,4 +1,4 @@
 BOOL __thiscall IngredAlch_IsAutoCalc(_BYTE *this)
 {
-  return (*(this + 0x7C) & 1) == 0;
+  return (*(this + 0x7C) & 1) == 0; /*0x419729*/
 }

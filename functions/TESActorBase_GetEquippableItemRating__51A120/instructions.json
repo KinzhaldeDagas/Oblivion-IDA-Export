@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51A120",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x51A125",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x51A1CF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x51A1D1",
-    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV; BladeSkillsRestored schema-4 owner decode: ECX is TESObjectWEAP and ESI is TESActorBase. Call returns at 0x51A1D6; paired Calc_WeaponDamage returns at 0x51A271. Patch resolves ESI as TESNPC and uses its carrier/co-save sidecar level; non-NPC or missing rows remain native.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,13 +439,13 @@
   },
   {
     "ea": "0x51A205",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+item], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x51A209",
-    "line": "fild    [esp+18h+arg_0]",
+    "line": "fild    [esp+18h+item]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x51A21F",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+item]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x51A246",
-    "line": "fld     [esp+28h+arg_0]",
+    "line": "fld     [esp+28h+item]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x51A252",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x51A25C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x51A266",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x51A26C",
-    "line": "call    Calc_WeaponDamage",
+    "line": "call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x51A30B",
-    "line": "call    TESObjectARMO_GetArmorSkillAV",
+    "line": "call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 7/7: TESActorBase armor-item evaluation selects the armor skill AV; consumer is Calc_ArmorRating at 0x51A34A. The receiver supplies the base-NPC context for authored NPC sidecar values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x51A326",
-    "line": "fnstcw  word ptr [esp+24h+arg_0]",
+    "line": "fnstcw  word ptr [esp+24h+item]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x51A32A",
-    "line": "movzx   eax, word ptr [esp+24h+arg_0]",
+    "line": "movzx   eax, word ptr [esp+24h+item]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -1069,13 +1069,13 @@
   },
   {
     "ea": "0x51A346",
-    "line": "fldcw   word ptr [esp+28h+arg_0]",
+    "line": "fldcw   word ptr [esp+28h+item]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x51A34A",
-    "line": "call    Calc_ArmorRating",
+    "line": "call    Calc_ArmorRating; Paired Medium boundary 7/7: TESActorBase_GetEquippableItemRating armor consumer. Use an authored NPC Medium sidecar level only when the receiver resolves to a TESNPC; otherwise preserve the engine-supplied fallback skill.",
     "mnemonic": "call",
     "size": 5
   },

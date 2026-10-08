@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70C0B0",
-    "line": "mov     ecx, ds:0B3F928h",
+    "line": "mov     ecx, ds:0B3F928h; OR/TESReloaded RenderObject detour target and native camera->NiCullingProcess::Process boundary. CULLING process hook runs under this traversal when vtable slots remain vanilla at install.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x70C0BB",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+camera]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x70C0C4",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+sceneRoot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x70C0CD",
-    "line": "mov     esi, [esp+0Ch+arg_C]",
+    "line": "mov     esi, [esp+0Ch+visibleArray]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x70C0D4",
-    "line": "mov     edi, [esp+10h+arg_8]",
+    "line": "mov     edi, [esp+10h+cullingProcess]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x70C0DE",
-    "line": "call    SetCameraViewProj",
+    "line": "call    SetCameraViewProj; Install the supplied camera view/projection before culling and visible-geometry submission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,25 +175,25 @@
   },
   {
     "ea": "0x70C0F8",
-    "line": "call    edx",
+    "line": "call    edx; CULLING audit 2026-09-27: virtual Process(self,camera,generic NiAVObject root,array); scope ends before the following deferred array submit.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x70C0FA",
-    "line": "push    esi",
+    "line": "push    esi; visibleArray",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70C0FB",
-    "line": "push    ebx",
+    "line": "push    ebx; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70C0FC",
-    "line": "call    sub_70C000",
+    "line": "call    NiRenderer_SubmitAndFlushVisibleGeometryArray; CULLING audit 2026-09-27: consumer runs after Process returns and clears process.Camera. Observation must retain explicit camera/array ownership through this point.",
     "mnemonic": "call",
     "size": 5
   },

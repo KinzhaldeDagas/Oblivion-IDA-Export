@@ -1,1 +1,1 @@
-IDropSourceVtbl_0
+typedef IDropSourceVtbl IDropSourceVtbl_0;

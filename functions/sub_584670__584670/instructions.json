@@ -72,12 +72,6 @@
     "size": 2
   },
   {
-    "ea": "0x58468D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x584690",
     "line": "add     eax, 1",
     "mnemonic": "add",
@@ -205,7 +199,7 @@
   },
   {
     "ea": "0x5846CB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +223,7 @@
   },
   {
     "ea": "0x5846D7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,13 +349,13 @@
   },
   {
     "ea": "0x58471A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58471C",
-    "line": "call    sub_58CDB0",
+    "line": "call    Tile__BuildStorage__Destroy; Verified: destroys main template unconditionally; subtemplate objects only when ownsSubTemplates is true; always frees subtemplate list links. ReadFile transfers subtemplate ownership to Menu before destroying storage. No savegame serialization in this teardown path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +367,7 @@
   },
   {
     "ea": "0x584722",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

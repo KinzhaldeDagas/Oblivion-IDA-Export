@@ -1,6 +1,6 @@
-0x95A2D0: fldz
+0x95A2D0: fldz; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.
 0x95A2D2: push    ebx
-0x95A2D3: mov     ebx, [esp+4+arg_0]
+0x95A2D3: mov     ebx, [esp+4+pickedObject]
 0x95A2D7: push    esi
 0x95A2D8: mov     esi, ecx
 0x95A2DA: mov     dword ptr [esi], 0

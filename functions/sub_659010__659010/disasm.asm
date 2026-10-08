@@ -1,4 +1,4 @@
-0x659010: sub     esp, 15Ch
+0x659010: sub     esp, 15Ch; RadiantAI: alternate/lower process action dispatcher with same 0xB152B0 procedure-row logic as 0x6497F0. Case 5 prints eating debug text but does not itself perform HighProcess sub_62DA10 acquire action.
 0x659016: mov     eax, ds:0B30AACh
 0x65901B: xor     eax, esp
 0x65901D: mov     [esp+15Ch+var_4], eax
@@ -18,7 +18,7 @@
 0x65904B: push    eax; void *
 0x65904C: call    OblivionDynamicCast
 0x659051: add     esp, 14h
-0x659054: mov     ecx, offset TimeGlobals
+0x659054: mov     ecx, 0B332E0h
 0x659059: mov     edi, eax
 0x65905B: call    TimeGlobals_GetGameHour
 0x659060: fstp    [esp+16Ch+var_14C]
@@ -88,9 +88,9 @@
 0x65913D: test    al, al
 0x65913F: jnz     loc_65920F
 0x659145: push    3Ah ; ':'; a1
-0x659147: call    TESForm_LookupByFormID
+0x659147: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x65914C: add     esp, 4
-0x65914F: mov     ecx, offset TimeGlobals
+0x65914F: mov     ecx, 0B332E0h
 0x659154: mov     ebp, eax
 0x659156: call    TimeGlobals_GetGameHour
 0x65915B: fstp    [esp+16Ch+var_154]
@@ -174,7 +174,7 @@
 0x659256: fld     dword ptr ds:0A5B6C0h
 0x65925C: mov     edx, [eax+174h]
 0x659262: push    edi; a7
-0x659263: push    offset sub_645A30; a6
+0x659263: push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6
 0x659268: push    ecx
 0x659269: mov     ecx, edi
 0x65926B: fstp    [esp+178h+a5]; a5
@@ -189,7 +189,7 @@
 0x659285: call    edx
 0x659287: push    eax; a2
 0x659288: mov     ecx, edi; this
-0x65928A: call    TESObjectREFR_GetParentCell
+0x65928A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x65928F: mov     ecx, ds:0B33A98h
 0x659295: push    eax; a1
 0x659296: call    sub_446B90
@@ -202,7 +202,7 @@
 0x6592B0: fld     dword ptr ds:0A5B6C0h
 0x6592B6: mov     edx, [eax+174h]
 0x6592BC: push    edi; a7
-0x6592BD: push    offset sub_645AF0; a6
+0x6592BD: push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6
 0x6592C2: push    ecx
 0x6592C3: mov     ecx, edi
 0x6592C5: fstp    [esp+178h+a5]; a5
@@ -217,7 +217,7 @@
 0x6592DF: call    edx
 0x6592E1: push    eax; a2
 0x6592E2: mov     ecx, edi; this
-0x6592E4: call    TESObjectREFR_GetParentCell
+0x6592E4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6592E9: mov     ecx, ds:0B33A98h
 0x6592EF: push    eax; a1
 0x6592F0: call    sub_446B90
@@ -505,7 +505,7 @@
 0x659662: cmp     al, 1
 0x659664: jnz     short loc_6596A9
 0x659666: mov     ecx, [ebp+28h]
-0x659669: call    sub_452A60
+0x659669: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x65966E: mov     edx, [esi+2Ch]
 0x659671: mov     dword ptr [esp+16Ch+var_15C], eax
 0x659675: fild    dword ptr [esp+16Ch+var_15C]
@@ -528,19 +528,19 @@
 0x6596A7: jmp     short def_659110; jumptable 00659110 default case, cases 11,12,16,18-22,25,31,33,34,37-39,42
 0x6596A9: mov     eax, [esi+8]
 0x6596AC: mov     ecx, [eax+28h]
-0x6596AF: call    sub_452A60
+0x6596AF: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6596B4: mov     ecx, edi; this
-0x6596B6: call    TESObjectREFR_GetParentCell
+0x6596B6: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6596BB: test    eax, eax
 0x6596BD: jz      short loc_6596D6
 0x6596BF: mov     ecx, edi; this
-0x6596C1: call    TESObjectREFR_GetParentCell
+0x6596C1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6596C6: mov     ecx, eax; this
-0x6596C8: call    TESObjectCELL_IsInterior
+0x6596C8: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6596CD: test    al, al
-0x6596CF: mov     ecx, offset flt_B36AA0
+0x6596CF: mov     ecx, (offset flt_B36A88+18h)
 0x6596D4: jnz     short loc_6596DB
-0x6596D6: mov     ecx, offset flt_B36A98
+0x6596D6: mov     ecx, (offset flt_B36A88+10h)
 0x6596DB: call    GameSetting_GetSafeFloatPointer
 0x6596E0: fld     dword ptr [eax]
 0x6596E2: mov     ecx, [esi+2Ch]
@@ -568,7 +568,7 @@
 0x659720: mov     ecx, esi
 0x659722: call    eax
 0x659724: mov     ecx, edi; jumptable 00659110 default case, cases 11,12,16,18-22,25,31,33,34,37-39,42
-0x659726: call    Actor__GetProcessLevel
+0x659726: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x65972B: cmp     eax, 2
 0x65972E: jnz     loc_659891
 0x659734: mov     eax, [esi+8]
@@ -614,24 +614,24 @@
 0x6597B0: add     esp, 0Ch
 0x6597B3: test    ecx, ecx
 0x6597B5: jz      short loc_6597D6
-0x6597B7: call    sub_565DF0
+0x6597B7: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x6597BC: test    al, al
 0x6597BE: jz      short loc_6597D6
-0x6597C0: mov     ecx, offset TimeGlobals
+0x6597C0: mov     ecx, 0B332E0h
 0x6597C5: call    TimeGlobals_GetGameDay
 0x6597CA: mov     edx, [esi+8]
 0x6597CD: mov     ecx, ebp
 0x6597CF: push    eax
 0x6597D0: push    edx
-0x6597D1: call    sub_41FFC0
-0x6597D6: mov     ecx, [esi+8]
+0x6597D1: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
+0x6597D6: mov     ecx, [esi+8]; self
 0x6597D9: test    ecx, ecx
 0x6597DB: jz      short loc_6597ED
-0x6597DD: call    sub_5660A0
+0x6597DD: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x6597E2: test    al, al
 0x6597E4: jz      short loc_6597ED
 0x6597E6: mov     ecx, edi; int
-0x6597E8: call    sub_5EAE70
+0x6597E8: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x6597ED: call    sub_579440
 0x6597F2: cmp     eax, edi
 0x6597F4: jnz     short loc_659829
@@ -654,7 +654,7 @@
 0x65982C: test    eax, eax
 0x65982E: jz      short loc_659839
 0x659830: push    eax
-0x659831: call    FormHeapFree
+0x659831: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x659836: add     esp, 4
 0x659839: mov     dword ptr [esi+44h], 0
 0x659840: lea     ebp, [esi+3Ch]
@@ -666,7 +666,7 @@
 0x659852: test    ebx, ebx
 0x659854: jz      short loc_65985F
 0x659856: push    ebx
-0x659857: call    FormHeapFree
+0x659857: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65985C: add     esp, 4
 0x65985F: push    ebx
 0x659860: mov     ecx, ebp
@@ -679,7 +679,7 @@
 0x659874: jnz     short loc_659891
 0x659876: push    edi
 0x659877: mov     ecx, esi
-0x659879: call    sub_648E40
+0x659879: call    sub_648E40; RadiantAI: per-process package refresh wrapper; calls actor base package chooser chain and stores selected package at process+0x8.
 0x65987E: fld     [esp+16Ch+var_14C]
 0x659882: cmp     ebp, [esi+8]
 0x659885: fstp    dword ptr [esi+0Ch]

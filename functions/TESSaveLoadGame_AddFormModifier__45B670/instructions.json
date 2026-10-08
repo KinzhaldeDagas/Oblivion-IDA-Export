@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x45B6A4",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x45B6C8",
-    "line": "mov     ecx, [esi+4]",
+    "line": "mov     ecx, [esi+4]; self",
     "mnemonic": "mov",
     "size": 3
   },
@@ -175,25 +175,25 @@
   },
   {
     "ea": "0x45B6CF",
-    "line": "mov     edx, [esp+8+arg_4]",
+    "line": "mov     edx, [esp+8+flags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x45B6D3",
-    "line": "push    edx",
+    "line": "push    edx; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B6D4",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B6D5",
-    "line": "call    sub_452C20",
+    "line": "call    ChangesMap_AddFormChangeFlags;",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x45B6DF",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+flags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x45B6E3",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x45B6E5",
-    "line": "push    eax",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B6E6",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45B6E7",
-    "line": "call    sub_452C20",
+    "line": "call    ChangesMap_AddFormChangeFlags;",
     "mnemonic": "call",
     "size": 5
   },

@@ -4,28 +4,28 @@ bhkPrismaticConstraint *__thiscall bhkPrismaticConstraint::bhkPrismaticConstrain
   bhkRefObject *v4; // eax
   bhkRefObject *v5; // esi
 
-  EnterCriticalSection(&stru_BA7C80);
-  CurrentThreadId = GetCurrentThreadId();
-  ++dword_BA7CFC;
-  dword_BA7CF8 = CurrentThreadId;
-  v4 = (bhkRefObject *)FormHeapAlloc(0x10u);
-  v5 = v4;
-  if ( v4 )
+  EnterCriticalSection(&unk_BA7C80); /*0x8c186b*/
+  CurrentThreadId = GetCurrentThreadId(); /*0x8c1871*/
+  ++unk_BA7CFC; /*0x8c187c*/
+  unk_BA7CF8 = CurrentThreadId; /*0x8c1884*/
+  v4 = (bhkRefObject *)FormHeapAlloc(0x10u); /*0x8c1889*/
+  v5 = v4; /*0x8c188e*/
+  if ( v4 ) /*0x8c18a1*/
   {
-    bhkRefObject::bhkRefObject(v4);
-    v5->__vftable = (NiObjectVtbl *)&bhkConstraint::`vftable';
-    v5[1].__vftable = 0;
-    ++dword_BA7D4C;
-    v5->__vftable = (NiObjectVtbl *)&bhkPrismaticConstraint::`vftable';
-    ++dword_BA80C4;
+    bhkRefObject::bhkRefObject(v4); /*0x8c18a5*/
+    v5->__vftable = (NiObjectVtbl *)&bhkConstraint::`vftable'; /*0x8c18aa*/
+    v5[1].__vftable = 0; /*0x8c18b0*/
+    ++unk_BA7D4C; /*0x8c18b7*/
+    v5->__vftable = (NiObjectVtbl *)&bhkPrismaticConstraint::`vftable'; /*0x8c18bd*/
+    ++unk_BA80C4; /*0x8c18c3*/
   }
   else
   {
-    v5 = 0;
+    v5 = 0; /*0x8c18cb*/
   }
-  sub_8A0860(this, (int)v5, a2);
-  if ( dword_BA7CFC-- == 1 )
-    dword_BA7CF8 = 0;
-  LeaveCriticalSection(&stru_BA7C80);
-  return (bhkPrismaticConstraint *)v5;
+  sub_8A0860(this, (int)v5, a2); /*0x8c18dd*/
+  if ( unk_BA7CFC-- == 1 ) /*0x8c18e2*/
+    unk_BA7CF8 = 0; /*0x8c18ea*/
+  LeaveCriticalSection(&unk_BA7C80); /*0x8c18f9*/
+  return (bhkPrismaticConstraint *)v5; /*0x8c1901*/
 }

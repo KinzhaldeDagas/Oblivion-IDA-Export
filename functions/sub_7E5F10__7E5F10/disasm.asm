@@ -1,4 +1,4 @@
-0x7E5F10: push    0FFFFFFFFh
+0x7E5F10: push    0FFFFFFFFh; Builds TallGrassShader constant maps in Oblivion. Vertex bindings include WVP, ShadowProjTransform, fog, grouped constants and instancing; pixel bindings include point-light color/data and alpha-test reference.
 0x7E5F12: push    offset SEH_8122A0
 0x7E5F17: mov     eax, large fs:0
 0x7E5F1D: push    eax
@@ -50,7 +50,7 @@
 0x7E5FA1: mov     edx, [ecx]
 0x7E5FA3: mov     eax, [edx+18h]
 0x7E5FA6: push    0
-0x7E5FA8: push    offset flt_B44EF8
+0x7E5FA8: push    offset unk_B44EF8
 0x7E5FAD: push    4
 0x7E5FAF: push    10h
 0x7E5FB1: push    offset EmptyString
@@ -64,7 +64,7 @@
 0x7E5FCA: mov     edx, [ecx]
 0x7E5FCC: mov     eax, [edx+18h]
 0x7E5FCF: push    0
-0x7E5FD1: push    offset dword_B46638
+0x7E5FD1: push    offset flt_B46638
 0x7E5FD6: push    4
 0x7E5FD8: push    10h
 0x7E5FDA: push    offset EmptyString
@@ -73,12 +73,12 @@
 0x7E5FE3: push    0
 0x7E5FE5: push    10000007h
 0x7E5FEA: push    offset aFogparam_0; "fogparam"
-0x7E5FEF: call    eax
+0x7E5FEF: call    eax; Fog constant-map decode: projected/instance vertex path declares fogparam at vs c15 from shared B45E14[0x209] / B46638.
 0x7E5FF1: mov     ecx, [esi]
 0x7E5FF3: mov     edx, [ecx]
 0x7E5FF5: mov     eax, [edx+18h]
 0x7E5FF8: push    0
-0x7E5FFA: push    offset dword_B46648
+0x7E5FFA: push    (offset flt_B46638+10h)
 0x7E5FFF: push    4
 0x7E6001: push    10h
 0x7E6003: push    offset EmptyString
@@ -87,12 +87,12 @@
 0x7E600C: push    0
 0x7E600E: push    10000007h
 0x7E6013: push    offset aFogcolor_0; "fogcolor"
-0x7E6018: call    eax
+0x7E6018: call    eax; Fog constant-map decode: projected/instance vertex path declares fogcolor at vs c14 from shared B45E14[0x20D] / B46648.
 0x7E601A: mov     ecx, [esi]
 0x7E601C: mov     edx, [ecx]
 0x7E601E: mov     eax, [edx+18h]
 0x7E6021: push    0
-0x7E6023: push    offset dword_B46070
+0x7E6023: push    offset flt_B46070
 0x7E6028: push    4
 0x7E602A: push    90h
 0x7E602F: push    offset EmptyString
@@ -203,3 +203,20 @@
 0x7E6170: pop     ebp
 0x7E6171: add     esp, 10h
 0x7E6174: retn    4
+0x9D0CA0: mov     eax, [ebp-10h]
+0x9D0CA3: push    eax
+0x9D0CA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CA9: pop     ecx
+0x9D0CAA: retn
+0x9D0CAB: mov     eax, [ebp-10h]
+0x9D0CAE: push    eax
+0x9D0CAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D0CB4: pop     ecx
+0x9D0CB5: retn
+0x9D0CB6: mov     edx, [esp+arg_4]
+0x9D0CBA: lea     eax, [edx-10h]
+0x9D0CBD: mov     ecx, [edx-14h]
+0x9D0CC0: xor     ecx, eax
+0x9D0CC2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D0CC7: mov     eax, offset stru_AF94E0
+0x9D0CCC: jmp     ___CxxFrameHandler3

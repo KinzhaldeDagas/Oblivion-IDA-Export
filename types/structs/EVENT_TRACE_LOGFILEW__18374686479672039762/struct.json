@@ -1,82 +1,135 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "EVENT_TRACE_LOGFILEW",
+  "definition": "typedef _EVENT_TRACE_LOGFILEW EVENT_TRACE_LOGFILEW\n",
   "id": 18374686479672039762,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LogFileName",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LoggerName",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentTime",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LogFileMode",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CurrentEvent",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 88
+      "size": 88,
+      "type": "EVENT_TRACE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LogfileHeader",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 272
+      "size": 272,
+      "type": "TRACE_LOGFILE_HEADER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BufferCallback",
       "offset": 384,
       "offset_hex": "0x180",
-      "size": 4
+      "size": 4,
+      "type": "PEVENT_TRACE_BUFFER_CALLBACKW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "BufferSize",
       "offset": 388,
       "offset_hex": "0x184",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Filled",
       "offset": 392,
       "offset_hex": "0x188",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EventsLost",
       "offset": 396,
-      "offset_hex": "0x18c",
-      "size": 4
+      "offset_hex": "0x18C",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EventCallback",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 4
+      "size": 4,
+      "type": "PEVENT_CALLBACK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Context",
       "offset": 404,
       "offset_hex": "0x194",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     }
   ],
   "name": "EVENT_TRACE_LOGFILEW",
+  "ordinal": 5814,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 408
 }

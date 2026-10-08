@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x478780",
-    "line": "push    ebx",
+    "line": "push    ebx; ActorSkinInfo equipment-slot teardown/replacement. Slot is exactly {TESForm*, TESModel*, NiAVObject*}; native code removes loaded 3D from shadow/parent ownership, releases loader/scene state, clears object3D, and optionally replaces form/model metadata. Known slots include rings, amulet, WEAP, AMMO, shield, and light. External Crossbow contrast after this native ownership behavior: retained raw controller/target pointers are invalidated when the owning WeaponObject graph is torn down; pointer equality alone is not a lifetime or generation check. Current removal/reset erases tracking without restoring original controller timing state, and target mismatch leaves null-controller tombstones instead of generation-validating/rescanning.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x478782",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4787B2",
-    "line": "push    edx",
+    "line": "push    edx; object",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,13 +127,13 @@
   },
   {
     "ea": "0x4787BD",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4787BF",
-    "line": "call    sub_7C5E70",
+    "line": "call    ShadowSceneNode_RemoveObjectReceivers; Removes an object's geometry from shadow-light receiver lists under the shadow-scene critical section. It obtains the object's node/container through virtual +0x08 and recurses; it does not detach the object from its parent or clear NiNode children.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x4787DB",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4787F2",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4787F9",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x478821",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x47884D",
-    "line": "lea     ecx, [edi+0ACh]",
+    "line": "lea     ecx, [edi+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x478853",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,19 +487,19 @@
   },
   {
     "ea": "0x47886A",
-    "line": "lea     ecx, [edi+0ACh]",
+    "line": "lea     ecx, [edi+0ACh]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x478870",
-    "line": "call    sub_477EF0",
+    "line": "call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x478875",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x478883",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x478885",
-    "line": "call    sub_6600D0",
+    "line": "call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x4788BF",
-    "line": "cmp     [esp+8+arg_4], 0",
+    "line": "cmp     [esp+8+replaceMetadata], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x4788C6",
-    "line": "mov     ecx, [esp+8+arg_8]",
+    "line": "mov     ecx, [esp+8+newModelData]",
     "mnemonic": "mov",
     "size": 4
   },

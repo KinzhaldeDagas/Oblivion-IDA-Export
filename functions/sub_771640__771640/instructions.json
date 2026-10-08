@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x771640",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Apply native filter preset row [MIN,MAG,MIP] to D3DSAMP_MAGFILTER/MINFILTER/MIPFILTER. SimpleShadow preset 1 = LINEAR/LINEAR/NONE.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x771643",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+filterPreset]",
     "mnemonic": "mov",
     "size": 4
   },

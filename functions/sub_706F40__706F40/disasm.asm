@@ -1,7 +1,7 @@
 0x706F40: sub     esp, 20h
 0x706F43: push    ebx
 0x706F44: push    esi
-0x706F45: mov     esi, dword ptr [esp+28h+arg_0]
+0x706F45: mov     esi, [esp+28h+arg_0]
 0x706F49: push    edi
 0x706F4A: push    esi
 0x706F4B: mov     edi, ecx
@@ -13,7 +13,7 @@
 0x706F61: movzx   ecx, word ptr [esi+8]
 0x706F65: add     esp, 4
 0x706F68: cmp     ebx, ecx
-0x706F6A: mov     dword ptr [esp+2Ch+arg_0], eax
+0x706F6A: mov     [esp+2Ch+arg_0], eax
 0x706F6E: jb      short loc_706F7E
 0x706F70: movzx   edx, word ptr [esi+0Eh]
 0x706F74: add     edx, ebx
@@ -27,13 +27,13 @@
 0x706F86: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x706F8B: mov     cl, [edi+18h]
 0x706F8E: and     cl, 1
-0x706F91: mov     [esp+2Ch+arg_0], cl
-0x706F95: mov     edx, dword ptr [esp+2Ch+arg_0]
+0x706F91: mov     byte ptr [esp+2Ch+arg_0], cl
+0x706F95: mov     edx, [esp+2Ch+arg_0]
 0x706F99: push    edx; char
 0x706F9A: push    offset aM_bztest; "m_bZTest"
 0x706F9F: call    TESOutput_PrintLabeledBool
 0x706FA4: movzx   ebx, word ptr [esi+0Ah]
-0x706FA8: mov     dword ptr [esp+34h+arg_0], eax
+0x706FA8: mov     [esp+34h+arg_0], eax
 0x706FAC: movzx   eax, word ptr [esi+8]
 0x706FB0: add     esp, 8
 0x706FB3: cmp     ebx, eax
@@ -51,8 +51,8 @@
 0x706FD2: mov     al, [edi+18h]
 0x706FD5: shr     al, 1
 0x706FD7: and     al, 1
-0x706FD9: mov     [esp+2Ch+arg_0], al
-0x706FDD: mov     ecx, dword ptr [esp+2Ch+arg_0]
+0x706FD9: mov     byte ptr [esp+2Ch+arg_0], al
+0x706FDD: mov     ecx, [esp+2Ch+arg_0]
 0x706FE1: push    ecx; char
 0x706FE2: push    offset aM_bzwrite; "m_bZWrite"
 0x706FE7: call    TESOutput_PrintLabeledBool
@@ -60,7 +60,7 @@
 0x706FF0: movzx   edx, word ptr [esi+8]
 0x706FF4: add     esp, 8
 0x706FF7: cmp     ebx, edx
-0x706FF9: mov     dword ptr [esp+2Ch+arg_0], eax
+0x706FF9: mov     [esp+2Ch+arg_0], eax
 0x706FFD: jb      short loc_70700D
 0x706FFF: movzx   eax, word ptr [esi+0Eh]
 0x707003: add     eax, ebx
@@ -88,7 +88,7 @@
 0x707069: push    offset aTestFunction; "Test Function"
 0x70706E: call    TESOutput_PrintLabeledString
 0x707073: movzx   edi, word ptr [esi+0Ah]
-0x707077: mov     dword ptr [esp+34h+arg_0], eax
+0x707077: mov     [esp+34h+arg_0], eax
 0x70707B: movzx   eax, word ptr [esi+8]
 0x70707F: add     esp, 8
 0x707082: cmp     edi, eax

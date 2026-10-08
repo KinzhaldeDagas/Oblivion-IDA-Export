@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x799780",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; vector<float>::push_back(const float&). Appends directly when end!=capacity; otherwise builds the checked end iterator and delegates to single-element insert.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7997AC",
-    "line": "mov     ecx, [esp+0Ch+arg_0]",
+    "line": "mov     ecx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x7997CF",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7997D3",
-    "line": "push    edx; int",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -211,31 +211,31 @@
   },
   {
     "ea": "0x7997D5",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7997D6",
-    "line": "lea     eax, [esp+1Ch+var_8]",
+    "line": "lea     eax, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7997DA",
-    "line": "push    eax; int",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7997DB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7997DD",
-    "line": "call    sub_7996F0",
+    "line": "call    OB_stVectorFloat_InsertOne_010201A0; Checked-iterator vector<float>::insert(position,value) wrapper. Converts the owner/current iterator to an index, delegates to insert-fill with count=1, then returns an iterator relocated against the possibly new begin pointer.",
     "mnemonic": "call",
     "size": 5
   },

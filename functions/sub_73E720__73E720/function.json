@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x73E720",
+      "0x73E85D"
+    ]
+  ],
+  "chunks_sha256": "fae696fc2bbc1d7d18721aa2b82710448646b99fed5bbe06c0872f6b12605730",
+  "comment_regular": "\nGPU static-world LOD audit 2026-09-27: world center+18 and radius+24; Euclidean camera distance. Radius>distance or distance<=float(1e-6) returns0. Otherwise radius (orthographic) or radius/distance (perspective), times max(float(2/(right-left)),float(2/(top-bottom))) and Camera LODAdjust. First threshold<=projected size wins; no match returns threshold count. Constants A372CC=358637BD, A3D0C0=double2.\n\nPass330 decode: NiScreenLODData camera selector. It computes distance and projected screen scale from the supplied camera/frustum and Camera::LODAdjust, then selects an authored screen-size threshold.",
+  "comment_repeatable": "Pass330 decode: NiScreenLODData camera selector. It computes distance and projected screen scale from the supplied camera/frustum and Camera::LODAdjust, then selects an authored screen-size threshold.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_73E720",
+  "display_name": "NiScreenLODData_SelectCamera",
   "end_ea": "0x73E85D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_73E720",
+  "name": "NiScreenLODData_SelectCamera",
   "segment": ".text",
   "sha256": "fae696fc2bbc1d7d18721aa2b82710448646b99fed5bbe06c0872f6b12605730",
   "size": 317,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x73E720",
+  "total_chunk_size": 317,
   "type": "unsigned int __thiscall(int this, float *, int)",
   "xrefs_from_count": 107,
   "xrefs_to_count": 1

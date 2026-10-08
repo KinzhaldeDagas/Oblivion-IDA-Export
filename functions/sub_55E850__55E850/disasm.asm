@@ -1,4 +1,4 @@
-0x55E850: push    0FFFFFFFFh
+0x55E850: push    0FFFFFFFFh; Verified Oblivion manager layout is 0x28 bytes with modelCacheByTree at +0 and pendingReferenceNodes at +0x24; constructor initializes shared Ni properties and the TESObjectREFR* -> BSTreeNode* map. Fallout's manager size/field offsets differ. Confidence applies to these local offsets and constructor stores.
 0x55E852: push    offset SEH_55E850
 0x55E857: mov     eax, large fs:0
 0x55E85D: push    eax
@@ -280,12 +280,12 @@
 0x55EB9D: add     ebp, 4
 0x55EBA0: push    ebp; lpAddend
 0x55EBA1: call    dword ptr ds:0A28078h
-0x55EBA7: push    4
-0x55EBA9: call    sub_78BD80
-0x55EBAE: push    1
-0x55EBB0: call    sub_7871C0
-0x55EBB5: push    1
-0x55EBB7: call    sub_787690
+0x55EBA7: push    4; matrixCount
+0x55EBA9: call    CSpeedTreeRT__SetNumWindMatrices; Static CSpeedTreeRT::SetNumWindMatrices. Forwards the requested count as an unsigned 16-bit value to the global wind-matrix container; SDK exception scaffolding surrounds the call.
+0x55EBAE: push    1; enabled
+0x55EBB0: call    CSpeedTreeRT__SetDropToBillboard; Static CSpeedTreeRT::SetDropToBillboard. Updates the global toggle that adds the synthetic billboard LOD to branch/frond/leaf transition selection.
+0x55EBB5: push    1; enabled
+0x55EBB7: call    CSpeedTreeRT__SetTextureFlip; Oblivion startup initializes CSpeedTreeRT global texture flip to true (push 1; call 0x787690). This is the sole code xref to the setter in this IDB, so generated/embedded SpeedTree T coordinates are negated for the Direct3D/Gamebryo path.
 0x55EBBC: fild    dword ptr ds:0B12630h
 0x55EBC2: mov     eax, ds:0B12630h
 0x55EBC7: test    eax, eax
@@ -299,11 +299,11 @@
 0x55EBE5: test    eax, eax
 0x55EBE7: mov     byte ptr [esp+34h+var_4], 0Bh
 0x55EBEC: jz      short loc_55EBFD
-0x55EBEE: push    0Ch
-0x55EBF0: push    25h ; '%'
-0x55EBF2: push    2
-0x55EBF4: mov     ecx, eax
-0x55EBF6: call    sub_55E720
+0x55EBEE: push    0Ch; entrySize
+0x55EBF0: push    25h ; '%'; bucketCount
+0x55EBF2: push    2; initialSize
+0x55EBF4: mov     ecx, eax; this
+0x55EBF6: call    BSTreeManager_ReferenceNodeMap_ctor; Verified local RTTI and constructor call: constructs LockFreeMap<TESObjectREFR*,BSTreeNode*> with arguments (2,37,12), used by BSTreeManager at +0x24.
 0x55EBFB: jmp     short loc_55EBFF
 0x55EBFD: xor     eax, eax
 0x55EBFF: mov     [esi+24h], eax
@@ -317,3 +317,58 @@
 0x55EC13: pop     ebx
 0x55EC14: add     esp, 20h
 0x55EC17: retn
+0x9BCB70: mov     ecx, [ebp-20h]
+0x9BCB73: add     ecx, 4; slot
+0x9BCB76: jmp     NiPointerSlot_Release
+0x9BCB7B: mov     ecx, [ebp-20h]
+0x9BCB7E: add     ecx, 8; slot
+0x9BCB81: jmp     NiPointerSlot_Release
+0x9BCB86: mov     ecx, [ebp-20h]
+0x9BCB89: add     ecx, 0Ch; slot
+0x9BCB8C: jmp     NiPointerSlot_Release
+0x9BCB91: mov     ecx, [ebp-20h]
+0x9BCB94: add     ecx, 10h; slot
+0x9BCB97: jmp     NiPointerSlot_Release
+0x9BCB9C: mov     ecx, [ebp-20h]
+0x9BCB9F: add     ecx, 14h; slot
+0x9BCBA2: jmp     NiPointerSlot_Release
+0x9BCBA7: mov     ecx, [ebp-20h]
+0x9BCBAA: add     ecx, 18h; slot
+0x9BCBAD: jmp     NiPointerSlot_Release
+0x9BCBB2: mov     eax, [ebp-1Ch]
+0x9BCBB5: push    eax
+0x9BCBB6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCBBB: pop     ecx
+0x9BCBBC: retn
+0x9BCBBD: mov     eax, [ebp-1Ch]
+0x9BCBC0: push    eax
+0x9BCBC1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCBC6: pop     ecx
+0x9BCBC7: retn
+0x9BCBC8: mov     eax, [ebp-1Ch]
+0x9BCBCB: push    eax
+0x9BCBCC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCBD1: pop     ecx
+0x9BCBD2: retn
+0x9BCBD3: mov     eax, [ebp-1Ch]
+0x9BCBD6: push    eax
+0x9BCBD7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCBDC: pop     ecx
+0x9BCBDD: retn
+0x9BCBDE: mov     eax, [ebp-1Ch]
+0x9BCBE1: push    eax
+0x9BCBE2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCBE7: pop     ecx
+0x9BCBE8: retn
+0x9BCBE9: mov     eax, [ebp-1Ch]
+0x9BCBEC: push    eax
+0x9BCBED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCBF2: pop     ecx
+0x9BCBF3: retn
+0x9BCBF4: mov     edx, [esp+arg_4]
+0x9BCBF8: lea     eax, [edx-24h]
+0x9BCBFB: mov     ecx, [edx-28h]
+0x9BCBFE: xor     ecx, eax
+0x9BCC00: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BCC05: mov     eax, offset stru_AE66EC
+0x9BCC0A: jmp     ___CxxFrameHandler3

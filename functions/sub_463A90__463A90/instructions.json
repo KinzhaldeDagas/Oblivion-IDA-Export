@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x463AE7",
-    "line": "mov     edi, [esp+2Ch+arg_0]",
+    "line": "mov     edi, [esp+2Ch+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x463AF3",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463AF5",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463AF6",
-    "line": "call    sub_452D30",
+    "line": "call    ChangesMap_FindByForm;",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,25 +277,25 @@
   },
   {
     "ea": "0x463B23",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463B25",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x463B27",
-    "line": "push    edx",
+    "line": "push    edx; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463B28",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x463B61",
-    "line": "mov     ecx, offset stru_B33B80",
+    "line": "mov     ecx, offset unk_B33B80",
     "mnemonic": "mov",
     "size": 5
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x463B6E",
-    "line": "push    eax",
+    "line": "push    eax; changeFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463B6F",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x463B72",
-    "line": "call    sub_4535A0",
+    "line": "call    SaveLoad_NormalizeFormChangeFlags; Verified: starts with created-form flag adjustment, then normalizes flags by runtime type/state. For TESObjectREFR it checks inventory/process/package/death/persistence and location; bit31 is set when reference location differs from its starting location. For TESObjectCELL it validates light/terrain-related flags and classifies exterior grid coordinates. Callers include UnloadForm, ResetFormForLoad, save/load consistency passes. Do not assign names to remaining individual bits without further use tracing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x463BB2",
-    "line": "mov     [esp+30h+arg_0], ecx",
+    "line": "mov     [esp+30h+form], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x463BBE",
-    "line": "mov     cx, word ptr [esp+2Ch+arg_0]",
+    "line": "mov     cx, word ptr [esp+2Ch+form]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x463BCC",
-    "line": "mov     word ptr [esp+2Ch+arg_0], cx",
+    "line": "mov     word ptr [esp+2Ch+form], cx",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x463BD1",
-    "line": "mov     word ptr [esp+2Ch+Src], cx",
+    "line": "mov     word ptr [esp+2Ch+Src], cx;",
     "mnemonic": "mov",
     "size": 5
   },
@@ -631,19 +631,19 @@
   },
   {
     "ea": "0x463BDC",
-    "line": "push    0; int",
+    "line": "push    0; worldZ",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x463BDE",
-    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; struct TypeDescriptor *",
+    "line": "push    offset ??_R0?AVTESObjectREFR@@@8; worldY",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x463BE3",
-    "line": "push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *",
+    "line": "push    offset ??_R0?AVTESForm@@@8; worldX",
     "mnemonic": "push",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x463BFF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x463C06",
-    "line": "mov     [esp+2Ch+var_14], eax",
+    "line": "mov     [esp+2Ch+referenceID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x463C0E",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x463C1A",
-    "line": "mov     eax, [esp+2Ch+var_14]",
+    "line": "mov     eax, [esp+2Ch+referenceID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -763,25 +763,25 @@
   },
   {
     "ea": "0x463C21",
-    "line": "push    edx",
+    "line": "push    edx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463C22",
-    "line": "push    ecx",
+    "line": "push    ecx; cellFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463C23",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x463C26",
-    "line": "call    sub_452E70",
+    "line": "call    InteriorCellNewReferencesMap_AddReferenceID; Verified: unload records interior reference IDs under cell FormID; corresponding LoadReferencesForCell consumes the list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x463C32",
-    "line": "mov     [esp+2Ch+var_14], edx",
+    "line": "mov     [esp+2Ch+referenceID], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x463C41",
-    "line": "mov     [esp+2Ch+var_10], eax",
+    "line": "mov     [esp+2Ch+worldspaceFormID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x463C61",
-    "line": "mov     edx, [esp+38h+var_10]",
+    "line": "mov     edx, [esp+38h+worldspaceFormID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -907,31 +907,31 @@
   },
   {
     "ea": "0x463C68",
-    "line": "mov     ecx, [esp+38h+var_14]",
+    "line": "mov     ecx, [esp+38h+referenceID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x463C6C",
-    "line": "push    ecx; int",
+    "line": "push    ecx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463C6D",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x463C70",
-    "line": "push    edx; int",
+    "line": "push    edx; worldspaceFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463C71",
-    "line": "call    sub_452F10",
+    "line": "call    ExteriorCellNewReferencesMap_AddReference; Verified: unload records exterior reference location data by worldspace; LoadReferencesForCell consumes entries matching cell grid XY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x463CAB",
-    "line": "mov     [esp+2Ch+var_10], ecx",
+    "line": "mov     [esp+2Ch+worldspaceFormID], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x463CBB",
-    "line": "mov     [esp+2Ch+var_14], edx",
+    "line": "mov     [esp+2Ch+referenceID], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x463CC4",
-    "line": "push    eax",
+    "line": "push    eax; cellY",
     "mnemonic": "push",
     "size": 1
   },
@@ -1111,43 +1111,43 @@
   },
   {
     "ea": "0x463CCC",
-    "line": "mov     ecx, [esp+30h+var_14]",
+    "line": "mov     ecx, [esp+30h+referenceID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x463CD0",
-    "line": "push    eax",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463CD1",
-    "line": "mov     eax, [esp+34h+var_10]",
+    "line": "mov     eax, [esp+34h+worldspaceFormID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x463CD5",
-    "line": "push    eax",
+    "line": "push    eax; cellFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463CD6",
-    "line": "push    ecx",
+    "line": "push    ecx; worldspaceFormID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463CD7",
-    "line": "mov     ecx, [esi+10h]",
+    "line": "mov     ecx, [esi+10h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x463CDA",
-    "line": "call    sub_452FE0",
+    "line": "call    ExteriorCellNewReferencesMap_AddCell; Verified: unload records exterior cell identity and coordinates by worldspace; LoadGame uses these records to detect conflicting cell coordinate forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,13 +1159,13 @@
   },
   {
     "ea": "0x463CE3",
-    "line": "movzx   eax, word ptr [esp+2Ch+arg_0]",
+    "line": "movzx   eax, word ptr [esp+2Ch+form]",
     "mnemonic": "movzx",
     "size": 5
   },
   {
     "ea": "0x463CE8",
-    "line": "mov     [esp+2Ch+arg_0], eax",
+    "line": "mov     [esp+2Ch+form], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1189,19 +1189,19 @@
   },
   {
     "ea": "0x463CF2",
-    "line": "call    sub_453500",
+    "line": "call    sub_453500; EnginePatch v1: save-buffer allocation hook used to track record buffer base/end for later savegame parser count clamps.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x463CF7",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x463CFD",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1213,13 +1213,13 @@
   },
   {
     "ea": "0x463D03",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463D04",
-    "line": "mov     [esp+34h+var_10], eax",
+    "line": "mov     [esp+34h+worldspaceFormID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x463D11",
-    "line": "call    SaveLoad_SaveFormModifiedFlags??",
+    "line": "call    SaveLoad_SaveFormModifiedFlags??; Second save-side caller of SaveLoad_SaveFormModifiedFlags?? during TESSaveLoadGame::UnloadForm-style buffering. SavePersistanceFix detours the callee, so this path is covered without a separate patch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,13 +1285,13 @@
   },
   {
     "ea": "0x463D20",
-    "line": "mov     eax, [esp+2Ch+arg_0]",
+    "line": "mov     eax, [esp+2Ch+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x463D24",
-    "line": "mov     edi, [esp+2Ch+var_10]",
+    "line": "mov     edi, [esp+2Ch+worldspaceFormID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x463D45",
-    "line": "mov     [ebp+4], edi",
+    "line": "mov     [ebp+4], edi;",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x463D4B",
-    "line": "mov     ecx, offset stru_B33B80; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B33B80; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

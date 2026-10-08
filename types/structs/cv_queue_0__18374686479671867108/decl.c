@@ -1,1 +1,1 @@
-cv_queue_0
+typedef cv_queue cv_queue_0;

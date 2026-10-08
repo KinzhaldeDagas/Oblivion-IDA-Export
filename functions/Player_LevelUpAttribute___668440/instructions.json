@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x668440",
-    "line": "push    ebx",
+    "line": "push    ebx; Applies one selected level-up attribute: current base plus the multiplier derived from the oldest bucket's skill-increase count, clamped to 100. Invalid/sentinel attribute AVs are ignored.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x668454",
-    "line": "push    esi",
+    "line": "push    esi; attributeAV",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668455",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x668459",
-    "line": "call    sub_664970",
+    "line": "call    Player_GetAttributeBonusSkillIncreaseCount; Returns the selected attribute's skill-increase count from the oldest queued eight-byte attribute-bonus bucket. The queue preserves separate bonus sets when multiple player levels are pending.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66845E",
-    "line": "push    eax",
+    "line": "push    eax; skillIncreaseCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66845F",
-    "line": "call    sub_5480A0",
+    "line": "call    LevelUp_GetAttributeMultiplierFromCount; Oblivion native attribute-bonus lookup. skillIncreaseCount <= 0 returns 1; values >= 10 use iLevelUp10Mult. Constructor defaults: counts 1-4 => x2, 5-7 => x3, 8-9 => x4, 10+ => x5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x668469",
-    "line": "cmp     edi, 64h ; 'd'",
+    "line": "cmp     edi, 64h ; 'd'; Clamp the computed final attribute value to Oblivion's native cap of 100 before writing the actor-base value.",
     "mnemonic": "cmp",
     "size": 3
   },
   {
     "ea": "0x66846C",
-    "line": "jle     short loc_668473",
+    "line": "jle     short loc_668473; Oblivion clamps the final selected attribute value to 100 before writing it to the actor base.",
     "mnemonic": "jle",
     "size": 2
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x66848A",
-    "line": "push    esi; a2",
+    "line": "push    esi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66848B",
-    "line": "call    sub_57A6F0",
+    "line": "call    UI_UpdateActorValueDisplays; UI_UpdateActorValueDisplays(actorValue), called by player base-AV setters/modifiers after changing base form values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,25 +193,25 @@
   },
   {
     "ea": "0x668493",
-    "line": "push    1",
+    "line": "push    1; updatePlayerUI",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x668495",
-    "line": "push    esi",
+    "line": "push    esi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x668496",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x668498",
-    "line": "call    sub_5E2670",
+    "line": "call    Player_OnActorValueBaseChanged; Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.",
     "mnemonic": "call",
     "size": 5
   },

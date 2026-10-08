@@ -1,4 +1,4 @@
 int sub_7625F0()
 {
-  return dword_B42050;
+  return unk_B42050; /*0x7625f5*/
 }

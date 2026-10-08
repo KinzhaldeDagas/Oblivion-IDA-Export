@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F01F0",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified: symmetric removal from the coordinate-indexed list or fallbackReferences under the shared WorldSpace reference-index critical section; removes an empty per-cell list/map entry.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F01F2",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4F0213",
-    "line": "mov     ecx, offset stru_B36100",
+    "line": "mov     ecx, offset g_TESWorldSpaceReferenceIndexLock",
     "mnemonic": "mov",
     "size": 5
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x4F021D",
-    "line": "push    esi",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F021E",
-    "line": "call    sub_4F00C0",
+    "line": "call    TESWorldSpace_UsesCoordinateReferenceIndex; Verified Oblivion allowlist includes TESSubSpace for the +0x64 persistent-reference index. Comparison: Fallout's persistent-reference classification is TESWorldSpace::IsFixedRef with a different explicit set; Fallout IDB has no TESSubSpace-named class/string, so it does not establish an analogue for Oblivion's +0x60 SubSpace spatial index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4F0233",
-    "line": "mov     ecx, offset stru_B36100; lpCriticalSection",
+    "line": "mov     ecx, offset g_TESWorldSpaceReferenceIndexLock; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x4F0250",
-    "line": "push    eax",
+    "line": "push    eax; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0251",
-    "line": "call    sub_4EFE40",
+    "line": "call    TESWorldSpace_PackCellCoordinates",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4F0259",
-    "line": "lea     ecx, [esp+10h+arg_0]",
+    "line": "lea     ecx, [esp+10h+reference]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4F0266",
-    "line": "mov     [esp+18h+arg_0], 0",
+    "line": "mov     [esp+18h+reference], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4F0273",
-    "line": "mov     edi, [esp+10h+arg_0]",
+    "line": "mov     edi, [esp+10h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x4F028F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x4F02A1",
-    "line": "mov     ecx, offset stru_B36100; lpCriticalSection",
+    "line": "mov     ecx, offset g_TESWorldSpaceReferenceIndexLock; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

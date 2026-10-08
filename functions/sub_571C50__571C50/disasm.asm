@@ -37,3 +37,15 @@
 0x571CC9: pop     esi
 0x571CCA: add     esp, 10h
 0x571CCD: retn    10h
+0x9BDDC0: mov     ecx, [ebp-10h]
+0x9BDDC3: jmp     NiExtraData_dtor
+0x9BDDC8: mov     ecx, [ebp-10h]
+0x9BDDCB: add     ecx, 10h; void *
+0x9BDDCE: jmp     BSStringT_Clear
+0x9BDDD3: mov     edx, [esp+a2]
+0x9BDDD7: lea     eax, [edx-8]
+0x9BDDDA: mov     ecx, [edx-0Ch]
+0x9BDDDD: xor     ecx, eax
+0x9BDDDF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDDE4: mov     eax, offset stru_AE7640
+0x9BDDE9: jmp     ___CxxFrameHandler3

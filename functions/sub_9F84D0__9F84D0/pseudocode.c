@@ -1,5 +1,5 @@
 int sub_9F84D0()
 {
-  GameSetting_ConstrAndReg((int *)dword_B39518, (int)"sSpellEffectiveness", (int)"Spell effectiveness");
-  return atexit(sub_A23150);
+  GameSetting_ConstrAndReg(&stru_B39518, "sSpellEffectiveness", "Spell effectiveness"); /*0x9f84df*/
+  return atexit(sub_A23150); /*0x9f84ef*/
 }

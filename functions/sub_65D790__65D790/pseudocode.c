@@ -1,20 +1,26 @@
-void __thiscall sub_65D790(Actor *this, _DWORD *a2, int a3)
+// Player first-person synchronization caller. For groups whose fixed 0x24-byte metadata record has allow-multiple byte +0x04 set, it obtains the third-person source sequence from metadata slot +0x08 and tries ActorAnimData_PlayFirstPersonBySource. On miss or non-multiple group it falls back to key-based first-person playback.
+void __thiscall Player_SyncFirstPersonAnimFromSource(
+        Actor *this,
+        unsigned int encodedKey,
+        unsigned int playImmediately)
 {
-  int v7; // eax
-  _DWORD **v8; // ebp
-  int v9; // esi
-  ActorAnimData *AnimData; // eax
-  PowerListEntry *v11; // eax
+  int groupID; // eax
+  ActorAnimData *firstPersonAnimData; // ebp
+  int groupRecordDwordIndex; // esi
+  ActorAnimData *thirdPersonAnimData; // eax
+  BSAnimGroupSequence *sourceSequence; // eax
 
-  v7 = sub_51AA00((unsigned __int8)a2);
-  v8 = (_DWORD **)this[5].members.unk0B4[1];
-  v9 = 9 * v7;
-  if ( !byte_B102E4[0x24 * v7]
-    || (AnimData = (ActorAnimData *)TESObjectREFR_GetAnimData(this),
-        v11 = sub_4706E0(AnimData, dword_B102E8[v9]),
-        !sub_474BE0(v8, (int)v11, a2)) )
-  {
-    if ( sub_470D00(v8, (int)a2) )
-      ActorAnimData_PlayAnimGroup((int)v8, a2, a3, 0xFFFFFFFF);
+  groupID = AnimKey_GetGroupID(encodedKey); /*0x65d79b*/
+  firstPersonAnimData = *((ActorAnimData **)this + 0x173); /*0x65d7a0*/
+  groupRecordDwordIndex = 9 * groupID; /*0x65d7ab*/
+  if ( !byte_B102E4[0x24 * groupID] /*0x65d7d2*/
+    || (thirdPersonAnimData = TESObjectREFR_GetAnimData((TESObjectREFR *)this),
+        sourceSequence = ActorAnimData_GetNormalizedSequenceSlot(
+                           thirdPersonAnimData,
+                           dword_B102E8[groupRecordDwordIndex]),
+        !ActorAnimData_PlayFirstPersonBySource(firstPersonAnimData, sourceSequence, encodedKey)) )// Calls first-person source sync with the active third-person source sequence and encoded key.
+  {                                             // Fallback path: if source sync was ineligible or missed, play the encoded key through first-person ActorAnimData when that key exists.
+    if ( ActorAnimData_HasAnimKey(firstPersonAnimData, encodedKey) ) /*0x65d7e3*/
+      ActorAnimData_PlayAnimGroup(firstPersonAnimData, encodedKey, playImmediately, 0xFFFFFFFF); /*0x65d7f6*/
   }
 }

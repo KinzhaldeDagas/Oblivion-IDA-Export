@@ -1,6 +1,6 @@
 0x77B3C0: push    esi
 0x77B3C1: push    edi
-0x77B3C2: mov     edi, [esp+8+arg_0]
+0x77B3C2: mov     edi, [esp+8+shader]
 0x77B3C6: mov     esi, ecx
 0x77B3C8: cmp     [esi+0FE0h], edi
 0x77B3CE: jnz     short loc_77B3ED

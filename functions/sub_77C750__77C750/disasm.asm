@@ -1,7 +1,7 @@
 0x77C750: push    ebx
 0x77C751: mov     ebx, [esp+4+arg_8]
 0x77C755: push    ebp
-0x77C756: mov     ebp, dword ptr [esp+8+ArgList]
+0x77C756: mov     ebp, [esp+8+ArgList]
 0x77C75A: push    esi
 0x77C75B: push    edi
 0x77C75C: push    1

@@ -1,4 +1,4 @@
 void __cdecl sub_A239B0()
 {
-  GameSetting_destr((int *)&unk_B3A0BC);
+  GameSetting_destr((int *)&g_sSkillNameHandToHand); /*0xa239b5*/
 }

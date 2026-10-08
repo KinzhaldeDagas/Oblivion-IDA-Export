@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x66A774",
-    "line": "mov     dword ptr [esi], offset ??_7PlayerCharacter@@6BPlayerCharacter@@@; const PlayerCharacter::`vftable'{for `PlayerCharacter'}",
+    "line": "mov     dword ptr [esi], offset ??_7PlayerCharacter@@6BPlayerCharacter@@@; PlayerCharacter constructor installs the primary PlayerCharacter vtable at this+0. The primary vtable starts at 0xA73A0C; the Player_OnInput/update slot used for next-frame scheduling is entry 0xA73C34 -> 0x671620.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x66A9CC",
-    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)",
+    "line": "call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x66A9EB",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x66A9F2",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x66AA10",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x66AA17",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x66AA4C",
-    "line": "call    sub_65B750",
+    "line": "call    MobileObject_EnsureActorCharacterController",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x66AA53",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x66AAC2",
-    "line": "call    sub_532BC0",
+    "line": "call    PlayerCameraCollisionPhantomPair_Init",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x66AB6C",
-    "line": "call    SetCameraFOV_0",
+    "line": "call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x66AC32",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1999,13 +1999,13 @@
   },
   {
     "ea": "0x66AC3A",
-    "line": "call    sub_668030",
+    "line": "call    Player_ClearAllSkillProgress; Clears the 21-entry PlayerCharacter skill-use progress array for native skill AVs 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66AC3F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x66AC47",
-    "line": "call    sub_65FBB0",
+    "line": "call    Player_ConsumeOldestAttributeBonusBucket; Consumes and frees the oldest (tail) attribute-bonus bucket after a player level-up, then ensures a current bucket remains available. New buckets are pushed at the front, so pending levels are resolved FIFO.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x66AC53",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x66AC5B",
-    "line": "call    sub_65D560",
+    "line": "call    Player_ClearSkillAdvanceCounts; Clear all 21 per-skill advance counters for both major and non-major skills. Raw skillExp[21], requiredSkillExp[21], lifetime skill-increase statistics, and majorSkillAdvances are separate and are not cleared here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3205,7 +3205,7 @@
   },
   {
     "ea": "0x66B021",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3358,5 +3358,257 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C4020",
+    "line": "mov     ecx, [ebp-10h]; int",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4023",
+    "line": "jmp     sub_612150",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4028",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C402B",
+    "line": "add     ecx, 574h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4031",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4036",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4039",
+    "line": "add     ecx, 5D0h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C403F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4044",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4047",
+    "line": "add     ecx, 5D8h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C404D",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4052",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4055",
+    "line": "add     ecx, 788h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C405B",
+    "line": "jmp     ??1?$NiTMap@IE@@UAE@XZ; NiTMap<uint,uchar>::~NiTMap<uint,uchar>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4060",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4063",
+    "line": "add     ecx, 798h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4069",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C406E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4071",
+    "line": "add     ecx, 79Ch; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4077",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C407C",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C407F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4080",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4085",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4086",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4087",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C408A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C408B",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4090",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4091",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4092",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4095",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C4096",
+    "line": "call    sub_6078C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C409B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C409C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C409D",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C40A1",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C40A4",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C40A7",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C40A9",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C40AE",
+    "line": "mov     eax, offset stru_AECAA4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C40B3",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

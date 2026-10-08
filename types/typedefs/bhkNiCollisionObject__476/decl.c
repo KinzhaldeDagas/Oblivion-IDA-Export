@@ -1,1 +1,1 @@
-bhkNiCollisionObject
+struct bhkNiCollisionObject;

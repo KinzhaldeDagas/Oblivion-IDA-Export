@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7EF5C3",
-    "line": "call    sub_8025F0",
+    "line": "call    sub_8025F0; Generic BSShader initialization used by SpeedTreeFrondShader vtable +0x84: sets renderer, invokes setup/check virtuals, and allocates one pass slot through sub_76CCA0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7EF5D0",
-    "line": "mov     edi, offset dword_B466E0",
+    "line": "mov     edi, (offset flt_B46638+0A8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7EF5FD",
-    "line": "cmp     edi, offset unk_B466F0",
+    "line": "cmp     edi, (offset flt_B46638+0B8h)",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7EF605",
-    "line": "mov     edi, offset dword_B46708",
+    "line": "mov     edi, (offset flt_B46638+0D0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7EF637",
-    "line": "cmp     edi, offset dword_B46710",
+    "line": "cmp     edi, (offset flt_B46638+0D8h)",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x7EF651",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },

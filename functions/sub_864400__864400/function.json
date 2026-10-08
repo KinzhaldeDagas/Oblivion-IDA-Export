@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x864400",
+      "0x86442A"
+    ]
+  ],
+  "chunks_sha256": "c62296db6155afb9279a152d44291b1ea03561f7789910b57e4632f6f715ff59",
+  "comment_regular": "Shared Lighting30/Hair SetupGeometry wrapper. Calls the native PP-lighting parser at 0x7DA220, then removes NiProperty ID 7. This proves both exact classes inherit Refract/RefractF name decoding.",
+  "comment_repeatable": "Shared Lighting30/Hair SetupGeometry wrapper. Calls the native PP-lighting parser at 0x7DA220, then removes NiProperty ID 7. This proves both exact classes inherit Refract/RefractF name decoding.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_864400",
+  "display_name": "Lighting30HairShaderProperty_SetupGeometry",
   "end_ea": "0x86442A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_864400",
+  "name": "Lighting30HairShaderProperty_SetupGeometry",
   "segment": ".text",
   "sha256": "c62296db6155afb9279a152d44291b1ea03561f7789910b57e4632f6f715ff59",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x864400",
-  "type": "char __thiscall(_DWORD *this, NiAVObject *)",
+  "total_chunk_size": 42,
+  "type": "bool __thiscall(BSShaderProperty *this, NiAVObject *geometry)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 2
 }

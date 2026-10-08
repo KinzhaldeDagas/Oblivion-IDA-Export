@@ -1,18 +1,31 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x864630",
+      "0x864666"
+    ]
+  ],
+  "chunks_sha256": "891157ccd75b5d6816f5c9645073b1236649866bd2013d80b5250eca34023903",
+  "comment_regular": "\n[2026-10-06 directional distant pass] Restores world bound from local bound+C4, reads instanceCount+C0, and forwards to717690 only when count is nonzero. Used by native distant tree instancing as well as grass; class name alone must not select a tree adapter.\n[v142 runtime corroboration 2026-10-07] Directional companion Render returned32 logged times with nonzero instance counts36..228 (logging cap32). User reports views changing during orbit; same source batch selects all8 views. Do not interpret 2745 sampled OnVisible submissions as a total GPU draw count. No destruction callback is logged in this session; unload/reload lifetime coverage is UNVERIFIED.\n[v142 visual acceptance update 2026-10-07] Supersedes only the earlier pending visual acceptance statements: the human tester now confirms overhead canopy appearance, near/far transitions with fading, and smooth blending between adjacent directional views during a slow orbit. Combined with archived v142 runtime evidence, the required directional plus horizontal billboard goal is accepted. This is human visual evidence, not an automated pixel test. New adapter scene unload/reload and queued-face destruction remain UNVERIFIED; no new runtime session or destruction coverage is claimed. Audit: SpeedTreeOBSE/out/billboard360_distant_v142/runtime_rotation_analysis.json.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_864630",
+  "display_name": "OB_TallGrassTriShape_Render_010201A0",
   "end_ea": "0x864666",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_864630",
+  "name": "OB_TallGrassTriShape_Render_010201A0",
   "segment": ".text",
   "sha256": "891157ccd75b5d6816f5c9645073b1236649866bd2013d80b5250eca34023903",
   "size": 54,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x864630",
+  "total_chunk_size": 54,
   "type": "int __thiscall(NiGeometry *this, NiDX9Renderer *)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 1

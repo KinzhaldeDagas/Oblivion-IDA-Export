@@ -43,12 +43,12 @@
 0x67ABC6: call    eax
 0x67ABC8: test    bl, bl
 0x67ABCA: jnz     loc_67AC91
-0x67ABD0: lea     ecx, [esp+24h+var_8]
-0x67ABD4: push    ecx
-0x67ABD5: mov     ecx, ebp
-0x67ABD7: call    sub_677C70
+0x67ABD0: lea     ecx, [esp+24h+outData]
+0x67ABD4: push    ecx; outData
+0x67ABD5: mov     ecx, ebp; this
+0x67ABD7: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x67ABDC: mov     esi, [eax]
-0x67ABDE: mov     eax, [esp+24h+var_8]
+0x67ABDE: mov     eax, [esp+24h+outData]
 0x67ABE2: test    eax, eax
 0x67ABE4: jz      short loc_67AC04
 0x67ABE6: mov     edi, eax

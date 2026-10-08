@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x80E8C0",
+      "0x80E980"
+    ],
+    [
+      "0x9D0F50",
+      "0x9D0F89"
+    ]
+  ],
+  "chunks_sha256": "9eee1507b0ef18d07d7a9394f13248f9da38a76be6cb3ca360fd27249e6232b8",
+  "comment_regular": "\n\n[v149 static mesh integration] Verified constructor alloc size B8 from factory80EE10; VS Ni-pointer array+7C has4 slots, PS+8C has2, pass+94. Plugin creates an additional native instance and directly supplies project-owned static-RGB mesh programs; native global definition5 is retained. Full game execution remains UNVERIFIED.\n\nSpeedTreeFrondShader constructor. Current xrefs show construction only from frond shader-definition factory 0x80EE10, not from a TES4 geometry attachment path.",
+  "comment_repeatable": "SpeedTreeFrondShader constructor. Current xrefs show construction only from frond shader-definition factory 0x80EE10, not from a TES4 geometry attachment path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "SpeedTreeFrondShader::SpeedTreeFrondShader(void)",
   "end_ea": "0x80E980",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0SpeedTreeFrondShader@@QAE@XZ",
   "segment": ".text",
   "sha256": "dfed81f6a143db94763b612e5e3e3d6c97bff07d4820b83a1a33a37f6bea9ca1",
   "size": 192,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80E8C0",
+  "total_chunk_size": 249,
   "type": "SpeedTreeFrondShader *__thiscall(SpeedTreeFrondShader *__hidden this)",
-  "xrefs_from_count": 56,
+  "xrefs_from_count": 76,
   "xrefs_to_count": 1
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46CDE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x46CE27",
-    "line": "movzx   edi, word ptr [esp+3Ch+arg_0]",
+    "line": "movzx   edi, word ptr [esp+3Ch+arg_0]; Morrowind Leveling hook point: replace raw leveled-list level load/store with adjusted world level, preserving flags for following JZ.",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -148,5 +148,59 @@
     "line": "jz      short TESLeveledList_CalcLeveledForm___InitContainer",
     "mnemonic": "jz",
     "size": 2
+  },
+  {
+    "ea": "0x9AEAF0",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEAF3",
+    "line": "jmp     TESContainer_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEAF8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AEAFC",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEAFF",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEB02",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEB04",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEB09",
+    "line": "mov     eax, offset stru_ADB20C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEB0E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

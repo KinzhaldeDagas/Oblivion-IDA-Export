@@ -1,29 +1,28 @@
-int __usercall Actor_MagicCaster_IsMagicItemUseable_::CheckMasteryLevel@<eax>(
-        int a1@<ebx>,
-        PlayerCharacter *a2@<ebp>,
-        int a3@<edi>,
-        int *a4@<esi>,
+int __userpurge Actor_MagicCaster_IsMagicItemUseable_::CheckMasteryLevel@<eax>(
+        PlayerCharacter *a1@<ebp>,
+        int a2@<edi>,
+        Actor *a3@<esi>,
+        int a4,
         int a5,
         int a6,
         int a7,
-        int a8,
+        void *a8,
         int a9,
         int a10,
-        int a11,
+        char a11,
         int a12,
-        int a13,
-        int a14)
+        _DWORD *a13)
 {
-  int SchoolAV; // eax
-  int SkillMasteryLevel; // esi
+  SkillActorValue SchoolAV; // eax
+  SkillMasteryLevel SkillMasteryLevel; // esi
 
-  if ( a2 == TESDataHandler_g_PlayerRef
-    && (*(int (__thiscall **)(int))(*(_DWORD *)a9 + 0x18))(a9) != 2
-    && (*(int (__thiscall **)(int))(*(_DWORD *)a9 + 0x18))(a9) != 3 )
+  if ( a1 == reference /*0x5f45df*/
+    && (*(int (__thiscall **)(void *))(*(_DWORD *)a8 + 0x18))(a8) != 2
+    && (*(int (__thiscall **)(void *))(*(_DWORD *)a8 + 0x18))(a8) != 3 )
   {
-    SchoolAV = EffectItemList_GetSchoolAV();
-    SkillMasteryLevel = Actor_GetSkillMasteryLevel(a4, a1, a3, SchoolAV);
-    HIBYTE(a8) = SkillMasteryLevel >= (*(int (__thiscall **)(int))(*(_DWORD *)a3 + 8))(a3);
+    SchoolAV = EffectItemList_GetSchoolAV(); /*0x5f45e3*/
+    SkillMasteryLevel = Actor_GetSkillMasteryLevel(a3, SchoolAV); /*0x5f45f0*/
+    HIBYTE(a7) = SkillMasteryLevel >= (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 8))(a2); /*0x5f45fd*/
   }
-  return Actor_MagicCaster_IsMagicItemUseable_::CheckImmuneToSilence_(a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+  return Actor_MagicCaster_IsMagicItemUseable_::CheckImmuneToSilence_(a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
 }

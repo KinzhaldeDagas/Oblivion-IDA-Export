@@ -2,15 +2,15 @@ int __cdecl sub_8F8030(int a1, __m128 **a2, int a3, int a4)
 {
   int v4; // esi
 
-  v4 = (*(int (__thiscall **)(int, int, int))(*(_DWORD *)dword_BA7D98 + 0x10))(dword_BA7D98, 0x2C, 0x1C);
-  *(_DWORD *)(v4 + 8) = a4;
-  *(_WORD *)(v4 + 4) = 0x2C;
-  *(_WORD *)(v4 + 6) = 1;
-  *(_DWORD *)v4 = &off_A9B63C;
-  *(_DWORD *)(v4 + 0x1C) = 0xFFFFFFFF;
-  *(_DWORD *)(v4 + 0x20) = 0xFFFFFFFF;
-  *(_DWORD *)(v4 + 0x24) = 0xFFFFFFFF;
-  *(_DWORD *)(v4 + 0x28) = 0xFFFFFFFF;
-  sub_8D1DB0(*a2 + 1, (float *)(v4 + 0xC));
-  return v4;
+  v4 = (*(int (__thiscall **)(int, int, int))(*(_DWORD *)unk_BA7D98 + 0x10))(unk_BA7D98, 0x2C, 0x1C); /*0x8f8044*/
+  *(_DWORD *)(v4 + 8) = a4; /*0x8f8046*/
+  *(_WORD *)(v4 + 4) = 0x2C; /*0x8f8050*/
+  *(_WORD *)(v4 + 6) = 1; /*0x8f8056*/
+  *(_DWORD *)v4 = &off_A9B63C; /*0x8f805c*/
+  *(_DWORD *)(v4 + 0x1C) = 0xFFFFFFFF; /*0x8f8062*/
+  *(_DWORD *)(v4 + 0x20) = 0xFFFFFFFF; /*0x8f8065*/
+  *(_DWORD *)(v4 + 0x24) = 0xFFFFFFFF; /*0x8f8068*/
+  *(_DWORD *)(v4 + 0x28) = 0xFFFFFFFF; /*0x8f806b*/
+  sub_8D1DB0(*a2 + 1, (float *)(v4 + 0xC)); /*0x8f8078*/
+  return v4; /*0x8f8082*/
 }

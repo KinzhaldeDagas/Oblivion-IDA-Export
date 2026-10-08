@@ -1,7 +1,7 @@
 void __cdecl sub_A18950()
 {
-  FormHeapFree(dword_B34438);
-  dword_B34438 = 0;
-  word_B3443E = 0;
-  word_B3443C = 0;
+  FormHeapFree(*(unsigned int *)&MEMORY[0xB33E90][0x5A8]); /*0xa18956*/
+  *(_DWORD *)&MEMORY[0xB33E90][0x5A8] = 0; /*0xa18960*/
+  *(_WORD *)&MEMORY[0xB33E90][0x5AE] = 0; /*0xa18965*/
+  *(_WORD *)&MEMORY[0xB33E90][0x5AC] = 0; /*0xa1896b*/
 }

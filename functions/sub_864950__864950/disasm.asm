@@ -1,4 +1,4 @@
-0x864950: push    esi
+0x864950: push    esi; MoonSugarEffect decode: ParallaxShader detailed pass population dispatcher. Calls class slots +0xC4..+0xD8 to build/populate subsets of the 0x3C Parallax pass table.
 0x864951: mov     esi, ecx
 0x864953: mov     eax, [esi]
 0x864955: mov     edx, [eax+0C4h]

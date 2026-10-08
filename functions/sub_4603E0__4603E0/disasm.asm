@@ -1,4 +1,4 @@
-0x4603E0: push    0FFFFFFFFh
+0x4603E0: push    0FFFFFFFFh; Verified: consumes the 36-byte created-reference data: kind at +0, second field at +4, location FormID at +8. Kind 1 allocates ArrowProjectile; kind 2 selects MagicBall/Bolt/Fog implementation; kinds 0/3 use the bound-object path and may reuse a matching existing TESObjectREFR. Bound object is RTTI-checked as TESBoundObject. Candidate: meaning of +4 is conditional across kinds; retained neutral member name.
 0x4603E2: push    offset SEH_4603E0
 0x4603E7: mov     eax, large fs:0
 0x4603ED: push    eax
@@ -14,8 +14,8 @@
 0x460404: mov     ebp, ecx
 0x460406: mov     eax, [esp+20h+a1]
 0x46040A: push    eax; a1
-0x46040B: call    TESForm_LookupByFormID
-0x460410: mov     edi, [esp+24h+arg_4]
+0x46040B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
+0x460410: mov     edi, [esp+24h+data]
 0x460414: add     esp, 4
 0x460417: xor     ebx, ebx
 0x460419: cmp     dword ptr [edi], 2
@@ -27,7 +27,7 @@
 0x460429: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x46042E: push    ebx; int
 0x46042F: push    ecx; a1
-0x460430: call    TESForm_LookupByFormID
+0x460430: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x460435: add     esp, 4
 0x460438: push    eax; void *
 0x460439: call    OblivionDynamicCast
@@ -66,9 +66,9 @@
 0x460498: call    eax
 0x46049A: cmp     eax, ebx
 0x46049C: jz      loc_4606A2
-0x4604A2: push    esi
-0x4604A3: mov     ecx, ebp
-0x4604A5: call    sub_45C7A0
+0x4604A2: push    esi; form
+0x4604A3: mov     ecx, ebp; self
+0x4604A5: call    TESSaveLoadGame_DeleteForm
 0x4604AA: xor     esi, esi
 0x4604AC: mov     eax, [edi]
 0x4604AE: test    eax, eax
@@ -80,12 +80,12 @@
 0x4604C4: push    9Ch ; 'œ'; Size
 0x4604C9: call    FormHeapAlloc
 0x4604CE: add     esp, 4
-0x4604D1: mov     [esp+20h+arg_4], eax
+0x4604D1: mov     [esp+20h+data], eax
 0x4604D5: test    eax, eax
 0x4604D7: mov     [esp+20h+var_4], 3
 0x4604DF: jz      short loc_4604EC
-0x4604E1: mov     ecx, eax
-0x4604E3: call    sub_6078E0
+0x4604E1: mov     ecx, eax; this
+0x4604E3: call    ArrowProjectile_Initialize; ArrowProjectile constructor/initializer: constructs MobileObject state, installs projectile vtables, allocates HighProcess, clears collision/transfer flags, increments the live-projectile count, and returns this.
 0x4604E8: mov     esi, eax
 0x4604EA: jmp     short loc_4604EE
 0x4604EC: xor     esi, esi
@@ -97,7 +97,7 @@
 0x4604FD: mov     [esp+34h+var_4], 0FFFFFFFFh
 0x460505: call    OblivionDynamicCast
 0x46050A: add     esp, 14h
-0x46050D: push    ebx; a2
+0x46050D: push    ebx; baseForm
 0x46050E: mov     ecx, eax; this
 0x460510: call    TESObjectREFR_SetBaseForm
 0x460515: mov     ecx, [esp+20h+a1]
@@ -117,7 +117,7 @@
 0x46053C: push    9Ch ; 'œ'; Size
 0x460541: call    FormHeapAlloc
 0x460546: add     esp, 4
-0x460549: mov     [esp+20h+arg_4], eax
+0x460549: mov     [esp+20h+data], eax
 0x46054D: test    eax, eax
 0x46054F: mov     [esp+20h+var_4], 5
 0x460557: jz      short loc_4605AE
@@ -127,7 +127,7 @@
 0x460562: push    0A4h ; '¤'; Size
 0x460567: call    FormHeapAlloc
 0x46056C: add     esp, 4
-0x46056F: mov     [esp+20h+arg_4], eax
+0x46056F: mov     [esp+20h+data], eax
 0x460573: test    eax, eax
 0x460575: mov     [esp+20h+var_4], 6
 0x46057D: jz      short loc_4605AE
@@ -137,7 +137,7 @@
 0x460588: push    90h; Size
 0x46058D: call    FormHeapAlloc
 0x460592: add     esp, 4
-0x460595: mov     [esp+20h+arg_4], eax
+0x460595: mov     [esp+20h+data], eax
 0x460599: test    eax, eax
 0x46059B: mov     [esp+20h+var_4], 4
 0x4605A3: jz      short loc_4605AE
@@ -171,7 +171,7 @@
 0x4605F6: push    58h ; 'X'; Size
 0x4605F8: call    FormHeapAlloc
 0x4605FD: add     esp, 4
-0x460600: mov     [esp+20h+arg_4], eax
+0x460600: mov     [esp+20h+data], eax
 0x460604: test    eax, eax
 0x460606: mov     [esp+20h+var_4], 2
 0x46060E: jz      short loc_460665
@@ -181,7 +181,7 @@
 0x460619: push    108h; Size
 0x46061E: call    FormHeapAlloc
 0x460623: add     esp, 4
-0x460626: mov     [esp+20h+arg_4], eax
+0x460626: mov     [esp+20h+data], eax
 0x46062A: test    eax, eax
 0x46062C: mov     [esp+20h+var_4], 1
 0x460634: jz      short loc_460665
@@ -191,7 +191,7 @@
 0x46063F: push    10Ch; Size
 0x460644: call    FormHeapAlloc
 0x460649: add     esp, 4
-0x46064C: mov     [esp+20h+arg_4], eax
+0x46064C: mov     [esp+20h+data], eax
 0x460650: test    eax, eax
 0x460652: mov     [esp+20h+var_4], 0
 0x46065A: jz      short loc_460665
@@ -208,7 +208,7 @@
 0x460678: mov     [esp+34h+var_4], 0FFFFFFFFh
 0x460680: call    OblivionDynamicCast
 0x460685: add     esp, 14h
-0x460688: push    ebx; a2
+0x460688: push    ebx; baseForm
 0x460689: mov     ecx, eax; this
 0x46068B: call    TESObjectREFR_SetBaseForm
 0x460690: mov     edx, [esp+20h+a1]
@@ -229,3 +229,45 @@
 0x4606BA: pop     ebx
 0x4606BB: add     esp, 0Ch
 0x4606BE: retn    8
+0x9AE560: mov     eax, [ebp+8]
+0x9AE563: push    eax
+0x9AE564: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE569: pop     ecx
+0x9AE56A: retn
+0x9AE56B: mov     eax, [ebp+8]
+0x9AE56E: push    eax
+0x9AE56F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE574: pop     ecx
+0x9AE575: retn
+0x9AE576: mov     eax, [ebp+8]
+0x9AE579: push    eax
+0x9AE57A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE57F: pop     ecx
+0x9AE580: retn
+0x9AE581: mov     eax, [ebp+8]
+0x9AE584: push    eax
+0x9AE585: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE58A: pop     ecx
+0x9AE58B: retn
+0x9AE58C: mov     eax, [ebp+8]
+0x9AE58F: push    eax
+0x9AE590: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE595: pop     ecx
+0x9AE596: retn
+0x9AE597: mov     eax, [ebp+8]
+0x9AE59A: push    eax
+0x9AE59B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE5A0: pop     ecx
+0x9AE5A1: retn
+0x9AE5A2: mov     eax, [ebp+8]
+0x9AE5A5: push    eax
+0x9AE5A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE5AB: pop     ecx
+0x9AE5AC: retn
+0x9AE5AD: mov     edx, [esp+data]
+0x9AE5B1: lea     eax, [edx-10h]
+0x9AE5B4: mov     ecx, [edx-14h]
+0x9AE5B7: xor     ecx, eax
+0x9AE5B9: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE5BE: mov     eax, offset stru_ADAD70
+0x9AE5C3: jmp     ___CxxFrameHandler3

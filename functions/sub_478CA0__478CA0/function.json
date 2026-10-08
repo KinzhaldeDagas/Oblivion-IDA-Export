@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x478CA0",
+      "0x478CD4"
+    ]
+  ],
+  "chunks_sha256": "630d88e08a3e1f23759d2cd3062758636aefe1cf72331adaa424621703db4da3",
+  "comment_regular": "Installs only form type 0x21 (WEAP) into ActorSkinInfo WeaponForm at +0xDC after clearing prior state; WeaponModel at +0xE0 points to the form's embedded TESModel at form+0x30.",
+  "comment_repeatable": "Installs only form type 0x21 (WEAP) into ActorSkinInfo WeaponForm at +0xDC after clearing prior state; WeaponModel at +0xE0 points to the form's embedded TESModel at form+0x30.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_478CA0",
+  "display_name": "ActorSkinInfo_SetWeaponSlotForm",
   "end_ea": "0x478CD4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_478CA0",
+  "name": "ActorSkinInfo_SetWeaponSlotForm",
   "segment": ".text",
   "sha256": "630d88e08a3e1f23759d2cd3062758636aefe1cf72331adaa424621703db4da3",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x478CA0",
-  "type": "void __userpurge(char *@<ecx>, char@<bpl>, double@<st2>, double@<st1>, double@<st0>, int)",
+  "total_chunk_size": 52,
+  "type": "void __thiscall(ActorSkinInfo *this, TESForm *weaponForm)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 1
 }

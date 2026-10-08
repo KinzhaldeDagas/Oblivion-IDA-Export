@@ -1,1 +1,5 @@
-_HD_LAYOUT
+struct _HD_LAYOUT
+{
+RECT *prc;
+WINDOWPOS *pwpos;
+};

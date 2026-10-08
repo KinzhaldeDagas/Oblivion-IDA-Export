@@ -1,4 +1,4 @@
-0x564B70: fldz
+0x564B70: fldz; 2026-05-18 73000 consumer decode: initializes bhkTransformShape cinfo used for single sphere/box placement. Layout observed by 0x8A2160: +0x04 child hk shape pointer, +0x10 4x4 transform. Stock sets identity rotation and translation zero before 0x565510 writes translation at +0x40..+0x4C.
 0x564B72: mov     eax, ecx
 0x564B74: mov     dword ptr [eax], 0
 0x564B7A: fst     dword ptr [eax+10h]

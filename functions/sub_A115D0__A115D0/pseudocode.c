@@ -1,4 +1,7 @@
-BSStringT *sub_A115D0()
+NiRTTI *sub_A115D0()
 {
-  return sub_70E220((BSStringT *)&dword_B45FF4, "WaterShaderHeightMap", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor( /*0xa115e4*/
+           (NiRTTI *)&OB_ShaderConstantStorage_010201A0[0x78],
+           "WaterShaderHeightMap",
+           &MEMORY[0xB4257C]);
 }

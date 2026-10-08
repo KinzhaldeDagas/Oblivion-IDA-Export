@@ -29,7 +29,7 @@
 0x74A874: add     esp, 4
 0x74A877: test    eax, eax
 0x74A879: jz      short loc_74A899
-0x74A87B: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Concurrency::details::_NonReentrantLock::_Release(void)
+0x74A87B: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; Pass222: NiPropertyState slot constructor callback; zeroes one dword smart-pointer slot.
 0x74A880: push    esi
 0x74A881: lea     ebx, [eax+4]
 0x74A884: push    4

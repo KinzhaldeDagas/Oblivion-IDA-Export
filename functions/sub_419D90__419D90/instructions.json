@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x419D92",
-    "line": "push    0",
+    "line": "push    0; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x419D96",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -274,12 +274,6 @@
     "line": "jmp     short loc_419E00",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x419DFD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x419E00",

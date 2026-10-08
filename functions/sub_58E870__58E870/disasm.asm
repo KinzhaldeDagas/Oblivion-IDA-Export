@@ -1,4 +1,4 @@
-0x58E870: push    ebp
+0x58E870: push    ebp; Focused visibility verification: dirty bit 4 causes visible/visibility trait evaluation and sets/clears model cull bit at node +0x18, then clears dirty flag. This is distinct from the stored focus pointer.
 0x58E871: mov     ebp, esp
 0x58E873: and     esp, 0FFFFFFF8h
 0x58E876: push    0FFFFFFFFh
@@ -88,7 +88,6 @@
 0x58E967: cmp     edi, ebp
 0x58E969: jz      short loc_58E988
 0x58E96B: jmp     short loc_58E970
-0x58E96D: align 10h
 0x58E970: mov     ecx, edi
 0x58E972: call    sub_58D960
 0x58E977: test    al, al
@@ -185,35 +184,35 @@
 0x58EA7F: jz      short loc_58EA9A
 0x58EA81: push    6
 0x58EA83: mov     ecx, edi
-0x58EA85: call    NiNode_GetNiPropertyByID
+0x58EA85: call    NiNode_GetNiPropertyByID;
 0x58EA8A: cmp     eax, ebp
 0x58EA8C: jz      short loc_58EA9A
-0x58EA8E: push    ebp
-0x58EA8F: mov     ecx, eax
-0x58EA91: call    NiTexturingProperty__SetUnk08
+0x58EA8E: push    ebp; texture
+0x58EA8F: mov     ecx, eax; this
+0x58EA91: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x58EA96: or      dword ptr [esi+2Ch], 20h
 0x58EA9A: cmp     [esp+6Ch+var_55], 0
 0x58EA9F: jz      loc_58EE55
 0x58EAA5: test    byte ptr [esi+2Ch], 20h
 0x58EAA9: jz      loc_58EE55
-0x58EAAF: mov     ecx, [esi+24h]
+0x58EAAF: mov     ecx, [esi+24h]; this
 0x58EAB2: cmp     ecx, ebp
 0x58EAB4: jz      loc_58EE55
 0x58EABA: test    bl, bl
 0x58EABC: jz      short loc_58EACB
 0x58EABE: cmp     byte ptr ds:0B3B0A2h, 0
 0x58EAC5: jz      loc_58EE55
-0x58EACB: push    ebp
-0x58EACC: call    sub_405790
+0x58EACB: push    ebp; index
+0x58EACC: call    NiNode_GetChildAtIndex
 0x58EAD1: cmp     eax, ebp
 0x58EAD3: jz      loc_58EE55
 0x58EAD9: push    6
 0x58EADB: mov     ecx, eax
-0x58EADD: call    NiNode_GetNiPropertyByID
+0x58EADD: call    NiNode_GetNiPropertyByID;
 0x58EAE2: mov     ebx, eax
 0x58EAE4: cmp     ebx, ebp
 0x58EAE6: jz      loc_58EE51
-0x58EAEC: mov     [esp+6Ch+var_50], ebp
+0x58EAEC: mov     [esp+6Ch+texture], ebp
 0x58EAF0: push    0FE6h
 0x58EAF5: mov     ecx, esi
 0x58EAF7: mov     [esp+70h+var_4], ebp
@@ -238,40 +237,40 @@
 0x58EB35: push    ebp; int
 0x58EB36: sub     esp, 8
 0x58EB39: mov     ecx, esp
-0x58EB3B: mov     [esp+80h+var_40], esp
+0x58EB3B: mov     dword ptr [esp+80h+var_40], esp
 0x58EB3F: push    eax
 0x58EB40: call    BSStringT_constr_str
-0x58EB45: lea     eax, [esp+80h+var_38]
+0x58EB45: lea     eax, [esp+80h+slot]
 0x58EB49: push    edi; Source
 0x58EB4A: push    eax; int
 0x58EB4B: mov     byte ptr [esp+88h+var_4], 0
 0x58EB53: call    sub_591360
 0x58EB58: add     esp, 1Ch
-0x58EB5B: push    eax
-0x58EB5C: lea     ecx, [esp+70h+var_50]
+0x58EB5B: push    eax; incoming
+0x58EB5C: lea     ecx, [esp+70h+texture]; this
 0x58EB60: mov     byte ptr [esp+70h+var_4], 2
-0x58EB65: call    sub_55E2A0
-0x58EB6A: lea     ecx, [esp+6Ch+var_38]; this
+0x58EB65: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x58EB6A: lea     ecx, [esp+6Ch+slot]; slot
 0x58EB6E: mov     byte ptr [esp+6Ch+var_4], 0
-0x58EB73: call    sub_7016A0
-0x58EB78: mov     edi, [esp+6Ch+var_50]
+0x58EB73: call    NiPointerSlot_Release
+0x58EB78: mov     edi, [esp+6Ch+texture]
 0x58EB7C: test    edi, edi
 0x58EB7E: jz      loc_58EE40
-0x58EB84: push    edi
-0x58EB85: mov     ecx, ebx
-0x58EB87: call    NiTexturingProperty__SetUnk08
+0x58EB84: push    edi; texture
+0x58EB85: mov     ecx, ebx; this
+0x58EB87: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x58EB8C: push    0FCFh
 0x58EB91: mov     ecx, esi
 0x58EB93: call    Tile_GetFloat
 0x58EB98: fcomp   dword ptr ds:0A379B4h
-0x58EB9E: mov     ecx, ebx
+0x58EB9E: mov     ecx, ebx; this
 0x58EBA0: fnstsw  ax
 0x58EBA2: test    ah, 44h
 0x58EBA5: jp      short loc_58EBAB
 0x58EBA7: push    3
 0x58EBA9: jmp     short loc_58EBAD
-0x58EBAB: push    0
-0x58EBAD: call    sub_405870
+0x58EBAB: push    0; value
+0x58EBAD: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x58EBB2: push    0FD2h
 0x58EBB7: mov     ecx, esi
 0x58EBB9: call    Tile_GetFloat
@@ -290,7 +289,7 @@
 0x58EBEF: fnstsw  ax
 0x58EBF1: test    ah, 44h
 0x58EBF4: jp      loc_58ECD2
-0x58EBFA: cmp     [esp+6Ch+var_40], 0
+0x58EBFA: cmp     dword ptr [esp+6Ch+var_40], 0
 0x58EBFF: jz      loc_58EC9D
 0x58EC05: lea     ecx, [esp+6Ch+var_40]
 0x58EC09: call    BSStringT_GetLen
@@ -313,11 +312,11 @@
 0x58EC43: fdiv    dword ptr [ebp+0]
 0x58EC46: push    ecx
 0x58EC47: mov     ecx, esi; this
-0x58EC49: fstp    [esp+70h+var_38]
-0x58EC4D: fld     [esp+70h+var_38]
-0x58EC51: fstp    [esp+70h+a2]; a3
-0x58EC54: push    0FE7h; a2
-0x58EC59: call    Tile_SetFloat
+0x58EC49: fstp    [esp+70h+slot]
+0x58EC4D: fld     [esp+70h+slot]
+0x58EC51: fstp    [esp+70h+a2]; value
+0x58EC54: push    0FE7h; propertyCode
+0x58EC59: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58EC5E: mov     edx, [edi]
 0x58EC60: mov     eax, [edx+50h]
 0x58EC63: mov     ecx, edi
@@ -330,11 +329,11 @@
 0x58EC79: fdiv    dword ptr [ebp+0]
 0x58EC7C: push    ecx
 0x58EC7D: mov     ecx, esi; this
-0x58EC7F: fstp    [esp+70h+var_38]
-0x58EC83: fld     [esp+70h+var_38]
-0x58EC87: fstp    [esp+70h+a2]; a3
-0x58EC8A: push    0FE8h; a2
-0x58EC8F: call    Tile_SetFloat
+0x58EC7F: fstp    [esp+70h+slot]
+0x58EC83: fld     [esp+70h+slot]
+0x58EC87: fstp    [esp+70h+a2]; value
+0x58EC8A: push    0FE8h; propertyCode
+0x58EC8F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58EC94: or      dword ptr [esi+2Ch], 10h
 0x58EC98: jmp     loc_58EE20
 0x58EC9D: mov     edx, [edi]
@@ -367,7 +366,7 @@
 0x58ECEC: jp      short loc_58ECF8
 0x58ECEE: fld     dword ptr ds:0A2FE7Ch
 0x58ECF4: fstp    [esp+6Ch+var_54]
-0x58ECF8: cmp     [esp+6Ch+var_40], 0
+0x58ECF8: cmp     dword ptr [esp+6Ch+var_40], 0
 0x58ECFD: jz      loc_58ED9A
 0x58ED03: lea     ecx, [esp+6Ch+var_40]
 0x58ED07: call    BSStringT_GetLen
@@ -394,11 +393,11 @@
 0x58ED53: push    ecx
 0x58ED54: mov     ecx, esi; this
 0x58ED56: fdiv    dword ptr [ebp+0]
-0x58ED59: fstp    [esp+70h+var_38]
-0x58ED5D: fld     [esp+70h+var_38]
-0x58ED61: fstp    [esp+70h+a2]; a3
-0x58ED64: push    0FE7h; a2
-0x58ED69: call    Tile_SetFloat
+0x58ED59: fstp    [esp+70h+slot]
+0x58ED5D: fld     [esp+70h+slot]
+0x58ED61: fstp    [esp+70h+a2]; value
+0x58ED64: push    0FE7h; propertyCode
+0x58ED69: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58ED6E: mov     edx, [edi]
 0x58ED70: mov     eax, [edx+50h]
 0x58ED73: mov     ecx, edi
@@ -410,8 +409,8 @@
 0x58ED83: fadd    qword ptr ds:0A30E60h
 0x58ED89: fmul    [esp+6Ch+var_48]
 0x58ED8D: fdiv    dword ptr [ebp+0]
-0x58ED90: fstp    [esp+6Ch+var_38]
-0x58ED94: fld     [esp+6Ch+var_38]
+0x58ED90: fstp    [esp+6Ch+slot]
+0x58ED94: fld     [esp+6Ch+slot]
 0x58ED98: jmp     short loc_58EE06
 0x58ED9A: fld     [esp+6Ch+var_54]
 0x58ED9E: mov     edx, [edi]
@@ -428,11 +427,11 @@
 0x58EDC3: fmul    [esp+6Ch+var_48]
 0x58EDC7: push    ecx
 0x58EDC8: mov     ecx, esi; this
-0x58EDCA: fstp    [esp+70h+var_38]
-0x58EDCE: fld     [esp+70h+var_38]
-0x58EDD2: fstp    [esp+70h+a2]; a3
-0x58EDD5: push    0FE7h; a2
-0x58EDDA: call    Tile_SetFloat
+0x58EDCA: fstp    [esp+70h+slot]
+0x58EDCE: fld     [esp+70h+slot]
+0x58EDD2: fstp    [esp+70h+a2]; value
+0x58EDD5: push    0FE7h; propertyCode
+0x58EDDA: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58EDDF: mov     edx, [edi]
 0x58EDE1: mov     eax, [edx+50h]
 0x58EDE4: mov     ecx, edi
@@ -443,13 +442,13 @@
 0x58EDF2: jge     short loc_58EDFA
 0x58EDF4: fadd    qword ptr ds:0A30E60h
 0x58EDFA: fmul    [esp+6Ch+var_48]
-0x58EDFE: fstp    [esp+6Ch+var_38]
-0x58EE02: fld     [esp+6Ch+var_38]
+0x58EDFE: fstp    [esp+6Ch+slot]
+0x58EE02: fld     [esp+6Ch+slot]
 0x58EE06: push    ecx
-0x58EE07: fstp    [esp+70h+a2]; a3
-0x58EE0A: push    0FE8h; a2
+0x58EE07: fstp    [esp+70h+a2]; value
+0x58EE0A: push    0FE8h; propertyCode
 0x58EE0F: mov     ecx, esi; this
-0x58EE11: call    Tile_SetFloat
+0x58EE11: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x58EE16: or      dword ptr [esi+2Ch], 10h
 0x58EE1A: jmp     short loc_58EE20
 0x58EE1C: fstp    st(1)
@@ -463,19 +462,19 @@
 0x58EE32: lea     ecx, [esp+6Ch+var_40]; void *
 0x58EE36: mov     byte ptr [esp+6Ch+var_4], 0
 0x58EE3B: call    BSStringT_Clear
-0x58EE40: lea     ecx, [esp+6Ch+var_50]; this
+0x58EE40: lea     ecx, [esp+6Ch+texture]; slot
 0x58EE44: mov     [esp+6Ch+var_4], 0FFFFFFFFh
-0x58EE4C: call    sub_7016A0
+0x58EE4C: call    NiPointerSlot_Release
 0x58EE51: mov     bl, [esp+6Ch+var_56]
 0x58EE55: test    byte ptr [esi+2Ch], 10h
 0x58EE59: jz      loc_58F2AD
-0x58EE5F: mov     ecx, [esi+24h]
+0x58EE5F: mov     ecx, [esi+24h]; this
 0x58EE62: test    ecx, ecx
 0x58EE64: jz      loc_58F2AD
 0x58EE6A: test    bl, bl
 0x58EE6C: jnz     loc_58F2AD
-0x58EE72: push    0
-0x58EE74: call    sub_405790
+0x58EE72: push    0; index
+0x58EE74: call    NiNode_GetChildAtIndex
 0x58EE79: push    0FCBh
 0x58EE7E: mov     ecx, esi
 0x58EE80: mov     ebp, eax
@@ -488,7 +487,7 @@
 0x58EE9B: push    0FDAh
 0x58EEA0: mov     ecx, esi
 0x58EEA2: call    Tile_GetFloat
-0x58EEA7: fstp    [esp+6Ch+var_40]
+0x58EEA7: fstp    dword ptr [esp+6Ch+var_40]
 0x58EEAB: push    0FD9h
 0x58EEB0: mov     ecx, esi
 0x58EEB2: call    Tile_GetFloat
@@ -514,8 +513,8 @@
 0x58EEFD: fchs
 0x58EEFF: mov     [eax+8], ecx
 0x58EF02: mov     ecx, dword ptr [esp+6Ch+var_20+4]
-0x58EF06: fstp    [esp+6Ch+var_38]
-0x58EF0A: fld     [esp+6Ch+var_38]
+0x58EF06: fstp    [esp+6Ch+slot]
+0x58EF0A: fld     [esp+6Ch+slot]
 0x58EF0E: mov     [eax+0Ch], edx
 0x58EF11: fst     [esp+6Ch+var_18]
 0x58EF15: mov     [eax+10h], ecx
@@ -546,9 +545,9 @@
 0x58EF6A: fstp    [esp+6Ch+var_54]
 0x58EF6E: push    6
 0x58EF70: mov     ecx, ebp
-0x58EF72: fstp    [esp+70h+var_50]
+0x58EF72: fstp    [esp+70h+texture]
 0x58EF76: mov     [eax+2Ch], edx
-0x58EF79: call    NiNode_GetNiPropertyByID
+0x58EF79: call    NiNode_GetNiPropertyByID;
 0x58EF7E: mov     edi, eax
 0x58EF80: test    edi, edi
 0x58EF82: jz      loc_58F191
@@ -564,14 +563,14 @@
 0x58EFAE: mov     ecx, esi
 0x58EFB0: call    Tile_GetFloat
 0x58EFB5: fcomp   dword ptr ds:0A379B4h
-0x58EFBB: mov     ecx, edi
+0x58EFBB: mov     ecx, edi; this
 0x58EFBD: fnstsw  ax
 0x58EFBF: test    ah, 44h
 0x58EFC2: jp      short loc_58EFC8
 0x58EFC4: push    3
 0x58EFC6: jmp     short loc_58EFCA
-0x58EFC8: push    0
-0x58EFCA: call    sub_405870
+0x58EFC8: push    0; value
+0x58EFCA: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x58EFCF: push    0FD2h
 0x58EFD4: mov     ecx, esi
 0x58EFD6: call    Tile_GetFloat
@@ -622,22 +621,22 @@
 0x58F080: xor     ecx, ecx
 0x58F082: fld     dword ptr [esi+40h]
 0x58F085: mov     edx, [ecx]
-0x58F087: fstp    [esp+6Ch+var_38]
+0x58F087: fstp    [esp+6Ch+slot]
 0x58F08B: mov     eax, [edx+4Ch]
 0x58F08E: fld     [esp+6Ch+var_54]
 0x58F092: fdiv    qword ptr ds:0A309F0h
 0x58F098: fstp    [esp+6Ch+var_30]
 0x58F09C: call    eax
 0x58F09E: test    eax, eax
-0x58F0A0: mov     [esp+6Ch+var_50], eax
-0x58F0A4: fild    [esp+6Ch+var_50]
+0x58F0A0: mov     [esp+6Ch+texture], eax
+0x58F0A4: fild    [esp+6Ch+texture]
 0x58F0A8: jge     short loc_58F0B0
 0x58F0AA: fadd    qword ptr ds:0A30E60h
 0x58F0B0: fmul    [esp+6Ch+var_30]
 0x58F0B4: mov     ecx, [edi+20h]
 0x58F0B7: mov     eax, [ecx]
 0x58F0B9: test    eax, eax
-0x58F0BB: fdiv    [esp+6Ch+var_38]
+0x58F0BB: fdiv    [esp+6Ch+slot]
 0x58F0BF: fstp    [esp+6Ch+var_54]
 0x58F0C3: jz      short loc_58F0CA
 0x58F0C5: mov     eax, [eax+8]
@@ -646,16 +645,16 @@
 0x58F0CC: mov     edx, [eax]
 0x58F0CE: fld     dword ptr [esi+40h]
 0x58F0D1: mov     ecx, eax
-0x58F0D3: fstp    [esp+6Ch+var_38]
+0x58F0D3: fstp    [esp+6Ch+slot]
 0x58F0D7: mov     eax, [edx+50h]
 0x58F0DA: call    eax
 0x58F0DC: test    eax, eax
-0x58F0DE: mov     [esp+6Ch+var_50], eax
-0x58F0E2: fild    [esp+6Ch+var_50]
+0x58F0DE: mov     [esp+6Ch+texture], eax
+0x58F0E2: fild    [esp+6Ch+texture]
 0x58F0E6: jge     short loc_58F0EE
 0x58F0E8: fadd    qword ptr ds:0A30E60h
 0x58F0EE: fmul    [esp+6Ch+var_30]
-0x58F0F2: fdiv    [esp+6Ch+var_38]
+0x58F0F2: fdiv    [esp+6Ch+slot]
 0x58F0F6: jmp     short loc_58F166
 0x58F0F8: mov     ecx, [edi+20h]
 0x58F0FB: mov     eax, [ecx]
@@ -671,8 +670,8 @@
 0x58F117: fstp    [esp+6Ch+var_30]
 0x58F11B: call    eax
 0x58F11D: test    eax, eax
-0x58F11F: mov     [esp+6Ch+var_38], eax
-0x58F123: fild    [esp+6Ch+var_38]
+0x58F11F: mov     [esp+6Ch+slot], eax
+0x58F123: fild    [esp+6Ch+slot]
 0x58F127: jge     short loc_58F12F
 0x58F129: fadd    qword ptr ds:0A30E60h
 0x58F12F: mov     ecx, [edi+20h]
@@ -689,13 +688,13 @@
 0x58F14B: mov     eax, [edx+50h]
 0x58F14E: call    eax
 0x58F150: test    eax, eax
-0x58F152: mov     [esp+6Ch+var_38], eax
-0x58F156: fild    [esp+6Ch+var_38]
+0x58F152: mov     [esp+6Ch+slot], eax
+0x58F156: fild    [esp+6Ch+slot]
 0x58F15A: jge     short loc_58F162
 0x58F15C: fadd    qword ptr ds:0A30E60h
 0x58F162: fmul    [esp+6Ch+var_30]
 0x58F166: lea     ecx, [esp+6Ch+var_20]; void *
-0x58F16A: fstp    [esp+6Ch+var_50]
+0x58F16A: fstp    [esp+6Ch+texture]
 0x58F16E: mov     [esp+6Ch+var_4], 0FFFFFFFFh
 0x58F176: call    BSStringT_Clear
 0x58F17B: jmp     short loc_58F191
@@ -704,19 +703,19 @@
 0x58F181: fld     [esp+6Ch+var_4C]
 0x58F185: fstp    [esp+6Ch+var_54]
 0x58F189: fld     dword ptr [esp+6Ch+var_48]
-0x58F18D: fstp    [esp+6Ch+var_50]
+0x58F18D: fstp    [esp+6Ch+texture]
 0x58F191: mov     ecx, [ebp+0B4h]
 0x58F197: mov     eax, [ecx+28h]
 0x58F19A: test    eax, eax
 0x58F19C: jz      loc_58F25D
-0x58F1A2: fld     [esp+6Ch+var_40]
+0x58F1A2: fld     dword ptr [esp+6Ch+var_40]
 0x58F1A6: fld     [esp+6Ch+var_54]
 0x58F1AA: fld     st
 0x58F1AC: fdivp   st(2), st
 0x58F1AE: fxch    st(1)
-0x58F1B0: fstp    [esp+6Ch+var_38]
+0x58F1B0: fstp    [esp+6Ch+slot]
 0x58F1B4: fld     [esp+6Ch+var_34]
-0x58F1B8: fld     [esp+6Ch+var_50]
+0x58F1B8: fld     [esp+6Ch+texture]
 0x58F1BC: fld     st
 0x58F1BE: fdivp   st(2), st
 0x58F1C0: fxch    st(1)
@@ -726,8 +725,8 @@
 0x58F1CC: fxch    st(1)
 0x58F1CE: fstp    [esp+6Ch+var_4C]
 0x58F1D2: fdivr   dword ptr [esp+6Ch+var_48]
-0x58F1D6: fstp    [esp+6Ch+var_40]
-0x58F1DA: fld     [esp+6Ch+var_38]
+0x58F1D6: fstp    dword ptr [esp+6Ch+var_40]
+0x58F1DA: fld     [esp+6Ch+slot]
 0x58F1DE: fst     dword ptr [esp+6Ch+var_20]
 0x58F1E2: fld     [esp+6Ch+var_34]
 0x58F1E6: mov     edx, dword ptr [esp+6Ch+var_20]
@@ -736,7 +735,7 @@
 0x58F1F0: mov     [eax], edx
 0x58F1F2: mov     ecx, dword ptr [esp+6Ch+var_20+4]
 0x58F1F6: fst     dword ptr [esp+6Ch+var_20]
-0x58F1FA: fld     [esp+6Ch+var_40]
+0x58F1FA: fld     dword ptr [esp+6Ch+var_40]
 0x58F1FE: mov     [eax+4], ecx
 0x58F201: mov     edx, dword ptr [esp+6Ch+var_20]
 0x58F205: fadd    st, st(2)
@@ -770,10 +769,10 @@
 0x58F268: mov     eax, [ebp+0B4h]
 0x58F26E: movzx   ecx, word ptr [eax+8]
 0x58F272: mov     edx, [eax+1Ch]
-0x58F275: push    edx
-0x58F276: push    ecx
-0x58F277: lea     ecx, [eax+0Ch]
-0x58F27A: call    sub_72A0F0
+0x58F275: push    edx; vertices
+0x58F276: push    ecx; vertexCount
+0x58F277: lea     ecx, [eax+0Ch]; self
+0x58F27A: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x58F27F: mov     eax, [esi+2Ch]
 0x58F282: test    al, 10h
 0x58F284: mov     [esp+6Ch+var_57], 1
@@ -877,7 +876,6 @@
 0x58F3ED: jbe     loc_58F5B0
 0x58F3F3: mov     ebx, [esp+6Ch+var_28]
 0x58F3F7: jmp     short loc_58F400
-0x58F3F9: align 10h
 0x58F400: movzx   ecx, word ptr [ebp+0B6h]
 0x58F407: cmp     ecx, edi
 0x58F409: ja      short loc_58F40F
@@ -886,7 +884,7 @@
 0x58F40F: mov     edx, [ebp+0B0h]
 0x58F415: mov     eax, [edx+edi*4]
 0x58F418: push    eax
-0x58F419: push    offset dword_B3FCD4
+0x58F419: push    offset stru_B3FCD4
 0x58F41E: call    NiRTTI_Cast
 0x58F423: add     esp, 8
 0x58F426: test    eax, eax
@@ -944,14 +942,14 @@
 0x58F4E5: jnz     short loc_58F522
 0x58F4E7: fld     dword ptr [esp+6Ch+var_30]
 0x58F4EB: fstp    [esp+6Ch+var_20]
-0x58F4EF: call    sub_57D7A0
+0x58F4EF: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x58F4F4: fmul    qword ptr ds:0A2FAA0h
 0x58F4FA: fsubr   [esp+6Ch+var_20]
 0x58F4FE: fstp    dword ptr [esp+6Ch+var_30]
-0x58F502: call    sub_57D7F0
+0x58F502: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x58F507: fadd    [esp+6Ch+var_28]
 0x58F50B: fstp    [esp+6Ch+var_20]
-0x58F50F: call    sub_57D7F0
+0x58F50F: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x58F514: fmul    qword ptr ds:0A2FAA0h
 0x58F51A: fsubr   [esp+6Ch+var_20]
 0x58F51E: fstp    [esp+6Ch+var_28]
@@ -976,7 +974,7 @@
 0x58F55F: mov     ecx, [ebp+0B0h]
 0x58F565: mov     eax, [ecx+edi*4]
 0x58F568: push    eax
-0x58F569: push    offset dword_B3FCD4
+0x58F569: push    offset stru_B3FCD4
 0x58F56E: call    NiRTTI_Cast
 0x58F573: add     esp, 8
 0x58F576: test    eax, eax
@@ -1009,21 +1007,21 @@
 0x58F5DF: fstp    [esp+6Ch+var_34]
 0x58F5E3: fld     [esp+6Ch+var_34]
 0x58F5E7: fstp    [esp+6Ch+var_20]
-0x58F5EB: call    sub_57D7A0
+0x58F5EB: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x58F5F0: fdivr   [esp+6Ch+var_20]
-0x58F5F4: fstp    [esp+6Ch+var_40]
+0x58F5F4: fstp    dword ptr [esp+6Ch+var_40]
 0x58F5F8: fild    dword ptr ds:0B06C50h
 0x58F5FE: fstp    [esp+6Ch+var_34]
 0x58F602: fld     [esp+6Ch+var_34]
 0x58F606: fstp    [esp+6Ch+var_20]
-0x58F60A: call    sub_57D7F0
+0x58F60A: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x58F60F: fdivr   [esp+6Ch+var_20]
 0x58F613: mov     ecx, esi
 0x58F615: fstp    [esp+6Ch+var_4C]
-0x58F619: call    sub_588C50
-0x58F61E: fstp    [esp+6Ch+var_38]
+0x58F619: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
+0x58F61E: fstp    [esp+6Ch+slot]
 0x58F622: mov     ecx, esi
-0x58F624: call    sub_588CF0
+0x58F624: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x58F629: fstp    dword ptr [esp+6Ch+var_48]
 0x58F62D: push    0FCAh
 0x58F632: mov     ecx, esi
@@ -1037,12 +1035,12 @@
 0x58F64C: fstp    [esp+70h+a2]; float
 0x58F64F: push    0FCBh
 0x58F654: call    Tile_GetFloat
-0x58F659: fld     [esp+70h+var_38]
+0x58F659: fld     [esp+70h+slot]
 0x58F65D: fld     st
 0x58F65F: sub     esp, 0Ch
 0x58F662: faddp   st(2), st
 0x58F664: mov     ecx, esi
-0x58F666: fld     [esp+7Ch+var_40]
+0x58F666: fld     dword ptr [esp+7Ch+var_40]
 0x58F66A: fld     st
 0x58F66C: fmulp   st(3), st
 0x58F66E: fxch    st(2)
@@ -1102,30 +1100,30 @@
 0x58F728: fstp    [esp+6Ch+var_34]
 0x58F72C: fld     [esp+6Ch+var_34]
 0x58F730: fstp    [esp+6Ch+var_20]
-0x58F734: call    sub_57D7A0
+0x58F734: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x58F739: fdivr   [esp+6Ch+var_20]
 0x58F73D: fstp    [esp+6Ch+var_4C]
 0x58F741: fild    dword ptr ds:0B06C50h
 0x58F747: fstp    [esp+6Ch+var_34]
 0x58F74B: fld     [esp+6Ch+var_34]
 0x58F74F: fstp    [esp+6Ch+var_20]
-0x58F753: call    sub_57D7F0
+0x58F753: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x58F758: fdivr   [esp+6Ch+var_20]
 0x58F75C: mov     ecx, edi
 0x58F75E: fstp    [esp+6Ch+var_34]
-0x58F762: call    sub_588C50
-0x58F767: fstp    [esp+6Ch+var_50]
+0x58F762: call    sub_588C50; AchievementsNative evidence: stock tile X helper starts with tile x and adds ancestor x only when ancestor locus is nonzero; use for inventory focus/popup coordinate mimic.
+0x58F767: fstp    [esp+6Ch+texture]
 0x58F76B: mov     ecx, edi
-0x58F76D: call    sub_588CF0
+0x58F76D: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x58F772: fstp    dword ptr [esp+6Ch+var_48]
 0x58F776: push    0FCBh
 0x58F77B: mov     ecx, edi
 0x58F77D: call    Tile_GetFloat
-0x58F782: fadd    [esp+6Ch+var_50]
+0x58F782: fadd    [esp+6Ch+texture]
 0x58F786: push    0FCAh
 0x58F78B: mov     ecx, edi
 0x58F78D: fmul    [esp+70h+var_4C]
-0x58F791: fstp    [esp+70h+var_38]
+0x58F791: fstp    [esp+70h+slot]
 0x58F795: call    Tile_GetFloat
 0x58F79A: fld     dword ptr [esp+6Ch+var_48]
 0x58F79E: mov     eax, [esi+24h]
@@ -1139,9 +1137,9 @@
 0x58F7B5: fmulp   st(3), st
 0x58F7B7: fxch    st(2)
 0x58F7B9: fstp    [esp+6Ch+var_34]
-0x58F7BD: fld     [esp+6Ch+var_50]
+0x58F7BD: fld     [esp+6Ch+texture]
 0x58F7C1: fmul    [esp+6Ch+var_4C]
-0x58F7C5: fstp    [esp+6Ch+var_50]
+0x58F7C5: fstp    [esp+6Ch+texture]
 0x58F7C9: fmulp   st(1), st
 0x58F7CB: fstp    dword ptr [esp+6Ch+var_48]
 0x58F7CF: call    sub_4784A0
@@ -1151,7 +1149,6 @@
 0x58F7DE: cmp     [ecx+0B8h], bp
 0x58F7E5: jbe     loc_58F882
 0x58F7EB: jmp     short loc_58F7F0
-0x58F7ED: align 10h
 0x58F7F0: mov     eax, [esi+24h]
 0x58F7F3: movzx   edx, word ptr [eax+0B6h]
 0x58F7FA: cmp     edx, ebp
@@ -1167,8 +1164,7 @@
 0x58F814: test    eax, eax
 0x58F816: jz      short loc_58F832
 0x58F818: jmp     short loc_58F820
-0x58F81A: align 10h
-0x58F820: cmp     eax, offset unk_B352A4
+0x58F820: cmp     eax, 0B352A4h
 0x58F825: jz      loc_58F8D2
 0x58F82B: mov     eax, [eax+4]
 0x58F82E: test    eax, eax
@@ -1180,16 +1176,16 @@
 0x58F83A: mov     edi, eax
 0x58F83C: jz      short loc_58F86D
 0x58F83E: fld     [esp+6Ch+var_34]
-0x58F842: call    Double_To_SInt32
-0x58F847: fld     [esp+6Ch+var_38]
+0x58F842: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x58F847: fld     [esp+6Ch+slot]
 0x58F84B: push    eax
-0x58F84C: call    Double_To_SInt32
+0x58F84C: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58F851: fld     dword ptr [esp+70h+var_48]
 0x58F855: push    eax
-0x58F856: call    Double_To_SInt32
-0x58F85B: fld     [esp+74h+var_50]
+0x58F856: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x58F85B: fld     [esp+74h+texture]
 0x58F85F: push    eax
-0x58F860: call    Double_To_SInt32
+0x58F860: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x58F865: push    eax
 0x58F866: mov     ecx, edi
 0x58F868: call    sub_4A17F0
@@ -1213,25 +1209,24 @@
 0x58F8B0: mov     [esp+6Ch+var_54], eax
 0x58F8B4: jz      loc_58FA89
 0x58F8BA: cmp     word ptr [eax+0B8h], 0
-0x58F8C2: mov     [esp+6Ch+var_50], 0
+0x58F8C2: mov     [esp+6Ch+texture], 0
 0x58F8CA: jbe     loc_58FA89
 0x58F8D0: jmp     short loc_58F8E2
 0x58F8D2: mov     al, 1
 0x58F8D4: jmp     loc_58F834
-0x58F8D9: align 10h
 0x58F8E0: mov     eax, ecx
 0x58F8E2: movzx   eax, word ptr [eax+0B6h]
-0x58F8E9: cmp     eax, [esp+6Ch+var_50]
+0x58F8E9: cmp     eax, [esp+6Ch+texture]
 0x58F8ED: jbe     loc_58FA6B
 0x58F8F3: mov     ecx, [esp+6Ch+var_54]
 0x58F8F7: mov     edx, [ecx+0B0h]
-0x58F8FD: mov     eax, [esp+6Ch+var_50]
+0x58F8FD: mov     eax, [esp+6Ch+texture]
 0x58F901: mov     ebx, [edx+eax*4]
 0x58F904: test    ebx, ebx
 0x58F906: jz      loc_58FA6B
 0x58F90C: push    2
 0x58F90E: mov     ecx, ebx
-0x58F910: call    NiNode_GetNiPropertyByID
+0x58F910: call    NiNode_GetNiPropertyByID;
 0x58F915: mov     ecx, [esp+6Ch+var_54]
 0x58F919: push    ecx
 0x58F91A: mov     edi, eax
@@ -1254,12 +1249,12 @@
 0x58F95E: fdiv    qword ptr ds:0A3DDD8h
 0x58F964: push    0FCEh
 0x58F969: mov     ecx, ebp
-0x58F96B: fstp    [esp+70h+var_40]
+0x58F96B: fstp    dword ptr [esp+70h+var_40]
 0x58F96F: call    Tile_GetFloat
 0x58F974: fdiv    qword ptr ds:0A3DDD8h
 0x58F97A: push    ebx
-0x58F97B: push    offset dword_B3FCD4
-0x58F980: fstp    [esp+74h+var_38]
+0x58F97B: push    offset stru_B3FCD4
+0x58F980: fstp    [esp+74h+slot]
 0x58F984: call    NiRTTI_Cast
 0x58F989: add     esp, 8
 0x58F98C: test    edi, edi
@@ -1271,11 +1266,11 @@
 0x58F99D: fld     [esp+6Ch+var_4C]
 0x58F9A1: fstp    dword ptr [esp+6Ch+var_20]
 0x58F9A5: mov     edx, dword ptr [esp+6Ch+var_20]
-0x58F9A9: fld     [esp+6Ch+var_40]
+0x58F9A9: fld     dword ptr [esp+6Ch+var_40]
 0x58F9AD: mov     [edi+40h], edx
 0x58F9B0: fstp    dword ptr [esp+6Ch+var_20+4]
 0x58F9B4: mov     eax, dword ptr [esp+6Ch+var_20+4]
-0x58F9B8: fld     [esp+6Ch+var_38]
+0x58F9B8: fld     [esp+6Ch+slot]
 0x58F9BC: mov     [edi+44h], eax
 0x58F9BF: fstp    [esp+6Ch+var_18]
 0x58F9C3: mov     ecx, [esp+6Ch+var_18]
@@ -1302,8 +1297,8 @@
 0x58FA0D: fld     dword ptr [esp+6Ch+var_48]
 0x58FA11: lea     eax, [edi+4]
 0x58FA14: fld     [esp+6Ch+var_4C]
-0x58FA18: fld     [esp+6Ch+var_40]
-0x58FA1C: fld     [esp+6Ch+var_38]
+0x58FA18: fld     dword ptr [esp+6Ch+var_40]
+0x58FA1C: fld     [esp+6Ch+slot]
 0x58FA20: jmp     short loc_58FA2A
 0x58FA22: fxch    st(2)
 0x58FA24: fxch    st(3)
@@ -1333,11 +1328,11 @@
 0x58FA65: xor     eax, 8
 0x58FA68: mov     [esi+2Ch], eax
 0x58FA6B: mov     ecx, [esp+6Ch+var_54]
-0x58FA6F: mov     eax, [esp+6Ch+var_50]
+0x58FA6F: mov     eax, [esp+6Ch+texture]
 0x58FA73: movzx   edx, word ptr [ecx+0B8h]
 0x58FA7A: add     eax, 1
 0x58FA7D: cmp     eax, edx
-0x58FA7F: mov     [esp+6Ch+var_50], eax
+0x58FA7F: mov     [esp+6Ch+texture], eax
 0x58FA83: jb      loc_58F8E0
 0x58FA89: mov     al, [esp+6Ch+var_57]
 0x58FA8D: mov     ecx, [esp+6Ch+var_C]
@@ -1350,3 +1345,20 @@
 0x58FA9D: mov     esp, ebp
 0x58FA9F: pop     ebp
 0x58FAA0: retn
+0x9BF970: lea     ecx, [ebp-50h]; slot
+0x9BF973: jmp     NiPointerSlot_Release
+0x9BF978: mov     ecx, [ebp-34h]; slot
+0x9BF97B: jmp     NiPointerSlot_Release
+0x9BF980: lea     ecx, [ebp-38h]; slot
+0x9BF983: jmp     NiPointerSlot_Release
+0x9BF988: lea     ecx, [ebp-40h]; void *
+0x9BF98B: jmp     BSStringT_Clear
+0x9BF990: lea     ecx, [ebp-20h]; void *
+0x9BF993: jmp     BSStringT_Clear
+0x9BF998: mov     edx, [esp-4+arg_4]
+0x9BF99C: lea     eax, [edx-5Ch]
+0x9BF99F: mov     ecx, [edx-60h]
+0x9BF9A2: xor     ecx, eax
+0x9BF9A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF9A9: mov     eax, offset stru_AE8E2C
+0x9BF9AE: jmp     ___CxxFrameHandler3

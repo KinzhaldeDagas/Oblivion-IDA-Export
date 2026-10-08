@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "STARTUPINFOEXW",
+  "definition": "typedef _STARTUPINFOEXW STARTUPINFOEXW\n",
   "id": 18374686479671869703,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "StartupInfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 68
+      "size": 68,
+      "type": "STARTUPINFOW"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpAttributeList",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "LPPROC_THREAD_ATTRIBUTE_LIST"
     }
   ],
   "name": "STARTUPINFOEXW",
+  "ordinal": 7914,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

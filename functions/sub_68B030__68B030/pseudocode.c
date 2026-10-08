@@ -1,41 +1,51 @@
-void __thiscall sub_68B030(char *this, TESObjectCELL **a2, float *a3, TESObjectCELL *a4, TESObjectCELL *a5)
+// Verified top-level TravelPath build sequence: select the destination's smallest containing interior/exterior SubSpace (fallback to supplied cell/worldspace), call TravelPath_BuildRoute with the source reference and positions, then, on success, augment the route with TESRoad surface samples.
+void __thiscall TravelPath_BuildToDestination(
+        TravelPath *this,
+        TESObjectREFR *sourceRef,
+        const NiPoint3 *destinationPosition,
+        TESObjectCELL *destinationCell,
+        TESWorldSpace *destinationWorldspace)
 {
-  TESObjectCELL *v6; // esi
-  float *v8; // eax
-  int v9; // eax
-  _DWORD *v10; // [esp-10h] [ebp-20h]
-  int v11; // [esp-Ch] [ebp-1Ch]
+  TESObjectCELL *v5; // esi
+  TESObjectREFR *SmallestSubSpaceContainingPosition; // eax
+  TESForm *SpatialContainerAtPosition; // eax
+  float *v9; // [esp-10h] [ebp-20h]
+  TESForm *v10; // [esp-Ch] [ebp-1Ch]
 
-  v6 = a4;
-  if ( a4 )
+  v5 = destinationCell; /*0x68b033*/
+  if ( destinationCell ) /*0x68b03e*/
   {
-    if ( !TESObjectCELL_IsInterior(a4) )
-      v6 = 0;
+    if ( !TESObjectCELL_IsInterior(destinationCell) ) /*0x68b042*/
+      v5 = 0; /*0x68b04b*/
   }
-  v8 = 0;
-  if ( v6 )
+  SmallestSubSpaceContainingPosition = 0; /*0x68b051*/
+  if ( v5 ) /*0x68b055*/
   {
-    v8 = sub_4CBBB0(v6, a3);
+    SmallestSubSpaceContainingPosition = TESObjectCELL_FindSmallestSubSpaceContainingPosition( /*0x68b05a*/
+                                           v5,
+                                           &destinationPosition->x);
   }
   else
   {
-    v6 = a5;
-    if ( !a5 )
-      goto LABEL_10;
-    v8 = sub_4F0600(a5, a3);
+    v5 = (TESObjectCELL *)destinationWorldspace; /*0x68b061*/
+    if ( !destinationWorldspace ) /*0x68b067*/
+      goto LABEL_10; /*0x68b067*/
+    SmallestSubSpaceContainingPosition = TESWorldSpace_FindSmallestSubSpaceContainingPosition( /*0x68b06c*/
+                                           destinationWorldspace,
+                                           &destinationPosition->x);// Verified: fast-travel destination builder resolves a containing TESSubSpace by interior cell scan or exterior WorldSpace +0x60 index. If none contains the destination, it falls back to the supplied cell/worldspace; the selected SubSpace is passed into path construction.
   }
-  if ( !v8 )
-    v8 = (float *)v6;
+  if ( !SmallestSubSpaceContainingPosition ) /*0x68b073*/
+    SmallestSubSpaceContainingPosition = (TESObjectREFR *)v5; /*0x68b075*/
 LABEL_10:
-  if ( a2 )
+  if ( sourceRef ) /*0x68b07d*/
   {
-    if ( v8 )
+    if ( SmallestSubSpaceContainingPosition ) /*0x68b081*/
     {
-      v11 = (int)v8;
-      v10 = (_DWORD *)((int (__thiscall *)(TESObjectCELL **))(*a2)[4].members.super.modlist.next)(a2);
-      sub_4D8AF0(a2);
-      if ( sub_68AB20((int *)this, v9, v10, v11, a3, (int)a2) )
-        sub_689DC0(this, a2);
+      v10 = (TESForm *)SmallestSubSpaceContainingPosition; /*0x68b085*/
+      v9 = sourceRef->vtbl->GetPos(sourceRef); /*0x68b092*/
+      SpatialContainerAtPosition = TESObjectREFR_GetSpatialContainerAtPosition(sourceRef); /*0x68b095*/
+      if ( TravelPath_BuildRoute(this, SpatialContainerAtPosition, v9, v10, destinationPosition, sourceRef) ) /*0x68b09d*/
+        TravelPath_AddRoadSegmentsForPath(this, sourceRef); /*0x68b0ab*/
     }
   }
 }

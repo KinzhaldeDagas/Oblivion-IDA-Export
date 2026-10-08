@@ -1,1 +1,1 @@
-hkNiTriStripsShape
+struct hkNiTriStripsShape;

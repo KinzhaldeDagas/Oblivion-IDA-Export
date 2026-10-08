@@ -82,18 +82,18 @@
 0x6A0042: fld     dword ptr [esp+2C4h+var_280+8]
 0x6A0046: fsub    [esp+2C4h+var_290]
 0x6A004A: fstp    [esp+2C4h+var_29C]
-0x6A004E: call    MobileObject_GetCharProxy
+0x6A004E: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x6A0053: cmp     eax, ebx
 0x6A0055: jz      short loc_6A0065
 0x6A0057: lea     ecx, [esp+2C4h+var_2A0]
 0x6A005B: push    ecx
 0x6A005C: mov     ecx, eax
-0x6A005E: call    sub_57E270
+0x6A005E: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x6A0063: jmp     short loc_6A0075
 0x6A0065: mov     ecx, ds:0B333C4h
 0x6A006B: lea     edx, [esp+2C4h+var_2A0]
 0x6A006F: push    edx
-0x6A0070: call    sub_65ABE0
+0x6A0070: call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.
 0x6A0075: fld     [esp+2C4h+var_298]
 0x6A0079: mov     eax, [eax]
 0x6A007B: fld     st
@@ -132,7 +132,7 @@
 0x6A00E8: fstp    dword ptr [esp+2C8h+var_280+4]
 0x6A00EC: fld     [esp+2C8h+var_2AC]
 0x6A00F0: fstp    dword ptr [esp+2C8h+var_280+8]
-0x6A00F4: call    bhkWorldRayCastData__SetCastInputTo
+0x6A00F4: call    bhkWorldRayCastData__SetCastInputTo; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.
 0x6A00F9: lea     ecx, [esp+2C4h+var_1C0]
 0x6A0100: call    sub_538C00
 0x6A0105: lea     ecx, [esp+2C4h+var_1C0]
@@ -140,14 +140,14 @@
 0x6A0113: mov     ecx, ds:0B333C4h; this
 0x6A0119: mov     [esp+2C4h+var_4], ebx
 0x6A0120: mov     [esp+2C4h+var_270.RayHitCollector1], ebx
-0x6A0127: call    TESObjectREFR_GetParentCell
+0x6A0127: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A012C: test    eax, eax
 0x6A012E: jz      loc_6A02C1
 0x6A0134: mov     ecx, ds:0B333C4h; this
-0x6A013A: call    TESObjectREFR_GetParentCell
+0x6A013A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6A013F: mov     esi, eax
 0x6A0141: mov     ecx, esi; this
-0x6A0143: call    TESObjectCELL_IsInterior
+0x6A0143: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x6A0148: test    al, al
 0x6A014A: jz      short loc_6A0156
 0x6A014C: lea     ecx, [esi+28h]
@@ -168,7 +168,6 @@
 0x6A017F: mov     [esp+2C4h+var_2A4], ecx
 0x6A0183: jmp     short loc_6A0194
 0x6A0185: jmp     short loc_6A0190
-0x6A0187: align 10h
 0x6A0190: mov     ecx, [esp+2C4h+var_2A4]
 0x6A0194: mov     eax, [esp+2C4h+var_2A8]
 0x6A0198: cmp     eax, [esp+2C4h+var_1AC]
@@ -190,7 +189,7 @@
 0x6A01D9: jz      short loc_6A01DE
 0x6A01DB: mov     ebx, [ecx+0Ch]
 0x6A01DE: push    eax
-0x6A01DF: call    sub_4DC270
+0x6A01DF: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x6A01E4: mov     esi, eax
 0x6A01E6: add     esp, 4
 0x6A01E9: cmp     esi, ds:0B333C4h
@@ -267,3 +266,16 @@
 0x6A02F8: mov     esp, ebp
 0x6A02FA: pop     ebp
 0x6A02FB: retn
+0x9C5E90: lea     ecx, [ebp+var_1C0]
+0x9C5E96: jmp     sub_538C80
+0x9C5E9B: mov     edx, [esp-4+arg_4]
+0x9C5E9F: lea     eax, [edx-2B4h]
+0x9C5EA5: mov     ecx, [edx-2B8h]
+0x9C5EAB: xor     ecx, eax
+0x9C5EAD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5EB2: add     eax, 0Ch
+0x9C5EB5: mov     ecx, [edx-8]
+0x9C5EB8: xor     ecx, eax
+0x9C5EBA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5EBF: mov     eax, offset stru_AEE540
+0x9C5EC4: jmp     ___CxxFrameHandler3

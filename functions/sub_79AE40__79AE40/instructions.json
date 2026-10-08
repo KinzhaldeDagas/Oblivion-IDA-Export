@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79AE40",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion-authoritative fill insertion for st_vector<SFrondVertex>. Snapshots the value for alias safety, inserts count 0x38-byte records, reuses capacity when possible, otherwise grows to max(old+old/2, size+count), and preserves overlapping ranges with forward/backward movement.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x79AE6D",
-    "line": "mov     esi, [ebp+arg_C]",
+    "line": "mov     esi, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x79AE9D",
-    "line": "mov     esi, [ebp+arg_8]",
+    "line": "mov     esi, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x79AED4",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,13 +583,13 @@
   },
   {
     "ea": "0x79AF44",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79AF46",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x79AF51",
-    "line": "push    edi; char *",
+    "line": "push    edi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AF52",
-    "line": "call    sub_799F30",
+    "line": "call    OB_stVector_SFrondVertex_Allocate_010201A0; Oblivion-authoritative allocator for count SFrondVertex elements. Allocates count*0x38 bytes from FormHeap and throws std::bad_alloc on multiplication overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x79AF5A",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AF5E",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x79AF62",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79AF65",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -673,25 +673,25 @@
   },
   {
     "ea": "0x79AF6A",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AF6B",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79AF6E",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AF6F",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x79AF77",
-    "line": "call    sub_79A9B0",
+    "line": "call    OB_SFrondVertex_UninitializedCopy_010201A0; Copies 0x38-byte SFrondVertex records from [first,last) into uninitialized destination storage and returns the constructed end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,19 +721,19 @@
   },
   {
     "ea": "0x79AF82",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AF83",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AF84",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x79AF87",
-    "line": "call    sub_79AB30",
+    "line": "call    OB_SFrondVertex_UninitializedFillNThunk_010201A0; Checked uninitialized_fill_n wrapper for SFrondVertex. Constructs count copies and returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,13 +757,13 @@
   },
   {
     "ea": "0x79AF8F",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AF93",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x79AF97",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -793,31 +793,31 @@
   },
   {
     "ea": "0x79AF9C",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AF9D",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79AFA0",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AFA1",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AFA2",
-    "line": "call    sub_79A9B0",
+    "line": "call    OB_SFrondVertex_UninitializedCopy_010201A0; Copies 0x38-byte SFrondVertex records from [first,last) into uninitialized destination storage and returns the constructed end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x79AFD3",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x79AFDB",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x79B013",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x79B017",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x79B02B",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x79B032",
-    "line": "mov     [ebp+arg_C], edx",
+    "line": "mov     [ebp+value], edx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1141,13 +1141,13 @@
   },
   {
     "ea": "0x79B03C",
-    "line": "add     edx, [ebp+arg_C]",
+    "line": "add     edx, [ebp+value]",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x79B03F",
-    "line": "mov     [ebp+arg_8], ecx",
+    "line": "mov     [ebp+count], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x79B05F",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1231,19 +1231,19 @@
   },
   {
     "ea": "0x79B064",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B065",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B066",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x79B069",
-    "line": "call    sub_79AAD0",
+    "line": "call    OB_SFrondVertex_UninitializedCopyThunk_010201A0; Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x79B076",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1339,13 +1339,13 @@
   },
   {
     "ea": "0x79B08F",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B090",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -1363,13 +1363,13 @@
   },
   {
     "ea": "0x79B09A",
-    "line": "call    sub_79AB30",
+    "line": "call    OB_SFrondVertex_UninitializedFillNThunk_010201A0; Checked uninitialized_fill_n wrapper for SFrondVertex. Constructs count copies and returns destination+count.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79B09F",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x79B0AB",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1405,19 +1405,19 @@
   },
   {
     "ea": "0x79B0AE",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B0AF",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B0B0",
-    "line": "call    sub_79A9E0",
+    "line": "call    OB_SFrondVertex_FillRange_010201A0; Fills an initialized SFrondVertex range with one 0x38-byte value. Used by vector insert when the insertion point has enough trailing initialized elements.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x79B0D2",
-    "line": "push    ecx",
+    "line": "push    ecx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x79B0D7",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x79B0DA",
-    "line": "push    esi",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1543,37 +1543,37 @@
   },
   {
     "ea": "0x79B0DD",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79B0E0",
-    "line": "call    sub_79AAD0",
+    "line": "call    OB_SFrondVertex_UninitializedCopyThunk_010201A0; Checked/uninitialized-copy trampoline for SFrondVertex ranges; delegates to 0x79A9B0 and returns the constructed end.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79B0E5",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x79B0E8",
-    "line": "push    edx",
+    "line": "push    edx; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B0E9",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B0EA",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -1585,13 +1585,13 @@
   },
   {
     "ea": "0x79B0EE",
-    "line": "call    sub_79AA70",
+    "line": "call    OB_SFrondVertex_CopyBackwardThunk_010201A0; Thin backward-copy trampoline for overlap-safe initialized SFrondVertex movement; delegates to 0x79A890.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79B0F3",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x79B0F9",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1615,19 +1615,19 @@
   },
   {
     "ea": "0x79B0FC",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B0FD",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79B0FE",
-    "line": "call    sub_79A9E0",
+    "line": "call    OB_SFrondVertex_FillRange_010201A0; Fills an initialized SFrondVertex range with one 0x38-byte value. Used by vector insert when the insertion point has enough trailing initialized elements.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1690,5 +1690,47 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC210",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC214",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC217",
+    "line": "mov     ecx, [edx-4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC21A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC21C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC221",
+    "line": "mov     eax, offset stru_AF52D0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC226",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

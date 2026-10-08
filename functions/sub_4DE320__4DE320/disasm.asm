@@ -36,7 +36,7 @@
 0x4DE378: mov     eax, [edx+4]
 0x4DE37B: mov     ecx, esi
 0x4DE37D: call    eax
-0x4DE37F: cmp     eax, offset dword_B3FAB0
+0x4DE37F: cmp     eax, offset parent
 0x4DE384: setz    al
 0x4DE387: test    al, al
 0x4DE389: jz      short loc_4DE39E

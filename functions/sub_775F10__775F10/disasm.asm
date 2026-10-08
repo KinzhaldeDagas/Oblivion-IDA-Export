@@ -13,7 +13,7 @@
 0x775F2A: mov     ecx, ebx
 0x775F2C: call    ??0?$NiTPointerListBase@V?$NiTPointerAllocator@I@@I@@QAE@XZ; NiTPointerListBase<NiTPointerAllocator<uint>,uint>::NiTPointerListBase<NiTPointerAllocator<uint>,uint>(void)
 0x775F31: push    ebx
-0x775F32: call    FormHeapFree
+0x775F32: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775F37: add     esp, 4
 0x775F3A: movzx   ecx, word ptr [edi+0Eh]
 0x775F3E: add     esi, 1
@@ -23,7 +23,7 @@
 0x775F46: mov     edx, [edi+8]
 0x775F49: push    edx
 0x775F4A: mov     dword ptr [edi+4], offset ??_7?$NiTArray@PAVNiDX9AdapterDesc@@@@6B@; const NiTArray<NiDX9AdapterDesc *>::`vftable'
-0x775F51: call    FormHeapFree
+0x775F51: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x775F56: add     esp, 4
 0x775F59: pop     edi
 0x775F5A: pop     esi

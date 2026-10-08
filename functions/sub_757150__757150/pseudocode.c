@@ -2,7 +2,7 @@ int __thiscall sub_757150(_DWORD *this, float *a2)
 {
   int result; // eax
 
-  result = *(this + 0x11);
-  *a2 = *(float *)(result + 0x2C);
-  return result;
+  result = *(this + 0x11); /*0x757150*/
+  *a2 = *(float *)(result + 0x2C); /*0x75715a*/
+  return result; /*0x75715c*/
 }

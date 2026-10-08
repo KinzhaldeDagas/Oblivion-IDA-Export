@@ -1,6 +1,6 @@
-0x7A8800: push    esi
+0x7A8800: push    esi; OBLIVION AUTHORITY (2026-08-30): Advances the debug vector<bool> iterator by a signed bit distance, carrying across packed 32-bit words and preserving bitOffset 0..31.
 0x7A8801: push    edi
-0x7A8802: mov     edi, [esp+8+arg_0]
+0x7A8802: mov     edi, [esp+8+delta]
 0x7A8806: test    edi, edi
 0x7A8808: mov     esi, ecx
 0x7A880A: jz      loc_7A88C4

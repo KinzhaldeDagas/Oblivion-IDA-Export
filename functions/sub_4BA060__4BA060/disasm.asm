@@ -1,4 +1,4 @@
-0x4BA060: mov     dl, [esp+arg_0]
+0x4BA060: mov     dl, [esp+index]; Verified seed-array consumer: accesses seedValues through the embedded NiTArray at +0x4C and count at +0x52. Constructor initializes it empty; destructor frees its data; Oblivion TREE load does not populate it. Fallout's SNAM load/save is a schema divergence, not evidence of an Oblivion population path.
 0x4BA064: cmp     dl, 0FFh
 0x4BA067: jz      short loc_4BA093
 0x4BA069: movzx   eax, word ptr [ecx+52h]

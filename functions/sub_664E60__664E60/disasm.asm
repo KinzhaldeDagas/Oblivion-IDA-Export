@@ -18,19 +18,19 @@
 0x664E97: jz      loc_664F63
 0x664E9D: test    byte ptr [eax+18h], 1
 0x664EA1: jnz     loc_664F63
-0x664EA7: mov     ecx, [esi+5DCh]
+0x664EA7: mov     ecx, [esi+5DCh]; this
 0x664EAD: push    ebx
 0x664EAE: push    ebp
-0x664EAF: push    0
-0x664EB1: call    ActorAnimData_GetAnimGroupFromField8Value
-0x664EB6: mov     ecx, [esi+5DCh]
-0x664EBC: push    0
+0x664EAF: push    0; slot
+0x664EB1: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
+0x664EB6: mov     ecx, [esi+5DCh]; this
+0x664EBC: push    0; slot
 0x664EBE: movzx   ebx, ax
-0x664EC1: call    ActorAnimData_GetSomethingFromField8Value
-0x664EC6: mov     ecx, [esi+5DCh]
-0x664ECC: push    0
+0x664EC1: call    ActorAnimData_GetSlotActionState; Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
+0x664EC6: mov     ecx, [esi+5DCh]; this
+0x664ECC: push    0; slotSelector
 0x664ECE: mov     ebp, eax
-0x664ED0: call    sub_4706E0
+0x664ED0: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x664ED5: mov     ecx, [esi+5DCh]
 0x664EDB: fld     dword ptr [ecx+94h]
 0x664EE1: mov     ecx, edi
@@ -39,9 +39,9 @@
 0x664EEA: call    sub_57ECB0
 0x664EEF: mov     ecx, edi
 0x664EF1: call    sub_57D5B0
-0x664EF6: mov     ecx, [esi+5DCh]
-0x664EFC: push    0
-0x664EFE: call    ActorAnimData_GetAnimGroupFromField8Value
+0x664EF6: mov     ecx, [esi+5DCh]; this
+0x664EFC: push    0; slot
+0x664EFE: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x664F03: cmp     bx, ax
 0x664F06: jnz     short loc_664F21
 0x664F08: fld     [esp+14h+var_4]
@@ -52,15 +52,15 @@
 0x664F18: push    ebp
 0x664F19: push    ebx
 0x664F1A: push    0
-0x664F1C: call    sub_474AB0
+0x664F1C: call    ActorAnimData_RestorePlaySavedSlot; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.
 0x664F21: cmp     byte ptr [esi+588h], 0
 0x664F28: mov     ecx, esi; this
 0x664F2A: setz    dl
-0x664F2D: push    edx; a2
-0x664F2E: call    Player_GetAnimData
+0x664F2D: push    edx; firstPerson
+0x664F2E: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x664F33: push    esi; a2
 0x664F34: mov     ecx, eax; this
-0x664F36: call    sub_474510
+0x664F36: call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.
 0x664F3B: mov     eax, [esi]
 0x664F3D: mov     edx, [eax+154h]
 0x664F43: mov     ecx, esi
@@ -69,9 +69,9 @@
 0x664F4E: pop     ebp
 0x664F4F: pop     ebx
 0x664F50: jnz     short loc_664F5B
-0x664F52: push    0
-0x664F54: mov     ecx, eax
-0x664F56: call    sub_405790
+0x664F52: push    0; index
+0x664F54: mov     ecx, eax; this
+0x664F56: call    NiNode_GetChildAtIndex
 0x664F5B: push    eax
 0x664F5C: mov     ecx, esi
 0x664F5E: call    sub_5EA1A0

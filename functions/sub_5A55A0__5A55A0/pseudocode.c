@@ -1,6 +1,6 @@
 bool __thiscall sub_5A55A0(_DWORD *this)
 {
-  return *(this + 0xA)
+  return *(this + 0xA) /*0x5a55de*/
       && *(this + 0xB)
       && *(this + 0xC)
       && *(this + 0xD)

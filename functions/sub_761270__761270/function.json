@@ -1,18 +1,31 @@
 {
-  "callees_count": 58,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_761270",
+  "chunks": [
+    [
+      "0x761270",
+      "0x7615E1"
+    ]
+  ],
+  "chunks_sha256": "a78f0dd369f2f44f79d92bccf587f3335fb03d85c74aa97b71f89979a229f99c",
+  "comment_regular": "DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.",
+  "comment_repeatable": "DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.\n\n[2026-10-04 texture acceptance plan] NiDX9SourceTextureData::ReplacementData is BYTE+64: initialized0 at7612C2, set1 at7614D8 after missing/unsupported image fallback. Native object may carry a valid D3D resource containing error pixels. Frond texture acceptance must distinguish authored resident data, replacement/error data and deferred/unready data; do not permanently cache a deferred resource as absent. Offset is valid for this verified DX9 source-data class only.\n[v110 acceptance] Verified source-data vtableA883C4, parent texture+4, D3D resource+50, width+58,height+5C, replacement BYTE+64. Frond source acceptance now requires correct source/data class, parent association, nonzero handle/dimensions and replacement=0. Unreadable/incomplete data stays retryable; foreign classes are not interpreted using these offsets.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_NiDX9SourceTextureData_CreateFromSourceTexture_010201A0",
   "end_ea": "0x7615E1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_761270",
+  "name": "OB_NiDX9SourceTextureData_CreateFromSourceTexture_010201A0",
   "segment": ".text",
   "sha256": "a78f0dd369f2f44f79d92bccf587f3335fb03d85c74aa97b71f89979a229f99c",
   "size": 881,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x761270",
+  "total_chunk_size": 881,
   "type": "NiDX9SourceTextureData *__cdecl(NiSourceTexture *, NiDX9Renderer *)",
   "xrefs_from_count": 380,
   "xrefs_to_count": 3

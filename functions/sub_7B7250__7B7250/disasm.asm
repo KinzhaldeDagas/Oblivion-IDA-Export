@@ -1,4 +1,4 @@
-0x7B7250: push    ebx
+0x7B7250: push    ebx; [Verified] Static-initialization target called with unk_B430D8 by InitializeRendererShaderStateGlobals. Resets renderer/shader state, clears pass-control bytes +1/+2, sets +3=1, resets shader version to 0, and releases cached renderer objects. [Unknown] The owning C++ class for unk_B430D8 is not identified.
 0x7B7251: push    ebp
 0x7B7252: push    esi
 0x7B7253: push    edi
@@ -42,7 +42,7 @@
 0x7B7306: mov     dword ptr ds:0B42E90h, 0FFFFFFFFh
 0x7B7310: mov     ds:0B42EB8h, ebx
 0x7B7316: mov     byte ptr ds:0B42EA7h, 1
-0x7B731D: mov     ds:0B42E85h, bl
+0x7B731D: mov     ds:0B42E85h, bl; [Verified] RendererShaderState_ResetGlobals clears OB_ShaderPassControl+1.
 0x7B7323: mov     dword ptr ds:0B42F40h, 2Fh ; '/'
 0x7B732D: mov     dword ptr ds:0B42D70h, offset j_j_NiFile_GetNiFile
 0x7B7337: mov     ds:0B42D78h, ebx
@@ -50,11 +50,11 @@
 0x7B7343: mov     byte ptr ds:0B42E95h, 1
 0x7B734A: mov     ds:0B42F31h, bl
 0x7B7350: mov     ds:0B42E94h, bl
-0x7B7356: mov     ds:0B42E86h, bl
+0x7B7356: mov     ds:0B42E86h, bl; [Verified] RendererShaderState_ResetGlobals clears bFullBrightLighting before renderer startup reloads its INI value.
 0x7B735C: mov     ds:0B42EBCh, ebx
 0x7B7362: mov     ds:0B42F48h, ebx
 0x7B7368: mov     ds:0B42D74h, ebx
-0x7B736E: mov     byte ptr ds:0B42E87h, 1
+0x7B736E: mov     byte ptr ds:0B42E87h, 1; [Verified] RendererShaderState_ResetGlobals initializes OB_ShaderPassControl+3 to one; the byte's meaning and consumers are Unknown.
 0x7B7375: mov     ds:0B42F33h, bl
 0x7B737B: jz      short loc_7B739D
 0x7B737D: mov     esi, eax

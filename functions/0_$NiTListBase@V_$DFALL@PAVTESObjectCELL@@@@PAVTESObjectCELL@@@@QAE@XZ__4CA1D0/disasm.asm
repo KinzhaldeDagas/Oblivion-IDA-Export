@@ -4,7 +4,7 @@
 0x4CA1D8: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$DFALL@PAVTESObjectCELL@@@@PAVTESObjectCELL@@@@6B@; const NiTListBase<DFALL<TESObjectCELL *>,TESObjectCELL *>::`vftable'
 0x4CA1DE: jz      short loc_4CA1E9
 0x4CA1E0: push    esi
-0x4CA1E1: call    FormHeapFree
+0x4CA1E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4CA1E6: add     esp, 4
 0x4CA1E9: mov     eax, esi
 0x4CA1EB: pop     esi

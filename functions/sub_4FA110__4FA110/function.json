@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 19,
+  "chunks": [
+    [
+      "0x4FA110",
+      "0x4FA1AF"
+    ]
+  ],
+  "chunks_sha256": "61d89d5b17f9bb48cc42d53d8cab245ae213ee6a8e676054c3bca6c9b998864e",
+  "comment_regular": "ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
+  "comment_repeatable": "ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_4FA110",
+  "display_name": "ScriptEventList::GetVariableValue",
   "end_ea": "0x4FA1AF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4FA110",
+  "name": "ScriptEventList::GetVariableValue",
   "segment": ".text",
   "sha256": "61d89d5b17f9bb48cc42d53d8cab245ae213ee6a8e676054c3bca6c9b998864e",
   "size": 159,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4FA110",
-  "type": "float __thiscall(ScriptEventList *this, int ArgList, Script *a3)",
+  "total_chunk_size": 159,
+  "type": "float __thiscall(ScriptEventList *this, UInt32 variableID, Script *sourceScript)",
   "xrefs_from_count": 67,
   "xrefs_to_count": 19
 }

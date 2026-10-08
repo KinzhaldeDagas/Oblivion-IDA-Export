@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DKMT_QUERYSTATISTICS_VIDPNSOURCE_INFORMATION",
+  "definition": "struct _D3DKMT_QUERYSTATISTICS_VIDPNSOURCE_INFORMATION\n{\nD3DKMT_QUERYSTATISTICS_PROCESS_VIDPNSOURCE_INFORMATION GlobalInformation;\nD3DKMT_QUERYSTATISTICS_PROCESS_VIDPNSOURCE_INFORMATION SystemInformation;\nULONG64 Reserved[8];\n}\n",
   "id": 18374686479672026844,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GlobalInformation",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 80
+      "size": 80,
+      "type": "D3DKMT_QUERYSTATISTICS_PROCESS_VIDPNSOURCE_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SystemInformation",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 80
+      "size": 80,
+      "type": "D3DKMT_QUERYSTATISTICS_PROCESS_VIDPNSOURCE_INFORMATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 64
+      "offset_hex": "0xA0",
+      "size": 64,
+      "type": "ULONG64[8]"
     }
   ],
   "name": "_D3DKMT_QUERYSTATISTICS_VIDPNSOURCE_INFORMATION",
+  "ordinal": 1251,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 224
 }

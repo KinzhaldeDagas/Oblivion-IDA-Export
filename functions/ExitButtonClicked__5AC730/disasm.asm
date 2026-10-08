@@ -1,4 +1,4 @@
-0x5AC730: mov     eax, ds:0B33398h
+0x5AC730: mov     eax, ds:0B33398h; LevelUpMenu exit path: commits the selected attributes/player level-up, restores music, marks the menu complete, and closes it.
 0x5AC735: push    esi
 0x5AC736: mov     esi, [eax+24h]
 0x5AC739: test    esi, esi
@@ -25,17 +25,17 @@
 0x5AC775: test    esi, esi
 0x5AC777: jz      short loc_5AC79F
 0x5AC779: mov     ecx, esi
-0x5AC77B: call    sub_5AC6A0
+0x5AC77B: call    LevelUpMenu_CommitSelectedAttributes; Collects up to three selected LevelUpMenu attribute tiles, maps their group-0 offsets to attribute AVs, and commits them through Player_CommitLevelUp. Missing selections remain 0xFFFFFFFF and are ignored by Player_LevelUpAttribute.
 0x5AC780: fld     dword ptr ds:0A379B4h
 0x5AC786: push    ecx
-0x5AC787: fstp    [esp+0Ch+a2]; a3
-0x5AC78A: push    1772h; a2
+0x5AC787: fstp    [esp+0Ch+a2]; value
+0x5AC78A: push    1772h; propertyCode
 0x5AC78F: mov     ecx, edi; this
-0x5AC791: call    Tile_SetFloat
+0x5AC791: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5AC796: pop     edi
 0x5AC797: mov     ecx, esi; int
 0x5AC799: pop     esi
-0x5AC79A: jmp     sub_584740
+0x5AC79A: jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5AC79F: pop     edi
 0x5AC7A0: pop     esi
 0x5AC7A1: retn

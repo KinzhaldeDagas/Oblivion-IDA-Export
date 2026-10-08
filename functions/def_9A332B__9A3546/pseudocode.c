@@ -13,5 +13,5 @@ int __userpurge def_9A332B@<eax>(
         int a11,
         int a12)
 {
-  return a1;
+  return a1; /*0x9a354e*/
 }

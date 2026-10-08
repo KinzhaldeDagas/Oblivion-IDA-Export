@@ -17,12 +17,12 @@
 0x71AE75: mov     [esp+18h+var_4], 0
 0x71AE7D: jz      short loc_71AE88
 0x71AE7F: push    eax
-0x71AE80: call    FormHeapFree
+0x71AE80: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x71AE85: add     esp, 4
 0x71AE88: lea     ecx, [esi+80h]; this
 0x71AE8E: mov     dword ptr ds:0B3FD24h, 0
 0x71AE98: call    ??1NiNIFImageReader@@UAE@XZ; NiNIFImageReader::~NiNIFImageReader(void)
-0x71AE9D: push    offset NiRefObject_objcount; lpAddend
+0x71AE9D: push    0B3FD64h; lpAddend
 0x71AEA2: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x71AEA8: call    dword ptr ds:0A2807Ch
 0x71AEAE: mov     ecx, [esp+18h+var_C]
@@ -31,3 +31,12 @@
 0x71AEBA: pop     esi
 0x71AEBB: add     esp, 10h
 0x71AEBE: retn
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

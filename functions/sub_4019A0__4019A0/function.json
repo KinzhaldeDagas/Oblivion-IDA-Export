@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4019A0",
+      "0x401A2A"
+    ]
+  ],
+  "chunks_sha256": "4601c3d6b52e3b963928ddf658ce7701d2fef713bd24079ad67533c187d514b1",
+  "comment_regular": "Releases consecutive free blocks at the high end of the heap backing buffer, reducing committed heap usage and updating the tail pointer.",
+  "comment_repeatable": "Releases consecutive free blocks at the high end of the heap backing buffer, reducing committed heap usage and updating the tail pointer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4019A0",
+  "display_name": "MemoryHeap_ReleaseTrailingFreeEntries",
   "end_ea": "0x401A2A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4019A0",
+  "name": "MemoryHeap_ReleaseTrailingFreeEntries",
   "segment": ".text",
   "sha256": "4601c3d6b52e3b963928ddf658ce7701d2fef713bd24079ad67533c187d514b1",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4019A0",
+  "total_chunk_size": 138,
   "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 55,
   "xrefs_to_count": 1

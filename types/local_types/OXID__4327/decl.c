@@ -1,1 +1,1 @@
-OXID
+typedef ID OXID;

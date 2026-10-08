@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8014E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x801569",
-    "line": "call    sub_801210",
+    "line": "call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x80157E",
-    "line": "jz      short loc_801588",
+    "line": "jz      short loc_801588; Null package map skips lookup CALL801581, including plugin embedded hook. Existing cached shader definitions need no lookup.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x801581",
-    "line": "call    NiTMap_GetAtIndex",
+    "line": "call    NiTMap_GetAtIndex; [Verified] Vertex-program loader queries the selected ShaderProgramPackageRecordMap by its requested program key before the later cache/source path; an embedded ShaderBufferEntry can provide the program payload.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x8015E4",
-    "line": "cmp     eax, offset CacheOrNullString",
+    "line": "cmp     eax, 0B42D80h",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x801609",
-    "line": "call    sub_801210",
+    "line": "call    sub_801210; MoonSugarEffect decode: builds shader cache filename from CacheOrNullString/FullPath, appends 'HDR.' when UseHDR is active, then appends requested .vso/.pso cache name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x801657",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -1003,19 +1003,19 @@
   },
   {
     "ea": "0x80171B",
-    "line": "push    esi",
+    "line": "push    esi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80171C",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80171D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x801723",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -1306,12 +1306,6 @@
     "line": "jmp     short loc_8017C0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x8017BD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x8017C0",
@@ -1621,7 +1615,7 @@
   },
   {
     "ea": "0x80186D",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -1771,7 +1765,7 @@
   },
   {
     "ea": "0x8018A9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,7 +2365,7 @@
   },
   {
     "ea": "0x8019EE",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -2743,7 +2737,7 @@
   },
   {
     "ea": "0x801AAB",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -3001,19 +2995,19 @@
   },
   {
     "ea": "0x801B2D",
-    "line": "push    edi",
+    "line": "push    edi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x801B2E",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x801B2F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -3031,7 +3025,7 @@
   },
   {
     "ea": "0x801B3A",
-    "line": "call    ReadFile??",
+    "line": "call    Archive_ReadBytes",
     "mnemonic": "call",
     "size": 5
   },
@@ -3163,7 +3157,7 @@
   },
   {
     "ea": "0x801B82",
-    "line": "mov     edx, [edx+16Ch]",
+    "line": "mov     edx, [edx+16Ch]; DX10 bridge note: CreateVertexShader vtable call is the authoritative D3D9 bytecode capture boundary for SM1/SM2/SM3 to SM4 companion translation.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3205,7 +3199,7 @@
   },
   {
     "ea": "0x801B93",
-    "line": "jz      short loc_801BCA",
+    "line": "jz      short loc_801BCA; MoonSugar build52 reference: Oblivion CreateVertexShader consumes compiled vertex bytecode here before creating the D3D vertex shader; plugin embedded bytecode mirrors this cached-.vso stage, while eligibility remains governed by decoded pass/program gates.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -3295,7 +3289,7 @@
   },
   {
     "ea": "0x801BCC",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; MoonSugarEffect decode: allocates concrete NiD3DVertexShader wrapper size 0x38 after native D3D CreateVertexShader succeeds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3349,7 +3343,7 @@
   },
   {
     "ea": "0x801BF0",
-    "line": "call    sub_780D80",
+    "line": "call    sub_780D80; MoonSugarEffect decode: standalone TES4 CreateVertexShader constructs a plain 0x38 NiD3DVertexShader with renderer dword_B43104. It stores the D3D handle later through vtable +0x44, but does not set creator pointer or retained bytecode metadata; rebuild on resource recreate instead of relying on factory restore.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3409,7 +3403,7 @@
   },
   {
     "ea": "0x801C14",
-    "line": "call    edx",
+    "line": "call    edx; MoonSugar build52 reference: Oblivion stores the created IDirect3DVertexShader9 handle into the NiD3DVertexShader wrapper through vtable +0x44. MoonSugar uses plugin-owned D3D shader handles only after native setup, not as new Oblivion shader semantics.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3433,7 +3427,7 @@
   },
   {
     "ea": "0x801C1E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3535,7 +3529,7 @@
   },
   {
     "ea": "0x801C58",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -3622,5 +3616,101 @@
     "line": "retn    18h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D06F0",
+    "line": "mov     eax, [ebp-0D64h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D06F6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D06F7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D06FC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D06FD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D06FE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0702",
+    "line": "lea     eax, [edx-0D9Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D0708",
+    "line": "mov     ecx, [edx-0DA0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D070E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0710",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0715",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0718",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D071B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D071D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0722",
+    "line": "mov     eax, offset stru_AF9034",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0727",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x772CD0",
-    "line": "push    ecx",
+    "line": "push    ecx; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,43 +31,43 @@
   },
   {
     "ea": "0x772CD6",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+state]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x772CDA",
-    "line": "lea     eax, [esp+10h+var_1]",
+    "line": "lea     eax, [esp+10h+savePrevious]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x772CDE",
-    "line": "push    eax",
+    "line": "push    eax; savePrevious",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x772CDF",
-    "line": "push    ecx",
+    "line": "push    ecx; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x772CE0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x772CE2",
-    "line": "mov     [esp+18h+var_1], 0",
+    "line": "mov     [esp+18h+savePrevious], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x772CE7",
-    "line": "call    sub_7727D0",
+    "line": "call    NiD3DRenderStateGroup_FindRenderStateEntry;",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x772CF4",
-    "line": "mov     al, [esp+10h+var_1]",
+    "line": "mov     al, [esp+10h+savePrevious]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x772D0B",
-    "line": "push    edi",
+    "line": "push    edi; entry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x772D0C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x772D10",
-    "line": "call    sub_772790",
+    "line": "call    NiD3DRenderStateGroup_RemoveSavedEntry;",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x772D36",
-    "line": "call    sub_772750",
+    "line": "call    NiD3DRenderStateGroup_RemoveNoSaveEntry;",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x772D74",
-    "line": "call    sub_772A80",
+    "line": "call    sub_772A80;",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x772D95",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+state]",
     "mnemonic": "mov",
     "size": 4
   },

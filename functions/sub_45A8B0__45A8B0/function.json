@@ -1,19 +1,32 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x45A8B0",
+      "0x45A939"
+    ]
+  ],
+  "chunks_sha256": "041279dad1a1a265edbc4144ed1b47dcc04ff8f67cd20016544a0dac8bf74bc4",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified: iterates every map value, frees nonnull entry+4 savedFormBuffer via MemoryHeap_Free_checked, frees entry via FormHeapFree, then NiTMap_Clear. Called by ChangesMap destructor 45F030. Probable homolog Fallout 825ED9D0.\nVerified: eighth ChangesMap virtual slot +0x1C at A3A308. Destructor entry is 45F030 (call to this function at 45F066).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_45A8B0",
+  "display_name": "ChangesMap_RemoveAllChanges",
   "end_ea": "0x45A939",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45A8B0",
+  "name": "ChangesMap_RemoveAllChanges",
   "segment": ".text",
   "sha256": "041279dad1a1a265edbc4144ed1b47dcc04ff8f67cd20016544a0dac8bf74bc4",
   "size": 137,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45A8B0",
-  "type": "int __thiscall(NiTMap_TESCELL *this)",
+  "total_chunk_size": 137,
+  "type": "void __thiscall(ChangesMap *self)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 2
 }

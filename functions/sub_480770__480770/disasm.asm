@@ -1,6 +1,6 @@
-0x480770: push    ebx
+0x480770: push    ebx; Scans direct children for exact name 'Scb', removes/releases the first match, and returns true. On the first child whose name begins 'FadeNode ', it immediately abandons remaining siblings and follows only that single child-as-NiNode chain; null cast or exhausted chain returns false. This is not a general recursive tree search.
 0x480771: push    ebp
-0x480772: mov     ebp, [esp+8+arg_0]
+0x480772: mov     ebp, [esp+8+rootNode]
 0x480776: test    ebp, ebp
 0x480778: push    esi
 0x480779: push    edi
@@ -17,9 +17,9 @@
 0x48079A: mov     edi, [esi+8]
 0x48079D: test    edi, edi
 0x48079F: jz      short loc_4807C7
-0x4807A1: push    offset off_A3CE0C; Str2
-0x4807A6: push    edi; Str1
-0x4807A7: call    __strcmp
+0x4807A1: push    offset off_A3CE0C; right
+0x4807A6: push    edi; left
+0x4807A7: call    CRT_StricmpLocaleDispatch
 0x4807AC: add     esp, 8
 0x4807AF: test    eax, eax
 0x4807B1: jz      short loc_4807E2
@@ -48,11 +48,11 @@
 0x4807E2: mov     edx, [ebp+0]
 0x4807E5: mov     edx, [edx+8Ch]
 0x4807EB: push    ebx
-0x4807EC: lea     eax, [esp+14h+arg_0]
+0x4807EC: lea     eax, [esp+14h+rootNode]
 0x4807F0: push    eax
 0x4807F1: mov     ecx, ebp
 0x4807F3: call    edx
-0x4807F5: mov     esi, [esp+10h+arg_0]
+0x4807F5: mov     esi, [esp+10h+rootNode]
 0x4807F9: test    esi, esi
 0x4807FB: jz      short loc_480819
 0x4807FD: lea     eax, [esi+4]

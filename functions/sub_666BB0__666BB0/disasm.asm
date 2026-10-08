@@ -1,4 +1,4 @@
-0x666BB0: sub     esp, 0F4h
+0x666BB0: sub     esp, 0F4h; Oblivion player-progression debug panel: enumerates all 21 native skills, labels only strict TESClass matches as 'Major', and prints each value, per-skill advance count, usage/required usage, aggregate major advances, readiness, attribute-bonus buckets, and specialization counters. Non-majors receive no separate 'Minor' label.
 0x666BB6: mov     eax, ds:0B30AACh
 0x666BBB: xor     eax, esp
 0x666BBD: mov     [esp+0F4h+var_4], eax
@@ -42,21 +42,21 @@
 0x666C47: mov     [esp+104h+var_F0], esi
 0x666C4B: mov     [esp+104h+var_F4], esi
 0x666C4F: mov     esi, 0Ch
-0x666C54: push    esi
+0x666C54: push    esi; Enumerate exactly SkillActorValue 0x0C..0x20 (21 native skills).
 0x666C55: push    2
-0x666C57: call    ActorValue_GetGroupOffsetFromAV
+0x666C57: call    ActorValue_GetGroupOffsetFromAV; Oblivion group 2 converts the native SkillActorValue to its 0..20 array index.
 0x666C5C: movsx   ecx, al
 0x666C5F: mov     [esp+10Ch+var_D8], ecx
 0x666C63: mov     ecx, ds:0B333C4h
 0x666C69: add     esp, 8
-0x666C6C: call    Actor_GetBaseClass
+0x666C6C: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x666C71: test    eax, eax
 0x666C73: jz      short loc_666C94
 0x666C75: mov     ecx, ds:0B333C4h
-0x666C7B: push    esi
-0x666C7C: call    Actor_GetBaseClass
-0x666C81: mov     ecx, eax
-0x666C83: call    sub_51C090
+0x666C7B: push    esi; actorValue
+0x666C7C: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
+0x666C81: mov     ecx, eax; this
+0x666C83: call    TESClass_IsMajorSkillAV; Use the strict seven-slot TESClass predicate solely to choose the literal 'Major, ' prefix. False or absent class leaves the skill unlabeled/non-major.
 0x666C88: test    al, al
 0x666C8A: mov     [esp+104h+var_E0], offset aMajor; "Major, "
 0x666C92: jnz     short loc_666C9C
@@ -70,7 +70,7 @@
 0x666CB0: ja      short loc_666CD1
 0x666CB2: push    esi
 0x666CB3: push    2
-0x666CB5: call    ActorValue_GetGroupOffsetFromAV
+0x666CB5: call    ActorValue_GetGroupOffsetFromAV; Map this native skill to its group-2 index and read PlayerCharacter::requiredSkillExp[index].
 0x666CBA: mov     ecx, ds:0B333C4h
 0x666CC0: movsx   edx, al
 0x666CC3: add     esp, 8
@@ -83,7 +83,7 @@
 0x666CDC: ja      short loc_666CFD
 0x666CDE: push    esi
 0x666CDF: push    2
-0x666CE1: call    ActorValue_GetGroupOffsetFromAV
+0x666CE1: call    ActorValue_GetGroupOffsetFromAV; Map this native skill to its group-2 index and read PlayerCharacter::skillExp[index].
 0x666CE6: mov     ecx, ds:0B333C4h
 0x666CEC: movsx   eax, al
 0x666CEF: add     esp, 8
@@ -91,10 +91,10 @@
 0x666CF9: fstp    [esp+104h+var_E4]
 0x666CFD: fld     [esp+104h+var_DC]
 0x666D01: mov     edx, [esp+104h+var_D8]
-0x666D05: mov     eax, [ecx+edx*4+188h]
+0x666D05: mov     eax, [ecx+edx*4+188h]; Read PlayerCharacter::skillAdv[group2Index], the per-skill advance count shown independently of major membership.
 0x666D0C: mov     edx, [ecx]
 0x666D0E: sub     esp, 10h
-0x666D11: fstp    [esp+114h+var_10C]
+0x666D11: fstp    qword ptr [esp+114h+var_10C]
 0x666D15: fld     [esp+114h+var_E4]
 0x666D19: fstp    qword ptr [esp+114h+var_114]
 0x666D1C: push    eax
@@ -105,11 +105,11 @@
 0x666D2A: push    eax
 0x666D2B: push    ecx
 0x666D2C: push    esi
-0x666D2D: call    ActorValue_GetName
+0x666D2D: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x666D32: add     esp, 4
 0x666D35: push    eax
 0x666D36: lea     edx, [esp+124h+var_CC]
-0x666D3A: push    offset aSSDAdvancesDUs; "%s (%s%d): advances: %d, usage %.2f/%.2"...
+0x666D3A: push    offset aSSDAdvancesDUs; Format each native skill as name, optional 'Major, ' prefix, current value, advance count, and current/required usage.
 0x666D3F: push    edx
 0x666D40: call    __sprintf
 0x666D45: fild    [esp+12Ch+var_F4]
@@ -134,7 +134,7 @@
 0x666D8F: push    ecx
 0x666D90: push    eax
 0x666D91: lea     ecx, [esp+10Ch+var_CC]
-0x666D95: push    offset aMajorSkillsAdv; "Major Skills Advanced: %d/%d"
+0x666D95: push    offset aMajorSkillsAdv; Report PlayerCharacter::majorSkillAdvances against g_iLevelUpSkillCount.value after the 21 per-skill rows.
 0x666D9A: push    ecx
 0x666D9B: call    __sprintf
 0x666DA0: fild    [esp+114h+var_F4]
@@ -152,7 +152,7 @@
 0x666DC9: mov     eax, ds:0B333C4h
 0x666DCE: add     [esp+118h+var_F4], edi
 0x666DD2: add     esp, 14h
-0x666DD5: cmp     byte ptr [eax+1DCh], 0
+0x666DD5: cmp     byte ptr [eax+1DCh], 0; PlayerCharacter::bCanLevelUp independently controls the 'Ready to Level Up' diagnostic line.
 0x666DDC: jz      short loc_666E06
 0x666DDE: fild    [esp+104h+var_F4]
 0x666DE2: push    0FFFFFFFFh; int
@@ -186,7 +186,7 @@
 0x666E48: fld     [esp+114h+var_E0]
 0x666E4C: fstp    [esp+114h+var_114]; float
 0x666E4F: push    offset aAttributeSkill; "Attribute Skill Counts"
-0x666E54: call    InterfaceMgr_DebugTextLine
+0x666E54: call    InterfaceMgr_DebugTextLine; Dump every retained attribute-bonus bucket; these counts include all skill increases, while only major increases roll the bucket boundary.
 0x666E59: mov     eax, ds:0B333C4h
 0x666E5E: mov     ebp, [eax+5B4h]
 0x666E64: mov     edx, [esp+118h+var_F0]
@@ -235,13 +235,13 @@
 0x666EE8: ja      short loc_666EFB
 0x666EEA: push    esi
 0x666EEB: push    eax
-0x666EEC: call    ActorValue_GetGroupOffsetFromAV
+0x666EEC: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x666EF1: movsx   eax, al
 0x666EF4: movsx   eax, byte ptr [eax+ebx]
 0x666EF8: add     esp, 8
 0x666EFB: push    eax
 0x666EFC: push    esi
-0x666EFD: call    ActorValue_GetName
+0x666EFD: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x666F02: add     esp, 4
 0x666F05: push    eax
 0x666F06: lea     ecx, [esp+10Ch+var_CC]
@@ -279,7 +279,7 @@
 0x666F78: fild    [esp+114h+var_F0]
 0x666F7C: fstp    [esp+114h+var_114]; float
 0x666F7F: push    offset aSpecialization; "Specialization Counts"
-0x666F84: call    InterfaceMgr_DebugTextLine
+0x666F84: call    InterfaceMgr_DebugTextLine; Dump Combat/Magic/Stealth advancement counters accumulated from every skill increase according to that skill's specialization.
 0x666F89: mov     ecx, ds:0B333C4h
 0x666F8F: movsx   edx, byte ptr [ecx+5B8h]
 0x666F96: mov     esi, [esp+118h+var_E8]

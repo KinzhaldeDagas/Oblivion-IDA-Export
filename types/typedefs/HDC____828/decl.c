@@ -1,1 +1,4 @@
-HDC__
+struct HDC__
+{
+int unused;
+};

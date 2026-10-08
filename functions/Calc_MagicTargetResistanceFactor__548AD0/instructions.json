@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x548AD0",
-    "line": "push    ecx",
+    "line": "push    ecx; AVU hook site: Calc_MagicTargetResistanceFactor entry. Stack +0x10 is magic-item resistance; +0x14 is effect-specific resistance. AVU applies optional DR to those exact slots before vanilla >=100 checks.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x548AD1",
-    "line": "fld     [esp+4+arg_C]",
+    "line": "fld     [esp+4+arg_C]; First vanilla threshold check uses arg_C / entry +0x10, the magic-item resistance bucket.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x548AE4",
-    "line": "fld     [esp+4+arg_10]",
+    "line": "fld     [esp+4+arg_10]; Second vanilla threshold check uses arg_10 / entry +0x14, the effect-specific resistance.",
     "mnemonic": "fld",
     "size": 4
   },

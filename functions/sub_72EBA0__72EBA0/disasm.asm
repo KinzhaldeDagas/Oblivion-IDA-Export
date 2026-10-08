@@ -64,11 +64,11 @@
 0x72EC55: push    ebx
 0x72EC56: mov     ecx, ebp
 0x72EC58: call    edx
-0x72EC5A: mov     cx, word ptr [esp+2Ch+var_C]
-0x72EC5F: mov     ax, word ptr [esp+2Ch+var_A]
+0x72EC5A: mov     cx, [esp+2Ch+var_C]
+0x72EC5F: mov     ax, [esp+2Ch+var_A]
 0x72EC64: cmp     cx, ax
 0x72EC67: jz      short loc_72EC78
-0x72EC69: mov     dx, word ptr [esp+2Ch+var_8]
+0x72EC69: mov     dx, [esp+2Ch+var_8]
 0x72EC6E: cmp     ax, dx
 0x72EC71: jz      short loc_72EC78
 0x72EC73: cmp     dx, cx
@@ -137,7 +137,7 @@
 0x72ED25: mov     eax, [esp+2Ch+var_10]
 0x72ED29: push    ecx
 0x72ED2A: mov     [eax+8], edx
-0x72ED2D: call    FormHeapFree
+0x72ED2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72ED32: mov     ecx, [esp+30h+var_4]
 0x72ED36: add     esp, 4
 0x72ED39: pop     edi

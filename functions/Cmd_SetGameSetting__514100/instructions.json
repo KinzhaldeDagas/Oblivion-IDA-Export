@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x514100",
-    "line": "sub     esp, 408h",
+    "line": "sub     esp, 408h; Verified: Cmd_SetGameSetting parses name/value, looks up g_GameSettingsByName and routes string values through Setting_SetStringValue. Its command-table entry at 0xB0B880 contains the SetGameSetting string pointer and function pointer 0x514100, confirming the generic setter is registered.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x514165",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x514182",
-    "line": "mov     ecx, offset dword_B35574",
+    "line": "mov     ecx, offset g_GameSettingsByName",
     "mnemonic": "mov",
     "size": 5
   },

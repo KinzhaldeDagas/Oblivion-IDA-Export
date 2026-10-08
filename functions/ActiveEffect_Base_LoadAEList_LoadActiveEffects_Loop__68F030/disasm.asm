@@ -1,6 +1,6 @@
 0x68F030: mov     edi, [esp+arg_28]
 0x68F034: push    edi
-0x68F035: call    ActiveEffect_Base_Load
+0x68F035: call    ActiveEffect_Base_Load; OBMEFix 2026-06-01 verification: vanilla call shape is ActiveEffect_Base_Load(parent). OBME owns this call after its loader wrapper is installed; OBMEFix chains only the OBME target and returns NULL only after consuming a verified non-actor duration SEFF record so 0x0068F07E skips insertion and 0x0068F094 handles normal loop increment.
 0x68F03A: push    0; int
 0x68F03C: push    offset ??_R0?AVVampirismEffect@@@8; struct TypeDescriptor *
 0x68F041: push    offset ??_R0?AVActiveEffect@@@8; struct _s_RTTICompleteObjectLocator *

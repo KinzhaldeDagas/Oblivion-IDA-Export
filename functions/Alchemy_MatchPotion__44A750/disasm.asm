@@ -1,7 +1,7 @@
-0x44A750: mov     ecx, [ecx]
+0x44A750: mov     ecx, [ecx]; this
 0x44A752: push    esi
 0x44A753: push    edi
-0x44A754: call    TESHealthForm_GetHealth
+0x44A754: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x44A759: mov     esi, eax
 0x44A75B: test    esi, esi
 0x44A75D: jz      short loc_44A7C0

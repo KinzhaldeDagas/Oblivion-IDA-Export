@@ -1,4 +1,4 @@
 void __cdecl sub_A1FB50()
 {
-  GameSetting_destr((int *)fPotionT2RetDurMult);
+  GameSetting_destr((int *)&MEMORY[0xB37998][0x20]); /*0xa1fb55*/
 }

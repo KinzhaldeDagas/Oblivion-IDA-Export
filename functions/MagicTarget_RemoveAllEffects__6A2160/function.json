@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6A2160",
+      "0x6A2190"
+    ]
+  ],
+  "chunks_sha256": "60b2c9e75f77b8f6e6b167444b940710203def392dc65f5b18e2f5971fba0c39",
+  "comment_regular": "Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.",
+  "comment_repeatable": "Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "MagicTarget_RemoveAllEffects",
   "end_ea": "0x6A2190",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "MagicTarget_RemoveAllEffects",
   "segment": ".text",
   "sha256": "60b2c9e75f77b8f6e6b167444b940710203def392dc65f5b18e2f5971fba0c39",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6A2160",
-  "type": "void __usercall(void *this@<ecx>, char@<bpl>, double@<st0>)",
+  "total_chunk_size": 48,
+  "type": "void __thiscall(MagicTarget *this)",
   "xrefs_from_count": 28,
   "xrefs_to_count": 4
 }

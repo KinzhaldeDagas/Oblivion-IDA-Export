@@ -1,5 +1,5 @@
 int __thiscall MagicCaster_ApplyActiveMagicItem(
-        void *this,
+        _DWORD *this,
         int a2,
         int a3,
         int a4,
@@ -33,7 +33,7 @@ int __thiscall MagicCaster_ApplyActiveMagicItem(
         int a32)
 {
   return MagicCaster_ApplyActiveMagicItem_::CheckMagicItem(
-           (int)this,
+           this,
            a2,
            a3,
            a4,

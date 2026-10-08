@@ -16,7 +16,7 @@
 0x664F99: mov     eax, [ebp+5D0h]
 0x664F9F: test    eax, eax
 0x664FA1: jz      loc_6651FF
-0x664FA7: call    TESObjectREFR__GetNiNode
+0x664FA7: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x664FAC: test    eax, eax
 0x664FAE: jz      loc_6651FF
 0x664FB4: mov     bl, [esp+6Ch+a3]
@@ -36,11 +36,11 @@
 0x664FE9: jz      short loc_665001
 0x664FEB: jmp     loc_6651FF
 0x664FF0: mov     ecx, ebp; this
-0x664FF2: call    TESObjectREFR__GetNiNode
+0x664FF2: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x664FF7: test    byte ptr [eax+18h], 1
 0x664FFB: jz      loc_6651FF
 0x665001: mov     ecx, ebp; this
-0x665003: call    TESObjectREFR__GetNiNode
+0x665003: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x665008: test    bl, bl
 0x66500A: mov     ecx, 0FFFEh
 0x66500F: jz      short loc_665018
@@ -54,7 +54,7 @@
 0x66502B: jmp     loc_6650C7
 0x665030: and     [eax+18h], cx
 0x665034: mov     ecx, ebp; this
-0x665036: call    TESObjectREFR__GetNiNode
+0x665036: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x66503B: mov     ebx, eax
 0x66503D: mov     eax, [ebp+0]
 0x665040: mov     edx, [eax+174h]
@@ -71,9 +71,9 @@
 0x665064: mov     ecx, ebp
 0x665066: call    eax
 0x665068: push    ecx
-0x665069: lea     ecx, [esp+70h+var_54]
-0x66506D: fstp    [esp+70h+var_70]; float
-0x665070: call    NiMatrix33_InitRotationTransform
+0x665069: lea     ecx, [esp+70h+var_54]; this
+0x66506D: fstp    [esp+70h+angleZ]; angleZ
+0x665070: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x665075: push    0
 0x665077: lea     ecx, [esp+70h+var_54]
 0x66507B: push    ecx
@@ -90,19 +90,19 @@
 0x66509C: mov     ecx, ebp; a1
 0x66509E: call    sub_5EE1B0
 0x6650A3: mov     ecx, ebp; this
-0x6650A5: call    TESObjectREFR_GetAnimData
+0x6650A5: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x6650AA: test    eax, eax
 0x6650AC: jz      short loc_6650B8
 0x6650AE: push    ebp; a2
 0x6650AF: mov     ecx, eax; this
-0x6650B1: call    sub_474510
+0x6650B1: call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.
 0x6650B6: jmp     short loc_6650C7
 0x6650B8: fldz
 0x6650BA: push    0; a3
 0x6650BC: push    ecx
 0x6650BD: fstp    [esp+74h+a2]; a2
 0x6650C0: mov     ecx, ebx; this
-0x6650C2: call    NiAVObject_UpdateNiAVObject
+0x6650C2: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x6650C7: mov     ecx, ebp
 0x6650C9: call    sub_5E5480
 0x6650CE: test    al, al
@@ -111,7 +111,7 @@
 0x6650DB: jnz     short loc_665112
 0x6650DD: mov     esi, [ebp+5CCh]
 0x6650E3: mov     ecx, ebp; this
-0x6650E5: call    TESObjectREFR_GetAnimData
+0x6650E5: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x6650EA: mov     ebx, eax
 0x6650EC: mov     eax, [esi+98h]
 0x6650F2: mov     ecx, [eax+7Ch]
@@ -128,7 +128,7 @@
 0x66510E: mov     edi, eax
 0x665110: jmp     short loc_665125
 0x665112: mov     ecx, ebp; this
-0x665114: call    TESObjectREFR_GetAnimData
+0x665114: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x665119: mov     ebx, [ebp+5CCh]
 0x66511F: mov     esi, eax
 0x665121: jmp     short loc_6650EC
@@ -158,11 +158,11 @@
 0x665160: mov     edx, [edi]
 0x665162: mov     edx, [edx+8Ch]
 0x665168: push    esi
-0x665169: lea     eax, [esp+70h+var_58]
+0x665169: lea     eax, [esp+70h+slot]
 0x66516D: push    eax
 0x66516E: mov     ecx, edi
 0x665170: call    edx
-0x665172: mov     eax, [esp+6Ch+var_58]
+0x665172: mov     eax, [esp+6Ch+slot]
 0x665176: test    eax, eax
 0x665178: mov     [esp+6Ch+var_4], 0
 0x665180: jz      short loc_665191
@@ -172,9 +172,9 @@
 0x665187: mov     eax, [edx+84h]
 0x66518D: mov     ecx, ebx
 0x66518F: call    eax
-0x665191: lea     ecx, [esp+6Ch+var_58]; this
+0x665191: lea     ecx, [esp+6Ch+slot]; slot
 0x665195: mov     [esp+6Ch+var_4], 0FFFFFFFFh
-0x66519D: call    sub_7016A0
+0x66519D: call    NiPointerSlot_Release
 0x6651A2: movzx   ecx, word ptr [edi+0B6h]
 0x6651A9: add     esi, 1
 0x6651AC: cmp     esi, ecx
@@ -214,3 +214,12 @@
 0x66520E: pop     ebx
 0x66520F: add     esp, 58h
 0x665212: retn    4
+0x9C3E20: lea     ecx, [ebp-58h]; slot
+0x9C3E23: jmp     NiPointerSlot_Release
+0x9C3E28: mov     edx, [esp+arg_4]
+0x9C3E2C: lea     eax, [edx-5Ch]
+0x9C3E2F: mov     ecx, [edx-60h]
+0x9C3E32: xor     ecx, eax
+0x9C3E34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3E39: mov     eax, offset stru_AEC92C
+0x9C3E3E: jmp     ___CxxFrameHandler3

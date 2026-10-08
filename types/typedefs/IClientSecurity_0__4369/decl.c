@@ -1,1 +1,1 @@
-IClientSecurity_0
+typedef IClientSecurity IClientSecurity_0;

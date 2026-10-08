@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D72D0",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7D72D7",
-    "line": "call    sub_7D7150",
+    "line": "call    NiRenderer_DrainRenderTargetGroupStack; Drain all strong-owned target-stack entries and end the currently ready group before optional D3D EndScene ownership handling.",
     "mnemonic": "call",
     "size": 5
   },

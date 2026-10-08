@@ -28,52 +28,52 @@
 0x533A4E: push    ecx
 0x533A4F: mov     ecx, eax
 0x533A51: fstp    [esp+8Ch+var_8C]; float
-0x533A54: call    sub_532090
+0x533A54: call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.
 0x533A59: mov     esi, eax
 0x533A5B: jmp     short loc_533A5F
 0x533A5D: xor     esi, esi
-0x533A5F: lea     ecx, [esp+84h+var_70]
-0x533A63: call    sub_532250
+0x533A5F: lea     ecx, [esp+84h+info]
+0x533A63: call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.
 0x533A68: mov     eax, [ebp+arg_4]
 0x533A6B: shl     eax, 10h
 0x533A6E: or      eax, 1Ch
 0x533A71: cmp     esi, edi
 0x533A73: mov     [esp+84h+var_4], 1
-0x533A7E: mov     [esp+84h+var_70], eax
+0x533A7E: mov     [esp+84h+info.collisionFilter], eax
 0x533A82: jz      short loc_533A8D
 0x533A84: mov     ecx, [esi+8]
-0x533A87: mov     [esp+84h+var_6C], ecx
+0x533A87: mov     [esp+84h+info.shape], ecx
 0x533A8B: jmp     short loc_533A91
-0x533A8D: mov     [esp+84h+var_6C], edi
+0x533A8D: mov     [esp+84h+info.shape], edi
 0x533A91: fldz
 0x533A93: push    14h; Size
-0x533A95: fst     [esp+88h+var_4C]
-0x533A99: fst     [esp+88h+var_48]
-0x533A9D: fst     [esp+88h+var_44]
-0x533AA1: fst     [esp+88h+var_40]
-0x533AA5: fst     [esp+88h+var_38]
-0x533AA9: fst     [esp+88h+var_34]
-0x533AAD: fst     [esp+88h+var_30]
-0x533AB1: fst     [esp+88h+var_2C]
-0x533AB5: fst     [esp+88h+var_24]
+0x533A95: fst     [esp+88h+info.transform+4]
+0x533A99: fst     [esp+88h+info.transform+8]
+0x533A9D: fst     [esp+88h+info.transform+0Ch]
+0x533AA1: fst     [esp+88h+info.transform+10h]
+0x533AA5: fst     [esp+88h+info.transform+18h]
+0x533AA9: fst     [esp+88h+info.transform+1Ch]
+0x533AAD: fst     [esp+88h+info.transform+20h]
+0x533AB1: fst     [esp+88h+info.transform+24h]
+0x533AB5: fst     [esp+88h+info.transform+2Ch]
 0x533AB9: fld1
-0x533ABB: fst     [esp+88h+var_50]
-0x533ABF: fst     [esp+88h+var_3C]
-0x533AC3: fstp    [esp+88h+var_28]
-0x533AC7: fst     [esp+88h+var_20]
-0x533ACB: fst     [esp+88h+var_1C]
-0x533ACF: fst     [esp+88h+var_18]
-0x533AD3: fstp    [esp+88h+var_14]
+0x533ABB: fst     [esp+88h+info.transform]
+0x533ABF: fst     [esp+88h+info.transform+14h]
+0x533AC3: fstp    [esp+88h+info.transform+28h]
+0x533AC7: fst     [esp+88h+info.transform+30h]
+0x533ACB: fst     [esp+88h+info.transform+34h]
+0x533ACF: fst     [esp+88h+info.transform+38h]
+0x533AD3: fstp    [esp+88h+info.transform+3Ch]
 0x533AD7: call    FormHeapAlloc
 0x533ADC: add     esp, 4
 0x533ADF: mov     [esp+84h+var_74], eax
 0x533AE3: cmp     eax, edi
 0x533AE5: mov     byte ptr [esp+84h+var_4], 2
 0x533AED: jz      short loc_533AFD
-0x533AEF: lea     edx, [esp+84h+var_70]
-0x533AF3: push    edx
-0x533AF4: mov     ecx, eax
-0x533AF6: call    sub_531FC0
+0x533AEF: lea     edx, [esp+84h+info]
+0x533AF3: push    edx; info
+0x533AF4: mov     ecx, eax; self
+0x533AF6: call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.
 0x533AFB: mov     edi, eax
 0x533AFD: mov     esi, [ebx+1A0h]
 0x533B03: cmp     esi, edi
@@ -102,58 +102,58 @@
 0x533B43: push    0
 0x533B45: push    3
 0x533B47: push    1Ch
-0x533B49: call    sub_8A7F20
+0x533B49: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B4E: push    0
 0x533B50: push    15h
 0x533B52: push    1Ch
-0x533B54: call    sub_8A7F20
+0x533B54: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B59: push    0
 0x533B5B: push    6
 0x533B5D: push    1Ch
-0x533B5F: call    sub_8A7F20
+0x533B5F: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B64: push    0
 0x533B66: push    7
 0x533B68: push    1Ch
-0x533B6A: call    sub_8A7F20
+0x533B6A: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B6F: push    0
 0x533B71: push    8
 0x533B73: push    1Ch
-0x533B75: call    sub_8A7F20
+0x533B75: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B7A: push    0
 0x533B7C: push    0Bh
 0x533B7E: push    1Ch
-0x533B80: call    sub_8A7F20
+0x533B80: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B85: add     esp, 48h
 0x533B88: push    0
 0x533B8A: push    12h
 0x533B8C: push    1Ch
-0x533B8E: call    sub_8A7F20
+0x533B8E: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B93: push    0
 0x533B95: push    14h
 0x533B97: push    1Ch
-0x533B99: call    sub_8A7F20
+0x533B99: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533B9E: push    0
 0x533BA0: push    18h
 0x533BA2: push    1Ch
-0x533BA4: call    sub_8A7F20
+0x533BA4: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533BA9: push    0
 0x533BAB: push    19h
 0x533BAD: push    1Ch
-0x533BAF: call    sub_8A7F20
+0x533BAF: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533BB4: push    0
 0x533BB6: push    1Ah
 0x533BB8: push    1Ch
-0x533BBA: call    sub_8A7F20
+0x533BBA: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533BBF: push    0
 0x533BC1: push    1Ch
 0x533BC3: push    1Ch
-0x533BC5: call    sub_8A7F20
+0x533BC5: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
 0x533BCA: add     esp, 48h
 0x533BCD: push    0
 0x533BCF: push    1Eh
 0x533BD1: push    1Ch
-0x533BD3: call    sub_8A7F20
-0x533BD8: mov     eax, [esp+90h+var_5C]
+0x533BD3: call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.
+0x533BD8: mov     eax, [esp+90h+info.propertyCapacityFlags]
 0x533BDC: add     esp, 0Ch
 0x533BDF: test    eax, eax
 0x533BE1: mov     [esp+84h+var_4], 0FFFFFFFFh
@@ -165,7 +165,7 @@
 0x533C04: test    ecx, ecx
 0x533C06: jnz     short loc_533C0E
 0x533C08: mov     ecx, ds:0BA7D9Ch
-0x533C0E: mov     edx, [esp+84h+var_64]
+0x533C0E: mov     edx, [esp+84h+info.propertyData]
 0x533C12: and     eax, 3FFFFFFFh
 0x533C17: add     eax, eax
 0x533C19: add     eax, eax
@@ -183,3 +183,22 @@
 0x533C35: mov     esp, ebp
 0x533C37: pop     ebp
 0x533C38: retn    8
+0x9B9410: mov     eax, [ebp+var_74]
+0x9B9413: push    eax
+0x9B9414: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B9419: pop     ecx
+0x9B941A: retn
+0x9B941B: lea     ecx, [ebp+info]
+0x9B941E: jmp     sub_8A5090
+0x9B9423: mov     eax, [ebp+var_74]
+0x9B9426: push    eax
+0x9B9427: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B942C: pop     ecx
+0x9B942D: retn
+0x9B942E: mov     edx, [esp-4+arg_4]
+0x9B9432: lea     eax, [edx-74h]
+0x9B9435: mov     ecx, [edx-78h]
+0x9B9438: xor     ecx, eax
+0x9B943A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B943F: mov     eax, offset stru_AE37AC
+0x9B9444: jmp     ___CxxFrameHandler3

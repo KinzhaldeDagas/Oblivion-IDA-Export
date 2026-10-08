@@ -1,6 +1,6 @@
 0x8CF0F0: push    esi
 0x8CF0F1: mov     esi, ecx
-0x8CF0F3: call    ??1bhkCharacterPointCollector@@UAE@XZ; bhkCharacterPointCollector::~bhkCharacterPointCollector(void)
+0x8CF0F3: call    ??1bhkCharacterPointCollector@@UAE@XZ; TES4 authoritative: bhkCharacterPointCollector destructor releases object refs and dynamic arrays, including 0x30-byte contact storage.
 0x8CF0F8: test    byte ptr [esp+4+arg_0], 1
 0x8CF0FD: jz      short loc_8CF111
 0x8CF0FF: mov     ecx, ds:0BA7D98h

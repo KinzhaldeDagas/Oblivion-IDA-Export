@@ -3,7 +3,7 @@
 0x75E5C5: mov     esi, ecx
 0x75E5C7: push    eax
 0x75E5C8: mov     dword ptr [esi+44h], 0
-0x75E5CF: call    NiTimeController__SetTarget
+0x75E5CF: call    NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.
 0x75E5D4: mov     eax, [esi+30h]
 0x75E5D7: test    eax, eax
 0x75E5D9: jz      short loc_75E5FA

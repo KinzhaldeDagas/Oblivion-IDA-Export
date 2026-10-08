@@ -1,1 +1,1 @@
-HavokError
+struct HavokError;

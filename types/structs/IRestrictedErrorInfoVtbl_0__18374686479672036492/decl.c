@@ -1,1 +1,1 @@
-IRestrictedErrorInfoVtbl_0
+typedef IRestrictedErrorInfoVtbl IRestrictedErrorInfoVtbl_0;

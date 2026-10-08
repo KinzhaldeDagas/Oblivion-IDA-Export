@@ -164,7 +164,7 @@
 0x573512: mov     ecx, ss:dword_B12DD0[ebp]; this
 0x573518: push    eax; a2
 0x573519: mov     [esp+38h+var_4], 0FFFFFFFFh
-0x573521: call    sub_405680
+0x573521: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x573526: push    0C0h ; 'À'; Size
 0x57352B: call    FormHeapAlloc
 0x573530: add     esp, 4
@@ -172,17 +172,17 @@
 0x573537: test    eax, eax
 0x573539: mov     [esp+34h+var_4], 2
 0x573541: jz      short loc_57355D
-0x573543: push    ebx
-0x573544: push    2
-0x573546: push    0
-0x573548: push    1
-0x57354A: push    edi
-0x57354B: push    0
-0x57354D: push    0
-0x57354F: push    esi
-0x573550: push    4
-0x573552: mov     ecx, eax
-0x573554: call    sub_7174B0
+0x573543: push    ebx; triangleIndices
+0x573544: push    2; triangleCount
+0x573546: push    0; dataFlags
+0x573548: push    1; hasVertexColors
+0x57354A: push    edi; textureCoordinates
+0x57354B: push    0; colors
+0x57354D: push    0; normals
+0x57354F: push    esi; vertices
+0x573550: push    4; vertexCount
+0x573552: mov     ecx, eax; this
+0x573554: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x573559: mov     edi, eax
 0x57355B: jmp     short loc_57355F
 0x57355D: xor     edi, edi
@@ -210,9 +210,9 @@
 0x5735B0: mov     ecx, edi
 0x5735B2: call    NiObjectNET_SetName
 0x5735B7: push    1; char
-0x5735B9: push    offset dword_B256D0; int
+0x5735B9: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x5735BE: push    ebx; Src
-0x5735BF: call    NiSourceTexture__LoadTextureByFilename
+0x5735BF: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x5735C4: mov     ebx, eax
 0x5735C6: add     esp, 0Ch
 0x5735C9: test    ebx, ebx
@@ -234,14 +234,14 @@
 0x5735FE: mov     [esp+34h+a2], eax
 0x573602: jmp     short loc_57360C
 0x573604: mov     [esp+34h+a2], 0
-0x57360C: mov     ecx, [esp+34h+a2]
-0x573610: push    ebx
+0x57360C: mov     ecx, [esp+34h+a2]; this
+0x573610: push    ebx; texture
 0x573611: mov     byte ptr [esp+38h+var_4], 4
-0x573616: call    NiTexturingProperty__SetUnk08
+0x573616: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x57361B: mov     eax, [esp+34h+a2]
 0x57361F: push    eax; a2
 0x573620: mov     ecx, edi; this
-0x573622: call    sub_405680
+0x573622: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x573627: push    5Ch ; '\'; Size
 0x573629: call    FormHeapAlloc
 0x57362E: add     esp, 4
@@ -272,12 +272,12 @@
 0x57368A: mov     ecx, edi; this
 0x57368C: mov     byte ptr [esp+38h+var_4], 4
 0x573691: mov     [eax+24h], edx
-0x573694: call    sub_405680
+0x573694: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x573699: mov     edi, [edi+0B4h]
-0x57369F: push    esi
-0x5736A0: push    4
-0x5736A2: lea     ecx, [edi+0Ch]
-0x5736A5: call    sub_72A0F0
+0x57369F: push    esi; vertices
+0x5736A0: push    4; vertexCount
+0x5736A2: lea     ecx, [edi+0Ch]; self
+0x5736A5: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x5736AA: fldz
 0x5736AC: mov     eax, ss:dword_B12DD0[ebp]
 0x5736B2: push    ecx
@@ -300,13 +300,13 @@
 0x5736E6: mov     ecx, esi
 0x5736E8: call    NiNode_UpdateDynamicEffectState
 0x5736ED: mov     ecx, esi; this
-0x5736EF: call    NiAVObject_InitializePropertyState
+0x5736EF: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x5736F4: fldz
 0x5736F6: push    0; a3
 0x5736F8: push    ecx
 0x5736F9: mov     ecx, esi; this
 0x5736FB: fstp    [esp+3Ch+var_3C]; a2
-0x5736FE: call    NiAVObject_UpdateNiAVObject
+0x5736FE: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x573703: fld     [esp+34h+arg_4]
 0x573707: test    ebx, ebx
 0x573709: fstp    dword ptr [ebp+0B12DCCh]
@@ -325,7 +325,7 @@
 0x573733: call    eax
 0x573735: mov     ecx, [esp+34h+Src]
 0x573739: push    ecx
-0x57373A: call    FormHeapFree
+0x57373A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x57373F: add     esp, 4
 0x573742: mov     ecx, [esp+34h+var_C]
 0x573746: mov     large fs:0, ecx
@@ -336,3 +336,39 @@
 0x573751: pop     ebx
 0x573752: add     esp, 20h
 0x573755: retn    8
+0x9BE080: mov     eax, [ebp+4]
+0x9BE083: push    eax
+0x9BE084: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE089: pop     ecx
+0x9BE08A: retn
+0x9BE08B: mov     eax, [ebp+4]
+0x9BE08E: push    eax
+0x9BE08F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE094: pop     ecx
+0x9BE095: retn
+0x9BE096: mov     eax, [ebp+4]
+0x9BE099: push    eax
+0x9BE09A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE09F: pop     ecx
+0x9BE0A0: retn
+0x9BE0A1: lea     ecx, [ebp-18h]; void *
+0x9BE0A4: jmp     BSStringT_Clear
+0x9BE0A9: lea     ecx, [ebp-20h]; slot
+0x9BE0AC: jmp     NiPointerSlot_Release
+0x9BE0B1: mov     eax, [ebp+4]
+0x9BE0B4: push    eax
+0x9BE0B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE0BA: pop     ecx
+0x9BE0BB: retn
+0x9BE0BC: mov     eax, [ebp+4]
+0x9BE0BF: push    eax
+0x9BE0C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BE0C5: pop     ecx
+0x9BE0C6: retn
+0x9BE0C7: mov     edx, [esp+arg_4]
+0x9BE0CB: lea     eax, [edx-24h]
+0x9BE0CE: mov     ecx, [edx-28h]
+0x9BE0D1: xor     ecx, eax
+0x9BE0D3: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE0D8: mov     eax, offset stru_AE7884
+0x9BE0DD: jmp     ___CxxFrameHandler3

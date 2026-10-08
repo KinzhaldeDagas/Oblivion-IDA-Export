@@ -1,1 +1,1 @@
-bhkNiTriStripsShape
+struct bhkNiTriStripsShape;

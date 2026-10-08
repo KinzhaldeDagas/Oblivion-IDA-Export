@@ -1,4 +1,4 @@
-BSStringT *sub_A10990()
+NiRTTI *sub_A10990()
 {
-  return sub_70E220(&stru_B42168, "NiDX9Renderer", (int)dword_B3F938);
+  return NiRTTI_Constructor(&stru_B42168, "NiDX9Renderer", &stru_B3F938); /*0xa109a4*/
 }

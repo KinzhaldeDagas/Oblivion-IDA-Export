@@ -11,7 +11,6 @@
 0x8F5323: lea     esi, [eax+10h]
 0x8F5326: mov     ecx, edi
 0x8F5328: jmp     short loc_8F5330
-0x8F532A: align 10h
 0x8F5330: movaps  xmm0, xmmword ptr [edx]
 0x8F5333: movaps  xmmword ptr [esi], xmm0
 0x8F5336: add     edx, 10h

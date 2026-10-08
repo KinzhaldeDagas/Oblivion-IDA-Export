@@ -89,7 +89,7 @@
 0x98EB74: imul    eax, 28h ; '('
 0x98EB77: mov     edx, ecx
 0x98EB79: sar     edx, 5
-0x98EB7C: add     eax, dword_BAAAC0[edx*4]
+0x98EB7C: add     eax, dword ptr unk_BAAAC0[edx*4]
 0x98EB83: jmp     short loc_98EB8A
 0x98EB85: mov     eax, offset aA_1
 0x98EB8A: test    byte ptr [eax+4], 20h

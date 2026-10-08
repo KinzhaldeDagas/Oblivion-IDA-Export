@@ -1,6 +1,6 @@
-0x6D0760: push    esi
+0x6D0760: push    esi; NiGeomMorpherController target setter. Accepts a compatible NiObjectNET target, delegates to NiTimeController::SetTarget, resets morph-controller state when morphData exists, and marks targetSetPending +0x5B; incompatible targets clear the controller target.
 0x6D0761: push    edi
-0x6D0762: mov     edi, [esp+8+arg_0]
+0x6D0762: mov     edi, [esp+8+target]
 0x6D0766: mov     eax, [edi]
 0x6D0768: mov     edx, [eax+0Ch]
 0x6D076B: mov     esi, ecx
@@ -10,7 +10,7 @@
 0x6D0773: mov     ecx, esi
 0x6D0775: jz      short loc_6D0798
 0x6D0777: push    edi
-0x6D0778: call    NiTimeController__SetTarget
+0x6D0778: call    NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.
 0x6D077D: cmp     dword ptr [esi+50h], 0
 0x6D0781: jz      short loc_6D079F
 0x6D0783: mov     eax, [esi]
@@ -22,7 +22,7 @@
 0x6D0794: pop     esi
 0x6D0795: retn    4
 0x6D0798: push    0
-0x6D079A: call    NiTimeController__SetTarget
+0x6D079A: call    NiTimeController__SetTarget; Retargets a controller while holding a temporary self-reference. Removes it from the previous NiObjectNET controller chain, assigns non-owning target +0x30, avoids duplicate insertion, then inserts into the new target's refcounted chain and propagates manager-controlled target state when applicable.
 0x6D079F: pop     edi
 0x6D07A0: pop     esi
 0x6D07A1: retn    4

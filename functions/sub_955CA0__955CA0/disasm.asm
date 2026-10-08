@@ -73,7 +73,6 @@
 0x955D85: xor     eax, eax
 0x955D87: mov     [esp+0A8h+var_94], eax
 0x955D8B: jmp     short loc_955D90
-0x955D8D: align 10h
 0x955D90: mov     ebp, [esp+eax*4+0A8h+var_7C]
 0x955D94: test    ebp, ebp
 0x955D96: lea     ebx, [ebp+38h]

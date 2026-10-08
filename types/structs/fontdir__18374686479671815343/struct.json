@@ -1,196 +1,306 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "fontdir",
+  "definition": "struct __unaligned __declspec(align(1)) fontdir\n{\nWORD num_of_resources;\nWORD res_id;\nWORD dfVersion;\nDWORD dfSize;\nCHAR dfCopyright[60];\nWORD dfType;\nWORD dfPoints;\nWORD dfVertRes;\nWORD dfHorizRes;\nWORD dfAscent;\nWORD dfInternalLeading;\nWORD dfExternalLeading;\nBYTE dfItalic;\nBYTE dfUnderline;\nBYTE dfStrikeOut;\nWORD dfWeight;\nBYTE dfCharSet;\nWORD dfPixWidth;\nWORD dfPixHeight;\nBYTE dfPitchAndFamily;\nWORD dfAvgWidth;\nWORD dfMaxWidth;\nBYTE dfFirstChar;\nBYTE dfLastChar;\nBYTE dfDefaultChar;\nBYTE dfBreakChar;\nWORD dfWidthBytes;\nDWORD dfDevice;\nDWORD dfFace;\nDWORD dfReserved;\nCHAR szFaceName[32];\n}\n",
   "id": 18374686479671815343,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_of_resources",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "res_id",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfVersion",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfSize",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfCopyright",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 60
+      "offset_hex": "0xA",
+      "size": 60,
+      "type": "CHAR[60]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfType",
       "offset": 70,
       "offset_hex": "0x46",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfPoints",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfVertRes",
       "offset": 74,
-      "offset_hex": "0x4a",
-      "size": 2
+      "offset_hex": "0x4A",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfHorizRes",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 2
+      "offset_hex": "0x4C",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfAscent",
       "offset": 78,
-      "offset_hex": "0x4e",
-      "size": 2
+      "offset_hex": "0x4E",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfInternalLeading",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfExternalLeading",
       "offset": 82,
       "offset_hex": "0x52",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfItalic",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfUnderline",
       "offset": 85,
       "offset_hex": "0x55",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfStrikeOut",
       "offset": 86,
       "offset_hex": "0x56",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfWeight",
       "offset": 87,
       "offset_hex": "0x57",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfCharSet",
       "offset": 89,
       "offset_hex": "0x59",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfPixWidth",
       "offset": 90,
-      "offset_hex": "0x5a",
-      "size": 2
+      "offset_hex": "0x5A",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfPixHeight",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 2
+      "offset_hex": "0x5C",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfPitchAndFamily",
       "offset": 94,
-      "offset_hex": "0x5e",
-      "size": 1
+      "offset_hex": "0x5E",
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfAvgWidth",
       "offset": 95,
-      "offset_hex": "0x5f",
-      "size": 2
+      "offset_hex": "0x5F",
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfMaxWidth",
       "offset": 97,
       "offset_hex": "0x61",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfFirstChar",
       "offset": 99,
       "offset_hex": "0x63",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfLastChar",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfDefaultChar",
       "offset": 101,
       "offset_hex": "0x65",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfBreakChar",
       "offset": 102,
       "offset_hex": "0x66",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfWidthBytes",
       "offset": 103,
       "offset_hex": "0x67",
-      "size": 2
+      "size": 2,
+      "type": "WORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfDevice",
       "offset": 105,
       "offset_hex": "0x69",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfFace",
       "offset": 109,
-      "offset_hex": "0x6d",
-      "size": 4
+      "offset_hex": "0x6D",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dfReserved",
       "offset": 113,
       "offset_hex": "0x71",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szFaceName",
       "offset": 117,
       "offset_hex": "0x75",
-      "size": 32
+      "size": 32,
+      "type": "CHAR[32]"
     }
   ],
   "name": "fontdir",
+  "ordinal": 1545,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 149
 }

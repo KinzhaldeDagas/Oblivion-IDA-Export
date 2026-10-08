@@ -10,11 +10,11 @@
 0x4441C2: push    ebx
 0x4441C3: mov     ebx, [esp+120h+arg_C]
 0x4441CA: push    ebp
-0x4441CB: mov     ebp, dword ptr [esp+124h+ArgList]
+0x4441CB: mov     ebp, [esp+124h+ArgList]
 0x4441D2: push    esi
 0x4441D3: push    ebx; int
 0x4441D4: push    ebp; ArgList
-0x4441D5: call    sub_4F1630
+0x4441D5: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x4441DA: mov     esi, eax
 0x4441DC: test    esi, esi
 0x4441DE: jnz     short loc_4441FE
@@ -40,7 +40,7 @@
 0x44421A: test    esi, esi
 0x44421C: jz      loc_444321
 0x444222: mov     ecx, esi; this
-0x444224: call    TESObjectCELL_IsInterior
+0x444224: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x444229: test    al, al
 0x44422B: push    esi; a2
 0x44422C: mov     ecx, edi; this
@@ -122,8 +122,8 @@
 0x444311: call    sub_4AF170
 0x444316: test    eax, eax
 0x444318: jz      short loc_444321
-0x44431A: mov     ecx, eax
-0x44431C: call    sub_4E7610
+0x44431A: mov     ecx, eax; this
+0x44431C: call    TESPathGrid_LoadOrResolveGraph; Verified exterior cell-loading path: after obtaining the cell's TESPathGrid, invokes TESPathGrid_LoadOrResolveGraph to load serialized chunks if absent, resolve deferred cross-cell links, and conditionally rebuild graph rendering.
 0x444321: pop     esi
 0x444322: pop     ebp
 0x444323: pop     ebx

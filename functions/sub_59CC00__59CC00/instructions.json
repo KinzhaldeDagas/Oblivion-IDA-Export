@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x59CDDD",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x59CE74",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,67 +1135,67 @@
   },
   {
     "ea": "0x59CE96",
-    "line": "push    ebx",
+    "line": "push    ebx; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59CE97",
-    "line": "push    2",
+    "line": "push    2; triangleCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CE99",
-    "line": "push    0",
+    "line": "push    0; dataFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CE9B",
-    "line": "push    1",
+    "line": "push    1; hasVertexColors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CE9D",
-    "line": "push    edi",
+    "line": "push    edi; textureCoordinates",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59CE9E",
-    "line": "push    0",
+    "line": "push    0; colors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CEA0",
-    "line": "push    0",
+    "line": "push    0; normals",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CEA2",
-    "line": "push    esi",
+    "line": "push    esi; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59CEA3",
-    "line": "push    4",
+    "line": "push    4; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CEA5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59CEA7",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x59CF09",
-    "line": "push    offset dword_B256D0; int",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x59CF0F",
-    "line": "call    NiSourceTexture__LoadTextureByFilename",
+    "line": "call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,13 +1471,13 @@
   },
   {
     "ea": "0x59CF40",
-    "line": "push    eax",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59CF41",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x59CF48",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x59CF61",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x59CFD3",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1729,55 +1729,55 @@
   },
   {
     "ea": "0x59CFDE",
-    "line": "push    esi",
+    "line": "push    esi; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59CFDF",
-    "line": "push    4",
+    "line": "push    4; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CFE1",
-    "line": "lea     ecx, [edi+0Ch]",
+    "line": "lea     ecx, [edi+0Ch]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x59CFE4",
-    "line": "call    sub_72A0F0",
+    "line": "call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59CFE9",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CFEB",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CFED",
-    "line": "push    1",
+    "line": "push    1; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59CFEF",
-    "line": "push    ebp",
+    "line": "push    ebp; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x59CFF0",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x59D00A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1894,5 +1894,209 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BFFF0",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFFF3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFFF4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFFF9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFFFA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFFFB",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFFFE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BFFFF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0004",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0005",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0006",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0009",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C000A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C000F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0010",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0011",
+    "line": "lea     ecx, [ebp-20h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0014",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0019",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C001C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C001D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0022",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0023",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0024",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0027",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C0028",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C002D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C002E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C002F",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C0033",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0036",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0039",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C003B",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0040",
+    "line": "mov     eax, offset stru_AE9364",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0045",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

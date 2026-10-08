@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x790E90",
-    "line": "push    ebp",
+    "line": "push    ebp; Fixed-stride 0x0C vector insert/fill machinery for OB_CBranchChildRef records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791460 always requests count=1.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x790EBD",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x790EC8",
-    "line": "mov     [ebp+var_1C], ecx",
+    "line": "mov     [ebp+var_1C.parentVertexIndex], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x790ED0",
-    "line": "mov     [ebp+var_18], edx",
+    "line": "mov     [ebp+var_1C.percentBetweenParentVertices], edx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x790ED3",
-    "line": "mov     [ebp+var_14], eax",
+    "line": "mov     [ebp+var_1C.childBranch], eax; CBranch*.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x790EF1",
-    "line": "mov     edi, [ebp+arg_8]",
+    "line": "mov     edi, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x790F24",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,13 +607,13 @@
   },
   {
     "ea": "0x790F95",
-    "line": "push    ebx; char *",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x790F96",
-    "line": "call    sub_78FAA0",
+    "line": "call    OB_stVectorBranchChildRef_Allocate_010201A0; Allocates count contiguous 0x0C-byte OB_CBranchChildRef records from FormHeap. Checks count*12 overflow and throws std::bad_alloc before allocation on overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x790F9E",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x790FA2",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -643,13 +643,13 @@
   },
   {
     "ea": "0x790FA6",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x790FA9",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x790FAF",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -751,13 +751,13 @@
   },
   {
     "ea": "0x790FD3",
-    "line": "mov     byte ptr [ebp+arg_8], 0",
+    "line": "mov     byte ptr [ebp+count], 0",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x790FD7",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x790FDB",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x790FE1",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x791015",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x79101D",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x791049",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x79104D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x791061",
-    "line": "mov     ebx, [ebp+arg_4]",
+    "line": "mov     ebx, [ebp+position]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x79107A",
-    "line": "mov     [ebp+arg_C], ecx",
+    "line": "mov     [ebp+value], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x791086",
-    "line": "mov     [ebp+arg_C], eax",
+    "line": "mov     [ebp+value], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1321,7 +1321,7 @@
   },
   {
     "ea": "0x7910C2",
-    "line": "mov     eax, [ebp+arg_C]",
+    "line": "mov     eax, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1345,7 +1345,7 @@
   },
   {
     "ea": "0x7910CE",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1357,19 +1357,19 @@
   },
   {
     "ea": "0x7910D1",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7910D2",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7910D3",
-    "line": "call    sub_790460",
+    "line": "call    OB_stVectorBranchChildRef_FillRange_010201A0; Copies one 0x0C-byte OB_CBranchChildRef value into every record in [first,last) and returns last. Used by both in-place child-vector insert/fill bodies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x7910FF",
-    "line": "mov     [ebp+arg_8], eax",
+    "line": "mov     [ebp+count], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x791107",
-    "line": "mov     edx, [ebp+arg_C]",
+    "line": "mov     edx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1513,31 +1513,31 @@
   },
   {
     "ea": "0x79110D",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+count]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x791110",
-    "line": "push    edx",
+    "line": "push    edx; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791111",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791112",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791113",
-    "line": "call    sub_79AAA0",
+    "line": "call    OB_CBranchChildRef_CopyBackwardThunk_010201A0; Checked insertion shifts the initialized CBranchChildRef suffix backward in 0x0C-byte records before filling the insertion gap; RT4.1 names the equivalent record SIdvBranch only after this Oblivion layout was established.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x79111B",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -1561,19 +1561,19 @@
   },
   {
     "ea": "0x79111E",
-    "line": "push    edi",
+    "line": "push    edi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79111F",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791120",
-    "line": "call    sub_790460",
+    "line": "call    OB_stVectorBranchChildRef_FillRange_010201A0; Copies one 0x0C-byte OB_CBranchChildRef value into every record in [first,last) and returns last. Used by both in-place child-vector insert/fill bodies.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1636,5 +1636,47 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBC10",
+    "line": "mov     edx, [esp-4+position]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBC14",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC17",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBC1A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBC1C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC21",
+    "line": "mov     eax, offset stru_AF4AD4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBC26",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

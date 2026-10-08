@@ -1,19 +1,36 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_848950",
+  "chunks": [
+    [
+      "0x848950",
+      "0x848AC3"
+    ],
+    [
+      "0x9D3390",
+      "0x9D33B3"
+    ]
+  ],
+  "chunks_sha256": "8fbd8bd0d8d6ef3008bc7d9defd38a79b205b60b1bf731328b1b734af5b643dd",
+  "comment_regular": "Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18E. It binds the effect texture and render-state fields; NiD3DShader_SetupShaderPrograms applies the active shader's owned fill/rim/fVars/U/V maps afterward.",
+  "comment_repeatable": "Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18E. It binds the effect texture and render-state fields; NiD3DShader_SetupShaderPrograms applies the active shader's owned fill/rim/fVars/U/V maps afterward.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiD3DPassArray_AddTextureEffectPass2x",
   "end_ea": "0x848AC3",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_848950",
+  "name": "NiD3DPassArray_AddTextureEffectPass2x",
   "segment": ".text",
   "sha256": "259bcbd454399c2c4ee696bf7bfb0697266c538635f75f0d96af53d1f8b3128c",
   "size": 371,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x848950",
-  "type": "void __thiscall(NiTArray_NiD3DPass *this, NiGeometry *, int, int, NiD3DPass *)",
-  "xrefs_from_count": 148,
+  "total_chunk_size": 406,
+  "type": "void __thiscall(NiTArray_NiD3DPass *this, NiGeometry *geometry, int arg3, int arg4, BSShaderProperty *shaderProperty)",
+  "xrefs_from_count": 159,
   "xrefs_to_count": 3
 }

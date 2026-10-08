@@ -1,4 +1,4 @@
-0x6A4680: push    esi
+0x6A4680: push    esi; ScriptEffect Update vfunc: reuse the active effect ScriptEventList and run ScriptEffectUpdate with this frame/update delta.
 0x6A4681: mov     esi, ecx
 0x6A4683: cmp     dword ptr [esi+38h], 0
 0x6A4687: jz      short loc_6A46A8
@@ -13,6 +13,6 @@
 0x6A469D: call    eax
 0x6A469F: mov     ecx, [esi+38h]
 0x6A46A2: push    eax; int
-0x6A46A3: call    sub_4F9F60
+0x6A46A3: call    ScriptEffect_RunUpdateEvent; Wrapper for ScriptEffectUpdate: calls ScriptRunner_RunEvent with start=0, finish=0, elapsedSeconds=delta.
 0x6A46A8: pop     esi
 0x6A46A9: retn    4

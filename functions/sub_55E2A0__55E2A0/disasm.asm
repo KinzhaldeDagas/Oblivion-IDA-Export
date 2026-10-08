@@ -1,5 +1,5 @@
-0x55E2A0: push    ebx
-0x55E2A1: mov     ebx, [esp+4+arg_0]
+0x55E2A0: push    ebx; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x55E2A1: mov     ebx, [esp+4+incoming]
 0x55E2A5: push    esi
 0x55E2A6: push    edi
 0x55E2A7: mov     edi, ecx

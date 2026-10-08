@@ -6,7 +6,7 @@
 0x7B23CB: push    eax
 0x7B23CC: push    ebx
 0x7B23CD: mov     esi, ecx
-0x7B23CF: call    sub_7ECB10
+0x7B23CF: call    j_BSShaderProperty_CopyCloneMembers
 0x7B23D4: mov     edi, [ebx+0A0h]
 0x7B23DA: cmp     edi, [esi+0A0h]
 0x7B23E0: jz      short loc_7B241C

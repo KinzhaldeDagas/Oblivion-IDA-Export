@@ -5,7 +5,7 @@
 0x73A64B: jz      short loc_73A65B
 0x73A64D: call    sub_6EBCB0
 0x73A652: push    esi
-0x73A653: call    FormHeapFree
+0x73A653: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73A658: add     esp, 4
 0x73A65B: pop     esi
 0x73A65C: retn

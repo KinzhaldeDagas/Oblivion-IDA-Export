@@ -1,5 +1,5 @@
-void __thiscall LightEffect_PreLoad(int *this, int a2)
+void __thiscall LightEffect_PreLoad(LightEffect_DecodedLayout *self, int context)
 {
-  nullsub_returnvVoid_1arg(a2);
-  sub_6948B0(this);
+  nullsub_returnvVoid_1arg(context); /*0x694ab8*/
+  LightEffect_TeardownTransientPointLight(self);// PreLoad tears down any existing transient LightEffect point light and its native full-list entry. /*0x694abf*/
 }

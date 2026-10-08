@@ -1,20 +1,20 @@
-int sub_54FE20()
+_DWORD **sub_54FE20()
 {
-  int result; // eax
+  _DWORD **result; // eax
   int (__thiscall ***v1)(_DWORD, int); // ecx
 
-  result = dword_B39B80;
-  if ( dword_B39B80 )
+  result = (_DWORD **)g_faceGenManager; /*0x54fe20*/
+  if ( g_faceGenManager ) /*0x54fe20*/
   {
-    if ( *(_DWORD *)(result + 0xDAC) )
+    if ( result[0x36B] ) /*0x54fe29*/
     {
-      sub_54F840(*(_DWORD **)(result + 0xDAC));
-      result = dword_B39B80;
-      v1 = *(int (__thiscall ****)(_DWORD, int))(dword_B39B80 + 0xDAC);
-      if ( v1 )
-        result = (**v1)(v1, 1);
-      *(_DWORD *)(dword_B39B80 + 0xDAC) = 0;
+      sub_54F840(result[0x36B]); /*0x54fe38*/
+      result = (_DWORD **)g_faceGenManager; /*0x54fe3d*/
+      v1 = *((int (__thiscall ****)(_DWORD, int))g_faceGenManager + 0x36B); /*0x54fe42*/
+      if ( v1 ) /*0x54fe4a*/
+        result = (_DWORD **)(**v1)(v1, 1); /*0x54fe52*/
+      *((_DWORD *)g_faceGenManager + 0x36B) = 0; /*0x54fe5a*/
     }
   }
-  return result;
+  return result; /*0x54fe64*/
 }

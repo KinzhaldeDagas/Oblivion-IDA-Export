@@ -11,7 +11,7 @@
 0x4F9714: mov     esi, ecx
 0x4F9716: push    esi
 0x4F9717: mov     ecx, edi
-0x4F9719: call    TESFile_InitializeFormFromRecord
+0x4F9719: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4F971E: push    0; a2
 0x4F9720: mov     ecx, esi; this
 0x4F9722: call    TESForm_SetIsLinked
@@ -20,7 +20,6 @@
 0x4F972E: test    eax, eax
 0x4F9730: jz      loc_4F9869
 0x4F9736: jmp     short loc_4F9740
-0x4F9738: align 10h
 0x4F9740: cmp     eax, 4D414E46h
 0x4F9745: jg      loc_4F97D6
 0x4F974B: jz      short loc_4F97B2
@@ -34,7 +33,7 @@
 0x4F976C: push    200h; a4
 0x4F9771: push    ebx; Dst
 0x4F9772: mov     ecx, edi; a1
-0x4F9774: call    TESFile_GetChunkData
+0x4F9774: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4F9779: mov     eax, [esi]
 0x4F977B: mov     edx, [eax+0D8h]
 0x4F9781: push    ebx
@@ -47,7 +46,7 @@
 0x4F9798: push    0; a4
 0x4F979A: push    ebx; Dst
 0x4F979B: mov     ecx, edi; a1
-0x4F979D: call    TESFile_GetChunkData
+0x4F979D: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4F97A2: push    0; a3
 0x4F97A4: push    ebx; a2
 0x4F97A5: lea     ecx, [esi+34h]; this
@@ -91,7 +90,7 @@
 0x4F9811: push    0Ch; a4
 0x4F9813: push    ebx; Dst
 0x4F9814: mov     ecx, edi; a1
-0x4F9816: call    TESFile_GetChunkData
+0x4F9816: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4F981B: test    ebx, ebx
 0x4F981D: jz      short loc_4F984F
 0x4F981F: cmp     dword ptr [esi+2Ch], 0

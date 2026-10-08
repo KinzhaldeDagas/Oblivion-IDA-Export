@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x5AF23D",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5AF243",
-    "line": "push    1Eh",
+    "line": "push    1Eh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5AF245",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,19 +247,19 @@
   },
   {
     "ea": "0x5AF281",
-    "line": "push    ecx",
+    "line": "push    ecx; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5AF282",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5AF288",
-    "line": "call    TESObjectREF_GetItemCount",
+    "line": "call    TESObjectREFR_GetItemCount; TESObjectREFR inventory count accessor: returns 0 when the reference has no container or no ContainerChanges; otherwise asks ContainerExtraData_GetItemCount(this, item), which combines base TESContainer count with EntryData.countDelta. Exact ABI is thiscall (TESObjectREFR *this, TESForm *item).",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5AF2AB",
-    "line": "mov     ecx, [esi+0Bh]",
+    "line": "mov     ecx, [esi+0Bh]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5AF2CC",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-NiPSysResetOnLoopCtlr
+struct NiPSysResetOnLoopCtlr;

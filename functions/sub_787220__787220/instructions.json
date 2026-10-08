@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x787220",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; 2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x787225",
-    "line": "mov     edi, [esp+18h+arg_4]",
+    "line": "mov     edi, [esp+18h+lodCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x78722C",
-    "line": "mov     [esp+18h+arg_4], eax",
+    "line": "mov     [esp+18h+lodCount], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787230",
-    "line": "fild    [esp+18h+arg_4]",
+    "line": "fild    [esp+18h+lodCount]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x78723A",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78723E",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x787244",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x78724C",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787250",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x787256",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,25 +127,25 @@
   },
   {
     "ea": "0x78725D",
-    "line": "mov     [esp+18h+arg_4], esi",
+    "line": "mov     [esp+18h+lodCount], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787261",
-    "line": "fisub   [esp+18h+arg_4]",
+    "line": "fisub   [esp+18h+lodCount]",
     "mnemonic": "fisub",
     "size": 4
   },
   {
     "ea": "0x787265",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787269",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x787283",
-    "line": "mov     [esp+18h+arg_4], ecx",
+    "line": "mov     [esp+18h+lodCount], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x787287",
-    "line": "fild    [esp+18h+arg_4]",
+    "line": "fild    [esp+18h+lodCount]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x78728F",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7872A2",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x7872AA",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7872AE",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7872B2",
-    "line": "fld     [esp+18h+arg_8]",
+    "line": "fld     [esp+18h+overlapRadius]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x7872D7",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+lodLevel]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7872DB",
-    "line": "fld     [esp+18h+arg_C]",
+    "line": "fld     [esp+18h+transitionFactor]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7872E7",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x7872F1",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x7872F7",
-    "line": "fcom    [esp+18h+arg_4]",
+    "line": "fcom    [esp+18h+lodCount]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x787302",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x78730A",
-    "line": "fld     [esp+18h+arg_14]",
+    "line": "fld     [esp+18h+targetAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x78730E",
-    "line": "mov     eax, [esp+18h+arg_20]",
+    "line": "mov     eax, [esp+18h+highLod]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -505,25 +505,25 @@
   },
   {
     "ea": "0x787322",
-    "line": "fsub    [esp+18h+arg_4]",
+    "line": "fsub    [esp+18h+lodCount]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x787326",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78732A",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x78732E",
-    "line": "fld     [esp+18h+arg_10]",
+    "line": "fld     [esp+18h+curveExponent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x787337",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x78733B",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x78733F",
-    "line": "mov     ecx, [esp+18h+arg_18]",
+    "line": "mov     ecx, [esp+18h+highAlpha]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x787347",
-    "line": "fadd    [esp+18h+arg_14]",
+    "line": "fadd    [esp+18h+targetAlpha]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x78734D",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+lodLevel]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x787355",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x78735B",
-    "line": "fcom    [esp+18h+arg_4]",
+    "line": "fcom    [esp+18h+lodCount]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x787366",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -637,13 +637,13 @@
   },
   {
     "ea": "0x78736E",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787372",
-    "line": "mov     edx, [esp+18h+arg_24]",
+    "line": "mov     edx, [esp+18h+lowLod]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -667,19 +667,19 @@
   },
   {
     "ea": "0x78737D",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787381",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787385",
-    "line": "fld     [esp+18h+arg_10]",
+    "line": "fld     [esp+18h+curveExponent]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -691,19 +691,19 @@
   },
   {
     "ea": "0x78738E",
-    "line": "fstp    [esp+18h+arg_4]",
+    "line": "fstp    [esp+18h+lodCount]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x787392",
-    "line": "fld     [esp+18h+arg_4]",
+    "line": "fld     [esp+18h+lodCount]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x787396",
-    "line": "mov     eax, [esp+18h+arg_1C]",
+    "line": "mov     eax, [esp+18h+lowAlpha]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x7873A0",
-    "line": "fadd    [esp+10h+arg_14]",
+    "line": "fadd    [esp+10h+targetAlpha]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7873AE",
-    "line": "mov     ecx, [esp+18h+arg_18]",
+    "line": "mov     ecx, [esp+18h+highAlpha]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x7873B4",
-    "line": "fld     [esp+18h+arg_14]",
+    "line": "fld     [esp+18h+targetAlpha]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x7873BC",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7873C1",
-    "line": "mov     edx, [esp+18h+arg_20]",
+    "line": "mov     edx, [esp+18h+highLod]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -853,13 +853,13 @@
   },
   {
     "ea": "0x7873DF",
-    "line": "mov     edx, [esp+18h+arg_1C]",
+    "line": "mov     edx, [esp+18h+lowAlpha]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7873E3",
-    "line": "mov     eax, [esp+18h+arg_24]",
+    "line": "mov     eax, [esp+18h+lowLod]",
     "mnemonic": "mov",
     "size": 4
   },

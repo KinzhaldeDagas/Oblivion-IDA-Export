@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x5ADEEF",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5ADEF2",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x5ADEF9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5ADF5B",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x5ADFED",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x5ADFFC",
-    "line": "mov     eax, offset flt_B3B3DC",
+    "line": "mov     eax, (offset dword_B3B0B4+328h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x5AE010",
-    "line": "cmp     eax, offset dword_B3B3EC",
+    "line": "cmp     eax, (offset dword_B3B0B4+338h)",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x5AE026",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

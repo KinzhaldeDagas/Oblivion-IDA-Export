@@ -1,1 +1,1 @@
-LFH_heap_0
+typedef LFH_heap LFH_heap_0;

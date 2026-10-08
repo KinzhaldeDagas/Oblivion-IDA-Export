@@ -1,4 +1,4 @@
-0x5E8DE0: push    esi
+0x5E8DE0: push    esi; 3DTheft: marks actor modified when assigning created package/editor package. For created package refIDs, uses actor modified mask 0x20000, or 0x30000 for types 0x13/0x11.
 0x5E8DE1: mov     esi, [esp+4+arg_0]
 0x5E8DE5: test    esi, esi
 0x5E8DE7: push    edi

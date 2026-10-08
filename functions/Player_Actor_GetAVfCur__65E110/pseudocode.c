@@ -8,33 +8,33 @@ double __userpurge Player_Actor_GetAVfCur@<st0>(int a1@<ecx>, int a2@<ebx>, int 
   float v12; // [esp+Ch] [ebp+4h]
   float v14; // [esp+Ch] [ebp+4h]
 
-  if ( a5 == 0xB )
+  if ( a5 == 0xB ) /*0x65e11a*/
   {
-    v12 = *(float *)(a1 + 0x230);
-    v8 = *(float *)(a1 + 0x350);
-    v10 = *(float *)(a1 + 0x47C);
-    return (float)(sub_4D8FB0((TESObjectREFR *)a1) + v12 + v8 + v10);
+    v12 = *(float *)(a1 + 0x230); /*0x65e122*/
+    v8 = *(float *)(a1 + 0x350); /*0x65e12c*/
+    v10 = *(float *)(a1 + 0x47C); /*0x65e135*/
+    return (float)(sub_4D8FB0((TESObjectREFR *)a1) + v12 + v8 + v10); /*0x65e14d*/
   }
   else
   {
-    v11 = *(float *)(a1 + 4 * a5 + 0x204);
-    v9 = *(float *)(a1 + 4 * a5 + 0x324);
-    switch ( a5 )
+    v11 = *(float *)(a1 + 4 * a5 + 0x204); /*0x65e163*/
+    v9 = *(float *)(a1 + 4 * a5 + 0x324); /*0x65e16e*/
+    switch ( a5 ) /*0x65e171*/
     {
-      case 8:
-        v6 = *(float *)(a1 + 0x444);
+      case 8: /*0x65e171*/
+        v6 = *(float *)(a1 + 0x444); /*0x65e196*/
         break;
-      case 9:
-        v6 = *(float *)(a1 + 0x448);
+      case 9: /*0x65e171*/
+        v6 = *(float *)(a1 + 0x448); /*0x65e18e*/
         break;
-      case 0xA:
-        v6 = *(float *)(a1 + 0x44C);
+      case 0xA: /*0x65e171*/
+        v6 = *(float *)(a1 + 0x44C); /*0x65e186*/
         break;
       default:
-        v6 = *(float *)(a1 + 4 * a5 + 0x450);
+        v6 = *(float *)(a1 + 4 * a5 + 0x450); /*0x65e17d*/
         break;
     }
-    v14 = v6;
-    return (float)(Actor_GetBaseCalcAVf((int *)a1, a2, a3, a4, a5) + v11 + v9 + v14);
+    v14 = v6; /*0x65e19d*/
+    return (float)(Actor_GetBaseCalcAVf((int *)a1, a2, a3, a4, a5) + v11 + v9 + v14); /*0x65e1b5*/
   }
 }

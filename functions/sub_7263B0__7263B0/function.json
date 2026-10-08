@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 8,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7263B0",
+      "0x7263B8"
+    ]
+  ],
+  "chunks_sha256": "06b68f367a9b4aa1a7e9151c9e6ec16f4e0b5bde51e703a0c891b35ea4ec33d1",
+  "comment_regular": "\n\n[2026-10-03 Fallout comparison] Verified NiAdditionalGeometryData::SetDataBlockCount: adds 0x1C (m_aDataBlocks) to ECX and tailcalls NiTArray_SetSize. Analogous Fallout named function 0x82BF94B8. This resizes data blocks, not stream descriptors.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7263B0",
+  "display_name": "OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0",
   "end_ea": "0x7263B8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7263B0",
+  "name": "OB_NiAdditionalGeometryData_SetDataBlockCount_010201A0",
   "segment": ".text",
   "sha256": "06b68f367a9b4aa1a7e9151c9e6ec16f4e0b5bde51e703a0c891b35ea4ec33d1",
   "size": 8,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7263B0",
+  "total_chunk_size": 8,
   "type": "void __thiscall(unsigned __int16 *this, unsigned int)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 8

@@ -73,36 +73,36 @@
 0x5A6140: jz      short loc_5A616A
 0x5A6142: fld1
 0x5A6144: push    ecx
-0x5A6145: fstp    [esp+0Ch+a2]; a3
+0x5A6145: fstp    [esp+0Ch+a2]; value
 0x5A6148: mov     ecx, edi; this
-0x5A614A: push    0FA1h; a2
-0x5A614F: call    Tile_SetFloat
+0x5A614A: push    0FA1h; propertyCode
+0x5A614F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A6154: fld1
 0x5A6156: push    ecx
-0x5A6157: fstp    [esp+0Ch+a2]; a3
+0x5A6157: fstp    [esp+0Ch+a2]; value
 0x5A615A: mov     ecx, [esi+4]; this
-0x5A615D: push    0FB1h; a2
-0x5A6162: call    Tile_SetFloat
+0x5A615D: push    0FB1h; propertyCode
+0x5A6162: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A6167: pop     esi
 0x5A6168: pop     edi
 0x5A6169: retn
 0x5A616A: mov     ecx, esi; int
-0x5A616C: call    sub_584740
+0x5A616C: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5A6171: fld1
 0x5A6173: push    ecx
 0x5A6174: mov     ecx, [esi+4]; this
-0x5A6177: fstp    [esp+0Ch+a2]; a3
-0x5A617A: push    0FB1h; a2
-0x5A617F: call    Tile_SetFloat
+0x5A6177: fstp    [esp+0Ch+a2]; value
+0x5A617A: push    0FB1h; propertyCode
+0x5A617F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A6184: pop     esi
 0x5A6185: pop     edi
 0x5A6186: retn
 0x5A6187: fldz
 0x5A6189: push    ecx
 0x5A618A: mov     ecx, [esi+4]; this
-0x5A618D: fstp    [esp+0Ch+a2]; a3
-0x5A6190: push    0FB1h; a2
-0x5A6195: call    Tile_SetFloat
+0x5A618D: fstp    [esp+0Ch+a2]; value
+0x5A6190: push    0FB1h; propertyCode
+0x5A6195: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A619A: mov     eax, [esi+24h]
 0x5A619D: cmp     eax, 1
 0x5A61A0: jz      short loc_5A6213
@@ -113,13 +113,13 @@
 0x5A61AE: mov     ecx, esi; int
 0x5A61B0: pop     esi
 0x5A61B1: pop     edi
-0x5A61B2: jmp     sub_584390
+0x5A61B2: jmp     Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5A61B7: fld1
 0x5A61B9: push    ecx
 0x5A61BA: mov     ecx, [esi+4]; this
-0x5A61BD: fstp    [esp+0Ch+a2]; a3
-0x5A61C0: push    0FB1h; a2
-0x5A61C5: call    Tile_SetFloat
+0x5A61BD: fstp    [esp+0Ch+a2]; value
+0x5A61C0: push    0FB1h; propertyCode
+0x5A61C5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A61CA: mov     eax, [esi+24h]
 0x5A61CD: cmp     eax, 1
 0x5A61D0: jz      short loc_5A61FD
@@ -129,19 +129,19 @@
 0x5A61DC: jz      short loc_5A61F6
 0x5A61DE: fld     dword ptr ds:0A379B4h
 0x5A61E4: push    ecx
-0x5A61E5: fstp    [esp+0Ch+a2]; a3
-0x5A61E8: push    0FA1h; a2
+0x5A61E5: fstp    [esp+0Ch+a2]; value
+0x5A61E8: push    0FA1h; propertyCode
 0x5A61ED: mov     ecx, edi; this
-0x5A61EF: call    Tile_SetFloat
+0x5A61EF: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A61F4: jmp     short loc_5A61FD
 0x5A61F6: mov     ecx, esi; int
-0x5A61F8: call    sub_584390
+0x5A61F8: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5A61FD: fld     dword ptr ds:0A379B4h
 0x5A6203: push    ecx
-0x5A6204: fstp    [esp+0Ch+a2]; a3
+0x5A6204: fstp    [esp+0Ch+a2]; value
 0x5A6207: mov     ecx, edi; this
-0x5A6209: push    0FA1h; a2
-0x5A620E: call    Tile_SetFloat
+0x5A6209: push    0FA1h; propertyCode
+0x5A620E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A6213: pop     esi
 0x5A6214: pop     edi
 0x5A6215: retn

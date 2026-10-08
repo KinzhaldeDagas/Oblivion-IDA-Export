@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5DAA76",
-    "line": "push    ebx",
+    "line": "push    ebx; Count all 21 native player skills into five SkillMasteryLevel buckets for the Stats menu. Major/non-major membership is not consulted.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x5DAA79",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5DAA7E",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x5DAA87",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5DAA88",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x5DAA9C",
-    "line": "jl      short StatsMenu_MiscTab_HandleClick___CalcSkillMasteryCounts",
+    "line": "jl      short StatsMenu_MiscTab_HandleClick___CalcSkillMasteryCounts; Complete the fixed 21-skill mastery-count loop; the resulting five counts are purely value/rank based, independent of TESClass majors.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x5DAAA0",
-    "line": "mov     [esp+arg_10], 5",
+    "line": "mov     [esp+arg_10], 5; Finish counting the fixed 21 native skills into the five mastery buckets used by the Stats menu.",
     "mnemonic": "mov",
     "size": 8
   },

@@ -1,14 +1,14 @@
-0x5EC1F0: sub     esp, 10h
+0x5EC1F0: sub     esp, 10h; Verified actor-specific path-node cost: apply fPathPreferredPointBonus to preferred nodes for non-creature actors; use point bit 0x10 as an underwater-result cache and bit 0x08 as the node's below-water state; account for swim/movement restrictions and fPathNPCWadingPenalty. It is called by TESConnectedPoint_ComputeActorAwareEdgeCost.
 0x5EC1F3: fld1
 0x5EC1F5: push    esi
-0x5EC1F6: mov     esi, [esp+14h+arg_0]
+0x5EC1F6: mov     esi, [esp+14h+point]
 0x5EC1FA: fstp    [esp+14h+var_10]
 0x5EC1FE: test    esi, esi
 0x5EC200: push    edi
 0x5EC201: mov     edi, ecx
 0x5EC203: jz      loc_5EC3F4
-0x5EC209: mov     ecx, esi
-0x5EC20B: call    sub_4E8040
+0x5EC209: mov     ecx, esi; this
+0x5EC20B: call    PathGraphNode_IsPreferred; Verified preferred-node predicate: reads the least-significant bit of the Z float at graph-node+0x1C. The registered fPathPreferredPointBonus setting applies a bonus to this marked point for non-creature actors.
 0x5EC210: test    al, al
 0x5EC212: jz      short loc_5EC234
 0x5EC214: mov     eax, [edi]
@@ -22,23 +22,23 @@
 0x5EC22E: fsubrp  st(1), st
 0x5EC230: fstp    [esp+18h+var_10]
 0x5EC234: push    ebx
-0x5EC235: mov     ecx, esi
-0x5EC237: mov     byte ptr [esp+1Ch+arg_0], 0
+0x5EC235: mov     ecx, esi; this
+0x5EC237: mov     byte ptr [esp+1Ch+point], 0
 0x5EC23C: xor     bl, bl
-0x5EC23E: call    sub_67ECC0
+0x5EC23E: call    GraphNode_IsFlag01Set; Verified returns stateFlags bit 0x01; graph searches use it to avoid inserting a node into the open list more than once.
 0x5EC243: test    al, al
 0x5EC245: jnz     loc_5EC325
-0x5EC24B: mov     ecx, esi
-0x5EC24D: call    sub_67EC90
+0x5EC24B: mov     ecx, esi; this
+0x5EC24D: call    GraphNode_IsFlag02Set; Verified returns stateFlags bit 0x02; graph searches set it after processing a node and use it to avoid reprocessing.
 0x5EC252: test    al, al
 0x5EC254: jnz     loc_5EC325
-0x5EC25A: mov     ecx, esi
-0x5EC25C: call    sub_67ECF0
+0x5EC25A: mov     ecx, esi; this
+0x5EC25C: call    GraphNode_IsBelowWaterFlagSet; Verified returns stateFlags bit 0x08, the PathGrid loader's below-water point flag.
 0x5EC261: test    al, al
 0x5EC263: jz      loc_5EC317
-0x5EC269: mov     ecx, esi
+0x5EC269: mov     ecx, esi; this
 0x5EC26B: mov     bl, 1
-0x5EC26D: call    sub_4BEF40
+0x5EC26D: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x5EC272: mov     ecx, [eax]
 0x5EC274: mov     [esp+1Ch+var_C], ecx
 0x5EC278: mov     edx, [eax+4]
@@ -48,7 +48,7 @@
 0x5EC287: mov     eax, [eax+8]
 0x5EC28A: mov     [esp+1Ch+var_4], eax
 0x5EC28E: jz      short loc_5EC2AD
-0x5EC290: call    TESObjectCELL_IsInterior
+0x5EC290: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5EC295: test    al, al
 0x5EC297: jnz     short loc_5EC2F2
 0x5EC299: lea     ecx, [esp+1Ch+var_C]
@@ -58,13 +58,13 @@
 0x5EC2A9: test    al, al
 0x5EC2AB: jnz     short loc_5EC2F2
 0x5EC2AD: mov     ecx, edi; this
-0x5EC2AF: call    TESObjectREFR_GetParentCell
+0x5EC2AF: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EC2B4: mov     ecx, eax; this
-0x5EC2B6: call    TESObjectCELL_IsInterior
+0x5EC2B6: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5EC2BB: test    al, al
 0x5EC2BD: mov     ecx, edi; this
 0x5EC2BF: jz      short loc_5EC2C8
-0x5EC2C1: call    TESObjectREFR_GetParentCell
+0x5EC2C1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5EC2C6: jmp     short loc_5EC2ED
 0x5EC2C8: push    0; int
 0x5EC2CA: call    TESObjectREFR_GetWorldSpace
@@ -88,19 +88,19 @@
 0x5EC30A: call    Actor_IsUnderwater??
 0x5EC30F: test    al, al
 0x5EC311: jz      short loc_5EC317
-0x5EC313: mov     byte ptr [esp+1Ch+arg_0], bl
-0x5EC317: mov     ecx, [esp+1Ch+arg_0]
-0x5EC31B: push    ecx
-0x5EC31C: mov     ecx, esi
-0x5EC31E: call    sub_67ED30
+0x5EC313: mov     byte ptr [esp+1Ch+point], bl
+0x5EC317: mov     ecx, [esp+1Ch+point]
+0x5EC31B: push    ecx; value
+0x5EC31C: mov     ecx, esi; this
+0x5EC31E: call    PathGraphNode_SetUnderwaterCache; Verified sets/clears stateFlags bit 0x10 from the result of Actor_IsUnderwater during point traversal-cost evaluation.
 0x5EC323: jmp     short loc_5EC339
-0x5EC325: mov     ecx, esi
-0x5EC327: call    sub_67ED20
-0x5EC32C: mov     ecx, esi
-0x5EC32E: mov     byte ptr [esp+1Ch+arg_0], al
-0x5EC332: call    sub_67ECF0
+0x5EC325: mov     ecx, esi; this
+0x5EC327: call    PathGraphNode_IsUnderwaterCacheSet; Verified returns stateFlags bit 0x10, used as an actor-specific cached underwater result.
+0x5EC32C: mov     ecx, esi; this
+0x5EC32E: mov     byte ptr [esp+1Ch+point], al
+0x5EC332: call    GraphNode_IsBelowWaterFlagSet; Verified returns stateFlags bit 0x08, the PathGrid loader's below-water point flag.
 0x5EC337: mov     bl, al
-0x5EC339: cmp     byte ptr [esp+1Ch+arg_0], 0
+0x5EC339: cmp     byte ptr [esp+1Ch+point], 0
 0x5EC33E: mov     ecx, edi
 0x5EC340: jz      short loc_5EC3BF
 0x5EC342: mov     edx, [edi]

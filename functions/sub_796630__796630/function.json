@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x796630",
+      "0x796723"
+    ]
+  ],
+  "chunks_sha256": "83d212d434cda7239b83b69e6bb96685b942500127b9ba5ac0676ba42cf3f594",
+  "comment_regular": "\n\n[2026-10-03 atlas/material correspondence] Embedded remap uses retained local coordinates for matching map IDs. Final export may therefore be atlas-space rather than local-space. Plugin selects final UVs unchanged only with a resolved composite texture and a corresponding embedded frond-map entry; individual textures use retained local coordinates. Atlas UVs cannot silently fall back to an individual texture when local data is unavailable.\n\nOblivion CIndexedGeometry::ChangeTexCoord. For the current vertex, remaps retained diffuse UVs only when its saved map index matches changedMapIndex; applies the global T sign flip before appending.",
+  "comment_repeatable": "Oblivion CIndexedGeometry::ChangeTexCoord. For the current vertex, remaps retained diffuse UVs only when its saved map index matches changedMapIndex; applies the global T sign flip before appending.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_796630",
+  "display_name": "OB_CIndexedGeometry_ChangeTexCoord_010201A0",
   "end_ea": "0x796723",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_796630",
+  "name": "OB_CIndexedGeometry_ChangeTexCoord_010201A0",
   "segment": ".text",
   "sha256": "83d212d434cda7239b83b69e6bb96685b942500127b9ba5ac0676ba42cf3f594",
   "size": 243,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x796630",
-  "type": "int __thiscall(char **this, float, float *)",
+  "total_chunk_size": 243,
+  "type": "void __thiscall(OB_CIndexedGeometry_010201A0 *this, unsigned __int8 changedMapIndex, float *newTexCoords)",
   "xrefs_from_count": 91,
   "xrefs_to_count": 1
 }

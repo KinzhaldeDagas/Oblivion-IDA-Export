@@ -31,14 +31,14 @@
 0x499F75: test    eax, eax
 0x499F77: jz      short loc_499F85
 0x499F79: mov     ecx, ds:0B42F50h; this
-0x499F7F: push    eax; a2
-0x499F80: call    sub_7C1EE0
+0x499F7F: push    eax; texture
+0x499F80: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x499F85: mov     eax, [edi+10h]
 0x499F88: test    eax, eax
 0x499F8A: jz      short loc_499F98
 0x499F8C: mov     ecx, ds:0B42F50h; this
-0x499F92: push    eax; a2
-0x499F93: call    sub_7C1EE0
+0x499F92: push    eax; texture
+0x499F93: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x499F98: mov     esi, [edi+8]
 0x499F9B: test    esi, esi
 0x499F9D: mov     ebp, ds:0A2807Ch

@@ -1,4 +1,4 @@
-0x787B20: xor     eax, eax
+0x787B20: xor     eax, eax; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.
 0x787B22: mov     [ecx+11Ch], eax
 0x787B28: mov     [ecx+120h], eax
 0x787B2E: mov     [ecx+108h], eax
@@ -28,7 +28,7 @@
 0x787BBE: mov     [ecx+0ACh], eax
 0x787BC4: mov     [ecx+0B0h], eax
 0x787BCA: mov     [ecx+50h], eax
-0x787BCD: mov     [ecx+54h], eax
+0x787BCD: mov     [ecx+54h], eax; SGeometry reset/clear path: +0x54 here is geometry-output storage, not CSpeedTreeRT+0x54 directional image count.
 0x787BD0: mov     [ecx+58h], eax
 0x787BD3: mov     [ecx+5Ch], eax
 0x787BD6: mov     [ecx+60h], eax

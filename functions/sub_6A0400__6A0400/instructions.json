@@ -1,31 +1,31 @@
 [
   {
     "ea": "0x6A0400",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+targetReference]; Verified (Oblivion): virtual receives owner ActiveEffect* and target TESObjectREFR*. Returns base payload size +4, plus 9 bytes for save version >=0x37.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A0404",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+linkContext]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6A0408",
-    "line": "push    eax",
+    "line": "push    eax; targetReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A0409",
-    "line": "push    edx",
+    "line": "push    edx; ownerActiveEffect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A040A",
-    "line": "call    sub_69DB90",
+    "line": "call    MagicHitEffect_GetExtraSaveSize; Verified (Oblivion): base GetExtraSaveSize receives owner ActiveEffect* and target TESObjectREFR*; it returns 5 bytes before version 0x72 and 9 bytes from version 0x72.",
     "mnemonic": "call",
     "size": 5
   },

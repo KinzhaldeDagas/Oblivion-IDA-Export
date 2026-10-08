@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68D9A0",
-    "line": "mov     ecx, [esi+34h]",
+    "line": "mov     ecx, [esi+34h]; Verified BSSimpleList_Clear frees successor HitEffectNode allocations and clears the root node's data; ActiveEffect::~ActiveEffect then frees the root/header. Hit-effect objects are detached first and are not deleted by this list clear.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x68D9A5",
-    "line": "jz      short ??1ActiveEffect@@UAE@XZ___DeleteHitEffectList",
+    "line": "jz      short ??1ActiveEffect@@UAE@XZ___DeleteHitEffectList; Verified ActiveEffect destructor frees the HitEffectNode root allocation only after BSSimpleList_Clear frees successor nodes; BSTempEffect items are detached and remain under ActorProcessManager refcount/update lifecycle.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x68D9A7",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   }

@@ -90,3 +90,5 @@
 0x46811D: mov     esi, [esi+4]
 0x468120: test    esi, esi
 0x468122: jnz     short loc_4680F3
+0x46812C: movsx   eax, byte ptr [ecx+4]
+0x468130: jmp     short loc_468115

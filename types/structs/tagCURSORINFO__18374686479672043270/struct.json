@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "tagCURSORINFO",
+  "definition": "struct tagCURSORINFO\n{\nDWORD cbSize;\nDWORD flags;\nHCURSOR hCursor;\nPOINT ptScreenPos;\n}\n",
   "id": 18374686479672043270,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbSize",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hCursor",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HCURSOR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ptScreenPos",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 8
+      "offset_hex": "0xC",
+      "size": 8,
+      "type": "POINT"
     }
   ],
   "name": "tagCURSORINFO",
+  "ordinal": 7431,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

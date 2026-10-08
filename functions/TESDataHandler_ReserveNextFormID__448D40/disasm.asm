@@ -5,10 +5,8 @@
 0x448D44: push    edi
 0x448D45: mov     ebx, ecx
 0x448D47: jmp     short loc_448D50
-0x448D49: align 10h
 0x448D50: mov     ebp, [ebx+8C0h]
 0x448D56: jmp     short loc_448D60
-0x448D58: align 10h
 0x448D60: mov     eax, [ebx+8C0h]
 0x448D66: mov     ecx, eax
 0x448D68: and     ecx, 0FFFFFFh
@@ -30,7 +28,6 @@
 0x448DA7: test    esi, esi
 0x448DA9: jz      short loc_448DCE
 0x448DAB: jmp     short loc_448DB0
-0x448DAD: align 10h
 0x448DB0: mov     edx, [esi+4]
 0x448DB3: mov     eax, ds:0B0613Ch
 0x448DB8: push    edx

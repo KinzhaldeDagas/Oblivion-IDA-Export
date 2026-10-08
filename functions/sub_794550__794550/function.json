@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x794550",
+      "0x7945A6"
+    ]
+  ],
+  "chunks_sha256": "c60dec7394f45bb777379de6319559a51491f683250da6ff8ec85a583a353cfe",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for arrays of 0x10-byte elements. Checks count*0x10 overflow, throws std::bad_alloc on overflow, and allocates through FormHeapAlloc; used by multiple outer-vector specializations including vector<vector<float>> and vector<vector<SFrondGuide>>.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for arrays of 0x10-byte elements. Checks count*0x10 overflow, throws std::bad_alloc on overflow, and allocates through FormHeapAlloc; used by multiple outer-vector specializations including vector<vector<float>> and vector<vector<SFrondGuide>>.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_794550",
+  "display_name": "OB_stVector16_Allocate_010201A0",
   "end_ea": "0x7945A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_794550",
+  "name": "OB_stVector16_Allocate_010201A0",
   "segment": ".text",
   "sha256": "c60dec7394f45bb777379de6319559a51491f683250da6ff8ec85a583a353cfe",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x794550",
-  "type": "int __cdecl(char *)",
+  "total_chunk_size": 86,
+  "type": "OB_stVector16_010201A0 *__cdecl(unsigned int count)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 6
 }

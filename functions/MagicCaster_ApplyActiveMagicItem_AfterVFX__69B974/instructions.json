@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x69B978",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x69B98B",
-    "line": "call    EffectItemList_HasOnTarget",
+    "line": "call    EffectItemList_HasOnTarget; True iff list has an EffectItem with range==2 (Target) and EffectSetting flag 0x400000 clear. Does not require hostile/detrimental.",
     "mnemonic": "call",
     "size": 5
   },

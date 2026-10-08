@@ -1,4 +1,4 @@
-0x4849C0: push    ecx
+0x4849C0: push    ecx; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x4849C1: push    esi
 0x4849C2: push    edi
 0x4849C3: push    0; int

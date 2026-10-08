@@ -35,12 +35,12 @@
 0x5F806B: call    TESPackage_SetType?
 0x5F8070: or      dword ptr [esi+1Ch], 4
 0x5F8074: mov     ecx, esi
-0x5F8076: call    sub_5672A0
+0x5F8076: call    sub_5672A0; 3DTheft decode: TESPackage procedure-array resolver is a mutator. It writes TESPackage+0x18/procedureArrayIndex directly; callers should not use EAX as the row result.
 0x5F807B: push    1; a4
 0x5F807D: push    1; a3
 0x5F807F: push    esi; a2
 0x5F8080: mov     ecx, edi; this
-0x5F8082: call    Actor_AddPackage?
+0x5F8082: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x5F8087: mov     eax, [edi]
 0x5F8089: mov     edx, [eax+170h]
 0x5F808F: mov     ecx, edi
@@ -64,3 +64,15 @@
 0x5F80C7: pop     esi
 0x5F80C8: add     esp, 10h
 0x5F80CB: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

@@ -12,11 +12,11 @@
 0x484802: test    esi, esi
 0x484804: jz      short loc_48483D
 0x484806: mov     ecx, esi
-0x484808: call    sub_41E850
+0x484808: call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.
 0x48480D: test    eax, eax
 0x48480F: jz      short loc_484836
 0x484811: mov     ecx, esi
-0x484813: call    sub_41E850
+0x484813: call    ExtraDataList_GetLeveledItem; Returns the ExtraLeveledItem object itself, allowing callers to inspect its selected leveled-list state.
 0x484818: mov     ebx, eax
 0x48481A: push    0
 0x48481C: push    ebx

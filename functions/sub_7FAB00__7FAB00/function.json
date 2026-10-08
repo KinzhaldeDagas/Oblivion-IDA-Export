@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x7FAB00",
+      "0x7FAB2D"
+    ]
+  ],
+  "chunks_sha256": "51d26eef69bec061ddb407f5264aa4ead84f10c11a82781d2630b90b174e6903",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7FAB00",
+  "comment_repeatable": "Lighting30 per-light pixel constant writer. For lightSlot 0..19 writes four floats to ConstantGroup global slot 0x47D+8*slot, mapping slot 0 to pixel c9 (LightColor), slot 1 to c11, and so on.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Lighting30Shader_WriteLightColorConstant",
   "end_ea": "0x7FAB2D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FAB00",
+  "name": "Lighting30Shader_WriteLightColorConstant",
   "segment": ".text",
   "sha256": "51d26eef69bec061ddb407f5264aa4ead84f10c11a82781d2630b90b174e6903",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FAB00",
-  "type": "int *__cdecl(int *, int, int, int, int)",
+  "total_chunk_size": 45,
+  "type": "float *__cdecl(unsigned int lightSlot, float x, float y, float z, float w)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 2
 }

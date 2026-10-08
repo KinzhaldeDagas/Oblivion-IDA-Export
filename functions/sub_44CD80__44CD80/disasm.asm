@@ -3,7 +3,7 @@
 0x44CD86: jz      short locret_44CDDE
 0x44CD88: mov     eax, [eax+8]
 0x44CD8B: push    eax
-0x44CD8C: push    offset dword_B3F95C
+0x44CD8C: push    offset stru_B3F95C
 0x44CD91: call    NiRTTI_Cast
 0x44CD96: add     esp, 8
 0x44CD99: test    eax, eax
@@ -27,6 +27,6 @@
 0x44CDCB: push    eax
 0x44CDCC: push    offset aSSSSDS; "%s\t%s\t%s\t%s\t%d\t%s\r\n"
 0x44CDD1: push    offset aTestmodelsUnus; "TestModels - Unused Textures.xls"
-0x44CDD6: call    nullsub_return0_0arg
+0x44CDD6: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x44CDDB: add     esp, 20h
 0x44CDDE: retn    14h

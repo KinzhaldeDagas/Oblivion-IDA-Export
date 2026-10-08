@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x65C010",
+      "0x65C183"
+    ]
+  ],
+  "chunks_sha256": "d785b31f47d6c434b714fd15d9eea2e9cf0a802932c08fd96254f6b624adb9de",
+  "comment_regular": "Verified 2026-10-04: reunited falsely separated internal blocks with original function. All entry xrefs to merged blocks are same-body branches/fallthroughs, with shared saved registers/stack and RET cleanup. Existing labels/comments preserved; analysis-only change. Prior fragmentation warning superseded for this body.\nVerified fast-slot ID order: [08,0B,28,30,24,31,06,38,2E,2F,29,21,1A,05,07,00,04,0D] (hex). Matching lookup/insert/remove switches and Oblivion naming tables establish named AVCollectionIndex fields. IDs09/0A are permanent magicka/fatigue outside this array.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "AVCollection_GetNode",
-  "end_ea": "0x65C04C",
+  "end_ea": "0x65C183",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AVCollection_GetNode",
   "segment": ".text",
-  "sha256": "4dcb58ec6ee62472ab178b39a748b04f004695c77e5fe931131afdf924bbff1c",
-  "size": 60,
+  "sha256": "d785b31f47d6c434b714fd15d9eea2e9cf0a802932c08fd96254f6b624adb9de",
+  "size": 371,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65C010",
-  "type": "_BYTE *__thiscall(_DWORD *this, int)",
-  "xrefs_from_count": 41,
+  "total_chunk_size": 371,
+  "type": "AVCollectionEntry *__thiscall(AVCollection *self, int actorValue)",
+  "xrefs_from_count": 166,
   "xrefs_to_count": 3
 }

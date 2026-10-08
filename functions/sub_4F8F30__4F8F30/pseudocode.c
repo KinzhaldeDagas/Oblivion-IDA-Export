@@ -1,47 +1,47 @@
-char __cdecl sub_4F8F30(PlayerCharacter *a1, int a2, int a3, double *a4)
+char __cdecl sub_4F8F30(Actor *a1, int a2, int a3, double *a4)
 {
-  PlayerCharacter *v7; // edi
+  PlayerCharacter *v4; // edi
+  void *v5; // eax
+  const char *v6; // eax
   void *v8; // eax
   const char *v9; // eax
-  void *v11; // eax
-  const char *v12; // eax
 
-  *a4 = 0.0;
-  v7 = 0;
-  if ( a1 )
+  *a4 = 0.0; /*0x4f8f37*/
+  v4 = 0; /*0x4f8f3f*/
+  if ( a1 ) /*0x4f8f43*/
   {
-    if ( a1->vtbl->super.super.super.IsActor((TESObjectREFR *)a1) )
+    if ( a1->vtbl->super.super.IsActor((TESObjectREFR *)a1) ) /*0x4f8f4f*/
     {
-      v7 = a1;
-      if ( a1->vtbl->super.IsInCombat((Actor *)a1, 1) )
-        *a4 = 1.0;
+      v4 = (PlayerCharacter *)a1; /*0x4f8f61*/
+      if ( a1->vtbl->IsInCombat(a1, 1) ) /*0x4f8f63*/
+        *a4 = 1.0; /*0x4f8f6b*/
     }
   }
-  if ( v7 == TESDataHandler_g_PlayerRef )
-    *a4 = (double)PlayerCharacter_IsPlayerInCombat(TESDataHandler_g_PlayerRef, 0);
-  if ( !IsConsoleMode )
-    return 1;
-  if ( 0.0 == *a4 )
+  if ( v4 == reference ) /*0x4f8f75*/
+    *a4 = (double)PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)reference, 0); /*0x4f8f89*/
+  if ( !MEMORY[0xB361AC] ) /*0x4f8f92*/
+    return 1; /*0x4f8f92*/
+  if ( 0.0 == *a4 ) /*0x4f8fac*/
   {
-    v11 = OblivionDynamicCast(
-            v7,
-            0,
-            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-            &TESFullName `RTTI Type Descriptor',
-            0);
-    if ( !v11 || (v12 = *((const char **)v11 + 1)) == 0 )
-      v12 = EmptyString;
-    Interface_ConsolePrint("%s is not in combat", v12);
-    return 1;
+    v8 = OblivionDynamicCast( /*0x4f8fda*/
+           v4,
+           0,
+           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+           &TESFullName `RTTI Type Descriptor',
+           0);
+    if ( !v8 || (v9 = *((const char **)v8 + 1)) == 0 ) /*0x4f8feb*/
+      v9 = EmptyString; /*0x4f8fed*/
+    Interface_ConsolePrint("%s is not in combat", v9); /*0x4f8ff8*/
+    return 1; /*0x4f9002*/
   }
-  v8 = OblivionDynamicCast(
-         v7,
+  v5 = OblivionDynamicCast( /*0x4f8fae*/
+         v4,
          0,
          (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
          &TESFullName `RTTI Type Descriptor',
          0);
-  if ( !v8 || (v9 = *((const char **)v8 + 1)) == 0 )
-    v9 = EmptyString;
-  Interface_ConsolePrint("%s is in combat", v9);
-  return 1;
+  if ( !v5 || (v6 = *((const char **)v5 + 1)) == 0 ) /*0x4f8fbf*/
+    v6 = EmptyString; /*0x4f8fc1*/
+  Interface_ConsolePrint("%s is in combat", v6); /*0x4f8fcc*/
+  return 1; /*0x4f8fd4*/
 }

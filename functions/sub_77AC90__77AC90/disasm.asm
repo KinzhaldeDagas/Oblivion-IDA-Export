@@ -1,11 +1,11 @@
-0x77AC90: mov     eax, [esp+arg_4]
-0x77AC94: mov     edx, [esp+arg_C]
+0x77AC90: mov     eax, [esp+renderDataCreated]; Resolve NiTexture to D3D texture and report render-data creation, actual mip-count>1, and NPOT/special dimensions.
+0x77AC94: mov     edx, [esp+needsNPOTFallback]
 0x77AC98: push    ebx
-0x77AC99: mov     ebx, [esp+4+arg_0]
+0x77AC99: mov     ebx, [esp+4+texture]
 0x77AC9D: test    ebx, ebx
 0x77AC9F: push    ebp
 0x77ACA0: mov     ebp, ecx
-0x77ACA2: mov     ecx, [esp+8+arg_8]
+0x77ACA2: mov     ecx, [esp+8+hasMultipleMipLevels]
 0x77ACA6: mov     byte ptr [eax], 0
 0x77ACA9: mov     byte ptr [ecx], 0
 0x77ACAC: mov     byte ptr [edx], 0
@@ -27,7 +27,7 @@
 0x77ACDC: test    esi, esi
 0x77ACDE: jnz     short loc_77AD08
 0x77ACE0: push    ebx
-0x77ACE1: push    offset dword_B3F95C
+0x77ACE1: push    offset stru_B3F95C
 0x77ACE6: call    NiRTTI_Cast
 0x77ACEB: add     esp, 8
 0x77ACEE: test    eax, eax
@@ -35,8 +35,8 @@
 0x77ACF2: mov     ecx, [ebp+0Ch]
 0x77ACF5: push    ecx
 0x77ACF6: push    eax
-0x77ACF7: call    sub_761270
-0x77ACFC: mov     edx, [esp+18h+arg_4]
+0x77ACF7: call    OB_NiDX9SourceTextureData_CreateFromSourceTexture_010201A0; DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.
+0x77ACFC: mov     edx, [esp+18h+renderDataCreated]
 0x77AD00: add     esp, 8
 0x77AD03: mov     esi, eax
 0x77AD05: mov     byte ptr [edx], 1
@@ -81,8 +81,8 @@
 0x77AD6B: pop     ebx
 0x77AD6C: retn    10h
 0x77AD6F: mov     al, 1
-0x77AD71: mov     edx, [esp+10h+arg_C]
-0x77AD75: mov     [edx], al
+0x77AD71: mov     edx, [esp+10h+needsNPOTFallback]
+0x77AD75: mov     [edx], al; Resolver output needsNPOTFallback is true when width or height is zero/non-power-of-two; false only when both dimensions are nonzero powers of two.
 0x77AD77: mov     eax, [esi]
 0x77AD79: mov     edx, [eax+18h]
 0x77AD7C: mov     ecx, esi
@@ -121,7 +121,7 @@
 0x77ADBF: mov     eax, [edx+28h]
 0x77ADC2: mov     ecx, edi
 0x77ADC4: call    eax
-0x77ADC6: mov     ecx, [esp+10h+arg_4]
+0x77ADC6: mov     ecx, [esp+10h+renderDataCreated]
 0x77ADCA: mov     byte ptr [ecx], 1
 0x77ADCD: jmp     short loc_77ADDE
 0x77ADCF: cmp     byte ptr [ebx+40h], 0
@@ -134,10 +134,10 @@
 0x77ADE0: mov     eax, [edx+10h]
 0x77ADE3: mov     ecx, esi
 0x77ADE5: call    eax
-0x77ADE7: mov     edx, [esp+10h+arg_8]
+0x77ADE7: mov     edx, [esp+10h+hasMultipleMipLevels]
 0x77ADEB: cmp     eax, 1
 0x77ADEE: setnbe  cl
-0x77ADF1: mov     [edx], cl
+0x77ADF1: mov     [edx], cl; Resolver output hasMultipleMipLevels is exact underlying texture level-count > 1.
 0x77ADF3: mov     eax, [esi]
 0x77ADF5: mov     edx, [eax+14h]
 0x77ADF8: mov     ecx, esi

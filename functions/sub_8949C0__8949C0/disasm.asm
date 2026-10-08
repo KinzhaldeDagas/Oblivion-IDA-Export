@@ -26,7 +26,7 @@
 0x894A10: mov     ecx, [ebx+8]
 0x894A13: cmp     ecx, eax
 0x894A15: jz      short loc_894A22
-0x894A17: call    sub_8AC0C0
+0x894A17: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x894A1C: mov     esi, eax
 0x894A1E: xor     eax, eax
 0x894A20: jmp     short loc_894A24
@@ -52,10 +52,10 @@
 0x894A95: fstp    [esp+258h+var_220]
 0x894A99: mov     ecx, ebx
 0x894A9B: mov     byte ptr [esp+258h+var_4], 1
-0x894AA3: call    sub_891440
+0x894AA3: call    bhkCharacterController_ReadRelativePosition; TES4 authoritative: reads current proxy position. Gets collision object transform at 0x8AC070, subtracts metadata/world transform basis offset, returns Havok-unit position.
 0x894AA8: push    edi; a2
 0x894AA9: mov     ecx, ebx; this
-0x894AAB: call    sub_452A10
+0x894AAB: call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.
 0x894AB0: mov     eax, [esi]
 0x894AB2: movaps  xmm0, xmmword ptr [esi+0A0h]
 0x894AB9: mov     eax, [eax+30h]
@@ -111,7 +111,7 @@
 0x894B56: lea     eax, [esp+254h+var_210]
 0x894B5A: push    eax; a2
 0x894B5B: mov     ecx, ebx; this
-0x894B5D: call    sub_891560
+0x894B5D: call    bhkCharacterController_WriteRelativePosition; TES4 authoritative: writes proxy position. Adds metadata/world transform basis offset, then writes to collision object through 0x8AC080.
 0x894B62: lea     ecx, [esp+254h+var_1C0]; this
 0x894B69: mov     byte ptr [esp+254h+var_4], 0
 0x894B71: call    ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
@@ -130,3 +130,20 @@
 0x894B9F: mov     esp, ebp
 0x894BA1: pop     ebp
 0x894BA2: retn    10h
+0x890230: mov     dword ptr [ecx], offset ??_7hkCdPointCollector@@6B@; const hkCdPointCollector::`vftable'
+0x890236: retn
+0x9D6520: lea     ecx, [ebp+var_200]
+0x9D6526: jmp     loc_890230
+0x9D652B: lea     ecx, [ebp+var_1C0]; this
+0x9D6531: jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)
+0x9D6536: mov     edx, dword ptr [esp-4+arg_4]
+0x9D653A: lea     eax, [edx-244h]
+0x9D6540: mov     ecx, [edx-248h]
+0x9D6546: xor     ecx, eax
+0x9D6548: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D654D: add     eax, 0Ch
+0x9D6550: mov     ecx, [edx-8]
+0x9D6553: xor     ecx, eax
+0x9D6555: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D655A: mov     eax, offset stru_AFE3B0
+0x9D655F: jmp     ___CxxFrameHandler3

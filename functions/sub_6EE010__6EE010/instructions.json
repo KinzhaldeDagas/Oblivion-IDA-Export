@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EE010",
-    "line": "push    ebp",
+    "line": "push    ebp; FaceGen random-generator method. Copies all four base matrices and adds independent N(0,1) * geneticVariation * 1.5 to every coefficient. The manager subobject passed in ECX is not otherwise referenced.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x6EE01A",
-    "line": "mov     ebx, [ebp+arg_8]",
+    "line": "mov     ebx, [ebp+outParameters]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x6EE01E",
-    "line": "mov     esi, [ebp+arg_4]",
+    "line": "mov     esi, [ebp+baseParameters]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x6EE024",
-    "line": "mov     [esp+28h+var_14], 2",
+    "line": "mov     [esp+28h+var_14], 2; Visit the four FaceGen matrices as a 2x2 layout. Standard Oblivion race parameters have coefficient counts 50, 30, 50, 0.",
     "mnemonic": "mov",
     "size": 8
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6EE03E",
-    "line": "imul    eax, edx",
+    "line": "imul    eax, edx; FaceGen Gaussian generator computes 32-bit rows*columns for output ResizeFill. Subsequent row/column loops use original dimensions; a wrapped product can leave output too small before indexed writes at 0x6EE0E8. Prettier Faces 1.19.13 now checks the race base's total coefficient count <= its supported 256-element candidate capacity before calling TESNPC_RandomizeFaceGen. Native standard initializer 0x552880 uses 50+30+50=130 coefficients. This is a plugin preflight guard, not proof stock race data can trigger overflow.",
     "mnemonic": "imul",
     "size": 3
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x6EE04D",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Resize output using an unchecked 32-bit columns*rows product. The subsequent nested loops retain the original rows and columns, so a wrapped product permits writes beyond the resized vector.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE052",
-    "line": "cmp     dword ptr [esi], 0",
+    "line": "cmp     dword ptr [esi], 0; Iterate the original row count, independent of the potentially wrapped allocation count.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x6EE065",
-    "line": "cmp     [esi+4], edi",
+    "line": "cmp     [esi+4], edi; Iterate the original column count and write output[row*columns+column]; no check proves the resized output range covers the original dimension product.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x6EE070",
-    "line": "call    sub_6F6A80",
+    "line": "call    FaceGen_RandomStandardNormal; Only direct native call to FaceGen_RandomStandardNormal during FaceGen coefficient generation. PF 1.19.15 optional RandomSeed provides deterministic private Gaussian stream inside character Randomize Face scope; when unset it uses file time/QPC/process/thread/address entropy. Outside scope this hook forwards native RNG.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE075",
-    "line": "fmul    [ebp+arg_0]",
+    "line": "fmul    [ebp+geneticVariation]",
     "mnemonic": "fmul",
     "size": 3
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x6EE083",
-    "line": "fstp    [esp+28h+var_8]",
+    "line": "fstp    [esp+28h+var_8]; scaledVariation = standardNormal * geneticVariation * 1.5; the value is added directly to the current race coefficient.",
     "mnemonic": "fstp",
     "size": 4
   },

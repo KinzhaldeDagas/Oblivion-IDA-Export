@@ -1,4 +1,4 @@
-0x5464AE: fld     [esp+arg_4C]
+0x5464AE: fld     [esp+arg_4C]; Combines movement/boot noise, distance attenuation, LOS and running multipliers, then scales the audible contribution by fSneakSoundsMult while preserving the stronger accumulated contribution.
 0x5464B2: fmul    [esp+arg_1C]
 0x5464B6: fadd    dword ptr [esp+0]
 0x5464B9: fld     [esp+arg_8]
@@ -14,5 +14,5 @@
 0x5464D7: fcom    [esp+arg_1C]
 0x5464DB: fnstsw  ax
 0x5464DD: test    ah, 41h
-0x5464E0: jnz     short Calc_DetectionLevel___CalcLightFactor
+0x5464E0: jnz     short Calc_DetectionLevel_ApplyLightFactor; Computes the target-light contribution using light level, detector visual penalties/bonuses (including Blindness/Night Eye inputs), distance normalization, and fSneakLightMult; preserves the stronger accumulated contribution.
 0x5464E2: fst     [esp+arg_1C]

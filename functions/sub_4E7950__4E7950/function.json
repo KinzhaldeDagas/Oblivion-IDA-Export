@@ -1,19 +1,36 @@
 {
-  "callees_count": 82,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4E7950",
+  "chunks": [
+    [
+      "0x4E7950",
+      "0x4E7D0E"
+    ],
+    [
+      "0x9B5E70",
+      "0x9B5EA1"
+    ]
+  ],
+  "chunks_sha256": "5de98d44429a1866ce7e07c3e813b0b8dbc72e188eb13bf60a475460d4dba653",
+  "comment_regular": "Verified — TESPathGrid-specific graph copy routine, reached through vtable entry at A476F8. It dynamic-casts source TESForm to TESPathGrid, forces source graph resolution if needed, allocates destination point nodes and copies positions, remaps source adjacency pointers by source-array index into destination point pointers, copies PGRI records, and conditionally clears non-active/unoverridden source graph state. The implementation verifies graph-copy/remap semantics; exact external lifecycle intent beyond the vtable callback remains Unknown.",
+  "comment_repeatable": "Verified — TESPathGrid-specific graph copy routine, reached through vtable entry at A476F8. It dynamic-casts source TESForm to TESPathGrid, forces source graph resolution if needed, allocates destination point nodes and copies positions, remaps source adjacency pointers by source-array index into destination point pointers, copies PGRI records, and conditionally clears non-active/unoverridden source graph state. The implementation verifies graph-copy/remap semantics; exact external lifecycle intent beyond the vtable callback remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "TESPathGrid_CopyGraphFrom",
   "end_ea": "0x4E7D0E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E7950",
+  "name": "TESPathGrid_CopyGraphFrom",
   "segment": ".text",
   "sha256": "9350e6d0da04365f13caf4485dd70e4049f98394b207eeca3bdfee2d49f104d9",
   "size": 958,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E7950",
-  "type": "void __thiscall(int *this, void *)",
-  "xrefs_from_count": 385,
+  "total_chunk_size": 1007,
+  "type": "void __thiscall(TESPathGrid *this, TESForm *source)",
+  "xrefs_from_count": 404,
   "xrefs_to_count": 1
 }

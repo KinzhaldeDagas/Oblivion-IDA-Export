@@ -1,1 +1,1 @@
-0x67B5E0: jmp     sub_5660F0
+0x67B5E0: jmp     TESPackage_InitLoadGame

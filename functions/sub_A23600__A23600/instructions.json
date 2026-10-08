@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA23600",
-    "line": "push    offset byte_B125E8",
+    "line": "push    offset bEnableTrees_SpeedTree; Verified INI setting cleanup removes bEnableTrees from the setting list and frees a dynamically allocated name if applicable.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA2360F",
-    "line": "mov     eax, off_B125EC; \"bEnableTrees:SpeedTree\"",
+    "line": "mov     eax, bEnableTrees_SpeedTree.name",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA2361E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

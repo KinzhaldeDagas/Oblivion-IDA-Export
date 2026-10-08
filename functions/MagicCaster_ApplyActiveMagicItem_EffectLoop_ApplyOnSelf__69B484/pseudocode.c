@@ -1,7 +1,7 @@
 int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnSelf@<eax>(
         int a1@<esi>,
-        int a2,
-        int a3,
+        TESObjectREFR *a2@<ebx>,
+        void (__thiscall ***a3)(_DWORD, int)@<edi>,
         int a4,
         int a5,
         int a6,
@@ -11,13 +11,35 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnSelf@<eax>(
         int a10,
         int a11,
         int a12,
-        int a13)
+        int a13,
+        int a14,
+        int a15,
+        int a16,
+        int a17,
+        int a18,
+        __int64 a19,
+        int a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        int a25,
+        int a26,
+        int a27,
+        int a28,
+        int a29,
+        int a30,
+        int a31,
+        int a32,
+        int a33,
+        int a34)
 {
-  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)a1 + 0x28))(a1) )
-    LOBYTE(a6) = 1;
+  if ( (*(unsigned __int8 (__thiscall **)(int))(*(_DWORD *)a1 + 0x28))(a1) ) /*0x69b48c*/
+    LOBYTE(a8) = 1; /*0x69b496*/
   return MagicCaster_ApplyActiveMagicItem_::EffectLoop_DestroyActvEff(
            a2,
            a3,
+           a1,
            a4,
            a5,
            a6,
@@ -27,5 +49,26 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnSelf@<eax>(
            a10,
            a11,
            a12,
-           a13);
+           a13,
+           a14,
+           a15,
+           a16,
+           a17,
+           a18,
+           a19,
+           a20,
+           a21,
+           a22,
+           a23,
+           a24,
+           a25,
+           a26,
+           a27,
+           a28,
+           a29,
+           a30,
+           a31,
+           a32,
+           a33,
+           a34);
 }

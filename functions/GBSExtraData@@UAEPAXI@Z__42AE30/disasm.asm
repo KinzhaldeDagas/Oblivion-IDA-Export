@@ -4,7 +4,7 @@
 0x42AE38: mov     dword ptr [esi], offset ??_7BSExtraData@@6B@; const BSExtraData::`vftable'
 0x42AE3E: jz      short loc_42AE49
 0x42AE40: push    esi
-0x42AE41: call    FormHeapFree
+0x42AE41: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42AE46: add     esp, 4
 0x42AE49: mov     eax, esi
 0x42AE4B: pop     esi

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x529820",
-    "line": "cmp     byte ptr [esp+arg_0], 0",
+    "line": "cmp     [esp+running], 0; TESQuest running/active setter used by StartQuest and StopQuest. Runtime bit 0x01 shares QUST DATA's editor label 'Start Game Enabled'; toggling it marks modified flag 0x04.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x529836",
-    "line": "mov     [esp+arg_0], 4",
+    "line": "mov     dword ptr [esp+running], 4",
     "mnemonic": "mov",
     "size": 8
   },

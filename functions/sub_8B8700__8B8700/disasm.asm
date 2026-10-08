@@ -2,14 +2,14 @@
 0x8B8701: mov     esi, [esp+4+arg_0]
 0x8B8705: test    esi, esi
 0x8B8707: jz      short loc_8B8767
-0x8B8709: push    offset unk_BA8000
+0x8B8709: push    0BA8000h
 0x8B870E: mov     ecx, esi
 0x8B8710: call    sub_700010
 0x8B8715: test    eax, eax
 0x8B8717: jz      short loc_8B8721
 0x8B8719: push    eax
 0x8B871A: mov     ecx, esi
-0x8B871C: call    sub_6FFE90
+0x8B871C: call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.
 0x8B8721: mov     eax, [esi]
 0x8B8723: mov     edx, [eax+8]
 0x8B8726: push    edi

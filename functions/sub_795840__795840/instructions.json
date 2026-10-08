@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795840",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned int>; validates owner/position, delegates to insert-fill, and returns an iterator to the inserted value.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x795843",
-    "line": "mov     ebp, [esp+0Ch+arg_4]",
+    "line": "mov     ebp, dword ptr [esp+0Ch+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x795878",
-    "line": "mov     ebx, [esp+14h+Src]",
+    "line": "mov     ebx, dword ptr [esp+14h+expectedOwner+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,49 +169,49 @@
   },
   {
     "ea": "0x795881",
-    "line": "mov     edx, [esp+14h+arg_C]",
+    "line": "mov     edx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795885",
-    "line": "mov     eax, [esp+14h+Src]",
+    "line": "mov     eax, dword ptr [esp+14h+expectedOwner+4]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795889",
-    "line": "push    edx; int",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79588A",
-    "line": "push    1; int",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79588C",
-    "line": "push    eax; Src",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79588D",
-    "line": "push    ebp; int",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79588E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x795890",
-    "line": "call    sub_7950A0",
+    "line": "call    OB_stVectorUInt32_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): vector<unsigned int> insert-fill core. Handles in-place overlap and 1.5x geometric reallocation while preserving the checked insertion position.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x7958A2",
-    "line": "mov     [esp+14h+Src], edi",
+    "line": "mov     dword ptr [esp+14h+expectedOwner+4], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x7958B8",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },

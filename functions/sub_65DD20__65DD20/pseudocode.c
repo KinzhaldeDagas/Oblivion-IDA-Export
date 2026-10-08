@@ -1,4 +1,4 @@
 void __thiscall sub_65DD20(_BYTE *this)
 {
-  *(this + 0x7F9) = 0;
+  *(this + 0x7F9) = 0; /*0x65dd20*/
 }

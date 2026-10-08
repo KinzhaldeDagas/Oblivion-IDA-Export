@@ -1,6 +1,6 @@
 0x4CCBF0: mov     eax, dword ptr [esp+a2]
 0x4CCBF4: push    esi
-0x4CCBF5: push    eax; a2
+0x4CCBF5: push    eax; fromActiveFile
 0x4CCBF6: mov     esi, ecx
 0x4CCBF8: call    TESForm_SetFromActiveFile
 0x4CCBFD: mov     eax, [esi+8]

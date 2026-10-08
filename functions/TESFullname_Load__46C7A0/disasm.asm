@@ -1,4 +1,4 @@
-0x46C7A0: push    ebp
+0x46C7A0: push    ebp; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x46C7A1: mov     ebp, esp
 0x46C7A3: push    ecx
 0x46C7A4: mov     eax, ds:0B30AACh
@@ -26,7 +26,7 @@
 0x46C7E0: push    0; a4
 0x46C7E2: push    esi; Dst
 0x46C7E3: mov     ecx, ebx; a1
-0x46C7E5: call    TESFile_GetChunkData
+0x46C7E5: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x46C7EA: push    0; a3
 0x46C7EC: push    esi; a2
 0x46C7ED: lea     ecx, [edi+4]; this
@@ -43,7 +43,7 @@
 0x46C808: retn
 0x46C809: mov     eax, [edi+4]
 0x46C80C: push    eax
-0x46C80D: call    FormHeapFree
+0x46C80D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x46C812: add     esp, 4
 0x46C815: mov     [edi+4], esi
 0x46C818: mov     [edi+0Ah], si

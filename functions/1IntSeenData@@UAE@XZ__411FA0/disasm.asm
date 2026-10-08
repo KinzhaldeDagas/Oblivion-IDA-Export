@@ -27,3 +27,14 @@
 0x411FF7: pop     esi
 0x411FF8: add     esp, 10h
 0x411FFB: retn
+0x411EF0: mov     dword ptr [ecx], offset ??_7SeenData@@6B@; const SeenData::`vftable'
+0x411EF6: retn
+0x9AAFF0: mov     ecx, [ebp-10h]
+0x9AAFF3: jmp     loc_411EF0
+0x9AAFF8: mov     edx, [esp+arg_4]
+0x9AAFFC: lea     eax, [edx-8]
+0x9AAFFF: mov     ecx, [edx-0Ch]
+0x9AB002: xor     ecx, eax
+0x9AB004: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AB009: mov     eax, offset stru_AD7EB8
+0x9AB00E: jmp     ___CxxFrameHandler3

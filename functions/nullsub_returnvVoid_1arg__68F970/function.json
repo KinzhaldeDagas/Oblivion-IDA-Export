@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 79,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 82,
+  "chunks": [
+    [
+      "0x68F970",
+      "0x68F973"
+    ]
+  ],
+  "chunks_sha256": "e598d0c3ba86d917b177d7adde0556aa99bc355543c57aee0a3e50b684dd7e99",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Culling-specific use: the +0x0C AppendVirtual slot of the observed NiCullingProcess, BSCullingProcess, and TESWaterCullingProcess tables all points to this shared one-stack-argument no-op. Constructor defaults UseAppendVirtual to zero. No active native append override established by these tables; preserve this shared function's existing general name.\n\nnullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
+  "comment_repeatable": "nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "nullsub_returnvVoid_1arg",
   "end_ea": "0x68F973",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "nullsub_returnvVoid_1arg",
   "segment": ".text",
   "sha256": "e598d0c3ba86d917b177d7adde0556aa99bc355543c57aee0a3e50b684dd7e99",
   "size": 3,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68F970",
+  "total_chunk_size": 3,
   "type": "void __stdcall(int)",
   "xrefs_from_count": 0,
-  "xrefs_to_count": 2412
+  "xrefs_to_count": 2361
 }

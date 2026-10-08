@@ -1,19 +1,36 @@
 {
-  "callees_count": 100,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 41,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_474530",
+  "chunks": [
+    [
+      "0x474530",
+      "0x474A9E"
+    ],
+    [
+      "0x9AEDD0",
+      "0x9AEDFB"
+    ]
+  ],
+  "chunks_sha256": "74715c645f773f0b9fc9bb6e8ba8e2c7184c38889a81ef9de8fb3fba48452dcd",
+  "comment_regular": "Plays a selected BSAnimGroupSequence. Resolves default slot from fixed group metadata, maps physical slot 5->0 and 6->3 while retaining the requested alias for clear semantics, handles menu/full reset conditions, records active key +0x3C and sequence +0xA0, chooses morph only for matching nonzero morph keys and equal controller counts, otherwise cross-fades or blends from a temporary pose, applies the maximum old/new Blend byte as transition time, and initializes slot action state.",
+  "comment_repeatable": "Plays a selected BSAnimGroupSequence. Resolves default slot from fixed group metadata, maps physical slot 5->0 and 6->3 while retaining the requested alias for clear semantics, handles menu/full reset conditions, records active key +0x3C and sequence +0xA0, chooses morph only for matching nonzero morph keys and equal controller counts, otherwise cross-fades or blends from a temporary pose, applies the maximum old/new Blend byte as transition time, and initializes slot action state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "ActorAnimData_PlaySequence",
   "end_ea": "0x474A9E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_474530",
+  "name": "ActorAnimData_PlaySequence",
   "segment": ".text",
   "sha256": "8b2580e39991bde0400069c33e5481d6f9f32515a27314f66454fe083fa24c02",
   "size": 1390,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x474530",
-  "type": "int __thiscall(_DWORD *this, int, float, int)",
-  "xrefs_from_count": 511,
+  "total_chunk_size": 1433,
+  "type": "BSAnimGroupSequence *__thiscall(ActorAnimData *this, BSAnimGroupSequence *sequence, unsigned int encodedKey, int slotSelector)",
+  "xrefs_from_count": 524,
   "xrefs_to_count": 5
 }

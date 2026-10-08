@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7687D2",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+parentBuffer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7687DD",
-    "line": "mov     edi, [esp+0Ch+arg_4]",
+    "line": "mov     edi, [esp+0Ch+pixelFormat]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7687F2",
-    "line": "cmp     eax, offset unk_B3FAC0",
+    "line": "cmp     eax, offset stru_B3FAC0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -163,37 +163,37 @@
   },
   {
     "ea": "0x76880E",
-    "line": "push    edi",
+    "line": "push    edi; pixelFormat",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76880F",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+parentBuffer]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x768813",
-    "line": "push    eax",
+    "line": "push    eax; parentBuffer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x768814",
-    "line": "push    ecx",
+    "line": "push    ecx; device",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x768815",
-    "line": "mov     [esp+18h+arg_0], esi",
+    "line": "mov     [esp+18h+parentBuffer], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x768819",
-    "line": "call    sub_76DE00",
+    "line": "call    NiDX9AdditionalDepthStencilBufferData__Create; Creates NiDX9AdditionalDepthStencilBufferData for a requested NiPixelFormat. Converts and validates the D3DFORMAT against the current adapter/backbuffer, creates a matching depth/stencil surface at the parent buffer dimensions, registers it for reset reconstruction, and attaches it to the Ni2DBuffer.",
     "mnemonic": "call",
     "size": 5
   },

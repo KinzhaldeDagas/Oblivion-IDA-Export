@@ -1,4 +1,4 @@
-0x5EA5E0: push    ebx
+0x5EA5E0: push    ebx; Oblivion actor prefilter used only by ShadowPass before mounted/sitting, refraction, invisibility, and map-budget checks. Requires the actor/process-derived state predicate to be clear and rejects ExtraGhost. Name intentionally describes observed shadow-pass use without importing later-version behavior.
 0x5EA5E1: push    esi
 0x5EA5E2: mov     esi, ecx
 0x5EA5E4: mov     eax, [esi]

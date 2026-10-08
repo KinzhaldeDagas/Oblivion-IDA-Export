@@ -7,36 +7,36 @@ int __cdecl sub_5C1060(int a1)
   int v5; // ecx
   int v6; // edx
 
-  result = a1;
-  if ( (unsigned int)(a1 + 1) <= 8 )
+  result = a1; /*0x5c1060*/
+  if ( (unsigned int)(a1 + 1) <= 8 ) /*0x5c106a*/
   {
-    v2 = dword_B3B430[0];
-    if ( a1 != dword_B3B430[0] )
+    v2 = *(_DWORD *)&byte_B3B418[0x18]; /*0x5c1070*/
+    if ( a1 != *(_DWORD *)&byte_B3B418[0x18] ) /*0x5c1078*/
     {
-      byte_B3B420 = 0;
-      if ( a1 < 0 || v2 >= 0 )
+      byte_B3B418[8] = 0; /*0x5c107e*/
+      if ( a1 < 0 || v2 >= 0 ) /*0x5c1088*/
       {
-        dword_B3B438 = dword_B3B434;
-        v4 = dword_B3B428;
-        dword_B3B434 = v2;
-        v5 = Seed;
-        dword_B3B42C = v4;
-        v6 = v5 - dword_B3B424[0];
-        dword_B3B424[0] = v5;
-        dword_B3B428 = v6;
-        dword_B3B430[0] = a1;
+        *(_DWORD *)&byte_B3B418[0x20] = *(_DWORD *)&byte_B3B418[0x1C]; /*0x5c10bd*/
+        v4 = *(_DWORD *)&byte_B3B418[0x10]; /*0x5c10c3*/
+        *(_DWORD *)&byte_B3B418[0x1C] = v2; /*0x5c10c9*/
+        v5 = *(_DWORD *)&MEMORY[0xB33E90][0x10]; /*0x5c10cf*/
+        *(_DWORD *)&byte_B3B418[0x14] = v4; /*0x5c10d5*/
+        v6 = v5 - *(_DWORD *)&byte_B3B418[0xC]; /*0x5c10dd*/
+        *(_DWORD *)&byte_B3B418[0xC] = v5; /*0x5c10e3*/
+        *(_DWORD *)&byte_B3B418[0x10] = v6; /*0x5c10e9*/
+        *(_DWORD *)&byte_B3B418[0x18] = a1; /*0x5c10ef*/
       }
       else
       {
-        dword_B3B428 = 0;
-        dword_B3B42C = 0;
-        v3 = Seed;
-        dword_B3B434 = 0xFFFFFFFF;
-        dword_B3B438 = 0xFFFFFFFF;
-        dword_B3B424[0] = v3;
-        dword_B3B430[0] = a1;
+        *(_DWORD *)&byte_B3B418[0x10] = 0; /*0x5c108d*/
+        *(_DWORD *)&byte_B3B418[0x14] = 0; /*0x5c1093*/
+        v3 = *(_DWORD *)&MEMORY[0xB33E90][0x10]; /*0x5c1099*/
+        *(_DWORD *)&byte_B3B418[0x1C] = 0xFFFFFFFF; /*0x5c109f*/
+        *(_DWORD *)&byte_B3B418[0x20] = 0xFFFFFFFF; /*0x5c10a5*/
+        *(_DWORD *)&byte_B3B418[0xC] = v3; /*0x5c10ab*/
+        *(_DWORD *)&byte_B3B418[0x18] = a1; /*0x5c10b1*/
       }
     }
   }
-  return result;
+  return result; /*0x5c10b6*/
 }

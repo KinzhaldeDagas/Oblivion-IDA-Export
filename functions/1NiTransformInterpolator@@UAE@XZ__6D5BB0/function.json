@@ -1,19 +1,36 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x6D5BB0",
+      "0x6D5C25"
+    ],
+    [
+      "0x9C7DA0",
+      "0x9C7DC3"
+    ]
+  ],
+  "chunks_sha256": "051774cd3b6fc60a63f926bb9a61aa81ef89c484a5f023bf2895ce5020df13c7",
+  "comment_regular": "Oblivion NiTransformInterpolator destructor. Releases the refcounted NiTransformData pointer at +0x2C, deleting it at zero references, then runs the interpolator base destructor.",
+  "comment_repeatable": "Oblivion NiTransformInterpolator destructor. Releases the refcounted NiTransformData pointer at +0x2C, deleting it at zero references, then runs the interpolator base destructor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "NiTransformInterpolator::~NiTransformInterpolator(void)",
   "end_ea": "0x6D5C25",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1NiTransformInterpolator@@UAE@XZ",
   "segment": ".text",
   "sha256": "774fd254bd7273332b623cc10592020f5e0fe8aa92ec74fa93038ffb28ed469b",
   "size": 117,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D5BB0",
+  "total_chunk_size": 152,
   "type": "void __thiscall(NiTransformInterpolator *__hidden this)",
-  "xrefs_from_count": 44,
+  "xrefs_from_count": 55,
   "xrefs_to_count": 1
 }

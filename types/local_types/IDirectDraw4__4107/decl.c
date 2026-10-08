@@ -1,1 +1,4 @@
-IDirectDraw4
+struct IDirectDraw4
+{
+IDirectDraw4Vtbl *lpVtbl;
+};

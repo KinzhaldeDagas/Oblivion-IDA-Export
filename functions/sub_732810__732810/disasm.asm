@@ -36,7 +36,7 @@
 0x73287A: jz      short loc_7328A8
 0x73287C: mov     ecx, [esi+14h]
 0x73287F: push    ecx
-0x732880: call    FormHeapFree
+0x732880: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x732885: mov     eax, [esp+14h+var_8]
 0x732889: xor     ecx, ecx
 0x73288B: mov     [esi+0Ch], eax

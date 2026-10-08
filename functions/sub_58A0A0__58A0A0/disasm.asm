@@ -60,7 +60,7 @@
 0x58A156: xor     eax, eax
 0x58A158: lea     edx, [esp+18h+arg_4]
 0x58A15C: push    edx
-0x58A15D: mov     ecx, offset off_B13BC4
+0x58A15D: mov     ecx, offset g_TileUserTraitTable; Verified: dynamic trait entry pointer array. Header data+4,capacity+8,endIndex+0xA,count+0xC,growBy+0xE from AddUserTrait growth/writes. Custom numeric IDs depend on registry insertion order.
 0x58A162: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x58A16A: mov     [esp+1Ch+arg_4], eax
 0x58A16E: call    NiTArray_Add
@@ -79,7 +79,7 @@
 0x58A193: add     ecx, offset unk_B3B0B0
 0x58A199: mov     [esp+1Ch+var_4], 0FFFFFFFFh
 0x58A1A1: mov     [esp+1Ch+arg_4], eax
-0x58A1A5: call    sub_6AA320
+0x58A1A5: call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.
 0x58A1AA: mov     ecx, [esp+18h+var_C]
 0x58A1AE: mov     large fs:0, ecx
 0x58A1B5: pop     ecx
@@ -87,3 +87,20 @@
 0x58A1B7: pop     esi
 0x58A1B8: add     esp, 0Ch
 0x58A1BB: retn    8
+0x9BF830: mov     eax, [ebp+4]
+0x9BF833: push    eax
+0x9BF834: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BF839: pop     ecx
+0x9BF83A: retn
+0x9BF83B: mov     eax, [ebp+4]
+0x9BF83E: push    eax
+0x9BF83F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BF844: pop     ecx
+0x9BF845: retn
+0x9BF846: mov     edx, [esp+arg_4]
+0x9BF84A: lea     eax, [edx-8]
+0x9BF84D: mov     ecx, [edx-0Ch]
+0x9BF850: xor     ecx, eax
+0x9BF852: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF857: mov     eax, offset stru_AE8D38
+0x9BF85C: jmp     ___CxxFrameHandler3

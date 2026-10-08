@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6637C5",
-    "line": "call    TESObjectREFR__GetNiNode",
+    "line": "call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x6637E4",
-    "line": "push    8",
+    "line": "push    8; nodeIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6637E6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6637E8",
-    "line": "call    sub_477EC0",
+    "line": "call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x6637F1",
-    "line": "push    0",
+    "line": "push    0; removeExisting",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6637F3",
-    "line": "push    8",
+    "line": "push    8; nodeIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6637F5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6637F7",
-    "line": "call    sub_477EC0",
+    "line": "call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6637FC",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x663807",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x663809",
-    "line": "call    sub_7C7F90",
+    "line": "call    ShadowSceneNode_RegisterOrRemovePointLightsInSubtree; Lock-protected wrapper for recursive point-light registration/removal across a NiNode subtree.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x663824",
-    "line": "push    8",
+    "line": "push    8; nodeIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x663826",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x663828",
-    "line": "call    sub_477EC0",
+    "line": "call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,31 +241,31 @@
   },
   {
     "ea": "0x663831",
-    "line": "push    1",
+    "line": "push    1; removeExisting",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x663833",
-    "line": "push    8",
+    "line": "push    8; nodeIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x663835",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x663837",
-    "line": "call    sub_477EC0",
+    "line": "call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66383C",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x663847",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x663849",
-    "line": "call    sub_7C7F90",
+    "line": "call    ShadowSceneNode_RegisterOrRemovePointLightsInSubtree; Lock-protected wrapper for recursive point-light registration/removal across a NiNode subtree.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x663860",
-    "line": "push    eax; a2",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x663861",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x663863",
-    "line": "call    sub_4DD130",
+    "line": "call    TESObjectREFR_SetExtraLightPayload; Allocate an AttachedLightPayload_Decoded for ordinary ExtraLight type 0x30, strongly own backingLight, initialize targetDimmer_04 to 1.0, and install it on the reference.",
     "mnemonic": "call",
     "size": 5
   },

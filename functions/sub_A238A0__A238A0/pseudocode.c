@@ -1,4 +1,4 @@
 void __cdecl sub_A238A0()
 {
-  GameSetting_destr((int *)&sAttributeNameStrength);
+  GameSetting_destr((int *)&MEMORY[0xB3A034]); /*0xa238a5*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x584740",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified: close-request helper sets Menu +0x24 to 2 when root visible==2, starts fade via 0x584300, then updates interface state. No direct menu destructor call here. Exact destruction timing through callees remains Unknown; do not label post-close access a proven immediate use-after-free.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x584796",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+duration]; duration",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x584799",
-    "line": "push    esi; int",
+    "line": "push    esi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58479A",
-    "line": "call    sub_584300",
+    "line": "call    InterfaceManager__NewTimer; Verified: clears previous timer with same index, allocates 0x14-byte node, assigns opaque index and duration, appends to InterfaceManager timer list at +0x130. Shared by menus and Tile animation objects; not menu-specific. Fallout named analogue 0x824EDBA0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5847F9",
-    "line": "call    sub_57F9F0",
+    "line": "call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x58480A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x584810",
-    "line": "jmp     sub_583C30",
+    "line": "jmp     InterfaceManager__UpdateAllTimers; Verified: advances elapsed time and unlinks/frees expired 0x14-byte timer nodes; does not destroy their owner objects. Fallout named analogue 0x824EA970; Fallout additionally adjusts delta during VATS playback.",
     "mnemonic": "jmp",
     "size": 5
   },

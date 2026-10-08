@@ -79,3 +79,28 @@
 0x437D39: pop     ebx
 0x437D3A: add     esp, 10h
 0x437D3D: retn
+0x435A90: mov     eax, [ecx]
+0x435A92: test    eax, eax
+0x435A94: jz      short locret_435AA0
+0x435A96: add     eax, 4
+0x435A99: push    eax; lpAddend
+0x435A9A: call    ds:InterlockedDecrement
+0x435AA0: retn
+0x9AC590: mov     ecx, [ebp-10h]; this
+0x9AC593: jmp     ??1QueuedMagicItem@@UAE@XZ; QueuedMagicItem::~QueuedMagicItem(void)
+0x9AC598: mov     ecx, [ebp-10h]
+0x9AC59B: add     ecx, 24h ; '$'; void *
+0x9AC59E: jmp     sub_4BDDC0
+0x9AC5A3: mov     ecx, [ebp-10h]
+0x9AC5A6: add     ecx, 28h ; '('
+0x9AC5A9: jmp     loc_435A90
+0x9AC5AE: mov     ecx, [ebp-10h]
+0x9AC5B1: add     ecx, 2Ch ; ','; slot
+0x9AC5B4: jmp     NiPointerSlot_Release
+0x9AC5B9: mov     edx, [esp+arg_4]
+0x9AC5BD: lea     eax, [edx-10h]
+0x9AC5C0: mov     ecx, [edx-14h]
+0x9AC5C3: xor     ecx, eax
+0x9AC5C5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC5CA: mov     eax, offset stru_AD9278
+0x9AC5CF: jmp     ___CxxFrameHandler3

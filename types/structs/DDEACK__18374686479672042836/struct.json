@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DDEACK",
+  "definition": "struct DDEACK\n{\nunsigned __int16 bAppReturnCode : 8;\nunsigned __int16 reserved : 6;\nunsigned __int16 fBusy : 1;\nunsigned __int16 fAck : 1;\n}\n",
   "id": 18374686479672042836,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bAppReturnCode",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int16 : 8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "reserved",
       "offset": 1,
       "offset_hex": "0x1",
-      "size": 0
+      "size": 0.75,
+      "type": "unsigned __int16 : 6"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fBusy",
-      "offset": 1,
+      "offset": 1.75,
       "offset_hex": "0x1",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fAck",
-      "offset": 1,
+      "offset": 1.875,
       "offset_hex": "0x1",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     }
   ],
   "name": "DDEACK",
+  "ordinal": 7307,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 2
 }

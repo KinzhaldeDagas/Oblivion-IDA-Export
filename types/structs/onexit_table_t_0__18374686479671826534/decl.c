@@ -1,1 +1,1 @@
-_onexit_table_t_0
+typedef _onexit_table_t _onexit_table_t_0;

@@ -1,4 +1,4 @@
-0x452180: mov     edx, [ecx+4Ch]
+0x452180: mov     edx, [ecx+4Ch]; Remaps a serialized FormID's high-byte mod index through TESSaveLoad::modRefIDTable. Dynamic 0xFF IDs pass through; missing/out-of-range mods resolve to zero; low 24-bit object ID is preserved.
 0x452183: push    esi
 0x452184: mov     esi, [esp+4+arg_0]
 0x452188: mov     eax, esi

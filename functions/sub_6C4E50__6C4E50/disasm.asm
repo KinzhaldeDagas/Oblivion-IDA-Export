@@ -4,7 +4,7 @@
 0x6C4E56: push    edi
 0x6C4E57: push    esi
 0x6C4E58: mov     edi, ecx
-0x6C4E5A: call    sub_715F40
+0x6C4E5A: call    NiTimeController_LoadBinary; Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.
 0x6C4E5F: mov     eax, [esi+21Ch]
 0x6C4E65: push    1
 0x6C4E67: lea     ecx, [esp+10h+var_4]

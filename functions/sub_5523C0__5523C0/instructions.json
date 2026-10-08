@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5523C0",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5523C5",
-    "line": "mov     ebp, [esp+1Ch+arg_4]",
+    "line": "mov     ebp, [esp+1Ch+rhs]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x5523DB",
-    "line": "push    10Dh; int",
+    "line": "push    10Dh; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x5523E5",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x5523F2",
-    "line": "mov     ebx, [esp+24h+arg_0]",
+    "line": "mov     ebx, [esp+24h+out]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5523F6",
-    "line": "push    ecx",
+    "line": "push    ecx; columns",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5523F7",
-    "line": "push    edx",
+    "line": "push    edx; rows",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5523F8",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5523FA",
-    "line": "call    sub_552240",
+    "line": "call    FaceGenMatrix_InitializeDimensions; Initialize FaceGenMatrix dimensions and resize to rows*columns floats. The product is computed in 32 bits without overflow validation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x552401",
-    "line": "mov     [esp+24h+arg_4], edi",
+    "line": "mov     [esp+24h+rhs], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -162,12 +162,6 @@
     "size": 2
   },
   {
-    "ea": "0x55240D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x552410",
     "line": "xor     edi, edi",
     "mnemonic": "xor",
@@ -181,7 +175,7 @@
   },
   {
     "ea": "0x552415",
-    "line": "mov     [esp+24h+arg_0], edi",
+    "line": "mov     [esp+24h+out], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +253,7 @@
   },
   {
     "ea": "0x55243B",
-    "line": "imul    edx, [esp+24h+arg_4]",
+    "line": "imul    edx, [esp+24h+rhs]",
     "mnemonic": "imul",
     "size": 5
   },
@@ -271,7 +265,7 @@
   },
   {
     "ea": "0x552443",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+out]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +355,7 @@
   },
   {
     "ea": "0x552471",
-    "line": "imul    eax, [esp+24h+arg_4]",
+    "line": "imul    eax, [esp+24h+rhs]",
     "mnemonic": "imul",
     "size": 5
   },
@@ -439,7 +433,7 @@
   },
   {
     "ea": "0x552499",
-    "line": "imul    edx, [esp+24h+arg_4]",
+    "line": "imul    edx, [esp+24h+rhs]",
     "mnemonic": "imul",
     "size": 5
   },
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x5524CE",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+out]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x5524EF",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+out]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,7 +607,7 @@
   },
   {
     "ea": "0x5524F9",
-    "line": "mov     [esp+24h+arg_0], eax",
+    "line": "mov     [esp+24h+out], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -625,7 +619,7 @@
   },
   {
     "ea": "0x552503",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+rhs]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -643,7 +637,7 @@
   },
   {
     "ea": "0x55250C",
-    "line": "mov     [esp+24h+arg_4], eax",
+    "line": "mov     [esp+24h+rhs], eax",
     "mnemonic": "mov",
     "size": 4
   },

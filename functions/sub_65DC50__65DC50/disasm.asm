@@ -1,4 +1,4 @@
-0x65DC50: sub     esp, 0Ch
+0x65DC50: sub     esp, 0Ch; Player/reference sound-distance helper. Computes distance from player to target ref and feeds the result into the sound system scaling/update path.
 0x65DC53: push    esi
 0x65DC54: push    edi
 0x65DC55: mov     edi, [esp+14h+arg_0]
@@ -47,7 +47,7 @@
 0x65DCDA: fld     [esp+14h+arg_0]
 0x65DCDE: push    ecx
 0x65DCDF: fstp    [esp+18h+var_18]; float
-0x65DCE2: call    sub_548A10
+0x65DCE2: call    sub_548A10; CustomAnimSupport evidence: HitShader Enum event support helper; scales player/reference distance for shader effect.
 0x65DCE7: fstp    [esp+18h+arg_0]
 0x65DCEB: add     esp, 4
 0x65DCEE: fldz
@@ -59,7 +59,7 @@
 0x65DCFD: jnz     short loc_65DD13
 0x65DCFF: push    ecx
 0x65DD00: fstp    [esp+18h+var_18]; float
-0x65DD03: call    sub_7EB080
+0x65DD03: call    sub_7EB080; CustomAnimSupport evidence: HitShader Enum event ultimately triggers shader/effect strength here.
 0x65DD08: add     esp, 4
 0x65DD0B: pop     edi
 0x65DD0C: pop     esi

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LDR_DLL_NOTIFICATION_DATA",
+  "definition": "typedef _LDR_DLL_NOTIFICATION_DATA LDR_DLL_NOTIFICATION_DATA\n",
   "id": 18374686479671878849,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Loaded",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "LDR_DLL_LOADED_NOTIFICATION_DATA"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unloaded",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "LDR_DLL_UNLOADED_NOTIFICATION_DATA"
     }
   ],
   "name": "LDR_DLL_NOTIFICATION_DATA",
+  "ordinal": 8903,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 24
 }

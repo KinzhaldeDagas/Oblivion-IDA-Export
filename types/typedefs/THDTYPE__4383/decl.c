@@ -1,1 +1,1 @@
-THDTYPE
+typedef _THDTYPE THDTYPE;

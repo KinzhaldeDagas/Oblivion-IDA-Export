@@ -1,1 +1,1 @@
-HACCEL
+typedef HACCEL__ *HACCEL;

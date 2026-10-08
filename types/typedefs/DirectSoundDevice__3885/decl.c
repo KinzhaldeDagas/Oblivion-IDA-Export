@@ -1,1 +1,46 @@
-DirectSoundDevice
+struct DirectSoundDevice
+{
+LONG ref;
+GUID guid;
+DSCAPS drvcaps;
+DWORD priolevel;
+DWORD sleeptime;
+PWAVEFORMATEX pwfx;
+PWAVEFORMATEX primary_pwfx;
+LPBYTE_0 buffer;
+DWORD writelead;
+DWORD buflen;
+DWORD ac_frames;
+DWORD frag_frames;
+DWORD playpos;
+DWORD pad;
+DWORD stopped;
+int nrofbuffers;
+IDirectSoundBufferImpl_0 **buffers;
+SRWLOCK buffer_list_lock;
+CRITICAL_SECTION mixlock;
+IDirectSoundBufferImpl_0 *primary;
+DWORD speaker_config;
+float speaker_angles[6];
+int speaker_num[6];
+int num_speakers;
+int lfe_channel;
+float *tmp_buffer;
+float *cp_buffer;
+float *dsp_buffer;
+DWORD tmp_buffer_len;
+DWORD cp_buffer_len;
+DWORD dsp_buffer_len;
+DSVOLUMEPAN volpan;
+normfunc normfunction;
+eax_info eax;
+DS3DLISTENER ds3dl;
+BOOL ds3dl_need_recalc;
+IMMDevice_0 *mmdevice;
+IAudioClient_0 *client;
+IAudioStreamVolume_0 *volume;
+IAudioRenderClient_0 *render;
+HANDLE sleepev;
+HANDLE thread;
+list entry;
+};

@@ -1,1 +1,1 @@
-TDIEntityID_0
+typedef TDIEntityID TDIEntityID_0;

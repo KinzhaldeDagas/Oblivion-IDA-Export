@@ -1,4 +1,4 @@
-0x42A0B0: push    0FFFFFFFFh
+0x42A0B0: push    0FFFFFFFFh; ExtraInfoGeneralTopic destructor clears the cached MenuTopic's isInfoGeneralTopic ownership marker, destroys its responses/display name, then frees the MenuTopic allocation.
 0x42A0B2: push    offset ??1ExtraSound@@UAE@XZ_SEH
 0x42A0B7: mov     eax, large fs:0
 0x42A0BD: push    eax
@@ -20,10 +20,10 @@
 0x42A0EA: cmp     edi, eax
 0x42A0EC: mov     [esp+1Ch+var_4], eax
 0x42A0F0: jz      short loc_42A102
-0x42A0F2: mov     ecx, edi
-0x42A0F4: call    sub_6B8F50
+0x42A0F2: mov     ecx, edi; this
+0x42A0F4: call    MenuTopic__Destroy; Ordinary MenuTopics destroy every DialogueResponse. INFOGENERAL skips response destruction here because ExtraInfoGeneralTopic owns the cached object; that owner's destructor clears isInfoGeneralTopic first, then calls this routine for full cleanup.
 0x42A0F9: push    edi
-0x42A0FA: call    FormHeapFree
+0x42A0FA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42A0FF: add     esp, 4
 0x42A102: mov     dword ptr [esi], offset ??_7BSExtraData@@6B@; const BSExtraData::`vftable'
 0x42A108: mov     ecx, [esp+1Ch+var_C]
@@ -33,3 +33,12 @@
 0x42A115: pop     esi
 0x42A116: add     esp, 10h
 0x42A119: retn
+0x9ABA20: mov     ecx, [ebp-10h]; this
+0x9ABA23: jmp     ??1BSExtraData@@UAE@XZ; BSExtraData::~BSExtraData(void)
+0x9ABA28: mov     edx, [esp+arg_4]
+0x9ABA2C: lea     eax, [edx-0Ch]
+0x9ABA2F: mov     ecx, [edx-10h]
+0x9ABA32: xor     ecx, eax
+0x9ABA34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABA39: mov     eax, offset stru_AD881C
+0x9ABA3E: jmp     ___CxxFrameHandler3

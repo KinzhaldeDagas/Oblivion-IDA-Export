@@ -1,1 +1,1 @@
-IOleInPlaceFrame_0
+typedef IOleInPlaceFrame IOleInPlaceFrame_0;

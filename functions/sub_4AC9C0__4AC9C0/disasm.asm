@@ -1,8 +1,8 @@
-0x4AC9C0: sub     esp, 0Ch
+0x4AC9C0: sub     esp, 0Ch; Verified (Oblivion): initializes the 0xE0-byte TESEffectShaderData block at TESEffectShader+0x18, including cFlags, blend defaults, particle lifetimes/velocity/scale/colors, and the byte/float values copied by TESEffectShader_ConfigureVisualProperty. Probable member names come from the matching Fallout EffectShaderData layout; the defaults and offsets are directly corroborated in Oblivion.
 0x4AC9C3: fldz
 0x4AC9C5: xor     eax, eax
 0x4AC9C7: fst     dword ptr [ecx+14h]
-0x4AC9CA: mov     [ecx], al
+0x4AC9CA: mov     [ecx], al; Verified (Oblivion): TESEffectShaderData_InitializeDefaults zeroes Data.cFlags. Individual set-bit semantics are established at the MagicShaderHitEffect_InitializeVisual callsites: 0x01 suppresses texture-effect-data setup; 0x08 suppresses the particle-property path.
 0x4AC9CC: fst     dword ptr [ecx+18h]
 0x4AC9CF: mov     [ecx+10h], eax
 0x4AC9D2: fst     dword ptr [ecx+1Ch]

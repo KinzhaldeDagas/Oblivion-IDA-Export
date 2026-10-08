@@ -17,9 +17,20 @@
 0x503238: push    edx; a2
 0x503239: push    eax; a1
 0x50323A: mov     dword ptr [esp+28h+var_4], 0
-0x503242: call    Script_ExtractArgs
+0x503242: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503247: add     esp, 20h
 0x50324A: test    al, al
 0x50324C: jnz     short loc_503251
 0x50324E: pop     esi
 0x50324F: pop     ecx
+0x503251: mov     ecx, [esp+8+arg_18]
+0x503255: mov     edx, dword ptr [esp+8+var_4]
+0x503259: push    ecx
+0x50325A: push    0
+0x50325C: push    edx
+0x50325D: push    esi
+0x50325E: call    GetInSameCell_Eval; GetInSameCell checks pointer identity of both resolved cell objects. This differs from GetInCell's case-insensitive editor-name prefix comparison; Fallout's analogous handler x4y6:0x823B61A0 also uses parent-cell pointer equality.
+0x503263: add     esp, 10h
+0x503266: pop     esi
+0x503267: pop     ecx
+0x503268: retn

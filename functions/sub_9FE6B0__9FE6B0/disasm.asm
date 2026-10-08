@@ -1,4 +1,4 @@
-0x9FE6B0: mov     ecx, offset g_pathingMutex; lpCriticalSection
+0x9FE6B0: mov     ecx, 0B3BE80h; lpCriticalSection
 0x9FE6B5: call    NiInitalizeCriticalSection
 0x9FE6BA: push    offset sub_A25DC0; void (__cdecl *)()
 0x9FE6BF: call    _atexit

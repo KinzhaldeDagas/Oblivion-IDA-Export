@@ -1,8 +1,8 @@
 int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnTouch_TargetAOE@<eax>(
-        int a1@<ebx>,
+        TESObjectREFR *a1@<ebx>,
         _DWORD *a2@<ebp>,
-        int a3,
-        int a4,
+        void (__thiscall ***a3)(_DWORD, int)@<edi>,
+        char *a4@<esi>,
         int a5,
         int a6,
         int a7,
@@ -18,12 +18,28 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnTouch_Target
         int a17,
         int a18,
         int a19,
-        char a20)
+        __int64 a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        int a25,
+        int a26,
+        int a27,
+        int a28,
+        int a29,
+        int a30,
+        int a31,
+        int a32,
+        int a33,
+        int a34,
+        int a35)
 {
-  if ( EffectItem_GetArea(a2) <= 0 || !a1 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_DestroyActvEff(
+  if ( EffectItem_GetArea(a2) <= 0 || !a1 ) /*0x69b502*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_DestroyActvEff( /*0x69b4fa*/
+             a1,
              a3,
-             a4,
+             (int)a4,
              a5,
              a6,
              a7,
@@ -33,7 +49,44 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnTouch_Target
              a11,
              a12,
              a13,
-             a14);
-  (*(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x174))(a1);
-  return MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnTouch_AOE(a1, a3, a4, a5, a6);
+             a14,
+             a15,
+             a16,
+             a17,
+             a18,
+             a19,
+             a20,
+             a21,
+             a22,
+             a23,
+             a24,
+             a25,
+             a26,
+             a27,
+             a28,
+             a29,
+             a30,
+             a31,
+             a32,
+             a33,
+             a34,
+             a35);
+  BYTE2(a9) = 0; /*0x69b512*/
+  a1->vtbl->GetPos(a1); /*0x69b517*/
+  return MagicCaster_ApplyActiveMagicItem_::EffectLoop_ApplyOnTouch_AOE(
+           a1,
+           (int)a3,
+           a4,
+           a5,
+           a6,
+           a7,
+           a8,
+           a9,
+           a10,
+           a11,
+           a12,
+           a13,
+           a14,
+           a15,
+           a16);
 }

@@ -1,4 +1,4 @@
-0x5E0430: push    ebx
+0x5E0430: push    ebx; Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.
 0x5E0431: push    ebp
 0x5E0432: push    esi
 0x5E0433: mov     esi, ecx
@@ -34,18 +34,18 @@
 0x5E047E: mov     edi, ebx
 0x5E0480: mov     eax, [ebp+0]
 0x5E0483: mov     edx, [eax+128h]
-0x5E0489: push    7
+0x5E0489: push    7; Read base Luck (AV 0x07) for the effective-skill adjustment.
 0x5E048B: mov     ecx, ebp
 0x5E048D: call    edx
-0x5E048F: mov     ecx, [esp+0Ch+arg_4]
+0x5E048F: mov     ecx, [esp+0Ch+luckValue]
 0x5E0493: push    eax
 0x5E0494: mov     eax, [edi]
 0x5E0496: mov     edx, [eax+128h]
-0x5E049C: push    ecx
+0x5E049C: push    ecx; Read the requested native base skill before applying Luck. This calculation is independent of major membership and advancement thresholds.
 0x5E049D: mov     ecx, edi
 0x5E049F: call    edx
-0x5E04A1: push    eax
-0x5E04A2: call    Calc_LuckModifiedSkill
+0x5E04A1: push    eax; skillValue
+0x5E04A2: call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.
 0x5E04A7: add     esp, 8
 0x5E04AA: pop     edi
 0x5E04AB: pop     esi

@@ -1,19 +1,32 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x65C520",
+      "0x65C614"
+    ]
+  ],
+  "chunks_sha256": "03bbde95dd160a04aaf111293cd0f875370a03a940bd8871c51dc12b43f2f462",
+  "comment_regular": "Verified: returns UInt16 size 2 + N*(version<0x34 ? 8 : 5), counting nonnull list entries, dedicated +8/+0xC pointers, and 18 indexed pointers. Note writer 0x65C270 always writes 5-byte entries; do not infer it supports producing old-version format.\nVerified continuation 2026-10-04: constructor/insert/remove/clear/copy are now connected; Add 65C8F0 fragmentation repaired. Prior insertion-fragmentation boundary is superseded. Probable corresponding Fallout ModifierList serialization at 826B6B88/826B6CD0/826B7500; dynamic map and endian handling differ, no schema copied.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "AVCollection_GetSaveSize",
   "end_ea": "0x65C614",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AVCollection_GetSaveSize",
   "segment": ".text",
   "sha256": "03bbde95dd160a04aaf111293cd0f875370a03a940bd8871c51dc12b43f2f462",
   "size": 244,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65C520",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 244,
+  "type": "unsigned __int16 __thiscall(AVCollection *self)",
   "xrefs_from_count": 115,
   "xrefs_to_count": 4
 }

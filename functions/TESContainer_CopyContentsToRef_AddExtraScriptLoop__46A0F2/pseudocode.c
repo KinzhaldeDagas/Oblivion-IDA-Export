@@ -1,5 +1,5 @@
 int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop@<eax>(
-        char *a1@<ebx>,
+        BSExtraDataVtbl *a1@<ebx>,
         int a2@<ebp>,
         double a3@<st2>,
         double a4@<st1>,
@@ -64,25 +64,25 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop@<eax>(
         int a63)
 {
   int a64; // [esp+E8h] [ebp+E8h]
-  _DWORD *v65; // eax
-  ExtraDataList *v66; // esi
+  _DWORD *v64; // eax
+  ExtraDataList *v65; // esi
   char **EventList; // eax
-  TESChildCELL *v68; // eax
-  TESForm *v69; // edi
+  TESChildCELL *v67; // eax
+  TESForm *v68; // edi
   char **ExtraScriptEventList; // eax
+  int v71; // [esp+14h] [ebp+14h]
   int v72; // [esp+14h] [ebp+14h]
-  int v73; // [esp+14h] [ebp+14h]
 
-  v65 = (_DWORD *)FormHeapAlloc(0x14u);
-  v72 = (int)v65;
-  v66 = 0;
-  STACK[0x140] = 0;
-  if ( v65 )
-    v66 = (ExtraDataList *)ExtraDataList_constr(v65);
-  STACK[0x140] = 0xFFFFFFFF;
-  ExtraDataList_SetExtraCount(v66, 1);
-  if ( !v66 )
-    return TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleForm(
+  v64 = (_DWORD *)FormHeapAlloc(0x14u); /*0x46a0f4*/
+  v71 = (int)v64; /*0x46a0fc*/
+  v65 = 0; /*0x46a100*/
+  STACK[0x140] = 0; /*0x46a104*/
+  if ( v64 ) /*0x46a10b*/
+    v65 = (ExtraDataList *)ExtraDataList_constr(v64); /*0x46a114*/
+  STACK[0x140] = 0xFFFFFFFF; /*0x46a11a*/
+  ExtraDataList_SetExtraCount(v65, 1); /*0x46a125*/
+  if ( !v65 ) /*0x46a12c*/
+    return TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleForm( /*0x46a12c*/
              a5,
              a3,
              a4,
@@ -92,7 +92,7 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop@<eax>(
              a8,
              a9,
              a10,
-             v72,
+             v71,
              a12,
              a13,
              a14,
@@ -146,18 +146,18 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop@<eax>(
              a62,
              a63,
              a64);
-  if ( ExtraDataList_GetExtraScript(v66) )
-    return TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleForm(
+  if ( ExtraDataList_GetExtraScript(v65) ) /*0x46a134*/
+    return TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleForm( /*0x46a13b*/
              a5,
              a3,
              a4,
              a2,
-             (int)v66,
+             (int)v65,
              a7,
              a8,
              a9,
              a10,
-             v72,
+             v71,
              a12,
              a13,
              a14,
@@ -211,33 +211,33 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop@<eax>(
              a62,
              a63,
              a64);
-  ExtraDataList_AddScript(v66, (int)a1);
-  EventList = Script_CreateEventList(a1);
-  ExtraDataList_SetScriptEventList(v66, (int)EventList);
-  v68 = (TESChildCELL *)FormHeapAlloc(0x58u);
-  v73 = (int)v68;
-  STACK[0x140] = 1;
-  if ( v68 )
-    v69 = (TESForm *)TESObjectREFR_constr(v68);
+  ExtraDataList_AddScript(v65, a1); /*0x46a140*/
+  EventList = Script_CreateEventList((char *)a1); /*0x46a147*/
+  ExtraDataList_SetScriptEventList(v65, (int)EventList); /*0x46a14f*/
+  v67 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x46a156*/
+  v72 = (int)v67; /*0x46a15e*/
+  STACK[0x140] = 1; /*0x46a164*/
+  if ( v67 ) /*0x46a16f*/
+    v68 = (TESForm *)TESObjectREFR_constr(v67); /*0x46a178*/
   else
-    v69 = 0;
-  STACK[0x140] = 0xFFFFFFFF;
-  TESForm_MakeTemporary(v69);
-  ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v66);
-  Script_Run((Script *)a1, a6, a4, (TESObjectREFR *)v69, ExtraScriptEventList, 0, 0);
-  if ( v69 )
-    v69->vtbl->Destroy(v69, 1);
+    v68 = 0; /*0x46a17c*/
+  STACK[0x140] = 0xFFFFFFFF; /*0x46a180*/
+  TESForm_MakeTemporary(v68); /*0x46a18b*/
+  ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v65); /*0x46a196*/
+  Script_Run((Script *)a1, a6, a4, (TESObjectREFR *)v68, ExtraScriptEventList, 0, 0); /*0x46a19f*/
+  if ( v68 ) /*0x46a1a6*/
+    v68->vtbl->Destroy(v68, 1); /*0x46a1b1*/
   return TESContainer_CopyContentsToRef_::AddExtraScriptLoop_AddSingleForm(
            a17,
            a3,
            a4,
            a2,
-           (int)v66,
+           (int)v65,
            a7,
            a8,
            a9,
            a10,
-           v73,
+           v72,
            a12,
            a13,
            a14,

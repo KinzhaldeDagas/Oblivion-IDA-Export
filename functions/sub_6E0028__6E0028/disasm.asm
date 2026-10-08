@@ -75,7 +75,7 @@
 0x6E0127: call    sub_70FD10
 0x6E012C: jmp     loc_6E0397
 0x6E0131: lea     ecx, [esp+arg_24]
-0x6E0135: call    sub_43F350
+0x6E0135: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6E013A: fstp    st
 0x6E013C: fld     dword ptr ds:0A7B17Ch
 0x6E0142: fld     [esp+arg_2C]
@@ -127,7 +127,7 @@
 0x6E01E0: fld     [esp+arg_38]
 0x6E01E4: fsub    [esp+arg_14]
 0x6E01E8: fstp    [esp+arg_38]
-0x6E01EC: call    sub_43F350
+0x6E01EC: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6E01F1: mov     eax, [esp+arg_64]
 0x6E01F5: fstp    st
 0x6E01F7: test    byte ptr [eax+3Ch], 1

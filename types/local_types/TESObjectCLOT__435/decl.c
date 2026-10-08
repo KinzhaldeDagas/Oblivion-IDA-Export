@@ -1,1 +1,1 @@
-TESObjectCLOT
+struct TESObjectCLOT;

@@ -1,1 +1,1 @@
-_Dcomplex
+typedef _C_double_complex_0 _Dcomplex;

@@ -1,17 +1,17 @@
-0x552730: sub     esp, 8
+0x552730: sub     esp, 8; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].
 0x552733: push    ebx
-0x552734: mov     ebx, [esp+0Ch+arg_0]
+0x552734: mov     ebx, [esp+0Ch+out]
 0x552738: push    ebp
 0x552739: push    esi
 0x55273A: mov     esi, ecx
 0x55273C: mov     eax, [esi]
 0x55273E: mov     ecx, [esi+4]
-0x552741: push    eax
-0x552742: push    ecx
+0x552741: push    eax; columns
+0x552742: push    ecx; rows
 0x552743: xor     ebp, ebp
-0x552745: mov     ecx, ebx
+0x552745: mov     ecx, ebx; this
 0x552747: mov     [esp+1Ch+var_8], ebp
-0x55274B: call    sub_552240
+0x55274B: call    FaceGenMatrix_InitializeDimensions; Initialize FaceGenMatrix dimensions and resize to rows*columns floats. The product is computed in 32 bits without overflow validation.
 0x552750: cmp     [esi], ebp
 0x552752: jbe     short loc_5527C3
 0x552754: push    edi

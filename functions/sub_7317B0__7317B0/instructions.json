@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7317B0",
-    "line": "mov     eax, ds:0B3FCE4h",
+    "line": "mov     eax, ds:0B3FCE4h; Pass222/223: NiPropertyState default-slot initializer. Copies native default globals into slots 0,2..9; leaves fog slot 1/+0x0C null.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7317FC",
-    "line": "mov     edi, [esi+10h]",
+    "line": "mov     edi, [esi+10h]; Fog property propagation decode: default initializer skips this+3 / state+0x0C, proving no default fog property is installed in NiPropertyState.",
     "mnemonic": "mov",
     "size": 3
   },

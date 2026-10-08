@@ -41,3 +41,14 @@
 0x532E69: pop     esi
 0x532E6A: add     esp, 10h
 0x532E6D: retn    4
+0x9B8EE0: lea     ecx, [ebp+4]; slot
+0x9B8EE3: jmp     NiPointerSlot_Release
+0x9B8EE8: mov     ecx, [ebp-10h]; slot
+0x9B8EEB: jmp     NiPointerSlot_Release
+0x9B8EF0: mov     edx, [esp+arg_4]
+0x9B8EF4: lea     eax, [edx-0Ch]
+0x9B8EF7: mov     ecx, [edx-10h]
+0x9B8EFA: xor     ecx, eax
+0x9B8EFC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8F01: mov     eax, offset stru_AE32FC
+0x9B8F06: jmp     ___CxxFrameHandler3

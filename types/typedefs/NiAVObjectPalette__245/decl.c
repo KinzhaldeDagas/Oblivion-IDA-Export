@@ -1,1 +1,1 @@
-NiAVObjectPalette
+struct NiAVObjectPalette;

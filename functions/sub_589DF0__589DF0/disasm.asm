@@ -17,7 +17,7 @@
 0x589E1E: mov     [esi+0Ch], di
 0x589E22: mov     [esi+0Eh], di
 0x589E26: fldz
-0x589E28: mov     ax, [esp+1Ch+arg_0]
+0x589E28: mov     ax, [esp+1Ch+trait]
 0x589E2D: fstp    dword ptr [esi+4]
 0x589E30: push    18h; Size
 0x589E32: mov     [esp+20h+var_4], edi
@@ -59,3 +59,13 @@
 0x589EA1: pop     esi
 0x589EA2: add     esp, 10h
 0x589EA5: retn    4
+0x9BF770: mov     ecx, [ebp-10h]
+0x9BF773: add     ecx, 8; void *
+0x9BF776: jmp     BSStringT_Clear
+0x9BF77B: mov     edx, [esp+arg_4]
+0x9BF77F: lea     eax, [edx-0Ch]
+0x9BF782: mov     ecx, [edx-10h]
+0x9BF785: xor     ecx, eax
+0x9BF787: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BF78C: mov     eax, offset stru_AE8C78
+0x9BF791: jmp     ___CxxFrameHandler3

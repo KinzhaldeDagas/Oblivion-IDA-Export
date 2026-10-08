@@ -1,4 +1,4 @@
-0x475300: push    0FFFFFFFFh
+0x475300: push    0FFFFFFFFh; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.
 0x475302: push    offset SEH_8C8970
 0x475307: mov     eax, large fs:0
 0x47530D: push    eax
@@ -31,7 +31,7 @@
 0x47535B: jnz     short loc_475365
 0x47535D: push    ecx
 0x47535E: mov     ecx, esi
-0x475360: call    sub_4733A0
+0x475360: call    ActorAnimData_StopSlotWithBlendNote; Calculates native stop ease-out from the current physical slot's TESAnimGroup Blend byte at +0x21 unless ActorAnimData +0xC4 forces zero, then passes the original slot argument to ActorAnimData_ClearSlot. Thus aliases 5/6 retain ClearSlot's multi-slot expansion.
 0x475365: cmp     dword ptr [esi+0D4h], 0
 0x47536C: jnz     short loc_47537E
 0x47536E: mov     eax, [edi]
@@ -46,7 +46,7 @@
 0x475395: jmp     short loc_47539F
 0x475397: push    edi
 0x475398: mov     ecx, esi
-0x47539A: call    sub_472ED0
+0x47539A: call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.
 0x47539F: push    2Ch ; ','; Size
 0x4753A1: call    FormHeapAlloc
 0x4753A6: add     esp, 4
@@ -62,7 +62,7 @@
 0x4753C7: push    edx
 0x4753C8: push    ecx
 0x4753C9: mov     ecx, eax
-0x4753CB: call    sub_474C50
+0x4753CB: call    AnimIdle_InitAndLoadKF; Initializes the 0x2C-byte AnimIdle runtime holder and starts its KF load. Observed layout: +0x00 phase (0 pending/unavailable, 1 ready, 2 active, 3 terminal), +0x04 completion/action mode, +0x08 KFModel, +0x0C requested slot/type, +0x10 played sequence, +0x24 TESIdleForm, +0x28 actor ref. Builds Meshes\\<TESIdleForm model path>, loads now or queues asynchronously, binds two actor-specific resources, and marks phase 1 when a KFModel is immediately available.
 0x4753D0: jmp     short loc_4753D4
 0x4753D2: xor     eax, eax
 0x4753D4: mov     [edi], eax
@@ -73,3 +73,15 @@
 0x4753E3: pop     esi
 0x4753E4: add     esp, 10h
 0x4753E7: retn    8
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

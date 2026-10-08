@@ -1,10 +1,10 @@
-unsigned int __thiscall sub_526A30(unsigned __int16 *this, LONG *a2)
+unsigned int __thiscall sub_526A30(MEF_RefPointerArray16 *this, LONG *a2)
 {
-  unsigned int v3; // edi
+  unsigned int usedEnd; // edi
 
-  v3 = *(this + 5);
-  if ( v3 >= *(this + 4) )
-    sub_523B10(this, v3 + *(this + 7));
-  sub_5254D0(this, v3, a2);
-  return v3;
+  usedEnd = this->usedEnd; /*0x526a38*/
+  if ( usedEnd >= this->capacity ) /*0x526a3e*/
+    NiTObjectArray_Resize16(this, usedEnd + this->growBy); /*0x526a49*/
+  sub_5254D0(this, usedEnd, a2); /*0x526a56*/
+  return usedEnd; /*0x526a5d*/
 }

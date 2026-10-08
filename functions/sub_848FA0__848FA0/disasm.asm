@@ -10,8 +10,8 @@
 0x848FBA: mov     eax, [ecx]
 0x848FBC: mov     edx, [eax+78h]
 0x848FBF: call    edx
-0x848FC1: push    eax
-0x848FC2: mov     ecx, esi
-0x848FC4: call    sub_7715E0
+0x848FC1: push    eax; preset
+0x848FC2: mov     ecx, esi; this
+0x848FC4: call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.
 0x848FC9: pop     esi
 0x848FCA: retn    8

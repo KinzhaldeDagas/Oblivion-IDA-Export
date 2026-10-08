@@ -45,7 +45,7 @@
 0x8C58DA: push    eax
 0x8C58DB: mov     ecx, edi
 0x8C58DD: call    edx
-0x8C58DF: mov     ecx, dword ptr [esp+14h+var_4]
+0x8C58DF: mov     ecx, [esp+14h+var_4]
 0x8C58E3: mov     eax, [esi]
 0x8C58E5: mov     edx, [eax+64h]
 0x8C58E8: push    ecx

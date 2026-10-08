@@ -111,7 +111,7 @@
 0x496665: test    eax, eax
 0x496667: jz      short loc_496682
 0x496669: lea     esp, [esp+0]
-0x496670: cmp     eax, offset dword_B3FACC
+0x496670: cmp     eax, offset stru_B3FACC
 0x496675: jz      loc_496768
 0x49667B: mov     eax, [eax+4]
 0x49667E: test    eax, eax
@@ -122,7 +122,7 @@
 0x49668A: call    edx
 0x49668C: test    eax, eax
 0x49668E: jz      short loc_4966A2
-0x496690: cmp     eax, offset dword_B3FD14
+0x496690: cmp     eax, offset stru_B3FD14
 0x496695: jz      loc_496772
 0x49669B: mov     eax, [eax+4]
 0x49669E: test    eax, eax
@@ -335,7 +335,7 @@
 0x496947: jnz     short loc_4969A9
 0x496949: mov     eax, dword ptr [esp+2F4h+var_2DC+4]
 0x49694D: push    eax
-0x49694E: call    sub_4DC270
+0x49694E: call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.
 0x496953: mov     edi, eax
 0x496955: add     esp, 4
 0x496958: test    edi, edi
@@ -383,8 +383,7 @@
 0x4969D2: cmp     eax, edi
 0x4969D4: jz      short loc_4969F2
 0x4969D6: jmp     short loc_4969E0
-0x4969D8: align 10h
-0x4969E0: cmp     eax, offset dword_B3CD7C
+0x4969E0: cmp     eax, offset stru_B3CD7C
 0x4969E5: jz      loc_496BF9
 0x4969EB: mov     eax, [eax+4]
 0x4969EE: cmp     eax, edi
@@ -470,7 +469,6 @@
 0x496AF5: cmp     [esi+0Ah], di
 0x496AF9: jbe     short loc_496B38
 0x496AFB: jmp     short loc_496B00
-0x496AFD: align 10h
 0x496B00: mov     ecx, [esi+4]
 0x496B03: mov     edx, [ecx+edi*4]
 0x496B06: mov     ecx, [esp+2F4h+var_2E0]
@@ -556,3 +554,19 @@
 0x496BF6: retn    8
 0x496BF9: mov     al, 1
 0x496BFB: jmp     loc_4969F4
+0x9B0300: mov     eax, [ebp-2D4h]
+0x9B0306: push    eax
+0x9B0307: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B030C: pop     ecx
+0x9B030D: retn
+0x9B030E: mov     edx, [esp+arg_4]
+0x9B0312: lea     eax, [edx-2E4h]
+0x9B0318: mov     ecx, [edx-2E8h]
+0x9B031E: xor     ecx, eax
+0x9B0320: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0325: add     eax, 10h
+0x9B0328: mov     ecx, [edx-4]
+0x9B032B: xor     ecx, eax
+0x9B032D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B0332: mov     eax, offset stru_ADC678
+0x9B0337: jmp     ___CxxFrameHandler3

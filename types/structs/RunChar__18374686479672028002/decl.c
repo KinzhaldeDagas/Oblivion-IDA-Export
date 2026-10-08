@@ -1,1 +1,1 @@
-RunChar
+typedef tagRunChar RunChar;

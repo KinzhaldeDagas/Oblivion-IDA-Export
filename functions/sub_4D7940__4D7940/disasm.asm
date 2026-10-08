@@ -22,7 +22,7 @@
 0x4D797B: jnz     short loc_4D7986
 0x4D797D: push    esi
 0x4D797E: lea     ecx, [edi+44h]
-0x4D7981: call    sub_420860
+0x4D7981: call    ExtraDataList_SetTravelHorse; Creates/updates ExtraTravelHorse type 0x58; null removes the travel-horse link.
 0x4D7986: pop     edi
 0x4D7987: pop     esi
 0x4D7988: retn    4

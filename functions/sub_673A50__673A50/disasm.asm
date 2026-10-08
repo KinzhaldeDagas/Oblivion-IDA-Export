@@ -1,4 +1,4 @@
-0x673A50: mov     eax, ecx
+0x673A50: mov     eax, ecx; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x673A52: mov     ecx, [esp+a2]
 0x673A56: cmp     ecx, 3; switch 4 cases
 0x673A59: ja      short def_673A5B; jumptable 00673A5B default case

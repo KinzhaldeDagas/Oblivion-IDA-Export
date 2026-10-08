@@ -1,1 +1,1 @@
-std::bad_alloc
+struct std::bad_alloc;

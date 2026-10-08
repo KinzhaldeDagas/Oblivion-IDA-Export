@@ -13,7 +13,7 @@
 0x625242: test    eax, eax
 0x625244: jnz     short loc_625258
 0x625246: mov     ecx, esi; this
-0x625248: call    Actor_GetHandReachDistance
+0x625248: call    Actor_GetHandReachDistance; Returns the actor's hand-to-hand reach distance by converting the native hand-reach game setting through Calc_GetCombatDistance.
 0x62524D: fstp    [esp+8+var_4]
 0x625251: fld     [esp+8+var_4]
 0x625255: pop     esi

@@ -12,7 +12,7 @@
 0x535C01: push    edi
 0x535C02: jz      loc_535DB6
 0x535C08: push    ebx
-0x535C09: call    sub_47FAC0
+0x535C09: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x535C0E: add     esp, 4
 0x535C11: test    eax, eax
 0x535C13: jz      loc_535DB6
@@ -24,9 +24,8 @@
 0x535C2C: jnz     short loc_535C36
 0x535C2E: cmp     ds:0B36594h, esi
 0x535C34: jz      short loc_535C65
-0x535C36: mov     eax, offset dword_B36594
+0x535C36: mov     eax, (offset dword_B36590+4)
 0x535C3B: jmp     short loc_535C40
-0x535C3D: align 10h
 0x535C40: mov     ecx, [eax+4]
 0x535C43: test    ecx, ecx
 0x535C45: jnz     short loc_535C4B
@@ -64,7 +63,7 @@
 0x535C8D: call    sub_535AC0
 0x535C92: fstp    dword ptr [esi+8]
 0x535C95: push    esi
-0x535C96: mov     ecx, offset dword_B36594
+0x535C96: mov     ecx, (offset dword_B36590+4)
 0x535C9B: mov     dword ptr [esi+0Ch], 0
 0x535CA2: call    BSSimpleList_PushFront
 0x535CA7: fld     dword ptr [esi+8]
@@ -74,7 +73,7 @@
 0x535CB4: push    offset flt_B2F080
 0x535CB9: lea     ecx, [esp+164h+var_110]
 0x535CBD: movaps  [esp+164h+var_E0], xmm0
-0x535CC5: call    sub_8B1DD0
+0x535CC5: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x535CCA: mov     edx, [edi]
 0x535CCC: mov     edx, [edx+0ACh]
 0x535CD2: lea     eax, [esp+160h+var_D0]

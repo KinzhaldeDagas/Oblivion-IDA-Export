@@ -1,56 +1,57 @@
-void __thiscall sub_530930(unsigned int **this, int a2)
+// Deep-clone every shared TESResponse into a caller-owned response list. TESResponse::CopyFrom copies all 16 TRDT bytes and duplicates responseText; callers clear their temporary list after constructing their own DialogueResponse objects.
+void __thiscall TESResponseList::CloneFrom(TESResponseListView *this, TESResponseListView *source)
 {
-  int v2; // ebp
-  char **v3; // esi
-  _DWORD *v4; // eax
-  BSStringT *v5; // edi
-  unsigned int **v6; // esi
-  unsigned int **v7; // eax
+  TESResponseListView *v2; // ebp
+  const TESResponse *first; // esi
+  TESResponse *v4; // eax
+  TESResponse *v5; // edi
+  TESResponseListView *v6; // esi
+  TESResponseNode **p_next; // eax
   bool v8; // zf
-  BSStringT **v9; // eax
+  TESResponseNode *v9; // eax
 
-  sub_5308E0(this);
-  v2 = a2;
+  TESResponseList::Clear(this); /*0x530959*/
+  v2 = source; /*0x53095e*/
   while ( v2 )
   {
-    v3 = *(char ***)v2;
-    if ( !*(_DWORD *)v2 )
-      break;
-    v2 = *(_DWORD *)(v2 + 4);
-    v4 = (_DWORD *)FormHeapAlloc(0x18u);
-    v5 = v4 ? (BSStringT *)sub_52E150(v4) : 0;
-    sub_52E110(v5, v3);
-    if ( v5 )
+    first = v2->first; /*0x530970*/
+    if ( !v2->first ) /*0x530970*/
+      break; /*0x530975*/
+    v2 = (TESResponseListView *)v2->next; /*0x53097b*/
+    v4 = (TESResponse *)FormHeapAlloc(0x18u);   // Allocate one 0x18 TESResponse clone. If allocation fails, the next unconditional TESResponse::CopyFrom receives null and dereferences it; native low-memory behavior is a crash. /*0x530980*/
+    v5 = v4 ? TESResponse::TESResponse(v4) : 0;
+    TESResponse::CopyFrom(v5, first); /*0x5309ac*/
+    if ( v5 ) /*0x5309b3*/
     {
-      v6 = this;
-      v7 = this + 1;
-      if ( *(this + 1) )
+      v6 = this; /*0x5309b9*/
+      p_next = &this->next; /*0x5309bb*/
+      if ( this->next ) /*0x5309bb*/
       {
-        do
+        do /*0x5309ca*/
         {
-          v6 = (unsigned int **)*v7;
-          v8 = (*v7)[1] == 0;
-          v7 = (unsigned int **)(*v7 + 1);
+          v6 = (TESResponseListView *)*p_next; /*0x5309c2*/
+          v8 = (*p_next)->next == 0; /*0x5309c4*/
+          p_next = &(*p_next)->next; /*0x5309c7*/
         }
-        while ( !v8 );
+        while ( !v8 ); /*0x5309ca*/
       }
-      if ( *v6 )
+      if ( v6->first ) /*0x5309cc*/
       {
-        v9 = (BSStringT **)FormHeapAlloc(8u);
-        if ( v9 )
+        v9 = (TESResponseNode *)FormHeapAlloc(8u);// Append a cloned response by allocating a list node. If node allocation fails, the just-created TESResponse is not linked or freed; cloning continues, so this individual authored response is omitted and leaked. /*0x5309d2*/
+        if ( v9 ) /*0x5309dc*/
         {
-          *v9 = v5;
-          v9[1] = 0;
-          v6[1] = (unsigned int *)v9;
+          v9->item = v5; /*0x5309de*/
+          v9->next = 0; /*0x5309e0*/
+          v6->next = v9; /*0x5309e3*/
         }
         else
         {
-          v6[1] = 0;
+          v6->next = 0; /*0x5309ea*/
         }
       }
       else
       {
-        *v6 = (unsigned int *)v5;
+        v6->first = v5; /*0x5309ef*/
       }
     }
   }

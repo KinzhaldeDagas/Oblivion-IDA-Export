@@ -24,21 +24,21 @@
 0x6A0B0E: mov     [esp+12Ch+var_4], 3
 0x6A0B19: jz      short loc_6A0B6F
 0x6A0B1B: mov     eax, [esi+1Ch]
-0x6A0B1E: mov     ecx, ds:0B333C4h
+0x6A0B1E: mov     ecx, ds:0B333C4h; this
 0x6A0B24: cmp     eax, ecx
 0x6A0B26: jnz     short loc_6A0B4E
-0x6A0B28: push    1
-0x6A0B2A: call    PlayerCharacter_GetPlayerNode
+0x6A0B28: push    1; firstPerson
+0x6A0B2A: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A0B2F: cmp     eax, ebx
 0x6A0B31: jz      short loc_6A0B40
 0x6A0B33: mov     ecx, [esi+48h]
-0x6A0B36: push    ecx
+0x6A0B36: push    ecx; data
 0x6A0B37: mov     ecx, [esi+34h]
-0x6A0B3A: push    eax
-0x6A0B3B: call    sub_4ADAD0
-0x6A0B40: mov     ecx, ds:0B333C4h
-0x6A0B46: push    ebx
-0x6A0B47: call    PlayerCharacter_GetPlayerNode
+0x6A0B3A: push    eax; sceneRoot
+0x6A0B3B: call    TESEffectShader_RemoveTextureEffectFromScenegraph; Verified (Oblivion): MagicShaderHitEffect destructor invokes TESEffectShader_RemoveTextureEffectFromScenegraph before releasing textureEffectData_48, ensuring matching scenegraph properties no longer retain the effect's object.
+0x6A0B40: mov     ecx, ds:0B333C4h; this
+0x6A0B46: push    ebx; firstPerson
+0x6A0B47: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x6A0B4C: jmp     short loc_6A0B5E
 0x6A0B4E: cmp     eax, ebx
 0x6A0B50: jz      short loc_6A0B6F
@@ -49,19 +49,19 @@
 0x6A0B5E: cmp     eax, ebx
 0x6A0B60: jz      short loc_6A0B6F
 0x6A0B62: mov     ecx, [esi+48h]
-0x6A0B65: push    ecx
+0x6A0B65: push    ecx; data
 0x6A0B66: mov     ecx, [esi+34h]
-0x6A0B69: push    eax
-0x6A0B6A: call    sub_4ADAD0
-0x6A0B6F: mov     eax, [esi+40h]
+0x6A0B69: push    eax; sceneRoot
+0x6A0B6A: call    TESEffectShader_RemoveTextureEffectFromScenegraph; Verified (Oblivion): inverse traversal visits the same property ID 4 subtype 5..10 classes (PPLighting/SpeedTree PP, Hair, SpeedTree Branch, SpeedTree Leaf, Lighting30). It clears the TextureEffectData pointer only when it equals the supplied object. No current shader-property vtable returns subtype 8 (Unknown). Fallout StopTextureShader uses property ID 3 and subtype 8..12, so do not transfer these IDs across versions.
+0x6A0B6F: mov     eax, [esi+40h]; Verified (Oblivion): shader field +0x40 is detached from its parent and released as a reference-counted NiAVObject/NiNode.
 0x6A0B72: cmp     eax, ebx
 0x6A0B74: jz      short loc_6A0B83
 0x6A0B76: mov     ecx, [esi+3Ch]
-0x6A0B79: push    ecx
+0x6A0B79: push    ecx; property
 0x6A0B7A: mov     ecx, [esi+34h]
-0x6A0B7D: push    eax
-0x6A0B7E: call    sub_4AC740
-0x6A0B83: mov     edi, [esi+3Ch]
+0x6A0B7D: push    eax; rootNode
+0x6A0B7E: call    NiProperty_DetachFromActorScenegraphs; Verified (Oblivion): shaderProperty_3C is detached from actor scenegraphs and released during destruction.
+0x6A0B83: mov     edi, [esi+3Ch]; Verified (Oblivion): shaderProperty_3C is a ParticleShaderProperty* (subtype ID 0xE), detached from the target's scenegraph and reference-count released during destruction.
 0x6A0B86: cmp     edi, ebx
 0x6A0B88: mov     ebp, ds:0A2807Ch
 0x6A0B8E: jz      short loc_6A0BAB
@@ -78,11 +78,11 @@
 0x6A0BA4: mov     ecx, edi
 0x6A0BA6: call    eax
 0x6A0BA8: mov     [esi+3Ch], ebx
-0x6A0BAB: mov     ecx, [esi+40h]
+0x6A0BAB: mov     ecx, [esi+40h]; this
 0x6A0BAE: cmp     ecx, ebx
 0x6A0BB0: jz      short loc_6A0BB8
-0x6A0BB2: push    ebx
-0x6A0BB3: call    sub_7074B0
+0x6A0BB2: push    ebx; newParent
+0x6A0BB3: call    NiAVObject_SetParentAndDetachFromOld; Sets NiAVObject parent at +0x1C. If already parented, first asks the old parent to remove this child, then installs the new parent. Used by NiNode child insertion/replacement.
 0x6A0BB8: mov     edi, [esi+40h]
 0x6A0BBB: cmp     edi, ebx
 0x6A0BBD: jz      short loc_6A0BDA
@@ -99,7 +99,7 @@
 0x6A0BD3: mov     ecx, edi
 0x6A0BD5: call    eax
 0x6A0BD7: mov     [esi+40h], ebx
-0x6A0BDA: mov     edi, [esi+48h]
+0x6A0BDA: mov     edi, [esi+48h]; Verified (Oblivion): textureEffectData_48 is detached from target nodes and reference-count released during destruction.
 0x6A0BDD: cmp     edi, ebx
 0x6A0BDF: jz      short loc_6A0BFC
 0x6A0BE1: lea     ecx, [edi+4]
@@ -115,7 +115,7 @@
 0x6A0BF5: mov     ecx, edi
 0x6A0BF7: call    eax
 0x6A0BF9: mov     [esi+48h], ebx
-0x6A0BFC: mov     edx, [esi+34h]
+0x6A0BFC: mov     edx, [esi+34h]; Verified (Oblivion): effectShader_34 is TESEffectShader*. The field is assigned from EffectSetting::effectShader at +0x78, compared to the Life Detected shader singleton, and consumed by shader-property construction/update paths.
 0x6A0BFF: cmp     edx, ebx
 0x6A0C01: jz      loc_6A0CDC
 0x6A0C07: mov     eax, [esi+1Ch]
@@ -134,7 +134,7 @@
 0x6A0C30: push    ecx
 0x6A0C31: fstp    [esp+130h+var_130]; float
 0x6A0C34: push    eax; int
-0x6A0C35: call    sub_6AC420
+0x6A0C35: call    SoundManager_StopRefLoopingSoundsWithFade; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.
 0x6A0C3A: mov     eax, [esi+34h]
 0x6A0C3D: mov     ecx, [eax+108h]
 0x6A0C43: mov     eax, ecx
@@ -247,3 +247,25 @@
 0x6A0D7E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6A0D83: add     esp, 118h
 0x6A0D89: retn
+0x9C5F20: mov     ecx, [ebp-118h]
+0x9C5F26: jmp     MagicHitEffect_destr
+0x9C5F2B: mov     ecx, [ebp-118h]
+0x9C5F31: add     ecx, 3Ch ; '<'; slot
+0x9C5F34: jmp     NiPointerSlot_Release
+0x9C5F39: mov     ecx, [ebp-118h]
+0x9C5F3F: add     ecx, 40h ; '@'; slot
+0x9C5F42: jmp     NiPointerSlot_Release
+0x9C5F47: mov     ecx, [ebp-118h]
+0x9C5F4D: add     ecx, 48h ; 'H'; slot
+0x9C5F50: jmp     NiPointerSlot_Release
+0x9C5F55: mov     edx, [esp+arg_4]
+0x9C5F59: lea     eax, [edx-11Ch]
+0x9C5F5F: mov     ecx, [edx-120h]
+0x9C5F65: xor     ecx, eax
+0x9C5F67: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5F6C: add     eax, 10h
+0x9C5F6F: mov     ecx, [edx-4]
+0x9C5F72: xor     ecx, eax
+0x9C5F74: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5F79: mov     eax, offset stru_AEE5C8
+0x9C5F7E: jmp     ___CxxFrameHandler3

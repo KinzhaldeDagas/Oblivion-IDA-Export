@@ -7,19 +7,19 @@
   },
   {
     "ea": "0x77AA64",
-    "line": "push    eax; a2",
+    "line": "push    eax; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77AA65",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; shader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77AA66",
-    "line": "call    sub_77A5B0",
+    "line": "call    NiD3DShader_CreateSCMExtraData; Verified NiD3DShader_CreateSCMExtraData: removes the prior named cache, counts attribute-kind30000000 entries in shader-owned and pass-owned maps, creates NiSCMExtraData when needed and prepopulates 8-byte key/extra-pointer arrays before attaching it to the geometry. The render wrapper later resets cursors, and attribute callbacks consume the cache. Fallout AddEntry is an architectural guide; preserve Oblivion two-stage offsets and actual key generation.",
     "mnemonic": "call",
     "size": 5
   },

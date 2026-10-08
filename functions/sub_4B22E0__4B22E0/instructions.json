@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B22E0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+optionalContext]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x4B22E5",
-    "line": "push    eax",
+    "line": "push    eax; optionalContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B22E6",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+payload]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x4B22F3",
-    "line": "push    ecx",
+    "line": "push    ecx; targetDimmer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B22F4",
-    "line": "push    ecx",
+    "line": "push    ecx; light",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4B22F7",
-    "line": "mov     [esp+10h+arg_4], esp",
+    "line": "mov     [esp+10h+optionalContext], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x4B2309",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B230B",
-    "line": "call    sub_4B1A50",
+    "line": "call    TESObjectLIGH_UpdateAttachedLightState; Oblivion native attached-point-light animation. lightFlags_7C bits 0x08/0x40 select Flicker/Flicker Slow and bits 0x80/0x100 select Pulse/Pulse Slow; the slow variants reduce the update step. It updates NiLight position and m_fDimmer using AttachedLightPayload_Decoded::targetDimmer_04 and TESObjectLIGH::fade_88. This is source-light state animation, not shadow-caster admission.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B2310",
-    "line": "pop     esi",
+    "line": "pop     esi; Forward payload->backingLight_00 and &payload->targetDimmer_04; optionalContext is supplied by the caller and is null at every direct retail call site.",
     "mnemonic": "pop",
     "size": 1
   },

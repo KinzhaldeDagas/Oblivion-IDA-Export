@@ -1,5 +1,5 @@
 0x718E20: push    ebx
-0x718E21: mov     ebx, dword ptr [esp+4+ArgList]
+0x718E21: mov     ebx, [esp+4+ArgList]
 0x718E25: push    esi
 0x718E26: mov     eax, ebx
 0x718E28: push    edi

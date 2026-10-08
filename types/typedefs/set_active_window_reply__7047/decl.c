@@ -1,1 +1,6 @@
-set_active_window_reply
+struct set_active_window_reply
+{
+reply_header __header;
+user_handle_t previous;
+char __pad_12[4];
+};

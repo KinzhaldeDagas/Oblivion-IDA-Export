@@ -1,0 +1,633 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "$30606C2DA1544C8D81106628C12A0883",
+  "definition": "enum $30606C2DA1544C8D81106628C12A0883 : __int32\n{\nFC_BYTE = 0x1,\nFC_CHAR = 0x2,\nFC_SMALL = 0x3,\nFC_USMALL = 0x4,\nFC_WCHAR = 0x5,\nFC_SHORT = 0x6,\nFC_USHORT = 0x7,\nFC_LONG = 0x8,\nFC_ULONG = 0x9,\nFC_FLOAT = 0xA,\nFC_HYPER = 0xB,\nFC_DOUBLE = 0xC,\nFC_ENUM16 = 0xD,\nFC_ENUM32 = 0xE,\nFC_IGNORE = 0xF,\nFC_ERROR_STATUS_T = 0x10,\nFC_RP = 0x11,\nFC_UP = 0x12,\nFC_OP = 0x13,\nFC_FP = 0x14,\nFC_STRUCT = 0x15,\nFC_PSTRUCT = 0x16,\nFC_CSTRUCT = 0x17,\nFC_CPSTRUCT = 0x18,\nFC_CVSTRUCT = 0x19,\nFC_BOGUS_STRUCT = 0x1A,\nFC_CARRAY = 0x1B,\nFC_CVARRAY = 0x1C,\nFC_SMFARRAY = 0x1D,\nFC_LGFARRAY = 0x1E,\nFC_SMVARRAY = 0x1F,\nFC_LGVARRAY = 0x20,\nFC_BOGUS_ARRAY = 0x21,\nFC_C_CSTRING = 0x22,\nFC_C_BSTRING = 0x23,\nFC_C_SSTRING = 0x24,\nFC_C_WSTRING = 0x25,\nFC_CSTRING = 0x26,\nFC_BSTRING = 0x27,\nFC_SSTRING = 0x28,\nFC_WSTRING = 0x29,\nFC_ENCAPSULATED_UNION = 0x2A,\nFC_NON_ENCAPSULATED_UNION = 0x2B,\nFC_BYTE_COUNT_POINTER = 0x2C,\nFC_TRANSMIT_AS = 0x2D,\nFC_REPRESENT_AS = 0x2E,\nFC_IP = 0x2F,\nFC_BIND_CONTEXT = 0x30,\nFC_BIND_GENERIC = 0x31,\nFC_BIND_PRIMITIVE = 0x32,\nFC_AUTO_HANDLE = 0x33,\nFC_CALLBACK_HANDLE = 0x34,\nFC_UNUSED1 = 0x35,\nFC_POINTER = 0x36,\nFC_ALIGNM2 = 0x37,\nFC_ALIGNM4 = 0x38,\nFC_ALIGNM8 = 0x39,\nFC_UNUSED2 = 0x3A,\nFC_UNUSED3 = 0x3B,\nFC_UNUSED4 = 0x3C,\nFC_STRUCTPAD1 = 0x3D,\nFC_STRUCTPAD2 = 0x3E,\nFC_STRUCTPAD3 = 0x3F,\nFC_STRUCTPAD4 = 0x40,\nFC_STRUCTPAD5 = 0x41,\nFC_STRUCTPAD6 = 0x42,\nFC_STRUCTPAD7 = 0x43,\nFC_STRING_SIZED = 0x44,\nFC_UNUSED5 = 0x45,\nFC_NO_REPEAT = 0x46,\nFC_FIXED_REPEAT = 0x47,\nFC_VARIABLE_REPEAT = 0x48,\nFC_FIXED_OFFSET = 0x49,\nFC_VARIABLE_OFFSET = 0x4A,\nFC_PP = 0x4B,\nFC_EMBEDDED_COMPLEX = 0x4C,\nFC_IN_PARAM = 0x4D,\nFC_IN_PARAM_BASETYPE = 0x4E,\nFC_IN_PARAM_NO_FREE_INST = 0x4F,\nFC_IN_OUT_PARAM = 0x50,\nFC_OUT_PARAM = 0x51,\nFC_RETURN_PARAM = 0x52,\nFC_RETURN_PARAM_BASETYPE = 0x53,\nFC_DEREFERENCE = 0x54,\nFC_DIV_2 = 0x55,\nFC_MULT_2 = 0x56,\nFC_ADD_1 = 0x57,\nFC_SUB_1 = 0x58,\nFC_CALLBACK = 0x59,\nFC_CONSTANT_IID = 0x5A,\nFC_END = 0x5B,\nFC_PAD = 0x5C,\nFC_HARD_STRUCT = 0xB1,\nFC_TRANSMIT_AS_PTR = 0xB2,\nFC_REPRESENT_AS_PTR = 0xB3,\nFC_USER_MARSHAL = 0xB4,\nFC_PIPE = 0xB5,\nFC_BLKHOLE = 0xB6,\nFC_RANGE = 0xB7,\nFC_INT3264 = 0xB8,\nFC_UINT3264 = 0xB9,\n}\n",
+  "id": 18374686479672021373,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BYTE",
+      "value": 1
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CHAR",
+      "value": 2
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_SMALL",
+      "value": 3
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_USMALL",
+      "value": 4
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_WCHAR",
+      "value": 5
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_SHORT",
+      "value": 6
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_USHORT",
+      "value": 7
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_LONG",
+      "value": 8
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ULONG",
+      "value": 9
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_FLOAT",
+      "value": 10
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_HYPER",
+      "value": 11
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_DOUBLE",
+      "value": 12
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ENUM16",
+      "value": 13
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ENUM32",
+      "value": 14
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_IGNORE",
+      "value": 15
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ERROR_STATUS_T",
+      "value": 16
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_RP",
+      "value": 17
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_UP",
+      "value": 18
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_OP",
+      "value": 19
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_FP",
+      "value": 20
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCT",
+      "value": 21
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_PSTRUCT",
+      "value": 22
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CSTRUCT",
+      "value": 23
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CPSTRUCT",
+      "value": 24
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CVSTRUCT",
+      "value": 25
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BOGUS_STRUCT",
+      "value": 26
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CARRAY",
+      "value": 27
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CVARRAY",
+      "value": 28
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_SMFARRAY",
+      "value": 29
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_LGFARRAY",
+      "value": 30
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_SMVARRAY",
+      "value": 31
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_LGVARRAY",
+      "value": 32
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BOGUS_ARRAY",
+      "value": 33
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_C_CSTRING",
+      "value": 34
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_C_BSTRING",
+      "value": 35
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_C_SSTRING",
+      "value": 36
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_C_WSTRING",
+      "value": 37
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CSTRING",
+      "value": 38
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BSTRING",
+      "value": 39
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_SSTRING",
+      "value": 40
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_WSTRING",
+      "value": 41
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ENCAPSULATED_UNION",
+      "value": 42
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_NON_ENCAPSULATED_UNION",
+      "value": 43
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BYTE_COUNT_POINTER",
+      "value": 44
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_TRANSMIT_AS",
+      "value": 45
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_REPRESENT_AS",
+      "value": 46
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_IP",
+      "value": 47
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BIND_CONTEXT",
+      "value": 48
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BIND_GENERIC",
+      "value": 49
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BIND_PRIMITIVE",
+      "value": 50
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_AUTO_HANDLE",
+      "value": 51
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CALLBACK_HANDLE",
+      "value": 52
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_UNUSED1",
+      "value": 53
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_POINTER",
+      "value": 54
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ALIGNM2",
+      "value": 55
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ALIGNM4",
+      "value": 56
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ALIGNM8",
+      "value": 57
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_UNUSED2",
+      "value": 58
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_UNUSED3",
+      "value": 59
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_UNUSED4",
+      "value": 60
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCTPAD1",
+      "value": 61
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCTPAD2",
+      "value": 62
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCTPAD3",
+      "value": 63
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCTPAD4",
+      "value": 64
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCTPAD5",
+      "value": 65
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCTPAD6",
+      "value": 66
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRUCTPAD7",
+      "value": 67
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_STRING_SIZED",
+      "value": 68
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_UNUSED5",
+      "value": 69
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_NO_REPEAT",
+      "value": 70
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_FIXED_REPEAT",
+      "value": 71
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_VARIABLE_REPEAT",
+      "value": 72
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_FIXED_OFFSET",
+      "value": 73
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_VARIABLE_OFFSET",
+      "value": 74
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_PP",
+      "value": 75
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_EMBEDDED_COMPLEX",
+      "value": 76
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_IN_PARAM",
+      "value": 77
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_IN_PARAM_BASETYPE",
+      "value": 78
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_IN_PARAM_NO_FREE_INST",
+      "value": 79
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_IN_OUT_PARAM",
+      "value": 80
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_OUT_PARAM",
+      "value": 81
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_RETURN_PARAM",
+      "value": 82
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_RETURN_PARAM_BASETYPE",
+      "value": 83
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_DEREFERENCE",
+      "value": 84
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_DIV_2",
+      "value": 85
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_MULT_2",
+      "value": 86
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_ADD_1",
+      "value": 87
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_SUB_1",
+      "value": 88
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CALLBACK",
+      "value": 89
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_CONSTANT_IID",
+      "value": 90
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_END",
+      "value": 91
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_PAD",
+      "value": 92
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_HARD_STRUCT",
+      "value": 177
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_TRANSMIT_AS_PTR",
+      "value": 178
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_REPRESENT_AS_PTR",
+      "value": 179
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_USER_MARSHAL",
+      "value": 180
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_PIPE",
+      "value": 181
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_BLKHOLE",
+      "value": 182
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_RANGE",
+      "value": 183
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_INT3264",
+      "value": 184
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "FC_UINT3264",
+      "value": 185
+    }
+  ],
+  "name": "$30606C2DA1544C8D81106628C12A0883",
+  "ordinal": 3100,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

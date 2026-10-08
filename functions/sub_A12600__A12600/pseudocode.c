@@ -1,4 +1,4 @@
-BSStringT *sub_A12600()
+NiRTTI *sub_A12600()
 {
-  return sub_70E220((BSStringT *)dword_BA7FEC, "bhkMultiSphereShape", (int)dword_BA7F48);
+  return NiRTTI_Constructor(&stru_BA7FEC, "bhkMultiSphereShape", &stru_BA7F48); /*0xa12614*/
 }

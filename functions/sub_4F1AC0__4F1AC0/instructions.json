@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F1AC0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified SubSpace spatial-index insertion. Its sole direct caller is TESObjectCELL_IndexSubSpaceReferences, and no direct removal caller was found; current evidence places insertion in the WorldSpace persistent-cell build during TESDataHandler_LoadFiles. Runtime add/remove maintenance beyond this build path is Unknown.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4F1AED",
-    "line": "mov     ebx, [esp+3Ch+arg_0]",
+    "line": "mov     ebx, [esp+3Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4F1B33",
-    "line": "mov     [esp+3Ch+arg_0], eax",
+    "line": "mov     [esp+3Ch+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x4F1B43",
-    "line": "push    25h ; '%'",
+    "line": "push    25h ; '%'; bucketCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4F1B45",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F1B47",
-    "line": "call    sub_4F0DE0",
+    "line": "call    TESWorldSpaceSubSpaceMap_ctor; Verified 16-byte NiTPointerMap<unsigned int, BSSimpleList<TESObjectREFR *>> constructor used only by TESWorldSpace_IndexSubSpaceReference in this database. Initializes a bucket array with the caller's bucket count; SubSpace index passes 0x25 (37) buckets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x4F1B8E",
-    "line": "fstp    [esp+3Ch+arg_0]",
+    "line": "fstp    [esp+3Ch+reference]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x4F1B96",
-    "line": "fsub    [esp+3Ch+arg_0]",
+    "line": "fsub    [esp+3Ch+reference]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x4F1BB5",
-    "line": "fsub    [esp+3Ch+arg_0]",
+    "line": "fsub    [esp+3Ch+reference]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4F1BDE",
-    "line": "fadd    [esp+3Ch+arg_0]",
+    "line": "fadd    [esp+3Ch+reference]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x4F1C08",
-    "line": "fadd    [esp+3Ch+arg_0]",
+    "line": "fadd    [esp+3Ch+reference]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x4F1C14",
-    "line": "fistp   [esp+3Ch+arg_0]",
+    "line": "fistp   [esp+3Ch+reference]",
     "mnemonic": "fistp",
     "size": 4
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x4F1C1C",
-    "line": "mov     ecx, [esp+3Ch+arg_0]",
+    "line": "mov     ecx, [esp+3Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -702,12 +702,6 @@
     "size": 2
   },
   {
-    "ea": "0x4F1C4A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x4F1C50",
     "line": "mov     eax, [esp+3Ch+var_1C]",
     "mnemonic": "mov",
@@ -739,7 +733,7 @@
   },
   {
     "ea": "0x4F1C60",
-    "line": "lea     eax, [esp+3Ch+arg_0]",
+    "line": "lea     eax, [esp+3Ch+reference]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -757,7 +751,7 @@
   },
   {
     "ea": "0x4F1C66",
-    "line": "mov     [esp+44h+arg_0], 0",
+    "line": "mov     [esp+44h+reference], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -769,7 +763,7 @@
   },
   {
     "ea": "0x4F1C73",
-    "line": "mov     esi, [esp+3Ch+arg_0]",
+    "line": "mov     esi, [esp+3Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1090,5 +1084,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B6850",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6853",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B6854",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6859",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B685A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B685B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B685F",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6862",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B6865",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B6867",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B686C",
+    "line": "mov     eax, offset stru_AE1654",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B6871",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

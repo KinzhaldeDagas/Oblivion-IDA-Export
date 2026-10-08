@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F0030",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Verified: clears inline exterior cellMap at +0x30; iterates mapped TESObjectCELL values and destroys them unless the WorldSpace base flag 0x4000 is set, then empties the map.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4F0065",
-    "line": "mov     [esp+14h+var_8], eax",
+    "line": "mov     [esp+14h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,61 +163,61 @@
   },
   {
     "ea": "0x4F0070",
-    "line": "lea     ecx, [esp+10h+var_C]",
+    "line": "lea     ecx, [esp+10h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F0074",
-    "line": "push    ecx",
+    "line": "push    ecx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0075",
-    "line": "mov     ecx, [edi+30h]",
+    "line": "mov     ecx, [edi+30h]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4F0078",
-    "line": "lea     edx, [esp+14h+var_4]",
+    "line": "lea     edx, [esp+14h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F007C",
-    "line": "push    edx",
+    "line": "push    edx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F007D",
-    "line": "lea     eax, [esp+18h+var_8]",
+    "line": "lea     eax, [esp+18h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4F0081",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F0082",
-    "line": "mov     [esp+1Ch+var_C], 0",
+    "line": "mov     [esp+1Ch+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x4F008A",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4F008F",
-    "line": "mov     ecx, [esp+10h+var_C]",
+    "line": "mov     ecx, [esp+10h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4F00A0",
-    "line": "cmp     [esp+10h+var_8], 0",
+    "line": "cmp     [esp+10h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

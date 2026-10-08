@@ -1,1 +1,4 @@
-_U64
+struct _U64
+{
+__msvcrt_ulong W[2];
+};

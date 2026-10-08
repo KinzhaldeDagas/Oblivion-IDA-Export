@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 5,
+  "chunks": [
+    [
+      "0x58D1C0",
+      "0x58D2E2"
+    ]
+  ],
+  "chunks_sha256": "698484591269c6e0d552a91f20f5e23fde00c9e852dd39b8e670253f1fb13543",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: detaches from old parent list and decrements child-count trait 0xFD0, assigns parent +0x10, increments new parent count, inserts in new parent child list. Optional sibling argument controls placement; null uses AddHead. This is attachment, not a float-value setter.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_58D1C0",
+  "display_name": "Tile::SetParent",
   "end_ea": "0x58D2E2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58D1C0",
+  "name": "Tile::SetParent",
   "segment": ".text",
   "sha256": "698484591269c6e0d552a91f20f5e23fde00c9e852dd39b8e670253f1fb13543",
   "size": 290,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58D1C0",
-  "type": "void __thiscall(float *this, float, int)",
+  "total_chunk_size": 290,
+  "type": "void __thiscall(Tile *this, Tile *parent, Tile *sibling)",
   "xrefs_from_count": 119,
   "xrefs_to_count": 5
 }

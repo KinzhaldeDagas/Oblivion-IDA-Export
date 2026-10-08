@@ -1,1 +1,1 @@
-IProcessInitControl_0
+typedef IProcessInitControl IProcessInitControl_0;

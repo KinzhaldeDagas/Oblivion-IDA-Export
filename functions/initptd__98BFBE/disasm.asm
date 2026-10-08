@@ -42,3 +42,7 @@
 0x98C056: pop     ecx
 0x98C057: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x98C05E: call    __initptd___$LN9_7
+0x98C069: push    0Ch
+0x98C06B: call    __unlock
+0x98C070: pop     ecx
+0x98C071: retn

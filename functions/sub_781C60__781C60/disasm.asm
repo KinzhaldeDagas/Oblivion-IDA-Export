@@ -14,9 +14,9 @@
 0x781C7F: push    eax
 0x781C80: mov     ecx, esi; this
 0x781C82: call    ??0NiD3DShaderProgram@@QAE@XZ; NiD3DShaderProgram::NiD3DShaderProgram(void)
-0x781C87: lea     eax, [esp+1Ch+var_C]
+0x781C87: lea     eax, [esp+1Ch+unused5]
 0x781C8B: push    eax
-0x781C8C: lea     ecx, [esp+20h+var_8]
+0x781C8C: lea     ecx, [esp+20h+unused4]
 0x781C90: push    ecx
 0x781C91: lea     eax, [esp+24h+var_4]
 0x781C95: push    eax
@@ -28,16 +28,16 @@
 0x781CA9: mov     [esi+34h], ebx
 0x781CAC: mov     edx, [edi]
 0x781CAE: mov     edx, [edx+28h]
-0x781CB1: lea     ecx, [esp+28h+var_10]
+0x781CB1: lea     ecx, [esp+28h+bytecode]
 0x781CB5: push    ecx
 0x781CB6: mov     ecx, [esp+2Ch+arg_0]
 0x781CBA: push    eax
 0x781CBB: push    ecx
 0x781CBC: mov     ecx, edi
 0x781CBE: mov     [esp+34h+var_4], ebx
-0x781CC2: mov     [esp+34h+var_10], ebx
-0x781CC6: mov     [esp+34h+var_C], ebx
-0x781CCA: mov     [esp+34h+var_8], ebx
+0x781CC2: mov     [esp+34h+bytecode], ebx
+0x781CC6: mov     [esp+34h+unused5], ebx
+0x781CCA: mov     [esp+34h+unused4], ebx
 0x781CCE: call    edx
 0x781CD0: test    al, al
 0x781CD2: jnz     short loc_781CE9
@@ -52,25 +52,25 @@
 0x781CE2: pop     ebx
 0x781CE3: add     esp, 10h
 0x781CE6: retn    20h ; ' '
-0x781CE9: mov     ebx, [esp+1Ch+arg_1C]
-0x781CED: mov     eax, [esp+1Ch+var_C]
-0x781CF1: mov     ecx, [esp+1Ch+var_8]
-0x781CF5: mov     edx, [esp+1Ch+arg_18]
+0x781CE9: mov     ebx, [esp+1Ch+unused6]
+0x781CED: mov     eax, [esp+1Ch+unused5]
+0x781CF1: mov     ecx, [esp+1Ch+unused4]
+0x781CF5: mov     edx, [esp+1Ch+unused3]
 0x781CF9: push    ebp
-0x781CFA: push    ebx
-0x781CFB: push    eax
-0x781CFC: push    ecx
-0x781CFD: mov     ecx, [esp+2Ch+var_10]
-0x781D01: push    edx
-0x781D02: lea     eax, [esp+30h+arg_14]
-0x781D06: push    eax
-0x781D07: push    ecx
+0x781CFA: push    ebx; unused6
+0x781CFB: push    eax; unused5
+0x781CFC: push    ecx; unused4
+0x781CFD: mov     ecx, [esp+2Ch+bytecode]
+0x781D01: push    edx; unused3
+0x781D02: lea     eax, [esp+30h+unused2]
+0x781D06: push    eax; unused2
+0x781D07: push    ecx; bytecode
 0x781D08: mov     ecx, edi
-0x781D0A: call    sub_783BF0
+0x781D0A: call    NiDX9Renderer__CreateVertexShader; Calls IDirect3DDevice9::CreateVertexShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x781D0F: mov     ebp, eax
 0x781D11: test    ebp, ebp
 0x781D13: jnz     short loc_781D40
-0x781D15: mov     edx, dword ptr [esp+20h+ArgList]
+0x781D15: mov     edx, [esp+20h+ArgList]
 0x781D19: push    edx; ArgList
 0x781D1A: push    offset aFailedCreateve; "Failed CreateVertexShader call on %s\n"
 0x781D1F: push    eax; int
@@ -89,7 +89,7 @@
 0x781D39: pop     ebx
 0x781D3A: add     esp, 10h
 0x781D3D: retn    20h ; ' '
-0x781D40: mov     ecx, dword ptr [esp+20h+ArgList]
+0x781D40: mov     ecx, [esp+20h+ArgList]
 0x781D44: mov     eax, [esi]
 0x781D46: mov     edx, [eax+8]
 0x781D49: push    ecx
@@ -100,7 +100,7 @@
 0x781D53: push    0
 0x781D55: mov     ecx, esi
 0x781D57: call    edx
-0x781D59: mov     ecx, [esp+20h+var_10]
+0x781D59: mov     ecx, [esp+20h+bytecode]
 0x781D5D: mov     eax, [esi]
 0x781D5F: mov     edx, [esp+20h+var_4]
 0x781D63: mov     eax, [eax+1Ch]
@@ -119,12 +119,12 @@
 0x781D7C: mov     ecx, esi
 0x781D7E: call    eax
 0x781D80: mov     edx, [esi]
-0x781D82: mov     eax, [esp+20h+arg_18]
+0x781D82: mov     eax, [esp+20h+unused3]
 0x781D86: mov     edx, [edx+3Ch]
 0x781D89: push    eax
 0x781D8A: mov     ecx, esi
 0x781D8C: call    edx
-0x781D8E: mov     ecx, [esp+20h+arg_14]
+0x781D8E: mov     ecx, [esp+20h+unused2]
 0x781D92: mov     eax, [esi]
 0x781D94: mov     edx, [eax+4Ch]
 0x781D97: push    ecx

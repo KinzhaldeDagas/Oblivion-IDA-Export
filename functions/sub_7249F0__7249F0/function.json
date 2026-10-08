@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x7249F0",
+      "0x724AA1"
+    ]
+  ],
+  "chunks_sha256": "5db8e7d1f23760396463dcae82e7cfd85c2d6d92bc27f2950dc0aaed0538b607",
+  "comment_regular": "\nGPU static-world LOD audit 2026-09-27: converts local center+8 through node world rotation/scale/translation to world center+14, and writes scaled local interval endpoints to each row+8/+C. Snapshot the current cached world values; do not substitute unobserved local-space formulas.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7249F0",
+  "display_name": "NiRangeLODData_UpdateWorldData",
   "end_ea": "0x724AA1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7249F0",
+  "name": "NiRangeLODData_UpdateWorldData",
   "segment": ".text",
   "sha256": "5db8e7d1f23760396463dcae82e7cfd85c2d6d92bc27f2950dc0aaed0538b607",
   "size": 177,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7249F0",
+  "total_chunk_size": 177,
   "type": "int __thiscall(float *this, int)",
   "xrefs_from_count": 62,
   "xrefs_to_count": 1

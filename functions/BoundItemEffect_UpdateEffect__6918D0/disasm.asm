@@ -64,9 +64,9 @@
 0x691996: mov     ebp, [eax]
 0x691998: push    1
 0x69199A: mov     ecx, ebp
-0x69199C: call    sub_41F370
+0x69199C: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x6919A1: mov     ecx, ebp
-0x6919A3: call    sub_41F2F0
+0x6919A3: call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.
 0x6919A8: cmp     esi, ds:0B333C4h
 0x6919AE: jnz     loc_691A4A
 0x6919B4: mov     ecx, [esi+58h]
@@ -83,7 +83,7 @@
 0x6919D8: jnz     short loc_691A4A
 0x6919DA: push    0
 0x6919DC: mov     ecx, edi
-0x6919DE: call    ActiveEffect_Base_Remove
+0x6919DE: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.
 0x6919E3: pop     ebp
 0x6919E4: pop     esi
 0x6919E5: pop     edi
@@ -117,9 +117,9 @@
 0x691A33: push    1
 0x691A35: mov     ecx, esi
 0x691A37: mov     byte ptr [edi+88h], 0
-0x691A3E: call    sub_41F370
+0x691A3E: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x691A43: mov     ecx, esi
-0x691A45: call    sub_41F2F0
+0x691A45: call    ExtraDataList_AddBoundArmor; Adds marker extra ExtraBoundArmor type 0x50 when it is not already present.
 0x691A4A: pop     ebp
 0x691A4B: pop     esi
 0x691A4C: pop     edi

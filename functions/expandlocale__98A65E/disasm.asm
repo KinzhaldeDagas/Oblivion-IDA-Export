@@ -12,7 +12,7 @@
 0x98A67C: mov     edi, [ebp+60h+arg_C]
 0x98A67F: mov     [ebp+60h+Dst], eax
 0x98A682: mov     eax, [ebp+60h+arg_10]
-0x98A685: mov     [ebp+60h+var_A4], edi
+0x98A685: mov     [ebp+60h+destination], edi
 0x98A688: mov     [ebp+60h+var_A0], eax
 0x98A68B: call    __getptd
 0x98A690: add     eax, 9Ch ; 'œ'
@@ -132,19 +132,19 @@
 0x98A7C8: add     esp, 14h
 0x98A7CB: jmp     short loc_98A7CF
 0x98A7CD: xor     esi, esi
-0x98A7CF: cmp     [ebp+60h+var_A4], esi
+0x98A7CF: cmp     [ebp+60h+destination], esi
 0x98A7D2: jz      short loc_98A7E2
-0x98A7D4: push    6; Size
-0x98A7D6: push    ebx; Src
-0x98A7D7: push    [ebp+60h+var_A4]; Dst
-0x98A7DA: call    _memcpy
+0x98A7D4: push    6; byteCount
+0x98A7D6: push    ebx; source
+0x98A7D7: push    [ebp+60h+destination]; destination
+0x98A7DA: call    _memcpy;
 0x98A7DF: add     esp, 0Ch
 0x98A7E2: cmp     [ebp+60h+var_A0], esi
 0x98A7E5: jz      short loc_98A7F7
-0x98A7E7: push    4; Size
-0x98A7E9: push    [ebp+60h+Src]; Src
-0x98A7EC: push    [ebp+60h+var_A0]; Dst
-0x98A7EF: call    _memcpy
+0x98A7E7: push    4; byteCount
+0x98A7E9: push    [ebp+60h+Src]; source
+0x98A7EC: push    [ebp+60h+var_A0]; destination
+0x98A7EF: call    _memcpy;
 0x98A7F4: add     esp, 0Ch
 0x98A7F7: push    [ebp+60h+Str1]; Src
 0x98A7FA: push    [ebp+60h+SizeInBytes]; SizeInBytes

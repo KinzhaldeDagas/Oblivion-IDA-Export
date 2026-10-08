@@ -1,4 +1,8 @@
-char *__stdcall sub_788ED0(char *a1, char *a2, char *a3)
+// Oblivion stdcall adapter for uninitialized copying of a range of trivial 28-byte collision records.
+OB_CollisionObject_010201A0 *__stdcall OB_stVector_CollisionObject_UninitializedCopyRange_Stdcall_010201A0(
+        const OB_CollisionObject_010201A0 *first,
+        const OB_CollisionObject_010201A0 *last,
+        OB_CollisionObject_010201A0 *destination)
 {
-  return sub_788630(a1, a2, a3);
+  return OB_stVector_CollisionObject_UninitializedCopyRange_010201A0(first, last, destination); /*0x788ef6*/
 }

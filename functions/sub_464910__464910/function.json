@@ -1,19 +1,32 @@
 {
-  "callees_count": 39,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x464910",
+      "0x464AAD"
+    ]
+  ],
+  "chunks_sha256": "cfb610dbdd97f82be611d49859dd7a41b363a79cc80f4b2cd27924262c8423b2",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": " Verified load timing: invoked by TESObjectCELL_LinkForm at 4CDA22 after cell records load; returns before ExtraDataList_ResolveLoadedFormIDs at 4CDAB7 and before TESForm_SetIsLinked at 4CDB9E. This restores deferred refs while the owning CELL is being linked.\n\nVerified: called by TESObjectCELL_LinkForm at 4CDA22. Requires save-load flag bit 0; loads the cell via LoadForm then restores references indexed for that cell. Interior path drains cellID->referenceID list. Exterior path selects worldspace map, scans records by exact cell X/Y, restores matching references, and removes consumed records/empty containers. Probable Fallout homolog BGSSaveLoadReferencesMap::LoadReferencesForCell 825F9CB8; Fallout derives a cell-coordinate key and reads an ID array, while Oblivion linearly scans linked records per worldspace.\nMEF SAVE AUDIT 2026-10-08: PERF-18 Verified exterior restore scaling: loading-enabled path calls LoadForm(cell) first, then worldspace-keyed map owner+C and scans the entire remaining tuple list by exact stored signed XY. Q no-match requests with unchanged R nonnull tuples cost Q*R tuple inspections. N one-per-cell tuples drained across N requests cost N*(N+1)/2, excluding empty-head checks/callback work. Actual populations/timing unmeasured.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_464910",
+  "display_name": "TESSaveLoadGame_LoadReferencesForCell",
   "end_ea": "0x464AAD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_464910",
+  "name": "TESSaveLoadGame_LoadReferencesForCell",
   "segment": ".text",
   "sha256": "cfb610dbdd97f82be611d49859dd7a41b363a79cc80f4b2cd27924262c8423b2",
   "size": 413,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x464910",
-  "type": "char __userpurge@<al>(int@<ecx>, double@<st2>, double@<st1>, double@<st0>, TESObjectCELL *)",
+  "total_chunk_size": 413,
+  "type": "unsigned __int8 __thiscall(TESSaveLoadGame_SerializationView *self, TESObjectCELL *cell)",
   "xrefs_from_count": 180,
   "xrefs_to_count": 1
 }

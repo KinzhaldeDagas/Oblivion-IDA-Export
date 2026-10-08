@@ -1,1 +1,1 @@
-IPSFactoryBuffer_0
+typedef IPSFactoryBuffer IPSFactoryBuffer_0;

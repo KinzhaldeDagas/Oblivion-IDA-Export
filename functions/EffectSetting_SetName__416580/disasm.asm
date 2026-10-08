@@ -12,9 +12,9 @@
 0x41659A: mov     eax, [eax]
 0x41659C: test    eax, eax
 0x41659E: jz      short loc_4165AE
-0x4165A0: push    esi; Str2
-0x4165A1: push    eax; Str1
-0x4165A2: call    __strcmp
+0x4165A0: push    esi; right
+0x4165A1: push    eax; left
+0x4165A2: call    CRT_StricmpLocaleDispatch
 0x4165A7: add     esp, 8
 0x4165AA: mov     edi, eax
 0x4165AC: jmp     short loc_4165BB
@@ -25,7 +25,7 @@
 0x4165B9: mov     edi, ecx
 0x4165BB: mov     edx, [esp+14h+var_8.m_data]
 0x4165BF: push    edx
-0x4165C0: call    FormHeapFree
+0x4165C0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4165C5: add     esp, 4
 0x4165C8: test    edi, edi
 0x4165CA: jz      short loc_4165D7

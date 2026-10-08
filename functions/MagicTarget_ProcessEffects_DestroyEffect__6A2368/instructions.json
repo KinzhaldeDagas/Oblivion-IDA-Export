@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6A2383",
-    "line": "call    BSSimpleList_Remove",
+    "line": "call    BSSimpleList_Remove; Verified target-process cleanup: BSSimpleList_Remove unlinks the terminated ActiveEffect node before the target PostRemoveEffect callback and virtual deleting destructor; the loop then advances using the saved predecessor/next node.",
     "mnemonic": "call",
     "size": 5
   },

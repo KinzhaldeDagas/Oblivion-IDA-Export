@@ -1,9 +1,9 @@
 _DWORD *sub_A14BE0()
 {
-  return sub_90D190(
-           dword_BA8F44,
+  return sub_90D190( /*0xa14c0a*/
+           unk_BA8F44,
            (int)"hkCachingShapePhantom",
-           (int)&unk_BA9584,
+           (int)unk_BA9584,
            0x130,
            0,
            0,

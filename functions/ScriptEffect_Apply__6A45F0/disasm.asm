@@ -1,4 +1,4 @@
-0x6A45F0: push    esi
+0x6A45F0: push    esi; ScriptEffect Apply vfunc: if a script exists, create the ScriptEventList for this active effect, resolve the target through caster vfunc +4, then run ScriptEffectStart.
 0x6A45F1: mov     esi, ecx
 0x6A45F3: mov     ecx, [esi+38h]
 0x6A45F6: test    ecx, ecx
@@ -12,6 +12,6 @@
 0x6A460B: call    edx
 0x6A460D: mov     ecx, [esi+38h]
 0x6A4610: push    eax
-0x6A4611: call    sub_4F9F00
+0x6A4611: call    ScriptEffect_RunStartEvent; Wrapper for ScriptEffectStart: calls ScriptRunner_RunEvent with start=1, finish=0, elapsedSeconds=0.0.
 0x6A4616: pop     esi
 0x6A4617: retn

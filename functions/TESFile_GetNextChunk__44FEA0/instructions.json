@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x44FECB",
-    "line": "mov     eax, [esi+254h]",
+    "line": "mov     eax, [esi+254h]; MEF v19 candidate/fix: byte-checked TESFile_GetNextChunk advance. Validate currentChunkOffset + currentChunk.length + 6 against active record/decompressed length; reload EAX with checked offset before 0x44FEF7.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x44FED4",
-    "line": "add     [esi+260h], eax",
+    "line": "add     [esi+260h], eax; EngineIssues review: TESFile_GetNextChunk advances currentChunkOffset by chunk length + 6 without overflow/progress check before comparing to record length.",
     "mnemonic": "add",
     "size": 6
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A14E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion CFrondEngine destructor invoked by the final CSpeedTreeRT ownership-release path before FormHeapFree. Deletes the profile spline and destroys/frees the +0x40 SFrondTexture, +0x18 guide-LOD, and +0x08 SFrondGuide vectors. RT 4.1 corroborates the explicit profile deletion; the executable establishes the implicit member-vector destruction order.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x7A151B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A151D",
-    "line": "call    sub_784B60",
+    "line": "call    OB_StBezierSpline_Dtor_010201A0; stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7A1523",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7A1531",
-    "line": "mov     eax, [esi+4]",
+    "line": "mov     eax, [esi+4]; CFrondEngine destruction path releases the +0x40 SFrondTexture range with the decoded 0x2C-stride destructor before freeing vector storage.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x7A1541",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1542",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1543",
-    "line": "call    sub_79B120",
+    "line": "call    OB_SFrondTexture_DestroyRange_010201A0; Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7A154C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x7A1570",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1571",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A1572",
-    "line": "call    sub_7A0CD0",
+    "line": "call    OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0; CFrondEngine destructor releases CFrondEngine+0x18 as vector<st_vector<SFrondGuide>>, deep-destroying every level and every contained compact guide.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7A157B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,19 +421,19 @@
   },
   {
     "ea": "0x7A159F",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A15A0",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A15A1",
-    "line": "call    sub_79E150",
+    "line": "call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7A15AA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -526,5 +526,377 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x79DFE0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFE1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFE2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x79DFE4",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79DFE7",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x79DFE9",
+    "line": "jz      short loc_79E007",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x79DFEB",
+    "line": "mov     ecx, [esp+8+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x79DFEF",
+    "line": "mov     edx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79DFF2",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF4",
+    "line": "push    edx; last",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF5",
+    "line": "push    eax; first",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFF6",
+    "line": "call    OB_SFrondTexture_DestroyRange_010201A0; Destroys [first,last) SFrondTexture records at 0x2C-byte stride by releasing each embedded filename string.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79DFFB",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79DFFE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x79DFFF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79E004",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x79E007",
+    "line": "mov     dword ptr [esi+4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x79E00E",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x79E015",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x79E01C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E01D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E01E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12E0",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12E1",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12E2",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7A12E4",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A12E7",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7A12E9",
+    "line": "jz      short loc_7A1307",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7A12EB",
+    "line": "mov     ecx, [esp+8+var_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7A12EF",
+    "line": "mov     edx, [esi+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A12F2",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F3",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F4",
+    "line": "push    edx; last",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F5",
+    "line": "push    eax; first",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12F6",
+    "line": "call    OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0; CFrondEngine constructor cleanup destroys any partially constructed outer guide-LOD level range through the decoded nested-vector destructor.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A12FB",
+    "line": "mov     eax, [esi+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7A12FE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7A12FF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7A1304",
+    "line": "add     esp, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7A1307",
+    "line": "mov     dword ptr [esi+4], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A130E",
+    "line": "mov     dword ptr [esi+8], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A1315",
+    "line": "mov     dword ptr [esi+0Ch], 0",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7A131C",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A131D",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7A131E",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CC6E0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6E3",
+    "line": "add     ecx, 8; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6E6",
+    "line": "jmp     OB_stVector_SFrondGuide_Destroy_010201A0; Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC6EB",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6EE",
+    "line": "add     ecx, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6F1",
+    "line": "jmp     loc_7A12E0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC6F6",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6F9",
+    "line": "add     ecx, 40h ; '@'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC6FC",
+    "line": "jmp     loc_79DFE0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC701",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC705",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC708",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC70B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC70D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC712",
+    "line": "mov     eax, offset stru_AF5AC8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC717",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

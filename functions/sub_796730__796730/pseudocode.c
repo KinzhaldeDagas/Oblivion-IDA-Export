@@ -1,16 +1,25 @@
-_DWORD *__thiscall sub_796730(int *this, _DWORD *a2, int a3, int a4, int a5, int a6)
+// OBLIVION AUTHORITY (2026-08-30): Checked erase-range for vector<vector<unsigned short>>. Move/copy-assigns the suffix, destroys the vacated owner range, updates end, and returns the checked iterator.
+OB_stVector_stVectorUShortIterator_010201A0 *__thiscall OB_stVector_stVectorUShort_EraseRange_010201A0(
+        OB_stVector_stVectorUShort_010201A0 *this,
+        OB_stVector_stVectorUShortIterator_010201A0 *result,
+        OB_stVector_stVectorUShortIterator_010201A0 first,
+        OB_stVector_stVectorUShortIterator_010201A0 last)
 {
-  _DWORD *v7; // edi
+  int v4; // ebx
+  int v5; // edi
+  OB_stVector4_010201A0 *v7; // edi
 
-  if ( !a3 || a3 != a5 )
-    _invalid_parameter_noinfo();
-  if ( a4 != a6 )
+  if ( !first.owner || first.owner != last.owner ) /*0x796741*/
+    _invalid_parameter_noinfo(v4, v5, (int)this); /*0x796743*/
+  if ( first.current != last.current ) /*0x796752*/
   {
-    v7 = (_DWORD *)sub_795CA0(a6, *(this + 2), a4);
-    sub_794FC0(v7, (_DWORD *)*(this + 2));
-    *(this + 2) = (int)v7;
+    v7 = (OB_stVector4_010201A0 *)OB_stVector_stVectorUShort_CopyAssignRange_010201A0( /*0x796765*/
+                                    last.current,
+                                    this->end,
+                                    first.current);
+    OB_stVector4_DestroyRange_010201A0(v7, (OB_stVector4_010201A0 *)this->end); /*0x79676d*/
+    this->end = (OB_stVectorUShort_010201A0 *)v7; /*0x796775*/
   }
-  *a2 = a3;
-  a2[1] = a4;
-  return a2;
+  *result = first; /*0x79677e*/
+  return result; /*0x79677d*/
 }

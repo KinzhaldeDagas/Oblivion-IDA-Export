@@ -1,1 +1,1 @@
-NiExtraDataController
+struct NiExtraDataController;

@@ -10,7 +10,6 @@
 0x4C1188: push    edi
 0x4C1189: mov     [esp+40h+var_2C], ebx
 0x4C118D: jmp     short loc_4C1198
-0x4C118F: align 10h
 0x4C1190: mov     esi, [esp+40h+var_30]
 0x4C1194: mov     ebx, [esp+40h+var_2C]
 0x4C1198: xor     ebp, ebp
@@ -120,7 +119,7 @@
 0x4C12DE: fmulp   st(2), st
 0x4C12E0: fsubrp  st(1), st
 0x4C12E2: fstp    [esp+44h+var_1C]
-0x4C12E6: call    sub_4BFAA0
+0x4C12E6: call    NiPoint3_NormalizeApproximateInPlace
 0x4C12EB: mov     edx, [esp+44h+arg_0]
 0x4C12EF: add     esp, 4
 0x4C12F2: test    edx, edx
@@ -219,7 +218,7 @@
 0x4C140C: push    0Ch
 0x4C140E: push    121h
 0x4C1413: push    ecx
-0x4C1414: call    sub_725890
+0x4C1414: call    NiPoint3_NormalizeStridedArray
 0x4C1419: add     esi, 4
 0x4C141C: add     esp, 0Ch
 0x4C141F: cmp     esi, 10h

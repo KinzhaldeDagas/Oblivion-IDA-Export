@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x764770",
-    "line": "push    ebx",
+    "line": "push    ebx; DX9 compatible-surface selector: convert the render-target pixel format, query device-format capabilities, choose a compatible depth/stencil D3DFORMAT, and return its NiSurfaceData.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x764771",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+pixelFormat]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x764797",
-    "line": "push    offset unk_B4265C",
+    "line": "push    offset stru_B4265C",
     "mnemonic": "push",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7647A1",
-    "line": "push    ebx",
+    "line": "push    ebx; pixelFormat",
     "mnemonic": "push",
     "size": 1
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x7647A4",
-    "line": "call    sub_76BEF0",
+    "line": "call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7647A9",
-    "line": "mov     ecx, [esp+18h+arg_8]",
+    "line": "mov     ecx, [esp+18h+desiredStencilBits]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7647AD",
-    "line": "mov     edx, [esp+18h+arg_4]",
+    "line": "mov     edx, [esp+18h+desiredDepthBits]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7647C1",
-    "line": "call    sub_775280",
+    "line": "call    NiDX9DeviceDesc_SelectCompatibleDepthStencilFormat; Select a compatible depth/stencil format from cached DX9 device capabilities. For a surface request above 16 depth bits, normalize the selection target to 24 depth bits and 8 stencil bits.",
     "mnemonic": "call",
     "size": 5
   },

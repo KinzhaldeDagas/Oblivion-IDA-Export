@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ACF40",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; MoonSugarEffect decode: drains immediate geometry groups/nodes during accumulator flush, interleaving queued RenderPass lists by depth and using sub_7A9820 for property-owned shader IDs.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7ACFB2",
-    "line": "call    sub_7ABAC0",
+    "line": "call    BSShaderAccumulator_DrainRenderPassList; Pass249 runtime correction: decoded native RenderPassListDrain call, but do not patch this callsite. The seven-callsite rendered-reference transaction repeatedly caused the identical world-load StackHash access violation. Preserve the native call.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7ACFBE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x7AD002",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7AD049",
-    "line": "mov     [esp+1Ch+var_8], eax",
+    "line": "mov     [esp+1Ch+node], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x7AD09D",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x7AD0B9",
-    "line": "call    sub_7FD260",
+    "line": "call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,13 +853,13 @@
   },
   {
     "ea": "0x7AD0D9",
-    "line": "push    ecx; float",
+    "line": "push    ecx; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD0DA",
-    "line": "push    ebp; int",
+    "line": "push    ebp; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -871,31 +871,31 @@
   },
   {
     "ea": "0x7AD0DD",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AD0E2",
-    "line": "lea     edx, [esp+1Ch+var_8]",
+    "line": "lea     edx, [esp+1Ch+node]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7AD0E6",
-    "line": "push    edx",
+    "line": "push    edx; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD0E7",
-    "line": "lea     ecx, [edi+21C0h]",
+    "line": "lea     ecx, [edi+21C0h]; list",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x7AD0ED",
-    "line": "call    sub_7AA860",
+    "line": "call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7AD0F6",
-    "line": "mov     [esp+1Ch+var_8], eax",
+    "line": "mov     [esp+1Ch+node], eax",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,7 +1,8 @@
-void __thiscall sub_67ECD0(_BYTE *this, char a2)
+// Verified sets/clears stateFlags bit 0x01, the graph-search discovered/open-list marker.
+void __thiscall GraphNode_SetFlag01(void *this, bool value)
 {
-  if ( a2 )
-    *(this + 0x10) |= 1u;
+  if ( value ) /*0x67ecd5*/
+    *((_BYTE *)this + 0x10) |= 1u; /*0x67ecd7*/
   else
-    *(this + 0x10) &= ~1u;
+    *((_BYTE *)this + 0x10) &= ~1u; /*0x67ecde*/
 }

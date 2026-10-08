@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x649204",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x64925A",
-    "line": "mov     ecx, offset fAIAcquireObjectDistance",
+    "line": "mov     ecx, (offset flt_B36778+170h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x649264",
-    "line": "mov     ecx, offset fAIAcquireObjectDistance",
+    "line": "mov     ecx, (offset flt_B36778+170h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x6492D7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x6492FA",
-    "line": "call    sub_67F100",
+    "line": "call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.",
     "mnemonic": "call",
     "size": 5
   },

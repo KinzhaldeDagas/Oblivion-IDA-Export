@@ -156,726 +156,726 @@ int __thiscall sub_8ED840(__m128 *this, __m128 *a2, int a3, int a4)
   int v159; // [esp+13Ch] [ebp-20h]
   int v160; // [esp+140h] [ebp-1Ch]
 
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v6 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) )
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8ed85b*/
+  v6 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8ed869*/
+  if ( *(_DWORD *)(v6 + 0x1A4) < *(_DWORD *)(v6 + 0x1A8) ) /*0x8ed87b*/
   {
-    v7 = ThreadLocalStoragePointer[TlsIndex];
-    v8 = *(_DWORD **)(v6 + 0x1A4);
-    *v8 = "TtrcHeightFild";
-    v9 = __rdtsc();
-    v8[1] = v9;
-    *(_DWORD *)(v7 + 0x1A4) = v8 + 3;
+    v7 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x8ed87d*/
+    v8 = *(_DWORD **)(v6 + 0x1A4); /*0x8ed87f*/
+    *v8 = "TtrcHeightFild"; /*0x8ed885*/
+    v9 = __rdtsc(); /*0x8ed88b*/
+    v8[1] = v9; /*0x8ed895*/
+    *(_DWORD *)(v7 + 0x1A4) = v8 + 3; /*0x8ed89b*/
   }
-  v10 = *a2;
-  v11 = *(this + 3);
-  v153 = _mm_add_ps(_mm_mul_ps(_mm_add_ps(*a2, *(this + 4)), v11), (__m128)xmmword_A97DD0);
-  v12 = (__int16)((unsigned __int32)v153.m128_i32[0] >> 6);
-  *(__m128 *)&v141[1] = _mm_mul_ps(v10, v11);
-  v13 = a2[1];
-  v14 = this->m128_i32[0];
-  i = (__int16)((unsigned __int32)v153.m128_i32[2] >> 6);
-  j = v12;
-  *(__m128 *)&v151[3] = _mm_mul_ps(v13, v11);
-  (*(void (__thiscall **)(__m128 *, int *))(v14 + 0x28))(this, &v127);
-  v141[4] = v141[2];
-  v151[6] = v151[4];
-  if ( (_BYTE)v127 )
+  v10 = *a2; /*0x8ed8a4*/
+  v11 = *(this + 3); /*0x8ed8a7*/
+  v153 = _mm_add_ps(_mm_mul_ps(_mm_add_ps(*a2, *(this + 4)), v11), (__m128)xmmword_A97DD0); /*0x8ed8c2*/
+  v12 = (__int16)((unsigned __int32)v153.m128_i32[0] >> 6); /*0x8ed8e4*/
+  *(__m128 *)&v141[1] = _mm_mul_ps(v10, v11); /*0x8ed8e7*/
+  v13 = a2[1]; /*0x8ed8ec*/
+  v14 = this->m128_i32[0]; /*0x8ed8f0*/
+  i = (__int16)((unsigned __int32)v153.m128_i32[2] >> 6); /*0x8ed8f6*/
+  j = v12; /*0x8ed900*/
+  *(__m128 *)&v151[3] = _mm_mul_ps(v13, v11); /*0x8ed904*/
+  (*(void (__thiscall **)(__m128 *, int *))(v14 + 0x28))(this, &v127); /*0x8ed90c*/
+  v141[4] = v141[2]; /*0x8ed920*/
+  v151[6] = v151[4]; /*0x8ed924*/
+  if ( (_BYTE)v127 ) /*0x8ed92b*/
   {
-    *(float *)&v141[2] = *(float *)&v141[1] - *(float *)&v141[3];
-    v15 = v151[3] - v151[5];
+    *(float *)&v141[2] = *(float *)&v141[1] - *(float *)&v141[3]; /*0x8ed951*/
+    v15 = v151[3] - v151[5]; /*0x8ed95c*/
   }
   else
   {
-    *(float *)&v141[2] = *(float *)&v141[3] + *(float *)&v141[1];
-    v15 = v151[5] + v151[3];
+    *(float *)&v141[2] = *(float *)&v141[3] + *(float *)&v141[1]; /*0x8ed935*/
+    v15 = v151[5] + v151[3]; /*0x8ed940*/
   }
-  v151[4] = v15;
-  v16 = v151[3] - *(float *)&v141[1];
-  *(float *)&v129 = v16;
-  v17 = fabs(v16);
-  v157 = v17;
-  if ( v17 >= flt_A9B0D8 )
+  v151[4] = v15; /*0x8ed963*/
+  v16 = v151[3] - *(float *)&v141[1]; /*0x8ed974*/
+  *(float *)&v129 = v16; /*0x8ed978*/
+  v17 = fabs(v16); /*0x8ed97c*/
+  v157 = v17; /*0x8ed97e*/
+  if ( v17 >= flt_A9B0D8 ) /*0x8ed990*/
   {
-    v19 = fConstant_1 / *(float *)&v129;
-    v153.m128_f32[0] = v19;
-    if ( *(float *)&v129 >= (double)*(float *)&SrcStr )
+    v19 = fConstant_1 / *(float *)&v129; /*0x8ed9ac*/
+    v153.m128_f32[0] = v19; /*0x8ed9b0*/
+    if ( *(float *)&v129 >= (double)*(float *)&SrcStr ) /*0x8ed9c6*/
     {
-      ++v12;
-      v146 = v19;
-      v18 = 1;
-      j = v12;
+      ++v12; /*0x8ed9d4*/
+      v146 = v19; /*0x8ed9d5*/
+      v18 = 1; /*0x8ed9d9*/
+      j = v12; /*0x8ed9de*/
     }
     else
     {
-      v18 = 0xFFFFFFFF;
-      v146 = -v19;
+      v18 = 0xFFFFFFFF; /*0x8ed9ca*/
+      v146 = -v19; /*0x8ed9ce*/
     }
-    v142 = ((double)j - *(float *)&v141[1]) * v19;
+    v142 = ((double)j - *(float *)&v141[1]) * v19; /*0x8ed9ec*/
   }
   else
   {
-    v146 = 0.0;
-    v18 = 0xFFFFFFFF;
-    v142 = 3.4028235e38;
+    v146 = 0.0; /*0x8ed992*/
+    v18 = 0xFFFFFFFF; /*0x8ed99a*/
+    v142 = 3.4028235e38; /*0x8ed99c*/
   }
-  v139 = v18;
-  v20 = v151[4] - *(float *)&v141[2];
-  *(float *)&v129 = v20;
-  if ( fabs(v20) >= flt_A9B0D8 )
+  v139 = v18; /*0x8ed9f9*/
+  v20 = v151[4] - *(float *)&v141[2]; /*0x8ed9fd*/
+  *(float *)&v129 = v20; /*0x8eda01*/
+  if ( fabs(v20) >= flt_A9B0D8 ) /*0x8eda12*/
   {
-    v21 = fConstant_1 / *(float *)&v129;
-    if ( *(float *)&v129 >= (double)*(float *)&SrcStr )
+    v21 = fConstant_1 / *(float *)&v129; /*0x8eda30*/
+    if ( *(float *)&v129 >= (double)*(float *)&SrcStr ) /*0x8eda43*/
     {
-      v147 = v21;
-      v140 = 1;
-      ++v132;
+      v147 = v21; /*0x8eda57*/
+      v140 = 1; /*0x8eda5c*/
+      ++v132; /*0x8eda64*/
     }
     else
     {
-      v140 = 0xFFFFFFFF;
-      v147 = -v21;
+      v140 = 0xFFFFFFFF; /*0x8eda47*/
+      v147 = -v21; /*0x8eda4d*/
     }
-    v143 = ((double)v132 - *(float *)&v141[2]) * v21;
+    v143 = ((double)v132 - *(float *)&v141[2]) * v21; /*0x8eda72*/
   }
   else
   {
-    v147 = 0.0;
-    v140 = 0xFFFFFFFF;
-    v143 = 3.4028235e38;
+    v147 = 0.0; /*0x8eda14*/
+    v140 = 0xFFFFFFFF; /*0x8eda1c*/
+    v143 = 3.4028235e38; /*0x8eda20*/
   }
-  v22 = i;
-  v23 = v151[5] - *(float *)&v141[3];
-  *(float *)&v129 = v23;
-  v24 = fabs(v23);
-  v150 = v24;
-  if ( v24 >= flt_A9B0D8 )
+  v22 = i; /*0x8eda7f*/
+  v23 = v151[5] - *(float *)&v141[3]; /*0x8eda83*/
+  *(float *)&v129 = v23; /*0x8eda87*/
+  v24 = fabs(v23); /*0x8eda8b*/
+  v150 = v24; /*0x8eda8d*/
+  if ( v24 >= flt_A9B0D8 ) /*0x8eda9f*/
   {
-    v25 = fConstant_1 / *(float *)&v129;
-    v153.m128_f32[2] = v25;
-    if ( *(float *)&v129 >= (double)*(float *)&SrcStr )
+    v25 = fConstant_1 / *(float *)&v129; /*0x8edabd*/
+    v153.m128_f32[2] = v25; /*0x8edac1*/
+    if ( *(float *)&v129 >= (double)*(float *)&SrcStr ) /*0x8edad7*/
     {
-      v22 = i + 1;
-      v148 = v25;
-      v141[0] = 1;
-      ++i;
+      v22 = i + 1; /*0x8edae7*/
+      v148 = v25; /*0x8edae8*/
+      v141[0] = 1; /*0x8edaec*/
+      ++i; /*0x8edaf4*/
     }
     else
     {
-      v141[0] = 0xFFFFFFFF;
-      v148 = -v25;
+      v141[0] = 0xFFFFFFFF; /*0x8edadb*/
+      v148 = -v25; /*0x8edae1*/
     }
-    v144 = ((double)i - *(float *)&v141[3]) * v25;
+    v144 = ((double)i - *(float *)&v141[3]) * v25; /*0x8edb02*/
   }
   else
   {
-    v148 = 0.0;
-    v141[0] = 0xFFFFFFFF;
-    v144 = 3.4028235e38;
+    v148 = 0.0; /*0x8edaa1*/
+    v141[0] = 0xFFFFFFFF; /*0x8edaa9*/
+    v144 = 3.4028235e38; /*0x8edaad*/
   }
-  if ( *(float *)&SrcStr == v148 + v146 || *(float *)&SrcStr == v147 + v146 || *(float *)&SrcStr == v147 + v148 )
+  if ( *(float *)&SrcStr == v148 + v146 || *(float *)&SrcStr == v147 + v146 || *(float *)&SrcStr == v147 + v148 ) /*0x8edb53*/
   {
-    if ( v12 >= (unsigned int)(this->m128_i32[3] - 1) || v22 >= *((_DWORD *)this + 4) - 1 )
+    if ( v12 >= (unsigned int)(this->m128_i32[3] - 1) || v22 >= *((_DWORD *)this + 4) - 1 ) /*0x8ee7a7*/
     {
-      v90 = NtCurrentTeb()->ThreadLocalStoragePointer;
-      LODWORD(v27) = v90[TlsIndex];
-      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-        return v27;
-      goto LABEL_172;
+      v90 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8eeb5b*/
+      LODWORD(v27) = v90[MEMORY[0xBA9DE4]]; /*0x8eeb68*/
+      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8eeb77*/
+        return v27; /*0x8eeb77*/
+      goto LABEL_172; /*0x8eeb77*/
     }
-    v92 = this->m128_i32[0];
-    v130 = 0x3F800000;
-    v136 = *(float *)&v141[3] - (double)i;
-    v156[0] = 1.0;
-    v154 = _mm_shuffle_ps((__m128)0x3F800000u, (__m128)0x3F800000u, 0);
-    v135 = *(float *)&v141[1] - (double)j;
-    v93 = (_BYTE *)(*(int (__thiscall **)(__m128 *, char *))(v92 + 0x28))(this, (char *)&v152 + 0xF);
-    v94 = this->m128_i32[0];
-    if ( *v93 )
+    v92 = this->m128_i32[0]; /*0x8ee7b1*/
+    v130 = 0x3F800000; /*0x8ee7ba*/
+    v136 = *(float *)&v141[3] - (double)i; /*0x8ee7d1*/
+    v156[0] = 1.0; /*0x8ee7db*/
+    v154 = _mm_shuffle_ps((__m128)0x3F800000u, (__m128)0x3F800000u, 0); /*0x8ee7e6*/
+    v135 = *(float *)&v141[1] - (double)j; /*0x8ee7f2*/
+    v93 = (_BYTE *)(*(int (__thiscall **)(__m128 *, char *))(v92 + 0x28))(this, (char *)&v152 + 0xF); /*0x8ee7f6*/
+    v94 = this->m128_i32[0]; /*0x8ee7fb*/
+    if ( *v93 ) /*0x8ee7f9*/
     {
-      v137 = ((double (__thiscall *)(__m128 *, int))*(_DWORD *)(v94 + 0x24))(this, v12);
-      *(float *)&v128 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+      v137 = ((double (__thiscall *)(__m128 *, int))*(_DWORD *)(v94 + 0x24))(this, v12); /*0x8ee80c*/
+      *(float *)&v128 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee81f*/
                           this,
                           v12 + 1,
                           v22 + 1);
-      v95 = this->m128_i32[0];
-      if ( v135 > (double)v136 )
+      v95 = this->m128_i32[0]; /*0x8ee827*/
+      if ( v135 > (double)v136 ) /*0x8ee834*/
       {
-        v96 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(v95 + 0x24))(this, v12 + 1, v22);
-        v123 = v96 - v137;
-        *(float *)&v128 = *(float *)&v128 - v96;
-        v97 = v123 * v135 + *(float *)&v128 * v136 + v137;
+        v96 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(v95 + 0x24))(this, v12 + 1, v22); /*0x8ee83b*/
+        v123 = v96 - v137; /*0x8ee844*/
+        *(float *)&v128 = *(float *)&v128 - v96; /*0x8ee84e*/
+        v97 = v123 * v135 + *(float *)&v128 * v136 + v137; /*0x8ee866*/
 LABEL_157:
-        v101 = 1;
-        v154.m128_f32[0] = -v123;
-        v99 = *(float *)&v128;
-        goto LABEL_160;
+        v101 = 1; /*0x8ee922*/
+        v154.m128_f32[0] = -v123; /*0x8ee92d*/
+        v99 = *(float *)&v128; /*0x8ee934*/
+        goto LABEL_160; /*0x8ee938*/
       }
-      v98 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(v95 + 0x24))(this, v12, v22 + 1);
-      v124 = *(float *)&v128 - v98;
-      *(float *)&v128 = v98 - v137;
-      v97 = v124 * v135 + *(float *)&v128 * v136 + v137;
-      v154.m128_f32[0] = -v124;
-      v99 = *(float *)&v128;
+      v98 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(v95 + 0x24))(this, v12, v22 + 1); /*0x8ee874*/
+      v124 = *(float *)&v128 - v98; /*0x8ee87d*/
+      *(float *)&v128 = v98 - v137; /*0x8ee885*/
+      v97 = v124 * v135 + *(float *)&v128 * v136 + v137; /*0x8ee89b*/
+      v154.m128_f32[0] = -v124; /*0x8ee8a5*/
+      v99 = *(float *)&v128; /*0x8ee8ac*/
     }
     else
     {
-      v134 = ((double (__thiscall *)(__m128 *, int))*(_DWORD *)(v94 + 0x24))(this, v12 + 1);
-      v125 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+      v134 = ((double (__thiscall *)(__m128 *, int))*(_DWORD *)(v94 + 0x24))(this, v12 + 1); /*0x8ee8bc*/
+      v125 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee8cc*/
                this,
                v12,
                v22 + 1);
-      if ( v135 + v136 > fConstant_1 )
+      if ( v135 + v136 > fConstant_1 ) /*0x8ee8e5*/
       {
-        v100 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+        v100 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee8f1*/
                  this,
                  v12 + 1,
                  v22 + 1);
-        v123 = v100 - v125;
-        *(float *)&v128 = v100 - v134;
-        v97 = (v135 - fConstant_1) * v123 + *(float *)&v128 * v136 + v134;
-        goto LABEL_157;
+        v123 = v100 - v125; /*0x8ee8fa*/
+        *(float *)&v128 = v100 - v134; /*0x8ee902*/
+        v97 = (v135 - fConstant_1) * v123 + *(float *)&v128 * v136 + v134; /*0x8ee91e*/
+        goto LABEL_157; /*0x8ee91e*/
       }
-      v102 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, v12, v22);
-      *(float *)&v128 = v134 - v102;
-      v126 = v125 - v102;
-      v97 = v102 + *(float *)&v128 * v135 + v126 * v136;
-      v154.m128_f32[0] = -*(float *)&v128;
-      v99 = v126;
+      v102 = ((double (__thiscall *)(__m128 *, int, unsigned int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, v12, v22); /*0x8ee93e*/
+      *(float *)&v128 = v134 - v102; /*0x8ee947*/
+      v126 = v125 - v102; /*0x8ee951*/
+      v97 = v102 + *(float *)&v128 * v135 + v126 * v136; /*0x8ee967*/
+      v154.m128_f32[0] = -*(float *)&v128; /*0x8ee96f*/
+      v99 = v126; /*0x8ee976*/
     }
-    v101 = 0;
+    v101 = 0; /*0x8ee97a*/
 LABEL_160:
-    v154.m128_f32[2] = -v99;
-    v137 = *(float *)&v141[4] - v97;
-    v134 = v151[6] - v97;
-    if ( v134 <= (double)v137 )
+    v154.m128_f32[2] = -v99; /*0x8ee97c*/
+    v137 = *(float *)&v141[4] - v97; /*0x8ee98b*/
+    v134 = v151[6] - v97; /*0x8ee998*/
+    if ( v134 <= (double)v137 ) /*0x8ee9ab*/
     {
-      if ( v137 < (double)*(float *)&SrcStr || v134 >= (double)*(float *)&SrcStr )
+      if ( v137 < (double)*(float *)&SrcStr || v134 >= (double)*(float *)&SrcStr ) /*0x8eea0c*/
       {
-        v91 = NtCurrentTeb()->ThreadLocalStoragePointer;
-        LODWORD(v27) = v91[TlsIndex];
-        if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-          return v27;
+        v91 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8eeb20*/
+        LODWORD(v27) = v91[MEMORY[0xBA9DE4]]; /*0x8eeb2d*/
+        if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8eeb3c*/
+          return v27; /*0x8eeb3c*/
 LABEL_148:
-        v43 = v91[TlsIndex];
-        v44 = *(_DWORD **)(v27 + 0x1A4);
-        *v44 = "Et";
-        v27 = __rdtsc();
-        v130 = v27;
-        v44[1] = v27;
+        v43 = v91[MEMORY[0xBA9DE4]]; /*0x8ee775*/
+        v44 = *(_DWORD **)(v27 + 0x1A4); /*0x8ee777*/
+        *v44 = "Et"; /*0x8ee77d*/
+        v27 = __rdtsc(); /*0x8ee783*/
+        v130 = v27; /*0x8ee785*/
+        v44[1] = v27; /*0x8ee78d*/
 LABEL_174:
-        *(_DWORD *)(v43 + 0x1A4) = v44 + 3;
-        return v27;
+        *(_DWORD *)(v43 + 0x1A4) = v44 + 3; /*0x8eeb94*/
+        return v27; /*0x8eeb97*/
       }
-      v103 = v137 / (v137 - v134);
-      if ( v103 < *(float *)(a4 + 4) )
+      v103 = v137 / (v137 - v134); /*0x8eea1d*/
+      if ( v103 < *(float *)(a4 + 4) ) /*0x8eea2b*/
       {
-        v104 = *(this + 3);
-        v156[0] = v103;
-        v105 = _mm_mul_ps(v154, v104);
-        v106 = _mm_mul_ps(v105, v105);
-        v107 = _mm_shuffle_ps(v106, v106, 0x55).m128_f32[0] + v106.m128_f32[0];
-        v108 = _mm_shuffle_ps(v106, v106, 0xAA);
-        v109 = v108;
-        v109.m128_f32[0] = v108.m128_f32[0] + v107;
-        v153 = v109;
-        v153.m128_f32[0] = 1.0 / fsqrt(v108.m128_f32[0] + v107);
-        v110 = v101 + 2 * (v12 + (v22 << 0xF));
-        v111 = *(void (__thiscall ***)(int, int, __m128 *))a4;
-        v155 = v110;
-        v130 = 0x3F000000;
-        v112 = (__m128)0x3F000000u;
-        v112.m128_f32[0] = (float)(0.5 * v153.m128_f32[0])
+        v104 = *(this + 3); /*0x8eea31*/
+        v156[0] = v103; /*0x8eea35*/
+        v105 = _mm_mul_ps(v154, v104); /*0x8eea44*/
+        v106 = _mm_mul_ps(v105, v105); /*0x8eea4a*/
+        v107 = _mm_shuffle_ps(v106, v106, 0x55).m128_f32[0] + v106.m128_f32[0]; /*0x8eea54*/
+        v108 = _mm_shuffle_ps(v106, v106, 0xAA); /*0x8eea5b*/
+        v109 = v108; /*0x8eea5f*/
+        v109.m128_f32[0] = v108.m128_f32[0] + v107; /*0x8eea62*/
+        v153 = v109; /*0x8eea66*/
+        v153.m128_f32[0] = 1.0 / fsqrt(v108.m128_f32[0] + v107); /*0x8eea72*/
+        v110 = v101 + 2 * (v12 + (v22 << 0xF)); /*0x8eea90*/
+        v111 = *(void (__thiscall ***)(int, int, __m128 *))a4; /*0x8eea93*/
+        v155 = v110; /*0x8eeaa7*/
+        v130 = 0x3F000000; /*0x8eeaae*/
+        v112 = (__m128)0x3F000000u; /*0x8eeab6*/
+        v112.m128_f32[0] = (float)(0.5 * v153.m128_f32[0]) /*0x8eeac7*/
                          * (float)(3.0
                                  - (float)((float)((float)(v108.m128_f32[0] + v107) * v153.m128_f32[0])
                                          * v153.m128_f32[0]));
-        v154 = _mm_mul_ps(_mm_shuffle_ps(v112, v112, 0), v105);
-        (*v111)(a4, a3, &v154);
+        v154 = _mm_mul_ps(_mm_shuffle_ps(v112, v112, 0), v105); /*0x8eeada*/
+        (*v111)(a4, a3, &v154); /*0x8eeae2*/
       }
-      v90 = NtCurrentTeb()->ThreadLocalStoragePointer;
-      LODWORD(v27) = v90[TlsIndex];
-      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-        return v27;
+      v90 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8eeae8*/
+      LODWORD(v27) = v90[MEMORY[0xBA9DE4]]; /*0x8eeaf5*/
+      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8eeb04*/
+        return v27; /*0x8eeb04*/
     }
     else
     {
-      v90 = NtCurrentTeb()->ThreadLocalStoragePointer;
-      LODWORD(v27) = v90[TlsIndex];
-      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-        return v27;
+      v90 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8ee9ad*/
+      LODWORD(v27) = v90[MEMORY[0xBA9DE4]]; /*0x8ee9ba*/
+      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8ee9c9*/
+        return v27; /*0x8ee9c9*/
     }
-    goto LABEL_172;
+    goto LABEL_172; /*0x8ee9c9*/
   }
-  v149 = *(__m128 *)&v141[1];
-  v145 = *(float *)&v12;
-  if ( v18 <= 0 )
+  v149 = *(__m128 *)&v141[1]; /*0x8edb63*/
+  v145 = *(float *)&v12; /*0x8edb87*/
+  if ( v18 <= 0 ) /*0x8edb8b*/
   {
-    v29 = this->m128_i32[3];
-    if ( v12 > v29 - 2 )
+    v29 = this->m128_i32[3]; /*0x8edbf9*/
+    if ( v12 > v29 - 2 ) /*0x8edc01*/
     {
-      v30 = (double)(v29 - 1);
-      if ( v151[3] > v30 )
+      v30 = (double)(v29 - 1); /*0x8edc0c*/
+      if ( v151[3] > v30 ) /*0x8edc1e*/
       {
-        v31 = NtCurrentTeb()->ThreadLocalStoragePointer;
-        LODWORD(v27) = v31[TlsIndex];
-        if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-          return v27;
-        goto LABEL_61;
+        v31 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8edc20*/
+        LODWORD(v27) = v31[MEMORY[0xBA9DE4]]; /*0x8edc2f*/
+        if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8edc3e*/
+          return v27; /*0x8edc3e*/
+        goto LABEL_61; /*0x8edc3e*/
       }
-      v12 = v29 - 2;
-      v28 = (*(float *)&v141[1] - v30) * v146;
-      goto LABEL_38;
+      v12 = v29 - 2; /*0x8edc68*/
+      v28 = (*(float *)&v141[1] - v30) * v146; /*0x8edc6a*/
+      goto LABEL_38; /*0x8edc6a*/
     }
 LABEL_41:
-    v35 = i;
-    goto LABEL_42;
+    v35 = i; /*0x8edd24*/
+    goto LABEL_42; /*0x8edd24*/
   }
-  if ( v12 > 0 )
-    goto LABEL_41;
-  if ( v151[3] < (double)*(float *)&SrcStr )
+  if ( v12 > 0 ) /*0x8edb8f*/
+    goto LABEL_41; /*0x8edb8f*/
+  if ( v151[3] < (double)*(float *)&SrcStr ) /*0x8edba7*/
   {
-    v26 = NtCurrentTeb()->ThreadLocalStoragePointer;
-    LODWORD(v27) = v26[TlsIndex];
-    if ( *(_DWORD *)(v27 + 0x1A4) < *(_DWORD *)(v27 + 0x1A8) )
-      goto LABEL_58;
-    return v27;
+    v26 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8edba9*/
+    LODWORD(v27) = v26[MEMORY[0xBA9DE4]]; /*0x8edbb6*/
+    if ( *(_DWORD *)(v27 + 0x1A4) < *(_DWORD *)(v27 + 0x1A8) ) /*0x8edbc5*/
+      goto LABEL_58; /*0x8edbc5*/
+    return v27; /*0x8edbc5*/
   }
-  v12 = 1;
-  v28 = -(v146 * *(float *)&v141[1]);
+  v12 = 1; /*0x8edbec*/
+  v28 = -(v146 * *(float *)&v141[1]); /*0x8edbf5*/
 LABEL_38:
-  v32 = (__m128)xmmword_A6DFE0;
-  j = v12;
-  v142 = v146 + v28;
-  *(float *)&v115 = v28;
-  v33 = _mm_shuffle_ps((__m128)v115, (__m128)v115, 0);
-  v116 = v28 * v150;
-  v149 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v32, v33), *(__m128 *)&v141[1]), _mm_mul_ps(v33, *(__m128 *)&v151[3]));
-  v128 = (int)v116;
-  v34 = i + v141[0] * v128 - 2;
-  for ( i = v34; (double)v34 <= v149.m128_f32[2]; i = v34 )
-    ++v34;
-  v35 = (v141[0] >> 1) + v34;
-  i = v35;
-  v144 = ((double)v35 - *(float *)&v141[3]) * v153.m128_f32[2];
+  v32 = (__m128)xmmword_A6DFE0; /*0x8edc6e*/
+  j = v12; /*0x8edc7b*/
+  v142 = v146 + v28; /*0x8edc7f*/
+  *(float *)&v115 = v28; /*0x8edc83*/
+  v33 = _mm_shuffle_ps((__m128)v115, (__m128)v115, 0); /*0x8edc94*/
+  v116 = v28 * v150; /*0x8edca3*/
+  v149 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v32, v33), *(__m128 *)&v141[1]), _mm_mul_ps(v33, *(__m128 *)&v151[3])); /*0x8edcb2*/
+  v128 = (int)v116; /*0x8edcbe*/
+  v34 = i + v141[0] * v128 - 2; /*0x8edcd1*/
+  for ( i = v34; (double)v34 <= v149.m128_f32[2]; i = v34 ) /*0x8edce9*/
+    ++v34; /*0x8edcf0*/
+  v35 = (v141[0] >> 1) + v34; /*0x8edd09*/
+  i = v35; /*0x8edd0b*/
+  v144 = ((double)v35 - *(float *)&v141[3]) * v153.m128_f32[2]; /*0x8edd1e*/
 LABEL_42:
-  if ( v141[0] <= 0 )
+  if ( v141[0] <= 0 ) /*0x8edd2e*/
   {
-    v37 = *((_DWORD *)this + 4);
-    if ( v35 <= v37 - 2 )
-      goto LABEL_56;
-    v38 = (double)(v37 - 1);
-    if ( v151[5] > v38 )
+    v37 = *((_DWORD *)this + 4); /*0x8edd9c*/
+    if ( v35 <= v37 - 2 ) /*0x8edda4*/
+      goto LABEL_56; /*0x8edda4*/
+    v38 = (double)(v37 - 1); /*0x8eddaf*/
+    if ( v151[5] > v38 ) /*0x8eddc1*/
     {
-      v31 = NtCurrentTeb()->ThreadLocalStoragePointer;
-      LODWORD(v27) = v31[TlsIndex];
-      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-        return v27;
-      goto LABEL_61;
+      v31 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8eddc3*/
+      LODWORD(v27) = v31[MEMORY[0xBA9DE4]]; /*0x8eddd2*/
+      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8edde1*/
+        return v27; /*0x8edde1*/
+      goto LABEL_61; /*0x8edde1*/
     }
-    v35 = v37 - 2;
-    v36 = (*(float *)&v141[3] - v38) * v148;
+    v35 = v37 - 2; /*0x8ede0b*/
+    v36 = (*(float *)&v141[3] - v38) * v148; /*0x8ede0d*/
   }
   else
   {
-    if ( v35 > 0 )
-      goto LABEL_56;
-    if ( v151[5] < (double)*(float *)&SrcStr )
+    if ( v35 > 0 ) /*0x8edd32*/
+      goto LABEL_56; /*0x8edd32*/
+    if ( v151[5] < (double)*(float *)&SrcStr ) /*0x8edd4a*/
     {
-      v26 = NtCurrentTeb()->ThreadLocalStoragePointer;
-      LODWORD(v27) = v26[TlsIndex];
-      if ( *(_DWORD *)(v27 + 0x1A4) < *(_DWORD *)(v27 + 0x1A8) )
-        goto LABEL_58;
-      return v27;
+      v26 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8edd4c*/
+      LODWORD(v27) = v26[MEMORY[0xBA9DE4]]; /*0x8edd59*/
+      if ( *(_DWORD *)(v27 + 0x1A4) < *(_DWORD *)(v27 + 0x1A8) ) /*0x8edd68*/
+        goto LABEL_58; /*0x8edd68*/
+      return v27; /*0x8edd68*/
     }
-    v35 = 1;
-    v36 = -(v148 * *(float *)&v141[3]);
+    v35 = 1; /*0x8edd8f*/
+    v36 = -(v148 * *(float *)&v141[3]); /*0x8edd98*/
   }
-  v39 = (__m128)xmmword_A6DFE0;
-  i = v35;
-  v144 = v148 + v36;
-  *(float *)&v117 = v36;
-  v40 = _mm_shuffle_ps((__m128)v117, (__m128)v117, 0);
-  v118 = v36 * v157;
-  v149 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v39, v40), *(__m128 *)&v141[1]), _mm_mul_ps(v40, *(__m128 *)&v151[3]));
-  v128 = (int)v118;
-  v41 = v18 * v128 + LODWORD(v145) - 2;
-  for ( j = v41; (double)v41 <= v149.m128_f32[0]; j = v41 )
-    ++v41;
-  v12 = (v18 >> 1) + v41;
-  j = v12;
-  v142 = ((double)v12 - *(float *)&v141[1]) * v153.m128_f32[0];
+  v39 = (__m128)xmmword_A6DFE0; /*0x8ede15*/
+  i = v35; /*0x8ede1e*/
+  v144 = v148 + v36; /*0x8ede22*/
+  *(float *)&v117 = v36; /*0x8ede26*/
+  v40 = _mm_shuffle_ps((__m128)v117, (__m128)v117, 0); /*0x8ede37*/
+  v118 = v36 * v157; /*0x8ede46*/
+  v149 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v39, v40), *(__m128 *)&v141[1]), _mm_mul_ps(v40, *(__m128 *)&v151[3])); /*0x8ede55*/
+  v128 = (int)v118; /*0x8ede61*/
+  v41 = v18 * v128 + LODWORD(v145) - 2; /*0x8ede70*/
+  for ( j = v41; (double)v41 <= v149.m128_f32[0]; j = v41 ) /*0x8ede88*/
+    ++v41; /*0x8ede90*/
+  v12 = (v18 >> 1) + v41; /*0x8edea9*/
+  j = v12; /*0x8edeab*/
+  v142 = ((double)v12 - *(float *)&v141[1]) * v153.m128_f32[0]; /*0x8edebe*/
 LABEL_56:
-  v42 = this->m128_u32[3];
-  if ( v12 < v42 )
+  v42 = this->m128_u32[3]; /*0x8edec2*/
+  if ( v12 < v42 ) /*0x8edec7*/
   {
-    if ( v12 - v139 >= v42 )
+    if ( v12 - v139 >= v42 ) /*0x8edf12*/
     {
-      v31 = NtCurrentTeb()->ThreadLocalStoragePointer;
-      LODWORD(v27) = v31[TlsIndex];
-      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-        return v27;
+      v31 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8edf14*/
+      LODWORD(v27) = v31[MEMORY[0xBA9DE4]]; /*0x8edf21*/
+      if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8edf30*/
+        return v27; /*0x8edf30*/
 LABEL_61:
-      v43 = v31[TlsIndex];
-      v44 = *(_DWORD **)(v27 + 0x1A4);
-      *v44 = "Et";
-      v27 = __rdtsc();
-      v44[1] = v27;
-      goto LABEL_174;
+      v43 = v31[MEMORY[0xBA9DE4]]; /*0x8edf36*/
+      v44 = *(_DWORD **)(v27 + 0x1A4); /*0x8edf38*/
+      *v44 = "Et"; /*0x8edf3e*/
+      v27 = __rdtsc(); /*0x8edf44*/
+      v44[1] = v27; /*0x8edf4e*/
+      goto LABEL_174; /*0x8edf51*/
     }
-    v45 = *(float *)&SrcStr;
-    v46 = ((_BYTE)v127 != 0) ^ ((v139 ^ v141[0]) >= 0);
-    LOBYTE(v151[1]) = v46;
-    if ( v147 == v45 )
+    v45 = *(float *)&SrcStr; /*0x8edf5a*/
+    v46 = ((_BYTE)v127 != 0) ^ ((v139 ^ v141[0]) >= 0); /*0x8edf78*/
+    LOBYTE(v151[1]) = v46; /*0x8edf7c*/
+    if ( v147 == v45 ) /*0x8edf86*/
     {
-      LOBYTE(v151[1]) = 0;
-      v46 = 0;
+      LOBYTE(v151[1]) = 0; /*0x8edf88*/
+      v46 = 0; /*0x8edf90*/
     }
-    v47 = 2;
-    LODWORD(v137) = 2;
-    if ( (_BYTE)v127 )
-      v48 = v12 - v35;
+    v47 = 2; /*0x8edf9d*/
+    LODWORD(v137) = 2; /*0x8edfa2*/
+    if ( (_BYTE)v127 ) /*0x8edfa6*/
+      v48 = v12 - v35; /*0x8edfac*/
     else
-      v48 = v35 + v12;
-    v132 = v48;
-    v49 = v149.m128_f32[1] - (double)v48;
-    if ( v46 )
+      v48 = v35 + v12; /*0x8edfa8*/
+    v132 = v48; /*0x8edfb0*/
+    v49 = v149.m128_f32[1] - (double)v48; /*0x8edfb8*/
+    if ( v46 ) /*0x8edfbf*/
     {
-      if ( fabs(v49) <= fConstant_1 )
+      if ( fabs(v49) <= fConstant_1 ) /*0x8edfce*/
       {
-        v47 = 0;
-        v137 = 0.0;
-        goto LABEL_74;
+        v47 = 0; /*0x8edfd6*/
+        v137 = 0.0; /*0x8edfd8*/
+        goto LABEL_74; /*0x8edfdc*/
       }
-      v50 = v48 - v140;
+      v50 = v48 - v140; /*0x8edfd0*/
     }
     else
     {
-      if ( (double)v140 * v49 <= *(float *)&SrcStr )
-        goto LABEL_74;
-      v47 = 0;
-      v137 = 0.0;
-      v50 = v140 + v48;
+      if ( (double)v140 * v49 <= *(float *)&SrcStr ) /*0x8edff1*/
+        goto LABEL_74; /*0x8edff1*/
+      v47 = 0; /*0x8edff7*/
+      v137 = 0.0; /*0x8edff9*/
+      v50 = v140 + v48; /*0x8edffd*/
     }
-    v132 = v50;
+    v132 = v50; /*0x8edfff*/
 LABEL_74:
-    if ( v147 == *(float *)&SrcStr )
-      v143 = 3.4028235e38;
+    if ( v147 == *(float *)&SrcStr ) /*0x8ee014*/
+      v143 = 3.4028235e38; /*0x8ee02c*/
     else
-      v143 = ((double)v132 - *(float *)&v141[2]) * (double)v140 * v147;
-    if ( v146 == *(float *)&SrcStr )
-      v51 = flt_A3B888;
+      v143 = ((double)v132 - *(float *)&v141[2]) * (double)v140 * v147; /*0x8ee026*/
+    if ( v146 == *(float *)&SrcStr ) /*0x8ee045*/
+      v51 = flt_A3B888; /*0x8ee047*/
     else
-      v51 = v142 - v146;
-    if ( v147 == *(float *)&SrcStr )
-      v149.m128_i32[1] = 0xFF7FFFFF;
+      v51 = v142 - v146; /*0x8ee053*/
+    if ( v147 == *(float *)&SrcStr ) /*0x8ee068*/
+      v149.m128_i32[1] = 0xFF7FFFFF; /*0x8ee06a*/
     else
-      v149.m128_f32[1] = v143 - v147;
-    if ( v148 == *(float *)&SrcStr )
-      v149.m128_i32[2] = 0xFF7FFFFF;
+      v149.m128_f32[1] = v143 - v147; /*0x8ee07f*/
+    if ( v148 == *(float *)&SrcStr ) /*0x8ee097*/
+      v149.m128_i32[2] = 0xFF7FFFFF; /*0x8ee099*/
     else
-      v149.m128_f32[2] = v144 - v148;
-    if ( v46 )
+      v149.m128_f32[2] = v144 - v148; /*0x8ee0ae*/
+    if ( v46 ) /*0x8ee0b7*/
     {
-      if ( !v47 )
+      if ( !v47 ) /*0x8ee0bb*/
       {
 LABEL_88:
-        v52 = 1;
+        v52 = 1; /*0x8ee0bf*/
 LABEL_99:
-        v53 = *(&v142 + v52) - *(&v146 + v52);
-        *(&j + v52) -= *(&v139 + v52);
-        v54 = j;
-        *(&v142 + v52) = v53;
-        v129 = v52;
-        v55 = this->m128_u32[3];
-        v151[0] = 3.4028235e38;
-        v151[2] = 0.0;
-        v135 = -1.0;
-        if ( v54 < v55 )
+        v53 = *(&v142 + v52) - *(&v146 + v52); /*0x8ee130*/
+        *(&j + v52) -= *(&v139 + v52); /*0x8ee142*/
+        v54 = j; /*0x8ee146*/
+        *(&v142 + v52) = v53; /*0x8ee14a*/
+        v129 = v52; /*0x8ee14e*/
+        v55 = this->m128_u32[3]; /*0x8ee152*/
+        v151[0] = 3.4028235e38; /*0x8ee157*/
+        v151[2] = 0.0; /*0x8ee162*/
+        v135 = -1.0; /*0x8ee16d*/
+        if ( v54 < v55 ) /*0x8ee175*/
         {
-          while ( 1 )
+          while ( 1 ) /*0x8ee180*/
           {
-            if ( (unsigned int)i >= *((_DWORD *)this + 4) )
-              goto LABEL_143;
-            if ( v135 > (double)*(float *)(a4 + 4) )
+            if ( (unsigned int)i >= *((_DWORD *)this + 4) ) /*0x8ee187*/
+              goto LABEL_143; /*0x8ee187*/
+            if ( v135 > (double)*(float *)(a4 + 4) ) /*0x8ee19c*/
             {
-              v90 = NtCurrentTeb()->ThreadLocalStoragePointer;
-              LODWORD(v27) = v90[TlsIndex];
-              if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-                return v27;
-              goto LABEL_172;
+              v90 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8ee718*/
+              LODWORD(v27) = v90[MEMORY[0xBA9DE4]]; /*0x8ee725*/
+              if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8ee734*/
+                return v27; /*0x8ee734*/
+              goto LABEL_172; /*0x8ee734*/
             }
-            v56 = v129;
-            v136 = *(&v142 + v129);
-            v130 = (int)(&v142 + v129);
-            sub_535AA0(&v154, v136);
-            v57 = j;
-            v58 = _mm_shuffle_ps(v154, v154, 0);
-            v59 = i;
-            v149 = _mm_add_ps(
+            v56 = v129; /*0x8ee1a2*/
+            v136 = *(&v142 + v129); /*0x8ee1b0*/
+            v130 = (int)(&v142 + v129); /*0x8ee1bc*/
+            sub_535AA0(&v154, v136); /*0x8ee1c0*/
+            v57 = j; /*0x8ee1c5*/
+            v58 = _mm_shuffle_ps(v154, v154, 0); /*0x8ee1dc*/
+            v59 = i; /*0x8ee1ee*/
+            v149 = _mm_add_ps( /*0x8ee200*/
                      _mm_mul_ps(_mm_sub_ps((__m128)xmmword_A6DFE0, v58), *(__m128 *)&v141[1]),
                      _mm_mul_ps(v58, *(__m128 *)&v151[3]));
-            LODWORD(v138) = j - v139;
-            if ( v56 )
+            LODWORD(v138) = j - v139; /*0x8ee208*/
+            if ( v56 ) /*0x8ee20c*/
             {
-              v74 = v56 == 2;
-              v60 = i;
-              if ( v74 )
+              v74 = v56 == 2; /*0x8ee248*/
+              v60 = i; /*0x8ee24b*/
+              if ( v74 ) /*0x8ee24f*/
               {
-                v120 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+                v120 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee25a*/
                          this,
                          j - v139,
                          i);
-                v61 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, v57, v60);
-                v62 = fabs(v149.m128_f32[0] - (double)j) * (v120 - v61);
+                v61 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, v57, v60); /*0x8ee264*/
+                v62 = fabs(v149.m128_f32[0] - (double)j) * (v120 - v61); /*0x8ee27a*/
               }
               else
               {
-                v134 = *(float *)&i;
-                *(float *)&v128 = fabs(v149.m128_f32[0] - (double)j);
-                if ( LOBYTE(v151[1]) )
-                  LODWORD(v134) = i - v141[0];
+                v134 = *(float *)&i; /*0x8ee28b*/
+                *(float *)&v128 = fabs(v149.m128_f32[0] - (double)j); /*0x8ee298*/
+                if ( LOBYTE(v151[1]) ) /*0x8ee29c*/
+                  LODWORD(v134) = i - v141[0]; /*0x8ee2a4*/
                 else
-                  v59 = i - v141[0];
-                v121 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+                  v59 = i - v141[0]; /*0x8ee2b0*/
+                v121 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee2bb*/
                          this,
                          j - v139,
                          v59);
-                v61 = ((double (__thiscall *)(__m128 *, int, _DWORD))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+                v61 = ((double (__thiscall *)(__m128 *, int, _DWORD))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee2c9*/
                         this,
                         v57,
                         LODWORD(v134));
-                v62 = (v121 - v61) * *(float *)&v128;
+                v62 = (v121 - v61) * *(float *)&v128; /*0x8ee2d2*/
               }
             }
             else
             {
-              v119 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+              v119 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee21d*/
                        this,
                        j,
                        i - v141[0]);
-              v60 = i;
-              v61 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, v57, i);
-              v62 = fabs(v149.m128_f32[2] - (double)i) * (v119 - v61);
+              v60 = i; /*0x8ee221*/
+              v61 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, v57, i); /*0x8ee22b*/
+              v62 = fabs(v149.m128_f32[2] - (double)i) * (v119 - v61); /*0x8ee241*/
             }
-            v63 = v61 + v62;
-            if ( v149.m128_f32[3] < v63 && v151[2] >= (double)v151[0] )
+            v63 = v61 + v62; /*0x8ee2d6*/
+            if ( v149.m128_f32[3] < v63 && v151[2] >= (double)v151[0] ) /*0x8ee2ff*/
             {
-              v64 = v149.m128_f32[3] - v63;
-              if ( v135 >= (double)*(float *)&SrcStr )
+              v64 = v149.m128_f32[3] - v63; /*0x8ee30c*/
+              if ( v135 >= (double)*(float *)&SrcStr ) /*0x8ee31d*/
               {
-                v65 = (v151[2] - v151[0]) / (v151[2] - v151[0] - v64) * (v136 - v135) + v135;
-                goto LABEL_116;
+                v65 = (v151[2] - v151[0]) / (v151[2] - v151[0] - v64) * (v136 - v135) + v135; /*0x8ee33d*/
+                goto LABEL_116; /*0x8ee341*/
               }
-              v66 = v136 / (v136 - v135);
-              v67 = *(float *)&v141[4] - ((fConstant_1 - v66) * v63 + v66 * v151[0]);
-              if ( v67 >= *(float *)&SrcStr )
-                break;
+              v66 = v136 / (v136 - v135); /*0x8ee34b*/
+              v67 = *(float *)&v141[4] - ((fConstant_1 - v66) * v63 + v66 * v151[0]); /*0x8ee364*/
+              if ( v67 >= *(float *)&SrcStr ) /*0x8ee373*/
+                break; /*0x8ee373*/
             }
-            v151[0] = v63;
-            v151[2] = v149.m128_f32[3];
-            v135 = v136;
+            v151[0] = v63; /*0x8ee604*/
+            v151[2] = v149.m128_f32[3]; /*0x8ee60f*/
+            v135 = v136; /*0x8ee616*/
 LABEL_129:
-            v86 = *(&v146 + v129);
-            v87 = v137;
-            *(&j + v129) += *(&v139 + v129);
-            v88 = v86 + *(float *)v130;
-            v89 = LODWORD(v87) ^ 2;
-            v137 = *(float *)&v89;
-            *(float *)v130 = v88;
-            if ( LOBYTE(v151[1]) )
+            v86 = *(&v146 + v129); /*0x8ee61a*/
+            v87 = v137; /*0x8ee62a*/
+            *(&j + v129) += *(&v139 + v129); /*0x8ee630*/
+            v88 = v86 + *(float *)v130; /*0x8ee638*/
+            v89 = LODWORD(v87) ^ 2; /*0x8ee63f*/
+            v137 = *(float *)&v89; /*0x8ee641*/
+            *(float *)v130 = v88; /*0x8ee645*/
+            if ( LOBYTE(v151[1]) ) /*0x8ee650*/
             {
-              if ( *(float *)&v89 == 0.0 )
-                goto LABEL_131;
-              if ( v142 >= (double)v144 )
-                goto LABEL_141;
-              *(float *)&v129 = 0.0;
+              if ( *(float *)&v89 == 0.0 ) /*0x8ee654*/
+                goto LABEL_131; /*0x8ee654*/
+              if ( v142 >= (double)v144 ) /*0x8ee66d*/
+                goto LABEL_141; /*0x8ee66d*/
+              *(float *)&v129 = 0.0; /*0x8ee66f*/
             }
             else
             {
-              if ( v157 < (double)v150 )
+              if ( v157 < (double)v150 ) /*0x8ee68c*/
               {
-                if ( *(float *)&v89 != 0.0 )
-                  goto LABEL_141;
-                if ( v142 < (double)v143 )
+                if ( *(float *)&v89 != 0.0 ) /*0x8ee690*/
+                  goto LABEL_141; /*0x8ee690*/
+                if ( v142 < (double)v143 ) /*0x8ee69f*/
                 {
-                  *(float *)&v129 = 0.0;
-                  goto LABEL_142;
+                  *(float *)&v129 = 0.0; /*0x8ee6a1*/
+                  goto LABEL_142; /*0x8ee6a5*/
                 }
 LABEL_131:
-                v129 = 1;
-                goto LABEL_142;
+                v129 = 1; /*0x8ee656*/
+                goto LABEL_142; /*0x8ee65e*/
               }
-              if ( *(float *)&v89 == 0.0 )
+              if ( *(float *)&v89 == 0.0 ) /*0x8ee6a9*/
               {
-                v129 = 1;
-                if ( v143 >= (double)v144 )
+                v129 = 1; /*0x8ee6b9*/
+                if ( v143 >= (double)v144 ) /*0x8ee6ca*/
 LABEL_141:
-                  v129 = 2;
+                  v129 = 2; /*0x8ee6cc*/
               }
               else
               {
-                *(float *)&v129 = 0.0;
+                *(float *)&v129 = 0.0; /*0x8ee6ab*/
               }
             }
 LABEL_142:
-            if ( (unsigned int)j >= this->m128_i32[3] )
-              goto LABEL_143;
+            if ( (unsigned int)j >= this->m128_i32[3] ) /*0x8ee6d7*/
+              goto LABEL_143; /*0x8ee6d7*/
           }
-          v65 = v67 / (v67 - v64) * v136;
+          v65 = v67 / (v67 - v64) * v136; /*0x8ee37f*/
 LABEL_116:
-          v134 = v65;
-          v135 = v136;
-          v151[0] = v63;
-          v151[2] = v149.m128_f32[3];
-          if ( v134 > (double)*(float *)(a4 + 4) )
+          v134 = v65; /*0x8ee383*/
+          v135 = v136; /*0x8ee399*/
+          v151[0] = v63; /*0x8ee39d*/
+          v151[2] = v149.m128_f32[3]; /*0x8ee3a8*/
+          if ( v134 > (double)*(float *)(a4 + 4) ) /*0x8ee3b7*/
           {
-            v91 = NtCurrentTeb()->ThreadLocalStoragePointer;
-            LODWORD(v27) = v91[TlsIndex];
-            if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-              return v27;
-            goto LABEL_148;
+            v91 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8ee753*/
+            LODWORD(v27) = v91[MEMORY[0xBA9DE4]]; /*0x8ee760*/
+            if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8ee76f*/
+              return v27; /*0x8ee76f*/
+            goto LABEL_148; /*0x8ee76f*/
           }
-          v68 = this->m128_i32[0];
-          v69 = i - v141[0];
-          v160 = 0x3F800000;
-          v158.m128_i32[3] = 0;
-          v158.m128_i32[1] = 0x3F800000;
-          v114 = i - v141[0];
-          if ( LOBYTE(v151[1]) )
+          v68 = this->m128_i32[0]; /*0x8ee3cc*/
+          v69 = i - v141[0]; /*0x8ee3ce*/
+          v160 = 0x3F800000; /*0x8ee3d2*/
+          v158.m128_i32[3] = 0; /*0x8ee3dd*/
+          v158.m128_i32[1] = 0x3F800000; /*0x8ee3e8*/
+          v114 = i - v141[0]; /*0x8ee3f5*/
+          if ( LOBYTE(v151[1]) ) /*0x8ee3f6*/
           {
-            *(float *)&v128 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(v68 + 0x24))(this, j, v114);
-            v145 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+            *(float *)&v128 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(v68 + 0x24))(this, j, v114); /*0x8ee400*/
+            v145 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee411*/
                      this,
                      LODWORD(v138),
                      v60);
-            v70 = this->m128_i32[0];
-            if ( v129 == 1 )
+            v70 = this->m128_i32[0]; /*0x8ee41a*/
+            if ( v129 == 1 ) /*0x8ee41e*/
             {
-              v71 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(v70 + 0x24))(this, LODWORD(v138), v69);
-              v138 = v71;
-              v72 = v71 - *(float *)&v128;
-              v73 = v138 - v145;
+              v71 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(v70 + 0x24))(this, LODWORD(v138), v69); /*0x8ee426*/
+              v138 = v71; /*0x8ee429*/
+              v72 = v71 - *(float *)&v128; /*0x8ee42d*/
+              v73 = v138 - v145; /*0x8ee435*/
 LABEL_126:
-              v76 = __OFSUB__(v69, v60);
-              v74 = v69 == v60;
-              v75 = v69 - v60 < 0;
-              goto LABEL_127;
+              v76 = __OFSUB__(v69, v60); /*0x8ee4e3*/
+              v74 = v69 == v60; /*0x8ee4e3*/
+              v75 = v69 - v60 < 0; /*0x8ee4e3*/
+              goto LABEL_127; /*0x8ee4e3*/
             }
-            v138 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(v70 + 0x24))(this, j, v60);
-            v76 = __OFSUB__(v60, v69);
-            v74 = v60 == v69;
-            v75 = v60 - v69 < 0;
-            v72 = v145 - v138;
-            v73 = *(float *)&v128 - v138;
+            v138 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(v70 + 0x24))(this, j, v60); /*0x8ee447*/
+            v76 = __OFSUB__(v60, v69); /*0x8ee44f*/
+            v74 = v60 == v69; /*0x8ee44f*/
+            v75 = v60 - v69 < 0; /*0x8ee44f*/
+            v72 = v145 - v138; /*0x8ee451*/
+            v73 = *(float *)&v128 - v138; /*0x8ee459*/
           }
           else
           {
-            v145 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(v68 + 0x24))(this, LODWORD(v138), v114);
-            v122 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, j, v60);
-            if ( *(float *)&v129 == 0.0 || v129 == 1 && v157 < (double)v150 )
+            v145 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(v68 + 0x24))(this, LODWORD(v138), v114); /*0x8ee46a*/
+            v122 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(this, j, v60); /*0x8ee47b*/
+            if ( *(float *)&v129 == 0.0 || v129 == 1 && v157 < (double)v150 ) /*0x8ee49f*/
             {
-              *(float *)&v128 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+              *(float *)&v128 = ((double (__thiscall *)(__m128 *, int, int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee4cf*/
                                   this,
                                   j,
                                   v69);
-              v72 = v145 - *(float *)&v128;
-              v73 = *(float *)&v128 - v122;
-              goto LABEL_126;
+              v72 = v145 - *(float *)&v128; /*0x8ee4d7*/
+              v73 = *(float *)&v128 - v122; /*0x8ee4df*/
+              goto LABEL_126; /*0x8ee4df*/
             }
-            v77 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(this->m128_i32[0] + 0x24))(
+            v77 = ((double (__thiscall *)(__m128 *, _DWORD, int))*(_DWORD *)(this->m128_i32[0] + 0x24))( /*0x8ee4ab*/
                     this,
                     LODWORD(v138),
                     v60);
-            *(float *)&v128 = v77;
-            v72 = v77 - v122;
-            v76 = __OFSUB__(v60, v69);
-            v74 = v60 == v69;
-            v75 = v60 - v69 < 0;
-            v73 = v145 - *(float *)&v128;
+            *(float *)&v128 = v77; /*0x8ee4ae*/
+            v72 = v77 - v122; /*0x8ee4b2*/
+            v76 = __OFSUB__(v60, v69); /*0x8ee4b6*/
+            v74 = v60 == v69; /*0x8ee4b6*/
+            v75 = v60 - v69 < 0; /*0x8ee4b6*/
+            v73 = v145 - *(float *)&v128; /*0x8ee4bc*/
           }
 LABEL_127:
-          v78 = *(this + 3);
-          v158.m128_f32[0] = (double)v139 * v72;
-          v160 = LODWORD(v134);
-          v158.m128_f32[2] = (double)v141[0] * v73;
-          v79 = _mm_mul_ps(v158, v78);
-          v80 = _mm_mul_ps(v79, v79);
-          v81 = _mm_shuffle_ps(v80, v80, 0x55).m128_f32[0] + v80.m128_f32[0];
-          v82 = _mm_shuffle_ps(v80, v80, 0xAA);
-          v83 = v82;
-          v83.m128_f32[0] = v82.m128_f32[0] + v81;
-          v153 = v83;
-          v153.m128_f32[0] = 1.0 / fsqrt(v82.m128_f32[0] + v81);
-          v84 = *(void (__thiscall ***)(int, int, __m128 *))a4;
-          v156[6] = 3.0;
-          v159 = (((_BYTE)v127 != 0) ^ !(v75 ^ v76 | v74))
+          v78 = *(this + 3); /*0x8ee4e5*/
+          v158.m128_f32[0] = (double)v139 * v72; /*0x8ee4fe*/
+          v160 = LODWORD(v134); /*0x8ee518*/
+          v158.m128_f32[2] = (double)v141[0] * v73; /*0x8ee523*/
+          v79 = _mm_mul_ps(v158, v78); /*0x8ee532*/
+          v80 = _mm_mul_ps(v79, v79); /*0x8ee545*/
+          v81 = _mm_shuffle_ps(v80, v80, 0x55).m128_f32[0] + v80.m128_f32[0]; /*0x8ee54f*/
+          v82 = _mm_shuffle_ps(v80, v80, 0xAA); /*0x8ee556*/
+          v83 = v82; /*0x8ee565*/
+          v83.m128_f32[0] = v82.m128_f32[0] + v81; /*0x8ee568*/
+          v153 = v83; /*0x8ee56c*/
+          v153.m128_f32[0] = 1.0 / fsqrt(v82.m128_f32[0] + v81); /*0x8ee578*/
+          v84 = *(void (__thiscall ***)(int, int, __m128 *))a4; /*0x8ee59a*/
+          v156[6] = 3.0; /*0x8ee59c*/
+          v159 = (((_BYTE)v127 != 0) ^ !(v75 ^ v76 | v74)) /*0x8ee5b4*/
                + 2 * (j + ((i - (v141[0] >> 1) - 1) << 0xF) - (v139 >> 1))
                - 2;
-          v156[5] = 0.5;
-          v85 = (__m128)0x3F000000u;
-          v85.m128_f32[0] = (float)(0.5 * v153.m128_f32[0])
+          v156[5] = 0.5; /*0x8ee5bb*/
+          v85 = (__m128)0x3F000000u; /*0x8ee5c6*/
+          v85.m128_f32[0] = (float)(0.5 * v153.m128_f32[0]) /*0x8ee5da*/
                           * (float)(3.0
                                   - (float)((float)((float)(v82.m128_f32[0] + v81) * v153.m128_f32[0]) * v153.m128_f32[0]));
-          v158 = _mm_mul_ps(_mm_shuffle_ps(v85, v85, 0), v79);
-          (*v84)(a4, a3, &v158);
-          goto LABEL_129;
+          v158 = _mm_mul_ps(_mm_shuffle_ps(v85, v85, 0), v79); /*0x8ee5ed*/
+          (*v84)(a4, a3, &v158); /*0x8ee5f5*/
+          goto LABEL_129; /*0x8ee5f7*/
         }
 LABEL_143:
-        v90 = NtCurrentTeb()->ThreadLocalStoragePointer;
-        LODWORD(v27) = v90[TlsIndex];
-        if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) )
-          return v27;
+        v90 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8ee6dd*/
+        LODWORD(v27) = v90[MEMORY[0xBA9DE4]]; /*0x8ee6ea*/
+        if ( *(_DWORD *)(v27 + 0x1A4) >= *(_DWORD *)(v27 + 0x1A8) ) /*0x8ee6f9*/
+          return v27; /*0x8ee6f9*/
 LABEL_172:
-        v43 = v90[TlsIndex];
-        v44 = *(_DWORD **)(v27 + 0x1A4);
-        *v44 = "Et";
-        v27 = __rdtsc();
-        v130 = v27;
-        HIDWORD(v27) = v27;
-        goto LABEL_173;
+        v43 = v90[MEMORY[0xBA9DE4]]; /*0x8eeb79*/
+        v44 = *(_DWORD **)(v27 + 0x1A4); /*0x8eeb7b*/
+        *v44 = "Et"; /*0x8eeb81*/
+        v27 = __rdtsc(); /*0x8eeb87*/
+        v130 = v27; /*0x8eeb89*/
+        HIDWORD(v27) = v27; /*0x8eeb8d*/
+        goto LABEL_173; /*0x8eeb8d*/
       }
-      if ( v51 > v149.m128_f32[2] )
+      if ( v51 > v149.m128_f32[2] ) /*0x8ee0d2*/
       {
-        *(float *)&v52 = 0.0;
-        goto LABEL_99;
+        *(float *)&v52 = 0.0; /*0x8ee0d4*/
+        goto LABEL_99; /*0x8ee0d6*/
       }
     }
-    else if ( v157 >= (double)v150 )
+    else if ( v157 >= (double)v150 ) /*0x8ee0eb*/
     {
-      if ( v47 )
+      if ( v47 ) /*0x8ee10b*/
       {
-        *(float *)&v52 = 0.0;
-        goto LABEL_99;
+        *(float *)&v52 = 0.0; /*0x8ee10d*/
+        goto LABEL_99; /*0x8ee10f*/
       }
-      v52 = 1;
-      if ( v149.m128_f32[1] > (double)v149.m128_f32[2] )
-        goto LABEL_99;
+      v52 = 1; /*0x8ee124*/
+      if ( v149.m128_f32[1] > (double)v149.m128_f32[2] ) /*0x8ee129*/
+        goto LABEL_99; /*0x8ee129*/
     }
-    else if ( !v47 )
+    else if ( !v47 ) /*0x8ee0ef*/
     {
-      if ( v51 > v149.m128_f32[1] )
+      if ( v51 > v149.m128_f32[1] ) /*0x8ee101*/
       {
-        *(float *)&v52 = 0.0;
-        goto LABEL_99;
+        *(float *)&v52 = 0.0; /*0x8ee103*/
+        goto LABEL_99; /*0x8ee105*/
       }
-      goto LABEL_88;
+      goto LABEL_88; /*0x8ee101*/
     }
-    v52 = 2;
-    goto LABEL_99;
+    v52 = 2; /*0x8ee12b*/
+    goto LABEL_99; /*0x8ee12b*/
   }
-  v26 = NtCurrentTeb()->ThreadLocalStoragePointer;
-  LODWORD(v27) = v26[TlsIndex];
-  if ( *(_DWORD *)(v27 + 0x1A4) < *(_DWORD *)(v27 + 0x1A8) )
+  v26 = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x8edec9*/
+  LODWORD(v27) = v26[MEMORY[0xBA9DE4]]; /*0x8eded6*/
+  if ( *(_DWORD *)(v27 + 0x1A4) < *(_DWORD *)(v27 + 0x1A8) ) /*0x8edee5*/
   {
 LABEL_58:
-    v43 = v26[TlsIndex];
-    v44 = *(_DWORD **)(v27 + 0x1A4);
-    *v44 = "Et";
-    v27 = __rdtsc();
-    HIDWORD(v27) = v27;
+    v43 = v26[MEMORY[0xBA9DE4]]; /*0x8edeeb*/
+    v44 = *(_DWORD **)(v27 + 0x1A4); /*0x8edeed*/
+    *v44 = "Et"; /*0x8edef3*/
+    v27 = __rdtsc(); /*0x8edef9*/
+    HIDWORD(v27) = v27; /*0x8edeff*/
 LABEL_173:
-    v44[1] = HIDWORD(v27);
-    goto LABEL_174;
+    v44[1] = HIDWORD(v27); /*0x8eeb91*/
+    goto LABEL_174; /*0x8eeb91*/
   }
-  return v27;
+  return v27; /*0x8eeb9d*/
 }

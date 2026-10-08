@@ -1,19 +1,32 @@
 {
-  "callees_count": 51,
-  "callers_count": 15,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 17,
+  "chunks": [
+    [
+      "0x72A0F0",
+      "0x72A6AE"
+    ]
+  ],
+  "chunks_sha256": "544f8e4d222e18d35431b40caea915be55b949514d05d0cf218ae69e681bf888",
+  "comment_regular": "Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
+  "comment_repeatable": "Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_72A0F0",
+  "display_name": "NiSphere_ComputeFromVertices",
   "end_ea": "0x72A6AE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_72A0F0",
+  "name": "NiSphere_ComputeFromVertices",
   "segment": ".text",
   "sha256": "544f8e4d222e18d35431b40caea915be55b949514d05d0cf218ae69e681bf888",
   "size": 1470,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x72A0F0",
-  "type": "int __thiscall(float *this, int, float *)",
+  "total_chunk_size": 1470,
+  "type": "void __thiscall(NiSphere *self, unsigned int vertexCount, const NiPoint3 *vertices)",
   "xrefs_from_count": 547,
   "xrefs_to_count": 17
 }

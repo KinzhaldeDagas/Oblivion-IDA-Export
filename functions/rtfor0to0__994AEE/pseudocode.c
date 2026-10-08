@@ -1,5 +1,5 @@
 // attributes: thunk
 void rtfor0to0()
 {
-  unknown_libname_123();
+  unknown_libname_123(); /*0x994aee*/
 }

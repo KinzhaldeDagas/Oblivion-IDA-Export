@@ -115,31 +115,31 @@
   },
   {
     "ea": "0x614593",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x614596",
-    "line": "push    eax",
+    "line": "push    eax; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x614597",
-    "line": "push    eax",
+    "line": "push    eax; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x614598",
-    "line": "push    5",
+    "line": "push    5; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x61459A",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x6145A0",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x6145AB",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6145B0",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x6145B8",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6145BB",
-    "line": "push    6",
+    "line": "push    6; groupID",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6145BD",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x6145C3",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6145C8",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x6145CE",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x6145D3",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x6145D8",
-    "line": "push    3",
+    "line": "push    3; groupID",
     "mnemonic": "push",
     "size": 2
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x6145E0",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x6145E6",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6145EB",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x6145F1",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x6145F6",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x6145FB",
-    "line": "push    4",
+    "line": "push    4; groupID",
     "mnemonic": "push",
     "size": 2
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x614603",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x614609",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x614690",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x6146D9",
-    "line": "lea     ecx, [esp+94h+var_24]",
+    "line": "lea     ecx, [esp+94h+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6146DD",
-    "line": "fstp    [esp+94h+var_94]; float",
+    "line": "fstp    [esp+94h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6146E0",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2398,5 +2398,551 @@
     "line": "call    sub_612910",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x614A87",
+    "line": "cmp     ebp, 3; switch 4 cases",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x614A8A",
+    "line": "ja      short def_614A8C",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x614A8C",
+    "line": "jmp     ds:jpt_614A8C[ebp*4]; switch jump",
+    "mnemonic": "jmp",
+    "size": 7
+  },
+  {
+    "ea": "0x614A93",
+    "line": "cmp     byte ptr [esi+197h], 0; jumptable 00614A8C case 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x614A9A",
+    "line": "jz      short loc_614AAB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x614A9C",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x614A9F",
+    "line": "lea     edx, [esp+0A0h+var_80+4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x614AA3",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614AA4",
+    "line": "call    sub_5FA0A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614AA9",
+    "line": "jmp     short loc_614AAD",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x614AAB",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614AAD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614AAE",
+    "line": "push    2",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x614AB0",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x614AB2",
+    "line": "call    sub_612910",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614AB7",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614AB8",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614ABA",
+    "line": "cmp     [esi+197h], al",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x614AC0",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614AC1",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614AC2",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x614AC5",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614AC6",
+    "line": "add     esp, 80h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x614ACC",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x614ACF",
+    "line": "cmp     byte ptr [esi+196h], 0; jumptable 00614A8C case 1",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x614AD6",
+    "line": "jz      short loc_614AE7",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x614AD8",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x614ADB",
+    "line": "lea     eax, [esp+0A0h+var_70]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x614ADF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614AE0",
+    "line": "call    sub_5FA0A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614AE5",
+    "line": "jmp     short loc_614AE9",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x614AE7",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614AE9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614AEA",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x614AEC",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x614AEE",
+    "line": "call    sub_612910",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614AF3",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614AF4",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614AF6",
+    "line": "cmp     [esi+196h], al",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x614AFC",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614AFD",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614AFE",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x614B01",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B02",
+    "line": "add     esp, 80h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x614B08",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x614B0B",
+    "line": "cmp     byte ptr [esi+194h], 0; jumptable 00614A8C case 2",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x614B12",
+    "line": "jz      short loc_614B23",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x614B14",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x614B17",
+    "line": "lea     edx, [esp+0A0h+var_64]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x614B1B",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614B1C",
+    "line": "call    sub_5FA0A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614B21",
+    "line": "jmp     short loc_614B25",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x614B23",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614B25",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614B26",
+    "line": "push    4",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x614B28",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x614B2A",
+    "line": "call    sub_612910",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614B2F",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B30",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614B32",
+    "line": "cmp     [esi+194h], al",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x614B38",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B39",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B3A",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x614B3D",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B3E",
+    "line": "add     esp, 80h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x614B44",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x614B47",
+    "line": "cmp     byte ptr [esi+195h], 0; jumptable 00614A8C case 3",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x614B4E",
+    "line": "jz      short loc_614B5F",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x614B50",
+    "line": "mov     ecx, [esi+3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x614B53",
+    "line": "lea     eax, [esp+0A0h+var_58]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x614B57",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614B58",
+    "line": "call    sub_5FA0A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614B5D",
+    "line": "jmp     short loc_614B61",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x614B5F",
+    "line": "xor     al, al",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614B61",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x614B62",
+    "line": "push    8",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x614B64",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x614B66",
+    "line": "call    sub_612910",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x614B6B",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B6C",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x614B6E",
+    "line": "cmp     [esi+195h], al",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x614B74",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B75",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B76",
+    "line": "setz    al",
+    "mnemonic": "setz",
+    "size": 3
+  },
+  {
+    "ea": "0x614B79",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B7A",
+    "line": "add     esp, 80h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x614B80",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x614B83",
+    "line": "mov     eax, 4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x614B88",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x614B89",
+    "line": "add     esp, 80h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x614B8F",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

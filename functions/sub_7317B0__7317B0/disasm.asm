@@ -1,4 +1,4 @@
-0x7317B0: mov     eax, ds:0B3FCE4h
+0x7317B0: mov     eax, ds:0B3FCE4h; Pass222/223: NiPropertyState default-slot initializer. Copies native default globals into slots 0,2..9; leaves fog slot 1/+0x0C null.
 0x7317B5: push    ebx
 0x7317B6: push    ebp
 0x7317B7: mov     ebp, ds:0A2807Ch
@@ -30,7 +30,7 @@
 0x7317F0: push    ebx; lpAddend
 0x7317F1: call    dword ptr ds:0A28078h
 0x7317F7: mov     eax, ds:0B3FAA4h
-0x7317FC: mov     edi, [esi+10h]
+0x7317FC: mov     edi, [esi+10h]; Fog property propagation decode: default initializer skips this+3 / state+0x0C, proving no default fog property is installed in NiPropertyState.
 0x7317FF: cmp     edi, eax
 0x731801: mov     ebx, eax
 0x731803: jz      short loc_731832

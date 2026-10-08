@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "font_intensities",
+  "definition": "struct font_intensities\n{\nintensity_range ranges[17];\nconst font_gamma_ramp *gamma_ramp __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671813026,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ranges",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 102
+      "size": 102,
+      "type": "intensity_range[17]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "gamma_ramp",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "const font_gamma_ramp *"
     }
   ],
   "name": "font_intensities",
+  "ordinal": 1131,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 108
 }

@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7C1360",
+      "0x7C13E1"
+    ]
+  ],
+  "chunks_sha256": "085763a9bf9c2a9293e63604aa899df8521d0e9c480f27d4a26337e46a05e190",
+  "comment_regular": "Oblivion shadow depth-stencil allocator. Ensures a square depth-stencil at least ShadowSurfaceRes, deriving compatible renderer surface data from the shadow target format before creation.\n\nOblivion-authoritative: returns the current shadow depth-stencil buffer when it is at least ShadowSurfaceRes square; otherwise lazily creates a shared square buffer using the configured shadow depth format.",
+  "comment_repeatable": "Oblivion shadow depth-stencil allocator. Ensures a square depth-stencil at least ShadowSurfaceRes, deriving compatible renderer surface data from the shadow target format before creation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7C1360",
+  "display_name": "BSTextureManager__GetOrCreateShadowDepthStencil",
   "end_ea": "0x7C13E1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C1360",
+  "name": "BSTextureManager__GetOrCreateShadowDepthStencil",
   "segment": ".text",
   "sha256": "085763a9bf9c2a9293e63604aa899df8521d0e9c480f27d4a26337e46a05e190",
   "size": 129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C1360",
-  "type": "int __thiscall(int *this)",
+  "total_chunk_size": 129,
+  "type": "void *__thiscall(BSTextureManager *this)",
   "xrefs_from_count": 59,
   "xrefs_to_count": 3
 }

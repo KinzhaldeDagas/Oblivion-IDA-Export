@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6967B0",
-    "line": "mov     eax, [esp+arg_0.vtbl]",
+    "line": "mov     eax, [esp+source.vtbl]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x6967C3",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x6967CB",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6967CC",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6967D7",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x6967DC",
-    "line": "push    edx; a1",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6967DD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x696807",
-    "line": "push    0Ch; a2",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x696814",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x696815",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x696839",
-    "line": "push    10h; Size",
+    "line": "push    10h; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x69683F",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x696840",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x69685F",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x696865",
-    "line": "push    edx; a1",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x696866",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x696882",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x696888",
-    "line": "push    ecx",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x696889",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -451,19 +451,19 @@
   },
   {
     "ea": "0x696896",
-    "line": "push    2; a2",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x696898",
-    "line": "lea     eax, [esp+38h+arg_0]",
+    "line": "lea     eax, [esp+38h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x69689C",
-    "line": "mov     [esp+38h+arg_0.vtbl], ebx",
+    "line": "mov     [esp+38h+source.vtbl], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x6968A3",
-    "line": "push    eax; a1",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6968A4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6968C1",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x6968D4",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x6968DA",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6968DB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x6968E2",
-    "line": "add     [esp+34h+arg_0.vtbl], 1",
+    "line": "add     [esp+34h+source.vtbl], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x6968EE",
-    "line": "mov     ax, word ptr [esp+34h+arg_0.vtbl]",
+    "line": "mov     ax, word ptr [esp+34h+source.vtbl]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x696903",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -673,13 +673,13 @@
   },
   {
     "ea": "0x69690B",
-    "line": "push    edx; a1",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x69690C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },

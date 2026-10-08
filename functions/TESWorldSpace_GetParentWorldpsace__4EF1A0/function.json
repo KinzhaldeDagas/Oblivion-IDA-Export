@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 23,
+  "chunks": [
+    [
+      "0x4EF1A0",
+      "0x4EF1A4"
+    ]
+  ],
+  "chunks_sha256": "087a4a4a1d3591c4f4697b2aeda95e2b286c2de3930f398f72f4d12404d5c677",
+  "comment_regular": "Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
+  "comment_repeatable": "Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "TESWorldSpace_GetParentWorldpsace",
+  "display_name": "Shared_GetPointerAtOffset7C",
   "end_ea": "0x4EF1A4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESWorldSpace_GetParentWorldpsace",
+  "name": "Shared_GetPointerAtOffset7C",
   "segment": ".text",
   "sha256": "087a4a4a1d3591c4f4697b2aeda95e2b286c2de3930f398f72f4d12404d5c677",
   "size": 4,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EF1A0",
-  "type": "TESWorldSpace *__thiscall(TESWorldSpace *this)",
+  "total_chunk_size": 4,
+  "type": "void *__thiscall(void *this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 23
 }

@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x78CCD5",
-    "line": "cmp     byte ptr [ebx+45h], 0",
+    "line": "cmp     byte ptr [ebx+45h], 0; Compute executes geometry initialization only while treeComputedFlag is zero; repeated Compute on the same CSpeedTreeRT is ignored. Therefore post-Compute leaf card counts/index arrays are immutable for that live object.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x78CCE9",
-    "line": "mov     ecx, [ebp+3Ch+arg_4]",
+    "line": "mov     ecx, [ebp+3Ch+seed]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x78CCF1",
-    "line": "push    ecx",
+    "line": "push    ecx; seed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CCF2",
-    "line": "mov     ecx, [ebx]",
+    "line": "mov     ecx, [ebx]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78CCF4",
-    "line": "call    sub_7A24F0",
+    "line": "call    OB_CTreeEngine_SetSeed_010201A0; CTreeEngine::SetSeed per local SpeedTreeRT 4.1: 0=random seed, 1=keep existing seed, >1=store provided seed at +0x48.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x78CCFD",
-    "line": "mov     ecx, [ebx]",
+    "line": "mov     ecx, [ebx]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78CCFF",
-    "line": "fstp    dword ptr [esp+0BCh+var_BC]; float",
+    "line": "fstp    [esp+0BCh+leafSizeIncreaseFactor]; leafSizeIncreaseFactor",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CD02",
-    "line": "call    sub_7A45F0",
+    "line": "call    OB_CTreeEngine_Compute_010201A0;",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,25 +211,25 @@
   },
   {
     "ea": "0x78CD0D",
-    "line": "mov     ecx, [ebx+5Ch]",
+    "line": "mov     ecx, [ebx+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CD10",
-    "line": "push    edx",
+    "line": "push    edx; lightingEngine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CD11",
-    "line": "push    eax",
+    "line": "push    eax; frondGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CD12",
-    "line": "call    sub_7A1CD0",
+    "line": "call    OB_CFrondEngine_Compute_010201A0; SpeedTreeOBSE 2026-05-30: C:\\src\\Fronds reference layer instruments this CFrondEngine::Compute callsite under the frond restoration opt-in.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,19 +325,19 @@
   },
   {
     "ea": "0x78CD47",
-    "line": "push    eax",
+    "line": "push    eax; leafTextureCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CD48",
-    "line": "lea     ecx, [esi+84h]",
+    "line": "lea     ecx, [esi+84h]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x78CD4E",
-    "line": "call    sub_7A5740",
+    "line": "call    OB_SIdvLeafInfo_InitTables_010201A0; Allocates and initializes the SIdvLeafInfo runtime tables: random rocking-group time offsets, 16 floats per texture-orientation texcoord block, and zeroed per-LOD leaf-card vertex tables.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x78CD5E",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78CD60",
-    "line": "call    sub_78C370",
+    "line": "call    CSpeedTreeRT__ComputeLeafStaticLighting; CSpeedTreeRT::ComputeLeafStaticLighting per local 4.1: compute tree center from bounds and pass leaves/LOD count to lighting engine.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x78CD67",
-    "line": "mov     ecx, [ebx+10h]",
+    "line": "mov     ecx, [ebx+10h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x78CD6F",
-    "line": "push    eax",
+    "line": "push    eax; windInfo",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CD70",
-    "line": "call    sub_793C00",
+    "line": "call    OB_CWindEngine_Init_010201A0; Oblivion-local CWindEngine::Init for the 0x1C-byte SIdvWindInfo record. Copies leafFactors.x/y, computes leafFrequency = leafFactors.y * strength * kFrequencyScale and leafThrow = leafFactors.x * strength * kThrowScale, then stores strength. This routine does not read the intervening leafOscillation vector; later source is used only to name the observed record fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,37 +433,37 @@
   },
   {
     "ea": "0x78CD88",
-    "line": "push    eax",
+    "line": "push    eax; leafInfo",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CD89",
-    "line": "push    ecx",
+    "line": "push    ecx; leafLods",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CD8A",
-    "line": "mov     ecx, [ebx+8]",
+    "line": "mov     ecx, [ebx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CD8D",
-    "line": "push    edx",
+    "line": "push    edx; leafLodCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CD8E",
-    "line": "call    sub_799320",
+    "line": "call    OB_CLeafGeometry_Init_010201A0; Only Oblivion call to CLeafGeometry::Init; it builds all SLodGeometry records and alternate-index arrays during the first successful Compute.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CD93",
-    "line": "cmp     dword ptr [ebx+4Ch], 0",
+    "line": "cmp     dword ptr [ebx+4Ch], 0; Composite-leaf authority: when CSpeedTreeRT+0x4C embedded texcoords exists, Compute transfers authored 10000 leaf UV rectangles into CLeafGeometry before stock leaf export.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -486,12 +486,6 @@
     "size": 2
   },
   {
-    "ea": "0x78CD9D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x78CDA0",
     "line": "mov     eax, [ebx+4Ch]",
     "mnemonic": "mov",
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x78CDA5",
-    "line": "jge     short loc_78CDBE",
+    "line": "jge     short loc_78CDBE; Embedded texcoord +0x00 is leaf-map count; loop bounds each 8-float authored composite UV rectangle.",
     "mnemonic": "jge",
     "size": 2
   },
@@ -529,25 +523,25 @@
   },
   {
     "ea": "0x78CDAF",
-    "line": "push    ecx",
+    "line": "push    ecx; texcoordBlock",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CDB0",
-    "line": "mov     ecx, [ebx+8]",
+    "line": "mov     ecx, [ebx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CDB3",
-    "line": "push    esi",
+    "line": "push    esi; leafMapIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CDB4",
-    "line": "call    sub_798550",
+    "line": "call    OB_CLeafGeometry_SetTextureCoords_010201A0; Compute transfers each embedded 8-float leaf rectangle through 0x798550. Therefore stock exported leaf-card UVs are already Direct3D-signed (T negated in Oblivion), and consumers must preserve their observed signed orientation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +607,7 @@
   },
   {
     "ea": "0x78CDD7",
-    "line": "push    edx; char",
+    "line": "push    edx; flipT",
     "mnemonic": "push",
     "size": 1
   },
@@ -625,7 +619,7 @@
   },
   {
     "ea": "0x78CDDB",
-    "line": "push    ecx; int",
+    "line": "push    ecx; texcoordBlock",
     "mnemonic": "push",
     "size": 1
   },
@@ -637,19 +631,19 @@
   },
   {
     "ea": "0x78CDDF",
-    "line": "push    esi; float",
+    "line": "push    esi; frondMapIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CDE0",
-    "line": "push    edx; int",
+    "line": "push    edx; frondGeometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CDE1",
-    "line": "call    sub_79A810",
+    "line": "call    OB_CFrondGeometry_CopyEmbeddedTexCoords_010201A0; CFrondEngine::SetTextureCoords per local 4.1: optionally flip T coordinates, reset vertex counter, ChangeTexCoord for every vertex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +661,7 @@
   },
   {
     "ea": "0x78CDEB",
-    "line": "cmp     byte ptr [ebp+3Ch+arg_8], 0",
+    "line": "cmp     [ebp+3Ch+compositeStrips], 0",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -679,43 +673,43 @@
   },
   {
     "ea": "0x78CDF1",
-    "line": "mov     ecx, [ebx+4]",
+    "line": "mov     ecx, [ebx+4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CDF4",
-    "line": "push    0",
+    "line": "push    0; toggleFaceOrdering",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x78CDF6",
-    "line": "call    sub_7977D0",
+    "line": "call    OB_CIndexedGeometry_CombineStrips_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::CombineStrips stitches per-LOD unsigned-short index arrays, including parity-dependent degenerates when requested, then replaces lengths/pointers/totals through deep vector assignment. RT4.1 corroborates the algorithm only; its 32-bit contiguous storage differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CDFB",
-    "line": "mov     ecx, [ebx+60h]",
+    "line": "mov     ecx, [ebx+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CDFE",
-    "line": "push    0",
+    "line": "push    0; toggleFaceOrdering",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x78CE00",
-    "line": "call    sub_7977D0",
+    "line": "call    OB_CIndexedGeometry_CombineStrips_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::CombineStrips stitches per-LOD unsigned-short index arrays, including parity-dependent degenerates when requested, then replaces lengths/pointers/totals through deep vector assignment. RT4.1 corroborates the algorithm only; its 32-bit contiguous storage differs.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE05",
-    "line": "mov     esi, [ebp+3Ch+arg_0]",
+    "line": "mov     esi, [ebp+3Ch+transform4x4]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -733,13 +727,13 @@
   },
   {
     "ea": "0x78CE0C",
-    "line": "lea     ecx, [ebp+3Ch+var_8C]",
+    "line": "lea     ecx, [ebp+3Ch+transform]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE0F",
-    "line": "call    sub_7A66B0",
+    "line": "call    OB_stTransform_ctor_010201A0; Initializes a 0x40-byte row-major SpeedTree transform to identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,13 +745,13 @@
   },
   {
     "ea": "0x78CE19",
-    "line": "lea     edi, [ebp+3Ch+var_8C]",
+    "line": "lea     edi, [ebp+3Ch+transform]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE1C",
-    "line": "lea     eax, [ebp+3Ch+var_8C]",
+    "line": "lea     eax, [ebp+3Ch+transform]",
     "mnemonic": "lea",
     "size": 3
   },
@@ -769,73 +763,73 @@
   },
   {
     "ea": "0x78CE21",
-    "line": "mov     ecx, [ebx+4]",
+    "line": "mov     ecx, [ebx+4]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CE24",
-    "line": "push    eax",
+    "line": "push    eax; transform",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CE25",
-    "line": "call    sub_7948C0",
+    "line": "call    OB_CIndexedGeometry_Transform_010201A0; Oblivion CIndexedGeometry::Transform. Applies the 4x4 stTransform to current and CPU-wind source coordinates, and rotates the normal/tangent/binormal streams with the transform's rotational portion.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE2A",
-    "line": "lea     ecx, [ebp+3Ch+var_8C]",
+    "line": "lea     ecx, [ebp+3Ch+transform]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE2D",
-    "line": "push    ecx",
+    "line": "push    ecx; transform",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CE2E",
-    "line": "mov     ecx, [ebx+8]",
+    "line": "mov     ecx, [ebx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CE31",
-    "line": "call    sub_798360",
+    "line": "call    OB_CLeafGeometry_Transform_010201A0; Oblivion CLeafGeometry::Transform. Applies the 4x4 stTransform to every LOD's leaf centers (including the preserved CPU-wind source centers) and transforms the per-card orientation vectors.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE36",
-    "line": "mov     ecx, [ebx+60h]",
+    "line": "mov     ecx, [ebx+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CE39",
-    "line": "lea     edx, [ebp+3Ch+var_8C]",
+    "line": "lea     edx, [ebp+3Ch+transform]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE3C",
-    "line": "push    edx",
+    "line": "push    edx; transform",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CE3D",
-    "line": "call    sub_7948C0",
+    "line": "call    OB_CIndexedGeometry_Transform_010201A0; Oblivion CIndexedGeometry::Transform. Applies the 4x4 stTransform to current and CPU-wind source coordinates, and rotates the normal/tangent/binormal streams with the transform's rotational portion.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE42",
-    "line": "mov     ecx, [ebx+58h]",
+    "line": "mov     ecx, [ebx+58h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -853,49 +847,49 @@
   },
   {
     "ea": "0x78CE49",
-    "line": "lea     eax, [ebp+3Ch+var_8C]",
+    "line": "lea     eax, [ebp+3Ch+transform]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE4C",
-    "line": "push    eax",
+    "line": "push    eax; transform4x4",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CE4D",
-    "line": "call    sub_788BE0",
+    "line": "call    CSpeedTreeRT__SCollisionObjects_TransformAll; Transforms compact SpeedTree collision records: transforms position by 4x4 matrix and scales radius/height/box dimensions by axis scale. No rotation storage is touched.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE52",
-    "line": "lea     ecx, [ebp+3Ch+var_34]",
+    "line": "lea     ecx, [ebp+3Ch+extents]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE55",
-    "line": "call    sub_7A6BB0",
+    "line": "call    OB_Extents_Init_010201A0; stRegion constructor/helper: initializes min to large positive and max to large negative sentinel values.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE5A",
-    "line": "lea     ecx, [ebp+3Ch+var_34]",
+    "line": "lea     ecx, [ebp+3Ch+extents]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE5D",
-    "line": "push    ecx",
+    "line": "push    ecx; extents",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CE5E",
-    "line": "mov     ecx, [ebx+4]",
+    "line": "mov     ecx, [ebx+4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -907,55 +901,55 @@
   },
   {
     "ea": "0x78CE65",
-    "line": "call    sub_7947A0",
+    "line": "call    OB_CIndexedGeometry_ComputeExtents_010201A0; Oblivion CIndexedGeometry::ComputeExtents. Walks the locally stored xyz vertex stream and includes each point in the 0x30-byte stRegion bounds object.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE6A",
-    "line": "mov     ecx, [ebx+8]",
+    "line": "mov     ecx, [ebx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CE6D",
-    "line": "lea     edx, [ebp+3Ch+var_34]",
+    "line": "lea     edx, [ebp+3Ch+extents]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE70",
-    "line": "push    edx",
+    "line": "push    edx; extents",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CE71",
-    "line": "call    sub_7997F0",
+    "line": "call    OB_CLeafGeometry_ComputeExtents_010201A0; Oblivion CLeafGeometry::ComputeExtents. Expands the 0x30-byte stRegion using leaf centers and maximum card reach, accounting for billboard orientation and every stored LOD.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78CE76",
-    "line": "mov     ecx, [ebx+60h]",
+    "line": "mov     ecx, [ebx+60h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CE79",
-    "line": "lea     eax, [ebp+3Ch+var_34]",
+    "line": "lea     eax, [ebp+3Ch+extents]",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78CE7C",
-    "line": "push    eax",
+    "line": "push    eax; extents",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78CE7D",
-    "line": "call    sub_7947A0",
+    "line": "call    OB_CIndexedGeometry_ComputeExtents_010201A0; Oblivion CIndexedGeometry::ComputeExtents. Walks the locally stored xyz vertex stream and includes each point in the 0x30-byte stRegion bounds object.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +961,7 @@
   },
   {
     "ea": "0x78CE85",
-    "line": "mov     ecx, [ebp+3Ch+var_34]",
+    "line": "mov     ecx, [ebp+3Ch+extents]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1009,7 +1003,7 @@
   },
   {
     "ea": "0x78CE99",
-    "line": "mov     edx, [ebp+3Ch+var_1C]",
+    "line": "mov     edx, dword ptr [ebp+3Ch+result.storage]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1021,7 +1015,7 @@
   },
   {
     "ea": "0x78CE9F",
-    "line": "mov     ecx, [ebp+3Ch+var_18]",
+    "line": "mov     ecx, dword ptr [ebp+3Ch+result.storage+4]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1039,7 +1033,7 @@
   },
   {
     "ea": "0x78CEA8",
-    "line": "mov     edx, [ebp+3Ch+var_14]",
+    "line": "mov     edx, dword ptr [ebp+3Ch+result.storage+8]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1063,7 +1057,7 @@
   },
   {
     "ea": "0x78CEB3",
-    "line": "fstp    [ebp+3Ch+arg_8]",
+    "line": "fstp    dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1075,13 +1069,13 @@
   },
   {
     "ea": "0x78CEB9",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CEBC",
-    "line": "fld     [ebp+3Ch+arg_8]",
+    "line": "fld     dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1099,7 +1093,7 @@
   },
   {
     "ea": "0x78CEC3",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1177,7 +1171,7 @@
   },
   {
     "ea": "0x78CEDE",
-    "line": "fstp    [ebp+3Ch+arg_8]",
+    "line": "fstp    dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1189,13 +1183,13 @@
   },
   {
     "ea": "0x78CEE3",
-    "line": "mov     eax, [ebp+3Ch+arg_8]",
+    "line": "mov     eax, dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CEE6",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1219,19 +1213,19 @@
   },
   {
     "ea": "0x78CEF3",
-    "line": "fstp    [ebp+3Ch+arg_0]",
+    "line": "fstp    [ebp+3Ch+transform4x4]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CEF6",
-    "line": "mov     [ebp+3Ch+arg_8], eax",
+    "line": "mov     dword ptr [ebp+3Ch+compositeStrips], eax",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CEF9",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1243,7 +1237,7 @@
   },
   {
     "ea": "0x78CEFE",
-    "line": "fld     [ebp+3Ch+arg_0]",
+    "line": "fld     [ebp+3Ch+transform4x4]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1285,19 +1279,19 @@
   },
   {
     "ea": "0x78CF0D",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CF10",
-    "line": "mov     edx, [ebp+3Ch+arg_4]",
+    "line": "mov     edx, [ebp+3Ch+seed]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CF13",
-    "line": "fld     [ebp+3Ch+arg_8]",
+    "line": "fld     dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1315,13 +1309,13 @@
   },
   {
     "ea": "0x78CF1E",
-    "line": "mov     [ebp+3Ch+arg_4], edx",
+    "line": "mov     [ebp+3Ch+seed], edx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CF21",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1357,7 +1351,7 @@
   },
   {
     "ea": "0x78CF2F",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1369,13 +1363,13 @@
   },
   {
     "ea": "0x78CF35",
-    "line": "fstp    [ebp+3Ch+arg_0]",
+    "line": "fstp    [ebp+3Ch+transform4x4]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CF38",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1387,7 +1381,7 @@
   },
   {
     "ea": "0x78CF3D",
-    "line": "fld     [ebp+3Ch+arg_0]",
+    "line": "fld     [ebp+3Ch+transform4x4]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1429,13 +1423,13 @@
   },
   {
     "ea": "0x78CF4C",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CF4F",
-    "line": "mov     eax, [ebp+3Ch+arg_4]",
+    "line": "mov     eax, [ebp+3Ch+seed]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1453,7 +1447,7 @@
   },
   {
     "ea": "0x78CF59",
-    "line": "mov     [ebp+3Ch+arg_8], eax",
+    "line": "mov     dword ptr [ebp+3Ch+compositeStrips], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1465,7 +1459,7 @@
   },
   {
     "ea": "0x78CF5F",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1477,13 +1471,13 @@
   },
   {
     "ea": "0x78CF65",
-    "line": "fstp    [ebp+3Ch+arg_0]",
+    "line": "fstp    [ebp+3Ch+transform4x4]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CF68",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1495,7 +1489,7 @@
   },
   {
     "ea": "0x78CF6D",
-    "line": "fld     [ebp+3Ch+arg_0]",
+    "line": "fld     [ebp+3Ch+transform4x4]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1537,19 +1531,19 @@
   },
   {
     "ea": "0x78CF7C",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CF7F",
-    "line": "mov     edx, [ebp+3Ch+arg_4]",
+    "line": "mov     edx, [ebp+3Ch+seed]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CF82",
-    "line": "fld     [ebp+3Ch+arg_8]",
+    "line": "fld     dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1567,13 +1561,13 @@
   },
   {
     "ea": "0x78CF8D",
-    "line": "mov     [ebp+3Ch+arg_4], edx",
+    "line": "mov     [ebp+3Ch+seed], edx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CF90",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1609,7 +1603,7 @@
   },
   {
     "ea": "0x78CF9F",
-    "line": "fstp    [ebp+3Ch+arg_0]",
+    "line": "fstp    [ebp+3Ch+transform4x4]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1621,13 +1615,13 @@
   },
   {
     "ea": "0x78CFA5",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CFA8",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1639,7 +1633,7 @@
   },
   {
     "ea": "0x78CFAD",
-    "line": "fld     [ebp+3Ch+arg_0]",
+    "line": "fld     [ebp+3Ch+transform4x4]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1681,13 +1675,13 @@
   },
   {
     "ea": "0x78CFBC",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CFBF",
-    "line": "mov     eax, [ebp+3Ch+arg_4]",
+    "line": "mov     eax, [ebp+3Ch+seed]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1705,7 +1699,7 @@
   },
   {
     "ea": "0x78CFC9",
-    "line": "mov     [ebp+3Ch+arg_8], eax",
+    "line": "mov     dword ptr [ebp+3Ch+compositeStrips], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1717,7 +1711,7 @@
   },
   {
     "ea": "0x78CFCF",
-    "line": "fstp    [ebp+3Ch+arg_0]",
+    "line": "fstp    [ebp+3Ch+transform4x4]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1729,13 +1723,13 @@
   },
   {
     "ea": "0x78CFD5",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CFD8",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1747,7 +1741,7 @@
   },
   {
     "ea": "0x78CFDD",
-    "line": "fld     [ebp+3Ch+arg_0]",
+    "line": "fld     [ebp+3Ch+transform4x4]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1789,19 +1783,19 @@
   },
   {
     "ea": "0x78CFEC",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78CFEF",
-    "line": "mov     edx, [ebp+3Ch+arg_4]",
+    "line": "mov     edx, [ebp+3Ch+seed]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78CFF2",
-    "line": "fld     [ebp+3Ch+arg_8]",
+    "line": "fld     dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1819,13 +1813,13 @@
   },
   {
     "ea": "0x78CFFD",
-    "line": "mov     [ebp+3Ch+arg_4], edx",
+    "line": "mov     [ebp+3Ch+seed], edx",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x78D000",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1861,7 +1855,7 @@
   },
   {
     "ea": "0x78D00F",
-    "line": "fstp    [ebp+3Ch+arg_0]",
+    "line": "fstp    [ebp+3Ch+transform4x4]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1873,13 +1867,13 @@
   },
   {
     "ea": "0x78D015",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78D018",
-    "line": "fld     [ebp+3Ch+arg_4]",
+    "line": "fld     [ebp+3Ch+seed]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1891,7 +1885,7 @@
   },
   {
     "ea": "0x78D01D",
-    "line": "fld     [ebp+3Ch+arg_0]",
+    "line": "fld     [ebp+3Ch+transform4x4]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1933,13 +1927,13 @@
   },
   {
     "ea": "0x78D02C",
-    "line": "fstp    [ebp+3Ch+arg_4]",
+    "line": "fstp    [ebp+3Ch+seed]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78D02F",
-    "line": "mov     eax, [ebp+3Ch+arg_4]",
+    "line": "mov     eax, [ebp+3Ch+seed]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1957,7 +1951,7 @@
   },
   {
     "ea": "0x78D039",
-    "line": "mov     [ebp+3Ch+arg_8], eax",
+    "line": "mov     dword ptr [ebp+3Ch+compositeStrips], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1981,7 +1975,7 @@
   },
   {
     "ea": "0x78D042",
-    "line": "fld     [ebp+3Ch+arg_8]",
+    "line": "fld     dword ptr [ebp+3Ch+compositeStrips]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -2011,25 +2005,25 @@
   },
   {
     "ea": "0x78D050",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78D052",
-    "line": "call    sub_787480",
+    "line": "call    CSpeedTreeRT__ComputeSelfShadowTexCoords",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78D057",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78D059",
-    "line": "call    sub_7875D0",
+    "line": "call    CSpeedTreeRT__SetupHorizontalBillboard; SetupHorizontalBillboard: when horizontal billboards are enabled, builds four XYZ corners at CSpeedTreeRT+0x70..0x9C from tree bounds midpoint and extent values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,7 +2035,7 @@
   },
   {
     "ea": "0x78D062",
-    "line": "lea     ecx, [ebp+3Ch+var_1C]; void *",
+    "line": "lea     ecx, [ebp+3Ch+result.storage]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -2053,13 +2047,13 @@
   },
   {
     "ea": "0x78D069",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78D06E",
-    "line": "lea     ecx, [ebp+3Ch+var_34]; void *",
+    "line": "lea     ecx, [ebp+3Ch+extents]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -2071,7 +2065,7 @@
   },
   {
     "ea": "0x78D075",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2083,7 +2077,7 @@
   },
   {
     "ea": "0x78D07F",
-    "line": "push    3Fh ; '?'; MaxCount",
+    "line": "push    3Fh ; '?'; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -2095,13 +2089,13 @@
   },
   {
     "ea": "0x78D086",
-    "line": "mov     ecx, offset dword_B2B614",
+    "line": "mov     ecx, offset OB_g_strError_010201A0; this",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x78D08B",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2155,13 +2149,13 @@
   },
   {
     "ea": "0x78D0AA",
-    "line": "lea     esi, [ebp+3Ch+var_20]",
+    "line": "lea     esi, [ebp+3Ch+result]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D0AD",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2209,13 +2203,13 @@
   },
   {
     "ea": "0x78D0C7",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D0C8",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2227,13 +2221,13 @@
   },
   {
     "ea": "0x78D0D0",
-    "line": "lea     ecx, [ebp+3Ch+var_20]",
+    "line": "lea     ecx, [ebp+3Ch+result]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D0D3",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2263,13 +2257,13 @@
   },
   {
     "ea": "0x78D0E8",
-    "line": "lea     esi, [ebp+3Ch+var_A8]",
+    "line": "lea     esi, [ebp+3Ch+var_A8]; result",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D0EB",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,13 +2311,13 @@
   },
   {
     "ea": "0x78D105",
-    "line": "push    eax; Src",
+    "line": "push    eax; error",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D106",
-    "line": "call    sub_7895E0",
+    "line": "call    CSpeedTreeRT__SetError; Oblivion binary evidence: CSpeedTreeRT static error setter. Assigns the NUL-terminated input into the sole 28-byte global error string at 0xB2B614. After observation, SpeedTreeRT 4.1 SpeedTreeRT.cpp:2671-2677 corroborates SetError and g_strError.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2335,13 +2329,13 @@
   },
   {
     "ea": "0x78D10E",
-    "line": "lea     ecx, [ebp+3Ch+var_A8]",
+    "line": "lea     ecx, [ebp+3Ch+var_A8]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x78D111",
-    "line": "call    sub_79AB00",
+    "line": "call    OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2365,7 +2359,7 @@
   },
   {
     "ea": "0x78D11F",
-    "line": "mov     al, [ebx+45h]",
+    "line": "mov     al, [ebx+45h];",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2428,5 +2422,95 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB890",
+    "line": "lea     ecx, [ebp+3Ch+extents]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB893",
+    "line": "jmp     OB_stRegion_Dtor_010201A0; Oblivion stRegion destructor: invokes the no-op stVec teardown on embedded vectors at +0x18 and +0x00. RT4.1 stRegion's max/min vector composition corroborates the two 24-byte subobjects.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB898",
+    "line": "lea     ecx, [ebp+3Ch+extents]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB89B",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB8A0",
+    "line": "lea     ecx, [ebp+3Ch+result]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB8A3",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB8A8",
+    "line": "lea     ecx, [ebp+3Ch+var_A8]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB8AB",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB8B0",
+    "line": "mov     edx, [esp-4+seed]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB8B4",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB8B7",
+    "line": "mov     ecx, [edx-70h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB8BA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB8BC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB8C1",
+    "line": "mov     eax, offset stru_AF4564",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB8C6",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

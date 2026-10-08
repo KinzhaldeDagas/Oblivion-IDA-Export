@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6806B0",
+      "0x68075A"
+    ]
+  ],
+  "chunks_sha256": "c8621960aeda2b90e8f9c842a4778b4bae8661ecf354982eea8592230d5488d2",
+  "comment_regular": "Verified state slot 0x04 marks an allocated table slot. The next-free cursor is a 16-bit index; 0xFFFF is reserved as exhausted/unavailable. Capacity starts at 500 and grows by 100, capped at 65535 entries.",
+  "comment_repeatable": "Verified state slot 0x04 marks an allocated table slot. The next-free cursor is a 16-bit index; 0xFFFF is reserved as exhausted/unavailable. Capacity starts at 500 and grows by 100, capped at 65535 entries.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6806B0",
+  "display_name": "TravelPath_AllocateSearchStateSlot",
   "end_ea": "0x68075A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6806B0",
+  "name": "TravelPath_AllocateSearchStateSlot",
   "segment": ".text",
   "sha256": "c8621960aeda2b90e8f9c842a4778b4bae8661ecf354982eea8592230d5488d2",
   "size": 170,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6806B0",
-  "type": "unsigned __int16 __usercall@<ax>(int@<esi>)",
+  "total_chunk_size": 170,
+  "type": "unsigned __int16 __cdecl()",
   "xrefs_from_count": 57,
   "xrefs_to_count": 1
 }

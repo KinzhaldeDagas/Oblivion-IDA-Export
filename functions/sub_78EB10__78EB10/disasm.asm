@@ -1,4 +1,4 @@
-0x78EB10: push    esi
+0x78EB10: push    esi; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.
 0x78EB11: mov     esi, ecx
 0x78EB13: mov     ecx, [esi+8]
 0x78EB16: test    ecx, ecx

@@ -1,1 +1,1 @@
-BSFile
+struct BSFile;

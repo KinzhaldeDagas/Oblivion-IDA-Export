@@ -1,126 +1,132 @@
-_DWORD *__thiscall TESDataHandler_constr(_DWORD *this)
+// Verified constructor store: [TESDataHandler+0xCD1] (activeFileState.retainActiveFile) is initialized to zero at 0x446EF4. A whole-code scan for the direct x86 displacement found this as the only store to +0xCD1; the other direct references are reads in Clear, LoadFormRecord, and LoadFiles. No direct nonzero writer has been identified; any alias/indirect setter remains Unknown.
+TESDataHandler *__thiscall TESDataHandler_constr(TESDataHandler *self)
 {
   int v2; // eax
   _DWORD *v3; // eax
   _DWORD *v4; // eax
   _DWORD *v5; // eax
-  _DWORD *v6; // eax
+  TESRegionList *v6; // eax
   int v7; // edi
-  _DWORD *v8; // ebp
-  int v9; // eax
-  int v10; // eax
+  UInt8 *v8; // ebp
+  _DWORD *v9; // eax
+  TESRegionDataManager *v10; // eax
   _DWORD *v11; // eax
   _DWORD *v12; // eax
   int v14; // [esp+14h] [ebp-14h]
 
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = 0;
-  *(this + 4) = 0;
-  *(this + 5) = 0;
-  *(this + 6) = 0;
-  *(this + 7) = 0;
-  *(this + 8) = 0;
-  *(this + 9) = 0;
-  *(this + 0xA) = 0;
-  *(this + 0xB) = 0;
-  *(this + 0xC) = 0;
-  *(this + 0xD) = 0;
-  *(this + 0xE) = 0;
-  *(this + 0xF) = 0;
-  *(this + 0x10) = 0;
-  *(this + 0x11) = 0;
-  *(this + 0x12) = 0;
-  *(this + 0x13) = 0;
-  *(this + 0x14) = 0;
-  *(this + 0x15) = 0;
-  *(this + 0x16) = 0;
-  *(this + 0x17) = 0;
-  *(this + 0x18) = 0;
-  *(this + 0x19) = 0;
-  *(this + 0x1A) = 0;
-  *(this + 0x1B) = 0;
-  *(this + 0x1C) = 0;
-  *(this + 0x1D) = 0;
-  *(this + 0x1E) = 0;
-  *(this + 0x1F) = 0;
-  *(this + 0x20) = 0;
-  *(this + 0x21) = 0;
-  *(this + 0x22) = 0;
-  *(this + 0x23) = 0;
-  *(this + 0x24) = 0;
-  *(this + 0x25) = 0;
-  *(this + 0x26) = 0;
-  *(this + 0x27) = 0;
-  *(this + 0x28) = 0;
-  *(this + 0x29) = 0;
-  *(this + 0x2A) = 0;
-  *(this + 0x2B) = 0;
-  *(this + 0x2C) = 0;
-  *(this + 0x2D) = 0;
-  *(this + 0x2E) = 0;
-  *(this + 0x30) = &NiTLargeArray<TESObjectCELL *>::`vftable';
-  *(this + 0x32) = 0;
-  *(this + 0x35) = 1;
-  *(this + 0x33) = 0;
-  *(this + 0x34) = 0;
-  *(this + 0x31) = 0;
-  ArrayConstructor(this + 0x36, 0x60u, 0x15, (int)TESSkill::TESSkill, TESSkill::~TESSkill);
-  v2 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex);
-  *(this + 0x22E) = 0;
-  *(this + 0x22F) = 0;
-  *(this + 0x232) = 0;
-  *(this + 0x233) = 0;
-  *(this + 0x230) = 0x800;
-  *(this + 0x234) = 0;
-  *(this + 0x231) = 0;
-  *((_BYTE *)this + 0xCD0) = 0;
-  *((_BYTE *)this + 0xCD1) = 0;
-  *(_BYTE *)(v2 + 0x184) = 0;
-  *((_BYTE *)this + 0xCD2) = 0;
-  *((_BYTE *)this + 0xCD3) = 0;
-  *((_BYTE *)this + 0xCD4) = 0;
-  *((_BYTE *)this + 0xCD5) = 1;
-  _memset(this + 0x235, 0, 0x3FC);
-  v3 = (_DWORD *)FormHeapAlloc(0x10u);
-  if ( v3 )
-    v4 = TESObjectListHead_constr(v3, 1);
+  self->packageList.item = 0; /*0x446daf*/
+  self->packageList.next = 0; /*0x446db2*/
+  self->worldspaceList.item = 0; /*0x446db5*/
+  self->worldspaceList.next = 0; /*0x446db8*/
+  self->climateList.item = 0; /*0x446dbb*/
+  self->climateList.next = 0; /*0x446dbe*/
+  self->weatherList.item = 0; /*0x446dc1*/
+  self->weatherList.next = 0; /*0x446dc4*/
+  self->enchantmentList.item = 0; /*0x446dc7*/
+  self->enchantmentList.next = 0; /*0x446dca*/
+  self->spellList.item = 0; /*0x446dcd*/
+  self->spellList.next = 0; /*0x446dd0*/
+  self->hairList.item = 0; /*0x446dd3*/
+  self->hairList.next = 0; /*0x446dd6*/
+  self->eyeList.item = 0; /*0x446dd9*/
+  self->eyeList.next = 0; /*0x446ddc*/
+  self->raceList.item = 0; /*0x446ddf*/
+  self->raceList.next = 0; /*0x446de2*/
+  self->landTextureList.item = 0; /*0x446de5*/
+  self->landTextureList.next = 0; /*0x446de8*/
+  self->classList.item = 0; /*0x446deb*/
+  self->classList.next = 0; /*0x446dee*/
+  self->factionList.item = 0; /*0x446df1*/
+  self->factionList.next = 0; /*0x446df4*/
+  self->scriptList.item = 0; /*0x446df7*/
+  self->scriptList.next = 0; /*0x446dfa*/
+  self->soundList.item = 0; /*0x446dfd*/
+  self->soundList.next = 0; /*0x446e00*/
+  self->listGlobals.item = 0; /*0x446e03*/
+  self->listGlobals.next = 0; /*0x446e06*/
+  *(_DWORD *)self->unknown7C = 0; /*0x446e09*/
+  *(_DWORD *)&self->unknown7C[4] = 0; /*0x446e0c*/
+  self->questList.item = 0; /*0x446e12*/
+  self->questList.next = 0; /*0x446e18*/
+  self->birthsignList.item = 0; /*0x446e1e*/
+  self->birthsignList.next = 0; /*0x446e24*/
+  self->combatStyleList.item = 0; /*0x446e2a*/
+  self->combatStyleList.next = 0; /*0x446e30*/
+  self->loadScreenList.item = 0; /*0x446e36*/
+  self->loadScreenList.next = 0; /*0x446e3c*/
+  self->waterList.item = 0; /*0x446e42*/
+  self->waterList.next = 0; /*0x446e48*/
+  self->effectShaderList.item = 0; /*0x446e4e*/
+  self->effectShaderList.next = 0; /*0x446e54*/
+  self->animationObjectList.item = 0; /*0x446e5a*/
+  self->animationObjectList.next = 0; /*0x446e60*/
+  *(_DWORD *)self->activeFileState.unknownBeforeActiveFileState = &NiTLargeArray<TESObjectCELL *>::`vftable'; /*0x446e66*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[8] = 0; /*0x446e70*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x14] = 1; /*0x446e76*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0xC] = 0; /*0x446e80*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x10] = 0; /*0x446e86*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[4] = 0; /*0x446e8c*/
+  ArrayConstructor( /*0x446eab*/
+    (char *)&self->activeFileState.unknownBeforeActiveFileState[0x18],
+    0x60u,
+    0x15,
+    (void (__thiscall *)(char *))TESSkill::TESSkill,
+    (void (__thiscall *)(void *))TESSkill::~TESSkill);
+  v2 = *((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]); /*0x446ebd*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x7F8] = 0; /*0x446ec0*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x7FC] = 0; /*0x446ec6*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x808] = 0; /*0x446ecc*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x80C] = 0; /*0x446ed2*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x800] = 0x800; /*0x446ed8*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x810] = 0; /*0x446ee2*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x804] = 0; /*0x446ee8*/
+  self->activeFileState.unknownBeforeActiveFileState[0xC10] = 0; /*0x446eee*/
+  self->activeFileState.retainActiveFile = 0; /*0x446ef4*/
+  *(_BYTE *)(v2 + 0x184) = 0; /*0x446efa*/
+  self->activeFileState.unknownAfterActiveFileState[0] = 0; /*0x446f05*/
+  self->activeFileState.unknownAfterActiveFileState[1] = 0; /*0x446f0b*/
+  self->activeFileState.unknownAfterActiveFileState[2] = 0; /*0x446f11*/
+  self->activeFileState.unknownAfterActiveFileState[3] = 1; /*0x446f17*/
+  _memset((int)&self->activeFileState.unknownBeforeActiveFileState[0x814], 0, 0x3FCu); /*0x446f2b*/
+  v3 = (_DWORD *)FormHeapAlloc(0x10u); /*0x446f32*/
+  if ( v3 ) /*0x446f45*/
+    v4 = TESObjectListHead_constr(v3, 1); /*0x446f4b*/
   else
-    v4 = 0;
-  *this = v4;
-  v5 = (_DWORD *)FormHeapAlloc(0x10u);
-  if ( v5 )
-    v6 = TESRegionList_constr(v5, 1);
+    v4 = 0; /*0x446f52*/
+  self->objectList = v4; /*0x446f5b*/
+  v5 = (_DWORD *)FormHeapAlloc(0x10u); /*0x446f5d*/
+  if ( v5 ) /*0x446f70*/
+    v6 = (TESRegionList *)TESRegionList_constr(v5, 1); /*0x446f76*/
   else
-    v6 = 0;
-  *(this + 0x2F) = v6;
-  *(this + 0x337) = 0;
-  *(this + 0x35) = 0x64;
-  v7 = 0x3D;
-  v8 = this + 0x41;
-  v14 = 0x15;
-  do
+    v6 = 0; /*0x446f7d*/
+  self->regionListOwner = v6; /*0x446f84*/
+  self->containerExtraData = 0; /*0x446f8a*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x14] = 0x64; /*0x446f90*/
+  v7 = 0x3D; /*0x446f9a*/
+  v8 = &self->activeFileState.unknownBeforeActiveFileState[0x44]; /*0x446f9f*/
+  v14 = 0x15; /*0x446fa5*/
+  do /*0x446fd1*/
   {
-    if ( v7 < 0x5A )
-      TESForm_SetFormID((TESForm *)(v8 + 0xFFFFFFF5), v7, 1);
-    *v8 = v7 - 0x31;
-    ++v7;
-    v8 += 0x18;
-    --v14;
+    if ( v7 < 0x5A ) /*0x446fb3*/
+      TESForm_SetFormID((TESForm *)(v8 + 0xFFFFFFD4), v7, 1); /*0x446fbb*/
+    *(_DWORD *)v8 = v7 - 0x31; /*0x446fc3*/
+    ++v7; /*0x446fc6*/
+    v8 += 0x60; /*0x446fc9*/
+    --v14; /*0x446fcc*/
   }
-  while ( v14 );
-  v9 = FormHeapAlloc(8u);
-  if ( v9 )
-    v10 = TESRegionDataManager_constr(v9);
+  while ( v14 ); /*0x446fd1*/
+  v9 = (_DWORD *)FormHeapAlloc(8u); /*0x446fd5*/
+  if ( v9 ) /*0x446fe8*/
+    v10 = (TESRegionDataManager *)TESRegionDataManager_constr(v9); /*0x446fec*/
   else
-    v10 = 0;
-  *(this + 0x336) = v10;
-  v11 = (_DWORD *)FormHeapAlloc(0x14u);
-  if ( v11 )
-    v12 = sub_521950(v11);
+    v10 = 0; /*0x446ff3*/
+  self->regionDataManager = v10; /*0x446ffc*/
+  v11 = (_DWORD *)FormHeapAlloc(0x14u); /*0x447002*/
+  if ( v11 ) /*0x447015*/
+    v12 = sub_521950(v11); /*0x447019*/
   else
-    v12 = 0;
-  g_idleAnimationMap = (int)v12;
-  *((_BYTE *)this + 0xCD6) = 0;
-  return this;
+    v12 = 0; /*0x447020*/
+  dword_B361CC[0x3D] = (int)v12; /*0x447022*/
+  self->activeFileState.unknownAfterActiveFileState[4] = 0; /*0x447027*/
+  return self; /*0x44702f*/
 }

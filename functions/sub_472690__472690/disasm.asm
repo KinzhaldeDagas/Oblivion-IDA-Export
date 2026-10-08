@@ -1,8 +1,8 @@
-0x472690: push    ebx
+0x472690: push    ebx; Iterates the controller manager sequence array, filters to BSAnimGroupSequence RTTI, and returns the first active sequence or the next active sequence after the supplied pointer.
 0x472691: push    ebp
 0x472692: push    esi
 0x472693: xor     bl, bl
-0x472695: cmp     [esp+0Ch+arg_0], 0
+0x472695: cmp     [esp+0Ch+after], 0
 0x47269A: push    edi
 0x47269B: mov     ebp, ecx
 0x47269D: jnz     short loc_4726A1
@@ -24,7 +24,7 @@
 0x4726C5: test    eax, eax
 0x4726C7: jz      short loc_4726DE
 0x4726C9: lea     esp, [esp+0]
-0x4726D0: cmp     eax, offset dword_B35270
+0x4726D0: cmp     eax, 0B35270h
 0x4726D5: jz      short loc_4726F4
 0x4726D7: mov     eax, [eax+4]
 0x4726DA: test    eax, eax
@@ -35,7 +35,7 @@
 0x4726E4: and     eax, esi
 0x4726E6: test    bl, bl
 0x4726E8: jnz     short loc_4726F8
-0x4726EA: cmp     eax, [esp+10h+arg_0]
+0x4726EA: cmp     eax, [esp+10h+after]
 0x4726EE: jnz     short loc_472702
 0x4726F0: mov     bl, 1
 0x4726F2: jmp     short loc_472702

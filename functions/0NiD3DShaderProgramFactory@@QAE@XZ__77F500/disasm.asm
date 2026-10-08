@@ -1,9 +1,9 @@
-0x77F500: push    ebx
+0x77F500: push    ebx; MoonSugarEffect decode: NiD3DShaderProgramFactory constructor. Creates string pointer maps at factory+0x18 for NiD3DVertexShader wrappers and factory+0x1C for NiD3DPixelShader wrappers. Factory maps are lookup/restore bookkeeping, not NiD3DPass ownership.
 0x77F501: push    esi
 0x77F502: push    edi
 0x77F503: mov     esi, ecx
 0x77F505: xor     ebx, ebx
-0x77F507: push    offset NiRefObject_objcount; lpAddend
+0x77F507: push    0B3FD64h; lpAddend
 0x77F50C: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x77F512: mov     [esi+4], ebx
 0x77F515: call    dword ptr ds:0A28078h

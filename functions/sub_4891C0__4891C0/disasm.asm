@@ -2,7 +2,7 @@
 0x4891C3: fld     dword ptr ds:0A30634h
 0x4891C9: push    esi
 0x4891CA: push    edi
-0x4891CB: fstp    [esp+2Ch+var_24]
+0x4891CB: fstp    dword ptr [esp+2Ch+var_24]
 0x4891CF: mov     edi, ecx
 0x4891D1: call    sub_485150
 0x4891D6: push    0; int
@@ -40,7 +40,7 @@
 0x489247: mov     [esp+30h+var_14], eax
 0x48924B: fild    [esp+30h+var_14]
 0x48924F: fstp    [esp+30h+var_14]
-0x489253: call    Actor_GetFatigueFraction
+0x489253: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x489258: cmp     esi, 1
 0x48925B: fstp    dword ptr [esp+30h+var_1C+4]
 0x48925F: mov     esi, [edi+8]
@@ -53,8 +53,8 @@
 0x489281: jmp     loc_489385
 0x489286: mov     ecx, ds:0B333C4h
 0x48928C: mov     ebx, [ecx]
-0x48928E: mov     ecx, esi
-0x489290: call    TESObjectWEAP_GetWeaponSkillAV
+0x48928E: mov     ecx, esi; this
+0x489290: call    TESObjectWEAP_GetWeaponSkillAV; BladeSkillsRestored schema-4 owner decode: this inventory-rating path is player-owned (PlayerCharacter global at 0xB333C4). ECX is TESObjectWEAP. Call returns at 0x489295; paired Calc_WeaponDamage returns at 0x489382.
 0x489295: mov     ecx, ds:0B333C4h
 0x48929B: mov     edx, [ebx+288h]
 0x4892A1: push    eax
@@ -69,7 +69,7 @@
 0x4892BD: movzx   ebx, ax
 0x4892C0: call    ContainerEntryExtraData_GetHealth
 0x4892C5: push    esi
-0x4892C6: fstp    qword ptr [esp+34h+var_24]
+0x4892C6: fstp    [esp+34h+var_24]
 0x4892CA: call    TESHealthForm_GetHealthForForm
 0x4892CF: add     esp, 4
 0x4892D2: test    eax, eax
@@ -78,13 +78,13 @@
 0x4892DC: jge     short loc_4892E4
 0x4892DE: fadd    dword ptr ds:0A2FC78h
 0x4892E4: cmp     byte ptr [esi+90h], 5
-0x4892EB: fdivr   qword ptr [esp+30h+var_24]
+0x4892EB: fdivr   [esp+30h+var_24]
 0x4892EF: fstp    dword ptr [esp+30h+var_C]
 0x4892F3: jnz     short loc_4892FB
 0x4892F5: fld     [esp+30h+var_14]
 0x4892F9: jmp     short loc_4892FF
 0x4892FB: fld     [esp+30h+var_10]
-0x4892FF: fstp    [esp+30h+var_24]
+0x4892FF: fstp    dword ptr [esp+30h+var_24]
 0x489303: push    1
 0x489305: fld1
 0x489307: sub     esp, 8
@@ -95,7 +95,7 @@
 0x489319: push    ebx
 0x48931A: push    ecx
 0x48931B: fstp    [esp+44h+var_44]
-0x48931E: fld     [esp+44h+var_24]
+0x48931E: fld     dword ptr [esp+44h+var_24]
 0x489322: jmp     short loc_489363
 0x489324: mov     ecx, ds:0B333C4h
 0x48932A: mov     eax, [ecx]
@@ -118,26 +118,26 @@
 0x48935B: push    ecx
 0x48935C: fstp    [esp+44h+var_44]; float
 0x48935F: fld     [esp+44h+var_14]
-0x489363: call    Double_To_SInt32
+0x489363: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x489368: fld     dword ptr [esp+44h+var_1C]
 0x48936C: push    eax; int
-0x48936D: call    Double_To_SInt32
+0x48936D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x489372: fld     [esp+48h+var_4]
 0x489376: push    eax; int
-0x489377: call    Double_To_SInt32
+0x489377: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x48937C: push    eax; int
-0x48937D: call    Calc_WeaponDamage
+0x48937D: call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.
 0x489382: add     esp, 20h
-0x489385: fstp    [esp+30h+var_24]
+0x489385: fstp    dword ptr [esp+30h+var_24]
 0x489389: sub     esp, 8
 0x48938C: fld1
 0x48938E: fstp    [esp+38h+var_34]; float
-0x489392: fld     [esp+38h+var_24]
+0x489392: fld     dword ptr [esp+38h+var_24]
 0x489396: fstp    [esp+38h+var_38]; float
 0x489399: call    Round_Float
-0x48939E: fstp    [esp+38h+var_24]
+0x48939E: fstp    dword ptr [esp+38h+var_24]
 0x4893A2: add     esp, 8
-0x4893A5: fld     [esp+30h+var_24]
+0x4893A5: fld     dword ptr [esp+30h+var_24]
 0x4893A9: pop     ebx
 0x4893AA: pop     edi
 0x4893AB: pop     esi
@@ -148,7 +148,7 @@
 0x4893B8: mov     eax, ds:0B333C4h
 0x4893BD: mov     ebx, [eax]
 0x4893BF: mov     ecx, esi
-0x4893C1: call    TESObjectARMO_GetArmorSkillAV
+0x4893C1: call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 2/7: player inventory entry rating classifies the armor, fetches player skill, health and condition, then calls Calc_ArmorRating at 0x489461.
 0x4893C6: mov     ecx, ds:0B333C4h
 0x4893CC: mov     edx, [ebx+288h]
 0x4893D2: push    eax
@@ -189,12 +189,12 @@
 0x489457: movzx   ecx, word ptr [esp+3Ch+var_4]
 0x48945C: push    ecx; int
 0x48945D: fldcw   word ptr [esp+40h+var_24]
-0x489461: call    Calc_ArmorRating
+0x489461: call    Calc_ArmorRating; Paired Medium boundary 2/7: player inventory armor-rating consumer. MWMediumArmor may use player sidecar Medium skill here.
 0x489466: fstp    [esp+40h+var_34]; float
 0x48946A: add     esp, 0Ch
 0x48946D: call    sub_484370
-0x489472: fstp    [esp+34h+var_24]
-0x489476: fld     [esp+34h+var_24]
+0x489472: fstp    dword ptr [esp+34h+var_24]
+0x489476: fld     dword ptr [esp+34h+var_24]
 0x48947A: add     esp, 4
 0x48947D: pop     ebx
 0x48947E: pop     edi
@@ -215,7 +215,7 @@
 0x4894AB: mov     [esp+24h+var_4], eax
 0x4894AF: fldcw   word ptr [esp+24h+var_24]
 0x4894B2: fild    [esp+24h+var_4]
-0x4894B6: fstp    [esp+24h+var_24]
-0x4894B9: fld     [esp+24h+var_24]
+0x4894B6: fstp    dword ptr [esp+24h+var_24]
+0x4894B9: fld     dword ptr [esp+24h+var_24]
 0x4894BC: add     esp, 24h
 0x4894BF: retn    0Ch

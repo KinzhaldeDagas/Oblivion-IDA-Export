@@ -6,13 +6,13 @@
 0x69CC87: lea     eax, [esp+20h+var_10]
 0x69CC8B: push    eax
 0x69CC8C: mov     esi, ecx
-0x69CC8E: call    MobileObject_GetCharProxy
+0x69CC8E: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69CC93: mov     ecx, eax
-0x69CC95: call    sub_57E270
+0x69CC95: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x69CC9A: mov     edi, [esp+20h+var_10]
 0x69CC9E: mov     ecx, esi; this
 0x69CCA0: or      edi, 4000h
-0x69CCA6: call    MobileObject_GetCharProxy
+0x69CCA6: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69CCAB: mov     ecx, [eax+364h]
 0x69CCB1: test    ecx, ecx
 0x69CCB3: jz      short loc_69CCCE
@@ -62,7 +62,7 @@
 0x69CD39: mov     [ecx+4], edx
 0x69CD3C: mov     [ecx+8], eax
 0x69CD3F: mov     ecx, esi; this
-0x69CD41: call    TESObjectREFR_GetParentCell
+0x69CD41: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x69CD46: push    eax; int
 0x69CD47: push    edi; int
 0x69CD48: mov     ecx, ebp
@@ -110,7 +110,7 @@
 0x69CDD1: mov     ecx, edi; this
 0x69CDD3: call    sub_6B73E0
 0x69CDD8: push    edi
-0x69CDD9: call    FormHeapFree
+0x69CDD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x69CDDE: add     esp, 4
 0x69CDE1: pop     edi
 0x69CDE2: pop     esi

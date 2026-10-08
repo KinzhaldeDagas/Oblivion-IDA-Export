@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x5523C0",
+      "0x552522"
+    ]
+  ],
+  "chunks_sha256": "342ac4e115dbaebeba5410df1126b1bad730ede7421af021f1ad1169aaaade37",
+  "comment_regular": "Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.",
+  "comment_repeatable": "Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_5523C0",
+  "display_name": "FaceGenMatrix_Multiply",
   "end_ea": "0x552522",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5523C0",
+  "name": "FaceGenMatrix_Multiply",
   "segment": ".text",
   "sha256": "342ac4e115dbaebeba5410df1126b1bad730ede7421af021f1ad1169aaaade37",
   "size": 354,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5523C0",
-  "type": "_DWORD *__thiscall(int *this, _DWORD *, _DWORD *)",
+  "total_chunk_size": 354,
+  "type": "FaceGenMatrix *__thiscall(const FaceGenMatrix *this, FaceGenMatrix *out, const FaceGenMatrix *rhs)",
   "xrefs_from_count": 136,
   "xrefs_to_count": 4
 }

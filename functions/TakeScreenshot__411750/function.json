@@ -1,19 +1,36 @@
 {
-  "callees_count": 43,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x411750",
+      "0x411B70"
+    ],
+    [
+      "0x9AAF10",
+      "0x9AAF4C"
+    ]
+  ],
+  "chunks_sha256": "fdc73b7ee30a814fba3cc4380386386ca67a2d226f72510de89bd5bd85e309b2",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 17,
+  "comment_repeatable": "\nVerified OblivionNew 2026-09-26 for DX11 audit: manual screenshot uses renderer+0x280 device; GetBackBuffer(0,0,MONO,&surface) at 0x4117E9 (device vtable+0x48), surface GetDesc at 0x411813 (+0x30), LockRect(full surface, flags0x800=D3DLOCK_NOSYSLOCK) at 0x41184D (+0x34), then UnlockRect0x411915 and Release0x411921. It copies locked rows to CPU NiPixelData/BMP. No GetFrontBufferData call occurs in this function. This is distinct from save-thumbnail Screenshot_RenderTexture at0x411B70. No claim about other modules/frontbuffer callers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 23,
   "display_name": "TakeScreenshot",
   "end_ea": "0x411B70",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TakeScreenshot",
   "segment": ".text",
   "sha256": "dcc72290860d0bcec2e5c69ad42e1063cdeda703e9d031a643c99d9dcfaba966",
   "size": 1056,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x411750",
+  "total_chunk_size": 1116,
   "type": "int __cdecl(char *)",
-  "xrefs_from_count": 369,
+  "xrefs_from_count": 388,
   "xrefs_to_count": 1
 }

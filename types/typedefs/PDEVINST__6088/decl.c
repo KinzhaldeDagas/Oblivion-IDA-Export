@@ -1,1 +1,1 @@
-PDEVINST
+typedef DWORD *PDEVINST;

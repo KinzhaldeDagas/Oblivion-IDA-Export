@@ -53,7 +53,7 @@
 0x6F424F: sub     edx, eax
 0x6F4251: cmp     edx, ebx
 0x6F4253: jnb     short loc_6F425A
-0x6F4255: call    sub_790B90
+0x6F4255: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x6F425A: test    ecx, ecx
 0x6F425C: jnz     short loc_6F4262
 0x6F425E: xor     eax, eax
@@ -162,7 +162,7 @@
 0x6F4358: call    sub_5573D0
 0x6F435D: mov     ecx, [esi+4]
 0x6F4360: push    ecx
-0x6F4361: call    FormHeapFree
+0x6F4361: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F4366: add     esp, 14h
 0x6F4369: mov     eax, [ebp+var_50]
 0x6F436C: imul    edi, 2Ch ; ','
@@ -180,7 +180,7 @@
 0x6F438E: push    esi
 0x6F438F: call    sub_557930
 0x6F4394: push    esi
-0x6F4395: call    FormHeapFree
+0x6F4395: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F439A: add     esp, 4
 0x6F439D: push    0
 0x6F439F: push    0
@@ -276,7 +276,7 @@
 0x6F4488: test    eax, eax
 0x6F448A: jz      short loc_6F4495
 0x6F448C: push    eax
-0x6F448D: call    FormHeapFree
+0x6F448D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F4492: add     esp, 4
 0x6F4495: xor     eax, eax
 0x6F4497: cmp     [ebp+var_28], 10h
@@ -286,7 +286,7 @@
 0x6F44A4: jb      short loc_6F44B2
 0x6F44A6: mov     eax, [ebp+var_3C]
 0x6F44A9: push    eax
-0x6F44AA: call    FormHeapFree
+0x6F44AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F44AF: add     esp, 4
 0x6F44B2: mov     ecx, [ebp+var_C]
 0x6F44B5: mov     large fs:0, ecx
@@ -300,3 +300,15 @@
 0x6F44CA: mov     esp, ebp
 0x6F44CC: pop     ebp
 0x6F44CD: retn    10h
+0x9C8A50: lea     ecx, [ebp+var_40]
+0x9C8A53: jmp     sub_556EC0
+0x9C8A58: mov     edx, [esp-4+arg_4]
+0x9C8A5C: lea     eax, [edx+0Ch]
+0x9C8A5F: mov     ecx, [edx-54h]
+0x9C8A62: xor     ecx, eax
+0x9C8A64: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8A69: mov     ecx, [edx-8]
+0x9C8A6C: xor     ecx, eax
+0x9C8A6E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8A73: mov     eax, offset stru_AF1308
+0x9C8A78: jmp     ___CxxFrameHandler3

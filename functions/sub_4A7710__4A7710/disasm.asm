@@ -34,7 +34,7 @@
 0x4A7764: mov     edx, [eax]
 0x4A7766: push    eax
 0x4A7767: mov     [esi], edx
-0x4A7769: call    FormHeapFree
+0x4A7769: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A776E: add     esp, 4
 0x4A7771: pop     edi
 0x4A7772: xor     al, al

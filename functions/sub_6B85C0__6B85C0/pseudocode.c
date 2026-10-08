@@ -1,14 +1,15 @@
-BOOL __thiscall sub_6B85C0(_DWORD *this, char a2)
+// FirstTopic(abSkipGreeting). Sets the cursor to the inline head node; when skipGreeting is true it advances once, so callers render/select ordinary TOPIC choices without replaying the greeting.
+bool __thiscall MenuTopicManager::FirstTopic(MenuTopicManagerView *this, bool skipGreeting)
 {
-  _DWORD *v2; // ecx
+  MenuTopicNode *currentTopicNode; // ecx
 
-  *this = this + 1;
-  if ( a2 )
+  this->currentTopicNode = (MenuTopicNode *)&this->firstTopic; /*0x6b85c8*/
+  if ( skipGreeting ) /*0x6b85ca*/
   {
-    if ( this == (_DWORD *)0xFFFFFFFC )
-      return 0;
-    *this = *(this + 2);
+    if ( this == (MenuTopicManagerView *)0xFFFFFFFC ) /*0x6b85ce*/
+      return 0; /*0x6b85ce*/
+    this->currentTopicNode = this->nextTopicNode; /*0x6b85d3*/
   }
-  v2 = (_DWORD *)*this;
-  return v2 && *v2;
+  currentTopicNode = this->currentTopicNode; /*0x6b85d5*/
+  return currentTopicNode && currentTopicNode->item; /*0x6b85e5*/
 }

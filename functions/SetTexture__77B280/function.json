@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77B280",
+      "0x77B2B0"
+    ]
+  ],
+  "chunks_sha256": "f11e8855a6a7550eab0a206273759672ba0e2724eb5d3199341ad282c2a4dce4",
+  "comment_regular": "DX10OBSE verified decode: NiDX9RenderState::SetTexture caches per-stage IDirect3DBaseTexture9 pointer and calls IDirect3DDevice9::SetTexture only when changed. DX10 hook must sync from device before draw because redundant native calls are suppressed.\nV259 white-LOD investigation: compare engine cache[stage] at FA0+4*stage with owned D3D9-facing binding separately. Cache equality can suppress setter; cached value is stored BEFORE device SetTexture. Diagnostic needs cache/device/backing lineage to separate cache suppression from missing renderer data. No replay/forced binding is authorized from a raw cache pointer.",
+  "comment_repeatable": "DX10OBSE verified decode: NiDX9RenderState::SetTexture caches per-stage IDirect3DBaseTexture9 pointer and calls IDirect3DDevice9::SetTexture only when changed. DX10 hook must sync from device before draw because redundant native calls are suppressed.\nDX11 inherited-state audit 2026-09-30: sixteen ordinary texture cache pointers atFA0+4*stage are separate from actual device binding identities. Equality suppresses SetTexture; cache changes precede the device call. A retained native cache pointer alone is not proof of the current logical device binding.\nDX11 state-handoff audit 2026-10-01: receiver is a render-state manager, not NiDX9Renderer. Shared entries appear in NiDX9RenderState vtable A8A9F4 and NiD3DRenderState vtable A8B2AC. State/value arguments are DWORDs, not pointers. Return register is not a uniform HRESULT (equal cached paths can omit the device call); do not infer backend success from it. Preserve physical current/saved cache words separately from actual logical device state and guard runtime enum-map values before native commit.\nFallout Xenon comparison 2026-10-01: decoded ClearTexture at 827B6EF8 bulk-clears samplers 0..25 for any non-null argument and uses device offset A68. Verified PPC instructions differ from this Oblivion single-slot compare/store/call path and its device at FF8; no Xenon layout or 26-slot rule is promoted to Oblivion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "SetTexture",
   "end_ea": "0x77B2B0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "SetTexture",
   "segment": ".text",
   "sha256": "f11e8855a6a7550eab0a206273759672ba0e2724eb5d3199341ad282c2a4dce4",
   "size": 48,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B280",
+  "total_chunk_size": 48,
   "type": "HRESULT __thiscall(NiDX9RenderState *this, DWORD sampler, IDirect3DBaseTexture9 *a3)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 2

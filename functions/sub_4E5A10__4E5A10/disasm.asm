@@ -7,7 +7,7 @@
 0x4E5A1C: push    edi
 0x4E5A1D: movzx   edi, word ptr [ecx+0Ah]
 0x4E5A21: push    eax; Seed
-0x4E5A22: call    GetRandomLargeInteger?
+0x4E5A22: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4E5A27: add     esp, 4
 0x4E5A2A: xor     edx, edx
 0x4E5A2C: div     edi

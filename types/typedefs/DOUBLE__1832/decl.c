@@ -1,1 +1,1 @@
-DOUBLE
+typedef double DOUBLE;

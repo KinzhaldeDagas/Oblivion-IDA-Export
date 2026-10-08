@@ -1,1 +1,1 @@
-bhkStiffSpringConstraint
+struct bhkStiffSpringConstraint;

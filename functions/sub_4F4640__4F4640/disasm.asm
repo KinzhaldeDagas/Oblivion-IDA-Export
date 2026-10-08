@@ -9,7 +9,7 @@
 0x4F4655: test    al, al
 0x4F4657: jz      short loc_4F4688
 0x4F4659: mov     ecx, esi; this
-0x4F465B: call    Actor_GetFatigueFraction
+0x4F465B: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x4F4660: mov     eax, [esp+4+arg_C]
 0x4F4664: fst     qword ptr [eax]
 0x4F4666: cmp     byte ptr ds:0B361ACh, 0

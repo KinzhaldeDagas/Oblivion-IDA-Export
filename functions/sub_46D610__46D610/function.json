@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x46D610",
+      "0x46D749"
+    ]
+  ],
+  "chunks_sha256": "a393752e45a5d1164315d7c23f18a8b0a2e94e277187ba352e96873e2c3f073d",
+  "comment_regular": "Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.",
+  "comment_repeatable": "Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_46D610",
+  "display_name": "TESModel_ReplaceTextureHashEntries",
   "end_ea": "0x46D749",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_46D610",
+  "name": "TESModel_ReplaceTextureHashEntries",
   "segment": ".text",
   "sha256": "a393752e45a5d1164315d7c23f18a8b0a2e94e277187ba352e96873e2c3f073d",
   "size": 313,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x46D610",
-  "type": "int __thiscall(_BYTE *this, int, unsigned int, _DWORD *, const char *ArgList)",
+  "total_chunk_size": 313,
+  "type": "int __thiscall(TESTextureList *this, TextureHashEntry24 *entries, unsigned int count, TESForm *form, const char *modelPath)",
   "xrefs_from_count": 114,
   "xrefs_to_count": 2
 }

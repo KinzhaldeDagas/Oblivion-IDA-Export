@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78FC20",
+      "0x78FCB7"
+    ]
+  ],
+  "chunks_sha256": "c314468434509f56adcc56754e3c9e0fd2b38ddcff4752bcb1261411148711fa",
+  "comment_regular": "Rotates the 4-byte CBranch-pointer range [first,last) around middle using gcd-cycle moves. Oblivion's fuzzy-volume insertion-sort helper uses it to move an insertion range without allocating.",
+  "comment_repeatable": "Rotates the 4-byte CBranch-pointer range [first,last) around middle using gcd-cycle moves. Oblivion's fuzzy-volume insertion-sort helper uses it to move an insertion range without allocating.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78FC20",
+  "display_name": "OB_BranchPtrVector_RotateRange_010201A0",
   "end_ea": "0x78FCB7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78FC20",
+  "name": "OB_BranchPtrVector_RotateRange_010201A0",
   "segment": ".text",
   "sha256": "c314468434509f56adcc56754e3c9e0fd2b38ddcff4752bcb1261411148711fa",
   "size": 151,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78FC20",
-  "type": "int __cdecl(_DWORD *, int, _DWORD *)",
+  "total_chunk_size": 151,
+  "type": "void __cdecl(OB_CBranch_010201A0 **first, OB_CBranch_010201A0 **middle, OB_CBranch_010201A0 **last)",
   "xrefs_from_count": 73,
   "xrefs_to_count": 1
 }

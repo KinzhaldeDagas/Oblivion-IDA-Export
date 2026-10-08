@@ -1,4 +1,4 @@
-0x42AB50: mov     eax, ecx
+0x42AB50: mov     eax, ecx; Constructs Oblivion ExtraHasNoRumors: type 0x5A, vtable, null next link, and boolean payload at +0x0C.
 0x42AB52: mov     cl, [esp+arg_0]
 0x42AB56: mov     byte ptr [eax+4], 5Ah ; 'Z'
 0x42AB5A: mov     dword ptr [eax+8], 0

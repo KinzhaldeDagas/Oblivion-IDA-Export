@@ -1,4 +1,4 @@
-0x668D00: push    0FFFFFFFFh
+0x668D00: push    0FFFFFFFFh; Actor reference default idle variant initialization. Seeds default idle/animation choices during actor setup; observed from actor initialization path.
 0x668D02: push    offset SEH_668D00
 0x668D07: mov     eax, large fs:0
 0x668D0D: push    eax
@@ -23,15 +23,15 @@
 0x668D53: cmp     [ebp+0], edi
 0x668D56: jnz     loc_66965E
 0x668D5C: mov     al, ds:0B45DA4h
-0x668D61: mov     ecx, offset ActorProcessManager_ptr
+0x668D61: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x668D66: mov     [esp+2A8h+var_28D], al
 0x668D6A: mov     byte ptr ds:0B45DA4h, 1
 0x668D71: call    sub_679060
 0x668D76: fldz
 0x668D78: push    ecx
-0x668D79: fstp    [esp+2ACh+a5]
-0x668D7C: mov     ecx, offset ActorProcessManager_ptr
-0x668D81: call    sub_67ACA0
+0x668D79: fstp    [esp+2ACh+a5]; deltaSeconds
+0x668D7C: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x668D81: call    ActorProcessManager_UpdateTempEffects; [Verified] Per-actor temp-effect update loop visits both activeTempEffects (+0x40) and extendedTempEffects (+0x48), dispatches virtual Update(effect, deltaSeconds), removes effects returning false, and releases manager references. Active-list decals (types 0/1) and particles (2) update through this shared manager. Fallout divergence: Fallout updates its separate BGSDecalManager simple-decal/emitter collections through UpdateDecals.
 0x668D86: mov     edx, [ebx]
 0x668D88: mov     eax, [edx+154h]
 0x668D8E: mov     ecx, ebx
@@ -40,12 +40,12 @@
 0x668D93: call    sub_8B8700
 0x668D98: add     esp, 4
 0x668D9B: mov     ecx, ebx; this
-0x668D9D: call    TESObjectREFR__GetNiNode
+0x668D9D: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x668DA2: push    eax
 0x668DA3: call    sub_8B8700
 0x668DA8: add     esp, 4
 0x668DAB: mov     ecx, ebx; this
-0x668DAD: call    TESObjectREFR__GetNiNode
+0x668DAD: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x668DB2: mov     esi, eax
 0x668DB4: mov     eax, [esi+0Ch]
 0x668DB7: cmp     eax, edi
@@ -57,8 +57,8 @@
 0x668DC9: mov     ecx, esi
 0x668DCB: mov     [esp+2A8h+var_4], 0
 0x668DD6: call    sub_6FFFD0
-0x668DDB: lea     ecx, [esp+2A8h+var_27C]
-0x668DDF: call    sub_478B90
+0x668DDB: lea     ecx, [esp+2A8h+var_27C]; this
+0x668DDF: call    OB_NiCloningProcess_ctor
 0x668DE4: fld1
 0x668DE6: fst     [esp+2A8h+var_264]
 0x668DEA: fst     [esp+2A8h+var_268]
@@ -77,13 +77,13 @@
 0x668E13: call    eax
 0x668E15: test    eax, eax
 0x668E17: jz      short loc_668E2D
-0x668E19: push    0
-0x668E1B: push    eax
+0x668E19: push    0; removeExisting
+0x668E1B: push    eax; root
 0x668E1C: push    1
 0x668E1E: call    GetShadowSceneNode
 0x668E23: add     esp, 4
-0x668E26: mov     ecx, eax
-0x668E28: call    sub_7C7F90
+0x668E26: mov     ecx, eax; self
+0x668E28: call    ShadowSceneNode_RegisterOrRemovePointLightsInSubtree; Lock-protected wrapper for recursive point-light registration/removal across a NiNode subtree.
 0x668E2D: mov     ecx, [esp+2A8h+a2]
 0x668E31: push    ecx; a2
 0x668E32: mov     ecx, esi; this
@@ -130,7 +130,7 @@
 0x668EA4: mov     ecx, esi
 0x668EA6: call    edx
 0x668EA8: mov     ecx, [ebp+0]; this
-0x668EAB: call    NiAVObject_InitializePropertyState
+0x668EAB: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x668EB0: fld1
 0x668EB2: mov     eax, [ebp+0]
 0x668EB5: push    ecx
@@ -164,10 +164,10 @@
 0x668F0D: mov     edx, [edx+58h]
 0x668F10: push    eax
 0x668F11: call    edx
-0x668F13: push    eax
-0x668F14: push    0
-0x668F16: mov     ecx, ebx
-0x668F18: call    sub_5F8300
+0x668F13: push    eax; quiverNode
+0x668F14: push    0; animData
+0x668F16: mov     ecx, ebx; this
+0x668F18: call    Actor_RefreshQuiverArrowVisibility; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.
 0x668F1D: push    0
 0x668F1F: mov     ecx, 9
 0x668F24: mov     esi, (offset stru_B26AF0.unk2C+2A8h)
@@ -212,7 +212,7 @@
 0x668FA5: mov     byte ptr [esp+2ACh+var_4], 3
 0x668FAD: call    edx
 0x668FAF: push    eax
-0x668FB0: push    offset dword_B39DB8
+0x668FB0: push    offset stru_B39DB8
 0x668FB5: call    NiRTTI_Cast
 0x668FBA: mov     edi, eax
 0x668FBC: add     esp, 8
@@ -239,7 +239,7 @@
 0x668FFC: push    offset aBsfacegennin_0; "BSFaceGenNiNodeSkinned"
 0x669001: call    edx
 0x669003: push    eax
-0x669004: push    offset dword_B39DB8
+0x669004: push    offset stru_B39DB8
 0x669009: call    NiRTTI_Cast
 0x66900E: mov     edi, eax
 0x669010: add     esp, 8
@@ -319,16 +319,16 @@
 0x6690E5: xor     eax, eax
 0x6690E7: test    esi, esi
 0x6690E9: jz      short loc_6690F3
-0x6690EB: push    eax
-0x6690EC: mov     ecx, esi
-0x6690EE: call    sub_405790
+0x6690EB: push    eax; index
+0x6690EC: mov     ecx, esi; this
+0x6690EE: call    NiNode_GetChildAtIndex
 0x6690F3: test    edi, edi
 0x6690F5: jz      short loc_669103
 0x6690F7: test    eax, eax
 0x6690F9: jnz     short loc_669107
-0x6690FB: push    eax
-0x6690FC: mov     ecx, edi
-0x6690FE: call    sub_405790
+0x6690FB: push    eax; index
+0x6690FC: mov     ecx, edi; this
+0x6690FE: call    NiNode_GetChildAtIndex
 0x669103: test    eax, eax
 0x669105: jz      short loc_669142
 0x669107: mov     ecx, ds:0B3F9A8h
@@ -444,13 +444,13 @@
 0x669240: fldz
 0x669242: mov     eax, [ebp+0]
 0x669245: push    ecx
-0x669246: fst     [esp+2ACh+a5]; a5
-0x669249: push    0; a4
+0x669246: fst     [esp+2ACh+a5]; period
+0x669249: push    0; useRefractF
 0x66924B: push    ecx
-0x66924C: fstp    [esp+2B4h+a3]; a3
-0x66924F: push    0; a2
-0x669251: push    eax; a1
-0x669252: call    sub_7D92C0
+0x66924C: fstp    [esp+2B4h+a3]; power
+0x66924F: push    0; enabled
+0x669251: push    eax; root
+0x669252: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x669257: push    0DCh ; 'Ü'; Size
 0x66925C: call    FormHeapAlloc
 0x669261: add     esp, 18h
@@ -459,7 +459,7 @@
 0x66926A: mov     byte ptr [esp+2A8h+var_4], 4
 0x669272: jz      short loc_66927D
 0x669274: mov     ecx, eax
-0x669276: call    NewActorAnimData
+0x669276: call    NewActorAnimData; Allocates and initializes ActorAnimData. Creates the +0x9C 0x65-bucket UInt16 animation-key map; nulls manager/root/accumulation, active-slot, pending-KF, and sequence pointers; initializes current/queued keys to 0xFFFF:0xFFFF, action arrays to -1, update state +0x90 to 0xFF, and blend scales +0xBC/+0xC0 to 1.0.
 0x66927B: jmp     short loc_66927F
 0x66927D: xor     eax, eax
 0x66927F: mov     edx, [ebx]
@@ -552,7 +552,7 @@
 0x66939F: lea     ecx, [esp+2B0h+var_218]
 0x6693A6: push    ecx; Str
 0x6693A7: mov     ecx, ds:0B33A1Ch
-0x6693AD: call    sub_434850
+0x6693AD: call    ModelLoader_BuildFileListWithArchives; Thin wrapper over ModelLoader_BuildFileListWildcard with archive lookup enabled. Power-attack/KF discovery uses this to enumerate candidate model paths.
 0x6693B2: mov     [esp+2A8h+var_294], eax
 0x6693B6: mov     byte ptr [esi], 0
 0x6693B9: mov     edi, offset off_B102CC; "HandToHand"
@@ -565,7 +565,7 @@
 0x6693D0: lea     ecx, [esp+2B4h+var_218]
 0x6693D7: push    offset aDataSSSidle_kf; "Data\\%s\\%s\\%sIdle.KF"
 0x6693DC: push    ecx
-0x6693DD: call    __sprintf
+0x6693DD: call    __sprintf; Default idle variant auto-detect: checks Data\Meshes\<model dir>\<weaponPrefix>Idle.KF and queues existing files.
 0x6693E2: mov     ecx, ds:0B33A04h
 0x6693E8: mov     edx, [ecx]
 0x6693EA: mov     edx, [edx+4]
@@ -617,7 +617,7 @@
 0x66946B: lea     ecx, [esp+2B4h+var_218]
 0x669472: push    offset aDataSSStorchid; "Data\\%s\\%s\\%sTorchIdle.KF"
 0x669477: push    ecx
-0x669478: call    __sprintf
+0x669478: call    __sprintf; Default torch idle variant auto-detect: checks Data\Meshes\<model dir>\<weaponPrefix>TorchIdle.KF and queues existing files.
 0x66947D: mov     ecx, ds:0B33A04h
 0x669483: mov     edx, [ecx]
 0x669485: mov     edx, [edx+4]
@@ -662,7 +662,7 @@
 0x6694F5: push    esi
 0x6694F6: call    BSSimpleList_PushBack
 0x6694FB: add     edi, 4
-0x6694FE: cmp     edi, offset animGroupInfos_ptr
+0x6694FE: cmp     edi, offset animGroupInfos_ptr; Interior callsite in actor default idle variant initialization; same setup path as ObservedActorRef_InitDefaultIdleVariants.
 0x669504: jl      loc_6693C0
 0x66950A: mov     eax, [ebp+0]
 0x66950D: mov     edx, [esp+2A8h+var_294]
@@ -670,21 +670,21 @@
 0x669517: push    ebx; int
 0x669518: push    eax; int
 0x669519: push    edx; int
-0x66951A: call    Menu_PickIdles??
+0x66951A: call    Menu_PickIdles; Initializes actor/player idle animation data from default Idle/TorchIdle files gathered from the model directory.
 0x66951F: lea     ecx, [ebx+44h]
-0x669522: call    sub_41E650
+0x669522: call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.
 0x669527: test    eax, eax
 0x669529: jz      short loc_669545
 0x66952B: mov     eax, [eax]
 0x66952D: test    eax, eax
 0x66952F: jz      short loc_669545
-0x669531: push    0
-0x669533: push    eax
+0x669531: push    0; trackBackingPosition
+0x669533: push    eax; backingLight
 0x669534: push    1
 0x669536: call    GetShadowSceneNode
 0x66953B: add     esp, 4
-0x66953E: mov     ecx, eax
-0x669540: call    sub_7C6AE0
+0x66953E: mov     ecx, eax; self
+0x669540: call    ShadowSceneNode_FindOrCreateFullLightForSource; Actor/equipped ExtraLight registration uses trackBackingPosition=false.
 0x669545: mov     al, [esp+2A8h+var_28D]
 0x669549: mov     ds:0B45DA4h, al
 0x66954E: mov     ecx, [ebp+0]
@@ -755,9 +755,9 @@
 0x669606: cmp     esi, edi
 0x669608: jz      short loc_66961A
 0x66960A: mov     ecx, esi; this
-0x66960C: call    DisposeActorAnimData
+0x66960C: call    DisposeActorAnimData; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.
 0x669611: push    esi
-0x669612: call    FormHeapFree
+0x669612: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x669617: add     esp, 4
 0x66961A: mov     [ebx+5DCh], edi
 0x669620: mov     esi, [ebp+0]
@@ -797,3 +797,30 @@
 0x66967D: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x669682: add     esp, 294h
 0x669688: retn    4
+0x9C3F40: lea     ecx, [ebp-284h]; slot
+0x9C3F46: jmp     NiPointerSlot_Release
+0x9C3F4B: lea     ecx, [ebp-27Ch]
+0x9C3F51: jmp     sub_4781A0
+0x9C3F56: mov     eax, [ebp-280h]
+0x9C3F5C: push    eax
+0x9C3F5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3F62: pop     ecx
+0x9C3F63: retn
+0x9C3F64: lea     ecx, [ebp-28Ch]; slot
+0x9C3F6A: jmp     NiPointerSlot_Release
+0x9C3F6F: mov     eax, [ebp-294h]
+0x9C3F75: push    eax
+0x9C3F76: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3F7B: pop     ecx
+0x9C3F7C: retn
+0x9C3F7D: mov     edx, [esp+arg_4]
+0x9C3F81: lea     eax, [edx-298h]
+0x9C3F87: mov     ecx, [edx-29Ch]
+0x9C3F8D: xor     ecx, eax
+0x9C3F8F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3F94: add     eax, 10h
+0x9C3F97: mov     ecx, [edx-4]
+0x9C3F9A: xor     ecx, eax
+0x9C3F9C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3FA1: mov     eax, offset stru_AECA04
+0x9C3FA6: jmp     ___CxxFrameHandler3

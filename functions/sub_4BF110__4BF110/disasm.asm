@@ -1,7 +1,7 @@
 0x4BF110: push    ebx
 0x4BF111: mov     ebx, dword ptr [esp+4+a2]
 0x4BF115: push    esi
-0x4BF116: push    ebx; a2
+0x4BF116: push    ebx; fromActiveFile
 0x4BF117: mov     esi, ecx
 0x4BF119: call    TESForm_SetFromActiveFile
 0x4BF11E: test    bl, bl

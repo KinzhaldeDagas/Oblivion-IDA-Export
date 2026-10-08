@@ -1,115 +1,113 @@
-void __userpurge EquipWeapon(
-        TESObjectREFR *a1@<ecx>,
-        double a2@<st0>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
-        int a5,
-        int a6)
+// Equips the supplied form on this reference. The native ABI has one stack argument: the weapon/form pointer.
+void __thiscall EquipWeapon(TESObjectREFR *this, TESForm *weapon)
 {
-  TESObjectREFR *v6; // ebp
-  char *v7; // edi
-  TESObjectREFR *v8; // esi
-  int v9; // eax
-  const char *v10; // eax
-  NiObjectNET *v11; // eax
-  NiObjectNET *v12; // edi
+  double v2; // st7
+  TESObjectREFR *v3; // ebp
+  ActorSkinInfo *SkinInfoByPerspective; // edi
+  TESObjectREFR *v5; // esi
+  int v6; // eax
+  const char *v7; // eax
+  NiObjectNET *CloneAndAttachModel3D; // eax
+  NiObjectNET *v9; // edi
   TESObjectREFRVtbl *vtbl; // ebp
-  void (__thiscall **v14)(TESObjectREFRVtbl *, int, _DWORD, int); // edi
-  int v15; // eax
-  TESObjectREFRVtbl *v16; // edi
+  void (__thiscall *v11)(BaseFormComponent *); // edi
+  int v12; // eax
+  TESObjectREFRVtbl *v13; // edi
   void (__thiscall *InitializeComponent)(BaseFormComponent *); // ebx
-  void *AnimData; // eax
-  void (__thiscall *v19)(BaseFormComponent *); // ebx
-  BSExtraDataVtbl *v20; // eax
-  int v21; // [esp-8h] [ebp-38h]
+  ActorAnimData *AnimDataByPerspective; // eax
+  void (__thiscall *v16)(BaseFormComponent *); // ebx
+  ActorAnimData *AnimData; // eax
+  int v18; // [esp-8h] [ebp-38h]
   BSStringT Src; // [esp+1Ch] [ebp-14h] BYREF
-  unsigned int v24; // [esp+2Ch] [ebp-4h]
+  unsigned int v21; // [esp+2Ch] [ebp-4h]
+  int v22; // [esp+38h] [ebp+8h]
 
-  v6 = a1;
-  if ( a1->member.niNode )
+  v3 = this; /*0x4e1927*/
+  if ( this->member.niNode ) /*0x4e192d*/
   {
-    v7 = (char *)((int (__thiscall *)(TESObjectREFR *))a1->vtbl->Unk_5A)(a1);
-    v8 = 0;
-    if ( v6->vtbl->IsActor(v6) )
-      v8 = v6;
-    if ( v6 == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+    SkinInfoByPerspective = this->vtbl->GetActiveSkinInfo(this); /*0x4e1943*/
+    v5 = 0; /*0x4e1950*/
+    if ( v3->vtbl->IsActor(v3) ) /*0x4e1952*/
+      v5 = v3; /*0x4e1958*/
+    if ( v3 == (TESObjectREFR *)reference ) /*0x4e1964*/
     {
-      if ( v7 )
-        sub_479780(v7, st5_0, st6_0, a2, a5);
-      v7 = (char *)sub_6600D0(TESDataHandler_g_PlayerRef, TESDataHandler_g_PlayerRef->isThirdPerson);
+      if ( SkinInfoByPerspective ) /*0x4e1968*/
+        ActorSkinInfo_SetEquippedWeapon3D(SkinInfoByPerspective, weapon); /*0x4e196d*/
+      SkinInfoByPerspective = Actor_GetSkinInfoByPerspective((Actor *)reference, reference->isThirdPerson); /*0x4e198c*/
     }
-    if ( v7 )
+    if ( SkinInfoByPerspective ) /*0x4e1990*/
     {
-      sub_479780(v7, st5_0, st6_0, a2, a5);
+      ActorSkinInfo_SetEquippedWeapon3D(SkinInfoByPerspective, weapon); /*0x4e1995*/
     }
-    else if ( a5 )
+    else if ( weapon ) /*0x4e19a1*/
     {
-      if ( a5 != 0xFFFFFFD0 )
+      if ( weapon != (TESForm *)0xFFFFFFD0 ) /*0x4e19ac*/
       {
-        v9 = 9;
-        if ( *(_BYTE *)(a5 + 0x90) == 5 )
-          v9 = 0xE;
-        v21 = v9;
-        v10 = (const char *)(*(int (__thiscall **)(int))(*(_DWORD *)(a5 + 0x30) + 0x14))(a5 + 0x30);
-        v11 = (NiObjectNET *)sub_479450(v10, v21, v6, 0);
-        v12 = v11;
-        if ( *(_BYTE *)(a5 + 0x90) == 5 )
+        v6 = 9; /*0x4e19b9*/
+        if ( LOBYTE(weapon[6].vtbl) == 5 ) /*0x4e19be*/
+          v6 = 0xE; /*0x4e19c0*/
+        v18 = v6; /*0x4e19c8*/
+        v7 = (const char *)((int (__thiscall *)(TESForm *))weapon[2].vtbl->Unk_05)(&weapon[2]); /*0x4e19ce*/
+        CloneAndAttachModel3D = (NiObjectNET *)Actor_LoadCloneAndAttachModel3D(v7, v18, v3, 0); /*0x4e19d1*/
+        v9 = CloneAndAttachModel3D; /*0x4e19e0*/
+        if ( LOBYTE(weapon[6].vtbl) == 5 ) /*0x4e19e2*/
         {
-          NiObjectNET_SetName(v11, aBow);
+          NiObjectNET_SetName(CloneAndAttachModel3D, aBow); /*0x4e19eb*/
         }
         else
         {
-          Src.m_data = 0;
-          Src.m_dataLen = 0;
-          Src.m_bufLen = 0;
-          v24 = 0;
-          BSStringT_Static_Format(&Src, "%s (%08X)", *(const char **)off_B065AC, *(_DWORD *)(a5 + 0xC));
-          NiObjectNET_SetName(v12, Src.m_data);
-          v24 = 0xFFFFFFFF;
-          FormHeapFree((unsigned int)Src.m_data);
+          Src.m_data = 0; /*0x4e19f4*/
+          Src.m_dataLen = 0; /*0x4e19f8*/
+          Src.m_bufLen = 0; /*0x4e19fd*/
+          v21 = 0; /*0x4e1a02*/
+          BSStringT_Static_Format(&Src, "%s (%08X)", *(const char **)off_B065AC, weapon->member.refID); /*0x4e1a1a*/
+          NiObjectNET_SetName(v9, Src.m_data); /*0x4e1a29*/
+          v21 = 0xFFFFFFFF; /*0x4e1a33*/
+          FormHeapFree((unsigned int)Src.m_data); /*0x4e1a3b*/
         }
-        if ( !sub_45A500(SaveLoad_CurrentSavegame) )
+        if ( !sub_45A500(g_TESSaveLoadGame) ) /*0x4e1a49*/
         {
-          if ( !Actor_IsWeaponOut(v8)
-            && !(*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))v8[1].vtbl->super.super.InitializeComponent + 0x49))(
-                  v8[1].vtbl,
+          if ( !Actor_IsWeaponOut(v5) /*0x4e1a6e*/
+            && !(*((int (__thiscall **)(TESObjectREFRVtbl *, _DWORD))v5[1].vtbl->super.super.InitializeComponent + 0x49))(
+                  v5[1].vtbl,
                   0) )
           {
-            (*((void (__thiscall **)(TESObjectREFRVtbl *, int))v8[1].vtbl->super.super.InitializeComponent + 0xC2))(
-              v8[1].vtbl,
+            (*((void (__thiscall **)(TESObjectREFRVtbl *, int))v5[1].vtbl->super.super.InitializeComponent + 0xC2))( /*0x4e1a86*/
+              v5[1].vtbl,
               1);
           }
-          vtbl = v8[1].vtbl;
-          v14 = (void (__thiscall **)(TESObjectREFRVtbl *, int, _DWORD, int))((char *)vtbl->super.super.InitializeComponent
-                                                                            + 0x150);
-          v15 = ((int (__thiscall *)(TESObjectREFR *, TESObjectREFR *))v8->vtbl->GetAnimData)(v8, v8);
-          (*v14)(vtbl, a6, 0, v15);
-          v6 = a1;
+          vtbl = v5[1].vtbl; /*0x4e1a88*/
+          v11 = (void (__thiscall *)(BaseFormComponent *))((char *)vtbl->super.super.InitializeComponent + 0x150); /*0x4e1a99*/
+          v12 = ((int (__thiscall *)(TESObjectREFR *, TESObjectREFR *))v5->vtbl->GetAnimData)(v5, v5); /*0x4e1a9f*/
+          (*(void (__thiscall **)(TESObjectREFRVtbl *, int, _DWORD, int))v11)(vtbl, v22, 0, v12); /*0x4e1aad*/
+          v3 = this; /*0x4e1aaf*/
         }
       }
     }
-    if ( v8 )
+    if ( v5 ) /*0x4e1ab5*/
     {
-      if ( *(_BYTE *)(a5 + 0x90) == 5 )
-        sub_5E13D0(v8, 1);
-      v16 = v8[1].vtbl;
-      if ( v16 )
+      if ( LOBYTE(weapon[6].vtbl) == 5 ) /*0x4e1abe*/
+        sub_5E13D0(v5, 1); /*0x4e1ac4*/
+      v13 = v5[1].vtbl; /*0x4e1ac9*/
+      if ( v13 ) /*0x4e1ace*/
       {
-        if ( *(_BYTE *)(a5 + 0x90) == 5 )
+        if ( LOBYTE(weapon[6].vtbl) == 5 ) /*0x4e1ad7*/
         {
-          if ( v6 == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+          if ( v3 == (TESObjectREFR *)reference ) /*0x4e1ae1*/
           {
-            InitializeComponent = v16->super.super.InitializeComponent;
-            AnimData = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1);
-            (*((void (__thiscall **)(TESObjectREFRVtbl *, void *))InitializeComponent + 0x45))(v16, AnimData);
+            InitializeComponent = v13->super.super.InitializeComponent; /*0x4e1ae3*/
+            AnimDataByPerspective = PlayerCharacter_GetAnimDataByPerspective(reference, 1); /*0x4e1ae7*/
+            (*((void (__thiscall **)(TESObjectREFRVtbl *, ActorAnimData *))InitializeComponent + 0x45))( /*0x4e1af5*/
+              v13,
+              AnimDataByPerspective);
           }
-          v19 = v16->super.super.InitializeComponent;
-          v20 = TESObjectREFR_GetAnimData((Actor *)v6);
-          (*((void (__thiscall **)(TESObjectREFRVtbl *, BSExtraDataVtbl *))v19 + 0x45))(v16, v20);
+          v16 = v13->super.super.InitializeComponent; /*0x4e1af7*/
+          AnimData = TESObjectREFR_GetAnimData(v3); /*0x4e1afb*/
+          (*((void (__thiscall **)(TESObjectREFRVtbl *, ActorAnimData *))v16 + 0x45))(v13, AnimData); /*0x4e1b09*/
         }
       }
-      sub_5EA1A0((int)v8, (int)v6, (_DWORD *)v6->member.niNode);
-      sub_5EE1B0((Actor *)v8, a2);
+      sub_5EA1A0((int)v5, (int)v3, (_DWORD *)v3->member.niNode); /*0x4e1b11*/
+      sub_5EE1B0((Actor *)v5, v2); /*0x4e1b18*/
     }
   }
 }

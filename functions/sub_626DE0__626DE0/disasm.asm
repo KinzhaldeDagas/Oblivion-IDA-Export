@@ -39,7 +39,7 @@
 0x626E3E: mov     edx, [eax]
 0x626E40: push    eax
 0x626E41: mov     [esi], edx
-0x626E43: call    FormHeapFree
+0x626E43: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x626E48: add     esp, 4
 0x626E4B: jmp     short loc_626E53
 0x626E4D: mov     dword ptr [esi], 0

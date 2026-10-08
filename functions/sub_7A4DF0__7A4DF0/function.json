@@ -1,19 +1,36 @@
 {
-  "callees_count": 42,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 28,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
-  "display_name": "sub_7A4DF0",
+  "chunks": [
+    [
+      "0x7A4DF0",
+      "0x7A50A9"
+    ],
+    [
+      "0x9CCB00",
+      "0x9CCB5F"
+    ]
+  ],
+  "chunks_sha256": "7780108b9824cb1dc49930dc7a78cdff3b777c2d41a4bf4b91e2f66a3ecebe36",
+  "comment_regular": "2026-05-21 SpeedTreeOBSE billboard-leaf core/tail load pass: Oblivion CTreeEngine::Parse consumes core 1000..1001, optionally consumes post-core 7000 leaf clusters, and those clusters may include stock 7004 billboard-leaf records parsed by 0x7A8250. Full-file compatibility fixtures now cover known-family supplemental tails after empty 7000 clusters and after stock 7004 payloads; the compatibility layer must sanitize only after that post-core cursor point.",
+  "comment_repeatable": "2026-05-21 SpeedTreeOBSE billboard-leaf core/tail load pass: Oblivion CTreeEngine::Parse consumes core 1000..1001, optionally consumes post-core 7000 leaf clusters, and those clusters may include stock 7004 billboard-leaf records parsed by 0x7A8250. Full-file compatibility fixtures now cover known-family supplemental tails after empty 7000 clusters and after stock 7004 payloads; the compatibility layer must sanitize only after that post-core cursor point.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 27,
+  "display_name": "OB_CTreeEngine_Parse_010201A0",
   "end_ea": "0x7A50A9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A4DF0",
+  "name": "OB_CTreeEngine_Parse_010201A0",
   "segment": ".text",
   "sha256": "a55123d1334f184ce1ea26db42d2ed4ffa5b4fc796f34048fa85d0175b367025",
   "size": 697,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A4DF0",
-  "type": "char __userpurge@<al>(float *this@<ecx>, int@<edi>, unsigned int *)",
-  "xrefs_from_count": 233,
+  "total_chunk_size": 792,
+  "type": "bool __thiscall(OB_CTreeEngine_010201A0 *this, OB_CTreeFileAccess_010201A0 *file)",
+  "xrefs_from_count": 277,
   "xrefs_to_count": 1
 }

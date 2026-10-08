@@ -1,1 +1,1 @@
-NiParticleMeshesData
+struct NiParticleMeshesData;

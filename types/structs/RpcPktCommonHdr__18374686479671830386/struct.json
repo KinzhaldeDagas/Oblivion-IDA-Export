@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "RpcPktCommonHdr",
+  "definition": "struct RpcPktCommonHdr\n{\nunsigned __int8 rpc_ver;\nunsigned __int8 rpc_ver_minor;\nunsigned __int8 ptype;\nunsigned __int8 flags;\nunsigned __int8 drep[4];\nunsigned __int16 frag_len;\nunsigned __int16 auth_len;\nunsigned int call_id;\n}\n",
   "id": 18374686479671830386,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rpc_ver",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rpc_ver_minor",
       "offset": 1,
       "offset_hex": "0x1",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ptype",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 3,
       "offset_hex": "0x3",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "drep",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "unsigned __int8[4]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "frag_len",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "auth_len",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 2
+      "offset_hex": "0xA",
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "call_id",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "unsigned int"
     }
   ],
   "name": "RpcPktCommonHdr",
+  "ordinal": 3055,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

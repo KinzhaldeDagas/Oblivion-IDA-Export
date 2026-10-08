@@ -4,3 +4,6 @@
 0x469C87: add     edx, 1
 0x469C8A: test    eax, eax
 0x469C8C: jnz     short TESContainer_GetNthForm___ContentLoop
+0x469C93: mov     eax, [eax]
+0x469C95: mov     eax, [eax+4]
+0x469C98: retn    4

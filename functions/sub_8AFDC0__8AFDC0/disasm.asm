@@ -1,4 +1,4 @@
-0x8AFDC0: push    ebp
+0x8AFDC0: push    ebp; Verified: constructs a vertical Havok capsule shape from trunkLength and radius, using trunkLength for endpoint height and radius for capsule radius, then wraps it in the Havok shape container. Called by BSTreeModel_CreateGeometry and CreateArt; it is Oblivion's helper and should not be replaced with Fallout's CreateTree implementation.
 0x8AFDC1: mov     ebp, esp
 0x8AFDC3: and     esp, 0FFFFFFF0h
 0x8AFDC6: push    0FFFFFFFFh
@@ -18,19 +18,19 @@
 0x8AFDF9: mov     large fs:0, eax
 0x8AFDFF: fldz
 0x8AFE01: xor     edi, edi
-0x8AFE03: fst     [esp+144h+var_114]
-0x8AFE07: mov     [esp+144h+var_130], edi
-0x8AFE0B: fst     [esp+144h+var_104]
-0x8AFE0F: fld     [ebp+arg_4]
+0x8AFE03: fst     [esp+144h+info.endpointA+0Ch]
+0x8AFE07: mov     [esp+144h+info.material], edi
+0x8AFE0B: fst     [esp+144h+info.endpointB+0Ch]
+0x8AFE0F: fld     [ebp+radius]
 0x8AFE12: fld     st
 0x8AFE14: fadd    st, st(1)
-0x8AFE16: fld     [ebp+arg_0]
+0x8AFE16: fld     [ebp+trunkLength]
 0x8AFE19: fcomp   st(1)
 0x8AFE1B: fnstsw  ax
 0x8AFE1D: test    ah, 41h
 0x8AFE20: jp      short loc_8AFE2D
 0x8AFE22: fadd    qword ptr ds:0A2F928h
-0x8AFE28: fstp    [ebp+arg_0]
+0x8AFE28: fstp    [ebp+trunkLength]
 0x8AFE2B: jmp     short loc_8AFE2F
 0x8AFE2D: fstp    st
 0x8AFE2F: fld     st
@@ -38,32 +38,32 @@
 0x8AFE33: fld     qword ptr ds:0A39088h
 0x8AFE39: fmul    st(1), st
 0x8AFE3B: fxch    st(1)
-0x8AFE3D: fstp    [esp+148h+var_12C]
+0x8AFE3D: fstp    [esp+148h+info.radius]
 0x8AFE41: fxch    st(2)
-0x8AFE43: fst     [esp+148h+var_120]
-0x8AFE47: fst     [esp+148h+var_11C]
-0x8AFE4B: fld     [ebp+arg_0]
+0x8AFE43: fst     [esp+148h+info.endpointA]
+0x8AFE47: fst     [esp+148h+info.endpointA+4]
+0x8AFE4B: fld     [ebp+trunkLength]
 0x8AFE4E: fsubrp  st(2), st
 0x8AFE50: fxch    st(1)
 0x8AFE52: fstp    [esp+148h+var_134]
 0x8AFE56: fld     [esp+148h+var_134]
 0x8AFE5A: fmulp   st(2), st
 0x8AFE5C: fxch    st(1)
-0x8AFE5E: fstp    [esp+148h+var_118]
-0x8AFE62: fst     [esp+148h+var_110]
-0x8AFE66: fstp    [esp+148h+var_10C]
-0x8AFE6A: fld     [esp+148h+var_12C]
-0x8AFE6E: fstp    [esp+148h+var_108]
+0x8AFE5E: fstp    [esp+148h+info.endpointA+8]
+0x8AFE62: fst     [esp+148h+info.endpointB]
+0x8AFE66: fstp    [esp+148h+info.endpointB+4]
+0x8AFE6A: fld     [esp+148h+info.radius]
+0x8AFE6E: fstp    [esp+148h+info.endpointB+8]
 0x8AFE72: call    FormHeapAlloc
 0x8AFE77: add     esp, 4
 0x8AFE7A: mov     [esp+144h+var_134], eax
 0x8AFE7E: cmp     eax, edi
 0x8AFE80: mov     [esp+144h+var_4], edi
 0x8AFE87: jz      short loc_8AFE99
-0x8AFE89: lea     ecx, [esp+144h+var_130]
-0x8AFE8D: push    ecx
-0x8AFE8E: mov     ecx, eax
-0x8AFE90: call    sub_563BB0
+0x8AFE89: lea     ecx, [esp+144h+info]
+0x8AFE8D: push    ecx; info
+0x8AFE8E: mov     ecx, eax; self
+0x8AFE90: call    OB_bhkCapsuleShape_CtorFromCinfo_010201A0; 2026-05-18 73000 consumer decode: constructs bhkCapsuleShape from radius and two endpoints in cinfo. Stock 0x565510 makes endpoints vertical/+Z; sidecar rotation for capsules would need rotated endpoints or a transform-wrapper replacement.
 0x8AFE95: mov     esi, eax
 0x8AFE97: jmp     short loc_8AFE9B
 0x8AFE99: xor     esi, esi
@@ -133,3 +133,26 @@
 0x8AFF9B: mov     esp, ebp
 0x8AFF9D: pop     ebp
 0x8AFF9E: retn
+0x9D6D40: mov     eax, [ebp+var_134]
+0x9D6D46: push    eax
+0x9D6D47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D6D4C: pop     ecx
+0x9D6D4D: retn
+0x9D6D4E: lea     ecx, [ebp+var_100]
+0x9D6D54: jmp     sub_8A5090
+0x9D6D59: mov     eax, [ebp+var_134]
+0x9D6D5F: push    eax
+0x9D6D60: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D6D65: pop     ecx
+0x9D6D66: retn
+0x9D6D67: mov     edx, [esp-4+radius]
+0x9D6D6B: lea     eax, [edx-134h]
+0x9D6D71: mov     ecx, [edx-138h]
+0x9D6D77: xor     ecx, eax
+0x9D6D79: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6D7E: add     eax, 8
+0x9D6D81: mov     ecx, [edx-8]
+0x9D6D84: xor     ecx, eax
+0x9D6D86: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6D8B: mov     eax, offset stru_AFEA70
+0x9D6D90: jmp     ___CxxFrameHandler3

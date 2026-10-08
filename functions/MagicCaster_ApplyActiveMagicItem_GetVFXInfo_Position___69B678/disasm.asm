@@ -12,7 +12,7 @@
 0x69B69A: test    eax, eax
 0x69B69C: jz      short loc_69B6A5
 0x69B69E: add     eax, 88h ; 'ˆ'
-0x69B6A3: jmp     short MagicCaster_ApplyActiveMagicItem___AOE_VFX?
+0x69B6A3: jmp     short MagicCaster_ApplyActiveMagicItem___AOE_VFX?; Magic caster active-magic-item area-effect path. Creates area VFX and plays SpecialIdle_AreaEffect through controller-manager helper.
 0x69B6A5: mov     edx, [edi]
 0x69B6A7: mov     eax, [edx+174h]
 0x69B6AD: mov     ecx, edi

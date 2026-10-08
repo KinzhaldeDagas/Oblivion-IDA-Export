@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59EAA0",
-    "line": "fld1",
+    "line": "fld1; Starts the first DialogueResponse of an externally supplied DialogueItem; if the item has no responses, returns to the normal topic-list advance path.",
     "mnemonic": "fld1",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x59EAA7",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -43,19 +43,19 @@
   },
   {
     "ea": "0x59EAAD",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59EAB2",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EAB7",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x59EAC3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EAC5",
-    "line": "call    sub_6B7BA0",
+    "line": "call    DialogueItem__FirstResponse",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x59EAD2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EAD4",
-    "line": "call    sub_6B7C20",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,31 +217,31 @@
   },
   {
     "ea": "0x59EB17",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+item], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x59EB1B",
-    "line": "fild    [esp+0Ch+arg_0]",
+    "line": "fild    [esp+0Ch+item]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x59EB1F",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59EB22",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59EB27",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x59EB3F",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x59EB45",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59EB4A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,61 +349,61 @@
   },
   {
     "ea": "0x59EB5E",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59EB61",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59EB66",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EB6B",
-    "line": "push    1",
+    "line": "push    1; enableActions",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59EB6D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EB6F",
-    "line": "call    sub_59E2B0",
+    "line": "call    DialogMenu__RefreshActionAvailability; Refreshes DialogMenu topic/persuasion/service tile availability from the current speaker and package/service flags. Called when entering or leaving response display; it does not run TESTopicInfo results.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59EB74",
-    "line": "push    0",
+    "line": "push    0; clearAll",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59EB76",
-    "line": "push    1",
+    "line": "push    1; processCurrentInfo",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x59EB78",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x59EB7A",
-    "line": "call    sub_59EA10",
+    "line": "call    DialogMenu__AdvanceTopicList; DialogMenu wrapper around LoadNextTopicList. Every native call site passes clearAll=false; processCurrentInfo is false only for the path that refreshes choices without committing the current INFO.",
     "mnemonic": "call",
     "size": 5
   },

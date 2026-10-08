@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x79AA70",
-    "line": "push    ecx",
+    "line": "push    ecx; Thin backward-copy trampoline for overlap-safe initialized SFrondVertex movement; delegates to 0x79A890.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA71",
-    "line": "mov     ecx, [esp+4+arg_8]",
+    "line": "mov     ecx, [esp+4+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AA75",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x79AA81",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationLast]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x79AA86",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,31 +61,31 @@
   },
   {
     "ea": "0x79AA8B",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AA8F",
-    "line": "push    eax",
+    "line": "push    eax; destinationLast",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA90",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA91",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AA92",
-    "line": "call    sub_79A890",
+    "line": "call    OB_SFrondVertex_CopyBackward_010201A0; Overlap-safe backward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into the range ending at destinationLast.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,56 +1,60 @@
-int *__thiscall sub_7A4C60(int *this, int *a2)
+// Leaf-texture vector deep copy assignment: clear on empty source, reuse initialized/capacity ranges when possible, otherwise destroy/free and allocate exact source size.
+OB_stVector_SIdvLeafTexture_010201A0 *__thiscall OB_stVector_SIdvLeafTexture_CopyAssign_010201A0(
+        OB_stVector_SIdvLeafTexture_010201A0 *this,
+        const OB_stVector_SIdvLeafTexture_010201A0 *source)
 {
-  int v3; // eax
-  unsigned int v4; // ecx
-  int v6; // ebx
-  unsigned int v7; // eax
-  int v8; // eax
-  int v9; // eax
-  unsigned int v10; // eax
-  int v11; // edi
-  char *v12; // eax
+  OB_SIdvLeafTexture_010201A0 *begin; // eax
+  unsigned int sourceSize; // ecx
+  OB_SIdvLeafTexture_010201A0 *destinationBegin; // ebx
+  unsigned int destinationSize; // eax
+  OB_SIdvLeafTexture_010201A0 *v8; // eax
+  OB_SIdvLeafTexture_010201A0 *v9; // eax
+  unsigned int destinationCapacity; // eax
+  const OB_SIdvLeafTexture_010201A0 *sourceSplit; // edi
+  unsigned int sourceCount; // eax
 
-  if ( this == a2 )
-    return this;
-  v3 = a2[1];
-  if ( !v3 || (v4 = (a2[2] - v3) / 0x54) == 0 )
+  if ( this == source ) /*0x7a4c6a*/
+    return this; /*0x7a4ddb*/
+  begin = source->begin; /*0x7a4c70*/
+  if ( !begin || (sourceSize = source->end - begin) == 0 ) /*0x7a4c90*/
   {
-    sub_7A4C20(this);
-    return this;
+    OB_stVector_SIdvLeafTexture_Clear_010201A0(this); /*0x7a4c94*/
+    return this; /*0x7a4c9e*/
   }
-  v6 = *(this + 1);
-  if ( v6 )
-    v7 = (*(this + 2) - v6) / 0x54;
+  destinationBegin = this->begin; /*0x7a4ca2*/
+  if ( destinationBegin ) /*0x7a4ca7*/
+    destinationSize = this->end - destinationBegin; /*0x7a4cc1*/
   else
-    v7 = 0;
-  if ( v4 > v7 )
+    destinationSize = 0; /*0x7a4ca9*/
+  if ( sourceSize > destinationSize ) /*0x7a4cc5*/
   {
-    if ( v6 )
-      v10 = (*(this + 3) - v6) / 0x54;
+    if ( destinationBegin ) /*0x7a4d3c*/
+      destinationCapacity = this->capacityEnd - destinationBegin; /*0x7a4d56*/
     else
-      v10 = 0;
-    if ( v4 <= v10 )
+      destinationCapacity = 0; /*0x7a4d3e*/
+    if ( sourceSize <= destinationCapacity ) /*0x7a4d5a*/
     {
-      v11 = a2[1] + 0x54 * sub_7876A0(this);
-      sub_7A45C0(a2[1], v11, v6);
-      sub_7A4BF0(v11, a2[2], (char *)*(this + 2));
+      sourceSplit = &source->begin[OB_stVector_SIdvLeafTexture_Size_010201A0(this)]; /*0x7a4d6b*/
+      OB_stVector_SIdvLeafTexture_CopyAssignRangeForwardThunk_010201A0(source->begin, sourceSplit, destinationBegin); /*0x7a4d70*/
+      this->end = OB_stVector_SIdvLeafTexture_UninitializedCopyThunk_010201A0(sourceSplit, source->end, this->end); /*0x7a4d89*/
+      return this; /*0x7a4d91*/
     }
-    if ( v6 )
+    if ( destinationBegin ) /*0x7a4d96*/
     {
-      sub_7A45A0(v6, *(this + 2));
-      FormHeapFree(*(this + 1));
+      OB_stVector_SIdvLeafTexture_DestroyRangeThunk_010201A0(destinationBegin, this->end); /*0x7a4d9f*/
+      FormHeapFree((unsigned int)this->begin); /*0x7a4da8*/
     }
-    v12 = (char *)sub_7876A0(a2);
-    if ( sub_7A3230(this, v12) )
-      sub_7A4BF0(a2[1], a2[2], (char *)*(this + 1));
-    return this;
+    sourceCount = OB_stVector_SIdvLeafTexture_Size_010201A0(source); /*0x7a4db2*/
+    if ( OB_stVector_SIdvLeafTexture_AllocateStorage_010201A0(this, sourceCount) ) /*0x7a4dba*/
+      this->end = OB_stVector_SIdvLeafTexture_UninitializedCopyThunk_010201A0(source->begin, source->end, this->begin); /*0x7a4dd6*/
+    return this; /*0x7a4dd6*/
   }
-  v8 = sub_7A3B80(a2[1], a2[2], v6);
-  sub_7A36B0(v8, *(this + 2));
-  v9 = a2[1];
-  if ( v9 )
-    *(this + 2) = *(this + 1) + 0x54 * ((a2[2] - v9) / 0x54);
+  v8 = OB_SIdvLeafTexture_CopyAssignRangeForward_010201A0(source->begin, source->end, destinationBegin); /*0x7a4ce1*/
+  OB_SIdvLeafTexture_DestroyRange_010201A0(v8, this->end); /*0x7a4cf1*/
+  v9 = source->begin; /*0x7a4cf6*/
+  if ( v9 ) /*0x7a4cfe*/
+    this->end = &this->begin[source->end - v9]; /*0x7a4d2f*/
   else
-    *(this + 2) = *(this + 1);
-  return this;
+    this->end = this->begin; /*0x7a4d07*/
+  return this; /*0x7a4c9c*/
 }

@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 51,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 117,
+  "chunks": [
+    [
+      "0x5E0380",
+      "0x5E0396"
+    ]
+  ],
+  "chunks_sha256": "d4859757b675683df6b6bbcc249d621b72a19b4282e28db9e9b463f4c58cc09f",
+  "comment_regular": "Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
+  "comment_repeatable": "Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5E0380",
+  "display_name": "Actor::GetCurrentPackage",
   "end_ea": "0x5E0396",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5E0380",
+  "name": "Actor::GetCurrentPackage",
   "segment": ".text",
   "sha256": "d4859757b675683df6b6bbcc249d621b72a19b4282e28db9e9b463f4c58cc09f",
   "size": 22,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E0380",
+  "total_chunk_size": 22,
   "type": "TESPackage *__thiscall(Actor *this)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 117

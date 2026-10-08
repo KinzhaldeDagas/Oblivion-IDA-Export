@@ -24,7 +24,7 @@
 0x8B90FC: lea     eax, [esp+30h+var_20]
 0x8B9100: push    eax
 0x8B9101: mov     ecx, edi
-0x8B9103: call    sub_8B1DD0
+0x8B9103: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8B9108: mov     ecx, [esp+30h+var_4]
 0x8B910C: mov     eax, edi
 0x8B910E: pop     edi

@@ -88,7 +88,7 @@
 0x6120B9: mov     ecx, esi
 0x6120BB: call    ContainerEntryExtraData_DestroyDataTable
 0x6120C0: push    esi
-0x6120C1: call    FormHeapFree
+0x6120C1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6120C6: add     esp, 4
 0x6120C9: add     ebx, 1
 0x6120CC: cmp     ebx, 10h

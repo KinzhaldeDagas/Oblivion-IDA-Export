@@ -5,7 +5,7 @@
 0x574B72: lea     ebp, [eax+edx*8+128h]
 0x574B79: fld     dword ptr [ebp+30h]
 0x574B7C: fadd    dword ptr [ebp+24h]
-0x574B7F: call    Double_To_SInt32
+0x574B7F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x574B84: add     ebx, eax
 0x574B86: cmp     [esp+arg_14], edi
 0x574B8A: mov     [esp+arg_20], ebx
@@ -28,7 +28,7 @@
 0x574BBD: mov     edx, [esp+arg_1C]
 0x574BC1: mov     eax, [edx+38h]
 0x574BC4: fadd    dword ptr [eax]
-0x574BC6: call    Double_To_SInt32
+0x574BC6: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x574BCB: mov     [esp+arg_10], eax
 0x574BCF: mov     eax, [esp+arg_24]
 0x574BD3: cmp     [esp+arg_C], eax
@@ -117,11 +117,11 @@
 0x574CC3: mov     eax, [esp+arg_1C]
 0x574CC7: mov     ecx, [eax+38h]
 0x574CCA: fadd    dword ptr [ecx]
-0x574CCC: call    Double_To_SInt32
+0x574CCC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x574CD1: fld     dword ptr [ebp+30h]
 0x574CD4: fadd    dword ptr [ebp+24h]
 0x574CD7: mov     [esp+arg_10], eax
-0x574CDB: call    Double_To_SInt32
+0x574CDB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x574CE0: mov     ecx, ebx
 0x574CE2: sub     ecx, eax
 0x574CE4: cmp     [esp+arg_C], ecx
@@ -136,7 +136,7 @@
 0x574D03: mov     [ecx], dl
 0x574D05: mov     eax, [ebp+38h]
 0x574D08: fadd    dword ptr [eax]
-0x574D0A: call    Double_To_SInt32
+0x574D0A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x574D0F: cmp     [esp+arg_C], ebx
 0x574D13: mov     [esp+arg_10], eax
 0x574D17: jg      short loc_574D1D
@@ -185,7 +185,7 @@
 0x574D90: mov     byte ptr [ecx+eax], 0
 0x574D94: mov     eax, [edx+38h]
 0x574D97: fsub    dword ptr [eax]
-0x574D99: call    Double_To_SInt32
+0x574D99: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x574D9E: mov     [esp+arg_10], eax
 0x574DA2: mov     ecx, [esi]
 0x574DA4: cmp     byte ptr [ecx], 0

@@ -4,31 +4,31 @@ bhkNiTriStripsShape *__thiscall bhkNiTriStripsShape::bhkNiTriStripsShape(bhkNiTr
   bhkRefObject *v4; // eax
   bhkRefObject *v5; // esi
 
-  EnterCriticalSection(&stru_BA7C80);
-  CurrentThreadId = GetCurrentThreadId();
-  ++dword_BA7CFC;
-  dword_BA7CF8 = CurrentThreadId;
-  v4 = (bhkRefObject *)FormHeapAlloc(0x14u);
-  v5 = v4;
-  if ( v4 )
+  EnterCriticalSection(&unk_BA7C80); /*0x8c638c*/
+  CurrentThreadId = GetCurrentThreadId(); /*0x8c6392*/
+  ++unk_BA7CFC; /*0x8c639d*/
+  unk_BA7CF8 = CurrentThreadId; /*0x8c63a5*/
+  v4 = (bhkRefObject *)FormHeapAlloc(0x14u); /*0x8c63aa*/
+  v5 = v4; /*0x8c63af*/
+  if ( v4 ) /*0x8c63c0*/
   {
-    bhkRefObject::bhkRefObject(v4);
-    v5->__vftable = (NiObjectVtbl *)&bhkShape::`vftable';
-    v5[1].__vftable = 0;
-    v5[1].members.m_uiRefCount = 0;
-    ++dword_BA7D70;
-    v5->__vftable = (NiObjectVtbl *)&bhkShapeCollection::`vftable';
-    ++dword_BA816C;
-    v5->__vftable = (NiObjectVtbl *)&bhkNiTriStripsShape::`vftable';
-    ++dword_BA812C;
+    bhkRefObject::bhkRefObject(v4); /*0x8c63c4*/
+    v5->__vftable = (NiObjectVtbl *)&bhkShape::`vftable'; /*0x8c63c9*/
+    v5[1].__vftable = 0; /*0x8c63cf*/
+    v5[1].members.m_uiRefCount = 0; /*0x8c63d2*/
+    ++unk_BA7D70; /*0x8c63d5*/
+    v5->__vftable = (NiObjectVtbl *)&bhkShapeCollection::`vftable'; /*0x8c63db*/
+    ++unk_BA816C; /*0x8c63e1*/
+    v5->__vftable = (NiObjectVtbl *)&bhkNiTriStripsShape::`vftable'; /*0x8c63e7*/
+    ++unk_BA812C; /*0x8c63ed*/
   }
   else
   {
-    v5 = 0;
+    v5 = 0; /*0x8c63f5*/
   }
-  (*(void (__thiscall **)(bhkNiTriStripsShape *, bhkRefObject *, int))(*(_DWORD *)this + 0x80))(this, v5, a2);
-  if ( dword_BA7CFC-- == 1 )
-    dword_BA7CF8 = 0;
-  LeaveCriticalSection(&stru_BA7C80);
-  return (bhkNiTriStripsShape *)v5;
+  (*(void (__thiscall **)(bhkNiTriStripsShape *, bhkRefObject *, int))(*(_DWORD *)this + 0x80))(this, v5, a2); /*0x8c640f*/
+  if ( unk_BA7CFC-- == 1 ) /*0x8c6411*/
+    unk_BA7CF8 = 0; /*0x8c6419*/
+  LeaveCriticalSection(&unk_BA7C80); /*0x8c6424*/
+  return (bhkNiTriStripsShape *)v5; /*0x8c642c*/
 }

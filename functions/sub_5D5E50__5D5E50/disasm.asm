@@ -1,4 +1,4 @@
-0x5D5E50: push    0FFFFFFFFh
+0x5D5E50: push    0FFFFFFFFh; Handles SkillsMenu row toggles and accept/back navigation. Multi-select is capped by SkillsMenu+0x44. In class-skill mode it copies selected row AV trait 0xFB0 into the staged ClassMenu array at +0x68, stopping at the cap of seven.
 0x5D5E52: push    offset SEH_5ACE20
 0x5D5E57: mov     eax, large fs:0
 0x5D5E5D: push    eax
@@ -59,9 +59,9 @@
 0x5D5F0E: jz      short loc_5D5F20
 0x5D5F10: fld1
 0x5D5F12: push    ecx
-0x5D5F13: fstp    [esp+2Ch+a2]; a3
-0x5D5F16: push    0FB1h; a2
-0x5D5F1B: call    Tile_SetFloat
+0x5D5F13: fstp    [esp+2Ch+a2]; value
+0x5D5F16: push    0FB1h; propertyCode
+0x5D5F1B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5F20: cmp     dword ptr [esi+3Ch], 3
 0x5D5F24: jnz     short loc_5D5F30
 0x5D5F26: push    0Bh; int
@@ -70,19 +70,19 @@
 0x5D5F30: fld     dword ptr ds:0A379B4h
 0x5D5F36: mov     edi, [esp+28h+arg_4]
 0x5D5F3A: push    ecx
-0x5D5F3B: fstp    [esp+2Ch+a2]; a3
-0x5D5F3E: push    0FB1h; a2
+0x5D5F3B: fstp    [esp+2Ch+a2]; value
+0x5D5F3E: push    0FB1h; propertyCode
 0x5D5F43: mov     ecx, edi; this
-0x5D5F45: call    Tile_SetFloat
+0x5D5F45: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5F4A: push    0FB0h
 0x5D5F4F: mov     ecx, edi
 0x5D5F51: mov     [esi+48h], edi
 0x5D5F54: call    Tile_GetFloat
-0x5D5F59: call    Double_To_SInt32
+0x5D5F59: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D5F5E: push    0FFFFFFFFh
 0x5D5F60: mov     ecx, esi
 0x5D5F62: mov     [esi+40h], eax
-0x5D5F65: call    sub_5D5B40
+0x5D5F65: call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.
 0x5D5F6A: jmp     loc_5D61AE
 0x5D5F6F: mov     edi, [esp+28h+arg_4]
 0x5D5F73: push    0FB1h
@@ -94,33 +94,33 @@
 0x5D5F8A: jp      short loc_5D5FAC
 0x5D5F8C: fld1
 0x5D5F8E: push    ecx
-0x5D5F8F: fstp    [esp+2Ch+a2]; a3
+0x5D5F8F: fstp    [esp+2Ch+a2]; value
 0x5D5F92: mov     ecx, edi; this
-0x5D5F94: push    0FB1h; a2
-0x5D5F99: call    Tile_SetFloat
+0x5D5F94: push    0FB1h; propertyCode
+0x5D5F99: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5F9E: push    0FFFFFFFFh
 0x5D5FA0: mov     ecx, esi
-0x5D5FA2: call    sub_5D5B40
+0x5D5FA2: call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.
 0x5D5FA7: jmp     loc_5D61AE
-0x5D5FAC: mov     ecx, esi
-0x5D5FAE: call    sub_5D5A00
+0x5D5FAC: mov     ecx, esi; this
+0x5D5FAE: call    SkillsMenu_CountSelectedRows; Count native SkillsMenu rows whose selection tile trait 0xFB1 equals 2. Class-major selection uses this count against the configured cap of seven.
 0x5D5FB3: cmp     eax, [esi+44h]
 0x5D5FB6: jge     short loc_5D5FF3
 0x5D5FB8: fld     dword ptr ds:0A379B4h
 0x5D5FBE: push    ecx
-0x5D5FBF: fstp    [esp+2Ch+a2]; a3
-0x5D5FC2: push    0FB1h; a2
+0x5D5FBF: fstp    [esp+2Ch+a2]; value
+0x5D5FC2: push    0FB1h; propertyCode
 0x5D5FC7: mov     ecx, edi; this
-0x5D5FC9: call    Tile_SetFloat
+0x5D5FC9: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D5FCE: push    0FB0h
 0x5D5FD3: mov     ecx, edi
 0x5D5FD5: call    Tile_GetFloat
-0x5D5FDA: call    Double_To_SInt32
+0x5D5FDA: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D5FDF: push    0FFFFFFFFh
 0x5D5FE1: mov     ecx, esi
 0x5D5FE3: mov     [esi+40h], eax
 0x5D5FE6: mov     [esi+48h], edi
-0x5D5FE9: call    sub_5D5B40
+0x5D5FE9: call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.
 0x5D5FEE: jmp     loc_5D61AE
 0x5D5FF3: mov     eax, ds:0B38CF0h
 0x5D5FF8: mov     ecx, ds:0B38620h
@@ -133,7 +133,7 @@
 0x5D600B: add     esp, 14h
 0x5D600E: push    0FFFFFFFFh
 0x5D6010: mov     ecx, esi
-0x5D6012: call    sub_5D5B40
+0x5D6012: call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.
 0x5D6017: jmp     loc_5D61AE
 0x5D601C: jnz     short loc_5D6023
 0x5D601E: add     ecx, 60h ; '`'
@@ -143,7 +143,7 @@
 0x5D6029: mov     edi, [eax+38h]
 0x5D602C: cmp     edi, ebp
 0x5D602E: mov     [esp+28h+arg_4], ecx
-0x5D6032: jz      short loc_5D607E
+0x5D6032: jz      short loc_5D607E; Write selected row actor values in list order into the staged ClassMenu array, stopping at selectionCap. Native class-skill mode sets selectionCap to seven.
 0x5D6034: cmp     ebp, [esi+44h]
 0x5D6037: jge     short loc_5D607E
 0x5D6039: mov     ebx, [edi+8]
@@ -159,7 +159,7 @@
 0x5D605B: push    0FB0h
 0x5D6060: mov     ecx, ebx
 0x5D6062: call    Tile_GetFloat
-0x5D6067: call    Double_To_SInt32
+0x5D6067: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D606C: mov     ecx, [esp+28h+arg_4]
 0x5D6070: mov     [ecx+ebp*4], eax
 0x5D6073: add     ebp, 1
@@ -182,7 +182,7 @@
 0x5D60A8: add     dword ptr [eax], 0FFFFFFFFh
 0x5D60AB: jnz     short loc_5D60D0
 0x5D60AD: mov     ecx, [esi+4Ch]; int
-0x5D60B0: call    sub_584390
+0x5D60B0: call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.
 0x5D60B5: mov     edx, [esi+3Ch]
 0x5D60B8: mov     eax, [esi+4Ch]
 0x5D60BB: mov     ecx, [esi+40h]
@@ -253,7 +253,7 @@
 0x5D619D: mov     edx, [eax+94h]
 0x5D61A3: mov     eax, [esi+40h]
 0x5D61A6: mov     [edx+14h], eax
-0x5D61A9: call    sub_5D5720
+0x5D61A9: call    sub_5D5720; Close SkillsMenu after staging the selection. Oblivion has no subsequent minor-skill selection mode.
 0x5D61AE: mov     ecx, [esp+28h+var_C]
 0x5D61B2: mov     large fs:0, ecx
 0x5D61B9: pop     ecx
@@ -263,3 +263,12 @@
 0x5D61BD: pop     ebx
 0x5D61BE: add     esp, 14h
 0x5D61C1: retn    8
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

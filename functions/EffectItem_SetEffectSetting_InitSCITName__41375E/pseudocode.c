@@ -15,14 +15,14 @@ int __usercall EffectItem_SetEffectSetting_::InitSCITName@<eax>(
   BSStringT *v12; // ecx
   char *m_data; // [esp-8h] [ebp-8h]
 
-  *(_DWORD *)(a1 + 8) = a2;
-  *(_WORD *)(a1 + 0xC) = a2;
-  *(_WORD *)(a1 + 0xE) = a2;
-  *(_DWORD *)(a4 + 0x18) = a1;
-  m_data = EffectSetting_GetName(a3, &a9)->m_data;
-  v12 = (BSStringT *)(*(_DWORD *)(a4 + 0x18) + 8);
-  a12 = a2;
-  BSStringT_Set(v12, m_data, a2);
-  FormHeapFree((unsigned int)a9.m_data);
-  return EffectItem_SetEffectSetting_::InitSCITData(a5, a6, a7, a8, a9.m_data, *(_DWORD *)&a9.m_dataLen, a10, a11, a12);
+  *(_DWORD *)(a1 + 8) = a2; /*0x41375e*/
+  *(_WORD *)(a1 + 0xC) = a2; /*0x413761*/
+  *(_WORD *)(a1 + 0xE) = a2; /*0x413765*/
+  *(_DWORD *)(a4 + 0x18) = a1; /*0x41376d*/
+  m_data = EffectSetting_GetName(a3, &a9)->m_data; /*0x413782*/
+  v12 = (BSStringT *)(*(_DWORD *)(a4 + 0x18) + 8); /*0x413783*/
+  a12 = a2; /*0x413786*/
+  BSStringT_Set(v12, m_data, a2); /*0x41378a*/
+  FormHeapFree((unsigned int)a9.m_data); /*0x413794*/
+  return EffectItem_SetEffectSetting_::InitSCITData(a2, a3, a4, a5);
 }

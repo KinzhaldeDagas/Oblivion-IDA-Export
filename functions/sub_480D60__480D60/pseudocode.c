@@ -7,16 +7,16 @@ unsigned int __cdecl sub_480D60(_WORD *a1, int a2, char a3, char a4, char a5)
   unsigned int v10; // [esp+14h] [ebp-8h]
   int v11; // [esp+18h] [ebp-4h]
 
-  v7 = 0xF;
-  v6[4] = 1;
-  v8 = 0;
-  v9 = a2;
-  v10 = 0xFFFFFFFF;
-  v11 = a3 != 0;
-  if ( a4 )
-    v11 |= 2u;
-  if ( a5 )
-    v11 |= 4u;
-  sub_88A7D0(a1, (int)v6, (void (__cdecl *)(int, int))sub_480CB0);
-  return v10;
+  v7 = 0xF; /*0x480d72*/
+  v6[4] = 1; /*0x480d7a*/
+  v8 = 0; /*0x480d7e*/
+  v9 = a2; /*0x480d82*/
+  v10 = 0xFFFFFFFF; /*0x480d86*/
+  v11 = a3 != 0; /*0x480d94*/
+  if ( a4 ) /*0x480d9c*/
+    v11 |= 2u; /*0x480d9e*/
+  if ( a5 ) /*0x480da7*/
+    v11 |= 4u; /*0x480da9*/
+  sub_88A7D0(a1, (int)v6, (void (__cdecl *)(int, int))sub_480CB0); /*0x480dbd*/
+  return v10; /*0x480dd0*/
 }

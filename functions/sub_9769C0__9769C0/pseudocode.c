@@ -1,9 +1,9 @@
 int __thiscall sub_9769C0(int this, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
 {
-  if ( this == a2 )
-    return 0;
+  if ( this == a2 ) /*0x9769c6*/
+    return 0; /*0x9769c8*/
   else
-    return (*(int (__thiscall **)(_DWORD, _DWORD, int, int, int, int, int, int, _DWORD, _DWORD, int))(**(_DWORD **)(this + 8) + 0xC))(
+    return (*(int (__thiscall **)(_DWORD, _DWORD, int, int, int, int, int, int, _DWORD, _DWORD, int))(**(_DWORD **)(this + 8) + 0xC))( /*0x976a09*/
              *(_DWORD *)(this + 8),
              *(_DWORD *)(a2 + 8),
              a3,

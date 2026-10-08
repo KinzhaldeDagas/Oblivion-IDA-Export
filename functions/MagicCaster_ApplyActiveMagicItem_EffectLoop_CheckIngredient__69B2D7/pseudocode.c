@@ -1,5 +1,5 @@
 int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckIngredient@<eax>(
-        int a1@<edi>,
+        _DWORD *a1@<edi>,
         int ebp0@<ebp>,
         int esi0@<esi>,
         TESObjectREFR *ebx0@<ebx>,
@@ -39,12 +39,12 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckIngredient@<ea
   int v36; // eax
   int v37; // eax
 
-  v36 = (*(int (__thiscall **)(int))(*(_DWORD *)esi0 + 0x30))(esi0);
-  v37 = (*(int (__thiscall **)(int))(*(_DWORD *)v36 + 0x18))(v36);
-  if ( !v37 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Spell();
-  if ( v37 != 8 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckRange(
+  v36 = (*(int (__thiscall **)(int))(*(_DWORD *)esi0 + 0x30))(esi0); /*0x69b2de*/
+  v37 = (*(int (__thiscall **)(int))(*(_DWORD *)v36 + 0x18))(v36); /*0x69b2e7*/
+  if ( !v37 ) /*0x69b2eb*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_Spell( /*0x69b2eb*/
+             a1,
+             esi0,
              a5,
              a6,
              a7,
@@ -56,13 +56,46 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckIngredient@<ea
              a13,
              a14,
              a15,
-             LODWORD(a16),
+             SLODWORD(a16),
              a17,
              a18);
-  if ( a20 && (*(_BYTE *)(a20 + 0x7C) & 2) != 0 )
-    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_EdibleIngredient();
+  if ( v37 != 8 ) /*0x69b2f4*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_CheckRange( /*0x69b2f4*/
+             ebp0,
+             (int)a1,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             SLODWORD(a16),
+             a17,
+             a18);
+  if ( a20 && (*(_BYTE *)(a20 + 0x7C) & 2) != 0 ) /*0x69b306*/
+    return MagicCaster_ApplyActiveMagicItem_::EffectLoop_EdibleIngredient( /*0x69b307*/
+             (int)a1,
+             a5,
+             a6,
+             a7,
+             a8,
+             a9,
+             a10,
+             a11,
+             a12,
+             a13,
+             a14,
+             a15,
+             SLODWORD(a16),
+             a17,
+             a18);
   return MagicCaster_ApplyActiveMagicItem_::EffectLoop_InedibleIngredient(
-           a1,
+           (int)a1,
            ebp0,
            esi0,
            ebx0,

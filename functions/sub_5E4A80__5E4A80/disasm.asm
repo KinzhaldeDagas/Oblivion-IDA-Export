@@ -2,7 +2,7 @@
 0x5E4A81: mov     ebx, ecx
 0x5E4A83: cmp     ebx, ds:0B333C4h
 0x5E4A89: jnz     short loc_5E4A98
-0x5E4A8B: call    GetGodMode
+0x5E4A8B: call    GetGodMode; Returns g_godModeEnabled (0x00B3BB06).
 0x5E4A90: test    al, al
 0x5E4A92: jz      short loc_5E4A98
 0x5E4A94: xor     eax, eax

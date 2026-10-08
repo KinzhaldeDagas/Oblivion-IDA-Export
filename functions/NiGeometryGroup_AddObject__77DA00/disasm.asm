@@ -15,7 +15,7 @@
 0x77DA26: test    eax, eax
 0x77DA28: jz      short loc_77DA35
 0x77DA2A: mov     ecx, eax
-0x77DA2C: call    NiGeometryBufferData__NiGeometryBufferData
+0x77DA2C: call    NiGeometryBufferData__NiGeometryBufferData; Pass225: NiGeometryBufferData constructor for 0x50-byte screen-texture buffer cache.
 0x77DA31: mov     esi, eax
 0x77DA33: jmp     short loc_77DA37
 0x77DA35: xor     esi, esi
@@ -34,7 +34,7 @@
 0x77DA5F: test    eax, eax
 0x77DA61: jz      short loc_77DA6E
 0x77DA63: mov     ecx, eax
-0x77DA65: call    NiGeometryBufferData__NiGeometryBufferData
+0x77DA65: call    NiGeometryBufferData__NiGeometryBufferData; Pass225: NiGeometryBufferData constructor for 0x50-byte screen-texture buffer cache.
 0x77DA6A: mov     esi, eax
 0x77DA6C: jmp     short loc_77DA70
 0x77DA6E: xor     esi, esi
@@ -45,13 +45,13 @@
 0x77DA79: test    eax, eax
 0x77DA7B: jz      short loc_77DA8E
 0x77DA7D: lea     ecx, [ecx+0]
-0x77DA80: cmp     eax, offset dword_B3FD2C
+0x77DA80: cmp     eax, offset stru_B3FD2C
 0x77DA85: jz      short loc_77DAE4
 0x77DA87: mov     eax, [eax+4]
 0x77DA8A: test    eax, eax
 0x77DA8C: jnz     short loc_77DA80
 0x77DA8E: push    edi
-0x77DA8F: push    offset dword_B3FD0C
+0x77DA8F: push    offset stru_B3FD0C
 0x77DA94: call    NiRTTI__IsObjectOfRTTIType
 0x77DA99: add     esp, 8
 0x77DA9C: test    al, al
@@ -74,7 +74,7 @@
 0x77DAD3: push    esi
 0x77DAD4: mov     ecx, ebp
 0x77DAD6: mov     [esi], eax
-0x77DAD8: call    sub_782910
+0x77DAD8: call    sub_782910; Pass225: Links NiGeometryBufferData to owning geometry group; increments group refcount and writes buffer+0x04.
 0x77DADD: pop     edi
 0x77DADE: pop     esi
 0x77DADF: pop     ebp

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x70E1A0",
-    "line": "push    esi; a3",
+    "line": "push    esi; Culling.dll decode: NiCullingProcess::OnVisible. With VisibleGeo, appends NiGeometry into the visible array; without VisibleGeo, queues to the active accumulator slot +0x58 or renders directly as fallback.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x70E1C6",
-    "line": "call    sub_732200",
+    "line": "call    sub_732200; MEF PERF 2026-10-02: PERF 2026-10-02 candidate remains unpromoted: observed size==capacity growth by growBy via732200; array lifetime/reuse and real growth quantum are not sealed in this pass. No repeated-per-frame allocation or large practical cost claim.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x70E1F8",
-    "line": "test    al, al",
+    "line": "test    al, al; NiAVObject culling traversal reached by the observed shader/geometry failure stack; this is downstream of malformed or absent render-property state, not a weapon-type dispatch.",
     "mnemonic": "test",
     "size": 2
   },

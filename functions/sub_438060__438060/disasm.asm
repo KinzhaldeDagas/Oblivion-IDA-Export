@@ -11,16 +11,16 @@
 0x438079: lea     eax, [esp+1Ch+var_C]
 0x43807D: mov     large fs:0, eax
 0x438083: mov     edi, ecx
-0x438085: mov     ecx, SaveLoad_CurrentSavegame
+0x438085: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x43808B: call    sub_45A500
 0x438090: test    al, al
 0x438092: jz      short loc_4380A7
-0x438094: mov     eax, SaveLoad_CurrentSavegame
+0x438094: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x438099: mov     ecx, [eax+18h]
 0x43809C: shr     ecx, 1
 0x43809E: test    cl, 1
 0x4380A1: jz      loc_4382EB
-0x4380A7: mov     esi, [esp+1Ch+arg_0]
+0x4380A7: mov     esi, [esp+1Ch+reference]
 0x4380AB: mov     ecx, [esi+1Ch]
 0x4380AE: test    ecx, ecx
 0x4380B0: jz      short loc_4380D6
@@ -59,7 +59,7 @@
 0x438116: mov     ecx, esi
 0x438118: call    eax
 0x43811A: mov     ecx, eax
-0x43811C: call    sub_612DE0
+0x43811C: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x438121: mov     [esp+1Ch+var_10], 0
 0x438129: mov     ecx, [edi+8]
 0x43812C: mov     edx, [ecx]
@@ -76,7 +76,7 @@
 0x43814C: mov     edx, [esi+14h]
 0x43814F: mov     cl, 10h
 0x438151: call    __allshr
-0x438156: mov     ecx, [esp+1Ch+arg_4]
+0x438156: mov     ecx, dword ptr [esp+1Ch+priority]
 0x43815A: movzx   eax, al
 0x43815D: cmp     eax, ecx
 0x43815F: jz      short loc_43816F
@@ -93,14 +93,14 @@
 0x438182: push    eax; lpAddend
 0x438183: call    ds:InterlockedDecrement
 0x438189: jmp     loc_4382D9
-0x43818E: cmp     esi, TESDataHandler_g_PlayerRef
+0x43818E: cmp     esi, dword ptr reference
 0x438194: jnz     short loc_4381B9
 0x438196: push    40h ; '@'; Size
 0x438198: call    FormHeapAlloc
 0x43819D: add     esp, 4
 0x4381A0: test    eax, eax
 0x4381A2: jz      loc_43824A
-0x4381A8: mov     ecx, [esp+1Ch+arg_4]
+0x4381A8: mov     ecx, dword ptr [esp+1Ch+priority]
 0x4381AC: push    ecx
 0x4381AD: mov     ecx, eax
 0x4381AF: call    sub_438020
@@ -121,7 +121,7 @@
 0x4381DF: add     esp, 4
 0x4381E2: test    eax, eax
 0x4381E4: jz      short loc_43824A
-0x4381E6: mov     ecx, [esp+1Ch+arg_4]
+0x4381E6: mov     ecx, dword ptr [esp+1Ch+priority]
 0x4381EA: push    ecx
 0x4381EB: push    esi
 0x4381EC: mov     ecx, eax
@@ -131,7 +131,7 @@
 0x4381FA: add     esp, 4
 0x4381FD: test    eax, eax
 0x4381FF: jz      short loc_43824A
-0x438201: mov     edx, [esp+1Ch+arg_4]
+0x438201: mov     edx, dword ptr [esp+1Ch+priority]
 0x438205: push    edx
 0x438206: push    esi
 0x438207: mov     ecx, eax
@@ -142,7 +142,7 @@
 0x438217: add     esp, 4
 0x43821A: test    eax, eax
 0x43821C: jz      short loc_43824A
-0x43821E: mov     ecx, [esp+1Ch+arg_4]
+0x43821E: mov     ecx, dword ptr [esp+1Ch+priority]
 0x438222: push    ecx
 0x438223: push    esi
 0x438224: mov     ecx, eax
@@ -153,11 +153,11 @@
 0x438234: add     esp, 4
 0x438237: test    eax, eax
 0x438239: jz      short loc_43824A
-0x43823B: mov     edx, [esp+1Ch+arg_4]
-0x43823F: push    edx
-0x438240: push    esi
-0x438241: mov     ecx, eax
-0x438243: call    sub_437E20
+0x43823B: mov     edx, dword ptr [esp+1Ch+priority]
+0x43823F: push    edx; priority
+0x438240: push    esi; reference
+0x438241: mov     ecx, eax; this
+0x438243: call    QueuedTree_ctor; Verified 0x30-byte QueuedTree task constructor: stores its TESObjectREFR at +0x20 and clears fields +0x18/+0x1C/+0x24/+0x28/+0x2C before installing QueuedTree vtable. The remaining zeroed pointer roles are Unknown. Fallout's constructor initializes a larger QueuedTree with queued-model, base-model, cloned-3D, and distant-attach task pointers.
 0x438248: jmp     short loc_43824C
 0x43824A: xor     eax, eax
 0x43824C: push    eax
@@ -170,7 +170,7 @@
 0x43825F: mov     [eax], ecx
 0x438261: mov     eax, [esp+24h+var_10]
 0x438265: test    eax, eax
-0x438267: mov     [esp+24h+arg_4], esp
+0x438267: mov     dword ptr [esp+24h+priority], esp
 0x43826B: jz      short loc_438277
 0x43826D: add     eax, 8
 0x438270: push    eax; lpAddend
@@ -230,3 +230,12 @@
 0x4382F8: pop     esi
 0x4382F9: add     esp, 10h
 0x4382FC: retn    8
+0x9AC610: lea     ecx, [ebp-10h]; void *
+0x9AC613: jmp     sub_4BDDC0
+0x9AC618: mov     edx, [esp+arg_4]
+0x9AC61C: lea     eax, [edx-0Ch]
+0x9AC61F: mov     ecx, [edx-10h]
+0x9AC622: xor     ecx, eax
+0x9AC624: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC629: mov     eax, offset stru_AD92D8
+0x9AC62E: jmp     ___CxxFrameHandler3

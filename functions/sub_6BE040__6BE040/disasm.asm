@@ -155,7 +155,7 @@
 0x6BE213: fstp    [esp+40h+arg_10]
 0x6BE217: fld     [esp+40h+arg_10]
 0x6BE21B: fstp    [esp+40h+var_40]
-0x6BE21E: call    edx
+0x6BE21E: call    edx ; unk_B3D040
 0x6BE220: mov     eax, [esp+40h+arg_14]
 0x6BE224: mov     ecx, [esp+40h+var_10]
 0x6BE228: mov     edx, [esp+40h+var_C]

@@ -1,1 +1,30 @@
-EventType
+enum __bitmask EventType : __int32
+{
+kEvent_OnAdd = 0x1,
+kEvent_OnEquip = 0x2, ///< MASK
+kEvent_OnActorEquip = 0x2,
+kEvent_OnDrop = 0x4,
+kEvent_OnUnequip = 0x8, ///< MASK
+kEvent_OnActorUnequip = 0x8,
+kEvent_OnDeath = 0x10,
+kEvent_OnMurder = 0x20,
+kEvent_OnKnockout = 0x40,
+kEvent_OnHit = 0x80,
+kEvent_OnHitWith = 0x100,
+kEvent_OnPackageStart = 0x200,
+kEvent_OnPackageDone = 0x400,
+kEvent_OnPackageChange = 0x800,
+kEvent_OnLoad = 0x1000,
+kEvent_OnMagicEffectHit = 0x2000,
+kEvent_OnSell = 0x4000,
+kEvent_OnStartCombat = 0x8000,
+kEvent_OnAlarm_Steal = 0x10000,
+kEvent_OnAlarm_Pickpocket = 0x20000,
+kEvent_OnAlarm_Trespass = 0x40000,
+kEvent_OnAlarm_Attack = 0x80000,
+kEvent_OnAlarm_Murder = 0x100000,
+kEvent_OnTrigger = 0x10000000,
+kEvent_OnTriggerActor = 0x20000000,
+kEvent_OnTriggerMob = 0x40000000,
+kEvent_OnReset = 0x80000000,
+};

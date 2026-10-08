@@ -56,11 +56,11 @@
 0x76369F: call    eax
 0x7636A1: test    eax, eax
 0x7636A3: jge     short loc_7636C5
-0x7636A5: push    eax
-0x7636A6: call    sub_7736F0
+0x7636A5: push    eax; hresult
+0x7636A6: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x7636AB: push    eax
 0x7636AC: push    offset aNidx9rendererL; "NiDX9Renderer::LockDynamicTexture Faile"...
-0x7636B1: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7636B1: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7636B6: add     esp, 0Ch
 0x7636B9: pop     edi
 0x7636BA: pop     esi

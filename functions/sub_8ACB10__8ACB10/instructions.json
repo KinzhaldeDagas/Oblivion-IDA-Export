@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8ACB10",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; TES4 authoritative: initializes low-level hkpCharacterProxy listener/manifold arrays, then calls 0x8AC1E0 to copy cinfo including max slope cosine.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x8ACB8B",
-    "line": "call    sub_8AC1E0",
+    "line": "call    hkpCharacterProxy_ResetFromCinfo; TES4 authoritative: resets/initializes low-level hkpCharacterProxy fields from cinfo. cinfo+0x64 is a slope angle in radians; proxy+0xA4 stores cos(cinfo+0x64), used by 0x8AE100 support acceptance.",
     "mnemonic": "call",
     "size": 5
   },

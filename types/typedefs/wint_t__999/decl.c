@@ -1,1 +1,1 @@
-wint_t
+typedef unsigned __int16 wint_t;

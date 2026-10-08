@@ -1,4 +1,4 @@
-0x5D5A00: mov     eax, [ecx+28h]
+0x5D5A00: mov     eax, [ecx+28h]; Count native SkillsMenu rows whose selection tile trait 0xFB1 equals 2. Class-major selection uses this count against the configured cap of seven.
 0x5D5A03: push    edi
 0x5D5A04: xor     edi, edi
 0x5D5A06: test    eax, eax

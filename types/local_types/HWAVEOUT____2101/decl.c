@@ -1,1 +1,4 @@
-HWAVEOUT__
+struct HWAVEOUT__
+{
+int unused;
+};

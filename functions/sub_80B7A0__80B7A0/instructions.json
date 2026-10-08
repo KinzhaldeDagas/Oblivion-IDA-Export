@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x80B7BC",
-    "line": "mov     [esp+104h+var_14], ebx",
+    "line": "mov     [esp+104h+self], ebx",
     "mnemonic": "mov",
     "size": 7
   },
@@ -79,13 +79,13 @@
   },
   {
     "ea": "0x80B7DA",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80B7DC",
-    "line": "call    sub_7ED160",
+    "line": "call    BSShaderLightingProperty_GetFirstLightUnfiltered",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x80B803",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80B805",
-    "line": "call    sub_7ED160",
+    "line": "call    BSShaderLightingProperty_GetFirstLightUnfiltered",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x80B84D",
-    "line": "mov     esi, offset flt_B46528",
+    "line": "mov     esi, (offset flt_B464A0+88h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x80B883",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x80B896",
-    "line": "mov     [esp+108h+var_EC], edx",
+    "line": "mov     [esp+108h+other.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x80B8A9",
-    "line": "mov     [esp+108h+var_E8], ecx",
+    "line": "mov     [esp+108h+other.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80B8AD",
-    "line": "mov     [esp+108h+var_E4], edx",
+    "line": "mov     [esp+108h+other.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x80B9D6",
-    "line": "mov     [esp+108h+var_EC], edx",
+    "line": "mov     [esp+108h+other.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80B9DA",
-    "line": "mov     [esp+108h+var_E8], eax",
+    "line": "mov     [esp+108h+other.y], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80B9DE",
-    "line": "mov     [esp+108h+var_E4], ecx",
+    "line": "mov     [esp+108h+other.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x80BA08",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x80BA53",
-    "line": "mov     ecx, [esp+108h+var_EC]",
+    "line": "mov     ecx, [esp+108h+other.x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -985,13 +985,13 @@
   },
   {
     "ea": "0x80BA5B",
-    "line": "mov     edx, [esp+108h+var_E8]",
+    "line": "mov     edx, [esp+108h+other.y]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80BA5F",
-    "line": "mov     eax, [esp+108h+var_E4]",
+    "line": "mov     eax, [esp+108h+other.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1027,25 +1027,25 @@
   },
   {
     "ea": "0x80BA73",
-    "line": "lea     ecx, [esp+108h+var_EC]",
+    "line": "lea     ecx, [esp+108h+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x80BA77",
-    "line": "push    ecx",
+    "line": "push    ecx; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80BA78",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x80BA7A",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x80BAB6",
-    "line": "fld     [esp+108h+var_EC]",
+    "line": "fld     [esp+108h+other.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1177,7 +1177,7 @@
   },
   {
     "ea": "0x80BAC2",
-    "line": "fld     [esp+108h+var_E8]",
+    "line": "fld     [esp+108h+other.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x80BACE",
-    "line": "fld     [esp+108h+var_E4]",
+    "line": "fld     [esp+108h+other.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x80BADA",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x80BB0B",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,13 +1675,13 @@
   },
   {
     "ea": "0x80BBC9",
-    "line": "mov     eax, [esp+108h+var_EC]",
+    "line": "mov     eax, [esp+108h+other.x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x80BBCD",
-    "line": "mov     ecx, [esp+108h+var_E8]",
+    "line": "mov     ecx, [esp+108h+other.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x80BBD3",
-    "line": "mov     edx, [esp+108h+var_E4]",
+    "line": "mov     edx, [esp+108h+other.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3139,13 +3139,13 @@
   },
   {
     "ea": "0x80BF2F",
-    "line": "mov     ecx, [esp+108h+var_14]",
+    "line": "mov     ecx, [esp+108h+self]; self",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x80BF36",
-    "line": "call    sub_7ED180",
+    "line": "call    BSShaderLightingProperty_GetNextLightUnfiltered",
     "mnemonic": "call",
     "size": 5
   },
@@ -3301,7 +3301,7 @@
   },
   {
     "ea": "0x80BF9E",
-    "line": "call    sub_7C9230",
+    "line": "call    ShadowLightShader__SetupGeometryConstants; Oblivion ShadowLight per-geometry constant setup. For mode-5 caster selectors 6..9, native PointLightPos0 c16 comes from B44FD8; c16.w is the projected-depth divisor, taken from the current light range/control and divided by object scale for rigid geometry. The positive B44EE4 path supplies the alternate depth-origin variant.",
     "mnemonic": "call",
     "size": 5
   },

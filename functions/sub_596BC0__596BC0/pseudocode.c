@@ -1,32 +1,32 @@
-_BYTE *__stdcall sub_596BC0(_DWORD *a1)
+TESForm *__stdcall sub_596BC0(_DWORD *a1)
 {
   double Float; // st7
   int v2; // eax
   int v3; // ebx
-  int v4; // edi
-  int v5; // esi
+  TESForm *item; // edi
+  OblivionTESFormListNode *p_classList; // esi
   int v6; // ebp
 
-  Float = Tile_GetFloat(a1, 0xFAA);
-  v2 = Double_To_SInt32(Float);
-  v3 = 0;
-  v4 = 0;
-  v5 = TESDataHandler + 0x54;
-  v6 = v2;
-  if ( TESDataHandler != 0xFFFFFFAC )
+  Float = Tile_GetFloat(a1, 0xFAA); /*0x596bcd*/
+  v2 = Double_To_SInt32(Float); /*0x596bd2*/
+  v3 = 0; /*0x596bdd*/
+  item = 0; /*0x596bdf*/
+  p_classList = &g_TESDataHandler->classList; /*0x596be1*/
+  v6 = v2; /*0x596be4*/
+  if ( g_TESDataHandler != (TESDataHandler *)0xFFFFFFAC ) /*0x596be6*/
   {
-    do
+    do /*0x596c07*/
     {
-      if ( !*(_DWORD *)v5 )
-        break;
-      if ( v3 > v6 )
-        break;
-      v4 = *(_DWORD *)v5;
-      if ( TESClass_IsPlayable(*(_BYTE **)v5) )
-        ++v3;
-      v5 = *(_DWORD *)(v5 + 4);
+      if ( !p_classList->item ) /*0x596be8*/
+        break; /*0x596bec*/
+      if ( v3 > v6 ) /*0x596bf0*/
+        break; /*0x596bf0*/
+      item = p_classList->item; /*0x596bf2*/
+      if ( TESClass_IsPlayable(p_classList->item) ) /*0x596bf6*/
+        ++v3; /*0x596bff*/
+      p_classList = p_classList->next; /*0x596c02*/
     }
-    while ( v5 );
+    while ( p_classList ); /*0x596c07*/
   }
-  return (_BYTE *)v4;
+  return item; /*0x596c0b*/
 }

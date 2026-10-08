@@ -1,1 +1,1 @@
-GENERIC_BINDING_ROUTINE
+typedef void *(*GENERIC_BINDING_ROUTINE)(void *);

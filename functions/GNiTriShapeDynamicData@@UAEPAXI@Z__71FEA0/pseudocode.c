@@ -1,9 +1,7 @@
-NiTriShapeDynamicData *__thiscall NiTriShapeDynamicData::`scalar deleting destructor'(
-        NiTriShapeDynamicData *this,
-        char a2)
+NiTriShapeData *__thiscall NiTriShapeData_ScalarDeletingDestructor(NiTriShapeData *self, unsigned int flags)
 {
-  NiTriShapeDynamicData::~NiTriShapeDynamicData(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  NiTriShapeData_Destruct(self); /*0x71fea3*/
+  if ( (flags & 1) != 0 ) /*0x71fead*/
+    FormHeapFree((unsigned int)self); /*0x71feb0*/
+  return self; /*0x71feba*/
 }

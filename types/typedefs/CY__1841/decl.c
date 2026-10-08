@@ -1,1 +1,1 @@
-CY
+typedef tagCY CY;

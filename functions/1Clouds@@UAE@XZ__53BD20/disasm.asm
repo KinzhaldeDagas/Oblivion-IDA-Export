@@ -16,14 +16,14 @@
 0x53BD56: call    sub_53B6E0
 0x53BD5B: mov     ecx, esi
 0x53BD5D: call    sub_53BBC0
-0x53BD62: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x53BD62: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x53BD67: push    2; int
 0x53BD69: push    4; unsigned int
 0x53BD6B: lea     eax, [esi+10h]
 0x53BD6E: push    eax; void *
 0x53BD6F: mov     byte ptr [esp+28h+var_4], 1
 0x53BD74: call    $LN21
-0x53BD79: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x53BD79: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x53BD7E: push    2; int
 0x53BD80: push    4; unsigned int
 0x53BD82: lea     ecx, [esi+8]
@@ -39,3 +39,28 @@
 0x53BDAB: pop     esi
 0x53BDAC: add     esp, 10h
 0x53BDAF: retn
+0x9BA2A0: mov     ecx, [ebp-10h]; this
+0x9BA2A3: jmp     ??1SkyObject@@UAE@XZ; SkyObject::~SkyObject(void)
+0x9BA2A8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9BA2AD: push    2; int
+0x9BA2AF: push    4; unsigned int
+0x9BA2B1: mov     eax, [ebp-10h]
+0x9BA2B4: add     eax, 8
+0x9BA2B7: push    eax; void *
+0x9BA2B8: call    $LN21
+0x9BA2BD: retn
+0x9BA2BE: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9BA2C3: push    2; int
+0x9BA2C5: push    4; unsigned int
+0x9BA2C7: mov     eax, [ebp-10h]
+0x9BA2CA: add     eax, 10h
+0x9BA2CD: push    eax; void *
+0x9BA2CE: call    $LN21
+0x9BA2D3: retn
+0x9BA2D4: mov     edx, [esp+arg_4]
+0x9BA2D8: lea     eax, [edx-8]
+0x9BA2DB: mov     ecx, [edx-0Ch]
+0x9BA2DE: xor     ecx, eax
+0x9BA2E0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA2E5: mov     eax, offset stru_AE44B0
+0x9BA2EA: jmp     ___CxxFrameHandler3

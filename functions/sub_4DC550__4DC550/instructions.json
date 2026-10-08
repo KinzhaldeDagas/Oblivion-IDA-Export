@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x4DC567",
-    "line": "call    sub_475440",
+    "line": "call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,25 +79,25 @@
   },
   {
     "ea": "0x4DC56F",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DC572",
-    "line": "push    5; int",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DC574",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DC576",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x4DC57E",
-    "line": "fstp    [esp+8+var_8]; float",
+    "line": "fstp    [esp+8+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DC581",
-    "line": "mov     ecx, [esi+98h]",
+    "line": "mov     ecx, [esi+98h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4DC587",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4DC59B",
-    "line": "jmp     sub_4730B0",
+    "line": "jmp     sub_4730B0; Walks every controller-manager sequence, RTTI-filters to the Oblivion animation-group sequence class, and clears the +8 pointer in each 0x10-byte controlled-block record through 0x49F520. Kept conservatively unnamed because the exact field type is not yet recovered.",
     "mnemonic": "jmp",
     "size": 5
   },

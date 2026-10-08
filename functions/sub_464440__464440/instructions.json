@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x4644AF",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4644B1",
-    "line": "call    SaveLoad_ValidateCreatedObj??",
+    "line": "call    TESSaveLoadGame_ProcessDeferredDeletions",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x4644C9",
-    "line": "call    sub_67F180",
+    "line": "call    TravelPath_ClearAllDoorLinkMaps; Verified LowPath map lifecycle during save/load reference reconciliation: first TravelPath_ClearAllDoorLinkMaps releases old AStarWorldNodes, state slots, lists, nested maps, and the outer map.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4644CE",
-    "line": "call    sub_67FCF0",
+    "line": "call    TravelPath_EnsureDoorLinkMapInitialized; Verified immediately after clearing old travel-link indices, TravelPath_EnsureDoorLinkMapInitialized recreates the outer space-link map for references being reconciled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x4644E9",
-    "line": "mov     ecx, ds:0B33A98h",
+    "line": "mov     ecx, ds:0B33A98h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x4644EF",
-    "line": "call    TESDataHandler_Clear",
+    "line": "call    TESDataHandler_Clear; Verified reader of activeFileState.retainActiveFile (+0xCD1): when zero, cleanup destroys and clears the stored active TESFile; when set, that file is retained. The only direct writer located so far is constructor initialization to zero; runtime setter remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x46452A",
-    "line": "mov     [esp+64h+arg_0], eax",
+    "line": "mov     dword ptr [esp+64h+initializationMode], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x464578",
-    "line": "mov     byte ptr [esp+64h+arg_0], dl",
+    "line": "mov     [esp+64h+initializationMode], dl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x464586",
-    "line": "mov     byte ptr [esp+64h+arg_0], al",
+    "line": "mov     [esp+64h+initializationMode], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -601,13 +601,13 @@
   },
   {
     "ea": "0x4645B0",
-    "line": "call    TESDataHandler_LoadFiles?",
+    "line": "call    TESDataHandler_LoadFiles?; Verified game/world initialization path: TESSaveLoadGame_ReconcileExistingChanges calls TESDataHandler_LoadFiles here, then reattaches the player to the saved cell and runs worldspace/LOD initialization. TESDataHandler_LoadFiles rebuilds each WorldSpace's derived SubSpace index from persistentCell, confirming a full load reconstructs +0x60. This does not prove that the CreateDuplicateForm path triggers a reload.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4645B5",
-    "line": "mov     edx, [esp+64h+arg_0]",
+    "line": "mov     edx, dword ptr [esp+64h+initializationMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x4645D1",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,13 +811,13 @@
   },
   {
     "ea": "0x46463F",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x464641",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x46464A",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; worldspace",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x46464C",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x46466C",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; worldspace",
     "mnemonic": "mov",
     "size": 2
   },
@@ -913,19 +913,19 @@
   },
   {
     "ea": "0x464671",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x464676",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x464678",
-    "line": "call    sub_4EBC00",
+    "line": "call    TESWorldSpaceTerrainLODQuadMap_Initialize; Verified initial terrain-quad map setup: discovers available NIFs, marks each corresponding quad Unloaded (5), stores its map-derived world origin, and sets the grid-cell width used by distance checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x46469A",
-    "line": "mov     [esp+64h+var_3C], eax",
+    "line": "mov     [esp+64h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1015,13 +1015,13 @@
   },
   {
     "ea": "0x4646AA",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4646AC",
-    "line": "call    ??0ChangesMap@@QAE@XZ; ChangesMap::ChangesMap(void)",
+    "line": "call    ??0ChangesMap@@QAE@XZ;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x4646C0",
-    "line": "mov     bl, byte ptr [esp+64h+arg_0]",
+    "line": "mov     bl, [esp+64h+initializationMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x464716",
-    "line": "mov     [esp+64h+var_3C], eax",
+    "line": "mov     [esp+64h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x464744",
-    "line": "call    sub_57B950",
+    "line": "call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,13 +1303,13 @@
   },
   {
     "ea": "0x46474C",
-    "line": "lea     edx, [esp+64h+var_4C]",
+    "line": "lea     edx, [esp+64h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x464750",
-    "line": "push    edx",
+    "line": "push    edx; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -1321,31 +1321,31 @@
   },
   {
     "ea": "0x464755",
-    "line": "push    eax",
+    "line": "push    eax; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x464756",
-    "line": "lea     ecx, [esp+6Ch+var_3C]",
+    "line": "lea     ecx, [esp+6Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x46475A",
-    "line": "push    ecx",
+    "line": "push    ecx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46475B",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46475E",
-    "line": "mov     [esp+70h+var_4C], edi",
+    "line": "mov     [esp+70h+valueOut], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x464766",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x464770",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,31 +1411,31 @@
   },
   {
     "ea": "0x464788",
-    "line": "mov     edx, [esp+64h+var_4C]",
+    "line": "mov     edx, [esp+64h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x46478C",
-    "line": "push    edx",
+    "line": "push    edx; savedData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46478D",
-    "line": "push    eax",
+    "line": "push    eax; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46478E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x464790",
-    "line": "call    sub_45F180",
+    "line": "call    TESSaveLoadGame_ResetFormForLoad; Verified: consumes form plus its 8-byte ChangeData entry. Uses form-type-specific masks (0xFFF generally, 0x7FF for REFR), deletes disallowed created forms, calls SaveLoad_NormalizeFormChangeFlags, invokes the form change callback, reloads the winning override through TESSaveLoadGame_ResetObject, runs DoPostFixup, then uses 45C020 to reconnect process/cell state. Called during TESSaveLoadGame_ReconcileExistingChanges (464790). Probable Fallout comparison: BGSSaveLoadGame::RevertCurrentChanges; implementation and flag policy differ.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,7 +1459,7 @@
   },
   {
     "ea": "0x4647A2",
-    "line": "mov     eax, [esp+64h+var_4C]",
+    "line": "mov     eax, [esp+64h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x4647C5",
-    "line": "lea     edi, [esp+64h+var_38]",
+    "line": "lea     edi, [esp+64h+data]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x4647CB",
-    "line": "mov     esi, [esp+64h+var_38]",
+    "line": "mov     esi, [esp+64h+data.primaryLocationFormID]; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x4647F1",
-    "line": "mov     edi, [esp+64h+var_28]",
+    "line": "mov     edi, [esp+64h+data.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x4647FC",
-    "line": "mov     [esp+68h+var_38], esi",
+    "line": "mov     [esp+68h+data.primaryLocationFormID], esi; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1699,13 +1699,13 @@
   },
   {
     "ea": "0x464820",
-    "line": "mov     [esp+68h+var_28], eax",
+    "line": "mov     [esp+68h+data.fallbackLocationFormID], eax; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x464824",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x46485C",
-    "line": "fld     [esp+64h+var_34]",
+    "line": "fld     [esp+64h+data.worldX]; Verified: source world X; used when source locator is a TESWorldSpace.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x464864",
-    "line": "fld     [esp+64h+var_30]",
+    "line": "fld     [esp+64h+data.worldY]; Verified: source world Y; used when source locator is a TESWorldSpace.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1861,13 +1861,13 @@
   },
   {
     "ea": "0x46487A",
-    "line": "push    edx; signed int",
+    "line": "push    edx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46487B",
-    "line": "push    ecx; signed int",
+    "line": "push    ecx; cellX",
     "mnemonic": "push",
     "size": 1
   },
@@ -1939,19 +1939,19 @@
   },
   {
     "ea": "0x46489B",
-    "line": "lea     edx, [esp+64h+var_38]",
+    "line": "lea     edx, [esp+64h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x46489F",
-    "line": "push    edx",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4648A0",
-    "line": "push    ebx",
+    "line": "push    ebx; referenceID",
     "mnemonic": "push",
     "size": 1
   },
@@ -1963,25 +1963,25 @@
   },
   {
     "ea": "0x4648A3",
-    "line": "call    sub_45C4F0",
+    "line": "call    TESSaveLoadGame_RebuildReferenceFromLocationOverrides;  Verified: moved-reference rebuild. Resolves primary location ID at +0 (fallback ID +0x10 when zero), casts it to TESObjectCELL or TESWorldSpace, scans its override files for the requested referenceID, loads matching reference records, runs PostFixup, and restores actor/REFR starting location data. Worldspace path quantizes X/Y by >>12 to find the owning cell. Probable role homolog: Fallout ReferenceInitialData::GetOriginalLocationCellAndWorld / LoadChangedReference; Oblivion implementation searches local override files directly. Verified: a2 uses 44-byte moved-reference payload; +0 and +0x10 are remapped FormIDs before call. X/Y at +4/+8 are consumed on the worldspace path. Remaining fields Unknown. Verified cross-reference divergence: Fallout MovedReferenceInitialData is 34 bytes (27-byte location data + compact original-location index and int16 cell XY); Oblivion restore reads 44 bytes and supports primary/fallback full FormIDs at +0/+0x10 plus world XY at +4/+8. Confidence label Probable applies only to s",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4648A8",
-    "line": "push    eax; Concurrency::details::SchedulerBase *",
+    "line": "push    eax; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4648A9",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4648AB",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x4648B2",
-    "line": "cmp     [esp+64h+var_3C], edi",
+    "line": "cmp     [esp+64h+position], edi",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x4648BC",
-    "line": "mov     bl, byte ptr [esp+64h+arg_0]",
+    "line": "mov     bl, [esp+64h+initializationMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2170,5 +2170,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AE6D0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE6D3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6D4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6D9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6DA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6DB",
+    "line": "mov     eax, [ebp-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE6DE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6DF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6E4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6E5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE6E6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE6EA",
+    "line": "lea     eax, [edx-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE6ED",
+    "line": "mov     ecx, [edx-58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE6F0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE6F2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6F7",
+    "line": "mov     eax, offset stru_ADAEB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE6FC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

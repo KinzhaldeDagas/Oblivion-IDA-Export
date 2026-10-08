@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5D5E50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Handles SkillsMenu row toggles and accept/back navigation. Multi-select is capped by SkillsMenu+0x44. In class-skill mode it copies selected row AV trait 0xFB0 into the staged ClassMenu array at +0x68, stopping at the cap of seven.",
     "mnemonic": "push",
     "size": 2
   },
@@ -367,19 +367,19 @@
   },
   {
     "ea": "0x5D5F13",
-    "line": "fstp    [esp+2Ch+a2]; a3",
+    "line": "fstp    [esp+2Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D5F16",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D5F1B",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x5D5F3B",
-    "line": "fstp    [esp+2Ch+a2]; a3",
+    "line": "fstp    [esp+2Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D5F3E",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x5D5F45",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x5D5F59",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x5D5F65",
-    "line": "call    sub_5D5B40",
+    "line": "call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5D5F8F",
-    "line": "fstp    [esp+2Ch+a2]; a3",
+    "line": "fstp    [esp+2Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x5D5F94",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5D5F99",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5D5FA2",
-    "line": "call    sub_5D5B40",
+    "line": "call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,13 +625,13 @@
   },
   {
     "ea": "0x5D5FAC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5D5FAE",
-    "line": "call    sub_5D5A00",
+    "line": "call    SkillsMenu_CountSelectedRows; Count native SkillsMenu rows whose selection tile trait 0xFB1 equals 2. Class-major selection uses this count against the configured cap of seven.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,13 +661,13 @@
   },
   {
     "ea": "0x5D5FBF",
-    "line": "fstp    [esp+2Ch+a2]; a3",
+    "line": "fstp    [esp+2Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5D5FC2",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x5D5FC9",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x5D5FDA",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x5D5FE9",
-    "line": "call    sub_5D5B40",
+    "line": "call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x5D6012",
-    "line": "call    sub_5D5B40",
+    "line": "call    SkillsMenu_UpdateDetails; Native SkillsMenu detail refresh. Resolve the selected native skill AV, then populate the menu from its Oblivion TESSkill description and icon.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x5D6032",
-    "line": "jz      short loc_5D607E",
+    "line": "jz      short loc_5D607E; Write selected row actor values in list order into the staged ClassMenu array, stopping at selectionCap. Native class-skill mode sets selectionCap to seven.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x5D6067",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x5D60B0",
-    "line": "call    sub_584390",
+    "line": "call    Menu__StartFadeIn; Oblivion ClassMenu step refresh: derives the active step value from tile traits 0xFDB/0xFDC, updates menu state, sets state 8, and refreshes the interface manager.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x5D61A9",
-    "line": "call    sub_5D5720",
+    "line": "call    sub_5D5720; Close SkillsMenu after staging the selection. Oblivion has no subsequent minor-skill selection mode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1588,5 +1588,59 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5BD0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BD3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BD8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5BDC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BDF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5BE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5BE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BE9",
+    "line": "mov     eax, offset stru_AE0BB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5BEE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -10,4 +10,4 @@
 0x6A2F17: cmp     eax, ds:0B333C4h
 0x6A2F1D: pop     esi
 0x6A2F1E: jnz     short NightEyeEffect_Apply___Done
-0x6A2F20: jmp     NightEyeEffect_SetPlayerShader?
+0x6A2F20: jmp     NightEyeEffect_SetPlayerShader?; MoonSugarEffect decode: NightEye player shader path sets NightEye active state from player actor value kActorVal_NightEyeBonus; do not hijack for Moon Sugar.

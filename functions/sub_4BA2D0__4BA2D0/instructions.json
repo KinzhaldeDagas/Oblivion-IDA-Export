@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4BA2D0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+tree]; Verified Oblivion context has a 0x1C-byte payload; Fallout's RTTI-named TREE_BILLBOARD_DATA is also 0x1C bytes and its constructor copies an instanceCount-sized NiPoint3 locations array and float color array. Probable field mapping follows matching argument order and downstream use; Oblivion field semantics are not promoted beyond what its own callsites establish.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BA2D4",
-    "line": "mov     edx, [esp+arg_8]",
+    "line": "mov     edx, [esp+placementArg2]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4BA2DB",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+placementArg1]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4BA2E1",
-    "line": "mov     eax, [esp+4+arg_C]",
+    "line": "mov     eax, [esp+4+modeOrDistance]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4BA2EB",
-    "line": "mov     eax, [esp+4+arg_10]",
+    "line": "mov     eax, [esp+4+instanceCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,19 +151,19 @@
   },
   {
     "ea": "0x4BA319",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA31A",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA31B",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4BA31F",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x4BA340",
-    "line": "mov     edx, [esp+18h+arg_18]",
+    "line": "mov     edx, [esp+18h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,19 +259,19 @@
   },
   {
     "ea": "0x4BA348",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA349",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA34A",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x4BA34E",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },

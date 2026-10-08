@@ -1,4 +1,4 @@
-0x7CD090: mov     eax, 2868h
+0x7CD090: mov     eax, 2868h; Loads Oblivion ShadowLightShader vertex-program variants from lighting\\1x and lighting\\2x HLSL sources, constructing macro combinations and replacing the corresponding refcounted program-table entries.
 0x7CD095: call    __alloca_probe
 0x7CD09A: mov     eax, ds:0B30AACh
 0x7CD09F: xor     eax, esp
@@ -1345,7 +1345,7 @@
 0x7CED92: mov     ecx, [esp+288Ch+var_2864]
 0x7CED96: lea     edx, [esp+288Ch+FileName]
 0x7CED9D: push    edx; lpFileName
-0x7CED9E: call    CreateVertexShader
+0x7CED9E: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7CEDA3: mov     ebp, ds:0B45290h[esi*4]
 0x7CEDAA: cmp     ebp, eax
 0x7CEDAC: mov     [esp+2878h+var_2868], eax
@@ -1379,7 +1379,6 @@
 0x7CEE02: xor     ebx, ebx
 0x7CEE04: mov     [esp+2878h+var_2868], esi
 0x7CEE08: jmp     short loc_7CEE10
-0x7CEE0A: align 10h
 0x7CEE10: mov     eax, [esi]
 0x7CEE12: cmp     eax, edi
 0x7CEE14: jz      loc_7CEEA4
@@ -1403,7 +1402,7 @@
 0x7CEE51: lea     ecx, [esp+288Ch+FileName]
 0x7CEE58: push    ecx; lpFileName
 0x7CEE59: mov     ecx, [esp+2890h+var_2864]
-0x7CEE5D: call    CreateVertexShader
+0x7CEE5D: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7CEE62: mov     esi, ds:0B4530Ch[ebx*4]
 0x7CEE69: mov     ebp, eax
 0x7CEE6B: cmp     esi, ebp
@@ -1479,7 +1478,7 @@
 0x7CEF46: lea     ecx, [esp+288Ch+FileName]
 0x7CEF4D: push    ecx; lpFileName
 0x7CEF4E: mov     ecx, [esp+2890h+var_2864]
-0x7CEF52: call    CreateVertexShader
+0x7CEF52: call    CreateVertexShader; Oblivion authoritative VS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreateVertexShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 modifier normalization and cN[a0.*] relative constant indexing for skinned shaders.
 0x7CEF57: mov     esi, ds:0B45364h[ebx*4]
 0x7CEF5E: mov     ebp, eax
 0x7CEF60: cmp     esi, ebp

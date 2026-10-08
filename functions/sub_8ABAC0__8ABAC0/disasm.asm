@@ -1,4 +1,4 @@
-0x8ABAC0: push    ebp
+0x8ABAC0: push    ebp; Low-level position writer: stores target at object+0xA0 and updates Havok transform when shape data exists.
 0x8ABAC1: mov     ebp, esp
 0x8ABAC3: and     esp, 0FFFFFFF0h
 0x8ABAC6: sub     esp, 28h

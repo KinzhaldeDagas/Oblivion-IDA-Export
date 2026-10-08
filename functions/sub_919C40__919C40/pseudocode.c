@@ -20,64 +20,64 @@ int __thiscall sub_919C40(char *this, int *a2)
   int i; // [esp+18h] [ebp+4h]
   int j; // [esp+18h] [ebp+4h]
 
-  v2 = this;
-  if ( this )
-    v3 = this + 0x28;
+  v2 = this; /*0x919c43*/
+  if ( this ) /*0x919c4d*/
+    v3 = this + 0x28; /*0x919c4f*/
   else
-    v3 = 0;
-  sub_8989E0(a2, (int)v3);
-  if ( v2 )
-    v5 = (int)(v2 + 0x2C);
+    v3 = 0; /*0x919c54*/
+  sub_8989E0(a2, (int)v3); /*0x919c5d*/
+  if ( v2 ) /*0x919c64*/
+    v5 = (int)(v2 + 0x2C); /*0x919c66*/
   else
-    v5 = 0;
-  sub_898A80(a2, v5);
-  v6 = 0;
-  for ( i = 0; v6 < a2[0xF]; i = v6 )
+    v5 = 0; /*0x919c6b*/
+  sub_898A80(a2, v5); /*0x919c70*/
+  v6 = 0; /*0x919c78*/
+  for ( i = 0; v6 < a2[0xF]; i = v6 ) /*0x919c80*/
   {
-    v7 = *(_DWORD *)(a2[0xE] + 4 * v6);
-    v8 = *(_DWORD *)(v7 + 0x38);
-    v9 = (_DWORD *)(v7 + 0x34);
-    v10 = 0;
-    if ( v8 > 0 )
+    v7 = *(_DWORD *)(a2[0xE] + 4 * v6); /*0x919c85*/
+    v8 = *(_DWORD *)(v7 + 0x38); /*0x919c88*/
+    v9 = (_DWORD *)(v7 + 0x34); /*0x919c8b*/
+    v10 = 0; /*0x919c8e*/
+    if ( v8 > 0 ) /*0x919c92*/
     {
-      v11 = v2 + 0x28;
-      do
-        (*(void (__thiscall **)(char *, _DWORD))(*(_DWORD *)v11 + 8))(v11, *(_DWORD *)(*v9 + 4 * v10++));
-      while ( v10 < v9[1] );
-      v2 = this;
-      v6 = i;
+      v11 = v2 + 0x28; /*0x919c94*/
+      do /*0x919cab*/
+        (*(void (__thiscall **)(char *, _DWORD))(*(_DWORD *)v11 + 8))(v11, *(_DWORD *)(*v9 + 4 * v10++)); /*0x919ca2*/
+      while ( v10 < v9[1] ); /*0x919cab*/
+      v2 = this; /*0x919cad*/
+      v6 = i; /*0x919cb1*/
     }
-    ++v6;
+    ++v6; /*0x919cb8*/
   }
-  result = 0;
-  for ( j = 0; result < a2[0x12]; j = result )
+  result = 0; /*0x919cc4*/
+  for ( j = 0; result < a2[0x12]; j = result ) /*0x919ccc*/
   {
-    v13 = *(_DWORD *)(a2[0x11] + 4 * result);
-    v14 = *(_DWORD *)(v13 + 0x38);
-    v15 = (_DWORD *)(v13 + 0x34);
-    v16 = 0;
-    if ( v14 > 0 )
+    v13 = *(_DWORD *)(a2[0x11] + 4 * result); /*0x919cd3*/
+    v14 = *(_DWORD *)(v13 + 0x38); /*0x919cd6*/
+    v15 = (_DWORD *)(v13 + 0x34); /*0x919cd9*/
+    v16 = 0; /*0x919cdc*/
+    if ( v14 > 0 ) /*0x919ce0*/
     {
-      v17 = v2 + 0x28;
-      do
-        (*(void (__thiscall **)(char *, _DWORD))(*(_DWORD *)v17 + 8))(v17, *(_DWORD *)(*v15 + 4 * v16++));
-      while ( v16 < v15[1] );
-      result = j;
-      v2 = this;
+      v17 = v2 + 0x28; /*0x919ce2*/
+      do /*0x919cf9*/
+        (*(void (__thiscall **)(char *, _DWORD))(*(_DWORD *)v17 + 8))(v17, *(_DWORD *)(*v15 + 4 * v16++)); /*0x919cf0*/
+      while ( v16 < v15[1] ); /*0x919cf9*/
+      result = j; /*0x919cfb*/
+      v2 = this; /*0x919cff*/
     }
-    ++result;
+    ++result; /*0x919d06*/
   }
-  v18 = a2[0xC];
-  if ( v18 )
+  v18 = a2[0xC]; /*0x919d0f*/
+  if ( v18 ) /*0x919d14*/
   {
-    result = *(_DWORD *)(v18 + 0x38);
-    for ( k = 0; k < result; ++k )
+    result = *(_DWORD *)(v18 + 0x38); /*0x919d16*/
+    for ( k = 0; k < result; ++k ) /*0x919d1d*/
     {
-      (*(void (__thiscall **)(char *, _DWORD))(*((_DWORD *)v2 + 0xA) + 8))(
+      (*(void (__thiscall **)(char *, _DWORD))(*((_DWORD *)v2 + 0xA) + 8))( /*0x919d2d*/
         v2 + 0x28,
         *(_DWORD *)(*(_DWORD *)(v18 + 0x34) + 4 * k));
-      result = *(_DWORD *)(v18 + 0x38);
+      result = *(_DWORD *)(v18 + 0x38); /*0x919d30*/
     }
   }
-  return result;
+  return result; /*0x919d38*/
 }

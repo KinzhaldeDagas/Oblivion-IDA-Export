@@ -1,10 +1,10 @@
-0x716050: push    ebx
+0x716050: push    ebx; Saves the first manager-controlled controller found in the next chain, then flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, and target +0x30. Runtime caches are not serialized.
 0x716051: push    esi
 0x716052: mov     esi, [esp+8+arg_0]
 0x716056: push    edi
 0x716057: push    esi
 0x716058: mov     edi, ecx
-0x71605A: call    nullsub_returnvVoid_1arg
+0x71605A: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x71605F: mov     ebx, [edi+34h]
 0x716062: test    ebx, ebx
 0x716064: jz      short loc_71607A

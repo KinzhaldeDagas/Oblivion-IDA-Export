@@ -38,7 +38,7 @@
 0x721692: mov     eax, [edx+4]
 0x721695: mov     ecx, edi
 0x721697: call    eax
-0x721699: cmp     eax, offset dword_B3FD44
+0x721699: cmp     eax, offset stru_B3FD44
 0x72169E: setz    al
 0x7216A1: test    al, al
 0x7216A3: jz      short loc_72171B
@@ -90,3 +90,15 @@
 0x721728: pop     esi
 0x721729: add     esp, 14h
 0x72172C: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

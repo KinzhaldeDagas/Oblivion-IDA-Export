@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C8000",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; ShadowSceneNode destructor. Clears registration and tears down owned light lists, persistent lights, target, cube camera, and helper state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7C8062",
-    "line": "call    sub_7C7E50",
+    "line": "call    ShadowSceneNode_TeardownLightLists; Remove full-list lights, free list nodes, reset partition anchors, and reset the active list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x7C80DF",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C80E0",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1246,5 +1246,185 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CE880",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE883",
+    "line": "jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE888",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE88B",
+    "line": "add     ecx, 0DCh ; 'Ü'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE891",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE896",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE899",
+    "line": "add     ecx, 0E4h ; 'ä'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE89F",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@UAE@XZ; NiTPointerList<NiPointer<ShadowSceneLight>>::~NiTPointerList<NiPointer<ShadowSceneLight>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE8A4",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE8A7",
+    "line": "add     ecx, 0F4h ; 'ô'",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE8AD",
+    "line": "jmp     j_??1?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@UAE@XZ; NiTPointerList<NiPointer<ShadowSceneLight>>::~NiTPointerList<NiPointer<ShadowSceneLight>>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE8B2",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE8B5",
+    "line": "add     ecx, 110h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE8BB",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE8C0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE8C3",
+    "line": "add     ecx, 114h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE8C9",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE8CE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE8D1",
+    "line": "add     ecx, 120h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE8D7",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE8DC",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE8DF",
+    "line": "add     ecx, 124h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CE8E5",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE8EA",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CE8EE",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE8F1",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CE8F4",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CE8F6",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE8FB",
+    "line": "mov     eax, offset stru_AF77E0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CE900",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

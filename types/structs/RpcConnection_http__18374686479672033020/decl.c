@@ -1,1 +1,1 @@
-RpcConnection_http
+typedef _RpcConnection_http RpcConnection_http;

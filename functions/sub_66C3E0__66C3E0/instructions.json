@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x66C3E0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+attributeAV]; Commit one Oblivion character level: apply three attributes, raise player level, consume the oldest all-skill attribute-bonus bucket, age specialization counters, subtract exactly g_iLevelUpSkillCount from majorSkillAdvances, clear all 21 per-skill advance counters, reset training use, and preserve any excess major progress/readiness.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x66C3E6",
-    "line": "push    eax",
+    "line": "push    eax; attributeAV",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,55 +31,55 @@
   },
   {
     "ea": "0x66C3E9",
-    "line": "call    Player_LevelUpAttribute?",
+    "line": "call    Player_LevelUpAttribute; Applies one selected level-up attribute: current base plus the multiplier derived from the oldest bucket's skill-increase count, clamped to 100. Invalid/sentinel attribute AVs are ignored.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C3EE",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+attribute2]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x66C3F2",
-    "line": "push    ecx",
+    "line": "push    ecx; attributeAV",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C3F3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C3F5",
-    "line": "call    Player_LevelUpAttribute?",
+    "line": "call    Player_LevelUpAttribute; Applies one selected level-up attribute: current base plus the multiplier derived from the oldest bucket's skill-increase count, clamped to 100. Invalid/sentinel attribute AVs are ignored.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x66C3FA",
-    "line": "mov     edx, [esp+8+arg_8]",
+    "line": "mov     edx, [esp+8+attribute3]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x66C3FE",
-    "line": "push    edx",
+    "line": "push    edx; attributeAV",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66C3FF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C401",
-    "line": "call    Player_LevelUpAttribute?",
+    "line": "call    Player_LevelUpAttribute; Applies one selected level-up attribute: current base plus the multiplier derived from the oldest bucket's skill-increase count, clamped to 100. Invalid/sentinel attribute AVs are ignored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x66C498",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C49A",
-    "line": "call    sub_65FBB0",
+    "line": "call    Player_ConsumeOldestAttributeBonusBucket; After applying the three selected attributes and raising level, consume the oldest queued attribute-bonus bucket.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x66C4A1",
-    "line": "xor     edx, edx",
+    "line": "xor     edx, edx; For g_iLevelUpSkillCount iterations, visit bytes +0x5B8..+0x5BB round-robin and decrement the selected byte only if positive. Skill increases populate specialization bytes 0..2; byte 3 is normally unused, so zero visits are not reassigned.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -475,19 +475,19 @@
   },
   {
     "ea": "0x66C4CF",
-    "line": "sub     [esi+184h], eax",
+    "line": "sub     [esi+184h], eax; Subtract exactly g_iLevelUpSkillCount from majorSkillAdvances. Excess major increases survive and may keep another level pending.",
     "mnemonic": "sub",
     "size": 6
   },
   {
     "ea": "0x66C4D5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C4D7",
-    "line": "call    sub_65D560",
+    "line": "call    Player_ClearSkillAdvanceCounts; Clear every per-skill advance counter after committing the level, for majors and non-majors alike. Raw skill-use progress is deliberately preserved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x66C4F2",
-    "line": "jge     short loc_66C4FB",
+    "line": "jge     short loc_66C4FB; Clear bCanLevelUp only if the remaining majorSkillAdvances is below the configured threshold; otherwise another level remains ready.",
     "mnemonic": "jge",
     "size": 2
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x66C521",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+attributeAV], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x66C525",
-    "line": "fild    [esp+0Ch+arg_0]",
+    "line": "fild    [esp+0Ch+attributeAV]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x66C532",
-    "line": "mov     [esp+0Ch+arg_0], ecx",
+    "line": "mov     [esp+0Ch+attributeAV], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x66C536",
-    "line": "fild    [esp+0Ch+arg_0]",
+    "line": "fild    [esp+0Ch+attributeAV]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x66C53E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x66C556",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -709,13 +709,13 @@
   },
   {
     "ea": "0x66C56A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x66C56C",
-    "line": "call    sub_6684B0",
+    "line": "call    Player_AppendLevelUpTrackingRecord; When bTrackLevelUps is enabled, append an Oblivion-native diagnostic snapshot: player identity/level, exactly seven class major-skill names, then all 21 skill values and skillExp entries, attributes, inventory data, and advancement counters. There is no serialized minor-skill name list.",
     "mnemonic": "call",
     "size": 5
   },

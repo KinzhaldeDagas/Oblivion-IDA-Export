@@ -1,19 +1,36 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A0EE0",
-  "end_ea": "0x7A0F45",
-  "flags": 21505,
+  "chunks": [
+    [
+      "0x7A0EE0",
+      "0x7A0F67"
+    ],
+    [
+      "0x9CC620",
+      "0x9CC643"
+    ]
+  ],
+  "chunks_sha256": "f40ebcc942f614912e2e197445fc5da04ef9deaf5deafb4883a3875b31db0012",
+  "comment_regular": "Oblivion CFrondEngine::StartGuide constructs one zeroed compact 0x30 SFrondGuide and deep-pushes it into CFrondEngine+0x08. Unlike published RT 4.1, the shipped ABI has no vertex-count argument or stack-vertex selection.",
+  "comment_repeatable": "Oblivion CFrondEngine::StartGuide constructs one zeroed compact 0x30 SFrondGuide and deep-pushes it into CFrondEngine+0x08. Unlike published RT 4.1, the shipped ABI has no vertex-count argument or stack-vertex selection.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 17,
+  "display_name": "OB_CFrondEngine_StartGuide_010201A0",
+  "end_ea": "0x7A0F67",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A0EE0",
+  "name": "OB_CFrondEngine_StartGuide_010201A0",
   "segment": ".text",
-  "sha256": "577d5334b47a04089d610739ccbbfb1e6ddaec65ca473797734d0a04f4892d6e",
-  "size": 101,
+  "sha256": "2c2fedd22d7b016d6f1556b1660f5a15dc7e7e93866b19a54a1c9ccf34f82fad",
+  "size": 135,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A0EE0",
-  "type": "void __thiscall __noreturn(unsigned int *this)",
-  "xrefs_from_count": 30,
+  "total_chunk_size": 170,
+  "type": "void __thiscall(OB_CFrondEngine_010201A0 *this)",
+  "xrefs_from_count": 71,
   "xrefs_to_count": 1
 }

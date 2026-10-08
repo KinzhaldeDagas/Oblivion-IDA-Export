@@ -20,7 +20,7 @@
 0x98C0AD: jz      short loc_98C0E9
 0x98C0AF: push    esi
 0x98C0B0: push    dword_B310AC
-0x98C0B6: push    FlsSetValue
+0x98C0B6: push    dword_BA9E10+10h
 0x98C0BC: call    __decode_pointer
 0x98C0C1: pop     ecx
 0x98C0C2: call    eax

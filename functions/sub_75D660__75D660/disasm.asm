@@ -8,7 +8,6 @@
 0x75D673: jge     short loc_75D6B6
 0x75D675: push    ebx
 0x75D676: jmp     short loc_75D680
-0x75D678: align 10h
 0x75D680: mov     edx, [ecx+68h]
 0x75D683: movzx   ebx, word ptr [edx+0B6h]
 0x75D68A: cmp     ebx, eax

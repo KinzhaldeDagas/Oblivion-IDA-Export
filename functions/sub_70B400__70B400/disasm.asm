@@ -22,10 +22,10 @@
 0x70B445: lea     eax, [esp+28h+var_14]
 0x70B449: push    eax
 0x70B44A: call    sub_70B400
-0x70B44F: push    eax
-0x70B450: lea     ecx, [esp+2Ch+var_18]
+0x70B44F: push    eax; incoming
+0x70B450: lea     ecx, [esp+2Ch+var_18]; this
 0x70B454: mov     byte ptr [esp+2Ch+var_4], 2
-0x70B459: call    sub_55E2A0
+0x70B459: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x70B45E: mov     esi, [esp+28h+var_14]
 0x70B462: test    esi, esi
 0x70B464: mov     byte ptr [esp+28h+var_4], 1
@@ -72,3 +72,21 @@
 0x70B4D3: pop     ebp
 0x70B4D4: add     esp, 18h
 0x70B4D7: retn    4
+0x9C99B0: lea     ecx, [ebp-18h]; slot
+0x9C99B3: jmp     NiPointerSlot_Release
+0x9C99B8: lea     ecx, [ebp-14h]; slot
+0x9C99BB: jmp     NiPointerSlot_Release
+0x9C99C0: mov     eax, [ebp-10h]
+0x9C99C3: and     eax, 1
+0x9C99C6: jz      locret_9C99D8
+0x9C99CC: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9C99D0: mov     ecx, [ebp+4]; slot
+0x9C99D3: jmp     NiPointerSlot_Release
+0x9C99D8: retn
+0x9C99D9: mov     edx, [esp+arg_4]
+0x9C99DD: lea     eax, [edx-18h]
+0x9C99E0: mov     ecx, [edx-1Ch]
+0x9C99E3: xor     ecx, eax
+0x9C99E5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C99EA: mov     eax, offset stru_AF2224
+0x9C99EF: jmp     ___CxxFrameHandler3

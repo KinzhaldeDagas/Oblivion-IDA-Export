@@ -1,4 +1,4 @@
-0x5E5400: mov     ecx, [ecx-4]
+0x5E5400: mov     ecx, [ecx-4]; MagicCaster active item getter; the embedded caster state at Actor+0x64 distinguishes aim/cast/find-target phases.
 0x5E5403: test    ecx, ecx
 0x5E5405: jz      short loc_5E5411
 0x5E5407: mov     eax, [ecx]

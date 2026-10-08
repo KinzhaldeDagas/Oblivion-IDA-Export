@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 26,
+  "chunks": [
+    [
+      "0x55F7E0",
+      "0x55F7FE"
+    ]
+  ],
+  "chunks_sha256": "fa2774896c4328be3dc808dd56e171e9bfff43d01a735b260a0b52b33214b771",
+  "comment_regular": "Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
+  "comment_repeatable": "Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_55F7E0",
+  "display_name": "BSTreeManager_GetInstance",
   "end_ea": "0x55F7FE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55F7E0",
+  "name": "BSTreeManager_GetInstance",
   "segment": ".text",
   "sha256": "fa2774896c4328be3dc808dd56e171e9bfff43d01a735b260a0b52b33214b771",
   "size": 30,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55F7E0",
-  "type": "int __cdecl(char)",
+  "total_chunk_size": 30,
+  "type": "BSTreeManager_OblivionVerifiedLayout *__cdecl(bool createIfMissing)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 26
 }

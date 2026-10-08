@@ -1,1 +1,1 @@
-AudioSessionState
+typedef _AudioSessionState AudioSessionState;

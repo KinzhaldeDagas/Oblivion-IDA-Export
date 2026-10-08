@@ -3,7 +3,7 @@
 0x4EDDE2: mov     esi, ecx
 0x4EDDE4: mov     eax, [esi+24h]
 0x4EDDE7: push    eax
-0x4EDDE8: call    FormHeapFree
+0x4EDDE8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EDDED: xor     ebx, ebx
 0x4EDDEF: mov     [esi+24h], ebx
 0x4EDDF2: mov     [esi+2Ah], bx
@@ -13,7 +13,7 @@
 0x4EDE01: mov     [esi+38h], ebx
 0x4EDE04: mov     ecx, [esi+30h]
 0x4EDE07: push    ecx
-0x4EDE08: call    FormHeapFree
+0x4EDE08: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EDE0D: add     esp, 8
 0x4EDE10: lea     ecx, [esi+3Ch]
 0x4EDE13: mov     [esi+30h], ebx

@@ -1,19 +1,36 @@
 {
-  "callees_count": 143,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 53,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_80F280",
+  "chunks": [
+    [
+      "0x80F280",
+      "0x80FA37"
+    ],
+    [
+      "0x9D0FF0",
+      "0x9D1013"
+    ]
+  ],
+  "chunks_sha256": "fcb2011e3a61174d10ecee95ad65cc8a6505609a33c4c19a0b3b828ef0c29f1e",
+  "comment_regular": "\n\n[v154 program adaptation] Branch setup vtableA9459C+2C=A945C8 wrapper calls original then inspects queued pass VP/PS pairs. Exact installed-program matching (with unambiguous comment-stripped fallback) supplies derivatives that route only NormalMap sampling to UV2. Unsupported pairs keep the complete original draw. Original constants, render states, textures, fog and shadow setup remain in native code. Shared pass refs held until slot restoration.\n\nSpeedTreeBranchShader render/setup virtual. Direct final state selector covers pass indices 0..26; mode 0x17A calls helper 0x85E410, which appends pass slot 27 (dword_B477FC) before common state writes continue against index 26.",
+  "comment_repeatable": "SpeedTreeBranchShader SetupRenderPass override. Selector 0x17A calls the branch-only stage-2 helper 0x85E410; every unhandled selector delegates to ShadowLightShader_SetupRenderPass, whose explicit 0x177..0x179 cases bind currentLight+0x114 and queue a pass. The branch property can emit 0x178 (passInfo bit 2), 0x179 (else bit 0x4000), or 0x17A (otherwise exact branch RTTI), and all three are consumed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_SpeedTreeBranchShader_SetupRenderState_010201A0",
   "end_ea": "0x80FA37",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80F280",
+  "name": "OB_SpeedTreeBranchShader_SetupRenderState_010201A0",
   "segment": ".text",
   "sha256": "2830623c787b54220ff8397e1a510a26cd5fe2e47d8330f1faa101f66cd69f05",
   "size": 1975,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80F280",
+  "total_chunk_size": 2010,
   "type": "int __thiscall(Ni2DBuffer **this, _DWORD *, int, int, NiRenderedTexture *, int, int, int)",
-  "xrefs_from_count": 796,
+  "xrefs_from_count": 807,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x794550: mov     ecx, [esp+arg_0]
+0x794550: mov     ecx, [esp+arg_0]; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for arrays of 0x10-byte elements. Checks count*0x10 overflow, throws std::bad_alloc on overflow, and allocates through FormHeapAlloc; used by multiple outer-vector specializations including vector<vector<float>> and vector<vector<SFrondGuide>>.
 0x794554: sub     esp, 0Ch
 0x794557: test    ecx, ecx
 0x794559: ja      short loc_79456D

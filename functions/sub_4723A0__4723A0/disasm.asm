@@ -1,4 +1,4 @@
-0x4723A0: sub     esp, 40h
+0x4723A0: sub     esp, 40h; Computes the actor movement vector from ActorAnimData +0x0C/+0x10/+0x14. For non-creature ground-movement groups, clamps the vector by TESAnimGroup root-motion magnitude scaled by +0xBC and, when the blend sequence at +0xAC is active, +0xC0; optionally transforms the result and can suppress Z.
 0x4723A3: push    ebx
 0x4723A4: mov     ebx, ecx
 0x4723A6: mov     eax, [ebx+4]
@@ -32,26 +32,26 @@
 0x472404: test    al, al
 0x472406: jnz     loc_472575
 0x47240C: mov     ecx, esi
-0x47240E: call    sub_5E05B0
+0x47240E: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x472413: test    al, al
 0x472415: jz      loc_472575
 0x47241B: mov     eax, [ebx+0A0h]
 0x472421: test    eax, eax
 0x472423: jz      loc_472575
 0x472429: mov     ecx, [eax+68h]
-0x47242C: call    TESAnimGroup_GetAnimationGroup
+0x47242C: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x472431: cmp     eax, 3
 0x472434: jl      loc_472575
 0x47243A: mov     eax, [ebx+0A0h]
 0x472440: mov     ecx, [eax+68h]
-0x472443: call    TESAnimGroup_GetAnimationGroup
+0x472443: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x472448: cmp     eax, 10h
 0x47244B: jg      loc_472575
 0x472451: mov     ecx, [ebx+0A0h]
 0x472457: fld     dword ptr ds:0B33E9Ch
 0x47245D: mov     ecx, [ecx+68h]
 0x472460: fstp    [esp+4Ch+arg_4]
-0x472464: call    sub_51AED0
+0x472464: call    TESAnimGroup_GetMovementMagnitude; TESAnimGroup movement magnitude. Computes sqrt(x*x + y*y + z*z) from movement vector floats; used by Animate In Place warning path.
 0x472469: fmul    dword ptr [ebx+0BCh]
 0x47246F: mov     eax, [ebx+0ACh]
 0x472475: test    eax, eax
@@ -64,7 +64,7 @@
 0x47248A: fld     dword ptr ds:0B33E9Ch
 0x472490: mov     ecx, eax
 0x472492: fstp    [esp+4Ch+var_40]
-0x472496: call    sub_51AED0
+0x472496: call    TESAnimGroup_GetMovementMagnitude; TESAnimGroup movement magnitude. Computes sqrt(x*x + y*y + z*z) from movement vector floats; used by Animate In Place warning path.
 0x47249B: fmul    dword ptr [ebx+0C0h]
 0x4724A1: fmul    [esp+4Ch+var_40]
 0x4724A5: fstp    [esp+4Ch+var_40]

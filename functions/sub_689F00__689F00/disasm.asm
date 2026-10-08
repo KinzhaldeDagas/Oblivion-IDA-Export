@@ -43,25 +43,25 @@
 0x689F87: mov     ecx, [eax]
 0x689F89: fst     [esp+68h+var_3C]
 0x689F8D: fldz
-0x689F8F: mov     [esp+68h+var_48], ecx
+0x689F8F: mov     [esp+68h+start.x], ecx
 0x689F93: mov     edx, [eax+4]
 0x689F96: fstp    [esp+68h+var_38]
 0x689F9A: lea     ecx, [esp+68h+var_3C]
-0x689F9E: push    ecx; int
-0x689F9F: mov     [esp+6Ch+var_44], edx
+0x689F9E: push    ecx; vertexColor
+0x689F9F: mov     [esp+6Ch+start.y], edx
 0x689FA3: mov     eax, [eax+8]
 0x689FA6: fst     [esp+6Ch+var_34]
 0x689FAA: fstp    [esp+6Ch+var_30]
 0x689FAE: push    ecx
 0x689FAF: fld     dword ptr ds:0A468FCh
-0x689FB5: mov     [esp+70h+var_40], eax
-0x689FB9: fstp    [esp+70h+var_70]; float
-0x689FBC: call    sub_47FD30
-0x689FC1: mov     edx, [esp+70h+var_48]
+0x689FB5: mov     [esp+70h+start.z], eax
+0x689FB9: fstp    [esp+70h+scale]; scale
+0x689FBC: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
+0x689FC1: mov     edx, [esp+70h+start.x]
 0x689FC5: mov     [eax+54h], edx
-0x689FC8: mov     ecx, [esp+70h+var_44]
+0x689FC8: mov     ecx, [esp+70h+start.y]
 0x689FCC: mov     [eax+58h], ecx
-0x689FCF: mov     edx, [esp+70h+var_40]
+0x689FCF: mov     edx, [esp+70h+start.z]
 0x689FD3: add     esp, 8
 0x689FD6: mov     [eax+5Ch], edx
 0x689FD9: mov     edx, [esi]
@@ -77,52 +77,52 @@
 0x689FF6: cmp     dword ptr [ebx], 0
 0x689FF9: jz      loc_68A0EF
 0x689FFF: mov     ebp, [ebx]
-0x68A001: mov     ecx, ebp
-0x68A003: call    sub_68B110
+0x68A001: mov     ecx, ebp; this
+0x68A003: call    TravelPathNode_GetPosition; Verified TravelPathNode_GetPosition returns a stored NiPoint3* for kind 1; for kind 0, returns reference GetPos unless the ref has TeleportData, in which case it returns the linked door's TeleportData xyz marker. Null payloads and unrecognized kinds return g_zeroNiPoint3.
 0x68A008: fld1
 0x68A00A: mov     ecx, [eax]
 0x68A00C: fst     [esp+68h+var_3C]
 0x68A010: fldz
-0x68A012: mov     [esp+68h+var_54], ecx
+0x68A012: mov     [esp+68h+end.x], ecx
 0x68A016: mov     edx, [eax+4]
 0x68A019: fstp    [esp+68h+var_38]
 0x68A01D: lea     ecx, [esp+68h+var_3C]
-0x68A021: push    ecx; int
-0x68A022: mov     [esp+6Ch+var_50], edx
+0x68A021: push    ecx; vertexColor
+0x68A022: mov     [esp+6Ch+end.y], edx
 0x68A026: mov     eax, [eax+8]
 0x68A029: fst     [esp+6Ch+var_34]
 0x68A02D: fstp    [esp+6Ch+var_30]
 0x68A031: push    ecx
 0x68A032: fld     dword ptr ds:0A468FCh
-0x68A038: mov     [esp+70h+var_4C], eax
-0x68A03C: fstp    [esp+70h+var_70]; float
-0x68A03F: call    sub_47FD30
-0x68A044: mov     edx, [esp+70h+var_54]
+0x68A038: mov     [esp+70h+end.z], eax
+0x68A03C: fstp    [esp+70h+scale]; scale
+0x68A03F: call    NiTriShape_CreateOctahedronGeometry; Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.
+0x68A044: mov     edx, [esp+70h+end.x]
 0x68A048: fld1
 0x68A04A: mov     edi, eax
 0x68A04C: fst     [esp+70h+var_2C]
 0x68A050: fldz
 0x68A052: mov     [edi+54h], edx
-0x68A055: mov     eax, [esp+70h+var_50]
+0x68A055: mov     eax, [esp+70h+end.y]
 0x68A059: fst     [esp+70h+var_28]
 0x68A05D: fstp    [esp+70h+var_18]
 0x68A061: mov     [edi+58h], eax
-0x68A064: mov     ecx, [esp+70h+var_4C]
+0x68A064: mov     ecx, [esp+70h+end.z]
 0x68A068: lea     edx, [esp+70h+var_2C]
-0x68A06C: push    edx
-0x68A06D: lea     eax, [esp+74h+var_54]
+0x68A06C: push    edx; endColor
+0x68A06D: lea     eax, [esp+74h+end]
 0x68A071: fst     [esp+74h+var_24]
 0x68A075: mov     [edi+5Ch], ecx
 0x68A078: fst     [esp+74h+var_20]
-0x68A07C: push    eax
+0x68A07C: push    eax; end
 0x68A07D: fst     [esp+78h+var_1C]
 0x68A081: lea     ecx, [esp+78h+var_1C]
 0x68A085: fst     [esp+78h+var_14]
-0x68A089: push    ecx
+0x68A089: push    ecx; startColor
 0x68A08A: fstp    [esp+7Ch+var_10]
-0x68A08E: lea     edx, [esp+7Ch+var_48]
-0x68A092: push    edx
-0x68A093: call    sub_47F070
+0x68A08E: lea     edx, [esp+7Ch+start]
+0x68A092: push    edx; start
+0x68A093: call    NiLines_CreateSegment; Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.
 0x68A098: add     esp, 18h
 0x68A09B: mov     [esp+68h+arg_0], eax
 0x68A09F: mov     eax, [esi]
@@ -142,12 +142,12 @@
 0x68A0C3: call    ?status@DName@@QBE?AW4DNameStatus@@XZ; DName::status(void)
 0x68A0C8: test    eax, eax
 0x68A0CA: jz      short loc_68A0EF
-0x68A0CC: mov     eax, [esp+68h+var_54]
-0x68A0D0: mov     ecx, [esp+68h+var_50]
-0x68A0D4: mov     edx, [esp+68h+var_4C]
-0x68A0D8: mov     [esp+68h+var_48], eax
-0x68A0DC: mov     [esp+68h+var_44], ecx
-0x68A0E0: mov     [esp+68h+var_40], edx
+0x68A0CC: mov     eax, [esp+68h+end.x]
+0x68A0D0: mov     ecx, [esp+68h+end.y]
+0x68A0D4: mov     edx, [esp+68h+end.z]
+0x68A0D8: mov     [esp+68h+start.x], eax
+0x68A0DC: mov     [esp+68h+start.y], ecx
+0x68A0E0: mov     [esp+68h+start.z], edx
 0x68A0E4: mov     ebx, [ebx+4]
 0x68A0E7: test    ebx, ebx
 0x68A0E9: jnz     loc_689FF0
@@ -161,3 +161,15 @@
 0x68A100: pop     ebx
 0x68A101: add     esp, 54h
 0x68A104: retn    4
+0x9C5280: mov     eax, [ebp+4]
+0x9C5283: push    eax
+0x9C5284: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5289: pop     ecx
+0x9C528A: retn
+0x9C528B: mov     edx, [esp+arg_4]
+0x9C528F: lea     eax, [edx-58h]
+0x9C5292: mov     ecx, [edx-5Ch]
+0x9C5295: xor     ecx, eax
+0x9C5297: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C529C: mov     eax, offset stru_AEDA90
+0x9C52A1: jmp     ___CxxFrameHandler3

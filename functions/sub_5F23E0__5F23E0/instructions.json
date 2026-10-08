@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x5F23F6",
-    "line": "push    edi",
+    "line": "push    edi; flushTermination",
     "mnemonic": "push",
     "size": 1
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5F24A1",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x5F24DF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,13 +685,13 @@
   },
   {
     "ea": "0x5F24EF",
-    "line": "lea     ecx, [esi+68h]",
+    "line": "lea     ecx, [esi+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5F24F2",
-    "line": "call    MagicTarget_RemoveAllEffects",
+    "line": "call    MagicTarget_RemoveAllEffects; Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,19 +715,19 @@
   },
   {
     "ea": "0x5F2500",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5F2506",
-    "line": "push    esi",
+    "line": "push    esi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F2507",
-    "line": "call    sub_463A90",
+    "line": "call    TESSaveLoadGame_UnloadForm;",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,42 +1,43 @@
-void __thiscall sub_7A14E0(unsigned int *this)
+// Oblivion CFrondEngine destructor invoked by the final CSpeedTreeRT ownership-release path before FormHeapFree. Deletes the profile spline and destroys/frees the +0x40 SFrondTexture, +0x18 guide-LOD, and +0x08 SFrondGuide vectors. RT 4.1 corroborates the explicit profile deletion; the executable establishes the implicit member-vector destruction order.
+void __thiscall OB_CFrondEngine_dtor_010201A0(OB_CFrondEngine_010201A0 *this)
 {
-  unsigned int *v2; // esi
-  _DWORD *v3; // eax
-  _DWORD *v4; // eax
-  _DWORD *v5; // eax
+  OB_stBezierSpline_010201A0 *profileSpline; // esi
+  OB_SFrondTexture_010201A0 *begin; // eax
+  OB_stVector_SFrondGuide_010201A0 *v4; // eax
+  OB_SFrondGuide_010201A0 *v5; // eax
 
-  v2 = (unsigned int *)*(this + 0xC);
-  if ( v2 )
+  profileSpline = (OB_stBezierSpline_010201A0 *)this->profileSpline; /*0x7a150a*/
+  if ( profileSpline ) /*0x7a1519*/
   {
-    sub_784B60(v2);
-    FormHeapFree((unsigned int)v2);
+    OB_StBezierSpline_Dtor_010201A0(profileSpline); /*0x7a151d*/
+    FormHeapFree((unsigned int)profileSpline); /*0x7a1523*/
   }
-  *(this + 0xC) = 0;
-  v3 = (_DWORD *)*(this + 0x11);
-  if ( v3 )
+  this->profileSpline = 0; /*0x7a152e*/
+  begin = (OB_SFrondTexture_010201A0 *)this->frondTextureVectorWrapper.begin; /*0x7a1531*/
+  if ( begin ) /*0x7a1536*/
   {
-    sub_79B120(v3, (_DWORD *)*(this + 0x12));
-    FormHeapFree(*(this + 0x11));
+    OB_SFrondTexture_DestroyRange_010201A0(begin, (OB_SFrondTexture_010201A0 *)this->frondTextureVectorWrapper.end); /*0x7a1543*/
+    FormHeapFree((unsigned int)this->frondTextureVectorWrapper.begin); /*0x7a154c*/
   }
-  *(this + 0x11) = 0;
-  *(this + 0x12) = 0;
-  *(this + 0x13) = 0;
-  v4 = (_DWORD *)*(this + 7);
-  if ( v4 )
+  this->frondTextureVectorWrapper.begin = 0; /*0x7a1554*/
+  this->frondTextureVectorWrapper.end = 0; /*0x7a1557*/
+  this->frondTextureVectorWrapper.capacityEnd = 0; /*0x7a155a*/
+  v4 = this->guideLodVectorWrapper.begin; /*0x7a155d*/
+  if ( v4 ) /*0x7a1565*/
   {
-    sub_7A0CD0(v4, (_DWORD *)*(this + 8));
-    FormHeapFree(*(this + 7));
+    OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0(v4, this->guideLodVectorWrapper.end);// CFrondEngine destructor releases CFrondEngine+0x18 as vector<st_vector<SFrondGuide>>, deep-destroying every level and every contained compact guide. /*0x7a1572*/
+    FormHeapFree((unsigned int)this->guideLodVectorWrapper.begin); /*0x7a157b*/
   }
-  *(this + 7) = 0;
-  *(this + 8) = 0;
-  *(this + 9) = 0;
-  v5 = (_DWORD *)*(this + 3);
-  if ( v5 )
+  this->guideLodVectorWrapper.begin = 0; /*0x7a1583*/
+  this->guideLodVectorWrapper.end = 0; /*0x7a1586*/
+  this->guideLodVectorWrapper.capacityEnd = 0; /*0x7a1589*/
+  v5 = this->guideVectorWrapper.begin; /*0x7a158c*/
+  if ( v5 ) /*0x7a1594*/
   {
-    sub_79E150(v5, (_DWORD *)*(this + 4));
-    FormHeapFree(*(this + 3));
+    OB_SFrondGuide_DestroyRange_010201A0(v5, this->guideVectorWrapper.end); /*0x7a15a1*/
+    FormHeapFree((unsigned int)this->guideVectorWrapper.begin); /*0x7a15aa*/
   }
-  *(this + 3) = 0;
-  *(this + 4) = 0;
-  *(this + 5) = 0;
+  this->guideVectorWrapper.begin = 0; /*0x7a15b2*/
+  this->guideVectorWrapper.end = 0; /*0x7a15b5*/
+  this->guideVectorWrapper.capacityEnd = 0; /*0x7a15b8*/
 }

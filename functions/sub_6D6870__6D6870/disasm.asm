@@ -1,4 +1,4 @@
-0x6D6870: push    esi
+0x6D6870: push    esi; Oblivion NiTransformInterpolator equality. Requires base equality and cached-transform equality, then requires both data pointers null or both nonnull and NiTransformData-equal through virtual +0x2C. Key cursor values are deliberately excluded.
 0x6D6871: push    edi
 0x6D6872: mov     edi, [esp+8+arg_0]
 0x6D6876: push    edi

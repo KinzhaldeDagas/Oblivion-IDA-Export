@@ -32,7 +32,6 @@
 0x954CE4: mov     ebx, 3
 0x954CE9: add     edx, eax
 0x954CEB: jmp     short loc_954CF0
-0x954CED: align 10h
 0x954CF0: mov     eax, edx
 0x954CF2: xor     ecx, ecx
 0x954CF4: test    eax, eax

@@ -1,1 +1,5 @@
-context_copy_range
+struct context_copy_range
+{
+ULONG start;
+ULONG flag;
+};

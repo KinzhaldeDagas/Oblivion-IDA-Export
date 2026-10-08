@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x679120",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified (Oblivion): walks each temp effect's GetType/parent RTTI chain to NiRTTI_MagicShaderHitEffect, filters by target, unfinished state and clear bWeaponEnchantment_28, and selects the smallest BSTempEffect::elapsedSeconds. A prior candidate with TESEffectShader::Data.cFlags bit 0 can be displaced by one without it. The exact meaning of bit 0 remains Unknown.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x679128",
-    "line": "mov     [esp+14h+var_4], eax",
+    "line": "mov     [esp+14h+outData], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x679150",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,37 +241,37 @@
   },
   {
     "ea": "0x679188",
-    "line": "lea     ecx, [esp+18h+var_4]",
+    "line": "lea     ecx, [esp+18h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x67918C",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67918D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67918F",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x679194",
-    "line": "mov     esi, [eax]",
+    "line": "mov     esi, [eax]; Verified (Oblivion): temp-effect iteration calls NodeVoid_GetDataAddRef before inspecting each effect, then decrements the returned temporary ref after the visit.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x679196",
-    "line": "mov     eax, [esp+18h+var_4]",
+    "line": "mov     eax, [esp+18h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x6791D0",
-    "line": "cmp     eax, offset unk_B3C0D4",
+    "line": "cmp     eax, offset NiRTTI_MagicShaderHitEffect",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6791E0",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+targetReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x679203",
-    "line": "mov     ecx, [ebp+34h]",
+    "line": "mov     ecx, [ebp+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x679206",
-    "line": "push    1",
+    "line": "push    1; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x679208",
-    "line": "call    sub_4AC730",
+    "line": "call    TESEffectShader_HasFlagBits; Verified (Oblivion): TESEffectShader_HasFlagBits(effectShader_34, 1) participates in ranking non-weapon shader effects for a target; when the current candidate has bit 0 and the new candidate does not, the new one is preferred. Exact semantic flag name remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,19 +565,19 @@
   },
   {
     "ea": "0x679211",
-    "line": "mov     ecx, [esi+34h]",
+    "line": "mov     ecx, [esi+34h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x679214",
-    "line": "push    1",
+    "line": "push    1; mask",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x679216",
-    "line": "call    sub_4AC730",
+    "line": "call    TESEffectShader_HasFlagBits; Verified (Oblivion): candidate target must match and bWeaponEnchantment_28 must be clear; lower BSTempEffect::elapsedSeconds is preferred. A previous candidate with TESEffectShader::Data.cFlags bit 0 is displaced by a candidate without that bit. Semantic name of bit 0 remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },

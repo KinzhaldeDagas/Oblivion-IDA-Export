@@ -1,4 +1,4 @@
-0x4F6F40: fldz
+0x4F6F40: fldz; GetIsRace_Eval (index 69 / opcode 0x1045): requires TESNPC BaseForm (type 0x23), then pointer-compares its actual race field at +0xE8 with the Race parameter (typeID 0x0F). Result is numeric 1 or 0.
 0x4F6F42: push    ebx
 0x4F6F43: mov     ebx, [esp+4+arg_C]
 0x4F6F47: fstp    qword ptr [ebx]

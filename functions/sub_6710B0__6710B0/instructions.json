@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x6710F5",
-    "line": "push    esi",
+    "line": "push    esi; linkContext",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6710F6",
-    "line": "push    eax",
+    "line": "push    eax; activeEffectList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6710F7",
-    "line": "call    ActiveEffect_Base_PostLinkAEList",
+    "line": "call    ActiveEffect_Base_PostLinkAEList; Verified post-link entry iterates the target ActiveEffect EffectNode list and dispatches each ActiveEffect virtual +0x1C with the target/reference linkContext. TESObjectREFR_PostLinkModifiedExtraList calls this for a linked NonActorMagicTarget list (null context); actor/player post-link paths pass their reference context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x67112C",
-    "line": "call    NightEyeEffect_SetPlayerShader?",
+    "line": "call    NightEyeEffect_SetPlayerShader?; MoonSugarEffect decode: NightEye player shader path sets NightEye active state from player actor value kActorVal_NightEyeBonus; do not hijack for Moon Sugar.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x671156",
-    "line": "call    SetCameraFOV_0",
+    "line": "call    SetCameraFOV_0; MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.",
     "mnemonic": "call",
     "size": 5
   },

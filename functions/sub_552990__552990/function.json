@@ -1,19 +1,36 @@
 {
-  "callees_count": 36,
-  "callers_count": 9,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_552990",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x552990",
+      "0x552C06"
+    ],
+    [
+      "0x9BBD60",
+      "0x9BBD83"
+    ]
+  ],
+  "chunks_sha256": "b8fdcd7628c747b4e492b43955f692cd8a5bf0b3e0d9296621f9a9eebd4ad900",
+  "comment_regular": "Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.",
+  "comment_repeatable": "Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "FaceGenHeadParameters_Combine",
   "end_ea": "0x552C06",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_552990",
+  "name": "FaceGenHeadParameters_Combine",
   "segment": ".text",
   "sha256": "9ad480acd9780d386156eafc3cc1264918357488100bd9b12952b480352992bf",
   "size": 630,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x552990",
-  "type": "void __cdecl(char *, char *, int, char, float)",
-  "xrefs_from_count": 225,
+  "total_chunk_size": 665,
+  "type": "void __cdecl(const FaceGenHeadParameters *base, const FaceGenHeadParameters *delta, FaceGenHeadParameters *outParameters, bool specialSecondBankMode, float maximumRms)",
+  "xrefs_from_count": 240,
   "xrefs_to_count": 13
 }

@@ -1,18 +1,31 @@
 {
-  "callees_count": 39,
-  "callers_count": 35,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 29,
+  "callers_count": 48,
+  "chunks": [
+    [
+      "0x7B4290",
+      "0x7B44A8"
+    ]
+  ],
+  "chunks_sha256": "30c6cbeb92ae4c90a7a2afcb2568da91ec94739feb2d8a37d72c07a36b8ddfa1",
+  "comment_regular": "\n[2026-10-03 frond readiness] Nonzero cached definition is returned unconditionally at7B42A0/7B449B. Native factory returning an object therefore does not establish complete programs. Plugin shader5 attachment now requires declaration capacity8/stream1, frond vtable, constant map/c12 binding, four VS wrappers with D3D handles+30, two PS wrappers with handles+28, and pass+94 with three populated stages. Incomplete cached definitions are rejected; map absence is only a new-creation prerequisite.\n\nDeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
+  "comment_repeatable": "DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "GetShaderDefinition",
   "end_ea": "0x7B44A8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "GetShaderDefinition",
   "segment": ".text",
   "sha256": "30c6cbeb92ae4c90a7a2afcb2568da91ec94739feb2d8a37d72c07a36b8ddfa1",
   "size": 536,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7B4290",
+  "total_chunk_size": 536,
   "type": "ShaderDefinition *__cdecl(unsigned int a1)",
   "xrefs_from_count": 181,
   "xrefs_to_count": 48

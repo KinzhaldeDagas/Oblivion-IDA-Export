@@ -1,4 +1,4 @@
-0x802890: push    ebx
+0x802890: push    ebx; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x802891: push    esi
 0x802892: mov     ebx, ecx
 0x802894: mov     esi, [ebx+7Ch]

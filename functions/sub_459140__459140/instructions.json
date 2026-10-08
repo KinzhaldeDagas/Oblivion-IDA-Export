@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x459140",
-    "line": "sub     esp, 1Ch",
+    "line": "sub     esp, 1Ch; MEF PERF 2026-10-02 PASS2: Verified character-controller drain: bucket-order iteration, MobileObject/HighProcess checks, temporary controller reference, cursor substitution/restoration, blob free and key removal. No evidence that callback order may be changed by rehash.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -72,12 +72,6 @@
     "size": 2
   },
   {
-    "ea": "0x45915A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x459160",
     "line": "cmp     dword ptr [edx], 0",
     "mnemonic": "cmp",
@@ -127,7 +121,7 @@
   },
   {
     "ea": "0x459177",
-    "line": "mov     [esp+24h+var_14], eax",
+    "line": "mov     [esp+24h+position], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,13 +145,13 @@
   },
   {
     "ea": "0x459183",
-    "line": "lea     eax, [esp+2Ch+var_1C]",
+    "line": "lea     eax, [esp+2Ch+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x459187",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,31 +163,31 @@
   },
   {
     "ea": "0x45918C",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x45918D",
-    "line": "mov     ecx, [edi+5Ch]",
+    "line": "mov     ecx, [edi+5Ch]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x459190",
-    "line": "lea     edx, [esp+34h+var_14]",
+    "line": "lea     edx, [esp+34h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x459194",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x459195",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +229,7 @@
   },
   {
     "ea": "0x4591AD",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +349,7 @@
   },
   {
     "ea": "0x4591EF",
-    "line": "mov     edx, [esp+2Ch+var_1C]",
+    "line": "mov     edx, [esp+2Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -571,13 +565,13 @@
   },
   {
     "ea": "0x459257",
-    "line": "call    sub_657340",
+    "line": "call    MobileObject_LoadCharacterProxyState",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x45925C",
-    "line": "mov     edx, [esp+2Ch+var_1C]",
+    "line": "mov     edx, [esp+2Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x4592C1",
-    "line": "mov     edx, [esp+2Ch+var_1C]",
+    "line": "mov     edx, [esp+2Ch+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x4592DD",
-    "line": "cmp     [esp+2Ch+var_14], 0",
+    "line": "cmp     [esp+2Ch+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

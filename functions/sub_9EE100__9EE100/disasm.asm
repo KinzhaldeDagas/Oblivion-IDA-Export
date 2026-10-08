@@ -2,7 +2,7 @@
 0x9EE106: push    ecx
 0x9EE107: fstp    [esp+4+var_4]; float
 0x9EE10A: push    offset aFdeathsoundmax; "fDeathSoundMaxDistance"
-0x9EE10F: mov     ecx, offset fDeathSoundMaxDistance
+0x9EE10F: mov     ecx, 0B37D78h
 0x9EE114: call    GameSetting_ConstrAndReg_float
 0x9EE119: push    offset sub_A20210; void (__cdecl *)()
 0x9EE11E: call    _atexit

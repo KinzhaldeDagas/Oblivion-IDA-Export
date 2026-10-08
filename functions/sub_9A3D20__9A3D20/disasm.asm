@@ -1,4 +1,4 @@
-0x9A3D20: cmp     byte_B4295B, 0
+0x9A3D20: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A3D27: push    ebx
 0x9A3D28: push    esi
 0x9A3D29: push    edi
@@ -6,10 +6,10 @@
 0x9A3D2E: mov     esi, [edi+30h]
 0x9A3D31: mov     ebx, [edi+14h]
 0x9A3D34: jnz     short loc_9A3D3B
-0x9A3D36: call    sub_783C70
+0x9A3D36: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A3D3B: and     ebx, 0FFh
 0x9A3D41: mov     eax, 3
-0x9A3D46: cmp     dword_B428D8[ebx*4], eax
+0x9A3D46: cmp     g_D3DXParameterClassDispatch[ebx*4], eax
 0x9A3D4D: jnz     short loc_9A3D64
 0x9A3D4F: mov     ecx, [esp+0Ch+arg_0]
 0x9A3D53: fld     dword ptr [esi]
@@ -19,13 +19,13 @@
 0x9A3D5A: fstp    dword ptr [ecx+0BAAA70h]
 0x9A3D60: pop     ebx
 0x9A3D61: retn    0Ch
-0x9A3D64: cmp     byte_B4295B, 0
+0x9A3D64: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A3D6B: mov     ebx, [edi+14h]
 0x9A3D6E: jnz     short loc_9A3D75
-0x9A3D70: call    sub_783C70
+0x9A3D70: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A3D75: and     ebx, 0FFh
 0x9A3D7B: mov     eax, 4
-0x9A3D80: cmp     dword_B428D8[ebx*4], eax
+0x9A3D80: cmp     g_D3DXParameterClassDispatch[ebx*4], eax
 0x9A3D87: jnz     short loc_9A3D9E
 0x9A3D89: mov     edx, [esp+0Ch+arg_0]
 0x9A3D8D: fld     dword ptr [esi]
@@ -35,12 +35,12 @@
 0x9A3D94: fstp    dword ptr [edx+0BAAA70h]
 0x9A3D9A: pop     ebx
 0x9A3D9B: retn    0Ch
-0x9A3D9E: cmp     byte_B4295B, 0
+0x9A3D9E: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A3DA5: mov     ebx, [edi+14h]
 0x9A3DA8: jnz     short loc_9A3DAF
-0x9A3DAA: call    sub_783C70
+0x9A3DAA: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A3DAF: and     ebx, 0FFh
-0x9A3DB5: cmp     dword_B428D8[ebx*4], 5
+0x9A3DB5: cmp     g_D3DXParameterClassDispatch[ebx*4], 5
 0x9A3DBD: jnz     short loc_9A3DE2
 0x9A3DBF: mov     eax, [esp+0Ch+arg_0]
 0x9A3DC3: fld     dword ptr [esi]
@@ -53,12 +53,12 @@
 0x9A3DD9: mov     eax, 5
 0x9A3DDE: pop     ebx
 0x9A3DDF: retn    0Ch
-0x9A3DE2: cmp     byte_B4295B, 0
+0x9A3DE2: cmp     g_D3DXParameterDispatchInitialized, 0
 0x9A3DE9: mov     ebx, [edi+14h]
 0x9A3DEC: jnz     short loc_9A3DF3
-0x9A3DEE: call    sub_783C70
+0x9A3DEE: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x9A3DF3: and     ebx, 0FFh
-0x9A3DF9: cmp     dword_B428D8[ebx*4], 6
+0x9A3DF9: cmp     g_D3DXParameterClassDispatch[ebx*4], 6
 0x9A3E01: jnz     short loc_9A3E2F
 0x9A3E03: fld     dword ptr [esi]
 0x9A3E05: mov     eax, [esp+0Ch+arg_0]

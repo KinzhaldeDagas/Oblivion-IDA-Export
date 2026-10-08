@@ -1,5 +1,5 @@
 0x721A90: push    ebx
-0x721A91: mov     ebx, dword ptr [esp+4+ArgList]
+0x721A91: mov     ebx, [esp+4+ArgList]
 0x721A95: push    esi
 0x721A96: mov     eax, ebx
 0x721A98: push    edi

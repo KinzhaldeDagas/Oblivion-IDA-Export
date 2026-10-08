@@ -10,7 +10,6 @@
 0x68FAA3: cmp     [edi+0A4h], esi
 0x68FAA9: jle     short loc_68FAE9
 0x68FAAB: jmp     short loc_68FAB0
-0x68FAAD: align 10h
 0x68FAB0: mov     eax, [edi+0A0h]
 0x68FAB6: mov     eax, [eax+esi*4]
 0x68FAB9: push    0; int

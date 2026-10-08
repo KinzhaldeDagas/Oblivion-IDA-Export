@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_789D40",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x789D40",
+      "0x789EBE"
+    ],
+    [
+      "0x9C8EB0",
+      "0x9C8ED3"
+    ]
+  ],
+  "chunks_sha256": "02d028c5217d7e4146ab65935d420ede4947924ee7138d0f2afde6479ad7d941",
+  "comment_regular": "2026-05-19 payload-retention pass: stock collision getter exports type, position, and dimensions only. Supplemental 73000 rotations are not exposed by this ABI and must be applied later at the Havok consumer boundary if retained sidecar data is present.",
+  "comment_repeatable": "2026-05-19 payload-retention pass: stock collision getter exports type, position, and dimensions only. Supplemental 73000 rotations are not exposed by this ABI and must be applied later at the Havok consumer boundary if retained sidecar data is present.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "CSpeedTreeRT__GetCollisionObject",
   "end_ea": "0x789EBE",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_789D40",
+  "name": "CSpeedTreeRT__GetCollisionObject",
   "segment": ".text",
   "sha256": "a55b861229f275f6a33d0b3298cac8080dfba8af14cc32ae98d647427829c90f",
   "size": 382,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x789D40",
-  "type": "void __userpurge(_DWORD *this@<ecx>, int@<edi>, unsigned int ArgList, _DWORD *, _DWORD *, _DWORD *)",
-  "xrefs_from_count": 146,
+  "total_chunk_size": 417,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, unsigned int index, int *typeOut, float *positionOut3, float *dimensionsOut3)",
+  "xrefs_from_count": 160,
   "xrefs_to_count": 2
 }

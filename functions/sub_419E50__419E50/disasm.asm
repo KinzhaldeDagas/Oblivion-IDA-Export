@@ -1,9 +1,9 @@
 0x419E50: push    ebx
 0x419E51: push    esi
 0x419E52: push    edi
-0x419E53: push    0
+0x419E53: push    0; effectIndex
 0x419E55: mov     edi, ecx
-0x419E57: call    MagicItem_GetFXEffect
+0x419E57: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x419E5C: mov     esi, eax
 0x419E5E: test    esi, esi
 0x419E60: mov     bl, 1

@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_RPC_ASYNC_NOTIFICATION_INFO",
+  "definition": "union _RPC_ASYNC_NOTIFICATION_INFO\n{\n$45E7D6C8CB319BFD4056BEFD81B8D7BC APC;\n$F5FAE13DCE0EB3372C9E728347B5FF54 IOC;\n$1A1880E56E396279FFDAE964CD8A44EC HWND;\nHANDLE hEvent;\nPFN_RPCNOTIFICATION_ROUTINE NotificationRoutine;\n}\n",
   "id": 18374686479672032129,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "APC",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "$45E7D6C8CB319BFD4056BEFD81B8D7BC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "IOC",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "$F5FAE13DCE0EB3372C9E728347B5FF54"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "HWND",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "$1A1880E56E396279FFDAE964CD8A44EC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hEvent",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NotificationRoutine",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "PFN_RPCNOTIFICATION_ROUTINE"
     }
   ],
   "name": "_RPC_ASYNC_NOTIFICATION_INFO",
+  "ordinal": 3041,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 24
 }

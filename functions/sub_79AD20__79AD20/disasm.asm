@@ -1,4 +1,4 @@
-0x79AD20: push    esi
+0x79AD20: push    esi; Initializes an empty compact SFrondGuide vector wrapper and, when count is nonzero, buys exact count capacity. Maximum count is 0x05555555.
 0x79AD21: xor     eax, eax
 0x79AD23: push    edi
 0x79AD24: mov     edi, [esp+8+arg_0]
@@ -14,10 +14,10 @@
 0x79AD3B: retn    4
 0x79AD3E: cmp     edi, 5555555h
 0x79AD44: jbe     short loc_79AD4B
-0x79AD46: call    sub_790B90
+0x79AD46: call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error("vector<T> too long") and throws; used by multiple element specializations after max_size checks.
 0x79AD4B: push    eax
-0x79AD4C: push    edi; char *
-0x79AD4D: call    sub_799FA0
+0x79AD4C: push    edi; count
+0x79AD4D: call    OB_stVector_SFrondGuide_Allocate_010201A0; Allocates count compact 0x30-byte SFrondGuide records from FormHeap and throws std::bad_alloc on count*0x30 overflow.
 0x79AD52: lea     ecx, [edi+edi*2]
 0x79AD55: add     esp, 8
 0x79AD58: shl     ecx, 4

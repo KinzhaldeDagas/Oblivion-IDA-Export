@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "host_object_params",
+  "definition": "struct __declspec(align(8)) host_object_params\n{\nclass_reg_data regdata;\nCLSID clsid;\nIID iid;\nHANDLE event __offset(OFF64|AUTO);\nHRESULT_0 hr;\nIStream_0 *stream __offset(OFF64|AUTO);\nBOOL apartment_threaded;\n}\n",
   "id": 18374686479671835664,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "regdata",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "class_reg_data"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clsid",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 16
+      "size": 16,
+      "type": "CLSID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "iid",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 16
+      "size": 16,
+      "type": "IID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "event",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hr",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stream",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "IStream_0 *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "apartment_threaded",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "BOOL"
     }
   ],
   "name": "host_object_params",
+  "ordinal": 4348,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

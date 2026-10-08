@@ -5,7 +5,7 @@
 0x4EFFC8: mov     ebx, ecx
 0x4EFFCA: jz      short loc_4F0021
 0x4EFFCC: mov     ecx, edi; this
-0x4EFFCE: call    TESObjectCELL_IsInterior
+0x4EFFCE: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4EFFD3: test    al, al
 0x4EFFD5: jnz     short loc_4F0021
 0x4EFFD7: push    ebp

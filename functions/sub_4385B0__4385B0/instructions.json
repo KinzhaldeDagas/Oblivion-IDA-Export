@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4385B0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified queued-record factory: validates the model path and Ni2DBuffer, allocates a 0x40-byte QueuedDistantLOD task around a 0x20-byte DistantLODQueuedInstanceData record, attaches the form texture-hash cache, and queues the task. Each record contains position, three rotation angles, normalized scale, and a retained cell Ni2DBuffer.",
     "mnemonic": "push",
     "size": 2
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4385D2",
-    "line": "mov     edi, [esp+18h+arg_0]",
+    "line": "mov     edi, [esp+18h+modelPath]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4385DF",
-    "line": "mov     esi, [esp+18h+arg_4]",
+    "line": "mov     esi, [esp+18h+instanceData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4385F7",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+modelPath], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x438607",
-    "line": "push    esi",
+    "line": "push    esi; instanceData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x438608",
-    "line": "push    5",
+    "line": "push    5; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43860A",
-    "line": "push    edi",
+    "line": "push    edi; modelPath",
     "mnemonic": "push",
     "size": 1
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x43860D",
-    "line": "call    ??0QueuedDistantLOD@@QAE@XZ; QueuedDistantLOD::QueuedDistantLOD(void)",
+    "line": "call    ??0QueuedDistantLOD@@QAE@XZ; Verified QueuedDistantLOD constructor: stores its per-instance context pointer at task +0x38; context is a 0x20-byte DistantLODQueuedInstanceData record. Priority is supplied by the factory as 5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x43861A",
-    "line": "mov     [esp+18h+arg_0], esi",
+    "line": "mov     [esp+18h+modelPath], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x43862C",
-    "line": "mov     eax, [esp+18h+arg_8]",
+    "line": "mov     eax, [esp+18h+textureHashCache]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x438640",
-    "line": "lea     ecx, [esp+18h+arg_0]; void *",
+    "line": "lea     ecx, [esp+18h+modelPath]; void *",
     "mnemonic": "lea",
     "size": 4
   },
@@ -352,5 +352,89 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AC670",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC673",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC674",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC679",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC67A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AC67B",
+    "line": "lea     ecx, [ebp+4]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC67E",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC683",
+    "line": "mov     edx, [esp+instanceData]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AC687",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC68A",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AC68D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AC68F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC694",
+    "line": "mov     eax, offset stru_AD9340",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AC699",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

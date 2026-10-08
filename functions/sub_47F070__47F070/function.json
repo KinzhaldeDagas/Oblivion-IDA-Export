@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_47F070",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
+  "callers_count": 10,
+  "chunks": [
+    [
+      "0x47F070",
+      "0x47F199"
+    ],
+    [
+      "0x9B3B90",
+      "0x9B3BC1"
+    ]
+  ],
+  "chunks_sha256": "27bef69921e4b5399e063a25500a7e3a77a0eeb89c5299b7122f00fa09c3b6d2",
+  "comment_regular": "Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
+  "comment_repeatable": "Verified generic NiLines_CreateSegment: copies two endpoint positions and two per-vertex colors, supplies line flags [1,0], and returns a two-vertex NiLines segment. TESPathGrid_RebuildRenderedGraph calls it for adjacency edges.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiLines_CreateSegment",
   "end_ea": "0x47F199",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_47F070",
+  "name": "NiLines_CreateSegment",
   "segment": ".text",
   "sha256": "ec89e27b9d89d5b4f6373a2cb05f9481d9b48b0d60991210aa308e422b6f7000",
   "size": 297,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x47F070",
-  "type": "NiAVObject *__cdecl(_DWORD *, _DWORD *, _DWORD *, _DWORD *)",
-  "xrefs_from_count": 109,
+  "total_chunk_size": 346,
+  "type": "NiAVObject *__cdecl(const NiPoint3 *start, const NiColorAlpha *startColor, const NiPoint3 *end, const NiColorAlpha *endColor)",
+  "xrefs_from_count": 128,
   "xrefs_to_count": 10
 }

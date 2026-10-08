@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6600B0",
+      "0x6600CA"
+    ]
+  ],
+  "chunks_sha256": "08a281d8f9afc46ad1fec0c74787f217768336bc247cbb01c041ce34d65b5ad0",
+  "comment_regular": "Return the player's currently active ActorSkinInfo: third-person +0x104 when +0x588 is set; otherwise first-person +0x5C8 when nonnull, falling back to +0x104. ActorSkinInfo owns equipped model pointers; it is not ActorAnimData.",
+  "comment_repeatable": "Return the player's currently active ActorSkinInfo: third-person +0x104 when +0x588 is set; otherwise first-person +0x5C8 when nonnull, falling back to +0x104. ActorSkinInfo owns equipped model pointers; it is not ActorAnimData.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6600B0",
+  "display_name": "PlayerCharacter_GetActiveSkinInfo",
   "end_ea": "0x6600CA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6600B0",
+  "name": "PlayerCharacter_GetActiveSkinInfo",
   "segment": ".text",
   "sha256": "08a281d8f9afc46ad1fec0c74787f217768336bc247cbb01c041ce34d65b5ad0",
   "size": 26,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6600B0",
-  "type": "int __thiscall(int this)",
+  "total_chunk_size": 26,
+  "type": "ActorSkinInfo *__thiscall(PlayerCharacter *this)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 1
 }

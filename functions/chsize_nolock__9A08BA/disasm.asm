@@ -9,8 +9,8 @@
 0x9A08C7: push    ebx; int
 0x9A08C8: push    ebx; int
 0x9A08C9: push    [ebp+arg_0]; int
-0x9A08CC: mov     [ebp+var_10], ebx
-0x9A08CF: mov     [ebp+var_C], ebx
+0x9A08CC: mov     dword ptr [ebp+var_10], ebx
+0x9A08CF: mov     dword ptr [ebp+var_10+4], ebx
 0x9A08D2: call    __lseeki64_nolock
 0x9A08D7: mov     [ebp+var_18], eax
 0x9A08DA: and     eax, edx
@@ -28,8 +28,8 @@
 0x9A08F7: add     esp, 10h
 0x9A08FA: cmp     ecx, 0FFFFFFFFh
 0x9A08FD: jz      short loc_9A0940
-0x9A08FF: mov     esi, [ebp+arg_4]
-0x9A0902: mov     edi, [ebp+arg_8]
+0x9A08FF: mov     esi, dword ptr [ebp+arg_4]
+0x9A0902: mov     edi, dword ptr [ebp+arg_4+4]
 0x9A0905: sub     esi, eax
 0x9A0907: sbb     edi, edx
 0x9A0909: js      loc_9A09D5
@@ -82,7 +82,7 @@
 0x9A0989: jg      short loc_9A095E
 0x9A098B: test    esi, esi
 0x9A098D: ja      short loc_9A095E
-0x9A098F: mov     esi, [ebp+var_10]
+0x9A098F: mov     esi, dword ptr [ebp+var_10]
 0x9A0992: push    [ebp+var_8]
 0x9A0995: push    [ebp+arg_0]
 0x9A0998: call    __setmode_nolock
@@ -101,7 +101,7 @@
 0x9A09C2: call    __errno
 0x9A09C7: mov     dword ptr [eax], 0Dh
 0x9A09CD: or      esi, 0FFFFFFFFh
-0x9A09D0: mov     [ebp+var_C], esi
+0x9A09D0: mov     dword ptr [ebp+var_10+4], esi
 0x9A09D3: jmp     short loc_9A0992
 0x9A09D5: cmp     edi, ebx
 0x9A09D7: jg      short loc_9A0A4A
@@ -109,8 +109,8 @@
 0x9A09DB: cmp     esi, ebx
 0x9A09DD: jnb     short loc_9A0A4A
 0x9A09DF: push    ebx; dwMoveMethod
-0x9A09E0: push    [ebp+arg_8]; int
-0x9A09E3: push    [ebp+arg_4]; int
+0x9A09E0: push    dword ptr [ebp+arg_4+4]; int
+0x9A09E3: push    dword ptr [ebp+arg_4]; int
 0x9A09E6: push    [ebp+arg_0]; int
 0x9A09E9: call    __lseeki64_nolock
 0x9A09EE: and     eax, edx
@@ -127,10 +127,10 @@
 0x9A0A10: neg     eax
 0x9A0A12: dec     eax
 0x9A0A13: cdq
-0x9A0A14: mov     [ebp+var_10], eax
+0x9A0A14: mov     dword ptr [ebp+var_10], eax
 0x9A0A17: and     eax, edx
 0x9A0A19: cmp     eax, 0FFFFFFFFh
-0x9A0A1C: mov     [ebp+var_C], edx
+0x9A0A1C: mov     dword ptr [ebp+var_10+4], edx
 0x9A0A1F: jnz     short loc_9A0A4A
 0x9A0A21: call    __errno
 0x9A0A26: mov     dword ptr [eax], 0Dh
@@ -138,8 +138,8 @@
 0x9A0A31: mov     esi, eax
 0x9A0A33: call    ds:GetLastError
 0x9A0A39: mov     [esi], eax
-0x9A0A3B: mov     esi, [ebp+var_10]
-0x9A0A3E: and     esi, [ebp+var_C]
+0x9A0A3B: mov     esi, dword ptr [ebp+var_10]
+0x9A0A3E: and     esi, dword ptr [ebp+var_10+4]
 0x9A0A41: cmp     esi, 0FFFFFFFFh
 0x9A0A44: jz      loc_9A0940
 0x9A0A4A: push    ebx; dwMoveMethod

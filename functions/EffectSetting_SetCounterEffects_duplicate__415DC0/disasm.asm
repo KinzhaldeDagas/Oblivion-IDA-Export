@@ -28,7 +28,6 @@
 0x415E20: jle     short loc_415E43
 0x415E22: mov     ecx, [esp+0Ch+arg_4]
 0x415E26: jmp     short loc_415E30
-0x415E28: align 10h
 0x415E30: mov     ebx, [ecx+eax*4]
 0x415E33: mov     edx, [esi+9Ch]
 0x415E39: mov     [edx+eax*4], ebx

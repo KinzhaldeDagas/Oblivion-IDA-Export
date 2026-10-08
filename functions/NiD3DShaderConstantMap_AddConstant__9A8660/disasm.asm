@@ -1,4 +1,4 @@
-0x9A8660: push    esi
+0x9A8660: push    esi; DeferredRendering: NiD3DShaderConstantMap::AddConstant routes by high nibble of flags; constant bindings are map metadata, not runtime light values.
 0x9A8661: mov     esi, ecx
 0x9A8663: mov     eax, [esi]
 0x9A8665: mov     edx, [eax+38h]

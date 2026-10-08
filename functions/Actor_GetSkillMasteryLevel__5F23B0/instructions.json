@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F23B0",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+actorValue]; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x5F23C6",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F23C7",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },

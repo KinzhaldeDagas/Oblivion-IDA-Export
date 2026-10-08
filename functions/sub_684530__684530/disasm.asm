@@ -38,10 +38,10 @@
 0x6845AF: push    ecx
 0x6845B0: mov     ecx, ebp
 0x6845B2: fstp    [esp+2Ch+var_2C]; float
-0x6845B5: call    sub_6899C0
+0x6845B5: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6845BA: push    eax; int
 0x6845BB: lea     ecx, [edi+4]
-0x6845BE: call    sub_6899C0
+0x6845BE: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6845C3: push    eax; int
 0x6845C4: call    sub_47D810
 0x6845C9: add     esp, 0Ch
@@ -101,10 +101,10 @@
 0x68466A: push    edi
 0x68466B: mov     ecx, ebx
 0x68466D: call    BSSimpleList_Remove
-0x684672: lea     ecx, [edi+4]; void *
-0x684675: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x684672: lea     ecx, [edi+4]; this
+0x684675: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x68467A: push    edi
-0x68467B: call    FormHeapFree
+0x68467B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x684680: mov     esi, [ebx+4]
 0x684683: add     esp, 4
 0x684686: jmp     loc_6845D9
@@ -116,14 +116,14 @@
 0x684698: mov     ecx, [eax]
 0x68469A: push    eax
 0x68469B: mov     [esi], ecx
-0x68469D: call    FormHeapFree
+0x68469D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6846A2: add     esp, 4
 0x6846A5: jmp     short loc_6846AD
 0x6846A7: mov     dword ptr [esi], 0
-0x6846AD: lea     ecx, [edi+4]; void *
-0x6846B0: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x6846AD: lea     ecx, [edi+4]; this
+0x6846B0: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x6846B5: push    edi
-0x6846B6: call    FormHeapFree
+0x6846B6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6846BB: add     esp, 4
 0x6846BE: jmp     loc_6845D9
 0x6846C3: fld     [esp+28h+var_14]
@@ -149,3 +149,15 @@
 0x6846FE: pop     ebx
 0x6846FF: add     esp, 14h
 0x684702: retn
+0x9AFAA0: mov     eax, [ebp-10h]
+0x9AFAA3: push    eax
+0x9AFAA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAA9: pop     ecx
+0x9AFAAA: retn
+0x9AFAAB: mov     edx, [esp+arg_4]
+0x9AFAAF: lea     eax, [edx-18h]
+0x9AFAB2: mov     ecx, [edx-1Ch]
+0x9AFAB5: xor     ecx, eax
+0x9AFAB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFABC: mov     eax, offset stru_ADBFB0
+0x9AFAC1: jmp     ___CxxFrameHandler3

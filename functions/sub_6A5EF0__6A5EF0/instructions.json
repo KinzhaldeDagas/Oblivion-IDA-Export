@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x6A5F63",
-    "line": "call    sub_46D5C0",
+    "line": "call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x6A5FBB",
-    "line": "call    sub_532090",
+    "line": "call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x6A5FC6",
-    "line": "lea     ecx, [esp+4C4h+var_470]",
+    "line": "lea     ecx, [esp+4C4h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A5FCA",
-    "line": "call    sub_532250",
+    "line": "call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x6A5FDC",
-    "line": "mov     [esp+4C4h+var_470], 1Bh",
+    "line": "mov     [esp+4C4h+info.collisionFilter], 1Bh",
     "mnemonic": "mov",
     "size": 8
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x6A5FE9",
-    "line": "mov     [esp+4C4h+var_46C], eax",
+    "line": "mov     [esp+4C4h+info.shape], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6A5FEF",
-    "line": "mov     [esp+4C4h+var_46C], ebx",
+    "line": "mov     [esp+4C4h+info.shape], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,73 +469,73 @@
   },
   {
     "ea": "0x6A5FF5",
-    "line": "lea     ecx, [esp+4C4h+var_470]",
+    "line": "lea     ecx, [esp+4C4h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A5FF9",
-    "line": "fst     [esp+4C4h+var_44C]",
+    "line": "fst     [esp+4C4h+info.transform+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6A5FFD",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6A5FFE",
-    "line": "fst     [esp+4C8h+var_448]",
+    "line": "fst     [esp+4C8h+info.transform+8]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6005",
-    "line": "lea     ecx, [esp+4C8h+var_490]",
+    "line": "lea     ecx, [esp+4C8h+self]; self",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A6009",
-    "line": "fst     [esp+4C8h+var_444]",
+    "line": "fst     [esp+4C8h+info.transform+0Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6010",
-    "line": "fst     [esp+4C8h+var_440]",
+    "line": "fst     [esp+4C8h+info.transform+10h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6017",
-    "line": "fst     [esp+4C8h+var_438]",
+    "line": "fst     [esp+4C8h+info.transform+18h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A601E",
-    "line": "fst     [esp+4C8h+var_434]",
+    "line": "fst     [esp+4C8h+info.transform+1Ch]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6025",
-    "line": "fst     [esp+4C8h+var_430]",
+    "line": "fst     [esp+4C8h+info.transform+20h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A602C",
-    "line": "fst     [esp+4C8h+var_42C]",
+    "line": "fst     [esp+4C8h+info.transform+24h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6033",
-    "line": "fst     [esp+4C8h+var_424]",
+    "line": "fst     [esp+4C8h+info.transform+2Ch]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -547,49 +547,49 @@
   },
   {
     "ea": "0x6A603C",
-    "line": "fst     [esp+4C8h+var_450]",
+    "line": "fst     [esp+4C8h+info.transform]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6A6040",
-    "line": "fst     [esp+4C8h+var_43C]",
+    "line": "fst     [esp+4C8h+info.transform+14h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6047",
-    "line": "fstp    [esp+4C8h+var_428]",
+    "line": "fstp    [esp+4C8h+info.transform+28h]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x6A604E",
-    "line": "fst     [esp+4C8h+var_420]",
+    "line": "fst     [esp+4C8h+info.transform+30h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6055",
-    "line": "fst     [esp+4C8h+var_41C]",
+    "line": "fst     [esp+4C8h+info.transform+34h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A605C",
-    "line": "fst     [esp+4C8h+var_418]",
+    "line": "fst     [esp+4C8h+info.transform+38h]",
     "mnemonic": "fst",
     "size": 7
   },
   {
     "ea": "0x6A6063",
-    "line": "fstp    [esp+4C8h+var_414]",
+    "line": "fstp    [esp+4C8h+info.transform+3Ch]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x6A606A",
-    "line": "call    sub_531FC0",
+    "line": "call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x6A607B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x6A6088",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x6A6091",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x6A60AA",
-    "line": "lea     ecx, [esp+4C8h+var_490]",
+    "line": "lea     ecx, [esp+4C8h+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x6A6126",
-    "line": "mov     eax, [esp+4C4h+var_488]",
+    "line": "mov     eax, [esp+4C4h+self.hkObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1147,13 +1147,13 @@
   },
   {
     "ea": "0x6A61FC",
-    "line": "lea     ecx, [esp+4C4h+var_490]",
+    "line": "lea     ecx, [esp+4C4h+self]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A6200",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,13 +1231,13 @@
   },
   {
     "ea": "0x6A622E",
-    "line": "lea     ecx, [esp+4C4h+var_490]",
+    "line": "lea     ecx, [esp+4C4h+self]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6A6232",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x6A623F",
-    "line": "lea     ecx, [esp+4C4h+var_490]",
+    "line": "lea     ecx, [esp+4C4h+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x6A6289",
-    "line": "lea     ecx, [esp+4C4h+var_490]; this",
+    "line": "lea     ecx, [esp+4C4h+self]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1375,7 +1375,7 @@
   },
   {
     "ea": "0x6A629A",
-    "line": "mov     eax, [esp+4C4h+var_45C]",
+    "line": "mov     eax, [esp+4C4h+info.propertyCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1441,7 +1441,7 @@
   },
   {
     "ea": "0x6A62CD",
-    "line": "mov     edx, [esp+4C4h+var_464]",
+    "line": "mov     edx, [esp+4C4h+info.propertyData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x6A630D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x6A6347",
-    "line": "lea     ecx, [esp+4C4h+var_490]; this",
+    "line": "lea     ecx, [esp+4C4h+self]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x6A6358",
-    "line": "lea     ecx, [esp+4C4h+var_470]",
+    "line": "lea     ecx, [esp+4C4h+info]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x6A6413",
-    "line": "call    bhkWorldRayCastData__SetCastInputFrom",
+    "line": "call    bhkWorldRayCastData__SetCastInputFrom; TES4 authoritative: bhkWorldRayCastData::SetCastInputFrom; scales world-space NiPoint3 into Havok units using hkFactor and writes ray From.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,7 +1957,7 @@
   },
   {
     "ea": "0x6A6424",
-    "line": "call    bhkWorldRayCastData__SetCastInputTo",
+    "line": "call    bhkWorldRayCastData__SetCastInputTo; TES4 authoritative: bhkWorldRayCastData::SetCastInputTo; scales world-space NiPoint3 into Havok units, writes ray To, resets sentinel vector at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x6A6437",
-    "line": "call    TES__CastRay",
+    "line": "call    TES__CastRay; TES4 authoritative: TES::CastRay. Uses current interior cell's bhkWorld or exterior bhkWorldM; calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData. Reusable for climbing wall/ledge probes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2047,7 +2047,7 @@
   },
   {
     "ea": "0x6A6476",
-    "line": "lea     ecx, [esp+4C4h+var_490]; this",
+    "line": "lea     ecx, [esp+4C4h+self]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x6A6487",
-    "line": "lea     ecx, [esp+4C4h+var_470]",
+    "line": "lea     ecx, [esp+4C4h+info]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2158,5 +2158,149 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6190",
+    "line": "mov     eax, [ebp+var_4A4]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C6196",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6197",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C619C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C619D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C619E",
+    "line": "lea     ecx, [ebp+info]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C61A4",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C61A9",
+    "line": "lea     ecx, [ebp+self]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C61AF",
+    "line": "jmp     ??1bhkSimpleShapePhantom@@UAE@XZ; bhkSimpleShapePhantom::~bhkSimpleShapePhantom(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C61B4",
+    "line": "lea     ecx, [ebp+var_360]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C61BA",
+    "line": "jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C61BF",
+    "line": "lea     ecx, [ebp+var_1C0]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C61C5",
+    "line": "jmp     ??1hkAllCdPointCollector@@UAE@XZ; hkAllCdPointCollector::~hkAllCdPointCollector(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C61CA",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C61CE",
+    "line": "lea     eax, [edx-4B4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C61D4",
+    "line": "mov     ecx, [edx-4B8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C61DA",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C61DC",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C61E1",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C61E4",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C61E7",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C61E9",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C61EE",
+    "line": "mov     eax, offset stru_AEE794",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C61F3",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

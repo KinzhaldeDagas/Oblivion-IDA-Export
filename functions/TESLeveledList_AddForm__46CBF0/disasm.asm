@@ -1,4 +1,4 @@
-0x46CBF0: push    ebx
+0x46CBF0: push    ebx; CustomAnimSupport decode: TESLeveledList support evidence; leveled lists are not deterministic form-list animation targets and are not expanded for mappings.
 0x46CBF1: push    ebp
 0x46CBF2: push    esi
 0x46CBF3: lea     ebp, [ecx+4]

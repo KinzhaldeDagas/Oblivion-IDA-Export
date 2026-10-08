@@ -1,10 +1,10 @@
-0x4A4460: push    ebx
+0x4A4460: push    ebx; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.
 0x4A4461: push    esi
 0x4A4462: push    edi
 0x4A4463: mov     edi, ecx
 0x4A4465: test    edi, edi
 0x4A4467: jz      short loc_4A448A
-0x4A4469: mov     ebx, [esp+0Ch+arg_0]
+0x4A4469: mov     ebx, [esp+0Ch+dataID]
 0x4A446D: lea     ecx, [ecx+0]
 0x4A4470: mov     esi, [edi]
 0x4A4472: test    esi, esi

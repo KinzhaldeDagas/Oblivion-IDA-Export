@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "UNWIND_INFO",
+  "definition": "struct UNWIND_INFO\n{\nunsigned __int8 version : 3;\nunsigned __int8 flags : 5;\nBYTE prolog;\nBYTE count;\nunsigned __int8 frame_reg : 4;\nunsigned __int8 frame_offset : 4;\nopcode opcodes[1];\n}\n",
   "id": 18374686479672048297,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "version",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.375,
+      "type": "unsigned __int8 : 3"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
-      "offset": 0,
+      "offset": 0.375,
       "offset_hex": "0x0",
-      "size": 0
+      "size": 0.625,
+      "type": "unsigned __int8 : 5"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "prolog",
       "offset": 1,
       "offset_hex": "0x1",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "count",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "frame_reg",
       "offset": 3,
       "offset_hex": "0x3",
-      "size": 0
+      "size": 0.5,
+      "type": "unsigned __int8 : 4"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "frame_offset",
-      "offset": 3,
+      "offset": 3.5,
       "offset_hex": "0x3",
-      "size": 0
+      "size": 0.5,
+      "type": "unsigned __int8 : 4"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "opcodes",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "opcode[1]"
     }
   ],
   "name": "UNWIND_INFO",
+  "ordinal": 9020,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 6
 }

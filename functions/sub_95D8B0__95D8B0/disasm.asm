@@ -14,10 +14,10 @@
 0x95D8D6: add     esp, 4
 0x95D8D9: test    eax, eax
 0x95D8DB: jz      short loc_95D8FF
-0x95D8DD: push    offset dword_B258E8
-0x95D8E2: push    offset dword_B258DC
-0x95D8E7: push    offset dword_B258D0
-0x95D8EC: push    offset Vector3_InitValue?
+0x95D8DD: push    offset rhs
+0x95D8E2: push    offset stru_B258DC
+0x95D8E7: push    offset stru_B258D0
+0x95D8EC: push    offset g_zeroNiPoint3
 0x95D8F1: push    offset flt_B258F4
 0x95D8F6: mov     ecx, eax
 0x95D8F8: call    sub_961580

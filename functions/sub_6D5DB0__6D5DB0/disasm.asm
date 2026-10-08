@@ -1,4 +1,4 @@
-0x6D5DB0: sub     esp, 0Ch
+0x6D5DB0: sub     esp, 0Ch; Oblivion NiTransformInterpolator time-range query. Aggregates first/last timestamps from translation (data count +0x0A, keys +0x24, stride +0x1D), rotation (count +8, keys +0x20, type +0x10, stride +0x1C), and scale (count +0x0C, keys +0x28, stride +0x1E). Rotation type 4 scans three independent scalar-axis subtracks. Returns [0,0] when no authored track contributes.
 0x6D5DB3: fld     dword ptr ds:0A7DEB4h
 0x6D5DB9: mov     ecx, [ecx+2Ch]
 0x6D5DBC: test    ecx, ecx
@@ -59,7 +59,6 @@
 0x6D5E60: lea     esi, [edx+30h]
 0x6D5E63: mov     [esp+1Ch+var_4], 3
 0x6D5E6B: jmp     short loc_6D5E70
-0x6D5E6D: align 10h
 0x6D5E70: mov     edi, [esi-1Ch]
 0x6D5E73: test    edi, edi
 0x6D5E75: jbe     short loc_6D5ECD

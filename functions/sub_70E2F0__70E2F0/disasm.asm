@@ -1,7 +1,7 @@
-0x70E2F0: mov     ecx, [esp+arg_0]
+0x70E2F0: mov     ecx, [esp+width]; Returns the complete 2D mip count floor(log2(max(width,height)))+1 for nonzero dimensions.
 0x70E2F4: test    ecx, ecx
 0x70E2F6: jz      short loc_70E330
-0x70E2F8: mov     eax, [esp+arg_4]
+0x70E2F8: mov     eax, [esp+height]
 0x70E2FC: test    eax, eax
 0x70E2FE: jz      short loc_70E330
 0x70E300: shr     ecx, 1

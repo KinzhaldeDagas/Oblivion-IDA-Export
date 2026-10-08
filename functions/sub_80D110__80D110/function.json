@@ -1,19 +1,40 @@
 {
-  "callees_count": 117,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 63,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_80D110",
+  "chunks": [
+    [
+      "0x80D110",
+      "0x80D866"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9D0EC0",
+      "0x9D0EEB"
+    ]
+  ],
+  "chunks_sha256": "e39257f3a74f57eefe866170a6240e43923e2d214b82d6479aff369bd4c6c2c5",
+  "comment_regular": "HairShader concrete render-pass consumer. It first resets the NiD3DShader pass queue, then handles only selectors 0xE0, 0xE1, and 0x18C..0x18F. The complete jump table maps 0x177..0x17A to default 0x80D84E, which returns 0 without a ShadowLightShader fallback, leaving PassCount zero.\n\nHair render-pass consumer. Switch handles only 0xE0, 0xE1, and 0x18C..0x18F; refraction 0x160..0x162 and high 0x177..0x17A all map to the reset-and-return default and queue no concrete Hair pass.",
+  "comment_repeatable": "Hair render-pass consumer. Switch handles only 0xE0, 0xE1, and 0x18C..0x18F; refraction 0x160..0x162 and high 0x177..0x17A all map to the reset-and-return default and queue no concrete Hair pass.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "HairShader_SetupRenderPass",
   "end_ea": "0x80D866",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80D110",
+  "name": "HairShader_SetupRenderPass",
   "segment": ".text",
   "sha256": "2f38bd0eff09ab29bd76d998e5f4a61b32faef5d76739a6562ccabe2ce61eae0",
   "size": 1878,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80D110",
-  "type": "int __thiscall(Ni2DBuffer **this, _DWORD *, int, int, NiRenderedTexture *, int, int, int)",
-  "xrefs_from_count": 682,
+  "total_chunk_size": 1939,
+  "type": "int __thiscall(Ni2DBuffer **this, float *, int, int, NiD3DPass *, int, int, int)",
+  "xrefs_from_count": 703,
   "xrefs_to_count": 1
 }

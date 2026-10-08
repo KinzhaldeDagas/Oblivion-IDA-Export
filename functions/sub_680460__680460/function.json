@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x680460",
+      "0x6804AF"
+    ]
+  ],
+  "chunks_sha256": "c5ed18544bc023912ac27fa92eb0ea7106f65e7bd76085fa1b8aa78bc67fa078",
+  "comment_regular": "Verified: stores predecessor link pointer at state +4 and the spatial form used to enter the current link at state +8. Seed links use a null predecessor and source space.",
+  "comment_repeatable": "Verified: stores predecessor link pointer at state +4 and the spatial form used to enter the current link at state +8. Seed links use a null predecessor and source space.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680460",
+  "display_name": "TravelPath_SearchState_SetParentAndSpace",
   "end_ea": "0x6804AF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680460",
+  "name": "TravelPath_SearchState_SetParentAndSpace",
   "segment": ".text",
   "sha256": "c5ed18544bc023912ac27fa92eb0ea7106f65e7bd76085fa1b8aa78bc67fa078",
   "size": 79,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680460",
-  "type": "char *__thiscall(_WORD *this, int, char *)",
+  "total_chunk_size": 79,
+  "type": "TravelPathSearchState *__thiscall(TravelPathSpaceDoorLink *node, TravelPathSpaceDoorLink *parentNode, TESForm *space)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 2
 }

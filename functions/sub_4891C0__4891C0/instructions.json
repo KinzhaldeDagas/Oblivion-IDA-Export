@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x489253",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,13 +331,13 @@
   },
   {
     "ea": "0x48928E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x489290",
-    "line": "call    TESObjectWEAP_GetWeaponSkillAV",
+    "line": "call    TESObjectWEAP_GetWeaponSkillAV; BladeSkillsRestored schema-4 owner decode: this inventory-rating path is player-owned (PlayerCharacter global at 0xB333C4). ECX is TESObjectWEAP. Call returns at 0x489295; paired Calc_WeaponDamage returns at 0x489382.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x489363",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x48936D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x489377",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x48937D",
-    "line": "call    Calc_WeaponDamage",
+    "line": "call    Calc_WeaponDamage; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x4893C1",
-    "line": "call    TESObjectARMO_GetArmorSkillAV",
+    "line": "call    TESObjectARMO_GetArmorSkillAV; Paired Medium boundary 2/7: player inventory entry rating classifies the armor, fetches player skill, health and condition, then calls Calc_ArmorRating at 0x489461.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x489461",
-    "line": "call    Calc_ArmorRating",
+    "line": "call    Calc_ArmorRating; Paired Medium boundary 2/7: player inventory armor-rating consumer. MWMediumArmor may use player sidecar Medium skill here.",
     "mnemonic": "call",
     "size": 5
   },

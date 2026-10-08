@@ -1,1 +1,1 @@
-IProgressNotifyVtbl_0
+typedef IProgressNotifyVtbl IProgressNotifyVtbl_0;

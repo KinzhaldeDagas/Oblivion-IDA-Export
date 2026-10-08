@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78E8A0",
-    "line": "push    ecx",
+    "line": "push    ecx; Oblivion compiler-lowered stVec::operator*(float): initializes the hidden return object with lhs.size and scales every active component. Exact behavior corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x78E8A3",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x78E8CF",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+scalar]",
     "mnemonic": "fld",
     "size": 4
   },

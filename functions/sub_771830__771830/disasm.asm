@@ -3,7 +3,7 @@
 0x771837: cmp     eax, 5
 0x77183A: push    ebx
 0x77183B: mov     bl, 1
-0x77183D: ja      def_771843
+0x77183D: ja      def_771843; jumptable 00771843 default case
 0x771843: jmp     ds:jpt_771843[eax*4]; switch jump
 0x77184A: mov     ecx, ds:0B42754h; jumptable 00771843 case 1
 0x771850: mov     eax, [esp+4+arg_4]
@@ -325,7 +325,7 @@
 0x771D58: jmp     loc_771A0F
 0x771D5D: push    40h ; '@'; jumptable 00771843 case 4
 0x771D5F: push    0
-0x771D61: push    offset flt_B42760
+0x771D61: push    offset unk_B42760; DX11 native test relocation: immediate PUSH B42760 is scratch output argument to memset; relocate along with absolute memory operands.
 0x771D66: call    __memset
 0x771D6B: fld     dword ptr ds:0A3D65Ch
 0x771D71: fst     dword ptr ds:0B42774h
@@ -494,3 +494,6 @@
 0x772010: fld     dword ptr [ecx+0A20h]
 0x772016: fmul    dword ptr [eax+8]
 0x772019: jmp     loc_771D30
+0x77201E: xor     al, al; jumptable 00771843 default case
+0x772020: pop     ebx
+0x772021: retn    8

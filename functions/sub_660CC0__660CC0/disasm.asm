@@ -3,7 +3,7 @@
 0x660CC4: push    esi
 0x660CC5: push    edi
 0x660CC6: mov     ebx, ecx
-0x660CC8: call    TESObjectREFR_GetParentCell
+0x660CC8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x660CCD: mov     esi, eax
 0x660CCF: call    sub_4C9F60
 0x660CD4: test    al, al
@@ -82,7 +82,7 @@
 0x660D88: push    ecx
 0x660D89: mov     ecx, esi; this
 0x660D8B: fstp    [esp+2Ch+a2]; a2
-0x660D8E: call    NiAVObject_UpdateNiAVObject
+0x660D8E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x660D93: push    1; a4
 0x660D95: push    1; a3
 0x660D97: push    1; a2
@@ -141,7 +141,7 @@
 0x660E3C: push    esi
 0x660E3D: call    sub_88CF90
 0x660E42: add     esp, 18h
-0x660E45: call    sub_5C1900
+0x660E45: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x660E4A: mov     eax, edi
 0x660E4C: pop     edi
 0x660E4D: pop     esi
@@ -155,7 +155,7 @@
 0x660E68: push    1
 0x660E6A: mov     ecx, edi
 0x660E6C: call    sub_4D6F40
-0x660E71: call    sub_5C1900
+0x660E71: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x660E76: mov     eax, edi
 0x660E78: pop     edi
 0x660E79: pop     esi

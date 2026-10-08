@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x791410",
-    "line": "push    ecx",
+    "line": "push    ecx; Source-match: CBranch::SortBranchVector wrapper. Sorts branch pointers by fuzzy volume for branch LOD selection.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79141E",
-    "line": "mov     byte ptr [esp+10h+var_4], 0",
+    "line": "mov     byte ptr [esp+10h+comparatorState], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x791437",
-    "line": "mov     eax, [esp+10h+var_4]",
+    "line": "mov     eax, [esp+10h+comparatorState]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x79143D",
-    "line": "push    eax",
+    "line": "push    eax; comparatorState",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,25 +115,25 @@
   },
   {
     "ea": "0x791443",
-    "line": "push    ecx",
+    "line": "push    ecx; depthLimit",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791444",
-    "line": "push    ebx",
+    "line": "push    ebx; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791445",
-    "line": "push    esi",
+    "line": "push    esi; begin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x791446",
-    "line": "call    sub_790C10",
+    "line": "call    OB_BranchPtrVector_IntrosortByFuzzyVolume_010201A0; Compiler introsort loop for the compact OB_CBranch* vector. Uses 0x7905D0's fuzzyBranchVolume partition, insertion sort for small ranges, and heap-sort fallback when the depth limit expires; branch LOD policy remains in the 0x791410 wrapper/callers.",
     "mnemonic": "call",
     "size": 5
   },

@@ -15,7 +15,6 @@
 0x923D97: cmp     edi, ebp
 0x923D99: jnb     short loc_923DB7
 0x923D9B: jmp     short loc_923DA0
-0x923D9D: align 10h
 0x923DA0: mov     edx, [edi]
 0x923DA2: mov     ecx, [edx+50h]
 0x923DA5: mov     eax, [ecx]

@@ -1,4 +1,4 @@
-BSStringT *sub_A03480()
+NiRTTI *sub_A03480()
 {
-  return sub_70E220((BSStringT *)dword_B3CF1C, "NiAlphaController", (int)dword_B3ED14);
+  return NiRTTI_Constructor(&stru_B3CF1C, "NiAlphaController", &stru_B3ED14); /*0xa03494*/
 }

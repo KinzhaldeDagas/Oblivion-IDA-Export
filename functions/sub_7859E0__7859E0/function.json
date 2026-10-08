@@ -1,19 +1,36 @@
 {
-  "callees_count": 30,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_7859E0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x7859E0",
+      "0x785BDD"
+    ],
+    [
+      "0x9CBD00",
+      "0x9CBD23"
+    ]
+  ],
+  "chunks_sha256": "d7a80ad93d79cd2fe4531033b8b88b21fd2aa3aabb3ca26227683fa8e741a81e",
+  "comment_regular": "Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
+  "comment_repeatable": "Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0",
   "end_ea": "0x785BDD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7859E0",
+  "name": "OB_stBezierSplineCacheMap_InsertNodeAndRebalance_010201A0",
   "segment": ".text",
   "sha256": "4f8daff732091725fc1b76195f8cd212eba7de058411c30b67f51c8530621b99",
   "size": 509,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7859E0",
-  "type": "int **__thiscall(int *this, int **, char, int **, _DWORD *)",
-  "xrefs_from_count": 196,
+  "total_chunk_size": 544,
+  "type": "OB_stBezierSplineCacheIterator_010201A0 *__thiscall(OB_stBezierSplineCacheMap_010201A0 *this, OB_stBezierSplineCacheIterator_010201A0 *result, unsigned __int8 insertLeft, OB_stBezierSplineCacheNode_010201A0 *parent, const OB_stBezierSplineCachePair_010201A0 *value)",
+  "xrefs_from_count": 211,
   "xrefs_to_count": 8
 }

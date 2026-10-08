@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x460772",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460773",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x460775",
-    "line": "call    sub_45E180",
+    "line": "call    SaveLoad_WorldspaceFormIDToIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x4607AF",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4607B0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4607B2",
-    "line": "call    sub_45E180",
+    "line": "call    SaveLoad_WorldspaceFormIDToIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x4607E6",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x4607FA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x460801",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460802",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x460813",
-    "line": "push    esi",
+    "line": "push    esi; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460814",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x460824",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x460840",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x46084C",
-    "line": "call    sub_41FF80",
+    "line": "call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,19 +1015,19 @@
   },
   {
     "ea": "0x46091D",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46091E",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x460920",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x460969",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x460984",
-    "line": "call    sub_41FF80",
+    "line": "call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,19 +1225,19 @@
   },
   {
     "ea": "0x460993",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460994",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x460996",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,19 +1351,19 @@
   },
   {
     "ea": "0x4609DA",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4609DB",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4609DD",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1681,7 +1681,7 @@
   },
   {
     "ea": "0x460A89",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x460A98",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x460A9F",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x460AAA",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x460AB5",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1801,7 +1801,7 @@
   },
   {
     "ea": "0x460AC7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,19 +1957,19 @@
   },
   {
     "ea": "0x460B0F",
-    "line": "push    edi",
+    "line": "push    edi; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460B10",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x460B12",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2071,7 +2071,7 @@
   },
   {
     "ea": "0x460B45",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,19 +2113,19 @@
   },
   {
     "ea": "0x460B5A",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460B5B",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x460B5D",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,19 +2161,19 @@
   },
   {
     "ea": "0x460B6F",
-    "line": "push    esi",
+    "line": "push    esi; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460B70",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x460B72",
-    "line": "call    SaveLoad_IRefToFormID?",
+    "line": "call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x460B9B",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2263,13 +2263,13 @@
   },
   {
     "ea": "0x460BA1",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x460BA2",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; Save-side movement block writer reached by created refs (0x24), move/havok (0x1C/0x2C), and Oblivion marker (4).",
     "mnemonic": "mov",
     "size": 6
   },

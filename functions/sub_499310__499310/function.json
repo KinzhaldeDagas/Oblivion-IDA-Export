@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x499310",
+      "0x49935D"
+    ]
+  ],
+  "chunks_sha256": "e3987dbc2f4331c244ab67e34877b68d43dfc5cd7124e576d31b4262708f7239",
+  "comment_regular": "Strong-own the supplied frame-local shadow map at ShadowSceneLight+0x114, releasing any previous map reference.",
+  "comment_repeatable": "Strong-own the supplied frame-local shadow map at ShadowSceneLight+0x114, releasing any previous map reference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_499310",
+  "display_name": "ShadowSceneLight_SetShadowMap",
   "end_ea": "0x49935D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_499310",
+  "name": "ShadowSceneLight_SetShadowMap",
   "segment": ".text",
   "sha256": "e3987dbc2f4331c244ab67e34877b68d43dfc5cd7124e576d31b4262708f7239",
   "size": 77,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x499310",
-  "type": "void __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 77,
+  "type": "void __thiscall(ShadowSceneLight_DecodedLayout *self, void *shadowMap)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 4
 }

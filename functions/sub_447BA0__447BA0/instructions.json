@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x447BA0",
-    "line": "push    esi",
+    "line": "push    esi; Verified TESObjectCELL deactivation path. Removes cell temp effects, lowers its process level, invokes cell teardown, clears pathgrid graph/render resources, removes the scene node and inactive cell forms, then for exteriors asks TESWorldSpace_UnloadExteriorCellIfEligible to either preserve or remove the cell. Nine call sites are in world/cell transition and TES destruction paths; inspect xrefs for the full lifecycle context.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x447BBB",
-    "line": "push    esi; a2",
+    "line": "push    esi; cell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x447BBC",
-    "line": "mov     ecx, offset ActorProcessManager_ptr; this",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x447BC1",
-    "line": "call    sub_67A8C0",
+    "line": "call    ActorProcessManager_RemoveTempEffectsForCell; [Verified] Called by TESObjectCELL_Deactivate. Removes active and extended temp effects whose BSTempEffect parentCell field at +0x0C equals the unloading cell, irrespective of remaining duration, then releases the list's reference. Thus decal lifetime survives normal updates but not unloading its owning cell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x447BF6",
-    "line": "call    sub_4E7690",
+    "line": "call    TESPathGrid_ClearGraphOnCellUnload; Verified PathGrid lifecycle edge: cell deactivation obtains the cell's TESPathGrid and calls TESPathGrid_ClearGraphOnCellUnload before interior/exterior content teardown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x447BFD",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x447C16",
-    "line": "call    sub_4CE320",
+    "line": "call    TESObjectCELL_DestroySceneNode; Verified scene-node teardown: temporarily sets cellProcessLevel=1, detaches the cell NiNode from its parent, clears/releases its child array, releases the NiNode and cell extra-data component, then resets cellProcessLevel to 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x447C1D",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x447C28",
-    "line": "call    sub_4D1570",
+    "line": "call    TESObjectCELL_ClearInactiveRuntimeForms; Verified inactive-cell form cleanup. Preserves persistent references and references whose winning override is a non-master file; unloads/destroys other nonpersistent references. Also destroys a PathGrid when it has no override or its winning override is a master, clears eligible LAND data, and clears cell flag 0x10. This is called during both interior and exterior teardown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x447C31",
-    "line": "push    esi",
+    "line": "push    esi; cell",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x447C37",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x447C39",
-    "line": "call    sub_4F1840",
+    "line": "call    TESWorldSpace_UnloadExteriorCellIfEligible; Verified exterior unload edge: after deactivation cleanup, passes the cell and owning TESWorldSpace into TESWorldSpace_UnloadExteriorCellIfEligible; map removal and destruction occur only for absent/master winning overrides.",
     "mnemonic": "call",
     "size": 5
   },

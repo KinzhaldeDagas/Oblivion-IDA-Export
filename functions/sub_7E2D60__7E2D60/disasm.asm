@@ -1,4 +1,4 @@
-0x7E2D60: mov     eax, ds:0B4600Ch
+0x7E2D60: mov     eax, ds:0B4600Ch; Verified (Oblivion): returns the cached slot capacity, initialized to 40 or 120 according to renderer capability, and used to size particleInstanceBuffer_6C and update iteration.
 0x7E2D65: test    eax, eax
 0x7E2D67: jnz     short locret_7E2D81
 0x7E2D69: cmp     dword ptr ds:0B42F48h, 2

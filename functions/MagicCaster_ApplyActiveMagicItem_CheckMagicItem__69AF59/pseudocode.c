@@ -32,8 +32,8 @@ int __usercall MagicCaster_ApplyActiveMagicItem_::CheckMagicItem@<eax>(
         int a31,
         int a32)
 {
-  if ( !(*(int (**)(void))(*a1 + 0x30))() )
-    JUMPOUT(0x69BA6E);
+  if ( !(*(int (**)(void))(*a1 + 0x30))() ) /*0x69af62*/
+    JUMPOUT(0x69BA6E); /*0x69ba6e*/
   return MagicCaster_ApplyActiveMagicItem_::GetParentActor(
            a1,
            a2,

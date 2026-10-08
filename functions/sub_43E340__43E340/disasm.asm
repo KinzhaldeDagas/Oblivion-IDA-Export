@@ -4,7 +4,6 @@
 0x43E346: mov     eax, edi
 0x43E348: lea     edx, [eax+1]
 0x43E34B: jmp     short loc_43E350
-0x43E34D: align 10h
 0x43E350: mov     cl, [eax]
 0x43E352: add     eax, 1
 0x43E355: test    cl, cl

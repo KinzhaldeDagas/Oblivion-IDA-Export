@@ -20,8 +20,8 @@
 0x5115A7: test    ebx, ebx
 0x5115A9: jz      short loc_5115BA
 0x5115AB: movzx   eax, byte ptr [ebx+4]
-0x5115AF: push    eax; a1
-0x5115B0: call    TESForm_CreateDynamic
+0x5115AF: push    eax; formType
+0x5115B0: call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.
 0x5115B5: add     esp, 4
 0x5115B8: jmp     short loc_5115BC
 0x5115BA: xor     eax, eax
@@ -67,7 +67,7 @@
 0x511635: call    TESObjectREFR_GetWorldSpace
 0x51163A: push    eax
 0x51163B: mov     ecx, edi; this
-0x51163D: call    TESObjectREFR_GetParentCell
+0x51163D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x511642: mov     edx, [edi]
 0x511644: push    eax
 0x511645: lea     eax, [edi+20h]
@@ -78,7 +78,7 @@
 0x511653: mov     ecx, ds:0B33A98h
 0x511659: push    eax
 0x51165A: push    esi
-0x51165B: call    TESDataHandler_PlaceObjectRef
+0x51165B: call    TESDataHandler_PlaceObjectRef; Verified object-reference placement helper accepts an interior cell or exterior WorldSpace and sets/reuses a reference base form. New reference attachment proceeds through cell lifecycle methods; this helper itself does not write the WorldSpace SubSpace index.
 0x511660: mov     ebx, eax
 0x511662: test    ebx, ebx
 0x511664: jz      loc_511706
@@ -88,10 +88,10 @@
 0x511672: push    edx
 0x511673: mov     [esp+18h+arg_18], ecx
 0x511677: call    sub_4F9FB0
-0x51167C: mov     ecx, ds:0B33A98h
+0x51167C: mov     ecx, ds:0B33A98h; self
 0x511682: add     esp, 8
-0x511685: push    esi
-0x511686: call    TESDataHandler_AddForm
+0x511685: push    esi; form
+0x511686: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x51168B: mov     ecx, ds:0B33B00h
 0x511691: push    esi
 0x511692: call    SaveLoad_AddCreatedObj

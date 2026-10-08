@@ -13,21 +13,21 @@
 0x71A672: test    ah, 44h
 0x71A675: jp      short loc_71A6C0
 0x71A677: lea     eax, [edi+0E0h]
-0x71A67D: push    eax
-0x71A67E: lea     ecx, [esi+0E0h]
-0x71A684: call    sub_8AA390
+0x71A67D: push    eax; other
+0x71A67E: lea     ecx, [esi+0E0h]; this
+0x71A684: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x71A689: test    al, al
 0x71A68B: jnz     short loc_71A6C0
 0x71A68D: lea     ecx, [edi+0ECh]
-0x71A693: push    ecx
-0x71A694: lea     ecx, [esi+0ECh]
-0x71A69A: call    sub_8AA390
+0x71A693: push    ecx; other
+0x71A694: lea     ecx, [esi+0ECh]; this
+0x71A69A: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x71A69F: test    al, al
 0x71A6A1: jnz     short loc_71A6C0
 0x71A6A3: add     edi, 0F8h ; 'ø'
-0x71A6A9: push    edi
-0x71A6AA: lea     ecx, [esi+0F8h]
-0x71A6B0: call    sub_8AA390
+0x71A6A9: push    edi; other
+0x71A6AA: lea     ecx, [esi+0F8h]; this
+0x71A6B0: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x71A6B5: test    al, al
 0x71A6B7: jnz     short loc_71A6C0
 0x71A6B9: pop     edi

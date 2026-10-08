@@ -27,8 +27,8 @@
 0x5E9A0E: mov     esi, eax
 0x5E9A10: test    esi, esi
 0x5E9A12: jz      short loc_5E9A51
-0x5E9A14: mov     ecx, esi
-0x5E9A16: call    sub_6B7260
+0x5E9A14: mov     ecx, esi; this
+0x5E9A16: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5E9A1B: test    al, al
 0x5E9A1D: jnz     short loc_5E9A3D
 0x5E9A1F: push    0
@@ -40,14 +40,14 @@
 0x5E9A31: push    0
 0x5E9A33: push    eax
 0x5E9A34: mov     ecx, esi
-0x5E9A36: call    sub_65A970
+0x5E9A36: call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
 0x5E9A3B: mov     esi, eax
 0x5E9A3D: test    esi, esi
 0x5E9A3F: jz      short loc_5E9A51
 0x5E9A41: mov     ecx, esi; this
 0x5E9A43: call    sub_6B73E0
 0x5E9A48: push    esi
-0x5E9A49: call    FormHeapFree
+0x5E9A49: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E9A4E: add     esp, 4
 0x5E9A51: pop     edi
 0x5E9A52: pop     esi

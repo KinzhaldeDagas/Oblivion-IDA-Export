@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x4ACFF3",
-    "line": "lea     ecx, [esi+18h]",
+    "line": "lea     ecx, [esi+18h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4ACFF6",
-    "line": "call    sub_4AC9C0",
+    "line": "call    TESEffectShaderData_InitializeDefaults; Verified (Oblivion): initializes the 0xE0-byte TESEffectShaderData block at TESEffectShader+0x18, including cFlags, blend defaults, particle lifetimes/velocity/scale/colors, and the byte/float values copied by TESEffectShader_ConfigureVisualProperty. Probable member names come from the matching Fallout EffectShaderData layout; the defaults and offsets are directly corroborated in Oblivion.",
     "mnemonic": "call",
     "size": 5
   },

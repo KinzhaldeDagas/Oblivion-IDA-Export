@@ -9,7 +9,7 @@
 0x4DC012: cmp     edi, ds:0B333C4h
 0x4DC018: jz      short loc_4DC05F
 0x4DC01A: mov     ecx, esi; this
-0x4DC01C: call    TESObjectREFR_IsPersistent?
+0x4DC01C: call    TESObjectREFR_IsPersistent
 0x4DC021: test    al, al
 0x4DC023: jnz     short loc_4DC05F
 0x4DC025: mov     eax, [esi]
@@ -23,7 +23,7 @@
 0x4DC036: call    sub_424B60
 0x4DC03B: push    edi
 0x4DC03C: lea     ecx, [esi+44h]
-0x4DC03F: call    sub_4203E0
+0x4DC03F: call    ExtraDataList_SetItemDropper; Creates/updates ExtraItemDropper; a null dropper removes extra type 0x41.
 0x4DC044: mov     eax, [esi]
 0x4DC046: mov     edx, [eax+78h]
 0x4DC049: mov     ecx, esi

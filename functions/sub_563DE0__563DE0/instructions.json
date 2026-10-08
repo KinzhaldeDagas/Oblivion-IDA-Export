@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x563DE0",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; Leaf alpha threshold 0..254 writes ALPHAREF; 255 hides the leaf shape. Terminal mip max-alpha 83 fails the stock GREATER 84 test everywhere: complete cutout disappearance, distinct from lighting/fog RGB blackening.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x563DE2",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+leafLodIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x563DF9",
-    "line": "mov     bl, [esp+4+arg_4]",
+    "line": "mov     bl, [esp+4+alphaTestReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x563E00",
-    "line": "jnz     short loc_563E0D",
+    "line": "jnz     short loc_563E0D;",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x563E17",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x563E20",
-    "line": "mov     [eax+1Ah], bl",
+    "line": "mov     [eax+1Ah], bl; Runtime leaf alpha reference accepts 0..254 and is applied at draw time; 255 hides the LOD shape instead of becoming ALPHAREF.",
     "mnemonic": "mov",
     "size": 3
   },

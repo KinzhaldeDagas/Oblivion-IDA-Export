@@ -1,4 +1,4 @@
-0x7D1920: push    0FFFFFFFFh
+0x7D1920: push    0FFFFFFFFh; Generic material shader id inference helper. Checks material/property names including Block and STBB, but the STBB check falls through to default shader id 1; it does not select SpeedTree billboard/frond ids.
 0x7D1922: push    offset SEH_7D1920
 0x7D1927: mov     eax, large fs:0
 0x7D192D: push    eax
@@ -15,14 +15,14 @@
 0x7D194D: push    eax
 0x7D194E: lea     eax, [esp+134h+var_C]
 0x7D1955: mov     large fs:0, eax
-0x7D195B: mov     ebp, [esp+134h+arg_0]
-0x7D1962: lea     eax, [esp+134h+var_118]
-0x7D1966: push    eax
-0x7D1967: mov     ecx, ebp
-0x7D1969: mov     [esp+138h+var_11C], 0
-0x7D1971: call    sub_405760
+0x7D195B: mov     ebp, [esp+134h+geometry]
+0x7D1962: lea     eax, [esp+134h+output]
+0x7D1966: push    eax; output
+0x7D1967: mov     ecx, ebp; this
+0x7D1969: mov     [esp+138h+outTexture], 0
+0x7D1971: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7D1976: mov     edi, [eax]
-0x7D1978: mov     eax, [esp+134h+var_118]
+0x7D1978: mov     eax, [esp+134h+output]
 0x7D197C: test    eax, eax
 0x7D197E: mov     ebx, ds:0A2807Ch
 0x7D1984: jz      short loc_7D19A0
@@ -42,11 +42,11 @@
 0x7D19A0: test    edi, edi
 0x7D19A2: jnz     short loc_7D19DB
 0x7D19A4: mov     ecx, ebp; this
-0x7D19A6: call    NiAVObject_InitializePropertyState
+0x7D19A6: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x7D19AB: lea     ecx, [esp+134h+var_120]
-0x7D19AF: push    ecx
-0x7D19B0: mov     ecx, ebp
-0x7D19B2: call    sub_405760
+0x7D19AF: push    ecx; output
+0x7D19B0: mov     ecx, ebp; this
+0x7D19B2: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7D19B7: mov     edi, [eax]
 0x7D19B9: mov     eax, [esp+134h+var_120]
 0x7D19BD: test    eax, eax
@@ -79,7 +79,7 @@
 0x7D19F9: jz      short loc_7D19DF
 0x7D19FB: push    2
 0x7D19FD: mov     ecx, ebp
-0x7D19FF: call    NiNode_GetNiPropertyByID
+0x7D19FF: call    NiNode_GetNiPropertyByID;
 0x7D1A04: mov     esi, eax
 0x7D1A06: test    esi, esi
 0x7D1A08: jz      short loc_7D1A2D
@@ -87,8 +87,8 @@
 0x7D1A0D: test    eax, eax
 0x7D1A0F: jz      short loc_7D1A2D
 0x7D1A11: push    offset aLava; "lava"
-0x7D1A16: push    eax; Str1
-0x7D1A17: call    __strcmp
+0x7D1A16: push    eax; left
+0x7D1A17: call    CRT_StricmpLocaleDispatch
 0x7D1A1C: add     esp, 8
 0x7D1A1F: test    eax, eax
 0x7D1A21: jnz     short loc_7D1A2D
@@ -102,7 +102,7 @@
 0x7D1A39: test    eax, eax
 0x7D1A3B: jz      short loc_7D19DF
 0x7D1A3D: push    eax
-0x7D1A3E: push    offset dword_B3F95C
+0x7D1A3E: push    offset stru_B3F95C
 0x7D1A43: call    NiRTTI_Cast
 0x7D1A48: add     esp, 8
 0x7D1A4B: test    eax, eax
@@ -111,27 +111,27 @@
 0x7D1A56: test    eax, eax
 0x7D1A58: jz      loc_7D1C28
 0x7D1A5E: push    offset a_n; "_n"
-0x7D1A63: push    eax
+0x7D1A63: push    eax; sourcePath
 0x7D1A64: lea     edx, [esp+13Ch+Src]
-0x7D1A68: push    edx
-0x7D1A69: call    sub_7B4160
-0x7D1A6E: push    1; char
-0x7D1A70: push    1; char
+0x7D1A68: push    edx; outPath
+0x7D1A69: call    BuildTextureVariantPath; Builds the normal-map companion name with suffix _n. BuildTextureVariantPath replaces everything from the final underscore in the diffuse basename, rather than blindly appending _n.
+0x7D1A6E: push    1; requireMipmaps
+0x7D1A70: push    1; loadFromCache
 0x7D1A72: lea     eax, [esp+148h+Src]
-0x7D1A76: push    eax; Src
-0x7D1A77: lea     ecx, [esp+14Ch+var_11C]
-0x7D1A7B: push    ecx; int
-0x7D1A7C: call    sub_7B8200
+0x7D1A76: push    eax; path
+0x7D1A77: lea     ecx, [esp+14Ch+outTexture]
+0x7D1A7B: push    ecx; outTexture
+0x7D1A7C: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7D1A81: add     esp, 1Ch
 0x7D1A84: cmp     dword ptr [eax], 0
 0x7D1A87: jnz     short loc_7D1A97
-0x7D1A89: cmp     byte ptr [esp+134h+arg_4], 0
+0x7D1A89: cmp     [esp+134h+normalMapBypass], 0
 0x7D1A91: jnz     short loc_7D1A97
 0x7D1A93: mov     bl, 1
 0x7D1A95: jmp     short loc_7D1A99
 0x7D1A97: xor     bl, bl
-0x7D1A99: lea     ecx, [esp+134h+var_11C]; this
-0x7D1A9D: call    sub_7016A0
+0x7D1A99: lea     ecx, [esp+134h+outTexture]; slot
+0x7D1A9D: call    NiPointerSlot_Release
 0x7D1AA2: test    bl, bl
 0x7D1AA4: jnz     loc_7D19DF
 0x7D1AAA: test    esi, esi
@@ -158,8 +158,8 @@
 0x7D1AF3: jz      short loc_7D1B2D
 0x7D1AF5: mov     eax, [esi+8]
 0x7D1AF8: push    offset aSkin; "skin"
-0x7D1AFD: push    eax; Str1
-0x7D1AFE: call    __strcmp
+0x7D1AFD: push    eax; left
+0x7D1AFE: call    CRT_StricmpLocaleDispatch
 0x7D1B03: add     esp, 8
 0x7D1B06: test    eax, eax
 0x7D1B08: jnz     short loc_7D1B2D
@@ -181,11 +181,11 @@
 0x7D1B3D: jmp     loc_7D1C2D
 0x7D1B42: push    0
 0x7D1B44: mov     ecx, ebp
-0x7D1B46: call    NiNode_GetNiPropertyByID
+0x7D1B46: call    NiNode_GetNiPropertyByID;
 0x7D1B4B: push    2
 0x7D1B4D: mov     ecx, ebp
 0x7D1B4F: mov     esi, eax
-0x7D1B51: call    NiNode_GetNiPropertyByID
+0x7D1B51: call    NiNode_GetNiPropertyByID;
 0x7D1B56: test    eax, eax
 0x7D1B58: jz      short loc_7D1B71
 0x7D1B5A: mov     eax, [eax+8]
@@ -208,8 +208,8 @@
 0x7D1B8A: test    eax, eax
 0x7D1B8C: mov     [esp+134h+var_4], edi
 0x7D1B93: jz      short loc_7D1B9E
-0x7D1B95: mov     ecx, eax
-0x7D1B97: call    sub_47F920
+0x7D1B95: mov     ecx, eax; this
+0x7D1B97: call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.
 0x7D1B9C: jmp     short loc_7D1BA0
 0x7D1B9E: xor     eax, eax
 0x7D1BA0: and     word ptr [eax+18h], 0FFFEh
@@ -266,3 +266,19 @@
 0x7D1C49: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x7D1C4E: add     esp, 120h
 0x7D1C54: retn
+0x9CE9D0: mov     eax, [ebp-120h]
+0x9CE9D6: push    eax
+0x9CE9D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CE9DC: pop     ecx
+0x9CE9DD: retn
+0x9CE9DE: mov     edx, dword ptr [esp+normalMapBypass]
+0x9CE9E2: lea     eax, [edx-124h]
+0x9CE9E8: mov     ecx, [edx-128h]
+0x9CE9EE: xor     ecx, eax
+0x9CE9F0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE9F5: add     eax, 10h
+0x9CE9F8: mov     ecx, [edx-4]
+0x9CE9FB: xor     ecx, eax
+0x9CE9FD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEA02: mov     eax, offset stru_AF78F0
+0x9CEA07: jmp     ___CxxFrameHandler3

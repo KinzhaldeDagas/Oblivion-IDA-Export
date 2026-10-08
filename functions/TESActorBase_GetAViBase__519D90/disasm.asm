@@ -1,4 +1,4 @@
-0x519D90: mov     edx, [esp+arg_0]
+0x519D90: mov     edx, [esp+arg_0]; TESActorBase base AV getter: actor value 7 reads attributes component index 7. Correlates with Luck via Actor_GetLuckModifiedBaseAV using AV 7.
 0x519D94: xor     eax, eax
 0x519D96: cmp     edx, 27h; switch 40 cases
 0x519D99: push    esi
@@ -72,7 +72,7 @@
 0x519E78: retn    4
 0x519E7B: add     ecx, 44h ; 'D'; jumptable 00519DA7 case 11
 0x519E7E: call    TESContainer_GetEncumberance
-0x519E83: call    Double_To_SInt32
+0x519E83: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x519E88: pop     esi
 0x519E89: retn    4
 0x519E8C: add     ecx, 68h ; 'h'; jumptable 00519DA7 case 33
@@ -91,7 +91,7 @@
 0x519EB5: pop     esi
 0x519EB6: retn    4
 0x519EB9: add     ecx, 68h ; 'h'; jumptable 00519DA7 case 36
-0x519EBC: call    TESAIForm_GetResponsibility
+0x519EBC: call    TESAIForm_GetResponsibility; TESAIForm::GetResponsibility reads AISettings[3] at component offset +7.
 0x519EC1: movzx   eax, al
 0x519EC4: pop     esi
 0x519EC5: retn    4

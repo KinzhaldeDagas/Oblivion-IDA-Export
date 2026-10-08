@@ -12,7 +12,7 @@
 0x88A891: jmp     short loc_88A899
 0x88A893: and     word ptr [edi+0Ch], 0FFBFh
 0x88A899: push    edi
-0x88A89A: push    offset dword_BA7A20
+0x88A89A: push    0BA7A20h
 0x88A89F: call    NiRTTI_Cast
 0x88A8A4: add     esp, 8
 0x88A8A7: test    eax, eax
@@ -67,7 +67,7 @@
 0x88A928: mov     edx, [eax+58h]
 0x88A92B: call    edx
 0x88A92D: mov     ecx, edi
-0x88A92F: call    sub_452A60
+0x88A92F: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x88A934: mov     edx, [eax]
 0x88A936: mov     ecx, eax
 0x88A938: mov     eax, [edx+74h]

@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_795B80",
+  "chunks": [
+    [
+      "0x795B80",
+      "0x795C22"
+    ],
+    [
+      "0x9CBDC0",
+      "0x9CBDEC"
+    ]
+  ],
+  "chunks_sha256": "0d82d5b527632b96439535d42ecd67c9e13961c91fef04d4963511136c14417f",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized copy of inner vector<unsigned short*> owners. Uses the shared 4-byte-element vector copy constructor and normally returns at 0x795C0E; prior noreturn metadata was false.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized copy of inner vector<unsigned short*> owners. Uses the shared 4-byte-element vector copy constructor and normally returns at 0x795C0E; prior noreturn metadata was false.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_stVectorUShortPtr_UninitializedCopyRange_010201A0",
   "end_ea": "0x795C22",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_795B80",
+  "name": "OB_stVector_stVectorUShortPtr_UninitializedCopyRange_010201A0",
   "segment": ".text",
   "sha256": "d04efb2cf007b1e18741299f266fda04cebe73edd9590f6b69a1ad1376af6c92",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795B80",
-  "type": "void __cdecl __noreturn(int, int, char *)",
-  "xrefs_from_count": 69,
+  "total_chunk_size": 206,
+  "type": "OB_stVectorUShortPtr_010201A0 *__cdecl(const OB_stVectorUShortPtr_010201A0 *first, const OB_stVectorUShortPtr_010201A0 *last, OB_stVectorUShortPtr_010201A0 *destination)",
+  "xrefs_from_count": 85,
   "xrefs_to_count": 1
 }

@@ -2,11 +2,11 @@ bool __thiscall TESForm_MatchGroupRecord(TESForm *this, _DWORD *groupRecord, boo
 {
   bool result; // al
 
-  result = 0;
-  if ( groupRecord )
+  result = 0; /*0x46b914*/
+  if ( groupRecord ) /*0x46b918*/
   {
-    if ( *groupRecord == dword_B05E20 && !groupRecord[3] )
-      return groupRecord[2] == *(_DWORD *)(0xC * (unsigned __int8)this->member.type + 0xB05E08);
+    if ( *groupRecord == dword_B05E20 && !groupRecord[3] ) /*0x46b926*/
+      return groupRecord[2] == *(_DWORD *)(0xC * (unsigned __int8)this->member.type + 0xB05E08); /*0x46b93f*/
   }
-  return result;
+  return result; /*0x46b941*/
 }

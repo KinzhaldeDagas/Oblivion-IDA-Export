@@ -14,7 +14,6 @@
 0x91540F: add     eax, 0Ch
 0x915412: lea     edi, [ecx+1]
 0x915415: jmp     short loc_915420
-0x915417: align 10h
 0x915420: movaps  xmm2, xmmword ptr [esi+20h]
 0x915424: movaps  xmm3, xmmword ptr [edx]
 0x915427: movaps  xmm1, xmmword ptr ds:0A372D0h

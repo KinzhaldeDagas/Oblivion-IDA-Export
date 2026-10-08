@@ -1,1 +1,1 @@
-IDispatchVtbl_0
+typedef IDispatchVtbl IDispatchVtbl_0;

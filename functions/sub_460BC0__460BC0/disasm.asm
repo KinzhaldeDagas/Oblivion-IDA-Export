@@ -66,11 +66,11 @@
 0x460C78: mov     [esp+60h+a1], edi
 0x460C7C: mov     [esp+60h+var_48], edi
 0x460C80: mov     eax, [esi+14h]
-0x460C83: push    24h ; '$'; Size
-0x460C85: push    eax; Src
+0x460C83: push    24h ; '$'; byteCount
+0x460C85: push    eax; source
 0x460C86: lea     ecx, [esp+68h+Dst]
-0x460C8A: push    ecx; Dst
-0x460C8B: call    _memcpy
+0x460C8A: push    ecx; destination
+0x460C8B: call    _memcpy;
 0x460C90: add     dword ptr [esi+14h], 24h ; '$'
 0x460C94: mov     edx, [esp+6Ch+a1]
 0x460C98: add     esp, 0Ch
@@ -84,7 +84,7 @@
 0x460CAE: call    sub_459950
 0x460CB3: push    eax; a1
 0x460CB4: mov     [esp+64h+var_48], eax
-0x460CB8: call    TESForm_LookupByFormID
+0x460CB8: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x460CBD: push    edi; int
 0x460CBE: push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *
 0x460CC3: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -109,7 +109,7 @@
 0x460CFE: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x460D03: push    0; int
 0x460D05: push    ecx; a1
-0x460D06: call    TESForm_LookupByFormID
+0x460D06: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x460D0B: add     esp, 4
 0x460D0E: push    eax; void *
 0x460D0F: call    OblivionDynamicCast
@@ -123,7 +123,7 @@
 0x460D23: push    ecx
 0x460D24: mov     ecx, ds:0B33A98h
 0x460D2A: push    eax
-0x460D2B: call    TESDataHandler_PlaceObjectRef
+0x460D2B: call    TESDataHandler_PlaceObjectRef; Verified object-reference placement helper accepts an interior cell or exterior WorldSpace and sets/reuses a reference base form. New reference attachment proceeds through cell lifecycle methods; this helper itself does not write the WorldSpace SubSpace index.
 0x460D30: push    ebx
 0x460D31: mov     ecx, ebp
 0x460D33: call    sub_45E990
@@ -142,9 +142,9 @@
 0x460D56: mov     edx, [esp+60h+arg_4]
 0x460D5A: mov     eax, [esp+60h+arg_0]
 0x460D5E: sar     edx, 0Ch
-0x460D61: push    edx; signed int
+0x460D61: push    edx; cellY
 0x460D62: sar     eax, 0Ch
-0x460D65: push    eax; signed int
+0x460D65: push    eax; cellX
 0x460D66: mov     ecx, esi; this
 0x460D68: call    TESWorldSpace__GetCellAtCellCoord
 0x460D6D: mov     edi, eax
@@ -185,17 +185,17 @@
 0x460DCC: add     esp, 50h
 0x460DCF: retn    8
 0x460DD2: test    al, 0Ch
-0x460DD4: jz      loc_461013
+0x460DD4: jz      loc_461013; Saved REFR move/havok branch. Reads 0x1C bytes normally, 0x2C bytes when CHANGEFLAG_REFR_CELL_CHANGED (sign bit) is set.
 0x460DDA: test    eax, eax
 0x460DDC: mov     edi, ds:0B33B00h
 0x460DE2: mov     esi, [edi+14h]
 0x460DE5: jns     short loc_460E2A
-0x460DE7: push    2Ch ; ','; Size
-0x460DE9: lea     eax, [esp+64h+var_2C]
-0x460DED: push    esi; Src
-0x460DEE: push    eax; Dst
-0x460DEF: call    _memcpy
-0x460DF4: mov     ecx, [esp+6Ch+var_2C]
+0x460DE7: push    2Ch ; ','; byteCount
+0x460DE9: lea     eax, [esp+64h+destination]
+0x460DED: push    esi; source
+0x460DEE: push    eax; destination
+0x460DEF: call    _memcpy;
+0x460DF4: mov     ecx, [esp+6Ch+destination]
 0x460DF8: add     esp, 0Ch
 0x460DFB: push    ecx
 0x460DFC: add     esi, 2Ch ; ','
@@ -212,11 +212,11 @@
 0x460E22: mov     [esp+60h+var_1C], eax
 0x460E26: rep movsd
 0x460E28: jmp     short loc_460E50
-0x460E2A: push    1Ch; Size
+0x460E2A: push    1Ch; byteCount
 0x460E2C: lea     eax, [esp+64h+Dst]
-0x460E30: push    esi; a3
-0x460E31: push    eax; a2
-0x460E32: call    _memcpy
+0x460E30: push    esi; source
+0x460E31: push    eax; destination
+0x460E32: call    _memcpy;
 0x460E37: mov     ecx, [esp+6Ch+Dst]
 0x460E3B: add     esp, 0Ch
 0x460E3E: add     esi, 1Ch
@@ -252,7 +252,7 @@
 0x460E9F: call    sub_45E990
 0x460EA4: mov     edx, [esp+60h+Dst]
 0x460EA8: push    edx; a1
-0x460EA9: call    TESForm_LookupByFormID
+0x460EA9: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x460EAE: push    0; int
 0x460EB0: push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *
 0x460EB5: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -272,7 +272,7 @@
 0x460EDF: mov     esi, eax
 0x460EE1: jz      short loc_460F08
 0x460EE3: mov     ecx, ebx; this
-0x460EE5: call    TESObjectREFR_GetParentCell
+0x460EE5: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460EEA: cmp     ebp, eax
 0x460EEC: jz      loc_46101E
 0x460EF2: push    0; int
@@ -296,23 +296,23 @@
 0x460F24: mov     ecx, [esp+60h+arg_0]
 0x460F28: sar     eax, 0Ch
 0x460F2B: sar     ecx, 0Ch
-0x460F2E: push    eax; signed int
-0x460F2F: push    ecx; signed int
+0x460F2E: push    eax; cellY
+0x460F2F: push    ecx; cellX
 0x460F30: mov     ecx, esi; this
 0x460F32: call    TESWorldSpace__GetCellAtCellCoord
 0x460F37: mov     ecx, ebx; this
 0x460F39: mov     edi, eax
-0x460F3B: call    TESObjectREFR_GetParentCell
+0x460F3B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460F40: test    eax, eax
 0x460F42: jz      short loc_460F56
 0x460F44: mov     ecx, ebx; this
-0x460F46: call    TESObjectREFR_GetParentCell
+0x460F46: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460F4B: mov     ecx, eax; this
-0x460F4D: call    TESObjectCELL_IsInterior
+0x460F4D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x460F52: test    al, al
 0x460F54: jnz     short loc_460F61
 0x460F56: mov     ecx, ebx; this
-0x460F58: call    TESObjectREFR_GetParentCell
+0x460F58: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460F5D: cmp     eax, edi
 0x460F5F: jz      short loc_460F77
 0x460F61: push    esi; int
@@ -329,7 +329,7 @@
 0x460F77: test    edi, edi
 0x460F79: jnz     loc_46101E
 0x460F7F: mov     ecx, ebx; this
-0x460F81: call    TESObjectREFR_IsPersistent?
+0x460F81: call    TESObjectREFR_IsPersistent
 0x460F86: test    al, al
 0x460F88: jnz     loc_46101E
 0x460F8E: push    offset aTryingToLoadNo; "Trying to load non-persistent ref into "...
@@ -342,7 +342,7 @@
 0x460F9F: add     esp, 50h
 0x460FA2: retn    8
 0x460FA5: mov     ecx, ebx; this
-0x460FA7: call    TESObjectREFR_IsPersistent?
+0x460FA7: call    TESObjectREFR_IsPersistent
 0x460FAC: test    al, al
 0x460FAE: jnz     short loc_460FC7
 0x460FB0: push    offset aTryingToPutNon; "Trying to put non-persistent reference "...
@@ -355,14 +355,14 @@
 0x460FC1: add     esp, 50h
 0x460FC4: retn    8
 0x460FC7: mov     ecx, ebx; this
-0x460FC9: call    TESObjectREFR_GetParentCell
+0x460FC9: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460FCE: test    eax, eax
 0x460FD0: jz      short loc_460FE1
-0x460FD2: push    ebx
+0x460FD2: push    ebx; reference
 0x460FD3: mov     ecx, ebx; this
-0x460FD5: call    TESObjectREFR_GetParentCell
-0x460FDA: mov     ecx, eax
-0x460FDC: call    sub_4CECD0
+0x460FD5: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x460FDA: mov     ecx, eax; this
+0x460FDC: call    TESObjectCELL_RemoveReference; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.
 0x460FE1: mov     edx, [ebx]
 0x460FE3: mov     eax, [edx+194h]
 0x460FE9: push    0
@@ -383,7 +383,7 @@
 0x46100D: add     esp, 50h
 0x461010: retn    8
 0x461013: test    eax, offset loc_800000
-0x461018: jz      short loc_46101E
+0x461018: jz      short loc_46101E; Saved REFR 0x00800000 Oblivion cell/worldspace marker branch. Consumes 4 bytes only.
 0x46101A: add     dword ptr [ebp+14h], 4
 0x46101E: pop     edi
 0x46101F: pop     esi

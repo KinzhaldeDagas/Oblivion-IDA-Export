@@ -1,1 +1,1 @@
-_TP_WAIT
+struct _TP_WAIT;

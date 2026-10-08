@@ -26,7 +26,7 @@
 0x571C09: test    eax, eax
 0x571C0B: jz      short loc_571C36
 0x571C0D: lea     ecx, [ecx+0]
-0x571C10: cmp     eax, offset unk_B3A6A8
+0x571C10: cmp     eax, offset stru_B3A6A8
 0x571C15: jz      short loc_571C20
 0x571C17: mov     eax, [eax+4]
 0x571C1A: test    eax, eax

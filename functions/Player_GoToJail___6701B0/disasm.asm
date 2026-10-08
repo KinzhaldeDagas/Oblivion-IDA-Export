@@ -26,14 +26,14 @@
 0x670206: push    1
 0x670208: push    eax
 0x670209: push    edi
-0x67020A: mov     ecx, offset ActorProcessManager_ptr
+0x67020A: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x67020F: call    sub_6765F0
 0x670214: mov     [esi+608h], edi
 0x67021A: mov     ds:0B3BAD4h, edi
 0x670220: mov     ds:0B3BAD0h, edi
 0x670226: push    edi
 0x670227: push    edi
-0x670228: mov     ecx, offset ActorProcessManager_ptr
+0x670228: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x67022D: mov     byte ptr [esi+610h], 0
 0x670234: call    sub_675D50
 0x670239: mov     edx, [esi]
@@ -43,7 +43,7 @@
 0x67024A: mov     ds:0B3BAD0h, edi
 0x670250: call    eax
 0x670252: fidiv   dword ptr ds:0B376F0h
-0x670258: call    Double_To_SInt32
+0x670258: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x67025D: mov     edx, [esi]
 0x67025F: mov     [esi+608h], eax
 0x670265: mov     eax, [edx+354h]
@@ -69,9 +69,9 @@
 0x6702B0: xor     ebp, ebp
 0x6702B2: cmp     ecx, ebp
 0x6702B4: jz      loc_6705C6
-0x6702BA: call    GetTeleportExtraData
-0x6702BF: mov     ecx, eax
-0x6702C1: call    sub_42B410
+0x6702BA: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x6702BF: mov     ecx, eax; this
+0x6702C1: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x6702C6: cmp     eax, ebp
 0x6702C8: jz      loc_6705B4
 0x6702CE: lea     ecx, [esi+44h]; this
@@ -114,11 +114,11 @@
 0x670331: mov     ebx, ds:0B33AB0h
 0x670337: jz      short loc_67034B
 0x670339: mov     ecx, ds:0B35EC8h
-0x67033F: push    1
-0x670341: push    0
-0x670343: push    ecx
-0x670344: mov     ecx, edi
-0x670346: call    ContainerExtraData_AddItem
+0x67033F: push    1; count
+0x670341: push    0; extraList
+0x670343: push    ecx; item
+0x670344: mov     ecx, edi; this
+0x670346: call    ContainerExtraData_AddItem; Canonical form-based container add: item, optional instance ExtraDataList, and signed count. All four external callers enter only at this head; the formerly split interior blocks are one logical routine ending in retn 0x0C. A proxy-to-source conversion hook here covers actor-hit/form adds but not ordinary world-reference pickup.
 0x67034B: push    ebx
 0x67034C: xor     edi, edi
 0x67034E: call    TESScriptableForm_GetScriptForForm
@@ -167,7 +167,7 @@
 0x6703C8: push    1
 0x6703CA: push    ebx
 0x6703CB: mov     ecx, esi
-0x6703CD: call    Actor_EquipItem
+0x6703CD: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x6703D2: mov     ebx, ds:0B33AB4h
 0x6703D8: push    ebx
 0x6703D9: call    TESScriptableForm_GetScriptForForm
@@ -218,7 +218,7 @@
 0x67045B: push    1
 0x67045D: push    ebx
 0x67045E: mov     ecx, esi
-0x670460: call    Actor_EquipItem
+0x670460: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x670465: mov     ebx, ds:0B33AB8h
 0x67046B: push    ebx
 0x67046C: call    TESScriptableForm_GetScriptForForm
@@ -270,22 +270,22 @@
 0x6704F6: push    1
 0x6704F8: push    ebx
 0x6704F9: mov     ecx, esi
-0x6704FB: call    Actor_EquipItem
+0x6704FB: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x670500: mov     ecx, [esi+58h]
 0x670503: mov     edx, [ecx]
 0x670505: mov     eax, [edx+308h]
 0x67050B: push    0
 0x67050D: call    eax
 0x67050F: mov     edi, [esi+104h]
-0x670515: mov     ecx, esi
-0x670517: call    TESObjectREFR_GetAnimData
+0x670515: mov     ecx, esi; this
+0x670517: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x67051C: mov     ebx, eax
 0x67051E: mov     ebp, 2
 0x670523: cmp     ebp, 1
 0x670526: jnz     short loc_670538
-0x670528: push    ebp
-0x670529: mov     ecx, esi
-0x67052B: call    sub_6600D0
+0x670528: push    ebp; firstPerson
+0x670529: mov     ecx, esi; this
+0x67052B: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x670530: mov     ebx, [esi+5CCh]
 0x670536: mov     edi, eax
 0x670538: mov     ecx, [esi+58h]
@@ -344,7 +344,7 @@
 0x6705E0: mov     byte ptr [esi+12Ch], 0
 0x6705E7: jle     loc_6706E6
 0x6705ED: mov     ecx, ds:0B3BAD0h; this
-0x6705F3: call    GetTeleportExtraData
+0x6705F3: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x6705F8: mov     ebx, eax
 0x6705FA: test    ebx, ebx
 0x6705FC: jz      loc_6706CF
@@ -352,17 +352,17 @@
 0x670608: push    1
 0x67060A: push    0
 0x67060C: push    ecx; int
-0x67060D: mov     ecx, offset ActorProcessManager_ptr
+0x67060D: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x670612: call    sub_6765F0
 0x670617: mov     ecx, ebx
 0x670619: call    sub_42B430
 0x67061E: mov     ecx, ebx
 0x670620: mov     edi, eax
-0x670622: call    sub_6899C0
+0x670622: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x670627: push    1; char
 0x670629: mov     ecx, ebx
 0x67062B: mov     ebp, eax
-0x67062D: call    sub_42B460
+0x67062D: call    sub_42B460; ExtraTeleport_GetTargetCell-style helper: returns parent cell of ExtraTeleport+0 target ref if present.
 0x670632: mov     edx, [edi]
 0x670634: mov     ecx, [edi+4]
 0x670637: push    eax; int
@@ -381,18 +381,18 @@
 0x670658: mov     [eax+4], edx
 0x67065B: mov     [eax+8], ecx
 0x67065E: mov     ecx, ds:0B333C4h; int
-0x670664: call    sub_66EAF0
+0x670664: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x670669: mov     ecx, esi
 0x67066B: call    sub_5E4140
 0x670670: mov     eax, ds:0B333C4h
 0x670675: cmp     byte ptr [eax+116h], 0
 0x67067C: jnz     short loc_6706E6
-0x67067E: mov     ecx, [esi+1E0h]
+0x67067E: mov     ecx, [esi+1E0h]; reference
 0x670684: test    ecx, ecx
 0x670686: jz      short loc_6706E6
-0x670688: push    1
-0x67068A: push    eax
-0x67068B: call    TESOBjectREFR_IsOwnedBy
+0x670688: push    1; useFactionOwnership
+0x67068A: push    eax; actorReference
+0x67068B: call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
 0x670690: test    al, al
 0x670692: jz      short loc_6706E6
 0x670694: mov     ecx, [esi+1E0h]; this
@@ -425,3 +425,25 @@
 0x6706F5: pop     ebx
 0x6706F6: add     esp, 10h
 0x6706F9: retn    4
+0x9C4290: mov     eax, [ebp+4]
+0x9C4293: push    eax
+0x9C4294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4299: pop     ecx
+0x9C429A: retn
+0x9C429B: mov     eax, [ebp+4]
+0x9C429E: push    eax
+0x9C429F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C42A4: pop     ecx
+0x9C42A5: retn
+0x9C42A6: mov     eax, [ebp-10h]
+0x9C42A9: push    eax
+0x9C42AA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C42AF: pop     ecx
+0x9C42B0: retn
+0x9C42B1: mov     edx, [esp+arg_4]
+0x9C42B5: lea     eax, [edx-14h]
+0x9C42B8: mov     ecx, [edx-18h]
+0x9C42BB: xor     ecx, eax
+0x9C42BD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C42C2: mov     eax, offset stru_AECC88
+0x9C42C7: jmp     ___CxxFrameHandler3

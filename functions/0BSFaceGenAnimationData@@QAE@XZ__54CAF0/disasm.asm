@@ -156,3 +156,66 @@
 0x54CDA1: pop     ebx
 0x54CDA2: add     esp, 10h
 0x54CDA5: retn
+0x9BB7F0: mov     ecx, [ebp-10h]
+0x9BB7F3: jmp     NiExtraData_dtor
+0x9BB7F8: mov     ecx, [ebp-10h]
+0x9BB7FB: add     ecx, 10h; this
+0x9BB7FE: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB803: mov     ecx, [ebp-10h]
+0x9BB806: add     ecx, 24h ; '$'
+0x9BB809: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB80E: mov     ecx, [ebp-10h]
+0x9BB811: add     ecx, 34h ; '4'; this
+0x9BB814: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB819: mov     ecx, [ebp-10h]
+0x9BB81C: add     ecx, 48h ; 'H'; this
+0x9BB81F: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB824: mov     ecx, [ebp-10h]
+0x9BB827: add     ecx, 5Ch ; '\'
+0x9BB82A: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB82F: mov     ecx, [ebp-10h]
+0x9BB832: add     ecx, 6Ch ; 'l'; this
+0x9BB835: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB83A: mov     ecx, [ebp-10h]
+0x9BB83D: add     ecx, 80h ; '€'
+0x9BB843: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB848: mov     ecx, [ebp-10h]
+0x9BB84B: add     ecx, 90h; this
+0x9BB851: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB856: mov     ecx, [ebp-10h]
+0x9BB859: add     ecx, 0A4h ; '¤'; this
+0x9BB85F: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB864: mov     ecx, [ebp-10h]
+0x9BB867: add     ecx, 0B8h ; '¸'
+0x9BB86D: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB872: mov     ecx, [ebp-10h]
+0x9BB875: add     ecx, 0C8h ; 'È'; this
+0x9BB87B: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB880: mov     ecx, [ebp-10h]
+0x9BB883: add     ecx, 0DCh ; 'Ü'
+0x9BB889: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB88E: mov     ecx, [ebp-10h]
+0x9BB891: add     ecx, 0ECh ; 'ì'; this
+0x9BB897: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB89C: mov     ecx, [ebp-10h]
+0x9BB89F: add     ecx, 100h; this
+0x9BB8A5: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB8AA: mov     ecx, [ebp-10h]
+0x9BB8AD: add     ecx, 114h
+0x9BB8B3: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB8B8: mov     ecx, [ebp-10h]
+0x9BB8BB: add     ecx, 124h; this
+0x9BB8C1: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB8C6: mov     ecx, [ebp-10h]
+0x9BB8C9: add     ecx, 138h
+0x9BB8CF: jmp     j_??1?$NiTPointerList@PAVBSFaceGenKeyframe@@@@UAE@XZ; NiTPointerList<BSFaceGenKeyframe *>::~NiTPointerList<BSFaceGenKeyframe *>(void)
+0x9BB8D4: mov     ecx, [ebp-10h]
+0x9BB8D7: add     ecx, 148h; this
+0x9BB8DD: jmp     ??1BSFaceGenKeyframeMultiple@@UAE@XZ; BSFaceGenKeyframeMultiple::~BSFaceGenKeyframeMultiple(void)
+0x9BB8E2: mov     edx, [esp+arg_4]
+0x9BB8E6: lea     eax, [edx-10h]
+0x9BB8E9: mov     ecx, [edx-14h]
+0x9BB8EC: xor     ecx, eax
+0x9BB8EE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BB8F3: mov     eax, offset stru_AE5578
+0x9BB8F8: jmp     ___CxxFrameHandler3

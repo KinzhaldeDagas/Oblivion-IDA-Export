@@ -1,19 +1,36 @@
 {
-  "callees_count": 39,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_4D16D0",
+  "chunks": [
+    [
+      "0x4D16D0",
+      "0x4D198E"
+    ],
+    [
+      "0x9B5520",
+      "0x9B5546"
+    ]
+  ],
+  "chunks_sha256": "ee2cc5ce0cafe7d757f1837ee98283d054b3db902d7afdaae0d081e06763601f",
+  "comment_regular": "Verified external .lod parser format: each record has a TESBoundObject FormID, count N, then rotationAnglesXYZ (3N floats), positions (3N floats), and scalePercent (N floats). The base-object transform applies rotation components as X, Y, Z radians and scale as abs(floor(scalePercent)/100).",
+  "comment_repeatable": "Verified external .lod parser format: each record has a TESBoundObject FormID, count N, then rotationAnglesXYZ (3N floats), positions (3N floats), and scalePercent (N floats). The base-object transform applies rotation components as X, Y, Z radians and scale as abs(floor(scalePercent)/100).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "DistantLOD_ParseExternalCellFile",
   "end_ea": "0x4D198E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4D16D0",
+  "name": "DistantLOD_ParseExternalCellFile",
   "segment": ".text",
   "sha256": "44b3b14a54e121e89a0a4ffb814498cac53e4d78676a7dcecc24aead8dc68c9c",
   "size": 702,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D16D0",
-  "type": "char __cdecl(_BYTE *arg0, _DWORD *, int)",
-  "xrefs_from_count": 284,
+  "total_chunk_size": 740,
+  "type": "bool __cdecl(void *bsFile, DistantLODCellObjectMap *outMap, DistantLODLoadMode lodMode)",
+  "xrefs_from_count": 298,
   "xrefs_to_count": 1
 }

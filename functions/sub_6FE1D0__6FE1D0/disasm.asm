@@ -6,7 +6,7 @@
 0x6FE1DA: push    edi
 0x6FE1DB: push    ebx
 0x6FE1DC: mov     esi, ecx
-0x6FE1DE: call    nullsub_returnvVoid_1arg
+0x6FE1DE: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6FE1E3: movzx   ebp, word ptr [esi+14h]
 0x6FE1E7: push    1
 0x6FE1E9: lea     ecx, [esp+1Ch+arg_0]

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79BEE0",
-    "line": "push    ebx",
+    "line": "push    ebx; Fills an initialized compact SFrondGuide range from one value using deep vector assignment plus scalar-field copies.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BEE1",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,25 +43,25 @@
   },
   {
     "ea": "0x79BEEF",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+source]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79BEF3",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79BEF4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79BEF6",
-    "line": "call    sub_79B160",
+    "line": "call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.",
     "mnemonic": "call",
     "size": 5
   },

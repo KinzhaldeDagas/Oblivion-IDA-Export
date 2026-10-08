@@ -1,1 +1,1 @@
-HIMCC
+typedef HANDLE HIMCC;

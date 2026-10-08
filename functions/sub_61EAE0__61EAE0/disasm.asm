@@ -1,22 +1,22 @@
 0x61EAE0: push    esi
 0x61EAE1: push    edi
 0x61EAE2: mov     esi, ecx
-0x61EAE4: call    sub_6135F0
+0x61EAE4: call    CombatController_GetCurrentTarget
 0x61EAE9: mov     edi, [esp+8+arg_0]
 0x61EAED: cmp     edi, eax
 0x61EAEF: jnz     short loc_61EB5E
 0x61EAF1: mov     ecx, esi
-0x61EAF3: call    sub_6135F0
+0x61EAF3: call    CombatController_GetCurrentTarget
 0x61EAF8: test    eax, eax
 0x61EAFA: jz      short loc_61EB3F
 0x61EAFC: mov     ecx, esi
-0x61EAFE: call    sub_6135F0
-0x61EB03: mov     ecx, eax
-0x61EB05: call    Actor_IsSwimming
+0x61EAFE: call    CombatController_GetCurrentTarget
+0x61EB03: mov     ecx, eax; this
+0x61EB05: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x61EB0A: test    al, al
 0x61EB0C: jz      short loc_61EB3F
-0x61EB0E: mov     ecx, [esi+3Ch]
-0x61EB11: call    Actor_IsSwimming
+0x61EB0E: mov     ecx, [esi+3Ch]; this
+0x61EB11: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x61EB16: test    al, al
 0x61EB18: jnz     short loc_61EB3F
 0x61EB1A: mov     ecx, [esi+3Ch]

@@ -25,7 +25,7 @@
 0x6DE3DC: push    eax; void *
 0x6DE3DD: call    $LN21
 0x6DE3E2: push    edi
-0x6DE3E3: call    FormHeapFree
+0x6DE3E3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6DE3E8: add     esp, 4
 0x6DE3EB: mov     ecx, esi
 0x6DE3ED: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -37,3 +37,12 @@
 0x6DE407: pop     esi
 0x6DE408: add     esp, 10h
 0x6DE40B: retn
+0x9CA4B0: mov     ecx, [ebp-10h]
+0x9CA4B3: jmp     NiRefObject_destr
+0x9CA4B8: mov     edx, [esp+arg_4]
+0x9CA4BC: lea     eax, [edx-0Ch]
+0x9CA4BF: mov     ecx, [edx-10h]
+0x9CA4C2: xor     ecx, eax
+0x9CA4C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA4C9: mov     eax, offset stru_AF2BA8
+0x9CA4CE: jmp     ___CxxFrameHandler3

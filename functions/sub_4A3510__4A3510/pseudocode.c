@@ -1,4 +1,4 @@
-void __thiscall sub_4A3510(_DWORD *this)
+void __thiscall TESRegionData_SetBaseVTable(_DWORD *this)
 {
-  *this = &TESRegionData::`vftable';
+  *this = &TESRegionData::`vftable'; /*0x4a3510*/
 }

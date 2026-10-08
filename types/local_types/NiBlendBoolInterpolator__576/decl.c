@@ -1,1 +1,1 @@
-NiBlendBoolInterpolator
+struct NiBlendBoolInterpolator;

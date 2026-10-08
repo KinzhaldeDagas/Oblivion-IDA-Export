@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x446A10",
-    "line": "mov     eax, [ecx+34h]",
+    "line": "mov     eax, [ecx+34h]; TES4 authoritative: TES::CastRay. Uses current interior cell's bhkWorld or exterior bhkWorldM; calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData. Reusable for climbing wall/ledge probes.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -91,6 +91,318 @@
   },
   {
     "ea": "0x446A37",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E30",
+    "line": "push    esi; Shared CastRay cell-world body. Calls bhkWorld raycast vfunc +0x88 with bhkWorldRayCastData; if hit collidable maps to terrain layer 0x11, returns cell NiNode, otherwise returns hit object via bhkWorldRayCastData helper 0x889CB0.",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4E31",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4E32",
+    "line": "mov     edi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E34",
+    "line": "test    byte ptr [edi+24h], 1",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x4D4E38",
+    "line": "jz      short loc_4D4E44",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E3A",
+    "line": "lea     ecx, [edi+28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E3D",
+    "line": "call    sub_424180",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D4E42",
+    "line": "jmp     short loc_4D4E49",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E44",
+    "line": "mov     eax, ds:0B35C24h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x4D4E49",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E4B",
+    "line": "jz      short loc_4D4EA6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E4D",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E4F",
+    "line": "mov     esi, [esp+8+arg_0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x4D4E53",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E55",
+    "line": "mov     eax, [edx+88h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x4D4E5B",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4E5C",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E5E",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E60",
+    "line": "jz      short loc_4D4EA6",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E62",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E64",
+    "line": "call    bhkWorldRayCastData_GetHitInfoIfTyped; Raycast data -> low-level hit info helper from root collidable + internal offset; used to inspect collision layer in TES::CastRay.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D4E69",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E6B",
+    "line": "jz      short loc_4D4E72",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E6D",
+    "line": "mov     eax, [eax+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E70",
+    "line": "jmp     short loc_4D4E74",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E72",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E74",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E76",
+    "line": "jz      short loc_4D4E9A",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E78",
+    "line": "mov     eax, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E7B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E7D",
+    "line": "jz      short loc_4D4E89",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E7F",
+    "line": "add     eax, 14h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E82",
+    "line": "jz      short loc_4D4E89",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E84",
+    "line": "mov     eax, [eax+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E87",
+    "line": "jmp     short loc_4D4E8B",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E89",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E8B",
+    "line": "and     eax, 3Fh",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E8E",
+    "line": "cmp     al, 11h",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E90",
+    "line": "jnz     short loc_4D4E9A",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E92",
+    "line": "mov     eax, [edi+54h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E95",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4E96",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4E97",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4E9A",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4E9C",
+    "line": "call    bhkWorldRayCastData_GetHitNiObject; Raycast data -> hit NiAVObject helper via root collidable at +0x50.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x4D4EA1",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4EA2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4EA3",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x4D4EA6",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4EA7",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x4D4EA9",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x4D4EAA",
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3

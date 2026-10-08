@@ -14,7 +14,6 @@
 0x43BDD5: push    esi
 0x43BDD6: push    edi
 0x43BDD7: jmp     short loc_43BDE0
-0x43BDD9: align 10h
 0x43BDE0: mov     ebx, [ebp+0]
 0x43BDE3: test    ebx, ebx
 0x43BDE5: jz      loc_43BE86
@@ -59,7 +58,7 @@
 0x43BE51: push    eax
 0x43BE52: call    sub_43B840
 0x43BE57: push    ebx
-0x43BE58: call    FormHeapFree
+0x43BE58: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43BE5D: mov     eax, [ebp+4]
 0x43BE60: add     esp, 4
 0x43BE63: test    eax, eax
@@ -69,7 +68,7 @@
 0x43BE6D: mov     ecx, [eax]
 0x43BE6F: push    eax
 0x43BE70: mov     [ebp+0], ecx
-0x43BE73: call    FormHeapFree
+0x43BE73: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43BE78: add     esp, 4
 0x43BE7B: jmp     short loc_43BE89
 0x43BE7D: mov     dword ptr [ebp+0], 0

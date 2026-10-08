@@ -1,4 +1,4 @@
-BSStringT *sub_A05E20()
+NiRTTI *sub_A05E20()
 {
-  return sub_70E220(&stru_B3E074, "NiKeyframeManager", (int)dword_B3FC98);
+  return NiRTTI_Constructor(&stru_B3E074, "NiKeyframeManager", &stru_B3FC98); /*0xa05e34*/
 }

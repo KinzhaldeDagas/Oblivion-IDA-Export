@@ -13,7 +13,7 @@ void __userpurge sub_64C350(
   int v12; // ebp
   char v13; // al
   TESObjectREFR *v14; // eax
-  TESPackage *v15; // ecx
+  int v15; // ecx
   float *v16; // ebx
   float *v17; // eax
   double v18; // st7
@@ -23,7 +23,7 @@ void __userpurge sub_64C350(
   double v22; // st7
   Atmosphere *v23; // ecx
   double v24; // st7
-  TESObjectCELL *ParentCell; // eax
+  TESObjectCELL *DwordAtOffset40; // eax
   double v26; // st7
   char v27; // al
   unsigned int *v28; // eax
@@ -50,23 +50,23 @@ void __userpurge sub_64C350(
   float *v49; // eax
   double v50; // st7
   double v51; // st6
-  char *v52; // eax
-  _DWORD *v53; // ebx
-  TESObjectCELL *v54; // eax
+  TESPackage *CurrentPackage; // eax
+  float *v53; // ebx
+  BSExtraDataVtbl *v54; // eax
   TESForm *v55; // ebx
   double v56; // st7
   double v57; // st7
   double v58; // st7
   int v59; // ebx
-  int v60; // eax
-  TESObjectCELL *v61; // [esp+14h] [ebp-64h]
+  float *v60; // eax
+  BSExtraDataVtbl *v61; // [esp+14h] [ebp-64h]
   TESWorldSpace *v62; // [esp+18h] [ebp-60h]
   TESWorldSpace *v63; // [esp+20h] [ebp-58h]
   float v64; // [esp+20h] [ebp-58h]
   float v65; // [esp+34h] [ebp-44h]
-  int v66; // [esp+34h] [ebp-44h]
+  int PointerAtOffset08; // [esp+34h] [ebp-44h]
   unsigned int *v67; // [esp+34h] [ebp-44h]
-  bool (__thiscall *CompareTo)(BSExtraData *, BSExtraData *); // [esp+38h] [ebp-40h]
+  UInt32 refID; // [esp+38h] [ebp-40h]
   int v69; // [esp+38h] [ebp-40h]
   float v70; // [esp+38h] [ebp-40h]
   TESObjectREFRVtbl *vtbl; // [esp+3Ch] [ebp-3Ch]
@@ -98,7 +98,7 @@ void __userpurge sub_64C350(
   float v97; // [esp+7Ch] [ebp+4h]
   float v98; // [esp+7Ch] [ebp+4h]
 
-  v12 = ((int (__usercall *)@<eax>(TESObjectREFR **@<ecx>, double@<st0>, double@<st1>, double@<st2>, double@<st3>, double@<st4>, double@<st5>, double@<st6>))LODWORD((*a1)[4].member.rot.y))(
+  v12 = ((int (__usercall *)@<eax>(TESObjectREFR **@<ecx>, double@<st0>, double@<st1>, double@<st2>, double@<st3>, double@<st4>, double@<st5>, double@<st6>, double@<st7>))LODWORD((*a1)[4].member.rot.y))( /*0x64c36b*/
           a1,
           a9,
           a8,
@@ -106,175 +106,184 @@ void __userpurge sub_64C350(
           a6,
           a5,
           a4,
-          a3);
-  if ( !a1[0xB] )
-    ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*a1)[0xF].member.pos[1]))(a1, a10);
-  if ( !sub_5E6780(a10) )
+          a3,
+          a2);
+  if ( !a1[0xB] ) /*0x64c363*/
+    ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*a1)[0xF].member.pos[1]))(a1, a10); /*0x64c37a*/
+  if ( !sub_5E6780(a10) ) /*0x64c37e*/
   {
-    if ( !a1[0xB] )
-      goto LABEL_7;
-    if ( !a1[0xB]->vtbl->IsActor(a1[0xB]) )
+    if ( !a1[0xB] ) /*0x64c387*/
+      goto LABEL_7; /*0x64c387*/
+    if ( !a1[0xB]->vtbl->IsActor(a1[0xB]) ) /*0x64c397*/
     {
-      sub_4D88C0(a10, (bool (__thiscall *)(BSExtraData *, BSExtraData *))a1[0xB]->member.super.refID);
-      if ( !v13 )
-        goto LABEL_7;
+      sub_4D88C0(a10, (bool (__thiscall *)(BSExtraData *, BSExtraData *))a1[0xB]->member.super.refID); /*0x64c3a6*/
+      if ( !v13 ) /*0x64c3ad*/
+        goto LABEL_7; /*0x64c3ad*/
     }
   }
-  v89 = 0;
-  if ( a1[0xB] )
+  v89 = 0; /*0x64c3e6*/
+  if ( a1[0xB] ) /*0x64c3e2*/
   {
-    if ( a1[0xB]->vtbl->IsActor(a1[0xB]) )
+    if ( a1[0xB]->vtbl->IsActor(a1[0xB]) ) /*0x64c3f8*/
     {
-      v14 = a1[0xB];
-      if ( v14 != a10 )
+      v14 = a1[0xB]; /*0x64c3fe*/
+      if ( v14 != a10 ) /*0x64c403*/
       {
-        v89 = 1;
-        v15 = *(TESPackage **)(*((_DWORD *)OblivionDynamicCast(
-                                             v14,
-                                             0,
-                                             (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
-                                             &Actor `RTTI Type Descriptor',
-                                             0)
-                               + 0x16)
-                             + 8);
-        if ( a1[0xB] != (TESObjectREFR *)TESDataHandler_g_PlayerRef
-          && (!v15 || v15->members.type != 1 && !sub_5660A0(v15)) )
+        v89 = 1; /*0x64c414*/
+        v15 = *(_DWORD *)(*((_DWORD *)OblivionDynamicCast( /*0x64c424*/
+                                        v14,
+                                        0,
+                                        (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
+                                        &Actor `RTTI Type Descriptor',
+                                        0)
+                          + 0x16)
+                        + 8);
+        if ( a1[0xB] != (TESObjectREFR *)reference /*0x64c43c*/
+          && (!v15 || *(_BYTE *)(v15 + 0x20) != 1 && !TESPackage_IsRuntimePackage((TESPackage *)v15)) )
         {
-          ((void (__thiscall *)(TESObjectREFR **, _DWORD))(*a1)[4].member.baseForm)(a1, 0);
-          return;
+          ((void (__thiscall *)(TESObjectREFR **, _DWORD))(*a1)[4].member.baseForm)(a1, 0); /*0x64c451*/
+          return; /*0x64c45a*/
         }
       }
     }
   }
-  v16 = a10->vtbl->GetPos(a10);
-  v17 = a10->vtbl->GetPos(a10);
-  *(float *)&v84 = *v17 - *v16;
-  *((float *)&v84 + 1) = v17[1] - v16[1];
-  v18 = v17[2] - v16[2];
-  v19 = 0;
-  v85 = v18;
-  v65 = 0.0;
-  if ( v89 )
+  v16 = a10->vtbl->GetPos(a10); /*0x64c469*/
+  v17 = a10->vtbl->GetPos(a10); /*0x64c475*/
+  *(float *)&v84 = *v17 - *v16; /*0x64c47b*/
+  *((float *)&v84 + 1) = v17[1] - v16[1]; /*0x64c485*/
+  v18 = v17[2] - v16[2]; /*0x64c48c*/
+  v19 = 0; /*0x64c48f*/
+  v85 = v18; /*0x64c495*/
+  v65 = 0.0; /*0x64c49b*/
+  if ( v89 ) /*0x64c49f*/
   {
-    v20 = a1[0xB]->vtbl->GetPos(a1[0xB]);
-    v21 = a10->vtbl->GetPos(a10);
-    *(float *)&v82 = *v21 - *v20;
-    *((float *)&v82 + 1) = v21[1] - v20[1];
-    v22 = v21[2] - v20[2];
-    v19 = (PlayerCharacter *)a1[0xB];
-    v23 = *(Atmosphere **)(v12 + 0x28);
-    v83 = v22;
-    v84 = v82;
-    v85 = v83;
-    v66 = (int)sub_452A60(v23);
-    if ( v66 <= 0 )
-      v66 = 0xC8;
-    if ( a1[0xB] == (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+    v20 = a1[0xB]->vtbl->GetPos(a1[0xB]); /*0x64c4b2*/
+    v21 = a10->vtbl->GetPos(a10); /*0x64c4be*/
+    *(float *)&v82 = *v21 - *v20; /*0x64c4c4*/
+    *((float *)&v82 + 1) = v21[1] - v20[1]; /*0x64c4ce*/
+    v22 = v21[2] - v20[2]; /*0x64c4dd*/
+    v19 = (PlayerCharacter *)a1[0xB]; /*0x64c4e0*/
+    v23 = *(Atmosphere **)(v12 + 0x28); /*0x64c4e7*/
+    v83 = v22; /*0x64c4ea*/
+    v84 = v82; /*0x64c4f2*/
+    v85 = v83; /*0x64c4f6*/
+    PointerAtOffset08 = (int)Shared_GetPointerAtOffset08(v23); /*0x64c501*/
+    if ( PointerAtOffset08 <= 0 ) /*0x64c505*/
+      PointerAtOffset08 = 0xC8; /*0x64c507*/
+    if ( a1[0xB] == (TESObjectREFR *)reference ) /*0x64c518*/
     {
-      v24 = (double)v66;
+      v24 = (double)PointerAtOffset08; /*0x64c51a*/
     }
     else
     {
-      ParentCell = TESObjectREFR_GetParentCell(a10);
-      if ( TESObjectCELL_IsInterior(ParentCell) )
-        v24 = flt_B36AA0;
+      DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(a10); /*0x64c522*/
+      if ( TESObjectCELL_IsInterior(DwordAtOffset40) ) /*0x64c529*/
+        v24 = flt_B36A88[6]; /*0x64c532*/
       else
-        v24 = (double)v66 * flt_B36A98;
+        v24 = (double)PointerAtOffset08 * flt_B36A88[4]; /*0x64c53e*/
     }
-    v65 = v24;
+    v65 = v24; /*0x64c544*/
   }
-  if ( !*(_DWORD *)(v12 + 0x24)
-    || (v26 = sub_566DC0((TESPackage *)v12, flt_A30634, a8, (Actor *)a10, 0, flt_A30634), !v27) )
+  if ( !*(_DWORD *)(v12 + 0x24) /*0x64c568*/
+    || (v26 = sub_566DC0(
+                (TESPackage *)v12,
+                kTerrainLODQuadRayDirectionZ,
+                a8,
+                a7,
+                (Actor *)a10,
+                0,
+                kTerrainLODQuadRayDirectionZ),
+        !v27) )
   {
-    if ( !v89 )
-      goto LABEL_69;
-    v72 = (float *)sub_566B30((TESPackage *)v12, (int)&v86, (Actor *)a10);
-    v48 = a10->vtbl->GetPos(a10);
-    *(float *)&v82 = *v48 - *v72;
-    *((float *)&v82 + 1) = v48[1] - v72[1];
-    v83 = v48[2] - v72[2];
-    v73 = (float *)sub_566B30((TESPackage *)v12, (int)&v81, (Actor *)a10);
-    v49 = v19->vtbl->super.super.super.GetPos((TESObjectREFR *)v19);
-    v86 = *v49 - *v73;
-    v87 = v49[1] - v73[1];
-    v88 = v49[2] - v73[2];
-    v74 = *(float *)&v84 * *(float *)&v84 + *((float *)&v84 + 1) * *((float *)&v84 + 1) + v85 * v85;
-    v75 = sqrt(v74);
-    if ( v65 < (double)v75 )
+    if ( !v89 ) /*0x64c7f6*/
+      goto LABEL_69; /*0x64c7f6*/
+    v72 = sub_566B30((TESPackage *)v12, &v86, (Actor *)a10); /*0x64c80b*/
+    v48 = a10->vtbl->GetPos(a10); /*0x64c817*/
+    *(float *)&v82 = *v48 - *v72; /*0x64c822*/
+    *((float *)&v82 + 1) = v48[1] - v72[1]; /*0x64c82c*/
+    v83 = v48[2] - v72[2]; /*0x64c83d*/
+    v73 = sub_566B30((TESPackage *)v12, (float *)&v81, (Actor *)a10); /*0x64c848*/
+    v49 = v19->vtbl->super.super.super.GetPos((TESObjectREFR *)v19); /*0x64c854*/
+    v86 = *v49 - *v73; /*0x64c85e*/
+    v87 = v49[1] - v73[1]; /*0x64c868*/
+    v88 = v49[2] - v73[2]; /*0x64c872*/
+    v74 = *(float *)&v84 * *(float *)&v84 + *((float *)&v84 + 1) * *((float *)&v84 + 1) + v85 * v85; /*0x64c892*/
+    v75 = sqrt(v74); /*0x64c89f*/
+    if ( v65 < (double)v75 ) /*0x64c8b2*/
     {
-      v50 = *((float *)&v82 + 1);
-      v51 = *(float *)&v82;
-      v81 = v87;
-      *(double *)&v82 = v88;
-      v76 = v50 * v50 + v51 * v51 + v83 * v83;
-      v77 = sqrt(v76);
-      v70 = v77;
-      v78 = v86 * v86 + v87 * v87 + v88 * v88;
-      v79 = sqrt(v78);
-      if ( v70 <= (double)v79 )
-        goto LABEL_79;
+      v50 = *((float *)&v82 + 1); /*0x64c8b8*/
+      v51 = *(float *)&v82; /*0x64c8bc*/
+      v81 = v87; /*0x64c8c8*/
+      *(double *)&v82 = v88; /*0x64c8d8*/
+      v76 = v50 * v50 + v51 * v51 + v83 * v83; /*0x64c8ec*/
+      v77 = sqrt(v76); /*0x64c8f9*/
+      v70 = v77; /*0x64c901*/
+      v78 = v86 * v86 + v87 * v87 + v88 * v88; /*0x64c91b*/
+      v79 = sqrt(v78); /*0x64c928*/
+      if ( v70 <= (double)v79 ) /*0x64c93b*/
+        goto LABEL_79; /*0x64c93b*/
     }
-    if ( v19 != TESDataHandler_g_PlayerRef
-      && sub_5E0380((Actor *)v19)
-      && (v52 = (char *)sub_5E0380((Actor *)v19), sub_567770(v52)) )
+    if ( v19 != reference /*0x64c959*/
+      && Actor::GetCurrentPackage((Actor *)v19)
+      && (CurrentPackage = Actor::GetCurrentPackage((Actor *)v19), TESPackage::IsTemporaryOverrideType(CurrentPackage)) )
     {
 LABEL_79:
-      if ( !*((_BYTE *)a1 + 0xD0) )
+      if ( !*((_BYTE *)a1 + 0xD0) ) /*0x64c962*/
       {
-        ((void (__thiscall *)(TESObjectREFR **, int))(*a1)[2].member.super.modlist.next)(a1, 1);
-        ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, unsigned int))LODWORD((*a1)[4].member.rot.z))(
+        ((void (__thiscall *)(TESObjectREFR **, int))(*a1)[2].member.super.modlist.next)(a1, 1); /*0x64c977*/
+        ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, unsigned int))LODWORD((*a1)[4].member.rot.z))( /*0x64c986*/
           a1,
           a10,
           0xFFFFFFFF);
-        return;
+        return; /*0x64c98f*/
       }
     }
     else
     {
 LABEL_69:
-      if ( !*((_BYTE *)a1 + 0xD0) )
-        goto LABEL_74;
+      if ( !*((_BYTE *)a1 + 0xD0) ) /*0x64c999*/
+        goto LABEL_74; /*0x64c999*/
     }
-    if ( !v89
+    if ( !v89 /*0x64c9e2*/
       || (v93 = *(float *)&v84 * *(float *)&v84 + *((float *)&v84 + 1) * *((float *)&v84 + 1) + v85 * v85,
           v94 = sqrt(v93),
           v65 >= (double)v94) )
     {
-      v95 = (TESChildCELL *)*a1;
-      v53 = (_DWORD *)sub_566B30((TESPackage *)v12, (int)&v86, (Actor *)a10);
-      v63 = sub_566940((TESPackage *)v12, (Actor *)a10);
-      v54 = sub_566A40((char **)v12, (Actor *)a10);
-      if ( !((unsigned __int8 (__thiscall *)(TESObjectREFR **, TESObjectREFR *, _DWORD, _DWORD, _DWORD, TESObjectCELL *, TESWorldSpace *))v95[0xF7].vtbl)(
+      v95 = (TESChildCELL *)*a1; /*0x64c9eb*/
+      v53 = sub_566B30((TESPackage *)v12, &v86, (Actor *)a10); /*0x64c9fa*/
+      v63 = sub_566940((TESPackage *)v12, (Actor *)a10); /*0x64ca01*/
+      v54 = sub_566A40((char **)v12, (Actor *)a10); /*0x64ca05*/
+      if ( !((unsigned __int8 (__thiscall *)(TESObjectREFR **, TESObjectREFR *, _DWORD, _DWORD, _DWORD, BSExtraDataVtbl *, TESWorldSpace *))v95[0xF7].vtbl)( /*0x64ca2d*/
               a1,
               a10,
-              *v53,
-              v53[1],
-              v53[2],
+              *(_DWORD *)v53,
+              *((_DWORD *)v53 + 1),
+              *((_DWORD *)v53 + 2),
               v54,
               v63) )
-        return;
+        return; /*0x64ca2d*/
     }
-    if ( *((_BYTE *)a1 + 0xD0) )
-      return;
+    if ( *((_BYTE *)a1 + 0xD0) ) /*0x64ca37*/
+      return; /*0x64ca3e*/
 LABEL_74:
-    v55 = TESForm_LookupByFormID(0x3Au);
-    GameHour = TimeGlobals_GetGameHour(&TimeGlobals);
-    *(double *)&v82 = GameHour;
-    v56 = sub_6599B0((TESChildCELL *)a10);
-    if ( v56 > *(double *)&v82 )
-      GameHour = GameHour + dbl_A2F920;
-    *(double *)&v82 = GameHour;
-    v57 = sub_6599B0((TESChildCELL *)a10);
-    v80 = *(double *)&v82 - v57;
-    v58 = *(float *)&v55[1].member.refID;
-    v59 = (int)*a1;
-    v97 = v58;
-    v64 = sub_5677B0((TESPackage *)v12, v58, a10, 1);
-    v98 = dbl_A2F938 / v97 * v80;
-    v62 = sub_566940((TESPackage *)v12, (Actor *)a10);
-    v61 = sub_566A40((char **)v12, (Actor *)a10);
-    v60 = sub_566B30((TESPackage *)v12, (int)&v86, (Actor *)a10);
-    (*(void (__thiscall **)(TESObjectREFR **, TESObjectREFR *, int, TESObjectCELL *, TESWorldSpace *, _DWORD, _DWORD))(v59 + 0x418))(
+    v55 = TESForm_LookupByFormID(0x3Au); /*0x64ca44*/
+    GameHour = TimeGlobals_GetGameHour(&MEMORY[0xB332E0]); /*0x64ca5a*/
+    *(double *)&v82 = GameHour; /*0x64ca64*/
+    v56 = sub_6599B0((TESChildCELL *)a10); /*0x64ca68*/
+    if ( v56 > *(double *)&v82 ) /*0x64ca76*/
+      GameHour = GameHour + dbl_A2F920; /*0x64ca82*/
+    *(double *)&v82 = GameHour; /*0x64ca8c*/
+    v57 = sub_6599B0((TESChildCELL *)a10); /*0x64ca90*/
+    v80 = *(double *)&v82 - v57; /*0x64ca9e*/
+    v58 = *(float *)&v55[1].member.refID; /*0x64caa2*/
+    v59 = (int)*a1; /*0x64caa5*/
+    v97 = v58; /*0x64caa7*/
+    v64 = sub_5677B0((TESPackage *)v12, v58, a10, 1); /*0x64cab3*/
+    v98 = dbl_A2F938 / v97 * v80; /*0x64cac7*/
+    v62 = sub_566940((TESPackage *)v12, (Actor *)a10); /*0x64cad8*/
+    v61 = sub_566A40((char **)v12, (Actor *)a10); /*0x64cae1*/
+    v60 = sub_566B30((TESPackage *)v12, &v86, (Actor *)a10); /*0x64caea*/
+    (*(void (__thiscall **)(TESObjectREFR **, TESObjectREFR *, float *, BSExtraDataVtbl *, TESWorldSpace *, _DWORD, _DWORD))(v59 + 0x418))( /*0x64caf9*/
       a1,
       a10,
       v60,
@@ -282,72 +291,72 @@ LABEL_74:
       v62,
       LODWORD(v98),
       LODWORD(v64));
-    return;
+    return; /*0x64caf9*/
   }
-  if ( !v89 )
+  if ( !v89 ) /*0x64c573*/
   {
-    v28 = sub_5E6780(a10);
-    v67 = v28;
-    if ( v28 )
+    v28 = sub_5E6780(a10); /*0x64c57b*/
+    v67 = v28; /*0x64c582*/
+    if ( v28 ) /*0x64c586*/
     {
-      v29 = (TESChildCELL **)*v28;
-      v30 = 0;
-      v90 = 0;
-      if ( v29 )
+      v29 = (TESChildCELL **)*v28; /*0x64c58c*/
+      v30 = 0; /*0x64c58e*/
+      v90 = 0; /*0x64c592*/
+      if ( v29 ) /*0x64c596*/
       {
-        v90 = *v29;
-        v30 = (ExtraDataList *)*v29;
+        v90 = *v29; /*0x64c59a*/
+        v30 = (ExtraDataList *)*v29; /*0x64c59e*/
       }
-      CompareTo = 0;
-      if ( v30 )
+      refID = 0; /*0x64c5a2*/
+      if ( v30 ) /*0x64c5aa*/
       {
-        if ( ExtraDataList_GetReferencePointer(v30) )
-          CompareTo = ExtraDataList_GetReferencePointer(v30)[1].CompareTo;
+        if ( ExtraDataList_GetReferencePointer(v30) ) /*0x64c5ae*/
+          refID = ExtraDataList_GetReferencePointer(v30)->member.super.refID; /*0x64c5c1*/
       }
-      v31 = (TESObjectREFR *)sub_5697E0(*(_DWORD **)(v12 + 0x24));
-      if ( (v31 || (v31 = a1[0xC]) != 0) && TESObjectREFR_GetContainer(v31) )
+      v31 = (TESObjectREFR *)sub_5697E0(*(_DWORD **)(v12 + 0x24)); /*0x64c5cd*/
+      if ( (v31 || (v31 = a1[0xC]) != 0) && TESObjectREFR_GetContainer(v31) ) /*0x64c5dc*/
       {
-        v32 = *(Atmosphere **)(v12 + 0x28);
-        v33 = v67[2];
-        v34 = (unsigned __int16 *)sub_452A60(v32);
-        sub_5FC6D0((int)a10, a2, a3, a4, a5, a6, a7, a8, v26, v33, (int)v90, v31, v34, (int)CompareTo);
+        v32 = *(Atmosphere **)(v12 + 0x28); /*0x64c5ed*/
+        v33 = v67[2]; /*0x64c5f0*/
+        v34 = (unsigned __int16 *)Shared_GetPointerAtOffset08(v32); /*0x64c5f4*/
+        sub_5FC6D0((int)a10, a2, a3, a4, a5, a6, a7, a8, v26, v33, (int)v90, v31, v34, refID); /*0x64c603*/
       }
       else
       {
-        if ( *v67 )
-          v90 = *(TESChildCELL **)*v67;
-        v36 = *(_DWORD **)(v12 + 0x24);
-        v69 = 0;
-        if ( v36 )
+        if ( *v67 ) /*0x64c611*/
+          v90 = *(TESChildCELL **)*v67; /*0x64c619*/
+        v36 = *(_DWORD **)(v12 + 0x24); /*0x64c61d*/
+        v69 = 0; /*0x64c622*/
+        if ( v36 ) /*0x64c62a*/
         {
-          v37 = (TESObjectREFR *)sub_5697E0(v36);
-          if ( (v37 || (v37 = a1[0xC]) != 0)
-            && (v37->vtbl->GetBaseForm(v37) == TESDataHandler_g_XMarker
-             || v37->vtbl->GetBaseForm(v37) == (TESForm *)TESDataHandler_g_XMarkerHeading) )
+          v37 = (TESObjectREFR *)sub_5697E0(v36); /*0x64c635*/
+          if ( (v37 || (v37 = a1[0xC]) != 0) /*0x64c668*/
+            && (v37->vtbl->GetBaseForm(v37) == MEMORY[0xB35EAC]
+             || v37->vtbl->GetBaseForm(v37) == (TESForm *)MEMORY[0xB35EB0]) )
           {
-            v38 = v37->vtbl->GetPos(v37);
-            v39 = *v38;
-            v40 = *((_DWORD *)v38 + 1);
-            v41 = v38[2];
-            v84 = __PAIR64__(v40, LODWORD(v39));
-            v85 = v41;
-            v42 = FormHeapAlloc(0xCu);
-            if ( v42 )
+            v38 = v37->vtbl->GetPos(v37); /*0x64c674*/
+            v39 = *v38; /*0x64c676*/
+            v40 = *((_DWORD *)v38 + 1); /*0x64c678*/
+            v41 = v38[2]; /*0x64c67b*/
+            v84 = __PAIR64__(v40, LODWORD(v39)); /*0x64c680*/
+            v85 = v41; /*0x64c688*/
+            v42 = FormHeapAlloc(0xCu); /*0x64c68c*/
+            if ( v42 ) /*0x64c696*/
             {
-              *(_QWORD *)v42 = v84;
-              *(float *)(v42 + 8) = v85;
+              *(_QWORD *)v42 = v84; /*0x64c69c*/
+              *(float *)(v42 + 8) = v85; /*0x64c6a9*/
             }
             else
             {
-              v42 = 0;
+              v42 = 0; /*0x64c6ae*/
             }
-            v69 = v42;
+            v69 = v42; /*0x64c6b0*/
           }
         }
-        v43 = v67[2];
-        vtbl = a10->vtbl;
-        v44 = sub_452A60(*(Atmosphere **)(v12 + 0x28));
-        ((void (__thiscall *)(TESObjectREFR *, unsigned int, TESChildCELL *, NiAVObject *, int, _DWORD))vtbl[1].Unk_48)(
+        v43 = v67[2]; /*0x64c6bf*/
+        vtbl = a10->vtbl; /*0x64c6c9*/
+        v44 = Shared_GetPointerAtOffset08(*(Atmosphere **)(v12 + 0x28)); /*0x64c6cd*/
+        ((void (__thiscall *)(TESObjectREFR *, unsigned int, TESChildCELL *, NiAVObject *, int, _DWORD))vtbl[1].Unk_48)( /*0x64c6e5*/
           a10,
           v43,
           v90,
@@ -355,37 +364,37 @@ LABEL_74:
           v69,
           0);
       }
-      ContainerEntryExtraData_DestroyDataTable(v67, v35);
-      FormHeapFree((unsigned int)v67);
+      ContainerEntryExtraData_DestroyDataTable(v67, v35); /*0x64c6ed*/
+      FormHeapFree((unsigned int)v67); /*0x64c6f3*/
     }
 LABEL_7:
-    ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, int))LODWORD((*a1)[4].member.rot.z))(a1, a10, 1);
+    ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, int))LODWORD((*a1)[4].member.rot.z))(a1, a10, 1); /*0x64c3af*/
 LABEL_8:
-    if ( !*((_BYTE *)a1 + 0xD0) )
-      ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*a1)[4].member.pos[2]))(a1, a10);
-    return;
+    if ( !*((_BYTE *)a1 + 0xD0) ) /*0x64c3be*/
+      ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *))LODWORD((*a1)[4].member.pos[2]))(a1, a10); /*0x64c3d6*/
+    return; /*0x64c3df*/
   }
-  v91 = *(float *)&v84 * *(float *)&v84 + *((float *)&v84 + 1) * *((float *)&v84 + 1) + v85 * v85;
-  v92 = sqrt(v91);
-  if ( v65 < (double)v92 )
-    goto LABEL_8;
-  ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, int))LODWORD((*a1)[4].member.rot.z))(a1, a10, 1);
-  v45 = a1[0xB];
-  if ( !(*((int (__thiscall **)(TESObjectREFRVtbl *))v45[1].vtbl->super.super.InitializeComponent + 0x61))(v45[1].vtbl) )
-    goto LABEL_8;
-  (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, int))v45[1].vtbl->super.super.InitializeComponent + 0x62))(
+  v91 = *(float *)&v84 * *(float *)&v84 + *((float *)&v84 + 1) * *((float *)&v84 + 1) + v85 * v85; /*0x64c71c*/
+  v92 = sqrt(v91); /*0x64c729*/
+  if ( v65 < (double)v92 ) /*0x64c73c*/
+    goto LABEL_8; /*0x64c73c*/
+  ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, int))LODWORD((*a1)[4].member.rot.z))(a1, a10, 1); /*0x64c74f*/
+  v45 = a1[0xB]; /*0x64c751*/
+  if ( !(*((int (__thiscall **)(TESObjectREFRVtbl *))v45[1].vtbl->super.super.InitializeComponent + 0x61))(v45[1].vtbl) ) /*0x64c75f*/
+    goto LABEL_8; /*0x64c75f*/
+  (*((void (__thiscall **)(TESObjectREFRVtbl *, TESObjectREFR *, int))v45[1].vtbl->super.super.InitializeComponent + 0x62))( /*0x64c777*/
     v45[1].vtbl,
     a10,
     1);
-  v46 = (TESPackage *)(*((int (__thiscall **)(TESObjectREFRVtbl *))v45[1].vtbl->super.super.InitializeComponent + 0x61))(v45[1].vtbl);
-  if ( !sub_5660A0(v46) )
-    goto LABEL_8;
-  v47 = (*((int (__thiscall **)(TESObjectREFRVtbl *))v45[1].vtbl->super.super.InitializeComponent + 0x61))(v45[1].vtbl);
-  if ( v47 )
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v47 + 0x10))(v47, 1);
-  v45[1].vtbl->super.super.CopyFromBase = 0;
-  v45->vtbl->super.ClearModified((TESForm *)v45, 0x30000);
-  if ( sub_5E05B0(v45) )
-    sub_5E02B0(v45);
-  ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, _DWORD))(*a1)->member.childCell.GetChildCell)(a1, a10, 0);
+  v46 = (TESPackage *)(*((int (__thiscall **)(TESObjectREFRVtbl *))v45[1].vtbl->super.super.InitializeComponent + 0x61))(v45[1].vtbl); /*0x64c784*/
+  if ( !TESPackage_IsRuntimePackage(v46) ) /*0x64c788*/
+    goto LABEL_8; /*0x64c78f*/
+  v47 = (*((int (__thiscall **)(TESObjectREFRVtbl *))v45[1].vtbl->super.super.InitializeComponent + 0x61))(v45[1].vtbl); /*0x64c7a0*/
+  if ( v47 ) /*0x64c7a4*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v47 + 0x10))(v47, 1); /*0x64c7af*/
+  v45[1].vtbl->super.super.CopyFromBase = 0; /*0x64c7b4*/
+  v45->vtbl->super.ClearModified((TESForm *)v45, 0x30000); /*0x64c7c7*/
+  if ( sub_5E05B0(v45) ) /*0x64c7cb*/
+    sub_5E02B0(v45); /*0x64c7d6*/
+  ((void (__thiscall *)(TESObjectREFR **, TESObjectREFR *, _DWORD))(*a1)->member.childCell.GetChildCell)(a1, a10, 0); /*0x64c7e5*/
 }

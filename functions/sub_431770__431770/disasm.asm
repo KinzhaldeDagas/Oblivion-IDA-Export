@@ -9,7 +9,7 @@
 0x431785: mov     ecx, [eax+edi*4-4]
 0x431789: sub     edi, 1
 0x43178C: push    ecx
-0x43178D: call    FormHeapFree
+0x43178D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x431792: movzx   eax, word ptr [esi+0Eh]
 0x431796: movzx   edx, ax
 0x431799: add     esp, 4
@@ -30,13 +30,13 @@
 0x4317C8: add     word ptr [esi+10h], 0FFFFh
 0x4317CE: test    edi, edi
 0x4317D0: jnz     short loc_431782
-0x4317D2: cmp     OBSE_g_FileFinder, esi
+0x4317D2: cmp     ds:0B33A04h, esi
 0x4317D8: jnz     short loc_4317E4
-0x4317DA: mov     OBSE_g_FileFinder, 0
+0x4317DA: mov     dword ptr ds:0B33A04h, 0
 0x4317E4: mov     edx, [esi+8]
 0x4317E7: push    edx
 0x4317E8: mov     dword ptr [esi+4], offset ??_7?$NiTArray@PBD@@6B@; const NiTArray<char const *>::`vftable'
-0x4317EF: call    FormHeapFree
+0x4317EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4317F4: add     esp, 4
 0x4317F7: pop     edi
 0x4317F8: pop     esi

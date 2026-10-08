@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x521E40",
-    "line": "push    esi",
+    "line": "push    esi; Reset active vampirism-selected NPC delta (GetAViBase 0x45 chooses +0x108/+0x168), not sex-specific. Copies manager default parameters, ensures dimensions without zeroing existing elements, then releases/clears NPC+0x1DC cached object.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,25 +67,25 @@
   },
   {
     "ea": "0x521E60",
-    "line": "push    eax",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x521E61",
-    "line": "call    sub_5538D0",
+    "line": "call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x521E66",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x521E67",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x521E8D",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x521E8E",
-    "line": "call    sub_552880",
+    "line": "call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
     "mnemonic": "call",
     "size": 5
   },

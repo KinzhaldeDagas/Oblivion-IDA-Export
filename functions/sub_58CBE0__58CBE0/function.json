@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x58CBE0",
+      "0x58CC57"
+    ]
+  ],
+  "chunks_sha256": "3aad822c086103aad8376e551781bc07e2983ad9e1cf6fbc60f2e5d69b056a2c",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nVerified 2026-10-07: literal action node layout from allocation/write sites: previousAction+0,nextAction+4,float operand+8,opcode+0xC,previousReaction+0x10,nextReaction+0x14. Appends to action chain and immediately calculates Value(false). Fallout AddAction(float)0x827DBBA8 instead uses 0x10-byte polymorphic FloatAction.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_58CBE0",
+  "display_name": "Tile::Value::AddFloatAction",
   "end_ea": "0x58CC57",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58CBE0",
+  "name": "Tile::Value::AddFloatAction",
   "segment": ".text",
   "sha256": "3aad822c086103aad8376e551781bc07e2983ad9e1cf6fbc60f2e5d69b056a2c",
   "size": 119,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58CBE0",
-  "type": "int __thiscall(float *this, float, int)",
+  "total_chunk_size": 119,
+  "type": "OblivionTileActionNode *__thiscall(OblivionTileValueView *this, float operand, unsigned int opcode)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 1
 }

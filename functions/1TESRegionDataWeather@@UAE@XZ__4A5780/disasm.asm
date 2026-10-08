@@ -17,10 +17,19 @@
 0x4A57B9: call    sub_4EED70
 0x4A57BE: mov     ecx, esi
 0x4A57C0: mov     [esp+18h+var_4], 0FFFFFFFFh
-0x4A57C8: call    sub_4A3510
+0x4A57C8: call    TESRegionData_SetBaseVTable
 0x4A57CD: mov     ecx, [esp+18h+var_C]
 0x4A57D1: mov     large fs:0, ecx
 0x4A57D8: pop     ecx
 0x4A57D9: pop     esi
 0x4A57DA: add     esp, 10h
 0x4A57DD: retn
+0x9B27E0: mov     ecx, [ebp-10h]
+0x9B27E3: jmp     TESRegionData_SetBaseVTable
+0x9B27E8: mov     edx, [esp+arg_4]
+0x9B27EC: lea     eax, [edx-8]
+0x9B27EF: mov     ecx, [edx-0Ch]
+0x9B27F2: xor     ecx, eax
+0x9B27F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B27F9: mov     eax, offset stru_ADE774
+0x9B27FE: jmp     ___CxxFrameHandler3

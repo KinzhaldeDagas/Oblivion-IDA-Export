@@ -1,19 +1,36 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7FEC30",
+  "chunks": [
+    [
+      "0x7FEC30",
+      "0x7FECE6"
+    ],
+    [
+      "0x9D5850",
+      "0x9D5873"
+    ]
+  ],
+  "chunks_sha256": "e71d45dc779c6ec6d39d66ab88e2940a160edabde3a246041b0c66bd2858e3bc",
+  "comment_regular": "Creates the 54-entry Oblivion Lighting30Shader pooled-pass table, preserving refcounts, then presets the SM3 stages.",
+  "comment_repeatable": "Create the 54-entry Oblivion Lighting30 NiD3DPass pool and invoke Lighting30Shader_InitializePassPool. Selector row is selector-0x12A; rows 36..39 are selectors 0x14E..0x151.\nDX11 writer audit 2026-10-01: virtual+B4 replaces54 global pooled-pass owners, then initializes their state via85E660. A retained individual pass does not freeze the global owner table. Whole-call observation excludes overlapping capture and invalidates older bucket epochs.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "Lighting30Shader__LoadStagesAndPasses",
   "end_ea": "0x7FECE6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FEC30",
+  "name": "Lighting30Shader__LoadStagesAndPasses",
   "segment": ".text",
   "sha256": "6ee86d71ed0eb47815a0ed66a076dd0d9fcb35a20bbbff4018e363c6e7402645",
   "size": 182,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FEC30",
-  "type": "char __thiscall(NiD3DPass *this)",
-  "xrefs_from_count": 73,
+  "total_chunk_size": 217,
+  "type": "bool __thiscall(void *this)",
+  "xrefs_from_count": 84,
   "xrefs_to_count": 1
 }

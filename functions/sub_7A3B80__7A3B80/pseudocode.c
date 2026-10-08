@@ -1,8 +1,14 @@
-int __cdecl sub_7A3B80(int a1, int a2, int a3)
+// Forward deep-copy assignment over existing 0x54-byte SIdvLeafTexture records; returns the destination end.
+OB_SIdvLeafTexture_010201A0 *__cdecl OB_SIdvLeafTexture_CopyAssignRangeForward_010201A0(
+        const OB_SIdvLeafTexture_010201A0 *first,
+        const OB_SIdvLeafTexture_010201A0 *last,
+        OB_SIdvLeafTexture_010201A0 *destinationFirst)
 {
-  int i; // esi
+  const OB_SIdvLeafTexture_010201A0 *i; // esi
 
-  for ( i = a1; i != a2; i += 0x54 )
-    sub_7A3470((float *)(i + a3 - a1), i);
-  return a3 + 0x54 * ((a2 - a1) / 0x54);
+  for ( i = first; i != last; ++i ) /*0x7a3bae*/
+    OB_SIdvLeafTexture_CopyAssign_010201A0( /*0x7a3bb6*/
+      (OB_SIdvLeafTexture_010201A0 *)((char *)i + (char *)destinationFirst - (char *)first),
+      i);
+  return &destinationFirst[last - first]; /*0x7a3bc4*/
 }

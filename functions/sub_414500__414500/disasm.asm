@@ -1,4 +1,4 @@
-0x414500: push    ebx
+0x414500: push    ebx; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x414501: push    ebp
 0x414502: push    esi
 0x414503: mov     esi, ecx
@@ -25,12 +25,12 @@
 0x414535: jb      short loc_414539
 0x414537: mov     ebx, [ebx]
 0x414539: mov     eax, [esp+0Ch+MaxCount]
-0x41453D: push    eax
+0x41453D: push    eax; count
 0x41453E: sub     ebp, ebx
-0x414540: push    ebp
-0x414541: push    esi
-0x414542: mov     ecx, esi
-0x414544: call    sub_414420
+0x414540: push    ebp; offset
+0x414541: push    esi; source
+0x414542: mov     ecx, esi; this
+0x414544: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x414549: pop     esi
 0x41454A: pop     ebp
 0x41454B: pop     ebx

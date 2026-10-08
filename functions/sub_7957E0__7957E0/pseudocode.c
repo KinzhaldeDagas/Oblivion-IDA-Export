@@ -1,14 +1,15 @@
-void __thiscall sub_7957E0(int this)
+// OBLIVION AUTHORITY (2026-08-30): Full destructor for an outer vector of 0x10-byte vector owners. Destroys every inner owner, frees outer storage, and clears the triplet; structurally shared by multiple specializations.
+void __thiscall OB_stVector_stVector4_DestroyThiscall_010201A0(OB_stVector16_010201A0 *this)
 {
-  _DWORD *v2; // eax
+  OB_stVector4_010201A0 *begin; // eax
 
-  v2 = *(_DWORD **)(this + 4);
-  if ( v2 )
+  begin = (OB_stVector4_010201A0 *)this->begin; /*0x7957e4*/
+  if ( begin ) /*0x7957e9*/
   {
-    sub_794FC0(v2, *(_DWORD **)(this + 8));
-    FormHeapFree(*(_DWORD *)(this + 4));
+    OB_stVector4_DestroyRange_010201A0(begin, (OB_stVector4_010201A0 *)this->end); /*0x7957f6*/
+    FormHeapFree((unsigned int)this->begin); /*0x7957ff*/
   }
-  *(_DWORD *)(this + 4) = 0;
-  *(_DWORD *)(this + 8) = 0;
-  *(_DWORD *)(this + 0xC) = 0;
+  this->begin = 0; /*0x795807*/
+  this->end = 0; /*0x79580e*/
+  this->capacityEnd = 0; /*0x795815*/
 }

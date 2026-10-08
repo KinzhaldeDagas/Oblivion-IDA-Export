@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x79F000",
+      "0x79F03F"
+    ]
+  ],
+  "chunks_sha256": "6d07a918246a90ff5dc2eaf78ec3ed5d6b792cbaa7153d763a04b7a380eb311e",
+  "comment_regular": "Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+  "comment_repeatable": "Destroys one st_vector<SFrondGuide>: deep-destroys the initialized 0x30 guide range, frees its allocation, and clears begin/end/capacityEnd.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79F000",
+  "display_name": "OB_stVector_SFrondGuide_Destroy_010201A0",
   "end_ea": "0x79F03F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79F000",
+  "name": "OB_stVector_SFrondGuide_Destroy_010201A0",
   "segment": ".text",
   "sha256": "6d07a918246a90ff5dc2eaf78ec3ed5d6b792cbaa7153d763a04b7a380eb311e",
   "size": 63,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79F000",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 63,
+  "type": "void __thiscall(OB_stVector_SFrondGuide_010201A0 *this)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 7
 }

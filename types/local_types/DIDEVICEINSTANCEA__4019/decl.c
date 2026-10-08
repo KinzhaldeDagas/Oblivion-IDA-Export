@@ -1,1 +1,12 @@
-DIDEVICEINSTANCEA
+struct DIDEVICEINSTANCEA
+{
+DWORD dwSize;
+GUID guidInstance;
+GUID guidProduct;
+DWORD dwDevType;
+CHAR tszInstanceName[260];
+CHAR tszProductName[260];
+GUID guidFFDriver;
+WORD wUsagePage;
+WORD wUsage;
+};

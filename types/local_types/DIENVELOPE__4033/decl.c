@@ -1,1 +1,8 @@
-DIENVELOPE
+struct DIENVELOPE
+{
+DWORD dwSize;
+DWORD dwAttackLevel;
+DWORD dwAttackTime;
+DWORD dwFadeLevel;
+DWORD dwFadeTime;
+};

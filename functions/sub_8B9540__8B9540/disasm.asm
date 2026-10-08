@@ -50,7 +50,7 @@
 0x8B95DF: push    ecx
 0x8B95E0: mov     ecx, ebx; this
 0x8B95E2: fstp    [esp+0BCh+a2]; a2
-0x8B95E5: call    NiAVObject_UpdateNiAVObject
+0x8B95E5: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x8B95EA: jmp     short loc_8B9625
 0x8B95EC: push    0DCh ; 'Ü'; Size
 0x8B95F1: call    FormHeapAlloc
@@ -72,7 +72,7 @@
 0x8B9631: lea     eax, [edi+20h]
 0x8B9634: push    eax
 0x8B9635: lea     ecx, [esp+0B8h+var_60]
-0x8B9639: call    sub_8B1DD0
+0x8B9639: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8B963E: movaps  xmm0, xmmword ptr [edi+30h]
 0x8B9642: lea     ecx, [esp+0B4h+var_60]
 0x8B9646: push    ecx
@@ -84,7 +84,7 @@
 0x8B9660: push    eax
 0x8B9661: lea     ecx, [esp+0C0h+var_70]
 0x8B9665: push    ecx
-0x8B9666: call    sub_43F3E0
+0x8B9666: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8B966B: mov     edx, [esp+0C4h+var_70]
 0x8B966F: mov     eax, [esp+0C4h+var_6C]
 0x8B9673: lea     edi, [ebx+30h]
@@ -111,3 +111,24 @@
 0x8B96BB: mov     esp, ebp
 0x8B96BD: pop     ebp
 0x8B96BE: retn    4
+0x9D7010: mov     eax, [ebp+var_9C]
+0x9D7016: push    eax
+0x9D7017: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D701C: pop     ecx
+0x9D701D: retn
+0x9D701E: mov     eax, [ebp+var_9C]
+0x9D7024: push    eax
+0x9D7025: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D702A: pop     ecx
+0x9D702B: retn
+0x9D702C: mov     edx, [esp-4+arg_4]
+0x9D7030: lea     eax, [edx-0A4h]
+0x9D7036: mov     ecx, [edx-0A8h]
+0x9D703C: xor     ecx, eax
+0x9D703E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7043: add     eax, 0Ch
+0x9D7046: mov     ecx, [edx-8]
+0x9D7049: xor     ecx, eax
+0x9D704B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7050: mov     eax, offset stru_AFECCC
+0x9D7055: jmp     ___CxxFrameHandler3

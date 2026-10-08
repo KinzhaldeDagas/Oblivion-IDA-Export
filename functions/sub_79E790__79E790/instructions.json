@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79E790",
-    "line": "push    ebx",
+    "line": "push    ebx; Three-way partition of 0x30-byte SFrondGuide records around a sampled fuzzySurfaceArea pivot, descending. Groups values greater than, equal to, and less than the pivot and returns the lower/upper bounds of the equal partition.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x79E792",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x79E797",
-    "line": "mov     esi, [esp+0Ch+arg_8]",
+    "line": "mov     esi, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x79E7C4",
-    "line": "push    esi",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x79E7C7",
-    "line": "push    edi",
+    "line": "push    edi; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E7C8",
-    "line": "push    ebp",
+    "line": "push    ebp; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E7C9",
-    "line": "call    sub_79E220",
+    "line": "call    OB_SFrondGuide_SelectPivotByFuzzyArea_010201A0; Selects a robust fuzzySurfaceArea pivot for SFrondGuide partitioning. Small ranges sort first/middle/last; ranges over 40 elements sort multiple evenly spaced triplets before the final three-sample ordering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x79E805",
-    "line": "mov     edi, [esp+10h+arg_8]",
+    "line": "mov     edi, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x79E8E6",
-    "line": "cmp     edi, [esp+10h+arg_8]",
+    "line": "cmp     edi, [esp+10h+last]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -889,13 +889,13 @@
   },
   {
     "ea": "0x79E90A",
-    "line": "push    edi",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E90B",
-    "line": "push    eax",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x79E90F",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x79E920",
-    "line": "cmp     edi, [esp+10h+arg_8]",
+    "line": "cmp     edi, [esp+10h+last]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x79E926",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x79E94B",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -1057,19 +1057,19 @@
   },
   {
     "ea": "0x79E94F",
-    "line": "push    ebx",
+    "line": "push    ebx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E950",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x79E955",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x79E96D",
-    "line": "cmp     edi, [esp+10h+arg_8]",
+    "line": "cmp     edi, [esp+10h+last]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1153,19 +1153,19 @@
   },
   {
     "ea": "0x79E977",
-    "line": "push    esi",
+    "line": "push    esi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E978",
-    "line": "push    ebx",
+    "line": "push    ebx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E979",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,13 +1189,13 @@
   },
   {
     "ea": "0x79E985",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E986",
-    "line": "push    ecx",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x79E990",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x79E9A0",
-    "line": "cmp     edi, [esp+10h+arg_8]",
+    "line": "cmp     edi, [esp+10h+last]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1273,19 +1273,19 @@
   },
   {
     "ea": "0x79E9AD",
-    "line": "push    ebx",
+    "line": "push    ebx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E9AE",
-    "line": "push    ebp",
+    "line": "push    ebp; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E9AF",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1303,19 +1303,19 @@
   },
   {
     "ea": "0x79E9BA",
-    "line": "push    esi",
+    "line": "push    esi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E9BB",
-    "line": "push    ebx",
+    "line": "push    ebx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E9BC",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,19 +1333,19 @@
   },
   {
     "ea": "0x79E9C9",
-    "line": "push    ebp",
+    "line": "push    ebp; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E9CA",
-    "line": "push    edi",
+    "line": "push    edi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E9CB",
-    "line": "call    sub_79B8D0",
+    "line": "call    OB_SFrondGuide_Swap_010201A0; Swaps two complete 0x30-byte SFrondGuide records. Uses a temporary deep copy of the embedded vertex vector, assigns both vectors safely, copies all scalar fields, then releases the temporary vector allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x79E9DB",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+result]",
     "mnemonic": "mov",
     "size": 4
   },

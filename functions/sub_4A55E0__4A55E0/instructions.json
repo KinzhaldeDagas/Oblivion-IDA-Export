@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4A55E9",
-    "line": "call    sub_4A5390",
+    "line": "call    TESRegionDataSound_ClearRecords; Verified: clears embedded TESRegionDataSound.sounds linked list and frees each owned OblivionTESRegionSoundRecord.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x4A55F0",
-    "line": "call    sub_4A3510",
+    "line": "call    TESRegionData_SetBaseVTable",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4A55FD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-float_handler
+typedef void (*float_handler)(int, int);

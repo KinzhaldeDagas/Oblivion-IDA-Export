@@ -4,11 +4,11 @@
 0x579935: call    InterfaceManager_GetSingleton
 0x57993A: fld     dword ptr ds:0A379B4h
 0x579940: mov     esi, [eax+1Ch]
-0x579943: fstp    [esp+0Ch+a2]; a3
+0x579943: fstp    [esp+0Ch+a2]; value
 0x579947: add     esp, 4
-0x57994A: push    0FA1h; a2
+0x57994A: push    0FA1h; propertyCode
 0x57994F: mov     ecx, esi; this
-0x579951: call    Tile_SetFloat
+0x579951: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x579956: cmp     dword ptr [esi+24h], 0
 0x57995A: jnz     short loc_579960
 0x57995C: or      dword ptr [esi+2Ch], 2

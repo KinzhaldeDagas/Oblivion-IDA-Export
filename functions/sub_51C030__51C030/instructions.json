@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51C030",
-    "line": "mov     edx, [ecx+38h]",
+    "line": "mov     edx, [ecx+38h]; Oblivion CLAS DATA validator: requires primary attributes to be distinct and each in 0..7, and requires pairwise uniqueness across exactly seven majorSkills entries. It does not range-check major skill AVs and does not validate specialization.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x51C049",
-    "line": "jbe     short loc_51C04D",
+    "line": "jbe     short loc_51C04D; Only the two favored attributes are range-checked here (Strength..Luck, 0..7).",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x51C060",
-    "line": "lea     edx, [edi+4]",
+    "line": "lea     edx, [edi+4]; Pairwise duplicate scan over majorSkills[0..6]; stored values themselves are not checked against SkillActorValue 0x0C..0x20.",
     "mnemonic": "lea",
     "size": 3
   },

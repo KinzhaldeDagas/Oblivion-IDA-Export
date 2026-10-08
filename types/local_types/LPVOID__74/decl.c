@@ -1,1 +1,1 @@
-LPVOID
+typedef void *LPVOID;

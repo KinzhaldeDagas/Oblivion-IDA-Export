@@ -1,1 +1,1 @@
-ACTCTXW
+typedef tagACTCTXW ACTCTXW;

@@ -1,1 +1,1 @@
-HMMIO
+typedef HMMIO__ *HMMIO;

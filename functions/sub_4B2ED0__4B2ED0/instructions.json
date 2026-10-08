@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x4B2ED4",
-    "line": "mov     dword ptr [eax+8], 0",
+    "line": "mov     dword ptr [eax+8], 0; NiTPointerList node release clears node+0x08 payload before returning the 12-byte node to the global pool.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4B2EE2",
-    "line": "jmp     sub_44D880",
+    "line": "jmp     NiTListNodePool_Release; Return the cleared NiTList node to the synchronized global node pool; payload lifetime is not handled here.",
     "mnemonic": "jmp",
     "size": 5
   }

@@ -1,1 +1,1 @@
-PropertyStorage_impl
+typedef tagPropertyStorage_impl PropertyStorage_impl;

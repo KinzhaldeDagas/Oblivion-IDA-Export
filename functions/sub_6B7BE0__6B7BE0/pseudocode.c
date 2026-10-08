@@ -1,10 +1,10 @@
-_DWORD *__thiscall sub_6B7BE0(_DWORD *this)
+DialogueItemView *__thiscall DialogueItem::InitializeEmpty(DialogueItemView *this)
 {
-  *this = 0;
-  *(this + 1) = 0;
-  *(this + 3) = 0;
-  *(this + 4) = 0;
-  *(this + 5) = 0;
-  *(this + 6) = 0;
-  return this;
+  this->firstResponse = 0; /*0x6b7be4*/
+  this->nextResponseNode = 0; /*0x6b7be6*/
+  this->info = 0; /*0x6b7be9*/
+  this->topic = 0; /*0x6b7bec*/
+  this->ownerQuest = 0; /*0x6b7bef*/
+  this->speaker = 0; /*0x6b7bf2*/
+  return this; /*0x6b7bf5*/
 }

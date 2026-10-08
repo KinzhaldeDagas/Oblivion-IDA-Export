@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x437E20",
+      "0x437E54"
+    ]
+  ],
+  "chunks_sha256": "f33d1eb8e59a29d35a2bc53601be2d82ddc62b3d004041b2b543cb6a6f95431f",
+  "comment_regular": "Verified 0x30-byte QueuedTree task constructor: stores its TESObjectREFR at +0x20 and clears fields +0x18/+0x1C/+0x24/+0x28/+0x2C before installing QueuedTree vtable. The remaining zeroed pointer roles are Unknown. Fallout's constructor initializes a larger QueuedTree with queued-model, base-model, cloned-3D, and distant-attach task pointers.",
+  "comment_repeatable": "Verified 0x30-byte QueuedTree task constructor: stores its TESObjectREFR at +0x20 and clears fields +0x18/+0x1C/+0x24/+0x28/+0x2C before installing QueuedTree vtable. The remaining zeroed pointer roles are Unknown. Fallout's constructor initializes a larger QueuedTree with queued-model, base-model, cloned-3D, and distant-attach task pointers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_437E20",
+  "display_name": "QueuedTree_ctor",
   "end_ea": "0x437E54",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_437E20",
+  "name": "QueuedTree_ctor",
   "segment": ".text",
   "sha256": "f33d1eb8e59a29d35a2bc53601be2d82ddc62b3d004041b2b543cb6a6f95431f",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x437E20",
-  "type": "IOTask *__thiscall(IOTask *this, int arg0, unsigned __int8)",
+  "total_chunk_size": 52,
+  "type": "QueuedTree_OblivionLayout *__thiscall(QueuedTree_OblivionLayout *this, TESObjectREFR *reference, unsigned __int8 priority)",
   "xrefs_from_count": 19,
   "xrefs_to_count": 1
 }

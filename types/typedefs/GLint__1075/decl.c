@@ -1,1 +1,1 @@
-GLint
+typedef int GLint;

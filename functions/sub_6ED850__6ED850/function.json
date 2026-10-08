@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6ED850",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x6ED850",
+      "0x6EDA06"
+    ],
+    [
+      "0x9C83F0",
+      "0x9C8426"
+    ]
+  ],
+  "chunks_sha256": "067cf05708d465f53dae206b299928b75ec90a8527a2ba2329e698b498cb1c6c",
+  "comment_regular": "Oblivion CTL loader called twice at most by FaceGenManager_Construct for FaceGen\\\\si.ctl. Uses FRCTL001 format marker, reads 0x18-byte header (two scalar outputs + four basis dimensions), loads four named control basis banks, then FanControls data/precomputation. Returns false on read/load failure; destroys binary file on all observed return paths. Header scalar meanings remain unresolved.",
+  "comment_repeatable": "Oblivion CTL loader called twice at most by FaceGenManager_Construct for FaceGen\\\\si.ctl. Uses FRCTL001 format marker, reads 0x18-byte header (two scalar outputs + four basis dimensions), loads four named control basis banks, then FanControls data/precomputation. Returns false on read/load failure; destroys binary file on all observed return paths. Header scalar meanings remain unresolved.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "FaceGen_LoadCtlFile",
   "end_ea": "0x6EDA06",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6ED850",
+  "name": "FaceGen_LoadCtlFile",
   "segment": ".text",
   "sha256": "681e61a50c118175c98ed313ed3a539050fd92aced589ad6f6031cbe8a53cec3",
   "size": 438,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6ED850",
-  "type": "char __cdecl(_DWORD *, _DWORD *, int *, int *, int, _BYTE *)",
-  "xrefs_from_count": 140,
+  "total_chunk_size": 492,
+  "type": "bool __cdecl(OB_stString28_010201A0 *path, unsigned int *outHeader0, unsigned int *outHeader1, unsigned int *outBasisDimensions, void *namedControlBanks, void *fanControls)",
+  "xrefs_from_count": 156,
   "xrefs_to_count": 2
 }

@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x422B86",
-    "line": "push    0",
+    "line": "push    0; linkContext",
     "mnemonic": "push",
     "size": 2
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x422B8A",
-    "line": "push    eax",
+    "line": "push    eax; activeEffectList",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x422B8B",
-    "line": "call    ActiveEffect_Base_PostLinkAEList",
+    "line": "call    ActiveEffect_Base_PostLinkAEList; Verified TESObjectREFR_PostLinkModifiedExtraList runs the post-link phase for changed NonActorMagicTarget ExtraData (mask 0x200000): obtains its embedded MagicTarget active-effect list and calls ActiveEffect_Base_PostLinkAEList(list, nullptr). The list link phase runs earlier in ExtraDataList_LoadModified.",
     "mnemonic": "call",
     "size": 5
   },

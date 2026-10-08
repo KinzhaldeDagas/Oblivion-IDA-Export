@@ -19,7 +19,7 @@
 0x4A174A: mov     ecx, [esp+8+a2]
 0x4A174E: push    ecx; a2
 0x4A174F: mov     ecx, edi; this
-0x4A1751: call    NiNode__OnVisible
+0x4A1751: call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x4A1756: mov     esi, [esi+280h]
 0x4A175C: mov     edx, [esi]
 0x4A175E: mov     eax, [edx+0E4h]

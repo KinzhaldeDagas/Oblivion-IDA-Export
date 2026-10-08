@@ -1,4 +1,4 @@
-BSStringT *sub_A0A180()
+NiRTTI *sub_A0A180()
 {
-  return sub_70E220((BSStringT *)dword_B3FF0C, "NiTriShapeDynamicData", (int)dword_B3FD2C);
+  return NiRTTI_Constructor(&stru_B3FF0C, "NiTriShapeDynamicData", &stru_B3FD2C); /*0xa0a194*/
 }

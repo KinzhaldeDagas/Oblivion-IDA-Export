@@ -1,5 +1,5 @@
 0x73BA20: push    ebx
-0x73BA21: mov     ebx, dword ptr [esp+4+ArgList]
+0x73BA21: mov     ebx, [esp+4+ArgList]
 0x73BA25: push    esi
 0x73BA26: mov     eax, ebx
 0x73BA28: push    edi

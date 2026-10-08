@@ -17,7 +17,7 @@
 0x7F3563: fild    dword ptr [esi+194h]
 0x7F3569: fdiv    dword ptr [esi+7Ch]
 0x7F356C: fmulp   st(1), st
-0x7F356E: call    Double_To_SInt32
+0x7F356E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7F3573: test    eax, eax
 0x7F3575: jg      short loc_7F357C
 0x7F3577: mov     eax, 1

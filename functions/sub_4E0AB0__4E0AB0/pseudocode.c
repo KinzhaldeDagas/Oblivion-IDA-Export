@@ -1,54 +1,47 @@
-unsigned int __thiscall sub_4E0AB0(_DWORD *this, unsigned __int16 arg0)
+unsigned int __thiscall sub_4E0AB0(TESForm *this, unsigned __int16 arg0)
 {
-  TESSaveLoad *v2; // eax
+  TESSaveLoadGame_SerializationView *v2; // eax
   NiNode *v4; // edi
-  unsigned __int8 next; // al
+  unsigned __int8 currentVersion; // al
   const char *v6; // eax
   unsigned int result; // eax
-  float *v8; // eax
-  float *v9; // esi
+  ActorAnimData *v8; // eax
+  float *p_unk00; // esi
   const char *v10; // eax
   int v11; // [esp-4h] [ebp-4Ch]
   int a2; // [esp+0h] [ebp-48h]
-  size_t v13; // [esp+4h] [ebp-44h]
+  int v13; // [esp+4h] [ebp-44h]
   int v14; // [esp+4h] [ebp-44h]
-  int v15; // [esp+4h] [ebp-44h]
   TESForm a1; // [esp+16h] [ebp-32h] BYREF
-  char v17; // [esp+30h] [ebp-18h]
-  int v18; // [esp+34h] [ebp-14h]
-  int v19; // [esp+38h] [ebp-10h]
-  _DWORD *v20; // [esp+3Ch] [ebp-Ch]
+  char v16; // [esp+30h] [ebp-18h]
+  int v17; // [esp+34h] [ebp-14h]
+  int v18; // [esp+38h] [ebp-10h]
+  TESForm *v19; // [esp+3Ch] [ebp-Ch]
   int vtbl_low; // [esp+40h] [ebp-8h]
-  int v22; // [esp+44h] [ebp-4h]
+  int v21; // [esp+44h] [ebp-4h]
 
-  v2 = SaveLoad_CurrentSavegame;
-  LOBYTE(a1.vtbl) = 0;
-  if ( LOBYTE(v2[1].createdObjectList.next) < 0x16u )
+  v2 = g_TESSaveLoadGame; /*0x4e0ab3*/
+  LOBYTE(a1.vtbl) = 0; /*0x4e0abc*/
+  if ( v2->currentVersion < 0x16u ) /*0x4e0ac7*/
   {
-    LODWORD(v13) = 1;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)((char *)&a1.vtbl + 1), v13);
-    if ( BYTE1(a1.vtbl) )
-      LOBYTE(a1.vtbl) |= 1u;
+    TESForm_LoadDataFromCurrentSaveGame(this, (char *)&a1.vtbl + 1, 1u); /*0x4e0ad2*/
+    if ( BYTE1(a1.vtbl) ) /*0x4e0adb*/
+      LOBYTE(a1.vtbl) |= 1u; /*0x4e0add*/
   }
-  v4 = (NiNode *)*(this + 0xF);
+  v4 = *((NiNode **)this + 0xF); /*0x4e0ae2*/
   if ( v4 )
   {
-    if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x2Bu )
+    if ( g_TESSaveLoadGame->currentVersion >= 0x2Bu ) /*0x4e0af7*/
+      TESForm_LoadDataFromCurrentSaveGame(this, &a1, 1u); /*0x4e0b02*/
+    currentVersion = g_TESSaveLoadGame->currentVersion; /*0x4e0b0d*/
+    if ( currentVersion >= 0x16u && currentVersion < 0x2Bu ) /*0x4e0b16*/
     {
-      LODWORD(v13) = 1;
-      TESForm_LoadDataFromCurrentSaveGame(&a1, v13);
+      TESForm_LoadDataFromCurrentSaveGame(this, (char *)&a1.vtbl + 1, 1u); /*0x4e0b21*/
+      if ( BYTE1(a1.vtbl) ) /*0x4e0b2a*/
+        LOBYTE(a1.vtbl) |= 1u; /*0x4e0b2c*/
     }
-    next = (unsigned __int8)SaveLoad_CurrentSavegame[1].createdObjectList.next;
-    if ( next >= 0x16u && next < 0x2Bu )
-    {
-      LODWORD(v13) = 1;
-      TESForm_LoadDataFromCurrentSaveGame((TESForm *)((char *)&a1.vtbl + 1), v13);
-      if ( BYTE1(a1.vtbl) )
-        LOBYTE(a1.vtbl) |= 1u;
-    }
-    if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) < 0x18u
-      || (LODWORD(v13) = 1,
-          TESForm_LoadDataFromCurrentSaveGame((TESForm *)((char *)&a1.vtbl + 1), v13),
+    if ( g_TESSaveLoadGame->currentVersion < 0x18u
+      || (TESForm_LoadDataFromCurrentSaveGame(this, (char *)&a1.vtbl + 1, 1u),
           BYTE2(a1.vtbl) = 0,
           *(_WORD *)&a1.member.type = 0,
           *(_WORD *)&a1.member.pad[1] = 0,
@@ -56,37 +49,37 @@ unsigned int __thiscall sub_4E0AB0(_DWORD *this, unsigned __int16 arg0)
           sub_4E0970(this, (char *)&a1.vtbl + 2),
           a1.member.pad[1] + a1.member.type == BYTE1(a1.vtbl)) )
     {
-      v18 = 0xF;
-      v17 = 1;
-      v19 = sub_4A05E0((int)v4);
-      v20 = this;
-      vtbl_low = LOBYTE(a1.vtbl);
-      v22 = 0;
-      sub_88A7D0(v4, (int)&a1.member.modlist.next + 2, (void (__cdecl *)(int, int))sub_4DB080);
-      if ( (*(unsigned __int8 (__thiscall **)(_DWORD *))(*this + 0x190))(this) )
+      v17 = 0xF; /*0x4e0bf3*/
+      v16 = 1; /*0x4e0bfb*/
+      v18 = sub_4A05E0((int)v4); /*0x4e0c15*/
+      v19 = this; /*0x4e0c19*/
+      vtbl_low = LOBYTE(a1.vtbl); /*0x4e0c1d*/
+      v21 = 0; /*0x4e0c21*/
+      sub_88A7D0(v4, (int)&a1.member.modlist.next + 2, (void (__cdecl *)(int, int))sub_4DB080); /*0x4e0c25*/
+      if ( ((unsigned __int8 (__thiscall *)(TESForm *))this->vtbl[1].CopyFrom)(this) ) /*0x4e0c37*/
       {
-        if ( (*(unsigned __int8 (__thiscall **)(_DWORD *))(*this + 0x1A0))(this) )
+        if ( ((unsigned __int8 (__thiscall *)(TESForm *))this->vtbl[1].Unk_31)(this) ) /*0x4e0c47*/
         {
-          sub_8A5580((int)v4, 1);
-          sub_88D070(v4, 1, 1, 0);
-          v8 = (float *)(*(int (__thiscall **)(_DWORD *))(*this + 0x164))(this);
-          v9 = v8;
-          if ( v8 )
+          sub_8A5580((int)v4, 1); /*0x4e0c50*/
+          sub_88D070(v4, 1, 1, 0); /*0x4e0c5b*/
+          v8 = (ActorAnimData *)((int (__thiscall *)(TESForm *))this->vtbl[1].Unk_22)(this); /*0x4e0c6d*/
+          p_unk00 = (float *)&v8->unk00; /*0x4e0c6f*/
+          if ( v8 ) /*0x4e0c73*/
           {
-            sub_470FC0(v8, 5, 0.0);
-            v9[6] = Vector3_InitValue_;
-            v9[7] = *(&Vector3_InitValue_ + 1);
-            v9[8] = dword_B3F9B0;
+            ActorAnimData_ClearSlot(v8, 5, 0.0); /*0x4e0c7f*/
+            p_unk00[6] = g_zeroNiPoint3.x; /*0x4e0c89*/
+            p_unk00[7] = g_zeroNiPoint3.y; /*0x4e0c92*/
+            p_unk00[8] = g_zeroNiPoint3.z; /*0x4e0c9b*/
           }
         }
       }
-      return NiAVObject_UpdateNiAVObject((NiAVObject *)v4, 0.0, 0);
+      return NiAVObject_UpdateNiAVObject((NiAVObject *)v4, 0.0, 0); /*0x4e0ca7*/
     }
     else
     {
-      v6 = (const char *)(*(int (__thiscall **)(_DWORD *, _DWORD, _DWORD, _DWORD))(*this + 0xD4))(
+      v6 = (const char *)((int (__thiscall *)(TESForm *, UInt32, _DWORD, _DWORD))this->vtbl->GetEditorName)( /*0x4e0b9a*/
                            this,
-                           *(this + 3),
+                           this->member.refID,
                            BYTE1(a1.vtbl),
                            (unsigned __int8)(a1.member.pad[1] + a1.member.type));
       PrintError(
@@ -95,18 +88,18 @@ unsigned int __thiscall sub_4E0AB0(_DWORD *this, unsigned __int16 arg0)
         v6,
         v11,
         a2,
-        v14);
-      SaveLoad_AdvanceBufferOffset(SaveLoad_CurrentSavegame, arg0 - 2);
-      result = (*(int (__thiscall **)(_DWORD *))(*this + 0x190))(this);
-      if ( (_BYTE)result )
-        return sub_8AB440((int)v4, (int)&Vector3_InitValue_, 1, 0.0, 0);
+        v13);
+      SaveLoad_AdvanceBufferOffset(g_TESSaveLoadGame, arg0 - 2); /*0x4e0bb9*/
+      result = ((int (__thiscall *)(TESForm *))this->vtbl[1].CopyFrom)(this); /*0x4e0bc8*/
+      if ( (_BYTE)result ) /*0x4e0bcc*/
+        return sub_8AB440(v4, &g_zeroNiPoint3.x, 1, 0.0, 0); /*0x4e0be1*/
     }
   }
   else
   {
-    v10 = (const char *)(*(int (__thiscall **)(_DWORD *, _DWORD))(*this + 0xD4))(this, *(this + 3));
-    PrintError("Cannot load Havok data for reference %s %08X because it has no 3D.", v10, v15);
-    return SaveLoad_AdvanceBufferOffset(SaveLoad_CurrentSavegame, arg0);
+    v10 = (const char *)((int (__thiscall *)(TESForm *, UInt32))this->vtbl->GetEditorName)(this, this->member.refID); /*0x4e0cc3*/
+    PrintError("Cannot load Havok data for reference %s %08X because it has no 3D.", v10, v14); /*0x4e0ccb*/
+    return SaveLoad_AdvanceBufferOffset(g_TESSaveLoadGame, arg0); /*0x4e0cdf*/
   }
-  return result;
+  return result; /*0x4e0be9*/
 }

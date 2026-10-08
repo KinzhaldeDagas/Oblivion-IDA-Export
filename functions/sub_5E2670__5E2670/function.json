@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 17,
+  "chunks": [
+    [
+      "0x5E2670",
+      "0x5E26BE"
+    ]
+  ],
+  "chunks_sha256": "fea00d21205ec28bc1e608387add818aa7f4f0d37466c1323cebbd74c86fd60a",
+  "comment_regular": "Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.",
+  "comment_repeatable": "Handles player base actor-value changes. For native skill AVs, optional UI refresh also recalculates required experience for all 21 skills; major/non-major membership affects the recomputed requirement through TESClass_IsMajorSkillAV.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5E2670",
+  "display_name": "Player_OnActorValueBaseChanged",
   "end_ea": "0x5E26BE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5E2670",
+  "name": "Player_OnActorValueBaseChanged",
   "segment": ".text",
   "sha256": "fea00d21205ec28bc1e608387add818aa7f4f0d37466c1323cebbd74c86fd60a",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E2670",
-  "type": "int __thiscall(PlayerCharacter *this, int, int)",
+  "total_chunk_size": 78,
+  "type": "void __thiscall(PlayerCharacter *this, unsigned int actorValue, char updatePlayerUI)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 17
 }

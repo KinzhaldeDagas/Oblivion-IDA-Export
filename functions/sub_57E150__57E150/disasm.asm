@@ -24,10 +24,10 @@
 0x57E1AF: jz      short loc_57E1C3
 0x57E1B1: fld1
 0x57E1B3: push    ecx
-0x57E1B4: fstp    [esp+10h+a2]; a3
+0x57E1B4: fstp    [esp+10h+a2]; value
 0x57E1B7: mov     ecx, esi; this
-0x57E1B9: push    0FA1h; a2
-0x57E1BE: call    Tile_SetFloat
+0x57E1B9: push    0FA1h; propertyCode
+0x57E1BE: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57E1C3: call    sub_57A2D0
 0x57E1C8: push    0
 0x57E1CA: mov     esi, eax
@@ -37,10 +37,10 @@
 0x57E1D6: jz      short loc_57E1EA
 0x57E1D8: fld1
 0x57E1DA: push    ecx
-0x57E1DB: fstp    [esp+10h+a2]; a3
+0x57E1DB: fstp    [esp+10h+a2]; value
 0x57E1DE: mov     ecx, esi; this
-0x57E1E0: push    0FA1h; a2
-0x57E1E5: call    Tile_SetFloat
+0x57E1E0: push    0FA1h; propertyCode
+0x57E1E5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57E1EA: call    sub_57A180
 0x57E1EF: push    0
 0x57E1F1: mov     esi, eax
@@ -50,10 +50,10 @@
 0x57E1FD: jz      short loc_57E211
 0x57E1FF: fld1
 0x57E201: push    ecx
-0x57E202: fstp    [esp+10h+a2]; a3
+0x57E202: fstp    [esp+10h+a2]; value
 0x57E205: mov     ecx, esi; this
-0x57E207: push    0FA1h; a2
-0x57E20C: call    Tile_SetFloat
+0x57E207: push    0FA1h; propertyCode
+0x57E20C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57E211: call    sub_579F80
 0x57E216: push    0
 0x57E218: mov     esi, eax
@@ -63,10 +63,10 @@
 0x57E224: jz      short loc_57E238
 0x57E226: fld1
 0x57E228: push    ecx
-0x57E229: fstp    [esp+10h+a2]; a3
+0x57E229: fstp    [esp+10h+a2]; value
 0x57E22C: mov     ecx, esi; this
-0x57E22E: push    0FA1h; a2
-0x57E233: call    Tile_SetFloat
+0x57E22E: push    0FA1h; propertyCode
+0x57E233: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57E238: call    sub_5C1290
 0x57E23D: push    0
 0x57E23F: call    sub_5AD980

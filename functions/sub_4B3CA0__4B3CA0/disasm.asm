@@ -19,12 +19,12 @@
 0x4B3CCC: retn    14h
 0x4B3CCF: push    edi
 0x4B3CD0: mov     edi, [esp+8+arg_0]
-0x4B3CD4: mov     ecx, edi; this
-0x4B3CD6: call    TESObjectREFR_GetOwner
+0x4B3CD4: mov     ecx, edi; reference
+0x4B3CD6: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4B3CDB: test    eax, eax
 0x4B3CDD: jz      short loc_4B3D20
-0x4B3CDF: mov     ecx, edi; this
-0x4B3CE1: call    TESObjectREFR_GetOwner
+0x4B3CDF: mov     ecx, edi; reference
+0x4B3CE1: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4B3CE6: cmp     eax, esi
 0x4B3CE8: jz      short loc_4B3D20
 0x4B3CEA: push    0; int
@@ -40,8 +40,8 @@
 0x4B3D07: push    ebx
 0x4B3D08: mov     ebx, [esi]
 0x4B3D0A: push    0FFFFFFFFh
-0x4B3D0C: mov     ecx, edi; this
-0x4B3D0E: call    TESObjectREFR_GetOwner
+0x4B3D0C: mov     ecx, edi; reference
+0x4B3D0E: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4B3D13: push    eax
 0x4B3D14: mov     eax, [ebx+248h]
 0x4B3D1A: push    edi

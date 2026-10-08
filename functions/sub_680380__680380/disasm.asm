@@ -1,4 +1,4 @@
-0x680380: mov     edx, [esp+arg_0]
+0x680380: mov     edx, [esp+space]; Verified: if the supplied spatial form matches spaceA or spaceB, returns its paired referenceA or referenceB, respectively; otherwise returns null.
 0x680384: xor     eax, eax
 0x680386: test    edx, edx
 0x680388: jz      short locret_68039D

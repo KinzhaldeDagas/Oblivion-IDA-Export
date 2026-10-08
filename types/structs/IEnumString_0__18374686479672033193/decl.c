@@ -1,1 +1,1 @@
-IEnumString_0
+typedef IEnumString IEnumString_0;

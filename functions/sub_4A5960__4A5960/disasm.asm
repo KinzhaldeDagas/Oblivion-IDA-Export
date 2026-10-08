@@ -1,16 +1,16 @@
-0x4A5960: mov     eax, [esp+arg_0]
+0x4A5960: mov     eax, [esp+file]; Verified: region RDWT weather-list helper uses the same sub_4EEDD0 EntryData loader as TESClimate WLS(T), but stores data at WeatherData +8 and includes region-specific warning.
 0x4A5964: push    ebx
 0x4A5965: mov     bl, ds:0B06B18h
 0x4A596B: push    esi
 0x4A596C: mov     esi, ds:0B34D88h
 0x4A5972: push    edi
-0x4A5973: mov     edi, [esp+0Ch+arg_4]
-0x4A5977: push    edi
-0x4A5978: push    eax
+0x4A5973: mov     edi, [esp+0Ch+region]
+0x4A5977: push    edi; owner
+0x4A5978: push    eax; file
 0x4A5979: add     ecx, 8
-0x4A597C: push    ecx
+0x4A597C: push    ecx; list
 0x4A597D: mov     byte ptr ds:0B06B18h, 1
-0x4A5984: call    sub_4EEDD0
+0x4A5984: call    OblivionTESWeatherList_LoadChunk; Verified: Oblivion weather-list chunk record is 8 bytes: TESWeather FormID plus selectionWeight. Fallout's 12-byte WeatherEntry adds TESGlobal* pChanceVar; this is a documented cross-game layout divergence.
 0x4A5989: add     esp, 0Ch
 0x4A598C: cmp     ds:0B34D88h, esi
 0x4A5992: mov     ds:0B06B18h, bl

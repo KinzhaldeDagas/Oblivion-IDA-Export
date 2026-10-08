@@ -1,4 +1,4 @@
-char *sub_8BDBD0()
+NiRTTI *sub_8BDBD0()
 {
-  return dword_BA8068;
+  return &stru_BA8068; /*0x8bdbd5*/
 }

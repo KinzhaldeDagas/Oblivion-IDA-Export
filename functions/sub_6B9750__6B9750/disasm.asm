@@ -60,7 +60,7 @@
 0x6B9814: push    1; int
 0x6B9816: push    ecx
 0x6B9817: fstp    [esp+13Ch+var_13C]; float
-0x6B981A: call    sub_57D7A0
+0x6B981A: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x6B981F: fmul    qword ptr ds:0A46B08h
 0x6B9825: push    ecx
 0x6B9826: lea     eax, [esp+140h+var_110]
@@ -86,7 +86,7 @@
 0x6B9869: push    1; int
 0x6B986B: push    ecx
 0x6B986C: fstp    [esp+13Ch+var_13C]; float
-0x6B986F: call    sub_57D7A0
+0x6B986F: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x6B9874: fmul    qword ptr ds:0A78850h
 0x6B987A: push    ecx
 0x6B987B: lea     edx, [esp+140h+var_110]
@@ -125,7 +125,7 @@
 0x6B98E9: jnz     short loc_6B98C5
 0x6B98EB: mov     ecx, [esp+130h+var_118.m_data]
 0x6B98EF: push    ecx
-0x6B98F0: call    FormHeapFree
+0x6B98F0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6B98F5: add     esp, 4
 0x6B98F8: mov     ecx, [esp+130h+var_C]
 0x6B98FF: mov     large fs:0, ecx
@@ -139,3 +139,16 @@
 0x6B9914: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6B9919: add     esp, 11Ch
 0x6B991F: retn    10h
+0x9C7050: lea     ecx, [ebp-118h]; void *
+0x9C7056: jmp     BSStringT_Clear
+0x9C705B: mov     edx, [esp+arg_4]
+0x9C705F: lea     eax, [edx-120h]
+0x9C7065: mov     ecx, [edx-124h]
+0x9C706B: xor     ecx, eax
+0x9C706D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7072: add     eax, 10h
+0x9C7075: mov     ecx, [edx-4]
+0x9C7078: xor     ecx, eax
+0x9C707A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C707F: mov     eax, offset stru_AEF4D0
+0x9C7084: jmp     ___CxxFrameHandler3

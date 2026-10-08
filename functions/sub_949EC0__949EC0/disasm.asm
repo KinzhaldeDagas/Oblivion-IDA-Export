@@ -262,7 +262,7 @@
 0x94A17B: add     ecx, ebx
 0x94A17D: push    ecx
 0x94A17E: push    ebp
-0x94A17F: call    sub_88FCC0
+0x94A17F: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94A184: mov     edx, [esi+50h]
 0x94A187: mov     eax, [edx+4]
 0x94A18A: inc     edi

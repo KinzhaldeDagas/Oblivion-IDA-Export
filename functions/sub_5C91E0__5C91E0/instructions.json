@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5C91E0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Complete player-face refresh after character-creation changes. The RaceSexMenu caller supplies this in ECX; generated head reconstruction occurs beneath this call, so it is the narrow boundary for temporarily enabling bFixFaceNormals during Randomize Face.",
     "mnemonic": "push",
     "size": 2
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x5C9200",
-    "line": "lea     eax, [esp+0ECh+var_C]",
+    "line": "lea     eax, [esp+0E0h]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5C9225",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x5C9228",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x5C9237",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9238",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x5C924B",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C924C",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,13 +691,13 @@
   },
   {
     "ea": "0x5C9329",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C932B",
-    "line": "call    sub_405CE0",
+    "line": "call    TESNPC_ClearFaceGenNodes; Clear both cached player TESNPC FaceGen nodes before reconstruction, guaranteeing the following node update takes the TESRace_CreateFaceGenNodes path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,43 +751,43 @@
   },
   {
     "ea": "0x5C934A",
-    "line": "call    sub_525A70",
+    "line": "call    TESNPC_ReconcileFaceGenNodesForActor; Reconcile TESNPC FaceGen nodes with actor skin/animation state. If both cached FaceGen node pointers are absent, this routine calls TESRace_CreateFaceGenNodes and attaches the new biped/skinned pair.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C934F",
-    "line": "lea     ecx, [esp+0E4h+var_C8]",
+    "line": "lea     ecx, [esp+0E4h+var_D0.parameters.matrices.allocator08]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C9353",
-    "line": "call    FaceGenHeadParameters_Ctor",
+    "line": "call    FaceGenRenderState_Construct; Construct a full 0xC4 FaceGenRenderState for the player refresh; this is larger than FaceGenHeadParameters alone.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9358",
-    "line": "mov     ecx, [edi+0E8h]",
+    "line": "mov     ecx, [edi+0E8h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5C935E",
-    "line": "lea     edx, [esp+0E4h+var_C8]",
+    "line": "lea     edx, [esp+0E4h+var_D0.parameters.matrices.allocator08]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C9362",
-    "line": "push    edx",
+    "line": "push    edx; outState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C9363",
-    "line": "push    edi",
+    "line": "push    edi; npc",
     "mnemonic": "push",
     "size": 1
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x5C936F",
-    "line": "call    TESRace_GetFaceGenHeadParameters",
+    "line": "call    TESRace_BuildFaceGenRenderState; Blockhead source audit: hooks this render-state build call, invokes native TESRace_BuildFaceGenRenderState then swaps cloned model/texture/hair assets. Its paired destructor hook at 0x5C93C8 frees those clones before native destruction. Prettier Faces scopes the enclosing refresh via 0x5C9D55; distinct patch sites here. Blockhead's source type FaceGenHeadParameters at these calls corresponds to the larger render state, not only the four coefficient matrices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,13 +817,13 @@
   },
   {
     "ea": "0x5C937C",
-    "line": "lea     eax, [esp+0E4h+var_C8]",
+    "line": "lea     eax, [esp+0E4h+var_D0.parameters.matrices.allocator08]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C9380",
-    "line": "push    eax",
+    "line": "push    eax; Push the FaceGenRenderState pointer before the perspective-node virtual call. The following pushed zero is that virtual call's perspective argument; its thiscall cleanup leaves this state pointer for BSFaceGen_ApplyHeadParametersToNode.",
     "mnemonic": "push",
     "size": 1
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x5C9387",
-    "line": "push    0",
+    "line": "push    0; state",
     "mnemonic": "push",
     "size": 2
   },
@@ -847,13 +847,13 @@
   },
   {
     "ea": "0x5C938B",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C938C",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Apply the same render state to the first player FaceGen node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,13 +865,13 @@
   },
   {
     "ea": "0x5C9394",
-    "line": "lea     ecx, [esp+0E8h+var_CC]",
+    "line": "lea     ecx, [esp+0E8h+var_D0.parameters.matrices.columns]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C9398",
-    "line": "push    ecx",
+    "line": "push    ecx; Push the same FaceGenRenderState for the second node before the perspective-node virtual call; the intervening zero belongs to that thiscall, not to ApplyHeadParameters.",
     "mnemonic": "push",
     "size": 1
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x5C93A7",
-    "line": "push    0",
+    "line": "push    0; state",
     "mnemonic": "push",
     "size": 2
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x5C93AB",
-    "line": "push    eax",
+    "line": "push    eax; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C93AC",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Apply the same render state to the second player FaceGen node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x5C93B9",
-    "line": "lea     ecx, [esp+0ECh+var_D0]",
+    "line": "lea     ecx, [esp+0ECh+var_D0]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x5C93C8",
-    "line": "call    FaceGenHeadParameters_Dtor",
+    "line": "call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C93CD",
-    "line": "mov     ecx, dword ptr [esp+0ECh+var_C]",
+    "line": "mov     ecx, [esp+0E0h]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1000,5 +1000,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C1730",
+    "line": "lea     ecx, [ebp-0D0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1736",
+    "line": "jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C173B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C173F",
+    "line": "lea     eax, [edx-0DCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C1745",
+    "line": "mov     ecx, [edx-0E0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C174B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C174D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1752",
+    "line": "mov     eax, offset stru_AEA758",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1757",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

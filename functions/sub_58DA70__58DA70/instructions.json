@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x58DA90",
-    "line": "mov     ecx, [edx+8]",
+    "line": "mov     ecx, [edx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x58DA98",
-    "line": "call    sub_588B20",
+    "line": "call    Tile__MarkSubtreeReleasing; Verified: sets Tile byte +5 recursively for unreleased/non-releasing descendants. Value calculation tests owner +5 to suppress evaluation during teardown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,25 +223,25 @@
   },
   {
     "ea": "0x58DADF",
-    "line": "push    ebx",
+    "line": "push    ebx; sibling",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DAE0",
-    "line": "push    ebx",
+    "line": "push    ebx; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DAE1",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DAE3",
-    "line": "call    sub_58D1C0",
+    "line": "call    Tile__SetParent; Verified: detaches from old parent list and decrements child-count trait 0xFD0, assigns parent +0x10, increments new parent count, inserts in new parent child list. Optional sibling argument controls placement; null uses AddHead. This is attachment, not a float-value setter.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x58DB19",
-    "line": "mov     ecx, edi; void *",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DB1B",
-    "line": "call    sub_589BB0",
+    "line": "call    Tile__Value__Destroy; Verified: unlinks/frees own action chain and incoming reaction actions, unlinking crosslinks from both chains; frees sentinels/string and clears owner. Source deletion removes references rather than re-resolving selector to replacement Tile. Fallout Value destructor 0x827DBC60 uses a reaction map and nulls reference operands instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x58DB21",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x58DB3C",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x58DB82",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },

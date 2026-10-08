@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E4960",
-    "line": "sub     esp, 50h",
+    "line": "sub     esp, 50h; Verified (Oblivion): samples NiGeometryData vertices/normals from a target geometry and writes a new particle instance record at slotIndex. This is emitterType_70 value 0, kParticleShaderEmitter_Geometry.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x7E4A65",
-    "line": "fstp    [esp+60h+var_18]",
+    "line": "fstp    [esp+60h+outVertices.data]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7E4A69",
-    "line": "mov     ecx, [esp+60h+var_18]",
+    "line": "mov     ecx, [esp+60h+outVertices.data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x7E4A79",
-    "line": "fstp    [esp+60h+var_14]",
+    "line": "fstp    [esp+60h+outVertices.stride]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7E4A7D",
-    "line": "mov     edx, [esp+60h+var_14]",
+    "line": "mov     edx, [esp+60h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x7E4A8D",
-    "line": "fstp    [esp+60h+var_10]",
+    "line": "fstp    dword ptr [esp+60h+outVertices.unknown08]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7E4A91",
-    "line": "mov     eax, [esp+60h+var_10]",
+    "line": "mov     eax, dword ptr [esp+60h+outVertices.unknown08]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7E4AF9",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x7E4B05",
-    "line": "lea     edx, [esp+64h+var_18]",
+    "line": "lea     edx, [esp+64h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -835,31 +835,31 @@
   },
   {
     "ea": "0x7E4B6D",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7E4B6F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E4B71",
-    "line": "mov     [esp+64h+var_18], eax",
+    "line": "mov     [esp+64h+outVertices.data], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7E4B75",
-    "line": "mov     [esp+64h+var_14], eax",
+    "line": "mov     [esp+64h+outVertices.stride], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7E4B79",
-    "line": "mov     byte ptr [esp+64h+var_10], al",
+    "line": "mov     [esp+64h+outVertices.unknown08], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7E4B89",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,25 +901,25 @@
   },
   {
     "ea": "0x7E4B96",
-    "line": "lea     ecx, [esp+60h+var_18]",
+    "line": "lea     ecx, [esp+60h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7E4B9A",
-    "line": "push    ecx",
+    "line": "push    ecx; outVertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7E4B9B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E4B9D",
-    "line": "call    sub_728B60",
+    "line": "call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x7E4BAE",
-    "line": "mov     eax, [esp+60h+var_14]",
+    "line": "mov     eax, [esp+60h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x7E4BB5",
-    "line": "add     eax, [esp+60h+var_18]",
+    "line": "add     eax, [esp+60h+outVertices.data]",
     "mnemonic": "add",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x7E4BE8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x7E4BEE",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x7E4C04",
-    "line": "mov     eax, offset Vector3_InitValue?",
+    "line": "mov     eax, offset g_zeroNiPoint3",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x7E4C2C",
-    "line": "mov     eax, offset Vector3_InitValue?",
+    "line": "mov     eax, offset g_zeroNiPoint3",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x7E4C45",
-    "line": "cmp     byte ptr [ebp+78h], 0",
+    "line": "cmp     byte ptr [ebp+78h], 0; Verified (Oblivion): when bWorldspace_78 is true, geometry/skinned-geometry samples are transformed by the source geometry's transform.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x7E4C5A",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x7E4CB9",
-    "line": "mov     eax, [esp+60h+arg_0]",
+    "line": "mov     eax, [esp+60h+slotIndex]",
     "mnemonic": "mov",
     "size": 4
   },

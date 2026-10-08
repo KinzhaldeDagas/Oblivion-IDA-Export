@@ -1,1 +1,1 @@
-NiSortAdjustNode
+struct NiSortAdjustNode;

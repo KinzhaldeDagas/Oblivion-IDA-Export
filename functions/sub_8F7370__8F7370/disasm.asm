@@ -37,7 +37,7 @@
 0x8F73EC: mov     [esp+0E0h+var_70], ecx
 0x8F73F0: xor     ecx, ecx
 0x8F73F2: cmp     eax, ecx
-0x8F73F4: mov     dword ptr [esp+0E0h+var_6C], ebx
+0x8F73F4: mov     [esp+0E0h+var_6C], ebx
 0x8F73F8: mov     [esp+0E0h+var_A0], ecx
 0x8F73FC: mov     dword ptr [esp+0E0h+var_9C], ecx
 0x8F7400: jle     loc_8F75BE
@@ -130,7 +130,7 @@
 0x8F7554: mov     edx, [ecx]
 0x8F7556: addps   xmm0, xmm3
 0x8F7559: movaps  [esp+0E0h+var_9C+0Ch], xmm0
-0x8F755E: movaps  xmm0, [esp+0E0h+var_6C+0Ch]
+0x8F755E: movaps  xmm0, xmmword ptr [esp+0E0h+var_6C+0Ch]
 0x8F7566: movaps  xmm2, xmmword ptr [eax+20h]
 0x8F756A: movaps  xmm3, xmmword ptr [eax+10h]
 0x8F756E: movaps  xmm1, xmm0

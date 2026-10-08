@@ -60,7 +60,7 @@
 0x72063A: add     ebx, 4
 0x72063D: push    ebx; lpAddend
 0x72063E: call    dword ptr ds:0A28078h
-0x720644: push    offset sub_7016A0; a5
+0x720644: push    offset NiPointerSlot_Release; a5
 0x720649: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x72064E: push    6; size
 0x720650: push    4; a2
@@ -240,10 +240,10 @@
 0x720813: lea     edi, [ecx+esi*4]
 0x720816: mov     ecx, [edi+4]
 0x720819: sub     ecx, [edi]
-0x72081B: push    ecx; Size
-0x72081C: push    edx; Src
-0x72081D: push    eax; Dst
-0x72081E: call    _memcpy
+0x72081B: push    ecx; byteCount
+0x72081C: push    edx; source
+0x72081D: push    eax; destination
+0x72081E: call    _memcpy;
 0x720823: mov     ecx, [ebx]
 0x720825: add     esi, 1
 0x720828: add     esp, 0Ch
@@ -255,7 +255,7 @@
 0x72083A: cmp     eax, 6
 0x72083D: mov     [esp+3Ch+arg_0], eax
 0x720841: jb      short loc_7207E0
-0x720843: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x720843: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x720848: push    6; int
 0x72084A: push    4; unsigned int
 0x72084C: lea     edx, [esp+48h+a1]
@@ -271,3 +271,22 @@
 0x72086D: pop     ebx
 0x72086E: add     esp, 28h
 0x720871: retn    18h
+0x9CA220: mov     eax, [ebp-28h]
+0x9CA223: push    eax
+0x9CA224: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA229: pop     ecx
+0x9CA22A: retn
+0x9CA22B: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CA230: push    6; int
+0x9CA232: push    4; unsigned int
+0x9CA234: lea     eax, [ebp-24h]
+0x9CA237: push    eax; void *
+0x9CA238: call    $LN21
+0x9CA23D: retn
+0x9CA23E: mov     edx, [esp+arg_4]
+0x9CA242: lea     eax, [edx-2Ch]
+0x9CA245: mov     ecx, [edx-30h]
+0x9CA248: xor     ecx, eax
+0x9CA24A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA24F: mov     eax, offset stru_AF29A8
+0x9CA254: jmp     ___CxxFrameHandler3

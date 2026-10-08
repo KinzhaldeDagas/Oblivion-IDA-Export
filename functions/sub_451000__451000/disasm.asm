@@ -1,4 +1,4 @@
-0x451000: sub     esp, 0Ch
+0x451000: sub     esp, 0Ch; Destroys every TESFile clone in the thread-ID map, clears and destroys the map, and nulls the owning TESFile's map pointer.
 0x451003: push    edi
 0x451004: mov     edi, ecx
 0x451006: mov     ecx, [edi+8]
@@ -19,27 +19,27 @@
 0x451031: jb      short loc_451020
 0x451033: xor     eax, eax
 0x451035: test    eax, eax
-0x451037: mov     [esp+14h+var_8], eax
+0x451037: mov     [esp+14h+position], eax
 0x45103B: jz      short loc_45107E
 0x45103D: lea     ecx, [ecx+0]
-0x451040: lea     eax, [esp+14h+var_C]
-0x451044: push    eax
-0x451045: lea     ecx, [esp+18h+var_4]
-0x451049: push    ecx
-0x45104A: mov     ecx, [edi+8]
-0x45104D: lea     edx, [esp+1Ch+var_8]
-0x451051: push    edx
-0x451052: mov     [esp+20h+var_C], 0
-0x45105A: call    sub_452600
-0x45105F: mov     esi, [esp+14h+var_C]
+0x451040: lea     eax, [esp+14h+valueOut]
+0x451044: push    eax; valueOut
+0x451045: lea     ecx, [esp+18h+keyOut]
+0x451049: push    ecx; keyOut
+0x45104A: mov     ecx, [edi+8]; self
+0x45104D: lea     edx, [esp+1Ch+position]
+0x451051: push    edx; position
+0x451052: mov     [esp+20h+valueOut], 0
+0x45105A: call    NiTMap_U32Pointer_GetNextEntry
+0x45105F: mov     esi, [esp+14h+valueOut]
 0x451063: test    esi, esi
 0x451065: jz      short loc_451077
 0x451067: mov     ecx, esi
 0x451069: call    TESFile_destr
 0x45106E: push    esi
-0x45106F: call    FormHeapFree
+0x45106F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x451074: add     esp, 4
-0x451077: cmp     [esp+14h+var_8], 0
+0x451077: cmp     [esp+14h+position], 0
 0x45107C: jnz     short loc_451040
 0x45107E: mov     ecx, [edi+8]
 0x451081: call    NiTMap_Clear

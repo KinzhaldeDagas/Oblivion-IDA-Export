@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x805670",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BloodOnDeath decode 2026-05-30: initializes GeometryDecalShader pass slots; fixed render setup, not a limit on blood trail temp effects.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x80569A",
-    "line": "lea     edi, [ecx+7Ch]",
+    "line": "lea     edi, [ecx+7Ch]; BloodOnDeath decode: two pass slots follow, corresponding to static and skinned geometry-decal variants.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -108,12 +108,6 @@
     "size": 2
   },
   {
-    "ea": "0x8056AA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x8056B0",
     "line": "lea     eax, [esp+28h+var_14]",
     "mnemonic": "lea",
@@ -127,7 +121,7 @@
   },
   {
     "ea": "0x8056B5",
-    "line": "call    sub_7606A0",
+    "line": "call    NiD3DPassPool_Acquire; Acquire a renderer-owned NiD3DPass from the global pass pool and return it with a reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +187,7 @@
   },
   {
     "ea": "0x8056D6",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +277,7 @@
   },
   {
     "ea": "0x805700",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -382,5 +376,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D0AC0",
+    "line": "lea     ecx, [ebp-14h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0AC3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0AC8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D0ACC",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0ACF",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0AD2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0AD4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0AD9",
+    "line": "mov     eax, offset stru_AF9368",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0ADE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

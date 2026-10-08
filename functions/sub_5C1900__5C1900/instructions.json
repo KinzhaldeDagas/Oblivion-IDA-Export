@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x5C1923",
-    "line": "mov     ebp, offset dword_B3B444",
+    "line": "mov     ebp, offset unk_B3B444",
     "mnemonic": "mov",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5C1938",
-    "line": "mov     [esp+14h+var_4], esi",
+    "line": "mov     [esp+14h+data], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5C1959",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,25 +283,25 @@
   },
   {
     "ea": "0x5C1980",
-    "line": "lea     edx, [esp+14h+var_4]",
+    "line": "lea     edx, [esp+14h+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C1984",
-    "line": "push    edx",
+    "line": "push    edx; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C1985",
-    "line": "lea     ecx, [ebp-4]",
+    "line": "lea     ecx, [ebp-4]; list",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5C1988",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5C19A0",
-    "line": "lea     eax, [esp+14h+var_4]",
+    "line": "lea     eax, [esp+14h+data]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x5C19A7",
-    "line": "push    eax",
+    "line": "push    eax; data",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C19A8",
-    "line": "add     ecx, offset quickKeyList_ptr",
+    "line": "add     ecx, 0B3B440h; list",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x5C19AE",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },

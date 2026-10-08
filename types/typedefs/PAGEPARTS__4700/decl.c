@@ -1,1 +1,8 @@
-PAGEPARTS
+enum PAGEPARTS : __int32
+{
+PAGEPartFiller0 = 0x0,
+PGRP_UP = 0x1,
+PGRP_DOWN = 0x2,
+PGRP_UPHORZ = 0x3,
+PGRP_DOWNHORZ = 0x4,
+};

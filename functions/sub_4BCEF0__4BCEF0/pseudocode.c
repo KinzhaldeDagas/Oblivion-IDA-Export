@@ -1,71 +1,76 @@
-void __stdcall sub_4BCEF0(int a1)
+// Verified: consumes DistantLODLoaderTaskData, walks its form-pointer -> DistantLODCellObjectData map, dispatches each key through virtual slot +0x11C, then frees the three arrays and clears the map. The external .lod parser RTTI-casts keys to TESBoundObject; the embedded REFR parser stores a NAME-resolved TESForm* without a local cast, so that path's bound-object invariant is Probable, not Verified.
+void __stdcall DistantLODLoaderTaskData_CleanupCellObjects(DistantLODLoaderTaskData *taskData)
 {
-  int v1; // edi
+  DistantLODLoaderTaskData *v1; // edi
   unsigned int v2; // eax
-  unsigned __int16 v3; // dx
-  TESObjectCELL *v4; // esi
+  unsigned __int16 cellY; // dx
+  _DWORD *v4; // esi
   int v5; // eax
-  int v6; // edi
+  _DWORD *resource20; // edi
   NiAVObject *v7; // esi
   unsigned int v8; // [esp+24h] [ebp-2Ch]
   unsigned int a2; // [esp+28h] [ebp-28h]
   unsigned int v10; // [esp+2Ch] [ebp-24h]
-  TESObjectCELL *v11; // [esp+40h] [ebp-10h] BYREF
-  NiTMap_Entry_TESCELL *v12; // [esp+44h] [ebp-Ch] BYREF
+  void *valueOut; // [esp+40h] [ebp-10h] BYREF
+  MEF_U32PointerMapEntry32 *position; // [esp+44h] [ebp-Ch] BYREF
   int v13; // [esp+48h] [ebp-8h]
   unsigned int v14; // [esp+4Ch] [ebp-4h]
 
-  v1 = a1;
-  if ( a1 && *(_BYTE *)(a1 + 0x28) && *(_DWORD *)(a1 + 0x20) && *(_DWORD *)(a1 + 0x1C) )
+  v1 = taskData; /*0x4bcef5*/
+  if ( taskData && taskData->parseComplete && taskData->cellLODBuffer && taskData->instancedLODNode ) /*0x4bcf15*/
   {
-    v2 = sub_7B2110(*(_WORD *)a1, *(_WORD *)(a1 + 4));
-    v3 = *(_WORD *)(v1 + 4);
-    v14 = v2;
-    v13 = sub_4EF1D0(*(_WORD *)v1, v3);
-    v12 = (NiTMap_Entry_TESCELL *)sub_6A9030((_DWORD *)(v1 + 0xC));
-    while ( v12 )
+    v2 = sub_7B2110(taskData->cellX, taskData->cellY); /*0x4bcf29*/
+    cellY = v1->cellY; /*0x4bcf2e*/
+    v14 = v2; /*0x4bcf32*/
+    v13 = TESObjectCELL_PackExteriorGroupLabel(v1->cellX, cellY); /*0x4bcf48*/
+    position = (MEF_U32PointerMapEntry32 *)NiTMapBase_GetFirstNode((unsigned int *)&v1->cellObjects); /*0x4bcf53*/
+    while ( position ) /*0x4bcf57*/
     {
-      a1 = 0;
-      v11 = 0;
-      sub_452600((NiTMap_TESCELL *)(v1 + 0xC), &v12, (void **)&a1, &v11);
-      v4 = v11;
-      if ( !a1 )
-        goto LABEL_10;
-      if ( v11 )
+      taskData = 0; /*0x4bcf71*/
+      valueOut = 0; /*0x4bcf75*/
+      NiTMap_U32Pointer_GetNextEntry( /*0x4bcf79*/
+        (MEF_U32PointerMapLayout32 *)&v1->cellObjects,
+        &position,
+        (unsigned int *)&taskData,
+        &valueOut);
+      v4 = valueOut; /*0x4bcf84*/
+      if ( !taskData ) /*0x4bcf88*/
+        goto LABEL_10; /*0x4bcf88*/
+      if ( valueOut ) /*0x4bcf8c*/
       {
-        v5 = *(_DWORD *)v11->members.extraData.members.m_presenceBitfield;
-        if ( v5 )
-          (*(void (__stdcall **)(TESForm::ModReferenceList *, _DWORD, _DWORD, int, unsigned int, int, _DWORD, _DWORD))(*(_DWORD *)a1 + 0x11C))(
-            v11->members.super.modlist.next,
-            *(_DWORD *)&v11->members.super.type,
-            *(_DWORD *)&v11->members.flags0,
+        v5 = *((_DWORD *)valueOut + 0xC); /*0x4bcf8e*/
+        if ( v5 ) /*0x4bcf93*/
+          (*(void (__stdcall **)(_DWORD, _DWORD, _DWORD, int, unsigned int, int, void *, void *))(taskData->cellX + 0x11C))( /*0x4bcfbc*/
+            *((_DWORD *)valueOut + 5),
+            *((_DWORD *)valueOut + 1),
+            *((_DWORD *)valueOut + 9),
             v5,
             v14,
             v13,
-            *(_DWORD *)(v1 + 0x1C),
-            *(_DWORD *)(v1 + 0x20));
+            v1->instancedLODNode,
+            v1->cellLODBuffer);                 // Verified virtual dispatch from each map key through vtable +0x11C with parsed arrays/count and cell context. External .lod entries are locally RTTI-verified TESBoundObject; embedded CELL/REFR entries are TESForm* resolved from NAME with no local cast. Probable: embedded references satisfy the same bound-object callback contract, supported by REFR baseForm serialization and all consumers.
 LABEL_10:
-        if ( v4 )
+        if ( v4 ) /*0x4bcfc2*/
         {
-          v10 = *(_DWORD *)&v4->members.flags0;
-          *(_DWORD *)&v4->members.fullName.name.m_dataLen = &NiTArray<float>::`vftable';
-          FormHeapFree(v10);
-          a2 = (unsigned int)v4->members.super.modlist.next;
-          v4->members.super.modlist.data = (Data *)&NiTArray<float>::`vftable';
-          FormHeapFree(a2);
-          v8 = *(_DWORD *)&v4->members.super.type;
-          v4->vtbl = (TESFormVtbl *)&NiTArray<float>::`vftable';
-          FormHeapFree(v8);
-          FormHeapFree((unsigned int)v4);
+          v10 = v4[9]; /*0x4bcfc7*/
+          v4[8] = &NiTArray<float>::`vftable'; /*0x4bcfc8*/
+          FormHeapFree(v10); /*0x4bcfcf*/
+          a2 = v4[5]; /*0x4bcfd7*/
+          v4[4] = &NiTArray<float>::`vftable'; /*0x4bcfd8*/
+          FormHeapFree(a2); /*0x4bcfdf*/
+          v8 = v4[1]; /*0x4bcfe7*/
+          *v4 = &NiTArray<float>::`vftable'; /*0x4bcfe8*/
+          FormHeapFree(v8); /*0x4bcfee*/
+          FormHeapFree((unsigned int)v4); /*0x4bcff4*/
         }
       }
     }
-    NiTMap_Clear((_DWORD *)(v1 + 0xC));
-    v6 = *(_DWORD *)(v1 + 0x20);
-    v7 = (NiAVObject *)dword_B34424;
-    if ( *(_DWORD *)(v6 + 4) > 2u )
-      ((void (__thiscall *)(NiAVObject *, int, int))v7->vtbl[1].super.super.Destructor)(v7, v6, 1);
-    NiAVObject_UpdateNiAVObject(v7, 0.0, 1);
-    NiAVObject_InitializePropertyState(v7);
+    NiTMap_Clear(&v1->cellObjects.vtable); /*0x4bd006*/
+    resource20 = v1->cellLODBuffer; /*0x4bd00d*/
+    v7 = *(NiAVObject **)&MEMORY[0xB33E90][0x594]; /*0x4bd014*/
+    if ( resource20[1] > 2u ) /*0x4bd01a*/
+      ((void (__thiscall *)(NiAVObject *, _DWORD *, int))v7->vtbl[1].super.super.Destructor)(v7, resource20, 1); /*0x4bd029*/
+    NiAVObject_UpdateNiAVObject(v7, 0.0, 1); /*0x4bd035*/
+    NiAVObject_InitializePropertyState(v7); /*0x4bd03c*/
   }
 }

@@ -1,4 +1,4 @@
-0x4D7FE0: push    ebx
+0x4D7FE0: push    ebx; Build a strong-owned {NiLight*,1.0} payload and install it as the reference's spell-effect attached-light extra-data type 0x49.
 0x4D7FE1: push    ebp
 0x4D7FE2: push    esi
 0x4D7FE3: push    edi
@@ -13,7 +13,7 @@
 0x4D7FFC: jmp     short loc_4D8000
 0x4D7FFE: xor     edi, edi
 0x4D8000: mov     esi, [edi]
-0x4D8002: mov     ebx, [esp+10h+arg_0]
+0x4D8002: mov     ebx, [esp+10h+backingLight]
 0x4D8006: cmp     esi, ebx
 0x4D8008: jz      short loc_4D803A
 0x4D800A: test    esi, esi
@@ -37,10 +37,10 @@
 0x4D8033: push    ebx; lpAddend
 0x4D8034: call    dword ptr ds:0A28078h
 0x4D803A: fld1
-0x4D803C: push    edi
-0x4D803D: lea     ecx, [ebp+44h]
+0x4D803C: push    edi; payload
+0x4D803D: lea     ecx, [ebp+44h]; self
 0x4D8040: fstp    dword ptr [edi+4]
-0x4D8043: call    sub_4267B0
+0x4D8043: call    ExtraDataList_SetSpellEffectLightPayload; Install or replace extra-data type 0x49 with an AttachedLightPayload_Decoded. Replacement releases the old payload's backing NiLight and frees that payload; creation builds an ExtraLight-style node, changes its type to 0x49, and adds it to the list.
 0x4D8048: pop     edi
 0x4D8049: pop     esi
 0x4D804A: pop     ebp

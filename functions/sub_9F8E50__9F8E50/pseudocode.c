@@ -1,4 +1,4 @@
-BSStringT *sub_9F8E50()
+NiRTTI *sub_9F8E50()
 {
-  return sub_70E220(&stru_B39D90, "BSFaceGenBaseMorphExtraData", (int)dword_B3FD44);
+  return NiRTTI_Constructor(&stru_B39D90, "BSFaceGenBaseMorphExtraData", &stru_B3FD44); /*0x9f8e64*/
 }

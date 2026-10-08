@@ -6,7 +6,7 @@
 0x9870B5: and     eax, 1F80h
 0x9870BA: cmp     eax, 1F80h
 0x9870BF: jnz     short __CIatan___jnedef_9
-0x9870C1: fnstcw  [esp+8+var_8]
-0x9870C4: mov     ax, [esp+8+var_8]
+0x9870C1: fnstcw  word ptr [esp+8+var_8]
+0x9870C4: mov     ax, word ptr [esp+8+var_8]
 0x9870C8: and     ax, 7Fh
 0x9870CC: cmp     ax, 7Fh

@@ -43,7 +43,7 @@
 0x6A9D5B: lea     ecx, [esp+11Ch+Str1]
 0x6A9D5F: push    ebp; char *
 0x6A9D60: push    ecx; Str
-0x6A9D61: call    sub_431970
+0x6A9D61: call    ModelLoader_BuildFileListWildcard; Decoded animation/model-loader helper. Builds a BSSimpleList of file paths for an input path that may contain wildcards; merges loose-file FindFirstFile results when archive invalidation is enabled, then asks archive/file systems to append matches. Used by KF/model discovery, not a CustomAnim override registry.
 0x6A9D66: mov     ebx, eax
 0x6A9D68: add     esp, 10h
 0x6A9D6B: test    ebx, ebx
@@ -59,7 +59,7 @@
 0x6A9D82: jz      short loc_6A9DD8
 0x6A9D84: push    edi
 0x6A9D85: push    eax; Seed
-0x6A9D86: call    GetRandomLargeInteger?
+0x6A9D86: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x6A9D8B: xor     edx, edx
 0x6A9D8D: add     esp, 4
 0x6A9D90: div     esi
@@ -79,21 +79,21 @@
 0x6A9DAE: mov     edx, [esi]
 0x6A9DB0: push    edx
 0x6A9DB1: sub     edi, 1
-0x6A9DB4: call    FormHeapFree
+0x6A9DB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A9DB9: mov     esi, [esi+4]
 0x6A9DBC: add     esp, 4
 0x6A9DBF: test    esi, esi
 0x6A9DC1: jnz     short loc_6A9D96
 0x6A9DC3: mov     ecx, ebx
-0x6A9DC5: call    BSSimpleList_Clear
+0x6A9DC5: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x6A9DCA: push    ebx
-0x6A9DCB: call    FormHeapFree
+0x6A9DCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A9DD0: add     esp, 4
 0x6A9DD3: mov     al, 1
 0x6A9DD5: pop     edi
 0x6A9DD6: jmp     short loc_6A9DE3
 0x6A9DD8: push    ebx
-0x6A9DD9: call    FormHeapFree
+0x6A9DD9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A9DDE: add     esp, 4
 0x6A9DE1: xor     al, al
 0x6A9DE3: mov     ecx, [esp+114h+var_4]

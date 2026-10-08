@@ -1,4 +1,4 @@
-0x803C90: push    0FFFFFFFFh
+0x803C90: push    0FFFFFFFFh; MoonSugarEffect decode: CopyShader render pass. Used as image-space fallback when no active native shader exists; copies source texture to destination/default target with tex ratio constants.
 0x803C92: push    offset SEH_803C90
 0x803C97: mov     eax, large fs:0
 0x803C9D: push    eax
@@ -44,13 +44,13 @@
 0x803D16: push    6
 0x803D18: push    0
 0x803D1A: push    10000007h
-0x803D1F: push    offset aTexratio0; "texRatio0"
+0x803D1F: push    offset aTexratio0; MoonSugarEffect decode: CopyShader vertex constants include texRatio0 plus RowOne/RowTwo transform rows for the copy/mask pass.
 0x803D24: call    edx
 0x803D26: mov     ecx, [esi]
 0x803D28: mov     eax, [ecx]
 0x803D2A: mov     edx, [eax+18h]
 0x803D2D: push    0
-0x803D2F: push    offset dword_B474CC
+0x803D2F: push    offset flt_B474CC
 0x803D34: push    4
 0x803D36: push    10h
 0x803D38: push    offset EmptyString
@@ -64,7 +64,7 @@
 0x803D51: mov     eax, [ecx]
 0x803D53: mov     edx, [eax+18h]
 0x803D56: push    0
-0x803D58: push    offset dword_B474DC
+0x803D58: push    (offset flt_B474CC+10h)
 0x803D5D: push    4
 0x803D5F: push    10h
 0x803D61: push    offset EmptyString
@@ -112,7 +112,7 @@
 0x803DE9: mov     edx, [ecx]
 0x803DEB: mov     eax, [edx+18h]
 0x803DEE: push    0
-0x803DF0: push    offset unk_B474F8
+0x803DF0: push    (offset flt_B474CC+2Ch)
 0x803DF5: push    4
 0x803DF7: push    100h
 0x803DFC: push    offset EmptyString
@@ -133,3 +133,20 @@
 0x803E2C: pop     esi
 0x803E2D: add     esp, 10h
 0x803E30: retn    4
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

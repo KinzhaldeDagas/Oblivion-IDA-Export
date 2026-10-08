@@ -16,7 +16,7 @@
 0x8BD5C6: add     ebx, edx
 0x8BD5C8: mov     ecx, ebx
 0x8BD5CA: mov     [ebx-1], al
-0x8BD5CD: call    sub_532250
+0x8BD5CD: call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.
 0x8BD5D2: cmp     dword ptr [esi+8], 0
 0x8BD5D6: mov     [esi+0Ch], ebx
 0x8BD5D9: jz      short loc_8BD5E3

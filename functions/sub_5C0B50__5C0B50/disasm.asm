@@ -1,6 +1,6 @@
 0x5C0B50: push    esi
 0x5C0B51: mov     esi, ecx
-0x5C0B53: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5C0B53: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5C0B58: xor     edx, edx
 0x5C0B5A: mov     dword ptr [esi], offset ??_7QuickKeysMenu@@6B@; const QuickKeysMenu::`vftable'
 0x5C0B60: mov     [esi+28h], edx
@@ -8,7 +8,6 @@
 0x5C0B66: xor     eax, eax
 0x5C0B68: lea     ecx, [esi+30h]
 0x5C0B6B: jmp     short loc_5C0B70
-0x5C0B6D: align 10h
 0x5C0B70: mov     [ecx], edx
 0x5C0B72: mov     ds:byte_B3B418[eax], dl
 0x5C0B78: add     eax, 1

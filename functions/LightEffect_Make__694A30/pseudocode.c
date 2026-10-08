@@ -1,10 +1,10 @@
-ActiveEffect *__cdecl LightEffect_Make(MagicCaster *a1, MagicItem *a2, EffectItem *a3)
+LightEffect_DecodedLayout *__cdecl LightEffect_Make(MagicCaster *caster, MagicItem *magicItem, EffectItem *effectItem)
 {
-  ActiveEffect *v3; // eax
+  LightEffect_DecodedLayout *v3; // eax
 
-  v3 = (ActiveEffect *)FormHeapAlloc(0x3Cu);
-  if ( v3 )
-    return LightEffect_constr(v3, a1, a2, a3);
+  v3 = (LightEffect_DecodedLayout *)FormHeapAlloc(0x3Cu); /*0x694a53*/
+  if ( v3 ) /*0x694a69*/
+    return LightEffect_constr(v3, caster, magicItem, effectItem); /*0x694a7c*/
   else
-    return 0;
+    return 0; /*0x694a91*/
 }

@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x6A6E21",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x6A6E3B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A6E3D",
-    "line": "call    sub_4C9820",
+    "line": "call    TESObjectCELL_HasFlag80",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x6A6E5F",
-    "line": "mov     ecx, offset fMagicSunDamagePainInitialDelay",
+    "line": "mov     ecx, (offset flt_B37ED0+108h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x6A6E84",
-    "line": "mov     ecx, offset fMagicSunDamageScreenGlowRateDown",
+    "line": "mov     ecx, (offset flt_B37ED0+0F8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x6A6F3E",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+b]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x6A6F43",
-    "line": "call    sub_7B4830",
+    "line": "call    sub_7B4830; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6A6FED",
-    "line": "mov     ecx, offset fMagicSunDamagePainTimer",
+    "line": "mov     ecx, (offset flt_B37ED0+100h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -985,7 +985,7 @@
   },
   {
     "ea": "0x6A7001",
-    "line": "mov     ecx, offset fMagicSunDamagePainInitialDelay",
+    "line": "mov     ecx, (offset flt_B37ED0+108h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x6A703B",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+b]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x6A7041",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x6A7069",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+b]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x6A706F",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x6A70C5",
-    "line": "mov     ecx, offset fMagicSunDamageScreenGlowRateUp",
+    "line": "mov     ecx, (offset flt_B37ED0+0F0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x6A70E5",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+b]; b",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1417,13 +1417,13 @@
   },
   {
     "ea": "0x6A70ED",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+a]; a",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6A70F0",
-    "line": "call    sub_4AC760",
+    "line": "call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x6A711D",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+b]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x6A7123",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x6A7157",
-    "line": "fstp    [esp+34h+var_2C]",
+    "line": "fstp    [esp+34h+a]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x6A7181",
-    "line": "mov     ecx, offset fMagicSunDamageScreenGlowRateDown",
+    "line": "mov     ecx, (offset flt_B37ED0+0F8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1717,7 +1717,7 @@
   },
   {
     "ea": "0x6A71A4",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+b]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1729,7 +1729,7 @@
   },
   {
     "ea": "0x6A71AC",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1801,7 +1801,7 @@
   },
   {
     "ea": "0x6A71DC",
-    "line": "fstp    [esp+2Ch+var_28]; float",
+    "line": "fstp    [esp+2Ch+b]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x6A71E2",
-    "line": "fstp    [esp+2Ch+var_2C]; float",
+    "line": "fstp    [esp+2Ch+a]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x6A7216",
-    "line": "fstp    [esp+34h+var_2C]; float",
+    "line": "fstp    [esp+34h+a]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x6A7242",
-    "line": "call    sub_7B4830",
+    "line": "call    sub_7B4830; MoonSugarEffect decode: writes BlurShader globals (blend type, pass count, radius, alpha, tex size). Called by WinMain defaults, SetImageSpaceGlow, and SunDamage paths.",
     "mnemonic": "call",
     "size": 5
   },

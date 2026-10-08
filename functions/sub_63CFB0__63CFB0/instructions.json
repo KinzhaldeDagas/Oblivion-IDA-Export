@@ -7,13 +7,13 @@
   },
   {
     "ea": "0x63CFB3",
-    "line": "push    ebx",
+    "line": "push    ebx; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63CFB4",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x63CFBC",
-    "line": "push    edi",
+    "line": "push    edi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x63CFDB",
-    "line": "fstp    dword ptr [esp+14h+var_8]",
+    "line": "fstp    [esp+14h+var_8]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x63CFDF",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x63CFF1",
-    "line": "fld     dword ptr [esp+14h+var_8]",
+    "line": "fld     [esp+14h+var_8]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x63D00A",
-    "line": "fstp    [esp+14h+a2]",
+    "line": "fstp    [esp+14h+a2]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x63D00E",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x63D017",
-    "line": "fstp    [esp+14h+var_8]",
+    "line": "fstp    qword ptr [esp+14h+var_8]; float",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x63D01B",
-    "line": "call    sub_4029D0",
+    "line": "call    TimeGlobals_GetTimeScale; Returns TimeGlobals field +5 TESGlobal value (time scale). Observed callers use it for magic cooldown and fast-travel time calculations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x63D026",
-    "line": "fcomp   [esp+14h+var_8]",
+    "line": "fcomp   qword ptr [esp+14h+var_8]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -295,25 +295,25 @@
   },
   {
     "ea": "0x63D041",
-    "line": "push    ebp",
+    "line": "push    ebp; float",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63D042",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x63D044",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x63D046",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x63D054",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,31 +373,31 @@
   },
   {
     "ea": "0x63D065",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+explicitTimeOrMinusOne]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x63D068",
-    "line": "push    ebp",
+    "line": "push    ebp; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x63D069",
-    "line": "call    sub_470CE0",
+    "line": "call    BSAnimGroupSequence_GetDuration; Returns zero for null; otherwise returns BSAnimGroupSequence end time (+0x30) minus start time (+0x2C).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x63D06E",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x63D071",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x63D074",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller; supports broad scheduler classification.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x63D07C",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7956B0",
-    "line": "push    ebp",
+    "line": "push    ebp; OBLIVION AUTHORITY (2026-08-30): Fill constructor for vector<unsigned int>; used by CIndexedGeometry::CombineStrips to create per-LOD triangle totals initialized to zero.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7956B5",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x7956CD",
-    "line": "call    sub_790B90",
+    "line": "call    OB_stVector_ThrowLengthError_010201A0; Shared Oblivion STL vector length guard failure. Constructs std::length_error(\"vector<T> too long\") and throws; used by multiple element specializations after max_size checks.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x7956F7",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -172,12 +172,6 @@
     "line": "jmp     short loc_795700",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7956FD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x795700",

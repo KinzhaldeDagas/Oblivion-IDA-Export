@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6807F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified Oblivion route costs: after the access-policy check, a successful TESObjectDOOR_CheckActorAccess with mustLockpickOut=1 adds fPathMustLockpickPenalty (plus zero-valued dbl_A2FC68); a failed check adds fPathImpassableDoorPenalty. Separately, if either endpoint has minimal-use flag and ignore-min-use is false, adds fPathMinimalUseDoorPenalty. Fallout's search uses fixed 409600 penalties for its policy/minimal-use branches, so the numeric behavior differs.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6807FB",
-    "line": "call    sub_67F0A0",
+    "line": "call    TravelPath_GetIgnoreLocks; Verified: reads policy byte 0 at qword_B3BB2C[0xBA]. CalcLowPathToPoint's first boolean argument is saved/restored through this accessor. TravelPath_ComputeDoorTransitionPenalty skips its lock/access penalty branch when this flag is true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x680802",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+candidateReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,31 +91,31 @@
   },
   {
     "ea": "0x680813",
-    "line": "push    1",
+    "line": "push    1; bypassPolicyWhenNoEffectiveLock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x680815",
-    "line": "push    0",
+    "line": "push    0; unknownPolicyFlag0",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x680817",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680818",
-    "line": "push    eax",
+    "line": "push    eax; doorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680819",
-    "line": "call    sub_4B72C0",
+    "line": "call    TESObjectDOOR_CheckActorAccessPolicy; Verified policy byte 1 behavior: when GetEffectiveDoorLock returns null, bypassPolicyWhenNoEffectiveLock=true returns accessible immediately; false continues through ownership, guard, trespass, and linked-cell checks. Current Oblivion callers: TravelPath_ComputeDoorTransitionPenalty passes (unknownPolicyFlag0=0, bypassPolicyWhenNoEffectiveLock=1), while IsOffLimitToThePlayer passes (0,0). unknownPolicyFlag0 is zero at all identified callers and remains Unknown. Fallout has analogous DoorLock policy methods, but the parameter meaning here is established from Oblivion control flow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,37 +145,37 @@
   },
   {
     "ea": "0x680828",
-    "line": "mov     byte ptr [esp+0Ch+arg_0], al",
+    "line": "mov     byte ptr [esp+0Ch+candidateReference], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x68082C",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+candidateReference]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x680830",
-    "line": "push    eax",
+    "line": "push    eax; mustLockpickOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680831",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680832",
-    "line": "push    ecx",
+    "line": "push    ecx; doorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680833",
-    "line": "call    sub_4B7490",
+    "line": "call    TESObjectDOOR_CheckActorAccess; Verified door access helper: handles linked-cell ownership, door ownership, guards, trespass, effective ExtraLockData, TESKey inventory, and lockpick tools. In the trespass branch, an interior linked cell passes the cell check when TESObjectCELL_HasPublicFlag20 (flags0 bit 0x20) is set. If no key matches, Lockpick/Skeleton Key with effective level <100 sets mustLockpickOut=1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x68083F",
-    "line": "mov     ecx, offset unk_B3A430",
+    "line": "mov     ecx, offset fPathImpassableDoorPenalty",
     "mnemonic": "mov",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x68084D",
-    "line": "cmp     byte ptr [esp+0Ch+arg_0], 0",
+    "line": "cmp     byte ptr [esp+0Ch+candidateReference], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x680854",
-    "line": "mov     ecx, offset unk_B3A438",
+    "line": "mov     ecx, offset fPathMustLockpickPenalty",
     "mnemonic": "mov",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x68086A",
-    "line": "call    sub_67F0C0",
+    "line": "call    TravelPath_GetIgnoreMinUse; Verified: reads policy byte 1 at qword_B3BB2C[0xBA]. When false, TravelPath_ComputeDoorTransitionPenalty may add the extra cost for a door whose TESObjectDOOR_HasMinUseFlag is set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x6808F6",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6808F8",
-    "line": "call    sub_4B6D10",
+    "line": "call    TESObjectDOOR_HasMinUseFlag; Verified: tests bit 0x08 at TESObjectDOOR +0x64. CalcLowPathToPoint prints the suffix '-MinUse' when this helper succeeds; travel search adds a penalty for either endpoint door carrying the bit unless ignore-min-use is enabled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x680902",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x680904",
-    "line": "call    sub_4B6D10",
+    "line": "call    TESObjectDOOR_HasMinUseFlag; Verified: tests bit 0x08 at TESObjectDOOR +0x64. CalcLowPathToPoint prints the suffix '-MinUse' when this helper succeeds; travel search adds a penalty for either endpoint door carrying the bit unless ignore-min-use is enabled.",
     "mnemonic": "call",
     "size": 5
   },

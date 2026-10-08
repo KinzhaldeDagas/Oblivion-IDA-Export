@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 42,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 137,
+  "chunks": [
+    [
+      "0x43ACE0",
+      "0x43AD0A"
+    ]
+  ],
+  "chunks_sha256": "0847cdc69fc7390233198028abf8abe4f3827c81eb8acc17f188cc57b3ae3bd7",
+  "comment_regular": "Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+  "comment_repeatable": "Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_43ACE0",
+  "display_name": "FaceGenMatrix_Destruct",
   "end_ea": "0x43AD0A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43ACE0",
+  "name": "FaceGenMatrix_Destruct",
   "segment": ".text",
   "sha256": "0847cdc69fc7390233198028abf8abe4f3827c81eb8acc17f188cc57b3ae3bd7",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43ACE0",
-  "type": "void __thiscall(unsigned int *this)",
+  "total_chunk_size": 42,
+  "type": "void __thiscall(FaceGenMatrix *this)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 137
 }

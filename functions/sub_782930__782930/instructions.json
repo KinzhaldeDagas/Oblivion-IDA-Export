@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x782930",
-    "line": "push    ebx",
+    "line": "push    ebx; Pass225: Unlinks NiGeometryBufferData from owning group; decrements group refcount and clears buffer+0x04.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x782940",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+buffer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x782964",
-    "line": "call    sub_777F40",
+    "line": "call    sub_777F40; MoonSugarEffect decode: release BuffData index buffer and reset IBSize/IB.",
     "mnemonic": "call",
     "size": 5
   },

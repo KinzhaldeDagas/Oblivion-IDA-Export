@@ -23,9 +23,9 @@
 0x67697A: jmp     short loc_67697E
 0x67697C: push    3; a2
 0x67697E: mov     ecx, ebp; this
-0x676980: call    sub_673A50
+0x676980: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x676985: mov     ecx, eax; this
-0x676987: call    sub_7616D0
+0x676987: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67698C: mov     edi, eax
 0x67698E: test    edi, edi
 0x676990: jz      loc_676A27
@@ -73,7 +73,7 @@
 0x676A08: test    al, al
 0x676A0A: jz      short loc_676A1F
 0x676A0C: mov     ecx, esi; int
-0x676A0E: call    sub_5EAE70
+0x676A0E: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x676A13: mov     ecx, [esp+10h+arg_0]
 0x676A17: push    ecx; int
 0x676A18: mov     ecx, esi; int

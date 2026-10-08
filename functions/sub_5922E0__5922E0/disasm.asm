@@ -1,4 +1,4 @@
-0x5922E0: mov     eax, [esp+arg_0]
+0x5922E0: mov     eax, [esp+trait]
 0x5922E4: sub     esp, 8
 0x5922E7: cmp     eax, 0FDEh
 0x5922EC: push    esi
@@ -8,7 +8,7 @@
 0x5922F2: push    eax
 0x5922F3: call    sub_588C10
 0x5922F8: test    eax, eax
-0x5922FA: mov     edi, [esp+10h+arg_8]
+0x5922FA: mov     edi, [esp+10h+text]
 0x5922FE: jnz     short loc_592304
 0x592300: test    edi, edi
 0x592302: jnz     short loc_59232E
@@ -34,7 +34,7 @@
 0x592339: retn    0Ch
 0x59233C: cmp     eax, 0FD1h
 0x592341: jnz     short loc_59235E
-0x592343: fld     [esp+10h+arg_4]
+0x592343: fld     [esp+10h+value]
 0x592347: push    eax
 0x592348: fstp    [esp+14h+var_8]
 0x59234C: call    Tile_GetFloat

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x519D90",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+arg_0]; TESActorBase base AV getter: actor value 7 reads attributes component index 7. Correlates with Luck via Actor_GetLuckModifiedBaseAV using AV 7.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x519E83",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x519EBC",
-    "line": "call    TESAIForm_GetResponsibility",
+    "line": "call    TESAIForm_GetResponsibility; TESAIForm::GetResponsibility reads AISettings[3] at component offset +7.",
     "mnemonic": "call",
     "size": 5
   },

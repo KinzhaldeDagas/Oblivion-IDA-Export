@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A4890",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified (Oblivion): dispatches RDAT/RDMD/RDNL/RDWT/RDSD/RDSG/RDGS chunks to factory-created region data and virtual loaders. Fallout has additional data IDs/layouts; those are not assumed here.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4A48A4",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+region]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4A48B2",
-    "line": "mov     [esi+4], ebx",
+    "line": "mov     [esi+4], ebx; Verified: each record-dispatch call assigns TESRegionDataManager.currentRegion before reading the next region chunk.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x4A496B",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Verified: RDAT base header reads exactly 8 bytes; first dword selects the Oblivion region-data factory ID, second dword is consumed by TESRegionData_LoadHeader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x4A497C",
-    "line": "call    edx",
+    "line": "call    edx; Verified: factory creates type from RDAT ID; returned object receives the 8-byte base RDAT header, then is linked into TESRegion's data list.",
     "mnemonic": "call",
     "size": 2
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x4A49D0",
-    "line": "add     esp, 8",
+    "line": "add     esp, 8; Verified: manager returns success after processing/ignoring a region chunk; only null file or null region returns false.",
     "mnemonic": "add",
     "size": 3
   },

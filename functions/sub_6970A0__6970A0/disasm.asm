@@ -1,4 +1,4 @@
-0x6970A0: push    0FFFFFFFFh
+0x6970A0: push    0FFFFFFFFh; Magic projectile hit/area-effect path. Handles target hit effects, spawns SpecialIdle_AreaEffect for area spells, plays impact sound, and binds effect visuals to actor/player perspective state.
 0x6970A2: push    offset SEH_8AA480
 0x6970A7: mov     eax, large fs:0
 0x6970AD: push    eax
@@ -13,7 +13,7 @@
 0x6970BD: lea     eax, [esp+3Ch+var_C]
 0x6970C1: mov     large fs:0, eax
 0x6970C7: mov     esi, ecx
-0x6970C9: mov     ebp, [esp+3Ch+arg_10]
+0x6970C9: mov     ebp, [esp+3Ch+unknownChildTag]
 0x6970CD: test    ebp, ebp
 0x6970CF: jz      short loc_6970F1
 0x6970D1: mov     eax, [ebp+0]
@@ -28,14 +28,14 @@
 0x6970EB: jnz     loc_6974D9
 0x6970F1: fld     dword ptr [esi+78h]
 0x6970F4: mov     ecx, esi; this
-0x6970F6: fstp    [esp+3Ch+arg_10]
-0x6970FA: fld     [esp+3Ch+arg_10]
+0x6970F6: fstp    [esp+3Ch+unknownChildTag]
+0x6970FA: fld     [esp+3Ch+unknownChildTag]
 0x6970FE: fstp    dword ptr [esi+0A0h]
-0x697104: call    MobileObject_GetCharProxy
+0x697104: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697109: test    eax, eax
 0x69710B: jz      short loc_697175
 0x69710D: mov     ecx, esi; this
-0x69710F: call    MobileObject_GetCharProxy
+0x69710F: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697114: add     eax, 1F0h
 0x697119: test    dword ptr [eax+4], 8000h
 0x697120: jz      short loc_69712E
@@ -43,16 +43,16 @@
 0x697124: mov     edx, [eax+214h]
 0x69712A: mov     ecx, esi
 0x69712C: call    edx
-0x69712E: lea     eax, [esp+3Ch+arg_10]
+0x69712E: lea     eax, [esp+3Ch+unknownChildTag]
 0x697132: push    eax
 0x697133: mov     ecx, esi; this
-0x697135: call    MobileObject_GetCharProxy
+0x697135: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x69713A: mov     ecx, eax
-0x69713C: call    sub_57E270
-0x697141: mov     edi, [esp+3Ch+arg_10]
+0x69713C: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
+0x697141: mov     edi, [esp+3Ch+unknownChildTag]
 0x697145: mov     ecx, esi; this
 0x697147: or      edi, 4000h
-0x69714D: call    MobileObject_GetCharProxy
+0x69714D: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x697152: mov     ecx, [eax+364h]
 0x697158: test    ecx, ecx
 0x69715A: jz      short loc_697175
@@ -72,12 +72,12 @@
 0x697189: call    eax
 0x69718B: test    eax, eax
 0x69718D: jz      short loc_6971DB
-0x69718F: push    offset dword_B258DC
+0x69718F: push    offset stru_B258DC
 0x697194: lea     ecx, [esp+40h+var_24]
 0x697198: push    ecx; float
 0x697199: lea     ecx, [eax+64h]
 0x69719C: call    sub_7101F0
-0x6971A1: mov     edx, [esp+3Ch+arg_C]
+0x6971A1: mov     edx, [esp+3Ch+parentNode]
 0x6971A5: push    edx; int
 0x6971A6: mov     edx, [eax]
 0x6971A8: sub     esp, 0Ch
@@ -131,15 +131,15 @@
 0x69723F: fsub    [esp+3Ch+arg_0]
 0x697243: mov     [esp+3Ch+var_20], edx
 0x697247: mov     [esp+3Ch+var_1C], eax
-0x69724B: fstp    [esp+3Ch+arg_C]
+0x69724B: fstp    [esp+3Ch+parentNode]
 0x69724F: fld     [esp+3Ch+var_20]
 0x697253: fsub    [esp+3Ch+arg_4]
-0x697257: fstp    [esp+3Ch+arg_10]
+0x697257: fstp    [esp+3Ch+unknownChildTag]
 0x69725B: fld     [esp+3Ch+var_1C]
 0x69725F: fsub    [esp+3Ch+arg_8]
 0x697263: fstp    [esp+3Ch+var_28]
-0x697267: fld     [esp+3Ch+arg_10]
-0x69726B: fld     [esp+3Ch+arg_C]
+0x697267: fld     [esp+3Ch+unknownChildTag]
+0x69726B: fld     [esp+3Ch+parentNode]
 0x69726F: fld     [esp+3Ch+var_28]
 0x697273: fld     st(1)
 0x697275: fmulp   st(2), st
@@ -149,18 +149,18 @@
 0x69727D: faddp   st(2), st
 0x69727F: fmul    st, st
 0x697281: faddp   st(1), st
-0x697283: fstp    [esp+3Ch+arg_10]
-0x697287: fld     [esp+3Ch+arg_10]
+0x697283: fstp    [esp+3Ch+unknownChildTag]
+0x697287: fld     [esp+3Ch+unknownChildTag]
 0x69728B: call    __CIsqrt
-0x697290: fstp    [esp+3Ch+arg_10]
-0x697294: fld     [esp+3Ch+arg_10]
+0x697290: fstp    [esp+3Ch+unknownChildTag]
+0x697294: fld     [esp+3Ch+unknownChildTag]
 0x697298: mov     ecx, [esi+7Ch]
-0x69729B: fstp    [esp+3Ch+arg_10]
+0x69729B: fstp    [esp+3Ch+unknownChildTag]
 0x69729F: push    0; float
 0x6972A1: fld     dword ptr [esi+5Ch]
 0x6972A4: sub     esp, 0Ch
-0x6972A7: fstp    [esp+4Ch+var_44]; float
-0x6972AB: fld     [esp+4Ch+arg_10]
+0x6972A7: fstp    [esp+4Ch+scale]; float
+0x6972AB: fld     [esp+4Ch+unknownChildTag]
 0x6972AF: fstp    [esp+4Ch+var_48]; float
 0x6972B3: fld     dword ptr ds:0A34BA0h
 0x6972B9: fstp    [esp+4Ch+var_4C]; float
@@ -177,10 +177,10 @@
 0x6972DC: mov     edx, [eax]
 0x6972DE: sub     esp, 8
 0x6972E1: fst     [esp+44h+var_40]; float
-0x6972E5: fstp    [esp+44h+var_44]; float
-0x6972E8: push    0; float
-0x6972EA: push    ebp; int
-0x6972EB: push    esi; int
+0x6972E5: fstp    [esp+44h+scale]; float
+0x6972E8: push    0; localPosZ
+0x6972EA: push    ebp; localPosY
+0x6972EB: push    esi; localPosX
 0x6972EC: sub     esp, 0Ch
 0x6972EF: mov     ecx, esp
 0x6972F1: mov     [ecx], edx
@@ -189,7 +189,7 @@
 0x6972F9: mov     [ecx+4], edx
 0x6972FC: mov     [ecx+8], eax
 0x6972FF: mov     ecx, esi; this
-0x697301: call    TESObjectREFR_GetParentCell
+0x697301: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x697306: push    eax; int
 0x697307: push    edi; int
 0x697308: mov     ecx, ebx
@@ -203,26 +203,26 @@
 0x697326: test    eax, eax
 0x697328: jz      loc_697444
 0x69732E: mov     ecx, [esi+70h]
-0x697331: call    EffectItem_GetArea
+0x697331: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x697336: mov     eax, [esi+74h]
 0x697339: mov     edx, [eax+18h]
 0x69733C: lea     ecx, [eax+18h]
 0x69733F: mov     eax, [edx+14h]
 0x697342: call    eax
 0x697344: mov     ecx, esi; this
-0x697346: mov     [esp+3Ch+arg_10], eax
-0x69734A: call    TESObjectREFR_GetParentCell
+0x697346: mov     [esp+3Ch+unknownChildTag], eax
+0x69734A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x69734F: push    esi; TESObjectREFR *
 0x697350: call    sub_4C9BE0
 0x697355: add     esp, 4
 0x697358: push    3
 0x69735A: push    eax
 0x69735B: mov     ecx, esi; this
-0x69735D: call    TESObjectREFR_GetParentCell
+0x69735D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x697362: mov     ecx, eax
-0x697364: call    sub_441800
+0x697364: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x697369: mov     edx, [esi]
-0x69736B: mov     [esp+3Ch+arg_C], eax
+0x69736B: mov     [esp+3Ch+parentNode], eax
 0x69736F: mov     eax, [edx+154h]
 0x697375: mov     ecx, esi
 0x697377: call    eax
@@ -232,13 +232,13 @@
 0x69737F: mov     eax, [edx+154h]
 0x697385: mov     ecx, esi
 0x697387: call    eax
-0x697389: push    offset dword_B258DC
+0x697389: push    offset stru_B258DC
 0x69738E: lea     ecx, [esp+40h+var_18]
 0x697392: push    ecx
 0x697393: lea     ecx, [eax+30h]
 0x697396: call    sub_7101F0
 0x69739B: jmp     short loc_6973A2
-0x69739D: mov     eax, offset dword_B258DC
+0x69739D: mov     eax, offset stru_B258DC
 0x6973A2: mov     edx, [eax+8]
 0x6973A5: mov     ebp, [eax]
 0x6973A7: mov     ebx, [eax+4]
@@ -254,9 +254,9 @@
 0x6973CA: fld1
 0x6973CC: mov     ecx, [esp+3Ch+arg_0]
 0x6973D0: mov     edx, [esp+3Ch+arg_4]
-0x6973D4: push    0; float
+0x6973D4: push    0; useCachedClone
 0x6973D6: sub     esp, 10h
-0x6973D9: fstp    [esp+50h+var_44]; float
+0x6973D9: fstp    [esp+50h+scale]; scale
 0x6973DD: mov     eax, esp
 0x6973DF: fld     dword ptr ds:0A31E2Ch
 0x6973E5: mov     [eax], ecx
@@ -264,32 +264,32 @@
 0x6973EB: mov     [eax+4], edx
 0x6973EE: mov     edx, [esp+50h+var_1C]
 0x6973F2: mov     [eax+8], ecx
-0x6973F5: mov     ecx, [esp+50h+arg_C]
+0x6973F5: mov     ecx, [esp+50h+parentNode]
 0x6973F9: sub     esp, 0Ch
 0x6973FC: mov     eax, esp
 0x6973FE: mov     [eax], ebp
 0x697400: mov     [eax+4], ebx
 0x697403: mov     [eax+8], edx
-0x697406: mov     eax, [esp+5Ch+arg_10]
-0x69740A: push    eax; float
-0x69740B: push    ecx; int
+0x697406: mov     eax, [esp+5Ch+unknownChildTag]
+0x69740A: push    eax; modelPath
+0x69740B: push    ecx; parentNode
 0x69740C: push    ecx
 0x69740D: mov     ecx, esi; this
-0x69740F: fstp    [esp+68h+var_68]; float
-0x697412: call    TESObjectREFR_GetParentCell
-0x697417: push    eax; int
-0x697418: mov     ecx, edi
-0x69741A: call    sub_5713F0
+0x69740F: fstp    [esp+68h+durationSeconds]; durationSeconds
+0x697412: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x697417: push    eax; parentCell
+0x697418: mov     ecx, edi; self
+0x69741A: call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.
 0x69741F: mov     edi, eax
 0x697421: jmp     short loc_697425
 0x697423: xor     edi, edi
-0x697425: push    edi
-0x697426: mov     ecx, offset ActorProcessManager_ptr
+0x697425: push    edi; effect
+0x697426: mov     ecx, (offset qword_B3BB2C+1D4h); self
 0x69742B: mov     [esp+40h+var_4], 0FFFFFFFFh
-0x697433: call    sub_678D30
+0x697433: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x697438: push    offset aSpecialidle_ar; "SpecialIdle_AreaEffect"
 0x69743D: mov     ecx, edi
-0x69743F: call    sub_570C00
+0x69743F: call    PlaySpecialIdleOnControllerManager; Area effect path starts SpecialIdle_AreaEffect on spawned effect object's controller manager via sub_570C00; no actor KFFZ lookup.
 0x697444: mov     edx, ds:0B33398h
 0x69744A: mov     ecx, [edx+24h]
 0x69744D: test    ecx, ecx
@@ -322,7 +322,7 @@
 0x6974A2: mov     [esp+48h+arg_4], edx
 0x6974A6: fld     [esp+48h+arg_4]
 0x6974AA: mov     [esp+48h+arg_0], ecx
-0x6974AE: fstp    [esp+48h+var_44]; float
+0x6974AE: fstp    [esp+48h+scale]; float
 0x6974B2: mov     ecx, edi
 0x6974B4: fld     [esp+48h+arg_0]
 0x6974B8: fstp    [esp+48h+var_48]; float
@@ -333,7 +333,7 @@
 0x6974C9: mov     ecx, edi; this
 0x6974CB: call    sub_6B73E0
 0x6974D0: push    edi
-0x6974D1: call    FormHeapFree
+0x6974D1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6974D6: add     esp, 4
 0x6974D9: mov     ecx, [esp+3Ch+var_C]
 0x6974DD: mov     large fs:0, ecx
@@ -344,3 +344,15 @@
 0x6974E8: pop     ebx
 0x6974E9: add     esp, 28h
 0x6974EC: retn    18h
+0x9C5A70: mov     eax, [ebp-28h]
+0x9C5A73: push    eax
+0x9C5A74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C5A79: pop     ecx
+0x9C5A7A: retn
+0x9C5A7B: mov     edx, [esp+arg_4]
+0x9C5A7F: lea     eax, [edx-2Ch]
+0x9C5A82: mov     ecx, [edx-30h]
+0x9C5A85: xor     ecx, eax
+0x9C5A87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5A8C: mov     eax, offset stru_AEE1A4
+0x9C5A91: jmp     ___CxxFrameHandler3

@@ -33,11 +33,11 @@
 0x537910: mov     eax, [eax+50h]
 0x537913: add     eax, 0D0h ; 'Ð'
 0x537918: jmp     short loc_53791F
-0x53791A: mov     eax, offset stru_BA7A40
+0x53791A: mov     eax, offset unk_BA7A40
 0x53791F: push    eax
 0x537920: lea     eax, [esp+40h+var_18]
 0x537924: push    eax
-0x537925: call    sub_43F3E0
+0x537925: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x53792A: fld     [esp+44h+var_10]
 0x53792E: fld     st
 0x537930: add     esp, 8
@@ -110,7 +110,7 @@
 0x537A19: push    offset aCwatermedium; "CWaterMedium"
 0x537A1E: mov     ecx, edi
 0x537A20: call    PlaySound???
-0x537A25: mov     ecx, offset unk_B37B48
+0x537A25: mov     ecx, 0B37B48h
 0x537A2A: mov     esi, eax
 0x537A2C: call    GameSetting_GetSafeFloatPointer
 0x537A31: fld     dword ptr [eax]
@@ -128,7 +128,7 @@
 0x537A59: push    offset aCwatersmall; "CWaterSmall"
 0x537A5E: mov     ecx, edi
 0x537A60: call    PlaySound???
-0x537A65: mov     ecx, offset fSplashScale3
+0x537A65: mov     ecx, 0B37B50h
 0x537A6A: mov     esi, eax
 0x537A6C: call    GameSetting_GetSafeFloatPointer
 0x537A71: fld     dword ptr [eax]
@@ -137,13 +137,13 @@
 0x537A79: jz      loc_537BD8
 0x537A7F: fld     [esp+3Ch+arg_4]
 0x537A83: sub     esp, 0Ch
-0x537A86: fst     [esp+48h+var_1C]
+0x537A86: fst     dword ptr [esp+48h+var_20+4]
 0x537A8A: mov     ecx, esi
 0x537A8C: fstp    [esp+48h+var_40]; float
-0x537A90: fld     [esp+48h+var_20]
-0x537A94: fstp    [esp+48h+var_44]; float
+0x537A90: fld     dword ptr [esp+48h+var_20]
+0x537A94: fstp    [esp+48h+scale]; float
 0x537A98: fld     [esp+48h+a2]
-0x537A9C: fstp    [esp+48h+var_48]; float
+0x537A9C: fstp    [esp+48h+unknownChildName+4]; localPosZ
 0x537A9F: call    sub_6B7360
 0x537AA4: push    0
 0x537AA6: mov     ecx, esi
@@ -154,17 +154,17 @@
 0x537AB5: test    ah, 5
 0x537AB8: jp      loc_537BD8
 0x537ABE: mov     ecx, ds:0B333C4h; this
-0x537AC4: call    TESObjectREFR_GetParentCell
+0x537AC4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x537AC9: test    eax, eax
 0x537ACB: jz      loc_537BD8
 0x537AD1: mov     ecx, ds:0B333C4h; this
-0x537AD7: call    TESObjectREFR_GetParentCell
+0x537AD7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x537ADC: mov     ecx, eax; this
 0x537ADE: call    TESObjectCELL__GetWaterForm
 0x537AE3: test    eax, eax
 0x537AE5: jz      loc_537BD8
 0x537AEB: mov     ecx, ds:0B333C4h; this
-0x537AF1: call    TESObjectREFR_GetParentCell
+0x537AF1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x537AF6: mov     ecx, eax; this
 0x537AF8: call    TESObjectCELL__GetWaterForm
 0x537AFD: mov     edx, [eax]
@@ -174,7 +174,7 @@
 0x537B09: test    al, al
 0x537B0B: jnz     loc_537BD8
 0x537B11: mov     ecx, ds:0B333C4h; this
-0x537B17: call    TESObjectREFR_GetParentCell
+0x537B17: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x537B1C: mov     ecx, ds:0B333C4h; TESObjectREFR *
 0x537B22: push    ecx; TESObjectREFR *
 0x537B23: call    sub_4C9BE0
@@ -182,9 +182,9 @@
 0x537B2E: add     esp, 4
 0x537B31: push    3
 0x537B33: push    eax
-0x537B34: call    TESObjectREFR_GetParentCell
+0x537B34: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x537B39: mov     ecx, eax
-0x537B3B: call    sub_441800
+0x537B3B: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x537B40: push    20h ; ' '; Size
 0x537B42: mov     edi, eax
 0x537B44: call    FormHeapAlloc
@@ -196,14 +196,14 @@
 0x537B5C: jz      short loc_537BC3
 0x537B5E: mov     edx, [esp+3Ch+a2]
 0x537B62: fld     [esp+3Ch+var_2C]
-0x537B66: mov     ecx, [esp+3Ch+var_20]
-0x537B6A: push    1; float
+0x537B66: mov     ecx, dword ptr [esp+3Ch+var_20]
+0x537B6A: push    1; useCachedClone
 0x537B6C: sub     esp, 10h
-0x537B6F: fstp    [esp+50h+var_44]; float
+0x537B6F: fstp    [esp+50h+scale]; scale
 0x537B73: mov     eax, esp
 0x537B75: fld1
 0x537B77: mov     [eax], edx
-0x537B79: mov     edx, [esp+50h+var_1C]
+0x537B79: mov     edx, dword ptr [esp+50h+var_20+4]
 0x537B7D: mov     [eax+4], ecx
 0x537B80: mov     ecx, ds:0B258DCh
 0x537B86: mov     [eax+8], edx
@@ -214,22 +214,22 @@
 0x537B96: mov     ecx, ds:0B258E4h
 0x537B9C: mov     [eax+4], edx
 0x537B9F: mov     edx, ds:0B37B38h
-0x537BA5: push    edx; float
-0x537BA6: push    edi; int
+0x537BA5: push    edx; modelPath
+0x537BA6: push    edi; parentNode
 0x537BA7: mov     [eax+8], ecx
 0x537BAA: push    ecx
 0x537BAB: mov     ecx, ds:0B333C4h; this
-0x537BB1: fstp    [esp+68h+var_68]; float
-0x537BB4: call    TESObjectREFR_GetParentCell
-0x537BB9: push    eax; int
-0x537BBA: mov     ecx, esi
-0x537BBC: call    sub_5713F0
+0x537BB1: fstp    [esp+68h+durationSeconds]; durationSeconds
+0x537BB4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
+0x537BB9: push    eax; parentCell
+0x537BBA: mov     ecx, esi; self
+0x537BBC: call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.
 0x537BC1: jmp     short loc_537BC5
 0x537BC3: xor     eax, eax
-0x537BC5: push    eax
-0x537BC6: mov     ecx, offset ActorProcessManager_ptr
+0x537BC5: push    eax; effect
+0x537BC6: mov     ecx, (offset qword_B3BB2C+1D4h); self
 0x537BCB: mov     [esp+40h+var_4], 0FFFFFFFFh
-0x537BD3: call    sub_678D30
+0x537BD3: call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.
 0x537BD8: fld     dword ptr ds:0B37B20h
 0x537BDE: fstp    dword ptr [ebx+14h]
 0x537BE1: mov     ecx, [esp+3Ch+var_C]
@@ -249,3 +249,15 @@
 0x537C06: pop     ebx
 0x537C07: add     esp, 2Ch
 0x537C0A: retn    8
+0x9B9380: mov     eax, [ebp+8]
+0x9B9383: push    eax
+0x9B9384: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B9389: pop     ecx
+0x9B938A: retn
+0x9B938B: mov     edx, [esp+arg_4]
+0x9B938F: lea     eax, [edx-2Ch]
+0x9B9392: mov     ecx, [edx-30h]
+0x9B9395: xor     ecx, eax
+0x9B9397: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B939C: mov     eax, offset stru_AE3718
+0x9B93A1: jmp     ___CxxFrameHandler3

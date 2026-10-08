@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_5F8300",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x5F8300",
+      "0x5F8454"
+    ],
+    [
+      "0x9C2A40",
+      "0x9C2A63"
+    ]
+  ],
+  "chunks_sha256": "603b72d5a2381bab41253f91a53c951abf3e284e9748391e791a76adee64434a",
+  "comment_regular": "Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.",
+  "comment_repeatable": "Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "Actor_RefreshQuiverArrowVisibility",
   "end_ea": "0x5F8454",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_5F8300",
+  "name": "Actor_RefreshQuiverArrowVisibility",
   "segment": ".text",
   "sha256": "ba3b050a832376dbc48dfae2251dd7cd767fb73375e9f9048df4173355a5477f",
   "size": 340,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5F8300",
-  "type": "void __thiscall(TESObjectREFR *this, int, int)",
-  "xrefs_from_count": 128,
+  "total_chunk_size": 375,
+  "type": "void __thiscall(Actor *this, ActorAnimData *animData, NiNode *quiverNode)",
+  "xrefs_from_count": 139,
   "xrefs_to_count": 6
 }

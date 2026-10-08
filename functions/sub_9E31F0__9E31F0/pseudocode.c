@@ -1,4 +1,4 @@
 int sub_9E31F0()
 {
-  return atexit(sub_A1BAA0);
+  return atexit(sub_A1BAA0); /*0x9e31fb*/
 }

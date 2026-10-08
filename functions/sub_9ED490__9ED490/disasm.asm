@@ -2,7 +2,7 @@
 0x9ED496: push    ecx
 0x9ED497: fstp    [esp+4+var_4]; float
 0x9ED49A: push    offset aFsplashsoundhe; "fSplashSoundHeavy"
-0x9ED49F: mov     ecx, offset flt_B37B08
+0x9ED49F: mov     ecx, 0B37B08h
 0x9ED4A4: call    GameSetting_ConstrAndReg_float
 0x9ED4A9: push    offset sub_A1FD30; void (__cdecl *)()
 0x9ED4AE: call    _atexit

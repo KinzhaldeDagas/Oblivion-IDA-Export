@@ -1,1 +1,1 @@
-PEB32
+typedef _PEB32 PEB32;

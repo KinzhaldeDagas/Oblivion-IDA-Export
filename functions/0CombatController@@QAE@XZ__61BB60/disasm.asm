@@ -101,13 +101,13 @@
 0x61BCE8: call    TESPackage_LocationData_SetReference
 0x61BCED: push    edi
 0x61BCEE: mov     ecx, esi
-0x61BCF0: call    TESPackage_SetLocation
+0x61BCF0: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x61BCF5: cmp     edi, ebx
 0x61BCF7: jz      short loc_61BD09
 0x61BCF9: mov     ecx, edi
 0x61BCFB: call    TESPackage_LocationData_destr
 0x61BD00: push    edi
-0x61BD01: call    FormHeapFree
+0x61BD01: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61BD06: add     esp, 4
 0x61BD09: push    0Ch; Size
 0x61BD0B: call    FormHeapAlloc
@@ -117,26 +117,26 @@
 0x61BD19: mov     byte ptr [esp+24h+var_4], 2
 0x61BD1E: jz      short loc_61BD2B
 0x61BD20: mov     ecx, eax
-0x61BD22: call    TESPackage_TargetData_constr
+0x61BD22: call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.
 0x61BD27: mov     edi, eax
 0x61BD29: jmp     short loc_61BD2D
 0x61BD2B: xor     edi, edi
 0x61BD2D: push    edi
 0x61BD2E: mov     ecx, esi
 0x61BD30: mov     byte ptr [esp+28h+var_4], bl
-0x61BD34: call    TESPackage_SetTarget
+0x61BD34: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x61BD39: mov     ecx, [esi+28h]
 0x61BD3C: push    ebx
-0x61BD3D: call    TESPackage_TargetData_SetType
+0x61BD3D: call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.
 0x61BD42: mov     ecx, [esi+28h]
 0x61BD45: push    ebp
-0x61BD46: call    TeSPackage_TargetData_SetTargetREFR
+0x61BD46: call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.
 0x61BD4B: cmp     edi, ebx
 0x61BD4D: jz      short loc_61BD5F
-0x61BD4F: mov     ecx, edi; void *
-0x61BD51: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x61BD4F: mov     ecx, edi; this
+0x61BD51: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x61BD56: push    edi
-0x61BD57: call    FormHeapFree
+0x61BD57: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61BD5C: add     esp, 4
 0x61BD5F: fldz
 0x61BD61: push    ecx
@@ -150,7 +150,7 @@
 0x61BD7D: mov     [esi+4Bh], bl
 0x61BD80: fld1
 0x61BD82: mov     [esi+4Ch], bl
-0x61BD85: fstp    [esp+28h+var_28]; float
+0x61BD85: fstp    [esp+28h+baseDistance]; baseDistance
 0x61BD88: mov     [esi+4Dh], bl
 0x61BD8B: mov     [esi+4Eh], bl
 0x61BD8E: mov     [esi+4Fh], bl
@@ -158,8 +158,8 @@
 0x61BD98: mov     [esi+58h], bl
 0x61BD9B: mov     [esi+59h], bl
 0x61BD9E: mov     [esi+0C4h], bl
-0x61BDA4: call    Calc_GetCombatDistance
-0x61BDA9: fstp    [esp+28h+var_28]; float
+0x61BDA4: call    Calc_GetCombatDistance; Converts a base reach/distance value to world combat distance using the Oblivion combat-distance game-setting multiplier.
+0x61BDA9: fstp    [esp+28h+baseDistance]; float
 0x61BDAC: mov     ecx, esi
 0x61BDAE: call    sub_612EA0
 0x61BDB3: mov     eax, 3
@@ -245,7 +245,7 @@
 0x61BF4F: mov     eax, [esi+160h]
 0x61BF55: mov     edi, [eax+4]
 0x61BF58: push    eax
-0x61BF59: call    FormHeapFree
+0x61BF59: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61BF5E: add     esp, 4
 0x61BF61: cmp     edi, ebx
 0x61BF63: mov     [esi+160h], edi
@@ -263,7 +263,7 @@
 0x61BF98: fstp    dword ptr [esi+188h]
 0x61BF9E: mov     [esi+174h], bl
 0x61BFA4: mov     [esi+17Dh], bl
-0x61BFAA: fst     [esp+2Ch+var_28]; float
+0x61BFAA: fst     [esp+2Ch+baseDistance]; float
 0x61BFAE: mov     [esi+17Eh], bl
 0x61BFB4: fstp    [esp+2Ch+var_2C]; float
 0x61BFB7: push    ecx; float
@@ -274,7 +274,7 @@
 0x61BFC2: mov     [esi+17Ch], bl
 0x61BFC8: mov     [esi+15Bh], bl
 0x61BFCE: mov     [esi+1A8h], ebx
-0x61BFD4: call    sub_616190
+0x61BFD4: call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x61BFD9: mov     dword ptr [esi+18h], 0Ch
 0x61BFE0: xor     eax, eax
 0x61BFE2: mov     ecx, 9
@@ -358,3 +358,22 @@
 0x61C128: pop     ebx
 0x61C129: add     esp, 10h
 0x61C12C: retn    10h
+0x9C3370: mov     ecx, [ebp-10h]; this
+0x9C3373: jmp     ??1TESPackage@@UAE@XZ; TESPackage::~TESPackage(void)
+0x9C3378: mov     eax, [ebp+4]
+0x9C337B: push    eax
+0x9C337C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3381: pop     ecx
+0x9C3382: retn
+0x9C3383: mov     eax, [ebp+4]
+0x9C3386: push    eax
+0x9C3387: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C338C: pop     ecx
+0x9C338D: retn
+0x9C338E: mov     edx, [esp+arg_4]
+0x9C3392: lea     eax, [edx-14h]
+0x9C3395: mov     ecx, [edx-18h]
+0x9C3398: xor     ecx, eax
+0x9C339A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C339F: mov     eax, offset stru_AEBFA8
+0x9C33A4: jmp     ___CxxFrameHandler3

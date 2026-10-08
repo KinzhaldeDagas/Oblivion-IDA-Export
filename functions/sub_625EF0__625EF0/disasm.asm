@@ -1,14 +1,14 @@
-0x625EF0: push    ecx
+0x625EF0: push    ecx; Modern DialoguePackage save size includes responseTimeRemaining, optional waitingForLip (save version >=0x6A), activeSpeaker/speaker/target/startingTopic FormIDs, UInt16 serialized-conversation size, the full Conversation payload, and package-level UInt16 current-item/current-response indices.
 0x625EF1: push    ebx
 0x625EF2: push    esi
 0x625EF3: push    edi
 0x625EF4: mov     edi, ecx
-0x625EF6: call    sub_567D20
+0x625EF6: call    TESPackage_GetSaveSize
 0x625EFB: mov     ecx, ds:0B33B00h
 0x625F01: movzx   esi, ax
 0x625F04: mov     [esp+10h+var_4], esi
 0x625F08: movzx   ebx, si
-0x625F0B: call    sub_45A170
+0x625F0B: call    TESSaveLoadGame_UseSaveGameBlocks
 0x625F10: test    al, al
 0x625F12: jz      short loc_625F17
 0x625F14: add     esi, 6
@@ -17,12 +17,12 @@
 0x625F1F: cmp     byte ptr [eax+7Ch], 6Ah ; 'j'
 0x625F23: jb      short loc_625F28
 0x625F25: add     esi, 1
-0x625F28: mov     ecx, [edi+50h]
+0x625F28: mov     ecx, [edi+50h]; this
 0x625F2B: add     esi, 12h
 0x625F2E: test    ecx, ecx
 0x625F30: mov     [esp+10h+var_4], esi
 0x625F34: jz      short loc_625F47
-0x625F36: call    sub_6B75B0
+0x625F36: call    Conversation__GetSaveSize; Conversation save-size calculation includes every DialogueItem plus the saved current-item index.
 0x625F3B: add     ax, 4
 0x625F3F: mov     di, si
 0x625F42: add     di, ax
@@ -36,7 +36,7 @@
 0x625F63: jz      short loc_625FAC
 0x625F65: mov     edx, [esi]
 0x625F67: push    edx; a1
-0x625F68: call    TESForm_LookupByFormID
+0x625F68: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x625F6D: mov     ecx, [esi+5]
 0x625F70: mov     edx, [eax]
 0x625F72: add     esp, 4

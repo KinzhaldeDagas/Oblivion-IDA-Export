@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6068D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; RadiantAI: AlarmPackage constructor candidate with actor/ref argument. Hooked by RadiantAIRestored only for opt-in logging.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x606907",
-    "line": "mov     dword ptr [esi], offset ??_7AlarmPackage@@6B@; const AlarmPackage::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7AlarmPackage@@6B@; Verified complete TESPackage persistence table extentEC; tail DC/E0/E4/E8 is no-argument size/save/load/init-load virtuals. Derived vtable identity from constructor stores and RTTI names. Prior incompleteDC type corrected.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -232,5 +232,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2EA0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2EA3",
+    "line": "jmp     ??1TESPackage@@UAE@XZ; TESPackage::~TESPackage(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2EA8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2EAC",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2EAF",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2EB2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2EB4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2EB9",
+    "line": "mov     eax, offset stru_AEBBC0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2EBE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

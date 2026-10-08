@@ -1,0 +1,4 @@
+struct OB_CSpeedTreeRT_SCollisionObjects_010201A0
+{
+OB_stVector_CollisionObject_010201A0 objects;
+};

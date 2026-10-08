@@ -1,48 +1,48 @@
 char __cdecl sub_4F8E70(_BYTE *a1, void *a2, int a3, double *a4)
 {
-  _BYTE *v7; // esi
+  _BYTE *v4; // esi
+  void *v5; // eax
+  CHAR *v6; // eax
+  const char *v7; // esi
   void *v8; // eax
-  CHAR *v9; // eax
-  const char *v10; // esi
-  void *v11; // eax
-  const char *v12; // eax
+  const char *v9; // eax
 
-  *a4 = 0.0;
-  v7 = 0;
-  if ( a1 )
+  *a4 = 0.0; /*0x4f8e77*/
+  v4 = 0; /*0x4f8e7f*/
+  if ( a1 ) /*0x4f8e83*/
   {
-    if ( (*(unsigned __int8 (__thiscall **)(_BYTE *))(*(_DWORD *)a1 + 0x190))(a1) )
-      v7 = a1;
+    if ( (*(unsigned __int8 (__thiscall **)(_BYTE *))(*(_DWORD *)a1 + 0x190))(a1) ) /*0x4f8e8f*/
+      v4 = a1; /*0x4f8e95*/
   }
-  *a4 = (double)sub_420ED0((ExtraDataList *)(v7 + 0x44), (int)a2);
-  if ( IsConsoleMode )
+  *a4 = (double)ExtraDataList_GetFriendHitCount((ExtraDataList *)(v4 + 0x44), (int)a2); /*0x4f8eac*/
+  if ( MEMORY[0xB361AC] ) /*0x4f8eae*/
   {
-    v8 = OblivionDynamicCast(
-           v7,
+    v5 = OblivionDynamicCast( /*0x4f8ec6*/
+           v4,
            0,
            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
            &TESFullName `RTTI Type Descriptor',
            0);
-    if ( v8 )
+    if ( v5 ) /*0x4f8ed0*/
     {
-      v9 = *((CHAR **)v8 + 1);
-      if ( !v9 )
-        v9 = EmptyString;
-      v10 = v9;
+      v6 = *((CHAR **)v5 + 1); /*0x4f8ed2*/
+      if ( !v6 ) /*0x4f8ed7*/
+        v6 = EmptyString; /*0x4f8ed9*/
+      v7 = v6; /*0x4f8ede*/
     }
     else
     {
-      v10 = EmptyString;
+      v7 = EmptyString; /*0x4f8ee2*/
     }
-    v11 = OblivionDynamicCast(
-            a2,
-            0,
-            (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-            &TESFullName `RTTI Type Descriptor',
-            0);
-    if ( !v11 || (v12 = *((const char **)v11 + 1)) == 0 )
-      v12 = EmptyString;
-    Interface_ConsolePrint("%s has hit %s %0.2f times", v12, v10, *a4);
+    v8 = OblivionDynamicCast( /*0x4f8ef6*/
+           a2,
+           0,
+           (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+           &TESFullName `RTTI Type Descriptor',
+           0);
+    if ( !v8 || (v9 = *((const char **)v8 + 1)) == 0 ) /*0x4f8f07*/
+      v9 = EmptyString; /*0x4f8f09*/
+    Interface_ConsolePrint("%s has hit %s %0.2f times", v9, v7, *a4); /*0x4f8f1d*/
   }
-  return 1;
+  return 1; /*0x4f8f25*/
 }

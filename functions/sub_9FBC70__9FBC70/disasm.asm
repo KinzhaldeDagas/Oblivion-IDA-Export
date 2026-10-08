@@ -3,7 +3,7 @@
 0x9FBC79: fstp    [esp+8+var_8]
 0x9FBC7C: call    sub_57D390
 0x9FBC81: fsubr   [esp+8+var_8]
-0x9FBC84: call    Double_To_SInt32
-0x9FBC89: mov     dword_B3A704, eax
+0x9FBC84: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x9FBC89: mov     dword ptr unk_B3A704, eax
 0x9FBC8E: add     esp, 8
 0x9FBC91: retn

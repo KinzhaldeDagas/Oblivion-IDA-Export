@@ -74,7 +74,7 @@
 0x488902: fld     dword ptr ds:0A30634h
 0x488908: fstp    [esp+28h+var_14]
 0x48890C: fld     [esp+28h+var_14]
-0x488910: call    Double_To_SInt32
+0x488910: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x488915: mov     ebp, [esp+28h+arg_4]
 0x488919: mov     ecx, [ebp+4]
 0x48891C: test    ecx, ecx
@@ -116,11 +116,11 @@
 0x48898B: cmp     byte ptr [esp+28h+arg_C], 0
 0x488990: jz      loc_488A87
 0x488996: mov     eax, [edi+8]
-0x488999: push    0
-0x48899B: push    1
-0x48899D: push    eax
-0x48899E: mov     ecx, ebp
-0x4889A0: call    ContainerExtraData_GetEntryForForm
+0x488999: push    0; referenceFormIDOrZero
+0x48899B: push    1; unusedAlwaysOne
+0x48899D: push    eax; form
+0x48899E: mov     ecx, ebp; this
+0x4889A0: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x4889A5: mov     ecx, [eax]
 0x4889A7: push    esi
 0x4889A8: call    BSSimpleList_Remove
@@ -159,7 +159,7 @@
 0x488A08: push    ecx
 0x488A09: mov     ecx, ebp
 0x488A0B: fstp    [esp+2Ch+var_2C]; float
-0x488A0E: call    sub_41EE90
+0x488A0E: call    ExtraDataList_SetCharge; Updates or creates ExtraCharge type 0x2E with the supplied float.
 0x488A13: push    ebp
 0x488A14: mov     ecx, esi
 0x488A16: call    BSSimpleList_PushFront
@@ -209,3 +209,20 @@
 0x488A96: pop     ebx
 0x488A97: add     esp, 14h
 0x488A9A: retn    10h
+0x9AFBE0: mov     eax, [ebp+10h]
+0x9AFBE3: push    eax
+0x9AFBE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFBE9: pop     ecx
+0x9AFBEA: retn
+0x9AFBEB: mov     eax, [ebp+10h]
+0x9AFBEE: push    eax
+0x9AFBEF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFBF4: pop     ecx
+0x9AFBF5: retn
+0x9AFBF6: mov     edx, [esp+arg_4]
+0x9AFBFA: lea     eax, [edx-18h]
+0x9AFBFD: mov     ecx, [edx-1Ch]
+0x9AFC00: xor     ecx, eax
+0x9AFC02: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFC07: mov     eax, offset stru_ADC0D8
+0x9AFC0C: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x43C710",
+      "0x43C815"
+    ]
+  ],
+  "chunks_sha256": "79dd35c1b9a683ac55ca896e0639b577462ee23c4b988e69d1dfcc066a64c661",
+  "comment_regular": "Verified QueuedTreeModel vtable QueueMe override (+0x20). If the tree's icon texture name exists, it builds the TESIconTree default-path + texture name and schedules/reuses it as a child texture dependency, then hands off to the queued-model base path. Fallout's named QueuedTreeModel::QueueMe follows the same icon-texture then base-model queue pattern.",
+  "comment_repeatable": "Verified QueuedTreeModel vtable QueueMe override (+0x20). If the tree's icon texture name exists, it builds the TESIconTree default-path + texture name and schedules/reuses it as a child texture dependency, then hands off to the queued-model base path. Fallout's named QueuedTreeModel::QueueMe follows the same icon-texture then base-model queue pattern.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_43C710",
+  "display_name": "QueuedTreeModel_QueueMe",
   "end_ea": "0x43C815",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_43C710",
+  "name": "QueuedTreeModel_QueueMe",
   "segment": ".text",
   "sha256": "79dd35c1b9a683ac55ca896e0639b577462ee23c4b988e69d1dfcc066a64c661",
   "size": 261,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x43C710",
-  "type": "int __thiscall(volatile LONG *this)",
+  "total_chunk_size": 261,
+  "type": "int __thiscall(QueuedTreeModel_OblivionLayout *this)",
   "xrefs_from_count": 104,
   "xrefs_to_count": 1
 }

@@ -37,7 +37,7 @@
 0x5E5013: jnz     short loc_5E501E
 0x5E5015: push    1
 0x5E5017: mov     ecx, esi
-0x5E5019: call    sub_419F10
+0x5E5019: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x5E501E: mov     edi, [edi+4]
 0x5E5021: test    edi, edi
 0x5E5023: jnz     short loc_5E4FF0
@@ -72,7 +72,7 @@
 0x5E506B: jnz     short loc_5E5076
 0x5E506D: push    1
 0x5E506F: mov     ecx, esi
-0x5E5071: call    sub_419F10
+0x5E5071: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x5E5076: mov     edi, [edi+4]
 0x5E5079: test    edi, edi
 0x5E507B: jnz     short loc_5E5048
@@ -123,7 +123,7 @@
 0x5E50F3: jnz     short loc_5E50FE
 0x5E50F5: push    1
 0x5E50F7: mov     ecx, esi
-0x5E50F9: call    sub_419F10
+0x5E50F9: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x5E50FE: mov     edi, [edi+4]
 0x5E5101: test    edi, edi
 0x5E5103: jnz     short loc_5E50D0
@@ -175,13 +175,13 @@
 0x5E517D: jz      short loc_5E5189
 0x5E517F: push    1
 0x5E5181: lea     ecx, [eax+18h]
-0x5E5184: call    sub_419F10
+0x5E5184: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x5E5189: test    esi, esi
 0x5E518B: jz      short loc_5E519D
 0x5E518D: mov     ecx, esi
 0x5E518F: call    ContainerEntryExtraData_DestroyDataTable
 0x5E5194: push    esi
-0x5E5195: call    FormHeapFree
+0x5E5195: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5E519A: add     esp, 4
 0x5E519D: add     edi, 4
 0x5E51A0: cmp     edi, 28h ; '('

@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x528A3F",
-    "line": "mov     [esp+13Ch+var_120], ebx",
+    "line": "mov     [esp+13Ch+npc], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x528A64",
-    "line": "mov     ecx, [esp+13Ch+arg_4]",
+    "line": "mov     ecx, [esp+13Ch+arg_4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x528A6B",
-    "line": "push    0",
+    "line": "push    0; nodeIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x528A6D",
-    "line": "call    sub_477EC0",
+    "line": "call    ActorSkinInfo_GetCachedNode; Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x528B8E",
-    "line": "call    sub_7165B0",
+    "line": "call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x528BC8",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,43 +811,43 @@
   },
   {
     "ea": "0x528BD1",
-    "line": "lea     ecx, [esp+13Ch+var_D0]",
+    "line": "lea     ecx, [esp+13Ch+parameters]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x528BD5",
-    "line": "call    FaceGenHeadParameters_Ctor",
+    "line": "call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x528BDA",
-    "line": "mov     eax, [esp+13Ch+var_120]",
+    "line": "mov     eax, [esp+13Ch+npc]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x528BDE",
-    "line": "mov     ecx, [eax+0E8h]",
+    "line": "mov     ecx, [eax+0E8h]; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x528BE4",
-    "line": "lea     edx, [esp+13Ch+var_D0]",
+    "line": "lea     edx, [esp+13Ch+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x528BE8",
-    "line": "push    edx",
+    "line": "push    edx; outState",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528BE9",
-    "line": "push    eax",
+    "line": "push    eax; npc",
     "mnemonic": "push",
     "size": 1
   },
@@ -859,31 +859,31 @@
   },
   {
     "ea": "0x528BF5",
-    "line": "call    TESRace_GetFaceGenHeadParameters",
+    "line": "call    TESRace_BuildFaceGenRenderState; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x528BFA",
-    "line": "lea     eax, [esp+13Ch+var_D0]",
+    "line": "lea     eax, [esp+13Ch+parameters]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x528BFE",
-    "line": "push    eax",
+    "line": "push    eax; state",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528BFF",
-    "line": "push    ebp",
+    "line": "push    ebp; faceNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x528C00",
-    "line": "call    BSFaceGen_DoSomethingWithFaceGenNode",
+    "line": "call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x528C08",
-    "line": "lea     ecx, [esp+13Ch+var_D0]",
+    "line": "lea     ecx, [esp+13Ch+parameters]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x528C17",
-    "line": "call    FaceGenHeadParameters_Dtor",
+    "line": "call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x528CAE",
-    "line": "call    sub_7165B0",
+    "line": "call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x528D14",
-    "line": "mov     ebx, [esp+140h+var_120]",
+    "line": "mov     ebx, [esp+140h+npc]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x528D38",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x528D47",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1630,5 +1630,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B8310",
+    "line": "lea     ecx, [ebp-0D0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8316",
+    "line": "jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B831B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B831F",
+    "line": "lea     eax, [edx-12Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B8325",
+    "line": "mov     ecx, [edx-130h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B832B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B832D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8332",
+    "line": "mov     eax, offset stru_AE2A10",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B8337",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

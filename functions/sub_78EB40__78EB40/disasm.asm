@@ -1,4 +1,4 @@
-0x78EB40: push    esi
+0x78EB40: push    esi; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.
 0x78EB41: mov     esi, ecx
 0x78EB43: mov     ecx, [esi+8]
 0x78EB46: test    ecx, ecx

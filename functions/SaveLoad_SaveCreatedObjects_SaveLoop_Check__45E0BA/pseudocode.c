@@ -1,4 +1,4 @@
-int __userpurge SaveLoad_SaveCreatedObjects_::SaveLoop_Check@<eax>(
+void __userpurge SaveLoad_SaveCreatedObjects_::SaveLoop_Check(
         _DWORD *a1@<ebx>,
         int a2,
         int a3,
@@ -15,8 +15,8 @@ int __userpurge SaveLoad_SaveCreatedObjects_::SaveLoop_Check@<eax>(
         int a14,
         int a15)
 {
-  if ( a6 )
-    return SaveLoad_SaveCreatedObjects_::SaveLoop_Body(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15);
+  if ( a6 ) /*0x45e0bf*/
+    SaveLoad_SaveCreatedObjects_::SaveLoop_Body(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15); /*0x45e0bf*/
   else
-    return SaveLoad_SaveCreatedObjects_::Done(a2);
+    SaveLoad_SaveCreatedObjects_::Done(a2); /*0x45e0c0*/
 }

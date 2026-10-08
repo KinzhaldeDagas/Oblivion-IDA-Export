@@ -4,7 +4,7 @@
 0x7219F7: push    ecx
 0x7219F8: fst     dword ptr [esi+0E0h]
 0x7219FE: fstp    [esp+8+var_8]; float
-0x721A01: call    sub_70A190
+0x721A01: call    sub_70A190; NiNode selected downward: flags+18 choose controllers/world update; child flags bit1 and bit4 choose synchronous vfunc+64/+68 at 70A215/70A210. Child bounds merge before RET 4. No queue/dispatch in this body. Full-call observer may fence same-thread descendants, not asynchronous work.
 0x721A06: mov     eax, [esi]
 0x721A08: mov     edx, [eax+78h]
 0x721A0B: mov     ecx, esi

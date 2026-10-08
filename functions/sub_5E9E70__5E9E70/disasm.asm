@@ -33,9 +33,9 @@
 0x5E9EDB: call    Actor_IsNPC
 0x5E9EE0: test    al, al
 0x5E9EE2: jz      loc_5E9F76
-0x5E9EE8: mov     ecx, esi; this
+0x5E9EE8: mov     ecx, esi; reference
 0x5E9EEA: mov     ebx, esi
-0x5E9EEC: call    TESObjectREFR_GetOwner
+0x5E9EEC: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x5E9EF1: mov     edx, [esi]
 0x5E9EF3: mov     edi, eax
 0x5E9EF5: mov     eax, [edx+170h]
@@ -58,13 +58,13 @@
 0x5E9F22: cmp     al, 23h ; '#'
 0x5E9F24: jnz     short loc_5E9F33
 0x5E9F26: push    edi
-0x5E9F27: mov     ecx, offset ActorProcessManager_ptr
+0x5E9F27: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5E9F2C: call    sub_675220
 0x5E9F31: jmp     short loc_5E9F42
 0x5E9F33: cmp     al, 6
 0x5E9F35: jnz     short loc_5E9F44
 0x5E9F37: push    edi
-0x5E9F38: mov     ecx, offset ActorProcessManager_ptr
+0x5E9F38: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5E9F3D: call    sub_675290
 0x5E9F42: mov     ebx, eax
 0x5E9F44: mov     ecx, [esi+7Ch]
@@ -163,7 +163,7 @@
 0x5EA03C: call    edx
 0x5EA03E: push    2; newDeadState
 0x5EA040: mov     ecx, esi; this
-0x5EA042: call    Actor_HandleDeathSTate????
+0x5EA042: call    Actor_HandleDeathState
 0x5EA047: pop     edi
 0x5EA048: pop     esi
 0x5EA049: pop     ebx

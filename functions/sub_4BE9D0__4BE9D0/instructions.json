@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BE9D0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified: saves Climate WLS(T) weather list from +0x30, two textures at +0x38, model at +0x18, and 6-byte climate data at +0x50.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4BE9E2",
-    "line": "call    sub_4EEB30",
+    "line": "call    OblivionTESWeatherList_SaveChunk; Verified: serializes each Oblivion weather entry as TESWeather FormID plus uint32 selectionWeight at +4; shared by climate WLS(T) and region RDWT.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4BEA2B",
-    "line": "call    TESForm_PutFormRecordChunkData",
+    "line": "call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.",
     "mnemonic": "call",
     "size": 5
   },

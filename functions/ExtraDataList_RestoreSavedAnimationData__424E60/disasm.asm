@@ -11,16 +11,16 @@
 0x424E7A: mov     edi, [esp+0Ch+arg_0]
 0x424E7E: jz      short loc_424EDD
 0x424E80: push    offset aExtradatalis_3; lpCriticalSection
-0x424E85: mov     ecx, offset stru_B33B80
+0x424E85: mov     ecx, offset unk_B33B80
 0x424E8A: call    NiEnterCriticalSection
 0x424E8F: movzx   eax, byte ptr [esi+0Ch]
-0x424E93: mov     ecx, SaveLoad_CurrentSavegame
+0x424E93: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424E99: push    eax
 0x424E9A: call    sub_45A140
 0x424E9F: mov     ecx, [esi+10h]
 0x424EA2: mov     edx, [edi+0Ch]
 0x424EA5: push    ecx
-0x424EA6: mov     ecx, SaveLoad_CurrentSavegame
+0x424EA6: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424EAC: push    edx
 0x424EAD: push    edi
 0x424EAE: call    sub_458ED0
@@ -29,22 +29,22 @@
 0x424EB7: mov     ecx, offset FormHeap
 0x424EBC: call    MemoryHeap_Free_checked
 0x424EC1: mov     dword ptr [esi+10h], 0
-0x424EC8: mov     eax, SaveLoad_CurrentSavegame
+0x424EC8: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424ECD: mov     cl, [eax+71h]
 0x424ED0: mov     [eax+7Ch], cl
-0x424ED3: mov     ecx, offset stru_B33B80; lpCriticalSection
+0x424ED3: mov     ecx, offset unk_B33B80; lpCriticalSection
 0x424ED8: call    NiLeaveCriticalSection_0
 0x424EDD: cmp     dword ptr [esi+14h], 0
 0x424EE1: jz      short loc_424F3D
 0x424EE3: push    offset aExtradatalis_3; lpCriticalSection
-0x424EE8: mov     ecx, offset stru_B33B80
+0x424EE8: mov     ecx, offset unk_B33B80
 0x424EED: call    NiEnterCriticalSection
 0x424EF2: movzx   edx, byte ptr [esi+0Ch]
-0x424EF6: mov     ecx, SaveLoad_CurrentSavegame
+0x424EF6: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424EFC: push    edx
 0x424EFD: call    sub_45A140
 0x424F02: mov     eax, [esi+14h]
-0x424F05: mov     ecx, SaveLoad_CurrentSavegame
+0x424F05: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424F0B: push    eax
 0x424F0C: push    edi
 0x424F0D: call    sub_459080
@@ -53,9 +53,9 @@
 0x424F16: mov     ecx, offset FormHeap
 0x424F1B: call    MemoryHeap_Free_checked
 0x424F20: mov     dword ptr [esi+14h], 0
-0x424F27: mov     eax, SaveLoad_CurrentSavegame
+0x424F27: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424F2C: movzx   edx, byte ptr [eax+71h]
-0x424F30: mov     ecx, offset stru_B33B80; lpCriticalSection
+0x424F30: mov     ecx, offset unk_B33B80; lpCriticalSection
 0x424F35: mov     [eax+7Ch], dl
 0x424F38: call    NiLeaveCriticalSection_0
 0x424F3D: cmp     dword ptr [esi+18h], 0

@@ -152,7 +152,7 @@
   {
     "from_ea": "0x497EBC",
     "to_ea": "0x7B7650",
-    "to_name": "InitBSShaderAccumulator",
+    "to_name": "BSShaderAccumulator_GetOrCreateGlobal",
     "type": 17
   },
   {
@@ -253,15 +253,15 @@
   },
   {
     "from_ea": "0x497F04",
-    "to_ea": "0x410B00",
-    "to_name": "sub_410B00",
-    "type": 17
-  },
-  {
-    "from_ea": "0x497F04",
     "to_ea": "0x497F09",
     "to_name": "",
     "type": 21
+  },
+  {
+    "from_ea": "0x497F04",
+    "to_ea": "0x410B00",
+    "to_name": "sub_410B00",
+    "type": 17
   },
   {
     "from_ea": "0x497F09",
@@ -277,13 +277,19 @@
   },
   {
     "from_ea": "0x497F0E",
+    "to_ea": "0x497F13",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x497F0E",
     "to_ea": "0x405B00",
     "to_name": "sub_405B00",
     "type": 17
   },
   {
-    "from_ea": "0x497F0E",
-    "to_ea": "0x497F13",
+    "from_ea": "0x497F13",
+    "to_ea": "0x497F18",
     "to_name": "",
     "type": 21
   },
@@ -292,12 +298,6 @@
     "to_ea": "0x405B40",
     "to_name": "Interface3dScenegraph_Destructor",
     "type": 17
-  },
-  {
-    "from_ea": "0x497F13",
-    "to_ea": "0x497F18",
-    "to_name": "",
-    "type": 21
   },
   {
     "from_ea": "0x497F18",
@@ -464,7 +464,7 @@
   {
     "from_ea": "0x497F59",
     "to_ea": "0x76B090",
-    "to_name": "sub_76B090",
+    "to_name": "NiDX9Renderer_Recreate",
     "type": 17
   },
   {
@@ -769,15 +769,15 @@
   },
   {
     "from_ea": "0x497FE1",
-    "to_ea": "0x497B20",
-    "to_name": "sub_497B20",
-    "type": 17
-  },
-  {
-    "from_ea": "0x497FE1",
     "to_ea": "0x497FE6",
     "to_name": "",
     "type": 21
+  },
+  {
+    "from_ea": "0x497FE1",
+    "to_ea": "0x497B20",
+    "to_name": "sub_497B20",
+    "type": 17
   },
   {
     "from_ea": "0x497FE6",
@@ -805,15 +805,15 @@
   },
   {
     "from_ea": "0x497FF0",
-    "to_ea": "0x401F00",
-    "to_name": "FormHeapAlloc",
-    "type": 17
-  },
-  {
-    "from_ea": "0x497FF0",
     "to_ea": "0x497FF5",
     "to_name": "",
     "type": 21
+  },
+  {
+    "from_ea": "0x497FF0",
+    "to_ea": "0x401F00",
+    "to_name": "FormHeapAlloc",
+    "type": 17
   },
   {
     "from_ea": "0x497FF5",
@@ -901,19 +901,25 @@
   },
   {
     "from_ea": "0x49801E",
-    "to_ea": "0x405710",
-    "to_name": "NiDX9Renderer::SetShaderAccumulator",
-    "type": 17
-  },
-  {
-    "from_ea": "0x49801E",
     "to_ea": "0x498023",
     "to_name": "",
     "type": 21
   },
   {
+    "from_ea": "0x49801E",
+    "to_ea": "0x405710",
+    "to_name": "NiDX9Renderer::SetShaderAccumulator",
+    "type": 17
+  },
+  {
     "from_ea": "0x498023",
     "to_ea": "0x498029",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x498029",
+    "to_ea": "0x49802E",
     "to_name": "",
     "type": 21
   },
@@ -924,8 +930,8 @@
     "type": 17
   },
   {
-    "from_ea": "0x498029",
-    "to_ea": "0x49802E",
+    "from_ea": "0x49802E",
+    "to_ea": "0x498033",
     "to_name": "",
     "type": 21
   },
@@ -936,8 +942,8 @@
     "type": 17
   },
   {
-    "from_ea": "0x49802E",
-    "to_ea": "0x498033",
+    "from_ea": "0x498033",
+    "to_ea": "0x498038",
     "to_name": "",
     "type": 21
   },
@@ -946,12 +952,6 @@
     "to_ea": "0x405C30",
     "to_name": "Interface3dScenegraph_Create",
     "type": 17
-  },
-  {
-    "from_ea": "0x498033",
-    "to_ea": "0x498038",
-    "to_name": "",
-    "type": 21
   },
   {
     "from_ea": "0x498038",
@@ -998,7 +998,7 @@
   {
     "from_ea": "0x498046",
     "to_ea": "0x5B6040",
-    "to_name": "sub_5B6040",
+    "to_name": "MainMenu_Open",
     "type": 17
   },
   {
@@ -1042,5 +1042,89 @@
     "to_ea": "0x49805D",
     "to_name": "",
     "type": 21
+  },
+  {
+    "from_ea": "0x9B03E0",
+    "to_ea": "0x9B03E3",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03E3",
+    "to_ea": "0x9B03E4",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03E4",
+    "to_ea": "0x9B03E9",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03E4",
+    "to_ea": "0x401F20",
+    "to_name": "FormHeapFree",
+    "type": 17
+  },
+  {
+    "from_ea": "0x9B03E9",
+    "to_ea": "0x9B03EA",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03EB",
+    "to_ea": "0x9B03EF",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03EF",
+    "to_ea": "0x9B03F2",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03F2",
+    "to_ea": "0x9B03F5",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03F5",
+    "to_ea": "0x9B03F7",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03F7",
+    "to_ea": "0x9B03FC",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03F7",
+    "to_ea": "0x9811E2",
+    "to_name": "@__security_check_cookie@4",
+    "type": 17
+  },
+  {
+    "from_ea": "0x9B03FC",
+    "to_ea": "0x9B0401",
+    "to_name": "",
+    "type": 21
+  },
+  {
+    "from_ea": "0x9B03FC",
+    "to_ea": "0xADC730",
+    "to_name": "stru_ADC730",
+    "type": 1
+  },
+  {
+    "from_ea": "0x9B0401",
+    "to_ea": "0x980EA4",
+    "to_name": "___CxxFrameHandler3",
+    "type": 19
   }
 ]

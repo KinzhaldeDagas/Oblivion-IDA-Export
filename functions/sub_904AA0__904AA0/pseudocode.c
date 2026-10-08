@@ -4,8 +4,8 @@ int __thiscall sub_904AA0(_DWORD **this, int a2, __m128 **a3, int a4, int a5)
   char v7; // [esp+4h] [ebp-8h]
   int v8; // [esp+8h] [ebp-4h]
 
-  v8 = a5;
-  v7 = 0;
-  v6 = &off_A9B4F0;
-  return sub_9046E0(this, a3, a2, a4, (int)&v6);
+  v8 = a5; /*0x904aa7*/
+  v7 = 0; /*0x904abe*/
+  v6 = &off_A9B4F0; /*0x904ac3*/
+  return sub_9046E0(this, a3, a2, a4, (int)&v6); /*0x904ad0*/
 }

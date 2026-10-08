@@ -1,19 +1,32 @@
 {
-  "callees_count": 28,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x552530",
+      "0x55262D"
+    ]
+  ],
+  "chunks_sha256": "8ef6b23ec3c8578f2ad83bb9fb91868001b4fe016fb7df823f69e649b6aae159",
+  "comment_regular": "Dimension-checked element-wise FaceGen matrix addition: outSum = this + right.",
+  "comment_repeatable": "Dimension-checked element-wise FaceGen matrix addition: outSum = this + right.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_552530",
+  "display_name": "FaceGenMatrix_Add",
   "end_ea": "0x55262D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_552530",
+  "name": "FaceGenMatrix_Add",
   "segment": ".text",
   "sha256": "8ef6b23ec3c8578f2ad83bb9fb91868001b4fe016fb7df823f69e649b6aae159",
   "size": 253,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x552530",
-  "type": "_DWORD *__thiscall(int *this, _DWORD *, _DWORD *)",
+  "total_chunk_size": 253,
+  "type": "FaceGenMatrix *__thiscall(const FaceGenMatrix *this, FaceGenMatrix *outSum, const FaceGenMatrix *right)",
   "xrefs_from_count": 112,
   "xrefs_to_count": 1
 }

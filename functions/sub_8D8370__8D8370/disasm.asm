@@ -10,7 +10,6 @@
 0x8D8381: mov     edi, [esp+10h+arg_8]
 0x8D8385: lea     ebp, [eax+1]
 0x8D8388: jmp     short loc_8D8390
-0x8D838A: align 10h
 0x8D8390: mov     ecx, [esi]
 0x8D8392: movsx   eax, byte ptr [ecx+5]
 0x8D8396: mov     edx, [esi+4]

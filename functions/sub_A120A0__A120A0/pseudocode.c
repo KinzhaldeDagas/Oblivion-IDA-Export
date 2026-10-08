@@ -1,4 +1,4 @@
-BSStringT *sub_A120A0()
+NiRTTI *sub_A120A0()
 {
-  return sub_70E220(&stru_BA7A14, "bhkBlendCollisionObjectAddRotation", (int)dword_BA7A20);
+  return NiRTTI_Constructor(&stru_BA7A14, "bhkBlendCollisionObjectAddRotation", &MEMORY[0xBA7A20]); /*0xa120b4*/
 }

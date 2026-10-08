@@ -13,11 +13,11 @@
 0x4B28FF: add     esp, 14h
 0x4B2902: test    edi, edi
 0x4B2904: jz      short loc_4B2964
-0x4B2906: mov     esi, [esp+0Ch+arg_0]
+0x4B2906: mov     esi, [esp+0Ch+reference]
 0x4B290A: test    esi, esi
 0x4B290C: jz      short loc_4B2964
 0x4B290E: lea     ecx, [esi+44h]
-0x4B2911: call    ExtraDataList_GetExtraCount
+0x4B2911: call    ExtraDataList_GetExtraCount; Pickup obtains ExtraCount from the activated world reference and transfers that count through the activating Actor's pickup virtual.
 0x4B2916: cmp     byte ptr [ebx+4], 19h
 0x4B291A: movsx   eax, ax
 0x4B291D: mov     [esp+0Ch+arg_4], eax
@@ -45,7 +45,7 @@
 0x4B2956: push    eax
 0x4B2957: push    esi
 0x4B2958: mov     ecx, edi
-0x4B295A: call    edx
+0x4B295A: call    edx; Transfer activated reference/count to Actor inventory. Recovery is ordinary base-object pickup, not restoration of the shooter's previously consumed stack entry.
 0x4B295C: pop     edi
 0x4B295D: pop     esi
 0x4B295E: mov     al, 1

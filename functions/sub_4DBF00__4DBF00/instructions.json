@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4DBF0E",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,19 +61,19 @@
   },
   {
     "ea": "0x4DBF17",
-    "line": "push    esi",
+    "line": "push    esi; markerReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DBF18",
-    "line": "lea     ecx, [edi+44h]",
+    "line": "lea     ecx, [edi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4DBF1B",
-    "line": "call    sub_4205C0",
+    "line": "call    ExtraDataList_SetRandomTeleportMarker; Verified ExtraDataList random-marker setter: null removes ExtraData type 0x43; non-null updates or allocates an ExtraRandomTeleportMarker and stores the TESObjectREFR* marker at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },

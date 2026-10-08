@@ -10,8 +10,8 @@
 0x6E0A99: jmp     short loc_6E0AC9
 0x6E0A9B: fld     [esp+1Ch+arg_0]
 0x6E0A9F: push    ecx
-0x6E0AA0: fstp    [esp+20h+var_20]; float
-0x6E0AA3: call    sub_6C36B0
+0x6E0AA0: fstp    [esp+20h+applicationTime]; applicationTime
+0x6E0AA3: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x6E0AA8: test    al, al
 0x6E0AAA: jz      short loc_6E0AC9
 0x6E0AAC: mov     ecx, [esi+3Ch]
@@ -98,7 +98,7 @@
 0x6E0B86: jz      short loc_6E0BEE
 0x6E0B88: push    edi
 0x6E0B89: push    eax
-0x6E0B8A: push    offset dword_B3FD14
+0x6E0B8A: push    offset stru_B3FD14
 0x6E0B8F: call    NiRTTI_Cast
 0x6E0B94: add     esp, 8
 0x6E0B97: test    byte ptr [esi+40h], 1
@@ -108,17 +108,17 @@
 0x6E0BA1: lea     eax, [esp+20h+var_18]
 0x6E0BA5: push    eax
 0x6E0BA6: call    sub_4820F0
-0x6E0BAB: push    offset dword_B3FA90
+0x6E0BAB: push    offset stru_B3FA90
 0x6E0BB0: mov     ecx, edi
 0x6E0BB2: call    sub_482120
-0x6E0BB7: push    offset dword_B3FA90
+0x6E0BB7: push    offset stru_B3FA90
 0x6E0BBC: mov     ecx, edi
 0x6E0BBE: call    sub_4B0BC0
 0x6E0BC3: pop     edi
 0x6E0BC4: pop     esi
 0x6E0BC5: add     esp, 18h
 0x6E0BC8: retn    4
-0x6E0BCB: push    offset dword_B3FA90
+0x6E0BCB: push    offset stru_B3FA90
 0x6E0BD0: call    sub_4820F0
 0x6E0BD5: lea     ecx, [esp+20h+var_18]
 0x6E0BD9: push    ecx

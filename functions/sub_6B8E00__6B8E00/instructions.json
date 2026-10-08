@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B8E00",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion MenuTopic allocation is 0x28 bytes at its native creator. Fallout counterpart FillTopicList allocates 0x2C bytes before MenuTopic constructor (x4y6:0x825E8740); keep these version-specific class layouts separate.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6B8E37",
-    "line": "mov     ebp, [esp+24h+arg_4]",
+    "line": "mov     ebp, [esp+24h+topic]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6B8E58",
-    "line": "jnz     short loc_6B8E63",
+    "line": "jnz     short loc_6B8E63; Stock FormID 000000D7 marks this MenuTopic as INFOGENERAL / visible label Rumors.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x6B8E66",
-    "line": "mov     eax, [esp+24h+arg_0]",
+    "line": "mov     eax, [esp+24h+ownerQuest]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B8E6A",
-    "line": "mov     [esp+24h+arg_4], eax",
+    "line": "mov     [esp+24h+topic], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B8E6E",
-    "line": "mov     eax, [esp+24h+arg_8]",
+    "line": "mov     eax, [esp+24h+info]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x6B8E76",
-    "line": "mov     [esp+24h+arg_0], edi",
+    "line": "mov     [esp+24h+ownerQuest], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x6B8E80",
-    "line": "cmp     [eax+22h], bl",
+    "line": "cmp     [eax+22h], bl; Snapshot !originalInfo->spoken into MenuTopic.infoNotSpoken before any low-disposition InfoRefusal substitution.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x6B8E89",
-    "line": "cmp     [esp+24h+arg_10], bl",
+    "line": "cmp     [esp+24h+substituteInfoRefusal], bl",
     "mnemonic": "cmp",
     "size": 4
   },
   {
     "ea": "0x6B8E8D",
-    "line": "mov     [esi+21h], cl",
+    "line": "mov     [esi+21h], cl; infoNotSpoken is a presentation/cache byte initialized from !TESTopicInfo.spoken. It is distinct from the authoritative INFO-global spoken byte.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -301,31 +301,31 @@
   },
   {
     "ea": "0x6B8E9C",
-    "line": "jnz     short loc_6B8ED4",
+    "line": "jnz     short loc_6B8ED4; Disposition-refusal substitution applies to ordinary TOPIC menu construction only. If selection returned a low-disposition fallback and the original INFO is not itself flagged InfoRefusal, replace its runtime INFO/topic/quest with the stock FormID 118 InfoRefusal match while retaining the original topic's display label.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x6B8E9E",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8E9F",
-    "line": "push    6",
+    "line": "push    6; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6B8EA1",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; MenuTopic fallback construction requests Miscellaneous bucket index 0: fixed FormID 00000118 InfoRefusal.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6B8EA6",
-    "line": "mov     ecx, [esp+2Ch+arg_C]",
+    "line": "mov     ecx, [esp+2Ch+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,25 +349,25 @@
   },
   {
     "ea": "0x6B8EB4",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8EB5",
-    "line": "push    ecx",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8EB6",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B8EB8",
-    "line": "call    sub_530020",
+    "line": "call    TESTopic__GetStrictMatchingInfo; Strict InfoRefusal lookup rejects another low-disposition fallback. When a strict stock InfoRefusal INFO exists, its responses, links, result, owner quest, and topic identity drive the MenuTopic; only the visible label came from the requested topic.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,37 +385,37 @@
   },
   {
     "ea": "0x6B8EC1",
-    "line": "push    eax",
+    "line": "push    eax; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8EC2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B8EC4",
-    "line": "mov     [esi+18h], eax",
+    "line": "mov     [esi+18h], eax; Replace runtime INFO/topic/owner quest with stock InfoRefusal, but do not recompute infoNotSpoken. The visible new marker still reflects the originally requested INFO; InfoRefusal RunResult also does not set spoken.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6B8EC7",
-    "line": "mov     [esp+28h+arg_0], edi",
+    "line": "mov     [esp+28h+ownerQuest], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B8ECB",
-    "line": "call    sub_52F570",
+    "line": "call    TESTopic__GetOwnerQuest",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6B8ED0",
-    "line": "mov     [esp+24h+arg_4], eax",
+    "line": "mov     [esp+24h+topic], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x6B8EF1",
-    "line": "mov     eax, [edx+30h]",
+    "line": "mov     eax, [edx+30h]; TESTopicInfo+0x30 points to linked-topic lists; linkedTo is the second list at +0x08 and supplies menu choices/conversation continuations.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6B8F0A",
-    "line": "mov     eax, [esp+24h+arg_C]",
+    "line": "mov     eax, [esp+24h+speaker]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -553,55 +553,55 @@
   },
   {
     "ea": "0x6B8F11",
-    "line": "mov     edi, [esp+24h+arg_0]",
+    "line": "mov     edi, [esp+24h+ownerQuest]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B8F15",
-    "line": "mov     edx, [esp+24h+arg_4]",
+    "line": "mov     edx, [esp+24h+topic]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6B8F19",
-    "line": "push    eax",
+    "line": "push    eax; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8F1A",
-    "line": "push    ecx",
+    "line": "push    ecx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8F1B",
-    "line": "push    edi",
+    "line": "push    edi; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8F1C",
-    "line": "push    edx",
+    "line": "push    edx; ownerQuest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8F1D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B8F1F",
-    "line": "call    sub_6B8CF0",
+    "line": "call    MenuTopic__FillResponseList; Builds runtime DialogueResponses from a cloned TESResponse list. Each TESResponse is reconstructed from the authoritative INFO record's 16-byte TRDT followed by NAM1 text. Empty text is skipped; INFOGENERAL/Rumors keeps only the first non-empty response.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6B8F24",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+topic]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -676,5 +676,59 @@
     "line": "retn    14h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6F90",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F93",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F98",
+    "line": "mov     edx, [esp+topic]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C6F9C",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F9F",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6FA2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6FA4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6FA9",
+    "line": "mov     eax, offset stru_AEF420",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6FAE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

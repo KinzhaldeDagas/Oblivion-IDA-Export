@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x9FED40",
-    "line": "push    offset ReanimateEffect_Make",
+    "line": "push    offset ReanimateEffect_Make; Verified (Oblivion): ActiveEffect_Register_REAN_Factory passes FourCC REAN (0x4E414552) and ReanimateEffect_Make to ActiveEffect_Base_AddCreationFunc, adding this code-to-factory mapping to NiTMap_AECreatorFuncs.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9FED45",
-    "line": "push    4E414552h",
+    "line": "push    4E414552h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x9FED4A",
-    "line": "call    ActiveEffect_Base_AddCreationFunc",
+    "line": "call    ActiveEffect_Base_AddCreationFunc; Verified (Oblivion): inserts an effectCode/factory pair into NiTMap_AECreatorFuncs. The 23 ActiveEffect_Register_* wrappers call this function, but their runtime invocation path is not established by current xrefs/initializer table evidence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x9FED52",
-    "line": "mov     byte_B3C0DF, al",
+    "line": "mov     byte ptr unk_B3C0DF, al",
     "mnemonic": "mov",
     "size": 5
   },

@@ -1,1 +1,1 @@
-IOleInPlaceUIWindow_0
+typedef IOleInPlaceUIWindow IOleInPlaceUIWindow_0;

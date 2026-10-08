@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43FB40",
-    "line": "mov     eax, ds:0B06A2Ch",
+    "line": "mov     eax, ds:0B06A2Ch; Exterior-grid shadow source-light activation. For every uGridsToLoad cell at process level 6, enumerate its references and register each ordinary attached ExtraLight, then reconcile receivers for every ShadowSceneNode full-list source. This does not enumerate statics and never calls ShadowSceneNodeAddShadowCaster.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x43FB64",
-    "line": "mov     ecx, [eax]",
+    "line": "mov     ecx, [eax]; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x43FB6F",
-    "line": "push    1",
+    "line": "push    1; registerLights",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43FB71",
-    "line": "call    sub_4CB670",
+    "line": "call    TESObjectCELL_RegisterOrUnregisterAttachedLights; Register ordinary attached light sources for every reference in this process-level-6 exterior cell; this is source-light registration, not static-caster admission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x43FB85",
-    "line": "push    1",
+    "line": "push    1; retainLightLists",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43FB87",
-    "line": "push    1",
+    "line": "push    1; reconcileReceivers",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x43FB93",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43FB95",
-    "line": "call    sub_7C7EB0",
+    "line": "call    ShadowSceneNode_ReconcileAllSourceLightsAndOptionallyTeardown; After all loaded exterior grid cells are processed, reconcile every full-list source light and retain both light lists (arguments true, true).",
     "mnemonic": "call",
     "size": 5
   },

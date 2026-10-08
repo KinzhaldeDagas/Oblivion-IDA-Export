@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x675D00",
+      "0x675D46"
+    ]
+  ],
+  "chunks_sha256": "3abc995cedf4dbaff6db96fe2ae1a5468e69ceeddec0702ee07b6875676df78c",
+  "comment_regular": "Verified: inverse crime-list lookup at manager+28+4*crimeType by16-bit index; returns pointer or NULL with diagnostic. No FormID resolution. Used by AlarmPackage_LoadGame; missing entries are skipped.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_675D00",
+  "display_name": "ActorProcessManager_GetCrimeByIndex",
   "end_ea": "0x675D46",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_675D00",
+  "name": "ActorProcessManager_GetCrimeByIndex",
   "segment": ".text",
   "sha256": "3abc995cedf4dbaff6db96fe2ae1a5468e69ceeddec0702ee07b6875676df78c",
   "size": 70,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x675D00",
-  "type": "int __thiscall(_DWORD *this, int, __int16)",
+  "total_chunk_size": 70,
+  "type": "Crime *__thiscall(ActorProcessManager *self, unsigned int crimeType, unsigned __int16 index)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 1
 }

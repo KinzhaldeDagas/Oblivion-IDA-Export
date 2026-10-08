@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x775280",
-    "line": "mov     eax, [ecx+138h]",
+    "line": "mov     eax, [ecx+138h]; Select a compatible depth/stencil format from cached DX9 device capabilities. For a surface request above 16 depth bits, normalize the selection target to 24 depth bits and 8 stencil bits.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x7752CD",
-    "line": "call    sub_7750F0",
+    "line": "call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7752D2",
-    "line": "retn    10h",
+    "line": "retn    10h; For the DX9 surface case, rank supported formats against 24 depth bits and 8 stencil bits.",
     "mnemonic": "retn",
     "size": 3
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7752EB",
-    "line": "call    sub_7750F0",
+    "line": "call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x775304",
-    "line": "call    sub_7750F0",
+    "line": "call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x775317",
-    "line": "call    sub_7750F0",
+    "line": "call    NiDX9FormatCaps_SelectClosestDepthStencilFormat; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.",
     "mnemonic": "call",
     "size": 5
   },

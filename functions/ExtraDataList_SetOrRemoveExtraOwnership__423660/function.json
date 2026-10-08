@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 19,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 28,
+  "chunks": [
+    [
+      "0x423660",
+      "0x42371E"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "aadc5104ff152c2f5fbd6125182d652a4ff248adc02fef414d08561987a1cdde",
+  "comment_regular": "Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
+  "comment_repeatable": "Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "ExtraDataList::SetOrRemoveExtraOwnership",
   "end_ea": "0x42371E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "ExtraDataList::SetOrRemoveExtraOwnership",
   "segment": ".text",
   "sha256": "1b1696b55941c4bc0d48adf0b91cce188a6c83f56942e7205dd150d0674d85fe",
   "size": 190,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x423660",
-  "type": "void __thiscall(ExtraDataList *this, TESForm *a2)",
-  "xrefs_from_count": 72,
+  "total_chunk_size": 228,
+  "type": "void __thiscall(ExtraDataList *this, TESForm *owner)",
+  "xrefs_from_count": 86,
   "xrefs_to_count": 28
 }

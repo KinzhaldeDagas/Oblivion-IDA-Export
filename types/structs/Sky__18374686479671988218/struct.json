@@ -1,232 +1,360 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "Sky",
+  "definition": "struct Sky\n{\nvoid **vtbl;\nNiNode *nodeSkyRoot;\nNiNode *nodeMoonsRoot;\nTESClimate *firstClimate; ///< Verified: climate chosen from destination cell/worldspace; Sky_SetClimateAndRefreshChildren assigns it.\nTESWeather *firstWeather; ///< Verified: active Sky firstWeather; weather update installs region/climate result here.\nTESWeather *secondWeather; ///< Verified: previous weather during transition; cleared when transition completes or fast change occurs.\nTESWeather *weather018; ///< Verified: cached candidate selected from firstClimate weatherList before region override path.\nTESWeather *weatherOverride; ///< Verified: explicit weather override used when present.\nAtmosphere *atmosphere;\nStars *stars;\nSun *sun;\nClouds *clouds;\nMoon *masserMoon;\nMoon *secundaMoon;\nPrecipitation *precipitation;\nUInt32 unk03C[30];\nfloat unk0B4;\nfloat unk0B8;\nfloat unk0BC;\nfloat windSpeed;\nfloat unk0C4;\nfloat unk0C8;\nfloat unk0CC;\nfloat unk0D0;\nfloat unk0D4;\nfloat weatherPercent; ///< Verified: normalized transition fraction used by weather blending; 1.0 when no secondWeather.\nUInt32 unk0DC;\nUInt32 unk0E0;\nfloat unk0E4;\nUInt32 unk0E8;\nUInt32 unk0EC;\nfloat unk0F0;\nfloat unk0F4;\nUInt32 unk0F8;\nUInt32 Flags0FC; ///< Verified: Sky runtime flags; bit 0 selection pending, bit 3 weatherPercent smoothing, bit 4 fast/forced weather transition among observed uses.\nUInt8 unk100;\nUInt8 unk101[3];\n}\n",
   "id": 18374686479671988218,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nodeSkyRoot",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "nodeMoonsRoot",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: climate chosen from destination cell/worldspace; Sky_SetClimateAndRefreshChildren assigns it.",
       "name": "firstClimate",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "TESClimate *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: active Sky firstWeather; weather update installs region/climate result here.",
       "name": "firstWeather",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "TESWeather *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: previous weather during transition; cleared when transition completes or fast change occurs.",
       "name": "secondWeather",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "TESWeather *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: cached candidate selected from firstClimate weatherList before region override path.",
       "name": "weather018",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "TESWeather *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: explicit weather override used when present.",
       "name": "weatherOverride",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "TESWeather *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "atmosphere",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "Atmosphere *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stars",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "Stars *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sun",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "Sun *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clouds",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "Clouds *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "masserMoon",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "Moon *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "secundaMoon",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "Moon *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "precipitation",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "Precipitation *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk03C",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 120
+      "offset_hex": "0x3C",
+      "size": 120,
+      "type": "UInt32[30]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0B4",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0B8",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0BC",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "windSpeed",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0C4",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0C8",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0CC",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0D0",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0D4",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: normalized transition fraction used by weather blending; 1.0 when no secondWeather.",
       "name": "weatherPercent",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0DC",
       "offset": 220,
-      "offset_hex": "0xdc",
-      "size": 4
+      "offset_hex": "0xDC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0E0",
       "offset": 224,
-      "offset_hex": "0xe0",
-      "size": 4
+      "offset_hex": "0xE0",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0E4",
       "offset": 228,
-      "offset_hex": "0xe4",
-      "size": 4
+      "offset_hex": "0xE4",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0E8",
       "offset": 232,
-      "offset_hex": "0xe8",
-      "size": 4
+      "offset_hex": "0xE8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0EC",
       "offset": 236,
-      "offset_hex": "0xec",
-      "size": 4
+      "offset_hex": "0xEC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0F0",
       "offset": 240,
-      "offset_hex": "0xf0",
-      "size": 4
+      "offset_hex": "0xF0",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0F4",
       "offset": 244,
-      "offset_hex": "0xf4",
-      "size": 4
+      "offset_hex": "0xF4",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk0F8",
       "offset": 248,
-      "offset_hex": "0xf8",
-      "size": 4
+      "offset_hex": "0xF8",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: Sky runtime flags; bit 0 selection pending, bit 3 weatherPercent smoothing, bit 4 fast/forced weather transition among observed uses.",
       "name": "Flags0FC",
       "offset": 252,
-      "offset_hex": "0xfc",
-      "size": 4
+      "offset_hex": "0xFC",
+      "size": 4,
+      "type": "UInt32"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk100",
       "offset": 256,
       "offset_hex": "0x100",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk101",
       "offset": 257,
       "offset_hex": "0x101",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     }
   ],
   "name": "Sky",
+  "ordinal": 486,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 260
 }

@@ -1,4 +1,4 @@
-0x69B99D: cmp     [esp+arg_10], 0
+0x69B99D: cmp     byte ptr [esp+arg_10], 0
 0x69B9A2: jz      short MagicCaster_ApplyActiveMagicItem___UnkCleanup?
 0x69B9A4: mov     ebx, [esp+arg_14]
 0x69B9A8: test    ebx, ebx
@@ -31,7 +31,7 @@
 0x69B9E3: fstp    [esp+4+var_4]
 0x69B9E6: push    1
 0x69B9E8: mov     ecx, esi
-0x69B9EA: add     edi, 39Ch
+0x69B9EA: add     edi, 39Ch; Advance the caster/player vtable pointer to Player_ModExperience (+0x39C) before resolving the effect school.
 0x69B9F0: call    eax
 0x69B9F2: mov     ecx, eax
 0x69B9F4: add     ecx, 0Ch
@@ -39,4 +39,4 @@
 0x69B9FC: mov     edx, [edi]
 0x69B9FE: push    eax
 0x69B9FF: mov     ecx, ebx
-0x69BA01: call    edx
+0x69BA01: call    edx; Eligible active magic-item application: resolved school AV, useValue1, identity scale (0.0).

@@ -174,12 +174,6 @@
     "size": 2
   },
   {
-    "ea": "0x4C8279",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x4C8280",
     "line": "mov     eax, [esp+ecx*4+1B1C4h+var_1B1AC]",
     "mnemonic": "mov",
@@ -552,12 +546,6 @@
     "size": 2
   },
   {
-    "ea": "0x4C833D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x4C8340",
     "line": "xor     esi, esi",
     "mnemonic": "xor",
@@ -589,7 +577,7 @@
   },
   {
     "ea": "0x4C834D",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +637,7 @@
   },
   {
     "ea": "0x4C836E",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +661,7 @@
   },
   {
     "ea": "0x4C837C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +685,7 @@
   },
   {
     "ea": "0x4C838A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +859,7 @@
   },
   {
     "ea": "0x4C83F0",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -934,12 +922,6 @@
     "line": "jmp     short loc_4C8420",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4C841D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4C8420",

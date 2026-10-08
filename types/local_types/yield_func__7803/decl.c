@@ -1,1 +1,1 @@
-yield_func
+typedef void (*yield_func)(void);

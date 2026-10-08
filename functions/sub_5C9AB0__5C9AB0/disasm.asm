@@ -33,7 +33,7 @@
 0x5C9B17: push    0FB4h
 0x5C9B1C: mov     ecx, esi
 0x5C9B1E: call    Tile_GetFloat
-0x5C9B23: call    Double_To_SInt32
+0x5C9B23: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C9B28: push    eax
 0x5C9B29: mov     ecx, ebx
 0x5C9B2B: call    sub_5C6390

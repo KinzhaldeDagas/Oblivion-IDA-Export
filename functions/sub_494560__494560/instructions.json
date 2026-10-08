@@ -12,32 +12,20 @@
     "size": 2
   },
   {
-    "ea": "0x494564",
-    "line": "db 8Dh, 0A4h, 24h, 4 dup(0)",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x49456B",
     "line": "jmp     short loc_494570",
     "mnemonic": "jmp",
     "size": 2
   },
   {
-    "ea": "0x49456D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x494570",
-    "line": "mov     cl, byte ptr ds:word_B3F280[eax]",
+    "line": "mov     cl, byte ptr ds:unk_B3F280[eax]",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x494576",
-    "line": "mov     ds:byte_B34C80[eax], cl",
+    "line": "mov     [eax+0B34C80h], cl",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,7 +49,7 @@
   },
   {
     "ea": "0x494583",
-    "line": "mov     eax, offset byte_B34C80",
+    "line": "mov     eax, 0B34C80h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -76,12 +64,6 @@
     "line": "jmp     short loc_494590",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x49458D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x494590",
@@ -181,7 +163,7 @@
   },
   {
     "ea": "0x4945CF",
-    "line": "mov     eax, offset byte_B34C80",
+    "line": "mov     eax, 0B34C80h",
     "mnemonic": "mov",
     "size": 5
   },

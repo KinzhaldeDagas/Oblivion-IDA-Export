@@ -25,7 +25,7 @@
 0x760439: add     esp, 4
 0x76043C: cmp     eax, edi
 0x76043E: jz      short loc_760453
-0x760440: push    offset NiD3DPass_NiD3DPass
+0x760440: push    offset NiD3DPass_NiD3DPass; DeferredRendering: NiD3DPass ctor authoritatively defines pass layout: name +0x04, stages +0x20, render-state group +0x30, PS map/file/entry/target/shader +0x34..0x44, VS map/file/entry/target/shader +0x48..0x58, SoftwareVP +0x5C.
 0x760445: push    esi
 0x760446: lea     edi, [eax+4]
 0x760449: push    64h ; 'd'

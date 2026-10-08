@@ -1,4 +1,4 @@
-0x4E55E0: sub     esp, 1Ch
+0x4E55E0: sub     esp, 1Ch; Verified PGRI index use: the record's first u16 selects the TESPathGridPoint in pointArray, while its indexedPosition at +4 is used to select the nearest eligible point in the owning cell.
 0x4E55E3: push    ebp
 0x4E55E4: push    edi
 0x4E55E5: xor     edi, edi
@@ -6,7 +6,7 @@
 0x4E55E9: cmp     [ebp+24h], edi
 0x4E55EC: mov     [esp+24h+var_1C], edi
 0x4E55F0: jz      loc_4E571E
-0x4E55F6: mov     eax, [esp+24h+arg_0]
+0x4E55F6: mov     eax, [esp+24h+position]
 0x4E55FA: fld     dword ptr [eax]
 0x4E55FC: push    esi
 0x4E55FD: fstp    [esp+28h+var_14]
@@ -36,7 +36,6 @@
 0x4E5653: jz      loc_4E5713
 0x4E5659: push    ebx
 0x4E565A: jmp     short loc_4E5664
-0x4E565C: align 10h
 0x4E5660: mov     edi, [esp+2Ch+var_1C]
 0x4E5664: cmp     dword ptr [esi+4], 0
 0x4E5668: jnz     short loc_4E5673
@@ -49,11 +48,11 @@
 0x4E567E: mov     ebx, [edx+eax*4]
 0x4E5681: test    ebx, ebx
 0x4E5683: jz      short loc_4E56EE
-0x4E5685: mov     ecx, ebx
-0x4E5687: call    sub_67ED70
+0x4E5685: mov     ecx, ebx; this
+0x4E5687: call    PathGraphNode_IsLinkedPointsDisabled; Verified returns PathGrid point flag 0x20, which is the linked-points-disabled state: SetLinkedPointsEnabled stores the inverse of its enabled argument, save/load persists flagged indices, searches skip flagged nodes, and renderer marks them wireframe.
 0x4E568C: test    al, al
 0x4E568E: jnz     short loc_4E56EE
-0x4E5690: mov     eax, [esp+2Ch+arg_0]
+0x4E5690: mov     eax, [esp+2Ch+position]
 0x4E5694: fld     dword ptr [edi+4]
 0x4E5697: fsub    dword ptr [eax]
 0x4E5699: fstp    [esp+2Ch+var_C]

@@ -1,4 +1,4 @@
-0x4031E0: mov     edx, dword ptr [esp+a2]
+0x4031E0: mov     edx, dword ptr [esp+a2]; TES4 authoritative mouse query modes mirror keyboard for buttons; mouse wheel pseudo-buttons 8/9 return wheel up/down.
 0x4031E4: push    edi
 0x4031E5: xor     edi, edi
 0x4031E7: cmp     edx, 8

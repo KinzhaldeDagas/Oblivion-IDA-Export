@@ -1,5 +1,5 @@
-0x4EEB10: mov     eax, [esp+arg_0]
-0x4EEB14: mov     ecx, [esp+arg_4]
+0x4EEB10: mov     eax, [esp+left]; Verified: sorts entries ascending by selectionWeight. The same field is consumed by Oblivion's weighted random weather selector.
+0x4EEB14: mov     ecx, [esp+right]
 0x4EEB18: mov     eax, [eax+4]
 0x4EEB1B: mov     ecx, [ecx+4]
 0x4EEB1E: cmp     eax, ecx

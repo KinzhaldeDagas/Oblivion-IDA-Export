@@ -24,7 +24,7 @@
 0x633951: push    1; float
 0x633953: mov     ecx, esi; this
 0x633955: mov     edi, eax
-0x633957: call    TESObjectREFR_GetParentCell
+0x633957: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63395C: mov     ecx, [edi]
 0x63395E: mov     edx, [edi+4]
 0x633961: push    eax; int
@@ -37,7 +37,7 @@
 0x633973: mov     [eax+8], ecx
 0x633976: push    edx; int
 0x633977: mov     ecx, esi
-0x633979: call    sub_5E2E20
+0x633979: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x63397E: mov     eax, [esi]
 0x633980: mov     edx, [eax+1CCh]
 0x633986: lea     ecx, [esp+3Ch+var_C]
@@ -100,7 +100,7 @@
 0x633A36: fstp    [esp+3Ch+var_8]
 0x633A3A: mov     edx, [esp+3Ch+var_8]
 0x633A3E: fld     [esp+3Ch+var_1C]
-0x633A42: mov     [esp+3Ch+var_2C], edx
+0x633A42: mov     dword ptr [esp+3Ch+var_2C], edx
 0x633A46: fadd    [esp+3Ch+var_10]
 0x633A4A: fstp    [esp+3Ch+var_4]
 0x633A4E: mov     eax, [esp+3Ch+var_4]
@@ -127,33 +127,33 @@
 0x633A93: mov     [esp+3Ch+var_30], edx
 0x633A97: mov     ecx, [eax+4]
 0x633A9A: push    0; int
-0x633A9C: mov     [esp+40h+var_2C], ecx
+0x633A9C: mov     dword ptr [esp+40h+var_2C], ecx
 0x633AA0: mov     edx, [eax+8]
 0x633AA3: push    1; float
 0x633AA5: push    0; float
 0x633AA7: mov     ecx, esi; this
-0x633AA9: mov     [esp+48h+var_28], edx
-0x633AAD: call    TESObjectREFR_GetParentCell
+0x633AA9: mov     dword ptr [esp+48h+var_2C+4], edx
+0x633AAD: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x633AB2: mov     ecx, [esp+48h+var_30]
-0x633AB6: mov     edx, [esp+48h+var_2C]
+0x633AB6: mov     edx, dword ptr [esp+48h+var_2C]
 0x633ABA: push    eax; int
 0x633ABB: sub     esp, 0Ch
 0x633ABE: mov     eax, esp
 0x633AC0: mov     [eax], ecx
-0x633AC2: mov     ecx, [esp+58h+var_28]
+0x633AC2: mov     ecx, dword ptr [esp+58h+var_2C+4]
 0x633AC6: mov     [eax+4], edx
 0x633AC9: lea     edx, [esp+58h+var_C]
 0x633ACD: mov     [eax+8], ecx
 0x633AD0: push    edx; int
 0x633AD1: mov     ecx, esi
-0x633AD3: call    sub_5E2E20
+0x633AD3: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x633AD8: mov     ecx, [eax]
 0x633ADA: mov     [esp+3Ch+var_30], ecx
 0x633ADE: mov     edx, [eax+4]
-0x633AE1: mov     [esp+3Ch+var_2C], edx
+0x633AE1: mov     dword ptr [esp+3Ch+var_2C], edx
 0x633AE5: mov     eax, [eax+8]
 0x633AE8: mov     edx, [esi]
-0x633AEA: mov     [esp+3Ch+var_28], eax
+0x633AEA: mov     dword ptr [esp+3Ch+var_2C+4], eax
 0x633AEE: mov     eax, [edx+174h]
 0x633AF4: mov     ecx, esi
 0x633AF6: call    eax
@@ -171,12 +171,12 @@
 0x633B17: mov     ecx, [eax]
 0x633B19: mov     [esp+3Ch+var_30], ecx
 0x633B1D: mov     edx, [eax+4]
-0x633B20: mov     [esp+3Ch+var_2C], edx
+0x633B20: mov     dword ptr [esp+3Ch+var_2C], edx
 0x633B24: mov     eax, [eax+8]
-0x633B27: mov     [esp+3Ch+var_28], eax
+0x633B27: mov     dword ptr [esp+3Ch+var_2C+4], eax
 0x633B2B: mov     ecx, [esp+3Ch+var_30]
-0x633B2F: mov     edx, [esp+3Ch+var_2C]
-0x633B33: mov     eax, [esp+3Ch+var_28]
+0x633B2F: mov     edx, dword ptr [esp+3Ch+var_2C]
+0x633B33: mov     eax, dword ptr [esp+3Ch+var_2C+4]
 0x633B37: mov     ebx, [edi]
 0x633B39: mov     [edi+27Ch], ecx
 0x633B3F: mov     [edi+280h], edx
@@ -185,14 +185,14 @@
 0x633B4D: call    TESObjectREFR_GetWorldSpace
 0x633B52: push    eax
 0x633B53: mov     ecx, esi; this
-0x633B55: call    TESObjectREFR_GetParentCell
+0x633B55: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x633B5A: mov     ecx, [esp+40h+var_30]
-0x633B5E: mov     edx, [esp+40h+var_2C]
+0x633B5E: mov     edx, dword ptr [esp+40h+var_2C]
 0x633B62: push    eax
 0x633B63: sub     esp, 0Ch
 0x633B66: mov     eax, esp
 0x633B68: mov     [eax], ecx
-0x633B6A: mov     ecx, [esp+50h+var_28]
+0x633B6A: mov     ecx, dword ptr [esp+50h+var_2C+4]
 0x633B6E: mov     [eax+4], edx
 0x633B71: mov     edx, [ebx+3DCh]
 0x633B77: mov     [eax+8], ecx

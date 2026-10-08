@@ -106,13 +106,13 @@
 0x63051E: mov     edx, [esi+2Ch]
 0x630521: cmp     edx, ds:0B333C4h
 0x630527: mov     ecx, [ebp+58h]
-0x63052A: mov     ecx, [ecx+8]
+0x63052A: mov     ecx, [ecx+8]; self
 0x63052D: jz      short loc_63055C
 0x63052F: test    ecx, ecx
 0x630531: jz      short loc_630542
 0x630533: cmp     byte ptr [ecx+20h], 1
 0x630537: jz      short loc_63055C
-0x630539: call    sub_5660A0
+0x630539: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x63053E: test    al, al
 0x630540: jnz     short loc_63055C
 0x630542: mov     eax, [esi]
@@ -171,7 +171,7 @@
 0x6305E2: mov     ecx, [esp+54h+var_44]
 0x6305E6: mov     ecx, [ecx+28h]
 0x6305E9: mov     ebx, [esi+2Ch]
-0x6305EC: call    sub_452A60
+0x6305EC: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6305F1: test    eax, eax
 0x6305F3: mov     [esp+54h+var_3C], eax
 0x6305F7: jg      short loc_630601
@@ -182,16 +182,16 @@
 0x63060C: fild    [esp+54h+var_3C]
 0x630610: jmp     short loc_630647
 0x630612: mov     ecx, edi; this
-0x630614: call    TESObjectREFR_GetParentCell
+0x630614: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x630619: test    eax, eax
 0x63061B: jz      short loc_63063D
 0x63061D: mov     ecx, edi; this
-0x63061F: call    TESObjectREFR_GetParentCell
+0x63061F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x630624: mov     ecx, eax; this
-0x630626: call    TESObjectCELL_IsInterior
+0x630626: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x63062B: test    al, al
 0x63062D: jz      short loc_63063D
-0x63062F: mov     ecx, offset flt_B36AA0
+0x63062F: mov     ecx, (offset flt_B36A88+18h)
 0x630634: call    GameSetting_GetSafeFloatPointer
 0x630639: fld     dword ptr [eax]
 0x63063B: jmp     short loc_630647
@@ -308,12 +308,12 @@
 0x6307B2: cmp     ebp, ebx
 0x6307B4: mov     [esp+54h+arg_4], ebx
 0x6307B8: jz      short loc_6307D3
-0x6307BA: mov     ecx, ebp
-0x6307BC: call    ExtraDataList_GetReferencePointer
+0x6307BA: mov     ecx, ebp; this
+0x6307BC: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x6307C1: test    eax, eax
 0x6307C3: jz      short loc_6307D3
-0x6307C5: mov     ecx, ebp
-0x6307C7: call    ExtraDataList_GetReferencePointer
+0x6307C5: mov     ecx, ebp; this
+0x6307C7: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x6307CC: mov     eax, [eax+0Ch]
 0x6307CF: mov     [esp+54h+arg_4], eax
 0x6307D3: mov     ecx, [esp+54h+var_44]
@@ -337,7 +337,7 @@
 0x63080A: mov     eax, [esp+54h+var_40]
 0x63080E: mov     ebp, [eax+8]
 0x630811: push    edx
-0x630812: call    sub_452A60
+0x630812: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x630817: push    eax
 0x630818: mov     eax, [esp+5Ch+arg_0]
 0x63081C: push    ebx
@@ -407,7 +407,7 @@
 0x6308E2: jnz     short loc_6308F2
 0x6308E4: mov     ecx, [esp+54h+var_44]
 0x6308E8: mov     ecx, [ecx+28h]
-0x6308EB: call    sub_452A60
+0x6308EB: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6308F0: mov     ebp, eax
 0x6308F2: mov     eax, [esp+54h+arg_0]
 0x6308F6: mov     edx, [edi]
@@ -425,7 +425,7 @@
 0x630911: mov     byte ptr [esi+25Dh], 0
 0x630918: call    ContainerEntryExtraData_DestroyDataTable
 0x63091D: push    ebp
-0x63091E: call    FormHeapFree
+0x63091E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x630923: mov     ebx, [esp+58h+var_34]
 0x630927: add     esp, 4
 0x63092A: mov     ecx, ebx
@@ -468,7 +468,7 @@
 0x63099D: cmp     eax, ebp
 0x63099F: jz      short loc_6309AA
 0x6309A1: push    eax
-0x6309A2: call    FormHeapFree
+0x6309A2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6309A7: add     esp, 4
 0x6309AA: mov     ecx, [esp+54h+var_3C]; this
 0x6309AE: cmp     ecx, ebp
@@ -482,7 +482,7 @@
 0x6309C6: mov     ecx, [eax+28h]
 0x6309C9: mov     ebp, [ebx+8]
 0x6309CC: push    edx
-0x6309CD: call    sub_452A60
+0x6309CD: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6309D2: mov     ecx, [esp+58h+arg_0]
 0x6309D6: push    eax
 0x6309D7: mov     eax, [esp+5Ch+var_3C]
@@ -551,7 +551,7 @@
 0x630A9F: jnz     short loc_630AAF
 0x630AA1: mov     ecx, [esp+54h+var_44]
 0x630AA5: mov     ecx, [ecx+28h]
-0x630AA8: call    sub_452A60
+0x630AA8: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x630AAD: mov     ebp, eax
 0x630AAF: mov     eax, [esp+54h+var_40]
 0x630AB3: mov     ecx, [esp+54h+arg_0]
@@ -568,7 +568,7 @@
 0x630ACC: mov     ecx, ebx
 0x630ACE: call    ContainerEntryExtraData_DestroyDataTable
 0x630AD3: push    ebx
-0x630AD4: call    FormHeapFree
+0x630AD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x630AD9: add     esp, 4
 0x630ADC: jmp     loc_630956
 0x630AE1: mov     eax, [esi+8]
@@ -586,8 +586,8 @@
 0x630B07: test    al, 1
 0x630B09: jz      short loc_630B10
 0x630B0B: mov     byte ptr [esp+54h+arg_0], 0
-0x630B10: mov     ecx, edi
-0x630B12: call    sub_5E32D0
+0x630B10: mov     ecx, edi; this
+0x630B12: call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.
 0x630B17: test    al, al
 0x630B19: mov     ecx, edi; this
 0x630B1B: jz      short loc_630B43
@@ -649,17 +649,17 @@
 0x630BAD: add     esp, 44h
 0x630BB0: retn    8
 0x630BB3: lea     ecx, [esp+54h+var_24]
-0x630BB7: call    sub_404C90
+0x630BB7: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x630BBC: fld     [esp+54h+var_3C]
 0x630BC0: fcompp
 0x630BC2: fnstsw  ax
 0x630BC4: test    ah, 1
 0x630BC7: jnz     short loc_630B8D
 0x630BC9: lea     ecx, [esp+54h+var_C]
-0x630BCD: call    sub_404C90
+0x630BCD: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x630BD2: fstp    [esp+54h+arg_0]
 0x630BD6: lea     ecx, [esp+54h+var_30]
-0x630BDA: call    sub_404C90
+0x630BDA: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x630BDF: fld     [esp+54h+arg_0]
 0x630BE3: fcompp
 0x630BE5: fnstsw  ax
@@ -688,8 +688,8 @@
 0x630C26: mov     eax, [ecx]
 0x630C28: mov     edx, [eax+184h]
 0x630C2E: call    edx
-0x630C30: mov     ecx, eax
-0x630C32: call    sub_5660A0
+0x630C30: mov     ecx, eax; self
+0x630C32: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x630C37: test    al, al
 0x630C39: jz      loc_630B8D
 0x630C3F: mov     ecx, [ebp+58h]
@@ -711,7 +711,7 @@
 0x630C6C: mov     ecx, ebp
 0x630C6E: call    eax
 0x630C70: mov     ecx, ebp
-0x630C72: call    sub_5E05B0
+0x630C72: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x630C77: test    al, al
 0x630C79: jz      short loc_630C82
 0x630C7B: mov     ecx, ebp
@@ -738,7 +738,7 @@
 0x630CAA: push    2
 0x630CAC: push    edi
 0x630CAD: call    sub_5677B0
-0x630CB2: call    Double_To_SInt32
+0x630CB2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x630CB7: mov     ecx, [esi+2Ch]
 0x630CBA: cmp     ecx, ebx
 0x630CBC: mov     [esp+54h+arg_0], eax

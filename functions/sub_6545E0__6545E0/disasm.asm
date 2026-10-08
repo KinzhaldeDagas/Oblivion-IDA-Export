@@ -12,8 +12,8 @@
 0x6545FE: cmp     esi, ecx
 0x654600: mov     ebp, eax
 0x654602: jnz     short loc_654613
-0x654604: push    1; a2
-0x654606: call    Player_GetAnimData
+0x654604: push    1; firstPerson
+0x654606: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x65460B: cmp     ebp, eax
 0x65460D: jz      loc_654C4E
 0x654613: mov     eax, [esi]
@@ -24,7 +24,7 @@
 0x654621: test    al, al
 0x654623: jz      short loc_654641
 0x654625: mov     ecx, esi; this
-0x654627: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x654627: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x65462C: cmp     eax, 6
 0x65462F: jz      short loc_654641
 0x654631: mov     byte ptr [edi+11Ch], 0
@@ -48,7 +48,7 @@
 0x654664: test    al, al
 0x654666: jnz     short loc_654678
 0x654668: mov     ecx, esi; this
-0x65466A: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x65466A: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x65466F: cmp     eax, 6
 0x654672: jnz     loc_6547E9
 0x654678: mov     al, [edi+11Ch]
@@ -84,19 +84,19 @@
 0x6546D7: mov     eax, [esi+3Ch]
 0x6546DA: push    1; a2
 0x6546DC: push    eax; a1
-0x6546DD: call    sub_88D070
+0x6546DD: call    sub_88D070; ODismemberment: bhkBlendCollisionObject traversal entry. Requires bhkBlendCollisionObject or forced flag; queues callback off off_B2E314 with state payload including a2 and a3.
 0x6546E2: mov     ecx, [esi+3Ch]
 0x6546E5: push    1
 0x6546E7: push    ecx
-0x6546E8: call    sub_8A5580
+0x6546E8: call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x6546ED: fldz
 0x6546EF: add     esp, 14h
-0x6546F2: fstp    [esp+44h+var_44]; float
-0x6546F5: push    5; int
-0x6546F7: mov     ecx, ebp
-0x6546F9: call    sub_470FC0
+0x6546F2: fstp    [esp+44h+easeOutTime]; easeOutTime
+0x6546F5: push    5; slot
+0x6546F7: mov     ecx, ebp; this
+0x6546F9: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x6546FE: mov     ecx, ebp
-0x654700: call    sub_4728C0
+0x654700: call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.
 0x654705: mov     edx, [edi]
 0x654707: mov     eax, [edx+194h]
 0x65470D: push    esi
@@ -108,7 +108,7 @@
 0x65471C: push    ecx
 0x65471D: mov     ecx, ebp
 0x65471F: mov     [edi+11Ch], bl
-0x654725: call    sub_4723A0
+0x654725: call    ActorAnimData_GetMovementVector; Computes the actor movement vector from ActorAnimData +0x0C/+0x10/+0x14. For non-creature ground-movement groups, clamps the vector by TESAnimGroup root-motion magnitude scaled by +0xBC and, when the blend sequence at +0xAC is active, +0xC0; optionally transforms the result and can suppress Z.
 0x65472A: fld     dword ptr [esp+40h+var_2C+4]
 0x65472E: fchs
 0x654730: push    0; int
@@ -149,11 +149,11 @@
 0x6547AB: push    0; int
 0x6547AD: push    edx; int
 0x6547AE: push    eax; int
-0x6547AF: call    sub_8AB440
+0x6547AF: call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.
 0x6547B4: mov     ecx, [esi+3Ch]
 0x6547B7: push    0
 0x6547B9: push    ecx
-0x6547BA: call    sub_8A5580
+0x6547BA: call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x6547BF: push    40h ; '@'
 0x6547C1: lea     edx, [esi+44h]
 0x6547C4: push    edx
@@ -186,8 +186,8 @@
 0x654819: fnstsw  ax
 0x65481B: test    ah, 41h
 0x65481E: jp      def_6547FC
-0x654824: mov     ecx, esi
-0x654826: call    sub_5EF930
+0x654824: mov     ecx, esi; this
+0x654826: call    Actor__StopDialoguePlayback; Stops an Actor's current dialogue/audio/lip playback and associated animation state. Used before starting/replacing dialogue, on menu close, death/paralysis, and DialoguePackage active-speaker cleanup.
 0x65482B: cmp     [edi+11Ch], bl
 0x654831: setz    cl
 0x654834: lea     ecx, [ecx+ecx+1]
@@ -204,12 +204,12 @@
 0x654857: call    eax
 0x654859: fldz
 0x65485B: push    ecx
-0x65485C: fstp    [esp+50h+var_50]; float
-0x65485F: mov     ecx, ebp
-0x654861: push    5; int
-0x654863: call    sub_470FC0
+0x65485C: fstp    [esp+50h+var_50]; easeOutTime
+0x65485F: mov     ecx, ebp; this
+0x654861: push    5; slot
+0x654863: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x654868: mov     ecx, ebp
-0x65486A: call    sub_4728C0
+0x65486A: call    ActorAnimData_ResetRootMotion; Resets ActorAnimData root-motion state: zeroes the cached accumulation vector at +0x18, restores the accumulation/root node transform fields, then finds the matching accumulation controllers and resets them. Used before sequence play and by full actor/animation reset paths.
 0x65486F: mov     edx, [edi]
 0x654871: mov     eax, [edx+194h]
 0x654877: push    esi
@@ -234,19 +234,19 @@
 0x6548A6: test    al, al
 0x6548A8: jnz     short loc_654902
 0x6548AA: mov     ecx, esi; this
-0x6548AC: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x6548AC: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x6548B1: cmp     eax, 6
 0x6548B4: jz      short loc_654902
 0x6548B6: mov     ecx, ds:0B362C0h
 0x6548BC: push    0
 0x6548BE: push    esi
-0x6548BF: call    sub_521450
+0x6548BF: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x6548C4: test    eax, eax
 0x6548C6: jz      loc_654A5B
 0x6548CC: push    5
 0x6548CE: push    eax
 0x6548CF: mov     ecx, ebp
-0x6548D1: call    sub_475300
+0x6548D1: call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.
 0x6548D6: mov     ecx, esi
 0x6548D8: call    sub_5E12B0
 0x6548DD: test    eax, eax
@@ -265,7 +265,7 @@
 0x6548FC: add     esp, 2Ch
 0x6548FF: retn    4
 0x654902: mov     ecx, esi; this
-0x654904: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x654904: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x654909: pop     ebx
 0x65490A: pop     edi
 0x65490B: pop     esi
@@ -276,12 +276,12 @@
 0x654915: mov     eax, [edx+28h]
 0x654918: mov     ecx, edi
 0x65491A: call    eax
-0x65491C: fstp    [esp+44h+var_34]
-0x654920: mov     ecx, offset TimeGlobals
+0x65491C: fstp    [esp+44h+slot]
+0x654920: mov     ecx, 0B332E0h
 0x654925: call    TimeGlobals_GetGameHour
 0x65492A: fstp    [esp+44h+var_4]
 0x65492E: fld     [esp+44h+var_4]
-0x654932: fld     [esp+44h+var_34]
+0x654932: fld     [esp+44h+slot]
 0x654936: fcom    st(1)
 0x654938: fnstsw  ax
 0x65493A: test    ah, 41h
@@ -290,11 +290,11 @@
 0x654945: fsubrp  st(1), st
 0x654947: jmp     short loc_65494B
 0x654949: fsubp   st(1), st
-0x65494B: fstp    [esp+44h+var_34]
-0x65494F: mov     ecx, offset TimeGlobals
-0x654954: fld     [esp+44h+var_34]
+0x65494B: fstp    [esp+44h+slot]
+0x65494F: mov     ecx, 0B332E0h
+0x654954: fld     [esp+44h+slot]
 0x654958: fstp    [esp+44h+var_2C]
-0x65495C: call    sub_4029D0
+0x65495C: call    TimeGlobals_GetTimeScale; Returns TimeGlobals field +5 TESGlobal value (time scale). Observed callers use it for magic cooldown and fast-travel time calculations.
 0x654961: fmul    qword ptr ds:0A72D40h
 0x654967: mov     byte ptr [esp+44h+var_4], 1
 0x65496C: fcomp   [esp+44h+var_2C]
@@ -302,10 +302,10 @@
 0x654972: test    ah, 5
 0x654975: jnp     short loc_65497C
 0x654977: mov     byte ptr [esp+44h+var_4], 0
-0x65497C: fld     [esp+44h+var_34]
-0x654980: mov     ecx, offset TimeGlobals
+0x65497C: fld     [esp+44h+slot]
+0x654980: mov     ecx, 0B332E0h
 0x654985: fstp    [esp+44h+var_2C]
-0x654989: call    sub_4029D0
+0x654989: call    TimeGlobals_GetTimeScale; Returns TimeGlobals field +5 TESGlobal value (time scale). Observed callers use it for magic cooldown and fast-travel time calculations.
 0x65498E: fmul    qword ptr ds:0A72D38h
 0x654994: fcomp   [esp+44h+var_2C]
 0x654998: fnstsw  ax
@@ -342,7 +342,7 @@
 0x654A00: mov     byte ptr [edi+11Ch], 3
 0x654A07: mov     ecx, ds:0B362C0h
 0x654A0D: push    esi
-0x654A0E: call    sub_521450
+0x654A0E: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x654A13: mov     ecx, esi
 0x654A15: mov     [esp+44h+var_4], eax
 0x654A19: mov     [edi+11Ch], bl
@@ -362,7 +362,7 @@
 0x654A47: push    5
 0x654A49: push    eax
 0x654A4A: mov     ecx, ebp
-0x654A4C: call    sub_475300
+0x654A4C: call    ActorAnimData_ReplaceCurrentIdleLoader; Replaces ActorAnimData current idle at +0xCC, not the queued +0xD0 slot. Stops its still-active normalized physical slot, retires the old AnimIdle into cleanup slots +0xD4/+0xD8 or destroys it, then allocates/initializes a new AnimIdle at +0xCC with completion mode 1 and no actor ref. Furniture/package callers later wait for ready phase and explicitly start it.
 0x654A51: pop     ebx
 0x654A52: pop     edi
 0x654A53: pop     esi
@@ -387,40 +387,40 @@
 0x654A81: add     esp, 2Ch
 0x654A84: retn    4
 0x654A87: mov     ecx, ebp; jumptable 006547FC case 5
-0x654A89: call    sub_4711F0
+0x654A89: call    ActorAnimData_IsCurrentIdleReady; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.
 0x654A8E: test    al, al
 0x654A90: jz      loc_654C18
-0x654A96: push    0
-0x654A98: mov     ecx, ebp
-0x654A9A: call    sub_4706E0
+0x654A96: push    0; slotSelector
+0x654A98: mov     ecx, ebp; this
+0x654A9A: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x654A9F: test    eax, eax
 0x654AA1: jz      short loc_654AB6
-0x654AA3: push    0
-0x654AA5: mov     ecx, ebp
-0x654AA7: call    sub_4706E0
+0x654AA3: push    0; slotSelector
+0x654AA5: mov     ecx, ebp; this
+0x654AA7: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x654AAC: cmp     dword ptr [eax+44h], 1
 0x654AB0: jnz     loc_654C18
-0x654AB6: mov     ecx, esi
-0x654AB8: call    Actor_IsSwimming
+0x654AB6: mov     ecx, esi; this
+0x654AB8: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x654ABD: test    al, al
 0x654ABF: mov     ecx, ebp
 0x654AC1: jnz     short loc_654ACF
 0x654AC3: push    esi
-0x654AC4: call    sub_477E50
+0x654AC4: call    ActorAnimData_StartQueuedIdleAction; Starts a ready queued idle as an actor action. Processes/promotes/plays through ActorAnimData_ProcessQueuedIdleKF; on success stores the actor ref at AnimIdle +0x28 and invokes high-process action 0x0B with the sequence at +0x10.
 0x654AC9: test    al, al
 0x654ACB: jnz     short loc_654AD8
 0x654ACD: mov     ecx, ebp
 0x654ACF: push    0
 0x654AD1: push    1
-0x654AD3: call    sub_475440
+0x654AD3: call    ActorAnimData_CleanupOrPromoteQueuedIdles; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x654AD8: mov     ebp, [ebp+8]
 0x654ADB: test    ebp, ebp
 0x654ADD: mov     ebx, [esi+3Ch]
 0x654AE0: mov     [esp+44h+var_4], ebx
 0x654AE4: jz      loc_654BE4
-0x654AEA: push    0
-0x654AEC: mov     ecx, ebp
-0x654AEE: call    sub_405790
+0x654AEA: push    0; index
+0x654AEC: mov     ecx, ebp; this
+0x654AEE: call    NiNode_GetChildAtIndex
 0x654AF3: mov     ebp, eax
 0x654AF5: push    offset aBip01Head; "Bip01 Head"
 0x654AFA: push    ebp
@@ -455,9 +455,9 @@
 0x654B56: mov     eax, [eax]
 0x654B58: mov     bl, [eax+1F4h]
 0x654B5E: not     bl
-0x654B60: lea     ecx, [esp+48h+var_34]; this
+0x654B60: lea     ecx, [esp+48h+slot]; slot
 0x654B64: and     bl, 1
-0x654B67: call    sub_7016A0
+0x654B67: call    NiPointerSlot_Release
 0x654B6C: test    bl, bl
 0x654B6E: jz      short loc_654BB8
 0x654B70: mov     ecx, [esp+48h+var_8]
@@ -485,7 +485,7 @@
 0x654BB4: fstp    dword ptr [esp+48h+var_2C+4]
 0x654BB8: lea     edx, [esp+48h+var_30]
 0x654BBC: push    edx
-0x654BBD: call    sub_683CB0
+0x654BBD: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x654BC2: fstp    [esp+4Ch+var_38]
 0x654BC6: fld     [esp+4Ch+var_38]
 0x654BCA: mov     byte ptr [edi+11Ch], 0
@@ -497,7 +497,7 @@
 0x654BE0: mov     ebx, [esp+4Ch+var_C]
 0x654BE4: push    0
 0x654BE6: push    ebx
-0x654BE7: call    sub_8A5580
+0x654BE7: call    sub_8A5580; ODismemberment: recursively walks NiAVObject children and dispatches the bhkConstraint attach/remove helpers on each bhkCollisionObject-backed node.
 0x654BEC: fldz
 0x654BEE: add     esp, 4
 0x654BF1: fstp    [esp+50h+var_50]; float
@@ -526,7 +526,7 @@
 0x654C35: add     esp, 2Ch
 0x654C38: retn    4
 0x654C3B: mov     ecx, ebp; jumptable 006547FC case 6
-0x654C3D: call    sub_472EA0
+0x654C3D: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x654C42: test    al, al
 0x654C44: jz      short def_6547FC
 0x654C46: mov     byte ptr [edi+11Ch], 0

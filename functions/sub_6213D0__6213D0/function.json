@@ -1,19 +1,44 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 32,
   "callers_count": 6,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x6213D0",
+      "0x62149C"
+    ],
+    [
+      "0x612C30",
+      "0x612C5D"
+    ],
+    [
+      "0x61C550",
+      "0x61C67C"
+    ],
+    [
+      "0x620C30",
+      "0x620E48"
+    ]
+  ],
+  "chunks_sha256": "ab48747800a76bd5ffd14465c711d653eae0148693122d72a3d7858ae8d7cfc2",
+  "comment_regular": "Dispatches CombatController behavior by current mode +0x74. Mode 3 conditionally runs close-combat handling and then the ranged weapon evaluator for modes 2/4 or the magic alternative.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_6213D0",
+  "display_name": "CombatController_UpdateCombatModeState",
   "end_ea": "0x62149C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "sub_6213D0",
+  "has_pseudocode": true,
+  "name": "CombatController_UpdateCombatModeState",
   "segment": ".text",
   "sha256": "c2212fa170a17fbd9cf179f65b01b12821e63fe89e1963c965f117270cafe089",
   "size": 204,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6213D0",
-  "type": "int __thiscall(_DWORD)",
-  "xrefs_from_count": 91,
+  "total_chunk_size": 1085,
+  "type": "void __thiscall(void *this)",
+  "xrefs_from_count": 465,
   "xrefs_to_count": 6
 }

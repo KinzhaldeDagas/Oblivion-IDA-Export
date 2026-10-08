@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x572896",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x572AEF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1225,19 +1225,19 @@
   },
   {
     "ea": "0x572B26",
-    "line": "lea     ecx, [esp+0D8h+var_9C]",
+    "line": "lea     ecx, [esp+0D8h+var_9C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x572B2A",
-    "line": "fstp    [esp+0D8h+var_D8]; float",
+    "line": "fstp    [esp+0D8h+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x572B2D",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,31 +1249,31 @@
   },
   {
     "ea": "0x572B35",
-    "line": "push    edi",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x572B36",
-    "line": "lea     eax, [esp+0D8h+var_78]",
+    "line": "lea     eax, [esp+0D8h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x572B3A",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x572B3B",
-    "line": "lea     ecx, [esp+0DCh+var_9C]",
+    "line": "lea     ecx, [esp+0DCh+var_9C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x572B3F",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1381,13 +1381,13 @@
   },
   {
     "ea": "0x572B80",
-    "line": "lea     ecx, [esp+0D8h+var_9C]",
+    "line": "lea     ecx, [esp+0D8h+var_9C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x572B84",
-    "line": "fstp    [esp+0D8h+var_D8]; float",
+    "line": "fstp    [esp+0D8h+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x572B8A",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1417,19 +1417,19 @@
   },
   {
     "ea": "0x572B96",
-    "line": "lea     ecx, [esp+0D8h+var_54]",
+    "line": "lea     ecx, [esp+0D8h+right]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x572B9D",
-    "line": "fstp    [esp+0D8h+var_D8]; float",
+    "line": "fstp    [esp+0D8h+angleX]; angleY",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x572BA0",
-    "line": "call    sub_70FD80",
+    "line": "call    NiMatrix33_InitRotationY; Verified matrix coefficients make this a Y-axis rotation: Y stays fixed; only the X/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1441,31 +1441,31 @@
   },
   {
     "ea": "0x572BA8",
-    "line": "push    edi",
+    "line": "push    edi; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x572BA9",
-    "line": "lea     ecx, [esp+0D8h+var_78]",
+    "line": "lea     ecx, [esp+0D8h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x572BAD",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x572BAE",
-    "line": "lea     edx, [esp+0DCh+var_54]",
+    "line": "lea     edx, [esp+0DCh+right]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x572BB5",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -1477,31 +1477,31 @@
   },
   {
     "ea": "0x572BBD",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x572BBE",
-    "line": "lea     ecx, [esp+0E4h+var_9C]",
+    "line": "lea     ecx, [esp+0E4h+var_9C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x572BC2",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x572BC7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x572BC9",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x572C3C",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x572C94",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x572CAA",
-    "line": "call    NiNode_AddNiExtraData",
+    "line": "call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1909,7 +1909,7 @@
   },
   {
     "ea": "0x572CC0",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1957,7 +1957,7 @@
   },
   {
     "ea": "0x572CD6",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x572D53",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x572D5D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2254,5 +2254,269 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BDF50",
+    "line": "mov     eax, [ebp-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDF56",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF57",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDF5C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF5D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF5E",
+    "line": "mov     eax, [ebp-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDF64",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF65",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDF6A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF6B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF6C",
+    "line": "mov     eax, [ebp-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDF72",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF73",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDF78",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF79",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF7A",
+    "line": "mov     eax, [ebp-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDF80",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF81",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDF86",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF87",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF88",
+    "line": "lea     ecx, [ebp-0B4h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDF8E",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDF93",
+    "line": "mov     eax, [ebp-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDF99",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDF9A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDF9F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFA0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFA1",
+    "line": "mov     eax, [ebp-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDFA7",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFA8",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDFAD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFAE",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFAF",
+    "line": "mov     eax, [ebp-0BCh]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDFB5",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFB6",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDFBB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFBC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BDFBD",
+    "line": "mov     edx, [esp+a2]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BDFC1",
+    "line": "lea     eax, [edx-0C4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDFC7",
+    "line": "mov     ecx, [edx-0C8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BDFCD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BDFCF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDFD4",
+    "line": "mov     eax, offset stru_AE778C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BDFD9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

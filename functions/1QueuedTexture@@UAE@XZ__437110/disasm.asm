@@ -1,4 +1,4 @@
-0x437110: push    0FFFFFFFFh
+0x437110: push    0FFFFFFFFh; QueuedTexture destructor: releases loaded resource at +0x28, frees copied path at +0x20, then chains to queued base.
 0x437112: push    offset ??1DistantLODLoaderTask@@UAE@XZ_SEH
 0x437117: mov     eax, large fs:0
 0x43711D: push    eax
@@ -32,7 +32,7 @@
 0x437167: push    ecx
 0x437168: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x437170: mov     dword ptr [edi], offset ??_7QueuedFileEntry@@6B@; const QueuedFileEntry::`vftable'
-0x437176: call    FormHeapFree
+0x437176: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43717B: add     esp, 4
 0x43717E: mov     ecx, edi; this
 0x437180: call    ??1QueuedMagicItem@@UAE@XZ; QueuedMagicItem::~QueuedMagicItem(void)
@@ -43,3 +43,12 @@
 0x437192: pop     esi
 0x437193: add     esp, 10h
 0x437196: retn
+0x9AC400: mov     ecx, [ebp-10h]; this
+0x9AC403: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9AC408: mov     edx, [esp+arg_4]
+0x9AC40C: lea     eax, [edx-0Ch]
+0x9AC40F: mov     ecx, [edx-10h]
+0x9AC412: xor     ecx, eax
+0x9AC414: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC419: mov     eax, offset stru_AD90C8
+0x9AC41E: jmp     ___CxxFrameHandler3

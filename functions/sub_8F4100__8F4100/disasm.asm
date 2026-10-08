@@ -208,7 +208,7 @@
 0x8F4510: movaps  xmm0, [esp+1D8h+var_140]
 0x8F4518: lea     ecx, [esp+1D8h+var_150]
 0x8F451F: movaps  [esp+1D8h+var_150], xmm0
-0x8F4527: call    sub_88FCC0
+0x8F4527: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8F452C: mov     edx, [esp+1D0h+var_1AC]
 0x8F4530: mov     eax, [esp+1D0h+var_1B0]
 0x8F4534: and     edx, 3FFFFFFFh
@@ -248,7 +248,7 @@
 0x8F45B7: fstp    [esp+1D4h+var_1D4]; float
 0x8F45BA: push    ecx; int
 0x8F45BB: lea     ecx, [esp+1D8h+var_110]
-0x8F45C2: call    sub_8B1B00
+0x8F45C2: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8F45C7: fld     dword ptr [esp+1D0h+var_110+0Ch]
 0x8F45CE: fmul    dword ptr [esp+1D0h+var_110+0Ch]
 0x8F45D5: movaps  xmm0, [esp+1D0h+var_110]
@@ -325,7 +325,7 @@
 0x8F4716: fstp    [esp+1D4h+var_1D4]; float
 0x8F4719: push    ecx; int
 0x8F471A: lea     ecx, [esp+1D8h+var_170]
-0x8F471E: call    sub_8B1B00
+0x8F471E: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8F4723: fld     dword ptr [esp+1D0h+var_170+0Ch]
 0x8F4727: fmul    dword ptr [esp+1D0h+var_170+0Ch]
 0x8F472B: movaps  xmm0, [esp+1D0h+var_170]
@@ -383,7 +383,7 @@
 0x8F4811: addps   xmm0, xmm1
 0x8F4814: lea     ecx, [esp+1D8h+var_150]
 0x8F481B: movaps  [esp+1D8h+var_150], xmm0
-0x8F4823: call    sub_88FCC0
+0x8F4823: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8F4828: mov     edx, [esp+1D0h+var_1AC]
 0x8F482C: mov     eax, [esp+1D0h+var_1B0]
 0x8F4830: and     edx, 3FFFFFFFh
@@ -453,7 +453,7 @@
 0x8F4936: fmul    dword ptr ds:0A46B14h
 0x8F493C: fstp    [esp+1D4h+var_1D4]; float
 0x8F493F: push    edx; int
-0x8F4940: call    sub_8B1B00
+0x8F4940: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8F4945: fld     dword ptr [esp+1D0h+var_170+0Ch]
 0x8F4949: fmul    dword ptr [esp+1D0h+var_170+0Ch]
 0x8F494D: movaps  xmm0, [esp+1D0h+var_170]
@@ -511,7 +511,7 @@
 0x8F4A32: push    edx
 0x8F4A33: lea     ecx, [esp+1D8h+var_150]
 0x8F4A3A: movaps  [esp+1D8h+var_150], xmm0
-0x8F4A42: call    sub_88FCC0
+0x8F4A42: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8F4A47: mov     eax, [esp+1D0h+var_1AC]
 0x8F4A4B: mov     ecx, [esp+1D0h+var_1B0]
 0x8F4A4F: and     eax, 3FFFFFFFh
@@ -561,7 +561,7 @@
 0x8F4AF4: fmul    dword ptr ds:0A3721Ch
 0x8F4AFA: fstp    [esp+1D4h+var_1D4]; float
 0x8F4AFD: push    edx; int
-0x8F4AFE: call    sub_8B1B00
+0x8F4AFE: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8F4B03: fld     dword ptr [esp+1D0h+var_170+0Ch]
 0x8F4B07: fmul    dword ptr [esp+1D0h+var_170+0Ch]
 0x8F4B0B: movaps  xmm0, [esp+1D0h+var_170]
@@ -630,7 +630,6 @@
 0x8F4C1D: movaps  [esp+1D0h+var_30], xmm0
 0x8F4C25: mov     edi, eax
 0x8F4C27: jmp     short loc_8F4C30
-0x8F4C29: align 10h
 0x8F4C30: fild    [esp+1D0h+var_1A8]
 0x8F4C34: push    ecx
 0x8F4C35: lea     edx, [esp+1D4h+var_E0]
@@ -639,7 +638,7 @@
 0x8F4C47: fmul    dword ptr ds:0A46B14h
 0x8F4C4D: fstp    [esp+1D4h+var_1D4]; float
 0x8F4C50: push    edx; int
-0x8F4C51: call    sub_8B1B00
+0x8F4C51: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x8F4C56: fld     dword ptr [esp+1D0h+var_110+0Ch]
 0x8F4C5D: fmul    dword ptr [esp+1D0h+var_110+0Ch]
 0x8F4C64: movaps  xmm0, [esp+1D0h+var_110]
@@ -697,7 +696,7 @@
 0x8F4D58: push    edx
 0x8F4D59: lea     ecx, [esp+1D8h+var_150]
 0x8F4D60: movaps  [esp+1D8h+var_150], xmm0
-0x8F4D68: call    sub_88FCC0
+0x8F4D68: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8F4D6D: mov     eax, [esp+1D0h+var_1AC]
 0x8F4D71: mov     ecx, [esp+1D0h+var_1B0]
 0x8F4D75: and     eax, 3FFFFFFFh
@@ -737,7 +736,7 @@
 0x8F4DEE: mov     dword ptr [esp+1D8h+var_150], 0
 0x8F4DF9: mov     dword ptr [esp+1D8h+var_150+4], 0
 0x8F4E04: mov     dword ptr [esp+1D8h+var_150+0Ch], 0
-0x8F4E0F: call    sub_88FCC0
+0x8F4E0F: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8F4E14: mov     ecx, [esp+1D0h+var_1AC]
 0x8F4E18: mov     eax, [esp+1D0h+var_1B0]
 0x8F4E1C: and     ecx, 3FFFFFFFh
@@ -839,7 +838,7 @@
 0x8F4F46: lea     ecx, [edx+edi]
 0x8F4F49: push    ecx
 0x8F4F4A: push    eax
-0x8F4F4B: call    sub_88FCC0
+0x8F4F4B: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x8F4F50: mov     eax, [esi+4]
 0x8F4F53: inc     ebx
 0x8F4F54: add     edi, 10h
@@ -906,7 +905,6 @@
 0x8F501B: jle     loc_8F5180
 0x8F5021: mov     [esp+1D0h+var_180], eax
 0x8F5025: jmp     short loc_8F5030
-0x8F5027: align 10h
 0x8F5030: mov     eax, [esp+1D0h+var_1B8]
 0x8F5034: test    eax, eax
 0x8F5036: jle     loc_8F5163
@@ -1023,7 +1021,6 @@
 0x8F519D: mov     ebx, 1
 0x8F51A2: mov     [esp+1D0h+var_1A4], eax
 0x8F51A6: jmp     short loc_8F51B0
-0x8F51A8: align 10h
 0x8F51B0: mov     ecx, [esp+1D0h+var_1C4]
 0x8F51B4: lea     edx, [ebx+ecx-1]
 0x8F51B8: mov     dword ptr [esp+1D0h+var_1A0], edx

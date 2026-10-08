@@ -1,47 +1,50 @@
-_DWORD *__thiscall NiNode::RemoveObject(_WORD *this, _DWORD *a2, int a3)
+//
+//
+// [2026-10-03 frond LOD replacement] Verified ECX=node, stack=(out NiPointer storage, child). Finds child, clears child+1C parent, removes array reference, writes a retained child pointer to out, returns out in EAX, RET8. Caller must release the returned reference (decrement and delete only at zero). Fallout NiNode::DetachChild 0x82BE8C10 corroborates reference semantics but its parameter order/ABI differs. Plugin LOD switch attaches a hidden tracked replacement, detaches old child, releases returned reference, then applies visibility; failure rolls back hidden replacement.
+NiAVObject **__thiscall NiNode::RemoveObject(NiNode *this, NiAVObject **outChild, NiAVObject *child)
 {
   unsigned int v4; // edi
-  int v5; // esi
-  void (__thiscall ***v7)(_DWORD, int); // edi
+  NiAVObject *v5; // esi
+  NiAVObject *v7; // edi
 
-  v4 = 0;
-  if ( *(this + 0x5B) )
+  v4 = 0; /*0x70b14d*/
+  if ( this->members.children.end ) /*0x70b14f*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x70b166*/
     {
-      v5 = *(_DWORD *)(*((_DWORD *)this + 0x2C) + 4 * v4);
-      if ( v5 )
+      v5 = *((NiAVObject **)&this->members.children.data->vtbl + v4); /*0x70b166*/
+      if ( v5 ) /*0x70b172*/
       {
-        InterlockedIncrement((volatile LONG *)(v5 + 4));
-        if ( v5 == a3 )
-          break;
+        InterlockedIncrement((volatile LONG *)&v5->members); /*0x70b178*/
+        if ( v5 == child ) /*0x70b18a*/
+          break; /*0x70b18a*/
       }
-      if ( v5 )
+      if ( v5 ) /*0x70b196*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-          (**(void (__thiscall ***)(int, int))v5)(v5, 1);
+        if ( !InterlockedDecrement((volatile LONG *)&v5->members) ) /*0x70b19c*/
+          v5->vtbl->super.super.Destructor((NiRefObject *)v5, 1); /*0x70b1ae*/
       }
-      if ( ++v4 >= (unsigned __int16)*(this + 0x5B) )
-        goto LABEL_8;
+      if ( ++v4 >= this->members.children.end ) /*0x70b1bc*/
+        goto LABEL_8; /*0x70b1bc*/
     }
-    *(_DWORD *)(v5 + 0x1C) = 0;
-    sub_6D7F60((int)(this + 0x56), &a3, v4);
-    if ( a3 )
+    v5->members.m_parent = 0; /*0x70b1e6*/
+    sub_6D7F60((int)&this->members.children, &child, v4); /*0x70b1e9*/
+    if ( child ) /*0x70b1f4*/
     {
-      v7 = (void (__thiscall ***)(_DWORD, int))a3;
-      if ( !InterlockedDecrement((volatile LONG *)(a3 + 4)) )
-        (**v7)(v7, 1);
+      v7 = child; /*0x70b1f6*/
+      if ( !InterlockedDecrement((volatile LONG *)&child->members) ) /*0x70b1fc*/
+        v7->vtbl->super.super.Destructor((NiRefObject *)v7, 1); /*0x70b212*/
     }
-    *a2 = v5;
-    InterlockedIncrement((volatile LONG *)(v5 + 4));
-    if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-      (**(void (__thiscall ***)(int, int))v5)(v5, 1);
-    return a2;
+    *outChild = v5; /*0x70b21c*/
+    InterlockedIncrement((volatile LONG *)&v5->members); /*0x70b21e*/
+    if ( !InterlockedDecrement((volatile LONG *)&v5->members) ) /*0x70b22d*/
+      v5->vtbl->super.super.Destructor((NiRefObject *)v5, 1); /*0x70b23f*/
+    return outChild; /*0x70b241*/
   }
   else
   {
 LABEL_8:
-    *a2 = 0;
-    return a2;
+    *outChild = 0; /*0x70b1be*/
+    return outChild; /*0x70b1be*/
   }
 }

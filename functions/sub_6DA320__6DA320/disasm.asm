@@ -47,9 +47,9 @@
 0x6DA39A: mov     eax, [edi+4]
 0x6DA39D: mov     ecx, [edi+8]
 0x6DA3A0: mov     edx, [edi+0Ch]
-0x6DA3A3: mov     [esp+24h+var_C], eax
-0x6DA3A7: mov     [esp+24h+var_8], ecx
-0x6DA3AB: mov     [esp+24h+var_4], edx
+0x6DA3A3: mov     [esp+24h+other.x], eax
+0x6DA3A7: mov     [esp+24h+other.y], ecx
+0x6DA3AB: mov     [esp+24h+other.z], edx
 0x6DA3AF: jz      short loc_6DA3F9
 0x6DA3B1: cmp     esi, 1
 0x6DA3B4: jz      short loc_6DA3BB
@@ -61,10 +61,10 @@
 0x6DA3C4: jnb     short loc_6DA3F1
 0x6DA3C6: movzx   ecx, [esp+24h+var_11]
 0x6DA3CB: imul    ecx, esi
-0x6DA3CE: lea     eax, [esp+24h+var_C]
-0x6DA3D2: push    eax
-0x6DA3D3: lea     ecx, [ecx+edi+4]
-0x6DA3D7: call    sub_8AA390
+0x6DA3CE: lea     eax, [esp+24h+other]
+0x6DA3D2: push    eax; other
+0x6DA3D3: lea     ecx, [ecx+edi+4]; this
+0x6DA3D7: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x6DA3DC: test    al, al
 0x6DA3DE: jz      short loc_6DA3E2
 0x6DA3E0: xor     bl, bl
@@ -96,9 +96,9 @@
 0x6DA418: mov     ecx, esi
 0x6DA41A: call    edx
 0x6DA41C: mov     dword ptr [ebx+18h], 0
-0x6DA423: mov     eax, [esp+24h+var_C]
-0x6DA427: mov     ecx, [esp+24h+var_8]
-0x6DA42B: mov     edx, [esp+24h+var_4]
+0x6DA423: mov     eax, [esp+24h+other.x]
+0x6DA427: mov     ecx, [esp+24h+other.y]
+0x6DA42B: mov     edx, [esp+24h+other.z]
 0x6DA42F: mov     [ebx+0Ch], eax
 0x6DA432: mov     [ebx+10h], ecx
 0x6DA435: mov     [ebx+14h], edx

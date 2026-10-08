@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79E2E0",
-    "line": "mov     ecx, [esp+arg_4]",
+    "line": "mov     ecx, [esp+last]; Builds a heap over [first,last) SFrondGuide records by walking parent holes backward from count/2 and applying the guide adjust-heap primitive.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x79E2E7",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x79E316",
-    "line": "mov     ecx, [esp+10h+arg_8]",
+    "line": "mov     ecx, dword ptr [esp+10h+sorterState]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E31A",
-    "line": "push    ecx; int",
+    "line": "push    ecx; sorterState",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,19 +175,19 @@
   },
   {
     "ea": "0x79E326",
-    "line": "mov     [esp+44h+arg_4], esp",
+    "line": "mov     [esp+44h+last], esp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79E32A",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E32B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x79E330",
-    "line": "call    sub_79AD70",
+    "line": "call    OB_stVector_SFrondVertex_CopyCtor_010201A0; Oblivion-authoritative copy construction for the 16-byte vector wrapper embedded at SFrondGuide+0x00. Allocates capacity for the exact source count and deep-copies 0x38-byte SFrondVertex records; scalar guide fields are copied separately by callers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x79E33B",
-    "line": "push    ebp; int",
+    "line": "push    ebp; length",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x79E33E",
-    "line": "push    ebx; int",
+    "line": "push    ebx; holeIndex",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x79E34B",
-    "line": "mov     eax, [esp+4Ch+arg_0]",
+    "line": "mov     eax, [esp+4Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x79E355",
-    "line": "push    eax; int",
+    "line": "push    eax; base",
     "mnemonic": "push",
     "size": 1
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x79E36B",
-    "line": "call    sub_79C130",
+    "line": "call    OB_SFrondGuide_AdjustHeap_010201A0; Adjusts/sifts one hole down the SFrondGuide heap, selecting children by fuzzySurfaceArea and moving whole non-trivial guide records. Finishes by pushing the saved by-value guide upward into its final heap slot.",
     "mnemonic": "call",
     "size": 5
   },

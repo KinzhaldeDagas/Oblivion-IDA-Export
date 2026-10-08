@@ -73,3 +73,18 @@
 0x437B2C: pop     ebx
 0x437B2D: add     esp, 10h
 0x437B30: retn
+0x9AC550: mov     ecx, [ebp-10h]; this
+0x9AC553: jmp     ??1QueuedMagicItem@@UAE@XZ; QueuedMagicItem::~QueuedMagicItem(void)
+0x9AC558: mov     ecx, [ebp-10h]
+0x9AC55B: add     ecx, 24h ; '$'; void *
+0x9AC55E: jmp     sub_4BDDC0
+0x9AC563: mov     ecx, [ebp-10h]
+0x9AC566: add     ecx, 28h ; '('; slot
+0x9AC569: jmp     NiPointerSlot_Release
+0x9AC56E: mov     edx, [esp+arg_4]
+0x9AC572: lea     eax, [edx-10h]
+0x9AC575: mov     ecx, [edx-14h]
+0x9AC578: xor     ecx, eax
+0x9AC57A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC57F: mov     eax, offset stru_AD9234
+0x9AC584: jmp     ___CxxFrameHandler3

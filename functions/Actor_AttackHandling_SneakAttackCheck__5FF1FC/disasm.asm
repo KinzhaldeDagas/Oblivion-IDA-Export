@@ -1,6 +1,6 @@
-0x5FF1FC: mov     edx, [edi]
+0x5FF1FC: mov     edx, [edi]; Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.
 0x5FF1FE: fld1
-0x5FF200: mov     eax, [edx+170h]
+0x5FF200: mov     eax, [edx+170h]; Oblivion sneak-attack decision. Creatures are excluded as attackers; the attacker must be sneaking; victim detection <= 0 permits the bonus unless combat-awareness logic forces failure. Successful attacks use the attacker's Sneak mastery plus weapon type to select the multiplier, set the Master-tier flag when applicable, show the player message, and pass the multiplier into damage calculation.
 0x5FF206: fstp    [esp+arg_34]; int
 0x5FF20A: mov     ecx, edi
 0x5FF20C: mov     [esp+arg_1A], 0
@@ -8,7 +8,7 @@
 0x5FF213: cmp     byte ptr [eax+4], 24h ; '$'
 0x5FF217: jz      Actor_AttackHandling___DetermineDamageFormula
 0x5FF21D: mov     ecx, edi
-0x5FF21F: call    Actor_IsSneaking
+0x5FF21F: call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.
 0x5FF224: test    al, al
 0x5FF226: jz      Actor_AttackHandling___DetermineDamageFormula
 0x5FF22C: mov     ecx, [esi+58h]
@@ -44,12 +44,12 @@
 0x5FF286: movsx   eax, byte ptr [eax+90h]
 0x5FF28D: jmp     short loc_5FF292
 0x5FF28F: or      eax, 0FFFFFFFFh
-0x5FF292: push    eax
-0x5FF293: push    1Fh
-0x5FF295: mov     ecx, edi
-0x5FF297: call    Actor_GetSkillMasteryLevel
-0x5FF29C: push    eax
-0x5FF29D: call    Calc_SneakAttackMultiplier
+0x5FF292: push    eax; weaponType
+0x5FF293: push    1Fh; actorValue
+0x5FF295: mov     ecx, edi; this
+0x5FF297: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
+0x5FF29C: push    eax; masteryLevel
+0x5FF29D: call    Calc_SneakAttackDamageMultiplier; Returns the Oblivion sneak-attack damage multiplier. Weapon types -1, 0, and 2 use the melee mastery settings; type 5 uses Marksman mastery settings; unsupported types remain 1.0. Mastery indices 0..4 select Novice through Master game settings.
 0x5FF2A2: fstp    [esp+8+arg_34]; int
 0x5FF2A6: fld1
 0x5FF2A8: add     esp, 8
@@ -57,9 +57,9 @@
 0x5FF2AF: fnstsw  ax
 0x5FF2B1: test    ah, 5
 0x5FF2B4: jp      short loc_5FF2C9
-0x5FF2B6: push    1Fh
-0x5FF2B8: mov     ecx, edi
-0x5FF2BA: call    Actor_GetSkillMasteryLevel
+0x5FF2B6: push    1Fh; actorValue
+0x5FF2B8: mov     ecx, edi; this
+0x5FF2BA: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5FF2BF: cmp     eax, 4
 0x5FF2C2: jnz     short loc_5FF2C9
 0x5FF2C4: mov     [esp+arg_1A], 1
@@ -68,7 +68,7 @@
 0x5FF2D1: mov     ecx, ds:0B38F10h
 0x5FF2D7: fld     [esp+arg_34]
 0x5FF2DB: push    ecx
-0x5FF2DC: call    Double_To_SInt32
+0x5FF2DC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5FF2E1: mov     edx, ds:0B38F08h
 0x5FF2E7: push    eax
 0x5FF2E8: push    edx

@@ -1,204 +1,210 @@
-char __thiscall sub_4F2270(TESWorldSpace *this, BSStringT *a2, float a3, float a4, float a5)
+// Verified: computes/caches worldspace location name; queries TESWorldSpace cell lookup first, then loaded TESRegionList with data ID 4 at coordinates when no cell location applies. Fallback resolves the highest-priority Map region data.
+char __thiscall TESWorldSpace_GetLocationName(
+        TESWorldSpace *this,
+        BSStringT *result,
+        float worldX,
+        float worldY,
+        float worldZ)
 {
   float v7; // edx
   float v8; // eax
   BSStringT *v9; // edi
   TESForm *v10; // eax
   TESForm *v11; // ebx
-  _DWORD *v12; // edi
-  int (__thiscall **v13)(_DWORD *, int); // esi
-  int *v14; // eax
-  int v15; // eax
+  TESRegionDataManager *v12; // edi
+  void **v13; // esi
+  BSExtraData *v14; // eax
+  TESRegionData *v15; // eax
   int v16; // eax
   const char *v17; // ebx
-  int v18; // eax
-  int *v19; // esi
-  int v20; // ebx
+  TESRegionList *regionListOwner; // eax
+  OblivionRegionListNode *p_regions; // esi
+  TESForm *regionForm; // ebx
   _DWORD *v21; // eax
-  _DWORD *v22; // edi
-  int (__thiscall **v23)(_DWORD *, int); // esi
-  int v24; // eax
+  TESRegionDataManager *regionDataManager; // edi
+  void **p_filterDataID4; // esi
+  int DataByID; // eax
   _BYTE *v25; // esi
-  int *v26; // ecx
+  OblivionRegionListNode *next; // ecx
   int v27; // edi
   unsigned int v28; // eax
-  const char *m_data; // eax
+  char *m_data; // eax
   unsigned int v30; // eax
   int v31; // eax
-  float v32; // [esp+0h] [ebp-38h]
-  float v33; // [esp+4h] [ebp-34h]
-  int v34; // [esp+8h] [ebp-30h]
+  float worldXa; // [esp+0h] [ebp-38h]
+  float worldYa; // [esp+4h] [ebp-34h]
+  float v34; // [esp+8h] [ebp-30h]
   char v35; // [esp+23h] [ebp-15h]
-  int *v36; // [esp+24h] [ebp-14h]
+  OblivionRegionListNode *v36; // [esp+24h] [ebp-14h]
   int v37; // [esp+28h] [ebp-10h]
   float v39[2]; // [esp+30h] [ebp-8h] BYREF
 
-  if ( (dword_B360C8 & 1) == 0 )
+  if ( (word_B360C6[1] & 1) == 0 ) /*0x4f228b*/
   {
-    dword_B360C8 |= 1u;
-    stru_B360C0.m_data = 0;
-    stru_B360C0.m_dataLen = 0;
-    stru_B360C0.m_bufLen = 0;
-    atexit(sub_A1C070);
+    *(_DWORD *)&word_B360C6[1] |= 1u; /*0x4f228d*/
+    unk_B360C0.m_data = 0; /*0x4f2299*/
+    word_B360C4 = 0; /*0x4f229f*/
+    word_B360C6[0] = 0; /*0x4f22a6*/
+    atexit(sub_A1C070); /*0x4f22ad*/
   }
-  if ( (dword_B360C8 & 2) == 0 )
-    dword_B360C8 |= 2u;
-  if ( !TESDataHandler )
-    return 0;
-  if ( (TESWorldSpace *)dword_B360BC == this )
+  if ( (word_B360C6[1] & 2) == 0 ) /*0x4f22c0*/
+    *(_DWORD *)&word_B360C6[1] |= 2u; /*0x4f22c2*/
+  if ( !g_TESDataHandler ) /*0x4f22ce*/
+    return 0; /*0x4f22ce*/
+  if ( (TESWorldSpace *)unk_B360BC == this ) /*0x4f22d6*/
   {
-    if ( a3 == flt_B360B0 && a4 == flt_B360B4 && a5 == flt_B360B8 )
+    if ( worldX == unk_B360B0 && worldY == unk_B360B4 && worldZ == unk_B360B8 ) /*0x4f230c*/
     {
-      BSStringT_Set(a2, stru_B360C0.m_data, 0);
-      return 0;
+      BSStringT_Set(result, unk_B360C0.m_data, 0); /*0x4f2318*/
+      return 0; /*0x4f2325*/
     }
   }
   else
   {
-    BSStringT_Set(&stru_B360C0, EmptyString, 0);
+    BSStringT_Set(&unk_B360C0, EmptyString, 0); /*0x4f2333*/
   }
-  v7 = a4;
-  v8 = a5;
-  v9 = a2;
-  flt_B360B0 = a3;
-  dword_B360BC = (int)this;
-  flt_B360B4 = v7;
-  flt_B360B8 = v8;
-  BSStringT_Set(a2, EmptyString, 0);
-  v10 = sub_44A270((TESWorldSpace **)TESDataHandler, a3, a4, this, 0);
-  v11 = v10;
-  if ( !v10 )
+  v7 = worldY; /*0x4f233b*/
+  v8 = worldZ; /*0x4f233e*/
+  v9 = result; /*0x4f2341*/
+  unk_B360B0 = worldX; /*0x4f2345*/
+  unk_B360BC = (int)this; /*0x4f2352*/
+  unk_B360B4 = v7; /*0x4f2358*/
+  unk_B360B8 = v8; /*0x4f235e*/
+  BSStringT_Set(result, EmptyString, 0); /*0x4f2363*/
+  v10 = sub_44A270((TESWorldSpace **)g_TESDataHandler, worldX, worldY, this, 0); /*0x4f2380*/
+  v11 = v10; /*0x4f2385*/
+  if ( !v10 ) /*0x4f2389*/
   {
-    v18 = *(_DWORD *)(TESDataHandler + 0xBC);
-    if ( v18 )
+    regionListOwner = g_TESDataHandler->regionListOwner; /*0x4f241a*/
+    if ( regionListOwner ) /*0x4f2422*/
     {
-      v19 = (int *)(v18 + 4);
-      v36 = (int *)(v18 + 4);
+      p_regions = &regionListOwner->regions; /*0x4f2424*/
+      v36 = &regionListOwner->regions; /*0x4f2427*/
     }
     else
     {
-      v36 = 0;
-      v19 = 0;
+      v36 = 0; /*0x4f242d*/
+      p_regions = 0; /*0x4f2435*/
     }
-    sub_4A6950(v39, &a3);
-    v37 = 0xFFFFFFFF;
-    v35 = 0;
-    if ( !v19 )
-      goto LABEL_52;
-    while ( 1 )
+    sub_4A6950(v39, &worldX); /*0x4f2441*/
+    v37 = 0xFFFFFFFF; /*0x4f2448*/
+    v35 = 0; /*0x4f2450*/
+    if ( !p_regions ) /*0x4f2455*/
+      goto LABEL_52; /*0x4f2455*/
+    while ( 1 ) /*0x4f2464*/
     {
-      v20 = *v19;
-      if ( !*v19 )
-        goto LABEL_51;
-      if ( (*(_DWORD *)(v20 + 8) & 0x20) != 0
-        || *(TESWorldSpace **)(v20 + 0x20) != this
-        || (v21 = *(_DWORD **)(v20 + 0x1C)) == 0
+      regionForm = p_regions->regionForm; /*0x4f2464*/
+      if ( !p_regions->regionForm ) /*0x4f2468*/
+        goto LABEL_51; /*0x4f2468*/
+      if ( (regionForm->member.flags & 0x20) != 0 /*0x4f249b*/
+        || (TESWorldSpace *)regionForm[1].member.flags != this
+        || (v21 = *(_DWORD **)&regionForm[1].member.type) == 0
         || !v21[1] && !*v21 )
       {
-        v26 = (int *)v19[1];
-        goto LABEL_49;
+        next = p_regions->next; /*0x4f2564*/
+        goto LABEL_49; /*0x4f2564*/
       }
-      v22 = *(_DWORD **)(TESDataHandler + 0xCD8);
-      v23 = (int (__thiscall **)(_DWORD *, int))(*v22 + 0x10);
-      v24 = sub_4A4460(*(int **)(v20 + 0x18), 4);
-      v25 = (_BYTE *)(*v23)(v22, v24);
-      if ( !v25 )
-        break;
-      v27 = *(_DWORD *)(v20 + 0x1C);
-      if ( !v27 )
+      regionDataManager = g_TESDataHandler->regionDataManager; /*0x4f24aa*/
+      p_filterDataID4 = &regionDataManager->vtable->filterDataID4; /*0x4f24b7*/
+      DataByID = TESRegion_FindDataByID((int *)regionForm[1].vtbl, 4);// Verified: worldspace location-name lookup requests region data ID 4 (Map) then evaluates map data with coordinates. /*0x4f24ba*/
+      v25 = (_BYTE *)((int (__thiscall *)(TESRegionDataManager *, int))*p_filterDataID4)(regionDataManager, DataByID); /*0x4f24c6*/
+      if ( !v25 ) /*0x4f24ca*/
+        break; /*0x4f24ca*/
+      v27 = *(_DWORD *)&regionForm[1].member.type; /*0x4f24d8*/
+      if ( !v27 ) /*0x4f24dd*/
       {
 LABEL_39:
-        v26 = (int *)v36[1];
-        goto LABEL_49;
+        next = v36->next; /*0x4f24fa*/
+        goto LABEL_49; /*0x4f2501*/
       }
-      while ( 1 )
+      while ( 1 ) /*0x4f24df*/
       {
-        if ( !*(_DWORD *)v27 )
-          goto LABEL_39;
-        if ( sub_4A7330(*(float **)v27, v39) )
-          break;
-        v27 = *(_DWORD *)(v27 + 4);
-        if ( !v27 )
-          goto LABEL_39;
+        if ( !*(_DWORD *)v27 ) /*0x4f24e3*/
+          goto LABEL_39; /*0x4f24e3*/
+        if ( sub_4A7330(*(float **)v27, v39) ) /*0x4f24ea*/
+          break; /*0x4f24ea*/
+        v27 = *(_DWORD *)(v27 + 4); /*0x4f24f3*/
+        if ( !v27 ) /*0x4f24f8*/
+          goto LABEL_39; /*0x4f24f8*/
       }
-      if ( v25[4] )
+      if ( v25[4] ) /*0x4f2503*/
       {
-        if ( v35 && (unsigned __int8)v25[6] <= v37 )
+        if ( v35 && (unsigned __int8)v25[6] <= v37 ) /*0x4f2519*/
         {
-          v26 = (int *)v36[1];
-          goto LABEL_49;
+          next = v36->next; /*0x4f251f*/
+          goto LABEL_49; /*0x4f2522*/
         }
 LABEL_46:
-        v35 = v25[4];
-        v37 = (unsigned __int8)v25[6];
-        (*(void (__thiscall **)(_BYTE *, BSStringT *))(*(_DWORD *)v25 + 0x24))(v25, a2);
-        v26 = (int *)v36[1];
-        goto LABEL_49;
+        v35 = v25[4]; /*0x4f2535*/
+        v37 = (unsigned __int8)v25[6]; /*0x4f2542*/
+        (*(void (__thiscall **)(_BYTE *, BSStringT *))(*(_DWORD *)v25 + 0x24))(v25, result); /*0x4f254c*/
+        next = v36->next; /*0x4f2552*/
+        goto LABEL_49; /*0x4f2555*/
       }
-      if ( !v35 && (unsigned __int8)v25[6] > v37 )
-        goto LABEL_46;
-      v36 = (int *)v36[1];
+      if ( !v35 && (unsigned __int8)v25[6] > v37 ) /*0x4f2533*/
+        goto LABEL_46; /*0x4f2533*/
+      v36 = v36->next; /*0x4f255e*/
 LABEL_50:
-      if ( !v36 )
-        goto LABEL_51;
-      v19 = v36;
+      if ( !v36 ) /*0x4f2570*/
+        goto LABEL_51; /*0x4f2570*/
+      p_regions = v36; /*0x4f2460*/
     }
-    v26 = (int *)v36[1];
+    next = v36->next; /*0x4f24d0*/
 LABEL_49:
-    v36 = v26;
-    goto LABEL_50;
+    v36 = next; /*0x4f2567*/
+    goto LABEL_50; /*0x4f2567*/
   }
-  if ( !sub_4C9B40((ExtraDataList *)v10, 1) )
+  if ( !sub_4C9B40((ExtraDataList *)v10, 1) ) /*0x4f239a*/
   {
 LABEL_18:
-    v17 = *(const char **)&v11[1].member.type;
-    if ( !v17 )
-      v17 = EmptyString;
-    BSStringT_Set(v9, v17, 0);
-    goto LABEL_52;
+    v17 = *(const char **)&v11[1].member.type; /*0x4f23fa*/
+    if ( !v17 ) /*0x4f23ff*/
+      v17 = EmptyString; /*0x4f2401*/
+    BSStringT_Set(v9, v17, 0); /*0x4f240b*/
+    goto LABEL_52; /*0x4f2410*/
   }
-  v12 = *(_DWORD **)(TESDataHandler + 0xCD8);
-  v32 = a3;
-  v33 = a4;
-  v34 = LODWORD(a5);
-  v13 = (int (__thiscall **)(_DWORD *, int))(*v12 + 0x10);
-  v14 = (int *)sub_4C9B40((ExtraDataList *)v11, 1);
-  v15 = sub_4A67B0(v14, 4, v32, v33, v34, (int)this);
-  v16 = (*v13)(v12, v15);
-  if ( !v16 )
+  v12 = g_TESDataHandler->regionDataManager; /*0x4f23a6*/
+  worldXa = worldX; /*0x4f23ba*/
+  worldYa = worldY; /*0x4f23bf*/
+  v34 = worldZ; /*0x4f23c4*/
+  v13 = &v12->vtable->filterDataID4; /*0x4f23cb*/
+  v14 = sub_4C9B40((ExtraDataList *)v11, 1); /*0x4f23ce*/
+  v15 = TESRegionList_SelectDataAtWorldPosition((TESRegionList *)v14, 4, worldXa, worldYa, v34, this);// Verified: this caller uses TESRegionDataMap ID 4 for worldspace location-name lookup; separate from cell music, which uses sound ID 7. /*0x4f23d5*/
+  v16 = ((int (__thiscall *)(TESRegionDataManager *, TESRegionData *))*v13)(v12, v15); /*0x4f23df*/
+  if ( !v16 ) /*0x4f23e3*/
   {
-    v9 = a2;
-    goto LABEL_18;
+    v9 = result; /*0x4f23f7*/
+    goto LABEL_18; /*0x4f23f7*/
   }
-  (*(void (__thiscall **)(int, BSStringT *))(*(_DWORD *)v16 + 0x24))(v16, a2);
+  (*(void (__thiscall **)(int, BSStringT *))(*(_DWORD *)v16 + 0x24))(v16, result); /*0x4f23f0*/
 LABEL_51:
-  v9 = a2;
+  v9 = result; /*0x4f2576*/
 LABEL_52:
-  LOWORD(v28) = v9->m_dataLen;
-  if ( (_WORD)v28 == 0xFFFF )
-    v28 = strlen(v9->m_data);
+  LOWORD(v28) = v9->m_dataLen; /*0x4f2579*/
+  if ( (_WORD)v28 == 0xFFFF ) /*0x4f2581*/
+    v28 = strlen(v9->m_data); /*0x4f2591*/
   else
-    v28 = (unsigned __int16)v28;
-  if ( !v28 )
+    v28 = (unsigned __int16)v28; /*0x4f2595*/
+  if ( !v28 ) /*0x4f259a*/
   {
-    m_data = this->fullName.name.m_data;
-    if ( !m_data )
-      m_data = EmptyString;
-    BSStringT_Set(v9, m_data, 0);
+    m_data = this->fullName.name.m_data; /*0x4f25a0*/
+    if ( !m_data ) /*0x4f25a5*/
+      m_data = EmptyString; /*0x4f25a7*/
+    BSStringT_Set(v9, m_data, 0); /*0x4f25b1*/
   }
-  LOWORD(v30) = v9->m_dataLen;
-  if ( (_WORD)v30 == 0xFFFF )
-    v30 = strlen(v9->m_data);
+  LOWORD(v30) = v9->m_dataLen; /*0x4f25b6*/
+  if ( (_WORD)v30 == 0xFFFF ) /*0x4f25be*/
+    v30 = strlen(v9->m_data); /*0x4f25ce*/
   else
-    v30 = (unsigned __int16)v30;
-  if ( !v30 )
-    BSStringT_Set(v9, (const char *)sDefaultCellName, 0);
-  if ( stru_B360C0.m_data && v9->m_data )
-    v31 = _strcmp(v9->m_data, stru_B360C0.m_data);
+    v30 = (unsigned __int16)v30; /*0x4f25d2*/
+  if ( !v30 ) /*0x4f25d7*/
+    BSStringT_Set(v9, MEMORY[0xB35C0C].value, 0); /*0x4f25e2*/
+  if ( unk_B360C0.m_data && v9->m_data ) /*0x4f25f1*/
+    v31 = CRT_StricmpLocaleDispatch(v9->m_data, unk_B360C0.m_data); /*0x4f25f9*/
   else
-    v31 = 2 * (stru_B360C0.m_data == 0) - 1;
-  if ( !v31 )
-    return 0;
-  BSStringT_Set(&stru_B360C0, v9->m_data, 0);
-  return 1;
+    v31 = 2 * (unk_B360C0.m_data == 0) - 1; /*0x4f260a*/
+  if ( !v31 ) /*0x4f2610*/
+    return 0; /*0x4f2610*/
+  BSStringT_Set(&unk_B360C0, v9->m_data, 0); /*0x4f2620*/
+  return 1; /*0x4f231f*/
 }

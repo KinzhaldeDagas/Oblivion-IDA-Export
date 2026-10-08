@@ -1,4 +1,4 @@
-0x474070: push    0FFFFFFFFh
+0x474070: push    0FFFFFFFFh; CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.
 0x474072: push    offset ??0AnimSequenceSingle@@QAE@XZ_SEH
 0x474077: mov     eax, large fs:0
 0x47407D: push    eax
@@ -16,7 +16,7 @@
 0x474099: mov     ebp, [esp+2Ch+arg_0]
 0x47409D: mov     esi, [ebp+8]
 0x4740A0: test    esi, esi
-0x4740A2: mov     [esp+2Ch+var_18], esi
+0x4740A2: mov     [esp+2Ch+slot], esi
 0x4740A6: jz      short loc_4740B2
 0x4740A8: lea     eax, [esi+4]
 0x4740AB: push    eax; lpAddend
@@ -25,10 +25,10 @@
 0x4740B4: mov     [esp+2Ch+var_4], 0
 0x4740BC: jz      short loc_47411D
 0x4740BE: mov     ecx, esi
-0x4740C0: call    TESAnimGroup_GetAnimationGroup
-0x4740C5: mov     ecx, esi
+0x4740C0: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
+0x4740C5: mov     ecx, esi; object
 0x4740C7: mov     [esp+2Ch+arg_0], eax
-0x4740CB: call    TESActorBaseData_GetMagicka
+0x4740CB: call    Shared_GetWordAtOffset08; TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.
 0x4740D0: cmp     [esp+2Ch+arg_0], 0FFh
 0x4740D8: movzx   edi, ax
 0x4740DB: mov     [esp+2Ch+var_10], edi
@@ -62,7 +62,7 @@
 0x47412F: xor     esi, esi
 0x474131: push    edi
 0x474132: mov     [esp+34h+var_14], esi
-0x474136: call    sub_470960
+0x474136: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x47413B: test    al, al
 0x47413D: jnz     short loc_47417A
 0x47413F: push    8; Size
@@ -76,14 +76,14 @@
 0x474157: mov     ecx, [ebx+9Ch]
 0x47415D: push    edi
 0x47415E: mov     esi, eax
-0x474160: call    sub_470820
+0x474160: call    AnimKeyMap_InsertOrAssign; Insert-or-assign for the ActorAnimData encoded-key map at +0x9C. Hashes UInt16 key, finds an equal node, invokes node cleanup before overwrite, or allocates/links a new node and increments map count.
 0x474165: jmp     short loc_47417E
 0x474167: mov     ecx, [ebx+9Ch]
 0x47416D: xor     eax, eax
 0x47416F: push    eax
 0x474170: push    edi
 0x474171: mov     esi, eax
-0x474173: call    sub_470820
+0x474173: call    AnimKeyMap_InsertOrAssign; Insert-or-assign for the ActorAnimData encoded-key map at +0x9C. Hashes UInt16 key, finds an equal node, invokes node cleanup before overwrite, or allocates/links a new node and increments map count.
 0x474178: jmp     short loc_47417E
 0x47417A: mov     esi, [esp+2Ch+var_14]
 0x47417E: mov     edx, [esi]
@@ -105,7 +105,7 @@
 0x4741B1: jz      short loc_4741FB
 0x4741B3: mov     ecx, [ebx+9Ch]
 0x4741B9: push    edi
-0x4741BA: call    sub_4708B0
+0x4741BA: call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.
 0x4741BF: push    8; Size
 0x4741C1: call    FormHeapAlloc
 0x4741C6: add     esp, 4
@@ -115,7 +115,7 @@
 0x4741D4: jz      short loc_4741E0
 0x4741D6: push    esi
 0x4741D7: mov     ecx, eax; this
-0x4741D9: call    ??0AnimSequenceMultiple@@QAE@XZ; AnimSequenceMultiple::AnimSequenceMultiple(void)
+0x4741D9: call    AnimSequenceMultiple_ctor; AnimSequenceMultiple constructor: converts an existing single sequence entry into a multiple-sequence list and moves the existing BSAnimGroupSequence into it.
 0x4741DE: jmp     short loc_4741E2
 0x4741E0: xor     eax, eax
 0x4741E2: mov     ecx, [ebx+9Ch]
@@ -123,7 +123,7 @@
 0x4741E9: push    edi
 0x4741EA: mov     byte ptr [esp+34h+var_4], 0
 0x4741EF: mov     esi, eax
-0x4741F1: call    sub_470820
+0x4741F1: call    AnimKeyMap_InsertOrAssign; Insert-or-assign for the ActorAnimData encoded-key map at +0x9C. Hashes UInt16 key, finds an equal node, invokes node cleanup before overwrite, or allocates/links a new node and increments map count.
 0x4741F6: jmp     loc_474315
 0x4741FB: mov     edx, [esi]
 0x4741FD: mov     eax, [edx+10h]
@@ -134,15 +134,15 @@
 0x474209: mov     ecx, [ebp+8]
 0x47420C: cmp     eax, ecx
 0x47420E: jnz     short loc_47423A
-0x474210: call    TESAnimGroup_GetAnimationGroup
+0x474210: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x474215: cmp     eax, 1
 0x474218: jnz     short loc_474224
 0x47421A: add     ebp, 0Ch
 0x47421D: push    ebp; lpAddend
 0x47421E: call    dword ptr ds:0A2807Ch
-0x474224: lea     ecx, [esp+2Ch+var_18]; this
+0x474224: lea     ecx, [esp+2Ch+slot]; slot
 0x474228: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x474230: call    sub_7016A0
+0x474230: call    NiPointerSlot_Release
 0x474235: jmp     loc_4744ED
 0x47423A: mov     edx, [esi]
 0x47423C: mov     eax, [edx+10h]
@@ -150,7 +150,7 @@
 0x474241: mov     ecx, esi
 0x474243: call    eax
 0x474245: mov     ecx, [eax+68h]
-0x474248: call    TESAnimGroup_GetAnimationGroup
+0x474248: call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.
 0x47424D: cmp     eax, 1
 0x474250: jnz     short loc_47426E
 0x474252: mov     edx, [esi]
@@ -162,7 +162,7 @@
 0x474260: mov     ecx, ds:0B33A1Ch
 0x474266: push    1
 0x474268: push    eax
-0x474269: call    sub_438540
+0x474269: call    ModelLoader_ReleaseModelPath; Releases a model-loader path reference. Used by AnimIdle/queued-loader cleanup when a KF/model reference is no longer needed.
 0x47426E: mov     eax, [ebx+0D4h]
 0x474274: test    eax, eax
 0x474276: jz      short loc_47428A
@@ -195,9 +195,9 @@
 0x4742B8: lea     ecx, [esp+30h+var_14]
 0x4742BC: push    ecx
 0x4742BD: mov     ecx, edi
-0x4742BF: call    sub_6C4A10
-0x4742C4: lea     ecx, [esp+2Ch+var_14]; this
-0x4742C8: call    sub_7016A0
+0x4742BF: call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
+0x4742C4: lea     ecx, [esp+2Ch+var_14]; slot
+0x4742C8: call    NiPointerSlot_Release
 0x4742CD: mov     edx, [esi]
 0x4742CF: mov     eax, [edx+10h]
 0x4742D2: push    0FFFFFFFFh
@@ -222,14 +222,14 @@
 0x47430F: push    0
 0x474311: mov     ecx, esi
 0x474313: call    eax
-0x474315: cmp     [esp+2Ch+ArgList], 0
+0x474315: cmp     byte ptr [esp+2Ch+ArgList], 0
 0x47431A: jz      short loc_474352
 0x47431C: mov     edi, [esp+2Ch+arg_0]
 0x474320: test    edi, edi
 0x474322: jz      short loc_474352
 0x474324: push    0
 0x474326: push    40Ch
-0x47432B: call    sub_5790E0
+0x47432B: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x474330: add     esp, 8
 0x474333: test    al, al
 0x474335: jz      short loc_47433C
@@ -245,7 +245,7 @@
 0x474355: push    6Ch ; 'l'; Size
 0x474357: call    FormHeapAlloc
 0x47435C: add     esp, 4
-0x47435F: mov     dword ptr [esp+2Ch+ArgList], eax
+0x47435F: mov     [esp+2Ch+ArgList], eax
 0x474363: test    eax, eax
 0x474365: mov     byte ptr [esp+2Ch+var_4], 2
 0x47436A: jz      short loc_47437C
@@ -253,7 +253,7 @@
 0x47436F: push    edi
 0x474370: push    ecx
 0x474371: mov     ecx, eax; this
-0x474373: call    ??0BSAnimGroupSequence@@QAE@XZ; BSAnimGroupSequence::BSAnimGroupSequence(void)
+0x474373: call    ??0BSAnimGroupSequence@@QAE@XZ; BSAnimGroupSequence ctor: stores parsed TESAnimGroup at +0x68 with refcount, copies source sequence/controller data from KF model.
 0x474378: mov     edi, eax
 0x47437A: jmp     short loc_47437E
 0x47437C: xor     edi, edi
@@ -263,11 +263,11 @@
 0x474384: mov     ecx, esi
 0x474386: mov     byte ptr [esp+30h+var_4], 0
 0x47438B: call    eax
-0x47438D: mov     ecx, [ebx+98h]
-0x474393: push    1
-0x474395: push    0
-0x474397: push    edi
-0x474398: call    sub_6C5760
+0x47438D: mov     ecx, [ebx+98h]; this
+0x474393: push    1; validateControlledBlocks
+0x474395: push    0; name
+0x474397: push    edi; sequence
+0x474398: call    NiControllerManager_AddSequence; Adds a controller sequence to a NiControllerManager: rejects an already-owned sequence, binds manager, optionally validates controlled blocks, stores name mapping/list membership, and balances the temporary reference.
 0x47439D: test    al, al
 0x47439F: jnz     loc_4744AA
 0x4743A5: mov     ecx, [ebx+4]
@@ -283,7 +283,6 @@
 0x4743C6: cmp     [edi+0Ch], ebp
 0x4743C9: jbe     short loc_474417
 0x4743CB: jmp     short loc_4743D0
-0x4743CD: align 10h
 0x4743D0: lea     edx, [esp+2Ch+ArgList]
 0x4743D4: push    edx
 0x4743D5: push    ebp
@@ -291,20 +290,20 @@
 0x4743D8: call    sub_6C66B0
 0x4743DD: mov     ecx, [ebx+4]
 0x4743E0: mov     eax, [ecx]
-0x4743E2: mov     edx, dword ptr [esp+2Ch+ArgList]
+0x4743E2: mov     edx, [esp+2Ch+ArgList]
 0x4743E6: mov     eax, [eax+58h]
 0x4743E9: push    edx
 0x4743EA: call    eax
 0x4743EC: test    eax, eax
 0x4743EE: jnz     short loc_474402
-0x4743F0: mov     ecx, dword ptr [esp+2Ch+ArgList]
+0x4743F0: mov     ecx, [esp+2Ch+ArgList]
 0x4743F4: push    ecx; ArgList
 0x4743F5: push    offset aObjectSInSeque; "Object '%s' in sequence but not skeleto"...
 0x4743FA: call    PrintError
 0x4743FF: add     esp, 8
-0x474402: mov     edx, dword ptr [esp+2Ch+ArgList]
+0x474402: mov     edx, [esp+2Ch+ArgList]
 0x474406: push    edx
-0x474407: call    FormHeapFree
+0x474407: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x47440C: add     ebp, 1
 0x47440F: add     esp, 4
 0x474412: cmp     ebp, [edi+0Ch]
@@ -314,8 +313,8 @@
 0x47441C: mov     byte ptr ds:0B06B18h, 0
 0x474423: mov     ecx, [ebx+98h]
 0x474429: push    eax
-0x47442A: call    sub_6C4A10
-0x47442F: mov     eax, dword ptr [esp+2Ch+ArgList]
+0x47442A: call    KeyframeManager_RemoveSequence; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
+0x47442F: mov     eax, [esp+2Ch+ArgList]
 0x474433: test    eax, eax
 0x474435: jz      short loc_474456
 0x474437: mov     ebp, eax
@@ -341,13 +340,13 @@
 0x474464: mov     ecx, [esp+2Ch+var_10]
 0x474468: push    ecx
 0x474469: mov     ecx, [ebx+9Ch]
-0x47446F: call    sub_4708B0
+0x47446F: call    ActorAnimData_RemoveAnimMapEntry; CustomAnimSupport decode: removes an encoded-key entry from ActorAnimData.animsMap; used by scoped live-sequence cleanup.
 0x474474: mov     edx, [esi]
 0x474476: mov     eax, [edx]
 0x474478: push    1
 0x47447A: mov     ecx, esi
 0x47447C: call    eax
-0x47447E: mov     esi, [esp+2Ch+var_18]
+0x47447E: mov     esi, [esp+2Ch+slot]
 0x474482: lea     ecx, [esi+4]
 0x474485: push    ecx; lpAddend
 0x474486: mov     [esp+30h+var_4], 0FFFFFFFFh
@@ -370,7 +369,7 @@
 0x4744C1: push    eax
 0x4744C2: mov     ecx, ebx
 0x4744C4: call    sub_472640
-0x4744C9: mov     esi, [esp+2Ch+var_18]
+0x4744C9: mov     esi, [esp+2Ch+slot]
 0x4744CD: lea     ecx, [esi+4]
 0x4744D0: push    ecx; lpAddend
 0x4744D1: mov     [esp+30h+var_4], 0FFFFFFFFh
@@ -392,3 +391,22 @@
 0x4744FE: pop     ebx
 0x4744FF: add     esp, 18h
 0x474502: retn    8
+0x9AED90: lea     ecx, [ebp-18h]; slot
+0x9AED93: jmp     NiPointerSlot_Release
+0x9AED98: mov     eax, [ebp-14h]
+0x9AED9B: push    eax
+0x9AED9C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AEDA1: pop     ecx
+0x9AEDA2: retn
+0x9AEDA3: mov     eax, [ebp+8]
+0x9AEDA6: push    eax
+0x9AEDA7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AEDAC: pop     ecx
+0x9AEDAD: retn
+0x9AEDAE: mov     edx, [esp+ArgList]
+0x9AEDB2: lea     eax, [edx-1Ch]
+0x9AEDB5: mov     ecx, [edx-20h]
+0x9AEDB8: xor     ecx, eax
+0x9AEDBA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEDBF: mov     eax, offset stru_ADB480
+0x9AEDC4: jmp     ___CxxFrameHandler3

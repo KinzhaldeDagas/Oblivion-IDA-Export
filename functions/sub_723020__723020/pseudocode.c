@@ -1,5 +1,6 @@
-void __thiscall sub_723020(char **this, NiGeometry *a2, _DWORD **a3)
+// Copies NiGeometry-specific members into a clone, including geometry data, then delegates the NiAVObject/base-member copy.
+void __thiscall NiGeometry_CopyMembersForClone(NiGeometry *this, NiGeometry *dest, void *cloningProcess)
 {
-  a2->__vftable->SetGeomData(a2, (NiObject *)*(this + 0x2D));
-  sub_707E90(this, a2, a3);
+  dest->__vftable->SetGeomData(dest, (NiObject *)this->member.geomData); /*0x723039*/
+  sub_707E90((char **)this, dest, (_DWORD **)cloningProcess); /*0x723043*/
 }

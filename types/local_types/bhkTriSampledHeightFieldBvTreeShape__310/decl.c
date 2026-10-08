@@ -1,1 +1,1 @@
-bhkTriSampledHeightFieldBvTreeShape
+struct bhkTriSampledHeightFieldBvTreeShape;

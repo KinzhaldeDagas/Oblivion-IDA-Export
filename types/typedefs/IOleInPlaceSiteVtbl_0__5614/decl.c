@@ -1,1 +1,1 @@
-IOleInPlaceSiteVtbl_0
+typedef IOleInPlaceSiteVtbl IOleInPlaceSiteVtbl_0;

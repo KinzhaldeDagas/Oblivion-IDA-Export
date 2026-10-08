@@ -31,3 +31,21 @@
 0x4AF606: pop     esi
 0x4AF607: add     esp, 14h
 0x4AF60A: retn
+0x9B2E50: mov     ecx, [ebp-10h]
+0x9B2E53: jmp     TESObject_destr
+0x9B2E58: cmp     dword ptr [ebp-10h], 0
+0x9B2E5C: jz      loc_9B2E70
+0x9B2E62: mov     eax, [ebp-10h]
+0x9B2E65: add     eax, 24h ; '$'
+0x9B2E68: mov     [ebp-14h], eax
+0x9B2E6B: jmp     loc_9B2E77
+0x9B2E70: mov     dword ptr [ebp-14h], 0
+0x9B2E77: mov     ecx, [ebp-14h]
+0x9B2E7A: jmp     TESLeveledList_destr
+0x9B2E7F: mov     edx, [esp+arg_4]
+0x9B2E83: lea     eax, [edx-10h]
+0x9B2E86: mov     ecx, [edx-14h]
+0x9B2E89: xor     ecx, eax
+0x9B2E8B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2E90: mov     eax, offset stru_ADECB0
+0x9B2E95: jmp     ___CxxFrameHandler3

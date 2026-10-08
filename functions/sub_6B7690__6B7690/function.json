@@ -1,19 +1,32 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B7690",
+      "0x6B7837"
+    ]
+  ],
+  "chunks_sha256": "af91e460134fc1fcd0e7181e95e1f86b229f3a86ddd6af583e7e90255646538c",
+  "comment_regular": "Conversation serialization writes UInt16 item count, every DialogueItem, and a UInt16 index for the list-internal current-item cursor. This is distinct from DialoguePackage's external currentItem/currentResponse indices.",
+  "comment_repeatable": "Conversation serialization writes UInt16 item count, every DialogueItem, and a UInt16 index for the list-internal current-item cursor. This is distinct from DialoguePackage's external currentItem/currentResponse indices.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_6B7690",
+  "display_name": "Conversation::SaveGame",
   "end_ea": "0x6B7837",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B7690",
+  "name": "Conversation::SaveGame",
   "segment": ".text",
   "sha256": "af91e460134fc1fcd0e7181e95e1f86b229f3a86ddd6af583e7e90255646538c",
   "size": 423,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B7690",
-  "type": "void __thiscall(const char ****this)",
+  "total_chunk_size": 423,
+  "type": "void __thiscall(ConversationView *this)",
   "xrefs_from_count": 151,
   "xrefs_to_count": 1
 }

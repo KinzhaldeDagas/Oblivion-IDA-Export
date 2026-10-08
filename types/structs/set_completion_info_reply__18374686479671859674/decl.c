@@ -1,1 +1,4 @@
-set_completion_info_reply
+struct set_completion_info_reply
+{
+reply_header __header;
+};

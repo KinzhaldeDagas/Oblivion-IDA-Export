@@ -14,12 +14,12 @@
 0x7E0EEF: mov     large fs:0, eax
 0x7E0EF5: mov     esi, ecx
 0x7E0EF7: mov     [esp+24h+var_10], esi
-0x7E0EFB: call    ??0BSImageSpaceShader@@QAE@XZ; BSImageSpaceShader::BSImageSpaceShader(void)
+0x7E0EFB: call    ??0BSImageSpaceShader@@QAE@XZ; MoonSugarEffect decode: BSImageSpaceShader base ctor calls BSShader ctor, sets vtable, clears source texture +0x7C and scalar fields +0x80..+0x8C.
 0x7E0F00: xor     ebx, ebx
 0x7E0F02: mov     dword ptr [esi], offset ??_7WaterShaderHeightMap@@6B@; const WaterShaderHeightMap::`vftable'
 0x7E0F08: mov     [esp+24h+var_4], ebx
 0x7E0F0C: mov     [esi+0B0h], ebx
-0x7E0F12: push    offset sub_7016A0; a5
+0x7E0F12: push    offset NiPointerSlot_Release; a5
 0x7E0F17: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x7E0F1C: push    7; size
 0x7E0F1E: push    4; a2
@@ -159,3 +159,50 @@
 0x7E10F8: pop     ebx
 0x7E10F9: add     esp, 10h
 0x7E10FC: retn
+0x9CF3F0: mov     ecx, [ebp-10h]; this
+0x9CF3F3: jmp     ??1BSImageSpaceShader@@UAE@XZ; MoonSugarEffect decode: BSImageSpaceShader dtor releases source BSRenderedTexture at +0x7C, clears +0x80..+0x8C, then calls BSShader dtor.
+0x9CF3F8: mov     ecx, [ebp-10h]
+0x9CF3FB: add     ecx, 0B0h ; '°'; slot
+0x9CF401: jmp     NiPointerSlot_Release
+0x9CF406: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CF40B: push    7; int
+0x9CF40D: push    4; unsigned int
+0x9CF40F: mov     eax, [ebp-10h]
+0x9CF412: add     eax, 0B4h ; '´'
+0x9CF417: push    eax; void *
+0x9CF418: call    $LN21
+0x9CF41D: retn
+0x9CF41E: mov     ecx, [ebp-10h]
+0x9CF421: add     ecx, 0D4h ; 'Ô'; void *
+0x9CF427: jmp     sub_4027D0
+0x9CF42C: mov     ecx, [ebp-10h]
+0x9CF42F: add     ecx, 0D8h ; 'Ø'; slot
+0x9CF435: jmp     NiPointerSlot_Release
+0x9CF43A: mov     ecx, [ebp-10h]
+0x9CF43D: add     ecx, 0DCh ; 'Ü'; slot
+0x9CF443: jmp     NiPointerSlot_Release
+0x9CF448: mov     ecx, [ebp-10h]
+0x9CF44B: add     ecx, 0E0h ; 'à'; slot
+0x9CF451: jmp     NiPointerSlot_Release
+0x9CF456: mov     ecx, [ebp-10h]
+0x9CF459: add     ecx, 0E4h ; 'ä'; slot
+0x9CF45F: jmp     NiPointerSlot_Release
+0x9CF464: mov     ecx, [ebp-10h]
+0x9CF467: add     ecx, 0E8h ; 'è'; slot
+0x9CF46D: jmp     NiPointerSlot_Release
+0x9CF472: mov     ecx, [ebp-10h]
+0x9CF475: add     ecx, 0ECh ; 'ì'; slot
+0x9CF47B: jmp     NiPointerSlot_Release
+0x9CF480: mov     ecx, [ebp-10h]
+0x9CF483: add     ecx, 0F0h ; 'ð'; slot
+0x9CF489: jmp     NiPointerSlot_Release
+0x9CF48E: mov     ecx, [ebp-10h]
+0x9CF491: add     ecx, 0F4h ; 'ô'; slot
+0x9CF497: jmp     NiPointerSlot_Release
+0x9CF49C: mov     edx, [esp+arg_4]
+0x9CF4A0: lea     eax, [edx-14h]
+0x9CF4A3: mov     ecx, [edx-18h]
+0x9CF4A6: xor     ecx, eax
+0x9CF4A8: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF4AD: mov     eax, offset stru_AF8078
+0x9CF4B2: jmp     ___CxxFrameHandler3

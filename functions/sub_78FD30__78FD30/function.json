@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78FD30",
+      "0x78FEAE"
+    ]
+  ],
+  "chunks_sha256": "d6141e51c25bda77a164991385760dbbd450c2be0fbffdef2af29a355a155a77",
+  "comment_regular": "\n[24000 research 2026-10-07] Verified density control is native leafInfo+20 spacingTolerance multiplied by max(texture+48,+4C), followed by axis-aligned proximity tests. This is existing collision spacing, not proof of24002 placementDistance semantics. Distinguish the two fields and avoid aliasing a retained24000 scalar onto native spacingTolerance.\n\nSpeedTreeRT 4.1 source match: CBranch::RoomForLeaf. Rejects generated leaves that are too close to existing local leaves based on largest leaf size and spacing tolerance.",
+  "comment_repeatable": "Leaf-room spacing check used for stock leaf collision/placement modes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78FD30",
+  "display_name": "OB_CBranch_CheckLeafRoom_010201A0",
   "end_ea": "0x78FEAE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78FD30",
+  "name": "OB_CBranch_CheckLeafRoom_010201A0",
   "segment": ".text",
   "sha256": "d6141e51c25bda77a164991385760dbbd450c2be0fbffdef2af29a355a155a77",
   "size": 382,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78FD30",
-  "type": "char __stdcall(float *, unsigned int, _DWORD *)",
+  "total_chunk_size": 382,
+  "type": "char __stdcall(float *, unsigned int, OB_stVector4_010201A0 *)",
   "xrefs_from_count": 163,
   "xrefs_to_count": 1
 }

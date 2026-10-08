@@ -1,0 +1,11 @@
+struct OB_stBezierSpline_010201A0
+{
+float minValue;
+float maxValue;
+float variance;
+OB_stVector_stVec_010201A0 controlPoints;
+OB_stVector_stVec_010201A0 controlPointTangents;
+OB_stVectorFloat_010201A0 controlPointTangentLengths;
+OB_stVector_stVec_010201A0 evenlySpacedPoints;
+OB_stVector_stVec_010201A0 splinePoints;
+};

@@ -96,14 +96,12 @@
 0x8DA6D3: mov     [esp+434h+var_420], eax
 0x8DA6D7: mov     [esp+434h+var_408], ecx
 0x8DA6DB: jmp     short loc_8DA6E0
-0x8DA6DD: align 10h
 0x8DA6E0: cmp     esi, [esp+434h+var_418]
 0x8DA6E4: mov     eax, esi
 0x8DA6E6: mov     [esp+434h+var_40C], eax
 0x8DA6EA: jge     loc_8DA7B6
 0x8DA6F0: mov     esi, [esp+434h+var_420]
 0x8DA6F4: jmp     short loc_8DA700
-0x8DA6F6: align 10h
 0x8DA700: mov     cl, byte ptr [esp+434h+arg_4]
 0x8DA707: mov     edi, [esp+434h+var_41C]
 0x8DA70B: mov     [edi+eax], cl

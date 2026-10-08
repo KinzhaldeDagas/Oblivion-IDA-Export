@@ -2,15 +2,18 @@
   "bytes_preview_hex": "",
   "bytes_sha256": "",
   "comments": {
-    "regular": "",
-    "repeatable": ""
+    "regular": "MiddleHighProcess vtable. Process level 1; SetCurrentPackage/GetCurrentPackage implemented, but movement flag setter/getter are no-op/zero. Package can be assigned, but visible crouch/run animation control is HighProcess-only.",
+    "repeatable": "Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded."
   },
+  "confidence_scope": "Raw live IDA annotation; bulk synchronization does not independently verify semantic names or comments.",
   "display_name": "const MiddleHighProcess::`vftable'",
   "ea": "0xA72684",
+  "evidence_confidence": "Unknown",
   "kind": "data",
   "name": "??_7MiddleHighProcess@@6B@",
   "segment": ".rdata",
   "size": 4,
+  "source_annotation_confidence": "Unknown",
   "type": "void *",
   "xrefs_to_count": 2
 }

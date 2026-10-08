@@ -30,7 +30,7 @@
 0x8D6EA8: mov     [eax+4], edx
 0x8D6EAB: mov     edx, [ecx+8]
 0x8D6EAE: mov     [eax+8], edx
-0x8D6EB1: mov     ecx, [ecx+0Ch]; void *
+0x8D6EB1: mov     ecx, [ecx+0Ch]; this
 0x8D6EB4: mov     [eax+0Ch], ecx
 0x8D6EB7: fld     dword ptr [esi+270h]
 0x8D6EBD: mov     eax, [ebp+arg_4]
@@ -55,7 +55,7 @@
 0x8D6F11: shufps  xmm2, xmm0, 0
 0x8D6F15: mulps   xmm2, xmm1
 0x8D6F18: movaps  xmmword ptr [esi+190h], xmm2
-0x8D6F1F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x8D6F1F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x8D6F24: push    esi
 0x8D6F25: call    sub_8CC3F0
 0x8D6F2A: mov     ecx, [esi+88h]

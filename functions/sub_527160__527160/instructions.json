@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x527160",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x5271A0",
-    "line": "lea     eax, [esp+18h+arg_4]",
+    "line": "lea     eax, [esp+18h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5271A4",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5271A7",
-    "line": "push    ebx; int",
+    "line": "push    ebx; count",
     "mnemonic": "push",
     "size": 1
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x5271A9",
-    "line": "push    esi; int",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5271AA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5271AC",
-    "line": "call    sub_526FA0",
+    "line": "call    OB_stVectorFloat_InsertFill_CompilerCopy_010201A0; Oblivion 1.2.0.416: compiler-emitted vector<float>::insert(position,count,value) body used by the checked float insert-one wrapper; 4-byte stride, 1.5x growth, alias-safe local fill value, in-place shift or FormHeap reallocation. Named CompilerCopy because equivalent specializations also exist at other addresses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x5271E3",
-    "line": "mov     [esp+18h+var_4], edi",
+    "line": "mov     [esp+18h+result.current], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,49 +385,49 @@
   },
   {
     "ea": "0x5271F9",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5271FA",
-    "line": "push    esi; int",
+    "line": "push    esi; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5271FB",
-    "line": "push    edi; Dst",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5271FC",
-    "line": "push    esi; int",
+    "line": "push    esi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5271FD",
-    "line": "lea     ecx, [esp+28h+var_8]",
+    "line": "lea     ecx, [esp+28h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x527201",
-    "line": "push    ecx; int",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x527202",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x527204",
-    "line": "call    sub_439050",
+    "line": "call    OB_stVector4_EraseRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "call",
     "size": 5
   },

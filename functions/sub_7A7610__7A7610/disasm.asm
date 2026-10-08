@@ -1,4 +1,4 @@
-0x7A7610: push    0FFFFFFFFh
+0x7A7610: push    0FFFFFFFFh; Compact stock SIdvBranchInfo constructor. Initializes core branch fields, diffuse texcoord controls, flare defaults at +0x24..+0x4C, and default spline pointers.
 0x7A7612: push    offset SEH_7A7610
 0x7A7617: mov     eax, large fs:0
 0x7A761D: push    eax
@@ -62,8 +62,8 @@
 0x7A76D9: cmp     eax, ebx
 0x7A76DB: mov     [esp+20h+var_4], ebx
 0x7A76DF: jz      short loc_7A76EA
-0x7A76E1: mov     ecx, eax
-0x7A76E3: call    sub_785BE0
+0x7A76E1: mov     ecx, eax; this
+0x7A76E3: call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.
 0x7A76E8: jmp     short loc_7A76EC
 0x7A76EA: xor     eax, eax
 0x7A76EC: or      edi, 0FFFFFFFFh
@@ -76,8 +76,8 @@
 0x7A7704: cmp     eax, ebx
 0x7A7706: mov     [esp+20h+var_4], 1
 0x7A770E: jz      short loc_7A7719
-0x7A7710: mov     ecx, eax
-0x7A7712: call    sub_785BE0
+0x7A7710: mov     ecx, eax; this
+0x7A7712: call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.
 0x7A7717: jmp     short loc_7A771B
 0x7A7719: xor     eax, eax
 0x7A771B: push    5Ch ; '\'; Size
@@ -89,8 +89,8 @@
 0x7A7730: cmp     eax, ebx
 0x7A7732: mov     [esp+20h+var_4], 2
 0x7A773A: jz      short loc_7A7745
-0x7A773C: mov     ecx, eax
-0x7A773E: call    sub_785BE0
+0x7A773C: mov     ecx, eax; this
+0x7A773E: call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.
 0x7A7743: jmp     short loc_7A7747
 0x7A7745: xor     eax, eax
 0x7A7747: push    5Ch ; '\'; Size
@@ -102,8 +102,8 @@
 0x7A775C: cmp     eax, ebx
 0x7A775E: mov     [esp+20h+var_4], 3
 0x7A7766: jz      short loc_7A7771
-0x7A7768: mov     ecx, eax
-0x7A776A: call    sub_785BE0
+0x7A7768: mov     ecx, eax; this
+0x7A776A: call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.
 0x7A776F: jmp     short loc_7A7773
 0x7A7771: xor     eax, eax
 0x7A7773: push    5Ch ; '\'; Size
@@ -115,8 +115,8 @@
 0x7A7788: cmp     eax, ebx
 0x7A778A: mov     [esp+20h+var_4], 4
 0x7A7792: jz      short loc_7A779D
-0x7A7794: mov     ecx, eax
-0x7A7796: call    sub_785BE0
+0x7A7794: mov     ecx, eax; this
+0x7A7796: call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.
 0x7A779B: jmp     short loc_7A779F
 0x7A779D: xor     eax, eax
 0x7A779F: push    5Ch ; '\'; Size
@@ -128,8 +128,8 @@
 0x7A77B4: cmp     eax, ebx
 0x7A77B6: mov     [esp+20h+var_4], 5
 0x7A77BE: jz      short loc_7A77DF
-0x7A77C0: mov     ecx, eax
-0x7A77C2: call    sub_785BE0
+0x7A77C0: mov     ecx, eax; this
+0x7A77C2: call    OB_StBezierSpline_DefaultCtor_010201A0; Oblivion 1.2.0.416: default spline constructor sets min=0, max=1, variance=0 and empties five owned vectors. RT4.1 source corroborates defaults/member roles but uses a different stack/heap spill layout; Oblivion's 92-byte vector layout is authoritative.
 0x7A77C7: mov     [esi+60h], eax
 0x7A77CA: mov     eax, esi
 0x7A77CC: mov     ecx, [esp+20h+var_C]
@@ -150,3 +150,40 @@
 0x7A77F2: pop     ebx
 0x7A77F3: add     esp, 10h
 0x7A77F6: retn
+0x9CCDB0: mov     eax, [ebp-10h]; Microsoft VisualC 2-14/net runtime
+0x9CCDB3: push    eax
+0x9CCDB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCDB9: pop     ecx
+0x9CCDBA: retn
+0x9CCDBB: mov     eax, [ebp-10h]
+0x9CCDBE: push    eax
+0x9CCDBF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCDC4: pop     ecx
+0x9CCDC5: retn
+0x9CCDC6: mov     eax, [ebp-10h]
+0x9CCDC9: push    eax
+0x9CCDCA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCDCF: pop     ecx
+0x9CCDD0: retn
+0x9CCDD1: mov     eax, [ebp-10h]
+0x9CCDD4: push    eax
+0x9CCDD5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCDDA: pop     ecx
+0x9CCDDB: retn
+0x9CCDDC: mov     eax, [ebp-10h]
+0x9CCDDF: push    eax
+0x9CCDE0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCDE5: pop     ecx
+0x9CCDE6: retn
+0x9CCDE7: mov     eax, [ebp-10h]
+0x9CCDEA: push    eax
+0x9CCDEB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CCDF0: pop     ecx
+0x9CCDF1: retn
+0x9CCDF2: mov     edx, [esp+arg_4]
+0x9CCDF6: lea     eax, [edx-10h]
+0x9CCDF9: mov     ecx, [edx-14h]
+0x9CCDFC: xor     ecx, eax
+0x9CCDFE: call    @__security_check_cookie@4
+0x9CCE03: mov     eax, offset stru_AF61A4
+0x9CCE08: jmp     ___CxxFrameHandler3

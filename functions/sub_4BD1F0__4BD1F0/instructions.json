@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BD1F0",
-    "line": "push    esi",
+    "line": "push    esi; Verified task cleanup callback: for states other than 6, applies/frees parsed cell-object payloads, then removes the packed cell key from the owner map at task+0x28. The special state 6 meaning remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x4BD1F7",
-    "line": "jz      short loc_4BD224",
+    "line": "jz      short loc_4BD224; Verified state-6 guard on the DistantLOD task cleanup callback: when IOTask_Cancel has already transitioned the task to 6, this hook skips its own payload cleanup/map removal; the cancel path invokes task completion and the destructor remains responsible for any unreleased payload. The canonical enum name for 6 remains Unknown.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x4BD1FF",
-    "line": "push    eax",
+    "line": "push    eax; taskData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD200",
-    "line": "call    sub_4BCEF0",
+    "line": "call    DistantLODLoaderTaskData_CleanupCellObjects; Verified: consumes DistantLODLoaderTaskData, walks its form-pointer -> DistantLODCellObjectData map, dispatches each key through virtual slot +0x11C, then frees the three arrays and clears the map. The external .lod parser RTTI-casts keys to TESBoundObject; the embedded REFR parser stores a NAME-resolved TESForm* without a local cast, so that path's bound-object invariant is Probable, not Verified.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x4BD210",
-    "line": "push    ecx",
+    "line": "push    ecx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD211",
-    "line": "push    eax",
+    "line": "push    eax; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BD212",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },

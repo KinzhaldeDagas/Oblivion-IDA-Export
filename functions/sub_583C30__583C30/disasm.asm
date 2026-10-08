@@ -51,7 +51,7 @@
 0x583CAE: mov     eax, [ecx+0Ch]
 0x583CB1: push    ecx
 0x583CB2: mov     [esi+0Ch], eax
-0x583CB5: call    FormHeapFree
+0x583CB5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x583CBA: fld1
 0x583CBC: add     esp, 4
 0x583CBF: mov     ecx, esi
@@ -61,7 +61,7 @@
 0x583CCF: mov     edx, [ecx+0Ch]
 0x583CD2: push    ecx
 0x583CD3: mov     [eax+0Ch], edx
-0x583CD6: call    FormHeapFree
+0x583CD6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x583CDB: fld1
 0x583CDD: add     esp, 4
 0x583CE0: mov     ecx, esi

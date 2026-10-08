@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6EE010",
+      "0x6EE125"
+    ]
+  ],
+  "chunks_sha256": "6817d986dd4c053bd56a21d81a40169507e60ac935d354d7a0abbd890db92b32",
+  "comment_regular": "FaceGen coefficient generator: resizes all four matrices, then writes base[i] + FaceGen_RandomStandardNormal()*geneticVariation*1.5 for every coefficient. The normal call at 0x6EE070 is the only normal source in this pass.\n\nFaceGen random-generator method. Copies all four base matrices and adds independent N(0,1) * geneticVariation * 1.5 to every coefficient. The manager subobject passed in ECX is not otherwise referenced.",
+  "comment_repeatable": "Resize and randomize all four FaceGen matrices. Output allocation uses unchecked 32-bit rows*columns, but nested writes use the original dimensions; malformed race data can therefore wrap the allocation count and overrun the output vector.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6EE010",
+  "display_name": "FaceGenHeadParameters_AddGaussianVariation",
   "end_ea": "0x6EE125",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_6EE010",
+  "name": "FaceGenHeadParameters_AddGaussianVariation",
   "segment": ".text",
   "sha256": "6817d986dd4c053bd56a21d81a40169507e60ac935d354d7a0abbd890db92b32",
   "size": 277,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6EE010",
-  "type": "void __stdcall(float, unsigned int *, int)",
+  "total_chunk_size": 277,
+  "type": "void __thiscall(void *this, float geneticVariation, const FaceGenHeadParameters *baseParameters, FaceGenHeadParameters *outParameters)",
   "xrefs_from_count": 98,
   "xrefs_to_count": 1
 }

@@ -1,1 +1,1 @@
-HANDLE
+typedef void *HANDLE;

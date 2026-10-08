@@ -1,1 +1,1 @@
-LOGFONTW
+typedef tagLOGFONTW LOGFONTW;

@@ -1,1 +1,1 @@
-CID
+typedef GUID CID;

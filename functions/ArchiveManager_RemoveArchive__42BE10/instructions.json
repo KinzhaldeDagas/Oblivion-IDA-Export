@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x42BE10",
-    "line": "mov     ecx, ArchiveList",
+    "line": "mov     ecx, ds:0B338E0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x42BE27",
-    "line": "mov     ArchiveProvidedLastFile, edi",
+    "line": "mov     ds:0B338E4h, edi",
     "mnemonic": "mov",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x42BE34",
-    "line": "cmp     FirstLoadedArchiveByType[eax], esi",
+    "line": "cmp     [eax+0B338E8h], esi",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x42BE3C",
-    "line": "mov     FirstLoadedArchiveByType[eax], edi",
+    "line": "mov     [eax+0B338E8h], edi",
     "mnemonic": "mov",
     "size": 6
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x42BE58",
-    "line": "mov     ArchiveProvidedLastFile, edi",
+    "line": "mov     ds:0B338E4h, edi",
     "mnemonic": "mov",
     "size": 6
   },

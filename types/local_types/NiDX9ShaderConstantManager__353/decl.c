@@ -1,1 +1,1 @@
-NiDX9ShaderConstantManager
+struct NiDX9ShaderConstantManager;

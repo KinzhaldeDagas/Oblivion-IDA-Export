@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_722B30",
+  "chunks": [
+    [
+      "0x722B30",
+      "0x722BF3"
+    ],
+    [
+      "0x9CF800",
+      "0x9CF823"
+    ]
+  ],
+  "chunks_sha256": "e9770b1e409d587a149eab2c769b8e39acc5b7a0090df6e743e63bad2c212e5b",
+  "comment_regular": "Pass222: NiGeometry override path; clones incoming NiPropertyState and stores result at NiGeometry +0xAC.",
+  "comment_repeatable": "Pass222: NiGeometry override path; clones incoming NiPropertyState and stores result at NiGeometry +0xAC.\nDX11 per-object lifetime audit 2026-10-01: NiGeometry has strong +4 NiRef associations at +AC (NiPropertyState), +B4 (geometry data) and +BC (shader). Constructor7227B0 retains incoming data; getter405760 returns/retains the +AC state; updater722B30 replaces +AC with decrement/destroy/assign/increment semantics; shader setter4EC910 does the same at+BC. NiPropertyState vtableA80984 has TEN strong slots from+8 through+2C; destructor731700 decrements each pointee+4 and destroys-on-zero. Ordinary Lighting30 uses slot4 (+18) with property vtableA9576C and shader vtableA930C4. These owner relationships permit separately qualified positive-CAS pins; mutable raw arrays, pooled render-pass nodes, texture-stage objects and COM resources are separate lifetimes and must not be assumed retained by this proof.\nVerified comparative divergence: Fallout PPC 822034B8 updates an EMBEDDED property state at NiGeometry+C0 under PropertyStateCrit, whereas Oblivion722B30 replaces a strong state POINTER at+AC. Fallout82C139A0 destroys seven inline state slots; Oblivion731700 destroys ten slots at state+8 on a separately refcounted NiPropertyState. Do not transplant Fallout property-state layout, pinning, slot count or locking assumptions.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "NiGeometry_UpdatePropertiesDownward",
   "end_ea": "0x722BF3",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_722B30",
+  "name": "NiGeometry_UpdatePropertiesDownward",
   "segment": ".text",
   "sha256": "8ee1b6ad914b9545165a2eb736646f26022ffdac879025323a266ccbf620b9a1",
   "size": 195,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x722B30",
+  "total_chunk_size": 230,
   "type": "UInt32 *__thiscall(_DWORD *this, Ni2DBuffer *)",
-  "xrefs_from_count": 84,
+  "xrefs_from_count": 95,
   "xrefs_to_count": 14
 }

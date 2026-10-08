@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x648F6C",
-    "line": "call    sub_568BB0",
+    "line": "call    sub_568BB0; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x648FB6",
-    "line": "add     ecx, 44h ; 'D'",
+    "line": "add     ecx, 44h ; 'D'; this",
     "mnemonic": "add",
     "size": 3
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x648FC1",
-    "line": "call    ExtraDataList_GetReferencePointer",
+    "line": "call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x649023",
-    "line": "call    sub_568BB0",
+    "line": "call    sub_568BB0; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x649034",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x6490FB",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x64912F",
-    "line": "mov     ecx, [eax]; this",
+    "line": "mov     ecx, [eax]; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x649144",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x649159",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },

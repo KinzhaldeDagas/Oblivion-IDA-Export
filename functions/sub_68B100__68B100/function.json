@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68B100",
+      "0x68B10F"
+    ]
+  ],
+  "chunks_sha256": "1a32e25570edfb625879452809dc2f8fd06001124ace12017e0961dae3a63a86",
+  "comment_regular": "Verified stores a TESObjectREFR* into payload +0 only when kind==0. The route node does not take an extra reference to the TESObjectREFR.",
+  "comment_repeatable": "Verified stores a TESObjectREFR* into payload +0 only when kind==0. The route node does not take an extra reference to the TESObjectREFR.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_68B100",
+  "display_name": "TravelPathNode_SetReference",
   "end_ea": "0x68B10F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68B100",
+  "name": "TravelPathNode_SetReference",
   "segment": ".text",
   "sha256": "1a32e25570edfb625879452809dc2f8fd06001124ace12017e0961dae3a63a86",
   "size": 15,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68B100",
-  "type": "int __thiscall(_BYTE *this, int)",
+  "total_chunk_size": 15,
+  "type": "TESObjectREFR *__thiscall(TravelPathNode *this, TESObjectREFR *reference)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 1
 }

@@ -26,7 +26,7 @@
 0x471C55: mov     byte ptr [esp+40h+arg_0], al
 0x471C59: jz      short loc_471C79
 0x471C5B: mov     ecx, esi; this
-0x471C5D: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x471C5D: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x471C62: cmp     eax, 1
 0x471C65: jz      short loc_471CDB
 0x471C67: mov     eax, [esi]
@@ -42,15 +42,15 @@
 0x471C83: call    edx
 0x471C85: mov     edi, eax
 0x471C87: push    edi
-0x471C88: push    offset dword_B35288
+0x471C88: push    0B35288h
 0x471C8D: call    NiRTTI__IsObjectOfRTTIType
 0x471C92: add     esp, 8
 0x471C95: test    al, al
 0x471C97: jz      short loc_471CB4
 0x471C99: fld     dword ptr [edi+0E8h]
-0x471C9F: fstp    [esp+40h+var_2C]
+0x471C9F: fstp    [esp+40h+slot]
 0x471CA3: fldz
-0x471CA5: fcomp   [esp+40h+var_2C]
+0x471CA5: fcomp   [esp+40h+slot]
 0x471CA9: fnstsw  ax
 0x471CAB: test    ah, 1
 0x471CAE: jz      loc_471E58
@@ -69,7 +69,7 @@
 0x471CDD: push    1
 0x471CDF: mov     ecx, esi
 0x471CE1: call    sub_5E1370
-0x471CE6: call    InitBSShaderAccumulator
+0x471CE6: call    BSShaderAccumulator_GetOrCreateGlobal
 0x471CEB: test    eax, eax
 0x471CED: jz      short loc_471D06
 0x471CEF: mov     ecx, [esi+0Ch]
@@ -91,7 +91,7 @@
 0x471D19: mov     ecx, esi
 0x471D1B: call    eax
 0x471D1D: push    eax
-0x471D1E: push    offset dword_B35288
+0x471D1E: push    0B35288h
 0x471D23: call    NiRTTI_Cast
 0x471D28: add     esp, 8
 0x471D2B: test    eax, eax
@@ -163,12 +163,12 @@
 0x471DDE: mov     edx, [esi]
 0x471DE0: mov     edx, [edx+88h]
 0x471DE6: push    eax
-0x471DE7: lea     eax, [esp+44h+var_2C]
+0x471DE7: lea     eax, [esp+44h+slot]
 0x471DEB: push    eax
 0x471DEC: mov     ecx, esi
 0x471DEE: call    edx
-0x471DF0: lea     ecx, [esp+40h+var_2C]; this
-0x471DF4: call    sub_7016A0
+0x471DF0: lea     ecx, [esp+40h+slot]; slot
+0x471DF4: call    NiPointerSlot_Release
 0x471DF9: test    edi, edi
 0x471DFB: jz      short loc_471E04
 0x471DFD: mov     byte ptr ds:0B3CBD0h, 1
@@ -191,10 +191,10 @@
 0x471E32: mov     eax, [edx+84h]
 0x471E38: mov     ecx, esi
 0x471E3A: call    eax
-0x471E3C: lea     ecx, [esp+40h+arg_0]; this
+0x471E3C: lea     ecx, [esp+40h+arg_0]; slot
 0x471E40: mov     dword ptr [ebx], 0
 0x471E46: mov     [esp+40h+var_4], 0FFFFFFFFh
-0x471E4E: call    sub_7016A0
+0x471E4E: call    NiPointerSlot_Release
 0x471E53: jmp     loc_471F00
 0x471E58: push    1
 0x471E5A: push    0
@@ -223,7 +223,7 @@
 0x471EA5: mov     ecx, esi
 0x471EA7: call    eax
 0x471EA9: push    eax
-0x471EAA: call    sub_46D5C0
+0x471EAA: call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x471EAF: fadd    st, st
 0x471EB1: add     esp, 4
 0x471EB4: fstp    [esp+40h+arg_0]
@@ -258,3 +258,12 @@
 0x471F0F: pop     ebx
 0x471F10: add     esp, 2Ch
 0x471F13: retn    4
+0x9AEC50: lea     ecx, [ebp+4]; slot
+0x9AEC53: jmp     NiPointerSlot_Release
+0x9AEC58: mov     edx, [esp+arg_4]
+0x9AEC5C: lea     eax, [edx-30h]
+0x9AEC5F: mov     ecx, [edx-34h]
+0x9AEC62: xor     ecx, eax
+0x9AEC64: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEC69: mov     eax, offset stru_ADB358
+0x9AEC6E: jmp     ___CxxFrameHandler3

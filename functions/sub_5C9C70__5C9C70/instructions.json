@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5C9C70",
-    "line": "push    40Ch",
+    "line": "push    40Ch; Reset Face menu action: resolve the open RaceSexMenu, reset the player NPC's active FaceGen delta, synchronously rebuild the player face, then synchronize the menu controls from player state.",
     "mnemonic": "push",
     "size": 5
   },
@@ -133,43 +133,43 @@
   },
   {
     "ea": "0x5C9CB6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C9CB8",
-    "line": "call    sub_521E40",
+    "line": "call    TESNPC_ResetFaceGenDelta; Reset active vampirism-selected NPC delta (GetAViBase 0x45 chooses +0x108/+0x168), not sex-specific. Copies manager default parameters, ensures dimensions without zeroing existing elements, then releases/clears NPC+0x1DC cached object.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9CBD",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C9CBF",
-    "line": "call    sub_5C91E0",
+    "line": "call    RaceSexMenu_RefreshPlayerFace; Complete player-face refresh after character-creation changes. The RaceSexMenu caller supplies this in ECX; generated head reconstruction occurs beneath this call, so it is the narrow boundary for temporarily enabling bFixFaceNormals during Randomize Face.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C9CC4",
-    "line": "push    0",
+    "line": "push    0; rebuildLists",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5C9CC6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C9CC8",
-    "line": "call    sub_5C7BA0",
+    "line": "call    RaceSexMenu_SynchronizeControlsFromPlayer; Broad RaceSexMenu state-to-UI synchronization used after Reset Face. Rebuilds localized controls from current player race/sex/head state; suitable native boundary for restoring a captured FaceGen candidate before UI refresh.",
     "mnemonic": "call",
     "size": 5
   },

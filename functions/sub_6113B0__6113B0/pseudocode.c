@@ -1,147 +1,156 @@
+// RadiantAI: trespass crime side-effect path. Builds crime type 2 record.
 unsigned int __userpurge sub_6113B0@<eax>(
         TESObjectREFR *a1@<ecx>,
         double a2@<st2>,
         double a3@<st1>,
-        TESObjectREFR *a4,
-        int a5,
-        int a6)
+        double a4@<st0>,
+        TESObjectREFR *a5,
+        int a6,
+        unsigned int number)
 {
-  _DWORD *v7; // eax
   _DWORD *v8; // eax
-  unsigned int v9; // edi
-  unsigned int *v10; // eax
-  unsigned int v11; // esi
-  int *v12; // ebp
-  int v13; // esi
-  TESObjectREFR *v14; // ecx
-  char v15; // al
+  Crime *CrimeByNumber; // eax
+  unsigned int v10; // edi
+  Crime *v11; // eax
+  unsigned int v12; // esi
+  EntryData *v13; // ebp
+  TESForm *extendData; // esi
+  TESObjectREFR *v15; // ecx
   char v16; // al
-  int v17; // eax
+  char v17; // al
   signed int v18; // eax
   char v19; // al
-  int v20; // ebp
+  TESTopic *Topic; // ebp
   char *Name; // eax
   bool v23; // [esp+Ch] [ebp-168h]
-  int *v24; // [esp+20h] [ebp-154h]
-  float v25; // [esp+24h] [ebp-150h]
-  int v26; // [esp+28h] [ebp-14Ch]
-  int *v27; // [esp+2Ch] [ebp-148h]
+  EntryData *countDelta; // [esp+20h] [ebp-154h]
+  float DispositionPenalty; // [esp+24h] [ebp-150h]
+  bool useBase; // [esp+28h] [ebp-14Ch]
+  EntryData *v27; // [esp+2Ch] [ebp-148h]
   char Format[300]; // [esp+38h] [ebp-13Ch] BYREF
   unsigned int v29; // [esp+170h] [ebp-4h]
 
   if ( (Actor::GetRaceIfNPC((Actor *)a1)->isPlayable & 1) != 0 )
   {
-    if ( a6 == 0xFFFFFFFF )
+    if ( number == 0xFFFFFFFF )
     {
-      v7 = (_DWORD *)FormHeapAlloc(0x30u);
-      v29 = 0;
-      v8 = v7 ? sub_6070B0(v7, 2u, (int)a4, (int)a1, 0, 0, a5) : 0;
-      v29 = 0xFFFFFFFF;
+      v8 = (_DWORD *)FormHeapAlloc(0x30u); /*0x611420*/
+      v29 = 0; /*0x61142e*/
+      CrimeByNumber = v8 ? (Crime *)sub_6070B0(v8, 2u, (int)a5, (int)a1, 0, 0, a6) : 0;
+      v29 = 0xFFFFFFFF; /*0x61144b*/
     }
     else
     {
-      v8 = (_DWORD *)sub_675BB0(&ActorProcessManager_ptr, 2u, a6);
+      CrimeByNumber = ActorProcessManager_FindCrimeByNumber( /*0x61146b*/
+                        (ActorProcessManager *)&qword_B3BB2C[0x75],
+                        kCrime_Trespass,
+                        number);
     }
-    v9 = (unsigned int)v8;
-    if ( v8 )
+    v10 = (unsigned int)CrimeByNumber; /*0x611470*/
+    if ( CrimeByNumber ) /*0x611474*/
     {
-      if ( a1 != (TESObjectREFR *)TESDataHandler_g_PlayerRef
+      if ( a1 != (TESObjectREFR *)reference /*0x6114db*/
         && ((int (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_37)(a1, 0x1F) == 0x64
         && Actor_IsSneaking(a1)
-        || (v12 = sub_67A290((int)&ActorProcessManager_ptr, a2, a3, v9), v24 = v12, (v27 = v12) == 0) )
+        || (v13 = sub_67A290((int)&qword_B3BB2C[0x75], a2, a3, a4, v10), countDelta = v13, (v27 = v13) == 0) )
       {
-        v10 = (unsigned int *)sub_675BB0(&ActorProcessManager_ptr, 2u, a6);
+        v11 = ActorProcessManager_FindCrimeByNumber((ActorProcessManager *)&qword_B3BB2C[0x75], kCrime_Trespass, number); /*0x6114a8*/
       }
       else
       {
-        do
+        do /*0x611640*/
         {
-          v13 = *v12;
-          if ( !*v12 )
-            break;
-          v14 = *(TESObjectREFR **)(v9 + 8);
-          LOBYTE(v26) = 0;
-          if ( (TESObjectREFR *)v13 == v14 || TESObjectREFR_GetOwner(v14) == (BSExtraDataVtbl *)v13 )
-            LOBYTE(v26) = 1;
-          sub_4DB760(a4);
-          if ( v15 )
+          extendData = (TESForm *)v13->extendData; /*0x6114e0*/
+          if ( !v13->extendData ) /*0x6114e0*/
+            break; /*0x6114e5*/
+          v15 = *(TESObjectREFR **)(v10 + 8); /*0x6114eb*/
+          useBase = 0; /*0x6114f0*/
+          if ( extendData == (TESForm *)v15 || TESObjectREFR_GetOwner(v15) == extendData ) /*0x6114fe*/
+            useBase = 1; /*0x611500*/
+          sub_4DB760(a5); /*0x611509*/
+          if ( v16 ) /*0x611510*/
           {
-            sub_4DB760((TESObjectREFR *)v13);
-            if ( !v16 )
-              continue;
+            sub_4DB760((TESObjectREFR *)extendData); /*0x611514*/
+            if ( !v17 ) /*0x61151b*/
+              continue; /*0x61151b*/
           }
-          sub_605F60((int *)v9, v13, v26);
-          v25 = (float)v17;
-          if ( !sub_5E6C60((Actor *)v13) )
-            (*(void (__thiscall **)(int, _DWORD, float))(*(_DWORD *)v13 + 0x374))(
-              v13,
-              *(_DWORD *)(v9 + 0xC),
-              COERCE_FLOAT(LODWORD(v25)));
-          v18 = (*(int (__thiscall **)(int, TESObjectREFR *))(*(_DWORD *)v13 + 0x224))(v13, a1);
-          if ( sub_605E20(v18, v13) )
+          DispositionPenalty = (float)Crime_GetDispositionPenalty((Crime *)v10, (Actor *)extendData, useBase); /*0x611538*/
+          if ( !Actor_IsGuardClass((Actor *)extendData) ) /*0x61153c*/
+            ((void (__thiscall *)(TESForm *, _DWORD, float))extendData->vtbl[4].super.ClearComponentReferences)( /*0x61155b*/
+              extendData,
+              *(_DWORD *)(v10 + 0xC),
+              COERCE_FLOAT(LODWORD(DispositionPenalty)));
+          v18 = ((int (__thiscall *)(TESForm *, TESObjectREFR *))extendData->vtbl[2].DoPostFixup)(extendData, a1); /*0x611569*/
+          if ( sub_605E20(v18, (int)extendData) ) /*0x61156e*/
           {
-            (*(void (__thiscall **)(int, unsigned int, _DWORD, int, _DWORD))(*(_DWORD *)v13 + 0x310))(v13, v9, 0, 1, 0);
-            sub_4DB760(a1);
-            if ( !v19 )
-              sub_605F00((_DWORD *)v9, (int)a1);
+            ((void (__thiscall *)(TESForm *, unsigned int, _DWORD, int, _DWORD))extendData->vtbl[3].Unk_1F)( /*0x611588*/
+              extendData,
+              v10,
+              0,
+              1,
+              0);
+            sub_4DB760(a1); /*0x61158c*/
+            if ( !v19 ) /*0x611593*/
+              Crime_AddWitness((Crime *)v10, (Actor *)a1); /*0x611598*/
           }
           else
           {
-            dword_B361C4 = a5;
-            *(_DWORD *)(v13 + 0xE4) = *(_DWORD *)(v9 + 0xC);
-            v20 = TESTopic::GEtTopic(2, 0xF);
-            if ( *(_DWORD *)(v9 + 0xC) && sub_5EA050((TESObjectREFR *)v13, *(TESObjectREFR **)(v9 + 0xC), v23) )
-              (*(void (__thiscall **)(int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int))(*(_DWORD *)v13 + 0x32C))(
-                v13,
-                *(_DWORD *)(v9 + 0xC),
+            unk_B361C4 = a6; /*0x6115a3*/
+            extendData[9].member.refID = *(_DWORD *)(v10 + 0xC); /*0x6115af*/
+            Topic = TESTopic::GetTopic(DialogueType_Combat, 0xF); /*0x6115ba*/
+            if ( *(_DWORD *)(v10 + 0xC) && sub_5EA050((TESObjectREFR *)extendData, *(TESObjectREFR **)(v10 + 0xC), v23) ) /*0x6115c9*/
+              ((void (__thiscall *)(TESForm *, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int))extendData->vtbl[3].Unk_26)( /*0x6115ea*/
+                extendData,
+                *(_DWORD *)(v10 + 0xC),
                 0,
                 0,
                 0,
                 0,
                 1);
             else
-              (*(void (__thiscall **)(_DWORD, int, int, _DWORD, _DWORD, int))(**(_DWORD **)(v13 + 0x58) + 0x1A4))(
-                *(_DWORD *)(v13 + 0x58),
-                v13,
-                v20,
+              (*(void (__thiscall **)(Data *, TESForm *, TESTopic *, _DWORD, _DWORD, int))(extendData[3].member.modlist.data->errorState /*0x611601*/
+                                                                                         + 0x1A4))(
+                extendData[3].member.modlist.data,
+                extendData,
+                Topic,
                 0,
                 0,
                 1);
-            v12 = v24;
-            dword_B361C4 = 0;
+            v13 = countDelta; /*0x611603*/
+            unk_B361C4 = 0; /*0x611607*/
           }
-          Name = TESObjectREFR_GetName((TESObjectREFR *)v13);
-          _sprintf(Format, "alarm Trespass sent to  %s ", Name);
-          Interface_ConsolePrint(Format);
-          v24 = (int *)v12[1];
-          v12 = v24;
+          Name = TESObjectREFR_GetName((TESObjectREFR *)extendData); /*0x611613*/
+          _sprintf(Format, "alarm Trespass sent to  %s ", Name); /*0x611623*/
+          Interface_ConsolePrint(Format); /*0x61162d*/
+          countDelta = (EntryData *)v13->countDelta; /*0x61163a*/
+          v13 = countDelta; /*0x61163e*/
         }
-        while ( v24 );
-        BSSimpleList_Clear(v27);
-        FormHeapFree((unsigned int)v27);
-        if ( sub_605F30((_DWORD *)v9) )
+        while ( countDelta ); /*0x611640*/
+        BSSimpleList_Clear(v27); /*0x61164a*/
+        FormHeapFree((unsigned int)v27); /*0x611654*/
+        if ( Crime_GetWitnessCount((Crime *)v10) ) /*0x61165e*/
         {
-          sub_675B30(&ActorProcessManager_ptr, (_DWORD *)v9);
-          FormHeapFree((unsigned int)v12);
-          return *(_DWORD *)(v9 + 0x28);
+          ActorProcessManager_AddCrime((ActorProcessManager *)&qword_B3BB2C[0x75], (Crime *)v10); /*0x61167a*/
+          FormHeapFree((unsigned int)v13); /*0x611680*/
+          return *(_DWORD *)(v10 + 0x28); /*0x61168b*/
         }
-        v10 = (unsigned int *)sub_675BB0(&ActorProcessManager_ptr, 2u, a6);
+        v11 = ActorProcessManager_FindCrimeByNumber((ActorProcessManager *)&qword_B3BB2C[0x75], kCrime_Trespass, number); /*0x611674*/
       }
-      v11 = (unsigned int)v10;
-      if ( v10 == (unsigned int *)v9 )
+      v12 = (unsigned int)v11; /*0x6114ad*/
+      if ( v11 == (Crime *)v10 ) /*0x6114b1*/
       {
-        if ( v10 )
+        if ( v11 ) /*0x61168f*/
         {
-          sub_605E80(v10);
-          FormHeapFree(v11);
+          Crime_Destructor(v11); /*0x611693*/
+          FormHeapFree(v12); /*0x611699*/
         }
       }
       else
       {
-        sub_605E80((unsigned int *)v9);
-        FormHeapFree(v9);
+        Crime_Destructor((Crime *)v10); /*0x6114b9*/
+        FormHeapFree(v10); /*0x6114bf*/
       }
     }
   }
-  return 0xFFFFFFFF;
+  return 0xFFFFFFFF; /*0x6116a4*/
 }

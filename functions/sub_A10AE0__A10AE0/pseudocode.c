@@ -1,4 +1,4 @@
-BSStringT *sub_A10AE0()
+NiRTTI *sub_A10AE0()
 {
-  return sub_70E220((BSStringT *)&unk_B4265C, "NiDX9OnscreenBufferData", (int)&stru_B42654);
+  return NiRTTI_Constructor(&stru_B4265C, "NiDX9OnscreenBufferData", &stru_B42654); /*0xa10af4*/
 }

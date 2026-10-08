@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x53C859",
-    "line": "mov     eax, [esp+68h+arg_0]",
+    "line": "mov     eax, [esp+68h+triangleIndices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x53C85E",
-    "line": "call    sub_543D30",
+    "line": "call    SkyObject__CreateRootNodeAndAttach; Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x53C882",
-    "line": "mov     [esp+70h+var_54], eax",
+    "line": "mov     [esp+70h+normals], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x53C8A7",
-    "line": "mov     [esp+78h+var_44], eax",
+    "line": "mov     [esp+78h+vertices], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x53C8B3",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x53C8B7",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x53C8C7",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x53C8D4",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -415,19 +415,19 @@
   },
   {
     "ea": "0x53C913",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x53C917",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x53C91B",
-    "line": "fst     [esp+78h+arg_0]",
+    "line": "fst     [esp+78h+triangleIndices]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x53C926",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -535,19 +535,19 @@
   },
   {
     "ea": "0x53C962",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x53C966",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x53C96A",
-    "line": "fst     [esp+78h+arg_0]",
+    "line": "fst     [esp+78h+triangleIndices]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x53C975",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -655,19 +655,19 @@
   },
   {
     "ea": "0x53C9B1",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x53C9B5",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x53C9B9",
-    "line": "fst     [esp+78h+arg_0]",
+    "line": "fst     [esp+78h+triangleIndices]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x53C9C6",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x53CA02",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x53CA06",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x53CA0E",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x53CA19",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x53CA56",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x53CA5A",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x53CA5E",
-    "line": "fst     [esp+78h+arg_0]",
+    "line": "fst     [esp+78h+triangleIndices]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x53CA69",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1039,19 +1039,19 @@
   },
   {
     "ea": "0x53CAA5",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x53CAA9",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x53CAAD",
-    "line": "fst     [esp+78h+arg_0]",
+    "line": "fst     [esp+78h+triangleIndices]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x53CAB8",
-    "line": "fld     [esp+78h+arg_0]",
+    "line": "fld     [esp+78h+triangleIndices]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x53CAF4",
-    "line": "fstp    [esp+78h+arg_0]",
+    "line": "fstp    [esp+78h+triangleIndices]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1171,13 +1171,13 @@
   },
   {
     "ea": "0x53CAFA",
-    "line": "fld     [esp+7Ch+arg_0]",
+    "line": "fld     [esp+7Ch+triangleIndices]",
     "mnemonic": "fld",
     "size": 7
   },
   {
     "ea": "0x53CB01",
-    "line": "fst     [esp+7Ch+arg_0]",
+    "line": "fst     [esp+7Ch+triangleIndices]",
     "mnemonic": "fst",
     "size": 7
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x53CB13",
-    "line": "fld     [esp+7Ch+arg_0]",
+    "line": "fld     [esp+7Ch+triangleIndices]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -1621,7 +1621,7 @@
   },
   {
     "ea": "0x53CC0F",
-    "line": "mov     [esp+84h+var_4C], eax",
+    "line": "mov     [esp+84h+textureCoordinates], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x53CC23",
-    "line": "mov     [esp+68h+arg_0], esi",
+    "line": "mov     [esp+68h+triangleIndices], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x53CC5A",
-    "line": "mov     [esp+68h+arg_0], edi",
+    "line": "mov     [esp+68h+triangleIndices], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x53CD44",
-    "line": "mov     [esp+70h+arg_0], eax",
+    "line": "mov     [esp+70h+triangleIndices], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x53CD4D",
-    "line": "mov     ecx, [esp+70h+arg_0]",
+    "line": "mov     ecx, [esp+70h+triangleIndices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x53CDB6",
-    "line": "mov     ecx, [esp+68h+arg_0]",
+    "line": "mov     ecx, [esp+68h+triangleIndices]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2335,73 +2335,73 @@
   },
   {
     "ea": "0x53CDBE",
-    "line": "push    ecx",
+    "line": "push    ecx; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CDBF",
-    "line": "mov     ecx, [esp+6Ch+var_54]",
+    "line": "mov     ecx, [esp+6Ch+normals]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x53CDC3",
-    "line": "push    2",
+    "line": "push    2; triangleCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CDC5",
-    "line": "push    0",
+    "line": "push    0; dataFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CDC7",
-    "line": "push    1",
+    "line": "push    1; hasVertexColors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CDC9",
-    "line": "push    edx",
+    "line": "push    edx; textureCoordinates",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CDCA",
-    "line": "push    esi",
+    "line": "push    esi; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CDCB",
-    "line": "push    ecx",
+    "line": "push    ecx; normals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CDCC",
-    "line": "push    ebx",
+    "line": "push    ebx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CDCD",
-    "line": "push    4",
+    "line": "push    4; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CDCF",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x53CDD1",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2617,7 +2617,7 @@
   },
   {
     "ea": "0x53CE3E",
-    "line": "mov     [esp+68h+arg_0], eax",
+    "line": "mov     [esp+68h+triangleIndices], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2653,13 +2653,13 @@
   },
   {
     "ea": "0x53CE53",
-    "line": "mov     edx, [esp+68h+var_4C]",
+    "line": "mov     edx, [esp+68h+textureCoordinates]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x53CE57",
-    "line": "push    ecx",
+    "line": "push    ecx; triangleIndices",
     "mnemonic": "push",
     "size": 1
   },
@@ -2671,67 +2671,67 @@
   },
   {
     "ea": "0x53CE5C",
-    "line": "push    2",
+    "line": "push    2; triangleCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CE5E",
-    "line": "push    0",
+    "line": "push    0; dataFlags",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CE60",
-    "line": "push    1",
+    "line": "push    1; hasVertexColors",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CE62",
-    "line": "push    edx",
+    "line": "push    edx; textureCoordinates",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CE63",
-    "line": "mov     edx, [esp+7Ch+var_44]",
+    "line": "mov     edx, [esp+7Ch+vertices]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x53CE67",
-    "line": "push    edi",
+    "line": "push    edi; colors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CE68",
-    "line": "push    ecx",
+    "line": "push    ecx; normals",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CE69",
-    "line": "push    edx",
+    "line": "push    edx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53CE6A",
-    "line": "push    4",
+    "line": "push    4; vertexCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53CE6C",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x53CE6E",
-    "line": "call    sub_7174B0",
+    "line": "call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2959,7 +2959,7 @@
   },
   {
     "ea": "0x53CEDE",
-    "line": "mov     [esp+68h+arg_0], esi",
+    "line": "mov     [esp+68h+triangleIndices], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3031,7 +3031,7 @@
   },
   {
     "ea": "0x53CF0B",
-    "line": "mov     [esp+68h+arg_0], esi",
+    "line": "mov     [esp+68h+triangleIndices], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x53CF49",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3355,7 +3355,7 @@
   },
   {
     "ea": "0x53CFCE",
-    "line": "mov     [esp+68h+arg_0], eax",
+    "line": "mov     [esp+68h+triangleIndices], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3583,7 +3583,7 @@
   },
   {
     "ea": "0x53D039",
-    "line": "mov     [esp+68h+arg_0], eax",
+    "line": "mov     [esp+68h+triangleIndices], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4033,19 +4033,19 @@
   },
   {
     "ea": "0x53D114",
-    "line": "lea     ecx, [esp+6Ch+var_30]",
+    "line": "lea     ecx, [esp+6Ch+var_30]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x53D118",
-    "line": "fstp    [esp+6Ch+var_6C]; float",
+    "line": "fstp    [esp+6Ch+angleX]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x53D11B",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4255,7 +4255,7 @@
   },
   {
     "ea": "0x53D197",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
@@ -4267,7 +4267,7 @@
   },
   {
     "ea": "0x53D19B",
-    "line": "push    0",
+    "line": "push    0; normalMapBypass",
     "mnemonic": "push",
     "size": 2
   },
@@ -4279,19 +4279,19 @@
   },
   {
     "ea": "0x53D1A0",
-    "line": "push    0Ah",
+    "line": "push    0Ah; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x53D1A2",
-    "line": "push    eax",
+    "line": "push    eax; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x53D1A3",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4315,7 +4315,7 @@
   },
   {
     "ea": "0x53D1B0",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4345,7 +4345,7 @@
   },
   {
     "ea": "0x53D1BE",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4423,7 +4423,7 @@
   },
   {
     "ea": "0x53D1DF",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4459,7 +4459,7 @@
   },
   {
     "ea": "0x53D1F7",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4489,7 +4489,7 @@
   },
   {
     "ea": "0x53D205",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4573,7 +4573,7 @@
   },
   {
     "ea": "0x53D228",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4648,5 +4648,269 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BA3B0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3B3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3B4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA3B9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3BA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3BB",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3BE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3BF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA3C4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3C5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3C6",
+    "line": "mov     eax, [ebp-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3C9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3CA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA3CF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3D0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3D1",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3D4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3D5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA3DA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3DB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3DC",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3DF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3E0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA3E5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3E6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3E7",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3EA",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA3EF",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3F2",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3F3",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA3F8",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3F9",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3FA",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA3FD",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA3FE",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA403",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA404",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BA405",
+    "line": "mov     edx, [esp+Src]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BA409",
+    "line": "lea     eax, [edx-58h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA40C",
+    "line": "mov     ecx, [edx-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA40F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BA411",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA416",
+    "line": "mov     eax, offset stru_AE455C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA41B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

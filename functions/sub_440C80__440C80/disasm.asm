@@ -8,7 +8,7 @@
 0x440C93: jz      loc_440E07
 0x440C99: push    edi
 0x440C9A: mov     ecx, ebp; this
-0x440C9C: call    TESObjectCELL_IsInterior
+0x440C9C: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x440CA1: test    al, al
 0x440CA3: jz      short loc_440CB6
 0x440CA5: mov     esi, ds:0B06A2Ch

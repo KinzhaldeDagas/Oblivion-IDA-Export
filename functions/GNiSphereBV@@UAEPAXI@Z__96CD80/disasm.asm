@@ -4,7 +4,7 @@
 0x96CD88: mov     dword ptr [esi], offset ??_7NiBoundingVolume@@6B@; const NiBoundingVolume::`vftable'
 0x96CD8E: jz      short loc_96CD99
 0x96CD90: push    esi
-0x96CD91: call    FormHeapFree
+0x96CD91: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x96CD96: add     esp, 4
 0x96CD99: mov     eax, esi
 0x96CD9B: pop     esi

@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x788720",
+      "0x788798"
+    ]
+  ],
+  "chunks_sha256": "4ce16384505ba51d41aacc2c6c856efb3659c09c3a0615b3a21a1de653b63272",
+  "comment_regular": "Oblivion CIndexedGeometry::GetStripLengths: validates LOD range and inner vector state, then returns the selected ushort strip-length buffer or null.\n\n[2026-10-02 packet bounds pass] Verified separate per-LOD length vector, two-byte elements. Selected pointer-vector count from 0x7886C0 alone does not prove this allocation has that many lengths. Bridge reconstruction now checks parallel cardinality and valid begin/end/capacity triplets.\n\nOblivion CIndexedGeometry::GetStripLengths: validates LOD range and inner vector state, then returns the selected ushort strip-length buffer or null.",
+  "comment_repeatable": "Oblivion CIndexedGeometry::GetStripLengths: validates LOD range and inner vector state, then returns the selected ushort strip-length buffer or null.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_788720",
+  "display_name": "OB_CIndexedGeometry_GetStripLengths_010201A0",
   "end_ea": "0x788798",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_788720",
+  "name": "OB_CIndexedGeometry_GetStripLengths_010201A0",
   "segment": ".text",
   "sha256": "4ce16384505ba51d41aacc2c6c856efb3659c09c3a0615b3a21a1de653b63272",
   "size": 120,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x788720",
-  "type": "int __thiscall(int this, __int16)",
+  "total_chunk_size": 120,
+  "type": "const unsigned __int16 *__thiscall(OB_CIndexedGeometry_010201A0 *this, __int16 lodLevel)",
   "xrefs_from_count": 58,
   "xrefs_to_count": 2
 }

@@ -1,4 +1,5 @@
-BSStringT *sub_A120C0()
+// ODismemberment: initializes BSFixedString 'bhkBlendCollisionObject' for class-chain checks.
+NiRTTI *sub_A120C0()
 {
-  return sub_70E220((BSStringT *)dword_BA7A20, "bhkBlendCollisionObject", (int)dword_BA7D24);
+  return NiRTTI_Constructor(&MEMORY[0xBA7A20], "bhkBlendCollisionObject", &MEMORY[0xBA7D24]); /*0xa120d4*/
 }

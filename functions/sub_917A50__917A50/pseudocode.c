@@ -11,29 +11,29 @@ double __userpurge sub_917A50@<st0>(__m128 *a1@<ecx>, double a2@<st0>, __m128 *a
   unsigned int v13; // [esp+8h] [ebp-14h]
   __m128 v14; // [esp+Ch] [ebp-10h] BYREF
 
-  v4 = a1[4];
-  v5 = a1[2];
-  v6 = a1[3];
-  v7 = a1[1].m128_i32[0];
-  v8 = _mm_shuffle_ps(v4, v4, 0x44);
-  v9 = _mm_shuffle_ps(v5, v6, 0x44);
-  v14 = _mm_add_ps(
+  v4 = a1[4]; /*0x917a5c*/
+  v5 = a1[2]; /*0x917a60*/
+  v6 = a1[3]; /*0x917a64*/
+  v7 = a1[1].m128_i32[0]; /*0x917a68*/
+  v8 = _mm_shuffle_ps(v4, v4, 0x44); /*0x917a6e*/
+  v9 = _mm_shuffle_ps(v5, v6, 0x44); /*0x917a7f*/
+  v14 = _mm_add_ps( /*0x917ac2*/
           _mm_add_ps(
             _mm_mul_ps(_mm_shuffle_ps(v9, v8, 0x88), _mm_shuffle_ps(*a3, *a3, 0)),
             _mm_mul_ps(_mm_shuffle_ps(v9, v8, 0xDD), _mm_shuffle_ps(*a3, *a3, 0x55))),
           _mm_mul_ps(
             _mm_shuffle_ps(_mm_shuffle_ps(v5, v6, 0xEE), _mm_shuffle_ps(v4, v4, 0xEE), 0x88),
             _mm_shuffle_ps(*a3, *a3, 0xAA)));
-  (*(void (__thiscall **)(__int32, __m128 *))(*(_DWORD *)v7 + 0x10))(v7, &v14);
-  *(float *)&v13 = a2;
-  v10 = _mm_mul_ps(_mm_shuffle_ps((__m128)v13, (__m128)v13, 0), v14);
-  v11 = _mm_mul_ps(
+  (*(void (__thiscall **)(__int32, __m128 *))(*(_DWORD *)v7 + 0x10))(v7, &v14); /*0x917aca*/
+  *(float *)&v13 = a2; /*0x917acd*/
+  v10 = _mm_mul_ps(_mm_shuffle_ps((__m128)v13, (__m128)v13, 0), v14); /*0x917aee*/
+  v11 = _mm_mul_ps( /*0x917b23*/
           _mm_add_ps(
             _mm_add_ps(
               _mm_mul_ps(a1[2], _mm_shuffle_ps(v10, v10, 0)),
               _mm_mul_ps(a1[3], _mm_shuffle_ps(v10, v10, 0x55))),
             _mm_add_ps(_mm_mul_ps(a1[4], _mm_shuffle_ps(v10, v10, 0xAA)), a1[5])),
           *a3);
-  return (float)(_mm_shuffle_ps(v11, v11, 0xAA).m128_f32[0]
+  return (float)(_mm_shuffle_ps(v11, v11, 0xAA).m128_f32[0] /*0x917b49*/
                + (float)(_mm_shuffle_ps(v11, v11, 0x55).m128_f32[0] + v11.m128_f32[0]));
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x452180",
-    "line": "mov     edx, [ecx+4Ch]",
+    "line": "mov     edx, [ecx+4Ch]; Remaps a serialized FormID's high-byte mod index through TESSaveLoad::modRefIDTable. Dynamic 0xFF IDs pass through; missing/out-of-range mods resolve to zero; low 24-bit object ID is preserved.",
     "mnemonic": "mov",
     "size": 3
   },

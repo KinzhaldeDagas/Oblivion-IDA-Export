@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x5C5F3F",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x5C5F75",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5C5F7B",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5C5F87",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5C5FB9",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x5C5FF4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x5C5FFA",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x5C6008",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C600B",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x5C6012",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,13 +511,13 @@
   },
   {
     "ea": "0x5C601C",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C601F",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x5C6026",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,13 +547,13 @@
   },
   {
     "ea": "0x5C602E",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C6031",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x5C6038",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x5C6061",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x5C609C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x5C60A2",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,13 +763,13 @@
   },
   {
     "ea": "0x5C60B0",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C60B3",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x5C60BA",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x5C60C4",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C60C7",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x5C60CE",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +835,13 @@
   },
   {
     "ea": "0x5C60D6",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C60D9",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x5C60E0",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x5C6108",
-    "line": "push    edi; a3",
+    "line": "push    edi; controlName",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6109",
-    "line": "push    eax; a2",
+    "line": "push    eax; controlName",
     "mnemonic": "push",
     "size": 1
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x5C6144",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1027,7 +1027,7 @@
   },
   {
     "ea": "0x5C614A",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,13 +1051,13 @@
   },
   {
     "ea": "0x5C6158",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C615B",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x5C6162",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,13 +1087,13 @@
   },
   {
     "ea": "0x5C616C",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C616F",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x5C6176",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,13 +1123,13 @@
   },
   {
     "ea": "0x5C617E",
-    "line": "fstp    [esp+30h+a2]; a3",
+    "line": "fstp    [esp+30h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5C6181",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x5C6188",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x5C61C4",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x5C61FB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x5C6201",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x5C620D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x5C625E",
-    "line": "push    eax; a2",
+    "line": "push    eax; categoryName",
     "mnemonic": "push",
     "size": 1
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x5C6295",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x5C629B",
-    "line": "call    sub_5C3440",
+    "line": "call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1690,5 +1690,131 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C1340",
+    "line": "mov     ecx, [ebp-18h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1343",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1348",
+    "line": "mov     ecx, [ebp-14h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C134B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1350",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1353",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1358",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C135B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1360",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1363",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1368",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C136B",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1370",
+    "line": "mov     ecx, [ebp-10h]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1373",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1378",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C137C",
+    "line": "lea     eax, [edx-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C137F",
+    "line": "mov     ecx, [edx-20h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C1382",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1384",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1389",
+    "line": "mov     eax, offset stru_AEA40C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C138E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

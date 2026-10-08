@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_I10_OUTPUT_DATA",
+  "definition": "struct _I10_OUTPUT_DATA\n{\n__int16 pos;\nchar sign;\nBYTE len;\nchar str[22];\n}\n",
   "id": 18374686479672030964,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pos",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "sign",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 1
+      "size": 1,
+      "type": "char"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "len",
       "offset": 3,
       "offset_hex": "0x3",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "str",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 22
+      "size": 22,
+      "type": "char[22]"
     }
   ],
   "name": "_I10_OUTPUT_DATA",
+  "ordinal": 2579,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 26
 }

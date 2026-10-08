@@ -1,12 +1,11 @@
 // positive sp value has been detected, the output may be wrong!
 void __userpurge LevelUpMenu_HandleClick_::ExitButtonClicked(
         int a1@<edi>,
-        double a2@<st2>,
-        double a3@<st1>,
-        double a4@<st0>,
-        int a5,
-        int a6)
+        double a2@<st1>,
+        double a3@<st0>,
+        int a4,
+        int a5)
 {
-  ExitButtonClicked(a1, a2, a3, a4);
-  sub_57DE50(1);
+  LevelUpMenu_ExitAndCommit(a1, a2, a3); /*0x5ac7bc*/
+  sub_57DE50(1); /*0x5ac7c3*/
 }

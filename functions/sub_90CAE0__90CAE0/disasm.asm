@@ -99,7 +99,6 @@
 0x90CBE7: test    edi, edi
 0x90CBE9: jle     short loc_90CC0E
 0x90CBEB: jmp     short loc_90CBF0
-0x90CBED: align 10h
 0x90CBF0: mov     edi, [eax]
 0x90CBF2: mov     [ecx], edi
 0x90CBF4: mov     edi, [eax+4]
@@ -167,7 +166,6 @@
 0x90CCA2: mov     edi, [esp+18h+arg_0]
 0x90CCA6: add     edi, edi
 0x90CCA8: jmp     short loc_90CCB0
-0x90CCAA: align 10h
 0x90CCB0: mov     bx, [eax]
 0x90CCB3: mov     [ecx], bx
 0x90CCB6: mov     bx, [eax+2]
@@ -456,7 +454,6 @@
 0x90CFC7: test    ebx, ebx
 0x90CFC9: jle     short loc_90CFE0
 0x90CFCB: jmp     short loc_90CFD0
-0x90CFCD: align 10h
 0x90CFD0: mov     ebx, [eax]
 0x90CFD2: mov     [edx+ecx*4], ebx
 0x90CFD5: add     eax, [esi+28h]
@@ -476,7 +473,7 @@
 0x90CFF6: add     esp, 8
 0x90CFF9: retn    4
 0x90CFFC: pop     edi
-0x90CFFD: mov     eax, offset stru_BA7A40
+0x90CFFD: mov     eax, offset unk_BA7A40
 0x90D002: pop     esi
 0x90D003: mov     [ebp+28h], ebx
 0x90D006: mov     dword ptr [ebp+2Ch], 1

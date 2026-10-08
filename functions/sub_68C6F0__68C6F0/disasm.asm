@@ -12,7 +12,7 @@
 0x68C708: jz      short loc_68C72C
 0x68C70A: lea     ebx, [ebx+0]
 0x68C710: mov     ecx, esi
-0x68C712: call    sub_6899C0
+0x68C712: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68C717: push    eax
 0x68C718: mov     ecx, edi
 0x68C71A: call    sub_68BED0

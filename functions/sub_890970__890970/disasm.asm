@@ -1,4 +1,4 @@
-0x890970: fldz
+0x890970: fldz; Transient velocity-add channel: when proxy+0x300 timer is positive, adds timer * proxy+0x2F0 vector to velocity unless gravity-suppress flags 0x1800 are set. Setter not confirmed in current movement slice.
 0x890972: fcomp   dword ptr [ecx+300h]
 0x890978: fnstsw  ax
 0x89097A: test    ah, 5

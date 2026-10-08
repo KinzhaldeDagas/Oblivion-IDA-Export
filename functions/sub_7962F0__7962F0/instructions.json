@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7962F0",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion CIndexedGeometry::AddVertexNormal. Appends one xyz normal. Unlike SpeedTree 4.1 source, this legacy ABI has no up-axis-adjust boolean.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7962F2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+normal]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,19 +25,19 @@
   },
   {
     "ea": "0x7962FC",
-    "line": "push    edi; int",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7962FD",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7962FF",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,19 +49,19 @@
   },
   {
     "ea": "0x796307",
-    "line": "push    eax; int",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796308",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79630A",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x796312",
-    "line": "push    edi; int",
+    "line": "push    edi; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796313",
-    "line": "mov     ecx, esi; int",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x796315",
-    "line": "call    sub_785F30",
+    "line": "call    OB_stVector_float_PushBack_010201A0; Oblivion compact float-vector push_back. Appends a 4-byte float in place when capacity remains; otherwise delegates to the reallocation/insertion path. Shared by spline tangent lengths and indexed-geometry float streams.",
     "mnemonic": "call",
     "size": 5
   },

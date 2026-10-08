@@ -1,4 +1,4 @@
-0x4B2C80: mov     ecx, ds:0B08314h
+0x4B2C80: mov     ecx, ds:0B08314h; Verified: clears and frees all TESTextureList values in the global form-ID cache, then clears the map. Called by TES destruction/teardown; exact lifecycle boundary is process-level object teardown.
 0x4B2C86: xor     eax, eax
 0x4B2C88: test    ecx, ecx
 0x4B2C8A: jbe     short loc_4B2C9F
@@ -27,7 +27,7 @@
 0x4B2CC5: mov     edx, ds:0B08310h
 0x4B2CCB: push    eax
 0x4B2CCC: mov     eax, [edx+4]
-0x4B2CCF: mov     ecx, offset off_B08310
+0x4B2CCF: mov     ecx, offset g_TESObjectTREETextureHashCache
 0x4B2CD4: call    eax
 0x4B2CD6: mov     ecx, ds:0B08314h
 0x4B2CDC: add     eax, 1
@@ -44,14 +44,14 @@
 0x4B2CFE: xor     esi, esi
 0x4B2D00: test    edi, edi
 0x4B2D02: jz      short loc_4B2D14
-0x4B2D04: mov     ecx, edi
-0x4B2D06: call    sub_46D450
+0x4B2D04: mov     ecx, edi; this
+0x4B2D06: call    TESTextureList_Clear
 0x4B2D0B: push    edi
-0x4B2D0C: call    FormHeapFree
+0x4B2D0C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B2D11: add     esp, 4
 0x4B2D14: test    esi, esi
 0x4B2D16: jnz     short loc_4B2CB0
 0x4B2D18: pop     edi
-0x4B2D19: mov     ecx, offset off_B08310
+0x4B2D19: mov     ecx, offset g_TESObjectTREETextureHashCache
 0x4B2D1E: pop     esi
 0x4B2D1F: jmp     NiTMap_Clear

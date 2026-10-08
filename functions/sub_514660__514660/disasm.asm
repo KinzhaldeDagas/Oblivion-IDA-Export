@@ -1,4 +1,4 @@
-0x514660: sub     esp, 8
+0x514660: sub     esp, 8; Signature anchor for StartCombat command entry: 83 EC 08 8B 4C 24 20 8B 54 24 1C 56 8B 74 24 18.
 0x514663: mov     ecx, [esp+8+l]
 0x514667: mov     edx, [esp+8+arg_10]
 0x51466B: push    esi
@@ -19,7 +19,7 @@
 0x51468C: xor     edi, edi
 0x51468E: push    eax; a1
 0x51468F: mov     dword ptr [esp+30h+var_8], edi
-0x514693: call    Script_ExtractArgs
+0x514693: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x514698: add     esp, 20h
 0x51469B: test    al, al
 0x51469D: jnz     short loc_5146A5
@@ -61,7 +61,7 @@
 0x51470D: cmp     [ecx+58h], edi
 0x514710: jz      loc_514947
 0x514716: mov     ecx, esi
-0x514718: call    sub_5E6B40
+0x514718: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x51471D: test    al, al
 0x51471F: mov     ecx, ds:0B333C4h; this
 0x514725: jz      short loc_51474A
@@ -85,7 +85,7 @@
 0x514757: jz      short loc_514776
 0x514759: mov     eax, ds:0B333C4h
 0x51475E: push    esi
-0x51475F: mov     ecx, offset ActorProcessManager_ptr
+0x51475F: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x514764: mov     [eax+590h], edi
 0x51476A: mov     byte ptr [eax+594h], 1
 0x514771: call    sub_674E10
@@ -94,7 +94,7 @@
 0x514779: push    ebp
 0x51477A: mov     ecx, esi; this
 0x51477C: mov     byte ptr [esp+18h+var_4], bl
-0x514780: call    sub_5E6C60
+0x514780: call    Actor_IsGuardClass; 3DTheft decode 2026-05-14: StartCombat command computes nonGuardFlag from Actor_IsGuardClass. Plugin passes nonGuardFlag=1 for spawned thief encounter actors.
 0x514785: test    al, al
 0x514787: jnz     short loc_51478F
 0x514789: mov     bl, 1
@@ -158,7 +158,7 @@
 0x514822: push    1
 0x514824: push    eax
 0x514825: push    esi
-0x514826: call    edx
+0x514826: call    edx; 3DTheft decode 2026-05-14: StartCombat command calls actor process vfunc +0x228 with actor,target,1,0,0,nonGuardFlag,0,1,0,1. Plugin uses this ABI for catch-up combat.
 0x514828: mov     eax, [esi]
 0x51482A: mov     edx, [eax+330h]
 0x514830: mov     ecx, esi
@@ -174,14 +174,14 @@
 0x514849: call    BSSimpleList_Count
 0x51484E: cmp     eax, 1
 0x514851: jnz     short loc_514871
-0x514853: mov     ecx, [edi]
+0x514853: mov     ecx, [edi]; this
 0x514855: mov     eax, [ecx]
 0x514857: cmp     eax, dword ptr [esp+18h+var_8]
 0x51485B: jnz     short loc_5148B7
 0x51485D: cmp     byte ptr [ecx+8], 0
 0x514861: jnz     short loc_5148B7
-0x514863: push    ebp
-0x514864: call    sub_60D020
+0x514863: push    ebp; value
+0x514864: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
 0x514869: mov     ecx, [edi]
 0x51486B: mov     byte ptr [ecx+8], 1
 0x51486F: jmp     short loc_5148B7
@@ -189,7 +189,7 @@
 0x514873: jz      short loc_5148B7
 0x514875: mov     eax, dword ptr [esp+18h+var_8]
 0x514879: lea     esp, [esp+0]
-0x514880: mov     ecx, [edi]
+0x514880: mov     ecx, [edi]; this
 0x514882: test    ecx, ecx
 0x514884: jz      short loc_51488A
 0x514886: cmp     [ecx], eax
@@ -200,15 +200,15 @@
 0x514891: jmp     short loc_5148B7
 0x514893: cmp     [ecx+4], ebp
 0x514896: jz      short loc_5148B7
-0x514898: push    ebp
-0x514899: call    sub_60D020
+0x514898: push    ebp; value
+0x514899: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
 0x51489E: mov     edx, [esi]
 0x5148A0: mov     eax, [edx+330h]
 0x5148A6: mov     ecx, esi
 0x5148A8: call    eax
 0x5148AA: mov     ecx, [eax+40h]
-0x5148AD: push    offset sub_614190
-0x5148B2: call    sub_5B27A0
+0x5148AD: push    offset CombatTargetInfo_ComparePriorityDescending
+0x5148B2: call    BSSimpleList_SortViaArrayAndRebuild
 0x5148B7: pop     ebp
 0x5148B8: test    bl, bl
 0x5148BA: pop     ebx
@@ -223,7 +223,7 @@
 0x5148D8: mov     edx, [edx+22Ch]
 0x5148DE: push    eax
 0x5148DF: push    esi
-0x5148E0: call    edx
+0x5148E0: call    edx; Guard-only followup after StartCombat package creation: process vfunc +0x22C called with actor,target. Non-guard encounter actors do not need this path.
 0x5148E2: mov     eax, [esi]
 0x5148E4: mov     edx, [eax+330h]
 0x5148EA: mov     ecx, esi

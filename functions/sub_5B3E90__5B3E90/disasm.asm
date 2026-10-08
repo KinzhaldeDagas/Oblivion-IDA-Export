@@ -9,5 +9,5 @@
 0x5B3EAA: jz      short locret_5B3EBA
 0x5B3EAC: mov     dword ptr [eax+58h], 3
 0x5B3EB3: mov     ecx, eax; int
-0x5B3EB5: jmp     sub_584740
+0x5B3EB5: jmp     Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5B3EBA: retn

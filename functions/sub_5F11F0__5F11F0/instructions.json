@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x5F1256",
-    "line": "lea     ecx, [esp+78h+var_6C]",
+    "line": "lea     ecx, [esp+78h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5F125A",
-    "line": "fstp    [esp+78h+var_78]; float",
+    "line": "fstp    [esp+78h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F125D",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x5F126A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F126C",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,55 +253,55 @@
   },
   {
     "ea": "0x5F1272",
-    "line": "lea     ecx, [esp+78h+var_48]",
+    "line": "lea     ecx, [esp+78h+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5F1276",
-    "line": "fstp    [esp+78h+var_78]; float",
+    "line": "fstp    [esp+78h+angleZ]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5F1279",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5F127E",
-    "line": "lea     ecx, [esp+74h+var_48]",
+    "line": "lea     ecx, [esp+74h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5F1282",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F1283",
-    "line": "lea     edx, [esp+78h+var_24]",
+    "line": "lea     edx, [esp+78h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5F1287",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5F1288",
-    "line": "lea     ecx, [esp+7Ch+var_6C]",
+    "line": "lea     ecx, [esp+7Ch+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5F128C",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x5F12A2",
-    "line": "fld     [esp+74h+var_68]",
+    "line": "fld     [esp+74h+var_6C.data+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x5F12A8",
-    "line": "fld     [esp+74h+var_5C]",
+    "line": "fld     [esp+74h+var_6C.data+10h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5F12AF",
-    "line": "fld     [esp+74h+var_50]",
+    "line": "fld     [esp+74h+var_6C.data+1Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5F12B6",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },

@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x502C52",
-    "line": "mov     [esp+0Ch+var_8], eax",
+    "line": "mov     [esp+0Ch+stage], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x502C56",
-    "line": "lea     eax, [esp+0Ch+var_8]",
+    "line": "lea     eax, [esp+0Ch+stage]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x502C7B",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x502C8C",
-    "line": "mov     edx, [esp+0Ch+arg_18]",
+    "line": "mov     edx, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x502C90",
-    "line": "mov     eax, [esp+0Ch+var_8]",
+    "line": "mov     eax, [esp+0Ch+stage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,31 +199,31 @@
   },
   {
     "ea": "0x502C98",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502C99",
-    "line": "push    eax",
+    "line": "push    eax; stage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502C9A",
-    "line": "push    ecx",
+    "line": "push    ecx; quest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502C9B",
-    "line": "push    esi",
+    "line": "push    esi; subject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x502C9C",
-    "line": "call    sub_4F4BC0",
+    "line": "call    GetStageDone_Eval; GetStageDone_Eval queries TESQuest::IsStageDone(quest, stage) and returns numeric 1/0. It does not compare against the current stage number.",
     "mnemonic": "call",
     "size": 5
   },

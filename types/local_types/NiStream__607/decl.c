@@ -1,1 +1,1 @@
-NiStream
+struct NiStream;

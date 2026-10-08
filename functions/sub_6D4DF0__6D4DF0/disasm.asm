@@ -5,7 +5,7 @@
 0x6D4DF4: mov     edi, [esp+10h+arg_0]
 0x6D4DF8: push    edi
 0x6D4DF9: mov     esi, ecx
-0x6D4DFB: call    nullsub_returnvVoid_1arg
+0x6D4DFB: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6D4E00: mov     eax, [edi+220h]
 0x6D4E06: mov     edx, [eax+8]
 0x6D4E09: push    1
@@ -39,7 +39,7 @@
 0x6D4E54: push    edx
 0x6D4E55: push    eax
 0x6D4E56: push    edi
-0x6D4E57: call    ecx ; dword_B3D5C0
+0x6D4E57: call    ecx ; unk_B3D5C0
 0x6D4E59: add     esp, 20h
 0x6D4E5C: mov     eax, [edi+220h]
 0x6D4E62: push    1
@@ -73,7 +73,7 @@
 0x6D4EAB: push    edx
 0x6D4EAC: push    eax
 0x6D4EAD: push    edi
-0x6D4EAE: call    ecx ; dword_B3D5C0
+0x6D4EAE: call    ecx ; unk_B3D5C0
 0x6D4EB0: add     esp, 20h
 0x6D4EB3: mov     eax, [edi+220h]
 0x6D4EB9: push    1
@@ -107,7 +107,7 @@
 0x6D4F02: push    edx
 0x6D4F03: push    eax
 0x6D4F04: push    edi
-0x6D4F05: call    ecx ; dword_B3D5C0
+0x6D4F05: call    ecx ; unk_B3D5C0
 0x6D4F07: add     esp, 20h
 0x6D4F0A: mov     eax, [edi+220h]
 0x6D4F10: push    1
@@ -141,7 +141,7 @@
 0x6D4F59: push    edx
 0x6D4F5A: push    eax
 0x6D4F5B: push    edi
-0x6D4F5C: call    ecx ; dword_B3D5C0
+0x6D4F5C: call    ecx ; unk_B3D5C0
 0x6D4F5E: add     esp, 20h
 0x6D4F61: pop     edi
 0x6D4F62: pop     esi

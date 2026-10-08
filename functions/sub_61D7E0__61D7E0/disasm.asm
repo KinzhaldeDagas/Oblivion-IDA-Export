@@ -4,7 +4,7 @@
 0x61D7E6: cmp     dword ptr [esi+70h], 8
 0x61D7EA: jnz     loc_61D9AB
 0x61D7F0: mov     ecx, [esi+3Ch]
-0x61D7F3: call    sub_5E0F50
+0x61D7F3: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x61D7F8: mov     edx, [eax]
 0x61D7FA: mov     ecx, eax
 0x61D7FC: mov     eax, [edx+154h]
@@ -23,12 +23,12 @@
 0x61D82A: mov     ecx, [esi+3Ch]
 0x61D82D: mov     edx, [ecx]
 0x61D82F: mov     eax, [edx+164h]
-0x61D835: push    1
+0x61D835: push    1; slot
 0x61D837: call    eax
-0x61D839: mov     ecx, eax
-0x61D83B: call    ActorAnimData_GetAnimGroupFromField8Value
+0x61D839: mov     ecx, eax; this
+0x61D83B: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x61D840: push    eax
-0x61D841: call    sub_51AC80
+0x61D841: call    AnimGroup_UsesAttackOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and the fixed Oblivion group record's note-template class is 4, 5, 6, or 7. Those classes cover AttackLeft/Right, power attacks, BlockAttack, AttackBow, and cast groups. This is a fixed-table classifier, not dynamic group registration.
 0x61D846: mov     ecx, [esi+8Ch]
 0x61D84C: add     esp, 4
 0x61D84F: test    ecx, ecx
@@ -55,7 +55,7 @@
 0x61D89A: cmp     ecx, [esi+9Ch]
 0x61D8A0: jz      short loc_61D8BF
 0x61D8A2: mov     ecx, esi
-0x61D8A4: call    sub_615980
+0x61D8A4: call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.
 0x61D8A9: fld     [esp+0Ch+var_8]
 0x61D8AD: fcompp
 0x61D8AF: fnstsw  ax
@@ -67,7 +67,7 @@
 0x61D8C5: push    0
 0x61D8C7: push    ecx
 0x61D8C8: mov     ecx, esi
-0x61D8CA: call    sub_617340
+0x61D8CA: call    CombatController_TryUseMagicItem
 0x61D8CF: test    al, al
 0x61D8D1: mov     byte ptr [esi+1ADh], 0
 0x61D8D8: jz      loc_61D9AB

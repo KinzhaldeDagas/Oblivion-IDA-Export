@@ -1,7 +1,7 @@
-int __usercall EffectItemList_AllEffectsHostile_::TestItem@<eax>(int a1@<esi>)
+char __usercall EffectItemList_AllEffectsHostile_::TestItem@<al>(int a1@<esi>)
 {
-  if ( a1 )
-    return EffectItemList_AllEffectsHostile_::EffectLoop(a1);
+  if ( a1 ) /*0x414ec5*/
+    return EffectItemList_AllEffectsHostile_::EffectLoop(a1); /*0x414ec6*/
   else
-    return EffectItemList_AllEffectsHostile_::Return_True();
+    return EffectItemList_AllEffectsHostile_::Return_True(); /*0x414ec5*/
 }

@@ -10,44 +10,44 @@ void __thiscall NiMeshPSysData::~NiMeshPSysData(NiMeshPSysData *this)
   unsigned int v9; // [esp-8h] [ebp-10h]
   unsigned int v10; // [esp-8h] [ebp-10h]
 
-  v2 = *((_WORD *)this + 0x3F) == 0;
-  *(_DWORD *)this = &NiMeshPSysData::`vftable';
-  if ( !v2 )
+  v2 = *((_WORD *)this + 0x3F) == 0; /*0x75d5c3*/
+  *(_DWORD *)this = &NiMeshPSysData::`vftable'; /*0x75d5c9*/
+  if ( !v2 ) /*0x75d5cf*/
   {
-    do
+    do /*0x75d60e*/
     {
-      v3 = *((_WORD *)this + 0x3F);
-      if ( v3 )
+      v3 = *((_WORD *)this + 0x3F); /*0x75d5d6*/
+      if ( v3 ) /*0x75d5dd*/
       {
-        v4 = *((_DWORD *)this + 0x1E);
-        v5 = v3 - 1;
-        *((_WORD *)this + 0x3F) = v5;
-        v6 = (void (__thiscall ****)(_DWORD, int))(v4 + 4 * v5);
-        v7 = *v6;
-        v2 = *v6 == 0;
-        *v6 = 0;
-        if ( !v2 )
+        v4 = *((_DWORD *)this + 0x1E); /*0x75d5df*/
+        v5 = v3 - 1; /*0x75d5e2*/
+        *((_WORD *)this + 0x3F) = v5; /*0x75d5e5*/
+        v6 = (void (__thiscall ****)(_DWORD, int))(v4 + 4 * v5); /*0x75d5ec*/
+        v7 = *v6; /*0x75d5ef*/
+        v2 = *v6 == 0; /*0x75d5f1*/
+        *v6 = 0; /*0x75d5f3*/
+        if ( !v2 ) /*0x75d5f9*/
         {
-          --*((_WORD *)this + 0x40);
-          if ( v7 )
-            (**v7)(v7, 1);
+          --*((_WORD *)this + 0x40); /*0x75d5fb*/
+          if ( v7 ) /*0x75d604*/
+            (**v7)(v7, 1); /*0x75d60c*/
         }
       }
     }
-    while ( *((_WORD *)this + 0x3F) );
+    while ( *((_WORD *)this + 0x3F) ); /*0x75d60e*/
   }
-  v10 = *((_DWORD *)this + 0x1E);
-  *((_DWORD *)this + 0x1D) = &NiTArray<NiTArray<NiPointer<NiAVObject>> *>::`vftable';
-  FormHeapFree(v10);
-  v8 = *((_DWORD *)this + 0x1A);
-  if ( v8 )
+  v10 = *((_DWORD *)this + 0x1E); /*0x75d618*/
+  *((_DWORD *)this + 0x1D) = &NiTArray<NiTArray<NiPointer<NiAVObject>> *>::`vftable'; /*0x75d619*/
+  FormHeapFree(v10); /*0x75d620*/
+  v8 = *((_DWORD *)this + 0x1A); /*0x75d625*/
+  if ( v8 ) /*0x75d62d*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) )
-      (**(void (__thiscall ***)(int, int))v8)(v8, 1);
+    if ( !InterlockedDecrement((volatile LONG *)(v8 + 4)) ) /*0x75d633*/
+      (**(void (__thiscall ***)(int, int))v8)(v8, 1); /*0x75d649*/
   }
-  v9 = *((_DWORD *)this + 0x17);
-  *(_DWORD *)this = &NiPSysData::`vftable';
-  FormHeapFree(v9);
-  FormHeapFree(*((_DWORD *)this + 0x18));
-  sub_73EEC0((NiGeometryData *)this);
+  v9 = *((_DWORD *)this + 0x17); /*0x759836*/
+  *(_DWORD *)this = &NiPSysData::`vftable'; /*0x759837*/
+  FormHeapFree(v9); /*0x75983d*/
+  FormHeapFree(*((_DWORD *)this + 0x18)); /*0x759846*/
+  sub_73EEC0((NiGeometryData *)this); /*0x759851*/
 }

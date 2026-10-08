@@ -1,4 +1,4 @@
 void __cdecl sub_A27B40()
 {
-  DeleteCriticalSection(&stru_BA7C80);
+  DeleteCriticalSection(&unk_BA7C80); /*0xa27b45*/
 }

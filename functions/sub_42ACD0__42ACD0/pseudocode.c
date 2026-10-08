@@ -1,26 +1,26 @@
-int __thiscall sub_42ACD0(char *this)
+// Verified: computes the PlayerCharacter-scaled lock magnitude from ExtraLockData, applies the iLockLevelMaxVeryEasy/Easy/Average/Hard/VeryHard thresholds, and returns a LOCK_LEVEL value 0..5. Its direct caller indexes LockLevelNames with this result to display the lock category.
+LOCK_LEVEL __thiscall ExtraLockData_GetLockLevelCategory(ExtraLockData *this)
 {
-  int v1; // eax
+  int level; // eax
   int v3; // [esp+0h] [ebp-8h]
-  int Level; // [esp+0h] [ebp-8h]
-  int v5; // [esp+4h] [ebp-4h]
+  int v4; // [esp+4h] [ebp-4h]
 
-  v1 = *this;
-  v5 = v1;
-  if ( (*(this + 8) & 4) != 0 )
+  level = (char)this->level; /*0x42acd7*/
+  v4 = level; /*0x42acda*/
+  if ( (this->flags & 4) != 0 ) /*0x42acde*/
   {
-    Level = (unsigned __int16)Actor_GetLevel((Actor *)TESDataHandler_g_PlayerRef, v3);
-    v1 = Double_To_SInt32((double)Level * fLeveledLockMult + (double)v5);
-    if ( v1 > 0x63 )
-      v1 = 0x63;
+    v3 = (unsigned __int16)Actor_GetLevel((Actor *)reference); /*0x42acee*/
+    level = Double_To_SInt32((double)v3 * MEMORY[0xB33880].value + (double)v4); /*0x42acfe*/
+    if ( level > 0x63 ) /*0x42ad06*/
+      level = 0x63; /*0x42ad08*/
   }
-  if ( v1 <= iLockLevelMaxVeryEasy )
-    return 0;
-  if ( v1 <= iLockLevelMaxEasy )
-    return 1;
-  if ( v1 <= iLockLevelMaxAverage )
-    return 2;
-  if ( v1 > iLockLevelMaxHard )
-    return (v1 > iLockLevelMaxVeryHard) + 4;
-  return 3;
+  if ( level <= MEMORY[0xB338B8].value ) /*0x42ad13*/
+    return LL_VERYEASY; /*0x42ad15*/
+  if ( level <= MEMORY[0xB338C0].value ) /*0x42ad21*/
+    return LL_EASY; /*0x42ad23*/
+  if ( level <= MEMORY[0xB338C8].value ) /*0x42ad32*/
+    return LL_AVERAGE; /*0x42ad34*/
+  if ( level > MEMORY[0xB338D0].value ) /*0x42ad43*/
+    return (level > MEMORY[0xB338D8].value) + 4; /*0x42ad5c*/
+  return LL_HARD; /*0x42ad17*/
 }

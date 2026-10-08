@@ -18,80 +18,80 @@ int __userpurge sub_956C30@<eax>(int a1@<ecx>, double a2@<st0>, int a3, int a4, 
   int v25; // [esp+20h] [ebp-4h]
   int v26; // [esp+34h] [ebp+10h]
 
-  v7 = *(_DWORD *)(a1 + 8);
-  v8 = *(_DWORD *)(a1 + 0x20);
-  v9 = *(_DWORD *)(v7 + 0xC);
-  v24 = *(_DWORD *)(v7 + 0x10);
-  (*(void (__thiscall **)(int, _DWORD *))(*(_DWORD *)v8 + 8))(v8, a6);
-  v22 = a2;
-  v11 = *(int **)(a1 + 0xC);
-  v12 = *v11;
-  v13 = 0;
-  v14 = v9 >> 1;
-  v23 = 10000000.0;
-  v26 = 0;
-  v25 = v9 >> 1;
-  if ( *v11 )
+  v7 = *(_DWORD *)(a1 + 8); /*0x956c33*/
+  v8 = *(_DWORD *)(a1 + 0x20); /*0x956c38*/
+  v9 = *(_DWORD *)(v7 + 0xC); /*0x956c3f*/
+  v24 = *(_DWORD *)(v7 + 0x10); /*0x956c51*/
+  (*(void (__thiscall **)(int, _DWORD *))(*(_DWORD *)v8 + 8))(v8, a6); /*0x956c55*/
+  v22 = a2; /*0x956c58*/
+  v11 = *(int **)(a1 + 0xC); /*0x956c60*/
+  v12 = *v11; /*0x956c63*/
+  v13 = 0; /*0x956c67*/
+  v14 = v9 >> 1; /*0x956c6b*/
+  v23 = 10000000.0; /*0x956c71*/
+  v26 = 0; /*0x956c79*/
+  v25 = v9 >> 1; /*0x956c7d*/
+  if ( *v11 ) /*0x956c63*/
   {
-    if ( v22 <= (double)*(float *)(a4 + 0xC4) )
+    if ( v22 <= (double)*(float *)(a4 + 0xC4) ) /*0x956ca5*/
     {
-      if ( v24 <= 0 )
+      if ( v24 <= 0 ) /*0x956cb1*/
       {
-        v13 = *v11;
+        v13 = *v11; /*0x956cd4*/
       }
       else
       {
-        v16 = *a5;
-        v13 = *a5 + v14;
-        if ( v13 > v12 )
-          v13 = v12;
-        v26 = v16 - v14;
-        if ( v16 - v14 < 0 )
-          v26 = 0;
+        v16 = *a5; /*0x956cb7*/
+        v13 = *a5 + v14; /*0x956cb9*/
+        if ( v13 > v12 ) /*0x956cbe*/
+          v13 = v12; /*0x956cc0*/
+        v26 = v16 - v14; /*0x956cc4*/
+        if ( v16 - v14 < 0 ) /*0x956cc8*/
+          v26 = 0; /*0x956cca*/
       }
-      goto LABEL_11;
+      goto LABEL_11; /*0x956cd2*/
     }
   }
   else
   {
-    v15 = v11[3];
-    if ( v15 )
+    v15 = v11[3]; /*0x956c83*/
+    if ( v15 ) /*0x956c88*/
     {
-      for ( a6[0xE] = *(_DWORD *)(v15 + 0xC); ; a6[0xE] = *(_DWORD *)(v18 + 0xC) )
+      for ( a6[0xE] = *(_DWORD *)(v15 + 0xC); ; a6[0xE] = *(_DWORD *)(v18 + 0xC) ) /*0x956c91*/
       {
-        a6[0xC] = v13;
-        a6[0xD] = v13 + a7[1] - a3;
-        v19 = ((double (__thiscall *)(int, _DWORD *))*(_DWORD *)(*(_DWORD *)v8 + 0xC))(v8, a6) + v22;
-        if ( v19 < v23 )
+        a6[0xC] = v13; /*0x956d02*/
+        a6[0xD] = v13 + a7[1] - a3; /*0x956d0e*/
+        v19 = ((double (__thiscall *)(int, _DWORD *))*(_DWORD *)(*(_DWORD *)v8 + 0xC))(v8, a6) + v22; /*0x956d1a*/
+        if ( v19 < v23 ) /*0x956d27*/
         {
-          v23 = v19;
-          *a5 = v13;
-          if ( v19 < *(float *)(a4 + 0xC4) )
+          v23 = v19; /*0x956d2d*/
+          *a5 = v13; /*0x956d31*/
+          if ( v19 < *(float *)(a4 + 0xC4) ) /*0x956d3e*/
           {
-            *(float *)(a4 + 0xC4) = v19;
-            *(_DWORD *)(a4 + 0xB8) = a6[9];
-            *(_DWORD *)(a4 + 0xBC) = a6[8];
-            *(_DWORD *)(a4 + 0xC0) = a6[0xE];
-            if ( v13 - v25 < v26 )
+            *(float *)(a4 + 0xC4) = v19; /*0x956d40*/
+            *(_DWORD *)(a4 + 0xB8) = a6[9]; /*0x956d49*/
+            *(_DWORD *)(a4 + 0xBC) = a6[8]; /*0x956d56*/
+            *(_DWORD *)(a4 + 0xC0) = a6[0xE]; /*0x956d61*/
+            if ( v13 - v25 < v26 ) /*0x956d6f*/
             {
-              v26 = v13 - v25;
-              if ( v13 - v25 < 0 )
-                v26 = 0;
+              v26 = v13 - v25; /*0x956d73*/
+              if ( v13 - v25 < 0 ) /*0x956d77*/
+                v26 = 0; /*0x956d79*/
             }
-            (*(void (__thiscall **)(int, _DWORD *, int))(*(_DWORD *)v8 + 0x14))(v8, a6, a4 + 0xC8);
+            (*(void (__thiscall **)(int, _DWORD *, int))(*(_DWORD *)v8 + 0x14))(v8, a6, a4 + 0xC8); /*0x956d8e*/
           }
         }
 LABEL_11:
-        if ( --v13 < v26 )
-          break;
-        v17 = *(int **)(a1 + 0xC);
-        if ( v13 > *v17 )
-          v18 = 0;
+        if ( --v13 < v26 ) /*0x956cdd*/
+          break; /*0x956cdd*/
+        v17 = *(int **)(a1 + 0xC); /*0x956ce7*/
+        if ( v13 > *v17 ) /*0x956cec*/
+          v18 = 0; /*0x956cf6*/
         else
-          v18 = *(_DWORD *)(v17[2] + 4 * v13);
+          v18 = *(_DWORD *)(v17[2] + 4 * v13); /*0x956cf1*/
       }
-      --*a5;
+      --*a5; /*0x956da1*/
     }
   }
-  return sub_9569F0(*(int **)(a1 + 0xC), *a7 + 0x10 * a3);
+  return sub_9569F0(*(int **)(a1 + 0xC), *a7 + 0x10 * a3); /*0x956dbf*/
 }

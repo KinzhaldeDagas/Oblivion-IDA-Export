@@ -11,10 +11,10 @@
 0x677296: mov     edi, [esi]
 0x677298: test    edi, edi
 0x67729A: jz      short loc_6772D0
-0x67729C: mov     ecx, edi
-0x67729E: call    sub_605E80
+0x67729C: mov     ecx, edi; self
+0x67729E: call    Crime_Destructor
 0x6772A3: push    edi
-0x6772A4: call    FormHeapFree
+0x6772A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6772A9: mov     eax, [esi+4]
 0x6772AC: add     esp, 4
 0x6772AF: test    eax, eax
@@ -24,7 +24,7 @@
 0x6772B9: mov     edx, [eax]
 0x6772BB: push    eax
 0x6772BC: mov     [esi], edx
-0x6772BE: call    FormHeapFree
+0x6772BE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6772C3: add     esp, 4
 0x6772C6: jmp     short loc_677296
 0x6772C8: mov     dword ptr [esi], 0

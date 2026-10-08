@@ -1,1 +1,1 @@
-cmp_func_t
+typedef INT (*cmp_func_t)(LPCWSTR, LPCWSTR);

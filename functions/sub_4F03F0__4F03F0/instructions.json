@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F03F0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified: replays coordinate-bucketed +0x64 references and spatially tests fallback references when attaching references to an exterior cell. This is the persistent-reference lifecycle, distinct from the SubSpace spatial lookup map at +0x60.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F03F2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+cell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4F0406",
-    "line": "mov     ecx, offset stru_B36100",
+    "line": "mov     ecx, offset g_TESWorldSpaceReferenceIndexLock",
     "mnemonic": "mov",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4F042A",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+cell]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4F0435",
-    "line": "mov     [esp+14h+arg_0], 0",
+    "line": "mov     [esp+14h+cell], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4F0442",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+cell]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x4F045D",
-    "line": "push    eax; Concurrency::details::SchedulerBase *",
+    "line": "push    eax; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F045E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F0460",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4F0482",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,19 +367,19 @@
   },
   {
     "ea": "0x4F04A3",
-    "line": "push    ebx; Concurrency::details::SchedulerBase *",
+    "line": "push    ebx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4F04A4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4F04A6",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x4F04B2",
-    "line": "mov     ecx, offset stru_B36100; lpCriticalSection",
+    "line": "mov     ecx, offset g_TESWorldSpaceReferenceIndexLock; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

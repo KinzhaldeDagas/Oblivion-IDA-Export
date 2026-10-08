@@ -1,1 +1,1 @@
-QueuedHead
+struct QueuedHead;

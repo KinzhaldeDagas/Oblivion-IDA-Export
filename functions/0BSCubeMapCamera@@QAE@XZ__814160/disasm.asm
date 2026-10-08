@@ -1,4 +1,4 @@
-0x814160: push    0FFFFFFFFh
+0x814160: push    0FFFFFFFFh; BSCubeMapCamera constructor: initializes mode +0x124, six face references +0x128..+0x13C, render/scene fields, cube frustum, and image-space shader list +0x14C.
 0x814162: push    offset ??0BSCubeMapCamera@@QAE@XZ_SEH
 0x814167: mov     eax, large fs:0
 0x81416D: push    eax
@@ -15,7 +15,7 @@
 0x814187: mov     ebp, ecx
 0x814189: mov     [esp+40h+var_2C], ebp
 0x81418D: call    sub_70D590
-0x814192: push    offset sub_7016A0; a5
+0x814192: push    offset NiPointerSlot_Release; a5
 0x814197: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x81419C: push    6; size
 0x81419E: push    4; a2
@@ -29,11 +29,10 @@
 0x8141BF: mov     [ebp+148h], edi
 0x8141C5: mov     eax, [esp+40h+arg_0]
 0x8141C9: mov     byte ptr [esp+40h+var_4], 3
-0x8141CE: mov     [ebp+124h], eax
+0x8141CE: mov     [ebp+124h], eax; Store BSCubeMapCamera render mode at +0x124. ShadowPass constructs this camera with mode 0.
 0x8141D4: mov     edi, esi
 0x8141D6: mov     ebx, 6
 0x8141DB: jmp     short loc_8141E0
-0x8141DD: align 10h
 0x8141E0: mov     esi, [edi]
 0x8141E2: test    esi, esi
 0x8141E4: jz      short loc_814208
@@ -117,12 +116,12 @@
 0x8142E0: mov     byte ptr [esp+40h+var_4], 4
 0x8142E5: jz      short loc_8142F0
 0x8142E7: mov     ecx, eax
-0x8142E9: call    ImageSpaceshaderList__Create; Treat this list as a de facto subclass of a standard NiTPointerList as this is bigger of 3 UInt32
+0x8142E9: call    ImageSpaceshaderList__Create; MoonSugarEffect decode: ImageSpaceShaderList creation order: NightEye, HDR/Blur, optional Refraction, Hit, and Copy fallback at +0x18.
 0x8142EE: jmp     short loc_8142F2
 0x8142F0: xor     eax, eax
 0x8142F2: mov     ecx, eax; this
 0x8142F4: mov     byte ptr [esp+40h+var_4], 3
-0x8142F9: mov     [ebp+14Ch], eax
+0x8142F9: mov     [ebp+14Ch], eax; Store the private image-space shader list at BSCubeMapCamera+0x14C.
 0x8142FF: call    j_NiTPointerList__FreeAllNodes
 0x814304: mov     eax, ebp
 0x814306: mov     ecx, dword ptr [esp+40h+var_C]
@@ -134,3 +133,31 @@
 0x814315: pop     ebx
 0x814316: add     esp, 2Ch
 0x814319: retn    4
+0x9D1320: mov     ecx, [ebp-2Ch]
+0x9D1323: jmp     DestroyNiCamera?
+0x9D1328: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D132D: push    6; int
+0x9D132F: push    4; unsigned int
+0x9D1331: mov     eax, [ebp-2Ch]
+0x9D1334: add     eax, 128h
+0x9D1339: push    eax; void *
+0x9D133A: call    $LN21
+0x9D133F: retn
+0x9D1340: mov     ecx, [ebp-2Ch]
+0x9D1343: add     ecx, 140h; slot
+0x9D1349: jmp     NiPointerSlot_Release
+0x9D134E: mov     ecx, [ebp-2Ch]
+0x9D1351: add     ecx, 148h; slot
+0x9D1357: jmp     NiPointerSlot_Release
+0x9D135C: mov     eax, [ebp+4]
+0x9D135F: push    eax
+0x9D1360: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D1365: pop     ecx
+0x9D1366: retn
+0x9D1367: mov     edx, [esp+arg_4]
+0x9D136B: lea     eax, [edx-30h]
+0x9D136E: mov     ecx, [edx-34h]
+0x9D1371: xor     ecx, eax
+0x9D1373: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D1378: mov     eax, offset stru_AF99C4
+0x9D137D: jmp     ___CxxFrameHandler3

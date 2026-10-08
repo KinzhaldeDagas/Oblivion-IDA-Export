@@ -1,6 +1,6 @@
 BOOL __stdcall Ctl3dAutoSubclass(HINSTANCE a1)
 {
-  _BYTE *v1; // ecx
+  TESBoundObject *v1; // ecx
 
-  return (BOOL)sub_4B3750(v1, (TESChildCELL *)a1, 0);
+  return (BOOL)TESBoundObject_Create3DImpl(v1, (TESObjectREFR *)a1, 0); /*0x51c64c*/
 }

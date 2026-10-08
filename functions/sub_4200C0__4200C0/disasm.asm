@@ -1,4 +1,4 @@
-0x4200C0: push    21h ; '!'; a2
+0x4200C0: push    21h ; '!'; Returns true when ExtraRunOncePacks contains a record for the supplied TESPackage pointer.
 0x4200C2: call    BaseExtraList_GetExtraData
 0x4200C7: test    eax, eax
 0x4200C9: jz      short loc_4200E7

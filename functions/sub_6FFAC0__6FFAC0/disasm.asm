@@ -4,7 +4,7 @@
 0x6FFAC4: xor     ebp, ebp
 0x6FFAC6: cmp     [ebx+14h], bp
 0x6FFACA: jz      short loc_6FFB0C
-0x6FFACC: push    offset stru_B3F600; lpCriticalSection
+0x6FFACC: push    offset unk_B3F600; lpCriticalSection
 0x6FFAD1: call    dword ptr ds:0A2806Ch
 0x6FFAD7: call    dword ptr ds:0A2808Ch
 0x6FFADD: mov     ds:0B3F678h, eax
@@ -15,7 +15,7 @@
 0x6FFAF3: sub     ds:0B3F67Ch, eax
 0x6FFAF9: jnz     short loc_6FFB01
 0x6FFAFB: mov     ds:0B3F678h, ebp
-0x6FFB01: push    offset stru_B3F600; lpCriticalSection
+0x6FFB01: push    offset unk_B3F600; lpCriticalSection
 0x6FFB06: call    dword ptr ds:0A28074h
 0x6FFB0C: pop     ebp
 0x6FFB0D: xor     al, al
@@ -36,7 +36,7 @@
 0x6FFB31: mov     edx, [ebx+10h]
 0x6FFB34: movsx   ecx, si
 0x6FFB37: mov     ecx, [edx+ecx*4]
-0x6FFB3A: call    sub_452A60
+0x6FFB3A: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6FFB3F: mov     ecx, [esp+10h+arg_0]
 0x6FFB43: mov     dl, [ecx]
 0x6FFB45: cmp     dl, [eax]
@@ -68,7 +68,7 @@
 0x6FFB86: sub     ds:0B3F67Ch, eax
 0x6FFB8C: jnz     short loc_6FFB98
 0x6FFB8E: mov     dword ptr ds:0B3F678h, 0
-0x6FFB98: push    offset stru_B3F600; lpCriticalSection
+0x6FFB98: push    offset unk_B3F600; lpCriticalSection
 0x6FFB9D: call    dword ptr ds:0A28074h
 0x6FFBA3: pop     edi
 0x6FFBA4: pop     esi
@@ -82,7 +82,7 @@
 0x6FFBB4: sub     dword ptr ds:0B3F67Ch, 1
 0x6FFBBB: jnz     short loc_6FFBC7
 0x6FFBBD: mov     dword ptr ds:0B3F678h, 0
-0x6FFBC7: push    offset stru_B3F600; lpCriticalSection
+0x6FFBC7: push    offset unk_B3F600; lpCriticalSection
 0x6FFBCC: call    dword ptr ds:0A28074h
 0x6FFBD2: pop     edi
 0x6FFBD3: pop     esi

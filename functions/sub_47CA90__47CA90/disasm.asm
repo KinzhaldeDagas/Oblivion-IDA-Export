@@ -22,7 +22,7 @@
 0x47CAD0: push    ebp; a3
 0x47CAD1: push    ecx
 0x47CAD2: fstp    [esp+18h+a2]; a2
-0x47CAD5: call    NiAVObject_UpdateNiAVObject
+0x47CAD5: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x47CADA: movzx   edx, word ptr [edi+0B8h]
 0x47CAE1: add     esi, 1
 0x47CAE4: cmp     esi, edx

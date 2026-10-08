@@ -1,1 +1,1 @@
-TESEyes
+struct TESEyes;

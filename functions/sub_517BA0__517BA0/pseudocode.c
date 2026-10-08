@@ -2,13 +2,13 @@ bool __thiscall sub_517BA0(TESForm *this, void *a2)
 {
   TESForm *v3; // eax
 
-  v3 = (TESForm *)OblivionDynamicCast(
+  v3 = (TESForm *)OblivionDynamicCast( /*0x517bb6*/
                     a2,
                     0,
                     (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
                     &TESSound `RTTI Type Descriptor',
                     0);
-  return !v3
+  return !v3 /*0x517c03*/
       || v3[2].member.refID != *((_DWORD *)this + 0xF)
       || BYTE1(v3[2].member.flags) != *((_BYTE *)this + 0x39)
       || LOBYTE(v3[2].member.flags) != *((_BYTE *)this + 0x38)

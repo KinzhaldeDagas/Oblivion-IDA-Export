@@ -1,19 +1,36 @@
 {
-  "callees_count": 44,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 24,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_79E400",
+  "chunks": [
+    [
+      "0x79E400",
+      "0x79E71E"
+    ],
+    [
+      "0x9CC420",
+      "0x9CC44D"
+    ]
+  ],
+  "chunks_sha256": "bf3e440698707e86f54f9c8d282cba5cf0b123b0aac70e836dfdfff8a652e7d4",
+  "comment_regular": "Oblivion st_vector<SFrondTexture>::insert(position,count,value). Makes an alias-safe value copy, enforces max_size 0x5D1745D, grows capacity by 1.5x when needed, and performs exception-safe deep construction/destruction of 0x2C-byte string-bearing records.",
+  "comment_repeatable": "Oblivion st_vector<SFrondTexture>::insert(position,count,value). Makes an alias-safe value copy, enforces max_size 0x5D1745D, grows capacity by 1.5x when needed, and performs exception-safe deep construction/destruction of 0x2C-byte string-bearing records.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
+  "display_name": "OB_stVector_SFrondTexture_InsertFill_010201A0",
   "end_ea": "0x79E71E",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_79E400",
+  "name": "OB_stVector_SFrondTexture_InsertFill_010201A0",
   "segment": ".text",
   "sha256": "60b9b2a7ae777cda2ebc35787c97c250d21f2ec3d746cddaf2f506abd3f3a10a",
   "size": 798,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79E400",
-  "type": "void __thiscall __noreturn(_DWORD *this, int, int, unsigned int, int)",
-  "xrefs_from_count": 332,
+  "total_chunk_size": 843,
+  "type": "void __thiscall(OB_stVector16_010201A0 *this, OB_stVector16_010201A0 *expectedOwner, OB_SFrondTexture_010201A0 *position, unsigned int count, const OB_SFrondTexture_010201A0 *value)",
+  "xrefs_from_count": 362,
   "xrefs_to_count": 1
 }

@@ -1,121 +1,110 @@
-void __userpurge TESActorBaseData_SaveModifiedComponent(char *this@<ecx>, int a2@<ebx>, char a3)
+// Verified: mask 0x10 saves exactly 16 bytes at component +4 (flags and six UInt16 fields through maxLevel). Includes both blood-disable flag bits; does not save blood path strings. Mask 0x40 saves UInt16 count then FormID (4 bytes through IRef-aware helper) and rank byte for each nonnull faction entry.
+void __thiscall TESActorBaseData_SaveModifiedComponent(TESActorBaseData *self, ActorBaseSaveChangeMask changeMask)
 {
-  TESSaveLoad *v5; // ecx
-  UInt32 v6; // ebp
-  TESSaveLoad *v7; // ecx
-  TESSaveLoad *v8; // ecx
-  char v9; // bl
-  TESSaveLoad *v10; // ecx
-  _WORD *v11; // edi
-  char *i; // esi
-  _BYTE *v13; // eax
-  int v14; // edx
-  char v15; // al
-  TESSaveLoad *v16; // ecx
-  UInt32 *v17; // edi
-  UInt32 v18; // esi
-  TESForm *v19; // eax
-  const char *v20; // eax
-  _WORD *v21; // edi
-  unsigned int v22; // esi
-  int v23; // [esp-Ch] [ebp-28h]
-  size_t v24; // [esp-8h] [ebp-24h]
-  size_t v25; // [esp-8h] [ebp-24h]
-  int v26; // [esp-8h] [ebp-24h]
-  size_t v27; // [esp-4h] [ebp-20h]
-  size_t v28; // [esp-4h] [ebp-20h]
-  const char *v29; // [esp-4h] [ebp-20h]
+  TESSaveLoadGame_SerializationView *v3; // ecx
+  unsigned __int8 *bufferCursor; // ebp
+  TESSaveLoadGame_SerializationView *v5; // ecx
+  TESSaveLoadGame_SerializationView *v6; // ecx
+  char v7; // bl
+  TESSaveLoadGame_SerializationView *v8; // ecx
+  unsigned __int8 *v9; // edi
+  FactionListEntry *i; // esi
+  FactionListData *data; // eax
+  unsigned int v12; // edx
+  UInt8 rank; // al
+  TESSaveLoadGame_SerializationView *v14; // ecx
+  UInt32 *currentlySavingFormHeader; // edi
+  unsigned __int8 *v16; // esi
+  TESForm *v17; // eax
+  const char *v18; // eax
+  unsigned __int8 *v19; // edi
+  unsigned __int8 *v20; // esi
+  int v21; // [esp-Ch] [ebp-28h]
+  int v22; // [esp-8h] [ebp-24h]
+  const char *v23; // [esp-4h] [ebp-20h]
   int Src; // [esp+Ch] [ebp-10h] BYREF
-  UInt32 v31; // [esp+10h] [ebp-Ch]
-  int v32; // [esp+14h] [ebp-8h] BYREF
-  int v33; // [esp+18h] [ebp-4h] BYREF
+  unsigned __int8 *v25; // [esp+10h] [ebp-Ch]
+  int source; // [esp+14h] [ebp-8h] BYREF
+  unsigned int v27; // [esp+18h] [ebp-4h] BYREF
 
-  v5 = SaveLoad_CurrentSavegame;
-  v32 = 0;
-  v6 = v5->unk000[5];
-  v31 = 0;
-  if ( sub_45A170() )
+  v3 = g_TESSaveLoadGame; /*0x467af8*/
+  source = 0; /*0x467b00*/
+  bufferCursor = v3->bufferCursor; /*0x467b04*/
+  v25 = 0; /*0x467b07*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x467b0b*/
   {
-    v7 = SaveLoad_CurrentSavegame;
-    LODWORD(v27) = 4;
-    Src = 0x4B4F4C42;
-    SaveLoad_SaveData((int)v7, &Src, v27);
-    v8 = SaveLoad_CurrentSavegame;
-    LODWORD(v28) = 2;
-    v31 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_SaveData((int)v8, &v32, v28);
+    v5 = g_TESSaveLoadGame; /*0x467b14*/
+    Src = 0x4B4F4C42; /*0x467b21*/
+    SaveLoad_SaveData(v5, &Src, 4u); /*0x467b29*/
+    v6 = g_TESSaveLoadGame; /*0x467b2e*/
+    v25 = g_TESSaveLoadGame->bufferCursor; /*0x467b3e*/
+    SaveLoad_SaveData(v6, &source, 2u); /*0x467b42*/
   }
-  HIDWORD(v24) = a2;
-  v9 = a3;
-  if ( (a3 & 0x10) != 0 )
+  v7 = changeMask; /*0x467b48*/
+  if ( (changeMask & 0x10) != 0 ) /*0x467b4f*/
+    SaveLoad_SaveData(g_TESSaveLoadGame, &self->flags, 0x10u); /*0x467b5d*/
+  if ( (v7 & 0x40) != 0 ) /*0x467b65*/
   {
-    LODWORD(v24) = 0x10;
-    SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, this + 4, v24);
-  }
-  if ( (v9 & 0x40) != 0 )
-  {
-    v10 = SaveLoad_CurrentSavegame;
-    LODWORD(v24) = 2;
-    Src = 0;
-    v11 = (_WORD *)v10->unk000[5];
-    SaveLoad_SaveData((int)v10, &Src, v24);
-    for ( i = this + 0x18; i; i = *((char **)i + 1) )
+    v8 = g_TESSaveLoadGame; /*0x467b67*/
+    Src = 0; /*0x467b73*/
+    v9 = v8->bufferCursor; /*0x467b77*/
+    SaveLoad_SaveData(v8, &Src, 2u); /*0x467b7b*/
+    for ( i = &self->factionList; i; i = i->next ) /*0x467b83*/
     {
-      v13 = *(_BYTE **)i;
-      if ( *(_DWORD *)i )
+      data = i->data; /*0x467b90*/
+      if ( i->data ) /*0x467b90*/
       {
-        v14 = *(_DWORD *)(*(_DWORD *)v13 + 0xC);
-        v15 = v13[4];
-        v16 = SaveLoad_CurrentSavegame;
-        v33 = v14;
-        a3 = v15;
-        SaveLoad_SaveFormID(v16, (int)&v33, 4u);
-        LODWORD(v25) = 1;
-        SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &a3, v25);
-        ++Src;
+        v12 = *((_DWORD *)data->faction + 3); /*0x467b98*/
+        rank = data->rank; /*0x467b9b*/
+        v14 = g_TESSaveLoadGame; /*0x467ba5*/
+        v27 = v12; /*0x467bab*/
+        LOBYTE(changeMask) = rank; /*0x467baf*/
+        SaveLoad_SaveFormID(v14, &v27, 4u); /*0x467bb3*/
+        SaveLoad_SaveData(g_TESSaveLoadGame, &changeMask, 1u); /*0x467bc4*/
+        ++Src; /*0x467bc9*/
       }
     }
-    *v11 = Src;
+    *(_WORD *)v9 = Src; /*0x467bd9*/
   }
   if ( Global_DebugSaveBuffer )
   {
-    v17 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    v18 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v17 )
+    currentlySavingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlySavingFormHeader; /*0x467beb*/
+    v16 = g_TESSaveLoadGame->bufferCursor; /*0x467bf3*/
+    if ( currentlySavingFormHeader )
     {
-      v19 = TESForm_LookupByFormID(*v17);
-      v20 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v19->vtbl->GetEditorName)(
-                            v19,
-                            *(UInt32 *)((char *)v17 + 5),
+      v17 = TESForm_LookupByFormID(*currentlySavingFormHeader); /*0x467bfb*/
+      v18 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v17->vtbl->GetEditorName)( /*0x467c1b*/
+                            v17,
+                            *(UInt32 *)((char *)currentlySavingFormHeader + 5),
                             0x66F,
                             "..\\TES Shared\\TESActorBaseData.cpp");
       sub_40FEC0(
         "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v18 - v6,
-        *v17,
-        v20,
-        v23,
-        v26,
-        v29);
+        v16 - bufferCursor,
+        *currentlySavingFormHeader,
+        v18,
+        v21,
+        v22,
+        v23);
     }
     else
     {
       sub_40FEC0(
         "SaveGame(): %-5i ending at line %i in file %s",
-        v18 - v6,
+        v16 - bufferCursor,
         0x66F,
         "..\\TES Shared\\TESActorBaseData.cpp");
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x467c53*/
   {
-    v21 = (_WORD *)v31;
-    v22 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v22 > v31 + 0xFFFF )
-      PrintError(
+    v19 = v25; /*0x467c62*/
+    v20 = g_TESSaveLoadGame->bufferCursor; /*0x467c66*/
+    if ( v20 > v25 + 0xFFFF ) /*0x467c71*/
+      PrintError( /*0x467c82*/
         "Save Game Block in file %s on line %i is greater than maximum short size",
         "..\\TES Shared\\TESActorBaseData.cpp",
         0x66F);
-    *v21 = v22 - (_WORD)v21;
+    *(_WORD *)v19 = (_WORD)v20 - (_WORD)v19; /*0x467c8c*/
   }
 }

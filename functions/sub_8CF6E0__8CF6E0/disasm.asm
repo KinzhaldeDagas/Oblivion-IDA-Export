@@ -1,4 +1,4 @@
-0x8CF6E0: push    ebp
+0x8CF6E0: push    ebp; TES4 authoritative: InAir state update. Uses +0x320 fall timer to set/clear flag 0x80, consumes support flag 0x100 for OnGround transition, sets flag 0x400 for short airborne/water-surface transition cases, and applies gravity via +0x328 * dt to velocity +0x2E0.
 0x8CF6E1: mov     ebp, esp
 0x8CF6E3: and     esp, 0FFFFFFF0h
 0x8CF6E6: sub     esp, 0B4h
@@ -14,7 +14,7 @@
 0x8CF70A: test    al, 1
 0x8CF70C: push    edi
 0x8CF70D: mov     [esp+0C0h+var_B4], ecx
-0x8CF711: jz      short loc_8CF74A
+0x8CF711: jz      short loc_8CF74A; InAir landing path: flag 0x100 switches state to OnGround and sets/clears pending fall-impact based on fall timer +0x320.
 0x8CF713: fcom    dword ptr [esi+320h]
 0x8CF719: mov     dword ptr [esi+2A0h], 0
 0x8CF723: fnstsw  ax
@@ -47,25 +47,25 @@
 0x8CF77E: test    ecx, ecx
 0x8CF780: movaps  xmm0, xmmword ptr [esi+340h]
 0x8CF787: shufps  xmm0, xmm0, 0AAh ; 'ª'
-0x8CF78B: movaps  [esp+0C0h+var_B0], xmm0
+0x8CF78B: movaps  [esp+0C0h+var_B0], xmm0; InAir copies shape-local offset vector from proxy+0x340/+0x344/+0x348 for water-height/transition tests.
 0x8CF790: jz      short loc_8CF79D
 0x8CF792: fstp    st
-0x8CF794: call    sub_8AC070
+0x8CF794: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x8CF799: fldz
 0x8CF79B: jmp     short loc_8CF7A2
-0x8CF79D: mov     eax, offset stru_BA7A40
+0x8CF79D: mov     eax, offset unk_BA7A40
 0x8CF7A2: movaps  xmm0, xmmword ptr [eax]
 0x8CF7A5: shufps  xmm0, xmm0, 0AAh ; 'ª'
 0x8CF7A9: subss   xmm0, dword ptr [esp+0C0h+var_B0]
 0x8CF7AF: movss   dword ptr [esp+0C0h+var_B0], xmm0
 0x8CF7B5: fld     dword ptr [esp+0C0h+var_B0]
-0x8CF7B9: fld     dword ptr [esi+318h]
+0x8CF7B9: fld     dword ptr [esi+318h]; InAir reads proxy+0x318 water height; if current position minus shape offset is below water height, it sets flag 0x400 and may zero downward velocity while jumping.
 0x8CF7BF: fcompp
 0x8CF7C1: fnstsw  ax
 0x8CF7C3: test    ah, 41h
 0x8CF7C6: jnz     short loc_8CF7D4
 0x8CF7C8: mov     bl, 1
-0x8CF7CA: or      dword ptr [esi+1F4h], 400h
+0x8CF7CA: or      dword ptr [esi+1F4h], 400h; InAir sets flag 0x400 for the short airborne transition case or the water-height case; do not treat this flag alone as ledge/ground proof.
 0x8CF7D4: mov     eax, [esi+2A0h]
 0x8CF7DA: cmp     eax, 0Bh
 0x8CF7DD: jz      short loc_8CF82C
@@ -77,7 +77,7 @@
 0x8CF7EF: jz      short loc_8CF822
 0x8CF7F1: mov     ecx, esi
 0x8CF7F3: fstp    st
-0x8CF7F5: call    sub_890720
+0x8CF7F5: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CF7FA: fldz
 0x8CF7FC: test    bl, bl
 0x8CF7FE: jz      short loc_8CF822
@@ -100,7 +100,7 @@
 0x8CF84B: jmp     short loc_8CF883
 0x8CF84D: mov     ecx, esi
 0x8CF84F: fstp    dword ptr [esi+324h]
-0x8CF855: call    sub_890720
+0x8CF855: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8CF85A: pop     edi
 0x8CF85B: pop     esi
 0x8CF85C: pop     ebx
@@ -141,7 +141,7 @@
 0x8CF90C: push    eax
 0x8CF90D: fst     [esp+0C8h+var_38]
 0x8CF914: fstp    [esp+0C8h+var_34]
-0x8CF91B: call    sub_91F430
+0x8CF91B: call    bhkCharacterState_SolveVelocityToTarget; InAir solver setup: response is state-dependent, basis slots use proxy+0x2C0/+0x2B0/+0x2B0, current=proxy+0x2E0, desired local velocity uses horizontal proxy+0x290 only, maxDelta comes from the InAir state object, reference=proxy+0x280.
 0x8CF920: movaps  xmm1, xmmword ptr [esi+2B0h]
 0x8CF927: movaps  xmm0, xmmword ptr [edi]
 0x8CF92A: mulps   xmm0, xmm1
@@ -193,7 +193,7 @@
 0x8CF9C9: mov     edx, [esi]
 0x8CF9CB: mov     eax, [edx+58h]
 0x8CF9CE: mov     ecx, esi
-0x8CF9D0: movaps  [esp+0C0h+var_A0], xmm0
+0x8CF9D0: movaps  [esp+0C0h+var_A0], xmm0; InAir reads runtime up/gravity basis from context+0x20 before applying gravity to velocity.
 0x8CF9D5: call    eax
 0x8CF9D7: movss   xmm0, dword ptr [esi+328h]
 0x8CF9DF: movss   xmm2, dword ptr [esi+2D8h]
@@ -210,7 +210,7 @@
 0x8CFA0A: movaps  xmm0, xmmword ptr [esi+2E0h]
 0x8CFA11: addps   xmm2, xmm0
 0x8CFA14: movaps  xmmword ptr [esi+2E0h], xmm2
-0x8CFA1B: call    sub_890740
+0x8CFA1B: call    sub_890740; Fall timer update: +0x324 always accumulates frame time; +0x320 accumulates only while downward velocity exceeds threshold and flags 0x100/0x200 are clear. Slowfall must suppress +0x320 for softened falls.
 0x8CFA20: mov     ecx, [esp+0C0h+var_4]
 0x8CFA27: pop     edi
 0x8CFA28: pop     esi

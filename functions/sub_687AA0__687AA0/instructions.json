@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x687AF1",
-    "line": "mov     edi, [esp+48h+arg_4]",
+    "line": "mov     edi, [esp+48h+worldXY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x687B12",
-    "line": "push    edi; float *",
+    "line": "push    edi; worldXY",
     "mnemonic": "push",
     "size": 1
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x687B1A",
-    "line": "call    TESWorldSpace__GetCellAtPos",
+    "line": "call    TESWorldSpace_GetCellAtWorldPosition",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x687B3B",
-    "line": "push    ebp; float *",
+    "line": "push    ebp; worldXY",
     "mnemonic": "push",
     "size": 1
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x687B43",
-    "line": "call    TESWorldSpace__GetCellAtPos",
+    "line": "call    TESWorldSpace_GetCellAtWorldPosition",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x687BD3",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x687BDD",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x687BF1",
-    "line": "lea     ecx, [esp+48h+var_34]; void *",
+    "line": "lea     ecx, [esp+48h+var_34]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x687BFA",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x687BFF",
-    "line": "lea     ecx, [esp+48h+var_20]; void *",
+    "line": "lea     ecx, [esp+48h+var_20]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x687C0B",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -784,5 +784,71 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5020",
+    "line": "lea     ecx, [ebp-20h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5023",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5028",
+    "line": "lea     ecx, [ebp-34h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C502B",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5030",
+    "line": "mov     edx, [esp+worldXY]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5034",
+    "line": "lea     eax, [edx-38h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5037",
+    "line": "mov     ecx, [edx-3Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C503A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C503C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5041",
+    "line": "mov     eax, offset stru_AED870",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5046",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -3,7 +3,7 @@
 0x41E452: push    edi
 0x41E453: mov     ebx, ecx
 0x41E455: push    offset aExtradatalis_6; "ExtraDataList::RemoveNonPersistentCellD"...
-0x41E45A: mov     ecx, offset BSExtraDataCS
+0x41E45A: mov     ecx, 0B33800h
 0x41E45F: call    NiEnterCriticalSection
 0x41E464: mov     esi, [ebx+4]
 0x41E467: xor     edi, edi
@@ -21,7 +21,7 @@
 0x41E482: jnz     short loc_41E49C
 0x41E484: mov     edi, ecx
 0x41E486: jmp     short loc_41E4B3
-0x41E488: mov     eax, SaveLoad_CurrentSavegame
+0x41E488: mov     eax, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x41E48D: mov     edx, [eax+18h]
 0x41E490: shr     edx, 2
 0x41E493: test    dl, 1
@@ -45,6 +45,6 @@
 0x41E4BD: add     esp, 4
 0x41E4C0: pop     edi
 0x41E4C1: pop     esi
-0x41E4C2: mov     ecx, offset BSExtraDataCS; lpCriticalSection
+0x41E4C2: mov     ecx, 0B33800h; lpCriticalSection
 0x41E4C7: pop     ebx
 0x41E4C8: jmp     NiLeaveCriticalSection_0

@@ -67,25 +67,25 @@
   },
   {
     "ea": "0x95D74F",
-    "line": "mov     ecx, [esp+4+arg_C]",
+    "line": "mov     ecx, [esp+4+pickedObject]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x95D753",
-    "line": "push    ecx",
+    "line": "push    ecx; pickedObject",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x95D754",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x95D756",
-    "line": "call    sub_95A2D0",
+    "line": "call    NiPickRecord_Initialize; Verified NiPickRecord initialization for the 0x44-byte record: retains the picked object at +0, clears/releases the secondary reference at +4, and zeros tail fields +0x34..+0x40. It does not initialize the intersection point, distance, or +0x28 normal fields; pick paths populate those selectively, so bounds-only records may leave the normal unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x95D778",
-    "line": "mov     edi, [esp+8+arg_C]",
+    "line": "mov     edi, [esp+8+pickedObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x95D790",
-    "line": "cmp     eax, offset dword_B3FD70",
+    "line": "cmp     eax, offset stru_B3FD70",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x95D7E2",
-    "line": "call    sub_95D540",
+    "line": "call    NiPick_ProcessSceneObject; Verified scene-object pick dispatcher: rejects invalid/filtered candidates, delegates NiGeometryData to NiPick_ProcessGeometryIntersection, and has a separate bounds/RTTI fallback that writes hit point and distance but does not explicitly populate the normal field.",
     "mnemonic": "call",
     "size": 5
   },

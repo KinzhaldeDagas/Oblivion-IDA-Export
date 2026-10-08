@@ -1,4 +1,4 @@
-0x5239C0: sub     esp, 8
+0x5239C0: sub     esp, 8; Non-player base vampirism reconstruction: skips formID 7; scans NPC and race spell lists, selects spell-type 4 and VAMP effect code 0x504D4156, sums EffectItem magnitudes, converts to integer, sets base AV 0x45 via virtual+0x134. Supports identifying FaceGen bank selector 0x45 as vampirism, not sex.
 0x5239C3: push    ebx
 0x5239C4: mov     ebx, ecx
 0x5239C6: cmp     dword ptr [ebx+0Ch], 7
@@ -94,7 +94,7 @@
 0x523AC7: jnz     short loc_523A60
 0x523AC9: fld     [esp+14h+var_8]
 0x523ACD: mov     esi, [ebx]
-0x523ACF: call    Double_To_SInt32
+0x523ACF: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x523AD4: push    eax
 0x523AD5: mov     eax, [esi+134h]
 0x523ADB: push    45h ; 'E'

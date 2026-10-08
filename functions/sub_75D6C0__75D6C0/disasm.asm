@@ -1,6 +1,6 @@
 0x75D6C0: push    ebx
 0x75D6C1: push    ebp
-0x75D6C2: mov     bp, [esp+8+arg_0]
+0x75D6C2: mov     bp, word ptr [esp+8+arg_0]
 0x75D6C7: push    esi
 0x75D6C8: mov     esi, ecx
 0x75D6CA: cmp     bp, [esi+48h]
@@ -15,7 +15,7 @@
 0x75D6E3: lea     edx, [esp+14h+arg_0]
 0x75D6E7: push    edx
 0x75D6E8: call    eax
-0x75D6EA: mov     eax, dword ptr [esp+10h+arg_0]
+0x75D6EA: mov     eax, [esp+10h+arg_0]
 0x75D6EE: test    eax, eax
 0x75D6F0: jz      short loc_75D710
 0x75D6F2: mov     edi, eax

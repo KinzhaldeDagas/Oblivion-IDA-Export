@@ -22,7 +22,6 @@
 0x48F3C7: test    ebx, ebx
 0x48F3C9: jz      short loc_48F434
 0x48F3CB: jmp     short loc_48F3D0
-0x48F3CD: align 10h
 0x48F3D0: mov     esi, [ebx]
 0x48F3D2: mov     ecx, ds:0B333C4h
 0x48F3D8: mov     ebp, [edi+8]

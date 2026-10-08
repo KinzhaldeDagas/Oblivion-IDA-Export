@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x631073",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x6310AF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x6310B6",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x6310D8",
-    "line": "mov     [esp+188h+var_170], edx",
+    "line": "mov     dword ptr [esp+188h+var_170], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x6310E3",
-    "line": "mov     [esp+18Ch+var_16C], eax",
+    "line": "mov     dword ptr [esp+18Ch+var_170+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x6310EC",
-    "line": "fld     [esp+18Ch+var_170]",
+    "line": "fld     dword ptr [esp+18Ch+var_170]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x631193",
-    "line": "mov     [esp+18Ch+var_170], edx",
+    "line": "mov     dword ptr [esp+18Ch+var_170], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x6311A3",
-    "line": "mov     [esp+198h+var_16C], ecx",
+    "line": "mov     dword ptr [esp+198h+var_170+4], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x6311C3",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x6311D8",
-    "line": "mov     [esp+188h+var_170], ecx",
+    "line": "mov     dword ptr [esp+188h+var_170], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x6311DF",
-    "line": "mov     [esp+188h+var_16C], edx",
+    "line": "mov     dword ptr [esp+188h+var_170+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -769,13 +769,13 @@
   },
   {
     "ea": "0x6311E9",
-    "line": "mov     ecx, offset dword_B3B94C",
+    "line": "mov     ecx, offset stru_B3B94C",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x6311EE",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x63120B",
-    "line": "mov     ecx, offset dword_B3B94C",
+    "line": "mov     ecx, offset stru_B3B94C",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x6312F7",
-    "line": "call    sub_46D5C0",
+    "line": "call    sub_46D5C0; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x6312FF",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1489,7 +1489,7 @@
   },
   {
     "ea": "0x631380",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1795,7 +1795,7 @@
   },
   {
     "ea": "0x631418",
-    "line": "fld     [esp+188h+var_170]",
+    "line": "fld     dword ptr [esp+188h+var_170]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1813,7 +1813,7 @@
   },
   {
     "ea": "0x631423",
-    "line": "fld     [esp+188h+var_16C]",
+    "line": "fld     dword ptr [esp+188h+var_170+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x63150B",
-    "line": "mov     [esp+18Ch+var_170], edx",
+    "line": "mov     dword ptr [esp+18Ch+var_170], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2281,7 +2281,7 @@
   },
   {
     "ea": "0x631515",
-    "line": "mov     [esp+190h+var_16C], eax",
+    "line": "mov     dword ptr [esp+190h+var_170+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2323,7 +2323,7 @@
   },
   {
     "ea": "0x63152C",
-    "line": "fld     [esp+18Ch+var_170]",
+    "line": "fld     dword ptr [esp+18Ch+var_170]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2341,7 +2341,7 @@
   },
   {
     "ea": "0x631537",
-    "line": "fld     [esp+18Ch+var_16C]",
+    "line": "fld     dword ptr [esp+18Ch+var_170+4]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2365,7 +2365,7 @@
   },
   {
     "ea": "0x631547",
-    "line": "fld     [esp+18Ch+var_170]",
+    "line": "fld     dword ptr [esp+18Ch+var_170]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2629,7 +2629,7 @@
   },
   {
     "ea": "0x6315D7",
-    "line": "mov     edx, [esp+198h+var_170]",
+    "line": "mov     edx, dword ptr [esp+198h+var_170]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x6315E2",
-    "line": "mov     ecx, [esp+1A4h+var_16C]",
+    "line": "mov     ecx, dword ptr [esp+1A4h+var_170+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2689,7 +2689,7 @@
   },
   {
     "ea": "0x6315F3",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2719,7 +2719,7 @@
   },
   {
     "ea": "0x631608",
-    "line": "mov     [esp+188h+var_170], edx",
+    "line": "mov     dword ptr [esp+188h+var_170], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2731,7 +2731,7 @@
   },
   {
     "ea": "0x63160F",
-    "line": "mov     [esp+188h+var_16C], eax",
+    "line": "mov     dword ptr [esp+188h+var_170+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x63168B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2983,7 +2983,7 @@
   },
   {
     "ea": "0x6316A6",
-    "line": "fld     [esp+188h+var_170]",
+    "line": "fld     dword ptr [esp+188h+var_170]",
     "mnemonic": "fld",
     "size": 4
   },

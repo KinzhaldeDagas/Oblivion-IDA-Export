@@ -1,4 +1,4 @@
-0x4A5FF0: mov     eax, [esp+arg_0]
+0x4A5FF0: mov     eax, [esp+arg_0]; Verified: appends one TESRegionGrassObject pointer to TESRegionGrassObjectList and increments its count at +0x10.
 0x4A5FF4: push    esi
 0x4A5FF5: mov     esi, ecx
 0x4A5FF7: push    eax

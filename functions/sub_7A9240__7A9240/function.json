@@ -1,19 +1,40 @@
 {
-  "callees_count": 97,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 46,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A9240",
+  "chunks": [
+    [
+      "0x7A9240",
+      "0x7A9740"
+    ],
+    [
+      "0x7A87D0",
+      "0x7A8800"
+    ],
+    [
+      "0x9CCF30",
+      "0x9CCF69"
+    ]
+  ],
+  "chunks_sha256": "821ad4de68a3eae625460cef9ce00fdfc3f002eff4dd61f1a9b8b11b4ab1f7ce",
+  "comment_regular": "OBLIVION AUTHORITY 2026-08-27: CLeafLodEngine::FindPairs accepts a 16-byte leaf-vector value. For each primary leaf in source order, it scans a contiguous following prefix only until end or the first already-marked candidate, chooses the nearest position within spacing tolerance, and marks only that chosen match. A leaf already used as a match may later be a primary. It never compares textureIndexByte, colorScaleByte, packedColor, or texture record, so pairs may cross leaf textures/layers.",
+  "comment_repeatable": "OBLIVION AUTHORITY 2026-08-27: CLeafLodEngine::FindPairs accepts a 16-byte leaf-vector value. For each primary leaf in source order, it scans a contiguous following prefix only until end or the first already-marked candidate, chooses the nearest position within spacing tolerance, and marks only that chosen match. A leaf already used as a match may later be a primary. It never compares textureIndexByte, colorScaleByte, packedColor, or texture record, so pairs may cross leaf textures/layers.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 65,
+  "display_name": "OB_CLeafLodEngine_FindPairs_010201A0",
   "end_ea": "0x7A9740",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A9240",
+  "name": "OB_CLeafLodEngine_FindPairs_010201A0",
   "segment": ".text",
   "sha256": "c781a59232aba946a59864b020e9c0d8c36880b84ccfcbd5148a1647355fb452",
   "size": 1280,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A9240",
-  "type": "void __thiscall(float *this, char, unsigned int, unsigned int, int)",
-  "xrefs_from_count": 450,
+  "total_chunk_size": 1385,
+  "type": "void __thiscall(OB_CLeafLodEngine_010201A0 *this, OB_stVectorBillboardLeafPtr_010201A0 originalLeaves)",
+  "xrefs_from_count": 544,
   "xrefs_to_count": 1
 }

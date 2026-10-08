@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x429AF3",
-    "line": "push    eax",
+    "line": "push    eax; numericLockMagnitude",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x429AF4",
-    "line": "call    GetLockLevel",
+    "line": "call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x429AFC",
-    "line": "push    ecx",
+    "line": "push    ecx; numericLockMagnitude",
     "mnemonic": "push",
     "size": 1
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x429AFF",
-    "line": "call    GetLockLevel",
+    "line": "call    GetLockLevel; Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
     "mnemonic": "call",
     "size": 5
   },

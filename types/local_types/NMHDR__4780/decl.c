@@ -1,1 +1,1 @@
-NMHDR
+typedef tagNMHDR NMHDR;

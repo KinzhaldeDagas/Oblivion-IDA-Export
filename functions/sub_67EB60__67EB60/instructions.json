@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67EB60",
-    "line": "mov     eax, ds:0B15450h",
+    "line": "mov     eax, ds:0B15450h; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x67EBAC",
-    "line": "mov     eax, [esp+8+arg_0]",
+    "line": "mov     eax, [esp+8+start]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x67EBC2",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x67EC03",
-    "line": "mov     ecx, [esp+8+arg_C]",
+    "line": "mov     ecx, [esp+8+extraCost]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,31 +343,31 @@
   },
   {
     "ea": "0x67EC08",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+actor]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x67EC0C",
-    "line": "push    ecx; float",
+    "line": "push    ecx; strictMode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67EC0D",
-    "line": "push    edi; int",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67EC0E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; segmentQuery",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EC10",
-    "line": "call    sub_67E160",
+    "line": "call    ConnectedPointGraph_TestStraightSegment; Verified direct-segment test used before actor-aware A*. It locates PathGrid nodes near both endpoints, rejects/defers segments based on distance, water-state mismatch and actor collision-height checks, and reports whether graph fallback should be attempted. Exact meaning of several geometric thresholds remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x67EC19",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67EC1A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; searchContext",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67EC1C",
-    "line": "call    sub_67E8D0",
+    "line": "call    ConnectedPointGraph_FindActorAwarePath; Verified actor-aware A* over graph-node adjacency. It uses TESConnectedPoint_ComputeActorAwareEdgeCost, skips candidates whose PathGrid linkedPointsDisabled bit 0x20 is set, and applies an additional actor-specific path filter. Its pathgrid caller selects a reachable point for actor movement.",
     "mnemonic": "call",
     "size": 5
   },

@@ -3,13 +3,13 @@
 0x402746: mov     ecx, offset HeapCriticalSection
 0x40274B: call    NiEnterCriticalSection
 0x402750: xor     esi, esi
-0x402752: cmp     g_HeapPoolsBySize[esi], 0
+0x402752: cmp     dword ptr [esi+0B33080h], 0
 0x402759: jz      short loc_40277F
 0x40275B: push    offset aFreeunusedpage; lpCriticalSection
 0x402760: mov     ecx, offset HeapCriticalSection
 0x402765: call    NiEnterCriticalSection
-0x40276A: mov     ecx, g_HeapPoolsBySize[esi]
-0x402770: call    sub_402640
+0x40276A: mov     ecx, [esi+0B33080h]
+0x402770: call    MemoryPool_FreeUnusedPages; Scans one MemoryPool for empty 4 KiB pages, unlinks each page's entries from its free list, VirtualFree's the page, and clears page metadata.
 0x402775: mov     ecx, offset HeapCriticalSection; lpCriticalSection
 0x40277A: call    NiLeaveCriticalSection_0
 0x40277F: add     esi, 4

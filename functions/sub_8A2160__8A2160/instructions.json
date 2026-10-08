@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8A2160",
-    "line": "push    ebp",
+    "line": "push    ebp; 2026-05-18 73000 consumer decode: bhkTransformShape setup consumes cinfo +0x04 child shape and cinfo +0x10 4x4 transform. This proves a rotation sidecar can be applied by building a non-identity transform cinfo instead of extending stock collision records.",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x8A21D1",
-    "line": "call    sub_8A2050",
+    "line": "call    sub_8A2050; 2026-05-18 73000 consumer decode: copies a full 4x4 transform matrix from cinfo into the Havok construction object; rows 0..2 via 0x8A1FB0 and row 3 here. 0x565510 stock callers leave rotation identity and write translation only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -538,5 +538,101 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D6A20",
+    "line": "mov     eax, [ebp+var_64]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6A23",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6A24",
+    "line": "call    sub_8C9290",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6A29",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6A2A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6A2B",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D6A2F",
+    "line": "lea     eax, [edx-64h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6A32",
+    "line": "mov     ecx, [edx-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6A35",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6A37",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6A3C",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6A3F",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6A42",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D6A44",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6A49",
+    "line": "mov     eax, offset stru_AFE7B4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6A4E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,4 +1,4 @@
-void __thiscall sub_4842E0(int this)
+void __thiscall sub_4842E0(TESForm **this)
 {
-  sub_470520(*(void **)(this + 8));
+  TESForm_GetValue(*(this + 2)); /*0x4842e4*/
 }

@@ -7,7 +7,7 @@
 0x50FCBA: mov     eax, [eax+0B0h]
 0x50FCC0: mov     ecx, [eax+4]
 0x50FCC3: push    8
-0x50FCC5: call    NiNode_GetNiPropertyByID
+0x50FCC5: call    NiNode_GetNiPropertyByID;
 0x50FCCA: test    eax, eax
 0x50FCCC: mov     cl, ds:0B361FEh
 0x50FCD2: jz      short loc_50FCE5
@@ -19,7 +19,7 @@
 0x50FCE5: cmp     byte ptr ds:0B361ACh, 0
 0x50FCEC: jz      short loc_50FD0A
 0x50FCEE: test    cl, cl
-0x50FCF0: mov     eax, offset aOn_0
+0x50FCF0: mov     eax, offset aOn_0; "On"
 0x50FCF5: jnz     short loc_50FCFC
 0x50FCF7: mov     eax, offset aOff
 0x50FCFC: push    eax

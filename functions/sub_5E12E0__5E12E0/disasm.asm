@@ -30,10 +30,10 @@
 0x5E132C: mov     edx, [eax+0CCh]
 0x5E1332: call    edx
 0x5E1334: mov     ecx, eax; this
-0x5E1336: call    TESObjectREFR_GetParentCell
+0x5E1336: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E133B: mov     ecx, esi; this
 0x5E133D: mov     edi, eax
-0x5E133F: call    TESObjectREFR_GetParentCell
+0x5E133F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5E1344: cmp     edi, eax
 0x5E1346: jz      short loc_5E1353
 0x5E1348: pop     edi

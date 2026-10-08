@@ -1,1 +1,1 @@
-_LocaleUpdate
+struct _LocaleUpdate;

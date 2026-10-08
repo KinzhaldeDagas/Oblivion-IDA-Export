@@ -56,10 +56,10 @@
 0x7705DC: mov     [esp+20h+var_8], ecx
 0x7705E0: jbe     short loc_770631
 0x7705E2: mov     eax, [esp+20h+Size]
-0x7705E6: push    eax; Size
-0x7705E7: push    ebp; Src
-0x7705E8: push    ebx; Dst
-0x7705E9: call    _memcpy
+0x7705E6: push    eax; byteCount
+0x7705E7: push    ebp; source
+0x7705E8: push    ebx; destination
+0x7705E9: call    _memcpy;
 0x7705EE: mov     eax, [esp+2Ch+var_C]
 0x7705F2: add     esp, 0Ch
 0x7705F5: cmp     ax, di

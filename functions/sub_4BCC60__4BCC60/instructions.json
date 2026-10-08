@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BCC60",
-    "line": "push    esi",
+    "line": "push    esi; Verified worker callback (+0x04 vtable): obtains an existing task BSFile or opens the task path, calls TESWorldSpace_LoadCellDistantLODData with task cellX/cellY, embedded object map and lodMode, then sets parseComplete at taskData +0x28.",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4BCC8D",
-    "line": "push    eax",
+    "line": "push    eax; externalFile",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4BCC91",
-    "line": "push    eax",
+    "line": "push    eax; lodMode",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,31 +133,31 @@
   },
   {
     "ea": "0x4BCC97",
-    "line": "push    ecx",
+    "line": "push    ecx; outMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BCC98",
-    "line": "mov     ecx, [esi+8]",
+    "line": "mov     ecx, [esi+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4BCC9B",
-    "line": "push    edx",
+    "line": "push    edx; cellY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BCC9C",
-    "line": "push    eax",
+    "line": "push    eax; cellX",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BCC9D",
-    "line": "call    sub_4F1990",
+    "line": "call    TESWorldSpace_LoadCellDistantLODData; Verified source selection: externalLodFiles uses the parsed external .lod stream exclusively; otherwise the loader searches this WorldSpace's override files, parses matching cell records, and follows parentWorldspace until a contributing file is found. Callers include DistantLODLoaderTask_LoadCellData.",
     "mnemonic": "call",
     "size": 5
   },

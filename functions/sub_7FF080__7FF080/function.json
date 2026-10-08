@@ -1,19 +1,36 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7FF080",
+  "chunks": [
+    [
+      "0x7FF080",
+      "0x7FF348"
+    ],
+    [
+      "0x9D0610",
+      "0x9D0633"
+    ]
+  ],
+  "chunks_sha256": "c57c34189e059ea86e76d05fa35556615694dd5b7864469f26bacf88c7f537a7",
+  "comment_regular": "Build the native one-stage Lighting30 mode-5 caster pass for selector 0x154 or 0x155. Lighting30Shader_ResolveSelectorStages binds shader-property texture 0/BaseMap; no receiver ShadowMap texture is bound on this producer path.\n\nBuild the native one-stage Lighting30 mode-5 caster pass for 0x154/0x155. The resolver binds property texture 0/BaseMap; this producer path does not bind receiver ShadowMap.",
+  "comment_repeatable": "Build the native one-stage Lighting30 mode-5 caster pass for selector 0x154 or 0x155. Lighting30Shader_ResolveSelectorStages binds shader-property texture 0/BaseMap; no receiver ShadowMap texture is bound on this producer path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Lighting30Shader_BuildMode5ShadowPass",
   "end_ea": "0x7FF348",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FF080",
+  "name": "Lighting30Shader_BuildMode5ShadowPass",
   "segment": ".text",
   "sha256": "4e55e91087fd4efa803883dbca4266fb8ac643791251a04c1981d966075eb8e4",
   "size": 712,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FF080",
-  "type": "int __thiscall(_DWORD *this, float, signed int, int)",
-  "xrefs_from_count": 219,
+  "total_chunk_size": 747,
+  "type": "int __userpurge@<eax>(_DWORD *this@<ecx>, double@<st0>, float, float, int)",
+  "xrefs_from_count": 230,
   "xrefs_to_count": 1
 }

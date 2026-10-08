@@ -1,15 +1,15 @@
 void __thiscall NiBlendBoolInterpolator::~NiBlendBoolInterpolator(NiBlendBoolInterpolator *this)
 {
-  int *v2; // eax
+  char *v2; // eax
   unsigned int v3; // edi
 
-  *(_DWORD *)this = &NiBlendInterpolator::`vftable';
-  v2 = *((int **)this + 5);
-  if ( v2 )
+  *(_DWORD *)this = &NiBlendInterpolator::`vftable'; /*0x6ccf79*/
+  v2 = *((char **)this + 5); /*0x6ccf7f*/
+  if ( v2 ) /*0x6ccf8c*/
   {
-    v3 = (unsigned int)(v2 + 0xFFFFFFFF);
-    _LN21(v2, 0x18u, v2[0xFFFFFFFF], (void (__thiscall *)(void *))sub_7016A0);
-    FormHeapFree(v3);
+    v3 = (unsigned int)(v2 + 0xFFFFFFFC); /*0x6ccf91*/
+    _LN21(v2, 0x18u, *((_DWORD *)v2 + 0xFFFFFFFF), (void (__thiscall *)(void *))NiPointerSlot_Release); /*0x6ccf9d*/
+    FormHeapFree(v3); /*0x6ccfa3*/
   }
-  sub_6EBA30(this);
+  sub_6EBA30(this); /*0x6ccfb5*/
 }

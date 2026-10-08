@@ -1,1 +1,1 @@
-SpeedTreeLeafShaderProperty
+struct SpeedTreeLeafShaderProperty;

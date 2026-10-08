@@ -10,18 +10,14 @@ double __userpurge ContainerEntryExtraData_GetHealthFracOrUses_::Return_Uses@<st
 {
   double result; // st7
 
-  if ( !a2 || a1 )
+  if ( !a2 || a1 ) /*0x485359*/
+    return ContainerEntryExtraData_GetHealthFracOrUses_::Return(a4, a5, *(float *)&a6, a7); /*0x485355*/
+  if ( (_BYTE)a4 ) /*0x48535f*/
   {
-LABEL_6:
-    ContainerEntryExtraData_GetHealthFracOrUses_::Return(a4, a5, *(float *)&a6, a7);
-    return result;
+    if ( ContainerEntryExtraData_GetUses(a3) ) /*0x485363*/
+      return (float)ContainerEntryExtraData_GetUses(a3); /*0x485387*/
+    return ContainerEntryExtraData_GetHealthFracOrUses_::Return(a4, a5, *(float *)&a6, a7); /*0x48536a*/
   }
-  if ( (_BYTE)a4 )
-  {
-    if ( ContainerEntryExtraData_GetUses(a3) )
-      return (float)ContainerEntryExtraData_GetUses(a3);
-    goto LABEL_6;
-  }
-  ContainerEntryExtraData_GetHealthFracOrUses_::Return_BaseUseCount(a2, a4, a5, a6, a7);
-  return result;
+  ContainerEntryExtraData_GetHealthFracOrUses_::Return_BaseUseCount(a2, a4, a5, a6, a7); /*0x48535f*/
+  return result; /*0x485387*/
 }

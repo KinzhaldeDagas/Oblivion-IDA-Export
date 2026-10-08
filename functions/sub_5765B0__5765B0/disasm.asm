@@ -59,3 +59,12 @@
 0x576662: pop     ebx
 0x576663: add     esp, 10h
 0x576666: retn    10h
+0x9BE540: mov     ecx, [ebp-10h]
+0x9BE543: jmp     j_??1?$NiTList@PAVTextLine@FontManager@@@@UAE@XZ; NiTList<FontManager::TextLine *>::~NiTList<FontManager::TextLine *>(void)
+0x9BE548: mov     edx, [esp+arg_4]
+0x9BE54C: lea     eax, [edx-10h]
+0x9BE54F: mov     ecx, [edx-14h]
+0x9BE552: xor     ecx, eax
+0x9BE554: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE559: mov     eax, offset stru_AE7C80
+0x9BE55E: jmp     ___CxxFrameHandler3

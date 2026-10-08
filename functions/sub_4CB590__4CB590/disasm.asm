@@ -1,7 +1,7 @@
 0x4CB590: push    ebp
 0x4CB591: mov     ebp, ecx
 0x4CB593: push    ebp; a2
-0x4CB594: mov     ecx, offset stru_B35C80; this
+0x4CB594: mov     ecx, offset unk_B35C80; this
 0x4CB599: call    sub_496EA0
 0x4CB59E: mov     eax, ds:0B33398h
 0x4CB5A3: cmp     dword ptr [eax+24h], 0
@@ -68,7 +68,7 @@
 0x4CB657: pop     esi
 0x4CB658: pop     ebx
 0x4CB659: push    ebp; a2
-0x4CB65A: mov     ecx, offset stru_B35C80; this
+0x4CB65A: mov     ecx, offset unk_B35C80; this
 0x4CB65F: call    sub_496F50
 0x4CB664: pop     edi
 0x4CB665: pop     ebp

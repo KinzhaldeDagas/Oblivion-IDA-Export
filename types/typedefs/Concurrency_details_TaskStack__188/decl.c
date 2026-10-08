@@ -1,1 +1,1 @@
-Concurrency::details::TaskStack
+struct Concurrency::details::TaskStack;

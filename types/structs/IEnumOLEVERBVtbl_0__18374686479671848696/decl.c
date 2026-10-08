@@ -1,1 +1,1 @@
-IEnumOLEVERBVtbl_0
+typedef IEnumOLEVERBVtbl IEnumOLEVERBVtbl_0;

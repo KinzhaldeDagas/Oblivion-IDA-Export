@@ -1,19 +1,36 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x58BAD0",
+      "0x58BC18"
+    ],
+    [
+      "0x9B7140",
+      "0x9B7163"
+    ]
+  ],
+  "chunks_sha256": "6fc0ee45ea4aad8ef12e7568ace3da15f69ed12112442320fcb70aeeef7eee30",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_58BAD0",
+  "comment_repeatable": "Verified: detects Value already in global evaluation stack, logs Loop Detected and nullifies reference actions; otherwise pushes Value. Stack globals 0xB3AF10 and depth 0xB3B0AC. This guard concerns property evaluation, not plugin global menu scratch state.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "Tile::Value::CheckEvaluationCycle",
   "end_ea": "0x58BC18",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_58BAD0",
+  "name": "Tile::Value::CheckEvaluationCycle",
   "segment": ".text",
   "sha256": "37ed3eb3be6ba29188a96f86eff145dadb29d99f7a4386529903a154532a0ac2",
   "size": 328,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58BAD0",
-  "type": "char __cdecl(_DWORD *)",
-  "xrefs_from_count": 128,
+  "total_chunk_size": 363,
+  "type": "bool __cdecl(OblivionTileValueView *value)",
+  "xrefs_from_count": 139,
   "xrefs_to_count": 1
 }

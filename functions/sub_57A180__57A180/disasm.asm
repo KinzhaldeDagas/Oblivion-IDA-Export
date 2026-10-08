@@ -16,6 +16,6 @@
 0x57A1AB: add     esp, 8
 0x57A1AE: cmp     dword ptr [eax+60h], 0
 0x57A1B2: jz      short loc_57A1B9
-0x57A1B4: jmp     sub_5B3760
+0x57A1B4: jmp     MagicMenu_Create
 0x57A1B9: xor     eax, eax
 0x57A1BB: retn

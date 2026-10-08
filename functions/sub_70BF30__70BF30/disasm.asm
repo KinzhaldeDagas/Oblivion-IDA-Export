@@ -1,4 +1,4 @@
-0x70BF30: push    0FFFFFFFFh
+0x70BF30: push    0FFFFFFFFh; MoonSugarEffect decode: visible-array submission helper. If renderer has an accumulator, AddRefs it and calls vtable +0x54 with the visible array; otherwise renders every NiGeometry directly through vtable +0x84.
 0x70BF32: push    offset SEH_88E880
 0x70BF37: mov     eax, large fs:0
 0x70BF3D: push    eax
@@ -26,13 +26,13 @@
 0x70BF7A: mov     [esp+24h+var_4], 0
 0x70BF82: jz      short loc_70BF94
 0x70BF84: mov     edx, [esi]
-0x70BF86: mov     eax, [esp+24h+arg_0]
+0x70BF86: mov     eax, [esp+24h+visibleArray]
 0x70BF8A: mov     edx, [edx+54h]
 0x70BF8D: push    eax
 0x70BF8E: mov     ecx, esi
-0x70BF90: call    edx
+0x70BF90: call    edx; CULLING audit 2026-09-27: accumulator array-submit slot +0x54. Distinct from per-geometry register slot +0x58.
 0x70BF92: jmp     short loc_70BFBC
-0x70BF94: mov     ebx, [esp+24h+arg_0]
+0x70BF94: mov     ebx, [esp+24h+visibleArray]
 0x70BF98: mov     edi, [ebx+4]
 0x70BF9B: xor     esi, esi
 0x70BF9D: test    edi, edi
@@ -42,7 +42,7 @@
 0x70BFA6: mov     edx, [ecx]
 0x70BFA8: mov     eax, [edx+84h]
 0x70BFAE: push    ebp
-0x70BFAF: call    eax
+0x70BFAF: call    eax; CULLING audit 2026-09-27: direct geometry Render(+0x84) in array loop when no accumulator; no bound/frustum recheck here.
 0x70BFB1: add     esi, 1
 0x70BFB4: cmp     esi, edi
 0x70BFB6: jb      short loc_70BFA1
@@ -69,3 +69,12 @@
 0x70BFEF: pop     ebx
 0x70BFF0: add     esp, 10h
 0x70BFF3: retn
+0x9C7C90: lea     ecx, [ebp-10h]; slot
+0x9C7C93: jmp     NiPointerSlot_Release
+0x9C7C98: mov     edx, [esp+arg_4]
+0x9C7C9C: lea     eax, [edx-14h]
+0x9C7C9F: mov     ecx, [edx-18h]
+0x9C7CA2: xor     ecx, eax
+0x9C7CA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7CA9: mov     eax, offset stru_AF0030
+0x9C7CAE: jmp     ___CxxFrameHandler3

@@ -42,7 +42,7 @@
 0x4FBE67: push    esi; a4
 0x4FBE68: call    ScriptRunner_GetSingleton
 0x4FBE6D: mov     ecx, eax; this
-0x4FBE6F: call    Script_RunEvent??
+0x4FBE6F: call    ScriptRunner_RunEvent
 0x4FBE74: cmp     byte ptr [esi+28h], 0
 0x4FBE78: mov     bl, al
 0x4FBE7A: jz      short loc_4FBEEC
@@ -60,20 +60,20 @@
 0x4FBE9D: test    al, al
 0x4FBE9F: jz      short loc_4FBEDA
 0x4FBEA1: mov     ebp, [esp+10h+ArgList]
-0x4FBEA5: push    0; a3
-0x4FBEA7: push    ebp; ArgList
+0x4FBEA5: push    0; sourceScript
+0x4FBEA7: push    ebp; variableID
 0x4FBEA8: mov     ecx, edi; this
-0x4FBEAA: call    sub_4FA110
+0x4FBEAA: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x4FBEAF: fstp    [esp+10h+ArgList]
 0x4FBEB3: fld     [esp+10h+ArgList]
 0x4FBEB7: fcomp   dword ptr ds:0A2FAA8h
 0x4FBEBD: fnstsw  ax
 0x4FBEBF: test    ah, 41h
 0x4FBEC2: jnz     short loc_4FBEDA
-0x4FBEC4: push    esi; a3
-0x4FBEC5: push    ebp; ArgList
+0x4FBEC4: push    esi; sourceScript
+0x4FBEC5: push    ebp; variableID
 0x4FBEC6: mov     ecx, edi; this
-0x4FBEC8: call    sub_4FA110
+0x4FBEC8: call    ScriptEventList__GetVariableValue; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x4FBECD: fstp    [esp+10h+ArgList]
 0x4FBED1: fld     [esp+10h+ArgList]
 0x4FBED5: fadd    dword ptr [esi+38h]

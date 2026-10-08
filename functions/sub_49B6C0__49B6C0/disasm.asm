@@ -1,6 +1,6 @@
 0x49B6C0: mov     ecx, ds:0B35230h
-0x49B6C6: add     ecx, 0ACh ; '¬'
-0x49B6CC: call    sub_477EF0
+0x49B6C6: add     ecx, 0ACh ; '¬'; this
+0x49B6CC: call    NiTObjectArray_ClearAndRelease; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x49B6D1: mov     eax, ds:0B35230h
 0x49B6D6: test    eax, eax
 0x49B6D8: jz      short locret_49B704

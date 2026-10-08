@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_41F4C0",
+  "chunks": [
+    [
+      "0x41F4C0",
+      "0x41F58A"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "b7fd1a12ee2bd4ff659ab31b2ab5e89d95b013ff0a59b28832a30de0f55bc862",
+  "comment_regular": "ExtraPackageStartLocation setter: first creation stores selected location FormID, XYZ, and rotZ; updating an extant singleton replaces only location/XYZ and preserves existing rotZ.",
+  "comment_repeatable": "ExtraPackageStartLocation setter: first creation stores selected location FormID, XYZ, and rotZ; updating an extant singleton replaces only location/XYZ and preserves existing rotZ.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetStartLocation",
   "end_ea": "0x41F58A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_41F4C0",
+  "name": "ExtraDataList_SetStartLocation",
   "segment": ".text",
   "sha256": "4a5b90f2bc2074fc609d900e53924eee301e3a969fbee387963746690583360c",
   "size": 202,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41F4C0",
+  "total_chunk_size": 240,
   "type": "BSExtraData *__thiscall(ExtraDataList *this, BSExtraDataVtbl *, BSExtraDataVtbl *, _DWORD *, float)",
-  "xrefs_from_count": 73,
+  "xrefs_from_count": 87,
   "xrefs_to_count": 4
 }

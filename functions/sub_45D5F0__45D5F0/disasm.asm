@@ -55,7 +55,7 @@
 0x45D69F: test    ecx, ecx
 0x45D6A1: jz      short loc_45D6A9
 0x45D6A3: mov     dword ptr [ecx], 0
-0x45D6A9: mov     eax, [esi+14h]
+0x45D6A9: mov     eax, [esi+14h]; First length-prefixed header string is the exact player/character name.
 0x45D6AC: mov     cl, [eax]
 0x45D6AE: mov     edx, [esp+84h+Dst]
 0x45D6B5: add     eax, 1
@@ -63,10 +63,10 @@
 0x45D6BA: mov     [esi+14h], eax
 0x45D6BD: jz      short loc_45D6D2
 0x45D6BF: movzx   edi, cl
-0x45D6C2: push    edi; Size
-0x45D6C3: push    eax; Src
-0x45D6C4: push    edx; Dst
-0x45D6C5: call    _memcpy
+0x45D6C2: push    edi; byteCount
+0x45D6C3: push    eax; source
+0x45D6C4: push    edx; destination
+0x45D6C5: call    _memcpy;
 0x45D6CA: add     esp, 0Ch
 0x45D6CD: add     [esi+14h], edi
 0x45D6D0: jmp     short loc_45D6DA
@@ -89,7 +89,7 @@
 0x45D711: mov     [eax], cx
 0x45D714: mov     ecx, [esi+14h]
 0x45D717: mov     al, [ecx]
-0x45D719: mov     edx, [esp+84h+arg_14]
+0x45D719: mov     edx, [esp+84h+destination]
 0x45D720: add     ecx, 1
 0x45D723: test    edx, edx
 0x45D725: mov     [esi+14h], ecx
@@ -97,10 +97,10 @@
 0x45D72A: test    al, al
 0x45D72C: jz      short loc_45D741
 0x45D72E: movzx   edi, al
-0x45D731: push    edi; Size
-0x45D732: push    ecx; Src
-0x45D733: push    edx; Dst
-0x45D734: call    _memcpy
+0x45D731: push    edi; byteCount
+0x45D732: push    ecx; source
+0x45D733: push    edx; destination
+0x45D734: call    _memcpy;
 0x45D739: add     esp, 0Ch
 0x45D73C: add     [esi+14h], edi
 0x45D73F: jmp     short loc_45D763
@@ -218,11 +218,11 @@
 0x45D89C: mov     edx, [esi+14h]
 0x45D89F: add     ecx, [ebp+50h]
 0x45D8A2: lea     edi, [edi+edi*2]
-0x45D8A5: push    edi; Size
-0x45D8A6: push    edx; Src
-0x45D8A7: push    ecx; Dst
+0x45D8A5: push    edi; byteCount
+0x45D8A6: push    edx; source
+0x45D8A7: push    ecx; destination
 0x45D8A8: mov     [esp+90h+var_4], 0FFFFFFFFh
-0x45D8B3: call    _memcpy
+0x45D8B3: call    _memcpy;
 0x45D8B8: add     [esi+14h], edi
 0x45D8BB: lea     edx, [esp+90h+a2]
 0x45D8BF: xor     eax, eax
@@ -255,3 +255,15 @@
 0x45D915: pop     ebx
 0x45D916: add     esp, 70h
 0x45D919: retn    28h ; '('
+0x9AE3C0: mov     eax, [ebp+8]
+0x9AE3C3: push    eax
+0x9AE3C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE3C9: pop     ecx
+0x9AE3CA: retn
+0x9AE3CB: mov     edx, [esp+arg_4]
+0x9AE3CF: lea     eax, [edx-74h]
+0x9AE3D2: mov     ecx, [edx-78h]
+0x9AE3D5: xor     ecx, eax
+0x9AE3D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE3DC: mov     eax, offset stru_ADAC34
+0x9AE3E1: jmp     ___CxxFrameHandler3

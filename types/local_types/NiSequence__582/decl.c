@@ -1,1 +1,1 @@
-NiSequence
+struct NiSequence;

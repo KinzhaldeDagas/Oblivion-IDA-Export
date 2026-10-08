@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4CBDB0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x4CBDB0",
+      "0x4CBE4E"
+    ]
+  ],
+  "chunks_sha256": "6698797071b4bb090ac88737cb5e6e9888186016a4a67a5b6dfb853a160f8b31",
+  "comment_regular": "Verified: scans cell object references, filters out references with deleted/disabled flags, then collects door references whose ExtraTeleport exists or whose TESObjectDOOR.randomTeleport list is nonempty. This list feeds teleport-link processing.",
+  "comment_repeatable": "Verified: scans cell object references, filters out references with deleted/disabled flags, then collects door references whose ExtraTeleport exists or whose TESObjectDOOR.randomTeleport list is nonempty. This list feeds teleport-link processing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESObjectCELL_CollectDoorsForTeleportProcessing",
   "end_ea": "0x4CBE4E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4CBDB0",
+  "name": "TESObjectCELL_CollectDoorsForTeleportProcessing",
   "segment": ".text",
   "sha256": "6698797071b4bb090ac88737cb5e6e9888186016a4a67a5b6dfb853a160f8b31",
   "size": 158,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CBDB0",
-  "type": "void __thiscall(TESObjectCELL *this, _DWORD *)",
+  "total_chunk_size": 158,
+  "type": "void __thiscall(TESObjectCELL *this, BSSimpleList_VoidPtr *outDoors)",
   "xrefs_from_count": 75,
   "xrefs_to_count": 2
 }

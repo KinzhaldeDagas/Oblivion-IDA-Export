@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$A7DE0CC30DB4C54B9D6C5D36303B081B",
+  "definition": "union $A7DE0CC30DB4C54B9D6C5D36303B081B\n{\nDWORD Reserved;\nBYTE SchedulingClass;\n}\n",
   "id": 18374686479672045889,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SchedulingClass",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "BYTE"
     }
   ],
   "name": "$A7DE0CC30DB4C54B9D6C5D36303B081B",
+  "ordinal": 8285,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

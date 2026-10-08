@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x68DBE5",
+      "0x68DBF1"
+    ]
+  ],
+  "chunks_sha256": "756f7c1a202a1a0797ea02ae2649b201a06ba650351fb80f4bdcb468fe74ce5d",
+  "comment_regular": "Verified SaveHitEffectList serializes the HitEffectNode chain at ActiveEffect+0x34. Each node's BSTempEffect reports a type byte through vtable +0x54 and writes type-specific payload through +0x78; the loop increments a byte count. This data is present only from save version 0x2A.",
+  "comment_repeatable": "Verified SaveHitEffectList serializes the HitEffectNode chain at ActiveEffect+0x34. Each node's BSTempEffect reports a type byte through vtable +0x54 and writes type-specific payload through +0x78; the loop increments a byte count. This data is present only from save version 0x2A.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "ActiveEffect_Base_SaveEffect:::SaveDataList",
+  "display_name": "ActiveEffect_Base_SaveEffect_SaveHitEffectList",
   "end_ea": "0x68DBF1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "ActiveEffect_Base_SaveEffect:::SaveDataList",
+  "name": "ActiveEffect_Base_SaveEffect_SaveHitEffectList",
   "segment": ".text",
   "sha256": "756f7c1a202a1a0797ea02ae2649b201a06ba650351fb80f4bdcb468fe74ce5d",
   "size": 12,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68DBE5",
+  "total_chunk_size": 12,
   "type": "int __userpurge@<eax>(int@<ebp>, _DWORD *@<edi>, int, int, int, int, int, int, _BYTE *, int, int, char)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 1

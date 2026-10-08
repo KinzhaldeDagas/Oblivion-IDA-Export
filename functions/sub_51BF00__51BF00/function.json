@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x51BF00",
+      "0x51BF0B"
+    ]
+  ],
+  "chunks_sha256": "b2bd0d23672c2d73aea17e433bdbfbc4dc9a6c94816b29def186f9726c017529",
+  "comment_regular": "Return one of exactly seven SkillActorValue entries from TESClass::majorSkills. Caller must supply index 0..6.",
+  "comment_repeatable": "Return one of exactly seven SkillActorValue entries from TESClass::majorSkills. Caller must supply index 0..6.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_51BF00",
+  "display_name": "TESClass_GetMajorSkillAV",
   "end_ea": "0x51BF0B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51BF00",
+  "name": "TESClass_GetMajorSkillAV",
   "segment": ".text",
   "sha256": "b2bd0d23672c2d73aea17e433bdbfbc4dc9a6c94816b29def186f9726c017529",
   "size": 11,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51BF00",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 11,
+  "type": "SkillActorValue __thiscall(TESClass *this, UInt32 index)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 5
 }

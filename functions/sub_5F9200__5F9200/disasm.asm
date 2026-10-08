@@ -157,7 +157,7 @@
 0x5F93DE: mov     ecx, esi
 0x5F93E0: call    sub_65AC20
 0x5F93E5: mov     ecx, ebx; this
-0x5F93E7: call    TESObjectREFR_GetParentCell
+0x5F93E7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F93EC: mov     ecx, ebx; this
 0x5F93EE: mov     edi, eax
 0x5F93F0: call    TESObjectREFR_GetWorldSpace
@@ -186,16 +186,16 @@
 0x5F9433: jz      short loc_5F9447
 0x5F9435: fld     dword ptr [ebx+28h]
 0x5F9438: push    ecx
-0x5F9439: mov     ecx, esi
-0x5F943B: fstp    [esp+4Ch+var_4C]; float
-0x5F943E: call    sub_4D8A10
+0x5F9439: mov     ecx, esi; this
+0x5F943B: fstp    [esp+4Ch+radians]; radians
+0x5F943E: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F9443: fldz
 0x5F9445: jmp     short loc_5F944D
 0x5F9447: fld     dword ptr ds:0A32048h
 0x5F944D: push    ecx
-0x5F944E: mov     ecx, esi
-0x5F9450: fstp    [esp+50h+a3]; float
-0x5F9453: call    sub_4D89D0
+0x5F944E: mov     ecx, esi; this
+0x5F9450: fstp    [esp+50h+a3]; radians
+0x5F9453: call    TESObjectREFR_SetRotationX; TES4 authoritative: write reference rotation X at TESObjectREFR+0x20, then notify the reference through virtual slot +0x40 with change mask 4.
 0x5F9458: push    ebp; a2
 0x5F9459: push    edi; int
 0x5F945A: push    esi; Concurrency::details::SchedulerBase *
@@ -206,7 +206,7 @@
 0x5F946B: cmp     esi, ebp
 0x5F946D: jnz     short loc_5F9489
 0x5F946F: lea     ecx, [ebp+44h]
-0x5F9472: call    GetExtraDataFollower
+0x5F9472: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x5F9477: test    eax, eax
 0x5F9479: jz      short loc_5F949E
 0x5F947B: mov     eax, [eax+0Ch]

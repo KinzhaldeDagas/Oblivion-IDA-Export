@@ -50,10 +50,10 @@
 0x770F37: jbe     short loc_770F8C
 0x770F39: lea     esp, [esp+0]
 0x770F40: mov     edx, [esp+18h+Size]
-0x770F44: push    edx; Size
-0x770F45: push    ebx; Src
-0x770F46: push    edi; Dst
-0x770F47: call    _memcpy
+0x770F44: push    edx; byteCount
+0x770F45: push    ebx; source
+0x770F46: push    edi; destination
+0x770F47: call    _memcpy;
 0x770F4C: mov     ecx, [esp+24h+var_8]
 0x770F50: add     esp, 0Ch
 0x770F53: cmp     cx, 4

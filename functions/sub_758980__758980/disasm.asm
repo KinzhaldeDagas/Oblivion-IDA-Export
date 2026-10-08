@@ -17,33 +17,33 @@
 0x7589B8: push    edi
 0x7589B9: lea     esi, [eax+64h]
 0x7589BC: mov     ecx, 0Dh
-0x7589C1: lea     edi, [esp+13Ch+var_9C]
+0x7589C1: lea     edi, [esp+13Ch+local]
 0x7589C8: rep movsd
 0x7589CA: mov     esi, [ebx+10h]
 0x7589CD: add     esi, 64h ; 'd'
 0x7589D0: mov     ecx, 0Dh
 0x7589D5: lea     edi, [esp+13Ch+var_68]
-0x7589DC: lea     eax, [esp+13Ch+var_34]
+0x7589DC: lea     eax, [esp+13Ch+parent]
 0x7589E3: rep movsd
 0x7589E5: push    eax
 0x7589E6: lea     ecx, [esp+140h+var_68]
-0x7589ED: call    sub_718A80
-0x7589F2: lea     ecx, [esp+13Ch+var_9C]
-0x7589F9: push    ecx
-0x7589FA: lea     edx, [esp+140h+var_D0]
-0x7589FE: push    edx
-0x7589FF: lea     ecx, [esp+144h+var_34]
-0x758A06: call    sub_53D7A0
-0x758A0B: mov     eax, [esp+13Ch+var_AC]
-0x758A12: mov     ecx, [esp+13Ch+var_A8]
-0x758A19: mov     edx, [esp+13Ch+var_A4]
+0x7589ED: call    sub_718A80;
+0x7589F2: lea     ecx, [esp+13Ch+local]
+0x7589F9: push    ecx; local
+0x7589FA: lea     edx, [esp+140h+out]
+0x7589FE: push    edx; out
+0x7589FF: lea     ecx, [esp+144h+parent]; parent
+0x758A06: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
+0x758A0B: mov     eax, [esp+13Ch+out.pos.x]
+0x758A12: mov     ecx, [esp+13Ch+out.pos.y]
+0x758A19: mov     edx, [esp+13Ch+out.pos.z]
 0x758A20: mov     [esp+13Ch+var_104], eax
 0x758A24: mov     [esp+13Ch+var_100], ecx
 0x758A28: lea     eax, [ebx+1Ch]
 0x758A2B: push    eax
 0x758A2C: lea     ecx, [esp+140h+var_110]
 0x758A30: push    ecx
-0x758A31: lea     ecx, [esp+144h+var_D0]
+0x758A31: lea     ecx, [esp+144h+out]
 0x758A35: mov     [esp+144h+var_FC], edx
 0x758A39: call    sub_7101F0
 0x758A3E: mov     edx, [eax]
@@ -53,7 +53,7 @@
 0x758A4A: mov     [esp+13Ch+var_11C], ecx
 0x758A4E: lea     ecx, [esp+13Ch+var_120]
 0x758A52: mov     [esp+13Ch+var_118], edx
-0x758A56: call    sub_43F350
+0x758A56: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x758A5B: fstp    st
 0x758A5D: fld     [esp+13Ch+var_11C]
 0x758A61: xor     edi, edi

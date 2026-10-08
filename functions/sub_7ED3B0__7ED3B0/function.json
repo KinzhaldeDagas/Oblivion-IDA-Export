@@ -1,19 +1,32 @@
 {
-  "callees_count": 21,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x7ED3B0",
+      "0x7ED4A4"
+    ]
+  ],
+  "chunks_sha256": "8a1d21c208019fe40f2ac3f67ac75d32f75e40b8f502c094f57db46ceb9e25cd",
+  "comment_regular": "Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.",
+  "comment_repeatable": "Continues Oblivion BSShaderLightingProperty non-shadow-light iteration using the stored cursor and the same cull/backing-light eligibility filter. Fallout later adds an explicit cast-shadow exclusion absent here.\n\nMEF PERF 2026-10-07 PASS4: LC-1 iterator decode: resumes cursor+7C, advances it before return and applies same cull/backing flag filter. Count and fill traverse linearly; GetNext does not restart at head. Shared mutable cursor and changing eligibility are additional reasons a count/fill patch needs bounded writes even below255.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7ED3B0",
+  "display_name": "BSShaderLightingProperty__GetNextActiveNonShadowLight",
   "end_ea": "0x7ED4A4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ED3B0",
+  "name": "BSShaderLightingProperty__GetNextActiveNonShadowLight",
   "segment": ".text",
   "sha256": "8a1d21c208019fe40f2ac3f67ac75d32f75e40b8f502c094f57db46ceb9e25cd",
   "size": 244,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ED3B0",
-  "type": "int __thiscall(int **this)",
+  "total_chunk_size": 244,
+  "type": "ShadowSceneLight_DecodedLayout *__thiscall(MEF_LightingPropertyIterationView32 *self)",
   "xrefs_from_count": 112,
   "xrefs_to_count": 6
 }

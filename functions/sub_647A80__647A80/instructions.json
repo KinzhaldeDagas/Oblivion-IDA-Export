@@ -559,25 +559,25 @@
   },
   {
     "ea": "0x647B76",
-    "line": "mov     ecx, [esi+2Ch]",
+    "line": "mov     ecx, [esi+2Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x647B79",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x647B7A",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x647B7F",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

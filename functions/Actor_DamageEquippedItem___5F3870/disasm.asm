@@ -1,80 +1,80 @@
-0x5F3870: sub     esp, 18h
+0x5F3870: sub     esp, 18h; Actor vtable +0x2C4 durability mutation. Applies positive damage to EntryData health, with optional Heavy/Light armor skill modifiers unless suppressed; updates container extras and handles break/unequip at zero. Returns false while item remains usable and true on terminal/break handling paths.
 0x5F3873: push    esi
 0x5F3874: push    edi
-0x5F3875: mov     edi, [esp+20h+arg_0]
+0x5F3875: mov     edi, [esp+20h+entry]
 0x5F3879: mov     esi, ecx
 0x5F387B: xor     cl, cl
 0x5F387D: test    edi, edi
 0x5F387F: jz      Actor_DamageEquippedItem?___Done
 0x5F3885: fldz
-0x5F3887: fld     [esp+20h+arg_4]
+0x5F3887: fld     [esp+20h+damage]
 0x5F388B: fcom    st(1)
 0x5F388D: fnstsw  ax
 0x5F388F: fstp    st(1)
 0x5F3891: test    ah, 41h
 0x5F3894: jnz     Actor_DamageEquippedItem?___Done_
 0x5F389A: mov     eax, [edi+8]
-0x5F389D: fstp    [esp+20h+arg_0]
+0x5F389D: fstp    [esp+20h+entry]
 0x5F38A1: push    ebp
 0x5F38A2: xor     ebp, ebp
 0x5F38A4: test    eax, eax
 0x5F38A6: jz      loc_5F392F
 0x5F38AC: cmp     byte ptr [eax+4], 14h
 0x5F38B0: jnz     short loc_5F392F
-0x5F38B2: cmp     byte ptr [esp+24h+arg_8], cl
+0x5F38B2: cmp     [esp+24h+suppressArmorSkillModifiers], cl
 0x5F38B6: mov     ebp, eax
 0x5F38B8: jnz     short loc_5F392F
 0x5F38BA: mov     ecx, ebp
 0x5F38BC: call    TESObjectARMO_ISHeavyArmor
 0x5F38C1: cmp     al, 1
 0x5F38C3: jnz     short loc_5F38EE
-0x5F38C5: push    12h
-0x5F38C7: mov     ecx, esi
-0x5F38C9: call    Actor_GetSkillMasteryLevel
+0x5F38C5: push    12h; actorValue
+0x5F38C7: mov     ecx, esi; this
+0x5F38C9: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5F38CE: cmp     eax, 2
 0x5F38D1: jl      short loc_5F38DA
-0x5F38D3: mov     ecx, offset fPerkHeavyArmorJourneymanDamageMult
+0x5F38D3: mov     ecx, 0B37500h
 0x5F38D8: jmp     short loc_5F3920
-0x5F38DA: push    12h
-0x5F38DC: mov     ecx, esi
-0x5F38DE: call    Actor_GetSkillMasteryLevel
+0x5F38DA: push    12h; actorValue
+0x5F38DC: mov     ecx, esi; this
+0x5F38DE: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5F38E3: test    eax, eax
 0x5F38E5: jnz     short loc_5F392F
-0x5F38E7: mov     ecx, offset fPerkHeavyArmorNoviceDamageMult
+0x5F38E7: mov     ecx, 0B374F8h
 0x5F38EC: jmp     short loc_5F3920
 0x5F38EE: mov     ecx, ebp
 0x5F38F0: call    TESObjectARMO_ISHeavyArmor
 0x5F38F5: test    al, al
 0x5F38F7: jnz     short loc_5F392F
-0x5F38F9: push    1Bh
-0x5F38FB: mov     ecx, esi
-0x5F38FD: call    Actor_GetSkillMasteryLevel
+0x5F38F9: push    1Bh; actorValue
+0x5F38FB: mov     ecx, esi; this
+0x5F38FD: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5F3902: cmp     eax, 2
 0x5F3905: jl      short loc_5F390E
-0x5F3907: mov     ecx, offset fPerkLightArmorJourneymanDamageMult
+0x5F3907: mov     ecx, 0B37508h
 0x5F390C: jmp     short loc_5F3920
-0x5F390E: push    1Bh
-0x5F3910: mov     ecx, esi
-0x5F3912: call    Actor_GetSkillMasteryLevel
+0x5F390E: push    1Bh; actorValue
+0x5F3910: mov     ecx, esi; this
+0x5F3912: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5F3917: test    eax, eax
 0x5F3919: jnz     short loc_5F392F
-0x5F391B: mov     ecx, offset fPerkLightArmorNoviceDamageMult
+0x5F391B: mov     ecx, 0B374F0h
 0x5F3920: call    GameSetting_GetSafeFloatPointer
 0x5F3925: fld     dword ptr [eax]
-0x5F3927: fmul    [esp+24h+arg_4]
-0x5F392B: fstp    [esp+24h+arg_0]
+0x5F3927: fmul    [esp+24h+damage]
+0x5F392B: fstp    [esp+24h+entry]
 0x5F392F: push    0
 0x5F3931: mov     ecx, edi
 0x5F3933: call    ContainerEntryExtraData_GetHealth
-0x5F3938: fsub    [esp+24h+arg_0]
-0x5F393C: fstp    [esp+24h+arg_8]
+0x5F3938: fsub    [esp+24h+entry]
+0x5F393C: fstp    dword ptr [esp+24h+suppressArmorSkillModifiers]
 0x5F3940: fld1
-0x5F3942: fcomp   [esp+24h+arg_8]
+0x5F3942: fcomp   dword ptr [esp+24h+suppressArmorSkillModifiers]
 0x5F3946: fnstsw  ax
 0x5F3948: test    ah, 41h
 0x5F394B: jnz     short loc_5F3953
 0x5F394D: fldz
-0x5F394F: fstp    [esp+24h+arg_8]
+0x5F394F: fstp    dword ptr [esp+24h+suppressArmorSkillModifiers]
 0x5F3953: cmp     byte ptr ds:0B3B908h, 0
 0x5F395A: push    ebx
 0x5F395B: jz      short loc_5F39A4
@@ -91,9 +91,9 @@
 0x5F3978: sub     esp, 18h
 0x5F397B: fstp    [esp+40h+var_30]
 0x5F397F: mov     ecx, esi; this
-0x5F3981: fld     [esp+40h+arg_8]
+0x5F3981: fld     dword ptr [esp+40h+suppressArmorSkillModifiers]
 0x5F3985: fstp    qword ptr [esp+40h+var_38]
-0x5F3989: fld     [esp+40h+arg_0]
+0x5F3989: fld     [esp+40h+entry]
 0x5F398D: fstp    [esp+40h+var_40]
 0x5F3990: push    ebx
 0x5F3991: call    TESObjectREFR_GetName
@@ -107,7 +107,7 @@
 0x5F39AA: push    eax; int
 0x5F39AB: lea     ecx, [esi+44h]; this
 0x5F39AE: call    ExtraDataList_GetContainerChanges
-0x5F39B3: fld     [esp+30h+arg_8]
+0x5F39B3: fld     dword ptr [esp+30h+suppressArmorSkillModifiers]
 0x5F39B7: push    eax; int
 0x5F39B8: push    ecx
 0x5F39B9: mov     ecx, edi
@@ -120,7 +120,7 @@
 0x5F39CF: mov     ecx, esi
 0x5F39D1: call    eax
 0x5F39D3: fldz
-0x5F39D5: fcomp   [esp+28h+arg_8]
+0x5F39D5: fcomp   dword ptr [esp+28h+suppressArmorSkillModifiers]
 0x5F39D9: fnstsw  ax
 0x5F39DB: test    ah, 1
 0x5F39DE: jnz     loc_5F3B31
@@ -196,7 +196,7 @@
 0x5F3ABB: lea     ecx, [esp+20h+var_C]
 0x5F3ABF: push    ecx
 0x5F3AC0: lea     edx, [esp+24h+var_10]
-0x5F3AC4: mov     [esp+24h+arg_0], eax
+0x5F3AC4: mov     [esp+24h+entry], eax
 0x5F3AC8: push    edx
 0x5F3AC9: lea     eax, [esp+28h+var_8]
 0x5F3ACD: push    eax

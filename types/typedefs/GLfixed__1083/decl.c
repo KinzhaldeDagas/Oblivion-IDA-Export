@@ -1,1 +1,1 @@
-GLfixed
+typedef int GLfixed;

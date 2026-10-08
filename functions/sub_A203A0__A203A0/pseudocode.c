@@ -1,4 +1,4 @@
 void __cdecl sub_A203A0()
 {
-  GameSetting_destr((int *)&flt_B37E40);
+  GameSetting_destr((int *)flt_B37E40); /*0xa203a5*/
 }

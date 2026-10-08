@@ -59,13 +59,13 @@
 0x43EF82: mov     ecx, edi
 0x43EF84: call    sub_4349B0
 0x43EF89: push    edi
-0x43EF8A: call    FormHeapFree
+0x43EF8A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43EF8F: add     esp, 4
 0x43EF92: test    byte ptr [esp+68h+var_30], 2
 0x43EF97: jz      short loc_43EF40
 0x43EF99: mov     eax, [esp+68h+var_34]
 0x43EF9D: push    eax
-0x43EF9E: call    FormHeapFree
+0x43EF9E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43EFA3: add     esp, 4
 0x43EFA6: mov     [esp+68h+var_34], ebx
 0x43EFAA: mov     [esp+68h+var_3C], offset ??_7LockFreeMapIterator@?$LockFreeMap@PBDPAVModel@@@@6B@; const LockFreeMap<char const *,Model *>::LockFreeMapIterator::`vftable'
@@ -93,7 +93,7 @@
 0x43EFFB: mov     ecx, [edi+8]
 0x43EFFE: cmp     ecx, ebx
 0x43F000: jz      short loc_43F00B
-0x43F002: call    TESAnimGroup_IsPowerAttack
+0x43F002: call    TESAnimGroup_IsPowerAttack; TESAnimGroup power-attack test: native group id 0x16-0x1A inclusive.
 0x43F007: test    al, al
 0x43F009: jz      short loc_43F02A
 0x43F00B: mov     ecx, [esi+4]
@@ -105,7 +105,7 @@
 0x43F01A: mov     ecx, edi
 0x43F01C: call    sub_436CB0
 0x43F021: push    edi
-0x43F022: call    FormHeapFree
+0x43F022: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F027: add     esp, 4
 0x43F02A: test    [esp+68h+var_10], 2
 0x43F02F: jz      short loc_43EFCE
@@ -152,14 +152,14 @@
 0x43F0B3: mov     ecx, edi
 0x43F0B5: call    sub_436CB0
 0x43F0BA: push    edi
-0x43F0BB: call    FormHeapFree
+0x43F0BB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F0C0: add     esp, 4
 0x43F0C3: test    [esp+68h+var_20], 2
 0x43F0C8: jz      short loc_43F074
 0x43F0CA: mov     edx, [esp+68h+var_24]
 0x43F0CE: push    edx
 0x43F0CF: mov     byte ptr [esp+6Ch+var_4], 1
-0x43F0D4: call    FormHeapFree
+0x43F0D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F0D9: add     esp, 4
 0x43F0DC: mov     [esp+68h+var_24], ebx
 0x43F0E0: mov     [esp+68h+var_2C], offset ??_7LockFreeMapIterator@?$LockFreeMap@PBDPAVKFModel@@@@6B@; const LockFreeMap<char const *,KFModel *>::LockFreeMapIterator::`vftable'
@@ -188,9 +188,9 @@
 0x43F120: mov     [esp+68h+var_40], eax
 0x43F124: mov     ecx, [esp+68h+var_40]
 0x43F128: push    ecx
-0x43F129: call    FormHeapFree
+0x43F129: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F12E: push    edi
-0x43F12F: call    FormHeapFree
+0x43F12F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F134: add     esp, 8
 0x43F137: mov     edi, [esi+10h]
 0x43F13A: cmp     edi, ebx
@@ -201,14 +201,14 @@
 0x43F148: call    sub_642E50
 0x43F14D: mov     edx, [edi+0Ch]
 0x43F150: push    edx
-0x43F151: call    FormHeapFree
+0x43F151: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F156: mov     eax, [edi+4]
 0x43F159: mov     [esp+6Ch+var_40], eax
 0x43F15D: mov     ecx, [esp+6Ch+var_40]
 0x43F161: push    ecx
-0x43F162: call    FormHeapFree
+0x43F162: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F167: push    edi
-0x43F168: call    FormHeapFree
+0x43F168: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F16D: add     esp, 0Ch
 0x43F170: mov     edi, [esi+0Ch]
 0x43F173: cmp     edi, ebx
@@ -219,14 +219,14 @@
 0x43F181: call    sub_642E50
 0x43F186: mov     edx, [edi+0Ch]
 0x43F189: push    edx
-0x43F18A: call    FormHeapFree
+0x43F18A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F18F: mov     eax, [edi+4]
 0x43F192: mov     [esp+6Ch+var_40], eax
 0x43F196: mov     ecx, [esp+6Ch+var_40]
 0x43F19A: push    ecx
-0x43F19B: call    FormHeapFree
+0x43F19B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F1A0: push    edi
-0x43F1A1: call    FormHeapFree
+0x43F1A1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F1A6: add     esp, 0Ch
 0x43F1A9: mov     edi, [esi+8]
 0x43F1AC: cmp     edi, ebx
@@ -237,14 +237,14 @@
 0x43F1BA: call    sub_642E50
 0x43F1BF: mov     edx, [edi+0Ch]
 0x43F1C2: push    edx
-0x43F1C3: call    FormHeapFree
+0x43F1C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F1C8: mov     eax, [edi+4]
 0x43F1CB: mov     [esp+6Ch+var_40], eax
 0x43F1CF: mov     ecx, [esp+6Ch+var_40]
 0x43F1D3: push    ecx
-0x43F1D4: call    FormHeapFree
+0x43F1D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F1D9: push    edi
-0x43F1DA: call    FormHeapFree
+0x43F1DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F1DF: add     esp, 0Ch
 0x43F1E2: mov     esi, [esi+18h]
 0x43F1E5: cmp     esi, ebx
@@ -256,7 +256,7 @@
 0x43F1F1: call    eax
 0x43F1F3: mov     ecx, [esp+68h+var_14]
 0x43F1F7: push    ecx
-0x43F1F8: call    FormHeapFree
+0x43F1F8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x43F1FD: add     esp, 4
 0x43F200: mov     ecx, dword ptr [esp+68h+var_C]
 0x43F204: mov     large fs:0, ecx
@@ -266,3 +266,38 @@
 0x43F20E: pop     ebx
 0x43F20F: add     esp, 58h
 0x43F212: retn
+0x438810: push    esi
+0x438811: mov     esi, ecx
+0x438813: mov     eax, [esi+8]
+0x438816: push    eax
+0x438817: mov     dword ptr [esi], offset ??_7LockFreeStringMapIterator@?$LockFreeStringMap@PAVModel@@@@6B@; const LockFreeStringMap<Model *>::LockFreeStringMapIterator::`vftable'
+0x43881D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x438822: add     esp, 4
+0x438825: mov     dword ptr [esi+8], 0
+0x43882C: mov     dword ptr [esi], offset ??_7LockFreeMapIterator@?$LockFreeMap@PBDPAVModel@@@@6B@; const LockFreeMap<char const *,Model *>::LockFreeMapIterator::`vftable'
+0x438832: pop     esi
+0x438833: retn
+0x438840: push    esi
+0x438841: mov     esi, ecx
+0x438843: mov     eax, [esi+8]
+0x438846: push    eax
+0x438847: mov     dword ptr [esi], offset ??_7LockFreeStringMapIterator@?$LockFreeStringMap@PAVKFModel@@@@6B@; const LockFreeStringMap<KFModel *>::LockFreeStringMapIterator::`vftable'
+0x43884D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x438852: add     esp, 4
+0x438855: mov     dword ptr [esi+8], 0
+0x43885C: mov     dword ptr [esi], offset ??_7LockFreeMapIterator@?$LockFreeMap@PBDPAVKFModel@@@@6B@; const LockFreeMap<char const *,KFModel *>::LockFreeMapIterator::`vftable'
+0x438862: pop     esi
+0x438863: retn
+0x9ACFA0: lea     ecx, [ebp-3Ch]
+0x9ACFA3: jmp     loc_438810
+0x9ACFA8: lea     ecx, [ebp-1Ch]
+0x9ACFAB: jmp     loc_438840
+0x9ACFB0: lea     ecx, [ebp-2Ch]
+0x9ACFB3: jmp     loc_438840
+0x9ACFB8: mov     edx, [esp+arg_4]
+0x9ACFBC: lea     eax, [edx-58h]
+0x9ACFBF: mov     ecx, [edx-5Ch]
+0x9ACFC2: xor     ecx, eax
+0x9ACFC4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ACFC9: mov     eax, offset stru_AD9BE8
+0x9ACFCE: jmp     ___CxxFrameHandler3

@@ -3,7 +3,7 @@
 0x410A72: mov     esi, ecx
 0x410A74: mov     ebx, 1
 0x410A79: mov     [esi+20h], ebx
-0x410A7C: mov     eax, OSGlobals
+0x410A7C: mov     eax, ds:0B33398h
 0x410A81: push    edi
 0x410A82: mov     edi, [eax+24h]
 0x410A85: test    edi, edi
@@ -14,7 +14,7 @@
 0x410A94: mov     edx, [esp+0Ch+arg_10]
 0x410A98: mov     eax, [esp+0Ch+arg_8]
 0x410A9C: push    ecx; float
-0x410A9D: mov     ecx, dword ptr [esp+10h+ArgList]
+0x410A9D: mov     ecx, [esp+10h+ArgList]
 0x410AA1: push    edx; int
 0x410AA2: push    eax; int
 0x410AA3: push    ecx; ArgList

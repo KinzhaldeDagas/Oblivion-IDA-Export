@@ -1,4 +1,4 @@
-char __usercall sub_503070@<al>(
+void __usercall Cmd_GetInCell_Execute(
         int ebx0@<ebx>,
         ParamInfo *a1,
         UInt8 *arg4,
@@ -9,11 +9,11 @@ char __usercall sub_503070@<al>(
         double *a8,
         UInt32 *a3)
 {
-  UInt16 v10[2]; // [esp+0h] [ebp-4h] BYREF
+  UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v10 = 0;
-  if ( Script_ExtractArgs(a1, arg4, a3, a4, a5, a6, l, v10) )
-    return sub_4F6D70(ebx0, a4, *(TESForm **)v10, 0, a8);
+  *(_DWORD *)v9 = 0; /*0x50309a*/
+  if ( Script_ExtractArgs(a1, arg4, a3, a4, a5, a6, l, v9) ) /*0x5030a2*/
+    GetInCell_Eval(ebx0, a4, *(TESForm **)v9, 0, a8); /*0x5030be*/
   else
-    return nullsub_1();
+    nullsub_1(); /*0x5030af*/
 }

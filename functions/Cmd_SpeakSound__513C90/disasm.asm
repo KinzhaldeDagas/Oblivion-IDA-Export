@@ -46,7 +46,7 @@
 0x513D32: mov     [esp+464h+var_4], ebx
 0x513D39: mov     [esp+464h+var_424], ebx
 0x513D3D: mov     [esp+464h+var_428], 32h ; '2'
-0x513D45: call    Script_ExtractArgs
+0x513D45: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x513D4A: add     esp, 28h
 0x513D4D: test    al, al
 0x513D4F: jz      loc_513E5C
@@ -70,7 +70,7 @@
 0x513D89: cmp     [esi+58h], ebx
 0x513D8C: jz      loc_513E5C
 0x513D92: mov     ecx, esi; this
-0x513D94: call    Actor__GetProcessLevel
+0x513D94: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x513D99: test    eax, eax
 0x513D9B: jnz     loc_513E5C
 0x513DA1: mov     eax, [esp+43Ch+var_424]
@@ -134,7 +134,7 @@
 0x513E58: mov     al, 1
 0x513E5A: jmp     short loc_513E67
 0x513E5C: push    ebx
-0x513E5D: call    FormHeapFree
+0x513E5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x513E62: add     esp, 4
 0x513E65: xor     al, al
 0x513E67: mov     ecx, [esp+43Ch+var_C]
@@ -149,3 +149,16 @@
 0x513E83: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x513E88: add     esp, 428h
 0x513E8E: retn
+0x9B7100: lea     ecx, [ebp-41Ch]; void *
+0x9B7106: jmp     BSStringT_Clear
+0x9B710B: mov     edx, [esp+arg_4]
+0x9B710F: lea     eax, [edx-42Ch]
+0x9B7115: mov     ecx, [edx-430h]
+0x9B711B: xor     ecx, eax
+0x9B711D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7122: add     eax, 10h
+0x9B7125: mov     ecx, [edx-4]
+0x9B7128: xor     ecx, eax
+0x9B712A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B712F: mov     eax, offset stru_AE1D88
+0x9B7134: jmp     ___CxxFrameHandler3

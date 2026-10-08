@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 24,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 39,
+  "chunks": [
+    [
+      "0x677C70",
+      "0x677C97"
+    ]
+  ],
+  "chunks_sha256": "78bc4fa14e99daf6315a407f34d3bfb459be11fc6aebc70e90c51650b1b15e1d",
+  "comment_regular": "Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
+  "comment_repeatable": "Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_677C70",
+  "display_name": "NodeVoid_GetDataAddRef",
   "end_ea": "0x677C97",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_677C70",
+  "name": "NodeVoid_GetDataAddRef",
   "segment": ".text",
   "sha256": "78bc4fa14e99daf6315a407f34d3bfb459be11fc6aebc70e90c51650b1b15e1d",
   "size": 39,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x677C70",
-  "type": "int *__thiscall(int *this, int *)",
+  "total_chunk_size": 39,
+  "type": "void **__thiscall(NodeVoid *this, void **outData)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 39
 }

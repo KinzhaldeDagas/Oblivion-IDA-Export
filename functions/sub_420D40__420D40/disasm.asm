@@ -1,5 +1,5 @@
-0x420D40: push    0FFFFFFFFh
-0x420D42: push    offset SEH_6E3250
+0x420D40: push    0FFFFFFFFh; Sets ExtraXTarget; null removes type 0x4D, otherwise updates or creates it.
+0x420D42: push    offset ExtraDataList_SetReferencePointer_SEH
 0x420D47: mov     eax, large fs:0
 0x420D4D: push    eax
 0x420D4E: push    esi
@@ -33,7 +33,7 @@
 0x420D9E: mov     [esp+18h+var_4], 0
 0x420DA6: jz      short loc_420DB1
 0x420DA8: mov     ecx, eax
-0x420DAA: call    sub_42A820
+0x420DAA: call    ExtraXTarget_ctor; Constructs Oblivion ExtraXTarget (type 0x4D) with a null target.
 0x420DAF: jmp     short loc_420DB3
 0x420DB1: xor     eax, eax
 0x420DB3: push    eax; BSExtraData *
@@ -56,3 +56,15 @@
 0x420DEC: pop     esi
 0x420DED: add     esp, 0Ch
 0x420DF0: retn    4
+0x9C3090: mov     eax, [ebp+4]
+0x9C3093: push    eax
+0x9C3094: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3099: pop     ecx
+0x9C309A: retn
+0x9C309B: mov     edx, [esp+arg_4]
+0x9C309F: lea     eax, [edx-8]
+0x9C30A2: mov     ecx, [edx-0Ch]
+0x9C30A5: xor     ecx, eax
+0x9C30A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C30AC: mov     eax, offset stru_AEBD48
+0x9C30B1: jmp     ___CxxFrameHandler3

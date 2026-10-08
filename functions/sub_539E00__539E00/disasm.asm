@@ -148,11 +148,11 @@
 0x53A05A: mov     ecx, esi
 0x53A05C: call    sub_539B80
 0x53A061: mov     ecx, esi
-0x53A063: call    sub_452A60
+0x53A063: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x53A068: mov     esi, eax
 0x53A06A: test    esi, esi
 0x53A06C: jz      short loc_53A0BA
-0x53A06E: push    offset dword_BA7F3C
+0x53A06E: push    0BA7F3Ch
 0x53A073: mov     ecx, esi
 0x53A075: call    sub_700010
 0x53A07A: test    eax, eax
@@ -206,3 +206,31 @@
 0x53A12A: mov     esp, ebp
 0x53A12C: pop     ebp
 0x53A12D: retn    10h
+0x9B95B0: mov     eax, [ebp+var_1B0]
+0x9B95B6: push    eax
+0x9B95B7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B95BC: pop     ecx
+0x9B95BD: retn
+0x9B95BE: lea     ecx, [ebp+var_100]
+0x9B95C4: jmp     sub_8A5090
+0x9B95C9: mov     eax, [ebp+var_1B0]
+0x9B95CF: push    eax
+0x9B95D0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B95D5: pop     ecx
+0x9B95D6: retn
+0x9B95D7: mov     eax, [ebp+var_1B0]
+0x9B95DD: push    eax
+0x9B95DE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B95E3: pop     ecx
+0x9B95E4: retn
+0x9B95E5: mov     edx, [esp-4+arg_4]
+0x9B95E9: lea     eax, [edx-1C4h]
+0x9B95EF: mov     ecx, [edx-1C8h]
+0x9B95F5: xor     ecx, eax
+0x9B95F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B95FC: add     eax, 8
+0x9B95FF: mov     ecx, [edx-8]
+0x9B9602: xor     ecx, eax
+0x9B9604: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9609: mov     eax, offset stru_AE3910
+0x9B960E: jmp     ___CxxFrameHandler3

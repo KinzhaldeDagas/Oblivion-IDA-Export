@@ -25,7 +25,7 @@
 0x5C1746: mov     edx, ds:0B38BA0h; jumptable 005C173F case 25
 0x5C174C: push    edx
 0x5C174D: push    esi; a1
-0x5C174E: call    TESFullName_GetNameForForm
+0x5C174E: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x5C1753: add     esp, 4
 0x5C1756: jmp     loc_5C17EE
 0x5C175B: lea     ecx, [esi+30h]; jumptable 005C173F case 40
@@ -35,7 +35,7 @@
 0x5C176B: mov     ecx, ds:0B38BA0h
 0x5C1771: push    ecx
 0x5C1772: push    esi; a1
-0x5C1773: call    TESFullName_GetNameForForm
+0x5C1773: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x5C1778: add     esp, 4
 0x5C177B: push    eax
 0x5C177C: push    offset aSS; "%s %s"
@@ -115,7 +115,7 @@
 0x5C1869: test    esi, esi
 0x5C186B: jz      short loc_5C1880
 0x5C186D: push    esi; a1
-0x5C186E: call    TESFullName_GetNameForForm
+0x5C186E: call    TESFullName_GetNameForForm; 3DTheft decode: TESFullName_GetNameForForm only dynamic-casts the passed form to TESFullName and returns its raw name/EmptyString; it does not apply worldspace fallback.
 0x5C1873: push    eax
 0x5C1874: push    offset aS; "%s"
 0x5C1879: lea     edx, [esp+120h+var_108]

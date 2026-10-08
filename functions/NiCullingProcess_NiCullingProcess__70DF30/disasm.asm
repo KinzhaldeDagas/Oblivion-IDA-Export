@@ -1,4 +1,4 @@
-0x70DF30: fldz
+0x70DF30: fldz; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.
 0x70DF32: push    ebx
 0x70DF33: push    ebp
 0x70DF34: push    esi
@@ -24,7 +24,7 @@
 0x70DF77: add     edi, 10h
 0x70DF7A: sub     ebp, 1
 0x70DF7D: jns     short loc_70DF70
-0x70DF7F: mov     eax, [esp+10h+arg_0]
+0x70DF7F: mov     eax, [esp+10h+visibleArray]
 0x70DF83: mov     dword ptr [ebx+60h], 3Fh ; '?'
 0x70DF8A: pop     edi
 0x70DF8B: mov     [esi+8], eax

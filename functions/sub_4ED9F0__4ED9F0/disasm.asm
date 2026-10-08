@@ -8,7 +8,6 @@
 0x4EDA05: mov     eax, [esi+24h]
 0x4EDA08: lea     edx, [eax+1]
 0x4EDA0B: jmp     short loc_4EDA10
-0x4EDA0D: align 10h
 0x4EDA10: mov     cl, [eax]
 0x4EDA12: add     eax, 1
 0x4EDA15: test    cl, cl
@@ -29,12 +28,12 @@
 0x4EDA3D: lea     eax, [esi+2Ch]
 0x4EDA40: push    eax; Src
 0x4EDA41: push    4D414E41h; int
-0x4EDA46: call    TESForm_PutFormRecordChunkData
+0x4EDA46: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EDA4B: push    1; Size
 0x4EDA4D: lea     ecx, [esi+2Dh]
 0x4EDA50: push    ecx; Src
 0x4EDA51: push    4D414E46h; int
-0x4EDA56: call    TESForm_PutFormRecordChunkData
+0x4EDA56: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EDA5B: movzx   eax, word ptr [esi+34h]
 0x4EDA5F: add     esp, 24h
 0x4EDA62: cmp     ax, 0FFFFh
@@ -57,7 +56,7 @@
 0x4EDA8F: push    eax; Size
 0x4EDA90: push    ecx; Src
 0x4EDA91: push    4D414E4Dh; int
-0x4EDA96: call    TESForm_PutFormRecordChunkData
+0x4EDA96: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EDA9B: mov     eax, [esi+38h]
 0x4EDA9E: add     esp, 0Ch
 0x4EDAA1: test    eax, eax
@@ -97,7 +96,7 @@
 0x4EDB16: lea     ecx, [esp+14h+Src]
 0x4EDB1A: push    ecx; Src
 0x4EDB1B: push    4D414E47h; int
-0x4EDB20: call    TESForm_PutFormRecordChunkData
+0x4EDB20: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4EDB25: add     esp, 0Ch
 0x4EDB28: mov     ecx, esi; this
 0x4EDB2A: call    TESForm_FinalizeFormRecord

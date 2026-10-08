@@ -17,11 +17,11 @@
 0x760198: jz      short loc_7601A5
 0x76019A: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
 0x76019E: jnz     short loc_7601A5
-0x7601A0: call    sub_772560
+0x7601A0: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x7601A5: sub     edi, 1
 0x7601A8: jns     short loc_760190
 0x7601AA: push    ebx
-0x7601AB: call    FormHeapFree
+0x7601AB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7601B0: add     esp, 4
 0x7601B3: pop     edi
 0x7601B4: pop     esi

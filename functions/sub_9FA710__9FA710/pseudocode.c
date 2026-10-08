@@ -1,5 +1,6 @@
-int sub_9FA710()
+// Verified setting registration: registers GameSettingFloat fPathMinimalUseDoorPenalty with default 40960.0 and pairs it with atexit cleanup GameSettings_Unregister_fPathMinimalUseDoorPenalty.
+int GameSettings_Register_fPathMinimalUseDoorPenalty()
 {
-  GameSetting_ConstrAndReg_float(&flt_B3A440, (int)"fPathMinimalUseDoorPenalty", 40960.0);
-  return atexit(sub_A240B0);
+  GameSetting_ConstrAndReg_float(&fPathMinimalUseDoorPenalty, (int)"fPathMinimalUseDoorPenalty", 40960.0); /*0x9fa724*/
+  return atexit(GameSettings_Unregister_fPathMinimalUseDoorPenalty); /*0x9fa734*/
 }

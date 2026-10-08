@@ -11,7 +11,7 @@
 0x481369: mov     ecx, esi
 0x48136B: jz      short loc_4813C4
 0x48136D: push    4
-0x48136F: call    NiNode_GetNiPropertyByID
+0x48136F: call    NiNode_GetNiPropertyByID;
 0x481374: mov     esi, eax
 0x481376: test    esi, esi
 0x481378: jz      loc_481406
@@ -40,7 +40,7 @@
 0x4813B2: mov     ecx, esi
 0x4813B4: call    edx
 0x4813B6: push    edi
-0x4813B7: mov     ecx, offset ActorProcessManager_ptr
+0x4813B7: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x4813BC: call    sub_67AB40
 0x4813C1: pop     edi
 0x4813C2: pop     esi

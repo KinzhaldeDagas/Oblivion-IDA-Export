@@ -1,4 +1,4 @@
-0x6BBDC0: mov     edx, [esp+arg_10]
+0x6BBDC0: mov     edx, [esp+arg_10]; Evaluates a position track at a requested time with endpoint clamping: returns the first/last value outside the authored range, dispatches NiPosKey_EvaluateTrack inside it, and returns the native invalid/default vector for an empty track.
 0x6BBDC4: test    edx, edx
 0x6BBDC6: jz      loc_6BBE60
 0x6BBDCC: fld     [esp+arg_4]
@@ -54,7 +54,7 @@
 0x6BBE47: fstp    [esp+20h+var_20]; float
 0x6BBE4A: push    esi; int
 0x6BBE4B: mov     [esp+24h+arg_10], 0
-0x6BBE53: call    sub_6BBBA0
+0x6BBE53: call    NiPosKey_EvaluateTrack; Oblivion 3-component position/vector key-track evaluator. One key or sentinel time returns key value at +4. Otherwise cursor-assisted bracket search uses the supplied byte stride, normalized segment time selects the interpolation-type dispatch table, and the lower-key cursor is written back.
 0x6BBE58: add     esp, 1Ch
 0x6BBE5B: mov     eax, esi
 0x6BBE5D: pop     esi

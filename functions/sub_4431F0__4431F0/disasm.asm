@@ -7,7 +7,7 @@
 0x443200: cmp     [esi+74h], ebx
 0x443203: jz      loc_4432F0
 0x443209: push    3
-0x44320B: call    nullsub_returnTrue_0arg
+0x44320B: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x443210: add     esp, 4
 0x443213: cmp     byte ptr ds:0B051CCh, 0
 0x44321A: jz      short loc_443261
@@ -36,7 +36,7 @@
 0x443256: jz      short loc_443261
 0x443258: push    0; a2
 0x44325A: mov     ecx, esi; this
-0x44325C: call    sub_43FC20
+0x44325C: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x443261: mov     ecx, ds:0B33398h
 0x443267: mov     dword ptr [ecx+18h], 0
 0x44326E: mov     ecx, esi; this
@@ -54,25 +54,25 @@
 0x443298: jz      short loc_4432E1
 0x44329A: test    esi, esi
 0x44329C: jz      short loc_4432DA
-0x44329E: mov     ecx, [esi]
-0x4432A0: call    sub_4EF7E0
+0x44329E: mov     ecx, [esi]; worldspace
+0x4432A0: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4432A5: test    eax, eax
 0x4432A7: jz      short loc_4432BD
-0x4432A9: mov     ecx, [esi]
+0x4432A9: mov     ecx, [esi]; worldspace
 0x4432AB: cmp     ecx, ebx
 0x4432AD: jnz     short loc_4432BD
-0x4432AF: call    sub_4EF7E0
-0x4432B4: mov     ecx, eax
-0x4432B6: call    sub_4EBC00
+0x4432AF: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
+0x4432B4: mov     ecx, eax; this
+0x4432B6: call    TESWorldSpaceTerrainLODQuadMap_Initialize; Verified initial terrain-quad map setup: discovers available NIFs, marks each corresponding quad Unloaded (5), stores its map-derived world origin, and sets the grid-cell width used by distance checks.
 0x4432BB: jmp     short loc_4432DA
-0x4432BD: mov     ecx, [esi]
-0x4432BF: call    sub_4EF7E0
+0x4432BD: mov     ecx, [esi]; worldspace
+0x4432BF: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4432C4: test    eax, eax
 0x4432C6: jz      short loc_4432DA
-0x4432C8: mov     ecx, [esi]
+0x4432C8: mov     ecx, [esi]; worldspace
 0x4432CA: cmp     ecx, ebx
 0x4432CC: jz      short loc_4432DA
-0x4432CE: call    sub_4EF7E0
+0x4432CE: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x4432D3: mov     ecx, eax
 0x4432D5: call    sub_4EA570
 0x4432DA: mov     esi, [esi+4]
@@ -80,7 +80,7 @@
 0x4432DF: jnz     short loc_44329E
 0x4432E1: call    sub_57A0D0
 0x4432E6: push    2
-0x4432E8: call    nullsub_returnTrue_0arg
+0x4432E8: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x4432ED: add     esp, 4
 0x4432F0: pop     esi
 0x4432F1: pop     ebx

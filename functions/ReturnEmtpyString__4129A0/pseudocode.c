@@ -1,4 +1,4 @@
 CHAR *ReturnEmtpyString()
 {
-  return EmptyString;
+  return EmptyString; /*0x4129a5*/
 }

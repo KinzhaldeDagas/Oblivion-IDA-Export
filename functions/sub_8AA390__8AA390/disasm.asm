@@ -1,5 +1,5 @@
-0x8AA390: fld     dword ptr [ecx]
-0x8AA392: mov     edx, [esp+arg_0]
+0x8AA390: fld     dword ptr [ecx]; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
+0x8AA392: mov     edx, [esp+other]
 0x8AA396: fld     dword ptr [edx]
 0x8AA398: fucompp
 0x8AA39A: fnstsw  ax

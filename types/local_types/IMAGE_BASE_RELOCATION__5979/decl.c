@@ -1,1 +1,5 @@
-_IMAGE_BASE_RELOCATION
+struct _IMAGE_BASE_RELOCATION
+{
+DWORD VirtualAddress;
+DWORD SizeOfBlock;
+};

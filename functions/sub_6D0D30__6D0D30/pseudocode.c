@@ -14,47 +14,47 @@ void __thiscall sub_6D0D30(int *this, unsigned int a2)
   int v14; // [esp+8h] [ebp-8h] BYREF
   int v15; // [esp+Ch] [ebp-4h] BYREF
 
-  v2 = a2;
-  sub_6D0550(this, a2);
-  if ( *(_DWORD *)(v2 + 0xD8) >= 0xA000102u )
+  v2 = a2; /*0x6d0d35*/
+  NiInterpController_LoadBinary((NiRenderer *)this, a2); /*0x6d0d3c*/
+  if ( *(_DWORD *)(v2 + 0xD8) >= 0xA000102u ) /*0x6d0d4b*/
   {
-    v12 = *(_DWORD *)(v2 + 0x21C);
-    v4 = *(void (__cdecl **)(int, int *, int, unsigned int *, int))(v12 + 4);
-    a2 = 2;
-    v4(v12, this + 0xF, 2, &a2, 1);
+    v12 = *(_DWORD *)(v2 + 0x21C); /*0x6d0d75*/
+    v4 = *(void (__cdecl **)(int, int *, int, unsigned int *, int))(v12 + 4); /*0x6d0d76*/
+    a2 = 2; /*0x6d0d79*/
+    v4(v12, this + 0xF, 2, &a2, 1); /*0x6d0d81*/
   }
   else
   {
-    *((_WORD *)this + 0x1E) = (*(_WORD *)(v2 + 0x25A) >> 5) & 0x3F;
+    *((_WORD *)this + 0x1E) = (*(_WORD *)(v2 + 0x25A) >> 5) & 0x3F; /*0x6d0d5c*/
   }
-  sub_712A20((unsigned int *)v2);
-  if ( *(_DWORD *)(v2 + 0xD8) >= 0x4000002u )
+  sub_712A20((unsigned int *)v2); /*0x6d0d88*/
+  if ( *(_DWORD *)(v2 + 0xD8) >= 0x4000002u ) /*0x6d0d97*/
   {
-    v13 = *(_DWORD *)(v2 + 0x21C);
-    v5 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v13 + 4);
-    v14 = 1;
-    v5(v13, &a2, 1, &v14, 1);
-    *((_BYTE *)this + 0x5A) = (_BYTE)a2 != 0;
+    v13 = *(_DWORD *)(v2 + 0x21C); /*0x6d0dad*/
+    v5 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(v13 + 4); /*0x6d0dae*/
+    v14 = 1; /*0x6d0db1*/
+    v5(v13, &a2, 1, &v14, 1); /*0x6d0db9*/
+    *((_BYTE *)this + 0x5A) = (_BYTE)a2 != 0; /*0x6d0dc6*/
   }
-  if ( *(_DWORD *)(v2 + 0xD8) >= 0xA010068u )
-    sub_712AE0((_DWORD *)v2);
-  if ( *(_DWORD *)(v2 + 4) >= 0xAu )
+  if ( *(_DWORD *)(v2 + 0xD8) >= 0xA010068u ) /*0x6d0dd3*/
+    sub_712AE0((unsigned int *)v2); /*0x6d0dd7*/
+  if ( *(_DWORD *)(v2 + 4) >= 0xAu ) /*0x6d0de0*/
   {
-    v6 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(*(_DWORD *)(v2 + 0x21C) + 4);
-    v10 = *(_DWORD *)(v2 + 0x21C);
-    v14 = 4;
-    v6(v10, &a2, 4, &v14, 1);
-    sub_4CA040((unsigned __int16 *)this + 0x20, a2);
-    for ( i = 0; i < a2; ++i )
+    v6 = *(void (__cdecl **)(int, unsigned int *, int, int *, int))(*(_DWORD *)(v2 + 0x21C) + 4); /*0x6d0df5*/
+    v10 = *(_DWORD *)(v2 + 0x21C); /*0x6d0dff*/
+    v14 = 4; /*0x6d0e00*/
+    v6(v10, &a2, 4, &v14, 1); /*0x6d0e08*/
+    sub_4CA040((unsigned __int16 *)this + 0x20, a2); /*0x6d0e17*/
+    for ( i = 0; i < a2; ++i ) /*0x6d0e22*/
     {
-      v11 = *(_DWORD *)(v2 + 0x21C);
-      v8 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 4);
-      v14 = 4;
-      v8(v11, &v15, 4, &v14, 1);
-      v9 = *((unsigned __int16 *)this + 0x25);
-      v14 = v15;
-      if ( i < v9 )
-        sub_4CA210((int)(this + 0x10), i, (float *)&v14);
+      v11 = *(_DWORD *)(v2 + 0x21C); /*0x6d0e38*/
+      v8 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 4); /*0x6d0e39*/
+      v14 = 4; /*0x6d0e3c*/
+      v8(v11, &v15, 4, &v14, 1); /*0x6d0e44*/
+      v9 = *((unsigned __int16 *)this + 0x25); /*0x6d0e4a*/
+      v14 = v15; /*0x6d0e4e*/
+      if ( i < v9 ) /*0x6d0e57*/
+        sub_4CA210((int)(this + 0x10), i, (float *)&v14); /*0x6d0e61*/
     }
   }
 }

@@ -1,0 +1,72 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESRegionData",
+  "definition": "struct TESRegionData\n{\nTESRegionDataVtable *vtable; ///< Verified base data vtable identity.\nunsigned __int8 bOverride; ///< Verified RDAT override flag at +4; true overrides lower-priority/fallback region data in selection.\nunsigned __int8 bIgnore; ///< Verified selection skips data when this byte is nonzero; member spelling bIgnore is Probable (Fallout uses same name).\nunsigned __int8 priority; ///< Verified default 0x32, loaded from RDAT when <=100, and compared to choose higher-priority region data.\nunsigned __int8 unknown07; ///< Padding/unknown.\n}\n",
+  "id": 18374686479672050099,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified base data vtable identity.",
+      "name": "vtable",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "TESRegionDataVtable *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified RDAT override flag at +4; true overrides lower-priority/fallback region data in selection.",
+      "name": "bOverride",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified selection skips data when this byte is nonzero; member spelling bIgnore is Probable (Fallout uses same name).",
+      "name": "bIgnore",
+      "offset": 5,
+      "offset_hex": "0x5",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified default 0x32, loaded from RDAT when <=100, and compared to choose higher-priority region data.",
+      "name": "priority",
+      "offset": 6,
+      "offset_hex": "0x6",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Padding/unknown.",
+      "name": "unknown07",
+      "offset": 7,
+      "offset_hex": "0x7",
+      "size": 1,
+      "type": "unsigned __int8"
+    }
+  ],
+  "name": "TESRegionData",
+  "ordinal": 224,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 8
+}

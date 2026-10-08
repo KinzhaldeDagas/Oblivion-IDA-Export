@@ -10,18 +10,18 @@
 0x5B69C8: call    InterfaceManager_GetSingleton
 0x5B69CD: add     esp, 8
 0x5B69D0: mov     edi, eax
-0x5B69D2: call    sub_57D7F0
+0x5B69D2: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B69D7: fstp    qword ptr [esp+10h+a3]
-0x5B69DB: call    sub_57D7F0
+0x5B69DB: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B69E0: fmul    qword ptr ds:0A2FAA0h
 0x5B69E6: fadd    dword ptr [edi+28h]
 0x5B69E9: fsubr   qword ptr [esp+10h+a3]
-0x5B69ED: call    Double_To_SInt32
+0x5B69ED: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B69F2: mov     ecx, [esi+40h]
 0x5B69F5: mov     [esp+10h+arg_0], eax
 0x5B69F9: fild    [esp+10h+arg_0]
 0x5B69FD: fstp    [esp+10h+arg_0]
-0x5B6A01: call    sub_588CF0
+0x5B6A01: call    sub_588CF0; AchievementsNative evidence: stock tile Y helper starts with tile y and adds ancestor y only when ancestor locus is nonzero; inventory hover passes this row Y to popup path.
 0x5B6A06: fsubr   [esp+10h+arg_0]
 0x5B6A0A: mov     ecx, [esi+44h]
 0x5B6A0D: push    0FB6h
@@ -32,29 +32,29 @@
 0x5B6A20: mov     ecx, [esi+44h]; this
 0x5B6A23: fstp    [esp+14h+arg_0]
 0x5B6A27: fld     dword ptr ds:0A6B1F0h
-0x5B6A2D: fstp    [esp+14h+a2]; a3
-0x5B6A30: push    0FB7h; a2
-0x5B6A35: call    Tile_SetFloat
+0x5B6A2D: fstp    [esp+14h+a2]; value
+0x5B6A30: push    0FB7h; propertyCode
+0x5B6A35: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6A3A: fld     [esp+10h+arg_0]
 0x5B6A3E: mov     ecx, [esi+40h]
 0x5B6A41: fstp    qword ptr [esp+10h+a3]
 0x5B6A45: push    0FB1h
 0x5B6A4A: call    Tile_GetFloat
 0x5B6A4F: fdivr   qword ptr [esp+10h+a3]
-0x5B6A53: call    Double_To_SInt32
+0x5B6A53: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B6A58: mov     [esp+10h+arg_0], eax
 0x5B6A5C: fild    [esp+10h+arg_0]
 0x5B6A60: push    ecx
 0x5B6A61: mov     ecx, [esi+44h]; this
-0x5B6A64: fstp    [esp+14h+a2]; a3
-0x5B6A67: push    0FB7h; a2
-0x5B6A6C: call    Tile_SetFloat
+0x5B6A64: fstp    [esp+14h+a2]; value
+0x5B6A67: push    0FB7h; propertyCode
+0x5B6A6C: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6A71: fldz
 0x5B6A73: push    ecx
-0x5B6A74: fstp    [esp+14h+a2]; a3
+0x5B6A74: fstp    [esp+14h+a2]; value
 0x5B6A77: mov     ecx, [esi+44h]; this
-0x5B6A7A: push    0FB7h; a2
-0x5B6A7F: call    Tile_SetFloat
+0x5B6A7A: push    0FB7h; propertyCode
+0x5B6A7F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6A84: pop     edi
 0x5B6A85: pop     esi
 0x5B6A86: add     esp, 8
@@ -80,10 +80,10 @@
 0x5B6AC1: call    InterfaceManager_GetSingleton
 0x5B6AC6: add     esp, 8
 0x5B6AC9: mov     edi, eax
-0x5B6ACB: call    sub_57D7A0
+0x5B6ACB: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5B6AD0: fmul    qword ptr ds:0A2FAA0h
 0x5B6AD6: fadd    dword ptr [edi+20h]
-0x5B6AD9: call    Double_To_SInt32
+0x5B6AD9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B6ADE: fld     dword ptr [esi+88h]
 0x5B6AE4: mov     [esp+10h+arg_0], eax
 0x5B6AE8: fisub   [esp+10h+arg_0]
@@ -101,15 +101,15 @@
 0x5B6B14: fstp    [esp+1Ch+arg_0]
 0x5B6B18: fld     [esp+1Ch+arg_0]
 0x5B6B1C: fchs
-0x5B6B1E: fstp    [esp+1Ch+var_18]; float
+0x5B6B1E: fstp    [esp+1Ch+value]; float
 0x5B6B22: fld     [esp+1Ch+arg_4]
 0x5B6B26: fchs
 0x5B6B28: fstp    [esp+1Ch+var_1C]; float
 0x5B6B2B: call    sub_5B67F0
-0x5B6B30: call    sub_57D7A0
+0x5B6B30: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5B6B35: fmul    qword ptr ds:0A2FAA0h
 0x5B6B3B: fadd    dword ptr [edi+20h]
-0x5B6B3E: call    Double_To_SInt32
+0x5B6B3E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B6B43: mov     [esp+10h+arg_0], eax
 0x5B6B47: fild    [esp+10h+arg_0]
 0x5B6B4B: mov     ecx, edi
@@ -134,21 +134,21 @@
 0x5B6B7E: call    InterfaceManager_GetSingleton
 0x5B6B83: add     esp, 8
 0x5B6B86: mov     edi, eax
-0x5B6B88: call    sub_57D7A0
+0x5B6B88: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5B6B8D: fmul    qword ptr ds:0A2FAA0h
 0x5B6B93: fadd    dword ptr [edi+20h]
-0x5B6B96: call    Double_To_SInt32
+0x5B6B96: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B6B9B: fld     dword ptr [esi+88h]
 0x5B6BA1: mov     [esp+14h+arg_0], eax
 0x5B6BA5: fisub   [esp+14h+arg_0]
 0x5B6BA9: fstp    [esp+14h+arg_4]
-0x5B6BAD: call    sub_57D7F0
+0x5B6BAD: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B6BB2: fstp    qword ptr [esp+14h+a3]
-0x5B6BB6: call    sub_57D7F0
+0x5B6BB6: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B6BBB: fmul    qword ptr ds:0A2FAA0h
 0x5B6BC1: fadd    dword ptr [edi+28h]
 0x5B6BC4: fsubr   qword ptr [esp+14h+a3]
-0x5B6BC8: call    Double_To_SInt32
+0x5B6BC8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B6BCD: fld     dword ptr [esi+8Ch]
 0x5B6BD3: mov     ebx, [esi+58h]
 0x5B6BD6: mov     [esp+14h+arg_0], eax
@@ -162,9 +162,9 @@
 0x5B6BF3: mov     ecx, ebx; this
 0x5B6BF5: fstp    [esp+18h+arg_0]
 0x5B6BF9: fld     [esp+18h+arg_0]
-0x5B6BFD: fstp    [esp+18h+var_18]; a3
-0x5B6C00: push    0FB8h; a2
-0x5B6C05: call    Tile_SetFloat
+0x5B6BFD: fstp    [esp+18h+value]; value
+0x5B6C00: push    0FB8h; propertyCode
+0x5B6C05: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6C0A: push    0FBBh
 0x5B6C0F: mov     ecx, ebx
 0x5B6C11: call    Tile_GetFloat
@@ -173,23 +173,23 @@
 0x5B6C1B: mov     ecx, ebx; this
 0x5B6C1D: fstp    [esp+18h+arg_0]
 0x5B6C21: fld     [esp+18h+arg_0]
-0x5B6C25: fstp    [esp+18h+var_18]; a3
-0x5B6C28: push    0FB9h; a2
-0x5B6C2D: call    Tile_SetFloat
-0x5B6C32: call    sub_57D7A0
+0x5B6C25: fstp    [esp+18h+value]; value
+0x5B6C28: push    0FB9h; propertyCode
+0x5B6C2D: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x5B6C32: call    UI_GetVirtualScreenWidth; Returns virtual UI width: 1280 for portrait/square, otherwise aspect*960. Layout coordinates are independent of output pixel resolution.
 0x5B6C37: fmul    qword ptr ds:0A2FAA0h
 0x5B6C3D: fadd    dword ptr [edi+20h]
-0x5B6C40: call    Double_To_SInt32
+0x5B6C40: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B6C45: mov     [esp+14h+arg_0], eax
 0x5B6C49: fild    [esp+14h+arg_0]
 0x5B6C4D: fstp    dword ptr [esi+88h]
-0x5B6C53: call    sub_57D7F0
+0x5B6C53: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B6C58: fstp    qword ptr [esp+14h+a3]
-0x5B6C5C: call    sub_57D7F0
+0x5B6C5C: call    UI_GetVirtualScreenHeight; Returns virtual UI height: 960 for landscape/square, otherwise (height/width)*1280.
 0x5B6C61: fmul    qword ptr ds:0A2FAA0h
 0x5B6C67: fadd    dword ptr [edi+28h]
 0x5B6C6A: fsubr   qword ptr [esp+14h+a3]
-0x5B6C6E: call    Double_To_SInt32
+0x5B6C6E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5B6C73: mov     [esp+14h+arg_0], eax
 0x5B6C77: fild    [esp+14h+arg_0]
 0x5B6C7B: pop     ebx

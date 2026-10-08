@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x60D0EC",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x60D108",
-    "line": "mov     ebx, [esp+0Ch+arg_0]",
+    "line": "mov     ebx, [esp+0Ch+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x60D12D",
-    "line": "mov     [esp+0Ch+arg_0], esi",
+    "line": "mov     [esp+0Ch+changeMask], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x60D140",
-    "line": "add     word ptr [esp+0Ch+arg_0], ax",
+    "line": "add     word ptr [esp+0Ch+changeMask], ax",
     "mnemonic": "add",
     "size": 5
   },
   {
     "ea": "0x60D145",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x60D157",
-    "line": "mov     [esp+8+arg_0], esi",
+    "line": "mov     [esp+8+changeMask], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x60D16F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x60D193",
-    "line": "mov     si, word ptr [esp+14h+arg_0]",
+    "line": "mov     si, word ptr [esp+14h+changeMask]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x60D1B3",
-    "line": "mov     si, word ptr [esp+8+arg_0]",
+    "line": "mov     si, word ptr [esp+8+changeMask]",
     "mnemonic": "mov",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x60D1DB",
-    "line": "mov     ax, word ptr [esp+8+arg_0]",
+    "line": "mov     ax, word ptr [esp+8+changeMask]",
     "mnemonic": "mov",
     "size": 5
   },

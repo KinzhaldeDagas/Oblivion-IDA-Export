@@ -12,14 +12,14 @@
 0x66472D: test    ecx, ecx
 0x66472F: jz      short loc_664738
 0x664731: push    1
-0x664733: call    sub_419F10
+0x664733: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x664738: test    edi, edi
 0x66473A: mov     [esi+624h], edi
 0x664740: jz      short loc_66477A
 0x664742: push    0
 0x664744: push    3
 0x664746: lea     ecx, [edi+0Ch]
-0x664749: call    EffectItemList_GetStrongestItem
+0x664749: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x66474E: mov     eax, [eax+1Ch]
 0x664751: add     eax, 44h ; 'D'
 0x664754: mov     eax, [eax+4]
@@ -42,7 +42,7 @@
 0x664787: call    Magic_GetDefaultPlayerSpell
 0x66478C: mov     ecx, eax
 0x66478E: add     ecx, 24h ; '$'
-0x664791: call    EffectItemList_GetStrongestItem
+0x664791: call    EffectItemList_GetStrongestItem; this=EffectItemList; args are rangeFilter (0 self,1 touch,2 target,3 any) and requireArea. Returns effective (flag 0x400000 clear) qualifying item with greatest truncated MagickaCostForCaster(item,null).
 0x664796: mov     eax, [eax+1Ch]
 0x664799: add     eax, 44h ; 'D'
 0x66479C: mov     eax, [eax+4]
@@ -71,7 +71,7 @@
 0x6647EC: test    ecx, ecx
 0x6647EE: jz      short loc_6647F7
 0x6647F0: push    0
-0x6647F2: call    sub_41A610
+0x6647F2: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x6647F7: mov     ecx, esi
 0x6647F9: call    sub_662DA0
 0x6647FE: mov     edi, [esi+764h]
@@ -80,7 +80,7 @@
 0x664808: mov     ecx, edi; this
 0x66480A: call    sub_6B73E0
 0x66480F: push    edi
-0x664810: call    FormHeapFree
+0x664810: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x664815: add     esp, 4
 0x664818: mov     dword ptr [esi+764h], 0
 0x664822: mov     dword ptr [esi+760h], 0

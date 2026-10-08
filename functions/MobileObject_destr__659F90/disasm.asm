@@ -19,7 +19,7 @@
 0x659FCD: mov     [esp+18h+var_4], 0
 0x659FD5: jnz     short loc_65A012
 0x659FD7: push    esi
-0x659FD8: mov     ecx, offset ActorProcessManager_ptr
+0x659FD8: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x659FDD: call    sub_674E10
 0x659FE2: mov     ecx, ds:0B33A98h
 0x659FE8: cmp     byte ptr [ecx+0CD4h], 0
@@ -34,7 +34,7 @@
 0x65A004: call    eax
 0x65A006: push    eax
 0x65A007: push    esi
-0x65A008: mov     ecx, offset ActorProcessManager_ptr
+0x65A008: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x65A00D: call    sub_674550
 0x65A012: mov     ecx, [esi+58h]
 0x65A015: test    ecx, ecx
@@ -45,10 +45,19 @@
 0x65A01F: call    eax
 0x65A021: mov     ecx, esi
 0x65A023: mov     [esp+18h+var_4], 0FFFFFFFFh
-0x65A02B: call    TESObjectREFR_destr
+0x65A02B: call    TESObjectREFR_destr; Verified reference destruction lifecycle: TESObjectREFR_destr calls TESForm_SetDeleted(this, true) before removing the reference from its cell and destroying its ExtraDataList.
 0x65A030: mov     ecx, dword ptr [esp+18h+var_C]
 0x65A034: mov     large fs:0, ecx
 0x65A03B: pop     ecx
 0x65A03C: pop     esi
 0x65A03D: add     esp, 10h
 0x65A040: retn
+0x9C3C10: mov     ecx, [ebp-10h]
+0x9C3C13: jmp     TESObjectREFR_destr; Verified reference destruction lifecycle: TESObjectREFR_destr calls TESForm_SetDeleted(this, true) before removing the reference from its cell and destroying its ExtraDataList.
+0x9C3C18: mov     edx, [esp+arg_4]
+0x9C3C1C: lea     eax, [edx-8]
+0x9C3C1F: mov     ecx, [edx-0Ch]
+0x9C3C22: xor     ecx, eax
+0x9C3C24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3C29: mov     eax, offset stru_AEC75C
+0x9C3C2E: jmp     ___CxxFrameHandler3

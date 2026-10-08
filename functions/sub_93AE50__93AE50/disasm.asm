@@ -8,7 +8,6 @@
 0x93AE5E: xor     esi, esi
 0x93AE60: mov     [esp+20h+var_14], edi
 0x93AE64: jmp     short loc_93AE70
-0x93AE66: align 10h
 0x93AE70: movsx   ecx, ds:byte_A99F0E[esi]
 0x93AE77: movsx   edx, ds:byte_A99F0C[esi]
 0x93AE7E: fld     dword ptr [ebx+ecx*4]

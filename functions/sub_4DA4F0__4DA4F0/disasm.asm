@@ -6,13 +6,13 @@
 0x4DA4F8: test    edi, edi
 0x4DA4FA: jz      loc_4DA5AE
 0x4DA500: lea     ecx, [esi+44h]
-0x4DA503: call    sub_420FD0
+0x4DA503: call    ExtraDataList_GetLastFinishedSequence; Returns the pointer payload of ExtraLastFinishedSequence (type 0x4A), or null.
 0x4DA508: test    eax, eax
 0x4DA50A: jz      short loc_4DA520
 0x4DA50C: mov     ecx, ds:0B10568h
-0x4DA512: push    ecx; Str2
-0x4DA513: push    eax; Str1
-0x4DA514: call    __strcmp
+0x4DA512: push    ecx; right
+0x4DA513: push    eax; left
+0x4DA514: call    CRT_StricmpLocaleDispatch
 0x4DA519: add     esp, 8
 0x4DA51C: test    eax, eax
 0x4DA51E: jz      short loc_4DA587
@@ -21,14 +21,14 @@
 0x4DA52A: mov     edx, [edi+0B0h]
 0x4DA530: cmp     dword ptr [edx], 0
 0x4DA533: jz      short loc_4DA57A
-0x4DA535: push    0
-0x4DA537: mov     ecx, edi
-0x4DA539: call    sub_405790
+0x4DA535: push    0; index
+0x4DA537: mov     ecx, edi; this
+0x4DA539: call    NiNode_GetChildAtIndex
 0x4DA53E: cmp     dword ptr [eax+0Ch], 0
 0x4DA542: jz      short loc_4DA57A
-0x4DA544: push    0
-0x4DA546: mov     ecx, edi
-0x4DA548: call    sub_405790
+0x4DA544: push    0; index
+0x4DA546: mov     ecx, edi; this
+0x4DA548: call    NiNode_GetChildAtIndex
 0x4DA54D: mov     eax, [eax+0Ch]
 0x4DA550: push    eax
 0x4DA551: push    offset stru_B3CAC0
@@ -37,9 +37,9 @@
 0x4DA55E: test    eax, eax
 0x4DA560: jz      short loc_4DA57A
 0x4DA562: mov     ecx, ds:0B10568h
-0x4DA568: push    ecx
-0x4DA569: mov     ecx, eax
-0x4DA56B: call    sub_4715A0
+0x4DA568: push    ecx; name
+0x4DA569: mov     ecx, eax; this
+0x4DA56B: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4DA570: test    eax, eax
 0x4DA572: jz      short loc_4DA57A
 0x4DA574: cmp     dword ptr [eax+44h], 0
@@ -84,20 +84,20 @@
 0x4DA5F6: jz      loc_4DA713
 0x4DA5FC: mov     edx, ds:0B102E0h
 0x4DA602: push    ebx
-0x4DA603: push    edx
-0x4DA604: mov     ecx, esi
-0x4DA606: call    sub_4715A0
+0x4DA603: push    edx; name
+0x4DA604: mov     ecx, esi; this
+0x4DA606: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4DA60B: mov     edi, eax
 0x4DA60D: mov     eax, ds:0B10328h
-0x4DA612: push    eax
-0x4DA613: mov     ecx, esi
-0x4DA615: call    sub_4715A0
+0x4DA612: push    eax; name
+0x4DA613: mov     ecx, esi; this
+0x4DA615: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4DA61A: fldz
 0x4DA61C: push    ecx
-0x4DA61D: fstp    [esp+14h+var_14]; float
-0x4DA620: mov     ecx, esi
+0x4DA61D: fstp    [esp+14h+easeOutTime]; easeOutTime
+0x4DA620: mov     ecx, esi; this
 0x4DA622: mov     ebx, eax
-0x4DA624: call    sub_4715C0
+0x4DA624: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4DA629: test    edi, edi
 0x4DA62B: jnz     short loc_4DA68B
 0x4DA62D: test    ebx, ebx
@@ -108,16 +108,16 @@
 0x4DA63B: test    edi, edi
 0x4DA63D: jz      short loc_4DA673
 0x4DA63F: fldz
-0x4DA641: push    ebx; int
+0x4DA641: push    ebx; timeSyncSequence
 0x4DA642: sub     esp, 8
-0x4DA645: fstp    [esp+1Ch+a2]; float
+0x4DA645: fstp    [esp+1Ch+a2]; easeInTime
 0x4DA649: fld1
 0x4DA64B: mov     ecx, esi
-0x4DA64D: fstp    [esp+1Ch+var_1C]; float
-0x4DA650: push    ebx; int
-0x4DA651: push    ebx; int
-0x4DA652: push    edi; int
-0x4DA653: call    sub_470B20
+0x4DA64D: fstp    [esp+1Ch+weight]; weight
+0x4DA650: push    ebx; startOver
+0x4DA651: push    ebx; priority
+0x4DA652: push    edi; sequence
+0x4DA653: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4DA658: fld     dword ptr ds:0A7DEB4h
 0x4DA65E: fchs
 0x4DA660: push    1; a3
@@ -126,12 +126,12 @@
 0x4DA666: fld     dword ptr [edi+2Ch]
 0x4DA669: mov     ecx, ebp; this
 0x4DA66B: fstp    [esp+18h+a2]; a2
-0x4DA66E: call    NiAVObject_UpdateNiAVObject
+0x4DA66E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DA673: fldz
 0x4DA675: push    ecx
-0x4DA676: mov     ecx, esi
-0x4DA678: fstp    [esp+14h+var_14]; float
-0x4DA67B: call    sub_4715C0
+0x4DA676: mov     ecx, esi; this
+0x4DA678: fstp    [esp+14h+easeOutTime]; easeOutTime
+0x4DA67B: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4DA680: and     word ptr [esi+8], 0FFF7h
 0x4DA686: jmp     loc_4DA712
 0x4DA68B: or      word ptr [esi+8], 8
@@ -140,16 +140,16 @@
 0x4DA694: cmp     dword ptr [edi+44h], 0
 0x4DA698: jnz     short loc_4DA6B6
 0x4DA69A: fldz
-0x4DA69C: push    0; int
+0x4DA69C: push    0; timeSyncSequence
 0x4DA69E: sub     esp, 8
-0x4DA6A1: fstp    [esp+1Ch+a2]; float
+0x4DA6A1: fstp    [esp+1Ch+a2]; easeInTime
 0x4DA6A5: fld1
 0x4DA6A7: mov     ecx, esi
-0x4DA6A9: fstp    [esp+1Ch+var_1C]; float
-0x4DA6AC: push    0; int
-0x4DA6AE: push    0; int
-0x4DA6B0: push    edi; int
-0x4DA6B1: call    sub_470B20
+0x4DA6A9: fstp    [esp+1Ch+weight]; weight
+0x4DA6AC: push    0; startOver
+0x4DA6AE: push    0; priority
+0x4DA6B0: push    edi; sequence
+0x4DA6B1: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4DA6B6: fld     dword ptr ds:0A7DEB4h
 0x4DA6BC: push    1; a3
 0x4DA6BE: fchs
@@ -158,22 +158,22 @@
 0x4DA6C4: mov     ecx, ebp; this
 0x4DA6C6: fld     dword ptr [edi+2Ch]
 0x4DA6C9: fstp    [esp+18h+a2]; a2
-0x4DA6CC: call    NiAVObject_UpdateNiAVObject
+0x4DA6CC: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DA6D1: test    ebx, ebx
 0x4DA6D3: jz      short loc_4DA712
 0x4DA6D5: cmp     dword ptr [ebx+44h], 0
 0x4DA6D9: jnz     short loc_4DA6F7
 0x4DA6DB: fldz
-0x4DA6DD: push    0; int
+0x4DA6DD: push    0; timeSyncSequence
 0x4DA6DF: sub     esp, 8
-0x4DA6E2: fstp    [esp+1Ch+a2]; float
+0x4DA6E2: fstp    [esp+1Ch+a2]; easeInTime
 0x4DA6E6: fld1
 0x4DA6E8: mov     ecx, esi
-0x4DA6EA: fstp    [esp+1Ch+var_1C]; float
-0x4DA6ED: push    0; int
-0x4DA6EF: push    0; int
-0x4DA6F1: push    ebx; int
-0x4DA6F2: call    sub_470B20
+0x4DA6EA: fstp    [esp+1Ch+weight]; weight
+0x4DA6ED: push    0; startOver
+0x4DA6EF: push    0; priority
+0x4DA6F1: push    ebx; sequence
+0x4DA6F2: call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.
 0x4DA6F7: fld     dword ptr ds:0A7DEB4h
 0x4DA6FD: push    1; a3
 0x4DA6FF: fchs
@@ -182,7 +182,7 @@
 0x4DA705: mov     ecx, ebp; this
 0x4DA707: fld     dword ptr [ebx+2Ch]
 0x4DA70A: fstp    [esp+18h+a2]; a2
-0x4DA70D: call    NiAVObject_UpdateNiAVObject
+0x4DA70D: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4DA712: pop     ebx
 0x4DA713: mov     ebp, [ebp+0Ch]
 0x4DA716: test    ebp, ebp
@@ -205,9 +205,9 @@
 0x4DA73E: jz      short loc_4DA74D
 0x4DA740: fldz
 0x4DA742: push    ecx
-0x4DA743: mov     ecx, eax
-0x4DA745: fstp    [esp+10h+var_10]; float
-0x4DA748: call    sub_4715C0
+0x4DA743: mov     ecx, eax; this
+0x4DA745: fstp    [esp+10h+var_10]; easeOutTime
+0x4DA748: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x4DA74D: pop     edi
 0x4DA74E: pop     esi
 0x4DA74F: pop     ebp

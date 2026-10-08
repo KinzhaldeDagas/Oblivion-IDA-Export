@@ -21,7 +21,7 @@
 0x449D67: test    edi, edi
 0x449D69: jz      loc_44A1BC
 0x449D6F: mov     ecx, edi; this
-0x449D71: call    TESObjectCELL_IsInterior
+0x449D71: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x449D76: test    al, al
 0x449D78: jz      short loc_449DCA
 0x449D7A: mov     edx, [esi+0CCh]
@@ -39,12 +39,12 @@
 0x449D9F: pop     esi
 0x449DA0: retn    4
 0x449DA3: lea     edx, [esp+8+arg_0]
-0x449DA7: push    edx
+0x449DA7: push    edx; value
 0x449DA8: add     esi, 0C0h ; 'À'
-0x449DAE: push    eax
-0x449DAF: mov     ecx, esi
+0x449DAE: push    eax; index
+0x449DAF: mov     ecx, esi; self
 0x449DB1: mov     [esp+10h+arg_0], 0
-0x449DB9: call    sub_446C50
+0x449DB9: call    NiTLargeArray32_SetSlot
 0x449DBE: mov     ecx, esi
 0x449DC0: call    sub_5A56F0
 0x449DC5: pop     edi

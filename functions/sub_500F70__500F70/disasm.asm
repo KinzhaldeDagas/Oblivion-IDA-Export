@@ -19,7 +19,7 @@
 0x500FA5: push    ecx; a2
 0x500FA6: push    edx; a1
 0x500FA7: mov     dword ptr [esp+24h+var_4], 0
-0x500FAF: call    Script_ExtractArgs
+0x500FAF: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x500FB4: add     esp, 20h
 0x500FB7: test    al, al
 0x500FB9: jnz     short loc_500FBD
@@ -30,7 +30,7 @@
 0x500FC7: mov     ds:0B3BD9Ch, eax
 0x500FCC: jz      short loc_500FEF
 0x500FCE: cmp     byte ptr ds:0B3BD9Ah, 0
-0x500FD5: mov     eax, offset aOn_0
+0x500FD5: mov     eax, offset aOn_0; "On"
 0x500FDA: jnz     short loc_500FE1
 0x500FDC: mov     eax, offset aOff
 0x500FE1: push    eax

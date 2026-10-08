@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x53FC90",
-    "line": "push    ecx",
+    "line": "push    ecx; Exterior fog day/night helper: computes adjusted sunset/night blend end from climate night plus transition padding.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x53FC9F",
-    "line": "jz      short loc_53FD0B",
+    "line": "jz      short loc_53FD0B; Fog time-boundary decode: adjusted sunset/night helper refreshes only when Flags0FC bit 0x2000 marks blend-end dirty.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x53FCE7",
-    "line": "fstp    st(1)",
+    "line": "fstp    st(1); Fog time-boundary decode: default adjusted sunset/night blend-end starts at day wrap value before clamp.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -157,25 +157,25 @@
   },
   {
     "ea": "0x53FCF0",
-    "line": "call    sub_499200",
+    "line": "call    sub_499200; Exterior fog day/night helper: climate night boundary byte (+0x53) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x53FCF5",
-    "line": "fadd    dword ptr ds:0B36668h",
+    "line": "fadd    dword ptr ds:0B36668h; Fog time-boundary decode: adjusted sunset/night uses cached night boundary + transition padding unk_B36668 when within day wrap.",
     "mnemonic": "fadd",
     "size": 6
   },
   {
     "ea": "0x53FCFB",
-    "line": "fstp    dword ptr ds:0B36678h",
+    "line": "fstp    dword ptr ds:0B36678h; Fog time-boundary decode: stores adjusted sunset/night blend-end in unk_B36678 for 0x5418F0/0x541DD0 interpolation.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x53FD01",
-    "line": "and     dword ptr [esi+0FCh], 0FFFFDFFFh",
+    "line": "and     dword ptr [esi+0FCh], 0FFFFDFFFh; Fog time-boundary decode: clears adjusted-sunset dirty bit after updating unk_B36678.",
     "mnemonic": "and",
     "size": 10
   },

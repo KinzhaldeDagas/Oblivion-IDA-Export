@@ -1,4 +1,4 @@
-0x7A5B10: fld1
+0x7A5B10: fld1; Oblivion SIdvLeafInfo constructor with the leafTextures member now typed as vector<SIdvLeafTexture>; total embedded record size remains 0x50.
 0x7A5B12: mov     eax, ecx
 0x7A5B14: fstp    dword ptr [eax+4]
 0x7A5B17: xor     ecx, ecx

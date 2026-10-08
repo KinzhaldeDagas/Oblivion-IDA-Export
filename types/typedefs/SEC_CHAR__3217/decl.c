@@ -1,1 +1,1 @@
-SEC_CHAR
+typedef CHAR SEC_CHAR;

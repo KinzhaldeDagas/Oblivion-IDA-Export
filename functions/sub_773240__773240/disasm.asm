@@ -3,7 +3,6 @@
 0x773244: mov     edx, 8
 0x773249: xor     ebx, ebx
 0x77324B: jmp     short loc_773250
-0x77324D: align 10h
 0x773250: mov     [eax-30h], bl
 0x773253: mov     [eax], bl
 0x773255: add     eax, 1

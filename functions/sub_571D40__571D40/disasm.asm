@@ -42,7 +42,7 @@
 0x571DB0: mov     [esi+0Ch], ebx
 0x571DB3: mov     ecx, [esi+10h]
 0x571DB6: push    ecx
-0x571DB7: call    FormHeapFree
+0x571DB7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x571DBC: fld     dword ptr ds:0A30634h
 0x571DC2: mov     [esi+10h], ebx
 0x571DC5: mov     [esi+16h], bx
@@ -58,3 +58,16 @@
 0x571DE3: pop     ebx
 0x571DE4: add     esp, 10h
 0x571DE7: retn
+0x9BDE20: mov     ecx, [ebp-10h]
+0x9BDE23: add     ecx, 0Ch; slot
+0x9BDE26: jmp     NiPointerSlot_Release
+0x9BDE2B: mov     ecx, [ebp-10h]
+0x9BDE2E: add     ecx, 10h; void *
+0x9BDE31: jmp     BSStringT_Clear
+0x9BDE36: mov     edx, [esp+arg_4]
+0x9BDE3A: lea     eax, [edx-10h]
+0x9BDE3D: mov     ecx, [edx-14h]
+0x9BDE40: xor     ecx, eax
+0x9BDE42: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDE47: mov     eax, offset stru_AE76A0
+0x9BDE4C: jmp     ___CxxFrameHandler3

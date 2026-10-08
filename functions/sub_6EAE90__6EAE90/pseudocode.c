@@ -1,18 +1,18 @@
-float *sub_6EAE90()
+NiObject *sub_6EAE90()
 {
-  float *v0; // eax
-  float *v1; // esi
+  NiObject *v0; // eax
+  NiObject *v1; // esi
 
-  v0 = (float *)FormHeapAlloc(0x44u);
-  v1 = v0;
-  if ( !v0 )
-    return 0;
-  sub_6CC4E0(v0);
-  *(_DWORD *)v1 = &NiBlendColorInterpolator::`vftable';
-  *((_DWORD *)v1 + 0xC) = dword_B24FD4;
-  *((_DWORD *)v1 + 0xD) = dword_B24FD8;
-  *((_DWORD *)v1 + 0xE) = dword_B24FDC;
-  *((_DWORD *)v1 + 0xF) = dword_B24FE0;
-  *((_BYTE *)v1 + 0x40) = 0;
-  return v1;
+  v0 = (NiObject *)FormHeapAlloc(0x44u); /*0x6eaeb4*/
+  v1 = v0; /*0x6eaeb9*/
+  if ( !v0 ) /*0x6eaecc*/
+    return 0; /*0x6eaf14*/
+  sub_6CC4E0(v0); /*0x6eaed0*/
+  v1->__vftable = (NiObjectVtbl *)&NiBlendColorInterpolator::`vftable'; /*0x6eaed5*/
+  v1[6].__vftable = (NiObjectVtbl *)dword_B24FD4; /*0x6eaee0*/
+  v1[6].members.m_uiRefCount = dword_B24FD8; /*0x6eaee9*/
+  v1[7].__vftable = (NiObjectVtbl *)dword_B24FDC; /*0x6eaef2*/
+  v1[7].members.m_uiRefCount = dword_B24FE0; /*0x6eaefa*/
+  LOBYTE(v1[8].__vftable) = 0; /*0x6eaefd*/
+  return v1; /*0x6eaf03*/
 }

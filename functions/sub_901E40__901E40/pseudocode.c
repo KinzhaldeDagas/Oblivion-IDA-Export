@@ -1,4 +1,4 @@
-int __cdecl sub_901E40(_DWORD *a1, _DWORD *a2, __m128 *a3, int a4, int a5)
+int __cdecl sub_901E40(_DWORD *a1, int *a2, __m128 *a3, int a4, int a5)
 {
   __m128 v5; // xmm0
   __m128 v6; // xmm1
@@ -17,26 +17,26 @@ int __cdecl sub_901E40(_DWORD *a1, _DWORD *a2, __m128 *a3, int a4, int a5)
   int v20; // [esp+58h] [ebp-40h]
   _OWORD v21[3]; // [esp+68h] [ebp-30h] BYREF
 
-  v5 = (__m128)xmmword_A965C0;
-  v6 = a3[1];
-  qmemcpy(v21, a3, sizeof(v21));
-  v12 = a3[1].m128_u64[0];
-  v7 = a3[1].m128_i32[2];
-  v14 = a3[1].m128_i32[3];
-  v15 = a4;
-  v21[1] = _mm_xor_ps(v6, v5);
-  v11[1] = 0x7F7FFFFF;
-  v11[0] = &off_A9B4E8;
-  v13 = v7;
-  if ( !a5 )
-    return sub_905370(a2, a1, (int)v21, (int)v11, 0);
-  v16[0] = &off_A9B4E8;
-  v17 = a3[1].m128_u64[0];
-  v8 = a3[1].m128_i32[2];
-  v9 = a3[1].m128_i32[3];
-  v20 = a5;
-  v18 = v8;
-  v19 = v9;
-  v16[1] = 0x7F7FFFFF;
-  return sub_905370(a2, a1, (int)v21, (int)v11, (int)v16);
+  v5 = (__m128)xmmword_A965C0; /*0x901e4f*/
+  v6 = a3[1]; /*0x901e56*/
+  qmemcpy(v21, a3, sizeof(v21)); /*0x901e6a*/
+  v12 = a3[1].m128_u64[0]; /*0x901e70*/
+  v7 = a3[1].m128_i32[2]; /*0x901e7b*/
+  v14 = a3[1].m128_i32[3]; /*0x901e81*/
+  v15 = a4; /*0x901e88*/
+  v21[1] = _mm_xor_ps(v6, v5); /*0x901e99*/
+  v11[1] = 0x7F7FFFFF; /*0x901ea1*/
+  v11[0] = &off_A9B4E8; /*0x901ea9*/
+  v13 = v7; /*0x901ead*/
+  if ( !a5 ) /*0x901eb1*/
+    return sub_905370(a2, a1, (int)v21, (int)v11, 0); /*0x901f17*/
+  v16[0] = &off_A9B4E8; /*0x901eb3*/
+  v17 = a3[1].m128_u64[0]; /*0x901eb9*/
+  v8 = a3[1].m128_i32[2]; /*0x901ec4*/
+  v9 = a3[1].m128_i32[3]; /*0x901ec7*/
+  v20 = a5; /*0x901eca*/
+  v18 = v8; /*0x901ece*/
+  v19 = v9; /*0x901ee2*/
+  v16[1] = 0x7F7FFFFF; /*0x901eed*/
+  return sub_905370(a2, a1, (int)v21, (int)v11, (int)v16); /*0x901eff*/
 }

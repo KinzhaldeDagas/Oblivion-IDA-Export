@@ -1,19 +1,22 @@
-float *__thiscall sub_7A3470(float *this, int a2)
+// Deep copy-assigns a compact 0x54 SIdvLeafTexture: byte blossom flag, color/variance, owned filename, origin, size, and sizeUsed.
+OB_SIdvLeafTexture_010201A0 *__thiscall OB_SIdvLeafTexture_CopyAssign_010201A0(
+        OB_SIdvLeafTexture_010201A0 *this,
+        const OB_SIdvLeafTexture_010201A0 *source)
 {
-  *(_BYTE *)this = *(_BYTE *)a2;
-  *(this + 1) = *(float *)(a2 + 4);
-  *(this + 2) = *(float *)(a2 + 8);
-  *(this + 3) = *(float *)(a2 + 0xC);
-  *(this + 4) = *(float *)(a2 + 0x10);
-  sub_414420((int)(this + 5), (_DWORD *)(a2 + 0x14), 0, 0xFFFFFFFF);
-  *(this + 0xC) = *(float *)(a2 + 0x30);
-  *(this + 0xD) = *(float *)(a2 + 0x34);
-  *(this + 0xE) = *(float *)(a2 + 0x38);
-  *(this + 0xF) = *(float *)(a2 + 0x3C);
-  *(this + 0x10) = *(float *)(a2 + 0x40);
-  *(this + 0x11) = *(float *)(a2 + 0x44);
-  *(this + 0x12) = *(float *)(a2 + 0x48);
-  *(this + 0x13) = *(float *)(a2 + 0x4C);
-  *(this + 0x14) = *(float *)(a2 + 0x50);
-  return this;
+  this->blossomFlag = source->blossomFlag; /*0x7a347a*/
+  this->baseColor[0] = source->baseColor[0]; /*0x7a347f*/
+  this->baseColor[1] = source->baseColor[1]; /*0x7a3485*/
+  this->baseColor[2] = source->baseColor[2]; /*0x7a3492*/
+  this->colorVariance = source->colorVariance; /*0x7a3499*/
+  OB_stString28_AssignSubstring_010201A0((int)&this->filename, &source->filename.allocatorState, 0, 0xFFFFFFFF); /*0x7a349f*/
+  this->textureOrigin[0] = source->textureOrigin[0];// SpeedTreeOBSE 2026-07-09: copies compact SIdvLeafTexture m_cOrigin from source +0x30; this is not the exported per-card texcoord table. /*0x7a34a7*/
+  this->textureOrigin[1] = source->textureOrigin[1]; /*0x7a34ad*/
+  this->textureOrigin[2] = source->textureOrigin[2]; /*0x7a34b3*/
+  this->textureSize[0] = source->textureSize[0];// SpeedTreeOBSE 2026-07-09: copies compact SIdvLeafTexture m_cSize from source +0x3C. /*0x7a34b9*/
+  this->textureSize[1] = source->textureSize[1]; /*0x7a34bf*/
+  this->textureSize[2] = source->textureSize[2]; /*0x7a34c8*/
+  this->sizeUsed[0] = source->sizeUsed[0];      // SpeedTreeOBSE 2026-07-09: copies compact SIdvLeafTexture m_cSizeUsed from source +0x48; world-space leaf sizing, not a UV texture extent. /*0x7a34cd*/
+  this->sizeUsed[1] = source->sizeUsed[1]; /*0x7a34d3*/
+  this->sizeUsed[2] = source->sizeUsed[2]; /*0x7a34da*/
+  return this; /*0x7a34d9*/
 }

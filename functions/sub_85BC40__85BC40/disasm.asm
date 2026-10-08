@@ -1,11 +1,11 @@
-0x85BC40: mov     eax, [esp+arg_4]
+0x85BC40: mov     eax, [esp+cloneProcess]; Pass205: WaterShaderProperty copy/clone helper copies full water pass-data block +0x6C..+0x84.
 0x85BC44: push    esi
 0x85BC45: push    edi
-0x85BC46: mov     edi, [esp+8+arg_0]
-0x85BC4A: push    eax
-0x85BC4B: push    edi
+0x85BC46: mov     edi, [esp+8+clone]
+0x85BC4A: push    eax; cloneProcess
+0x85BC4B: push    edi; clone
 0x85BC4C: mov     esi, ecx
-0x85BC4E: call    sub_7E2490
+0x85BC4E: call    BSShaderProperty_CopyCloneMembers; [Verified] Shared BSShaderProperty clone-field copier: delegates to the common property copier, copies source +0x1C and +0x20 into the clone, and clears clone +0x24. Directly used by BSShaderProperty_CreateClone and the inherited path used by GeometryDecalShaderProperty. It does not touch BSShaderLightingProperty's +0x80 DECAL_DATA* list.
 0x85BC53: mov     ecx, [esi+6Ch]
 0x85BC56: mov     [edi+6Ch], ecx
 0x85BC59: movzx   edx, byte ptr [esi+70h]

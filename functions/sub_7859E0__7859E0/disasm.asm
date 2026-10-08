@@ -1,4 +1,4 @@
-0x7859E0: push    0FFFFFFFFh
+0x7859E0: push    0FFFFFFFFh; Links a newly allocated spline-cache node beneath the selected parent, increments map size, performs standard red-black insertion recoloring/rotations, forces the root black, and returns {map,node}.
 0x7859E2: push    offset SEH_794340
 0x7859E7: mov     eax, large fs:0
 0x7859ED: push    eax
@@ -15,14 +15,14 @@
 0x785A07: mov     edi, ecx
 0x785A09: cmp     dword ptr [edi+8], 7FFFFFEh
 0x785A10: jb      short loc_785A5E
-0x785A12: push    13h; MaxCount
+0x785A12: push    13h; count
 0x785A14: xor     esi, esi
 0x785A16: push    offset aMapSetTTooLong; "map/set<T> too long"
-0x785A1B: lea     ecx, [esp+6Ch+var_50]
-0x785A1F: mov     [esp+6Ch+var_38], 0Fh
-0x785A27: mov     [esp+6Ch+var_3C], esi
-0x785A2B: mov     [esp+6Ch+var_4C], 0
-0x785A30: call    sub_414500
+0x785A1B: lea     ecx, [esp+6Ch+var_50]; this
+0x785A1F: mov     [esp+6Ch+var_50.capacity], 0Fh
+0x785A27: mov     [esp+6Ch+var_50.size], esi
+0x785A2B: mov     byte ptr [esp+6Ch+var_50.storage], 0
+0x785A30: call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.
 0x785A35: lea     eax, [esp+64h+var_50]
 0x785A39: push    eax
 0x785A3A: lea     ecx, [esp+68h+var_34]
@@ -33,15 +33,15 @@
 0x785A50: push    ecx
 0x785A51: mov     [esp+6Ch+var_34], offset ??_7length_error@std@@6B@; const std::length_error::`vftable'
 0x785A59: call    ThrowException??
-0x785A5E: mov     edx, [esp+64h+arg_C]
+0x785A5E: mov     edx, [esp+64h+value]
 0x785A62: mov     eax, [edi+4]
-0x785A65: mov     esi, [esp+64h+arg_8]
-0x785A69: push    0
-0x785A6B: push    edx
-0x785A6C: push    eax
-0x785A6D: push    esi
-0x785A6E: push    eax
-0x785A6F: call    sub_785360
+0x785A65: mov     esi, [esp+64h+parent]
+0x785A69: push    0; color
+0x785A6B: push    edx; value
+0x785A6C: push    eax; right
+0x785A6D: push    esi; parent
+0x785A6E: push    eax; left
+0x785A6F: call    OB_stBezierSplineCacheMap_AllocateNode_010201A0; Allocates a 0x30-byte spline-cache node from FormHeap and delegates field/key/value initialization to OB_stBezierSplineCacheNode_Init_010201A0.
 0x785A74: mov     ebp, eax
 0x785A76: mov     eax, [edi+4]
 0x785A79: mov     ebx, 1
@@ -54,7 +54,7 @@
 0x785A8D: mov     ecx, [edi+4]
 0x785A90: mov     [ecx+8], ebp
 0x785A93: jmp     short loc_785AB7
-0x785A95: cmp     byte ptr [esp+64h+arg_4], 0
+0x785A95: cmp     [esp+64h+insertLeft], 0
 0x785A9A: jz      short loc_785AA9
 0x785A9C: mov     [esi], ebp
 0x785A9E: mov     eax, [edi+4]
@@ -91,9 +91,9 @@
 0x785AFB: cmp     esi, [ecx+8]
 0x785AFE: jnz     short loc_785B0A
 0x785B00: mov     esi, ecx
-0x785B02: push    esi
-0x785B03: mov     ecx, edi
-0x785B05: call    sub_784740
+0x785B02: push    esi; pivot
+0x785B03: mov     ecx, edi; this
+0x785B05: call    OB_stBezierSplineCacheMap_RotateLeft_010201A0; Oblivion-authoritative red-black-tree left rotation around pivot. Reparents pivot->right, updates the sentinel head's root link when pivot was root, and preserves child parent links.
 0x785B0A: mov     eax, [esi+4]
 0x785B0D: mov     [eax+2Ch], bl
 0x785B10: mov     ecx, [esi+4]
@@ -101,9 +101,9 @@
 0x785B16: mov     byte ptr [edx+2Ch], 0
 0x785B1A: mov     eax, [esi+4]
 0x785B1D: mov     ecx, [eax+4]
-0x785B20: push    ecx
-0x785B21: mov     ecx, edi
-0x785B23: call    sub_784790
+0x785B20: push    ecx; pivot
+0x785B21: mov     ecx, edi; this
+0x785B23: call    OB_stBezierSplineCacheMap_RotateRight_010201A0; Oblivion-authoritative red-black-tree right rotation around pivot. Mirror of 0x784740; updates the sentinel head root and all affected parent/child links.
 0x785B28: jmp     short loc_785BA5
 0x785B2A: mov     edx, [edx]
 0x785B2C: cmp     byte ptr [edx+2Ch], 0
@@ -119,9 +119,9 @@
 0x785B48: cmp     esi, [ecx]
 0x785B4A: jnz     short loc_785B56
 0x785B4C: mov     esi, ecx
-0x785B4E: push    esi
-0x785B4F: mov     ecx, edi
-0x785B51: call    sub_784790
+0x785B4E: push    esi; pivot
+0x785B4F: mov     ecx, edi; this
+0x785B51: call    OB_stBezierSplineCacheMap_RotateRight_010201A0; Oblivion-authoritative red-black-tree right rotation around pivot. Mirror of 0x784740; updates the sentinel head root and all affected parent/child links.
 0x785B56: mov     eax, [esi+4]
 0x785B59: mov     [eax+2Ch], bl
 0x785B5C: mov     ecx, [esi+4]
@@ -158,7 +158,7 @@
 0x785BB5: mov     edx, [edi+4]
 0x785BB8: mov     eax, [edx+4]
 0x785BBB: mov     [eax+2Ch], bl
-0x785BBE: mov     eax, [esp+64h+arg_0]
+0x785BBE: mov     eax, [esp+64h+result]
 0x785BC2: mov     [eax+4], ebp
 0x785BC5: mov     [eax], edi
 0x785BC7: mov     ecx, [esp+64h+var_C]
@@ -170,3 +170,12 @@
 0x785BD6: pop     ebx
 0x785BD7: add     esp, 50h
 0x785BDA: retn    10h
+0x9CBD00: lea     ecx, [ebp-50h]; this
+0x9CBD03: jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.
+0x9CBD08: mov     edx, dword ptr [esp+insertLeft]
+0x9CBD0C: lea     eax, [edx-54h]
+0x9CBD0F: mov     ecx, [edx-58h]
+0x9CBD12: xor     ecx, eax
+0x9CBD14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CBD19: mov     eax, offset stru_AF4C48
+0x9CBD1E: jmp     ___CxxFrameHandler3

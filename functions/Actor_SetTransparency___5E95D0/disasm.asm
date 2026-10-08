@@ -39,15 +39,15 @@
 0x5E962E: mov     edi, dword ptr [esp+10h+a2]
 0x5E9632: mov     edx, [eax+154h]
 0x5E9638: push    ecx
-0x5E9639: fstp    [esp+14h+a5]; a5
-0x5E963C: push    0; a4
+0x5E9639: fstp    [esp+14h+a5]; period
+0x5E963C: push    0; useRefractF
 0x5E963E: push    ecx
-0x5E963F: fstp    [esp+1Ch+var_1C]; a3
-0x5E9642: push    edi; a2
+0x5E963F: fstp    [esp+1Ch+power]; power
+0x5E9642: push    edi; enabled
 0x5E9643: mov     ecx, esi
 0x5E9645: call    edx
-0x5E9647: push    eax; a1
-0x5E9648: call    sub_7D92C0
+0x5E9647: push    eax; root
+0x5E9648: call    NiAVObject_SetShaderRefractionStateRecursive; Recursively set/clear native refraction state on shader-property subtypes 5..10. useRefractF selects passInfo 0x10000 instead of 0x8000; stores power and optional period and invalidates pass caches.
 0x5E964D: lea     ecx, [esi+44h]; this
 0x5E9650: add     esp, 14h
 0x5E9653: test    ecx, ecx

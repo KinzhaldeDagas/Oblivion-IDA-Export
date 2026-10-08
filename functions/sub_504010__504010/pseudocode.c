@@ -10,6 +10,6 @@ bool __cdecl sub_504010(
 {
   UInt16 v9[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0;
-  return Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9);
+  *(_DWORD *)v9 = 0; /*0x504038*/
+  return Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9); /*0x50404d*/
 }

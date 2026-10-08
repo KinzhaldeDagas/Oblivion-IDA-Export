@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4AF853",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x4AF867",
-    "line": "call    TESLeveledList_AddForm",
+    "line": "call    TESLeveledList_AddForm; CustomAnimSupport decode: TESLeveledList support evidence; leveled lists are not deterministic form-list animation targets and are not expanded for mappings.",
     "mnemonic": "call",
     "size": 5
   },

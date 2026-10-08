@@ -1,6 +1,6 @@
-0x764C70: sub     esp, 28h
+0x764C70: sub     esp, 28h; Clear an optional normalized rectangle of the current target. Save the incoming D3D viewport, install a full-current-target viewport, issue a capability-filtered color/depth/stencil Clear, then restore the saved viewport.
 0x764C73: push    ebx
-0x764C74: mov     ebx, [esp+2Ch+arg_4]
+0x764C74: mov     ebx, [esp+2Ch+clearFlags]
 0x764C78: test    ebx, ebx
 0x764C7A: push    esi
 0x764C7B: mov     esi, ecx
@@ -41,7 +41,7 @@
 0x764CEE: fld     st
 0x764CF0: fmulp   st(2), st
 0x764CF2: fxch    st(1)
-0x764CF4: call    Double_To_SInt32
+0x764CF4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x764CF9: fld     dword ptr [edi+8]
 0x764CFC: fld1
 0x764CFE: mov     [esp+30h+var_20], eax
@@ -51,30 +51,30 @@
 0x764D0A: fld     st
 0x764D0C: fmulp   st(3), st
 0x764D0E: fxch    st(2)
-0x764D10: call    Double_To_SInt32
+0x764D10: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x764D15: fld     dword ptr [edi+4]
 0x764D18: fmulp   st(3), st
 0x764D1A: mov     [esp+30h+var_1C], eax
 0x764D1E: fxch    st(2)
-0x764D20: call    Double_To_SInt32
+0x764D20: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x764D25: fld     dword ptr [edi+0Ch]
 0x764D28: fsubp   st(2), st
 0x764D2A: mov     [esp+30h+var_18], eax
 0x764D2E: fmulp   st(1), st
-0x764D30: call    Double_To_SInt32
+0x764D30: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x764D35: jmp     short loc_764D43
-0x764D37: mov     [esp+30h+var_20], ecx
+0x764D37: mov     [esp+30h+var_20], ecx; With no optional normalized rectangle, build one D3DRECT covering the complete current target.
 0x764D3B: mov     [esp+30h+var_1C], ecx
 0x764D3F: mov     [esp+30h+var_18], ebp
 0x764D43: mov     ecx, [esi+87Ch]
 0x764D49: mov     [esp+30h+var_14], eax
 0x764D4D: mov     eax, [ecx]
-0x764D4F: mov     edx, [eax+84h]
+0x764D4F: mov     edx, [eax+84h];
 0x764D55: mov     edi, ebx
 0x764D57: and     edi, 1
 0x764D5A: call    edx
 0x764D5C: push    eax
-0x764D5D: push    offset unk_B4263C
+0x764D5D: push    offset stru_B4263C
 0x764D62: call    sub_497DD0
 0x764D67: mov     ebp, eax
 0x764D69: add     esp, 8
@@ -82,8 +82,8 @@
 0x764D6E: jz      short loc_764DA6
 0x764D70: test    bl, 4
 0x764D73: jz      short loc_764D87
-0x764D75: mov     ecx, ebp
-0x764D77: call    sub_76D4F0
+0x764D75: mov     ecx, ebp; this
+0x764D77: call    NiDX92DBufferData_HasDepthComponent; Return whether this depth/stencil buffer's surface format advertises a depth component; used to gate D3DCLEAR_ZBUFFER.
 0x764D7C: test    al, al
 0x764D7E: jz      short loc_764D87
 0x764D80: mov     eax, 2
@@ -92,8 +92,8 @@
 0x764D89: or      edi, eax
 0x764D8B: test    bl, 2
 0x764D8E: jz      short loc_764DA2
-0x764D90: mov     ecx, ebp
-0x764D92: call    sub_76D510
+0x764D90: mov     ecx, ebp; this
+0x764D92: call    NiDX92DBufferData_HasStencilComponent; Return whether this depth/stencil buffer's surface format advertises a stencil component; used to gate D3DCLEAR_STENCIL.
 0x764D97: test    al, al
 0x764D99: jz      short loc_764DA2
 0x764D9B: mov     eax, 4
@@ -106,7 +106,7 @@
 0x764DB2: push    edx
 0x764DB3: push    eax
 0x764DB4: mov     eax, [ecx+0C0h]
-0x764DBA: call    eax
+0x764DBA: call    eax; Save the incoming D3D viewport before the clear-only full-target viewport override.
 0x764DBC: mov     ecx, [esi+87Ch]
 0x764DC2: mov     edx, [ecx]
 0x764DC4: mov     eax, [edx+4Ch]
@@ -125,7 +125,7 @@
 0x764DF4: push    edx
 0x764DF5: push    eax
 0x764DF6: mov     eax, [ecx+0BCh]
-0x764DFC: call    eax
+0x764DFC: call    eax; Install the renderer's full-current-target viewport for the Clear call.
 0x764DFE: fld     dword ptr [esi+5D8h]
 0x764E04: mov     eax, [esi+280h]
 0x764E0A: mov     edx, [esi+5DCh]
@@ -141,14 +141,14 @@
 0x764E24: push    1
 0x764E26: push    eax
 0x764E27: mov     eax, [ecx+0ACh]
-0x764E2D: call    eax
+0x764E2D: call    eax; Issue IDirect3DDevice9::Clear for one target-sized rectangle; requested Z/stencil bits are included only when the attached surface format supports them.
 0x764E2F: mov     esi, [esi+280h]
 0x764E35: mov     ecx, [esi]
 0x764E37: mov     eax, [ecx+0BCh]
 0x764E3D: lea     edx, [esp+38h+var_18]
 0x764E41: push    edx
 0x764E42: push    esi
-0x764E43: call    eax
+0x764E43: call    eax; Restore the exact D3D viewport saved before Clear.
 0x764E45: pop     edi
 0x764E46: pop     ebp
 0x764E47: pop     esi

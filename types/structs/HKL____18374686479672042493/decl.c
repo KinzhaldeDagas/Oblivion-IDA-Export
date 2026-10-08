@@ -1,1 +1,4 @@
-HKL__
+struct HKL__
+{
+int unused;
+};

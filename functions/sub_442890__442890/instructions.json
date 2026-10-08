@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x442890",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "push",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4428F0",
-    "line": "mov     ebx, [esp+28h+arg_0]",
+    "line": "mov     ebx, [esp+28h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x442922",
-    "line": "cmp     [esp+28h+arg_C], 0",
+    "line": "cmp     [esp+28h+searchArchives], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -391,19 +391,19 @@
   },
   {
     "ea": "0x442948",
-    "line": "cmp     [esp+28h+arg_8], 0",
+    "line": "cmp     [esp+28h+allowMissing], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x44294D",
-    "line": "jz      short loc_44295A",
+    "line": "jz      short loc_44295A; SpeedTreeOBSE 2026-07-14: FileFinder lookup is archive/resource aware. Direct SpeedTree composite candidates must reach this path without a loose-file GetFileAttributes gate.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x44294F",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x44297A",
-    "line": "push    offset dword_B256D0; int",
+    "line": "push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x442980",
-    "line": "call    NiSourceTexture__LoadTextureByFilename",
+    "line": "call    NiSourceTexture__LoadTextureByFilename; Verified (Oblivion): source-texture loader returns a reference-counted NiSourceTexture* through its output parameter; that pointer is passed to TESEffectShader_CreateVisualProperty and retained by ParticleShaderProperty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x4429BA",
-    "line": "cmp     [esp+28h+arg_8], 0",
+    "line": "cmp     [esp+28h+allowMissing], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x4429D1",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -826,5 +826,101 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AD120",
+    "line": "lea     ecx, [ebp-14h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD123",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD128",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD12B",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD12E",
+    "line": "jz      locret_9AD140",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9AD134",
+    "line": "and     dword ptr [ebp-10h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9AD138",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD13B",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD140",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AD141",
+    "line": "mov     edx, [esp+ArgList]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AD145",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD148",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD14B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AD14D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD152",
+    "line": "mov     eax, offset stru_AD9D24",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD157",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60EEE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; RadiantAI conversation-package boundary. Requires both actors at process level 0, builds the Oblivion Conversation first, then creates a shared dynamic DialoguePackage. Native callers must supply nonnull actors and successful allocations: the target null check occurs after dereference, and allocation failures are not safely handled.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x60EF09",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x60EF16",
-    "line": "mov     ebp, [esp+28h+arg_0]",
+    "line": "mov     ebp, [esp+28h+target]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x60EF1C",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; The target is dereferenced by Actor::GetProcessLevel before the later null check at 0x60EF3B. A null target is not safely rejected; scheduler callers always provide a candidate Actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x60EF37",
-    "line": "mov     [esp+28h+arg_0], edi",
+    "line": "mov     [esp+28h+target], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60EF3B",
-    "line": "jz      loc_60F237",
+    "line": "jz      loc_60F237; Late null-target test. It cannot protect the preceding GetProcessLevel(target) dereference and documents only the native nonnull invariant.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x60EF74",
-    "line": "jnz     loc_60F237",
+    "line": "jnz     loc_60F237; StartConversationPackage itself accepts target SitSleep states None (0), Sitting (4), or Sleeping (9), rejecting transitional SittingIn/Out and SleepingIn/Out states. The ambient schedulers prefilter Sleeping, so random NPC conversations only reach this call with None/Sitting targets.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x60EF80",
-    "line": "jz      short loc_60EFB7",
+    "line": "jz      short loc_60EFB7; When target is the player, no NPC Conversation chain is allocated and the FirstItem gate is skipped. Both ambient random-conversation scans reject the player earlier, so this branch belongs to direct/scripted dialogue initiation.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x60EF84",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocate the 0x10-byte Conversation container for non-player dialogue. Allocation failure leaves targeta null; the later Conversation::FirstItem call dereferences it, so this is an unchecked OOM invariant rather than a clean false return.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x60EF8C",
-    "line": "mov     [esp+28h+arg_0], eax",
+    "line": "mov     [esp+28h+target], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -343,43 +343,43 @@
   },
   {
     "ea": "0x60EF98",
-    "line": "mov     ecx, [esp+28h+arg_8]",
+    "line": "mov     ecx, [esp+28h+startingTopic]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60EF9C",
-    "line": "push    edi",
+    "line": "push    edi; unused",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60EF9D",
-    "line": "push    ecx",
+    "line": "push    ecx; startingTopic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60EF9E",
-    "line": "push    ebp",
+    "line": "push    ebp; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60EF9F",
-    "line": "push    esi",
+    "line": "push    esi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60EFA0",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60EFA2",
-    "line": "call    sub_6B7420",
+    "line": "call    Conversation__Conversation",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,19 +403,19 @@
   },
   {
     "ea": "0x60EFB3",
-    "line": "mov     [esp+28h+arg_0], eax",
+    "line": "mov     [esp+28h+target], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60EFB7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60EFB9",
-    "line": "call    sub_5EF930",
+    "line": "call    Actor__StopDialoguePlayback; Side effects occur before validating that the generated NPC Conversation has an item: clears initiator interaction/current package state and removes invisibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,25 +523,25 @@
   },
   {
     "ea": "0x60EFEB",
-    "line": "push    edi",
+    "line": "push    edi; casterFilterOrNull",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60EFEC",
-    "line": "push    49564E49h",
+    "line": "push    49564E49h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x60EFF1",
-    "line": "lea     ecx, [esi+68h]",
+    "line": "lea     ecx, [esi+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x60EFF4",
-    "line": "call    sub_6A24B0",
+    "line": "call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,13 +559,13 @@
   },
   {
     "ea": "0x60F001",
-    "line": "mov     ecx, [esp+28h+arg_0]",
+    "line": "mov     ecx, [esp+28h+target]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60F005",
-    "line": "call    sub_6B74B0",
+    "line": "call    Conversation__FirstItem; Empty but successfully allocated Conversation: return false after initiator playback/package/invisibility side effects and leak the container. A null allocation would crash inside FirstItem instead.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x60F091",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocate the shared 0x64-byte DialoguePackage after synchronizing both participants' process state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,37 +895,37 @@
   },
   {
     "ea": "0x60F0A9",
-    "line": "mov     ecx, [esp+28h+arg_0]",
+    "line": "mov     ecx, [esp+28h+target]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60F0AD",
-    "line": "push    ebp",
+    "line": "push    ebp; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60F0AE",
-    "line": "push    esi",
+    "line": "push    esi; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60F0AF",
-    "line": "push    ecx",
+    "line": "push    ecx; conversation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60F0B0",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60F0B2",
-    "line": "call    sub_625D80",
+    "line": "call    DialoguePackage__DialoguePackage; Constructs the dynamic 0x64-byte DialoguePackage and takes ownership of the prepared Conversation. Runtime fields at +0x50/+0x54/+0x58 are the conversation/item/response cursors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x60F0BB",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; Unchecked DialoguePackage allocation failure produces null v14; the following startingTopic write dereferences it. Normal runtime assumes FormHeapAlloc succeeds.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x60F0BF",
-    "line": "mov     edx, [esp+28h+arg_8]",
+    "line": "mov     edx, [esp+28h+startingTopic]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x60F122",
-    "line": "call    TESPackage_SetType?",
+    "line": "call    TESPackage_SetType?; Sets the dynamic ambient conversation package to kPackageType_Dialogue (18 / 0x12), matching the authoritative TESPackageNames table.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x60F135",
-    "line": "mov     [esp+28h+arg_8], eax",
+    "line": "mov     [esp+28h+startingTopic], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x60F16E",
-    "line": "call    TESPackage_SetLocation",
+    "line": "call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x60F17F",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x60F191",
-    "line": "mov     [esp+28h+arg_8], eax",
+    "line": "mov     [esp+28h+startingTopic], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x60F1A3",
-    "line": "call    TESPackage_TargetData_constr",
+    "line": "call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x60F1B9",
-    "line": "call    TESPackage_SetTarget",
+    "line": "call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,13 +1429,13 @@
   },
   {
     "ea": "0x60F1C2",
-    "line": "mov     ecx, ebx; void *",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60F1C4",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x60F1CA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x60F1DE",
-    "line": "call    TESPackage_TargetData_SetType",
+    "line": "call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1495,7 +1495,7 @@
   },
   {
     "ea": "0x60F1E7",
-    "line": "call    TeSPackage_TargetData_SetTargetREFR",
+    "line": "call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,13 +1615,13 @@
   },
   {
     "ea": "0x60F220",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; Installs the newly allocated dynamic DialoguePackage as the initiator process's editorPackage (setCurrent=false, markDynamic=true). StartConversationPackage cleared currentPackage earlier; it does not directly SetCurrentPackage to the dialogue package here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60F225",
-    "line": "cmp     byte ptr [esp+28h+arg_4], 0",
+    "line": "cmp     [esp+28h+incrementProcedure], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1714,5 +1714,167 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C30C0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30C3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30C4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30C9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30CA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30CB",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30CE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30CF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30D4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30D5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30D6",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30D9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30DA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30DF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30E0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30E1",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30E4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30E5",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30EA",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30EB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C30EC",
+    "line": "mov     edx, dword ptr [esp+incrementProcedure]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C30F0",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30F3",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C30F6",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C30F8",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C30FD",
+    "line": "mov     eax, offset stru_AEBD8C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3102",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,76 +1,126 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IBasicAudioVtbl",
+  "definition": "struct IBasicAudioVtbl\n{\nHRESULT (__stdcall *QueryInterface)(IBasicAudio *This, const IID *const riid, LPVOID *ppvObj);\nULONG (__stdcall *AddRef)(IBasicAudio *This);\nULONG (__stdcall *Release)(IBasicAudio *This);\nHRESULT (__stdcall *GetTypeInfoCount)(IBasicAudio *This, UINT *pctinfo);\nHRESULT (__stdcall *GetTypeInfo)(IBasicAudio *This, UINT itinfo, LCID lcid, ITypeInfo **pptinfo);\nHRESULT (__stdcall *GetIDsOfNames)(IBasicAudio *This, const IID *const riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid);\nHRESULT (__stdcall *Invoke)(IBasicAudio *This, DISPID dispidMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr);\nHRESULT (__stdcall *put_Volume)(IBasicAudio *This, int lVolume);\nHRESULT (__stdcall *get_Volume)(IBasicAudio *This, int *plVolume);\nHRESULT (__stdcall *put_Balance)(IBasicAudio *This, int lBalance);\nHRESULT (__stdcall *get_Balance)(IBasicAudio *This, int *plBalance);\n}\n",
   "id": 18374686479671982659,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IBasicAudio *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IBasicAudio *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTypeInfoCount",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, UINT *pctinfo)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetTypeInfo",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, UINT itinfo, LCID lcid, ITypeInfo **pptinfo)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetIDsOfNames",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, const IID *const riid, OLECHAR **rgszNames, UINT cNames, LCID lcid, DISPID *rgdispid)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Invoke",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, DISPID dispidMember, const IID *const riid, LCID lcid, WORD wFlags, DISPPARAMS *pdispparams, VARIANT *pvarResult, EXCEPINFO *pexcepinfo, UINT *puArgErr)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "put_Volume",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, int lVolume)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_Volume",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, int *plVolume)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "put_Balance",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, int lBalance)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_Balance",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IBasicAudio *This, int *plBalance)"
     }
   ],
   "name": "IBasicAudioVtbl",
+  "ordinal": 9118,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 44
 }

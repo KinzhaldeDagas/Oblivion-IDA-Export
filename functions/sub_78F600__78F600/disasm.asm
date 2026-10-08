@@ -1,4 +1,4 @@
-0x78F600: fld     [esp+arg_4]
+0x78F600: fld     [esp+arg_4]; SpeedTreeRT 4.1 source match: leaf blossom/probability helper used by CBranch::MakeLeaf. Applies blossom distance/probability logic with parent fallback.
 0x78F604: push    ebx
 0x78F605: push    esi
 0x78F606: fstp    [esp+8+arg_4]
@@ -30,11 +30,11 @@
 0x78F64F: jp      short loc_78F67C
 0x78F651: fld1
 0x78F653: sub     esp, 8
-0x78F656: fstp    [esp+10h+var_C]; float
-0x78F65A: mov     ecx, offset unk_B429C9
+0x78F656: fstp    [esp+10h+maxValue]; maxValue
+0x78F65A: mov     ecx, offset stru_B429C9; this
 0x78F65F: fldz
-0x78F661: fstp    [esp+10h+var_10]; float
-0x78F664: call    sub_78EA00
+0x78F661: fstp    [esp+10h+minValue]; minValue
+0x78F664: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x78F669: mov     eax, ds:0B429B8h
 0x78F66E: fld     dword ptr [eax+28h]
 0x78F671: fcompp

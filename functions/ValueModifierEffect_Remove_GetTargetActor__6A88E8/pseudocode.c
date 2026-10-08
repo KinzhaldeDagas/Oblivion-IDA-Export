@@ -2,8 +2,8 @@ int __usercall ValueModifierEffect_Remove_::GetTargetActor@<eax>(int a1@<esi>, i
 {
   MagicTarget *v3; // ecx
 
-  v3 = *(MagicTarget **)(a1 + 0x20);
-  if ( v3 )
-    MagicTarget_GetParentActor(v3);
+  v3 = *(MagicTarget **)(a1 + 0x20); /*0x6a88e8*/
+  if ( v3 ) /*0x6a88ee*/
+    MagicTarget_GetParentActor(v3); /*0x6a88f0*/
   return ValueModifierEffect_Remove_::TestMagnitude_(a1, a2, a3);
 }

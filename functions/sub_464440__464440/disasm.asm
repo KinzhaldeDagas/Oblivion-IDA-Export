@@ -31,22 +31,22 @@
 0x4644A6: call    eax
 0x4644A8: mov     ecx, ebp
 0x4644AA: call    sub_462080
-0x4644AF: mov     ecx, ebp
-0x4644B1: call    SaveLoad_ValidateCreatedObj??
+0x4644AF: mov     ecx, ebp; self
+0x4644B1: call    TESSaveLoadGame_ProcessDeferredDeletions
 0x4644B6: push    1; arg1
 0x4644B8: push    0; canCreate
 0x4644BA: call    InterfaceManager_GetSingleton
 0x4644BF: add     esp, 8
 0x4644C2: mov     ecx, eax
 0x4644C4: call    sub_57ECB0
-0x4644C9: call    sub_67F180
-0x4644CE: call    sub_67FCF0
+0x4644C9: call    TravelPath_ClearAllDoorLinkMaps; Verified LowPath map lifecycle during save/load reference reconciliation: first TravelPath_ClearAllDoorLinkMaps releases old AStarWorldNodes, state slots, lists, nested maps, and the outer map.
+0x4644CE: call    TravelPath_EnsureDoorLinkMapInitialized; Verified immediately after clearing old travel-link indices, TravelPath_EnsureDoorLinkMapInitialized recreates the outer space-link map for references being reconciled.
 0x4644D3: mov     ecx, ds:0B333A0h
 0x4644D9: call    sub_43F6E0
 0x4644DE: mov     ecx, ds:0B333A0h
 0x4644E4: call    sub_43F560
-0x4644E9: mov     ecx, ds:0B33A98h
-0x4644EF: call    TESDataHandler_Clear
+0x4644E9: mov     ecx, ds:0B33A98h; self
+0x4644EF: call    TESDataHandler_Clear; Verified reader of activeFileState.retainActiveFile (+0xCD1): when zero, cleanup destroys and clears the stored active TESFile; when set, that file is retained. The only direct writer located so far is constructor initialization to zero; runtime setter remains Unknown.
 0x4644F4: call    EffectSettingCollection_Reset
 0x4644F9: call    sub_5B7150
 0x4644FE: call    sub_5A6A80
@@ -59,7 +59,7 @@
 0x46451D: push    804h; Size
 0x464522: call    FormHeapAlloc
 0x464527: add     esp, 4
-0x46452A: mov     [esp+64h+arg_0], eax
+0x46452A: mov     dword ptr [esp+64h+initializationMode], eax
 0x46452E: test    eax, eax
 0x464530: mov     [esp+64h+var_4], 0
 0x464538: jz      short loc_464543
@@ -81,12 +81,12 @@
 0x464570: jnz     short loc_46457E
 0x464572: mov     dl, [ebp+18h]
 0x464575: and     dl, 1
-0x464578: mov     byte ptr [esp+64h+arg_0], dl
+0x464578: mov     [esp+64h+initializationMode], dl
 0x46457C: jmp     short loc_46458A
 0x46457E: mov     eax, [ebp+18h]
 0x464581: shr     eax, 12h
 0x464584: and     al, 1
-0x464586: mov     byte ptr [esp+64h+arg_0], al
+0x464586: mov     [esp+64h+initializationMode], al
 0x46458A: mov     ecx, ds:0B33398h
 0x464590: mov     esi, [ecx+10h]
 0x464593: call    edi ; GetCurrentThreadId
@@ -98,8 +98,8 @@
 0x4645A6: mov     ecx, ds:0B33A98h
 0x4645AC: push    0
 0x4645AE: push    0
-0x4645B0: call    TESDataHandler_LoadFiles?
-0x4645B5: mov     edx, [esp+64h+arg_0]
+0x4645B0: call    TESDataHandler_LoadFiles?; Verified game/world initialization path: TESSaveLoadGame_ReconcileExistingChanges calls TESDataHandler_LoadFiles here, then reattaches the player to the saved cell and runs worldspace/LOD initialization. TESDataHandler_LoadFiles rebuilds each WorldSpace's derived SubSpace index from persistentCell, confirming a full load reconstructs +0x60. This does not prove that the CreateDuplicateForm path triggers a reload.
+0x4645B5: mov     edx, dword ptr [esp+64h+initializationMode]
 0x4645B9: push    edx
 0x4645BA: mov     ecx, ebp
 0x4645BC: call    sub_45A530
@@ -107,7 +107,7 @@
 0x4645C3: call    sub_5AD750
 0x4645C8: mov     ecx, ds:0B333C4h; this
 0x4645CE: add     esp, 4
-0x4645D1: call    TESObjectREFR_GetParentCell
+0x4645D1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4645D6: mov     ecx, ds:0B333C4h; this
 0x4645DC: push    0; a2
 0x4645DE: mov     esi, eax
@@ -133,12 +133,12 @@
 0x464634: jnz     short loc_46463F
 0x464636: cmp     dword ptr [esi], 0
 0x464639: jz      loc_4648F0
-0x46463F: mov     ecx, [esi]
-0x464641: call    TESWorldSpace_GetParentWorldpsace
+0x46463F: mov     ecx, [esi]; this
+0x464641: call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.
 0x464646: test    eax, eax
 0x464648: jnz     short loc_46467D
-0x46464A: mov     ecx, [esi]
-0x46464C: call    sub_4EF7E0
+0x46464A: mov     ecx, [esi]; worldspace
+0x46464C: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
 0x464651: test    eax, eax
 0x464653: jz      short loc_46467D
 0x464655: mov     ecx, [esi]
@@ -148,11 +148,11 @@
 0x464661: push    eax; ArgList
 0x464662: push    offset aInitializing_0; "Initializing LOD land for worldspace '%"...
 0x464667: call    sub_40FEC0
-0x46466C: mov     ecx, [esi]
+0x46466C: mov     ecx, [esi]; worldspace
 0x46466E: add     esp, 8
-0x464671: call    sub_4EF7E0
-0x464676: mov     ecx, eax
-0x464678: call    sub_4EBC00
+0x464671: call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.
+0x464676: mov     ecx, eax; this
+0x464678: call    TESWorldSpaceTerrainLODQuadMap_Initialize; Verified initial terrain-quad map setup: discovers available NIFs, marks each corresponding quad Unloaded (5), stores its map-derived world origin, and sets the grid-cell width used by distance checks.
 0x46467D: mov     esi, [esi+4]
 0x464680: test    esi, esi
 0x464682: jnz     short loc_464630
@@ -163,17 +163,17 @@
 0x464690: push    10h; Size
 0x464692: call    FormHeapAlloc
 0x464697: add     esp, 4
-0x46469A: mov     [esp+64h+var_3C], eax
+0x46469A: mov     [esp+64h+position], eax
 0x46469E: cmp     eax, edi
 0x4646A0: mov     [esp+64h+var_4], 1
 0x4646A8: jz      short loc_4646B3
-0x4646AA: mov     ecx, eax; this
-0x4646AC: call    ??0ChangesMap@@QAE@XZ; ChangesMap::ChangesMap(void)
+0x4646AA: mov     ecx, eax; self
+0x4646AC: call    ??0ChangesMap@@QAE@XZ;
 0x4646B1: jmp     short loc_4646B5
 0x4646B3: xor     eax, eax
 0x4646B5: mov     [esp+64h+var_4], 0FFFFFFFFh
 0x4646BD: mov     [ebp+4], eax
-0x4646C0: mov     bl, byte ptr [esp+64h+arg_0]
+0x4646C0: mov     bl, [esp+64h+initializationMode]
 0x4646C4: test    bl, bl
 0x4646C6: jnz     short loc_4646CF
 0x4646C8: mov     ecx, ebp
@@ -201,7 +201,7 @@
 0x464710: jb      short loc_464700
 0x464712: xor     eax, eax
 0x464714: cmp     eax, edi
-0x464716: mov     [esp+64h+var_3C], eax
+0x464716: mov     [esp+64h+position], eax
 0x46471A: jz      loc_4648C0
 0x464720: mov     ecx, ds:0B33398h
 0x464726: cmp     byte ptr [ecx+1], 0
@@ -213,35 +213,35 @@
 0x46473B: fld     [esp+68h+var_50]
 0x46473F: fstp    [esp+68h+var_68]; float
 0x464742: push    2; int
-0x464744: call    sub_57B950
+0x464744: call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.
 0x464749: add     esp, 8
-0x46474C: lea     edx, [esp+64h+var_4C]
-0x464750: push    edx
+0x46474C: lea     edx, [esp+64h+valueOut]
+0x464750: push    edx; valueOut
 0x464751: lea     eax, [esp+68h+a1]
-0x464755: push    eax
-0x464756: lea     ecx, [esp+6Ch+var_3C]
-0x46475A: push    ecx
-0x46475B: mov     ecx, [ebp+0]
-0x46475E: mov     [esp+70h+var_4C], edi
+0x464755: push    eax; keyOut
+0x464756: lea     ecx, [esp+6Ch+position]
+0x46475A: push    ecx; position
+0x46475B: mov     ecx, [ebp+0]; self
+0x46475E: mov     [esp+70h+valueOut], edi
 0x464762: mov     [esp+70h+a1], edi
-0x464766: call    sub_452600
+0x464766: call    NiTMap_U32Pointer_GetNextEntry
 0x46476B: mov     ebx, [esp+64h+a1]
 0x46476F: push    ebx; a1
-0x464770: call    TESForm_LookupByFormID
+0x464770: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x464775: add     esp, 4
 0x464778: cmp     eax, ds:0B333C4h
 0x46477E: jz      loc_4648B0
 0x464784: cmp     eax, edi
 0x464786: jz      short loc_4647A2
-0x464788: mov     edx, [esp+64h+var_4C]
-0x46478C: push    edx
-0x46478D: push    eax
-0x46478E: mov     ecx, ebp
-0x464790: call    sub_45F180
+0x464788: mov     edx, [esp+64h+valueOut]
+0x46478C: push    edx; savedData
+0x46478D: push    eax; form
+0x46478E: mov     ecx, ebp; self
+0x464790: call    TESSaveLoadGame_ResetFormForLoad; Verified: consumes form plus its 8-byte ChangeData entry. Uses form-type-specific masks (0xFFF generally, 0x7FF for REFR), deletes disallowed created forms, calls SaveLoad_NormalizeFormChangeFlags, invokes the form change callback, reloads the winning override through TESSaveLoadGame_ResetObject, runs DoPostFixup, then uses 45C020 to reconnect process/cell state. Called during TESSaveLoadGame_ReconcileExistingChanges (464790). Probable Fallout comparison: BGSSaveLoadGame::RevertCurrentChanges; implementation and flag policy differ.
 0x464795: jmp     loc_4648B0
 0x46479A: mov     eax, [esi+eax*4]
 0x46479D: jmp     loc_464714
-0x4647A2: mov     eax, [esp+64h+var_4C]
+0x4647A2: mov     eax, [esp+64h+valueOut]
 0x4647A6: test    dword ptr [eax], 80000000h
 0x4647AC: jz      loc_4648B0
 0x4647B2: mov     esi, [eax+4]
@@ -249,9 +249,9 @@
 0x4647B7: jz      loc_4648B0
 0x4647BD: add     esi, 4
 0x4647C0: mov     ecx, 0Bh
-0x4647C5: lea     edi, [esp+64h+var_38]
+0x4647C5: lea     edi, [esp+64h+data]
 0x4647C9: rep movsd
-0x4647CB: mov     esi, [esp+64h+var_38]
+0x4647CB: mov     esi, [esp+64h+data.primaryLocationFormID]; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.
 0x4647CF: mov     ecx, ds:0B33A98h
 0x4647D5: push    esi; _DWORD
 0x4647D6: call    TESDataHandler_IsFormIDCreated?
@@ -264,10 +264,10 @@
 0x4647E9: jmp     short loc_4647F1
 0x4647EB: mov     eax, [eax+4]
 0x4647EE: mov     esi, [eax+esi*4]
-0x4647F1: mov     edi, [esp+64h+var_28]
+0x4647F1: mov     edi, [esp+64h+data.fallbackLocationFormID]; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.
 0x4647F5: mov     ecx, ds:0B33A98h
 0x4647FB: push    edi; _DWORD
-0x4647FC: mov     [esp+68h+var_38], esi
+0x4647FC: mov     [esp+68h+data.primaryLocationFormID], esi; Verified: 44-byte payload copied from savedFormBuffer+4; consumed by location reconstruction.
 0x464800: call    TESDataHandler_IsFormIDCreated?
 0x464805: test    al, al
 0x464807: jz      short loc_46480D
@@ -281,8 +281,8 @@
 0x464819: mov     ecx, [eax+4]
 0x46481C: mov     eax, [ecx+edi*4]
 0x46481F: push    esi; a1
-0x464820: mov     [esp+68h+var_28], eax
-0x464824: call    TESForm_LookupByFormID
+0x464820: mov     [esp+68h+data.fallbackLocationFormID], eax; Verified: fallback source cell/worldspace FormID; used only when primary source locator at +0 is zero.
+0x464824: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x464829: push    0; int
 0x46482B: push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *
 0x464830: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
@@ -300,16 +300,16 @@
 0x464855: add     esp, 2Ch
 0x464858: test    eax, eax
 0x46485A: jz      short loc_464885
-0x46485C: fld     [esp+64h+var_34]
+0x46485C: fld     [esp+64h+data.worldX]; Verified: source world X; used when source locator is a TESWorldSpace.
 0x464860: fistp   [esp+64h+var_40]
-0x464864: fld     [esp+64h+var_30]
+0x464864: fld     [esp+64h+data.worldY]; Verified: source world Y; used when source locator is a TESWorldSpace.
 0x464868: fistp   [esp+64h+var_44]
 0x46486C: mov     edx, [esp+64h+var_44]
 0x464870: mov     ecx, [esp+64h+var_40]
 0x464874: sar     edx, 0Ch
 0x464877: sar     ecx, 0Ch
-0x46487A: push    edx; signed int
-0x46487B: push    ecx; signed int
+0x46487A: push    edx; cellY
+0x46487B: push    ecx; cellX
 0x46487C: mov     ecx, eax; this
 0x46487E: call    TESWorldSpace__GetCellAtCellCoord
 0x464883: mov     edi, eax
@@ -321,18 +321,18 @@
 0x464892: call    TESObjectCELL_IsProcessLevel?LowHigh
 0x464897: test    al, al
 0x464899: jz      short loc_4648B0
-0x46489B: lea     edx, [esp+64h+var_38]
-0x46489F: push    edx
-0x4648A0: push    ebx
+0x46489B: lea     edx, [esp+64h+data]
+0x46489F: push    edx; data
+0x4648A0: push    ebx; referenceID
 0x4648A1: mov     ecx, ebp
-0x4648A3: call    sub_45C4F0
-0x4648A8: push    eax; Concurrency::details::SchedulerBase *
-0x4648A9: mov     ecx, edi
-0x4648AB: call    sub_4D35D0
+0x4648A3: call    TESSaveLoadGame_RebuildReferenceFromLocationOverrides;  Verified: moved-reference rebuild. Resolves primary location ID at +0 (fallback ID +0x10 when zero), casts it to TESObjectCELL or TESWorldSpace, scans its override files for the requested referenceID, loads matching reference records, runs PostFixup, and restores actor/REFR starting location data. Worldspace path quantizes X/Y by >>12 to find the owning cell. Probable role homolog: Fallout ReferenceInitialData::GetOriginalLocationCellAndWorld / LoadChangedReference; Oblivion implementation searches local override files directly. Verified: a2 uses 44-byte moved-reference payload; +0 and +0x10 are remapped FormIDs before call. X/Y at +4/+8 are consumed on the worldspace path. Remaining fields Unknown. Verified cross-reference divergence: Fallout MovedReferenceInitialData is 34 bytes (27-byte location data + compact original-location index and int16 cell XY); Oblivion restore reads 44 bytes and supports primary/fallback full FormIDs at +0/+0x10 plus world XY at +4/+8. Confidence label Probable applies only to s
+0x4648A8: push    eax; reference
+0x4648A9: mov     ecx, edi; this
+0x4648AB: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x4648B0: xor     edi, edi
-0x4648B2: cmp     [esp+64h+var_3C], edi
+0x4648B2: cmp     [esp+64h+position], edi
 0x4648B6: jnz     loc_464720
-0x4648BC: mov     bl, byte ptr [esp+64h+arg_0]
+0x4648BC: mov     bl, [esp+64h+initializationMode]
 0x4648C0: mov     ecx, [ebp+0]
 0x4648C3: mov     eax, [ecx]
 0x4648C5: mov     edx, [eax+1Ch]
@@ -360,3 +360,20 @@
 0x4648FF: pop     ebx
 0x464900: add     esp, 50h
 0x464903: retn    4
+0x9AE6D0: mov     eax, [ebp+4]
+0x9AE6D3: push    eax
+0x9AE6D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE6D9: pop     ecx
+0x9AE6DA: retn
+0x9AE6DB: mov     eax, [ebp-3Ch]
+0x9AE6DE: push    eax
+0x9AE6DF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE6E4: pop     ecx
+0x9AE6E5: retn
+0x9AE6E6: mov     edx, [esp+arg_4]
+0x9AE6EA: lea     eax, [edx-54h]
+0x9AE6ED: mov     ecx, [edx-58h]
+0x9AE6F0: xor     ecx, eax
+0x9AE6F2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE6F7: mov     eax, offset stru_ADAEB4
+0x9AE6FC: jmp     ___CxxFrameHandler3

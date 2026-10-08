@@ -1,7 +1,7 @@
-0x79A9B0: mov     edx, [esp+arg_0]
-0x79A9B4: mov     eax, [esp+arg_8]
+0x79A9B0: mov     edx, [esp+first]; Copies 0x38-byte SFrondVertex records from [first,last) into uninitialized destination storage and returns the constructed end.
+0x79A9B4: mov     eax, [esp+destinationFirst]
 0x79A9B8: push    ebx
-0x79A9B9: mov     ebx, [esp+4+arg_4]
+0x79A9B9: mov     ebx, [esp+4+last]
 0x79A9BD: cmp     edx, ebx
 0x79A9BF: jz      short loc_79A9DE
 0x79A9C1: push    esi

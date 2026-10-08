@@ -5,23 +5,23 @@ double __usercall sub_504DB0@<st0>(double result@<st0>, int a2, int a3, void *a4
   int v6; // edi
   float v7; // [esp+18h] [ebp+Ch]
 
-  if ( a4 )
+  if ( a4 ) /*0x504db6*/
   {
-    v4 = (int *)OblivionDynamicCast(
+    v4 = (int *)OblivionDynamicCast( /*0x504dcb*/
                   a4,
                   0,
                   (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                   &Actor `RTTI Type Descriptor',
                   0);
-    v5 = v4;
-    if ( v4 )
+    v5 = v4; /*0x504dd0*/
+    if ( v4 ) /*0x504dd7*/
     {
-      v6 = *v4;
-      (*(void (__thiscall **)(int *))(*v4 + 0x250))(v4);
-      v7 = result * dbl_A3D360;
-      (*(void (__thiscall **)(int *, _DWORD))(v6 + 0x254))(v5, LODWORD(v7));
-      return v7;
+      v6 = *v4; /*0x504dda*/
+      (*(void (__thiscall **)(int *))(*v4 + 0x250))(v4); /*0x504de4*/
+      v7 = result * dbl_A3D360; /*0x504df3*/
+      (*(void (__thiscall **)(int *, _DWORD))(v6 + 0x254))(v5, LODWORD(v7)); /*0x504e00*/
+      return v7; /*0x504df9*/
     }
   }
-  return result;
+  return result; /*0x504dba*/
 }

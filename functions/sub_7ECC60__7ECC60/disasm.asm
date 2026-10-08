@@ -1,4 +1,4 @@
-0x7ECC60: mov     eax, [esp+arg_8]
+0x7ECC60: mov     eax, [esp+before]; Detect duplicate and find ordered insertion point using normalized receiver-surface distance: (distance to light - receiver radius) / light range.
 0x7ECC64: sub     esp, 20h
 0x7ECC67: mov     dword ptr [eax], 0
 0x7ECC6D: cmp     dword ptr [ecx+78h], 1
@@ -8,7 +8,7 @@
 0x7ECC78: retn    0Ch
 0x7ECC7B: mov     ecx, [ecx+70h]
 0x7ECC7E: push    ebx
-0x7ECC7F: mov     ebx, [esp+24h+arg_0]
+0x7ECC7F: mov     ebx, [esp+24h+light]
 0x7ECC83: push    ebp
 0x7ECC84: mov     ebp, [ecx]
 0x7ECC86: push    esi
@@ -18,7 +18,7 @@
 0x7ECC8F: lea     ecx, [esp+30h+var_1C]
 0x7ECC93: push    ecx
 0x7ECC94: mov     ecx, ebx
-0x7ECC96: call    sub_405AD0
+0x7ECC96: call    ShadowSceneLight_GetLightRef
 0x7ECC9B: mov     edx, [eax]
 0x7ECC9D: mov     eax, [esp+30h+var_1C]
 0x7ECCA1: fld     dword ptr [edx+0F8h]
@@ -43,9 +43,9 @@
 0x7ECCD5: lea     eax, [esp+30h+var_1C]
 0x7ECCD9: push    eax
 0x7ECCDA: mov     ecx, ebx
-0x7ECCDC: call    sub_405AD0
+0x7ECCDC: call    ShadowSceneLight_GetLightRef
 0x7ECCE1: mov     eax, [eax]
-0x7ECCE3: mov     esi, [esp+30h+arg_4]
+0x7ECCE3: mov     esi, [esp+30h+bound]
 0x7ECCE7: fld     dword ptr [eax+88h]
 0x7ECCED: fsub    dword ptr [esi]
 0x7ECCEF: add     eax, 88h ; 'ˆ'
@@ -67,11 +67,11 @@
 0x7ECD22: faddp   st(2), st
 0x7ECD24: fmul    st, st
 0x7ECD26: faddp   st(1), st
-0x7ECD28: fstp    [esp+30h+arg_4]
-0x7ECD2C: fld     [esp+30h+arg_4]
+0x7ECD28: fstp    [esp+30h+bound]
+0x7ECD2C: fld     [esp+30h+bound]
 0x7ECD30: call    __CIsqrt
-0x7ECD35: fstp    [esp+30h+arg_4]
-0x7ECD39: fld     [esp+30h+arg_4]
+0x7ECD35: fstp    [esp+30h+bound]
+0x7ECD39: fld     [esp+30h+bound]
 0x7ECD3D: mov     eax, [esp+30h+var_1C]
 0x7ECD41: test    eax, eax
 0x7ECD43: fsub    dword ptr [esi+0Ch]
@@ -92,18 +92,18 @@
 0x7ECD6A: mov     ecx, ebx
 0x7ECD6C: call    eax
 0x7ECD6E: mov     edi, edi
-0x7ECD70: cmp     edi, [esp+30h+arg_0]
+0x7ECD70: cmp     edi, [esp+30h+light]
 0x7ECD74: jz      loc_7ECE90
-0x7ECD7A: mov     ecx, [esp+30h+arg_8]
+0x7ECD7A: mov     ecx, [esp+30h+before]
 0x7ECD7E: cmp     dword ptr [ecx], 0
 0x7ECD81: jnz     loc_7ECE6B
-0x7ECD87: lea     edx, [esp+30h+arg_4]
+0x7ECD87: lea     edx, [esp+30h+bound]
 0x7ECD8B: push    edx
 0x7ECD8C: mov     ecx, edi
-0x7ECD8E: call    sub_405AD0
+0x7ECD8E: call    ShadowSceneLight_GetLightRef
 0x7ECD93: mov     eax, [eax]
 0x7ECD95: fld     dword ptr [eax+0F8h]
-0x7ECD9B: mov     eax, [esp+30h+arg_4]
+0x7ECD9B: mov     eax, [esp+30h+bound]
 0x7ECD9F: test    eax, eax
 0x7ECDA1: fstp    [esp+30h+var_1C]
 0x7ECDA5: jz      short loc_7ECDC5
@@ -123,7 +123,7 @@
 0x7ECDC5: lea     ecx, [esp+30h+var_14]
 0x7ECDC9: push    ecx
 0x7ECDCA: mov     ecx, edi
-0x7ECDCC: call    sub_405AD0
+0x7ECDCC: call    ShadowSceneLight_GetLightRef
 0x7ECDD1: mov     eax, [eax]
 0x7ECDD3: fld     dword ptr [eax+88h]
 0x7ECDD9: add     eax, 88h ; 'ˆ'
@@ -199,7 +199,7 @@
 0x7ECE96: add     esp, 20h
 0x7ECE99: retn    0Ch
 0x7ECE9C: mov     ecx, [esp+30h+var_20]
-0x7ECEA0: mov     edx, [esp+30h+arg_8]
+0x7ECEA0: mov     edx, [esp+30h+before]
 0x7ECEA4: mov     [edx], ecx
 0x7ECEA6: pop     edi
 0x7ECEA7: pop     esi

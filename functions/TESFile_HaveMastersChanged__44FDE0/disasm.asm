@@ -13,7 +13,7 @@
 0x44FE09: jz      short loc_44FE82
 0x44FE0B: push    esi
 0x44FE0C: lea     esp, [esp+0]
-0x44FE10: cmp     dword ptr [edi], 0
+0x44FE10: cmp     dword ptr [edi], 0; TESFile_HaveMastersChanged walks masterList and masterlistSizeInfo in parallel by ordinal, not by neighboring TES4 subrecords. It returns the current result as soon as either list ends. Thus non-adjacent MAST/DATA can still pair natively; missing/extra occurrences truncate this dependency-change check.
 0x44FE13: jz      short loc_44FE81
 0x44FE15: test    ebp, ebp
 0x44FE17: jz      short loc_44FE81

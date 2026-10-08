@@ -6,9 +6,9 @@ int __userpurge ContainerExtraData_HasItemFromLevItem_::ItemLoop_next@<eax>(
 {
   int **v4; // edi
 
-  v4 = *(int ***)(a1 + 4);
-  if ( v4 )
-    return ContainerExtraData_HasItemFromLevItem_::ItemLoop(a2, v4, a3, a4);
+  v4 = *(int ***)(a1 + 4); /*0x488408*/
+  if ( v4 ) /*0x48840d*/
+    return ContainerExtraData_HasItemFromLevItem_::ItemLoop(a2, v4, a3, a4); /*0x48840d*/
   else
-    return ContainerExtraData_HasItemFromLevItem_::Done(a4);
+    return ContainerExtraData_HasItemFromLevItem_::Done(a4); /*0x48840e*/
 }

@@ -1,4 +1,4 @@
-0x597B10: call    sub_578D70
+0x597B10: call    InterfaceManager_ConsumeMessageButton
 0x597B15: cmp     al, 1
 0x597B17: jnz     short loc_597B68
 0x597B19: push    esi

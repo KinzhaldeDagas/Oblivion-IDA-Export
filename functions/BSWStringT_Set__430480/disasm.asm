@@ -37,7 +37,7 @@
 0x4304D6: jmp     loc_43055D
 0x4304DB: mov     eax, [edi]
 0x4304DD: push    eax
-0x4304DE: call    FormHeapFree
+0x4304DE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4304E3: xor     esi, esi
 0x4304E5: movzx   eax, si
 0x4304E8: add     esp, 4
@@ -77,7 +77,7 @@
 0x43053C: jmp     short loc_430540
 0x43053E: xor     esi, esi
 0x430540: push    ebp
-0x430541: call    FormHeapFree
+0x430541: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x430546: add     esp, 4
 0x430549: cmp     esi, 0FFFFh
 0x43054F: movzx   eax, si

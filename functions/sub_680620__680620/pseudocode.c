@@ -1,34 +1,30 @@
-void __usercall sub_680620(int a1@<esi>, unsigned __int16 a2)
+// Verified reallocation helper: grows the table to the requested capacity, allocates and zeroes capacity*0x10 bytes, copies old entries, frees the old allocation, and records the new capacity.
+void __cdecl TravelPath_ResizeSearchStateTable(unsigned __int16 newCapacity)
 {
-  const void *v2; // ebp
-  unsigned __int16 v3; // bx
-  void *v4; // eax
-  size_t v5; // [esp-10h] [ebp-14h]
+  TravelPathSearchState *states; // ebp
+  unsigned __int16 stateCapacity; // bx
+  TravelPathSearchState *v3; // eax
 
-  if ( a2 > (unsigned __int16)word_B3BF04 )
+  if ( newCapacity > MEMORY[0xB3BE00].stateCapacity )
   {
-    HIDWORD(v5) = a1;
-    v2 = dword_B3BF00;
-    v3 = word_B3BF04;
-    v4 = (void *)FormHeapAlloc((unsigned __int64)a2 >> 0x1C != 0 ? 0xFFFFFFFF : 0x10 * a2);
-    dword_B3BF00 = v4;
-    word_B3BF04 = a2;
-    if ( v4 )
+    states = MEMORY[0xB3BE00].states; /*0x680634*/
+    stateCapacity = MEMORY[0xB3BE00].stateCapacity; /*0x68063d*/
+    v3 = (TravelPathSearchState *)FormHeapAlloc((unsigned __int64)newCapacity >> 0x1C != 0 ? 0xFFFFFFFF : 0x10 * newCapacity);
+    MEMORY[0xB3BE00].states = v3; /*0x68065d*/
+    MEMORY[0xB3BE00].stateCapacity = newCapacity; /*0x680662*/
+    if ( v3 ) /*0x680669*/
     {
-      if ( a2 )
+      if ( newCapacity ) /*0x68066e*/
       {
-        _memset(v4, 0, 0x10 * a2);
-        v4 = dword_B3BF00;
+        _memset((int)v3, 0, 0x10 * newCapacity); /*0x680677*/
+        v3 = MEMORY[0xB3BE00].states; /*0x68067c*/
       }
     }
-    if ( v2 )
+    if ( states ) /*0x680686*/
     {
-      if ( v3 )
-      {
-        LODWORD(v5) = 0x10 * v3;
-        memcpy(v4, v2, v5);
-      }
-      FormHeapFree((unsigned int)v2);
+      if ( stateCapacity ) /*0x68068b*/
+        memcpy(v3, states, 0x10 * stateCapacity); /*0x680696*/
+      FormHeapFree((unsigned int)states); /*0x68069f*/
     }
   }
 }

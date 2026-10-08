@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 38,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 47,
+  "chunks": [
+    [
+      "0x5660A0",
+      "0x5660A9"
+    ]
+  ],
+  "chunks_sha256": "6467831b9e95c7e2ef1b4754cee0381b7fb13c648a8bafb5135ddb5b453a0f31",
+  "comment_regular": "Verified flag predicate: TESPackage packageFlags bit800. BaseProcess_LoadGame uses it to retire an existing package through load-manager DeleteForm. Name describes observed runtime-package marker; no ownership transfer implied by predicate alone.\nConfidence refinement: Verified predicate is flag800 and BaseProcess load deletion use. Probable semantic label RuntimePackage; original getter spelling Unknown.\n\n3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
+  "comment_repeatable": "3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_5660A0",
+  "display_name": "TESPackage_IsRuntimePackage",
   "end_ea": "0x5660A9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5660A0",
+  "name": "TESPackage_IsRuntimePackage",
   "segment": ".text",
   "sha256": "6467831b9e95c7e2ef1b4754cee0381b7fb13c648a8bafb5135ddb5b453a0f31",
   "size": 9,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5660A0",
-  "type": "bool __thiscall(TESPackage *this)",
+  "total_chunk_size": 9,
+  "type": "bool __thiscall(TESPackage *self)",
   "xrefs_from_count": 3,
   "xrefs_to_count": 47
 }

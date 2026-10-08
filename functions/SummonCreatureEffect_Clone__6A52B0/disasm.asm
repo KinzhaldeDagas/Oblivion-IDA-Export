@@ -61,7 +61,7 @@
 0x6A5363: test    ecx, ecx
 0x6A5365: jz      short loc_6A536E
 0x6A5367: push    0
-0x6A5369: call    sub_41A610
+0x6A5369: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x6A536E: mov     dl, [esi+61h]
 0x6A5371: mov     [edi+61h], dl
 0x6A5374: mov     eax, edi
@@ -72,3 +72,15 @@
 0x6A5383: pop     esi
 0x6A5384: add     esp, 10h
 0x6A5387: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 17,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x68A760",
+      "0x68A882"
+    ]
+  ],
+  "chunks_sha256": "9c3ea60f3102502c8112e57e5c36fe7f78e9da1f78dfeeffef63841694c24242",
+  "comment_regular": "Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.",
+  "comment_repeatable": "Verified TravelPath_ComputeDistance sums Euclidean segments from sourceRef->GetPos through each TravelPathNode_GetPosition. For a type-0 teleport node, the segment endpoint is the linked door's TeleportData xyz marker; after consuming that node, the next segment starts at the current door's own TeleportData xyz (its destination marker). Type-1 nodes use owned position payloads; ordinary references use GetPos.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_68A760",
+  "display_name": "TravelPath_ComputeDistance",
   "end_ea": "0x68A882",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68A760",
+  "name": "TravelPath_ComputeDistance",
   "segment": ".text",
   "sha256": "9c3ea60f3102502c8112e57e5c36fe7f78e9da1f78dfeeffef63841694c24242",
   "size": 290,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68A760",
-  "type": "double __thiscall(char *this, int)",
+  "total_chunk_size": 290,
+  "type": "double __thiscall(TravelPath *this, TESObjectREFR *sourceRef)",
   "xrefs_from_count": 106,
   "xrefs_to_count": 4
 }

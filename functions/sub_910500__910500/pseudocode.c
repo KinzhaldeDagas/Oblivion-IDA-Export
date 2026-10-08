@@ -2,11 +2,11 @@ int __cdecl sub_910500(int a1)
 {
   int result; // eax
 
-  result = a1;
-  if ( a1 )
+  result = a1; /*0x910500*/
+  if ( a1 ) /*0x910506*/
   {
-    *(_WORD *)(a1 + 6) = 1;
-    *(_DWORD *)a1 = &hkMalleableConstraintData::`vftable';
+    *(_WORD *)(a1 + 6) = 1; /*0x910508*/
+    *(_DWORD *)a1 = &hkMalleableConstraintData::`vftable'; /*0x91050e*/
   }
-  return result;
+  return result; /*0x910514*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F90D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified INI setting registration for bEnableTrees:SpeedTree; calls SettingCollectionList_AddSetting on the 8-byte value/name pair and registers atexit cleanup.",
     "mnemonic": "push",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x9F90F0",
-    "line": "push    offset byte_B125E8",
+    "line": "push    offset bEnableTrees_SpeedTree",
     "mnemonic": "push",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x9F9107",
-    "line": "push    offset sub_A23600; void (__cdecl *)()",
+    "line": "push    offset INISetting_bEnableTrees_SpeedTree_atexit; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },
@@ -124,5 +124,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x403BC0",
+    "line": "mov     eax, [ecx+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x403BC3",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x403BC5",
+    "line": "jz      short locret_403BD3",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x403BC7",
+    "line": "cmp     byte ptr [eax], 53h ; 'S'",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x403BCA",
+    "line": "jnz     short locret_403BD3",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x403BCC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x403BCD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x403BD2",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x403BD3",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BCD70",
+    "line": "mov     ecx, offset bEnableTrees_SpeedTree",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCD75",
+    "line": "jmp     loc_403BC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCD7A",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BCD7E",
+    "line": "lea     eax, [edx]",
+    "mnemonic": "lea",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCD80",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCD83",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCD85",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCD8A",
+    "line": "mov     eax, offset stru_AE6890",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCD8F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

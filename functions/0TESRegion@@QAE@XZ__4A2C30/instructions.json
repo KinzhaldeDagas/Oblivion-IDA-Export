@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A2C30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified: constructs TESRegion (FormType 0x2F), allocates owned 12-byte TESRegionDataList at +0x18 (ownsData=1), allocates 8-byte region-area list head at +0x1C, zeros worldspace +0x20 and cached weather +0x24, initializes float +0x28 to flt_A30634.",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x4A2C87",
-    "line": "call    sub_4A43E0",
+    "line": "call    sub_4A43E0; Verified: initializes the 12-byte TESRegionDataList header: firstData null, overflowNodes null, ownsData byte set from constructor argument.",
     "mnemonic": "call",
     "size": 5
   },
@@ -328,5 +328,89 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B2650",
+    "line": "mov     ecx, [ebp-14h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2653",
+    "line": "jmp     TESForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2658",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B265B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B265C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2661",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2662",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2663",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B2667",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B266A",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B266D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B266F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2674",
+    "line": "mov     eax, offset stru_ADE600",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2679",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

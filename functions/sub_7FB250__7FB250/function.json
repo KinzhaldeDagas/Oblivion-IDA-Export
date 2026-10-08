@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_7FB250",
+  "chunks": [
+    [
+      "0x7FB250",
+      "0x7FB381"
+    ]
+  ],
+  "chunks_sha256": "b0bf1ad8c3ff7e4dd354016ad1c3484d6fc52dded705c2b72047b82cb9fed604",
+  "comment_regular": "Oblivion Lighting30Shader initialization/reset: initializes the base shader, releases SM3 program tables and 54 pooled passes, then seeds repeated constant blocks from the engine's default color/vector.",
+  "comment_repeatable": "Oblivion Lighting30Shader initialization/reset: initializes the base shader, releases SM3 program tables and 54 pooled passes, then seeds repeated constant blocks from the engine's default color/vector.\nDX11 writer audit 2026-10-01: virtual+84 resets shared Lighting30 vertex/pixel caches and all54 global pass owners. Full-call writer boundary, including base8025F0; stolen prefix9 bytes contains CALL at+4 and needs explicit relocation to8025F0. Main-thread or renderer-lock identity alone is not proof this lifecycle writer is inactive.\nDX11 comparative writer audit 2026-10-01: Oblivion7FAAB0 matches the LoadShaders-then-PresetStages sequence here, but uses virtual+A8 followed by a tail JMP85E660 (RET0), so whole-call observation must span that tail. Oblivion7FB250 matches the shared program/pass cache reset family of Fallout828D5660, with different cache sizes, map-entry ownership and native offsets. Both examined versions use plain, non-atomic pooled-pass reference decrements, unlike program NiRef counters. The comparison identifies writer families; it does not establish thread exclusion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 15,
+  "display_name": "Lighting30Shader__InitializeAndClearShaderCaches",
   "end_ea": "0x7FB381",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7FB250",
+  "name": "Lighting30Shader__InitializeAndClearShaderCaches",
   "segment": ".text",
   "sha256": "b0bf1ad8c3ff7e4dd354016ad1c3484d6fc52dded705c2b72047b82cb9fed604",
   "size": 305,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7FB250",
-  "type": "char __thiscall(BSShader *this)",
+  "total_chunk_size": 305,
+  "type": "bool __thiscall(void *this)",
   "xrefs_from_count": 131,
   "xrefs_to_count": 1
 }

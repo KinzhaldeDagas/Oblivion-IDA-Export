@@ -9,25 +9,25 @@ int __userpurge Actor_SetupCastingFX__::ProceeFXModel_@<eax>(
         int a8,
         int a9,
         int a10,
-        _DWORD *a11)
+        _DWORD *magicItem)
 {
   int v11; // ebp
   int FXEffect; // eax
   int v13; // edi
 
-  v11 = 0;
-  if ( !a11 )
-    return Actor_SetupCastingFX__::ProcessMagicCasterFX(a1, 0, 0, a2);
-  FXEffect = MagicItem_GetFXEffect(a11, 0);
-  v13 = FXEffect;
-  if ( !FXEffect )
-    return Actor_SetupCastingFX__::ProcessMagicCasterFX(a1, 0, 0, a2);
-  LOWORD(FXEffect) = *(_WORD *)(FXEffect + 0x20);
-  if ( (_WORD)FXEffect == 0xFFFF )
-    FXEffect = strlen(*(const char **)(v13 + 0x1C));
+  v11 = 0; /*0x5edd0b*/
+  if ( !magicItem ) /*0x5edd15*/
+    return Actor_SetupCastingFX__::ProcessMagicCasterFX(a1, 0, 0, a2); /*0x5edd15*/
+  FXEffect = (int)MagicItem_GetFXEffect(magicItem, 0); /*0x5edd18*/
+  v13 = FXEffect; /*0x5edd1d*/
+  if ( !FXEffect ) /*0x5edd21*/
+    return Actor_SetupCastingFX__::ProcessMagicCasterFX(a1, 0, 0, a2); /*0x5edd15*/
+  LOWORD(FXEffect) = *(_WORD *)(FXEffect + 0x20); /*0x5edd23*/
+  if ( (_WORD)FXEffect == 0xFFFF ) /*0x5edd2b*/
+    FXEffect = strlen(*(const char **)(v13 + 0x1C)); /*0x5edd30*/
   else
-    FXEffect = (unsigned __int16)FXEffect;
-  if ( FXEffect )
-    v11 = sub_69FD20(v13);
+    FXEffect = (unsigned __int16)FXEffect; /*0x5edd40*/
+  if ( FXEffect ) /*0x5edd45*/
+    v11 = sub_69FD20(v13); /*0x5edd54*/
   return Actor_SetupCastingFX__::ProcessMagicCasterFX(a1, v11, v13, a2);
 }

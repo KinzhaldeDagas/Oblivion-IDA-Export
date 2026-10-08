@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "packed_MSG",
+  "definition": "struct packed_MSG\n{\nuser_handle_t hwnd;\nDWORD __pad1;\nUINT message;\n__declspec(align(8)) ULONGLONG wParam;\nULONGLONG lParam;\nDWORD time;\nPOINT pt;\nDWORD __pad2;\n}\n",
   "id": 18374686479671862650,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwnd",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "user_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__pad1",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "message",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wParam",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lParam",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "time",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pt",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 8
+      "size": 8,
+      "type": "POINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__pad2",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "DWORD"
     }
   ],
   "name": "packed_MSG",
+  "ordinal": 7525,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

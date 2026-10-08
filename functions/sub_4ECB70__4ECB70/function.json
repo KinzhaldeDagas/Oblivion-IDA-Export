@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4ECB70",
+  "chunks": [
+    [
+      "0x4ECB70",
+      "0x4ECC55"
+    ],
+    [
+      "0x9CA9B0",
+      "0x9CA9D3"
+    ]
+  ],
+  "chunks_sha256": "15c6f274530094204230e8b4958a4ceeec38be3578786c01d8cda460b91e2513",
+  "comment_regular": "Verified async completion: obtains the loaded NIF node from the TerrainLODQuadLoadTask, stores it in quad.terrainLODNode (+0x2C), sets state LoadedDetached (2), and releases quadData's task reference.",
+  "comment_repeatable": "Verified async completion: obtains the loaded NIF node from the TerrainLODQuadLoadTask, stores it in quad.terrainLODNode (+0x2C), sets state LoadedDetached (2), and releases quadData's task reference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TerrainLODQuadLoadTask_ApplyLoadedMesh",
   "end_ea": "0x4ECC55",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ECB70",
+  "name": "TerrainLODQuadLoadTask_ApplyLoadedMesh",
   "segment": ".text",
   "sha256": "a8cb87eb2f8d9a5bb9b3d9ba6f6334267d99a685a2c7f620ee86200a32542155",
   "size": 229,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ECB70",
-  "type": "int *__thiscall(_DWORD **this)",
-  "xrefs_from_count": 96,
+  "total_chunk_size": 264,
+  "type": "int __thiscall(TESTerrainLODQuad_OblivionComplete_060 *this)",
+  "xrefs_from_count": 107,
   "xrefs_to_count": 1
 }

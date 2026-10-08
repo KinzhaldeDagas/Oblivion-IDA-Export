@@ -1,1 +1,1 @@
-LPD3DVALUE
+typedef float *LPD3DVALUE;

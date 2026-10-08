@@ -1,6 +1,6 @@
 0x4440C0: push    esi
 0x4440C1: mov     esi, ecx
-0x4440C3: call    TESObjectCELL_IsInterior
+0x4440C3: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4440C8: test    al, al
 0x4440CA: jz      short loc_4440D5
 0x4440CC: lea     ecx, [esi+28h]

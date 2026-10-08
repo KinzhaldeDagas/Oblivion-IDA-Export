@@ -1,1 +1,1 @@
-IRemUnknown2Vtbl_0
+typedef IRemUnknown2Vtbl IRemUnknown2Vtbl_0;

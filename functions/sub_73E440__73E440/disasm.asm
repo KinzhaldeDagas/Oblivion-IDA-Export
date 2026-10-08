@@ -1,4 +1,4 @@
-0x73E440: sub     esp, 1Ch
+0x73E440: sub     esp, 1Ch; Pass225: NiScreenTexture save writes records then serializes +0x14 object reference.
 0x73E443: push    ebp
 0x73E444: push    esi
 0x73E445: push    edi
@@ -6,7 +6,7 @@
 0x73E44A: mov     esi, ecx
 0x73E44C: push    edi
 0x73E44D: mov     [esp+2Ch+var_18], esi
-0x73E451: call    nullsub_returnvVoid_1arg
+0x73E451: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x73E456: mov     eax, [esi+10h]
 0x73E459: push    1
 0x73E45B: lea     ecx, [esp+2Ch+arg_0]
@@ -28,7 +28,6 @@
 0x73E48F: mov     [esp+2Ch+arg_0], ebp
 0x73E493: mov     ebx, 2
 0x73E498: jmp     short loc_73E4A0
-0x73E49A: align 10h
 0x73E4A0: mov     esi, [esi+8]
 0x73E4A3: add     esi, [esp+2Ch+arg_0]
 0x73E4A7: mov     eax, [edi+220h]

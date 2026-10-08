@@ -12,19 +12,19 @@ void __usercall sub_5C2BA0(
   _DWORD *OpenMenuTile; // eax
   void *ParentMenu; // eax
 
-  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40C);
-  if ( OpenMenuTile )
+  OpenMenuTile = (_DWORD *)Menu_GetOpenMenuTile(0x40C); /*0x5c2ba5*/
+  if ( OpenMenuTile ) /*0x5c2baf*/
   {
-    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile);
-    if ( OblivionDynamicCast(
+    ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile); /*0x5c2bc1*/
+    if ( OblivionDynamicCast( /*0x5c2bc7*/
            ParentMenu,
            0,
            (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
            &RaceSexMenu `RTTI Type Descriptor',
            0) )
     {
-      if ( sub_578D70() == 2 )
-        sub_5C28F0(a1, a2, a3, a4, a5, a6, a7, a8, a9);
+      if ( InterfaceManager_ConsumeMessageButton() == 2 ) /*0x5c2bda*/
+        RaceSexMenu_ApplyPlayerChangesAndClose(a1, a2, a3, a4, a5, a6, a7, a8, a9); /*0x5c2bdc*/
     }
   }
 }

@@ -7,27 +7,27 @@
 0x70983E: test    al, al
 0x709840: jz      short loc_7098A7
 0x709842: lea     eax, [edi+1Ch]
-0x709845: push    eax
-0x709846: lea     ecx, [esi+1Ch]
-0x709849: call    sub_8AA390
+0x709845: push    eax; other
+0x709846: lea     ecx, [esi+1Ch]; this
+0x709849: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x70984E: test    al, al
 0x709850: jnz     short loc_7098A7
 0x709852: lea     ecx, [edi+28h]
-0x709855: push    ecx
-0x709856: lea     ecx, [esi+28h]
-0x709859: call    sub_8AA390
+0x709855: push    ecx; other
+0x709856: lea     ecx, [esi+28h]; this
+0x709859: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x70985E: test    al, al
 0x709860: jnz     short loc_7098A7
 0x709862: lea     edx, [edi+34h]
-0x709865: push    edx
-0x709866: lea     ecx, [esi+34h]
-0x709869: call    sub_8AA390
+0x709865: push    edx; other
+0x709866: lea     ecx, [esi+34h]; this
+0x709869: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x70986E: test    al, al
 0x709870: jnz     short loc_7098A7
 0x709872: lea     eax, [edi+40h]
-0x709875: push    eax
-0x709876: lea     ecx, [esi+40h]
-0x709879: call    sub_8AA390
+0x709875: push    eax; other
+0x709876: lea     ecx, [esi+40h]; this
+0x709879: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x70987E: test    al, al
 0x709880: jnz     short loc_7098A7
 0x709882: fld     dword ptr [esi+4Ch]

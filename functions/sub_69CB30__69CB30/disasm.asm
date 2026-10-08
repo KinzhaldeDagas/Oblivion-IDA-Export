@@ -31,15 +31,15 @@
 0x69CB88: sub     esp, 0Ch
 0x69CB8B: mov     [esp+50h+var_2C], edx
 0x69CB8F: fld     [esp+50h+var_2C]
-0x69CB93: fstp    [esp+50h+var_48]; float
+0x69CB93: fstp    [esp+50h+easeOutTime]; rollY
 0x69CB97: mov     [esp+50h+var_30], ecx
 0x69CB9B: fld     [esp+50h+var_30]
 0x69CB9F: mov     [esp+50h+var_28], eax
-0x69CBA3: fstp    [esp+50h+a2]; float
-0x69CBA7: lea     ecx, [esp+50h+var_24]
+0x69CBA3: fstp    [esp+50h+a2]; pitchX
+0x69CBA7: lea     ecx, [esp+50h+var_24]; this
 0x69CBAB: fld     [esp+50h+var_28]
-0x69CBAF: fstp    [esp+50h+var_50]; float
-0x69CBB2: call    sub_7117C0
+0x69CBAF: fstp    [esp+50h+easeInTime]; yawZ
+0x69CBB2: call    NiMatrix33_SetEulerZXY; Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.
 0x69CBB7: lea     edi, [ebx+30h]
 0x69CBBA: mov     ecx, 9
 0x69CBBF: lea     esi, [esp+44h+var_24]
@@ -77,20 +77,20 @@
 0x69CC1B: jz      short loc_69CC78
 0x69CC1D: fldz
 0x69CC1F: push    ecx
-0x69CC20: mov     ecx, esi
-0x69CC22: fstp    [esp+48h+var_48]; float
-0x69CC25: call    sub_4715C0
+0x69CC20: mov     ecx, esi; this
+0x69CC22: fstp    [esp+48h+easeOutTime]; easeOutTime
+0x69CC25: call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.
 0x69CC2A: fldz
-0x69CC2C: push    0; int
-0x69CC2E: push    0; int
+0x69CC2C: push    0; transition
+0x69CC2E: push    0; timeSyncSequence
 0x69CC30: sub     esp, 8
-0x69CC33: fstp    [esp+54h+var_50]; float
-0x69CC37: mov     ecx, edi
+0x69CC33: fstp    [esp+54h+easeInTime]; easeInTime
+0x69CC37: mov     ecx, edi; this
 0x69CC39: fld1
-0x69CC3B: fstp    [esp+54h+var_54]; float
-0x69CC3E: push    0; char
-0x69CC40: push    0; int
-0x69CC42: call    sub_6C9BA0
+0x69CC3B: fstp    [esp+54h+weight]; weight
+0x69CC3E: push    0; startOver
+0x69CC40: push    0; priority
+0x69CC42: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x69CC47: or      word ptr [esi+8], 8
 0x69CC4C: fld     dword ptr ds:0A7DEB4h
 0x69CC52: fchs
@@ -103,7 +103,7 @@
 0x69CC68: fstp    [esp+4Ch+var_34]
 0x69CC6C: fld     [esp+4Ch+var_34]
 0x69CC70: fstp    [esp+4Ch+a2]; a2
-0x69CC73: call    NiAVObject_UpdateNiAVObject
+0x69CC73: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x69CC78: pop     edi
 0x69CC79: pop     esi
 0x69CC7A: pop     ebp

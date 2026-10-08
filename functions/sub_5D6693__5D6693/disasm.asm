@@ -2,16 +2,16 @@
 0x5D6695: xor     ebp, ebp
 0x5D6697: push    ebp
 0x5D6698: push    0
-0x5D669A: call    ActorValue_GetAVFromGroupOffset
+0x5D669A: call    ActorValue_GetAVFromGroupOffset; mwMediumArmor: Oblivion group 2 maps skill offset to actor value by adding 0x0C. OpenMW/Morrowind skill index 2 is MediumArmor, but Oblivion offset 2 becomes actor value 0x0E (Blade). Do not pass Morrowind skill indexes directly through this helper.
 0x5D669F: mov     edi, eax
 0x5D66A1: add     esp, 8
 0x5D66A4: push    edi
 0x5D66A5: push    edi
-0x5D66A6: call    ActorValue_GetName
+0x5D66A6: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x5D66AB: add     esp, 4
 0x5D66AE: push    eax
 0x5D66AF: mov     ecx, esi
-0x5D66B1: call    sub_5D6270
+0x5D66B1: call    SkillsMenu_CreateSkillRow; Sidecar decode: creates chargen skill row; writes skill/AV to tile trait 0xFB0 and selection state to 0xFB1.
 0x5D66B6: test    ebx, ebx
 0x5D66B8: jz      short loc_5D66BF
 0x5D66BA: cmp     edi, [esi+40h]
@@ -30,7 +30,7 @@
 0x5D66E3: mov     ecx, ebx
 0x5D66E5: add     edi, 0Ch
 0x5D66E8: call    Tile_GetFloat
-0x5D66ED: call    Double_To_SInt32
+0x5D66ED: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D66F2: mov     edx, [edi]
 0x5D66F4: push    eax
 0x5D66F5: mov     ecx, esi

@@ -1,1 +1,1 @@
-AppPolicyThreadInitializationType_0
+typedef AppPolicyThreadInitializationType AppPolicyThreadInitializationType_0;

@@ -1,4 +1,4 @@
-0x64DF40: sub     esp, 10h
+0x64DF40: sub     esp, 10h; 3DTheft decode 2026-05-17: high-process package target/procedure-state resolver used before Follow execution; clears follow target, resolves current package target, links Follow/Escort actor targets through package target resolver, and caches followed actor position.
 0x64DF43: push    ebx
 0x64DF44: push    esi
 0x64DF45: mov     esi, ecx
@@ -24,7 +24,7 @@
 0x64DF80: mov     eax, [esp+1Ch+arg_0]
 0x64DF84: push    eax
 0x64DF85: mov     ecx, ebx
-0x64DF87: call    sub_568BB0
+0x64DF87: call    sub_568BB0; 3DTheft: package target resolver/follower bookkeeping. Runtime packages with packageFlags bit 0x800 skip normal follower extra-data side effects for actor targets.
 0x64DF8C: jmp     loc_64E1F4
 0x64DF91: mov     edi, [ebx+28h]
 0x64DF94: test    edi, edi
@@ -78,11 +78,11 @@
 0x64E028: test    al, al
 0x64E02A: jnz     loc_64E1F4
 0x64E030: mov     eax, [esi+2Ch]
-0x64E033: lea     ecx, [eax+44h]
+0x64E033: lea     ecx, [eax+44h]; this
 0x64E036: test    ecx, ecx
 0x64E038: jz      loc_64E1F4
 0x64E03E: mov     edi, [esi]
-0x64E040: call    ExtraDataList_GetReferencePointer
+0x64E040: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x64E045: push    eax
 0x64E046: mov     eax, [edi+0D0h]
 0x64E04C: mov     ecx, esi
@@ -101,7 +101,7 @@
 0x64E085: mov     edi, [esp+1Ch+arg_0]
 0x64E089: push    ebp
 0x64E08A: mov     ecx, edi; this
-0x64E08C: call    TESObjectREFR_GetParentCell
+0x64E08C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64E091: mov     edx, [edi]
 0x64E093: mov     [esp+20h+arg_0], eax
 0x64E097: mov     eax, [edx+174h]
@@ -118,7 +118,7 @@
 0x64E0BA: call    TargetData__GetTargetType
 0x64E0BF: mov     ecx, [esp+1Ch+var_C]
 0x64E0C3: mov     ebp, eax
-0x64E0C5: call    sub_452A60
+0x64E0C5: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64E0CA: cmp     ebp, 1
 0x64E0CD: mov     [esi+38h], eax
 0x64E0D0: jnz     short loc_64E0E5
@@ -133,9 +133,9 @@
 0x64E0EC: mov     dword ptr [esi+64h], 0
 0x64E0F3: call    sub_569E80
 0x64E0F8: mov     [esi+6Ch], eax
-0x64E0FB: mov     ecx, offset fAIAcquireObjectDistance
+0x64E0FB: mov     ecx, (offset flt_B36778+170h)
 0x64E100: call    GameSetting_GetSafeFloatPointer
-0x64E105: mov     ecx, offset fAIAcquireObjectDistance
+0x64E105: mov     ecx, (offset flt_B36778+170h)
 0x64E10A: mov     ebx, eax
 0x64E10C: call    GameSetting_GetSafeFloatPointer
 0x64E111: fld     dword ptr [ebx]
@@ -191,7 +191,7 @@
 0x64E198: call    eax
 0x64E19A: test    al, al
 0x64E19C: mov     eax, [esi+44h]
-0x64E19F: mov     ecx, [eax]; this
+0x64E19F: mov     ecx, [eax]; reference
 0x64E1A1: jz      short loc_64E1A6
 0x64E1A3: push    ecx
 0x64E1A4: jmp     short loc_64E1DD
@@ -199,7 +199,7 @@
 0x64E1A8: push    offset ??_R0?AVTESNPC@@@8; struct TypeDescriptor *
 0x64E1AD: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x64E1B2: push    0; int
-0x64E1B4: call    TESObjectREFR_GetOwner
+0x64E1B4: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x64E1B9: push    eax; void *
 0x64E1BA: call    OblivionDynamicCast
 0x64E1BF: add     esp, 14h
@@ -207,7 +207,7 @@
 0x64E1C4: jz      short loc_64E1E9
 0x64E1C6: mov     ebx, [esi]
 0x64E1C8: push    eax
-0x64E1C9: mov     ecx, offset ActorProcessManager_ptr
+0x64E1C9: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x64E1CE: call    sub_675220
 0x64E1D3: mov     edx, [ebx+0D0h]
 0x64E1D9: push    eax

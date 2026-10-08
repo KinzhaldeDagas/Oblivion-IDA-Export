@@ -109,12 +109,12 @@
 0x445F84: call    sub_4431F0
 0x445F89: mov     esi, [ebp+74h]
 0x445F8C: fld     dword ptr [esi+98h]
-0x445F92: call    Double_To_SInt32
+0x445F92: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x445F97: fld     dword ptr [esi+9Ch]
 0x445F9D: mov     edi, eax
 0x445F9F: sar     edi, 0Ch
 0x445FA2: mov     ds:0B33A74h, edi
-0x445FA8: call    Double_To_SInt32
+0x445FA8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x445FAD: fld     dword ptr [esi+0A0h]
 0x445FB3: fstp    [esp+13Ch+var_12C]
 0x445FB7: mov     ebx, eax
@@ -123,11 +123,11 @@
 0x445FC2: fstp    [esp+13Ch+var_128]
 0x445FC6: mov     ds:0B33A70h, ebx
 0x445FCC: fld     [esp+13Ch+var_128]
-0x445FD0: call    Double_To_SInt32
+0x445FD0: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x445FD5: fld     [esp+13Ch+var_12C]
 0x445FD9: sar     eax, 0Ch
 0x445FDC: push    eax
-0x445FDD: call    Double_To_SInt32
+0x445FDD: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x445FE2: mov     edx, [esi]
 0x445FE4: sar     eax, 0Ch
 0x445FE7: push    eax
@@ -148,7 +148,7 @@
 0x446022: push    ecx; int
 0x446023: mov     ecx, [ebp+74h]
 0x446026: push    edx; ArgList
-0x446027: call    sub_4F1630
+0x446027: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x44602C: mov     esi, eax
 0x44602E: test    esi, esi
 0x446030: jz      short loc_44603A
@@ -160,19 +160,19 @@
 0x446043: fld     dword ptr [edi+0A4h]
 0x446049: add     ebx, 1
 0x44604C: mov     ds:0B33A70h, ebx
-0x446052: call    Double_To_SInt32
+0x446052: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x446057: sar     eax, 0Ch
 0x44605A: cmp     ebx, eax
 0x44605C: jle     loc_4460E1
 0x446062: fld     dword ptr [edi+9Ch]
-0x446068: call    Double_To_SInt32
+0x446068: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x44606D: fld     dword ptr [edi+0A0h]
 0x446073: mov     ebx, ds:0B33A74h
 0x446079: sar     eax, 0Ch
 0x44607C: add     ebx, 1
 0x44607F: mov     ds:0B33A70h, eax
 0x446084: mov     ds:0B33A74h, ebx
-0x44608A: call    Double_To_SInt32
+0x44608A: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x44608F: sar     eax, 0Ch
 0x446092: cmp     ebx, eax
 0x446094: jle     short loc_4460E1
@@ -206,9 +206,9 @@
 0x446101: jz      loc_446462
 0x446107: fld     dword ptr ds:0A31C80h
 0x44610D: push    ecx
-0x44610E: mov     ecx, offset TimeGlobals
+0x44610E: mov     ecx, 0B332E0h
 0x446113: fstp    [esp+140h+var_140]; float
-0x446116: call    sub_4029E0
+0x446116: call    TimeGlobals_AdvanceGameTime; Advances GameHour by TimeScale * elapsedSeconds / 3600; rolls GameDay, GameMonth, GameYear, and DaysPassed after 24-hour boundaries.
 0x44611B: mov     ecx, ds:0B3F9ACh
 0x446121: mov     eax, ds:0B3F9A8h
 0x446126: mov     edx, ds:0B3F9B0h
@@ -216,7 +216,7 @@
 0x446130: mov     ecx, esi; this
 0x446132: mov     dword ptr [esp+13Ch+var_124], eax
 0x446136: mov     [esp+13Ch+var_11C], edx
-0x44613A: call    TESObjectCELL_IsInterior
+0x44613A: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44613F: test    al, al
 0x446141: jnz     short loc_446199
 0x446143: mov     ecx, esi; this
@@ -242,7 +242,7 @@
 0x446191: mov     edx, [esp+13Ch+var_108]
 0x446195: mov     [esp+13Ch+var_11C], edx
 0x446199: mov     ecx, esi; this
-0x44619B: call    TESObjectCELL_IsInterior
+0x44619B: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4461A0: test    al, al
 0x4461A2: jz      short loc_4461F4
 0x4461A4: mov     ecx, esi
@@ -320,7 +320,7 @@
 0x44626F: mov     [eax+4], edx
 0x446272: mov     edx, [esp+15Ch+var_11C]
 0x446276: mov     [eax+8], edx
-0x446279: call    sub_66EAF0
+0x446279: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x44627E: mov     ecx, ds:0B33A10h
 0x446284: push    5
 0x446286: call    sub_434020
@@ -329,10 +329,10 @@
 0x446294: push    0
 0x446296: mov     [esp+140h+var_118], eax
 0x44629A: fild    [esp+140h+var_118]
-0x44629E: mov     ecx, esi; this
+0x44629E: mov     ecx, esi; object
 0x4462A0: fdiv    qword ptr ds:0A2FC70h
 0x4462A6: fstp    [esp+140h+var_128]
-0x4462AA: call    TESObjectCELL_GetNiNode?
+0x4462AA: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x4462AF: push    eax
 0x4462B0: call    sub_4A2BA0
 0x4462B5: mov     ebp, eax
@@ -347,7 +347,7 @@
 0x4462D3: mov     ecx, [eax+4]
 0x4462D6: push    eax
 0x4462D7: mov     [esp+140h+var_118], ecx
-0x4462DB: call    FormHeapFree
+0x4462DB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4462E0: mov     edx, [esp+140h+var_118]
 0x4462E4: add     esp, 4
 0x4462E7: test    edx, edx
@@ -373,15 +373,15 @@
 0x446326: mov     byte ptr [ebx+0A8h], 1
 0x44632D: mov     ecx, ds:0B333A0h; this
 0x446333: push    0; a2
-0x446335: call    sub_43FC20
+0x446335: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x44633A: mov     ecx, ds:0B33398h
 0x446340: push    1
 0x446342: call    OSGlobals_PurgeModels
 0x446347: mov     ecx, ds:0B333A0h; this
 0x44634D: push    0; a2
-0x44634F: call    sub_43FC20
+0x44634F: call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.
 0x446354: mov     ecx, esi; this
-0x446356: call    TESObjectCELL_IsInterior
+0x446356: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44635B: test    al, al
 0x44635D: mov     ecx, esi; this
 0x44635F: jz      short loc_4463C9
@@ -416,7 +416,7 @@
 0x4463B1: push    eax
 0x4463B2: push    offset aSInteriorD_1fD; "%s\tInterior\t%d\t%.1f\t%d\t%d\t%d\t%d"...
 0x4463B7: push    offset FileName; "TestAllCells.xls"
-0x4463BC: call    nullsub_return0_0arg
+0x4463BC: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x4463C1: add     esp, 28h
 0x4463C4: jmp     loc_446443
 0x4463C9: fld     [esp+13Ch+var_128]
@@ -457,7 +457,7 @@
 0x446430: push    eax
 0x446431: push    offset aSDDD_1fDDD; "%s\t%d, %d\t%d\t%.1f\t%d\t%d\t%d\r\n"
 0x446436: push    offset FileName; "TestAllCells.xls"
-0x44643B: call    nullsub_return0_0arg
+0x44643B: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x446440: add     esp, 2Ch
 0x446443: mov     eax, ds:0B33A88h
 0x446448: cmp     eax, 4

@@ -1,1 +1,1 @@
-bhkHeightFieldShape
+struct bhkHeightFieldShape;

@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x44A33A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x44A3F9",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -619,13 +619,13 @@
   },
   {
     "ea": "0x44A3FE",
-    "line": "push    ecx; Str1",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44A3FF",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x44A5E1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x44A5F9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x44A666",
-    "line": "call    TESFile_GetMasterByIndex",
+    "line": "call    TESFile_GetMasterByIndex; Oblivion TESFile_GetMasterByIndex returns masterFiles[slot-1] for a one-based MAST index, bounded by masterCount. FormID owner-byte resolution can therefore select distinct alias slots for duplicate filenames.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x44A6F2",
-    "line": "call    TESFile_BuildLoadedMasterArray",
+    "line": "call    TESFile_BuildLoadedMasterArray; MEF PERF 2026-09-08: PERF-5 another producer: discovery routine's final pass resolves masters for each candidate file; earlier pass44A64E also resolves before dependency-driven list reorder44A683..44A6B3. A persistent filename cache must account for list reorder/reload and first-match priority, not just pointer identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2284,5 +2284,101 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AD990",
+    "line": "mov     eax, [ebp-35Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AD996",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AD997",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD99C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AD99D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AD99E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AD9A2",
+    "line": "lea     eax, [edx-374h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AD9A8",
+    "line": "mov     ecx, [edx-378h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AD9AE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AD9B0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD9B5",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD9B8",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AD9BB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AD9BD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD9C2",
+    "line": "mov     eax, offset stru_ADA41C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AD9C7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

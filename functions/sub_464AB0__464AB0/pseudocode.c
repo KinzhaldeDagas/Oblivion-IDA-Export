@@ -28,327 +28,326 @@ void __userpurge sub_464AB0(
   NiPixelData *v26; // eax
   IOManager *v27; // ecx
   NiPixelData *v28; // ebp
-  double v29; // st7
-  DWORD (__stdcall *v30)(); // ebx
-  PlayerCharacter *v31; // ebp
-  DWORD v32; // eax
+  DWORD (__stdcall *v29)(); // ebx
+  PlayerCharacter *v30; // ebp
+  DWORD v31; // eax
   UInt32 unk714; // ecx
-  int v34; // edx
-  void (__cdecl *v35)(int, int *, int, double *, int); // edx
-  const char *v36; // ebx
-  void (__cdecl *v37)(int, double *, int, int *, int); // edx
-  void (__cdecl *v38)(int, double *, int, int *, int); // eax
-  void (__cdecl *v39)(int, unsigned __int8 *, int, int *, int); // ecx
-  void (__cdecl *v40)(int, char *, _DWORD, int *, int); // eax
-  void (__cdecl *v41)(int, int *, int, int *, int); // ecx
-  void (__cdecl *v42)(int, int *, int, int *, int); // edx
-  void (__cdecl *v43)(int, char *, _DWORD, int *, int); // eax
-  void (__cdecl *v44)(int, float *, int, int *, int); // ecx
-  void (__cdecl *v45)(int, UInt32 *, int, int *, int); // edx
-  void (__cdecl *v46)(int, struct _SYSTEMTIME *, int, int *, int); // eax
-  void (__cdecl *v47)(int, float *, int, int *, int); // ecx
-  NiPixelData *v48; // ebx
-  _DWORD *v49; // esi
-  int v50; // [esp+0h] [ebp-70h]
-  unsigned __int8 v51; // [esp+17h] [ebp-59h] BYREF
-  float v52; // [esp+18h] [ebp-58h] BYREF
-  char *v53; // [esp+1Ch] [ebp-54h]
-  NiPixelData *v54; // [esp+20h] [ebp-50h]
-  unsigned int v55; // [esp+24h] [ebp-4Ch] BYREF
-  unsigned int v56; // [esp+28h] [ebp-48h] BYREF
-  int v57; // [esp+2Ch] [ebp-44h] BYREF
-  int v58; // [esp+30h] [ebp-40h] BYREF
-  double v59; // [esp+34h] [ebp-3Ch] BYREF
+  int v33; // edx
+  void (__cdecl *v34)(int, int *, int, double *, int); // edx
+  const char *v35; // ebx
+  void (__cdecl *v36)(int, double *, int, int *, int); // edx
+  void (__cdecl *v37)(int, double *, int, int *, int); // eax
+  void (__cdecl *v38)(int, unsigned __int8 *, int, int *, int); // ecx
+  void (__cdecl *v39)(int, char *, _DWORD, int *, int); // eax
+  void (__cdecl *v40)(int, int *, int, int *, int); // ecx
+  void (__cdecl *v41)(int, int *, int, int *, int); // edx
+  void (__cdecl *v42)(int, char *, _DWORD, int *, int); // eax
+  void (__cdecl *v43)(int, float *, int, int *, int); // ecx
+  void (__cdecl *v44)(int, UInt32 *, int, int *, int); // edx
+  void (__cdecl *v45)(int, struct _SYSTEMTIME *, int, int *, int); // eax
+  void (__cdecl *v46)(int, float *, int, int *, int); // ecx
+  NiPixelData *v47; // ebx
+  _DWORD *v48; // esi
+  unsigned __int8 v49; // [esp+17h] [ebp-59h] BYREF
+  float v50; // [esp+18h] [ebp-58h] BYREF
+  char *v51; // [esp+1Ch] [ebp-54h]
+  NiPixelData *v52; // [esp+20h] [ebp-50h]
+  unsigned int v53; // [esp+24h] [ebp-4Ch] BYREF
+  unsigned int v54; // [esp+28h] [ebp-48h] BYREF
+  int v55; // [esp+2Ch] [ebp-44h] BYREF
+  int v56; // [esp+30h] [ebp-40h] BYREF
+  double v57; // [esp+34h] [ebp-3Ch] BYREF
   char *Name; // [esp+3Ch] [ebp-34h]
   int Level; // [esp+40h] [ebp-30h] BYREF
-  float v62; // [esp+44h] [ebp-2Ch] BYREF
-  UInt32 v63; // [esp+48h] [ebp-28h] BYREF
-  BSStringT v64; // [esp+4Ch] [ebp-24h] BYREF
+  float v60; // [esp+44h] [ebp-2Ch] BYREF
+  UInt32 v61; // [esp+48h] [ebp-28h] BYREF
+  BSStringT v62; // [esp+4Ch] [ebp-24h] BYREF
   struct _SYSTEMTIME SystemTime; // [esp+54h] [ebp-1Ch] BYREF
-  int v66; // [esp+6Ch] [ebp-4h]
+  int v64; // [esp+6Ch] [ebp-4h]
 
-  v11 = a9;
-  v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0;
-  v13 = this + 0x70;
-  v14 = (unsigned __int8 *)(this + 0x71);
-  *(_BYTE *)(this + 0x70) = 0;
-  *(_BYTE *)(this + 0x71) = 0x7D;
-  *(_BYTE *)(this + 0x7C) = 0x7D;
-  if ( v12 )
+  v11 = a9; /*0x464adc*/
+  v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0; /*0x464ae3*/
+  v13 = this + 0x70; /*0x464ae5*/
+  v14 = (unsigned __int8 *)(this + 0x71); /*0x464ae8*/
+  *(_BYTE *)(this + 0x70) = 0; /*0x464aeb*/
+  *(_BYTE *)(this + 0x71) = 0x7D; /*0x464aee*/
+  *(_BYTE *)(this + 0x7C) = 0x7D; /*0x464af2*/
+  if ( v12 ) /*0x464af6*/
   {
-    v15 = *(void (__cdecl **)(int, const char *, int, int *, int))(v11 + 8);
-    v57 = 1;
-    v15(v11, "TES4SAVEGAME", 0xC, &v57, 1);
+    v15 = *(void (__cdecl **)(int, const char *, int, int *, int))(v11 + 8); /*0x464b01*/
+    v55 = 1; /*0x464b13*/
+    v15(v11, "TES4SAVEGAME", 0xC, &v55, 1); /*0x464b1b*/
   }
   else
   {
-    *(_DWORD *)(this + 0x90) += 0xC;
+    *(_DWORD *)(this + 0x90) += 0xC; /*0x464af8*/
   }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464b28*/
   {
-    ++*(_DWORD *)(this + 0x90);
-  }
-  else
-  {
-    v16 = *(void (__cdecl **)(int, int, int, int *, int))(v11 + 8);
-    v57 = 1;
-    v16(v11, v13, 1, &v57, 1);
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    ++*(_DWORD *)(this + 0x90);
+    ++*(_DWORD *)(this + 0x90); /*0x464b2f*/
   }
   else
   {
-    v57 = 1;
-    (*(void (__cdecl **)(int, unsigned __int8 *, int, int *, int))(v11 + 8))(v11, v14, 1, &v57, 1);
+    v16 = *(void (__cdecl **)(int, int, int, int *, int))(v11 + 8); /*0x464b37*/
+    v55 = 1; /*0x464b45*/
+    v16(v11, v13, 1, &v55, 1); /*0x464b4d*/
   }
-  if ( !*(_DWORD *)(this + 0xA4) )
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464b60*/
   {
-    GetSystemTime((LPSYSTEMTIME)(this + 0x94));
-    *(_DWORD *)(this + 0xA4) = *v14;
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    *(_DWORD *)(this + 0x90) += 0x10;
+    ++*(_DWORD *)(this + 0x90); /*0x464b62*/
   }
   else
   {
-    v17 = *(void (__cdecl **)(int, int, int, int *, int))(v11 + 8);
-    v57 = 1;
-    v17(v11, this + 0x94, 0x10, &v57, 1);
+    v55 = 1; /*0x464b71*/
+    (*(void (__cdecl **)(int, unsigned __int8 *, int, int *, int))(v11 + 8))(v11, v14, 1, &v55, 1); /*0x464b7a*/
   }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
+  if ( !*(_DWORD *)(this + 0xA4) ) /*0x464b7f*/
   {
-    *(_DWORD *)(this + 0x90) += 4;
+    GetSystemTime((LPSYSTEMTIME)(this + 0x94)); /*0x464b95*/
+    *(_DWORD *)(this + 0xA4) = *v14; /*0x464b9f*/
+  }
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464ba9*/
+  {
+    *(_DWORD *)(this + 0x90) += 0x10; /*0x464bab*/
   }
   else
   {
-    v18 = *(void (__cdecl **)(int, int, int, int *, int))(v11 + 8);
-    v57 = 1;
-    v18(v11, this + 0xA4, 4, &v57, 1);
+    v17 = *(void (__cdecl **)(int, int, int, int *, int))(v11 + 8); /*0x464bb4*/
+    v55 = 1; /*0x464bc8*/
+    v17(v11, this + 0x94, 0x10, &v55, 1); /*0x464bd0*/
   }
-  Name = TESObjectREFR_GetName((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-  v19 = &Name[strlen(Name) + 1];
-  v20 = (Actor *)TESDataHandler_g_PlayerRef;
-  v51 = (_BYTE)v19 - (_BYTE)Name;
-  Level = (unsigned __int16)Actor_GetLevel(v20, v50);
-  v64.m_data = 0;
-  v64.m_dataLen = 0;
-  v64.m_bufLen = 0;
-  v21 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-  v66 = 0;
-  GetTeleportCellName(v21, &v64);
-  m_data = v64.m_data;
-  v53 = v64.m_data;
-  if ( !v64.m_data )
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464bde*/
   {
-    ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-    m_data = (char *)ParentCell->vtbl->GetEditorName(ParentCell);
-    v53 = m_data;
+    *(_DWORD *)(this + 0x90) += 4; /*0x464be0*/
   }
-  LOBYTE(a9) = 0;
-  if ( m_data )
-    LOBYTE(a9) = strlen(m_data) + 1;
-  v59 = TimeGlobals_GetGameHour(&TimeGlobals) / dbl_A2F920;
-  v62 = COERCE_FLOAT(TimeGlobals_GetGameDaysPassed(&TimeGlobals));
-  v24 = (double)SLODWORD(v62);
-  if ( v62 < 0.0 )
-    v24 = v24 + flt_A2FC78;
-  v62 = v24 + v59;
-  GetLocalTime(&SystemTime);
-  v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0;
-  v52 = 0.0;
-  v55 = 0x100;
-  v56 = 0x100;
-  v54 = 0;
-  v57 = 0;
-  if ( v12 )
+  else
   {
-    v25 = nullsub_returnTrue_0arg();
-    sub_432890((volatile LONG *)ioManager);
-    v26 = Screenshot_RenderTexture(a3, v25, a4, &v55, &v56);
-    v27 = ioManager;
-    v28 = v26;
-    v54 = v26;
-    sub_432860((volatile LONG *)v27);
-    v29 = nullsub_returnTrue_0arg();
-    if ( v28 )
+    v18 = *(void (__cdecl **)(int, int, int, int *, int))(v11 + 8); /*0x464be9*/
+    v55 = 1; /*0x464bf7*/
+    v18(v11, this + 0xA4, 4, &v55, 1); /*0x464bff*/
+  }
+  Name = TESObjectREFR_GetName((TESObjectREFR *)reference); /*0x464c0f*/
+  v19 = &Name[strlen(Name) + 1]; /*0x464c1d*/
+  v20 = (Actor *)reference; /*0x464c1f*/
+  v49 = (_BYTE)v19 - (_BYTE)Name; /*0x464c29*/
+  Level = (unsigned __int16)Actor_GetLevel(v20); /*0x464c37*/
+  v62.m_data = 0; /*0x464c3b*/
+  v62.m_dataLen = 0; /*0x464c3f*/
+  v62.m_bufLen = 0; /*0x464c44*/
+  v21 = (TESObjectREFR *)reference; /*0x464c49*/
+  v64 = 0; /*0x464c54*/
+  GetTeleportCellName(v21, &v62); /*0x464c58*/
+  m_data = v62.m_data; /*0x464c5d*/
+  v51 = v62.m_data; /*0x464c63*/
+  if ( !v62.m_data ) /*0x464c67*/
+  {
+    ParentCell = Shared_GetDwordAtOffset40((TESObjectREFR *)reference); /*0x464c6f*/
+    m_data = (char *)ParentCell->vtbl->GetEditorName(ParentCell); /*0x464c7e*/
+    v51 = m_data; /*0x464c80*/
+  }
+  LOBYTE(a9) = 0; /*0x464c86*/
+  if ( m_data ) /*0x464c8b*/
+    LOBYTE(a9) = strlen(m_data) + 1; /*0x464c9d*/
+  v57 = TimeGlobals_GetGameHour(&MEMORY[0xB332E0]) / dbl_A2F920; /*0x464cb6*/
+  v60 = COERCE_FLOAT(TimeGlobals_GetGameDaysPassed(&MEMORY[0xB332E0])); /*0x464cc1*/
+  v24 = (double)SLODWORD(v60); /*0x464cc5*/
+  if ( v60 < 0.0 ) /*0x464cc9*/
+    v24 = v24 + flt_A2FC78; /*0x464ccb*/
+  v25 = v24 + v57; /*0x464cd1*/
+  v60 = v25; /*0x464cda*/
+  GetLocalTime(&SystemTime); /*0x464cde*/
+  v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0; /*0x464cef*/
+  v50 = 0.0; /*0x464cf2*/
+  v53 = 0x100; /*0x464cf6*/
+  v54 = 0x100; /*0x464cfa*/
+  v52 = 0; /*0x464cfe*/
+  v55 = 0; /*0x464d02*/
+  if ( v12 ) /*0x464d06*/
+  {
+    Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x464d0a*/
+    sub_432890((volatile LONG *)MEMORY[0xB33A10]); /*0x464d18*/
+    v26 = Screenshot_RenderTexture(a3, v25, a4, &v53, &v54); /*0x464d27*/
+    v27 = MEMORY[0xB33A10]; /*0x464d2c*/
+    v28 = v26; /*0x464d32*/
+    v52 = v26; /*0x464d37*/
+    sub_432860((volatile LONG *)v27); /*0x464d3b*/
+    Cmd_AddAchievement_PC_ReturnTrueNoOp(); /*0x464d42*/
+    if ( v28 ) /*0x464d4c*/
     {
-      v57 = *(_DWORD *)(*((_DWORD *)v28 + 0x17) + 4) - **((_DWORD **)v28 + 0x17);
-      LODWORD(v52) = v57 + 8;
+      v55 = *(_DWORD *)(*((_DWORD *)v28 + 0x17) + 4) - **((_DWORD **)v28 + 0x17); /*0x464d58*/
+      LODWORD(v50) = v55 + 8; /*0x464d5f*/
     }
   }
   else
   {
-    v52 = (double)nHeight / (double)nWidth;
-    v29 = v52 * dbl_A3B1B8;
-    LODWORD(v52) = 0x300 * Double_To_SInt32(v29) + 8;
+    v50 = (double)nHeight / (double)nWidth; /*0x464d71*/
+    v25 = v50 * dbl_A3B1B8; /*0x464d79*/
+    LODWORD(v50) = 0x300 * Double_To_SInt32(v25) + 8; /*0x464d8d*/
   }
-  v30 = GetTickCount;
-  v31 = TESDataHandler_g_PlayerRef;
-  v31->unk714 += GetTickCount() - v31->TickCount;
-  v32 = v30();
-  unk714 = v31->unk714;
-  v31->TickCount = v32;
-  v63 = unk714;
-  v34 = *(_DWORD *)(this + 0x18) >> 9;
-  v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0;
-  v58 = v51 + LODWORD(v52) + (unsigned __int8)a9 + 0x24;
-  if ( v12 )
+  v29 = GetTickCount; /*0x464d91*/
+  v30 = reference; /*0x464d97*/
+  v30->unk714 += GetTickCount() - v30->TickCount; /*0x464da5*/
+  v31 = v29(); /*0x464dab*/
+  unk714 = v30->unk714; /*0x464dad*/
+  v30->TickCount = v31; /*0x464db3*/
+  v61 = unk714; /*0x464dc7*/
+  v33 = *(_DWORD *)(this + 0x18) >> 9; /*0x464dd2*/
+  v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0; /*0x464dd5*/
+  v56 = v49 + LODWORD(v50) + (unsigned __int8)a9 + 0x24; /*0x464dd8*/
+  if ( v12 ) /*0x464de1*/
   {
-    v35 = *(void (__cdecl **)(int, int *, int, double *, int))(v11 + 8);
-    LODWORD(v59) = 1;
-    v35(v11, &v58, 4, &v59, 1);
-  }
-  else
-  {
-    *(_DWORD *)(this + 0x90) += 4;
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0
-    || (v36 = (const char *)Str) != 0 && (strstr((const char *)Str, "quicksave") || strstr(v36, "autosave")) )
-  {
-    v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0;
-    LODWORD(v59) = 0;
-    if ( v12 )
-    {
-      v38 = *(void (__cdecl **)(int, double *, int, int *, int))(v11 + 8);
-      Str = 1;
-      v38(v11, &v59, 4, &Str, 1);
-    }
-    else
-    {
-      *(_DWORD *)(this + 0x90) += 4;
-    }
+    v34 = *(void (__cdecl **)(int, int *, int, double *, int))(v11 + 8); /*0x464dec*/
+    LODWORD(v57) = 1; /*0x464dfd*/
+    v34(v11, &v56, 4, &v57, 1); /*0x464e01*/
   }
   else
   {
-    if ( !*(_DWORD *)(this + 0x88) )
-      sub_464320((_DWORD *)this, v29, st4_0, a3, a4, a5, a6, a7, a8, v34);
-    v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0;
-    LODWORD(v59) = *(_DWORD *)(this + 0x88);
-    if ( v12 )
+    *(_DWORD *)(this + 0x90) += 4; /*0x464de3*/
+  }
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 /*0x464e34*/
+    || (v35 = (const char *)Str) != 0 && (strstr((const char *)Str, "quicksave") || strstr(v35, "autosave")) )
+  {
+    v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0; /*0x464e9f*/
+    LODWORD(v57) = 0; /*0x464ea1*/
+    if ( v12 ) /*0x464ea9*/
     {
-      v37 = *(void (__cdecl **)(int, double *, int, int *, int))(v11 + 8);
-      Str = 1;
-      v37(v11, &v59, 4, &Str, 1);
+      v37 = *(void (__cdecl **)(int, double *, int, int *, int))(v11 + 8); /*0x464eb4*/
+      Str = 1; /*0x464ec5*/
+      v37(v11, &v57, 4, &Str, 1); /*0x464ecc*/
     }
     else
     {
-      *(_DWORD *)(this + 0x90) += 4;
+      *(_DWORD *)(this + 0x90) += 4; /*0x464eab*/
     }
-    ++*(_DWORD *)(this + 0x88);
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    ++*(_DWORD *)(this + 0x90);
   }
   else
   {
-    v39 = *(void (__cdecl **)(int, unsigned __int8 *, int, int *, int))(v11 + 8);
-    Str = 1;
-    v39(v11, &v51, 1, &Str, 1);
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    *(_DWORD *)(this + 0x90) += v51;
-  }
-  else
-  {
-    v40 = *(void (__cdecl **)(int, char *, _DWORD, int *, int))(v11 + 8);
-    Str = 1;
-    v40(v11, Name, v51, &Str, 1);
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    *(_DWORD *)(this + 0x90) += 2;
-  }
-  else
-  {
-    v41 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 8);
-    Str = 1;
-    v41(v11, &Level, 2, &Str, 1);
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    ++*(_DWORD *)(this + 0x90);
-  }
-  else
-  {
-    v42 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 8);
-    Str = 1;
-    v42(v11, &a9, 1, &Str, 1);
-  }
-  if ( v53 )
-  {
-    if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
+    if ( !*(_DWORD *)(this + 0x88) ) /*0x464e40*/
+      sub_464320((_DWORD *)this, v25, st4_0, a3, a4, a5, a6, a7, a8, v33); /*0x464e4b*/
+    v12 = (*(_DWORD *)(this + 0x18) & 0x200) == 0; /*0x464e5c*/
+    LODWORD(v57) = *(_DWORD *)(this + 0x88); /*0x464e5f*/
+    if ( v12 ) /*0x464e63*/
     {
-      *(_DWORD *)(this + 0x90) += (unsigned __int8)a9;
+      v36 = *(void (__cdecl **)(int, double *, int, int *, int))(v11 + 8); /*0x464e74*/
+      Str = 1; /*0x464e85*/
+      v36(v11, &v57, 4, &Str, 1); /*0x464e8c*/
     }
     else
     {
-      v43 = *(void (__cdecl **)(int, char *, _DWORD, int *, int))(v11 + 8);
-      Str = 1;
-      v43(v11, v53, (unsigned __int8)a9, &Str, 1);
+      *(_DWORD *)(this + 0x90) += 4; /*0x464e65*/
     }
+    ++*(_DWORD *)(this + 0x88); /*0x464e6c*/
   }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464eda*/
   {
-    *(_DWORD *)(this + 0x90) += 4;
-  }
-  else
-  {
-    v44 = *(void (__cdecl **)(int, float *, int, int *, int))(v11 + 8);
-    Str = 1;
-    v44(v11, &v62, 4, &Str, 1);
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    *(_DWORD *)(this + 0x90) += 4;
+    ++*(_DWORD *)(this + 0x90); /*0x464edc*/
   }
   else
   {
-    v45 = *(void (__cdecl **)(int, UInt32 *, int, int *, int))(v11 + 8);
-    Str = 1;
-    v45(v11, &v63, 4, &Str, 1);
+    v38 = *(void (__cdecl **)(int, unsigned __int8 *, int, int *, int))(v11 + 8); /*0x464ee4*/
+    Str = 1; /*0x464ef4*/
+    v38(v11, &v49, 1, &Str, 1); /*0x464efb*/
   }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464f0e*/
   {
-    *(_DWORD *)(this + 0x90) += 0x10;
-  }
-  else
-  {
-    v46 = *(void (__cdecl **)(int, struct _SYSTEMTIME *, int, int *, int))(v11 + 8);
-    Str = 1;
-    v46(v11, &SystemTime, 0x10, &Str, 1);
-  }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
-  {
-    *(_DWORD *)(this + 0x90) += 4;
+    *(_DWORD *)(this + 0x90) += v49; /*0x464f10*/
   }
   else
   {
-    v47 = *(void (__cdecl **)(int, float *, int, int *, int))(v11 + 8);
-    Str = 1;
-    v47(v11, &v52, 4, &Str, 1);
+    v39 = *(void (__cdecl **)(int, char *, _DWORD, int *, int))(v11 + 8); /*0x464f23*/
+    Str = 1; /*0x464f28*/
+    v39(v11, Name, v49, &Str, 1); /*0x464f2f*/
   }
-  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 )
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464f3d*/
   {
-    *(_DWORD *)(this + 0x90) += LODWORD(v52);
+    *(_DWORD *)(this + 0x90) += 2; /*0x464f3f*/
   }
   else
   {
-    v48 = v54;
-    if ( v54 )
+    v40 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 8); /*0x464f48*/
+    Str = 1; /*0x464f59*/
+    v40(v11, &Level, 2, &Str, 1); /*0x464f60*/
+  }
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464f6e*/
+  {
+    ++*(_DWORD *)(this + 0x90); /*0x464f70*/
+  }
+  else
+  {
+    v41 = *(void (__cdecl **)(int, int *, int, int *, int))(v11 + 8); /*0x464f78*/
+    Str = 1; /*0x464f8b*/
+    v41(v11, &a9, 1, &Str, 1); /*0x464f92*/
+  }
+  if ( v51 ) /*0x464f9d*/
+  {
+    if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464fad*/
     {
-      sub_45BAB0((_DWORD *)this, v11, (int)&v55, 4);
-      sub_45BAB0((_DWORD *)this, v11, (int)&v56, 4);
-      sub_45BAB0((_DWORD *)this, v11, *((_DWORD *)v48 + 0x14) + **((_DWORD **)v48 + 0x17), v57);
-      (**(void (__thiscall ***)(NiPixelData *, int))v48)(v48, 1);
+      *(_DWORD *)(this + 0x90) += (unsigned __int8)a9; /*0x464faf*/
+    }
+    else
+    {
+      v42 = *(void (__cdecl **)(int, char *, _DWORD, int *, int))(v11 + 8); /*0x464fbe*/
+      Str = 1; /*0x464fc3*/
+      v42(v11, v51, (unsigned __int8)a9, &Str, 1); /*0x464fca*/
     }
   }
-  v49 = *(_DWORD **)(this + 0x40);
-  if ( v49 )
-    sub_4531B0(v49, 1, v58, "Save Game Header");
-  FormHeapFree((unsigned int)v64.m_data);
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x464fd8*/
+  {
+    *(_DWORD *)(this + 0x90) += 4; /*0x464fda*/
+  }
+  else
+  {
+    v43 = *(void (__cdecl **)(int, float *, int, int *, int))(v11 + 8); /*0x464fe3*/
+    Str = 1; /*0x464ff4*/
+    v43(v11, &v60, 4, &Str, 1); /*0x464ffb*/
+  }
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x465009*/
+  {
+    *(_DWORD *)(this + 0x90) += 4; /*0x46500b*/
+  }
+  else
+  {
+    v44 = *(void (__cdecl **)(int, UInt32 *, int, int *, int))(v11 + 8); /*0x465014*/
+    Str = 1; /*0x465025*/
+    v44(v11, &v61, 4, &Str, 1); /*0x46502c*/
+  }
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x465039*/
+  {
+    *(_DWORD *)(this + 0x90) += 0x10; /*0x46503b*/
+  }
+  else
+  {
+    v45 = *(void (__cdecl **)(int, struct _SYSTEMTIME *, int, int *, int))(v11 + 8); /*0x465044*/
+    Str = 1; /*0x465055*/
+    v45(v11, &SystemTime, 0x10, &Str, 1); /*0x46505c*/
+  }
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x46506a*/
+  {
+    *(_DWORD *)(this + 0x90) += 4; /*0x46506c*/
+  }
+  else
+  {
+    v46 = *(void (__cdecl **)(int, float *, int, int *, int))(v11 + 8); /*0x465075*/
+    Str = 1; /*0x465086*/
+    v46(v11, &v50, 4, &Str, 1); /*0x46508d*/
+  }
+  if ( (*(_DWORD *)(this + 0x18) & 0x200) != 0 ) /*0x46509b*/
+  {
+    *(_DWORD *)(this + 0x90) += LODWORD(v50); /*0x4650e8*/
+  }
+  else
+  {
+    v47 = v52; /*0x46509d*/
+    if ( v52 ) /*0x4650a3*/
+    {
+      sub_45BAB0((_DWORD *)this, v11, (int)&v53, 4); /*0x4650af*/
+      sub_45BAB0((_DWORD *)this, v11, (int)&v54, 4); /*0x4650be*/
+      sub_45BAB0((_DWORD *)this, v11, *((_DWORD *)v47 + 0x14) + **((_DWORD **)v47 + 0x17), v55); /*0x4650d4*/
+      (**(void (__thiscall ***)(NiPixelData *, int))v47)(v47, 1); /*0x4650e0*/
+    }
+  }
+  v48 = *(_DWORD **)(this + 0x40); /*0x4650ee*/
+  if ( v48 ) /*0x4650f3*/
+    sub_4531B0(v48, 1, v56, "Save Game Header"); /*0x465101*/
+  FormHeapFree((unsigned int)v62.m_data); /*0x46510b*/
 }

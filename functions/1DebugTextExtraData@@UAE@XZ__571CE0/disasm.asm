@@ -12,7 +12,7 @@
 0x571D02: mov     esi, ecx
 0x571D04: mov     eax, [esi+10h]
 0x571D07: push    eax
-0x571D08: call    FormHeapFree
+0x571D08: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x571D0D: xor     eax, eax
 0x571D0F: add     esp, 4
 0x571D12: mov     ecx, esi
@@ -27,3 +27,12 @@
 0x571D38: pop     esi
 0x571D39: add     esp, 10h
 0x571D3C: retn
+0x9BDDF0: mov     ecx, [ebp-10h]
+0x9BDDF3: jmp     NiExtraData_dtor
+0x9BDDF8: mov     edx, [esp+arg_4]
+0x9BDDFC: lea     eax, [edx-8]
+0x9BDDFF: mov     ecx, [edx-0Ch]
+0x9BDE02: xor     ecx, eax
+0x9BDE04: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BDE09: mov     eax, offset stru_AE766C
+0x9BDE0E: jmp     ___CxxFrameHandler3

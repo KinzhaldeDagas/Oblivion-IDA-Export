@@ -1,4 +1,4 @@
-0x403960: mov     edx, dword ptr [esp+scheme]
+0x403960: mov     edx, dword ptr [esp+scheme]; [Controller decode 2026-07-09] Resets requested binding scheme. Scheme 0 keyboard, 1 mouse, 2 joystick/controller, 3 all. Joystick defaults are installed only when joystick flag bit0 is active; AlwaysRunControlBoh at +0x1BD5 is adjacent to but outside the persisted 29-row joystick block.
 0x403964: push    ebx
 0x403965: xor     eax, eax
 0x403967: mov     bl, 0FFh

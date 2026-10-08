@@ -1,4 +1,4 @@
-0x5F0D60: sub     esp, 18h
+0x5F0D60: sub     esp, 18h; Health Bars plugin analysis: native predicate for actor 3D HealthBar visibility. Vanilla excludes player, requires bHealthBarShowing, actor alive/loaded/visible/in range/in view, and hides when base health <= current health. Plugin changes the equality case so full-health actors can show the native bar while still hiding current > base.
 0x5F0D63: push    ebx
 0x5F0D64: push    esi
 0x5F0D65: mov     esi, ecx
@@ -12,7 +12,7 @@
 0x5F0D78: retn
 0x5F0D79: cmp     byte ptr ds:0B14E90h, 0
 0x5F0D80: push    edi
-0x5F0D81: jz      loc_5F0ED0
+0x5F0D81: jz      loc_5F0ED0; Health Bars plugin patch site for no-bars issue: vanilla returns false when bHealthBarShowing:GamePlay is 0. Plugin NOPs this branch so the setting cannot suppress actor-head bars after startup/INI load.
 0x5F0D87: mov     eax, [esi]
 0x5F0D89: mov     edx, [eax+170h]
 0x5F0D8F: push    ebp
@@ -38,8 +38,8 @@
 0x5F0DC6: pop     ebp
 0x5F0DC7: fcomp   [esp+24h+var_14]
 0x5F0DCB: fnstsw  ax
-0x5F0DCD: test    ah, 41h
-0x5F0DD0: jnp     loc_5F0ED0
+0x5F0DCD: test    ah, 41h; Health Bars plugin patch site: vanilla tests FPU C0|C3 and hides base<=current health. Plugin changes mask/branch to hide only current>base, allowing full-health actor bars.
+0x5F0DD0: jnp     loc_5F0ED0; Health Bars plugin patch site for no-bars issue: vanilla returns false when TESActorBase health <= current health. Leveled/modified actors can have current health above base-form health, so plugin NOPs this branch and clamps the visual ratio in the 0x640080 call hook.
 0x5F0DD6: mov     eax, [esi]
 0x5F0DD8: mov     edx, [eax+198h]
 0x5F0DDE: push    0
@@ -62,7 +62,7 @@
 0x5F0E1B: mov     ecx, esi
 0x5F0E1D: call    eax
 0x5F0E1F: push    eax
-0x5F0E20: push    offset dword_B3FAB0
+0x5F0E20: push    offset parent
 0x5F0E25: call    NiRTTI_Cast
 0x5F0E2A: push    edi
 0x5F0E2B: push    eax
@@ -94,7 +94,7 @@
 0x5F0E7D: call    sub_4121A0
 0x5F0E82: lea     ecx, [esp+24h+var_C]
 0x5F0E86: push    ecx
-0x5F0E87: call    sub_683CB0
+0x5F0E87: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x5F0E8C: fstp    [esp+28h+var_18]
 0x5F0E90: fld     [esp+28h+var_18]
 0x5F0E94: mov     eax, ds:0B333C4h

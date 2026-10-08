@@ -14,7 +14,7 @@
 0x8A2EF1: mov     esp, ebp
 0x8A2EF3: pop     ebp
 0x8A2EF4: retn    4
-0x8A2EF7: mov     eax, offset stru_BA7A40
+0x8A2EF7: mov     eax, offset unk_BA7A40
 0x8A2EFC: movaps  xmm0, xmmword ptr [eax]
 0x8A2EFF: mov     eax, [ebp+arg_0]
 0x8A2F02: movaps  xmmword ptr [eax], xmm0

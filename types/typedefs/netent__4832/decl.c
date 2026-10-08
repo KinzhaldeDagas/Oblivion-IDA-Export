@@ -1,1 +1,1 @@
-netent
+struct netent;

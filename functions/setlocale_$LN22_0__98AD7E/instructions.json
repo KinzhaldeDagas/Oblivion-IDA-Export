@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x98ADF4",
-    "line": "push    18h; Size",
+    "line": "push    18h; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -229,19 +229,19 @@
   },
   {
     "ea": "0x98ADFE",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x98ADFF",
-    "line": "push    offset unk_BAA620; Dst",
+    "line": "push    (offset dword_BA9E10+810h); destination",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x98AE04",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -274,5 +274,41 @@
     "line": "jmp     short _setlocale___$LN26_0",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x98AE3B",
+    "line": "push    edi; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98AE3C",
+    "line": "call    ___removelocaleref",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98AE41",
+    "line": "push    edi; Memory",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x98AE42",
+    "line": "call    ___freetlocinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x98AE47",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x98AE48",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
   }
 ]

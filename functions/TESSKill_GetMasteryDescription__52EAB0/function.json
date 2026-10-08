@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x52EAB0",
+      "0x52EAEB"
+    ]
+  ],
+  "chunks_sha256": "de2e33ee7c214ca3d361a2fee56ffd5bdc7ceddb6d5e6a2e1445b3550e5adc4a",
+  "comment_regular": "Return a mastery-specific SKIL description. Novice uses the shared novice text; Apprentice through Master use the four descriptions stored at TESSkill+0x40..+0x58; invalid ranks return empty.",
+  "comment_repeatable": "Return a mastery-specific SKIL description. Novice uses the shared novice text; Apprentice through Master use the four descriptions stored at TESSkill+0x40..+0x58; invalid ranks return empty.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "TESSKill_GetMasteryDescription",
+  "display_name": "TESSkill_GetMasteryDescription",
   "end_ea": "0x52EAEB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESSKill_GetMasteryDescription",
+  "name": "TESSkill_GetMasteryDescription",
   "segment": ".text",
   "sha256": "de2e33ee7c214ca3d361a2fee56ffd5bdc7ceddb6d5e6a2e1445b3550e5adc4a",
   "size": 59,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52EAB0",
-  "type": "CHAR *__thiscall(_DWORD *this, int)",
+  "total_chunk_size": 59,
+  "type": "const char *__thiscall(TESSkill *this, SkillMasteryLevel mastery)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 2
 }

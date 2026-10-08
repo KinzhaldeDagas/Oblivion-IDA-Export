@@ -87,14 +87,14 @@
 0x4EBEDA: fld     qword ptr ds:0A46040h
 0x4EBEE0: fmul    st(1), st
 0x4EBEE2: fxch    st(1)
-0x4EBEE4: call    Double_To_SInt32
+0x4EBEE4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EBEE9: fld     [esp+48h+arg_4]
 0x4EBEED: fld     st
 0x4EBEEF: mov     esi, eax
 0x4EBEF1: fmulp   st(2), st
 0x4EBEF3: mov     [esp+48h+a2], eax
 0x4EBEF7: fxch    st(1)
-0x4EBEF9: call    Double_To_SInt32
+0x4EBEF9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4EBEFE: fldz
 0x4EBF00: fcom    st(2)
 0x4EBF02: mov     ecx, eax
@@ -597,7 +597,7 @@
 0x4EC512: xor     bl, bl
 0x4EC514: cmp     ds:0B43384h, bl
 0x4EC51A: jz      short loc_4EC528
-0x4EC51C: mov     ecx, offset stru_B43400; lpCriticalSection
+0x4EC51C: mov     ecx, offset unk_B43400; lpCriticalSection
 0x4EC521: call    sub_43F2E0
 0x4EC526: mov     bl, 1
 0x4EC528: push    0
@@ -609,7 +609,7 @@
 0x4EC53D: add     esp, 0Ch
 0x4EC540: test    bl, bl
 0x4EC542: jz      short loc_4EC54E
-0x4EC544: mov     ecx, offset stru_B43400; lpCriticalSection
+0x4EC544: mov     ecx, offset unk_B43400; lpCriticalSection
 0x4EC549: call    sub_43F300
 0x4EC54E: mov     ecx, ds:0B36094h; this
 0x4EC554: test    ecx, ecx
@@ -618,9 +618,9 @@
 0x4EC55A: push    0; a3
 0x4EC55C: push    ecx
 0x4EC55D: fstp    [esp+50h+var_50]; a2
-0x4EC560: call    NiAVObject_UpdateNiAVObject
+0x4EC560: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4EC565: mov     ecx, ds:0B36094h; this
-0x4EC56B: call    NiAVObject_InitializePropertyState
+0x4EC56B: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4EC570: mov     ecx, dword ptr [esp+48h+var_C]
 0x4EC574: mov     large fs:0, ecx
 0x4EC57B: pop     ecx
@@ -630,3 +630,15 @@
 0x4EC57F: pop     ebx
 0x4EC580: add     esp, 34h
 0x4EC583: retn
+0x9CACC0: mov     eax, [ebp-18h]
+0x9CACC3: push    eax
+0x9CACC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CACC9: pop     ecx
+0x9CACCA: retn
+0x9CACCB: mov     edx, [esp+arg_4]
+0x9CACCF: lea     eax, [edx-38h]
+0x9CACD2: mov     ecx, [edx-3Ch]
+0x9CACD5: xor     ecx, eax
+0x9CACD7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CACDC: mov     eax, offset stru_AF32FC
+0x9CACE1: jmp     ___CxxFrameHandler3

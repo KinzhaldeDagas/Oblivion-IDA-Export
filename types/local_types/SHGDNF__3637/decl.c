@@ -1,1 +1,1 @@
-SHGDNF
+typedef DWORD SHGDNF;

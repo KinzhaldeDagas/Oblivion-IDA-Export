@@ -1,9 +1,9 @@
-0x4F7FA0: fldz
+0x4F7FA0: fldz; GetIsCurrentPackage_Eval requires an actor subject and Package parameter (form type 0x3D). It reads the subject's current package; for a temporary-override package it prefers the actor's ExtraPackage when present, then pointer-compares against the parameter.
 0x4F7FA2: push    ebp
-0x4F7FA3: mov     ebp, [esp+4+arg_C]
+0x4F7FA3: mov     ebp, [esp+4+value]
 0x4F7FA7: fstp    qword ptr [ebp+0]
 0x4F7FAA: push    esi
-0x4F7FAB: mov     esi, [esp+8+arg_0]
+0x4F7FAB: mov     esi, [esp+8+subject]
 0x4F7FAF: push    edi
 0x4F7FB0: xor     edi, edi
 0x4F7FB2: test    esi, esi
@@ -15,7 +15,7 @@
 0x4F7FC2: test    al, al
 0x4F7FC4: jz      short loc_4F7FC8
 0x4F7FC6: mov     edi, esi
-0x4F7FC8: mov     eax, [esp+0Ch+arg_4]
+0x4F7FC8: mov     eax, [esp+0Ch+package]
 0x4F7FCC: push    ebx
 0x4F7FCD: xor     ebx, ebx
 0x4F7FCF: test    eax, eax
@@ -32,8 +32,8 @@
 0x4F7FEA: mov     esi, eax
 0x4F7FEC: test    esi, esi
 0x4F7FEE: jz      short loc_4F8012
-0x4F7FF0: mov     ecx, esi
-0x4F7FF2: call    sub_5660A0
+0x4F7FF0: mov     ecx, esi; self
+0x4F7FF2: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x4F7FF7: test    al, al
 0x4F7FF9: jz      short loc_4F8012
 0x4F7FFB: add     edi, 44h ; 'D'

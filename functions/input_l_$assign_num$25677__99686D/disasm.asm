@@ -52,3 +52,17 @@
 0x9968F3: test    al, al
 0x9968F5: jnz     loc_995E6B
 0x9968FB: jmp     short __input_l___$error_return$25524
+0x996903: cmp     eax, 0FFFFFFFFh
+0x996906: jz      short loc_996913
+0x996908: push    dword ptr [ebp-14h]; File
+0x99690B: push    eax; Ch
+0x99690C: call    __ungetc_nolock
+0x996911: pop     ecx
+0x996912: pop     ecx
+0x996913: cmp     ebx, 0FFFFFFFFh
+0x996916: jz      short __input_l___$error_return$25524
+0x996918: push    dword ptr [ebp-14h]; File
+0x99691B: push    dword ptr [ebp-4]; Ch
+0x99691E: call    __ungetc_nolock
+0x996923: pop     ecx
+0x996924: pop     ecx

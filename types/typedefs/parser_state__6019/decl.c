@@ -1,1 +1,13 @@
-parser_state
+enum parser_state : __int32
+{
+LINE_START = 0x0,
+SECTION_NAME = 0x1,
+KEY_NAME = 0x2,
+VALUE_NAME = 0x3,
+EOL_BACKSLASH = 0x4,
+QUOTES = 0x5,
+LEADING_SPACES = 0x6,
+TRAILING_SPACES = 0x7,
+COMMENT = 0x8,
+NB_PARSER_STATES = 0x9,
+};

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_SCOPE_TABLE",
+  "definition": "struct _SCOPE_TABLE\n{\nULONG Count;\n$C90EE666A55B50DD87FBA4A0CE8476AD ScopeRecord[1];\n}\n",
   "id": 18374686479672048263,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Count",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ScopeRecord",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 16
+      "size": 16,
+      "type": "$C90EE666A55B50DD87FBA4A0CE8476AD[1]"
     }
   ],
   "name": "_SCOPE_TABLE",
+  "ordinal": 9015,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 20
 }

@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4A64C1",
-    "line": "mov     [esp+38h+var_1C], eax",
+    "line": "mov     [esp+38h+self], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x4A64C7",
-    "line": "mov     [esp+38h+var_1C], ebx",
+    "line": "mov     [esp+38h+self], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -238,12 +238,6 @@
     "line": "jmp     short loc_4A64E0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4A64DD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4A64E0",
@@ -289,7 +283,7 @@
   },
   {
     "ea": "0x4A64F5",
-    "line": "mov     eax, [esp+38h+arg_8]",
+    "line": "mov     eax, [esp+38h+worldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,31 +307,31 @@
   },
   {
     "ea": "0x4A6500",
-    "line": "jnz     short loc_4A6571",
+    "line": "jnz     short loc_4A6571; Verified: ignores regions with flag bit 0x20 and constrains candidates to the requested worldspace when one is provided.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x4A6502",
-    "line": "mov     edx, [esp+38h+arg_0]",
+    "line": "mov     edx, [esp+38h+dataID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A6506",
-    "line": "mov     ecx, [edi+18h]",
+    "line": "mov     ecx, [edi+18h]; dataList",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x4A6509",
-    "line": "push    edx",
+    "line": "push    edx; dataID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A650A",
-    "line": "call    sub_4A4460",
+    "line": "call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +349,7 @@
   },
   {
     "ea": "0x4A6513",
-    "line": "cmp     [eax+5], bl",
+    "line": "cmp     [eax+5], bl; Verified: region-data entries with byte +5 nonzero are excluded before geometry/selection. Meaning of this byte remains Candidate pending additional direct naming or writer evidence; Fallout similarity alone is not sufficient.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -367,7 +361,7 @@
   },
   {
     "ea": "0x4A6518",
-    "line": "cmp     [esp+38h+arg_4], ebx",
+    "line": "cmp     [esp+38h+worldXY], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -415,7 +409,7 @@
   },
   {
     "ea": "0x4A652B",
-    "line": "mov     eax, [esp+38h+arg_4]",
+    "line": "mov     eax, [esp+38h+worldXY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,19 +463,19 @@
   },
   {
     "ea": "0x4A6542",
-    "line": "mov     ecx, [esp+38h+var_1C]",
+    "line": "mov     ecx, [esp+38h+self]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A6546",
-    "line": "push    edi",
+    "line": "push    edi; region",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A6547",
-    "line": "call    sub_4A6350",
+    "line": "call    TESRegionList_AddUniqueRegion; Verified: inserts region only when not already present, preserving unique TESRegion membership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +487,7 @@
   },
   {
     "ea": "0x4A654E",
-    "line": "mov     ecx, [esp+38h+var_1C]",
+    "line": "mov     ecx, [esp+38h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -526,12 +520,6 @@
     "line": "jmp     short loc_4A6560",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4A655D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4A6560",
@@ -595,13 +583,13 @@
   },
   {
     "ea": "0x4A657C",
-    "line": "mov     ebp, [esp+38h+arg_0]",
+    "line": "mov     ebp, [esp+38h+dataID]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A6580",
-    "line": "mov     esi, ds:0B35420h[ebp*8]",
+    "line": "mov     esi, ds:0B35420h[ebp*8]; Verified: cache slot selected-data pointer address = 0xB35420 + 8 * regionDataID.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -613,13 +601,13 @@
   },
   {
     "ea": "0x4A6589",
-    "line": "lea     edi, ds:0B35420h[ebp*8]",
+    "line": "lea     edi, ds:0B35420h[ebp*8]; Verified: corresponding cache slot matched-region-list pointer is selected-data slot +4.",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4A6590",
-    "line": "mov     [esp+38h+arg_8], edi",
+    "line": "mov     [esp+38h+worldspace], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,7 +619,7 @@
   },
   {
     "ea": "0x4A6596",
-    "line": "mov     ecx, ds:0B35424h[ebp*8]",
+    "line": "mov     ecx, ds:0B35424h[ebp*8]; self",
     "mnemonic": "mov",
     "size": 7
   },
@@ -649,19 +637,19 @@
   },
   {
     "ea": "0x4A65A1",
-    "line": "mov     edx, [esp+38h+var_1C]",
+    "line": "mov     edx, [esp+38h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4A65A5",
-    "line": "push    edx",
+    "line": "push    edx; other",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A65A6",
-    "line": "call    sub_4A6410",
+    "line": "call    TESRegionList_AreEqual; Verified: compares region-list membership; used to decide whether cached region-data selection remains valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +667,7 @@
   },
   {
     "ea": "0x4A65AF",
-    "line": "mov     esi, [esp+38h+var_1C]",
+    "line": "mov     esi, [esp+38h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -691,7 +679,7 @@
   },
   {
     "ea": "0x4A65B6",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,7 +805,7 @@
   },
   {
     "ea": "0x4A65F0",
-    "line": "mov     [esp+38h+arg_4], esi",
+    "line": "mov     [esp+38h+worldXY], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -859,7 +847,7 @@
   },
   {
     "ea": "0x4A6600",
-    "line": "mov     ebp, [esp+38h+var_1C]",
+    "line": "mov     ebp, [esp+38h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -925,7 +913,7 @@
   },
   {
     "ea": "0x4A662A",
-    "line": "mov     ecx, [esp+38h+arg_0]",
+    "line": "mov     ecx, [esp+38h+dataID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -937,19 +925,19 @@
   },
   {
     "ea": "0x4A6631",
-    "line": "push    ecx",
+    "line": "push    ecx; dataID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A6632",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; dataList",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A6634",
-    "line": "call    sub_4A4460",
+    "line": "call    TESRegion_FindDataByID; Verified: walks TESRegionDataList and returns the element whose virtual GetDataID (+0x0C) equals the requested ID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1195,7 @@
   },
   {
     "ea": "0x4A66A7",
-    "line": "call    edx",
+    "line": "call    edx; Verified: when another non-override candidate is encountered, prior selected TESRegionData receives current candidate and the number of matching regions through its virtual slot +0x18.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1261,7 +1249,7 @@
   },
   {
     "ea": "0x4A66BD",
-    "line": "mov     esi, [esp+38h+arg_4]",
+    "line": "mov     esi, [esp+38h+worldXY]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1345,7 +1333,7 @@
   },
   {
     "ea": "0x4A66E8",
-    "line": "mov     ebp, [esp+38h+arg_8]",
+    "line": "mov     ebp, [esp+38h+worldspace]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1393,7 @@
   },
   {
     "ea": "0x4A66FF",
-    "line": "mov     [ebp+0], edi",
+    "line": "mov     [ebp+0], edi; Verified: stores selected resolved data and matched-region-list snapshot in the per-data-ID cache; cache slot index is 8 * dataID.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1423,7 +1411,7 @@
   },
   {
     "ea": "0x4A6707",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1459,7 @@
   },
   {
     "ea": "0x4A671A",
-    "line": "mov     eax, [esp+38h+var_1C]",
+    "line": "mov     eax, [esp+38h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1495,13 +1483,13 @@
   },
   {
     "ea": "0x4A6724",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4A6729",
-    "line": "mov     ecx, [esp+38h+var_1C]",
+    "line": "mov     ecx, [esp+38h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1588,5 +1576,77 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B28F0",
+    "line": "mov     eax, [ebp-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B28F3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B28F4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B28F9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B28FA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B28FB",
+    "line": "mov     edx, [esp+worldXY]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B28FF",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2902",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2905",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2907",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B290C",
+    "line": "mov     eax, offset stru_ADE880",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2911",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

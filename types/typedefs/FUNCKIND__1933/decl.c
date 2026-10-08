@@ -1,1 +1,1 @@
-FUNCKIND
+typedef tagFUNCKIND FUNCKIND;

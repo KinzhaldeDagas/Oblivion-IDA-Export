@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x46DB47",
-    "line": "call    sub_46D940",
+    "line": "call    TESModel_LoadTextureHashSubrecord; Authoritative Oblivion MODT replay entry. Each valid nonempty MODT whose size is divisible by 24 replaces the runtime texture-entry array; malformed/zero MODT does not mutate. Repeated valid chunks are runtime last-valid-wins.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x46DB75",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x46DB9E",
-    "line": "call    TESFile_GetChunkData4",
+    "line": "call    TESFile_GetChunkData4; Authoritative TESModel MODB replay: this branch runs for every MODB occurrence. GetChunkData4 is a cap4 read into fresh uninitialized stack scratch, then the bound radius is assigned. Exact4 and overlong (>4 => first3 plus zero high byte) are deterministic; size0/short1..3 assign indeterminate remaining bytes. Later occurrences supersede earlier bound state.",
     "mnemonic": "call",
     "size": 5
   },

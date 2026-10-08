@@ -3,7 +3,6 @@
 0x700A94: test    esi, esi
 0x700A96: jz      short loc_700AB8
 0x700A98: jmp     short loc_700AA0
-0x700A9A: align 10h
 0x700AA0: mov     eax, [esi]
 0x700AA2: fld     [esp+4+arg_0]
 0x700AA6: mov     edx, [eax+54h]

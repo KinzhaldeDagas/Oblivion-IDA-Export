@@ -4,40 +4,40 @@ int __thiscall sub_8C24C0(_DWORD *this, _BYTE *a2)
   _DWORD *v4; // ecx
   bool v5; // zf
 
-  if ( *(this + 3) )
+  if ( *(this + 3) ) /*0x8c24c3*/
   {
-    *a2 = 0;
-    return *(this + 3);
+    *a2 = 0; /*0x8c2541*/
+    return *(this + 3); /*0x8c2544*/
   }
   else
   {
-    v3 = (_DWORD *)FormHeapAlloc(0x1Cu);
-    if ( v3 )
+    v3 = (_DWORD *)FormHeapAlloc(0x1Cu); /*0x8c24cb*/
+    if ( v3 ) /*0x8c24d5*/
     {
-      v4 = v3 + 1;
-      v3[1] = 0;
-      v3[3] = 0;
-      v3[4] = 0;
-      v3[2] = 1;
-      *v3 = &hkFixedConstraintCinfo::`vftable';
+      v4 = v3 + 1; /*0x8c24d7*/
+      v3[1] = 0; /*0x8c24da*/
+      v3[3] = 0; /*0x8c24e0*/
+      v3[4] = 0; /*0x8c24e7*/
+      v3[2] = 1; /*0x8c24ee*/
+      *v3 = &hkFixedConstraintCinfo::`vftable'; /*0x8c24f5*/
     }
     else
     {
-      v4 = 0;
+      v4 = 0; /*0x8c24fd*/
     }
-    v5 = *(this + 2) == 0;
-    *(this + 3) = v4;
-    if ( !v5 )
+    v5 = *(this + 2) == 0; /*0x8c24ff*/
+    *(this + 3) = v4; /*0x8c2503*/
+    if ( !v5 ) /*0x8c2506*/
     {
-      if ( v4 )
+      if ( v4 ) /*0x8c250a*/
       {
-        sub_8A07E0(this, v4 + 0xFFFFFFFF);
-        *a2 = 1;
-        return *(this + 3);
+        sub_8A07E0(this, v4 + 0xFFFFFFFF); /*0x8c2512*/
+        *a2 = 1; /*0x8c251b*/
+        return *(this + 3); /*0x8c2522*/
       }
-      sub_8A07E0(this, 0);
+      sub_8A07E0(this, 0); /*0x8c252a*/
     }
-    *a2 = 1;
-    return *(this + 3);
+    *a2 = 1; /*0x8c2533*/
+    return *(this + 3); /*0x8c2536*/
   }
 }

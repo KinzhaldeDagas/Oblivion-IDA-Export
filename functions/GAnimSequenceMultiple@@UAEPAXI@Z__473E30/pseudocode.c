@@ -2,8 +2,8 @@ AnimSequenceMultiple *__thiscall AnimSequenceMultiple::`scalar deleting destruct
         AnimSequenceMultiple *this,
         char a2)
 {
-  AnimSequenceMultiple::~AnimSequenceMultiple(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  AnimSequenceMultiple::~AnimSequenceMultiple(this); /*0x473e33*/
+  if ( (a2 & 1) != 0 ) /*0x473e3d*/
+    FormHeapFree((unsigned int)this); /*0x473e40*/
+  return this; /*0x473e4a*/
 }

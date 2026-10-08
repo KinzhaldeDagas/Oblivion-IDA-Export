@@ -1,5 +1,5 @@
-char __usercall sub_5047E0@<al>(char a1@<bpl>, double a2@<st2>, double a3@<st1>)
+char __usercall sub_5047E0@<al>(char a1@<bpl>, double a2@<st2>, double a3@<st1>, double a4@<st3>, double a5@<st0>)
 {
-  sub_663070((int)TESDataHandler_g_PlayerRef, a1, a2, a3, 0);
-  return 1;
+  sub_663070((int)reference, a1, a2, a3, a4, a5, 0); /*0x5047e8*/
+  return 1; /*0x5047ef*/
 }

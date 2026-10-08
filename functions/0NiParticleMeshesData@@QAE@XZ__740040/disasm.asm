@@ -68,3 +68,20 @@
 0x7400FF: pop     ebx
 0x740100: add     esp, 14h
 0x740103: retn
+0x9CAE10: mov     ecx, [ebp-14h]; this
+0x9CAE13: jmp     sub_73EEC0
+0x9CAE18: mov     ecx, [ebp-14h]
+0x9CAE1B: add     ecx, 5Ch ; '\'; slot
+0x9CAE1E: jmp     NiPointerSlot_Release
+0x9CAE23: mov     eax, [ebp-10h]
+0x9CAE26: push    eax
+0x9CAE27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAE2C: pop     ecx
+0x9CAE2D: retn
+0x9CAE2E: mov     edx, [esp+arg_4]
+0x9CAE32: lea     eax, [edx-18h]
+0x9CAE35: mov     ecx, [edx-1Ch]
+0x9CAE38: xor     ecx, eax
+0x9CAE3A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAE3F: mov     eax, offset stru_AF343C
+0x9CAE44: jmp     ___CxxFrameHandler3

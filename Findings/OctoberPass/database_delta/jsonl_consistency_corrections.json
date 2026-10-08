@@ -1,0 +1,196 @@
+{
+  "corrected_at": "2026-10-08T21:54:41.685789+00:00",
+  "records": [
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified (Oblivion): save conversion changes EffectSetting pointer fields at +0x70..+0x8C—including effectShader +0x78 and enchantEffect +0x7C—from TESForm pointers into FormIDs before writing the data block.",
+          "jsonl": "Verified (Oblivion): save conversion changes EffectSetting pointer fields at +0x70..+0x8Câ€”including effectShader +0x78 and enchantEffect +0x7Câ€”from TESForm pointers into FormIDs before writing the data block."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified (Oblivion): save conversion changes EffectSetting pointer fields at +0x70..+0x8C—including effectShader +0x78 and enchantEffect +0x7C—from TESForm pointers into FormIDs before writing the data block.",
+          "jsonl": "Verified (Oblivion): save conversion changes EffectSetting pointer fields at +0x70..+0x8Câ€”including effectShader +0x78 and enchantEffect +0x7Câ€”from TESForm pointers into FormIDs before writing the data block."
+        }
+      },
+      "ea": "0x41583F"
+    },
+    {
+      "differences": {
+        "comment_repeatable": {
+          "canonical": "Verified: ResetObject reloads a form’s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9.",
+          "jsonl": "Verified: ResetObject reloads a formâ€™s active override record. Counts override files, casts references/actors, calls UnloadForm-style buffer cleanup where needed, checks parent-cell and process constraints, finds the winning override file, and invokes TESDataHandler_LoadFormRecord under save/load guard. Callers include ResetFormForLoad 45F20E and LoadGame 4665B9."
+        }
+      },
+      "ea": "0x45BDE0"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
+          "jsonl": "Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four Â±scale X/Y equatorial points and two Â±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four ±scale X/Y equatorial points and two ±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property.",
+          "jsonl": "Verified generic NiTriShape geometry factory, used by PathGrid rendering and multiple other callers. It builds six octahedron vertices (four Â±scale X/Y equatorial points and two Â±scale*sqrt(2) Z poles), repeats a supplied NiColorAlpha for all six, writes 24 u16 indices for eight triangular faces, and returns a NiTriShape. This constructs a filled octahedron surface; wireframe is a separate scene property."
+        }
+      },
+      "ea": "0x47FD30"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x64 is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x68) * amplitude. TESEffectShader_AnimateTextureEffect multiplies edge alpha by (1 + this pulse) and clamps the result. Edge-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
+          "jsonl": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x64 is nonpositive; otherwise returns sin(2Ï€ * activeElapsedSeconds * frequency at +0x68) * amplitude. TESEffectShader_AnimateTextureEffect multiplies edge alpha by (1 + this pulse) and clamps the result. Edge-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x64 is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x68) * amplitude. TESEffectShader_AnimateTextureEffect multiplies edge alpha by (1 + this pulse) and clamps the result. Edge-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
+          "jsonl": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x64 is nonpositive; otherwise returns sin(2Ï€ * activeElapsedSeconds * frequency at +0x68) * amplitude. TESEffectShader_AnimateTextureEffect multiplies edge alpha by (1 + this pulse) and clamps the result. Edge-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout."
+        }
+      },
+      "ea": "0x4ACD90"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x3C is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x40) * amplitude. TESEffectShader_AnimateTextureEffect multiplies fill alpha by (1 + this pulse) and clamps the result. Fill-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
+          "jsonl": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x3C is nonpositive; otherwise returns sin(2Ï€ * activeElapsedSeconds * frequency at +0x40) * amplitude. TESEffectShader_AnimateTextureEffect multiplies fill alpha by (1 + this pulse) and clamps the result. Fill-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x3C is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x40) * amplitude. TESEffectShader_AnimateTextureEffect multiplies fill alpha by (1 + this pulse) and clamps the result. Fill-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.",
+          "jsonl": "Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x3C is nonpositive; otherwise returns sin(2Ï€ * activeElapsedSeconds * frequency at +0x40) * amplitude. TESEffectShader_AnimateTextureEffect multiplies fill alpha by (1 + this pulse) and clamps the result. Fill-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout."
+        }
+      },
+      "ea": "0x4ACDE0"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified — PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A.",
+          "jsonl": "Verified â€” PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified — PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A.",
+          "jsonl": "Verified â€” PGRL loading populates pointsByReference (+0x34): key is a TESObjectREFR* and value is a BSSimpleList of TESPathGridPoint*. Duplicate point pointers are suppressed. Cross-reference from TESPathGrid_LoadSerializedGraphChunks at 0x4E678A."
+        }
+      },
+      "ea": "0x4E50E0"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified — for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site.",
+          "jsonl": "Verified â€” for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified — for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site.",
+          "jsonl": "Verified â€” for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site."
+        }
+      },
+      "ea": "0x4E5170"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified — linked-point state dispatcher. In an interior, it obtains the current interior cell's PathGrid and applies the reference toggle. Otherwise it scans the loaded exterior grid as a uGridsToLoad × uGridsToLoad array, obtains each present cell's PathGrid, and applies the same toggle. The exterior loop and call to SetLinkedPointsEnabled are confirmed in disassembly at 0x4E5247–0x4E5264. Fallout comparison: Fallout PathBuilder::BuildNavMeshInfoPath (0x82241A48) reconstructs a route through NavMeshInfo nodes and linked-door references into VirtualPathingNodes; that is a different navigation representation and does not establish Oblivion linked-point semantics.",
+          "jsonl": "Verified â€” linked-point state dispatcher. In an interior, it obtains the current interior cell's PathGrid and applies the reference toggle. Otherwise it scans the loaded exterior grid as a uGridsToLoad Ã— uGridsToLoad array, obtains each present cell's PathGrid, and applies the same toggle. The exterior loop and call to SetLinkedPointsEnabled are confirmed in disassembly at 0x4E5247â€“0x4E5264. Fallout comparison: Fallout PathBuilder::BuildNavMeshInfoPath (0x82241A48) reconstructs a route through NavMeshInfo nodes and linked-door references into VirtualPathingNodes; that is a different navigation representation and does not establish Oblivion linked-point semantics."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified — linked-point state dispatcher. In an interior, it obtains the current interior cell's PathGrid and applies the reference toggle. Otherwise it scans the loaded exterior grid as a uGridsToLoad × uGridsToLoad array, obtains each present cell's PathGrid, and applies the same toggle. The exterior loop and call to SetLinkedPointsEnabled are confirmed in disassembly at 0x4E5247–0x4E5264. Fallout comparison: Fallout PathBuilder::BuildNavMeshInfoPath (0x82241A48) reconstructs a route through NavMeshInfo nodes and linked-door references into VirtualPathingNodes; that is a different navigation representation and does not establish Oblivion linked-point semantics.",
+          "jsonl": "Verified â€” linked-point state dispatcher. In an interior, it obtains the current interior cell's PathGrid and applies the reference toggle. Otherwise it scans the loaded exterior grid as a uGridsToLoad Ã— uGridsToLoad array, obtains each present cell's PathGrid, and applies the same toggle. The exterior loop and call to SetLinkedPointsEnabled are confirmed in disassembly at 0x4E5247â€“0x4E5264. Fallout comparison: Fallout PathBuilder::BuildNavMeshInfoPath (0x82241A48) reconstructs a route through NavMeshInfo nodes and linked-door references into VirtualPathingNodes; that is a different navigation representation and does not establish Oblivion linked-point semantics."
+        }
+      },
+      "ea": "0x4E51F0"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified — TESPathGrid-specific graph copy routine, reached through vtable entry at A476F8. It dynamic-casts source TESForm to TESPathGrid, forces source graph resolution if needed, allocates destination point nodes and copies positions, remaps source adjacency pointers by source-array index into destination point pointers, copies PGRI records, and conditionally clears non-active/unoverridden source graph state. The implementation verifies graph-copy/remap semantics; exact external lifecycle intent beyond the vtable callback remains Unknown.",
+          "jsonl": "Verified â€” TESPathGrid-specific graph copy routine, reached through vtable entry at A476F8. It dynamic-casts source TESForm to TESPathGrid, forces source graph resolution if needed, allocates destination point nodes and copies positions, remaps source adjacency pointers by source-array index into destination point pointers, copies PGRI records, and conditionally clears non-active/unoverridden source graph state. The implementation verifies graph-copy/remap semantics; exact external lifecycle intent beyond the vtable callback remains Unknown."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified — TESPathGrid-specific graph copy routine, reached through vtable entry at A476F8. It dynamic-casts source TESForm to TESPathGrid, forces source graph resolution if needed, allocates destination point nodes and copies positions, remaps source adjacency pointers by source-array index into destination point pointers, copies PGRI records, and conditionally clears non-active/unoverridden source graph state. The implementation verifies graph-copy/remap semantics; exact external lifecycle intent beyond the vtable callback remains Unknown.",
+          "jsonl": "Verified â€” TESPathGrid-specific graph copy routine, reached through vtable entry at A476F8. It dynamic-casts source TESForm to TESPathGrid, forces source graph resolution if needed, allocates destination point nodes and copies positions, remaps source adjacency pointers by source-array index into destination point pointers, copies PGRI records, and conditionally clears non-active/unoverridden source graph state. The implementation verifies graph-copy/remap semantics; exact external lifecycle intent beyond the vtable callback remains Unknown."
+        }
+      },
+      "ea": "0x4E7950"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "\n\n[2026-10-02 tangent preservation pass] Verified stock branch builder copies exported tangent/binormal XYZ using the compacted vertex mapping and attaches owning TangentSpaceData to property+0xD4. Fallout BSTreeModel::CreateBranchGeometry 0x8246BD48 corroborates preservation of both vectors. A basis synthesized only from normals loses original direction/handedness. SpeedTreeOBSE branch-shader frond path now preserves exported frond tangents (+0x5C) and binormals (+0x58) through capture/cache/clone and supplies separate property-owned copies. Normal-derived fallback remains only for absent pairs.\n\n[2026-10-02 branch dimming correction] Verified branch STSP per-vertex packing: x=exported windWeight, y=4*matrixByte, z=BYTE1(packedColor)/255.0, w=0. Divisor at 0xA3DDD8 has double bits 0x406FE00000000000. Fallout CreateBranchGeometry 0x8246BD48 corroborates color-derived z and 1/255 scale, but byte addressing differs on PPC; use Oblivion byte selection. RT4.1 IndexedGeometry.cpp:596 explicitly separates little/big-endian packing. SpeedTreeOBSE now retains Oblivion packed-green scalar in owned cache buffers and applies it ONLY to branch-shader property creation. The frond layout keeps z=0; eliminating fake secondary wind does not mean branch z is unused. Missing packed-color data rejects branch property creation instead of inventing a dimmer.\n\n[v152 UV delivery] Native branch LOD builder compacts by selected source vertex indices, copying diffuse S/T at561DFD/561E05 into scene UV0 at561E11/561E1C without a second V flip. Extra UV channels must follow this same source-to-LOD mapping; v152 has not yet added their scene/shader consumers.\n\n[v153 extra UV delivery] Plugin post-builder bridge now checks source/scene strip lengths, canonical ascending vertex remapping and bit-identical UV0 before constructing seven planar UV sets. All model LOD arrays are prepared before SetData728890 publication; XYZ/N/color pointers are preserved and CPU streams retained. Base builder clears packed colors and primary wind but leaves source strip/UV data usable. Actual native scene execution and graphics integration remain UNVERIFIED.\n\nVerified branch resource path: branch LOD count sizes three model arrays—branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3.",
+          "jsonl": "\n\n[2026-10-02 tangent preservation pass] Verified stock branch builder copies exported tangent/binormal XYZ using the compacted vertex mapping and attaches owning TangentSpaceData to property+0xD4. Fallout BSTreeModel::CreateBranchGeometry 0x8246BD48 corroborates preservation of both vectors. A basis synthesized only from normals loses original direction/handedness. SpeedTreeOBSE branch-shader frond path now preserves exported frond tangents (+0x5C) and binormals (+0x58) through capture/cache/clone and supplies separate property-owned copies. Normal-derived fallback remains only for absent pairs.\n\n[2026-10-02 branch dimming correction] Verified branch STSP per-vertex packing: x=exported windWeight, y=4*matrixByte, z=BYTE1(packedColor)/255.0, w=0. Divisor at 0xA3DDD8 has double bits 0x406FE00000000000. Fallout CreateBranchGeometry 0x8246BD48 corroborates color-derived z and 1/255 scale, but byte addressing differs on PPC; use Oblivion byte selection. RT4.1 IndexedGeometry.cpp:596 explicitly separates little/big-endian packing. SpeedTreeOBSE now retains Oblivion packed-green scalar in owned cache buffers and applies it ONLY to branch-shader property creation. The frond layout keeps z=0; eliminating fake secondary wind does not mean branch z is unused. Missing packed-color data rejects branch property creation instead of inventing a dimmer.\n\n[v152 UV delivery] Native branch LOD builder compacts by selected source vertex indices, copying diffuse S/T at561DFD/561E05 into scene UV0 at561E11/561E1C without a second V flip. Extra UV channels must follow this same source-to-LOD mapping; v152 has not yet added their scene/shader consumers.\n\n[v153 extra UV delivery] Plugin post-builder bridge now checks source/scene strip lengths, canonical ascending vertex remapping and bit-identical UV0 before constructing seven planar UV sets. All model LOD arrays are prepared before SetData728890 publication; XYZ/N/color pointers are preserved and CPU streams retained. Base builder clears packed colors and primary wind but leaves source strip/UV data usable. Actual native scene execution and graphics integration remain UNVERIFIED.\n\nVerified branch resource path: branch LOD count sizes three model arraysâ€”branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified branch resource path: branch LOD count sizes three model arrays—branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3.",
+          "jsonl": "Verified branch resource path: branch LOD count sizes three model arraysâ€”branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3."
+        }
+      },
+      "ea": "0x5616F0"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "Verified LockEffect marker semantics for ExtraLockData.flags bit 0x02: LockEffect_Apply writes exactly 0x02 before setting locked bit 0x01. On the next application, an existing lock without bit 0x02 causes this effect to remove itself; bit0x02 plus locked bit0x01 also removes it as completed; bit0x02 while unlocked causes the effect to reapply. Thus 0x02 marks a lock owned/pending from LockEffect, while 0x01 is the actual locked state. Fallout LockEffect::Start uses the same 0x02→0x03 sequence in REFR_LOCK but different storage and Lock/UnLock methods.",
+          "jsonl": "Verified LockEffect marker semantics for ExtraLockData.flags bit 0x02: LockEffect_Apply writes exactly 0x02 before setting locked bit 0x01. On the next application, an existing lock without bit 0x02 causes this effect to remove itself; bit0x02 plus locked bit0x01 also removes it as completed; bit0x02 while unlocked causes the effect to reapply. Thus 0x02 marks a lock owned/pending from LockEffect, while 0x01 is the actual locked state. Fallout LockEffect::Start uses the same 0x02â†’0x03 sequence in REFR_LOCK but different storage and Lock/UnLock methods."
+        },
+        "comment_repeatable": {
+          "canonical": "Verified LockEffect marker semantics for ExtraLockData.flags bit 0x02: LockEffect_Apply writes exactly 0x02 before setting locked bit 0x01. On the next application, an existing lock without bit 0x02 causes this effect to remove itself; bit0x02 plus locked bit0x01 also removes it as completed; bit0x02 while unlocked causes the effect to reapply. Thus 0x02 marks a lock owned/pending from LockEffect, while 0x01 is the actual locked state. Fallout LockEffect::Start uses the same 0x02→0x03 sequence in REFR_LOCK but different storage and Lock/UnLock methods.",
+          "jsonl": "Verified LockEffect marker semantics for ExtraLockData.flags bit 0x02: LockEffect_Apply writes exactly 0x02 before setting locked bit 0x01. On the next application, an existing lock without bit 0x02 causes this effect to remove itself; bit0x02 plus locked bit0x01 also removes it as completed; bit0x02 while unlocked causes the effect to reapply. Thus 0x02 marks a lock owned/pending from LockEffect, while 0x01 is the actual locked state. Fallout LockEffect::Start uses the same 0x02â†’0x03 sequence in REFR_LOCK but different storage and Lock/UnLock methods."
+        }
+      },
+      "ea": "0x694C40"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "[Verified] SetDecalPassBatchSizeForShaderPackageVersion writes 6 for package versions 3/4, 8 for 5–7, and 2 otherwise. The value is used as the decal-data batch decrement in both BSSM_DECAL/BSSM_DECAL_A and BSSM_3XDECAL/BSSM_3XDECAL_A loops.",
+          "jsonl": "[Verified] SetDecalPassBatchSizeForShaderPackageVersion writes 6 for package versions 3/4, 8 for 5â€“7, and 2 otherwise. The value is used as the decal-data batch decrement in both BSSM_DECAL/BSSM_DECAL_A and BSSM_3XDECAL/BSSM_3XDECAL_A loops."
+        },
+        "comment_repeatable": {
+          "canonical": "[Verified] SetDecalPassBatchSizeForShaderPackageVersion writes 6 for package versions 3/4, 8 for 5–7, and 2 otherwise. The value is used as the decal-data batch decrement in both BSSM_DECAL/BSSM_DECAL_A and BSSM_3XDECAL/BSSM_3XDECAL_A loops.",
+          "jsonl": "[Verified] SetDecalPassBatchSizeForShaderPackageVersion writes 6 for package versions 3/4, 8 for 5â€“7, and 2 otherwise. The value is used as the decal-data batch decrement in both BSSM_DECAL/BSSM_DECAL_A and BSSM_3XDECAL/BSSM_3XDECAL_A loops."
+        }
+      },
+      "ea": "0x7B4590"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "[Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.",
+          "jsonl": "[Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3â€“6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0â€“6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified."
+        },
+        "comment_repeatable": {
+          "canonical": "[Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3–6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0–6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified.",
+          "jsonl": "[Verified] Selects and publishes the renderer shader-package version at RendererGlobalState+0xAF from adapter/version inputs and vendor prefix. The third argument is bForce1XShaders; when true and a shader version is available, the function forces package version 1. Argument maxPS20Instructions is the same value logged as maxPS20inst; ATI/NVIDIA paths choose versions 3â€“6 and set +0xC when it exceeds 0xFF. Fallback branches choose version 0/1 and clear HDR mode at +0x1D7. [Verified] +0xC gates Lighting30 definition 0x1A; [Probable] it represents shader-feature capability. This native selector emits versions 0â€“6 only; [Unknown] the writer/source of version 7, which the package-index switch handles, has not yet been identified."
+        }
+      },
+      "ea": "0x7B45F0"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "[Verified] BSShaderManager_GetShaderVersionName maps values 0–7 to BSSM_SV_NONE, BSSM_SV_1_X, BSSM_SV_2_0, BSSM_SV_2_A96, BSSM_SV_2_B96, BSSM_SV_2_A, BSSM_SV_2_B and BSSM_SV_3_0.",
+          "jsonl": "[Verified] BSShaderManager_GetShaderVersionName maps values 0â€“7 to BSSM_SV_NONE, BSSM_SV_1_X, BSSM_SV_2_0, BSSM_SV_2_A96, BSSM_SV_2_B96, BSSM_SV_2_A, BSSM_SV_2_B and BSSM_SV_3_0."
+        },
+        "comment_repeatable": {
+          "canonical": "[Verified] BSShaderManager_GetShaderVersionName maps values 0–7 to BSSM_SV_NONE, BSSM_SV_1_X, BSSM_SV_2_0, BSSM_SV_2_A96, BSSM_SV_2_B96, BSSM_SV_2_A, BSSM_SV_2_B and BSSM_SV_3_0.",
+          "jsonl": "[Verified] BSShaderManager_GetShaderVersionName maps values 0â€“7 to BSSM_SV_NONE, BSSM_SV_1_X, BSSM_SV_2_0, BSSM_SV_2_A96, BSSM_SV_2_B96, BSSM_SV_2_A, BSSM_SV_2_B and BSSM_SV_3_0."
+        }
+      },
+      "ea": "0x7B7070"
+    },
+    {
+      "differences": {
+        "comment_regular": {
+          "canonical": "[Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0–6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default.",
+          "jsonl": "[Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0â€“6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default."
+        },
+        "comment_repeatable": {
+          "canonical": "[Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0–6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default.",
+          "jsonl": "[Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0â€“6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default."
+        }
+      },
+      "ea": "0x7DAB80"
+    }
+  ]
+}

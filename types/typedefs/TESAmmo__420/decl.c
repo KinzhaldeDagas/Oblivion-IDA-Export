@@ -1,1 +1,1 @@
-TESAmmo
+struct TESAmmo;

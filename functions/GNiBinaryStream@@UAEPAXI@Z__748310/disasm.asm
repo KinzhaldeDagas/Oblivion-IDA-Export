@@ -4,7 +4,7 @@
 0x748318: mov     dword ptr [esi], offset ??_7NiBinaryStream@@6B@; const NiBinaryStream::`vftable'
 0x74831E: jz      short loc_748329
 0x748320: push    esi
-0x748321: call    FormHeapFree
+0x748321: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x748326: add     esp, 4
 0x748329: mov     eax, esi
 0x74832B: pop     esi

@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x65CBB0",
+      "0x65CC89"
+    ]
+  ],
+  "chunks_sha256": "49bb426babbebd902ae90ee052c4a9f29f59e1edbf5fa5e0893122ba756f37ff",
+  "comment_regular": "Verified: repaired erroneous internal-basic-block function boundaries; all merged entry xrefs are local branches/fallthroughs using shared stack frame. ECX-only receiver, no stack or extra register arguments. Called by actor-base mask 0x10000000 at complete object +0xD0. Labels preserved, executable bytes unchanged.\nVerified: reads UInt16 count. Version >=0x34 uses 5-byte serialized entries (ID byte + float); older versions read 8-byte runtime-shaped entries. Allocates 8-byte entries and forwards to AVCollection_Add. Unknown: complete insertion/allocation-failure policy is outside this serialization pass.\nVerified continuation 2026-10-04: constructor/insert/remove/clear/copy are now connected; Add 65C8F0 fragmentation repaired. Prior insertion-fragmentation boundary is superseded. Probable corresponding Fallout ModifierList serialization at 826B6B88/826B6CD0/826B7500; dynamic map and endian handling differ, no schema copied.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "AVCollection_Load",
-  "end_ea": "0x65CC83",
+  "end_ea": "0x65CC89",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AVCollection_Load",
   "segment": ".text",
-  "sha256": "8187e5cb4bd7d9cbf59ff76ad8e4da8df8d043cd70eb07179ce109391ff36f43",
-  "size": 211,
+  "sha256": "49bb426babbebd902ae90ee052c4a9f29f59e1edbf5fa5e0893122ba756f37ff",
+  "size": 217,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65CBB0",
-  "type": "int __usercall@<eax>(unsigned int **this@<ecx>, int@<esi>)",
-  "xrefs_from_count": 83,
+  "total_chunk_size": 217,
+  "type": "void __thiscall(AVCollection *self)",
+  "xrefs_from_count": 86,
   "xrefs_to_count": 4
 }

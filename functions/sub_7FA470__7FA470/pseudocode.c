@@ -1,87 +1,88 @@
-LONG __thiscall sub_7FA470(BSImageSpaceShader *this, NiRenderedTexture *a2)
+// Find the first empty rendered-texture slot in a BSImageSpaceShader, replace its strong-owned texture reference, and AddRef the new texture.
+int __thiscall BSImageSpaceShader_BindFirstFreeRenderedTexture(void *imageSpaceShader, void *renderedTexture)
 {
-  LONG v3; // esi
-  LONG result; // eax
-  UInt32 *p_Unk080; // ecx
-  NiRenderedTexture *v6; // ebx
+  int v3; // esi
+  int result; // eax
+  _DWORD *v5; // ecx
+  volatile LONG *v6; // ebx
 
-  v3 = 0xFFFFFFFF;
-  result = 2;
-  p_Unk080 = &this->member.Unk080;
-  while ( v3 == 0xFFFFFFFF )
+  v3 = 0xFFFFFFFF; /*0x7fa474*/
+  result = 2; /*0x7fa477*/
+  v5 = (char *)imageSpaceShader + 0x80; /*0x7fa47c*/
+  while ( v3 == 0xFFFFFFFF ) /*0x7fa485*/
   {
-    if ( !p_Unk080[0xFFFFFFFF] )
+    if ( !v5[0xFFFFFFFF] ) /*0x7fa487*/
     {
-      v3 = result - 2;
-      break;
+      v3 = result - 2; /*0x7fa48d*/
+      break; /*0x7fa493*/
     }
-    if ( !*p_Unk080 )
+    if ( !*v5 ) /*0x7fa495*/
     {
-      v3 = result - 1;
-      break;
+      v3 = result - 1; /*0x7fa49a*/
+      break; /*0x7fa4a0*/
     }
-    if ( !p_Unk080[1] )
+    if ( !v5[1] ) /*0x7fa4a2*/
     {
-      v3 = result;
-      break;
+      v3 = result; /*0x7fa4ab*/
+      break; /*0x7fa4ad*/
     }
-    if ( !p_Unk080[2] )
-      v3 = result + 1;
-    result += 4;
-    p_Unk080 += 4;
-    if ( (unsigned int)(result - 2) >= 0x10 )
+    if ( !v5[2] ) /*0x7fa4af*/
+      v3 = result + 1; /*0x7fa4b5*/
+    result += 4; /*0x7fa4b8*/
+    v5 += 4; /*0x7fa4be*/
+    if ( (unsigned int)(result - 2) >= 0x10 ) /*0x7fa4c4*/
     {
-      if ( v3 == 0xFFFFFFFF )
-        return result;
-      break;
+      if ( v3 == 0xFFFFFFFF ) /*0x7fa4c9*/
+        return result; /*0x7fa4c9*/
+      break; /*0x7fa4c9*/
     }
   }
-  if ( a2 )
+  if ( renderedTexture ) /*0x7fa4d6*/
   {
-    result = (LONG)a2->__vftable->super.super.GetType(a2);
-    if ( result )
+    result = (*(int (__thiscall **)(void *))(*(_DWORD *)renderedTexture + 4))(renderedTexture); /*0x7fa4e4*/
+    if ( result ) /*0x7fa4e8*/
     {
-      while ( (char *)result != dword_B3F95C )
+      while ( (char *)result != stru_B3F95C ) /*0x7fa4f5*/
       {
-        result = *(_DWORD *)(result + 4);
-        if ( !result )
-          goto LABEL_17;
+        result = *(_DWORD *)(result + 4); /*0x7fa4f7*/
+        if ( !result ) /*0x7fa4fc*/
+          goto LABEL_17; /*0x7fa4fc*/
       }
-      v6 = *((NiRenderedTexture **)&this->member.Unk07C + v3);
-      if ( v6 != a2 )
+      v6 = *((volatile LONG **)imageSpaceShader + v3 + 0x1F); /*0x7fa525*/
+      if ( v6 != renderedTexture ) /*0x7fa52b*/
       {
-        if ( v6 )
+        if ( v6 ) /*0x7fa52f*/
         {
 LABEL_26:
-          if ( !InterlockedDecrement((volatile LONG *)&v6->member) )
-            v6->__vftable->super.super.super.Destructor((NiRefObject *)v6, 1);
+          if ( !InterlockedDecrement(v6 + 1) ) /*0x7fa547*/
+            (**(void (__thiscall ***)(void *, int))v6)((void *)v6, 1); /*0x7fa55d*/
         }
 LABEL_28:
-        *((_DWORD *)&this->member.Unk07C + v3) = a2;
-        return InterlockedIncrement((volatile LONG *)&a2->member);
+        *((_DWORD *)imageSpaceShader + v3 + 0x1F) = renderedTexture; /*0x7fa55f*/
+        return InterlockedIncrement((volatile LONG *)renderedTexture + 1); /*0x7fa567*/
       }
     }
     else
     {
 LABEL_17:
-      result = (LONG)a2->__vftable->super.super.GetType(a2);
-      if ( result )
+      result = (*(int (__thiscall **)(void *))(*(_DWORD *)renderedTexture + 4))(renderedTexture); /*0x7fa4fe*/
+      if ( result ) /*0x7fa509*/
       {
-        while ( (_UNKNOWN *)result != &unk_B3FF04 )
+        while ( (float *)result != &MEMORY[0xB3F9B0][0x155] ) /*0x7fa515*/
         {
-          result = *(_DWORD *)(result + 4);
-          if ( !result )
-            return result;
+          result = *(_DWORD *)(result + 4); /*0x7fa517*/
+          if ( !result ) /*0x7fa51c*/
+            return result; /*0x7fa51c*/
         }
-        v6 = *((NiRenderedTexture **)&this->member.Unk07C + v3);
-        if ( v6 != a2 )
+        v6 = *((volatile LONG **)imageSpaceShader + v3 + 0x1F); /*0x7fa537*/
+        if ( v6 != renderedTexture ) /*0x7fa53d*/
         {
-          if ( v6 )
-            goto LABEL_26;
-          goto LABEL_28;
+          if ( v6 ) /*0x7fa541*/
+            goto LABEL_26; /*0x7fa541*/
+          goto LABEL_28; /*0x7fa541*/
         }
       }
     }
   }
-  return result;
+  return result; /*0x7fa520*/
 }

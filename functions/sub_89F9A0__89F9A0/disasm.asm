@@ -52,7 +52,7 @@
 0x89FA32: mov     ecx, edi
 0x89FA34: call    sub_89D7B0
 0x89FA39: mov     edx, [edi]
-0x89FA3B: mov     eax, dword ptr [esp+0Ch+var_4]
+0x89FA3B: mov     eax, [esp+0Ch+var_4]
 0x89FA3F: mov     edx, [edx+64h]
 0x89FA42: push    eax
 0x89FA43: mov     ecx, edi

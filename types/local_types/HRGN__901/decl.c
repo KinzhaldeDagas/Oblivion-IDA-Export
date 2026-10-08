@@ -1,1 +1,1 @@
-HRGN
+typedef HRGN__ *HRGN;

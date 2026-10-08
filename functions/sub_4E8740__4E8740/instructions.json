@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4E8755",
-    "line": "call    TESForm_Clone",
+    "line": "call    TESForm_Clone; Verified ordinary form-clone path: allocates via TESForm_CreateDynamic, invokes the destination CopyFrom virtual, restores EditorID and records the cloneMap entry. This does not dispatch CreateDuplicateForm; WorldSpace's deep cell/persistent-cell clone is a separate +0x38 virtual path.",
     "mnemonic": "call",
     "size": 5
   },

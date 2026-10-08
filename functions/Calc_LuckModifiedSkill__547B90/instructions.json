@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x547B90",
-    "line": "fild    [esp+arg_4]",
+    "line": "fild    [esp+luckValue]; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "fild",
     "size": 4
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x547B9A",
-    "line": "fstp    [esp+arg_4]",
+    "line": "fstp    [esp+luckValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x547B9E",
-    "line": "fld     [esp+arg_4]",
+    "line": "fld     [esp+luckValue]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x547BA8",
-    "line": "fstp    [esp+arg_4]",
+    "line": "fstp    [esp+luckValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x547BAC",
-    "line": "fild    [esp+arg_0]",
+    "line": "fild    [esp+skillValue]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x547BB0",
-    "line": "fadd    [esp+arg_4]",
+    "line": "fadd    [esp+luckValue]",
     "mnemonic": "fadd",
     "size": 4
   }

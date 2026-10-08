@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785910",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Erases a [first,last) iterator range from the spline-cache map. Uses whole-tree destruction when the range is begin-to-end; otherwise repeatedly advances and erases individual nodes. Returns the resulting iterator.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x785917",
-    "line": "mov     edi, [esp+18h+arg_4]",
+    "line": "mov     edi, [esp+18h+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x78592F",
-    "line": "mov     ebx, [esp+18h+arg_8]",
+    "line": "mov     ebx, [esp+18h+firstNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x785937",
-    "line": "mov     eax, [esp+18h+arg_C]",
+    "line": "mov     eax, [esp+18h+lastOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x78594B",
-    "line": "cmp     [esp+18h+arg_10], ebp",
+    "line": "cmp     [esp+18h+lastNode], ebp",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x785957",
-    "line": "push    edx",
+    "line": "push    edx; root",
     "mnemonic": "push",
     "size": 1
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x78595A",
-    "line": "call    sub_784FF0",
+    "line": "call    OB_stBezierSplineCacheMap_DestroySubtree_010201A0; Destroys a cache-map subtree. Recurses through right children while iterating down the left spine; releases heap-backed string storage when capacity>=16, then frees each 0x30-byte node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x78597C",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -294,12 +294,6 @@
     "size": 3
   },
   {
-    "ea": "0x78598F",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
-  },
-  {
     "ea": "0x785990",
     "line": "test    edi, edi",
     "mnemonic": "test",
@@ -313,7 +307,7 @@
   },
   {
     "ea": "0x785994",
-    "line": "cmp     edi, [esp+18h+arg_C]",
+    "line": "cmp     edi, [esp+18h+lastOwner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -331,7 +325,7 @@
   },
   {
     "ea": "0x78599F",
-    "line": "cmp     ebx, [esp+18h+arg_10]",
+    "line": "cmp     ebx, [esp+18h+lastNode]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -343,25 +337,25 @@
   },
   {
     "ea": "0x7859A5",
-    "line": "lea     ecx, [esp+18h+arg_4]",
+    "line": "lea     ecx, [esp+18h+firstOwner]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7859A9",
-    "line": "call    sub_7846D0",
+    "line": "call    OB_stBezierSplineCacheIterator_Increment_010201A0; Oblivion-authoritative cache-map iterator preincrement. Descends to the leftmost node of a non-nil right subtree; otherwise climbs parents until leaving a right-child chain. Mutates the {owner,node} iterator in place.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7859AE",
-    "line": "push    ebx",
+    "line": "push    ebx; iteratorNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7859AF",
-    "line": "push    edi",
+    "line": "push    edi; iteratorOwner",
     "mnemonic": "push",
     "size": 1
   },
@@ -373,31 +367,31 @@
   },
   {
     "ea": "0x7859B4",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7859B5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7859B7",
-    "line": "call    sub_784C30",
+    "line": "call    OB_stBezierSplineCacheMap_EraseNode_010201A0; Erases one spline-cache map node. Validates the iterator, computes its successor, unlinks/transplants the node, performs red-black deletion fixup with the two rotations, destroys any heap-backed key storage, frees the 0x30-byte node, and decrements map size.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7859BC",
-    "line": "mov     ebx, [esp+18h+arg_8]",
+    "line": "mov     ebx, [esp+18h+firstNode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7859C0",
-    "line": "mov     edi, [esp+18h+arg_4]",
+    "line": "mov     edi, [esp+18h+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +403,7 @@
   },
   {
     "ea": "0x7859C6",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+result]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4D47CC",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4D481B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x4D4853",
-    "line": "lea     ecx, [esp+64h+var_38]",
+    "line": "lea     ecx, [esp+64h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D4857",
-    "line": "call    sub_4E7DF0",
+    "line": "call    TESPathGridPoint_ctor; Verified TESPathGridPoint constructor initializes the graph-search prefix, adjacency list and position, sets +0x28 to null, and lazily creates two shared NiAVObject templates. The template references are refcounted and selected by integerized point-Z parity in TESPathGridPoint_RebuildRenderGeometry. Material field correction: the formerly `unknown28` member at +0x28 is a per-point NiNode* renderNode; the render builder writes it and the clear helper removes/releases it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,19 +391,19 @@
   },
   {
     "ea": "0x4D4874",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4875",
-    "line": "lea     ecx, [esp+68h+var_38]",
+    "line": "lea     ecx, [esp+68h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D4879",
-    "line": "call    sub_4BEF50",
+    "line": "call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,25 +421,25 @@
   },
   {
     "ea": "0x4D4888",
-    "line": "push    eax",
+    "line": "push    eax; outFallbackUsed",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4889",
-    "line": "push    0",
+    "line": "push    0; excludedPoints",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D488B",
-    "line": "push    0",
+    "line": "push    0; extraFilter",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D488D",
-    "line": "push    ecx",
+    "line": "push    ecx; actor",
     "mnemonic": "push",
     "size": 1
   },
@@ -451,19 +451,19 @@
   },
   {
     "ea": "0x4D4892",
-    "line": "push    edx",
+    "line": "push    edx; origin",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4893",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D4895",
-    "line": "call    sub_4E5730",
+    "line": "call    TESPathGrid_FindReachablePointForActor; Verified PathGrid candidate search: scans point lists in nearby packed cell buckets, skips null/disabled points and exclusions, scores candidates using actor-aware connected-point cost, and optionally tests a short segment/line-of-sight before returning the best point. The exact semantics of the extraFilter and outFallbackUsed parameters remain Candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x4D489E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D48A0",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x4D48C0",
-    "line": "lea     ecx, [esp+64h+var_38]",
+    "line": "lea     ecx, [esp+64h+var_38]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x4D48CC",
-    "line": "call    sub_4E8200",
+    "line": "call    TESPathGridPoint_Cleanup; Verified point cleanup called before freeing persistent or temporary TESPathGridPoint nodes: frees adjacency-list chain at +0x24, clears the per-point renderNode at +0x28, decrements g_PathGridPointLiveCount, and on the last node releases both shared marker-template references. It does not free the point allocation itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x4D4903",
-    "line": "push    eax; a2",
+    "line": "push    eax; baseForm",
     "mnemonic": "push",
     "size": 1
   },
@@ -739,19 +739,19 @@
   },
   {
     "ea": "0x4D4933",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D4934",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D4936",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -868,5 +868,89 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5780",
+    "line": "mov     eax, [ebp-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5783",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5784",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5789",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B578A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B578B",
+    "line": "lea     ecx, [ebp-38h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B578E",
+    "line": "jmp     TESPathGridPoint_Cleanup; Verified point cleanup called before freeing persistent or temporary TESPathGridPoint nodes: frees adjacency-list chain at +0x24, clears the per-point renderNode at +0x28, decrements g_PathGridPointLiveCount, and on the last node releases both shared marker-template references. It does not free the point allocation itself.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5793",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5797",
+    "line": "lea     eax, [edx-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B579A",
+    "line": "mov     ecx, [edx-58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B579D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B579F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B57A4",
+    "line": "mov     eax, offset stru_AE0814",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B57A9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

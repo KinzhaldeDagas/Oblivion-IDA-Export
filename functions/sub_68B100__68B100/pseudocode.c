@@ -1,11 +1,12 @@
-int __thiscall sub_68B100(_BYTE *this, int a2)
+// Verified stores a TESObjectREFR* into payload +0 only when kind==0. The route node does not take an extra reference to the TESObjectREFR.
+TESObjectREFR *__thiscall TravelPathNode_SetReference(TravelPathNode *this, TESObjectREFR *reference)
 {
-  int result; // eax
+  TESObjectREFR *result; // eax
 
-  if ( !*(this + 4) )
+  if ( !this->type ) /*0x68b100*/
   {
-    *(_DWORD *)this = a2;
-    return a2;
+    this->payload = reference; /*0x68b10a*/
+    return reference; /*0x68b106*/
   }
-  return result;
+  return result; /*0x68b10c*/
 }

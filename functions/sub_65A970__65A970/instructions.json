@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x65A970",
-    "line": "mov     eax, ds:0B33398h",
+    "line": "mov     eax, ds:0B33398h; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x65A9A8",
-    "line": "call    sub_447490",
+    "line": "call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.",
     "mnemonic": "call",
     "size": 5
   },

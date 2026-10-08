@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiGeometryDataVtbl",
+  "definition": "struct NiGeometryDataVtbl\n{\nNiObjectVtbl super;\nvoid (__thiscall *SetNumVertices)(NiGeometryData *this, UInt32 arg);\nUInt16 (__thiscall *GetNumVertices)(NiGeometryData *this);\nvoid (__thiscall *UpdateNormals)(NiGeometryData *this);\n}\n",
   "id": 18374686479671996180,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 76
+      "size": 76,
+      "type": "NiObjectVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "SetNumVertices",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "void (__thiscall *)(NiGeometryData *this, UInt32 arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "GetNumVertices",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "UInt16 (__thiscall *)(NiGeometryData *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "UpdateNormals",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(NiGeometryData *this)"
     }
   ],
   "name": "NiGeometryDataVtbl",
+  "ordinal": 9600,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 88
 }

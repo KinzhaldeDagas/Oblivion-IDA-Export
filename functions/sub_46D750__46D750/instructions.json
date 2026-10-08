@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x46D750",
-    "line": "push    ebp",
+    "line": "push    ebp; Verified: MODT chunks are accepted only when byte length is a nonzero multiple of 24. Each valid chunk is decoded into runtime texture-hash entries and replaces the TESTextureList state; zero/invalid-width chunks leave the old state unchanged. The 24-byte field meanings remain Unknown.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x46D783",
-    "line": "sub     ecx, edx",
+    "line": "sub     ecx, edx; MODT acceptance gate: only nonzero payload length divisible by 24 reaches replacement. Invalid-width and zero-length MODT retain the prior runtime texture array.",
     "mnemonic": "sub",
     "size": 2
   },
@@ -235,55 +235,55 @@
   },
   {
     "ea": "0x46D7AF",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x46D7B4",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+modelPath]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46D7B7",
-    "line": "mov     ecx, [ebp+arg_4]",
+    "line": "mov     ecx, [ebp+form]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46D7BA",
-    "line": "push    eax",
+    "line": "push    eax; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46D7BB",
-    "line": "push    ecx",
+    "line": "push    ecx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46D7BC",
-    "line": "mov     ecx, [ebp+var_8]",
+    "line": "mov     ecx, [ebp+var_8]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x46D7BF",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46D7C0",
-    "line": "push    ebx",
+    "line": "push    ebx; entries",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x46D7C1",
-    "line": "call    sub_46D610",
+    "line": "call    TESModel_ReplaceTextureHashEntries; Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },

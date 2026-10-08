@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x660145",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x66014C",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x66014E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x660150",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x660159",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x660161",
-    "line": "push    1",
+    "line": "push    1; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x660163",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x660167",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x660170",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x66017C",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x660190",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,31 +781,31 @@
   },
   {
     "ea": "0x6602B9",
-    "line": "lea     ecx, [esp+0F0h+var_C0]",
+    "line": "lea     ecx, [esp+0F0h+var_C0]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6602BD",
-    "line": "fstp    [esp+0F0h+var_F0]; float",
+    "line": "fstp    [esp+0F0h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6602C0",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6602C5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6602C7",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -817,55 +817,55 @@
   },
   {
     "ea": "0x6602CD",
-    "line": "lea     ecx, [esp+0F0h+var_48]",
+    "line": "lea     ecx, [esp+0F0h+right]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6602D4",
-    "line": "fstp    [esp+0F0h+var_F0]; float",
+    "line": "fstp    [esp+0F0h+angleZ]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6602D7",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6602DC",
-    "line": "lea     eax, [esp+0ECh+var_48]",
+    "line": "lea     eax, [esp+0ECh+right]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6602E3",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6602E4",
-    "line": "lea     ecx, [esp+0F0h+var_24]",
+    "line": "lea     ecx, [esp+0F0h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6602EB",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6602EC",
-    "line": "lea     ecx, [esp+0F4h+var_C0]",
+    "line": "lea     ecx, [esp+0F4h+var_C0]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6602F0",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,19 +1315,19 @@
   },
   {
     "ea": "0x6603E0",
-    "line": "lea     ecx, [esp+0F0h+var_6C]",
+    "line": "lea     ecx, [esp+0F0h+var_6C]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x6603E7",
-    "line": "fstp    [esp+0F0h+var_F0]; float",
+    "line": "fstp    [esp+0F0h+angleZ]; angleX",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6603EA",
-    "line": "call    NiMatrix33_InitRotationTransposedTransform???",
+    "line": "call    NiMatrix33_InitRotationXTransposed; Verified matrix coefficients make this an X-axis rotation in the engine's transposed convention: X stays fixed; only the Y/Z submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,31 +1363,31 @@
   },
   {
     "ea": "0x660405",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x660406",
-    "line": "lea     ecx, [esp+0F0h+var_24]",
+    "line": "lea     ecx, [esp+0F0h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x66040D",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x66040E",
-    "line": "lea     ecx, [esp+0F4h+var_9C]",
+    "line": "lea     ecx, [esp+0F4h+var_9C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x660412",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },

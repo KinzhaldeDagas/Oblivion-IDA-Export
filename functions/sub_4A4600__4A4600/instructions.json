@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A4600",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): supported factory IDs are 3 Weather, 4 Map, 5 Landscape, 6 Grass, 7 Sound; allocation sizes confirmed in this switch. Do not import Fallout's extra ID8.",
     "mnemonic": "push",
     "size": 2
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4A4620",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+dataID]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x4A4643",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+dataID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x4A4657",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A4659",
-    "line": "call    sub_4A5610",
+    "line": "call    TESRegionDataWeather_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4A467A",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+dataID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x4A468E",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A4690",
-    "line": "call    sub_4A4A80",
+    "line": "call    TESRegionDataMap_ctor; Verified: Map region data constructor initializes base and assigns Map vtable; mapName defaults to 'Default Region Name'.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4A46B1",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+dataID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x4A46C1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A46C3",
-    "line": "call    sub_4A3CD0",
+    "line": "call    TESRegionDataLandscape_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4A46E4",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+dataID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x4A46F4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A46F6",
-    "line": "call    sub_4A35E0",
+    "line": "call    TESRegionDataGrass_ctor",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x4A4717",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+dataID], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,13 +469,13 @@
   },
   {
     "ea": "0x4A4727",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4A4729",
-    "line": "call    sub_4A55C0",
+    "line": "call    TESRegionDataSound_ctor; Verified: Sound region data allocation size 0x14 and constructor anchor for its Oblivion vtable; Fallout layout is larger and not transferable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -514,5 +514,197 @@
     "line": "xor     eax, eax",
     "mnemonic": "xor",
     "size": 2
+  },
+  {
+    "ea": "0x9B2750",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2753",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2754",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2759",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B275A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B275B",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B275E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B275F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2764",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2765",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2766",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2769",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B276A",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B276F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2770",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2771",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2774",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2775",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B277A",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B277B",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B277C",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B277F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2780",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2785",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2786",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B2787",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B278B",
+    "line": "lea     eax, [edx]",
+    "mnemonic": "lea",
+    "size": 2
+  },
+  {
+    "ea": "0x9B278D",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B2790",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B2792",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B2797",
+    "line": "mov     eax, offset stru_ADE6EC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B279C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

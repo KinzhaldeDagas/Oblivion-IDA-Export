@@ -7,7 +7,7 @@
 0x446B9E: test    edi, edi
 0x446BA0: jz      short loc_446C0B
 0x446BA2: mov     ecx, esi; this
-0x446BA4: call    TESObjectCELL_IsInterior
+0x446BA4: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x446BA9: test    al, al
 0x446BAB: jnz     short loc_446BE4
 0x446BAD: mov     ecx, esi; this

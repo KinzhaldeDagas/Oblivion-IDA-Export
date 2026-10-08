@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6714E0",
-    "line": "push    ebp",
+    "line": "push    ebp; Queued-move processor called from Player_OnInput. It may call PlayerCharacter_ProcessQueuedWorldspaceMove only when global/player/worldspace gates pass; a call-site wrapper at 0x672F08 should run its pending encounter logic after calling this original function.",
     "mnemonic": "push",
     "size": 1
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6715C6",
-    "line": "call    sub_66FF10",
+    "line": "call    PlayerCharacter_ProcessQueuedWorldspaceMove; Queued worldspace move processor. It consumes PlayerCharacter queued position/worldspace fields at +0x720/+0x72C for queued moves, separate from the synchronous world-map fast-travel relocation at 0x66FAFA.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x6715EB",
-    "line": "call    sub_66FF10",
+    "line": "call    PlayerCharacter_ProcessQueuedWorldspaceMove; Queued worldspace move processor. It consumes PlayerCharacter queued position/worldspace fields at +0x720/+0x72C for queued moves, separate from the synchronous world-map fast-travel relocation at 0x66FAFA.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,82 +1,87 @@
-void __usercall RaceSexMenu::~RaceSexMenu(Menu *this@<ecx>, double a2@<st2>, double a3@<st1>, double a4@<st0>)
+void __usercall RaceSexMenu::~RaceSexMenu(Menu *this@<ecx>, double st5_0@<st2>, double a3@<st1>, double a4@<st0>)
 {
-  int *v6; // eax
-  unsigned int v7; // esi
-  int *v8; // eax
-  unsigned int v9; // esi
-  PlayerCharacter *v10; // esi
+  char *v5; // eax
+  unsigned int v6; // esi
+  char *v7; // eax
+  unsigned int v8; // esi
+  PlayerCharacter *v9; // esi
   bhkCharacterProxy *CharProxy; // esi
   unsigned int v12; // esi
   NiObject *v13; // eax
   NiObject *v14; // eax
-  _DWORD *AnimData; // eax
-  _DWORD *v16; // eax
-  _DWORD *v17; // eax
-  _DWORD *v18; // eax
-  float v19; // [esp+14h] [ebp-14h]
+  ActorAnimData *AnimDataByPerspective; // eax
+  ActorAnimData *v16; // eax
+  ActorAnimData *v17; // eax
+  ActorAnimData *v18; // eax
+  float a2; // [esp+0h] [ebp-28h]
 
-  this->__vftable = (MenuVtbl *)&RaceSexMenu::`vftable';
-  v6 = *((int **)this + 0x235);
-  if ( v6 )
+  this->__vftable = (MenuVtbl *)&RaceSexMenu::`vftable'; /*0x5c4c1b*/
+  v5 = *((char **)this + 0x235); /*0x5c4c21*/
+  if ( v5 ) /*0x5c4c31*/
   {
-    v7 = (unsigned int)(v6 + 0xFFFFFFFF);
-    _LN21(v6, 0x18u, v6[0xFFFFFFFF], (void (__thiscall *)(void *))sub_43ACE0);
-    FormHeapFree(v7);
+    v6 = (unsigned int)(v5 + 0xFFFFFFFC); /*0x5c4c36*/
+    _LN21(v5, 0x18u, *((_DWORD *)v5 + 0xFFFFFFFF), (void (__thiscall *)(void *))FaceGenMatrix_Destruct); /*0x5c4c42*/
+    FormHeapFree(v6); /*0x5c4c48*/
   }
-  v8 = *((int **)this + 0x236);
-  if ( v8 )
+  v7 = *((char **)this + 0x236); /*0x5c4c50*/
+  if ( v7 ) /*0x5c4c58*/
   {
-    v9 = (unsigned int)(v8 + 0xFFFFFFFF);
-    _LN21(v8, 0x18u, v8[0xFFFFFFFF], (void (__thiscall *)(void *))sub_43ACE0);
-    FormHeapFree(v9);
+    v8 = (unsigned int)(v7 + 0xFFFFFFFC); /*0x5c4c5d*/
+    _LN21(v7, 0x18u, *((_DWORD *)v7 + 0xFFFFFFFF), (void (__thiscall *)(void *))FaceGenMatrix_Destruct); /*0x5c4c69*/
+    FormHeapFree(v8); /*0x5c4c6f*/
   }
-  if ( OSGlobals )
+  if ( MEMORY[0xB33398] ) /*0x5c4c77*/
   {
-    a2 = g_DefaulFOV;
-    SetCameraFOV_0(g_worldScenegraph, g_DefaulFOV, 0.0);
+    __asm { fld     dword ptr ds:0B0313Ch } /*0x5c4c80*/
+    __asm { fstp    [esp+28h+a2]; a2 }
+    SetCameraFOV_0((SceneGraph *)g_WorldSceneReceiverRoot, a2, 0.0); /*0x5c4c92*/
   }
-  if ( TESDataHandler_g_PlayerRef )
+  if ( reference ) /*0x5c4c97*/
   {
-    if ( Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1) )
+    if ( PlayerCharacter_GetAnimDataByPerspective(reference, 1) ) /*0x5c4ca3*/
     {
-      if ( *((_DWORD *)Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1) + 0x32) )
+      if ( PlayerCharacter_GetAnimDataByPerspective(reference, 1)->unkC8[0] ) /*0x5c4cb9*/
       {
-        v10 = TESDataHandler_g_PlayerRef;
-        *((_DWORD *)Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 0) + 0x32) = v10;
+        v9 = reference; /*0x5c4cca*/
+        PlayerCharacter_GetAnimDataByPerspective(reference, 0)->unkC8[0] = (UInt32)v9; /*0x5c4cd1*/
       }
     }
-    CharProxy = MobileObject_GetCharProxy((MobileObject *)TESDataHandler_g_PlayerRef);
-    if ( CharProxy )
+    CharProxy = MobileObject_GetCharProxy((MobileObject *)reference); /*0x5c4ce2*/
+    if ( CharProxy ) /*0x5c4ce6*/
     {
-      TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetScale((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-      v19 = a2;
-      a2 = v19;
-      *((float *)CharProxy + 0xCD) = v19;
+      reference->vtbl->super.super.super.GetScale((TESObjectREFR *)reference); /*0x5c4cf6*/
+      __asm /*0x5c4cf8*/
+      {
+        fstp    [esp+20h+var_14]
+        fld     [esp+20h+var_14]
+        fstp    dword ptr [esi+334h]
+      }
+      *((float *)CharProxy + 0xCD) = _ET1; /*0x5c4d00*/
     }
   }
-  v12 = *((_DWORD *)this + 0x23B);
-  if ( v12 )
+  v12 = *((_DWORD *)this + 0x23B); /*0x5c4d06*/
+  if ( v12 ) /*0x5c4d0e*/
   {
-    sub_57FEB0(*((_DWORD **)this + 0x23B));
-    FormHeapFree(v12);
+    sub_57FEB0(*((_DWORD **)this + 0x23B)); /*0x5c4d12*/
+    FormHeapFree(v12); /*0x5c4d18*/
   }
-  v13 = *((NiObject **)TESObjectREFR_GetAnimData((Actor *)TESDataHandler_g_PlayerRef)[0x13].Destructor + 0x1F);
-  if ( v13 )
+  v13 = *((NiObject **)TESObjectREFR_GetAnimData((TESObjectREFR *)reference)->manager + 0x1F); /*0x5c4d31*/
+  if ( v13 ) /*0x5c4d36*/
   {
-    v14 = NiRTTI_Cast((BSStringT *)&stru_B3FCA0.SpinCount, v13);
-    if ( v14 )
-      sub_716690(v14);
+    v14 = NiRTTI_Cast((BSStringT *)stru_B3FCB8, v13); /*0x5c4d3e*/
+    if ( v14 ) /*0x5c4d48*/
+      sub_716690(v14); /*0x5c4d4c*/
   }
-  AnimData = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 0);
-  sub_473200(AnimData, 0);
-  v16 = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 0);
-  sub_473200(v16, 1);
-  v17 = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1);
-  sub_473200(v17, 0);
-  v18 = Player_GetAnimData((Actor *)TESDataHandler_g_PlayerRef, 1);
-  sub_473200(v18, 1);
-  QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, (int)"Characters\\_Male\\Skeleton.nif", 1, 1);
-  QueuedModelLoader_RemoveModel((int *)ModelLoaderPtr, (int)"Characters\\_Male\\SkeletonBeast.nif", 1, 1);
-  _LN21((char *)this + 0x930, 8u, 0x10, (void (__thiscall *)(void *))BSStringT_Clear);
-  Menu::~Menu(this, a2, a3, a4);
+  AnimDataByPerspective = PlayerCharacter_GetAnimDataByPerspective(reference, 0); /*0x5c4d5b*/
+  ActorAnimData_ResetControllerSequences(AnimDataByPerspective, 0); /*0x5c4d62*/
+  v16 = PlayerCharacter_GetAnimDataByPerspective(reference, 0); /*0x5c4d71*/
+  ActorAnimData_ResetControllerSequences(v16, 1); /*0x5c4d78*/
+  v17 = PlayerCharacter_GetAnimDataByPerspective(reference, 1); /*0x5c4d87*/
+  ActorAnimData_ResetControllerSequences(v17, 0); /*0x5c4d8e*/
+  v18 = PlayerCharacter_GetAnimDataByPerspective(reference, 1); /*0x5c4d9d*/
+  ActorAnimData_ResetControllerSequences(v18, 1); /*0x5c4da4*/
+  QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], (int)"Characters\\_Male\\Skeleton.nif", 1, 1); /*0x5c4db8*/
+  QueuedModelLoader_RemoveModel((int *)MEMORY[0xB33A1C], (int)"Characters\\_Male\\SkeletonBeast.nif", 1, 1); /*0x5c4dcc*/
+  _LN21((char *)this + 0x930, 8u, 0x10, (void (__thiscall *)(void *))BSStringT_Clear); /*0x5c4de6*/
+  Menu::~Menu(this, st5_0, a3, a4); /*0x5c4df5*/
 }

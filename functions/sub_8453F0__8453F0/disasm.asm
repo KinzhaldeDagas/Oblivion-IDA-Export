@@ -178,14 +178,14 @@
 0x84568E: fst     [esp+0ECh+var_B8]
 0x845692: mov     ecx, [esp+0ECh+var_B8]
 0x845696: fxch    st(1)
-0x845698: mov     ds:dword_B46198[ebx], edx
+0x845698: mov     ds:flt_B46198[ebx], edx
 0x84569E: fst     [esp+0ECh+var_BC]
 0x8456A2: mov     eax, [esp+0ECh+var_BC]
 0x8456A6: fst     [esp+0ECh+var_B4]
 0x8456AA: mov     edx, [esp+0ECh+var_B4]
-0x8456AE: mov     ds:dword_B4619C[ebx], eax
-0x8456B4: mov     ds:dword_B461A0[ebx], ecx
-0x8456BA: mov     ds:dword_B461A4[ebx], edx
+0x8456AE: mov     ds:flt_B4619C[ebx], eax
+0x8456B4: mov     ds:flt_B461A0[ebx], ecx
+0x8456BA: mov     ds:flt_B461A4[ebx], edx
 0x8456C0: jmp     loc_8457A1
 0x8456C5: fxch    st(1); jumptable 0084567F case 1
 0x8456C7: fst     [esp+0ECh+var_A0]
@@ -193,40 +193,49 @@
 0x8456CF: fst     [esp+0ECh+var_9C]
 0x8456D3: mov     ecx, [esp+0ECh+var_9C]
 0x8456D7: fst     [esp+0ECh+var_94]
-0x8456DB: mov     ds:dword_B46198[ebx], eax
+0x8456DB: mov     ds:flt_B46198[ebx], eax
 0x8456E1: mov     eax, [esp+0ECh+var_94]
 0x8456E5: fxch    st(1)
 0x8456E7: fst     [esp+0ECh+var_98]
 0x8456EB: mov     edx, [esp+0ECh+var_98]
-0x8456EF: mov     ds:dword_B4619C[ebx], ecx
-0x8456F5: mov     ds:dword_B461A0[ebx], edx
-0x8456FB: mov     ds:dword_B461A4[ebx], eax
+0x8456EF: mov     ds:flt_B4619C[ebx], ecx
+0x8456F5: mov     ds:flt_B461A0[ebx], edx
+0x8456FB: mov     ds:flt_B461A4[ebx], eax
 0x845701: jmp     loc_84579F
 0x845706: fst     [esp+0ECh+var_90]; jumptable 0084567F case 2
 0x84570A: mov     ecx, [esp+0ECh+var_90]
 0x84570E: fxch    st(1)
-0x845710: mov     ds:dword_B46198[ebx], ecx
+0x845710: mov     ds:flt_B46198[ebx], ecx
 0x845716: fst     [esp+0ECh+var_8C]
 0x84571A: mov     edx, [esp+0ECh+var_8C]
 0x84571E: fst     [esp+0ECh+var_88]
 0x845722: mov     eax, [esp+0ECh+var_88]
 0x845726: fst     [esp+0ECh+var_84]
 0x84572A: mov     ecx, [esp+0ECh+var_84]
-0x84572E: mov     ds:dword_B4619C[ebx], edx
-0x845734: mov     ds:dword_B461A0[ebx], eax
-0x84573A: mov     ds:dword_B461A4[ebx], ecx
+0x84572E: mov     ds:flt_B4619C[ebx], edx
+0x845734: mov     ds:flt_B461A0[ebx], eax
+0x84573A: mov     ds:flt_B461A4[ebx], ecx
 0x845740: jmp     short loc_8457A1
 0x845742: fxch    st(1); jumptable 0084567F case 3
 0x845744: fst     [esp+0ECh+var_B0]
 0x845748: mov     edx, [esp+0ECh+var_B0]
 0x84574C: fst     [esp+0ECh+var_AC]
 0x845750: mov     eax, [esp+0ECh+var_AC]
-0x845754: mov     ds:dword_B46198[ebx], edx
+0x845754: mov     ds:flt_B46198[ebx], edx
 0x84575A: fst     [esp+0ECh+var_A8]
 0x84575E: mov     ecx, [esp+0ECh+var_A8]
 0x845762: fst     [esp+0ECh+var_A4]
 0x845766: mov     edx, [esp+0ECh+var_A4]
-0x84576A: mov     ds:dword_B4619C[ebx], eax
-0x845770: mov     ds:dword_B461A0[ebx], ecx
-0x845776: mov     ds:dword_B461A4[ebx], edx
+0x84576A: mov     ds:flt_B4619C[ebx], eax
+0x845770: mov     ds:flt_B461A0[ebx], ecx
+0x845776: mov     ds:flt_B461A4[ebx], edx
 0x84577C: jmp     short loc_8457A1
+0x9D3270: lea     ecx, [ebp-0D4h]; void *
+0x9D3276: jmp     sub_4027D0
+0x9D327B: mov     edx, [esp+arg_4]
+0x9D327F: lea     eax, [edx-0DCh]
+0x9D3285: mov     ecx, [edx-0E0h]
+0x9D328B: xor     ecx, eax
+0x9D328D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3292: mov     eax, offset stru_AFB6B8
+0x9D3297: jmp     ___CxxFrameHandler3

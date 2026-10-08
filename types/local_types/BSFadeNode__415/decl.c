@@ -1,1 +1,1 @@
-BSFadeNode
+struct BSFadeNode;

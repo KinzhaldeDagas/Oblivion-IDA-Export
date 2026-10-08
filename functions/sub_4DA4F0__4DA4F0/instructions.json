@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4DA503",
-    "line": "call    sub_420FD0",
+    "line": "call    ExtraDataList_GetLastFinishedSequence; Returns the pointer payload of ExtraLastFinishedSequence (type 0x4A), or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,19 +73,19 @@
   },
   {
     "ea": "0x4DA512",
-    "line": "push    ecx; Str2",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA513",
-    "line": "push    eax; Str1",
+    "line": "push    eax; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA514",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,19 +139,19 @@
   },
   {
     "ea": "0x4DA535",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DA537",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DA539",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x4DA544",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DA546",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DA548",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,19 +235,19 @@
   },
   {
     "ea": "0x4DA568",
-    "line": "push    ecx",
+    "line": "push    ecx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA569",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DA56B",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,19 +517,19 @@
   },
   {
     "ea": "0x4DA603",
-    "line": "push    edx",
+    "line": "push    edx; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA604",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DA606",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,19 +547,19 @@
   },
   {
     "ea": "0x4DA612",
-    "line": "push    eax",
+    "line": "push    eax; name",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA613",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DA615",
-    "line": "call    sub_4715A0",
+    "line": "call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,13 +577,13 @@
   },
   {
     "ea": "0x4DA61D",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DA620",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x4DA624",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x4DA641",
-    "line": "push    ebx; int",
+    "line": "push    ebx; timeSyncSequence",
     "mnemonic": "push",
     "size": 1
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x4DA645",
-    "line": "fstp    [esp+1Ch+a2]; float",
+    "line": "fstp    [esp+1Ch+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -691,31 +691,31 @@
   },
   {
     "ea": "0x4DA64D",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DA650",
-    "line": "push    ebx; int",
+    "line": "push    ebx; startOver",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA651",
-    "line": "push    ebx; int",
+    "line": "push    ebx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA652",
-    "line": "push    edi; int",
+    "line": "push    edi; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA653",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x4DA66E",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,19 +787,19 @@
   },
   {
     "ea": "0x4DA676",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DA678",
-    "line": "fstp    [esp+14h+var_14]; float",
+    "line": "fstp    [esp+14h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DA67B",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x4DA69C",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x4DA6A1",
-    "line": "fstp    [esp+1Ch+a2]; float",
+    "line": "fstp    [esp+1Ch+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -883,31 +883,31 @@
   },
   {
     "ea": "0x4DA6A9",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DA6AC",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DA6AE",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DA6B0",
-    "line": "push    edi; int",
+    "line": "push    edi; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA6B1",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x4DA6CC",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x4DA6DD",
-    "line": "push    0; int",
+    "line": "push    0; timeSyncSequence",
     "mnemonic": "push",
     "size": 2
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x4DA6E2",
-    "line": "fstp    [esp+1Ch+a2]; float",
+    "line": "fstp    [esp+1Ch+a2]; easeInTime",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1027,31 +1027,31 @@
   },
   {
     "ea": "0x4DA6EA",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+weight]; weight",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DA6ED",
-    "line": "push    0; int",
+    "line": "push    0; startOver",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DA6EF",
-    "line": "push    0; int",
+    "line": "push    0; priority",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4DA6F1",
-    "line": "push    ebx; int",
+    "line": "push    ebx; sequence",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4DA6F2",
-    "line": "call    sub_470B20",
+    "line": "call    BSAnimGroupSequence_Activate; BSAnimGroupSequence activation wrapper. Delegates to NiControllerSequence_Activate with the final transition flag forced to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x4DA70D",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,19 +1243,19 @@
   },
   {
     "ea": "0x4DA743",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4DA745",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+var_10]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4DA748",
-    "line": "call    sub_4715C0",
+    "line": "call    NiControllerManager_DeactivateAllSequences; Iterates all controller-manager sequence slots and deactivates each sequence with the supplied ease-out time and transition flag zero.",
     "mnemonic": "call",
     "size": 5
   },

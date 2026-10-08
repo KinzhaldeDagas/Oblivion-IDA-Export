@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 1,
+  "chunks": [
+    [
+      "0x546440",
+      "0x54645A"
+    ]
+  ],
+  "chunks_sha256": "a56b1514be86a6829d8915b691f458f9aaf2b5f7ffa69b13053fbb9f76fddc34",
+  "comment_regular": "When the target is moving, builds its boot-noise term as bootWeight * fSneakBootWeightMult + fSneakBootWeightBase; stationary targets retain the quiet baseline.",
+  "comment_repeatable": "When the target is moving, builds its boot-noise term as bootWeight * fSneakBootWeightMult + fSneakBootWeightBase; stationary targets retain the quiet baseline.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "Calc_DetectionLevel:::CalcMovementFactor",
+  "display_name": "Calc_DetectionLevel_ApplyMovementFactor",
   "end_ea": "0x54645A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "Calc_DetectionLevel:::CalcMovementFactor",
+  "name": "Calc_DetectionLevel_ApplyMovementFactor",
   "segment": ".text",
   "sha256": "a56b1514be86a6829d8915b691f458f9aaf2b5f7ffa69b13053fbb9f76fddc34",
   "size": 26,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x546440",
-  "type": "int __usercall@<eax>(char@<zf>, int, int, int, int, int, int, int, float, int, int, int, int, int, int, int, int, int, int, int)",
+  "total_chunk_size": 26,
+  "type": "int __usercall@<eax>(char@<zf>, float, int, int, int, int, int, int, float, int, int, int, int, int, int, int, int, int, int, int)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 1
 }

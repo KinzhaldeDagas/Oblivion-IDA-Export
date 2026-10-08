@@ -1,1 +1,4 @@
-tagCInterfaceProxyHeader
+struct tagCInterfaceProxyHeader
+{
+const IID *piid;
+};

@@ -1,7 +1,7 @@
-void __userpurge MagicItemForm_LoadForm_::NoEffectsError(int a1@<ebp>, int a2@<edi>, int a3)
+void __userpurge MagicItemForm_LoadForm_::NoEffectsError(int a1@<edi>, int a2)
 {
   const char *v3; // [esp+0h] [ebp-4h]
 
-  PrintError("Magic Item (%08X) %s has no effects defined.", *(_DWORD *)(a2 + 0xC), v3);
-  MagicItemForm_LoadForm_::Return_1(a1, a3);
+  PrintError("Magic Item (%08X) %s has no effects defined.", *(_DWORD *)(a1 + 0xC), v3); /*0x41b469*/
+  MagicItemForm_LoadForm_::Return_1(a2); /*0x41b46f*/
 }

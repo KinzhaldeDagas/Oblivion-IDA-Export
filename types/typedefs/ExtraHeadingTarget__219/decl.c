@@ -1,1 +1,1 @@
-ExtraHeadingTarget
+struct ExtraHeadingTarget;

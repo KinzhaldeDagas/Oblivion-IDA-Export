@@ -136,7 +136,7 @@
 0x98FACC: stosd
 0x98FACD: stosd
 0x98FACE: jmp     short loc_98FA82
-0x98FAD0: cmp     dword_BAA604, esi
+0x98FAD0: cmp     dword_BA9E10+7F4h, esi
 0x98FAD6: jnz     loc_98F96C
 0x98FADC: or      eax, 0FFFFFFFFh
 0x98FADF: mov     ecx, [ebp+var_4]

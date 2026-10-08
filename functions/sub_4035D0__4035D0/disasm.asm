@@ -1,4 +1,4 @@
-0x4035D0: push    ebx
+0x4035D0: push    ebx; [Controller decode 2026-07-09] DirectInput EnumObjects callback. Records supported joystick axes in axisMask bits 0..5 and POV objects in povMask.
 0x4035D1: push    esi
 0x4035D2: push    edi
 0x4035D3: mov     edi, [esp+0Ch+arg_0]
@@ -8,7 +8,7 @@
 0x4035E4: mov     ecx, edi
 0x4035E6: mov     esi, [ecx]
 0x4035E8: cmp     esi, [eax]
-0x4035EA: jnz     short loc_4035FE
+0x4035EA: jnz     short loc_4035FE; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: XAxis object -> axisMask bit 0.
 0x4035EC: sub     edx, 4
 0x4035EF: add     eax, 4
 0x4035F2: add     ecx, 4
@@ -63,7 +63,7 @@
 0x403674: push    ebp
 0x403675: mov     esi, [edx]
 0x403677: cmp     esi, [ecx]
-0x403679: jnz     short loc_40368D
+0x403679: jnz     short loc_40368D; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: YAxis object -> axisMask bit 1.
 0x40367B: sub     eax, 4
 0x40367E: add     ecx, 4
 0x403681: add     edx, 4
@@ -117,7 +117,7 @@
 0x4036FF: nop
 0x403700: mov     esi, [edx]
 0x403702: cmp     esi, [ecx]
-0x403704: jnz     short loc_403718
+0x403704: jnz     short loc_403718; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: ZAxis object -> axisMask bit 2.
 0x403706: sub     eax, 4
 0x403709: add     ecx, 4
 0x40370C: add     edx, 4
@@ -171,7 +171,7 @@
 0x40378A: lea     ebx, [ebx+0]
 0x403790: mov     esi, [edx]
 0x403792: cmp     esi, [ecx]
-0x403794: jnz     short loc_4037A8
+0x403794: jnz     short loc_4037A8; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: RxAxis object -> axisMask bit 3.
 0x403796: sub     eax, 4
 0x403799: add     ecx, 4
 0x40379C: add     edx, 4
@@ -225,7 +225,7 @@
 0x40381A: lea     ebx, [ebx+0]
 0x403820: mov     esi, [edx]
 0x403822: cmp     esi, [ecx]
-0x403824: jnz     short loc_403838
+0x403824: jnz     short loc_403838; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: RyAxis object -> axisMask bit 4.
 0x403826: sub     eax, 4
 0x403829: add     ecx, 4
 0x40382C: add     edx, 4
@@ -278,10 +278,9 @@
 0x4038A4: mov     ecx, offset CLSID_GUID_RzAxis
 0x4038A9: mov     edx, edi
 0x4038AB: jmp     short loc_4038B0
-0x4038AD: align 10h
 0x4038B0: mov     esi, [edx]
 0x4038B2: cmp     esi, [ecx]
-0x4038B4: jnz     short loc_4038C8
+0x4038B4: jnz     short loc_4038C8; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: RzAxis object -> axisMask bit 5.
 0x4038B6: sub     eax, 4
 0x4038B9: add     ecx, 4
 0x4038BC: add     edx, 4
@@ -331,7 +330,7 @@
 0x40392B: or      dword ptr [ebx], 20h
 0x40392E: mov     eax, [esp+0Ch+arg_0]
 0x403932: test    byte ptr [eax+18h], 0Ch
-0x403936: jz      short loc_403948
+0x403936: jz      short loc_403948; [Controller decode 2026-07-09] EnumJoystickObjectsCallback: POV object -> povMask bit based on DirectInput object instance.
 0x403938: mov     ecx, [eax+18h]
 0x40393B: shr     ecx, 8
 0x40393E: mov     edx, 1

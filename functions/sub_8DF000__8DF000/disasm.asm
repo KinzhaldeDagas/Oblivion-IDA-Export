@@ -1,9 +1,7 @@
 0x8DF000: sub     ecx, 8
 0x8DF003: jmp     loc_8DF020
-0x8DF008: align 10h
 0x8DF010: sub     ecx, 0Ch
 0x8DF013: jmp     loc_8DF020
-0x8DF018: align 10h
 0x8DF020: push    esi
 0x8DF021: mov     esi, ecx
 0x8DF023: call    sub_8DEED0

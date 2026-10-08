@@ -80,12 +80,12 @@
 0x46DA50: mov     ecx, edi
 0x46DA52: call    eax
 0x46DA54: mov     edx, [ebx]
-0x46DA56: push    eax; Str2
+0x46DA56: push    eax; right
 0x46DA57: mov     eax, [edx+14h]
 0x46DA5A: mov     ecx, ebx
 0x46DA5C: call    eax
-0x46DA5E: push    eax; Str1
-0x46DA5F: call    __strcmp
+0x46DA5E: push    eax; left
+0x46DA5F: call    CRT_StricmpLocaleDispatch
 0x46DA64: add     esp, 8
 0x46DA67: test    eax, eax
 0x46DA69: jnz     loc_46D9A5

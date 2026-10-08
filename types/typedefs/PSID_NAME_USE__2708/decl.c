@@ -1,1 +1,1 @@
-PSID_NAME_USE
+typedef tagSID_NAME_USE *PSID_NAME_USE;

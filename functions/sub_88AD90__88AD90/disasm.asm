@@ -42,10 +42,10 @@
 0x88ADFE: mov     ecx, [eax+edi*4]
 0x88AE01: test    ecx, ecx
 0x88AE03: jz      short loc_88AE21
-0x88AE05: push    offset dword_BA7B80
+0x88AE05: push    offset stru_BA7B80
 0x88AE0A: lea     edx, [esp+18h+var_8]
 0x88AE0E: push    edx
-0x88AE0F: call    sub_47F990
+0x88AE0F: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x88AE14: mov     ecx, [eax]
 0x88AE16: test    ecx, ecx
 0x88AE18: jz      short loc_88AE21

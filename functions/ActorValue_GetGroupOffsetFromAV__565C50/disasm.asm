@@ -1,4 +1,4 @@
-0x565C50: mov     eax, [esp+arg_0]
+0x565C50: mov     eax, [esp+arg_0]; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x565C54: cmp     eax, 6; switch 7 cases
 0x565C57: ja      short ActorValue_GetGroupOffsetFromAV___def_565C59
 0x565C59: jmp     ds:jpt_565C59[eax*4]; switch jump

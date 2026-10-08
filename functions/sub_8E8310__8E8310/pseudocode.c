@@ -11,27 +11,27 @@ int __cdecl sub_8E8310(signed int a1, signed int a2)
   int v11; // [esp+Ch] [ebp-8h] BYREF
   int v12; // [esp+10h] [ebp-4h]
 
-  v2 = a1;
-  v3 = (_DWORD *)a2;
-  a2 = *(_DWORD *)(a2 + 4);
-  v9 = *(_DWORD *)(a1 + 0x220);
-  v4 = *(void (__cdecl **)(int, signed int *, int, signed int *, int))(v9 + 8);
-  a1 = 4;
-  v4(v9, &a2, 4, &a1, 1);
-  v5 = 0;
-  v12 = 4 * a2;
-  if ( a2 <= 0 )
-    return 4 * a2;
-  do
+  v2 = a1; /*0x8e8314*/
+  v3 = (_DWORD *)a2; /*0x8e831a*/
+  a2 = *(_DWORD *)(a2 + 4); /*0x8e8328*/
+  v9 = *(_DWORD *)(a1 + 0x220); /*0x8e8339*/
+  v4 = *(void (__cdecl **)(int, signed int *, int, signed int *, int))(v9 + 8); /*0x8e833a*/
+  a1 = 4; /*0x8e833d*/
+  v4(v9, &a2, 4, &a1, 1); /*0x8e8345*/
+  v5 = 0; /*0x8e8355*/
+  v12 = 4 * a2; /*0x8e8359*/
+  if ( a2 <= 0 ) /*0x8e835d*/
+    return 4 * a2; /*0x8e83a4*/
+  do /*0x8e8395*/
   {
-    v6 = *(_DWORD *)(v2 + 0x220);
-    v11 = *(_DWORD *)(*v3 + 4 * v5);
-    v10 = v6;
-    v7 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v6 + 8);
-    a1 = 4;
-    v7(v10, &v11, 4, &a1, 1);
-    ++v5;
+    v6 = *(_DWORD *)(v2 + 0x220); /*0x8e8365*/
+    v11 = *(_DWORD *)(*v3 + 4 * v5); /*0x8e8372*/
+    v10 = v6; /*0x8e837d*/
+    v7 = *(void (__cdecl **)(int, int *, int, signed int *, int))(v6 + 8); /*0x8e837e*/
+    a1 = 4; /*0x8e8381*/
+    v7(v10, &v11, 4, &a1, 1); /*0x8e8389*/
+    ++v5; /*0x8e838b*/
   }
-  while ( v5 < a2 );
-  return v12;
+  while ( v5 < a2 ); /*0x8e8395*/
+  return v12; /*0x8e839b*/
 }

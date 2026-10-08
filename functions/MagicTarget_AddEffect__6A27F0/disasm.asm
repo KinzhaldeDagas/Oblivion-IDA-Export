@@ -28,3 +28,20 @@
 0x6A2853: test    ebx, ebx
 0x6A2855: mov     [esp+13Ch+var_124], ebx
 0x6A2859: jz      short MagicTarget_AddEffect___GetSEFFAlwaysApplies
+0x9C6030: lea     ecx, [ebp-124h]; void *
+0x9C6036: jmp     BSStringT_Clear
+0x9C603B: lea     ecx, [ebp-124h]; void *
+0x9C6041: jmp     BSStringT_Clear
+0x9C6046: lea     ecx, [ebp-118h]; void *
+0x9C604C: jmp     BSStringT_Clear
+0x9C6051: mov     edx, [esp+arg_4]
+0x9C6055: lea     eax, [edx-12Ch]
+0x9C605B: mov     ecx, [edx-130h]
+0x9C6061: xor     ecx, eax
+0x9C6063: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6068: add     eax, 10h
+0x9C606B: mov     ecx, [edx-4]
+0x9C606E: xor     ecx, eax
+0x9C6070: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6075: mov     eax, offset stru_AEE67C
+0x9C607A: jmp     ___CxxFrameHandler3

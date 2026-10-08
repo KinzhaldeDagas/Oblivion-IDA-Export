@@ -27,14 +27,14 @@
 0x48F1C7: mov     edx, [ecx]
 0x48F1C9: push    ecx
 0x48F1CA: mov     [eax], edx
-0x48F1CC: call    FormHeapFree
+0x48F1CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F1D1: add     esp, 4
 0x48F1D4: jmp     short loc_48F1DC
 0x48F1D6: mov     dword ptr [eax], 0
 0x48F1DC: test    edi, edi
 0x48F1DE: jz      loc_48F31D
-0x48F1E4: mov     ecx, edi
-0x48F1E6: call    sub_41E790
+0x48F1E4: mov     ecx, edi; this
+0x48F1E6: call    ExtraDataList_GetOriginalReference; Return the TESObjectREFR payload stored in ExtraOriginalReference type 0x26. It cannot redirect an AMMO-keyed inventory entry to a WEAP form.
 0x48F1EB: mov     esi, eax
 0x48F1ED: test    esi, esi
 0x48F1EF: jz      loc_48F31D
@@ -175,7 +175,7 @@
 0x48F341: mov     eax, [esi+4]
 0x48F344: mov     edi, [eax+4]
 0x48F347: push    eax
-0x48F348: call    FormHeapFree
+0x48F348: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F34D: add     esp, 4
 0x48F350: test    edi, edi
 0x48F352: mov     [esi+4], edi
@@ -183,10 +183,10 @@
 0x48F357: mov     dword ptr [esi], 0
 0x48F35D: mov     eax, [ebp+0]
 0x48F360: push    eax
-0x48F361: call    FormHeapFree
+0x48F361: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F366: push    ebp
 0x48F367: mov     dword ptr [ebp+0], 0
-0x48F36E: call    FormHeapFree
+0x48F36E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x48F373: add     esp, 8
 0x48F376: test    ebx, ebx
 0x48F378: jnz     loc_48F195

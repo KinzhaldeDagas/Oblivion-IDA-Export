@@ -1,1 +1,1 @@
-HFONT
+typedef HFONT__ *HFONT;

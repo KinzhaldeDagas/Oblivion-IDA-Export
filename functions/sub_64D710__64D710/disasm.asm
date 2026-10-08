@@ -1,4 +1,4 @@
-0x64D710: sub     esp, 28h
+0x64D710: sub     esp, 28h; Middle/low FLEE procedure: dynamic-casts current package to FleePackage, resolves target, chooses flee point through FleePackage helpers, and sends movement/path request via process vfuncs +0x3DC/+0x418. Package AlwaysSneak is handled separately by Actor update bit 0x20000 -> movement flag 0x400.
 0x64D713: push    ebx
 0x64D714: push    ebp
 0x64D715: push    esi
@@ -52,7 +52,7 @@
 0x64D792: mov     ecx, esi
 0x64D794: call    edx
 0x64D796: mov     ecx, eax
-0x64D798: call    sub_419F10
+0x64D798: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x64D79D: mov     eax, [esi]
 0x64D79F: mov     edx, [eax+54h]
 0x64D7A2: push    0
@@ -115,7 +115,7 @@
 0x64D853: mov     ecx, esi
 0x64D855: call    edx
 0x64D857: mov     ecx, eax
-0x64D859: call    sub_41A610
+0x64D859: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x64D85E: pop     edi
 0x64D85F: pop     esi
 0x64D860: pop     ebp
@@ -123,7 +123,7 @@
 0x64D862: add     esp, 28h
 0x64D865: retn    4
 0x64D868: mov     ecx, ebp; this
-0x64D86A: call    TESObjectREFR_GetParentCell
+0x64D86A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64D86F: mov     ebx, eax
 0x64D871: test    ebx, ebx
 0x64D873: mov     [esp+38h+var_20], ebx
@@ -144,14 +144,14 @@
 0x64D8A8: mov     ecx, ebx; this
 0x64D8AA: mov     [esp+38h+var_8], edx
 0x64D8AE: mov     [esp+38h+var_4], eax
-0x64D8B2: call    TESObjectCELL_IsInterior
+0x64D8B2: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x64D8B7: test    al, al
 0x64D8B9: jz      short loc_64D8CC
-0x64D8BB: mov     ecx, offset flt_B37030
+0x64D8BB: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+358h)
 0x64D8C0: call    GameSetting_GetSafeFloatPointer
 0x64D8C5: mov     [esp+38h+var_25], 1
 0x64D8CA: jmp     short loc_64D8D6
-0x64D8CC: mov     ecx, offset flt_B37028
+0x64D8CC: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+350h)
 0x64D8D1: call    GameSetting_GetSafeFloatPointer
 0x64D8D6: fld     dword ptr [eax]
 0x64D8D8: fstp    [esp+38h+arg_0]
@@ -234,7 +234,7 @@
 0x64D9D4: call    TESObjectREFR_GetWorldSpace
 0x64D9D9: push    eax
 0x64D9DA: mov     ecx, ebx; this
-0x64D9DC: call    TESObjectREFR_GetParentCell
+0x64D9DC: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64D9E1: mov     ecx, [esp+3Ch+arg_0]
 0x64D9E5: mov     edx, [ecx]
 0x64D9E7: push    eax
@@ -260,9 +260,9 @@
 0x64DA23: cmp     byte ptr [esi+0D0h], 0
 0x64DA2A: jnz     loc_64DADB
 0x64DA30: push    3Ah ; ':'; a1
-0x64DA32: call    TESForm_LookupByFormID
+0x64DA32: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x64DA37: add     esp, 4
-0x64DA3A: mov     ecx, offset TimeGlobals
+0x64DA3A: mov     ecx, 0B332E0h
 0x64DA3F: mov     edi, eax
 0x64DA41: call    TimeGlobals_GetGameHour
 0x64DA46: fstp    [esp+38h+arg_0]

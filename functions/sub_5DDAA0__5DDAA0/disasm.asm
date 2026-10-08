@@ -18,12 +18,12 @@
 0x5DDACF: jz      short loc_5DDAEE
 0x5DDAD1: fld     dword ptr ds:0A379B4h
 0x5DDAD7: push    ecx
-0x5DDAD8: fstp    [esp+0Ch+a2]; a3
-0x5DDADB: push    1772h; a2
+0x5DDAD8: fstp    [esp+0Ch+a2]; value
+0x5DDADB: push    1772h; propertyCode
 0x5DDAE0: mov     ecx, esi; this
-0x5DDAE2: call    Tile_SetFloat
+0x5DDAE2: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5DDAE7: mov     ecx, edi; int
-0x5DDAE9: call    sub_584740
+0x5DDAE9: call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.
 0x5DDAEE: pop     edi
 0x5DDAEF: mov     edx, ds:0B38CF0h
 0x5DDAF5: mov     eax, ds:0B38CE0h

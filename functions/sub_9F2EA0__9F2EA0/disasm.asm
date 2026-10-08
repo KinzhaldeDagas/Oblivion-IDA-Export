@@ -2,7 +2,7 @@
 0x9F2EA6: push    ecx
 0x9F2EA7: fstp    [esp+4+var_4]; float
 0x9F2EAA: push    offset aFdispositionre; "fDispositionReduction"
-0x9F2EAF: mov     ecx, offset fDispositionReduction
+0x9F2EAF: mov     ecx, 0B38E28h
 0x9F2EB4: call    GameSetting_ConstrAndReg_float
 0x9F2EB9: push    offset sub_A22370; void (__cdecl *)()
 0x9F2EBE: call    _atexit

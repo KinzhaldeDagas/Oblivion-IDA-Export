@@ -15,18 +15,18 @@
 0x679C31: jz      short loc_679CAC
 0x679C33: mov     ecx, ds:0B333C4h
 0x679C39: add     ecx, 44h ; 'D'
-0x679C3C: call    GetExtraDataFollower
+0x679C3C: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x679C41: test    eax, eax
 0x679C43: jz      short loc_679C6F
 0x679C45: mov     ecx, ds:0B333C4h
 0x679C4B: add     ecx, 44h ; 'D'
-0x679C4E: call    GetExtraDataFollower
+0x679C4E: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x679C53: cmp     [eax+0Ch], edi
 0x679C56: jz      short loc_679C6F
 0x679C58: mov     ecx, ds:0B333C4h
 0x679C5E: add     ecx, 44h ; 'D'
 0x679C61: push    ebx
-0x679C62: call    GetExtraDataFollower
+0x679C62: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x679C67: mov     ecx, [eax+0Ch]
 0x679C6A: call    BSSimpleList_Remove
 0x679C6F: mov     eax, ds:0B333C4h
@@ -52,33 +52,33 @@
 0x679CB2: jnz     short loc_679CC5
 0x679CB4: push    edi; a2
 0x679CB5: mov     ecx, esi; this
-0x679CB7: call    sub_673A50
+0x679CB7: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x679CBC: mov     ecx, eax; this
-0x679CBE: call    sub_7616D0
+0x679CBE: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x679CC3: jmp     short loc_679D0A
 0x679CC5: cmp     edi, 1
 0x679CC8: jnz     short loc_679CDB
 0x679CCA: push    edi; a2
 0x679CCB: mov     ecx, esi; this
-0x679CCD: call    sub_673A50
+0x679CCD: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x679CD2: mov     ecx, eax; this
-0x679CD4: call    sub_7616D0
+0x679CD4: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x679CD9: jmp     short loc_679D0A
 0x679CDB: cmp     edi, 2
 0x679CDE: jnz     short loc_679CF1
 0x679CE0: push    edi; a2
 0x679CE1: mov     ecx, esi; this
-0x679CE3: call    sub_673A50
+0x679CE3: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x679CE8: mov     ecx, eax; this
-0x679CEA: call    sub_7616D0
+0x679CEA: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x679CEF: jmp     short loc_679D0A
 0x679CF1: cmp     edi, 3
 0x679CF4: jnz     short loc_679D07
 0x679CF6: push    edi; a2
 0x679CF7: mov     ecx, esi; this
-0x679CF9: call    sub_673A50
+0x679CF9: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x679CFE: mov     ecx, eax; this
-0x679D00: call    sub_7616D0
+0x679D00: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x679D05: jmp     short loc_679D0A
 0x679D07: lea     eax, [esi+58h]
 0x679D0A: test    eax, eax
@@ -86,7 +86,6 @@
 0x679D10: jz      loc_67A1C1
 0x679D16: jmp     short loc_679D24
 0x679D18: jmp     short loc_679D20
-0x679D1A: align 10h
 0x679D20: mov     eax, [esp+1Ch+arg_0]
 0x679D24: cmp     dword ptr [eax+4], 0
 0x679D28: jnz     short loc_679D33
@@ -144,10 +143,10 @@
 0x679DCE: mov     ebp, eax
 0x679DD0: call    sub_5E03A0
 0x679DD5: test    ebp, ebp
-0x679DD7: mov     [esp+1Ch+var_8], eax
+0x679DD7: mov     [esp+1Ch+self], eax
 0x679DDB: jz      short loc_679E1C
-0x679DDD: mov     ecx, ebp
-0x679DDF: call    sub_5660A0
+0x679DDD: mov     ecx, ebp; self
+0x679DDF: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x679DE4: test    al, al
 0x679DE6: jz      short loc_679E1C
 0x679DE8: cmp     byte ptr [ebp+20h], 0Ch
@@ -160,7 +159,7 @@
 0x679DFC: jnz     short loc_679E07
 0x679DFE: push    0
 0x679E00: mov     ecx, ebp
-0x679E02: call    TESPackage_SetTarget
+0x679E02: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x679E07: push    esi
 0x679E08: mov     ecx, ebp
 0x679E0A: call    sub_566D00
@@ -168,12 +167,12 @@
 0x679E11: jnz     short loc_679E1C
 0x679E13: push    0
 0x679E15: mov     ecx, ebp
-0x679E17: call    TESPackage_SetLocation
-0x679E1C: cmp     [esp+1Ch+var_8], 0
+0x679E17: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
+0x679E1C: cmp     [esp+1Ch+self], 0
 0x679E21: jz      short loc_679E66
-0x679E23: mov     ebp, [esp+1Ch+var_8]
-0x679E27: mov     ecx, ebp
-0x679E29: call    sub_5660A0
+0x679E23: mov     ebp, [esp+1Ch+self]
+0x679E27: mov     ecx, ebp; self
+0x679E29: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x679E2E: test    al, al
 0x679E30: jz      short loc_679E66
 0x679E32: cmp     byte ptr [ebp+20h], 0Ch
@@ -186,7 +185,7 @@
 0x679E46: jnz     short loc_679E51
 0x679E48: push    0
 0x679E4A: mov     ecx, ebp
-0x679E4C: call    TESPackage_SetTarget
+0x679E4C: call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.
 0x679E51: push    esi
 0x679E52: mov     ecx, ebp
 0x679E54: call    sub_566D00
@@ -194,7 +193,7 @@
 0x679E5B: jnz     short loc_679E66
 0x679E5D: push    0
 0x679E5F: mov     ecx, ebp
-0x679E61: call    TESPackage_SetLocation
+0x679E61: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x679E66: mov     ebp, [esp+1Ch+var_C]
 0x679E6A: cmp     ebp, 2
 0x679E6D: jge     loc_679F6D
@@ -247,21 +246,21 @@
 0x679EFC: cmp     eax, ebx
 0x679EFE: jnz     short loc_679F47
 0x679F00: mov     ecx, esi
-0x679F02: call    sub_5E6B40
+0x679F02: call    Actor_IsInDialogueProcedure; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x679F07: test    al, al
-0x679F09: mov     ecx, esi
+0x679F09: mov     ecx, esi; this
 0x679F0B: jz      short loc_679F19
 0x679F0D: mov     edx, [esi]
 0x679F0F: mov     eax, [edx+30Ch]
 0x679F15: call    eax
 0x679F17: jmp     short loc_679F47
-0x679F19: call    sub_5E0380
-0x679F1E: mov     ecx, eax
-0x679F20: call    sub_5660A0
+0x679F19: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x679F1E: mov     ecx, eax; self
+0x679F20: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x679F25: test    al, al
 0x679F27: jz      short loc_679F32
 0x679F29: mov     ecx, esi; int
-0x679F2B: call    sub_5EAE70
+0x679F2B: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x679F30: jmp     short loc_679F47
 0x679F32: mov     edx, [edi]
 0x679F34: mov     eax, [edx+178h]
@@ -305,8 +304,8 @@
 0x679F9D: call    sub_5E6CD0
 0x679FA2: test    al, al
 0x679FA4: jz      short loc_679FC7
-0x679FA6: mov     ecx, esi
-0x679FA8: call    sub_5E0380
+0x679FA6: mov     ecx, esi; this
+0x679FA8: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x679FAD: cmp     eax, ebp
 0x679FAF: jz      short loc_679FBF
 0x679FB1: cmp     byte ptr [eax+20h], 10h
@@ -333,14 +332,14 @@
 0x679FE9: jz      short loc_679FFB
 0x679FEB: push    ebx
 0x679FEC: mov     ecx, ebp
-0x679FEE: call    sub_6162D0
+0x679FEE: call    CombatController_RemoveTarget
 0x679FF3: push    ebx
 0x679FF4: mov     ecx, ebp
 0x679FF6: call    sub_615010
 0x679FFB: xor     ebp, ebp
 0x679FFD: push    ebx
 0x679FFE: lea     ecx, [esi+44h]
-0x67A001: call    sub_424D00
+0x67A001: call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.
 0x67A006: mov     edx, [edi]
 0x67A008: mov     eax, [edx+0CCh]
 0x67A00E: mov     ecx, edi
@@ -358,7 +357,7 @@
 0x67A02C: jnz     short loc_67A036
 0x67A02E: push    ebp
 0x67A02F: mov     ecx, esi
-0x67A031: call    sub_5E03C0
+0x67A031: call    sub_5E03C0; 3DTheft decode 2026-05-17: Actor wrapper for process vfunc +0xD0; writes the resolved procedure target/follow reference into the actor process.
 0x67A036: mov     edx, [esi]
 0x67A038: mov     eax, [edx+380h]
 0x67A03E: mov     ecx, esi
@@ -420,8 +419,8 @@
 0x67A0DC: call    sub_5697E0
 0x67A0E1: cmp     eax, ebx
 0x67A0E3: jnz     short loc_67A0F5
-0x67A0E5: mov     ecx, esi
-0x67A0E7: call    sub_5E0380
+0x67A0E5: mov     ecx, esi; this
+0x67A0E7: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x67A0EC: mov     ecx, [eax+24h]
 0x67A0EF: push    ebp
 0x67A0F0: call    TESPackage_LocationData_SetReference

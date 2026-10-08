@@ -3,7 +3,7 @@
 0x981638: test    edx, edx
 0x98163A: jz      short toend
 0x98163C: xor     eax, eax
-0x98163E: mov     al, [esp+arg_4]
+0x98163E: mov     al, byte ptr [esp+arg_4]
 0x981642: test    al, al
 0x981644: jnz     short loc_98165C
 0x981646: cmp     edx, 100h

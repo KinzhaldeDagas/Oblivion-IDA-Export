@@ -14,7 +14,7 @@
 0x51E9C7: mov     [esp+20h+var_10], esi
 0x51E9CB: lea     edi, [esi+0E4h]
 0x51E9D1: mov     dword ptr [esi], offset ??_7TESCreature@@6BTESCreature@@@; const TESCreature::`vftable'{for `TESCreature'}
-0x51E9D7: mov     dword ptr [esi+24h], offset ??_7TESCreature@@6BTESActorBaseData@@@; const TESCreature::`vftable'{for `TESActorBaseData'}
+0x51E9D7: mov     dword ptr [esi+24h], offset ??_7TESCreature@@6BTESActorBaseData@@@; Verified typed prefix through +0x50 only; complete table extends further. Blood slots +0x28/+0x30 are independent disable flags; +0x38/+0x40 are texture/particle getters. TESCreature ctor 0x51EB80 installs its component vtable at complete-object +0x24. Unknown slots intentionally remain untyped.
 0x51E9DE: mov     dword ptr [esi+44h], offset ??_7TESCreature@@6BTESContainer@@@; const TESCreature::`vftable'{for `TESContainer'}
 0x51E9E5: mov     dword ptr [esi+54h], offset ??_7TESCreature@@6BTESSpellList@@@; const TESCreature::`vftable'{for `TESSpellList'}
 0x51E9EC: mov     dword ptr [esi+68h], offset ??_7TESCreature@@6BTESAIForm@@@; const TESCreature::`vftable'{for `TESAIForm'}
@@ -47,3 +47,27 @@
 0x51EA94: pop     esi
 0x51EA95: add     esp, 14h
 0x51EA98: retn
+0x9B79D0: mov     ecx, [ebp-10h]; this
+0x9B79D3: jmp     ??1TESActorBase@@UAE@XZ; TESActorBase::~TESActorBase(void)
+0x9B79D8: cmp     dword ptr [ebp-10h], 0
+0x9B79DC: jz      loc_9B79F2
+0x9B79E2: mov     eax, [ebp-10h]
+0x9B79E5: add     eax, 0E4h ; 'ä'
+0x9B79EA: mov     [ebp-14h], eax
+0x9B79ED: jmp     loc_9B79F9
+0x9B79F2: mov     dword ptr [ebp-14h], 0
+0x9B79F9: mov     ecx, [ebp-14h]
+0x9B79FC: jmp     TESAttackDamageForm_destr
+0x9B7A01: mov     ecx, [ebp-10h]
+0x9B7A04: add     ecx, 11Ch; this
+0x9B7A0A: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B7A0F: mov     ecx, [ebp-10h]
+0x9B7A12: add     ecx, 134h; void *
+0x9B7A18: jmp     TESTexture_destr
+0x9B7A1D: mov     edx, [esp+arg_4]
+0x9B7A21: lea     eax, [edx-10h]
+0x9B7A24: mov     ecx, [edx-14h]
+0x9B7A27: xor     ecx, eax
+0x9B7A29: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7A2E: mov     eax, offset stru_AE2370
+0x9B7A33: jmp     ___CxxFrameHandler3

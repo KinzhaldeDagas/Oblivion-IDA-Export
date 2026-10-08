@@ -1,4 +1,4 @@
-int __usercall rtforloginf_::tranindfpop@<eax>(double a1@<st0>)
+int __usercall rtforloginf_::tranindfpop@<eax>(int a1@<ebp>)
 {
   return rtforloginf_::tranindfnpop(a1);
 }

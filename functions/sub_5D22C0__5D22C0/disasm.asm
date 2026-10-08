@@ -1,4 +1,4 @@
-0x5D22C0: push    0FFFFFFFFh
+0x5D22C0: push    0FFFFFFFFh; Repair-menu item handling. A successful repair awards Armorer useValue0 before inventory/repair-state updates.
 0x5D22C2: push    offset SEH_5D22C0
 0x5D22C7: mov     eax, large fs:0
 0x5D22CD: push    eax
@@ -105,21 +105,21 @@
 0x5D2441: push    0FAAh
 0x5D2446: mov     ecx, ebx
 0x5D2448: call    Tile_GetFloat
-0x5D244D: call    Double_To_SInt32
+0x5D244D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D2452: xor     edi, edi
 0x5D2454: push    edi; a3
 0x5D2455: push    0FB9h
 0x5D245A: mov     ecx, ebx
 0x5D245C: mov     ds:0B3B718h, eax
 0x5D2461: call    Tile_GetFloat
-0x5D2466: call    Double_To_SInt32
+0x5D2466: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D246B: mov     ecx, ds:0B333C4h; this
 0x5D2471: push    eax; a2
 0x5D2472: call    GetInventoryEntryOfItem
-0x5D2477: mov     ecx, ds:0B333C4h
-0x5D247D: push    0Ch
+0x5D2477: mov     ecx, ds:0B333C4h; this
+0x5D247D: push    0Ch; actorValue
 0x5D247F: mov     esi, eax
-0x5D2481: call    Actor_GetSkillMasteryLevel
+0x5D2481: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5D2486: cmp     esi, edi
 0x5D2488: mov     [esp+2A8h+var_290], eax
 0x5D248C: mov     byte ptr [esp+2A8h+var_274], 0
@@ -227,22 +227,22 @@
 0x5D25D6: jmp     short loc_5D25DA
 0x5D25D8: xor     eax, eax
 0x5D25DA: mov     [esi], eax
-0x5D25DC: push    0
-0x5D25DE: mov     ecx, esi
-0x5D25E0: call    sub_60D020
+0x5D25DC: push    0; value
+0x5D25DE: mov     ecx, esi; this
+0x5D25E0: call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.
 0x5D25E5: mov     ecx, [esi]
 0x5D25E7: push    edi
 0x5D25E8: call    BSSimpleList_PushFront
 0x5D25ED: mov     [esp+2B0h+var_299], 0
-0x5D25F2: mov     ecx, [esp+2B0h+var_278]
-0x5D25F6: push    0
-0x5D25F8: push    1
-0x5D25FA: push    ebx
-0x5D25FB: call    ContainerExtraData_GetEntryForForm
+0x5D25F2: mov     ecx, [esp+2B0h+var_278]; this
+0x5D25F6: push    0; referenceFormIDOrZero
+0x5D25F8: push    1; unusedAlwaysOne
+0x5D25FA: push    ebx; form
+0x5D25FB: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x5D2600: test    eax, eax
-0x5D2602: mov     [esp+2B8h+var_290], eax
+0x5D2602: mov     [esp+2B0h+var_288], eax
 0x5D2606: jnz     short loc_5D2618
-0x5D2608: cmp     byte ptr [esp+2B8h+var_2A4+3], 0
+0x5D2608: cmp     [esp+2B0h+var_299], 0
 0x5D260D: jz      loc_5D2A08
 0x5D2613: jmp     loc_5D29F8
 0x5D2618: mov     ecx, ebp
@@ -254,9 +254,9 @@
 0x5D2629: push    14h; Size
 0x5D262B: call    FormHeapAlloc
 0x5D2630: add     esp, 4
-0x5D2633: mov     [esp+24h], eax
+0x5D2633: mov     [esp+2B0h+var_28C], eax
 0x5D2637: test    eax, eax
-0x5D2639: mov     [esp+2B8h+var_14], 1
+0x5D2639: mov     [esp+2B0h+var_C], 1
 0x5D2644: jz      short loc_5D2651
 0x5D2646: mov     ecx, eax
 0x5D2648: call    ExtraDataList_constr
@@ -267,61 +267,61 @@
 0x5D2655: mov     edx, [ecx]
 0x5D2657: push    edx
 0x5D2658: mov     ecx, edi
-0x5D265A: mov     [esp+2BCh+var_14], 0FFFFFFFFh
+0x5D265A: mov     [esp+2B4h+var_C], 0FFFFFFFFh
 0x5D2665: mov     ebx, edi
 0x5D2667: call    BaseExtraList_Copy
 0x5D266C: push    1
 0x5D266E: mov     ecx, edi
 0x5D2670: call    ExtraDataList_SetExtraCount
-0x5D2675: cmp     byte ptr [esp+2B8h+var_2A4+3], 0
+0x5D2675: cmp     [esp+2B0h+var_299], 0
 0x5D267A: jz      short loc_5D2698
 0x5D267C: mov     ecx, ebp
 0x5D267E: call    ExtraDataList_GetExtraCount
 0x5D2683: cmp     ax, 1
 0x5D2687: jle     short loc_5D2698
-0x5D2689: mov     eax, [esp+2B8h+var_298]
+0x5D2689: mov     eax, [esp+2B0h+var_290]
 0x5D268D: add     eax, 0FFFFFFFFh
 0x5D2690: push    eax
 0x5D2691: mov     ecx, ebp
 0x5D2693: call    ExtraDataList_SetExtraCount
 0x5D2698: mov     ecx, ebx
 0x5D269A: call    ExtraDataList_GetHealthData
-0x5D269F: call    Double_To_SInt32
+0x5D269F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D26A4: cmp     eax, 0FFFFFFFFh
-0x5D26A7: mov     [esp+24h], eax
+0x5D26A7: mov     [esp+2B0h+var_28C], eax
 0x5D26AB: jnz     short loc_5D26B5
 0x5D26AD: mov     eax, [esp+1Ch]
-0x5D26B1: mov     [esp+24h], eax
-0x5D26B5: mov     ecx, [esp+2B8h+var_27C]
+0x5D26B1: mov     [esp+2B0h+var_28C], eax
+0x5D26B5: mov     ecx, [esp+2B0h+var_274]
 0x5D26B9: add     eax, ecx
 0x5D26BB: cmp     [esp+1Ch], eax
-0x5D26BF: mov     [esp+2B8h+var_298], eax
+0x5D26BF: mov     [esp+2B0h+var_290], eax
 0x5D26C3: jg      short loc_5D2709
-0x5D26C5: cmp     [esp+2B8h+var_2A0], 3
+0x5D26C5: cmp     [esp+2B0h+var_298], 3
 0x5D26CA: jl      short loc_5D2703
-0x5D26CC: fild    [esp+2B8h+var_298]
-0x5D26D0: fstp    [esp+2B8h+var_2A0]
+0x5D26CC: fild    [esp+2B0h+var_290]
+0x5D26D0: fstp    [esp+2B0h+var_298]
 0x5D26D4: fild    dword ptr [esp+1Ch]
 0x5D26D8: fmul    qword ptr ds:0A3FA98h
-0x5D26DE: fld     [esp+2B8h+var_2A0]
+0x5D26DE: fld     [esp+2B0h+var_298]
 0x5D26E2: fcom    st(1)
 0x5D26E4: fnstsw  ax
 0x5D26E6: test    ah, 5
 0x5D26E9: jp      short loc_5D26F7
 0x5D26EB: fstp    st(1)
-0x5D26ED: fstp    [esp+2B8h+var_2A0]
-0x5D26F1: fld     [esp+2B8h+var_2A0]
+0x5D26ED: fstp    [esp+2B0h+var_298]
+0x5D26F1: fld     [esp+2B0h+var_298]
 0x5D26F5: jmp     short loc_5D270D
 0x5D26F7: fstp    st
-0x5D26F9: fstp    [esp+2B8h+var_2A0]
-0x5D26FD: fld     [esp+2B8h+var_2A0]
+0x5D26F9: fstp    [esp+2B0h+var_298]
+0x5D26FD: fld     [esp+2B0h+var_298]
 0x5D2701: jmp     short loc_5D270D
 0x5D2703: fild    dword ptr [esp+1Ch]
 0x5D2707: jmp     short loc_5D270D
-0x5D2709: fild    [esp+2B8h+var_298]
+0x5D2709: fild    [esp+2B0h+var_290]
 0x5D270D: push    ecx
 0x5D270E: mov     ecx, ebx
-0x5D2710: fstp    dword ptr [esp+2BCh+var_2BC]; float
+0x5D2710: fstp    [esp+2B4h+var_2B4]; float
 0x5D2713: call    ExtraDataList_SetHealthValue
 0x5D2718: mov     ecx, ds:0B333C4h
 0x5D271E: mov     edx, [ecx]
@@ -336,7 +336,7 @@
 0x5D273B: call    eax
 0x5D273D: push    eax
 0x5D273E: call    sub_548330
-0x5D2743: mov     edi, [esp+34h]
+0x5D2743: mov     edi, [esp+2C0h+var_28C]
 0x5D2747: add     esp, 8
 0x5D274A: test    al, al
 0x5D274C: jz      short loc_5D27A3
@@ -361,13 +361,13 @@
 0x5D2782: call    edx
 0x5D2784: cmp     dword ptr [edi+54h], 0
 0x5D2788: jg      short loc_5D278F
-0x5D278A: call    sub_5C1900
+0x5D278A: call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval
 0x5D278F: fild    dword ptr [edi+54h]
 0x5D2792: push    ecx
 0x5D2793: mov     ecx, [edi+34h]; this
-0x5D2796: fstp    [esp+2ECh+a2]; a3
-0x5D2799: push    0FAEh; a2
-0x5D279E: call    Tile_SetFloat
+0x5D2796: fstp    dword ptr [esp+0]; value
+0x5D2799: push    0FAEh; propertyCode
+0x5D279E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5D27A3: push    1
 0x5D27A5: mov     ecx, esi
 0x5D27A7: call    ContainerEntryExtraData_GetHealth
@@ -375,10 +375,10 @@
 0x5D27B2: fnstsw  ax
 0x5D27B4: test    ah, 1
 0x5D27B7: jnz     short loc_5D27BE
-0x5D27B9: mov     byte ptr [esp+2E8h+var_2B4], 1
+0x5D27B9: mov     byte ptr [esp+2E0h+var_2AC], 1
 0x5D27BE: test    ebx, ebx
 0x5D27C0: jz      loc_5D28CF
-0x5D27C6: mov     eax, [esp+2E8h+var_2C0]
+0x5D27C6: mov     eax, [esp+2E0h+var_2B8]
 0x5D27CA: mov     ebp, [eax]
 0x5D27CC: test    ebp, ebp
 0x5D27CE: jz      short loc_5D27EA
@@ -393,7 +393,7 @@
 0x5D27E3: mov     ebp, [ebp+4]
 0x5D27E6: test    ebp, ebp
 0x5D27E8: jnz     short loc_5D27D0
-0x5D27EA: mov     ecx, [esp+2E8h+var_2C0]
+0x5D27EA: mov     ecx, [esp+2E0h+var_2B8]
 0x5D27EE: cmp     dword ptr [ecx], 0
 0x5D27F1: jnz     loc_5D28BC
 0x5D27F7: push    8; Size
@@ -416,11 +416,11 @@
 0x5D2833: mov     ecx, ebp
 0x5D2835: call    BSSimpleList_Remove
 0x5D283A: mov     eax, [esp+1Ch]
-0x5D283E: sub     eax, [esp+24h]
+0x5D283E: sub     eax, [esp+2E0h+var_2BC]
 0x5D2842: mov     byte ptr [esp+17h], 1
-0x5D2847: cmp     [esp+2E8h+var_2AC], eax
+0x5D2847: cmp     [esp+2E0h+var_2A4], eax
 0x5D284B: jle     short loc_5D2852
-0x5D284D: mov     byte ptr [esp+2E8h+var_2B4], 1
+0x5D284D: mov     byte ptr [esp+2E0h+var_2AC], 1
 0x5D2852: push    0
 0x5D2854: push    0FDDh
 0x5D2859: push    0
@@ -429,22 +429,22 @@
 0x5D285F: call    InterfaceManager_GetSingleton
 0x5D2864: add     esp, 8
 0x5D2867: mov     ecx, eax
-0x5D2869: call    sub_57F9F0
-0x5D286E: mov     edi, dword ptr [esp+2E8h+var_2BC]
+0x5D2869: call    InterfaceManager__SetCurrentFocusTarget; AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.
+0x5D286E: mov     edi, [esp+2E0h+var_2B4]
 0x5D2872: mov     ecx, ds:0B333C4h
 0x5D2878: fldz
 0x5D287A: mov     edx, [ecx]
 0x5D287C: mov     eax, [edx+39Ch]
 0x5D2882: push    ecx
-0x5D2883: fstp    [esp+2ECh+a2]
+0x5D2883: fstp    dword ptr [esp+0]
 0x5D2886: push    0
 0x5D2888: push    0Ch
-0x5D288A: call    eax
+0x5D288A: call    eax; Successful repair: Armorer (0x0C), useValue0, identity scale (0.0).
 0x5D288C: mov     ecx, ds:0B333C4h
 0x5D2892: mov     edx, [ecx]
 0x5D2894: mov     eax, [edx+2C0h]
 0x5D289A: call    eax
-0x5D289C: mov     ecx, [esp+2F4h+var_2C0]
+0x5D289C: mov     ecx, [esp+2ECh+var_2B8]
 0x5D28A0: push    ecx
 0x5D28A1: mov     ecx, edi
 0x5D28A3: call    sub_5D1080
@@ -452,9 +452,9 @@
 0x5D28AA: call    sub_5D0B80
 0x5D28AF: jmp     loc_5D2608
 0x5D28B4: xor     eax, eax
-0x5D28B6: mov     edx, [esp+2E8h+var_2C0]
+0x5D28B6: mov     edx, [esp+2E0h+var_2B8]
 0x5D28BA: mov     [edx], eax
-0x5D28BC: mov     eax, [esp+2E8h+var_2C0]
+0x5D28BC: mov     eax, [esp+2E0h+var_2B8]
 0x5D28C0: mov     ecx, [eax]
 0x5D28C2: push    ebx
 0x5D28C3: call    BSSimpleList_PushFront
@@ -462,16 +462,16 @@
 0x5D28CD: jmp     short loc_5D2852
 0x5D28CF: cmp     byte ptr [esp+17h], 0
 0x5D28D4: jnz     loc_5D2852
-0x5D28DA: mov     ecx, [esp+2E8h+var_2B0]
-0x5D28DE: push    1
-0x5D28E0: push    esi
-0x5D28E1: call    ContainerExtraData_AddEntry
+0x5D28DA: mov     ecx, [esp+2E0h+var_2A8]; this
+0x5D28DE: push    1; destroyEntryIfMerged
+0x5D28E0: push    esi; entry
+0x5D28E1: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
 0x5D28E6: push    1; arg1
 0x5D28E8: push    0; canCreate
 0x5D28EA: call    InterfaceManager_GetSingleton
 0x5D28EF: push    1
 0x5D28F1: call    sub_5966F0
-0x5D28F6: mov     ecx, [esp+2E0h+var_2A4]
+0x5D28F6: mov     ecx, [esp+2ECh+var_2B0]
 0x5D28FA: add     esp, 0Ch
 0x5D28FD: push    eax
 0x5D28FE: push    0FF0h
@@ -492,8 +492,8 @@
 0x5D292F: call    TESHealthForm_GetHealthForForm
 0x5D2934: mov     [esp+2ACh+var_290], eax
 0x5D2938: mov     eax, [esi+8]
-0x5D293B: push    eax
-0x5D293C: call    sub_470520
+0x5D293B: push    eax; form
+0x5D293C: call    TESForm_GetValue
 0x5D2941: mov     [esp+2B0h+var_278], eax
 0x5D2945: fild    [esp+2B0h+var_278]
 0x5D2949: add     esp, 4
@@ -538,3 +538,188 @@
 0x5D29D9: call    ShowUIMessageBox
 0x5D29DE: add     esp, 2Ch
 0x5D29E1: mov     byte ptr [ebp+64h], 1
+0x5D2A32: mov     ecx, ds:0B38CF0h
+0x5D2A38: mov     edx, ds:0B38DB0h
+0x5D2A3E: push    0
+0x5D2A40: push    ecx
+0x5D2A41: push    1
+0x5D2A43: push    0
+0x5D2A45: push    edx
+0x5D2A46: call    ShowUIMessageBox
+0x5D2A4B: add     esp, 14h
+0x5D2A4E: jmp     short def_5D24AB
+0x5D2A50: push    0FBAh; jumptable 005D24AB case 3
+0x5D2A55: mov     ecx, ebx
+0x5D2A57: call    Tile_GetFloat
+0x5D2A5C: fcomp   dword ptr ds:0A2F948h
+0x5D2A62: fnstsw  ax
+0x5D2A64: test    ah, 44h
+0x5D2A67: jp      short loc_5D2A08
+0x5D2A69: push    1
+0x5D2A6B: push    esi
+0x5D2A6C: mov     ecx, ebp
+0x5D2A6E: call    sub_5D0A20
+0x5D2A73: mov     eax, [esi+8]
+0x5D2A76: mov     ecx, ds:0B333C4h
+0x5D2A7C: push    edi
+0x5D2A7D: push    1
+0x5D2A7F: push    eax
+0x5D2A80: call    sub_5E99C0
+0x5D2A85: jmp     short loc_5D2A08
+0x5D2A87: push    412h; jumptable 005D24AB case 4
+0x5D2A8C: call    Menu_GetOpenMenuTile
+0x5D2A91: add     esp, 4
+0x5D2A94: cmp     eax, edi
+0x5D2A96: jz      def_5D24AB
+0x5D2A9C: mov     ecx, eax
+0x5D2A9E: call    Tile_GetParentMenu
+0x5D2AA3: mov     edi, eax
+0x5D2AA5: test    edi, edi
+0x5D2AA7: jz      def_5D24AB
+0x5D2AAD: mov     edx, [edi+30h]
+0x5D2AB0: test    edx, edx
+0x5D2AB2: jz      short loc_5D2B1B
+0x5D2AB4: mov     ecx, [esi+8]
+0x5D2AB7: mov     al, [ecx+4]
+0x5D2ABA: cmp     al, 22h ; '"'
+0x5D2ABC: jz      short loc_5D2AC2
+0x5D2ABE: cmp     al, 21h ; '!'
+0x5D2AC0: jnz     short loc_5D2AD2
+0x5D2AC2: mov     ecx, [edx+8]
+0x5D2AC5: mov     cl, [ecx+4]
+0x5D2AC8: cmp     cl, 22h ; '"'
+0x5D2ACB: jz      short loc_5D2B1B
+0x5D2ACD: cmp     cl, 21h ; '!'
+0x5D2AD0: jz      short loc_5D2B1B
+0x5D2AD2: cmp     al, 14h
+0x5D2AD4: jz      short loc_5D2ADA
+0x5D2AD6: cmp     al, 16h
+0x5D2AD8: jnz     short loc_5D2AEA
+0x5D2ADA: mov     ecx, [edx+8]
+0x5D2ADD: mov     cl, [ecx+4]
+0x5D2AE0: cmp     cl, 14h
+0x5D2AE3: jz      short loc_5D2B1B
+0x5D2AE5: cmp     cl, 16h
+0x5D2AE8: jz      short loc_5D2B1B
+0x5D2AEA: cmp     al, 22h ; '"'
+0x5D2AEC: jz      short loc_5D2B10
+0x5D2AEE: cmp     al, 21h ; '!'
+0x5D2AF0: jz      short loc_5D2B10
+0x5D2AF2: cmp     al, 14h
+0x5D2AF4: jz      short loc_5D2B10
+0x5D2AF6: cmp     al, 16h
+0x5D2AF8: jz      short loc_5D2B10
+0x5D2AFA: mov     edx, [edx+8]
+0x5D2AFD: mov     al, [edx+4]
+0x5D2B00: cmp     al, 22h ; '"'
+0x5D2B02: jz      short loc_5D2B10
+0x5D2B04: cmp     al, 21h ; '!'
+0x5D2B06: jz      short loc_5D2B10
+0x5D2B08: cmp     al, 14h
+0x5D2B0A: jz      short loc_5D2B10
+0x5D2B0C: cmp     al, 16h
+0x5D2B0E: jnz     short loc_5D2B1B
+0x5D2B10: mov     ecx, [edi+28h]
+0x5D2B13: add     ecx, 24h ; '$'
+0x5D2B16: call    EffectItemList_Clear
+0x5D2B1B: mov     eax, [esi+8]
+0x5D2B1E: mov     edx, [edi+28h]
+0x5D2B21: xor     ecx, ecx
+0x5D2B23: cmp     byte ptr [eax+4], 21h ; '!'
+0x5D2B27: setnz   cl
+0x5D2B2A: add     ecx, 2
+0x5D2B2D: mov     [edx+34h], ecx
+0x5D2B30: mov     ebp, [edi+30h]
+0x5D2B33: test    ebp, ebp
+0x5D2B35: jz      short loc_5D2B47
+0x5D2B37: mov     ecx, ebp
+0x5D2B39: call    ContainerEntryExtraData_DestroyDataTable
+0x5D2B3E: push    ebp
+0x5D2B3F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5D2B44: add     esp, 4
+0x5D2B47: mov     ecx, edi
+0x5D2B49: mov     [edi+30h], esi
+0x5D2B4C: call    sub_5A2160
+0x5D2B51: mov     ecx, edi
+0x5D2B53: call    sub_5A2520
+0x5D2B58: mov     eax, [esi+8]
+0x5D2B5B: push    0
+0x5D2B5D: push    1
+0x5D2B5F: push    eax
+0x5D2B60: mov     ecx, ds:0B333C4h
+0x5D2B66: call    sub_5E99C0
+0x5D2B6B: call    sub_5D03B0
+0x5D2B70: jmp     loc_5D2A08
+0x5D2B75: push    418h; jumptable 005D24AB case 6
+0x5D2B7A: call    Menu_GetOpenMenuTile
+0x5D2B7F: add     esp, 4
+0x5D2B82: cmp     eax, edi
+0x5D2B84: jz      def_5D24AB
+0x5D2B8A: mov     ecx, eax
+0x5D2B8C: call    Tile_GetParentMenu
+0x5D2B91: mov     edi, eax
+0x5D2B93: test    edi, edi
+0x5D2B95: jz      def_5D24AB
+0x5D2B9B: mov     ebp, [edi+2Ch]
+0x5D2B9E: test    ebp, ebp
+0x5D2BA0: jz      short loc_5D2BB2
+0x5D2BA2: mov     ecx, ebp
+0x5D2BA4: call    ContainerEntryExtraData_DestroyDataTable
+0x5D2BA9: push    ebp
+0x5D2BAA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5D2BAF: add     esp, 4
+0x5D2BB2: push    0
+0x5D2BB4: mov     [edi+2Ch], esi
+0x5D2BB7: mov     ecx, [esi+8]
+0x5D2BBA: push    1
+0x5D2BBC: push    ecx
+0x5D2BBD: jmp     short loc_5D2B60
+0x5D2BBF: push    412h; jumptable 005D24AB case 5
+0x5D2BC4: call    Menu_GetOpenMenuTile
+0x5D2BC9: add     esp, 4
+0x5D2BCC: cmp     eax, edi
+0x5D2BCE: jz      def_5D24AB
+0x5D2BD4: mov     ecx, eax
+0x5D2BD6: call    Tile_GetParentMenu
+0x5D2BDB: mov     edi, eax
+0x5D2BDD: test    edi, edi
+0x5D2BDF: jz      def_5D24AB
+0x5D2BE5: mov     ebp, [edi+2Ch]
+0x5D2BE8: test    ebp, ebp
+0x5D2BEA: jz      short loc_5D2BFC
+0x5D2BEC: mov     ecx, ebp
+0x5D2BEE: call    ContainerEntryExtraData_DestroyDataTable
+0x5D2BF3: push    ebp
+0x5D2BF4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x5D2BF9: add     esp, 4
+0x5D2BFC: mov     ecx, edi
+0x5D2BFE: mov     [edi+2Ch], esi
+0x5D2C01: call    sub_5A2160
+0x5D2C06: mov     ecx, edi
+0x5D2C08: call    sub_5A2520
+0x5D2C0D: mov     edx, [esi+8]
+0x5D2C10: push    0
+0x5D2C12: push    1
+0x5D2C14: push    edx
+0x5D2C15: jmp     loc_5D2B60
+0x9C1DF0: mov     eax, [ebp-284h]
+0x9C1DF6: push    eax
+0x9C1DF7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C1DFC: pop     ecx
+0x9C1DFD: retn
+0x9C1DFE: mov     eax, [ebp-284h]
+0x9C1E04: push    eax
+0x9C1E05: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C1E0A: pop     ecx
+0x9C1E0B: retn
+0x9C1E0C: mov     edx, [esp+arg_4]
+0x9C1E10: lea     eax, [edx-298h]
+0x9C1E16: mov     ecx, [edx-29Ch]
+0x9C1E1C: xor     ecx, eax
+0x9C1E1E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1E23: add     eax, 10h
+0x9C1E26: mov     ecx, [edx-4]
+0x9C1E29: xor     ecx, eax
+0x9C1E2B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1E30: mov     eax, offset stru_AEADCC
+0x9C1E35: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-void *sub_810EF0()
+NiRTTI *sub_810EF0()
 {
-  return &unk_B4780C;
+  return &stru_B4780C; /*0x810ef5*/
 }

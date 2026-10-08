@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FF080",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Build the native one-stage Lighting30 mode-5 caster pass for 0x154/0x155. The resolver binds property texture 0/BaseMap; this producer path does not bind receiver ShadowMap.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x7FF0A9",
-    "line": "mov     ebp, [esp+40h+arg_0]",
+    "line": "mov     ebp, [esp+40h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FF0AD",
-    "line": "mov     eax, [esp+40h+arg_4]",
+    "line": "mov     eax, [esp+40h+selector]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x7FF0B3",
-    "line": "push    ebx",
+    "line": "push    ebx; variant",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FF0B4",
-    "line": "push    ebp",
+    "line": "push    ebp; property",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FF0B5",
-    "line": "push    eax",
+    "line": "push    eax; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FF0B6",
-    "line": "call    sub_862B40",
+    "line": "call    Lighting30Shader_ResolveSelectorStages; Lighting30 selector resolver upper bound is 0x15F. This is a consumer-domain fact, not producer reachability: exact Lighting30's native +0x5C builder stays within it, including refraction 0x156..0x158.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x7FF133",
-    "line": "mov     ecx, [edx+0Ch]",
+    "line": "mov     ecx, [edx+0Ch]; Fog render consumer decode: Lighting30 mode-5 loads active fog property from render/property state +0x0C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x7FF141",
-    "line": "fstp    [esp+40h+arg_4]",
+    "line": "fstp    [esp+40h+selector]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7FF148",
-    "line": "fstp    [esp+40h+arg_0]",
+    "line": "fstp    [esp+40h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7FF14E",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7FF15B",
-    "line": "fld     [esp+40h+arg_4]",
+    "line": "fld     [esp+40h+selector]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7FF17E",
-    "line": "mov     ds:0B46DB8h, eax",
+    "line": "mov     ds:0B46DB8h, eax; Fog render consumer decode: Lighting30 mode-5 zero/invalid fog range fallback writes default grouped FogParam.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x7FF1B9",
-    "line": "fstp    [esp+40h+arg_0]",
+    "line": "fstp    [esp+40h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x7FF1C9",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x7FF1DB",
-    "line": "mov     ds:0B46DB8h, eax",
+    "line": "mov     ds:0B46DB8h, eax; Fog render consumer decode: Lighting30 mode-5 grouped FogParam B45E14[0x3E9..0x3EC] / B46DB8 = (fogEnd, fogEnd - fogStart, 1, 0).",
     "mnemonic": "mov",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x7FF217",
-    "line": "mov     ds:0B46DC8h, eax",
+    "line": "mov     ds:0B46DC8h, eax; Fog render consumer decode: Lighting30 mode-5 grouped FogColor B45E14[0x3ED..0x3F0] / B46DC8 = (fog.r, fog.g, fog.b, 1).",
     "mnemonic": "mov",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7FF24A",
-    "line": "mov     ds:0B46DB8h, eax",
+    "line": "mov     ds:0B46DB8h, eax; Fog render consumer decode: Lighting30 mode-5 null-property fallback writes default grouped FogParam/FogColor.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x7FF2B2",
-    "line": "fstp    [esp+40h+arg_0]",
+    "line": "fstp    [esp+40h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7FF2B6",
-    "line": "fcom    [esp+40h+arg_0]",
+    "line": "fcom    [esp+40h+value]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x7FF2E5",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x7FF2F4",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x7FF301",
-    "line": "mov     [esp+40h+arg_0], edi",
+    "line": "mov     [esp+40h+value], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1081,25 +1081,25 @@
   },
   {
     "ea": "0x7FF308",
-    "line": "lea     ecx, [esp+40h+arg_0]",
+    "line": "lea     ecx, [esp+40h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7FF30C",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FF30D",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FF30E",
-    "line": "lea     ecx, [esi+40h]",
+    "line": "lea     ecx, [esi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x7FF315",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x7FF328",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1216,5 +1216,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0610",
+    "line": "lea     ecx, [ebp+4]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0613",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0618",
+    "line": "mov     edx, [esp+selector]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D061C",
+    "line": "lea     eax, [edx-30h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D061F",
+    "line": "mov     ecx, [edx-34h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0622",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0624",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0629",
+    "line": "mov     eax, offset stru_AF8F90",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D062E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

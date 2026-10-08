@@ -123,7 +123,6 @@
 0x92F414: jle     short loc_92F468
 0x92F416: mov     edi, ebx
 0x92F418: jmp     short loc_92F420
-0x92F41A: align 10h
 0x92F420: movaps  xmm1, xmmword ptr [edi]
 0x92F423: mulps   xmm1, xmm0
 0x92F426: movaps  xmm2, xmm1
@@ -198,7 +197,6 @@
 0x92F50E: movaps  [esp+0C0h+var_90], xmm4
 0x92F513: movaps  [esp+0C0h+var_50], xmm5
 0x92F518: jmp     short loc_92F520
-0x92F51A: align 10h
 0x92F520: mov     eax, [ebp+arg_8]
 0x92F523: movaps  xmm0, xmm1
 0x92F526: mulps   xmm0, xmm1
@@ -227,7 +225,7 @@
 0x92F57C: test    eax, eax
 0x92F57E: mulps   xmm3, xmm1
 0x92F581: mov     [esp+0C0h+var_A8], 0C0000000h
-0x92F589: movaps  [esp+0C0h+var_40], xmm3
+0x92F589: movaps  xmmword ptr [esp+0C0h+var_40], xmm3
 0x92F591: mov     [esp+0C0h+var_70], 7F7FFFFFh
 0x92F599: jle     loc_92F733
 0x92F59F: mov     [esp+0C0h+var_A0], ebx
@@ -373,7 +371,7 @@
 0x92F791: movaps  xmm4, [esp+0C8h+var_90]
 0x92F796: movaps  xmm6, [esp+0C8h+var_20]
 0x92F79E: movaps  xmm0, [esp+0C8h+var_10]
-0x92F7A6: movaps  xmm3, [esp+0C8h+var_40]
+0x92F7A6: movaps  xmm3, xmmword ptr [esp+0C8h+var_40]
 0x92F7AE: movaps  xmm5, [esp+0C8h+var_50]
 0x92F7B3: mov     edx, [esp+0C8h+var_98]
 0x92F7B7: add     esp, 8
@@ -493,7 +491,7 @@
 0x92F944: push    ecx
 0x92F945: call    sub_8A6EE0
 0x92F94A: movaps  xmm4, [esp+0C8h+var_90]
-0x92F94F: movaps  xmm3, [esp+0C8h+var_40]
+0x92F94F: movaps  xmm3, xmmword ptr [esp+0C8h+var_40]
 0x92F957: movaps  xmm5, [esp+0C8h+var_50]
 0x92F95C: mov     ecx, [ebp+arg_C]
 0x92F95F: add     esp, 8
@@ -628,10 +626,10 @@
 0x92FB24: shufps  xmm3, xmm0, 0AAh ; 'ª'
 0x92FB28: movaps  xmm0, xmm3
 0x92FB2B: addss   xmm0, xmm2
-0x92FB2F: movaps  [esp+0C0h+var_40], xmm0
+0x92FB2F: movaps  xmmword ptr [esp+0C0h+var_40], xmm0
 0x92FB37: rsqrtss xmm2, xmm0
-0x92FB3B: movss   dword ptr [esp+0C0h+var_40], xmm2
-0x92FB44: movaps  xmm2, [esp+0C0h+var_40]
+0x92FB3B: movss   [esp+0C0h+var_40], xmm2
+0x92FB44: movaps  xmm2, xmmword ptr [esp+0C0h+var_40]
 0x92FB4C: mulss   xmm0, xmm2
 0x92FB50: mulss   xmm0, xmm2
 0x92FB54: mulss   xmm5, xmm2

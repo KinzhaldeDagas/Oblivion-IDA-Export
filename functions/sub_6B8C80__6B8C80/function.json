@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_6B8C80",
+  "chunks": [
+    [
+      "0x6B8C80",
+      "0x6B8CE8"
+    ],
+    [
+      "0x9C6F30",
+      "0x9C6F53"
+    ]
+  ],
+  "chunks_sha256": "716809e2608825a4a02414581cefc5d11480999d14dd8c44124200f76008677a",
+  "comment_regular": "Initialize an empty MenuTopic for extra-data loading: clear response nodes/cursors and all identity pointers, then initialize an empty display string.",
+  "comment_repeatable": "Initialize an empty MenuTopic for extra-data loading: clear response nodes/cursors and all identity pointers, then initialize an empty display string.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "MenuTopic::InitializeEmpty",
   "end_ea": "0x6B8CE8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B8C80",
+  "name": "MenuTopic::InitializeEmpty",
   "segment": ".text",
   "sha256": "6dcf87db970a0101cb2d8866cabb277e8a79fd530488e8047aee08438f7257e9",
   "size": 104,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B8C80",
-  "type": "int __thiscall(int this)",
-  "xrefs_from_count": 36,
+  "total_chunk_size": 139,
+  "type": "MenuTopicView *__thiscall(MenuTopicView *this)",
+  "xrefs_from_count": 47,
   "xrefs_to_count": 1
 }

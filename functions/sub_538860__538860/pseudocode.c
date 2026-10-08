@@ -1,41 +1,41 @@
-void __thiscall sub_538860(int *this, int a2)
+void __thiscall sub_538860(Ni2DBuffer **this, int a2)
 {
   int v3; // esi
-  int v4; // eax
+  NiRTTI *v4; // eax
   char v5; // al
-  int v6; // eax
-  int v7; // [esp-4h] [ebp-Ch]
+  Ni2DBuffer *v6; // eax
+  Ni2DBuffer *v7; // [esp-4h] [ebp-Ch]
 
-  if ( a2 )
-    v3 = *(_DWORD *)(a2 + 0xC);
+  if ( a2 ) /*0x53886a*/
+    v3 = *(_DWORD *)(a2 + 0xC); /*0x53886c*/
   else
-    v3 = 0;
+    v3 = 0; /*0x538871*/
   if ( v3 )
   {
-    v4 = (*(int (__thiscall **)(int))(*(_DWORD *)v3 + 4))(v3);
-    if ( v4 )
+    v4 = (NiRTTI *)(*(int (__thiscall **)(int))(*(_DWORD *)v3 + 4))(v3); /*0x53887e*/
+    if ( v4 ) /*0x538882*/
     {
-      while ( (char *)v4 != dword_BA7D84 )
+      while ( v4 != &stru_BA7D84 ) /*0x538889*/
       {
-        v4 = *(_DWORD *)(v4 + 4);
-        if ( !v4 )
-          goto LABEL_8;
+        v4 = v4->parent; /*0x53888b*/
+        if ( !v4 ) /*0x538890*/
+          goto LABEL_8; /*0x538890*/
       }
-      v5 = 1;
+      v5 = 1; /*0x5388c2*/
     }
     else
     {
 LABEL_8:
-      v5 = 0;
+      v5 = 0; /*0x538892*/
     }
-    v6 = v5 != 0 ? v3 : 0;
-    if ( v6 )
+    v6 = v5 != 0 ? (Ni2DBuffer *)v3 : 0;
+    if ( v6 ) /*0x53889a*/
     {
-      if ( *(_DWORD *)(v6 + 4) )
+      if ( v6->members.super.m_uiRefCount ) /*0x53889c*/
       {
-        v7 = v6;
-        InterlockedIncrement((volatile LONG *)(v6 + 4));
-        sub_67A760(this + 3, v7);
+        v7 = v6; /*0x5388ad*/
+        InterlockedIncrement((volatile LONG *)&v6->members); /*0x5388af*/
+        sub_67A760(this + 3, v7); /*0x5388b8*/
       }
     }
   }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x59DB70",
-    "line": "cmp     [esp+a3], 64h ; 'd'",
+    "line": "cmp     [esp+a3], 64h ; 'd'; Custom ID48 is below native topic threshold 0x64, so no native topic-highlight geometry is applied. Its visual focus must be represented by its XML mouseover-dependent traits.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x59DB86",
-    "line": "mov     esi, [esp+0Ch+arg_4]",
+    "line": "mov     esi, [esp+0Ch+tile]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x59DBB3",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59DBB6",
-    "line": "push    0FABh; a2",
+    "line": "push    0FABh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59DBBB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x59DBD0",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59DBD3",
-    "line": "push    0FCBh; a2",
+    "line": "push    0FCBh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59DBD8",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x59DBF9",
-    "line": "fstp    [esp+8+arg_4]",
+    "line": "fstp    [esp+8+tile]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x59DC3D",
-    "line": "fadd    [esp+8+arg_4]",
+    "line": "fadd    [esp+8+tile]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x59DC41",
-    "line": "fstp    [esp+8+arg_4]",
+    "line": "fstp    [esp+8+tile]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -385,25 +385,25 @@
   },
   {
     "ea": "0x59DC54",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59DC57",
-    "line": "push    0FADh; a2",
+    "line": "push    0FADh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59DC5C",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x59DC61",
-    "line": "fld     [esp+8+arg_4]",
+    "line": "fld     [esp+8+tile]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -421,19 +421,19 @@
   },
   {
     "ea": "0x59DC69",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59DC6C",
-    "line": "push    0FACh; a2",
+    "line": "push    0FACh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59DC71",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,19 +457,19 @@
   },
   {
     "ea": "0x59DC80",
-    "line": "fstp    [esp+0Ch+a2]; a3",
+    "line": "fstp    [esp+0Ch+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x59DC83",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x59DC88",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

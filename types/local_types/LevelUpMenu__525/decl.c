@@ -1,1 +1,1 @@
-LevelUpMenu
+struct LevelUpMenu;

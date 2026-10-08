@@ -1,4 +1,4 @@
-char *sub_742200()
+NiRTTI *sub_742200()
 {
-  return dword_B40224;
+  return &stru_B40224; /*0x742205*/
 }

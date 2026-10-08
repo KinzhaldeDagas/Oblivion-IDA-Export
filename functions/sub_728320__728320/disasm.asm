@@ -16,11 +16,11 @@
 0x72834B: mov     eax, [esi+1Ch]
 0x72834E: test    eax, eax
 0x728350: jz      short loc_72835F
-0x728352: push    eax
+0x728352: push    eax; vertices
 0x728353: movzx   eax, cx
-0x728356: push    eax
-0x728357: lea     ecx, [esi+0Ch]
-0x72835A: call    sub_72A0F0
+0x728356: push    eax; vertexCount
+0x728357: lea     ecx, [esi+0Ch]; self
+0x72835A: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x72835F: mov     ecx, [esp+4+arg_C]
 0x728363: mov     ax, [esi+2Ch]
 0x728367: mov     edx, [esp+4+arg_10]

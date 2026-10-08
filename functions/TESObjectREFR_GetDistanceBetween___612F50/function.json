@@ -1,19 +1,32 @@
 {
-  "callees_count": 22,
-  "callers_count": 18,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 23,
+  "chunks": [
+    [
+      "0x612F50",
+      "0x6131CB"
+    ]
+  ],
+  "chunks_sha256": "423b2d19b0267d12c87eb182d8a306502b8ff27b76aae80aa628e7f819bcbf83",
+  "comment_regular": "Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
+  "comment_repeatable": "Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "TESObjectREFR_GetDistanceBetween?",
+  "display_name": "TESObjectREFR_GetSurfaceDistance",
   "end_ea": "0x6131CB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "TESObjectREFR_GetDistanceBetween?",
+  "name": "TESObjectREFR_GetSurfaceDistance",
   "segment": ".text",
   "sha256": "423b2d19b0267d12c87eb182d8a306502b8ff27b76aae80aa628e7f819bcbf83",
   "size": 635,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x612F50",
-  "type": "double __usercall@<st0>(int *@<edi>, TESObjectREFR *, TESObjectREFR *, char, char)",
+  "total_chunk_size": 635,
+  "type": "float __cdecl(TESObjectREFR *from, TESObjectREFR *to, bool useActorProjection)",
   "xrefs_from_count": 226,
   "xrefs_to_count": 24
 }

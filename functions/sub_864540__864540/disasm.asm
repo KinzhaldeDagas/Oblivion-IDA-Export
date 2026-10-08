@@ -1,4 +1,4 @@
-0x864540: push    ebx
+0x864540: push    ebx; Appends inherited viewer strings plus TallGrassTriStrips pLocalBound and instance count diagnostics.
 0x864541: push    esi
 0x864542: mov     esi, [esp+8+arg_0]
 0x864546: push    edi

@@ -3,7 +3,6 @@
 0x5894A5: mov     edx, [esp+arg_0]
 0x5894A9: jz      short loc_5894BC
 0x5894AB: jmp     short loc_5894B0
-0x5894AD: align 10h
 0x5894B0: cmp     [eax+4], edx
 0x5894B3: jz      short loc_5894C5
 0x5894B5: mov     eax, [eax+14h]

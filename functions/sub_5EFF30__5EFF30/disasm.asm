@@ -47,7 +47,7 @@
 0x5EFFB2: pop     esi
 0x5EFFB3: pop     edi
 0x5EFFB4: retn    4
-0x5EFFB7: call    sub_5EAE70
+0x5EFFB7: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x5EFFBC: pop     esi
 0x5EFFBD: pop     edi
 0x5EFFBE: retn    4

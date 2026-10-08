@@ -22,7 +22,7 @@
 0x5EA2B4: addps   xmm1, xmm2
 0x5EA2B7: push    ecx
 0x5EA2B8: movaps  [esp+28h+var_20], xmm1
-0x5EA2BD: call    sub_43F3E0
+0x5EA2BD: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x5EA2C2: mov     ecx, [esp+28h+var_4]
 0x5EA2C6: add     esp, 8
 0x5EA2C9: xor     ecx, esp

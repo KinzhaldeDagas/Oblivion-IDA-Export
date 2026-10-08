@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x793A00",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; Oblivion stRotTransform::RotateX. Converts degrees to radians, builds the X-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x793A03",
-    "line": "fld     [esp+4Ch+arg_0]",
+    "line": "fld     [esp+4Ch+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x793A11",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+angleDegrees]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793A15",
-    "line": "fld     [esp+54h+arg_0]",
+    "line": "fld     [esp+54h+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x793A2A",
-    "line": "fld     [esp+54h+arg_0]",
+    "line": "fld     [esp+54h+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -85,31 +85,31 @@
   },
   {
     "ea": "0x793A33",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+angleDegrees]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793A37",
-    "line": "fld     [esp+54h+arg_0]",
+    "line": "fld     [esp+54h+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x793A3B",
-    "line": "push    edi",
+    "line": "push    edi; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793A3C",
-    "line": "fstp    [esp+58h+arg_0]",
+    "line": "fstp    [esp+58h+angleDegrees]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793A40",
-    "line": "lea     eax, [esp+58h+var_24]",
+    "line": "lea     eax, [esp+58h+outTransform]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x793A46",
-    "line": "push    eax",
+    "line": "push    eax; outTransform",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x793A47",
-    "line": "fstp    [esp+5Ch+var_48]",
+    "line": "fstp    [esp+5Ch+var_48.m]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793A4B",
-    "line": "lea     ecx, [esp+5Ch+var_48]",
+    "line": "lea     ecx, [esp+5Ch+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x793A51",
-    "line": "fst     [esp+5Ch+var_44]",
+    "line": "fst     [esp+5Ch+var_48.m+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x793A55",
-    "line": "fst     [esp+5Ch+var_40]",
+    "line": "fst     [esp+5Ch+var_48.m+8]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x793A59",
-    "line": "fst     [esp+5Ch+var_3C]",
+    "line": "fst     [esp+5Ch+var_48.m+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x793A61",
-    "line": "fst     [esp+5Ch+var_38]",
+    "line": "fst     [esp+5Ch+var_48.m+10h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x793A65",
-    "line": "fld     [esp+5Ch+arg_0]",
+    "line": "fld     [esp+5Ch+angleDegrees]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x793A69",
-    "line": "fst     [esp+5Ch+var_34]",
+    "line": "fst     [esp+5Ch+var_48.m+14h]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x793A6F",
-    "line": "fstp    [esp+5Ch+var_30]",
+    "line": "fstp    [esp+5Ch+var_48.m+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -211,19 +211,19 @@
   },
   {
     "ea": "0x793A77",
-    "line": "fstp    [esp+5Ch+var_2C]",
+    "line": "fstp    [esp+5Ch+var_48.m+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793A7B",
-    "line": "fstp    [esp+5Ch+var_28]",
+    "line": "fstp    [esp+5Ch+var_48.m+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x793A7F",
-    "line": "call    sub_78EDD0",
+    "line": "call    OB_stRotTransform_MultiplyCopy_010201A0; Oblivion stRotTransform 3x3 multiply (C++ operator* with an explicit hidden result pointer). Computes this*rhs into the supplied 0x24-byte output transform.",
     "mnemonic": "call",
     "size": 5
   },

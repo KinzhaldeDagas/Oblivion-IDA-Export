@@ -37,7 +37,6 @@
 0x94DEE5: jmp     short loc_94DEF0
 0x94DEE7: mov     eax, [esp+1Ch+arg_0]
 0x94DEEB: jmp     short loc_94DEF0
-0x94DEED: align 10h
 0x94DEF0: mov     edx, [esi]
 0x94DEF2: movaps  xmm0, xmmword ptr [edi+60h]
 0x94DEF6: movaps  xmmword ptr [edx+ecx], xmm0

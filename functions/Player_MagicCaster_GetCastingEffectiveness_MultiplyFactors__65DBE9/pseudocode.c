@@ -3,5 +3,5 @@ double __stdcall Player_MagicCaster_GetCastingEffectiveness_::MultiplyFactors(fl
 {
   float v3; // [esp-8h] [ebp-8h]
 
-  return (float)(a2 * v3);
+  return (float)(a2 * v3); /*0x65dbfc*/
 }

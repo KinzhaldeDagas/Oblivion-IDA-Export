@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x8643B0",
-    "line": "push    esi",
+    "line": "push    esi; Appends inherited shader-property viewer strings followed by the Lighting30ShaderProperty class label.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8643B1",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+viewerStrings]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x8643B6",
-    "line": "push    esi",
+    "line": "push    esi; viewerStrings",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8643B7",
-    "line": "call    sub_7D9890",
+    "line": "call    BSShaderPPLightingProperty_GetViewerStrings; Verified (Oblivion): BSShaderPPLightingProperty_GetViewerStrings exports property+0xE0 as \"spTexEffectData\" and reads the current-fill color at +0x0C..+0x18, current-edge color at +0x1C..+0x28, and edge falloff at +0x54. Viewer labels duplicate R for the third color component; probable blue-channel typo, corroborated by the RGBA grouping and Fallout's NiColorA layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x8643D4",
-    "line": "mov     [esp+8+arg_0], eax",
+    "line": "mov     [esp+8+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x8643E8",
-    "line": "lea     eax, [esp+8+arg_0]",
+    "line": "lea     eax, [esp+8+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },

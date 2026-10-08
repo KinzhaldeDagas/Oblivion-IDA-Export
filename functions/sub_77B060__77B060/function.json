@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x77B060",
+      "0x77B07B"
+    ]
+  ],
+  "chunks_sha256": "9208f6863fcdbb23ee1bda1f6c7bc4f0517bbc0d59df81e1c0ee9791ddd4b7f3",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "DX11 restore semantics verified 2026-09-30: reads DWORD saved value at this+124+8*state, then calls virtual+64 SetRenderState(this,state,savedValue,0). Restoration uses the single saved register and does not pop a stack or request another save; repeated restore IDs read the same saved slot unless an intervening writer changes it.\nDX11 saved-state implementation 2026-09-30: full byte contracts for75F9E0,772720,77B060 now qualify a separate restore program. It retains forward saved-list IDs including duplicates and reads the single saved register during evaluation without resaving or popping it. Unknown saved words remain unknown. Frame preparation pairs restoration with its exact pass/manager; ordered scheduling and inherited manager/device state authority remain required before traversal omission.\nDX11 state-handoff audit 2026-10-01: receiver is a render-state manager, not NiDX9Renderer. Shared entries appear in NiDX9RenderState vtable A8A9F4 and NiD3DRenderState vtable A8B2AC. State/value arguments are DWORDs, not pointers. Return register is not a uniform HRESULT (equal cached paths can omit the device call); do not infer backend success from it. Preserve physical current/saved cache words separately from actual logical device state and guard runtime enum-map values before native commit.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77B060",
+  "display_name": "NiDX9RenderState_RestoreSavedState",
   "end_ea": "0x77B07B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77B060",
+  "name": "NiDX9RenderState_RestoreSavedState",
   "segment": ".text",
   "sha256": "9208f6863fcdbb23ee1bda1f6c7bc4f0517bbc0d59df81e1c0ee9791ddd4b7f3",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77B060",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 27,
+  "type": "unsigned int __thiscall(NiDX9RenderState *self, unsigned int state)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 2
 }

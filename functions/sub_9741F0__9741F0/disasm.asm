@@ -24,7 +24,7 @@
 0x974232: fstp    dword ptr [esi+4]
 0x974235: fld     [esp+0Ch+var_4]
 0x974239: fstp    dword ptr [esi+8]
-0x97423C: call    sub_43F350
+0x97423C: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x974241: mov     eax, esi
 0x974243: fstp    st
 0x974245: pop     esi

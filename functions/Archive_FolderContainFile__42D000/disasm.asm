@@ -132,12 +132,12 @@
 0x42D1C1: push    edi
 0x42D1C2: push    edx
 0x42D1C3: mov     ecx, ebx
-0x42D1C5: call    sub_42CC00
+0x42D1C5: call    Archive_GetFileNameByFolderAndIndex
 0x42D1CA: mov     esi, eax
 0x42D1CC: lea     eax, [esp+138h+Filename]
-0x42D1D0: push    eax; Str2
-0x42D1D1: push    esi; Str1
-0x42D1D2: call    __strcmp
+0x42D1D0: push    eax; right
+0x42D1D1: push    esi; left
+0x42D1D2: call    CRT_StricmpLocaleDispatch
 0x42D1D7: add     esp, 8
 0x42D1DA: test    eax, eax
 0x42D1DC: jz      short loc_42D1F6

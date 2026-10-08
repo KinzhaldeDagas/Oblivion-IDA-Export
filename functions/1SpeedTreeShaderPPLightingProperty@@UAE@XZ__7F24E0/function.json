@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "SpeedTreeShaderPPLightingProperty::~SpeedTreeShaderPPLightingProperty(void)",
+  "chunks": [
+    [
+      "0x7F24E0",
+      "0x7F2593"
+    ],
+    [
+      "0x9CFE40",
+      "0x9CFE71"
+    ]
+  ],
+  "chunks_sha256": "68aa79dce124a32fe556471da73372a7be93d4eb218b7b3109287fa9b8dca0b4",
+  "comment_regular": "SpeedTreeShaderPPLightingProperty dtor: releases the +0xF0 STSPData reference before running the BSShaderPPLightingProperty base destructor.",
+  "comment_repeatable": "SpeedTreeShaderPPLightingProperty dtor: releases the +0xF0 STSPData reference before running the BSShaderPPLightingProperty base destructor.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "OB_SpeedTreeShaderPPLightingProperty_dtor_010201A0",
   "end_ea": "0x7F2593",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "??1SpeedTreeShaderPPLightingProperty@@UAE@XZ",
+  "name": "OB_SpeedTreeShaderPPLightingProperty_dtor_010201A0",
   "segment": ".text",
   "sha256": "0449d6de99fc7dd3a89ccd50450d0534ae3da3f506245b92bb8d1ae6f3703c33",
   "size": 179,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F24E0",
+  "total_chunk_size": 228,
   "type": "void __thiscall(SpeedTreeShaderPPLightingProperty *__hidden this)",
-  "xrefs_from_count": 71,
+  "xrefs_from_count": 85,
   "xrefs_to_count": 2
 }

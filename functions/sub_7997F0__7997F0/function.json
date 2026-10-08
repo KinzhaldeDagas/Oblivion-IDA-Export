@@ -1,19 +1,36 @@
 {
-  "callees_count": 52,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 28,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7997F0",
+  "chunks": [
+    [
+      "0x7997F0",
+      "0x799E99"
+    ],
+    [
+      "0x9CC130",
+      "0x9CC1B9"
+    ]
+  ],
+  "chunks_sha256": "10dc8a4ead4b0938fd57e16974c0d8155b2bff73a0ab04c389d4fd0c90321b9d",
+  "comment_regular": "Accumulates leaf-geometry extents into the Compute bounds object.\n\nOblivion CLeafGeometry::ComputeExtents. Expands the 0x30-byte stRegion using leaf centers and maximum card reach, accounting for billboard orientation and every stored LOD.",
+  "comment_repeatable": "Oblivion CLeafGeometry::ComputeExtents. Expands the 0x30-byte stRegion using leaf centers and maximum card reach, accounting for billboard orientation and every stored LOD.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 38,
+  "display_name": "OB_CLeafGeometry_ComputeExtents_010201A0",
   "end_ea": "0x799E99",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7997F0",
+  "name": "OB_CLeafGeometry_ComputeExtents_010201A0",
   "segment": ".text",
   "sha256": "5844e40d1ba3838b318f224fd5c47b5c90cf80c9487c5343d4cd1c068eca71a3",
   "size": 1705,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7997F0",
-  "type": "void __thiscall(int this, float *)",
-  "xrefs_from_count": 492,
+  "total_chunk_size": 1842,
+  "type": "void __thiscall(OB_CLeafGeometry_010201A0 *this, OB_stRegion_010201A0 *extents)",
+  "xrefs_from_count": 558,
   "xrefs_to_count": 1
 }

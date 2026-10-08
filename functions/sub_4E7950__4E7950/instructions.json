@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E7950",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified — TESPathGrid-specific graph copy routine, reached through vtable entry at A476F8. It dynamic-casts source TESForm to TESPathGrid, forces source graph resolution if needed, allocates destination point nodes and copies positions, remaps source adjacency pointers by source-array index into destination point pointers, copies PGRI records, and conditionally clears non-active/unoverridden source graph state. The implementation verifies graph-copy/remap semantics; exact external lifecycle intent beyond the vtable callback remains Unknown.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4E797D",
-    "line": "mov     eax, [esp+38h+arg_0]",
+    "line": "mov     eax, [esp+38h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4E79AE",
-    "line": "mov     byte ptr [esp+38h+arg_0], al",
+    "line": "mov     byte ptr [esp+38h+source], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x4E79B4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E79B6",
-    "line": "call    sub_4E7610",
+    "line": "call    TESPathGrid_LoadOrResolveGraph; Verified graph lifecycle dispatcher: if pointArray already exists, resolve deferred cross-cell PGRI links and optionally rebuild the render graph; otherwise find the thread-safe override file, load the PathGrid graph chunks, and on successful load perform the same cross-cell resolution/render update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x4E7A49",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7A4B",
-    "line": "call    sub_4E7DF0",
+    "line": "call    TESPathGridPoint_ctor; Verified TESPathGridPoint constructor initializes the graph-search prefix, adjacency list and position, sets +0x28 to null, and lazily creates two shared NiAVObject templates. The template references are refcounted and selected by integerized point-Z parity in TESPathGridPoint_RebuildRenderGeometry. Material field correction: the formerly `unknown28` member at +0x28 is a per-point NiNode* renderNode; the render builder writes it and the clear helper removes/releases it.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x4E7A56",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -511,25 +511,25 @@
   },
   {
     "ea": "0x4E7A64",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E7A69",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E7A6A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7A6C",
-    "line": "call    sub_4BEF50",
+    "line": "call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x4E7ABA",
-    "line": "mov     ecx, [eax+edi*4]",
+    "line": "mov     ecx, [eax+edi*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x4E7AC1",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x4E7AD7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x4E7AEA",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x4E7AEE",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,13 +1009,13 @@
   },
   {
     "ea": "0x4E7B6B",
-    "line": "mov     ecx, [esp+38h+var_1C]",
+    "line": "mov     ecx, [esp+38h+var_1C]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E7B6F",
-    "line": "call    sub_4E7DE0",
+    "line": "call    PathGraphNode_GetConnections; Verified graph-node connection-list accessor: returns this+0x20. TESPathGrid and TESRoad graph code both traverse this as a BSSimpleList of adjacency pointers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,13 +1387,13 @@
   },
   {
     "ea": "0x4E7C2D",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7C2F",
-    "line": "call    sub_4E4ED0",
+    "line": "call    TESPathGrid_ClearPGRIRecords; Verified frees the PGRI record list header at TESPathGrid+0x28 and each allocated 16-byte record in that list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1420,12 +1420,6 @@
     "line": "jmp     short loc_4E7C40",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E7C3D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4E7C40",
@@ -1558,12 +1552,6 @@
     "line": "jmp     short loc_4E7C80",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E7C7D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x4E7C80",
@@ -1699,7 +1687,7 @@
   },
   {
     "ea": "0x4E7CB8",
-    "line": "cmp     byte ptr [esp+38h+arg_0], bl",
+    "line": "cmp     byte ptr [esp+38h+source], bl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1723,13 +1711,13 @@
   },
   {
     "ea": "0x4E7CC3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7CC5",
-    "line": "call    sub_4E5400",
+    "line": "call    TESPathGrid_ClearRenderedPointGeometry; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1735,7 @@
   },
   {
     "ea": "0x4E7CCE",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1765,7 @@
   },
   {
     "ea": "0x4E7CDA",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1807,25 +1795,25 @@
   },
   {
     "ea": "0x4E7CEA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7CEC",
-    "line": "call    sub_4E6CA0",
+    "line": "call    TESPathGrid_ClearPointsAndReferenceMaps; Verified point teardown order under the shared pathgrid critical section: remove reciprocal PGRI cross-cell connections; clear pointsByReference list headers/nodes; destroy each point's owned adjacency list via its point cleanup helper; free point nodes; destroy and null the NiTArray at +0x24. The 512-unit spatial-bucket map at +0x44 is cleared separately by TESPathGrid_ClearSpatialBucketMap.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E7CF1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7CF3",
-    "line": "call    sub_4E5280",
+    "line": "call    TESPathGrid_ClearSpatialBucketMap; Verified frees every BSSimpleList node and list header stored in TESPathGrid.pointsByCell (+0x44), then clears that NiTPointerMap. Given the key helper's X/Y >> 9 packing, this is a 512-unit spatial bucket map local to this PathGrid, not a one-entry-per-world-cell map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1882,5 +1870,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5E70",
+    "line": "mov     eax, [ebp-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E7B",
+    "line": "mov     eax, [ebp-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E7E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E7F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E84",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E85",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5E86",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5E8A",
+    "line": "lea     eax, [edx-28h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E8D",
+    "line": "mov     ecx, [edx-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5E90",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5E92",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E97",
+    "line": "mov     eax, offset stru_AE0DF0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5E9C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

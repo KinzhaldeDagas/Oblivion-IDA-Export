@@ -1,4 +1,4 @@
-0x4BA2A0: push    esi
+0x4BA2A0: push    esi; Verified random/default seed: returns 0 when the seed array count at +0x52 is zero; otherwise returns seedValues[Game_RandomLargeInteger(0) % count]. TESObjectREFR_GetTreeSeed reaches this when no per-reference seed extra exists.
 0x4BA2A1: mov     esi, ecx
 0x4BA2A3: push    edi
 0x4BA2A4: movzx   edi, word ptr [esi+52h]
@@ -9,7 +9,7 @@
 0x4BA2AF: pop     esi
 0x4BA2B0: retn
 0x4BA2B1: push    0; Seed
-0x4BA2B3: call    GetRandomLargeInteger?
+0x4BA2B3: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4BA2B8: xor     edx, edx
 0x4BA2BA: div     edi
 0x4BA2BC: mov     eax, [esi+4Ch]

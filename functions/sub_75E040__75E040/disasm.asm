@@ -3,7 +3,7 @@
 0x75E043: mov     ecx, [esi+0Ch]
 0x75E046: test    ecx, ecx
 0x75E048: jz      short loc_75E090
-0x75E04A: cmp     byte ptr ds:0B3F944h, 0
+0x75E04A: cmp     byte ptr ds:0B3F944h, 0; 3DTheft decode 2026-05-16: NiPSysUpdateTask::Run gates particle-system update on byte_B3F944 before invoking the target vfunc +0x9C.
 0x75E051: jnz     short loc_75E090
 0x75E053: mov     eax, [ecx]
 0x75E055: fld     dword ptr [esi+10h]

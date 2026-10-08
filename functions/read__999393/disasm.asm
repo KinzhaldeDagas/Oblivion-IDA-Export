@@ -13,7 +13,7 @@
 0x9993C2: xor     edi, edi
 0x9993C4: cmp     eax, edi
 0x9993C6: jl      short loc_9993D0
-0x9993C8: cmp     eax, uNumber
+0x9993C8: cmp     eax, ds:0BAAAA0h
 0x9993CE: jb      short loc_9993F1
 0x9993D0: call    ___doserrno
 0x9993D5: mov     [eax], edi

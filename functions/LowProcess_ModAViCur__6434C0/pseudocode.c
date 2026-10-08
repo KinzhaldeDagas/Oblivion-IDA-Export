@@ -1,13 +1,11 @@
-int __thiscall LowProcess_ModAViCur(_DWORD *this, int a2, int a3, signed int a4)
+// Verified: accepts only IDs8..10, converts integer delta to float and adjusts LowProcess collection +0x70 with allowPositive=0.
+void __thiscall LowProcess_ModAViCur(LowProcess *self, int context, int actorValue, int delta)
 {
-  int result; // eax
-  int v5; // [esp+0h] [ebp-8h]
+  float deltaa; // [esp+0h] [ebp-8h]
 
-  result = a3;
-  if ( a3 >= 8 && a3 <= 0xA )
+  if ( actorValue >= 8 && actorValue <= 0xA ) /*0x6434cc*/
   {
-    *(float *)&v5 = (float)a4;
-    return AVCollection_ModAVLimited(this + 0x1C, a3, v5, 0);
+    deltaa = (float)delta; /*0x6434d8*/
+    AVCollection_AdjustValue(&self->avDamageModifiers, actorValue, deltaa, 0); /*0x6434dc*/
   }
-  return result;
 }

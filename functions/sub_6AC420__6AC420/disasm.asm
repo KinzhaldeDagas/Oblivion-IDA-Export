@@ -1,4 +1,4 @@
-0x6AC420: push    0FFFFFFFFh
+0x6AC420: push    0FFFFFFFFh; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.
 0x6AC422: push    offset SEH_6AC420
 0x6AC427: mov     eax, large fs:0
 0x6AC42D: push    eax
@@ -31,7 +31,7 @@
 0x6AC47D: cmp     byte ptr ds:0B16178h, 0
 0x6AC484: jz      loc_6AC5D4
 0x6AC48A: mov     ecx, [ebp+304h]
-0x6AC490: call    sub_6A9030
+0x6AC490: call    NiTMapBase_GetFirstNode
 0x6AC495: cmp     eax, ebx
 0x6AC497: mov     [esp+38h+arg_0], eax
 0x6AC49B: jz      loc_6AC594
@@ -155,3 +155,14 @@
 0x6AC604: pop     ebx
 0x6AC605: add     esp, 24h
 0x6AC608: retn    8
+0x9C6490: lea     ecx, [ebp-24h]; slot
+0x9C6493: jmp     NiPointerSlot_Release
+0x9C6498: lea     ecx, [ebp-1Ch]; slot
+0x9C649B: jmp     NiPointerSlot_Release
+0x9C64A0: mov     edx, [esp+arg_4]
+0x9C64A4: lea     eax, [edx-28h]
+0x9C64A7: mov     ecx, [edx-2Ch]
+0x9C64AA: xor     ecx, eax
+0x9C64AC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C64B1: mov     eax, offset stru_AEEA28
+0x9C64B6: jmp     ___CxxFrameHandler3

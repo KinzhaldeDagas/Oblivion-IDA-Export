@@ -8,7 +8,7 @@
 0x5F19EB: mov     [esp+0Ch+arg_0], eax
 0x5F19EF: fild    [esp+0Ch+arg_0]
 0x5F19F3: fmul    [esp+0Ch+arg_8]
-0x5F19F7: call    Double_To_SInt32
+0x5F19F7: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5F19FC: pop     edi
 0x5F19FD: pop     ebx
 0x5F19FE: pop     esi

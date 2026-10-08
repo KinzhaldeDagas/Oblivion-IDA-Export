@@ -9,8 +9,8 @@
 0x98DEF0: mov     ecx, [esi+4]
 0x98DEF3: test    ecx, ecx
 0x98DEF5: jz      short loc_98DF26
-0x98DEF7: mov     eax, Memory
-0x98DEFC: mov     edx, offset unk_BAA5F4
+0x98DEF7: mov     eax, dword_BA9E10+7E8h
+0x98DEFC: mov     edx, (offset dword_BA9E10+7E4h)
 0x98DF01: mov     [ebp+var_1C], eax
 0x98DF04: test    eax, eax
 0x98DF06: jz      short loc_98DF19

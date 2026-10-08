@@ -18,11 +18,10 @@
 0x5A3055: xor     ebp, ebp
 0x5A3057: xor     edi, edi
 0x5A3059: call    Tile_GetFloat
-0x5A305E: call    Double_To_SInt32
+0x5A305E: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5A3063: cmp     esi, ebp
 0x5A3065: jz      loc_5A3148
 0x5A306B: jmp     short loc_5A3070
-0x5A306D: align 10h
 0x5A3070: cmp     edi, eax
 0x5A3072: jz      short loc_5A3083
 0x5A3074: mov     esi, [esi+4]
@@ -80,7 +79,7 @@
 0x5A3111: mov     ecx, edi
 0x5A3113: call    EffectItem_destr
 0x5A3118: push    edi
-0x5A3119: call    FormHeapFree
+0x5A3119: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A311E: add     esp, 4
 0x5A3121: jmp     short loc_5A3148
 0x5A3123: sub     esp, 8
@@ -103,3 +102,15 @@
 0x5A3157: pop     ebx
 0x5A3158: add     esp, 0Ch
 0x5A315B: retn    4
+0x9C6200: mov     eax, [ebp+4]
+0x9C6203: push    eax
+0x9C6204: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6209: pop     ecx
+0x9C620A: retn
+0x9C620B: mov     edx, [esp+arg_4]
+0x9C620F: lea     eax, [edx-10h]
+0x9C6212: mov     ecx, [edx-14h]
+0x9C6215: xor     ecx, eax
+0x9C6217: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C621C: mov     eax, offset stru_AEE7E8
+0x9C6221: jmp     ___CxxFrameHandler3

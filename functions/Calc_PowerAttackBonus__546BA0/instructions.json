@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x546BA0",
-    "line": "push    ecx",
+    "line": "push    ecx; Sidecar decode: Calc_PowerAttackBonus derives mastery from skill and gates standing/sidestep/backward/forward AttackPower groups. BladeSkillsRestored substitutes only skill level after consuming the exact 0x5FF4A2 -> 0x5FF4E6 per-thread token; unmatched or overflowed contexts use native skill.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x546BA1",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x546BAB",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x546BB0",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x546BD4",
-    "line": "mov     ecx, offset fDamagePowerAttackStandBonus",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+150h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x546BED",
-    "line": "mov     ecx, offset fDamagePowerAttackForwardBonus",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+168h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x546C06",
-    "line": "mov     ecx, offset fDamagePowerAttackBackBonus",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+160h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x546C1F",
-    "line": "mov     ecx, offset fDamagePowerAttackSideBonus",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+158h)",
     "mnemonic": "mov",
     "size": 5
   },

@@ -3,7 +3,6 @@
 0x606AD5: jz      short loc_606AEB
 0x606AD7: mov     ecx, [esp+arg_0]
 0x606ADB: jmp     short loc_606AE0
-0x606ADD: align 10h
 0x606AE0: cmp     [eax], ecx
 0x606AE2: jz      short loc_606AEB
 0x606AE4: mov     eax, [eax+4]

@@ -1,4 +1,4 @@
-0x7C1960: push    0FFFFFFFFh
+0x7C1960: push    0FFFFFFFFh; Borrows one Oblivion frustum shadow render texture by removing the head of BSTextureManager's unused pool and adding the same refcounted texture to its used pool.
 0x7C1962: push    offset BSTextureManager_FetchShadowMap_SEH
 0x7C1967: mov     eax, large fs:0
 0x7C196D: push    eax
@@ -19,15 +19,15 @@
 0x7C1993: mov     ebp, ds:0A2807Ch
 0x7C1999: mov     [esp+24h+var_4], esi
 0x7C199D: jbe     short loc_7C19F3
-0x7C199F: lea     eax, [esp+24h+var_10]
-0x7C19A3: push    eax
-0x7C19A4: lea     ecx, [edi+20h]
-0x7C19A7: call    sub_7C1740
-0x7C19AC: push    eax
-0x7C19AD: lea     ecx, [esp+28h+var_14]
+0x7C199F: lea     eax, [esp+24h+result]
+0x7C19A3: push    eax; result
+0x7C19A4: lea     ecx, [edi+20h]; self
+0x7C19A7: call    NiTRefPointerList__RemoveHead; Remove the borrowed texture node from the unused frustum-shadow pool.
+0x7C19AC: push    eax; incoming
+0x7C19AD: lea     ecx, [esp+28h+var_14]; this
 0x7C19B1: mov     byte ptr [esp+28h+var_4], 1
-0x7C19B6: call    sub_55E2A0
-0x7C19BB: mov     eax, [esp+24h+var_10]
+0x7C19B6: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
+0x7C19BB: mov     eax, [esp+24h+result]
 0x7C19BF: test    eax, eax
 0x7C19C1: mov     byte ptr [esp+24h+var_4], 0
 0x7C19C6: jz      short loc_7C19E2
@@ -47,7 +47,7 @@
 0x7C19E2: lea     ecx, [esp+24h+var_14]
 0x7C19E6: push    ecx
 0x7C19E7: lea     ecx, [edi+30h]
-0x7C19EA: call    sub_7C16B0
+0x7C19EA: call    NiTRefPointerList__AddTail; Append the borrowed texture to the used frustum-shadow pool.
 0x7C19EF: mov     esi, [esp+24h+var_14]
 0x7C19F3: test    esi, esi
 0x7C19F5: mov     [esp+24h+var_4], 0FFFFFFFFh
@@ -71,3 +71,14 @@
 0x7C1A23: pop     ebp
 0x7C1A24: add     esp, 14h
 0x7C1A27: retn
+0x9CE1E0: lea     ecx, [ebp-14h]; slot
+0x9CE1E3: jmp     NiPointerSlot_Release
+0x9CE1E8: lea     ecx, [ebp-10h]; slot
+0x9CE1EB: jmp     NiPointerSlot_Release
+0x9CE1F0: mov     edx, [esp+arg_4]
+0x9CE1F4: lea     eax, [edx-14h]
+0x9CE1F7: mov     ecx, [edx-18h]
+0x9CE1FA: xor     ecx, eax
+0x9CE1FC: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE201: mov     eax, offset stru_AF7220
+0x9CE206: jmp     ___CxxFrameHandler3

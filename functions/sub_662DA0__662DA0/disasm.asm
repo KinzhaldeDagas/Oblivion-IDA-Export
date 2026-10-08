@@ -95,7 +95,7 @@
 0x662EA3: setnle  al
 0x662EA6: mov     [edi+6E6h], al
 0x662EAC: fmul    dword ptr ds:0B37DB8h
-0x662EB2: call    Double_To_SInt32
+0x662EB2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x662EB7: mov     edx, [esi+290h]
 0x662EBD: push    eax
 0x662EBE: push    3Ch ; '<'

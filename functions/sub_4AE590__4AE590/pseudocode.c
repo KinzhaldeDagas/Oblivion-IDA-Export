@@ -1,4 +1,4 @@
 bool __thiscall sub_4AE590(TESFurniture *this)
 {
-  return (this->unk058 & 0x40000000) != 0;
+  return (this->unk058 & 0x40000000) != 0; /*0x4ae598*/
 }

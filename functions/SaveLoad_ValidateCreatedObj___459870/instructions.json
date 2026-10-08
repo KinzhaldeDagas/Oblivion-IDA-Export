@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4598CE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x45990B",
-    "line": "jnz     short loc_459945",
+    "line": "jnz     short loc_459945; MEF SAVE PERF PASS2 2026-10-08: Save performance audit exclusion: deferred deletion's two passes use local successor promotion/head removal, not repeated search-from-head. No extra quadratic unlink factor established here. Preserve class partition and unlink-before-destructor behavior; arbitrary destructors may dominate time but were not profiled.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x459923",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

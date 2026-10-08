@@ -1,19 +1,32 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 17,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4B72C0",
+      "0x4B748B"
+    ]
+  ],
+  "chunks_sha256": "63f816a999f9b4a289a9c02210cfbdbc27177f2ca3c790b7360fa1733ab53819",
+  "comment_regular": "Verified policy byte 1 behavior: when GetEffectiveDoorLock returns null, bypassPolicyWhenNoEffectiveLock=true returns accessible immediately; false continues through ownership, guard, trespass, and linked-cell checks. Current Oblivion callers: TravelPath_ComputeDoorTransitionPenalty passes (unknownPolicyFlag0=0, bypassPolicyWhenNoEffectiveLock=1), while IsOffLimitToThePlayer passes (0,0). unknownPolicyFlag0 is zero at all identified callers and remains Unknown. Fallout has analogous DoorLock policy methods, but the parameter meaning here is established from Oblivion control flow.",
+  "comment_repeatable": "Verified policy byte 1 behavior: when GetEffectiveDoorLock returns null, bypassPolicyWhenNoEffectiveLock=true returns accessible immediately; false continues through ownership, guard, trespass, and linked-cell checks. Current Oblivion callers: TravelPath_ComputeDoorTransitionPenalty passes (unknownPolicyFlag0=0, bypassPolicyWhenNoEffectiveLock=1), while IsOffLimitToThePlayer passes (0,0). unknownPolicyFlag0 is zero at all identified callers and remains Unknown. Fallout has analogous DoorLock policy methods, but the parameter meaning here is established from Oblivion control flow.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4B72C0",
+  "display_name": "TESObjectDOOR_CheckActorAccessPolicy",
   "end_ea": "0x4B748B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B72C0",
+  "name": "TESObjectDOOR_CheckActorAccessPolicy",
   "segment": ".text",
   "sha256": "63f816a999f9b4a289a9c02210cfbdbc27177f2ca3c790b7360fa1733ab53819",
   "size": 459,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B72C0",
-  "type": "bool __cdecl(TESObjectREFR *, TESObjectREFR *, char, char)",
+  "total_chunk_size": 459,
+  "type": "bool __cdecl(TESObjectREFR *doorReference, Actor *actor, UInt8 unknownPolicyFlag0, bool bypassPolicyWhenNoEffectiveLock)",
   "xrefs_from_count": 212,
   "xrefs_to_count": 3
 }

@@ -4,7 +4,7 @@
 0x763EB8: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAVNiD3DShaderInterface@@@@6B@; const NiTListBase<NiTPointerAllocator<uint>,NiD3DShaderInterface *>::`vftable'
 0x763EBE: jz      short loc_763EC9
 0x763EC0: push    esi
-0x763EC1: call    FormHeapFree
+0x763EC1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x763EC6: add     esp, 4
 0x763EC9: mov     eax, esi
 0x763ECB: pop     esi

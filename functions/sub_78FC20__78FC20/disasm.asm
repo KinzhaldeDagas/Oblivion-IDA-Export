@@ -1,9 +1,9 @@
-0x78FC20: push    ebx
-0x78FC21: mov     ebx, [esp+4+arg_0]
+0x78FC20: push    ebx; Rotates the 4-byte CBranch-pointer range [first,last) around middle using gcd-cycle moves. Oblivion's fuzzy-volume insertion-sort helper uses it to move an insertion range without allocating.
+0x78FC21: mov     ebx, [esp+4+first]
 0x78FC25: push    ebp
-0x78FC26: mov     ebp, [esp+8+arg_8]
+0x78FC26: mov     ebp, [esp+8+last]
 0x78FC2A: push    esi
-0x78FC2B: mov     esi, [esp+0Ch+arg_4]
+0x78FC2B: mov     esi, [esp+0Ch+middle]
 0x78FC2F: sub     esi, ebx
 0x78FC31: mov     ecx, ebp
 0x78FC33: sub     ecx, ebx
@@ -30,9 +30,9 @@
 0x78FC62: lea     edx, [ebx+esi*4]
 0x78FC65: cmp     edx, ebp
 0x78FC67: mov     edi, ebx
-0x78FC69: mov     [esp+10h+arg_4], ecx
+0x78FC69: mov     [esp+10h+middle], ecx
 0x78FC6D: jnz     short loc_78FC73
-0x78FC6F: mov     edx, [esp+10h+arg_0]
+0x78FC6F: mov     edx, [esp+10h+first]
 0x78FC73: cmp     edx, ebx
 0x78FC75: jz      short loc_78FCA2
 0x78FC77: mov     ecx, [edx]
@@ -48,11 +48,11 @@
 0x78FC91: jmp     short loc_78FC9E
 0x78FC93: mov     edx, esi
 0x78FC95: sub     edx, ecx
-0x78FC97: mov     ecx, [esp+10h+arg_0]
+0x78FC97: mov     ecx, [esp+10h+first]
 0x78FC9B: lea     edx, [ecx+edx*4]
 0x78FC9E: cmp     edx, ebx
 0x78FCA0: jnz     short loc_78FC77
-0x78FCA2: mov     edx, [esp+10h+arg_4]
+0x78FCA2: mov     edx, [esp+10h+middle]
 0x78FCA6: sub     eax, 1
 0x78FCA9: sub     ebx, 4
 0x78FCAC: test    eax, eax

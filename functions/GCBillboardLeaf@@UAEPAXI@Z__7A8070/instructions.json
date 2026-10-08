@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A8070",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion CBillboardLeaf scalar deleting destructor. The 0x4C-byte leaf has no derived-owned allocation, so this wrapper invokes the shared CIdvCamera base destructor and frees through FormHeap only when flags bit 0 is set.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x7A8073",
-    "line": "call    ??1CBillboardLeaf@@UAE@XZ; CBillboardLeaf::~CBillboardLeaf(void)",
+    "line": "call    OB_CIdvCamera_dtor_010201A0; Oblivion CIdvCamera base destructor. Restores the CIdvCamera vftable; both CTreeEngine and CBillboardLeaf destructors call this shared base cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A8078",
-    "line": "test    byte ptr [esp+4+arg_0], 1",
+    "line": "test    byte ptr [esp+4+flags], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7A8080",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

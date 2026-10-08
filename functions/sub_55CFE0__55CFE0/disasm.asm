@@ -1,19 +1,19 @@
 0x55CFE0: push    ebx
 0x55CFE1: push    ebp
-0x55CFE2: mov     ebp, [esp+8+arg_0]
+0x55CFE2: mov     ebp, [esp+8+destination]
 0x55CFE6: test    ebp, ebp
 0x55CFE8: mov     ebx, ecx
 0x55CFEA: jz      loc_55D07E
-0x55CFF0: mov     eax, [esp+8+arg_4]
+0x55CFF0: mov     eax, [esp+8+cloningProcess]
 0x55CFF4: push    esi
 0x55CFF5: push    edi
-0x55CFF6: push    eax
-0x55CFF7: push    ebp
-0x55CFF8: call    sub_70AC60
+0x55CFF6: push    eax; cloningProcess
+0x55CFF7: push    ebp; destination
+0x55CFF8: call    OB_NiNode_CopyMembersForClone
 0x55CFFD: lea     ecx, [ebx+0DCh]
-0x55D003: push    ecx
-0x55D004: lea     ecx, [ebp+0DCh]
-0x55D00A: call    sub_55E2A0
+0x55D003: push    ecx; incoming
+0x55D004: lea     ecx, [ebp+0DCh]; this
+0x55D00A: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x55D00F: lea     esi, [ebx+0E0h]
 0x55D015: lea     edi, [ebp+0E0h]
 0x55D01B: mov     ecx, 9

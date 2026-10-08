@@ -1,14 +1,14 @@
-0x8ABF70: push    ebp
+0x8ABF70: push    ebp; TES4 authoritative: computes contact-match error from normal difference, contact plane/fraction difference, and resolved collidable-space point difference.
 0x8ABF71: mov     ebp, esp
 0x8ABF73: and     esp, 0FFFFFFF0h
 0x8ABF76: sub     esp, 2Ch
-0x8ABF79: mov     eax, [ebp+arg_0]
+0x8ABF79: mov     eax, [ebp+candidate]
 0x8ABF7C: fld     dword ptr ds:0A2F948h
 0x8ABF82: movaps  xmm0, xmmword ptr [eax+10h]
 0x8ABF86: push    esi
-0x8ABF87: mov     esi, [ebp+arg_4]
+0x8ABF87: mov     esi, [ebp+manifoldEntry]
 0x8ABF8A: movaps  xmm1, xmmword ptr [esi+10h]
-0x8ABF8E: mulps   xmm0, xmm1
+0x8ABF8E: mulps   xmm0, xmm1; Compares candidate and manifold contact normals through dot(normalA, normalB).
 0x8ABF91: movaps  xmm1, xmm0
 0x8ABF94: shufps  xmm1, xmm0, 55h ; 'U'
 0x8ABF98: addss   xmm1, xmm0
@@ -29,7 +29,7 @@
 0x8ABFCD: movaps  [esp+30h+var_20], xmm0
 0x8ABFD2: fstp    [esp+30h+var_28]
 0x8ABFD6: fld     dword ptr [eax+1Ch]
-0x8ABFD9: fsub    dword ptr [esi+1Ch]
+0x8ABFD9: fsub    dword ptr [esi+1Ch]; Includes squared difference between contact normal.w / distance fields in the match error.
 0x8ABFDC: fld     st
 0x8ABFDE: fmul    st, st(1)
 0x8ABFE0: fstp    [esp+30h+var_24]
@@ -41,7 +41,7 @@
 0x8ABFEF: lea     edx, [esp+30h+var_20]
 0x8ABFF3: push    edx
 0x8ABFF4: push    eax
-0x8ABFF5: call    sub_8ABCE0
+0x8ABFF5: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x8ABFFA: movaps  xmm0, [esp+30h+var_20]
 0x8ABFFF: movaps  xmm1, [esp+30h+var_10]
 0x8AC004: mov     eax, [esi+28h]
@@ -54,9 +54,9 @@
 0x8AC019: lea     eax, [esp+30h+var_10]
 0x8AC01D: push    eax
 0x8AC01E: push    esi
-0x8AC01F: call    sub_8ABCE0
+0x8AC01F: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x8AC024: movaps  xmm0, [esp+30h+var_20]
-0x8AC029: subps   xmm0, [esp+30h+var_10]
+0x8AC029: subps   xmm0, [esp+30h+var_10]; Includes squared resolved collidable-space point delta in the match error when collidable transform data is available.
 0x8AC02E: mulps   xmm0, xmm0
 0x8AC031: movaps  xmm1, xmm0
 0x8AC034: shufps  xmm1, xmm0, 55h ; 'U'

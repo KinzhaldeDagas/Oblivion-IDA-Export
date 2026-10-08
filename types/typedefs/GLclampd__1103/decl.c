@@ -1,1 +1,1 @@
-GLclampd
+typedef double GLclampd;

@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6988E6",
-    "line": "mov     [esp+70h+var_48], eax",
+    "line": "mov     [esp+70h+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x698910",
-    "line": "mov     eax, [esp+7Ch+var_48]",
+    "line": "mov     eax, [esp+7Ch+slot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x69896E",
-    "line": "fstp    [esp+64h+var_48]",
+    "line": "fstp    [esp+64h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x698974",
-    "line": "fld     [esp+64h+var_48]",
+    "line": "fld     [esp+64h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x6989A7",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x6989B1",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6989B3",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,19 +505,19 @@
   },
   {
     "ea": "0x6989BC",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6989C2",
-    "line": "push    1; a4",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6989C4",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x698A12",
-    "line": "mov     [esp+64h+var_48], ebx",
+    "line": "mov     [esp+64h+slot], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,19 +799,19 @@
   },
   {
     "ea": "0x698A56",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x698A57",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x698A59",
-    "line": "call    sub_4D7D10",
+    "line": "call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x698A81",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x698A98",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x698A9D",
-    "line": "push    esi; Concurrency::details::SchedulerBase *",
+    "line": "push    esi; reference",
     "mnemonic": "push",
     "size": 1
   },
@@ -949,19 +949,19 @@
   },
   {
     "ea": "0x698AA0",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x698AA5",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x698AA7",
-    "line": "call    sub_4D35D0",
+    "line": "call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x698AE0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x698B25",
-    "line": "mov     [esp+68h+var_48], edx",
+    "line": "mov     [esp+68h+slot], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x698B49",
-    "line": "fld     [esp+74h+var_48]",
+    "line": "fld     [esp+74h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1411,7 +1411,7 @@
   },
   {
     "ea": "0x698BB3",
-    "line": "mov     ecx, offset ActorProcessManager_ptr.unk4C",
+    "line": "mov     ecx, (offset qword_B3BB2C+224h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1576,5 +1576,185 @@
     "line": "retn    28h ; '('",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C5AE0",
+    "line": "mov     ecx, [ebp+a2.x]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AE3",
+    "line": "jmp     sub_69FA60",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5AE8",
+    "line": "mov     ecx, [ebp+a2.x]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AEB",
+    "line": "add     ecx, 7Ch ; '|'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AEE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5AF3",
+    "line": "mov     ecx, [ebp+a2.x]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5AF6",
+    "line": "add     ecx, 88h ; 'ˆ'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5AFC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B01",
+    "line": "mov     ecx, [ebp+a2.x]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B04",
+    "line": "add     ecx, 8Ch ; 'Œ'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5B0A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B0F",
+    "line": "mov     ecx, [ebp+a2.x]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B12",
+    "line": "add     ecx, 90h; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5B18",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B1D",
+    "line": "mov     ecx, [ebp+a2.x]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B20",
+    "line": "add     ecx, 94h ; '”'; slot",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9C5B26",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B2B",
+    "line": "lea     ecx, [ebp+slot]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B2E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B33",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5B37",
+    "line": "lea     eax, [edx-54h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B3A",
+    "line": "mov     ecx, [edx-58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B3D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5B3F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B44",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B47",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5B4A",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5B4C",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B51",
+    "line": "mov     eax, offset stru_AEE1F4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5B56",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

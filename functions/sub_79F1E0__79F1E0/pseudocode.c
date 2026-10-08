@@ -1,166 +1,171 @@
-int __thiscall sub_79F1E0(_DWORD *this, unsigned int *a2)
+//
+// [2026-10-03 acceptance corpus] Strict parser traversal of installed FrondTrees.esp assets: BambooCluster mode1/enabled/4LODs/two maps; BananaTree01 and CinnamonFern01 mode1/6LODs; CalleryPear and KingPalm01 mode1/4LODs; CurlyPalm01 and CoconutPalm01 mode1/1LOD; PonytailPalm mode0/3LODs. SDK SouthCarolina Palmetto_RT is mode0/5LODs and authors composite normal/self-shadow layers. These are static authored settings, NOT proof of nonempty native guide generation. FrondTrees plugin defines8TREEs but zeroREFRs; ordinary scene runs cannot establish their rendering.
+int __thiscall OB_CFrondEngine_Parse_010201A0(OB_CFrondEngine_010201A0 *this, OB_CTreeFileAccess_010201A0 *fileAccess)
 {
-  _DWORD *v2; // edi
-  int result; // eax
-  char **v4; // eax
-  double v5; // st7
-  int v6; // eax
-  int v7; // edx
-  _DWORD *v8; // eax
-  _DWORD *v9; // eax
-  int v10[12]; // [esp-1Ch] [ebp-138h] BYREF
-  _DWORD *v11; // [esp+14h] [ebp-108h]
-  int v12; // [esp+18h] [ebp-104h]
-  int *v13; // [esp+1Ch] [ebp-100h]
-  int v14; // [esp+20h] [ebp-FCh] BYREF
-  unsigned int v15; // [esp+24h] [ebp-F8h]
-  int v16; // [esp+34h] [ebp-E8h]
-  unsigned int v17; // [esp+38h] [ebp-E4h]
-  _BYTE v18[4]; // [esp+3Ch] [ebp-E0h] BYREF
-  unsigned int v19; // [esp+40h] [ebp-DCh]
-  int v20; // [esp+50h] [ebp-CCh]
-  unsigned int v21; // [esp+54h] [ebp-C8h]
-  _BYTE v22[68]; // [esp+80h] [ebp-9Ch] BYREF
-  _BYTE v23[28]; // [esp+C4h] [ebp-58h] BYREF
-  char v24[20]; // [esp+E0h] [ebp-3Ch] BYREF
-  int v25; // [esp+F4h] [ebp-28h]
-  int v26; // [esp+F8h] [ebp-24h]
-  float v27; // [esp+FCh] [ebp-20h]
-  float v28; // [esp+100h] [ebp-1Ch]
-  float v29; // [esp+104h] [ebp-18h]
-  float v30; // [esp+108h] [ebp-14h]
-  int v31; // [esp+118h] [ebp-4h]
+  OB_CFrondEngine_010201A0 *engine; // edi
+  int Dword_010201A0; // eax
+  void *v4; // eax
+  int textureIndex; // edi
+  double defaultAspectRatio; // st7
+  int textureToken; // eax
+  int v8; // edx
+  OB_stString28_010201A0 *v9; // eax
+  OB_stString28_010201A0 *v10; // eax
+  OB_stString28_010201A0 v11; // [esp-1Ch] [ebp-138h] BYREF
+  OB_CFrondEngine_010201A0 *engineForTextures; // [esp+14h] [ebp-108h]
+  int textureCount; // [esp+18h] [ebp-104h]
+  OB_stString28_010201A0 *v14; // [esp+1Ch] [ebp-100h]
+  OB_stString28_010201A0 source; // [esp+20h] [ebp-FCh] BYREF
+  OB_stString28_010201A0 v16; // [esp+3Ch] [ebp-E0h] BYREF
+  OB_IdvFileError_010201A0 v17; // [esp+80h] [ebp-9Ch] BYREF
+  OB_stString28_010201A0 result; // [esp+C4h] [ebp-58h] BYREF
+  struct OB_SFrondTexture_010201A0 textureRecord; // [esp+E0h] [ebp-3Ch] BYREF
+  int v20; // [esp+118h] [ebp-4h]
 
-  v2 = this;
-  v11 = this;
-  result = sub_78EB40(a2);
-  do
+  engine = this; /*0x79f222*/
+  engineForTextures = this; /*0x79f226*/
+  Dword_010201A0 = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f22a*/
+  do /*0x79f519*/
   {
-    if ( result > 0x36B7 )
+    if ( Dword_010201A0 > 0x36B7 ) /*0x79f245*/
     {
-      if ( result != 0x36B8 )
+      if ( Dword_010201A0 != 0x36B8 ) /*0x79f55a*/
       {
-LABEL_36:
-        v9 = (_DWORD *)sub_7A54A0((int)v23, "malformed frond info (token %d)", result);
-        v31 = 4;
-        sub_789190((std::exception *)v22, v9, 0);
-        ThrowException__((int)v22, &_TI3_AVIdvFileError__);
+LABEL_38:
+        v10 = OB_IdvFormatString_010201A0(&result, "malformed frond info (token %d)", Dword_010201A0); /*0x79f59f*/
+        v20 = 4; /*0x79f5bd*/
+        OB_IdvFileError_Ctor_010201A0(&v17, v10, 0); /*0x79f5c8*/
+        ThrowException__((DWORD)&v17, &_TI3_AVIdvFileError__); /*0x79f5da*/
       }
-      v2[0x1A] = sub_78EB40(a2);
+      engine->minCrossSegments = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f563*/
     }
     else
     {
-      if ( result != 0x36B7 )
+      if ( Dword_010201A0 != 0x36B7 ) /*0x79f24b*/
       {
-        switch ( result )
+        switch ( Dword_010201A0 ) /*0x79f260*/
         {
-          case 0x32CA:
-            v2[0xE] = sub_78EB40(a2);
-            goto LABEL_31;
-          case 0x32CB:
-            v2[0xA] = sub_78EB40(a2);
-            goto LABEL_31;
-          case 0x32CC:
-            v2[0xB] = sub_78EB40(a2);
-            goto LABEL_31;
-          case 0x32CD:
-            v4 = sub_7909D0(a2);
-            sub_799EB0(v2, (unsigned int)v4);
-            goto LABEL_31;
-          case 0x32CE:
-            v2[0xD] = sub_78EB40(a2);
-            goto LABEL_31;
-          case 0x32CF:
-            *((_BYTE *)v2 + 0x3C) = sub_7877E0(a2);
-            goto LABEL_31;
-          case 0x32D0:
-            sub_79E380(v2 + 0x10);
-            v12 = sub_78EB40(a2);
-            if ( v12 > 0 )
+          case 0x32CA: /*0x79f260*/
+            engine->activationBranchLevel = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f26e*/
+            goto LABEL_33; /*0x79f271*/
+          case 0x32CB: /*0x79f260*/
+            engine->frondType = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f27d*/
+            goto LABEL_33; /*0x79f280*/
+          case 0x32CC: /*0x79f260*/
+            engine->bladeCount = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f28c*/
+            goto LABEL_33; /*0x79f28f*/
+          case 0x32CD: /*0x79f260*/
+            v4 = OB_CTreeFileAccess_ParseSplineProfileObject_010201A0(fileAccess); /*0x79f296*/
+            OB_CFrondEngine_SetProfile_010201A0(engine, v4); /*0x79f29e*/
+            goto LABEL_33; /*0x79f2a3*/
+          case 0x32CE: /*0x79f260*/
+            engine->profileSegmentCount = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f2af*/
+            goto LABEL_33; /*0x79f2b2*/
+          case 0x32CF: /*0x79f260*/
+            engine->enabledFlag = OB_CTreeFileAccess_ParseBool_010201A0(fileAccess); /*0x79f2be*/
+            goto LABEL_33; /*0x79f2c1*/
+          case 0x32D0: /*0x79f260*/
+            OB_stVector_SFrondTexture_Clear_010201A0(&engine->frondTextureVectorWrapper);// Token 13008 clears the existing CFrondEngine+0x40 SFrondTexture vector before reading the declared texture count. /*0x79f314*/
+            textureIndex = 0; /*0x79f320*/
+            textureCount = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f324*/
+            if ( textureCount > 0 ) /*0x79f328*/
             {
-              v5 = flt_A3D65C;
-              v26 = 0xF;
-              v27 = v5;
-              v25 = 0;
-              v24[4] = 0;
-              v28 = 1.0;
-              v29 = 0.0;
-              v30 = 0.0;
-              v31 = 0;
-              sub_78EB40(a2);
-              v6 = sub_78EB40(a2);
-              while ( 1 )
+              do /*0x79f503*/
               {
-                switch ( v6 )
-                {
-                  case 0x36B2:
-                    v13 = v10;
-                    sub_78EC20(a2, v7, (int)v10);
-                    sub_789120((int)&v14, v10[0], v10[1], v10[2], v10[3], v10[4], v10[5], v10[6]);
-                    LOBYTE(v31) = 1;
-                    sub_414420((int)v24, &v14, 0, 0xFFFFFFFF);
-                    LOBYTE(v31) = 0;
-                    if ( v17 >= 0x10 )
-                      FormHeapFree(v15);
-                    v17 = 0xF;
-                    v16 = 0;
-                    LOBYTE(v15) = 0;
-                    v8 = (_DWORD *)sub_789430(v24, (int)v18);
-                    LOBYTE(v31) = 2;
-                    sub_414420((int)v24, v8, 0, 0xFFFFFFFF);
-                    LOBYTE(v31) = 0;
-                    if ( v21 >= 0x10 )
-                      FormHeapFree(v19);
-                    v21 = 0xF;
-                    v20 = 0;
-                    LOBYTE(v19) = 0;
-                    break;
-                  case 0x36B3:
-                    v27 = sub_78EB10(a2);
-                    break;
-                  case 0x36B4:
-                    v28 = sub_78EB10(a2);
-                    break;
-                  case 0x36B5:
-                    v29 = sub_78EB10(a2);
-                    break;
-                  case 0x36B6:
-                    v30 = sub_78EB10(a2);
-                    break;
-                  default:
-                    JUMPOUT(0x79F568);
+                defaultAspectRatio = kHeadBodyNormalMatchRadius;// Oblivion constructs the temporary SFrondTexture with defaults aspectRatio=0.5, sizeScale=1.0, minAngleOffset=0.0, maxAngleOffset=0.0; RT 4.1 FrondEngine.h independently corroborates these defaults. /*0x79f330*/
+                textureRecord.filename.capacity = 0xF;// Initializes the embedded OB_stString28 filename: capacity 15, size 0, inline byte 0. The executable fixes the 28-byte string layout; RT 4.1 only corroborates the member identity. /*0x79f336*/
+                textureRecord.aspectRatio = defaultAspectRatio; /*0x79f341*/
+                textureRecord.filename.size = 0; /*0x79f348*/
+                textureRecord.filename.storage.inlineData[0] = 0; /*0x79f351*/
+                textureRecord.sizeScale = 1.0; /*0x79f358*/
+                textureRecord.minAngleOffset = 0.0; /*0x79f361*/
+                textureRecord.maxAngleOffset = 0.0; /*0x79f368*/
+                v20 = 0; /*0x79f371*/
+                OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f378*/
+                textureToken = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f37f*/
+                do /*0x79f4a5*/
+                {                               // Nested frond-texture tokens: 14002 filename, 14003 aspect ratio, 14004 size scale, 14005 minimum angle offset, 14006 maximum angle offset; 14001 ends the record.
+                  switch ( textureToken ) /*0x79f39f*/
+                  {
+                    case 0x36B2: /*0x79f39f*/
+                      v14 = &v11; /*0x79f3ab*/
+                      OB_CTreeFileAccess_ReadString_010201A0(fileAccess, v8, &v11); /*0x79f3b2*/
+                      OB_stString28_CopyCtorConsumeTemporary_010201A0(&source, v11); /*0x79f3bb*/
+                      LOBYTE(v20) = 1; /*0x79f3cf*/
+                      OB_stString28_AssignSubstring_010201A0(&textureRecord.filename, &source, 0, 0xFFFFFFFF); /*0x79f3d7*/
+                      LOBYTE(v20) = 0; /*0x79f3e0*/
+                      if ( source.capacity >= 0x10 ) /*0x79f3e7*/
+                        FormHeapFree((unsigned int)source.storage.heapData); /*0x79f3ee*/
+                      source.capacity = 0xF; /*0x79f402*/
+                      source.size = 0; /*0x79f40a*/
+                      source.storage.inlineData[0] = 0; /*0x79f40e*/
+                      v9 = OB_IdvNoPath_010201A0(&textureRecord.filename, &v16); /*0x79f412*/
+                      LOBYTE(v20) = 2; /*0x79f422*/
+                      OB_stString28_AssignSubstring_010201A0(&textureRecord.filename, v9, 0, 0xFFFFFFFF); /*0x79f42a*/
+                      LOBYTE(v20) = 0; /*0x79f433*/
+                      if ( v16.capacity >= 0x10 ) /*0x79f43a*/
+                        FormHeapFree((unsigned int)v16.storage.heapData); /*0x79f441*/
+                      v16.capacity = 0xF; /*0x79f449*/
+                      v16.size = 0; /*0x79f451*/
+                      v16.storage.inlineData[0] = 0; /*0x79f455*/
+                      break; /*0x79f459*/
+                    case 0x36B3: /*0x79f39f*/
+                      textureRecord.aspectRatio = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f462*/
+                      break; /*0x79f469*/
+                    case 0x36B4: /*0x79f39f*/
+                      textureRecord.sizeScale = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f472*/
+                      break; /*0x79f479*/
+                    case 0x36B5: /*0x79f39f*/
+                      textureRecord.minAngleOffset = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f482*/
+                      break; /*0x79f489*/
+                    case 0x36B6: /*0x79f39f*/
+                      textureRecord.maxAngleOffset = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f492*/
+                      break; /*0x79f492*/
+                    default:
+                      JUMPOUT(0x79F568); /*0x79f568*/
+                  }
+                  textureToken = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f49b*/
                 }
-                v6 = sub_78EB40(a2);
-                if ( v6 == 0x36B1 )
-                  sub_79F040(v11 + 0x10, (int)v24);
+                while ( textureToken != 0x36B1 ); /*0x79f4a5*/
+                OB_stVector_SFrondTexture_PushBack_010201A0( /*0x79f4ba*/
+                  &engineForTextures->frondTextureVectorWrapper,
+                  &textureRecord);              // Appends the completed temporary SFrondTexture to CFrondEngine+0x40 via the decoded deep-copying vector push_back specialization.
+                v20 = 0xFFFFFFFF; /*0x79f4c6*/
+                if ( textureRecord.filename.capacity >= 0x10 ) /*0x79f4d1*/
+                  FormHeapFree((unsigned int)textureRecord.filename.storage.heapData); /*0x79f4db*/
+                ++textureIndex; /*0x79f4e3*/
+                textureRecord.filename.capacity = 0xF; /*0x79f4ea*/
+                textureRecord.filename.size = 0; /*0x79f4f5*/
+                textureRecord.filename.storage.inlineData[0] = 0; /*0x79f4fc*/
               }
+              while ( textureIndex < textureCount ); /*0x79f503*/
             }
-            v2 = v11;
-            goto LABEL_31;
-          case 0x32D1:
-            v2[0x14] = sub_78EB40(a2);
-            goto LABEL_31;
-          case 0x32D2:
-            *((float *)v2 + 0x15) = sub_78EB10(a2);
-            goto LABEL_31;
-          case 0x32D3:
-            *((float *)v2 + 0x16) = sub_78EB10(a2);
-            goto LABEL_31;
-          case 0x32D4:
-            *((float *)v2 + 0x17) = sub_78EB10(a2);
-            goto LABEL_31;
-          case 0x32D5:
-            *((float *)v2 + 0x18) = sub_78EB10(a2);
-            goto LABEL_31;
+            engine = engineForTextures; /*0x79f509*/
+            goto LABEL_33; /*0x79f509*/
+          case 0x32D1: /*0x79f260*/
+            engine->frondLodCount = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f2cd*/
+            goto LABEL_33; /*0x79f2d0*/
+          case 0x32D2: /*0x79f260*/
+            engine->maxSurfaceAreaPercent = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f2dc*/
+            goto LABEL_33; /*0x79f2df*/
+          case 0x32D3: /*0x79f260*/
+            engine->minSurfaceAreaPercent = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f2eb*/
+            goto LABEL_33; /*0x79f2ee*/
+          case 0x32D4: /*0x79f260*/
+            engine->reductionFuzziness = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f2fa*/
+            goto LABEL_33; /*0x79f2fd*/
+          case 0x32D5: /*0x79f260*/
+            engine->largeFrondRetentionPercent = OB_CTreeFileAccess_ReadFloat_010201A0(fileAccess); /*0x79f309*/
+            goto LABEL_33; /*0x79f30c*/
           default:
-            goto LABEL_36;
+            goto LABEL_38;
         }
       }
-      v2[0x19] = sub_78EB40(a2);
+      engine->minLengthSegments = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f550*/
     }
-LABEL_31:
-    result = sub_78EB40(a2);
+LABEL_33:
+    Dword_010201A0 = OB_CTreeFileAccess_ReadDword_010201A0(fileAccess); /*0x79f50d*/
   }
-  while ( result != 0x32C9 );
-  return result;
+  while ( Dword_010201A0 != 0x32C9 ); /*0x79f519*/
+  return Dword_010201A0; /*0x79f51f*/
 }

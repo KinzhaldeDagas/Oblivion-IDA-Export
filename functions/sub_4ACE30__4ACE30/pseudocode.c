@@ -1,4 +1,14 @@
-double __stdcall sub_4ACE30(float a1, float a2, float a3, float a4, float a5, float a6, float a7, float a8, float a9)
+// Verified (Oblivion): generic animation helper interpolates from zero through the configured full value to the persistent value across fade-in/full/fade-out intervals; when finished it applies the fade-out interpolation.
+double __stdcall TESEffectShader_AnimateValue(
+        float currentValue,
+        float deltaSeconds,
+        float elapsedSeconds,
+        bool bFinished,
+        float fadeInTime,
+        float fadeOutTime,
+        float fullTime,
+        float fullValue,
+        float persistentValue)
 {
   double v9; // st7
   double v10; // st6
@@ -8,71 +18,71 @@ double __stdcall sub_4ACE30(float a1, float a2, float a3, float a4, float a5, fl
   bool v14; // c0
   double v15; // st6
   double v17; // st6
-  float v20; // [esp+18h] [ebp+10h]
-  float v21; // [esp+18h] [ebp+10h]
-  float v22; // [esp+18h] [ebp+10h]
-  float v23; // [esp+18h] [ebp+10h]
-  float v24; // [esp+18h] [ebp+10h]
-  float v25; // [esp+18h] [ebp+10h]
-  float v26; // [esp+18h] [ebp+10h]
-  float v27; // [esp+18h] [ebp+10h]
-  float v28; // [esp+18h] [ebp+10h]
+  float bFinishedb; // [esp+18h] [ebp+10h]
+  float bFinishedc; // [esp+18h] [ebp+10h]
+  float bFinisheda; // [esp+18h] [ebp+10h]
+  float bFinishedd; // [esp+18h] [ebp+10h]
+  float bFinishede; // [esp+18h] [ebp+10h]
+  float bFinishedf; // [esp+18h] [ebp+10h]
+  float bFinishedg; // [esp+18h] [ebp+10h]
+  float bFinishedh; // [esp+18h] [ebp+10h]
+  float bFinishedi; // [esp+18h] [ebp+10h]
 
-  v9 = a7;
-  v10 = a5;
-  v11 = a3;
-  if ( LOBYTE(a4) && v10 + v9 <= v11 )
+  v9 = fullTime; /*0x4ace35*/
+  v10 = fadeInTime; /*0x4ace39*/
+  v11 = elapsedSeconds; /*0x4ace3d*/
+  if ( bFinished && v10 + v9 <= v11 ) /*0x4ace52*/
   {
-    if ( a6 <= 0.0 || (v12 = a8 - a9, 0.0 == v12) )
+    if ( fadeOutTime <= 0.0 || (v12 = fullValue - persistentValue, 0.0 == v12) ) /*0x4ace86*/
     {
-      v13 = 0.0;
-      v22 = flt_A41AC8;
+      v13 = 0.0; /*0x4acec1*/
+      bFinisheda = flt_A41AC8; /*0x4acec3*/
     }
     else
     {
-      v20 = v12;
-      v21 = fabs(v20);
-      v22 = 1.0 / a6 * v21;
-      v13 = 0.0;
-      if ( flt_A41AC8 > (double)v22 )
-        v22 = flt_A41AC8;
+      bFinishedb = v12; /*0x4ace88*/
+      bFinishedc = fabs(bFinishedb); /*0x4ace92*/
+      bFinisheda = 1.0 / fadeOutTime * bFinishedc; /*0x4acea2*/
+      v13 = 0.0; /*0x4acea6*/
+      if ( flt_A41AC8 > (double)bFinisheda ) /*0x4aceb1*/
+        bFinisheda = flt_A41AC8; /*0x4aceb7*/
     }
-    v23 = v22 * a2;
-    v24 = a1 - v23;
-    v14 = v24 < v13;
-    v15 = v24;
-    if ( v14 )
-      return (float)0.0;
-    return (float)v15;
+    bFinishedd = bFinisheda * deltaSeconds; /*0x4aced7*/
+    bFinishede = currentValue - bFinishedd; /*0x4acedf*/
+    v14 = bFinishede < v13; /*0x4acee7*/
+    v15 = bFinishede; /*0x4aceeb*/
+    if ( v14 ) /*0x4acef0*/
+      return (float)0.0; /*0x4acefc*/
+    return (float)v15; /*0x4acef0*/
   }
-  if ( v11 >= v10 )
+  if ( v11 >= v10 ) /*0x4acf13*/
   {
-    v17 = v11 - v10;
-    if ( v17 >= v9 )
+    v17 = v11 - v10; /*0x4acf4b*/
+    if ( v17 >= v9 ) /*0x4acf54*/
     {
-      if ( a6 <= v17 - v9 )
+      if ( fadeOutTime <= v17 - v9 ) /*0x4acf78*/
       {
-        return a9;
+        return persistentValue; /*0x4acfdb*/
       }
       else
       {
-        v26 = a8 - a9;
-        v27 = fabs(v26);
-        v28 = a1 - a2 / a6 * v27;
-        return (float)Min_Float(a9, v28);
+        bFinishedg = fullValue - persistentValue; /*0x4acf8f*/
+        bFinishedh = fabs(bFinishedg); /*0x4acf99*/
+        bFinishedi = currentValue - deltaSeconds / fadeOutTime * bFinishedh; /*0x4acfaf*/
+        return (float)Min_Float(persistentValue, bFinishedi); /*0x4acfca*/
       }
     }
     else
     {
-      return a8;
+      return fullValue; /*0x4acf62*/
     }
   }
   else
   {
-    v25 = a2 / v10 * a8 + a1;
-    v15 = v25;
-    if ( v25 <= (double)a8 )
-      return (float)v15;
-    return a8;
+    bFinishedf = deltaSeconds / v10 * fullValue + currentValue; /*0x4acf2d*/
+    v15 = bFinishedf; /*0x4acf31*/
+    if ( bFinishedf <= (double)fullValue ) /*0x4acf3c*/
+      return (float)v15; /*0x4acf09*/
+    return fullValue; /*0x4acf44*/
   }
 }

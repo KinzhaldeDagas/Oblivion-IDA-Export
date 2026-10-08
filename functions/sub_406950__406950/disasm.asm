@@ -1,4 +1,4 @@
-0x406950: push    0FFFFFFFFh
+0x406950: push    0FFFFFFFFh; Retail world-scene construction: creates the world SceneGraph/ShadowSceneNode state consumed by NiRenderer_Render and ShadowPass.
 0x406952: push    offset SEH_406950
 0x406957: mov     eax, large fs:0
 0x40695D: push    eax
@@ -23,11 +23,11 @@
 0x406996: push    0
 0x406998: push    offset aWorld; "World"
 0x40699D: mov     ecx, eax; this
-0x40699F: call    ??0SceneGraph@@QAE@XZ; SceneGraph::SceneGraph(void)
+0x40699F: call    ??0SceneGraph@@QAE@XZ; MoonSugarEffect decode: SceneGraph constructor creates camera at +0xDC and cullingProcess at +0xE4; world scenegraph uses these in NiRenderer_Render.
 0x4069A4: mov     esi, eax
 0x4069A6: jmp     short loc_4069AA
 0x4069A8: xor     esi, esi
-0x4069AA: mov     eax, g_worldScenegraph
+0x4069AA: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x4069AF: cmp     eax, esi
 0x4069B1: mov     ebx, ds:InterlockedDecrement
 0x4069B7: mov     [esp+34h+var_4], 0FFFFFFFFh
@@ -48,7 +48,7 @@
 0x4069DB: mov     ecx, edi
 0x4069DD: call    edx
 0x4069DF: test    esi, esi
-0x4069E1: mov     g_worldScenegraph, esi
+0x4069E1: mov     g_WorldSceneReceiverRoot, esi; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x4069E7: jz      short loc_4069F3
 0x4069E9: add     esi, 4
 0x4069EC: push    esi; lpAddend
@@ -61,12 +61,12 @@
 0x406A06: mov     [esp+34h+var_4], 1
 0x406A0E: jz      short loc_406A1B
 0x406A10: mov     ecx, eax; this
-0x406A12: call    ??0ShadowSceneNode@@QAE@XZ; ShadowSceneNode::ShadowSceneNode(void)
+0x406A12: call    ??0ShadowSceneNode@@QAE@XZ; ShadowSceneNode constructor. Initializes full list (+0xE4..+0xF0), active list (+0xF4..+0x100), iterator/partition anchors, and persistent lights at +0x110/+0x114.
 0x406A17: mov     ebp, eax
 0x406A19: jmp     short loc_406A1D
 0x406A1B: xor     ebp, ebp
-0x406A1D: mov     ecx, dword_B350D8
-0x406A23: mov     eax, dword_B43104
+0x406A1D: mov     ecx, ds:0B350D8h
+0x406A23: mov     eax, dword ptr unk_B43104
 0x406A28: cmp     eax, ecx
 0x406A2A: mov     [esp+34h+var_4], 0FFFFFFFFh
 0x406A32: mov     edi, ecx
@@ -87,7 +87,7 @@
 0x406A50: mov     ecx, esi
 0x406A52: call    edx
 0x406A54: test    edi, edi
-0x406A56: mov     dword_B43104, edi
+0x406A56: mov     dword ptr unk_B43104, edi
 0x406A5C: jz      short loc_406A68
 0x406A5E: add     edi, 4
 0x406A61: push    edi; lpAddend
@@ -95,11 +95,11 @@
 0x406A68: xor     eax, eax
 0x406A6A: lea     ebx, [ebx+0]
 0x406A70: mov     cl, byte ptr ds:dataShaderPath[eax]; "data\\shaders\\"
-0x406A76: mov     FullPath[eax], cl
+0x406A76: mov     (OB_RendererGlobalState_010201A0.pad_0B3+1Ch)[eax], cl
 0x406A7C: add     eax, 1
 0x406A7F: test    cl, cl
 0x406A81: jnz     short loc_406A70
-0x406A83: call    sub_7BA0F0
+0x406A83: call    sub_7BA0F0; MoonSugarEffect decode: shader system init prewarms shader definitions 1..27, then constructs imageSpaceShaderList if ImageSpaceEffectEnabled.
 0x406A88: push    ebp
 0x406A89: push    0
 0x406A8B: mov     byte ptr [ebp+11Ch], 0
@@ -114,8 +114,8 @@
 0x406AB3: add     esp, 10h
 0x406AB6: neg     cl
 0x406AB8: mov     edi, 2
-0x406ABD: mov     byte_B42EA7, 0
-0x406AC4: mov     byte_B42E85, 0
+0x406ABD: mov     OB_RendererGlobalState_010201A0.pad_00D+1, 0
+0x406AC4: mov     OB_ShaderPassControl_010201A0.unk_01, 0; [Verified] World/display initialization clears OB_ShaderPassControl+1 before composing the independent BSShaderFeatureMask and shadow-caster category mask.
 0x406ACB: sbb     ecx, ecx
 0x406ACD: and     ecx, 0FFFFFFF8h
 0x406AD0: sub     al, 1
@@ -135,19 +135,19 @@
 0x406AF1: cmp     byte_B06CCC, 1
 0x406AF8: setz    al
 0x406AFB: or      ecx, eax
-0x406AFD: or      ecx, 10h
+0x406AFD: or      ecx, 10h; Native world/display initialization unconditionally contributes BSShaderFeatureMask shadow-map bit 0x10.
 0x406B00: cmp     byte_B06CBC, 0
 0x406B07: jz      short loc_406B18
-0x406B09: cmp     ShaderPackage, edi
+0x406B09: cmp     dword ptr OB_RendererGlobalState_010201A0.shaderPackageVersion_le, edi
 0x406B0F: jl      short loc_406B18
 0x406B11: mov     eax, 20h ; ' '
 0x406B16: jmp     short loc_406B1A
 0x406B18: xor     eax, eax
-0x406B1A: or      eax, ecx
-0x406B1C: mov     cl, DoStaticAndArchShadows
-0x406B22: mov     edx, dword_B43104
-0x406B28: mov     dword_B42F40, eax
-0x406B2D: mov     al, byte_B06CEC
+0x406B1A: or      eax, ecx; Display initialization conditionally contributes native canopy-shadow category bit 0x20.
+0x406B1C: mov     cl, g_bDoStaticAndArchShadowsSetting; Read bDoStaticAndArchShadows:Display for startup category-mask composition.
+0x406B22: mov     edx, dword ptr unk_B43104
+0x406B28: mov     dword ptr OB_RendererGlobalState_010201A0.pad_00D+9Ah, eax; Publish the complete BSShaderFeatureMask assembled from display settings plus native shadow-map bit 0x10 and the conditional canopy bit 0x20.
+0x406B2D: mov     al, g_bDoActorShadowsSetting
 0x406B32: neg     al
 0x406B34: push    edx
 0x406B35: sbb     eax, eax
@@ -156,14 +156,14 @@
 0x406B3C: sbb     ecx, ecx
 0x406B3E: and     ecx, edi
 0x406B40: or      ecx, eax
-0x406B42: mov     dword_B2C678, ecx
-0x406B48: mov     ecx, g_textureManager
-0x406B4E: call    sub_7C2450
+0x406B42: mov     g_ShadowCasterCategoryMask, ecx; Publish g_ShadowCasterCategoryMask = (bDoStaticAndArchShadows ? 0x02 : 0) | (bDoActorShadows ? 0x08 : 0). This is separate from the master shadow-map feature bit.
+0x406B48: mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4
+0x406B4E: call    sub_7C2450; MoonSugarEffect decode: texture-manager render-target prewarm/release. Allocates/retrieves common HDR/image-space/default surfaces then returns them to the manager cache with sub_7C1EE0.
 0x406B53: call    sub_4814C0
 0x406B58: fldz
-0x406B5A: mov     ecx, g_worldScenegraph
-0x406B60: fstp    flt_B44EE4
-0x406B66: mov     dword_B42EB4, offset sub_4E0CF0
+0x406B5A: mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
+0x406B60: fstp    flt_B44EE4; ShadowLight native caster depth-origin/override parameter. Zero selects the normal projected view-Z path; a positive value selects SLS2056/SLS2062 and supplies the alternate origin/range setup.
+0x406B66: mov     dword ptr OB_RendererGlobalState_010201A0.pad_00D+0Eh, offset ClassifyShadowCasterCategory; Classify owner/base form into retail shadow category 0..6: unresolved, architecture, furniture, actors, items, misc, other.
 0x406B70: mov     eax, [ecx]
 0x406B72: mov     edx, [eax+84h]
 0x406B78: push    0
@@ -191,7 +191,7 @@
 0x406BBB: mov     [esp+38h+a2], esi
 0x406BBF: mov     [esp+38h+var_4], 0FFFFFFFFh
 0x406BC7: mov     [esi+18h], ax
-0x406BCB: call    sub_405680
+0x406BCB: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x406BD0: push    1Ch; Size
 0x406BD2: call    FormHeapAlloc
 0x406BD7: mov     edi, eax
@@ -213,7 +213,7 @@
 0x406C0D: push    ebx; a2
 0x406C0E: mov     ecx, ebp; this
 0x406C10: mov     [esp+38h+var_4], edi
-0x406C14: call    sub_405680
+0x406C14: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x406C19: push    1Ch; Size
 0x406C1B: call    FormHeapAlloc
 0x406C20: mov     esi, eax
@@ -228,7 +228,7 @@
 0x406C42: mov     word ptr [esi+18h], 0
 0x406C48: jmp     short loc_406C4C
 0x406C4A: xor     esi, esi
-0x406C4C: mov     eax, dword_B333E0
+0x406C4C: mov     eax, dword ptr unk_B333E0
 0x406C51: cmp     eax, esi
 0x406C53: mov     [esp+34h+var_4], edi
 0x406C57: jz      short loc_406C95
@@ -249,17 +249,17 @@
 0x406C79: call    eax
 0x406C7B: test    esi, esi
 0x406C7D: mov     eax, esi
-0x406C7F: mov     dword_B333E0, eax
+0x406C7F: mov     dword ptr unk_B333E0, eax
 0x406C84: jz      short loc_406C95
 0x406C86: add     esi, 4
 0x406C89: push    esi; lpAddend
 0x406C8A: call    ds:InterlockedIncrement
-0x406C90: mov     eax, dword_B333E0
+0x406C90: mov     eax, dword ptr unk_B333E0
 0x406C95: and     word ptr [eax+18h], 0FFFEh
-0x406C9B: mov     ecx, dword_B333E0
+0x406C9B: mov     ecx, dword ptr unk_B333E0
 0x406CA1: push    ecx; a2
 0x406CA2: mov     ecx, ebp; this
-0x406CA4: call    sub_405680
+0x406CA4: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x406CA9: push    34h ; '4'; Size
 0x406CAB: call    FormHeapAlloc
 0x406CB0: add     esp, 4
@@ -268,11 +268,11 @@
 0x406CB9: mov     [esp+34h+var_4], 5
 0x406CC1: jz      short loc_406CCE
 0x406CC3: mov     ecx, eax
-0x406CC5: call    NiFogProperty_constr
-0x406CCA: mov     esi, eax
+0x406CC5: call    NiFogProperty_constr; Fog decode: constructs full BSFogProperty. Base NiFogProperty fields use default color; extension adds fogStart +0x2C and fogEnd +0x30.
+0x406CCA: mov     esi, eax; Fog decode: scene setup constructs the global active BSFogProperty for B333E4 via NiFogProperty_constr. This is the active world fog object, not the plain startup NiFogProperty default.
 0x406CCC: jmp     short loc_406CD0
 0x406CCE: xor     esi, esi
-0x406CD0: mov     eax, dword_B333E4
+0x406CD0: mov     eax, dword ptr unk_B333E4
 0x406CD5: cmp     eax, esi
 0x406CD7: mov     [esp+34h+var_4], 0FFFFFFFFh
 0x406CDF: jz      short loc_406D1D
@@ -293,22 +293,22 @@
 0x406D01: call    eax
 0x406D03: test    esi, esi
 0x406D05: mov     eax, esi
-0x406D07: mov     dword_B333E4, eax
+0x406D07: mov     dword ptr unk_B333E4, eax; Fog decode: stores the active global BSFogProperty pointer into B333E4.
 0x406D0C: jz      short loc_406D1D
 0x406D0E: add     esi, 4
 0x406D11: push    esi; lpAddend
 0x406D12: call    ds:InterlockedIncrement
-0x406D18: mov     eax, dword_B333E4
-0x406D1D: or      word ptr [eax+18h], 1
+0x406D18: mov     eax, dword ptr unk_B333E4
+0x406D1D: or      word ptr [eax+18h], 1; Fog decode: enables the B333E4 fog property by setting flags bit 0.
 0x406D22: fld1
 0x406D24: push    ecx
 0x406D25: fstp    [esp+38h+a6]; float
-0x406D28: mov     ecx, dword_B333E4
-0x406D2E: call    sub_7C8270
-0x406D33: mov     ecx, dword_B333E4
+0x406D28: mov     ecx, dword ptr unk_B333E4
+0x406D2E: call    sub_7C8270; Fog decode: initializes B333E4 BSFogProperty default fogStart/fogEnd through 0x7C8270.
+0x406D33: mov     ecx, dword ptr unk_B333E4
 0x406D39: push    ecx; a2
 0x406D3A: mov     ecx, ebp; this
-0x406D3C: call    sub_405680
+0x406D3C: call    sub_405680; Fog decode: attaches B333E4 to the root/sky scene node. Property propagation puts it in NiPropertyState slot type 1 / +0x0C for render consumers.
 0x406D41: push    0DCh ; 'Ü'; Size
 0x406D46: call    FormHeapAlloc
 0x406D4B: add     esp, 4
@@ -322,7 +322,7 @@
 0x406D67: mov     esi, eax
 0x406D69: jmp     short loc_406D6D
 0x406D6B: xor     esi, esi
-0x406D6D: mov     ecx, dword_B333D8
+0x406D6D: mov     ecx, dword ptr root
 0x406D73: cmp     ecx, esi
 0x406D75: mov     [esp+34h+var_4], 0FFFFFFFFh
 0x406D7D: jz      short loc_406DBD
@@ -343,16 +343,16 @@
 0x406D9F: call    eax
 0x406DA1: test    esi, esi
 0x406DA3: mov     ecx, esi
-0x406DA5: mov     dword_B333D8, ecx
+0x406DA5: mov     dword ptr root, ecx
 0x406DAB: jz      short loc_406DBD
 0x406DAD: add     esi, 4
 0x406DB0: push    esi; lpAddend
 0x406DB1: call    ds:InterlockedIncrement
-0x406DB7: mov     ecx, dword_B333D8
+0x406DB7: mov     ecx, dword ptr root
 0x406DBD: push    offset off_A30044; Src
 0x406DC2: call    NiObjectNET_SetName
 0x406DC7: mov     edx, [ebp+0]
-0x406DCA: mov     eax, dword_B333D8
+0x406DCA: mov     eax, dword ptr root
 0x406DCF: mov     edx, [edx+84h]
 0x406DD5: push    0
 0x406DD7: push    eax
@@ -371,7 +371,7 @@
 0x406E02: mov     esi, eax
 0x406E04: jmp     short loc_406E08
 0x406E06: xor     esi, esi
-0x406E08: mov     ecx, dword_B333DC
+0x406E08: mov     ecx, dword ptr unk_B333DC
 0x406E0E: cmp     ecx, esi
 0x406E10: mov     [esp+34h+var_4], 0FFFFFFFFh
 0x406E18: jz      short loc_406E58
@@ -392,27 +392,27 @@
 0x406E3A: call    edx
 0x406E3C: test    esi, esi
 0x406E3E: mov     ecx, esi
-0x406E40: mov     dword_B333DC, ecx
+0x406E40: mov     dword ptr unk_B333DC, ecx
 0x406E46: jz      short loc_406E58
 0x406E48: add     esi, 4
 0x406E4B: push    esi; lpAddend
 0x406E4C: call    ds:InterlockedIncrement
-0x406E52: mov     ecx, dword_B333DC
+0x406E52: mov     ecx, dword ptr unk_B333DC
 0x406E58: push    offset aWeather; "Weather"
 0x406E5D: call    NiObjectNET_SetName
-0x406E62: mov     ecx, dword_B333DC; this
+0x406E62: mov     ecx, dword ptr unk_B333DC; this
 0x406E68: push    ebx; a2
-0x406E69: call    sub_405680
-0x406E6E: mov     eax, dword_B333E0
-0x406E73: mov     ecx, dword_B333DC; this
+0x406E69: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x406E6E: mov     eax, dword ptr unk_B333E0
+0x406E73: mov     ecx, dword ptr unk_B333DC; this
 0x406E79: push    eax; a2
-0x406E7A: call    sub_405680
+0x406E7A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x406E7F: mov     ecx, [esp+34h+a2]
 0x406E83: push    ecx; a2
-0x406E84: mov     ecx, dword_B333DC; this
-0x406E8A: call    sub_405680
+0x406E84: mov     ecx, dword ptr unk_B333DC; this
+0x406E8A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x406E8F: mov     edx, [ebp+0]
-0x406E92: mov     eax, dword_B333DC
+0x406E92: mov     eax, dword ptr unk_B333DC
 0x406E97: mov     edx, [edx+84h]
 0x406E9D: push    0
 0x406E9F: push    eax
@@ -435,9 +435,9 @@
 0x406ED9: push    offset aLodroot; "LODRoot"
 0x406EDE: mov     ecx, eax
 0x406EE0: mov     [esp+38h+var_4], edi
-0x406EE4: mov     LODRoot, eax
+0x406EE4: mov     ds:0B333A8h, eax
 0x406EE9: call    NiObjectNET_SetName
-0x406EEE: mov     ecx, LODRoot
+0x406EEE: mov     ecx, ds:0B333A8h
 0x406EF4: mov     eax, [ebp+0]
 0x406EF7: mov     edx, [eax+84h]
 0x406EFD: push    0
@@ -461,7 +461,7 @@
 0x406F35: mov     ecx, esi
 0x406F37: mov     [esp+38h+var_4], edi
 0x406F3B: call    NiObjectNET_SetName
-0x406F40: mov     ecx, LODRoot
+0x406F40: mov     ecx, ds:0B333A8h
 0x406F46: mov     eax, [ecx]
 0x406F48: mov     edx, [eax+84h]
 0x406F4E: push    0
@@ -495,7 +495,7 @@
 0x406FAD: mov     ecx, esi
 0x406FAF: mov     [esp+38h+var_4], edi
 0x406FB3: call    NiObjectNET_SetName
-0x406FB8: mov     ecx, LODRoot
+0x406FB8: mov     ecx, ds:0B333A8h
 0x406FBE: mov     eax, [ecx]
 0x406FC0: mov     edx, [eax+84h]
 0x406FC6: push    0
@@ -526,7 +526,7 @@
 0x407015: mov     ecx, esi
 0x407017: call    edx
 0x407019: push    0DCh ; 'Ü'; Size
-0x40701E: mov     LODTree, edi
+0x40701E: mov     ds:0B42D64h, edi
 0x407024: call    FormHeapAlloc
 0x407029: add     esp, 4
 0x40702C: mov     [esp+34h+var_1C], eax
@@ -541,9 +541,9 @@
 0x407049: push    offset aObjectlodroot; "ObjectLODRoot"
 0x40704E: mov     ecx, eax
 0x407050: mov     [esp+38h+var_4], ebx
-0x407054: mov     ObjectLODRoot, eax
+0x407054: mov     ds:0B333ACh, eax
 0x407059: call    NiObjectNET_SetName
-0x40705E: mov     ecx, ObjectLODRoot
+0x40705E: mov     ecx, ds:0B333ACh
 0x407064: mov     eax, [ebp+0]
 0x407067: mov     edx, [eax+84h]
 0x40706D: push    0
@@ -565,16 +565,16 @@
 0x40709E: push    offset aMagicprojectil; "MagicProjectileRoot"
 0x4070A3: mov     ecx, eax
 0x4070A5: mov     [esp+38h+var_4], ebx
-0x4070A9: mov     MagicProjectileRoot, eax
+0x4070A9: mov     ds:0B333A4h, eax
 0x4070AE: call    NiObjectNET_SetName
-0x4070B3: mov     ecx, MagicProjectileRoot
+0x4070B3: mov     ecx, ds:0B333A4h
 0x4070B9: mov     eax, [ebp+0]
 0x4070BC: mov     edx, [eax+84h]
 0x4070C2: push    0
 0x4070C4: push    ecx
 0x4070C5: mov     ecx, ebp
 0x4070C7: call    edx
-0x4070C9: mov     eax, g_worldScenegraph
+0x4070C9: mov     eax, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x4070CE: cmp     word ptr [eax+0B6h], 0
 0x4070D6: ja      short loc_4070DC
 0x4070D8: xor     eax, eax
@@ -592,21 +592,21 @@
 0x407103: mov     ecx, [esp+34h+var_10]
 0x407107: mov     [eax+58h], edx
 0x40710A: mov     [eax+5Ch], ecx
-0x40710D: mov     ecx, g_worldScenegraph; this
-0x407113: call    NiAVObject_InitializePropertyState
-0x407118: mov     ecx, g_worldScenegraph
+0x40710D: mov     ecx, g_WorldSceneReceiverRoot; this
+0x407113: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
+0x407118: mov     ecx, g_WorldSceneReceiverRoot; Verified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.
 0x40711E: call    NiNode_UpdateDynamicEffectState
 0x407123: fldz
 0x407125: push    1; a3
 0x407127: push    ecx
-0x407128: mov     ecx, g_worldScenegraph; this
+0x407128: mov     ecx, g_WorldSceneReceiverRoot; this
 0x40712E: fstp    [esp+3Ch+a5]; a2
-0x407131: call    NiAVObject_UpdateNiAVObject
-0x407136: cmp     ScreenElementsRoot?, 0
+0x407131: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
+0x407136: cmp     dword ptr ds:0B333ECh, 0
 0x40713D: mov     dl, byte_B06DC4
-0x407143: mov     byte_B33396, dl
+0x407143: mov     byte ptr unk_B33396, dl
 0x407149: jnz     loc_4073B8
-0x40714F: cmp     ImageSpaceEffectEnabled, 0
+0x40714F: cmp     OB_RendererGlobalState_010201A0.pad_00D+98h, 0
 0x407156: jnz     loc_4073B8
 0x40715C: push    0C0h ; 'À'; Size
 0x407161: call    FormHeapAlloc
@@ -649,17 +649,17 @@
 0x4071CA: xor     eax, eax
 0x4071CC: or      edi, 0FFFFFFFFh
 0x4071CF: push    eax; a2
-0x4071D0: mov     ecx, offset ScreenElementsRoot?; this
+0x4071D0: mov     ecx, 0B333ECh; this
 0x4071D5: mov     [esp+38h+var_4], edi
 0x4071D9: call    NiSmartPointer_Set??
-0x4071DE: mov     eax, ScreenElementsRoot?
+0x4071DE: mov     eax, ds:0B333ECh
 0x4071E3: mov     ecx, [eax+0B4h]; this
 0x4071E9: push    0; Src
 0x4071EB: push    0; a3
 0x4071ED: push    4; a2
 0x4071EF: call    sub_702970
 0x4071F4: fld1
-0x4071F6: mov     ecx, ScreenElementsRoot?
+0x4071F6: mov     ecx, ds:0B333ECh
 0x4071FC: mov     ecx, [ecx+0B4h]; this
 0x407202: sub     esp, 10h
 0x407205: fst     [esp+44h+a6]; a6
@@ -668,12 +668,12 @@
 0x40720F: fst     [esp+44h+a4]; a4
 0x407213: fstp    [esp+44h+a3]; a3
 0x407216: push    0; a2
-0x407218: call    sub_702EC0
-0x40721D: mov     edx, ScreenElementsRoot?
+0x407218: call    sub_702EC0; MoonSugarEffect decode: sets 4-vertex screen polygon positions. For image-space quad arguments resolve to (-1,1), (-1,-1), (1,-1), (1,1), z=0.
+0x40721D: mov     edx, ds:0B333ECh
 0x407223: mov     ecx, [edx+0B4h]; this
 0x407229: call    sub_703050
 0x40722E: fld1
-0x407230: mov     eax, ScreenElementsRoot?
+0x407230: mov     eax, ds:0B333ECh
 0x407235: mov     ecx, [eax+0B4h]; this
 0x40723B: sub     esp, 10h
 0x40723E: fst     [esp+44h+a6]; a7
@@ -683,7 +683,7 @@
 0x40724C: fstp    [esp+44h+a3]; a4
 0x40724F: push    0; a3
 0x407251: push    0; a2
-0x407253: call    sub_702FC0
+0x407253: call    sub_702FC0; MoonSugarEffect decode: sets 4-vertex screen polygon UVs for one texture set. Image-space quad uses UV rectangle 0,0 to 1,1.
 0x407258: push    1Ch; Size
 0x40725A: call    FormHeapAlloc
 0x40725F: mov     esi, eax
@@ -699,10 +699,10 @@
 0x407287: jmp     short loc_40728B
 0x407289: xor     esi, esi
 0x40728B: and     word ptr [esi+18h], 0FFC7h
-0x407291: mov     ecx, ScreenElementsRoot?; this
+0x407291: mov     ecx, ds:0B333ECh; this
 0x407297: push    esi; a2
 0x407298: mov     [esp+38h+var_4], edi
-0x40729C: call    sub_405680
+0x40729C: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4072A1: push    5Ch ; '\'; Size
 0x4072A3: call    FormHeapAlloc
 0x4072A8: add     esp, 4
@@ -714,17 +714,17 @@
 0x4072BD: call    ??0NiMaterialProperty@@QAE@XZ; NiMaterialProperty::NiMaterialProperty(void)
 0x4072C2: jmp     short loc_4072C6
 0x4072C4: xor     eax, eax
-0x4072C6: mov     ecx, dword_B25AC4
+0x4072C6: mov     ecx, stru_B25AC4.x
 0x4072CC: mov     [eax+40h], ecx
-0x4072CF: mov     edx, dword_B25AC8
+0x4072CF: mov     edx, stru_B25AC4.y
 0x4072D5: mov     [eax+44h], edx
-0x4072D8: mov     ecx, dword_B25ACC
+0x4072D8: mov     ecx, stru_B25AC4.z
 0x4072DE: add     dword ptr [eax+54h], 1
 0x4072E2: mov     [eax+48h], ecx
-0x4072E5: mov     ecx, ScreenElementsRoot?; this
+0x4072E5: mov     ecx, ds:0B333ECh; this
 0x4072EB: push    eax; a2
 0x4072EC: mov     [esp+38h+var_4], edi
-0x4072F0: call    sub_405680
+0x4072F0: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4072F5: push    1Ch; Size
 0x4072F7: call    FormHeapAlloc
 0x4072FC: mov     esi, eax
@@ -740,10 +740,10 @@
 0x407324: jmp     short loc_407328
 0x407326: xor     esi, esi
 0x407328: and     word ptr [esi+18h], 0FFFCh
-0x40732E: mov     ecx, ScreenElementsRoot?; this
+0x40732E: mov     ecx, ds:0B333ECh; this
 0x407334: push    esi; a2
 0x407335: mov     [esp+38h+var_4], edi
-0x407339: call    sub_405680
+0x407339: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x40733E: push    30h ; '0'; Size
 0x407340: call    FormHeapAlloc
 0x407345: add     esp, 4
@@ -756,29 +756,29 @@
 0x40735F: mov     esi, eax
 0x407361: jmp     short loc_407365
 0x407363: xor     esi, esi
-0x407365: mov     ecx, menuRenderedTexture; this
+0x407365: mov     ecx, dword ptr texture; this
 0x40736B: mov     [esp+34h+var_4], edi
 0x40736F: call    BSRenderedTexture__GetInnerTexture
-0x407374: push    eax
-0x407375: mov     ecx, esi
-0x407377: call    NiTexturingProperty__SetUnk08
+0x407374: push    eax; texture
+0x407375: mov     ecx, esi; this
+0x407377: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
 0x40737C: push    0; a2
 0x40737E: mov     ecx, esi; this
-0x407380: call    sub_405900
-0x407385: push    0
-0x407387: mov     ecx, esi
-0x407389: call    sub_405870
-0x40738E: mov     ecx, ScreenElementsRoot?; this
+0x407380: call    NiTexturingProperty_SetBaseMapFilterMode
+0x407385: push    0; value
+0x407387: mov     ecx, esi; this
+0x407389: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
+0x40738E: mov     ecx, ds:0B333ECh; this
 0x407394: push    esi; a2
-0x407395: call    sub_405680
-0x40739A: mov     ecx, ScreenElementsRoot?; this
-0x4073A0: call    NiAVObject_InitializePropertyState
+0x407395: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x40739A: mov     ecx, ds:0B333ECh; this
+0x4073A0: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4073A5: fldz
 0x4073A7: push    1; a3
 0x4073A9: push    ecx
-0x4073AA: mov     ecx, ScreenElementsRoot?; this
+0x4073AA: mov     ecx, ds:0B333ECh; this
 0x4073B0: fstp    [esp+3Ch+a5]; a2
-0x4073B3: call    NiAVObject_UpdateNiAVObject
+0x4073B3: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4073B8: mov     ecx, dword ptr [esp+34h+var_C]
 0x4073BC: mov     large fs:0, ecx
 0x4073C3: pop     ecx
@@ -788,3 +788,110 @@
 0x4073C7: pop     ebx
 0x4073C8: add     esp, 20h
 0x4073CB: retn
+0x9A9F90: mov     eax, [ebp-20h]
+0x9A9F93: push    eax
+0x9A9F94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9F99: pop     ecx
+0x9A9F9A: retn
+0x9A9F9B: mov     eax, [ebp-20h]
+0x9A9F9E: push    eax
+0x9A9F9F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FA4: pop     ecx
+0x9A9FA5: retn
+0x9A9FA6: mov     eax, [ebp-20h]
+0x9A9FA9: push    eax
+0x9A9FAA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FAF: pop     ecx
+0x9A9FB0: retn
+0x9A9FB1: mov     eax, [ebp-1Ch]
+0x9A9FB4: push    eax
+0x9A9FB5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FBA: pop     ecx
+0x9A9FBB: retn
+0x9A9FBC: mov     eax, [ebp-1Ch]
+0x9A9FBF: push    eax
+0x9A9FC0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FC5: pop     ecx
+0x9A9FC6: retn
+0x9A9FC7: mov     eax, [ebp-1Ch]
+0x9A9FCA: push    eax
+0x9A9FCB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FD0: pop     ecx
+0x9A9FD1: retn
+0x9A9FD2: mov     eax, [ebp-1Ch]
+0x9A9FD5: push    eax
+0x9A9FD6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FDB: pop     ecx
+0x9A9FDC: retn
+0x9A9FDD: mov     eax, [ebp-1Ch]
+0x9A9FE0: push    eax
+0x9A9FE1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FE6: pop     ecx
+0x9A9FE7: retn
+0x9A9FE8: mov     eax, [ebp-1Ch]
+0x9A9FEB: push    eax
+0x9A9FEC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FF1: pop     ecx
+0x9A9FF2: retn
+0x9A9FF3: mov     eax, [ebp-1Ch]
+0x9A9FF6: push    eax
+0x9A9FF7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9A9FFC: pop     ecx
+0x9A9FFD: retn
+0x9A9FFE: mov     eax, [ebp-1Ch]
+0x9AA001: push    eax
+0x9AA002: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA007: pop     ecx
+0x9AA008: retn
+0x9AA009: mov     eax, [ebp-1Ch]
+0x9AA00C: push    eax
+0x9AA00D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA012: pop     ecx
+0x9AA013: retn
+0x9AA014: mov     eax, [ebp-1Ch]
+0x9AA017: push    eax
+0x9AA018: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA01D: pop     ecx
+0x9AA01E: retn
+0x9AA01F: mov     eax, [ebp-1Ch]
+0x9AA022: push    eax
+0x9AA023: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA028: pop     ecx
+0x9AA029: retn
+0x9AA02A: mov     eax, [ebp-1Ch]
+0x9AA02D: push    eax
+0x9AA02E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA033: pop     ecx
+0x9AA034: retn
+0x9AA035: mov     eax, [ebp-20h]
+0x9AA038: push    eax
+0x9AA039: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA03E: pop     ecx
+0x9AA03F: retn
+0x9AA040: mov     eax, [ebp-1Ch]
+0x9AA043: push    eax
+0x9AA044: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA049: pop     ecx
+0x9AA04A: retn
+0x9AA04B: mov     eax, [ebp-1Ch]
+0x9AA04E: push    eax
+0x9AA04F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA054: pop     ecx
+0x9AA055: retn
+0x9AA056: mov     eax, [ebp-1Ch]
+0x9AA059: push    eax
+0x9AA05A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA05F: pop     ecx
+0x9AA060: retn
+0x9AA061: mov     eax, [ebp-1Ch]
+0x9AA064: push    eax
+0x9AA065: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AA06A: pop     ecx
+0x9AA06B: retn
+0x9AA06C: mov     edx, [esp+arg_4]
+0x9AA070: lea     eax, [edx-24h]
+0x9AA073: mov     ecx, [edx-28h]
+0x9AA076: xor     ecx, eax
+0x9AA078: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AA07D: mov     eax, offset stru_AD7004
+0x9AA082: jmp     ___CxxFrameHandler3

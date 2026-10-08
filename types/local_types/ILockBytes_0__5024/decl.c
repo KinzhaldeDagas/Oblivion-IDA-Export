@@ -1,1 +1,1 @@
-ILockBytes_0
+typedef ILockBytes ILockBytes_0;

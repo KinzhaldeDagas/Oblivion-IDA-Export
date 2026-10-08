@@ -29,9 +29,9 @@
 0x593873: mov     esi, eax
 0x593875: call    InterfaceManager_GetDepth
 0x59387A: fstp    [esp+12Ch+var_110]
-0x59387E: mov     ecx, [esi+68h]; TileWindow *
+0x59387E: mov     ecx, [esi+68h]; this
 0x593881: push    offset aDataMenusDia_0; "Data\\Menus\\dialog\\Alchemy.xml"
-0x593886: call    Menu_LoadXML
+0x593886: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x59388B: mov     esi, eax
 0x59388D: mov     ecx, esi
 0x59388F: mov     [esp+12Ch+var_11C], esi
@@ -82,6 +82,6 @@
 0x59392D: fld     [esp+12Ch+var_110]
 0x593931: push    ecx
 0x593932: mov     ecx, [esp+130h+var_11C]; this
-0x593936: fstp    [esp+130h+a2]; a3
-0x593939: push    0FABh; a2
-0x59393E: call    Tile_SetFloat
+0x593936: fstp    [esp+130h+a2]; value
+0x593939: push    0FABh; propertyCode
+0x59393E: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.

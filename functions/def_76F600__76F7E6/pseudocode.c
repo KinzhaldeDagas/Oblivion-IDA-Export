@@ -21,34 +21,34 @@ int __userpurge def_76F600@<eax>(
   int v18; // [esp-14h] [ebp-14h] BYREF
   int v19; // [esp-10h] [ebp-10h] BYREF
 
-  if ( a1 < 0 )
+  if ( a1 < 0 ) /*0x76f7e8*/
   {
-    if ( sub_726320(a2, a1 & 0x7FFFFFFF, &a12, &a11, &a6, &a10, &v18, &v19) )
+    if ( sub_726320(a2, a1 & 0x7FFFFFFF, &a12, &a11, &a6, &a10, &v18, &v19) ) /*0x76f80f*/
     {
-      v17 = a12;
+      v17 = a12; /*0x76f81c*/
     }
     else
     {
-      v17 = 0;
-      a11 = 0;
-      v18 = 0;
-      v19 = 0;
+      v17 = 0; /*0x76f824*/
+      a11 = 0; /*0x76f828*/
+      v18 = 0; /*0x76f82c*/
+      v19 = 0; /*0x76f830*/
     }
   }
-  v12 = *(int (__cdecl **)(_DWORD *))(*(_DWORD *)(a4 + 8) + 4 * a11);
-  if ( !v12 )
-    goto LABEL_12;
-  v16 = 0;
-  if ( a5 )
+  v12 = *(int (__cdecl **)(_DWORD *))(*(_DWORD *)(a4 + 8) + 4 * a11); /*0x76f83b*/
+  if ( !v12 ) /*0x76f840*/
+    goto LABEL_12; /*0x76f840*/
+  v16 = 0; /*0x76f848*/
+  if ( a5 ) /*0x76f850*/
   {
-    v13 = *(_DWORD *)(a3 + 8);
-    if ( v13 != 1 && v13 != 2 )
-      v16 = *(_DWORD *)(a5 + 0xC);
+    v13 = *(_DWORD *)(a3 + 8); /*0x76f852*/
+    if ( v13 != 1 && v13 != 2 ) /*0x76f85d*/
+      v16 = *(_DWORD *)(a5 + 0xC); /*0x76f862*/
   }
-  v15[0] = *(_DWORD *)(a3 + 0xC);
-  v15[1] = a11;
-  if ( !v17 )
+  v15[0] = *(_DWORD *)(a3 + 0xC); /*0x76f86e*/
+  v15[1] = a11; /*0x76f872*/
+  if ( !v17 ) /*0x76f876*/
 LABEL_12:
-    JUMPOUT(0x76F607);
-  return v12(v15);
+    JUMPOUT(0x76F607); /*0x76f607*/
+  return v12(v15); /*0x76f88d*/
 }

@@ -1,1 +1,1 @@
-IMMDeviceVtbl_0
+typedef IMMDeviceVtbl IMMDeviceVtbl_0;

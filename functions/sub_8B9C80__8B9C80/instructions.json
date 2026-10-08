@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8B9C80",
-    "line": "push    esi",
+    "line": "push    esi; TES4 authoritative: controller/proxy vtable +0x58 target. Returns runtime context pointer by reading proxy+0x8 collision wrapper, wrapper+0x30 Havok object, then Havok object+0x8. State code reads up/gravity basis at returned+0x20.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x8B9C8E",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x8B9C95",
-    "line": "jz      short loc_8B9C9C",
+    "line": "jz      short loc_8B9C9C; Requires proxy+0x8 collision wrapper and wrapper+0x30 Havok object before returning context.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x8B9C97",
-    "line": "mov     eax, [eax+8]",
+    "line": "mov     eax, [eax+8]; Returns *(havokObject+0x8); state routines then read hkVector4 at +0x20 as runtime up/gravity basis.",
     "mnemonic": "mov",
     "size": 3
   },

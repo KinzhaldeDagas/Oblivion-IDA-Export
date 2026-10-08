@@ -2,7 +2,7 @@
 0x6936F4: push    esi
 0x6936F5: push    eax
 0x6936F6: mov     esi, ecx
-0x6936F8: call    ActiveEffect_Base_SaveEffect
+0x6936F8: call    ActiveEffect_Base_SaveEffect; Verified base save payload includes the HitEffectNode chain at ActiveEffect+0x34 for version >=0x2A: writes a count byte, then each hit effect's virtual type ID (+0x54) and per-type payload (+0x78). Earlier versions skip that list and use the older +0x14 payload branch.
 0x6936FD: mov     ecx, ds:0B33B00h
 0x693703: cmp     byte ptr [ecx+7Ch], 37h ; '7'
 0x693707: jb      short loc_69376F
@@ -37,10 +37,10 @@
 0x693756: jmp     short loc_69375C
 0x693758: mov     [esp+8+Src], esi
 0x69375C: pop     edi
-0x69375D: mov     ecx, ds:0B33B00h
-0x693763: push    4; Size
+0x69375D: mov     ecx, ds:0B33B00h; self
+0x693763: push    4; byteCount
 0x693765: lea     edx, [esp+8+Src]
-0x693769: push    edx; Src
+0x693769: push    edx; source
 0x69376A: call    SaveLoad_SaveData
 0x69376F: pop     esi
 0x693770: retn    4

@@ -1,19 +1,36 @@
 {
-  "callees_count": 44,
-  "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_61C6E0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
+  "callers_count": 7,
+  "chunks": [
+    [
+      "0x61C6E0",
+      "0x61C999"
+    ],
+    [
+      "0x9C33E0",
+      "0x9C3406"
+    ]
+  ],
+  "chunks_sha256": "a684ff330b305b7d86feadeffa0e7dcacca94d25d22e9b6a112f6955063507df",
+  "comment_regular": "Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.",
+  "comment_repeatable": "Verified actor movement path helper called by CombatController_UpdateMovementAndReachability and other movement callers. Finds a reachable PathGrid node near the actor, checks distance and line of sight, collects enabled linked-point positions into the actor's waypoint list, then updates the movement path. Owner class layout remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ActorMovement_BuildPathGridWaypointList",
   "end_ea": "0x61C999",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_61C6E0",
+  "name": "ActorMovement_BuildPathGridWaypointList",
   "segment": ".text",
   "sha256": "6d35275d6bec6904f3b71f2433ea59a5b95d0e0703b8fbac177e96549b9baf94",
   "size": 697,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x61C6E0",
-  "type": "bool __thiscall(int this)",
-  "xrefs_from_count": 256,
+  "total_chunk_size": 735,
+  "type": "bool __thiscall(void *this)",
+  "xrefs_from_count": 270,
   "xrefs_to_count": 7
 }

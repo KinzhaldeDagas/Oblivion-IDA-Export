@@ -34,7 +34,7 @@
 0x4B577C: call    edx
 0x4B577E: test    al, al
 0x4B5780: jz      short loc_4B57B0
-0x4B5782: call    InterfaceManager_IsMenuMode
+0x4B5782: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x4B5787: test    al, al
 0x4B5789: jnz     short loc_4B57B0
 0x4B578B: fld     dword ptr ds:0A30634h
@@ -59,7 +59,7 @@
 0x4B57C5: jnz     loc_4B587B
 0x4B57CB: test    bl, bl
 0x4B57CD: jnz     loc_4B587B
-0x4B57D3: mov     ecx, [esp+10h+arg_0]
+0x4B57D3: mov     ecx, [esp+10h+reference]
 0x4B57D7: push    ecx
 0x4B57D8: push    esi
 0x4B57D9: call    sub_57B740
@@ -86,18 +86,18 @@
 0x4B5832: call    sub_4B52D0
 0x4B5837: push    eax
 0x4B5838: push    2
-0x4B583A: call    ActorValue_GetGroupOffsetFromAV
-0x4B583F: mov     ecx, ds:0B33A98h
+0x4B583A: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
+0x4B583F: mov     ecx, ds:0B33A98h; this
 0x4B5845: add     esp, 8
-0x4B5848: push    eax
-0x4B5849: call    TESDataHandler_GetTESSkillByCode
+0x4B5848: push    eax; skillIndex
+0x4B5849: call    TESDataHandler_GetTESSkillByCode; Return one of exactly 21 inline Oblivion TESSkill records. Reject skillIndex > 20; otherwise return TESDataHandler+0xD8+(skillIndex*0x60).
 0x4B584E: test    eax, eax
 0x4B5850: jz      short loc_4B5860
-0x4B5852: mov     ecx, ds:0B333C4h
-0x4B5858: push    edi
-0x4B5859: push    edi
-0x4B585A: push    eax
-0x4B585B: call    Player_SkillLevelIncrease
+0x4B5852: mov     ecx, ds:0B333C4h; this
+0x4B5858: push    edi; showFeedback
+0x4B5859: push    edi; skipProgressConsumption
+0x4B585A: push    eax; skill
+0x4B585B: call    Player_SkillLevelIncrease; Reading a skill book grants one native skill level through the shared Player_SkillLevelIncrease path; whether it advances the player-level counter is decided by TESClass_IsMajorSkillAV inside that routine.
 0x4B5860: mov     edx, [esi]
 0x4B5862: mov     eax, [edx+40h]
 0x4B5865: push    4
@@ -116,13 +116,13 @@
 0x4B5888: mov     edx, [esp+10h+arg_C]
 0x4B588C: mov     eax, [esp+10h+arg_8]
 0x4B5890: push    ecx
-0x4B5891: mov     ecx, [esp+14h+arg_0]
+0x4B5891: mov     ecx, [esp+14h+reference]
 0x4B5895: push    edx
 0x4B5896: push    eax
-0x4B5897: push    ebp
-0x4B5898: push    ecx
-0x4B5899: mov     ecx, esi
-0x4B589B: call    sub_4B28E0
+0x4B5897: push    ebp; unused
+0x4B5898: push    ecx; reference
+0x4B5899: mov     ecx, esi; this
+0x4B589B: call    TESBoundObject_ActivatePickup
 0x4B58A0: mov     edx, ds:0B333C4h
 0x4B58A6: mov     byte ptr [edx+10Ch], 0
 0x4B58AD: pop     edi

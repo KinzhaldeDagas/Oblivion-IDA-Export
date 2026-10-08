@@ -71,7 +71,7 @@
 0x686B1B: pop     ebp
 0x686B1C: retn
 0x686B1D: lea     ecx, [esp+674h+var_658]
-0x686B21: call    sub_43F350
+0x686B21: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x686B26: fstp    st
 0x686B28: fld     [esp+674h+var_658]
 0x686B2C: fld     qword ptr ds:0A4D910h
@@ -120,7 +120,7 @@
 0x686BB2: fstp    [esp+674h+var_65C]
 0x686BB6: jz      short loc_686BD3
 0x686BB8: mov     ecx, edi; this
-0x686BBA: call    MobileObject_GetCharProxy
+0x686BBA: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x686BBF: test    eax, eax
 0x686BC1: jz      short loc_686BD3
 0x686BC3: fld     dword ptr [eax+248h]
@@ -179,7 +179,7 @@
 0x686CA4: mov     [esi+8], ecx
 0x686CA7: jmp     loc_686F21
 0x686CAC: lea     ecx, [esp+674h+var_62C]
-0x686CB0: call    sub_6899C0
+0x686CB0: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x686CB5: mov     edx, [eax]
 0x686CB7: mov     ecx, [eax+4]
 0x686CBA: mov     [esp+674h+var_604], edx
@@ -207,7 +207,7 @@
 0x686D14: fstp    [esp+674h+var_654]
 0x686D18: fld     [esp+674h+var_660]
 0x686D1C: fstp    [esp+674h+var_650]
-0x686D20: call    sub_43F350
+0x686D20: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x686D25: fstp    st
 0x686D27: lea     eax, [esp+edi+674h+var_2F8]
 0x686D2E: fld     [esp+674h+var_658]
@@ -253,7 +253,7 @@
 0x686DBB: test    al, al
 0x686DBD: jz      loc_686F07
 0x686DC3: lea     ecx, [esp+674h+var_62C]
-0x686DC7: call    sub_6899C0
+0x686DC7: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x686DCC: mov     ecx, [eax]
 0x686DCE: mov     edx, [eax+4]
 0x686DD1: mov     eax, [eax+8]
@@ -348,9 +348,9 @@
 0x686F19: mov     [esi], ecx
 0x686F1B: mov     [esi+4], edx
 0x686F1E: mov     [esi+8], eax
-0x686F21: lea     ecx, [esp+674h+var_62C]; void *
+0x686F21: lea     ecx, [esp+674h+var_62C]; this
 0x686F25: mov     [esp+674h+var_4], 0FFFFFFFFh
-0x686F30: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x686F30: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x686F35: mov     eax, esi
 0x686F37: mov     ecx, [esp+674h+var_C]
 0x686F3E: mov     large fs:0, ecx
@@ -361,3 +361,12 @@
 0x686F49: mov     esp, ebp
 0x686F4B: pop     ebp
 0x686F4C: retn
+0x9C4F80: lea     ecx, [ebp+var_62C]; this
+0x9C4F86: jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
+0x9C4F8B: mov     edx, [esp-4+arg_4]
+0x9C4F8F: lea     eax, [edx-664h]
+0x9C4F95: mov     ecx, [edx-668h]
+0x9C4F9B: xor     ecx, eax
+0x9C4F9D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4FA2: mov     eax, offset stru_AED7F0
+0x9C4FA7: jmp     ___CxxFrameHandler3

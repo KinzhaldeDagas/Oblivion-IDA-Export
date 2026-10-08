@@ -35,13 +35,13 @@
 0x738E28: lea     ecx, [esi+esi*2]
 0x738E2B: add     ecx, ecx
 0x738E2D: add     ecx, ecx
-0x738E2F: push    ecx; Size
+0x738E2F: push    ecx; byteCount
 0x738E30: mov     ecx, [esp+2Ch+Src]
-0x738E34: push    ecx; Src
-0x738E35: push    eax; Dst
+0x738E34: push    ecx; source
+0x738E35: push    eax; destination
 0x738E36: mov     [edi+10h], eax
-0x738E39: call    _memcpy
-0x738E3E: mov     ebp, [esp+34h+arg_8]
+0x738E39: call    _memcpy;
+0x738E3E: mov     ebp, [esp+34h+source]
 0x738E42: add     esp, 10h
 0x738E45: cmp     ebp, ebx
 0x738E47: jz      short loc_738E78
@@ -55,11 +55,11 @@
 0x738E5B: push    ecx; Size
 0x738E5C: call    FormHeapAlloc
 0x738E61: lea     ecx, ds:0[esi*8]
-0x738E68: push    ecx; Size
-0x738E69: push    ebp; Src
-0x738E6A: push    eax; Dst
+0x738E68: push    ecx; byteCount
+0x738E69: push    ebp; source
+0x738E6A: push    eax; destination
 0x738E6B: mov     [edi+14h], eax
-0x738E6E: call    _memcpy
+0x738E6E: call    _memcpy;
 0x738E73: add     esp, 10h
 0x738E76: jmp     short loc_738E7B
 0x738E78: mov     [edi+14h], ebx
@@ -90,12 +90,12 @@
 0x738EBD: jmp     short loc_738EC1
 0x738EBF: xor     eax, eax
 0x738EC1: shl     esi, 4
-0x738EC4: push    esi; Size
-0x738EC5: push    ebx; Src
-0x738EC6: push    eax; Dst
+0x738EC4: push    esi; byteCount
+0x738EC5: push    ebx; source
+0x738EC6: push    eax; destination
 0x738EC7: mov     byte ptr [esp+30h+var_4], 1
 0x738ECC: mov     [edi+18h], eax
-0x738ECF: call    _memcpy
+0x738ECF: call    _memcpy;
 0x738ED4: add     esp, 0Ch
 0x738ED7: jmp     short loc_738EE0
 0x738ED9: mov     dword ptr [edi+18h], 0
@@ -107,7 +107,7 @@
 0x738EF0: mov     byte ptr [esp+24h+var_4], 3
 0x738EF5: jz      short loc_738F02
 0x738EF7: mov     ecx, eax
-0x738EF9: call    sub_7319E0
+0x738EF9: call    sub_7319E0; Pass222: Constructs 0x30-byte NiPropertyState with ten managed smart-pointer slots at +0x08..+0x2C.
 0x738EFE: mov     ebp, eax
 0x738F00: jmp     short loc_738F04
 0x738F02: xor     ebp, ebp
@@ -145,3 +145,25 @@
 0x738F52: pop     ebx
 0x738F53: add     esp, 10h
 0x738F56: retn    10h
+0x9CAB60: mov     ecx, [ebp-10h]
+0x9CAB63: jmp     NiRefObject_destr
+0x9CAB68: mov     ecx, [ebp-10h]
+0x9CAB6B: add     ecx, 8; slot
+0x9CAB6E: jmp     NiPointerSlot_Release
+0x9CAB73: mov     eax, [ebp+4]
+0x9CAB76: push    eax
+0x9CAB77: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAB7C: pop     ecx
+0x9CAB7D: retn
+0x9CAB7E: mov     eax, [ebp+4]
+0x9CAB81: push    eax
+0x9CAB82: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAB87: pop     ecx
+0x9CAB88: retn
+0x9CAB89: mov     edx, [esp+Src]
+0x9CAB8D: lea     eax, [edx-14h]
+0x9CAB90: mov     ecx, [edx-18h]
+0x9CAB93: xor     ecx, eax
+0x9CAB95: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAB9A: mov     eax, offset stru_AF31C0
+0x9CAB9F: jmp     ___CxxFrameHandler3

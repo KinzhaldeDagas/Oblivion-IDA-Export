@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BA030",
+      "0x4BA05F"
+    ]
+  ],
+  "chunks_sha256": "bab52cbea2d7ddd5979fb8c5f5aead42392513ec128593c0f3951b8f4da10936",
+  "comment_regular": "Verified: scans the uint32 seed array at +0x4C with uint16 count +0x52; returns byte index on match or 0xFF for empty/missing values. TESObjectREFR_SetTreeSeedByValue uses 0xFF to remove the per-reference seed extra.",
+  "comment_repeatable": "Verified: scans the uint32 seed array at +0x4C with uint16 count +0x52; returns byte index on match or 0xFF for empty/missing values. TESObjectREFR_SetTreeSeedByValue uses 0xFF to remove the per-reference seed extra.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BA030",
+  "display_name": "TESObjectTREE_GetIndexForSeed",
   "end_ea": "0x4BA05F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BA030",
+  "name": "TESObjectTREE_GetIndexForSeed",
   "segment": ".text",
   "sha256": "bab52cbea2d7ddd5979fb8c5f5aead42392513ec128593c0f3951b8f4da10936",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BA030",
-  "type": "unsigned __int8 __thiscall(int this, int)",
+  "total_chunk_size": 47,
+  "type": "unsigned __int8 __thiscall(TESObjectTREE_OblivionLayout_080_NiTArrayVerified *this, unsigned int seed)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 1
 }

@@ -56,7 +56,7 @@
 0x66984D: jz      loc_669CFE
 0x669853: push    edi
 0x669854: push    3F1h
-0x669859: call    sub_5790E0
+0x669859: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x66985E: add     esp, 8
 0x669861: test    al, al
 0x669863: jz      loc_6699FC
@@ -147,7 +147,7 @@
 0x669989: call    __sprintf
 0x66998E: add     esp, 0Ch
 0x669991: cmp     [esp+250h+var_218], 0
-0x669996: mov     byte ptr [esp+250h+var_114], 0
+0x669996: mov     [esp+250h+var_114], 0
 0x66999E: jz      short loc_6699BF
 0x6699A0: lea     edx, [esp+250h+var_218]
 0x6699A4: push    edx
@@ -168,15 +168,15 @@
 0x6699DA: push    ebp; int
 0x6699DB: call    QueueUIMessage
 0x6699E0: push    edi
-0x6699E1: call    FormHeapFree
+0x6699E1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6699E6: push    ebp
 0x6699E7: mov     [esp+268h+var_4], 0FFFFFFFFh
-0x6699F2: call    FormHeapFree
+0x6699F2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6699F7: add     esp, 18h
 0x6699FA: xor     edi, edi
 0x6699FC: push    edi
 0x6699FD: push    3F1h
-0x669A02: call    sub_5790E0
+0x669A02: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x669A07: add     esp, 8
 0x669A0A: test    al, al
 0x669A0C: jz      short loc_669A34
@@ -210,7 +210,7 @@
 0x669A67: push    edx
 0x669A68: call    __sprintf
 0x669A6D: add     esp, 0Ch
-0x669A70: cmp     byte ptr [esp+250h+var_114], 0
+0x669A70: cmp     [esp+250h+var_114], 0
 0x669A78: mov     [esp+250h+var_218], 0
 0x669A7D: jz      short loc_669A9E
 0x669A7F: lea     eax, [esp+250h+var_114]
@@ -293,7 +293,7 @@
 0x669B80: push    1
 0x669B82: push    offset sub_665220
 0x669B87: push    offset aQuest_added_xm; "quest_added.xml"
-0x669B8C: call    sub_57B370
+0x669B8C: call    sub_57B370; Native skill-mastery perk presentation entry that opens skill_perk.xml with typed varargs. Synthetic Medium Armor mastery feedback should use this path, with ordinary HUD text only as fallback.
 0x669B91: add     esp, 54h
 0x669B94: lea     ecx, [esp+250h+var_220]; void *
 0x669B98: mov     byte ptr [esp+250h+var_4], 2
@@ -351,7 +351,7 @@
 0x669C43: push    1
 0x669C45: push    offset sub_665240
 0x669C4A: push    offset aQuest_added_xm; "quest_added.xml"
-0x669C4F: call    sub_57B370
+0x669C4F: call    sub_57B370; Native skill-mastery perk presentation entry that opens skill_perk.xml with typed varargs. Synthetic Medium Armor mastery feedback should use this path, with ordinary HUD text only as fallback.
 0x669C54: add     esp, 4Ch
 0x669C57: lea     ecx, [esp+250h+var_220]; void *
 0x669C5B: mov     [esp+250h+var_4], 0FFFFFFFFh
@@ -401,10 +401,10 @@
 0x669CE3: push    1
 0x669CE5: push    0
 0x669CE7: push    offset aQuest_added_xm; "quest_added.xml"
-0x669CEC: call    sub_57B370
+0x669CEC: call    sub_57B370; Native skill-mastery perk presentation entry that opens skill_perk.xml with typed varargs. Synthetic Medium Armor mastery feedback should use this path, with ordinary HUD text only as fallback.
 0x669CF1: mov     ecx, [esp+29Ch+var_238.m_data]
 0x669CF5: push    ecx
-0x669CF6: call    FormHeapFree
+0x669CF6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x669CFB: add     esp, 50h
 0x669CFE: mov     al, 1
 0x669D00: mov     ecx, [esp+250h+var_C]
@@ -419,3 +419,26 @@
 0x669D1C: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x669D21: add     esp, 23Ch
 0x669D27: retn    4
+0x9C3FB0: lea     ecx, [ebp-230h]; void *
+0x9C3FB6: jmp     BSStringT_Clear
+0x9C3FBB: lea     ecx, [ebp-238h]; void *
+0x9C3FC1: jmp     BSStringT_Clear
+0x9C3FC6: lea     ecx, [ebp-228h]; void *
+0x9C3FCC: jmp     BSStringT_Clear
+0x9C3FD1: lea     ecx, [ebp-220h]; void *
+0x9C3FD7: jmp     BSStringT_Clear
+0x9C3FDC: lea     ecx, [ebp-220h]; void *
+0x9C3FE2: jmp     BSStringT_Clear
+0x9C3FE7: lea     ecx, [ebp-238h]; void *
+0x9C3FED: jmp     BSStringT_Clear
+0x9C3FF2: mov     edx, [esp+arg_4]
+0x9C3FF6: lea     eax, [edx-240h]
+0x9C3FFC: mov     ecx, [edx-244h]
+0x9C4002: xor     ecx, eax
+0x9C4004: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4009: add     eax, 10h
+0x9C400C: mov     ecx, [edx-4]
+0x9C400F: xor     ecx, eax
+0x9C4011: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4016: mov     eax, offset stru_AECA50
+0x9C401B: jmp     ___CxxFrameHandler3

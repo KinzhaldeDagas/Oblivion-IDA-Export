@@ -98,7 +98,7 @@
 0x764B40: mov     [esp+38h+arg_0], ebx
 0x764B44: jb      loc_764A70
 0x764B4A: mov     edx, [ebp+0]
-0x764B4D: mov     eax, [edx+84h]
+0x764B4D: mov     eax, [edx+84h];
 0x764B53: mov     ecx, ebp
 0x764B55: call    eax
 0x764B57: mov     esi, eax
@@ -111,7 +111,7 @@
 0x764B66: test    eax, eax
 0x764B68: jz      short loc_764B7E
 0x764B6A: lea     ebx, [ebx+0]
-0x764B70: cmp     eax, offset unk_B4263C
+0x764B70: cmp     eax, offset stru_B4263C
 0x764B75: jz      short loc_764B9A
 0x764B77: mov     eax, [eax+4]
 0x764B7A: test    eax, eax

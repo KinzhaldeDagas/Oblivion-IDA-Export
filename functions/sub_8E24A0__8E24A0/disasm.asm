@@ -238,7 +238,6 @@
 0x8E27B1: mov     [esp+0D0h+var_94], ebx
 0x8E27B5: jle     short loc_8E27CF
 0x8E27B7: jmp     short loc_8E27C0
-0x8E27B9: align 10h
 0x8E27C0: mov     dword ptr [ebx+eax*4], 3F800000h
 0x8E27C7: mov     edx, [ecx+10h]
 0x8E27CA: inc     eax
@@ -264,7 +263,6 @@
 0x8E280A: mov     [esp+0D0h+var_A8], edi
 0x8E280E: mov     ecx, 0C0h ; 'À'
 0x8E2813: jmp     short loc_8E2820
-0x8E2815: align 10h
 0x8E2820: mov     edi, [eax]
 0x8E2822: add     edi, 1010101h
 0x8E2828: test    edi, 8080808h
@@ -315,7 +313,6 @@
 0x8E28D5: mov     [esp+0D0h+var_BC], ecx
 0x8E28D9: jle     short loc_8E2922
 0x8E28DB: jmp     short loc_8E28E0
-0x8E28DD: align 10h
 0x8E28E0: mov     edx, dword ptr [esp+0D0h+var_B8+0Ch]
 0x8E28E4: mov     ecx, [esp+0D0h+var_BC]
 0x8E28E8: mov     edx, [edx]
@@ -355,7 +352,6 @@
 0x8E2942: mov     [esp+0D0h+var_BC], ecx
 0x8E2946: jle     short loc_8E2992
 0x8E2948: jmp     short loc_8E2950
-0x8E294A: align 10h
 0x8E2950: mov     edx, [esp+0D0h+var_A8]
 0x8E2954: mov     ecx, [esp+0D0h+var_BC]
 0x8E2958: mov     edx, [edx]
@@ -395,7 +391,6 @@
 0x8E29B2: mov     [esp+0D0h+var_BC], ecx
 0x8E29B6: jle     short loc_8E2A02
 0x8E29B8: jmp     short loc_8E29C0
-0x8E29BA: align 10h
 0x8E29C0: mov     edx, dword ptr [esp+0D0h+var_B8+8]
 0x8E29C4: mov     ecx, [esp+0D0h+var_BC]
 0x8E29C8: mov     edx, [edx]
@@ -435,7 +430,6 @@
 0x8E2A22: mov     [esp+0D0h+var_BC], ecx
 0x8E2A26: jle     short loc_8E2A72
 0x8E2A28: jmp     short loc_8E2A30
-0x8E2A2A: align 10h
 0x8E2A30: mov     edx, dword ptr [esp+0D0h+var_B8]
 0x8E2A34: mov     ecx, [esp+0D0h+var_BC]
 0x8E2A38: mov     edx, [edx]
@@ -527,7 +521,6 @@
 0x8E2B70: sub     ecx, eax
 0x8E2B72: mov     [esp+0D0h+var_98], ecx
 0x8E2B76: jmp     short loc_8E2B80
-0x8E2B78: align 10h
 0x8E2B80: mov     eax, dword ptr [esp+0D0h+var_B8+4]
 0x8E2B84: mov     ecx, [esp+0D0h+var_94]
 0x8E2B88: fld     dword ptr [ecx+eax*4]

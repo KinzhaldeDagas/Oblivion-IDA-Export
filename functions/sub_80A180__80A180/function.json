@@ -1,18 +1,31 @@
 {
-  "callees_count": 28,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x80A180",
+      "0x80A931"
+    ]
+  ],
+  "chunks_sha256": "4dc14ed33a8c79bb0d80a71766a66f96665b9f4682f90c366b808678dd7f5eb9",
+  "comment_regular": "MoonSugarEffect decode: SkinShader vertex-program loader. Loads 0x14 SKIN2*.vso vs_2_0 variants into this+0x9C from lighting\\2x\\v ADTS/AD/DiffusePt HLSL with SKIN/FACEGENBLEND/LIGHTS/PROJ_SHADOW defines.\nV177 observed interior receiver audit: SKIN2%03i.vso array at object+9C+4*i. Actual opaque shader hashes observed in V175. Preserve the native cubic view-dependent diffuse term for skin; local shadowing applies to each admitted point contribution, not ambient/glow or the whole final color. Complete code/chunks/tables exported for existing source/lifetime/draw proof.",
+  "comment_repeatable": "MoonSugarEffect decode: SkinShader vertex-program loader. Loads 0x14 SKIN2*.vso vs_2_0 variants into this+0x9C from lighting\\2x\\v ADTS/AD/DiffusePt HLSL with SKIN/FACEGENBLEND/LIGHTS/PROJ_SHADOW defines.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 53,
-  "display_name": "sub_80A180",
+  "display_name": "SkinShader_LoadVertexPrograms",
   "end_ea": "0x80A931",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_80A180",
+  "name": "SkinShader_LoadVertexPrograms",
   "segment": ".text",
   "sha256": "4dc14ed33a8c79bb0d80a71766a66f96665b9f4682f90c366b808678dd7f5eb9",
   "size": 1969,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x80A180",
+  "total_chunk_size": 1969,
   "type": "void __thiscall(char *this)",
   "xrefs_from_count": 434,
   "xrefs_to_count": 1

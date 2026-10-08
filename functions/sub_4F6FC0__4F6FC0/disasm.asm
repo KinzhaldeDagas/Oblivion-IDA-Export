@@ -1,4 +1,4 @@
-0x4F6FC0: fldz
+0x4F6FC0: fldz; GetIsSex_Eval (index 70 / opcode 0x1046): requires TESNPC BaseForm; Sex parameter (typeID 0x12) is compared with TESActorBase_IsFemale (0 male, 1 female), yielding numeric 1 or 0.
 0x4F6FC2: push    esi
 0x4F6FC3: mov     esi, [esp+4+arg_0]
 0x4F6FC7: test    esi, esi

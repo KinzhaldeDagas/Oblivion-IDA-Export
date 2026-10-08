@@ -17,20 +17,20 @@
 0x503B28: push    edx; a2
 0x503B29: push    eax; a1
 0x503B2A: mov     dword ptr [esp+28h+var_4], 0
-0x503B32: call    Script_ExtractArgs
+0x503B32: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503B37: add     esp, 20h
 0x503B3A: test    al, al
 0x503B3C: jnz     short loc_503B41
 0x503B3E: pop     esi
 0x503B3F: pop     ecx
 0x503B40: retn
-0x503B41: mov     ecx, [esp+8+arg_18]
+0x503B41: mov     ecx, [esp+8+value]
 0x503B45: mov     edx, dword ptr [esp+8+var_4]
-0x503B49: push    ecx
-0x503B4A: push    0
-0x503B4C: push    edx
-0x503B4D: push    esi
-0x503B4E: call    sub_4F5010
+0x503B49: push    ecx; value
+0x503B4A: push    0; param2
+0x503B4C: push    edx; actorBase
+0x503B4D: push    esi; subject
+0x503B4E: call    GetDeadCount_Eval; GetDeadCount_Eval uses its Actor Base parameter to query the engine's global form-to-dead-count list. The helper returns the matching 16-bit count or 0 when no entry exists; no subject reference is required.
 0x503B53: add     esp, 10h
 0x503B56: pop     esi
 0x503B57: pop     ecx

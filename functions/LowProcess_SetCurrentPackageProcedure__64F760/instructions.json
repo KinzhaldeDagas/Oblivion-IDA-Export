@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x64F760",
-    "line": "push    esi",
+    "line": "push    esi; 3DTheft: SetCurrentPackProcedure clamps the stored procedure slot against the active package procedureArrayIndex row length.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x64F76D",
-    "line": "cmp     dword ptr [esi+0C0h], 0",
+    "line": "cmp     dword ptr [esi+0C0h], 0; 3DTheft decode: current/editor PackProcedure stores a procedure-row slot index, not the eProcedure enum value. The clamp compares the stored slot against row length from procedureArrayIndex.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x64F792",
-    "line": "call    sub_673980",
+    "line": "call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.",
     "mnemonic": "call",
     "size": 5
   },

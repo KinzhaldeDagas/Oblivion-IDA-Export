@@ -1,4 +1,4 @@
-0x7A7560: push    0FFFFFFFFh
+0x7A7560: push    0FFFFFFFFh; Oblivion Normal constructor. Initializes the PosGen layout, reuses the static Normal sx/sfx/xi tables when available or builds them symmetrically once, then increments the shared instance count.
 0x7A7562: push    offset SEH_7A7560
 0x7A7567: mov     eax, large fs:0
 0x7A756D: push    eax
@@ -29,9 +29,9 @@
 0x7A75BF: mov     ecx, ds:0B42A8Ch
 0x7A75C5: mov     [esi+0Ch], ecx
 0x7A75C8: jmp     short loc_7A75ED
-0x7A75CA: push    1
-0x7A75CC: mov     ecx, esi
-0x7A75CE: call    sub_7A71D0
+0x7A75CA: push    1; symmetric
+0x7A75CC: mov     ecx, esi; this
+0x7A75CE: call    OB_PosGen_Build_010201A0; Oblivion PosGen::Build. Allocates sx/sfx as two 60-float tables, integrates density with 0.01 symmetric or 0.02 positive increments, enforces a 50..59 sample span, and records xi for rejection sampling.
 0x7A75D3: fld     dword ptr [esi+4]
 0x7A75D6: fstp    dword ptr ds:0B42C98h
 0x7A75DC: mov     edx, [esi+8]
@@ -46,3 +46,27 @@
 0x7A7602: pop     esi
 0x7A7603: add     esp, 10h
 0x7A7606: retn
+0x7A6DD0: push    esi
+0x7A6DD1: mov     esi, ecx
+0x7A6DD3: cmp     byte ptr [esi+10h], 0
+0x7A6DD7: mov     dword ptr [esi], offset ??_7PosGen@@6B@; const PosGen::`vftable'
+0x7A6DDD: jnz     short loc_7A6DF4
+0x7A6DDF: mov     eax, [esi+8]
+0x7A6DE2: push    eax
+0x7A6DE3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x7A6DE8: mov     ecx, [esi+0Ch]
+0x7A6DEB: push    ecx
+0x7A6DEC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x7A6DF1: add     esp, 8
+0x7A6DF4: mov     dword ptr [esi], offset ??_7Random@@6B@; const Random::`vftable'
+0x7A6DFA: pop     esi
+0x7A6DFB: retn
+0x9CCD80: mov     ecx, [ebp-10h]
+0x9CCD83: jmp     loc_7A6DD0
+0x9CCD88: mov     edx, [esp+arg_4]
+0x9CCD8C: lea     eax, [edx-8]
+0x9CCD8F: mov     ecx, [edx-0Ch]
+0x9CCD92: xor     ecx, eax
+0x9CCD94: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CCD99: mov     eax, offset stru_AF6180
+0x9CCD9E: jmp     ___CxxFrameHandler3

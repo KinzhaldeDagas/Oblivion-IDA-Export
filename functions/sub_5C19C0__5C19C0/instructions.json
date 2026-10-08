@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x5C19C1",
-    "line": "cmp     [esp+4+arg_0], 33h ; '3'",
+    "line": "cmp     [esp+4+data], 33h ; '3'",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x5C19ED",
-    "line": "fnstcw  word ptr [esp+8+arg_0]",
+    "line": "fnstcw  word ptr [esp+8+data]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x5C19F1",
-    "line": "movzx   eax, word ptr [esp+8+arg_0]",
+    "line": "movzx   eax, word ptr [esp+8+data]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x5C1A13",
-    "line": "fldcw   word ptr [esp+4+arg_0]",
+    "line": "fldcw   word ptr [esp+4+data]",
     "mnemonic": "fldcw",
     "size": 4
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x5C1A1A",
-    "line": "fnstcw  word ptr [esp+4+arg_0]",
+    "line": "fnstcw  word ptr [esp+4+data]",
     "mnemonic": "fnstcw",
     "size": 4
   },
   {
     "ea": "0x5C1A1E",
-    "line": "movzx   eax, word ptr [esp+4+arg_0]",
+    "line": "movzx   eax, word ptr [esp+4+data]",
     "mnemonic": "movzx",
     "size": 5
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x5C1A3E",
-    "line": "fldcw   word ptr [esp+4+arg_0]",
+    "line": "fldcw   word ptr [esp+4+data]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x5C1A42",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+data], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x5C1A48",
-    "line": "lea     ecx, [esp+4+arg_0]",
+    "line": "lea     ecx, [esp+4+data]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5C1A4C",
-    "line": "push    ecx",
+    "line": "push    ecx; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -247,13 +247,13 @@
   },
   {
     "ea": "0x5C1A57",
-    "line": "add     ecx, offset quickKeyList_ptr",
+    "line": "add     ecx, 0B3B440h; list",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x5C1A5D",
-    "line": "call    sub_776690",
+    "line": "call    NiTPointerList_RemoveByData; [Verified] Generic NiTPointerList remove-by-data helper. Scans node payloads for the supplied pointer, then delegates removal of the matching node to NiTPointerList_RemoveNode. The decal-list path calls it with the DECAL_DATA* payload address.",
     "mnemonic": "call",
     "size": 5
   },

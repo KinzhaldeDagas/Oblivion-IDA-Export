@@ -1,1 +1,5 @@
-dispatcher_data
+struct dispatcher_data
+{
+SC_HANDLE manager;
+HANDLE pipe;
+};

@@ -1,1 +1,6 @@
-get_object_types_reply
+struct get_object_types_reply
+{
+reply_header __header;
+int count;
+char __pad_12[4];
+};

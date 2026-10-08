@@ -1,7 +1,7 @@
-0x41DE50: mov     ecx, TlsIndex
+0x41DE50: mov     ecx, dword ptr byte_BA9DCC+18h
 0x41DE56: mov     edx, large fs:2Ch
 0x41DE5D: mov     eax, 1
-0x41DE62: add     dword_B33780, eax
+0x41DE62: add     dword ptr unk_B33780, eax
 0x41DE68: push    esi
 0x41DE69: mov     esi, [edx+ecx*4]
 0x41DE6C: add     [esi+0Ch], eax

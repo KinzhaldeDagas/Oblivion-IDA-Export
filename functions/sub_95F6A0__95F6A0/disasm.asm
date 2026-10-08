@@ -3,8 +3,8 @@
 0x95F6A7: add     esp, 4
 0x95F6AA: test    eax, eax
 0x95F6AC: jz      short loc_95F6C0
-0x95F6AE: push    offset dword_B258DC
-0x95F6B3: push    offset Vector3_InitValue?
+0x95F6AE: push    offset stru_B258DC
+0x95F6B3: push    offset g_zeroNiPoint3
 0x95F6B8: mov     ecx, eax
 0x95F6BA: call    sub_95F620
 0x95F6BF: retn

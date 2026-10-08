@@ -1,4 +1,4 @@
-0x4B86C0: push    0FFFFFFFFh
+0x4B86C0: push    0FFFFFFFFh; Verified Fallout corroboration for this Oblivion helper pair: Fallout's FindRandomTeleportTarget calls PlayerCharacter::GetLastSpaceForDoor before selecting among the door's RandomTeleports, avoids the previous index when possible, and calls SetLastSpaceForDoor with the selected index. Oblivion independently proves its helper pair operates on the same per-door remembered-space behavior; only this behavior is treated as shared.
 0x4B86C2: push    offset SEH_4B86C0
 0x4B86C7: mov     eax, large fs:0
 0x4B86CD: push    eax
@@ -12,7 +12,7 @@
 0x4B86DC: push    eax
 0x4B86DD: lea     eax, [esp+54h+var_C]
 0x4B86E1: mov     large fs:0, eax
-0x4B86E7: mov     [esp+54h+var_3C], ecx
+0x4B86E7: mov     [esp+54h+door], ecx
 0x4B86EB: mov     esi, [esp+54h+arg_0]
 0x4B86EF: xor     ebx, ebx
 0x4B86F1: xor     ebp, ebp
@@ -25,17 +25,17 @@
 0x4B8708: mov     [esp+54h+arg_0], eax
 0x4B870C: jnz     short loc_4B8736
 0x4B870E: mov     ecx, esi; this
-0x4B8710: call    TESObjectREFR_GetParentCell
+0x4B8710: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4B8715: test    eax, eax
 0x4B8717: jz      short loc_4B8736
 0x4B8719: mov     ecx, esi; this
-0x4B871B: call    TESObjectREFR_GetParentCell
+0x4B871B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4B8720: mov     ecx, eax; this
-0x4B8722: call    TESObjectCELL_IsInterior
+0x4B8722: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4B8727: test    al, al
 0x4B8729: jz      short loc_4B8736
 0x4B872B: mov     ecx, esi; this
-0x4B872D: call    TESObjectREFR_GetParentCell
+0x4B872D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4B8732: mov     [esp+54h+arg_0], eax
 0x4B8736: mov     ecx, [esp+54h+arg_4]
 0x4B873A: xor     edi, edi
@@ -46,28 +46,28 @@
 0x4B8747: cmp     esi, ebx
 0x4B8749: jz      short loc_4B877F
 0x4B874B: mov     ecx, esi; this
-0x4B874D: call    GetTeleportExtraData
+0x4B874D: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x4B8752: test    eax, eax
 0x4B8754: jz      short loc_4B877F
 0x4B8756: mov     ecx, esi; this
-0x4B8758: call    GetTeleportExtraData
-0x4B875D: mov     ecx, eax
-0x4B875F: call    sub_42B410
+0x4B8758: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x4B875D: mov     ecx, eax; this
+0x4B875F: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x4B8764: test    eax, eax
 0x4B8766: jz      short loc_4B877F
 0x4B8768: mov     ecx, esi; this
-0x4B876A: call    GetTeleportExtraData
-0x4B876F: mov     ecx, eax
-0x4B8771: call    sub_42B410
-0x4B8776: mov     ecx, eax
-0x4B8778: call    sub_4D8AF0
+0x4B876A: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
+0x4B876F: mov     ecx, eax; this
+0x4B8771: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
+0x4B8776: mov     ecx, eax; this
+0x4B8778: call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.
 0x4B877D: mov     edi, eax
 0x4B877F: cmp     [esp+54h+arg_0], ebx
 0x4B8783: jz      loc_4B89DD
 0x4B8789: push    25h ; '%'
 0x4B878B: lea     ecx, [esp+58h+var_2C]
 0x4B878F: call    ??0?$NiTPointerMap@H_N@@QAE@XZ; NiTPointerMap<int,bool>::NiTPointerMap<int,bool>(void)
-0x4B8794: mov     edx, [esp+54h+var_3C]
+0x4B8794: mov     edx, [esp+54h+door]
 0x4B8798: xor     esi, esi
 0x4B879A: lea     eax, [edx+68h]
 0x4B879D: cmp     eax, ebx
@@ -103,20 +103,20 @@
 0x4B87E8: jmp     short loc_4B880B
 0x4B87EA: mov     ecx, [esp+54h+arg_0]
 0x4B87EE: lea     eax, [esp+54h+var_40]
-0x4B87F2: push    eax
-0x4B87F3: push    ecx
-0x4B87F4: push    edi
+0x4B87F2: push    eax; existingTeleportDoorOut
+0x4B87F3: push    ecx; destinationSpace
+0x4B87F4: push    edi; ownerSpace
 0x4B87F5: mov     [esp+60h+arg_4], esi
-0x4B87F9: call    sub_4CB070
-0x4B87FE: mov     edx, [esp+60h+var_3C]
+0x4B87F9: call    DoorTeleport_FindRandomDestinationDoor; Verified call edge: DoorTeleport_SelectRandomDestinationDoor receives the matched listed space, current WorldSpace, and an output for an already-linked teleport door.
+0x4B87FE: mov     edx, [esp+60h+door]
 0x4B8802: add     esp, 0Ch
 0x4B8805: mov     ebp, eax
 0x4B8807: mov     [esp+54h+var_40], ebx
-0x4B880B: mov     ecx, ds:0B333C4h
+0x4B880B: mov     ecx, ds:0B333C4h; this
 0x4B8811: or      edi, 0FFFFFFFFh
-0x4B8814: push    edx
+0x4B8814: push    edx; door
 0x4B8815: mov     [esp+58h+var_34], edi
-0x4B8819: call    sub_663EB0
+0x4B8819: call    PlayerCharacter_GetLastSpaceForDoor; Verified cross-reference: reads the player's remembered last-space index for this source door before random destination selection; the selected space is compared against this value to avoid an immediate repeat when possible.
 0x4B881E: cmp     [esp+54h+arg_4], esi
 0x4B8822: movzx   edx, al
 0x4B8825: mov     [esp+54h+var_30], edx
@@ -127,7 +127,7 @@
 0x4B8837: jnz     loc_4B89B6
 0x4B883D: add     [esp+54h+arg_4], 1
 0x4B8842: push    ebx; Seed
-0x4B8843: call    GetRandomLargeInteger?
+0x4B8843: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4B8848: xor     edx, edx
 0x4B884A: add     esp, 4
 0x4B884D: div     esi
@@ -154,14 +154,13 @@
 0x4B8886: mov     esi, [esi]
 0x4B8888: cmp     esi, ebx
 0x4B888A: jnz     short loc_4B8870
-0x4B888C: mov     eax, [esp+54h+var_3C]
+0x4B888C: mov     eax, [esp+54h+door]
 0x4B8890: add     eax, 68h ; 'h'
 0x4B8893: xor     edx, edx
 0x4B8895: xor     esi, esi
 0x4B8897: cmp     eax, ebx
 0x4B8899: jz      short loc_4B88D5
 0x4B889B: jmp     short loc_4B88A0
-0x4B889D: align 10h
 0x4B88A0: mov     ecx, [eax+4]
 0x4B88A3: cmp     ecx, ebx
 0x4B88A5: jnz     short loc_4B88AB
@@ -177,7 +176,7 @@
 0x4B88BA: cmp     [esi+8], bl
 0x4B88BD: jz      short loc_4B888C
 0x4B88BF: push    ebx; Seed
-0x4B88C0: call    GetRandomLargeInteger?
+0x4B88C0: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x4B88C5: xor     edx, edx
 0x4B88C7: add     esp, 4
 0x4B88CA: div     [esp+54h+var_38]
@@ -185,10 +184,10 @@
 0x4B88D3: mov     edx, [eax]
 0x4B88D5: mov     ecx, [esp+54h+arg_0]
 0x4B88D9: lea     eax, [esp+54h+var_40]
-0x4B88DD: push    eax
-0x4B88DE: push    ecx
-0x4B88DF: push    edx
-0x4B88E0: call    sub_4CB070
+0x4B88DD: push    eax; existingTeleportDoorOut
+0x4B88DE: push    ecx; destinationSpace
+0x4B88DF: push    edx; ownerSpace
+0x4B88E0: call    DoorTeleport_FindRandomDestinationDoor; Verified call edge: DoorTeleport_SelectRandomDestinationDoor receives a randomly selected listed destination space and returns a random eligible destination door; caller tracks existing ExtraTeleport candidates and avoids a repeated space.
 0x4B88E5: add     esp, 0Ch
 0x4B88E8: cmp     [esp+54h+var_40], ebx
 0x4B88EC: mov     ebp, eax
@@ -215,11 +214,11 @@
 0x4B8931: mov     eax, [esp+54h+var_40]
 0x4B8935: cmp     eax, ebx
 0x4B8937: jz      short loc_4B89B6
-0x4B8939: mov     ecx, [esp+54h+var_3C]
+0x4B8939: mov     ecx, [esp+54h+door]
 0x4B893D: test    byte ptr [ecx+64h], 1
 0x4B8941: jz      short loc_4B89B6
 0x4B8943: push    eax
-0x4B8944: call    RemoveExtraTeleportFromDoorRef
+0x4B8944: call    RemoveExtraTeleportFromDoorRef; Verified teleport-extra removal hook: before removing linked-door metadata, it removes the corresponding AStarWorldNode from the low-path space maps; then it clears teleport metadata from the linked door and this reference.
 0x4B8949: mov     ecx, [esp+58h+var_40]; this
 0x4B894D: add     esp, 4
 0x4B8950: call    TESObjectREFR_GetWorldSpace
@@ -229,12 +228,12 @@
 0x4B895B: call    sub_4F2630
 0x4B8960: jmp     short loc_4B89AE
 0x4B8962: mov     ecx, [esp+54h+var_40]; this
-0x4B8966: call    TESObjectREFR_GetParentCell
+0x4B8966: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4B896B: mov     esi, eax
 0x4B896D: cmp     esi, ebx
 0x4B896F: jz      short loc_4B89AE
 0x4B8971: mov     ecx, esi; this
-0x4B8973: call    TESObjectCELL_IsInterior
+0x4B8973: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4B8978: test    al, al
 0x4B897A: jz      short loc_4B89AE
 0x4B897C: push    25h ; '%'
@@ -244,7 +243,7 @@
 0x4B898B: push    edx
 0x4B898C: mov     ecx, esi
 0x4B898E: mov     byte ptr [esp+58h+var_4], 1
-0x4B8993: call    sub_4CBE50
+0x4B8993: call    sub_4CBE50; Verified cell object-list processing: door references with ExtraTeleport are checked for a nonempty TESObjectDOOR.randomTeleport list; if present, RemoveExtraTeleportFromDoorRef removes reciprocal low-path indexing before save/load reset/post-fixup. The nested gate has been verified as a randomTeleport-list nonempty check.
 0x4B8998: lea     ecx, [esp+54h+var_1C]
 0x4B899C: call    NiTMap_Clear
 0x4B89A1: lea     ecx, [esp+54h+var_1C]
@@ -254,11 +253,11 @@
 0x4B89B2: mov     edi, [esp+54h+var_34]
 0x4B89B6: cmp     edi, 0FFFFFFFFh
 0x4B89B9: jz      short loc_4B89CC
-0x4B89BB: mov     eax, [esp+54h+var_3C]
-0x4B89BF: mov     ecx, ds:0B333C4h
-0x4B89C5: push    edi
-0x4B89C6: push    eax
-0x4B89C7: call    sub_663EE0
+0x4B89BB: mov     eax, [esp+54h+door]
+0x4B89BF: mov     ecx, ds:0B333C4h; this
+0x4B89C5: push    edi; spaceIndex
+0x4B89C6: push    eax; door
+0x4B89C7: call    PlayerCharacter_SetLastSpaceForDoor; Verified cross-reference: commits the chosen destination-space index to the PlayerCharacter per-door last-space map after candidate selection.
 0x4B89CC: lea     ecx, [esp+54h+var_2C]
 0x4B89D0: mov     [esp+54h+var_4], 0FFFFFFFFh
 0x4B89D8: call    ??1?$NiTPointerMap@H_N@@UAE@XZ; NiTPointerMap<int,bool>::~NiTPointerMap<int,bool>(void)
@@ -272,3 +271,14 @@
 0x4B89EE: pop     ebx
 0x4B89EF: add     esp, 40h
 0x4B89F2: retn    8
+0x9B3C30: lea     ecx, [ebp-2Ch]
+0x9B3C33: jmp     ??1?$NiTPointerMap@H_N@@UAE@XZ; NiTPointerMap<int,bool>::~NiTPointerMap<int,bool>(void)
+0x9B3C38: lea     ecx, [ebp-1Ch]
+0x9B3C3B: jmp     ??1?$NiTPointerMap@PAVTESObjectCELL@@_N@@UAE@XZ; NiTPointerMap<TESObjectCELL *,bool>::~NiTPointerMap<TESObjectCELL *,bool>(void)
+0x9B3C40: mov     edx, [esp+arg_4]
+0x9B3C44: lea     eax, [edx-44h]
+0x9B3C47: mov     ecx, [edx-48h]
+0x9B3C4A: xor     ecx, eax
+0x9B3C4C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3C51: mov     eax, offset stru_ADF5AC
+0x9B3C56: jmp     ___CxxFrameHandler3

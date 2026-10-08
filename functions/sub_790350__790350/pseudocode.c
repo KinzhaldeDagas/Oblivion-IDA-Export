@@ -1,25 +1,29 @@
-void __cdecl sub_790350(int *a1, int *a2, int *a3)
+// Orders three CBranch pointers using the float at CBranch+0x2C (fuzzyBranchVolume), implementing the descending-volume comparator used by the branch LOD sort.
+void __cdecl OB_BranchPtrVector_Sort3ByFuzzyVolume_010201A0(
+        OB_CBranch_010201A0 **first,
+        OB_CBranch_010201A0 **middle,
+        OB_CBranch_010201A0 **last)
 {
-  int v3; // edx
-  int v4; // edx
-  int v5; // edx
+  OB_CBranch_010201A0 *v3; // edx
+  OB_CBranch_010201A0 *v4; // edx
+  OB_CBranch_010201A0 *v5; // edx
 
-  v3 = *a2;
-  if ( *(float *)(*a1 + 0x2C) < (double)*(float *)(*a2 + 0x2C) )
+  v3 = *middle; /*0x790354*/
+  if ( (*first)->fuzzyBranchVolume < (double)(*middle)->fuzzyBranchVolume ) /*0x79036b*/
   {
-    *a2 = *a1;
-    *a1 = v3;
+    *middle = *first; /*0x79036d*/
+    *first = v3; /*0x79036f*/
   }
-  v4 = *a3;
-  if ( *(float *)(*a2 + 0x2C) < (double)*(float *)(*a3 + 0x2C) )
+  v4 = *last; /*0x790378*/
+  if ( (*middle)->fuzzyBranchVolume < (double)(*last)->fuzzyBranchVolume ) /*0x790387*/
   {
-    *a3 = *a2;
-    *a2 = v4;
+    *last = *middle; /*0x790389*/
+    *middle = v4; /*0x79038b*/
   }
-  v5 = *a2;
-  if ( *(float *)(*a1 + 0x2C) < (double)*(float *)(*a2 + 0x2C) )
+  v5 = *middle; /*0x79038d*/
+  if ( (*first)->fuzzyBranchVolume < (double)(*middle)->fuzzyBranchVolume ) /*0x79039f*/
   {
-    *a2 = *a1;
-    *a1 = v5;
+    *middle = *first; /*0x7903a1*/
+    *first = v5; /*0x7903a3*/
   }
 }

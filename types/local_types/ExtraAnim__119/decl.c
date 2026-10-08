@@ -1,1 +1,1 @@
-ExtraAnim
+struct ExtraAnim;

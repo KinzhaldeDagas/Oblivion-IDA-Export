@@ -28,7 +28,7 @@
 0x80259C: jz      short loc_8025AF
 0x80259E: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x8025A2: jnz     short loc_8025A9
-0x8025A4: call    sub_7604D0
+0x8025A4: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8025A9: mov     dword ptr [edi], 0
 0x8025AF: mov     eax, esi
 0x8025B1: mov     byte ptr [esi+78h], 0
@@ -39,3 +39,20 @@
 0x8025C2: pop     esi
 0x8025C3: add     esp, 10h
 0x8025C6: retn
+0x9D0770: mov     ecx, [ebp-10h]
+0x9D0773: jmp     sub_76C760
+0x9D0778: push    offset sub_4027D0; void (__thiscall *)(void *)
+0x9D077D: push    1; int
+0x9D077F: push    4; unsigned int
+0x9D0781: mov     eax, [ebp-10h]
+0x9D0784: add     eax, 70h ; 'p'
+0x9D0787: push    eax; void *
+0x9D0788: call    $LN21
+0x9D078D: retn
+0x9D078E: mov     edx, [esp+arg_4]
+0x9D0792: lea     eax, [edx-0Ch]
+0x9D0795: mov     ecx, [edx-10h]
+0x9D0798: xor     ecx, eax
+0x9D079A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D079F: mov     eax, offset stru_AF9094
+0x9D07A4: jmp     ___CxxFrameHandler3

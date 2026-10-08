@@ -1,4 +1,4 @@
-0x4F28B0: push    0FFFFFFFFh
+0x4F28B0: push    0FFFFFFFFh; Verified Oblivion .cmp mask bits: 0x1 trees, 0x2 buildings/object LOD, 0x4 LandLOD, established by direct mode-test consumers. Fallout divergence: Fallout WorldSpace instead exposes NoLODWater and NoLODNoise flag bits and a DistantLODShaderProperty cache; the Fallout database has no matching Oblivion .cmp cell-map path.
 0x4F28B2: push    offset SEH_4F28B0
 0x4F28B7: mov     eax, large fs:0
 0x4F28BD: push    eax
@@ -72,11 +72,11 @@
 0x4F297E: movzx   edi, cx
 0x4F2981: shl     eax, 10h
 0x4F2984: or      edi, eax
-0x4F2986: lea     eax, [esp+34h+var_1D]
-0x4F298A: push    eax
-0x4F298B: push    edi
-0x4F298C: mov     ecx, ebp
-0x4F298E: call    sub_4D6760
+0x4F2986: lea     eax, [esp+34h+valueOut]
+0x4F298A: push    eax; valueOut
+0x4F298B: push    edi; key
+0x4F298C: mov     ecx, ebp; this
+0x4F298E: call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.
 0x4F2993: test    al, al
 0x4F2995: jnz     short loc_4F29A1
 0x4F2997: push    1; a3
@@ -92,7 +92,7 @@
 0x4F29B6: add     ebx, 0DCh ; 'Ü'
 0x4F29BC: push    ebx
 0x4F29BD: mov     ecx, esi
-0x4F29BF: call    eax
+0x4F29BF: call    eax; Verified .cmp trailer: after reading the packed exterior-cell coordinate entries, LoadLODObjects reads the final 4-byte word into TESWorldSpace.distantLODMetadata.modeMask (+0xDC). No consumer of modeMask was established; its semantic meaning remains Unknown.
 0x4F29C1: mov     edx, [esi]
 0x4F29C3: mov     eax, [edx]
 0x4F29C5: push    1
@@ -100,7 +100,7 @@
 0x4F29C9: call    eax
 0x4F29CB: mov     ecx, [esp+34h+var_14]
 0x4F29CF: push    ecx
-0x4F29D0: call    FormHeapFree
+0x4F29D0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4F29D5: add     esp, 4
 0x4F29D8: mov     ecx, [esp+34h+var_C]
 0x4F29DC: mov     large fs:0, ecx
@@ -111,3 +111,12 @@
 0x4F29E7: pop     ebx
 0x4F29E8: add     esp, 20h
 0x4F29EB: retn
+0x9B6950: lea     ecx, [ebp-14h]; void *
+0x9B6953: jmp     BSStringT_Clear
+0x9B6958: mov     edx, [esp+arg_4]
+0x9B695C: lea     eax, [edx-24h]
+0x9B695F: mov     ecx, [edx-28h]
+0x9B6962: xor     ecx, eax
+0x9B6964: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6969: mov     eax, offset stru_AE1738
+0x9B696E: jmp     ___CxxFrameHandler3

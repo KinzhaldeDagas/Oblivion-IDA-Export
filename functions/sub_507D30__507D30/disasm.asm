@@ -17,7 +17,7 @@
 0x507D5E: test    bl, bl
 0x507D60: mov     eax, offset aOff
 0x507D65: jnz     short loc_507D6C
-0x507D67: mov     eax, offset aOn_0
+0x507D67: mov     eax, offset aOn_0; "On"
 0x507D6C: push    eax
 0x507D6D: mov     ecx, esi; this
 0x507D6F: call    TESObjectREFR_GetName
@@ -36,7 +36,7 @@
 0x507D9B: cmp     byte ptr ds:0B33A34h, 0
 0x507DA2: mov     eax, offset aOff
 0x507DA7: jnz     short loc_507DAE
-0x507DA9: mov     eax, offset aOn_0
+0x507DA9: mov     eax, offset aOn_0; "On"
 0x507DAE: push    eax
 0x507DAF: push    offset aCollisionS; "Collision -> %s"
 0x507DB4: call    Interface_ConsolePrint

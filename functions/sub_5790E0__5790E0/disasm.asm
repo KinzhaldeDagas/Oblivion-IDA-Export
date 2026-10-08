@@ -1,4 +1,4 @@
-0x5790E0: push    esi
+0x5790E0: push    esi; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5790E1: push    1; arg1
 0x5790E3: push    0; canCreate
 0x5790E5: call    InterfaceManager_GetSingleton

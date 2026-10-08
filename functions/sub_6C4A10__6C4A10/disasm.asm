@@ -1,4 +1,4 @@
-0x6C4A10: push    0FFFFFFFFh
+0x6C4A10: push    0FFFFFFFFh; CustomAnimSupport decode: removes a sequence from the keyframe manager during live sequence pruning/cleanup.
 0x6C4A12: push    offset SEH_8A4E30
 0x6C4A17: mov     eax, large fs:0
 0x6C4A1D: push    eax
@@ -162,3 +162,12 @@
 0x6C4BBC: call    edx
 0x6C4BBE: mov     eax, edi
 0x6C4BC0: jmp     loc_6C4A6C
+0x9D6B90: lea     ecx, [ebp-10h]; slot
+0x9D6B93: jmp     NiPointerSlot_Release
+0x9D6B98: mov     edx, [esp+arg_4]
+0x9D6B9C: lea     eax, [edx-20h]
+0x9D6B9F: mov     ecx, [edx-24h]
+0x9D6BA2: xor     ecx, eax
+0x9D6BA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6BA9: mov     eax, offset stru_AFE8E8
+0x9D6BAE: jmp     ___CxxFrameHandler3

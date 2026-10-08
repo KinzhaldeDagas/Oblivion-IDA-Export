@@ -1,4 +1,4 @@
-0x77FF40: sub     esp, 0Ch
+0x77FF40: sub     esp, 0Ch; DX10 bridge note: Oblivion texture-stage/sampler default replay. dword_B28CB0 is 2. dword_B2A7C0 stage 0 defaults are COLOROP=MODULATE, COLORARG1=TEXTURE, COLORARG2=CURRENT, ALPHAOP=SELECTARG1, ALPHAARG1=TEXTURE, ALPHAARG2=CURRENT; for stages after 0 the function forces COLOROP/ALPHAOP to DISABLE. DX10 seed/fallback shaders mirror this two-stage table, including stage 0/1 texture SRV sampling and CURRENT chaining when enabled.
 0x77FF43: push    ebp
 0x77FF44: xor     ebp, ebp
 0x77FF46: cmp     ds:0B28CB0h, ebp

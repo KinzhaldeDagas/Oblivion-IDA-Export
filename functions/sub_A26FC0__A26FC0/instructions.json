@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA26FC0",
-    "line": "mov     eax, dword_B429E0",
+    "line": "mov     eax, lastOwner.begin",
     "mnemonic": "mov",
     "size": 5
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0xA26FCA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,19 +37,19 @@
   },
   {
     "ea": "0xA26FD2",
-    "line": "mov     dword_B429E0, 0",
+    "line": "mov     lastOwner.begin, 0",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0xA26FDC",
-    "line": "mov     dword_B429E4, 0",
+    "line": "mov     lastOwner.end, 0",
     "mnemonic": "mov",
     "size": 10
   },
   {
     "ea": "0xA26FE6",
-    "line": "mov     dword_B429E8, 0",
+    "line": "mov     lastOwner.capacity, 0",
     "mnemonic": "mov",
     "size": 10
   },

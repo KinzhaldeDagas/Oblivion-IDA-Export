@@ -1,4 +1,4 @@
-0x55F380: push    esi
+0x55F380: push    esi; LockFreeMap vtable slot: thread-local operation wrapper forwarding to 0x55F120 with explicit hash/key/value.
 0x55F381: push    edi
 0x55F382: mov     esi, ecx
 0x55F384: mov     edi, [esi+14h]
@@ -19,7 +19,7 @@
 0x55F3AF: push    ecx; Comperand
 0x55F3B0: push    edx; LONG
 0x55F3B1: mov     ecx, eax
-0x55F3B3: call    sub_55F120
+0x55F3B3: call    sub_55F120; LockFreeMap insert/update core: insert new 12-byte node or update existing value when replace flag is set.
 0x55F3B8: pop     edi
 0x55F3B9: pop     esi
 0x55F3BA: retn    10h

@@ -1,25 +1,25 @@
-LONG __thiscall sub_6D0B10(_DWORD *this, int a2, unsigned __int16 a3)
+// Refcount-aware replacement of interpolators[index]: releases the old NiInterpolator, stores the new pointer, and acquires it. Semantically void; prior EAX/LONG output was refcount/index residue.
+void __thiscall NiGeomMorpherController_SetInterpolator(
+        NiGeomMorpherController *this,
+        NiInterpolator *interpolator,
+        unsigned __int16 index)
 {
-  LONG result; // eax
-  int v4; // ecx
-  int v5; // esi
-  _DWORD *v6; // edi
+  NiInterpolator **interpolators; // ecx
+  volatile LONG *v4; // esi
+  NiInterpolator **v5; // edi
 
-  result = a3;
-  v4 = *(this + 0x15);
-  v5 = *(_DWORD *)(v4 + 4 * a3);
-  v6 = (_DWORD *)(v4 + 4 * a3);
-  if ( v5 != a2 )
+  interpolators = this->interpolators; /*0x6d0b15*/
+  v4 = (volatile LONG *)interpolators[index]; /*0x6d0b1e*/
+  v5 = &interpolators[index]; /*0x6d0b24*/
+  if ( v4 != (volatile LONG *)interpolator ) /*0x6d0b27*/
   {
-    if ( v5 )
+    if ( v4 ) /*0x6d0b2b*/
     {
-      result = InterlockedDecrement((volatile LONG *)(v5 + 4));
-      if ( !result )
-        result = (**(int (__thiscall ***)(int, int))v5)(v5, 1);
+      if ( !InterlockedDecrement(v4 + 1) ) /*0x6d0b31*/
+        (**(void (__thiscall ***)(volatile LONG *, int))v4)(v4, 1); /*0x6d0b47*/
     }
-    *v6 = a2;
-    if ( a2 )
-      return InterlockedIncrement((volatile LONG *)(a2 + 4));
+    *v5 = interpolator; /*0x6d0b4b*/
+    if ( interpolator ) /*0x6d0b4d*/
+      InterlockedIncrement((volatile LONG *)interpolator + 1); /*0x6d0b53*/
   }
-  return result;
 }

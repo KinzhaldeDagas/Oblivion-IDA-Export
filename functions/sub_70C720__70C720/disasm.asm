@@ -14,34 +14,34 @@
 0x70C74C: mov     ecx, [eax+8]
 0x70C74F: mov     [esp+40h+var_2C], edx
 0x70C753: mov     [esp+40h+var_28], ecx
-0x70C757: fstp    [esp+40h+var_24]
+0x70C757: fstp    [esp+40h+var_24.x]
 0x70C75B: mov     ebx, [esp+40h+arg_4]
 0x70C75F: fld     [esp+40h+var_2C]
 0x70C763: push    edi
 0x70C764: fsub    dword ptr [esi+8Ch]
 0x70C76A: mov     edi, [esp+44h+arg_8]
-0x70C76E: fstp    [esp+44h+var_20]
+0x70C76E: fstp    [esp+44h+var_24.y]
 0x70C772: fld     [esp+44h+var_28]
 0x70C776: fsub    dword ptr [esi+90h]
-0x70C77C: fstp    [esp+44h+var_1C]
+0x70C77C: fstp    [esp+44h+var_24.z]
 0x70C780: fld     dword ptr [esi+100h]
 0x70C786: fsub    dword ptr [esi+0FCh]
 0x70C78C: fld1
 0x70C78E: fdivrp  st(1), st
 0x70C790: fstp    [esp+44h+var_34]
 0x70C794: fld     dword ptr [esi+64h]
-0x70C797: fstp    [esp+44h+var_18]
+0x70C797: fstp    [esp+44h+out.x]
 0x70C79B: fld     dword ptr [esi+70h]
-0x70C79E: fstp    [esp+44h+var_14]
+0x70C79E: fstp    [esp+44h+out.y]
 0x70C7A2: fld     dword ptr [esi+7Ch]
-0x70C7A5: fstp    [esp+44h+var_10]
-0x70C7A9: fld     [esp+44h+var_14]
-0x70C7AD: fmul    [esp+44h+var_20]
-0x70C7B1: fld     [esp+44h+var_18]
-0x70C7B5: fmul    [esp+44h+var_24]
+0x70C7A5: fstp    [esp+44h+out.z]
+0x70C7A9: fld     [esp+44h+out.y]
+0x70C7AD: fmul    [esp+44h+var_24.y]
+0x70C7B1: fld     [esp+44h+out.x]
+0x70C7B5: fmul    [esp+44h+var_24.x]
 0x70C7B9: faddp   st(1), st
-0x70C7BB: fld     [esp+44h+var_10]
-0x70C7BF: fmul    [esp+44h+var_1C]
+0x70C7BB: fld     [esp+44h+out.z]
+0x70C7BF: fmul    [esp+44h+var_24.z]
 0x70C7C3: faddp   st(1), st
 0x70C7C5: fstp    [esp+44h+var_38]
 0x70C7C9: fld     [esp+44h+var_38]
@@ -70,58 +70,58 @@
 0x70C80B: fstp    [esp+44h+arg_4]
 0x70C80F: fmul    [esp+44h+arg_4]
 0x70C813: fstp    dword ptr [edi+8]
-0x70C816: lea     edx, [esp+44h+var_C]
+0x70C816: lea     edx, [esp+44h+rhs]
 0x70C81A: fld     dword ptr [esi+68h]
-0x70C81D: push    edx
-0x70C81E: fstp    [esp+48h+var_C]
-0x70C822: lea     eax, [esp+48h+var_18]
+0x70C81D: push    edx; rhs
+0x70C81E: fstp    [esp+48h+rhs.x]
+0x70C822: lea     eax, [esp+48h+out]
 0x70C826: fld     dword ptr [esi+74h]
-0x70C829: push    eax
-0x70C82A: fstp    [esp+4Ch+var_8]
-0x70C82E: lea     ecx, [esp+4Ch+var_24]
+0x70C829: push    eax; out
+0x70C82A: fstp    [esp+4Ch+rhs.y]
+0x70C82E: lea     ecx, [esp+4Ch+var_24]; this
 0x70C832: fld     dword ptr [esi+80h]
-0x70C838: fstp    [esp+4Ch+var_4]
-0x70C83C: call    sub_4BF9E0
+0x70C838: fstp    [esp+4Ch+rhs.z]
+0x70C83C: call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.
 0x70C841: fld     dword ptr [eax]
 0x70C843: fld     [esp+44h+arg_0]
 0x70C847: fld     st
 0x70C849: fmulp   st(2), st
 0x70C84B: fxch    st(1)
-0x70C84D: fstp    [esp+44h+var_C]
+0x70C84D: fstp    [esp+44h+rhs.x]
 0x70C851: fld     dword ptr [eax+4]
 0x70C854: fmul    st, st(1)
-0x70C856: fstp    [esp+44h+var_8]
+0x70C856: fstp    [esp+44h+rhs.y]
 0x70C85A: fmul    dword ptr [eax+8]
-0x70C85D: fstp    [esp+44h+var_4]
+0x70C85D: fstp    [esp+44h+rhs.z]
 0x70C861: fld     [esp+44h+var_30]
-0x70C865: fld     [esp+44h+var_C]
+0x70C865: fld     [esp+44h+rhs.x]
 0x70C869: fld     st
 0x70C86B: fsubp   st(2), st
 0x70C86D: fxch    st(1)
-0x70C86F: fstp    [esp+44h+var_18]
+0x70C86F: fstp    [esp+44h+out.x]
 0x70C873: fld     [esp+44h+var_2C]
-0x70C877: fld     [esp+44h+var_8]
+0x70C877: fld     [esp+44h+rhs.y]
 0x70C87B: fld     st
 0x70C87D: fsubp   st(2), st
 0x70C87F: fxch    st(1)
-0x70C881: fstp    [esp+44h+var_14]
+0x70C881: fstp    [esp+44h+out.y]
 0x70C885: fld     [esp+44h+var_28]
-0x70C889: fld     [esp+44h+var_4]
+0x70C889: fld     [esp+44h+rhs.z]
 0x70C88D: fld     st
 0x70C88F: fsubp   st(2), st
 0x70C891: fxch    st(1)
-0x70C893: fstp    [esp+44h+var_10]
+0x70C893: fstp    [esp+44h+out.z]
 0x70C897: fld     dword ptr [esi+0E0h]
-0x70C89D: fld     [esp+44h+var_14]
+0x70C89D: fld     [esp+44h+out.y]
 0x70C8A1: fld     st
 0x70C8A3: fmulp   st(2), st
 0x70C8A5: fld     dword ptr [esi+0DCh]
-0x70C8AB: fld     [esp+44h+var_18]
+0x70C8AB: fld     [esp+44h+out.x]
 0x70C8AF: fld     st
 0x70C8B1: fmulp   st(2), st
 0x70C8B3: fxch    st(3)
 0x70C8B5: faddp   st(1), st
-0x70C8B7: fld     [esp+44h+var_10]
+0x70C8B7: fld     [esp+44h+out.z]
 0x70C8BB: fmul    dword ptr [esi+0E4h]
 0x70C8C1: faddp   st(1), st
 0x70C8C3: fadd    dword ptr [esi+0E8h]
@@ -139,7 +139,7 @@
 0x70C8F2: fxch    st(2)
 0x70C8F4: faddp   st(1), st
 0x70C8F6: fld     dword ptr [esi+0B4h]
-0x70C8FC: fmul    [esp+44h+var_10]
+0x70C8FC: fmul    [esp+44h+out.z]
 0x70C900: faddp   st(1), st
 0x70C902: fadd    dword ptr [esi+0B8h]
 0x70C908: fdivrp  st(1), st
@@ -147,21 +147,21 @@
 0x70C90C: fld     [esp+44h+var_30]
 0x70C910: faddp   st(3), st
 0x70C912: fxch    st(2)
-0x70C914: fstp    [esp+44h+var_C]
+0x70C914: fstp    [esp+44h+rhs.x]
 0x70C918: fadd    [esp+44h+var_2C]
-0x70C91C: fstp    [esp+44h+var_8]
+0x70C91C: fstp    [esp+44h+rhs.y]
 0x70C920: fadd    [esp+44h+var_28]
-0x70C924: fstp    [esp+44h+var_4]
-0x70C928: fld     [esp+44h+var_C]
+0x70C924: fstp    [esp+44h+rhs.z]
+0x70C928: fld     [esp+44h+rhs.x]
 0x70C92C: fld     st
 0x70C92E: fmul    dword ptr [esi+0DCh]
 0x70C934: fld     dword ptr [esi+0E0h]
-0x70C93A: fld     [esp+44h+var_8]
+0x70C93A: fld     [esp+44h+rhs.y]
 0x70C93E: fld     st
 0x70C940: fmulp   st(2), st
 0x70C942: fxch    st(2)
 0x70C944: faddp   st(1), st
-0x70C946: fld     [esp+44h+var_4]
+0x70C946: fld     [esp+44h+rhs.z]
 0x70C94A: fld     st
 0x70C94C: fmul    dword ptr [esi+0E4h]
 0x70C952: faddp   st(2), st
@@ -178,13 +178,13 @@
 0x70C977: fld     dword ptr [esi+0ACh]
 0x70C97D: lea     ecx, [esp+44h+var_24]
 0x70C981: fmulp   st(4), st
-0x70C983: push    ecx
+0x70C983: push    ecx; rhs
 0x70C984: fld     dword ptr [esi+0B0h]
-0x70C98A: lea     edx, [esp+48h+var_18]
+0x70C98A: lea     edx, [esp+48h+out]
 0x70C98E: fmulp   st(3), st
-0x70C990: push    edx
+0x70C990: push    edx; out
 0x70C991: fxch    st(3)
-0x70C993: lea     ecx, [esp+4Ch+var_C]
+0x70C993: lea     ecx, [esp+4Ch+rhs]; this
 0x70C997: faddp   st(2), st
 0x70C999: fmul    dword ptr [esi+0B4h]
 0x70C99F: faddp   st(1), st
@@ -192,51 +192,51 @@
 0x70C9A7: fdivrp  st(1), st
 0x70C9A9: fstp    dword ptr [edi]
 0x70C9AB: fld     dword ptr [esi+6Ch]
-0x70C9AE: fstp    [esp+4Ch+var_C]
+0x70C9AE: fstp    [esp+4Ch+rhs.x]
 0x70C9B2: fld     dword ptr [esi+78h]
-0x70C9B5: fstp    [esp+4Ch+var_8]
+0x70C9B5: fstp    [esp+4Ch+rhs.y]
 0x70C9B9: fld     dword ptr [esi+84h]
-0x70C9BF: fstp    [esp+4Ch+var_4]
-0x70C9C3: call    sub_4BF9E0
+0x70C9BF: fstp    [esp+4Ch+rhs.z]
+0x70C9C3: call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.
 0x70C9C8: fld     dword ptr [eax]
 0x70C9CA: fld     [esp+44h+arg_0]
 0x70C9CE: fld     st
 0x70C9D0: fmulp   st(2), st
 0x70C9D2: fxch    st(1)
-0x70C9D4: fstp    [esp+44h+var_C]
+0x70C9D4: fstp    [esp+44h+rhs.x]
 0x70C9D8: fld     dword ptr [eax+4]
 0x70C9DB: fmul    st, st(1)
-0x70C9DD: fstp    [esp+44h+var_8]
+0x70C9DD: fstp    [esp+44h+rhs.y]
 0x70C9E1: fmul    dword ptr [eax+8]
-0x70C9E4: fstp    [esp+44h+var_4]
+0x70C9E4: fstp    [esp+44h+rhs.z]
 0x70C9E8: fld     [esp+44h+var_30]
-0x70C9EC: fld     [esp+44h+var_C]
+0x70C9EC: fld     [esp+44h+rhs.x]
 0x70C9F0: fld     st
 0x70C9F2: fsubp   st(2), st
 0x70C9F4: fxch    st(1)
-0x70C9F6: fstp    [esp+44h+var_18]
+0x70C9F6: fstp    [esp+44h+out.x]
 0x70C9FA: fld     [esp+44h+var_2C]
-0x70C9FE: fld     [esp+44h+var_8]
+0x70C9FE: fld     [esp+44h+rhs.y]
 0x70CA02: fld     st
 0x70CA04: fsubp   st(2), st
 0x70CA06: fxch    st(1)
-0x70CA08: fstp    [esp+44h+var_14]
+0x70CA08: fstp    [esp+44h+out.y]
 0x70CA0C: fld     [esp+44h+var_28]
-0x70CA10: fld     [esp+44h+var_4]
+0x70CA10: fld     [esp+44h+rhs.z]
 0x70CA14: fld     st
 0x70CA16: fsubp   st(2), st
 0x70CA18: fxch    st(1)
-0x70CA1A: fstp    [esp+44h+var_10]
-0x70CA1E: fld     [esp+44h+var_18]
+0x70CA1A: fstp    [esp+44h+out.z]
+0x70CA1E: fld     [esp+44h+out.x]
 0x70CA22: fld     st
 0x70CA24: fmul    dword ptr [esi+0DCh]
 0x70CA2A: fld     dword ptr [esi+0E0h]
-0x70CA30: fld     [esp+44h+var_14]
+0x70CA30: fld     [esp+44h+out.y]
 0x70CA34: fld     st
 0x70CA36: fmulp   st(2), st
 0x70CA38: fxch    st(2)
 0x70CA3A: faddp   st(1), st
-0x70CA3C: fld     [esp+44h+var_10]
+0x70CA3C: fld     [esp+44h+out.z]
 0x70CA40: fmul    dword ptr [esi+0E4h]
 0x70CA46: faddp   st(1), st
 0x70CA48: fadd    dword ptr [esi+0E8h]
@@ -254,7 +254,7 @@
 0x70CA77: fxch    st(2)
 0x70CA79: faddp   st(1), st
 0x70CA7B: fld     dword ptr [esi+0C4h]
-0x70CA81: fmul    [esp+44h+var_10]
+0x70CA81: fmul    [esp+44h+out.z]
 0x70CA85: faddp   st(1), st
 0x70CA87: fadd    dword ptr [esi+0C8h]
 0x70CA8D: fdivrp  st(1), st
@@ -262,21 +262,21 @@
 0x70CA92: fld     [esp+44h+var_30]
 0x70CA96: faddp   st(3), st
 0x70CA98: fxch    st(2)
-0x70CA9A: fstp    [esp+44h+var_C]
+0x70CA9A: fstp    [esp+44h+rhs.x]
 0x70CA9E: fadd    [esp+44h+var_2C]
-0x70CAA2: fstp    [esp+44h+var_8]
+0x70CAA2: fstp    [esp+44h+rhs.y]
 0x70CAA6: fadd    [esp+44h+var_28]
-0x70CAAA: fstp    [esp+44h+var_4]
-0x70CAAE: fld     [esp+44h+var_C]
+0x70CAAA: fstp    [esp+44h+rhs.z]
+0x70CAAE: fld     [esp+44h+rhs.x]
 0x70CAB2: fld     st
 0x70CAB4: fmul    dword ptr [esi+0DCh]
 0x70CABA: fld     dword ptr [esi+0E0h]
-0x70CAC0: fld     [esp+44h+var_8]
+0x70CAC0: fld     [esp+44h+rhs.y]
 0x70CAC4: fld     st
 0x70CAC6: fmulp   st(2), st
 0x70CAC8: fxch    st(2)
 0x70CACA: faddp   st(1), st
-0x70CACC: fld     [esp+44h+var_4]
+0x70CACC: fld     [esp+44h+rhs.z]
 0x70CAD0: fld     st
 0x70CAD2: fmul    dword ptr [esi+0E4h]
 0x70CAD8: faddp   st(2), st

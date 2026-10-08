@@ -76,12 +76,12 @@
 0x4855A1: mov     edi, [eax]
 0x4855A3: test    edi, edi
 0x4855A5: jz      short loc_4855FA
-0x4855A7: mov     ecx, edi
-0x4855A9: call    ExtraDataList_GetOwner
+0x4855A7: mov     ecx, edi; this
+0x4855A9: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4855AE: test    eax, eax
 0x4855B0: jz      short loc_4855FA
-0x4855B2: mov     ecx, edi
-0x4855B4: call    ExtraDataList_GetOwner
+0x4855B2: mov     ecx, edi; this
+0x4855B4: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x4855B9: test    eax, eax
 0x4855BB: jz      short loc_4855FA
 0x4855BD: mov     ecx, ds:0B333C4h
@@ -117,9 +117,9 @@
 0x485611: test    al, al
 0x485613: jz      short loc_485617
 0x485615: mov     bl, 1
-0x485617: mov     ecx, ds:0B333C4h
-0x48561D: push    1Dh
-0x48561F: call    Actor_GetSkillMasteryLevel
+0x485617: mov     ecx, ds:0B333C4h; this
+0x48561D: push    1Dh; actorValue
+0x48561F: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x485624: cmp     eax, 2
 0x485627: jl      short loc_48562B
 0x485629: mov     bl, 1

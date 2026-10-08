@@ -1,1 +1,6 @@
-BALLOONSTATES
+enum BALLOONSTATES : __int32
+{
+BALLOONStateFiller0 = 0x0,
+TTBS_NORMAL = 0x1,
+TTBS_LINK = 0x2,
+};

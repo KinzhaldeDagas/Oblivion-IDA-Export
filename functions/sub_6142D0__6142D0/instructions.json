@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6142D0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6142DA",
-    "line": "mov     ebx, [esp+14h+arg_4]",
+    "line": "mov     ebx, [esp+14h+outMaximumDistance]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6142E0",
-    "line": "mov     edi, [esp+1Ch+arg_0]",
+    "line": "mov     edi, [esp+1Ch+outOptimalDistance]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x614300",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x614304",
-    "line": "fstp    [esp+1Ch+arg_4]",
+    "line": "fstp    [esp+1Ch+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x61434E",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x61435E",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,19 +307,19 @@
   },
   {
     "ea": "0x614371",
-    "line": "push    2",
+    "line": "push    2; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x614373",
-    "line": "lea     ecx, [eax+18h]",
+    "line": "lea     ecx, [eax+18h]; magicItem",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x614376",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x61437F",
-    "line": "lea     ecx, [esp+1Ch+arg_4]",
+    "line": "lea     ecx, [esp+1Ch+outMaximumDistance]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x614384",
-    "line": "lea     edx, [esp+20h+arg_0]",
+    "line": "lea     edx, [esp+20h+outOptimalDistance]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x6143A1",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x6143AB",
-    "line": "fstp    [esp+1Ch+arg_4]",
+    "line": "fstp    [esp+1Ch+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -451,19 +451,19 @@
   },
   {
     "ea": "0x6143BE",
-    "line": "mov     ecx, [eax]",
+    "line": "mov     ecx, [eax]; magicItem",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6143C0",
-    "line": "push    2",
+    "line": "push    2; effectIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6143C2",
-    "line": "call    MagicItem_GetFXEffect",
+    "line": "call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x6143E7",
-    "line": "fld     [esp+1Ch+arg_0]",
+    "line": "fld     [esp+1Ch+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x6143EF",
-    "line": "fld     [esp+1Ch+arg_4]",
+    "line": "fld     [esp+1Ch+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x6143FA",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x614412",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x614427",
-    "line": "fld     [esp+1Ch+arg_0]",
+    "line": "fld     [esp+1Ch+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x614459",
-    "line": "fst     [esp+1Ch+arg_0]",
+    "line": "fst     [esp+1Ch+outOptimalDistance]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -787,13 +787,13 @@
   },
   {
     "ea": "0x614461",
-    "line": "fstp    [esp+1Ch+arg_0]",
+    "line": "fstp    [esp+1Ch+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x614465",
-    "line": "fld     [esp+1Ch+arg_0]",
+    "line": "fld     [esp+1Ch+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x61446F",
-    "line": "fld     [esp+1Ch+arg_4]",
+    "line": "fld     [esp+1Ch+outMaximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -865,7 +865,7 @@
   },
   {
     "ea": "0x614486",
-    "line": "fstp    [esp+1Ch+arg_4]",
+    "line": "fstp    [esp+1Ch+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x61449C",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x6144A1",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     [esp+14h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6144A5",
-    "line": "fmul    [esp+14h+arg_4]",
+    "line": "fmul    [esp+14h+outMaximumDistance]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x6144B5",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -991,13 +991,13 @@
   },
   {
     "ea": "0x6144BA",
-    "line": "fld     [esp+14h+arg_0]",
+    "line": "fld     [esp+14h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x6144BE",
-    "line": "fmul    [esp+14h+arg_4]",
+    "line": "fmul    [esp+14h+outMaximumDistance]",
     "mnemonic": "fmul",
     "size": 4
   },

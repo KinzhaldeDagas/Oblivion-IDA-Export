@@ -1,10 +1,10 @@
 0x663520: push    ebx
 0x663521: push    esi
 0x663522: mov     esi, ecx
-0x663524: mov     ecx, [esi+764h]
+0x663524: mov     ecx, [esi+764h]; this
 0x66352A: test    ecx, ecx
 0x66352C: jz      short loc_663542
-0x66352E: call    sub_6B7260
+0x66352E: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x663533: test    al, al
 0x663535: jz      short loc_663542
 0x663537: mov     ecx, [esi+764h]
@@ -40,7 +40,7 @@
 0x663599: mov     ecx, edi; this
 0x66359B: call    sub_6B73E0
 0x6635A0: push    edi
-0x6635A1: call    FormHeapFree
+0x6635A1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6635A6: add     esp, 4
 0x6635A9: mov     dword ptr [esi+764h], 0
 0x6635B3: mov     dword ptr [esi+760h], 0

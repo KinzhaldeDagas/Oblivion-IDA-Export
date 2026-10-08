@@ -1,19 +1,36 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 13,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x51EB80",
+      "0x51ECF5"
+    ],
+    [
+      "0x9B7A40",
+      "0x9B7A8D"
+    ]
+  ],
+  "chunks_sha256": "a1802a36d9dbf1732fabaa605e768a3e0098d3a5a8d2c793202fc647d42bc61c",
+  "comment_regular": "Verified blood component lifecycle: TESCreature +0x11C is TESModel bloodSpray, +0x134 is TESTexture bloodDecal; actor-base-data this is +0x24. Constructor constructs, InitializeDefaults initializes, destructor destroys these components. No Fallout member offsets imported.",
   "comment_repeatable": "",
-  "data_refs_count": 13,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 14,
   "display_name": "TESCreature_constr",
   "end_ea": "0x51ECF5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESCreature_constr",
   "segment": ".text",
   "sha256": "a00a5edba0ee93b3e33f7262f22ba6eb31e59775757b1d6a0abc0f49dc07e443",
   "size": 373,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51EB80",
-  "type": "TESForm *__thiscall(TESForm *this)",
-  "xrefs_from_count": 116,
+  "total_chunk_size": 450,
+  "type": "TESCreature *__thiscall(TESCreature *self)",
+  "xrefs_from_count": 136,
   "xrefs_to_count": 1
 }

@@ -19,7 +19,6 @@
 0x90F3C2: mov     esi, [esp+1Ch+arg_0]
 0x90F3C6: push    ebp
 0x90F3C7: jmp     short loc_90F3D0
-0x90F3C9: align 10h
 0x90F3D0: mov     eax, [edi+120h]
 0x90F3D6: mov     ecx, [eax+ebx*8]
 0x90F3D9: mov     edx, [ecx]

@@ -1,17 +1,18 @@
-void __usercall sub_478E30(char *this@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+// Clear ActorSkinInfo light equipment slot at +0x12C; called by native UnequipLight handling.
+void __thiscall ActorSkinInfo_ClearLightSlot(ActorSkinInfo *this)
 {
-  int v6; // ecx
-  char v7; // al
+  TESObjectLIGH *LightForm; // ecx
+  char v3; // al
 
-  v6 = *((_DWORD *)this + 0x4B);
-  if ( v6 )
+  LightForm = this->LightForm; /*0x478e33*/
+  if ( LightForm ) /*0x478e41*/
   {
-    if ( *(_BYTE *)(v6 + 4) == 0x1A )
-      sub_478780(this, a2, a3, a4, a5, (int)(this + 0x12C), 1, 0);
+    if ( *((_BYTE *)LightForm + 4) == 0x1A ) /*0x478e47*/
+      ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->LightForm, 1, 0); /*0x478e50*/
   }
-  if ( *((PlayerCharacter **)this + 0x54) == TESDataHandler_g_PlayerRef )
+  if ( (PlayerCharacter *)this->owner == reference ) /*0x478e61*/
   {
-    v7 = sub_65D770(TESDataHandler_g_PlayerRef, (int)this);
-    sub_663870(TESDataHandler_g_PlayerRef, 0, v7);
+    v3 = sub_65D770(reference, (int)this); /*0x478e64*/
+    sub_663870((Ni2DBuffer **)reference, 0, v3); /*0x478e72*/
   }
 }

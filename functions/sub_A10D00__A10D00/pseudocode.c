@@ -1,5 +1,6 @@
-int sub_A10D00()
+// CRT dynamic initializer for the process-global Oblivion CWindMatrices object; constructs the four-matrix default and registers the matching atexit destructor.
+int __cdecl OB_CWindMatrices_GlobalCtor_010201A0()
 {
-  sub_793C60((unsigned int *)&word_B42A10);
-  return atexit(sub_A27040);
+  OB_CWindMatrices_ctor_010201A0(&CWindEngine__s_windMatrixContainer); /*0xa10d05*/
+  return atexit(OB_CWindMatrices_GlobalDtor_010201A0); /*0xa10d15*/
 }

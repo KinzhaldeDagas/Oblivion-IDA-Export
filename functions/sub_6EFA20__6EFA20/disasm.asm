@@ -15,34 +15,34 @@
 0x6EFA4D: push    eax
 0x6EFA4E: lea     eax, [esp+0C0h+var_C]
 0x6EFA55: mov     large fs:0, eax
-0x6EFA5B: mov     ebp, [esp+0C0h+arg_0]
-0x6EFA62: mov     edi, [esp+0C0h+arg_4]
-0x6EFA69: mov     esi, [esp+0C0h+arg_8]
-0x6EFA70: mov     ebx, [esp+0C0h+arg_C]
+0x6EFA5B: mov     ebp, [esp+0C0h+source]
+0x6EFA62: mov     edi, [esp+0C0h+coordinateMetadata]
+0x6EFA69: mov     esi, [esp+0C0h+bank0]
+0x6EFA70: mov     ebx, [esp+0C0h+bank1]
 0x6EFA77: sub     esp, 1Ch
-0x6EFA7A: mov     ecx, esp
+0x6EFA7A: mov     ecx, esp; this
 0x6EFA7C: mov     [esp+0DCh+var_A4], esp
-0x6EFA80: push    8; MaxCount
+0x6EFA80: push    8; count
 0x6EFA82: mov     dword ptr [ecx+18h], 0Fh
 0x6EFA89: mov     dword ptr [ecx+14h], 0
 0x6EFA90: push    offset aFregt003; "FREGT003"
 0x6EFA95: mov     byte ptr [ecx+4], 0
-0x6EFA99: call    sub_414500
+0x6EFA99: call    OB_stString28_AssignBytes_010201A0; Open and validate the FREGT003 FaceGen texture-morph format.
 0x6EFA9E: lea     ecx, [esp+0DCh+var_54]; this
 0x6EFAA5: call    sub_6F6110
 0x6EFAAA: xor     eax, eax
 0x6EFAAC: push    eax
 0x6EFAAD: sub     esp, 1Ch
-0x6EFAB0: mov     ecx, esp
+0x6EFAB0: mov     ecx, esp; this
 0x6EFAB2: mov     [esp+0E0h+var_A4], esp
-0x6EFAB6: push    0FFFFFFFFh
-0x6EFAB8: push    eax
+0x6EFAB6: push    0FFFFFFFFh; count
+0x6EFAB8: push    eax; offset
 0x6EFAB9: mov     dword ptr [ecx+18h], 0Fh
 0x6EFAC0: mov     [ecx+14h], eax
-0x6EFAC3: push    ebp
+0x6EFAC3: push    ebp; source
 0x6EFAC4: mov     [esp+0ECh+var_4], eax
 0x6EFACB: mov     [ecx+4], al
-0x6EFACE: call    sub_414420
+0x6EFACE: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x6EFAD3: lea     ecx, [esp+0E0h+var_54]
 0x6EFADA: call    sub_6F66E0
 0x6EFADF: test    al, al
@@ -56,7 +56,7 @@
 0x6EFB00: push    1
 0x6EFB02: lea     eax, [esp+0C8h+var_8C]
 0x6EFB06: push    eax
-0x6EFB07: call    sub_6F5E50
+0x6EFB07: call    sub_6F5E50; Read the 56-byte FREGT003 descriptor after the magic. Its first fields are width, height, and basis counts for two texture banks. Every one of the 20 vanilla EGT entries in Oblivion - Meshes.bsa declares 50/0 bases.
 0x6EFB0C: test    al, al
 0x6EFB0E: jnz     short loc_6EFB2B
 0x6EFB10: lea     ecx, [esp+0C0h+var_54]; this
@@ -71,7 +71,7 @@
 0x6EFB38: mov     ecx, ebx
 0x6EFB3A: call    sub_559930
 0x6EFB3F: mov     eax, [esp+0C0h+var_88]
-0x6EFB43: mov     edi, [esp+0C0h+var_84]
+0x6EFB43: mov     edi, [esp+0C0h+var_84]; Load every record in EGT basis bank 0; each basis record is 64 bytes and owns three signed image-channel planes.
 0x6EFB47: lea     ecx, [eax+7]
 0x6EFB4A: and     ecx, 0FFFFFFF8h
 0x6EFB4D: sub     ecx, eax
@@ -83,13 +83,13 @@
 0x6EFB60: imul    ecx, eax
 0x6EFB63: mov     [esp+100h+var_90], eax
 0x6EFB67: mov     eax, esp
-0x6EFB69: push    offset sub_794EB0; a5
-0x6EFB6E: push    offset sub_6EF4A0; a4
+0x6EFB69: push    offset OB_stVector4_DestroyThiscall_010201A0; a5
+0x6EFB6E: push    offset FaceGenEgtBasisBank_Construct; a4
 0x6EFB73: push    3; size
 0x6EFB75: push    10h; a2
 0x6EFB77: add     eax, 10h
 0x6EFB7A: push    eax; a1
-0x6EFB7B: mov     [esp+114h+var_94], ecx
+0x6EFB7B: mov     [esp+114h+newSize], ecx
 0x6EFB82: call    ArrayConstructor
 0x6EFB87: push    edi
 0x6EFB88: mov     ecx, esi
@@ -102,7 +102,6 @@
 0x6EFBA1: mov     [esp+0C0h+var_98], edi
 0x6EFBA5: jmp     short loc_6EFBB8
 0x6EFBA7: jmp     short loc_6EFBB0
-0x6EFBA9: align 10h
 0x6EFBB0: mov     edi, [esp+0C0h+var_98]
 0x6EFBB4: mov     ebp, [esp+0C0h+var_A8]
 0x6EFBB8: mov     ecx, [esi+4]
@@ -156,7 +155,7 @@
 0x6EFC40: cmp     ebp, eax
 0x6EFC42: jb      short loc_6EFC49
 0x6EFC44: call    __invalid_parameter_noinfo
-0x6EFC49: mov     ebp, [esp+0C0h+var_94]
+0x6EFC49: mov     ebp, [esp+0C0h+newSize]
 0x6EFC4D: sub     ebp, [esp+0C0h+var_90]
 0x6EFC51: mov     eax, [esi+4]
 0x6EFC54: mov     ecx, [esp+0C0h+var_9C]
@@ -165,7 +164,6 @@
 0x6EFC60: mov     [esp+0C0h+var_AC], 0
 0x6EFC68: mov     [esp+0C0h+var_A0], edi
 0x6EFC6C: jmp     short loc_6EFC78
-0x6EFC6E: align 10h
 0x6EFC70: mov     ebp, [esp+0C0h+var_A4]
 0x6EFC74: mov     edi, [esp+0C0h+var_98]
 0x6EFC78: mov     ecx, [esi+4]
@@ -179,11 +177,11 @@
 0x6EFC8D: call    __invalid_parameter_noinfo
 0x6EFC92: mov     edx, [esi+4]
 0x6EFC95: mov     eax, [esp+0C0h+var_A0]
-0x6EFC99: lea     ecx, [eax+edx+10h]; int
-0x6EFC9D: mov     edx, [esp+0C0h+var_94]
-0x6EFCA1: push    0; int
-0x6EFCA3: push    edx; int
-0x6EFCA4: call    sub_6EF4B0
+0x6EFC99: lea     ecx, [eax+edx+10h]; this
+0x6EFC9D: mov     edx, [esp+0C0h+newSize]
+0x6EFCA1: push    0; fillValue
+0x6EFCA3: push    edx; newSize
+0x6EFCA4: call    OB_stVectorByte_ResizeFill_010201A0; Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.
 0x6EFCA9: mov     ecx, [esi+4]
 0x6EFCAC: test    ecx, ecx
 0x6EFCAE: jz      short loc_6EFCBE
@@ -239,12 +237,12 @@
 0x6EFD50: cmp     eax, [esp+0C0h+var_84]
 0x6EFD54: mov     [esp+0C0h+var_A8], eax
 0x6EFD58: jb      loc_6EFBB0
-0x6EFD5E: mov     esi, [esp+0C0h+var_80]
+0x6EFD5E: mov     esi, [esp+0C0h+var_80]; Load EGT basis bank 1 using the second descriptor count. Every shipped Oblivion EGT asset declares 50 bases in bank 0 and zero in bank 1.
 0x6EFD62: sub     esp, 40h
 0x6EFD65: mov     eax, esp
 0x6EFD67: mov     [esp+100h+var_A4], esp
-0x6EFD6B: push    offset sub_794EB0; a5
-0x6EFD70: push    offset sub_6EF4A0; a4
+0x6EFD6B: push    offset OB_stVector4_DestroyThiscall_010201A0; a5
+0x6EFD70: push    offset FaceGenEgtBasisBank_Construct; a4
 0x6EFD75: push    3; size
 0x6EFD77: push    10h; a2
 0x6EFD79: add     eax, 10h
@@ -275,7 +273,6 @@
 0x6EFDE2: call    ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
 0x6EFDE7: xor     al, al
 0x6EFDE9: jmp     loc_6EFFCE
-0x6EFDEE: align 10h
 0x6EFDF0: mov     esi, [esp+0C0h+var_A8]
 0x6EFDF4: mov     edi, [esp+0C0h+var_AC]
 0x6EFDF8: mov     ecx, [ebx+4]
@@ -333,13 +330,12 @@
 0x6EFE8C: mov     edx, [esp+0C0h+var_9C]
 0x6EFE90: mov     eax, [esp+0C0h+var_AC]
 0x6EFE94: mov     [ecx+edi+0Ch], edx
-0x6EFE98: mov     edi, [esp+0C0h+var_94]
+0x6EFE98: mov     edi, [esp+0C0h+newSize]
 0x6EFE9C: sub     edi, [esp+0C0h+var_90]
 0x6EFEA0: xor     ebp, ebp
 0x6EFEA2: mov     [esp+0C0h+var_A4], edi
 0x6EFEA6: mov     [esp+0C0h+var_A0], eax
 0x6EFEAA: jmp     short loc_6EFEB8
-0x6EFEAC: align 10h
 0x6EFEB0: mov     edi, [esp+0C0h+var_A4]
 0x6EFEB4: mov     esi, [esp+0C0h+var_A8]
 0x6EFEB8: mov     ecx, [ebx+4]
@@ -353,11 +349,11 @@
 0x6EFECB: call    __invalid_parameter_noinfo
 0x6EFED0: mov     ecx, [ebx+4]
 0x6EFED3: mov     edx, [esp+0C0h+var_A0]
-0x6EFED7: mov     eax, [esp+0C0h+var_94]
-0x6EFEDB: push    0; int
-0x6EFEDD: lea     ecx, [ecx+edx+10h]; int
-0x6EFEE1: push    eax; int
-0x6EFEE2: call    sub_6EF4B0
+0x6EFED7: mov     eax, [esp+0C0h+newSize]
+0x6EFEDB: push    0; fillValue
+0x6EFEDD: lea     ecx, [ecx+edx+10h]; this
+0x6EFEE1: push    eax; newSize
+0x6EFEE2: call    OB_stVectorByte_ResizeFill_010201A0; Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.
 0x6EFEE7: mov     ecx, [ebx+4]
 0x6EFEEA: test    ecx, ecx
 0x6EFEEC: jz      short loc_6EFEFA
@@ -437,3 +433,22 @@
 0x6EFFF6: mov     [esp+0C0h+var_54], offset ??_7BSFaceGenBinaryFile@@6B@; const BSFaceGenBinaryFile::`vftable'
 0x6EFFFE: mov     [esp+0C0h+var_4], 2
 0x6F0009: jmp     loc_6EFDB5
+0x9C8620: lea     ecx, [ebp-54h]; this
+0x9C8623: jmp     ??1BSFaceGenBinaryFile@@UAE@XZ; BSFaceGenBinaryFile::~BSFaceGenBinaryFile(void)
+0x9C8628: lea     ecx, [ebp-54h]; this
+0x9C862B: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8630: lea     ecx, [ebp-54h]; this
+0x9C8633: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8638: lea     ecx, [ebp-54h]; this
+0x9C863B: jmp     ??1FutBinaryFileC@@UAE@XZ; FutBinaryFileC::~FutBinaryFileC(void)
+0x9C8640: mov     edx, [esp+coordinateMetadata]
+0x9C8644: lea     eax, [edx-0B0h]
+0x9C864A: mov     ecx, [edx-0B4h]
+0x9C8650: xor     ecx, eax
+0x9C8652: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8657: add     eax, 10h
+0x9C865A: mov     ecx, [edx-4]
+0x9C865D: xor     ecx, eax
+0x9C865F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C8664: mov     eax, offset stru_AF0A28
+0x9C8669: jmp     ___CxxFrameHandler3

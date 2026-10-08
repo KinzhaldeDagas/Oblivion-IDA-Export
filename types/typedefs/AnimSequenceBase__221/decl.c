@@ -1,1 +1,1 @@
-AnimSequenceBase
+struct AnimSequenceBase;

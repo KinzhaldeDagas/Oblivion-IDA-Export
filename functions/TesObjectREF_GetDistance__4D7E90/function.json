@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
-  "callers_count": 100,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 141,
+  "chunks": [
+    [
+      "0x4D7E90",
+      "0x4D7F40"
+    ]
+  ],
+  "chunks_sha256": "cdc813544c45d1859ca8af9acdc7e14725fd7109b34217c9037bec802f0fd3b6",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "MEF LARGE PERF 2026-09-08: PERF comparator constraint: GetDistance filters targetflags/interior/worldspace compatibility, calls target GetPos virtual and then distance-to-point sqrt. It can return a sentinel instead. Replacing comparator with raw position squared distance is not proven equivalent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TesObjectREF_GetDistance",
   "end_ea": "0x4D7F40",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TesObjectREF_GetDistance",
   "segment": ".text",
   "sha256": "cdc813544c45d1859ca8af9acdc7e14725fd7109b34217c9037bec802f0fd3b6",
   "size": 176,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D7E90",
+  "total_chunk_size": 176,
   "type": "double __thiscall(TESObjectREFR *this, TESObjectREFR *a2, char unk000)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 148

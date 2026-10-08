@@ -1,1 +1,5 @@
-close_desktop_request
+struct close_desktop_request
+{
+request_header __header;
+obj_handle_t handle;
+};

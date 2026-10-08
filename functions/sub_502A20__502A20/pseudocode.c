@@ -9,5 +9,5 @@ char __usercall sub_502A20@<al>(
         int a8,
         double *a9)
 {
-  return Cmd_GetFurnitureMarkerID(a1, a2, a5, 0, 0, a9);
+  return Cmd_GetFurnitureMarkerID(a1, a2, a5, 0, 0, a9); /*0x502a36*/
 }

@@ -1,7 +1,7 @@
-0x784180: mov     ecx, [esp+arg_0]
-0x784184: mov     edx, [esp+arg_4]
+0x784180: mov     ecx, [esp+first]; Oblivion 1.2.0.416: forward-copies six-dword records from [first,last) and returns the advanced destination.
+0x784184: mov     edx, [esp+last]
 0x784188: cmp     ecx, edx
-0x78418A: mov     eax, [esp+arg_8]
+0x78418A: mov     eax, [esp+destination]
 0x78418E: jz      short locret_7841BE
 0x784190: push    esi
 0x784191: mov     esi, [ecx]

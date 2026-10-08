@@ -1,1 +1,4 @@
-HPALETTE__
+struct HPALETTE__
+{
+int unused;
+};

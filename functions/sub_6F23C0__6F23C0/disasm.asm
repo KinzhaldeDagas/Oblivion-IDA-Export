@@ -21,8 +21,8 @@
 0x6F23F1: jbe     short loc_6F23F8
 0x6F23F3: call    sub_6F1780
 0x6F23F8: push    ecx
-0x6F23F9: push    esi; char *
-0x6F23FA: call    sub_78FB60
+0x6F23F9: push    esi; count
+0x6F23FA: call    OB_stVector4_Allocate_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded allocator for vectors with 4-byte elements. Validates count*4 overflow, throws bad_alloc on overflow, and allocates through FormHeapAlloc; FindPairs uses it for vector<bool>'s uint32 backing words.
 0x6F23FF: mov     [edi+4], eax
 0x6F2402: mov     [edi+8], eax
 0x6F2405: lea     eax, [eax+esi*4]

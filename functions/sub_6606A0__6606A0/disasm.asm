@@ -18,7 +18,7 @@
 0x6606C8: mov     ecx, [esi]; this
 0x6606CA: test    ecx, ecx
 0x6606CC: jz      short loc_6606D9
-0x6606CE: call    sub_5E6C60
+0x6606CE: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x6606D3: test    al, al
 0x6606D5: jz      short loc_6606D9
 0x6606D7: mov     bl, 1

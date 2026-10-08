@@ -9,26 +9,26 @@ void __thiscall sub_728C00(int this, int a2)
   int v8; // [esp+14h] [ebp-8h] BYREF
   int v9; // [esp+18h] [ebp-4h] BYREF
 
-  if ( *(_BYTE *)(this + 0x3C) )
+  if ( *(_BYTE *)(this + 0x3C) ) /*0x728c06*/
   {
-    v2 = *(_BYTE **)(this + 0x34);
-    v5 = 0;
-    v7 = 0;
-    v4 = 0;
-    if ( v2 )
+    v2 = *(_BYTE **)(this + 0x34); /*0x728c0c*/
+    v5 = 0; /*0x728c11*/
+    v7 = 0; /*0x728c15*/
+    v4 = 0; /*0x728c19*/
+    if ( v2 ) /*0x728c1d*/
     {
-      if ( (*(unsigned __int8 (__thiscall **)(_BYTE *))(*(_DWORD *)v2 + 0x4C))(v2) )
+      if ( (*(unsigned __int8 (__thiscall **)(_BYTE *))(*(_DWORD *)v2 + 0x4C))(v2) ) /*0x728c26*/
       {
-        if ( (v2[0x2C] & 1) != 0 )
+        if ( (v2[0x2C] & 1) != 0 ) /*0x728c30*/
         {
-          v6 = 0;
-          sub_726320((int)v2, 1u, &v4, &v9, &v7, &v8, &v6, &v5);
+          v6 = 0; /*0x728c54*/
+          sub_726320((int)v2, 1u, &v4, &v9, &v7, &v8, &v6, &v5); /*0x728c58*/
         }
       }
     }
-    v3 = v5;
-    *(_DWORD *)a2 = v4;
-    *(_DWORD *)(a2 + 4) = v3;
-    *(_BYTE *)(a2 + 8) = 0;
+    v3 = v5; /*0x728c65*/
+    *(_DWORD *)a2 = v4; /*0x728c69*/
+    *(_DWORD *)(a2 + 4) = v3; /*0x728c6b*/
+    *(_BYTE *)(a2 + 8) = 0; /*0x728c6e*/
   }
 }

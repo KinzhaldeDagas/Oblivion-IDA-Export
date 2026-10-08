@@ -1,4 +1,4 @@
-BSStringT *sub_A128A0()
+NiRTTI *sub_A128A0()
 {
-  return sub_70E220(&stru_BA80E0, "bhkHingeConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA80E0, "bhkHingeConstraint", &MEMORY[0xBA7D50]); /*0xa128b4*/
 }

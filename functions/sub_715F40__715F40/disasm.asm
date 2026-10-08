@@ -1,4 +1,4 @@
-0x715F40: push    ebx
+0x715F40: push    ebx; Load persistent NiTimeController state: flags +0x08, frequency/phase/key bounds, and target/next links. Legacy migration clears flag bit 0x20 before stream version 0x0A01006D. Runtime time caches and update bytes are constructor state, not serialized.
 0x715F41: push    ebp
 0x715F42: push    esi
 0x715F43: mov     esi, [esp+0Ch+a2]

@@ -179,7 +179,7 @@
 0x401461: mov     [esi+16Ch], al
 0x401467: pop     ebp
 0x401468: jnz     short loc_40146F
-0x40146A: call    sub_402170
+0x40146A: call    MemoryPool_ResetRegistry; Clears the global small-pool registry (0x81 slots) and the high-byte address-to-pool lookup table.
 0x40146F: pop     edi
 0x401470: pop     esi
 0x401471: pop     ebx

@@ -1,1 +1,1 @@
-NiSourceCubeMap
+struct NiSourceCubeMap;

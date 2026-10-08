@@ -1,3 +1,4 @@
+// Oblivion ShadowLight per-geometry constant setup. For mode-5 caster selectors 6..9, native PointLightPos0 c16 comes from B44FD8; c16.w is the projected-depth divisor, taken from the current light range/control and divided by object scale for rigid geometry. The positive B44EE4 path supplies the alternate depth-origin variant.
 int __fastcall sub_7C9230(
         int a1,
         int a2,
@@ -16,7 +17,7 @@ int __fastcall sub_7C9230(
   bool v14; // zf
   int v15; // edi
   _DWORD **v16; // ecx
-  _DWORD *v17; // eax
+  _DWORD *LightRef; // eax
   float v18; // esi
   bool v20; // c0
   double v21; // st7
@@ -24,7 +25,7 @@ int __fastcall sub_7C9230(
   int v23; // eax
   int v24; // ecx
   int v25; // eax
-  int v26; // edx
+  float v26; // edx
   double v27; // st7
   double v28; // st7
   float v29; // ecx
@@ -67,7 +68,7 @@ int __fastcall sub_7C9230(
   float v66; // [esp+60h] [ebp-224h]
   float v67; // [esp+64h] [ebp-220h] BYREF
   float v68; // [esp+68h] [ebp-21Ch]
-  int v69; // [esp+6Ch] [ebp-218h]
+  float v69; // [esp+6Ch] [ebp-218h]
   float v70; // [esp+70h] [ebp-214h]
   float v71; // [esp+74h] [ebp-210h] BYREF
   float v72; // [esp+78h] [ebp-20Ch]
@@ -116,432 +117,432 @@ int __fastcall sub_7C9230(
   char v115[96]; // [esp+1E4h] [ebp-A0h] BYREF
   _BYTE v116[64]; // [esp+244h] [ebp-40h] BYREF
 
-  v10 = *(_DWORD *)(a7 + 0x18);
-  v66 = *(float *)&a1;
-  v64 = 0;
-  if ( v10 && (v64 = (*(_BYTE *)(v10 + 0x1C) & 2) != 0, (*(_BYTE *)(v10 + 0x1C) & 2) != 0) )
+  v10 = *(_DWORD *)(a7 + 0x18); /*0x7c923f*/
+  v66 = *(float *)&a1; /*0x7c9249*/
+  v64 = 0; /*0x7c924d*/
+  if ( v10 && (v64 = (*(_BYTE *)(v10 + 0x1C) & 2) != 0, (*(_BYTE *)(v10 + 0x1C) & 2) != 0) ) /*0x7c9261*/
   {
-    if ( !a5 )
-      return 0;
-    v12 = a9;
-    if ( !*(_DWORD *)(a1 + 0x34) )
-      NiDX9Renderer::CalculateBoneMatrixes(dword_B43104, (NiSkinInstance *)a4, a9, 0, 3, 1);
-    (*(void (__thiscall **)(_DWORD, _DWORD))(**(_DWORD **)(a1 + 0x18) + 0x30))(
+    if ( !a5 ) /*0x7c9268*/
+      return 0; /*0x7c9268*/
+    v12 = a9; /*0x7c9272*/
+    if ( !*(_DWORD *)(a1 + 0x34) ) /*0x7c926e*/
+      NiDX9Renderer::CalculateBoneMatrixes(unk_B43104, (NiSkinInstance *)a4, a9, 0, 3, 1); /*0x7c9288*/
+    (*(void (__thiscall **)(_DWORD, _DWORD))(**(_DWORD **)(a1 + 0x18) + 0x30))( /*0x7c929a*/
       *(_DWORD *)(a1 + 0x18),
       *(unsigned __int16 *)(a5 + 0x24));
   }
   else
   {
-    v12 = a9;
+    v12 = a9; /*0x7c929e*/
   }
-  sub_765480(*(NiDX9Renderer **)(a1 + 0x14), (float *)v12, 0);
-  v13 = flt_B44EE4;
-  v14 = LOWORD(dword_B42EAC) == 5;
-  v15 = dword_B42E90;
-  v65 = *(float *)&dword_B42E90;
-  if ( v14 && 0.0 == v13 )
+  NiDX9Renderer_SetModelTransform(*(NiDX9Renderer **)(a1 + 0x14), (float *)v12, 0); /*0x7c92a7*/
+  v13 = flt_B44EE4; /*0x7c92ac*/
+  v14 = *(_WORD *)&OB_RendererGlobalState_010201A0[0x13] == 5; /*0x7c92b2*/
+  v15 = LODWORD(unk_B42E90); /*0x7c92bc*/
+  v65 = unk_B42E90; /*0x7c92c2*/
+  if ( v14 && 0.0 == v13 ) /*0x7c92d5*/
   {
-    v16 = *(_DWORD ***)(dword_B42EB8 + 0xC);
-    if ( *v16 )
+    v16 = *(_DWORD ***)(*(_DWORD *)&OB_RendererGlobalState_010201A0[0x1F] + 0xC); /*0x7c92de*/
+    if ( *v16 ) /*0x7c92e3*/
     {
-      v17 = sub_405AD0(*v16, &v65);
-      v18 = v65;
-      v66 = *(float *)(*v17 + 0xF8);
-      if ( v65 != 0.0 && !InterlockedDecrement((volatile LONG *)(LODWORD(v65) + 4)) && v18 != 0.0 )
-        (**(void (__thiscall ***)(_DWORD, int))LODWORD(v18))(LODWORD(v18), 1);
-      if ( !a4 )
-        v66 = v66 / a9->scale;
-      flt_B44FE4 = v66;
-      return 0;
+      LightRef = ShadowSceneLight_GetLightRef(*v16, &v65); /*0x7c92f5*/
+      v18 = v65; /*0x7c92fc*/
+      v66 = *(float *)(*LightRef + 0xF8); /*0x7c9308*/
+      if ( v65 != 0.0 && !InterlockedDecrement((volatile LONG *)(LODWORD(v65) + 4)) && v18 != 0.0 ) /*0x7c931e*/
+        (**(void (__thiscall ***)(_DWORD, int))LODWORD(v18))(LODWORD(v18), 1); /*0x7c9328*/
+      if ( !a4 ) /*0x7c932e*/
+        v66 = v66 / a9->scale; /*0x7c933a*/
+      ShadowLightPointLightPos0DepthRange = v66; /*0x7c9344*/
+      return 0; /*0x7c9350*/
     }
-    return 0;
+    return 0; /*0x7c9f1f*/
   }
   if ( (unsigned int)(v15 - 6) <= 3 )
   {
-    v20 = v13 > 0.0;
-    v21 = 0.0;
-    if ( !v20 )
+    v20 = v13 > 0.0; /*0x7c935f*/
+    v21 = 0.0; /*0x7c9363*/
+    if ( !v20 ) /*0x7c9368*/
     {
-      v67 = 0.0;
-      v68 = 0.0;
-      *(float *)&v69 = 0.0;
-      v30 = flt_B465A8;
-      *(float *)&dword_B44FD8 = 0.0;
-      v70 = v30;
-      v31 = v70;
-      *(float *)&dword_B44FDC = 0.0;
-      *(float *)&dword_B44FE0 = 0.0;
-      flt_B44FE4 = v31;
-      return 0;
+      v67 = 0.0; /*0x7c9456*/
+      v68 = 0.0; /*0x7c945e*/
+      v69 = 0.0; /*0x7c9466*/
+      v30 = OB_ShaderConstantStorage_010201A0[0x1E5]; /*0x7c946e*/
+      ShadowLightPointLightPos0Constant = 0.0; /*0x7c9474*/
+      v70 = v30; /*0x7c947a*/
+      v31 = v70; /*0x7c947e*/
+      flt_B44FDC = 0.0; /*0x7c9482*/
+      flt_B44FE0 = 0.0; /*0x7c9487*/
+      ShadowLightPointLightPos0DepthRange = v31; /*0x7c948d*/
+      return 0; /*0x7c949b*/
     }
-    v22 = *(_DWORD *)(a7 + 0x18);
-    if ( v22 )
+    v22 = *(_DWORD *)(a7 + 0x18); /*0x7c9371*/
+    if ( v22 ) /*0x7c9376*/
     {
-      if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)v22 + 0x54))(*(_DWORD *)(a7 + 0x18)) >= 1
+      if ( (*(int (__thiscall **)(_DWORD))(*(_DWORD *)v22 + 0x54))(*(_DWORD *)(a7 + 0x18)) >= 1 /*0x7c9394*/
         && (*(int (__thiscall **)(int))(*(_DWORD *)v22 + 0x54))(v22) <= 0xA )
       {
-        v21 = 0.0;
-        v23 = 1;
-        goto LABEL_26;
+        v21 = 0.0; /*0x7c9396*/
+        v23 = 1; /*0x7c9398*/
+        goto LABEL_26; /*0x7c939d*/
       }
-      v21 = 0.0;
+      v21 = 0.0; /*0x7c939f*/
     }
-    v23 = 0;
+    v23 = 0; /*0x7c93a1*/
 LABEL_26:
-    v24 = 0;
+    v24 = 0; /*0x7c93a3*/
     if ( (v23 != 0 ? v22 : 0) == 0 )
     {
 LABEL_34:
-      v65 = *(float *)(v24 + 0xA0);
-      v66 = flt_B44EE4;
-      if ( !a4 )
-        v66 = v66 / a9->scale;
-      v67 = v21;
-      v68 = v21;
-      v26 = LODWORD(v68);
-      v27 = v65;
-      *(float *)&dword_B44FD8 = v67;
-      *(float *)&v69 = v27;
-      v28 = v66;
-      dword_B44FE0 = v69;
-      v70 = v28;
-      v29 = v70;
-      dword_B44FDC = v26;
-      flt_B44FE4 = v29;
-      return 0;
+      v65 = *(float *)(v24 + 0xA0); /*0x7c93e4*/
+      v66 = flt_B44EE4; /*0x7c93f8*/
+      if ( !a4 ) /*0x7c93fc*/
+        v66 = v66 / a9->scale; /*0x7c9408*/
+      v67 = v21; /*0x7c940c*/
+      v68 = v21; /*0x7c9414*/
+      v26 = v68; /*0x7c9418*/
+      v27 = v65; /*0x7c941c*/
+      ShadowLightPointLightPos0Constant = v67; /*0x7c9420*/
+      v69 = v27; /*0x7c9426*/
+      v28 = v66; /*0x7c942e*/
+      flt_B44FE0 = v69; /*0x7c9432*/
+      v70 = v28; /*0x7c9437*/
+      v29 = v70; /*0x7c943b*/
+      flt_B44FDC = v26; /*0x7c943f*/
+      ShadowLightPointLightPos0DepthRange = v29; /*0x7c9445*/
+      return 0; /*0x7c9453*/
     }
     if ( v22 )
     {
       if ( (*(int (__thiscall **)(int))(*(_DWORD *)v22 + 0x54))(v22) >= 5
         && (*(int (__thiscall **)(int))(*(_DWORD *)v22 + 0x54))(v22) <= 0xA )
       {
-        v21 = 0.0;
-        v25 = 1;
+        v21 = 0.0; /*0x7c93cf*/
+        v25 = 1; /*0x7c93d1*/
 LABEL_33:
         v24 = v25 != 0 ? v22 : 0;
-        goto LABEL_34;
+        goto LABEL_34; /*0x7c93e2*/
       }
-      v21 = 0.0;
+      v21 = 0.0; /*0x7c93d8*/
     }
-    v25 = 0;
-    goto LABEL_33;
+    v25 = 0; /*0x7c93da*/
+    goto LABEL_33; /*0x7c93da*/
   }
-  v107 = 0.0;
-  v106 = 0.0;
-  v105 = 0.0;
-  v104 = 0.0;
-  v102 = 0.0;
-  v101 = 0.0;
-  v100 = 0.0;
-  v99 = 0.0;
-  v97 = 0.0;
-  v96 = 0.0;
-  v95 = 0.0;
-  v94 = 0.0;
-  v108 = 1.0;
-  v103 = 1.0;
-  v98 = 1.0;
-  *(float *)&v93 = 1.0;
-  v92 = 1.0;
-  v87 = 1.0;
-  v82 = 1.0;
-  v77 = 1.0;
-  v91 = 0.0;
-  v90 = 0.0;
-  v89 = 0.0;
-  v88 = 0.0;
-  v86 = 0.0;
-  v85 = 0.0;
-  v84 = 0.0;
-  v83 = 0.0;
-  v81 = 0.0;
-  v80 = 0.0;
-  v79 = 0.0;
-  v78 = 0.0;
-  if ( v64 && a4 )
+  v107 = 0.0; /*0x7c94a5*/
+  v106 = 0.0; /*0x7c94ac*/
+  v105 = 0.0; /*0x7c94b3*/
+  v104 = 0.0; /*0x7c94ba*/
+  v102 = 0.0; /*0x7c94c1*/
+  v101 = 0.0; /*0x7c94c8*/
+  v100 = 0.0; /*0x7c94cf*/
+  v99 = 0.0; /*0x7c94d6*/
+  v97 = 0.0; /*0x7c94dd*/
+  v96 = 0.0; /*0x7c94e4*/
+  v95 = 0.0; /*0x7c94eb*/
+  v94 = 0.0; /*0x7c94f2*/
+  v108 = 1.0; /*0x7c94fb*/
+  v103 = 1.0; /*0x7c9502*/
+  v98 = 1.0; /*0x7c9509*/
+  *(float *)&v93 = 1.0; /*0x7c9510*/
+  v92 = 1.0; /*0x7c9517*/
+  v87 = 1.0; /*0x7c951e*/
+  v82 = 1.0; /*0x7c9525*/
+  v77 = 1.0; /*0x7c952c*/
+  v91 = 0.0; /*0x7c9533*/
+  v90 = 0.0; /*0x7c953a*/
+  v89 = 0.0; /*0x7c9541*/
+  v88 = 0.0; /*0x7c9548*/
+  v86 = 0.0; /*0x7c954f*/
+  v85 = 0.0; /*0x7c9556*/
+  v84 = 0.0; /*0x7c955d*/
+  v83 = 0.0; /*0x7c9564*/
+  v81 = 0.0; /*0x7c956b*/
+  v80 = 0.0; /*0x7c9572*/
+  v79 = 0.0; /*0x7c9579*/
+  v78 = 0.0; /*0x7c9580*/
+  if ( v64 && a4 ) /*0x7c9592*/
   {
-    v32 = (float *)a4[0xA];
-    v77 = *v32;
-    v78 = v32[1];
-    v79 = v32[2];
-    v81 = v32[4];
-    v82 = v32[5];
-    v83 = v32[6];
-    v85 = v32[8];
-    v86 = v32[9];
-    v87 = v32[0xA];
-    v89 = v32[0xC] + CameraWorldTranslate;
-    v90 = v32[0xD] + flt_B3F930;
-    v91 = v32[0xE] + flt_B3F934;
-    v80 = v32[3];
-    v84 = v32[7];
-    v88 = v32[0xB];
-    v92 = v32[0xF];
-    D3DXMatrixInverse_0(&v93, 0, &v77);
+    v32 = (float *)a4[0xA]; /*0x7c9598*/
+    v77 = *v32; /*0x7c95a4*/
+    v78 = v32[1]; /*0x7c95ae*/
+    v79 = v32[2]; /*0x7c95b8*/
+    v81 = v32[4]; /*0x7c95c2*/
+    v82 = v32[5]; /*0x7c95cc*/
+    v83 = v32[6]; /*0x7c95d6*/
+    v85 = v32[8]; /*0x7c95e0*/
+    v86 = v32[9]; /*0x7c95ea*/
+    v87 = v32[0xA]; /*0x7c95f4*/
+    v89 = v32[0xC] + MEMORY[0xB3F92C]; /*0x7c9604*/
+    v90 = v32[0xD] + unk_B3F930; /*0x7c9614*/
+    v91 = v32[0xE] + unk_B3F934; /*0x7c9624*/
+    v80 = v32[3]; /*0x7c962e*/
+    v84 = v32[7]; /*0x7c9638*/
+    v88 = v32[0xB]; /*0x7c9642*/
+    v92 = v32[0xF]; /*0x7c9654*/
+    D3DXMatrixInverse_0((int)&v93, 0, (int)&v77); /*0x7c965e*/
   }
   else
   {
-    sub_718A80((float *)v12, (NiTransform *)v76);
-    *(float *)&v93 = *(float *)v76 * *(float *)&v76[0x30];
-    v94 = *(float *)&v76[0xC] * *(float *)&v76[0x30];
-    v95 = *(float *)&v76[0x18] * *(float *)&v76[0x30];
-    v97 = *(float *)&v76[4] * *(float *)&v76[0x30];
-    v98 = *(float *)&v76[0x10] * *(float *)&v76[0x30];
-    v99 = *(float *)&v76[0x1C] * *(float *)&v76[0x30];
-    v101 = *(float *)&v76[8] * *(float *)&v76[0x30];
-    v102 = *(float *)&v76[0x14] * *(float *)&v76[0x30];
-    v103 = *(float *)&v76[0x30] * *(float *)&v76[0x20];
-    v105 = *(float *)&v76[0x24];
-    v106 = *(float *)&v76[0x28];
-    v107 = *(float *)&v76[0x2C];
-    v108 = 1.0;
+    sub_718A80((float *)v12, (NiTransform *)v76); /*0x7c9672*/
+    *(float *)&v93 = *(float *)v76 * *(float *)&v76[0x30]; /*0x7c968b*/
+    v94 = *(float *)&v76[0xC] * *(float *)&v76[0x30]; /*0x7c969b*/
+    v95 = *(float *)&v76[0x18] * *(float *)&v76[0x30]; /*0x7c96ab*/
+    v97 = *(float *)&v76[4] * *(float *)&v76[0x30]; /*0x7c96bb*/
+    v98 = *(float *)&v76[0x10] * *(float *)&v76[0x30]; /*0x7c96cb*/
+    v99 = *(float *)&v76[0x1C] * *(float *)&v76[0x30]; /*0x7c96db*/
+    v101 = *(float *)&v76[8] * *(float *)&v76[0x30]; /*0x7c96eb*/
+    v102 = *(float *)&v76[0x14] * *(float *)&v76[0x30]; /*0x7c96fb*/
+    v103 = *(float *)&v76[0x30] * *(float *)&v76[0x20]; /*0x7c9709*/
+    v105 = *(float *)&v76[0x24]; /*0x7c9717*/
+    v106 = *(float *)&v76[0x28]; /*0x7c9725*/
+    v107 = *(float *)&v76[0x2C]; /*0x7c9733*/
+    v108 = 1.0; /*0x7c973c*/
   }
-  if ( *(_BYTE *)(dword_B45030 + 8) )
+  if ( *(_BYTE *)(dword_B45030 + 8) ) /*0x7c9748*/
   {
-    for ( i = 0; i < 0x20; *(float *)(i + 0xB454D4) = 0.0 )
+    for ( i = 0; i < 0x20; *(float *)(i + 0xB454D4) = 0.0 ) /*0x7c974e*/
     {
-      v71 = -*(float *)(i + 0xB465A8);
-      v72 = -*(float *)(i + 0xB465AC);
-      v73 = -*(float *)(i + 0xB465B0);
-      D3DXVec3TransformNormal_0(&v67, &v71, &v93);
-      D3DXVec3Normalize_0(&v71, &v67);
-      *(float *)(i + 0xB454D8) = v71;
-      i += 0x10;
-      *(float *)(i + 0xB454CC) = v72;
-      *(float *)(i + 0xB454D0) = v73;
+      v71 = -*(float *)(i + 0xB465A8); /*0x7c9760*/
+      v72 = -*(float *)(i + 0xB465AC); /*0x7c9775*/
+      v73 = -*(float *)(i + 0xB465B0); /*0x7c9782*/
+      D3DXVec3TransformNormal_0((int)&v67, (int)&v71, (int)&v93); /*0x7c9786*/
+      D3DXVec3Normalize_0((int)&v71, (int)&v67); /*0x7c9795*/
+      *(float *)(i + 0xB454D8) = v71; /*0x7c979e*/
+      i += 0x10; /*0x7c97a4*/
+      *(float *)(i + 0xB454CC) = v72; /*0x7c97ae*/
+      *(float *)(i + 0xB454D0) = v73; /*0x7c97b8*/
     }
-    v12 = a9;
+    v12 = a9; /*0x7c97c8*/
   }
-  sub_7C9140((int)&v93, v12->scale, v15, (int)a4);
-  if ( v15 < 0x180 || v15 > 0x187 )
+  sub_7C9140((int)&v93, v12->scale, v15, (int)a4); /*0x7c97e1*/
+  if ( v15 < 0x180 || v15 > 0x187 ) /*0x7c97f8*/
   {
-    v67 = *(float *)&dword_B46658;
-    v68 = *(float *)&dword_B4665C;
-    v69 = dword_B46660;
-    D3DXVec3TransformCoord_0(&v71, &v67, &v93);
-    flt_B44F08 = v71;
-    flt_B44F0C = v72;
-    flt_B44F10 = v73;
-    flt_B44F14 = 1.0;
-    v35 = 1.0;
-    v34 = 0.0;
+    v67 = OB_ShaderConstantStorage_010201A0[0x211]; /*0x7c98cd*/
+    v68 = OB_ShaderConstantStorage_010201A0[0x212]; /*0x7c98dc*/
+    v69 = OB_ShaderConstantStorage_010201A0[0x213]; /*0x7c98ec*/
+    D3DXVec3TransformCoord_0((int)&v71, (int)&v67, (int)&v93); /*0x7c98f0*/
+    unk_B44F08 = v71; /*0x7c98f9*/
+    unk_B44F0C = v72; /*0x7c9903*/
+    unk_B44F10 = v73; /*0x7c990d*/
+    unk_B44F14 = 1.0; /*0x7c9915*/
+    v35 = 1.0; /*0x7c991d*/
+    v34 = 0.0; /*0x7c991d*/
   }
   else
   {
-    v71 = *(float *)&dword_B46658;
-    v72 = *(float *)&dword_B4665C;
-    v73 = *(float *)&dword_B46660;
-    v67 = v71 - v12->pos.x;
-    v68 = v72 - v12->pos.y;
-    *(float *)&v69 = v73 - v12->pos.z;
-    sub_43F350(&v67);
-    flt_B44F18 = v67;
-    flt_B44F1C = v68;
-    flt_B44F20 = *(float *)&v69;
-    v34 = 0.0;
-    flt_B44F24 = 0.0;
-    v67 = v71 - CameraWorldTranslate;
-    v68 = v72 - flt_B3F930;
-    *(float *)&v69 = v73 - flt_B3F934;
-    flt_B44F08 = v67;
-    flt_B44F0C = v68;
-    flt_B44F10 = *(float *)&v69;
-    v35 = 1.0;
-    flt_B44F14 = 1.0;
+    v71 = OB_ShaderConstantStorage_010201A0[0x211]; /*0x7c9808*/
+    v72 = OB_ShaderConstantStorage_010201A0[0x212]; /*0x7c9812*/
+    v73 = OB_ShaderConstantStorage_010201A0[0x213]; /*0x7c981c*/
+    v67 = v71 - v12->pos.x; /*0x7c9827*/
+    v68 = v72 - v12->pos.y; /*0x7c9832*/
+    v69 = v73 - v12->pos.z; /*0x7c983d*/
+    Vector3_NormalizeInPlace(&v67); /*0x7c9841*/
+    unk_B44F18 = v67; /*0x7c984c*/
+    unk_B44F1C = v68; /*0x7c9856*/
+    unk_B44F20 = v69; /*0x7c9860*/
+    v34 = 0.0; /*0x7c9866*/
+    unk_B44F24 = 0.0; /*0x7c9868*/
+    v67 = v71 - MEMORY[0xB3F92C]; /*0x7c9878*/
+    v68 = v72 - unk_B3F930; /*0x7c9886*/
+    v69 = v73 - unk_B3F934; /*0x7c9894*/
+    unk_B44F08 = v67; /*0x7c989c*/
+    unk_B44F0C = v68; /*0x7c98a6*/
+    unk_B44F10 = v69; /*0x7c98b0*/
+    v35 = 1.0; /*0x7c98b6*/
+    unk_B44F14 = 1.0; /*0x7c98b8*/
   }
-  if ( *(_BYTE *)(dword_B4501C + 8) )
+  if ( *(_BYTE *)(dword_B4501C + 8) ) /*0x7c9925*/
   {
-    v36 = *(_DWORD *)(dword_B42EB8 + 0xC);
-    if ( !v36 || *(_BYTE *)(*(_DWORD *)v36 + 0xF5) || v15 >= 0x180 && v15 <= 0x187 || v15 == 0x77 || v15 == 0x85 )
+    v36 = *(_DWORD *)(*(_DWORD *)&OB_RendererGlobalState_010201A0[0x1F] + 0xC); /*0x7c9934*/
+    if ( !v36 || *(_BYTE *)(*(_DWORD *)v36 + 0xF5) || v15 >= 0x180 && v15 <= 0x187 || v15 == 0x77 || v15 == 0x85 )// ShadowSceneLight +0xF5 selects the special-light shader-matrix branch; zero continues ordinary selector-specific handling. /*0x7c9971*/
     {
-      qmemcpy(v114, (const void *)(*(_DWORD *)(a1 + 0x14) + 0x940), sizeof(v114));
-      D3DXMatrixTranspose_0(&unk_B45498, v114);
+      qmemcpy(v114, (const void *)(*(_DWORD *)(a1 + 0x14) + 0x940), sizeof(v114)); /*0x7c9afd*/
+      D3DXMatrixTranspose_0((int)&unk_B45498, (int)v114); /*0x7c9b0c*/
     }
     else
     {
-      *(float *)&v76[0x38] = v34;
-      *(float *)&v76[0x34] = *(float *)&v76[0x38];
-      *(float *)&v76[0x30] = *(float *)&v76[0x38];
-      *(float *)&v76[0x2C] = *(float *)&v76[0x38];
-      *(float *)&v76[0x24] = *(float *)&v76[0x38];
-      *(float *)&v76[0x20] = *(float *)&v76[0x38];
-      *(float *)&v76[0x1C] = *(float *)&v76[0x38];
-      *(float *)&v76[0x18] = *(float *)&v76[0x38];
-      *(float *)&v76[0x10] = *(float *)&v76[0x38];
-      *(float *)&v76[0xC] = *(float *)&v76[0x38];
-      *(float *)&v76[8] = *(float *)&v76[0x38];
-      *(float *)&v76[4] = *(float *)&v76[0x38];
-      v75[0xE] = *(float *)&v76[0x38];
-      v75[0xD] = *(float *)&v76[0x38];
-      v75[0xC] = *(float *)&v76[0x38];
-      v75[0xB] = *(float *)&v76[0x38];
-      v75[9] = *(float *)&v76[0x38];
-      v75[8] = *(float *)&v76[0x38];
-      v75[7] = *(float *)&v76[0x38];
-      v75[6] = *(float *)&v76[0x38];
-      v75[4] = *(float *)&v76[0x38];
-      v75[3] = *(float *)&v76[0x38];
-      v75[2] = *(float *)&v76[0x38];
-      v75[1] = *(float *)&v76[0x38];
-      *(float *)&v76[0x3C] = v35;
-      *(float *)&v76[0x28] = *(float *)&v76[0x3C];
-      *(float *)&v76[0x14] = *(float *)&v76[0x3C];
-      *(float *)v76 = *(float *)&v76[0x3C];
-      v75[0xF] = *(float *)&v76[0x3C];
-      v75[0xA] = *(float *)&v76[0x3C];
-      v75[5] = *(float *)&v76[0x3C];
-      v75[0] = *(float *)&v76[0x3C];
-      if ( a4 )
-        qmemcpy(v76, a4[0xA], sizeof(v76));
+      *(float *)&v76[0x38] = v34; /*0x7c997e*/
+      *(float *)&v76[0x34] = *(float *)&v76[0x38]; /*0x7c9985*/
+      *(float *)&v76[0x30] = *(float *)&v76[0x38]; /*0x7c998c*/
+      *(float *)&v76[0x2C] = *(float *)&v76[0x38]; /*0x7c9993*/
+      *(float *)&v76[0x24] = *(float *)&v76[0x38]; /*0x7c999a*/
+      *(float *)&v76[0x20] = *(float *)&v76[0x38]; /*0x7c99a1*/
+      *(float *)&v76[0x1C] = *(float *)&v76[0x38]; /*0x7c99a8*/
+      *(float *)&v76[0x18] = *(float *)&v76[0x38]; /*0x7c99af*/
+      *(float *)&v76[0x10] = *(float *)&v76[0x38]; /*0x7c99b6*/
+      *(float *)&v76[0xC] = *(float *)&v76[0x38]; /*0x7c99bd*/
+      *(float *)&v76[8] = *(float *)&v76[0x38]; /*0x7c99c4*/
+      *(float *)&v76[4] = *(float *)&v76[0x38]; /*0x7c99cb*/
+      v75[0xE] = *(float *)&v76[0x38]; /*0x7c99d2*/
+      v75[0xD] = *(float *)&v76[0x38]; /*0x7c99d6*/
+      v75[0xC] = *(float *)&v76[0x38]; /*0x7c99da*/
+      v75[0xB] = *(float *)&v76[0x38]; /*0x7c99de*/
+      v75[9] = *(float *)&v76[0x38]; /*0x7c99e2*/
+      v75[8] = *(float *)&v76[0x38]; /*0x7c99e6*/
+      v75[7] = *(float *)&v76[0x38]; /*0x7c99ea*/
+      v75[6] = *(float *)&v76[0x38]; /*0x7c99ee*/
+      v75[4] = *(float *)&v76[0x38]; /*0x7c99f2*/
+      v75[3] = *(float *)&v76[0x38]; /*0x7c99f6*/
+      v75[2] = *(float *)&v76[0x38]; /*0x7c99fa*/
+      v75[1] = *(float *)&v76[0x38]; /*0x7c99fe*/
+      *(float *)&v76[0x3C] = v35; /*0x7c9a02*/
+      *(float *)&v76[0x28] = *(float *)&v76[0x3C]; /*0x7c9a09*/
+      *(float *)&v76[0x14] = *(float *)&v76[0x3C]; /*0x7c9a10*/
+      *(float *)v76 = *(float *)&v76[0x3C]; /*0x7c9a17*/
+      v75[0xF] = *(float *)&v76[0x3C]; /*0x7c9a1e*/
+      v75[0xA] = *(float *)&v76[0x3C]; /*0x7c9a22*/
+      v75[5] = *(float *)&v76[0x3C]; /*0x7c9a26*/
+      v75[0] = *(float *)&v76[0x3C]; /*0x7c9a2a*/
+      if ( a4 ) /*0x7c9a2e*/
+        qmemcpy(v76, a4[0xA], sizeof(v76)); /*0x7c9a3f*/
       else
-        sub_7640A0((float *)v76, (float *)v12);
-      v37 = dword_B42EB8;
-      *(float *)&v76[0x30] = CameraWorldTranslate + *(float *)&v76[0x30];
-      *(float *)&v76[0x34] = flt_B3F930 + *(float *)&v76[0x34];
-      *(float *)&v76[0x38] = flt_B3F934 + *(float *)&v76[0x38];
-      D3DXMatrixMultiply_0(v114, v76, **(_DWORD **)(v37 + 0xC) + 0x10);
-      qmemcpy(v75, v114, sizeof(v75));
-      D3DXMatrixTranspose_0(v75, v75);
-      qmemcpy(&unk_B45498, v75, 0x40u);
+        sub_7640A0((float *)v76, (float *)v12); /*0x7c9a4c*/
+      v37 = *(_DWORD *)&OB_RendererGlobalState_010201A0[0x1F]; /*0x7c9a5a*/
+      *(float *)&v76[0x30] = MEMORY[0xB3F92C] + *(float *)&v76[0x30]; /*0x7c9a66*/
+      *(float *)&v76[0x34] = unk_B3F930 + *(float *)&v76[0x34]; /*0x7c9a7a*/
+      *(float *)&v76[0x38] = unk_B3F934 + *(float *)&v76[0x38]; /*0x7c9a8e*/
+      D3DXMatrixMultiply_0((int)v114, (int)v76, **(_DWORD **)(v37 + 0xC) + 0x10); /*0x7c9aae*/
+      qmemcpy(v75, v114, sizeof(v75)); /*0x7c9acb*/
+      D3DXMatrixTranspose_0((int)v75, (int)v75); /*0x7c9acd*/
+      qmemcpy(&unk_B45498, v75, 0x40u); /*0x7c9ae0*/
     }
   }
-  if ( *(_BYTE *)(dword_B45024 + 8) )
+  if ( *(_BYTE *)(dword_B45024 + 8) ) /*0x7c9b1d*/
   {
-    v38 = *(_DWORD **)(a7 + 0x18);
-    if ( v38 )
+    v38 = *(_DWORD **)(a7 + 0x18); /*0x7c9b2a*/
+    if ( v38 ) /*0x7c9b2f*/
     {
-      if ( (*(int (__thiscall **)(_DWORD))(*v38 + 0x54))(*(_DWORD *)(a7 + 0x18)) != 0xFFFFFFFF )
+      if ( (*(int (__thiscall **)(_DWORD))(*v38 + 0x54))(*(_DWORD *)(a7 + 0x18)) != 0xFFFFFFFF ) /*0x7c9b41*/
       {
-        if ( GetShadowSceneNode(v38[7] >> 0x1C) )
+        if ( GetShadowSceneNode(v38[7] >> 0x1C) ) /*0x7c9b51*/
         {
-          if ( v64 && a4 )
+          if ( v64 && a4 ) /*0x7c9b6c*/
           {
-            v39 = CameraWorldTranslate;
-            v40 = flt_B3F930;
-            v75[0] = 1.0;
-            v41 = flt_B3F934;
-            v75[1] = 0.0;
-            v67 = v39;
-            v75[2] = 0.0;
-            v68 = v40;
-            *(float *)&v69 = v41;
-            v75[3] = v39;
-            v75[4] = 0.0;
-            v75[6] = 0.0;
-            v75[5] = 1.0;
-            v75[7] = v40;
-            v75[8] = 0.0;
-            v75[9] = 0.0;
-            v75[0xA] = 1.0;
-            v75[0xB] = v41;
-            scale = 1.0;
-            v75[0xC] = 0.0;
-            v75[0xD] = 0.0;
-            v75[0xE] = 0.0;
+            v39 = MEMORY[0xB3F92C]; /*0x7c9b70*/
+            v40 = unk_B3F930; /*0x7c9b76*/
+            v75[0] = 1.0; /*0x7c9b7b*/
+            v41 = unk_B3F934; /*0x7c9b81*/
+            v75[1] = 0.0; /*0x7c9b87*/
+            v67 = v39; /*0x7c9b8b*/
+            v75[2] = 0.0; /*0x7c9b8f*/
+            v68 = v40; /*0x7c9b93*/
+            v69 = v41; /*0x7c9b9b*/
+            v75[3] = v39; /*0x7c9b9f*/
+            v75[4] = 0.0; /*0x7c9ba3*/
+            v75[6] = 0.0; /*0x7c9ba7*/
+            v75[5] = 1.0; /*0x7c9bad*/
+            v75[7] = v40; /*0x7c9bb5*/
+            v75[8] = 0.0; /*0x7c9bbb*/
+            v75[9] = 0.0; /*0x7c9bbf*/
+            v75[0xA] = 1.0; /*0x7c9bc5*/
+            v75[0xB] = v41; /*0x7c9bcd*/
+            scale = 1.0; /*0x7c9bd1*/
+            v75[0xC] = 0.0; /*0x7c9bd3*/
+            v75[0xD] = 0.0; /*0x7c9bd7*/
+            v75[0xE] = 0.0; /*0x7c9bdb*/
           }
           else
           {
-            v75[0] = a9->rot.data[0][0];
-            v75[1] = a9->rot.data[0][1];
-            v75[2] = a9->rot.data[0][2];
-            v75[3] = a9->pos.x;
-            v75[4] = a9->rot.data[1][0];
-            v75[5] = a9->rot.data[1][1];
-            v75[6] = a9->rot.data[1][2];
-            v75[7] = a9->pos.y;
-            v75[8] = a9->rot.data[2][0];
-            v75[9] = a9->rot.data[2][1];
-            v75[0xA] = a9->rot.data[2][2];
-            v75[0xB] = a9->pos.z;
-            v75[0xC] = 0.0;
-            v75[0xD] = 0.0;
-            v75[0xE] = 0.0;
-            scale = a9->scale;
+            v75[0] = a9->rot.data[0][0]; /*0x7c9be6*/
+            v75[1] = a9->rot.data[0][1]; /*0x7c9bed*/
+            v75[2] = a9->rot.data[0][2]; /*0x7c9bf4*/
+            v75[3] = a9->pos.x; /*0x7c9bfb*/
+            v75[4] = a9->rot.data[1][0]; /*0x7c9c02*/
+            v75[5] = a9->rot.data[1][1]; /*0x7c9c09*/
+            v75[6] = a9->rot.data[1][2]; /*0x7c9c10*/
+            v75[7] = a9->pos.y; /*0x7c9c17*/
+            v75[8] = a9->rot.data[2][0]; /*0x7c9c1e*/
+            v75[9] = a9->rot.data[2][1]; /*0x7c9c25*/
+            v75[0xA] = a9->rot.data[2][2]; /*0x7c9c2c*/
+            v75[0xB] = a9->pos.z; /*0x7c9c33*/
+            v75[0xC] = 0.0; /*0x7c9c39*/
+            v75[0xD] = 0.0; /*0x7c9c3d*/
+            v75[0xE] = 0.0; /*0x7c9c41*/
+            scale = a9->scale; /*0x7c9c45*/
           }
-          v75[0xF] = scale;
-          qmemcpy(&unk_B45560, v75, 0x40u);
+          v75[0xF] = scale; /*0x7c9c4d*/
+          qmemcpy(&unk_B45560, v75, 0x40u); /*0x7c9c5a*/
         }
       }
     }
   }
-  if ( *(_BYTE *)(dword_B45068 + 8) )
+  if ( *(_BYTE *)(dword_B45068 + 8) ) /*0x7c9c62*/
   {
-    if ( a4 )
+    if ( a4 ) /*0x7c9c6d*/
     {
-      qmemcpy(v75, a4[0xA], sizeof(v75));
-      D3DXMatrixTranspose_0(v75, v75);
-      qmemcpy(&unk_B44F98, v75, 0x40u);
+      qmemcpy(v75, a4[0xA], sizeof(v75)); /*0x7c9c7f*/
+      D3DXMatrixTranspose_0((int)v75, (int)v75); /*0x7c9c85*/
+      qmemcpy(&unk_B44F98, v75, 0x40u); /*0x7c9c98*/
     }
   }
-  device = dword_B43104->member.device;
-  v112 = device;
-  if ( (unsigned int)(LODWORD(v65) - 0x177) > 3 )
-    return 0;
-  v44 = *(int **)(dword_B42EB8 + 0xC);
-  v45 = *v44;
-  v14 = *(_BYTE *)(*v44 + 0x214) == 0;
-  v110 = *v44;
-  if ( !v14 )
+  device = unk_B43104->member.device; /*0x7c9ca4*/
+  v112 = device; /*0x7c9cb2*/
+  if ( (unsigned int)(LODWORD(v65) - 0x177) > 3 ) /*0x7c9cb9*/
+    return 0; /*0x7c9cb9*/
+  v44 = *(int **)(*(_DWORD *)&OB_RendererGlobalState_010201A0[0x1F] + 0xC); /*0x7c9cc5*/
+  v45 = *v44; /*0x7c9cc8*/
+  v14 = *(_BYTE *)(*v44 + 0x214) == 0; /*0x7c9cca*/
+  v110 = *v44; /*0x7c9cd1*/
+  if ( !v14 ) /*0x7c9cd8*/
   {
-    v62 = (const float *)(v45 + 0x1B4);
-    for ( j = 0; j < 6; ++j )
+    v62 = (const float *)(v45 + 0x1B4); /*0x7c9efd*/
+    for ( j = 0; j < 6; ++j ) /*0x7c9f03*/
     {
-      device->lpVtbl->SetClipPlane(device, j, v62);
-      v62 += 4;
+      device->lpVtbl->SetClipPlane(device, j, v62); /*0x7c9f10*/
+      v62 += 4; /*0x7c9f15*/
     }
-    return 0;
+    return 0; /*0x7c9f1b*/
   }
-  v46 = flt_B3F930;
-  v47 = (float *)(v45 + 0x150);
-  v48 = *(_DWORD *)(LODWORD(v66) + 0x14);
-  qmemcpy(v75, (const void *)(v48 + 0x980), sizeof(v75));
-  v49 = CameraWorldTranslate;
-  v50 = flt_B3F934;
-  v65 = v46 * v75[4] + v49 * v75[0] + v50 * v75[8];
-  v75[0xC] = -v65;
-  v65 = v49 * v75[1] + v46 * v75[5] + v50 * v75[9];
-  v75[0xD] = -v65;
-  v65 = v46 * v75[6] + v49 * v75[2] + v50 * v75[0xA];
-  v75[0xE] = -v65;
-  qmemcpy(v114, (const void *)(v48 + 0x9C0), sizeof(v114));
-  D3DXMatrixMultiply_0(v76, v75, v114);
-  D3DXMatrixInverse_0(v116, 0, v76);
-  D3DXMatrixTranspose_0(v76, v116);
-  LODWORD(v66) = &v115[4] - (char *)v47;
-  v109 = (char *)(&v115[8] - (char *)v47);
-  v111 = (char *)(&v115[0xC] - (char *)v47);
-  v51 = 0;
-  v52 = v47;
-  LODWORD(v65) = v115 - (char *)v47;
-  do
+  v46 = unk_B3F930; /*0x7c9cde*/
+  v47 = (float *)(v45 + 0x150); /*0x7c9ce4*/
+  v48 = *(_DWORD *)(LODWORD(v66) + 0x14); /*0x7c9cf0*/
+  qmemcpy(v75, (const void *)(v48 + 0x980), sizeof(v75)); /*0x7c9d02*/
+  v49 = MEMORY[0xB3F92C]; /*0x7c9d08*/
+  v50 = unk_B3F934; /*0x7c9d2f*/
+  v65 = v46 * v75[4] + v49 * v75[0] + v50 * v75[8]; /*0x7c9d3c*/
+  v75[0xC] = -v65; /*0x7c9d4d*/
+  v65 = v49 * v75[1] + v46 * v75[5] + v50 * v75[9]; /*0x7c9d67*/
+  v75[0xD] = -v65; /*0x7c9d71*/
+  v65 = v46 * v75[6] + v49 * v75[2] + v50 * v75[0xA]; /*0x7c9d87*/
+  v75[0xE] = -v65; /*0x7c9d91*/
+  qmemcpy(v114, (const void *)(v48 + 0x9C0), sizeof(v114)); /*0x7c9d95*/
+  D3DXMatrixMultiply_0((int)v76, (int)v75, (int)v114); /*0x7c9da1*/
+  D3DXMatrixInverse_0((int)v116, 0, (int)v76); /*0x7c9db8*/
+  D3DXMatrixTranspose_0((int)v76, (int)v116); /*0x7c9dcd*/
+  LODWORD(v66) = &v115[4] - (char *)v47; /*0x7c9ddb*/
+  v109 = (char *)(&v115[8] - (char *)v47); /*0x7c9de8*/
+  v111 = (char *)(&v115[0xC] - (char *)v47); /*0x7c9df8*/
+  v51 = 0; /*0x7c9e06*/
+  v52 = v47; /*0x7c9e0a*/
+  LODWORD(v65) = v115 - (char *)v47; /*0x7c9e0c*/
+  do /*0x7c9eca*/
   {
-    v53 = v52[1];
-    v54 = v52[2];
-    v67 = *v52;
-    v71 = v67;
-    v68 = v53;
-    *(float *)&v69 = v54;
-    v72 = v53;
-    v73 = v54;
-    v74 = -v52[3];
-    D3DXPlaneNormalize_0(&v71, &v71);
-    D3DXPlaneTransform_0(v113, &v71, v76);
-    v55 = v65;
-    v56 = v66;
-    *(float *)((char *)v52 + LODWORD(v65)) = v113[0];
-    v57 = (char *)v52 + LODWORD(v55);
-    v58 = v109;
-    *(float *)((char *)v52 + LODWORD(v56)) = v113[1];
-    v59 = v111;
-    *(float *)((char *)v52 + (_DWORD)v58) = v113[2];
-    v60 = v112;
-    *(float *)((char *)v52 + (_DWORD)v59) = v113[3];
-    v60->lpVtbl->SetClipPlane(v60, v51++, (const float *)v57);
-    v52 += 4;
+    v53 = v52[1]; /*0x7c9e12*/
+    v54 = v52[2]; /*0x7c9e15*/
+    v67 = *v52; /*0x7c9e18*/
+    v71 = v67; /*0x7c9e20*/
+    v68 = v53; /*0x7c9e24*/
+    v69 = v54; /*0x7c9e2c*/
+    v72 = v53; /*0x7c9e30*/
+    v73 = v54; /*0x7c9e3d*/
+    v74 = -v52[3]; /*0x7c9e49*/
+    D3DXPlaneNormalize_0((int)&v71, (int)&v71); /*0x7c9e4d*/
+    D3DXPlaneTransform_0((int)v113, (int)&v71, (int)v76); /*0x7c9e67*/
+    v55 = v65; /*0x7c9e73*/
+    v56 = v66; /*0x7c9e77*/
+    *(float *)((char *)v52 + LODWORD(v65)) = v113[0]; /*0x7c9e7b*/
+    v57 = (char *)v52 + LODWORD(v55); /*0x7c9e85*/
+    v58 = v109; /*0x7c9e88*/
+    *(float *)((char *)v52 + LODWORD(v56)) = v113[1]; /*0x7c9e8f*/
+    v59 = v111; /*0x7c9e99*/
+    *(float *)((char *)v52 + (_DWORD)v58) = v113[2]; /*0x7c9ea0*/
+    v60 = v112; /*0x7c9ea3*/
+    *(float *)((char *)v52 + (_DWORD)v59) = v113[3]; /*0x7c9eb2*/
+    v60->lpVtbl->SetClipPlane(v60, v51++, (const float *)v57); /*0x7c9ebf*/
+    v52 += 4; /*0x7c9ec4*/
   }
-  while ( v51 < 6 );
-  v61 = (char *)(v110 + 0x1B4);
-  *(_BYTE *)(v110 + 0x214) = 1;
-  qmemcpy(v61, v115, 0x60u);
-  return 0;
+  while ( v51 < 6 ); /*0x7c9eca*/
+  v61 = (char *)(v110 + 0x1B4); /*0x7c9ed7*/
+  *(_BYTE *)(v110 + 0x214) = 1; /*0x7c9ee9*/
+  qmemcpy(v61, v115, 0x60u); /*0x7c9ef0*/
+  return 0; /*0x7c934a*/
 }

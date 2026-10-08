@@ -1,4 +1,4 @@
-0x511FA0: mov     eax, [esp+arg_8]
+0x511FA0: mov     eax, [esp+arg_8]; PickIdle command handler: resolves a TESIdleForm from g_idleAnimationMap for the actor and queues it through ActorAnimData.
 0x511FA4: push    ebx
 0x511FA5: push    ebp
 0x511FA6: push    esi
@@ -22,7 +22,7 @@
 0x511FDE: mov     ecx, ds:0B362C0h
 0x511FE4: push    eax
 0x511FE5: push    ebp
-0x511FE6: call    sub_521450
+0x511FE6: call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.
 0x511FEB: mov     esi, eax
 0x511FED: test    esi, esi
 0x511FEF: jz      loc_512091
@@ -35,7 +35,7 @@
 0x512006: jz      loc_512091
 0x51200C: mov     ecx, edi
 0x51200E: xor     bl, bl
-0x512010: call    sub_472EA0
+0x512010: call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.
 0x512015: test    al, al
 0x512017: jnz     short loc_51201B
 0x512019: mov     bl, 1
@@ -58,12 +58,12 @@
 0x512049: jnz     short loc_512091
 0x51204B: push    3; int
 0x51204D: mov     ecx, esi
-0x51204F: call    sub_520200
+0x51204F: call    TESIdleForm_GetQueuedAnimType; Returns TESIdleForm ANAM byte at +0x38 masked with 0x7F. This low-seven-bit value is passed as the queued idle slot/type; the high bit is handled separately by native idle selection.
 0x512054: push    eax; int
 0x512055: push    ebp; int
 0x512056: push    esi; int
 0x512057: mov     ecx, edi; this
-0x512059: call    sub_477DB0
+0x512059: call    ActorAnimData_QueueIdle; Queues a TESIdleForm for playable ActorAnimData processing. If requested slot/type is 0 or 5, forces completion/action mode to 3; allocates and initializes an AnimIdle, stores it at queued slot +0xD0, then immediately attempts ActorAnimData_ProcessQueuedIdleKF for cache-hit/synchronous readiness.
 0x51205E: cmp     byte ptr ds:0B361ACh, 0
 0x512065: jz      short loc_512091
 0x512067: mov     edx, [esi+18h]

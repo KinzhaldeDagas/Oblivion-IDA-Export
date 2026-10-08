@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79A950",
-    "line": "push    ebx",
+    "line": "push    ebx; Forward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into destinationFirst; returns destination end.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A951",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79A956",
-    "line": "mov     ebp, [esp+8+arg_8]",
+    "line": "mov     ebp, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79A95B",
-    "line": "mov     esi, [esp+0Ch+arg_0]",
+    "line": "mov     esi, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },

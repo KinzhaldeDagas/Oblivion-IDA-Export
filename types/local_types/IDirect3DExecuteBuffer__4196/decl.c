@@ -1,1 +1,4 @@
-IDirect3DExecuteBuffer
+struct IDirect3DExecuteBuffer
+{
+IDirect3DExecuteBufferVtbl *lpVtbl;
+};

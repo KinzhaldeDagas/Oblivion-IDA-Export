@@ -1,1 +1,1 @@
-RepairMenu::RepairMenuList
+struct RepairMenu::RepairMenuList;

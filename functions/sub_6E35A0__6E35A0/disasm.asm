@@ -64,7 +64,7 @@
 0x6E3656: push    eax; int
 0x6E3657: push    ecx; int
 0x6E3658: push    ebx; int
-0x6E3659: call    sub_6D3210
+0x6E3659: call    NiAnimationKey_CopyRangeRebased; Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.
 0x6E365E: mov     edx, [esi+10h]
 0x6E3661: mov     eax, [esp+50h+var_1C]
 0x6E3665: mov     ecx, [edi]
@@ -84,3 +84,17 @@
 0x6E3687: pop     ebx
 0x6E3688: add     esp, 1Ch
 0x6E368B: retn    0Ch
+0x9C8120: mov     eax, [ebp-14h]
+0x9C8123: and     eax, 1
+0x9C8126: jz      locret_9C8138
+0x9C812C: and     dword ptr [ebp-14h], 0FFFFFFFEh
+0x9C8130: mov     ecx, [ebp+4]; slot
+0x9C8133: jmp     NiPointerSlot_Release
+0x9C8138: retn
+0x9C8139: mov     edx, [esp+arg_4]
+0x9C813D: lea     eax, [edx-20h]
+0x9C8140: mov     ecx, [edx-24h]
+0x9C8143: xor     ecx, eax
+0x9C8145: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C814A: mov     eax, offset stru_AF0414
+0x9C814F: jmp     ___CxxFrameHandler3

@@ -1,18 +1,31 @@
 {
-  "callees_count": 105,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 21,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4CD600",
+      "0x4CD95D"
+    ]
+  ],
+  "chunks_sha256": "2c2a34eaeb5395c41299c2f3a4c195377cfd9479bd59a41c9bc9e6beb362d5af",
+  "comment_regular": "Authoritative CELL deletion note: the record-header deleted flag does not short-circuit TESObjectCELL payload dispatch; serialized DATA/direct fields and shared ExtraDataList chunks are still replayed in stream order.\nAuthoritative direct-field replay: CELL chunks are processed in serialized order; accepted later DATA/XCLC/XCLL chunks overwrite/reset state established by earlier chunks.",
+  "comment_repeatable": "0x4CD600: Common-extra inventory audit 2026-09-05: CELL forwards the same nine reference-bearing extra cases XESP/XTEL/XLOC/XPSN/XPSL/XMRC/XHRS/XTRG/XRTM to ExtraDataList_Load. Load acceptance is confirmed separately from any later owner-sensitive resolution and writer effects. CELL deletion does not bypass payload dispatch.\n\n0x4CD923: CELL common-reference extras verified 2026-09-05: XESP, XTEL, XLOC, XPSN, XPSL, XMRC, XHRS, XTRG, XRTM reach ExtraDataList_Load 0x4259E0. This is load-stage acceptance. Loader resets internal linked bit0x8 at 0x4CD940; it does not short-circuit serialized payload for deleted0x20. Preserve XPCI/XMRK nested cursor consumption.\n\nCommon-extra inventory audit 2026-09-05: CELL forwards the same nine reference-bearing extra cases XESP/XTEL/XLOC/XPSN/XPSL/XMRC/XHRS/XTRG/XRTM to ExtraDataList_Load. Load acceptance is confirmed separately from any later owner-sensitive resolution and writer effects. CELL deletion does not bypass payload dispatch.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "TESObjectCELL_LoadForm",
   "end_ea": "0x4CD95D",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
   "name": "TESObjectCELL_LoadForm",
   "segment": ".text",
   "sha256": "2c2a34eaeb5395c41299c2f3a4c195377cfd9479bd59a41c9bc9e6beb362d5af",
   "size": 861,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4CD600",
+  "total_chunk_size": 861,
   "type": "char __thiscall(TESObjectCELL *this, Data *a1)",
   "xrefs_from_count": 334,
   "xrefs_to_count": 1

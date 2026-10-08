@@ -44,7 +44,7 @@
 0x4500F5: add     eax, 1
 0x4500F8: push    eax
 0x4500F9: mov     ecx, esi
-0x4500FB: call    TESFile_GetMasterByIndex
+0x4500FB: call    TESFile_GetMasterByIndex; Oblivion record-header FormID resolution indexes masters with HIBYTE(FormID)+1. A duplicated MAST filename still has a distinct slot, but BuildLoadedMasterArray may put the same first-matched TESFile pointer in each duplicate slot.
 0x450100: mov     ecx, [esi+248h]
 0x450106: mov     edi, ecx
 0x450108: and     edi, 0FF000000h

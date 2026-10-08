@@ -1,7 +1,7 @@
 0x674500: push    esi
 0x674501: mov     esi, ecx
 0x674503: lea     ecx, [esi+68h]; this
-0x674506: call    sub_7616D0
+0x674506: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67450B: test    eax, eax
 0x67450D: mov     [esi+78h], eax
 0x674510: jz      short loc_67454A

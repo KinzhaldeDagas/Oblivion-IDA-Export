@@ -1,4 +1,4 @@
-0x64B400: push    0FFFFFFFFh
+0x64B400: push    0FFFFFFFFh; MiddleHighProcess constructor: derives from MiddleLowProcess, installs MiddleHighProcess vtable, initializes pathing, currentPackage +0x0C0 and currentPackProcedure. No movementFlags field is initialized here.
 0x64B402: push    offset ??0MiddleHighProcess@@QAE@XZ_SEH
 0x64B407: mov     eax, large fs:0
 0x64B40D: push    eax
@@ -13,9 +13,9 @@
 0x64B41E: mov     large fs:0, eax
 0x64B424: mov     esi, ecx
 0x64B426: mov     [esp+20h+var_10], esi
-0x64B42A: call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess::MiddleLowProcess(void)
+0x64B42A: call    ??0MiddleLowProcess@@QAE@XZ; MiddleLowProcess constructor: derives from LowProcess and installs MiddleLowProcess vtable; no currentPackage or movementFlags storage.
 0x64B42F: xor     ebx, ebx
-0x64B431: mov     dword ptr [esi], offset ??_7MiddleHighProcess@@6B@; const MiddleHighProcess::`vftable'
+0x64B431: mov     dword ptr [esi], offset ??_7MiddleHighProcess@@6B@; Verified persistence family:3F0 size,3F4 save,3F8 load,404 revert; base/low/middle-low bodies decoded and MobileObject dispatch confirmed. Probable:3FC InitLoadGame and400 FinishInitLoadGame; derived middle-high/high overrides remain only family-mapped, not fully decoded.
 0x64B437: mov     [esi+0A8h], ebx
 0x64B43D: mov     [esi+0ACh], ebx
 0x64B443: mov     [esi+0B0h], ebx
@@ -132,3 +132,18 @@
 0x64B642: pop     ebx
 0x64B643: add     esp, 10h
 0x64B646: retn
+0x9C3A90: mov     ecx, [ebp-10h]; this
+0x9C3A93: jmp     ??1MiddleLowProcess@@UAE@XZ; MiddleLowProcess::~MiddleLowProcess(void)
+0x9C3A98: mov     ecx, [ebp-10h]
+0x9C3A9B: add     ecx, 118h; slot
+0x9C3AA1: jmp     NiPointerSlot_Release
+0x9C3AA6: mov     ecx, [ebp-10h]
+0x9C3AA9: add     ecx, 184h; slot
+0x9C3AAF: jmp     NiPointerSlot_Release
+0x9C3AB4: mov     edx, [esp+arg_4]
+0x9C3AB8: lea     eax, [edx-10h]
+0x9C3ABB: mov     ecx, [edx-14h]
+0x9C3ABE: xor     ecx, eax
+0x9C3AC0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3AC5: mov     eax, offset stru_AEC608
+0x9C3ACA: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x680500",
+      "0x680543"
+    ]
+  ],
+  "chunks_sha256": "aab3a0ae206a3e63404666f8f9024fb9377de58bff6b82164c7fd4d7c0c5d8b1",
+  "comment_regular": "Verified: Sets or clears bit 0x02 at byte +0x0C of the 0x10-byte state record selected by the node's 16-bit index. The route loop sets it after expanding a popped node, so its expanded/closed-set role is Probable; the full record layout remains Unknown.",
+  "comment_repeatable": "Verified: Sets or clears bit 0x02 at byte +0x0C of the 0x10-byte state record selected by the node's 16-bit index. The route loop sets it after expanding a popped node, so its expanded/closed-set role is Probable; the full record layout remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680500",
+  "display_name": "TravelPath_SetSearchNodeExpandedFlag",
   "end_ea": "0x680543",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680500",
+  "name": "TravelPath_SetSearchNodeExpandedFlag",
   "segment": ".text",
   "sha256": "aab3a0ae206a3e63404666f8f9024fb9377de58bff6b82164c7fd4d7c0c5d8b1",
   "size": 67,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680500",
-  "type": "char *__thiscall(unsigned __int16 *this, char)",
+  "total_chunk_size": 67,
+  "type": "TravelPathSearchState *__thiscall(TravelPathSpaceDoorLink *node, char expanded)",
   "xrefs_from_count": 19,
   "xrefs_to_count": 1
 }

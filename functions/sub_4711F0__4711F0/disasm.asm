@@ -1,4 +1,4 @@
-0x4711F0: mov     eax, [ecx+0CCh]
+0x4711F0: mov     eax, [ecx+0CCh]; Returns true when ActorAnimData current idle (+0xCC) exists and its phase field is 1. Furniture/action callers use this as the loaded/ready gate immediately before StartQueuedIdleAction.
 0x4711F6: test    eax, eax
 0x4711F8: jnz     short loc_4711FD
 0x4711FA: xor     al, al

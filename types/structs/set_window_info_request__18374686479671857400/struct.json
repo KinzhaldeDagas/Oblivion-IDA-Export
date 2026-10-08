@@ -1,82 +1,135 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "set_window_info_request",
+  "definition": "struct set_window_info_request\n{\nrequest_header __header;\nunsigned __int16 flags;\n__int16 is_unicode;\nuser_handle_t handle;\nunsigned int style;\nunsigned int ex_style;\nunsigned int id;\nmod_handle_t instance;\nlparam_t user_data;\nint extra_offset;\ndata_size_t extra_size;\nlparam_t extra_value;\n}\n",
   "id": 18374686479671857400,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "request_header"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 2
+      "offset_hex": "0xC",
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_unicode",
       "offset": 14,
-      "offset_hex": "0xe",
-      "size": 2
+      "offset_hex": "0xE",
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handle",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "user_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "style",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ex_style",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "id",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "instance",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "mod_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "user_data",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 8
+      "size": 8,
+      "type": "lparam_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "extra_offset",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "extra_size",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "data_size_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "extra_value",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 8
+      "size": 8,
+      "type": "lparam_t"
     }
   ],
   "name": "set_window_info_request",
+  "ordinal": 6954,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

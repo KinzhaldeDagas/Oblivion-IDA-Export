@@ -29,9 +29,9 @@
 0x77F647: lea     edi, [esi+8]
 0x77F64A: mov     ecx, edi
 0x77F64C: mov     dword ptr [edi], offset ??_7?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAD@@6B@; const NiTPointerListBase<NiTPointerAllocator<uint>,char *>::`vftable'
-0x77F652: call    NiTPointerList__FreeAllNodes
+0x77F652: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x77F657: mov     dword ptr [edi], offset ??_7?$NiTListBase@V?$NiTPointerAllocator@I@@PAD@@6B@; const NiTListBase<NiTPointerAllocator<uint>,char *>::`vftable'
-0x77F65D: push    offset NiRefObject_objcount; lpAddend
+0x77F65D: push    0B3FD64h; lpAddend
 0x77F662: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x77F668: call    dword ptr ds:0A2807Ch
 0x77F66E: pop     edi

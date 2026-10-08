@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x416E9B",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x416EA1",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x416EA2",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x416EAC",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; MEF candidate verification 2026-05-30: known-effect signed dword count verified; loop consumes one FormID per positive entry. Accepted pending signed dword clamp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x416EB1",
-    "line": "xor     esi, esi",
+    "line": "xor     esi, esi; MEF v51 bridge-stack audit: direct JMP preserves entry ESP; signed known-effects count is exactly dword [ESP+14h]. Bridge restores ESP before replaying the signed comparison.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x416EC0",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416EC6",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x416ECC",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x416ECD",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x416EDC",
-    "line": "mov     ecx, offset EffectSettingCollection",
+    "line": "mov     ecx, 0B33508h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x416F12",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x416F18",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x416F25",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x416F3F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

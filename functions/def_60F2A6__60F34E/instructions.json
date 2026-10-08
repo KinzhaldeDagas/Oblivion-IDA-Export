@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x60F399",
-    "line": "call    sub_5E6C60",
+    "line": "call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x60F3BE",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x60F41B",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60F41E",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x60F44A",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x60F451",
-    "line": "call    TESClass__IsGuardClass",
+    "line": "call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x60F497",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x60F49B",
-    "line": "call    sub_606140",
+    "line": "call    Crime_GetGoldValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,13 +793,13 @@
   },
   {
     "ea": "0x60F4F3",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60F4F6",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x60F522",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x60F529",
-    "line": "call    TESClass__IsGuardClass",
+    "line": "call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x60F56B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x60F56F",
-    "line": "call    sub_606140",
+    "line": "call    Crime_GetGoldValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x60F606",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60F608",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,13 +1615,13 @@
   },
   {
     "ea": "0x60F694",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60F697",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x60F6C2",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x60F6C9",
-    "line": "call    TESClass__IsGuardClass",
+    "line": "call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x60F70B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x60F70F",
-    "line": "call    sub_606140",
+    "line": "call    Crime_GetGoldValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,13 +2077,13 @@
   },
   {
     "ea": "0x60F786",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60F788",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2101,13 +2101,13 @@
   },
   {
     "ea": "0x60F791",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60F793",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x60F79C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x60F7A0",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,19 +2149,19 @@
   },
   {
     "ea": "0x60F7A9",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60F7AE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60F7B0",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x60F7BB",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2203,13 +2203,13 @@
   },
   {
     "ea": "0x60F7C8",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60F7CB",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x60F7F7",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2299,7 +2299,7 @@
   },
   {
     "ea": "0x60F7FE",
-    "line": "call    TESClass__IsGuardClass",
+    "line": "call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2431,7 +2431,7 @@
   },
   {
     "ea": "0x60F840",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2443,7 +2443,7 @@
   },
   {
     "ea": "0x60F844",
-    "line": "call    sub_606140",
+    "line": "call    Crime_GetGoldValue",
     "mnemonic": "call",
     "size": 5
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x60F877",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2545,7 +2545,7 @@
   },
   {
     "ea": "0x60F87E",
-    "line": "call    TESClass__IsGuardClass",
+    "line": "call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,13 +2725,13 @@
   },
   {
     "ea": "0x60F8DC",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60F8DF",
-    "line": "call    sub_5E32D0",
+    "line": "call    Actor__HasNPCBaseForm; Direct base-form predicate: GetBaseForm()->type == kFormType_NPC (0x23). Unlike Actor_IsNPC, this compact helper assumes the receiver/base form are valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2809,7 +2809,7 @@
   },
   {
     "ea": "0x60F906",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -2941,13 +2941,13 @@
   },
   {
     "ea": "0x60F943",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60F945",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3079,7 +3079,7 @@
   },
   {
     "ea": "0x60F98A",
-    "line": "call    sub_6068D0",
+    "line": "call    sub_6068D0; RadiantAI: AlarmPackage constructor candidate with actor/ref argument. Hooked by RadiantAIRestored only for opt-in logging.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3433,7 +3433,7 @@
   },
   {
     "ea": "0x60FA4F",
-    "line": "call    TESPackage_SetLocation",
+    "line": "call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3469,7 +3469,7 @@
   },
   {
     "ea": "0x60FA60",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3529,7 +3529,7 @@
   },
   {
     "ea": "0x60FA84",
-    "line": "call    TESPackage_TargetData_constr",
+    "line": "call    TESPackage_TargetData_constr; 3DTheft decode: TESPackage_TargetData constructor initializes targetType=2, target/object=0, count=0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3571,7 +3571,7 @@
   },
   {
     "ea": "0x60FA9A",
-    "line": "call    TESPackage_SetTarget",
+    "line": "call    TESPackage_SetTarget; 3DTheft decode: TESPackage_SetTarget allocates package->target when needed, copies a 0x0C TargetData record, and leaves later callers to set target type/ref/count fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3589,13 +3589,13 @@
   },
   {
     "ea": "0x60FAA3",
-    "line": "mov     ecx, ebx; void *",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60FAA5",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3607,7 +3607,7 @@
   },
   {
     "ea": "0x60FAAB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3637,7 +3637,7 @@
   },
   {
     "ea": "0x60FABF",
-    "line": "call    TESPackage_TargetData_SetType",
+    "line": "call    TESPackage_TargetData_SetType; 3DTheft decode: TargetData_SetType writes targetType and clears the target/object field for refr/base/type target modes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3691,7 +3691,7 @@
   },
   {
     "ea": "0x60FAD6",
-    "line": "call    TeSPackage_TargetData_SetTargetREFR",
+    "line": "call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3919,7 +3919,7 @@
   },
   {
     "ea": "0x60FB3A",
-    "line": "call    Actor_AddPackage?",
+    "line": "call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3937,19 +3937,19 @@
   },
   {
     "ea": "0x60FB43",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60FB44",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60FB46",
-    "line": "call    sub_605F00",
+    "line": "call    Crime_AddWitness",
     "mnemonic": "call",
     "size": 5
   },

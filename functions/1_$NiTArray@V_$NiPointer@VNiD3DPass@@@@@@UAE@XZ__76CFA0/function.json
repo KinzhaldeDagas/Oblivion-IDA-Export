@@ -1,18 +1,31 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x76CFA0",
+      "0x76CFE7"
+    ]
+  ],
+  "chunks_sha256": "3f48796751d23ef814d911d5af3af5fda52b01df54b0bfec8de6c0e14af9030f",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nDX11 lifetime audit 2026-10-01: destructor traverses the allocation cookie DWORD at data-4, not merely NiTArray end/live, then frees the allocation. Full-capacity pass ownership capture must bound and match that cookie; a shader pin does not freeze this raw allocation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "NiTArray<NiPointer<NiD3DPass>>::~NiTArray<NiPointer<NiD3DPass>>(void)",
   "end_ea": "0x76CFE7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??1?$NiTArray@V?$NiPointer@VNiD3DPass@@@@@@UAE@XZ",
   "segment": ".text",
   "sha256": "3f48796751d23ef814d911d5af3af5fda52b01df54b0bfec8de6c0e14af9030f",
   "size": 71,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76CFA0",
+  "total_chunk_size": 71,
   "type": "void __thiscall(_DWORD *this)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 2

@@ -3,7 +3,6 @@
 0x8A8097: test    ecx, ecx
 0x8A8099: jz      short loc_8A80A9
 0x8A809B: jmp     short loc_8A80A0
-0x8A809D: align 10h
 0x8A80A0: mov     eax, ecx
 0x8A80A2: mov     ecx, [eax+0Ch]
 0x8A80A5: test    ecx, ecx

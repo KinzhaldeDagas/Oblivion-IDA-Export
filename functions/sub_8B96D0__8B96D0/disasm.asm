@@ -70,3 +70,12 @@
 0x8B978D: pop     ebx
 0x8B978E: add     esp, 10h
 0x8B9791: retn    4
+0x9D7060: mov     ecx, [ebp-10h]; this
+0x9D7063: jmp     ??1bhkRigidBody@@UAE@XZ; bhkRigidBody::~bhkRigidBody(void)
+0x9D7068: mov     edx, [esp+arg_4]
+0x9D706C: lea     eax, [edx-14h]
+0x9D706F: mov     ecx, [edx-18h]
+0x9D7072: xor     ecx, eax
+0x9D7074: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7079: mov     eax, offset stru_AFECF8
+0x9D707E: jmp     ___CxxFrameHandler3

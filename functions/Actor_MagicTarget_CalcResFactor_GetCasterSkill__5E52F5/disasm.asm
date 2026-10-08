@@ -21,5 +21,5 @@
 0x5E5333: mov     ecx, esi
 0x5E5335: call    edx
 0x5E5337: mov     ebp, eax
-0x5E5339: jmp     short Actor_MagicTarget_CalcResFactor___GetTargetMagicItemResistance
+0x5E5339: jmp     short Actor_MagicTarget_CalcResFactor___GetTargetMagicItemResistance; AVU decode: choose target magic-item resistance AV. Uses ResistPoison (0x43) for poison path/flag, otherwise ResistMagic (0x40) when the magic item type check allows it.
 0x5E533B: mov     ebp, 64h ; 'd'

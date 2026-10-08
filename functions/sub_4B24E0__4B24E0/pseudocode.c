@@ -1,4 +1,4 @@
-char *sub_4B24E0()
+NiRTTI *sub_4B24E0()
 {
-  return dword_B35ACC;
+  return &stru_B35ACC; /*0x4b24e5*/
 }

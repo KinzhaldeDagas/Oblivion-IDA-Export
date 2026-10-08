@@ -2,9 +2,9 @@ unsigned int sub_A15870()
 {
   int v1; // [esp+Ch] [ebp-34h]
 
-  LOWORD(v1) = (unsigned __int16)&off_AA1BEC;
-  HIBYTE(v1) = (unsigned int)&off_AA1BEC >> 0x18;
-  BYTE2(v1) = (unsigned int)&off_AA1BEC >> 0x10;
-  dword_B30588 = v1;
-  return (unsigned int)&off_AA1BEC >> 0x10;
+  LOWORD(v1) = (unsigned __int16)&off_AA1BEC; /*0xa1588f*/
+  HIBYTE(v1) = (unsigned int)&off_AA1BEC >> 0x18; /*0xa1589d*/
+  BYTE2(v1) = (unsigned int)&off_AA1BEC >> 0x10; /*0xa158a5*/
+  dword_B30588 = v1; /*0xa158ad*/
+  return (unsigned int)&off_AA1BEC >> 0x10; /*0xa158a1*/
 }

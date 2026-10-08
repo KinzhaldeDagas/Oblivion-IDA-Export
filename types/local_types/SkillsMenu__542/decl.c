@@ -1,1 +1,1 @@
-SkillsMenu
+struct SkillsMenu;

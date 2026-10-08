@@ -1,4 +1,4 @@
-0x41E960: push    5Bh ; '['; a2
+0x41E960: push    5Bh ; '['; Returns the sound payload stored in ExtraSound, with null checks for both the extra and its payload.
 0x41E962: call    BaseExtraList_GetExtraData
 0x41E967: test    eax, eax
 0x41E969: jz      short loc_41E972

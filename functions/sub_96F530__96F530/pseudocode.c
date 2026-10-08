@@ -5,8 +5,8 @@ void __thiscall sub_96F530(int this, float *a2, float *a3)
   float v6; // edx
   bool v7; // zf
   float v8; // eax
-  double v9; // st7
-  double v10; // st7
+  double y; // st7
+  double z; // st7
   double v11; // st5
   double v12; // st7
   double v13; // st7
@@ -15,97 +15,93 @@ void __thiscall sub_96F530(int this, float *a2, float *a3)
   double v16; // st7
   double v17; // st7
   float v18; // [esp+8h] [ebp-34h]
-  int v19; // [esp+Ch] [ebp-30h] BYREF
-  float v20; // [esp+10h] [ebp-2Ch]
-  float v21; // [esp+14h] [ebp-28h]
-  float v22; // [esp+18h] [ebp-24h] BYREF
-  float v23; // [esp+1Ch] [ebp-20h]
-  float v24; // [esp+20h] [ebp-1Ch]
-  float v25; // [esp+24h] [ebp-18h]
-  float v26; // [esp+28h] [ebp-14h]
-  float v27; // [esp+2Ch] [ebp-10h]
-  float v28; // [esp+30h] [ebp-Ch]
-  float v29; // [esp+34h] [ebp-8h]
-  float v30; // [esp+38h] [ebp-4h]
-  float v31; // [esp+40h] [ebp+4h]
+  NiPoint3 v19; // [esp+Ch] [ebp-30h] BYREF
+  NiPoint3 other; // [esp+18h] [ebp-24h] BYREF
+  float v21; // [esp+24h] [ebp-18h]
+  float v22; // [esp+28h] [ebp-14h]
+  float v23; // [esp+2Ch] [ebp-10h]
+  float v24; // [esp+30h] [ebp-Ch]
+  float v25; // [esp+34h] [ebp-8h]
+  float v26; // [esp+38h] [ebp-4h]
+  float v27; // [esp+40h] [ebp+4h]
 
-  sub_976A50((float *)(*(_DWORD *)(this + 0x38) + 0x20), (int)&v19, *(float *)(this + 0x44));
-  v4 = *(float **)(this + 0x3C);
-  v5 = v4[1];
-  v6 = v4[2];
-  v7 = *(_DWORD *)(this + 0x18) == 2;
-  v8 = v4[3];
-  v22 = v5;
-  v23 = v6;
-  v24 = v8;
-  if ( v7 )
+  sub_976A50((float *)(*(_DWORD *)(this + 0x38) + 0x20), &v19.x, *(float *)(this + 0x44)); /*0x96f548*/
+  v4 = *(float **)(this + 0x3C); /*0x96f54d*/
+  v5 = v4[1]; /*0x96f550*/
+  v6 = v4[2]; /*0x96f553*/
+  v7 = *(_DWORD *)(this + 0x18) == 2; /*0x96f559*/
+  v8 = v4[3]; /*0x96f55d*/
+  other.x = v5; /*0x96f560*/
+  other.y = v6; /*0x96f564*/
+  other.z = v8; /*0x96f568*/
+  if ( v7 ) /*0x96f56c*/
   {
-    v18 = *(float *)(this + 0x1C);
-    v25 = *a2 * v18;
-    v26 = a2[1] * v18;
-    v27 = v18 * a2[2];
-    *(float *)&v19 = v25 + *(float *)&v19;
-    v20 = v20 + v26;
-    v21 = v21 + v27;
-    v31 = *(float *)(this + 0x1C);
-    v25 = *a3 * v31;
-    v26 = a3[1] * v31;
-    v27 = v31 * a3[2];
-    v22 = v25 + v22;
-    v23 = v23 + v26;
-    v24 = v24 + v27;
-    v25 = v22 - *(float *)&v19;
-    v9 = v23;
-    *(float *)(this + 0x2C) = v25;
-    v26 = v9 - v20;
-    v10 = v24;
-    *(float *)(this + 0x30) = v26;
-    v27 = v10 - v21;
-    *(float *)(this + 0x34) = v27;
-    sub_43F350((float *)(this + 0x2C));
-    v11 = *(float *)(*(_DWORD *)(this + 0x38) + 0x38);
-    v25 = *(float *)(this + 0x2C) * v11;
-    v26 = *(float *)(this + 0x30) * v11;
-    v27 = v11 * *(float *)(this + 0x34);
-    v22 = v25 + *(float *)&v19;
-    v12 = v26;
-    *(float *)(this + 0x20) = v22;
-    v23 = v12 + v20;
-    v13 = v27;
-    *(float *)(this + 0x24) = v23;
-    v24 = v13 + v21;
-    *(float *)(this + 0x28) = v24;
+    v18 = *(float *)(this + 0x1C); /*0x96f579*/
+    v21 = *a2 * v18; /*0x96f58d*/
+    v22 = a2[1] * v18; /*0x96f596*/
+    v23 = v18 * a2[2]; /*0x96f5a1*/
+    v19.x = v21 + v19.x; /*0x96f5ad*/
+    v19.y = v19.y + v22; /*0x96f5b9*/
+    v19.z = v19.z + v23; /*0x96f5c5*/
+    v27 = *(float *)(this + 0x1C); /*0x96f5cc*/
+    v21 = *a3 * v27; /*0x96f5dc*/
+    v22 = a3[1] * v27; /*0x96f5e5*/
+    v23 = v27 * a3[2]; /*0x96f5ec*/
+    other.x = v21 + other.x; /*0x96f5f8*/
+    other.y = other.y + v22; /*0x96f604*/
+    other.z = other.z + v23; /*0x96f610*/
+    v21 = other.x - v19.x; /*0x96f61c*/
+    y = other.y; /*0x96f624*/
+    *(float *)(this + 0x2C) = v21; /*0x96f628*/
+    v22 = y - v19.y; /*0x96f630*/
+    z = other.z; /*0x96f638*/
+    *(float *)(this + 0x30) = v22; /*0x96f63c*/
+    v23 = z - v19.z; /*0x96f643*/
+    *(float *)(this + 0x34) = v23; /*0x96f64b*/
+    Vector3_NormalizeInPlace((float *)(this + 0x2C)); /*0x96f64e*/
+    v11 = *(float *)(*(_DWORD *)(this + 0x38) + 0x38); /*0x96f665*/
+    v21 = *(float *)(this + 0x2C) * v11; /*0x96f66b*/
+    v22 = *(float *)(this + 0x30) * v11; /*0x96f674*/
+    v23 = v11 * *(float *)(this + 0x34); /*0x96f67b*/
+    other.x = v21 + v19.x; /*0x96f688*/
+    v12 = v22; /*0x96f690*/
+    *(float *)(this + 0x20) = other.x; /*0x96f694*/
+    other.y = v12 + v19.y; /*0x96f69b*/
+    v13 = v23; /*0x96f6a3*/
+    *(float *)(this + 0x24) = other.y; /*0x96f6a7*/
+    other.z = v13 + v19.z; /*0x96f6ae*/
+    *(float *)(this + 0x28) = other.z; /*0x96f6b6*/
   }
   else
   {
-    v25 = v22 + *(float *)&v19;
-    v26 = v23 + v20;
-    v27 = v24 + v21;
-    v14 = dbl_A2FAA0;
-    v28 = v25 * v14;
-    v15 = v26;
-    *(float *)(this + 0x20) = v28;
-    v29 = v15 * v14;
-    *(float *)(this + 0x24) = v29;
-    v30 = v14 * v27;
-    *(float *)(this + 0x28) = v30;
-    if ( sub_8AA390((float *)&v19, &v22) )
+    v21 = other.x + v19.x; /*0x96f6c8*/
+    v22 = other.y + v19.y; /*0x96f6d4*/
+    v23 = other.z + v19.z; /*0x96f6e0*/
+    v14 = dbl_A2FAA0; /*0x96f6f0*/
+    v24 = v21 * v14; /*0x96f6f2*/
+    v15 = v22; /*0x96f6fa*/
+    *(float *)(this + 0x20) = v24; /*0x96f6fe*/
+    v25 = v15 * v14; /*0x96f708*/
+    *(float *)(this + 0x24) = v25; /*0x96f710*/
+    v26 = v14 * v23; /*0x96f717*/
+    *(float *)(this + 0x28) = v26; /*0x96f71f*/
+    if ( NiPoint3__NotEqual(&v19, &other) ) /*0x96f726*/
     {
-      v28 = v22 - *(float *)&v19;
-      v16 = v23;
-      *(float *)(this + 0x2C) = v28;
-      v29 = v16 - v20;
-      v17 = v24;
-      *(float *)(this + 0x30) = v29;
-      v30 = v17 - v21;
-      *(float *)(this + 0x34) = v30;
-      sub_43F350((float *)(this + 0x2C));
+      v24 = other.x - v19.x; /*0x96f73a*/
+      v16 = other.y; /*0x96f742*/
+      *(float *)(this + 0x2C) = v24; /*0x96f746*/
+      v25 = v16 - v19.y; /*0x96f74c*/
+      v17 = other.z; /*0x96f754*/
+      *(float *)(this + 0x30) = v25; /*0x96f758*/
+      v26 = v17 - v19.z; /*0x96f75f*/
+      *(float *)(this + 0x34) = v26; /*0x96f767*/
+      Vector3_NormalizeInPlace((float *)(this + 0x2C)); /*0x96f76a*/
     }
     else
     {
-      *(_DWORD *)(this + 0x2C) = dword_B258E8;
-      *(_DWORD *)(this + 0x30) = dword_B258EC;
-      *(_DWORD *)(this + 0x34) = dword_B258F0;
+      *(float *)(this + 0x2C) = rhs.x; /*0x96f77e*/
+      *(float *)(this + 0x30) = rhs.y; /*0x96f787*/
+      *(float *)(this + 0x34) = rhs.z; /*0x96f78f*/
     }
   }
 }

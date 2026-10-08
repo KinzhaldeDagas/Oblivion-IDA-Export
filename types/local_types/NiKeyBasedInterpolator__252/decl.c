@@ -1,1 +1,1 @@
-NiKeyBasedInterpolator
+struct NiKeyBasedInterpolator;

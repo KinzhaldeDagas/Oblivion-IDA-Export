@@ -1,1 +1,1 @@
-NiBoolData
+struct NiBoolData;

@@ -5,7 +5,7 @@
 0x6C4DA6: mov     edi, [esp+14h+arg_0]
 0x6C4DAA: push    edi
 0x6C4DAB: mov     esi, ecx
-0x6C4DAD: call    sub_716050
+0x6C4DAD: call    NiTimeController_SaveBinary; Saves the first manager-controlled controller found in the next chain, then flags +0x08, frequency +0x0C, phase +0x10, low/high key times +0x14/+0x18, and target +0x30. Runtime caches are not serialized.
 0x6C4DB2: mov     al, [esi+6Ch]
 0x6C4DB5: push    1
 0x6C4DB7: lea     ecx, [esp+18h+var_4]

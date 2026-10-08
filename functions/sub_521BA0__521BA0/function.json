@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 4,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x521BA0",
+      "0x521BC8"
+    ]
+  ],
+  "chunks_sha256": "4b32812c90ba84ed304a6e939f8e31f952a080d390eca0f24bdcef373fdd9ad2",
+  "comment_regular": "Verified: TESActorBase size +21 bytes for 0x200 skills +4 bytes for 0x400 combat-style FormID; matches NPC save/load partners. Creature uses the same masks but only three skill bytes.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_521BA0",
+  "display_name": "TESNPC_GetModifiedSize",
   "end_ea": "0x521BC8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_521BA0",
+  "name": "TESNPC_GetModifiedSize",
   "segment": ".text",
   "sha256": "4b32812c90ba84ed304a6e939f8e31f952a080d390eca0f24bdcef373fdd9ad2",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x521BA0",
-  "type": "int __thiscall(char *this, int)",
+  "total_chunk_size": 40,
+  "type": "unsigned __int16 __thiscall(TESNPC *self, ActorBaseSaveChangeMask changeMask)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 5
 }

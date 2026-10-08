@@ -1,18 +1,31 @@
 {
-  "callees_count": 59,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 39,
+  "callers_count": 21,
+  "chunks": [
+    [
+      "0x57F9F0",
+      "0x57FD5E"
+    ]
+  ],
+  "chunks_sha256": "e208c6d044adc2b65e4b4c5ac4647cfc1d80000723629fc3172e7a06baef17f9",
+  "comment_regular": "AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.",
+  "comment_repeatable": "AchievementsNative evidence: focused tile with xlist=&xitem drives parent xscroll by pulsing the xscroll target's user5 through -999999, tile xscroll, then 0; do not leave scroll target user5 at the desired scroll value.\nVerified: handles focus transition and click trait dispatch. Click path calls Menu vtable +0x0C at 0x57FCC4 then still calls tile update 0x58FBA0 on original clicked Tile at 0x57FCCB. A hook must not delete that Tile before dispatcher unwinds. xitem focus also pulses ancestor xscroll user5. Fallout named analogue 0x824F06A0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_57F9F0",
+  "display_name": "InterfaceManager::SetCurrentFocusTarget",
   "end_ea": "0x57FD5E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_57F9F0",
+  "name": "InterfaceManager::SetCurrentFocusTarget",
   "segment": ".text",
   "sha256": "e208c6d044adc2b65e4b4c5ac4647cfc1d80000723629fc3172e7a06baef17f9",
   "size": 878,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x57F9F0",
+  "total_chunk_size": 878,
   "type": "double __userpurge@<st0>(float *this@<ecx>, double st5_0@<st2>, double result@<st0>, double st6_0@<st1>, float, _DWORD *, int)",
   "xrefs_from_count": 315,
   "xrefs_to_count": 21

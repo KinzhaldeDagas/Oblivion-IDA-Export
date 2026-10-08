@@ -1,1 +1,1 @@
-TallGrassShaderProperty::CachedGeometry
+struct TallGrassShaderProperty::CachedGeometry;

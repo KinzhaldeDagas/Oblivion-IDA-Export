@@ -1,4 +1,4 @@
-0x4BC570: push    ebp
+0x4BC570: push    ebp; Verified record-load virtual (vtable +0x1C): accepts only record type 0x29, initializes form metadata, clears linked state, reads EDID and a 12-byte DNAM vector, truncates the three float components to UInt16, and recalculates boundRadius from the half-extents. No SubSpace-specific index registration occurs in this loader.
 0x4BC571: mov     ebp, esp
 0x4BC573: sub     esp, 18h
 0x4BC576: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x4BC595: jmp     loc_4BC6F3
 0x4BC59A: push    esi
 0x4BC59B: mov     ecx, edi
-0x4BC59D: call    TESFile_InitializeFormFromRecord
+0x4BC59D: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4BC5A2: push    0; a2
 0x4BC5A4: mov     ecx, esi; this
 0x4BC5A6: call    TESForm_SetIsLinked
@@ -34,7 +34,7 @@
 0x4BC5D8: lea     eax, [ebp+Dst]
 0x4BC5DB: push    eax; Dst
 0x4BC5DC: mov     ecx, edi; a1
-0x4BC5DE: call    TESFile_GetChunkData
+0x4BC5DE: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4BC5E3: fld     dword ptr [ebp+Dst]
 0x4BC5E6: fnstcw  [ebp+var_A]
 0x4BC5E9: movzx   eax, [ebp+var_A]
@@ -72,7 +72,7 @@
 0x4BC65B: push    200h; a4
 0x4BC660: push    ebx; Dst
 0x4BC661: mov     ecx, edi; a1
-0x4BC663: call    TESFile_GetChunkData
+0x4BC663: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4BC668: mov     edx, [esi]
 0x4BC66A: mov     eax, [edx+0D8h]
 0x4BC670: push    ebx

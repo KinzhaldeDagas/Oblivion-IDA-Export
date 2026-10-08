@@ -1,4 +1,4 @@
-0x401F00: mov     eax, [esp+Size]
+0x401F00: mov     eax, [esp+Size]; Hot Reload OBSE decode: FormHeapAlloc(size) forwards to MemoryHeap_Allocate(&FormHeap, size, 1). Used for replacement script data/list payloads.
 0x401F04: push    1; int
 0x401F06: push    eax; Size
 0x401F07: mov     ecx, offset FormHeap

@@ -2,7 +2,7 @@
 0x60BF32: test    eax, eax
 0x60BF34: jz      short loc_60BF46
 0x60BF36: push    eax
-0x60BF37: call    FormHeapFree
+0x60BF37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60BF3C: add     esp, 4
 0x60BF3F: mov     dword ptr [esi+5Ch], 0
 0x60BF46: mov     dword ptr [esi+60h], 0

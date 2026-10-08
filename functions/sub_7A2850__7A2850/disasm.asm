@@ -1,6 +1,6 @@
-0x7A2850: push    esi
+0x7A2850: push    esi; Deep copy-constructs one compact 0x54 SIdvLeafTexture, including initialization and assignment of its owned 28-byte small string.
 0x7A2851: push    edi
-0x7A2852: mov     edi, [esp+8+arg_0]
+0x7A2852: mov     edi, [esp+8+source]
 0x7A2856: mov     al, [edi]
 0x7A2858: mov     esi, ecx
 0x7A285A: mov     [esi], al
@@ -13,15 +13,15 @@
 0x7A286E: fld     dword ptr [edi+10h]
 0x7A2871: xor     eax, eax
 0x7A2873: fstp    dword ptr [esi+10h]
-0x7A2876: push    0FFFFFFFFh
-0x7A2878: lea     ecx, [esi+14h]
-0x7A287B: push    eax
+0x7A2876: push    0FFFFFFFFh; count
+0x7A2878: lea     ecx, [esi+14h]; this
+0x7A287B: push    eax; offset
 0x7A287C: lea     edx, [edi+14h]
 0x7A287F: mov     dword ptr [ecx+18h], 0Fh
 0x7A2886: mov     [ecx+14h], eax
-0x7A2889: push    edx
+0x7A2889: push    edx; source
 0x7A288A: mov     [ecx+4], al
-0x7A288D: call    sub_414420
+0x7A288D: call    OB_stString28_AssignSubstring_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,offset,count). Bounds-checks offset, clamps count to source.size-offset, handles self-assignment by in-place erasure, grows when required, copies the selected bytes, updates size, and writes the terminator.
 0x7A2892: mov     eax, [edi+30h]
 0x7A2895: mov     [esi+30h], eax
 0x7A2898: mov     ecx, [edi+34h]

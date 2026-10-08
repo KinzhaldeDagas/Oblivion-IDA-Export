@@ -45,7 +45,7 @@
 0x5909FC: push    0
 0x5909FE: push    1
 0x590A00: push    eax
-0x590A01: call    sub_439EB0
+0x590A01: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x590A06: mov     edi, eax
 0x590A08: test    edi, edi
 0x590A0A: jnz     short loc_590A1F
@@ -57,8 +57,8 @@
 0x590A1F: mov     eax, [edi+1Ch]
 0x590A22: test    eax, eax
 0x590A24: jz      short loc_590A9B
-0x590A26: lea     ecx, [esp+50h+var_28]
-0x590A2A: call    sub_478B90
+0x590A26: lea     ecx, [esp+50h+var_28]; this
+0x590A2A: call    OB_NiCloningProcess_ctor
 0x590A2F: fld1
 0x590A31: fst     [esp+50h+var_10]
 0x590A35: fst     [esp+50h+var_14]
@@ -161,7 +161,7 @@
 0x590B5D: mov     [eax+44h], edx
 0x590B60: mov     [eax+48h], ecx
 0x590B63: mov     ecx, edi; this
-0x590B65: call    sub_405680
+0x590B65: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x590B6A: push    ebx; arg1
 0x590B6B: push    0; canCreate
 0x590B6D: call    InterfaceManager_GetSingleton
@@ -169,7 +169,7 @@
 0x590B75: add     esp, 8
 0x590B78: push    edx; a2
 0x590B79: mov     ecx, edi; this
-0x590B7B: call    sub_405680
+0x590B7B: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x590B80: mov     ecx, [esi+24h]
 0x590B83: mov     eax, [ecx]
 0x590B85: mov     edx, [eax+84h]
@@ -178,10 +178,10 @@
 0x590B8D: call    edx
 0x590B8F: fld     dword ptr ds:0A379B4h
 0x590B95: push    ecx
-0x590B96: fstp    [esp+54h+a3]; a3
-0x590B99: push    0FA6h; a2
+0x590B96: fstp    [esp+54h+a3]; value
+0x590B99: push    0FA6h; propertyCode
 0x590B9E: mov     ecx, esi; this
-0x590BA0: call    Tile_SetFloat
+0x590BA0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x590BA5: push    0FA1h
 0x590BAA: mov     ecx, esi
 0x590BAC: call    Tile_GetFloat
@@ -201,7 +201,7 @@
 0x590BD7: mov     ecx, [esi+24h]
 0x590BDA: call    NiNode_UpdateDynamicEffectState
 0x590BDF: mov     ecx, [esi+24h]; this
-0x590BE2: call    NiAVObject_InitializePropertyState
+0x590BE2: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x590BE7: mov     eax, [esi+2Ch]
 0x590BEA: xor     eax, 40h
 0x590BED: or      eax, 9
@@ -220,3 +220,17 @@
 0x590C10: pop     ebx
 0x590C11: add     esp, 3Ch
 0x590C14: retn
+0x9BFAA0: lea     ecx, [ebp-28h]
+0x9BFAA3: jmp     sub_4781A0
+0x9BFAA8: mov     eax, [ebp-38h]
+0x9BFAAB: push    eax
+0x9BFAAC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BFAB1: pop     ecx
+0x9BFAB2: retn
+0x9BFAB3: mov     edx, [esp+arg_4]
+0x9BFAB7: lea     eax, [edx-40h]
+0x9BFABA: mov     ecx, [edx-44h]
+0x9BFABD: xor     ecx, eax
+0x9BFABF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BFAC4: mov     eax, offset stru_AE8F58
+0x9BFAC9: jmp     ___CxxFrameHandler3

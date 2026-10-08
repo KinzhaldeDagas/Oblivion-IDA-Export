@@ -1,4 +1,4 @@
-0x51AED0: push    ecx
+0x51AED0: push    ecx; TESAnimGroup movement magnitude. Computes sqrt(x*x + y*y + z*z) from movement vector floats; used by Animate In Place warning path.
 0x51AED1: fld     dword ptr [ecx+18h]
 0x51AED4: fld     dword ptr [ecx+14h]
 0x51AED7: fld     dword ptr [ecx+1Ch]

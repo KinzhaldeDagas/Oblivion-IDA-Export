@@ -17,14 +17,14 @@
 0x8B7FC5: jz      short loc_8B7FCC
 0x8B7FC7: add     eax, 10h
 0x8B7FCA: jmp     short loc_8B7FD1
-0x8B7FCC: mov     eax, offset stru_BA7A40
+0x8B7FCC: mov     eax, offset unk_BA7A40
 0x8B7FD1: movaps  xmm0, xmmword ptr [eax]
 0x8B7FD4: lea     eax, [esp+40h+var_20]
 0x8B7FD8: push    eax
 0x8B7FD9: lea     ecx, [esp+44h+var_2C]
 0x8B7FDD: push    ecx
 0x8B7FDE: movaps  [esp+48h+var_20], xmm0
-0x8B7FE3: call    sub_43F3E0
+0x8B7FE3: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8B7FE8: fld     [esp+48h+var_2C]
 0x8B7FEC: fld     qword ptr ds:0A3D0C0h
 0x8B7FF2: lea     edx, [esp+48h+var_2C]

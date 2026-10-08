@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x814340",
-    "line": "mov     eax, ds:0B43124h",
+    "line": "mov     eax, ds:0B43124h; BSCubeMapCamera virtual render dispatcher. Mode 0 calls the six-face shadow object-list renderer; mode 3 calls the alternate face renderer; afterward it releases +0x140 and all six +0x128 face references.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x814387",
-    "line": "mov     eax, [esi+124h]",
+    "line": "mov     eax, [esi+124h]; Dispatch by BSCubeMapCamera+0x124: mode 0 -> 0x00813510, mode 3 -> 0x00813960.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x81439B",
-    "line": "call    sub_813510",
+    "line": "call    BSCubeMapCamera_RenderMode0_ShadowObjectListFaces; Mode 0 is the six-face render-target loop used by ShadowSceneLight special/object-list dispatch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x8143A2",
-    "line": "mov     ecx, [esp+10h+arg_0]; jumptable 00814392 case 3",
+    "line": "mov     ecx, [esp+10h+renderArg]; jumptable 00814392 case 3",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x8143A9",
-    "line": "call    sub_813960",
+    "line": "call    BSCubeMapCamera_RenderMode3Faces; Mode 3 uses the distinct image-space cube-face path; it is not the mode used by ShadowPass special-light rendering.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8143AE",
-    "line": "mov     edi, [esi+140h]; jumptable 00814392 default case, cases 1,2",
+    "line": "mov     edi, [esi+140h]; Begin post-render ownership cleanup for BSCubeMapCamera+0x140 and six face texture references.",
     "mnemonic": "mov",
     "size": 6
   },

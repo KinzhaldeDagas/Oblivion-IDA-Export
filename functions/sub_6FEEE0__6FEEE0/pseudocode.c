@@ -1,18 +1,18 @@
-float *__thiscall sub_6FEEE0(float *this)
+NiObject *__thiscall sub_6FEEE0(NiObject *this)
 {
-  float v2; // edx
+  float z; // edx
 
-  sub_752BF0(this);
-  *(_DWORD *)this = &BSParentVelocityModifier::`vftable';
-  *((_DWORD *)this + 3) = 0xBB8;
-  *(this + 9) = Vector3_InitValue_;
-  *(this + 0xA) = *(&Vector3_InitValue_ + 1);
-  *(this + 0xB) = dword_B3F9B0;
-  *(this + 0xC) = Vector3_InitValue_;
-  *(this + 0xD) = *(&Vector3_InitValue_ + 1);
-  v2 = dword_B3F9B0;
-  *(this + 8) = 0.0;
-  *(this + 6) = 0.0;
-  *(this + 0xE) = v2;
-  return this;
+  sub_752BF0(this); /*0x6feee3*/
+  this->__vftable = (NiObjectVtbl *)&BSParentVelocityModifier::`vftable'; /*0x6feeea*/
+  *((_DWORD *)this + 3) = 0xBB8; /*0x6feef0*/
+  *((_DWORD *)this + 9) = LODWORD(g_zeroNiPoint3.x); /*0x6feefc*/
+  *((_DWORD *)this + 0xA) = LODWORD(g_zeroNiPoint3.y); /*0x6fef05*/
+  *((_DWORD *)this + 0xB) = LODWORD(g_zeroNiPoint3.z); /*0x6fef0e*/
+  *((_DWORD *)this + 0xC) = LODWORD(g_zeroNiPoint3.x); /*0x6fef16*/
+  *((_DWORD *)this + 0xD) = LODWORD(g_zeroNiPoint3.y); /*0x6fef1f*/
+  z = g_zeroNiPoint3.z; /*0x6fef22*/
+  *((float *)this + 8) = 0.0; /*0x6fef28*/
+  *((float *)this + 6) = 0.0; /*0x6fef2b*/
+  *((float *)this + 0xE) = z; /*0x6fef2e*/
+  return this; /*0x6fef33*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x813300",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Mode-0 cube-map helper: swaps temporary accumulator/culling state and renders the current ShadowSceneLight's +0xE8 category/object list through ShadowSceneLight_RenderCategoryObjectList.",
     "mnemonic": "push",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x8133D6",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x81341A",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x813429",
-    "line": "push    0",
+    "line": "push    0; visibleArray",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x81342B",
-    "line": "lea     ecx, [esp+0E0h+var_9C]",
+    "line": "lea     ecx, [esp+0E0h+self]; self",
     "mnemonic": "lea",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x813436",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x81344D",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x813452",
-    "line": "mov     [esp+0DCh+var_9C.Camera], edi",
+    "line": "mov     [esp+0DCh+self.Camera], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -589,13 +589,13 @@
   },
   {
     "ea": "0x81345D",
-    "line": "lea     ecx, [esp+0E0h+var_9C]; this",
+    "line": "lea     ecx, [esp+0E0h+self]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x813461",
-    "line": "call    NiCullingProcess__SetFrustum",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x81346D",
-    "line": "lea     eax, [esp+0DCh+var_9C]",
+    "line": "lea     eax, [esp+0DCh+self]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x813472",
-    "line": "call    sub_7D2070",
+    "line": "call    ShadowSceneLight_RenderCategoryObjectList; Traverse ShadowSceneLight+0xE8 object/geometry list and apply the cached caster-category mask. This is category filtering, not per-reference static-light admission.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x81348A",
-    "line": "call    NiDX9Renderer__SetShaderAccumulator",
+    "line": "call    NiDX9Renderer__SetShaderAccumulator;",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x81349F",
-    "line": "lea     ecx, [esp+0DCh+var_9C]; this",
+    "line": "lea     ecx, [esp+0DCh+self]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x8134AB",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -916,5 +916,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D1230",
+    "line": "lea     ecx, [ebp-0A0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1236",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D123B",
+    "line": "lea     ecx, [ebp-0A4h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1241",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1246",
+    "line": "lea     ecx, [ebp-9Ch]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D124C",
+    "line": "jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1251",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D1255",
+    "line": "lea     eax, [edx-0CCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D125B",
+    "line": "mov     ecx, [edx-0D0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1261",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D1263",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1268",
+    "line": "mov     eax, offset stru_AF9928",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D126D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

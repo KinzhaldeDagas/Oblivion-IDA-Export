@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x62FBD0",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; RadiantAI: action code 8 used by Cast Magic row, not Alarm.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x62FCA1",
-    "line": "call    Actor_GetBaseClass",
+    "line": "call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x62FCA8",
-    "line": "call    TESClass__IsGuardClass",
+    "line": "call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x62FE5A",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x62FEF6",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x62FF3E",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x62FF48",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x62FFA4",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x62FFAA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x62FFE3",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2179,7 +2179,7 @@
   },
   {
     "ea": "0x62FFEB",
-    "line": "call    sub_41FC70",
+    "line": "call    ExtraDataList_GetTrespassPackage; Returns the TrespassPackage stored in ExtraTresPassPackage, or null.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-LPACCEL
+typedef tagACCEL *LPACCEL;

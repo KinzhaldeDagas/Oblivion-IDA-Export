@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x78F7A0",
+      "0x78F9F5"
+    ]
+  ],
+  "chunks_sha256": "1248464ccd725549eb2042a2f7a677acba9cd4ecc7ad5e3be0fceb0f35088a7a",
+  "comment_regular": "\n\nSpeedTreeOBSE v158: existing793550 adapter additionally prepares reference static branch RGB from generated ring topology under opt-in BranchLighting.bUseAuthoredStaticLighting. Reference4.1 ComputeBranchNormals uses GetVertexCoord(nRunningCount), without branch starting offset or current column, as its static-lighting position. New baker preserves this while retaining native dynamic normals. Owned canonical/per-LOD RGB has no shader consumer yet; no in-game static rendering claim.\n\nSpeedTreeOBSE v161: native fixed-ring code normalizes horizontal/vertical differences without the4.1 tiny-vector threshold, then appends an unnormalized cross product at78F9B9; it lacks4.1 zero-cross direction fallback and final seam normalization. Existing793550 adapter now stages reference normals for fixed and supplemental rings before native7962F0 append. In-game execution/appearance remains UNVERIFIED.\n\nStock CBranch::ComputeBranchNormals uses fixed CBranch cross-section segment count argument, not a per-vertex m_nCrossSegments tail field.\n[2026-10-05 supplemental geometry] Stock fixed-count normals cannot handle per-ring26013 cross profiles. v116 replaces this call for adapted branches with recorded-ring neighbor selection and26014/26020 seam blend, emits through native AddVertexNormal7962F0 (no bool argument), advances+22. LOD ring-pair indices remain uint16-bounded and native-owned.",
+  "comment_repeatable": "Computes branch normals from generated coord grid using an explicit fixed cross-section segment count; no per-vertex cross-segment tail field is read.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78F7A0",
+  "display_name": "OB_CBranch_ComputeBranchNormals_010201A0",
   "end_ea": "0x78F9F5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78F7A0",
+  "name": "OB_CBranch_ComputeBranchNormals_010201A0",
   "segment": ".text",
   "sha256": "1248464ccd725549eb2042a2f7a677acba9cd4ecc7ad5e3be0fceb0f35088a7a",
   "size": 597,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78F7A0",
-  "type": "void __thiscall(_DWORD *this, int, unsigned __int16)",
+  "total_chunk_size": 597,
+  "type": "void __thiscall(OB_CBranch_010201A0 *this, OB_CIndexedGeometry_010201A0 *geometry, unsigned __int16 crossSectionSegments)",
   "xrefs_from_count": 210,
   "xrefs_to_count": 1
 }

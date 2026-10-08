@@ -1,1 +1,1 @@
-IRegistrar_0
+typedef IRegistrar IRegistrar_0;

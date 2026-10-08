@@ -1,11 +1,11 @@
-0x5E46C0: sub     esp, 0Ch
+0x5E46C0: sub     esp, 0Ch; Actor magic-effect transaction for a weapon hit or ArrowProjectile hit. Selects base weapon enchant/poison for ordinary attacks or projectile-retained AMMO enchantment (+0x7C), poison (+0x84), and paid bow enchantment (+0x80); pays ordinary weapon charge/consumes ordinary poison, applies effects through this Actor's MagicCaster to target, and reports insufficient charge.
 0x5E46C3: push    ebx
-0x5E46C4: mov     ebx, [esp+10h+arg_0]
+0x5E46C4: mov     ebx, [esp+10h+weaponEntry]
 0x5E46C8: test    ebx, ebx
 0x5E46CA: push    ebp
-0x5E46CB: mov     ebp, [esp+14h+arg_C]
+0x5E46CB: mov     ebp, [esp+14h+outInsufficientCharge]
 0x5E46CF: push    esi
-0x5E46D0: mov     esi, [esp+18h+arg_8]
+0x5E46D0: mov     esi, [esp+18h+projectile]
 0x5E46D4: mov     [esp+18h+var_C], ecx
 0x5E46D8: mov     byte ptr [ebp+0], 0
 0x5E46DC: jnz     short loc_5E46ED
@@ -29,13 +29,13 @@
 0x5E4701: test    esi, esi
 0x5E4703: mov     edi, eax
 0x5E4705: jz      short loc_5E472F
-0x5E4707: mov     ecx, esi
-0x5E4709: call    sub_607410
+0x5E4707: mov     ecx, esi; Projectile path: obtain retained poison from ArrowProjectile+0x84 instead of consulting current weapon EntryData.
+0x5E4709: call    ArrowProjectile_GetPoison; Return projectile-retained AlchemyItem poison at ArrowProjectile+0x84. The equipped weapon's poison extra is consumed at release.
 0x5E470E: test    esi, esi
-0x5E4710: mov     [esp+1Ch+arg_C], eax
+0x5E4710: mov     [esp+1Ch+outInsufficientCharge], eax
 0x5E4714: jz      short loc_5E473A
-0x5E4716: mov     ecx, esi
-0x5E4718: call    TESWorldSpace_GetParentWorldpsace
+0x5E4716: mov     ecx, esi; Projectile path: shared +0x7C accessor returns retained AMMO enchantment. This call is not a TESWorldSpace operation.
+0x5E4718: call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.
 0x5E471D: jmp     short loc_5E473D
 0x5E471F: test    esi, esi
 0x5E4721: jnz     short loc_5E4707
@@ -46,30 +46,30 @@
 0x5E4728: pop     ebx
 0x5E4729: add     esp, 0Ch
 0x5E472C: retn    10h
-0x5E472F: mov     ecx, ebx
-0x5E4731: call    sub_484DF0
-0x5E4736: mov     [esp+1Ch+arg_C], eax
+0x5E472F: mov     ecx, ebx; this
+0x5E4731: call    EquippedEntryData_GetPoison; Return the AlchemyItem poison attached to this EntryData's first ExtraDataList stack, or NULL. EntryData layout is extendData@+0, countDelta@+4, type@+8.
+0x5E4736: mov     [esp+1Ch+outInsufficientCharge], eax
 0x5E473A: mov     eax, [edi+64h]
 0x5E473D: test    esi, esi
 0x5E473F: mov     edi, eax
 0x5E4741: jz      short loc_5E4750
-0x5E4743: mov     ecx, esi
-0x5E4745: call    sub_607400
-0x5E474A: mov     [esp+1Ch+arg_8], eax
+0x5E4743: mov     ecx, esi; Projectile path: obtain paid bow enchantment from ArrowProjectile+0x80.
+0x5E4745: call    ArrowProjectile_GetBowEnchantment; Return projectile-retained bow EnchantmentItem at ArrowProjectile+0x80. This is captured only when release-time charge covers the shot cost.
+0x5E474A: mov     [esp+1Ch+projectile], eax
 0x5E474E: jmp     short loc_5E4758
-0x5E4750: mov     [esp+1Ch+arg_8], 0
+0x5E4750: mov     [esp+1Ch+projectile], 0
 0x5E4758: test    edi, edi
 0x5E475A: jnz     short loc_5E4768
-0x5E475C: cmp     [esp+1Ch+arg_C], edi
+0x5E475C: cmp     [esp+1Ch+outInsufficientCharge], edi
 0x5E4760: jnz     short loc_5E4768
-0x5E4762: cmp     [esp+1Ch+arg_8], edi
+0x5E4762: cmp     [esp+1Ch+projectile], edi
 0x5E4766: jz      short loc_5E4723
 0x5E4768: test    esi, esi
 0x5E476A: jnz     loc_5E4809
 0x5E4770: test    edi, edi
 0x5E4772: jz      short loc_5E47D8
-0x5E4774: mov     ecx, ebx
-0x5E4776: call    sub_4849C0
+0x5E4774: mov     ecx, ebx; Ordinary non-projectile path only: read current equipped instance charge for the weapon's base enchantment.
+0x5E4776: call    EquippedEntryData_GetCharge; Return per-instance ExtraCharge when present; otherwise return the TESEnchantableForm base charge. Returns the sentinel/default when the EntryData form is not enchantable.
 0x5E477B: fstp    [esp+1Ch+var_8]
 0x5E477F: mov     eax, [edi+24h]
 0x5E4782: mov     edx, [eax]
@@ -90,21 +90,21 @@
 0x5E47AB: mov     eax, [ebx]
 0x5E47AD: mov     eax, [eax]
 0x5E47AF: mov     ecx, [esp+1Ch+var_C]
-0x5E47B3: push    eax; int
+0x5E47B3: push    eax; targetStack
 0x5E47B4: add     ecx, 44h ; 'D'; this
 0x5E47B7: call    ExtraDataList_GetContainerChanges
 0x5E47BC: fld     [esp+20h+var_8]
 0x5E47C0: fsub    [esp+20h+var_4]
-0x5E47C4: push    eax; int
+0x5E47C4: push    eax; containerChanges
 0x5E47C5: push    ecx
-0x5E47C6: mov     ecx, ebx
+0x5E47C6: mov     ecx, ebx; this
 0x5E47C8: fstp    [esp+28h+var_4]
 0x5E47CC: fld     [esp+28h+var_4]
-0x5E47D0: fstp    [esp+28h+var_28]; float
-0x5E47D3: call    sub_488AA0
+0x5E47D0: fstp    [esp+28h+newCharge]; newCharge
+0x5E47D3: call    EquippedEntryData_SetCharge; Ordinary non-projectile path only: subtract floored enchantment cost from the selected weapon stack's charge. Projectile bow charge was already paid at release.
 0x5E47D8: mov     ebp, [ebx+8]
 0x5E47DB: test    edi, edi
-0x5E47DD: mov     ebx, [esp+1Ch+arg_4]
+0x5E47DD: mov     ebx, [esp+1Ch+target]
 0x5E47E1: jz      short loc_5E483B
 0x5E47E3: mov     esi, [esp+1Ch+var_C]
 0x5E47E7: mov     edx, [esi+5Ch]
@@ -141,7 +141,7 @@
 0x5E4833: push    ebp
 0x5E4834: mov     ecx, esi
 0x5E4836: call    MagicCaster_UseActiveMagicItem
-0x5E483B: mov     eax, [esp+1Ch+arg_C]
+0x5E483B: mov     eax, [esp+1Ch+outInsufficientCharge]
 0x5E483F: test    eax, eax
 0x5E4841: jz      short loc_5E4882
 0x5E4843: mov     esi, [esp+1Ch+var_C]
@@ -165,11 +165,11 @@
 0x5E486D: push    ebp
 0x5E486E: mov     ecx, esi
 0x5E4870: call    MagicCaster_UseActiveMagicItem
-0x5E4875: mov     ecx, [esp+1Ch+arg_0]
+0x5E4875: mov     ecx, [esp+1Ch+weaponEntry]; this
 0x5E4879: test    ecx, ecx
 0x5E487B: jz      short loc_5E4882
-0x5E487D: call    sub_484E50
-0x5E4882: mov     eax, [esp+1Ch+arg_8]
+0x5E487D: call    EquippedEntryData_ConsumePoison; Ordinary non-projectile path consumes weapon poison after applying it. Projectile poison was already consumed at release and is not consumed again here.
+0x5E4882: mov     eax, [esp+1Ch+projectile]
 0x5E4886: test    eax, eax
 0x5E4888: jz      short loc_5E48BC
 0x5E488A: mov     esi, [esp+1Ch+var_C]

@@ -14,7 +14,7 @@
 0x4F65CF: call    edx
 0x4F65D1: test    al, al
 0x4F65D3: jz      short loc_4F65F8
-0x4F65D5: mov     ecx, [esi+58h]
+0x4F65D5: mov     ecx, [esi+58h]; MEF v30 verified ActorWithoutProcessCTD site: Actor +0x58 is dereferenced without a null test. Null uses existing no-result path 0x004F65F8; non-null resumes at 0x004F65DA.
 0x4F65D8: mov     eax, [ecx]
 0x4F65DA: mov     edx, [eax+374h]
 0x4F65E0: mov     ebx, esi

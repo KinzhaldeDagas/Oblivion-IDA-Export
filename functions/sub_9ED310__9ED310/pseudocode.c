@@ -1,5 +1,5 @@
 int sub_9ED310()
 {
-  GameSetting_ConstrAndReg_float(&flt_B37AC8, (int)"fBuoyancyMultBody", 1.0);
-  return atexit(sub_A1FCB0);
+  GameSetting_ConstrAndReg_float(&MEMORY[0xB37A58][0x1C], (int)"fBuoyancyMultBody", 1.0); /*0x9ed320*/
+  return atexit(sub_A1FCB0); /*0x9ed330*/
 }

@@ -1,1 +1,1 @@
-hkPhantomOverlapListener
+struct hkPhantomOverlapListener;

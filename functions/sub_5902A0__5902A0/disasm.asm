@@ -37,3 +37,32 @@
 0x59030F: retn
 0x590310: xor     eax, eax; jumptable 005902AE default case, case 906
 0x590312: retn
+0x58FF50: mov     eax, ecx
+0x58FF52: fld     dword ptr ds:0A30634h
+0x58FF58: xor     ecx, ecx
+0x58FF5A: mov     [eax+8], ecx
+0x58FF5D: mov     [eax+0Ch], cx
+0x58FF61: mov     [eax+0Eh], cx
+0x58FF65: mov     [eax+20h], ecx
+0x58FF68: mov     [eax+18h], ecx
+0x58FF6B: mov     [eax+1Ch], ecx
+0x58FF6E: mov     dword ptr [eax+14h], offset ??_7?$NiTList@PAVValue@Tile@@@@6B@; const NiTList<Tile::Value *>::`vftable'
+0x58FF75: mov     [eax+3Ch], ecx
+0x58FF78: mov     [eax+34h], ecx
+0x58FF7B: mov     [eax+38h], ecx
+0x58FF7E: mov     dword ptr [eax+30h], offset ??_7?$NiTList@PAVTile@@@@6B@; const NiTList<Tile *>::`vftable'
+0x58FF85: mov     [eax+10h], ecx
+0x58FF88: mov     [eax+4], cl
+0x58FF8B: mov     [eax+6], cl
+0x58FF8E: mov     dword ptr [eax], offset ??_7Tile3D@@6B@; const Tile3D::`vftable'
+0x58FF94: mov     [eax+48h], ecx
+0x58FF97: mov     [eax+4Ch], cx
+0x58FF9B: mov     [eax+4Eh], cx
+0x58FF9F: mov     [eax+50h], ecx
+0x58FFA2: mov     [eax+54h], cx
+0x58FFA6: mov     [eax+56h], cx
+0x58FFAA: fstp    dword ptr [eax+58h]
+0x58FFAD: mov     [eax+24h], ecx
+0x58FFB0: mov     [eax+40h], ecx
+0x58FFB3: mov     [eax+44h], ecx
+0x58FFB6: retn

@@ -25,7 +25,7 @@
 0x699C48: mov     ecx, edi; this
 0x699C4A: call    MagicCaster_CastingVFX_destr
 0x699C4F: push    edi
-0x699C50: call    FormHeapFree
+0x699C50: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x699C55: add     esp, 4
 0x699C58: mov     dword ptr [esi+4], 0
 0x699C5F: pop     edi

@@ -1,1 +1,1 @@
-NMTBSAVE
+typedef tagNMTBSAVE NMTBSAVE;

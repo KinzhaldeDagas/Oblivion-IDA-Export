@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ModelLoader",
+  "definition": "struct ModelLoader\n{\nLockFreeMap *modelMap;\nLockFreeMap *kfMap;\nLockFreeMap *refMap;\nLockFreeMap *idleMap;\nLockFreeMap *helmetMap;\nLockFreeQueue_NiIOTask *distant3DMap;\nBackgroundCloneThread *bgCloneThread;\n}\n",
   "id": 18374686479671980450,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "modelMap",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LockFreeMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "kfMap",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LockFreeMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refMap",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "LockFreeMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "idleMap",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LockFreeMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "helmetMap",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "LockFreeMap *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "distant3DMap",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LockFreeQueue_NiIOTask *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bgCloneThread",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "BackgroundCloneThread *"
     }
   ],
   "name": "ModelLoader",
+  "ordinal": 9074,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 28
 }

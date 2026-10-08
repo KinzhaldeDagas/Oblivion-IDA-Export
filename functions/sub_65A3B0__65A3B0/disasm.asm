@@ -1,4 +1,4 @@
-0x65A3B0: call    MobileObject_GetCharProxy
+0x65A3B0: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x65A3B5: mov     ecx, eax
 0x65A3B7: test    ecx, ecx
 0x65A3B9: jz      short locret_65A3D9

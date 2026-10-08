@@ -1,4 +1,4 @@
-char *sub_6ECC20()
+NiRTTI *sub_6ECC20()
 {
-  return dword_B3EEFC;
+  return &stru_B3EEFC; /*0x6ecc25*/
 }

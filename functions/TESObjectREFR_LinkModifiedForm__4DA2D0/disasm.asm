@@ -1,16 +1,16 @@
-0x4DA2D0: push    ebx
+0x4DA2D0: push    ebx; Verified enable-state linking: reads ExtraEnableStateParent's bit 0x800, applies inverse mode when configured, and propagates the resulting disabled state to the reference through TESForm_SetDisabledFlag. It removes 3D when either disabled bit 0x800 or deleted bit 0x20 is set.
 0x4DA2D1: push    ebp
 0x4DA2D2: push    esi
 0x4DA2D3: mov     esi, ecx
 0x4DA2D5: lea     ebp, [esi+44h]
 0x4DA2D8: push    edi
 0x4DA2D9: mov     ecx, ebp
-0x4DA2DB: call    sub_420260
+0x4DA2DB: call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x4DA2E0: mov     edi, eax
 0x4DA2E2: test    edi, edi
 0x4DA2E4: jz      short loc_4DA315
 0x4DA2E6: mov     ecx, ebp
-0x4DA2E8: call    sub_420340
+0x4DA2E8: call    ExtraDataList_IsEnableStateInverse; Tests flag bit 0 of ExtraEnableStateParent, the inverse-enable-state flag.
 0x4DA2ED: test    al, al
 0x4DA2EF: jz      short loc_4DA301
 0x4DA2F1: mov     eax, [edi+8]
@@ -22,9 +22,9 @@
 0x4DA301: mov     ecx, [edi+8]
 0x4DA304: shr     ecx, 0Bh
 0x4DA307: and     ecx, 0FFFFFF01h
-0x4DA30D: push    ecx; a2
+0x4DA30D: push    ecx; disabled
 0x4DA30E: mov     ecx, esi; this
-0x4DA310: call    TESForm_SetEnabled?
+0x4DA310: call    TESForm_SetDisabledFlag; Verified Oblivion setter: the bool parameter sets or clears TESFormMembr.flags bit 0x800. TESObjectREFR_LinkModifiedForm propagates this bit through ExtraEnableStateParent and the enable-state activation routine clears it. CalcLowPathToPoint independently appends '-Disabled' when this bit is set. Fallout's mangled TESForm::SetDisabled directly writes the same 0x800 mask; this is a cross-check, not the basis of the Oblivion interpretation.
 0x4DA315: mov     ebx, [esp+10h+arg_0]
 0x4DA319: test    bl, 1
 0x4DA31C: jnz     short loc_4DA322

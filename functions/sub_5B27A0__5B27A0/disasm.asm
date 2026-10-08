@@ -1,4 +1,4 @@
-0x5B27A0: push    ebp
+0x5B27A0: push    ebp; MEF LARGE PERF 2026-09-08: Verified PERF-8: valid dense N-entry lists are copied to temporary stack pointer array, Shell-sorted506F00, then ALL N-1 dynamic nodes are freed and N-1 new8-byte nodes allocated. This churn occurs even when payload order was already correct. Preserve array-sort comparator sequence/tie result; reuse existing nodes only for validated compatible dense shape.
 0x5B27A1: mov     ebp, esp
 0x5B27A3: sub     esp, 0Ch
 0x5B27A6: mov     eax, ds:0B30AACh
@@ -29,7 +29,7 @@
 0x5B27E6: mov     eax, [ebp+arg_0]
 0x5B27E9: push    eax
 0x5B27EA: call    sub_5B1E70
-0x5B27EF: jmp     loc_5B2891
+0x5B27EF: jmp     loc_5B2891; MEF LARGE PERF 2026-09-08: PERF-8 required fast completion: LEAESP,[EBP-18h], popEDI/ESI/EBX, original cookie check, restoreEBP,RET4. Must use this epilogue after in-place payload rewrite to discard the dynamic _alloca scratch. Do not return directly from a bridge with the sorter frame active.
 0x5B27F4: xor     eax, eax
 0x5B27F6: test    ebx, ebx
 0x5B27F8: jle     short loc_5B280F
@@ -45,13 +45,13 @@
 0x5B2813: push    ecx
 0x5B2814: push    edx
 0x5B2815: mov     ecx, esi
-0x5B2817: call    sub_506F00
-0x5B281C: cmp     dword ptr [esi+4], 0
+0x5B2817: call    PointerArray_ShellSort
+0x5B281C: cmp     dword ptr [esi+4], 0; MEF v56 post-sort reuse validates exact dense nonnull chain and sorted array before any write, then replaces payload fields only. No comparison rerun, node allocation or link changes. Success5B2891 restores dynamic stack/cookie/RET4; unsupported shapes replayCMP/JZ to5B2838 or5B2822. Compiled bridge/fallback fixtures pass.
 0x5B2820: jz      short loc_5B2838
 0x5B2822: mov     eax, [esi+4]
 0x5B2825: mov     edi, [eax+4]
 0x5B2828: push    eax
-0x5B2829: call    FormHeapFree
+0x5B2829: call    FormHeapFree; MEF LARGE PERF 2026-09-08: PERF-8 free loop releases every dynamic8-byte node but not payload objects; head remains embedded. Followed by allocation loop5B2849 rebuilding same dense shape. Avoid both loops with post-sort payload rewrite; preserve net payload ownership and original output order.
 0x5B282E: add     esp, 4
 0x5B2831: test    edi, edi
 0x5B2833: mov     [esi+4], edi
@@ -60,11 +60,11 @@
 0x5B283A: test    ebx, ebx
 0x5B283C: mov     [esi], edi
 0x5B283E: mov     [ebp+var_C], edi
-0x5B2841: jle     short loc_5B2891
+0x5B2841: jle     short loc_5B2891; MEF LARGE PERF 2026-09-08: PERF-8 required fast completion: LEAESP,[EBP-18h], popEDI/ESI/EBX, original cookie check, restoreEBP,RET4. Must use this epilogue after in-place payload rewrite to discard the dynamic _alloca scratch. Do not return directly from a bridge with the sorter frame active.
 0x5B2843: test    edi, edi
 0x5B2845: jle     short loc_5B286E
 0x5B2847: push    8; Size
-0x5B2849: call    FormHeapAlloc
+0x5B2849: call    FormHeapAlloc; MEF LARGE PERF 2026-09-08: PERF-8 alloc loop issues one FormHeapAlloc(8) per output after the first. For N>=1 successful dense sort =>N-1 allocations andN-1 frees. OOM can also truncate stock reconstruction; this pass proposes no global allocator policy and no new allocations for the post-sort fast path.
 0x5B284E: add     esp, 4
 0x5B2851: test    eax, eax
 0x5B2853: jz      short loc_5B2868
@@ -89,7 +89,7 @@
 0x5B288A: cmp     edi, ebx
 0x5B288C: mov     [ebp+var_C], esi
 0x5B288F: jl      short loc_5B2843
-0x5B2891: lea     esp, [ebp-18h]
+0x5B2891: lea     esp, [ebp-18h]; MEF LARGE PERF 2026-09-08: PERF-8 required fast completion: LEAESP,[EBP-18h], popEDI/ESI/EBX, original cookie check, restoreEBP,RET4. Must use this epilogue after in-place payload rewrite to discard the dynamic _alloca scratch. Do not return directly from a bridge with the sorter frame active.
 0x5B2894: pop     edi
 0x5B2895: pop     esi
 0x5B2896: pop     ebx

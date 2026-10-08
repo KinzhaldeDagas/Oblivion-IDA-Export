@@ -1,1 +1,1 @@
-HDC
+typedef HDC__ *HDC;

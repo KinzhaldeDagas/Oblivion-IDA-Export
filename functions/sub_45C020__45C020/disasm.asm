@@ -43,7 +43,7 @@
 0x45C0A1: mov     [esp+34h+var_4], 0
 0x45C0A9: jz      short loc_45C0B4
 0x45C0AB: mov     ecx, eax; this
-0x45C0AD: call    ??0LowProcess@@QAE@XZ; LowProcess::LowProcess(void)
+0x45C0AD: call    ??0LowProcess@@QAE@XZ; LowProcess constructor: initializes editorPackage/editorPackProcedure and follow/pathing state, but no currentPackage field used by runtime package assignment.
 0x45C0B2: jmp     short loc_45C0B6
 0x45C0B4: xor     eax, eax
 0x45C0B6: mov     [ebp+58h], eax
@@ -67,10 +67,10 @@
 0x45C0F7: mov     ecx, esi
 0x45C0F9: call    edx
 0x45C0FB: mov     ecx, esi; this
-0x45C0FD: call    TESObjectREFR_GetParentCell
+0x45C0FD: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45C102: mov     ecx, esi; this
 0x45C104: mov     edi, eax
-0x45C106: call    TESObjectREFR_IsPersistent?
+0x45C106: call    TESObjectREFR_IsPersistent
 0x45C10B: test    al, al
 0x45C10D: jz      loc_45C276
 0x45C113: cmp     esi, ds:0B333C4h
@@ -78,7 +78,7 @@
 0x45C11F: test    edi, edi
 0x45C121: jz      short loc_45C132
 0x45C123: mov     ecx, edi; this
-0x45C125: call    TESForm_GetQuestItem
+0x45C125: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x45C12A: test    al, al
 0x45C12C: jz      loc_45C276
 0x45C132: mov     eax, [esi]
@@ -95,9 +95,9 @@
 0x45C152: test    edi, edi
 0x45C154: mov     ebx, eax
 0x45C156: jz      short loc_45C164
-0x45C158: push    esi; Concurrency::details::SchedulerBase *
-0x45C159: mov     ecx, edi
-0x45C15B: call    sub_4D35D0
+0x45C158: push    esi; reference
+0x45C159: mov     ecx, edi; this
+0x45C15B: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x45C160: jmp     short loc_45C1CC
 0x45C162: xor     ebx, ebx
 0x45C164: mov     eax, [esi]
@@ -125,15 +125,15 @@
 0x45C1AD: mov     ebx, eax
 0x45C1AF: test    ebx, ebx
 0x45C1B1: jz      short loc_45C1C8
-0x45C1B3: push    ebp; signed int
-0x45C1B4: push    edi; signed int
+0x45C1B3: push    ebp; cellY
+0x45C1B4: push    edi; cellX
 0x45C1B5: mov     ecx, ebx; this
 0x45C1B7: call    TESWorldSpace__GetCellAtCellCoord
 0x45C1BC: test    eax, eax
 0x45C1BE: jz      short loc_45C1C8
-0x45C1C0: push    esi; Concurrency::details::SchedulerBase *
-0x45C1C1: mov     ecx, eax
-0x45C1C3: call    sub_4D35D0
+0x45C1C0: push    esi; reference
+0x45C1C1: mov     ecx, eax; this
+0x45C1C3: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x45C1C8: mov     ebp, [esp+34h+var_1C]
 0x45C1CC: mov     ebx, [esp+34h+var_20]
 0x45C1D0: test    byte ptr [esp+34h+arg_4], 10h
@@ -165,7 +165,7 @@
 0x45C21E: jnz     short loc_45C25A
 0x45C220: push    0; newDeadState
 0x45C222: mov     ecx, esi; this
-0x45C224: call    Actor_HandleDeathSTate????
+0x45C224: call    Actor_HandleDeathState
 0x45C229: cmp     dword ptr [esi+3Ch], 0
 0x45C22D: jz      short loc_45C236
 0x45C22F: mov     ecx, esi
@@ -206,7 +206,7 @@
 0x45C292: jnz     loc_45C1D0
 0x45C298: push    0; a2
 0x45C29A: mov     ecx, esi; this
-0x45C29C: call    TESObjectREFR_GetParentCell
+0x45C29C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45C2A1: mov     ecx, ds:0B333A0h
 0x45C2A7: push    eax; a1
 0x45C2A8: call    TESObjectCELL_IsProcessLevel?LowHigh
@@ -222,7 +222,7 @@
 0x45C2CF: or      dword ptr [ebx+18h], 2
 0x45C2D3: push    0
 0x45C2D5: mov     ecx, esi; this
-0x45C2D7: call    TESObjectREFR_GetParentCell
+0x45C2D7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45C2DC: mov     ecx, ds:0B333A0h
 0x45C2E2: push    eax
 0x45C2E3: call    sub_440C80
@@ -240,3 +240,15 @@
 0x45C313: mov     ecx, esi
 0x45C315: call    eax
 0x45C317: jmp     loc_45C1D0
+0x9AE350: mov     eax, [ebp+4]
+0x9AE353: push    eax
+0x9AE354: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE359: pop     ecx
+0x9AE35A: retn
+0x9AE35B: mov     edx, [esp+arg_4]
+0x9AE35F: lea     eax, [edx-24h]
+0x9AE362: mov     ecx, [edx-28h]
+0x9AE365: xor     ecx, eax
+0x9AE367: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE36C: mov     eax, offset stru_ADABDC
+0x9AE371: jmp     ___CxxFrameHandler3

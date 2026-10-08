@@ -1,6 +1,6 @@
-0x7100A0: mov     edx, [esp+arg_4]
+0x7100A0: mov     edx, [esp+right]; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x7100A4: fld     dword ptr [edx]
-0x7100A6: mov     eax, [esp+arg_0]
+0x7100A6: mov     eax, [esp+out]
 0x7100AA: fmul    dword ptr [ecx]
 0x7100AC: fld     dword ptr [edx+0Ch]
 0x7100AF: fmul    dword ptr [ecx+4]

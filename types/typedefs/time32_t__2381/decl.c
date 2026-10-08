@@ -1,1 +1,1 @@
-__time32_t
+typedef __msvcrt_long __time32_t;

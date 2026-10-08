@@ -1,1 +1,1 @@
-ExtraScript
+struct ExtraScript;

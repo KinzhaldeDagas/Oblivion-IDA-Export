@@ -1,4 +1,4 @@
-0x5E6A40: sub     esp, 84h
+0x5E6A40: sub     esp, 84h; ODismemberment combat decode: returns a local-space weapon/reach point for hit visuals. Uses actor GetNiNode, equipped weapon combat distance, named weapon node lookup, and native transform helpers. Attack tail passes this as one of Actor_HandleHitVisualEffects' vector inputs.
 0x5E6A46: push    esi
 0x5E6A47: mov     esi, ecx
 0x5E6A49: mov     eax, [esi]
@@ -31,8 +31,8 @@
 0x5E6AA2: push    ecx
 0x5E6AA3: fstp    [esp+90h+var_84]
 0x5E6AA7: fld     [esp+90h+var_84]
-0x5E6AAB: fstp    [esp+90h+var_90]; float
-0x5E6AAE: call    Calc_GetCombatDistance
+0x5E6AAB: fstp    [esp+90h+baseDistance]; baseDistance
+0x5E6AAE: call    Calc_GetCombatDistance; Converts a base reach/distance value to world combat distance using the Oblivion combat-distance game-setting multiplier.
 0x5E6AB3: add     esp, 4
 0x5E6AB6: jmp     short loc_5E6ABA
 0x5E6AB8: fldz
@@ -45,16 +45,16 @@
 0x5E6ACD: add     esp, 8
 0x5E6AD0: test    esi, esi
 0x5E6AD2: jz      short loc_5E6A5A
-0x5E6AD4: lea     edx, [esp+8Ch+var_68]
+0x5E6AD4: lea     edx, [esp+8Ch+parent]
 0x5E6AD8: push    edx
 0x5E6AD9: lea     ecx, [edi+64h]
-0x5E6ADC: call    sub_718A80
+0x5E6ADC: call    sub_718A80;
 0x5E6AE1: add     esi, 64h ; 'd'
-0x5E6AE4: push    esi
-0x5E6AE5: lea     eax, [esp+90h+var_34]
-0x5E6AE9: push    eax
-0x5E6AEA: lea     ecx, [esp+94h+var_68]
-0x5E6AEE: call    sub_53D7A0
+0x5E6AE4: push    esi; local
+0x5E6AE5: lea     eax, [esp+90h+out]
+0x5E6AE9: push    eax; out
+0x5E6AEA: lea     ecx, [esp+94h+parent]; parent
+0x5E6AEE: call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.
 0x5E6AF3: fldz
 0x5E6AF5: fst     [esp+8Ch+var_74]
 0x5E6AF9: lea     ecx, [esp+8Ch+var_74]
@@ -63,9 +63,9 @@
 0x5E6B02: fstp    [esp+90h+var_70]
 0x5E6B06: lea     edx, [esp+90h+var_80]
 0x5E6B0A: push    edx
-0x5E6B0B: lea     ecx, [esp+94h+var_34]
+0x5E6B0B: lea     ecx, [esp+94h+out]
 0x5E6B0F: fstp    [esp+94h+var_6C]
-0x5E6B13: call    sub_53D4B0
+0x5E6B13: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x5E6B18: mov     eax, [esp+8Ch+arg_0]
 0x5E6B1F: mov     ecx, [esp+8Ch+var_80]
 0x5E6B23: mov     edx, [esp+8Ch+var_7C]

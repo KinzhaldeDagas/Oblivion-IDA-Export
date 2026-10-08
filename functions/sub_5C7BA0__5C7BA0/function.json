@@ -1,19 +1,36 @@
 {
-  "callees_count": 254,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 188,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 11,
-  "display_name": "sub_5C7BA0",
+  "chunks": [
+    [
+      "0x5C7BA0",
+      "0x5C91D6"
+    ],
+    [
+      "0x9C15B0",
+      "0x9C1724"
+    ]
+  ],
+  "chunks_sha256": "8d9661b3edb752df43728b6c9877e27a6f9ed8700950009ee5de636b032593bf",
+  "comment_regular": "Broad RaceSexMenu state-to-UI synchronization used after Reset Face. Rebuilds localized controls from current player race/sex/head state; suitable native boundary for restoring a captured FaceGen candidate before UI refresh.",
+  "comment_repeatable": "Broad RaceSexMenu state-to-UI synchronization used after Reset Face. Rebuilds localized controls from current player race/sex/head state; suitable native boundary for restoring a captured FaceGen candidate before UI refresh.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 13,
+  "display_name": "RaceSexMenu_SynchronizeControlsFromPlayer",
   "end_ea": "0x5C91D6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5C7BA0",
+  "name": "RaceSexMenu_SynchronizeControlsFromPlayer",
   "segment": ".text",
   "sha256": "8b8adc2d8ad203aec32b9f702cecfdbde019af68bbbb8a45a16306ce293736fa",
   "size": 5686,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5C7BA0",
-  "type": "char __thiscall(float *this, char)",
-  "xrefs_from_count": 1840,
+  "total_chunk_size": 6058,
+  "type": "char __thiscall(void *this, char rebuildLists)",
+  "xrefs_from_count": 1937,
   "xrefs_to_count": 4
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A24B0",
-    "line": "push    ecx",
+    "line": "push    ecx; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
     "mnemonic": "push",
     "size": 1
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6A24D1",
-    "line": "mov     eax, [esp+14h+arg_4]",
+    "line": "mov     eax, [esp+14h+casterFilterOrNull]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x6A24F2",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+effectCode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x6A2502",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified immediate removal path for matching effect codes: mark/flush termination, unlink from EffectNode via BSSimpleList_Remove, call target PostRemoveEffect, then destroy the ActiveEffect. The caster filter is optional; null matches all casters.",
     "mnemonic": "call",
     "size": 5
   },

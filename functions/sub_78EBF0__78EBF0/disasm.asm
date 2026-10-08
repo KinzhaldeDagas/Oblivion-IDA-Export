@@ -1,4 +1,4 @@
-0x78EBF0: push    esi
+0x78EBF0: push    esi; Oblivion CTreeFileAccess::PeekToken. Bounds-checks byteBufferBegin/cursorOffset/byteBufferEnd, returns the little-endian dword at the current cursor without advancing it. CTreeEngine::Parse uses the result to detect optional token 0x1B58 before consuming it; RT4.1 FileAccess.cpp corroborates PeekToken after this behavior was established.
 0x78EBF1: mov     esi, ecx
 0x78EBF3: mov     ecx, [esi+8]
 0x78EBF6: test    ecx, ecx

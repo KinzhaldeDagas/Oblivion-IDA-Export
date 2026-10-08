@@ -13,7 +13,7 @@
 0x660739: test    ah, 41h
 0x66073C: jp      short loc_660756
 0x66073E: fsubp   st(1), st
-0x660740: call    Double_To_SInt32
+0x660740: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x660745: add     dword ptr [esi+6F8h], 1
 0x66074C: mov     [esi+6FCh], eax
 0x660752: pop     esi

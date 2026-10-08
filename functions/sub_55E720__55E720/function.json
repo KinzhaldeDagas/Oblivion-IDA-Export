@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_55E720",
+  "chunks": [
+    [
+      "0x55E720",
+      "0x55E80A"
+    ],
+    [
+      "0x9B44A0",
+      "0x9B44D1"
+    ]
+  ],
+  "chunks_sha256": "58b576e51a1de82afb0f497dcf919c0008847d62eb418c6a706dddde634e6ded",
+  "comment_regular": "Verified local RTTI and constructor call: constructs LockFreeMap<TESObjectREFR*,BSTreeNode*> with arguments (2,37,12), used by BSTreeManager at +0x24.",
+  "comment_repeatable": "Verified local RTTI and constructor call: constructs LockFreeMap<TESObjectREFR*,BSTreeNode*> with arguments (2,37,12), used by BSTreeManager at +0x24.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "BSTreeManager_ReferenceNodeMap_ctor",
   "end_ea": "0x55E80A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_55E720",
+  "name": "BSTreeManager_ReferenceNodeMap_ctor",
   "segment": ".text",
   "sha256": "df35c5d54baa4ab2458014f86755a7ba46ded2a0c8ab185ef088ed89bb662910",
   "size": 234,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x55E720",
-  "type": "_DWORD *__thiscall(_DWORD *this, unsigned int, int, int)",
-  "xrefs_from_count": 85,
+  "total_chunk_size": 283,
+  "type": "LockFreeMap *__thiscall(LockFreeMap *this, unsigned int initialSize, int bucketCount, int entrySize)",
+  "xrefs_from_count": 104,
   "xrefs_to_count": 1
 }

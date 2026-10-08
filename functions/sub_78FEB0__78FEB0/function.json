@@ -1,19 +1,32 @@
 {
-  "callees_count": 26,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x78FEB0",
+      "0x7902EE"
+    ]
+  ],
+  "chunks_sha256": "f00a10381ddc6ed38f86cc9f910d0d7ddfe49d3a75a32b0a6aac256b26e8d8f1",
+  "comment_regular": "\n\n[v152 texture controls] Native cross-section writer emits only diffuse ST at78FFB0. Its S/T use precomputed legacy tiling and passed tile offset. Plugin now stages RT4.1 Branch.cpp1406-1477 coordinates for seven layers through existing first/next-ring wrappers; native diffuse vector is replaced only after full tree coverage/count checks. Reference50000 has7 controls per branch level plus root group. Runtime game execution remains UNVERIFIED; six extra layer arrays are owned but not yet rendered.\n\nCBranch::BuildCrossSection consumes stock branch vertex position (+0x0C), radius (+0x18), and transform rows (+0x28..+0x3C) plus explicit fixed cross-section segment count.",
+  "comment_repeatable": "Builds one branch cross-section from compact branch vertex position/radius/transform, emits diffuse texcoords, tangent/binormal, coord, packed color, and optional primary wind data into CIndexedGeometry.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_78FEB0",
+  "display_name": "OB_CBranch_BuildCrossSection_010201A0",
   "end_ea": "0x7902EE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78FEB0",
+  "name": "OB_CBranch_BuildCrossSection_010201A0",
   "segment": ".text",
   "sha256": "f00a10381ddc6ed38f86cc9f910d0d7ddfe49d3a75a32b0a6aac256b26e8d8f1",
   "size": 1086,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78FEB0",
-  "type": "int __thiscall(_DWORD *this, float *, float, float, int, int, float *, int, unsigned __int8, float, int)",
+  "total_chunk_size": 1086,
+  "type": "int __thiscall(_DWORD *this, float *, float, float, int, OB_CIndexedGeometry_010201A0 *, float *, float windWeight, unsigned __int8 windMatrixIndex, float, int)",
   "xrefs_from_count": 340,
   "xrefs_to_count": 2
 }

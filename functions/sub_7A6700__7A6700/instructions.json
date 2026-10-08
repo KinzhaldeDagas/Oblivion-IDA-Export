@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A6700",
-    "line": "push    ebp",
+    "line": "push    ebp; Oblivion legacy unit-billboard builder: derives azimuth from cameraDirection XY, rotates four canonical corners, and writes 12 static floats.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7A6709",
-    "line": "mov     eax, [ebp+arg_0]",
+    "line": "mov     eax, [ebp+cameraDirection]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -439,7 +439,7 @@
   },
   {
     "ea": "0x7A6801",
-    "line": "lea     ecx, [esp+6Ch+var_24]",
+    "line": "lea     ecx, [esp+6Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -577,55 +577,55 @@
   },
   {
     "ea": "0x7A6889",
-    "line": "fst     [esp+6Ch+var_24]",
+    "line": "fst     [esp+6Ch+var_24.m]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A688D",
-    "line": "fst     [esp+6Ch+var_14]",
+    "line": "fst     [esp+6Ch+var_24.m+10h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A6891",
-    "line": "fstp    [esp+6Ch+var_4]",
+    "line": "fstp    [esp+6Ch+var_24.m+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A6895",
-    "line": "fst     [esp+6Ch+var_20]",
+    "line": "fst     [esp+6Ch+var_24.m+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A6899",
-    "line": "fst     [esp+6Ch+var_1C]",
+    "line": "fst     [esp+6Ch+var_24.m+8]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A689D",
-    "line": "fst     [esp+6Ch+var_18]",
+    "line": "fst     [esp+6Ch+var_24.m+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A68A1",
-    "line": "fst     [esp+6Ch+var_10]",
+    "line": "fst     [esp+6Ch+var_24.m+14h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A68A5",
-    "line": "fst     [esp+6Ch+var_C]",
+    "line": "fst     [esp+6Ch+var_24.m+18h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7A68A9",
-    "line": "fstp    [esp+6Ch+var_8]",
+    "line": "fstp    [esp+6Ch+var_24.m+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x7A68B1",
-    "line": "fstp    [esp+6Ch+var_6C]; float",
+    "line": "fstp    [esp+6Ch+angleDegrees]; angleDegrees",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7A68B4",
-    "line": "call    sub_793AA0",
+    "line": "call    OB_stRotTransform_RotateZDegrees_010201A0; Oblivion stRotTransform::RotateZ. Converts degrees to radians, builds the Z-axis 3x3 rotation, post-multiplies the current transform, and stores the result in place; used by the legacy billboard camera-direction path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A68B9",
-    "line": "fld     [esp+68h+var_18]",
+    "line": "fld     [esp+68h+var_24.m+0Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -679,13 +679,13 @@
   },
   {
     "ea": "0x7A68D1",
-    "line": "fld     [esp+68h+var_24]",
+    "line": "fld     [esp+68h+var_24.m]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A68D5",
-    "line": "fld     [esp+68h+var_C]",
+    "line": "fld     [esp+68h+var_24.m+18h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -757,19 +757,19 @@
   },
   {
     "ea": "0x7A68F7",
-    "line": "fld     [esp+68h+var_14]",
+    "line": "fld     [esp+68h+var_24.m+10h]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A68FB",
-    "line": "fld     [esp+68h+var_20]",
+    "line": "fld     [esp+68h+var_24.m+4]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7A68FF",
-    "line": "fld     [esp+68h+var_8]",
+    "line": "fld     [esp+68h+var_24.m+1Ch]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x7A6921",
-    "line": "fld     [esp+68h+var_10]",
+    "line": "fld     [esp+68h+var_24.m+14h]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x7A6929",
-    "line": "fld     [esp+68h+var_1C]",
+    "line": "fld     [esp+68h+var_24.m+8]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x7A6931",
-    "line": "fld     [esp+68h+var_4]",
+    "line": "fld     [esp+68h+var_24.m+20h]",
     "mnemonic": "fld",
     "size": 4
   },

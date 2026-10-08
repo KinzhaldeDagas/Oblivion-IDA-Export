@@ -5,11 +5,11 @@
 0x4DCF99: mov     eax, [esi]
 0x4DCF9B: mov     edx, [eax+168h]
 0x4DCFA1: call    edx
-0x4DCFA3: mov     ecx, ds:0B333C4h
+0x4DCFA3: mov     ecx, ds:0B333C4h; this
 0x4DCFA9: cmp     esi, ecx
 0x4DCFAB: jnz     short loc_4DCFB4
-0x4DCFAD: push    0
-0x4DCFAF: call    sub_6600D0
+0x4DCFAD: push    0; firstPerson
+0x4DCFAF: call    Actor_GetSkinInfoByPerspective; Per-perspective ActorSkinInfo selector. false returns Actor+0x104; true returns PlayerCharacter+0x5C8. ActorSkinInfo is the 0x154-byte skin/bone/equipment context. It is not ActorAnimData; first-person ActorAnimData is independently at PlayerCharacter+0x5CC and selected by 0x65D750. firstPerson=true is meaningful only for the player.
 0x4DCFB4: test    eax, eax
 0x4DCFB6: jz      short loc_4DCFC6
 0x4DCFB8: mov     ecx, [esp+4+arg_0]

@@ -5,7 +5,7 @@
 0x70FC38: push    edi
 0x70FC39: jz      short loc_70FC86
 0x70FC3B: push    ebp
-0x70FC3C: mov     ebp, dword ptr [esp+10h+ArgList]
+0x70FC3C: mov     ebp, [esp+10h+ArgList]
 0x70FC40: mov     eax, ebp
 0x70FC42: lea     edx, [eax+1]
 0x70FC45: mov     cl, [eax]
@@ -38,7 +38,7 @@
 0x70FC83: pop     esi
 0x70FC84: pop     ebx
 0x70FC85: retn
-0x70FC86: mov     ebx, dword ptr [esp+0Ch+ArgList]
+0x70FC86: mov     ebx, [esp+0Ch+ArgList]
 0x70FC8A: mov     eax, ebx
 0x70FC8C: lea     edx, [eax+1]
 0x70FC8F: nop

@@ -35,7 +35,6 @@
 0x8BA338: js      short loc_8BA363
 0x8BA33A: inc     ecx
 0x8BA33B: jmp     short loc_8BA340
-0x8BA33D: align 10h
 0x8BA340: movaps  xmm1, xmmword ptr [eax]
 0x8BA343: movaps  xmm2, xmmword ptr [eax+10h]
 0x8BA347: add     eax, 30h ; '0'

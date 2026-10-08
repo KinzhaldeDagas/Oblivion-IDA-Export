@@ -16,7 +16,7 @@
 0x7DAEA4: mov     ecx, [eax+4]
 0x7DAEA7: mov     esi, [esi]
 0x7DAEA9: push    ecx
-0x7DAEAA: call    FormHeapFree
+0x7DAEAA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7DAEAF: add     esp, 4
 0x7DAEB2: test    esi, esi
 0x7DAEB4: jnz     short loc_7DAEA2

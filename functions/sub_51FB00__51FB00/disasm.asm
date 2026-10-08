@@ -11,7 +11,7 @@
 0x51FB17: mov     ecx, edi
 0x51FB19: call    sub_51F2D0
 0x51FB1E: push    edi
-0x51FB1F: call    FormHeapFree
+0x51FB1F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51FB24: add     esp, 4
 0x51FB27: mov     eax, [esi+40h]
 0x51FB2A: test    eax, eax
@@ -21,7 +21,7 @@
 0x51FB34: mov     edx, [eax]
 0x51FB36: push    eax
 0x51FB37: mov     [esi+3Ch], edx
-0x51FB3A: call    FormHeapFree
+0x51FB3A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51FB3F: add     esp, 4
 0x51FB42: jmp     short loc_51FB04
 0x51FB44: mov     dword ptr [esi+3Ch], 0

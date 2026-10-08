@@ -14,7 +14,7 @@
 0x5306B0: mov     edx, [eax]
 0x5306B2: push    eax
 0x5306B3: mov     [esi], edx
-0x5306B5: call    FormHeapFree
+0x5306B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5306BA: add     esp, 4
 0x5306BD: jmp     short loc_530698
 0x5306BF: mov     dword ptr [esi], 0

@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x799F30",
+      "0x799F92"
+    ]
+  ],
+  "chunks_sha256": "14b654dcccb6a45e73da37ddd7ce3a2f466c07afe51e116e8c7f42e6b7f80233",
+  "comment_regular": "Oblivion-authoritative allocator for count SFrondVertex elements. Allocates count*0x38 bytes from FormHeap and throws std::bad_alloc on multiplication overflow.",
+  "comment_repeatable": "Oblivion-authoritative allocator for count SFrondVertex elements. Allocates count*0x38 bytes from FormHeap and throws std::bad_alloc on multiplication overflow.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_799F30",
+  "display_name": "OB_stVector_SFrondVertex_Allocate_010201A0",
   "end_ea": "0x799F92",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_799F30",
+  "name": "OB_stVector_SFrondVertex_Allocate_010201A0",
   "segment": ".text",
   "sha256": "14b654dcccb6a45e73da37ddd7ce3a2f466c07afe51e116e8c7f42e6b7f80233",
   "size": 98,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x799F30",
-  "type": "int __cdecl(char *)",
+  "total_chunk_size": 98,
+  "type": "OB_SFrondVertex_010201A0 *__cdecl(unsigned int count)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 2
 }

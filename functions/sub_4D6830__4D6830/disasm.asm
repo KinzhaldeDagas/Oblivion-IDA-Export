@@ -1,4 +1,4 @@
-0x4D6830: movss   xmm4, dword ptr ds:0A46C30h
+0x4D6830: movss   xmm4, dword ptr ds:0A46C30h; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.
 0x4D6838: mov     eax, ecx
 0x4D683A: movaps  xmm2, xmmword ptr [eax]
 0x4D683D: movaps  xmm0, xmm2

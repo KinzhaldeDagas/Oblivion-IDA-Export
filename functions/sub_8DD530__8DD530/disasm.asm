@@ -125,7 +125,7 @@
 0x8DD6F6: mulps   xmm2, xmm1
 0x8DD6F9: fstp    st
 0x8DD6FB: movaps  xmmword ptr [esi+90h], xmm2
-0x8DD702: call    sub_8B1DD0
+0x8DD702: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8DD707: movaps  xmm0, xmmword ptr [esi+80h]
 0x8DD70E: movaps  xmm2, xmmword ptr [esi+20h]
 0x8DD712: movaps  xmm3, xmmword ptr [esi+10h]

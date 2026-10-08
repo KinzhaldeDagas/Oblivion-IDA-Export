@@ -1,1 +1,1 @@
-Concurrency::details::SchedulerBase
+struct Concurrency::details::SchedulerBase;

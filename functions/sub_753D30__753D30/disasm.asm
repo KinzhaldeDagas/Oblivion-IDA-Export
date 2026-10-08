@@ -6,7 +6,7 @@
 0x753D3C: call    edx
 0x753D3E: test    eax, eax
 0x753D40: jz      short loc_753D50
-0x753D42: cmp     eax, offset dword_B40864
+0x753D42: cmp     eax, offset stru_B40864
 0x753D47: jz      short loc_753D53
 0x753D49: mov     eax, [eax+4]
 0x753D4C: test    eax, eax

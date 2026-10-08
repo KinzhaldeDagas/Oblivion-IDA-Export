@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51AF70",
-    "line": "sub     esp, 34h",
+    "line": "sub     esp, 34h; Dispatches parsed TESAnimGroup events whose timestamps are crossed between previous and current sequence time, including wrap-around. Sound records have a non-null +0x0C sound entry; Enum records use the +0x04 ID and packed source-text position at +0x08. This is reached from ActorAnimData's sampled-slot update.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x51B12B",
-    "line": "call    sub_65DC50",
+    "line": "call    Player_UpdateSoundDistanceFromRef; Player/reference sound-distance helper. Computes distance from player to target ref and feeds the result into the sound system scaling/update path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x51B180",
-    "line": "call    sub_6AC420",
+    "line": "call    SoundManager_StopRefLoopingSoundsWithFade; Sound manager animation event helper. Finds active sounds associated with a reference, marks/removes loop entries, and either fades/stops or schedules stop based on the passed fade time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x51B1E3",
-    "line": "call    sub_65A970",
+    "line": "call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x51B1FA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x51B262",
-    "line": "call    sub_6B1210",
+    "line": "call    SoundManager_PlayFootstepAnimEvent; Footstep/creature animation event dispatcher. Handles creature anim sounds, terrain/water/armor/sneak footstep selection, positions played sound at the actor, and applies sound-system range gating.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x51B2E4",
-    "line": "call    sub_51CEC0",
+    "line": "call    TESCreature_SelectSoundForAnimEnum; TESCreature sound selector: walks inherited creature data, chooses a sound entry by category index and probability.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x51B390",
-    "line": "call    sub_6B07F0",
+    "line": "call    SoundManager_PlayWeaponEquipAnimEvent; Weapon equip/unequip animation sound event dispatcher. Selects sound descriptor by equipped weapon anim type, appends Equip/Unequip variant, positions sound, and adjusts volume/pitch for sneaking/weapon speed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x51B39D",
-    "line": "call    sub_6B07F0",
+    "line": "call    SoundManager_PlayWeaponEquipAnimEvent; Weapon equip/unequip animation sound event dispatcher. Selects sound descriptor by equipped weapon anim type, appends Equip/Unequip variant, positions sound, and adjusts volume/pitch for sneaking/weapon speed.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x987C40: movq    xmm0, [esp+arg_0]
+0x987C40: movq    xmm0, qword ptr [esp+arg_0]
 0x987C46: movapd  xmm2, ds:xmmword_AA3FA0
 0x987C4E: movapd  xmm1, xmm0
 0x987C52: movapd  xmm7, xmm0
@@ -14,6 +14,6 @@
 0x987C7D: psllq   xmm1, xmm2
 0x987C81: cmp     eax, 0C32h
 0x987C86: jg      short _ceil___return_x_0
-0x987C88: movq    [esp+arg_0], xmm1
-0x987C8E: fld     [esp+arg_0]
+0x987C88: movq    qword ptr [esp+arg_0], xmm1
+0x987C8E: fld     qword ptr [esp+arg_0]
 0x987C92: retn

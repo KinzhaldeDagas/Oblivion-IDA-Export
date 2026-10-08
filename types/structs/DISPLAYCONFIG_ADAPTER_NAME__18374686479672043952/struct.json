@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DISPLAYCONFIG_ADAPTER_NAME",
+  "definition": "struct DISPLAYCONFIG_ADAPTER_NAME\n{\nDISPLAYCONFIG_DEVICE_INFO_HEADER_0 header;\nWCHAR_0 adapterDevicePath[128];\n}\n",
   "id": 18374686479672043952,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "DISPLAYCONFIG_DEVICE_INFO_HEADER_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "adapterDevicePath",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 256
+      "size": 256,
+      "type": "WCHAR_0[128]"
     }
   ],
   "name": "DISPLAYCONFIG_ADAPTER_NAME",
+  "ordinal": 7655,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 276
 }

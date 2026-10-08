@@ -33,113 +33,113 @@ _DWORD *__usercall sub_745EF0@<eax>(_DWORD *result@<eax>, int *a2@<ecx>)
   int v32; // [esp+28h] [ebp-8h]
   int v33; // [esp+2Ch] [ebp-4h]
 
-  v2 = a2[1];
-  v3 = *a2;
-  v4 = (int *)a2[2];
-  v31 = v2;
-  v5 = *v4;
-  v33 = v4[1];
-  v6 = v4[2];
-  v7 = v4[4];
-  result[0x2CD] = 0;
-  result[0x2CE] = 0;
-  result[0x2CF] = 0;
-  result[0x2D0] = 0;
-  result[0x2D1] = 0;
-  result[0x2D2] = 0;
-  result[0x2D3] = 0;
-  result[0x2D4] = 0;
-  v32 = v6;
-  *(_WORD *)(v3 + 4 * result[result[0x513] + 0x2D5] + 2) = 0;
-  v8 = result[0x513] + 1;
-  v27 = v7;
-  v26 = 0;
-  if ( v8 < 0x23D )
+  v2 = a2[1]; /*0x745ef3*/
+  v3 = *a2; /*0x745ef7*/
+  v4 = (int *)a2[2]; /*0x745ef9*/
+  v31 = v2; /*0x745efc*/
+  v5 = *v4; /*0x745f04*/
+  v33 = v4[1]; /*0x745f06*/
+  v6 = v4[2]; /*0x745f0a*/
+  v7 = v4[4]; /*0x745f0e*/
+  result[0x2CD] = 0; /*0x745f13*/
+  result[0x2CE] = 0; /*0x745f19*/
+  result[0x2CF] = 0; /*0x745f1f*/
+  result[0x2D0] = 0; /*0x745f25*/
+  result[0x2D1] = 0; /*0x745f2b*/
+  result[0x2D2] = 0; /*0x745f31*/
+  result[0x2D3] = 0; /*0x745f37*/
+  result[0x2D4] = 0; /*0x745f3d*/
+  v32 = v6; /*0x745f43*/
+  *(_WORD *)(v3 + 4 * result[result[0x513] + 0x2D5] + 2) = 0; /*0x745f55*/
+  v8 = result[0x513] + 1; /*0x745f60*/
+  v27 = v7; /*0x745f69*/
+  v26 = 0; /*0x745f6d*/
+  if ( v8 < 0x23D ) /*0x745f71*/
   {
-    v25 = &result[v8 + 0x2D5];
-    v9 = 0x23D - v8;
-    v10 = 0x23D;
-    v29 = v9;
-    v24 = 0x23D;
-    while ( 1 )
+    v25 = &result[v8 + 0x2D5]; /*0x745f7e*/
+    v9 = 0x23D - v8; /*0x745f87*/
+    v10 = 0x23D; /*0x745f89*/
+    v29 = v9; /*0x745f8b*/
+    v24 = 0x23D; /*0x745f8f*/
+    while ( 1 ) /*0x745f9d*/
     {
-      v11 = *v25;
-      v12 = *(unsigned __int16 *)(v3 + 4 * *(unsigned __int16 *)(v3 + 4 * *v25 + 2) + 2) + 1;
-      if ( v12 > v7 )
+      v11 = *v25; /*0x745f9d*/
+      v12 = *(unsigned __int16 *)(v3 + 4 * *(unsigned __int16 *)(v3 + 4 * *v25 + 2) + 2) + 1; /*0x745fa9*/
+      if ( v12 > v7 ) /*0x745fae*/
       {
-        ++v26;
-        v12 = v7;
+        ++v26; /*0x745fb0*/
+        v12 = v7; /*0x745fb5*/
       }
-      *(_WORD *)(v3 + 4 * v11 + 2) = v12;
-      if ( v11 <= v31 )
+      *(_WORD *)(v3 + 4 * v11 + 2) = v12; /*0x745fbb*/
+      if ( v11 <= v31 ) /*0x745fc0*/
       {
-        ++*((_WORD *)result + v12 + 0x59A);
-        v13 = 0;
-        if ( v11 >= v32 )
-          v13 = *(_DWORD *)(v33 + 4 * (v11 - v32));
-        v14 = *(unsigned __int16 *)(v3 + 4 * v11);
-        result[0x5A8] += v14 * (v13 + v12);
-        if ( v5 )
-          result[0x5A9] += v14 * (v13 + *(unsigned __int16 *)(v5 + 4 * v11 + 2));
-        v10 = 0x23D;
+        ++*((_WORD *)result + v12 + 0x59A); /*0x745fc6*/
+        v13 = 0; /*0x745fcf*/
+        if ( v11 >= v32 ) /*0x745fd3*/
+          v13 = *(_DWORD *)(v33 + 4 * (v11 - v32)); /*0x745fdd*/
+        v14 = *(unsigned __int16 *)(v3 + 4 * v11); /*0x745fe4*/
+        result[0x5A8] += v14 * (v13 + v12); /*0x745fec*/
+        if ( v5 ) /*0x745ff4*/
+          result[0x5A9] += v14 * (v13 + *(unsigned __int16 *)(v5 + 4 * v11 + 2)); /*0x746000*/
+        v10 = 0x23D; /*0x746006*/
       }
-      ++v25;
-      if ( !--v29 )
-        break;
-      v7 = v27;
+      ++v25; /*0x74600a*/
+      if ( !--v29 ) /*0x746014*/
+        break; /*0x746014*/
+      v7 = v27; /*0x745f95*/
     }
-    v15 = v26;
-    if ( v26 )
+    v15 = v26; /*0x74601a*/
+    if ( v26 ) /*0x746020*/
     {
-      v16 = (_WORD *)result + v27 + 0x59A;
-      do
+      v16 = (_WORD *)result + v27 + 0x59A; /*0x746031*/
+      do /*0x74607f*/
       {
-        v17 = v27 - 1;
-        for ( i = (_WORD *)result + v27 + 0x599; !*i; --v17 )
-          i += 0xFFFFFFFF;
-        --*((_WORD *)result + v17 + 0x59A);
-        *((_WORD *)result + v17 + 0x59B) += 2;
-        --*v16;
-        v15 -= 2;
+        v17 = v27 - 1; /*0x746040*/
+        for ( i = (_WORD *)result + v27 + 0x599; !*i; --v17 ) /*0x746044*/
+          i += 0xFFFFFFFF; /*0x746056*/
+        --*((_WORD *)result + v17 + 0x59A); /*0x746062*/
+        *((_WORD *)result + v17 + 0x59B) += 2; /*0x74606c*/
+        --*v16; /*0x746075*/
+        v15 -= 2; /*0x74607a*/
       }
-      while ( v15 > 0 );
-      v19 = v27;
-      if ( v27 )
+      while ( v15 > 0 ); /*0x74607f*/
+      v19 = v27; /*0x746081*/
+      if ( v27 ) /*0x746087*/
       {
-        v30 = (char *)result + 2 * v27 + 0xB34;
-        do
+        v30 = (char *)result + 2 * v27 + 0xB34; /*0x746089*/
+        do /*0x7460fd*/
         {
-          v20 = (unsigned __int16)*v16;
-          v28 = v20;
-          if ( v20 )
+          v20 = (unsigned __int16)*v16; /*0x746090*/
+          v28 = v20; /*0x746095*/
+          if ( v20 ) /*0x746099*/
           {
-            v21 = &result[v10 + 0x2D5];
-            do
+            v21 = &result[v10 + 0x2D5]; /*0x74609b*/
+            do /*0x7460e7*/
             {
-              v22 = v21[0xFFFFFFFF];
-              --v24;
-              v21 += 0xFFFFFFFF;
-              if ( v22 <= v31 )
+              v22 = v21[0xFFFFFFFF]; /*0x7460a2*/
+              --v24; /*0x7460a5*/
+              v21 += 0xFFFFFFFF; /*0x7460aa*/
+              if ( v22 <= v31 ) /*0x7460b5*/
               {
-                v23 = *(unsigned __int16 *)(v3 + 4 * v22 + 2);
-                if ( v23 != v19 )
+                v23 = *(unsigned __int16 *)(v3 + 4 * v22 + 2); /*0x7460b7*/
+                if ( v23 != v19 ) /*0x7460c2*/
                 {
-                  result[0x5A8] += *(unsigned __int16 *)(v3 + 4 * v22) * (v19 - v23);
-                  *(_WORD *)(v3 + 4 * v22 + 2) = v19;
+                  result[0x5A8] += *(unsigned __int16 *)(v3 + 4 * v22) * (v19 - v23); /*0x7460cf*/
+                  *(_WORD *)(v3 + 4 * v22 + 2) = v19; /*0x7460d9*/
                 }
-                v20 = --v28;
+                v20 = --v28; /*0x7460e1*/
               }
             }
-            while ( v20 );
-            v10 = v24;
+            while ( v20 ); /*0x7460e7*/
+            v10 = v24; /*0x7460e9*/
           }
-          --v19;
-          v16 = v30 + 0xFFFFFFFE;
-          v30 += 0xFFFFFFFE;
+          --v19; /*0x7460f1*/
+          v16 = v30 + 0xFFFFFFFE; /*0x7460f4*/
+          v30 += 0xFFFFFFFE; /*0x7460f9*/
         }
-        while ( v19 );
+        while ( v19 ); /*0x7460fd*/
       }
     }
   }
-  return result;
+  return result; /*0x7460ff*/
 }

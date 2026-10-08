@@ -1,69 +1,70 @@
-UInt32 __thiscall TESForm_SetFromActiveFile(TESForm *this, TESForm *a2)
+// local variable allocation has failed, the output may be wrong!
+unsigned int __thiscall TESForm_SetFromActiveFile(TESForm *self, bool fromActiveFile)
 {
-  UInt32 result; // eax
-  UInt32 v4; // edx
-  int v5; // ecx
-  int v6; // edx
-  int v7; // ecx
+  unsigned int result; // eax
+  unsigned int usedEnd; // edx
+  void **data; // ecx
+  void *v6; // edx
+  unsigned int v7; // ecx
 
-  result = this->member.flags;
-  if ( (_BYTE)a2 )
+  result = self->member.flags; /*0x46c648*/
+  if ( fromActiveFile ) /*0x46c64b*/
   {
-    if ( (result & 2) == 0 )
+    if ( (result & 2) == 0 ) /*0x46c654*/
     {
-      result >>= 0xE;
-      if ( (result & 1) == 0 )
+      result >>= 0xE; /*0x46c656*/
+      if ( (result & 1) == 0 ) /*0x46c65b*/
       {
-        result = 0;
-        if ( dword_B06158 )
+        result = 0; /*0x46c663*/
+        if ( TESForm_ActiveFileFormList.usedEnd ) /*0x46c65d*/
         {
-          while ( *(TESForm **)(dword_B06150 + 4 * result) != this )
+          while ( TESForm_ActiveFileFormList.data[result] != self ) /*0x46c673*/
           {
-            if ( ++result >= dword_B06158 )
-              goto TESForm_SetFromActiveFile___AddToActiveFile;
+            if ( ++result >= TESForm_ActiveFileFormList.usedEnd ) /*0x46c67a*/
+              goto TESForm_SetFromActiveFile___AddToActiveFile; /*0x46c67a*/
           }
         }
         else
         {
 TESForm_SetFromActiveFile___AddToActiveFile:
-          a2 = this;
-          result = NiTArray_AddItem_((unsigned int *)&TESForm_ActiveFileFormList, &a2);
+          *(_DWORD *)&fromActiveFile = self; /*0x46c67c*/
+          result = NiTLargeArray_RawPointer_AddFirstEmpty(&TESForm_ActiveFileFormList, (void **)&fromActiveFile); /*0x46c68a*/
         }
       }
     }
-    this->member.flags |= 2u;
+    self->member.flags |= 2u; /*0x46c68f*/
   }
   else
   {
-    result >>= 1;
-    if ( (result & 1) != 0 )
+    result >>= 1; /*0x46c697*/
+    if ( (result & 1) != 0 ) /*0x46c69b*/
     {
-      v4 = dword_B06158;
-      result = 0;
-      if ( dword_B06158 )
+      usedEnd = TESForm_ActiveFileFormList.usedEnd; /*0x46c69d*/
+      result = 0; /*0x46c6a3*/
+      if ( TESForm_ActiveFileFormList.usedEnd ) /*0x46c69d*/
       {
-        v5 = dword_B06150;
-        while ( *(TESForm **)(v5 + 4 * result) != this )
+        data = TESForm_ActiveFileFormList.data; /*0x46c6a9*/
+        while ( data[result] != self ) /*0x46c6b3*/
         {
-          if ( ++result >= v4 )
+          if ( ++result >= usedEnd ) /*0x46c6ba*/
           {
-            this->member.flags &= ~2u;
-            return result;
+            self->member.flags &= ~2u; /*0x46c6bc*/
+            return result; /*0x46c6c1*/
           }
         }
-        if ( result < v4 )
+        if ( result < usedEnd ) /*0x46c6c6*/
         {
-          v6 = *(_DWORD *)(v5 + 4 * result);
-          *(_DWORD *)(v5 + 4 * result) = 0;
-          if ( v6 )
-            --dword_B0615C;
-          v7 = dword_B06158 - 1;
-          if ( result == v7 )
-            dword_B06158 = v7;
+          v6 = data[result]; /*0x46c6c8*/
+          data[result] = 0; /*0x46c6cd*/
+          if ( v6 ) /*0x46c6d4*/
+            --TESForm_ActiveFileFormList.occupiedCount; /*0x46c6d6*/
+          v7 = TESForm_ActiveFileFormList.usedEnd - 1; /*0x46c6e3*/
+          if ( result == v7 ) /*0x46c6e8*/
+            TESForm_ActiveFileFormList.usedEnd = v7; /*0x46c6ea*/
         }
       }
     }
-    this->member.flags &= ~2u;
+    self->member.flags &= ~2u; /*0x46c6f0*/
   }
-  return result;
+  return result; /*0x46c693*/
 }

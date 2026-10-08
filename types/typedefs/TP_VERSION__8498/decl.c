@@ -1,1 +1,1 @@
-TP_VERSION
+typedef DWORD TP_VERSION;

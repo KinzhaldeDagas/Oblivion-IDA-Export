@@ -3,7 +3,7 @@
 0x6FE002: mov     edi, [esp+8+arg_0]
 0x6FE006: push    edi
 0x6FE007: mov     esi, ecx
-0x6FE009: call    nullsub_returnvVoid_1arg
+0x6FE009: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6FE00E: mov     eax, [esi+8]
 0x6FE011: push    eax
 0x6FE012: mov     ecx, edi

@@ -1,23 +1,24 @@
-_DWORD *__thiscall sub_7C1740(int **this, _DWORD *a2)
+// Generic refcounted NiT pointer-list RemoveHead helper. Unlinks the head, returns a strong reference to its payload, frees the node through the allocator virtual, and decrements count.
+void **__thiscall NiTRefPointerList__RemoveHead(MEF_RefList32 *self, void **result)
 {
-  int *v3; // edi
-  int v4; // eax
+  MEF_RefListNode32 *head; // edi
+  MEF_RefListNode32 *next; // eax
   bool v5; // zf
-  int v6; // eax
+  volatile LONG *payload; // eax
 
-  v3 = *(this + 1);
-  v4 = *v3;
-  v5 = *v3 == 0;
-  *(this + 1) = (int *)*v3;
-  if ( v5 )
-    *(this + 2) = 0;
+  head = self->head; /*0x7c176d*/
+  next = head->next; /*0x7c1770*/
+  v5 = head->next == 0; /*0x7c1772*/
+  self->head = head->next; /*0x7c1774*/
+  if ( v5 ) /*0x7c1777*/
+    self->tail = 0; /*0x7c177e*/
   else
-    *(_DWORD *)(v4 + 4) = 0;
-  v6 = v3[2];
-  *a2 = v6;
-  if ( v6 )
-    InterlockedIncrement((volatile LONG *)(v6 + 4));
-  ((void (__thiscall *)(int **, int *))(*this)[2])(this, v3);
-  *(this + 3) = (int *)((char *)*(this + 3) + 0xFFFFFFFF);
-  return a2;
+    next->previous = 0; /*0x7c1779*/
+  payload = (volatile LONG *)head->payload; /*0x7c1781*/
+  *result = (void *)payload; /*0x7c178a*/
+  if ( payload ) /*0x7c178c*/
+    InterlockedIncrement(payload + 1); /*0x7c1792*/
+  (*((void (__thiscall **)(MEF_RefList32 *, MEF_RefListNode32 *))self->vtable + 2))(self, head); /*0x7c17ac*/
+  --self->count; /*0x7c17ae*/
+  return result; /*0x7c17b4*/
 }

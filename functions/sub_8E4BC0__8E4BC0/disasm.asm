@@ -74,7 +74,6 @@
 0x8E4CB6: mov     [esp+440h+var_430], 0
 0x8E4CBE: jle     loc_8E4DEC
 0x8E4CC4: jmp     short loc_8E4CD0
-0x8E4CC6: align 10h
 0x8E4CD0: mov     edx, [esp+440h+var_42C]
 0x8E4CD4: mov     eax, [edx+40h]
 0x8E4CD7: mov     edx, [esp+440h+var_20C]
@@ -174,7 +173,6 @@
 0x8E4DFA: mov     [esp+440h+var_430], 0
 0x8E4E02: jle     loc_8E4F2B
 0x8E4E08: jmp     short loc_8E4E10
-0x8E4E0A: align 10h
 0x8E4E10: mov     edx, [esp+440h+var_42C]
 0x8E4E14: mov     eax, [edx+40h]
 0x8E4E17: mov     edx, [esp+440h+var_418]

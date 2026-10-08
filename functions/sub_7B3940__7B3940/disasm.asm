@@ -33,7 +33,7 @@
 0x7B3996: mov     dword ptr [edi+1Ch], 0
 0x7B399D: lea     ebx, [edi+20h]
 0x7B39A0: mov     ecx, ebx
-0x7B39A2: call    NiTPointerList__FreeAllNodes
+0x7B39A2: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7B39A7: mov     esi, [edi+10h]
 0x7B39AA: test    esi, esi
 0x7B39AC: jz      short loc_7B39D0
@@ -46,13 +46,13 @@
 0x7B39BC: mov     ecx, ebp
 0x7B39BE: call    sub_803210
 0x7B39C3: push    ebp
-0x7B39C4: call    FormHeapFree
+0x7B39C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7B39C9: add     esp, 4
 0x7B39CC: test    esi, esi
 0x7B39CE: jnz     short loc_7B39B0
 0x7B39D0: lea     esi, [edi+0Ch]
 0x7B39D3: mov     ecx, esi
-0x7B39D5: call    NiTPointerList__FreeAllNodes
+0x7B39D5: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x7B39DA: mov     ecx, ebx
 0x7B39DC: mov     byte ptr [esp+24h+var_4], 1
 0x7B39E1: call    ??1?$NiTList@I@@UAE@XZ; NiTList<uint>::~NiTList<uint>(void)
@@ -84,3 +84,19 @@
 0x7B3A2C: pop     ebx
 0x7B3A2D: add     esp, 10h
 0x7B3A30: retn
+0x9CDA40: mov     ecx, [ebp-10h]
+0x9CDA43: add     ecx, 0Ch
+0x9CDA46: jmp     j_??1?$NiTPointerList@PAVDistantLODGroup@@@@UAE@XZ; NiTPointerList<DistantLODGroup *>::~NiTPointerList<DistantLODGroup *>(void)
+0x9CDA4B: mov     ecx, [ebp-10h]
+0x9CDA4E: add     ecx, 1Ch; slot
+0x9CDA51: jmp     NiPointerSlot_Release
+0x9CDA56: mov     ecx, [ebp-10h]
+0x9CDA59: add     ecx, 20h ; ' '
+0x9CDA5C: jmp     j_??1?$NiTList@I@@UAE@XZ; NiTList<uint>::~NiTList<uint>(void)
+0x9CDA61: mov     edx, [esp+arg_4]
+0x9CDA65: lea     eax, [edx-14h]
+0x9CDA68: mov     ecx, [edx-18h]
+0x9CDA6B: xor     ecx, eax
+0x9CDA6D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDA72: mov     eax, offset stru_AF6C38
+0x9CDA77: jmp     ___CxxFrameHandler3

@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B84A0",
+      "0x6B8552"
+    ]
+  ],
+  "chunks_sha256": "a59582a2340490dcf61f50385b3a55d6bdd16b68b37c28c890e9bdc36397dc3c",
+  "comment_regular": "Saves response display text and voice path with UInt8 lengths, then the copied 8-byte TRDT prefix as two UInt32 values.",
+  "comment_repeatable": "Saves response display text and voice path with UInt8 lengths, then the copied 8-byte TRDT prefix as two UInt32 values.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6B84A0",
+  "display_name": "DialogueResponse::SaveGame",
   "end_ea": "0x6B8552",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B84A0",
+  "name": "DialogueResponse::SaveGame",
   "segment": ".text",
   "sha256": "a59582a2340490dcf61f50385b3a55d6bdd16b68b37c28c890e9bdc36397dc3c",
   "size": 178,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B84A0",
-  "type": "void *__thiscall(const char **this)",
+  "total_chunk_size": 178,
+  "type": "void __thiscall(DialogueResponse *this)",
   "xrefs_from_count": 70,
   "xrefs_to_count": 1
 }

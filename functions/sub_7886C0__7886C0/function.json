@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7886C0",
+      "0x788712"
+    ]
+  ],
+  "chunks_sha256": "d5a4de84a0e7473f00f7c32328d66934e8c161f30cfe3112249d38e1c7231735",
+  "comment_regular": "Oblivion CIndexedGeometry::GetNumStrips: rejects negative LODs, checked-indexes perLodStrips, and returns the selected inner ushort-vector size. RT4.1 exposes the same accessor contract.\n\n[2026-10-02 packet bounds pass] Verified GetNumStrips returns selected inner STRIP-POINTER vector count (4-byte elements), not strip-length count. Fallout symbol GetNumStrips at 0x8281AB48 agrees. Oblivion bridge must separately compare ushort length-vector count before indexing both arrays. Earlier phrase inner ushort-vector size should be read as ushort-pointer-vector size.\n[2026-10-03 full frond export cache] Zero selected strip-pointer-vector length is a valid topology state, distinct from a missing/unreadable vector. Plugin empty certificate requires both selected ushort-length and pointer vectors to have zero counts, valid native spans, and zero selected perLodTriangleCounts entry. Empty state is cached by shared family/selector; runtime hides the child without substituting a different visible LOD. Enumeration covers all nonnegative signed-short selectors, not a fixed first-16 sample.\n\nOblivion CIndexedGeometry::GetNumStrips: rejects negative LODs, checked-indexes perLodStrips, and returns the selected inner ushort-pointer-vector size. RT4.1 exposes the same accessor contract.",
+  "comment_repeatable": "Oblivion CIndexedGeometry::GetNumStrips: rejects negative LODs, checked-indexes perLodStrips, and returns the selected inner ushort-vector size. RT4.1 exposes the same accessor contract.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7886C0",
+  "display_name": "OB_CIndexedGeometry_GetNumStrips_010201A0",
   "end_ea": "0x788712",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7886C0",
+  "name": "OB_CIndexedGeometry_GetNumStrips_010201A0",
   "segment": ".text",
   "sha256": "d5a4de84a0e7473f00f7c32328d66934e8c161f30cfe3112249d38e1c7231735",
   "size": 82,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7886C0",
-  "type": "int __thiscall(_DWORD *this, __int16)",
+  "total_chunk_size": 82,
+  "type": "unsigned __int16 __thiscall(OB_CIndexedGeometry_010201A0 *this, __int16 lodLevel)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 2
 }

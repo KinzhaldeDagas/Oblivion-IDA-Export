@@ -22,7 +22,7 @@
 0x5D0E18: call    ??1RepairMenuList@RepairMenu@@UAE@XZ; RepairMenu::RepairMenuList::~RepairMenuList(void)
 0x5D0E1D: mov     ecx, esi; this
 0x5D0E1F: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x5D0E27: call    ??1Menu@@UAE@XZ; Menu::~Menu(void)
+0x5D0E27: call    ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
 0x5D0E2C: mov     ecx, [esp+1Ch+var_C]
 0x5D0E30: mov     large fs:0, ecx
 0x5D0E37: pop     ecx
@@ -30,3 +30,15 @@
 0x5D0E39: pop     esi
 0x5D0E3A: add     esp, 10h
 0x5D0E3D: retn
+0x9C1D70: mov     ecx, [ebp-10h]; this
+0x9C1D73: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C1D78: mov     ecx, [ebp-10h]
+0x9C1D7B: add     ecx, 68h ; 'h'; this
+0x9C1D7E: jmp     j_??1RepairMenuList@RepairMenu@@UAE@XZ; RepairMenu::RepairMenuList::~RepairMenuList(void)
+0x9C1D83: mov     edx, [esp+arg_4]
+0x9C1D87: lea     eax, [edx-0Ch]
+0x9C1D8A: mov     ecx, [edx-10h]
+0x9C1D8D: xor     ecx, eax
+0x9C1D8F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1D94: mov     eax, offset stru_AEAD64
+0x9C1D99: jmp     ___CxxFrameHandler3

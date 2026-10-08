@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x51AA10",
-    "line": "push    esi",
+    "line": "push    esi; Stores the encoded group key at TESAnimGroup +0x08. Using the unsigned low group byte without a bounds check, indexes the fixed 43-record table, reads noteTemplateClass at record +0x0C, counts that class in the note-major required-note matrix (max 5), writes requiredNoteCount at +0x0C, frees the old +0x10 time array, allocates count*4, and zero-fills it to +0.0f. Later KF parsing populates and validates the authored times. Corrected: this initializer does not write QNaNs.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x51AA13",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+4+groupKey]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x51AA4E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

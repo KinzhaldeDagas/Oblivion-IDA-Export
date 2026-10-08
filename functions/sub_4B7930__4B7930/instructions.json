@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B7930",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+space]; Verified spatial-form predicate: false for null; true for form type 0x35 (TESWorldSpace); for form type 0x30 it RTTI-casts to TESObjectCELL and returns true only for interior cells; false otherwise. Probable domain role: accept only spaces allowed as random teleport destinations.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4B796A",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },

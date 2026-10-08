@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A3700",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; CTreeEngine constructor for stock compact 0x110-byte object. Initializes branch weight level at +0xF0 and stock wind info; no floor-info fields or cluster first-branch-level storage are present.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7A372A",
-    "line": "call    sub_78ECF0",
+    "line": "call    OB_CIdvCamera_ctor_010201A0; Constructs the exact 0x10-byte Oblivion CIdvCamera base: installs its vftable and zeros the three-float position at +0x04. Called as the base constructor of both CTreeEngine and CBillboardLeaf. RT4.1 exposes the same layout/behavior under the later name stCamera.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x7A3739",
-    "line": "lea     ecx, [esi+20h]",
+    "line": "lea     ecx, [esi+20h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x7A3754",
-    "line": "call    sub_78EAF0",
+    "line": "call    OB_stRandom_ctor_010201A0; Oblivion stRandom constructor. The class has no per-instance generator state; if the shared SIdvRandomImpl state is not initialized, it invokes Reseed(-1).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A3759",
-    "line": "lea     ecx, [esi+24h]",
+    "line": "lea     ecx, [esi+24h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x7A3765",
-    "line": "call    sub_7A8620",
+    "line": "call    OB_SIdvTreeInfo_ctor_010201A0; OBLIVION AUTHORITY (2026-08-30): Initializes the exact 0x34-byte SIdvTreeInfo embedded at CTreeEngine+0x24. The compact layout is stString28 followed by far, near, seed, size, variance, and flareSeed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x7A378C",
-    "line": "lea     ecx, [esi+84h]",
+    "line": "lea     ecx, [esi+84h]; this",
     "mnemonic": "lea",
     "size": 6
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7A3797",
-    "line": "call    sub_7A5B10",
+    "line": "call    OB_SIdvLeafInfo_ctor_010201A0; Oblivion SIdvLeafInfo constructor with the leafTextures member now typed as vector<SIdvLeafTexture>; total embedded record size remains 0x50.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x7A37B0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x7A37F3",
-    "line": "call    sub_7A8480",
+    "line": "call    OB_SIdvWindInfo_ctor_010201A0; Constructs the embedded 0x1C-byte SIdvWindInfo with leafFactors.x/y initialized to the local default scalar and the remaining five floats zero. CTreeEngine construction subsequently derives leafOscillation and assigns strength.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x7A37FE",
-    "line": "mov     eax, [esp+20h+arg_0]",
+    "line": "mov     eax, [esp+20h+branchGeometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x7A3821",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+branchGeometry]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7A3825",
-    "line": "fld     [esp+20h+arg_0]",
+    "line": "fld     [esp+20h+branchGeometry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -520,5 +520,149 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC8C0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8C3",
+    "line": "jmp     OB_CIdvCamera_dtor_010201A0; Oblivion CIdvCamera base destructor. Restores the CIdvCamera vftable; both CTreeEngine and CBillboardLeaf destructors call this shared base cleanup.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC8C8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8CB",
+    "line": "add     ecx, 20h ; ' '; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8CE",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC8D3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8D6",
+    "line": "add     ecx, 24h ; '$'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8D9",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC8DE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8E1",
+    "line": "add     ecx, 60h ; '`'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8E4",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC8E9",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8EC",
+    "line": "add     ecx, 74h ; 't'; this",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8EF",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC8F4",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC8F7",
+    "line": "add     ecx, 84h ; '„'; this",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC8FD",
+    "line": "jmp     OB_SIdvLeafInfo_dtor_010201A0; SIdvLeafInfo destruction frees rocking/vertex/texcoord tables, then destroys and frees the typed compact leaf-texture vector.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC902",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC906",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC909",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC90C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC90E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC913",
+    "line": "mov     eax, offset stru_AF5C50",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC918",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

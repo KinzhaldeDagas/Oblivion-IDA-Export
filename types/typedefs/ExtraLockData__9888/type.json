@@ -1,0 +1,69 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "ExtraLockData",
+  "definition": "struct ExtraLockData\n{\nunsigned __int8 level;\nunsigned __int8 unused01[3];\nTESKey *key; ///< Verified TESKey* key: ExtraDataList_ResolveLoadedFormIDs resolves the stored FormID and RTTI-casts it to TESKey; TESObjectDOOR_CheckActorAccess checks actor inventory for this key.\nunsigned __int8 flags; ///< Verified: bit 0x01 is the runtime is_locked predicate and XLOC load forces it on; bit 0x04 enables leveled scaling. Verified bit 0x02 use: LockEffect_Apply sets it and later checks it with bit 0x01; Candidate label LockEffect marker. Other bits remain Unknown.\nunsigned __int8 unused09[3];\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "level",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unused01",
+      "offset_bits": 8,
+      "offset_bytes": 1,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified TESKey* key: ExtraDataList_ResolveLoadedFormIDs resolves the stored FormID and RTTI-casts it to TESKey; TESObjectDOOR_CheckActorAccess checks actor inventory for this key.",
+      "name": "key",
+      "offset_bits": 32,
+      "offset_bytes": 4,
+      "size_bits": 32,
+      "type": "TESKey *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified: bit 0x01 is the runtime is_locked predicate and XLOC load forces it on; bit 0x04 enables leveled scaling. Verified bit 0x02 use: LockEffect_Apply sets it and later checks it with bit 0x01; Candidate label LockEffect marker. Other bits remain Unknown.",
+      "name": "flags",
+      "offset_bits": 64,
+      "offset_bytes": 8,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unused09",
+      "offset_bits": 72,
+      "offset_bytes": 9,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    }
+  ],
+  "name": "ExtraLockData",
+  "ordinal": 9888,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 12
+}

@@ -1,1 +1,30 @@
-LB_DESCR_0
+struct LB_DESCR_0
+{
+HWND self;
+HWND owner;
+UINT style;
+INT width;
+INT height;
+$A92B9559E7F130C194A684546C2095F5 u;
+INT nb_items;
+UINT items_size;
+INT top_item;
+INT selected_item;
+INT focus_item;
+INT anchor_item;
+INT item_height;
+INT page_size;
+INT column_width;
+INT horz_extent;
+INT horz_pos;
+INT nb_tabs;
+INT *tabs;
+INT avg_char_width;
+INT wheel_remain;
+BOOL caret_on;
+BOOL captured;
+BOOL in_focus;
+HFONT font;
+LCID locale;
+HEADCOMBO_0 *lphc;
+};

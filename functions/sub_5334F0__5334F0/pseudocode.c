@@ -20,11 +20,11 @@ char __thiscall sub_5334F0(unsigned __int16 *this, int a2, unsigned int a3)
   _DWORD *v20; // esi
   int v21; // ecx
   bhkRefObject *v22; // [esp+1Ch] [ebp-158h]
-  bhkRefObject *v23; // [esp+20h] [ebp-154h] BYREF
+  void *v23; // [esp+20h] [ebp-154h] BYREF
   unsigned int v24; // [esp+24h] [ebp-150h]
   unsigned __int16 *v25; // [esp+28h] [ebp-14Ch]
   int v26; // [esp+2Ch] [ebp-148h]
-  bhkRefObject *v27; // [esp+30h] [ebp-144h]
+  void *slot; // [esp+30h] [ebp-144h]
   __m128 v28; // [esp+34h] [ebp-140h] BYREF
   float v29[8]; // [esp+44h] [ebp-130h] BYREF
   int v30; // [esp+64h] [ebp-110h]
@@ -37,113 +37,113 @@ char __thiscall sub_5334F0(unsigned __int16 *this, int a2, unsigned int a3)
   char v37; // [esp+144h] [ebp-30h]
   unsigned int v38; // [esp+170h] [ebp-4h]
 
-  v3 = a2;
-  result = 0;
-  v5 = *(this + 0xA) == 0;
-  v25 = this;
-  v26 = a2;
-  if ( v5 )
+  v3 = a2; /*0x533530*/
+  result = 0; /*0x533535*/
+  v5 = *(this + 0xA) == 0; /*0x533537*/
+  v25 = this; /*0x53353b*/
+  v26 = a2; /*0x53353f*/
+  if ( v5 ) /*0x533543*/
   {
-    if ( a2 )
+    if ( a2 ) /*0x53354b*/
     {
-      sub_8A5790(v31);
-      v6 = 0.0;
-      v35 = 0.0;
-      v7 = flt_B114A4;
-      LODWORD(v31[0]) = 0x10011;
-      v33 = 0x10011;
-      v36 = v7;
-      v8 = 0;
-      v38 = 0;
-      v37 = 7;
-      v24 = 0;
-      if ( a3 )
+      sub_8A5790(v31); /*0x533555*/
+      v6 = 0.0; /*0x53355a*/
+      v35 = 0.0; /*0x533561*/
+      v7 = flt_B114A4; /*0x533568*/
+      LODWORD(v31[0]) = 0x10011; /*0x53356e*/
+      v33 = 0x10011; /*0x533572*/
+      v36 = v7; /*0x533579*/
+      v8 = 0; /*0x533580*/
+      v38 = 0; /*0x533585*/
+      v37 = 7; /*0x53358c*/
+      v24 = 0; /*0x533594*/
+      if ( a3 ) /*0x533598*/
       {
-        v9 = flt_A5611C;
-        while ( 1 )
+        v9 = flt_A5611C; /*0x53359e*/
+        while ( 1 ) /*0x5335be*/
         {
-          v10 = *(_DWORD *)(v3 + 4 * v8);
-          if ( v10 )
+          v10 = *(_DWORD *)(v3 + 4 * v8); /*0x5335be*/
+          if ( v10 ) /*0x5335c3*/
           {
-            v11 = *(_DWORD *)(v10 + 0xB4);
-            v29[6] = v6;
-            v12 = flt_A30634;
-            v30 = 0;
-            v29[7] = v12;
-            LODWORD(v29[5]) = 0x11;
-            LODWORD(v29[4]) = 0x11;
-            v29[0] = v9;
-            v28.m128_u64[0] = 0;
-            v29[1] = flt_A56118;
-            v29[2] = v29[0];
-            v29[3] = v6;
-            v30 = *(_DWORD *)(v11 + 0x1C);
-            sub_8B0C60((int)v29);
-            v13 = (bhkRefObject *)FormHeapAlloc(0x14u);
-            v23 = v13;
-            LOBYTE(v38) = 1;
-            if ( v13 )
+            v11 = *(_DWORD *)(v10 + 0xB4); /*0x5335c9*/
+            v29[6] = v6; /*0x5335d1*/
+            v12 = kTerrainLODQuadRayDirectionZ; /*0x5335da*/
+            v30 = 0; /*0x5335e0*/
+            v29[7] = v12; /*0x5335e4*/
+            LODWORD(v29[5]) = 0x11; /*0x5335e8*/
+            LODWORD(v29[4]) = 0x11; /*0x5335ee*/
+            v29[0] = v9; /*0x5335f2*/
+            v28.m128_u64[0] = 0; /*0x5335f6*/
+            v29[1] = flt_A56118; /*0x533604*/
+            v29[2] = v29[0]; /*0x53360c*/
+            v29[3] = v6; /*0x533610*/
+            v30 = *(_DWORD *)(v11 + 0x1C); /*0x533617*/
+            sub_8B0C60((int)v29); /*0x53361b*/
+            v13 = (bhkRefObject *)FormHeapAlloc(0x14u); /*0x533622*/
+            v23 = v13; /*0x53362a*/
+            LOBYTE(v38) = 1; /*0x533630*/
+            if ( v13 ) /*0x533638*/
             {
-              v14 = sub_532CD0(v13, &v28);
-              v22 = v14;
+              v14 = sub_532CD0(v13, &v28); /*0x533646*/
+              v22 = v14; /*0x533648*/
             }
             else
             {
-              v22 = 0;
-              v14 = 0;
+              v22 = 0; /*0x53364e*/
+              v14 = 0; /*0x533652*/
             }
-            v27 = v14;
-            if ( v14 )
-              InterlockedIncrement((volatile LONG *)&v14->members);
-            v15 = *(float *)&v14->hkObject;
-            LOBYTE(v38) = 2;
-            v31[1] = v15;
-            v34 = v15;
-            v16 = (bhkRefObject *)FormHeapAlloc(0x1Cu);
-            v23 = v16;
-            LOBYTE(v38) = 3;
-            if ( v16 )
-              v17 = sub_533290(v16, (int)v31);
+            slot = v14; /*0x533656*/
+            if ( v14 ) /*0x53365a*/
+              InterlockedIncrement((volatile LONG *)&v14->members); /*0x533660*/
+            v15 = *(float *)&v14->hkObject; /*0x533666*/
+            LOBYTE(v38) = 2; /*0x53366b*/
+            v31[1] = v15; /*0x533673*/
+            v34 = v15; /*0x533677*/
+            v16 = (bhkRefObject *)FormHeapAlloc(0x1Cu); /*0x53367e*/
+            v23 = v16; /*0x533686*/
+            LOBYTE(v38) = 3; /*0x53368c*/
+            if ( v16 ) /*0x533694*/
+              v17 = sub_533290(v16, (int)v31); /*0x5336a2*/
             else
-              v17 = 0;
-            v23 = v17;
-            if ( v17 )
-              InterlockedIncrement((volatile LONG *)&v17->members);
-            v18 = v25[9];
-            v19 = v25[8];
-            v20 = v25 + 4;
-            LOBYTE(v38) = 4;
-            if ( v18 >= v19 )
-              sub_523B10(v25 + 4, v18 + v25[0xB]);
-            sub_5331C0(v20, v18, (LONG *)&v23);
-            LOBYTE(v38) = 2;
-            if ( v17 )
+              v17 = 0; /*0x5336a6*/
+            v23 = v17; /*0x5336aa*/
+            if ( v17 ) /*0x5336ae*/
+              InterlockedIncrement((volatile LONG *)&v17->members); /*0x5336b4*/
+            v18 = v25[9]; /*0x5336be*/
+            v19 = v25[8]; /*0x5336c2*/
+            v20 = v25 + 4; /*0x5336c6*/
+            LOBYTE(v38) = 4; /*0x5336cb*/
+            if ( v18 >= v19 ) /*0x5336d3*/
+              NiTObjectArray_Resize16((MEF_RefPointerArray16 *)(v25 + 4), v18 + v25[0xB]); /*0x5336de*/
+            sub_5331C0(v20, v18, (LONG *)&v23); /*0x5336eb*/
+            LOBYTE(v38) = 2; /*0x5336f2*/
+            if ( v17 ) /*0x5336fa*/
             {
-              if ( !InterlockedDecrement((volatile LONG *)&v17->members) )
-                v17->__vftable->super.Destructor((NiRefObject *)v17, 1);
+              if ( !InterlockedDecrement((volatile LONG *)&v17->members) ) /*0x533700*/
+                v17->__vftable->super.Destructor((NiRefObject *)v17, 1); /*0x533712*/
             }
-            LOBYTE(v38) = 0;
-            if ( !InterlockedDecrement((volatile LONG *)&v22->members) )
-              v22->__vftable->super.Destructor((NiRefObject *)v22, 1);
+            LOBYTE(v38) = 0; /*0x53371c*/
+            if ( !InterlockedDecrement((volatile LONG *)&v22->members) ) /*0x533724*/
+              v22->__vftable->super.Destructor((NiRefObject *)v22, 1); /*0x533736*/
           }
-          v8 = ++v24;
-          if ( v24 >= a3 )
-            break;
-          v3 = v26;
-          v9 = flt_A5611C;
-          v6 = 0.0;
+          v8 = ++v24; /*0x533744*/
+          if ( v24 >= a3 ) /*0x53374e*/
+            break; /*0x53374e*/
+          v3 = v26; /*0x5335b6*/
+          v9 = flt_A5611C; /*0x5335bc*/
+          v6 = 0.0; /*0x5335bc*/
         }
       }
-      v38 = 0xFFFFFFFF;
-      if ( v32 >= 0 )
+      v38 = 0xFFFFFFFF; /*0x533761*/
+      if ( v32 >= 0 ) /*0x53376c*/
       {
-        v21 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + TlsIndex) + 0x19C);
-        if ( !v21 )
-          v21 = dword_BA7D9C;
-        sub_8A75D0(v21, (_DWORD *)LODWORD(v31[3]), 8 * v32, 0x14);
+        v21 = *(_DWORD *)(*((_DWORD *)NtCurrentTeb()->ThreadLocalStoragePointer + MEMORY[0xBA9DE4]) + 0x19C); /*0x53377e*/
+        if ( !v21 ) /*0x533786*/
+          v21 = unk_BA7D9C; /*0x533788*/
+        sub_8A75D0(v21, (_DWORD *)LODWORD(v31[3]), 8 * v32, 0x14); /*0x5337a4*/
       }
     }
-    return 1;
+    return 1; /*0x5337a9*/
   }
-  return result;
+  return result; /*0x5337ab*/
 }

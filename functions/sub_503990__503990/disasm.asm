@@ -17,20 +17,20 @@
 0x5039B8: push    edx; a2
 0x5039B9: push    eax; a1
 0x5039BA: mov     dword ptr [esp+28h+var_4], 0
-0x5039C2: call    Script_ExtractArgs
+0x5039C2: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5039C7: add     esp, 20h
 0x5039CA: test    al, al
 0x5039CC: jnz     short loc_5039D1
 0x5039CE: pop     esi
 0x5039CF: pop     ecx
 0x5039D0: retn
-0x5039D1: mov     ecx, [esp+8+arg_18]
+0x5039D1: mov     ecx, [esp+8+value]
 0x5039D5: mov     edx, dword ptr [esp+8+var_4]
-0x5039D9: push    ecx
-0x5039DA: push    0
-0x5039DC: push    edx
-0x5039DD: push    esi
-0x5039DE: call    sub_4F4E20
+0x5039D9: push    ecx; value
+0x5039DA: push    0; param2
+0x5039DC: push    edx; target
+0x5039DD: push    esi; subject
+0x5039DE: call    GetDisposition_Eval; GetDisposition_Eval (index 76 / opcode 0x104C): for valid actor subject and Actor parameter, returns the subject's disposition toward that target. A global one-pair cache reuses the last result; non-actor inputs leave numeric result 0.
 0x5039E3: add     esp, 10h
 0x5039E6: pop     esi
 0x5039E7: pop     ecx

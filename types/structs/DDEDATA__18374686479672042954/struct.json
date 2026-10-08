@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "DDEDATA",
+  "definition": "struct DDEDATA\n{\nunsigned __int16 unused : 12;\nunsigned __int16 fResponse : 1;\nunsigned __int16 fRelease : 1;\nunsigned __int16 reserved : 1;\nunsigned __int16 fAckReq : 1;\n__int16 cfFormat;\nBYTE Value[1];\n}\n",
   "id": 18374686479672042954,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unused",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1.5,
+      "type": "unsigned __int16 : 12"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fResponse",
-      "offset": 1,
+      "offset": 1.5,
       "offset_hex": "0x1",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fRelease",
-      "offset": 1,
+      "offset": 1.625,
       "offset_hex": "0x1",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "reserved",
-      "offset": 1,
+      "offset": 1.75,
       "offset_hex": "0x1",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fAckReq",
-      "offset": 1,
+      "offset": 1.875,
       "offset_hex": "0x1",
-      "size": 0
+      "size": 0.125,
+      "type": "unsigned __int16 : 1"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cfFormat",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "__int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Value",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 1
+      "size": 1,
+      "type": "BYTE[1]"
     }
   ],
   "name": "DDEDATA",
+  "ordinal": 7341,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 6
 }

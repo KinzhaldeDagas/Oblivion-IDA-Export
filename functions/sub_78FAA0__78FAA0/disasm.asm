@@ -1,4 +1,4 @@
-0x78FAA0: mov     ecx, [esp+arg_0]
+0x78FAA0: mov     ecx, [esp+arg_0]; Allocates count contiguous 0x0C-byte OB_CBranchChildRef records from FormHeap. Checks count*12 overflow and throws std::bad_alloc before allocation on overflow.
 0x78FAA4: sub     esp, 0Ch
 0x78FAA7: test    ecx, ecx
 0x78FAA9: ja      short loc_78FAC1

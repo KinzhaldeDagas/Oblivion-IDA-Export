@@ -1,19 +1,36 @@
 {
-  "callees_count": 40,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7C6770",
+  "chunks": [
+    [
+      "0x7C6770",
+      "0x7C69B8"
+    ],
+    [
+      "0x9CE6A0",
+      "0x9CE6CE"
+    ]
+  ],
+  "chunks_sha256": "d722c36092bbab8db47f8096687353af77d890f45d8cc89f47f8210d04da0418",
+  "comment_regular": "Oblivion active shadow-light producer loop. Saves render mode, enters mode 5, publishes each current ShadowSceneLight, dispatches its shadow render, clears the current-light pointer, and restores the prior mode.\n\nOwn mode-5 shadow-map rendering: consume active lights, publish current light, dispatch render, release transient camera state, clear current light, and restore prior render mode.",
+  "comment_repeatable": "Oblivion active shadow-light producer loop. Saves render mode, enters mode 5, publishes each current ShadowSceneLight, dispatches its shadow render, clears the current-light pointer, and restores the prior mode.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ShadowSceneNode_RenderActiveShadowLights_Mode5",
   "end_ea": "0x7C69B8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C6770",
+  "name": "ShadowSceneNode_RenderActiveShadowLights_Mode5",
   "segment": ".text",
   "sha256": "3c8826f94bfc7057da8e3aad7d9c2483c777a4fc51183a0c4317dd25f178c29d",
   "size": 584,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C6770",
+  "total_chunk_size": 630,
   "type": "void __thiscall(Ni2DBuffer **this, int)",
-  "xrefs_from_count": 228,
+  "xrefs_from_count": 245,
   "xrefs_to_count": 1
 }

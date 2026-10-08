@@ -34,7 +34,7 @@
 0x8AEEF1: lea     ecx, [esp+0A0h+var_50]
 0x8AEEF5: push    ecx
 0x8AEEF6: mov     ecx, ebx
-0x8AEEF8: call    sub_6848D0
+0x8AEEF8: call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.
 0x8AEEFD: lea     edx, [esp+0A0h+var_50]
 0x8AEF01: push    edx
 0x8AEF02: lea     eax, [esp+0A4h+var_84]
@@ -44,7 +44,7 @@
 0x8AEF13: push    ecx
 0x8AEF14: lea     edx, [esp+0ACh+var_60]
 0x8AEF18: push    edx
-0x8AEF19: call    sub_43F3E0
+0x8AEF19: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8AEF1E: add     esp, 10h
 0x8AEF21: push    offset off_A97270; ArgList
 0x8AEF26: lea     ecx, [esp+0A4h+var_84]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x76D6F0",
+      "0x76D7C3"
+    ]
+  ],
+  "chunks_sha256": "df727f81d01a26dd7ca5303fd7c7cdc8d02807d17d0c8dcc70e910c02dda6ec8",
+  "comment_regular": "\nVerified vtableA8997C slot12/+0x30 (xrefA899AC). Releases previous surface, clears cached RT0/DS bindings, replaces retained device+0x4C, AddRefs it, GetRenderTarget(0)->surface+0x0C, reads desc and updates parent dimensions and SurfaceData+0x10. Retains saved PresentParams+0x14; no sample count is selected here.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_76D6F0",
+  "display_name": "NiDX9ImplicitBufferData_Recreate",
   "end_ea": "0x76D7C3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76D6F0",
+  "name": "NiDX9ImplicitBufferData_Recreate",
   "segment": ".text",
   "sha256": "df727f81d01a26dd7ca5303fd7c7cdc8d02807d17d0c8dcc70e910c02dda6ec8",
   "size": 211,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76D6F0",
-  "type": "char __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 211,
+  "type": "bool __thiscall(NiDX9ImplicitBufferData *self, IDirect3DDevice9 *device)",
   "xrefs_from_count": 84,
   "xrefs_to_count": 1
 }

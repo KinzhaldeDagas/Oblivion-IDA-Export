@@ -1,5 +1,5 @@
 // positive sp value has been detected, the output may be wrong!
 void def_6B0985()
 {
-  ;
+  ; /*0x6b0bad*/
 }

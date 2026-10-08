@@ -1,10 +1,11 @@
-double __thiscall sub_7871A0(_DWORD *this)
+// CSpeedTreeRT::GetLodLevel. Returns instanceData+0x10 for instances or treeEngine+0x14 for base trees.
+float __thiscall CSpeedTreeRT__GetLodLevel(const OB_CSpeedTreeRT_010201A0 *this)
 {
-  int v1; // eax
+  int instanceData; // eax
 
-  v1 = *(this + 0xD);
-  if ( v1 )
-    return *(float *)(v1 + 0x10);
+  instanceData = this->instanceData; /*0x7871a1*/
+  if ( instanceData ) /*0x7871a6*/
+    return *(float *)(instanceData + 0x10); /*0x7871ab*/
   else
-    return *(float *)(*this + 0x14);
+    return *(float *)(this->treeEngine + 0x14); /*0x7871b8*/
 }

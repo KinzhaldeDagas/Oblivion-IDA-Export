@@ -1,4 +1,4 @@
-0x76D430: push    esi
+0x76D430: push    esi; Unbinds nonzero MRT slots only when the renderer cache says a surface is active, then clears the corresponding cache entry. Slot 0 is deliberately retained.
 0x76D431: mov     esi, [esp+4+a2]
 0x76D435: test    esi, esi
 0x76D437: jz      short loc_76D460

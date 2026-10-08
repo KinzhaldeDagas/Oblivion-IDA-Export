@@ -2,7 +2,7 @@
 0x7E5971: mov     esi, [esp+4+arg_0]
 0x7E5975: push    edi
 0x7E5976: push    esi
-0x7E5977: call    sub_7E28E0
+0x7E5977: call    sub_7E28E0; Shader/property diagnostic dumper. Prints pass names via BSShaderProperty_GetRenderPassName; BSSM_FRONDS from this path is diagnostic text only.
 0x7E597C: mov     eax, ds:0B46058h
 0x7E5981: push    eax; ArgList
 0x7E5982: call    TESOutput_PrintString

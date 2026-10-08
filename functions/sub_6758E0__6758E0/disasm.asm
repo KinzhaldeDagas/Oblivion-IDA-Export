@@ -25,9 +25,9 @@
 0x675911: jnz     loc_675B0F
 0x675917: push    edi; a2
 0x675918: mov     ecx, esi; this
-0x67591A: call    sub_673A50
+0x67591A: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x67591F: mov     ecx, eax; this
-0x675921: call    sub_7616D0
+0x675921: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x675926: cmp     eax, ebx
 0x675928: mov     [esp+1Ch+var_C], eax
 0x67592C: jz      loc_675B0F
@@ -52,7 +52,7 @@
 0x67596E: call    eax
 0x675970: test    al, al
 0x675972: jz      loc_675A70
-0x675978: cmp     dword ptr [esp+1Ch+arg_4], 0Ch
+0x675978: cmp     [esp+1Ch+arg_4], 0Ch
 0x67597D: jnz     loc_675A70
 0x675983: mov     ecx, esi
 0x675985: call    sub_5E03A0
@@ -64,7 +64,7 @@
 0x675998: jz      short loc_6759FF
 0x67599A: cmp     ecx, ebx
 0x67599C: jz      loc_675AF8
-0x6759A2: call    sub_6135F0
+0x6759A2: call    CombatController_GetCurrentTarget
 0x6759A7: cmp     eax, [esp+1Ch+arg_0]
 0x6759AB: jnz     loc_675AF8
 0x6759B1: cmp     ebp, ebx
@@ -86,7 +86,7 @@
 0x6759DE: test    al, al
 0x6759E0: jnz     short loc_6759ED
 0x6759E2: mov     ecx, esi; this
-0x6759E4: call    TESObjectREFR_IsPersistent?
+0x6759E4: call    TESObjectREFR_IsPersistent
 0x6759E9: test    al, al
 0x6759EB: jnz     short loc_675A63
 0x6759ED: mov     edx, [esi]
@@ -121,7 +121,7 @@
 0x675A42: test    al, al
 0x675A44: jnz     short loc_675A51
 0x675A46: mov     ecx, esi; this
-0x675A48: call    TESObjectREFR_IsPersistent?
+0x675A48: call    TESObjectREFR_IsPersistent
 0x675A4D: test    al, al
 0x675A4F: jnz     short loc_675A63
 0x675A51: mov     eax, [esi]
@@ -134,16 +134,16 @@
 0x675A64: mov     ecx, ebp
 0x675A66: call    BSSimpleList_PushFront
 0x675A6B: jmp     loc_675AF8
-0x675A70: mov     ecx, esi
-0x675A72: call    sub_5E0380
+0x675A70: mov     ecx, esi; this
+0x675A72: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x675A77: mov     edi, eax
 0x675A79: cmp     edi, ebx
 0x675A7B: jz      short loc_675AF4
 0x675A7D: mov     ecx, esi; this
-0x675A7F: call    sub_5E6C60
+0x675A7F: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x675A84: test    al, al
 0x675A86: jnz     short loc_675A8F
-0x675A88: cmp     dword ptr [esp+1Ch+arg_4], 0Fh
+0x675A88: cmp     [esp+1Ch+arg_4], 0Fh
 0x675A8D: jz      short loc_675AF4
 0x675A8F: mov     ecx, [esi+58h]
 0x675A92: mov     eax, [ecx]
@@ -152,7 +152,7 @@
 0x675A9C: cmp     eax, [esp+1Ch+arg_0]
 0x675AA0: jnz     short loc_675AF4
 0x675AA2: movsx   eax, byte ptr [edi+20h]
-0x675AA6: cmp     eax, dword ptr [esp+1Ch+arg_4]
+0x675AA6: cmp     eax, [esp+1Ch+arg_4]
 0x675AAA: jnz     short loc_675AF4
 0x675AAC: cmp     ebp, ebx
 0x675AAE: jnz     short loc_675AC9

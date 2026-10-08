@@ -1,4 +1,4 @@
-0x47F990: mov     edx, [ecx+48h]
+0x47F990: mov     edx, [ecx+48h]; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x47F993: push    esi
 0x47F994: xor     eax, eax
 0x47F996: test    edx, edx

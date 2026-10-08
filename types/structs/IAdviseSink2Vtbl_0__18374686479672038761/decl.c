@@ -1,1 +1,1 @@
-IAdviseSink2Vtbl_0
+typedef IAdviseSink2Vtbl IAdviseSink2Vtbl_0;

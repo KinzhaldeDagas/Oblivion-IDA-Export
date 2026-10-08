@@ -1,1 +1,1 @@
-TransactedSharedImpl_0
+typedef TransactedSharedImpl TransactedSharedImpl_0;

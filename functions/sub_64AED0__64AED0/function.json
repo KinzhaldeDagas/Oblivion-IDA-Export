@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x64AED0",
+      "0x64AF10"
+    ]
+  ],
+  "chunks_sha256": "a880f8a7b6db0b668c07acfca9a7e935372d510928aeca2882066120dc5f9337",
+  "comment_regular": "Authoritative MiddleHighProcess equipped-AMMO setter (vtable +0x10C). Destroys/frees the prior copied EntryData, stores the replacement pointer (NULL on final-shot depletion), and returns true. It does not clear ActorAnimData ammo-slot 3D and does not spawn/detach a projectile.",
+  "comment_repeatable": "Authoritative MiddleHighProcess equipped-AMMO setter (vtable +0x10C). Destroys/frees the prior copied EntryData, stores the replacement pointer (NULL on final-shot depletion), and returns true. It does not clear ActorAnimData ammo-slot 3D and does not spawn/detach a projectile.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_64AED0",
+  "display_name": "MiddleHighProcess_SetEquippedAmmoData",
   "end_ea": "0x64AF10",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_64AED0",
+  "name": "MiddleHighProcess_SetEquippedAmmoData",
   "segment": ".text",
   "sha256": "a880f8a7b6db0b668c07acfca9a7e935372d510928aeca2882066120dc5f9337",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x64AED0",
+  "total_chunk_size": 64,
   "type": "char __fastcall(HighProcess *, int, EntryData *)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 2

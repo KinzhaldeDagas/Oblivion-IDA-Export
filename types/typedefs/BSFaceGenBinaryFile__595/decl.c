@@ -1,1 +1,1 @@
-BSFaceGenBinaryFile
+struct BSFaceGenBinaryFile;

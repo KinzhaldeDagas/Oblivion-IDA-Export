@@ -1,14 +1,7 @@
-void __thiscall sub_67B560(_DWORD *this)
+void __thiscall sub_67B560(TESPackage *this)
 {
-  size_t v3; // [esp-4h] [ebp-8h]
-  size_t v4; // [esp-4h] [ebp-8h]
-  size_t v5; // [esp-4h] [ebp-8h]
-
-  sub_567E00(this);
-  LODWORD(v3) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)(this + 0x10), v3);
-  LODWORD(v4) = 0xC;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)(this + 0x11), v4);
-  LODWORD(v5) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)(this + 0x14), v5);
+  TESPackage_SaveGame(this); /*0x67b563*/
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)this, (char *)this + 0x40, 4u); /*0x67b570*/
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)this, (char *)this + 0x44, 0xCu); /*0x67b57d*/
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)this, (char *)this + 0x50, 4u); /*0x67b58a*/
 }

@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x623A1F",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x623AA5",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x623AB2",
-    "line": "call    sub_521450",
+    "line": "call    TESIdleForm_FindIdleForActor; Idle root lookup for actor model path; rejects final candidate when ANAM high bit is set but model path is not .kf.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x623AC0",
-    "line": "call    sub_612DE0",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x623AE2",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+outScore]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -547,19 +547,19 @@
   },
   {
     "ea": "0x623AEC",
-    "line": "push    ecx",
+    "line": "push    ecx; allowYieldEvaluation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x623AED",
-    "line": "push    eax",
+    "line": "push    eax; skipFleeAndYieldEvaluation",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x623AEE",
-    "line": "push    edx",
+    "line": "push    edx; outScore",
     "mnemonic": "push",
     "size": 1
   },
@@ -571,31 +571,31 @@
   },
   {
     "ea": "0x623AF1",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x623AF6",
-    "line": "push    eax",
+    "line": "push    eax; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x623AF7",
-    "line": "push    0",
+    "line": "push    0; equippedEntry",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x623AF9",
-    "line": "push    edi",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x623AFA",
-    "line": "call    sub_621B40",
+    "line": "call    CombatSelection_EvaluateWeaponVsHandToHand; Six-argument cdecl combat-choice evaluator. skipFleeAndYieldEvaluation nonzero skips the entire flee/yield block; allowYieldEvaluation gates only the yield portion when that block runs. These are control flags, not allowYield/hasYieldIdle. Any additional throwing-weapon scoring multipliers are external emulation policy, not observed here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x623B1C",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -886,5 +886,185 @@
     "line": "jmp     short loc_623BB4",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x623B9C",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x623B9E",
+    "line": "jz      short loc_623BB4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x623BA0",
+    "line": "cmp     edi, 1",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x623BA3",
+    "line": "jz      short loc_623BB4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x623BA5",
+    "line": "cmp     edi, 3",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x623BA8",
+    "line": "jz      short loc_623BB4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x623BAA",
+    "line": "cmp     edi, 2",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x623BAD",
+    "line": "jz      short loc_623BB4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x623BAF",
+    "line": "cmp     edi, 4",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x623BB2",
+    "line": "jnz     short loc_623BDD",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x623BB4",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x623BB5",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x623BB7",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x623BBC",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x623BBE",
+    "line": "call    sub_61E8A0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x623BC3",
+    "line": "mov     ecx, esi; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x623BC5",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x623BCA",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x623BCB",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x623BCD",
+    "line": "fstp    [esp+14h+var_14]; float",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x623BD0",
+    "line": "call    sub_612EA0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x623BD5",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x623BD6",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x623BD8",
+    "line": "call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x623BDD",
+    "line": "mov     eax, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x623BDF",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x623BE0",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x623BE1",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x623BE2",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x623BE3",
+    "line": "retn    8",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

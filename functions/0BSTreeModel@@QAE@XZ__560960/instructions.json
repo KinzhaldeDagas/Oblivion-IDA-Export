@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x560960",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified current STBB layout view: BSTreeModel_OblivionLayout_058_STBBVerified refines model+0x1C to NiTriShape* billboardShape_STBB. This supersedes the earlier partial +0x1C NiStream view; the ctor initializes the shape pointer null.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x56098D",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x5609A1",
-    "line": "mov     dword ptr [esi], offset ??_7BSTreeModel@@6B@; const BSTreeModel::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7BSTreeModel@@6B@; Verified BSTreeModel runtime layout is 0x58 bytes in Oblivion. Fallout's same-named model has a smaller 0x50-byte structure; its seed/trunk length/trunk width fields are at +0x40/+0x48/+0x4C versus Oblivion +0x48/+0x50/+0x54.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -139,43 +139,43 @@
   },
   {
     "ea": "0x5609AB",
-    "line": "mov     [esi+10h], ebx",
+    "line": "mov     [esi+10h], ebx; Verified owning baseModel NiPointer at +0x10 starts null; InitAsInstance stores the base model here and the destructor releases it after the instance CSpeedTreeRT wrapper.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609AE",
-    "line": "mov     [esi+1Ch], ebx",
+    "line": "mov     [esi+1Ch], ebx; Verified: billboardShape_STBB NiTriShape smart pointer at BSTreeModel+0x1C starts null. CreateBillboardGeometry stores the `STBB` NiTriShape here; CreateArt passes it through BSTreeNode vtable +0xC0 to BSTreeNode_SetBillboard; ClearModel and instances release/clone it.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609B1",
-    "line": "mov     [esi+20h], ebx",
+    "line": "mov     [esi+20h], ebx; Verified leafShaderStreamData NiPointer at +0x20 starts null. CreateLeafGeometry fills it with OB_STLSPData and SpeedTreeLeafShaderProperty constructors consume it; instances share its reference.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609B4",
-    "line": "mov     [esi+34h], ebx",
+    "line": "mov     [esi+34h], ebx; Verified branchTexturingProperty at +0x34 starts null; ApplyBaseObject creates the branch texture property and CreateArt attaches it to the branch root.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609B7",
-    "line": "mov     [esi+38h], ebx",
+    "line": "mov     [esi+38h], ebx; Verified leafTexture at +0x38 starts null; ApplyBaseObject loads the TESObjectTREE leaf source texture here and assigns it to every leaf LOD shader property.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609BA",
-    "line": "mov     [esi+3Ch], ebx",
+    "line": "mov     [esi+3Ch], ebx; Verified billboardTexturingProperty at +0x3C starts null; ApplyBaseObject loads the tree billboard texture and assigns this property to the billboard geometry path.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609BD",
-    "line": "mov     [esi+40h], ebx",
+    "line": "mov     [esi+40h], ebx; Verified collisionShape NiPointer at +0x40 starts null; CreateGeometry builds a Havok capsule from trunkLength/trunkWidth and CreateArt passes it to BSTreeNode_ctor.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -187,25 +187,25 @@
   },
   {
     "ea": "0x5609C6",
-    "line": "mov     [esi+0Ch], ebx",
+    "line": "mov     [esi+0Ch], ebx; Verified BSTreeModel.speedTree at +0x0C starts null; BSTreeModel_InitFromBase allocates/loads the CSpeedTreeRT wrapper here, and the destructor releases it.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609C9",
-    "line": "mov     [esi+8], ebx",
+    "line": "mov     [esi+8], ebx; Verified BSTreeModel modelState enum values: constructor 0=uninitialized, InitFromBase sets 1=base model, and InitAsInstance sets 2=instance. Update and instance guards distinguish state 2.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609CC",
-    "line": "mov     [esi+14h], ebx",
+    "line": "mov     [esi+14h], ebx; Verified branchGeometryDataByLOD array pointer at +0x14 starts null and is allocated to branch LOD count by CreateBranchGeometry; CreateArt uses each entry to build a branch NiTriStrips node.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x5609CF",
-    "line": "mov     [esi+18h], ebx",
+    "line": "mov     [esi+18h], ebx; Verified leafGeometryDataByLOD array pointer at +0x18 starts null and is allocated to leaf LOD count by CreateLeafGeometry; CreateArt builds each leaf NiTriShape from those data entries.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -409,25 +409,25 @@
   },
   {
     "ea": "0x560A1B",
-    "line": "mov     [esi+24h], ebx",
+    "line": "mov     [esi+24h], ebx; Verified branchShaderPropertiesByLOD pointer array at +0x24 starts null, is allocated by CreateBranchGeometry, and is cloned per LOD when making a model instance.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560A1E",
-    "line": "mov     [esi+28h], ebx",
+    "line": "mov     [esi+28h], ebx; Verified leafShaderPropertiesByLOD pointer array at +0x28 starts null, is allocated by CreateLeafGeometry, and is cloned per LOD when making a model instance.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560A21",
-    "line": "mov     [esi+2Ch], ebx",
+    "line": "mov     [esi+2Ch], ebx; Verified branchCachedPropertiesByLOD array at +0x2C starts null; CreateArt caches branch child property ID 3 into its LOD slots for reuse.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560A24",
-    "line": "mov     [esi+30h], ebx",
+    "line": "mov     [esi+30h], ebx; Candidate role: leafCachedPropertiesByLOD array at +0x30 is initialized and copied/cleared like the other leaf LOD arrays; CreateArt consumes its entries as BSShaderProperty values when present, but no stock writer was found in this pass.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -727,25 +727,25 @@
   },
   {
     "ea": "0x560A8F",
-    "line": "mov     dword ptr [esi+48h], 1",
+    "line": "mov     dword ptr [esi+48h], 1; Verified BSTreeModel.seed at +0x48 defaults to 1; InitFromBase replaces it with CSpeedTreeRT_GetSeed after successful Compute.",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x560A96",
-    "line": "fst     dword ptr [esi+44h]",
+    "line": "fst     dword ptr [esi+44h]; Verified curveScalar at +0x44 defaults to 0 and ApplyBaseObject writes the validated forced/TESObjectTREE curve scalar here.",
     "mnemonic": "fst",
     "size": 3
   },
   {
     "ea": "0x560A99",
-    "line": "mov     [esi+4Ch], bl",
+    "line": "mov     [esi+4Ch], bl; Verified: BSTreeModel constructor initializes the byte at +0x4C to 0. Manager later sets it to 1 after the model's vtable CreateArt call; no stock read was found, so its semantic meaning remains Unknown.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x560A9C",
-    "line": "fst     dword ptr [esi+50h]",
+    "line": "fst     dword ptr [esi+50h]; Verified trunkLength at +0x50 and trunkWidth at +0x54 default to 0; successful InitFromBase fills them from CSpeedTreeRT_GetTrunkLength/GetTrunkWidth, and CreateGeometry uses them for the fallback Havok capsule.",
     "mnemonic": "fst",
     "size": 3
   },
@@ -814,5 +814,185 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BD000",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD003",
+    "line": "jmp     NiRefObject_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD008",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD00B",
+    "line": "add     ecx, 10h; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD00E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD013",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD016",
+    "line": "add     ecx, 1Ch; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD019",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD01E",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD021",
+    "line": "add     ecx, 20h ; ' '; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD024",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD029",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD02C",
+    "line": "add     ecx, 34h ; '4'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD02F",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD034",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD037",
+    "line": "add     ecx, 38h ; '8'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD03A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD03F",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD042",
+    "line": "add     ecx, 3Ch ; '<'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD045",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD04A",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD04D",
+    "line": "add     ecx, 40h ; '@'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD050",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD055",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BD059",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD05C",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BD05F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BD061",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD066",
+    "line": "mov     eax, offset stru_AE6ACC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BD06B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

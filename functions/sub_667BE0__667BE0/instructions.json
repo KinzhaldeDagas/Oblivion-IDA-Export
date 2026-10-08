@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x667BE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; PlayerCharacter GenerateNiNode override. Builds the first-person root at +0x5D0 from Characters\\\\_1stPerson\\\\Skeleton.NIF, constructs 0x154-byte ActorSkinInfo at +0x5C8 and 0xDC-byte ActorAnimData at +0x5CC, builds/picks its KF list, generates/configures the player NiNode through the base MobileObject path, and returns NiNode*. It does not call ActorAnimData_LoadKFFZSpecialAnims. Native ABI has no stack/x87 inputs.",
     "mnemonic": "push",
     "size": 2
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x667C34",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x667C36",
-    "line": "call    sub_6670C0",
+    "line": "call    Player_RecalculateAllRequiredSkillExperience; Recomputes required skill-use progress for all 21 native Oblivion skill actor values by calling Player_RecalculateRequiredSkillExperience.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x667C4D",
-    "line": "call    sub_439EB0",
+    "line": "call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x667D5B",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,25 +1003,25 @@
   },
   {
     "ea": "0x667E12",
-    "line": "push    ebx",
+    "line": "push    ebx; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x667E13",
-    "line": "push    ebp",
+    "line": "push    ebp; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x667E14",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x667E16",
-    "line": "call    sub_478730",
+    "line": "call    ActorSkinInfo_ctor; Construct PlayerCharacter first-person ActorSkinInfo (+0x5C8) with owner=player and the loaded first-person model root. Confirms ActorSkinInfo and ActorAnimData are distinct adjacent allocations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x667E51",
-    "line": "call    NewActorAnimData",
+    "line": "call    NewActorAnimData; Construct separate PlayerCharacter first-person ActorAnimData (+0x5CC), size 0xDC, immediately after the first-person ActorSkinInfo allocation at +0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x667E66",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x667E7A",
-    "line": "call    MobileObject_GenerateNiNode",
+    "line": "call    MobileObject_GenerateNiNode; MobileObject GenerateNiNode override. Calls TESObjectREFR_GenerateNiNode, forwards matching model extra data to the process when present, conditionally registers the result as a shadow caster, and returns NiNode*. Native ABI has no stack/x87 inputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x667E9A",
-    "line": "call    sub_435830",
+    "line": "call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x667EA8",
-    "line": "call    Menu_PickIdles??",
+    "line": "call    Menu_PickIdles; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,13 +1315,13 @@
   },
   {
     "ea": "0x667ECE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x667ED0",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1777,7 +1777,7 @@
   },
   {
     "ea": "0x667FC2",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1819,7 +1819,7 @@
   },
   {
     "ea": "0x667FD4",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x667FF9",
-    "line": "call    sub_57E270",
+    "line": "call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2026,5 +2026,137 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C3EB0",
+    "line": "mov     eax, [ebp-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3EB3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EB4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3EB9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EBA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EBB",
+    "line": "mov     eax, [ebp-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3EBE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EBF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3EC4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EC5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3EC6",
+    "line": "mov     eax, [ebp-68h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3EC9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3ECA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3ECF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3ED0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C3ED1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C3ED5",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3ED8",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C3EDB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C3EDD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3EE2",
+    "line": "mov     eax, offset stru_AEC9AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3EE7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

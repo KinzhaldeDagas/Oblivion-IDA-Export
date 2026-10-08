@@ -414,14 +414,8 @@
     "size": 1
   },
   {
-    "ea": "0x451B2D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x451B30",
-    "line": "mov     eax, [esi+250h]",
+    "line": "mov     eax, [esi+250h]; Oblivion TESFile_Open TES4-header dispatch recognizes only HEDR, MAST, SNAM, master DATA, and CNAM. There are no ONAM/INTV/INCC/OFST or DELE branches in this loop; unhandled header chunks fall through to TESFile_GetNextChunk.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x451B6A",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Each CNAM is read into stack storage with maxSize=0x200 then passed to BSStringT_Set(minLength=0). Lengths 1..512 need an embedded NUL; 0 is a no-op; >512 copies 511 bytes and forces NUL. Unterminated <=512-byte input makes C-string assignment dependent on adjacent stack bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +583,7 @@
   },
   {
     "ea": "0x451B95",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Each DATA occurrence allocates 8 bytes, performs TESFile_GetChunkData(maxSize=8), and appends to the separate masterlistSizeInfo list. It is not validated or paired with an immediately previous MAST. Short reads retain unknown heap suffix bytes; >8 copies 7 and forces byte 7 to zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +625,7 @@
   },
   {
     "ea": "0x451BB3",
-    "line": "call    __alloca?",
+    "line": "call    __alloca?; Each SNAM is read into stack storage with maxSize=0x200 then passed to BSStringT_Set(minLength=0) at 0x451BD0. Lengths 1..512 need an embedded NUL; 0 is a no-op; >512 copies 511 bytes and forces NUL. Unterminated <=512-byte input makes C-string assignment dependent on adjacent stack bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +655,7 @@
   },
   {
     "ea": "0x451BC2",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; TES4 SNAM follows the same 0x200 bounded stack-buffer read and C-string setter at 0x451BD0. For 1..512 bytes, determinism requires an embedded NUL; zero size is a no-op; >512 copies 511 then writes terminator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +703,7 @@
   },
   {
     "ea": "0x451BE1",
-    "line": "jz      short loc_451C1C",
+    "line": "jz      short loc_451C1C; Every HEDR occurrence bounded-reads into shared TESFile fields with maxSize=12. Zero is a no-op; short sizes overlay a prefix; >12 copies 11 bytes then zeroes byte 11. Later HEDR therefore replays over constructor/prior state; an exact final chunk replaces all 12 serialized bytes. Then nextFormID is clamped and its owner byte repacked from this->fileIndex at 0x451C36..0x451C59.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x451C00",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; MAST allocates currentChunk.length bytes, then TESFile_GetChunkData(maxSize=0) copies the full chunk without a terminator. The pointer is retained in masterList and later compared as a C string in TESFile_BuildLoadedMasterArray at 0x44FD08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,7 +835,7 @@
   },
   {
     "ea": "0x451C27",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; TES4 HEDR bounded 12-byte field read. Reader semantics: size 0 does not touch destination; short sizes overlay prefix only; size >12 copies 11 bytes plus forced zero at byte 11. Call is reached for each HEDR in stream order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -853,7 +847,7 @@
   },
   {
     "ea": "0x451C36",
-    "line": "ja      short loc_451C42",
+    "line": "ja      short loc_451C42; After each HEDR read, nextFormID is clamped to at least 0x800, then its high byte is repacked from fileIndex. Repeated HEDR chunks therefore replay over the same state, including this per-occurrence clamp.",
     "mnemonic": "ja",
     "size": 2
   },
@@ -907,7 +901,7 @@
   },
   {
     "ea": "0x451C61",
-    "line": "call    TESFile_GetNextChunk",
+    "line": "call    TESFile_GetNextChunk; After the TES4-header loop, the reader advances through TES4 group records to the first form and rewinds. Header chunks not matched earlier (including ONAM/INTV/INCC/OFST/DELE) were skipped rather than assigned startup metadata.",
     "mnemonic": "call",
     "size": 5
   },

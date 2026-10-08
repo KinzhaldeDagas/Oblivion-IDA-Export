@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8037D0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: ImageSpaceShaderList processing builds a temporary active shader list, binds each shader to the shared screen element, and ping-pongs source/destination targets.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x803800",
-    "line": "call    ImageSpaceShaderList__AssignScreenElements",
+    "line": "call    ImageSpaceShaderList__AssignScreenElements; MoonSugarEffect decode: creates native image-space screen quad as one 4-vertex NiScreenElements polygon. Coordinates are x=-1,y=1,w=2,h=-2 and UVs 0..1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x803898",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x803899",
-    "line": "call    sub_4EC910",
+    "line": "call    NiGeometry_SetShader; NiGeometry shader smart-pointer setter: releases the old BSShader, stores the new shader, and AddRefs it when the pointer changes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x8038DE",
-    "line": "call    BSTextureManager_GetDefaultRenderTarget",
+    "line": "call    BSTextureManager_GetDefaultRenderTarget; Oblivion default rendered-target acquisition. Resolves dimensions, D3D format, auxiliary value, and flags for the target type, then obtains a matching cached or newly created BSRenderedTexture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x8039C9",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8039CA",
-    "line": "call    sub_7C1EE0",
+    "line": "call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1204,5 +1204,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0970",
+    "line": "lea     ecx, [ebp-1Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0973",
+    "line": "jmp     j_??1?$NiTPointerList@PAVBSImageSpaceShader@@@@UAE@XZ; NiTPointerList<BSImageSpaceShader *>::~NiTPointerList<BSImageSpaceShader *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0978",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D097C",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D097F",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0982",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0984",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0989",
+    "line": "mov     eax, offset stru_AF925C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D098E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

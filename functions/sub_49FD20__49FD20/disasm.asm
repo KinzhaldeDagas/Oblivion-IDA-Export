@@ -1,4 +1,4 @@
-0x49FD20: push    ebx
+0x49FD20: push    ebx; Finds the controlled-block record whose palette-resolved target name exactly matches the supplied node name and returns that record's priority byte at +0x0D; returns zero when absent.
 0x49FD21: push    ebp
 0x49FD22: push    esi
 0x49FD23: push    edi
@@ -18,9 +18,9 @@
 0x49FD4B: add     eax, [edx+8]
 0x49FD4E: jmp     short loc_49FD52
 0x49FD50: xor     eax, eax
-0x49FD52: push    ebp; Str2
-0x49FD53: push    eax; Str1
-0x49FD54: call    __strcmp
+0x49FD52: push    ebp; right
+0x49FD53: push    eax; left
+0x49FD54: call    CRT_StricmpLocaleDispatch
 0x49FD59: add     esp, 8
 0x49FD5C: test    eax, eax
 0x49FD5E: jz      short loc_49FD74

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5FBB10",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Base Actor implementation of vtable slot +0x2CC PickUpReference. Performs the general world-reference pickup/inventory transaction; PlayerCharacter overrides the same slot at 0x660910 with equipped-AMMO merge handling.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5FBB73",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5FBB86",
-    "line": "mov     [esp+24h+var_8], ebx",
+    "line": "mov     dword ptr [esp+24h+forceWorn], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x5FBBE1",
-    "line": "mov     ebx, [esp+18h+var_8]",
+    "line": "mov     ebx, dword ptr [esp+18h+forceWorn]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x5FBBE7",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x5FBBED",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x5FBC0F",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FBC11",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,25 +577,25 @@
   },
   {
     "ea": "0x5FBC1E",
-    "line": "push    1",
+    "line": "push    1; useFactionOwnership",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FBC20",
-    "line": "push    esi",
+    "line": "push    esi; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBC21",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FBC23",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x5FBC3C",
-    "line": "mov     ecx, edi; this",
+    "line": "mov     ecx, edi; reference",
     "mnemonic": "mov",
     "size": 2
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x5FBC44",
-    "line": "call    TESObjectREFR_GetOwner",
+    "line": "call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5FBC49",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,19 +835,19 @@
   },
   {
     "ea": "0x5FBC92",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBC93",
-    "line": "lea     ecx, [edi+44h]",
+    "line": "lea     ecx, [edi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x5FBC96",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x5FBCB8",
-    "line": "mov     byte ptr [esp+1Ch+var_8], bl",
+    "line": "mov     [esp+1Ch+forceWorn], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x5FBCEC",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
@@ -1021,13 +1021,13 @@
   },
   {
     "ea": "0x5FBCF0",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FBCF2",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1075,13 +1075,13 @@
   },
   {
     "ea": "0x5FBD09",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FBD0B",
-    "line": "call    sub_60D020",
+    "line": "call    Shared_SetDwordAtOffset04; Identical-code-folded setter shared by unrelated engine classes: writes value to *(int *)(this+4) and returns value. In EntryData call sites, +0x04 is the canonical signed countDelta; shader/process vtable users give the same bytes unrelated meanings. Do not assign a globally EntryData-specific prototype.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x5FBD16",
-    "line": "mov     byte ptr [esp+18h+var_8], bl",
+    "line": "mov     [esp+18h+forceWorn], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x5FBD20",
-    "line": "mov     byte ptr [esp+18h+arg_8], 0",
+    "line": "mov     byte ptr [esp+18h+arg2], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x5FBD2F",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x5FBD3A",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,13 +1219,13 @@
   },
   {
     "ea": "0x5FBD50",
-    "line": "mov     ecx, [esp+18h+var_8]",
+    "line": "mov     ecx, dword ptr [esp+18h+forceWorn]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FBD54",
-    "line": "mov     edx, [esp+18h+arg_4]",
+    "line": "mov     edx, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1255,49 +1255,49 @@
   },
   {
     "ea": "0x5FBD5E",
-    "line": "mov     eax, [esp+18h+var_8]",
+    "line": "mov     eax, dword ptr [esp+18h+forceWorn]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FBD62",
-    "line": "mov     ecx, [esp+18h+arg_4]",
+    "line": "mov     ecx, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FBD66",
-    "line": "push    eax",
+    "line": "push    eax; forceWorn",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBD67",
-    "line": "push    0",
+    "line": "push    0; unusedArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5FBD69",
-    "line": "push    ecx",
+    "line": "push    ecx; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBD6A",
-    "line": "push    edi",
+    "line": "push    edi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBD6B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FBD6D",
-    "line": "call    sub_4DDC40",
+    "line": "call    TESObjectREFR_AddItemFromWorldReference; Actor world-pickup branch calls TESObjectREFR_AddItemFromWorldReference; it inserts the picked reference's base form and bypasses 0x48F7C0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1339,55 +1339,55 @@
   },
   {
     "ea": "0x5FBD7F",
-    "line": "mov     ecx, [esp+18h+var_8]",
+    "line": "mov     ecx, dword ptr [esp+18h+forceWorn]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FBD83",
-    "line": "mov     edx, [esp+18h+arg_8]",
+    "line": "mov     edx, [esp+18h+arg2]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FBD87",
-    "line": "mov     eax, [esp+18h+arg_4]",
+    "line": "mov     eax, [esp+18h+arg1]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5FBD8B",
-    "line": "push    ecx",
+    "line": "push    ecx; forceWorn",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBD8C",
-    "line": "push    edx",
+    "line": "push    edx; unusedArg",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBD8D",
-    "line": "push    eax",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBD8E",
-    "line": "push    edi",
+    "line": "push    edi; sourceRef",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBD8F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FBD91",
-    "line": "call    sub_4DDC40",
+    "line": "call    TESObjectREFR_AddItemFromWorldReference; Actor world-pickup branch calls TESObjectREFR_AddItemFromWorldReference with the live source reference; proxy AMMO remains the inserted base form.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x5FBDA9",
-    "line": "push    0",
+    "line": "push    0; quiverNode",
     "mnemonic": "push",
     "size": 2
   },
@@ -1447,19 +1447,19 @@
   },
   {
     "ea": "0x5FBDAF",
-    "line": "push    eax",
+    "line": "push    eax; animData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5FBDB0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5FBDB2",
-    "line": "call    sub_5F8300",
+    "line": "call    Actor_RefreshQuiverArrowVisibility; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1711,7 +1711,7 @@
   },
   {
     "ea": "0x5FBE27",
-    "line": "call    Actor_EquipItem",
+    "line": "call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x5FBE6F",
-    "line": "mov     byte ptr [esp+18h+arg_4], al",
+    "line": "mov     byte ptr [esp+18h+arg1], al",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x5FBE75",
-    "line": "mov     byte ptr [esp+18h+arg_4], 0",
+    "line": "mov     byte ptr [esp+18h+arg1], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1891,7 +1891,7 @@
   },
   {
     "ea": "0x5FBE7D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x5FBE85",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x5FBEAB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

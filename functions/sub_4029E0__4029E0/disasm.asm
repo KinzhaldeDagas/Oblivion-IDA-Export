@@ -1,4 +1,4 @@
-0x4029E0: sub     esp, 0Ch
+0x4029E0: sub     esp, 0Ch; Advances GameHour by TimeScale * elapsedSeconds / 3600; rolls GameDay, GameMonth, GameYear, and DaysPassed after 24-hour boundaries.
 0x4029E3: push    esi
 0x4029E4: mov     esi, ecx
 0x4029E6: mov     eax, [esi+14h]
@@ -27,7 +27,7 @@
 0x402A32: fld     dword ptr [ecx+24h]
 0x402A35: fstp    [esp+14h+var_4]
 0x402A39: fld     [esp+14h+arg_0]
-0x402A3D: call    Double_To_SInt32
+0x402A3D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x402A42: movsx   edx, al
 0x402A45: push    edx
 0x402A46: call    sub_47D2B0
@@ -36,7 +36,7 @@
 0x402A50: movzx   ebx, ax
 0x402A53: fld     [esp+14h+var_8]
 0x402A57: fsub    ds:dbl_A2F920
-0x402A5D: mov     ecx, TESDataHandler_g_PlayerRef
+0x402A5D: mov     ecx, dword ptr reference
 0x402A63: test    ecx, ecx
 0x402A65: fstp    [esp+14h+var_8]
 0x402A69: fld     [esp+14h+var_C]
@@ -48,7 +48,7 @@
 0x402A7C: test    al, al
 0x402A7E: fld1
 0x402A80: jz      short loc_402A8E
-0x402A82: mov     eax, TESDataHandler_g_PlayerRef
+0x402A82: mov     eax, dword ptr reference
 0x402A87: add     dword ptr [eax+6B0h], 1
 0x402A8E: mov     eax, [esi+10h]
 0x402A91: fld     dword ptr [eax+24h]

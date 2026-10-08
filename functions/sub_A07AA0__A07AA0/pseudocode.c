@@ -1,4 +1,4 @@
-BSStringT *sub_A07AA0()
+NiRTTI *sub_A07AA0()
 {
-  return sub_70E220((BSStringT *)dword_B3E7A0, "NiBoolTimelineInterpolator", (int)dword_B3E7E8);
+  return NiRTTI_Constructor(&stru_B3E7A0, "NiBoolTimelineInterpolator", &stru_B3E7E8); /*0xa07ab4*/
 }

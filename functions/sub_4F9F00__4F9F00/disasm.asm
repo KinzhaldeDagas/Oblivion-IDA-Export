@@ -1,4 +1,4 @@
-0x4F9F00: fldz
+0x4F9F00: fldz; Wrapper for ScriptEffectStart: calls ScriptRunner_RunEvent with start=1, finish=0, elapsedSeconds=0.0.
 0x4F9F02: mov     eax, [esp+a6]
 0x4F9F06: mov     edx, [esp+a5]
 0x4F9F0A: push    ecx
@@ -12,5 +12,5 @@
 0x4F9F18: push    ecx; a4
 0x4F9F19: call    ScriptRunner_GetSingleton
 0x4F9F1E: mov     ecx, eax; this
-0x4F9F20: call    Script_RunEvent??
+0x4F9F20: call    ScriptRunner_RunEvent
 0x4F9F25: retn    8

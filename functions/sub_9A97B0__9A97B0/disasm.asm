@@ -7,7 +7,7 @@
 0x9A97BC: xor     esi, esi
 0x9A97BE: or      edi, 0FFFFFFFFh
 0x9A97C1: cmp     ecx, 1
-0x9A97C4: mov     [esp+18h+var_4], esi
+0x9A97C4: mov     [esp+18h+value], esi
 0x9A97C8: mov     [esp+18h+var_8], ecx
 0x9A97CC: jbe     loc_9A98F9
 0x9A97D2: xor     eax, eax
@@ -34,7 +34,7 @@
 0x9A9808: mov     eax, [esp+1Ch+var_C]
 0x9A980C: mov     esi, [ebp+0]
 0x9A980F: test    esi, esi
-0x9A9811: mov     [esp+1Ch+var_4], esi
+0x9A9811: mov     [esp+1Ch+value], esi
 0x9A9815: jz      loc_9A98CB
 0x9A981B: lea     eax, [esi+4]
 0x9A981E: push    eax; lpAddend
@@ -48,21 +48,20 @@
 0x9A983D: jnb     loc_9A98CB
 0x9A9843: mov     ecx, [ebx+10h]
 0x9A9846: lea     edx, [ecx+edi*4]
-0x9A9849: push    edx
+0x9A9849: push    edx; value
 0x9A984A: lea     ebp, [ebx+0Ch]
-0x9A984D: push    eax
-0x9A984E: mov     ecx, ebp
-0x9A9850: call    sub_9A9670
-0x9A9855: lea     eax, [esp+1Ch+var_4]
-0x9A9859: push    eax
-0x9A985A: push    edi
-0x9A985B: mov     ecx, ebp
-0x9A985D: call    sub_9A9670
+0x9A984D: push    eax; index
+0x9A984E: mov     ecx, ebp; this
+0x9A9850: call    NiTArray_ConstantMapEntry_SetAt; Verified companion to SortByEnabled: array this is map+0C, base pointer this+4, end this+0A and live count this+0C. SetAt updates occupancy/end as needed and assigns the pointer with NiPointer decrement/destructor/increment behavior. The caller retains its current entry while exchanging two positions; model array order without executing native refcounts under metadata gates.
+0x9A9855: lea     eax, [esp+1Ch+value]
+0x9A9859: push    eax; value
+0x9A985A: push    edi; index
+0x9A985B: mov     ecx, ebp; this
+0x9A985D: call    NiTArray_ConstantMapEntry_SetAt; Verified companion to SortByEnabled: array this is map+0C, base pointer this+4, end this+0A and live count this+0C. SetAt updates occupancy/end as needed and assigns the pointer with NiPointer decrement/destructor/increment behavior. The caller retains its current entry while exchanging two positions; model array order without executing native refcounts under metadata gates.
 0x9A9862: add     edi, 1
 0x9A9865: cmp     edi, [esp+1Ch+var_8]
 0x9A9869: jnb     short loc_9A98E0
 0x9A986B: jmp     short loc_9A9870
-0x9A986D: align 10h
 0x9A9870: mov     ecx, [ebx+10h]
 0x9A9873: cmp     esi, [ecx+edi*4]
 0x9A9876: lea     ebp, [ecx+edi*4]
@@ -79,7 +78,7 @@
 0x9A9891: call    edx
 0x9A9893: mov     esi, [ebp+0]
 0x9A9896: test    esi, esi
-0x9A9898: mov     [esp+1Ch+var_4], esi
+0x9A9898: mov     [esp+1Ch+value], esi
 0x9A989C: jz      short loc_9A98A8
 0x9A989E: lea     eax, [esi+4]
 0x9A98A1: push    eax; lpAddend

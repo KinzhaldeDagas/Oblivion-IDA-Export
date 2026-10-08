@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x428E70",
-    "line": "xor     al, al",
+    "line": "xor     al, al; Verified runtime lock predicate: returns (ExtraLockData.flags & 0x01) != 0. ExtraDataList_Load sets this bit on accepted 12-byte and legacy 16-byte XLOC payloads; serialized flag bits are then preserved. This is a runtime normalization step.",
     "mnemonic": "xor",
     "size": 2
   },

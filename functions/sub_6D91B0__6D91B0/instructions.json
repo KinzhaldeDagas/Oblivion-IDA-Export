@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x6D91C8",
-    "line": "fstp    [esp+84h+var_84]; float",
+    "line": "fstp    [esp+84h+applicationTime]; applicationTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6D91CB",
-    "line": "call    sub_6C36B0",
+    "line": "call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x6D920B",
-    "line": "call    sub_6BB270",
+    "line": "call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x6D9229",
-    "line": "fstp    [esp+0A0h+var_8C]; float",
+    "line": "fstp    [esp+0A0h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -265,49 +265,49 @@
   },
   {
     "ea": "0x6D9232",
-    "line": "lea     ecx, [esp+8Ch+var_48]",
+    "line": "lea     ecx, [esp+8Ch+right]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6D9236",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6D923B",
-    "line": "lea     eax, [esp+88h+var_48]",
+    "line": "lea     eax, [esp+88h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6D923F",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6D9240",
-    "line": "lea     ecx, [esp+8Ch+var_24]",
+    "line": "lea     ecx, [esp+8Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6D9244",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6D9245",
-    "line": "lea     ecx, [esp+90h+var_6C]",
+    "line": "lea     ecx, [esp+90h+var_6C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6D9249",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },

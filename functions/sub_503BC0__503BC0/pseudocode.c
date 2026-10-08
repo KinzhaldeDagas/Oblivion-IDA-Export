@@ -13,25 +13,25 @@ bool __cdecl sub_503BC0(
   int v10; // ecx
   UInt16 v11[2]; // [esp+0h] [ebp-4h] BYREF
 
-  *(_DWORD *)v11 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v11);
-  if ( result )
+  *(_DWORD *)v11 = 0; /*0x503bea*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v11); /*0x503bf2*/
+  if ( result ) /*0x503bfc*/
   {
-    if ( a4 )
+    if ( a4 ) /*0x503c03*/
     {
-      v9 = (_DWORD **)OblivionDynamicCast(
+      v9 = (_DWORD **)OblivionDynamicCast( /*0x503c14*/
                         a4,
                         0,
                         (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                         &Actor `RTTI Type Descriptor',
                         0);
-      if ( v9 )
+      if ( v9 ) /*0x503c1e*/
       {
-        LOBYTE(v10) = *(_DWORD *)v11 > 0;
-        Actor_SetAlerted(v9, v10);
+        LOBYTE(v10) = *(_DWORD *)v11 > 0; /*0x503c25*/
+        Actor_SetAlerted(v9, v10); /*0x503c2b*/
       }
     }
-    return 1;
+    return 1; /*0x503c30*/
   }
-  return result;
+  return result; /*0x503c00*/
 }

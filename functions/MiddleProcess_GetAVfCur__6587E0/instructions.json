@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6587E5",
-    "line": "mov     edi, [esp+10h+arg_4]",
+    "line": "mov     edi, [esp+10h+actorValue]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x6587EB",
-    "line": "push    edi",
+    "line": "push    edi; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6587EC",
-    "line": "lea     ecx, [esi+94h]",
+    "line": "lea     ecx, [esi+94h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x658813",
-    "line": "fstp    [esp+8+arg_4]",
+    "line": "fstp    [esp+8+actorValue]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x658817",
-    "line": "fld     [esp+8+arg_4]",
+    "line": "fld     [esp+8+actorValue]",
     "mnemonic": "fld",
     "size": 4
   },

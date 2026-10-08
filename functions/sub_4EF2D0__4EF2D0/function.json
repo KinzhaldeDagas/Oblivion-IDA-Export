@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x4EF2D0",
+      "0x4EF2E3"
+    ]
+  ],
+  "chunks_sha256": "58f8782e01f78a6348b6a1323feff308d50cae1705d7e7d2bacd26f9783f99d2",
+  "comment_regular": "Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
+  "comment_repeatable": "Verified .cmp mode-mask bit meanings from Oblivion consumers: 0x1 enables the tree channel (DistantLOD_UpdateExteriorGrid pairs this with bDisplayLODTrees); 0x2 enables the building/object channel (paired with bDisplayLODBuildings and CellsWithLODObjects); 0x4 enables the LandLOD channel (DistantLOD_UpdateLandLODMap). Default mask 0x7 enables all three.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EF2D0",
+  "display_name": "TESWorldSpace_IsDistantLODModeEnabled",
   "end_ea": "0x4EF2E3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EF2D0",
+  "name": "TESWorldSpace_IsDistantLODModeEnabled",
   "segment": ".text",
   "sha256": "58f8782e01f78a6348b6a1323feff308d50cae1705d7e7d2bacd26f9783f99d2",
   "size": 19,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EF2D0",
-  "type": "BOOL __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 19,
+  "type": "bool __thiscall(TESWorldSpace *this, unsigned int modeBit)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 9
 }

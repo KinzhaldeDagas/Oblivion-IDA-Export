@@ -1,1 +1,1 @@
-PCInterfaceName
+typedef const char *PCInterfaceName;

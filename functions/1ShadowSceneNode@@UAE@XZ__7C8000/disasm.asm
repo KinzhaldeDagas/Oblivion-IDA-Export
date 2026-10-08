@@ -1,4 +1,4 @@
-0x7C8000: push    0FFFFFFFFh
+0x7C8000: push    0FFFFFFFFh; ShadowSceneNode destructor. Clears registration and tears down owned light lists, persistent lights, target, cube camera, and helper state.
 0x7C8002: push    offset ??1ShadowSceneNode@@UAE@XZ_SEH
 0x7C8007: mov     eax, large fs:0
 0x7C800D: push    eax
@@ -29,7 +29,7 @@
 0x7C8058: call    sub_7B4270
 0x7C805D: add     esp, 8
 0x7C8060: mov     ecx, esi
-0x7C8062: call    sub_7C7E50
+0x7C8062: call    ShadowSceneNode_TeardownLightLists; Remove full-list lights, free list nodes, reset partition anchors, and reset the active list.
 0x7C8067: mov     edi, [esi+110h]
 0x7C806D: cmp     edi, ebx
 0x7C806F: mov     ebp, ds:0A2807Ch
@@ -74,8 +74,8 @@
 0x7C80D5: cmp     eax, ebx
 0x7C80D7: jz      short loc_7C80E5
 0x7C80D9: mov     ecx, ds:0B42F50h; this
-0x7C80DF: push    eax; a2
-0x7C80E0: call    sub_7C1EE0
+0x7C80DF: push    eax; texture
+0x7C80E0: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
 0x7C80E5: mov     edi, [esi+120h]
 0x7C80EB: cmp     edi, ebx
 0x7C80ED: jz      short loc_7C810D
@@ -206,3 +206,33 @@
 0x7C8235: pop     ebx
 0x7C8236: add     esp, 10h
 0x7C8239: retn
+0x9CE880: mov     ecx, [ebp-10h]; this
+0x9CE883: jmp     ??1NiBSPNode@@UAE@XZ; NiBSPNode::~NiBSPNode(void)
+0x9CE888: mov     ecx, [ebp-10h]
+0x9CE88B: add     ecx, 0DCh ; 'Ü'; slot
+0x9CE891: jmp     NiPointerSlot_Release
+0x9CE896: mov     ecx, [ebp-10h]
+0x9CE899: add     ecx, 0E4h ; 'ä'
+0x9CE89F: jmp     j_??1?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@UAE@XZ; NiTPointerList<NiPointer<ShadowSceneLight>>::~NiTPointerList<NiPointer<ShadowSceneLight>>(void)
+0x9CE8A4: mov     ecx, [ebp-10h]
+0x9CE8A7: add     ecx, 0F4h ; 'ô'
+0x9CE8AD: jmp     j_??1?$NiTPointerList@V?$NiPointer@VShadowSceneLight@@@@@@UAE@XZ; NiTPointerList<NiPointer<ShadowSceneLight>>::~NiTPointerList<NiPointer<ShadowSceneLight>>(void)
+0x9CE8B2: mov     ecx, [ebp-10h]
+0x9CE8B5: add     ecx, 110h; slot
+0x9CE8BB: jmp     NiPointerSlot_Release
+0x9CE8C0: mov     ecx, [ebp-10h]
+0x9CE8C3: add     ecx, 114h; slot
+0x9CE8C9: jmp     NiPointerSlot_Release
+0x9CE8CE: mov     ecx, [ebp-10h]
+0x9CE8D1: add     ecx, 120h; slot
+0x9CE8D7: jmp     NiPointerSlot_Release
+0x9CE8DC: mov     ecx, [ebp-10h]
+0x9CE8DF: add     ecx, 124h; slot
+0x9CE8E5: jmp     NiPointerSlot_Release
+0x9CE8EA: mov     edx, [esp+arg_4]
+0x9CE8EE: lea     eax, [edx-14h]
+0x9CE8F1: mov     ecx, [edx-18h]
+0x9CE8F4: xor     ecx, eax
+0x9CE8F6: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CE8FB: mov     eax, offset stru_AF77E0
+0x9CE900: jmp     ___CxxFrameHandler3

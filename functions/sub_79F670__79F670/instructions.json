@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79F670",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; OBLIVION AUTHORITY (2026-08-30): push_back for vector<vector<float>>. Deep-copy-constructs an inner vector directly when capacity exists; otherwise delegates to checked insert-one. Boundary corrected through ret 4 at 0x79F6F1.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,13 +115,13 @@
   },
   {
     "ea": "0x79F69A",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79F69E",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x79F6A5",
-    "line": "mov     byte ptr [esp+10h+var_8], 0",
+    "line": "mov     byte ptr [esp+10h+result.owner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79F6AA",
-    "line": "mov     eax, [esp+10h+var_8]",
+    "line": "mov     eax, [esp+10h+result.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,25 +163,25 @@
   },
   {
     "ea": "0x79F6B1",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F6B2",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79F6B4",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F6B5",
-    "line": "call    sub_79BF40",
+    "line": "call    OB_stVector_stVectorFloat_UninitializedFillN_010201A0; OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized_fill_n for vector<float> elements of vector<vector<float>>. Deep-copy-constructs each inner vector and destroys only the constructed prefix on unwind. Its normal return at 0x79BFD0 proves the prior noreturn annotation false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,50 +253,74 @@
   },
   {
     "ea": "0x79F6D7",
-    "line": "mov     eax, [esp+10h+arg_0]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79F6DB",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F6DC",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F6DD",
-    "line": "push    esi",
+    "line": "push    esi; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F6DE",
-    "line": "lea     ecx, [esp+1Ch+var_8]",
+    "line": "lea     ecx, [esp+1Ch+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79F6E2",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F6E3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79F6E5",
-    "line": "call    sub_79F150",
+    "line": "call    OB_stVector_stVectorFloat_InsertOne_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked-iterator insert-one wrapper for vector<vector<float>>. Validates owner/position, calls insert-fill(count=1), relocates the inserted element after possible reallocation, and returns {owner,current}. Boundary corrected through ret 0x10 at 0x79F1DA.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x79F6EA",
+    "line": "pop     edi; Recovered normal epilogue after the former false noreturn insert wrapper; restores registers and returns with ret 4.",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79F6EB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79F6EC",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x79F6EF",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

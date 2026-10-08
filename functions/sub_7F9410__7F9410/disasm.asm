@@ -1,4 +1,4 @@
-0x7F9410: push    0FFFFFFFFh
+0x7F9410: push    0FFFFFFFFh; ABI: void __thiscall(batchScratch in ECX, renderPassList on stack, shaderIndex on stack); single epilogue uses retn 8. The only Oblivion caller is 0x7AE6DD and ignores EAX.
 0x7F9412: push    offset SEH_7F9410
 0x7F9417: mov     eax, large fs:0
 0x7F941D: push    eax
@@ -13,8 +13,8 @@
 0x7F942D: lea     eax, [esp+98h+var_C]
 0x7F9434: mov     large fs:0, eax
 0x7F943A: mov     [esp+98h+var_78], ecx
-0x7F943E: mov     eax, ds:0B3F928h
-0x7F9443: mov     ecx, [esp+98h+arg_0]
+0x7F943E: mov     eax, ds:0B3F928h; Loads the authoritative NiDX9Renderer pointer from global 0xB3F928 and saves it in var_64. The valid reset later reads its IDirect3DDevice9 at renderer+0x280.
+0x7F9443: mov     ecx, [esp+98h+renderPassList]
 0x7F944A: mov     [esp+98h+var_64], eax
 0x7F944E: mov     eax, [ecx+4]
 0x7F9451: mov     esi, [eax]
@@ -22,15 +22,15 @@
 0x7F9456: mov     ecx, [ecx]
 0x7F9458: mov     ebx, [ecx]
 0x7F945A: mov     edx, [ebx+0B4h]
-0x7F9460: lea     eax, [esp+98h+var_68]
-0x7F9464: mov     [esp+98h+var_74], ecx
-0x7F9468: push    eax
-0x7F9469: mov     ecx, ebx
+0x7F9460: lea     eax, [esp+98h+output]
+0x7F9464: mov     [esp+98h+renderEntry], ecx
+0x7F9468: push    eax; output
+0x7F9469: mov     ecx, ebx; this
 0x7F946B: mov     [esp+9Ch+var_84], esi
 0x7F946F: mov     [esp+9Ch+var_7C], edx
-0x7F9473: call    sub_405760
+0x7F9473: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F9478: mov     edi, [eax]
-0x7F947A: mov     eax, [esp+98h+var_68]
+0x7F947A: mov     eax, [esp+98h+output]
 0x7F947E: test    eax, eax
 0x7F9480: mov     [esp+98h+var_80], edi
 0x7F9484: jz      short loc_7F94A5
@@ -58,8 +58,8 @@
 0x7F94C7: push    8
 0x7F94C9: push    0
 0x7F94CB: push    eax
-0x7F94CC: mov     [esp+0A8h+var_70], edi
-0x7F94D0: call    edx
+0x7F94CC: mov     [esp+0A8h+lightingProperty], edi
+0x7F94D0: call    edx; Direct sampler0 D3DSAMP_MIPMAPLODBIAS write from fLODTreeMipMapLODBias. This precedes both the valid draw route and the empty/no-eligible scan route.
 0x7F94D2: mov     eax, [edi+9Ch]
 0x7F94D8: movzx   eax, word ptr [eax+0Eh]
 0x7F94DC: xor     edi, edi
@@ -70,8 +70,8 @@
 0x7F94EF: lea     edi, [esp+98h+var_40]
 0x7F94F3: rep movsd
 0x7F94F5: mov     edx, [ebx+20h]
-0x7F94F8: mov     esi, [esp+98h+arg_4]
-0x7F94FF: mov     edi, [esp+98h+var_74]
+0x7F94F8: mov     esi, [esp+98h+shaderIndex]
+0x7F94FF: mov     edi, [esp+98h+renderEntry]
 0x7F9503: mov     [esp+98h+var_50], edx
 0x7F9507: mov     eax, [ebx+24h]
 0x7F950A: mov     [esp+98h+var_4C], eax
@@ -83,15 +83,15 @@
 0x7F951F: mov     [esp+98h+var_5C], eax
 0x7F9523: mov     ds:0B42E90h, eax
 0x7F9528: mov     ds:0B42EB8h, edi
-0x7F952E: call    sub_7ECB20
-0x7F9533: mov     eax, [esp+98h+var_70]
-0x7F9537: push    0
-0x7F9539: push    eax
-0x7F953A: push    edi
-0x7F953B: push    esi
+0x7F952E: call    OB_BSShader_ResetLightConstantSlots_010201A0; Oblivion Lighting30 light-bank reset: clears eight diffuse/color slots to (0,0,0,1) and eight source/data slots to (0.001,0,0,0); it does not clear ambient c5.
+0x7F9533: mov     eax, [esp+98h+lightingProperty]
+0x7F9537: push    0; previousRenderEntry
+0x7F9539: push    eax; lightingProperty
+0x7F953A: push    edi; renderEntry
+0x7F953B: push    esi; shaderIndex
 0x7F953C: mov     esi, [esp+0A8h+var_78]
 0x7F9540: mov     ecx, esi
-0x7F9542: call    sub_7F60F0
+0x7F9542: call    OB_BSShader_RebuildRenderEntryLightConstants_010201A0
 0x7F9547: push    ebx
 0x7F9548: mov     ecx, esi
 0x7F954A: call    sub_7F6A30
@@ -121,13 +121,13 @@
 0x7F9591: test    eax, eax
 0x7F9593: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x7F959E: jz      short loc_7F95C2
-0x7F95A0: mov     [esp+98h+var_70], eax
+0x7F95A0: mov     [esp+98h+lightingProperty], eax
 0x7F95A4: add     eax, 4
 0x7F95A7: push    eax; lpAddend
 0x7F95A8: call    dword ptr ds:0A2807Ch
 0x7F95AE: test    eax, eax
 0x7F95B0: jnz     short loc_7F95C2
-0x7F95B2: mov     ecx, [esp+98h+var_70]
+0x7F95B2: mov     ecx, [esp+98h+lightingProperty]
 0x7F95B6: test    ecx, ecx
 0x7F95B8: jz      short loc_7F95C2
 0x7F95BA: mov     eax, [ecx]
@@ -157,13 +157,13 @@
 0x7F95F9: test    eax, eax
 0x7F95FB: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x7F9606: jz      short loc_7F962A
-0x7F9608: mov     [esp+98h+var_70], eax
+0x7F9608: mov     [esp+98h+lightingProperty], eax
 0x7F960C: add     eax, 4
 0x7F960F: push    eax; lpAddend
 0x7F9610: call    dword ptr ds:0A2807Ch
 0x7F9616: test    eax, eax
 0x7F9618: jnz     short loc_7F962A
-0x7F961A: mov     ecx, [esp+98h+var_70]
+0x7F961A: mov     ecx, [esp+98h+lightingProperty]
 0x7F961E: test    ecx, ecx
 0x7F9620: jz      short loc_7F962A
 0x7F9622: mov     eax, [ecx]
@@ -175,7 +175,7 @@
 0x7F9630: mov     ecx, ebp
 0x7F9632: call    edx
 0x7F9634: mov     eax, [ebp+3Ch]
-0x7F9637: lea     ecx, [esp+98h+var_70]
+0x7F9637: lea     ecx, [esp+98h+lightingProperty]
 0x7F963B: push    ecx
 0x7F963C: mov     ecx, ebx
 0x7F963E: mov     [esp+9Ch+var_6C], eax
@@ -195,24 +195,24 @@
 0x7F965F: mov     ecx, ebp
 0x7F9661: mov     [esp+0B4h+var_4], 2
 0x7F966C: call    edx
-0x7F966E: mov     eax, [esp+98h+var_70]
+0x7F966E: mov     eax, [esp+98h+lightingProperty]
 0x7F9672: test    eax, eax
 0x7F9674: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x7F967F: jz      short loc_7F96A3
-0x7F9681: mov     [esp+98h+var_74], eax
+0x7F9681: mov     [esp+98h+renderEntry], eax
 0x7F9685: add     eax, 4
 0x7F9688: push    eax; lpAddend
 0x7F9689: call    dword ptr ds:0A2807Ch
 0x7F968F: test    eax, eax
 0x7F9691: jnz     short loc_7F96A3
-0x7F9693: mov     ecx, [esp+98h+var_74]
+0x7F9693: mov     ecx, [esp+98h+renderEntry]
 0x7F9697: test    ecx, ecx
 0x7F9699: jz      short loc_7F96A3
 0x7F969B: mov     eax, [ecx]
 0x7F969D: mov     edx, [eax]
 0x7F969F: push    1
 0x7F96A1: call    edx
-0x7F96A3: lea     eax, [esp+98h+var_70]
+0x7F96A3: lea     eax, [esp+98h+lightingProperty]
 0x7F96A7: push    eax
 0x7F96A8: mov     ecx, ebx
 0x7F96AA: call    sub_7016D0
@@ -232,17 +232,17 @@
 0x7F96C9: mov     ecx, ebp
 0x7F96CB: mov     [esp+0B8h+var_4], 3
 0x7F96D6: call    edx
-0x7F96D8: mov     eax, [esp+98h+var_70]
+0x7F96D8: mov     eax, [esp+98h+lightingProperty]
 0x7F96DC: test    eax, eax
 0x7F96DE: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x7F96E9: jz      short loc_7F970D
-0x7F96EB: mov     [esp+98h+var_74], eax
+0x7F96EB: mov     [esp+98h+renderEntry], eax
 0x7F96EF: add     eax, 4
 0x7F96F2: push    eax; lpAddend
 0x7F96F3: call    dword ptr ds:0A2807Ch
 0x7F96F9: test    eax, eax
 0x7F96FB: jnz     short loc_7F970D
-0x7F96FD: mov     ecx, [esp+98h+var_74]
+0x7F96FD: mov     ecx, [esp+98h+renderEntry]
 0x7F9701: test    ecx, ecx
 0x7F9703: jz      short loc_7F970D
 0x7F9705: mov     eax, [ecx]
@@ -257,7 +257,7 @@
 0x7F9717: push    ebx
 0x7F9718: mov     ecx, ebp
 0x7F971A: call    edx
-0x7F971C: lea     eax, [esp+98h+var_70]
+0x7F971C: lea     eax, [esp+98h+lightingProperty]
 0x7F9720: push    eax
 0x7F9721: mov     ecx, ebx
 0x7F9723: call    sub_7016D0
@@ -277,7 +277,7 @@
 0x7F9742: mov     ecx, ebp
 0x7F9744: mov     [esp+0B8h+var_4], 4
 0x7F974F: call    edx
-0x7F9751: mov     eax, [esp+98h+var_70]
+0x7F9751: mov     eax, [esp+98h+lightingProperty]
 0x7F9755: test    eax, eax
 0x7F9757: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x7F9762: jz      short loc_7F9782
@@ -303,7 +303,7 @@
 0x7F9795: mov     ecx, ds:0B28CB0h
 0x7F979B: mov     eax, [esp+98h+var_7C]
 0x7F979F: lea     edx, ds:0[ecx*4]
-0x7F97A6: mov     [esp+98h+var_68], eax
+0x7F97A6: mov     [esp+98h+output], eax
 0x7F97AA: mov     eax, [esp+98h+var_78]
 0x7F97AE: mov     ecx, [eax]
 0x7F97B0: push    edx
@@ -315,22 +315,21 @@
 0x7F97C0: test    eax, eax
 0x7F97C2: jz      loc_7F9ACB
 0x7F97C8: jmp     loc_7F9874
-0x7F97CD: align 10h
 0x7F97D0: mov     esi, [esp+98h+var_84]
 0x7F97D4: cmp     esi, edi
-0x7F97D6: jz      short loc_7F984D
+0x7F97D6: jz      short loc_7F984D; If no queued geometry has the required property/pass word, this scan exhausts the list and takes the cleanup-only exit below. That exit does not reset the bias written at 0x7F94D0.
 0x7F97D8: mov     ecx, [esi]
 0x7F97DA: lea     eax, [esi+8]
 0x7F97DD: mov     eax, [eax]
 0x7F97DF: mov     ebx, [eax]
 0x7F97E1: mov     edx, [ebx+0B4h]
-0x7F97E7: mov     [esp+98h+var_74], eax
+0x7F97E7: mov     [esp+98h+renderEntry], eax
 0x7F97EB: lea     eax, [esp+98h+var_60]
 0x7F97EF: mov     [esp+98h+var_84], ecx
-0x7F97F3: push    eax
-0x7F97F4: mov     ecx, ebx
+0x7F97F3: push    eax; output
+0x7F97F4: mov     ecx, ebx; this
 0x7F97F6: mov     [esp+9Ch+var_7C], edx
-0x7F97FA: call    sub_405760
+0x7F97FA: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F97FF: mov     esi, [eax]
 0x7F9801: mov     eax, [esp+98h+var_60]
 0x7F9805: cmp     eax, edi
@@ -351,47 +350,46 @@
 0x7F982A: call    eax
 0x7F982C: mov     eax, [esi+18h]
 0x7F982F: mov     ebp, [ebx+0BCh]
-0x7F9835: mov     [esp+98h+var_70], eax
+0x7F9835: mov     [esp+98h+lightingProperty], eax
 0x7F9839: mov     eax, [eax+9Ch]
 0x7F983F: movzx   eax, word ptr [eax+0Eh]
 0x7F9843: cmp     ax, di
 0x7F9846: jz      short loc_7F97D0
 0x7F9848: jmp     loc_7F94E7
-0x7F984D: mov     esi, [esp+98h+arg_0]
-0x7F9854: mov     ecx, esi
-0x7F9856: call    sub_7A9C30
+0x7F984D: mov     esi, [esp+98h+renderPassList]
+0x7F9854: mov     ecx, esi; this
+0x7F9856: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Unbalanced empty/no-eligible-geometry exit: clears/moves the list and returns without a direct MIPMAPLODBIAS reset. The nonzero bias can leak into later draws, including leaves, because the leaf stage/cache never writes sampler state 8.
 0x7F985B: mov     ecx, [esi+4]
 0x7F985E: mov     [esi+0Ch], ecx
 0x7F9861: mov     [esi+4], edi
 0x7F9864: mov     [esi+8], edi
 0x7F9867: mov     [esi+10h], edi
-0x7F986A: jmp     loc_7F9B1E
-0x7F986F: align 10h
+0x7F986A: jmp     loc_7F9B1E; Empty/no-eligible cleanup jumps directly to 0x7F9B1E. CFG verification: this is the sole predecessor that bypasses the reset block; bytes E9 AF 02 00 00.
 0x7F9870: mov     eax, [esp+98h+var_84]
 0x7F9874: mov     edx, [eax]
 0x7F9876: lea     ecx, [eax+8]
 0x7F9879: mov     eax, [ecx]
 0x7F987B: mov     ebx, [eax]
 0x7F987D: mov     edi, [ebx+0B4h]
-0x7F9883: mov     [esp+98h+var_74], eax
+0x7F9883: mov     [esp+98h+renderEntry], eax
 0x7F9887: lea     eax, [esp+98h+var_60]
-0x7F988B: push    eax
-0x7F988C: mov     ecx, ebx
+0x7F988B: push    eax; output
+0x7F988C: mov     ecx, ebx; this
 0x7F988E: mov     [esp+9Ch+var_84], edx
 0x7F9892: mov     [esp+9Ch+var_7C], edi
-0x7F9896: call    sub_405760
+0x7F9896: call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.
 0x7F989B: mov     ecx, [eax]
 0x7F989D: mov     eax, [esp+98h+var_60]
 0x7F98A1: test    eax, eax
 0x7F98A3: mov     [esp+98h+var_80], ecx
 0x7F98A7: jz      short loc_7F98CB
-0x7F98A9: mov     [esp+98h+var_70], eax
+0x7F98A9: mov     [esp+98h+lightingProperty], eax
 0x7F98AD: add     eax, 4
 0x7F98B0: push    eax; lpAddend
 0x7F98B1: call    dword ptr ds:0A2807Ch
 0x7F98B7: test    eax, eax
 0x7F98B9: jnz     short loc_7F98CB
-0x7F98BB: mov     ecx, [esp+98h+var_70]
+0x7F98BB: mov     ecx, [esp+98h+lightingProperty]
 0x7F98BF: test    ecx, ecx
 0x7F98C1: jz      short loc_7F98CB
 0x7F98C3: mov     edx, [ecx]
@@ -403,11 +401,11 @@
 0x7F98D2: mov     ecx, [eax+9Ch]
 0x7F98D8: movzx   ecx, word ptr [ecx+0Eh]
 0x7F98DC: test    cx, cx
-0x7F98DF: mov     [esp+98h+var_70], eax
+0x7F98DF: mov     [esp+98h+lightingProperty], eax
 0x7F98E3: jbe     loc_7F9AC0
-0x7F98E9: cmp     [esp+98h+var_68], edi
+0x7F98E9: cmp     [esp+98h+output], edi
 0x7F98ED: mov     edx, [esp+98h+var_5C]
-0x7F98F1: mov     ecx, [esp+98h+var_74]
+0x7F98F1: mov     ecx, [esp+98h+renderEntry]
 0x7F98F5: mov     ds:0B42E90h, edx
 0x7F98FB: mov     ds:0B42EB8h, ecx
 0x7F9901: jz      loc_7F9A58
@@ -423,7 +421,7 @@
 0x7F9925: mov     [esp+98h+var_50], eax
 0x7F9929: mov     ecx, [ebx+24h]
 0x7F992C: mov     [esp+98h+var_4C], ecx
-0x7F9930: mov     [esp+98h+var_70], edx
+0x7F9930: mov     [esp+98h+lightingProperty], edx
 0x7F9934: mov     edx, [ebx+28h]
 0x7F9937: lea     ecx, [esp+98h+var_58]
 0x7F993B: mov     [esp+98h+var_48], edx
@@ -434,7 +432,7 @@
 0x7F9949: call    sub_7016D0
 0x7F994E: mov     eax, [eax]
 0x7F9950: mov     edi, [esp+98h+var_80]
-0x7F9954: mov     esi, [esp+98h+var_70]
+0x7F9954: mov     esi, [esp+98h+lightingProperty]
 0x7F9958: mov     edx, [ebp+0]
 0x7F995B: mov     edx, [edx+2Ch]
 0x7F995E: lea     ecx, [esp+98h+var_50]
@@ -453,13 +451,13 @@
 0x7F9981: test    eax, eax
 0x7F9983: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x7F998E: jz      short loc_7F99B2
-0x7F9990: mov     [esp+98h+var_68], eax
+0x7F9990: mov     [esp+98h+output], eax
 0x7F9994: add     eax, 4
 0x7F9997: push    eax; lpAddend
 0x7F9998: call    dword ptr ds:0A2807Ch
 0x7F999E: test    eax, eax
 0x7F99A0: jnz     short loc_7F99B2
-0x7F99A2: mov     ecx, [esp+98h+var_68]
+0x7F99A2: mov     ecx, [esp+98h+output]
 0x7F99A6: test    ecx, ecx
 0x7F99A8: jz      short loc_7F99B2
 0x7F99AA: mov     eax, [ecx]
@@ -496,13 +494,13 @@
 0x7F99FC: test    eax, eax
 0x7F99FE: mov     [esp+98h+var_4], 0FFFFFFFFh
 0x7F9A09: jz      short loc_7F9A2D
-0x7F9A0B: mov     [esp+98h+var_68], eax
+0x7F9A0B: mov     [esp+98h+output], eax
 0x7F9A0F: add     eax, 4
 0x7F9A12: push    eax; lpAddend
 0x7F9A13: call    dword ptr ds:0A2807Ch
 0x7F9A19: test    eax, eax
 0x7F9A1B: jnz     short loc_7F9A2D
-0x7F9A1D: mov     ecx, [esp+98h+var_68]
+0x7F9A1D: mov     ecx, [esp+98h+output]
 0x7F9A21: test    ecx, ecx
 0x7F9A23: jz      short loc_7F9A2D
 0x7F9A25: mov     eax, [ecx]
@@ -524,13 +522,13 @@
 0x7F9A47: push    ebp
 0x7F9A48: push    ebx
 0x7F9A49: call    sub_7F6BF0
-0x7F9A4E: mov     esi, [esp+98h+var_70]
+0x7F9A4E: mov     esi, [esp+98h+lightingProperty]
 0x7F9A52: mov     edi, [esp+98h+var_7C]
 0x7F9A56: jmp     short loc_7F9ABC
 0x7F9A58: push    eax
 0x7F9A59: mov     ecx, ebp
-0x7F9A5B: call    sub_8115C0
-0x7F9A60: mov     ecx, [esp+98h+var_70]
+0x7F9A5B: call    OB_DistantLOD_CopyInstancesAndSetTriangles_010201A0
+0x7F9A60: mov     ecx, [esp+98h+lightingProperty]
 0x7F9A64: mov     edx, [ecx+9Ch]
 0x7F9A6A: mov     eax, [edx+4]
 0x7F9A6D: mov     edx, [edi]
@@ -559,12 +557,12 @@
 0x7F9AA9: mov     dword ptr [esi+48h], 0
 0x7F9AB0: mov     dword ptr [esi+44h], 1
 0x7F9AB7: call    sub_7F6BF0
-0x7F9ABC: mov     [esp+98h+var_68], edi
+0x7F9ABC: mov     [esp+98h+output], edi
 0x7F9AC0: cmp     [esp+98h+var_84], 0
 0x7F9AC5: jnz     loc_7F9870
-0x7F9ACB: mov     esi, [esp+98h+arg_0]
-0x7F9AD2: mov     ecx, esi
-0x7F9AD4: call    sub_7A9C30
+0x7F9ACB: mov     esi, [esp+98h+renderPassList]
+0x7F9AD2: mov     ecx, esi; this
+0x7F9AD4: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7F9AD9: mov     eax, [esi+4]
 0x7F9ADC: xor     edi, edi
 0x7F9ADE: mov     [esi+0Ch], eax
@@ -575,21 +573,21 @@
 0x7F9AED: mov     eax, [edx+4Ch]
 0x7F9AF0: mov     ecx, ebp
 0x7F9AF2: call    eax
-0x7F9AF4: mov     esi, [esp+98h+var_64]
+0x7F9AF4: mov     esi, [esp+98h+var_64]; Valid draw path reloads ESI=NiDX9Renderer from saved var_64, applies render-state cleanup at 0x7F9AF8..0x7F9B07, then resets bias. Retargeting the empty-path jump here would add that separate render-state call; prefer a dedicated branch trampoline if conditional-only repair is required.
 0x7F9AF8: mov     ecx, [esi+8ACh]
 0x7F9AFE: mov     edx, [ecx]
 0x7F9B00: mov     eax, [edx+0FCh]
 0x7F9B06: push    edi
 0x7F9B07: call    eax
-0x7F9B09: mov     eax, [esi+280h]
+0x7F9B09: mov     eax, [esi+280h]; Valid-path reset obtains IDirect3DDevice9 from NiDX9Renderer+0x280. A post-call wrapper can use the same global renderer/device path after the original returns.
 0x7F9B0F: mov     ecx, [eax]
 0x7F9B11: mov     edx, [ecx+114h]
 0x7F9B17: push    edi
 0x7F9B18: push    8
 0x7F9B1A: push    edi
 0x7F9B1B: push    eax
-0x7F9B1C: call    edx
-0x7F9B1E: mov     ecx, [esp+98h+var_C]
+0x7F9B1C: call    edx; Only in-function zero-bias reset. The normal block 0x7F9ACB..0x7F9B1E executes it; the 0x7F984D cleanup block does not.
+0x7F9B1E: mov     ecx, [esp+98h+var_C]; Common epilogue has exactly two CFG predecessors: 0x7F9ACB normal completion (includes reset at 0x7F9B1C) and 0x7F984D empty/no-eligible cleanup (skips it). An outer post-call reset repairs the unique bypass.
 0x7F9B25: mov     large fs:0, ecx
 0x7F9B2C: pop     ecx
 0x7F9B2D: pop     edi
@@ -597,4 +595,25 @@
 0x7F9B2F: pop     ebp
 0x7F9B30: pop     ebx
 0x7F9B31: add     esp, 84h
-0x7F9B37: retn    8
+0x7F9B37: retn    8; Single callee-cleaned epilogue: retn 8. Confirms 0x7F9410 consumes exactly two stack arguments in addition to ECX.
+0x9D03B0: lea     ecx, [ebp-6Ch]; slot
+0x9D03B3: jmp     NiPointerSlot_Release
+0x9D03B8: lea     ecx, [ebp-6Ch]; slot
+0x9D03BB: jmp     NiPointerSlot_Release
+0x9D03C0: lea     ecx, [ebp-70h]; slot
+0x9D03C3: jmp     NiPointerSlot_Release
+0x9D03C8: lea     ecx, [ebp-70h]; slot
+0x9D03CB: jmp     NiPointerSlot_Release
+0x9D03D0: lea     ecx, [ebp-70h]; slot
+0x9D03D3: jmp     NiPointerSlot_Release
+0x9D03D8: lea     ecx, [ebp-58h]; slot
+0x9D03DB: jmp     NiPointerSlot_Release
+0x9D03E0: lea     ecx, [ebp-54h]; slot
+0x9D03E3: jmp     NiPointerSlot_Release
+0x9D03E8: mov     edx, [esp+shaderIndex]
+0x9D03EC: lea     eax, [edx-88h]
+0x9D03F2: mov     ecx, [edx-8Ch]
+0x9D03F8: xor     ecx, eax
+0x9D03FA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D03FF: mov     eax, offset stru_AF8DB0
+0x9D0404: jmp     ___CxxFrameHandler3

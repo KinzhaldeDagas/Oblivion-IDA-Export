@@ -1,1 +1,1 @@
-WPARAM_0
+typedef UINT_PTR_0 WPARAM_0;

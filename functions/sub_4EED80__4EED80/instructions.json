@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4EED80",
-    "line": "push    esi",
+    "line": "push    esi; Verified: clears destination weather list when mode is false, then copies each 8-byte {TESWeather*, sortWeight} payload into a new list node; mode true preserves existing entries and appends.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EED81",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4EED8C",
-    "line": "cmp     [esp+8+arg_4], 0",
+    "line": "cmp     [esp+8+append], 0",
     "mnemonic": "cmp",
     "size": 5
   },

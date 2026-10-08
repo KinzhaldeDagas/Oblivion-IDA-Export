@@ -1,6 +1,6 @@
 0x4D1340: sub     esp, 8
 0x4D1343: push    ebp
-0x4D1344: mov     ebp, [esp+0Ch+arg_0]
+0x4D1344: mov     ebp, [esp+0Ch+file]
 0x4D1348: test    ebp, ebp
 0x4D134A: push    edi
 0x4D134B: mov     edi, ecx
@@ -52,7 +52,7 @@
 0x4D13CA: cmp     dword ptr [esi+0Ch], 8
 0x4D13CE: jnz     short loc_4D13F0
 0x4D13D0: mov     ecx, ebp
-0x4D13D2: call    TESFile__NextGroup
+0x4D13D2: call    TESFile__NextGroup; MEF v20 fix: TESFile::NextGroup short-GRUP guard. Reject lengths below 0x14 before subtracting the group header and tail-calling TESFile_NextRecord.
 0x4D13D7: push    esi
 0x4D13D8: call    sub_4CCD00
 0x4D13DD: add     esp, 4
@@ -107,10 +107,9 @@
 0x4D1464: and     eax, ebx
 0x4D1466: test    eax, eax
 0x4D1468: mov     byte ptr [esi+186h], 1
-0x4D146F: mov     byte ptr [esp+18h+arg_0], 1
+0x4D146F: mov     byte ptr [esp+18h+file], 1
 0x4D1474: jz      loc_4D1541
 0x4D147A: jmp     short loc_4D1484
-0x4D147C: align 10h
 0x4D1480: mov     esi, [esp+18h+var_8]
 0x4D1484: mov     eax, [eax]
 0x4D1486: push    eax
@@ -124,7 +123,7 @@
 0x4D149D: jnz     loc_4D1541
 0x4D14A3: mov     esi, [ebp+248h]
 0x4D14A9: push    esi; a1
-0x4D14AA: call    TESForm_LookupByFormID
+0x4D14AA: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4D14AF: add     esp, 4
 0x4D14B2: push    esi
 0x4D14B3: push    0; int
@@ -144,13 +143,13 @@
 0x4D14DF: jnz     short loc_4D14FB
 0x4D14E1: test    al, al
 0x4D14E3: jnz     short loc_4D14FB
-0x4D14E5: mov     ecx, ds:0B33A98h
-0x4D14EB: push    0
-0x4D14ED: push    ebp
-0x4D14EE: call    TESDataHandler_LoadFormRecord
+0x4D14E5: mov     ecx, ds:0B33A98h; dataHandler
+0x4D14EB: push    0; firstFileLowFormFilter
+0x4D14ED: push    ebp; file
+0x4D14EE: call    TESDataHandler_LoadFormRecord; Verified TESDataHandler_LoadFormRecord behavior: when activeFileState.retainActiveFile is nonzero, newly loaded cells receive TESForm::SetFromActiveFile(1). This matches the flag's file-retention use; the flag's writer remains Unknown.
 0x4D14F3: test    eax, eax
 0x4D14F5: jnz     short loc_4D14FB
-0x4D14F7: mov     byte ptr [esp+18h+arg_0], al
+0x4D14F7: mov     byte ptr [esp+18h+file], al
 0x4D14FB: push    1
 0x4D14FD: mov     ecx, ebp
 0x4D14FF: call    TESFile_NextRecordEx; NextForm?
@@ -176,7 +175,7 @@
 0x4D1535: test    eax, eax
 0x4D1537: jnz     loc_4D1480
 0x4D153D: mov     esi, [esp+18h+var_8]
-0x4D1541: mov     al, byte ptr [esp+18h+arg_0]
+0x4D1541: mov     al, byte ptr [esp+18h+file]
 0x4D1545: mov     byte ptr [esi+186h], 0
 0x4D154C: mov     byte ptr [esi+184h], 0
 0x4D1553: pop     esi

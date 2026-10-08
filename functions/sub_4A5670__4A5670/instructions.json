@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A5670",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified: copy/merge constructor copies TESRegionData base fields and EntryData list from source Weather data; this is not the RDWT parser.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4A569A",
-    "line": "mov     ebx, [esp+20h+arg_0]",
+    "line": "mov     ebx, [esp+20h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4A56BC",
-    "line": "push    0",
+    "line": "push    0; append",
     "mnemonic": "push",
     "size": 2
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x4A56C1",
-    "line": "push    ebx",
+    "line": "push    ebx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A56C2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4A56C9",
-    "line": "call    sub_4EED80",
+    "line": "call    OblivionTESWeatherList_CopyEntries; Verified: clears destination weather list when mode is false, then copies each 8-byte {TESWeather*, sortWeight} payload into a new list node; mode true preserves existing entries and appends.",
     "mnemonic": "call",
     "size": 5
   },
@@ -226,5 +226,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B28C0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B28C3",
+    "line": "jmp     TESRegionData_SetBaseVTable",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B28C8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B28CB",
+    "line": "add     ecx, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B28CE",
+    "line": "jmp     sub_4EED70",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B28D3",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B28D7",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B28DA",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B28DD",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B28DF",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B28E4",
+    "line": "mov     eax, offset stru_ADE854",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B28E9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

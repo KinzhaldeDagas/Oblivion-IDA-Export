@@ -62,17 +62,17 @@
 0x72F3AE: mov     [esp+30h+var_10], eax
 0x72F3B2: jb      short loc_72F350
 0x72F3B4: mov     esi, [esp+30h+var_18]
-0x72F3B8: push    esi
-0x72F3B9: push    eax
+0x72F3B8: push    esi; vertices
+0x72F3B9: push    eax; vertexCount
 0x72F3BA: mov     eax, [ebp+44h]
-0x72F3BD: lea     ecx, [edi+eax+34h]
-0x72F3C1: call    sub_72A0F0
+0x72F3BD: lea     ecx, [edi+eax+34h]; self
+0x72F3C1: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x72F3C6: mov     ecx, [ebp+44h]
 0x72F3C9: lea     eax, [edi+ecx]
-0x72F3CC: lea     ecx, [eax+34h]
-0x72F3CF: push    eax
-0x72F3D0: push    ecx
-0x72F3D1: call    sub_72A820
+0x72F3CC: lea     ecx, [eax+34h]; output
+0x72F3CF: push    eax; transform
+0x72F3D0: push    ecx; input
+0x72F3D1: call    NiBound_TransformInto
 0x72F3D6: mov     ecx, [esp+30h+var_1C]
 0x72F3DA: add     ecx, 1
 0x72F3DD: xor     eax, eax
@@ -82,7 +82,7 @@
 0x72F3E9: mov     [esp+30h+var_1C], ecx
 0x72F3ED: jb      loc_72F340
 0x72F3F3: push    esi
-0x72F3F4: call    FormHeapFree
+0x72F3F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72F3F9: add     esp, 4
 0x72F3FC: mov     ecx, [esp+30h+var_C]
 0x72F400: mov     large fs:0, ecx
@@ -93,3 +93,12 @@
 0x72F40B: pop     ebx
 0x72F40C: add     esp, 1Ch
 0x72F40F: retn    4
+0x9CA740: lea     ecx, [ebp-18h]; void *
+0x9CA743: jmp     sub_6C4090
+0x9CA748: mov     edx, [esp+arg_4]
+0x9CA74C: lea     eax, [edx-20h]
+0x9CA74F: mov     ecx, [edx-24h]
+0x9CA752: xor     ecx, eax
+0x9CA754: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA759: mov     eax, offset stru_AF2E00
+0x9CA75E: jmp     ___CxxFrameHandler3

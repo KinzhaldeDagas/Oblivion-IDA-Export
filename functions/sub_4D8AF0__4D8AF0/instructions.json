@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D8AF0",
-    "line": "push    esi",
+    "line": "push    esi; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4D8AFD",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,19 +121,19 @@
   },
   {
     "ea": "0x4D8B24",
-    "line": "push    eax",
+    "line": "push    eax; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D8B25",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D8B27",
-    "line": "call    sub_4CBBB0",
+    "line": "call    TESObjectCELL_FindSmallestSubSpaceContainingPosition; Verified: locks a cell's object list and returns the smallest-radius TESSubSpace reference containing the query position; this is the interior-cell counterpart to the WorldSpace coordinate-bucket lookup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x4D8B70",
-    "line": "push    eax",
+    "line": "push    eax; worldPosition",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D8B71",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D8B73",
-    "line": "call    sub_4F0600",
+    "line": "call    TESWorldSpace_FindSmallestSubSpaceContainingPosition; Verified: queries the SubSpace candidate list for the position-derived cell key, then returns the smallest-radius TESSubSpace whose exact scaled local bounds contain the point.",
     "mnemonic": "call",
     "size": 5
   },

@@ -25,13 +25,13 @@
 0x94F522: lea     eax, [esp+0C4h+var_80]
 0x94F526: lea     ecx, [esi+50h]
 0x94F529: push    eax
-0x94F52A: call    sub_88FCC0
+0x94F52A: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94F52F: lea     edx, [ebx+10h]
 0x94F532: push    edx
 0x94F533: lea     eax, [esp+0C4h+var_40]
 0x94F53A: lea     ecx, [esi+40h]
 0x94F53D: push    eax
-0x94F53E: call    sub_88FCC0
+0x94F53E: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94F543: mov     ecx, [ebp+arg_8]
 0x94F546: push    ecx
 0x94F547: mov     ecx, esi
@@ -55,7 +55,7 @@
 0x94F575: lea     ecx, [esi+90h]
 0x94F57B: push    ecx
 0x94F57C: lea     ecx, [esp+0C8h+var_90]
-0x94F580: call    sub_88FE00
+0x94F580: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94F585: fld     dword ptr [esi]
 0x94F587: fmul    dword ptr ds:0A3D65Ch
 0x94F58D: mov     edx, [ebp+arg_8]

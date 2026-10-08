@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6CC3A0",
-    "line": "push    esi",
+    "line": "push    esi; NiBlendTransformInterpolator virtual transform update (+0x4C). Dispatches by active blend-item count +0x0E: one item takes the single-item fast path, multiple items normalize/prepare blend state and evaluate the weighted transform path, and zero items fail. Caches the requested time at +0x08.",
     "mnemonic": "push",
     "size": 1
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x6CC3C1",
-    "line": "call    sub_6CBDF0",
+    "line": "call    NiBlendTransformInterpolator_UpdateSingle; Oblivion: evaluates the sole active 0x18-byte blend item. Honors the blend time-override flag, writes invalid TRS sentinels on failure/sentinel time, and normalizes a valid quaternion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x6CC3D7",
-    "line": "call    sub_6CD0F0",
+    "line": "call    NiBlendInterpolator_RecomputeNormalizedWeights; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x6CC3F0",
-    "line": "call    sub_6CBEE0",
+    "line": "call    NiBlendTransformInterpolator_UpdateMultiple; Oblivion: evaluates multiple 0x18-byte blend items using item+8 normalized weight. Translation, rotation, and scale validity are tracked independently; missing channels reduce only that channel's weight. Quaternions are hemisphere-corrected before weighted summation and normalized afterward.",
     "mnemonic": "call",
     "size": 5
   },

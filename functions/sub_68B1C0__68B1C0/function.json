@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x68B1C0",
+      "0x68B1D0"
+    ]
+  ],
+  "chunks_sha256": "b504b93630cc67e8b8ad56ff702b4c03b7a5b1be61527ff30250eb67e254fa39",
+  "comment_regular": "Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.",
+  "comment_repeatable": "Verified frees only the owned position payload when kind==1; it does not free the TravelPathNode record itself and does not release reference-kind payloads.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_68B1C0",
+  "display_name": "TravelPathNode_FreeOwnedPosition",
   "end_ea": "0x68B1D0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68B1C0",
+  "name": "TravelPathNode_FreeOwnedPosition",
   "segment": ".text",
   "sha256": "b504b93630cc67e8b8ad56ff702b4c03b7a5b1be61527ff30250eb67e254fa39",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68B1C0",
-  "type": "void __thiscall(int this)",
+  "total_chunk_size": 16,
+  "type": "void __thiscall(TravelPathNode *this)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 5
 }

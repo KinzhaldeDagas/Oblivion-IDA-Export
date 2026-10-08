@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4E5170",
+      "0x4E51E1"
+    ]
+  ],
+  "chunks_sha256": "8fa1e43ef555499a96e485129604d2a1a80fbb0d7d0aa31e0399cc09c8015aa4",
+  "comment_regular": "Verified — for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site.",
+  "comment_repeatable": "Verified — for pointsByReference[reference], sets every listed node's linkedPointsDisabled flag to !enabled. When disabling and at least one point was found, calls parentCell->MarkAsModified(0x01000000). The exact semantic meaning of this modification mask is Unknown from this call site.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "SetLinkedPointsEnabled",
+  "display_name": "TESPathGrid_SetLinkedPointsEnabled",
   "end_ea": "0x4E51E1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "SetLinkedPointsEnabled",
+  "name": "TESPathGrid_SetLinkedPointsEnabled",
   "segment": ".text",
   "sha256": "8fa1e43ef555499a96e485129604d2a1a80fbb0d7d0aa31e0399cc09c8015aa4",
   "size": 113,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E5170",
-  "type": "void __thiscall(_DWORD **this, int, char)",
+  "total_chunk_size": 113,
+  "type": "void __thiscall(TESPathGrid *this, TESObjectREFR *reference, bool enabled)",
   "xrefs_from_count": 54,
   "xrefs_to_count": 2
 }

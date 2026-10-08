@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x785360",
-    "line": "push    ebp",
+    "line": "push    ebp; Allocates a 0x30-byte spline-cache node from FormHeap and delegates field/key/value initialization to OB_stBezierSplineCacheNode_Init_010201A0.",
     "mnemonic": "push",
     "size": 1
   },
@@ -157,73 +157,73 @@
   },
   {
     "ea": "0x7853AC",
-    "line": "mov     eax, [ebp+arg_10]",
+    "line": "mov     eax, dword ptr [ebp+color]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7853AF",
-    "line": "mov     ecx, [ebp+arg_C]",
+    "line": "mov     ecx, [ebp+value]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7853B2",
-    "line": "mov     edx, [ebp+arg_8]",
+    "line": "mov     edx, [ebp+right]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7853B5",
-    "line": "push    eax",
+    "line": "push    eax; color",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7853B6",
-    "line": "mov     eax, [ebp+arg_4]",
+    "line": "mov     eax, [ebp+parent]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7853B9",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7853BA",
-    "line": "mov     ecx, [ebp+arg_0]",
+    "line": "mov     ecx, [ebp+left]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7853BD",
-    "line": "push    edx",
+    "line": "push    edx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7853BE",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7853BF",
-    "line": "push    ecx",
+    "line": "push    ecx; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7853C0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7853C2",
-    "line": "call    sub_784F20",
+    "line": "call    OB_stBezierSplineCacheNode_Init_010201A0; Constructs one 0x30-byte cache-map node: installs left/parent/right links, copies the 28-byte small-string key and stBezierSpline* value from the pair, then writes color and clears isNil.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7853E1",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -327,6 +327,90 @@
     "ea": "0x7853ED",
     "line": "call    ThrowException??",
     "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB000",
+    "line": "mov     eax, [ebp+var_14]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB003",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB004",
+    "line": "mov     ecx, [ebp+var_18]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB007",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB008",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB00D",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB010",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CB011",
+    "line": "mov     edx, [esp-4+parent]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB015",
+    "line": "lea     eax, [edx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB018",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB01B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB01D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB022",
+    "line": "mov     eax, offset stru_AF36DC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB027",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

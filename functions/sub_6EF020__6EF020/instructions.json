@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EF020",
-    "line": "sub     esp, 20h",
+    "line": "sub     esp, 20h; Reads four control-basis banks (2x2 traversal), each with an entry count. Each 0x34-byte entry contains a 1 x basisDimensions[bank] float matrix followed by a length-prefixed string. Reads coefficient floats, string length, then string bytes; any failed read returns false. Do not assume these banks are texture-only.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x6EF035",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -444,12 +444,6 @@
     "size": 2
   },
   {
-    "ea": "0x6EF0FA",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x6EF100",
     "line": "mov     edi, [esp+30h+var_10]",
     "mnemonic": "mov",
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x6EF12A",
-    "line": "mov     ebx, [esp+30h+arg_4]",
+    "line": "mov     ebx, [esp+30h+basisDimensions]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,7 +607,7 @@
   },
   {
     "ea": "0x6EF14D",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +769,7 @@
   },
   {
     "ea": "0x6EF19D",
-    "line": "mov     ecx, [esp+30h+arg_0]",
+    "line": "mov     ecx, [esp+30h+file]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -835,7 +829,7 @@
   },
   {
     "ea": "0x6EF1B7",
-    "line": "mov     ebx, [esp+30h+arg_0]",
+    "line": "mov     ebx, [esp+30h+file]",
     "mnemonic": "mov",
     "size": 4
   },

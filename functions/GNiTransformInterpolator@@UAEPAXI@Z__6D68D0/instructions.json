@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x6D68D3",
-    "line": "call    ??1NiTransformInterpolator@@UAE@XZ; NiTransformInterpolator::~NiTransformInterpolator(void)",
+    "line": "call    ??1NiTransformInterpolator@@UAE@XZ; Oblivion NiTransformInterpolator destructor. Releases the refcounted NiTransformData pointer at +0x2C, deleting it at zero references, then runs the interpolator base destructor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6D68E0",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

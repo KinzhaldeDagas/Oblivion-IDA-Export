@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BC2E0",
+      "0x4BC49F"
+    ]
+  ],
+  "chunks_sha256": "2b0844da13d6948f88707bb7a58050c081435345a2a149a56bbe29f414fb9d25",
+  "comment_regular": "Verified: tests whether a world position lies inside a placed TESSubSpace. Requires base form kFormType_SubSpace (0x29) and reference flag 0x20 clear; first applies bound-radius broadphase (+0x2C times reference scale), transforms the query into local space, then tests all three scaled half-extents.",
+  "comment_repeatable": "Verified: tests whether a world position lies inside a placed TESSubSpace. Requires base form kFormType_SubSpace (0x29) and reference flag 0x20 clear; first applies bound-radius broadphase (+0x2C times reference scale), transforms the query into local space, then tests all three scaled half-extents.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BC2E0",
+  "display_name": "TESSubSpace_ContainsPosition",
   "end_ea": "0x4BC49F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BC2E0",
+  "name": "TESSubSpace_ContainsPosition",
   "segment": ".text",
   "sha256": "2b0844da13d6948f88707bb7a58050c081435345a2a149a56bbe29f414fb9d25",
   "size": 447,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BC2E0",
-  "type": "double __usercall@<st0>(double result@<st0>, float *, float *)",
+  "total_chunk_size": 447,
+  "type": "char __usercall@<al>(float *worldPosition, TESObjectREFR *candidate, float searchScale@<st0>)",
   "xrefs_from_count": 174,
   "xrefs_to_count": 1
 }

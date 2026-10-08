@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x403DD0",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+arg_0]; [Controller decode 2026-07-09] DirectInput EnumDevices callback for joystick/gamepad devices. Accepts device types 0x14/0x15, copies DIDEVICEINSTANCE, sets g_joystickDIDATAFORMAT, reads DIDEVCAPS, enumerates objects, sets axis range -100..100 and 10 percent deadzone.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x403E44",
-    "line": "push    offset JoystickDeviceFormat",
+    "line": "push    offset g_joystickDIDATAFORMAT",
     "mnemonic": "push",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x403EC3",
-    "line": "push    offset sub_4035D0",
+    "line": "push    offset InputGlobals__EnumJoystickObjectsCallback",
     "mnemonic": "push",
     "size": 5
   },
@@ -565,13 +565,13 @@
   },
   {
     "ea": "0x403F14",
-    "line": "call    eax",
+    "line": "call    eax; [Controller decode 2026-07-09] SetProperty(DIPROP_RANGE=4): joystick axis range normalized to -100..100.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x403F16",
-    "line": "fld     ds:flt_A2FAAC",
+    "line": "fld     ds:kFaceEarNormalMatchRadius",
     "mnemonic": "fld",
     "size": 6
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x403F29",
-    "line": "call    InputGlobals__SetJoystickDeadzone",
+    "line": "call    InputGlobals__SetJoystickDeadzone; [Controller decode 2026-07-09] InitializeJoystickProperties: applies 10 percent joystick deadzone via SetJoystickDeadzone(..., 0.1).",
     "mnemonic": "call",
     "size": 5
   },

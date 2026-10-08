@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E7820",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified TESPathGrid destruction order: clear rendered geometry; clear point array/backlinks; free PGRI rows; clear every pointsByCell (+0x44) bucket list (512-unit X/Y spatial buckets); release component references; release shared point-marker/render resources on the last instance; destroy both pointer-map containers and render node; then destroy TESForm base.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x4E784A",
-    "line": "mov     dword ptr [esi], offset ??_7TESPathGrid@@6BTESPathGrid@@@; const TESPathGrid::`vftable'{for `TESPathGrid'}",
+    "line": "mov     dword ptr [esi], offset ??_7TESPathGrid@@6BTESPathGrid@@@; Verified destructor clears the rendered graph, owned point/reference structures, PGRI records, and the per-PathGrid spatial bucket map at +0x44; then releases component references and refcounted render resources before TESForm destruction.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -109,43 +109,43 @@
   },
   {
     "ea": "0x4E785F",
-    "line": "call    sub_4E5400",
+    "line": "call    TESPathGrid_ClearRenderedPointGeometry; Verified cleanup of TESPathGrid.renderNode (+0x1C): resets point render helpers, detaches the generated root from shared path-grid visual state, updates the root node, releases it, and clears the field.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E7864",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7866",
-    "line": "call    sub_4E6CA0",
+    "line": "call    TESPathGrid_ClearPointsAndReferenceMaps; Verified point teardown order under the shared pathgrid critical section: remove reciprocal PGRI cross-cell connections; clear pointsByReference list headers/nodes; destroy each point's owned adjacency list via its point cleanup helper; free point nodes; destroy and null the NiTArray at +0x24. The 512-unit spatial-bucket map at +0x44 is cleared separately by TESPathGrid_ClearSpatialBucketMap.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E786B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E786D",
-    "line": "call    sub_4E4ED0",
+    "line": "call    TESPathGrid_ClearPGRIRecords; Verified frees the PGRI record list header at TESPathGrid+0x28 and each allocated 16-byte record in that list.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4E7872",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E7874",
-    "line": "call    sub_4E5280",
+    "line": "call    TESPathGrid_ClearSpatialBucketMap; Verified frees every BSSimpleList node and list header stored in TESPathGrid.pointsByCell (+0x44), then clears that NiTPointerMap. Given the key helper's X/Y >> 9 packing, this is a 512-unit spatial bucket map local to this PathGrid, not a one-entry-per-world-cell map.",
     "mnemonic": "call",
     "size": 5
   },
@@ -568,5 +568,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9B5D90",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5D93",
+    "line": "jmp     TESForm_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5D98",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5D9B",
+    "line": "add     ecx, 1Ch; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5D9E",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5DA3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5DA6",
+    "line": "add     ecx, 34h ; '4'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5DA9",
+    "line": "jmp     ??1?$NiTPointerMap@PAVTESObjectREFR@@PAV?$BSSimpleList@PAVTESPathGridPoint@@@@@@UAE@XZ; NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>::~NiTPointerMap<TESObjectREFR *,BSSimpleList<TESPathGridPoint *> *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5DAE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5DB1",
+    "line": "add     ecx, 44h ; 'D'",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5DB4",
+    "line": "jmp     ??1?$NiTPointerMap@IPAV?$BSSimpleList@PAVTESPathGridPoint@@@@@@UAE@XZ; NiTPointerMap<uint,BSSimpleList<TESPathGridPoint *> *>::~NiTPointerMap<uint,BSSimpleList<TESPathGridPoint *> *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5DB9",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5DBD",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5DC0",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5DC3",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5DC5",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5DCA",
+    "line": "mov     eax, offset stru_AE0D54",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5DCF",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,1 +1,1 @@
-MENUINFO
+typedef tagMENUINFO MENUINFO;

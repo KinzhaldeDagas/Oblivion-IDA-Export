@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x602055",
-    "line": "mov     esi, dword ptr [esp+3Ch+arg_0]",
+    "line": "mov     esi, [esp+3Ch+arg_0]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x602090",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x60209C",
-    "line": "push    0",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60209E",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x6020A9",
-    "line": "push    0; a2",
+    "line": "push    0; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x6020AF",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x602178",
-    "line": "fstp    [esp+40h+var_40]",
+    "line": "fstp    [esp+40h+easeOutTime]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -691,25 +691,25 @@
   },
   {
     "ea": "0x6021B2",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6021B4",
-    "line": "fstp    [esp+40h+var_40]; float",
+    "line": "fstp    [esp+40h+easeOutTime]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6021B7",
-    "line": "push    0; int",
+    "line": "push    0; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6021B9",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x6021EF",
-    "line": "mov     edi, dword ptr [esp+44h+arg_0]",
+    "line": "mov     edi, [esp+44h+arg_0]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x602216",
-    "line": "mov     ecx, ds:0B333C4h",
+    "line": "mov     ecx, ds:0B333C4h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -913,13 +913,13 @@
   },
   {
     "ea": "0x602224",
-    "line": "push    1",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x602226",
-    "line": "call    PlayerCharacter_GetPlayerNode",
+    "line": "call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x602241",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,7 +1033,7 @@
   },
   {
     "ea": "0x602261",
-    "line": "call    sub_65ABE0",
+    "line": "call    MobileObject_GetCollisionFilterInfo; Returns actor/proxy collision filter identity by calling 0x57E270 on MobileObject_GetCharProxy(this). Callers keep high 16 bits and OR in the chosen collision layer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x60227B",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,25 +1183,25 @@
   },
   {
     "ea": "0x6022A5",
-    "line": "fstp    [esp+48h+var_48]; float",
+    "line": "fstp    [esp+48h+arg1]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6022A8",
-    "line": "push    5; int",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6022AA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6022AC",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,25 +1249,25 @@
   },
   {
     "ea": "0x6022CC",
-    "line": "fst     [esp+4Ch+var_48]; int",
+    "line": "fst     [esp+4Ch+arg1]; arg1",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x6022D0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6022D2",
-    "line": "fstp    [esp+4Ch+var_4C]; float",
+    "line": "fstp    [esp+4Ch+arg0]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6022D5",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
     "mnemonic": "call",
     "size": 5
   },

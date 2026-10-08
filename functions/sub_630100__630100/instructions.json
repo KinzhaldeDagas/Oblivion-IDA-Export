@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x630231",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,25 +925,25 @@
   },
   {
     "ea": "0x6302BC",
-    "line": "call    sub_5E05F0",
+    "line": "call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6302C1",
-    "line": "push    3",
+    "line": "push    3; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6302C3",
-    "line": "push    2",
+    "line": "push    2; topicType",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6302C5",
-    "line": "call    TESTopic__GEtTopic",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1170,12 +1170,6 @@
     "size": 2
   },
   {
-    "ea": "0x630339",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x630340",
     "line": "mov     ebx, [esi]",
     "mnemonic": "mov",
@@ -1219,7 +1213,7 @@
   },
   {
     "ea": "0x630355",
-    "line": "call    sub_420680",
+    "line": "call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1243,7 +1237,7 @@
   },
   {
     "ea": "0x630361",
-    "line": "call    sub_420680",
+    "line": "call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1387,7 @@
   },
   {
     "ea": "0x6303A1",
-    "line": "call    sub_472EA0",
+    "line": "call    ActorAnimData_IsIdleInactive; Idle inactive predicate used by IsIdlePlaying. False while a queued/current idle remains active or pending; true when no current idle remains or the current idle reached terminal state 3.",
     "mnemonic": "call",
     "size": 5
   },

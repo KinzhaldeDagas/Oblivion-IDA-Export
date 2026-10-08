@@ -1,166 +1,261 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "hid_value_caps",
+  "definition": "struct hid_value_caps\n{\nUSAGE usage_page;\nUSAGE usage_min;\nUSAGE usage_max;\nUSHORT data_index_min;\nUSHORT data_index_max;\nUSHORT string_min;\nUSHORT string_max;\nUSHORT designator_min;\nUSHORT designator_max;\nBOOLEAN is_range;\nBOOLEAN is_string_range;\nBOOLEAN is_designator_range;\nUCHAR report_id;\nUSHORT link_collection;\nUSAGE link_usage_page;\nUSAGE link_usage;\nUSHORT bit_field;\nUSHORT bit_size;\nUSHORT report_count;\nULONG start_bit;\nLONG logical_min;\nLONG logical_max;\nLONG physical_min;\nLONG physical_max;\nULONG units;\nULONG units_exp;\n}\n",
   "id": 18374686479672034251,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "usage_page",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "USAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "usage_min",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "USAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "usage_max",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "USAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data_index_min",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "data_index_max",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "string_min",
       "offset": 10,
-      "offset_hex": "0xa",
-      "size": 2
+      "offset_hex": "0xA",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "string_max",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 2
+      "offset_hex": "0xC",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "designator_min",
       "offset": 14,
-      "offset_hex": "0xe",
-      "size": 2
+      "offset_hex": "0xE",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "designator_max",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_range",
       "offset": 18,
       "offset_hex": "0x12",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_string_range",
       "offset": 19,
       "offset_hex": "0x13",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_designator_range",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 1
+      "size": 1,
+      "type": "BOOLEAN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "report_id",
       "offset": 21,
       "offset_hex": "0x15",
-      "size": 1
+      "size": 1,
+      "type": "UCHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "link_collection",
       "offset": 22,
       "offset_hex": "0x16",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "link_usage_page",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 2
+      "size": 2,
+      "type": "USAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "link_usage",
       "offset": 26,
-      "offset_hex": "0x1a",
-      "size": 2
+      "offset_hex": "0x1A",
+      "size": 2,
+      "type": "USAGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bit_field",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 2
+      "offset_hex": "0x1C",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bit_size",
       "offset": 30,
-      "offset_hex": "0x1e",
-      "size": 2
+      "offset_hex": "0x1E",
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "report_count",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "start_bit",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "logical_min",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "logical_max",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "physical_min",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "physical_max",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "units",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "units_exp",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "ULONG"
     }
   ],
   "name": "hid_value_caps",
+  "ordinal": 3776,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 64
 }

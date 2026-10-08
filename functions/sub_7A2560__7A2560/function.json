@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7A2560",
+      "0x7A25B6"
+    ]
+  ],
+  "chunks_sha256": "a262c2b271ffe359037952c10f3838dc827d5781c4958383ef73f47dfaccb2f7",
+  "comment_regular": "Oblivion leaf-texture vector allocator: rejects count*0x54 overflow, then allocates exactly count 0x54-byte records through FormHeap.",
+  "comment_repeatable": "Oblivion leaf-texture vector allocator: rejects count*0x54 overflow, then allocates exactly count 0x54-byte records through FormHeap.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_7A2560",
+  "display_name": "OB_stVector_SIdvLeafTexture_Allocate_010201A0",
   "end_ea": "0x7A25B6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A2560",
+  "name": "OB_stVector_SIdvLeafTexture_Allocate_010201A0",
   "segment": ".text",
   "sha256": "a262c2b271ffe359037952c10f3838dc827d5781c4958383ef73f47dfaccb2f7",
   "size": 86,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A2560",
-  "type": "int __cdecl(char *)",
+  "total_chunk_size": 86,
+  "type": "OB_SIdvLeafTexture_010201A0 *__cdecl(unsigned int count)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 2
 }

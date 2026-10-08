@@ -45,7 +45,7 @@
 0x4FCED1: call    PrintError
 0x4FCED6: add     esp, 4
 0x4FCED9: push    esi
-0x4FCEDA: call    FormHeapFree
+0x4FCEDA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FCEDF: add     esp, 4
 0x4FCEE2: mov     ecx, [esp+124h+var_C]
 0x4FCEE9: mov     large fs:0, ecx
@@ -56,3 +56,16 @@
 0x4FCEFB: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4FCF00: add     esp, 11Ch
 0x4FCF06: retn
+0x9B6CA0: lea     ecx, [ebp-11Ch]; void *
+0x9B6CA6: jmp     BSStringT_Clear
+0x9B6CAB: mov     edx, [esp+Format]
+0x9B6CAF: lea     eax, [edx-114h]
+0x9B6CB5: mov     ecx, [edx-118h]
+0x9B6CBB: xor     ecx, eax
+0x9B6CBD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6CC2: add     eax, 4
+0x9B6CC5: mov     ecx, [edx-4]
+0x9B6CC8: xor     ecx, eax
+0x9B6CCA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6CCF: mov     eax, offset stru_AE1A00
+0x9B6CD4: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x680760: movzx   eax, word ptr [ecx]
+0x680760: movzx   eax, word ptr [ecx]; Verified: returns the spatial TESForm stored at state +8 for this link's searchNodeIndex. The route expansion uses it to select the opposite endpoint.
 0x680763: xor     edx, edx
 0x680765: cmp     ax, ds:0B3BF04h
 0x68076C: jnb     short loc_68077E

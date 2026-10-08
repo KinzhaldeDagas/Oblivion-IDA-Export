@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x89F6B0",
+      "0x89F724"
+    ]
+  ],
+  "chunks_sha256": "ab7a9cde262051dd9a26fa2e3dcc1abbc3dd81bf82163a132e17ca58a004dd3a",
+  "comment_regular": "Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.",
+  "comment_repeatable": "Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "sub_89F6B0",
   "end_ea": "0x89F724",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_89F6B0",
   "segment": ".text",
   "sha256": "ab7a9cde262051dd9a26fa2e3dcc1abbc3dd81bf82163a132e17ca58a004dd3a",
   "size": 116,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x89F6B0",
-  "type": "NiObject *__thiscall(int **this, char *)",
+  "total_chunk_size": 116,
+  "type": "NiObject *__thiscall(int **this, NiRTTI *)",
   "xrefs_from_count": 57,
   "xrefs_to_count": 10
 }

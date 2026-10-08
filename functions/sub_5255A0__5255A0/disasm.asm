@@ -38,9 +38,9 @@
 0x52561E: mov     ecx, esi
 0x525620: call    eax
 0x525622: mov     dword ptr [ebx], 0
-0x525628: push    ebx
-0x525629: lea     ecx, [edi+1D4h]
-0x52562F: call    sub_55E2A0
+0x525628: push    ebx; incoming
+0x525629: lea     ecx, [edi+1D4h]; this
+0x52562F: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x525634: mov     esi, [edi+1DCh]
 0x52563A: test    esi, esi
 0x52563C: jz      short loc_525660
@@ -71,10 +71,10 @@
 0x525691: lea     eax, [edi+168h]
 0x525697: jnz     short loc_52569F
 0x525699: lea     eax, [edi+108h]
-0x52569F: push    eax
-0x5256A0: call    sub_5538D0
-0x5256A5: push    eax
-0x5256A6: call    sub_5528F0
+0x52569F: push    eax; destination
+0x5256A0: call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.
+0x5256A5: push    eax; source
+0x5256A6: call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.
 0x5256AB: add     esp, 8
 0x5256AE: lea     esi, [edi+114h]
 0x5256B4: mov     [esp+18h+var_8], 2

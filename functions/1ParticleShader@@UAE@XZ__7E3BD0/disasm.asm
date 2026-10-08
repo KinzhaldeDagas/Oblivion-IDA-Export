@@ -37,7 +37,7 @@
 0x7E3C34: mov     ds:0B46014h, ebx
 0x7E3C3A: mov     eax, [esi+80h]
 0x7E3C40: push    eax
-0x7E3C41: call    FormHeapFree
+0x7E3C41: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7E3C46: mov     [esi+80h], ebx
 0x7E3C4C: mov     ecx, [esi+84h]
 0x7E3C52: add     esp, 4
@@ -45,7 +45,7 @@
 0x7E3C57: jz      short loc_7E3C6A
 0x7E3C59: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7E3C5D: jnz     short loc_7E3C64
-0x7E3C5F: call    sub_7604D0
+0x7E3C5F: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7E3C64: mov     [esi+84h], ebx
 0x7E3C6A: mov     edi, [esi+88h]
 0x7E3C70: cmp     edi, ebx
@@ -117,10 +117,10 @@
 0x7E3D14: jz      short loc_7E3D21
 0x7E3D16: add     dword ptr [ecx+60h], 0FFFFFFFFh
 0x7E3D1A: jnz     short loc_7E3D21
-0x7E3D1C: call    sub_7604D0
+0x7E3D1C: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x7E3D21: mov     ecx, esi; this
 0x7E3D23: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7E3D2B: call    ??1BSShader@@UAE@XZ; BSShader::~BSShader(void)
+0x7E3D2B: call    ??1BSShader@@UAE@XZ;
 0x7E3D30: mov     ecx, dword ptr [esp+24h+var_C]
 0x7E3D34: mov     large fs:0, ecx
 0x7E3D3B: pop     ecx
@@ -130,3 +130,21 @@
 0x7E3D3F: pop     ebx
 0x7E3D40: add     esp, 10h
 0x7E3D43: retn
+0x9CF6F0: mov     ecx, [ebp-10h]; this
+0x9CF6F3: jmp     ??1BSShader@@UAE@XZ;
+0x9CF6F8: mov     ecx, [ebp-10h]
+0x9CF6FB: add     ecx, 84h ; '„'; void *
+0x9CF701: jmp     sub_4027D0
+0x9CF706: mov     ecx, [ebp-10h]
+0x9CF709: add     ecx, 88h ; 'ˆ'; slot
+0x9CF70F: jmp     NiPointerSlot_Release
+0x9CF714: mov     ecx, [ebp-10h]
+0x9CF717: add     ecx, 8Ch ; 'Œ'; slot
+0x9CF71D: jmp     NiPointerSlot_Release
+0x9CF722: mov     edx, [esp+arg_4]
+0x9CF726: lea     eax, [edx-14h]
+0x9CF729: mov     ecx, [edx-18h]
+0x9CF72C: xor     ecx, eax
+0x9CF72E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CF733: mov     eax, offset stru_AF8334
+0x9CF738: jmp     ___CxxFrameHandler3

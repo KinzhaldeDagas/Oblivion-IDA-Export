@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_810B90",
+  "chunks": [
+    [
+      "0x810B90",
+      "0x810DA8"
+    ],
+    [
+      "0x9D0CA0",
+      "0x9D0CD1"
+    ]
+  ],
+  "chunks_sha256": "b295d2439086267447052002d9e745c3b343466b652ade79b53f50f48a901067",
+  "comment_regular": "\n\n[v153 UV declaration audit] Fixed branch declaration has six entries: position, normal, UV0 atsemantic5/source7, additional tangent/binormal/wind descriptors80000000..2. Publishing extra NiGeometryData UV planes does not itself add declaration inputs or shader samplers. v153 preserves UV0; six material-channel shader consumers remain incomplete.\n\nCreates ShaderDefinition for SpeedTree branch shader (GetShaderDefinition id 4): declaration id 6, SpeedTreeBranchShader object, branch lighting/TREE program sets.",
+  "comment_repeatable": "Creates ShaderDefinition for SpeedTree branch shader (GetShaderDefinition id 4): declaration id 6, SpeedTreeBranchShader object, branch lighting/TREE program sets.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_CreateSpeedTreeBranchShaderDefinition_010201A0",
   "end_ea": "0x810DA8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_810B90",
+  "name": "OB_CreateSpeedTreeBranchShaderDefinition_010201A0",
   "segment": ".text",
   "sha256": "5e514e3a0e98f0882c5123536439e0fecf3913381dc756456785e3c20996989b",
   "size": 536,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x810B90",
+  "total_chunk_size": 585,
   "type": "ShaderDefinition *()",
-  "xrefs_from_count": 230,
+  "xrefs_from_count": 249,
   "xrefs_to_count": 1
 }

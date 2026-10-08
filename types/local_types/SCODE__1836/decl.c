@@ -1,1 +1,1 @@
-SCODE
+typedef LONG SCODE;

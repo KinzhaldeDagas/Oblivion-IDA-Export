@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x753C30",
-    "line": "cmp     eax, offset dword_B40BCC",
+    "line": "cmp     eax, offset stru_B40BCC",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -367,19 +367,19 @@
   },
   {
     "ea": "0x753C83",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x753C85",
-    "line": "fstp    [esp+18h+var_18]; float",
+    "line": "fstp    [esp+18h+applicationTime]; applicationTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x753C88",
-    "line": "call    sub_6C36B0",
+    "line": "call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x753CAF",
-    "line": "fstp    [esp+18h+var_18]",
+    "line": "fstp    [esp+18h+applicationTime]",
     "mnemonic": "fstp",
     "size": 3
   },

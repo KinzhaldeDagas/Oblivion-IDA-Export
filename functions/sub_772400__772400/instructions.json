@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x772400",
-    "line": "push    esi",
+    "line": "push    esi; NiD3DPass stage gate: apply tracked state group, then bind texture and commit transform.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x772405",
-    "line": "mov     ecx, [esi+0Ch]",
+    "line": "mov     ecx, [esi+0Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x772408",
-    "line": "push    eax",
+    "line": "push    eax; stage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x772409",
-    "line": "call    sub_773440",
+    "line": "call    OB_NiD3DTextureStageStateGroup_ApplyAllStates_010201A0; Apply the authored texture-stage and five sampler states immediately before binding the stage texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x772416",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x772418",
-    "line": "call    sub_7721E0",
+    "line": "call    OB_NiD3DTextureStage_BindTextureAndTransform_010201A0; Oblivion texture-stage binding: resolve the D3D texture, call NiDX9RenderState::SetTexture(stage,texture), handle single-mip and NPOT fallback state, then commit the texture transform. This is the path by which Lighting30 stage 2 reaches D3D sampler s2.",
     "mnemonic": "call",
     "size": 5
   },

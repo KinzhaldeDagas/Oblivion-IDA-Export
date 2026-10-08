@@ -1,19 +1,36 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_5C91E0",
+  "chunks": [
+    [
+      "0x5C91E0",
+      "0x5C93E7"
+    ],
+    [
+      "0x9C1730",
+      "0x9C175C"
+    ]
+  ],
+  "chunks_sha256": "f6bd9d99a759df7d3a3d29ee022596218b3c50608d056df43813f20142390291",
+  "comment_regular": "Synchronous character-creation face refresh: clear both cached player FaceGen nodes, reconcile/recreate them through TESRace_CreateFaceGenNodes, build one render state, apply it to both perspective nodes, update the player head, and destroy the state. A bFixFaceNormals scope around this call covers node construction completely.\n\nComplete player-face refresh after character-creation changes. The RaceSexMenu caller supplies this in ECX; generated head reconstruction occurs beneath this call, so it is the narrow boundary for temporarily enabling bFixFaceNormals during Randomize Face.",
+  "comment_repeatable": "Complete player-face refresh after character-creation changes. The RaceSexMenu caller supplies this in ECX; generated head reconstruction occurs beneath this call, so it is the narrow boundary for temporarily enabling bFixFaceNormals during Randomize Face.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 17,
+  "display_name": "RaceSexMenu_RefreshPlayerFace",
   "end_ea": "0x5C93E7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5C91E0",
+  "name": "RaceSexMenu_RefreshPlayerFace",
   "segment": ".text",
   "sha256": "2abf46b41f53077e6acf21183862aae2010c7c5482cff11290a22dc76b817ab6",
   "size": 519,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5C91E0",
-  "type": "void __usercall(double@<st2>, double@<st1>, double@<st0>)",
-  "xrefs_from_count": 194,
+  "total_chunk_size": 563,
+  "type": "void __thiscall(void *this)",
+  "xrefs_from_count": 219,
   "xrefs_to_count": 4
 }

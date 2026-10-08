@@ -1,18 +1,31 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
+  "chunks": [
+    [
+      "0x411160",
+      "0x4112DA"
+    ]
+  ],
+  "chunks_sha256": "3fce08727249027fbf84ee9a58ea7f9ec660ec2041c31056165b7c6b90677275",
+  "comment_regular": "MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.",
+  "comment_repeatable": "MoonSugarEffect decode: SetCameraFOV_0 rebuilds SceneGraph camera frustum, max far/near ratio, camera LODAdjust, and leaves persistent camera state. Avoid for per-frame Moon Sugar wobble.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 7,
   "display_name": "SetCameraFOV_0",
   "end_ea": "0x4112DA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "SetCameraFOV_0",
   "segment": ".text",
   "sha256": "3fce08727249027fbf84ee9a58ea7f9ec660ec2041c31056165b7c6b90677275",
   "size": 378,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x411160",
+  "total_chunk_size": 378,
   "type": "void __thiscall(SceneGraph *this, float a2, float a3)",
   "xrefs_from_count": 121,
   "xrefs_to_count": 10

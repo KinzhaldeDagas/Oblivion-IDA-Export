@@ -5,7 +5,7 @@
 0x99D419: push    esi
 0x99D41A: push    edi
 0x99D41B: jl      short loc_99D478
-0x99D41D: cmp     ecx, uNumber
+0x99D41D: cmp     ecx, ds:0BAAAA0h
 0x99D423: jnb     short loc_99D478
 0x99D425: mov     esi, ecx
 0x99D427: and     esi, 1Fh

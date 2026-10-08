@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x796980",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): stdcall adapter for uninitialized move of 0x10-byte vector owners. Function boundary now includes the add-esp/ret 0x0C normal tail through 0x7969A8.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x796981",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79698D",
-    "line": "mov     eax, [esp+8+arg_8]",
+    "line": "mov     eax, [esp+8+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x796992",
-    "line": "mov     edx, [esp+0Ch+arg_0]",
+    "line": "mov     edx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,32 +55,44 @@
   },
   {
     "ea": "0x796997",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+last]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79699B",
-    "line": "push    eax",
+    "line": "push    eax; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79699C",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79699D",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79699E",
-    "line": "call    sub_795ED0",
+    "line": "call    OB_stVector4_UninitializedMoveRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move of 0x10-byte vector owners. Constructs empty destinations, swaps begin/end/capacity ownership from each source, leaves sources empty, returns destinationFirst+count, and destroys the constructed prefix only on unwind. The prior noreturn annotation was false.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x7969A3",
+    "line": "add     esp, 1Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7969A6",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60B120",
-    "line": "push    ebp",
+    "line": "push    ebp; Resolve a non-Actor TESObjectREFR impact from world position/normal and the contacted Havok collision object. Builds state-1 attachment data, ray-resolves material/subshape, applies retained AMMO enchantment, poison, then bow enchantment through the shooter's MagicCaster, restores prior caster state, emits hit events, applies impulse, and selects attached or free-impact state.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x60B160",
-    "line": "mov     eax, [ebp+arg_8]",
+    "line": "mov     eax, [ebp+struckReference]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60B163",
-    "line": "mov     esi, [ebp+arg_0]",
+    "line": "mov     esi, [ebp+impactPosition]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60B166",
-    "line": "mov     edi, [ebp+arg_4]",
+    "line": "mov     edi, [ebp+impactNormal]",
     "mnemonic": "mov",
     "size": 3
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x60B170",
-    "line": "mov     [esp+238h+var_20C], esi",
+    "line": "mov     [esp+238h+self], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x60B188",
-    "line": "mov     dword ptr [eax], 1",
+    "line": "mov     dword ptr [eax], 1; Resolved non-Actor TESObjectREFR impact initializes collision record state 1.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x60B201",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x60B210",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x60B222",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x60B229",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x60B29C",
-    "line": "fstp    [esp+234h+var_214]",
+    "line": "fstp    [esp+234h+collisionObject]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x60B2B0",
-    "line": "fld     [esp+234h+var_214]",
+    "line": "fld     [esp+234h+collisionObject]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x60B2BF",
-    "line": "lea     edx, [esp+238h+var_1DC]",
+    "line": "lea     edx, [esp+238h+normalZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x60B2F0",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x60B309",
-    "line": "mov     [esp+234h+var_214], 0",
+    "line": "mov     [esp+234h+collisionObject], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x60B313",
-    "line": "mov     esi, [esp+234h+var_1F8]",
+    "line": "mov     esi, [esp+234h+var_1F8]; RealArenaTraining fidelity pass: ESI is loaded from the hit-ref argument/local used for both arrow event paths.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1111,13 +1111,13 @@
   },
   {
     "ea": "0x60B386",
-    "line": "push    eax; float",
+    "line": "push    eax; localPosZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60B387",
-    "line": "call    Script_AddEventToExtraScript",
+    "line": "call    Script_AddEventToExtraScript; RealArenaTraining fidelity pass: first arrow Script_AddEventToExtraScript in sub_60B120; EBX is ArrowProjectile and ESI remains hit ref.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x60B3A9",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x60B3B8",
-    "line": "mov     [esp+234h+var_214], edi",
+    "line": "mov     [esp+234h+collisionObject], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1267,13 +1267,13 @@
   },
   {
     "ea": "0x60B3D1",
-    "line": "push    eax",
+    "line": "push    eax; object",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60B3D2",
-    "line": "call    sub_480340",
+    "line": "call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,13 +1309,13 @@
   },
   {
     "ea": "0x60B3E3",
-    "line": "mov     [esp+234h+var_214], ecx",
+    "line": "mov     [esp+234h+collisionObject], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60B3E7",
-    "line": "mov     ecx, [esp+234h+var_214]",
+    "line": "mov     ecx, [esp+234h+collisionObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x60B40A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x60B500",
-    "line": "call    sub_88FCC0",
+    "line": "call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x60B519",
-    "line": "call    sub_88FCC0",
+    "line": "call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1855,7 +1855,7 @@
   },
   {
     "ea": "0x60B549",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2119,7 +2119,7 @@
   },
   {
     "ea": "0x60B5D5",
-    "line": "mov     eax, [esp+234h+var_214]",
+    "line": "mov     eax, [esp+234h+collisionObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2131,7 +2131,7 @@
   },
   {
     "ea": "0x60B5DD",
-    "line": "mov     esi, [esp+234h+var_20C]",
+    "line": "mov     esi, [esp+234h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2221,7 +2221,7 @@
   },
   {
     "ea": "0x60B603",
-    "line": "fstp    [esp+24Ch+var_24C]; float",
+    "line": "fstp    [esp+24Ch+pointY]; directionZ",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x60B617",
-    "line": "fstp    [esp+234h+var_20C]",
+    "line": "fstp    [esp+234h+self]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2287,13 +2287,13 @@
   },
   {
     "ea": "0x60B62F",
-    "line": "fstp    [esp+234h+var_1F4]",
+    "line": "fstp    [esp+234h+parentNode]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x60B633",
-    "line": "fld     [esp+234h+var_20C]",
+    "line": "fld     [esp+234h+self]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2317,7 +2317,7 @@
   },
   {
     "ea": "0x60B643",
-    "line": "fld     [esp+234h+var_1F4]",
+    "line": "fld     [esp+234h+parentNode]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x60B64B",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2407,13 +2407,13 @@
   },
   {
     "ea": "0x60B67A",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60B67F",
-    "line": "push    edi",
+    "line": "push    edi; materialId",
     "mnemonic": "push",
     "size": 1
   },
@@ -2425,7 +2425,7 @@
   },
   {
     "ea": "0x60B682",
-    "line": "call    sub_5361B0",
+    "line": "call    ImpactMaterial_GetHitParticlePath; Verified: maps Havok/material hit IDs to the corresponding sHitParticle* GameSetting string. 1/0x10 Stone; 2/0x11 Cloth; 3/0x12 Dirt; 4/0x13 Glass; 5/0x0B/0x14/0x1A Grass; 6/0x15 Metal; 7/0x16 Organic; 8/0x17 Skin; 9/0x0C/0x18/0x1B Water; 0x0D/0x1C Wood; 0x0E/0x1D Chain; default (including remaining material IDs) Snow. Distinct from Actor/TESCreature blood NIF path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2461,7 +2461,7 @@
   },
   {
     "ea": "0x60B696",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2503,7 +2503,7 @@
   },
   {
     "ea": "0x60B6A9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2515,7 +2515,7 @@
   },
   {
     "ea": "0x60B6B0",
-    "line": "call    sub_441800",
+    "line": "call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).",
     "mnemonic": "call",
     "size": 5
   },
@@ -2527,7 +2527,7 @@
   },
   {
     "ea": "0x60B6B7",
-    "line": "mov     [esp+238h+var_1F4], eax",
+    "line": "mov     [esp+238h+parentNode], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2545,7 +2545,7 @@
   },
   {
     "ea": "0x60B6C3",
-    "line": "mov     [esp+234h+var_20C], eax",
+    "line": "mov     [esp+234h+self], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2587,7 +2587,7 @@
   },
   {
     "ea": "0x60B6DD",
-    "line": "push    0; float",
+    "line": "push    0; useCachedClone",
     "mnemonic": "push",
     "size": 2
   },
@@ -2599,7 +2599,7 @@
   },
   {
     "ea": "0x60B6E2",
-    "line": "fstp    [esp+248h+a2]; float",
+    "line": "fstp    [esp+248h+a2]; scale",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2683,19 +2683,19 @@
   },
   {
     "ea": "0x60B70F",
-    "line": "mov     edx, [esp+254h+var_1F4]",
+    "line": "mov     edx, [esp+254h+parentNode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60B713",
-    "line": "push    edi; float",
+    "line": "push    edi; modelPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60B714",
-    "line": "push    edx; int",
+    "line": "push    edx; parentNode",
     "mnemonic": "push",
     "size": 1
   },
@@ -2719,31 +2719,31 @@
   },
   {
     "ea": "0x60B71B",
-    "line": "fstp    [esp+260h+var_260]; float",
+    "line": "fstp    [esp+260h+durationSeconds]; durationSeconds",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x60B71E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60B723",
-    "line": "mov     ecx, [esp+260h+var_20C]",
+    "line": "mov     ecx, [esp+260h+self]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60B727",
-    "line": "push    eax; int",
+    "line": "push    eax; parentCell",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60B728",
-    "line": "call    sub_5713F0",
+    "line": "call    BSTempEffectParticle_Constructor; Verified: constructs BSTempEffectParticle; parameters include cell, duration, NiNode parent, model path, direction XYZ, local position XYZ, scale, and cached-clone flag. Body-hit caller 0x5EF214 passes direction XYZ and position XYZ; constructor writes position components into the NiAVObject local-transform translation (including stores at root+0x54/+0x58). It applies |scale|, attaches the cloned NIF and starts controllers. Cached-clone choice is controlled by the final bool. All parameters now typed by observed data flow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2761,13 +2761,13 @@
   },
   {
     "ea": "0x60B731",
-    "line": "push    eax",
+    "line": "push    eax; effect",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60B732",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2779,13 +2779,13 @@
   },
   {
     "ea": "0x60B742",
-    "line": "call    sub_678D30",
+    "line": "call    ActorProcessManager_RegisterTempEffect; [Verified] ActorProcessManager_RegisterTempEffect increments the effect reference and routes GetTypeID 4-6 into extendedTempEffects (+0x48), all other IDs into activeTempEffects (+0x40). Vtable evidence confirms decals 0/1 and particles 2 use the active list. Fallout divergence: its BGSDecalManager updates distinct simple-decal and emitter collections instead of using this per-actor temp-effect routing; one-to-one equivalence is Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60B747",
-    "line": "mov     ecx, [ebx+78h]",
+    "line": "mov     ecx, [ebx+78h]; Temporarily save shooter MagicCaster active item and target before applying projectile-retained effects; both are restored after AMMO enchantment, poison, and bow enchantment processing.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2839,7 +2839,7 @@
   },
   {
     "ea": "0x60B763",
-    "line": "mov     [esp+234h+var_1F4], eax",
+    "line": "mov     [esp+234h+parentNode], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2863,13 +2863,13 @@
   },
   {
     "ea": "0x60B76E",
-    "line": "mov     [esp+234h+var_20C], eax",
+    "line": "mov     [esp+234h+self], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60B772",
-    "line": "mov     eax, [ebx+7Ch]",
+    "line": "mov     eax, [ebx+7Ch]; Apply ArrowProjectile+0x7C AMMO EnchantmentItem retained from the AMMO base form.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3043,13 +3043,13 @@
   },
   {
     "ea": "0x60B7C0",
-    "line": "call    MagicCaster_UseActiveMagicItem",
+    "line": "call    MagicCaster_UseActiveMagicItem; Non-Actor reference impact invokes shooter MagicCaster with projectile-held AMMO enchantment.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60B7C5",
-    "line": "mov     edx, [ebx+84h]",
+    "line": "mov     edx, [ebx+84h]; Apply ArrowProjectile+0x84 AlchemyItem poison retained from the equipped weapon; poison was already removed from that weapon at release.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3223,13 +3223,13 @@
   },
   {
     "ea": "0x60B815",
-    "line": "call    MagicCaster_UseActiveMagicItem",
+    "line": "call    MagicCaster_UseActiveMagicItem; Non-Actor reference impact invokes shooter MagicCaster with projectile-held poison.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60B81A",
-    "line": "mov     edx, [ebx+80h]",
+    "line": "mov     edx, [ebx+80h]; Apply ArrowProjectile+0x80 bow EnchantmentItem retained only after successful release-time charge payment.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3355,7 +3355,7 @@
   },
   {
     "ea": "0x60B855",
-    "line": "call    edx",
+    "line": "call    edx; Non-Actor reference impact invokes shooter MagicCaster with projectile-held bow enchantment.",
     "mnemonic": "call",
     "size": 2
   },
@@ -3415,7 +3415,7 @@
   },
   {
     "ea": "0x60B872",
-    "line": "mov     edx, [esp+234h+var_1F4]",
+    "line": "mov     edx, [esp+234h+parentNode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3475,7 +3475,7 @@
   },
   {
     "ea": "0x60B88D",
-    "line": "mov     eax, [esp+234h+var_20C]",
+    "line": "mov     eax, [esp+234h+self]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3493,7 +3493,7 @@
   },
   {
     "ea": "0x60B894",
-    "line": "mov     edi, [esp+234h+var_1F8]",
+    "line": "mov     edi, [esp+234h+var_1F8]; RealArenaTraining fidelity pass: EDI is reloaded from the same hit-ref local before the static object event.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3505,7 +3505,7 @@
   },
   {
     "ea": "0x60B89A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3631,13 +3631,13 @@
   },
   {
     "ea": "0x60B8D0",
-    "line": "push    edi; a2",
+    "line": "push    edi; normalY",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60B8D1",
-    "line": "call    Script_AddEventToExtraScript",
+    "line": "call    Script_AddEventToExtraScript; RealArenaTraining fidelity pass: second arrow event in the same collision function; EBX is the same ArrowProjectile and EDI is the same hit ref, so plugin suppresses duplicate training by arrow+target identity rather than time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3673,13 +3673,13 @@
   },
   {
     "ea": "0x60B8EA",
-    "line": "push    offset dword_B258DC",
+    "line": "push    offset stru_B258DC",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x60B8EF",
-    "line": "lea     eax, [esp+238h+var_1DC]",
+    "line": "lea     eax, [esp+238h+normalZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3691,7 +3691,7 @@
   },
   {
     "ea": "0x60B8F6",
-    "line": "push    eax; float",
+    "line": "push    eax; normalZ",
     "mnemonic": "push",
     "size": 1
   },
@@ -3709,7 +3709,7 @@
   },
   {
     "ea": "0x60B8FE",
-    "line": "mov     ecx, [esp+234h+var_214]",
+    "line": "mov     ecx, [esp+234h+collisionObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3721,7 +3721,7 @@
   },
   {
     "ea": "0x60B904",
-    "line": "push    ecx; int",
+    "line": "push    ecx; collisionObject",
     "mnemonic": "push",
     "size": 1
   },
@@ -3817,13 +3817,13 @@
   },
   {
     "ea": "0x60B92D",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60B92F",
-    "line": "call    sub_6088F0",
+    "line": "call    ArrowProjectile_ApplyImpactImpulseToCollision; Applies the one-shot impact impulse using world-space contact point and normal components. Projectile byte +0x97 prevents duplicate attempts, including unsupported collision objects.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3889,7 +3889,7 @@
   },
   {
     "ea": "0x60B95A",
-    "line": "mov     ecx, [esp+238h+var_214]",
+    "line": "mov     ecx, [esp+238h+collisionObject]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4033,7 +4033,7 @@
   },
   {
     "ea": "0x60B9B7",
-    "line": "call    sub_53D4B0",
+    "line": "call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4159,7 +4159,7 @@
   },
   {
     "ea": "0x60B9F9",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4261,7 +4261,7 @@
   },
   {
     "ea": "0x60BA3A",
-    "line": "call    sub_43F3E0",
+    "line": "call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).",
     "mnemonic": "call",
     "size": 5
   },
@@ -4339,7 +4339,7 @@
   },
   {
     "ea": "0x60BA60",
-    "line": "call    sub_608DA0",
+    "line": "call    ArrowProjectile_SetFreeImpactState3; Convert to free-impact state 3 without changing TESObjectREFR.baseForm or attaching source-WEAP identity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4414,5 +4414,101 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C2FC0",
+    "line": "mov     eax, [ebp+self]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2FC6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2FC7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2FCC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2FCD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C2FCE",
+    "line": "mov     edx, [esp-4+impactNormal]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C2FD2",
+    "line": "lea     eax, [edx-224h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2FD8",
+    "line": "mov     ecx, [edx-228h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C2FDE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2FE0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2FE5",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2FE8",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C2FEB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C2FED",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2FF2",
+    "line": "mov     eax, offset stru_AEBCB4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C2FF7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

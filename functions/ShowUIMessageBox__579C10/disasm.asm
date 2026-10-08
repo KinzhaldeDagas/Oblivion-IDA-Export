@@ -1,4 +1,4 @@
-0x579C10: push    ecx
+0x579C10: push    ecx; Verified aPortable: cdecl varargs message, void callback(), base button index, NULL-terminated button labels. Requires InterfaceManager cursor; mode selects message menu builder. Fallout queued MessageMenu API is architecturally related but is NOT the same calling convention or lifetime.
 0x579C11: push    1; arg1
 0x579C13: push    0; canCreate
 0x579C15: call    InterfaceManager_GetSingleton
@@ -43,13 +43,13 @@
 0x579C98: fnstsw  ax
 0x579C9A: test    ah, 44h
 0x579C9D: jp      short loc_579CC1
-0x579C9F: mov     edx, [esp+4+arg_C]
-0x579CA3: mov     eax, [esp+4+arg_8]
+0x579C9F: mov     edx, [esp+4+firstButton]
+0x579CA3: mov     eax, [esp+4+baseButtonIndex]
 0x579CA7: lea     ecx, [esp+4+var_4]
 0x579CAA: push    ecx
-0x579CAB: mov     ecx, [esp+8+arg_4]
+0x579CAB: mov     ecx, [esp+8+callback]
 0x579CAF: push    edx
-0x579CB0: mov     edx, [esp+0Ch+arg_0]
+0x579CB0: mov     edx, [esp+0Ch+message]
 0x579CB4: push    eax
 0x579CB5: push    ecx
 0x579CB6: push    edx
@@ -57,13 +57,13 @@
 0x579CBC: add     esp, 14h
 0x579CBF: pop     ecx
 0x579CC0: retn
-0x579CC1: mov     ecx, [esp+4+arg_C]
-0x579CC5: mov     edx, [esp+4+arg_8]
+0x579CC1: mov     ecx, [esp+4+firstButton]
+0x579CC5: mov     edx, [esp+4+baseButtonIndex]
 0x579CC9: lea     eax, [esp+4+var_4]
 0x579CCC: push    eax
-0x579CCD: mov     eax, [esp+8+arg_4]
+0x579CCD: mov     eax, [esp+8+callback]
 0x579CD1: push    ecx
-0x579CD2: mov     ecx, [esp+0Ch+arg_0]
+0x579CD2: mov     ecx, [esp+0Ch+message]
 0x579CD6: push    edx
 0x579CD7: push    eax
 0x579CD8: push    ecx

@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x4BFDD7",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BFDD9",
-    "line": "call    TESWorldSpace_GetParentWorldpsace",
+    "line": "call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.",
     "mnemonic": "call",
     "size": 5
   },

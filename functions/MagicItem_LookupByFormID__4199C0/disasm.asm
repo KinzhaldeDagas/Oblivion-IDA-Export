@@ -2,7 +2,7 @@
 0x4199C4: push    esi
 0x4199C5: push    edi
 0x4199C6: push    eax; a1
-0x4199C7: call    TESForm_LookupByFormID
+0x4199C7: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4199CC: mov     esi, eax
 0x4199CE: add     esp, 4
 0x4199D1: test    esi, esi

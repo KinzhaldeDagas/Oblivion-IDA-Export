@@ -1,2 +1,2 @@
-0xA25F90: mov     ecx, offset NiTMap_AECreatorFuncs
-0xA25F95: jmp     ??1?$NiTPointerMap@W4EffectID@MagicSystem@@P6APAVActiveEffect@@PAVMagicCaster@@PAVMagicItem@@PAVEffectItem@@@Z@@UAE@XZ; NiTPointerMap<MagicSystem::EffectID,ActiveEffect * (*)(MagicCaster *,MagicItem *,EffectItem *)>::~NiTPointerMap<MagicSystem::EffectID,ActiveEffect * (*)(MagicCaster *,MagicItem *,EffectItem *)>(void)
+0xA25F90: mov     ecx, offset NiTMap_AECreatorFuncs; Verified atexit cleanup: calls ActiveEffectCreatorMap_Destroy on NiTMap_AECreatorFuncs, releasing the map bucket allocation at process shutdown.
+0xA25F95: jmp     ActiveEffectCreatorMap_Destroy; Verified ActiveEffectCreatorMap destructor: clears entries, restores the NiTMapBase vtable, clears the base map, and frees the bucket array. The global object itself is static storage.

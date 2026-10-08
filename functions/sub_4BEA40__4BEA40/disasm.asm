@@ -1,4 +1,4 @@
-0x4BEA40: mov     eax, [esp+arg_0]
+0x4BEA40: mov     eax, [esp+source]; Verified: copies the two-byte climate settings at +0x54 as part of the 6-byte data block at +0x50; individual semantics remain Unknown except Sky's use of +0x54 low byte.
 0x4BEA44: push    ebx
 0x4BEA45: push    edi
 0x4BEA46: push    0; int
@@ -17,15 +17,15 @@
 0x4BEA67: push    ebx; a2
 0x4BEA68: mov     ecx, edi; this
 0x4BEA6A: call    TESForm_CopyAllComponentsFrom
-0x4BEA6F: push    0
+0x4BEA6F: push    0; append
 0x4BEA71: lea     ecx, [ebx+30h]
-0x4BEA74: push    ecx
-0x4BEA75: lea     ecx, [edi+30h]
-0x4BEA78: call    sub_4EED80
+0x4BEA74: push    ecx; source
+0x4BEA75: lea     ecx, [edi+30h]; this
+0x4BEA78: call    OblivionTESWeatherList_CopyEntries; Verified: clears destination weather list when mode is false, then copies each 8-byte {TESWeather*, sortWeight} payload into a new list node; mode true preserves existing entries and appends.
 0x4BEA7D: mov     ebp, ebx
 0x4BEA7F: lea     esi, [edi+38h]
 0x4BEA82: sub     ebp, edi
-0x4BEA84: mov     [esp+10h+arg_0], 2
+0x4BEA84: mov     [esp+10h+source], 2
 0x4BEA8C: lea     esp, [esp+0]
 0x4BEA90: mov     edx, [esi]
 0x4BEA92: mov     edx, [edx+8]
@@ -34,7 +34,7 @@
 0x4BEA99: mov     ecx, esi
 0x4BEA9B: call    edx
 0x4BEA9D: add     esi, 0Ch
-0x4BEAA0: sub     [esp+10h+arg_0], 1
+0x4BEAA0: sub     [esp+10h+source], 1
 0x4BEAA5: jnz     short loc_4BEA90
 0x4BEAA7: mov     eax, [edi+18h]
 0x4BEAAA: mov     eax, [eax+8]

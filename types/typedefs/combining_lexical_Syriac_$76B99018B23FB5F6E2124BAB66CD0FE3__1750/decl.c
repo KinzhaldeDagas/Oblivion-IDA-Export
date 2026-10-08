@@ -1,1 +1,21 @@
-combining_lexical_Syriac::$76B99018B23FB5F6E2124BAB66CD0FE3
+enum combining_lexical_Syriac::$76B99018B23FB5F6E2124BAB66CD0FE3 : __int32
+{
+Syriac_Norm = 0x0,
+Syriac_DIAC1 = 0x1,
+Syriac_DIAC2 = 0x2,
+Syriac_DIAC3 = 0x3,
+Syriac_DIAC4 = 0x4,
+Syriac_DIAC5 = 0x5,
+Syriac_DIAC6 = 0x6,
+Syriac_DIAC7 = 0x7,
+Syriac_DIAC8 = 0x8,
+Syriac_DIAC9 = 0x9,
+Syriac_DIAC10 = 0xA,
+Syriac_DIAC11 = 0xB,
+Syriac_DIAC12 = 0xC,
+Syriac_DIAC13 = 0xD,
+Syriac_DIAC14 = 0xE,
+Syriac_DIAC15 = 0xF,
+Syriac_DIAC16 = 0x10,
+Syriac_DIAC17 = 0x11,
+};

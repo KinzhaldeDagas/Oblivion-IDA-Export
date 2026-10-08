@@ -4,8 +4,8 @@
 0x502C48: mov     esi, [esp+0Ch+a4]
 0x502C4C: xor     eax, eax
 0x502C4E: mov     dword ptr [esp+0Ch+var_4], eax
-0x502C52: mov     [esp+0Ch+var_8], eax
-0x502C56: lea     eax, [esp+0Ch+var_8]
+0x502C52: mov     [esp+0Ch+stage], eax
+0x502C56: lea     eax, [esp+0Ch+stage]
 0x502C5A: push    eax
 0x502C5B: mov     eax, [esp+10h+arg_10]
 0x502C5F: lea     ecx, [esp+10h+var_4]
@@ -21,21 +21,21 @@
 0x502C78: push    edx; a3
 0x502C79: push    eax; a2
 0x502C7A: push    ecx; a1
-0x502C7B: call    Script_ExtractArgs
+0x502C7B: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x502C80: add     esp, 24h
 0x502C83: test    al, al
 0x502C85: jnz     short loc_502C8C
 0x502C87: pop     esi
 0x502C88: add     esp, 8
 0x502C8B: retn
-0x502C8C: mov     edx, [esp+0Ch+arg_18]
-0x502C90: mov     eax, [esp+0Ch+var_8]
+0x502C8C: mov     edx, [esp+0Ch+value]
+0x502C90: mov     eax, [esp+0Ch+stage]
 0x502C94: mov     ecx, dword ptr [esp+0Ch+var_4]
-0x502C98: push    edx
-0x502C99: push    eax
-0x502C9A: push    ecx
-0x502C9B: push    esi
-0x502C9C: call    sub_4F4BC0
+0x502C98: push    edx; value
+0x502C99: push    eax; stage
+0x502C9A: push    ecx; quest
+0x502C9B: push    esi; subject
+0x502C9C: call    GetStageDone_Eval; GetStageDone_Eval queries TESQuest::IsStageDone(quest, stage) and returns numeric 1/0. It does not compare against the current stage number.
 0x502CA1: add     esp, 10h
 0x502CA4: pop     esi
 0x502CA5: add     esp, 8

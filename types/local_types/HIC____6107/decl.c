@@ -1,1 +1,4 @@
-HIC__
+struct HIC__
+{
+int unused;
+};

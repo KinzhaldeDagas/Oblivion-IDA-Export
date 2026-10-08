@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x52F010",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Authoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x52F042",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x52F0A5",
-    "line": "cmp     [esi+116h], bl",
+    "line": "cmp     [esi+116h], bl; Shivering Isles fallback for ambient selection only: if no match while the player is in the SE world, temporarily retry base-world conditions for dialogue types Combat(2), Persuasion(3), Detection(4), or Miscellaneous(6), then restore the world flag.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x52F0D4",
-    "line": "push    ecx; a7",
+    "line": "push    ecx; conversation",
     "mnemonic": "push",
     "size": 1
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x52F0D9",
-    "line": "push    eax; a6",
+    "line": "push    eax; previousTopic",
     "mnemonic": "push",
     "size": 1
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x52F0DE",
-    "line": "push    edx; a5",
+    "line": "push    edx; useConversationRules",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x52F0E3",
-    "line": "push    ecx; a4",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F0E4",
-    "line": "push    edx; a3",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F0E5",
-    "line": "push    eax; a2",
+    "line": "push    eax; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x52F0EE",
-    "line": "call    sub_52F010",
+    "line": "call    TESTopic__SelectInfoForSpeaker; Authoritative Oblivion INFO selector. Scans running quest buckets by descending priority and INFOs in record order; applies conditions, conversation linkedFrom/ANY rules, reuse suppression, and Random groups. For an ambient first item (previousTopic=null), a nonempty linkedFrom list is rejected unless the target is the player. RandomEnd is latched before conversation reuse checks, so a duplicate/repeated RandomEnd INFO can terminate the scan without being eligible.",
     "mnemonic": "call",
     "size": 5
   },
@@ -480,12 +480,6 @@
     "size": 3
   },
   {
-    "ea": "0x52F10A",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 6
-  },
-  {
     "ea": "0x52F110",
     "line": "mov     eax, [esp+24h+var_C]",
     "mnemonic": "mov",
@@ -493,7 +487,7 @@
   },
   {
     "ea": "0x52F114",
-    "line": "mov     edi, [eax]",
+    "line": "mov     edi, [eax]; QuestInfoEntry traversal is already sorted by descending QUST priority. Selection therefore exhausts higher-priority quest INFO arrays before lower-priority quests; equal-priority bucket order remains stable.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -571,7 +565,7 @@
   },
   {
     "ea": "0x52F145",
-    "line": "jz      loc_52F2A5",
+    "line": "jz      loc_52F2A5; Only a running quest bucket participates in INFO selection: TESQuest.questFlags bit 0x01. In authored QUST DATA the Construction Set labels this same bit 'Start Game Enabled'.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -631,7 +625,7 @@
   },
   {
     "ea": "0x52F168",
-    "line": "mov     [esp+24h+var_11], bl",
+    "line": "mov     [esp+24h+lowDispositionFailure], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -661,43 +655,43 @@
   },
   {
     "ea": "0x52F17C",
-    "line": "push    ecx",
+    "line": "push    ecx; target",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F17D",
-    "line": "push    edx",
+    "line": "push    edx; speaker",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F17E",
-    "line": "push    eax",
+    "line": "push    eax; parentQuest",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F17F",
-    "line": "lea     ecx, [esp+30h+var_11]",
+    "line": "lea     ecx, [esp+30h+lowDispositionFailure]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x52F183",
-    "line": "push    ecx",
+    "line": "push    ecx; lowDispositionFailure",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52F184",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52F186",
-    "line": "call    sub_530830",
+    "line": "call    TESTopicInfo__EvaluateConditions; Evaluate quest conditions followed by INFO conditions for this speaker/target. SayOnce is rejected here when the INFO-global spoken byte is already set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -829,7 +823,7 @@
   },
   {
     "ea": "0x52F1CE",
-    "line": "jz      short loc_52F1F5",
+    "line": "jz      short loc_52F1F5; Conversation link acceptance: the candidate linked topic may equal previousTopic or be stock 000000D3 / ANY, which acts as the wildcard continuation root.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -859,7 +853,7 @@
   },
   {
     "ea": "0x52F1DB",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; First ambient item (previousTopic=null): an INFO with a links object is accepted when its linkedFrom list is empty. If linkedFrom is nonempty, only the special target==Player case bypasses the missing previous-topic match.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -895,7 +889,7 @@
   },
   {
     "ea": "0x52F1EF",
-    "line": "jnz     loc_52F275",
+    "line": "jnz     loc_52F275; For normal NPC-to-NPC random conversation, previousTopic=null plus nonempty INFO.linkedFrom rejects this candidate. The target==Player exception applies only to this first-item/no-previous-topic branch.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -919,13 +913,13 @@
   },
   {
     "ea": "0x52F1FF",
-    "line": "jz      short loc_52F206",
+    "line": "jz      short loc_52F206; TESTopicInfo::RandomEnd (0x20): stop scanning later INFO candidates after this match.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x52F201",
-    "line": "mov     [esp+24h+var_12], 1",
+    "line": "mov     [esp+24h+var_12], 1; Latch RandomEnd before checking whether this INFO duplicates an earlier conversation item. The stop flag is not cleared if the later exact-INFO or same quest/topic reuse test rejects the candidate.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -997,7 +991,7 @@
   },
   {
     "ea": "0x52F220",
-    "line": "jz      short loc_52F275",
+    "line": "jz      short loc_52F275; Exact-INFO reuse rejection occurs after RandomEnd was latched. A rejected RandomEnd still blocks all later INFOs; earlier accumulated Random candidates remain selectable, otherwise selection can return null and drive retry/GOODBYE recovery.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1009,7 +1003,7 @@
   },
   {
     "ea": "0x52F224",
-    "line": "test    byte ptr [ecx+3Ch], 4",
+    "line": "test    byte ptr [ecx+3Ch], 4; TESQuest.questFlags bit 0x04 is the Oblivion Construction Set option 'Allow repeated conversation topics'. When clear, generated conversations suppress later DialogueItems from the same owner quest/topic.",
     "mnemonic": "test",
     "size": 4
   },
@@ -1045,7 +1039,7 @@
   },
   {
     "ea": "0x52F236",
-    "line": "jz      short loc_52F275",
+    "line": "jz      short loc_52F275; Same owner quest/topic reuse rejection also preserves an already-latched RandomEnd stop. QUST Allow repeated conversation topics bypasses only this same-topic test, never exact-INFO reuse.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1153,7 +1147,7 @@
   },
   {
     "ea": "0x52F267",
-    "line": "jz      short loc_52F2BF",
+    "line": "jz      short loc_52F2BF; TESTopicInfo::Random (0x02): non-random eligible INFO returns immediately when no random candidates exist; random INFOs are accumulated.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1171,7 +1165,7 @@
   },
   {
     "ea": "0x52F26D",
-    "line": "jz      short loc_52F2B8",
+    "line": "jz      short loc_52F2B8; An eligible non-Random INFO terminates further scanning. If Random candidates were already accumulated, the non-Random INFO is a boundary and is not itself selected.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -1201,7 +1195,7 @@
   },
   {
     "ea": "0x52F27B",
-    "line": "cmp     [esp+24h+var_11], bl",
+    "line": "cmp     [esp+24h+lowDispositionFailure], bl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1219,7 +1213,7 @@
   },
   {
     "ea": "0x52F285",
-    "line": "mov     [esp+24h+var_8], esi",
+    "line": "mov     [esp+24h+var_8], esi; Player/menu-only fallback: retain this condition-failed INFO when its failed condition was GetDisposition with > or >=. The last such candidate wins if no normal or Random match exists.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1453,7 +1447,7 @@
   },
   {
     "ea": "0x52F2F0",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1465,7 +1459,7 @@
   },
   {
     "ea": "0x52F2F7",
-    "line": "div     esi",
+    "line": "div     esi; Uniform selection from the eligible Random (0x02) INFO candidate list.",
     "mnemonic": "div",
     "size": 2
   },

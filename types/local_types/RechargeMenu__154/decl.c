@@ -1,1 +1,1 @@
-RechargeMenu
+struct RechargeMenu;

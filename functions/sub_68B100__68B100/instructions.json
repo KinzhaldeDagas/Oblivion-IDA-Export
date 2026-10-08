@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68B100",
-    "line": "cmp     byte ptr [ecx+4], 0",
+    "line": "cmp     byte ptr [ecx+4], 0; Verified stores a TESObjectREFR* into payload +0 only when kind==0. The route node does not take an extra reference to the TESObjectREFR.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x68B106",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+reference]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -14,7 +14,7 @@
 0x8A3016: mov     esp, ebp
 0x8A3018: pop     ebp
 0x8A3019: retn    4
-0x8A301C: mov     eax, offset stru_BA7A40
+0x8A301C: mov     eax, offset unk_BA7A40
 0x8A3021: movaps  xmm0, xmmword ptr [eax]
 0x8A3024: mov     eax, [ebp+arg_0]
 0x8A3027: movaps  xmmword ptr [eax], xmm0

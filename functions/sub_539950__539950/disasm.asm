@@ -1,2 +1,2 @@
-0x539950: mov     eax, offset stru_BA7D50
+0x539950: mov     eax, 0BA7D50h
 0x539955: retn

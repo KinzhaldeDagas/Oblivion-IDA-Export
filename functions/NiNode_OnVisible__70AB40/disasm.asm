@@ -1,4 +1,4 @@
-0x70AB40: fldz
+0x70AB40: fldz; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x70AB42: push    edi
 0x70AB43: mov     edi, ecx
 0x70AB45: fcomp   dword ptr [edi+2Ch]
@@ -7,7 +7,7 @@
 0x70AB4D: jnp     short loc_70AB83
 0x70AB4F: push    esi
 0x70AB50: xor     esi, esi
-0x70AB52: cmp     [edi+0B6h], si
+0x70AB52: cmp     [edi+0B6h], si; Begin ordinary NiNode child loop using child count +0xB6 and child array +0xB0.
 0x70AB59: jbe     short loc_70AB82
 0x70AB5B: push    ebx
 0x70AB5C: mov     ebx, [esp+0Ch+a2]
@@ -16,7 +16,7 @@
 0x70AB69: test    ecx, ecx
 0x70AB6B: jz      short loc_70AB73
 0x70AB6D: push    ebx; a2
-0x70AB6E: call    NiAVObject_Render
+0x70AB6E: call    NiAVObject_Render; NiNode recursively submits each eligible child through NiAVObject visibility/render dispatch; each child retains its own AppCulled test.
 0x70AB73: movzx   ecx, word ptr [edi+0B6h]
 0x70AB7A: add     esi, 1
 0x70AB7D: cmp     esi, ecx

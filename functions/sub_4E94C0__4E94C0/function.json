@@ -1,19 +1,36 @@
 {
-  "callees_count": 41,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 27,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4E94C0",
+  "chunks": [
+    [
+      "0x4E94C0",
+      "0x4E97E4"
+    ],
+    [
+      "0x9B5FC0",
+      "0x9B5FE3"
+    ]
+  ],
+  "chunks_sha256": "f56cab9ab51d2096cf93448199372a81adc20139a80123e4b39f674e046932b4",
+  "comment_regular": "Verified this is called with TESRoad* by TESRoad_AddTravelSurfaceSegment. It resolves both endpoint positions to nearest road graph points, checks endpoint/process conditions and geometry, and resets transient node data after the surface test.",
+  "comment_repeatable": "Verified this is called with TESRoad* by TESRoad_AddTravelSurfaceSegment. It resolves both endpoint positions to nearest road graph points, checks endpoint/process conditions and geometry, and resets transient node data after the surface test.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESRoad_TestTravelSurfaceSegment",
   "end_ea": "0x4E97E4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E94C0",
+  "name": "TESRoad_TestTravelSurfaceSegment",
   "segment": ".text",
   "sha256": "c47cc146bae06785cda6097072f61b1b9ed756c0747243c8d315498ffbcfc4c0",
   "size": 804,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E94C0",
-  "type": "char __thiscall(int *this, int **, int **, BSExtraData *)",
-  "xrefs_from_count": 266,
+  "total_chunk_size": 839,
+  "type": "bool __thiscall(TESRoad *this, const NiPoint3 *start, const NiPoint3 *end, void *geometryContext)",
+  "xrefs_from_count": 277,
   "xrefs_to_count": 1
 }

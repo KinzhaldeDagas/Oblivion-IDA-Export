@@ -58,9 +58,9 @@
 0x81323D: test    esi, esi
 0x81323F: jz      short loc_81325B
 0x813241: mov     ecx, esi
-0x813243: call    ImageSpaceShaderList__Destroy
+0x813243: call    ImageSpaceShaderList__Destroy; MoonSugarEffect decode: ImageSpaceShaderList::Destroy frees list nodes and owned renderTarget/screen quad, clears fallback pointer; it does not release shader objects stored as raw list data.
 0x813248: push    esi
-0x813249: call    FormHeapFree
+0x813249: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x81324E: add     esp, 4
 0x813251: mov     dword ptr [ebp+14Ch], 0
 0x81325B: mov     esi, [ebp+148h]
@@ -95,7 +95,7 @@
 0x8132A3: push    1
 0x8132A5: mov     ecx, esi
 0x8132A7: call    eax
-0x8132A9: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x8132A9: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x8132AE: push    6; int
 0x8132B0: push    4; unsigned int
 0x8132B2: lea     eax, [ebp+128h]
@@ -114,3 +114,26 @@
 0x8132E1: pop     ebx
 0x8132E2: add     esp, 10h
 0x8132E5: retn
+0x9D11D0: mov     ecx, [ebp-10h]
+0x9D11D3: jmp     DestroyNiCamera?
+0x9D11D8: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D11DD: push    6; int
+0x9D11DF: push    4; unsigned int
+0x9D11E1: mov     eax, [ebp-10h]
+0x9D11E4: add     eax, 128h
+0x9D11E9: push    eax; void *
+0x9D11EA: call    $LN21
+0x9D11EF: retn
+0x9D11F0: mov     ecx, [ebp-10h]
+0x9D11F3: add     ecx, 140h; slot
+0x9D11F9: jmp     NiPointerSlot_Release
+0x9D11FE: mov     ecx, [ebp-10h]
+0x9D1201: add     ecx, 148h; slot
+0x9D1207: jmp     NiPointerSlot_Release
+0x9D120C: mov     edx, [esp+arg_4]
+0x9D1210: lea     eax, [edx-14h]
+0x9D1213: mov     ecx, [edx-18h]
+0x9D1216: xor     ecx, eax
+0x9D1218: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D121D: mov     eax, offset stru_AF98EC
+0x9D1222: jmp     ___CxxFrameHandler3

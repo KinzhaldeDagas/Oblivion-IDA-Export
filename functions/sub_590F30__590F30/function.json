@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x590F30",
+      "0x590F73"
+    ]
+  ],
+  "chunks_sha256": "03264ef960313360919dbfaf77fdfbdefda08270361cff28fa0ecd265aa6683c",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified vtable +0x14 callback, Fallout analogue 0x822468F8. Marks position dirty for x/y, geometry dirty for width/height, returns NULL so shared FinalPostParse also runs. No dialogue callback here.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_590F30",
+  "display_name": "TileImage::PostParse",
   "end_ea": "0x590F73",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_590F30",
+  "name": "TileImage::PostParse",
   "segment": ".text",
   "sha256": "03264ef960313360919dbfaf77fdfbdefda08270361cff28fa0ecd265aa6683c",
   "size": 67,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x590F30",
-  "type": "int __thiscall(_DWORD *this, int, int, int)",
+  "total_chunk_size": 67,
+  "type": "Tile *__thiscall(TileImage *this, unsigned int trait, float value, const char *text)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 1
 }

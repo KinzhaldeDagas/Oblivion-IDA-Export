@@ -12,7 +12,6 @@
 0x47DBA7: test    esi, esi
 0x47DBA9: jz      short loc_47DBC8
 0x47DBAB: jmp     short loc_47DBB0
-0x47DBAD: align 10h
 0x47DBB0: mov     eax, [esi+4]
 0x47DBB3: mov     edx, [edi]
 0x47DBB5: mov     edx, [edx+8]

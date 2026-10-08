@@ -3,7 +3,7 @@
 0x4AF7AA: push    ecx; Dst
 0x4AF7AB: mov     ecx, edi; a1
 0x4AF7AD: mov     byte ptr [ebp-0Ch], 0
-0x4AF7B1: call    TESFile_GetChunkData
+0x4AF7B1: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4AF7B6: test    byte ptr [ebp-0Ch], 80h
 0x4AF7BA: lea     ebx, [esi+24h]
 0x4AF7BD: mov     ecx, ebx

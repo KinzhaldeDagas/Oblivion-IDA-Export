@@ -26,3 +26,12 @@
 0x5E15CC: pop     esi
 0x5E15CD: add     esp, 10h
 0x5E15D0: retn    4
+0x9B2190: mov     ecx, [ebp-10h]
+0x9B2193: jmp     loc_4A01E0
+0x9B2198: mov     edx, [esp+arg_4]
+0x9B219C: lea     eax, [edx-8]
+0x9B219F: mov     ecx, [edx-0Ch]
+0x9B21A2: xor     ecx, eax
+0x9B21A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B21A9: mov     eax, offset stru_ADE1D4
+0x9B21AE: jmp     ___CxxFrameHandler3

@@ -1,18 +1,31 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7238A0",
+      "0x723930"
+    ]
+  ],
+  "chunks_sha256": "7fc1ebd6a62b268fe6e99a943fa0147ea763d448f272e1dd3f2fe67d06103a3f",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused CULLING audit: preserves native LOD camera selection. Dynamic flag+0x100 enables recomputing selected index+0xE0 from current process.Camera, then delegates to NiSwitchNode OnVisible. Guard selected geometry after this dispatch; rejecting/replacing node handling can skip native selection side effects.\nGPU static-world LOD audit 2026-09-27: dynamic selection is conditional on byte+100 and non-null data+FC. Global B273FC>=0 overrides the camera result through data virtual+58. Only this dynamic/data branch walks backward to a preceding non-null child before delegating to NiSwitchNode. Cached +E0 writes remain native side effects required by any replacement.\n\nRetail NiLODNode OnVisible entry. Dynamic-LOD flag +0x100 controls whether selected child +0xE0 is recomputed from the current culling camera.",
+  "comment_repeatable": "Retail NiLODNode OnVisible entry. Dynamic-LOD flag +0x100 controls whether selected child +0xE0 is recomputed from the current culling camera.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiLodNode_Render?",
+  "display_name": "NiLODNode_OnVisible",
   "end_ea": "0x723930",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiLodNode_Render?",
+  "name": "NiLODNode_OnVisible",
   "segment": ".text",
   "sha256": "7fc1ebd6a62b268fe6e99a943fa0147ea763d448f272e1dd3f2fe67d06103a3f",
   "size": 144,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7238A0",
+  "total_chunk_size": 144,
   "type": "int __thiscall(NiLODNode *this, NiCullingProcess *)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 1

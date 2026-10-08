@@ -1,1 +1,1 @@
-SChannelHookCallInfo_0
+typedef SChannelHookCallInfo SChannelHookCallInfo_0;

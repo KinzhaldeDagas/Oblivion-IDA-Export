@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x546640",
+      "0x546659"
+    ]
+  ],
+  "chunks_sha256": "cc643bb42794275dd55cb4e161a9ef83efa8d98267fe6a2a513fc45228c36cd8",
+  "comment_regular": "RadiantAI 2026-07-12: acquire kill score. Callers pass shouldActorFight result as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=50, mult=-1 => score = fightScore + 50 - responsibility.",
+  "comment_repeatable": "RadiantAI 2026-07-12: acquire kill score. Callers pass shouldActorFight result as arg1 and raw Responsibility AV 0x24 as arg2. Defaults base=50, mult=-1 => score = fightScore + 50 - responsibility.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "sub_546640",
   "end_ea": "0x546659",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_546640",
   "segment": ".text",
   "sha256": "cc643bb42794275dd55cb4e161a9ef83efa8d98267fe6a2a513fc45228c36cd8",
   "size": 25,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x546640",
+  "total_chunk_size": 25,
   "type": "double __cdecl(signed int, signed int)",
   "xrefs_from_count": 5,
   "xrefs_to_count": 3

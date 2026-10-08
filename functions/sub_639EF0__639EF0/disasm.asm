@@ -19,7 +19,7 @@
 0x639F20: mov     eax, [esi+40h]
 0x639F23: mov     edi, [eax+4]
 0x639F26: push    eax
-0x639F27: call    FormHeapFree
+0x639F27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x639F2C: add     esp, 4
 0x639F2F: cmp     edi, ebx
 0x639F31: mov     [esi+40h], edi
@@ -27,7 +27,7 @@
 0x639F36: mov     edi, [esp+2Ch+arg_0]
 0x639F3A: mov     ecx, edi; this
 0x639F3C: mov     [esi+3Ch], ebx
-0x639F3F: call    TESObjectREFR_GetParentCell
+0x639F3F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x639F44: mov     ebp, eax
 0x639F46: mov     eax, [edi]
 0x639F48: mov     edx, [eax+174h]
@@ -102,3 +102,15 @@
 0x63A015: pop     ebx
 0x63A016: add     esp, 18h
 0x63A019: retn    8
+0x9C25F0: mov     eax, [ebp+4]
+0x9C25F3: push    eax
+0x9C25F4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C25F9: pop     ecx
+0x9C25FA: retn
+0x9C25FB: mov     edx, [esp+arg_4]
+0x9C25FF: lea     eax, [edx-1Ch]
+0x9C2602: mov     ecx, [edx-20h]
+0x9C2605: xor     ecx, eax
+0x9C2607: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C260C: mov     eax, offset stru_AEB4AC
+0x9C2611: jmp     ___CxxFrameHandler3

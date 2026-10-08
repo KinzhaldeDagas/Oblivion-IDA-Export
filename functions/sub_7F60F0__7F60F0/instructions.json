@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7F60F0",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+lightingProperty]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,13 +25,13 @@
   },
   {
     "ea": "0x7F60FC",
-    "line": "fstp    [esp+8+arg_8]",
+    "line": "fstp    [esp+8+lightingProperty]; Tree/LOD light rebuild reads BSShaderLightingProperty+0x94. Base constructor 0x7EE4B8 initializes this dimmer to 1.0; no leaf-specific writer is proven in the draw path.",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7F6100",
-    "line": "mov     edi, [esp+8+arg_4]",
+    "line": "mov     edi, [esp+8+renderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7F610C",
-    "line": "mov     esi, [esp+0Ch+arg_C]",
+    "line": "mov     esi, [esp+0Ch+previousRenderEntry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7F612A",
-    "line": "fld     [esp+0Ch+arg_8]",
+    "line": "fld     [esp+0Ch+lightingProperty]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -139,25 +139,25 @@
   },
   {
     "ea": "0x7F612F",
-    "line": "fstp    [esp+10h+var_10]; float",
+    "line": "fstp    [esp+10h+propertyDimmer]; propertyDimmer",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7F6132",
-    "line": "push    ecx; int",
+    "line": "push    ecx; shadowSceneLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F6133",
-    "line": "push    eax; int",
+    "line": "push    eax; lightSlot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7F6134",
-    "line": "call    sub_7EE390",
+    "line": "call    OB_BSShader_DispatchLightConstantUpdate_010201A0; Rebuild only present/changed slots. Normal tree callers pass previousRenderEntry=null after reset, so every present slot is rewritten.",
     "mnemonic": "call",
     "size": 5
   },

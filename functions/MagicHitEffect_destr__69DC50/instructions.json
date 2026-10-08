@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x69DC7D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x69DC80",
-    "line": "jmp     BSTempEffect_destr",
+    "line": "jmp     BSTempEffect_Destructor; Verified BSTempEffect destructor: resets duration, elapsed, parent cell and initializeCallbackDone (+0x14), restores base vtable, then invokes NiRefObject destructor.",
     "mnemonic": "jmp",
     "size": 5
   }

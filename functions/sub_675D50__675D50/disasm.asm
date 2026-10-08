@@ -40,9 +40,9 @@
 0x675DB5: jmp     short loc_675DB9
 0x675DB7: push    3; a2
 0x675DB9: mov     ecx, esi; this
-0x675DBB: call    sub_673A50
+0x675DBB: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x675DC0: mov     ecx, eax; this
-0x675DC2: call    sub_7616D0
+0x675DC2: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x675DC7: mov     edi, eax
 0x675DC9: test    edi, edi
 0x675DCB: jz      loc_675E79
@@ -72,7 +72,7 @@
 0x675E14: push    ebp
 0x675E15: call    edx
 0x675E17: jmp     short loc_675E6A
-0x675E19: call    sub_5EAE70
+0x675E19: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x675E1E: jmp     short loc_675E6A
 0x675E20: cmp     [esp+14h+arg_4], 0
 0x675E25: jnz     short loc_675E6A
@@ -80,12 +80,12 @@
 0x675E29: call    sub_5E6BA0
 0x675E2E: test    al, al
 0x675E30: jz      short loc_675E6A
-0x675E32: mov     ecx, esi
-0x675E34: call    sub_5E0380
+0x675E32: mov     ecx, esi; this
+0x675E34: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x675E39: cmp     dword ptr [eax+28h], 0
 0x675E3D: jz      short loc_675E6A
-0x675E3F: mov     ecx, esi
-0x675E41: call    sub_5E0380
+0x675E3F: mov     ecx, esi; this
+0x675E41: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x675E46: mov     ecx, [eax+28h]
 0x675E49: call    sub_569E60
 0x675E4E: cmp     eax, ebp
@@ -93,7 +93,7 @@
 0x675E52: test    ebp, ebp
 0x675E54: jnz     short loc_675E6A
 0x675E56: mov     ecx, esi; int
-0x675E58: call    sub_5EAE70
+0x675E58: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x675E5D: mov     ecx, [esi+58h]
 0x675E60: mov     eax, [ecx]
 0x675E62: mov     edx, [eax+49Ch]

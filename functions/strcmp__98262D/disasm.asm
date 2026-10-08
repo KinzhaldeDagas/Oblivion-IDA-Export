@@ -1,4 +1,4 @@
-0x98262D: push    ebp
+0x98262D: push    ebp; MEF PERF 2026-09-07: Corrected naming/ABI from Oblivion assembly: CRT_StricmpLocaleDispatch is cdecl two string arguments/plainRET; it does not read incomingEBX/EDI. BA9E10==0 tailcalls982525 ASCII fold; nonzero calls98255A with null locale. Previous strcmp label/spurious register parameters must not drive a case-sensitive hash index.
 0x98262E: mov     ebp, esp
 0x982630: push    esi
 0x982631: xor     esi, esi

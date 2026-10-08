@@ -1,20 +1,22 @@
-int __usercall EffectSetting_LinkForm_::ResolveEffectShader@<eax>(TESForm *esi0@<esi>, TESForm a1)
+// Verified (Oblivion): EffectSetting::effectShader (+0x78) resolves through FormID lookup and a TESForm-to-TESEffectShader RTTI cast.
+int __usercall EffectSetting_LinkForm_::ResolveEffectShader@<eax>(EffectSetting *effectSetting@<esi>)
 {
   Data *OverrideFile; // eax
-  TESForm *v3; // eax
+  TESForm *v2; // eax
+  TESForm a1; // [esp+4h] [ebp+4h] BYREF
 
-  a1.vtbl = esi0[5].vtbl;
-  if ( a1.vtbl )
+  a1.vtbl = (TESFormVtbl *)effectSetting->effectShader; /*0x415b21*/
+  if ( a1.vtbl ) /*0x415b25*/
   {
-    OverrideFile = TESForm_GetOverrideFile(esi0, 0xFFFFFFFF);
-    TESForm_ResolveFormID((UInt32 *)&a1, OverrideFile);
-    v3 = TESForm_LookupByFormID((UInt32)a1.vtbl);
-    esi0[5].vtbl = (TESFormVtbl *)OblivionDynamicCast(
-                                    v3,
-                                    0,
-                                    (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
-                                    &TESEffectShader `RTTI Type Descriptor',
-                                    0);
+    OverrideFile = TESForm_GetOverrideFile(&effectSetting->super, 0xFFFFFFFF); /*0x415b2b*/
+    TESForm_ResolveFormID((UInt32 *)&a1, OverrideFile); /*0x415b36*/
+    v2 = TESForm_LookupByFormID((UInt32)a1.vtbl); /*0x415b51*/
+    effectSetting->effectShader = (TESEffectShader *)OblivionDynamicCast( /*0x415b62*/
+                                                       v2,
+                                                       0,
+                                                       (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
+                                                       &TESEffectShader `RTTI Type Descriptor',
+                                                       0);
   }
-  return EffectSetting_LinkForm_::ResolveEnchantShader(esi0, a1);
+  return EffectSetting_LinkForm_::ResolveEnchantShader(&effectSetting->super, a1);
 }

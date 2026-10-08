@@ -6,6 +6,6 @@ int __userpurge Player_OnHealthDamage@<eax>(
         int a5,
         int a6)
 {
-  Actor_OnHealthDamage(a1, a2, a3, st7_0, a5, a6);
-  return ((int (__thiscall *)(Actor *, _DWORD))a1->vtbl->super.super.IsDead)(a1, 0);
+  Actor_OnHealthDamage(a1, a2, a3, st7_0, a5, a6); /*0x65d700*/
+  return ((int (__thiscall *)(Actor *, _DWORD))a1->vtbl->super.super.IsDead)(a1, 0); /*0x65d714*/
 }

@@ -14,7 +14,6 @@
 0x8D3D12: jmp     short loc_8D3D20
 0x8D3D14: xor     ebx, ebx
 0x8D3D16: jmp     short loc_8D3D20
-0x8D3D18: align 10h
 0x8D3D20: mov     ecx, [ecx]
 0x8D3D22: mov     ebp, [ecx+eax*4]
 0x8D3D25: movzx   edx, word ptr [ebp+8Ch]

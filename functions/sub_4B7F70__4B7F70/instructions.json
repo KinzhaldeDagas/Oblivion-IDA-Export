@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x4B7F95",
-    "line": "mov     ebp, [esp+1Ch+arg_0]",
+    "line": "mov     ebp, [esp+1Ch+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4B7F99",
-    "line": "push    ebp",
+    "line": "push    ebp; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B7F9A",
-    "line": "call    sub_4B2320",
+    "line": "call    TESBoundObject_Create3D; Generic TESBoundObject Create3D wrapper: dispatches virtual +0xEC with the reference and a zero mode argument.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4B7FA9",
-    "line": "push    offset unk_B3B900",
+    "line": "push    offset stru_B3B900",
     "mnemonic": "push",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4B7FE5",
-    "line": "mov     [esp+1Ch+arg_0], eax",
+    "line": "mov     [esp+1Ch+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,19 +301,19 @@
   },
   {
     "ea": "0x4B800F",
-    "line": "push    offset sub_4B76A0",
+    "line": "push    offset sub_4B76A0; value",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x4B8014",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B8016",
-    "line": "call    sub_60E0D0",
+    "line": "call    Shared_SetDwordAtOffset40; In this call context, Shared_SetDwordAtOffset40 initializes the BSPlayerDistanceCheckController field at +0x40; it is not operating on TESClass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x4B802C",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x4B8041",
-    "line": "mov     [esp+1Ch+arg_0], eax",
+    "line": "mov     [esp+1Ch+reference], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x4B807C",
-    "line": "call    sub_6FFE90",
+    "line": "call    NiObjectNET_RemoveController; Removes a specific NiTimeController from NiObjectNET's refcounted controller chain, relinking predecessor/head and clearing the removed controller's next link with balanced temporary references.",
     "mnemonic": "call",
     "size": 5
   },
@@ -580,5 +580,107 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3B90",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3B93",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B94",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3B99",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B9A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B9B",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3B9E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3B9F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3BA4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3BA5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3BA6",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3BAA",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3BAD",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3BB0",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3BB2",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3BB7",
+    "line": "mov     eax, offset stru_ADF520",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3BBC",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

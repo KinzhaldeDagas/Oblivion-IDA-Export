@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_402E50",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x402E50",
+      "0x402F47"
+    ],
+    [
+      "0x9A9DB0",
+      "0x9A9DE4"
+    ]
+  ],
+  "chunks_sha256": "fa3cfe5ca1699130e069daed03e98a766b4177d3cc274a954daae866c1f01ec1",
+  "comment_regular": "Builds the in-game date string '%s %d, 3E%d' from a month-name table, game day, and game year. Observed in HUD and Sleep/Wait menu.",
+  "comment_repeatable": "Builds the in-game date string '%s %d, 3E%d' from a month-name table, game day, and game year. Observed in HUD and Sleep/Wait menu.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 6,
+  "display_name": "TimeGlobals_FormatGameDate",
   "end_ea": "0x402F47",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_402E50",
+  "name": "TimeGlobals_FormatGameDate",
   "segment": ".text",
   "sha256": "dab8edee195dbd9b72879fa7aeef5f6facdc3cdb459cb39614b68dfb629a9589",
   "size": 247,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x402E50",
+  "total_chunk_size": 299,
   "type": "BSStringT *__userpurge@<eax>(int *this@<ecx>, double@<st0>, BSStringT *)",
-  "xrefs_from_count": 87,
+  "xrefs_from_count": 103,
   "xrefs_to_count": 4
 }

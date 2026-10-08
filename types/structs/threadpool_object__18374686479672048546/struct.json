@@ -1,142 +1,225 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "threadpool_object",
+  "definition": "struct threadpool_object\n{\nvoid *win32_callback;\nLONG refcount;\nBOOL shutdown;\nthreadpool_objtype type;\nthreadpool *pool;\nthreadpool_group *group;\nPVOID userdata;\nPTP_CLEANUP_GROUP_CANCEL_CALLBACK group_cancel_callback;\nPTP_SIMPLE_CALLBACK finalization_callback;\nBOOL may_run_long;\nHMODULE race_dll;\nTP_CALLBACK_PRIORITY priority;\nlist group_entry;\nBOOL is_group_member;\nlist pool_entry;\nRTL_CONDITION_VARIABLE finished_event;\nRTL_CONDITION_VARIABLE group_finished_event;\nHANDLE completed_event;\nLONG num_pending_callbacks;\nLONG num_running_callbacks;\nLONG num_associated_callbacks;\n$769A967339D274836F7FAABDD7ECEEC5 u;\n}\n",
   "id": 18374686479672048546,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "win32_callback",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "refcount",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "shutdown",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "threadpool_objtype"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pool",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "threadpool *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "group",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "threadpool_group *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "userdata",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "PVOID"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "group_cancel_callback",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "PTP_CLEANUP_GROUP_CANCEL_CALLBACK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "finalization_callback",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "PTP_SIMPLE_CALLBACK"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "may_run_long",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "race_dll",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HMODULE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "priority",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "TP_CALLBACK_PRIORITY"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "group_entry",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 8
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "is_group_member",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pool_entry",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 8
+      "offset_hex": "0x3C",
+      "size": 8,
+      "type": "list"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "finished_event",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "RTL_CONDITION_VARIABLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "group_finished_event",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "RTL_CONDITION_VARIABLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "completed_event",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "HANDLE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_pending_callbacks",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_running_callbacks",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "num_associated_callbacks",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "LONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "u",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 48
+      "size": 48,
+      "type": "$769A967339D274836F7FAABDD7ECEEC5"
     }
   ],
   "name": "threadpool_object",
+  "ordinal": 9061,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 144
 }

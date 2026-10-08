@@ -1,19 +1,48 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "FaceGenHeadParameters_Ctor",
+  "chunks": [
+    [
+      "0x527C90",
+      "0x527E3A"
+    ],
+    [
+      "0x431320",
+      "0x431331"
+    ],
+    [
+      "0x521CB0",
+      "0x521CC1"
+    ],
+    [
+      "0x521CD0",
+      "0x521CE1"
+    ],
+    [
+      "0x9B8270",
+      "0x9B82C5"
+    ]
+  ],
+  "chunks_sha256": "420cce1acee3fd6b4ffde07d678ae7388b0d0e649714317869b5c08a886cbae9",
+  "comment_regular": "Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.",
+  "comment_repeatable": "Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 8,
+  "display_name": "FaceGenRenderState_Construct",
   "end_ea": "0x527E3A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "FaceGenHeadParameters_Ctor",
+  "name": "FaceGenRenderState_Construct",
   "segment": ".text",
   "sha256": "010380a5d9fb9a788a1d776216554f33d59e419f8360e031b33f05afada4ee80",
   "size": 426,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x527C90",
-  "type": "_DWORD *__thiscall(_DWORD *this)",
-  "xrefs_from_count": 111,
+  "total_chunk_size": 562,
+  "type": "FaceGenRenderState *__thiscall(FaceGenRenderState *this)",
+  "xrefs_from_count": 158,
   "xrefs_to_count": 8
 }

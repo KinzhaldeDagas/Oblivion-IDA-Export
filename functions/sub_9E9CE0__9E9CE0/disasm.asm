@@ -2,7 +2,7 @@
 0x9E9CE6: push    ecx
 0x9E9CE7: fstp    [esp+4+var_4]; float
 0x9E9CEA: push    offset aFprojectilekno; "fProjectileKnockMultClutter"
-0x9E9CEF: mov     ecx, offset flt_B370E8
+0x9E9CEF: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+410h)
 0x9E9CF4: call    GameSetting_ConstrAndReg_float
 0x9E9CF9: push    offset sub_A1E8F0; void (__cdecl *)()
 0x9E9CFE: call    _atexit

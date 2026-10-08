@@ -28,71 +28,71 @@ unsigned int __thiscall sub_8B3250(int *this, unsigned __int16 *a2)
   unsigned int v28; // ecx
   float v29[3]; // [esp+10h] [ebp-Ch] BYREF
 
-  v2 = (NiTArray_NiTexturingPropertyMap *)a2;
-  result = sub_8A0D20(this, a2);
-  v5 = (__m128 *)*(this + 1);
-  if ( v5 )
+  v2 = (NiTArray_NiTexturingPropertyMap *)a2; /*0x8b3254*/
+  result = sub_8A0D20(this, a2); /*0x8b325c*/
+  v5 = (__m128 *)*(this + 1); /*0x8b3261*/
+  if ( v5 ) /*0x8b3266*/
   {
-    sub_4D68A0(v29, v5 + 2);
-    v6 = (unsigned __int16 *)sub_707280(v29, "PivotInA");
-    end = v2->end;
-    capacity = v2->capacity;
-    a2 = v6;
-    if ( end >= capacity )
-      NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize);
-    NiTArray_SetAt(v2, end, &a2);
-    sub_4D68A0(v29, v5 + 6);
-    v9 = (unsigned __int16 *)sub_707280(v29, "PivotInB");
-    v10 = v2->end;
-    v11 = v2->capacity;
-    a2 = v9;
-    if ( v10 >= v11 )
-      NiTArray_SetSize((unsigned __int16 *)v2, v10 + v2->growSize);
-    NiTArray_SetAt(v2, v10, &a2);
-    sub_4D68A0(v29, v5 + 7);
-    v12 = (unsigned __int16 *)sub_707280(v29, "AxleInB");
-    v13 = v2->end;
-    a2 = v12;
-    if ( v13 >= v2->capacity )
-      NiTArray_SetSize((unsigned __int16 *)v2, v13 + v2->growSize);
-    NiTArray_SetAt(v2, v13, &a2);
-    sub_4D68A0(v29, v5 + 4);
-    v14 = (unsigned __int16 *)sub_707280(v29, "Perp2AxleInA1");
-    v15 = v2->end;
-    v16 = v2->capacity;
-    a2 = v14;
-    if ( v15 >= v16 )
-      NiTArray_SetSize((unsigned __int16 *)v2, v15 + v2->growSize);
-    NiTArray_SetAt(v2, v15, &a2);
-    sub_4D68A0(v29, v5 + 5);
-    v17 = (unsigned __int16 *)sub_707280(v29, "Perp2AxleInA2");
-    v18 = v2->end;
-    v19 = v2->capacity;
-    a2 = v17;
-    if ( v18 >= v19 )
-      NiTArray_SetSize((unsigned __int16 *)v2, v18 + v2->growSize);
-    NiTArray_SetAt(v2, v18, &a2);
-    v20 = (unsigned __int16 *)TESOutput_PrintLabeledFloat("MinAngle", v5->m128_f32[3]);
-    v21 = v2->end;
-    v22 = v2->capacity;
-    a2 = v20;
-    if ( v21 >= v22 )
-      NiTArray_SetSize((unsigned __int16 *)v2, v21 + v2->growSize);
-    NiTArray_SetAt(v2, v21, &a2);
-    v23 = (unsigned __int16 *)TESOutput_PrintLabeledFloat("MaxAngle", v5[1].m128_f32[0]);
-    v24 = v2->end;
-    v25 = v2->capacity;
-    a2 = v23;
-    if ( v24 >= v25 )
-      NiTArray_SetSize((unsigned __int16 *)v2, v24 + v2->growSize);
-    NiTArray_SetAt(v2, v24, &a2);
-    v26 = (unsigned __int16 *)TESOutput_PrintLabeledFloat("MaxFrictionTrq", v5[1].m128_f32[1]);
-    v27 = v2->end;
-    v28 = v2->capacity;
-    a2 = v26;
-    if ( v27 >= v28 )
-      NiTArray_SetSize((unsigned __int16 *)v2, v27 + v2->growSize);
-    return NiTArray_SetAt(v2, v27, &a2);
+    sub_4D68A0(v29, v5 + 2); /*0x8b3276*/
+    v6 = (unsigned __int16 *)sub_707280(v29, "PivotInA"); /*0x8b3287*/
+    end = v2->end; /*0x8b328c*/
+    capacity = v2->capacity; /*0x8b3290*/
+    a2 = v6; /*0x8b3296*/
+    if ( end >= capacity ) /*0x8b329a*/
+      NiTArray_SetSize((unsigned __int16 *)v2, end + v2->growSize); /*0x8b32a5*/
+    NiTArray_SetAt(v2, end, &a2); /*0x8b32b2*/
+    sub_4D68A0(v29, v5 + 6); /*0x8b32c0*/
+    v9 = (unsigned __int16 *)sub_707280(v29, "PivotInB"); /*0x8b32d1*/
+    v10 = v2->end; /*0x8b32d6*/
+    v11 = v2->capacity; /*0x8b32da*/
+    a2 = v9; /*0x8b32e0*/
+    if ( v10 >= v11 ) /*0x8b32e4*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v10 + v2->growSize); /*0x8b32ef*/
+    NiTArray_SetAt(v2, v10, &a2); /*0x8b32fc*/
+    sub_4D68A0(v29, v5 + 7); /*0x8b330a*/
+    v12 = (unsigned __int16 *)sub_707280(v29, "AxleInB"); /*0x8b331b*/
+    v13 = v2->end; /*0x8b3320*/
+    a2 = v12; /*0x8b3324*/
+    if ( v13 >= v2->capacity ) /*0x8b332e*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v13 + v2->growSize); /*0x8b3339*/
+    NiTArray_SetAt(v2, v13, &a2); /*0x8b3346*/
+    sub_4D68A0(v29, v5 + 4); /*0x8b3354*/
+    v14 = (unsigned __int16 *)sub_707280(v29, "Perp2AxleInA1"); /*0x8b3365*/
+    v15 = v2->end; /*0x8b336a*/
+    v16 = v2->capacity; /*0x8b336e*/
+    a2 = v14; /*0x8b3374*/
+    if ( v15 >= v16 ) /*0x8b3378*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v15 + v2->growSize); /*0x8b3383*/
+    NiTArray_SetAt(v2, v15, &a2); /*0x8b3390*/
+    sub_4D68A0(v29, v5 + 5); /*0x8b339e*/
+    v17 = (unsigned __int16 *)sub_707280(v29, "Perp2AxleInA2"); /*0x8b33af*/
+    v18 = v2->end; /*0x8b33b4*/
+    v19 = v2->capacity; /*0x8b33b8*/
+    a2 = v17; /*0x8b33be*/
+    if ( v18 >= v19 ) /*0x8b33c2*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v18 + v2->growSize); /*0x8b33cd*/
+    NiTArray_SetAt(v2, v18, &a2); /*0x8b33da*/
+    v20 = (unsigned __int16 *)TESOutput_PrintLabeledFloat("MinAngle", v5->m128_f32[3]); /*0x8b33eb*/
+    v21 = v2->end; /*0x8b33f0*/
+    v22 = v2->capacity; /*0x8b33f4*/
+    a2 = v20; /*0x8b33fd*/
+    if ( v21 >= v22 ) /*0x8b3401*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v21 + v2->growSize); /*0x8b340c*/
+    NiTArray_SetAt(v2, v21, &a2); /*0x8b3419*/
+    v23 = (unsigned __int16 *)TESOutput_PrintLabeledFloat("MaxAngle", v5[1].m128_f32[0]); /*0x8b342a*/
+    v24 = v2->end; /*0x8b342f*/
+    v25 = v2->capacity; /*0x8b3433*/
+    a2 = v23; /*0x8b343c*/
+    if ( v24 >= v25 ) /*0x8b3440*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v24 + v2->growSize); /*0x8b344b*/
+    NiTArray_SetAt(v2, v24, &a2); /*0x8b3458*/
+    v26 = (unsigned __int16 *)TESOutput_PrintLabeledFloat("MaxFrictionTrq", v5[1].m128_f32[1]); /*0x8b3469*/
+    v27 = v2->end; /*0x8b346e*/
+    v28 = v2->capacity; /*0x8b3472*/
+    a2 = v26; /*0x8b347b*/
+    if ( v27 >= v28 ) /*0x8b3480*/
+      NiTArray_SetSize((unsigned __int16 *)v2, v27 + v2->growSize); /*0x8b348b*/
+    return NiTArray_SetAt(v2, v27, &a2); /*0x8b3498*/
   }
-  return result;
+  return result; /*0x8b349d*/
 }

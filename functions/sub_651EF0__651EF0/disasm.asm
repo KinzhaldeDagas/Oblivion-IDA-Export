@@ -11,7 +11,7 @@
 0x651F0B: cmp     dword ptr [eax], 0
 0x651F0E: jz      short loc_651F5F
 0x651F10: push    ebx
-0x651F11: call    TESObjectREFR_GetParentCell
+0x651F11: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x651F16: mov     esi, [esi+170h]
 0x651F1C: test    esi, esi
 0x651F1E: mov     ebx, eax
@@ -25,7 +25,7 @@
 0x651F30: test    edi, edi
 0x651F32: jz      short loc_651F56
 0x651F34: mov     ecx, edi; this
-0x651F36: call    TESObjectREFR_GetParentCell
+0x651F36: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x651F3B: cmp     eax, ebx
 0x651F3D: jz      short loc_651F56
 0x651F3F: test    ebx, ebx
@@ -34,7 +34,7 @@
 0x651F44: mov     ecx, ebx
 0x651F46: call    sub_4D38F0
 0x651F4B: push    edi
-0x651F4C: mov     ecx, offset ActorProcessManager_ptr
+0x651F4C: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x651F51: call    sub_6748B0
 0x651F56: mov     esi, [esi+4]
 0x651F59: test    esi, esi

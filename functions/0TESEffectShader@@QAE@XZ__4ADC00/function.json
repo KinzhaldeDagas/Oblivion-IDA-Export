@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 7,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x4ADC00",
+      "0x4ADC8C"
+    ],
+    [
+      "0x9B2BE0",
+      "0x9B2C1F"
+    ]
+  ],
+  "chunks_sha256": "dcf615f6902401f5bac3a5a337c5f9d63fdad56f490a00ed98dfaf787f09256b",
+  "comment_regular": "Verified (Oblivion): constructs the 0x110-byte TESEffectShader. Its 0xE0-byte Data member begins at +0x18 and is followed by TESTexture TextureShaderTexture (+0xF8) and ParticleShaderTexture (+0x104). Fallout's layout is 0x170 bytes with a larger EffectShaderData block and a third texture; this is a confirmed layout divergence.",
+  "comment_repeatable": "Verified (Oblivion): constructs the 0x110-byte TESEffectShader. Its 0xE0-byte Data member begins at +0x18 and is followed by TESTexture TextureShaderTexture (+0xF8) and ParticleShaderTexture (+0x104). Fallout's layout is 0x170 bytes with a larger EffectShaderData block and a third texture; this is a confirmed layout divergence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "TESEffectShader::TESEffectShader(void)",
   "end_ea": "0x4ADC8C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0TESEffectShader@@QAE@XZ",
   "segment": ".text",
   "sha256": "d7bc7b76ed879159f587408a7a2cef0e57b93ec8b0a5ab34fb62c809d997f861",
   "size": 140,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ADC00",
-  "type": "TESEffectShader *__thiscall(TESEffectShader *__hidden this)",
-  "xrefs_from_count": 46,
+  "total_chunk_size": 203,
+  "type": "TESEffectShader *__thiscall(TESEffectShader *this)",
+  "xrefs_from_count": 63,
   "xrefs_to_count": 4
 }

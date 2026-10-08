@@ -1,1 +1,1 @@
-InterfaceData
+typedef tagInterfaceData InterfaceData;

@@ -1,12 +1,12 @@
-int *__thiscall GameSetting_GetSafeFloatPointer(int *this)
+float *__thiscall GameSetting_GetSafeFloatPointer(float *this)
 {
-  int *result; // eax
+  float *result; // eax
 
-  result = this;
-  if ( !this )
+  result = this; /*0x403c00*/
+  if ( !this ) /*0x403c04*/
   {
-    *(float *)&dword_B35464 = 0.0;
-    return &dword_B35464;
+    flt_B35464[0] = 0.0; /*0x403c0d*/
+    return flt_B35464; /*0x403c08*/
   }
-  return result;
+  return result; /*0x403c13*/
 }

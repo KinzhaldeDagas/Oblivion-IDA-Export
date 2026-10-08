@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8480C0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Oblivion mode-5 rigid opaque ShadowLight enqueuer. Reuses pool[6]; its one configured stage remains unbound and is ignored by SLS2058. Default SLS2052/SLS2058 switches to SLS2056/SLS2062 only for positive native depth-origin override.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x8480E8",
-    "line": "mov     esi, ds:0B455B8h",
+    "line": "mov     esi, ds:0B455B8h; Pool[6] rigid opaque caster pass. Default SLS2052/SLS2058; positive native depth-origin override switches to SLS2056/SLS2062.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x848102",
-    "line": "push    eax; a2",
+    "line": "push    eax; shader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x848103",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x848117",
-    "line": "push    edx; a2",
+    "line": "push    edx; shader",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x848118",
-    "line": "call    sub_7AEC60",
+    "line": "call    NiD3DPass_SetPixelShader; Reference-counted NiD3DPass pixel-shader setter. Replaces pass+0x44 and AddRefs the new NiD3DPixelShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x848125",
-    "line": "call    sub_7AECB0",
+    "line": "call    NiD3DPass_SetVertexShader; Reference-counted NiD3DPass vertex-shader setter. Replaces pass+0x58 and AddRefs the new NiD3DVertexShader.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x84812C",
-    "line": "mov     [esp+20h+var_10], esi",
+    "line": "mov     [esp+20h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,25 +241,25 @@
   },
   {
     "ea": "0x84813D",
-    "line": "lea     ecx, [esp+20h+var_10]",
+    "line": "lea     ecx, [esp+20h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x848141",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x848142",
-    "line": "push    edx",
+    "line": "push    edx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x848143",
-    "line": "lea     ecx, [edi+40h]",
+    "line": "lea     ecx, [edi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x84814E",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x848165",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -376,5 +376,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D34E0",
+    "line": "lea     ecx, [ebp-10h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D34E3",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D34E8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D34EC",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D34EF",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D34F2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D34F4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D34F9",
+    "line": "mov     eax, offset stru_AFB8F4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D34FE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

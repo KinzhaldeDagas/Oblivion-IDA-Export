@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x78B0C0",
+      "0x78B0DF"
+    ]
+  ],
+  "chunks_sha256": "1dda7aa0c6ac0053854e0183d844c0f95efdaf1bb3b76c6a3d4b0ec1161c7a52",
+  "comment_regular": "CSpeedTreeRT::DeleteTransientData tiny thunk. If CTreeEngine+0x21 says transient data is intact, tail-jumps to CTreeEngine::FreeTransientData 0x7A2620; otherwise reports stock no-transient-data error.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_78B0C0",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "CSpeedTreeRT__DeleteTransientData",
   "end_ea": "0x78B0DF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
-  "name": "sub_78B0C0",
+  "has_pseudocode": true,
+  "name": "CSpeedTreeRT__DeleteTransientData",
   "segment": ".text",
   "sha256": "1dda7aa0c6ac0053854e0183d844c0f95efdaf1bb3b76c6a3d4b0ec1161c7a52",
   "size": 31,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78B0C0",
-  "type": "void __thiscall(int *this)",
+  "total_chunk_size": 31,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this)",
   "xrefs_from_count": 12,
   "xrefs_to_count": 1
 }

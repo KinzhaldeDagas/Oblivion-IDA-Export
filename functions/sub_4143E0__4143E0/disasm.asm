@@ -5,7 +5,7 @@
 0x4143ED: jb      short loc_4143FB
 0x4143EF: mov     eax, [esi+10h]
 0x4143F2: push    eax
-0x4143F3: call    FormHeapFree
+0x4143F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4143F8: add     esp, 4
 0x4143FB: xor     eax, eax
 0x4143FD: mov     dword ptr [esi+24h], 0Fh

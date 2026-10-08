@@ -6,13 +6,13 @@
 0x624485: mov     esi, ecx
 0x624487: call    sub_61E8A0
 0x62448C: mov     edi, [esi+3Ch]
-0x62448F: push    1
-0x624491: push    0
-0x624493: push    11h
-0x624495: mov     ecx, edi
-0x624497: mov     byte ptr [esi+174h], 1
+0x62448F: push    1; forceWeaponPrefix
+0x624491: push    0; weaponEntryDataArg
+0x624493: push    11h; groupID
+0x624495: mov     ecx, edi; this
+0x624497: mov     byte ptr [esi+174h], 1; Initializes CombatController+0x174 to true before movement/path evaluation; this is the current-target reachability state.
 0x62449E: xor     bl, bl
-0x6244A0: call    Actor_LoadAnimGroup?
+0x6244A0: call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.
 0x6244A5: movzx   ebp, ax
 0x6244A8: test    bp, bp
 0x6244AB: jz      short loc_6244D6
@@ -27,7 +27,7 @@
 0x6244C7: push    ecx
 0x6244C8: push    ebp
 0x6244C9: mov     ecx, eax
-0x6244CB: call    sub_470960
+0x6244CB: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x6244D0: test    al, al
 0x6244D2: jz      short loc_6244D6
 0x6244D4: mov     bl, 1
@@ -69,11 +69,11 @@
 0x624545: mov     ecx, edi
 0x624547: call    ContainerEntryExtraData_DestroyDataTable
 0x62454C: push    edi
-0x62454D: call    FormHeapFree
+0x62454D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x624552: add     esp, 4
 0x624555: push    0
 0x624557: mov     ecx, esi
-0x624559: call    sub_624030
+0x624559: call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.
 0x62455E: pop     edi
 0x62455F: pop     esi
 0x624560: pop     ebp
@@ -90,7 +90,7 @@
 0x62457A: push    eax
 0x62457B: mov     ecx, esi
 0x62457D: mov     byte ptr [esi+130h], 1
-0x624584: call    sub_624030
+0x624584: call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.
 0x624589: pop     edi
 0x62458A: pop     esi
 0x62458B: pop     ebp
@@ -101,7 +101,7 @@
 0x624596: push    0
 0x624598: mov     ecx, esi
 0x62459A: mov     byte ptr [esi+131h], 1
-0x6245A1: call    sub_624030
+0x6245A1: call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.
 0x6245A6: pop     edi
 0x6245A7: pop     esi
 0x6245A8: pop     ebp

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x701610",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; Generic compatible depth/stencil request for a render-target surface: request 32 depth bits and 8 stencil bits from the renderer-specific selector.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x701612",
-    "line": "mov     edx, [esp+arg_0]",
+    "line": "mov     edx, [esp+renderTargetSurfaceData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x701623",
-    "line": "retn    4",
+    "line": "retn    4; Request 32 depth bits and 8 stencil bits generically; the DX9 surface path normalizes this to the 24/8 compatibility target.",
     "mnemonic": "retn",
     "size": 3
   }

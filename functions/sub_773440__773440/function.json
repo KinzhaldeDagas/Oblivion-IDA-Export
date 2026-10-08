@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x773440",
+      "0x77346F"
+    ]
+  ],
+  "chunks_sha256": "06c79f46438290b78df68e36ece23730225ae70b9a8afd3bda41dbed7ae08544",
+  "comment_regular": "Apply one stage's tracked texture-stage states, then tracked sampler states.",
+  "comment_repeatable": "Apply one stage's tracked texture-stage states, then tracked sampler states.\nGPU-world qualification: stage state is applied only when stage index < DWORD B28CB0; sampler state application still occurs. Decoder retains this distinction rather than dropping the whole stage.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_773440",
+  "display_name": "OB_NiD3DTextureStageStateGroup_ApplyAllStates_010201A0",
   "end_ea": "0x77346F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_773440",
+  "name": "OB_NiD3DTextureStageStateGroup_ApplyAllStates_010201A0",
   "segment": ".text",
   "sha256": "06c79f46438290b78df68e36ece23730225ae70b9a8afd3bda41dbed7ae08544",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x773440",
-  "type": "int __thiscall(NiD3DTextureStage *this, NiD3DTextureStage *a2)",
+  "total_chunk_size": 47,
+  "type": "int __thiscall(void *this, unsigned int stage)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 1
 }

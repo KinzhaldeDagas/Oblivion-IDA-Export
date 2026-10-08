@@ -9,25 +9,27 @@ char __cdecl sub_509490(
         UInt32 *a3)
 {
   OSGlobals *v8; // eax
-  int *v9; // eax
-  int *v10; // esi
-  UInt16 v12[2]; // [esp+4h] [ebp-4h] BYREF
+  int *sound; // esi
+  int *v10; // eax
+  int *v11; // esi
+  UInt16 v13[2]; // [esp+4h] [ebp-4h] BYREF
 
-  v8 = OSGlobals;
-  *(_DWORD *)v12 = 0;
-  if ( v8->sound )
+  v8 = MEMORY[0xB33398]; /*0x509491*/
+  *(_DWORD *)v13 = 0; /*0x509497*/
+  sound = (int *)v8->sound; /*0x50949f*/
+  if ( sound ) /*0x5094a4*/
   {
-    if ( Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v12) )
+    if ( Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v13) ) /*0x5094ce*/
     {
-      OSGLobals_PlaySound(*(_DWORD *)(*(_DWORD *)v12 + 0xC), 0x101, 0);
-      v10 = v9;
-      if ( v9 )
+      v10 = OSGLobals_PlaySound(sound, *(void **)(*(_DWORD *)v13 + 0xC), 0x101, 0); /*0x5094eb*/
+      v11 = v10; /*0x5094f0*/
+      if ( v10 ) /*0x5094f4*/
       {
-        sub_6B7190(v9, 0);
-        sub_6B73E0(v10);
-        FormHeapFree((unsigned int)v10);
+        sub_6B7190(v10, 0); /*0x5094fa*/
+        sub_6B73E0(v11); /*0x509501*/
+        FormHeapFree((unsigned int)v11); /*0x509507*/
       }
     }
   }
-  return 1;
+  return 1; /*0x509511*/
 }

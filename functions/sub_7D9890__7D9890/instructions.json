@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D9890",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified (Oblivion): BSShaderPPLightingProperty_GetViewerStrings exports property+0xE0 as \"spTexEffectData\" and reads the current-fill color at +0x0C..+0x18, current-edge color at +0x1C..+0x28, and edge falloff at +0x54. Viewer labels duplicate R for the third color component; probable blue-channel typo, corroborated by the RGBA grouping and Fallout's NiColorA layout.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7D9892",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+viewerStrings]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7D989A",
-    "line": "call    sub_7EE5D0",
+    "line": "call    sub_7EE5D0; BloodOnDeath decode 2026-05-30: shader-property diagnostic dump; no spawn, lifetime, or projection cap is enforced here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7D98B7",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7D98CB",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x7D98FA",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x7D990E",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7D9955",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x7D9969",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x7D9987",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7D99A4",
-    "line": "lea     edx, [esp+0Ch+arg_0]",
+    "line": "lea     edx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x7D99DE",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x7D99F2",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7D9A19",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x7D9A2D",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x7D9A5F",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -919,7 +919,7 @@
   },
   {
     "ea": "0x7D9A66",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -973,13 +973,13 @@
   },
   {
     "ea": "0x7D9A84",
-    "line": "lea     edx, [esp+0Ch+arg_0]",
+    "line": "lea     edx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D9A88",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1081,7 +1081,7 @@
   },
   {
     "ea": "0x7D9AC0",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7D9AC7",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1147,7 +1147,7 @@
   },
   {
     "ea": "0x7D9AE9",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x7D9AF0",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x7D9B1A",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x7D9B2E",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x7D9B5A",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x7D9B6F",
-    "line": "lea     ecx, [esp+10h+arg_0]",
+    "line": "lea     ecx, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x7D9BB1",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1585,7 +1585,7 @@
   },
   {
     "ea": "0x7D9BCE",
-    "line": "lea     edx, [esp+10h+arg_0]",
+    "line": "lea     edx, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x7D9BF5",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x7D9C09",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x7D9C3E",
-    "line": "lea     edx, [esp+10h+arg_0]",
+    "line": "lea     edx, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x7D9C5C",
-    "line": "lea     ecx, [esp+10h+arg_0]",
+    "line": "lea     ecx, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1879,7 +1879,7 @@
   },
   {
     "ea": "0x7D9C63",
-    "line": "mov     [esp+14h+arg_0], eax",
+    "line": "mov     [esp+14h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x7D9C88",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x7D9CA5",
-    "line": "lea     edx, [esp+10h+arg_0]",
+    "line": "lea     edx, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2101,13 +2101,13 @@
   },
   {
     "ea": "0x7D9CDA",
-    "line": "lea     ecx, [esp+10h+arg_0]",
+    "line": "lea     ecx, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D9CDE",
-    "line": "mov     [esp+10h+arg_0], eax",
+    "line": "mov     [esp+10h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2155,7 +2155,7 @@
   },
   {
     "ea": "0x7D9CF9",
-    "line": "mov     [esp+18h+arg_0], eax",
+    "line": "mov     [esp+18h+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x7D9D00",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2311,7 +2311,7 @@
   },
   {
     "ea": "0x7D9D4E",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x7D9D62",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2425,7 +2425,7 @@
   },
   {
     "ea": "0x7D9D89",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2467,7 +2467,7 @@
   },
   {
     "ea": "0x7D9D9D",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x7D9DD0",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2617,7 +2617,7 @@
   },
   {
     "ea": "0x7D9DE4",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x7D9E05",
-    "line": "push    offset aRefractionPowe; \"refraction power\"",
+    "line": "push    offset aRefractionPowe; MoonSugarEffect decode: TES output path reports shader-property refraction power when refraction flag 0x8000 is set.",
     "mnemonic": "push",
     "size": 5
   },
@@ -2719,7 +2719,7 @@
   },
   {
     "ea": "0x7D9E1C",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2761,7 +2761,7 @@
   },
   {
     "ea": "0x7D9E30",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2845,7 +2845,7 @@
   },
   {
     "ea": "0x7D9E66",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2887,7 +2887,7 @@
   },
   {
     "ea": "0x7D9E7A",
-    "line": "lea     eax, [esp+0Ch+arg_0]",
+    "line": "lea     eax, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2929,7 +2929,7 @@
   },
   {
     "ea": "0x7D9E8E",
-    "line": "push    offset aRefractionPeri; \"refraction period\"",
+    "line": "push    offset aRefractionPeri; MoonSugarEffect decode: TES output path reports refraction period when fire/refraction flag 0x10000 is set.",
     "mnemonic": "push",
     "size": 5
   },
@@ -2965,7 +2965,7 @@
   },
   {
     "ea": "0x7D9EA5",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x7D9EB9",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3103,7 +3103,7 @@
   },
   {
     "ea": "0x7D9EED",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3145,7 +3145,7 @@
   },
   {
     "ea": "0x7D9F01",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3241,7 +3241,7 @@
   },
   {
     "ea": "0x7D9F38",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3283,7 +3283,7 @@
   },
   {
     "ea": "0x7D9F4C",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3373,7 +3373,7 @@
   },
   {
     "ea": "0x7D9F7F",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3415,7 +3415,7 @@
   },
   {
     "ea": "0x7D9F93",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3505,7 +3505,7 @@
   },
   {
     "ea": "0x7D9FC4",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3547,7 +3547,7 @@
   },
   {
     "ea": "0x7D9FD8",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3637,7 +3637,7 @@
   },
   {
     "ea": "0x7DA009",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3679,7 +3679,7 @@
   },
   {
     "ea": "0x7DA01D",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3739,7 +3739,7 @@
   },
   {
     "ea": "0x7DA03C",
-    "line": "call    TESOutput_PrintLabeledFloat",
+    "line": "call    TESOutput_PrintLabeledFloat; Verified (Oblivion): viewer exports the third current-fill color component at TextureEffectData+0x14 but labels it \"Fill Color R\", duplicating the red label already used for +0x0C. Probable: +0x14 is blue, based on the grouped four-float color layout, packed RGB initialization, and Fallout's NiColorA CurrentFillColor field.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3769,7 +3769,7 @@
   },
   {
     "ea": "0x7DA04E",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3811,7 +3811,7 @@
   },
   {
     "ea": "0x7DA062",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3901,7 +3901,7 @@
   },
   {
     "ea": "0x7DA093",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3943,7 +3943,7 @@
   },
   {
     "ea": "0x7DA0A7",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4033,7 +4033,7 @@
   },
   {
     "ea": "0x7DA0D8",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4075,7 +4075,7 @@
   },
   {
     "ea": "0x7DA0EC",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4165,7 +4165,7 @@
   },
   {
     "ea": "0x7DA11D",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4207,7 +4207,7 @@
   },
   {
     "ea": "0x7DA131",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4267,7 +4267,7 @@
   },
   {
     "ea": "0x7DA150",
-    "line": "call    TESOutput_PrintLabeledFloat",
+    "line": "call    TESOutput_PrintLabeledFloat; Verified (Oblivion): viewer exports the third current-edge color component at TextureEffectData+0x24 but labels it \"Edge Color R\", duplicating the red label already used for +0x1C. Probable: +0x24 is blue, based on the grouped four-float color layout, packed RGB initialization, and Fallout's NiColorA CurrentRimColor field. Fallout names this color group Rim; Oblivion's source data calls it Edge.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4297,7 +4297,7 @@
   },
   {
     "ea": "0x7DA162",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4339,7 +4339,7 @@
   },
   {
     "ea": "0x7DA176",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4429,7 +4429,7 @@
   },
   {
     "ea": "0x7DA1A7",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4471,7 +4471,7 @@
   },
   {
     "ea": "0x7DA1BB",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -4561,7 +4561,7 @@
   },
   {
     "ea": "0x7DA1EC",
-    "line": "mov     [esp+0Ch+arg_0], eax",
+    "line": "mov     [esp+0Ch+viewerStrings], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4603,7 +4603,7 @@
   },
   {
     "ea": "0x7DA200",
-    "line": "lea     ecx, [esp+0Ch+arg_0]",
+    "line": "lea     ecx, [esp+0Ch+viewerStrings]",
     "mnemonic": "lea",
     "size": 4
   },

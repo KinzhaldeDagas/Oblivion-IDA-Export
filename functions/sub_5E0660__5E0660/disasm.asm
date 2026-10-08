@@ -1,4 +1,4 @@
-0x5E0660: sub     esp, 20h
+0x5E0660: sub     esp, 20h; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x5E0663: push    esi
 0x5E0664: mov     esi, ecx
 0x5E0666: mov     eax, [esi]

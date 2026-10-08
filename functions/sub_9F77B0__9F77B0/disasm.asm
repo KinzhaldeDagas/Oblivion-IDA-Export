@@ -1,7 +1,7 @@
 0x9F77B0: push    offset aShaircolor5; "sHairColor5"
 0x9F77B5: push    offset aShaircolor5; "sHairColor5"
-0x9F77BA: mov     ecx, offset dword_B39360
-0x9F77BF: call    GameSetting_ConstrAndReg
+0x9F77BA: mov     ecx, offset stru_B39360; self
+0x9F77BF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F77C4: push    offset sub_A22DE0; void (__cdecl *)()
 0x9F77C9: call    _atexit
 0x9F77CE: pop     ecx

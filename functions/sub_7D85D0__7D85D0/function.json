@@ -1,18 +1,31 @@
 {
-  "callees_count": 94,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D85D0",
+      "0x7D8B3F"
+    ]
+  ],
+  "chunks_sha256": "89d9a3a0518261f04fbd967d955eae335e0e82dd0822168cc60d20400ce74230",
+  "comment_regular": "BSShaderPPLightingProperty RenderPass-list producer and cache owner. In emit mode, a matching (renderMode<<8)|buildFlags key reuses the property-owned list; on a miss it clears the lists and dispatches virtual +0x98 for shader-package class 1 or +0x9C for class >=2. Conditional Hair reaches this function only when B42F3E is enabled and flags this+0x1C contain 0x8000/0x10000; class >=2 then completes Hair's path to the inherited high-selector producer. A later class>=3/feature-0x10 path can append a mode-5 caster.\n\nSpeedTreeOBSE v160 recovery: plugin only invalidates the cache key on late static failure, without freeing pass records held by an accumulator. Next normal-mode emit query uses native dynamic producers; count-only queries do not mark a new published plan. Cache mismatch sentinel is requested flags XOR1 for normal mode0. Failed queued static color/fog records remain suppressed until the property has completed native emission. This is plugin recovery logic; full native runtime execution is UNVERIFIED.\n\nBase PP-lighting vtable +0x5C render-pass builder. Stock accumulator reachability: BSShaderPPLightingProperty and both SpeedTree PP-lighting owners retain this slot; Lighting30 overrides +0x5C with 0x8637D0; Hair overrides it with 0x882AE0 and calls this only for Refract/RefractF fallback.",
+  "comment_repeatable": "Base PP-lighting vtable +0x5C render-pass builder. Stock accumulator reachability: BSShaderPPLightingProperty and both SpeedTree PP-lighting owners retain this slot; Lighting30 overrides +0x5C with 0x8637D0; Hair overrides it with 0x882AE0 and calls this only for Refract/RefractF fallback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D85D0",
+  "display_name": "BSShaderPPLightingProperty_BuildRenderPasses",
   "end_ea": "0x7D8B3F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D85D0",
+  "name": "BSShaderPPLightingProperty_BuildRenderPasses",
   "segment": ".text",
   "sha256": "89d9a3a0518261f04fbd967d955eae335e0e82dd0822168cc60d20400ce74230",
   "size": 1391,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D85D0",
+  "total_chunk_size": 1391,
   "type": "NiTPointerList__BSImageSpaceShader *__thiscall(NiTPointerList__BSImageSpaceShader *this, NiGeometry *, int, _WORD *, int)",
   "xrefs_from_count": 557,
   "xrefs_to_count": 4

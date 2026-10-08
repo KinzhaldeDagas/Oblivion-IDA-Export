@@ -6,7 +6,7 @@
 0x7493DD: mov     eax, ds:0B3F940h
 0x7493E2: test    eax, eax
 0x7493E4: jz      short loc_749448
-0x7493E6: mov     al, [eax+1B0h]
+0x7493E6: mov     al, [eax+1B0h]; 3DTheft decode 2026-05-16: NiPSys path only submits a NiPSysUpdateTask when manager byte +0x1B0 is set and the current thread matches dword_B40820.
 0x7493EC: test    al, al
 0x7493EE: jz      short loc_749448
 0x7493F0: fldz
@@ -28,7 +28,7 @@
 0x749423: push    edi; int
 0x749424: mov     ecx, esi
 0x749426: call    sub_75DFF0
-0x74942B: mov     ecx, ds:0B3F940h
+0x74942B: mov     ecx, ds:0B3F940h; 3DTheft decode 2026-05-16: NiPSysUpdateTask is submitted through g_NiParallelUpdateTaskManager vfunc +0x4C with mode 3; on failure cleanup vfunc +0x54 runs.
 0x749431: mov     edx, [ecx]
 0x749433: mov     eax, [edx+4Ch]
 0x749436: push    3

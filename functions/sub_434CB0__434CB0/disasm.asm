@@ -1,4 +1,4 @@
-0x434CB0: sub     esp, 118h
+0x434CB0: sub     esp, 118h; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.
 0x434CB6: mov     eax, ___security_cookie
 0x434CBB: xor     eax, esp
 0x434CBD: mov     [esp+118h+var_4], eax
@@ -13,7 +13,7 @@
 0x434CD9: jz      short loc_434CF0
 0x434CDB: lea     ecx, [esp+120h+var_108]
 0x434CDF: push    ecx; int
-0x434CE0: mov     ecx, ModelLoaderPtr
+0x434CE0: mov     ecx, ds:0B33A1Ch
 0x434CE6: push    eax; Str1
 0x434CE7: call    sub_434710
 0x434CEC: lea     esi, [esp+120h+var_108]

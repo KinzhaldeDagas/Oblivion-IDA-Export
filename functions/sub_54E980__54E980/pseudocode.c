@@ -1,7 +1,7 @@
 double sub_54E980()
 {
-  if ( fExpressionChangePerSec <= 0.0 )
-    return (float)0.0;
+  if ( MEMORY[0xB39AB8] <= 0.0 ) /*0x54e990*/
+    return (float)0.0; /*0x54e99e*/
   else
-    return fExpressionChangePerSec;
+    return MEMORY[0xB39AB8]; /*0x54e994*/
 }

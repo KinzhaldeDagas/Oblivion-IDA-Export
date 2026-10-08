@@ -13,7 +13,7 @@
 0x43403A: call    edx
 0x43403C: test    eax, eax
 0x43403E: jnz     short loc_43405D
-0x434040: mov     eax, ModelLoaderPtr
+0x434040: mov     eax, ds:0B33A1Ch
 0x434045: mov     edi, [eax+18h]
 0x434048: mov     ecx, [edi+28h]
 0x43404B: mov     edx, [ecx]
@@ -45,7 +45,7 @@
 0x434092: mov     edx, [ecx]
 0x434094: mov     eax, [edx+0Ch]
 0x434097: call    eax
-0x434099: mov     ecx, ModelLoaderPtr
+0x434099: mov     ecx, ds:0B33A1Ch
 0x43409F: mov     edi, [ecx+18h]
 0x4340A2: mov     ecx, [edi+28h]
 0x4340A5: mov     edx, [ecx]
@@ -67,7 +67,6 @@
 0x4340D1: fadd    ds:flt_A2FC78
 0x4340D7: fstp    [esp+1Ch+var_8]
 0x4340DB: jmp     short loc_4340E4
-0x4340DD: align 10h
 0x4340E0: mov     ecx, [esp+1Ch+var_C]
 0x4340E4: sub     ecx, eax
 0x4340E6: test    ecx, ecx
@@ -76,13 +75,13 @@
 0x4340F0: jge     short loc_4340F8
 0x4340F2: fadd    ds:flt_A2FC78
 0x4340F8: fdiv    [esp+1Ch+var_8]
-0x4340FC: mov     ecx, SaveLoad_CurrentSavegame
+0x4340FC: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x434102: fmul    ds:fCostant_100
 0x434108: fstp    [esp+1Ch+arg_0]
 0x43410C: call    sub_45A500
 0x434111: test    al, al
 0x434113: jz      short loc_434136
-0x434115: mov     ecx, SaveLoad_CurrentSavegame
+0x434115: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x43411B: mov     eax, [ecx+18h]
 0x43411E: shr     eax, 0Bh
 0x434121: test    al, 1
@@ -97,7 +96,7 @@
 0x43413A: push    ecx
 0x43413B: fstp    [esp+20h+var_20]; float
 0x43413E: push    2; int
-0x434140: call    sub_57B950
+0x434140: call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.
 0x434145: add     esp, 8
 0x434148: mov     edx, [esi]
 0x43414A: mov     eax, [edx+38h]
@@ -113,7 +112,7 @@
 0x434161: push    32h ; '2'; dwMilliseconds
 0x434163: call    ds:Sleep
 0x434169: mov     ecx, esi; this
-0x43416B: call    IOManager_ProcessThreads
+0x43416B: call    IOManager_ProcessThreads; MEF data-streaming pass: IOManager post-process pump uses QPC deadline and configured millisecond budget. Left unchanged; budget tuning needs runtime profiling and is not an IDA-proven engine bug.
 0x434170: xor     ebx, ebx
 0x434172: xor     eax, eax
 0x434174: mov     ecx, [esi+2Ch]
@@ -127,7 +126,7 @@
 0x43418A: mov     edx, [eax+0Ch]
 0x43418D: call    edx
 0x43418F: mov     ebp, eax
-0x434191: mov     eax, ModelLoaderPtr
+0x434191: mov     eax, ds:0B33A1Ch
 0x434196: mov     edi, [eax+18h]
 0x434199: mov     ecx, [edi+28h]
 0x43419C: mov     edx, [ecx]

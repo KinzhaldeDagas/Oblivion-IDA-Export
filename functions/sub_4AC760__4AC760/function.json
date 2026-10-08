@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4AC760",
+      "0x4AC787"
+    ]
+  ],
+  "chunks_sha256": "f1b2023c3f051d652e27782eea814b347786135907423fda3288f56a644e096a",
+  "comment_regular": "Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.",
+  "comment_repeatable": "Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4AC760",
+  "display_name": "Float_Min",
   "end_ea": "0x4AC787",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4AC760",
+  "name": "Float_Min",
   "segment": ".text",
   "sha256": "f1b2023c3f051d652e27782eea814b347786135907423fda3288f56a644e096a",
   "size": 39,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4AC760",
-  "type": "double __cdecl(float, float)",
+  "total_chunk_size": 39,
+  "type": "float __cdecl(float a, float b)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 6
 }

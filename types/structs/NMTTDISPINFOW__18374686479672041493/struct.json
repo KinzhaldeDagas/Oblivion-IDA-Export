@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NMTTDISPINFOW",
+  "definition": "typedef tagNMTTDISPINFOW NMTTDISPINFOW\n",
   "id": 18374686479672041493,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "NMHDR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpszText",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szText",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 160
+      "offset_hex": "0x1C",
+      "size": 160,
+      "type": "WCHAR_0[80]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hinst",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "HINSTANCE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uFlags",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "UINT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lParam",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 8
+      "offset_hex": "0xC8",
+      "size": 8,
+      "type": "LPARAM_0"
     }
   ],
   "name": "NMTTDISPINFOW",
+  "ordinal": 6370,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 208
 }

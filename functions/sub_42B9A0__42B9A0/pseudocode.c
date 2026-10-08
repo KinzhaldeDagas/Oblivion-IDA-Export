@@ -1,48 +1,49 @@
-void *__thiscall sub_42B9A0(int *this)
+// XTEL writer: if linkedDoor is non-null, writes exact 28 bytes as linked door FormID plus six floats; if null, emits nothing.
+void *__thiscall TeleportData_SaveXTEL(TeleportData *this)
 {
-  int v1; // edx
-  int v2; // eax
-  int v3; // edx
-  int v4; // eax
-  int v5; // edx
-  int v6; // eax
-  int v7; // edx
-  int v8; // eax
+  TESObjectREFR *linkedDoor; // edx
+  UInt32 refID; // eax
+  float x; // edx
+  float y; // eax
+  float z; // edx
+  float xRot; // eax
+  float yRot; // edx
+  float zRot; // eax
   void *result; // eax
   size_t v10; // [esp-4h] [ebp-20h] BYREF
-  int v11; // [esp+4h] [ebp-18h]
-  int v12; // [esp+8h] [ebp-14h]
-  int v13; // [esp+Ch] [ebp-10h]
-  int v14; // [esp+10h] [ebp-Ch]
-  int v15; // [esp+14h] [ebp-8h]
-  int v16; // [esp+18h] [ebp-4h]
+  float v11; // [esp+4h] [ebp-18h]
+  float v12; // [esp+8h] [ebp-14h]
+  float v13; // [esp+Ch] [ebp-10h]
+  float v14; // [esp+10h] [ebp-Ch]
+  float v15; // [esp+14h] [ebp-8h]
+  float v16; // [esp+18h] [ebp-4h]
 
-  v1 = *this;
-  if ( *this )
+  linkedDoor = this->linkedDoor; /*0x42b9a0*/
+  if ( this->linkedDoor ) /*0x42b9a0*/
   {
-    HIDWORD(v10) = 0;
-    v11 = 0;
-    v12 = 0;
-    v13 = 0;
-    v14 = 0;
-    v15 = 0;
-    v16 = 0;
-    v2 = *(_DWORD *)(v1 + 0xC);
-    v3 = *(this + 1);
-    HIDWORD(v10) = v2;
-    v4 = *(this + 2);
-    v11 = v3;
-    v5 = *(this + 3);
-    v12 = v4;
-    v6 = *(this + 4);
-    v13 = v5;
-    v7 = *(this + 5);
-    v14 = v6;
-    v8 = *(this + 6);
-    LODWORD(v10) = 0x1C;
-    v15 = v7;
-    v16 = v8;
-    return TESForm_PutFormRecordChunkData(0x4C455458, (char *)&v10 + 4, v10);
+    HIDWORD(v10) = 0; /*0x42b9ab*/
+    v11 = 0.0; /*0x42b9ae*/
+    v12 = 0.0; /*0x42b9b2*/
+    v13 = 0.0; /*0x42b9b6*/
+    v14 = 0.0; /*0x42b9ba*/
+    v15 = 0.0; /*0x42b9be*/
+    v16 = 0.0; /*0x42b9c2*/
+    refID = linkedDoor->member.super.refID; /*0x42b9c6*/
+    x = this->x; /*0x42b9c9*/
+    HIDWORD(v10) = refID; /*0x42b9cc*/
+    y = this->y; /*0x42b9cf*/
+    v11 = x; /*0x42b9d2*/
+    z = this->z; /*0x42b9d6*/
+    v12 = y; /*0x42b9d9*/
+    xRot = this->xRot; /*0x42b9dd*/
+    v13 = z; /*0x42b9e0*/
+    yRot = this->yRot; /*0x42b9e4*/
+    v14 = xRot; /*0x42b9e7*/
+    zRot = this->zRot; /*0x42b9eb*/
+    LODWORD(v10) = 0x1C; /*0x42b9ee*/
+    v15 = yRot; /*0x42b9fa*/
+    v16 = zRot; /*0x42b9fe*/
+    return TESForm_PutFormRecordChunkData(0x4C455458, (char *)&v10 + 4, v10); /*0x42ba02*/
   }
-  return result;
+  return result; /*0x42ba0a*/
 }

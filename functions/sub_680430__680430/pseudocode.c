@@ -1,7 +1,8 @@
-int __thiscall sub_680430(_WORD *this)
+// Verified: returns the predecessor TravelPathSpaceDoorLink pointer stored at state +4 for this link's searchNodeIndex.
+TravelPathSpaceDoorLink *__thiscall TravelPath_SearchState_GetParentNode(TravelPathSpaceDoorLink *node)
 {
-  if ( *this >= (unsigned __int16)word_B3BF04 )
-    return *(_DWORD *)4;
+  if ( node->searchNodeIndex >= LOWORD(qword_B3BB2C[0xF6]) ) /*0x68043c*/
+    return *(TravelPathSpaceDoorLink **)4; /*0x68044e*/
   else
-    return *((_DWORD *)dword_B3BF00 + 4 * (unsigned __int16)*this + 1);
+    return *(TravelPathSpaceDoorLink **)(LODWORD(qword_B3BB2C[0xF5]) + 0x10 * node->searchNodeIndex + 4); /*0x68044a*/
 }

@@ -23,9 +23,9 @@
 0x676B75: jmp     short loc_676B79
 0x676B77: push    3; a2
 0x676B79: mov     ecx, esi; this
-0x676B7B: call    sub_673A50
+0x676B7B: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x676B80: mov     ecx, eax; this
-0x676B82: call    sub_7616D0
+0x676B82: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x676B87: mov     ebp, eax
 0x676B89: test    ebp, ebp
 0x676B8B: jz      loc_676CFF

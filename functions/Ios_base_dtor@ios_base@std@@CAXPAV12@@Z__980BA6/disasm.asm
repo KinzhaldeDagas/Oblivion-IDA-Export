@@ -16,7 +16,7 @@
 0x980BD4: mov     ecx, esi
 0x980BD6: call    sub_6F6E10
 0x980BDB: push    esi
-0x980BDC: call    FormHeapFree
+0x980BDC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x980BE1: pop     ecx
 0x980BE2: pop     esi
 0x980BE3: retn

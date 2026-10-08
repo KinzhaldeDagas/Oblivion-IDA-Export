@@ -1,4 +1,4 @@
-0x55FDF0: push    0FFFFFFFFh
+0x55FDF0: push    0FFFFFFFFh; Verified canopy-shadow path plus version difference: both games use Data\\Textures\\Trees\\CanopyShadow.dds and a white 16x16 fallback. Fallout loads through TES::CreateTextureImage and also updates BSShaderManager::pProjectedShadowTexture; Oblivion loads through OB_TES_LoadOrFindSourceTexture and stores through its renderer helper. Oblivion's adjacent renderer-resource global remains Unknown.
 0x55FDF2: push    offset SEH_55FDF0
 0x55FDF7: mov     eax, large fs:0
 0x55FDFD: push    eax
@@ -16,8 +16,8 @@
 0x55FE19: mov     [esp+2Ch+var_18], esi
 0x55FE1D: cmp     ds:0B39E04h, esi
 0x55FE23: jnz     short loc_55FE2E
-0x55FE25: push    esi
-0x55FE26: call    sub_55F750
+0x55FE25: push    esi; recreate
+0x55FE26: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x55FE2B: add     esp, 4
 0x55FE2E: mov     eax, ds:0B39E04h
 0x55FE33: mov     eax, [eax+4]
@@ -26,12 +26,12 @@
 0x55FE3E: mov     ecx, ds:0B333A0h
 0x55FE44: cmp     ecx, esi
 0x55FE46: jz      short loc_55FE69
-0x55FE48: push    esi; char
-0x55FE49: push    1; char
+0x55FE48: push    esi; searchArchives
+0x55FE49: push    1; allowMissing
 0x55FE4B: push    offset aDataTexturesTr; "Data\\Textures\\Trees\\CanopyShadow.dds"
-0x55FE50: lea     edx, [esp+38h+var_10]
-0x55FE54: push    edx; int
-0x55FE55: call    sub_442890
+0x55FE50: lea     edx, [esp+38h+outTexture]
+0x55FE54: push    edx; outTexture
+0x55FE55: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
 0x55FE5A: mov     [esp+2Ch+var_4], esi
 0x55FE5E: mov     esi, [esp+2Ch+var_14]
 0x55FE62: mov     ebx, 1
@@ -44,8 +44,8 @@
 0x55FE85: mov     edi, [eax]
 0x55FE87: mov     [esp+2Ch+var_18], ebx
 0x55FE8B: jnz     short loc_55FE97
-0x55FE8D: push    0
-0x55FE8F: call    sub_55F750
+0x55FE8D: push    0; recreate
+0x55FE8F: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x55FE94: add     esp, 4
 0x55FE97: mov     ecx, ds:0B39E04h
 0x55FE9D: push    edi; a2
@@ -72,7 +72,7 @@
 0x55FED9: test    bl, 1
 0x55FEDC: mov     [esp+2Ch+var_4], ebp
 0x55FEE0: jz      short loc_55FF06
-0x55FEE2: mov     esi, [esp+2Ch+var_10]
+0x55FEE2: mov     esi, [esp+2Ch+outTexture]
 0x55FEE6: test    esi, esi
 0x55FEE8: jz      short loc_55FF06
 0x55FEEA: lea     ecx, [esi+4]
@@ -89,8 +89,8 @@
 0x55FF04: call    eax
 0x55FF06: cmp     dword ptr ds:0B39E04h, 0
 0x55FF0D: jnz     short loc_55FF19
-0x55FF0F: push    0
-0x55FF11: call    sub_55F750
+0x55FF0F: push    0; recreate
+0x55FF11: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x55FF16: add     esp, 4
 0x55FF19: mov     ecx, ds:0B39E04h
 0x55FF1F: mov     eax, [ecx+4]
@@ -101,8 +101,8 @@
 0x55FF2D: or      ebp, 0FFFFFFFFh
 0x55FF30: cmp     dword ptr ds:0B39E04h, 0
 0x55FF37: jnz     short loc_55FF43
-0x55FF39: push    0
-0x55FF3B: call    sub_55F750
+0x55FF39: push    0; recreate
+0x55FF3B: call    BSTreeManager_Create; Verified singleton Create(recreate): optionally destroys/frees an existing BSTreeManager, allocates 0x28 bytes, runs BSTreeManager_ctor, and stores the instance.
 0x55FF40: add     esp, 4
 0x55FF43: mov     edx, ds:0B39E04h
 0x55FF49: mov     eax, [edx+4]
@@ -153,13 +153,13 @@
 0x55FFD5: test    eax, eax
 0x55FFD7: mov     [esp+2Ch+var_4], 3
 0x55FFDF: jz      short loc_55FFEA
-0x55FFE1: mov     ecx, eax
-0x55FFE3: call    sub_55E850
+0x55FFE1: mov     ecx, eax; this
+0x55FFE3: call    BSTreeManager_ctor; Verified Oblivion manager layout is 0x28 bytes with modelCacheByTree at +0 and pendingReferenceNodes at +0x24; constructor initializes shared Ni properties and the TESObjectREFR* -> BSTreeNode* map. Fallout's manager size/field offsets differ. Confidence applies to these local offsets and constructor stores.
 0x55FFE8: jmp     short loc_55FFEC
 0x55FFEA: xor     eax, eax
 0x55FFEC: mov     [esp+2Ch+var_4], ebp
 0x55FFF0: mov     ds:0B39E04h, eax
-0x55FFF5: push    offset dword_B256D0; a2
+0x55FFF5: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x55FFFA: push    esi; a1
 0x55FFFB: mov     ebx, eax
 0x55FFFD: call    NiSourceTexture__LoadTexturePixelData
@@ -199,8 +199,8 @@
 0x560058: test    eax, eax
 0x56005A: mov     [esp+2Ch+var_4], 4
 0x560062: jz      short loc_56006D
-0x560064: mov     ecx, eax
-0x560066: call    sub_55E850
+0x560064: mov     ecx, eax; this
+0x560066: call    BSTreeManager_ctor; Verified Oblivion manager layout is 0x28 bytes with modelCacheByTree at +0 and pendingReferenceNodes at +0x24; constructor initializes shared Ni properties and the TESObjectREFR* -> BSTreeNode* map. Fallout's manager size/field offsets differ. Confidence applies to these local offsets and constructor stores.
 0x56006B: jmp     short loc_56006F
 0x56006D: xor     eax, eax
 0x56006F: mov     [esp+2Ch+var_4], 0FFFFFFFFh
@@ -235,12 +235,12 @@
 0x5600C2: push    28h ; '('; Size
 0x5600C4: call    FormHeapAlloc
 0x5600C9: add     esp, 4
-0x5600CC: mov     [esp+2Ch+var_10], eax
+0x5600CC: mov     [esp+2Ch+outTexture], eax
 0x5600D0: test    eax, eax
 0x5600D2: mov     [esp+2Ch+var_4], 5
 0x5600DA: jz      short loc_5600E5
-0x5600DC: mov     ecx, eax
-0x5600DE: call    sub_55E850
+0x5600DC: mov     ecx, eax; this
+0x5600DE: call    BSTreeManager_ctor; Verified Oblivion manager layout is 0x28 bytes with modelCacheByTree at +0 and pendingReferenceNodes at +0x24; constructor initializes shared Ni properties and the TESObjectREFR* -> BSTreeNode* map. Fallout's manager size/field offsets differ. Confidence applies to these local offsets and constructor stores.
 0x5600E3: jmp     short loc_5600E7
 0x5600E5: xor     eax, eax
 0x5600E7: mov     ds:0B39E04h, eax
@@ -254,3 +254,44 @@
 0x5600FE: pop     ebx
 0x5600FF: add     esp, 18h
 0x560102: retn
+0x9BCCF0: mov     eax, [ebp-18h]
+0x9BCCF3: and     eax, 1
+0x9BCCF6: jz      locret_9BCD08
+0x9BCCFC: and     dword ptr [ebp-18h], 0FFFFFFFEh
+0x9BCD00: lea     ecx, [ebp-10h]; slot
+0x9BCD03: jmp     NiPointerSlot_Release
+0x9BCD08: retn
+0x9BCD09: mov     eax, [ebp-18h]
+0x9BCD0C: and     eax, 2
+0x9BCD0F: jz      locret_9BCD21
+0x9BCD15: and     dword ptr [ebp-18h], 0FFFFFFFDh
+0x9BCD19: lea     ecx, [ebp-14h]; slot
+0x9BCD1C: jmp     NiPointerSlot_Release
+0x9BCD21: retn
+0x9BCD22: mov     eax, [ebp-14h]
+0x9BCD25: push    eax
+0x9BCD26: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCD2B: pop     ecx
+0x9BCD2C: retn
+0x9BCD2D: mov     eax, [ebp-14h]
+0x9BCD30: push    eax
+0x9BCD31: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCD36: pop     ecx
+0x9BCD37: retn
+0x9BCD38: mov     eax, [ebp-14h]
+0x9BCD3B: push    eax
+0x9BCD3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCD41: pop     ecx
+0x9BCD42: retn
+0x9BCD43: mov     eax, [ebp-10h]
+0x9BCD46: push    eax
+0x9BCD47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCD4C: pop     ecx
+0x9BCD4D: retn
+0x9BCD4E: mov     edx, [esp+arg_4]
+0x9BCD52: lea     eax, [edx-1Ch]
+0x9BCD55: mov     ecx, [edx-20h]
+0x9BCD58: xor     ecx, eax
+0x9BCD5A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BCD5F: mov     eax, offset stru_AE6834
+0x9BCD64: jmp     ___CxxFrameHandler3

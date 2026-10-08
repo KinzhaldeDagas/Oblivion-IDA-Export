@@ -1,4 +1,4 @@
-0x50EF90: push    0FFFFFFFFh
+0x50EF90: push    0FFFFFFFFh; Verified registration as the TestLocalMap script command. This script handler shares DebugRender_GetOrCreateVertexColorProperty and the local-map/FOW debug visualization path; retain the script parameters as recovered until its remaining data flow is fully labeled.
 0x50EF92: push    offset SEH_50EF90
 0x50EF97: mov     eax, large fs:0
 0x50EF9D: push    eax
@@ -30,7 +30,7 @@
 0x50EFF9: xor     ebp, ebp
 0x50EFFB: push    ecx; a1
 0x50EFFC: mov     dword ptr [esp+15Ch+var_128], ebp
-0x50F000: call    Script_ExtractArgs
+0x50F000: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50F005: add     esp, 20h
 0x50F008: test    al, al
 0x50F00A: jz      loc_50FC84
@@ -69,7 +69,7 @@
 0x50F085: fadd    qword ptr ds:0A3F3E8h
 0x50F08B: mov     [esp+13Ch+var_44], edi
 0x50F092: mov     [esp+13Ch+var_124], esi
-0x50F096: mov     [esp+13Ch+var_120], ecx
+0x50F096: mov     [esp+13Ch+normals], ecx
 0x50F09A: fstp    [esp+13Ch+var_10C]
 0x50F09E: call    sub_411F00
 0x50F0A3: xor     eax, eax
@@ -83,16 +83,15 @@
 0x50F0C5: fst     [esp+13Ch+var_BC]
 0x50F0CC: fld1
 0x50F0CE: fstp    [esp+13Ch+var_B8]
-0x50F0D5: fild    [esp+13Ch+var_120]
+0x50F0D5: fild    [esp+13Ch+normals]
 0x50F0D9: fmul    qword ptr ds:0A2FAA0h
 0x50F0DF: fstp    [esp+13Ch+var_A0]
 0x50F0E6: fstp    [esp+13Ch+var_F8]
 0x50F0EA: jmp     short loc_50F0F7
-0x50F0EC: align 10h
 0x50F0F0: mov     edi, [esp+13Ch+var_44]
 0x50F0F7: xor     edx, edx
 0x50F0F9: div     dword ptr ds:0B06A2Ch
-0x50F0FF: mov     [esp+13Ch+var_C4], 0
+0x50F0FF: mov     [esp+13Ch+texture], 0
 0x50F107: mov     ebp, edx
 0x50F109: mov     [esp+13Ch+var_E8], ebp
 0x50F10D: mov     [esp+13Ch+var_C8], eax
@@ -108,7 +107,7 @@
 0x50F144: test    al, al
 0x50F146: mov     ecx, ds:0B333C4h; this
 0x50F14C: jz      loc_50F281
-0x50F152: call    TESObjectREFR_GetParentCell
+0x50F152: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x50F157: mov     ebx, eax
 0x50F159: test    ebx, ebx
 0x50F15B: jz      loc_50F37A
@@ -146,15 +145,15 @@
 0x50F1D3: mov     ecx, esi
 0x50F1D5: shl     ecx, 0Ch
 0x50F1D8: add     ecx, 800h
-0x50F1DE: mov     [esp+13Ch+var_120], ecx
-0x50F1E2: fild    [esp+13Ch+var_120]
+0x50F1DE: mov     [esp+13Ch+normals], ecx
+0x50F1E2: fild    [esp+13Ch+normals]
 0x50F1E6: mov     edx, edi
 0x50F1E8: shl     edx, 0Ch
 0x50F1EB: add     edx, 800h
 0x50F1F1: fstp    dword ptr [esp+13Ch+var_34]
 0x50F1F8: mov     eax, dword ptr [esp+13Ch+var_34]
-0x50F1FF: mov     [esp+13Ch+var_120], edx
-0x50F203: fild    [esp+13Ch+var_120]
+0x50F1FF: mov     [esp+13Ch+normals], edx
+0x50F203: fild    [esp+13Ch+normals]
 0x50F207: push    0
 0x50F209: push    edi
 0x50F20A: push    esi
@@ -177,7 +176,7 @@
 0x50F24D: mov     eax, [eax]
 0x50F24F: test    eax, eax
 0x50F251: jz      short loc_50F261
-0x50F253: mov     [esp+13Ch+var_C4], eax
+0x50F253: mov     [esp+13Ch+texture], eax
 0x50F257: add     eax, 4
 0x50F25A: push    eax; lpAddend
 0x50F25B: call    dword ptr ds:0A28078h
@@ -204,14 +203,14 @@
 0x50F2B8: add     esi, [esp+13Ch+var_C8]
 0x50F2BC: mov     ecx, edx
 0x50F2BE: shl     ecx, 0Ch
-0x50F2C1: mov     [esp+13Ch+var_120], ecx
-0x50F2C5: fild    [esp+13Ch+var_120]
+0x50F2C1: mov     [esp+13Ch+normals], ecx
+0x50F2C5: fild    [esp+13Ch+normals]
 0x50F2C9: mov     ecx, esi
 0x50F2CB: shl     ecx, 0Ch
 0x50F2CE: test    eax, eax
 0x50F2D0: fstp    [esp+13Ch+var_1C]
-0x50F2D7: mov     [esp+13Ch+var_120], ecx
-0x50F2DB: fild    [esp+13Ch+var_120]
+0x50F2D7: mov     [esp+13Ch+normals], ecx
+0x50F2DB: fild    [esp+13Ch+normals]
 0x50F2DF: mov     ecx, [esp+13Ch+var_1C]
 0x50F2E6: mov     dword ptr [esp+13Ch+var_F4], ecx
 0x50F2EA: fstp    [esp+13Ch+var_18]
@@ -222,8 +221,8 @@
 0x50F305: mov     ecx, [esp+13Ch+var_14]
 0x50F30C: mov     [esp+13Ch+var_EC], ecx
 0x50F310: jz      short loc_50F37A
-0x50F312: push    esi; signed int
-0x50F313: push    edx; signed int
+0x50F312: push    esi; cellY
+0x50F313: push    edx; cellX
 0x50F314: mov     ecx, eax; this
 0x50F316: call    TESWorldSpace__GetCellAtCellCoord
 0x50F31B: mov     esi, eax
@@ -238,7 +237,7 @@
 0x50F337: mov     eax, [eax]
 0x50F339: test    eax, eax
 0x50F33B: jz      short loc_50F34B
-0x50F33D: mov     [esp+13Ch+var_C4], eax
+0x50F33D: mov     [esp+13Ch+texture], eax
 0x50F341: add     eax, 4
 0x50F344: push    eax; lpAddend
 0x50F345: call    dword ptr ds:0A28078h
@@ -273,12 +272,12 @@
 0x50F39E: mov     edx, 0Ch
 0x50F3A3: mul     edx
 0x50F3A5: seto    cl
-0x50F3A8: mov     [esp+140h+var_40], edi
+0x50F3A8: mov     [esp+140h+vertices], edi
 0x50F3AF: neg     ecx
 0x50F3B1: or      ecx, eax
 0x50F3B3: push    ecx; Size
 0x50F3B4: call    FormHeapAlloc
-0x50F3B9: mov     [esp+144h+var_120], eax
+0x50F3B9: mov     [esp+144h+normals], eax
 0x50F3BD: xor     ecx, ecx
 0x50F3BF: mov     eax, 121h
 0x50F3C4: mov     edx, 8
@@ -288,7 +287,7 @@
 0x50F3D0: or      ecx, eax
 0x50F3D2: push    ecx; Size
 0x50F3D3: call    FormHeapAlloc
-0x50F3D8: mov     [esp+148h+var_74], eax
+0x50F3D8: mov     [esp+148h+textureCoordinates], eax
 0x50F3DF: xor     ecx, ecx
 0x50F3E1: mov     eax, 121h
 0x50F3E6: mov     edx, 10h
@@ -312,9 +311,9 @@
 0x50F41A: fst     dword ptr [ecx-0Ch]
 0x50F41D: jns     short loc_50F40B
 0x50F41F: fstp    st
-0x50F421: mov     [esp+13Ch+var_B4], eax
+0x50F421: mov     [esp+13Ch+colors], eax
 0x50F428: jmp     short loc_50F435
-0x50F42A: mov     [esp+13Ch+var_B4], 0
+0x50F42A: mov     [esp+13Ch+colors], 0
 0x50F435: xor     ecx, ecx
 0x50F437: mov     eax, 600h
 0x50F43C: mov     edx, 2
@@ -354,11 +353,11 @@
 0x50F4B9: cmp     ebx, 44h ; 'D'
 0x50F4BC: mov     [esp+13Ch+var_118], ebx
 0x50F4C0: jl      short loc_50F461
-0x50F4C2: mov     edx, [esp+13Ch+var_120]
+0x50F4C2: mov     edx, [esp+13Ch+normals]
 0x50F4C6: fstp    st
-0x50F4C8: mov     ecx, [esp+13Ch+var_74]
+0x50F4C8: mov     ecx, [esp+13Ch+textureCoordinates]
 0x50F4CF: fld     qword ptr ds:0A492E0h
-0x50F4D5: mov     eax, [esp+13Ch+var_B4]
+0x50F4D5: mov     eax, [esp+13Ch+colors]
 0x50F4DC: mov     [esp+13Ch+var_E4], 0
 0x50F4E4: jmp     short loc_50F4FB
 0x50F4E6: mov     edx, [esp+13Ch+var_B0]
@@ -486,7 +485,6 @@
 0x50F6E1: add     edi, ecx
 0x50F6E3: jmp     short loc_50F6F4
 0x50F6E5: jmp     short loc_50F6F0
-0x50F6E7: align 10h
 0x50F6F0: mov     ebx, [esp+13Ch+var_11C]
 0x50F6F4: mov     ecx, ebp
 0x50F6F6: and     ecx, 80000001h
@@ -545,21 +543,21 @@
 0x50F7B0: test    eax, eax
 0x50F7B2: mov     byte ptr [esp+13Ch+var_4], 4
 0x50F7BA: jz      short loc_50F7F3
-0x50F7BC: mov     edx, [esp+13Ch+var_74]
-0x50F7C3: mov     ecx, [esp+13Ch+var_B4]
-0x50F7CA: push    esi
-0x50F7CB: push    200h
-0x50F7D0: push    0
-0x50F7D2: push    1
-0x50F7D4: push    edx
-0x50F7D5: mov     edx, [esp+150h+var_120]
-0x50F7D9: push    ecx
-0x50F7DA: mov     ecx, [esp+154h+var_40]
-0x50F7E1: push    edx
-0x50F7E2: push    ecx
-0x50F7E3: push    121h
-0x50F7E8: mov     ecx, eax
-0x50F7EA: call    sub_7174B0
+0x50F7BC: mov     edx, [esp+13Ch+textureCoordinates]
+0x50F7C3: mov     ecx, [esp+13Ch+colors]
+0x50F7CA: push    esi; triangleIndices
+0x50F7CB: push    200h; triangleCount
+0x50F7D0: push    0; dataFlags
+0x50F7D2: push    1; hasVertexColors
+0x50F7D4: push    edx; textureCoordinates
+0x50F7D5: mov     edx, [esp+150h+normals]
+0x50F7D9: push    ecx; colors
+0x50F7DA: mov     ecx, [esp+154h+vertices]
+0x50F7E1: push    edx; normals
+0x50F7E2: push    ecx; vertices
+0x50F7E3: push    121h; vertexCount
+0x50F7E8: mov     ecx, eax; this
+0x50F7EA: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x50F7EF: mov     esi, eax
 0x50F7F1: jmp     short loc_50F7F5
 0x50F7F3: xor     esi, esi
@@ -577,7 +575,7 @@
 0x50F81B: fild    [esp+13Ch+var_E8]
 0x50F81F: fld     qword ptr ds:0A46970h
 0x50F825: mov     eax, [esp+13Ch+var_C8]
-0x50F829: mov     ebp, [esp+13Ch+var_C4]
+0x50F829: mov     ebp, [esp+13Ch+texture]
 0x50F82D: fadd    st(1), st
 0x50F82F: shl     eax, 6
 0x50F832: test    ebp, ebp
@@ -608,20 +606,20 @@
 0x50F889: mov     edi, eax
 0x50F88B: jmp     short loc_50F88F
 0x50F88D: xor     edi, edi
-0x50F88F: push    ebp
-0x50F890: mov     ecx, edi
+0x50F88F: push    ebp; texture
+0x50F890: mov     ecx, edi; this
 0x50F892: mov     byte ptr [esp+140h+var_4], 1
-0x50F89A: call    NiTexturingProperty__SetUnk08
-0x50F89F: push    0
-0x50F8A1: mov     ecx, edi
-0x50F8A3: call    sub_405870
+0x50F89A: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x50F89F: push    0; value
+0x50F8A1: mov     ecx, edi; this
+0x50F8A3: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x50F8A8: mov     cx, [edi+18h]
 0x50F8AC: and     cx, 0FFF5h
 0x50F8B1: or      cx, 4
 0x50F8B5: mov     [edi+18h], cx
 0x50F8B9: push    edi; a2
 0x50F8BA: mov     ecx, esi; this
-0x50F8BC: call    sub_405680
+0x50F8BC: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x50F8C1: lea     edx, [ebp+4]
 0x50F8C4: push    edx; lpAddend
 0x50F8C5: call    dword ptr ds:0A2807Ch
@@ -676,7 +674,7 @@
 0x50F969: call    eax
 0x50F96B: mov     ecx, ds:0B333C4h; this
 0x50F971: push    eax; int
-0x50F972: call    TESObjectREFR_GetParentCell
+0x50F972: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x50F977: mov     ecx, eax
 0x50F979: call    sub_4CCE20
 0x50F97E: fld     [esp+13Ch+var_D4]
@@ -824,16 +822,16 @@
 0x50FBE1: mov     ecx, ds:0B333C4h; this
 0x50FBE7: add     esp, 28h
 0x50FBEA: lea     esi, [ecx+20h]
-0x50FBED: call    TESObjectREFR_GetParentCell
+0x50FBED: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x50FBF2: mov     ecx, eax
 0x50FBF4: call    sub_4CCE00
 0x50FBF9: fadd    dword ptr [esi+8]
 0x50FBFC: push    ecx
-0x50FBFD: lea     ecx, [esp+140h+var_6C]
+0x50FBFD: lea     ecx, [esp+140h+var_6C]; this
 0x50FC04: fstp    [esp+140h+var_124]
 0x50FC08: fld     [esp+140h+var_124]
-0x50FC0C: fstp    [esp+140h+var_140]; float
-0x50FC0F: call    NiMatrix33_InitRotationTransform
+0x50FC0C: fstp    [esp+140h+angleZ]; angleZ
+0x50FC0F: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x50FC14: lea     edi, [ebp+30h]
 0x50FC17: mov     ecx, 9
 0x50FC1C: lea     esi, [esp+13Ch+var_6C]
@@ -844,10 +842,10 @@
 0x50FC2F: push    ebp
 0x50FC30: mov     ecx, ebx
 0x50FC32: call    eax
-0x50FC34: call    sub_4E70B0
+0x50FC34: call    DebugRender_GetOrCreateVertexColorProperty; Verified TestLocalMap command handler also requests DebugRender_GetOrCreateVertexColorProperty. Its table row at B0C050 points to TestLocalMap (A50890) with description "Simulates the local map. (1 or 0 for FOW on or off)" (A50858).
 0x50FC39: push    eax; a2
 0x50FC3A: mov     ecx, ebx; this
-0x50FC3C: call    sub_405680
+0x50FC3C: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x50FC41: fldz
 0x50FC43: mov     ecx, [esp+13Ch+var_114]
 0x50FC47: mov     [ebx+54h], ecx
@@ -859,13 +857,13 @@
 0x50FC58: mov     ecx, ebx; this
 0x50FC5A: fstp    [esp+144h+a2]; a2
 0x50FC5D: mov     [ebx+5Ch], eax
-0x50FC60: call    NiAVObject_UpdateNiAVObject
+0x50FC60: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x50FC65: mov     ecx, ebx; this
-0x50FC67: call    NiAVObject_InitializePropertyState
+0x50FC67: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x50FC6C: fld     dword ptr ds:0A37CC8h
 0x50FC72: push    ecx
 0x50FC73: mov     ecx, ds:0B333A0h
-0x50FC79: fstp    [esp+140h+var_140]; float
+0x50FC79: fstp    [esp+140h+angleZ]; float
 0x50FC7C: push    ebx; int
 0x50FC7D: call    sub_440E60
 0x50FC82: mov     al, 1
@@ -878,3 +876,31 @@
 0x50FC96: pop     ebx
 0x50FC97: add     esp, 128h
 0x50FC9D: retn
+0x9B6EC0: mov     eax, [ebp-124h]
+0x9B6EC6: push    eax
+0x9B6EC7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6ECC: pop     ecx
+0x9B6ECD: retn
+0x9B6ECE: lea     ecx, [ebp-0C4h]; slot
+0x9B6ED4: jmp     NiPointerSlot_Release
+0x9B6ED9: lea     ecx, [ebp-28h]; slot
+0x9B6EDC: jmp     NiPointerSlot_Release
+0x9B6EE1: lea     ecx, [ebp-20h]; slot
+0x9B6EE4: jmp     NiPointerSlot_Release
+0x9B6EE9: mov     eax, [ebp-11Ch]
+0x9B6EEF: push    eax
+0x9B6EF0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6EF5: pop     ecx
+0x9B6EF6: retn
+0x9B6EF7: mov     eax, [ebp-0E8h]
+0x9B6EFD: push    eax
+0x9B6EFE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B6F03: pop     ecx
+0x9B6F04: retn
+0x9B6F05: mov     edx, [esp+arg_4]
+0x9B6F09: lea     eax, [edx-12Ch]
+0x9B6F0F: mov     ecx, [edx-130h]
+0x9B6F15: xor     ecx, eax
+0x9B6F17: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6F1C: mov     eax, offset stru_AE1BC8
+0x9B6F21: jmp     ___CxxFrameHandler3

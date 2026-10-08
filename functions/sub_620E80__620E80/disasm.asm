@@ -51,7 +51,7 @@
 0x620F0C: push    2
 0x620F0E: mov     ecx, esi
 0x620F10: add     edi, 308h
-0x620F16: call    sub_6135F0
+0x620F16: call    CombatController_GetCurrentTarget
 0x620F1B: mov     edx, [edi]
 0x620F1D: push    eax
 0x620F1E: mov     ecx, ebp
@@ -64,7 +64,7 @@
 0x620F2E: push    1
 0x620F30: mov     ecx, esi
 0x620F32: add     edi, 318h
-0x620F38: call    sub_6135F0
+0x620F38: call    CombatController_GetCurrentTarget
 0x620F3D: push    eax
 0x620F3E: mov     eax, [edi]
 0x620F40: mov     ecx, ebp
@@ -77,12 +77,12 @@
 0x620F52: test    al, al
 0x620F54: pop     ebp
 0x620F55: jz      loc_6210C9
-0x620F5B: mov     ecx, [esi+3Ch]
+0x620F5B: mov     ecx, [esi+3Ch]; this
 0x620F5E: push    0; int
 0x620F60: push    offset ??_R0?AVFleePackage@@@8; struct TypeDescriptor *
 0x620F65: push    offset ??_R0?AVTESPackage@@@8; struct _s_RTTICompleteObjectLocator *
 0x620F6A: push    0; int
-0x620F6C: call    sub_5E0380
+0x620F6C: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x620F71: push    eax; void *
 0x620F72: call    OblivionDynamicCast
 0x620F77: mov     ebx, eax
@@ -112,25 +112,25 @@
 0x620FB4: push    0
 0x620FB6: call    sub_5E6D70
 0x620FBB: mov     ecx, [esi+3Ch]
-0x620FBE: call    Actor_IsBlocking
+0x620FBE: call    Actor_IsBlocking; Actor_IsBlocking: process current-action vfunc +0x2D0 equals 6. Player jump path treats this specially; climb activation should reject or require explicit design override while blocking.
 0x620FC3: test    al, al
 0x620FC5: jz      short loc_620FD1
-0x620FC7: mov     ecx, [esi+3Ch]
-0x620FCA: push    0; float
-0x620FCC: call    sub_5F4AE0
+0x620FC7: mov     ecx, [esi+3Ch]; this
+0x620FCA: push    0; shouldBlock
+0x620FCC: call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.
 0x620FD1: cmp     dword ptr [esi+70h], 0Ch
 0x620FD5: mov     edi, 0Dh
 0x620FDA: jnz     short loc_62103A
-0x620FDC: mov     ecx, [esi+3Ch]
-0x620FDF: call    Actor_IsSwimming
+0x620FDC: mov     ecx, [esi+3Ch]; this
+0x620FDF: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x620FE4: test    al, al
 0x620FE6: jnz     short loc_62103A
-0x620FE8: mov     ecx, [esi+3Ch]
+0x620FE8: mov     ecx, [esi+3Ch]; this
 0x620FEB: push    0; int
 0x620FED: push    offset ??_R0?AVFleePackage@@@8; struct TypeDescriptor *
 0x620FF2: push    offset ??_R0?AVTESPackage@@@8; struct _s_RTTICompleteObjectLocator *
 0x620FF7: push    0; int
-0x620FF9: call    sub_5E0380
+0x620FF9: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x620FFE: push    eax; void *
 0x620FFF: call    OblivionDynamicCast
 0x621004: add     esp, 14h
@@ -168,12 +168,12 @@
 0x621068: pop     ebx
 0x621069: add     esp, 4
 0x62106C: jmp     sub_61D320
-0x621071: mov     ecx, [esi+3Ch]
+0x621071: mov     ecx, [esi+3Ch]; this
 0x621074: push    0; int
 0x621076: push    offset ??_R0?AVFleePackage@@@8; struct TypeDescriptor *
 0x62107B: push    offset ??_R0?AVTESPackage@@@8; struct _s_RTTICompleteObjectLocator *
 0x621080: push    0; int
-0x621082: call    sub_5E0380
+0x621082: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x621087: push    eax; void *
 0x621088: call    OblivionDynamicCast
 0x62108D: add     esp, 14h

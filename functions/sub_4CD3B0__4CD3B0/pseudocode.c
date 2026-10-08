@@ -20,130 +20,130 @@ void __thiscall sub_4CD3B0(TESObjectCELL *this, Data *a2)
   NiTArray_NiTexturingPropertyMap v20; // [esp+24h] [ebp-1Ch] BYREF
   int v21; // [esp+3Ch] [ebp-4h]
 
-  v3 = 0;
-  v20._vtbl = &NiTArray<TESObjectREFR *>::`vftable';
-  v20.growSize = 1;
-  memset(&v20.data, 0, 0xA);
-  v21 = 0;
-  NiTArray_SetSize((unsigned __int16 *)&v20, 0x32u);
-  v20.growSize = 0x32;
-  sub_496EA0((char *)&stru_B35C80, this);
-  p_objectList = &this->members.objectList;
-  if ( this != (TESObjectCELL *)0xFFFFFFB8 )
+  v3 = 0; /*0x4cd3d9*/
+  v20._vtbl = &NiTArray<TESObjectREFR *>::`vftable'; /*0x4cd3db*/
+  v20.growSize = 1; /*0x4cd3e8*/
+  memset(&v20.data, 0, 0xA); /*0x4cd3f9*/
+  v21 = 0; /*0x4cd403*/
+  NiTArray_SetSize((unsigned __int16 *)&v20, 0x32u); /*0x4cd407*/
+  v20.growSize = 0x32; /*0x4cd412*/
+  sub_496EA0((char *)&unk_B35C80, this); /*0x4cd419*/
+  p_objectList = &this->members.objectList; /*0x4cd41e*/
+  if ( this != (TESObjectCELL *)0xFFFFFFB8 ) /*0x4cd423*/
   {
-    do
+    do /*0x4cd4c3*/
     {
-      if ( !p_objectList->next && !p_objectList->refr )
-        break;
-      refr = p_objectList->refr;
-      p_objectList = p_objectList->next;
-      flags = refr->member.super.flags;
-      v18 = (signed int)refr;
-      v7 = (flags & 0x4000) == 0;
-      if ( (flags & 0x20) != 0 )
+      if ( !p_objectList->next && !p_objectList->refr ) /*0x4cd437*/
+        break; /*0x4cd439*/
+      refr = p_objectList->refr; /*0x4cd43f*/
+      p_objectList = p_objectList->next; /*0x4cd441*/
+      flags = refr->member.super.flags; /*0x4cd443*/
+      v18 = (signed int)refr; /*0x4cd44f*/
+      v7 = (flags & 0x4000) == 0; /*0x4cd455*/
+      if ( (flags & 0x20) != 0 ) /*0x4cd45c*/
       {
-        OverrideFile = TESForm_GetOverrideFile((TESForm *)refr, 0);
-        if ( OverrideFile )
+        OverrideFile = TESForm_GetOverrideFile((TESForm *)refr, 0); /*0x4cd462*/
+        if ( OverrideFile ) /*0x4cd469*/
         {
-          if ( !TESFile_GetIsMaster(OverrideFile) )
-            v7 = 0;
+          if ( !TESFile_GetIsMaster(OverrideFile) ) /*0x4cd46d*/
+            v7 = 0; /*0x4cd476*/
         }
       }
-      if ( a2 != TESForm_GetOverrideFile((TESForm *)refr, 0xFFFFFFFF) && (refr->member.super.flags & 2) == 0 )
-        v7 = 0;
-      if ( ((this->members.flags0 & 1) != 0
-         || !TESObjectREFR_IsPersistent_(refr)
+      if ( a2 != TESForm_GetOverrideFile((TESForm *)refr, 0xFFFFFFFF) && (refr->member.super.flags & 2) == 0 ) /*0x4cd48f*/
+        v7 = 0; /*0x4cd491*/
+      if ( ((this->members.flags0 & 1) != 0 /*0x4cd4af*/
+         || !TESObjectREFR_IsPersistent(refr)
          || (this->members.super.flags & 0x400) != 0)
         && v7 )
       {
-        sub_4BACA0(&v20, &v18);
+        sub_4BACA0(&v20, &v18); /*0x4cd4ba*/
       }
-      v3 = 0;
+      v3 = 0; /*0x4cd4bf*/
     }
-    while ( p_objectList );
+    while ( p_objectList ); /*0x4cd4c3*/
   }
-  sub_496F50(&stru_B35C80, this);
-  sub_521BE0(&v20);
-  numObjs = v20.numObjs;
-  data = v20.data;
-  v18 = v20.numObjs;
-  v17 = 0;
-  if ( v20.numObjs )
+  sub_496F50(&unk_B35C80, this); /*0x4cd4cf*/
+  sub_521BE0(&v20); /*0x4cd4d8*/
+  numObjs = v20.numObjs; /*0x4cd4dd*/
+  data = v20.data; /*0x4cd4e4*/
+  v18 = v20.numObjs; /*0x4cd4e8*/
+  v17 = 0; /*0x4cd4ec*/
+  if ( v20.numObjs ) /*0x4cd4f0*/
   {
-    v16 = v20.data;
-    while ( 1 )
+    v16 = v20.data; /*0x4cd4f6*/
+    while ( 1 ) /*0x4cd502*/
     {
-      vtbl = v16->vtbl;
-      v12 = v17 + 1;
-      v19 = v17 + 1;
-      if ( (int)(v17 + 1) >= numObjs )
-        goto LABEL_36;
-      do
+      vtbl = v16->vtbl; /*0x4cd502*/
+      v12 = v17 + 1; /*0x4cd504*/
+      v19 = v17 + 1; /*0x4cd509*/
+      if ( (int)(v17 + 1) >= numObjs ) /*0x4cd50d*/
+        goto LABEL_36; /*0x4cd50d*/
+      do /*0x4cd599*/
       {
-        v13 = *(&data->vtbl + v12);
-        if ( !(*((unsigned __int8 (__thiscall **)(NiTexturingProperty_Map_Vtbl *, NiTexturingProperty_Map_Vtbl *))v13->Destroy
+        v13 = *(&data->vtbl + v12); /*0x4cd513*/
+        if ( !(*((unsigned __int8 (__thiscall **)(NiTexturingProperty_Map_Vtbl *, NiTexturingProperty_Map_Vtbl *))v13->Destroy /*0x4cd523*/
                + 0xD))(
                 v13,
                 vtbl) )
-          goto LABEL_34;
-        if ( v17 >= v20.end )
+          goto LABEL_34; /*0x4cd523*/
+        if ( v17 >= v20.end ) /*0x4cd530*/
         {
-          v20.end = v17 + 1;
+          v20.end = v17 + 1; /*0x4cd535*/
 LABEL_24:
-          ++v20.numObjs;
-          goto LABEL_25;
+          ++v20.numObjs; /*0x4cd545*/
+          goto LABEL_25; /*0x4cd545*/
         }
-        if ( !v16->vtbl )
-          goto LABEL_24;
+        if ( !v16->vtbl ) /*0x4cd540*/
+          goto LABEL_24; /*0x4cd543*/
 LABEL_25:
-        v14 = v12 < (unsigned int)v20.end;
-        v16->vtbl = v13;
-        if ( v14 )
+        v14 = v12 < (unsigned int)v20.end; /*0x4cd54b*/
+        v16->vtbl = v13; /*0x4cd556*/
+        if ( v14 ) /*0x4cd558*/
         {
-          if ( vtbl )
+          if ( vtbl ) /*0x4cd570*/
           {
-            if ( !*((_DWORD *)&data->vtbl + v12) )
-              ++v20.numObjs;
+            if ( !*((_DWORD *)&data->vtbl + v12) ) /*0x4cd572*/
+              ++v20.numObjs; /*0x4cd578*/
           }
-          else if ( *((_DWORD *)&data->vtbl + v12) )
+          else if ( *((_DWORD *)&data->vtbl + v12) ) /*0x4cd580*/
           {
-            --v20.numObjs;
+            --v20.numObjs; /*0x4cd586*/
           }
         }
         else
         {
-          v20.end = v12 + 1;
-          if ( vtbl )
-            ++v20.numObjs;
+          v20.end = v12 + 1; /*0x4cd55f*/
+          if ( vtbl ) /*0x4cd564*/
+            ++v20.numObjs; /*0x4cd566*/
         }
-        *((_DWORD *)&data->vtbl + v12) = vtbl;
-        vtbl = v13;
+        *((_DWORD *)&data->vtbl + v12) = vtbl; /*0x4cd58d*/
+        vtbl = v13; /*0x4cd590*/
 LABEL_34:
-        ++v12;
+        ++v12; /*0x4cd592*/
       }
-      while ( v12 < v18 );
-      numObjs = v18;
-      v12 = v19;
+      while ( v12 < v18 ); /*0x4cd599*/
+      numObjs = v18; /*0x4cd59f*/
+      v12 = v19; /*0x4cd5a3*/
 LABEL_36:
-      v16 = (NiTexturingProperty_Map *)((char *)v16 + 4);
-      v17 = v12;
-      if ( v12 >= numObjs )
+      v16 = (NiTexturingProperty_Map *)((char *)v16 + 4); /*0x4cd5a7*/
+      v17 = v12; /*0x4cd5ae*/
+      if ( v12 >= numObjs ) /*0x4cd5b2*/
       {
-        v3 = 0;
-        break;
+        v3 = 0; /*0x4cd5b8*/
+        break; /*0x4cd5b8*/
       }
     }
   }
-  if ( numObjs > 0 )
+  if ( numObjs > 0 ) /*0x4cd5bc*/
   {
-    do
+    do /*0x4cd5d6*/
     {
-      v15 = *((TESForm **)&data->vtbl + v3);
-      if ( v15 )
-        TESForm_SaveFormRecord(v15, a2);
-      ++v3;
+      v15 = *((TESForm **)&data->vtbl + v3); /*0x4cd5c0*/
+      if ( v15 ) /*0x4cd5c5*/
+        TESForm_SaveFormRecord(v15, a2); /*0x4cd5cc*/
+      ++v3; /*0x4cd5d1*/
     }
-    while ( v3 < numObjs );
+    while ( v3 < numObjs ); /*0x4cd5d6*/
   }
-  FormHeapFree((unsigned int)data);
+  FormHeapFree((unsigned int)data); /*0x4cd5d9*/
 }

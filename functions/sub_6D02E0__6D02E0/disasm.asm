@@ -22,7 +22,7 @@
 0x6D031A: mov     [esp+20h+var_4], edi
 0x6D031E: jz      short loc_6D0339
 0x6D0320: mov     ecx, esi
-0x6D0322: call    sub_6D04E0
+0x6D0322: call    NiInterpController_Construct; Constructs NiInterpController over NiTimeController, installs its vtable, and clears interpolator capability/manager flag 0x20.
 0x6D0327: mov     dword ptr [esi], offset ??_7NiMultiTargetTransformController@@6B@; const NiMultiTargetTransformController::`vftable'
 0x6D032D: mov     [esi+3Ch], edi
 0x6D0330: mov     [esi+40h], edi
@@ -44,3 +44,15 @@
 0x6D0360: pop     ebx
 0x6D0361: add     esp, 10h
 0x6D0364: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

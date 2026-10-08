@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x43FBA5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43FBA7",
-    "line": "call    sub_4D6FD0",
+    "line": "call    TESObjectREFR_HasVisibleDistantFlag; Verified gate: mobile-object scene cleanup begins only when TESObjectREFR_HasVisibleDistantFlag is true. Fallout's same-named visible-distant getter confirms the 0x8000 meaning; this call path then independently requires the 0x80000 state before detaching the NiNode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x43FBC0",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43FBC2",
-    "line": "call    sub_4D7000",
+    "line": "call    TESObjectREFR_HasTemp3DFlag; Verified gate: mobile cleanup removes the current NiNode only when the reference has the probable visible-distant flag, has a NiNode, and has the probable HasTemp3D bit set. It then clears the NiNode pointer and HasTemp3D bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x43FBFE",
-    "line": "lea     ecx, [esp+0Ch+arg_0]; this",
+    "line": "lea     ecx, [esp+0Ch+arg_0]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x43FC02",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,37 +235,37 @@
   },
   {
     "ea": "0x43FC08",
-    "line": "push    0",
+    "line": "push    0; node",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43FC0A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43FC0C",
-    "line": "call    sub_4D7D10",
+    "line": "call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x43FC11",
-    "line": "push    0",
+    "line": "push    0; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x43FC13",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43FC15",
-    "line": "call    sub_4D7010",
+    "line": "call    TESObjectREFR_SetTemp3DFlag; Verified local operation: sets/clears TESObjectREFR flags +0x08 bit 0x80000. Probable semantic name SetTemp3DFlag; the bit is toggled around reference NiNode attachment/removal and matches Fallout's named SetHasTemp3D usage.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A6E00",
-    "line": "push    esi",
+    "line": "push    esi; Oblivion Normal destructor. Decrements the shared Normal instance count; non-final instances mark their PosGen base notReady so only the final owner releases the shared sx/sfx tables.",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x7A6E29",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7A6E32",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

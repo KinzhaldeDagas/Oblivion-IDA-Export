@@ -1,4 +1,4 @@
-0x475D80: push    0FFFFFFFFh
+0x475D80: push    0FFFFFFFFh; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.
 0x475D82: push    offset Menu_PickIdles??_SEH
 0x475D87: mov     eax, large fs:0
 0x475D8D: push    eax
@@ -26,7 +26,7 @@
 0x475DD6: lea     eax, [esp+40h+var_2C]
 0x475DDA: push    eax
 0x475DDB: push    0
-0x475DDD: call    sub_470960
+0x475DDD: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x475DE2: test    al, al
 0x475DE4: jnz     loc_476066
 0x475DEA: mov     edx, [ebp+0]
@@ -84,12 +84,12 @@
 0x475EB3: mov     ecx, ds:0B33A1Ch
 0x475EB9: push    edi
 0x475EBA: mov     [esp+44h+var_28], edi
-0x475EBE: call    sub_439FF0
+0x475EBE: call    ModelLoader_LoadKFModelNow; Synchronous KF model load path. Queued idle loader and menu/power-attack setup use this when an immediate KFModel is required.
 0x475EC3: mov     esi, eax
 0x475EC5: mov     ecx, [esi+8]
 0x475EC8: test    ecx, ecx
 0x475ECA: jz      loc_475F9C
-0x475ED0: call    TESAnimGroup_IsPowerAttack
+0x475ED0: call    TESAnimGroup_IsPowerAttack; TESAnimGroup power-attack test: native group id 0x16-0x1A inclusive.
 0x475ED5: test    al, al
 0x475ED7: jz      short loc_475EEF
 0x475ED9: cmp     byte ptr [esp+40h+arg_8], 0
@@ -98,25 +98,25 @@
 0x475EE3: push    esi; lpAddend
 0x475EE4: call    dword ptr ds:0A2807Ch
 0x475EEA: jmp     loc_475F9C
-0x475EEF: mov     ecx, ds:0B333C4h
+0x475EEF: mov     ecx, ds:0B333C4h; this
 0x475EF5: test    ecx, ecx
 0x475EF7: mov     byte ptr [esp+40h+arg_0], 1
 0x475EFC: jz      loc_475F86
-0x475F02: push    0
-0x475F04: call    PlayerCharacter_GetPlayerNode
+0x475F02: push    0; firstPerson
+0x475F04: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x475F09: test    eax, eax
 0x475F0B: jz      short loc_475F86
 0x475F0D: cmp     dword ptr ds:0B06548h, 0
 0x475F14: jz      short loc_475F86
-0x475F16: mov     ecx, ds:0B333C4h
-0x475F1C: push    0
-0x475F1E: call    PlayerCharacter_GetPlayerNode
+0x475F16: mov     ecx, ds:0B333C4h; this
+0x475F1C: push    0; firstPerson
+0x475F1E: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x475F23: mov     edi, [esp+40h+arg_4]
 0x475F27: cmp     edi, eax
 0x475F29: jz      short loc_475F73
-0x475F2B: mov     ecx, ds:0B333C4h
-0x475F31: push    1
-0x475F33: call    PlayerCharacter_GetPlayerNode
+0x475F2B: mov     ecx, ds:0B333C4h; this
+0x475F31: push    1; firstPerson
+0x475F33: call    PlayerCharacter_GetNodeByPerspective; Explicit perspective node selector. false tail-calls TESObjectREFR_GetNiNode; true returns PlayerCharacter.firstPersonNiNode at +0x5D0. Native flag type is bool.
 0x475F38: cmp     edi, eax
 0x475F3A: jz      short loc_475F73
 0x475F3C: mov     edx, ds:0B333C4h
@@ -126,17 +126,17 @@
 0x475F50: call    sub_45A500
 0x475F55: test    al, al
 0x475F57: jnz     short loc_475F86
-0x475F59: call    InterfaceManager_IsMenuMode
+0x475F59: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x475F5E: test    al, al
 0x475F60: jnz     short loc_475F86
 0x475F62: mov     ecx, ds:0B333A0h
-0x475F68: call    sub_404F20
+0x475F68: call    sub_404F20; CustomAnimSupport evidence: global loading/update gate checked by KF install/defer decisions; support condition for SpecialAnims install timing.
 0x475F6D: test    al, al
 0x475F6F: jz      short loc_475F8B
 0x475F71: jmp     short loc_475F86
 0x475F73: push    0
 0x475F75: push    40Ch
-0x475F7A: call    sub_5790E0
+0x475F7A: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x475F7F: add     esp, 8
 0x475F82: test    al, al
 0x475F84: jnz     short loc_475F8B
@@ -145,10 +145,10 @@
 0x475F8F: push    eax
 0x475F90: push    esi
 0x475F91: mov     ecx, ebx; this
-0x475F93: call    ??0AnimSequenceSingle@@QAE@XZ; AnimSequenceSingle::AnimSequenceSingle(void)
+0x475F93: call    ActorAnimData_InstallKFModel; CustomAnimSupport decode: installs a parsed KFModel into ActorAnimData as AnimSequenceSingle/Multiple or defers it. Historical constructor-style name is not canonical.
 0x475F98: mov     edi, [esp+40h+var_28]
 0x475F9C: push    edi
-0x475F9D: call    FormHeapFree
+0x475F9D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x475FA2: mov     eax, [ebp+4]
 0x475FA5: add     esp, 4
 0x475FA8: test    eax, eax
@@ -158,7 +158,7 @@
 0x475FB2: mov     edx, [eax]
 0x475FB4: push    eax
 0x475FB5: mov     [ebp+0], edx
-0x475FB8: call    FormHeapFree
+0x475FB8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x475FBD: add     esp, 4
 0x475FC0: jmp     short loc_475FC9
 0x475FC2: mov     dword ptr [ebp+0], 0
@@ -174,13 +174,13 @@
 0x475FE7: mov     esi, (offset stru_B26AF0.unk2C+2A8h)
 0x475FEC: rep movsd
 0x475FEE: push    ebp
-0x475FEF: call    FormHeapFree
+0x475FEF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x475FF4: mov     ecx, [ebx+9Ch]
 0x475FFA: add     esp, 4
 0x475FFD: lea     eax, [esp+40h+var_2C]
 0x476001: push    eax
 0x476002: push    0
-0x476004: call    sub_470960
+0x476004: call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.
 0x476009: mov     bl, al
 0x47600B: test    bl, bl
 0x47600D: jz      short loc_476062
@@ -193,29 +193,29 @@
 0x47601E: test    esi, esi
 0x476020: jz      short loc_476062
 0x476022: fldz
-0x476024: push    0; int
-0x476026: push    0; int
+0x476024: push    0; transition
+0x476026: push    0; timeSyncSequence
 0x476028: sub     esp, 8
-0x47602B: fstp    [esp+50h+var_4C]; float
-0x47602F: mov     ecx, esi
+0x47602B: fstp    [esp+50h+easeInTime]; easeInTime
+0x47602F: mov     ecx, esi; this
 0x476031: fld1
-0x476033: fstp    [esp+50h+var_50]; float
-0x476036: push    1; char
-0x476038: push    64h ; 'd'; int
-0x47603A: call    sub_6C9BA0
+0x476033: fstp    [esp+50h+weight]; weight
+0x476036: push    1; startOver
+0x476038: push    64h ; 'd'; priority
+0x47603A: call    NiControllerSequence_Activate; Native controller-sequence activation state machine. Rejects an already-active sequence, validates optional time-sync compatibility, records activation parameters, and queues the active sequence with its manager.
 0x47603F: fldz
 0x476041: push    1; a3
 0x476043: push    ecx
 0x476044: mov     ecx, [esp+48h+var_24]
 0x476048: fstp    [esp+48h+a2]; a2
 0x47604B: mov     ecx, [ecx+4]; this
-0x47604E: call    NiAVObject_UpdateNiAVObject
+0x47604E: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x476053: fldz
-0x476055: push    0; char
+0x476055: push    0; transition
 0x476057: push    ecx
-0x476058: mov     ecx, esi
-0x47605A: fstp    [esp+48h+a2]; float
-0x47605D: call    sub_6C9CB0
+0x476058: mov     ecx, esi; this
+0x47605A: fstp    [esp+48h+a2]; easeOutTime
+0x47605D: call    NiControllerSequence_Deactivate; Native controller-sequence deactivation. Immediate stop clears active state/controller links; positive ease-out enters state 3 or 4 and records fade timing.
 0x476062: mov     al, bl
 0x476064: jmp     short loc_476068
 0x476066: xor     al, al
@@ -228,3 +228,15 @@
 0x476077: pop     ebx
 0x476078: add     esp, 2Ch
 0x47607B: retn    0Ch
+0x9AEE80: mov     eax, [ebp-28h]
+0x9AEE83: push    eax
+0x9AEE84: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AEE89: pop     ecx
+0x9AEE8A: retn
+0x9AEE8B: mov     edx, [esp+arg_4]
+0x9AEE8F: lea     eax, [edx-30h]
+0x9AEE92: mov     ecx, [edx-34h]
+0x9AEE95: xor     ecx, eax
+0x9AEE97: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AEE9C: mov     eax, offset stru_ADB548
+0x9AEEA1: jmp     ___CxxFrameHandler3

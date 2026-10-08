@@ -1,5 +1,5 @@
 0xA1BAA0: push    esi
-0xA1BAA1: mov     esi, bhkWorldM
+0xA1BAA1: mov     esi, ds:0B35C24h
 0xA1BAA7: test    esi, esi
 0xA1BAA9: jz      short loc_A1BAC7
 0xA1BAAB: lea     eax, [esi+4]

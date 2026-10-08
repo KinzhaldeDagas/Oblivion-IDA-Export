@@ -1,4 +1,4 @@
-0x7920A0: push    ebp
+0x7920A0: push    ebp; CBranch::ComputeBud. Builds a two-vertex bud direction from branch profile/parent transform and forwards final position, normal, parent direction, wind weights, and map state to MakeLeaf.
 0x7920A1: mov     ebp, esp
 0x7920A3: and     esp, 0FFFFFFF8h
 0x7920A6: sub     esp, 0F4h
@@ -41,20 +41,20 @@
 0x79214A: fst     [esp+100h+var_48]
 0x792151: fst     [esp+100h+var_4C]
 0x792158: fst     [esp+100h+var_50]
-0x79215F: fst     [esp+100h+var_3C]
-0x792166: fst     [esp+100h+var_40]
-0x79216D: fst     [esp+100h+var_44]
+0x79215F: fst     [esp+100h+position.z]
+0x792166: fst     [esp+100h+position.y]
+0x79216D: fst     [esp+100h+position.x]
 0x792174: fst     [esp+100h+var_30]
 0x79217B: fst     [esp+100h+var_2C]
 0x792182: fst     [esp+100h+var_28]
 0x792189: fst     [esp+100h+var_20]
 0x792190: fst     [esp+100h+var_1C]
 0x792197: fstp    [esp+100h+var_18]
-0x79219E: mov     ecx, [esi+60h]
+0x79219E: mov     ecx, [esi+60h]; this
 0x7921A1: fld     [ebp+arg_10]
 0x7921A4: push    ecx
-0x7921A5: fstp    [esp+104h+var_104]; float
-0x7921A8: call    sub_784210
+0x7921A5: fstp    [esp+104h+percent]; percent
+0x7921A8: call    OB_stBezierSpline_Evaluate_010201A0; Oblivion compact stBezierSpline Evaluate: requires the 500-entry vector at +0x3C, samples/interpolates its y values, maps normalized output through min@0x00/max@0x04, then adds uniform +/- variance@0x08. This executable field order overrides the differing RT4.1 header declaration order.
 0x7921AD: fmul    [ebp+arg_4]
 0x7921B0: fstp    dword ptr [esp+100h+var_A0]
 0x7921B4: fld     dword ptr [esp+100h+var_A0]
@@ -70,11 +70,11 @@
 0x7921D0: fstp    [esp+100h+var_F0]
 0x7921D4: sub     esp, 8
 0x7921D7: fld     dword ptr ds:0A3F420h
-0x7921DD: mov     ecx, offset unk_B429C9
-0x7921E2: fstp    [esp+108h+var_104]; float
+0x7921DD: mov     ecx, offset stru_B429C9; this
+0x7921E2: fstp    [esp+108h+percent]; maxValue
 0x7921E6: fld     dword ptr ds:0A8C694h
-0x7921EC: fstp    dword ptr [esp+108h+var_10C+4]; float
-0x7921EF: call    sub_78EA00
+0x7921EC: fstp    [esp+108h+primaryWindWeight+4]; minValue
+0x7921EF: call    OB_stRandom_GetUniform_010201A0; Oblivion stRandom::GetUniform. Returns minValue + (maxValue - minValue) * SIdvRandomImpl::m_cUniform.Next(). Used throughout spline, branch, frond, tree, leaf-LOD, and seed generation paths.
 0x7921F4: mov     esi, [ebp+arg_14]
 0x7921F7: fstp    dword ptr [esp+100h+var_A0]
 0x7921FB: mov     eax, [ebp+arg_18]
@@ -100,7 +100,7 @@
 0x792240: mov     ecx, 9
 0x792245: fmul    st, st(2)
 0x792247: faddp   st(1), st
-0x792249: fstp    dword ptr [esp+10Ch+var_EC]
+0x792249: fstp    [esp+10Ch+normal.x]
 0x79224D: fld     dword ptr [esi+0Ch]
 0x792250: fmul    st, st(2)
 0x792252: fld     dword ptr [esi+10h]
@@ -109,8 +109,8 @@
 0x792259: fld     dword ptr [esi+14h]
 0x79225C: fmul    st, st(2)
 0x79225E: faddp   st(1), st
-0x792260: fstp    dword ptr [esp+10Ch+var_EC+4]
-0x792264: mov     edx, dword ptr [esp+10Ch+var_EC+4]
+0x792260: fstp    [esp+10Ch+normal.y]
+0x792264: mov     edx, [esp+10Ch+normal.y]
 0x792268: fld     dword ptr [esi+18h]
 0x79226B: fmulp   st(2), st
 0x79226D: fld     dword ptr [esi+1Ch]
@@ -120,22 +120,22 @@
 0x792276: fmul    dword ptr [esi+20h]
 0x792279: rep movsd
 0x79227B: faddp   st(1), st
-0x79227D: fstp    [esp+10Ch+var_E4]
+0x79227D: fstp    [esp+10Ch+normal.z]
 0x792281: fld     dword ptr [esp+10Ch+var_A0]
-0x792285: mov     ecx, dword ptr [esp+10Ch+var_EC]
+0x792285: mov     ecx, [esp+10Ch+normal.x]
 0x792289: mov     [eax], ecx
-0x79228B: mov     ecx, [esp+10Ch+var_E4]
+0x79228B: mov     ecx, [esp+10Ch+normal.z]
 0x79228F: mov     [eax+4], edx
 0x792292: mov     [eax+8], ecx
 0x792295: push    ecx
 0x792296: lea     ecx, [esp+110h+var_7C]
 0x79229D: fstp    [esp+110h+var_110]; float
-0x7922A0: call    sub_78F050
+0x7922A0: call    OB_Mat3_AxisAngleInPlace_010201A0; In-place axis-angle rotation helper for branch transforms.
 0x7922A5: fld     dword ptr ds:0A5793Ch
 0x7922AB: push    ecx
 0x7922AC: lea     ecx, [esp+104h+var_7C]
-0x7922B3: fstp    [esp+104h+var_104]; float
-0x7922B6: call    sub_78EEC0
+0x7922B3: fstp    [esp+104h+percent]; float
+0x7922B6: call    OB_Mat3_RotateY_010201A0; Y-rotation helper used by branch/bud generation.
 0x7922BB: fld     dword ptr ds:0B2B71Ch
 0x7922C1: fld     dword ptr ds:0B2B718h
 0x7922C7: fld     dword ptr ds:0B2B720h
@@ -147,9 +147,9 @@
 0x7922E1: fld     [esp+100h+var_64]
 0x7922E8: fmul    st, st(2)
 0x7922EA: faddp   st(1), st
-0x7922EC: fstp    dword ptr [esp+100h+var_EC]
+0x7922EC: fstp    [esp+100h+normal.x]
 0x7922F0: fld     [esp+100h+var_78]
-0x7922F7: mov     edx, dword ptr [esp+100h+var_EC]
+0x7922F7: mov     edx, [esp+100h+normal.x]
 0x7922FB: fmul    st, st(2)
 0x7922FD: mov     [esp+100h+var_98], edx
 0x792301: fld     [esp+100h+var_6C]
@@ -158,8 +158,8 @@
 0x79230C: fld     [esp+100h+var_60]
 0x792313: fmul    st, st(2)
 0x792315: faddp   st(1), st
-0x792317: fstp    dword ptr [esp+100h+var_EC+4]
-0x79231B: mov     eax, dword ptr [esp+100h+var_EC+4]
+0x792317: fstp    [esp+100h+normal.y]
+0x79231B: mov     eax, [esp+100h+normal.y]
 0x79231F: fld     [esp+100h+var_74]
 0x792326: mov     [esp+100h+var_94], eax
 0x79232A: fmulp   st(2), st
@@ -169,17 +169,17 @@
 0x792337: faddp   st(2), st
 0x792339: fmul    [esp+100h+var_5C]
 0x792340: faddp   st(1), st
-0x792342: fstp    [esp+100h+var_E4]
-0x792346: mov     ecx, [esp+100h+var_E4]
+0x792342: fstp    [esp+100h+normal.z]
+0x792346: mov     ecx, [esp+100h+normal.z]
 0x79234A: fld     [esp+100h+var_F0]
 0x79234E: mov     [esp+100h+var_90], ecx
-0x792352: fld     dword ptr [esp+100h+var_EC]
+0x792352: fld     [esp+100h+normal.x]
 0x792356: fmul    st, st(1)
 0x792358: fstp    dword ptr [esp+100h+var_B0]
-0x79235C: fld     dword ptr [esp+100h+var_EC+4]
+0x79235C: fld     [esp+100h+normal.y]
 0x792360: fmul    st, st(1)
 0x792362: fstp    dword ptr [esp+100h+var_B0+4]
-0x792366: fmul    [esp+100h+var_E4]
+0x792366: fmul    [esp+100h+normal.z]
 0x79236A: fstp    [esp+100h+var_A8]
 0x79236E: fld     [esp+100h+var_8C]
 0x792372: fld     dword ptr [esp+100h+var_B0]
@@ -187,37 +187,37 @@
 0x792378: fstp    dword ptr [esp+100h+var_D0]
 0x79237C: mov     edx, dword ptr [esp+100h+var_D0]
 0x792380: fld     [esp+100h+var_88]
-0x792384: mov     [esp+100h+var_44], edx
+0x792384: mov     [esp+100h+position.x], edx
 0x79238B: fld     dword ptr [esp+100h+var_B0+4]
 0x79238F: fadd    st, st(1)
 0x792391: fstp    dword ptr [esp+100h+var_D0+4]
 0x792395: mov     eax, dword ptr [esp+100h+var_D0+4]
 0x792399: fld     [esp+100h+var_84]
-0x79239D: mov     [esp+100h+var_40], eax
+0x79239D: mov     [esp+100h+position.y], eax
 0x7923A4: fld     [esp+100h+var_A8]
 0x7923A8: fadd    st, st(1)
 0x7923AA: fstp    [esp+100h+var_C8]
 0x7923AE: mov     ecx, [esp+100h+var_C8]
 0x7923B2: fld     dword ptr [esp+100h+var_D0]
-0x7923B6: mov     [esp+100h+var_3C], ecx
+0x7923B6: mov     [esp+100h+position.z], ecx
 0x7923BD: fst     [esp+100h+var_C0]
 0x7923C1: fsubrp  st(3), st
 0x7923C3: fxch    st(2)
-0x7923C5: fstp    dword ptr [esp+100h+var_EC]
+0x7923C5: fstp    [esp+100h+normal.x]
 0x7923C9: fld     dword ptr [esp+100h+var_D0+4]
 0x7923CD: fst     [esp+100h+var_B0]
 0x7923D1: fsubrp  st(1), st
-0x7923D3: fstp    dword ptr [esp+100h+var_EC+4]
+0x7923D3: fstp    [esp+100h+normal.y]
 0x7923D7: fld     [esp+100h+var_C8]
 0x7923DB: fst     [esp+100h+var_D0]
 0x7923DF: fsubrp  st(1), st
-0x7923E1: fstp    [esp+100h+var_E4]
-0x7923E5: fld     dword ptr [esp+100h+var_EC+4]
+0x7923E1: fstp    [esp+100h+normal.z]
+0x7923E5: fld     [esp+100h+normal.y]
 0x7923E9: fst     [esp+100h+var_8]
-0x7923F0: fld     dword ptr [esp+100h+var_EC]
+0x7923F0: fld     [esp+100h+normal.x]
 0x7923F4: fst     [esp+100h+var_A0]
-0x7923F8: fld     [esp+100h+var_E4]
-0x7923FC: fst     [esp+100h+var_E0]
+0x7923F8: fld     [esp+100h+normal.z]
+0x7923FC: fst     qword ptr [esp+100h+parentDirection.x]
 0x792400: fld     st(1)
 0x792402: fmulp   st(2), st
 0x792404: fld     st(2)
@@ -239,26 +239,26 @@
 0x792432: fld     [esp+100h+var_F0]
 0x792436: fld     [esp+100h+var_A0]
 0x79243A: fmul    st, st(1)
-0x79243C: fstp    dword ptr [esp+100h+var_EC]
+0x79243C: fstp    [esp+100h+normal.x]
 0x792440: fld     [esp+100h+var_8]
 0x792447: fmul    st, st(1)
-0x792449: fstp    dword ptr [esp+100h+var_EC+4]
-0x79244D: fmul    [esp+100h+var_E0]
-0x792451: fstp    [esp+100h+var_E4]
+0x792449: fstp    [esp+100h+normal.y]
+0x79244D: fmul    qword ptr [esp+100h+parentDirection.x]
+0x792451: fstp    [esp+100h+normal.z]
 0x792455: jz      loc_7924F0
 0x79245B: cmp     dword ptr [eax+1Ch], 0
 0x79245F: jz      loc_7924F0
 0x792465: mov     ecx, [eax+18h]
 0x792468: mov     edx, [ecx+0Ch]
 0x79246B: add     ecx, 0Ch
-0x79246E: mov     dword ptr [esp+100h+var_E0], edx
+0x79246E: mov     [esp+100h+parentDirection.x], edx
 0x792472: mov     edx, [ecx+4]
 0x792475: mov     ecx, [ecx+8]
-0x792478: mov     dword ptr [esp+100h+var_E0+4], edx
+0x792478: mov     [esp+100h+parentDirection.y], edx
 0x79247C: mov     edx, ds:0B429B8h
 0x792482: mov     edx, [edx+2Ch]
 0x792485: test    edx, edx
-0x792487: mov     [esp+100h+var_D8], ecx
+0x792487: mov     [esp+100h+parentDirection.z], ecx
 0x79248B: jz      short loc_7924BE
 0x79248D: xor     ecx, ecx
 0x79248F: nop
@@ -276,33 +276,33 @@
 0x7924A9: mov     edx, [eax+10h]
 0x7924AC: add     eax, 0Ch
 0x7924AF: mov     eax, [eax+8]
-0x7924B2: mov     dword ptr [esp+100h+var_E0], ecx
-0x7924B6: mov     dword ptr [esp+100h+var_E0+4], edx
-0x7924BA: mov     [esp+100h+var_D8], eax
-0x7924BE: fld     dword ptr [esp+100h+var_E0]
+0x7924B2: mov     [esp+100h+parentDirection.x], ecx
+0x7924B6: mov     [esp+100h+parentDirection.y], edx
+0x7924BA: mov     [esp+100h+parentDirection.z], eax
+0x7924BE: fld     [esp+100h+parentDirection.x]
 0x7924C2: fsubr   [esp+100h+var_C0]
 0x7924C6: fstp    dword ptr [esp+100h+var_C0]
 0x7924CA: mov     ecx, dword ptr [esp+100h+var_C0]
-0x7924CE: fld     dword ptr [esp+100h+var_E0+4]
+0x7924CE: fld     [esp+100h+parentDirection.y]
 0x7924D2: fsubr   [esp+100h+var_B0]
 0x7924D6: fstp    dword ptr [esp+100h+var_C0+4]
 0x7924DA: mov     edx, dword ptr [esp+100h+var_C0+4]
-0x7924DE: fld     [esp+100h+var_D8]
+0x7924DE: fld     [esp+100h+parentDirection.z]
 0x7924E2: fsubr   [esp+100h+var_D0]
 0x7924E6: fstp    [esp+100h+var_B8]
 0x7924EA: mov     eax, [esp+100h+var_B8]
 0x7924EE: jmp     short loc_7924FC
-0x7924F0: mov     ecx, dword ptr [esp+100h+var_EC]
-0x7924F4: mov     edx, dword ptr [esp+100h+var_EC+4]
-0x7924F8: mov     eax, [esp+100h+var_E4]
-0x7924FC: mov     dword ptr [esp+100h+var_E0+4], edx
-0x792500: fld     dword ptr [esp+100h+var_E0+4]
+0x7924F0: mov     ecx, [esp+100h+normal.x]
+0x7924F4: mov     edx, [esp+100h+normal.y]
+0x7924F8: mov     eax, [esp+100h+normal.z]
+0x7924FC: mov     [esp+100h+parentDirection.y], edx
+0x792500: fld     [esp+100h+parentDirection.y]
 0x792504: fst     [esp+100h+var_B0]
-0x792508: mov     dword ptr [esp+100h+var_E0], ecx
-0x79250C: fld     dword ptr [esp+100h+var_E0]
-0x792510: mov     [esp+100h+var_D8], eax
+0x792508: mov     [esp+100h+parentDirection.x], ecx
+0x79250C: fld     [esp+100h+parentDirection.x]
+0x792510: mov     [esp+100h+parentDirection.z], eax
 0x792514: fst     [esp+100h+var_D0]
-0x792518: fld     [esp+100h+var_D8]
+0x792518: fld     [esp+100h+parentDirection.z]
 0x79251C: fst     [esp+100h+var_C0]
 0x792520: fld     st(1)
 0x792522: fmulp   st(2), st
@@ -317,37 +317,37 @@
 0x792538: call    __CIsqrt
 0x79253D: fstp    [esp+100h+var_F0]
 0x792541: fld     [esp+100h+var_F0]
-0x792545: mov     ecx, [ebp+arg_1C]
+0x792545: mov     ecx, [ebp+leaves]
 0x792548: fld1
-0x79254A: mov     edx, [ebp+arg_24]
+0x79254A: mov     edx, [ebp+primaryWindGroup]
 0x79254D: fdivrp  st(1), st
-0x79254F: push    ecx; int
-0x792550: push    edx; int
+0x79254F: push    ecx; leaves
+0x792550: push    edx; primaryWindGroup
 0x792551: push    ecx
-0x792552: lea     eax, [esp+10Ch+var_E0]
-0x792556: lea     ecx, [esp+10Ch+var_EC]
-0x79255A: lea     edx, [esp+10Ch+var_44]
+0x792552: lea     eax, [esp+10Ch+parentDirection]
+0x792556: lea     ecx, [esp+10Ch+normal]
+0x79255A: lea     edx, [esp+10Ch+position]
 0x792561: fstp    [esp+10Ch+var_F0]
 0x792565: fld     [esp+10Ch+var_F0]
 0x792569: fld     [esp+10Ch+var_D0]
 0x79256D: fmul    st, st(1)
-0x79256F: fstp    dword ptr [esp+10Ch+var_E0]
+0x79256F: fstp    [esp+10Ch+parentDirection.x]
 0x792573: fld     [esp+10Ch+var_B0]
 0x792577: fmul    st, st(1)
-0x792579: fstp    dword ptr [esp+10Ch+var_E0+4]
+0x792579: fstp    [esp+10Ch+parentDirection.y]
 0x79257D: fmul    [esp+10Ch+var_C0]
-0x792581: fstp    [esp+10Ch+var_D8]
+0x792581: fstp    [esp+10Ch+parentDirection.z]
 0x792585: fld     [ebp+arg_20]
-0x792588: fstp    dword ptr [esp+10Ch+var_10C]; float
-0x79258B: push    eax; int
+0x792588: fstp    [esp+10Ch+primaryWindWeight]; primaryWindWeight
+0x79258B: push    eax; parentDirection
 0x79258C: fld     [ebp+arg_10]
-0x79258F: push    ecx; int
-0x792590: push    ebx; int
+0x79258F: push    ecx; normal
+0x792590: push    ebx; parentBranch
 0x792591: push    ecx
-0x792592: fstp    [esp+11Ch+var_11C]; float
-0x792595: push    edx; int
-0x792596: mov     ecx, ebx
-0x792598: call    sub_7919D0
+0x792592: fstp    [esp+11Ch+percentAlongParent]; percentAlongParent
+0x792595: push    edx; position
+0x792596: mov     ecx, ebx; this
+0x792598: call    OB_CBranch_MakeLeaf_010201A0; Only direct MakeLeaf call. ComputeBud passes its a7/fPercentOfParent argument as percentAlongParent and the current CBranch (`this`) as parentBranch; these are the inputs to the recursive/cubic dimming formula.
 0x79259D: pop     edi
 0x79259E: pop     esi
 0x79259F: pop     ebx

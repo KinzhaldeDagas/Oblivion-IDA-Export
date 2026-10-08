@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x52AF73",
-    "line": "mov     ecx, offset stru_B36300; this",
+    "line": "mov     ecx, offset unk_B36300; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x52AF87",
-    "line": "call    TESForm_GetOverrideFile",
+    "line": "call    TESForm_GetOverrideFile; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x52AFA0",
-    "line": "call    sub_4520F0",
+    "line": "call    TESFile_GetThreadSafeFile; Returns the root TESFile on the main thread; on worker threads returns the per-thread clone selected by GetCurrentThreadId via TESFile_GetThreadSafeFileForThread.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x52B021",
-    "line": "call    TESFile_GetChunkData",
+    "line": "call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x52B029",
-    "line": "mov     ecx, offset stru_B36300; this",
+    "line": "mov     ecx, offset unk_B36300; this",
     "mnemonic": "mov",
     "size": 5
   },

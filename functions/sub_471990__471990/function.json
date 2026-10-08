@@ -1,18 +1,31 @@
 {
-  "callees_count": 28,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x471990",
+      "0x471B79"
+    ]
+  ],
+  "chunks_sha256": "247aab593ea54a5ace550d4c87bb72546c8fd9bf2a36a3264eceb6360bb958c1",
+  "comment_regular": "CustomAnimSupport decode: removes native power attack groups 0x16..0x1A across movement/weapon key variants before dynamic rebuild.",
+  "comment_repeatable": "Remove all power-attack animation groups (0x16-0x1A) across movement 0-3 and weapon 0-5 from ActorAnimData before rebuilding the dynamic power-attack list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_471990",
+  "display_name": "ActorAnimData_RemovePowerAttackGroups",
   "end_ea": "0x471B79",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_471990",
+  "name": "ActorAnimData_RemovePowerAttackGroups",
   "segment": ".text",
   "sha256": "247aab593ea54a5ace550d4c87bb72546c8fd9bf2a36a3264eceb6360bb958c1",
   "size": 489,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x471990",
+  "total_chunk_size": 489,
   "type": "int __thiscall(void *this)",
   "xrefs_from_count": 174,
   "xrefs_to_count": 6

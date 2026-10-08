@@ -1,4 +1,4 @@
-0x417420: fldz
+0x417420: fldz; TES4 effect table initialization has Water Breathing/Walking and many magic effects, but no observed Slowfall or Climbing effect in this table. Movement discipline implementation must add behavior outside the vanilla effect state table.
 0x417422: push    0; int
 0x417424: push    0FFFFFFFFh; int
 0x417426: push    1000172h; int
@@ -8,7 +8,7 @@
 0x417431: push    0; int
 0x417433: push    offset aWaterBreathing; "Water Breathing"
 0x417438: push    52424157h; int
-0x41743D: call    EffectSettingCollection_AddFull
+0x41743D: call    EffectSettingCollection_AddFull; TES4 authoritative effect registration includes Water Breathing/Water Walking/Feather, but no native Slow Fall, Levitate, or Climbing effect has been observed in this table.
 0x417442: fldz
 0x417444: add     esp, 20h
 0x417447: push    0; int
@@ -95,7 +95,7 @@
 0x417543: push    0; int
 0x417545: push    offset aFeather; "Feather"
 0x41754A: push    52485446h; int
-0x41754F: call    EffectSettingCollection_AddFull
+0x41754F: call    EffectSettingCollection_AddFull; TES4 authoritative: Feather effect registration. This is encumbrance/burden-related, not a native Slowfall movement effect.
 0x417554: fldz
 0x417556: add     esp, 24h
 0x417559: push    0; int
@@ -2010,7 +2010,7 @@
 0x418D27: push    6; int
 0x418D29: push    offset aScriptEffect; "Script Effect"
 0x418D2E: push    46464553h; int
-0x418D33: call    EffectSettingCollection_AddFull
+0x418D33: call    EffectSettingCollection_AddFull; Registers vanilla Script Effect: effect code 'SEFF' (0x46464553), archetype/category 6, flags 0x170, associated dispel code 'DSPL'.
 0x418D38: fldz
 0x418D3A: add     esp, 24h
 0x418D3D: push    0; int

@@ -1,45 +1,41 @@
-int __thiscall sub_626230(_DWORD *this)
+// Loads DialoguePackage resume state. Modern saves (version >=0x20) restore the serialized conversation and exact cursors; no TESTopic selection, AddTopicList, or INFO result script runs in this load phase.
+void __thiscall DialoguePackage::LoadGame(DialoguePackageRuntimeView *this)
 {
-  UInt32 *v3; // edi
+  unsigned __int8 *bufferCursor; // ebx
+  UInt32 *currentlyLoadingFormHeader; // edi
   TESForm *v4; // eax
   const char *v5; // eax
-  int v7; // [esp-8h] [ebp-58h]
-  size_t v8; // [esp-4h] [ebp-54h]
-  size_t v9; // [esp-4h] [ebp-54h]
-  int v10; // [esp-4h] [ebp-54h]
-  size_t v11; // [esp-4h] [ebp-54h]
-  int v12; // [esp+4h] [ebp-4Ch]
-  int v13; // [esp+8h] [ebp-48h]
-  int v14; // [esp+Ch] [ebp-44h]
-  int v15; // [esp+20h] [ebp-30h] BYREF
+  int v6; // [esp-8h] [ebp-58h]
+  int v7; // [esp-4h] [ebp-54h]
+  int destination; // [esp+20h] [ebp-30h] BYREF
   int Dst; // [esp+24h] [ebp-2Ch] BYREF
   TESForm a1; // [esp+28h] [ebp-28h] BYREF
 
-  sub_567F70(this);
-  v15 = 0;
-  if ( sub_45A170() )
+  TESPackage_LoadGame(&this->super); /*0x626259*/
+  destination = 0; /*0x626266*/
+  bufferCursor = 0; /*0x62626a*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() )
   {
-    LODWORD(v8) = 4;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &Dst, v8);
+    SaveLoad_LoadData(g_TESSaveLoadGame, &Dst, 4u); /*0x626286*/
     if ( Dst != 0x4B4F4C42 )
     {
-      v3 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[0];
-      if ( v3 )
+      currentlyLoadingFormHeader = (UInt32 *)g_TESSaveLoadGame->currentlyLoadingFormHeader; /*0x62629a*/
+      if ( currentlyLoadingFormHeader )
       {
-        v4 = TESForm_LookupByFormID(*v3);
-        v5 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v4->vtbl->GetEditorName)(
+        v4 = TESForm_LookupByFormID(*currentlyLoadingFormHeader); /*0x6262a7*/
+        v5 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, _DWORD))v4->vtbl->GetEditorName)( /*0x6262c2*/
                              v4,
-                             *((unsigned __int8 *)v3 + 9),
-                             *(UInt32 *)((char *)v3 + 5));
+                             *((unsigned __int8 *)currentlyLoadingFormHeader + 9),
+                             *(UInt32 *)((char *)currentlyLoadingFormHeader + 5));
         PrintError(
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s wit"
           "h version %i and flags %08X",
           ".\\AI\\DialoguePackage.cpp",
           0x182,
-          *v3,
+          *currentlyLoadingFormHeader,
           v5,
-          v7,
-          v10);
+          v6,
+          v7);
       }
       else
       {
@@ -47,20 +43,15 @@ int __thiscall sub_626230(_DWORD *this)
           "LoadGame Buffer error: Block Header is incorrect in file %s on line %i.  Current version is %i",
           ".\\AI\\DialoguePackage.cpp",
           0x182,
-          LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next));
+          g_TESSaveLoadGame->currentVersion);
       }
     }
-    LODWORD(v9) = 2;
-    SaveLoad_LoadData((int)SaveLoad_CurrentSavegame, &v15, v9);
+    bufferCursor = g_TESSaveLoadGame->bufferCursor; /*0x626303*/
+    SaveLoad_LoadData(g_TESSaveLoadGame, &destination, 2u); /*0x62630d*/
   }
-  LODWORD(v8) = 4;
-  TESForm_LoadDataFromCurrentSaveGame((TESForm *)(this + 0x11), v8);
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x6Au )
-  {
-    LODWORD(v11) = 1;
-    TESForm_LoadDataFromCurrentSaveGame((TESForm *)(this + 0x13), v11);
-  }
-  LODWORD(v11) = 4;
-  TESForm_LoadFormIDFromCurrentSaveGame(&a1, v11, v12, v13, v14);
-  return sub_626353(this, v15);
+  TESForm_LoadDataFromCurrentSaveGame((TESForm *)this, &this->responseTimeRemaining, 4u); /*0x62631a*/
+  if ( g_TESSaveLoadGame->currentVersion >= 0x6Au ) /*0x626329*/
+    TESForm_LoadDataFromCurrentSaveGame((TESForm *)this, &this->waitingForLip, 1u); /*0x626333*/
+  TESForm_LoadFormIDFromCurrentSaveGame((TESForm *)this, (unsigned int *)&a1, 4u); /*0x626341*/
+  DialoguePackage::LoadGame_Continuation(destination, (int)bufferCursor, 0, this); /*0x626352*/
 }

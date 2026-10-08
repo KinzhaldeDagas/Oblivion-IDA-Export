@@ -1,4 +1,4 @@
-BSStringT *sub_A09D10()
+NiRTTI *sub_A09D10()
 {
-  return sub_70E220((BSStringT *)dword_B3FB00, "NiCollisionObject", (int)dword_B3F684);
+  return NiRTTI_Constructor(&stru_B3FB00, "NiCollisionObject", &stru_B3F684); /*0xa09d24*/
 }

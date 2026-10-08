@@ -2,7 +2,7 @@
 0x9E9E36: push    ecx
 0x9E9E37: fstp    [esp+4+var_4]; float
 0x9E9E3A: push    offset aFenemyhealthba; "fEnemyHealthBarTimer"
-0x9E9E3F: mov     ecx, offset fEnemyHealthBarTimer
+0x9E9E3F: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+448h)
 0x9E9E44: call    GameSetting_ConstrAndReg_float
 0x9E9E49: push    offset sub_A1E960; void (__cdecl *)()
 0x9E9E4E: call    _atexit

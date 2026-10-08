@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 3,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_531FC0",
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x531FC0",
+      "0x532059"
+    ],
+    [
+      "0x9B8D10",
+      "0x9B8D33"
+    ]
+  ],
+  "chunks_sha256": "a75d8818e17cee4e2f434d2987bc8c21a772aeaa85023d720bf2aed61ba78e75",
+  "comment_regular": "Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
+  "comment_repeatable": "Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0",
   "end_ea": "0x532059",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_531FC0",
+  "name": "OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0",
   "segment": ".text",
   "sha256": "d5413e060a17bd0c9cd000fd83349e17bd6d88d7efb87ddcc7c5ca6788974fa1",
   "size": 153,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x531FC0",
-  "type": "bhkRefObject *__thiscall(bhkRefObject *this, int)",
-  "xrefs_from_count": 50,
+  "total_chunk_size": 188,
+  "type": "bhkRefObject *__thiscall(bhkRefObject *self, const OB_CollisionPhantomCinfo_010201A0 *info)",
+  "xrefs_from_count": 61,
   "xrefs_to_count": 9
 }

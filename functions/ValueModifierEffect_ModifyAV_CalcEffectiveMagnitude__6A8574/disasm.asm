@@ -1,4 +1,4 @@
-0x6A8574: fldz
+0x6A8574: fldz; OBMEFix 2026-06-01 verification: vanilla ValueModifierEffect negative damage clamp. If amount < 0 and actorValue is not Fatigue, engine reads current AV and clamps the amount so current+amount does not go below zero before the virtual DamageAV_F call at +0x2A4.
 0x6A8576: fld     [esp+arg_10]
 0x6A857A: fcom    st(1)
 0x6A857C: fnstsw  ax

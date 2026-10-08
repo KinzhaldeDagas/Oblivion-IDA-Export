@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A2A40",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; 2026-05-25 fidelity note: Oblivion stock 15000 texture-controls parser is bounded by the existing CTreeEngine branch-info pointer-vector count and requires 15001 after that loop. Compatibility mirror must not treat unknown branch count as a free-running record stream; standalone unknown count is accepted only as zero-entry/end-token form.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7A2A6F",
-    "line": "mov     edi, [esp+0B0h+arg_0]",
+    "line": "mov     edi, [esp+0B0h+file]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x7A2A9D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A2A9F",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,13 +367,13 @@
   },
   {
     "ea": "0x7A2B00",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A2B02",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x7A2B2F",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x7A2B33",
-    "line": "call    sub_78EB10",
+    "line": "call    OB_CTreeFileAccess_ReadFloat_010201A0; CTreeFileAccess::ParseFloat. Bounds-checks cursor, advances by 4, returns little-endian float.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7A2B4C",
-    "line": "push    1Ah; MaxCount",
+    "line": "push    1Ah; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -511,55 +511,55 @@
   },
   {
     "ea": "0x7A2B53",
-    "line": "lea     ecx, [esp+0B8h+var_94]",
+    "line": "lea     ecx, [esp+0B8h+details]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A2B57",
-    "line": "mov     [esp+0B8h+var_7C], 0Fh",
+    "line": "mov     [esp+0B8h+details.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A2B5F",
-    "line": "mov     [esp+0B8h+var_80], ebp",
+    "line": "mov     [esp+0B8h+details.size], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A2B63",
-    "line": "mov     [esp+0B8h+var_90], 0",
+    "line": "mov     byte ptr [esp+0B8h+details.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A2B68",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A2B6D",
-    "line": "push    ebp",
+    "line": "push    ebp; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A2B6E",
-    "line": "lea     eax, [esp+0B4h+var_94]",
+    "line": "lea     eax, [esp+0B4h+details]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A2B72",
-    "line": "push    eax",
+    "line": "push    eax; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A2B73",
-    "line": "lea     ecx, [esp+0B8h+var_5C]",
+    "line": "lea     ecx, [esp+0B8h+var_5C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x7A2B7E",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x7A2B92",
-    "line": "push    1Ah; MaxCount",
+    "line": "push    1Ah; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -613,55 +613,55 @@
   },
   {
     "ea": "0x7A2B99",
-    "line": "lea     ecx, [esp+0B8h+var_94]",
+    "line": "lea     ecx, [esp+0B8h+details]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A2B9D",
-    "line": "mov     [esp+0B8h+var_7C], 0Fh",
+    "line": "mov     [esp+0B8h+details.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A2BA5",
-    "line": "mov     [esp+0B8h+var_80], 0",
+    "line": "mov     [esp+0B8h+details.size], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A2BAD",
-    "line": "mov     [esp+0B8h+var_90], 0",
+    "line": "mov     byte ptr [esp+0B8h+details.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A2BB2",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A2BB7",
-    "line": "push    0",
+    "line": "push    0; appendSystemError",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7A2BB9",
-    "line": "lea     edx, [esp+0B4h+var_94]",
+    "line": "lea     edx, [esp+0B4h+details]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A2BBD",
-    "line": "push    edx",
+    "line": "push    edx; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A2BBE",
-    "line": "lea     ecx, [esp+0B8h+var_5C]",
+    "line": "lea     ecx, [esp+0B8h+var_5C]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x7A2BCD",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,13 +703,13 @@
   },
   {
     "ea": "0x7A2BE1",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7A2BE3",
-    "line": "call    sub_78EB40",
+    "line": "call    OB_CTreeFileAccess_ReadDword_010201A0; CTreeFileAccess::ParseToken/ParseInt-style 4-byte read. Bounds-checks cursor against owned buffer, advances cursor by 4, returns little-endian dword.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x7A2BEF",
-    "line": "push    1Ah; MaxCount",
+    "line": "push    1Ah; count",
     "mnemonic": "push",
     "size": 2
   },
@@ -739,37 +739,37 @@
   },
   {
     "ea": "0x7A2BF6",
-    "line": "lea     ecx, [esp+0B8h+var_78]",
+    "line": "lea     ecx, [esp+0B8h+var_78]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7A2BFA",
-    "line": "mov     [esp+0B8h+var_60], 0Fh",
+    "line": "mov     [esp+0B8h+var_78.capacity], 0Fh",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7A2C02",
-    "line": "mov     [esp+0B8h+var_64], ebp",
+    "line": "mov     [esp+0B8h+var_78.size], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A2C06",
-    "line": "mov     [esp+0B8h+var_74], 0",
+    "line": "mov     byte ptr [esp+0B8h+var_78.storage], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A2C0B",
-    "line": "call    sub_414500",
+    "line": "call    OB_stString28_AssignBytes_010201A0; Oblivion binary evidence: 28-byte SSO string assign(source,count). Detects source aliasing inside the current buffer and delegates to substring assignment; otherwise grows if needed, copies exactly count bytes, updates size, and terminates.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7A2C10",
-    "line": "push    ebp",
+    "line": "push    ebp; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
@@ -781,13 +781,13 @@
   },
   {
     "ea": "0x7A2C15",
-    "line": "push    ecx",
+    "line": "push    ecx; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A2C16",
-    "line": "lea     ecx, [esp+0B8h+var_34]",
+    "line": "lea     ecx, [esp+0B8h+var_34]; this",
     "mnemonic": "lea",
     "size": 7
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x7A2C28",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -880,5 +880,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CC7A0",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC7A6",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC7AB",
+    "line": "lea     ecx, [ebp-94h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC7B1",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC7B6",
+    "line": "lea     ecx, [ebp-78h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CC7B9",
+    "line": "jmp     OB_stString28_Dtor_010201A0; Oblivion binary evidence: destructor/reset for the exact 28-byte SSO string. Frees heap storage when capacity is at least 16, restores capacity 15 and size zero, and terminates the inline buffer. Used for IdvFormatString temporaries and folded string owners across the executable.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC7BE",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CC7C2",
+    "line": "lea     eax, [edx-0A0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC7C8",
+    "line": "mov     ecx, [edx-0A4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CC7CE",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CC7D0",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC7D5",
+    "line": "mov     eax, offset stru_AF5B7C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CC7DA",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

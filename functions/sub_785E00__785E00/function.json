@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 4,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_785E00",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x785E00",
+      "0x785E8E"
+    ],
+    [
+      "0x9CB110",
+      "0x9CB133"
+    ]
+  ],
+  "chunks_sha256": "167713933751d11756a2f1ebb1ecda1373dd371790b5a2e714b0177c2eca0965",
+  "comment_regular": "Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.",
+  "comment_repeatable": "Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_stVector_stVec_ResizeDefault_010201A0",
   "end_ea": "0x785E8E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_785E00",
+  "name": "OB_stVector_stVec_ResizeDefault_010201A0",
   "segment": ".text",
   "sha256": "1ab1988d282ad50055d81051330712c2ed6397d572097d0bd22d762e24b70829",
   "size": 142,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x785E00",
-  "type": "void __thiscall(char **this, unsigned int)",
-  "xrefs_from_count": 45,
+  "total_chunk_size": 177,
+  "type": "void __thiscall(OB_stVector16_010201A0 *this, unsigned int count)",
+  "xrefs_from_count": 56,
   "xrefs_to_count": 2
 }

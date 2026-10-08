@@ -1,1 +1,1 @@
-NiShaderFactory
+struct NiShaderFactory;

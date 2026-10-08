@@ -1,4 +1,4 @@
-0x7243E0: push    esi
+0x7243E0: push    esi; Retail NiSwitchNode OnVisible entry.
 0x7243E1: mov     esi, ecx
 0x7243E3: mov     eax, [esi+0E0h]
 0x7243E9: test    eax, eax
@@ -31,7 +31,7 @@
 0x724442: mov     eax, [esp+8+a2]
 0x724446: push    eax; a2
 0x724447: mov     ecx, edi; this
-0x724449: call    NiAVObject_Render
+0x724449: call    NiAVObject_Render; Submit only the NiSwitchNode child selected by +0xE0.
 0x72444E: pop     edi
 0x72444F: pop     esi
 0x724450: retn    4

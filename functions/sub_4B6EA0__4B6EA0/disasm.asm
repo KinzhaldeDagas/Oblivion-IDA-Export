@@ -1,4 +1,4 @@
-0x4B6EA0: push    ebp
+0x4B6EA0: push    ebp; Verified TESObjectDOOR LoadForm vtable override (TESObjectDOOR vtable slot +0x1C at 0xA44A70). Checks record type 0x18, loads standard door subrecords, and for TNAM (record chunk code 0x4D414E54) reads each 4-byte FormID and pushes it into super.randomTeleport. This loader stores unresolved IDs; TESObjectDOOR_DoPostFixup performs the resolution.
 0x4B6EA1: mov     ebp, esp
 0x4B6EA3: sub     esp, 8
 0x4B6EA6: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x4B6EC5: jmp     loc_4B710A
 0x4B6ECA: push    edi
 0x4B6ECB: mov     ecx, esi
-0x4B6ECD: call    TESFile_InitializeFormFromRecord
+0x4B6ECD: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4B6ED2: xor     ebx, ebx
 0x4B6ED4: push    ebx; a2
 0x4B6ED5: mov     ecx, edi; this
@@ -27,7 +27,6 @@
 0x4B6EE3: cmp     eax, ebx
 0x4B6EE5: jz      loc_4B7108
 0x4B6EEB: jmp     short loc_4B6EF0
-0x4B6EED: align 10h
 0x4B6EF0: cmp     eax, 4D414E41h
 0x4B6EF5: jg      loc_4B6FF1
 0x4B6EFB: jz      loc_4B6FAD
@@ -44,7 +43,7 @@
 0x4B6F2D: push    200h; a4
 0x4B6F32: push    ebx; Dst
 0x4B6F33: mov     ecx, esi; a1
-0x4B6F35: call    TESFile_GetChunkData
+0x4B6F35: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B6F3A: mov     eax, [edi]
 0x4B6F3C: mov     edx, [eax+0D8h]
 0x4B6F42: push    ebx
@@ -56,7 +55,7 @@
 0x4B6F51: push    eax
 0x4B6F52: mov     ecx, esi
 0x4B6F54: mov     [ebp+a1], ebx
-0x4B6F57: call    TESFile_GetChunkData4
+0x4B6F57: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B6F5C: mov     ecx, [ebp+a1]
 0x4B6F5F: mov     [edi+4Ch], ecx
 0x4B6F62: push    edi
@@ -72,24 +71,24 @@
 0x4B6F8A: lea     eax, [edi+24h]
 0x4B6F8D: push    esi
 0x4B6F8E: push    eax
-0x4B6F8F: call    TESFullname_Load
+0x4B6F8F: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4B6F94: add     esp, 8
 0x4B6F97: jmp     loc_4B70EE
 0x4B6F9C: xor     eax, eax
 0x4B6F9E: push    esi
 0x4B6F9F: push    eax
-0x4B6FA0: call    TESFullname_Load
+0x4B6FA0: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4B6FA5: add     esp, 8
 0x4B6FA8: jmp     loc_4B70EE
 0x4B6FAD: lea     edx, [ebp+a1]
 0x4B6FB0: push    edx
 0x4B6FB1: mov     ecx, esi
 0x4B6FB3: mov     [ebp+a1], ebx
-0x4B6FB6: call    TESFile_GetChunkData4
+0x4B6FB6: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B6FBB: lea     eax, [ebp+a1]
 0x4B6FBE: push    esi; a2
 0x4B6FBF: push    eax; a1
-0x4B6FC0: call    TESForm_ResolveFormID
+0x4B6FC0: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4B6FC5: mov     ecx, [ebp+a1]
 0x4B6FC8: add     esp, 8
 0x4B6FCB: push    ebx; int
@@ -97,7 +96,7 @@
 0x4B6FD1: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4B6FD6: push    ebx; int
 0x4B6FD7: push    ecx; a1
-0x4B6FD8: call    TESForm_LookupByFormID
+0x4B6FD8: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4B6FDD: add     esp, 4
 0x4B6FE0: push    eax; void *
 0x4B6FE1: call    OblivionDynamicCast
@@ -115,17 +114,17 @@
 0x4B7010: lea     edx, [edi+64h]
 0x4B7013: push    edx; Dst
 0x4B7014: mov     ecx, esi; a1
-0x4B7016: call    TESFile_GetChunkData
+0x4B7016: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B701B: jmp     loc_4B70EE
 0x4B7020: lea     eax, [ebp+a1]
 0x4B7023: push    eax
 0x4B7024: mov     ecx, esi
 0x4B7026: mov     [ebp+a1], ebx
-0x4B7029: call    TESFile_GetChunkData4
+0x4B7029: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B702E: lea     ecx, [ebp+a1]
 0x4B7031: push    esi; a2
 0x4B7032: push    ecx; a1
-0x4B7033: call    TESForm_ResolveFormID
+0x4B7033: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4B7038: mov     edx, [ebp+a1]
 0x4B703B: add     esp, 8
 0x4B703E: push    ebx; int
@@ -133,7 +132,7 @@
 0x4B7044: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4B7049: push    ebx; int
 0x4B704A: push    edx; a1
-0x4B704B: call    TESForm_LookupByFormID
+0x4B704B: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4B7050: add     esp, 4
 0x4B7053: push    eax; void *
 0x4B7054: call    OblivionDynamicCast
@@ -144,11 +143,11 @@
 0x4B7067: push    eax
 0x4B7068: mov     ecx, esi
 0x4B706A: mov     [ebp+a1], ebx
-0x4B706D: call    TESFile_GetChunkData4
+0x4B706D: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B7072: lea     ecx, [ebp+a1]
 0x4B7075: push    esi; a2
 0x4B7076: push    ecx; a1
-0x4B7077: call    TESForm_ResolveFormID
+0x4B7077: call    TESForm_ResolveFormID; Resolves a plugin-record FormID to current load order. During save loading it uses modRefIDTable; otherwise the serialized high byte selects a master, falling back to the current file, while preserving the low 24-bit object ID.
 0x4B707C: mov     edx, [ebp+a1]
 0x4B707F: add     esp, 8
 0x4B7082: push    ebx; int
@@ -156,7 +155,7 @@
 0x4B7088: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4B708D: push    ebx; int
 0x4B708E: push    edx; a1
-0x4B708F: call    TESForm_LookupByFormID
+0x4B708F: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4B7094: add     esp, 4
 0x4B7097: push    eax; void *
 0x4B7098: call    OblivionDynamicCast
@@ -164,7 +163,7 @@
 0x4B70A0: mov     [edi+58h], eax
 0x4B70A3: jmp     short loc_4B70EE
 0x4B70A5: cmp     eax, 4D414E54h
-0x4B70AA: jz      short loc_4B70D4
+0x4B70AA: jz      short loc_4B70D4; Verified TNAM list load branch (chunk code 0x4D414E54): reads one 32-bit serialized FormID with TESFile_GetChunkData4 and pushes that raw value into TESObjectDOORMembr.randomTeleport. It does not resolve the FormID here.
 0x4B70AC: cmp     eax, 54444F4Dh
 0x4B70B1: jnz     short loc_4B70EE
 0x4B70B3: cmp     edi, ebx
@@ -185,7 +184,7 @@
 0x4B70D7: push    eax
 0x4B70D8: mov     ecx, esi
 0x4B70DA: mov     [ebp+a1], ebx
-0x4B70DD: call    TESFile_GetChunkData4
+0x4B70DD: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B70E2: mov     ecx, [ebp+a1]
 0x4B70E5: push    ecx
 0x4B70E6: lea     ecx, [edi+68h]

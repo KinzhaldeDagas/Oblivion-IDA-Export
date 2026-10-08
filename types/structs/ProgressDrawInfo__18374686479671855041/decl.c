@@ -1,1 +1,1 @@
-ProgressDrawInfo
+typedef tagProgressDrawInfo ProgressDrawInfo;

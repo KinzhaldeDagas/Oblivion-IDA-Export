@@ -1,4 +1,4 @@
-0x521A10: push    esi
+0x521A10: push    esi; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.
 0x521A11: mov     esi, ecx
 0x521A13: mov     eax, [esi]
 0x521A15: mov     edx, [eax+128h]

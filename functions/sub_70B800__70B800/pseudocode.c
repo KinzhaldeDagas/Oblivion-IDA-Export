@@ -1,4 +1,4 @@
-char *sub_70B800()
+float *sub_70B800()
 {
-  return dword_B3FAB0;
+  return &MEMORY[0xB3F9B0][0x40]; /*0x70b805*/
 }

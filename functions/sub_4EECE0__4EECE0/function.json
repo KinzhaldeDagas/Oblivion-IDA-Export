@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4EECE0",
+      "0x4EED4B"
+    ]
+  ],
+  "chunks_sha256": "4cfb3bc53fe8c0bba0db9809786b6ef1e8840aabe70f9fa15d682f0294741b46",
+  "comment_regular": "Verified: performs weighted TESWeather selection using each entry's selectionWeight, random roll modulo sum, and cumulative ranges. First zero-weight entry may be chosen because of the initial 0xFFFFFFFF accumulator; later zero-weight entries are skipped.",
+  "comment_repeatable": "Verified: performs weighted TESWeather selection using each entry's selectionWeight, random roll modulo sum, and cumulative ranges. First zero-weight entry may be chosen because of the initial 0xFFFFFFFF accumulator; later zero-weight entries are skipped.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4EECE0",
+  "display_name": "OblivionTESWeatherList_SelectWeightedWeather",
   "end_ea": "0x4EED4B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4EECE0",
+  "name": "OblivionTESWeatherList_SelectWeightedWeather",
   "segment": ".text",
   "sha256": "4cfb3bc53fe8c0bba0db9809786b6ef1e8840aabe70f9fa15d682f0294741b46",
   "size": 107,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4EECE0",
-  "type": "int __thiscall(_DWORD *this)",
+  "total_chunk_size": 107,
+  "type": "TESWeather *__thiscall(OblivionTESWeatherList *list)",
   "xrefs_from_count": 61,
   "xrefs_to_count": 2
 }

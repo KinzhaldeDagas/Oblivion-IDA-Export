@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79E3C0",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): stdcall adapter for vector<vector<float>> uninitialized_fill_n. Corrected boundary includes the pointer-result calculation and ret 0x0C normal tail through 0x79E3F6.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3C1",
-    "line": "mov     edx, [esp+4+arg_8]",
+    "line": "mov     edx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79E3C6",
-    "line": "mov     esi, [esp+8+arg_4]",
+    "line": "mov     esi, [esp+8+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x79E3CB",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x79E3D9",
-    "line": "mov     eax, [esp+10h+arg_8]",
+    "line": "mov     eax, [esp+10h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,26 +73,74 @@
   },
   {
     "ea": "0x79E3DF",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3E0",
-    "line": "push    esi",
+    "line": "push    esi; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3E1",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79E3E2",
-    "line": "call    sub_79BF40",
+    "line": "call    OB_stVector_stVectorFloat_UninitializedFillN_010201A0; OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized_fill_n for vector<float> elements of vector<vector<float>>. Deep-copy-constructs each inner vector and destroys only the constructed prefix on unwind. Its normal return at 0x79BFD0 proves the prior noreturn annotation false.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x79E3E7",
+    "line": "mov     eax, esi; Recovered normal tail omitted by the false noreturn callee: returns destination + count and performs ret 0x0C.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x79E3E9",
+    "line": "add     esp, 18h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x79E3EC",
+    "line": "shl     eax, 4",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x79E3EF",
+    "line": "add     eax, edi",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x79E3F1",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E3F2",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E3F3",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79E3F4",
+    "line": "retn    0Ch",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

@@ -1,5 +1,9 @@
-_DWORD *__cdecl sub_7A1000(char *a1, char *a2, _DWORD *a3)
+// Backward ownership-move thunk for 16-byte guide-LOD level vector elements; returns the resulting destination begin.
+OB_stVector_SFrondGuide_010201A0 *__cdecl OB_stVector_stVector_SFrondGuide_MoveAssignRangeBackwardThunk_010201A0(
+        OB_stVector_SFrondGuide_010201A0 *first,
+        OB_stVector_SFrondGuide_010201A0 *last,
+        OB_stVector_SFrondGuide_010201A0 *destinationEnd)
 {
-  sub_7A0E60(a1, a2, a3);
-  return &a3[0xFFFFFFFC * ((a2 - a1) >> 4)];
+  OB_stVector_stVector_SFrondGuide_MoveAssignRangeBackward_010201A0(first, last, destinationEnd); /*0x7a1027*/
+  return &destinationEnd[-(last - first)]; /*0x7a103f*/
 }

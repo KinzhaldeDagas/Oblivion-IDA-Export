@@ -12,9 +12,9 @@
 0x5B6811: mov     ecx, esi; this
 0x5B6813: fstp    [esp+8+arg_8]
 0x5B6817: fld     [esp+8+arg_8]
-0x5B681B: fstp    [esp+8+a2]; a3
-0x5B681E: push    0FB8h; a2
-0x5B6823: call    Tile_SetFloat
+0x5B681B: fstp    [esp+8+a2]; value
+0x5B681E: push    0FB8h; propertyCode
+0x5B6823: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6828: push    0FBBh
 0x5B682D: mov     ecx, esi
 0x5B682F: call    Tile_GetFloat
@@ -23,8 +23,8 @@
 0x5B6839: mov     ecx, esi; this
 0x5B683B: fstp    [esp+8+arg_8]
 0x5B683F: fld     [esp+8+arg_8]
-0x5B6843: fstp    [esp+8+a2]; a3
-0x5B6846: push    0FB9h; a2
-0x5B684B: call    Tile_SetFloat
+0x5B6843: fstp    [esp+8+a2]; value
+0x5B6846: push    0FB9h; propertyCode
+0x5B684B: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5B6850: pop     esi
 0x5B6851: retn    0Ch

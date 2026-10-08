@@ -109,12 +109,12 @@
 0x5AB934: jle     short loc_5AB950
 0x5AB936: mov     eax, ds:0B333C4h
 0x5AB93B: mov     ecx, ds:0B140E4h
-0x5AB941: push    1
-0x5AB943: push    1
-0x5AB945: push    eax
-0x5AB946: push    ecx
-0x5AB947: push    esi
-0x5AB948: call    sub_607F90
+0x5AB941: push    1; requireInventoryTransfer
+0x5AB943: push    1; destroyImmediately
+0x5AB945: push    eax; target
+0x5AB946: push    ecx; maximumMatches
+0x5AB947: push    esi; baseForm
+0x5AB948: call    ArrowProjectile_CleanupMatchingByBaseAndTarget; Scans two ActorProcessManager lists for ArrowProjectile objects matching baseForm and recorded target. Stops at maximumMatches; optionally requires transfer marker +0x95 and either destroys immediately or marks lifecycle state 3.
 0x5AB94D: add     esp, 14h
 0x5AB950: test    ebp, ebp
 0x5AB952: jz      short loc_5AB967

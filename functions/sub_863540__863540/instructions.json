@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x863540",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+cloningProcess]; Copies the inherited BSShaderPPLightingProperty state into the clone destination, then copies Lighting30's four floats at +0xF0..+0xFC and refcount-assigns the derived texture/object at +0x104.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x863545",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x86354B",
-    "line": "push    eax",
+    "line": "push    eax; cloneProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x86354C",
-    "line": "push    ebx",
+    "line": "push    ebx; clone",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x86354F",
-    "line": "call    sub_7D7AD0",
+    "line": "call    BSShaderPPLightingProperty_CopyCloneMembers; [Verified] BSShaderPPLightingProperty clone-field copier. Calls BSShaderProperty_CopyCloneMembers, resizes/copies the three NiPointer arrays and scalar fields in the PP-lighting extension, and retains refcounted members. It does not copy the inherited BSShaderLightingProperty decal list at +0x80.",
     "mnemonic": "call",
     "size": 5
   },

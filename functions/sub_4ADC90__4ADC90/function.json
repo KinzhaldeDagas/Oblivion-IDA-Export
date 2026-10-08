@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4ADC90",
+      "0x4ADE6B"
+    ]
+  ],
+  "chunks_sha256": "dab1f3e9a62a931558d9171b71b02af32199ca6682f4a1d4b5bbde5125ed2ff1",
+  "comment_regular": "Verified (Oblivion): animates fillColor_2C into currentFillColor_0C and edgeColor_3C into currentEdgeColor_1C, including independent alpha timing/pulse, then accumulates textureOffsetU_4C/textureOffsetV_50. Fallout's NiColorA names CurrentFillColor/CurrentRimColor and their base FillColor/RimColor at the same offsets, corroborating these grouped fields; Oblivion's source fields use Edge terminology.",
+  "comment_repeatable": "Verified (Oblivion): animates fillColor_2C into currentFillColor_0C and edgeColor_3C into currentEdgeColor_1C, including independent alpha timing/pulse, then accumulates textureOffsetU_4C/textureOffsetV_50. Fallout's NiColorA names CurrentFillColor/CurrentRimColor and their base FillColor/RimColor at the same offsets, corroborating these grouped fields; Oblivion's source fields use Edge terminology.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4ADC90",
+  "display_name": "TESEffectShader_AnimateTextureEffect",
   "end_ea": "0x4ADE6B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4ADC90",
+  "name": "TESEffectShader_AnimateTextureEffect",
   "segment": ".text",
   "sha256": "dab1f3e9a62a931558d9171b71b02af32199ca6682f4a1d4b5bbde5125ed2ff1",
   "size": 475,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4ADC90",
-  "type": "void __thiscall(float *this, int, float, float, float, float)",
+  "total_chunk_size": 475,
+  "type": "void __thiscall(TESEffectShader *this, OblivionTextureEffectData *textureEffectData, float deltaSeconds, float visualElapsedSeconds, float activeElapsedSeconds, bool bFinished)",
   "xrefs_from_count": 174,
   "xrefs_to_count": 1
 }

@@ -3,7 +3,7 @@
 0x8060DF: jz      short loc_8060ED
 0x8060E1: push    0; _DWORD
 0x8060E3: push    offset aInvalidSubText; "Invalid sub texture in decal"
-0x8060E8: call    eax ; dword_B42E8C
+0x8060E8: call    eax ; unk_B42E8C
 0x8060EA: add     esp, 8
 0x8060ED: fld1
 0x8060EF: mov     eax, 0Ah
@@ -62,7 +62,7 @@
 0x80618F: mov     ecx, edi
 0x806191: call    edx
 0x806193: test    ebx, ebx
-0x806195: mov     eax, [esp+4+arg_34]
+0x806195: mov     eax, [esp+4+value]
 0x806199: mov     [eax+4], ebx
 0x80619C: jz      short loc_8061A8
 0x80619E: add     ebx, 4
@@ -70,20 +70,20 @@
 0x8061A2: call    dword ptr ds:0A28078h
 0x8061A8: mov     edi, 1
 0x8061AD: add     [ebp+60h], edi
-0x8061B0: mov     [esp+4+arg_34], ebp
+0x8061B0: mov     [esp+4+value], ebp
 0x8061B4: mov     edx, [esi+38h]
-0x8061B7: lea     ecx, [esp+4+arg_34]
-0x8061BB: push    ecx
-0x8061BC: push    edx
-0x8061BD: lea     ecx, [esi+40h]
+0x8061B7: lea     ecx, [esp+4+value]
+0x8061BB: push    ecx; value
+0x8061BC: push    edx; index
+0x8061BD: lea     ecx, [esi+40h]; this
 0x8061C0: mov     [esp+0Ch+arg_28], 0
-0x8061C8: call    sub_76CE40
+0x8061C8: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x8061CD: or      eax, 0FFFFFFFFh
 0x8061D0: add     [ebp+60h], eax
 0x8061D3: mov     [esp+4+arg_28], eax
 0x8061D7: jnz     short loc_8061E0
 0x8061D9: mov     ecx, ebp
-0x8061DB: call    sub_7604D0
+0x8061DB: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8061E0: add     [esi+38h], edi
 0x8061E3: xor     eax, eax
 0x8061E5: mov     ecx, [esp+4+arg_20]

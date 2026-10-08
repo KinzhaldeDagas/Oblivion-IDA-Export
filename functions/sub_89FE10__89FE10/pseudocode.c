@@ -9,29 +9,29 @@ bool __thiscall sub_89FE10(NiTriBasedGeomData *this, int a2)
   int v9; // esi
   int v10; // eax
 
-  result = sub_89D6F0(this, a2);
-  if ( result )
+  result = sub_89D6F0(this, a2); /*0x89fe19*/
+  if ( result ) /*0x89fe20*/
   {
-    if ( this && (v4 = *(_DWORD *)&this->members.super.m_usVertices) != 0 )
-      v5 = *(_DWORD *)(v4 + 0x18);
+    if ( this && (v4 = *(_DWORD *)&this->members.super.m_usVertices) != 0 ) /*0x89fe2b*/
+      v5 = *(_DWORD *)(v4 + 0x18); /*0x89fe2d*/
     else
-      v5 = 0;
-    if ( a2 && (v6 = *(_DWORD *)(a2 + 8)) != 0 )
-      v7 = *(_DWORD *)(v6 + 0x18);
+      v5 = 0; /*0x89fe32*/
+    if ( a2 && (v6 = *(_DWORD *)(a2 + 8)) != 0 ) /*0x89fe3d*/
+      v7 = *(_DWORD *)(v6 + 0x18); /*0x89fe3f*/
     else
-      v7 = 0;
-    result = v5 == v7;
-    if ( result )
+      v7 = 0; /*0x89fe44*/
+    result = v5 == v7; /*0x89fe48*/
+    if ( result ) /*0x89fe4d*/
     {
-      if ( this && (v8 = *(_DWORD *)&this->members.super.m_usVertices) != 0 )
-        v9 = *(_DWORD *)(v8 + 0x1C);
+      if ( this && (v8 = *(_DWORD *)&this->members.super.m_usVertices) != 0 ) /*0x89fe58*/
+        v9 = *(_DWORD *)(v8 + 0x1C); /*0x89fe5a*/
       else
-        v9 = 0;
-      if ( a2 && (v10 = *(_DWORD *)(a2 + 8)) != 0 )
-        return v9 == *(_DWORD *)(v10 + 0x1C);
+        v9 = 0; /*0x89fe5f*/
+      if ( a2 && (v10 = *(_DWORD *)(a2 + 8)) != 0 ) /*0x89fe6a*/
+        return v9 == *(_DWORD *)(v10 + 0x1C); /*0x89fe72*/
       else
-        return v9 == 0;
+        return v9 == 0; /*0x89fe7d*/
     }
   }
-  return result;
+  return result; /*0x89fe71*/
 }

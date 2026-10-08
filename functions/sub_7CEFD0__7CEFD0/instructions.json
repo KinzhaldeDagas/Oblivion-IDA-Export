@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7CEFD0",
-    "line": "mov     eax, 2B2Ch",
+    "line": "mov     eax, 2B2Ch; Loads Oblivion ShadowLightShader pixel-program variants from lighting\\\\1x and lighting\\\\2x HLSL sources. Compile macros include runtime numeric shadow parameters and material/pass feature combinations.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7777,7 +7777,7 @@
   },
   {
     "ea": "0x7D0C0F",
-    "line": "mov     [esp+2B3Ch+var_1490], offset aLighting2xPSim; \"lighting\\\\2x\\\\p\\\\SimpleShadow.p.hlsl\"",
+    "line": "mov     [esp+2B3Ch+var_1490], offset aLighting2xPSim; Verified (Oblivion): ShadowLightShader__LoadPixelShaders table entry v15[0x5A4] (entry index 76 = 0x5A4/0x13) uses source \"lighting\\\\2x\\\\p\\\\SimpleShadow.p.hlsl\". The loader formats the output name as SLS2%03i.pso, so this entry compiles as SLS2076.pso.",
     "mnemonic": "mov",
     "size": 11
   },
@@ -8635,7 +8635,7 @@
   },
   {
     "ea": "0x7D0FE4",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9061,7 +9061,7 @@
   },
   {
     "ea": "0x7D10CB",
-    "line": "call    __sprintf",
+    "line": "call    __sprintf; Verified (Oblivion): 2x pixel-program loader formats \"SLS2%03i.pso\" from v7; for entry 76, the source table is v15[0x5A4] = lighting\\\\2x\\\\p\\\\SimpleShadow.p.hlsl. Candidate resource association: the installed shaderpackage002.sdp contains a record named SLS2076.pso whose CTAB lists FillColor, RimColor, SourceTexture, and fVars, which conflicts with this loader table; do not use that record to infer fVars lane semantics until package-to-loader version/slot linkage is resolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9133,7 +9133,7 @@
   },
   {
     "ea": "0x7D10F3",
-    "line": "call    CreatePixelShader",
+    "line": "call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.",
     "mnemonic": "call",
     "size": 5
   },

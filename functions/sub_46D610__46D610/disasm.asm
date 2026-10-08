@@ -1,9 +1,9 @@
-0x46D610: mov     eax, [esp+arg_4]
+0x46D610: mov     eax, [esp+count]; Verified: replaces runtime TESTextureList entry count and pointer array; for each 24-byte record invokes ArchiveManager_LazyFileLookup using decoded 8-byte identifiers. Diagnostic strings confirm missing archive texture entries. Record field semantics beyond lookup identifiers remain Unknown.
 0x46D614: sub     esp, 10h
 0x46D617: push    ebx
 0x46D618: mov     ebx, ecx
 0x46D61A: xor     ecx, ecx
-0x46D61C: mov     [ebx], al
+0x46D61C: mov     [ebx], al; Oblivion runtime texture-array mutation overwrites the entry count and installs a newly allocated array for this decoded MODT. Repeated valid MODT chunks therefore replace prior runtime state (last valid wins).
 0x46D61E: mov     edx, 4
 0x46D623: mul     edx
 0x46D625: seto    cl
@@ -14,13 +14,13 @@
 0x46D62E: call    FormHeapAlloc
 0x46D633: xor     edi, edi
 0x46D635: add     esp, 4
-0x46D638: cmp     [esp+18h+arg_4], edi
+0x46D638: cmp     [esp+18h+count], edi
 0x46D63C: mov     [ebx+4], eax
 0x46D63F: jbe     loc_46D741
 0x46D645: push    ebp
-0x46D646: mov     ebp, [esp+1Ch+arg_8]
+0x46D646: mov     ebp, [esp+1Ch+form]
 0x46D64A: push    esi; ArgList
-0x46D64B: mov     esi, [esp+20h+arg_0]
+0x46D64B: mov     esi, [esp+20h+entries]
 0x46D64F: add     esi, 2
 0x46D652: movzx   ecx, byte ptr [esi-1]
 0x46D656: movzx   edx, byte ptr [esi]
@@ -89,7 +89,7 @@
 0x46D72C: add     esp, 4
 0x46D72F: add     edi, 1
 0x46D732: add     esi, 18h
-0x46D735: cmp     edi, [esp+20h+arg_4]
+0x46D735: cmp     edi, [esp+20h+count]
 0x46D739: jb      loc_46D652
 0x46D73F: pop     esi
 0x46D740: pop     ebp

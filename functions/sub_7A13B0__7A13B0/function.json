@@ -1,19 +1,44 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_7A13B0",
+  "chunks": [
+    [
+      "0x7A13B0",
+      "0x7A14D9"
+    ],
+    [
+      "0x79DFE0",
+      "0x79E01F"
+    ],
+    [
+      "0x7A12E0",
+      "0x7A131F"
+    ],
+    [
+      "0x9CC680",
+      "0x9CC6E0"
+    ]
+  ],
+  "chunks_sha256": "5c62516b4f86743dcb135914e2c1c02c54ac8366348d508446cd8e860cc70597",
+  "comment_regular": "\n\n[2026-10-03 later-source closure] Six RT4.1 supplemental generation fields25002..25007 have no storage in this0x6C native engine. Plugin now interprets retained sidecar values outside the object and adapts CBranch generation/retention callsites. Source defaults: distance0, ancestorLevel0, above/below ENABLED0, segments1, overridefalse. Cutoff sign reverses above/below equality semantics. Do not write these values after+6C.\n\nSpeedTree decode: compact stock CFrondEngine ctor. Object is 0x6C bytes in CSpeedTreeRT construction; initializes geometry/lighting pointers, MSVC vector containers for guides/guide-LODs/textures, stock frond fields through min cross segments, and default Bezier profile. Later 4.1 supplemental frond fields are not present in this stock allocation.",
+  "comment_repeatable": "SpeedTree decode: compact stock CFrondEngine ctor. Object is 0x6C bytes in CSpeedTreeRT construction; initializes geometry/lighting pointers, MSVC vector containers for guides/guide-LODs/textures, stock frond fields through min cross segments, and default Bezier profile. Later 4.1 supplemental frond fields are not present in this stock allocation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_CFrondEngine_ctor_010201A0",
   "end_ea": "0x7A14D9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A13B0",
+  "name": "OB_CFrondEngine_ctor_010201A0",
   "segment": ".text",
   "sha256": "23cbe9883813d96bb5bb4fb7200e7708acad27dbf538dd3b6b6975311b2891b2",
   "size": 297,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A13B0",
-  "type": "_DWORD *__thiscall(_DWORD *this)",
-  "xrefs_from_count": 97,
+  "total_chunk_size": 519,
+  "type": "OB_CFrondEngine_010201A0 *__thiscall(OB_CFrondEngine_010201A0 *this)",
+  "xrefs_from_count": 177,
   "xrefs_to_count": 1
 }

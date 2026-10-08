@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x790930",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+end]; Insertion-sorts a short CBranch pointer range by fuzzyBranchVolume. Finds the insertion point and rotates [point,current,current+1) through the dedicated pointer-range helper.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x790935",
-    "line": "mov     ebp, [esp+4+arg_0]",
+    "line": "mov     ebp, [esp+4+begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,25 +301,25 @@
   },
   {
     "ea": "0x7909A5",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7909A6",
-    "line": "push    esi",
+    "line": "push    esi; middle",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7909A7",
-    "line": "push    edx",
+    "line": "push    edx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7909A8",
-    "line": "call    sub_78FC20",
+    "line": "call    OB_BranchPtrVector_RotateRange_010201A0; Rotates the 4-byte CBranch-pointer range [first,last) around middle using gcd-cycle moves. Oblivion's fuzzy-volume insertion-sort helper uses it to move an insertion range without allocating.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x7909B6",
-    "line": "cmp     esi, [esp+10h+arg_4]",
+    "line": "cmp     esi, [esp+10h+end]",
     "mnemonic": "cmp",
     "size": 4
   },

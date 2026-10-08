@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x58BD54",
-    "line": "mov     ebp, offset unk_B3B0BC",
+    "line": "mov     ebp, (offset dword_B3B0B4+8)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -40,12 +40,6 @@
     "line": "jmp     short loc_58BD60",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x58BD5D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x58BD60",
@@ -181,7 +175,7 @@
   },
   {
     "ea": "0x58BD95",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +205,7 @@
   },
   {
     "ea": "0x58BDA6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +235,7 @@
   },
   {
     "ea": "0x58BDB6",
-    "line": "cmp     ebp, offset dword_B3B27C",
+    "line": "cmp     ebp, (offset dword_B3B0B4+1C8h)",
     "mnemonic": "cmp",
     "size": 6
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5221C0",
-    "line": "push    esi",
+    "line": "push    esi; Builds absolute FaceGen parameters by combining race base with active NPC delta. CORRECTION: bank selection uses base actor value 0x45 (vampirism), zero -> +0x108, nonzero -> +0x168; earlier sex-selected description was incorrect. Null race copies manager default parameters.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x5221C2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+outAbsolute]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5221C6",
-    "line": "push    edi",
+    "line": "push    edi; parameters",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x5221C9",
-    "line": "call    sub_552880",
+    "line": "call    FaceGenHeadParameters_Initialize; Standard FaceGenHeadParameters dimensions: matrix0 50x1, matrix1 30x1, matrix2 50x1, matrix3 untouched. Thus standard initialized active coefficient count is 130, under PF supported 256 cap. Existing elements survive ResizeFill as documented; this routine is not a full zero reset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,25 +55,25 @@
   },
   {
     "ea": "0x5221DA",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5221DB",
-    "line": "call    sub_5538D0",
+    "line": "call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5221E0",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5221E1",
-    "line": "call    sub_5528F0",
+    "line": "call    FaceGenHeadParameters_Copy; Deep-copies all four FaceGen matrices, preserving dimensions and engine ownership of destination coefficient buffers.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,25 +169,25 @@
   },
   {
     "ea": "0x52220F",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+maximumRms]; maximumRms",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x522212",
-    "line": "push    0; char",
+    "line": "push    0; specialSecondBankMode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x522214",
-    "line": "push    edi; int",
+    "line": "push    edi; outParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x522215",
-    "line": "push    eax; int",
+    "line": "push    eax; delta",
     "mnemonic": "push",
     "size": 1
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x522221",
-    "line": "push    eax; int",
+    "line": "push    eax; base",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x522222",
-    "line": "call    sub_552990",
+    "line": "call    FaceGenHeadParameters_Combine; Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.",
     "mnemonic": "call",
     "size": 5
   },

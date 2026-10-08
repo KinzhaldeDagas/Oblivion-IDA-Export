@@ -1,43 +1,33 @@
-int __thiscall sub_588930(_DWORD *this)
+// Verified: unlinks and frees action nodes reachable through Value +0x10 sentinel; also removes crosslinks at action +0x10/+0x14. Called before CalculateValue by numeric setter.
+void __thiscall Tile::Value::ClearActions(OblivionTileValueView *this)
 {
-  int v2; // edi
-  _DWORD *v3; // eax
-  _DWORD *v4; // ecx
-  _DWORD *v5; // ecx
-  int v6; // ecx
-  int v7; // ecx
+  OblivionTileActionNode *actionHead; // edi
+  OblivionTileActionNode *i; // eax
+  OblivionTileActionNode *j; // ecx
+  OblivionTileActionNode *nextAction; // ecx
+  OblivionTileActionNode *previousReaction; // ecx
+  OblivionTileActionNode *nextReaction; // ecx
 
-  v2 = *(this + 4);
-  v3 = *(_DWORD **)(v2 + 4);
-  if ( !v3 )
-    return *(this + 4);
-  do
+  actionHead = this->actionHead; /*0x588935*/
+  for ( i = actionHead->nextAction; i; i = actionHead->nextAction ) /*0x58893f*/
   {
-    v4 = (_DWORD *)*v3;
-    if ( *v3 )
-    {
-      do
-        v4 = (_DWORD *)*v4;
-      while ( v4 );
-    }
-    if ( *v3 )
-      *(_DWORD *)(*v3 + 4) = v3[1];
-    v5 = (_DWORD *)v3[1];
-    if ( v5 )
-      *v5 = *v3;
-    v6 = v3[4];
-    if ( v6 )
-      *(_DWORD *)(v6 + 0x14) = v3[5];
-    v7 = v3[5];
-    if ( v7 )
-      *(_DWORD *)(v7 + 0x10) = v3[4];
-    *v3 = 0;
-    v3[1] = 0;
-    v3[4] = 0;
-    v3[5] = 0;
-    FormHeapFree((unsigned int)v3);
-    v3 = *(_DWORD **)(v2 + 4);
+    for ( j = i->previousAction; j; j = j->previousAction ) /*0x588941*/
+      ; /*0x588947*/
+    if ( i->previousAction ) /*0x58894d*/
+      i->previousAction->nextAction = i->nextAction; /*0x588956*/
+    nextAction = i->nextAction; /*0x588959*/
+    if ( nextAction ) /*0x58895e*/
+      nextAction->previousAction = i->previousAction; /*0x588962*/
+    previousReaction = i->previousReaction; /*0x588964*/
+    if ( previousReaction ) /*0x588969*/
+      previousReaction->nextReaction = i->nextReaction; /*0x58896e*/
+    nextReaction = i->nextReaction; /*0x588971*/
+    if ( nextReaction ) /*0x588976*/
+      nextReaction->previousReaction = i->previousReaction; /*0x58897b*/
+    i->previousAction = 0; /*0x58897f*/
+    i->nextAction = 0; /*0x588981*/
+    i->previousReaction = 0; /*0x588984*/
+    i->nextReaction = 0; /*0x588987*/
+    FormHeapFree((unsigned int)i); /*0x58898a*/
   }
-  while ( v3 );
-  return *(this + 4);
 }

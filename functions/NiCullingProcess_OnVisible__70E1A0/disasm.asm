@@ -1,4 +1,4 @@
-0x70E1A0: push    esi; a3
+0x70E1A0: push    esi; Culling.dll decode: NiCullingProcess::OnVisible. With VisibleGeo, appends NiGeometry into the visible array; without VisibleGeo, queues to the active accumulator slot +0x58 or renders directly as fallback.
 0x70E1A1: mov     esi, [ecx+8]
 0x70E1A4: test    esi, esi
 0x70E1A6: jz      short loc_70E1DF
@@ -15,7 +15,7 @@
 0x70E1C1: add     ecx, eax
 0x70E1C3: push    ecx; a3
 0x70E1C4: mov     ecx, esi; this
-0x70E1C6: call    sub_732200
+0x70E1C6: call    sub_732200; MEF PERF 2026-10-02: PERF 2026-10-02 candidate remains unpromoted: observed size==capacity growth by growBy via732200; array lifetime/reuse and real growth quantum are not sealed in this pass. No repeated-per-frame allocation or large practical cost claim.
 0x70E1CB: mov     edx, [esi+4]
 0x70E1CE: mov     eax, [esi]
 0x70E1D0: mov     ecx, [esp+4+a2]
@@ -32,7 +32,7 @@
 0x70E1F2: mov     edx, [eax+58h]
 0x70E1F5: push    esi
 0x70E1F6: call    edx
-0x70E1F8: test    al, al
+0x70E1F8: test    al, al; NiAVObject culling traversal reached by the observed shader/geometry failure stack; this is downstream of malformed or absent render-property state, not a weapon-type dispatch.
 0x70E1FA: jnz     short loc_70E20F
 0x70E1FC: mov     ecx, ds:0B3F928h
 0x70E202: mov     eax, [esi]

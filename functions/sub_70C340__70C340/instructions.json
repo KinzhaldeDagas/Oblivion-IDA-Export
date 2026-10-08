@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x70C355",
-    "line": "fstp    [esp+80h+var_78]",
+    "line": "fstp    [esp+80h+rhs.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x70C362",
-    "line": "fstp    [esp+80h+var_74]",
+    "line": "fstp    [esp+80h+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -73,25 +73,25 @@
   },
   {
     "ea": "0x70C36F",
-    "line": "fstp    [esp+80h+var_70]",
+    "line": "fstp    [esp+80h+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x70C373",
-    "line": "fld     [esp+80h+var_78]",
+    "line": "fld     [esp+80h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C377",
-    "line": "fld     [esp+80h+var_74]",
+    "line": "fld     [esp+80h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C37B",
-    "line": "fld     [esp+80h+var_70]",
+    "line": "fld     [esp+80h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x70C3AD",
-    "line": "lea     ecx, [esp+80h+var_78]",
+    "line": "lea     ecx, [esp+80h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70C3B1",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,55 +223,55 @@
   },
   {
     "ea": "0x70C3B8",
-    "line": "lea     eax, [esp+80h+var_78]",
+    "line": "lea     eax, [esp+80h+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70C3BC",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70C3BD",
-    "line": "lea     ecx, [esp+84h+var_6C]",
+    "line": "lea     ecx, [esp+84h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70C3C1",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70C3C2",
-    "line": "mov     ecx, [esp+88h+arg_4]",
+    "line": "mov     ecx, [esp+88h+arg_4]; this",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x70C3C9",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x70C3CE",
-    "line": "fld     [esp+80h+var_68]",
+    "line": "fld     [esp+80h+out.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C3D2",
-    "line": "fld     [esp+80h+var_6C]",
+    "line": "fld     [esp+80h+out.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C3D6",
-    "line": "fld     [esp+80h+var_64]",
+    "line": "fld     [esp+80h+out.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x70C3FF",
-    "line": "lea     edx, [esp+80h+var_6C]",
+    "line": "lea     edx, [esp+80h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70C403",
-    "line": "push    edx",
+    "line": "push    edx; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -379,37 +379,37 @@
   },
   {
     "ea": "0x70C408",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x70C409",
-    "line": "lea     ecx, [esp+88h+var_78]",
+    "line": "lea     ecx, [esp+88h+rhs]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70C40D",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x70C412",
-    "line": "fld     [esp+80h+var_5C]",
+    "line": "fld     [esp+80h+var_60.y]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C416",
-    "line": "fld     [esp+80h+var_60]",
+    "line": "fld     [esp+80h+var_60.x]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x70C41A",
-    "line": "fld     [esp+80h+var_58]",
+    "line": "fld     [esp+80h+var_60.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x70C447",
-    "line": "fld     [esp+80h+var_78]",
+    "line": "fld     [esp+80h+rhs.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -529,13 +529,13 @@
   },
   {
     "ea": "0x70C453",
-    "line": "lea     ecx, [esp+88h+var_6C]",
+    "line": "lea     ecx, [esp+88h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x70C457",
-    "line": "fld     [esp+88h+var_74]",
+    "line": "fld     [esp+88h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x70C467",
-    "line": "fld     [esp+90h+var_70]",
+    "line": "fld     [esp+90h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },

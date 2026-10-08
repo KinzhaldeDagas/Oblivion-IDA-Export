@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 245,
-  "comment_regular": "",
+  "callers_count": 1045,
+  "chunks": [
+    [
+      "0x984D5E",
+      "0x984D6E"
+    ]
+  ],
+  "chunks_sha256": "cd349dae43dbf63016fe6ea9339dab15c59041e3224e48cf8a53004224b45e77",
+  "comment_regular": "\n[2026-10-03 ABI audit] Verified no register or stack inputs: XOR EAX,EAX; pushes five zero arguments to __invalid_parameter; cleans0x14 and RET. Previous usercall EBX/EDI/ESI inputs were spurious and contaminated CBranch::Compute decompilation.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "__invalid_parameter_noinfo",
   "end_ea": "0x984D6E",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
   "name": "__invalid_parameter_noinfo",
   "segment": ".text",
   "sha256": "cd349dae43dbf63016fe6ea9339dab15c59041e3224e48cf8a53004224b45e77",
   "size": 16,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x984D5E",
-  "type": "int __usercall@<eax>(int@<ebx>, int@<edi>, int@<esi>)",
+  "total_chunk_size": 16,
+  "type": "void __cdecl()",
   "xrefs_from_count": 9,
   "xrefs_to_count": 1045
 }

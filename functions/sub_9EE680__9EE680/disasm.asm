@@ -2,7 +2,7 @@
 0x9EE686: push    ecx
 0x9EE687: fstp    [esp+4+var_4]; float
 0x9EE68A: push    offset aFmagicdefaultt; "fMagicDefaultTouchDistance"
-0x9EE68F: mov     ecx, offset fMagicDefaultTouchDistance
+0x9EE68F: mov     ecx, 0B37E68h
 0x9EE694: call    GameSetting_ConstrAndReg_float
 0x9EE699: push    offset sub_A203F0; void (__cdecl *)()
 0x9EE69E: call    _atexit

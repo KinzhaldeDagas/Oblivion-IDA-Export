@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_7D5ED0",
+  "chunks": [
+    [
+      "0x7D5ED0",
+      "0x7D5F74"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "32dfa110be894230b14f1df75eba381d9b584d243a2534c8ea078c67799df29d",
+  "comment_regular": "Create/reuse the fence geometry at +0x148, insert it at object-list head, and set reconciliation cursor +0x144.",
+  "comment_repeatable": "Create/reuse the fence geometry at +0x148, insert it at object-list head, and set reconciliation cursor +0x144.\n\nMEF PERF 2026-10-07 PASS2: PERF-13 Verified fence protocol: create/reuse geometry+148, insert a NEW refcounted list node at object-list+E4 head through749800, then store that NODE in+144. Current-pass accepted entries live before fence; old unmatched entries remain at/after it. Fence object reuse does not eliminate per-pass node insertion/removal.\nMEF v57 IMPLEMENTED 2026-10-08: PERF-13 Begin wrapper executes native fence creation/head insert, then builds bounded index of the searchable old tail only. Accepted new head entries never enter this pending index. Same-owner reentry forgets older state before callbacks; invalid/duplicate/reentrant shapes continue native.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ShadowSceneLight_BeginReceiverReconciliation",
   "end_ea": "0x7D5F74",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D5ED0",
+  "name": "ShadowSceneLight_BeginReceiverReconciliation",
   "segment": ".text",
   "sha256": "4a31925aa1e6c3ef4769ee7937dbd19100a775b0e366309343f0ad9f3e8ce3a5",
   "size": 164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D5ED0",
-  "type": "Ni2DBuffer *__thiscall(Ni2DBuffer **this)",
-  "xrefs_from_count": 55,
+  "total_chunk_size": 202,
+  "type": "MEF_RefListNode32 *__thiscall(ShadowSceneLight_DecodedLayout *self)",
+  "xrefs_from_count": 69,
   "xrefs_to_count": 2
 }

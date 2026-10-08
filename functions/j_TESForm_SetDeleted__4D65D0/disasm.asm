@@ -1,1 +1,1 @@
-0x4D65D0: jmp     TESForm_SetDeleted
+0x4D65D0: jmp     TESForm_SetDeleted; Verified Oblivion setter: toggles TESFormMembr.flags bit 0x20 and marks the form modified. The TESForm_SetDeleted symbol, TESObjectREFR_destr call with true, and both low-path filters establish that this is the deleted flag.

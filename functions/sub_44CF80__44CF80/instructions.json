@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x44CFAB",
-    "line": "mov     [esp+114h+var_110], 0",
+    "line": "mov     [esp+114h+valueOut], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -76,12 +76,6 @@
     "line": "jmp     short loc_44CFC0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x44CFBD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x44CFC0",
@@ -127,7 +121,7 @@
   },
   {
     "ea": "0x44CFD5",
-    "line": "mov     [esp+114h+var_114], eax",
+    "line": "mov     [esp+114h+position], eax",
     "mnemonic": "mov",
     "size": 3
   },
@@ -163,55 +157,55 @@
   },
   {
     "ea": "0x44CFE2",
-    "line": "lea     eax, [esp+124h+var_110]",
+    "line": "lea     eax, [esp+124h+valueOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x44CFE6",
-    "line": "push    eax",
+    "line": "push    eax; valueOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44CFE7",
-    "line": "lea     ecx, [esp+128h+var_10C]",
+    "line": "lea     ecx, [esp+128h+keyOut]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x44CFEB",
-    "line": "push    ecx",
+    "line": "push    ecx; keyOut",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44CFEC",
-    "line": "lea     edx, [esp+12Ch+var_114]",
+    "line": "lea     edx, [esp+12Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x44CFF0",
-    "line": "push    edx",
+    "line": "push    edx; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x44CFF1",
-    "line": "mov     ecx, offset TESForm_FormIDMap",
+    "line": "mov     ecx, offset TESForm_FormIDMap; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x44CFF6",
-    "line": "call    sub_452600",
+    "line": "call    NiTMap_U32Pointer_GetNextEntry",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x44CFFB",
-    "line": "mov     esi, [esp+124h+var_110]",
+    "line": "mov     esi, [esp+124h+valueOut]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -913,7 +907,7 @@
   },
   {
     "ea": "0x44D16A",
-    "line": "call    TESClass_IsPlayable",
+    "line": "call    TESClass_IsPlayable; TESClass_IsPlayable reads classFlags at +0x60 bit 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1783,7 +1777,7 @@
   },
   {
     "ea": "0x44D30F",
-    "line": "cmp     [esp+124h+var_114], 0",
+    "line": "cmp     [esp+124h+position], 0",
     "mnemonic": "cmp",
     "size": 5
   },

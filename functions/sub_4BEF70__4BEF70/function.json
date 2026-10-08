@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4BEF70",
+      "0x4BEF9E"
+    ]
+  ],
+  "chunks_sha256": "8008a67eba2871e5eb47372a045c4e2bbe7640628b1cfc5aecd4047aac4b77db",
+  "comment_regular": "Verified: initializes the 0x28-byte point allocation used by ROAD load/copy, zeros its leading 0x14 bytes through sub_67EDC0, initializes its XYZ at +0x14, and zeros the 8-byte connection-list header at +0x20. The meaning of leading bytes +0x00..+0x13 remains Unknown.",
+  "comment_repeatable": "Verified: initializes the 0x28-byte point allocation used by ROAD load/copy, zeros its leading 0x14 bytes through sub_67EDC0, initializes its XYZ at +0x14, and zeros the 8-byte connection-list header at +0x20. The meaning of leading bytes +0x00..+0x13 remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4BEF70",
+  "display_name": "TESConnectedPoint_ctor",
   "end_ea": "0x4BEF9E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BEF70",
+  "name": "TESConnectedPoint_ctor",
   "segment": ".text",
   "sha256": "8008a67eba2871e5eb47372a045c4e2bbe7640628b1cfc5aecd4047aac4b77db",
   "size": 46,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BEF70",
-  "type": "float *__thiscall(float *this)",
+  "total_chunk_size": 46,
+  "type": "TESConnectedPoint *__thiscall(TESConnectedPoint *this)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 2
 }

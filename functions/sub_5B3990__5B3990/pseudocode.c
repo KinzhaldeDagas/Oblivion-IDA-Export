@@ -7,227 +7,227 @@ void __userpurge sub_5B3990(
         _DWORD *a6)
 {
   signed int v6; // esi
-  int v7; // edi
-  _DWORD *v8; // eax
-  _DWORD *v9; // esi
-  unsigned __int8 *v10; // eax
-  int v11; // esi
+  double v7; // st7
+  int v8; // edi
+  _DWORD *v9; // eax
+  _DWORD *v10; // esi
+  unsigned __int8 *v11; // eax
+  int v12; // esi
   int ***ContainerExtraDataForRef; // ebx
-  ExtraDataList *v13; // edi
-  int v14; // esi
-  char v15; // al
-  int v16; // eax
-  char v17; // bl
-  double v18; // st7
-  int v19; // eax
-  double v20; // st7
-  int v21; // eax
-  _DWORD *v22; // esi
-  int v23; // edi
-  _DWORD *v24; // eax
+  ExtraDataList *v14; // edi
+  int v15; // esi
+  char v16; // al
+  int v17; // eax
+  char v18; // bl
+  double v19; // st7
+  int v20; // eax
+  double v21; // st7
+  int v22; // eax
+  _DWORD *v23; // esi
+  int v24; // edi
+  _DWORD *v25; // eax
   Tile **Singleton; // eax
-  double v26; // st7
-  int v27; // eax
-  int v28; // edx
-  int *v29; // ecx
-  int v30; // esi
-  char *v31; // esi
-  double v32; // st7
-  int v33; // eax
-  signed int v34; // esi
-  double v35; // st7
+  double v27; // st7
+  int v28; // eax
+  int v29; // edx
+  int *v30; // ecx
+  int v31; // esi
+  char *v32; // esi
+  double v33; // st7
+  int v34; // eax
+  signed int v35; // esi
   float a2; // [esp+0h] [ebp-18h]
-  int v38; // [esp+1Ch] [ebp+4h]
+  signed int v38; // [esp+1Ch] [ebp+4h]
 
-  v6 = a5;
-  if ( Menu_GetOpenMenuTile(0x416) && a5 >= 0x3E9 && byte_B3B43D )
+  v6 = a5; /*0x5b39a7*/
+  if ( Menu_GetOpenMenuTile(0x416) && a5 >= 0x3E9 && unk_B3B43D ) /*0x5b39bc*/
   {
-    Tile_GetFloat(a6, 0xFBB);
-    v7 = Double_To_SInt32(a4);
-    Float = Tile_GetFloat(a6, 0xFB5);
-    switch ( Double_To_SInt32(a4) )
+    v7 = Tile_GetFloat(a6, 0xFBB); /*0x5b39cc*/
+    v8 = Double_To_SInt32(v7); /*0x5b39dd*/
+    a4 = Tile_GetFloat(a6, 0xFB5); /*0x5b39df*/
+    switch ( Double_To_SInt32(a4) ) /*0x5b39f8*/
     {
-      case 1:
-      case 2:
-      case 4:
-        v16 = a1 + 0x38;
-        if ( a1 != 0xFFFFFFC8 )
+      case 1: /*0x5b39f8*/
+      case 2: /*0x5b39f8*/
+      case 4: /*0x5b39f8*/
+        v17 = a1 + 0x38; /*0x5b3ae0*/
+        if ( a1 != 0xFFFFFFC8 ) /*0x5b3ae3*/
         {
-          while ( --v7 )
+          while ( --v8 ) /*0x5b3af0*/
           {
-            v16 = *(_DWORD *)(v16 + 4);
-            if ( !v16 )
-              goto LABEL_9;
+            v17 = *(_DWORD *)(v17 + 4); /*0x5b3af5*/
+            if ( !v17 ) /*0x5b3afa*/
+              goto LABEL_9; /*0x5b3afa*/
           }
-          sub_5C25C0((char)a6, st5_0, Float, a4, *(unsigned __int8 **)v16);
+          sub_5C25C0((char)a6, st5_0, Float, a4, *(unsigned __int8 **)v17); /*0x5b3b06*/
         }
-        break;
-      case 8:
-        v8 = (_DWORD *)dword_B14360;
-        if ( dword_B14360 )
+        break; /*0x5b3b0b*/
+      case 8: /*0x5b39f8*/
+        v9 = (_DWORD *)dword_B14360; /*0x5b39ff*/
+        if ( dword_B14360 ) /*0x5b39ff*/
         {
-          while ( 1 )
+          while ( 1 ) /*0x5b3a10*/
           {
-            v9 = (_DWORD *)v8[2];
-            v8 = (_DWORD *)*v8;
-            if ( v9[1] == v7 )
-              break;
-            if ( !v8 )
-              goto LABEL_8;
+            v10 = (_DWORD *)v9[2]; /*0x5b3a10*/
+            v9 = (_DWORD *)*v9; /*0x5b3a19*/
+            if ( v10[1] == v8 ) /*0x5b3a1b*/
+              break; /*0x5b3a1b*/
+            if ( !v9 ) /*0x5b3a1f*/
+              goto LABEL_8; /*0x5b3a1f*/
           }
-          v10 = (unsigned __int8 *)OblivionDynamicCast(
-                                     *(void **)(*v9 + 8),
+          v11 = (unsigned __int8 *)OblivionDynamicCast( /*0x5b3a6d*/
+                                     *(void **)(*v10 + 8),
                                      0,
                                      (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                                      &TESObjectBOOK `RTTI Type Descriptor',
                                      0);
-          if ( v10 )
+          if ( v11 ) /*0x5b3a77*/
           {
-            if ( (v10[0x88] & 1) != 0 )
+            if ( (v11[0x88] & 1) != 0 ) /*0x5b3a80*/
             {
-              if ( *((_DWORD *)v10 + 0x19) )
-                sub_5C25C0((char)a6, st5_0, Float, a4, v10);
+              if ( *((_DWORD *)v11 + 0x19) ) /*0x5b3a82*/
+                sub_5C25C0((char)a6, st5_0, Float, a4, v11); /*0x5b3a8b*/
             }
           }
-          v11 = *v9;
-          if ( v11 )
+          v12 = *v10; /*0x5b3a90*/
+          if ( v12 ) /*0x5b3a94*/
           {
-            TESObjectREFR_GetContainer((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-            ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)TESDataHandler_g_PlayerRef);
-            if ( ContainerExtraDataForRef )
+            TESObjectREFR_GetContainer((TESObjectREFR *)reference); /*0x5b3a9c*/
+            ContainerExtraDataForRef = (int ***)ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)reference); /*0x5b3aae*/
+            if ( ContainerExtraDataForRef ) /*0x5b3ab5*/
             {
-              v13 = 0;
-              if ( *(_DWORD *)v11 )
-                v13 = **(ExtraDataList ***)v11;
-              v14 = *(_DWORD *)(v11 + 8);
-              v15 = sub_5C1100();
-              sub_489820(ContainerExtraDataForRef, st5_0, v14, v13, v15);
+              v14 = 0; /*0x5b3abd*/
+              if ( *(_DWORD *)v12 ) /*0x5b3abb*/
+                v14 = **(ExtraDataList ***)v12; /*0x5b3ac3*/
+              v15 = *(_DWORD *)(v12 + 8); /*0x5b3ac5*/
+              v16 = sub_5C1100(); /*0x5b3ac8*/
+              sub_489820(ContainerExtraDataForRef, Float, v15, v14, v16); /*0x5b3ad2*/
             }
           }
 LABEL_8:
-          v6 = a5;
+          v6 = a5; /*0x5b3a21*/
         }
-        break;
+        break; /*0x5b3a21*/
       default:
         break;
     }
   }
 LABEL_9:
-  if ( Menu_GetOpenMenuTile(0x3F8) )
-    return;
-  if ( (unsigned int)(v6 - 1) <= 4 )
+  if ( Menu_GetOpenMenuTile(0x3F8) ) /*0x5b3a2a*/
+    return; /*0x5b3a34*/
+  if ( (unsigned int)(v6 - 1) <= 4 ) /*0x5b3a40*/
   {
-    sub_5B2060((int *)a1, st5_0, a4, Float, v6, (int)a6);
-    return;
+    sub_5B2060((int *)a1, st5_0, a4, Float, v6, (int)a6); /*0x5b3a4c*/
+    return; /*0x5b3a56*/
   }
-  if ( v6 == 7 || v6 == 8 )
+  if ( v6 == 7 || v6 == 8 ) /*0x5b3b1c*/
   {
-    v32 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 4), 0xFAE);
-    v33 = Double_To_SInt32(v32);
-    if ( a5 == 7 )
-      v34 = v33 - 1;
+    v33 = Tile_GetFloat((_DWORD *)*(_DWORD *)(a1 + 4), 0xFAE); /*0x5b3cb2*/
+    v34 = Double_To_SInt32(v33); /*0x5b3cb7*/
+    if ( a5 == 7 ) /*0x5b3cc3*/
+      v35 = v34 - 1; /*0x5b3cc5*/
     else
-      v34 = v33 + 1;
-    v38 = v34;
-    if ( v34 >= 1 )
+      v35 = v34 + 1; /*0x5b3cca*/
+    v38 = v35; /*0x5b3cd0*/
+    if ( v35 >= 1 ) /*0x5b3cd4*/
     {
-      if ( v34 <= 5 )
+      if ( v35 <= 5 ) /*0x5b3ce0*/
       {
 LABEL_59:
-        v35 = (double)v38;
-        a2 = v35;
-        Tile_SetFloat(*(Tile **)(a1 + 4), (_DWORD *)0xFAE, a2);
-        sub_5B2060((int *)a1, st5_0, v35, Float, v34, 0);
-        return;
+        __asm { fild    [esp+14h+arg_0] } /*0x5b3ceb*/
+        __asm { fstp    [esp+18h+a2]; value }
+        Tile_SetFloat(*(Tile **)(a1 + 4), 0xFAEu, a2); /*0x5b3cff*/
+        sub_5B2060((int *)a1, st5_0, v33, Float, v35, 0); /*0x5b3d09*/
+        return; /*0x5b3d09*/
       }
-      v34 = 1;
+      v35 = 1; /*0x5b3ce2*/
     }
     else
     {
-      v34 = 5;
+      v35 = 5; /*0x5b3cd6*/
     }
-    v38 = v34;
-    goto LABEL_59;
+    v38 = v35; /*0x5b3ce7*/
+    goto LABEL_59; /*0x5b3ce7*/
   }
-  if ( (unsigned int)(v6 - 0xD) <= 1 )
+  if ( (unsigned int)(v6 - 0xD) <= 1 ) /*0x5b3b28*/
   {
-    if ( (byte_B3B404 & 0x7F) == v6 - 0xD )
+    if ( (dword_B3B0B4[0xD4] & 0x7F) == v6 - 0xD ) /*0x5b3b3e*/
     {
-      sub_597A60(&byte_B3B404);
+      sub_597A60((char *)&dword_B3B0B4[0xD4]); /*0x5b3b40*/
     }
     else
     {
-      sub_597A40(&byte_B3B404, v6 - 0xD);
-      byte_B3B404 &= ~0x80u;
+      sub_597A40(&dword_B3B0B4[0xD4], v6 - 0xD); /*0x5b3b53*/
+      LOBYTE(dword_B3B0B4[0xD4]) &= ~0x80u; /*0x5b3b58*/
     }
-    sub_5B2B70(st5_0, Float);
-    return;
+    sub_5B2B70(st5_0, Float); /*0x5b3b45*/
+    return; /*0x5b3b4f*/
   }
-  if ( v6 >= 0x3E9 )
+  if ( v6 >= 0x3E9 ) /*0x5b3b72*/
   {
-    v17 = 0;
-    v18 = Tile_GetFloat(a6, 0xFB5);
-    v19 = Double_To_SInt32(v18);
-    if ( v19 != 0x10 )
+    v18 = 0; /*0x5b3b7f*/
+    v19 = Tile_GetFloat(a6, 0xFB5); /*0x5b3b81*/
+    v20 = Double_To_SInt32(v19); /*0x5b3b86*/
+    if ( v20 != 0x10 ) /*0x5b3b8e*/
     {
-      if ( v19 == 8 )
+      if ( v20 == 8 ) /*0x5b3b9e*/
       {
-        v20 = Tile_GetFloat(a6, 0xFBB);
-        v21 = Double_To_SInt32(v20);
-        v22 = (_DWORD *)dword_B14360;
-        v23 = v21;
-        if ( dword_B14360 )
+        v21 = Tile_GetFloat(a6, 0xFBB); /*0x5b3ba0*/
+        v22 = Double_To_SInt32(v21); /*0x5b3ba5*/
+        v23 = (_DWORD *)dword_B14360; /*0x5b3baa*/
+        v24 = v22; /*0x5b3bb2*/
+        if ( dword_B14360 ) /*0x5b3baa*/
         {
-          do
+          do /*0x5b3beb*/
           {
-            v24 = (_DWORD *)v22[2];
-            v22 = (_DWORD *)*v22;
-            if ( v24[1] == v23 )
+            v25 = (_DWORD *)v23[2]; /*0x5b3bc3*/
+            v23 = (_DWORD *)*v23; /*0x5b3bc8*/
+            if ( v25[1] == v24 ) /*0x5b3bca*/
             {
-              sub_664850((int)TESDataHandler_g_PlayerRef, (char)a6, st5_0, Float, v20, *(_DWORD *)(*v24 + 8));
-              sub_57DE50(0x17);
-              v17 = 1;
+              sub_664850(reference, *(_DWORD *)(*v25 + 8)); /*0x5b3bd8*/
+              sub_57DE50(0x17); /*0x5b3bdf*/
+              v18 = 1; /*0x5b3be7*/
             }
           }
-          while ( v22 );
-          if ( v17 )
+          while ( v23 ); /*0x5b3beb*/
+          if ( v18 ) /*0x5b3bef*/
           {
 LABEL_41:
-            Singleton = (Tile **)InterfaceManager_GetSingleton(0, 1);
-            sub_57D730(Singleton, 0);
-            sub_5B2B70(st5_0, Float);
+            Singleton = (Tile **)InterfaceManager_GetSingleton(0, 1); /*0x5b3bf5*/
+            sub_57D730(Singleton, 0); /*0x5b3c05*/
+            sub_5B2B70(st5_0, Float); /*0x5b3c0a*/
           }
         }
       }
       else
       {
-        v26 = Tile_GetFloat(a6, 0xFBB);
-        v27 = Double_To_SInt32(v26);
-        v28 = 0;
-        v29 = (int *)(a1 + 0x38);
-        if ( a1 == 0xFFFFFFC8 )
-          goto LABEL_46;
-        do
+        v27 = Tile_GetFloat(a6, 0xFBB); /*0x5b3c17*/
+        v28 = Double_To_SInt32(v27); /*0x5b3c1c*/
+        v29 = 0; /*0x5b3c25*/
+        v30 = (int *)(a1 + 0x38); /*0x5b3c27*/
+        if ( a1 == 0xFFFFFFC8 ) /*0x5b3c2a*/
+          goto LABEL_46; /*0x5b3c2a*/
+        do /*0x5b3c3e*/
         {
-          v30 = *v29;
-          v29 = (int *)v29[1];
-          ++v28;
+          v31 = *v30; /*0x5b3c30*/
+          v30 = (int *)v30[1]; /*0x5b3c32*/
+          ++v29; /*0x5b3c35*/
         }
-        while ( v28 != v27 && v29 );
-        if ( !v30 )
+        while ( v29 != v28 && v30 ); /*0x5b3c3e*/
+        if ( !v31 ) /*0x5b3c42*/
         {
 LABEL_46:
-          PrintError("Spell item index did was not in saved list.");
-          return;
+          PrintError("Spell item index did was not in saved list."); /*0x5b3c49*/
+          return; /*0x5b3c56*/
         }
-        v31 = (char *)(v30 + 0x18);
-        if ( v31 != (char *)Player_GetCurrentMagicItem(TESDataHandler_g_PlayerRef) )
+        v32 = (char *)(v31 + 0x18); /*0x5b3c5f*/
+        if ( v32 != (char *)Player_GetCurrentMagicItem(reference) ) /*0x5b3c69*/
         {
-          if ( sub_65D4C0(TESDataHandler_g_PlayerRef) )
-            sub_664850((int)TESDataHandler_g_PlayerRef, (char)a6, st5_0, Float, v26, 0);
-          PlayerCharacter_SetCurrentMagicItem((int)TESDataHandler_g_PlayerRef, (char)a6, st5_0, Float, v26, v31);
-          sub_57DE50(0x17);
-          goto LABEL_41;
+          if ( sub_65D4C0(reference) ) /*0x5b3c75*/
+            sub_664850(reference, 0); /*0x5b3c86*/
+          PlayerCharacter_SetCurrentMagicItem(reference, v32); /*0x5b3c92*/
+          sub_57DE50(0x17); /*0x5b3c99*/
+          goto LABEL_41; /*0x5b3ca1*/
         }
       }
     }

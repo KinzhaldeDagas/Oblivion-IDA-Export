@@ -1,4 +1,7 @@
-void __stdcall sub_7A45A0(int a1, int a2)
+// Typed vector wrapper for destruction of an initialized SIdvLeafTexture range.
+void __stdcall OB_stVector_SIdvLeafTexture_DestroyRangeThunk_010201A0(
+        OB_SIdvLeafTexture_010201A0 *first,
+        OB_SIdvLeafTexture_010201A0 *last)
 {
-  sub_7A36B0(a1, a2);
+  OB_SIdvLeafTexture_DestroyRange_010201A0(first, last); /*0x7a45b0*/
 }

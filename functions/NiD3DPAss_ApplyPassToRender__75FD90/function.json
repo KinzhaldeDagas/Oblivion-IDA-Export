@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x75FD90",
+      "0x75FE23"
+    ]
+  ],
+  "chunks_sha256": "c98799d3ac271f9de219d6e5131db1ffe85d397fcc51986e58de38ea6a86535f",
+  "comment_regular": "Apply a NiD3DPass to DX9: select vertex-processing mode, apply every authored render state, apply each active texture-stage/sampler group and texture binding, then disable unused stages. This is the last caster state boundary before constants/programs and draw.",
+  "comment_repeatable": "Apply a NiD3DPass to DX9: select vertex-processing mode, apply every authored render state, apply each active texture-stage/sampler group and texture binding, then disable unused stages. This is the last caster state boundary before constants/programs and draw.\nGPU-world authored-state reader qualification: pass+30 selects RenderStateGroup, before the texture-stage loop. Captured state programs also verify pass vtable+8 points here and the global B427A4 manager/device and +64 setter contract. Texture binding/mip/NPOT/transform overrides and restoration remain later obligations.\nGPU-world stage inventory now retains pass NiTArray header at+24 (data/capacity/end/live/grow), stops at first null as this loop does, and records visited array count separately from each stage object index. The visited count is the DisableUnusedStages argument; the B28CB8 threshold and later cleanup remain obligations.\nDX11 pass lifecycle audit 2026-09-30: vtable A882DC slots+8/+C are ApplyRenderStateAndTextureStages75FD90 and RestoreSavedRenderStates75F9E0. The restore wrapper reads pass+30 and calls772720 when nonnull. 772720 walks group+10 in head-to-tail order and dispatches each recorded state ID to the global manager RestoreRenderState; it is distinct from texture/sampler cleanup. Fresh pass construction must not treat application-only metadata as restoration authority.\nDX11 fresh pass construction 2026-09-30: pass route is observed independently through B46F28+4*selector. Protected construction copies the current authored render/stage groups, substitutes the current property assignments for the exact assigned stage-array elements, retains the initial contents of other elements, and preserves the first-null boundary plus cleanup intervals. Retained pooled-pass contents require ordered shared-pass mutation tracking before native omission; an initial snapshot is not a persistent per-geometry state guarantee.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "NiD3DPAss::ApplyPassToRender",
+  "display_name": "NiD3DPass_ApplyRenderStateAndTextureStages",
   "end_ea": "0x75FE23",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "NiD3DPAss::ApplyPassToRender",
+  "name": "NiD3DPass_ApplyRenderStateAndTextureStages",
   "segment": ".text",
   "sha256": "c98799d3ac271f9de219d6e5131db1ffe85d397fcc51986e58de38ea6a86535f",
   "size": 147,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x75FD90",
+  "total_chunk_size": 147,
   "type": "UInt8 __thiscall(NiD3DPass *this, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)",
   "xrefs_from_count": 63,
   "xrefs_to_count": 1

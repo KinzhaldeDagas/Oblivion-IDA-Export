@@ -1,7 +1,8 @@
-unsigned int __thiscall sub_4CA990(ExtraDataList *this)
+// Verified cell helper: returns ExtraRank.rank from the cell's XRNK extra, substituting 0 when no rank extra exists.
+SInt32 __thiscall TESObjectCELL_GetRequiredOwnerFactionRank(TESObjectCELL *cell)
 {
-  unsigned int v1; // eax
+  SInt32 Rank; // eax
 
-  v1 = sub_41E7F0(this + 2);
-  return v1 != 0xFFFFFFFF ? v1 : 0;
+  Rank = ExtraDataList_GetRank(&cell->members.extraData); /*0x4ca993*/
+  return Rank != 0xFFFFFFFF ? Rank : 0;
 }

@@ -1,77 +1,75 @@
-void __usercall sub_505FE0(
-        double st6_0@<st1>,
-        double a2@<st0>,
+void __cdecl sub_505FE0(
         ParamInfo *a1,
-        UInt8 *a4,
-        TESObjectREFR *a5,
-        TESObjectREFR *a6,
-        Script *a7,
+        UInt8 *a2,
+        TESObjectREFR *arg8,
+        TESObjectREFR *a4,
+        Script *a5,
         ScriptEventList *l,
-        int a9,
+        int a7,
         UInt32 *a3)
 {
-  TESObjectREFR *v12; // edi
-  TESObjectCELL *ParentCell; // eax
-  float *v14; // eax
-  volatile LONG *v15; // esi
-  unsigned __int8 (__usercall *v16)@<al>(volatile LONG *@<ecx>, double@<st0>, double@<st1>); // eax
+  TESObjectREFR *v10; // edi
+  TESObjectCELL *DwordAtOffset40; // eax
+  MagicShaderHitEffect *v12; // eax
+  MagicShaderHitEffect *v13; // esi
+  void (__thiscall *Destructor)(NiRefObject *, bool); // eax
   char *Name; // eax
-  char *v18; // eax
-  float v19; // [esp+10h] [ebp-18h] BYREF
-  UInt16 v20[2]; // [esp+14h] [ebp-14h] BYREF
-  float *v21; // [esp+18h] [ebp-10h]
-  unsigned int v22; // [esp+24h] [ebp-4h]
+  char *v16; // eax
+  float elapsedSeconds; // [esp+10h] [ebp-18h] BYREF
+  UInt16 v18[2]; // [esp+14h] [ebp-14h] BYREF
+  MagicShaderHitEffect *v19; // [esp+18h] [ebp-10h]
+  unsigned int v20; // [esp+24h] [ebp-4h]
 
-  v12 = a5;
-  v19 = flt_A30634;
-  *(_DWORD *)v20 = 0;
-  if ( Script_ExtractArgs(a1, a4, a3, a5, a6, a7, l, v20, &v19) )
+  v10 = arg8; /*0x50600f*/
+  elapsedSeconds = kTerrainLODQuadRayDirectionZ; /*0x506013*/
+  *(_DWORD *)v18 = 0; /*0x50603c*/
+  if ( Script_ExtractArgs(a1, a2, a3, arg8, a4, a5, l, v18, &elapsedSeconds) ) /*0x506044*/
   {
-    if ( !a5 )
-      v12 = (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-    ParentCell = TESObjectREFR_GetParentCell(v12);
-    if ( TESObjectCELL_IsProcessLevel_LowHigh(ParentCell, 0) )
+    if ( !arg8 ) /*0x506064*/
+      v10 = (TESObjectREFR *)reference; /*0x506066*/
+    DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v10); /*0x50606e*/
+    if ( TESObjectCELL_IsProcessLevel_LowHigh(DwordAtOffset40, 0) ) /*0x50607c*/
     {
-      if ( v12->vtbl->GetNiNode(v12) )
+      if ( v10->vtbl->GetNiNode(v10) ) /*0x506093*/
       {
-        v14 = (float *)FormHeapAlloc(0x4Cu);
-        v21 = v14;
-        v22 = 0;
-        if ( v14 )
-          v15 = (volatile LONG *)MagicShaderHitEffect_constr_args2(v14, (int)v12, *(int *)v20, v19);
+        v12 = (MagicShaderHitEffect *)FormHeapAlloc(0x4Cu); /*0x50609f*/
+        v19 = v12; /*0x5060a7*/
+        v20 = 0; /*0x5060ad*/
+        if ( v12 ) /*0x5060b5*/
+          v13 = MagicShaderHitEffect_constr_args2(v12, v10, *(TESEffectShader **)v18, elapsedSeconds); /*0x5060cc*/
         else
-          v15 = 0;
-        v16 = *(unsigned __int8 (__usercall **)@<al>(volatile LONG *@<ecx>, double@<st0>, double@<st1>))(*v15 + 0x68);
-        v22 = 0xFFFFFFFF;
-        if ( v16(v15, a2, st6_0) )
+          v13 = 0; /*0x5060d0*/
+        Destructor = v13->super.super.vtable[1].super.super.Destructor; /*0x5060d4*/
+        v20 = 0xFFFFFFFF; /*0x5060d9*/
+        if ( ((unsigned __int8 (__thiscall *)(MagicShaderHitEffect *))Destructor)(v13) ) /*0x5060e1*/
         {
-          sub_678D30((int *)&ActorProcessManager_ptr, v15);
-          if ( IsConsoleMode )
+          ActorProcessManager_RegisterTempEffect((ActorProcessManager *)&qword_B3BB2C[0x75], &v13->super.super); /*0x5060ed*/
+          if ( MEMORY[0xB361AC] ) /*0x5060f2*/
           {
-            if ( TESObjectREFR_GetName(v12) )
+            if ( TESObjectREFR_GetName(v10) ) /*0x506101*/
             {
-              Name = TESObjectREFR_GetName(v12);
-              Interface_ConsolePrint("Shader effect has been applied to %s", Name);
+              Name = TESObjectREFR_GetName(v10); /*0x50610c*/
+              Interface_ConsolePrint("Shader effect has been applied to %s", Name); /*0x506117*/
             }
             else
             {
-              Interface_ConsolePrint("Shader effect has been applied to reference");
+              Interface_ConsolePrint("Shader effect has been applied to reference"); /*0x506138*/
             }
           }
         }
         else
         {
-          (**(void (__thiscall ***)(volatile LONG *, int))v15)(v15, 1);
-          if ( IsConsoleMode )
+          v13->super.super.vtable->super.super.Destructor((NiRefObject *)v13, 1); /*0x506142*/
+          if ( MEMORY[0xB361AC] ) /*0x506144*/
           {
-            if ( TESObjectREFR_GetName(v12) )
+            if ( TESObjectREFR_GetName(v10) ) /*0x50614f*/
             {
-              v18 = TESObjectREFR_GetName(v12);
-              Interface_ConsolePrint("Shader effect initialization failed for %s", v18);
+              v16 = TESObjectREFR_GetName(v10); /*0x50615a*/
+              Interface_ConsolePrint("Shader effect initialization failed for %s", v16); /*0x506165*/
             }
             else
             {
-              Interface_ConsolePrint("Shader effect initialization failed for reference");
+              Interface_ConsolePrint("Shader effect initialization failed for reference"); /*0x506186*/
             }
           }
         }

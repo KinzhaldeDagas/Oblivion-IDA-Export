@@ -28,11 +28,11 @@
 0x437823: mov     ecx, esi
 0x437825: mov     byte ptr [esp+20h+var_4], 1
 0x43782A: mov     [esi+2Ch], bl
-0x43782D: call    sub_434600
+0x43782D: call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.
 0x437832: push    1
 0x437834: push    ebx
 0x437835: mov     ecx, esi
-0x437837: call    sub_434CB0
+0x437837: call    sub_434CB0; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.
 0x43783C: mov     eax, esi
 0x43783E: mov     ecx, [esp+1Ch+var_C]
 0x437842: mov     large fs:0, ecx
@@ -41,3 +41,22 @@
 0x43784B: pop     ebx
 0x43784C: add     esp, 10h
 0x43784F: retn    8
+0x435AF0: mov     eax, [ecx]
+0x435AF2: test    eax, eax
+0x435AF4: jz      short locret_435B00
+0x435AF6: add     eax, 0Ch
+0x435AF9: push    eax; lpAddend
+0x435AFA: call    ds:InterlockedDecrement
+0x435B00: retn
+0x9AC4F0: mov     ecx, [ebp-10h]; this
+0x9AC4F3: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9AC4F8: mov     ecx, [ebp-10h]
+0x9AC4FB: add     ecx, 28h ; '('
+0x9AC4FE: jmp     loc_435AF0
+0x9AC503: mov     edx, dword ptr [esp+a2]
+0x9AC507: lea     eax, [edx-0Ch]
+0x9AC50A: mov     ecx, [edx-10h]
+0x9AC50D: xor     ecx, eax
+0x9AC50F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC514: mov     eax, offset stru_AD91C4
+0x9AC519: jmp     ___CxxFrameHandler3

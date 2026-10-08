@@ -2,8 +2,8 @@ NiTListBase<DFALL<BSAnimGroupSequence const *>,BSAnimGroupSequence const *> *__t
         NiTListBase<DFALL<BSAnimGroupSequence const *>,BSAnimGroupSequence const *> *this,
         char a2)
 {
-  *(_DWORD *)this = &NiTListBase<DFALL<BSAnimGroupSequence const *>,BSAnimGroupSequence const *>::`vftable';
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  *(_DWORD *)this = &NiTListBase<DFALL<BSAnimGroupSequence const *>,BSAnimGroupSequence const *>::`vftable'; /*0x470a98*/
+  if ( (a2 & 1) != 0 ) /*0x470a9e*/
+    FormHeapFree((unsigned int)this); /*0x470aa1*/
+  return this; /*0x470aab*/
 }

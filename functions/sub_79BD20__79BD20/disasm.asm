@@ -1,4 +1,4 @@
-0x79BD20: sub     esp, 8
+0x79BD20: sub     esp, 8; Oblivion st_vector<SFrondVertex>::push_back. Constructs in place when end<capacityEnd; otherwise delegates to checked insert-one at end.
 0x79BD23: push    ebx
 0x79BD24: push    esi
 0x79BD25: mov     esi, ecx
@@ -30,18 +30,18 @@
 0x79BD65: add     eax, edx
 0x79BD67: cmp     edi, eax
 0x79BD69: jnb     short loc_79BD9D
-0x79BD6B: mov     ecx, [esp+14h+arg_0]
-0x79BD6F: mov     edx, [esp+14h+arg_0]
+0x79BD6B: mov     ecx, [esp+14h+value]
+0x79BD6F: mov     edx, [esp+14h+value]
 0x79BD73: mov     edi, [esi+8]
-0x79BD76: mov     byte ptr [esp+14h+var_8], 0
-0x79BD7B: mov     eax, [esp+14h+var_8]
-0x79BD7F: push    eax
-0x79BD80: push    ecx
-0x79BD81: push    esi
-0x79BD82: push    edx
-0x79BD83: push    1
-0x79BD85: push    edi
-0x79BD86: call    sub_79AA10
+0x79BD76: mov     byte ptr [esp+14h+debugCookie], 0
+0x79BD7B: mov     eax, dword ptr [esp+14h+debugCookie]
+0x79BD7F: push    eax; debugCookie
+0x79BD80: push    ecx; debugValue
+0x79BD81: push    esi; debugOwner
+0x79BD82: push    edx; value
+0x79BD83: push    1; count
+0x79BD85: push    edi; destination
+0x79BD86: call    OB_SFrondVertex_UninitializedFillN_010201A0; Low-level uninitialized_fill_n for trivial 0x38-byte SFrondVertex records. Oblivion call sites pass three effective operands plus three checked-iterator/debug operands that this body does not consume.
 0x79BD8B: add     esp, 18h
 0x79BD8E: add     edi, 38h ; '8'
 0x79BD91: mov     [esi+8], edi
@@ -54,14 +54,14 @@
 0x79BDA0: cmp     ebx, edi
 0x79BDA2: jbe     short loc_79BDA9
 0x79BDA4: call    __invalid_parameter_noinfo
-0x79BDA9: mov     eax, [esp+14h+arg_0]
-0x79BDAD: push    eax
-0x79BDAE: push    edi
-0x79BDAF: push    esi
-0x79BDB0: lea     ecx, [esp+20h+var_8]
-0x79BDB4: push    ecx
-0x79BDB5: mov     ecx, esi
-0x79BDB7: call    sub_79B560
+0x79BDA9: mov     eax, [esp+14h+value]
+0x79BDAD: push    eax; value
+0x79BDAE: push    edi; position
+0x79BDAF: push    esi; expectedOwner
+0x79BDB0: lea     ecx, [esp+20h+debugCookie]
+0x79BDB4: push    ecx; result
+0x79BDB5: mov     ecx, esi; this
+0x79BDB7: call    OB_stVector_SFrondVertex_InsertOne_010201A0; Checked insert-one wrapper for st_vector<SFrondVertex>. Preserves the pre-growth iterator index, delegates to InsertFill(count=1), then returns an 8-byte {owner,current} iterator.
 0x79BDBC: pop     edi
 0x79BDBD: pop     esi
 0x79BDBE: pop     ebx

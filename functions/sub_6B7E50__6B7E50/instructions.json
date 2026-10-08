@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B7E50",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Rebuilds serialized response objects and internal response cursor; resolves INFO/topic/ownerQuest immediately and leaves speaker as a FormID for InitLoadGame. Does not collect live responses or run results.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x6B7E79",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B7E7F",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x6B7E85",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B7E86",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; EngineFix implementation 2026-05-07: Dialogue Conversation nested choice count is one byte; sub_6B8280 consumes at least 10 bytes per nested entry (two length bytes plus two 4-byte values, with optional string payloads). Registered count clamp uses remaining / 10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x6B7E91",
-    "line": "mov     [esp+3Ch+var_24], ebx",
+    "line": "mov     [esp+3Ch+destination], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -148,12 +148,6 @@
     "line": "jmp     short loc_6B7EA0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x6B7E9D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x6B7EA0",
@@ -181,7 +175,7 @@
   },
   {
     "ea": "0x6B7EAE",
-    "line": "cmp     eax, ebx",
+    "line": "cmp     eax, ebx; EngineFix implementation 2026-05-07: Dialogue Conversation nested choice allocation-failure hook. If the 0x18 object allocation fails, discard one sub_6B8280 serialized choice entry, restore SEH state, and resume nested loop tail.",
     "mnemonic": "cmp",
     "size": 2
   },
@@ -199,13 +193,13 @@
   },
   {
     "ea": "0x6B7EB6",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B7EB8",
-    "line": "call    sub_6B8390",
+    "line": "call    DialogueResponse__InitializeEmpty",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +223,7 @@
   },
   {
     "ea": "0x6B7EC3",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -241,7 +235,7 @@
   },
   {
     "ea": "0x6B7ECD",
-    "line": "call    sub_6B8280",
+    "line": "call    DialogueResponse__LoadGame; Loads the exact saved response display text, voice path, and copied first 8 bytes of TRDT. Resume therefore uses serialized response material rather than recollecting TESTopicInfo responses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +391,7 @@
   },
   {
     "ea": "0x6B7F0F",
-    "line": "mov     eax, [esp+3Ch+var_24]",
+    "line": "mov     eax, [esp+3Ch+destination]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +415,7 @@
   },
   {
     "ea": "0x6B7F1D",
-    "line": "mov     [esp+3Ch+var_24], eax",
+    "line": "mov     [esp+3Ch+destination], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -433,13 +427,13 @@
   },
   {
     "ea": "0x6B7F27",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B7F2D",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -451,13 +445,13 @@
   },
   {
     "ea": "0x6B7F33",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B7F34",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,19 +481,19 @@
   },
   {
     "ea": "0x6B7F45",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6B7F47",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B7F48",
-    "line": "call    sub_6B7CA0",
+    "line": "call    DialogueItem__GetDialogueResponseByIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +601,7 @@
   },
   {
     "ea": "0x6B7F72",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -619,19 +613,19 @@
   },
   {
     "ea": "0x6B7F78",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B7F79",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B7F7F",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +679,7 @@
   },
   {
     "ea": "0x6B7F99",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,31 +715,31 @@
   },
   {
     "ea": "0x6B7FAD",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B7FB3",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6B7FB5",
-    "line": "lea     edx, [esp+48h+var_24]",
+    "line": "lea     edx, [esp+48h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B7FB9",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B7FBA",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +793,7 @@
   },
   {
     "ea": "0x6B7FD4",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,13 +829,13 @@
   },
   {
     "ea": "0x6B7FE8",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B7FEE",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -853,13 +847,13 @@
   },
   {
     "ea": "0x6B7FF4",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B7FF5",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +907,7 @@
   },
   {
     "ea": "0x6B800F",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +943,7 @@
   },
   {
     "ea": "0x6B8023",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -961,19 +955,19 @@
   },
   {
     "ea": "0x6B8029",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B802A",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x6B8030",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1042,5 +1036,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C6E70",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6E73",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6E74",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6E79",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6E7A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6E7B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C6E7F",
+    "line": "lea     eax, [edx-2Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6E82",
+    "line": "mov     ecx, [edx-30h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6E85",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6E87",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6E8C",
+    "line": "mov     eax, offset stru_AEF300",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6E91",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

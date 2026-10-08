@@ -4,25 +4,25 @@ char __thiscall sub_95FA90(_WORD *this, int a2)
   int v5; // esi
   int v6; // ecx
 
-  if ( (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0xC))(a2) != 4 )
-    return 0;
-  v4 = *(this + 7);
-  if ( v4 != *(_WORD *)(a2 + 0xE) )
-    return 0;
-  v5 = 0;
-  if ( !v4 )
-    return 1;
-  while ( 1 )
+  if ( (*(int (__thiscall **)(int))(*(_DWORD *)a2 + 0xC))(a2) != 4 ) /*0x95faa4*/
+    return 0; /*0x95faa4*/
+  v4 = *(this + 7); /*0x95faad*/
+  if ( v4 != *(_WORD *)(a2 + 0xE) ) /*0x95fab5*/
+    return 0; /*0x95faa7*/
+  v5 = 0; /*0x95fab8*/
+  if ( !v4 ) /*0x95fabd*/
+    return 1; /*0x95faeb*/
+  while ( 1 ) /*0x95faca*/
   {
-    v6 = *(_DWORD *)(4 * v5 + *((_DWORD *)this + 2));
-    if ( (*(unsigned __int8 (__thiscall **)(int, _DWORD))(*(_DWORD *)v6 + 0x28))(
+    v6 = *(_DWORD *)(4 * v5 + *((_DWORD *)this + 2)); /*0x95faca*/
+    if ( (*(unsigned __int8 (__thiscall **)(int, _DWORD))(*(_DWORD *)v6 + 0x28))( /*0x95fada*/
            v6,
            *(_DWORD *)(4 * v5 + *(_DWORD *)(a2 + 8))) )
     {
-      break;
+      break; /*0x95fada*/
     }
-    if ( ++v5 >= (unsigned int)(unsigned __int16)*(this + 7) )
-      return 1;
+    if ( ++v5 >= (unsigned int)(unsigned __int16)*(this + 7) ) /*0x95fae9*/
+      return 1; /*0x95fae9*/
   }
-  return 0;
+  return 0; /*0x95faa6*/
 }

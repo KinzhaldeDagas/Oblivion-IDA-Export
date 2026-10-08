@@ -19,13 +19,13 @@
   },
   {
     "ea": "0x42B954",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42B95A",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x42B95F",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x42B965",
-    "line": "push    0Ch; Size",
+    "line": "push    0Ch; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x42B96A",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42B96B",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x42B97A",
-    "line": "mov     [esp+8+var_4], 0",
+    "line": "mov     [esp+8+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -109,37 +109,37 @@
   },
   {
     "ea": "0x42B987",
-    "line": "mov     [esp+8+var_4], edx",
+    "line": "mov     [esp+8+source], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x42B98B",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x42B991",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x42B993",
-    "line": "lea     eax, [esp+0Ch+var_4]",
+    "line": "lea     eax, [esp+0Ch+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x42B997",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42B998",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },

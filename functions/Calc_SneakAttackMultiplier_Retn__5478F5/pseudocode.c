@@ -1,4 +1,4 @@
-int Calc_SneakAttackMultiplier_::Retn()
+void Calc_SneakAttackMultiplier_::Retn()
 {
-  return Calc_SneakAttackMultiplier_::Done();
+  Calc_SneakAttackMultiplier_::Done(); /*0x5478f6*/
 }

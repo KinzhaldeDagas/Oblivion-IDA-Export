@@ -1,7 +1,7 @@
-0x992839: cmp     byte_BAA644, 0
+0x992839: cmp     byte ptr dword_BA9E10+834h, 0
 0x992840: push    esi
 0x992841: jz      short loc_992865
-0x992843: push    dword_BAA640
+0x992843: push    dword_BA9E10+830h
 0x992849: call    __decode_pointer
 0x99284E: mov     esi, eax
 0x992850: test    esi, esi

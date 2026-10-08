@@ -1,33 +1,35 @@
-_DWORD *__thiscall sub_452C20(_DWORD *this, _DWORD *a2, int a3)
+//
+// Verified: reads TESForm+0xC key, allocates/zeros 8-byte entry on lookup miss, ORs flags at entry+0 only if savedFormBuffer+4 is null; returns entry. Oblivion 45B670/45B700 and blob-drain callers establish modifier role. Probable homolog: Fallout 825EDC40 AddChangeFlags; Fallout takes formID directly, Oblivion takes TESForm*.
+OblivionChangeData *__thiscall ChangesMap_AddFormChangeFlags(ChangesMap *self, TESForm *form, unsigned int flags)
 {
-  int v3; // ebx
-  _DWORD *v5; // eax
-  _DWORD *v6; // esi
-  _DWORD *result; // eax
+  UInt32 refID; // ebx
+  OblivionChangeData *v5; // eax
+  OblivionChangeData *v6; // esi
+  OblivionChangeData *result; // eax
 
-  v3 = a2[3];
-  if ( NiTMap_GetAt(this, v3, &a2) )
+  refID = form->member.refID; /*0x452c25*/
+  if ( NiTMap_GetAt(self, refID, &form) ) /*0x452c34*/
   {
-    v6 = a2;
+    v6 = (OblivionChangeData *)form; /*0x452c74*/
   }
   else
   {
-    v5 = (_DWORD *)FormHeapAlloc(8u);
-    if ( v5 )
+    v5 = (OblivionChangeData *)FormHeapAlloc(8u); /*0x452c3f*/
+    if ( v5 ) /*0x452c49*/
     {
-      *v5 = 0;
-      v5[1] = 0;
-      v6 = v5;
-      NiTMap_SetAt(this, v3, (int)v5);
+      v5->changeFlags = 0; /*0x452c4f*/
+      v5->savedFormBuffer = 0; /*0x452c55*/
+      v6 = v5; /*0x452c5c*/
+      NiTMap_SetAt(self, refID, (int)v5); /*0x452c5e*/
     }
     else
     {
-      v6 = 0;
-      NiTMap_SetAt(this, v3, 0);
+      v6 = 0; /*0x452c6b*/
+      NiTMap_SetAt(self, refID, 0); /*0x452c6d*/
     }
   }
-  result = v6;
-  if ( !v6[1] )
-    *v6 |= a3;
-  return result;
+  result = v6; /*0x452c7c*/
+  if ( !v6->savedFormBuffer ) /*0x452c78*/
+    v6->changeFlags |= flags; /*0x452c84*/
+  return result; /*0x452c86*/
 }

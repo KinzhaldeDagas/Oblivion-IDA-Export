@@ -67,17 +67,17 @@
 0x5BE943: push    ecx
 0x5BE944: fstp    [esp+38h+var_38]; float
 0x5BE947: call    sub_547B00
-0x5BE94C: mov     ecx, ds:0B333C4h
+0x5BE94C: mov     ecx, ds:0B333C4h; this
 0x5BE952: add     esp, 24h
 0x5BE955: mov     edi, eax
-0x5BE957: push    20h ; ' '
+0x5BE957: push    20h ; ' '; actorValue
 0x5BE959: mov     [esp+18h+var_4], edi
-0x5BE95D: call    Actor_GetSkillMasteryLevel
+0x5BE95D: call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.
 0x5BE962: cmp     eax, 4
 0x5BE965: jnz     short loc_5BE978
 0x5BE967: fild    [esp+14h+var_4]
 0x5BE96B: fmul    qword ptr ds:0A2FAA0h
-0x5BE971: call    Double_To_SInt32
+0x5BE971: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5BE976: mov     edi, eax
 0x5BE978: mov     ecx, ds:0B333C4h
 0x5BE97E: call    sub_5E4420

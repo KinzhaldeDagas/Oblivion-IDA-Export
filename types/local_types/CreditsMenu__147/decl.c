@@ -1,1 +1,1 @@
-CreditsMenu
+struct CreditsMenu;

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x41F370",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x41F3C6",
-    "line": "call    sub_42A050",
+    "line": "call    ExtraCannotWear_ctor; Constructs marker extra ExtraCannotWear, type 0x47.",
     "mnemonic": "call",
     "size": 5
   },
@@ -310,5 +310,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AFAD0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAD3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFAD4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFAD9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFADA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AFADB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AFADF",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAE2",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AFAE5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AFAE7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFAEC",
+    "line": "mov     eax, offset stru_ADBFDC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AFAF1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

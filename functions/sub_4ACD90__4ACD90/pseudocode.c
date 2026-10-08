@@ -1,11 +1,17 @@
-double __thiscall sub_4ACD90(float *this, float a2)
+// Verified (Oblivion): returns 1 when the amplitude field at TESEffectShader+0x64 is nonpositive; otherwise returns sin(2π * activeElapsedSeconds * frequency at +0x68) * amplitude. TESEffectShader_AnimateTextureEffect multiplies edge alpha by (1 + this pulse) and clamps the result. Edge-alpha pulse role is direct; field names are Probable from Fallout's corresponding EffectShaderData layout.
+float __thiscall TESEffectShader_CalculateEdgeEffectPulse(TESEffectShader *this, float activeElapsedSeconds)
 {
-  float v3; // [esp+8h] [ebp+4h]
-  float v4; // [esp+8h] [ebp+4h]
+  float activeElapsedSecondsa; // [esp+8h] [ebp+4h]
+  float activeElapsedSecondsb; // [esp+8h] [ebp+4h]
 
-  if ( *(this + 0x19) <= 0.0 )
-    return 1.0;
-  v3 = flt_B3F9A0 * a2 * *(this + 0x1A);
-  v4 = sin(v3);
-  return (float)(v4 * *(this + 0x19));
+  if ( this->Data.fEdgeAlphaPulseAmplitude <= 0.0 ) /*0x4acd9d*/
+  {
+    return 1.0; /*0x4acdd0*/
+  }
+  else
+  {
+    activeElapsedSecondsa = unk_B3F9A0 * activeElapsedSeconds * this->Data.fEdgeAlphaPulseFrequency; /*0x4acdac*/
+    activeElapsedSecondsb = sin(activeElapsedSecondsa); /*0x4acdb9*/
+    return activeElapsedSecondsb * this->Data.fEdgeAlphaPulseAmplitude; /*0x4acdc9*/
+  }
 }

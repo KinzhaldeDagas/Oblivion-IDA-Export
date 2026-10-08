@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x43178D",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4317D2",
-    "line": "cmp     OBSE_g_FileFinder, esi",
+    "line": "cmp     ds:0B33A04h, esi",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4317DA",
-    "line": "mov     OBSE_g_FileFinder, 0",
+    "line": "mov     dword ptr ds:0B33A04h, 0",
     "mnemonic": "mov",
     "size": 10
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4317EF",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

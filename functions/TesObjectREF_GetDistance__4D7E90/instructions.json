@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D7E90",
-    "line": "push    ecx",
+    "line": "push    ecx; MEF LARGE PERF 2026-09-08: PERF comparator constraint: GetDistance filters targetflags/interior/worldspace compatibility, calls target GetPos virtual and then distance-to-point sqrt. It can return a sentinel instead. Replacing comparator with raw position squared distance is not proven equivalent.",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4D7EAB",
-    "line": "mov     eax, [esi+8]",
+    "line": "mov     eax, [esi+8]; 3DTheft pass 166 crash boundary: first target-reference flags read in GetDistance. 2026-07-13 dump had ESI=0x031BA25F, exactly the logged pending decision tick, due to the former Actor_GetDisposition caller stack imbalance.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4D7ED3",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x4D7EDF",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,19 +337,19 @@
   },
   {
     "ea": "0x4D7F2A",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D7F2B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4D7F2D",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },

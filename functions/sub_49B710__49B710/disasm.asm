@@ -56,7 +56,7 @@
 0x49B7C7: mov     ecx, [edi]; this
 0x49B7C9: push    esi; a2
 0x49B7CA: mov     [esp+34h+var_4], ebp
-0x49B7CE: call    sub_405680
+0x49B7CE: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B7D3: push    esi; a2
 0x49B7D4: lea     ecx, [ebx+24h]; this
 0x49B7D7: call    NiSmartPointer_Set??
@@ -95,7 +95,7 @@
 0x49B847: mov     [eax+30h], edx
 0x49B84A: mov     ecx, [edi]; this
 0x49B84C: mov     [esp+34h+var_4], ebp
-0x49B850: call    sub_405680
+0x49B850: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B855: push    1Ch; Size
 0x49B857: call    FormHeapAlloc
 0x49B85C: mov     esi, eax
@@ -118,7 +118,7 @@
 0x49B89B: mov     ecx, [edi]; this
 0x49B89D: push    eax; a2
 0x49B89E: mov     [esp+34h+var_4], ebp
-0x49B8A2: call    sub_405680
+0x49B8A2: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B8A7: push    24h ; '$'; Size
 0x49B8A9: call    FormHeapAlloc
 0x49B8AE: mov     esi, eax
@@ -139,7 +139,7 @@
 0x49B8EA: mov     ecx, [edi]; this
 0x49B8EC: push    esi; a2
 0x49B8ED: mov     [esp+34h+var_4], ebp
-0x49B8F1: call    sub_405680
+0x49B8F1: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x49B8F6: mov     eax, [esp+30h+arg_0]
 0x49B8FA: test    eax, eax
 0x49B8FC: mov     ecx, [edi]
@@ -157,3 +157,35 @@
 0x49B91C: pop     ebx
 0x49B91D: add     esp, 1Ch
 0x49B920: retn    4
+0x9B1930: mov     eax, [ebp-1Ch]
+0x9B1933: push    eax
+0x9B1934: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1939: pop     ecx
+0x9B193A: retn
+0x9B193B: mov     eax, [ebp-1Ch]
+0x9B193E: push    eax
+0x9B193F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1944: pop     ecx
+0x9B1945: retn
+0x9B1946: mov     eax, [ebp-1Ch]
+0x9B1949: push    eax
+0x9B194A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B194F: pop     ecx
+0x9B1950: retn
+0x9B1951: mov     eax, [ebp-1Ch]
+0x9B1954: push    eax
+0x9B1955: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B195A: pop     ecx
+0x9B195B: retn
+0x9B195C: mov     eax, [ebp-1Ch]
+0x9B195F: push    eax
+0x9B1960: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1965: pop     ecx
+0x9B1966: retn
+0x9B1967: mov     edx, [esp+arg_4]
+0x9B196B: lea     eax, [edx-20h]
+0x9B196E: mov     ecx, [edx-24h]
+0x9B1971: xor     ecx, eax
+0x9B1973: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1978: mov     eax, offset stru_ADDA88
+0x9B197D: jmp     ___CxxFrameHandler3

@@ -12,12 +12,12 @@
 0x437D65: lea     eax, [esp+114h+Str]
 0x437D69: push    eax; Str
 0x437D6A: call    sub_46D540
-0x437D6F: mov     ecx, ModelLoaderPtr
+0x437D6F: mov     ecx, ds:0B33A1Ch
 0x437D75: mov     ecx, [ecx]
 0x437D77: add     esp, 8
-0x437D7A: lea     eax, [esp+110h+var_10C]
+0x437D7A: lea     eax, [esp+110h+slot]
 0x437D7E: push    eax
-0x437D7F: mov     [esp+114h+var_10C], 0
+0x437D7F: mov     [esp+114h+slot], 0
 0x437D87: mov     edx, [ecx]
 0x437D89: mov     edx, [edx+4]
 0x437D8C: lea     eax, [esp+114h+Str]
@@ -25,14 +25,14 @@
 0x437D91: call    edx
 0x437D93: test    al, al
 0x437D95: jz      short loc_437E04
-0x437D97: mov     eax, [esp+110h+var_10C]
+0x437D97: mov     eax, [esp+110h+slot]
 0x437D9B: test    eax, eax
 0x437D9D: jz      short loc_437E04
-0x437D9F: mov     ecx, [eax+8]
+0x437D9F: mov     ecx, [eax+8]; this
 0x437DA2: test    ecx, ecx
 0x437DA4: jz      short loc_437E04
 0x437DA6: push    esi
-0x437DA7: call    sub_700900
+0x437DA7: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x437DAC: mov     esi, eax
 0x437DAE: test    esi, esi
 0x437DB0: jz      short loc_437E03
@@ -44,12 +44,12 @@
 0x437DBC: mov     edi, eax
 0x437DBE: test    edi, edi
 0x437DC0: jnz     short loc_437DDB
-0x437DC2: mov     [esp+118h+var_10C], esi
+0x437DC2: mov     [esp+118h+slot], esi
 0x437DC6: add     esi, 4
 0x437DC9: push    esi; lpAddend
 0x437DCA: call    ds:InterlockedIncrement
-0x437DD0: lea     ecx, [esp+118h+var_10C]; this
-0x437DD4: call    sub_7016A0
+0x437DD0: lea     ecx, [esp+118h+slot]; slot
+0x437DD4: call    NiPointerSlot_Release
 0x437DD9: jmp     short loc_437DF4
 0x437DDB: mov     eax, [edi]
 0x437DDD: mov     edx, [eax+98h]

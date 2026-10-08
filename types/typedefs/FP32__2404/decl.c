@@ -1,1 +1,1 @@
-_FP32
+typedef float _FP32;

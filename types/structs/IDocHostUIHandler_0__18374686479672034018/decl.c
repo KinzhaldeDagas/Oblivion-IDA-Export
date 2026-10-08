@@ -1,1 +1,1 @@
-IDocHostUIHandler_0
+typedef IDocHostUIHandler IDocHostUIHandler_0;

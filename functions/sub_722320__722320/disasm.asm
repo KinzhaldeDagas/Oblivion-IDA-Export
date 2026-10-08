@@ -7,7 +7,7 @@
 0x72232C: call    sub_721B70
 0x722331: push    edi; a2
 0x722332: mov     ecx, esi; this
-0x722334: call    NiNode__OnVisible
+0x722334: call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.
 0x722339: pop     edi
 0x72233A: pop     esi
 0x72233B: retn    4

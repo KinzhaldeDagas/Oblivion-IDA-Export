@@ -10,7 +10,7 @@
 0x88AA95: test    eax, eax
 0x88AA97: jz      short loc_88AAAE
 0x88AA99: lea     esp, [esp+0]
-0x88AAA0: cmp     eax, offset dword_BA7D84
+0x88AAA0: cmp     eax, offset stru_BA7D84
 0x88AAA5: jz      short loc_88AAE1
 0x88AAA7: mov     eax, [eax+4]
 0x88AAAA: test    eax, eax

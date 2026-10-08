@@ -143,7 +143,7 @@
 0x7141BC: jb      loc_714110
 0x7141C2: mov     ecx, [esp+138h+var_118]
 0x7141C6: push    ecx
-0x7141C7: call    FormHeapFree
+0x7141C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7141CC: add     esp, 4
 0x7141CF: mov     al, 1
 0x7141D1: mov     ecx, dword ptr [esp+138h+var_C]
@@ -171,7 +171,20 @@
 0x714224: call    _strcat_s
 0x714229: mov     ecx, [esp+150h+var_118]
 0x71422D: push    ecx
-0x71422E: call    FormHeapFree
+0x71422E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x714233: add     esp, 1Ch
 0x714236: xor     al, al
 0x714238: jmp     short loc_7141D1
+0x9C9DC0: lea     ecx, [ebp-120h]; slot
+0x9C9DC6: jmp     NiPointerSlot_Release
+0x9C9DCB: mov     edx, [esp+arg_4]
+0x9C9DCF: lea     eax, [edx-128h]
+0x9C9DD5: mov     ecx, [edx-12Ch]
+0x9C9DDB: xor     ecx, eax
+0x9C9DDD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9DE2: add     eax, 10h
+0x9C9DE5: mov     ecx, [edx-4]
+0x9C9DE8: xor     ecx, eax
+0x9C9DEA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9DEF: mov     eax, offset stru_AF258C
+0x9C9DF4: jmp     ___CxxFrameHandler3

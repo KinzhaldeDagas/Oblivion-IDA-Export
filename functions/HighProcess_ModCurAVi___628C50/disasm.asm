@@ -1,13 +1,13 @@
-0x628C50: mov     eax, [esp+arg_8]
+0x628C50: mov     eax, [esp+delta]
 0x628C54: push    esi
 0x628C55: push    edi
-0x628C56: mov     edi, [esp+8+arg_4]
-0x628C5A: push    eax
+0x628C56: mov     edi, [esp+8+actorValue]
+0x628C5A: push    eax; delta
 0x628C5B: mov     esi, ecx
-0x628C5D: mov     ecx, [esp+0Ch+arg_0]
-0x628C61: push    edi
-0x628C62: push    ecx
-0x628C63: mov     ecx, esi
+0x628C5D: mov     ecx, [esp+0Ch+context]
+0x628C61: push    edi; actorValue
+0x628C62: push    ecx; context
+0x628C63: mov     ecx, esi; self
 0x628C65: call    MiddleProcess_ModAViCur
 0x628C6A: cmp     edi, 0Bh
 0x628C6D: jz      short loc_628C83

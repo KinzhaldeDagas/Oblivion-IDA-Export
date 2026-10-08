@@ -1,4 +1,4 @@
-0x4B3750: push    0FFFFFFFFh
+0x4B3750: push    0FFFFFFFFh; Generic bound-object 3D implementation used by many form classes. Obtains/caches the model, clones its NiNode tree for the reference, applies scale, and resets the clone's local transform.
 0x4B3752: push    offset SEH_4B3750
 0x4B3757: mov     eax, large fs:0
 0x4B375D: push    eax
@@ -19,11 +19,11 @@
 0x4B3792: mov     ebx, ecx
 0x4B3794: xor     ebp, ebp
 0x4B3796: cmp     ebx, ds:0B35EA4h
-0x4B379C: mov     [esp+154h+var_13C], esi
+0x4B379C: mov     [esp+154h+reference], esi
 0x4B37A0: jz      short loc_4B37AA
 0x4B37A2: cmp     ebx, ds:0B35EB4h
 0x4B37A8: jnz     short loc_4B37B0
-0x4B37AA: mov     [esp+154h+var_13C], ebp
+0x4B37AA: mov     [esp+154h+reference], ebp
 0x4B37AE: mov     esi, ebp
 0x4B37B0: mov     eax, [ebx]
 0x4B37B2: mov     edx, [eax+110h]
@@ -41,7 +41,7 @@
 0x4B37D3: push    1
 0x4B37D5: mov     ecx, esi
 0x4B37D7: call    sub_46A9C0
-0x4B37DC: cmp     byte ptr [esp+154h+arg_4], 0
+0x4B37DC: cmp     byte ptr [esp+154h+arg1], 0
 0x4B37E4: jnz     short loc_4B381F; jumptable 004B3803 cases 33-35
 0x4B37E6: cmp     dword ptr [edi+4], 1
 0x4B37EA: jnz     short loc_4B381F; jumptable 004B3803 cases 33-35
@@ -56,7 +56,7 @@
 0x4B3810: add     esp, 4
 0x4B3813: test    al, al
 0x4B3815: jz      short loc_4B381F; jumptable 004B3803 cases 33-35
-0x4B3817: mov     byte ptr [esp+154h+arg_4], 1
+0x4B3817: mov     byte ptr [esp+154h+arg1], 1
 0x4B381F: test    esi, esi; jumptable 004B3803 cases 33-35
 0x4B3821: fld1
 0x4B3823: fstp    [esp+154h+var_138]
@@ -65,8 +65,8 @@
 0x4B382B: call    TESObjectREFR_GetScale
 0x4B3830: fstp    [esp+154h+var_138]
 0x4B3834: fld     dword ptr [edi+60h]
-0x4B3837: fstp    [esp+154h+var_140]
-0x4B383B: fld     [esp+154h+var_140]
+0x4B3837: fstp    [esp+154h+element]
+0x4B383B: fld     [esp+154h+element]
 0x4B383F: fld     [esp+154h+var_138]
 0x4B3843: fld     st
 0x4B3845: fucomp  st(2)
@@ -83,19 +83,19 @@
 0x4B3864: mov     esi, eax
 0x4B3866: test    esi, esi
 0x4B3868: jz      loc_4B38F1
-0x4B386E: push    0
-0x4B3870: mov     ecx, esi
-0x4B3872: call    sub_405790
+0x4B386E: push    0; index
+0x4B3870: mov     ecx, esi; this
+0x4B3872: call    NiNode_GetChildAtIndex
 0x4B3877: test    eax, eax
 0x4B3879: jz      short loc_4B38F1
-0x4B387B: push    0
-0x4B387D: mov     ecx, esi
-0x4B387F: call    sub_405790
+0x4B387B: push    0; index
+0x4B387D: mov     ecx, esi; this
+0x4B387F: call    NiNode_GetChildAtIndex
 0x4B3884: cmp     [eax+0Ch], ebp
 0x4B3887: jz      short loc_4B38F1
-0x4B3889: push    0
-0x4B388B: mov     ecx, esi
-0x4B388D: call    sub_405790
+0x4B3889: push    0; index
+0x4B388B: mov     ecx, esi; this
+0x4B388D: call    NiNode_GetChildAtIndex
 0x4B3892: mov     eax, [eax+0Ch]
 0x4B3895: push    eax
 0x4B3896: push    offset stru_B3CAC0
@@ -104,11 +104,11 @@
 0x4B38A3: test    eax, eax
 0x4B38A5: jz      short loc_4B38F1
 0x4B38A7: push    offset aUnequip; "Unequip"
-0x4B38AC: mov     ecx, eax
-0x4B38AE: call    sub_4715A0
+0x4B38AC: mov     ecx, eax; this
+0x4B38AE: call    NiControllerManager_FindSequenceByName; Looks up a NiControllerSequence by name in the controller manager name map at +0x58; returns null on miss.
 0x4B38B3: test    eax, eax
 0x4B38B5: jz      short loc_4B38F1
-0x4B38B7: mov     esi, [esp+154h+var_13C]
+0x4B38B7: mov     esi, [esp+154h+reference]
 0x4B38BB: jmp     loc_4B381F; jumptable 004B3803 cases 33-35
 0x4B38C0: push    0; jumptable 004B3803 case 20
 0x4B38C2: push    offset ??_R0?AVTESObjectARMO@@@8; struct TypeDescriptor *
@@ -126,10 +126,10 @@
 0x4B38E7: test    al, al
 0x4B38E9: jnz     loc_4B381F; jumptable 004B3803 cases 33-35
 0x4B38EF: jmp     short def_4B3803; jumptable 004B3803 default case, cases 19,21-23,25-32
-0x4B38F1: mov     esi, [esp+154h+var_13C]
+0x4B38F1: mov     esi, [esp+154h+reference]
 0x4B38F5: push    offset dword_A7D0EC; jumptable 004B3803 default case, cases 19,21-23,25-32
 0x4B38FA: mov     ecx, edi
-0x4B38FC: call    NiObjectNET_GetExtraData
+0x4B38FC: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x4B3901: test    eax, eax
 0x4B3903: jz      short loc_4B3914
 0x4B3905: mov     ecx, [eax+0Ch]
@@ -141,10 +141,10 @@
 0x4B3918: mov     edx, [esi]
 0x4B391A: fld     dword ptr [edi+60h]
 0x4B391D: mov     eax, [edx+0ECh]
-0x4B3923: fstp    [esp+154h+var_140]
+0x4B3923: fstp    [esp+154h+element]
 0x4B3927: mov     ecx, esi
 0x4B3929: call    eax
-0x4B392B: fld     [esp+154h+var_140]
+0x4B392B: fld     [esp+154h+element]
 0x4B392F: fucompp
 0x4B3931: fnstsw  ax
 0x4B3933: test    ah, 44h
@@ -164,13 +164,13 @@
 0x4B3960: add     esp, 8
 0x4B3963: fld1
 0x4B3965: fstp    [esp+154h+var_138]
-0x4B3969: lea     ecx, [esp+154h+var_130]
-0x4B396D: call    sub_478B90
+0x4B3969: lea     ecx, [esp+154h+var_130]; this
+0x4B396D: call    OB_NiCloningProcess_ctor
 0x4B3972: fld     [esp+154h+var_138]
 0x4B3976: fst     [esp+154h+var_118]
 0x4B397A: fst     [esp+154h+var_11C]
 0x4B397E: fstp    [esp+154h+var_120]
-0x4B3982: cmp     byte ptr [esp+154h+arg_4], 0
+0x4B3982: cmp     byte ptr [esp+154h+arg1], 0
 0x4B398A: lea     ecx, [esp+154h+var_130]
 0x4B398E: mov     [esp+154h+var_4], 0
 0x4B3999: push    ecx
@@ -195,22 +195,22 @@
 0x4B39D5: test    eax, eax
 0x4B39D7: jz      short loc_4B3A0F
 0x4B39D9: push    esi
-0x4B39DA: lea     ecx, [esp+158h+var_140]
+0x4B39DA: lea     ecx, [esp+158h+element]
 0x4B39DE: mov     ebp, esi
 0x4B39E0: call    sub_405070
-0x4B39E5: lea     eax, [esp+154h+var_140]
-0x4B39E9: push    eax
-0x4B39EA: mov     ecx, offset off_B082F0
+0x4B39E5: lea     eax, [esp+154h+element]
+0x4B39E9: push    eax; element
+0x4B39EA: mov     ecx, offset stru_B082F0; self
 0x4B39EF: mov     byte ptr [esp+158h+var_4], 2
-0x4B39F7: call    NiTArray_AddItem
-0x4B39FC: lea     ecx, [esp+154h+var_140]; this
+0x4B39F7: call    NiTObjectArray_AddFirstEmpty
+0x4B39FC: lea     ecx, [esp+154h+element]; slot
 0x4B3A00: mov     byte ptr [esp+154h+var_4], 1
-0x4B3A08: call    sub_7016A0
+0x4B3A08: call    NiPointerSlot_Release
 0x4B3A0D: jmp     short loc_4B3A53
 0x4B3A0F: push    0DCh ; 'Ü'; Size
 0x4B3A14: call    FormHeapAlloc
 0x4B3A19: add     esp, 4
-0x4B3A1C: mov     [esp+154h+var_140], eax
+0x4B3A1C: mov     [esp+154h+element], eax
 0x4B3A20: test    eax, eax
 0x4B3A22: mov     byte ptr [esp+154h+var_4], 3
 0x4B3A2A: jz      short loc_4B3A39
@@ -240,7 +240,7 @@
 0x4B3A71: push    1
 0x4B3A73: mov     ecx, esi
 0x4B3A75: call    eax
-0x4B3A77: mov     esi, [esp+154h+var_13C]
+0x4B3A77: mov     esi, [esp+154h+reference]
 0x4B3A7B: fld1
 0x4B3A7D: fld     st
 0x4B3A7F: fld     [esp+154h+var_138]
@@ -250,23 +250,23 @@
 0x4B3A89: test    ah, 44h
 0x4B3A8C: jnp     loc_4B3BB9
 0x4B3A92: fld     dword ptr [edi+60h]
-0x4B3A95: fstp    [esp+154h+var_140]
+0x4B3A95: fstp    [esp+154h+element]
 0x4B3A99: fxch    st(1)
-0x4B3A9B: fcomp   [esp+154h+var_140]
+0x4B3A9B: fcomp   [esp+154h+element]
 0x4B3A9F: fnstsw  ax
 0x4B3AA1: test    ah, 44h
 0x4B3AA4: jp      loc_4B3BBB
 0x4B3AAA: fabs
-0x4B3AAC: lea     edx, [esp+154h+var_114]
-0x4B3AB0: fstp    [esp+154h+var_140]
-0x4B3AB4: push    edx
-0x4B3AB5: fld     [esp+158h+var_140]
-0x4B3AB9: push    esi
-0x4B3ABA: mov     ecx, ebx
+0x4B3AAC: lea     edx, [esp+154h+outPath]
+0x4B3AB0: fstp    [esp+154h+element]
+0x4B3AB4: push    edx; outPath
+0x4B3AB5: fld     [esp+158h+element]
+0x4B3AB9: push    esi; reference
+0x4B3ABA: mov     ecx, ebx; this
 0x4B3ABC: fstp    dword ptr [ebp+60h]
-0x4B3ABF: call    sub_4B2B00
+0x4B3ABF: call    TESBoundObject_BuildReferenceModelPath; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.
 0x4B3AC4: mov     ecx, ds:0B33A1Ch
-0x4B3ACA: lea     eax, [esp+154h+var_114]
+0x4B3ACA: lea     eax, [esp+154h+outPath]
 0x4B3ACE: push    eax
 0x4B3ACF: call    ModelLoader_IsModelLoaded??
 0x4B3AD4: test    eax, eax
@@ -279,7 +279,7 @@
 0x4B3AE8: mov     byte ptr [esp+154h+var_4], 4
 0x4B3AF0: jz      short loc_4B3B11
 0x4B3AF2: push    ebp
-0x4B3AF3: lea     ecx, [esp+158h+var_114]
+0x4B3AF3: lea     ecx, [esp+158h+outPath]
 0x4B3AF7: push    ecx
 0x4B3AF8: mov     ecx, eax
 0x4B3AFA: call    sub_434A70
@@ -292,7 +292,7 @@
 0x4B3B11: xor     esi, esi
 0x4B3B13: mov     ecx, ds:0B33A1Ch
 0x4B3B19: push    esi
-0x4B3B1A: lea     edx, [esp+158h+var_114]
+0x4B3B1A: lea     edx, [esp+158h+outPath]
 0x4B3B1E: push    edx
 0x4B3B1F: mov     byte ptr [esp+15Ch+var_4], 0
 0x4B3B27: call    sub_434800
@@ -303,12 +303,12 @@
 0x4B3B34: mov     ecx, esi
 0x4B3B36: call    sub_4349B0
 0x4B3B3B: push    esi
-0x4B3B3C: call    FormHeapFree
+0x4B3B3C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B3B41: add     esp, 4
 0x4B3B44: jmp     short loc_4B3B4D
 0x4B3B46: add     dword ptr ds:0B35AC4h, 1
-0x4B3B4D: mov     esi, [esp+154h+var_13C]
-0x4B3B51: mov     ecx, [esp+154h+arg_4]
+0x4B3B4D: mov     esi, [esp+154h+reference]
+0x4B3B51: mov     ecx, [esp+154h+arg1]
 0x4B3B58: mov     eax, [ebx]
 0x4B3B5A: mov     edx, [eax+0ECh]
 0x4B3B60: push    ecx
@@ -319,16 +319,16 @@
 0x4B3B68: cmp     ebp, esi
 0x4B3B6A: jz      short loc_4B3B9E
 0x4B3B6C: push    ebp
-0x4B3B6D: lea     ecx, [esp+158h+var_140]
+0x4B3B6D: lea     ecx, [esp+158h+element]
 0x4B3B71: call    sub_405070
-0x4B3B76: lea     eax, [esp+154h+var_140]
+0x4B3B76: lea     eax, [esp+154h+element]
 0x4B3B7A: push    eax
-0x4B3B7B: mov     ecx, offset off_B082F0
+0x4B3B7B: mov     ecx, offset stru_B082F0; MEF PERF 2026-10-08: Verified strong-pointer16 array used by TESBoundObject_Create3DImpl4B39F7; clear4B26D5 and remove4D9849 are also observed. Its entire lifetime/population not sealed. Generic AddFirstEmpty patch must not assume every caller is a NiNode child array.
 0x4B3B80: mov     byte ptr [esp+158h+var_4], 5
 0x4B3B88: call    sub_4B24F0
-0x4B3B8D: lea     ecx, [esp+154h+var_140]; this
+0x4B3B8D: lea     ecx, [esp+154h+element]; slot
 0x4B3B91: mov     byte ptr [esp+154h+var_4], 0
-0x4B3B99: call    sub_7016A0
+0x4B3B99: call    NiPointerSlot_Release
 0x4B3B9E: lea     ecx, [esp+154h+var_130]
 0x4B3BA2: mov     [esp+154h+var_4], 0FFFFFFFFh
 0x4B3BAD: call    sub_4781A0
@@ -357,9 +357,9 @@
 0x4B3BEE: and     word ptr [ebp+18h], 0FFFEh
 0x4B3BF4: cmp     dword ptr [ebp+1Ch], 0
 0x4B3BF8: fabs
-0x4B3BFA: fstp    [esp+154h+var_140]
+0x4B3BFA: fstp    [esp+154h+element]
 0x4B3BFE: lea     edi, [ebp+30h]
-0x4B3C01: fld     [esp+154h+var_140]
+0x4B3C01: fld     [esp+154h+element]
 0x4B3C05: mov     ecx, 9
 0x4B3C0A: fstp    dword ptr [ebp+60h]
 0x4B3C0D: mov     esi, (offset stru_B26AF0.unk2C+2A8h)
@@ -385,3 +385,32 @@
 0x4B3C55: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4B3C5A: add     esp, 140h
 0x4B3C60: retn    8
+0x9B3370: lea     ecx, [ebp-130h]
+0x9B3376: jmp     sub_4781A0
+0x9B337B: lea     ecx, [ebp-134h]; slot
+0x9B3381: jmp     NiPointerSlot_Release
+0x9B3386: lea     ecx, [ebp-140h]; slot
+0x9B338C: jmp     NiPointerSlot_Release
+0x9B3391: mov     eax, [ebp-140h]
+0x9B3397: push    eax
+0x9B3398: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B339D: pop     ecx
+0x9B339E: retn
+0x9B339F: mov     eax, [ebp-134h]
+0x9B33A5: push    eax
+0x9B33A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B33AB: pop     ecx
+0x9B33AC: retn
+0x9B33AD: lea     ecx, [ebp-140h]; slot
+0x9B33B3: jmp     NiPointerSlot_Release
+0x9B33B8: mov     edx, [esp+arg1]
+0x9B33BC: lea     eax, [edx-144h]
+0x9B33C2: mov     ecx, [edx-148h]
+0x9B33C8: xor     ecx, eax
+0x9B33CA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B33CF: add     eax, 10h
+0x9B33D2: mov     ecx, [edx-4]
+0x9B33D5: xor     ecx, eax
+0x9B33D7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B33DC: mov     eax, offset stru_ADF0A4
+0x9B33E1: jmp     ___CxxFrameHandler3

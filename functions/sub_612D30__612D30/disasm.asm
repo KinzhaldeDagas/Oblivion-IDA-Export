@@ -1,4 +1,4 @@
-0x612D30: cmp     byte ptr [ecx+15Ah], 0
+0x612D30: cmp     byte ptr [ecx+15Ah], 0; Clears blocking-ally flag +0x15A when elapsed controller time exceeds duration +0x168.
 0x612D37: jz      short locret_612D58
 0x612D39: fld     dword ptr [ecx+44h]
 0x612D3C: fsub    dword ptr [ecx+164h]

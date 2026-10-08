@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x45FC60",
-    "line": "push    ecx",
+    "line": "push    ecx; [Verified] TESSaveLoadGame_LoadTempEffectsList version-gates the Temp Effects List chunk and calls ActorProcessManager_LoadTempEffects for save versions >=0x5E; earlier versions skip the chunk body.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x45FC82",
-    "line": "jb      short loc_45FCA3",
+    "line": "jb      short loc_45FCA3; MEF v58 NOTE: snapshot stream keeps native callback430050 and RTTI, clones16 BSFile virtual entries and replaces dtor/seek/size/read only. Original vtable restores before releasing snapshot bytes/context and invoking native scalar destructor430A90. PERF4 recognizes exact owned snapshot identity and captured size, avoiding a regression to repeated load-side fixed growth.",
     "mnemonic": "jb",
     "size": 2
   },
   {
     "ea": "0x45FC84",
-    "line": "mov     eax, [edi+4]",
+    "line": "mov     eax, [edi+4]; MEF v58 SR1 framing: for supported versions5E..7D temp-effects trailer is DWORD length plus payload, between change-record loop and the recorded ID-array offset. Validator requires exact trailer end==ID start; ID arrays are two DWORD counts plus DWORD values. Earlier versions differ and remain outside snapshot admission.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x45FCA3",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; MEF v58 NOTE: snapshot stream keeps native callback430050 and RTTI, clones16 BSFile virtual entries and replaces dtor/seek/size/read only. Original vtable restores before releasing snapshot bytes/context and invoking native scalar destructor430A90. PERF4 recognizes exact owned snapshot identity and captured size, avoiding a regression to repeated load-side fixed growth.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x45FD46",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x45FD4B",
-    "line": "call    sub_679850",
+    "line": "call    ActorProcessManager_LoadTempEffects; Verified call-chain anchor: TESSaveLoadGame_LoadGame invokes ActorProcessManager_LoadTempEffects after loading the Temp Effects List buffer when save version is at least 0x5E.",
     "mnemonic": "call",
     "size": 5
   },

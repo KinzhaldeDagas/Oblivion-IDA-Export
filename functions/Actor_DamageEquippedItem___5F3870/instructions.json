@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5F3870",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Actor vtable +0x2C4 durability mutation. Applies positive damage to EntryData health, with optional Heavy/Light armor skill modifiers unless suppressed; updates container extras and handles break/unequip at zero. Returns false while item remains usable and true on terminal/break handling paths.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5F3875",
-    "line": "mov     edi, [esp+20h+arg_0]",
+    "line": "mov     edi, [esp+20h+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x5F3887",
-    "line": "fld     [esp+20h+arg_4]",
+    "line": "fld     [esp+20h+damage]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5F389D",
-    "line": "fstp    [esp+20h+arg_0]",
+    "line": "fstp    [esp+20h+entry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5F38B2",
-    "line": "cmp     byte ptr [esp+24h+arg_8], cl",
+    "line": "cmp     [esp+24h+suppressArmorSkillModifiers], cl",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x5F38C5",
-    "line": "push    12h",
+    "line": "push    12h; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F38C7",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F38C9",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5F38D3",
-    "line": "mov     ecx, offset fPerkHeavyArmorJourneymanDamageMult",
+    "line": "mov     ecx, 0B37500h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x5F38DA",
-    "line": "push    12h",
+    "line": "push    12h; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F38DC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F38DE",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x5F38E7",
-    "line": "mov     ecx, offset fPerkHeavyArmorNoviceDamageMult",
+    "line": "mov     ecx, 0B374F8h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -289,19 +289,19 @@
   },
   {
     "ea": "0x5F38F9",
-    "line": "push    1Bh",
+    "line": "push    1Bh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F38FB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F38FD",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5F3907",
-    "line": "mov     ecx, offset fPerkLightArmorJourneymanDamageMult",
+    "line": "mov     ecx, 0B37508h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x5F390E",
-    "line": "push    1Bh",
+    "line": "push    1Bh; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5F3910",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5F3912",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5F391B",
-    "line": "mov     ecx, offset fPerkLightArmorNoviceDamageMult",
+    "line": "mov     ecx, 0B374F0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x5F3927",
-    "line": "fmul    [esp+24h+arg_4]",
+    "line": "fmul    [esp+24h+damage]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x5F392B",
-    "line": "fstp    [esp+24h+arg_0]",
+    "line": "fstp    [esp+24h+entry]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -409,13 +409,13 @@
   },
   {
     "ea": "0x5F3938",
-    "line": "fsub    [esp+24h+arg_0]",
+    "line": "fsub    [esp+24h+entry]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x5F393C",
-    "line": "fstp    [esp+24h+arg_8]",
+    "line": "fstp    dword ptr [esp+24h+suppressArmorSkillModifiers]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x5F3942",
-    "line": "fcomp   [esp+24h+arg_8]",
+    "line": "fcomp   dword ptr [esp+24h+suppressArmorSkillModifiers]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x5F394F",
-    "line": "fstp    [esp+24h+arg_8]",
+    "line": "fstp    dword ptr [esp+24h+suppressArmorSkillModifiers]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x5F3981",
-    "line": "fld     [esp+40h+arg_8]",
+    "line": "fld     dword ptr [esp+40h+suppressArmorSkillModifiers]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -571,7 +571,7 @@
   },
   {
     "ea": "0x5F3989",
-    "line": "fld     [esp+40h+arg_0]",
+    "line": "fld     [esp+40h+entry]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -655,7 +655,7 @@
   },
   {
     "ea": "0x5F39B3",
-    "line": "fld     [esp+30h+arg_8]",
+    "line": "fld     dword ptr [esp+30h+suppressArmorSkillModifiers]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x5F39D5",
-    "line": "fcomp   [esp+28h+arg_8]",
+    "line": "fcomp   dword ptr [esp+28h+suppressArmorSkillModifiers]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x5F3AC4",
-    "line": "mov     [esp+24h+arg_0], eax",
+    "line": "mov     [esp+24h+entry], eax",
     "mnemonic": "mov",
     "size": 4
   },

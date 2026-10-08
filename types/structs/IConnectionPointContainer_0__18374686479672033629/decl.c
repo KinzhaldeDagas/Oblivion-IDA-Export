@@ -1,1 +1,1 @@
-IConnectionPointContainer_0
+typedef IConnectionPointContainer IConnectionPointContainer_0;

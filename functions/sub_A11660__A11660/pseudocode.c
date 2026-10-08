@@ -1,4 +1,4 @@
-BSStringT *sub_A11660()
+NiRTTI *sub_A11660()
 {
-  return sub_70E220(&stru_B46100, "TallGrassShader", (int)&ImageSpaceShaderRTTI___);
+  return NiRTTI_Constructor((NiRTTI *)&unk_B46100, "TallGrassShader", &MEMORY[0xB4257C]); /*0xa11674*/
 }

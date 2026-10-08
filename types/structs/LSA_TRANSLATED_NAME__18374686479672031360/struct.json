@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "LSA_TRANSLATED_NAME",
+  "definition": "struct __declspec(align(8)) LSA_TRANSLATED_NAME\n{\nSID_NAME_USE Use;\nLSA_UNICODE_STRING Name;\nLONG DomainIndex;\n}\n",
   "id": 18374686479672031360,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Use",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "SID_NAME_USE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Name",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 8
+      "size": 8,
+      "type": "LSA_UNICODE_STRING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DomainIndex",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "LONG"
     }
   ],
   "name": "LSA_TRANSLATED_NAME",
+  "ordinal": 2730,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 16
 }

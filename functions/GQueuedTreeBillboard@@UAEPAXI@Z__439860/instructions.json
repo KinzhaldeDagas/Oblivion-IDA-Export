@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x439860",
-    "line": "push    esi",
+    "line": "push    esi; QueuedTreeBillboard scalar deleting destructor.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x439863",
-    "line": "call    ??1QueuedTreeBillboard@@UAE@XZ; QueuedTreeBillboard::~QueuedTreeBillboard(void)",
+    "line": "call    ??1QueuedTreeBillboard@@UAE@XZ; QueuedTreeBillboard destructor: frees copied billboard context arrays at +0x30 through 0x4B9CF0, then releases QueuedTexture base resources.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x439870",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,30 @@
-WaterShaderHeightMap
+struct WaterShaderHeightMap
+{
+BSImageSpaceShaderVtbl *__vftable;
+BSImageSpaceShaderMembr super;
+float Unk090;
+float Unk094;
+float Unk098;
+float Unk09C;
+UInt32 Unk0A0;
+UInt32 Unk0A4;
+UInt32 Unk0A8;
+UInt32 Unk0AC;
+NiD3DVertexShader *Vertex;
+NiD3DPixelShader *Pixel[7];
+UInt32 CurrentPixelIndex;
+UInt32 Unk0D4;
+BSRenderedTexture *Unk0D8;
+BSRenderedTexture *Unk0DC;
+BSRenderedTexture *Unk0E0;
+BSRenderedTexture *Unk0E4;
+BSRenderedTexture *Unk0E8;
+BSRenderedTexture *Unk0EC;
+BSRenderedTexture *Unk0F0;
+BSRenderedTexture *Unk0F4;
+UInt32 Unk0F8;
+UInt32 Unk0FC;
+UInt32 Time;
+float fPassNum;
+UInt32 Unk108;
+};

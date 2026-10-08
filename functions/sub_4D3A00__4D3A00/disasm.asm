@@ -1,12 +1,12 @@
-0x4D3A00: sub     esp, 10h
-0x4D3A03: cmp     [esp+10h+arg_0], 0
+0x4D3A00: sub     esp, 10h; Verified Oblivion clone helper: scans the persistent cell's reference list, maps each reference position to a destination exterior cell, and adds the reference there. Probable structural analogue in Fallout is TESObjectCELL::AssignPersistentRefsToCellsInWorld, called from Fallout TESWorldSpace::CreateDuplicateForm; it does not correspond to Oblivion's SubSpace spatial index.
+0x4D3A03: cmp     [esp+10h+destinationWorldSpace], 0
 0x4D3A08: push    ebp
 0x4D3A09: mov     ebp, ecx
 0x4D3A0B: jz      loc_4D3B05
 0x4D3A11: test    dword ptr [ebp+8], 400h
 0x4D3A18: jz      loc_4D3B05
 0x4D3A1E: push    ebp; a2
-0x4D3A1F: mov     ecx, offset stru_B35C80; this
+0x4D3A1F: mov     ecx, offset unk_B35C80; this
 0x4D3A24: call    sub_496EA0
 0x4D3A29: lea     eax, [ebp+48h]
 0x4D3A2C: test    eax, eax
@@ -16,7 +16,6 @@
 0x4D3A39: push    esi
 0x4D3A3A: push    edi
 0x4D3A3B: jmp     short loc_4D3A40
-0x4D3A3D: align 10h
 0x4D3A40: mov     eax, [esp+20h+var_10]
 0x4D3A44: mov     esi, [eax]
 0x4D3A46: test    esi, esi
@@ -40,16 +39,16 @@
 0x4D3A82: fld     [esp+20h+var_4]
 0x4D3A86: fistp   [esp+20h+var_8]
 0x4D3A8A: mov     ebx, [esp+20h+var_8]
-0x4D3A8E: mov     ecx, [esp+20h+arg_0]; this
+0x4D3A8E: mov     ecx, [esp+20h+destinationWorldSpace]; this
 0x4D3A92: sar     ebx, 0Ch
-0x4D3A95: push    ebx; signed int
-0x4D3A96: push    edi; signed int
+0x4D3A95: push    ebx; cellY
+0x4D3A96: push    edi; cellX
 0x4D3A97: call    TESWorldSpace__GetCellAtCellCoord
 0x4D3A9C: test    eax, eax
 0x4D3A9E: jz      short loc_4D3AAA
-0x4D3AA0: push    esi; Concurrency::details::SchedulerBase *
-0x4D3AA1: mov     ecx, eax
-0x4D3AA3: call    sub_4D35D0
+0x4D3AA0: push    esi; reference
+0x4D3AA1: mov     ecx, eax; this
+0x4D3AA3: call    TESObjectCELL_AddReference; Verified: persistent-cell AddReference updates the WorldSpace coordinate/fallback persistent-reference index (+0x64) through TESWorldSpace_IndexReference. Ordinary cell additions do not index there. This routine does not populate the separate SubSpace spatial index at +0x60.
 0x4D3AA8: jmp     short loc_4D3AE4
 0x4D3AAA: mov     eax, [esi+0Ch]
 0x4D3AAD: mov     ecx, [ebp+0Ch]
@@ -81,7 +80,7 @@
 0x4D3AF8: pop     esi
 0x4D3AF9: pop     ebx
 0x4D3AFA: push    ebp; a2
-0x4D3AFB: mov     ecx, offset stru_B35C80; this
+0x4D3AFB: mov     ecx, offset unk_B35C80; this
 0x4D3B00: call    sub_496F50
 0x4D3B05: pop     ebp
 0x4D3B06: add     esp, 10h

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x504B00",
-    "line": "push    esi",
+    "line": "push    esi; Verified behavior: script-style wrapper extracts a target reference and optional linked-cell propagation argument, clears ExtraLockData locked bit 0x01 if effective lock data exists, marks the lock modified, optionally propagates unlocked=true to owner cells, marks the form active-file modified, and prints `Unlocked %s` in console mode. Exact command-table name remains Unknown.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x504B01",
-    "line": "mov     esi, [esp+4+arg_8]",
+    "line": "mov     esi, [esp+4+otherEndpoint]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x504B15",
-    "line": "lea     eax, [esp+4+arg_8]",
+    "line": "lea     eax, [esp+4+otherEndpoint]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x504B31",
-    "line": "mov     [esp+24h+arg_8], 0",
+    "line": "mov     [esp+24h+otherEndpoint], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x504B39",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x504B45",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x504B47",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x504B54",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x504B56",
-    "line": "call    sub_4D9070",
+    "line": "call    TESObjectREFR_MarkLockDataAsModified; Verified modified-state propagation: if this reference has lock data, calls TESFormVtbl::MarkAsModified with mask 0x40; otherwise, if its linked-door chain has lock data, marks that linked-door reference with the same mask.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x504B5B",
-    "line": "cmp     [esp+4+arg_8], 0",
+    "line": "cmp     [esp+4+otherEndpoint], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x504B64",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,25 +241,25 @@
   },
   {
     "ea": "0x504B6D",
-    "line": "push    1",
+    "line": "push    1; unlocked",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x504B6F",
-    "line": "push    esi",
+    "line": "push    esi; otherEndpoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x504B70",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; linkedDoorSlot",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x504B72",
-    "line": "call    sub_42B5F0",
+    "line": "call    TESObjectREFR_PropagateLockStateToLinkedDoorCells; Verified: Unlock script wrapper optionally propagates `unlocked=true` to the linked door and both owner cells when its extracted argument is positive.",
     "mnemonic": "call",
     "size": 5
   },

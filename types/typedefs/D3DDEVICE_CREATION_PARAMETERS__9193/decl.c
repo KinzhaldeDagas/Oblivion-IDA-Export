@@ -1,1 +1,7 @@
-_D3DDEVICE_CREATION_PARAMETERS
+struct _D3DDEVICE_CREATION_PARAMETERS
+{
+UINT AdapterOrdinal;
+D3DDEVTYPE DeviceType;
+HWND hFocusWindow;
+DWORD BehaviorFlags;
+};

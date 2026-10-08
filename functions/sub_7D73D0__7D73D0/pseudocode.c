@@ -1,16 +1,17 @@
-signed int __thiscall sub_7D73D0(_DWORD *this, signed int a2)
+// Shader-property vtable slot +0x7C: writes mode field +0xDC as 3 for argument 0 and 1 for arguments 1..3; returns the argument.
+int __thiscall OB_BSShaderProperty_SetDwordDCMode_010201A0(void *this, int mode)
 {
-  signed int result; // eax
+  int result; // eax
 
-  result = a2;
-  if ( a2 )
+  result = mode; /*0x7d73d0*/
+  if ( mode ) /*0x7d73d6*/
   {
-    if ( a2 > 0 && a2 <= 3 )
-      *(this + 0x37) = 1;
+    if ( mode > 0 && mode <= 3 ) /*0x7d73dd*/
+      *((_DWORD *)this + 0x37) = 1; /*0x7d73df*/
   }
   else
   {
-    *(this + 0x37) = 3;
+    *((_DWORD *)this + 0x37) = 3; /*0x7d73ec*/
   }
-  return result;
+  return result; /*0x7d73e9*/
 }

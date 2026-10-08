@@ -1,18 +1,31 @@
 {
-  "callees_count": 22,
-  "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 15,
+  "chunks": [
+    [
+      "0x612DE0",
+      "0x612EA0"
+    ]
+  ],
+  "chunks_sha256": "1990ab4db02053f6dd7eb2136485a93124752c5d617d75ba43fffd64363a6b10",
+  "comment_regular": "Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
+  "comment_repeatable": "Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 11,
-  "display_name": "sub_612DE0",
+  "display_name": "CombatController_SetCombatMode",
   "end_ea": "0x612EA0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_612DE0",
+  "name": "CombatController_SetCombatMode",
   "segment": ".text",
   "sha256": "1990ab4db02053f6dd7eb2136485a93124752c5d617d75ba43fffd64363a6b10",
   "size": 192,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x612DE0",
+  "total_chunk_size": 192,
   "type": "void __thiscall(int this, int)",
   "xrefs_from_count": 83,
   "xrefs_to_count": 15

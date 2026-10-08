@@ -1,4 +1,4 @@
-unsigned int *__userpurge TESContainer_RemoveNthEntry_::ContentLookupLoop@<eax>(
+void __userpurge TESContainer_RemoveNthEntry_::ContentLookupLoop(
         unsigned int *result@<eax>,
         unsigned int a2@<edx>,
         unsigned int a3@<ecx>,
@@ -7,29 +7,39 @@ unsigned int *__userpurge TESContainer_RemoveNthEntry_::ContentLookupLoop@<eax>(
   unsigned int *v4; // ecx
   unsigned int v5; // esi
 
-  while ( a3 < a2 )
+  while ( a3 < a2 ) /*0x469702*/
   {
-    result = (unsigned int *)result[1];
-    ++a3;
-    if ( !result )
-      return result;
+    result = (unsigned int *)result[1]; /*0x469704*/
+    ++a3; /*0x469707*/
+    if ( !result ) /*0x46970c*/
+      return; /*0x46970c*/
   }
-  if ( !result )
-    return (unsigned int *)TESContainer_RemoveNthEntry_::Done(a4);
-  v4 = (unsigned int *)result[1];
-  v5 = *result;
-  if ( v4 )
+  if ( result ) /*0x469713*/
   {
-    result[1] = v4[1];
-    *result = *v4;
-    FormHeapFree((unsigned int)v4);
+    v4 = (unsigned int *)result[1]; /*0x469715*/
+    v5 = *result; /*0x46971b*/
+    if ( v4 ) /*0x46971d*/
+    {
+      result[1] = v4[1]; /*0x469722*/
+      *result = *v4; /*0x469728*/
+      FormHeapFree((unsigned int)v4); /*0x46972a*/
+    }
+    else
+    {
+      *result = 0; /*0x469734*/
+    }
+    if ( v5 ) /*0x46973c*/
+    {
+      FormHeapFree(v5); /*0x46973f*/
+      TESContainer_RemoveNthEntry_::Done_(a4); /*0x469745*/
+    }
+    else
+    {
+      TESContainer_RemoveNthEntry_::Done_(a4); /*0x46973c*/
+    }
   }
   else
   {
-    *result = 0;
+    TESContainer_RemoveNthEntry_::Done(a4); /*0x469713*/
   }
-  if ( !v5 )
-    return (unsigned int *)TESContainer_RemoveNthEntry_::Done_(a4);
-  FormHeapFree(v5);
-  return (unsigned int *)TESContainer_RemoveNthEntry_::Done_(a4);
 }

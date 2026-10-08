@@ -75,3 +75,34 @@
 0x4691AA: pop     ebx
 0x4691AB: add     esp, 10h
 0x4691AE: retn
+0x9AE920: push    offset ??1TESModel@@UAE@XZ; void (__thiscall *)(void *)
+0x9AE925: push    2; int
+0x9AE927: push    18h; unsigned int
+0x9AE929: mov     eax, [ebp-10h]
+0x9AE92C: add     eax, 8
+0x9AE92F: push    eax; void *
+0x9AE930: call    $LN21
+0x9AE935: retn
+0x9AE936: push    offset ??1TESModel@@UAE@XZ; void (__thiscall *)(void *)
+0x9AE93B: push    2; int
+0x9AE93D: push    18h; unsigned int
+0x9AE93F: mov     eax, [ebp-10h]
+0x9AE942: add     eax, 38h ; '8'
+0x9AE945: push    eax; void *
+0x9AE946: call    $LN21
+0x9AE94B: retn
+0x9AE94C: push    offset j_TESTexture_destr; void (__thiscall *)(void *)
+0x9AE951: push    2; int
+0x9AE953: push    0Ch; unsigned int
+0x9AE955: mov     eax, [ebp-10h]
+0x9AE958: add     eax, 68h ; 'h'
+0x9AE95B: push    eax; void *
+0x9AE95C: call    $LN21
+0x9AE961: retn
+0x9AE962: mov     edx, [esp+arg_4]
+0x9AE966: lea     eax, [edx-14h]
+0x9AE969: mov     ecx, [edx-18h]
+0x9AE96C: xor     ecx, eax
+0x9AE96E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE973: mov     eax, offset stru_ADB0B8
+0x9AE978: jmp     ___CxxFrameHandler3

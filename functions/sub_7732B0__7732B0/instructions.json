@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7732B0",
-    "line": "push    ebx",
+    "line": "push    ebx; Oblivion draw-time texture-stage application: exactly eight tracked D3DTSS slots; no sampler LOD or texture-factor state.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7732B1",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+stage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x773318",
-    "line": "jl      short loc_7732C0",
+    "line": "jl      short loc_7732C0; Draw-time texture-stage group iterates exactly eight stage states: COLOROP/ARG1/ARG2, ALPHAOP/ARG1/ARG2, BUMPENVMAT00, TEXTURETRANSFORMFLAGS.",
     "mnemonic": "jl",
     "size": 2
   },

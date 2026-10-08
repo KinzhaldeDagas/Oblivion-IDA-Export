@@ -1,53 +1,54 @@
-char __cdecl sub_67F5D0(TESObjectREFR *a1)
+// Verified duplicate test: finds the two endpoint spaces from the door reference and linked door, looks up that pair in the nested map, and checks whether any AStarWorldNode in the list contains this reference at either endpoint. TESObjectREFR::AddToLowPathWorld skips construction/insertion when this returns true.
+bool __cdecl TravelPath_HasAStarWorldNodeForDoor(TESObjectREFR *doorReference)
 {
-  TESObjectCELL **v1; // edi
-  char v2; // bl
-  ExtraTeleport *TeleportExtraData; // eax
-  BSExtraData *p_super; // esi
-  int v5; // eax
-  _DWORD *v6; // ecx
+  TESObjectREFR *v1; // edi
+  bool v2; // bl
+  TeleportData *TeleportData; // eax
+  TeleportData *v4; // esi
+  TESForm *SpatialContainerAtPosition; // eax
+  LowPathWorldDoorLinkMap *doorLinkMap; // ecx
   TESObjectREFR *v7; // ebp
-  TESObjectCELL **v8; // eax
-  int v9; // eax
+  TESObjectREFR *LinkedDoor; // eax
+  TESForm *v9; // eax
   TESObjectREFR *v10; // esi
 
-  v1 = (TESObjectCELL **)a1;
-  v2 = 0;
-  if ( a1 )
+  v1 = doorReference; /*0x67f5d2*/
+  v2 = 0; /*0x67f5d6*/
+  if ( doorReference ) /*0x67f5da*/
   {
-    TeleportExtraData = GetTeleportExtraData(a1);
-    p_super = &TeleportExtraData->super;
-    if ( TeleportExtraData )
+    TeleportData = TESObjectREFR_GetTeleportData(doorReference); /*0x67f5e3*/
+    v4 = TeleportData; /*0x67f5e8*/
+    if ( TeleportData ) /*0x67f5ec*/
     {
-      if ( sub_42B410(&TeleportExtraData->super) )
+      if ( TeleportData_GetLinkedDoor(TeleportData) ) /*0x67f5f4*/
       {
-        sub_4D8AF0(v1);
-        if ( v5 )
+        SpatialContainerAtPosition = TESObjectREFR_GetSpatialContainerAtPosition(v1); /*0x67f603*/
+        if ( SpatialContainerAtPosition ) /*0x67f60a*/
         {
-          v6 = lowPathWorld_ptr;
-          a1 = 0;
-          if ( NiTMap_GetAt(v6, v5, &a1) )
+          doorLinkMap = MEMORY[0xB3BE00].doorLinkMap; /*0x67f611*/
+          doorReference = 0; /*0x67f618*/
+          if ( NiTMap_GetAt(doorLinkMap, (int)SpatialContainerAtPosition, &doorReference) ) /*0x67f61c*/
           {
-            v7 = a1;
-            if ( a1 )
+            v7 = doorReference; /*0x67f626*/
+            if ( doorReference ) /*0x67f62c*/
             {
-              v8 = (TESObjectCELL **)sub_42B410(p_super);
-              sub_4D8AF0(v8);
-              if ( v9 )
+              LinkedDoor = TeleportData_GetLinkedDoor(v4); /*0x67f630*/
+              v9 = TESObjectREFR_GetSpatialContainerAtPosition(LinkedDoor); /*0x67f637*/
+              if ( v9 ) /*0x67f63e*/
               {
-                a1 = 0;
-                if ( NiTMap_GetAt(v7, v9, &a1) )
+                doorReference = 0; /*0x67f648*/
+                if ( NiTMap_GetAt(v7, (int)v9, &doorReference) ) /*0x67f64c*/
                 {
-                  v10 = a1;
-                  if ( a1 )
+                  v10 = doorReference; /*0x67f655*/
+                  if ( doorReference ) /*0x67f65b*/
                   {
-                    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v10) )
+                    while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v10) ) /*0x67f669*/
                     {
-                      if ( sub_680410(&v10->vtbl->super.super.InitializeComponent, (int)v1) )
-                        return 1;
-                      v10 = *(TESObjectREFR **)&v10->member.super.type;
-                      if ( !v10 )
-                        return 0;
+                      if ( AStarWorldNode_ContainsReference((AStarWorldNode *)v10->vtbl, v1) ) /*0x67f66e*/
+                        return 1; /*0x67f685*/
+                      v10 = *(TESObjectREFR **)&v10->member.super.type; /*0x67f677*/
+                      if ( !v10 ) /*0x67f67c*/
+                        return 0; /*0x67f684*/
                     }
                   }
                 }
@@ -58,5 +59,5 @@ char __cdecl sub_67F5D0(TESObjectREFR *a1)
       }
     }
   }
-  return v2;
+  return v2; /*0x67f680*/
 }

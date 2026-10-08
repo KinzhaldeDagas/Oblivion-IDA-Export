@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x55C724",
-    "line": "mov     [esp+30h+var_18], ebx",
+    "line": "mov     [esp+30h+outVertices.data], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55C728",
-    "line": "mov     [esp+30h+var_14], ebx",
+    "line": "mov     [esp+30h+outVertices.stride], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55C72C",
-    "line": "mov     [esp+30h+var_10], bl",
+    "line": "mov     [esp+30h+outVertices.unknown08], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x55C736",
-    "line": "mov     ecx, [edi+0B4h]",
+    "line": "mov     ecx, [edi+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -175,13 +175,13 @@
   },
   {
     "ea": "0x55C744",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x55C746",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Returns false immediately for an already-locked stream. Otherwise records bool argument at +0x3D and sets locked byte +0x3C. Additional-data branch: true argument invokes sub_7261D0 at acquisition; false invokes sub_726190 and later sub_7261D0 on unlock. Do not infer operation semantics from old writeAccess label alone.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,31 +199,31 @@
   },
   {
     "ea": "0x55C74F",
-    "line": "mov     ecx, [edi+0B4h]",
+    "line": "mov     ecx, [edi+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x55C755",
-    "line": "lea     eax, [esp+30h+var_18]",
+    "line": "lea     eax, [esp+30h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x55C759",
-    "line": "push    eax",
+    "line": "push    eax; outVertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55C75A",
-    "line": "call    sub_728B60",
+    "line": "call    NiGeometryData_GetLockedVertexStream; Return the locked vertex pointer and stride. Additional geometry may provide an alternate writable stream that does not alias m_pkVertex; otherwise the function returns m_pkVertex with 12-byte stride.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x55C75F",
-    "line": "cmp     [esp+30h+var_18], ebx",
+    "line": "cmp     [esp+30h+outVertices.data], ebx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -402,14 +402,8 @@
     "size": 2
   },
   {
-    "ea": "0x55C7B8",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x55C7C0",
-    "line": "mov     eax, [esp+30h+var_14]",
+    "line": "mov     eax, [esp+30h+outVertices.stride]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +415,7 @@
   },
   {
     "ea": "0x55C7C7",
-    "line": "add     eax, [esp+30h+var_18]",
+    "line": "add     eax, [esp+30h+outVertices.data]",
     "mnemonic": "add",
     "size": 4
   },
@@ -541,7 +535,7 @@
   },
   {
     "ea": "0x55C7FC",
-    "line": "push    ecx; Size",
+    "line": "push    ecx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,19 +559,19 @@
   },
   {
     "ea": "0x55C806",
-    "line": "push    ebp; Src",
+    "line": "push    ebp; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55C807",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55C808",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,13 +589,13 @@
   },
   {
     "ea": "0x55C814",
-    "line": "mov     ecx, [edx+0B4h]",
+    "line": "mov     ecx, [edx+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x55C81A",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Corrected audit: if locked, checks additional-data virtual predicate +0x4C; calls sub_7261D0(additional,0) only when saved lock-mode byte +0x3D is ZERO, then clears locked byte +0x3C. Earlier description as committing a write lock was unsupported/opposite to this branch. Exact additional-data operation remains unresolved.",
     "mnemonic": "call",
     "size": 5
   },
@@ -688,5 +682,59 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BCAA0",
+    "line": "mov     ecx, [ebp-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCAA3",
+    "line": "jmp     NiExtraData_dtor",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCAA8",
+    "line": "mov     edx, [esp+Src]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BCAAC",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCAAF",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BCAB2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BCAB4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCAB9",
+    "line": "mov     eax, offset stru_AE663C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BCABE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

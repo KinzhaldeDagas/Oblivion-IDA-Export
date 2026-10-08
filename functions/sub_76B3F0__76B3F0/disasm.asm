@@ -1,4 +1,4 @@
-0x76B3F0: push    esi
+0x76B3F0: push    esi; Oblivion-authoritative lost-device state machine. TestCooperativeLevel: DEVICENOTRESET invokes full recreation and updates lostDevice; DEVICELOST transitions once into lost state and invokes lost-device callbacks; all other results are renderable.
 0x76B3F1: mov     esi, ecx
 0x76B3F3: mov     eax, [esi+280h]
 0x76B3F9: mov     ecx, [eax]
@@ -8,7 +8,7 @@
 0x76B401: cmp     eax, 88760869h
 0x76B406: jnz     short loc_76B41C
 0x76B408: mov     ecx, esi; this
-0x76B40A: call    sub_76A970
+0x76B40A: call    NiDX9Renderer_RecreateDevice; Oblivion-authoritative NiDX9 device reset transaction: releases light/index/vertex buffers and RT slots 1-3; invalidates screen RT groups, rendered textures/cubemaps/dynamic textures, shaders and geometry; runs pre-reset callbacks; Reset()s using the default RT group's saved D3DPRESENT_PARAMETERS; increments ResetCounter; rebuilds targets/textures/defaults/shaders/render state; then runs post-reset callbacks. Any failed phase returns false.
 0x76B40F: test    al, al
 0x76B411: setz    cl
 0x76B414: mov     [esi+6F0h], cl
@@ -45,7 +45,7 @@
 0x76B46D: pop     esi
 0x76B46E: retn
 0x76B46F: push    offset aNidx9render_25; "NiDX9Renderer::LostDeviceRestore> Lost "...
-0x76B474: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76B474: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76B479: add     esp, 4
 0x76B47C: pop     edi
 0x76B47D: pop     ebx

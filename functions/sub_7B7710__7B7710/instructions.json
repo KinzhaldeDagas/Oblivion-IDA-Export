@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7B7820",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7B7844",
-    "line": "mov     [esp+0B4h+var_7C], eax",
+    "line": "mov     [esp+0B4h+source], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -703,31 +703,31 @@
   },
   {
     "ea": "0x7B7889",
-    "line": "push    esi; Size",
+    "line": "push    esi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B788A",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B788B",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B788C",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7B7891",
-    "line": "mov     edx, [esp+0C8h+var_7C]",
+    "line": "mov     edx, [esp+0C8h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -739,25 +739,25 @@
   },
   {
     "ea": "0x7B7898",
-    "line": "push    esi; Size",
+    "line": "push    esi; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B7899",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B789A",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7B789B",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x7B797B",
-    "line": "push    offset dword_B3FD04",
+    "line": "push    offset stru_B3FD04",
     "mnemonic": "push",
     "size": 5
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x7B7A44",
-    "line": "mov     [esp+0C8h+var_7C], eax",
+    "line": "mov     [esp+0C8h+source], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3223,7 +3223,7 @@
   },
   {
     "ea": "0x7B7DCE",
-    "line": "mov     ecx, [esp+0B4h+var_7C]",
+    "line": "mov     ecx, [esp+0B4h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3673,7 +3673,7 @@
   },
   {
     "ea": "0x7B7EA4",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3691,7 +3691,7 @@
   },
   {
     "ea": "0x7B7EAD",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3727,7 +3727,7 @@
   },
   {
     "ea": "0x7B7EC4",
-    "line": "mov     ecx, [esp+0B4h+var_7C]",
+    "line": "mov     ecx, [esp+0B4h+source]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3763,7 +3763,7 @@
   },
   {
     "ea": "0x7B7ED7",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3832,5 +3832,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CDAB0",
+    "line": "mov     eax, [ebp+var_80]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CDAB3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDAB4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDAB9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDABA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CDABB",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CDABF",
+    "line": "lea     eax, [edx-0A4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDAC5",
+    "line": "mov     ecx, [edx-0A8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CDACB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CDACD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDAD2",
+    "line": "mov     eax, offset stru_AF6C90",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CDAD7",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

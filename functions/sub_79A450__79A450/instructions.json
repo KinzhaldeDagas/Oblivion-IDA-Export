@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79A450",
-    "line": "sub     esp, 40h",
+    "line": "sub     esp, 40h; SpeedTree decode: stock CFrondEngine::ComputeExtrusion. Builds a reduced zig-zag strip for one extrusion LOD using min length/cross segment fields and guide vertex counts. Stock 0x6C CFrondEngine has no bProhibitSegmentReduction field.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x79A46F",
-    "line": "mov     ecx, [esp+44h+arg_0]",
+    "line": "mov     ecx, [esp+44h+lodLevel]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79A473",
-    "line": "fild    [esp+44h+arg_0]",
+    "line": "fild    [esp+44h+lodLevel]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x79A515",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x79A5B0",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x79A61A",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x79A632",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,13 +967,13 @@
   },
   {
     "ea": "0x79A643",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79A645",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -997,13 +997,13 @@
   },
   {
     "ea": "0x79A651",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79A653",
-    "line": "call    sub_799EE0",
+    "line": "call    OB_stVector_SFrondVertex_Size_010201A0; Oblivion-authoritative size query for the SFrondVertex vector. Computes (end-begin)/0x38; returns zero when begin is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x79A7EA",
-    "line": "mov     edx, [esp+50h+arg_0]",
+    "line": "mov     edx, [esp+50h+lodLevel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1699,31 +1699,31 @@
   },
   {
     "ea": "0x79A7F2",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79A7F4",
-    "line": "push    ebp",
+    "line": "push    ebp; Full DWORD extrusion index count in EBP is pushed here. Native AddStrip reads only WORD; frond-specific replacement reads DWORD and splits before transfer. Verified2026-10-03.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A7F5",
-    "line": "push    ebx",
+    "line": "push    ebx; strip",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A7F6",
-    "line": "push    edx",
+    "line": "push    edx; lodLevel",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79A7F7",
-    "line": "call    sub_796100",
+    "line": "call    OB_CIndexedGeometry_AddStrip_010201A0; OBLIVION AUTHORITY (2026-08-30): CIndexedGeometry::AddStrip receives ownership of a caller FormHeap-allocated unsigned-short array (for example allocation at 0x78F477 before call 0x78F48C), appends its unsigned-short length and pointer to per-LOD nested vectors, then adds the 32-bit result of zero_extend(stripLength)-2 to the per-LOD triangle total. There is no clamp in this function; callers are expected to provide a valid strip length (at least two). RT4.1's later contiguous vector<int> representation is contrast only and was not projected onto Oblivion.",
     "mnemonic": "call",
     "size": 5
   },

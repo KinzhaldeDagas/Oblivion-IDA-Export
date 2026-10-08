@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
-  "callers_count": 17,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 20,
+  "chunks": [
+    [
+      "0x45C7A0",
+      "0x45C866"
+    ]
+  ],
+  "chunks_sha256": "fa173a1f58b0f1c3d1f6c07db45ce88689d1386073afa21845b90f5b3ca7b6b6",
+  "comment_regular": "Verified 2026-10-04: DeleteForm identity anchored by literal diagnostic and Oblivion behavior. Removes changes entry with force=true. Flag4000 forms or RTTI TESObjectCELL receive a fresh FormID; ordinary forms get FormID0, global-list removal, empty editor ID and deduplicated queue insertion at manager+30. NO immediate destructor/free in this ordinary branch. Probable Fallout homolog82600530. Unknown complete queue-drain timing.\nVerified continuation: ordinary deferred forms are ultimately destroyed by manager459870, which unlinks before destructor and orders TESBoundObject/SpellItem last. Queue insertion453910, removal453940 and load-completion call4668BA close ownership chain; prior queue-drain Unknown superseded for these anchors.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 4,
-  "display_name": "sub_45C7A0",
+  "display_name": "TESSaveLoadGame_DeleteForm",
   "end_ea": "0x45C866",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45C7A0",
+  "name": "TESSaveLoadGame_DeleteForm",
   "segment": ".text",
   "sha256": "fa173a1f58b0f1c3d1f6c07db45ce88689d1386073afa21845b90f5b3ca7b6b6",
   "size": 198,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x45C7A0",
-  "type": "void __thiscall(char *this, TESForm *)",
+  "total_chunk_size": 198,
+  "type": "void __thiscall(TESSaveLoadGame_SerializationView *self, TESForm *form)",
   "xrefs_from_count": 88,
   "xrefs_to_count": 20
 }

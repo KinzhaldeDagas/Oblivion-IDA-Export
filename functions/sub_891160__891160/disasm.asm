@@ -10,7 +10,7 @@
 0x89117F: push    edi
 0x891180: jz      loc_891218
 0x891186: push    eax
-0x891187: call    sub_89F6B0
+0x891187: call    sub_89F6B0; Looks up NiObject in proxy/collision metadata map, default key dword_B3FA80 when caller key is null, then NiRTTI_Cast to NiObject. Used by 0x8AFCE0 for root-collidable type 2 hits.
 0x89118C: test    eax, eax
 0x89118E: jz      loc_891218
 0x891194: mov     edx, [eax]
@@ -26,7 +26,7 @@
 0x8911AF: mov     ecx, [eax+0B0h]
 0x8911B5: mov     eax, [ecx]
 0x8911B7: push    eax
-0x8911B8: push    offset dword_B3FAB0
+0x8911B8: push    offset parent
 0x8911BD: call    NiRTTI_Cast
 0x8911C2: mov     ebx, eax
 0x8911C4: add     esp, 8
@@ -36,7 +36,6 @@
 0x8911D2: test    esi, esi
 0x8911D4: jz      short loc_891218
 0x8911D6: jmp     short loc_8911E0
-0x8911D8: align 10h
 0x8911E0: movzx   edx, word ptr [ebx+0B6h]
 0x8911E7: sub     esi, 1
 0x8911EA: cmp     edx, esi
@@ -49,8 +48,8 @@
 0x8911FE: test    eax, eax
 0x891200: jz      short loc_891214
 0x891202: push    offset aBhkcoldisp; "bhkColDisp"
-0x891207: push    eax; Str1
-0x891208: call    __strcmp
+0x891207: push    eax; left
+0x891208: call    CRT_StricmpLocaleDispatch
 0x89120D: add     esp, 8
 0x891210: test    eax, eax
 0x891212: jz      short loc_891229

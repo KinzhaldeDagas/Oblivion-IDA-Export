@@ -1,19 +1,36 @@
 {
-  "callees_count": 178,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 49,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 14,
-  "display_name": "sub_51B490",
+  "chunks": [
+    [
+      "0x51B490",
+      "0x51BE2B"
+    ],
+    [
+      "0x9B76C0",
+      "0x9B770A"
+    ]
+  ],
+  "chunks_sha256": "b9813a72e2b5e9b10c3524875e3f9781d0545518e887555232a3383a582ced1a",
+  "comment_regular": "Authoritative Oblivion KF-to-TESAnimGroup parser. Consumes a NiControllerSequence and model path, resolves the fixed 43-group table, encodes filename movement/weapon prefixes, parses required action notes plus m:/Blend:/Sound:/Enum:, builds the +0x24/+0x28 event array, validates required-note ordering, and returns the constructed TESAnimGroup. Native scheduling uses each KF's authored note times; it does not impose fixed Hit timestamps. External StarShooting contrast after this native decode: deployed AttackLeft/AttackRight files instantiate class 4 as Start, Hit, a:R/a:L, End; TES3 Shoot Follow Attach is motion-only and not an Oblivion scheduler phase. The current CAS manifest applies groups 17/18/20/21 by broad weapon-name substrings Star/Throwing/Dart (12 rules over 8 files), so unrelated names can match. Its lightweight package validator checks only first/last Start/End and would not catch missing class-4 Hit/a: notes; the older six-file import log is stale.",
+  "comment_repeatable": "Authoritative Oblivion KF-to-TESAnimGroup parser. Consumes a NiControllerSequence and model path, resolves the fixed 43-group table, encodes filename movement/weapon prefixes, parses required action notes plus m:/Blend:/Sound:/Enum:, builds the +0x24/+0x28 event array, validates required-note ordering, and returns the constructed TESAnimGroup. Native scheduling uses each KF's authored note times; it does not impose fixed Hit timestamps. External StarShooting contrast after this native decode: deployed AttackLeft/AttackRight files instantiate class 4 as Start, Hit, a:R/a:L, End; TES3 Shoot Follow Attach is motion-only and not an Oblivion scheduler phase. The current CAS manifest applies groups 17/18/20/21 by broad weapon-name substrings Star/Throwing/Dart (12 rules over 8 files), so unrelated names can match. Its lightweight package validator checks only first/last Start/End and would not catch missing class-4 Hit/a: notes; the older six-file import log is stale.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 15,
+  "display_name": "TESAnimGroup_ParseKFModel",
   "end_ea": "0x51BE2B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51B490",
+  "name": "TESAnimGroup_ParseKFModel",
   "segment": ".text",
   "sha256": "79dd6a331a0a2abfe16bf5149b40104a72ec13efd8fa5b3d7d6e7c2eb81da2bf",
   "size": 2459,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51B490",
-  "type": "int __cdecl(int, char *Str)",
-  "xrefs_from_count": 912,
+  "total_chunk_size": 2533,
+  "type": "TESAnimGroup *__cdecl(NiControllerSequence *sequence, char *modelPath)",
+  "xrefs_from_count": 936,
   "xrefs_to_count": 1
 }

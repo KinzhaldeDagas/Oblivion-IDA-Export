@@ -15,7 +15,7 @@
 0x6210F0: mov     eax, [eax]
 0x6210F2: push    eax
 0x6210F3: mov     ecx, esi
-0x6210F5: call    sub_6162D0
+0x6210F5: call    CombatController_RemoveTarget
 0x6210FA: mov     eax, [edi]
 0x6210FC: test    eax, eax
 0x6210FE: jnz     short loc_6210F0
@@ -28,7 +28,7 @@
 0x621112: push    0; char
 0x621114: push    ecx; int
 0x621115: mov     ecx, esi
-0x621117: call    sub_616190
+0x621117: call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x62111C: pop     edi
 0x62111D: cmp     dword ptr [esi+6Ch], 7
 0x621121: jnz     short loc_621149
@@ -51,7 +51,7 @@
 0x62114F: and     ebx, 5
 0x621152: add     ebx, 7
 0x621155: push    ebx
-0x621156: call    sub_612DE0
+0x621156: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x62115B: push    0
 0x62115D: mov     ecx, esi
 0x62115F: call    sub_619920

@@ -1,20 +1,20 @@
-0x68EE90: sub     esp, 14h
+0x68EE90: sub     esp, 14h; Verified active-effect list load lifecycle: destroys current effects and clears old list nodes, reads the UInt16 effect count (and optional BLOK header), loads each record through ActiveEffect_Base_Load, then inserts valid effects sorted by MagicTarget_ActiveEffectComparisonFunc. The loop also retains save-buffer boundary checks and handles the Vampirism-effect special case.
 0x68EE93: mov     ecx, ds:0B33B00h
 0x68EE99: push    ebx
 0x68EE9A: push    ebp
 0x68EE9B: push    esi
 0x68EE9C: xor     eax, eax
 0x68EE9E: push    edi
-0x68EE9F: mov     [esp+24h+var_10], eax
+0x68EE9F: mov     [esp+24h+destination], eax
 0x68EEA3: mov     [esp+24h+var_C], eax
-0x68EEA7: call    sub_45A170
+0x68EEA7: call    TESSaveLoadGame_UseSaveGameBlocks
 0x68EEAC: test    al, al
 0x68EEAE: jz      loc_68EF51
-0x68EEB4: mov     ecx, ds:0B33B00h
-0x68EEBA: push    4; Size
+0x68EEB4: mov     ecx, ds:0B33B00h; self
+0x68EEBA: push    4; byteCount
 0x68EEBC: lea     eax, [esp+28h+Dst]
-0x68EEC0: push    eax; Dst
-0x68EEC1: call    SaveLoad_LoadData
+0x68EEC0: push    eax; destination
+0x68EEC1: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x68EEC6: cmp     [esp+24h+Dst], 4B4F4C42h
 0x68EECE: jz      short loc_68EF38
 0x68EED0: mov     eax, ds:0B33B00h
@@ -23,7 +23,7 @@
 0x68EEDD: jz      short loc_68EF1C
 0x68EEDF: mov     ecx, [esi]
 0x68EEE1: push    ecx; a1
-0x68EEE2: call    TESForm_LookupByFormID
+0x68EEE2: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x68EEE7: mov     edx, [esi+5]
 0x68EEEA: movzx   ecx, byte ptr [esi+9]
 0x68EEEE: add     esp, 4
@@ -49,13 +49,13 @@
 0x68EF2B: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x68EF30: call    PrintError
 0x68EF35: add     esp, 10h
-0x68EF38: mov     ecx, ds:0B33B00h
+0x68EF38: mov     ecx, ds:0B33B00h; self
 0x68EF3E: mov     eax, [ecx+14h]
-0x68EF41: push    2; Size
-0x68EF43: lea     edx, [esp+28h+var_10]
-0x68EF47: push    edx; Dst
+0x68EF41: push    2; byteCount
+0x68EF43: lea     edx, [esp+28h+destination]
+0x68EF47: push    edx; destination
 0x68EF48: mov     [esp+2Ch+var_C], eax
-0x68EF4C: call    SaveLoad_LoadData
+0x68EF4C: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x68EF51: fldz
 0x68EF53: push    0; int
 0x68EF55: push    offset ??_R0?AVHUDMainMenu@@@8; struct TypeDescriptor *

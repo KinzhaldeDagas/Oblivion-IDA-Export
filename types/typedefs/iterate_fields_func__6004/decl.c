@@ -1,1 +1,1 @@
-iterate_fields_func
+typedef BOOL (*iterate_fields_func)(HINF, PCWSTR, void *);

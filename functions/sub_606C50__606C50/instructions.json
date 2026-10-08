@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x606C57",
-    "line": "call    sub_567E00",
+    "line": "call    TESPackage_SaveGame",
     "mnemonic": "call",
     "size": 5
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x606C69",
-    "line": "mov     [esp+20h+var_4], 0",
+    "line": "mov     [esp+20h+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x606C86",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x606C8F",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x606C95",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x606C9B",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x606CA9",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -145,19 +145,19 @@
   },
   {
     "ea": "0x606CB2",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x606CB4",
-    "line": "lea     eax, [esp+24h+var_4]",
+    "line": "lea     eax, [esp+24h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x606CB8",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x606CC2",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x606CC9",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x606CDA",
-    "line": "push    edx; Src",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x606CF7",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -289,13 +289,13 @@
   },
   {
     "ea": "0x606CFD",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x606CFE",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -319,25 +319,25 @@
   },
   {
     "ea": "0x606D12",
-    "line": "push    edi",
+    "line": "push    edi; crime",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x606D13",
-    "line": "push    edx",
+    "line": "push    edx; crimeType",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x606D14",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x606D19",
-    "line": "call    sub_675CC0",
+    "line": "call    ActorProcessManager_GetCrimeIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x606D21",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x606D27",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x606D28",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x606D6B",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x606DC7",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

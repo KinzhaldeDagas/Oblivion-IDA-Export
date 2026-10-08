@@ -1,4 +1,4 @@
-0x680790: mov     eax, [esp+arg_0]
+0x680790: mov     eax, [esp+space]; Verified endpoint filter: rejects references with deleted bit 0x20; disabled bit 0x800 is rejected unless the verified allow-disabled-doors policy is set. The independent CalcLowPathToPoint diagnostic names 0x800 '-Disabled'.
 0x680794: push    ebx
 0x680795: xor     bl, bl
 0x680797: test    eax, eax
@@ -17,7 +17,7 @@
 0x6807B5: shr     eax, 0Bh
 0x6807B8: test    al, 1
 0x6807BA: jz      short loc_6807C5
-0x6807BC: call    sub_67F0E0
+0x6807BC: call    TravelPath_GetAllowDisabledDoors; Verified: reads policy byte 2 at qword_B3BB2C[0xBA]. TravelPathSpaceDoorLink_IsEligibleInSpace permits references with the disabled bit (0x800) when this flag is true.
 0x6807C1: test    al, al
 0x6807C3: jz      short loc_6807DD
 0x6807C5: mov     ecx, [esi+8]

@@ -6,8 +6,8 @@
 0x439B9A: mov     dword ptr [eax+0Ch], 6
 0x439BA1: mov     eax, [esp+4+arg_0]
 0x439BA5: push    eax
-0x439BA6: call    sub_4392E0
-0x439BAB: mov     ecx, ModelLoaderPtr
+0x439BA6: call    QueuedTreeModel_ReleaseBuildResources
+0x439BAB: mov     ecx, ds:0B33A1Ch
 0x439BB1: mov     ecx, [ecx+8]
 0x439BB4: mov     eax, [esi+20h]
 0x439BB7: mov     edx, [ecx]

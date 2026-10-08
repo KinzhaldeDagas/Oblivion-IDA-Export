@@ -7,8 +7,8 @@
 0x4BFDCE: call    TESObjectCELL_GetWorldSpace
 0x4BFDD3: test    eax, eax
 0x4BFDD5: jz      short loc_4BFDED
-0x4BFDD7: mov     ecx, eax
-0x4BFDD9: call    TESWorldSpace_GetParentWorldpsace
+0x4BFDD7: mov     ecx, eax; this
+0x4BFDD9: call    Shared_GetPointerAtOffset7C; Shared four-byte accessor returning *(this+0x7C). Verified contexts include TESWorldSpace::parentWorldspace and ArrowProjectile::arrowEnch; class-specific naming is unsafe.
 0x4BFDDE: test    eax, eax
 0x4BFDE0: jz      short loc_4BFDED
 0x4BFDE2: or      dword ptr [esi+1Ch], 400h

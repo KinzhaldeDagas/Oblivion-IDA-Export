@@ -1,4 +1,4 @@
-0x7F4FA0: push    0FFFFFFFFh
+0x7F4FA0: push    0FFFFFFFFh; MoonSugarEffect decode: NightEye constant setup maps pixel constant spellinput to flt_B46914.
 0x7F4FA2: push    offset SEH_803C90
 0x7F4FA7: mov     eax, large fs:0
 0x7F4FAD: push    eax
@@ -50,7 +50,7 @@
 0x7F5038: mov     eax, [ecx]
 0x7F503A: mov     edx, [eax+18h]
 0x7F503D: push    0
-0x7F503F: push    offset flt_B46914
+0x7F503F: push    offset unk_B46914
 0x7F5044: push    4
 0x7F5046: push    10h
 0x7F5048: push    offset EmptyString
@@ -121,3 +121,20 @@
 0x7F5114: pop     esi
 0x7F5115: add     esp, 10h
 0x7F5118: retn    4
+0x9D00B0: mov     eax, [ebp-10h]
+0x9D00B3: push    eax
+0x9D00B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00B9: pop     ecx
+0x9D00BA: retn
+0x9D00BB: mov     eax, [ebp-10h]
+0x9D00BE: push    eax
+0x9D00BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D00C4: pop     ecx
+0x9D00C5: retn
+0x9D00C6: mov     edx, [esp+arg_4]
+0x9D00CA: lea     eax, [edx-0Ch]
+0x9D00CD: mov     ecx, [edx-10h]
+0x9D00D0: xor     ecx, eax
+0x9D00D2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D00D7: mov     eax, offset stru_AF8B40
+0x9D00DC: jmp     ___CxxFrameHandler3

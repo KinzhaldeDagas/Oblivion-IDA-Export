@@ -13,9 +13,9 @@
 0x404101: mov     eax, [ebx+4]
 0x404104: mov     ecx, [esi]
 0x404106: mov     ecx, [ecx+4]
-0x404109: push    eax; Str2
-0x40410A: push    ecx; Str1
-0x40410B: call    __strcmp
+0x404109: push    eax; right
+0x40410A: push    ecx; left
+0x40410B: call    CRT_StricmpLocaleDispatch
 0x404110: add     esp, 8
 0x404113: test    eax, eax
 0x404115: jz      short loc_40412C

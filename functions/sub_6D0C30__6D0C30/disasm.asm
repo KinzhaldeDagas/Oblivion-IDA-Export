@@ -1,4 +1,4 @@
-0x6D0C30: sub     esp, 0Ch
+0x6D0C30: sub     esp, 0Ch; Builds the output vertex buffer from current morphWeights. Clears the target buffer unless leaveTargetBaseIntact (+0x59) is set, then accumulates each enabled morph target's vertex deltas.
 0x6D0C33: push    ebp
 0x6D0C34: push    esi
 0x6D0C35: mov     esi, ecx

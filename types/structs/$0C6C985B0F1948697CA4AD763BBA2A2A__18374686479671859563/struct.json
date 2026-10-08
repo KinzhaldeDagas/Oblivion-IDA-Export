@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$0C6C985B0F1948697CA4AD763BBA2A2A",
+  "definition": "struct $0C6C985B0F1948697CA4AD763BBA2A2A\n{\nirp_type type;\nunsigned int key;\ndata_size_t out_size;\nint __pad;\nclient_ptr_t file;\nfile_pos_t pos;\n}\n",
   "id": 18374686479671859563,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "irp_type"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "key",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "out_size",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "data_size_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__pad",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "file",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 8
+      "size": 8,
+      "type": "client_ptr_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pos",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "file_pos_t"
     }
   ],
   "name": "$0C6C985B0F1948697CA4AD763BBA2A2A",
+  "ordinal": 6679,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

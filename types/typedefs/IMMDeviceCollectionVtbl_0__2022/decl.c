@@ -1,1 +1,1 @@
-IMMDeviceCollectionVtbl_0
+typedef IMMDeviceCollectionVtbl IMMDeviceCollectionVtbl_0;

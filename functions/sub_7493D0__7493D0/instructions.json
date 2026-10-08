@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7493E6",
-    "line": "mov     al, [eax+1B0h]",
+    "line": "mov     al, [eax+1B0h]; 3DTheft decode 2026-05-16: NiPSys path only submits a NiPSysUpdateTask when manager byte +0x1B0 is set and the current thread matches dword_B40820.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x74942B",
-    "line": "mov     ecx, ds:0B3F940h",
+    "line": "mov     ecx, ds:0B3F940h; 3DTheft decode 2026-05-16: NiPSysUpdateTask is submitted through g_NiParallelUpdateTaskManager vfunc +0x4C with mode 3; on failure cleanup vfunc +0x54 runs.",
     "mnemonic": "mov",
     "size": 6
   },

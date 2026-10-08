@@ -1,19 +1,32 @@
 {
-  "callees_count": 24,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4F1240",
+      "0x4F13C9"
+    ]
+  ],
+  "chunks_sha256": "250dc09a61dc86b35b427b6ba824962448f66d47740f9ae81da9c96f4623dbdc",
+  "comment_regular": "Verified: the special TESFormVtbl +0x38 CreateDuplicateForm override clones worldspace cells and persistentCell but does not build +0x60. Full plugin/game loading later reconstructs +0x60 via TESDataHandler_LoadFiles; Candidate concern is only for queries made after duplication and before any full-load reconstruction. Whether that interval occurs in live callers is Unknown.",
+  "comment_repeatable": "Verified: the special TESFormVtbl +0x38 CreateDuplicateForm override clones worldspace cells and persistentCell but does not build +0x60. Full plugin/game loading later reconstructs +0x60 via TESDataHandler_LoadFiles; Candidate concern is only for queries made after duplication and before any full-load reconstruction. Whether that interval occurs in live callers is Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 8,
   "display_name": "TESWorldSpace::CreateDuplicateForm",
   "end_ea": "0x4F13C9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESWorldSpace::CreateDuplicateForm",
   "segment": ".text",
   "sha256": "250dc09a61dc86b35b427b6ba824962448f66d47740f9ae81da9c96f4623dbdc",
   "size": 393,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4F1240",
-  "type": "int __thiscall(TESWorldSpace *this, int a2, void *cloneMap)",
+  "total_chunk_size": 393,
+  "type": "TESForm *__thiscall(TESWorldSpace *this, int duplicateMode, void *cloneMap)",
   "xrefs_from_count": 175,
   "xrefs_to_count": 1
 }

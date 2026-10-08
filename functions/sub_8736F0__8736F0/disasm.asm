@@ -30,7 +30,7 @@
 0x873744: mov     ecx, esi
 0x873746: call    edx
 0x873748: mov     eax, [edi+24h]
-0x87374B: mov     ecx, [esp+20h+arg_C]
+0x87374B: mov     ecx, [esp+20h+value]
 0x87374F: mov     ebx, [eax]
 0x873751: mov     edx, [ecx]
 0x873753: mov     eax, [edx+88h]
@@ -63,7 +63,7 @@
 0x873798: push    ebp; lpAddend
 0x873799: call    dword ptr ds:0A28078h
 0x87379F: mov     edx, [edi+24h]
-0x8737A2: mov     eax, [esp+20h+arg_C]
+0x8737A2: mov     eax, [esp+20h+value]
 0x8737A6: mov     ebx, [edx+4]
 0x8737A9: push    0
 0x8737AB: push    eax
@@ -101,7 +101,7 @@
 0x873800: mov     ebx, [ebp+4]
 0x873803: cmp     ebx, eax
 0x873805: mov     ecx, eax
-0x873807: mov     [esp+20h+arg_C], ecx
+0x873807: mov     [esp+20h+value], ecx
 0x87380B: jz      short loc_873842
 0x87380D: test    ebx, ebx
 0x87380F: jz      short loc_873831
@@ -117,7 +117,7 @@
 0x873827: push    1
 0x873829: mov     ecx, ebx
 0x87382B: call    eax
-0x87382D: mov     ecx, [esp+20h+arg_C]
+0x87382D: mov     ecx, [esp+20h+value]
 0x873831: test    ecx, ecx
 0x873833: mov     [ebp+4], ecx
 0x873836: jz      short loc_873842
@@ -126,21 +126,21 @@
 0x87383C: call    dword ptr ds:0A28078h
 0x873842: mov     ebx, 1
 0x873847: add     [edi+60h], ebx
-0x87384A: mov     [esp+20h+arg_C], edi
-0x87384E: mov     edx, [esi+38h]
-0x873851: lea     ecx, [esp+20h+arg_C]
-0x873855: push    ecx
-0x873856: push    edx
-0x873857: lea     ecx, [esi+40h]
+0x87384A: mov     [esp+20h+value], edi
+0x87384E: mov     edx, [esi+38h]; MoonSugarEffect decode: Parallax pass-0 append. edx = shader+0x38 PassCount; ecx later becomes shader+0x40 Passes base; pass pointer is dword_B47620[0].
+0x873851: lea     ecx, [esp+20h+value]
+0x873855: push    ecx; value
+0x873856: push    edx; index
+0x873857: lea     ecx, [esi+40h]; this
 0x87385A: mov     [esp+28h+var_4], 0
-0x873862: call    sub_76CE40
+0x873862: call    NiTArray_NiD3DPass_SetAt; MoonSugarEffect decode: sub_76CE40(&shader->Passes, shader->PassCount, &dword_B47620[0]) stores the selected global pass in the shader pass array with refcount ownership.
 0x873867: or      eax, 0FFFFFFFFh
 0x87386A: add     [edi+60h], eax
 0x87386D: mov     [esp+20h+var_4], eax
 0x873871: jnz     short loc_87387A
 0x873873: mov     ecx, edi
-0x873875: call    sub_7604D0
-0x87387A: add     [esi+38h], ebx
+0x873875: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
+0x87387A: add     [esi+38h], ebx; MoonSugarEffect decode: increments shader+0x38 PassCount after appending dword_B47620[0]. vtable +0x48 will later copy Passes.data[0] into CurrentPass.
 0x87387D: mov     ecx, [esp+20h+var_C]
 0x873881: mov     large fs:0, ecx
 0x873888: pop     ecx
@@ -150,3 +150,12 @@
 0x87388C: pop     ebx
 0x87388D: add     esp, 0Ch
 0x873890: retn    10h
+0x9D3390: lea     ecx, [ebp+10h]; void *
+0x9D3393: jmp     sub_4027D0
+0x9D3398: mov     edx, [esp+arg_4]
+0x9D339C: lea     eax, [edx-10h]
+0x9D339F: mov     ecx, [edx-14h]
+0x9D33A2: xor     ecx, eax
+0x9D33A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D33A9: mov     eax, offset stru_AFB7C0
+0x9D33AE: jmp     ___CxxFrameHandler3

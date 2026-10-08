@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x60CF80",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x60CFBF",
-    "line": "call    EvaluatePackage",
+    "line": "call    EvaluatePackage; Actor::EvaluatePackage. After current package changes, resets/evaluates actor AI state through sub_5EAE70 and process callbacks; plugin calls this after assigning runtime packages.",
     "mnemonic": "call",
     "size": 5
   },

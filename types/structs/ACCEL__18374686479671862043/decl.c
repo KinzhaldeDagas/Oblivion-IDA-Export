@@ -1,1 +1,1 @@
-ACCEL
+typedef tagACCEL ACCEL;

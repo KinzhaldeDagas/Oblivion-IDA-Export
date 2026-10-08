@@ -44,7 +44,7 @@
 0x5BDEFD: call    edx
 0x5BDEFF: call    sub_5BD9F0
 0x5BDF04: push    0
-0x5BDF06: call    sub_5AEA60
+0x5BDF06: call    LoadgameMenu_Open; CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.
 0x5BDF0B: add     esp, 4
 0x5BDF0E: pop     esi
 0x5BDF0F: retn    8
@@ -58,7 +58,7 @@
 0x5BDF23: mov     ecx, esi
 0x5BDF25: call    edx
 0x5BDF27: call    sub_5BD9F0
-0x5BDF2C: call    sub_5D39A0
+0x5BDF2C: call    SaveMenu_Open
 0x5BDF31: pop     esi
 0x5BDF32: retn    8
 0x5BDF35: cmp     eax, 7

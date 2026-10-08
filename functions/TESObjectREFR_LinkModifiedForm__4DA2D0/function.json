@@ -1,18 +1,31 @@
 {
-  "callees_count": 23,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4DA2D0",
+      "0x4DA3DB"
+    ]
+  ],
+  "chunks_sha256": "d864fdec73afc06a6fb2634de7a98438d69770acf7b82b0ea1c19577edec2757",
+  "comment_regular": "Verified enable-state linking: reads ExtraEnableStateParent's bit 0x800, applies inverse mode when configured, and propagates the resulting disabled state to the reference through TESForm_SetDisabledFlag. It removes 3D when either disabled bit 0x800 or deleted bit 0x20 is set.",
+  "comment_repeatable": "Verified enable-state linking: reads ExtraEnableStateParent's bit 0x800, applies inverse mode when configured, and propagates the resulting disabled state to the reference through TESForm_SetDisabledFlag. It removes 3D when either disabled bit 0x800 or deleted bit 0x20 is set.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESObjectREFR_LinkModifiedForm",
   "end_ea": "0x4DA3DB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_LinkModifiedForm",
   "segment": ".text",
   "sha256": "d864fdec73afc06a6fb2634de7a98438d69770acf7b82b0ea1c19577edec2757",
   "size": 267,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DA2D0",
+  "total_chunk_size": 267,
   "type": "void __thiscall(TESObjectREFR *this, int, int)",
   "xrefs_from_count": 122,
   "xrefs_to_count": 2

@@ -8,7 +8,6 @@
 0x7AA4DF: push    edi
 0x7AA4E0: lea     esi, [ebx+222Ch]
 0x7AA4E6: jmp     short loc_7AA4F0
-0x7AA4E8: align 10h
 0x7AA4F0: mov     eax, [ebx+2230h]
 0x7AA4F6: mov     edi, [eax+8]
 0x7AA4F9: cmp     edi, ebp
@@ -22,7 +21,7 @@
 0x7AA50A: call    edx
 0x7AA50C: mov     [edi+14h], ebp
 0x7AA50F: push    edi
-0x7AA510: call    FormHeapFree
+0x7AA510: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7AA515: add     esp, 4
 0x7AA518: mov     ecx, [esi+4]
 0x7AA51B: mov     eax, [ecx]

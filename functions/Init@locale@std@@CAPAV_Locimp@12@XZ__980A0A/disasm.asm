@@ -44,3 +44,16 @@
 0x980A9C: mov     eax, esi
 0x980A9E: call    __EH_epilog3
 0x980AA3: retn
+0x9D7CAD: lea     ecx, [ebp+var_10]; this
+0x9D7CB0: jmp     ??1_Lockit@std@@QAE@XZ
+0x9D7CB5: push    [ebp+var_14]
+0x9D7CB8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D7CBD: pop     ecx
+0x9D7CBE: retn
+0x9D7CBF: mov     edx, [esp-4+arg_4]
+0x9D7CC3: lea     eax, [edx+0Ch]
+0x9D7CC6: mov     ecx, [edx-18h]
+0x9D7CC9: xor     ecx, eax
+0x9D7CCB: call    @__security_check_cookie@4
+0x9D7CD0: mov     eax, offset stru_AFF81C
+0x9D7CD5: jmp     ___CxxFrameHandler3

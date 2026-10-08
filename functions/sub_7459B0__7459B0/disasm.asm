@@ -30,7 +30,6 @@
 0x745A03: shl     ebp, 4
 0x745A06: add     eax, ebp
 0x745A08: jmp     short loc_745A10
-0x745A0A: align 10h
 0x745A10: movzx   ebp, byte ptr [esi]
 0x745A13: add     ecx, ebp
 0x745A15: movzx   ebp, byte ptr [esi+1]

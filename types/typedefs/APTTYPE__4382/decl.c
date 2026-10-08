@@ -1,1 +1,1 @@
-_APTTYPE
+typedef APTTYPE _APTTYPE;

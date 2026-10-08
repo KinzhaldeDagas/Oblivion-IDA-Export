@@ -24,7 +24,7 @@
 0x8D41D2: lea     ecx, [esi+70h]
 0x8D41D5: push    ecx
 0x8D41D6: mov     ecx, esi
-0x8D41D8: call    sub_8B1DD0
+0x8D41D8: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8D41DD: movaps  xmm0, xmmword ptr [esi+80h]
 0x8D41E4: movaps  xmm2, xmmword ptr [esi+20h]
 0x8D41E8: movaps  xmm3, xmmword ptr [esi+10h]

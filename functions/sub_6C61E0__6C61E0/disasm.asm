@@ -1,4 +1,4 @@
-0x6C61E0: push    ebx
+0x6C61E0: push    ebx;
 0x6C61E1: push    esi
 0x6C61E2: mov     ebx, ecx
 0x6C61E4: mov     esi, [ebx+34h]

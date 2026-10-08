@@ -1,82 +1,77 @@
 void __thiscall sub_5AF200(int this)
 {
+  int v2; // eax
   int v3; // eax
-  int v4; // eax
-  int SkillMasteryLevel; // eax
-  int v6; // ebx
-  int v7; // eax
-  int v8; // ebp
-  int v9; // esi
-  int *v10; // ecx
-  double v11; // st7
-  int v12; // [esp+0h] [ebp-Ch]
-  int v13; // [esp+4h] [ebp-8h]
-  int v14; // [esp+8h] [ebp-4h]
+  SkillMasteryLevel SkillMasteryLevel; // eax
+  int v5; // ebx
+  int v6; // ebp
+  int v7; // esi
+  UInt32 *v8; // ecx
+  double v9; // st7
 
-  v3 = *(_DWORD *)(this + 0x160);
-  *(float *)(this + 0x158) = 0.0;
-  *(float *)(this + 0x14C) = 0.0;
-  v4 = this + 0x28 * v3;
-  *(_DWORD *)(this + 0x150) = 4;
-  if ( !*(_BYTE *)(v4 + 0x95) )
-    *(float *)(v4 + 0x90) = -*(float *)(this + 0x6C);
-  SkillMasteryLevel = Actor_GetSkillMasteryLevel(0x1E);
+  v2 = *(_DWORD *)(this + 0x160); /*0x5af207*/
+  *(float *)(this + 0x158) = 0.0; /*0x5af20d*/
+  *(float *)(this + 0x14C) = 0.0; /*0x5af216*/
+  v3 = this + 0x28 * v2; /*0x5af21c*/
+  *(_DWORD *)(this + 0x150) = 4; /*0x5af21f*/
+  if ( !*(_BYTE *)(v3 + 0x95) ) /*0x5af229*/
+    *(float *)(v3 + 0x90) = -*(float *)(this + 0x6C); /*0x5af237*/
+  SkillMasteryLevel = Actor_GetSkillMasteryLevel((Actor *)reference, kSkillAV_Security); /*0x5af245*/
   if ( SkillMasteryLevel )
   {
     switch ( SkillMasteryLevel )
     {
-      case 1:
-        v6 = 1;
+      case kSkillMastery_Apprentice:
+        v5 = 1; /*0x5af257*/
         break;
-      case 2:
-        v6 = 2;
+      case kSkillMastery_Journeyman:
+        v5 = 2; /*0x5af260*/
         break;
-      case 3:
-        v6 = 3;
+      case kSkillMastery_Expert:
+        v5 = 3; /*0x5af269*/
         break;
       default:
-        v6 = SkillMasteryLevel != 4 ? 0 : 4;
+        v5 = SkillMasteryLevel != kSkillMastery_Master ? 0 : 4;
         break;
     }
   }
   else
   {
-    v6 = 0;
+    v5 = 0; /*0x5af24e*/
   }
-  TESObjectREF_GetItemCount((TESObjectREFR *)TESDataHandler_g_PlayerRef, TESDataHandler_g_SkeletonKey, v12, v13, v14);
-  if ( v7 )
-    ++v6;
-  v8 = 0;
-  if ( *(int *)(this + 0x4C) > 0 )
+  if ( TESObjectREFR_GetItemCount((TESObjectREFR *)reference, (TESForm *)MEMORY[0xB35ECC]) ) /*0x5af288*/
+    ++v5; /*0x5af291*/
+  v6 = 0; /*0x5af294*/
+  if ( *(int *)(this + 0x4C) > 0 ) /*0x5af299*/
   {
-    v9 = this + 0x95;
-    do
+    v7 = this + 0x95; /*0x5af29c*/
+    do /*0x5af2ed*/
     {
-      if ( *(_BYTE *)v9 )
+      if ( *(_BYTE *)v7 ) /*0x5af2a2*/
       {
-        if ( v6 > 0 )
+        if ( v5 > 0 ) /*0x5af2a9*/
         {
-          --v6;
+          --v5; /*0x5af2e1*/
         }
         else
         {
-          v10 = *(int **)(v9 + 0xB);
-          *(_BYTE *)v9 = 0;
-          *(_BYTE *)(v9 - 1) = 1;
-          *(_BYTE *)(v9 + 1) = 1;
-          v11 = -*(float *)(this + 0x6C);
-          *(_DWORD *)(v9 - 0x15) = 0xFFFFFFFF;
-          *(float *)(v9 - 5) = v11;
-          if ( v10 )
+          v8 = *(UInt32 **)(v7 + 0xB); /*0x5af2ab*/
+          *(_BYTE *)v7 = 0; /*0x5af2b0*/
+          *(_BYTE *)(v7 - 1) = 1; /*0x5af2b3*/
+          *(_BYTE *)(v7 + 1) = 1; /*0x5af2b7*/
+          v9 = -*(float *)(this + 0x6C); /*0x5af2be*/
+          *(_DWORD *)(v7 - 0x15) = 0xFFFFFFFF; /*0x5af2c0*/
+          *(float *)(v7 - 5) = v9; /*0x5af2c7*/
+          if ( v8 ) /*0x5af2ca*/
           {
-            if ( !sub_6B7260(v10) )
-              sub_6B7190(*(int **)(v9 + 0xB), 1);
+            if ( !SoundHandle::IsPlaying(v8) ) /*0x5af2cc*/
+              sub_6B7190(*(int **)(v7 + 0xB), 1); /*0x5af2da*/
           }
         }
       }
-      ++v8;
-      v9 += 0x28;
+      ++v6; /*0x5af2e4*/
+      v7 += 0x28; /*0x5af2e7*/
     }
-    while ( v8 < *(_DWORD *)(this + 0x4C) );
+    while ( v6 < *(_DWORD *)(this + 0x4C) ); /*0x5af2ed*/
   }
 }

@@ -1,88 +1,144 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "new_process_request",
+  "definition": "struct new_process_request\n{\nrequest_header __header;\nobj_handle_t token;\nobj_handle_t debug;\nobj_handle_t parent_process;\nunsigned int flags;\nint socket_fd;\nunsigned int access;\nunsigned __int16 machine;\nchar __pad_38[2];\ndata_size_t info_size;\ndata_size_t handles_size;\ndata_size_t jobs_size;\nchar __pad_52[4];\n}\n",
   "id": 18374686479671856465,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__header",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "request_header"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "token",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "obj_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "debug",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "obj_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "parent_process",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "obj_handle_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "socket_fd",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "access",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "unsigned int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "machine",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 2
+      "size": 2,
+      "type": "unsigned __int16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__pad_38",
       "offset": 38,
       "offset_hex": "0x26",
-      "size": 2
+      "size": 2,
+      "type": "char[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "info_size",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "data_size_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "handles_size",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "data_size_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "jobs_size",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "data_size_t"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "__pad_52",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "char[4]"
     }
   ],
   "name": "new_process_request",
+  "ordinal": 6686,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 56
 }

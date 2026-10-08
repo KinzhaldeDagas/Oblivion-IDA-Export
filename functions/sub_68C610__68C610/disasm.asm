@@ -10,10 +10,10 @@
 0x68C629: test    esi, esi
 0x68C62B: jz      loc_68C6CB
 0x68C631: mov     ecx, edi
-0x68C633: call    sub_6899C0
-0x68C638: push    eax
-0x68C639: mov     ecx, esi
-0x68C63B: call    sub_4D7E30
+0x68C633: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
+0x68C638: push    eax; pointXYZ
+0x68C639: mov     ecx, esi; this
+0x68C63B: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x68C640: fadd    qword ptr ds:0A2FC68h
 0x68C646: mov     ecx, edi
 0x68C648: fstp    [esp+18h+var_10]
@@ -22,10 +22,10 @@
 0x68C653: test    esi, esi
 0x68C655: jz      short loc_68C6CB
 0x68C657: mov     ecx, edi
-0x68C659: call    sub_6899C0
+0x68C659: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68C65E: mov     ecx, esi
 0x68C660: mov     edi, eax
-0x68C662: call    sub_6899C0
+0x68C662: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x68C667: fld     dword ptr [eax]
 0x68C669: fsub    dword ptr [edi]
 0x68C66B: fstp    [esp+18h+var_C]

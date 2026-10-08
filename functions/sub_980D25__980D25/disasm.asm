@@ -2,10 +2,10 @@
 0x980D2B: push    esi
 0x980D2C: mov     eax, ecx
 0x980D2E: mov     ecx, ds:0BA9C10h
-0x980D34: mov     esi, offset dword_BA9C10
+0x980D34: mov     esi, (offset byte_BA9BB4+5Ch)
 0x980D39: mov     ds:0BA9C54h, esi
 0x980D3F: mov     ecx, [ecx+4]
-0x980D42: mov     ds:dword_BA9C3C[ecx], edx
+0x980D42: mov     dword ptr ds:(byte_BA9BB4+88h)[ecx], edx
 0x980D48: mov     ecx, ds:0BA9C10h
 0x980D4E: mov     edx, [ecx+4]
 0x980D51: add     edx, esi

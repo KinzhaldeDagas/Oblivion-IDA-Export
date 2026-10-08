@@ -1,322 +1,495 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESFormVtbl",
+  "definition": "struct TESFormVtbl\n{\nBaseFormComponentVtbl super;\nvoid (__thiscall *Destroy)(TESForm *this, bool Dealloc);\nvoid (__thiscall *Unk_05)(TESForm *this);\nvoid (__thiscall *Unk_06)(TESForm *this);\nbool (__thiscall *LoadForm)(TESForm *this, void *modEntry);\nvoid (__thiscall *Unk_08)(TESForm *this);\nvoid (__thiscall *Unk_09)(TESForm *this);\nvoid (__thiscall *Unk_0A)(TESForm *this);\nvoid (__thiscall *Unk_0B)(TESForm *this);\nvoid (__thiscall *Unk_0C)(TESForm *this);\nvoid (__thiscall *Unk_0D)(TESForm *this);\nvoid (__thiscall *Unk_0E)(TESForm *this);\nvoid (__thiscall *Unk_0F)(TESForm *this);\nvoid (__thiscall *MarkAsModified)(TESForm *this, UInt32 mask);\nvoid (__thiscall *ClearModified)(TESForm *this, UInt32 mask);\nvoid (__thiscall *Unk_12)(TESForm *this);\nUInt32 (__thiscall *GetSaveSize)(TESForm *this, UInt32 modifiedMask);\nvoid (__thiscall *SaveGame)(TESForm *this, UInt32 modifiedMask);\nvoid (__thiscall *LoadGame)(TESForm *this, UInt32 modifiedMask, UInt32 unk);\nvoid (__thiscall *Unk_16)(TESForm *this);\nvoid (__thiscall *Unk_17)(TESForm *this);\nvoid (__thiscall *Unk_18)(TESForm *this);\nvoid (__thiscall *Unk_19)(TESForm *this);\nbool (__thiscall *SeekRecordTypeFast)(TESForm *this, Data *);\nvoid (__thiscall *DoPostFixup)(TESForm *this);\nvoid (__thiscall *Unk_1C)(TESForm *this);\nvoid (__thiscall *GetDescription)(TESForm *this, BSStringT *dst);\nvoid (__thiscall *Unk_1E)(TESForm *this);\nvoid (__thiscall *Unk_1F)(TESForm *this);\nvoid (__thiscall *Unk_20)(TESForm *this);\nvoid (__thiscall *Unk_21)(TESForm *this);\nvoid (__thiscall *Unk_22)(TESForm *this);\nvoid (__thiscall *Unk_23)(TESForm *this);\nvoid (__thiscall *SetFromActiveFile)(TESForm *this, UInt8 arg);\nvoid (__thiscall *SetQuestItem)(TESForm *this, bool isQuestItem);\nvoid (__thiscall *Unk_26)(TESForm *this);\nvoid (__thiscall *Unk_27)(TESForm *this);\nvoid (__thiscall *Unk_28)(TESForm *this);\nbool (__thiscall *Unk_29)(TESForm *this);\nbool (__thiscall *Unk_2A)(TESForm *this);\nbool (__thiscall *Unk_2B)(TESForm *this);\nvoid (__thiscall *Unk_2C)(TESForm *this);\nvoid (__thiscall *CopyFrom)(TESForm *form);\nbool (__thiscall *Compare)(TESForm *form);\nvoid (__thiscall *Unk_2F)(TESForm *this);\nvoid (__thiscall *Unk_30)(TESForm *this);\nvoid (__thiscall *Unk_31)(TESForm *this);\nvoid (__thiscall *Unk_32)(TESForm *this);\nbool (__thiscall *Unk_33)(TESForm *this, TESObjectREFR *refr0, TESObjectREFR *refr1, UInt32 unk2);\nconst char *(__thiscall *GetName)(TESForm *this);\nconst char *(__thiscall *GetEditorName)(TESForm *this);\nvoid (__thiscall *SetEditorID)(TESForm *this, const char *name);\n}\n",
   "id": 18374686479671808355,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 16
+      "size": 16,
+      "type": "BaseFormComponentVtbl"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Destroy",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, bool Dealloc)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_05",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_06",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LoadForm",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESForm *this, void *modEntry)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_08",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_09",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0A",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0B",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0C",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0D",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0E",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_0F",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "MarkAsModified",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, UInt32 mask)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ClearModified",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, UInt32 mask)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_12",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetSaveSize",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "UInt32 (__thiscall *)(TESForm *this, UInt32 modifiedMask)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SaveGame",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, UInt32 modifiedMask)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LoadGame",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, UInt32 modifiedMask, UInt32 unk)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_16",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_17",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_18",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_19",
       "offset": 100,
       "offset_hex": "0x64",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SeekRecordTypeFast",
       "offset": 104,
       "offset_hex": "0x68",
-      "size": 4
+      "size": 4,
+      "type": "bool (__thiscall *)(TESForm *this, Data *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DoPostFixup",
       "offset": 108,
-      "offset_hex": "0x6c",
-      "size": 4
+      "offset_hex": "0x6C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_1C",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDescription",
       "offset": 116,
       "offset_hex": "0x74",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, BSStringT *dst)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_1E",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_1F",
       "offset": 124,
-      "offset_hex": "0x7c",
-      "size": 4
+      "offset_hex": "0x7C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_20",
       "offset": 128,
       "offset_hex": "0x80",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_21",
       "offset": 132,
       "offset_hex": "0x84",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_22",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_23",
       "offset": 140,
-      "offset_hex": "0x8c",
-      "size": 4
+      "offset_hex": "0x8C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetFromActiveFile",
       "offset": 144,
       "offset_hex": "0x90",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, UInt8 arg)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetQuestItem",
       "offset": 148,
       "offset_hex": "0x94",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, bool isQuestItem)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_26",
       "offset": 152,
       "offset_hex": "0x98",
-      "size": 4
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_27",
       "offset": 156,
-      "offset_hex": "0x9c",
-      "size": 4
+      "offset_hex": "0x9C",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_28",
       "offset": 160,
-      "offset_hex": "0xa0",
-      "size": 4
+      "offset_hex": "0xA0",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_29",
       "offset": 164,
-      "offset_hex": "0xa4",
-      "size": 4
+      "offset_hex": "0xA4",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_2A",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 4
+      "offset_hex": "0xA8",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_2B",
       "offset": 172,
-      "offset_hex": "0xac",
-      "size": 4
+      "offset_hex": "0xAC",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_2C",
       "offset": 176,
-      "offset_hex": "0xb0",
-      "size": 4
+      "offset_hex": "0xB0",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CopyFrom",
       "offset": 180,
-      "offset_hex": "0xb4",
-      "size": 4
+      "offset_hex": "0xB4",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *form)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Compare",
       "offset": 184,
-      "offset_hex": "0xb8",
-      "size": 4
+      "offset_hex": "0xB8",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESForm *form)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_2F",
       "offset": 188,
-      "offset_hex": "0xbc",
-      "size": 4
+      "offset_hex": "0xBC",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_30",
       "offset": 192,
-      "offset_hex": "0xc0",
-      "size": 4
+      "offset_hex": "0xC0",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_31",
       "offset": 196,
-      "offset_hex": "0xc4",
-      "size": 4
+      "offset_hex": "0xC4",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_32",
       "offset": 200,
-      "offset_hex": "0xc8",
-      "size": 4
+      "offset_hex": "0xC8",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Unk_33",
       "offset": 204,
-      "offset_hex": "0xcc",
-      "size": 4
+      "offset_hex": "0xCC",
+      "size": 4,
+      "type": "bool (__thiscall *)(TESForm *this, TESObjectREFR *refr0, TESObjectREFR *refr1, UInt32 unk2)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetName",
       "offset": 208,
-      "offset_hex": "0xd0",
-      "size": 4
+      "offset_hex": "0xD0",
+      "size": 4,
+      "type": "const char *(__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetEditorName",
       "offset": 212,
-      "offset_hex": "0xd4",
-      "size": 4
+      "offset_hex": "0xD4",
+      "size": 4,
+      "type": "const char *(__thiscall *)(TESForm *this)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetEditorID",
       "offset": 216,
-      "offset_hex": "0xd8",
-      "size": 4
+      "offset_hex": "0xD8",
+      "size": 4,
+      "type": "void (__thiscall *)(TESForm *this, const char *name)"
     }
   ],
   "name": "TESFormVtbl",
+  "ordinal": 718,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 220
 }

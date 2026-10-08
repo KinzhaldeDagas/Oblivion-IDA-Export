@@ -7,7 +7,7 @@
 0x7166A1: mov     eax, [esi+1Ch]
 0x7166A4: push    esi
 0x7166A5: push    eax
-0x7166A6: call    sub_7165B0
+0x7166A6: call    sub_7165B0; CustomAnimSupport evidence: queued idle loader controller-manager data attach/bind helper.
 0x7166AB: add     esp, 8
 0x7166AE: pop     esi
 0x7166AF: retn

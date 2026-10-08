@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D31B0",
-    "line": "sub     esp, 28h",
+    "line": "sub     esp, 28h; Compute this light's influence score at a point, excluding the supplied source and +0xF4 projector mode. NiPointLight sources use 1-(distance/range)^2 falloff, multiplied by the maximum light color component.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7D31BC",
-    "line": "cmp     eax, [esp+2Ch+arg_C]",
+    "line": "cmp     eax, [esp+2Ch+excludedBackingLight]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7D31D3",
-    "line": "cmp     byte ptr [esi+0FCh], 0",
+    "line": "cmp     byte ptr [esi+0FCh], 0; When +0xFC says the backing source is a NiPointLight, apply native point-distance/range attenuation to the contribution score.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7D322E",
-    "line": "fld     [esp+2Ch+arg_0]",
+    "line": "fld     [esp+2Ch+x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7D323A",
-    "line": "fld     [esp+2Ch+arg_4]",
+    "line": "fld     [esp+2Ch+y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7D3246",
-    "line": "fld     [esp+2Ch+arg_8]",
+    "line": "fld     [esp+2Ch+z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x7D326E",
-    "line": "fstp    [esp+2Ch+arg_C]",
+    "line": "fstp    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D3272",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -295,13 +295,13 @@
   },
   {
     "ea": "0x7D327B",
-    "line": "fstp    [esp+2Ch+arg_C]",
+    "line": "fstp    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D327F",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -313,13 +313,13 @@
   },
   {
     "ea": "0x7D3287",
-    "line": "fstp    [esp+2Ch+arg_C]",
+    "line": "fstp    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D328B",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x7D329C",
-    "line": "fst     [esp+2Ch+arg_C]",
+    "line": "fst     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7D32A4",
-    "line": "fst     [esp+2Ch+arg_C]",
+    "line": "fst     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x7D32AA",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -457,13 +457,13 @@
   },
   {
     "ea": "0x7D32C3",
-    "line": "fstp    [esp+2Ch+arg_C]",
+    "line": "fstp    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D32C7",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -517,13 +517,13 @@
   },
   {
     "ea": "0x7D32DC",
-    "line": "fstp    [esp+2Ch+arg_C]",
+    "line": "fstp    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D32E0",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x7D3307",
-    "line": "fst     [esp+2Ch+arg_C]",
+    "line": "fst     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7D330D",
-    "line": "fst     [esp+2Ch+arg_C]",
+    "line": "fst     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7D3317",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x7D3337",
-    "line": "fstp    [esp+2Ch+arg_C]",
+    "line": "fstp    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -733,19 +733,19 @@
   },
   {
     "ea": "0x7D3341",
-    "line": "fmul    [esp+2Ch+arg_C]",
+    "line": "fmul    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x7D3345",
-    "line": "fstp    [esp+2Ch+arg_C]",
+    "line": "fstp    [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7D3349",
-    "line": "fld     [esp+2Ch+arg_C]",
+    "line": "fld     [esp+2Ch+excludedBackingLight]",
     "mnemonic": "fld",
     "size": 4
   },

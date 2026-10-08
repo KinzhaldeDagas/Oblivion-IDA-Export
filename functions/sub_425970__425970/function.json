@@ -1,19 +1,32 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x425970",
+      "0x4259AE"
+    ]
+  ],
+  "chunks_sha256": "c096a2f998c8ed276c8677a25e84753145ff8bb06fff856e6eabeaa09f083bba",
+  "comment_regular": "OFE world-transition finding: this getter does not reevaluate INFO conditions. A custom cached MenuTopic must be invalidated when its active topic rule no longer matches the current speaker worldspace. Native 41E160 removes extra type 0x59 and invokes its deleting destructor; 42A0B0 then clears ownership flag and destroys/frees stored MenuTopic. Do not install a cache pointer when its response list is empty.\n\nReturns actor-owned INFOGENERAL/Rumors MenuTopic. If its response list has zero nodes, lazily rebuild responses from the cached ownerQuest/topic/INFO/speaker tuple; no topic/INFO condition selection is rerun. A populated-but-exhausted cache is simply rewound later by FillTopicList.",
+  "comment_repeatable": "Returns actor-owned INFOGENERAL/Rumors MenuTopic. If its response list has zero nodes, lazily rebuild responses from the cached ownerQuest/topic/INFO/speaker tuple; no topic/INFO condition selection is rerun. A populated-but-exhausted cache is simply rewound later by FillTopicList.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_425970",
+  "display_name": "ExtraDataList::GetInfoGeneralTopic",
   "end_ea": "0x4259AE",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_425970",
+  "name": "ExtraDataList::GetInfoGeneralTopic",
   "segment": ".text",
   "sha256": "c096a2f998c8ed276c8677a25e84753145ff8bb06fff856e6eabeaa09f083bba",
   "size": 62,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x425970",
-  "type": "TESTopic *__thiscall(ExtraDataList *this, TESObjectREFR *)",
+  "total_chunk_size": 62,
+  "type": "MenuTopicView *__thiscall(ExtraDataList *this, TESObjectREFR *speaker)",
   "xrefs_from_count": 31,
   "xrefs_to_count": 1
 }

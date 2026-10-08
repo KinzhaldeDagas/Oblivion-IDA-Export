@@ -1,11 +1,11 @@
-0x7A7DD0: push    esi
+0x7A7DD0: push    esi; Copies the complete 0x4C-byte Oblivion billboard-leaf state (position base, angle, packed color/dimming byte, normal/tangent/binormal, texture index, and one wind weight/group).
 0x7A7DD1: push    edi
-0x7A7DD2: mov     edi, [esp+8+arg_0]
+0x7A7DD2: mov     edi, [esp+8+source]
 0x7A7DD6: mov     esi, ecx
 0x7A7DD8: cmp     edi, esi
 0x7A7DDA: jz      short loc_7A7E40
-0x7A7DDC: push    edi
-0x7A7DDD: call    sub_78ED20
+0x7A7DDC: push    edi; source
+0x7A7DDD: call    OB_CIdvCamera_copy_assign_010201A0; Oblivion CIdvCamera copy assignment. On non-self assignment copies only the three-float position at +0x04..+0x0F and returns this. The function occupies the inherited assignment slot in the CIdvCamera and derived vtables.
 0x7A7DE2: movzx   eax, byte ptr [edi+10h]
 0x7A7DE6: mov     [esi+10h], al
 0x7A7DE9: mov     ecx, [edi+14h]

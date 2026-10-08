@@ -2,7 +2,7 @@
 0x4CD091: mov     ebx, ecx
 0x4CD093: push    edi
 0x4CD094: push    ebx; a2
-0x4CD095: mov     ecx, offset stru_B35C80; this
+0x4CD095: mov     ecx, offset unk_B35C80; this
 0x4CD09A: call    sub_496EA0
 0x4CD09F: lea     edi, [ebx+48h]
 0x4CD0A2: test    edi, edi
@@ -17,8 +17,8 @@
 0x4CD0B7: call    edx
 0x4CD0B9: test    eax, eax
 0x4CD0BB: jz      short loc_4CD0EC
-0x4CD0BD: mov     ecx, esi
-0x4CD0BF: call    sub_4D7000
+0x4CD0BD: mov     ecx, esi; this
+0x4CD0BF: call    TESObjectREFR_HasTemp3DFlag; Verified local operation: tests TESObjectREFR flags +0x08 for bit 0x80000. Probable semantic name HasTemp3DFlag, corroborated by local set-after-node-attach/clear-after-removal flow and Fallout's named TESObjectREFR::SetHasTemp3D counterpart.
 0x4CD0C4: test    al, al
 0x4CD0C6: jnz     short loc_4CD0EC
 0x4CD0C8: mov     eax, [esi+8]
@@ -56,7 +56,7 @@
 0x4CD120: jnz     short loc_4CD0A7
 0x4CD122: pop     esi
 0x4CD123: push    ebx; a2
-0x4CD124: mov     ecx, offset stru_B35C80; this
+0x4CD124: mov     ecx, offset unk_B35C80; this
 0x4CD129: call    sub_496F50
 0x4CD12E: pop     edi
 0x4CD12F: pop     ebx

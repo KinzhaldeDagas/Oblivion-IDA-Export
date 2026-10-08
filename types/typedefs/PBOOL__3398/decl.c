@@ -1,1 +1,1 @@
-PBOOL
+typedef int *PBOOL;

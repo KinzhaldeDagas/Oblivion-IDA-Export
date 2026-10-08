@@ -1,4 +1,4 @@
-BSStringT *sub_A10D20()
+NiRTTI *sub_A10D20()
 {
-  return sub_70E220((BSStringT *)dword_B42CEC, "BSShaderAccumulator", (int)dword_B3FD1C);
+  return NiRTTI_Constructor(&stru_B42CEC, "BSShaderAccumulator", &stru_B3FD1C); /*0xa10d34*/
 }

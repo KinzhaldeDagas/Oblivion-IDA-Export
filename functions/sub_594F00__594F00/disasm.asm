@@ -27,9 +27,9 @@
 0x594F64: fld1
 0x594F66: push    ecx
 0x594F67: mov     ecx, [edi-48h]; this
-0x594F6A: fstp    [esp+11Ch+a2]; a3
-0x594F6D: push    0FA1h; a2
-0x594F72: call    Tile_SetFloat
+0x594F6A: fstp    [esp+11Ch+a2]; value
+0x594F6D: push    0FA1h; propertyCode
+0x594F72: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x594F77: add     edi, 4
 0x594F7A: sub     ebx, 1
 0x594F7D: jnz     short loc_594F40
@@ -61,19 +61,19 @@
 0x594FDA: call    Tile_SetString
 0x594FDF: fld     dword ptr ds:0A379B4h
 0x594FE5: push    ecx
-0x594FE6: fstp    [esp+120h+var_120]; a3
-0x594FE9: push    0FA1h; a2
+0x594FE6: fstp    [esp+120h+var_120]; value
+0x594FE9: push    0FA1h; propertyCode
 0x594FEE: mov     ecx, ebp; this
-0x594FF0: call    Tile_SetFloat
-0x594FF5: mov     ecx, edi
-0x594FF7: call    TESHealthForm_GetHealth
+0x594FF0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
+0x594FF5: mov     ecx, edi; this
+0x594FF7: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x594FFC: mov     [esp+11Ch+var_10C], eax
 0x595000: fild    [esp+11Ch+var_10C]
 0x595004: push    ecx
 0x595005: mov     ecx, ebp; this
-0x595007: fstp    [esp+120h+var_120]; a3
-0x59500A: push    0FAEh; a2
-0x59500F: call    Tile_SetFloat
+0x595007: fstp    [esp+120h+var_120]; value
+0x59500A: push    0FAEh; propertyCode
+0x59500F: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x595014: mov     ecx, edi
 0x595016: call    sub_488DF0
 0x59501B: push    eax

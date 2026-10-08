@@ -17,7 +17,7 @@
 0x48DA2D: mov     esi, [esp+2Ch+arg_4]
 0x48DA31: test    esi, esi
 0x48DA33: jz      loc_48DF67
-0x48DA39: cmp     [esp+2Ch+arg_0], 0
+0x48DA39: cmp     [esp+2Ch+entry], 0
 0x48DA3E: jz      loc_48DF67
 0x48DA44: mov     ecx, esi; this
 0x48DA46: call    TESObjectREFR_GetContainer
@@ -36,7 +36,7 @@
 0x48DA6F: xor     eax, eax
 0x48DA71: lea     ebp, [eax+8]
 0x48DA74: test    ebp, ebp
-0x48DA76: mov     [esp+2Ch+arg_0], ebp
+0x48DA76: mov     [esp+2Ch+entry], ebp
 0x48DA7A: jz      loc_48DD1D
 0x48DA80: cmp     dword ptr [ebp+4], 0
 0x48DA84: jnz     short loc_48DA90
@@ -54,11 +54,11 @@
 0x48DAAC: add     esp, 14h
 0x48DAAF: test    edi, edi
 0x48DAB1: jz      loc_48DD0E
-0x48DAB7: mov     ecx, [esp+2Ch+var_18]
-0x48DABB: push    0
-0x48DABD: push    1
-0x48DABF: push    edi
-0x48DAC0: call    ContainerExtraData_GetEntryForForm
+0x48DAB7: mov     ecx, [esp+2Ch+var_18]; this
+0x48DABB: push    0; referenceFormIDOrZero
+0x48DABD: push    1; unusedAlwaysOne
+0x48DABF: push    edi; form
+0x48DAC0: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x48DAC5: mov     ebx, eax
 0x48DAC7: mov     eax, [ebp+0]
 0x48DACA: mov     eax, [eax]
@@ -85,8 +85,8 @@
 0x48DB07: cmp     dword ptr [eax+4], 0
 0x48DB0B: jz      loc_48DC58
 0x48DB11: movzx   eax, byte ptr [edi+4]
-0x48DB15: push    eax; a1
-0x48DB16: call    TESForm_CreateDynamic
+0x48DB15: push    eax; formType
+0x48DB16: call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.
 0x48DB1B: mov     esi, eax
 0x48DB1D: mov     edx, [esi]
 0x48DB1F: mov     eax, [edx+0B4h]
@@ -104,9 +104,9 @@
 0x48DB44: test    eax, eax
 0x48DB46: jz      short loc_48DB4F
 0x48DB48: mov     dword ptr [eax+4], 0
-0x48DB4F: mov     ecx, ds:0B33A98h
-0x48DB55: push    esi
-0x48DB56: call    TESDataHandler_AddForm
+0x48DB4F: mov     ecx, ds:0B33A98h; self
+0x48DB55: push    esi; form
+0x48DB56: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x48DB5B: mov     ecx, ds:0B33B00h
 0x48DB61: push    esi
 0x48DB62: call    SaveLoad_AddCreatedObj
@@ -243,19 +243,19 @@
 0x48DCF6: test    esi, esi
 0x48DCF8: jnz     short loc_48DCAE
 0x48DCFA: mov     ecx, [esp+2Ch+arg_4]
-0x48DCFE: push    1
-0x48DD00: push    ecx
-0x48DD01: mov     ecx, [esp+34h+var_14]
-0x48DD05: call    ContainerExtraData_AddEntry
-0x48DD0A: mov     ebp, [esp+2Ch+arg_0]
+0x48DCFE: push    1; destroyEntryIfMerged
+0x48DD00: push    ecx; entry
+0x48DD01: mov     ecx, [esp+34h+var_14]; this
+0x48DD05: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
+0x48DD0A: mov     ebp, [esp+2Ch+entry]
 0x48DD0E: mov     ebp, [ebp+4]
 0x48DD11: test    ebp, ebp
-0x48DD13: mov     [esp+2Ch+arg_0], ebp
+0x48DD13: mov     [esp+2Ch+entry], ebp
 0x48DD17: jnz     loc_48DA80
 0x48DD1D: mov     edx, [esp+2Ch+var_18]
 0x48DD21: mov     eax, [edx]
 0x48DD23: test    eax, eax
-0x48DD25: mov     [esp+2Ch+arg_0], eax
+0x48DD25: mov     [esp+2Ch+entry], eax
 0x48DD29: jz      loc_48DF67
 0x48DD2F: nop
 0x48DD30: cmp     dword ptr [eax+4], 0
@@ -275,8 +275,8 @@
 0x48DD63: jz      loc_48DEA5
 0x48DD69: mov     eax, [edi+8]
 0x48DD6C: movzx   eax, byte ptr [eax+4]
-0x48DD70: push    eax; a1
-0x48DD71: call    TESForm_CreateDynamic
+0x48DD70: push    eax; formType
+0x48DD71: call    TESForm_CreateDynamic; Verified runtime serialized-form factory dispatch: form type 0x29 constructs a 0x30-byte TESSubSpace; constructor sets default bounds and the TESSubSpace vtable.
 0x48DD76: mov     esi, eax
 0x48DD78: mov     eax, [edi+8]
 0x48DD7B: mov     edx, [esi]
@@ -295,9 +295,9 @@
 0x48DDA2: test    eax, eax
 0x48DDA4: jz      short loc_48DDAD
 0x48DDA6: mov     dword ptr [eax+4], 0
-0x48DDAD: mov     ecx, ds:0B33A98h
-0x48DDB3: push    esi
-0x48DDB4: call    TESDataHandler_AddForm
+0x48DDAD: mov     ecx, ds:0B33A98h; self
+0x48DDB3: push    esi; form
+0x48DDB4: call    TESDataHandler_AddForm; Verified registration path: switches on TESForm+4 type byte. TESGlobal ctor 4F9604 writes type 4; case 4 pushes the form into TESDataHandler.listGlobals at self+0x74 (self+0x1D pointers) and returns success. Called from TESDataHandler_LoadFormRecord 44E596; this list is consumed by TESSaveLoadGame_LoadGlobalValues.
 0x48DDB9: mov     ecx, ds:0B33B00h
 0x48DDBF: push    esi
 0x48DDC0: call    SaveLoad_AddCreatedObj
@@ -428,14 +428,14 @@
 0x48DF40: test    esi, esi
 0x48DF42: jnz     short loc_48DEF9
 0x48DF44: mov     eax, [esp+2Ch+arg_4]
-0x48DF48: mov     ecx, [esp+2Ch+var_14]
-0x48DF4C: push    1
-0x48DF4E: push    eax
-0x48DF4F: call    ContainerExtraData_AddEntry
-0x48DF54: mov     eax, [esp+2Ch+arg_0]
+0x48DF48: mov     ecx, [esp+2Ch+var_14]; this
+0x48DF4C: push    1; destroyEntryIfMerged
+0x48DF4E: push    eax; entry
+0x48DF4F: call    ContainerExtraData_AddEntry; Merge or append a complete EntryData into ExtraContainerChanges. Native ABI is two stack arguments (entry, destroyEntryIfMerged) and retn 0x08; all 14 callers pass exactly two. If a matching form entry exists, it merges counts/extra-data chains and conditionally destroys the supplied entry; otherwise it appends that entry directly. Return register has no contract.
+0x48DF54: mov     eax, [esp+2Ch+entry]
 0x48DF58: mov     eax, [eax+4]
 0x48DF5B: test    eax, eax
-0x48DF5D: mov     [esp+2Ch+arg_0], eax
+0x48DF5D: mov     [esp+2Ch+entry], eax
 0x48DF61: jnz     loc_48DD30
 0x48DF67: mov     ecx, [esp+2Ch+var_C]
 0x48DF6B: mov     large fs:0, ecx
@@ -446,3 +446,50 @@
 0x48DF76: pop     ebx
 0x48DF77: add     esp, 18h
 0x48DF7A: retn    8
+0x9AFD70: mov     eax, [ebp+8]
+0x9AFD73: push    eax
+0x9AFD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD79: pop     ecx
+0x9AFD7A: retn
+0x9AFD7B: mov     eax, [ebp-10h]
+0x9AFD7E: push    eax
+0x9AFD7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD84: pop     ecx
+0x9AFD85: retn
+0x9AFD86: mov     eax, [ebp+8]
+0x9AFD89: push    eax
+0x9AFD8A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD8F: pop     ecx
+0x9AFD90: retn
+0x9AFD91: mov     eax, [ebp-10h]
+0x9AFD94: push    eax
+0x9AFD95: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFD9A: pop     ecx
+0x9AFD9B: retn
+0x9AFD9C: mov     eax, [ebp+8]
+0x9AFD9F: push    eax
+0x9AFDA0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFDA5: pop     ecx
+0x9AFDA6: retn
+0x9AFDA7: mov     eax, [ebp-10h]
+0x9AFDAA: push    eax
+0x9AFDAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFDB0: pop     ecx
+0x9AFDB1: retn
+0x9AFDB2: mov     eax, [ebp+8]
+0x9AFDB5: push    eax
+0x9AFDB6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFDBB: pop     ecx
+0x9AFDBC: retn
+0x9AFDBD: mov     eax, [ebp-10h]
+0x9AFDC0: push    eax
+0x9AFDC1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFDC6: pop     ecx
+0x9AFDC7: retn
+0x9AFDC8: mov     edx, [esp+arg_4]
+0x9AFDCC: lea     eax, [edx-1Ch]
+0x9AFDCF: mov     ecx, [edx-20h]
+0x9AFDD2: xor     ecx, eax
+0x9AFDD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFDD9: mov     eax, offset stru_ADC1FC
+0x9AFDDE: jmp     ___CxxFrameHandler3

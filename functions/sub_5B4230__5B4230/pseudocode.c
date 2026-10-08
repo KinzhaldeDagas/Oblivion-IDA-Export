@@ -1,11 +1,12 @@
+// AchievementsNative evidence: MagicPopupMenu builder for magic/effect items. Sets root user0=source Y, user1=bottom margin, user3=depth; stores exposed popup X at +0x50 and hidden X at +0x54 (exposed X minus background width).
 // bad sp value at call has been detected, the output may be wrong!
-int __cdecl sub_5B4230(
-        int a1,
-        float a2,
-        float a3,
-        float a4,
-        int a5,
-        float a6,
+void __usercall sub_5B4230(
+        double a1@<st2>,
+        double a2@<st1>,
+        _DWORD *a3,
+        int a4,
+        unsigned __int8 *a5,
+        int a6,
         int a7,
         int a8,
         int a9,
@@ -13,126 +14,138 @@ int __cdecl sub_5B4230(
         int a11,
         int a12,
         int a13,
+        int a14,
+        int a15,
         int WortcraftMaxEffects)
 {
   Tile *OpenMenuTile; // eax
-  Tile *v15; // ebx
+  Tile *v17; // ebx
   void *ParentMenu; // eax
-  float *v17; // eax
-  float *v18; // edi
-  _DWORD *v19; // ecx
-  _BYTE *v20; // ebp
-  char **v21; // eax
-  const char *v22; // ebx
-  const char **v23; // eax
-  const char *v24; // eax
-  int (__thiscall *v25)(int); // eax
+  _DWORD *v19; // eax
+  int v20; // edi
+  _DWORD *v21; // ecx
+  int v22; // ebx
+  _BYTE *v23; // ebp
+  char **v24; // eax
+  const char *v25; // ebx
+  const char **v26; // eax
+  const char *v27; // eax
+  int (__thiscall *v28)(_DWORD *); // eax
   int BaseCalcAVi; // eax
-  BSStringT v28; // [esp+18h] [ebp-348h] BYREF
-  int v29; // [esp+20h] [ebp-340h]
-  double v30; // [esp+24h] [ebp-33Ch]
-  int v31; // [esp+2Ch] [ebp-334h]
-  double v32; // [esp+30h] [ebp-330h]
-  int v33; // [esp+3Ch] [ebp-324h]
-  Tile *v34; // [esp+40h] [ebp-320h]
-  char v35[260]; // [esp+148h] [ebp-218h] BYREF
-  char v36[260]; // [esp+24Ch] [ebp-114h] BYREF
-  unsigned int v37; // [esp+35Ch] [ebp-4h]
+  BSStringT v30; // [esp+18h] [ebp-348h] BYREF
+  _DWORD *v31; // [esp+20h] [ebp-340h]
+  double v32; // [esp+24h] [ebp-33Ch]
+  int v33; // [esp+2Ch] [ebp-334h]
+  double v34; // [esp+30h] [ebp-330h]
+  int v35; // [esp+3Ch] [ebp-324h]
+  Tile *v36; // [esp+40h] [ebp-320h]
+  char v37[260]; // [esp+148h] [ebp-218h] BYREF
+  char v38[260]; // [esp+24Ch] [ebp-114h] BYREF
+  unsigned int v39; // [esp+35Ch] [ebp-4h]
 
-  v29 = a1;
-  v31 = a5;
-  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x400);
-  v15 = OpenMenuTile;
-  v34 = OpenMenuTile;
-  if ( !OpenMenuTile
+  v31 = a3; /*0x5b427e*/
+  v33 = a7; /*0x5b4282*/
+  OpenMenuTile = (Tile *)Menu_GetOpenMenuTile(0x400); /*0x5b4286*/
+  v17 = OpenMenuTile; /*0x5b428b*/
+  v36 = OpenMenuTile; /*0x5b4292*/
+  if ( !OpenMenuTile /*0x5b42be*/
     || (ParentMenu = (void *)Tile_GetParentMenu(OpenMenuTile),
-        v17 = (float *)OblivionDynamicCast(
-                         ParentMenu,
-                         0,
-                         (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
-                         &MagicPopupMenu `RTTI Type Descriptor',
-                         0),
-        (v18 = v17) == 0) )
+        v19 = OblivionDynamicCast(
+                ParentMenu,
+                0,
+                (struct _s_RTTICompleteObjectLocator *)&Menu `RTTI Type Descriptor',
+                &MagicPopupMenu `RTTI Type Descriptor',
+                0),
+        (v20 = (int)v19) == 0) )
   {
-    JUMPOUT(0x5B49DC);
+    JUMPOUT(0x5B49DC); /*0x5b49dc*/
   }
-  *((_DWORD *)v17 + 0x16) = 1;
-  Tile_SetFloat(v15, (_DWORD *)0xFAE, a3);
-  Tile_SetFloat(v15, (_DWORD *)0xFAF, a4);
-  Tile_SetFloat(v15, (_DWORD *)0xFB1, a6);
-  v19 = *((_DWORD **)v18 + 0xA);
-  v18[0x14] = a2;
-  v30 = a2;
-  v18[0x15] = a2 - Tile_GetFloat(v19, 0xFCB);
-  if ( a5 )
+  v19[0x16] = 1; /*0x5b42d6*/
+  Tile_SetFloat(v17, (_DWORD *)0xFAE, *(float *)&a5); /*0x5b42dd*/
+  Tile_SetFloat(v17, (_DWORD *)0xFAF, *(float *)&a6); /*0x5b42f4*/
+  Tile_SetFloat(v17, (_DWORD *)0xFB1, *(float *)&a8); /*0x5b430b*/
+  v21 = *(_DWORD **)(v20 + 0x28); /*0x5b4317*/
+  *(float *)(v20 + 0x50) = *(float *)&a4; /*0x5b431a*/
+  v32 = *(float *)&a4; /*0x5b4322*/
+  v22 = 0; /*0x5b432f*/
+  *(float *)(v20 + 0x54) = *(float *)&a4 - Tile_GetFloat(v21, 0xFCB); /*0x5b4333*/
+  if ( a7 ) /*0x5b4336*/
   {
-    v20 = *(_BYTE **)(a5 + 8);
-    if ( v20[4] == 0x21 )
+    v23 = *(_BYTE **)(a7 + 8); /*0x5b433c*/
+    if ( v23[4] == 0x21 ) /*0x5b4343*/
     {
-      _sprintf(v35, "%s\\%s", "Icons", "icon_small_damage.dds");
-      Tile_SetFloat(*((Tile **)v18 + 0xB), (_DWORD *)0xFA1, fConstant_2);
-      Tile_SetString(*((_DWORD **)v18 + 0xB), (_DWORD *)0xFAF, v35);
-      Tile_SetFloat(*((Tile **)v18 + 0xB), (_DWORD *)0xFB0, flt_A2FE7C);
-      if ( v20 )
+      _sprintf(v37, "%s\\%s", "Icons", "icon_small_damage.dds"); /*0x5b4360*/
+      Tile_SetFloat(*(Tile **)(v20 + 0x2C), (_DWORD *)0xFA1, fConstant_2); /*0x5b437a*/
+      Tile_SetString(*(_DWORD **)(v20 + 0x2C), (_DWORD *)0xFAF, v37); /*0x5b438f*/
+      Tile_SetFloat(*(Tile **)(v20 + 0x2C), (_DWORD *)0xFB0, flt_A2FE7C); /*0x5b43a6*/
+      if ( v23 ) /*0x5b43ad*/
       {
-        v21 = *(char ***)(4 * (char)v20[0x90] + 0xB39A44);
-        if ( v21 )
-          Tile_SetString(*((_DWORD **)v18 + 0xB), (_DWORD *)0xFAE, *v21);
+        v24 = *(char ***)(4 * (char)v23[0x90] + 0xB39A44); /*0x5b43ba*/
+        if ( v24 ) /*0x5b43c3*/
+          Tile_SetString(*(_DWORD **)(v20 + 0x2C), (_DWORD *)0xFAE, *v24); /*0x5b43d0*/
         else
-          Tile_SetString(*((_DWORD **)v18 + 0xB), (_DWORD *)0xFAE, 0);
+          Tile_SetString(*(_DWORD **)(v20 + 0x2C), (_DWORD *)0xFAE, 0); /*0x5b43e5*/
       }
     }
     else
     {
-      if ( v20[4] != 0x14 )
-        goto LABEL_16;
-      _sprintf(v36, "%s\\%s", "Icons", "icon_small_armor.dds");
-      Tile_SetFloat(*((Tile **)v18 + 0xB), (_DWORD *)0xFA1, fConstant_2);
-      Tile_SetString(*((_DWORD **)v18 + 0xB), (_DWORD *)0xFAF, v36);
-      Tile_SetFloat(*((Tile **)v18 + 0xB), (_DWORD *)0xFB0, flt_A2FE7C);
-      if ( v20 )
+      if ( v23[4] != 0x14 ) /*0x5b43f3*/
+        goto LABEL_16; /*0x5b43f3*/
+      _sprintf(v38, "%s\\%s", "Icons", "icon_small_armor.dds"); /*0x5b4410*/
+      Tile_SetFloat(*(Tile **)(v20 + 0x2C), (_DWORD *)0xFA1, fConstant_2); /*0x5b442a*/
+      Tile_SetString(*(_DWORD **)(v20 + 0x2C), (_DWORD *)0xFAF, v38); /*0x5b443f*/
+      Tile_SetFloat(*(Tile **)(v20 + 0x2C), (_DWORD *)0xFB0, flt_A2FE7C); /*0x5b4456*/
+      if ( v23 ) /*0x5b445f*/
       {
-        v28.m_data = 0;
-        v28.m_dataLen = 0;
-        v28.m_bufLen = 0;
-        v22 = (const char *)dword_B38BE8;
-        v37 = 0;
-        v23 = *(const char ***)(4 * (unsigned __int8)TESObjectARMO_ISHeavyArmor(v20) + 0xB084E8);
-        if ( v23 )
-          v24 = *v23;
+        v30.m_data = 0; /*0x5b4461*/
+        v30.m_dataLen = 0; /*0x5b4465*/
+        v30.m_bufLen = 0; /*0x5b446a*/
+        v25 = (const char *)stru_B38BE8; /*0x5b446f*/
+        v39 = 0; /*0x5b4477*/
+        v26 = *(const char ***)(4 * (unsigned __int8)TESObjectARMO_ISHeavyArmor(v23) + 0xB084E8);// Medium Armor MagicPopup decode: enchanted-armor label path calls TESObjectARMO_IsHeavyArmor here; plugin captures armor context but preserves native boolean. /*0x5b4486*/
+        if ( v26 ) /*0x5b448f*/
+          v27 = *v26; /*0x5b4491*/
         else
-          v24 = 0;
-        BSStringT_Static_Format(&v28, "%s %s", v24, v22);
-        Tile_SetString(*((_DWORD **)v18 + 0xB), (_DWORD *)0xFAE, v28.m_data);
-        v37 = 0xFFFFFFFF;
-        BSStringT_Clear((unsigned int *)&v28);
+          v27 = 0; /*0x5b4495*/
+        BSStringT_Static_Format(&v30, "%s %s", v27, v25); /*0x5b44a3*/
+        Tile_SetString(*(_DWORD **)(v20 + 0x2C), (_DWORD *)0xFAE, v30.m_data);// Medium Armor MagicPopup decode: final enchanted-armor Tile_SetString label write; replace Light/Heavy text with Medium only for effective Medium classification. /*0x5b44b8*/
+        v39 = 0xFFFFFFFF; /*0x5b44c1*/
+        BSStringT_Clear((unsigned int *)&v30); /*0x5b44cc*/
       }
     }
-    HIDWORD(v32) = 1;
+    HIDWORD(v34) = 1; /*0x5b44d1*/
+    v22 = 1; /*0x5b44d9*/
   }
 LABEL_16:
-  v25 = *(int (__thiscall **)(int))(*(_DWORD *)a1 + 0x18);
-  v33 = 8;
-  if ( v25(a1) == 8 )
+  v28 = *(int (__thiscall **)(_DWORD *))(*a3 + 0x18); /*0x5b44dd*/
+  v35 = 8; /*0x5b44e4*/
+  if ( v28(a3) == 8 ) /*0x5b44f1*/
   {
-    BaseCalcAVi = Actor_GetBaseCalcAVi(0x13);
-    WortcraftMaxEffects = Magic_GetWortcraftMaxEffects(BaseCalcAVi);
+    BaseCalcAVi = Actor_GetBaseCalcAVi((int *)reference, v22, v20, (int)a3, 0x13); /*0x5b44fb*/
+    WortcraftMaxEffects = Magic_GetWortcraftMaxEffects(BaseCalcAVi); /*0x5b4509*/
   }
-  if ( a1 == 0xFFFFFFF0 )
-    JUMPOUT(0x5B46DE);
-  return sub_5B4524(
-           a1,
-           LODWORD(a2),
-           LODWORD(a3),
-           LODWORD(a4),
-           a5,
-           LODWORD(a6),
-           a7,
-           a8,
-           a9,
-           a10,
-           a11,
-           a12,
-           a13,
-           WortcraftMaxEffects);
+  if ( a3 == (_DWORD *)0xFFFFFFF0 ) /*0x5b4512*/
+    JUMPOUT(0x5B46DE); /*0x5b46de*/
+  sub_5B4524( /*0x5b451c*/
+    (Tile **)(v20 + 4 * v22 + 0x2C),
+    v22,
+    a3 + 4,
+    v20,
+    (int)a3,
+    a1,
+    a2,
+    (int)a3,
+    a4,
+    a5,
+    a6,
+    a7,
+    a8,
+    a9,
+    a10,
+    a11,
+    a12,
+    a13,
+    a14,
+    a15,
+    WortcraftMaxEffects);
 }

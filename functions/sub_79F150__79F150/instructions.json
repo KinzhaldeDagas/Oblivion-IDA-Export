@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79F150",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): Checked-iterator insert-one wrapper for vector<vector<float>>. Validates owner/position, calls insert-fill(count=1), relocates the inserted element after possible reallocation, and returns {owner,current}. Boundary corrected through ret 0x10 at 0x79F1DA.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x79F153",
-    "line": "mov     ebp, [esp+0Ch+arg_4]",
+    "line": "mov     ebp, [esp+0Ch+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x79F188",
-    "line": "mov     edi, [esp+14h+arg_8]",
+    "line": "mov     edi, [esp+14h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,50 +169,176 @@
   },
   {
     "ea": "0x79F191",
-    "line": "mov     edx, [esp+14h+arg_C]",
+    "line": "mov     edx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79F195",
-    "line": "mov     eax, [esp+14h+arg_8]",
+    "line": "mov     eax, [esp+14h+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79F199",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F19A",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x79F19C",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F19D",
-    "line": "push    ebp",
+    "line": "push    ebp; expectedOwner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F19E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79F1A0",
-    "line": "call    sub_79EBB0",
+    "line": "call    OB_stVector_stVectorFloat_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): Checked insert-fill implementation for vector<vector<float>>. Deep-copies the fill value, reuses capacity or grows by roughly 1.5x, moves existing inner-vector owners with ownership transfer, and preserves exception cleanup. Oblivion call flow establishes the specialization; RT4.1 FrondEngine.cpp lines 768-779 corroborate its m_vRunningLengths resize role.",
     "mnemonic": "call",
     "size": 5
+  },
+  {
+    "ea": "0x79F1A5",
+    "line": "mov     ebx, [esi+4]; Recovered post-insert normal tail omitted by the former false noreturn call: recomputes the inserted pointer after possible reallocation and fills the checked iterator result.",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79F1A8",
+    "line": "cmp     ebx, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x79F1AB",
+    "line": "jbe     short loc_79F1B2",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x79F1AD",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79F1B2",
+    "line": "shl     edi, 4",
+    "mnemonic": "shl",
+    "size": 3
+  },
+  {
+    "ea": "0x79F1B5",
+    "line": "add     edi, ebx",
+    "mnemonic": "add",
+    "size": 2
+  },
+  {
+    "ea": "0x79F1B7",
+    "line": "cmp     edi, [esi+8]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x79F1BA",
+    "line": "mov     [esp+14h+position], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x79F1BE",
+    "line": "ja      short loc_79F1C5",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x79F1C0",
+    "line": "cmp     edi, [esi+4]",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x79F1C3",
+    "line": "jnb     short loc_79F1CA",
+    "mnemonic": "jnb",
+    "size": 2
+  },
+  {
+    "ea": "0x79F1C5",
+    "line": "call    __invalid_parameter_noinfo",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x79F1CA",
+    "line": "mov     eax, [esp+14h+result]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x79F1CE",
+    "line": "mov     [eax+4], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x79F1D1",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79F1D2",
+    "line": "mov     [eax], esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x79F1D4",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79F1D5",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79F1D6",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79F1D7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x79F1D8",
+    "line": "retn    10h",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

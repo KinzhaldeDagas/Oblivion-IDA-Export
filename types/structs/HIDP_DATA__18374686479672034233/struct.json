@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_HIDP_DATA",
+  "definition": "struct _HIDP_DATA\n{\nUSHORT DataIndex;\nUSHORT Reserved;\n$1C870FD3084B4449EA41395CC1355EB2 _anon_0;\n}\n",
   "id": 18374686479672034233,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DataIndex",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 2
+      "size": 2,
+      "type": "USHORT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "_anon_0",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "$1C870FD3084B4449EA41395CC1355EB2"
     }
   ],
   "name": "_HIDP_DATA",
+  "ordinal": 3771,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 8
 }

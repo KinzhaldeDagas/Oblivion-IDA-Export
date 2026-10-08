@@ -1,1 +1,1 @@
-dibdrv_physdev_0
+typedef dibdrv_physdev dibdrv_physdev_0;

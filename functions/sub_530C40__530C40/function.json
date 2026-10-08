@@ -1,19 +1,36 @@
 {
-  "callees_count": 31,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_530C40",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 20,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x530C40",
+      "0x530DA8"
+    ],
+    [
+      "0x9B8B90",
+      "0x9B8BC0"
+    ]
+  ],
+  "chunks_sha256": "7d84c8a5f5458ad1b4721ef2493d0a75dc8fe494a02f3f3da68b28a1e51d16fc",
+  "comment_regular": "Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.",
+  "comment_repeatable": "Oblivion lazy INFO response-stream reader. Rebuilds a shared list from the last override TESFile plus TESTopicInfo+0x34 record offset. Recognizes only TRDT and NAM1; NAM2 actor notes are runtime-inert.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESTopicInfo::GetResponseList",
   "end_ea": "0x530DA8",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_530C40",
+  "name": "TESTopicInfo::GetResponseList",
   "segment": ".text",
   "sha256": "aaa5388e998965d554dd0df980417bb47657393afee71950514379a700eddcd1",
   "size": 360,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x530C40",
-  "type": "int *__thiscall(TESForm *this)",
-  "xrefs_from_count": 144,
+  "total_chunk_size": 408,
+  "type": "TESResponseListView *__thiscall(OblivionTopicInfo *this)",
+  "xrefs_from_count": 162,
   "xrefs_to_count": 6
 }

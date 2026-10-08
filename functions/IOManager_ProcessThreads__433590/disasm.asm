@@ -1,4 +1,4 @@
-0x433590: push    0FFFFFFFFh
+0x433590: push    0FFFFFFFFh; MEF data-streaming pass: IOManager post-process pump uses QPC deadline and configured millisecond budget. Left unchanged; budget tuning needs runtime profiling and is not an IDA-proven engine bug.
 0x433592: push    offset SEH_433590
 0x433597: mov     eax, large fs:0
 0x43359D: push    eax
@@ -15,10 +15,10 @@
 0x4335B7: mov     ebx, ecx
 0x4335B9: lea     eax, [esp+38h+PerformanceCount]
 0x4335BD: push    eax; lpPerformanceCount
-0x4335BE: call    ds:QueryPerformanceCounter
+0x4335BE: call    ds:QueryPerformanceCounter; MEF candidate verification 2026-05-30: IOManager uses QPC with 64-bit budget conversion and deadline compare; no IDA-proven timer arithmetic bug here.
 0x4335C4: cmp     dword ptr [ebx+38h], 6
-0x4335C8: mov     ecx, dword ptr Frequency+4
-0x4335CE: mov     edx, dword ptr Frequency
+0x4335C8: mov     ecx, ds:0B33A0Ch
+0x4335CE: mov     edx, ds:0B33A08h
 0x4335D4: mov     eax, dword_B048E4
 0x4335D9: push    ecx
 0x4335DA: push    edx
@@ -33,7 +33,7 @@
 0x4335F2: push    eax
 0x4335F3: call    __alldiv
 0x4335F8: add     dword ptr [esp+38h+PerformanceCount], eax
-0x4335FC: mov     ecx, ModelLoaderPtr
+0x4335FC: mov     ecx, ds:0B33A1Ch
 0x433602: adc     dword ptr [esp+38h+PerformanceCount+4], edx
 0x433606: call    sub_43D3F0
 0x43360B: lea     ecx, [esp+38h+a2]
@@ -48,8 +48,8 @@
 0x433632: mov     edx, [ecx]
 0x433634: mov     eax, [edx+14h]
 0x433637: call    eax
-0x433639: mov     ecx, ModelLoaderPtr; void *
-0x43363F: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x433639: mov     ecx, ds:0B33A1Ch; this
+0x43363F: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x433644: lea     ecx, [esp+38h+var_14]
 0x433648: push    ecx; lpPerformanceCount
 0x433649: call    ds:QueryPerformanceCounter
@@ -155,3 +155,14 @@
 0x43374F: pop     ebx
 0x433750: add     esp, 24h
 0x433753: retn
+0x9ABF80: lea     ecx, [ebp-24h]; void *
+0x9ABF83: jmp     sub_4BDDC0
+0x9ABF88: lea     ecx, [ebp-20h]; void *
+0x9ABF8B: jmp     sub_4BDDC0
+0x9ABF90: mov     edx, [esp+arg_4]
+0x9ABF94: lea     eax, [edx-28h]
+0x9ABF97: mov     ecx, [edx-2Ch]
+0x9ABF9A: xor     ecx, eax
+0x9ABF9C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9ABFA1: mov     eax, offset stru_AD8CA8
+0x9ABFA6: jmp     ___CxxFrameHandler3

@@ -152,7 +152,7 @@
 0x579EBA: call    InterfaceManager_GetSingleton
 0x579EBF: add     esp, 8
 0x579EC2: mov     ecx, eax
-0x579EC4: call    sub_5821F0
+0x579EC4: call    InterfaceManager_ProcessGlobalHotkeys
 0x579EC9: push    1; arg1
 0x579ECB: push    0; canCreate
 0x579ECD: call    InterfaceManager_GetSingleton
@@ -170,7 +170,7 @@
 0x579EEF: call    InterfaceManager_GetSingleton
 0x579EF4: add     esp, 8
 0x579EF7: mov     ecx, eax
-0x579EF9: call    sub_583F40
+0x579EF9: call    InterfaceManager__UpdateMenuFades; Verified: reads GetTimerPercent and Menu fade state +0x24. State 2 completion sets state 4; if root trait 0x1772==2, destroys MenuTopicManager for DialogMenu at 0x584230 then invokes root tile deleting destructor at 0x584255. Otherwise hides root. State 8 completion sets state 1. This is the normal deferred destruction path, separate from StartFadeOut.
 0x579EFE: push    1; arg1
 0x579F00: push    0; canCreate
 0x579F02: call    InterfaceManager_GetSingleton
@@ -192,7 +192,7 @@
 0x579F2F: call    InterfaceManager_GetSingleton
 0x579F34: add     esp, 8
 0x579F37: mov     ecx, eax
-0x579F39: call    MiscPass
+0x579F39: call    MiscPass; MoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.
 0x579F3E: push    1; arg1
 0x579F40: push    0; canCreate
 0x579F42: call    InterfaceManager_GetSingleton

@@ -19,13 +19,13 @@
 0x6CCF8C: jz      short loc_6CCFAB
 0x6CCF8E: mov     ecx, [eax-4]
 0x6CCF91: lea     edi, [eax-4]
-0x6CCF94: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6CCF94: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6CCF99: push    ecx; int
 0x6CCF9A: push    18h; unsigned int
 0x6CCF9C: push    eax; void *
 0x6CCF9D: call    $LN21
 0x6CCFA2: push    edi
-0x6CCFA3: call    FormHeapFree
+0x6CCFA3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CCFA8: add     esp, 4
 0x6CCFAB: mov     ecx, esi
 0x6CCFAD: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -37,3 +37,12 @@
 0x6CCFC7: pop     esi
 0x6CCFC8: add     esp, 10h
 0x6CCFCB: retn
+0x9C7870: mov     ecx, [ebp-10h]
+0x9C7873: jmp     sub_6EBA30
+0x9C7878: mov     edx, [esp+arg_4]
+0x9C787C: lea     eax, [edx-0Ch]
+0x9C787F: mov     ecx, [edx-10h]
+0x9C7882: xor     ecx, eax
+0x9C7884: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7889: mov     eax, offset stru_AEFC6C
+0x9C788E: jmp     ___CxxFrameHandler3

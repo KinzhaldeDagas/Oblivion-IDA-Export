@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x75328F",
-    "line": "fstp    [esp+18h+var_18]",
+    "line": "fstp    [esp+18h+rhs.x]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x753298",
-    "line": "fstp    [esp+18h+var_14]",
+    "line": "fstp    [esp+18h+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x7532A2",
-    "line": "mov     ecx, [esp+18h+arg_8]",
+    "line": "mov     ecx, [esp+18h+arg_8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7532A6",
-    "line": "fstp    [esp+18h+var_10]",
+    "line": "fstp    [esp+18h+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7532AC",
-    "line": "fld     [esp+18h+var_18]",
+    "line": "fld     [esp+18h+rhs.x]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7532B3",
-    "line": "fld     [esp+18h+var_14]",
+    "line": "fld     [esp+18h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7532BE",
-    "line": "fld     [esp+18h+var_10]",
+    "line": "fld     [esp+18h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x7532F7",
-    "line": "fstp    [esp+18h+var_18]",
+    "line": "fstp    [esp+18h+rhs.x]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x7532FE",
-    "line": "fstp    [esp+18h+var_14]",
+    "line": "fstp    [esp+18h+rhs.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x753306",
-    "line": "fstp    [esp+18h+var_10]",
+    "line": "fstp    [esp+18h+rhs.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x75330A",
-    "line": "fld     [esp+18h+var_18]",
+    "line": "fld     [esp+18h+rhs.x]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x75331C",
-    "line": "fld     [esp+18h+var_14]",
+    "line": "fld     [esp+18h+rhs.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x75332F",
-    "line": "fld     [esp+18h+var_10]",
+    "line": "fld     [esp+18h+rhs.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x753342",
-    "line": "mov     eax, [esp+18h+arg_0]",
+    "line": "mov     eax, [esp+18h+out]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x753346",
-    "line": "mov     ecx, [esp+18h+var_18]",
+    "line": "mov     ecx, [esp+18h+rhs.x]",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x753349",
-    "line": "mov     edx, [esp+18h+var_14]",
+    "line": "mov     edx, [esp+18h+rhs.y]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x75334F",
-    "line": "mov     ecx, [esp+18h+var_10]",
+    "line": "mov     ecx, [esp+18h+rhs.z]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,31 +445,31 @@
   },
   {
     "ea": "0x753360",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+out]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x753364",
-    "line": "lea     edx, [esp+1Ch+var_18]",
+    "line": "lea     edx, [esp+1Ch+rhs]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x753368",
-    "line": "push    edx",
+    "line": "push    edx; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x753369",
-    "line": "push    esi",
+    "line": "push    esi; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x75336A",
-    "line": "call    sub_4BF9E0",
+    "line": "call    NiPoint3__NormalizedCrossProduct; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "call",
     "size": 5
   },

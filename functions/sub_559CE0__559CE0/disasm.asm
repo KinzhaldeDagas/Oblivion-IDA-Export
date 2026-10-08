@@ -85,7 +85,7 @@
 0x559DA6: cmp     eax, ebx
 0x559DA8: jz      short loc_559DB3
 0x559DAA: push    eax
-0x559DAB: call    FormHeapFree
+0x559DAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559DB0: add     esp, 4
 0x559DB3: mov     edi, [esi+8]
 0x559DB6: cmp     edi, ebx
@@ -93,7 +93,7 @@
 0x559DBA: mov     ecx, edi
 0x559DBC: call    sub_5599B0
 0x559DC1: push    edi
-0x559DC2: call    FormHeapFree
+0x559DC2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559DC7: add     esp, 4
 0x559DCA: mov     edi, [esi+20h]
 0x559DCD: cmp     edi, ebx
@@ -161,7 +161,7 @@
 0x559E57: call    eax
 0x559E59: mov     ecx, [esi]
 0x559E5B: push    ecx
-0x559E5C: call    FormHeapFree
+0x559E5C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x559E61: add     esp, 4
 0x559E64: mov     [esi], ebx
 0x559E66: mov     [esi+6], bx
@@ -175,3 +175,24 @@
 0x559E7D: pop     ebx
 0x559E7E: add     esp, 10h
 0x559E81: retn
+0x9BC970: mov     ecx, [ebp-10h]; void *
+0x9BC973: jmp     BSStringT_Clear
+0x9BC978: mov     ecx, [ebp-10h]
+0x9BC97B: add     ecx, 0Ch; slot
+0x9BC97E: jmp     NiPointerSlot_Release
+0x9BC983: mov     ecx, [ebp-10h]
+0x9BC986: add     ecx, 10h; slot
+0x9BC989: jmp     NiPointerSlot_Release
+0x9BC98E: mov     ecx, [ebp-10h]
+0x9BC991: add     ecx, 1Ch; slot
+0x9BC994: jmp     NiPointerSlot_Release
+0x9BC999: mov     ecx, [ebp-10h]
+0x9BC99C: add     ecx, 20h ; ' '; slot
+0x9BC99F: jmp     NiPointerSlot_Release
+0x9BC9A4: mov     edx, [esp+arg_4]
+0x9BC9A8: lea     eax, [edx-14h]
+0x9BC9AB: mov     ecx, [edx-18h]
+0x9BC9AE: xor     ecx, eax
+0x9BC9B0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BC9B5: mov     eax, offset stru_AE651C
+0x9BC9BA: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-DSBCAPS
+typedef _DSBCAPS DSBCAPS;

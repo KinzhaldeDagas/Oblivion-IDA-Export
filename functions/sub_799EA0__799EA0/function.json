@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x799EA0",
+      "0x799EA4"
+    ]
+  ],
+  "chunks_sha256": "f0796b52ef91eb1efe247aaf211420318d599b2ce1e74a3c2781b8f4b568072e",
+  "comment_regular": "\n\n[2026-10-03 callsite distinction] Native Enabled is solely byte+3C. Plugin changes two CBranch callsites, not this accessor globally:7925E9 uses current authored branch condition,79391A discards completed ENABLED/PRUNED children but retains DISABLED branches. An Enabled-only substitution without matching child retention would lose authored branch hierarchy.\n\nSpeedTree decode: CFrondEngine::Enabled. Returns byte at +0x3C.",
+  "comment_repeatable": "SpeedTree decode: CFrondEngine::Enabled. Returns byte at +0x3C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_799EA0",
+  "display_name": "OB_CFrondEngine_Enabled_010201A0",
   "end_ea": "0x799EA4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_799EA0",
+  "name": "OB_CFrondEngine_Enabled_010201A0",
   "segment": ".text",
   "sha256": "f0796b52ef91eb1efe247aaf211420318d599b2ce1e74a3c2781b8f4b568072e",
   "size": 4,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x799EA0",
-  "type": "char __thiscall(_BYTE *this)",
+  "total_chunk_size": 4,
+  "type": "bool __thiscall(const OB_CFrondEngine_010201A0 *this)",
   "xrefs_from_count": 1,
   "xrefs_to_count": 4
 }

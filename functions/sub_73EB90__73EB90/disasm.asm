@@ -32,7 +32,6 @@
 0x73EBE5: cmp     [esp+10h+arg_0], edi
 0x73EBE9: jbe     short loc_73EC20
 0x73EBEB: jmp     short loc_73EBF0
-0x73EBED: align 10h
 0x73EBF0: mov     ecx, [esi+2Ch]
 0x73EBF3: mov     eax, [ebx+21Ch]
 0x73EBF9: push    1

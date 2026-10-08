@@ -14,9 +14,9 @@ int __userpurge EffectItemList_CopyFrom_::LoopBody@<eax>(
 {
   int v12; // esi
 
-  v12 = *(_DWORD *)(a2 + 4);
-  if ( v12 == a1 )
-    return EffectItemList_CopyFrom_::LoopContinue(a1, a2, a3);
+  v12 = *(_DWORD *)(a2 + 4); /*0x414e00*/
+  if ( v12 == a1 ) /*0x414e05*/
+    return EffectItemList_CopyFrom_::LoopContinue(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); /*0x414e05*/
   else
-    return EffectItemList_CopyFrom_::CopyEffectItem(a1, a2, v12, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12);
+    return EffectItemList_CopyFrom_::CopyEffectItem(a1, a2, v12, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12); /*0x414e06*/
 }

@@ -8,7 +8,7 @@
 0x405455: jz      short loc_405461
 0x405457: call    sub_40FD90
 0x40545C: call    sub_40FDD0
-0x405461: mov     eax, ObjectPtr
+0x405461: mov     eax, ds:0B33428h
 0x405466: cmp     eax, ebx
 0x405468: jz      short loc_405479
 0x40546A: cmp     [eax+20h], ebx
@@ -16,13 +16,13 @@
 0x405470: cmp     al, bl
 0x405472: jz      short loc_405479
 0x405474: call    sub_410B00
-0x405479: call    InitBSShaderAccumulator
+0x405479: call    BSShaderAccumulator_GetOrCreateGlobal
 0x40547E: cmp     eax, ebx
 0x405480: jz      short loc_405489
 0x405482: mov     ecx, eax
 0x405484: call    sub_7A9CF0
-0x405489: mov     eax, TES
-0x40548E: mov     ecx, [eax+8]
+0x405489: mov     eax, ds:0B333A0h
+0x40548E: mov     ecx, [eax+8];
 0x405491: push    ebp
 0x405492: mov     ebp, [ecx+0Ch]
 0x405495: push    esi
@@ -32,7 +32,7 @@
 0x40549B: jle     short loc_4054EB
 0x40549D: lea     ecx, [ecx+0]
 0x4054A0: xor     esi, esi
-0x4054A2: mov     edx, TES
+0x4054A2: mov     edx, ds:0B333A0h
 0x4054A8: mov     ecx, [edx+8]
 0x4054AB: push    esi
 0x4054AC: push    edi
@@ -44,7 +44,7 @@
 0x4054BC: push    eax
 0x4054BD: lea     edx, [esp+18h+arg_0]
 0x4054C1: push    edx
-0x4054C2: call    sub_4CAFF0
+0x4054C2: call    sub_4CAFF0; Retrieve the cell canopy-shadow mask.
 0x4054C7: cmp     [esp+14h+arg_0], ebx
 0x4054CB: jz      short loc_4054DD
 0x4054CD: mov     eax, [esp+14h+var_4]
@@ -59,13 +59,13 @@
 0x4054E4: add     edi, 1
 0x4054E7: cmp     edi, ebp
 0x4054E9: jl      short loc_4054A0
-0x4054EB: mov     eax, menuRenderedTexture
+0x4054EB: mov     eax, dword ptr texture
 0x4054F0: cmp     eax, ebx
 0x4054F2: jz      short loc_405542
-0x4054F4: mov     ecx, g_textureManager; this
-0x4054FA: push    eax; a2
-0x4054FB: call    sub_7C1EE0
-0x405500: mov     esi, menuRenderedTexture
+0x4054F4: mov     ecx, dword ptr OB_RendererGlobalState_010201A0.pad_0B3+4; this
+0x4054FA: push    eax; texture
+0x4054FB: call    BSTextureManager__ReturnRenderedTexture; General BSTextureManager rendered-texture return path, not canopy-specific: locates the texture's pool record, performs manager return bookkeeping, and removes the record from the borrowed/owned list. Used by water, HDR, menus, canopy shadows and shadow rendering.
+0x405500: mov     esi, dword ptr texture
 0x405506: cmp     esi, ebx
 0x405508: jz      short loc_40552C
 0x40550A: lea     eax, [esi+4]
@@ -80,21 +80,21 @@
 0x405520: push    1
 0x405522: mov     ecx, esi
 0x405524: call    eax
-0x405526: mov     menuRenderedTexture, ebx
-0x40552C: cmp     byte_B42D54, bl
+0x405526: mov     dword ptr texture, ebx
+0x40552C: cmp     byte ptr unk_B42D54, bl
 0x405532: jz      short loc_40553C
 0x405534: fldz
-0x405536: fstp    flt_B42D50
-0x40553C: mov     byte_B42D54, bl
+0x405536: fstp    dword ptr unk_B42D50
+0x40553C: mov     byte ptr unk_B42D54, bl
 0x405542: pop     edi
 0x405543: pop     esi
 0x405544: pop     ebp
-0x405545: mov     byte_B33397, bl
+0x405545: mov     byte ptr unk_B33397, bl
 0x40554B: mov     al, 1
 0x40554D: pop     ebx
 0x40554E: pop     ecx
 0x40554F: retn
-0x405550: mov     eax, ObjectPtr
+0x405550: mov     eax, ds:0B33428h
 0x405555: cmp     eax, ebx
 0x405557: jz      short loc_405563
 0x405559: cmp     [eax+20h], ebx
@@ -103,19 +103,19 @@
 0x405561: jnz     short loc_405586
 0x405563: push    ebx
 0x405564: push    414h
-0x405569: call    sub_5790E0
+0x405569: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x40556E: add     esp, 8
 0x405571: test    al, al
 0x405573: jz      short loc_405586
 0x405575: mov     ecx, off_B03094; "Map loop.bik"
 0x40557B: push    1
 0x40557D: push    ecx
-0x40557E: call    sub_410C40
+0x40557E: call    sub_410C40; MenuPlease: patched call to sub_410C40 so device reset does not restart Map loop.bik.
 0x405583: add     esp, 8
-0x405586: cmp     UseHDR, bl
+0x405586: cmp     OB_RendererGlobalState_010201A0.bHighDynamicRangeMode, bl
 0x40558C: jz      short loc_405593
 0x40558E: call    sub_7C02E0
-0x405593: mov     edx, TES
+0x405593: mov     edx, ds:0B333A0h
 0x405599: mov     ecx, [edx+54h]
 0x40559C: cmp     ecx, ebx
 0x40559E: jz      short loc_4055BC
@@ -123,7 +123,7 @@
 0x4055A6: jz      short loc_4055BC
 0x4055A8: push    1
 0x4055AA: call    WaterManager__Destroy?
-0x4055AF: mov     eax, TES
+0x4055AF: mov     eax, ds:0B333A0h
 0x4055B4: mov     ecx, [eax+54h]
 0x4055B7: call    sub_498F30
 0x4055BC: push    ebx

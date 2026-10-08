@@ -110,7 +110,7 @@
 0x8E8E5A: mov     ecx, edi
 0x8E8E5C: mov     [esp+68h+var_38], edx
 0x8E8E60: mov     [esp+68h+var_34], eax
-0x8E8E64: call    sub_88FE00
+0x8E8E64: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8E8E69: mov     ecx, large fs:2Ch
 0x8E8E70: mov     edx, ds:0BA9DE4h
 0x8E8E76: mov     eax, [ecx+edx*4]

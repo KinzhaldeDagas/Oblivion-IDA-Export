@@ -1,1 +1,1 @@
-__gnuc_va_list
+typedef char *__gnuc_va_list;

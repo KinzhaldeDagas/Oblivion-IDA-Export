@@ -1,57 +1,57 @@
-char __thiscall sub_753BE0(int this, float a2)
+char __thiscall sub_753BE0(NiTimeController *this, float applicationTime)
 {
-  __int16 v3; // ax
-  _DWORD *v4; // esi
-  _DWORD *v5; // ebx
+  UInt16 flags; // ax
+  NiInterpController *m_controller; // esi
+  NiInterpController *v5; // ebx
   int v6; // ebp
-  int v7; // eax
+  NiRTTI *v7; // eax
   char result; // al
   bool v9; // zf
-  int v10; // [esp+14h] [ebp-4h]
+  NiNode *m_pTarget; // [esp+14h] [ebp-4h]
 
-  v3 = *(_WORD *)(this + 8);
-  *(float *)(this + 0x14) = -flt_A7DEB4;
-  *(float *)(this + 0x18) = flt_A7DEB4;
-  *(_WORD *)(this + 8) = v3 & 0xFFF9 | 4;
-  v4 = *(_DWORD **)(*(_DWORD *)(this + 0x30) + 0xC);
-  v5 = 0;
-  v6 = 0;
-  v10 = *(_DWORD *)(this + 0x30);
-  if ( v4 )
+  flags = this->members.flags; /*0x753bef*/
+  this->members.m_fLoKeyTime = -flt_A7DEB4; /*0x753bf3*/
+  this->members.m_fHiKeyTime = flt_A7DEB4; /*0x753c04*/
+  this->members.flags = flags & 0xFFF9 | 4; /*0x753c07*/
+  m_controller = this->members.m_pTarget->members.super.super.m_controller; /*0x753c0e*/
+  v5 = 0; /*0x753c11*/
+  v6 = 0; /*0x753c13*/
+  m_pTarget = this->members.m_pTarget; /*0x753c17*/
+  if ( m_controller ) /*0x753c1b*/
   {
-    while ( 1 )
+    while ( 1 ) /*0x753c24*/
     {
-      v7 = (*(int (__thiscall **)(_DWORD *))(*v4 + 4))(v4);
-      if ( v7 )
-        break;
+      v7 = m_controller->vtbl->super.super.GetType((NiObject *)m_controller); /*0x753c24*/
+      if ( v7 ) /*0x753c28*/
+        break; /*0x753c28*/
 LABEL_5:
-      v4 = (_DWORD *)v4[0xD];
-      if ( !v4 )
-        goto LABEL_8;
+      m_controller = (NiInterpController *)m_controller->member.next; /*0x753c3e*/
+      if ( !m_controller ) /*0x753c43*/
+        goto LABEL_8; /*0x753c43*/
     }
-    while ( (char *)v7 != dword_B40BCC )
+    while ( v7 != &stru_B40BCC ) /*0x753c35*/
     {
-      v7 = *(_DWORD *)(v7 + 4);
-      if ( !v7 )
-        goto LABEL_5;
+      v7 = v7->parent; /*0x753c37*/
+      if ( !v7 ) /*0x753c3c*/
+        goto LABEL_5; /*0x753c3c*/
     }
-    v6 = v4[0x11];
-    v5 = v4;
+    v6 = *(_DWORD *)&m_controller[1].member.flags; /*0x753c47*/
+    v5 = m_controller; /*0x753c4a*/
   }
 LABEL_8:
-  if ( -flt_A7DEB4 != *(float *)(this + 0x20) )
+  if ( -flt_A7DEB4 != this->members.m_fLastTime ) /*0x753c62*/
   {
-    if ( v5 )
+    if ( v5 ) /*0x753c66*/
     {
-      if ( (v5[2] & 6) == 0 && *(float *)(v6 + 0x48) < a2 - *(float *)(this + 0x20) )
-        *(float *)(this + 0x20) = a2;
+      if ( (v5->member.flags & 6) == 0 && *(float *)(v6 + 0x48) < applicationTime - this->members.m_fLastTime ) /*0x753c7d*/
+        this->members.m_fLastTime = applicationTime; /*0x753c7f*/
     }
   }
-  result = sub_6C36B0((float *)this, a2);
-  v9 = *(_DWORD *)(this + 0x30) == 0;
-  *(float *)(this + 0x18) = 0.0;
-  *(float *)(this + 0x14) = 0.0;
-  if ( !v9 && !result )
-    return (*(char (__stdcall **)(_DWORD))(*(_DWORD *)v10 + 0x98))(*(float *)(this + 0x28));
-  return result;
+  result = NiTimeController_IsUpdateUnchanged(this, applicationTime); /*0x753c88*/
+  v9 = this->members.m_pTarget == 0; /*0x753c8f*/
+  this->members.m_fHiKeyTime = 0.0; /*0x753c93*/
+  this->members.m_fLoKeyTime = 0.0; /*0x753c96*/
+  if ( !v9 && !result ) /*0x753c9d*/
+    return ((char (__stdcall *)(float))m_pTarget->vtbl->Unk_26)(this->members.cachedScaledTime); /*0x753cb2*/
+  return result; /*0x753cb4*/
 }

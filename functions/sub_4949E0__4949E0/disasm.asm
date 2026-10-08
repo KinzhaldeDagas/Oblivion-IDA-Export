@@ -16,7 +16,7 @@
 0x494A0E: retn    0Ch
 0x494A11: push    ebx
 0x494A12: push    esi
-0x494A13: mov     ecx, offset TimeInfo
+0x494A13: mov     ecx, 0B33E90h
 0x494A18: call    OsGlobalsTime__UpdatetimeInfo
 0x494A1D: mov     bl, [esp+30h+arg_8]
 0x494A21: and     bl, 0Fh
@@ -130,25 +130,25 @@
 0x494B9E: push    1; a3
 0x494BA0: push    1Ch; a2
 0x494BA2: mov     ecx, esi; this
-0x494BA4: call    InputGlobals__QueryKeyboardState
+0x494BA4: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494BA9: test    eax, eax
 0x494BAB: jnz     short loc_494BE2
 0x494BAD: push    eax; a3
 0x494BAE: push    1Ch; a2
 0x494BB0: mov     ecx, esi; this
-0x494BB2: call    InputGlobals__QueryKeyboardState
+0x494BB2: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494BB7: test    eax, eax
 0x494BB9: jnz     short loc_494BE2
 0x494BBB: push    1; a3
 0x494BBD: push    9Ch ; 'œ'; a2
 0x494BC2: mov     ecx, esi; this
-0x494BC4: call    InputGlobals__QueryKeyboardState
+0x494BC4: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494BC9: test    eax, eax
 0x494BCB: jnz     short loc_494BE2
 0x494BCD: push    eax; a3
 0x494BCE: push    9Ch ; 'œ'; a2
 0x494BD3: mov     ecx, esi; this
-0x494BD5: call    InputGlobals__QueryKeyboardState
+0x494BD5: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494BDA: test    eax, eax
 0x494BDC: jz      loc_494D0A
 0x494BE2: mov     [esp+34h+arg_8], 0
@@ -156,62 +156,62 @@
 0x494BEC: push    1; a3
 0x494BEE: push    1; a2
 0x494BF0: mov     ecx, esi; this
-0x494BF2: call    InputGlobals__QueryKeyboardState
+0x494BF2: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494BF7: test    eax, eax
 0x494BF9: jnz     short loc_494C09
 0x494BFB: push    eax; a3
 0x494BFC: push    1; a2
 0x494BFE: mov     ecx, esi; this
-0x494C00: call    InputGlobals__QueryKeyboardState
+0x494C00: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C05: test    eax, eax
 0x494C07: jz      short loc_494C0E
 0x494C09: mov     [esp+34h+arg_8], 2
 0x494C0E: push    1; a3
 0x494C10: push    1Ch; a2
 0x494C12: mov     ecx, esi; this
-0x494C14: call    InputGlobals__QueryKeyboardState
+0x494C14: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C19: test    eax, eax
 0x494C1B: jnz     short loc_494BE2
 0x494C1D: push    eax; a3
 0x494C1E: push    1Ch; a2
 0x494C20: mov     ecx, esi; this
-0x494C22: call    InputGlobals__QueryKeyboardState
+0x494C22: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C27: test    eax, eax
 0x494C29: jnz     short loc_494BE2
 0x494C2B: push    1; a3
 0x494C2D: push    15h; a2
 0x494C2F: mov     ecx, esi; this
-0x494C31: call    InputGlobals__QueryKeyboardState
+0x494C31: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C36: test    eax, eax
 0x494C38: jnz     short loc_494BE2
 0x494C3A: push    eax; a3
 0x494C3B: push    15h; a2
 0x494C3D: mov     ecx, esi; this
-0x494C3F: call    InputGlobals__QueryKeyboardState
+0x494C3F: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C44: test    eax, eax
 0x494C46: jnz     short loc_494BE2
 0x494C48: push    1; a3
 0x494C4A: push    9Ch ; 'œ'; a2
 0x494C4F: mov     ecx, esi; this
-0x494C51: call    InputGlobals__QueryKeyboardState
+0x494C51: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C56: test    eax, eax
 0x494C58: jnz     short loc_494BE2
 0x494C5A: push    eax; a3
 0x494C5B: push    9Ch ; 'œ'; a2
 0x494C60: mov     ecx, esi; this
-0x494C62: call    InputGlobals__QueryKeyboardState
+0x494C62: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C67: test    eax, eax
 0x494C69: jnz     loc_494BE2
 0x494C6F: push    1; a3
 0x494C71: push    31h ; '1'; a2
 0x494C73: mov     ecx, esi; this
-0x494C75: call    InputGlobals__QueryKeyboardState
+0x494C75: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C7A: test    eax, eax
 0x494C7C: jnz     short loc_494C8C
 0x494C7E: push    eax; a3
 0x494C7F: push    31h ; '1'; a2
 0x494C81: mov     ecx, esi; this
-0x494C83: call    InputGlobals__QueryKeyboardState
+0x494C83: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C88: test    eax, eax
 0x494C8A: jz      short loc_494D0A
 0x494C8C: mov     [esp+34h+arg_8], 1
@@ -219,37 +219,37 @@
 0x494C93: push    1; a3
 0x494C95: push    1Eh; a2
 0x494C97: mov     ecx, esi; this
-0x494C99: call    InputGlobals__QueryKeyboardState
+0x494C99: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494C9E: test    eax, eax
 0x494CA0: jnz     short loc_494D02
 0x494CA2: push    eax; a3
 0x494CA3: push    1Eh; a2
 0x494CA5: mov     ecx, esi; this
-0x494CA7: call    InputGlobals__QueryKeyboardState
+0x494CA7: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494CAC: test    eax, eax
 0x494CAE: jnz     short loc_494D02
 0x494CB0: push    1; a3
 0x494CB2: push    13h; a2
 0x494CB4: mov     ecx, esi; this
-0x494CB6: call    InputGlobals__QueryKeyboardState
+0x494CB6: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494CBB: test    eax, eax
 0x494CBD: jnz     short loc_494CF6
 0x494CBF: push    eax; a3
 0x494CC0: push    13h; a2
 0x494CC2: mov     ecx, esi; this
-0x494CC4: call    InputGlobals__QueryKeyboardState
+0x494CC4: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494CC9: test    eax, eax
 0x494CCB: jnz     short loc_494CF6
 0x494CCD: push    1; a3
 0x494CCF: push    17h; a2
 0x494CD1: mov     ecx, esi; this
-0x494CD3: call    InputGlobals__QueryKeyboardState
+0x494CD3: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494CD8: test    eax, eax
 0x494CDA: jnz     short loc_494CEA
 0x494CDC: push    eax; a3
 0x494CDD: push    17h; a2
 0x494CDF: mov     ecx, esi; this
-0x494CE1: call    InputGlobals__QueryKeyboardState
+0x494CE1: call    InputGlobals__QueryKeyboardState; TES4 authoritative keyboard query modes: 0=current down, 1=previous up/current down, 2=current up/previous down, 3=state changed.
 0x494CE6: test    eax, eax
 0x494CE8: jz      short loc_494D0A
 0x494CEA: mov     al, byte ptr [esp+34h+arg_4]
@@ -266,7 +266,7 @@
 0x494D0F: mov     al, [esp+34h+arg_8]
 0x494D13: cmp     al, 0FFh
 0x494D15: jnz     short loc_494D27
-0x494D17: call    sub_579970
+0x494D17: call    InterfaceManager_UpdateMessageMenuCursorClick
 0x494D1C: call    sub_578D70
 0x494D21: mov     [esp+34h+arg_8], al
 0x494D25: jmp     short loc_494D5F

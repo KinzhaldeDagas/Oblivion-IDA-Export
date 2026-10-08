@@ -31,12 +31,12 @@
 0x4F3685: jz      loc_4F402C
 0x4F368B: cmp     [edi], eax
 0x4F368D: jnz     loc_4F402C
-0x4F3693: push    esi; Size
-0x4F3694: push    ecx; Src
+0x4F3693: push    esi; byteCount
+0x4F3694: push    ecx; source
 0x4F3695: lea     ecx, [esp+2E0h+Dst]
-0x4F369C: push    ecx; Dst
+0x4F369C: push    ecx; destination
 0x4F369D: mov     dword ptr [edi+708h], 0FFFFFFFFh
-0x4F36A7: call    _memcpy
+0x4F36A7: call    _memcpy;
 0x4F36AC: mov     ecx, dword ptr [ebp+arg_18]
 0x4F36AF: add     esp, 0Ch
 0x4F36B2: lea     eax, [esp+2D8h+var_28C]
@@ -86,7 +86,6 @@
 0x4F3754: pop     ebp
 0x4F3755: retn    1Ch
 0x4F3758: jmp     short loc_4F3760
-0x4F375A: align 10h
 0x4F3760: mov     ebx, [esp+2D8h+var_274]
 0x4F3764: mov     eax, [esp+2D8h+var_290]
 0x4F3768: mov     esi, [esp+2D8h+var_27C]
@@ -519,7 +518,7 @@
 0x4F3D9C: fidivr  dword ptr [esp+2D8h+var_2B0]
 0x4F3DA0: fstp    [esp+2D8h+var_2C0]
 0x4F3DA4: jmp     loc_4F3E73
-0x4F3DA9: call    Double_To_SInt32
+0x4F3DA9: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4F3DAE: mov     ecx, eax
 0x4F3DB0: mov     eax, edi
 0x4F3DB2: cdq
@@ -540,7 +539,7 @@
 0x4F3DE4: fstp    [esp+2D8h+var_2C0]
 0x4F3DE8: jmp     loc_4F3E73
 0x4F3DED: fld     [esp+2D8h+var_2B0]
-0x4F3DF1: call    Double_To_SInt32
+0x4F3DF1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4F3DF6: cdq
 0x4F3DF7: idiv    esi
 0x4F3DF9: mov     [esp+2D8h+var_298], edx
@@ -560,10 +559,10 @@
 0x4F3E26: fdivr   [esp+2D8h+var_2B0]
 0x4F3E2A: fstp    [esp+2D8h+var_2C0]
 0x4F3E2E: jmp     short loc_4F3E73
-0x4F3E30: call    Double_To_SInt32
+0x4F3E30: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4F3E35: fld     [esp+2D8h+var_2B0]
 0x4F3E39: mov     esi, eax
-0x4F3E3B: call    Double_To_SInt32
+0x4F3E3B: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4F3E40: cdq
 0x4F3E41: idiv    esi
 0x4F3E43: mov     [esp+2D8h+var_298], edx

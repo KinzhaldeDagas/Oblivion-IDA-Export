@@ -1,1 +1,1 @@
-SOCKET
+typedef u_int SOCKET;

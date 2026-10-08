@@ -1,1 +1,1 @@
-LPINT
+typedef int *LPINT;

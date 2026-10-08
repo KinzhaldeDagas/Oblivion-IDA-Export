@@ -1,1 +1,1 @@
-CLSID
+typedef GUID CLSID;

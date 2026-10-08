@@ -1,19 +1,36 @@
 {
-  "callees_count": 451,
-  "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 159,
+  "callers_count": 13,
+  "chunks": [
+    [
+      "0x5FCAB0",
+      "0x5FE2E2"
+    ],
+    [
+      "0x9C2B50",
+      "0x9C2B7E"
+    ]
+  ],
+  "chunks_sha256": "d3563d3960a6cff0bb616f197ce77c8b3b1698bd90948bb23b11911fb9bd3ec4",
+  "comment_regular": "Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
+  "comment_repeatable": "Per-actor native action state machine. Advances required-note phases, handles AttackBow nock/hold/release lifecycle, constructs ArrowProjectile on release, and dispatches post-shot AMMO consumption.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 26,
   "display_name": "Actor_ProcessAction",
   "end_ea": "0x5FE2E2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor_ProcessAction",
   "segment": ".text",
   "sha256": "b69084a2a9fc77e7a7b96b29ab774ca911249656ad935efa67c3c00e2d318045",
   "size": 6194,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5FCAB0",
-  "type": "void __userpurge(Actor *this@<ecx>, double st5_0@<st2>, double@<st1>, double AnimData@<st0>, float, float)",
-  "xrefs_from_count": 2336,
+  "total_chunk_size": 6240,
+  "type": "void __thiscall(Actor *this, float arg0, float arg1)",
+  "xrefs_from_count": 2352,
   "xrefs_to_count": 13
 }

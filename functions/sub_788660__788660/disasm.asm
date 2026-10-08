@@ -1,9 +1,9 @@
-0x788660: push    ebx
-0x788661: mov     ebx, [esp+4+arg_0]
+0x788660: push    ebx; Oblivion collision-vector copy-backward primitive: moves 28-byte records from the end toward the front-safe destination and returns destination start.
+0x788661: mov     ebx, [esp+4+first]
 0x788665: push    ebp
 0x788666: push    esi
-0x788667: mov     esi, [esp+0Ch+arg_4]
-0x78866B: mov     ebp, [esp+0Ch+arg_8]
+0x788667: mov     esi, [esp+0Ch+last]
+0x78866B: mov     ebp, [esp+0Ch+destinationEnd]
 0x78866F: mov     ecx, esi
 0x788671: sub     ecx, ebx
 0x788673: mov     eax, 92492493h

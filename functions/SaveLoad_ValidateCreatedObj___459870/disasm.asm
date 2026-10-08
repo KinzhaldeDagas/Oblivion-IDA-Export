@@ -35,7 +35,7 @@
 0x4598C9: mov     edx, [eax]
 0x4598CB: push    eax
 0x4598CC: mov     [edi], edx
-0x4598CE: call    FormHeapFree
+0x4598CE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4598D3: mov     eax, [esi]
 0x4598D5: mov     edx, [eax+10h]
 0x4598D8: add     esp, 4
@@ -59,7 +59,7 @@
 0x459902: mov     ecx, ebp
 0x459904: call    BSSimpleList_IsEmpty
 0x459909: test    al, al
-0x45990B: jnz     short loc_459945
+0x45990B: jnz     short loc_459945; MEF SAVE PERF PASS2 2026-10-08: Save performance audit exclusion: deferred deletion's two passes use local successor promotion/head removal, not repeated search-from-head. No extra quadratic unlink factor established here. Preserve class partition and unlink-before-destructor behavior; arbitrary destructors may dominate time but were not profiled.
 0x45990D: mov     eax, [ebp+4]
 0x459910: test    eax, eax
 0x459912: mov     esi, [ebp+0]
@@ -69,7 +69,7 @@
 0x45991D: mov     edx, [eax]
 0x45991F: push    eax
 0x459920: mov     [ebp+0], edx
-0x459923: call    FormHeapFree
+0x459923: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x459928: add     esp, 4
 0x45992B: jmp     short loc_459934
 0x45992D: mov     dword ptr [ebp+0], 0

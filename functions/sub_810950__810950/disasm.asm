@@ -1,4 +1,4 @@
-0x810950: push    0FFFFFFFFh
+0x810950: push    0FFFFFFFFh; SpeedTreeBranchShader constant-map setup: ensures vertex/pixel constant maps, mirrors them into object slots +0x98/+0x94, then installs shared tree/wind registers via 0x7F16F0(register 0x25).
 0x810952: push    offset SEH_806210
 0x810957: mov     eax, large fs:0
 0x81095D: push    eax
@@ -105,9 +105,9 @@
 0x810A70: push    eax; lpAddend
 0x810A71: call    dword ptr ds:0A28078h
 0x810A77: mov     ecx, [ebx]
-0x810A79: push    25h ; '%'
-0x810A7B: push    ecx
-0x810A7C: call    sub_7F16F0
+0x810A79: push    25h ; '%'; baseRegister
+0x810A7B: push    ecx; constantMap
+0x810A7C: call    OB_SpeedTreeShader_RegisterTreeAndWindConstants_010201A0; Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).
 0x810A81: add     esp, 8
 0x810A84: mov     ecx, dword ptr [esp+24h+var_C]
 0x810A88: mov     large fs:0, ecx
@@ -118,3 +118,20 @@
 0x810A93: pop     ebx
 0x810A94: add     esp, 10h
 0x810A97: retn
+0x9C57A0: mov     eax, [ebp-10h]
+0x9C57A3: push    eax
+0x9C57A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57A9: pop     ecx
+0x9C57AA: retn
+0x9C57AB: mov     eax, [ebp-10h]
+0x9C57AE: push    eax
+0x9C57AF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C57B4: pop     ecx
+0x9C57B5: retn
+0x9C57B6: mov     edx, [esp+arg_4]
+0x9C57BA: lea     eax, [edx-14h]
+0x9C57BD: mov     ecx, [edx-18h]
+0x9C57C0: xor     ecx, eax
+0x9C57C2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C57C7: mov     eax, offset stru_AEDF40
+0x9C57CC: jmp     ___CxxFrameHandler3

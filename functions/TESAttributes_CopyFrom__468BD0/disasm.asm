@@ -16,7 +16,7 @@
 0x468BF6: xor     esi, esi
 0x468BF8: push    esi
 0x468BF9: push    0
-0x468BFB: call    ActorValue_GetGroupOffsetFromAV
+0x468BFB: call    ActorValue_GetGroupOffsetFromAV; RealArenaTraining fidelity pass: ActorValue_GetGroupOffsetFromAV(group, actorValue). Player skill-progress code calls this with group 2 before indexing player skillExp/requiredSkillExp.
 0x468C00: movsx   ecx, al
 0x468C03: mov     dl, [ecx+edi+4]
 0x468C07: mov     [ebx+esi+4], dl

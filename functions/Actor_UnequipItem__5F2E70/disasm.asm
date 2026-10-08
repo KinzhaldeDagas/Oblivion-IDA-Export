@@ -64,7 +64,7 @@
 0x5F2F26: call    MagicTarget_RemoveBoundObj
 0x5F2F2B: cmp     esi, ds:0B333C4h
 0x5F2F31: jnz     short loc_5F2F78
-0x5F2F33: call    InterfaceManager_IsMenuMode
+0x5F2F33: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5F2F38: test    al, al
 0x5F2F3A: jz      short loc_5F2F5F
 0x5F2F3C: mov     ecx, ds:0B333C4h; this
@@ -74,9 +74,9 @@
 0x5F2F4B: fldz
 0x5F2F4D: push    ecx
 0x5F2F4E: mov     ecx, ds:0B333C4h
-0x5F2F54: fstp    [esp+20h+var_20]
+0x5F2F54: fstp    [esp+20h+deltaTime]; deltaTime
 0x5F2F57: add     ecx, 68h ; 'h'; this
-0x5F2F5A: call    MagicTarget_ProcessEffects
+0x5F2F5A: call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.
 0x5F2F5F: mov     ecx, ds:0B333C4h
 0x5F2F65: push    ebp
 0x5F2F66: push    edi
@@ -86,9 +86,9 @@
 0x5F2F70: push    edi
 0x5F2F71: mov     ecx, esi
 0x5F2F73: call    sub_5E99C0
-0x5F2F78: mov     ecx, dword ptr [esp+20h+arg_8]
-0x5F2F7C: mov     edx, [esp+20h+arg_0]
-0x5F2F80: mov     eax, [esp+20h]
+0x5F2F78: mov     ecx, dword ptr [esp+1Ch+arg_8+4]
+0x5F2F7C: mov     edx, [esp+1Ch+arg_4]
+0x5F2F80: mov     eax, [esp+1Ch+arg_0]
 0x5F2F84: push    ecx
 0x5F2F85: push    edx
 0x5F2F86: push    ebp
@@ -99,7 +99,6 @@
 0x5F2F90: mov     bl, al
 0x5F2F92: jmp     Actor_UnequipItem___def_5F2F0D; jumptable 005F2F0D default case, cases 21,23-25,27-32
 0x5F2F97: mov     edx, [esi]; jumptable 005F2F0D case 33
-0x5F2F99: db 8Bh, 82h, 80h
 0x5F2F9C: add     eax, [eax]
 0x5F2F9E: add     [ebx-7A2F0032h], cl
 0x5F2FA4: sal     byte ptr [ecx+eax*2-75h], 16h
@@ -113,7 +112,7 @@
 0x5F2FBF: fld     dword ptr ds:0A30634h
 0x5F2FC5: push    ecx
 0x5F2FC6: mov     ecx, ds:0B38A40h
-0x5F2FCC: fstp    [esp+20h+var_20]; duration
+0x5F2FCC: fstp    [esp+20h+deltaTime]; duration
 0x5F2FCF: push    1; unk2
 0x5F2FD1: push    0; unk1
 0x5F2FD3: push    ecx; string
@@ -165,13 +164,13 @@
 0x5F3052: call    sub_41F630
 0x5F3057: mov     ecx, ds:0B33A98h
 0x5F305D: push    offset aItmtorchheldun; "ITMTorchHeldUnequip"
-0x5F3062: call    sub_447490
+0x5F3062: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x5F3067: mov     ebx, eax
 0x5F3069: test    ebx, ebx
 0x5F306B: jz      short loc_5F30C4; jumptable 005F2F0D case 34
 0x5F306D: cmp     esi, ds:0B333C4h
 0x5F3073: jnz     short loc_5F309A
-0x5F3075: call    InterfaceManager_IsMenuMode
+0x5F3075: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5F307A: test    al, al
 0x5F307C: jz      short loc_5F309A
 0x5F307E: mov     ecx, [esi+58h]
@@ -197,7 +196,7 @@
 0x5F30B4: mov     ecx, ebx; this
 0x5F30B6: call    sub_6B73E0
 0x5F30BB: push    ebx
-0x5F30BC: call    FormHeapFree
+0x5F30BC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F30C1: add     esp, 4
 0x5F30C4: mov     ecx, dword ptr [esp+20h+arg_8]; jumptable 005F2F0D case 34
 0x5F30C8: mov     edx, [esp+20h+arg_0]
@@ -217,7 +216,7 @@
 0x5F30EA: push    edi
 0x5F30EB: mov     ecx, esi
 0x5F30ED: call    sub_5E99C0
-0x5F30F2: cmp     [esp+20h+arg_8+4], 0; jumptable 005F2F0D default case, cases 21,23-25,27-32
+0x5F30F2: cmp     [esp+1Ch+arg_10], 0; jumptable 005F2F0D default case, cases 21,23-25,27-32
 0x5F30F7: jnz     short loc_5F3104
 0x5F30F9: push    0
 0x5F30FB: push    0

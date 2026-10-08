@@ -1,19 +1,15 @@
 char __cdecl sub_4F47B0(TESObjectREFR *a1, int a2, int a3, double *a4)
 {
-  char *v7; // eax
-  int v8; // eax
+  ExtraLockData *EffectiveDoorLock; // eax
 
-  *a4 = 0.0;
-  if ( a1 )
+  *a4 = 0.0; /*0x4f47bd*/
+  if ( a1 ) /*0x4f47bf*/
   {
-    v7 = (char *)sub_4D7740(a1);
-    if ( v7 )
-    {
-      sub_429990(v7);
-      *a4 = (double)v8;
-    }
+    EffectiveDoorLock = TESObjectREFR_GetEffectiveDoorLock(a1); /*0x4f47c1*/
+    if ( EffectiveDoorLock ) /*0x4f47c8*/
+      *a4 = (double)ExtraLockData_GetPlayerScaledLockLevel(EffectiveDoorLock); /*0x4f47d9*/
   }
-  if ( IsConsoleMode )
-    Interface_ConsolePrint("GetLockLevel >> %0.f", *a4);
-  return 1;
+  if ( MEMORY[0xB361AC] ) /*0x4f47db*/
+    Interface_ConsolePrint("GetLockLevel >> %0.f", *a4); /*0x4f47f1*/
+  return 1; /*0x4f47fb*/
 }

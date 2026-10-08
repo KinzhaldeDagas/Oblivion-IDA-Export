@@ -1,4 +1,4 @@
-0x4AC6B0: push    0FFFFFFFFh
+0x4AC6B0: push    0FFFFFFFFh; Verified (Oblivion): destructor destroys embedded TESTexture members at +0x104 and +0xF8 before the TESForm base destructor.
 0x4AC6B2: push    offset ??1TESEffectShader@@UAE@XZ_SEH
 0x4AC6B7: mov     eax, large fs:0
 0x4AC6BD: push    eax
@@ -29,3 +29,18 @@
 0x4AC726: pop     esi
 0x4AC727: add     esp, 10h
 0x4AC72A: retn
+0x9B2BA0: mov     ecx, [ebp-10h]; this
+0x9B2BA3: jmp     TESForm_destr
+0x9B2BA8: mov     ecx, [ebp-10h]
+0x9B2BAB: add     ecx, 0F8h ; 'ø'; void *
+0x9B2BB1: jmp     TESTexture_destr
+0x9B2BB6: mov     ecx, [ebp-10h]
+0x9B2BB9: add     ecx, 104h; void *
+0x9B2BBF: jmp     TESTexture_destr
+0x9B2BC4: mov     edx, [esp+arg_4]
+0x9B2BC8: lea     eax, [edx-8]
+0x9B2BCB: mov     ecx, [edx-0Ch]
+0x9B2BCE: xor     ecx, eax
+0x9B2BD0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2BD5: mov     eax, offset stru_ADEA58
+0x9B2BDA: jmp     ___CxxFrameHandler3

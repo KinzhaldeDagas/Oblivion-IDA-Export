@@ -19,7 +19,7 @@
 0x91BA9C: push    1134h
 0x91BAA1: lea     eax, [esp+10h+var_8]
 0x91BAA5: push    eax
-0x91BAA6: call    sub_47F990
+0x91BAA6: call    sub_47F990; TES4 authoritative metadata map lookup: map count at +0x48, entries pointer at +0x44, each entry 0x10 bytes: key, unknown, valueLow, valueHigh.
 0x91BAAB: mov     eax, [eax]
 0x91BAAD: pop     esi
 0x91BAAE: add     esp, 8

@@ -1,38 +1,39 @@
-double __userpurge sub_55C850@<st0>(int a1@<ecx>, double result@<st0>, double a3@<st1>, int a4)
+double __userpurge sub_55C850@<st0>(int a1@<ecx>, double result@<st0>, double a3@<st1>, double a4@<st2>, int a5)
 {
   int i; // edi
-  int v7; // eax
   int v8; // eax
-  float v9; // [esp+20h] [ebp+4h]
+  int v9; // eax
+  float v10; // [esp+20h] [ebp+4h]
 
-  for ( i = 0; i < 0xD; ++i )
+  for ( i = 0; i < 0xD; ++i ) /*0x55c859*/
   {
-    v7 = (*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>))(*(_DWORD *)a1 + 0x9C))(a1, result);
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v7 + 0x54))(v7, i);
-    v9 = a3;
-    a3 = v9;
-    if ( v9 > 0.0 && a3 <= 1.0 )
+    v8 = (*(int (__usercall **)@<eax>(int@<ecx>, double@<st0>, double@<st1>))(*(_DWORD *)a1 + 0x9C))(a1, result, a3); /*0x55c86b*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v8 + 0x54))(v8, i); /*0x55c875*/
+    v10 = a4; /*0x55c877*/
+    a4 = v10; /*0x55c885*/
+    if ( v10 > 0.0 && a4 <= 1.0 ) /*0x55c895*/
     {
-      if ( (*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a4 + 0x10) + 0x18))(*(_DWORD *)(a4 + 0x10), i) )
+      if ( (*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a5 + 0x10) + 0x18))(*(_DWORD *)(a5 + 0x10), i) ) /*0x55c8a0*/
       {
-        if ( !*(_BYTE *)(a4 + 0x1C) )
+        if ( !*(_BYTE *)(a5 + 0x1C) ) /*0x55c8a6*/
         {
-          sub_5508F0(*(_DWORD *)a4, a4 + 4);
-          *(_BYTE *)(a4 + 0x1C) = 1;
+          NiGeometry_RestoreFaceGenBaseVertices(*(_DWORD *)a5, a5 + 4); /*0x55c8b3*/
+          *(_BYTE *)(a5 + 0x1C) = 1; /*0x55c8bb*/
         }
-        v8 = (*(int (__usercall **)@<eax>(_DWORD@<ecx>, int, double@<st0>))(**(_DWORD **)(a4 + 0x10) + 0x18))(
-               *(_DWORD *)(a4 + 0x10),
+        v9 = (*(int (__usercall **)@<eax>(_DWORD@<ecx>, int, double@<st0>, double@<st1>))(**(_DWORD **)(a5 + 0x10) + 0x18))( /*0x55c8c8*/
+               *(_DWORD *)(a5 + 0x10),
                i,
-               result);
-        result = v9;
-        (*(void (__thiscall **)(int, int, _DWORD, _DWORD, float))(*(_DWORD *)v8 + 4))(
-          v8,
-          a4 + 4,
-          *(_DWORD *)(a4 + 0x18),
-          *(_DWORD *)(a4 + 0x14),
-          COERCE_FLOAT(LODWORD(v9)));
+               result,
+               a3);
+        result = v10; /*0x55c8ca*/
+        (*(void (__thiscall **)(int, int, _DWORD, _DWORD, float))(*(_DWORD *)v9 + 4))( /*0x55c8e5*/
+          v9,
+          a5 + 4,
+          *(_DWORD *)(a5 + 0x18),
+          *(_DWORD *)(a5 + 0x14),
+          COERCE_FLOAT(LODWORD(v10)));
       }
     }
   }
-  return result;
+  return result; /*0x55c8f7*/
 }

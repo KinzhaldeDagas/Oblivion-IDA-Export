@@ -1,4 +1,4 @@
-0x794A90: mov     ax, [esp+arg_0]
+0x794A90: mov     ax, [esp+lodIndex]; Oblivion legacy CIndexedGeometry::ResetStripCounter(lod). Selects the active LOD, resets the current strip index, and clears that LOD's accumulated triangle count. This differs from the later 4.1 no-argument inline reset.
 0x794A95: push    esi
 0x794A96: mov     esi, ecx
 0x794A98: mov     [esi+24h], ax

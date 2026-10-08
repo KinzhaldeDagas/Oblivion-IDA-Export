@@ -1,4 +1,5 @@
-int __cdecl MagicHitEffect__BuildHitVFXList_::PlayModelHitEffect(
+// Verified (Oblivion): model-hit factory skips when ActiveEffect aeFlags bit 0x4 is set or the global guard is nonzero; allocates 0x38 bytes, uses the target's parent reference and owner ActiveEffect, invokes the virtual initializer, registers successful effects with ActorProcessManager, then chains the shader factory. Failed model initialization is destroyed before shader fallback.
+MagicShaderHitEffect **__cdecl MagicHitEffect__BuildHitVFXList_::PlayModelHitEffect(
         int a1,
         int a2,
         int a3,
@@ -6,41 +7,38 @@ int __cdecl MagicHitEffect__BuildHitVFXList_::PlayModelHitEffect(
         int a5,
         int a6,
         int a7,
-        float *a8)
+        ActiveEffect *a8)
 {
-  float *v8; // edi
-  float *v9; // esi
-  TESObjectREFR *v10; // eax
-  float *v11; // esi
-  float **v12; // eax
+  NiObject *v8; // esi
+  TESObjectREFR *v9; // eax
+  NiObject *v10; // esi
+  NiObject **v11; // eax
 
-  v8 = a8;
-  if ( ((_DWORD)a8[5] & 4) == 0 && !byte_B333B8 )
+  if ( (a8->members.aeFlags & 4) == 0 && !unk_B333B8 ) /*0x69da27*/
   {
-    v9 = (float *)FormHeapAlloc(0x38u);
-    a8 = v9;
-    if ( v9 )
+    v8 = (NiObject *)FormHeapAlloc(0x38u);      // Verified (Oblivion): model-hit factory allocates exactly sizeof(MagicModelHitEffect) = 0x38 bytes. It suppresses model creation when the shared render-state byte at B333B8 is nonzero; that global is also referenced by ShadowPass/frame code and remains Unknown. /*0x69da37*/
+    if ( v8 ) /*0x69da46*/
     {
-      v10 = (TESObjectREFR *)(*(int (__thiscall **)(_DWORD))(**((_DWORD **)v8 + 8) + 4))(*((_DWORD *)v8 + 8));
-      v11 = MagicModelHitEffect_constr_args(v9, v10, (int)v8);
+      v9 = a8->members.target->vtbl->GetParentReference(a8->members.target); /*0x69da51*/
+      v10 = MagicModelHitEffect_constr_args(v8, v9, (int)a8); /*0x69da5b*/
     }
     else
     {
-      v11 = 0;
+      v10 = 0; /*0x69da5f*/
     }
-    a6 = 0xFFFFFFFF;
-    if ( !(*(unsigned __int8 (__thiscall **)(float *))(*(_DWORD *)v11 + 0x68))(v11) )
+    if ( !((unsigned __int8 (__thiscall *)(NiObject *))v10->__vftable[1].Load)(v10) ) /*0x69da74*/
     {
-      (**(void (__thiscall ***)(float *, int))v11)(v11, 1);
-      return MagicHitEffect__BuildHitVFXList_::PlayShaderHitEffect(a1, a2, a3, a4, a5, 0xFFFFFFFF, a7, a8);
+      v10->__vftable->super.Destructor((NiRefObject *)v10, 1); /*0x69daaa*/
+      return MagicHitEffect__BuildHitVFXList_::PlayShaderHitEffect(0, a8); /*0x69daab*/
     }
-    sub_678D30((int *)&ActorProcessManager_ptr, (volatile LONG *)v11);
-    v12 = (float **)FormHeapAlloc(8u);
-    if ( v12 )
+    ActorProcessManager_RegisterTempEffect((ActorProcessManager *)&qword_B3BB2C[0x75], (BSTempEffect *)v10); /*0x69da7c*/
+    v11 = (NiObject **)FormHeapAlloc(8u); /*0x69da83*/
+    if ( v11 ) /*0x69da8d*/
     {
-      *v12 = v11;
-      v12[1] = 0;
+      *v11 = v10; /*0x69da8f*/
+      v11[1] = 0; /*0x69da91*/
+      return MagicHitEffect__BuildHitVFXList_::PlayShaderHitEffect(v11, a8); /*0x69da9a*/
     }
   }
-  return MagicHitEffect__BuildHitVFXList_::PlayShaderHitEffect(a1, a2, a3, a4, a5, a6, a7, a8);
+  return MagicHitEffect__BuildHitVFXList_::PlayShaderHitEffect(0, a8);
 }

@@ -1,4 +1,4 @@
-0x790D00: push    0FFFFFFFFh
+0x790D00: push    0FFFFFFFFh; Compact stock CBranch cleanup. Frees vertex array, recursively destroys every child branch, releases flare vector at +0x30 and child vector at +0x08.
 0x790D02: push    offset SEH_790D00
 0x790D07: mov     eax, large fs:0
 0x790D0D: push    eax
@@ -17,14 +17,13 @@
 0x790D2B: mov     eax, [esi+18h]
 0x790D2E: push    eax
 0x790D2F: mov     [esp+28h+var_4], 1
-0x790D37: call    FormHeapFree
+0x790D37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x790D3C: xor     ebx, ebx
 0x790D3E: add     esp, 4
 0x790D41: xor     edi, edi
 0x790D43: mov     [esi+18h], ebx
 0x790D46: xor     ebp, ebp
 0x790D48: jmp     short loc_790D50
-0x790D4A: align 10h
 0x790D50: mov     eax, [esi+0Ch]
 0x790D53: cmp     eax, ebx
 0x790D55: jz      loc_790DF1
@@ -57,9 +56,9 @@
 0x790DA0: test    ebx, ebx
 0x790DA2: jz      short loc_790DB4
 0x790DA4: mov     ecx, ebx
-0x790DA6: call    sub_790D00
+0x790DA6: call    OB_CBranch_cleanup_010201A0; Compact CBranch cleanup: frees vertex storage, recursively destroys children, and clears child/flare vectors.
 0x790DAB: push    ebx
-0x790DAC: call    FormHeapFree
+0x790DAC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x790DB1: add     esp, 4
 0x790DB4: mov     eax, [esi+0Ch]
 0x790DB7: test    eax, eax
@@ -85,7 +84,7 @@
 0x790DF4: cmp     eax, ebx
 0x790DF6: jz      short loc_790E01
 0x790DF8: push    eax
-0x790DF9: call    FormHeapFree
+0x790DF9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x790DFE: add     esp, 4
 0x790E01: mov     [esi+34h], ebx
 0x790E04: mov     [esi+38h], ebx
@@ -94,7 +93,7 @@
 0x790E0D: cmp     eax, ebx
 0x790E0F: jz      short loc_790E1A
 0x790E11: push    eax
-0x790E12: call    FormHeapFree
+0x790E12: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x790E17: add     esp, 4
 0x790E1A: mov     [esi+0Ch], ebx
 0x790E1D: mov     [esi+10h], ebx
@@ -108,3 +107,16 @@
 0x790E32: pop     ebx
 0x790E33: add     esp, 10h
 0x790E36: retn
+0x9CBBD0: mov     ecx, [ebp-10h]
+0x9CBBD3: add     ecx, 8; this
+0x9CBBD6: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CBBDB: mov     ecx, [ebp-10h]
+0x9CBBDE: add     ecx, 30h ; '0'; this
+0x9CBBE1: jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.
+0x9CBBE6: mov     edx, [esp+arg_4]
+0x9CBBEA: lea     eax, [edx-14h]
+0x9CBBED: mov     ecx, [edx-18h]
+0x9CBBF0: xor     ecx, eax
+0x9CBBF2: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CBBF7: mov     eax, offset stru_AF4A70
+0x9CBBFC: jmp     ___CxxFrameHandler3

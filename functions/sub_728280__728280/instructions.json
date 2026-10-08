@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x728280",
-    "line": "push    esi",
+    "line": "push    esi; Verified Prettier Faces audit: allocate 12*vertexCount bytes or 36*vertexCount when format at +0x2C has any 0xF000 bits. clearStorage clears all allocated planes. TriShape/TriStrips UpdateNormals both request clearing but rebuild only first plane; plugin's NBT exclusion preserves tangent/binormal storage. Prototype corrected to NiGeometryData*, bool.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x72828F",
-    "line": "jz      short loc_728296",
+    "line": "jz      short loc_728296; NiGeometryData format bits 0xF000 indicate NBT storage. Allocate/clear one vector plane normally or three planes (normal, binormal, tangent) for NBT data.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7282BF",
-    "line": "cmp     [esp+8+arg_0], 0",
+    "line": "cmp     [esp+8+clearStorage], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x7282DB",
-    "line": "call    __memset",
+    "line": "call    __memset; Clear every allocated vector plane. UpdateNormals callers rebuild only the first normal plane, so invoking them on NBT geometry would erase tangent-space data.",
     "mnemonic": "call",
     "size": 5
   },

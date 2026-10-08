@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x79AB70",
-    "line": "push    ebx",
+    "line": "push    ebx; Checked erase-range helper for the trivial SFrondVertex vector. Validates both iterator owners, moves [last,end) forward over [first,last), updates end, and returns {owner,first}.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79AB71",
-    "line": "mov     ebx, [esp+4+arg_4]",
+    "line": "mov     ebx, [esp+4+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x79AB7D",
-    "line": "cmp     ebx, [esp+0Ch+arg_C]",
+    "line": "cmp     ebx, [esp+0Ch+lastOwner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x79AB88",
-    "line": "mov     edi, [esp+0Ch+arg_8]",
+    "line": "mov     edi, [esp+0Ch+destinationFirst]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x79AB8C",
-    "line": "mov     ecx, [esp+0Ch+arg_10]",
+    "line": "mov     ecx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x79AB97",
-    "line": "mov     byte ptr [esp+0Ch+arg_4], 0",
+    "line": "mov     byte ptr [esp+0Ch+firstOwner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x79AB9C",
-    "line": "mov     edx, [esp+0Ch+arg_4]",
+    "line": "mov     edx, [esp+0Ch+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x79ABA1",
-    "line": "mov     edx, [esp+10h+arg_0]",
+    "line": "mov     edx, [esp+10h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x79ABA6",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -133,25 +133,25 @@
   },
   {
     "ea": "0x79ABAB",
-    "line": "push    edi",
+    "line": "push    edi; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABAC",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABAD",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79ABAE",
-    "line": "call    sub_79A950",
+    "line": "call    OB_SFrondVertex_CopyForward_010201A0; Forward copy/assignment of initialized 0x38-byte SFrondVertex records from [first,last) into destinationFirst; returns destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x79ABB9",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

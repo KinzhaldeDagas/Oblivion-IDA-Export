@@ -5,7 +5,6 @@
 0x5893F7: test    esi, esi
 0x5893F9: jz      short loc_589418
 0x5893FB: jmp     short loc_589400
-0x5893FD: align 10h
 0x589400: mov     ecx, [esi+8]
 0x589403: test    ecx, ecx
 0x589405: lea     eax, [esi+8]
@@ -20,4 +19,4 @@
 0x589418: lea     ecx, [edi+30h]
 0x58941B: pop     edi
 0x58941C: pop     esi
-0x58941D: jmp     NiTPointerList__FreeAllNodes
+0x58941D: jmp     NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.

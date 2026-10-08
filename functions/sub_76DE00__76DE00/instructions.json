@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76DE00",
-    "line": "mov     eax, [esp+arg_8]",
+    "line": "mov     eax, [esp+pixelFormat]; Creates NiDX9AdditionalDepthStencilBufferData for a requested NiPixelFormat. Converts and validates the D3DFORMAT against the current adapter/backbuffer, creates a matching depth/stencil surface at the parent buffer dimensions, registers it for reset reconstruction, and attaches it to the Ni2DBuffer.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x76DE10",
-    "line": "push    eax",
+    "line": "push    eax; pixelFormat",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76DE11",
-    "line": "call    sub_76BEF0",
+    "line": "call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,13 +265,13 @@
   },
   {
     "ea": "0x76DE69",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76DE6A",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x76DE75",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x76DEA7",
-    "line": "mov     edx, [esp+2Ch+arg_4]",
+    "line": "mov     edx, [esp+2Ch+parentBuffer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x76DEBC",
-    "line": "mov     edx, [esp+34h+arg_0]",
+    "line": "mov     edx, [esp+34h+device]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x76DED1",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+device]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -553,13 +553,13 @@
   },
   {
     "ea": "0x76DEDD",
-    "line": "push    eax",
+    "line": "push    eax; hresult",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76DEDE",
-    "line": "call    sub_7736F0",
+    "line": "call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x76DEE9",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x76DF21",
-    "line": "mov     edi, [esp+30h+arg_4]",
+    "line": "mov     edi, [esp+30h+parentBuffer]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x61CE40",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Combat dodge selection consumes Actor_GetFatigueFraction; SmartAI reads the same resource without changing actions.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x61CE5D",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x61CE6E",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x61CE75",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x61CE8C",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x61CE94",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+value2]; Dodge selection reads Actor_GetFatigueFraction and feeds it into CombatStyle_CalculateDodgeScore.",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x61CE97",
-    "line": "call    sub_5E3590",
+    "line": "call    sub_5E3590; Walk-speed branch used by sub_5E65B0 when run/swim/fly flags are absent. Calls Calc_WalkSpeed, then may clamp to package target actor's walk speed minus close-distance margin.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x61CE9C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x61CEA4",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x61CEAA",
-    "line": "call    sub_546A40",
+    "line": "call    CombatStyle_CalculateDodgeScore",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x61CF4A",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x61CF59",
-    "line": "call    sub_6135F0",
+    "line": "call    CombatController_GetCurrentTarget",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x61CF80",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x61CFAC",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x61CFBD",
-    "line": "call    sub_615980",
+    "line": "call    CombatController_GetCachedTargetSurfaceDistance; Returns CombatController cached target surface distance at +0x184, computing it once when negative. The inherited EDI low-byte input belongs to this private compiler ABI and is deliberately retained.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,13 +715,13 @@
   },
   {
     "ea": "0x61CFC6",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61CFC8",
-    "line": "call    sub_615520",
+    "line": "call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x61D024",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x61D07C",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x61D086",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x61D0A1",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+value2]; value2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1147,13 +1147,13 @@
   },
   {
     "ea": "0x61D0AF",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+value1]; value1",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x61D0B2",
-    "line": "call    sub_546B20",
+    "line": "call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x61D0C1",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x61D0CB",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x61D0E6",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+value2]; value2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1267,13 +1267,13 @@
   },
   {
     "ea": "0x61D0F4",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+value1]; value1",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x61D0F7",
-    "line": "call    sub_546B20",
+    "line": "call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x61D103",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x61D10D",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1369,7 +1369,7 @@
   },
   {
     "ea": "0x61D130",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x61D13A",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x61D159",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+value2]; value2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1465,13 +1465,13 @@
   },
   {
     "ea": "0x61D15F",
-    "line": "fstp    [esp+28h+var_28]; float",
+    "line": "fstp    [esp+28h+value1]; value1",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x61D162",
-    "line": "call    sub_546B20",
+    "line": "call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1483,7 +1483,7 @@
   },
   {
     "ea": "0x61D16B",
-    "line": "mov     ecx, [esi+3Ch]",
+    "line": "mov     ecx, [esi+3Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1501,25 +1501,25 @@
   },
   {
     "ea": "0x61D175",
-    "line": "push    0",
+    "line": "push    0; forceWeaponPrefix",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x61D177",
-    "line": "push    0",
+    "line": "push    0; weaponEntryDataArg",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x61D179",
-    "line": "push    edi",
+    "line": "push    edi; groupID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61D17A",
-    "line": "call    Actor_LoadAnimGroup?",
+    "line": "call    Actor_LoadAnimGroup_; Builds an initial encoded key from live actor movement/weapon state and requested fixed group ID, then returns ActorAnimData_ResolveAnimKeyFallback's concrete playable key or sentinel 0x00FF when no ActorAnimData exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x61D180",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x61D1CC",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x61D1EF",
-    "line": "mov     ecx, offset unk_B36D90",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+0B8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2107,7 +2107,7 @@
   },
   {
     "ea": "0x61D2AD",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x61D2B7",
-    "line": "call    sub_5E0F50",
+    "line": "call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x61D2D5",
-    "line": "fstp    [esp+20h+var_20]; float",
+    "line": "fstp    [esp+20h+var_20]; value2",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2203,13 +2203,13 @@
   },
   {
     "ea": "0x61D2DB",
-    "line": "fstp    [esp+24h+var_24]; float",
+    "line": "fstp    [esp+24h+value2]; value1",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x61D2DE",
-    "line": "call    sub_546B20",
+    "line": "call    RandomFloatBetween; Returns a uniformly distributed floating value between the two inputs, accepting either input order.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 22,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_799320",
+  "chunks": [
+    [
+      "0x799320",
+      "0x799524"
+    ],
+    [
+      "0x9AFC20",
+      "0x9AFC51"
+    ]
+  ],
+  "chunks_sha256": "d7dad20498f4e52890a2f4226747f1e91e738fdc1c768048b9223223e05b8278",
+  "comment_regular": "Initializes stock CLeafGeometry from CTreeEngine leaf LOD count, all-leaves pointer, and leaf-info member.\n\nSpeedTree decode: CLeafGeometry::Init. Imports SIdvLeafInfo leaf tables, rocking group count, texture dimensions/origins, allocates vertex-program table (rockingGroups * textureCount * 0x80 bytes), then builds compact per-LOD leaf records.",
+  "comment_repeatable": "SpeedTreeOBSE 2026-06-12 IDA-only leaf-level pass: CLeafGeometry consumes compact leaf texture count for dimensions, origins, and table allocation; this is separate from LOD-indexed shader properties.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_CLeafGeometry_Init_010201A0",
   "end_ea": "0x799524",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_799320",
+  "name": "OB_CLeafGeometry_Init_010201A0",
   "segment": ".text",
   "sha256": "bb92babd1bd12816eee299505917beb4c41cffef6cdfa733beab781240833bc1",
   "size": 516,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x799320",
-  "type": "void __thiscall(int this, unsigned __int16, int, int)",
-  "xrefs_from_count": 192,
+  "total_chunk_size": 565,
+  "type": "void __thiscall(OB_CLeafGeometry_010201A0 *this, unsigned __int16 leafLodCount, const OB_stVectorBillboardLeafPtr_010201A0 *leafLods, const OB_SIdvLeafInfo_010201A0 *leafInfo)",
+  "xrefs_from_count": 211,
   "xrefs_to_count": 1
 }

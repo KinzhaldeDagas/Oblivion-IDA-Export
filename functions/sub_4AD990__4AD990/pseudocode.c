@@ -1,11 +1,17 @@
-float *__thiscall sub_4AD990(float *this, int a2, int a3, int a4, float a5)
+// Verified (Oblivion): constructs a ParticleShaderProperty from the TESEffectShader and selected visual nodes, configures it with a NiSourceTexture*, initializes its animation time, and returns the property retained by MagicShaderHitEffect +0x3C.
+ParticleShaderProperty *__thiscall TESEffectShader_CreateVisualProperty(
+        TESEffectShader *this,
+        void *targetNode,
+        void *secondaryNode,
+        NiSourceTexture *sourceTexture,
+        float elapsedSeconds)
 {
-  float *v6; // esi
+  ParticleShaderProperty *AttachedParticleShaderProperty; // esi
 
-  if ( !a4 )
-    return 0;
-  v6 = (float *)sub_7E45F0(a2, a3);
-  sub_4AD630(this, (int)v6, a4);
-  sub_7E4800(v6, a5);
-  return v6;
+  if ( !sourceTexture ) /*0x4ad99a*/
+    return 0; /*0x4ad9d2*/
+  AttachedParticleShaderProperty = NiNode_CreateAttachedParticleShaderProperty(targetNode, secondaryNode); /*0x4ad9af*/
+  TESEffectShader_ConfigureVisualProperty(this, AttachedParticleShaderProperty, sourceTexture); /*0x4ad9b5*/
+  ParticleShaderProperty_ResetParticleStateAtTime(AttachedParticleShaderProperty, elapsedSeconds); /*0x4ad9c4*/
+  return AttachedParticleShaderProperty; /*0x4ad9cc*/
 }

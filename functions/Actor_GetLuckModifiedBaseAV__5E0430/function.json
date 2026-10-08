@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x5E0430",
+      "0x5E04B1"
+    ]
+  ],
+  "chunks_sha256": "a66dee939d4c4fb1631e16b7de554df8507bcf9301a6b04de48b6af658edb98d",
+  "comment_regular": "Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.",
+  "comment_repeatable": "Return a native skill's Luck-adjusted effective base value. Read base Luck and the requested base SkillActorValue, apply Calc_LuckModifiedSkill, and clamp to 0..100. TESClass major/minor status is not consulted.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Actor_GetLuckModifiedBaseAV",
   "end_ea": "0x5E04B1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor_GetLuckModifiedBaseAV",
   "segment": ".text",
   "sha256": "a66dee939d4c4fb1631e16b7de554df8507bcf9301a6b04de48b6af658edb98d",
   "size": 129,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5E0430",
-  "type": "void __userpurge(int@<ecx>, int, signed int)",
+  "total_chunk_size": 129,
+  "type": "double __thiscall(Actor *this, SkillActorValue actorValue)",
   "xrefs_from_count": 58,
   "xrefs_to_count": 8
 }

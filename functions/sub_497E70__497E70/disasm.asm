@@ -1,4 +1,4 @@
-0x497E70: push    0FFFFFFFFh
+0x497E70: push    0FFFFFFFFh; MoonSugarEffect decode: display/render resize recreate caller. Recreates Gamebryo render dimensions, then calls RecreateImageSpaceShader before rebuilding accumulators and scenegraphs.
 0x497E72: push    offset SEH_497E70
 0x497E77: mov     eax, large fs:0
 0x497E7D: push    eax
@@ -18,7 +18,7 @@
 0x497EAA: jz      loc_49804B
 0x497EB0: cmp     ds:0B350D0h, ebx
 0x497EB6: jz      loc_49804B
-0x497EBC: call    InitBSShaderAccumulator
+0x497EBC: call    BSShaderAccumulator_GetOrCreateGlobal
 0x497EC1: mov     ecx, eax
 0x497EC3: call    sub_7A9CF0
 0x497EC8: fild    dword ptr ds:0B350D0h
@@ -57,10 +57,10 @@
 0x497F44: mov     [edi], ebx
 0x497F46: mov     eax, ds:0B350D0h
 0x497F4B: mov     ecx, ds:0B350CCh
-0x497F51: push    eax
-0x497F52: push    ecx
-0x497F53: mov     ecx, ds:0B350D8h
-0x497F59: call    sub_76B090
+0x497F51: push    eax; height
+0x497F52: push    ecx; width
+0x497F53: mov     ecx, ds:0B350D8h; this
+0x497F59: call    NiDX9Renderer_Recreate; Oblivion-authoritative resize/recreate wrapper. Saves the current 0x38-byte presentation block, substitutes requested width/height, and runs full device recreation. Returns 2 for requested parameters, 1 after successfully restoring originals, or 0 if both attempts fail.
 0x497F5E: test    eax, eax
 0x497F60: setnz   al
 0x497F63: cmp     al, bl
@@ -103,7 +103,7 @@
 0x497FDC: push    offset aFailedToRecrea; "Failed to Recreate Gamebryo Render in d"...
 0x497FE1: call    sub_497B20
 0x497FE6: add     esp, 4
-0x497FE9: call    RecreateImageSpaceShader
+0x497FE9: call    RecreateImageSpaceShader; MoonSugarEffect decode: display/render resize resource fence. sub_497E70 calls RecreateImageSpaceShader after Gamebryo render dimensions are recreated and before installing a new shader accumulator/rebuilding scenegraphs. Good boundary for plugin-owned renderer helper resources to invalidate/rebuild.
 0x497FEE: push    38h ; '8'; Size
 0x497FF0: call    FormHeapAlloc
 0x497FF5: add     esp, 4
@@ -118,7 +118,7 @@
 0x49800F: mov     ecx, ds:0B350D8h; this
 0x498015: push    eax; a2
 0x498016: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x49801E: call    NiDX9Renderer__SetShaderAccumulator
+0x49801E: call    NiDX9Renderer__SetShaderAccumulator;
 0x498023: mov     ecx, ds:0B333CCh
 0x498029: call    sub_4112E0
 0x49802E: call    InterfaceMenuScenegraph_Create
@@ -127,7 +127,7 @@
 0x498039: call    sub_578CC0
 0x49803E: add     esp, 4
 0x498041: call    sub_578CD0
-0x498046: call    sub_5B6040
+0x498046: call    MainMenu_Open
 0x49804B: mov     ecx, dword ptr [esp+30h+var_C]
 0x49804F: mov     large fs:0, ecx
 0x498056: pop     ecx
@@ -136,3 +136,15 @@
 0x498059: pop     ebx
 0x49805A: add     esp, 20h
 0x49805D: retn
+0x9B03E0: mov     eax, [ebp-20h]
+0x9B03E3: push    eax
+0x9B03E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B03E9: pop     ecx
+0x9B03EA: retn
+0x9B03EB: mov     edx, [esp+arg_4]
+0x9B03EF: lea     eax, [edx-20h]
+0x9B03F2: mov     ecx, [edx-24h]
+0x9B03F5: xor     ecx, eax
+0x9B03F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B03FC: mov     eax, offset stru_ADC730
+0x9B0401: jmp     ___CxxFrameHandler3

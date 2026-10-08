@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CE610",
-    "line": "sub     esp, 0C0h",
+    "line": "sub     esp, 0C0h; Per-cell canopy shadow mask updater; ensures global canopy shadow texture via 0x55FDF0 then paints mask pixels across current/neighbor cells.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4CE625",
-    "line": "call    sub_55FDF0",
+    "line": "call    BSTreeManager_GetCanopyShadow; Verified canopy-shadow path plus version difference: both games use Data\\\\Textures\\\\Trees\\\\CanopyShadow.dds and a white 16x16 fallback. Fallout loads through TES::CreateTextureImage and also updates BSShaderManager::pProjectedShadowTexture; Oblivion loads through OB_TES_LoadOrFindSourceTexture and stores through its renderer helper. Oblivion's adjacent renderer-resource global remains Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4CE68F",
-    "line": "call    TESObjectCELL__CreateCanopyShadowMaskForCell",
+    "line": "call    TESObjectCELL__CreateCanopyShadowMaskForCell; Create/update the native cell canopy-shadow mask.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x4CE714",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x4CE73C",
-    "line": "call    nullsub_returnTrue_0arg",
+    "line": "call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x4CE787",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x4CE7B5",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },

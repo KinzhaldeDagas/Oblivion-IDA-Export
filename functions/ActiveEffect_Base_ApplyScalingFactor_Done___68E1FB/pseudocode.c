@@ -1,4 +1,4 @@
-int __stdcall ActiveEffect_Base_ApplyScalingFactor_::Done_(int a1)
+void __stdcall ActiveEffect_Base_ApplyScalingFactor_::Done_(int a1)
 {
-  return ActiveEffect_Base_ApplyScalingFactor_::Done(a1);
+  ActiveEffect_Base_ApplyScalingFactor_::Done(a1); /*0x68e1fc*/
 }

@@ -1,73 +1,73 @@
 [
   {
     "ea": "0x7C15C0",
-    "line": "mov     eax, [esp+arg_10]",
+    "line": "mov     eax, dword ptr [esp+targetFlags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C15C4",
-    "line": "mov     edx, [esp+arg_C]",
+    "line": "mov     edx, [esp+aux]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C15C8",
-    "line": "push    eax",
+    "line": "push    eax; targetFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C15C9",
-    "line": "mov     eax, [esp+4+arg_8]",
+    "line": "mov     eax, [esp+4+d3dFormat]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C15CD",
-    "line": "push    edx",
+    "line": "push    edx; aux",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C15CE",
-    "line": "mov     edx, [esp+8+arg_0]",
+    "line": "mov     edx, [esp+8+renderer]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C15D2",
-    "line": "push    eax",
+    "line": "push    eax; d3dFormat",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C15D3",
-    "line": "mov     eax, [esp+0Ch+arg_4]",
+    "line": "mov     eax, [esp+0Ch+width]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C15D7",
-    "line": "push    eax",
+    "line": "push    eax; height",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C15D8",
-    "line": "push    eax",
+    "line": "push    eax; width",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C15D9",
-    "line": "push    edx",
+    "line": "push    edx; renderer",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C15DA",
-    "line": "call    sub_7C1430",
+    "line": "call    BSTextureManager_CreateRenderedTexture; Oblivion BSTextureManager rendered-texture creator. Builds a BSRenderedTexture for the requested dimensions, D3D format override, auxiliary value, and target flags; eligible targets receive the manager depth-stencil unless flags suppress it.",
     "mnemonic": "call",
     "size": 5
   },

@@ -27,12 +27,12 @@
 0x539BD3: push    ecx
 0x539BD4: fstp    [esp+0ECh+a2]; a2
 0x539BD7: mov     ecx, esi; this
-0x539BD9: call    NiAVObject_UpdateNiAVObject
+0x539BD9: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x539BDE: mov     esi, [esi+1Ch]
 0x539BE1: cmp     esi, ebx
 0x539BE3: jz      loc_539DD2
 0x539BE9: push    esi
-0x539BEA: call    sub_47FAC0
+0x539BEA: call    NiAVObject_GetBhkCollisionObject; ODismemberment: authoritative NiAVObject collision getter. Reads NiAVObject+0xA8 and accepts objects whose class chain includes bhkCollisionObject.
 0x539BEF: add     esp, 4
 0x539BF2: cmp     eax, ebx
 0x539BF4: mov     [esp+0E4h+var_BC], eax
@@ -44,7 +44,7 @@
 0x539C12: mov     [esp+0E4h+var_D0], offset ??_7hkLimitedHingeConstraintCinfo@@6B@; const hkLimitedHingeConstraintCinfo::`vftable'
 0x539C1A: mov     ecx, edi
 0x539C1C: mov     [esp+0E4h+var_4], ebx
-0x539C23: call    sub_452A60
+0x539C23: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x539C28: lea     ecx, [esp+0E4h+var_D0]
 0x539C2C: call    sub_8B2B00
 0x539C31: mov     eax, [esp+0E4h+var_BC]
@@ -157,7 +157,7 @@
 0x539D90: jnz     short loc_539DAF
 0x539D92: mov     ecx, [esp+0E4h+var_BC]
 0x539D96: push    ecx
-0x539D97: push    offset dword_BA7A20
+0x539D97: push    0BA7A20h
 0x539D9C: call    NiRTTI_Cast
 0x539DA1: add     esp, 8
 0x539DA4: cmp     eax, ebx
@@ -184,3 +184,25 @@
 0x539DF2: mov     esp, ebp
 0x539DF4: pop     ebp
 0x539DF5: retn    4
+0x539AF0: push    0
+0x539AF2: mov     dword ptr [ecx], offset ??_7hkConstraintCinfo@@6B@; const hkConstraintCinfo::`vftable'
+0x539AF8: call    sub_8A0200
+0x539AFD: retn
+0x9B9560: lea     ecx, [ebp+var_D0]
+0x9B9566: jmp     loc_539AF0
+0x9B956B: mov     eax, [ebp+var_B4]
+0x9B9571: push    eax
+0x9B9572: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B9577: pop     ecx
+0x9B9578: retn
+0x9B9579: mov     edx, [esp-4+arg_4]
+0x9B957D: lea     eax, [edx-0D4h]
+0x9B9583: mov     ecx, [edx-0D8h]
+0x9B9589: xor     ecx, eax
+0x9B958B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B9590: add     eax, 0Ch
+0x9B9593: mov     ecx, [edx-8]
+0x9B9596: xor     ecx, eax
+0x9B9598: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B959D: mov     eax, offset stru_AE38CC
+0x9B95A2: jmp     ___CxxFrameHandler3

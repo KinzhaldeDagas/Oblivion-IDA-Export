@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5ACB60",
-    "line": "push    ebp",
+    "line": "push    ebp; Creates the eight Oblivion attribute rows for LevelUpMenu, displays the bonus derived from the oldest queued bucket, and disables attributes whose base value is already 100.",
     "mnemonic": "push",
     "size": 1
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x5ACBB7",
-    "line": "push    0",
+    "line": "push    0; lastTile",
     "mnemonic": "push",
     "size": 2
   },
@@ -163,19 +163,19 @@
   },
   {
     "ea": "0x5ACBBE",
-    "line": "push    eax",
+    "line": "push    eax; parent",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5ACBBF",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ACBC1",
-    "line": "call    Menu_CreateTileFromTemplate",
+    "line": "call    Menu__RenderTemplate; Verified 2026-10-07: case-insensitive search of Menu template list +8/+0xC; saves global build context0xB3B0A8, creates temporary storage, replaces owned default template with borrowed matched template, builds/connects, nulls mainTemplate before Destroy so borrowed template survives, then restores previous build context. Optional lastTile stored Menu+0x10. Fallout named RenderTemplate0x827E4270 corroborates role; Fallout names use interned-string comparison.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5ACBD3",
-    "line": "call    ActorValue_GetAVFromGroupOffset",
+    "line": "call    ActorValue_GetAVFromGroupOffset; Level-up menu passes group 0 and offsets 0..7 here, mapping directly to the eight Oblivion attribute actor values.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x5ACBE1",
-    "line": "fstp    [esp+150h+a2]; a3",
+    "line": "fstp    [esp+150h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5ACBE4",
-    "line": "push    0FAAh; a2",
+    "line": "push    0FAAh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x5ACBEB",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x5ACBF7",
-    "line": "call    Player_GetAttributeLevelingBonus",
+    "line": "call    Player_GetAttributeLevelingBonus; Player_GetAttributeLevelingBonus: for attribute AV 0..7, read the attribute's skill-increase count and convert it through LevelUp_GetAttributeMultiplierFromCount; otherwise return 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x5ACC0C",
-    "line": "cmp     eax, 64h ; 'd'",
+    "line": "cmp     eax, 64h ; 'd'; If base plus displayed bonus exceeds 100, reduce the displayed bonus to 100 minus base.",
     "mnemonic": "cmp",
     "size": 3
   },
   {
     "ea": "0x5ACC0F",
-    "line": "jle     short loc_5ACC24",
+    "line": "jle     short loc_5ACC24; Clamp the displayed attribute bonus so current base plus bonus cannot exceed Oblivion's native cap of 100.",
     "mnemonic": "jle",
     "size": 2
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x5ACC39",
-    "line": "cmp     eax, 64h ; 'd'",
+    "line": "cmp     eax, 64h ; 'd'; Show the bonus label only when the derived multiplier is greater than 1 and the current base is below 100.",
     "mnemonic": "cmp",
     "size": 3
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x5ACC80",
-    "line": "fstp    [esp+150h+a2]; a3",
+    "line": "fstp    [esp+150h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5ACC83",
-    "line": "push    0FAFh; a2",
+    "line": "push    0FAFh; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x5ACC8A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x5ACC9B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x5ACCCE",
-    "line": "fstp    [esp+150h+a2]; a3",
+    "line": "fstp    [esp+150h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5ACCD1",
-    "line": "push    0FB1h; a2",
+    "line": "push    0FB1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5ACCD6",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x5ACCDC",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x5ACD08",
-    "line": "call    ActorValue_GetName",
+    "line": "call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x5ACD86",
-    "line": "cmp     eax, 64h ; 'd'",
+    "line": "cmp     eax, 64h ; 'd'; Hide and disable this attribute row when its current base is already 100.",
     "mnemonic": "cmp",
     "size": 3
   },
   {
     "ea": "0x5ACD89",
-    "line": "jl      short loc_5ACDA2",
+    "line": "jl      short loc_5ACDA2; Disable the attribute tile when its current base value is already 100.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x5ACD8E",
-    "line": "fstp    [esp+150h+a2]; a3",
+    "line": "fstp    [esp+150h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -979,13 +979,13 @@
   },
   {
     "ea": "0x5ACD93",
-    "line": "push    0FB4h; a2",
+    "line": "push    0FB4h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5ACD98",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x5ACDB2",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1192,5 +1192,95 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C0540",
+    "line": "lea     ecx, [ebp+var_12C.m_dataLen]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C0546",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C054B",
+    "line": "lea     ecx, [ebp+var_138]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C0551",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C0556",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C055A",
+    "line": "lea     eax, [edx-13Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C0560",
+    "line": "mov     ecx, [edx-140h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C0566",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C0568",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C056D",
+    "line": "add     eax, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0570",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C0573",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C0575",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C057A",
+    "line": "mov     eax, offset stru_AE981C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C057F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -3,15 +3,15 @@ NiTPointerMap<TESForm *,bool> *__thiscall NiTPointerMap<TESForm *,bool>::NiTPoin
         unsigned int a2)
 {
   int v3; // eax
-  int v5; // [esp-8h] [ebp-Ch]
+  unsigned int v5; // [esp-8h] [ebp-Ch]
 
-  *((_DWORD *)this + 1) = a2;
-  *(_DWORD *)this = &NiTMapBase<NiTPointerAllocator<unsigned int>,TESForm *,bool>::`vftable';
-  *((_DWORD *)this + 3) = 0;
+  *((_DWORD *)this + 1) = a2; /*0x44d729*/
+  *(_DWORD *)this = &NiTMapBase<NiTPointerAllocator<unsigned int>,TESForm *,bool>::`vftable'; /*0x44d736*/
+  *((_DWORD *)this + 3) = 0; /*0x44d73c*/
   v3 = FormHeapAlloc((unsigned __int64)a2 >> 0x1E != 0 ? 0xFFFFFFFF : 4 * a2);
-  v5 = 4 * *((_DWORD *)this + 1);
-  *((_DWORD *)this + 2) = v3;
-  _memset(v3, 0, v5);
-  *(_DWORD *)this = &NiTPointerMap<TESForm *,bool>::`vftable';
-  return this;
+  v5 = 4 * *((_DWORD *)this + 1); /*0x44d754*/
+  *((_DWORD *)this + 2) = v3; /*0x44d758*/
+  _memset(v3, 0, v5); /*0x44d75b*/
+  *(_DWORD *)this = &NiTPointerMap<TESForm *,bool>::`vftable'; /*0x44d763*/
+  return this; /*0x44d76b*/
 }

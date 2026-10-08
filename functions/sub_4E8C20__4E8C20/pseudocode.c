@@ -1,81 +1,82 @@
-int __thiscall sub_4E8C20(_DWORD *this)
+// Verified: TESRoad destructor helper traverses its 37-bucket map of BSSimpleList<TESConnectedPoint*> values, calls the per-entry cleanup routine for each point, frees each list node and list header, clears the map, and zeros TESRoad+0x18. Exact TESConnectedPoint layout/cleanup semantics remain Unknown.
+int __thiscall TESRoad_ClearConnectedPointMap(TESRoad *this)
 {
-  _DWORD *v1; // edi
+  TESRoad *v1; // edi
   unsigned int v2; // edx
-  NiTMap_TESCELL *v3; // ebp
+  MEF_U32PointerMapLayout32 *v3; // ebp
   unsigned int v4; // eax
   _DWORD *v5; // esi
   _DWORD *v6; // ecx
-  NiTMap_Entry_TESCELL *v7; // eax
-  TESObjectCELL *v8; // esi
-  unsigned int *vtbl; // edi
-  TESFormVtbl **v10; // eax
+  MEF_U32PointerMapEntry32 *v7; // eax
+  unsigned int **v8; // esi
+  unsigned int *v9; // edi
+  unsigned int **v10; // eax
   int result; // eax
-  TESObjectCELL *v12; // [esp+Ch] [ebp-10h] BYREF
-  NiTMap_Entry_TESCELL *v13; // [esp+10h] [ebp-Ch] BYREF
-  _DWORD *v14; // [esp+14h] [ebp-8h]
-  void *v15; // [esp+18h] [ebp-4h] BYREF
+  void *valueOut; // [esp+Ch] [ebp-10h] BYREF
+  MEF_U32PointerMapEntry32 *position; // [esp+10h] [ebp-Ch] BYREF
+  TESRoad *v14; // [esp+14h] [ebp-8h]
+  unsigned int keyOut; // [esp+18h] [ebp-4h] BYREF
 
-  v1 = this;
-  v2 = *(this + 8);
-  v3 = (NiTMap_TESCELL *)(this + 7);
-  v4 = 0;
-  v14 = this;
-  if ( v2 )
+  v1 = this; /*0x4e8c26*/
+  v2 = *((_DWORD *)this + 8); /*0x4e8c28*/
+  v3 = (MEF_U32PointerMapLayout32 *)((char *)this + 0x1C); /*0x4e8c2b*/
+  v4 = 0; /*0x4e8c2e*/
+  v14 = this; /*0x4e8c32*/
+  if ( v2 ) /*0x4e8c36*/
   {
-    v5 = (_DWORD *)*(this + 9);
-    v6 = v5;
-    while ( !*v6 )
+    v5 = *((_DWORD **)this + 9); /*0x4e8c38*/
+    v6 = v5; /*0x4e8c3b*/
+    while ( !*v6 ) /*0x4e8c43*/
     {
-      ++v4;
-      ++v6;
-      if ( v4 >= v2 )
-        goto LABEL_5;
+      ++v4; /*0x4e8c45*/
+      ++v6; /*0x4e8c48*/
+      if ( v4 >= v2 ) /*0x4e8c4d*/
+        goto LABEL_5; /*0x4e8c4d*/
     }
-    v7 = (NiTMap_Entry_TESCELL *)v5[v4];
+    v7 = (MEF_U32PointerMapEntry32 *)v5[v4]; /*0x4e8cc3*/
   }
   else
   {
 LABEL_5:
-    v7 = 0;
+    v7 = 0; /*0x4e8c4f*/
   }
-  v13 = v7;
-  if ( v7 )
+  position = v7; /*0x4e8c53*/
+  if ( v7 ) /*0x4e8c57*/
   {
-    do
+    do /*0x4e8cde*/
     {
-      v12 = 0;
-      sub_452600(v3, &v13, &v15, &v12);
-      v8 = v12;
-      if ( v12 )
+      valueOut = 0; /*0x4e8c71*/
+      NiTMap_U32Pointer_GetNextEntry(v3, &position, &keyOut, &valueOut); /*0x4e8c79*/
+      v8 = (unsigned int **)valueOut; /*0x4e8c7e*/
+      if ( valueOut ) /*0x4e8c84*/
       {
-        while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v8) )
+        while ( !BSSimpleList_IsEmpty((BSSimpleList_VoidPtr *)v8) ) /*0x4e8c8f*/
         {
-          vtbl = (unsigned int *)v8->vtbl;
-          if ( v8->vtbl )
+          v9 = *v8; /*0x4e8c91*/
+          if ( *v8 ) /*0x4e8c91*/
           {
-            sub_4BEFA0((unsigned int *)v8->vtbl);
-            FormHeapFree((unsigned int)vtbl);
+            sub_4BEFA0(*v8); /*0x4e8c99*/
+            FormHeapFree((unsigned int)v9); /*0x4e8c9f*/
           }
-          v10 = *(TESFormVtbl ***)&v8->members.super.type;
-          if ( v10 )
+          v10 = (unsigned int **)v8[1]; /*0x4e8ca7*/
+          if ( v10 ) /*0x4e8cac*/
           {
-            *(_DWORD *)&v8->members.super.type = v10[1];
-            v8->vtbl = *v10;
-            FormHeapFree((unsigned int)v10);
+            v8[1] = v10[1]; /*0x4e8cb1*/
+            *v8 = *v10; /*0x4e8cb7*/
+            FormHeapFree((unsigned int)v10); /*0x4e8cb9*/
           }
           else
           {
-            v8->vtbl = 0;
+            *v8 = 0; /*0x4e8cc8*/
           }
         }
-        FormHeapFree((unsigned int)v8);
+        FormHeapFree((unsigned int)v8); /*0x4e8cd1*/
       }
     }
-    while ( v13 );
-    v1 = v14;
+    while ( position ); /*0x4e8cde*/
+    v1 = v14; /*0x4e8ce0*/
   }
-  result = NiTMap_Clear(v3);
-  v1[6] = 0;
-  return result;
+  result = NiTMap_Clear(v3); /*0x4e8ce6*/
+  *((_DWORD *)v1 + 6) = 0; /*0x4e8ceb*/
+  return result; /*0x4e8cf2*/
 }

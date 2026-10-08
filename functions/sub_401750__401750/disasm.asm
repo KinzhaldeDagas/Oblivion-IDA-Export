@@ -1,4 +1,4 @@
-0x401750: push    ebx
+0x401750: push    ebx; FormHeap shutdown path: destroys all small MemoryPools, unlinks remaining free entries, releases allocator tables/backing state, and clears heap fields.
 0x401751: push    esi
 0x401752: mov     esi, ecx
 0x401754: xor     ebx, ebx
@@ -6,7 +6,7 @@
 0x40175C: push    edi
 0x40175D: mov     byte ptr [esi+16Dh], 1
 0x401764: jnz     short loc_40176B
-0x401766: call    sub_4027A0
+0x401766: call    MemoryPool_DestroyAll; Destroys every registered small MemoryPool; invoked during FormHeap shutdown.
 0x40176B: mov     edi, [esi+5Ch]
 0x40176E: cmp     edi, ebx
 0x401770: jz      short loc_401788
@@ -45,7 +45,7 @@
 0x4017C1: push    eax
 0x4017C2: push    edi
 0x4017C3: mov     ecx, esi
-0x4017C5: call    sub_401690
+0x4017C5: call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.
 0x4017CA: mov     eax, [edi+4]
 0x4017CD: cmp     eax, ebx
 0x4017CF: jnz     short loc_4017C1
@@ -61,7 +61,7 @@
 0x4017E8: push    edx
 0x4017E9: push    edi
 0x4017EA: mov     ecx, esi
-0x4017EC: call    sub_401690
+0x4017EC: call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.
 0x4017F1: cmp     [esi+40h], ebx
 0x4017F4: jnz     short loc_4017E5
 0x4017F6: mov     ecx, [esi+34h]

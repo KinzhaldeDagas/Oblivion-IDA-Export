@@ -4,13 +4,13 @@ bool __thiscall sub_4A41A0(_DWORD *this)
   unsigned __int16 v2; // cx
   bool result; // al
 
-  v1 = *(this + 2);
-  result = 0;
+  v1 = *(this + 2); /*0x4a41a0*/
+  result = 0; /*0x4a41cc*/
   if ( v1 )
   {
-    v2 = *(_WORD *)(v1 + 8);
+    v2 = *(_WORD *)(v1 + 8); /*0x4a41a7*/
     if ( v2 == 0xFFFF ? strlen(*(const char **)(v1 + 4)) : v2 )
-      return 1;
+      return 1; /*0x4a41a5*/
   }
-  return result;
+  return result; /*0x4a41ce*/
 }

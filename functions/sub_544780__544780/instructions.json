@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x54485E",
-    "line": "push    offset dword_B3FAB0",
+    "line": "push    offset parent",
     "mnemonic": "push",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x54488D",
-    "line": "lea     eax, [esp+4D0h+var_4B8]",
+    "line": "lea     eax, [esp+4D0h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -421,13 +421,13 @@
   },
   {
     "ea": "0x544894",
-    "line": "lea     ecx, [esp+4CCh+var_4B8]; this",
+    "line": "lea     ecx, [esp+4CCh+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x544898",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x5448D7",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x5448E4",
-    "line": "lea     edx, [esp+4D0h+var_4B8]",
+    "line": "lea     edx, [esp+4D0h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -595,13 +595,13 @@
   },
   {
     "ea": "0x5448EE",
-    "line": "lea     ecx, [esp+4CCh+var_4B8]; this",
+    "line": "lea     ecx, [esp+4CCh+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5448F2",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x5448FB",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x544908",
-    "line": "lea     eax, [esp+4D0h+var_4B8]",
+    "line": "lea     eax, [esp+4D0h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -667,31 +667,31 @@
   },
   {
     "ea": "0x544912",
-    "line": "lea     ecx, [esp+4CCh+var_4B8]; this",
+    "line": "lea     ecx, [esp+4CCh+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x544916",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x54491B",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x54491D",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54491E",
-    "line": "call    sub_405790",
+    "line": "call    NiNode_GetChildAtIndex",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x54492A",
-    "line": "lea     ecx, [esp+4D0h+var_4B8]",
+    "line": "lea     ecx, [esp+4D0h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -745,13 +745,13 @@
   },
   {
     "ea": "0x544936",
-    "line": "lea     ecx, [esp+4CCh+var_4B8]; this",
+    "line": "lea     ecx, [esp+4CCh+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x54493A",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x544943",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,31 +889,31 @@
   },
   {
     "ea": "0x544992",
-    "line": "push    1",
+    "line": "push    1; arg3",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x544994",
-    "line": "push    ebx",
+    "line": "push    ebx; normalMapBypass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x544995",
-    "line": "push    0Ah; float",
+    "line": "push    0Ah; shaderId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x544997",
-    "line": "push    edi; float",
+    "line": "push    edi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x544998",
-    "line": "call    sub_7B8940",
+    "line": "call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x5449E7",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x5449ED",
-    "line": "push    offset dword_B4335C; float",
+    "line": "push    offset stru_B4335C; float",
     "mnemonic": "push",
     "size": 5
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x544A5A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x544A8B",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1432,5 +1432,95 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BA800",
+    "line": "lea     ecx, [ebp-4B4h]; void *",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BA806",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA80B",
+    "line": "lea     ecx, [ebp-4A0h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BA811",
+    "line": "jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA816",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BA81A",
+    "line": "lea     eax, [edx-4BCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BA820",
+    "line": "mov     ecx, [edx-4C0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BA826",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BA828",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA82D",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA830",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BA833",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BA835",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA83A",
+    "line": "mov     eax, offset stru_AE4920",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BA83F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

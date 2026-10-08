@@ -47,3 +47,17 @@
 0x4A3E14: pop     esi
 0x4A3E15: add     esp, 10h
 0x4A3E18: retn    4
+0x9B26E0: mov     ecx, [ebp-10h]
+0x9B26E3: jmp     TESRegionData_SetBaseVTable
+0x9B26E8: mov     eax, [ebp+4]
+0x9B26EB: push    eax
+0x9B26EC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B26F1: pop     ecx
+0x9B26F2: retn
+0x9B26F3: mov     edx, [esp+arg_4]
+0x9B26F7: lea     eax, [edx-0Ch]
+0x9B26FA: mov     ecx, [edx-10h]
+0x9B26FD: xor     ecx, eax
+0x9B26FF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B2704: mov     eax, offset stru_ADE694
+0x9B2709: jmp     ___CxxFrameHandler3

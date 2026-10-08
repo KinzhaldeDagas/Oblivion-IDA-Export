@@ -1,4 +1,4 @@
-0x46B680: push    edi
+0x46B680: push    edi; TESForm override-file selector. With a2=-1 it walks the entire mod-reference list and returns the last non-null TESFile; TESTopicInfo lazy responses therefore read only the winning override file.
 0x46B681: add     ecx, 10h
 0x46B684: xor     edi, edi
 0x46B686: xor     eax, eax
@@ -11,7 +11,7 @@
 0x46B695: mov     ecx, [ecx+4]
 0x46B698: jz      short TESForm_GetOverrideFile___LoopContinue
 0x46B69A: cmp     esi, 0FFFFFFFFh
-0x46B69D: mov     eax, edx
+0x46B69D: mov     eax, edx; Update result on every non-null file entry; no merge traversal occurs when caller passes -1.
 0x46B69F: jz      short TESForm_GetOverrideFile___LoopContinue
 0x46B6A1: add     edi, 1
 0x46B6A4: cmp     edi, esi
@@ -19,5 +19,5 @@
 0x46B6A8: test    ecx, ecx
 0x46B6AA: jnz     short TESForm_GetOverrideFile___LoopTest
 0x46B6AC: pop     esi
-0x46B6AD: pop     edi
+0x46B6AD: pop     edi; For TESTopicInfo::GetResponseList this returned final TESFile is paired with the single sourceFileOffset stored by the last INFO loader invocation.
 0x46B6AE: retn    4

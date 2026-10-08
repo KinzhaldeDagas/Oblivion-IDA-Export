@@ -13,7 +13,7 @@
 0x5D3B95: call    OblivionDynamicCast
 0x5D3B9A: add     esp, 14h
 0x5D3B9D: mov     ebx, eax
-0x5D3B9F: call    sub_578D70
+0x5D3B9F: call    InterfaceManager_ConsumeMessageButton
 0x5D3BA4: cmp     al, 2
 0x5D3BA6: jnz     loc_5D3D0E
 0x5D3BAC: mov     eax, [ebx+48h]
@@ -100,7 +100,7 @@
 0x5D3CA4: fld     dword ptr ds:0A30634h
 0x5D3CAA: fstp    [esp+14h+var_4]
 0x5D3CAE: fld     [esp+14h+var_4]
-0x5D3CB2: call    Double_To_SInt32
+0x5D3CB2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5D3CB7: test    esi, esi
 0x5D3CB9: mov     ecx, 1
 0x5D3CBE: jz      short loc_5D3CE5

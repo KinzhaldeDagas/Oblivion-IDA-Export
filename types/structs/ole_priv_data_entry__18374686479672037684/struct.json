@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "ole_priv_data_entry",
+  "definition": "struct __declspec(align(8)) ole_priv_data_entry\n{\nFORMATETC fmtetc;\nDWORD first_use;\nDWORD unk[2];\n}\n",
   "id": 18374686479672037684,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fmtetc",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "FORMATETC"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "first_use",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "unk",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 8
+      "offset_hex": "0x1C",
+      "size": 8,
+      "type": "DWORD[2]"
     }
   ],
   "name": "ole_priv_data_entry",
+  "ordinal": 5040,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 40
 }

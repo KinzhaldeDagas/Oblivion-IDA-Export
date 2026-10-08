@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A2160",
-    "line": "mov     eax, [ecx]",
+    "line": "mov     eax, [ecx]; Verified no-argument target method: walks the EffectNode chain and calls ActiveEffect_Base_Remove(effect, 1) for each nonnull entry. It marks/flushes effect termination but leaves list unlink, PostRemoveEffect, and deleting destruction to the process loop or explicit removal paths.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6A2185",
-    "line": "call    ActiveEffect_Base_Remove",
+    "line": "call    ActiveEffect_Base_Remove; Verified RemoveAllEffects walks EffectNode entries and requests termination with immediate effect cleanup. It does not itself unlink entries; the regular MagicTarget_ProcessEffects loop owns node removal and target PostRemoveEffect/destruction.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x514100: sub     esp, 408h
+0x514100: sub     esp, 408h; Verified: Cmd_SetGameSetting parses name/value, looks up g_GameSettingsByName and routes string values through Setting_SetStringValue. Its command-table entry at 0xB0B880 contains the SetGameSetting string pointer and function pointer 0x514100, confirming the generic setter is registered.
 0x514106: mov     eax, ds:0B30AACh
 0x51410B: xor     eax, esp
 0x51410D: mov     [esp+408h+var_4], eax
@@ -26,7 +26,7 @@
 0x514162: push    edx; a3
 0x514163: push    ecx; a2
 0x514164: push    eax; a1
-0x514165: call    Script_ExtractArgs
+0x514165: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x51416A: add     esp, 24h
 0x51416D: test    al, al
 0x51416F: jz      loc_51420D
@@ -34,7 +34,7 @@
 0x514179: push    eax
 0x51417A: lea     ecx, [esp+41Ch+var_204]
 0x514181: push    ecx
-0x514182: mov     ecx, offset dword_B35574
+0x514182: mov     ecx, offset g_GameSettingsByName
 0x514187: mov     [esp+420h+a3], 0
 0x51418F: call    NiTMap_GetAt
 0x514194: mov     esi, [esp+418h+a3]

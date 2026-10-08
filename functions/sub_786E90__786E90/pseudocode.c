@@ -1,4 +1,5 @@
-BOOL __thiscall sub_786E90(float *this, float *a2)
+// Oblivion 1.2.0.416: exact component-wise stVec3 inequality. RT4.1 inline operator!= corroborates the three OR comparisons.
+bool __thiscall OB_stVec3_NotEqual_010201A0(const OB_stVec3_010201A0 *this, const OB_stVec3_010201A0 *other)
 {
-  return *a2 != *this || a2[1] != *(this + 1) || a2[2] != *(this + 2);
+  return other->x != this->x || other->y != this->y || other->z != this->z; /*0x786ec1*/
 }

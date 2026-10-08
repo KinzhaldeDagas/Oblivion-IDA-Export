@@ -1,15 +1,16 @@
-char __thiscall sub_795260(_DWORD *this, unsigned int a2)
+// OBLIVION AUTHORITY (2026-08-30): Initializes raw vector<unsigned short> storage, enforcing the 0x7FFFFFFF element limit and allocating count*2.
+bool __thiscall OB_stVectorUShort_Buy_010201A0(OB_stVectorUShort_010201A0 *this, unsigned int count)
 {
-  int v4; // eax
+  unsigned __int16 *v4; // eax
 
-  *(this + 1) = 0;
-  *(this + 2) = 0;
-  *(this + 3) = 0;
-  if ( !a2 )
-    return 0;
-  v4 = FormHeapAlloc(2 * a2);
-  *(this + 3) = v4 + 2 * a2;
-  *(this + 1) = v4;
-  *(this + 2) = v4;
-  return 1;
+  this->begin = 0; /*0x79526b*/
+  this->end = 0; /*0x79526e*/
+  this->capacityEnd = 0; /*0x795271*/
+  if ( !count ) /*0x795274*/
+    return 0; /*0x795276*/
+  v4 = (unsigned __int16 *)FormHeapAlloc(2 * count); /*0x79528b*/
+  this->capacityEnd = &v4[count]; /*0x795295*/
+  this->begin = v4; /*0x795298*/
+  this->end = v4; /*0x79529b*/
+  return 1; /*0x795278*/
 }

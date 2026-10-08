@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5EC1F0",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Verified actor-specific path-node cost: apply fPathPreferredPointBonus to preferred nodes for non-creature actors; use point bit 0x10 as an underwater-result cache and bit 0x08 as the node's below-water state; account for swim/movement restrictions and fPathNPCWadingPenalty. It is called by TESConnectedPoint_ComputeActorAwareEdgeCost.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x5EC1F6",
-    "line": "mov     esi, [esp+14h+arg_0]",
+    "line": "mov     esi, [esp+14h+point]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,13 +55,13 @@
   },
   {
     "ea": "0x5EC209",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC20B",
-    "line": "call    sub_4E8040",
+    "line": "call    PathGraphNode_IsPreferred; Verified preferred-node predicate: reads the least-significant bit of the Z float at graph-node+0x1C. The registered fPathPreferredPointBonus setting applies a bonus to this marked point for non-creature actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x5EC235",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC237",
-    "line": "mov     byte ptr [esp+1Ch+arg_0], 0",
+    "line": "mov     byte ptr [esp+1Ch+point], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -163,7 +163,7 @@
   },
   {
     "ea": "0x5EC23E",
-    "line": "call    sub_67ECC0",
+    "line": "call    GraphNode_IsFlag01Set; Verified returns stateFlags bit 0x01; graph searches use it to avoid inserting a node into the open list more than once.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x5EC24B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC24D",
-    "line": "call    sub_67EC90",
+    "line": "call    GraphNode_IsFlag02Set; Verified returns stateFlags bit 0x02; graph searches set it after processing a node and use it to avoid reprocessing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x5EC25A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC25C",
-    "line": "call    sub_67ECF0",
+    "line": "call    GraphNode_IsBelowWaterFlagSet; Verified returns stateFlags bit 0x08, the PathGrid loader's below-water point flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x5EC269",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x5EC26D",
-    "line": "call    sub_4BEF40",
+    "line": "call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x5EC290",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x5EC2AF",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x5EC2B6",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x5EC2C1",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -541,31 +541,31 @@
   },
   {
     "ea": "0x5EC313",
-    "line": "mov     byte ptr [esp+1Ch+arg_0], bl",
+    "line": "mov     byte ptr [esp+1Ch+point], bl",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5EC317",
-    "line": "mov     ecx, [esp+1Ch+arg_0]",
+    "line": "mov     ecx, [esp+1Ch+point]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5EC31B",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5EC31C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC31E",
-    "line": "call    sub_67ED30",
+    "line": "call    PathGraphNode_SetUnderwaterCache; Verified sets/clears stateFlags bit 0x10 from the result of Actor_IsUnderwater during point traversal-cost evaluation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,31 +577,31 @@
   },
   {
     "ea": "0x5EC325",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC327",
-    "line": "call    sub_67ED20",
+    "line": "call    PathGraphNode_IsUnderwaterCacheSet; Verified returns stateFlags bit 0x10, used as an actor-specific cached underwater result.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5EC32C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5EC32E",
-    "line": "mov     byte ptr [esp+1Ch+arg_0], al",
+    "line": "mov     byte ptr [esp+1Ch+point], al",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5EC332",
-    "line": "call    sub_67ECF0",
+    "line": "call    GraphNode_IsBelowWaterFlagSet; Verified returns stateFlags bit 0x08, the PathGrid loader's below-water point flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x5EC339",
-    "line": "cmp     byte ptr [esp+1Ch+arg_0], 0",
+    "line": "cmp     byte ptr [esp+1Ch+point], 0",
     "mnemonic": "cmp",
     "size": 5
   },

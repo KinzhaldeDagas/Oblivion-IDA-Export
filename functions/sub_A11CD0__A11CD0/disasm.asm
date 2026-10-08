@@ -1,6 +1,6 @@
 0xA11CD0: fldz
 0xA11CD2: mov     ecx, 20h ; ' '
-0xA11CD7: mov     eax, offset dword_B46CD0
+0xA11CD7: mov     eax, offset unk_B46CD0
 0xA11CDC: fst     dword ptr [eax-8]
 0xA11CDF: add     eax, 10h
 0xA11CE2: sub     ecx, 1

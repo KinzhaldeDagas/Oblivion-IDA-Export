@@ -1,80 +1,78 @@
-void __userpurge sub_596FE0(
-        _DWORD *a1@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>,
-        int a6,
-        Tile *a7)
+void __userpurge ClassMenu_HandleButton(
+        TESChildCELL **a1@<ecx>,
+        double a2@<st2>,
+        double a3@<st1>,
+        double a4@<st0>,
+        int a5,
+        Tile *a6)
 {
-  CHAR *v8; // esi
-  const char *v9; // eax
-  char v10; // al
-  bool v11; // zf
+  CHAR *vtbl; // esi
+  const char *v8; // eax
+  char v9; // al
+  bool v10; // zf
   char *m_data; // esi
-  _BYTE *v13; // ebx
-  BSStringT v14; // [esp+14h] [ebp-14h] BYREF
-  int v15; // [esp+24h] [ebp-4h]
+  TESChildCELL *v12; // ebx
+  BSStringT v13; // [esp+14h] [ebp-14h] BYREF
+  int v14; // [esp+24h] [ebp-4h]
 
-  switch ( a6 )
+  switch ( a5 ) /*0x59700f*/
   {
-    case 4:
-      v14.m_data = 0;
-      v14.m_dataLen = 0;
-      v14.m_bufLen = 0;
-      v8 = *(CHAR **)(a1[0xF] + 0x1C);
-      v15 = 0;
-      if ( !v8 )
-        v8 = EmptyString;
-      v9 = 0;
-      if ( v8 )
+    case 4: /*0x59700f*/
+      v13.m_data = 0; /*0x597015*/
+      v13.m_dataLen = 0; /*0x59701d*/
+      v13.m_bufLen = 0; /*0x597024*/
+      vtbl = (CHAR *)a1[0xF][7].vtbl; /*0x597031*/
+      v14 = 0; /*0x597036*/
+      if ( !vtbl ) /*0x59703e*/
+        vtbl = EmptyString; /*0x597040*/
+      v8 = 0; /*0x597045*/
+      if ( vtbl ) /*0x597049*/
       {
-        v10 = *v8;
-        if ( *v8 == 0x61
-          || v10 == 0x65
-          || v10 == 0x69
-          || v10 == 0x6F
-          || v10 == 0x75
-          || v10 == 0x41
-          || v10 == 0x45
-          || v10 == 0x49
-          || v10 == 0x4F
-          || (v11 = v10 == 0x55, v9 = *(const char **)dword_B38660, v11) )
+        v9 = *vtbl; /*0x59704b*/
+        if ( *vtbl == 0x61 /*0x597078*/
+          || v9 == 0x65
+          || v9 == 0x69
+          || v9 == 0x6F
+          || v9 == 0x75
+          || v9 == 0x41
+          || v9 == 0x45
+          || v9 == 0x49
+          || v9 == 0x4F
+          || (v10 = v9 == 0x55, v8 = *(const char **)stru_B38660, v10) )
         {
-          v9 = (const char *)dword_B38668;
+          v8 = (const char *)stru_B38668; /*0x59707a*/
         }
       }
-      BSStringT_Static_Format(&v14, "%s %s?", v9, v8);
-      m_data = v14.m_data;
-      ShowUIMessageBox(
-        (char *)MessageButtonTextYes,
+      BSStringT_Static_Format(&v13, "%s %s?", v8, vtbl); /*0x59708b*/
+      m_data = v13.m_data; /*0x59709c*/
+      ShowUIMessageBox( /*0x5970ac*/
+        (char *)MEMORY[0xB38CF8],
         a2,
         a3,
         a4,
-        a5,
-        v14.m_data,
-        (int)sub_596A00,
+        v13.m_data,
+        (int)ClassMenu_ApplyChosenClass,
         1,
-        (const char *)MessageButtonTextNo,
-        MessageButtonTextYes);
-      FormHeapFree((unsigned int)m_data);
+        (char *)MEMORY[0xB38D00],
+        MEMORY[0xB38CF8]);
+      FormHeapFree((unsigned int)m_data); /*0x5970b2*/
       break;
-    case 0x63:
-      Tile_SetFloat(a7, (_DWORD *)0xFB0, fConstant_2);
-      v13 = sub_596BC0(a7);
-      if ( v13 )
+    case 0x63: /*0x59700f*/
+      Tile_SetFloat(a6, (_DWORD *)0xFB0, fConstant_2); /*0x5970e9*/
+      v12 = (TESChildCELL *)sub_596BC0(a6); /*0x5970f6*/
+      if ( v12 ) /*0x5970fa*/
       {
-        sub_57DE50(0xB);
-        Tile_GetFloat(a7, 0xFAA);
-        a1[0x11] = Double_To_SInt32(a5);
-        a1[0xF] = v13;
-        sub_596CF0(a1, 0);
+        sub_57DE50(0xB); /*0x5970fe*/
+        Tile_GetFloat(a6, 0xFAA); /*0x59710d*/
+        a1[0x11] = (TESChildCELL *)Double_To_SInt32(a4); /*0x59711b*/
+        a1[0xF] = v12; /*0x59711e*/
+        ClassMenu_RefreshClassDetails(a1, 0);   // Morrowind Leveling hook: refresh extended ClassMenu minor skill traits after vanilla class display update. /*0x597121*/
       }
       break;
-    case 5:
-      sub_57DE50(1);
-      a1[0x16] = 1;
-      sub_584740(a1, a3, a4);
+    case 5: /*0x59700f*/
+      sub_57DE50(1); /*0x597142*/
+      a1[0x16] = (TESChildCELL *)1; /*0x59714c*/
+      Menu::StartFadeOut(a1, a3);               // ClassMenu button 5 overall-cancel path: request native menu close. Eventual deletion dispatches through ClassMenu::~ClassMenu at 0x596C70. /*0x597153*/
       break;
   }
 }

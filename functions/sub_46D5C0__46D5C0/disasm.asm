@@ -1,4 +1,4 @@
-0x46D5C0: push    esi
+0x46D5C0: push    esi; Collision/model radius-ish helper used by PlaceAtMe after a ray hit. It dynamic-casts a form to TESModel and reads +0x0C, otherwise resolves from TESObjectREFR via 0x4694A0; result scales the normalized hit vector before final placement point.
 0x46D5C1: mov     esi, [esp+4+arg_0]
 0x46D5C5: push    0; int
 0x46D5C7: push    offset ??_R0?AVTESModel@@@8; struct TypeDescriptor *

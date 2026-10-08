@@ -70,7 +70,7 @@
 0x54F408: mov     ecx, ebx
 0x54F40A: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x54F412: mov     [esp+20h+arg_0], eax
-0x54F416: call    sub_5B1E20
+0x54F416: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x54F41B: mov     al, 1
 0x54F41D: mov     ecx, [esp+1Ch+var_C]
 0x54F421: mov     large fs:0, ecx
@@ -80,3 +80,15 @@
 0x54F42B: pop     ebx
 0x54F42C: add     esp, 0Ch
 0x54F42F: retn    4
+0x9C8290: mov     eax, [ebp+4]
+0x9C8293: push    eax
+0x9C8294: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C8299: pop     ecx
+0x9C829A: retn
+0x9C829B: mov     edx, [esp+arg_4]
+0x9C829F: lea     eax, [edx-0Ch]
+0x9C82A2: mov     ecx, [edx-10h]
+0x9C82A5: xor     ecx, eax
+0x9C82A7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C82AC: mov     eax, offset stru_AF0554
+0x9C82B1: jmp     ___CxxFrameHandler3

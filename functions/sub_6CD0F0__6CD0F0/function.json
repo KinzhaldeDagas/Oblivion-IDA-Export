@@ -1,18 +1,31 @@
 {
-  "callees_count": 42,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x6CD0F0",
+      "0x6CD3C9"
+    ]
+  ],
+  "chunks_sha256": "eadbdec0bd5d4d87e38702296600da9337816634ff66c942f73f7685f7b899f4",
+  "comment_regular": "Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.",
+  "comment_repeatable": "Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6CD0F0",
+  "display_name": "NiBlendInterpolator_RecomputeNormalizedWeights",
   "end_ea": "0x6CD3C9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CD0F0",
+  "name": "NiBlendInterpolator_RecomputeNormalizedWeights",
   "segment": ".text",
   "sha256": "eadbdec0bd5d4d87e38702296600da9337816634ff66c942f73f7685f7b899f4",
   "size": 729,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CD0F0",
+  "total_chunk_size": 729,
   "type": "void __thiscall(int this)",
   "xrefs_from_count": 312,
   "xrefs_to_count": 9

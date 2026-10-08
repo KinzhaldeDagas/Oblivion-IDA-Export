@@ -1,1 +1,1 @@
-IOleObject_0
+typedef IOleObject IOleObject_0;

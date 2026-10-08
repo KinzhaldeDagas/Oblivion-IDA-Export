@@ -21,7 +21,7 @@
 0x70D5D6: call    NiFrustum__SetOrtho
 0x70D5DB: fldz
 0x70D5DD: fst     dword ptr [esi+110h]
-0x70D5E3: mov     ecx, esi
+0x70D5E3: mov     ecx, esi; this
 0x70D5E5: fst     dword ptr [esi+114h]
 0x70D5EB: fst     dword ptr [esi+118h]
 0x70D5F1: fst     dword ptr [esi+11Ch]
@@ -42,10 +42,10 @@
 0x70D644: fstp    dword ptr [esi+10Ch]
 0x70D64A: fst     dword ptr [esi+118h]
 0x70D650: fst     dword ptr [esi+114h]
-0x70D656: fstp    dword ptr [esi+120h]
+0x70D656: fstp    dword ptr [esi+120h]; Pass330 decode: the per-light NiCamera constructor initializes LODAdjust (+0x120) to 1.0; ShadowSceneLight::Render does not override it before caster traversal.
 0x70D65C: fst     dword ptr [esi+11Ch]
 0x70D662: fstp    dword ptr [esi+110h]
-0x70D668: call    sub_70C120
+0x70D668: call    NiAVObject_UpdateWorldTransform; NiAVObject/NiNode virtual +0x74. Updates this->worldTransform at +0x64. With a parent, composes parent world with this local via 0x53D7A0; without a parent, copies local directly. Then notifies an attached collision object through virtual +0x50. Return register contents are incidental; native callers use no return value.
 0x70D66D: mov     ecx, esi
 0x70D66F: call    sub_70CC90
 0x70D674: mov     eax, [esi+88h]
@@ -62,3 +62,12 @@
 0x70D69E: pop     esi
 0x70D69F: add     esp, 10h
 0x70D6A2: retn
+0x9C9A00: mov     ecx, [ebp-10h]; this
+0x9C9A03: jmp     ??1NiAVObject@@UAE@XZ; NiAVObject::~NiAVObject(void)
+0x9C9A08: mov     edx, [esp+arg_4]
+0x9C9A0C: lea     eax, [edx-0Ch]
+0x9C9A0F: mov     ecx, [edx-10h]
+0x9C9A12: xor     ecx, eax
+0x9C9A14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9A19: mov     eax, offset stru_AF2250
+0x9C9A1E: jmp     ___CxxFrameHandler3

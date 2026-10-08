@@ -1,58 +1,99 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IPropertyStoreVtbl_0",
+  "definition": "typedef IPropertyStoreVtbl IPropertyStoreVtbl_0\n",
   "id": 18374686479672029137,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IPropertyStore_0 *, const IID *const, void **)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IPropertyStore_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (*)(IPropertyStore_0 *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCount",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IPropertyStore_0 *, DWORD *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAt",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IPropertyStore_0 *, DWORD, PROPERTYKEY *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetValue",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IPropertyStore_0 *, const PROPERTYKEY *const, PROPVARIANT *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetValue",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT_0 (*)(IPropertyStore_0 *, const PROPERTYKEY *const, const PROPVARIANT *const)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Commit",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT_0 (*)(IPropertyStore_0 *)"
     }
   ],
   "name": "IPropertyStoreVtbl_0",
+  "ordinal": 2018,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 32
 }

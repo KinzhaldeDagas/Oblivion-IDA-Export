@@ -1,29 +1,27 @@
-int __userpurge sub_78B700@<eax>(_BYTE *this@<ecx>, int a2@<edi>, _DWORD *a3)
+// CSpeedTreeRT::SetNumLeafRockingGroups. Before Compute, stores at CTreeEngine+0xBC and coerces zero to one; after Compute reports the stock no-effect error.
+void __thiscall CSpeedTreeRT__SetNumLeafRockingGroups(OB_CSpeedTreeRT_010201A0 *this, unsigned int groupCount)
 {
-  bool v3; // zf
-  int result; // eax
-  rsize_t v5; // [esp-4h] [ebp-60h] BYREF
-  char *v6; // [esp+4Ch] [ebp-10h]
-  int v7; // [esp+58h] [ebp-4h]
+  bool v2; // zf
+  unsigned int v3; // eax
+  int v4; // [esp+0h] [ebp-5Ch] BYREF
+  int *v5; // [esp+4Ch] [ebp-10h]
+  int v6; // [esp+58h] [ebp-4h]
 
-  v6 = (char *)&v5 + 4;
-  v3 = *(this + 0x45) == 0;
-  v7 = 0;
-  if ( v3 )
+  v5 = &v4; /*0x78b728*/
+  v2 = this->treeComputedFlag == 0; /*0x78b72b*/
+  v6 = 0; /*0x78b72f*/
+  if ( v2 ) /*0x78b736*/
   {
-    result = (int)a3;
-    if ( !a3 )
-      result = 1;
-    *(_DWORD *)(*(_DWORD *)this + 0xBC) = result;
+    v3 = groupCount; /*0x78b738*/
+    if ( !groupCount ) /*0x78b73d*/
+      v3 = 1; /*0x78b73f*/
+    this->treeEngine->leafInfo.rockingGroupCount = v3; /*0x78b746*/
   }
   else
   {
-    LODWORD(v5) = 0x47;
-    return (int)sub_414500(
-                  &dword_B2B614,
-                  a2,
-                  "SetNumLeafRockingGroups() has no effect after Compute() has been called",
-                  v5);
+    OB_stString28_AssignBytes_010201A0( /*0x78b76c*/
+      &OB_g_strError_010201A0,
+      "SetNumLeafRockingGroups() has no effect after Compute() has been called",
+      0x47u);
   }
-  return result;
 }

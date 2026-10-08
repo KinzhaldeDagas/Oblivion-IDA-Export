@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x451210",
-    "line": "push    esi",
+    "line": "push    esi; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.",
     "mnemonic": "push",
     "size": 1
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x45124D",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+arg_0]; Existing 0x4000 partial marker is sticky: if already set on the in-memory form, OR it into the incoming record flags; otherwise replace flags with the incoming value.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x45128C",
-    "line": "call    sub_46B6C0",
+    "line": "call    TESForm_SetFile; Updates TESForm source-file provenance. Thread-safe clones normalize to their root parent; master files replace prior source entries, non-masters append once, and null removes the last source entry.",
     "mnemonic": "call",
     "size": 5
   },

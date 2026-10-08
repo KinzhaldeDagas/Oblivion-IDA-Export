@@ -187,25 +187,25 @@
   },
   {
     "ea": "0x6A53E1",
-    "line": "push    0",
+    "line": "push    0; casterFilterOrNull",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6A53E3",
-    "line": "push    50525453h",
+    "line": "push    50525453h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6A53E8",
-    "line": "add     ecx, 68h ; 'h'",
+    "line": "add     ecx, 68h ; 'h'; this",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x6A53EB",
-    "line": "call    sub_6A24B0",
+    "line": "call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6A53FB",
-    "line": "call    Actor_Kill",
+    "line": "call    Actor_Kill; ODismemberment: candidate future death/kill integration point after visual/state pipeline is stable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x6A5451",
-    "line": "call    sub_419F10",
+    "line": "call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.",
     "mnemonic": "call",
     "size": 5
   },

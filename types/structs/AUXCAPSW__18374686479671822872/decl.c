@@ -1,1 +1,1 @@
-AUXCAPSW
+typedef tagAUXCAPSW AUXCAPSW;

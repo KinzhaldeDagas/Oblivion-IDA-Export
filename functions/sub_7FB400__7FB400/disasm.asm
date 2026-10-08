@@ -1,4 +1,4 @@
-0x7FB400: push    ebx
+0x7FB400: push    ebx; Lighting30 vtable +0x30 current-pass wrapper. Performs the native type-0xA property-side reset, then delegates to NiD3DShader_ApplyCurrentPassState so the selected pass render-state group and texture stages reach DX9.
 0x7FB401: mov     ebx, [esp+4+a5]
 0x7FB405: push    esi
 0x7FB406: mov     esi, [ebx+18h]
@@ -35,7 +35,7 @@
 0x7FB453: push    eax; a3
 0x7FB454: push    ecx; a2
 0x7FB455: mov     ecx, edi; this
-0x7FB457: call    sub_77A1B0
+0x7FB457: call    NiD3DShader_ApplyCurrentPassState; Oblivion NiD3DShader vtable +0x30 wrapper. Applies CurrentPass render state and texture stages through NiD3DPass_ApplyRenderStateAndTextureStages.
 0x7FB45C: pop     edi
 0x7FB45D: pop     esi
 0x7FB45E: pop     ebx

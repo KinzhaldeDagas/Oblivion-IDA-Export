@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x405090",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified loaded-cell dispatcher for TESObjectCELL_RemoveTreeModel3DByTrunkLength. Iterates current/interior or exterior-buffer cells; when skipCurrentExteriorNeighbors is true, preserves the active 2x2 exterior neighborhood. Memory_Cleanup supplies trunkLength buckets [-FLT_MAX,100), [100,250), and [250,FLT_MAX); length units are Unknown.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x405091",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x40509C",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x4050D1",
-    "line": "cmp     [esp+14h+arg_0], 0",
+    "line": "cmp     [esp+14h+skipCurrentExteriorNeighbors], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x4050E8",
-    "line": "mov     ecx, TES",
+    "line": "mov     ecx, ds:0B333A0h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x40510E",
-    "line": "fld     [esp+14h+arg_8]",
+    "line": "fld     [esp+14h+maximumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -289,37 +289,37 @@
   },
   {
     "ea": "0x405115",
-    "line": "fstp    [esp+1Ch+var_18]; float",
+    "line": "fstp    [esp+1Ch+upperBound]; upperBound",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x405119",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x40511B",
-    "line": "fld     [esp+1Ch+arg_4]",
+    "line": "fld     [esp+1Ch+minimumDistance]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x40511F",
-    "line": "fstp    [esp+1Ch+var_1C]; float",
+    "line": "fstp    [esp+1Ch+lowerBound]; lowerBound",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x405122",
-    "line": "call    sub_4D1A90",
+    "line": "call    TESObjectCELL_RemoveTreeModel3DByTrunkLength; Verified per-cell tree-model 3D cleanup (not billboard construction): iterates TREE references, casts current NiNode to RTTI BSTreeNode, follows BSTreeNode.treeModel (+0xDC), and checks BSTreeModel.trunkLength (+0x50). Removes the reference 3D and clears the probable HasTemp3D flag when the node/model data is invalid or trunkLength lies in [lowerBound,upperBound). Length units are Unknown.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x405127",
-    "line": "mov     ecx, TES; this",
+    "line": "mov     ecx, ds:0B333A0h; this",
     "mnemonic": "mov",
     "size": 6
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x40513B",
-    "line": "call    sub_43FC20",
+    "line": "call    sub_43FC20; TES cleanup/streaming critical-section path; calls SpeedTree cache prune 0x55E390(1) before and after heap/cell cleanup.",
     "mnemonic": "call",
     "size": 5
   },

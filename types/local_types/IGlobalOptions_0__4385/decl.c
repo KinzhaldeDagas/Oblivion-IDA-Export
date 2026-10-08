@@ -1,1 +1,1 @@
-IGlobalOptions_0
+typedef IGlobalOptions IGlobalOptions_0;

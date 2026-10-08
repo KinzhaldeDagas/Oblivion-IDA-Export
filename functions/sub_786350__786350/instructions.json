@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x786350",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; stBezierSpline evenly-spaced point/table builder. Called after parsing a new profile string, with 0x1F4 samples in the observed constructor path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,37 +97,37 @@
   },
   {
     "ea": "0x78637D",
-    "line": "mov     [esp+6Ch+var_30], edi",
+    "line": "mov     [esp+6Ch+var_34.begin], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786381",
-    "line": "mov     [esp+6Ch+var_2C], edi",
+    "line": "mov     [esp+6Ch+var_34.end], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786385",
-    "line": "mov     [esp+6Ch+var_28], edi",
+    "line": "mov     [esp+6Ch+var_34.capacityEnd], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786389",
-    "line": "mov     ebp, [esp+6Ch+arg_0]",
+    "line": "mov     ebp, [esp+6Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78638D",
-    "line": "push    ebp",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78638E",
-    "line": "lea     ecx, [esp+70h+var_34]",
+    "line": "lea     ecx, [esp+70h+var_34]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x786396",
-    "line": "call    sub_785E00",
+    "line": "call    OB_stVector_stVec_ResizeDefault_010201A0; Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x7863A7",
-    "line": "mov     [esp+6Ch+arg_0], eax",
+    "line": "mov     [esp+6Ch+count], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7863AB",
-    "line": "fild    [esp+6Ch+arg_0]",
+    "line": "fild    [esp+6Ch+count]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x7863BB",
-    "line": "mov     [esp+6Ch+arg_0], edi",
+    "line": "mov     [esp+6Ch+count], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x7863C3",
-    "line": "mov     [esp+6Ch+var_3C], ecx",
+    "line": "mov     [esp+6Ch+var_3C.owner], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7863C7",
-    "line": "fild    [esp+6Ch+var_3C]",
+    "line": "fild    [esp+6Ch+var_3C.owner]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -253,13 +253,13 @@
   },
   {
     "ea": "0x7863D8",
-    "line": "mov     ecx, [esp+70h+var_4C]",
+    "line": "mov     ecx, [esp+70h+var_4C]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7863DC",
-    "line": "lea     edx, [esp+70h+var_24]",
+    "line": "lea     edx, [esp+70h+result]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -277,25 +277,25 @@
   },
   {
     "ea": "0x7863E8",
-    "line": "fstp    [esp+70h+var_70]; float",
+    "line": "fstp    [esp+70h+v]; percent",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7863EB",
-    "line": "push    edx; int",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7863EC",
-    "line": "call    sub_7844A0",
+    "line": "call    OB_StBezierSpline_SampleControlCurve_010201A0; Oblivion compact stBezierSpline control-curve sampler. Constructs a 2D result, clamps percent to [0,1], returns the terminal control point at the final segment, otherwise cubic-interpolates four splinePoints records. Sole caller is CreateEvenlySpacedPoints.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7863F1",
-    "line": "mov     ebx, [esp+6Ch+var_30]",
+    "line": "mov     ebx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7863FB",
-    "line": "mov     ecx, [esp+6Ch+var_2C]",
+    "line": "mov     ecx, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x78641B",
-    "line": "mov     ebx, [esp+6Ch+var_30]",
+    "line": "mov     ebx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x786421",
-    "line": "mov     eax, [esp+6Ch+arg_0]",
+    "line": "mov     eax, [esp+6Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x786445",
-    "line": "lea     ecx, [esp+6Ch+var_24]; void *",
+    "line": "lea     ecx, [esp+6Ch+result]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x78644C",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786451",
-    "line": "add     [esp+6Ch+arg_0], 18h",
+    "line": "add     [esp+6Ch+count], 18h",
     "mnemonic": "add",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x786487",
-    "line": "push    ebx",
+    "line": "push    ebx; last",
     "mnemonic": "push",
     "size": 1
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x786489",
-    "line": "push    ebx",
+    "line": "push    ebx; first",
     "mnemonic": "push",
     "size": 1
   },
@@ -607,37 +607,37 @@
   },
   {
     "ea": "0x78648E",
-    "line": "push    eax",
+    "line": "push    eax; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78648F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786491",
-    "line": "call    sub_784AC0",
+    "line": "call    OB_stVector24_EraseRange_010201A0; Oblivion 1.2.0.416: checked erase(first,last) for 0x18-byte records; compacts the tail, destroys remnants, updates end, and returns an iterator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x786496",
-    "line": "push    ebp",
+    "line": "push    ebp; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x786497",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x786499",
-    "line": "call    sub_785E00",
+    "line": "call    OB_stVector_stVec_ResizeDefault_010201A0; Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x7864A9",
-    "line": "mov     [esp+6Ch+arg_0], edi",
+    "line": "mov     [esp+6Ch+count], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -937,13 +937,13 @@
   },
   {
     "ea": "0x786532",
-    "line": "mov     [esp+6Ch+var_3C], ebp",
+    "line": "mov     [esp+6Ch+var_3C.owner], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786536",
-    "line": "fild    [esp+6Ch+var_3C]",
+    "line": "fild    [esp+6Ch+var_3C.owner]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x786550",
-    "line": "mov     edi, [esp+6Ch+arg_0]",
+    "line": "mov     edi, [esp+6Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x78657F",
-    "line": "mov     edi, [esp+6Ch+var_30]",
+    "line": "mov     edi, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x786594",
-    "line": "mov     ecx, [esp+6Ch+var_2C]",
+    "line": "mov     ecx, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "ea": "0x7865B4",
-    "line": "mov     edi, [esp+6Ch+var_30]",
+    "line": "mov     edi, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1219,7 +1219,7 @@
   },
   {
     "ea": "0x7865CC",
-    "line": "mov     ecx, [esp+6Ch+var_2C]",
+    "line": "mov     ecx, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x7865EF",
-    "line": "mov     edi, [esp+6Ch+var_30]",
+    "line": "mov     edi, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1363,13 +1363,13 @@
   },
   {
     "ea": "0x786612",
-    "line": "mov     [esp+6Ch+arg_0], esi",
+    "line": "mov     [esp+6Ch+count], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x786616",
-    "line": "mov     edi, [esp+6Ch+arg_0]",
+    "line": "mov     edi, [esp+6Ch+count]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1387,31 +1387,31 @@
   },
   {
     "ea": "0x78661F",
-    "line": "fst     [esp+80h+var_70]; float",
+    "line": "fst     [esp+80h+v]; v",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x786623",
-    "line": "lea     ecx, [esp+80h+var_24]",
+    "line": "lea     ecx, [esp+80h+result]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x786627",
-    "line": "fst     [esp+80h+var_74]; float",
+    "line": "fst     [esp+80h+w]; w",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x78662B",
-    "line": "fst     [esp+80h+var_78]; float",
+    "line": "fst     [esp+80h+z]; z",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x78662F",
-    "line": "fstp    [esp+80h+var_7C]; float",
+    "line": "fstp    [esp+80h+y]; y",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1423,19 +1423,19 @@
   },
   {
     "ea": "0x786637",
-    "line": "fstp    [esp+80h+var_80]; float",
+    "line": "fstp    [esp+80h+x]; x",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x78663A",
-    "line": "call    sub_78E5D0",
+    "line": "call    OB_stVec_ctor_xyzwv_010201A0; Oblivion five-component stVec constructor: stores x/y/z/w/v and sets logical size to 5. Exact body corroborated by RT4.1 Vec.cpp.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x78663F",
-    "line": "mov     ecx, [esp+6Ch+var_30]",
+    "line": "mov     ecx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x786647",
-    "line": "mov     esi, [esp+6Ch+var_2C]",
+    "line": "mov     esi, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1525,13 +1525,13 @@
   },
   {
     "ea": "0x786669",
-    "line": "mov     esi, [esp+6Ch+var_2C]",
+    "line": "mov     esi, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78666D",
-    "line": "mov     ecx, [esp+6Ch+var_30]",
+    "line": "mov     ecx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1579,7 +1579,7 @@
   },
   {
     "ea": "0x786682",
-    "line": "mov     [esp+6Ch+var_3C], eax",
+    "line": "mov     [esp+6Ch+var_3C.owner], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1657,13 +1657,13 @@
   },
   {
     "ea": "0x7866A6",
-    "line": "mov     esi, [esp+6Ch+var_2C]",
+    "line": "mov     esi, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7866AA",
-    "line": "mov     ecx, [esp+6Ch+var_30]",
+    "line": "mov     ecx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x7866CD",
-    "line": "cmp     [esp+6Ch+arg_0], eax",
+    "line": "cmp     [esp+6Ch+count], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1759,13 +1759,13 @@
   },
   {
     "ea": "0x7866D8",
-    "line": "mov     esi, [esp+6Ch+var_2C]",
+    "line": "mov     esi, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7866DC",
-    "line": "mov     ecx, [esp+6Ch+var_30]",
+    "line": "mov     ecx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x7866E6",
-    "line": "mov     eax, [esp+6Ch+var_3C]",
+    "line": "mov     eax, [esp+6Ch+var_3C.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1891,13 +1891,13 @@
   },
   {
     "ea": "0x786717",
-    "line": "mov     esi, [esp+6Ch+var_2C]",
+    "line": "mov     esi, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78671B",
-    "line": "mov     ecx, [esp+6Ch+var_30]",
+    "line": "mov     ecx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x78673C",
-    "line": "cmp     [esp+6Ch+arg_0], eax",
+    "line": "cmp     [esp+6Ch+count], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x786747",
-    "line": "mov     ecx, [esp+6Ch+var_30]",
+    "line": "mov     ecx, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x786756",
-    "line": "fstp    [esp+6Ch+var_3C]",
+    "line": "fstp    [esp+6Ch+var_3C.owner]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x78675F",
-    "line": "fld     [esp+6Ch+var_3C]",
+    "line": "fld     [esp+6Ch+var_3C.owner]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x78676F",
-    "line": "fstp    [esp+6Ch+var_20]",
+    "line": "fstp    [esp+6Ch+result.data+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x786799",
-    "line": "mov     ecx, [esp+6Ch+var_24]",
+    "line": "mov     ecx, [esp+6Ch+result.data]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x7867A4",
-    "line": "mov     edx, [esp+6Ch+var_20]",
+    "line": "mov     edx, [esp+6Ch+result.data+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x7867AD",
-    "line": "mov     ecx, [esp+6Ch+var_1C]",
+    "line": "mov     ecx, [esp+6Ch+result.data+8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2197,7 +2197,7 @@
   },
   {
     "ea": "0x7867B4",
-    "line": "mov     edx, [esp+6Ch+var_18]",
+    "line": "mov     edx, [esp+6Ch+result.data+0Ch]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x7867BB",
-    "line": "mov     ecx, [esp+6Ch+var_14]",
+    "line": "mov     ecx, [esp+6Ch+result.data+10h]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2221,13 +2221,13 @@
   },
   {
     "ea": "0x7867C2",
-    "line": "mov     edx, [esp+6Ch+var_10]",
+    "line": "mov     edx, [esp+6Ch+result.size]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7867C6",
-    "line": "lea     ecx, [esp+6Ch+var_24]; void *",
+    "line": "lea     ecx, [esp+6Ch+result]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x7867CD",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2653,7 +2653,7 @@
   },
   {
     "ea": "0x78689A",
-    "line": "mov     esi, [esp+6Ch+var_30]",
+    "line": "mov     esi, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x7868AA",
-    "line": "mov     edi, [esp+6Ch+var_2C]",
+    "line": "mov     edi, [esp+6Ch+var_34.end]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2695,13 +2695,13 @@
   },
   {
     "ea": "0x7868B2",
-    "line": "mov     ecx, esi; void *",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7868B4",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x7868C0",
-    "line": "mov     esi, [esp+6Ch+var_30]",
+    "line": "mov     esi, [esp+6Ch+var_34.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2737,7 +2737,7 @@
   },
   {
     "ea": "0x7868C5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2800,5 +2800,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CB190",
+    "line": "lea     ecx, [ebp-34h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB193",
+    "line": "jmp     OB_stVector24_DestroyThunk_010201A0; Oblivion 1.2.0.416: compiler thunk to the shared 24-byte vector destructor.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB198",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CB19C",
+    "line": "lea     eax, [edx-5Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB19F",
+    "line": "mov     ecx, [edx-60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CB1A2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CB1A4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB1A9",
+    "line": "mov     eax, offset stru_AF3844",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CB1AE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

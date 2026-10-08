@@ -5,7 +5,7 @@
 0x552D6A: cmp     esi, edi
 0x552D6C: jz      short loc_552D89
 0x552D6E: mov     edi, edi
-0x552D70: push    offset sub_43ACE0; void (__thiscall *)(void *)
+0x552D70: push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)
 0x552D75: push    4; int
 0x552D77: push    18h; unsigned int
 0x552D79: lea     eax, [esi+8]

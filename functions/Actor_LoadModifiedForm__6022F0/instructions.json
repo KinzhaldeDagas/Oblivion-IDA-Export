@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x6022F3",
-    "line": "test    [esp+14h+arg_4], 28000000h",
+    "line": "test    [esp+14h+currentFlags], 28000000h",
     "mnemonic": "test",
     "size": 8
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x6022FD",
-    "line": "mov     ebp, [esp+1Ch+arg_0]",
+    "line": "mov     ebp, [esp+1Ch+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x6023B5",
-    "line": "test    byte ptr [esp+24h+arg_4], 40h",
+    "line": "test    byte ptr [esp+24h+currentFlags], 40h",
     "mnemonic": "test",
     "size": 5
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x6023F0",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x60241A",
-    "line": "mov     eax, [esp+24h+arg_4]",
+    "line": "mov     eax, [esp+24h+currentFlags]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x60241E",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -637,19 +637,19 @@
   },
   {
     "ea": "0x60242E",
-    "line": "push    eax",
+    "line": "push    eax; currentFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60242F",
-    "line": "push    ecx",
+    "line": "push    ecx; changeMask",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602430",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x602455",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,37 +715,37 @@
   },
   {
     "ea": "0x602462",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x602468",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x60246A",
-    "line": "lea     edx, [esp+28h+var_4]",
+    "line": "lea     edx, [esp+28h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x60246E",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60246F",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x602474",
-    "line": "cmp     [esp+24h+var_4], 4B4F4C42h",
+    "line": "cmp     [esp+24h+destination], 4B4F4C42h",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x602490",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x6024E6",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x6024EF",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x6024F5",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -985,13 +985,13 @@
   },
   {
     "ea": "0x6024FA",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6024FF",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1003,13 +1003,13 @@
   },
   {
     "ea": "0x602507",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602508",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1027,13 +1027,13 @@
   },
   {
     "ea": "0x602516",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60251B",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1045,25 +1045,25 @@
   },
   {
     "ea": "0x602523",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602524",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602526",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60252B",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1075,19 +1075,19 @@
   },
   {
     "ea": "0x602533",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602534",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602536",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x602546",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1123,19 +1123,19 @@
   },
   {
     "ea": "0x60254B",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60254C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60254E",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x60255A",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1165,19 +1165,19 @@
   },
   {
     "ea": "0x602560",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602561",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602563",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x6025D1",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1399,13 +1399,13 @@
   },
   {
     "ea": "0x6025D7",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6025D8",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1417,7 +1417,7 @@
   },
   {
     "ea": "0x6025E2",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x6025EE",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1447,19 +1447,19 @@
   },
   {
     "ea": "0x6025F4",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6025F5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6025F7",
-    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame",
+    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x602606",
-    "line": "test    [esp+2Ch+var_4], 8000h",
+    "line": "test    [esp+2Ch+destination], 8000h",
     "mnemonic": "test",
     "size": 8
   },
@@ -1489,13 +1489,13 @@
   },
   {
     "ea": "0x602614",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x60261A",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1507,25 +1507,25 @@
   },
   {
     "ea": "0x602620",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602621",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; MEF candidate verification 2026-05-30: Actor first relationship/disposition UInt16 count verified; loop consumes FormID+4-byte value. Accepted pending paired clamp/allocation-skip hook.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x602626",
-    "line": "xor     ebp, ebp",
+    "line": "xor     ebp, ebp; MEF v51 bridge-stack audit: direct JMP preserves entry ESP; first paired-loop count is word [ESP+10h]. Bridge takes its address before five cdecl pushes and add esp,14h restores the original stack.",
     "mnemonic": "xor",
     "size": 2
   },
   {
     "ea": "0x602628",
-    "line": "cmp     word ptr [esp+2Ch+var_20.member.type], bp",
+    "line": "cmp     word ptr [esp+2Ch+var_20.member.type], bp; EnginePatch analysis 2026-05-07: Actor disposition/relationship count is UInt16; loop at 0x602631 consumes FormID + 4-byte value per entry. Clamp to remaining bytes / 8; allocation failure paths currently dereference NULL.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x602631",
-    "line": "push    8; Size",
+    "line": "push    8; MEF hook feasibility 2026-05-30: first actor relationship/disposition loop entry allocation. Null allocation reaches write through EDI at 0x602654.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x60263B",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1573,13 +1573,13 @@
   },
   {
     "ea": "0x602641",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602642",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x602646",
-    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame",
+    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame; MEF actor-pair helper target: first loop consumes resolved FormID into a stack local before the 4-byte value read. Helper replacement must preserve this cursor movement even when insertion is skipped.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1603,31 +1603,31 @@
   },
   {
     "ea": "0x60264F",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x602651",
-    "line": "push    edi; a1",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602652",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602654",
-    "line": "mov     [edi+4], edx",
+    "line": "mov     [edi+4], edx; MEF v29 verified vanilla hazard: writes [edi+4] after entry allocation at 0x602633; helper consumes entry and skips insertion if allocation fails.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x602657",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF actor-pair helper target: first loop consumes the paired 4-byte relationship/disposition value. Helper should read this into a local before allocating/committing list nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x602664",
-    "line": "push    8; Size",
+    "line": "push    8; MEF hook feasibility 2026-05-30: first actor relationship/disposition history-node allocation. Failure zeroes EAX then writes [EAX+4] at 0x602687; simple branch patch is insufficient.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1711,13 +1711,13 @@
   },
   {
     "ea": "0x602687",
-    "line": "mov     [eax+4], edx",
+    "line": "mov     [eax+4], edx; MEF v29 verified vanilla hazard: writes [eax+4] after history-node allocation failure zeroes eax at 0x60267F; helper preserves old current/history and frees uncommitted entry.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x60268A",
-    "line": "mov     [esi+0A8h], eax",
+    "line": "mov     [esi+0A8h], eax; MEF actor-pair helper target: first-loop history chain commit Actor+0xA8. Helper must leave this unchanged if required history-node allocation fails.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x60269A",
-    "line": "mov     [esi+0A4h], edi",
+    "line": "mov     [esi+0A4h], edi; MEF actor-pair helper target: first-loop current entry commit Actor+0xA4. Helper must commit only after preserving old current entry in the +0xA8 history chain.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x6026AE",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1783,19 +1783,19 @@
   },
   {
     "ea": "0x6026B4",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6026B5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6026B7",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x6026EB",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x6026FB",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1915,25 +1915,25 @@
   },
   {
     "ea": "0x602701",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602702",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; MEF candidate verification 2026-05-30: Actor second relationship/disposition UInt16 count verified; loop consumes FormID+4-byte value. Accepted pending paired clamp/allocation-skip hook.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x602707",
-    "line": "xor     ebx, ebx",
+    "line": "xor     ebx, ebx; MEF v51 bridge-stack audit: direct JMP preserves entry ESP; second paired-loop count is word [ESP+28h]. Bridge takes its address before five cdecl pushes and add esp,14h restores the original stack.",
     "mnemonic": "xor",
     "size": 2
   },
   {
     "ea": "0x602709",
-    "line": "cmp     word ptr [esp+38h+var_20.member.modlist.data], bx",
+    "line": "cmp     word ptr [esp+38h+var_20.member.modlist.data], bx; EnginePatch analysis 2026-05-07: Actor second relationship count is UInt16; loop at 0x602710 consumes FormID + 4-byte value per entry. Clamp to remaining bytes / 8; allocation failure paths currently dereference NULL.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1945,7 +1945,7 @@
   },
   {
     "ea": "0x602710",
-    "line": "push    8; Size",
+    "line": "push    8; MEF hook feasibility 2026-05-30: second actor relationship/disposition loop entry allocation. Null allocation reaches write through EDI at 0x602733.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x60271C",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -1981,19 +1981,19 @@
   },
   {
     "ea": "0x602722",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602723",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602725",
-    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame",
+    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame; MEF actor-pair helper target: second loop consumes resolved FormID into a stack local before the 4-byte value read. Helper replacement must preserve this cursor movement even when insertion is skipped.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x60272E",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2017,25 +2017,25 @@
   },
   {
     "ea": "0x602733",
-    "line": "mov     [edi], ecx",
+    "line": "mov     [edi], ecx; MEF v29 verified vanilla hazard: writes [edi] after entry allocation at 0x602712; helper consumes FormID/value before commit and skips insertion on failure.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602735",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602736",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602738",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF actor-pair helper target: second loop consumes the paired 4-byte relationship/disposition value. Helper should read this into a local before allocating/committing list nodes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x602746",
-    "line": "push    8; Size",
+    "line": "push    8; MEF hook feasibility 2026-05-30: second actor relationship/disposition history-node allocation. Failure zeroes EAX then writes [EAX+4] at 0x60276D; simple branch patch is insufficient.",
     "mnemonic": "push",
     "size": 2
   },
@@ -2119,13 +2119,13 @@
   },
   {
     "ea": "0x60276D",
-    "line": "mov     [eax+4], edx",
+    "line": "mov     [eax+4], edx; MEF v29 verified vanilla hazard: writes [eax+4] after history-node allocation failure zeroes eax at 0x602765; helper preserves old current/history and frees uncommitted entry.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x602770",
-    "line": "mov     [esi+0A0h], eax",
+    "line": "mov     [esi+0A0h], eax; MEF actor-pair helper target: second-loop history chain commit Actor+0xA0. Helper must leave this unchanged if required history-node allocation fails.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x602780",
-    "line": "mov     [esi+9Ch], edi",
+    "line": "mov     [esi+9Ch], edi; MEF actor-pair helper target: second-loop current entry commit Actor+0x9C. Helper must commit only after preserving old current entry in the +0xA0 history chain.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2179,7 +2179,7 @@
   },
   {
     "ea": "0x602794",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2191,19 +2191,19 @@
   },
   {
     "ea": "0x60279A",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60279B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60279D",
-    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame",
+    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x6027B5",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2251,19 +2251,19 @@
   },
   {
     "ea": "0x6027BB",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6027BC",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6027BE",
-    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame",
+    "line": "call    TESForm_LoadFormIDFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadFormIDFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadFormID.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2317,7 +2317,7 @@
   },
   {
     "ea": "0x6027DA",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2413,7 +2413,7 @@
   },
   {
     "ea": "0x602820",
-    "line": "lea     ecx, [esi+88h]",
+    "line": "lea     ecx, [esi+88h]; self",
     "mnemonic": "lea",
     "size": 6
   },
@@ -2425,7 +2425,7 @@
   },
   {
     "ea": "0x60282B",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2443,7 +2443,7 @@
   },
   {
     "ea": "0x602837",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2455,25 +2455,25 @@
   },
   {
     "ea": "0x60283F",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602840",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x602845",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x60284B",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2485,13 +2485,13 @@
   },
   {
     "ea": "0x602851",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602852",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x602861",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2527,7 +2527,7 @@
   },
   {
     "ea": "0x60286D",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2539,13 +2539,13 @@
   },
   {
     "ea": "0x602873",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602874",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x60288F",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2593,19 +2593,19 @@
   },
   {
     "ea": "0x602897",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602898",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60289A",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2629,7 +2629,7 @@
   },
   {
     "ea": "0x6028AB",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2641,25 +2641,25 @@
   },
   {
     "ea": "0x6028B3",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6028B4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6028B6",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6028BB",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2671,25 +2671,25 @@
   },
   {
     "ea": "0x6028C3",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6028C4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6028C6",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6028CB",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2701,25 +2701,25 @@
   },
   {
     "ea": "0x6028D3",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6028D4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6028D6",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6028DB",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2731,25 +2731,25 @@
   },
   {
     "ea": "0x6028E3",
-    "line": "push    edx; a1",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6028E4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6028E6",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6028EB",
-    "line": "push    4; a2",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2761,19 +2761,19 @@
   },
   {
     "ea": "0x6028F3",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6028F4",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6028F6",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x602907",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2809,19 +2809,19 @@
   },
   {
     "ea": "0x60290F",
-    "line": "push    ecx; a1",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x602910",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x602912",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2845,7 +2845,7 @@
   },
   {
     "ea": "0x602923",
-    "line": "push    1; a2",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -2857,19 +2857,19 @@
   },
   {
     "ea": "0x60292B",
-    "line": "push    eax; a1",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x60292C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60292E",
-    "line": "call    TESForm_LoadDataFromCurrentSaveGame",
+    "line": "call    TESForm_LoadDataFromCurrentSaveGame; MEF v29 actor-pair helper prerequisite: TESForm_LoadDataFromCurrentSaveGame still loads SaveLoad at 0xB33B00 and tail-jumps to SaveLoad_LoadData.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2881,7 +2881,7 @@
   },
   {
     "ea": "0x602939",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -2941,7 +2941,7 @@
   },
   {
     "ea": "0x602960",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

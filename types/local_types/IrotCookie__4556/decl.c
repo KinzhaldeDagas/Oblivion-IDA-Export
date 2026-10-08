@@ -1,1 +1,1 @@
-IrotCookie
+typedef DWORD IrotCookie;

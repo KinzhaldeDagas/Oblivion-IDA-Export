@@ -1,6 +1,10 @@
-char __thiscall TESOBjectREFR_IsOwnedBy(TESObjectREFR *this, TESObjectREFR *a2, char a3)
+// Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.
+bool __thiscall TESObjectREFR_IsOwnedBy(
+        TESObjectREFR *reference,
+        TESObjectREFR *actorReference,
+        bool useFactionOwnership)
 {
-  char v4; // bl
+  bool v4; // bl
   TESBoundObject *Owner; // edi
   TESBoundObject *v6; // esi
   TESActorBase *v7; // eax
@@ -10,61 +14,61 @@ char __thiscall TESOBjectREFR_IsOwnedBy(TESObjectREFR *this, TESObjectREFR *a2, 
   bool v11; // c0
   char v12; // c2
   bool v13; // c3
-  BSExtraDataVtbl *v15; // [esp+8h] [ebp-8h]
-  void **v16; // [esp+Ch] [ebp-4h]
+  TESGlobal *OwnershipGlobal; // [esp+8h] [ebp-8h]
+  SInt32 OwnershipRank; // [esp+Ch] [ebp-4h]
 
-  v4 = 0;
-  if ( !TESObjectREFR_GetOwner(this) )
-    return 0;
-  Owner = (TESBoundObject *)TESObjectREFR_GetOwner(this);
-  v16 = sub_4DB830(this);
-  v15 = sub_4DB7D0(this);
-  if ( !Owner )
-    return 0;
-  if ( a2 )
+  v4 = 0; /*0x4de777*/
+  if ( !TESObjectREFR_GetOwner(reference) ) /*0x4de779*/
+    return 0; /*0x4de874*/
+  Owner = (TESBoundObject *)TESObjectREFR_GetOwner(reference); /*0x4de790*/
+  OwnershipRank = TESObjectREFR_GetOwnershipRank(reference); /*0x4de799*/
+  OwnershipGlobal = TESObjectREFR_GetOwnershipGlobal(reference); /*0x4de7a4*/
+  if ( !Owner ) /*0x4de7a8*/
+    return 0; /*0x4de85e*/
+  if ( actorReference ) /*0x4de7b5*/
   {
-    v4 = 1;
-    v6 = (TESBoundObject *)((int (__thiscall *)(TESObjectREFR *))a2->vtbl->GetTemplateForm)(a2);
-    if ( !v6 )
-      v6 = (TESBoundObject *)a2->vtbl->GetBaseForm(a2);
-    v7 = (TESActorBase *)((unsigned __int8)v6->member.super.type - kFormType_NPC);
-    v8 = 0;
-    if ( (unsigned int)v7 <= 1 )
+    v4 = 1; /*0x4de7c6*/
+    v6 = (TESBoundObject *)((int (__thiscall *)(TESObjectREFR *))actorReference->vtbl->GetTemplateForm)(actorReference); /*0x4de7ca*/
+    if ( !v6 ) /*0x4de7ce*/
+      v6 = (TESBoundObject *)actorReference->vtbl->GetBaseForm(actorReference); /*0x4de7dd*/
+    v7 = (TESActorBase *)((unsigned __int8)v6->member.super.type - kFormType_NPC); /*0x4de7e3*/
+    v8 = 0; /*0x4de7e6*/
+    if ( (unsigned int)v7 <= 1 ) /*0x4de7eb*/
     {
-      v7 = (TESActorBase *)OblivionDynamicCast(
+      v7 = (TESActorBase *)OblivionDynamicCast( /*0x4de7fa*/
                              v6,
                              0,
                              (struct _s_RTTICompleteObjectLocator *)&TESBoundObject `RTTI Type Descriptor',
                              &TESActorBase `RTTI Type Descriptor',
                              0);
-      v8 = v7;
+      v8 = v7; /*0x4de802*/
     }
-    if ( Owner != v6 )
+    if ( Owner != v6 ) /*0x4de806*/
     {
-      v9 = 0;
-      if ( Owner->member.super.type != kFormType_Faction || (v9 = Owner, !a3) )
+      v9 = 0; /*0x4de808*/
+      if ( Owner->member.super.type != kFormType_Faction || (v9 = Owner, !useFactionOwnership) ) /*0x4de817*/
       {
-        v7 = (TESActorBase *)v15;
-        if ( !v15
-          || (v11 = *(float *)&v15[4].CompareTo > 0.0,
+        v7 = (TESActorBase *)OwnershipGlobal; /*0x4de819*/
+        if ( !OwnershipGlobal /*0x4de82b*/
+          || (v11 = OwnershipGlobal->data > 0.0,
               v12 = 0,
-              v13 = 0.0 == *(float *)&v15[4].CompareTo,
+              v13 = 0.0 == OwnershipGlobal->data,
               BYTE1(v7) = v10,
-              0.0 == *(float *)&v15[4].CompareTo) )
+              0.0 == OwnershipGlobal->data) )
         {
-          v4 = 0;
+          v4 = 0; /*0x4de82d*/
         }
       }
-      if ( v9 )
+      if ( v9 ) /*0x4de831*/
       {
-        if ( v8 )
+        if ( v8 ) /*0x4de835*/
         {
-          LOBYTE(v7) = a2 == (TESObjectREFR *)TESDataHandler_g_PlayerRef;
-          if ( TESActorBaseData_GetFactionRank(&v8->super.actorBaseData, (int)v9, (int)v7) < (int)v16 )
-            return 0;
+          LOBYTE(v7) = actorReference == (TESObjectREFR *)::reference; /*0x4de83d*/
+          if ( (int)TESActorBaseData_GetFactionRank((int *)&v8->super.actorBaseData, (int)v9, (int)v7) < OwnershipRank ) /*0x4de84e*/
+            return 0; /*0x4de853*/
         }
       }
     }
   }
-  return v4;
+  return v4; /*0x4de852*/
 }

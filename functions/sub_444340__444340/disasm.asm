@@ -20,13 +20,13 @@
 0x444378: mov     [esp+28h+var_16], 1
 0x44437D: call    sub_57BAC0
 0x444382: mov     [esp+28h+var_15], al
-0x444386: call    sub_4E9F40
+0x444386: call    sub_4E9F40; Fog decode: returns global far-plane/clamp mode flag unk_B3608F; when false, non-water 0x541DD0 paths clamp fogEnd to GetFarPlane.
 0x44438B: test    al, al
 0x44438D: jz      short loc_44439B
 0x44438F: mov     eax, [ebp+74h]
-0x444392: mov     ecx, [ebp+4]
-0x444395: push    eax
-0x444396: call    sub_483D60
+0x444392: mov     ecx, [ebp+4]; gridDistantArray
+0x444395: push    eax; worldspace
+0x444396: call    DistantLOD_UpdateExteriorGrid; Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.
 0x44439B: mov     eax, ds:0B33B00h
 0x4443A0: or      dword ptr [eax+18h], 100h
 0x4443A7: mov     ecx, ds:0B35C24h
@@ -40,7 +40,6 @@
 0x4443C3: jnb     loc_444534
 0x4443C9: xor     ebx, ebx
 0x4443CB: jmp     short loc_4443D0
-0x4443CD: align 10h
 0x4443D0: cmp     ebx, eax
 0x4443D2: jnb     loc_44452C
 0x4443D8: mov     edx, [esp+28h+var_8]
@@ -65,7 +64,7 @@
 0x44440C: test    esi, esi
 0x44440E: jz      short loc_44446B
 0x444410: mov     ecx, esi; this
-0x444412: call    TESObjectCELL_IsInterior
+0x444412: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x444417: test    al, al
 0x444419: jz      short loc_444434
 0x44441B: mov     ecx, ds:0B051D4h
@@ -88,7 +87,7 @@
 0x44444C: add     eax, 1
 0x44444F: jmp     short loc_444440
 0x444451: mov     ecx, esi; this
-0x444453: call    TESObjectCELL_IsInterior
+0x444453: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x444458: test    al, al
 0x44445A: push    esi; a2
 0x44445B: mov     ecx, ebp; this
@@ -142,7 +141,7 @@
 0x44450D: push    ecx
 0x44450E: fstp    [esp+2Ch+var_2C]; float
 0x444511: push    1; int
-0x444513: call    sub_57B950
+0x444513: call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.
 0x444518: add     esp, 8
 0x44451B: mov     eax, ds:0B06A2Ch
 0x444520: mov     ecx, [esp+28h+var_C]
@@ -175,7 +174,7 @@
 0x44458B: mov     ecx, ds:0B33B00h
 0x444591: push    0
 0x444593: push    0
-0x444595: call    sub_45FDA0
+0x444595: call    TESSaveLoadGame_FinalizeLoadedForms
 0x44459A: mov     ecx, ds:0B33B00h
 0x4445A0: push    0
 0x4445A2: call    sub_461030
@@ -225,7 +224,7 @@
 0x44463E: push    eax
 0x44463F: call    sub_4D5BD0
 0x444644: mov     ecx, esi; this
-0x444646: call    TESObjectCELL_IsInterior
+0x444646: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x44464B: test    al, al
 0x44464D: push    esi; a2
 0x44464E: mov     ecx, ebp; this
@@ -237,11 +236,11 @@
 0x444660: call    sub_4D58B0
 0x444665: mov     edi, eax
 0x444667: mov     ecx, edi; this
-0x444669: call    NiAVObject_InitializePropertyState
+0x444669: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x44466E: mov     ecx, edi
 0x444670: call    NiNode_UpdateDynamicEffectState
 0x444675: mov     ecx, [ebp+10h]; this
-0x444678: call    NiAVObject_InitializePropertyState
+0x444678: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x44467D: mov     ecx, [ebp+10h]
 0x444680: call    NiNode_UpdateDynamicEffectState
 0x444685: cmp     word ptr [edi+0B8h], 0
@@ -251,7 +250,7 @@
 0x444693: push    ecx
 0x444694: fstp    [esp+30h+a2]; a2
 0x444697: mov     ecx, edi; this
-0x444699: call    NiAVObject_UpdateNiAVObject
+0x444699: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x44469E: cmp     dword ptr [ebp+78h], 0
 0x4446A2: jz      short loc_4446CB
 0x4446A4: push    8; Size

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x472D10",
-    "line": "sub     esp, 10h",
+    "line": "sub     esp, 10h; Serializes current or queued AnimIdle state with debug size accounting; form references remain subject to native save/load resolution.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x472D1B",
-    "line": "mov     [esp+18h+var_4], 0",
+    "line": "mov     [esp+18h+source], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x472D2F",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x472D38",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x472D3E",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x472D44",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x472D52",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x472D5B",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x472D5D",
-    "line": "lea     eax, [esp+20h+var_4]",
+    "line": "lea     eax, [esp+20h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x472D61",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x472D89",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x472D8F",
-    "line": "push    4",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x472D95",
-    "line": "push    edx",
+    "line": "push    edx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x472D96",
-    "line": "call    SaveLoad_SaveFormID",
+    "line": "call    SaveLoad_SaveFormID; Writes an array of FormIDs to the save buffer. When IRef encoding is enabled, each full FormID is first converted to a compact IRef via SaveLoad_FormIDToIRef.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x472DAE",
-    "line": "call    sub_49F550",
+    "line": "call    BSAnimGroupSequence_GetSaveStateSize; Returns native serialized BSAnimGroupSequence state size: 20 bytes for save versions >= 0x71, otherwise 24 bytes.",
     "mnemonic": "call",
     "size": 5
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x472DBD",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x472DC3",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x472DC4",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x472DE2",
-    "line": "call    sub_472C40",
+    "line": "call    AnimIdle_SaveSlotState; Writes one AnimIdle slot state: presence/state metadata, idle form reference, optional loaded sequence marker, and nested BSAnimGroupSequence state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x472E05",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x472E5D",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },

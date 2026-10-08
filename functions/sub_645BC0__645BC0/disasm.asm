@@ -99,7 +99,7 @@
 0x645CD8: call    TESObjectREFR_GetWorldSpace
 0x645CDD: mov     ecx, [esi+2Ch]; this
 0x645CE0: push    eax
-0x645CE1: call    TESObjectREFR_GetParentCell
+0x645CE1: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x645CE6: mov     ecx, [ebp+0]
 0x645CE9: mov     edx, [ebp+4]
 0x645CEC: push    eax
@@ -117,9 +117,9 @@
 0x645D0A: jz      loc_645C0C
 0x645D10: mov     ebp, [esp+24h+var_14]
 0x645D14: push    3Ah ; ':'; a1
-0x645D16: call    TESForm_LookupByFormID
+0x645D16: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x645D1B: add     esp, 4
-0x645D1E: mov     ecx, offset TimeGlobals
+0x645D1E: mov     ecx, 0B332E0h
 0x645D23: mov     ebx, eax
 0x645D25: call    TimeGlobals_GetGameHour
 0x645D2A: fstp    [esp+24h+arg_0]
@@ -160,7 +160,7 @@
 0x645DA0: test    ah, 5
 0x645DA3: jp      short loc_645E18
 0x645DA5: mov     ecx, edi; this
-0x645DA7: call    Actor__GetProcessLevel
+0x645DA7: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x645DAC: fld     [esp+24h+arg_0]
 0x645DB0: sub     esp, 8
 0x645DB3: fstp    [esp+2Ch+var_2C+4]
@@ -177,7 +177,7 @@
 0x645DDB: call    TESObjectREFR_GetWorldSpace
 0x645DE0: mov     ecx, [esi+2Ch]; this
 0x645DE3: push    eax
-0x645DE4: call    TESObjectREFR_GetParentCell
+0x645DE4: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x645DE9: push    eax
 0x645DEA: mov     eax, [ebp+0]
 0x645DED: mov     edx, [eax+174h]
@@ -189,7 +189,7 @@
 0x645DFF: mov     ecx, esi
 0x645E01: call    eax
 0x645E03: mov     ecx, edi; this
-0x645E05: call    Actor__GetProcessLevel
+0x645E05: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x645E0A: cmp     eax, dword ptr [esp+24h+var_8]
 0x645E0E: jnz     loc_645FD2
 0x645E14: mov     ebp, [esp+24h+var_14]
@@ -318,7 +318,7 @@
 0x645F7B: cmp     eax, edi
 0x645F7D: jz      short loc_645F88
 0x645F7F: push    eax
-0x645F80: call    FormHeapFree
+0x645F80: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x645F85: add     esp, 4
 0x645F88: mov     [esi+44h], edi
 0x645F8B: mov     [esi+2Ch], edi

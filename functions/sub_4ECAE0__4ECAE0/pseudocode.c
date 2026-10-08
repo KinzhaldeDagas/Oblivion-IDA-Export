@@ -1,42 +1,45 @@
-void __thiscall sub_4ECAE0(_DWORD *this, volatile LONG *a2)
+// Verified recursive unload state machine: Attached(3)->LoadedDetached(2) removes the terrain node; LoadedDetached(2)->UnloadPending(4); the next unload pass releases the mesh and reaches Unloaded(5). The same transition recurses over four child pointers at +0x30..+0x3C.
+void __thiscall TESTerrainLODQuad_AdvanceUnloadState(
+        TESTerrainLODQuad_OblivionComplete_060 *this,
+        NiNode *landLODParent)
 {
-  volatile LONG *v2; // ebx
-  volatile LONG *v4; // edi
-  _DWORD **v5; // esi
+  NiNode *v2; // ebx
+  NiNode *v4; // edi
+  void **children_030; // esi
   int v6; // edi
 
-  v2 = a2;
-  switch ( *(this + 2) )
+  v2 = landLODParent; /*0x4ecae1*/
+  switch ( this->state ) /*0x4ecaef*/
   {
-    case 2:
-      *(this + 2) = 4;
+    case TerrainLODQuadState_LoadedDetached: /*0x4ecaef*/
+      this->state = TerrainLODQuadState_UnloadPending;// Verified deferred-unload transition: a LoadedDetached quad moves to UnloadPending (4); a later update releases its mesh and transitions to Unloaded (5). /*0x4ecb44*/
       break;
-    case 3:
-      (*(void (__thiscall **)(volatile LONG *, volatile LONG **, _DWORD))(*a2 + 0x88))(a2, &a2, *(this + 0xB));
-      v4 = a2;
-      if ( a2 )
+    case TerrainLODQuadState_Attached: /*0x4ecaef*/
+      landLODParent->vtbl->RemoveObject(landLODParent, (NiAVObject **)&landLODParent, this->terrainLODNode_02C); /*0x4ecb15*/
+      v4 = landLODParent; /*0x4ecb17*/
+      if ( landLODParent ) /*0x4ecb1d*/
       {
-        if ( !InterlockedDecrement(a2 + 1) )
+        if ( !InterlockedDecrement((volatile LONG *)&landLODParent->members) ) /*0x4ecb23*/
         {
-          if ( v4 )
-            (**(void (__thiscall ***)(volatile LONG *, int))v4)(v4, 1);
+          if ( v4 ) /*0x4ecb2f*/
+            v4->vtbl->super.super.super.Destructor((NiRefObject *)v4, 1); /*0x4ecb39*/
         }
       }
-      *(this + 2) = 2;
+      this->state = TerrainLODQuadState_LoadedDetached;// Verified detach transition: removes terrainLODNode from LandLOD and changes state from Attached (3) to LoadedDetached (2). /*0x4ecb3b*/
       break;
-    case 4:
-      sub_4EC810(this);
+    case TerrainLODQuadState_UnloadPending: /*0x4ecaef*/
+      TESTerrainLODQuad_ReleaseMesh(this); /*0x4ecafb*/
       break;
   }
-  v5 = (_DWORD **)(this + 0xC);
-  if ( *v5 )
+  children_030 = this->children_030; /*0x4ecb4b*/
+  if ( *children_030 ) /*0x4ecb4e*/
   {
-    v6 = 4;
-    do
+    v6 = 4;                                     // Verified recursion over the four child-quad pointers at +0x30..+0x3C applies the same detach/unload state progression to descendants. /*0x4ecb53*/
+    do /*0x4ecb66*/
     {
-      sub_4ECAE0(*v5++, v2);
-      --v6;
+      TESTerrainLODQuad_AdvanceUnloadState((TESTerrainLODQuad_OblivionComplete_060 *)*children_030++, v2); /*0x4ecb5b*/
+      --v6; /*0x4ecb63*/
     }
-    while ( v6 );
+    while ( v6 ); /*0x4ecb66*/
   }
 }

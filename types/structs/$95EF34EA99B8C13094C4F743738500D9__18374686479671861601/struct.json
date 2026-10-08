@@ -1,28 +1,54 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$95EF34EA99B8C13094C4F743738500D9",
+  "definition": "union $95EF34EA99B8C13094C4F743738500D9\n{\nMOUSEINPUT mi;\nKEYBDINPUT ki;\nHARDWAREINPUT hi;\n}\n",
   "id": 18374686479671861601,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mi",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "MOUSEINPUT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ki",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 24
+      "size": 24,
+      "type": "KEYBDINPUT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hi",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "HARDWAREINPUT"
     }
   ],
   "name": "$95EF34EA99B8C13094C4F743738500D9",
+  "ordinal": 7422,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 32
 }

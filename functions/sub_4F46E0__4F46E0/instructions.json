@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F46E0",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h; GetCurrentTime_Eval reads TimeGlobals::GameHour and returns the numeric hour for the enclosing CTDA comparison; it has no parameters or subject requirement. Vanilla core dialogue uses it 23 times. Fallout's later counterpart x4y6:0x823B4BC8 reads Calendar::GetHour, so the owning time subsystem differs.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F46EA",
-    "line": "mov     eax, [esp+arg_C]",
+    "line": "mov     eax, [esp+value]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -1,19 +1,36 @@
 {
-  "callees_count": 16,
-  "callers_count": 7,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 9,
+  "chunks": [
+    [
+      "0x4046A0",
+      "0x404842"
+    ],
+    [
+      "0x403C30",
+      "0x403C86"
+    ]
+  ],
+  "chunks_sha256": "502de332e01c16d34780be2e9a8bdda65ee85252018d17141dd3d9d064b35c9b",
+  "comment_regular": "[Controller decode 2026-07-09] Polls all enumerated joysticks, keyboard, and mouse. Joystick current DIJOYSTATE is copied to previous DIJOYSTATE before polling. InputGlobal+0x1B50/+0x1B58 are mouse double-click flags/timestamps, not controller state.",
   "comment_repeatable": "",
-  "data_refs_count": 0,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "InputGlobals::PollAndUpdateInputState",
   "end_ea": "0x404842",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobals::PollAndUpdateInputState",
   "segment": ".text",
   "sha256": "4f607caab2e254f0265abfdb90275ec653ab85158ddd4e23bde0681ed65fdacf",
   "size": 418,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4046A0",
+  "total_chunk_size": 504,
   "type": "void __thiscall(InputGlobal *this)",
-  "xrefs_from_count": 160,
+  "xrefs_from_count": 189,
   "xrefs_to_count": 9
 }

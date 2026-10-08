@@ -123,13 +123,13 @@
 0x9165F9: movaps  [esp+0E4h+var_40], xmm0
 0x916601: fstp    [esp+0E4h+var_E4]; float
 0x916604: push    edx; int
-0x916605: call    sub_8B1B00
+0x916605: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x91660A: xor     ebx, ebx
 0x91660C: push    ebx; float
 0x91660D: lea     eax, [esp+0E4h+var_80]
 0x916611: push    eax; int
 0x916612: lea     ecx, [esp+0E8h+var_C0]
-0x916616: call    sub_8B1B00
+0x916616: call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.
 0x91661B: mov     ecx, ds:0BA7D98h
 0x916621: mov     edx, [ecx]
 0x916623: push    24h ; '$'
@@ -217,7 +217,6 @@
 0x916736: movaps  xmm6, xmmword ptr [esp+0E0h+var_18+8]
 0x91673E: movaps  xmm4, [esp+0E0h+var_40]
 0x916746: jmp     short loc_916750
-0x916748: align 10h
 0x916750: fld     dword ptr [esp+0E0h+var_C0+0Ch]
 0x916754: movaps  xmm0, [esp+0E0h+var_C0]
 0x916759: fmul    dword ptr [esp+0E0h+var_C0+0Ch]

@@ -1,18 +1,31 @@
 {
-  "callees_count": 30,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4723A0",
+  "chunks": [
+    [
+      "0x4723A0",
+      "0x472623"
+    ]
+  ],
+  "chunks_sha256": "a238c415c43f10521a3dd4fc2ff3502a9530c9819cdcf90df71c453c65c6e00b",
+  "comment_regular": "Computes the actor movement vector from ActorAnimData +0x0C/+0x10/+0x14. For non-creature ground-movement groups, clamps the vector by TESAnimGroup root-motion magnitude scaled by +0xBC and, when the blend sequence at +0xAC is active, +0xC0; optionally transforms the result and can suppress Z.",
+  "comment_repeatable": "Computes the actor movement vector from ActorAnimData +0x0C/+0x10/+0x14. For non-creature ground-movement groups, clamps the vector by TESAnimGroup root-motion magnitude scaled by +0xBC and, when the blend sequence at +0xAC is active, +0xC0; optionally transforms the result and can suppress Z.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ActorAnimData_GetMovementVector",
   "end_ea": "0x472623",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4723A0",
+  "name": "ActorAnimData_GetMovementVector",
   "segment": ".text",
   "sha256": "a238c415c43f10521a3dd4fc2ff3502a9530c9819cdcf90df71c453c65c6e00b",
   "size": 643,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4723A0",
+  "total_chunk_size": 643,
   "type": "void __userpurge(float *@<ecx>, double@<st1>, float *, Actor *, char, char)",
   "xrefs_from_count": 229,
   "xrefs_to_count": 4

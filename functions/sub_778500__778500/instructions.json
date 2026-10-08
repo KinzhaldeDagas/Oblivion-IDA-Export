@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x778507",
-    "line": "mov     [esp+18h+var_18], ecx",
+    "line": "mov     [esp+18h+self], ecx",
     "mnemonic": "mov",
     "size": 3
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x778515",
-    "line": "mov     ebx, [esp+1Ch+arg_0]",
+    "line": "mov     ebx, [esp+1Ch+byteLength]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x77852E",
-    "line": "mov     ebp, [esp+20h+arg_C]",
+    "line": "mov     ebp, [esp+20h+usage]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,13 +145,13 @@
   },
   {
     "ea": "0x778540",
-    "line": "mov     edi, [esp+28h+arg_10]",
+    "line": "mov     edi, [esp+28h+pool]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778544",
-    "line": "mov     [esp+28h+arg_0], eax",
+    "line": "mov     [esp+28h+byteLength], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x7785A7",
-    "line": "cmp     ecx, [esp+28h+arg_0]",
+    "line": "cmp     ecx, [esp+28h+byteLength]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x7785B3",
-    "line": "mov     edx, [esp+28h+arg_0]",
+    "line": "mov     edx, [esp+28h+byteLength]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7785BD",
-    "line": "lea     ecx, [esp+2Ch+arg_10]",
+    "line": "lea     ecx, [esp+2Ch+pool]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x7785D1",
-    "line": "mov     [esp+3Ch+arg_10], 0",
+    "line": "mov     [esp+3Ch+pool], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -613,49 +613,49 @@
   },
   {
     "ea": "0x778641",
-    "line": "mov     ecx, [esp+28h+var_18]",
+    "line": "mov     ecx, [esp+28h+self]; self",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778645",
-    "line": "mov     edx, [esp+28h+arg_0]",
+    "line": "mov     edx, [esp+28h+byteLength]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x778649",
-    "line": "push    0",
+    "line": "push    0; description",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x77864B",
-    "line": "push    edi",
+    "line": "push    edi; pool",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77864C",
-    "line": "push    65h ; 'e'",
+    "line": "push    65h ; 'e'; format",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x77864E",
-    "line": "push    ebp",
+    "line": "push    ebp; usage",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x77864F",
-    "line": "push    edx",
+    "line": "push    edx; byteLength",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x778650",
-    "line": "call    sub_778180",
+    "line": "call    NiDX9IndexBufferManager_CreateIndexBuffer",
     "mnemonic": "call",
     "size": 5
   },
@@ -685,7 +685,7 @@
   },
   {
     "ea": "0x778664",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x77867D",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -811,13 +811,13 @@
   },
   {
     "ea": "0x778697",
-    "line": "mov     eax, [esp+28h+var_18]",
+    "line": "mov     eax, [esp+28h+self]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x77869B",
-    "line": "mov     ecx, [esp+28h+arg_0]",
+    "line": "mov     ecx, [esp+28h+byteLength]",
     "mnemonic": "mov",
     "size": 4
   },

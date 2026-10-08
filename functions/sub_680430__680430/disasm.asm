@@ -1,4 +1,4 @@
-0x680430: movzx   eax, word ptr [ecx]
+0x680430: movzx   eax, word ptr [ecx]; Verified: returns the predecessor TravelPathSpaceDoorLink pointer stored at state +4 for this link's searchNodeIndex.
 0x680433: xor     edx, edx
 0x680435: cmp     ax, ds:0B3BF04h
 0x68043C: jnb     short loc_68044E

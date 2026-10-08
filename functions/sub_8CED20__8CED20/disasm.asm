@@ -63,7 +63,6 @@
 0x8CEDD5: mov     [esp+70h+var_54], ecx
 0x8CEDD9: jz      short loc_8CEDEB
 0x8CEDDB: jmp     short loc_8CEDE0
-0x8CEDDD: align 10h
 0x8CEDE0: mov     [esp+70h+var_54], eax
 0x8CEDE4: mov     eax, [eax+0Ch]
 0x8CEDE7: test    eax, eax
@@ -245,7 +244,7 @@
 0x8CF03C: push    edx
 0x8CF03D: push    eax
 0x8CF03E: mov     ecx, edx
-0x8CF040: call    sub_88FE00
+0x8CF040: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x8CF045: fldz
 0x8CF047: movaps  xmm1, xmmword ptr [esi+10h]
 0x8CF04B: movaps  xmm2, [esp+70h+var_50]

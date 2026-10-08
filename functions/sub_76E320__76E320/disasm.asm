@@ -1,4 +1,4 @@
-0x76E320: mov     eax, [esp+a2]
+0x76E320: mov     eax, [esp+a2]; Initializes NiDX9ShaderDeclaration from the renderer/device and stream count, AddRefs the D3D device, and allocates per-stream descriptors with disabled element slots.
 0x76E324: push    ebx
 0x76E325: push    ebp
 0x76E326: push    esi
@@ -31,7 +31,7 @@
 0x76E371: add     esp, 4
 0x76E374: cmp     edi, ebx
 0x76E376: jz      short loc_76E388
-0x76E378: push    offset sub_76E260
+0x76E378: push    offset sub_76E260; MoonSugarEffect decode: stream descriptor initializer. Clears active flag/unknown, element-array pointer, and stride/cache field.
 0x76E37D: push    ebp
 0x76E37E: push    10h
 0x76E380: push    edi
@@ -64,7 +64,7 @@
 0x76E3CD: jl      short loc_76E3E7
 0x76E3CF: nop
 0x76E3D0: mov     ecx, edi
-0x76E3D2: call    sub_76FB00
+0x76E3D2: call    sub_76FB00; MoonSugarEffect decode: vertex declaration element initializer. Clears fields and marks the element disabled with usage/type sentinel values 0xFFFFFFFF and 0x11.
 0x76E3D7: add     edi, 1Ch
 0x76E3DA: sub     ebx, 1
 0x76E3DD: jns     short loc_76E3D0

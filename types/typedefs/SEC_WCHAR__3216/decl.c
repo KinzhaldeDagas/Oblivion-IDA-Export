@@ -1,1 +1,1 @@
-SEC_WCHAR
+typedef WCHAR_0 SEC_WCHAR;

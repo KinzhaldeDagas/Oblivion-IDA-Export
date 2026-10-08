@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x59F970",
+      "0x59F9B0"
+    ]
+  ],
+  "chunks_sha256": "dcea7eaf918d4cd7854cb07cccf0afb5310e2dfa3bb5ee0aa737560fa72e3c6a",
+  "comment_regular": "External dialog-menu refresh callback: if menu 0x3F1 and its MenuTopicManager are live, processes the current info, rebuilds the topic list, then refreshes topic/service tile availability. It is not the per-response speech-completion callback.",
+  "comment_repeatable": "External dialog-menu refresh callback: if menu 0x3F1 and its MenuTopicManager are live, processes the current info, rebuilds the topic list, then refreshes topic/service tile availability. It is not the per-response speech-completion callback.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_59F970",
+  "display_name": "DialogMenu::CommitCurrentTopicAndRefresh",
   "end_ea": "0x59F9B0",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_59F970",
+  "name": "DialogMenu::CommitCurrentTopicAndRefresh",
   "segment": ".text",
   "sha256": "dcea7eaf918d4cd7854cb07cccf0afb5310e2dfa3bb5ee0aa737560fa72e3c6a",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x59F970",
-  "type": "void __usercall(double@<st2>, double@<st1>, double@<st0>)",
+  "total_chunk_size": 64,
+  "type": "void __cdecl()",
   "xrefs_from_count": 31,
   "xrefs_to_count": 1
 }

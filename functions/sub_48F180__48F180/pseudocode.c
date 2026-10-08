@@ -1,11 +1,11 @@
 void __thiscall sub_48F180(unsigned int ***this)
 {
-  unsigned int **v1; // ebx
-  unsigned int *v2; // ebp
-  unsigned int i; // eax
+  int *v1; // ebx
+  unsigned int v2; // ebp
+  int *i; // eax
   ExtraDataList *v4; // edi
-  _DWORD *v5; // ecx
-  TESObjectREFR *v6; // eax
+  int *v5; // ecx
+  TESObjectREFR *OriginalReference; // eax
   TESObjectREFR *v7; // esi
   ExtraContainerChanges_Data *ContainerChanges; // eax
   char v9; // bl
@@ -20,161 +20,165 @@ void __thiscall sub_48F180(unsigned int ***this)
   EntryData *v18; // eax
   ExtraDataList **v19; // eax
   ExtraDataList **v20; // ecx
-  _DWORD *v21; // esi
+  int *v21; // esi
   int v22; // edi
-  unsigned int **v23; // [esp+4h] [ebp-4h]
+  int *v23; // [esp+4h] [ebp-4h]
 
-  v1 = *this;
-  v23 = *this;
-  while ( v1 )
+  v1 = (int *)*this; /*0x48f182*/
+  v23 = (int *)*this; /*0x48f188*/
+  if ( *this ) /*0x48f188*/
   {
-    v2 = *v1;
-    if ( !*v1 )
-      break;
-    for ( i = *v2; *v2; v1 = v23 )
+    do /*0x48f378*/
     {
-      v4 = *(ExtraDataList **)i;
-      if ( !*(_DWORD *)i )
-        break;
-      v5 = *(_DWORD **)(i + 4);
-      if ( v5 )
+      v2 = *v1; /*0x48f197*/
+      if ( !*v1 ) /*0x48f197*/
+        break; /*0x48f19b*/
+      for ( i = *(int **)v2; *(_DWORD *)v2; v1 = v23 ) /*0x48f1a1*/
       {
-        *(_DWORD *)(i + 4) = v5[1];
-        *(_DWORD *)i = *v5;
-        FormHeapFree((unsigned int)v5);
-      }
-      else
-      {
-        *(_DWORD *)i = 0;
-      }
-      if ( v4 )
-      {
-        v6 = (TESObjectREFR *)sub_41E790(v4);
-        v7 = v6;
-        if ( v6 )
+        v4 = (ExtraDataList *)*i; /*0x48f1b0*/
+        if ( !*i ) /*0x48f1b4*/
+          break; /*0x48f1b4*/
+        v5 = (int *)i[1]; /*0x48f1ba*/
+        if ( v5 ) /*0x48f1bf*/
         {
-          if ( TESObjectREFR_GetContainer(v6) )
+          i[1] = v5[1]; /*0x48f1c4*/
+          *i = *v5; /*0x48f1ca*/
+          FormHeapFree((unsigned int)v5); /*0x48f1cc*/
+        }
+        else
+        {
+          *i = 0; /*0x48f1d6*/
+        }
+        if ( v4 ) /*0x48f1de*/
+        {
+          OriginalReference = (TESObjectREFR *)ExtraDataList_GetOriginalReference(v4); /*0x48f1e6*/
+          v7 = OriginalReference; /*0x48f1eb*/
+          if ( OriginalReference ) /*0x48f1ef*/
           {
-            sub_4234B0(v4);
-            if ( (unsigned int)BaseExtraList_Count(v4) < 2 )
+            if ( TESObjectREFR_GetContainer(OriginalReference) ) /*0x48f1f7*/
             {
-              if ( ExtraDataList_GetExtraCount(v4) )
-                sub_41F620(v4);
-            }
-            BSSimpleList_Remove((_DWORD *)*v2, (int)v4);
-            ContainerChanges = ExtraDataList_GetContainerChanges(&v7->member.baseExtraList);
-            v9 = 1;
-            if ( ContainerChanges )
-            {
-              objList = ContainerChanges->objList;
-              v11 = 1;
-              if ( objList )
+              sub_4234B0(v4); /*0x48f206*/
+              if ( (unsigned int)BaseExtraList_Count(v4) < 2 ) /*0x48f215*/
               {
-                while ( v11 )
+                if ( ExtraDataList_GetExtraCount(v4) ) /*0x48f219*/
+                  sub_41F620(v4); /*0x48f225*/
+              }
+              BSSimpleList_Remove(*(int **)v2, (int)v4); /*0x48f22e*/
+              ContainerChanges = ExtraDataList_GetContainerChanges(&v7->member.baseExtraList); /*0x48f236*/
+              v9 = 1; /*0x48f23d*/
+              if ( ContainerChanges ) /*0x48f23f*/
+              {
+                objList = ContainerChanges->objList; /*0x48f241*/
+                v11 = 1; /*0x48f248*/
+                if ( objList ) /*0x48f24a*/
                 {
-                  if ( objList->node.data && objList->node.data->type == (TESForm *)v2[2] )
-                    v11 = 0;
-                  else
-                    objList = (tListEntryData *)objList->node.next;
-                  if ( !objList )
-                    goto LABEL_32;
-                }
-                data = objList->node.data;
-                if ( data )
-                {
-                  extendData = (ExtraDataList **)data->extendData;
-                  if ( extendData )
+                  while ( v11 ) /*0x48f252*/
                   {
-                    v14 = extendData;
-                    do
+                    if ( objList->node.data && objList->node.data->type == *(TESForm **)(v2 + 8) ) /*0x48f25d*/
+                      v11 = 0; /*0x48f25f*/
+                    else
+                      objList = (tListEntryData *)objList->node.next; /*0x48f263*/
+                    if ( !objList ) /*0x48f268*/
+                      goto LABEL_32; /*0x48f268*/
+                  }
+                  data = objList->node.data; /*0x48f270*/
+                  if ( data ) /*0x48f274*/
+                  {
+                    extendData = (ExtraDataList **)data->extendData; /*0x48f276*/
+                    if ( extendData ) /*0x48f27a*/
                     {
-                      if ( !*v14 )
-                        break;
-                      if ( !v9 )
-                        break;
-                      if ( *v14 == v4 )
-                        v9 = 0;
-                      else
-                        v14 = (ExtraDataList **)v14[1];
+                      v14 = extendData; /*0x48f27c*/
+                      do /*0x48f297*/
+                      {
+                        if ( !*v14 ) /*0x48f280*/
+                          break; /*0x48f284*/
+                        if ( !v9 ) /*0x48f288*/
+                          break; /*0x48f288*/
+                        if ( *v14 == v4 ) /*0x48f28c*/
+                          v9 = 0; /*0x48f28e*/
+                        else
+                          v14 = (ExtraDataList **)v14[1]; /*0x48f292*/
+                      }
+                      while ( v14 ); /*0x48f297*/
                     }
-                    while ( v14 );
                   }
                 }
               }
-            }
 LABEL_32:
-            v15 = ExtraDataList_GetContainerChanges(&TESDataHandler_g_PlayerRef->super.super.super.super.baseExtraList);
-            if ( v15 )
-            {
-              next = v15->objList;
-              v17 = 1;
-              if ( next )
+              v15 = ExtraDataList_GetContainerChanges(&reference->super.super.super.super.baseExtraList); /*0x48f299*/
+              if ( v15 ) /*0x48f2a9*/
               {
-                while ( v17 )
+                next = v15->objList; /*0x48f2ab*/
+                v17 = 1; /*0x48f2b2*/
+                if ( next ) /*0x48f2b4*/
                 {
-                  if ( next->node.data && next->node.data->type == (TESForm *)v2[2] )
-                    v17 = 0;
-                  else
-                    next = (tListEntryData *)next->node.next;
-                  if ( !next )
-                    goto LABEL_50;
-                }
-                v18 = next->node.data;
-                if ( v18 )
-                {
-                  v19 = (ExtraDataList **)v18->extendData;
-                  if ( v19 )
+                  while ( v17 ) /*0x48f2b8*/
                   {
-                    v20 = v19;
-                    do
+                    if ( next->node.data && next->node.data->type == *(TESForm **)(v2 + 8) ) /*0x48f2c3*/
+                      v17 = 0; /*0x48f2c5*/
+                    else
+                      next = (tListEntryData *)next->node.next; /*0x48f2c9*/
+                    if ( !next ) /*0x48f2ce*/
+                      goto LABEL_50; /*0x48f2ce*/
+                  }
+                  v18 = next->node.data; /*0x48f2d6*/
+                  if ( v18 ) /*0x48f2da*/
+                  {
+                    v19 = (ExtraDataList **)v18->extendData; /*0x48f2dc*/
+                    if ( v19 ) /*0x48f2e0*/
                     {
-                      if ( !*v20 )
-                        break;
-                      if ( !v9 )
-                        goto LABEL_54;
-                      if ( *v20 == v4 )
-                        v9 = 0;
-                      else
-                        v20 = (ExtraDataList **)v20[1];
+                      v20 = v19; /*0x48f2e2*/
+                      do /*0x48f2fb*/
+                      {
+                        if ( !*v20 ) /*0x48f2e4*/
+                          break; /*0x48f2e8*/
+                        if ( !v9 ) /*0x48f2ec*/
+                          goto LABEL_54; /*0x48f2ec*/
+                        if ( *v20 == v4 ) /*0x48f2f0*/
+                          v9 = 0; /*0x48f2f2*/
+                        else
+                          v20 = (ExtraDataList **)v20[1]; /*0x48f2f6*/
+                      }
+                      while ( v20 ); /*0x48f2fb*/
                     }
-                    while ( v20 );
                   }
                 }
               }
-            }
 LABEL_50:
-            if ( !v9 )
-              goto LABEL_54;
+              if ( !v9 ) /*0x48f2ff*/
+                goto LABEL_54; /*0x48f2ff*/
 LABEL_53:
-            (*(void (__thiscall **)(ExtraDataList *, int))v4->vtbl)(v4, 1);
-            goto LABEL_54;
+              (*(void (__thiscall **)(ExtraDataList *, int))v4->vtbl)(v4, 1); /*0x48f313*/
+              goto LABEL_54; /*0x48f31b*/
+            }
+            sub_4234B0(v4); /*0x48f303*/
+            if ( !ExtraDataList_GetExtraScript(v4) ) /*0x48f30a*/
+              goto LABEL_53; /*0x48f311*/
           }
-          sub_4234B0(v4);
-          if ( !ExtraDataList_GetExtraScript(v4) )
-            goto LABEL_53;
         }
-      }
 LABEL_54:
-      i = *v2;
-    }
-    BSSimpleList_Remove(v1, (int)v2);
-    v21 = (_DWORD *)*v2;
-    if ( *v2 )
-    {
-      if ( v21[1] )
-      {
-        do
-        {
-          v22 = *(_DWORD *)(v21[1] + 4);
-          FormHeapFree(v21[1]);
-          v21[1] = v22;
-        }
-        while ( v22 );
+        i = *(int **)v2; /*0x48f31d*/
       }
-      *v21 = 0;
+      BSSimpleList_Remove(v1, v2); /*0x48f32c*/
+      v21 = *(int **)v2; /*0x48f334*/
+      if ( *(_DWORD *)v2 ) /*0x48f334*/
+      {
+        if ( v21[1] ) /*0x48f33b*/
+        {
+          do /*0x48f355*/
+          {
+            v22 = *(_DWORD *)(v21[1] + 4); /*0x48f344*/
+            FormHeapFree(v21[1]); /*0x48f348*/
+            v21[1] = v22; /*0x48f352*/
+          }
+          while ( v22 ); /*0x48f355*/
+        }
+        *v21 = 0; /*0x48f357*/
+      }
+      FormHeapFree(*(_DWORD *)v2); /*0x48f361*/
+      *(_DWORD *)v2 = 0; /*0x48f367*/
+      FormHeapFree(v2); /*0x48f36e*/
     }
-    FormHeapFree(*v2);
-    *v2 = 0;
-    FormHeapFree((unsigned int)v2);
+    while ( v1 ); /*0x48f378*/
   }
 }

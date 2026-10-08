@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x658550",
-    "line": "push    ebx",
+    "line": "push    ebx; Replaces HighProcess equippedWeaponData, derives staff/bow flags from TESObjectWEAP weapon type, rebuilds equipment attachment-node caches for active player perspectives, or clears those caches when equipment is absent.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x658552",
-    "line": "mov     ebp, [esp+8+arg_0]",
+    "line": "mov     ebp, [esp+8+entry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x658572",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,31 +271,31 @@
   },
   {
     "ea": "0x6585DB",
-    "line": "mov     ecx, [esp+10h+arg_4]",
+    "line": "mov     ecx, [esp+10h+rootNode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6585DF",
-    "line": "push    ecx",
+    "line": "push    ecx; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6585E0",
-    "line": "push    ebx",
+    "line": "push    ebx; skinInstance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6585E1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6585E3",
-    "line": "call    sub_6541A0",
+    "line": "call    MiddleHighProcess_CacheEquipmentAttachmentNodes; Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x6585EE",
-    "line": "push    ebx; a2",
+    "line": "push    ebx; firstPerson",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6585EF",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x658602",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x658604",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -361,13 +361,13 @@
   },
   {
     "ea": "0x658612",
-    "line": "push    1; a2",
+    "line": "push    1; firstPerson",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x658614",
-    "line": "call    Player_GetAnimData",
+    "line": "call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,25 +379,25 @@
   },
   {
     "ea": "0x65861F",
-    "line": "push    edi",
+    "line": "push    edi; rootNode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658620",
-    "line": "push    edx",
+    "line": "push    edx; skinInstance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x658621",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x658623",
-    "line": "call    sub_6541A0",
+    "line": "call    MiddleHighProcess_CacheEquipmentAttachmentNodes; Refreshes the equipment attachment cache for the selected skeleton context: either first-person globals or MiddleHighProcess fields (+0xFC Weapon, +0x100 Torch, +0x104 Bip01 L ForearmTwist, +0x108 BackWeapon/SideWeapon selected by native WEAP type, +0x10C Quiver). It pre-clears the matching ArrowBone cache for separate population. The Boolean result is not general cache success; it is NiNode_RemoveScbChildAlongFadeNodeChain(cached Weapon), meaning whether literal Scb was removed.",
     "mnemonic": "call",
     "size": 5
   },

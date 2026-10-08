@@ -10,9 +10,9 @@
 0x753873: pop     esi
 0x753874: retn    4
 0x753877: add     esi, 30h ; '0'
-0x75387A: push    esi
-0x75387B: lea     ecx, [edi+30h]
-0x75387E: call    sub_8AA390
+0x75387A: push    esi; other
+0x75387B: lea     ecx, [edi+30h]; this
+0x75387E: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x753883: test    al, al
 0x753885: pop     edi
 0x753886: setz    al

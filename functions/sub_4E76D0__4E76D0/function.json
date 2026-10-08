@@ -1,19 +1,36 @@
 {
-  "callees_count": 17,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 2,
-  "display_name": "sub_4E76D0",
+  "chunks": [
+    [
+      "0x4E76D0",
+      "0x4E781B"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "2fa6b89ee0403b5563990e61aab4ba29f2c2b3c27e10a1bf663e9b6eadd75184",
+  "comment_regular": "Verified debug-render root setter. Updates g_PathGridDebugRenderingEnabled. Enabling creates a shared NiNode, attaches DebugRender_GetOrCreateVertexColorProperty, and adds the root to TES/ObjectLODRoot; disabling removes the root, clears its child objects, releases it, and nulls g_PathGridDebugRenderRoot. Called by TESPathGrid_ToggleDebugRendering before per-cell render rebuild/clear.",
+  "comment_repeatable": "Verified debug-render root setter. Updates g_PathGridDebugRenderingEnabled. Enabling creates a shared NiNode, attaches DebugRender_GetOrCreateVertexColorProperty, and adds the root to TES/ObjectLODRoot; disabling removes the root, clears its child objects, releases it, and nulls g_PathGridDebugRenderRoot. Called by TESPathGrid_ToggleDebugRendering before per-cell render rebuild/clear.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "TESPathGrid_SetDebugRenderingEnabled",
   "end_ea": "0x4E781B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E76D0",
+  "name": "TESPathGrid_SetDebugRenderingEnabled",
   "segment": ".text",
   "sha256": "a99c6283189273813d4abf0853f0e7503ec71298f755bdec443cc0b78b967c02",
   "size": 331,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E76D0",
-  "type": "char __cdecl(NiNode *)",
-  "xrefs_from_count": 122,
+  "total_chunk_size": 369,
+  "type": "void __cdecl(bool enabled)",
+  "xrefs_from_count": 136,
   "xrefs_to_count": 1
 }

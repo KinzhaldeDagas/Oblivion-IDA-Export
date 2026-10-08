@@ -1,4 +1,4 @@
-0x667BE0: push    0FFFFFFFFh
+0x667BE0: push    0FFFFFFFFh; PlayerCharacter GenerateNiNode override. Builds the first-person root at +0x5D0 from Characters\\_1stPerson\\Skeleton.NIF, constructs 0x154-byte ActorSkinInfo at +0x5C8 and 0xDC-byte ActorAnimData at +0x5CC, builds/picks its KF list, generates/configures the player NiNode through the base MobileObject path, and returns NiNode*. It does not call ActorAnimData_LoadKFFZSpecialAnims. Native ABI has no stack/x87 inputs.
 0x667BE2: push    offset SEH_667BE0
 0x667BE7: mov     eax, large fs:0
 0x667BED: push    eax
@@ -28,15 +28,15 @@
 0x667C2C: push    ebp; int
 0x667C2D: mov     ecx, eax; int
 0x667C2F: call    sub_5227A0
-0x667C34: mov     ecx, ebp
-0x667C36: call    sub_6670C0
+0x667C34: mov     ecx, ebp; this
+0x667C36: call    Player_RecalculateAllRequiredSkillExperience; Recomputes required skill-use progress for all 21 native Oblivion skill actor values by calling Player_RecalculateRequiredSkillExperience.
 0x667C3B: mov     eax, ds:0B36BB8h
 0x667C40: mov     ecx, ds:0B33A1Ch
 0x667C46: push    1
 0x667C48: push    3
 0x667C4A: push    1
 0x667C4C: push    eax
-0x667C4D: call    sub_439EB0
+0x667C4D: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x667C52: mov     esi, eax
 0x667C54: push    0DCh ; 'Ü'; Size
 0x667C59: mov     [esp+88h+var_6C], esi
@@ -114,7 +114,7 @@
 0x667D55: push    ecx
 0x667D56: fstp    [esp+8Ch+a2]; a2
 0x667D59: mov     ecx, ebx; this
-0x667D5B: call    NiAVObject_UpdateNiAVObject
+0x667D5B: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x667D60: mov     eax, ds:0B3BB0Ch
 0x667D65: fld     dword ptr [eax+90h]
 0x667D6B: lea     edi, [esp+84h+var_54]
@@ -165,10 +165,10 @@
 0x667E03: test    eax, eax
 0x667E05: mov     [esp+84h+var_4], 1
 0x667E10: jz      short loc_667E1D
-0x667E12: push    ebx
-0x667E13: push    ebp
-0x667E14: mov     ecx, eax
-0x667E16: call    sub_478730
+0x667E12: push    ebx; rootNode
+0x667E13: push    ebp; owner
+0x667E14: mov     ecx, eax; this
+0x667E16: call    ActorSkinInfo_ctor; Construct PlayerCharacter first-person ActorSkinInfo (+0x5C8) with owner=player and the loaded first-person model root. Confirms ActorSkinInfo and ActorAnimData are distinct adjacent allocations.
 0x667E1B: jmp     short loc_667E1F
 0x667E1D: xor     eax, eax
 0x667E1F: or      esi, 0FFFFFFFFh
@@ -182,16 +182,16 @@
 0x667E42: mov     [esp+84h+var_4], 2
 0x667E4D: jz      short loc_667E58
 0x667E4F: mov     ecx, eax
-0x667E51: call    NewActorAnimData
+0x667E51: call    NewActorAnimData; Construct separate PlayerCharacter first-person ActorAnimData (+0x5CC), size 0xDC, immediately after the first-person ActorSkinInfo allocation at +0x5C8.
 0x667E56: jmp     short loc_667E5A
 0x667E58: xor     eax, eax
 0x667E5A: mov     [ebp+5CCh], eax
 0x667E60: mov     al, [ebp+588h]
-0x667E66: mov     ecx, ebp
+0x667E66: mov     ecx, ebp; this
 0x667E68: mov     [esp+84h+var_4], esi
 0x667E6F: mov     byte ptr [esp+84h+var_70+3], al
 0x667E73: mov     byte ptr [ebp+588h], 1
-0x667E7A: call    MobileObject_GenerateNiNode
+0x667E7A: call    MobileObject_GenerateNiNode; MobileObject GenerateNiNode override. Calls TESObjectREFR_GenerateNiNode, forwards matching model extra data to the process when present, conditionally registers the result as a shadow caster, and returns NiNode*. Native ABI has no stack/x87 inputs.
 0x667E7F: mov     cl, byte ptr [esp+84h+var_70+3]
 0x667E83: mov     [ebp+588h], cl
 0x667E89: mov     edx, ds:0B36BB8h
@@ -199,12 +199,12 @@
 0x667E95: push    0; int
 0x667E97: push    edx; char *
 0x667E98: mov     esi, eax
-0x667E9A: call    sub_435830
+0x667E9A: call    BuildKFListForModelDirectory; Builds a KF path list for a model directory. Feeds ModelLoader KF discovery used by actor animation setup and generated attack/idle lists.
 0x667E9F: mov     ecx, [ebp+5CCh]; this
 0x667EA5: push    ebp; int
 0x667EA6: push    ebx; int
 0x667EA7: push    eax; int
-0x667EA8: call    Menu_PickIdles??
+0x667EA8: call    Menu_PickIdles; Menu_PickIdles loader. Loads candidate idle KF paths from a list, filters power attacks for menu/player contexts, installs valid sequences, and initializes the selected idle sequence on the target node.
 0x667EAD: mov     ebx, [ebp+58h]
 0x667EB0: mov     edi, [ebx]
 0x667EB2: mov     eax, [edi+0ECh]
@@ -217,8 +217,8 @@
 0x667EC7: mov     ecx, ebx
 0x667EC9: call    edx
 0x667ECB: mov     edi, [ebp+58h]
-0x667ECE: mov     ecx, ebp
-0x667ED0: call    TESObjectREFR_GetAnimData
+0x667ECE: mov     ecx, ebp; this
+0x667ED0: call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.
 0x667ED5: mov     edx, [edi]
 0x667ED7: push    eax
 0x667ED8: mov     eax, [edx+114h]
@@ -294,14 +294,14 @@
 0x667FBC: mov     ecx, ebp
 0x667FBE: call    eax
 0x667FC0: mov     ecx, ebp; this
-0x667FC2: call    MobileObject_GetCharProxy
+0x667FC2: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x667FC7: mov     ebx, eax
 0x667FC9: test    ebx, ebx
 0x667FCB: jz      short loc_668016
 0x667FCD: mov     ecx, [ebx+8]
 0x667FD0: test    ecx, ecx
 0x667FD2: jz      short loc_667FDB
-0x667FD4: call    sub_8AC0C0
+0x667FD4: call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.
 0x667FD9: jmp     short loc_667FDD
 0x667FDB: xor     eax, eax
 0x667FDD: mov     eax, [eax+8]
@@ -315,7 +315,7 @@
 0x667FF2: lea     ecx, [esp+84h+var_64]
 0x667FF6: push    ecx
 0x667FF7: mov     ecx, ebx
-0x667FF9: call    sub_57E270
+0x667FF9: call    bhkCharacterProxy_GetCollisionFilterInfo; Reads collision filter info from proxy metadata: proxy+0x364 -> +8 -> +0x14 -> +0x1C. Used to preserve actor identity in raycast filter high 16 bits.
 0x667FFE: movzx   eax, word ptr [eax+2]
 0x668002: mov     edx, [edi]
 0x668004: mov     edx, [edx+90h]
@@ -336,3 +336,25 @@
 0x668027: pop     ebx
 0x668028: add     esp, 70h
 0x66802B: retn
+0x9C3EB0: mov     eax, [ebp-68h]
+0x9C3EB3: push    eax
+0x9C3EB4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3EB9: pop     ecx
+0x9C3EBA: retn
+0x9C3EBB: mov     eax, [ebp-68h]
+0x9C3EBE: push    eax
+0x9C3EBF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3EC4: pop     ecx
+0x9C3EC5: retn
+0x9C3EC6: mov     eax, [ebp-68h]
+0x9C3EC9: push    eax
+0x9C3ECA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C3ECF: pop     ecx
+0x9C3ED0: retn
+0x9C3ED1: mov     edx, [esp+arg_4]
+0x9C3ED5: lea     eax, [edx-74h]
+0x9C3ED8: mov     ecx, [edx-78h]
+0x9C3EDB: xor     ecx, eax
+0x9C3EDD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C3EE2: mov     eax, offset stru_AEC9AC
+0x9C3EE7: jmp     ___CxxFrameHandler3

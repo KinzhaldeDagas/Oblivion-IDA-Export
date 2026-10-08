@@ -23,7 +23,7 @@
 0x7B89DE: push    70h ; 'p'; Size
 0x7B89E0: call    FormHeapAlloc
 0x7B89E5: add     esp, 4
-0x7B89E8: mov     [esp+204h+var_1BC], eax
+0x7B89E8: mov     [esp+204h+outTexture], eax
 0x7B89EC: xor     esi, esi
 0x7B89EE: cmp     eax, esi
 0x7B89F0: mov     [esp+204h+var_4], esi
@@ -167,7 +167,7 @@
 0x7B8BCA: push    70h ; 'p'; Size
 0x7B8BCC: call    FormHeapAlloc
 0x7B8BD1: add     esp, 4
-0x7B8BD4: mov     [esp+204h+var_1BC], eax
+0x7B8BD4: mov     [esp+204h+outTexture], eax
 0x7B8BD8: test    eax, eax
 0x7B8BDA: mov     [esp+204h+var_4], esi
 0x7B8BE1: jz      short loc_7B8BFD
@@ -298,7 +298,7 @@
 0x7B8DA1: push    70h ; 'p'; Size
 0x7B8DA3: call    FormHeapAlloc
 0x7B8DA8: add     esp, 4
-0x7B8DAB: mov     [esp+204h+var_1BC], eax
+0x7B8DAB: mov     [esp+204h+outTexture], eax
 0x7B8DAF: test    eax, eax
 0x7B8DB1: mov     [esp+204h+var_4], 2
 0x7B8DBC: jz      short loc_7B8DDA
@@ -439,7 +439,7 @@
 0x7B8F8E: push    70h ; 'p'; Size
 0x7B8F90: call    FormHeapAlloc
 0x7B8F95: add     esp, 4
-0x7B8F98: mov     [esp+204h+var_1BC], eax
+0x7B8F98: mov     [esp+204h+outTexture], eax
 0x7B8F9C: test    eax, eax
 0x7B8F9E: mov     [esp+204h+var_4], 3
 0x7B8FA9: jz      short loc_7B8FC7
@@ -570,7 +570,7 @@
 0x7B916B: push    70h ; 'p'; Size
 0x7B916D: call    FormHeapAlloc
 0x7B9172: add     esp, 4
-0x7B9175: mov     [esp+204h+var_1BC], eax
+0x7B9175: mov     [esp+204h+outTexture], eax
 0x7B9179: test    eax, eax
 0x7B917B: mov     [esp+204h+var_4], 4
 0x7B9186: jz      short loc_7B91A4
@@ -708,7 +708,7 @@
 0x7B9352: push    70h ; 'p'; Size
 0x7B9354: call    FormHeapAlloc
 0x7B9359: add     esp, 4
-0x7B935C: mov     [esp+204h+var_1BC], eax
+0x7B935C: mov     [esp+204h+outTexture], eax
 0x7B9360: test    eax, eax
 0x7B9362: mov     [esp+204h+var_4], 5
 0x7B936D: jz      short loc_7B938D
@@ -773,7 +773,7 @@
 0x7B943F: fmul    [esp+204h+var_1C8]
 0x7B9443: fstp    [esp+204h+var_1C8]
 0x7B9447: fmul    qword ptr ds:0A8F638h
-0x7B944D: fstp    [esp+204h+var_1BC]
+0x7B944D: fstp    [esp+204h+outTexture]
 0x7B9451: fld     [esp+204h+var_1C0]
 0x7B9455: fadd    st, st(1)
 0x7B9457: fld     qword ptr ds:0A2FAA0h
@@ -799,18 +799,18 @@
 0x7B94A0: mov     cl, byte ptr [esp+204h+var_1A8]
 0x7B94A4: mov     [esi], cl
 0x7B94A6: fldcw   word ptr [esp+204h+var_1CC]
-0x7B94AA: fld     [esp+204h+var_1BC]
+0x7B94AA: fld     [esp+204h+outTexture]
 0x7B94AE: faddp   st(3), st
 0x7B94B0: fnstcw  word ptr [esp+204h+var_1CC]
 0x7B94B4: fmulp   st(2), st
 0x7B94B6: movzx   eax, word ptr [esp+204h+var_1CC]
 0x7B94BB: or      eax, 0C00h
-0x7B94C0: mov     [esp+204h+var_1BC], eax
+0x7B94C0: mov     [esp+204h+outTexture], eax
 0x7B94C4: add     esi, 4
 0x7B94C7: fmulp   st(1), st
-0x7B94C9: fldcw   word ptr [esp+204h+var_1BC]
-0x7B94CD: fistp   [esp+204h+var_1BC]
-0x7B94D1: mov     dl, byte ptr [esp+204h+var_1BC]
+0x7B94C9: fldcw   word ptr [esp+204h+outTexture]
+0x7B94CD: fistp   [esp+204h+outTexture]
+0x7B94D1: mov     dl, byte ptr [esp+204h+outTexture]
 0x7B94D5: mov     [esi-5], dl
 0x7B94D8: fldcw   word ptr [esp+204h+var_1CC]
 0x7B94DC: mov     [esp+204h+var_1CC], ebx
@@ -838,7 +838,7 @@
 0x7B9530: mov     eax, ds:0B43104h
 0x7B9535: mov     ecx, [esp+204h+var_1B0]
 0x7B9539: mov     edx, [esp+204h+var_19C]
-0x7B953D: push    offset dword_B256D0
+0x7B953D: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0
 0x7B9542: push    eax
 0x7B9543: mov     eax, [esp+20Ch+var_1B4]
 0x7B9547: push    edi
@@ -882,12 +882,12 @@
 0x7B95A6: push    97Ch
 0x7B95AB: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B95B0: push    0
-0x7B95B2: call    nullsub_return0_0arg
+0x7B95B2: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B95B7: add     esp, 0Ch
 0x7B95BA: push    70h ; 'p'; Size
 0x7B95BC: call    FormHeapAlloc
 0x7B95C1: add     esp, 4
-0x7B95C4: mov     [esp+204h+var_1BC], eax
+0x7B95C4: mov     [esp+204h+outTexture], eax
 0x7B95C8: test    eax, eax
 0x7B95CA: mov     [esp+204h+var_4], 6
 0x7B95D5: jz      short loc_7B95EB
@@ -908,7 +908,6 @@
 0x7B95FF: add     ecx, 2
 0x7B9602: mov     esi, 10h
 0x7B9607: jmp     short loc_7B9610
-0x7B9609: align 10h
 0x7B9610: mov     edx, 10h
 0x7B9615: mov     byte ptr [ecx-2], 80h ; '€'
 0x7B9619: mov     byte ptr [ecx-1], 80h ; '€'
@@ -919,7 +918,7 @@
 0x7B9628: sub     esi, 1
 0x7B962B: jnz     short loc_7B9610
 0x7B962D: add     dword ptr [eax+68h], 1
-0x7B9631: push    offset dword_B256D0; a2
+0x7B9631: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x7B9636: push    eax; a1
 0x7B9637: call    NiSourceTexture__LoadTexturePixelData
 0x7B963C: mov     esi, eax
@@ -954,12 +953,12 @@
 0x7B9689: push    98Ch
 0x7B968E: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B9693: push    0
-0x7B9695: call    nullsub_return0_0arg
+0x7B9695: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B969A: add     esp, 0Ch
 0x7B969D: push    70h ; 'p'; Size
 0x7B969F: call    FormHeapAlloc
 0x7B96A4: add     esp, 4
-0x7B96A7: mov     [esp+204h+var_1BC], eax
+0x7B96A7: mov     [esp+204h+outTexture], eax
 0x7B96AB: test    eax, eax
 0x7B96AD: mov     [esp+204h+var_4], 7
 0x7B96B8: jz      short loc_7B96D0
@@ -990,7 +989,7 @@
 0x7B970C: sub     esi, 1
 0x7B970F: jnz     short loc_7B96F0
 0x7B9711: add     dword ptr [eax+68h], 1
-0x7B9715: push    offset dword_B256D0; a2
+0x7B9715: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x7B971A: push    eax; a1
 0x7B971B: call    NiSourceTexture__LoadTexturePixelData
 0x7B9720: mov     esi, eax
@@ -1025,12 +1024,12 @@
 0x7B976D: push    9AFh
 0x7B9772: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B9777: push    0
-0x7B9779: call    nullsub_return0_0arg
+0x7B9779: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B977E: add     esp, 0Ch
 0x7B9781: push    70h ; 'p'; Size
 0x7B9783: call    FormHeapAlloc
 0x7B9788: add     esp, 4
-0x7B978B: mov     [esp+204h+var_1BC], eax
+0x7B978B: mov     [esp+204h+outTexture], eax
 0x7B978F: test    eax, eax
 0x7B9791: mov     [esp+204h+var_4], 8
 0x7B979C: jz      short loc_7B97B4
@@ -1060,7 +1059,7 @@
 0x7B97E8: sub     esi, 1
 0x7B97EB: jnz     short loc_7B97D0
 0x7B97ED: add     dword ptr [eax+68h], 1
-0x7B97F1: push    offset dword_B256D0; a2
+0x7B97F1: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x7B97F6: push    eax; a1
 0x7B97F7: call    NiSourceTexture__LoadTexturePixelData
 0x7B97FC: mov     esi, eax
@@ -1095,14 +1094,14 @@
 0x7B9849: push    9C0h
 0x7B984E: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B9853: push    0
-0x7B9855: call    nullsub_return0_0arg
+0x7B9855: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B985A: add     esp, 0Ch
-0x7B985D: push    1; char
-0x7B985F: push    1; char
-0x7B9861: lea     ecx, [esp+20Ch+var_1BC]
+0x7B985D: push    1; requireMipmaps
+0x7B985F: push    1; loadFromCache
+0x7B9861: lea     ecx, [esp+20Ch+outTexture]
 0x7B9865: push    offset aDataTextures_6; "Data\\Textures\\Effects\\WindowEnvironm"...
-0x7B986A: push    ecx; int
-0x7B986B: call    sub_7B8200
+0x7B986A: push    ecx; outTexture
+0x7B986B: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7B9870: add     esp, 10h
 0x7B9873: mov     edi, eax
 0x7B9875: mov     eax, ds:0B43100h
@@ -1131,7 +1130,7 @@
 0x7B98B6: add     eax, 4
 0x7B98B9: push    eax; lpAddend
 0x7B98BA: call    dword ptr ds:0A28078h
-0x7B98C0: mov     esi, [esp+204h+var_1BC]
+0x7B98C0: mov     esi, [esp+204h+outTexture]
 0x7B98C4: test    esi, esi
 0x7B98C6: mov     [esp+204h+var_4], ebx
 0x7B98CD: jz      short loc_7B98EB
@@ -1147,12 +1146,12 @@
 0x7B98E5: push    1
 0x7B98E7: mov     ecx, esi
 0x7B98E9: call    eax
-0x7B98EB: push    1; char
-0x7B98ED: push    1; char
+0x7B98EB: push    1; requireMipmaps
+0x7B98ED: push    1; loadFromCache
 0x7B98EF: lea     ecx, [esp+20Ch+var_1A8]
 0x7B98F3: push    offset aDataTextures_7; "Data\\Textures\\Effects\\WindowEnvironm"...
-0x7B98F8: push    ecx; int
-0x7B98F9: call    sub_7B8200
+0x7B98F8: push    ecx; outTexture
+0x7B98F9: call    NiSourceTexture_LoadChecked; Loads/caches a NiSourceTexture by filename and optionally rejects a loaded texture that lacks mipmaps. The first argument is the returned smart-pointer storage.
 0x7B98FE: add     esp, 10h
 0x7B9901: mov     edi, eax
 0x7B9903: mov     eax, ds:0B430E4h
@@ -1200,7 +1199,7 @@
 0x7B9979: push    70h ; 'p'; Size
 0x7B997B: call    FormHeapAlloc
 0x7B9980: add     esp, 4
-0x7B9983: mov     [esp+204h+var_1BC], eax
+0x7B9983: mov     [esp+204h+outTexture], eax
 0x7B9987: test    eax, eax
 0x7B9989: mov     [esp+204h+var_4], 0Bh
 0x7B9994: jz      short loc_7B99AE
@@ -1229,7 +1228,6 @@
 0x7B99E2: mov     bl, 0E6h ; 'æ'
 0x7B99E4: mov     al, 0D4h ; 'Ô'
 0x7B99E6: jmp     short loc_7B99F0
-0x7B99E8: align 10h
 0x7B99F0: mov     edx, 4
 0x7B99F5: mov     [ecx-2], bl
 0x7B99F8: mov     [ecx-1], al
@@ -1256,7 +1254,7 @@
 0x7B9A3C: sub     eax, 1
 0x7B9A3F: jnz     short loc_7B9A20
 0x7B9A41: add     dword ptr [edi+68h], 1
-0x7B9A45: push    offset dword_B256D0; a2
+0x7B9A45: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x7B9A4A: push    edi; a1
 0x7B9A4B: call    NiSourceTexture__LoadTexturePixelData
 0x7B9A50: mov     esi, eax
@@ -1291,12 +1289,12 @@
 0x7B9A9D: push    9E5h
 0x7B9AA2: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B9AA7: push    0
-0x7B9AA9: call    nullsub_return0_0arg
+0x7B9AA9: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B9AAE: add     esp, 0Ch
 0x7B9AB1: push    70h ; 'p'; Size
 0x7B9AB3: call    FormHeapAlloc
 0x7B9AB8: add     esp, 4
-0x7B9ABB: mov     [esp+204h+var_1BC], eax
+0x7B9ABB: mov     [esp+204h+outTexture], eax
 0x7B9ABF: test    eax, eax
 0x7B9AC1: mov     [esp+204h+var_4], 0Ch
 0x7B9ACC: jz      short loc_7B9AE4
@@ -1327,7 +1325,7 @@
 0x7B9B1C: sub     esi, 1
 0x7B9B1F: jnz     short loc_7B9B00
 0x7B9B21: add     dword ptr [eax+68h], 1
-0x7B9B25: push    offset dword_B256D0; a2
+0x7B9B25: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x7B9B2A: push    eax; a1
 0x7B9B2B: call    NiSourceTexture__LoadTexturePixelData
 0x7B9B30: mov     esi, eax
@@ -1362,7 +1360,7 @@
 0x7B9B7D: push    9F6h
 0x7B9B82: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B9B87: push    0
-0x7B9B89: call    nullsub_return0_0arg
+0x7B9B89: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B9B8E: add     esp, 0Ch
 0x7B9B91: push    offset aDataTextures_8; "Data\\Textures\\Effects\\"
 0x7B9B96: lea     ecx, [esp+208h+Src]
@@ -1370,7 +1368,7 @@
 0x7B9BA2: push    ecx
 0x7B9BA3: call    __sprintf
 0x7B9BA8: mov     edx, ds:0B43104h
-0x7B9BAE: push    offset dword_B256D0
+0x7B9BAE: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0
 0x7B9BB3: push    edx
 0x7B9BB4: lea     eax, [esp+218h+Src]
 0x7B9BBB: push    eax
@@ -1414,7 +1412,7 @@
 0x7B9C17: push    0A00h
 0x7B9C1C: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B9C21: push    0
-0x7B9C23: call    nullsub_return0_0arg
+0x7B9C23: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B9C28: add     esp, 0Ch
 0x7B9C2B: push    offset aDataTextures_8; "Data\\Textures\\Effects\\"
 0x7B9C30: lea     eax, [esp+208h+Src]
@@ -1422,7 +1420,7 @@
 0x7B9C3C: push    eax
 0x7B9C3D: call    __sprintf
 0x7B9C42: mov     ecx, ds:0B43104h
-0x7B9C48: push    offset dword_B256D0
+0x7B9C48: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0
 0x7B9C4D: push    ecx
 0x7B9C4E: lea     edx, [esp+218h+Src]
 0x7B9C55: push    edx
@@ -1466,7 +1464,7 @@
 0x7B9CB1: push    0A05h
 0x7B9CB6: push    offset a_Bsshadermanag; ".\\BSShaderManager.cpp"
 0x7B9CBB: push    0
-0x7B9CBD: call    nullsub_return0_0arg
+0x7B9CBD: call    nullsub_return0_0arg; [Verified] Shared zero-return leaf. BSTempEffectDecal vtable 0xA6822C uses it at +0x54 for GetTypeID 0 and also in other slots; many unrelated vtables reuse this target. Class meaning must be established from the owning vtable and caller.
 0x7B9CC2: add     esp, 0Ch
 0x7B9CC5: push    offset aDataTextures_8; "Data\\Textures\\Effects\\"
 0x7B9CCA: lea     ecx, [esp+208h+Src]
@@ -1475,9 +1473,9 @@
 0x7B9CD7: call    __sprintf
 0x7B9CDC: push    1; char
 0x7B9CDE: lea     edx, [esp+214h+Src]
-0x7B9CE5: push    offset dword_B256D0; int
+0x7B9CE5: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x7B9CEA: push    edx; Src
-0x7B9CEB: call    NiSourceTexture__LoadTextureByFilename
+0x7B9CEB: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x7B9CF0: mov     esi, eax
 0x7B9CF2: mov     eax, ds:0B430F8h
 0x7B9CF7: add     esp, 18h
@@ -1511,9 +1509,9 @@
 0x7B9D46: call    __sprintf
 0x7B9D4B: push    1; char
 0x7B9D4D: lea     ecx, [esp+214h+Src]
-0x7B9D54: push    offset dword_B256D0; int
+0x7B9D54: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x7B9D59: push    ecx; Src
-0x7B9D5A: call    NiSourceTexture__LoadTextureByFilename
+0x7B9D5A: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x7B9D5F: mov     esi, eax
 0x7B9D61: mov     eax, ds:0B43128h
 0x7B9D66: add     esp, 18h
@@ -1549,9 +1547,9 @@
 0x7B9DBE: call    __sprintf
 0x7B9DC3: push    1; char
 0x7B9DC5: lea     edx, [esp+214h+Src]
-0x7B9DCC: push    offset dword_B256D0; int
+0x7B9DCC: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; int
 0x7B9DD1: push    edx; Src
-0x7B9DD2: call    NiSourceTexture__LoadTextureByFilename
+0x7B9DD2: call    NiSourceTexture__LoadTextureByFilename; SpeedTreeOBSE 2026-07-14: generic NiSourceTexture creation preserves default pixel/alpha/mipmap preferences. Suitable for authored DDS/TGA composite candidates resolved through engine resources.
 0x7B9DD7: mov     esi, eax
 0x7B9DD9: mov     eax, ds:0B430E8h
 0x7B9DDE: add     esp, 18h
@@ -1581,7 +1579,7 @@
 0x7B9E1B: push    70h ; 'p'; Size
 0x7B9E1D: call    FormHeapAlloc
 0x7B9E22: add     esp, 4
-0x7B9E25: mov     [esp+204h+var_1BC], eax
+0x7B9E25: mov     [esp+204h+outTexture], eax
 0x7B9E29: test    eax, eax
 0x7B9E2B: mov     [esp+204h+var_4], 0Dh
 0x7B9E36: jz      short loc_7B9E56
@@ -1615,8 +1613,8 @@
 0x7B9E9E: fxch    st(2)
 0x7B9EA0: fxch    st(1)
 0x7B9EA2: fild    [esp+204h+var_1CC]
-0x7B9EA6: fstp    [esp+204h+var_1BC]
-0x7B9EAA: fld     [esp+204h+var_1BC]
+0x7B9EA6: fstp    [esp+204h+outTexture]
+0x7B9EAA: fld     [esp+204h+outTexture]
 0x7B9EAE: fcom    st(3)
 0x7B9EB0: fnstsw  ax
 0x7B9EB2: test    ah, 5
@@ -1651,8 +1649,8 @@
 0x7B9EF8: fld     st(1)
 0x7B9EFA: fmulp   st(2), st
 0x7B9EFC: faddp   st(1), st
-0x7B9EFE: fstp    [esp+204h+var_1BC]
-0x7B9F02: fld     [esp+204h+var_1BC]
+0x7B9EFE: fstp    [esp+204h+outTexture]
+0x7B9F02: fld     [esp+204h+outTexture]
 0x7B9F06: fcom    st(2)
 0x7B9F08: fnstsw  ax
 0x7B9F0A: test    ah, 41h
@@ -1689,25 +1687,25 @@
 0x7B9F5E: jnz     short loc_7B9F64
 0x7B9F60: fld1
 0x7B9F62: fsubrp  st(1), st
-0x7B9F64: fstp    [esp+204h+var_1BC]
+0x7B9F64: fstp    [esp+204h+outTexture]
 0x7B9F68: sub     esp, 8
-0x7B9F6B: fld     [esp+20Ch+var_1BC]
+0x7B9F6B: fld     [esp+20Ch+outTexture]
 0x7B9F6F: fmul    qword ptr ds:0A3DDD8h
-0x7B9F75: fstp    [esp+20Ch+var_1BC]
-0x7B9F79: fld     [esp+20Ch+var_1BC]
+0x7B9F75: fstp    [esp+20Ch+outTexture]
+0x7B9F79: fld     [esp+20Ch+outTexture]
 0x7B9F7D: fstp    [esp+20Ch+var_20C]; double
 0x7B9F80: call    _floor
 0x7B9F85: fnstcw  word ptr [esp+20Ch+var_1CC]
 0x7B9F89: add     edi, 1
 0x7B9F8C: movzx   eax, word ptr [esp+20Ch+var_1CC]
 0x7B9F91: or      eax, 0C00h
-0x7B9F96: mov     [esp+20Ch+var_1BC], eax
+0x7B9F96: mov     [esp+20Ch+outTexture], eax
 0x7B9F9A: add     esp, 8
-0x7B9F9D: fldcw   word ptr [esp+204h+var_1BC]
+0x7B9F9D: fldcw   word ptr [esp+204h+outTexture]
 0x7B9FA1: add     esi, 3
 0x7B9FA4: cmp     edi, 80h ; '€'
-0x7B9FAA: fistp   [esp+204h+var_1BC]
-0x7B9FAE: mov     al, byte ptr [esp+204h+var_1BC]
+0x7B9FAA: fistp   [esp+204h+outTexture]
+0x7B9FAE: mov     al, byte ptr [esp+204h+outTexture]
 0x7B9FB2: mov     [esi-5], al
 0x7B9FB5: mov     [esi-4], al
 0x7B9FB8: mov     [esi-3], al
@@ -1720,7 +1718,7 @@
 0x7B9FD5: mov     [esp+204h+var_1AC], eax
 0x7B9FD9: jl      loc_7B9E76
 0x7B9FDF: add     dword ptr [ebx+68h], 1
-0x7B9FE3: push    offset dword_B256D0; a2
+0x7B9FE3: push    offset OB_TES_DefaultSourceTextureFormatPrefs_010201A0; a2
 0x7B9FE8: push    ebx; a1
 0x7B9FE9: call    NiSourceTexture__LoadTexturePixelData
 0x7B9FEE: mov     esi, eax
@@ -1813,3 +1811,78 @@
 0x7BA0E0: mov     esp, ebp
 0x7BA0E2: pop     ebp
 0x7BA0E3: retn
+0x9CDB40: mov     eax, [ebp+outTexture]
+0x9CDB46: push    eax
+0x9CDB47: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDB4C: pop     ecx
+0x9CDB4D: retn
+0x9CDB4E: mov     eax, [ebp+outTexture]
+0x9CDB54: push    eax
+0x9CDB55: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDB5A: pop     ecx
+0x9CDB5B: retn
+0x9CDB5C: mov     eax, [ebp+outTexture]
+0x9CDB62: push    eax
+0x9CDB63: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDB68: pop     ecx
+0x9CDB69: retn
+0x9CDB6A: mov     eax, [ebp+outTexture]
+0x9CDB70: push    eax
+0x9CDB71: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDB76: pop     ecx
+0x9CDB77: retn
+0x9CDB78: mov     eax, [ebp+outTexture]
+0x9CDB7E: push    eax
+0x9CDB7F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDB84: pop     ecx
+0x9CDB85: retn
+0x9CDB86: mov     eax, [ebp+outTexture]
+0x9CDB8C: push    eax
+0x9CDB8D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDB92: pop     ecx
+0x9CDB93: retn
+0x9CDB94: mov     eax, [ebp+outTexture]
+0x9CDB9A: push    eax
+0x9CDB9B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDBA0: pop     ecx
+0x9CDBA1: retn
+0x9CDBA2: mov     eax, [ebp+outTexture]
+0x9CDBA8: push    eax
+0x9CDBA9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDBAE: pop     ecx
+0x9CDBAF: retn
+0x9CDBB0: mov     eax, [ebp+outTexture]
+0x9CDBB6: push    eax
+0x9CDBB7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDBBC: pop     ecx
+0x9CDBBD: retn
+0x9CDBBE: lea     ecx, [ebp+outTexture]; slot
+0x9CDBC4: jmp     NiPointerSlot_Release
+0x9CDBC9: lea     ecx, [ebp+var_1A8]; slot
+0x9CDBCF: jmp     NiPointerSlot_Release
+0x9CDBD4: mov     eax, [ebp+outTexture]
+0x9CDBDA: push    eax
+0x9CDBDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDBE0: pop     ecx
+0x9CDBE1: retn
+0x9CDBE2: mov     eax, [ebp+outTexture]
+0x9CDBE8: push    eax
+0x9CDBE9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDBEE: pop     ecx
+0x9CDBEF: retn
+0x9CDBF0: mov     eax, [ebp+outTexture]
+0x9CDBF6: push    eax
+0x9CDBF7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CDBFC: pop     ecx
+0x9CDBFD: retn
+0x9CDBFE: mov     edx, [esp-4+arg_4]
+0x9CDC02: lea     eax, [edx-1F4h]
+0x9CDC08: mov     ecx, [edx-1F8h]
+0x9CDC0E: xor     ecx, eax
+0x9CDC10: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDC15: add     eax, 0Ch
+0x9CDC18: mov     ecx, [edx-38h]
+0x9CDC1B: xor     ecx, eax
+0x9CDC1D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CDC22: mov     eax, offset stru_AF6CE8
+0x9CDC27: jmp     ___CxxFrameHandler3

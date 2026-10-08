@@ -1,25 +1,25 @@
-int __thiscall sub_6B7560(_DWORD *this, __int16 a2)
+DialogueItemView *__thiscall Conversation::GetDialogueItemByIndex(ConversationView *this, SInt16 index)
 {
-  _DWORD *v2; // eax
+  ConversationView *v2; // eax
   __int16 v3; // dx
-  int v4; // ecx
+  DialogueItemNode *nextItemNode; // ecx
 
-  v2 = this;
-  v3 = 0;
-  if ( this )
+  v2 = this; /*0x6b7560*/
+  v3 = 0; /*0x6b7562*/
+  if ( this ) /*0x6b7567*/
   {
-    do
+    do /*0x6b7570*/
     {
-      v4 = v2[1];
-      if ( !v4 && !*v2 )
-        break;
-      if ( v3 == a2 )
-        return *v2;
-      v2 = (_DWORD *)v2[1];
-      ++v3;
+      nextItemNode = v2->nextItemNode; /*0x6b7570*/
+      if ( !nextItemNode && !v2->firstItem ) /*0x6b7577*/
+        break; /*0x6b7577*/
+      if ( v3 == index ) /*0x6b757e*/
+        return v2->firstItem; /*0x6b759c*/
+      v2 = (ConversationView *)v2->nextItemNode; /*0x6b7580*/
+      ++v3; /*0x6b7582*/
     }
-    while ( v4 );
+    while ( nextItemNode ); /*0x6b7570*/
   }
-  PrintError("When trying to get a dialogue item by its index, the index was larger than the size of the dialogue items list.");
-  return 0;
+  PrintError("When trying to get a dialogue item by its index, the index was larger than the size of the dialogue items list."); /*0x6b7589*/
+  return 0; /*0x6b7598*/
 }

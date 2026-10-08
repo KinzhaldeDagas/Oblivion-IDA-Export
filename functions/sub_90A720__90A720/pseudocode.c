@@ -7,18 +7,18 @@ int __cdecl sub_90A720(int *a1)
   char v6; // [esp+14h] [ebp-8h]
   char v7; // [esp+15h] [ebp-7h]
 
-  v2 = sub_90A6E0;
-  v3 = sub_90A0F0;
-  v4 = sub_90A130;
-  v5 = sub_90A170;
-  v6 = 1;
-  v7 = 1;
-  sub_8DADD0(a1, (int)&v2, 0xFFFFFFFF, 0xB);
-  v2 = sub_90A5A0;
-  v3 = sub_909F50;
-  v4 = sub_909940;
-  v5 = sub_909C40;
-  v6 = 0;
-  v7 = 1;
-  return sub_8DADD0(a1, (int)&v2, 0xB, 0xFFFFFFFF);
+  v2 = sub_90A6E0; /*0x90a733*/
+  v3 = sub_90A0F0; /*0x90a73b*/
+  v4 = sub_90A130; /*0x90a743*/
+  v5 = sub_90A170; /*0x90a74b*/
+  v6 = 1; /*0x90a753*/
+  v7 = 1; /*0x90a758*/
+  sub_8DADD0(a1, (int)&v2, 0xFFFFFFFF, 0xB); /*0x90a75d*/
+  v2 = sub_90A5A0; /*0x90a76d*/
+  v3 = sub_909F50; /*0x90a775*/
+  v4 = sub_909940; /*0x90a77d*/
+  v5 = sub_909C40; /*0x90a785*/
+  v6 = 0; /*0x90a78d*/
+  v7 = 1; /*0x90a792*/
+  return sub_8DADD0(a1, (int)&v2, 0xB, 0xFFFFFFFF); /*0x90a79c*/
 }

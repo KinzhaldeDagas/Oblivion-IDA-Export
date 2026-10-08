@@ -51,8 +51,8 @@
 0x644BAB: push    edi
 0x644BAC: mov     ecx, esi
 0x644BAE: call    eax
-0x644BB0: mov     ecx, [esi+8]
-0x644BB3: call    sub_5660A0
+0x644BB0: mov     ecx, [esi+8]; self
+0x644BB3: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x644BB8: test    al, al
 0x644BBA: jz      short loc_644BE7
 0x644BBC: mov     ecx, [esi+8]
@@ -75,17 +75,17 @@
 0x644BE1: add     esp, 0Ch
 0x644BE4: retn    10h
 0x644BE7: push    3Ah ; ':'; a1
-0x644BE9: call    TESForm_LookupByFormID
+0x644BE9: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x644BEE: add     esp, 4
-0x644BF1: mov     ecx, offset TimeGlobals
+0x644BF1: mov     ecx, 0B332E0h
 0x644BF6: mov     ebx, eax
 0x644BF8: call    TimeGlobals_GetGameHour
 0x644BFD: fstp    [esp+18h+arg_0]
 0x644C01: fld     [esp+18h+arg_0]
 0x644C05: mov     ecx, edi; this
-0x644C07: fstp    [esp+18h+var_C+4]
+0x644C07: fstp    qword ptr [esp+18h+var_C+4]
 0x644C0B: call    sub_6599B0; Noope the struct asosciated to the this pointer is bigger
-0x644C10: fcomp   [esp+18h+var_C+4]
+0x644C10: fcomp   qword ptr [esp+18h+var_C+4]
 0x644C14: fnstsw  ax
 0x644C16: test    ah, 41h
 0x644C19: jnz     short loc_644C29
@@ -94,15 +94,15 @@
 0x644C25: fstp    [esp+18h+arg_0]
 0x644C29: fld     [esp+18h+arg_0]
 0x644C2D: mov     ecx, edi; this
-0x644C2F: fstp    [esp+18h+var_C+4]
+0x644C2F: fstp    qword ptr [esp+18h+var_C+4]
 0x644C33: call    sub_6599B0; Noope the struct asosciated to the this pointer is bigger
-0x644C38: fsubr   [esp+18h+var_C+4]
+0x644C38: fsubr   qword ptr [esp+18h+var_C+4]
 0x644C3C: mov     ecx, [esi+8]
 0x644C3F: push    2
 0x644C41: push    edi
-0x644C42: fstp    dword ptr [esp+20h+var_C+4]
+0x644C42: fstp    [esp+20h+var_C+4]
 0x644C46: fld     dword ptr [ebx+24h]
-0x644C49: fstp    dword ptr [esp+20h+var_C]
+0x644C49: fstp    [esp+20h+var_C]
 0x644C4D: call    sub_5677B0
 0x644C52: mov     eax, [esi+2Ch]
 0x644C55: fstp    [esp+18h+arg_0]
@@ -122,18 +122,18 @@
 0x644C77: sub     esp, 8
 0x644C7A: fstp    [esp+24h+var_20]
 0x644C7E: mov     ebx, [esi+2Ch]
-0x644C81: fld     dword ptr [esp+24h+var_C]
+0x644C81: fld     [esp+24h+var_C]
 0x644C85: mov     ebp, [esi]
 0x644C87: fdivr   qword ptr ds:0A2F938h
 0x644C8D: mov     ecx, ebx; this
-0x644C8F: fmul    dword ptr [esp+24h+var_C+4]
+0x644C8F: fmul    [esp+24h+var_C+4]
 0x644C93: fstp    [esp+24h+arg_0]
 0x644C97: fld     [esp+24h+arg_0]
 0x644C9B: fstp    [esp+24h+var_24]
 0x644C9E: call    TESObjectREFR_GetWorldSpace
 0x644CA3: mov     ecx, [esi+2Ch]; this
 0x644CA6: push    eax
-0x644CA7: call    TESObjectREFR_GetParentCell
+0x644CA7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x644CAC: mov     edx, [ebx]
 0x644CAE: push    eax
 0x644CAF: mov     eax, [edx+174h]

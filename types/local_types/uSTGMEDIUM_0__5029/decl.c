@@ -1,1 +1,1 @@
-uSTGMEDIUM_0
+typedef tagSTGMEDIUM_0 uSTGMEDIUM_0;

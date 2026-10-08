@@ -11,7 +11,7 @@
 0x77C8C4: push    eax; lpAddend
 0x77C8C5: call    dword ptr ds:0A28078h
 0x77C8CB: mov     ecx, esi
-0x77C8CD: call    sub_452A60
+0x77C8CD: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x77C8D2: mov     ecx, [edi+20h]
 0x77C8D5: push    eax
 0x77C8D6: call    sub_77C5E0

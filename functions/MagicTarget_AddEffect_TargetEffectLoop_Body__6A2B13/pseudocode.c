@@ -12,10 +12,10 @@ int __usercall MagicTarget_AddEffect_::TargetEffectLoop_Body@<eax>(
         void *a11,
         float a12)
 {
-  if ( *(_DWORD *)ebx0 )
+  if ( *(_DWORD *)ebx0 ) /*0x6a2b13*/
   {
-    if ( Magic_BoundItemSlotOverlap(*(_DWORD *)(a2 + 0xC), *(_DWORD *)(*(_DWORD *)ebx0 + 0xC)) )
-      MagicTarget_RemoveEffects();
+    if ( Magic_BoundItemSlotOverlap(*(_DWORD *)(a2 + 0xC), *(_DWORD *)(*(_DWORD *)ebx0 + 0xC)) ) /*0x6a2b21*/
+      MagicTarget_RemoveEffects(); /*0x6a2b36*/
   }
   return MagicTarget_AddEffect_::TargetEffectLoop_Next(a2, a3, ebx0, a4, a5, a6, a7, a8, a9, a10, a11, a12);
 }

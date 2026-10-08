@@ -1,37 +1,37 @@
 [
   {
     "ea": "0x547070",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Sidecar decode: Calc_WeaponDamage is actor/weapon agnostic after entry; BladeSkillsRestored substitutes only the skill-level argument after consuming the most recent exact source-return/formula-return token from its bounded per-thread stack. Unmatched or overflowed contexts retain native formula inputs.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x547073",
-    "line": "mov     eax, [esp+8+arg_4]",
+    "line": "mov     eax, [esp+8+luckValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x547077",
-    "line": "mov     ecx, [esp+8+arg_0]",
+    "line": "mov     ecx, [esp+8+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x54707B",
-    "line": "push    eax",
+    "line": "push    eax; luckValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54707C",
-    "line": "push    ecx",
+    "line": "push    ecx; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x54707D",
-    "line": "call    Calc_LuckModifiedSkill",
+    "line": "call    Calc_LuckModifiedSkill; Compute Luck-adjusted effective skill as skill + iActorLuckSkillBase + Luck*fActorLuckSkillMult, then clamp to 0..100. Defaults simplify to skill + (Luck-50)*0.4.",
     "mnemonic": "call",
     "size": 5
   },

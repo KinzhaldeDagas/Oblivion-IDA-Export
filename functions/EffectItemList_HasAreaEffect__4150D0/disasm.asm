@@ -13,14 +13,13 @@
 0x4150E8: jz      short loc_415124
 0x4150EA: push    edi
 0x4150EB: jmp     short loc_4150F0
-0x4150ED: align 10h
 0x4150F0: test    bl, bl
 0x4150F2: jnz     short loc_415123
 0x4150F4: mov     edi, [esi+4]
 0x4150F7: test    edi, edi
 0x4150F9: jz      short loc_415117
 0x4150FB: mov     ecx, edi
-0x4150FD: call    EffectItem_GetArea
+0x4150FD: call    EffectItem_GetArea; Effective area: returns 0 for EffectSetting NoArea (0x200) or Self range (0); otherwise raw EffectItem+0x8 area.
 0x415102: cmp     eax, 1
 0x415105: jle     short loc_415117
 0x415107: mov     eax, [edi+1Ch]

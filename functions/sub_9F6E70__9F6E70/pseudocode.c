@@ -1,5 +1,5 @@
 int sub_9F6E70()
 {
-  GameSetting_ConstrAndReg(&dword_B39110, (int)"sEyesdown", (int)"Eyes down/up");
-  return atexit(sub_A22940);
+  GameSetting_ConstrAndReg(&stru_B39110, "sEyesdown", "Eyes down/up"); /*0x9f6e7f*/
+  return atexit(sub_A22940); /*0x9f6e8f*/
 }

@@ -1,24 +1,13 @@
-void __thiscall sub_785E00(char **this, unsigned int a2)
+// Oblivion compact stVec-vector resize(count) wrapper. Constructs the default zero/size-3 stVec fill value, delegates to the vector resize/fill implementation, then destroys the temporary.
+void __thiscall OB_stVector_stVec_ResizeDefault_010201A0(OB_stVector16_010201A0 *this, unsigned int count)
 {
-  int *v3; // eax
-  int v4; // edx
-  int v5; // [esp-18h] [ebp-44h]
-  int v6; // [esp-14h] [ebp-40h]
-  int v7; // [esp-10h] [ebp-3Ch]
-  int v8; // [esp-Ch] [ebp-38h]
-  int v9; // [esp-4h] [ebp-30h]
-  float v10[6]; // [esp+8h] [ebp-24h] BYREF
-  unsigned int v11; // [esp+28h] [ebp-4h]
+  OB_stVec_010201A0 v3; // [esp+8h] [ebp-24h] BYREF
+  unsigned int v4; // [esp+28h] [ebp-4h]
+  OB_stVec_010201A0 v5; // 0:^4.24
 
-  v3 = (int *)sub_78E550(v10);
-  v5 = *v3;
-  v6 = v3[1];
-  v7 = v3[2];
-  v8 = v3[3];
-  v4 = v3[4];
-  v9 = v3[5];
-  v11 = 0;
-  sub_7856B0(this, a2, v5, v6, v7, v8, v4, v9);
-  v11 = 0xFFFFFFFF;
-  TESTexture::ClearComponentReferences(v10);
+  v5 = *OB_stVec_ctor_zero3_010201A0(&v3); /*0x785e36*/
+  v4 = 0; /*0x785e5d*/
+  OB_stVector_stVec_ResizeFill_010201A0((OB_stVector_stVec_010201A0 *)this, count, v5); /*0x785e65*/
+  v4 = 0xFFFFFFFF; /*0x785e6e*/
+  Shared_NoOpVirtual_60D0A0(&v3); /*0x785e76*/
 }

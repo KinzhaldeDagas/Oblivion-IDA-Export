@@ -12,14 +12,14 @@ bool __cdecl cmd_Drop(
   UInt32 v9; // [esp+4h] [ebp-8h] BYREF
   TESForm *v10; // [esp+8h] [ebp-4h] BYREF
 
-  v10 = 0;
-  v9 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, &v10, &v9);
-  if ( result )
+  v10 = 0; /*0x500681*/
+  v9 = 0; /*0x500689*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, &v10, &v9); /*0x500691*/
+  if ( result ) /*0x50069b*/
   {
-    if ( a4 )
-      a4->vtbl->RemoveItem(a4, v10, 0, v9, 0, 1, 0, 0, 0, 1, 0);
-    return 1;
+    if ( a4 ) /*0x5006a4*/
+      a4->vtbl->RemoveItem(a4, v10, 0, v9, 0, 1, 0, 0, 0, 1, 0); /*0x5006ca*/
+    return 1; /*0x5006cc*/
   }
-  return result;
+  return result; /*0x50069d*/
 }

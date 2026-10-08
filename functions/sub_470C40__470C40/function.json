@@ -1,19 +1,32 @@
 {
-  "callees_count": 8,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x470C40",
+      "0x470CA9"
+    ]
+  ],
+  "chunks_sha256": "b15922397e0133872121f157e2dc18e97da3cad32e10affb45fe608019c3b640",
+  "comment_regular": "AnimSequenceMultiple vtable helper used by first-person source sync. It scans list order and returns the first candidate whose path suffix beginning at the final backslash exactly matches the source suffix. The comparison is case-sensitive and includes the backslash plus full filename/extension.",
+  "comment_repeatable": "AnimSequenceMultiple vtable helper used by first-person source sync. It scans list order and returns the first candidate whose path suffix beginning at the final backslash exactly matches the source suffix. The comparison is case-sensitive and includes the backslash plus full filename/extension.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_470C40",
+  "display_name": "AnimSequenceMultiple_FindBySourceBasename",
   "end_ea": "0x470CA9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_470C40",
+  "name": "AnimSequenceMultiple_FindBySourceBasename",
   "segment": ".text",
   "sha256": "b15922397e0133872121f157e2dc18e97da3cad32e10affb45fe608019c3b640",
   "size": 105,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x470C40",
-  "type": "char *__thiscall(_DWORD *this, int)",
+  "total_chunk_size": 105,
+  "type": "BSAnimGroupSequence *__thiscall(AnimSequenceMultiple *this, BSAnimGroupSequence *sourceSequence)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 1
 }

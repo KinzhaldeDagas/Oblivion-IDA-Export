@@ -1,4 +1,5 @@
-char *sub_73DA90()
+// Oblivion virtual GetRTTI for NiShadeProperty. Returns NiRTTI_NiShadeProperty (B401B0).
+const NiRTTI *__thiscall NiShadeProperty_GetRTTI(NiShadeProperty *this)
 {
-  return dword_B401B0;
+  return &NiRTTI_NiShadeProperty; /*0x73da95*/
 }

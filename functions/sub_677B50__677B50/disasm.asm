@@ -9,7 +9,6 @@
 0x677B69: push    esi
 0x677B6A: push    edi
 0x677B6B: jmp     short loc_677B70
-0x677B6D: align 10h
 0x677B70: cmp     dword ptr [ebx+4], 0
 0x677B74: jnz     short loc_677B7F
 0x677B76: cmp     dword ptr [ebx], 0

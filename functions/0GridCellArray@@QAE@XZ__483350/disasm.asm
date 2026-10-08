@@ -85,3 +85,15 @@
 0x483451: pop     esi
 0x483452: add     esp, 1Ch
 0x483455: retn
+0x9AF830: mov     ecx, [ebp-1Ch]
+0x9AF833: jmp     sub_481DF0
+0x9AF838: mov     ecx, [ebp-1Ch]
+0x9AF83B: add     ecx, 24h ; '$'; slot
+0x9AF83E: jmp     NiPointerSlot_Release
+0x9AF843: mov     edx, [esp+arg_4]
+0x9AF847: lea     eax, [edx-18h]
+0x9AF84A: mov     ecx, [edx-1Ch]
+0x9AF84D: xor     ecx, eax
+0x9AF84F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AF854: mov     eax, offset stru_ADBD64
+0x9AF859: jmp     ___CxxFrameHandler3

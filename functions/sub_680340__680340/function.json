@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x680340",
+      "0x680374"
+    ]
+  ],
+  "chunks_sha256": "8bd727d3ad8d02345a82f7c1bf8de3639b05bd2af41ee28f8d7c2a736cbb2cfb",
+  "comment_regular": "Verified: clears allocation flag 0x04 for this AStarWorldNode's table slot and rewinds LowPathSearchGlobals.nextFreeStateIndex when the released slot is lower.",
+  "comment_repeatable": "Verified: clears allocation flag 0x04 for this AStarWorldNode's table slot and rewinds LowPathSearchGlobals.nextFreeStateIndex when the released slot is lower.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_680340",
+  "display_name": "AStarWorldNode_ReleaseSearchStateSlot",
   "end_ea": "0x680374",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680340",
+  "name": "AStarWorldNode_ReleaseSearchStateSlot",
   "segment": ".text",
   "sha256": "8bd727d3ad8d02345a82f7c1bf8de3639b05bd2af41ee28f8d7c2a736cbb2cfb",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680340",
-  "type": "int __thiscall(unsigned __int16 *this)",
+  "total_chunk_size": 52,
+  "type": "unsigned __int16 __thiscall(AStarWorldNode *this)",
   "xrefs_from_count": 14,
   "xrefs_to_count": 2
 }

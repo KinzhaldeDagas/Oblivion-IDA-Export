@@ -3,7 +3,7 @@
 0x6DD232: mov     edi, [esp+8+arg_0]
 0x6DD236: push    edi
 0x6DD237: mov     esi, ecx
-0x6DD239: call    sub_715F10
+0x6DD239: call    NiTimeController_RegisterStreamables; Registers the NiObject base first and, on success, registers the refcounted next-controller object at +0x34. The target at +0x30 is a link, not recursively registered here.
 0x6DD23E: test    al, al
 0x6DD240: jnz     short loc_6DD247
 0x6DD242: pop     edi

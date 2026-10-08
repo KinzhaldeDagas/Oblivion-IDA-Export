@@ -14,9 +14,9 @@
 0x6A071F: mov     large fs:0, eax
 0x6A0725: mov     esi, ecx
 0x6A0727: mov     [esp+24h+var_10], esi
-0x6A072B: call    MagicHitEffect_constr
+0x6A072B: call    MagicHitEffect_constr; Verified MagicHitEffect constructor starts from the 24-byte BSTempEffect base, nulls ownerActiveEffect (+0x18) and targetReference (+0x1C), zeros elapsedSeconds (+0x20) and bFinished (+0x24), establishing a 40-byte base layout.
 0x6A0730: xor     ebx, ebx
-0x6A0732: mov     dword ptr [esi], offset ??_7MagicShaderHitEffect@@6B@; const MagicShaderHitEffect::`vftable'
+0x6A0732: mov     dword ptr [esi], offset ??_7MagicShaderHitEffect@@6B@; Verified (Oblivion): constructor initializes a 0x4C-byte shader hit effect. +0x28 is bWeaponEnchantment_28, set true by Process_UpdateWeaponEnchantmentShader after resolving an equipped enchantment's EffectSetting.enchantEffect. +0x30 TESBoundObject*, +0x34 TESEffectShader*, +0x38 visual elapsed timer, +0x3C ParticleShaderProperty*, +0x40 NiNode*, +0x44 perspective state, and +0x48 TextureEffectData* are supported by field use/construction/destruction.
 0x6A0738: mov     [esp+24h+var_4], ebx
 0x6A073C: mov     [esi+3Ch], ebx
 0x6A073F: mov     [esi+40h], ebx
@@ -75,9 +75,9 @@
 0x6A07B9: call    eax
 0x6A07BB: mov     [esi+40h], ebx
 0x6A07BE: mov     [esi+28h], bl
-0x6A07C1: mov     dword ptr [esi+2Ch], 0FFFFFFFFh
+0x6A07C1: mov     dword ptr [esi+2Ch], 0FFFFFFFFh; Verified (Oblivion): shader field +0x2C is initialized to 0xFFFFFFFF and serialized as a raw dword for save version >= 0x37; semantic meaning remains Unknown.
 0x6A07C8: mov     [esi+30h], ebx
-0x6A07CB: mov     [esi+44h], bl
+0x6A07CB: mov     [esi+44h], bl; Verified (Oblivion): shader byte +0x44 initializes to zero and is later read/written during player perspective restoration; meaning is Probable perspective-state byte.
 0x6A07CE: mov     eax, esi
 0x6A07D0: mov     ecx, dword ptr [esp+24h+var_C]
 0x6A07D4: mov     large fs:0, ecx
@@ -88,3 +88,21 @@
 0x6A07DF: pop     ebx
 0x6A07E0: add     esp, 10h
 0x6A07E3: retn
+0x9C5ED0: mov     ecx, [ebp-10h]
+0x9C5ED3: jmp     MagicHitEffect_destr
+0x9C5ED8: mov     ecx, [ebp-10h]
+0x9C5EDB: add     ecx, 3Ch ; '<'; slot
+0x9C5EDE: jmp     NiPointerSlot_Release
+0x9C5EE3: mov     ecx, [ebp-10h]
+0x9C5EE6: add     ecx, 40h ; '@'; slot
+0x9C5EE9: jmp     NiPointerSlot_Release
+0x9C5EEE: mov     ecx, [ebp-10h]
+0x9C5EF1: add     ecx, 48h ; 'H'; slot
+0x9C5EF4: jmp     NiPointerSlot_Release
+0x9C5EF9: mov     edx, [esp+arg_4]
+0x9C5EFD: lea     eax, [edx-14h]
+0x9C5F00: mov     ecx, [edx-18h]
+0x9C5F03: xor     ecx, eax
+0x9C5F05: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5F0A: mov     eax, offset stru_AEE584
+0x9C5F0F: jmp     ___CxxFrameHandler3

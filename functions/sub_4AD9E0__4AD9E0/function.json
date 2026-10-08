@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4AD9E0",
+      "0x4ADAC3"
+    ]
+  ],
+  "chunks_sha256": "fed2a3e366c21e4edd4b3d3b6b2df95dac4f28a0b4ed78b08b26b8d416f4c488",
+  "comment_regular": "Verified (Oblivion): recursively applies TextureEffectData to scene nodes whose property ID 4 returns shader-property subtype 5..10 from vtable slot +0x54. Direct vtable bodies identify accepted values: 5 BSShaderPPLightingProperty and SpeedTreeShaderPPLightingProperty; 6 HairShaderProperty; 7 SpeedTreeBranchShaderProperty; 9 SpeedTreeLeafShaderProperty; 10 Lighting30ShaderProperty. The current exhaustive 17-entry BSShaderProperty-family vtable census has no subtype 8 mapping (Unknown). Data.cFlags bit 0x20 additionally restricts candidates to property ID 2 name \"skin\". Fallout StartTextureShader instead queries property ID 3 and accepts subtype IDs 8..12; these numeric IDs are version-specific.",
+  "comment_repeatable": "Verified (Oblivion): recursively applies TextureEffectData to scene nodes whose property ID 4 returns shader-property subtype 5..10 from vtable slot +0x54. Direct vtable bodies identify accepted values: 5 BSShaderPPLightingProperty and SpeedTreeShaderPPLightingProperty; 6 HairShaderProperty; 7 SpeedTreeBranchShaderProperty; 9 SpeedTreeLeafShaderProperty; 10 Lighting30ShaderProperty. The current exhaustive 17-entry BSShaderProperty-family vtable census has no subtype 8 mapping (Unknown). Data.cFlags bit 0x20 additionally restricts candidates to property ID 2 name \"skin\". Fallout StartTextureShader instead queries property ID 3 and accepts subtype IDs 8..12; these numeric IDs are version-specific.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_4AD9E0",
+  "display_name": "TESEffectShader_ApplyTextureEffectToScenegraph",
   "end_ea": "0x4ADAC3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4AD9E0",
+  "name": "TESEffectShader_ApplyTextureEffectToScenegraph",
   "segment": ".text",
   "sha256": "fed2a3e366c21e4edd4b3d3b6b2df95dac4f28a0b4ed78b08b26b8d416f4c488",
   "size": 227,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4AD9E0",
-  "type": "void __thiscall(_BYTE *this, NiNode *, int)",
+  "total_chunk_size": 227,
+  "type": "void __thiscall(TESEffectShader *this, NiAVObject *sceneRoot, OblivionTextureEffectData *data)",
   "xrefs_from_count": 108,
   "xrefs_to_count": 2
 }

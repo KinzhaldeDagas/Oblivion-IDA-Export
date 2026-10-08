@@ -1,0 +1,669 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "D3DDDIFORMAT",
+  "definition": "enum D3DDDIFORMAT : __int32\n{\nD3DDDIFMT_UNKNOWN = 0x0,\nD3DDDIFMT_R8G8B8 = 0x14,\nD3DDDIFMT_A8R8G8B8 = 0x15,\nD3DDDIFMT_X8R8G8B8 = 0x16,\nD3DDDIFMT_R5G6B5 = 0x17,\nD3DDDIFMT_X1R5G5B5 = 0x18,\nD3DDDIFMT_A1R5G5B5 = 0x19,\nD3DDDIFMT_A4R4G4B4 = 0x1A,\nD3DDDIFMT_R3G3B2 = 0x1B,\nD3DDDIFMT_A8 = 0x1C,\nD3DDDIFMT_A8R3G3B2 = 0x1D,\nD3DDDIFMT_X4R4G4B4 = 0x1E,\nD3DDDIFMT_A2B10G10R10 = 0x1F,\nD3DDDIFMT_A8B8G8R8 = 0x20,\nD3DDDIFMT_X8B8G8R8 = 0x21,\nD3DDDIFMT_G16R16 = 0x22,\nD3DDDIFMT_A2R10G10B10 = 0x23,\nD3DDDIFMT_A16B16G16R16 = 0x24,\nD3DDDIFMT_A8P8 = 0x28,\nD3DDDIFMT_P8 = 0x29,\nD3DDDIFMT_L8 = 0x32,\nD3DDDIFMT_A8L8 = 0x33,\nD3DDDIFMT_A4L4 = 0x34,\nD3DDDIFMT_V8U8 = 0x3C,\nD3DDDIFMT_L6V5U5 = 0x3D,\nD3DDDIFMT_X8L8V8U8 = 0x3E,\nD3DDDIFMT_Q8W8V8U8 = 0x3F,\nD3DDDIFMT_V16U16 = 0x40,\nD3DDDIFMT_W11V11U10 = 0x41,\nD3DDDIFMT_A2W10V10U10 = 0x43,\nD3DDDIFMT_D16_LOCKABLE = 0x46,\nD3DDDIFMT_D32 = 0x47,\nD3DDDIFMT_S1D15 = 0x48,\nD3DDDIFMT_D15S1 = 0x49,\nD3DDDIFMT_S8D24 = 0x4A,\nD3DDDIFMT_D24S8 = 0x4B,\nD3DDDIFMT_X8D24 = 0x4C,\nD3DDDIFMT_D24X8 = 0x4D,\nD3DDDIFMT_X4S4D24 = 0x4E,\nD3DDDIFMT_D24X4S4 = 0x4F,\nD3DDDIFMT_D16 = 0x50,\nD3DDDIFMT_L16 = 0x51,\nD3DDDIFMT_D32F_LOCKABLE = 0x52,\nD3DDDIFMT_D24FS8 = 0x53,\nD3DDDIFMT_D32_LOCKABLE = 0x54,\nD3DDDIFMT_S8_LOCKABLE = 0x55,\nD3DDDIFMT_G8R8 = 0x5B,\nD3DDDIFMT_R8 = 0x5C,\nD3DDDIFMT_VERTEXDATA = 0x64,\nD3DDDIFMT_INDEX16 = 0x65,\nD3DDDIFMT_INDEX32 = 0x66,\nD3DDDIFMT_Q16W16V16U16 = 0x6E,\nD3DDDIFMT_R16F = 0x6F,\nD3DDDIFMT_G16R16F = 0x70,\nD3DDDIFMT_A16B16G16R16F = 0x71,\nD3DDDIFMT_R32F = 0x72,\nD3DDDIFMT_G32R32F = 0x73,\nD3DDDIFMT_A32B32G32R32F = 0x74,\nD3DDDIFMT_CxV8U8 = 0x75,\nD3DDDIFMT_A1 = 0x76,\nD3DDDIFMT_A2B10G10R10_XR_BIAS = 0x77,\nD3DDDIFMT_DXVACOMPBUFFER_BASE = 0x96,\nD3DDDIFMT_PICTUREPARAMSDATA = 0x96,\nD3DDDIFMT_MACROBLOCKDATA = 0x97,\nD3DDDIFMT_RESIDUALDIFFERENCEDATA = 0x98,\nD3DDDIFMT_DEBLOCKINGDATA = 0x99,\nD3DDDIFMT_INVERSEQUANTIZATIONDATA = 0x9A,\nD3DDDIFMT_SLICECONTROLDATA = 0x9B,\nD3DDDIFMT_BITSTREAMDATA = 0x9C,\nD3DDDIFMT_MOTIONVECTORBUFFER = 0x9D,\nD3DDDIFMT_FILMGRAINBUFFER = 0x9E,\nD3DDDIFMT_DXVA_RESERVED9 = 0x9F,\nD3DDDIFMT_DXVA_RESERVED10 = 0xA0,\nD3DDDIFMT_DXVA_RESERVED11 = 0xA1,\nD3DDDIFMT_DXVA_RESERVED12 = 0xA2,\nD3DDDIFMT_DXVA_RESERVED13 = 0xA3,\nD3DDDIFMT_DXVA_RESERVED14 = 0xA4,\nD3DDDIFMT_DXVA_RESERVED15 = 0xA5,\nD3DDDIFMT_DXVA_RESERVED16 = 0xA6,\nD3DDDIFMT_DXVA_RESERVED17 = 0xA7,\nD3DDDIFMT_DXVA_RESERVED18 = 0xA8,\nD3DDDIFMT_DXVA_RESERVED19 = 0xA9,\nD3DDDIFMT_DXVA_RESERVED20 = 0xAA,\nD3DDDIFMT_DXVA_RESERVED21 = 0xAB,\nD3DDDIFMT_DXVA_RESERVED22 = 0xAC,\nD3DDDIFMT_DXVA_RESERVED23 = 0xAD,\nD3DDDIFMT_DXVA_RESERVED24 = 0xAE,\nD3DDDIFMT_DXVA_RESERVED25 = 0xAF,\nD3DDDIFMT_DXVA_RESERVED26 = 0xB0,\nD3DDDIFMT_DXVA_RESERVED27 = 0xB1,\nD3DDDIFMT_DXVA_RESERVED28 = 0xB2,\nD3DDDIFMT_DXVA_RESERVED29 = 0xB3,\nD3DDDIFMT_DXVA_RESERVED30 = 0xB4,\nD3DDDIFMT_DXVA_RESERVED31 = 0xB5,\nD3DDDIFMT_DXVACOMPBUFFER_MAX = 0xB5,\nD3DDDIFMT_BINARYBUFFER = 0xC7,\nD3DDDIFMT_MULTI2_ARGB8 = 0x3154454D,\nD3DDDIFMT_DXT1 = 0x31545844,\nD3DDDIFMT_DXT2 = 0x32545844,\nD3DDDIFMT_YUY2 = 0x32595559,\nD3DDDIFMT_DXT3 = 0x33545844,\nD3DDDIFMT_DXT4 = 0x34545844,\nD3DDDIFMT_DXT5 = 0x35545844,\nD3DDDIFMT_G8R8_G8B8 = 0x42475247,\nD3DDDIFMT_R8G8_B8G8 = 0x47424752,\nD3DDDIFMT_UYVY = 0x59565955,\nD3DDDIFMT_FORCE_UINT = 0x7FFFFFFF,\n}\n",
+  "id": 18374686479671812141,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_UNKNOWN",
+      "value": 0
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_R8G8B8",
+      "value": 20
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A8R8G8B8",
+      "value": 21
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_X8R8G8B8",
+      "value": 22
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_R5G6B5",
+      "value": 23
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_X1R5G5B5",
+      "value": 24
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A1R5G5B5",
+      "value": 25
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A4R4G4B4",
+      "value": 26
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_R3G3B2",
+      "value": 27
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A8",
+      "value": 28
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A8R3G3B2",
+      "value": 29
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_X4R4G4B4",
+      "value": 30
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A2B10G10R10",
+      "value": 31
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A8B8G8R8",
+      "value": 32
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_X8B8G8R8",
+      "value": 33
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_G16R16",
+      "value": 34
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A2R10G10B10",
+      "value": 35
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A16B16G16R16",
+      "value": 36
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A8P8",
+      "value": 40
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_P8",
+      "value": 41
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_L8",
+      "value": 50
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A8L8",
+      "value": 51
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A4L4",
+      "value": 52
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_V8U8",
+      "value": 60
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_L6V5U5",
+      "value": 61
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_X8L8V8U8",
+      "value": 62
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_Q8W8V8U8",
+      "value": 63
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_V16U16",
+      "value": 64
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_W11V11U10",
+      "value": 65
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A2W10V10U10",
+      "value": 67
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D16_LOCKABLE",
+      "value": 70
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D32",
+      "value": 71
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_S1D15",
+      "value": 72
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D15S1",
+      "value": 73
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_S8D24",
+      "value": 74
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D24S8",
+      "value": 75
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_X8D24",
+      "value": 76
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D24X8",
+      "value": 77
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_X4S4D24",
+      "value": 78
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D24X4S4",
+      "value": 79
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D16",
+      "value": 80
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_L16",
+      "value": 81
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D32F_LOCKABLE",
+      "value": 82
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D24FS8",
+      "value": 83
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_D32_LOCKABLE",
+      "value": 84
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_S8_LOCKABLE",
+      "value": 85
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_G8R8",
+      "value": 91
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_R8",
+      "value": 92
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_VERTEXDATA",
+      "value": 100
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_INDEX16",
+      "value": 101
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_INDEX32",
+      "value": 102
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_Q16W16V16U16",
+      "value": 110
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_R16F",
+      "value": 111
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_G16R16F",
+      "value": 112
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A16B16G16R16F",
+      "value": 113
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_R32F",
+      "value": 114
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_G32R32F",
+      "value": 115
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A32B32G32R32F",
+      "value": 116
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_CxV8U8",
+      "value": 117
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A1",
+      "value": 118
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_A2B10G10R10_XR_BIAS",
+      "value": 119
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVACOMPBUFFER_BASE",
+      "value": 150
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_PICTUREPARAMSDATA",
+      "value": 150
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_MACROBLOCKDATA",
+      "value": 151
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_RESIDUALDIFFERENCEDATA",
+      "value": 152
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DEBLOCKINGDATA",
+      "value": 153
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_INVERSEQUANTIZATIONDATA",
+      "value": 154
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_SLICECONTROLDATA",
+      "value": 155
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_BITSTREAMDATA",
+      "value": 156
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_MOTIONVECTORBUFFER",
+      "value": 157
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_FILMGRAINBUFFER",
+      "value": 158
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED9",
+      "value": 159
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED10",
+      "value": 160
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED11",
+      "value": 161
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED12",
+      "value": 162
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED13",
+      "value": 163
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED14",
+      "value": 164
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED15",
+      "value": 165
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED16",
+      "value": 166
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED17",
+      "value": 167
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED18",
+      "value": 168
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED19",
+      "value": 169
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED20",
+      "value": 170
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED21",
+      "value": 171
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED22",
+      "value": 172
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED23",
+      "value": 173
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED24",
+      "value": 174
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED25",
+      "value": 175
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED26",
+      "value": 176
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED27",
+      "value": 177
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED28",
+      "value": 178
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED29",
+      "value": 179
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED30",
+      "value": 180
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVA_RESERVED31",
+      "value": 181
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXVACOMPBUFFER_MAX",
+      "value": 181
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_BINARYBUFFER",
+      "value": 199
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_MULTI2_ARGB8",
+      "value": 827606349
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXT1",
+      "value": 827611204
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXT2",
+      "value": 844388420
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_YUY2",
+      "value": 844715353
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXT3",
+      "value": 861165636
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXT4",
+      "value": 877942852
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_DXT5",
+      "value": 894720068
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_G8R8_G8B8",
+      "value": 1111970375
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_R8G8_B8G8",
+      "value": 1195525970
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_UYVY",
+      "value": 1498831189
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "D3DDDIFMT_FORCE_UINT",
+      "value": 2147483647
+    }
+  ],
+  "name": "D3DDDIFORMAT",
+  "ordinal": 1028,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

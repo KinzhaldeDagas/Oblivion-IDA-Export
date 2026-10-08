@@ -1,4 +1,4 @@
-char *sub_740980()
+NiRTTI *sub_740980()
 {
-  return dword_B401EC;
+  return &stru_B401EC; /*0x740985*/
 }

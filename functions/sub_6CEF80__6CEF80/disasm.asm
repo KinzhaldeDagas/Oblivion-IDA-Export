@@ -1,4 +1,4 @@
-0x6CEF80: sub     esp, 0E0h
+0x6CEF80: sub     esp, 0E0h; Oblivion: updates one accumulation item's 0x68-byte state (cached time, current transform, accumulated delta/reference state). Evaluates virtual +0x4C and handles forward time versus backward/wrap time using the interpolator range from virtual +0x80.
 0x6CEF86: push    ebx
 0x6CEF87: push    ebp
 0x6CEF88: movzx   ebp, [esp+0E8h+arg_0]
@@ -23,7 +23,7 @@
 0x6CEFCB: jnz     short loc_6CEFDF
 0x6CEFCD: lea     ebx, [ebp+4]
 0x6CEFD0: mov     ecx, ebx
-0x6CEFD2: call    sub_6CBC10
+0x6CEFD2: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CEFD7: test    al, al
 0x6CEFD9: jz      loc_6CF0DC
 0x6CEFDF: mov     eax, [esp+0F0h+arg_8]
@@ -353,7 +353,7 @@
 0x6CF41B: add     esp, 0E0h
 0x6CF421: retn    0Ch
 0x6CF424: lea     esi, [ebp+24h]
-0x6CF427: push    offset Vector3_InitValue?
+0x6CF427: push    offset g_zeroNiPoint3
 0x6CF42C: mov     ecx, esi
 0x6CF42E: call    sub_471390
 0x6CF433: push    offset dword_B27110

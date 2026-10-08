@@ -1,4 +1,4 @@
-0x7E2430: fld1
+0x7E2430: fld1; Shader property LOD/alpha helper: update float +0x20 and reset dword +0x24 when crossing 1.0 threshold.
 0x7E2432: fcom    dword ptr [ecx+20h]
 0x7E2435: fnstsw  ax
 0x7E2437: fld     [esp+arg_0]

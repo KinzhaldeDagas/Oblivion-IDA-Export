@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6D0760",
+      "0x6D07A4"
+    ]
+  ],
+  "chunks_sha256": "683f4a15d5501fbceb6d2435ef227d740374cdc4760fe898d9be412f0906e2f5",
+  "comment_regular": "NiGeomMorpherController target setter. Accepts a compatible NiObjectNET target, delegates to NiTimeController::SetTarget, resets morph-controller state when morphData exists, and marks targetSetPending +0x5B; incompatible targets clear the controller target.",
+  "comment_repeatable": "NiGeomMorpherController target setter. Accepts a compatible NiObjectNET target, delegates to NiTimeController::SetTarget, resets morph-controller state when morphData exists, and marks targetSetPending +0x5B; incompatible targets clear the controller target.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6D0760",
+  "display_name": "NiGeomMorpherController_SetTarget",
   "end_ea": "0x6D07A4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6D0760",
+  "name": "NiGeomMorpherController_SetTarget",
   "segment": ".text",
   "sha256": "683f4a15d5501fbceb6d2435ef227d740374cdc4760fe898d9be412f0906e2f5",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6D0760",
-  "type": "void __thiscall(NiTimeController *this, NiObjectNET *)",
+  "total_chunk_size": 68,
+  "type": "void __thiscall(NiGeomMorpherController *this, NiObjectNET *target)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

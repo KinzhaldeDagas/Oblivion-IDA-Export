@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CECD0",
-    "line": "push    esi",
+    "line": "push    esi; Verified: removes a reference from the cell object list under the cell lock. For persistent cells, clears the reference's ExtraDataList cell pointer and removes it from the owning WorldSpace persistent-reference index (+0x64); for normal cells, clears its parent cell and updates changed state. No write to the separate SubSpace index (+0x60) is present.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4CECD2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x4CECE1",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4CECF5",
-    "line": "mov     ecx, offset stru_B35C80; this",
+    "line": "mov     ecx, offset unk_B35C80; this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4CED18",
-    "line": "mov     ecx, [esi+50h]",
+    "line": "mov     ecx, [esi+50h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x4CED1F",
-    "line": "push    edi",
+    "line": "push    edi; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CED20",
-    "line": "call    sub_4F01F0",
+    "line": "call    TESWorldSpace_RemoveIndexedReference; Verified: symmetric removal from the coordinate-indexed list or fallbackReferences under the shared WorldSpace reference-index critical section; removes an empty per-cell list/map entry.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4CED42",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },

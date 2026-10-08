@@ -37,7 +37,7 @@
 0x4B5D40: call    TESValueForm_destr
 0x4B5D45: mov     eax, [esi+28h]
 0x4B5D48: push    eax
-0x4B5D49: call    FormHeapFree
+0x4B5D49: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4B5D4E: xor     eax, eax
 0x4B5D50: add     esp, 4
 0x4B5D53: mov     ecx, esi
@@ -55,3 +55,48 @@
 0x4B5D7C: pop     ebx
 0x4B5D7D: add     esp, 20h
 0x4B5D80: retn
+0x9B3970: mov     ecx, [ebp-10h]
+0x9B3973: jmp     TESObject_destr
+0x9B3978: cmp     dword ptr [ebp-10h], 0
+0x9B397C: jz      loc_9B3990
+0x9B3982: mov     eax, [ebp-10h]
+0x9B3985: add     eax, 24h ; '$'
+0x9B3988: mov     [ebp-14h], eax
+0x9B398B: jmp     loc_9B3997
+0x9B3990: mov     dword ptr [ebp-14h], 0
+0x9B3997: mov     ecx, [ebp-14h]
+0x9B399A: jmp     TESFullName_Initialize
+0x9B399F: cmp     dword ptr [ebp-10h], 0
+0x9B39A3: jz      loc_9B39B7
+0x9B39A9: mov     eax, [ebp-10h]
+0x9B39AC: add     eax, 4Ch ; 'L'
+0x9B39AF: mov     [ebp-18h], eax
+0x9B39B2: jmp     loc_9B39BE
+0x9B39B7: mov     dword ptr [ebp-18h], 0
+0x9B39BE: mov     ecx, [ebp-18h]
+0x9B39C1: jmp     TESValueForm_destr
+0x9B39C6: cmp     dword ptr [ebp-10h], 0
+0x9B39CA: jz      loc_9B39DE
+0x9B39D0: mov     eax, [ebp-10h]
+0x9B39D3: add     eax, 54h ; 'T'
+0x9B39D6: mov     [ebp-1Ch], eax
+0x9B39D9: jmp     loc_9B39E5
+0x9B39DE: mov     dword ptr [ebp-1Ch], 0
+0x9B39E5: mov     ecx, [ebp-1Ch]
+0x9B39E8: jmp     TESWeightForm_destr
+0x9B39ED: cmp     dword ptr [ebp-10h], 0
+0x9B39F1: jz      loc_9B3A05
+0x9B39F7: mov     eax, [ebp-10h]
+0x9B39FA: add     eax, 5Ch ; '\'
+0x9B39FD: mov     [ebp-20h], eax
+0x9B3A00: jmp     loc_9B3A0C
+0x9B3A05: mov     dword ptr [ebp-20h], 0
+0x9B3A0C: mov     ecx, [ebp-20h]
+0x9B3A0F: jmp     TESBipedModelForm_destr
+0x9B3A14: mov     edx, [esp+arg_4]
+0x9B3A18: lea     eax, [edx-24h]
+0x9B3A1B: mov     ecx, [edx-28h]
+0x9B3A1E: xor     ecx, eax
+0x9B3A20: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3A25: mov     eax, offset stru_ADF3E0
+0x9B3A2A: jmp     ___CxxFrameHandler3

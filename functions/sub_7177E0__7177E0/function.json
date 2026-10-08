@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_7177E0",
+  "chunks": [
+    [
+      "0x7177E0",
+      "0x717877"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "ea7a32b39bb5336ea613086f45932c5b53e4b0c71916c35a1fe42a3f446b3733",
+  "comment_regular": "Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.",
+  "comment_repeatable": "Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "NiLines_ctorWithGeometryData",
   "end_ea": "0x717877",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7177E0",
+  "name": "NiLines_ctorWithGeometryData",
   "segment": ".text",
   "sha256": "87834349d3af29d0677f4e8ebca4392618ccc5b33dd98de43af837361b5067b1",
   "size": 151,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7177E0",
-  "type": "NiAVObject *__thiscall(NiAVObject *this, unsigned __int16, int, int, int, char, __int16, int)",
-  "xrefs_from_count": 54,
+  "total_chunk_size": 189,
+  "type": "NiAVObject *__thiscall(NiAVObject *this, UInt16 vertexCount, NiPoint3 *vertices, NiColorAlpha *colors, void *arg5, char arg6, __int16 arg7, int lineFlags)",
+  "xrefs_from_count": 68,
   "xrefs_to_count": 8
 }

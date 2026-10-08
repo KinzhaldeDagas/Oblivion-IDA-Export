@@ -1,4 +1,4 @@
-0x6D3540: push    ecx
+0x6D3540: push    ecx; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.
 0x6D3541: mov     ecx, [esp+4+arg_4]
 0x6D3545: cmp     ecx, 4
 0x6D3548: push    ebx
@@ -28,7 +28,7 @@
 0x6D358C: push    eax; int
 0x6D358D: push    ebp; int
 0x6D358E: push    0; int
-0x6D3590: call    sub_6D3540
+0x6D3590: call    NiAnimationKey_GuaranteeTimeRange; Guarantees authored keys at both requested boundaries using the registered content/type insertion function. For Euler rotation type 4, recursively updates all three scalar axes and refreshes axis stride/cursor metadata. Unlike range cloning, this operation may synthesize evaluated boundary keys.
 0x6D3595: mov     eax, [esp+2Ch+arg_4]
 0x6D3599: add     esp, 18h
 0x6D359C: mov     ecx, [esp+14h+var_4]
@@ -67,14 +67,14 @@
 0x6D35FE: push    ebx
 0x6D35FF: push    ecx
 0x6D3600: fstp    [esp+1Ch+var_1C]
-0x6D3603: call    esi ; dword_B3D1A8
+0x6D3603: call    esi ; unk_B3D1A8
 0x6D3605: fld     [esp+1Ch+arg_14]
 0x6D3609: add     esp, 0Ch
 0x6D360C: push    edi
 0x6D360D: push    ebx
 0x6D360E: push    ecx
 0x6D360F: fstp    [esp+1Ch+var_1C]
-0x6D3612: call    esi ; dword_B3D1A8
+0x6D3612: call    esi ; unk_B3D1A8
 0x6D3614: add     esp, 0Ch
 0x6D3617: pop     edi
 0x6D3618: pop     esi

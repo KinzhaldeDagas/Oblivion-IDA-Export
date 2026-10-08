@@ -1,6 +1,6 @@
-0x79B2F0: push    esi
+0x79B2F0: push    esi; OBLIVION AUTHORITY (2026-08-30): Compiler-folded copy assignment for a 0x10-byte vector owner with four-byte elements. Handles self-assignment, empty source, capacity reuse, initialized/uninitialized tails, and reallocation.
 0x79B2F1: push    edi
-0x79B2F2: mov     edi, [esp+8+arg_0]
+0x79B2F2: mov     edi, [esp+8+source]
 0x79B2F6: mov     esi, ecx
 0x79B2F8: cmp     esi, edi
 0x79B2FA: jz      loc_79B40E
@@ -14,7 +14,7 @@
 0x79B30E: sub     edx, ebx
 0x79B310: sar     edx, 2
 0x79B313: jnz     short loc_79B323
-0x79B315: call    sub_784A70
+0x79B315: call    OB_stVector4_Clear_010201A0; OBLIVION AUTHORITY (2026-08-30): clear() wrapper for a trivial 4-byte-element vector; validates begin/end and erases the full range while retaining capacity.
 0x79B31A: pop     ebp
 0x79B31B: pop     ebx
 0x79B31C: pop     edi
@@ -31,10 +31,10 @@
 0x79B333: sar     ecx, 2
 0x79B336: cmp     edx, ecx
 0x79B338: ja      short loc_79B37A
-0x79B33A: push    eax; Dst
-0x79B33B: push    ebp; int
-0x79B33C: push    ebx; Src
-0x79B33D: call    sub_790420
+0x79B33A: push    eax; destination
+0x79B33B: push    ebp; last
+0x79B33C: push    ebx; first
+0x79B33D: call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.
 0x79B342: mov     eax, [edi+4]
 0x79B345: add     esp, 0Ch
 0x79B348: test    eax, eax
@@ -78,19 +78,19 @@
 0x79B399: sub     ecx, eax
 0x79B39B: sar     ecx, 2
 0x79B39E: mov     edx, ebx
-0x79B3A0: push    eax; Dst
+0x79B3A0: push    eax; destination
 0x79B3A1: lea     ebx, [edx+ecx*4]
-0x79B3A4: push    ebx; int
-0x79B3A5: push    edx; Src
-0x79B3A6: call    sub_790420
+0x79B3A4: push    ebx; last
+0x79B3A5: push    edx; first
+0x79B3A6: call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.
 0x79B3AB: mov     edx, [esi+8]
 0x79B3AE: mov     eax, [edi+8]
 0x79B3B1: add     esp, 0Ch
-0x79B3B4: push    edx; Dst
-0x79B3B5: push    eax; int
-0x79B3B6: push    ebx; Src
+0x79B3B4: push    edx; destination
+0x79B3B5: push    eax; last
+0x79B3B6: push    ebx; first
 0x79B3B7: mov     ecx, esi
-0x79B3B9: call    sub_7A25C0
+0x79B3B9: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x79B3BE: pop     ebp
 0x79B3BF: pop     ebx
 0x79B3C0: mov     [esi+8], eax
@@ -101,7 +101,7 @@
 0x79B3CA: test    eax, eax
 0x79B3CC: jz      short loc_79B3D7
 0x79B3CE: push    eax
-0x79B3CF: call    FormHeapFree
+0x79B3CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x79B3D4: add     esp, 4
 0x79B3D7: mov     ecx, [edi+4]
 0x79B3DA: test    ecx, ecx
@@ -111,19 +111,19 @@
 0x79B3E2: mov     eax, [edi+8]
 0x79B3E5: sub     eax, ecx
 0x79B3E7: sar     eax, 2
-0x79B3EA: push    eax; char *
-0x79B3EB: mov     ecx, esi
-0x79B3ED: call    sub_790E40
+0x79B3EA: push    eax; capacity
+0x79B3EB: mov     ecx, esi; this
+0x79B3ED: call    OB_stVector4_AllocateCapacity_010201A0; Resets an OB_stVector4 pointer triplet and allocates capacity for exactly the requested number of 4-byte elements while leaving end==begin. Returns false for zero capacity; OB_stVector4_CopyAssign uses it after freeing insufficient storage.
 0x79B3F2: test    al, al
 0x79B3F4: jz      short loc_79B40C
 0x79B3F6: mov     ecx, [esi+4]
 0x79B3F9: mov     edx, [edi+8]
 0x79B3FC: mov     eax, [edi+4]
-0x79B3FF: push    ecx; Dst
-0x79B400: push    edx; int
-0x79B401: push    eax; Src
+0x79B3FF: push    ecx; destination
+0x79B400: push    edx; last
+0x79B401: push    eax; first
 0x79B402: mov     ecx, esi
-0x79B404: call    sub_7A25C0
+0x79B404: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x79B409: mov     [esi+8], eax
 0x79B40C: pop     ebp
 0x79B40D: pop     ebx

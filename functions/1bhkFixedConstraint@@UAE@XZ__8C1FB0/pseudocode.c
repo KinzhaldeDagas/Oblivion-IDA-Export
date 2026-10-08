@@ -1,7 +1,7 @@
-void __thiscall bhkFixedConstraint::~bhkFixedConstraint(bhkFixedConstraint *this)
+void __thiscall bhkFixedConstraint::~bhkFixedConstraint(bhkSerializable *this)
 {
-  *(_DWORD *)this = &bhkFixedConstraint::`vftable';
-  sub_89D700(this);
-  --dword_BA80D0;
-  bhkGenericConstraint::~bhkGenericConstraint(this);
+  this->__vftable = (NiObjectVtbl *)&bhkFixedConstraint::`vftable'; /*0x8c1fd8*/
+  sub_89D700(this); /*0x8c1fe6*/
+  --unk_BA80D0; /*0x8c1feb*/
+  bhkGenericConstraint::~bhkGenericConstraint(this); /*0x8c1ffc*/
 }

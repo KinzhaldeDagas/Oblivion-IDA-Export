@@ -1,4 +1,4 @@
-0x4BECF0: push    ebp
+0x4BECF0: push    ebp; Verified: TESClimate record loader handles WLS(T) by passing the list head at +0x30 to the shared TESWeather list parser; climate-owned list has an 8-byte inline BSSimpleList head.
 0x4BECF1: mov     ebp, esp
 0x4BECF3: sub     esp, 8
 0x4BECF6: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x4BED15: jmp     loc_4BEE4B
 0x4BED1A: push    esi
 0x4BED1B: mov     ecx, edi
-0x4BED1D: call    TESFile_InitializeFormFromRecord
+0x4BED1D: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4BED22: push    0; a2
 0x4BED24: mov     ecx, esi; this
 0x4BED26: call    TESForm_SetIsLinked
@@ -46,7 +46,7 @@
 0x4BED7F: push    200h; a4
 0x4BED84: push    ebx; Dst
 0x4BED85: mov     ecx, edi; a1
-0x4BED87: call    TESFile_GetChunkData
+0x4BED87: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4BED8C: mov     edx, [esi]
 0x4BED8E: mov     eax, [edx+0D8h]
 0x4BED94: push    ebx
@@ -66,16 +66,16 @@
 0x4BEDC3: cmp     eax, 4D414E54h
 0x4BEDC8: jz      short loc_4BEE22
 0x4BEDCA: cmp     eax, 54534C57h
-0x4BEDCF: jnz     short loc_4BEE2F
+0x4BEDCF: jnz     short loc_4BEE2F; Verified: climate WLS(T) weather-list chunk uses same EntryData parser as TESRegionDataWeather RDWT at WeatherData +8; outer record/chunk tags and owners differ.
 0x4BEDD1: mov     ecx, ds:0B34D88h
 0x4BEDD7: mov     bl, ds:0B06B18h
-0x4BEDDD: push    esi
+0x4BEDDD: push    esi; owner
 0x4BEDDE: lea     edx, [esi+30h]
-0x4BEDE1: push    edi
-0x4BEDE2: push    edx
+0x4BEDE1: push    edi; file
+0x4BEDE2: push    edx; list
 0x4BEDE3: mov     [ebp+var_8], ecx
 0x4BEDE6: mov     byte ptr ds:0B06B18h, 1
-0x4BEDED: call    sub_4EEDD0
+0x4BEDED: call    OblivionTESWeatherList_LoadChunk; Verified: Oblivion weather-list chunk record is 8 bytes: TESWeather FormID plus selectionWeight. Fallout's 12-byte WeatherEntry adds TESGlobal* pChanceVar; this is a documented cross-game layout divergence.
 0x4BEDF2: mov     eax, [ebp+var_8]
 0x4BEDF5: add     esp, 0Ch
 0x4BEDF8: cmp     ds:0B34D88h, eax
@@ -94,7 +94,7 @@
 0x4BEE24: lea     ecx, [esi+50h]
 0x4BEE27: push    ecx; Dst
 0x4BEE28: mov     ecx, edi; a1
-0x4BEE2A: call    TESFile_GetChunkData
+0x4BEE2A: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4BEE2F: mov     ecx, edi
 0x4BEE31: call    TESFile_GetNextChunk
 0x4BEE36: test    al, al

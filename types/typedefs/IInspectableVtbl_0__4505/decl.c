@@ -1,1 +1,1 @@
-IInspectableVtbl_0
+typedef IInspectableVtbl IInspectableVtbl_0;

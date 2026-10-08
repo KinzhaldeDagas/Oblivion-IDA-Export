@@ -3,5 +3,5 @@
 0x718207: push    edx; a3
 0x718208: add     eax, 0ECh ; 'ì'
 0x71820D: push    eax; a2
-0x71820E: call    sub_717A40
+0x71820E: call    NiFrustumPlanes_SetFromFrustumAndTransform; MoonSugarEffect decode: frustum-plane builder consumes NiFrustum plus NiTransform. Camera sway before NiCullingProcess::Process changes these planes for that traversal.
 0x718213: retn    4

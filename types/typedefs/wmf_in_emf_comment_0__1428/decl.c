@@ -1,1 +1,1 @@
-wmf_in_emf_comment_0
+typedef wmf_in_emf_comment wmf_in_emf_comment_0;

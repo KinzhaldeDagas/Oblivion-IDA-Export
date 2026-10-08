@@ -9,7 +9,7 @@
 0x5C0835: push    edi
 0x5C0836: push    0FB5h
 0x5C083B: call    Tile_GetFloat
-0x5C0840: call    Double_To_SInt32
+0x5C0840: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C0845: mov     ebx, [esi+44h]
 0x5C0848: mov     ebp, [esi+4Ch]
 0x5C084B: push    3F0h
@@ -24,15 +24,15 @@
 0x5C086A: add     eax, 44h ; 'D'
 0x5C086D: mov     ecx, eax
 0x5C086F: call    ExtraDataList_GetExtraCount
-0x5C0874: mov     ecx, ds:0B333C4h
-0x5C087A: push    0
-0x5C087C: push    0
+0x5C0874: mov     ecx, ds:0B333C4h; this
+0x5C087A: push    0; forceWorn
+0x5C087C: push    0; unusedArg
 0x5C087E: movsx   ebx, ax
 0x5C0881: mov     eax, [esi+50h]
-0x5C0884: push    edi
-0x5C0885: push    eax
+0x5C0884: push    edi; count
+0x5C0885: push    eax; sourceRef
 0x5C0886: sub     ebx, edi
-0x5C0888: call    sub_4DDC40
+0x5C0888: call    TESObjectREFR_AddItemFromWorldReference; Add a live world reference to this reference's container by forwarding it to ContainerExtraData_AddItemFromWorldReference. That path derives sourceRef->GetBaseForm() and copies reference instance data; the returned byte is not a verified insertion-success contract and native callers ignore it.
 0x5C088D: test    ebx, ebx
 0x5C088F: mov     ecx, [esi+50h]
 0x5C0892: jle     short loc_5C08AB

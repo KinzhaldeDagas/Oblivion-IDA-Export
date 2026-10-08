@@ -1,4 +1,4 @@
-0x5E3320: push    esi
+0x5E3320: push    esi; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x5E3321: mov     esi, ecx
 0x5E3323: call    Actor_IsNPC
 0x5E3328: test    al, al

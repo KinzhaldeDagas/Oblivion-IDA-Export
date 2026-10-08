@@ -1,4 +1,4 @@
-0x608CB0: sub     esp, 34h
+0x608CB0: sub     esp, 34h; Initializes the generated projectile root's LOCAL transform only: scale=1, translation=reference position, rotation from yawZ/pitchX/rollY. ORs collision-filter bit 0x4000, invokes the collision body callback, then recursively ensures alpha properties. It does not update the node world transform.
 0x608CB3: push    ebx
 0x608CB4: push    esi
 0x608CB5: mov     esi, ecx
@@ -30,21 +30,21 @@
 0x608D01: sub     esp, 0Ch
 0x608D04: mov     [esp+4Ch+var_2C], edx
 0x608D08: fld     [esp+4Ch+var_2C]
-0x608D0C: fstp    [esp+4Ch+var_44]; float
+0x608D0C: fstp    [esp+4Ch+rollY]; rollY
 0x608D10: mov     [esp+4Ch+var_30], ecx
 0x608D14: fld     [esp+4Ch+var_30]
 0x608D18: mov     [esp+4Ch+var_28], eax
-0x608D1C: fstp    [esp+4Ch+var_48]; float
-0x608D20: lea     ecx, [esp+4Ch+var_24]
+0x608D1C: fstp    [esp+4Ch+pitchX]; pitchX
+0x608D20: lea     ecx, [esp+4Ch+var_24]; this
 0x608D24: fld     [esp+4Ch+var_28]
-0x608D28: fstp    [esp+4Ch+var_4C]; float
-0x608D2B: call    sub_7117C0
+0x608D28: fstp    [esp+4Ch+yawZ]; yawZ
+0x608D2B: call    NiMatrix33_SetEulerZXY; Build generated projectile root local rotation as Z * (X * Y) from reference yawZ, pitchX, and rollY.
 0x608D30: lea     edi, [ebx+30h]
 0x608D33: mov     ecx, 9
 0x608D38: lea     esi, [esp+40h+var_24]
-0x608D3C: push    ebx
+0x608D3C: push    ebx; object
 0x608D3D: rep movsd
-0x608D3F: call    sub_480340
+0x608D3F: call    NiAVObject_FindBhkCollisionObjectRecursive; Returns the first bhk collision object found on object or recursively beneath its NiNode children. This is structural traversal, independent of node names.
 0x608D44: add     esp, 4
 0x608D47: test    eax, eax
 0x608D49: pop     edi
@@ -72,8 +72,8 @@
 0x608D7E: mov     edx, [ecx]
 0x608D80: mov     eax, [edx+80h]
 0x608D86: call    eax
-0x608D88: push    ebx
-0x608D89: call    sub_481570
+0x608D88: push    ebx; object
+0x608D89: call    NiAVObject_EnsureAlphaPropertyRecursive; Recursively ensure geometry under the generated projectile root has property type 0 / NiAlphaProperty. This is alpha-property setup, not a transform refresh.
 0x608D8E: add     esp, 4
 0x608D91: pop     esi
 0x608D92: pop     ebx

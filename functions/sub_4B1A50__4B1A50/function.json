@@ -1,19 +1,36 @@
 {
-  "callees_count": 47,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x4B1A50",
+      "0x4B1F90"
+    ],
+    [
+      "0x9B3000",
+      "0x9B3023"
+    ]
+  ],
+  "chunks_sha256": "af8d0762b321e248bb5307e9f1530d134e24549e0ef16c19f1149a1dcb393fcf",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4B1A50",
+  "comment_repeatable": "Oblivion native attached-point-light animation. lightFlags_7C bits 0x08/0x40 select Flicker/Flicker Slow and bits 0x80/0x100 select Pulse/Pulse Slow; the slow variants reduce the update step. It updates NiLight position and m_fDimmer using AttachedLightPayload_Decoded::targetDimmer_04 and TESObjectLIGH::fade_88. This is source-light state animation, not shadow-caster admission.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TESObjectLIGH_UpdateAttachedLightState",
   "end_ea": "0x4B1F90",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4B1A50",
+  "name": "TESObjectLIGH_UpdateAttachedLightState",
   "segment": ".text",
   "sha256": "a9af503402c8eda88eef5238bf44842491819e76cf440d8d9107d06731419963",
   "size": 1344,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4B1A50",
-  "type": "char __thiscall(float *this, NiAVObject *, float *, int)",
-  "xrefs_from_count": 415,
+  "total_chunk_size": 1379,
+  "type": "bool __thiscall(TESObjectLIGH_DecodedLayout *self, NiLight *light, float *targetDimmer, void *optionalContext)",
+  "xrefs_from_count": 426,
   "xrefs_to_count": 1
 }

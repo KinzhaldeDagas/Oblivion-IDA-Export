@@ -1,10 +1,10 @@
 0x4C5640: sub     esp, 18h
 0x4C5643: push    edi
 0x4C5644: mov     edi, ecx
-0x4C5646: mov     ecx, [edi+20h]; this
+0x4C5646: mov     ecx, [edi+20h]; object
 0x4C5649: test    ecx, ecx
 0x4C564B: jz      loc_4C58C5
-0x4C5651: call    TESObjectCELL_GetNiNode?
+0x4C5651: call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.
 0x4C5656: test    eax, eax
 0x4C5658: jz      loc_4C58C5
 0x4C565E: mov     eax, [edi+24h]
@@ -33,7 +33,7 @@
 0x4C56A4: jge     short loc_4C56AD
 0x4C56A6: push    eax
 0x4C56A7: push    esi
-0x4C56A8: call    sub_441800
+0x4C56A8: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x4C56AD: mov     edx, [edi+24h]
 0x4C56B0: mov     ecx, [edx]
 0x4C56B2: mov     [ecx+esi*4], eax
@@ -53,7 +53,7 @@
 0x4C56E3: mov     ecx, [eax]
 0x4C56E5: mov     ecx, [ecx+esi*4]; this
 0x4C56E8: push    edx; a2
-0x4C56E9: call    sub_405680
+0x4C56E9: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x4C56EE: push    esi
 0x4C56EF: mov     ecx, edi
 0x4C56F1: call    sub_4BFF00
@@ -69,7 +69,7 @@
 0x4C570F: lea     eax, [esp+30h+var_14]
 0x4C5713: push    eax
 0x4C5714: call    edx
-0x4C5716: mov     eax, dword ptr [esp+28h+var_14]
+0x4C5716: mov     eax, [esp+28h+var_14]
 0x4C571A: test    eax, eax
 0x4C571C: jz      short loc_4C573C
 0x4C571E: mov     ebx, eax
@@ -88,10 +88,10 @@
 0x4C573C: mov     eax, [ebp+0B4h]
 0x4C5742: mov     ecx, [eax+1Ch]
 0x4C5745: movzx   edx, word ptr [eax+8]
-0x4C5749: push    ecx
-0x4C574A: push    edx
-0x4C574B: lea     ecx, [eax+0Ch]
-0x4C574E: call    sub_72A0F0
+0x4C5749: push    ecx; vertices
+0x4C574A: push    edx; vertexCount
+0x4C574B: lea     ecx, [eax+0Ch]; self
+0x4C574E: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x4C5753: mov     ebp, [ebp+0B4h]
 0x4C5759: or      word ptr [ebp+2Eh], 0Fh
 0x4C575E: add     esi, 1
@@ -153,7 +153,7 @@
 0x4C5813: mov     ecx, ebx
 0x4C5815: call    eax
 0x4C5817: mov     ecx, ebx; this
-0x4C5819: call    sub_769030
+0x4C5819: call    sub_769030; MoonSugarEffect decode: BeginScene prepack flush. Iterates renderer PrePackObjects, locks/stages shared VB ranges, uses declaration/default/skinned packers, rebuilds IBs, unlocks, clears the map, and heap-frees temporary entries. Plugin mask passes should not borrow this renderer-owned queue/lifetime.
 0x4C581E: mov     ecx, [edi+24h]
 0x4C5821: mov     edx, [ecx]
 0x4C5823: cmp     dword ptr [edx+ebp*4], 0
@@ -172,7 +172,7 @@
 0x4C584A: mov     ecx, [eax]
 0x4C584C: fstp    [esp+30h+a2]; a2
 0x4C584F: mov     ecx, [ecx+ebp*4]; this
-0x4C5852: call    NiAVObject_UpdateNiAVObject
+0x4C5852: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x4C5857: mov     edx, [edi+24h]
 0x4C585A: mov     eax, [edx]
 0x4C585C: mov     ecx, [eax+ebp*4]
@@ -180,7 +180,7 @@
 0x4C5864: mov     ecx, [edi+24h]
 0x4C5867: mov     edx, [ecx]
 0x4C5869: mov     ecx, [edx+ebp*4]; this
-0x4C586C: call    NiAVObject_InitializePropertyState
+0x4C586C: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x4C5871: add     ebp, 1
 0x4C5874: cmp     ebp, 4
 0x4C5877: jl      loc_4C57A3

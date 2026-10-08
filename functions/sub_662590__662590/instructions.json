@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x662590",
-    "line": "cmp     byte ptr ds:0B3BB06h, 0",
+    "line": "cmp     byte ptr ds:0B3BB06h, 0; PlayerCharacter post-shot AMMO-consumption override. Takes only PlayerCharacter *this and independently queries GetEquippedAmmoData(1); it does not receive WEAP EntryData in EDI. God mode (g_godModeEnabled at 0x00B3BB06) skips the transaction. Otherwise it decrements/removes exactly one equipped AMMO item. Base Actor slot +0x2E8 is the shared no-op at 0x0060D0A0.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x6625B4",
-    "line": "call    ExtraDataList_GetExtraCount",
+    "line": "call    ExtraDataList_GetExtraCount; Read ExtraCount from the active equipped AMMO EntryData's selected ExtraDataList, then compute remaining stack count as ExtraCount-1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x662605",
-    "line": "call    edx",
+    "line": "call    edx; Final-item branch: remove exactly one AMMO form using the selected equipped ammo ExtraDataList; this branch runs when ExtraCount-1 is below one.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x662607",
-    "line": "call    sub_5C1900",
+    "line": "call    PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval; After selected-list removal of the final AMMO item, reconcile the player's eight hotkey/quickslot bindings so stale inventory bindings are cleared.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x662619",
-    "line": "call    edx",
+    "line": "call    edx; Calls MiddleHighProcess_SetEquippedAmmoData(NULL): destroys/frees the process's copied equipped-AMMO EntryData and stores NULL. This call does not itself clear hand/quiver 3D.",
     "mnemonic": "call",
     "size": 2
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x66262D",
-    "line": "call    ExtraDataList_SetExtraCount",
+    "line": "call    ExtraDataList_SetExtraCount; When at least one item remains in this extra-data stack, write the decremented ExtraCount back before inventory reconciliation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x66263E",
-    "line": "push    1",
+    "line": "push    1; value",
     "mnemonic": "push",
     "size": 2
   },
@@ -397,13 +397,13 @@
   },
   {
     "ea": "0x662642",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x662644",
-    "line": "call    sub_60D020",
+    "line": "call    Shared_SetDwordAtOffset04; On the copied equipped-AMMO EntryData returned by GetEquippedAmmoData, Shared_SetDwordAtOffset04 writes countDelta=1 before container-count reconciliation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,13 +535,13 @@
   },
   {
     "ea": "0x66267B",
-    "line": "call    ContainerExtraData_GetItemCount",
+    "line": "call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x662680",
-    "line": "mov     ebx, eax",
+    "line": "mov     ebx, eax; Read total count for the equipped AMMO form from container changes and reconcile a mismatch before final removal.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -613,25 +613,25 @@
   },
   {
     "ea": "0x6626A0",
-    "line": "push    edi",
+    "line": "push    edi; countDelta",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6626A1",
-    "line": "push    ecx",
+    "line": "push    ecx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6626A2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6626A4",
-    "line": "call    sub_487350",
+    "line": "call    ExtraContainerChanges_AdjustCountForForm; Walks ExtraContainerChanges_Data.objList (+0x00), finds the EntryData whose type/form is at +0x08, and adds countDelta to EntryData.countDelta (+0x04). Return-register contents are incidental; both native callers ignore them.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x6626DA",
-    "line": "call    edx",
+    "line": "call    edx; Player post-shot transaction removes exactly one equipped AMMO form through virtual TESObjectREFR::RemoveItem.",
     "mnemonic": "call",
     "size": 2
   },

@@ -66,7 +66,7 @@
 0x584A46: test    edi, edi
 0x584A48: jnz     loc_5849A5
 0x584A4E: fld     [esp+1Ch+var_14]
-0x584A52: call    Double_To_SInt32
+0x584A52: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x584A57: mov     [esp+1Ch+a3], eax
 0x584A5B: fild    [esp+1Ch+a3]
 0x584A5F: fstp    [esp+1Ch+a3]
@@ -91,9 +91,9 @@
 0x584AA1: jz      short loc_584AE3
 0x584AA3: fld     [esp+1Ch+a3]
 0x584AA7: push    ecx
-0x584AA8: fstp    [esp+20h+a2]; a3
-0x584AAB: push    0FABh; a2
-0x584AB0: call    Tile_SetFloat
+0x584AA8: fstp    [esp+20h+a2]; value
+0x584AAB: push    0FABh; propertyCode
+0x584AB0: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x584AB5: fld     [esp+1Ch+a3]
 0x584AB9: mov     esi, [esi+1Ch]
 0x584ABC: fmul    qword ptr ds:0A68FD0h
@@ -120,9 +120,9 @@
 0x584B01: mov     ecx, eax; this
 0x584B03: fstp    [esp+18h+a3]
 0x584B07: fld     [esp+18h+a3]
-0x584B0B: fstp    [esp+18h+var_18]; a3
-0x584B0E: push    0FABh; a2
-0x584B13: call    Tile_SetFloat
+0x584B0B: fstp    [esp+18h+value]; value
+0x584B0E: push    0FABh; propertyCode
+0x584B13: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x584B18: fld     [esp+14h+var_14]
 0x584B1B: fadd    qword ptr ds:0A3D0C0h
 0x584B21: fstp    [esp+14h+a3]

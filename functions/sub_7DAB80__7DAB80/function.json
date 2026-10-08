@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7DAB80",
+      "0x7DAC53"
+    ]
+  ],
+  "chunks_sha256": "4e5d7f67fca00c6e9d556f3f615f4470d31c2f92dda8767d96d120c680c33db4",
+  "comment_regular": "[Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0–6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default.",
+  "comment_repeatable": "[Verified] Maps OblivionBSSMShaderVersion to the selected SDP index. Version 7/BSSM_SV_3_0 maps to package 9 without HDR, or 18/19 with HDR based on FP16ARGB filtering. [Unknown] No native direct store of version 7 was found; SetShaderPackage writes only 0–6. [Candidate cross-build link] Fallout's separately implemented SetShaderVersion also selects BSSM_SV_3_0=7 by default.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7DAB80",
+  "display_name": "GetShaderProgramPackageIndex",
   "end_ea": "0x7DAC53",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7DAB80",
+  "name": "GetShaderProgramPackageIndex",
   "segment": ".text",
   "sha256": "4e5d7f67fca00c6e9d556f3f615f4470d31c2f92dda8767d96d120c680c33db4",
   "size": 211,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7DAB80",
-  "type": "void()",
+  "total_chunk_size": 211,
+  "type": "int __cdecl()",
   "xrefs_from_count": 64,
   "xrefs_to_count": 2
 }

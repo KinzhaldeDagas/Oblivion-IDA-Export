@@ -1,4 +1,4 @@
 int __thiscall sub_41F6D0(_DWORD *this)
 {
-  return BaseExtraList_RemoveExtraByType(this, 0x47u);
+  return BaseExtraList_RemoveExtraByType(this, 0x47u); /*0x41f6d7*/
 }

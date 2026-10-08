@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x5E406E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -223,13 +223,13 @@
   },
   {
     "ea": "0x5E4072",
-    "line": "fstp    [esp+0Ch+var_C]; float",
+    "line": "fstp    [esp+0Ch+delta]; delta",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5E4075",
-    "line": "call    Actor_ModFatigue?",
+    "line": "call    Actor_ApplyNegativeFatigueDeltaClamped; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.",
     "mnemonic": "call",
     "size": 5
   },

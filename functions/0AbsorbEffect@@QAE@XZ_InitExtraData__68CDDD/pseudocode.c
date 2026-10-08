@@ -10,9 +10,9 @@ void __userpurge AbsorbEffect::AbsorbEffect(
         int a9,
         char a10)
 {
-  a2[0xF] = a1;
-  a2[0x10] = a1;
-  a2[0x11] = a1;
-  a2[0x12] = a1;
-  JUMPOUT(0x68CE15);
+  a2[0xF] = a1; /*0x68cddd*/
+  a2[0x10] = a1; /*0x68cde0*/
+  a2[0x11] = a1; /*0x68cde3*/
+  a2[0x12] = a1; /*0x68cde6*/
+  JUMPOUT(0x68CE15); /*0x68ce15*/
 }

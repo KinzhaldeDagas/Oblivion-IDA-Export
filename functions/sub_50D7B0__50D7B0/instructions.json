@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x50D7B0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Native SetNoRumors command. Stores an actor override only when the requested value differs from the base NoRumors flag; matching the base removes type 0x5A. It never invalidates cached INFOGENERAL type 0x59.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x50D7E4",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x50D81A",
-    "line": "mov     byte ptr [esp+10h+var_4], bl",
+    "line": "mov     [esp+10h+noRumors], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x50D822",
-    "line": "mov     byte ptr [esp+10h+var_4], bl",
+    "line": "mov     [esp+10h+noRumors], bl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,19 +313,19 @@
   },
   {
     "ea": "0x50D83E",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x50D841",
-    "line": "jnz     short loc_50D84F",
+    "line": "jnz     short loc_50D84F; If requested NoRumors equals the base NPC flag, remove the per-reference type-0x5A override. This comparison and removal do not touch cached INFOGENERAL type 0x59.",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x50D843",
-    "line": "call    sub_4209C0",
+    "line": "call    ExtraDataList__RemoveNoRumorsOverride; Remove only ExtraHasNoRumors (0x5A), restoring fallback to the NPC base NoRumors flag. ExtraInfoGeneralTopic (0x59) is untouched, so an old cached rumor can become visible again.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,19 +355,19 @@
   },
   {
     "ea": "0x50D84F",
-    "line": "mov     edx, [esp+0Ch+var_4]",
+    "line": "mov     edx, dword ptr [esp+0Ch+noRumors]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x50D853",
-    "line": "push    edx",
+    "line": "push    edx; noRumors",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x50D854",
-    "line": "call    sub_420920",
+    "line": "call    ExtraDataList__SetNoRumors; Store a type-0x5A override because requested NoRumors differs from the base flag. The cached type-0x59 rumor MenuTopic remains intact.",
     "mnemonic": "call",
     "size": 5
   },

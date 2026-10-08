@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_500830",
+  "chunks": [
+    [
+      "0x500830",
+      "0x50085E"
+    ]
+  ],
+  "chunks_sha256": "924e16945edf33c9779b81a1986774ea3b3f7a5353cdd4470ebbf51ff6bce8d9",
+  "comment_regular": "Only writer of g_bRendererAccumulationFrozen. Registered by CommandInfo_FreezeRenderAccumulation as the FreezeRenderAccumulation/fra console command ('only re-render geometry visible during this frame'). Toggles the renderer debug replay/freeze state, prints frozen or active, and returns true.\n\nRead the current debug replay state before toggling it; registered console command is the only producer.",
+  "comment_repeatable": "Only writer of g_bRendererAccumulationFrozen. Registered by CommandInfo_FreezeRenderAccumulation as the FreezeRenderAccumulation/fra console command ('only re-render geometry visible during this frame'). Toggles the renderer debug replay/freeze state, prints frozen or active, and returns true.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "ToggleRendererAccumulationFrozen",
   "end_ea": "0x50085E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_500830",
+  "name": "ToggleRendererAccumulationFrozen",
   "segment": ".text",
   "sha256": "924e16945edf33c9779b81a1986774ea3b3f7a5353cdd4470ebbf51ff6bce8d9",
   "size": 46,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x500830",
-  "type": "char()",
-  "xrefs_from_count": 17,
+  "total_chunk_size": 46,
+  "type": "bool __cdecl()",
+  "xrefs_from_count": 19,
   "xrefs_to_count": 1
 }

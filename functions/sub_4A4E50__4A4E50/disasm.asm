@@ -8,9 +8,9 @@
 0x4A4E5F: mov     ecx, [esi]
 0x4A4E61: test    ecx, ecx
 0x4A4E63: jz      short loc_4A4E71
-0x4A4E65: push    eax; Str2
-0x4A4E66: push    ecx; Str1
-0x4A4E67: call    __strcmp
+0x4A4E65: push    eax; right
+0x4A4E66: push    ecx; left
+0x4A4E67: call    CRT_StricmpLocaleDispatch
 0x4A4E6C: add     esp, 8
 0x4A4E6F: jmp     short loc_4A4E7E
 0x4A4E71: xor     ecx, ecx

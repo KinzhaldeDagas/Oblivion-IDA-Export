@@ -1,1 +1,30 @@
-IDirectInputDevice2WVtbl
+struct IDirectInputDevice2WVtbl
+{
+HRESULT (__stdcall *QueryInterface)(IDirectInputDevice2W *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);
+ULONG (__stdcall *AddRef)(IDirectInputDevice2W *This) __offset(OFF64|AUTO);
+ULONG (__stdcall *Release)(IDirectInputDevice2W *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetCapabilities)(IDirectInputDevice2W *This, LPDIDEVCAPS) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumObjects)(IDirectInputDevice2W *This, LPDIENUMDEVICEOBJECTSCALLBACKW, LPVOID, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetProperty)(IDirectInputDevice2W *This, const GUID *const, LPDIPROPHEADER) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetProperty)(IDirectInputDevice2W *This, const GUID *const, LPCDIPROPHEADER) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Acquire)(IDirectInputDevice2W *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Unacquire)(IDirectInputDevice2W *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDeviceState)(IDirectInputDevice2W *This, DWORD, LPVOID) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDeviceData)(IDirectInputDevice2W *This, DWORD, LPDIDEVICEOBJECTDATA, LPDWORD, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetDataFormat)(IDirectInputDevice2W *This, LPCDIDATAFORMAT) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetEventNotification)(IDirectInputDevice2W *This, HANDLE) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SetCooperativeLevel)(IDirectInputDevice2W *This, HWND, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetObjectInfo)(IDirectInputDevice2W *This, LPDIDEVICEOBJECTINSTANCEW, DWORD, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetDeviceInfo)(IDirectInputDevice2W *This, LPDIDEVICEINSTANCEW) __offset(OFF64|AUTO);
+HRESULT (__stdcall *RunControlPanel)(IDirectInputDevice2W *This, HWND, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Initialize)(IDirectInputDevice2W *This, HINSTANCE, DWORD, const GUID *const) __offset(OFF64|AUTO);
+HRESULT (__stdcall *CreateEffect)(IDirectInputDevice2W *This, const GUID *const, LPCDIEFFECT, LPDIRECTINPUTEFFECT *, LPUNKNOWN) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumEffects)(IDirectInputDevice2W *This, LPDIENUMEFFECTSCALLBACKW, LPVOID, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetEffectInfo)(IDirectInputDevice2W *This, LPDIEFFECTINFOW, const GUID *const) __offset(OFF64|AUTO);
+HRESULT (__stdcall *GetForceFeedbackState)(IDirectInputDevice2W *This, LPDWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SendForceFeedbackCommand)(IDirectInputDevice2W *This, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *EnumCreatedEffectObjects)(IDirectInputDevice2W *This, LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, LPVOID, DWORD) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Escape)(IDirectInputDevice2W *This, LPDIEFFESCAPE) __offset(OFF64|AUTO);
+HRESULT (__stdcall *Poll)(IDirectInputDevice2W *This) __offset(OFF64|AUTO);
+HRESULT (__stdcall *SendDeviceData)(IDirectInputDevice2W *This, DWORD, LPCDIDEVICEOBJECTDATA, LPDWORD, DWORD) __offset(OFF64|AUTO);
+};

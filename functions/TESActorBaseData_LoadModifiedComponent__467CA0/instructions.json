@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x467CB0",
-    "line": "mov     [esp+20h+var_10], ebp",
+    "line": "mov     [esp+20h+destination], ebp",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x467CB4",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x467CC1",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467CC7",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x467CCD",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467CCE",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x467CEF",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x467D45",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
@@ -313,25 +313,25 @@
   },
   {
     "ea": "0x467D4E",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x467D50",
-    "line": "lea     eax, [esp+24h+var_10]",
+    "line": "lea     eax, [esp+24h+destination]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x467D54",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467D55",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x467D5B",
-    "line": "mov     bl, [esp+24h+arg_0]",
+    "line": "mov     bl, byte ptr [esp+24h+changeMask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x467D62",
-    "line": "jz      short loc_467D75",
+    "line": "jz      short loc_467D75; 3DTheft decode 2026-05-13: Save/load modified actor-base flags bit 0x10 reloads the 4-byte flags dword at component +0x04.",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x467D64",
-    "line": "push    10h; Size",
+    "line": "push    10h; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -373,19 +373,19 @@
   },
   {
     "ea": "0x467D69",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467D6A",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467D70",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -415,13 +415,13 @@
   },
   {
     "ea": "0x467D85",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467D8B",
-    "line": "push    2; Size",
+    "line": "push    2; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x467D91",
-    "line": "push    edx; Dst",
+    "line": "push    edx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467D92",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; EngineFix analysis 2026-05-07: TESActorBaseData faction-list count is save-controlled UInt16; loop consumes FormID + rank byte (5 bytes) and does lookup/allocation per entry. Candidate count clamp to remaining / 5.",
     "mnemonic": "call",
     "size": 5
   },
@@ -468,20 +468,14 @@
     "size": 2
   },
   {
-    "ea": "0x467DAD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x467DB0",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467DB6",
-    "line": "push    4; Size",
+    "line": "push    4; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -493,19 +487,19 @@
   },
   {
     "ea": "0x467DBC",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467DBD",
-    "line": "call    SaveLoad_LoadFormID",
+    "line": "call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x467DC2",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -517,19 +511,19 @@
   },
   {
     "ea": "0x467DC8",
-    "line": "push    ecx; Dst",
+    "line": "push    ecx; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x467DC9",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x467DCF",
-    "line": "call    SaveLoad_LoadData",
+    "line": "call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,7 +541,7 @@
   },
   {
     "ea": "0x467DD9",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,19 +583,19 @@
   },
   {
     "ea": "0x467DEE",
-    "line": "mov     edi, eax",
+    "line": "mov     edi, eax; EngineFix implementation 2026-05-07: narrow allocation-failure hook. If faction entry allocation fails after FormID+rank are consumed, pop the allocation argument and resume at loop tail 0x467E2C without writing through NULL.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x467DF0",
-    "line": "mov     [edi], ebx",
+    "line": "mov     [edi], ebx; EngineFix analysis 2026-05-07: FormHeapAlloc result for faction entry is used before a null check; allocation failure would write through NULL.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x467DF2",
-    "line": "mov     al, [esp+30h+var_4]",
+    "line": "mov     al, byte ptr [esp+30h+var_4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -649,7 +643,7 @@
   },
   {
     "ea": "0x467E0C",
-    "line": "test    eax, eax",
+    "line": "test    eax, eax; EngineFix implementation 2026-05-07: narrow allocation-failure hook for non-empty faction list node. On node allocation failure, free the just-created entry and resume at 0x467E2C, leaving the existing list unchanged.",
     "mnemonic": "test",
     "size": 2
   },
@@ -691,7 +685,7 @@
   },
   {
     "ea": "0x467E20",
-    "line": "mov     edx, [esi+1Ch]",
+    "line": "mov     edx, [esi+1Ch]; EngineFix analysis 2026-05-07: list-node allocation failure path zeroes eax then writes [eax+4]. Patch allocation failure to leave list unchanged after entry bytes are consumed.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -757,7 +751,7 @@
   },
   {
     "ea": "0x467E4A",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +817,7 @@
   },
   {
     "ea": "0x467E72",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

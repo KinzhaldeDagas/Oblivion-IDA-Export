@@ -1,1 +1,13 @@
-message_type
+enum message_type : __int32
+{
+MSG_ASCII = 0x0,
+MSG_UNICODE = 0x1,
+MSG_NOTIFY = 0x2,
+MSG_CALLBACK = 0x3,
+MSG_CALLBACK_RESULT = 0x4,
+MSG_OTHER_PROCESS = 0x5,
+MSG_POSTED = 0x6,
+MSG_HARDWARE = 0x7,
+MSG_WINEVENT = 0x8,
+MSG_HOOK_LL = 0x9,
+};

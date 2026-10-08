@@ -5,9 +5,9 @@
 0x67A857: test    edi, edi
 0x67A859: jz      short loc_67A895
 0x67A85B: mov     eax, [edi+4]
-0x67A85E: push    edi
+0x67A85E: push    edi; incoming
 0x67A85F: mov     [esi+4], eax
-0x67A862: call    sub_55E2A0
+0x67A862: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x67A867: mov     esi, [edi]
 0x67A869: test    esi, esi
 0x67A86B: jz      short loc_67A889
@@ -24,7 +24,7 @@
 0x67A885: mov     ecx, esi
 0x67A887: call    eax
 0x67A889: push    edi
-0x67A88A: call    FormHeapFree
+0x67A88A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67A88F: add     esp, 4
 0x67A892: pop     edi
 0x67A893: pop     esi

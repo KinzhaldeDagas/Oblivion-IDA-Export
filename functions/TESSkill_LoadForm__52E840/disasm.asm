@@ -1,4 +1,4 @@
-0x52E840: push    ebp
+0x52E840: push    ebp; Oblivion SKIL load. DATA has two event-use floats; the four ANAM/JNAM/ENAM/MNAM chunks are mastery descriptions, not extra use values or major/minor state.
 0x52E841: mov     ebp, esp
 0x52E843: push    ecx
 0x52E844: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x52E864: jmp     loc_52E96C
 0x52E869: push    esi
 0x52E86A: mov     ecx, edi
-0x52E86C: call    TESFile_InitializeFormFromRecord
+0x52E86C: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x52E871: mov     ecx, edi
 0x52E873: call    TESFile_GetChunkType
 0x52E878: test    eax, eax
@@ -47,7 +47,7 @@
 0x52E8C4: push    eax; Dst
 0x52E8C5: push    edi; a2
 0x52E8C6: mov     ecx, esi; this
-0x52E8C8: call    TESForm_LoadGenericComponents
+0x52E8C8: call    TESForm_LoadGenericComponents; Load 0x14-byte SKIL DATA: actorValue, governingAttribute, specialization, useValue0, useValue1.
 0x52E8CD: jmp     loc_52E950
 0x52E8D2: mov     eax, [edi+254h]
 0x52E8D8: call    __alloca?
@@ -55,7 +55,7 @@
 0x52E8DF: push    200h; a4
 0x52E8E4: push    ebx; Dst
 0x52E8E5: mov     ecx, edi; a1
-0x52E8E7: call    TESFile_GetChunkData
+0x52E8E7: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x52E8EC: mov     edx, [esi]
 0x52E8EE: mov     eax, [edx+0D8h]
 0x52E8F4: push    ebx

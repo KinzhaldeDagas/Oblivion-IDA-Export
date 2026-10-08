@@ -14,7 +14,7 @@
 0x5297E1: mov     ecx, edi
 0x5297E3: call    sub_52B330
 0x5297E8: push    edi
-0x5297E9: call    FormHeapFree
+0x5297E9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5297EE: add     esp, 4
 0x5297F1: mov     eax, [esi+4]
 0x5297F4: test    eax, eax
@@ -24,7 +24,7 @@
 0x5297FE: mov     edx, [eax]
 0x529800: push    eax
 0x529801: mov     [esi], edx
-0x529803: call    FormHeapFree
+0x529803: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x529808: add     esp, 4
 0x52980B: jmp     short loc_5297D0
 0x52980D: mov     dword ptr [esi], 0

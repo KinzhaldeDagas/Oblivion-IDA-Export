@@ -1,14 +1,14 @@
 0x55AF70: cmp     dword ptr [ecx+8], 0
 0x55AF74: jz      short locret_55AFB2
 0x55AF76: push    esi
-0x55AF77: mov     esi, [esp+4+arg_0]
+0x55AF77: mov     esi, [esp+4+vertices]
 0x55AF7B: cmp     dword ptr [esi], 0
 0x55AF7E: jz      short loc_55AFB1
-0x55AF80: mov     edx, [esp+4+arg_4]
+0x55AF80: mov     edx, [esp+4+vertexCount]
 0x55AF84: test    edx, edx
 0x55AF86: jz      short loc_55AFB1
 0x55AF88: fldz
-0x55AF8A: fld     [esp+4+arg_8]
+0x55AF8A: fld     [esp+4+hairLength]
 0x55AF8E: fcom    st(1)
 0x55AF90: fnstsw  ax
 0x55AF92: fstp    st(1)

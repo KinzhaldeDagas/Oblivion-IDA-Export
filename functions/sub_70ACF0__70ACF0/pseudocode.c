@@ -1,29 +1,29 @@
-char __thiscall sub_70ACF0(NiNode *this, int a2)
+char __thiscall sub_70ACF0(NiNode *this, NiStream *a2)
 {
   char result; // al
   unsigned int i; // esi
-  int v5; // ecx
+  NiAVObject *v5; // ecx
   NiTList_Entry *head; // esi
   void *data; // ecx
 
-  result = sub_707AF0(this, a2);
-  if ( result )
+  result = sub_707AF0(this, (int)a2); /*0x70acf9*/
+  if ( result ) /*0x70ad00*/
   {
-    for ( i = 0; this->members.children.end > i; ++i )
+    for ( i = 0; this->members.children.end > i; ++i ) /*0x70ad07*/
     {
-      v5 = *((_DWORD *)&this->members.children.data->vtbl + i);
-      if ( v5 )
-        (*(void (__thiscall **)(int, int))(*(_DWORD *)v5 + 0x24))(v5, a2);
+      v5 = this->members.children.data[i]; /*0x70ad1f*/
+      if ( v5 ) /*0x70ad24*/
+        v5->vtbl->super.FindNodes((NiObject *)v5, a2); /*0x70ad2c*/
     }
-    head = this->members.effects.head;
-    while ( head )
+    head = this->members.effects.head; /*0x70ad3c*/
+    while ( head ) /*0x70ad44*/
     {
-      data = head->data;
-      head = head->next;
-      if ( data )
-        (*(void (__thiscall **)(void *, int))(*(_DWORD *)data + 0x24))(data, a2);
+      data = head->data; /*0x70ad46*/
+      head = head->next; /*0x70ad4e*/
+      if ( data ) /*0x70ad50*/
+        (*(void (__thiscall **)(void *, NiStream *))(*(_DWORD *)data + 0x24))(data, a2); /*0x70ad58*/
     }
-    return 1;
+    return 1; /*0x70ad60*/
   }
-  return result;
+  return result; /*0x70ad02*/
 }

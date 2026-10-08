@@ -32,7 +32,7 @@
 0x88D427: push    eax
 0x88D428: push    ecx
 0x88D429: lea     ecx, [esp+38h+var_20]
-0x88D42D: call    sub_88FE00
+0x88D42D: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x88D432: fldz
 0x88D434: mov     edx, [edi+10h]
 0x88D437: movaps  xmm1, [esp+30h+var_20]
@@ -68,7 +68,7 @@
 0x88D48D: jmp     short loc_88D491
 0x88D48F: xor     esi, esi
 0x88D491: push    esi
-0x88D492: push    offset dword_BA7FA8
+0x88D492: push    offset stru_BA7FA8
 0x88D497: call    sub_435CC0
 0x88D49C: add     esp, 8
 0x88D49F: test    al, al

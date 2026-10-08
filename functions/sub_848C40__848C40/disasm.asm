@@ -95,9 +95,9 @@
 0x848D6D: mov     [eax+4], edx
 0x848D70: mov     edx, [esp+20h+var_8]
 0x848D74: mov     [eax+8], edx
-0x848D77: push    0
+0x848D77: push    0; slot
 0x848D79: mov     [eax+0Ch], ecx
-0x848D7C: call    sub_7ECAE0
+0x848D7C: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x848D81: add     esp, 14h
 0x848D84: add     esp, 10h
 0x848D87: retn    4

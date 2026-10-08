@@ -20,7 +20,7 @@
 0x8A5C50: mov     esi, [ebp+arg_0]
 0x8A5C53: xor     ebx, ebx
 0x8A5C55: push    esi
-0x8A5C56: mov     [esp+1C8h+var_1B0], ecx
+0x8A5C56: mov     [esp+1C8h+outData], ecx
 0x8A5C5A: mov     [esp+1C8h+var_1A4], ebx
 0x8A5C5E: call    sub_8B0080
 0x8A5C63: mov     eax, ds:0BA7D84h
@@ -45,7 +45,7 @@
 0x8A5C9C: lea     ecx, [esp+1C4h+var_180]
 0x8A5CA0: call    sub_8A5790
 0x8A5CA5: mov     [esp+1C4h+var_4], ebx
-0x8A5CAC: mov     ebx, [esp+1C4h+var_1B0]
+0x8A5CAC: mov     ebx, [esp+1C4h+outData]
 0x8A5CB0: lea     ecx, [esp+1C4h+var_180]
 0x8A5CB4: push    ecx
 0x8A5CB5: mov     ecx, ebx
@@ -54,7 +54,7 @@
 0x8A5CC0: push    edx
 0x8A5CC1: lea     eax, [esp+1C8h+var_1A0]
 0x8A5CC5: push    eax
-0x8A5CC6: call    sub_43F3E0
+0x8A5CC6: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A5CCB: fld     [esp+1CCh+var_140]
 0x8A5CD2: fstp    [esp+1CCh+var_18C]
 0x8A5CD6: add     esp, 8
@@ -70,14 +70,14 @@
 0x8A5D08: movzx   edi, word ptr [esi+0Ah]
 0x8A5D0C: movzx   ecx, word ptr [esi+8]
 0x8A5D10: cmp     edi, ecx
-0x8A5D12: mov     [esp+1C4h+var_1B0], eax
+0x8A5D12: mov     [esp+1C4h+outData], eax
 0x8A5D16: jb      short loc_8A5D26
 0x8A5D18: movzx   edx, word ptr [esi+0Eh]
 0x8A5D1C: add     edx, edi
 0x8A5D1E: push    edx
 0x8A5D1F: mov     ecx, esi
 0x8A5D21: call    NiTArray_SetSize
-0x8A5D26: lea     eax, [esp+1C4h+var_1B0]
+0x8A5D26: lea     eax, [esp+1C4h+outData]
 0x8A5D2A: push    eax
 0x8A5D2B: push    edi
 0x8A5D2C: mov     ecx, esi
@@ -88,14 +88,14 @@
 0x8A5D41: movzx   edi, word ptr [esi+0Ah]
 0x8A5D45: movzx   ecx, word ptr [esi+8]
 0x8A5D49: cmp     edi, ecx
-0x8A5D4B: mov     [esp+1C4h+var_1B0], eax
+0x8A5D4B: mov     [esp+1C4h+outData], eax
 0x8A5D4F: jb      short loc_8A5D5F
 0x8A5D51: movzx   edx, word ptr [esi+0Eh]
 0x8A5D55: add     edx, edi
 0x8A5D57: push    edx
 0x8A5D58: mov     ecx, esi
 0x8A5D5A: call    NiTArray_SetSize
-0x8A5D5F: lea     eax, [esp+1C4h+var_1B0]
+0x8A5D5F: lea     eax, [esp+1C4h+outData]
 0x8A5D63: push    eax
 0x8A5D64: push    edi
 0x8A5D65: mov     ecx, esi
@@ -104,13 +104,13 @@
 0x8A5D73: push    ecx
 0x8A5D74: lea     edx, [esp+1C8h+var_1A0]
 0x8A5D78: push    edx
-0x8A5D79: call    sub_43F3E0
+0x8A5D79: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A5D7E: add     esp, 8
 0x8A5D81: push    offset off_A97548; ArgList
 0x8A5D86: lea     ecx, [esp+1C8h+var_1A0]
 0x8A5D8A: call    sub_707280
 0x8A5D8F: movzx   edi, word ptr [esi+0Ah]
-0x8A5D93: mov     [esp+1C4h+var_1B0], eax
+0x8A5D93: mov     [esp+1C4h+outData], eax
 0x8A5D97: movzx   eax, word ptr [esi+8]
 0x8A5D9B: cmp     edi, eax
 0x8A5D9D: jb      short loc_8A5DAD
@@ -119,7 +119,7 @@
 0x8A5DA5: push    ecx
 0x8A5DA6: mov     ecx, esi
 0x8A5DA8: call    NiTArray_SetSize
-0x8A5DAD: lea     edx, [esp+1C4h+var_1B0]
+0x8A5DAD: lea     edx, [esp+1C4h+outData]
 0x8A5DB1: push    edx
 0x8A5DB2: push    edi
 0x8A5DB3: mov     ecx, esi
@@ -130,7 +130,7 @@
 0x8A5DC5: push    offset aMass; "MASS"
 0x8A5DCA: call    TESOutput_PrintLabeledFloat
 0x8A5DCF: movzx   edi, word ptr [esi+0Ah]
-0x8A5DD3: mov     [esp+1CCh+var_1B0], eax
+0x8A5DD3: mov     [esp+1CCh+outData], eax
 0x8A5DD7: movzx   eax, word ptr [esi+8]
 0x8A5DDB: add     esp, 8
 0x8A5DDE: cmp     edi, eax
@@ -140,7 +140,7 @@
 0x8A5DE8: push    ecx
 0x8A5DE9: mov     ecx, esi
 0x8A5DEB: call    NiTArray_SetSize
-0x8A5DF0: lea     edx, [esp+1C4h+var_1B0]
+0x8A5DF0: lea     edx, [esp+1C4h+outData]
 0x8A5DF4: push    edx
 0x8A5DF5: push    edi
 0x8A5DF6: mov     ecx, esi
@@ -151,7 +151,7 @@
 0x8A5E08: push    offset aLindamp; "LINDAMP"
 0x8A5E0D: call    TESOutput_PrintLabeledFloat
 0x8A5E12: movzx   edi, word ptr [esi+0Ah]
-0x8A5E16: mov     [esp+1CCh+var_1B0], eax
+0x8A5E16: mov     [esp+1CCh+outData], eax
 0x8A5E1A: movzx   eax, word ptr [esi+8]
 0x8A5E1E: add     esp, 8
 0x8A5E21: cmp     edi, eax
@@ -161,7 +161,7 @@
 0x8A5E2B: push    ecx
 0x8A5E2C: mov     ecx, esi
 0x8A5E2E: call    NiTArray_SetSize
-0x8A5E33: lea     edx, [esp+1C4h+var_1B0]
+0x8A5E33: lea     edx, [esp+1C4h+outData]
 0x8A5E37: push    edx
 0x8A5E38: push    edi
 0x8A5E39: mov     ecx, esi
@@ -172,7 +172,7 @@
 0x8A5E4B: push    offset aAngdamp; "ANGDAMP"
 0x8A5E50: call    TESOutput_PrintLabeledFloat
 0x8A5E55: movzx   edi, word ptr [esi+0Ah]
-0x8A5E59: mov     [esp+1CCh+var_1B0], eax
+0x8A5E59: mov     [esp+1CCh+outData], eax
 0x8A5E5D: movzx   eax, word ptr [esi+8]
 0x8A5E61: add     esp, 8
 0x8A5E64: cmp     edi, eax
@@ -182,7 +182,7 @@
 0x8A5E6E: push    ecx
 0x8A5E6F: mov     ecx, esi
 0x8A5E71: call    NiTArray_SetSize
-0x8A5E76: lea     edx, [esp+1C4h+var_1B0]
+0x8A5E76: lea     edx, [esp+1C4h+outData]
 0x8A5E7A: push    edx
 0x8A5E7B: push    edi
 0x8A5E7C: mov     ecx, esi
@@ -193,7 +193,7 @@
 0x8A5E8E: push    offset aFriction; "FRICTION"
 0x8A5E93: call    TESOutput_PrintLabeledFloat
 0x8A5E98: movzx   edi, word ptr [esi+0Ah]
-0x8A5E9C: mov     [esp+1CCh+var_1B0], eax
+0x8A5E9C: mov     [esp+1CCh+outData], eax
 0x8A5EA0: movzx   eax, word ptr [esi+8]
 0x8A5EA4: add     esp, 8
 0x8A5EA7: cmp     edi, eax
@@ -203,7 +203,7 @@
 0x8A5EB1: push    ecx
 0x8A5EB2: mov     ecx, esi
 0x8A5EB4: call    NiTArray_SetSize
-0x8A5EB9: lea     edx, [esp+1C4h+var_1B0]
+0x8A5EB9: lea     edx, [esp+1C4h+outData]
 0x8A5EBD: push    edx
 0x8A5EBE: push    edi
 0x8A5EBF: mov     ecx, esi
@@ -214,7 +214,7 @@
 0x8A5ED1: push    offset aRest; "REST"
 0x8A5ED6: call    TESOutput_PrintLabeledFloat
 0x8A5EDB: movzx   edi, word ptr [esi+0Ah]
-0x8A5EDF: mov     [esp+1CCh+var_1B0], eax
+0x8A5EDF: mov     [esp+1CCh+outData], eax
 0x8A5EE3: movzx   eax, word ptr [esi+8]
 0x8A5EE7: add     esp, 8
 0x8A5EEA: cmp     edi, eax
@@ -224,7 +224,7 @@
 0x8A5EF4: push    ecx
 0x8A5EF5: mov     ecx, esi
 0x8A5EF7: call    NiTArray_SetSize
-0x8A5EFC: lea     edx, [esp+1C4h+var_1B0]
+0x8A5EFC: lea     edx, [esp+1C4h+outData]
 0x8A5F00: push    edx
 0x8A5F01: push    edi
 0x8A5F02: mov     ecx, esi
@@ -242,14 +242,14 @@
 0x8A5F33: movzx   ecx, word ptr [esi+8]
 0x8A5F37: add     esp, 8
 0x8A5F3A: cmp     edi, ecx
-0x8A5F3C: mov     [esp+1C4h+var_1B0], eax
+0x8A5F3C: mov     [esp+1C4h+outData], eax
 0x8A5F40: jb      short loc_8A5F50
 0x8A5F42: movzx   edx, word ptr [esi+0Eh]
 0x8A5F46: add     edx, edi
 0x8A5F48: push    edx
 0x8A5F49: mov     ecx, esi
 0x8A5F4B: call    NiTArray_SetSize
-0x8A5F50: lea     eax, [esp+1C4h+var_1B0]
+0x8A5F50: lea     eax, [esp+1C4h+outData]
 0x8A5F54: push    eax
 0x8A5F55: push    edi
 0x8A5F56: mov     ecx, esi
@@ -263,14 +263,14 @@
 0x8A5F76: movzx   ecx, word ptr [esi+8]
 0x8A5F7A: add     esp, 8
 0x8A5F7D: cmp     edi, ecx
-0x8A5F7F: mov     [esp+1C4h+var_1B0], eax
+0x8A5F7F: mov     [esp+1C4h+outData], eax
 0x8A5F83: jb      short loc_8A5F93
 0x8A5F85: movzx   edx, word ptr [esi+0Eh]
 0x8A5F89: add     edx, edi
 0x8A5F8B: push    edx
 0x8A5F8C: mov     ecx, esi
 0x8A5F8E: call    NiTArray_SetSize
-0x8A5F93: lea     eax, [esp+1C4h+var_1B0]
+0x8A5F93: lea     eax, [esp+1C4h+outData]
 0x8A5F97: push    eax
 0x8A5F98: push    edi
 0x8A5F99: mov     ecx, esi
@@ -279,13 +279,13 @@
 0x8A5FA7: push    ecx
 0x8A5FA8: lea     edx, [esp+1C8h+var_1A0]
 0x8A5FAC: push    edx
-0x8A5FAD: call    sub_43F3E0
+0x8A5FAD: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A5FB2: add     esp, 8
 0x8A5FB5: push    offset aLinvel; "LinVel"
 0x8A5FBA: lea     ecx, [esp+1C8h+var_1A0]
 0x8A5FBE: call    sub_707280
 0x8A5FC3: movzx   edi, word ptr [esi+0Ah]
-0x8A5FC7: mov     [esp+1C4h+var_1B0], eax
+0x8A5FC7: mov     [esp+1C4h+outData], eax
 0x8A5FCB: movzx   eax, word ptr [esi+8]
 0x8A5FCF: cmp     edi, eax
 0x8A5FD1: jb      short loc_8A5FE1
@@ -294,7 +294,7 @@
 0x8A5FD9: push    ecx
 0x8A5FDA: mov     ecx, esi
 0x8A5FDC: call    NiTArray_SetSize
-0x8A5FE1: lea     edx, [esp+1C4h+var_1B0]
+0x8A5FE1: lea     edx, [esp+1C4h+outData]
 0x8A5FE5: push    edx
 0x8A5FE6: push    edi
 0x8A5FE7: mov     ecx, esi
@@ -303,7 +303,7 @@
 0x8A5FF5: push    eax
 0x8A5FF6: lea     ecx, [esp+1C8h+var_1A0]
 0x8A5FFA: push    ecx
-0x8A5FFB: call    sub_43F3E0
+0x8A5FFB: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A6000: add     esp, 8
 0x8A6003: push    offset aAngvel; "AngVel"
 0x8A6008: lea     ecx, [esp+1C8h+var_1A0]
@@ -311,14 +311,14 @@
 0x8A6011: movzx   edi, word ptr [esi+0Ah]
 0x8A6015: movzx   edx, word ptr [esi+8]
 0x8A6019: cmp     edi, edx
-0x8A601B: mov     [esp+1C4h+var_1B0], eax
+0x8A601B: mov     [esp+1C4h+outData], eax
 0x8A601F: jb      short loc_8A602F
 0x8A6021: movzx   eax, word ptr [esi+0Eh]
 0x8A6025: add     eax, edi
 0x8A6027: push    eax
 0x8A6028: mov     ecx, esi
 0x8A602A: call    NiTArray_SetSize
-0x8A602F: lea     ecx, [esp+1C4h+var_1B0]
+0x8A602F: lea     ecx, [esp+1C4h+outData]
 0x8A6033: push    ecx
 0x8A6034: push    edi
 0x8A6035: mov     ecx, esi
@@ -332,14 +332,14 @@
 0x8A6055: movzx   edx, word ptr [esi+8]
 0x8A6059: add     esp, 8
 0x8A605C: cmp     edi, edx
-0x8A605E: mov     [esp+1C4h+var_1B0], eax
+0x8A605E: mov     [esp+1C4h+outData], eax
 0x8A6062: jb      short loc_8A6072
 0x8A6064: movzx   eax, word ptr [esi+0Eh]
 0x8A6068: add     eax, edi
 0x8A606A: push    eax
 0x8A606B: mov     ecx, esi
 0x8A606D: call    NiTArray_SetSize
-0x8A6072: lea     ecx, [esp+1C4h+var_1B0]
+0x8A6072: lea     ecx, [esp+1C4h+outData]
 0x8A6076: push    ecx
 0x8A6077: push    edi
 0x8A6078: mov     ecx, esi
@@ -353,14 +353,14 @@
 0x8A6097: movzx   edx, word ptr [esi+8]
 0x8A609B: add     esp, 8
 0x8A609E: cmp     edi, edx
-0x8A60A0: mov     [esp+1C4h+var_1B0], eax
+0x8A60A0: mov     [esp+1C4h+outData], eax
 0x8A60A4: jb      short loc_8A60B4
 0x8A60A6: movzx   eax, word ptr [esi+0Eh]
 0x8A60AA: add     eax, edi
 0x8A60AC: push    eax
 0x8A60AD: mov     ecx, esi
 0x8A60AF: call    NiTArray_SetSize
-0x8A60B4: lea     ecx, [esp+1C4h+var_1B0]
+0x8A60B4: lea     ecx, [esp+1C4h+outData]
 0x8A60B8: push    ecx
 0x8A60B9: push    edi
 0x8A60BA: mov     ecx, esi
@@ -374,14 +374,14 @@
 0x8A60D7: movzx   edx, word ptr [esi+8]
 0x8A60DB: add     esp, 8
 0x8A60DE: cmp     edi, edx
-0x8A60E0: mov     [esp+1C4h+var_1B0], eax
+0x8A60E0: mov     [esp+1C4h+outData], eax
 0x8A60E4: jb      short loc_8A60F4
 0x8A60E6: movzx   eax, word ptr [esi+0Eh]
 0x8A60EA: add     eax, edi
 0x8A60EC: push    eax
 0x8A60ED: mov     ecx, esi
 0x8A60EF: call    NiTArray_SetSize
-0x8A60F4: lea     ecx, [esp+1C4h+var_1B0]
+0x8A60F4: lea     ecx, [esp+1C4h+outData]
 0x8A60F8: push    ecx
 0x8A60F9: push    edi
 0x8A60FA: mov     ecx, esi
@@ -390,10 +390,10 @@
 0x8A6104: mov     [esp+1C4h+var_1A8], ebx
 0x8A6108: test    ebx, ebx
 0x8A610A: jz      short loc_8A6127
-0x8A610C: lea     edx, [esp+1C4h+var_1B0]
-0x8A6110: push    edx
-0x8A6111: mov     ecx, ebx
-0x8A6113: call    sub_677C70
+0x8A610C: lea     edx, [esp+1C4h+outData]
+0x8A6110: push    edx; outData
+0x8A6111: mov     ecx, ebx; this
+0x8A6113: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A6118: or      [esp+1C4h+var_1A4], 1
 0x8A611D: cmp     dword ptr [eax], 0
 0x8A6120: mov     [esp+1C4h+var_1A9], 1
@@ -401,7 +401,7 @@
 0x8A6127: mov     [esp+1C4h+var_1A9], 0
 0x8A612C: test    byte ptr [esp+1C4h+var_1A4], 1
 0x8A6131: jz      short loc_8A615C
-0x8A6133: mov     edi, [esp+1C4h+var_1B0]
+0x8A6133: mov     edi, [esp+1C4h+outData]
 0x8A6137: and     [esp+1C4h+var_1A4], 0FFFFFFFEh
 0x8A613C: test    edi, edi
 0x8A613E: jz      short loc_8A615C
@@ -420,9 +420,9 @@
 0x8A615C: cmp     [esp+1C4h+var_1A9], 0
 0x8A6161: jz      loc_8A6240
 0x8A6167: lea     ecx, [esp+1C4h+var_194]
-0x8A616B: push    ecx
-0x8A616C: mov     ecx, ebx
-0x8A616E: call    sub_677C70
+0x8A616B: push    ecx; outData
+0x8A616C: mov     ecx, ebx; this
+0x8A616E: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A6173: mov     edi, [eax]
 0x8A6175: mov     eax, [esp+1C4h+var_194]
 0x8A6179: test    eax, eax
@@ -525,3 +525,16 @@
 0x8A62AB: mov     esp, ebp
 0x8A62AD: pop     ebp
 0x8A62AE: retn    4
+0x9D6CD0: lea     ecx, [ebp+var_180]
+0x9D6CD6: jmp     sub_8A5090
+0x9D6CDB: mov     edx, [esp-4+arg_4]
+0x9D6CDF: lea     eax, [edx-1B4h]
+0x9D6CE5: mov     ecx, [edx-1B8h]
+0x9D6CEB: xor     ecx, eax
+0x9D6CED: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6CF2: add     eax, 0Ch
+0x9D6CF5: mov     ecx, [edx-8]
+0x9D6CF8: xor     ecx, eax
+0x9D6CFA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6CFF: mov     eax, offset stru_AFEA00
+0x9D6D04: jmp     ___CxxFrameHandler3

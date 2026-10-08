@@ -1,78 +1,76 @@
-int __thiscall sub_6DA320(_DWORD *this)
+char __thiscall sub_6DA320(float *this)
 {
-  _DWORD *v1; // ebx
-  int result; // eax
+  float *v1; // ebx
+  float v2; // eax
   unsigned int v3; // ebp
   int v4; // esi
-  _DWORD *v5; // edi
+  float *v5; // edi
   void (__thiscall ***v6)(_DWORD, int); // esi
-  int v7; // ecx
-  int v8; // edx
+  float v7; // ecx
+  float v8; // edx
   char v9; // bl
   unsigned int i; // esi
   int v11; // esi
-  int v12; // ecx
-  int v13; // edx
-  unsigned __int8 v14; // [esp+7h] [ebp-11h]
-  int v16; // [esp+Ch] [ebp-Ch] BYREF
-  int v17; // [esp+10h] [ebp-8h]
-  int v18; // [esp+14h] [ebp-4h]
+  float y; // ecx
+  float z; // edx
+  unsigned __int8 v15; // [esp+7h] [ebp-11h]
+  NiPoint3 other; // [esp+Ch] [ebp-Ch] BYREF
 
-  v1 = this;
-  result = *(this + 6);
-  if ( result )
+  v1 = this; /*0x6da324*/
+  v2 = *(this + 6); /*0x6da326*/
+  if ( v2 != 0.0 ) /*0x6da32f*/
   {
-    v3 = *(_DWORD *)(result + 8);
-    v4 = *(_DWORD *)(result + 0x10);
-    v5 = *(_DWORD **)(result + 0xC);
-    v14 = *(_BYTE *)(result + 0x14);
-    if ( !v3 )
+    v3 = *(_DWORD *)(LODWORD(v2) + 8); /*0x6da339*/
+    v4 = *(_DWORD *)(LODWORD(v2) + 0x10); /*0x6da33f*/
+    v5 = *(float **)(LODWORD(v2) + 0xC); /*0x6da343*/
+    v15 = *(_BYTE *)(LODWORD(v2) + 0x14); /*0x6da346*/
+    if ( !v3 ) /*0x6da34a*/
     {
-      v6 = (void (__thiscall ***)(_DWORD, int))*(this + 6);
-      if ( !InterlockedDecrement((volatile LONG *)(result + 4)) )
-        (**v6)(v6, 1);
-      v1[6] = 0;
-      result = dword_B24FC8;
-      v1[3] = dword_B24FC8;
-      v1[4] = dword_B24FCC;
-      v1[5] = dword_B24FD0;
-      return result;
+      v6 = *((void (__thiscall ****)(_DWORD, int))this + 6); /*0x6da34c*/
+      if ( !InterlockedDecrement((volatile LONG *)(LODWORD(v2) + 4)) ) /*0x6da356*/
+        (**v6)(v6, 1); /*0x6da36c*/
+      v1[6] = 0.0; /*0x6da36e*/
+      v2 = *(float *)&dword_B24FC8; /*0x6da375*/
+      *((_DWORD *)v1 + 3) = dword_B24FC8; /*0x6da37a*/
+      *((_DWORD *)v1 + 4) = dword_B24FCC; /*0x6da384*/
+      *((_DWORD *)v1 + 5) = dword_B24FD0; /*0x6da38f*/
+      return LOBYTE(v2); /*0x6da396*/
     }
-    result = v5[1];
-    v7 = v5[2];
-    v8 = v5[3];
-    v16 = result;
-    v17 = v7;
-    v18 = v8;
-    if ( v3 == 1 )
-      goto LABEL_16;
-    if ( v4 == 1 || v4 == 5 )
+    v2 = v5[1]; /*0x6da39a*/
+    v7 = v5[2]; /*0x6da39d*/
+    v8 = v5[3]; /*0x6da3a0*/
+    other.x = v2; /*0x6da3a3*/
+    other.y = v7; /*0x6da3a7*/
+    other.z = v8; /*0x6da3ab*/
+    if ( v3 == 1 ) /*0x6da3af*/
+      goto LABEL_16; /*0x6da3af*/
+    if ( v4 == 1 || v4 == 5 ) /*0x6da3b9*/
     {
-      v9 = 1;
-      for ( i = 1; i < v3; ++i )
+      v9 = 1; /*0x6da3bb*/
+      for ( i = 1; i < v3; ++i ) /*0x6da3bd*/
       {
-        result = sub_8AA390((float *)((char *)v5 + i * v14 + 4), (float *)&v16);
-        if ( (_BYTE)result )
-          v9 = 0;
-        if ( !v9 )
-          return result;
+        LOBYTE(v2) = NiPoint3__NotEqual((const NiPoint3 *)((char *)v5 + i * v15 + 4), &other); /*0x6da3d7*/
+        if ( LOBYTE(v2) ) /*0x6da3de*/
+          v9 = 0; /*0x6da3e0*/
+        if ( !v9 ) /*0x6da3e7*/
+          return LOBYTE(v2); /*0x6da3e7*/
       }
-      v1 = this;
+      v1 = this; /*0x6da3f5*/
 LABEL_16:
-      v11 = v1[6];
-      if ( v11 )
+      v11 = *((_DWORD *)v1 + 6); /*0x6da3f9*/
+      if ( v11 ) /*0x6da3fe*/
       {
-        if ( !InterlockedDecrement((volatile LONG *)(v11 + 4)) )
-          (**(void (__thiscall ***)(int, int))v11)(v11, 1);
-        v1[6] = 0;
+        if ( !InterlockedDecrement((volatile LONG *)(v11 + 4)) ) /*0x6da404*/
+          (**(void (__thiscall ***)(int, int))v11)(v11, 1); /*0x6da41a*/
+        v1[6] = 0.0; /*0x6da41c*/
       }
-      result = v16;
-      v12 = v17;
-      v13 = v18;
-      v1[3] = v16;
-      v1[4] = v12;
-      v1[5] = v13;
+      LOBYTE(v2) = LOBYTE(other.x); /*0x6da423*/
+      y = other.y; /*0x6da427*/
+      z = other.z; /*0x6da42b*/
+      v1[3] = other.x; /*0x6da42f*/
+      v1[4] = y; /*0x6da432*/
+      v1[5] = z; /*0x6da435*/
     }
   }
-  return result;
+  return LOBYTE(v2); /*0x6da392*/
 }

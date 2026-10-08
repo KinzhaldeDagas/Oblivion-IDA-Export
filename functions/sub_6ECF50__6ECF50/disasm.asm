@@ -3,7 +3,7 @@
 0x6ECF55: push    edi
 0x6ECF56: push    esi
 0x6ECF57: mov     edi, ecx
-0x6ECF59: call    sub_6CE3A0
+0x6ECF59: call    NiSingleInterpController_IsEqual; Equality requires equal NiTimeController base state and null-symmetric interpolator state; two non-null interpolators compare through their virtual IsEqual slot (+0x2C).
 0x6ECF5E: test    al, al
 0x6ECF60: jnz     short loc_6ECF69
 0x6ECF62: pop     edi

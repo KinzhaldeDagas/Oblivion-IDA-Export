@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7EFBF0",
-    "line": "mov     eax, [esp+arg_4]",
+    "line": "mov     eax, [esp+cloneProcess]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,19 +25,19 @@
   },
   {
     "ea": "0x7EFBF7",
-    "line": "mov     edi, [esp+0Ch+arg_0]",
+    "line": "mov     edi, [esp+0Ch+clone]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7EFBFB",
-    "line": "push    eax",
+    "line": "push    eax; cloneProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7EFBFC",
-    "line": "push    edi",
+    "line": "push    edi; clone",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x7EFBFF",
-    "line": "call    sub_7E2490",
+    "line": "call    BSShaderProperty_CopyCloneMembers; [Verified] Shared BSShaderProperty clone-field copier: delegates to the common property copier, copies source +0x1C and +0x20 into the clone, and clears clone +0x24. Directly used by BSShaderProperty_CreateClone and the inherited path used by GeometryDecalShaderProperty. It does not touch BSShaderLightingProperty's +0x80 DECAL_DATA* list.",
     "mnemonic": "call",
     "size": 5
   },

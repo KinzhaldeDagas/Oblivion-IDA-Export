@@ -1,4 +1,4 @@
-0x42BE70: mov     ecx, ArchiveList
+0x42BE70: mov     ecx, ds:0B338E0h
 0x42BE76: push    esi
 0x42BE77: push    edi
 0x42BE78: xor     edi, edi
@@ -17,14 +17,14 @@
 0x42BE92: mov     esi, [esi+4]
 0x42BE95: cmp     esi, edi
 0x42BE97: jnz     short loc_42BE84
-0x42BE99: mov     ecx, ArchiveList
-0x42BE9F: call    BSSimpleList_Clear
-0x42BEA4: mov     eax, ArchiveList
+0x42BE99: mov     ecx, ds:0B338E0h
+0x42BE9F: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x42BEA4: mov     eax, ds:0B338E0h
 0x42BEA9: push    eax
-0x42BEAA: call    FormHeapFree
+0x42BEAA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42BEAF: add     esp, 4
-0x42BEB2: mov     ArchiveList, edi
-0x42BEB8: mov     ecx, ArchiveInvalidateFilenames
+0x42BEB2: mov     ds:0B338E0h, edi
+0x42BEB8: mov     ecx, ds:0B33930h
 0x42BEBE: cmp     ecx, edi
 0x42BEC0: jz      short loc_42BEF8
 0x42BEC2: xor     esi, esi
@@ -34,8 +34,8 @@
 0x42BED0: mov     ecx, [ecx+4]
 0x42BED3: mov     edx, [ecx+esi*4]
 0x42BED6: push    edx
-0x42BED7: call    FormHeapFree
-0x42BEDC: mov     ecx, ArchiveInvalidateFilenames
+0x42BED7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x42BEDC: mov     ecx, ds:0B33930h
 0x42BEE2: movzx   eax, word ptr [ecx+0Ah]
 0x42BEE6: add     esi, 1
 0x42BEE9: add     esp, 4
@@ -45,7 +45,7 @@
 0x42BEF2: mov     eax, [edx]
 0x42BEF4: push    1
 0x42BEF6: call    eax
-0x42BEF8: mov     ecx, ArchiveInvalidatedDirPAths
+0x42BEF8: mov     ecx, ds:0B33934h
 0x42BEFE: cmp     ecx, edi
 0x42BF00: jz      short loc_42BF38
 0x42BF02: xor     esi, esi
@@ -55,8 +55,8 @@
 0x42BF10: mov     ecx, [ecx+4]
 0x42BF13: mov     edx, [ecx+esi*4]
 0x42BF16: push    edx
-0x42BF17: call    FormHeapFree
-0x42BF1C: mov     ecx, ArchiveInvalidatedDirPAths
+0x42BF17: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x42BF1C: mov     ecx, ds:0B33934h
 0x42BF22: movzx   eax, word ptr [ecx+0Ah]
 0x42BF26: add     esi, 1
 0x42BF29: add     esp, 4
@@ -66,24 +66,24 @@
 0x42BF32: mov     eax, [edx]
 0x42BF34: push    1
 0x42BF36: call    eax
-0x42BF38: mov     FirstLoadedArchiveByType, edi
+0x42BF38: mov     ds:0B338E8h, edi
 0x42BF3E: mov     dword_B3390C, edi
-0x42BF44: mov     dword_B338EC, edi
-0x42BF4A: mov     dword_B33910, edi
-0x42BF50: mov     dword_B338F0, edi
-0x42BF56: mov     dword_B33914, edi
-0x42BF5C: mov     dword_B338F4, edi
-0x42BF62: mov     dword_B33918, edi
-0x42BF68: mov     dword_B338F8, edi
-0x42BF6E: mov     dword_B3391C, edi
-0x42BF74: mov     dword_B338FC, edi
-0x42BF7A: mov     dword_B33920, edi
-0x42BF80: mov     dword_B33900, edi
-0x42BF86: mov     dword_B33924, edi
-0x42BF8C: mov     dword_B33904, edi
-0x42BF92: mov     dword_B33928, edi
-0x42BF98: mov     dword_B33908, edi
-0x42BF9E: mov     dword_B3392C, edi
+0x42BF44: mov     dword ptr unk_B338EC, edi
+0x42BF4A: mov     dword ptr unk_B33910, edi
+0x42BF50: mov     dword ptr unk_B338F0, edi
+0x42BF56: mov     dword ptr unk_B33914, edi
+0x42BF5C: mov     dword ptr unk_B338F4, edi
+0x42BF62: mov     dword ptr unk_B33918, edi
+0x42BF68: mov     dword ptr unk_B338F8, edi
+0x42BF6E: mov     dword ptr unk_B3391C, edi
+0x42BF74: mov     dword ptr unk_B338FC, edi
+0x42BF7A: mov     dword ptr unk_B33920, edi
+0x42BF80: mov     dword ptr unk_B33900, edi
+0x42BF86: mov     dword ptr unk_B33924, edi
+0x42BF8C: mov     dword ptr unk_B33904, edi
+0x42BF92: mov     dword ptr unk_B33928, edi
+0x42BF98: mov     dword ptr unk_B33908, edi
+0x42BF9E: mov     dword ptr unk_B3392C, edi
 0x42BFA4: pop     edi
 0x42BFA5: pop     esi
 0x42BFA6: retn

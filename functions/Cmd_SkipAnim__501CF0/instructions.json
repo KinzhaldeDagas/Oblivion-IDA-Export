@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x501CF0",
-    "line": "push    esi",
+    "line": "push    esi; SkipAnim command: writes ActorAnimData +0x90 skip/action byte to 5.",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x501D11",
-    "line": "push    5",
+    "line": "push    5; state",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x501D17",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x501D19",
-    "line": "call    sub_4706D0",
+    "line": "call    ActorAnimData_SetUpdateState; Oblivion ActorAnimData update-control setter: stores one byte at +0x90. Observed callers write state 3 for attack/action synchronization and state 5 from Cmd_SkipAnim. Do not infer KF unloading or map mutation from this setter.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x646600",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; RadiantAI: acquire scan callback for sub_62DA10; builds 0x20-byte candidate entries from loose refs, containers, and actor inventories. Initial response codes: 0 direct/world, 1 inventory/container.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x6466D5",
-    "line": "mov     byte ptr [esp+1Ch], 1",
+    "line": "mov     byte ptr [esp+18h+arg_0], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x646720",
-    "line": "mov     byte ptr [esp+1Ch], 0",
+    "line": "mov     byte ptr [esp+18h+arg_0], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x646784",
-    "line": "cmp     byte ptr [esp+20h+var_4], 0",
+    "line": "cmp     byte ptr [esp+18h+arg_0], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x6467C7",
-    "line": "mov     ecx, [esp+20h+var_10]",
+    "line": "mov     ecx, [esp+18h+var_8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x646818",
-    "line": "mov     [esp+20h+var_C], esi",
+    "line": "mov     [esp+18h+var_4], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x64684D",
-    "line": "mov     [esp+20h+var_4], eax",
+    "line": "mov     [esp+18h+arg_0], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1237,7 +1237,7 @@
   },
   {
     "ea": "0x646857",
-    "line": "mov     ecx, [esp+20h+var_4]",
+    "line": "mov     ecx, [esp+18h+arg_0]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1267,31 +1267,31 @@
   },
   {
     "ea": "0x646868",
-    "line": "push    0",
+    "line": "push    0; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x64686A",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x64686C",
-    "line": "push    edx",
+    "line": "push    edx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x64686D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x64686F",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x64687C",
-    "line": "mov     ebx, [esp+28h+var_18]",
+    "line": "mov     ebx, [esp+18h+var_8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1429,19 +1429,19 @@
   },
   {
     "ea": "0x6468B2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6468B4",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6468B9",
-    "line": "mov     ecx, [esp+28h+var_8]",
+    "line": "mov     ecx, [esp+18h+arg_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x6468BF",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x646911",
-    "line": "call    ContainerExtraData_GetItemCount",
+    "line": "call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1675,13 +1675,13 @@
   },
   {
     "ea": "0x64692B",
-    "line": "mov     esi, [esp+28h+var_14]",
+    "line": "mov     esi, [esp+18h+var_4]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x64692F",
-    "line": "mov     eax, [esp+28h+var_C]",
+    "line": "mov     eax, [esp+18h+arg_0]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1699,7 +1699,7 @@
   },
   {
     "ea": "0x646938",
-    "line": "mov     [esp+28h+var_C], eax",
+    "line": "mov     [esp+18h+arg_0], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1747,13 +1747,13 @@
   },
   {
     "ea": "0x646951",
-    "line": "mov     [esp+28h+var_14], ebx",
+    "line": "mov     [esp+18h+var_4], ebx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x646955",
-    "line": "mov     [esp+28h+var_C], esi",
+    "line": "mov     [esp+18h+arg_0], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1843,7 +1843,7 @@
   },
   {
     "ea": "0x646985",
-    "line": "mov     ebx, [esp+28h+var_18]",
+    "line": "mov     ebx, [esp+18h+var_8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1963,19 +1963,19 @@
   },
   {
     "ea": "0x6469BF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6469C1",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6469C6",
-    "line": "mov     ecx, [esp+28h+var_8]",
+    "line": "mov     ecx, [esp+18h+arg_4]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x6469CC",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x646A1E",
-    "line": "call    ContainerExtraData_GetItemCount",
+    "line": "call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2257,19 +2257,19 @@
   },
   {
     "ea": "0x646A4C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x646A51",
-    "line": "mov     ebx, [esp+2Ch+var_14]",
+    "line": "mov     ebx, [esp+1Ch+var_4]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x646A55",
-    "line": "mov     esi, [esp+2Ch+var_C]",
+    "line": "mov     esi, [esp+1Ch+arg_0]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2293,7 +2293,7 @@
   },
   {
     "ea": "0x646A61",
-    "line": "mov     [esp+28h+var_C], esi",
+    "line": "mov     [esp+18h+arg_0], esi",
     "mnemonic": "mov",
     "size": 4
   },

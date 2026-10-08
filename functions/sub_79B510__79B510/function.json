@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79B510",
+      "0x79B55E"
+    ]
+  ],
+  "chunks_sha256": "3a1ef9f5757759cb4211826bafc2361f464bd9fe94d64bbfd16dbc22d7891d8a",
+  "comment_regular": "Overlap-safe backward copy-assignment for 0x2C-byte SFrondTexture records; deep-assigns filename plus the four scalar floats and returns destination begin.",
+  "comment_repeatable": "Overlap-safe backward copy-assignment for 0x2C-byte SFrondTexture records; deep-assigns filename plus the four scalar floats and returns destination begin.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79B510",
+  "display_name": "OB_SFrondTexture_CopyAssignRangeBackward_010201A0",
   "end_ea": "0x79B55E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79B510",
+  "name": "OB_SFrondTexture_CopyAssignRangeBackward_010201A0",
   "segment": ".text",
   "sha256": "3a1ef9f5757759cb4211826bafc2361f464bd9fe94d64bbfd16dbc22d7891d8a",
   "size": 78,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79B510",
-  "type": "float *__cdecl(int, int, float *)",
+  "total_chunk_size": 78,
+  "type": "OB_SFrondTexture_010201A0 *__cdecl(const OB_SFrondTexture_010201A0 *first, const OB_SFrondTexture_010201A0 *last, OB_SFrondTexture_010201A0 *destinationLast)",
   "xrefs_from_count": 35,
   "xrefs_to_count": 1
 }

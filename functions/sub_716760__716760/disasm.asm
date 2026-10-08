@@ -1,7 +1,7 @@
 0x716760: sub     esp, 0Ch
 0x716763: push    esi
 0x716764: push    edi
-0x716765: mov     edi, [esp+14h+arg_0]
+0x716765: mov     edi, [esp+14h+position]
 0x716769: push    edi
 0x71676A: mov     esi, ecx
 0x71676C: call    j_nullsub_3
@@ -13,7 +13,7 @@
 0x71677C: call    edx
 0x71677E: mov     eax, [esi+14h]
 0x716781: push    1
-0x716783: lea     ecx, [esp+18h+arg_0]
+0x716783: lea     ecx, [esp+18h+position]
 0x716787: push    ecx
 0x716788: mov     [esp+1Ch+var_C], eax
 0x71678C: mov     eax, [edi+220h]
@@ -22,7 +22,7 @@
 0x716798: push    edx
 0x716799: push    eax
 0x71679A: mov     eax, [eax+8]
-0x71679D: mov     [esp+28h+arg_0], 4
+0x71679D: mov     [esp+28h+position], 4
 0x7167A5: call    eax
 0x7167A7: add     esp, 14h
 0x7167AA: cmp     dword ptr [esi+14h], 0
@@ -43,29 +43,29 @@
 0x7167CF: jb      short loc_7167C2
 0x7167D1: xor     eax, eax
 0x7167D3: test    eax, eax
-0x7167D5: mov     [esp+18h+arg_0], eax
+0x7167D5: mov     [esp+18h+position], eax
 0x7167D9: pop     ebx
 0x7167DA: jz      short loc_716817
 0x7167DC: lea     esp, [esp+0]
-0x7167E0: lea     ecx, [esp+14h+var_4]
-0x7167E4: push    ecx
-0x7167E5: lea     edx, [esp+18h+var_8]
-0x7167E9: push    edx
-0x7167EA: lea     eax, [esp+1Ch+arg_0]
-0x7167EE: push    eax
-0x7167EF: mov     ecx, esi
-0x7167F1: call    sub_452600
-0x7167F6: mov     ecx, [esp+14h+var_8]
+0x7167E0: lea     ecx, [esp+14h+valueOut]
+0x7167E4: push    ecx; valueOut
+0x7167E5: lea     edx, [esp+18h+keyOut]
+0x7167E9: push    edx; keyOut
+0x7167EA: lea     eax, [esp+1Ch+position]
+0x7167EE: push    eax; position
+0x7167EF: mov     ecx, esi; self
+0x7167F1: call    NiTMap_U32Pointer_GetNextEntry
+0x7167F6: mov     ecx, [esp+14h+keyOut]
 0x7167FA: push    ecx
 0x7167FB: mov     ecx, edi
 0x7167FD: call    sub_713720
 0x716802: mov     edx, [edi]
-0x716804: mov     eax, [esp+14h+var_4]
+0x716804: mov     eax, [esp+14h+valueOut]
 0x716808: mov     edx, [edx+2Ch]
 0x71680B: push    eax
 0x71680C: mov     ecx, edi
 0x71680E: call    edx
-0x716810: cmp     [esp+14h+arg_0], 0
+0x716810: cmp     [esp+14h+position], 0
 0x716815: jnz     short loc_7167E0
 0x716817: pop     edi
 0x716818: pop     esi

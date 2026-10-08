@@ -39,3 +39,17 @@
 0x439C95: pop     esi
 0x439C96: add     esp, 14h
 0x439C99: retn    4
+0x9AC870: mov     ecx, [ebp-14h]
+0x9AC873: jmp     ??1?$BSTaskManagerThread@_J@@UAE@XZ; BSTaskManagerThread<__int64>::~BSTaskManagerThread<__int64>(void)
+0x9AC878: mov     eax, [ebp-10h]
+0x9AC87B: push    eax
+0x9AC87C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC881: pop     ecx
+0x9AC882: retn
+0x9AC883: mov     edx, [esp+arg_4]
+0x9AC887: lea     eax, [edx-0Ch]
+0x9AC88A: mov     ecx, [edx-10h]
+0x9AC88D: xor     ecx, eax
+0x9AC88F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC894: mov     eax, offset stru_AD9504
+0x9AC899: jmp     ___CxxFrameHandler3

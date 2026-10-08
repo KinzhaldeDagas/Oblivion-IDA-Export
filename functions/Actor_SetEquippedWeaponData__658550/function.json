@@ -1,19 +1,32 @@
 {
-  "callees_count": 21,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x658550",
+      "0x658690"
+    ]
+  ],
+  "chunks_sha256": "f9281a9b687d4426710911b95dc65856b50fc828219495e9d112e47864592c16",
+  "comment_regular": "Replaces HighProcess equippedWeaponData, derives staff/bow flags from TESObjectWEAP weapon type, rebuilds equipment attachment-node caches for active player perspectives, or clears those caches when equipment is absent.",
+  "comment_repeatable": "Replaces HighProcess equippedWeaponData, derives staff/bow flags from TESObjectWEAP weapon type, rebuilds equipment attachment-node caches for active player perspectives, or clears those caches when equipment is absent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "Actor_SetEquippedWeaponData",
   "end_ea": "0x658690",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "Actor_SetEquippedWeaponData",
   "segment": ".text",
   "sha256": "f9281a9b687d4426710911b95dc65856b50fc828219495e9d112e47864592c16",
   "size": 320,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x658550",
-  "type": "char __fastcall(HighProcess *, int, EntryData *, _DWORD *)",
+  "total_chunk_size": 320,
+  "type": "char __thiscall(HighProcess *this, EntryData *entry, NiNode *rootNode)",
   "xrefs_from_count": 113,
   "xrefs_to_count": 2
 }

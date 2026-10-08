@@ -13,14 +13,14 @@ char __usercall def_504375@<al>(
 {
   int v11; // [esp+0h] [ebp-4h]
 
-  *a10 = 0.0;
-  if ( a3 )
+  *a10 = 0.0; /*0x5043a6*/
+  if ( a3 ) /*0x5043a8*/
   {
-    if ( a2 )
+    if ( a2 ) /*0x5043ac*/
     {
-      if ( sub_4FB5F0(a2, v11, a1) )
-        *a10 = 1.0;
+      if ( sub_4FB5F0(a2, v11, a1) ) /*0x5043b6*/
+        *a10 = 1.0; /*0x5043c1*/
     }
   }
-  return 1;
+  return 1; /*0x5043cb*/
 }

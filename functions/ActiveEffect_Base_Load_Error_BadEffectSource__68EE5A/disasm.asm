@@ -1,7 +1,7 @@
 0x68EE5A: movzx   eax, [esp+arg_4]
 0x68EE5F: mov     ecx, ds:0B33B00h
 0x68EE65: push    eax
-0x68EE66: call    SaveLoad_AdvanceBufferOffset
+0x68EE66: call    SaveLoad_AdvanceBufferOffset; EnginePatch v2: byte-checked SaveLoad_AdvanceBufferOffset hook. Clamps save cursor movement to active tracked record buffer.
 0x68EE6B: movzx   ecx, [esp+arg_8]
 0x68EE70: mov     edx, dword ptr [esp+ArgList]
 0x68EE74: push    ecx

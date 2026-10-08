@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x761270",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; DX10OBSE resource decode: creates/loads NiDX9SourceTextureData for NiSourceTexture, creating a managed IDirect3DTexture9 and uploading source mip texels when rendererData is absent.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x761290",
-    "line": "cmp     eax, offset dword_B3FD34",
+    "line": "cmp     eax, offset stru_B3FD34",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x76133E",
-    "line": "call    NiDX9SourceTextureData_LoadTextureFile",
+    "line": "call    NiDX9SourceTextureData_LoadTextureFile; D3DX file-memory fast path requires the global gate, NiSourceTexture::persistRenderData, and a renderer. Textures created by TES helper 0x442890 set persistRenderData=true, and WinMain sets the global gate true at 0x40E876.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x7613A5",
-    "line": "mov     ecx, [esi+eax*4]; void *",
+    "line": "mov     ecx, [esi+eax*4]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x7613B2",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x76150B",
-    "line": "mov     ecx, [edx+8]",
+    "line": "mov     ecx, [edx+8]; Fallback NiPixelData path uses FormatPrefs mipmap mode. TES default is mode 2 (Default); when global default generation is enabled, a one-level supported POT source is expanded by 0x71E790/0x71B8D0.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x761518",
-    "line": "cmp     ds:0B3F708h, al",
+    "line": "cmp     ds:0B3F708h, al; When true, generateMipmaps is passed to NiDevImageConverter at 0x76154B. It is not proof that file-authored mip count will be preserved.",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x76154B",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; NiDevImageConverter::ConvertPixelData. With generateMipmaps=true and a one-level supported POT input, 0x71E790 calls 0x71B8D0 to allocate/fill a complete chain before D3D creation/upload.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x761556",
-    "line": "call    sub_760700",
+    "line": "call    OB_NiDX9SourceTextureData_CreateD3DTexture_010201A0; DX10OBSE resource decode: NiDX9SourceTextureData creates D3DPOOL_MANAGED IDirect3DTexture9 using converted D3DFORMAT, mip-skip policy, width/height, and level count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1663,7 +1663,7 @@
   },
   {
     "ea": "0x761564",
-    "line": "call    sub_760CC0",
+    "line": "call    OB_NiDX9SourceTextureData_UploadMipLevels_010201A0; DX10OBSE resource decode: fills the D3D9 texture levels from converted NiPixelData by locking each texture level/surface and copying rows/blocks.",
     "mnemonic": "call",
     "size": 5
   },

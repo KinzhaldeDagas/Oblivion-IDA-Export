@@ -1,64 +1,108 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "sysparam_all_entry",
+  "definition": "union sysparam_all_entry\n{\nsysparam_entry hdr;\nsysparam_uint_entry uint;\nsysparam_bool_entry bool;\nsysparam_dword_entry dword;\nsysparam_rgb_entry rgb;\nsysparam_binary_entry bin;\nsysparam_path_entry path;\nsysparam_font_entry font;\nsysparam_pref_entry pref;\n}\n",
   "id": 18374686479672044086,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hdr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "sysparam_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "uint",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "sysparam_uint_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bool",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "sysparam_bool_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dword",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 40
+      "size": 40,
+      "type": "sysparam_dword_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rgb",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "sysparam_rgb_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bin",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "sysparam_binary_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "path",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 552
+      "size": 552,
+      "type": "sysparam_path_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "font",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 192
+      "size": 192,
+      "type": "sysparam_font_entry"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pref",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 48
+      "size": 48,
+      "type": "sysparam_pref_entry"
     }
   ],
   "name": "sysparam_all_entry",
+  "ordinal": 7705,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 552
 }

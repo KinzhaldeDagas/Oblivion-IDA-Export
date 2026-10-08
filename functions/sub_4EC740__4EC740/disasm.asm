@@ -18,14 +18,13 @@
 0x4EC773: lea     esi, [ebp+30h]
 0x4EC776: mov     ebx, 4
 0x4EC77B: jmp     short loc_4EC780
-0x4EC77D: align 10h
 0x4EC780: mov     edi, [esi]
 0x4EC782: test    edi, edi
 0x4EC784: jz      short loc_4EC796
 0x4EC786: mov     ecx, edi
 0x4EC788: call    sub_4EC740
 0x4EC78D: push    edi
-0x4EC78E: call    FormHeapFree
+0x4EC78E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4EC793: add     esp, 4
 0x4EC796: add     esi, 4
 0x4EC799: sub     ebx, 1
@@ -72,3 +71,16 @@
 0x4EC7FE: pop     ebx
 0x4EC7FF: add     esp, 10h
 0x4EC802: retn
+0x9B6460: mov     ecx, [ebp-10h]
+0x9B6463: add     ecx, 4; void *
+0x9B6466: jmp     sub_4BDDC0
+0x9B646B: mov     ecx, [ebp-10h]
+0x9B646E: add     ecx, 2Ch ; ','; slot
+0x9B6471: jmp     NiPointerSlot_Release
+0x9B6476: mov     edx, [esp+arg_4]
+0x9B647A: lea     eax, [edx-14h]
+0x9B647D: mov     ecx, [edx-18h]
+0x9B6480: xor     ecx, eax
+0x9B6482: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6487: mov     eax, offset stru_AE1368
+0x9B648C: jmp     ___CxxFrameHandler3

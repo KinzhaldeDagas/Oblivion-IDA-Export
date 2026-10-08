@@ -1,186 +1,185 @@
-void __userpurge sub_660910(int a1@<ecx>, double a2@<st2>, double a3@<st1>, TESObjectREFR *a4, signed int a5, int a6)
+// PlayerCharacter vtable +0x2CC pickup transaction for a world reference. Handles activation/ownership, optional direct merge into currently equipped AMMO, world-reference cleanup, and quiver refresh.
+void __thiscall PlayerCharacter_PickUpReference(PlayerCharacter *this, TESObjectREFR *reference, int arg1, int arg2)
 {
-  TESForm *v10; // eax
-  NiNode *v11; // eax
-  TESObjectREFR **v12; // ebx
-  Actor *v13; // ebp
-  TESObjectREFR *v14; // eax
+  double v4; // st6
+  TESKey *v7; // eax
+  NiObjectNET *v8; // eax
+  TESObjectREFR **v9; // ebx
+  Actor *v10; // ebp
+  TESObjectREFR *v11; // eax
   TESForm *Owner; // ebp
-  void *v16; // ebx
-  _DWORD *v17; // eax
-  bool v18; // zf
-  char v19; // al
-  void (__thiscall **v20)(int); // ebx
-  bool v21; // al
+  void *v13; // ebx
+  Actor *v14; // eax
+  bool v15; // zf
+  char v16; // al
+  void (__thiscall **p_Unk_8E)(Actor *); // ebx
+  bool v18; // al
   ExtraDataList *p_baseExtraList; // ecx
-  char v23; // bl
-  TESForm *v24; // ebp
-  int *v25; // eax
+  char v20; // bl
+  TESForm *type; // ebp
+  int *v22; // eax
   int ExtraCount; // ebp
-  Sky *v27; // eax
-  char *v28; // ebp
-  _DWORD *v29; // eax
-  int v30; // eax
+  TESHealthForm *v24; // eax
+  int v25; // ebp
+  void *v26; // eax
+  int v27; // eax
   ExtraContainerChanges_Data *ContainerChanges; // eax
-  ExtraDataList ***v32; // eax
-  char v33; // al
-  int v34; // [esp+8h] [ebp-1Ch]
-  TESObjectREFR *v35; // [esp+Ch] [ebp-18h]
-  int v36; // [esp+10h] [ebp-14h]
-  int v37; // [esp+1Ch] [ebp-8h]
-  ExtraDataList *v38; // [esp+20h] [ebp-4h]
-  TESChildCELL *v39; // [esp+28h] [ebp+4h]
+  ExtraDataList ***v29; // eax
+  char v30; // al
+  int v31; // [esp+8h] [ebp-1Ch]
+  TESObjectREFR *v32; // [esp+Ch] [ebp-18h]
+  int v33; // [esp+10h] [ebp-14h]
+  TESForm *form; // [esp+1Ch] [ebp-8h]
+  ExtraDataList *v35; // [esp+20h] [ebp-4h]
+  TESChildCELL *v36; // [esp+28h] [ebp+4h]
   TESChildCELL *OverrideFile; // [esp+28h] [ebp+4h]
 
-  v10 = a4->vtbl->GetBaseForm(a4);
-  sub_5E99C0((TESObjectREFR *)a1, v10, 1, 0);
-  v11 = a4->vtbl->GetNiNode(a4);
-  sub_88CF90(v11, 1u, 1, 0);
-  v12 = sub_674E40(a4->member.super.refID, (TESObjectREFR *)a1);
-  v39 = (TESChildCELL *)v12;
-  if ( v12 )
+  v7 = (TESKey *)reference->vtbl->GetBaseForm(reference);// Player world pickup begins by virtual sourceRef->GetBaseForm(). For a landed thrown proxy this is the AMMO assigned at 0x60CCA5, not the originating WEAP. /*0x66092b*/
+  sub_5E99C0((TESObjectREFR *)this, v7, 1, 0); /*0x660930*/
+  v8 = (NiObjectNET *)reference->vtbl->GetNiNode(reference); /*0x660945*/
+  sub_88CF90(v8, 1u, 1, 0); /*0x660948*/
+  v9 = sub_674E40((ActorProcessManager *)&qword_B3BB2C[0x75], reference->member.super.refID, (TESObjectREFR *)this); /*0x66095f*/
+  v36 = (TESChildCELL *)v9; /*0x660963*/
+  if ( v9 ) /*0x660967*/
   {
-    do
+    do /*0x660992*/
     {
-      v13 = (Actor *)*v12;
-      if ( !*v12 )
-        break;
-      sub_5E2E00((Actor *)*v12);
-      if ( v14 == a4 )
-        sub_5E03C0(v13, a1);
+      v10 = (Actor *)*v9; /*0x660970*/
+      if ( !*v9 ) /*0x660970*/
+        break; /*0x660974*/
+      sub_5E2E00((Actor *)*v9); /*0x660978*/
+      if ( v11 == reference ) /*0x660981*/
+        sub_5E03C0(v10, (int)this); /*0x660984*/
       else
-        sub_5E03C0(v13, 0);
-      v12 = (TESObjectREFR **)v12[1];
+        sub_5E03C0(v10, 0); /*0x660988*/
+      v9 = (TESObjectREFR **)v9[1]; /*0x66098d*/
     }
-    while ( v12 );
-    BSSimpleList_Clear(v39);
-    FormHeapFree((unsigned int)v39);
+    while ( v9 ); /*0x660992*/
+    BSSimpleList_Clear(v36); /*0x660998*/
+    FormHeapFree((unsigned int)v36); /*0x6609a2*/
   }
-  OverrideFile = (TESChildCELL *)TESForm_GetOverrideFile((TESForm *)a4, 0xFFFFFFFF);
-  if ( !Menu_GetOpenMenuTile(0x3F1) && !LOBYTE(TESDataHandler_g_PlayerRef->unk124) )
+  OverrideFile = (TESChildCELL *)TESForm_GetOverrideFile((TESForm *)reference, 0xFFFFFFFF); /*0x6609b8*/
+  if ( !Menu_GetOpenMenuTile(0x3F1) && !LOBYTE(::reference->unk124) ) /*0x6609d2*/
   {
-    Owner = (TESForm *)TESObjectREFR_GetOwner(a4);
-    v16 = OblivionDynamicCast(
-            a4,
+    Owner = TESObjectREFR_GetOwner(reference); /*0x6609f4*/
+    v13 = OblivionDynamicCast( /*0x660a00*/
+            reference,
             0,
             (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
             &ArrowProjectile `RTTI Type Descriptor',
             0);
-    if ( !Owner
-      || TESOBjectREFR_IsOwnedBy(a4, (TESObjectREFR *)a1, 1)
-      || v16
-      || a4->vtbl->GetBaseForm(a4)->member.refID == 0xF )
+    if ( !Owner /*0x660a32*/
+      || TESObjectREFR_IsOwnedBy(reference, (TESObjectREFR *)this, 1)
+      || v13
+      || reference->vtbl->GetBaseForm(reference)->member.refID == 0xF )
     {
-      p_baseExtraList = &a4->member.baseExtraList;
+      p_baseExtraList = &reference->member.baseExtraList; /*0x660acc*/
 LABEL_24:
-      ExtraDataList_RemoveOwner(p_baseExtraList);
-      goto LABEL_25;
+      ExtraDataList_RemoveOwner(p_baseExtraList); /*0x660acf*/
+      goto LABEL_25; /*0x660acf*/
     }
-    v17 = sub_676480((int)&ActorProcessManager_ptr, a4);
-    v18 = (a4->member.super.flags & 1) == 0;
-    dword_B3BAF0 = (int)v17;
-    if ( !v18 || OverrideFile || (sub_4D8260((int)a4, 2), v19) )
+    v14 = sub_676480((int)&qword_B3BB2C[0x75], reference); /*0x660a3e*/
+    v15 = (reference->member.super.flags & 1) == 0; /*0x660a43*/
+    unk_B3BAF0 = (int)v14; /*0x660a47*/
+    if ( !v15 || OverrideFile || (sub_4D8260((int)reference, 2u), v16) ) /*0x660a5f*/
     {
-      v20 = (void (__thiscall **)(int))(*(_DWORD *)a1 + 0x238);
-      v36 = ((int (__thiscall *)(TESObjectREFR *, signed int, _DWORD, TESForm *))a4->vtbl->GetBaseForm)(
-              a4,
-              a5,
+      p_Unk_8E = &this->vtbl->super.Unk_8E; /*0x660aa4*/
+      v33 = ((int (__thiscall *)(TESObjectREFR *, int, _DWORD, TESForm *))reference->vtbl->GetBaseForm)( /*0x660aac*/
+              reference,
+              arg1,
               0,
               Owner);
-      v35 = a4;
+      v32 = reference; /*0x660aad*/
     }
     else
     {
-      if ( !dword_B3BAF0 )
-        goto LABEL_21;
-      v20 = (void (__thiscall **)(int))(*(_DWORD *)a1 + 0x238);
-      v36 = ((int (__thiscall *)(TESObjectREFR *, signed int, _DWORD, TESForm *))a4->vtbl->GetBaseForm)(
-              a4,
-              a5,
+      if ( !unk_B3BAF0 ) /*0x660a68*/
+        goto LABEL_21; /*0x660a68*/
+      p_Unk_8E = &this->vtbl->super.Unk_8E; /*0x660a7e*/
+      v33 = ((int (__thiscall *)(TESObjectREFR *, int, _DWORD, TESForm *))reference->vtbl->GetBaseForm)( /*0x660a8c*/
+              reference,
+              arg1,
               0,
               Owner);
-      v35 = (TESObjectREFR *)dword_B3BAF0;
+      v32 = (TESObjectREFR *)unk_B3BAF0; /*0x660a8d*/
     }
-    (*v20)(a1);
+    (*p_Unk_8E)((Actor *)this); /*0x660ab2*/
 LABEL_21:
-    v21 = sub_4DE880(a4, 0);
-    p_baseExtraList = &a4->member.baseExtraList;
-    if ( !v21 )
+    v18 = sub_4DE880(reference, 0); /*0x660ab4*/
+    p_baseExtraList = &reference->member.baseExtraList; /*0x660abf*/
+    if ( !v18 ) /*0x660ac2*/
     {
-      ExtraDataList::SetOrRemoveExtraOwnership(p_baseExtraList, Owner);
-      goto LABEL_25;
+      ExtraDataList::SetOrRemoveExtraOwnership(p_baseExtraList, Owner); /*0x660ac5*/
+      goto LABEL_25; /*0x660aca*/
     }
-    goto LABEL_24;
+    goto LABEL_24; /*0x660ac2*/
   }
 LABEL_25:
-  v23 = 0;
-  if ( (*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x58) + 0xF4))(*(_DWORD *)(a1 + 0x58), 1) )
+  v20 = 0; /*0x660ad4*/
+  if ( this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1) ) /*0x660ae3*/
   {
-    v24 = *(TESForm **)((*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x58) + 0xF4))(
-                          *(_DWORD *)(a1 + 0x58),
-                          1)
-                      + 8);
-    if ( a4->vtbl->GetBaseForm(a4) == v24 )
+    type = this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1)->type; /*0x660afc*/
+    if ( reference->vtbl->GetBaseForm(reference) == type )// Equipped-AMMO fast merge: requires picked reference base form to equal the currently equipped AMMO form. On success this path bypasses both form-based ContainerExtraData_AddItem (0x48F7C0) and reference-based ContainerExtraData_AddItemFromWorldReference (0x48AA10). /*0x660b0d*/
     {
-      v25 = (int *)(*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x58) + 0xF4))(*(_DWORD *)(a1 + 0x58), 1);
-      if ( !sub_4847C0(v25) || ExtraDataList_GetOwner(&a4->member.baseExtraList) )
+      v22 = (int *)this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1); /*0x660b20*/
+      if ( !EntryData_HasDefaultContainerExtraList(v22) || ExtraDataList_GetOwner(&reference->member.baseExtraList) ) /*0x660b30*/
       {
-        ExtraCount = ExtraDataList_GetExtraCount(&a4->member.baseExtraList);
-        v27 = (Sky *)(*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x58) + 0xF4))(*(_DWORD *)(a1 + 0x58), 1);
-        v28 = (char *)TESHealthForm_GetHealth(v27) + ExtraCount;
-        v29 = (_DWORD *)(*(int (__thiscall **)(_DWORD, int, char *))(**(_DWORD **)(a1 + 0x58) + 0xF4))(
-                          *(_DWORD *)(a1 + 0x58),
-                          1,
-                          v28);
-        sub_60D020(v29, (int)v35);
-        v30 = (*(int (__thiscall **)(_DWORD, int, int))(**(_DWORD **)(a1 + 0x58) + 0xF4))(
-                *(_DWORD *)(a1 + 0x58),
+        ExtraCount = ExtraDataList_GetExtraCount(&reference->member.baseExtraList); /*0x660b4a*/
+        v24 = (TESHealthForm *)this->super.super.super.process->GetEquippedAmmoData(this->super.super.super.process, 1); /*0x660b57*/
+        v25 = TESHealthForm_GetHealth(v24) + ExtraCount; /*0x660b63*/
+        v26 = (void *)((int (__thiscall *)(LowProcess *, int, int))this->super.super.super.process->GetEquippedAmmoData)( /*0x660b70*/
+                        this->super.super.super.process,
+                        1,
+                        v25);
+        Shared_SetDwordAtOffset04(v26, (int)v32); /*0x660b74*/
+        v27 = ((int (__thiscall *)(LowProcess *, int, int))this->super.super.super.process->GetEquippedAmmoData)( /*0x660b86*/
+                this->super.super.super.process,
                 1,
-                v36);
-        v38 = &TESDataHandler_g_PlayerRef->super.super.super.super.baseExtraList;
-        v37 = *(_DWORD *)(v30 + 8);
-        v34 = ExtraDataList_GetExtraCount(&a4->member.baseExtraList);
-        ContainerChanges = ExtraDataList_GetContainerChanges(v38);
-        sub_487350(ContainerChanges, v37, v34);
-        v32 = (ExtraDataList ***)(*(int (__thiscall **)(_DWORD, int))(**(_DWORD **)(a1 + 0x58) + 0xF4))(
-                                   *(_DWORD *)(a1 + 0x58),
+                v33);
+        v35 = &::reference->super.super.super.super.baseExtraList; /*0x660b94*/
+        form = *(TESForm **)(v27 + 8); /*0x660b9a*/
+        v31 = ExtraDataList_GetExtraCount(&reference->member.baseExtraList); /*0x660bae*/
+        ContainerChanges = ExtraDataList_GetContainerChanges(v35); /*0x660bb0*/
+        ExtraContainerChanges_AdjustCountForForm(ContainerChanges, form, v31); /*0x660bb7*/
+        v29 = (ExtraDataList ***)this->super.super.super.process->GetEquippedAmmoData( /*0x660bc9*/
+                                   this->super.super.super.process,
                                    1);
-        ExtraDataList_SetExtraCount(**v32, (int)v28);
-        v23 = 1;
+        ExtraDataList_SetExtraCount(**v29, v25);// Write the merged total into the selected equipped-AMMO ExtraDataList and mark fast-merge success, suppressing both ordinary inventory-add boundaries. A proxy-to-WEAP recovery hook must account for this separate path if it can become reachable. /*0x660bd0*/
+        v20 = 1; /*0x660bd5*/
       }
     }
   }
-  if ( (a4->member.super.flags & 1) == 0 && !OverrideFile )
+  if ( (reference->member.super.flags & 1) == 0 && !OverrideFile ) /*0x660be6*/
   {
-    sub_4D8260((int)a4, 2);
-    if ( v33 )
+    sub_4D8260((int)reference, 2u); /*0x660bf0*/
+    if ( v30 ) /*0x660bf7*/
     {
-      sub_4D7D80(a4);
-      if ( !v23 )
+      sub_4D7D80(reference); /*0x660bfb*/
+      if ( !v20 ) /*0x660c02*/
       {
-        sub_4DDC40((TESObjectREFR *)a1, a4, a5, 0, 0);
-        sub_57A3B0(a2, a3, 0);
-        return;
+        TESObjectREFR_AddItemFromWorldReference((TESObjectREFR *)this, reference, arg1, 0, 0);// Player world-pickup branch uses the reference-based insertion path, not form-based ContainerExtraData_AddItem. /*0x660c10*/
+        sub_57A3B0(v4, 0); /*0x660c17*/
+        return; /*0x660c26*/
       }
     }
     else
     {
-      if ( !v23 )
-        sub_4DDC40((TESObjectREFR *)a1, a4, a5, 0, 0);
-      a4->vtbl->super.Destroy((TESForm *)a4, 1);
-      if ( !v23 )
-        goto LABEL_39;
+      if ( !v20 ) /*0x660c2b*/
+        TESObjectREFR_AddItemFromWorldReference((TESObjectREFR *)this, reference, arg1, 0, 0);// Player world-pickup branch uses the reference-based insertion path, preserving sourceRef->GetBaseForm(). /*0x660c39*/
+      reference->vtbl->super.Destroy((TESForm *)reference, 1); /*0x660c47*/
+      if ( !v20 ) /*0x660c4b*/
+        goto LABEL_39; /*0x660c4b*/
     }
 LABEL_38:
-    sub_5F8300((TESObjectREFR *)a1, *(_DWORD *)(a1 + 0x104), 0);
-    sub_5F8300((TESObjectREFR *)a1, *(_DWORD *)(a1 + 0x5C8), 0);
+    Actor_RefreshQuiverArrowVisibility((Actor *)this, (ActorAnimData *)this->super.skinInfo, 0); /*0x660c4d*/
+    Actor_RefreshQuiverArrowVisibility((Actor *)this, (ActorAnimData *)this->firstPersonSkinInfo, 0); /*0x660c68*/
 LABEL_39:
-    sub_57A3B0(a2, a3, 0);
-    return;
+    sub_57A3B0(v4, 0); /*0x660c6d*/
+    return; /*0x660c7e*/
   }
-  sub_4D7D80(a4);
-  if ( v23 )
-    goto LABEL_38;
-  sub_4DDC40((TESObjectREFR *)a1, a4, a5, a6, 0);
-  sub_57A3B0(a2, a3, 0);
+  sub_4D7D80(reference); /*0x660c83*/
+  if ( v20 ) /*0x660c8a*/
+    goto LABEL_38; /*0x660c8a*/
+  TESObjectREFR_AddItemFromWorldReference((TESObjectREFR *)this, reference, arg1, arg2, 0);// Player world-pickup branch uses the reference-based insertion path; an AMMO-backed thrown reference therefore yields proxy AMMO without a companion hook here. /*0x660c9b*/
+  sub_57A3B0(v4, 0); /*0x660ca2*/
 }

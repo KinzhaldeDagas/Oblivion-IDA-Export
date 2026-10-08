@@ -76,7 +76,7 @@
 0x6011A6: fnstsw  ax
 0x6011A8: test    ah, 5
 0x6011AB: jnp     loc_601659
-0x6011B1: mov     edi, dword ptr [esp+30h+arg_10]
+0x6011B1: mov     edi, [esp+30h+arg_10]
 0x6011B5: mov     edx, [esi]
 0x6011B7: test    edi, edi
 0x6011B9: setnle  al
@@ -91,7 +91,7 @@
 0x6011D6: mov     ecx, esi
 0x6011D8: call    eax
 0x6011DA: test    edi, edi
-0x6011DC: mov     dword ptr [esp+30h+arg_10], 0
+0x6011DC: mov     [esp+30h+arg_10], 0
 0x6011E4: jnz     short loc_60122A
 0x6011E6: mov     ecx, [esi+58h]
 0x6011E9: test    ecx, ecx
@@ -115,10 +115,10 @@
 0x60121B: push    edi
 0x60121C: push    ebp
 0x60121D: call    eax
-0x60121F: call    Double_To_SInt32
-0x601224: mov     dword ptr [esp+30h+arg_10], eax
+0x60121F: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x601224: mov     [esp+30h+arg_10], eax
 0x601228: jmp     short loc_60122E
-0x60122A: mov     dword ptr [esp+30h+arg_10], edi
+0x60122A: mov     [esp+30h+arg_10], edi
 0x60122E: mov     edx, [esi]
 0x601230: mov     eax, [edx+334h]
 0x601236: push    1
@@ -150,7 +150,7 @@
 0x601282: jmp     short loc_60128A
 0x601284: mov     dword ptr [esp+30h+var_1C], eax
 0x601288: mov     ebp, eax
-0x60128A: call    sub_579540
+0x60128A: call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.
 0x60128F: cmp     eax, esi
 0x601291: jnz     short loc_60129D
 0x601293: push    0
@@ -210,7 +210,7 @@
 0x601327: push    1
 0x601329: push    eax
 0x60132A: mov     ecx, esi
-0x60132C: call    Actor_EquipItem
+0x60132C: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x601331: cmp     byte ptr [ebp+90h], 5
 0x601338: jnz     short loc_601361
 0x60133A: mov     edx, [esi]
@@ -222,16 +222,16 @@
 0x60134A: mov     ebp, [edi+8]
 0x60134D: push    1
 0x60134F: push    0
-0x601351: mov     ecx, edi
-0x601353: call    TESHealthForm_GetHealth
+0x601351: mov     ecx, edi; this
+0x601353: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x601358: push    eax
 0x601359: push    ebp
 0x60135A: mov     ecx, esi
-0x60135C: call    Actor_EquipItem
+0x60135C: call    Actor_EquipItem; UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 0x601361: mov     ecx, edi
 0x601363: call    ContainerEntryExtraData_DestroyDataTable
 0x601368: push    edi
-0x601369: call    FormHeapFree
+0x601369: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60136E: mov     ebp, dword ptr [esp+34h+var_1C]
 0x601372: add     esp, 4
 0x601375: cmp     byte ptr [esp+30h+arg_4], 0
@@ -282,7 +282,7 @@
 0x6013F7: push    0
 0x6013F9: call    eax
 0x6013FB: mov     ecx, eax
-0x6013FD: call    sub_41A610
+0x6013FD: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x601402: mov     ecx, [esi+58h]
 0x601405: mov     edx, [ecx]
 0x601407: mov     eax, [edx+50h]
@@ -313,7 +313,7 @@
 0x601446: push    0
 0x601448: call    edx
 0x60144A: mov     ecx, eax
-0x60144C: call    sub_419F10
+0x60144C: call    MagicItem_UnloadVFXModels; MagicItem VFX model unload path. Walks spell art and effect-item VFX model references (weapons, armor, NPC/creature models, etc.) and removes them from the queued model loader/cache.
 0x601451: mov     ecx, [esi+58h]
 0x601454: mov     eax, [ecx]
 0x601456: mov     edx, [eax+54h]
@@ -332,21 +332,21 @@
 0x60147B: push    0
 0x60147D: call    edx
 0x60147F: mov     ecx, eax
-0x601481: call    sub_41A610
+0x601481: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x601486: jmp     loc_601659
 0x60148B: mov     edi, [esp+30h+arg_0]
 0x60148F: mov     ecx, esi; int
-0x601491: call    sub_5EAE70
+0x601491: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x601496: mov     ecx, [esi+58h]
 0x601499: mov     eax, [ecx]
 0x60149B: mov     edx, [eax+178h]
 0x6014A1: push    0
 0x6014A3: call    edx
 0x6014A5: mov     eax, [esi+58h]
-0x6014A8: mov     ecx, [eax+8]
+0x6014A8: mov     ecx, [eax+8]; self
 0x6014AB: test    ecx, ecx
 0x6014AD: jz      short loc_6014F5
-0x6014AF: call    sub_5660A0
+0x6014AF: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x6014B4: test    al, al
 0x6014B6: jnz     short loc_6014F5
 0x6014B8: mov     edi, [esi+58h]
@@ -380,7 +380,7 @@
 0x601508: mov     dword ptr [esp+30h+var_4], 0
 0x601510: jz      short loc_601529
 0x601512: mov     ecx, [esp+30h+var_14]
-0x601516: mov     edx, dword ptr [esp+30h+arg_10]
+0x601516: mov     edx, [esp+30h+arg_10]
 0x60151A: push    ecx
 0x60151B: push    edx
 0x60151C: push    edi
@@ -395,7 +395,7 @@
 0x601538: jz      short loc_601543
 0x60153A: push    7
 0x60153C: mov     ecx, edi
-0x60153E: call    sub_612DE0
+0x60153E: call    CombatController_SetCombatMode; Sets CombatController+0x70 active mode (0 H2H, 1 melee weapon, 2 ranged weapon, 3 touch spell, 4 ranged spell, 5 yield, 7 flee, 0xA switch weapon, 0xC leave water) and invalidates desired-distance cache +0x188.
 0x601543: cmp     byte ptr [esp+30h+arg_4], 0
 0x601548: jz      short loc_60154E
 0x60154A: mov     byte ptr [edi+4Dh], 1
@@ -439,7 +439,7 @@
 0x6015A6: push    0; a3
 0x6015A8: push    edi; a2
 0x6015A9: mov     ecx, esi; this
-0x6015AB: call    Actor_AddPackage?
+0x6015AB: call    Actor_AddPackage?; 3DTheft: xrefs ignore this function's return value; use current package/process state after call, not AL/EAX, as the package assignment result.
 0x6015B0: mov     ebp, [esp+30h+arg_0]
 0x6015B4: jmp     short loc_60162F
 0x6015B6: mov     edx, [esi]
@@ -455,12 +455,12 @@
 0x6015D6: mov     ecx, esi
 0x6015D8: call    eax
 0x6015DA: mov     ecx, eax
-0x6015DC: call    sub_6135F0
+0x6015DC: call    CombatController_GetCurrentTarget
 0x6015E1: cmp     eax, ebp
 0x6015E3: jz      short loc_60162F
 0x6015E5: fld     dword ptr ds:0A31E2Ch
 0x6015EB: mov     ecx, [esp+30h+var_14]
-0x6015EF: mov     edx, dword ptr [esp+30h+arg_10]
+0x6015EF: mov     edx, [esp+30h+arg_10]
 0x6015F3: fstp    dword ptr [esi+0ACh]
 0x6015F9: fldz
 0x6015FB: mov     eax, [esi]
@@ -474,7 +474,7 @@
 0x601610: mov     ecx, esi
 0x601612: call    edx
 0x601614: mov     ecx, eax
-0x601616: call    sub_616190
+0x601616: call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x60161B: mov     eax, [esi]
 0x60161D: mov     edx, [eax+330h]
 0x601623: push    ebp
@@ -504,3 +504,15 @@
 0x601668: pop     ebx
 0x601669: add     esp, 1Ch
 0x60166C: retn    18h
+0x9C2BD0: mov     eax, [ebp+18h]
+0x9C2BD3: push    eax
+0x9C2BD4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2BD9: pop     ecx
+0x9C2BDA: retn
+0x9C2BDB: mov     edx, [esp+arg_4]
+0x9C2BDF: lea     eax, [edx-20h]
+0x9C2BE2: mov     ecx, [edx-24h]
+0x9C2BE5: xor     ecx, eax
+0x9C2BE7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2BEC: mov     eax, offset stru_AEB948
+0x9C2BF1: jmp     ___CxxFrameHandler3

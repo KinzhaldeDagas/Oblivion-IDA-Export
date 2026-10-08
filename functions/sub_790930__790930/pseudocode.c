@@ -1,40 +1,43 @@
-void __cdecl sub_790930(_DWORD *a1, _DWORD *a2)
+// Insertion-sorts a short CBranch pointer range by fuzzyBranchVolume. Finds the insertion point and rotates [point,current,current+1) through the dedicated pointer-range helper.
+void __cdecl OB_BranchPtrVector_InsertionSortByFuzzyVolume_010201A0(
+        OB_CBranch_010201A0 **begin,
+        OB_CBranch_010201A0 **end)
 {
-  _DWORD *v2; // esi
-  _DWORD *v3; // ebx
-  _DWORD *v4; // edx
-  _DWORD *i; // ecx
-  double v6; // st6
+  OB_CBranch_010201A0 **v2; // esi
+  OB_CBranch_010201A0 **v3; // ebx
+  OB_CBranch_010201A0 **v4; // edx
+  OB_CBranch_010201A0 **i; // ecx
+  double fuzzyBranchVolume; // st6
 
-  if ( a1 != a2 )
+  if ( begin != end ) /*0x79093b*/
   {
-    v2 = a1 + 1;
-    if ( a1 + 1 != a2 )
+    v2 = begin + 1; /*0x790942*/
+    if ( begin + 1 != end ) /*0x790947*/
     {
-      v3 = a1 + 2;
-      do
+      v3 = begin + 2; /*0x79094b*/
+      do /*0x7909ba*/
       {
-        if ( *(float *)(*a1 + 0x2C) >= (double)*(float *)(*v2 + 0x2C) )
+        if ( (*begin)->fuzzyBranchVolume >= (double)(*v2)->fuzzyBranchVolume ) /*0x790962*/
         {
-          v4 = v2;
-          for ( i = v2; ; v4 = i )
+          v4 = v2; /*0x790975*/
+          for ( i = v2; ; v4 = i ) /*0x790977*/
           {
-            v6 = *(float *)(i[0xFFFFFFFF] + 0x2C);
-            i += 0xFFFFFFFF;
-            if ( v6 >= *(float *)(*v2 + 0x2C) )
-              break;
+            fuzzyBranchVolume = i[0xFFFFFFFF]->fuzzyBranchVolume; /*0x790986*/
+            i += 0xFFFFFFFF; /*0x790989*/
+            if ( fuzzyBranchVolume >= (*v2)->fuzzyBranchVolume ) /*0x790993*/
+              break; /*0x790993*/
           }
-          if ( v4 != v2 && v2 != v3 )
-            sub_78FC20(v4, (int)v2, v3);
+          if ( v4 != v2 && v2 != v3 ) /*0x79099f*/
+            OB_BranchPtrVector_RotateRange_010201A0(v4, v2, v3); /*0x7909a8*/
         }
-        else if ( a1 != v2 && v2 != v3 )
+        else if ( begin != v2 && v2 != v3 ) /*0x79096a*/
         {
-          sub_78FC20(a1, (int)v2, v3);
+          OB_BranchPtrVector_RotateRange_010201A0(begin, v2, v3); /*0x790973*/
         }
-        ++v2;
-        ++v3;
+        ++v2; /*0x7909b0*/
+        ++v3; /*0x7909b3*/
       }
-      while ( v2 != a2 );
+      while ( v2 != end ); /*0x7909ba*/
     }
   }
 }

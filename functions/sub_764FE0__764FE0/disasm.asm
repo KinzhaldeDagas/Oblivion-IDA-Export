@@ -1,4 +1,4 @@
-0x764FE0: sub     esp, 20h
+0x764FE0: sub     esp, 20h; Oblivion-authoritative NiDX9Renderer::FastCopy. Rejects lost-device, missing-surface, and incompatible-format cases; converts an optional source rectangle plus destination X/Y into D3D RECTs and calls IDirect3DDevice9::StretchRect with D3DTEXF_NONE. Intended for format-compatible copies.
 0x764FE3: push    ebx
 0x764FE4: mov     ebx, ecx
 0x764FE6: cmp     byte ptr [ebx+6F0h], 0
@@ -7,8 +7,8 @@
 0x764FF1: pop     ebx
 0x764FF2: add     esp, 20h
 0x764FF5: retn    14h
-0x764FF8: mov     eax, [esp+24h+arg_0]
-0x764FFC: mov     ecx, [esp+24h+arg_4]; void *
+0x764FF8: mov     eax, [esp+24h+source]
+0x764FFC: mov     ecx, [esp+24h+destination]; this
 0x765000: push    esi
 0x765001: mov     esi, [eax+10h]
 0x765004: test    esi, esi
@@ -38,7 +38,7 @@
 0x765048: jz      loc_7650F5
 0x76504E: test    edi, edi
 0x765050: jz      loc_7650F5
-0x765056: mov     eax, [esp+2Ch+arg_8]
+0x765056: mov     eax, [esp+2Ch+sourceRect]
 0x76505A: test    eax, eax
 0x76505C: jz      short loc_765079
 0x76505E: mov     edx, [eax]
@@ -49,13 +49,13 @@
 0x76506E: mov     [esp+2Ch+var_1C], edx
 0x765072: mov     edx, [eax+0Ch]
 0x765075: mov     [esp+2Ch+var_14], edx
-0x765079: mov     edx, [esp+2Ch+arg_C]
+0x765079: mov     edx, [esp+2Ch+destinationX]
 0x76507D: mov     esi, [esp+2Ch+var_18]
 0x765081: add     esi, edx
 0x765083: mov     [esp+2Ch+var_8], esi
 0x765087: mov     esi, [esp+2Ch+var_14]
 0x76508B: mov     [esp+2Ch+var_10], edx
-0x76508F: mov     edx, [esp+2Ch+arg_10]
+0x76508F: mov     edx, [esp+2Ch+destinationY]
 0x765093: add     esi, edx
 0x765095: test    eax, eax
 0x765097: mov     eax, [ebx+280h]
@@ -69,7 +69,7 @@
 0x7650B0: push    edi
 0x7650B1: lea     esi, [esp+38h+var_20]
 0x7650B5: push    esi
-0x7650B6: jmp     short loc_7650BD
+0x7650B6: jmp     short loc_7650BD; FastCopy StretchRect commit: source/destination surfaces with optional rectangles, filter D3DTEXF_NONE.
 0x7650B8: push    0
 0x7650BA: push    edi
 0x7650BB: push    0
@@ -79,11 +79,11 @@
 0x7650C5: call    eax
 0x7650C7: test    eax, eax
 0x7650C9: jge     short loc_7650EA
-0x7650CB: push    eax
-0x7650CC: call    sub_7736F0
+0x7650CB: push    eax; hresult
+0x7650CC: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x7650D1: push    eax
 0x7650D2: push    offset aNidx9rendererF; "NiDX9Renderer::FastCopy> Failed Stretch"...
-0x7650D7: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7650D7: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7650DC: add     esp, 0Ch
 0x7650DF: pop     edi
 0x7650E0: pop     esi
@@ -101,7 +101,7 @@
 0x7650FA: jmp     short loc_765101
 0x7650FC: push    offset aNoRendererdata; "No RendererData found"
 0x765101: push    offset aNidx9render_22; "NiDX9Renderer::FastCopy> Failed - %s"
-0x765106: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x765106: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76510B: add     esp, 8
 0x76510E: pop     edi
 0x76510F: pop     esi

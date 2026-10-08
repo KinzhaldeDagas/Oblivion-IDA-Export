@@ -1,142 +1,148 @@
-unsigned int __cdecl strtoxl(struct localeinfo_struct *a1, const char *a2, const char **a3, unsigned int a4, int a5)
+unsigned int __usercall strtoxl@<eax>(
+        int a1@<ebx>,
+        struct localeinfo_struct *a2,
+        const char *a3,
+        const char **a4,
+        int a5,
+        int a6)
 {
   pthreadlocinfo locinfo; // ecx
-  char v7; // bl
+  char v8; // bl
   const char *i; // edi
-  int v9; // eax
-  _BYTE *v10; // edi
+  int v10; // eax
+  _BYTE *v11; // edi
   const unsigned __int16 *pctype; // esi
-  unsigned int v12; // eax
-  unsigned __int16 v13; // cx
-  unsigned int v14; // ecx
-  int v15; // ecx
-  const char *v16; // edi
+  unsigned int v13; // eax
+  unsigned __int16 v14; // cx
+  unsigned int v15; // ecx
+  int v16; // ecx
+  const char *v17; // edi
   struct localeinfo_struct Locale; // [esp+8h] [ebp-14h] BYREF
-  int v18; // [esp+10h] [ebp-Ch]
-  char v19; // [esp+14h] [ebp-8h]
-  unsigned int v20; // [esp+18h] [ebp-4h]
+  int v19; // [esp+10h] [ebp-Ch]
+  char v20; // [esp+14h] [ebp-8h]
+  unsigned int v21; // [esp+18h] [ebp-4h]
 
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&Locale, a1);
-  if ( a3 )
-    *a3 = a2;
-  if ( !a2 || a4 && ((int)a4 < 2 || (int)a4 > 0x24) )
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&Locale, a2); /*0x982979*/
+  if ( a4 ) /*0x982988*/
+    *a4 = a3; /*0x98298a*/
+  if ( !a3 || a5 && (a5 < 2 || a5 > 0x24) ) /*0x9829cb*/
   {
-    *_errno() = 0x16;
-    _invalid_parameter(0, 0, 0, 0, 0);
-    if ( v19 )
-      *(_DWORD *)(v18 + 0x70) &= ~2u;
-    return 0;
+    *_errno() = 0x16; /*0x98299a*/
+    _invalid_parameter(a1, 0, (int)a3); /*0x9829a0*/
+    if ( v20 ) /*0x9829ac*/
+      *(_DWORD *)(v19 + 0x70) &= ~2u; /*0x9829b1*/
+    return 0; /*0x9829b7*/
   }
-  locinfo = Locale.locinfo;
-  v7 = *a2;
-  v20 = 0;
-  for ( i = a2 + 1; ; ++i )
+  locinfo = Locale.locinfo; /*0x9829cd*/
+  v8 = *a3; /*0x9829d1*/
+  v21 = 0; /*0x9829d3*/
+  for ( i = a3 + 1; ; ++i ) /*0x9829d6*/
   {
-    if ( locinfo->mb_cur_max <= 1 )
+    if ( locinfo->mb_cur_max <= 1 ) /*0x9829e0*/
     {
-      v9 = locinfo->pctype[(unsigned __int8)v7] & 8;
+      v10 = locinfo->pctype[(unsigned __int8)v8] & 8; /*0x982a06*/
     }
     else
     {
-      v9 = _isctype_l((unsigned __int8)v7, 8, (_locale_t)&Locale);
-      locinfo = Locale.locinfo;
+      v10 = _isctype_l((unsigned __int8)v8, 8, (_locale_t)&Locale); /*0x9829ec*/
+      locinfo = Locale.locinfo; /*0x9829f1*/
     }
-    if ( !v9 )
-      break;
-    v7 = *i;
+    if ( !v10 ) /*0x982a0b*/
+      break; /*0x982a0b*/
+    v8 = *i; /*0x982a0d*/
   }
-  if ( v7 == 0x2D )
+  if ( v8 == 0x2D ) /*0x982a15*/
   {
-    a5 |= 2u;
+    a6 |= 2u; /*0x982a17*/
   }
-  else if ( v7 != 0x2B )
+  else if ( v8 != 0x2B ) /*0x982a20*/
   {
-    goto LABEL_20;
+    goto LABEL_20; /*0x982a20*/
   }
-  v7 = *i++;
+  v8 = *i++; /*0x982a22*/
 LABEL_20:
-  if ( !a4 )
+  if ( !a5 ) /*0x982a44*/
   {
-    if ( v7 != 0x30 )
+    if ( v8 != 0x30 ) /*0x982a49*/
     {
-      a4 = 0xA;
-      goto LABEL_32;
+      a5 = 0xA; /*0x982a4b*/
+      goto LABEL_32; /*0x982a52*/
     }
-    if ( *i != 0x78 && *i != 0x58 )
+    if ( *i != 0x78 && *i != 0x58 ) /*0x982a5c*/
     {
-      a4 = 8;
-      goto LABEL_32;
+      a5 = 8; /*0x982a5e*/
+      goto LABEL_32; /*0x982a65*/
     }
-    a4 = 0x10;
-    goto LABEL_29;
+    a5 = 0x10; /*0x982a67*/
+    goto LABEL_29; /*0x982a6e*/
   }
-  if ( a4 == 0x10 && v7 == 0x30 )
+  if ( a5 == 0x10 && v8 == 0x30 ) /*0x982a78*/
   {
 LABEL_29:
-    if ( *i == 0x78 || *i == 0x58 )
+    if ( *i == 0x78 || *i == 0x58 ) /*0x982a82*/
     {
-      v10 = i + 1;
-      v7 = *v10;
-      i = v10 + 1;
+      v11 = i + 1; /*0x982a84*/
+      v8 = *v11; /*0x982a85*/
+      i = v11 + 1; /*0x982a87*/
     }
   }
 LABEL_32:
-  pctype = locinfo->pctype;
-  v12 = 0xFFFFFFFF / a4;
-  while ( 1 )
+  pctype = locinfo->pctype; /*0x982a88*/
+  v13 = 0xFFFFFFFF / a5; /*0x982a93*/
+  while ( 1 ) /*0x982a99*/
   {
-    v13 = pctype[(unsigned __int8)v7];
-    if ( (v13 & 4) != 0 )
+    v14 = pctype[(unsigned __int8)v8]; /*0x982a99*/
+    if ( (v14 & 4) != 0 ) /*0x982aa0*/
     {
-      v14 = v7 - 0x30;
+      v15 = v8 - 0x30; /*0x982aa5*/
     }
     else
     {
-      if ( (v13 & 0x103) == 0 )
-        break;
-      v15 = v7;
-      if ( (unsigned __int8)(v7 - 0x61) <= 0x19u )
-        v15 = v7 - 0x20;
-      v14 = v15 - 0x37;
+      if ( (v14 & 0x103) == 0 ) /*0x982aaf*/
+        break; /*0x982aaf*/
+      v16 = v8; /*0x982ab9*/
+      if ( (unsigned __int8)(v8 - 0x61) <= 0x19u ) /*0x982abc*/
+        v16 = v8 - 0x20; /*0x982abe*/
+      v15 = v16 - 0x37; /*0x982ac1*/
     }
-    if ( v14 >= a4 )
-      break;
-    a5 |= 8u;
-    if ( v20 < v12 || v20 == v12 && v14 <= 0xFFFFFFFF % a4 )
+    if ( v15 >= a5 ) /*0x982ac7*/
+      break; /*0x982ac7*/
+    a6 |= 8u; /*0x982ac9*/
+    if ( v21 < v13 || v21 == v13 && v15 <= 0xFFFFFFFF % a5 ) /*0x982ad6*/
     {
-      v20 = v14 + a4 * v20;
+      v21 = v15 + a5 * v21; /*0x982b02*/
     }
     else
     {
-      a5 |= 4u;
-      if ( !a3 )
-        break;
+      a6 |= 4u; /*0x982ad8*/
+      if ( !a4 ) /*0x982ae0*/
+        break; /*0x982ae0*/
     }
-    v7 = *i++;
+    v8 = *i++; /*0x982b05*/
   }
-  v16 = i + 0xFFFFFFFF;
-  if ( (a5 & 8) != 0 )
+  v17 = i + 0xFFFFFFFF; /*0x982ae2*/
+  if ( (a6 & 8) != 0 ) /*0x982ae8*/
   {
-    if ( (a5 & 4) != 0 || (a5 & 1) == 0 && ((a5 & 2) != 0 && v20 > 0x80000000 || (a5 & 2) == 0 && v20 > 0x7FFFFFFF) )
+    if ( (a6 & 4) != 0 || (a6 & 1) == 0 && ((a6 & 2) != 0 && v21 > 0x80000000 || (a6 & 2) == 0 && v21 > 0x7FFFFFFF) ) /*0x982b2c*/
     {
-      *_errno() = 0x22;
-      if ( (a5 & 1) != 0 )
-        v20 = 0xFFFFFFFF;
+      *_errno() = 0x22; /*0x982b37*/
+      if ( (a6 & 1) != 0 ) /*0x982b3d*/
+        v21 = 0xFFFFFFFF; /*0x982b3f*/
       else
-        v20 = ((a5 & 2) != 0) + 0x7FFFFFFF;
+        v21 = ((a6 & 2) != 0) + 0x7FFFFFFF; /*0x982b52*/
     }
   }
   else
   {
-    if ( a3 )
-      v16 = a2;
-    v20 = 0;
+    if ( a4 ) /*0x982aee*/
+      v17 = a3; /*0x982af0*/
+    v21 = 0; /*0x982af3*/
   }
-  if ( a3 )
-    *a3 = v16;
-  if ( (a5 & 2) != 0 )
-    v20 = -v20;
-  if ( v19 )
-    *(_DWORD *)(v18 + 0x70) &= ~2u;
-  return v20;
+  if ( a4 ) /*0x982b5a*/
+    *a4 = v17; /*0x982b5c*/
+  if ( (a6 & 2) != 0 ) /*0x982b62*/
+    v21 = -v21; /*0x982b64*/
+  if ( v20 ) /*0x982b6b*/
+    *(_DWORD *)(v19 + 0x70) &= ~2u; /*0x982b70*/
+  return v21; /*0x982b92*/
 }

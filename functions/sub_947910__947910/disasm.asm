@@ -73,7 +73,6 @@
 0x9479C7: test    edi, edi
 0x9479C9: jle     short loc_9479E0
 0x9479CB: jmp     short loc_9479D0
-0x9479CD: align 10h
 0x9479D0: mov     dl, [eax+1]
 0x9479D3: mov     cl, [eax]
 0x9479D5: mov     [eax], dl

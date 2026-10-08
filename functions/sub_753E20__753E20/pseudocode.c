@@ -13,21 +13,21 @@ void __thiscall sub_753E20(float *this, int a2, int a3)
   float v15; // [esp+20h] [ebp-4h]
   float v16; // [esp+2Ch] [ebp+8h]
 
-  for ( i = 0; i < *(_WORD *)(a3 + 0x48); v6[2] = v6[2] + v15 )
+  for ( i = 0; i < *(_WORD *)(a3 + 0x48); v6[2] = v6[2] + v15 ) /*0x753e2c*/
   {
-    v6 = (float *)(*(_DWORD *)(a3 + 0x5C) + 0x1C * i);
-    v7 = rand();
-    v10 = ((double)v7 + (double)v7) / dbl_A3D5A8 - dbl_A2F928;
-    v8 = rand();
-    v11 = ((double)v8 + (double)v8) / dbl_A3D5A8 - dbl_A2F928;
-    v9 = rand();
-    ++i;
-    v12 = ((double)v9 + (double)v9) / dbl_A3D5A8 - dbl_A2F928;
-    v16 = *(this + 7);
-    v13 = v16 * v10;
-    v14 = v16 * v11;
-    v15 = v16 * v12;
-    *v6 = *v6 + v13;
-    v6[1] = v6[1] + v14;
+    v6 = (float *)(*(_DWORD *)(a3 + 0x5C) + 0x1C * i); /*0x753e4f*/
+    v7 = rand(); /*0x753e52*/
+    v10 = ((double)v7 + (double)v7) / dbl_A3D5A8 - dbl_A2F928; /*0x753e6d*/
+    v8 = rand(); /*0x753e71*/
+    v11 = ((double)v8 + (double)v8) / dbl_A3D5A8 - dbl_A2F928; /*0x753e8c*/
+    v9 = rand(); /*0x753e90*/
+    ++i; /*0x753e9d*/
+    v12 = ((double)v9 + (double)v9) / dbl_A3D5A8 - dbl_A2F928; /*0x753eae*/
+    v16 = *(this + 7); /*0x753eb5*/
+    v13 = v16 * v10; /*0x753ec3*/
+    v14 = v16 * v11; /*0x753ecd*/
+    v15 = v16 * v12; /*0x753ed5*/
+    *v6 = *v6 + v13; /*0x753edf*/
+    v6[1] = v6[1] + v14; /*0x753ee8*/
   }
 }

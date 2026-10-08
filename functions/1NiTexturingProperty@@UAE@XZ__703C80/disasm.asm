@@ -1,4 +1,4 @@
-0x703C80: push    0FFFFFFFFh
+0x703C80: push    0FFFFFFFFh; Verified cleanup ownership: nonnull map slots through end(+26) are virtually destroyed; null slots are safe. Optional shader-map array is destroyed, primary array +20 is freed, then base object is destroyed. Native-code fixture executes this routine with heap/base dependencies redirected and validates empty/1/7-map states.
 0x703C82: push    offset ??1NiTexturingProperty@@UAE@XZ_SEH
 0x703C87: mov     eax, large fs:0
 0x703C8D: push    eax
@@ -61,7 +61,7 @@
 0x703D22: mov     eax, [esi+20h]
 0x703D25: push    eax
 0x703D26: mov     dword ptr [esi+1Ch], offset ??_7?$NiTArray@PAVMap@NiTexturingProperty@@@@6B@; const NiTArray<NiTexturingProperty::Map *>::`vftable'
-0x703D2D: call    FormHeapFree
+0x703D2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x703D32: add     esp, 4
 0x703D35: mov     ecx, esi; this
 0x703D37: mov     [esp+1Ch+var_4], 0FFFFFFFFh
@@ -73,3 +73,21 @@
 0x703D51: pop     esi
 0x703D52: add     esp, 10h
 0x703D55: retn
+0x703C00: mov     eax, [ecx+4]
+0x703C03: push    eax
+0x703C04: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAVMap@NiTexturingProperty@@@@6B@; const NiTArray<NiTexturingProperty::Map *>::`vftable'
+0x703C0A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x703C0F: pop     ecx
+0x703C10: retn
+0x9C94D0: mov     ecx, [ebp-10h]; this
+0x9C94D3: jmp     j_??1NiDitherProperty@@UAE@XZ; NiDitherProperty::~NiDitherProperty(void)
+0x9C94D8: mov     ecx, [ebp-10h]
+0x9C94DB: add     ecx, 1Ch
+0x9C94DE: jmp     loc_703C00
+0x9C94E3: mov     edx, [esp+arg_4]
+0x9C94E7: lea     eax, [edx-0Ch]
+0x9C94EA: mov     ecx, [edx-10h]
+0x9C94ED: xor     ecx, eax
+0x9C94EF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C94F4: mov     eax, offset stru_AF1DA8
+0x9C94F9: jmp     ___CxxFrameHandler3

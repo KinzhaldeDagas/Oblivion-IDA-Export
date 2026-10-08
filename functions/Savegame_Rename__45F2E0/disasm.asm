@@ -1,4 +1,4 @@
-0x45F2E0: push    0FFFFFFFFh
+0x45F2E0: push    0FFFFFFFFh; Verified ABI: ECX save/load manager, stack existingFile/stem/mode, RET0Ch at45F78C. EBP carries mode through sprintf at45F3AD. aPortable resolver bridge duplicates five cdecl formatting arguments and passes EBP as sixth; offline compiled bridge test checks reads with10 backups and saves with1 versus10. Co-save allowance is SDK-derived: .obse adds one byte vs .ess, and backup sidecars need base+5+4*count+NUL within260.
 0x45F2E2: push    offset Savegame_Rename_SEH
 0x45F2E7: mov     eax, large fs:0
 0x45F2ED: push    eax
@@ -15,9 +15,9 @@
 0x45F30D: push    eax
 0x45F30E: lea     eax, [esp+648h+var_C]
 0x45F315: mov     large fs:0, eax
-0x45F31B: mov     ebx, [esp+648h+arg_0]
+0x45F31B: mov     ebx, [esp+648h+existingFile]
 0x45F322: test    ebx, ebx
-0x45F324: mov     ebp, [esp+648h+arg_8]
+0x45F324: mov     ebp, [esp+648h+mode]
 0x45F32B: mov     [esp+648h+var_630], ecx
 0x45F32F: mov     [esp+648h+var_62C], ebx
 0x45F333: jz      short loc_45F35D
@@ -32,7 +32,7 @@
 0x45F34D: cmp     ebp, 3; switch 4 cases
 0x45F350: ja      Savegame_Rename___def_45F356; jumptable 0045F356 default case, case 3
 0x45F356: jmp     ds:jpt_45F356[ebp*4]; switch jump
-0x45F35D: mov     eax, [esp+648h+arg_4]
+0x45F35D: mov     eax, [esp+648h+stem]
 0x45F364: test    eax, eax
 0x45F366: jnz     short loc_45F377
 0x45F368: lea     eax, [esp+648h+var_218]
@@ -46,22 +46,21 @@
 0x45F385: add     eax, 1
 0x45F388: test    cl, cl
 0x45F38A: jnz     short loc_45F380
-0x45F38C: mov     edx, ds:0B05564h
+0x45F38C: mov     edx, ds:0B05564h; ContinueFromLastSave decode: Savegame_Rename builds full path as GameSaveRoot + SaveSubdir + stem + .ess using globals 0x00B3F280 and *(0x00B05564).
 0x45F392: lea     ecx, [esp+648h+var_218]
 0x45F399: push    ecx
 0x45F39A: push    edx
-0x45F39B: push    offset word_B3F280
+0x45F39B: push    offset unk_B3F280
 0x45F3A0: lea     eax, [esp+654h+var_420]
 0x45F3A7: push    offset aSSS_ess; "%s%s%s.ess"
 0x45F3AC: push    eax
-0x45F3AD: call    __sprintf
+0x45F3AD: call    __sprintf; Verified aPortable bounds surface: resolver filename sprintf; subsequent backup path is OldFilename[256], capped 10 iterations with .bak appends. Validate root+stem+40+NUL before entering unsafe backup concatenation, not only MAX_PATH filename length.
 0x45F3B2: add     esp, 14h
 0x45F3B5: test    ebp, ebp
 0x45F3B7: jnz     short loc_45F34D
 0x45F3B9: xor     eax, eax
 0x45F3BB: jmp     short loc_45F3C0
-0x45F3BD: align 10h
-0x45F3C0: mov     cl, byte ptr ds:word_B3F280[eax]
+0x45F3C0: mov     cl, byte ptr ds:unk_B3F280[eax]
 0x45F3C6: mov     [esp+eax+648h+PathName], cl
 0x45F3CD: add     eax, 1
 0x45F3D0: test    cl, cl
@@ -69,7 +68,6 @@
 0x45F3D4: mov     eax, ds:0B05564h
 0x45F3D9: mov     edx, eax
 0x45F3DB: jmp     short loc_45F3E0
-0x45F3DD: align 10h
 0x45F3E0: mov     cl, [eax]
 0x45F3E2: add     eax, 1
 0x45F3E5: test    cl, cl
@@ -102,9 +100,8 @@
 0x45F43B: mov     bl, ds:0A3AAE4h
 0x45F441: mov     ebp, ds:0A3AAE0h
 0x45F447: jmp     short loc_45F450
-0x45F449: align 10h
 0x45F450: xor     eax, eax
-0x45F452: mov     cl, byte ptr ds:word_B3F280[eax]
+0x45F452: mov     cl, byte ptr ds:unk_B3F280[eax]
 0x45F458: mov     [esp+eax+648h+OldFilename], cl
 0x45F45C: add     eax, 1
 0x45F45F: test    cl, cl
@@ -167,7 +164,6 @@
 0x45F502: jnz     short loc_45F4E3
 0x45F504: xor     eax, eax
 0x45F506: jmp     short loc_45F510
-0x45F508: align 10h
 0x45F510: mov     cl, [esp+eax+648h+OldFilename]
 0x45F514: mov     [esp+eax+648h+FileName], cl
 0x45F51B: add     eax, 1
@@ -186,7 +182,6 @@
 0x45F544: jnz     short loc_45F562
 0x45F546: xor     eax, eax
 0x45F548: jmp     short loc_45F550
-0x45F54A: align 10h
 0x45F550: mov     cl, [esp+eax+648h+var_420]
 0x45F557: mov     [esp+eax+648h+OldFilename], cl
 0x45F55B: add     eax, 1
@@ -232,7 +227,7 @@
 0x45F5D4: sub     [esp+648h+var_634], 1
 0x45F5D9: jns     loc_45F450
 0x45F5DF: mov     ebx, [esp+648h+var_62C]
-0x45F5E3: mov     ebp, [esp+648h+arg_8]
+0x45F5E3: mov     ebp, [esp+648h+mode]
 0x45F5EA: jmp     loc_45F356
 0x45F5EF: test    ebx, ebx; jumptable 0045F356 case 0
 0x45F5F1: jz      loc_45F6BE
@@ -287,18 +282,18 @@
 0x45F68F: add     esp, 8
 0x45F692: test    eax, eax
 0x45F694: jnz     short loc_45F6AC
-0x45F696: push    eax
+0x45F696: push    eax; mode
 0x45F697: lea     ecx, [esp+64Ch+Str]
-0x45F69E: push    ecx
-0x45F69F: push    eax
-0x45F6A0: mov     ecx, esi
-0x45F6A2: call    Savegame_Rename
+0x45F69E: push    ecx; stem
+0x45F69F: push    eax; existingFile
+0x45F6A0: mov     ecx, esi; this
+0x45F6A2: call    TESSaveLoadGame_ResolveSaveFile
 0x45F6A7: jmp     loc_45F765
-0x45F6AC: push    0
-0x45F6AE: push    0
-0x45F6B0: push    0
-0x45F6B2: mov     ecx, esi
-0x45F6B4: call    Savegame_Rename
+0x45F6AC: push    0; mode
+0x45F6AE: push    0; stem
+0x45F6B0: push    0; existingFile
+0x45F6B2: mov     ecx, esi; this
+0x45F6B4: call    TESSaveLoadGame_ResolveSaveFile
 0x45F6B9: jmp     loc_45F765
 0x45F6BE: push    154h; Size
 0x45F6C3: call    FormHeapAlloc
@@ -326,7 +321,7 @@
 0x45F71A: jz      short loc_45F738
 0x45F71C: push    0
 0x45F71E: push    20000h
-0x45F723: push    0
+0x45F723: push    0; MEF v58 VERIFIED mode translation: ResolveSaveFile load flag1 does NOT mean BSFile mode1. This branch pushes constructor mode0;4309AE stores it atstream+20. BSFile_OpenFile42FE92/42FEAF chooses rb for mode0. Existing PERF4 and new SR1 native-read eligibility must require +20==0.
 0x45F725: lea     ecx, [esp+654h+var_420]
 0x45F72C: push    ecx
 0x45F72D: mov     ecx, eax
@@ -362,3 +357,24 @@
 0x45F781: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x45F786: add     esp, 634h
 0x45F78C: retn    0Ch
+0x9AE510: mov     eax, [ebp-630h]
+0x9AE516: push    eax
+0x9AE517: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE51C: pop     ecx
+0x9AE51D: retn
+0x9AE51E: mov     eax, [ebp-630h]
+0x9AE524: push    eax
+0x9AE525: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AE52A: pop     ecx
+0x9AE52B: retn
+0x9AE52C: mov     edx, [esp+stem]
+0x9AE530: lea     eax, [edx-638h]
+0x9AE536: mov     ecx, [edx-63Ch]
+0x9AE53C: xor     ecx, eax
+0x9AE53E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE543: add     eax, 10h
+0x9AE546: mov     ecx, [edx-4]
+0x9AE549: xor     ecx, eax
+0x9AE54B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE550: mov     eax, offset stru_ADAD4C
+0x9AE555: jmp     ___CxxFrameHandler3

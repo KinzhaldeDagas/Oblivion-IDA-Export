@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7E6710",
-    "line": "sub     esp, 0CCh",
+    "line": "sub     esp, 0CCh; MoonSugarEffect decode: TallGrassShader transform slot (+0x34). Calls sub_765480 with passed NiTransform, computes inverse/local wind or shadow constants, then falls through to base sub_779710. Transform-copy wobble reaches this but per-vertex grass motion is shader-owned.",
     "mnemonic": "sub",
     "size": 6
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x7E6729",
-    "line": "call    sub_765480",
+    "line": "call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x7E6882",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x7E68DD",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,13 +1249,13 @@
   },
   {
     "ea": "0x7E6A17",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7E6A19",
-    "line": "call    sub_7ED600",
+    "line": "call    BSShaderLightingProperty__CountFrustumVisibleEnabledLights; Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1423,7 +1423,7 @@
   },
   {
     "ea": "0x7E6A76",
-    "line": "call    sub_779710",
+    "line": "call    sub_779710; MoonSugar build 39: base shader +0x34 transform slot branches skinned partition to CalculateBoneMatrixes/sub_765560, otherwise pass-0 non-skinned to sub_765480. Confirms hardware skin needs separate post-flush hook.",
     "mnemonic": "call",
     "size": 5
   },

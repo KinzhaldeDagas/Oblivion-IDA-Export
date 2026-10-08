@@ -34,11 +34,11 @@
 0x4373B9: call    edx
 0x4373BB: push    eax
 0x4373BC: mov     ecx, esi
-0x4373BE: call    sub_434600
+0x4373BE: call    sub_434600; QueuedFileEntry path copy helper. Allocates and copies source path string into entry +0x20.
 0x4373C3: push    1
 0x4373C5: push    ebx
 0x4373C6: mov     ecx, esi
-0x4373C8: call    sub_434CB0
+0x4373C8: call    sub_434CB0; QueuedFileEntry archive lookup helper. Hashes copied path at +0x20 and stores resolved archive/file entry pointer at +0x24.
 0x4373CD: cmp     [esp+1Ch+arg_C], bl
 0x4373D1: jz      short loc_4373D9
 0x4373D3: or      byte ptr [esi+34h], 4
@@ -68,3 +68,15 @@
 0x43741E: pop     ebx
 0x43741F: add     esp, 10h
 0x437422: retn    18h
+0x9AC460: mov     ecx, [ebp-10h]; this
+0x9AC463: jmp     ??1LipTask@@UAE@XZ; LipTask::~LipTask(void)
+0x9AC468: mov     ecx, [ebp-10h]
+0x9AC46B: add     ecx, 28h ; '('
+0x9AC46E: jmp     loc_435A90
+0x9AC473: mov     edx, dword ptr [esp+a2]
+0x9AC477: lea     eax, [edx-0Ch]
+0x9AC47A: mov     ecx, [edx-10h]
+0x9AC47D: xor     ecx, eax
+0x9AC47F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC484: mov     eax, offset stru_AD9130
+0x9AC489: jmp     ___CxxFrameHandler3

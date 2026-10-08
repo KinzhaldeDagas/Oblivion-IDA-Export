@@ -1,5 +1,5 @@
 char sub_500820()
 {
-  byte_B42CD8 = 1;
-  return 1;
+  unk_B42CD8 = 1; /*0x500822*/
+  return 1; /*0x500827*/
 }

@@ -1,4 +1,4 @@
-0x43F3E0: push    ebp
+0x43F3E0: push    ebp; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x43F3E1: mov     ebp, esp
 0x43F3E3: and     esp, 0FFFFFFF0h
 0x43F3E6: sub     esp, 20h

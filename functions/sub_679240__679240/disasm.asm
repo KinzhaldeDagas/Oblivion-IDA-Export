@@ -1,10 +1,10 @@
-0x679240: push    ecx
+0x679240: push    ecx; Verified (Oblivion): walks the temp-effect RTTI chain to NiRTTI_MagicShaderHitEffect, then filters by targetReference, bWeaponEnchantment_28, bFinished and TESEffectShader pointer. It keeps one match and marks duplicate/different-shader entries finished. Fallout's analogous ProcessLists routine uses a distinct NiShader collection; Oblivion uses ActorProcessManager::extendedTempEffects.
 0x679241: push    ebx
 0x679242: push    ebp
 0x679243: push    esi
 0x679244: xor     eax, eax
 0x679246: lea     esi, [ecx+48h]
-0x679249: mov     [esp+10h+var_4], eax
+0x679249: mov     [esp+10h+outData], eax
 0x67924D: xor     ebp, ebp
 0x67924F: cmp     [esi+4], eax
 0x679252: push    edi
@@ -15,7 +15,7 @@
 0x67925E: jnz     short loc_679268
 0x679260: mov     bl, al
 0x679262: jmp     short loc_67926A
-0x679264: mov     edi, [esp+14h+arg_0]
+0x679264: mov     edi, [esp+14h+targetReference]
 0x679268: xor     bl, bl
 0x67926A: test    al, 1
 0x67926C: jz      short loc_67928A
@@ -37,12 +37,12 @@
 0x679294: test    ebx, ebx
 0x679296: jz      loc_67932A
 0x67929C: lea     esp, [esp+0]
-0x6792A0: lea     ecx, [esp+14h+var_4]
-0x6792A4: push    ecx
-0x6792A5: mov     ecx, ebx
-0x6792A7: call    sub_677C70
-0x6792AC: mov     esi, [eax]
-0x6792AE: mov     eax, [esp+14h+var_4]
+0x6792A0: lea     ecx, [esp+14h+outData]
+0x6792A4: push    ecx; outData
+0x6792A5: mov     ecx, ebx; this
+0x6792A7: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
+0x6792AC: mov     esi, [eax]; Verified (Oblivion): weapon-shader manager scan obtains a temporary AddRef of each NodeVoid data object before reading its RTTI/fields.
+0x6792AE: mov     eax, [esp+14h+outData]
 0x6792B2: test    eax, eax
 0x6792B4: jz      short loc_6792D4
 0x6792B6: mov     edi, eax
@@ -66,24 +66,24 @@
 0x6792DF: call    eax
 0x6792E1: test    eax, eax
 0x6792E3: jz      short loc_67931F
-0x6792E5: cmp     eax, offset unk_B3C0D4
+0x6792E5: cmp     eax, offset NiRTTI_MagicShaderHitEffect
 0x6792EA: jz      short loc_6792F5
 0x6792EC: mov     eax, [eax+4]
 0x6792EF: test    eax, eax
 0x6792F1: jnz     short loc_6792E5
 0x6792F3: jmp     short loc_67931F
-0x6792F5: mov     ecx, [esp+14h+arg_0]
+0x6792F5: mov     ecx, [esp+14h+targetReference]
 0x6792F9: cmp     [esi+1Ch], ecx
 0x6792FC: jnz     short loc_67931F
-0x6792FE: cmp     byte ptr [esi+28h], 0
+0x6792FE: cmp     byte ptr [esi+28h], 0; Verified (Oblivion): only bWeaponEnchantment_28 entries are considered by this de-duplication helper; finished entries are skipped.
 0x679302: jz      short loc_67931F
 0x679304: cmp     byte ptr [esi+24h], 0
 0x679308: jnz     short loc_67931F
-0x67930A: mov     edx, [esp+14h+arg_4]
+0x67930A: mov     edx, [esp+14h+effectShader]
 0x67930E: cmp     [esi+34h], edx
 0x679311: jnz     short loc_67931B
 0x679313: test    ebp, ebp
-0x679315: jnz     short loc_67931B
+0x679315: jnz     short loc_67931B; Verified (Oblivion): a matching target with a different TESEffectShader, or a second duplicate, is marked bFinished so the old weapon enchantment visual will retire.
 0x679317: mov     ebp, esi
 0x679319: jmp     short loc_67931F
 0x67931B: mov     byte ptr [esi+24h], 1

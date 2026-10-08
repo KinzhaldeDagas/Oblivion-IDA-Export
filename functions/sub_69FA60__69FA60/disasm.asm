@@ -23,7 +23,7 @@
 0x69FAAC: call    edx
 0x69FAAE: push    eax
 0x69FAAF: push    edi
-0x69FAB0: mov     ecx, offset ActorProcessManager_ptr
+0x69FAB0: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x69FAB5: call    sub_674550
 0x69FABA: mov     eax, [edi+3Ch]
 0x69FABD: test    eax, eax
@@ -92,3 +92,12 @@
 0x69FB74: pop     esi
 0x69FB75: add     esp, 14h
 0x69FB78: retn
+0x9C5E00: mov     ecx, [ebp-10h]
+0x9C5E03: jmp     MobileObject_destr
+0x9C5E08: mov     edx, [esp+arg_4]
+0x9C5E0C: lea     eax, [edx-10h]
+0x9C5E0F: mov     ecx, [edx-14h]
+0x9C5E12: xor     ecx, eax
+0x9C5E14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C5E19: mov     eax, offset stru_AEE4BC
+0x9C5E1E: jmp     ___CxxFrameHandler3

@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x58CC07",
-    "line": "mov     ecx, [esp+0Ch+arg_4]",
+    "line": "mov     ecx, [esp+0Ch+opcode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58CC0B",
-    "line": "fld     [esp+0Ch+arg_0]",
+    "line": "fld     [esp+0Ch+operand]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -151,13 +151,13 @@
   },
   {
     "ea": "0x58CC2E",
-    "line": "push    0",
+    "line": "push    0; forceUpdate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58CC30",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x58CC35",
-    "line": "call    DoActionEnumeration",
+    "line": "call    Tile__Value__CalculateValue; Verified: receiver is 0x1C-byte Tile::Value, NOT Tile. Reads owner at +0, numeric value +4, trait code +0x18, expression head pointer +0x10. Native SetFloat 0x58CA00 and dependency propagation 0x58BDD0 pass Value pointers. Fallout named analogue 0x8220BFF0. Local SDK Tile::DoActionEnumeration incorrectly passes Tile* to this address; plugin direct calls are invalid-receiver calls.",
     "mnemonic": "call",
     "size": 5
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x58CC44",
-    "line": "push    edi",
+    "line": "push    edi; forceUpdate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58CC45",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x58CC4A",
-    "line": "call    DoActionEnumeration",
+    "line": "call    Tile__Value__CalculateValue; Verified: receiver is 0x1C-byte Tile::Value, NOT Tile. Reads owner at +0, numeric value +4, trait code +0x18, expression head pointer +0x10. Native SetFloat 0x58CA00 and dependency propagation 0x58BDD0 pass Value pointers. Fallout named analogue 0x8220BFF0. Local SDK Tile::DoActionEnumeration incorrectly passes Tile* to this address; plugin direct calls are invalid-receiver calls.",
     "mnemonic": "call",
     "size": 5
   },

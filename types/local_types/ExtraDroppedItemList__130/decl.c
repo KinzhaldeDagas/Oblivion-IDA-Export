@@ -1,1 +1,1 @@
-ExtraDroppedItemList
+struct ExtraDroppedItemList;

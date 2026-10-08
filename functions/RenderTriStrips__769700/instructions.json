@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x769700",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; DeferredRendering implementation: TriStrips draw path confirms shader interface setup occurs before final D3D draw. Current deferred resolve stays EndScene-only and opt-in.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x76975B",
-    "line": "call    sub_768890",
+    "line": "call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x769770",
-    "line": "push    offset NiD3DShaderInterfaceString",
+    "line": "push    0B42858h",
     "mnemonic": "push",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x7697D9",
-    "line": "mov     ecx, [eax+8]; void *",
+    "line": "mov     ecx, [eax+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x76981B",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

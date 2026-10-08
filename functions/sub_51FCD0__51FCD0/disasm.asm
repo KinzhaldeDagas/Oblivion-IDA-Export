@@ -25,7 +25,7 @@
 0x51FD2C: call    sub_46E5C0
 0x51FD31: mov     eax, [esi+1Ch]
 0x51FD34: push    eax
-0x51FD35: call    FormHeapFree
+0x51FD35: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x51FD3A: xor     eax, eax
 0x51FD3C: add     esp, 4
 0x51FD3F: mov     ecx, esi; this
@@ -41,3 +41,30 @@
 0x51FD66: pop     esi
 0x51FD67: add     esp, 18h
 0x51FD6A: retn
+0x9B7C20: mov     ecx, [ebp-10h]; this
+0x9B7C23: jmp     TESForm_destr
+0x9B7C28: cmp     dword ptr [ebp-10h], 0
+0x9B7C2C: jz      loc_9B7C40
+0x9B7C32: mov     eax, [ebp-10h]
+0x9B7C35: add     eax, 18h
+0x9B7C38: mov     [ebp-14h], eax
+0x9B7C3B: jmp     loc_9B7C47
+0x9B7C40: mov     dword ptr [ebp-14h], 0
+0x9B7C47: mov     ecx, [ebp-14h]
+0x9B7C4A: jmp     TESFullName_Initialize
+0x9B7C4F: cmp     dword ptr [ebp-10h], 0
+0x9B7C53: jz      loc_9B7C67
+0x9B7C59: mov     eax, [ebp-10h]
+0x9B7C5C: add     eax, 24h ; '$'
+0x9B7C5F: mov     [ebp-18h], eax
+0x9B7C62: jmp     loc_9B7C6E
+0x9B7C67: mov     dword ptr [ebp-18h], 0
+0x9B7C6E: mov     ecx, [ebp-18h]
+0x9B7C71: jmp     sub_46E5C0
+0x9B7C76: mov     edx, [esp+arg_4]
+0x9B7C7A: lea     eax, [edx-14h]
+0x9B7C7D: mov     ecx, [edx-18h]
+0x9B7C80: xor     ecx, eax
+0x9B7C82: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7C87: mov     eax, offset stru_AE2538
+0x9B7C8C: jmp     ___CxxFrameHandler3

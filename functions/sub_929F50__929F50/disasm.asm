@@ -77,7 +77,7 @@
 0x92A040: push    ecx
 0x92A041: lea     ecx, [esp+98h+var_30]
 0x92A045: fstp    [esp+98h+var_58]
-0x92A049: call    sub_88FCC0
+0x92A049: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x92A04E: movaps  xmm0, [esp+90h+var_30]
 0x92A053: movaps  xmm1, xmmword ptr [ebx]
 0x92A056: mov     eax, [esp+90h+var_78]
@@ -101,7 +101,7 @@
 0x92A095: mov     esi, [ebp+arg_0]
 0x92A098: push    esi
 0x92A099: fstp    [esp+98h+var_48]
-0x92A09D: call    sub_88FCC0
+0x92A09D: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x92A0A2: movaps  xmm0, [esp+90h+var_20]
 0x92A0A7: movaps  xmm1, xmmword ptr [ebx]
 0x92A0AA: mov     eax, [esp+90h+var_78]
@@ -124,7 +124,7 @@
 0x92A0EB: push    eax
 0x92A0EC: push    esi
 0x92A0ED: fstp    [esp+98h+var_38]
-0x92A0F1: call    sub_88FCC0
+0x92A0F1: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x92A0F6: movaps  xmm0, [esp+90h+var_10]
 0x92A0FE: movaps  xmm1, xmmword ptr [ebx]
 0x92A101: mov     eax, [esp+90h+var_70]

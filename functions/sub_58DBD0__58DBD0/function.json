@@ -1,19 +1,36 @@
 {
-  "callees_count": 151,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 39,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x58DBD0",
+      "0x58E3A8"
+    ],
+    [
+      "0x9BF930",
+      "0x9BF96C"
+    ]
+  ],
+  "chunks_sha256": "7807b20c1ca91312c001cb015a890288130579e8cb1805acb5a89c4ec9364284",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 18,
-  "display_name": "sub_58DBD0",
+  "comment_repeatable": "Verified: allocates BuildStorage0x14, parses supplied buffer/length when buffer nonnull; otherwise loads file and expands include/source files. Tracks line counter for diagnostics and item construction. Emits lexical pairs to0x58D2F0. Full token grammar and malformed-input cleanup remain Unknown beyond examined branches.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 19,
+  "display_name": "Tile::ParseFile",
   "end_ea": "0x58E3A8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58DBD0",
+  "name": "Tile::ParseFile",
   "segment": ".text",
   "sha256": "d9b228bc6a6e3f8cd355bca2b6a351fa0c2b4fabfdbb4310889bb89d9f2cfcbb",
   "size": 2008,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58DBD0",
-  "type": "int *__cdecl(char *Str, int, unsigned int)",
-  "xrefs_from_count": 695,
+  "total_chunk_size": 2068,
+  "type": "OblivionTileBuildStorage *__cdecl(const char *path, const char *buffer, unsigned int length)",
+  "xrefs_from_count": 714,
   "xrefs_to_count": 1
 }

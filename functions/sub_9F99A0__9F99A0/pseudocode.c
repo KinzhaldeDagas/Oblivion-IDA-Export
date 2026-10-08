@@ -1,5 +1,5 @@
-int sub_9F99A0()
+int InitSetting_sSkillNameAcrobatics()
 {
-  GameSetting_ConstrAndReg((int *)&unk_B3A104, (int)"sSkillNameAcrobatics", (int)"Acrobatics");
-  return atexit(sub_A23A40);
+  GameSetting_ConstrAndReg(&g_sSkillNameAcrobatics, "sSkillNameAcrobatics", "Acrobatics"); /*0x9f99af*/
+  return atexit(sub_A23A40); /*0x9f99bf*/
 }

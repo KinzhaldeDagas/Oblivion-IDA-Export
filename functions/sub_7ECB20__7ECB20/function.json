@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7ECB20",
+  "chunks": [
+    [
+      "0x7ECB20",
+      "0x7ECBFA"
+    ]
+  ],
+  "chunks_sha256": "8b187f5cfb86f3819c2a0a411f0c93045a149dc904b7186fae5fe80e493e11b0",
+  "comment_regular": "\nDX11 source-state audit 2026-10-01: this GENERIC bank reset writes color B464A8..B46527 and data B465A8..B46627 (8 float4 rows each), plus B46138..B46157 and one-time default B466C8..B466D8. It does NOT clear Lighting30 ConstantGroup color/data pairs B47008/B47018+20h*slot. Therefore unvisited Lighting30 slots must retain their prior current source words; do not reset them to generic defaults.\n\nOBLIVION AUTHORITY (2026-08-24): Per-pass light reset clears eight shared diffuse slots to (0,0,0,1) and eight source-vector slots to (0.001,0,0,0). It does NOT clear shared ambient c5. Leaf c11 is later rebuilt/normalized from source slot 0 during normal per-draw transform setup, so zero-light c11 is fallback-derived rather than stale on that path.",
+  "comment_repeatable": "Oblivion Lighting30 light-bank reset: clears eight diffuse/color slots to (0,0,0,1) and eight source/data slots to (0.001,0,0,0); it does not clear ambient c5.\nLighting30 flow note: this reset writes separate generic light banks, not Lighting30 B46F78(c0) or B46FB8(c4). Do not treat it as clearing emission c4 before a skipped emission block.\nDX11 generic-bank audit 2026-10-01: bit0 of DWORD B466D8 gates static POD initialization only. Cold path ORs bit0 preserving other bits, writes float literal A37080 (0.001f) and three zero words to B466C8. Hot path preserves all four existing raw words. No registration/atexit or external callback. Every call clears eight DWORDs B46138, copies raw color B25AD0 into eight float4 rows B464A8, and static vector B466C8 into eight rows B465A8. Gaps and Lighting30 ConstantGroup remain untouched. Comparison: Fallout8221D618 resets different per-frame sources/dirty flags; do not transplant that policy.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "OB_BSShader_ResetLightConstantSlots_010201A0",
   "end_ea": "0x7ECBFA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7ECB20",
+  "name": "OB_BSShader_ResetLightConstantSlots_010201A0",
   "segment": ".text",
   "sha256": "8b187f5cfb86f3819c2a0a411f0c93045a149dc904b7186fae5fe80e493e11b0",
   "size": 218,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ECB20",
-  "type": "int *()",
+  "total_chunk_size": 218,
+  "type": "void __cdecl()",
   "xrefs_from_count": 60,
   "xrefs_to_count": 7
 }

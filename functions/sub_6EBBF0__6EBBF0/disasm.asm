@@ -4,7 +4,7 @@
 0x6EBBFA: jnz     short loc_6EBC0F
 0x6EBBFC: mov     eax, [esi+10h]
 0x6EBBFF: cmp     dword ptr [eax+4], 1
-0x6EBC03: jbe     short loc_6EBC0F
+0x6EBC03: jbe     short loc_6EBC0F; 3DTheft decode 2026-05-16: NiGeomMorpherUpdateTask::Run also gates work on byte_B3F944 before invoking the morpher update vfunc +0x68.
 0x6EBC05: mov     ecx, [esi+0Ch]
 0x6EBC08: mov     edx, [ecx]
 0x6EBC0A: mov     eax, [edx+68h]

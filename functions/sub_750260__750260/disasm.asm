@@ -44,9 +44,9 @@
 0x7502DA: fstp    st(2)
 0x7502DC: fstp    st(1)
 0x7502DE: push    ecx
-0x7502DF: mov     ecx, ebx
-0x7502E1: fstp    [esp+5Ch+var_5C]; float
-0x7502E4: call    sub_6C36B0
+0x7502DF: mov     ecx, ebx; this
+0x7502E1: fstp    [esp+5Ch+applicationTime]; applicationTime
+0x7502E4: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x7502E9: test    al, al
 0x7502EB: jnz     loc_750AC8
 0x7502F1: mov     eax, [ebx+48h]
@@ -57,7 +57,7 @@
 0x750306: fld     dword ptr ds:0A7DEB4h
 0x75030C: push    eax
 0x75030D: fchs
-0x75030F: push    offset dword_B3EA50
+0x75030F: push    offset stru_B3EA50
 0x750314: fstp    [esp+60h+arg_0]
 0x750318: call    NiRTTI__IsObjectOfRTTIType
 0x75031D: add     esp, 8
@@ -65,7 +65,7 @@
 0x750322: jz      short loc_750351
 0x750324: mov     esi, [ebx+48h]
 0x750327: mov     ecx, esi
-0x750329: call    sub_6CD0F0
+0x750329: call    NiBlendInterpolator_RecomputeNormalizedWeights; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.
 0x75032E: mov     ecx, esi
 0x750330: call    sub_6CC550
 0x750335: cmp     al, ds:0A79EFCh
@@ -96,14 +96,14 @@
 0x750388: fstp    dword ptr [esp+58h+var_20+4]
 0x75038C: push    edi
 0x75038D: push    eax
-0x75038E: push    offset dword_B3CF5C
+0x75038E: push    offset stru_B3CF5C
 0x750393: call    NiRTTI__IsObjectOfRTTIType
 0x750398: add     esp, 8
 0x75039B: test    al, al
 0x75039D: jz      short loc_7503CC
 0x75039F: mov     edi, [ebx+3Ch]
 0x7503A2: mov     ecx, edi
-0x7503A4: call    sub_6CD0F0
+0x7503A4: call    NiBlendInterpolator_RecomputeNormalizedWeights; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.
 0x7503A9: mov     ecx, edi
 0x7503AB: call    sub_6CC550
 0x7503B0: cmp     al, ds:0A79EFCh
@@ -323,7 +323,7 @@
 0x750620: fld     dword ptr [esp+6Ch+var_34+4]
 0x750624: fstp    [esp+6Ch+var_58]; float
 0x750628: fld     dword ptr [esp+6Ch+var_10]
-0x75062C: fst     [esp+6Ch+var_5C]; float
+0x75062C: fst     [esp+6Ch+applicationTime]; float
 0x750630: fld     [esp+6Ch+var_14]
 0x750634: fstp    [esp+6Ch+var_60]; float
 0x750638: fld     dword ptr [esp+6Ch+var_3C]

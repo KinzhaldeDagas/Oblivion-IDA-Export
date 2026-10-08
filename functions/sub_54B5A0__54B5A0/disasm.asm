@@ -180,52 +180,52 @@
 0x54B7DF: fstp    st
 0x54B7E1: fld     dword ptr ds:0A641F8h
 0x54B7E7: sub     esp, 0Ch
-0x54B7EA: fstp    [esp+100h+var_F8]; float
-0x54B7EE: lea     ecx, [esp+100h+var_D8]
+0x54B7EA: fstp    [esp+100h+rollY]; float
+0x54B7EE: lea     ecx, [esp+100h+right]
 0x54B7F2: fld     dword ptr ds:0A641F4h
-0x54B7F8: fstp    [esp+100h+var_FC]; float
+0x54B7F8: fstp    [esp+100h+pitchX]; float
 0x54B7FC: fld     dword ptr ds:0A641F0h
-0x54B802: fstp    [esp+100h+var_100]; float
+0x54B802: fstp    [esp+100h+yawZ]; float
 0x54B805: call    sub_711580
 0x54B80A: fld     dword ptr [esi+188h]
 0x54B810: sub     esp, 0Ch
-0x54B813: fstp    [esp+100h+var_F8]; float
-0x54B817: lea     ecx, [esp+100h+var_90]
+0x54B813: fstp    [esp+100h+rollY]; rollY
+0x54B817: lea     ecx, [esp+100h+var_90]; this
 0x54B81B: fldz
-0x54B81D: fstp    [esp+100h+var_FC]; float
+0x54B81D: fstp    [esp+100h+pitchX]; pitchX
 0x54B821: fld     dword ptr [esi+184h]
-0x54B827: fstp    [esp+100h+var_100]; float
-0x54B82A: call    sub_7117C0
-0x54B82F: lea     ecx, [esp+0F4h+var_D8]
-0x54B833: push    ecx
-0x54B834: lea     edx, [esp+0F8h+var_48]
-0x54B83B: push    edx
-0x54B83C: lea     ecx, [esp+0FCh+var_90]
-0x54B840: call    NiMAtrix33_Multiply
+0x54B827: fstp    [esp+100h+yawZ]; yawZ
+0x54B82A: call    NiMatrix33_SetEulerZXY; Writes a NiMatrix33 from Euler angles in Z*(X*Y) order: yawZ, pitchX, rollY. All observed callers use the written matrix and ignore incidental EAX.
+0x54B82F: lea     ecx, [esp+0F4h+right]
+0x54B833: push    ecx; right
+0x54B834: lea     edx, [esp+0F8h+out]
+0x54B83B: push    edx; out
+0x54B83C: lea     ecx, [esp+0FCh+var_90]; this
+0x54B840: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x54B845: mov     edi, [esp+0F4h+arg_8]
 0x54B84C: push    edi
 0x54B84D: mov     ecx, esi
 0x54B84F: call    sub_54B560
 0x54B854: add     edi, 64h ; 'd'
-0x54B857: push    edi
+0x54B857: push    edi; right
 0x54B858: lea     ecx, [esp+0F8h+var_B4]
-0x54B85C: push    ecx
+0x54B85C: push    ecx; out
 0x54B85D: lea     edx, [esp+0FCh+var_24]
 0x54B864: push    edx
 0x54B865: lea     ecx, [eax+64h]
 0x54B868: call    sub_7103C0
-0x54B86D: mov     ecx, eax
-0x54B86F: call    NiMAtrix33_Multiply
-0x54B874: lea     eax, [esp+0F4h+var_48]
-0x54B87B: push    eax
+0x54B86D: mov     ecx, eax; this
+0x54B86F: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
+0x54B874: lea     eax, [esp+0F4h+out]
+0x54B87B: push    eax; right
 0x54B87C: lea     ecx, [esp+0F8h+var_6C]
-0x54B883: push    ecx
+0x54B883: push    ecx; out
 0x54B884: lea     edx, [esp+0FCh+var_24]
 0x54B88B: push    edx
 0x54B88C: lea     ecx, [esp+100h+var_B4]
 0x54B890: call    sub_7103C0
-0x54B895: mov     ecx, eax
-0x54B897: call    NiMAtrix33_Multiply
+0x54B895: mov     ecx, eax; this
+0x54B897: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x54B89C: lea     esi, [esp+0F4h+var_6C]
 0x54B8A3: mov     eax, [esp+0F4h+arg_0]
 0x54B8AA: mov     ecx, 9

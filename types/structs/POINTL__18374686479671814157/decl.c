@@ -1,1 +1,1 @@
-POINTL
+typedef _POINTL POINTL;

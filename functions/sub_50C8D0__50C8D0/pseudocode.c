@@ -17,36 +17,36 @@ bool __usercall sub_50C8D0@<al>(
   int v14; // [esp+8h] [ebp-8h] BYREF
   UInt16 v15[2]; // [esp+Ch] [ebp-4h] BYREF
 
-  *(_DWORD *)v15 = 0;
-  v14 = 0;
-  result = Script_ExtractArgs(a1, arg4, a3, a4, a6, a7, l, v15, &v14);
-  if ( result )
+  *(_DWORD *)v15 = 0; /*0x50c901*/
+  v14 = 0; /*0x50c909*/
+  result = Script_ExtractArgs(a1, arg4, a3, a4, a6, a7, l, v15, &v14); /*0x50c911*/
+  if ( result ) /*0x50c91b*/
   {
-    if ( a4 != (TESObjectREFR *)TESDataHandler_g_PlayerRef )
+    if ( a4 != (TESObjectREFR *)reference ) /*0x50c928*/
     {
-      if ( a4 )
+      if ( a4 ) /*0x50c92c*/
       {
-        v11 = OblivionDynamicCast(
+        v11 = OblivionDynamicCast( /*0x50c93d*/
                 a4,
                 0,
                 (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
                 &Actor `RTTI Type Descriptor',
                 0);
-        if ( v11 )
+        if ( v11 ) /*0x50c947*/
         {
-          if ( v11[0x16] )
+          if ( v11[0x16] ) /*0x50c949*/
           {
-            v12 = (*(int (__thiscall **)(_DWORD *))(*v11 + 0x330))(v11);
-            if ( v12 )
+            v12 = (*(int (__thiscall **)(_DWORD *))(*v11 + 0x330))(v11); /*0x50c959*/
+            if ( v12 ) /*0x50c95d*/
             {
-              v13 = (float)v14;
-              sub_61D5B0(v12, bp0, a2, *(int *)v15, v13);
+              v13 = (float)v14; /*0x50c968*/
+              sub_61D5B0(v12, bp0, a2, *(int **)v15, v13); /*0x50c96e*/
             }
           }
         }
       }
     }
-    return 1;
+    return 1; /*0x50c973*/
   }
-  return result;
+  return result; /*0x50c91d*/
 }

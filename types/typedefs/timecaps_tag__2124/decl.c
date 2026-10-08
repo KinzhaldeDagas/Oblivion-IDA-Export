@@ -1,1 +1,5 @@
-timecaps_tag
+struct timecaps_tag
+{
+UINT wPeriodMin;
+UINT wPeriodMax;
+};

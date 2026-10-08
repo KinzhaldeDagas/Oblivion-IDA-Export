@@ -30,7 +30,7 @@
 0x98D613: push    offset aRuntimeErrorPr
 0x98D618: mov     ebx, 314h
 0x98D61D: push    ebx; SizeInBytes
-0x98D61E: mov     ebp, offset Dst
+0x98D61E: mov     ebp, (offset dword_BA9E10+4A0h)
 0x98D623: push    ebp; Dst
 0x98D624: call    _strcpy_s
 0x98D629: add     esp, 0Ch
@@ -44,10 +44,10 @@
 0x98D635: call    __invoke_watson
 0x98D63A: add     esp, 14h
 0x98D63D: push    104h; nSize
-0x98D642: mov     esi, offset Filename
+0x98D642: mov     esi, (offset dword_BA9E10+4B9h)
 0x98D647: push    esi; lpFilename
 0x98D648: push    0; hModule
-0x98D64A: mov     byte_BAA3CD, 0
+0x98D64A: mov     byte ptr dword_BA9E10+5BDh, 0
 0x98D651: call    ds:GetModuleFileNameA
 0x98D657: test    eax, eax
 0x98D659: jnz     short loc_98D681
@@ -77,7 +77,7 @@
 0x98D694: sub     esi, 3Bh ; ';'
 0x98D697: add     eax, esi
 0x98D699: push    3; Src
-0x98D69B: mov     ecx, offset dword_BAA5C4
+0x98D69B: mov     ecx, (offset dword_BA9E10+7B4h)
 0x98D6A0: push    offset a___
 0x98D6A5: sub     ecx, eax
 0x98D6A7: push    ecx; SizeInBytes

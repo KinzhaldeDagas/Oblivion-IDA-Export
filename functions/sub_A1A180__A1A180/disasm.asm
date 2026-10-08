@@ -1,5 +1,5 @@
 0xA1A180: push    esi
-0xA1A181: mov     esi, value
+0xA1A181: mov     esi, ds:0B35230h
 0xA1A187: test    esi, esi
 0xA1A189: jz      short loc_A1A1A7
 0xA1A18B: lea     eax, [esi+4]

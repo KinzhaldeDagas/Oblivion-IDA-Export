@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68DBFC",
-    "line": "mov     edi, [esi]",
+    "line": "mov     edi, [esi]; Verified (Oblivion): save traversal calls each hit-effect vtable +0x78 with ECX=this, owner ActiveEffect* (EDI), and targetReference (EBX); then increments the serialized hit-effect count. This establishes the shared SaveExtraData virtual signature.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x68DC07",
-    "line": "push    1; Size",
+    "line": "push    1; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -43,13 +43,13 @@
   },
   {
     "ea": "0x68DC0D",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x68DC0E",
-    "line": "mov     ecx, ds:0B33B00h",
+    "line": "mov     ecx, ds:0B33B00h; self",
     "mnemonic": "mov",
     "size": 6
   },

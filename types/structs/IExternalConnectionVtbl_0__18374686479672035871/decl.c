@@ -1,1 +1,1 @@
-IExternalConnectionVtbl_0
+typedef IExternalConnectionVtbl IExternalConnectionVtbl_0;

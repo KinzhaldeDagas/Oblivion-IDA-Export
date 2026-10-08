@@ -1,19 +1,32 @@
 {
-  "callees_count": 21,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x6517B2",
+      "0x651880"
+    ]
+  ],
+  "chunks_sha256": "5602379cfa6904b6aa402f71e92f97efe2efd41d86f5421316177045376d3952",
+  "comment_regular": "Verified LowProcess load-link path calls ActiveEffect_Base_LinkAEList on its embedded active-effect EffectNode chain before resolving other saved references. Fallout uses its separate staged ActiveEffect load callbacks rather than this Oblivion link slot.",
+  "comment_repeatable": "Verified LowProcess load-link path calls ActiveEffect_Base_LinkAEList on its embedded active-effect EffectNode chain before resolving other saved references. Fallout uses its separate staged ActiveEffect load callbacks rather than this Oblivion link slot.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
   "display_name": "MiddleHighProc_LinkMagicData?:::LinkMagicEffectList",
   "end_ea": "0x651880",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "MiddleHighProc_LinkMagicData?:::LinkMagicEffectList",
   "segment": ".text",
   "sha256": "5602379cfa6904b6aa402f71e92f97efe2efd41d86f5421316177045376d3952",
   "size": 206,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6517B2",
-  "type": "TESSaveLoad *__userpurge@<eax>(int@<edi>, int, int, int)",
+  "total_chunk_size": 206,
+  "type": "TESSaveLoadGame_SerializationView *__userpurge@<eax>(int@<edi>, TESChildCELL *ebx0@<ebx>, int, int, int)",
   "xrefs_from_count": 91,
   "xrefs_to_count": 2
 }

@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A7E50",
+  "chunks": [
+    [
+      "0x7A7E50",
+      "0x7A7EBA"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "cf47868f4854cffb6bf31ce17d05a3d6383b6c223f20fa26d70d44ed6f81462c",
+  "comment_regular": "Allocates a 0x4C-byte CBillboardLeaf, default-constructs it, then applies the local copy-assignment helper.\nSpeedTreeOBSE v166 VERIFIED clone allocates4C, calls default ctor7A7D80 then copy assignment7A7DD0. Side metadata propagation is attached at caller7A9089, with failed provenance disabling prepared leaf wind rather than guessing.",
+  "comment_repeatable": "Allocates a 0x4C-byte CBillboardLeaf, default-constructs it, then applies the local copy-assignment helper.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_CBillboardLeaf_Clone_010201A0",
   "end_ea": "0x7A7EBA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7A7E50",
+  "name": "OB_CBillboardLeaf_Clone_010201A0",
   "segment": ".text",
   "sha256": "cab37d72a188efc4e737fd9c2977d18a86f0ae0f30d29a7bca26898fefd727fd",
   "size": 106,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A7E50",
-  "type": "float *__thiscall(void *this)",
-  "xrefs_from_count": 40,
+  "total_chunk_size": 144,
+  "type": "OB_CBillboardLeaf_010201A0 *__thiscall(const OB_CBillboardLeaf_010201A0 *this)",
+  "xrefs_from_count": 54,
   "xrefs_to_count": 1
 }

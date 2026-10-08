@@ -1,15 +1,16 @@
 int __usercall ValueModifierEffect_PostLink_::GetCasterActor@<eax>(
         int a1@<esi>,
-        int a2,
+        int *a2@<edi>,
         int a3,
-        float a4,
-        int a5,
-        float a6)
+        int a4,
+        float a5,
+        int a6,
+        float a7)
 {
-  MagicCaster *v6; // ecx
+  MagicCaster *v7; // ecx
 
-  v6 = *(MagicCaster **)(a1 + 0x24);
-  if ( v6 )
-    MagicCaster_GetParentActor(v6);
-  return ValueModifierEffect_PostLink_::FixupBoundObjEffects(a2, a3, a4, a5, a6);
+  v7 = *(MagicCaster **)(a1 + 0x24); /*0x6a8687*/
+  if ( v7 ) /*0x6a868e*/
+    MagicCaster_GetParentActor(v7); /*0x6a8690*/
+  return ValueModifierEffect_PostLink_::FixupBoundObjEffects(a2, (float *)a1, a3);
 }

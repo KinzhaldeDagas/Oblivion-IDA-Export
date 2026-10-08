@@ -1,19 +1,36 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 37,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
+  "chunks": [
+    [
+      "0x48F7C0",
+      "0x48FBB5"
+    ],
+    [
+      "0x9AFED0",
+      "0x9AFEF6"
+    ]
+  ],
+  "chunks_sha256": "2997e7c56a52475746c55064adc56ce3ae930852ecc0f23f0e2971f2a8147698",
+  "comment_regular": "Canonical form-based container add: item, optional instance ExtraDataList, and signed count. All four external callers enter only at this head; the formerly split interior blocks are one logical routine ending in retn 0x0C. A proxy-to-source conversion hook here covers actor-hit/form adds but not ordinary world-reference pickup.",
+  "comment_repeatable": "Canonical form-based container add: item, optional instance ExtraDataList, and signed count. All four external callers enter only at this head; the formerly split interior blocks are one logical routine ending in retn 0x0C. A proxy-to-source conversion hook here covers actor-hit/form adds but not ordinary world-reference pickup.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
   "display_name": "ContainerExtraData_AddItem",
-  "end_ea": "0x48F7FA",
-  "flags": 5120,
+  "end_ea": "0x48FBB5",
+  "evidence_confidence": "Unknown",
+  "flags": 21504,
   "has_pseudocode": true,
   "name": "ContainerExtraData_AddItem",
   "segment": ".text",
-  "sha256": "4c0bfa8ef48879751a4f8c8baf9ca0f8c1893cd94e601fc2491f1f168f685ec6",
-  "size": 58,
+  "sha256": "67bdb1370387c3168cda06cccd827af484ae32f31deee633c45f26c76ff4c514",
+  "size": 1013,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x48F7C0",
-  "type": "void __thiscall(float *this, int, _DWORD *, int, int, int, int, int, int, int, int, int, int)",
-  "xrefs_from_count": 21,
+  "total_chunk_size": 1051,
+  "type": "void __thiscall(ExtraContainerChanges_Data *this, TESForm *item, ExtraDataList *extraList, int count)",
+  "xrefs_from_count": 448,
   "xrefs_to_count": 4
 }

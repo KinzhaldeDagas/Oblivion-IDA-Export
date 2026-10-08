@@ -6,7 +6,7 @@
 0x4843BE: fstp    [esp+arg_0]
 0x4843C2: fld     [esp+arg_0]
 0x4843C6: fld     st
-0x4843C8: call    Double_To_SInt32
+0x4843C8: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4843CD: mov     ecx, eax
 0x4843CF: mov     [esp+arg_0], ecx
 0x4843D3: fisub   [esp+arg_0]

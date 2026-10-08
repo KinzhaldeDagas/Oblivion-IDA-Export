@@ -1,1 +1,1 @@
-DEVINSTID_W
+typedef WCHAR_0 *DEVINSTID_W;

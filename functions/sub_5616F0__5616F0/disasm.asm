@@ -1,4 +1,4 @@
-0x5616F0: push    ebp
+0x5616F0: push    ebp; Verified branch resource path: branch LOD count sizes three model arrays—branchGeometryDataByLOD (+0x14), branchShaderPropertiesByLOD (+0x24), and branchCachedPropertiesByLOD (+0x2C). CreateArt turns geometry data into branch NiTriStrips, attaches the per-LOD shader property, and caches property ID 3.
 0x5616F1: mov     ebp, esp
 0x5616F3: and     esp, 0FFFFFFC0h
 0x5616F6: push    0FFFFFFFFh
@@ -17,8 +17,8 @@
 0x56171D: mov     large fs:0, eax
 0x561723: mov     esi, ecx
 0x561725: mov     [esp+244h+var_1F0], esi
-0x561729: lea     ecx, [esp+244h+Src]
-0x561730: call    sub_7879A0
+0x561729: lea     ecx, [esp+244h+Src]; this
+0x561730: call    OB_SpeedTreeGeometryOutput_init_010201A0; 2026-05-26 SpeedTreeOBSE: identified temporary SGeometry/output initializer used by the optional 360 diagnostic candidate export probe before stock GetGeometry(0x08). Must not be treated as live render-resource allocation.
 0x561735: xor     ebp, ebp
 0x561737: cmp     [esi+0Ch], ebp
 0x56173A: mov     [esp+244h+var_4], ebp
@@ -30,13 +30,13 @@
 0x561756: jz      short loc_561778
 0x561758: mov     ecx, [eax-4]
 0x56175B: lea     edi, [eax-4]
-0x56175E: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x56175E: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x561763: push    ecx; int
 0x561764: push    4; unsigned int
 0x561766: push    eax; void *
 0x561767: call    $LN21
 0x56176C: push    edi
-0x56176D: call    FormHeapFree
+0x56176D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x561772: add     esp, 4
 0x561775: mov     [esi+14h], ebp
 0x561778: mov     eax, [esi+24h]
@@ -44,19 +44,19 @@
 0x56177D: jz      short loc_56179F
 0x56177F: mov     edx, [eax-4]
 0x561782: lea     edi, [eax-4]
-0x561785: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x561785: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x56178A: push    edx; int
 0x56178B: push    4; unsigned int
 0x56178D: push    eax; void *
 0x56178E: call    $LN21
 0x561793: push    edi
-0x561794: call    FormHeapFree
+0x561794: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x561799: add     esp, 4
 0x56179C: mov     [esi+24h], ebp
-0x56179F: mov     ecx, [esi+0Ch]
+0x56179F: mov     ecx, [esi+0Ch]; this
 0x5617A2: cmp     ecx, ebp
 0x5617A4: jz      loc_562277
-0x5617AA: call    sub_7871F0
+0x5617AA: call    CSpeedTreeRT__GetNumBranchLodLevels; CSpeedTreeRT::GetNumBranchLodLevels. Returns the 16-bit branch LOD count at CTreeEngine+0x70.
 0x5617AF: movzx   edi, ax
 0x5617B2: cmp     di, bp
 0x5617B5: mov     [esp+244h+var_1EC], edi
@@ -69,7 +69,7 @@
 0x5617C8: push    1; int
 0x5617CA: lea     eax, [esp+254h+Src]
 0x5617D1: push    eax; Src
-0x5617D2: call    sub_78C6F0
+0x5617D2: call    CSpeedTreeRT__GetGeometry; 2026-05-25 render dispatch recheck: first stock CSpeedTreeRT::GetGeometry call from branch/base builder passes geometry flag 0x01 only (branch). This is not a frond or 360 billboard consumer.
 0x5617D7: cmp     [esp+244h+var_14C], ebp
 0x5617DE: jz      short loc_561821
 0x5617E0: cmp     [esp+244h+var_158], ebp
@@ -109,7 +109,7 @@
 0x56185B: cmp     eax, ebp
 0x56185D: mov     byte ptr [esp+244h+var_4], 1
 0x561865: jz      short loc_561881
-0x561867: push    offset sub_7016A0; a5
+0x561867: push    offset NiPointerSlot_Release; a5
 0x56186C: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x561871: push    edi; size
 0x561872: lea     ebx, [eax+4]
@@ -140,7 +140,7 @@
 0x5618B9: cmp     eax, ebp
 0x5618BB: mov     byte ptr [esp+244h+var_4], 2
 0x5618C3: jz      short loc_5618DF
-0x5618C5: push    offset sub_7016A0; a5
+0x5618C5: push    offset NiPointerSlot_Release; a5
 0x5618CA: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x5618CF: push    edi; size
 0x5618D0: lea     ebx, [eax+4]
@@ -171,7 +171,7 @@
 0x561917: cmp     eax, ebp
 0x561919: mov     byte ptr [esp+244h+var_4], 3
 0x561921: jz      short loc_56193D
-0x561923: push    offset sub_7016A0; a5
+0x561923: push    offset NiPointerSlot_Release; a5
 0x561928: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x56192D: push    edi; size
 0x56192E: lea     ebx, [eax+4]
@@ -258,7 +258,7 @@
 0x561A47: lea     ecx, [esp+254h+Src]
 0x561A4E: push    ecx; Src
 0x561A4F: mov     ecx, [esi+0Ch]
-0x561A52: call    sub_78C6F0
+0x561A52: call    CSpeedTreeRT__GetGeometry; 2026-05-25 render dispatch recheck: branch/base builder repeats CSpeedTreeRT::GetGeometry with geometry flag 0x01 only for branch LOD output. No later-family sidecar consumption observed.
 0x561A57: cmp     [esp+244h+var_160], bp
 0x561A5F: jbe     loc_562240
 0x561A65: cmp     [esp+244h+var_168], ebp
@@ -286,11 +286,11 @@
 0x561ABB: mov     edi, eax
 0x561ABD: movzx   eax, word ptr [esi]
 0x561AC0: add     eax, eax
-0x561AC2: push    eax; Size
-0x561AC3: push    edx; Src
-0x561AC4: push    edi; Dst
+0x561AC2: push    eax; byteCount
+0x561AC3: push    edx; source
+0x561AC4: push    edi; destination
 0x561AC5: mov     [esp+258h+var_1B4], edi
-0x561ACC: call    _memcpy
+0x561ACC: call    _memcpy;
 0x561AD1: movzx   eax, [esp+258h+var_160]
 0x561AD9: push    eax; Size
 0x561ADA: call    FormHeapAlloc
@@ -305,7 +305,6 @@
 0x561AF6: cmp     [esi], bp
 0x561AF9: jbe     short loc_561B12
 0x561AFB: jmp     short loc_561B00
-0x561AFD: align 10h
 0x561B00: movzx   edx, word ptr [edi+eax*2]
 0x561B04: mov     byte ptr [edx+ebx], 1
 0x561B08: movzx   ecx, word ptr [esi]
@@ -324,7 +323,6 @@
 0x561B41: mov     byte ptr [esp+244h+var_4], 4
 0x561B49: jbe     short loc_561B7D
 0x561B4B: jmp     short loc_561B50
-0x561B4D: align 10h
 0x561B50: movzx   eax, di
 0x561B53: cmp     byte ptr [eax+ebx], 0
 0x561B57: jz      short loc_561B6B
@@ -338,7 +336,7 @@
 0x561B76: jb      short loc_561B50
 0x561B78: mov     bp, [esp+244h+var_1D6]
 0x561B7D: push    ebx
-0x561B7E: call    FormHeapFree
+0x561B7E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x561B83: add     esp, 4
 0x561B86: xor     ecx, ecx
 0x561B88: test    bp, bp
@@ -454,13 +452,12 @@
 0x561CFD: mov     ecx, [esp+244h+var_1E8]
 0x561D01: sub     esi, eax
 0x561D03: sub     ecx, eax
-0x561D05: mov     [esp+244h+var_200], edx
+0x561D05: mov     [esp+244h+stspData], edx
 0x561D09: mov     [esp+244h+var_20C], ecx
 0x561D0D: mov     [esp+244h+var_1BC], ebx
 0x561D14: jmp     short loc_561D20
-0x561D16: align 10h
 0x561D20: mov     edi, [esp+244h+var_14C]
-0x561D27: mov     ecx, [esp+244h+var_200]
+0x561D27: mov     ecx, [esp+244h+stspData]
 0x561D2B: mov     edx, [ecx]
 0x561D2D: lea     ecx, [edx+edx*2]
 0x561D30: fld     dword ptr [edi+ecx*4]
@@ -558,7 +555,7 @@
 0x561EE4: fstp    [esp+244h+var_174]
 0x561EEB: mov     edx, [esp+244h+var_174]
 0x561EF2: mov     [ecx+eax+8], edx
-0x561EF6: add     [esp+244h+var_200], 4
+0x561EF6: add     [esp+244h+stspData], 4
 0x561EFB: add     ebp, 8
 0x561EFE: add     eax, 0Ch
 0x561F01: sub     [esp+244h+var_1BC], 1
@@ -626,13 +623,13 @@
 0x562003: test    eax, eax
 0x562005: mov     byte ptr [esp+244h+var_4], 6
 0x56200D: jz      short loc_56201E
-0x56200F: mov     ecx, eax
-0x562011: call    sub_7F2360
+0x56200F: mov     ecx, eax; this
+0x562011: call    OB_STSPData_ctor_010201A0; STSPData ctor: NiRefObject with data pointer +0x08 null and 16-bit count/ownership gate +0x0C zero.
 0x562016: mov     esi, eax
-0x562018: mov     [esp+244h+var_200], eax
+0x562018: mov     [esp+244h+stspData], eax
 0x56201C: jmp     short loc_562024
 0x56201E: xor     esi, esi
-0x562020: mov     [esp+244h+var_200], esi
+0x562020: mov     [esp+244h+stspData], esi
 0x562024: test    esi, esi
 0x562026: mov     [esp+244h+var_20C], esi
 0x56202A: jz      short loc_562036
@@ -723,10 +720,10 @@
 0x56213B: test    eax, eax
 0x56213D: mov     byte ptr [esp+244h+var_4], 9
 0x562145: jz      short loc_562159
-0x562147: mov     edx, [esp+244h+var_200]
-0x56214B: push    edx
-0x56214C: mov     ecx, eax
-0x56214E: call    sub_7F2030
+0x562147: mov     edx, [esp+244h+stspData]
+0x56214B: push    edx; stspData
+0x56214C: mov     ecx, eax; this
+0x56214E: call    OB_SpeedTreeBranchShaderProperty_ctor_010201A0; Branch shader-property ctor. Fronds.log lines with propertyVtable=00A92A94/propertyTypeId=7 map to this class: PPLighting base plus STSPData ref, then branch vtable.
 0x562153: mov     [esp+244h+var_208], eax
 0x562157: jmp     short loc_562161
 0x562159: mov     [esp+244h+var_208], 0
@@ -780,11 +777,11 @@
 0x5621DF: push    1
 0x5621E1: mov     ecx, edi
 0x5621E3: call    eax
-0x5621E5: mov     [esi+0D4h], ebx
+0x5621E5: mov     [esi+0D4h], ebx; 2026-05-30 SpeedTreeOBSE: branch builder assigns tangent-space data to SpeedTreeBranchShaderProperty+0xD4 when source normal/tangent arrays exist. It does not assign base-diffuse +0xBC or base-normal +0xC0 texture arrays.
 0x5621EB: add     ebx, 4
 0x5621EE: push    ebx; lpAddend
 0x5621EF: call    dword ptr ds:0A28078h
-0x5621F5: mov     esi, [esp+244h+var_200]
+0x5621F5: mov     esi, [esp+244h+stspData]
 0x5621F9: lea     ecx, [esi+4]
 0x5621FC: push    ecx; lpAddend
 0x5621FD: mov     byte ptr [esp+248h+var_4], 4
@@ -800,7 +797,7 @@
 0x56221D: push    ecx
 0x56221E: mov     byte ptr [esp+248h+var_4], 0
 0x562226: mov     [esp+248h+var_1E0], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'
-0x56222E: call    FormHeapFree
+0x56222E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x562233: mov     edi, [esp+248h+var_1E4]
 0x562237: mov     esi, [esp+248h+var_1F0]
 0x56223B: add     esp, 4
@@ -809,16 +806,16 @@
 0x562243: cmp     di, word ptr [esp+244h+var_1EC]
 0x562248: mov     [esp+244h+var_1E4], edi
 0x56224C: jb      loc_561A40
-0x562252: mov     ecx, [esi+0Ch]
-0x562255: call    sub_788FD0
-0x56225A: mov     ecx, [esi+0Ch]
+0x562252: mov     ecx, [esi+0Ch]; this
+0x562255: call    CSpeedTreeRT__ClearBranchPackedColors; Oblivion CSpeedTreeRT branch cleanup wrapper: when branchGeometry exists, clears its packed-color vector at CIndexedGeometry+0x58 after Bethesda copies the geometry.
+0x56225A: mov     ecx, [esi+0Ch]; this
 0x56225D: mov     [esp+244h+var_15C], ebp
-0x562264: call    unknown_libname_13_0
+0x562264: call    CSpeedTreeRT__ClearBranchPrimaryWindData; Oblivion CSpeedTreeRT branch cleanup wrapper: when branchGeometry exists, clears its primary wind-weight and primary wind-matrix-index vectors via the CIndexedGeometry helper.
 0x562269: mov     [esp+244h+var_140], ebp
 0x562270: mov     [esp+244h+var_13C], ebp
 0x562277: mov     [esp+244h+var_4], 0FFFFFFFFh
-0x562282: lea     ecx, [esp+244h+Src]
-0x562289: call    sub_787B20
+0x562282: lea     ecx, [esp+244h+Src]; this
+0x562289: call    OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.
 0x56228E: mov     ecx, dword ptr [esp+244h+var_C]
 0x562295: mov     large fs:0, ecx
 0x56229C: pop     ecx
@@ -829,3 +826,57 @@
 0x5622A1: mov     esp, ebp
 0x5622A3: pop     ebp
 0x5622A4: retn
+0x4B9D50: mov     eax, [ecx+4]
+0x4B9D53: push    eax
+0x4B9D54: mov     dword ptr [ecx], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'
+0x4B9D5A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x4B9D5F: pop     ecx
+0x4B9D60: retn
+0x9BD150: lea     ecx, [ebp-170h]; this
+0x9BD156: jmp     OB_SpeedTreeGeometryOutput_Dtor_010201A0; Oblivion aggregate SpeedTree geometry-output destructor/reset: clears all externally owned branch, frond, leaf, and billboard view pointers without freeing them. Called on stack SGeometry output after Bethesda geometry builders finish.
+0x9BD15B: mov     eax, [ebp-1F8h]
+0x9BD161: push    eax
+0x9BD162: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD167: pop     ecx
+0x9BD168: retn
+0x9BD169: mov     eax, [ebp-1F8h]
+0x9BD16F: push    eax
+0x9BD170: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD175: pop     ecx
+0x9BD176: retn
+0x9BD177: mov     eax, [ebp-1F8h]
+0x9BD17D: push    eax
+0x9BD17E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD183: pop     ecx
+0x9BD184: retn
+0x9BD185: lea     ecx, [ebp-1E0h]
+0x9BD18B: jmp     loc_4B9D50
+0x9BD190: mov     eax, [ebp-20Ch]
+0x9BD196: push    eax
+0x9BD197: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD19C: pop     ecx
+0x9BD19D: retn
+0x9BD19E: mov     eax, [ebp-20Ch]
+0x9BD1A4: push    eax
+0x9BD1A5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD1AA: pop     ecx
+0x9BD1AB: retn
+0x9BD1AC: lea     ecx, [ebp-20Ch]; slot
+0x9BD1B2: jmp     NiPointerSlot_Release
+0x9BD1B7: mov     eax, [ebp-1F4h]
+0x9BD1BD: push    eax
+0x9BD1BE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD1C3: pop     ecx
+0x9BD1C4: retn
+0x9BD1C5: mov     eax, [ebp-1F8h]
+0x9BD1CB: push    eax
+0x9BD1CC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BD1D1: pop     ecx
+0x9BD1D2: retn
+0x9BD1D3: mov     edx, [esp-4+arg_4]
+0x9BD1D7: lea     eax, [edx-234h]
+0x9BD1DD: mov     ecx, [edx-238h]
+0x9BD1E3: xor     ecx, eax
+0x9BD1E5: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BD1EA: mov     eax, offset stru_AE6BD8
+0x9BD1EF: jmp     ___CxxFrameHandler3

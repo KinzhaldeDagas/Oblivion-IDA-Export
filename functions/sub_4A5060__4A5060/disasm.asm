@@ -1,4 +1,4 @@
-0x4A5060: push    0FFFFFFFFh
+0x4A5060: push    0FFFFFFFFh; Verified: record-copy helper for the 12-byte OblivionTESRegionSoundRecord; first field maps to a live form; remaining fields are copied without interpretation.
 0x4A5062: push    offset ??1TESRegionDataLandscape@@UAE@XZ_SEH
 0x4A5067: mov     eax, large fs:0
 0x4A506D: push    eax
@@ -37,3 +37,12 @@
 0x4A50CA: pop     esi
 0x4A50CB: add     esp, 10h
 0x4A50CE: retn    4
+0x9B2890: mov     ecx, [ebp-10h]
+0x9B2893: jmp     TESRegionData_SetBaseVTable
+0x9B2898: mov     edx, [esp+arg_4]
+0x9B289C: lea     eax, [edx-0Ch]
+0x9B289F: mov     ecx, [edx-10h]
+0x9B28A2: xor     ecx, eax
+0x9B28A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B28A9: mov     eax, offset stru_ADE820
+0x9B28AE: jmp     ___CxxFrameHandler3

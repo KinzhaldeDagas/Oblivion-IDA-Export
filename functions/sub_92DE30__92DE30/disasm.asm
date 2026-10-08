@@ -248,7 +248,6 @@
 0x92E187: test    edx, edx
 0x92E189: jle     short loc_92E1BD
 0x92E18B: jmp     short loc_92E190
-0x92E18D: align 10h
 0x92E190: mov     eax, [esp+0B0h+var_A0]
 0x92E194: mov     eax, [eax+ecx*4]
 0x92E197: cmp     eax, [esp+0B0h+var_94]
@@ -312,7 +311,6 @@
 0x92E253: lea     eax, [eax+edi+0Ch]
 0x92E257: mov     [esp+0B0h+var_94], eax
 0x92E25B: jmp     short loc_92E260
-0x92E25D: align 10h
 0x92E260: fld     dword ptr ds:0A2FAA8h
 0x92E266: fld     dword ptr [eax]
 0x92E268: fucompp
@@ -329,7 +327,6 @@
 0x92E28D: mov     [esp+0B0h+var_8C], eax
 0x92E291: jle     loc_92E5E9
 0x92E297: jmp     short loc_92E2A0
-0x92E299: align 10h
 0x92E2A0: mov     ecx, [esi+4]
 0x92E2A3: cmp     word ptr [ecx+eax*8+6], 1
 0x92E2A9: lea     ecx, [ecx+eax*8]
@@ -350,7 +347,6 @@
 0x92E2F8: mov     [esp+0B0h+var_78], esi
 0x92E2FC: movaps  [esp+0B0h+var_10], xmm0
 0x92E304: jmp     short loc_92E310
-0x92E306: align 10h
 0x92E310: movzx   eax, word ptr [esi+4]
 0x92E314: mov     word ptr [ebx+eax*8+6], 1
 0x92E31B: movzx   edx, word ptr [esi+4]

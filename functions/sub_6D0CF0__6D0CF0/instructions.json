@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6D0CF0",
-    "line": "push    esi",
+    "line": "push    esi; If target +0x30 exists and weightsDirty +0x58 is set, applies current morph weights, marks geometry data dirty (flags +0x2E bit 0), optionally invokes the target update when morphFlags +0x3C bit 0 is set, then clears weightsDirty. Semantically void; prior return value was undefined EAX residue on no-op paths.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6D0CFF",
-    "line": "call    sub_6D0C30",
+    "line": "call    NiGeomMorpherController_ApplyMorphWeights; Builds the output vertex buffer from current morphWeights. Clears the target buffer unless leaveTargetBaseIntact (+0x59) is set, then accumulates each enabled morph target's vertex deltas.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x6D0D16",
-    "line": "test    [esi+3Ch], al",
+    "line": "test    [esi+3Ch], al; Test NiGeomMorpherController.morphFlags +0x3C bit 0. If set, CommitDirtyMorphWeights invokes the target geometry update after applying weights. No native timing flag is read here.",
     "mnemonic": "test",
     "size": 3
   },

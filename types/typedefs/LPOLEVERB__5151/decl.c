@@ -1,1 +1,1 @@
-LPOLEVERB
+typedef tagOLEVERB *LPOLEVERB;

@@ -8,26 +8,26 @@ int __usercall unknown_libname_38_::unknown_libname_40@<eax>(
 {
   int result; // eax
 
-  switch ( a1 )
+  switch ( a1 ) /*0x9856d0*/
   {
-    case 0:
-      result = *(_DWORD *)(a2 + 8);
-      break;
-    case 1:
-      a3[3] = a4[3];
-      result = *(_DWORD *)(a2 + 8);
-      break;
-    case 2:
-      a3[3] = a4[3];
-      a3[2] = a4[2];
-      result = *(_DWORD *)(a2 + 8);
-      break;
-    case 3:
-      a3[3] = a4[3];
-      a3[2] = a4[2];
-      a3[1] = a4[1];
-      result = *(_DWORD *)(a2 + 8);
-      break;
+    case 0: /*0x9856d0*/
+      result = *(_DWORD *)(a2 + 8); /*0x9857e0*/
+      break; /*0x9857e6*/
+    case 1: /*0x9856d0*/
+      a3[3] = a4[3]; /*0x9857eb*/
+      result = *(_DWORD *)(a2 + 8); /*0x9857ee*/
+      break; /*0x9857f4*/
+    case 2: /*0x9856d0*/
+      a3[3] = a4[3]; /*0x9857fb*/
+      a3[2] = a4[2]; /*0x985801*/
+      result = *(_DWORD *)(a2 + 8); /*0x985804*/
+      break; /*0x98580a*/
+    case 3: /*0x9856d0*/
+      a3[3] = a4[3]; /*0x98580f*/
+      a3[2] = a4[2]; /*0x985815*/
+      a3[1] = a4[1]; /*0x98581b*/
+      result = *(_DWORD *)(a2 + 8); /*0x98581e*/
+      break; /*0x98581e*/
   }
-  return result;
+  return result; /*0x9857e6*/
 }

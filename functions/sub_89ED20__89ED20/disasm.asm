@@ -11,7 +11,7 @@
 0x89ED35: test    eax, eax
 0x89ED37: jz      short loc_89ED4E
 0x89ED39: lea     esp, [esp+0]
-0x89ED40: cmp     eax, offset dword_BA7D84
+0x89ED40: cmp     eax, offset stru_BA7D84
 0x89ED45: jz      short loc_89ED78
 0x89ED47: mov     eax, [eax+4]
 0x89ED4A: test    eax, eax
@@ -71,11 +71,11 @@
 0x89EDD6: test    edi, edi
 0x89EDD8: jz      short loc_89EDEF
 0x89EDDA: mov     ecx, esi
-0x89EDDC: call    sub_89F570
+0x89EDDC: call    bhkRefObject_UpdateHavokObject
 0x89EDE1: mov     ecx, edi
 0x89EDE3: call    sub_8A6410
 0x89EDE8: mov     ecx, esi
-0x89EDEA: call    sub_89F570
+0x89EDEA: call    bhkRefObject_UpdateHavokObject
 0x89EDEF: pop     edi
 0x89EDF0: pop     esi
 0x89EDF1: retn    8

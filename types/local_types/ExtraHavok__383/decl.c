@@ -1,1 +1,1 @@
-ExtraHavok
+struct ExtraHavok;

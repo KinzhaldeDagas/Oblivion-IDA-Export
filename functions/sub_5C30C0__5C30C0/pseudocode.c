@@ -4,9 +4,9 @@ BOOL __thiscall sub_5C30C0(char **this)
   TESForm *v3; // edi
   const char *RenderTargetsNum; // eax
 
-  v2 = sub_580120(*(this + 0x23B));
-  Tile_SetString(*(this + 0xC), (_DWORD *)0xFDE, v2);
-  v3 = TESDataHandler_g_PlayerRef->vtbl->super.super.super.GetBaseForm(TESDataHandler_g_PlayerRef);
-  RenderTargetsNum = (const char *)NiRenderTargetGroup::GetRenderTargetsNum((NiRenderTargetGroup *)*(this + 0x23B));
-  return BSStringT_Set((BSStringT *)&v3[6].member.modlist.next, RenderTargetsNum, 0);
+  v2 = sub_580120(*(this + 0x23B)); /*0x5c30ca*/
+  Tile_SetString(*(this + 0xC), (_DWORD *)0xFDE, v2); /*0x5c30d8*/
+  v3 = reference->vtbl->super.super.super.GetBaseForm(reference); /*0x5c30f3*/
+  RenderTargetsNum = (const char *)NiRenderTargetGroup::GetRenderTargetsNum((NiRenderTargetGroup *)*(this + 0x23B)); /*0x5c30f5*/
+  return BSStringT_Set((BSStringT *)&v3[6].member.modlist.next, RenderTargetsNum, 0); /*0x5c3108*/
 }

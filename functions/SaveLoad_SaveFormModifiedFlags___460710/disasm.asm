@@ -32,9 +32,9 @@
 0x460768: mov     ecx, esi; this
 0x46076A: call    TESObjectCELL_GetWorldSpace
 0x46076F: mov     eax, [eax+0Ch]
-0x460772: push    eax
-0x460773: mov     ecx, ebp
-0x460775: call    sub_45E180
+0x460772: push    eax; formID
+0x460773: mov     ecx, ebp; self
+0x460775: call    SaveLoad_WorldspaceFormIDToIndex
 0x46077A: mov     ecx, esi; this
 0x46077C: mov     word ptr [esp+64h+Src], ax
 0x460781: call    TESObjectCELL_GetXCoordinate
@@ -48,9 +48,9 @@
 0x4607A5: mov     ecx, esi; this
 0x4607A7: call    TESObjectCELL_GetWorldSpace
 0x4607AC: mov     eax, [eax+0Ch]
-0x4607AF: push    eax
-0x4607B0: mov     ecx, ebp
-0x4607B2: call    sub_45E180
+0x4607AF: push    eax; formID
+0x4607B0: mov     ecx, ebp; self
+0x4607B2: call    SaveLoad_WorldspaceFormIDToIndex
 0x4607B7: mov     ecx, esi; this
 0x4607B9: mov     [esp+64h+var_54], ax
 0x4607BE: call    TESObjectCELL_GetXCoordinate
@@ -64,27 +64,27 @@
 0x4607DB: jmp     loc_460BA2
 0x4607E0: mov     ecx, ebx; this
 0x4607E2: mov     [esp+64h+var_48], edi
-0x4607E6: call    TESObjectREFR_GetParentCell
+0x4607E6: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x4607EB: mov     esi, eax
 0x4607ED: cmp     esi, edi
 0x4607EF: jz      short loc_460822
 0x4607F1: mov     ecx, esi; this
 0x4607F3: call    TESObjectCELL_GetWorldSpace
 0x4607F8: cmp     eax, edi
-0x4607FA: mov     ecx, ebp
+0x4607FA: mov     ecx, ebp; self
 0x4607FC: jz      short loc_460810
 0x4607FE: mov     eax, [eax+0Ch]
-0x460801: push    eax
-0x460802: call    SaveLoad_IRefToFormID?
+0x460801: push    eax; formID
+0x460802: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x460807: mov     [esp+64h+var_48], eax
 0x46080B: jmp     loc_4608C0
 0x460810: mov     esi, [esi+0Ch]
-0x460813: push    esi
-0x460814: call    SaveLoad_IRefToFormID?
+0x460813: push    esi; formID
+0x460814: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x460819: mov     [esp+64h+var_48], eax
 0x46081D: jmp     loc_4608C0
 0x460822: mov     ecx, ebx; this
-0x460824: call    TESObjectREFR_IsPersistent?
+0x460824: call    TESObjectREFR_IsPersistent
 0x460829: test    al, al
 0x46082B: jnz     short loc_46083E
 0x46082D: mov     edx, [ebx+0Ch]
@@ -93,11 +93,11 @@
 0x460836: call    PrintError
 0x46083B: add     esp, 8
 0x46083E: mov     ecx, ebx; this
-0x460840: call    TESObjectREFR_IsPersistent?
+0x460840: call    TESObjectREFR_IsPersistent
 0x460845: test    al, al
 0x460847: jz      short loc_460866
 0x460849: lea     ecx, [ebx+44h]
-0x46084C: call    sub_41FF80
+0x46084C: call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.
 0x460851: test    eax, eax
 0x460853: jnz     short loc_460866
 0x460855: mov     eax, [ebx+0Ch]
@@ -167,9 +167,9 @@
 0x460916: mov     ecx, ebx
 0x460918: call    eax
 0x46091A: mov     eax, [eax+0Ch]
-0x46091D: push    eax
-0x46091E: mov     ecx, ebp
-0x460920: call    SaveLoad_IRefToFormID?
+0x46091D: push    eax; formID
+0x46091E: mov     ecx, ebp; self
+0x460920: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x460925: mov     [esp+64h+var_28], eax
 0x460929: push    0; int
 0x46092B: push    offset ??_R0?AVArrowProjectile@@@8; struct TypeDescriptor *
@@ -191,20 +191,20 @@
 0x460962: add     esp, 28h
 0x460965: mov     ecx, ebx; this
 0x460967: mov     esi, eax
-0x460969: call    TESObjectREFR_IsPersistent?
+0x460969: call    TESObjectREFR_IsPersistent
 0x46096E: test    al, al
 0x460970: jz      short loc_4609AB
 0x460972: cmp     [esp+64h+var_48], 0
 0x460977: mov     [esp+64h+var_2C], 3
 0x46097F: jnz     short loc_4609E6
 0x460981: lea     ecx, [ebx+44h]
-0x460984: call    sub_41FF80
+0x460984: call    ExtraDataList_GetPersistentCell; Returns the TESObjectCELL stored in ExtraPersistentCell, or null.
 0x460989: mov     ecx, eax; this
 0x46098B: call    TESObjectCELL_GetWorldSpace
 0x460990: mov     eax, [eax+0Ch]
-0x460993: push    eax
-0x460994: mov     ecx, ebp
-0x460996: call    SaveLoad_IRefToFormID?
+0x460993: push    eax; formID
+0x460994: mov     ecx, ebp; self
+0x460996: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x46099B: push    24h ; '$'
 0x46099D: lea     edx, [esp+68h+var_2C]
 0x4609A1: mov     [esp+68h+var_24], eax
@@ -223,9 +223,9 @@
 0x4609CA: mov     ecx, [ecx+1Ch]
 0x4609CD: mov     [esp+64h+var_2C], 2
 0x4609D5: call    EffectSetting_GetProjectileType
-0x4609DA: push    eax
-0x4609DB: mov     ecx, ebp
-0x4609DD: call    SaveLoad_IRefToFormID?
+0x4609DA: push    eax; formID
+0x4609DB: mov     ecx, ebp; self
+0x4609DD: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x4609E2: mov     [esp+64h+var_28], eax
 0x4609E6: push    24h ; '$'
 0x4609E8: lea     edx, [esp+68h+var_2C]
@@ -278,27 +278,27 @@
 0x460A7D: mov     [esp+64h+var_24], edx
 0x460A81: mov     [esp+64h+var_20], eax
 0x460A85: mov     [esp+64h+var_2C], edi
-0x460A89: call    TESObjectREFR_GetParentCell
+0x460A89: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460A8E: test    eax, eax
 0x460A90: jz      loc_460B1B
 0x460A96: mov     ecx, ebx; this
-0x460A98: call    TESObjectREFR_GetParentCell
+0x460A98: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460A9D: mov     ecx, eax; this
-0x460A9F: call    TESObjectCELL_IsInterior
+0x460A9F: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x460AA4: test    al, al
 0x460AA6: mov     ecx, ebx; this
 0x460AA8: jz      short loc_460AB5
-0x460AAA: call    TESObjectREFR_GetParentCell
+0x460AAA: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460AAF: mov     eax, [eax+0Ch]
 0x460AB2: push    eax
 0x460AB3: jmp     short loc_460B10
-0x460AB5: call    TESObjectREFR_GetParentCell
+0x460AB5: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460ABA: mov     ecx, eax; this
 0x460ABC: call    TESObjectCELL_GetWorldSpace
 0x460AC1: test    eax, eax
 0x460AC3: jz      short loc_460B1B
 0x460AC5: mov     ecx, ebx; this
-0x460AC7: call    TESObjectREFR_GetParentCell
+0x460AC7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460ACC: mov     ecx, eax; this
 0x460ACE: call    TESObjectCELL_GetWorldSpace
 0x460AD3: mov     eax, [eax+0Ch]
@@ -324,9 +324,9 @@
 0x460B08: test    edi, edi
 0x460B0A: jz      short loc_460B1B
 0x460B0C: mov     edi, [edi+0Ch]
-0x460B0F: push    edi
-0x460B10: mov     ecx, ebp
-0x460B12: call    SaveLoad_IRefToFormID?
+0x460B0F: push    edi; formID
+0x460B10: mov     ecx, ebp; self
+0x460B12: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x460B17: mov     [esp+64h+var_2C], eax
 0x460B1B: mov     ecx, 7
 0x460B20: lea     esi, [esp+64h+var_48]
@@ -343,24 +343,24 @@
 0x460B3C: test    eax, offset loc_800000
 0x460B41: jz      short loc_460BAD
 0x460B43: mov     ecx, ebx; this
-0x460B45: call    TESObjectREFR_GetParentCell
+0x460B45: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x460B4A: mov     ecx, ebx; this
 0x460B4C: mov     esi, eax
 0x460B4E: call    TESObjectREFR_GetWorldSpace
 0x460B53: cmp     eax, edi
 0x460B55: jz      short loc_460B68
 0x460B57: mov     eax, [eax+0Ch]
-0x460B5A: push    eax
-0x460B5B: mov     ecx, ebp
-0x460B5D: call    SaveLoad_IRefToFormID?
+0x460B5A: push    eax; formID
+0x460B5B: mov     ecx, ebp; self
+0x460B5D: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x460B62: mov     [esp+64h+Src], eax
 0x460B66: jmp     short loc_460B9B
 0x460B68: cmp     esi, edi
 0x460B6A: jz      short loc_460B7D
 0x460B6C: mov     esi, [esi+0Ch]
-0x460B6F: push    esi
-0x460B70: mov     ecx, ebp
-0x460B72: call    SaveLoad_IRefToFormID?
+0x460B6F: push    esi; formID
+0x460B70: mov     ecx, ebp; self
+0x460B72: call    SaveLoad_FormIDToIRef; Maps a full FormID to its compact save-game IRef index: returns an existing array index or appends the FormID and returns the new index. Created IDs (0xFFxxxxxx) pass through unchanged. This is FormID->IRef, despite the former reversed name.
 0x460B77: mov     [esp+64h+Src], eax
 0x460B7B: jmp     short loc_460B9B
 0x460B7D: mov     eax, [ebx+0Ch]
@@ -373,10 +373,10 @@
 0x460B8E: push    offset aReferenceS08xI; "Reference %s ( %08X ) in an oblivion pl"...
 0x460B93: call    PrintError
 0x460B98: add     esp, 0Ch
-0x460B9B: push    4; Size
+0x460B9B: push    4; byteCount
 0x460B9D: lea     eax, [esp+68h+Src]
-0x460BA1: push    eax; Src
-0x460BA2: mov     ecx, ds:0B33B00h
+0x460BA1: push    eax; source
+0x460BA2: mov     ecx, ds:0B33B00h; Save-side movement block writer reached by created refs (0x24), move/havok (0x1C/0x2C), and Oblivion marker (4).
 0x460BA8: call    SaveLoad_SaveData
 0x460BAD: pop     edi
 0x460BAE: pop     esi

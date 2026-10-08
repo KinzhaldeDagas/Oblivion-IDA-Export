@@ -1,4 +1,4 @@
-0x783180: push    ecx
+0x783180: push    ecx; MoonSugarEffect decode: NiD3DVertexShader indexed float-array setter. For entry types 8/9, writes selected matrix/vector array rows with SetVertexShaderConstantF; this is the bone/matrix-palette style path.
 0x783181: cmp     byte ptr ds:0B4295Bh, 0
 0x783188: push    esi
 0x783189: mov     esi, [esp+8+arg_0]
@@ -6,14 +6,14 @@
 0x78318E: mov     edi, [esi+14h]
 0x783191: mov     [esp+0Ch+var_4], ecx
 0x783195: jnz     short loc_78319C
-0x783197: call    sub_783C70
+0x783197: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x78319C: and     edi, 0FFh
 0x7831A2: cmp     dword ptr ds:0B428D8h[edi*4], 8
 0x7831AA: jz      short loc_7831D5
 0x7831AC: cmp     byte ptr ds:0B4295Bh, 0
 0x7831B3: mov     edi, [esi+14h]
 0x7831B6: jnz     short loc_7831BD
-0x7831B8: call    sub_783C70
+0x7831B8: call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.
 0x7831BD: and     edi, 0FFh
 0x7831C3: cmp     dword ptr ds:0B428D8h[edi*4], 9
 0x7831CB: jz      short loc_7831D5
@@ -31,7 +31,6 @@
 0x7831E2: jbe     short loc_783226
 0x7831E4: mov     edi, [esp+14h+arg_C]
 0x7831E8: jmp     short loc_7831F0
-0x7831EA: align 10h
 0x7831F0: mov     edx, [esp+14h+arg_10]
 0x7831F4: movzx   edx, word ptr [edx+esi*2]
 0x7831F8: mov     eax, [esp+14h+var_4]

@@ -25,14 +25,14 @@ int __thiscall EffectItem_Initialize(
         int a24,
         int a25)
 {
-  *(this + 7) = a2;
-  *this = a2[0x26];
-  *(this + 2) = 0;
-  *(this + 3) = 0;
-  *(this + 1) = 0;
+  *(this + 7) = a2; /*0x4147bd*/
+  *this = a2[0x26]; /*0x4147c6*/
+  *(this + 2) = 0; /*0x4147c8*/
+  *(this + 3) = 0; /*0x4147cb*/
+  *(this + 1) = 0; /*0x4147ce*/
   return EffectItem_Initialize_::InitData(
            a2,
-           (int)this,
+           this,
            0,
            (int)a2,
            a3,

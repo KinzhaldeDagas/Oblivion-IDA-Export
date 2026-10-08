@@ -2,14 +2,14 @@ char __thiscall IngredientItem_MagicItem_CompareData(_DWORD *this, void *a2)
 {
   _DWORD *v3; // eax
 
-  v3 = OblivionDynamicCast(
+  v3 = OblivionDynamicCast( /*0x419856*/
          a2,
          0,
          (struct _s_RTTICompleteObjectLocator *)&MagicItem `RTTI Type Descriptor',
          &IngredientItem `RTTI Type Descriptor',
          0);
-  if ( v3 && v3[0x1E] == *(this + 0x15) && *((_BYTE *)v3 + 0x7C) == *((_BYTE *)this + 0x58) )
-    return 0;
+  if ( v3 && v3[0x1E] == *(this + 0x15) && *((_BYTE *)v3 + 0x7C) == *((_BYTE *)this + 0x58) ) /*0x419870*/
+    return 0; /*0x419872*/
   else
-    return IngredientItem_MagicItem_CompareData_::Return_1((int)a2);
+    return IngredientItem_MagicItem_CompareData_::Return_1((int)a2); /*0x419860*/
 }

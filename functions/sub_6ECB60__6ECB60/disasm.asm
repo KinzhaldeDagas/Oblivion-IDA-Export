@@ -1,1 +1,1 @@
-0x6ECB60: jmp     sub_6CE2C0
+0x6ECB60: jmp     NiSingleInterpController_CopyMembers; Copies NiTimeController members, clones the source interpolator at +0x3C through the stream clone map, and assigns the clone through the destination smart pointer.

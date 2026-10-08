@@ -1,1 +1,1 @@
-TileImage
+struct TileImage;

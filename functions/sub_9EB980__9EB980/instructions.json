@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9EB980",
-    "line": "push    2",
+    "line": "push    2; Initializes Oblivion iLevelUp02Mult; native default 2.",
     "mnemonic": "push",
     "size": 2
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9EB987",
-    "line": "mov     ecx, offset iLevelUp02Mult",
+    "line": "mov     ecx, offset g_iLevelUp02Mult; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9EB98C",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },

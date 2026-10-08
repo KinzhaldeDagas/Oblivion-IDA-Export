@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 29,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 33,
+  "chunks": [
+    [
+      "0x4D8370",
+      "0x4D83A6"
+    ]
+  ],
+  "chunks_sha256": "071b5250aeee70d48b95000b4e11f07b4807a16af18254fb823a0917a6bf5e5f",
+  "comment_regular": "Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
+  "comment_repeatable": "Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESObjectREFR_GetAnimData",
   "end_ea": "0x4D83A6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_GetAnimData",
   "segment": ".text",
   "sha256": "071b5250aeee70d48b95000b4e11f07b4807a16af18254fb823a0917a6bf5e5f",
   "size": 54,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D8370",
-  "type": "BSExtraDataVtbl *__thiscall(Actor *this)",
+  "total_chunk_size": 54,
+  "type": "ActorAnimData *__thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 23,
   "xrefs_to_count": 44
 }

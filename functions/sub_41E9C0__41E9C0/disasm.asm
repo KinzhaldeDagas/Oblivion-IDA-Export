@@ -1,4 +1,4 @@
-0x41E9C0: push    0FFFFFFFFh
+0x41E9C0: push    0FFFFFFFFh; Replaces or creates ExtraAnim. Existing ActorAnimData is disposed and freed before the new animation pointer is installed.
 0x41E9C2: push    offset SEH_8C8970
 0x41E9C7: mov     eax, large fs:0
 0x41E9CD: push    eax
@@ -20,9 +20,9 @@
 0x41E9F5: test    edi, edi
 0x41E9F7: jz      short loc_41EA09
 0x41E9F9: mov     ecx, edi; this
-0x41E9FB: call    DisposeActorAnimData
+0x41E9FB: call    DisposeActorAnimData; Destroys ActorAnimData-owned state. Releases current/queued/cleanup idles; deactivates and releases the controller manager; deleting-destructs every +0x9C animation-map entry; frees the +0xB8 pending-KF linked list; clears/destroys the map; and nulls the accumulation node. Confirms map entries and pending-KF nodes are ActorAnimData-owned.
 0x41EA00: push    edi
-0x41EA01: call    FormHeapFree
+0x41EA01: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x41EA06: add     esp, 4
 0x41EA09: mov     eax, [esp+1Ch+arg_0]
 0x41EA0D: mov     [esi+0Ch], eax
@@ -53,3 +53,15 @@
 0x41EA5D: pop     esi
 0x41EA5E: add     esp, 10h
 0x41EA61: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

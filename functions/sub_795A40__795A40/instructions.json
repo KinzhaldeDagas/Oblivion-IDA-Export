@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795A40",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-30): Checked single-element insertion wrapper for vector<unsigned short>; used when CombineStrips appends a composite strip length.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x795A43",
-    "line": "mov     ebp, [esp+0Ch+arg_4]",
+    "line": "mov     ebp, dword ptr [esp+0Ch+expectedOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x795A77",
-    "line": "mov     ebx, [esp+14h+Src]",
+    "line": "mov     ebx, dword ptr [esp+14h+expectedOwner+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -169,49 +169,49 @@
   },
   {
     "ea": "0x795A7F",
-    "line": "mov     edx, [esp+14h+arg_C]",
+    "line": "mov     edx, [esp+14h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795A83",
-    "line": "mov     eax, [esp+14h+Src]",
+    "line": "mov     eax, dword ptr [esp+14h+expectedOwner+4]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795A87",
-    "line": "push    edx; int",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A88",
-    "line": "push    1; int",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x795A8A",
-    "line": "push    eax; Src",
+    "line": "push    eax; count",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A8B",
-    "line": "push    ebp; int",
+    "line": "push    ebp; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795A8C",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x795A8E",
-    "line": "call    sub_7952B0",
+    "line": "call    OB_stVectorUShort_InsertFill_010201A0; OBLIVION AUTHORITY (2026-08-30): vector<unsigned short> insert-fill core. Uses 2-byte element arithmetic, overlap-safe moves, and 1.5x growth.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x795AA0",
-    "line": "mov     [esp+14h+Src], edi",
+    "line": "mov     dword ptr [esp+14h+expectedOwner+4], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x795AB6",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },

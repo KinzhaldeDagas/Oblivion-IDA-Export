@@ -1,19 +1,36 @@
 {
-  "callees_count": 8,
-  "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_41E710",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 10,
+  "chunks": [
+    [
+      "0x41E710",
+      "0x41E790"
+    ],
+    [
+      "0x9C3090",
+      "0x9C30B6"
+    ]
+  ],
+  "chunks_sha256": "8b58abca24efcfd52eb1fd5e97ba1f3a3096354e3e14887379b7bee1909877c7",
+  "comment_regular": "Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
+  "comment_repeatable": "Set ExtraOriginalReference (type 0x26) to a live TESObjectREFR. This provenance is used for synthetic/reference projections, is excluded by relevant copy paths, and is never interpreted by pickup as a base-form override.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetOriginalReferenceExtra",
   "end_ea": "0x41E790",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_41E710",
+  "name": "ExtraDataList_SetOriginalReferenceExtra",
   "segment": ".text",
   "sha256": "e6ac1515d52362eb88543d427f411000e37ebb3bc45fab667ed487c8345aa7f9",
   "size": 128,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41E710",
-  "type": "int __thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 48,
+  "total_chunk_size": 166,
+  "type": "int __thiscall(ExtraDataList *this, TESObjectREFR *originalReference)",
+  "xrefs_from_count": 62,
   "xrefs_to_count": 10
 }

@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x51AF53",
-    "line": "call    ??1TESAnimGroup@@UAE@XZ; TESAnimGroup::~TESAnimGroup(void)",
+    "line": "call    TESAnimGroup_destructor; Destroys TESAnimGroup-owned allocations: frees the required-note float array at +0x10 and the parsed 0x10-byte text-key event array at +0x28, then tears down the NiRefObject base.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x51AF60",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

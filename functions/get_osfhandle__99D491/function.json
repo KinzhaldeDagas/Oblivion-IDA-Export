@@ -1,18 +1,31 @@
 {
-  "callees_count": 9,
-  "callers_count": 5,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 8,
+  "chunks": [
+    [
+      "0x99D491",
+      "0x99D502"
+    ]
+  ],
+  "chunks_sha256": "ef982bacc1e22ca5d43f447b2d2c0c47b37074ab2a8cd186fa1a8271fab471d1",
+  "comment_regular": "MEF v56 copied read-only descriptor resolution contract: descriptor<nhandleBAAAA0, page=pioinfoBAAAC0[fd>>5], entry stride28h, open flagbit1 at+4, HANDLE at+0. Uses GetFileSizeEx directly so no FILE seek/buffer disturbance or _get_osfhandle invalid-parameter dispatch. LastError restored; invalid bounds/handles disable optional reserve.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "__get_osfhandle",
   "end_ea": "0x99D502",
+  "evidence_confidence": "Unknown",
   "flags": 21572,
   "has_pseudocode": true,
   "name": "__get_osfhandle",
   "segment": ".text",
   "sha256": "ef982bacc1e22ca5d43f447b2d2c0c47b37074ab2a8cd186fa1a8271fab471d1",
   "size": 113,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x99D491",
+  "total_chunk_size": 113,
   "type": "int __cdecl(int)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 8

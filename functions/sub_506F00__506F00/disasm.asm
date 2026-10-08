@@ -1,4 +1,4 @@
-0x506F00: sub     esp, 8
+0x506F00: sub     esp, 8; MEF LARGE PERF 2026-09-08: PERF-8 actual pointer-array sorter uses gaps h=3*h+1, reducing h/=3, with gapped insertion comparisons. It is Shell sort, not the suspected cubic linked-list indexed sort. Keep this exact sorter to preserve tie behavior and comparator call sequence while removing node reconstruction.
 0x506F03: mov     ecx, [esp+8+arg_8]
 0x506F07: add     ecx, 0FFFFFFFFh
 0x506F0A: mov     eax, 38E38E39h
@@ -21,7 +21,6 @@
 0x506F39: push    ebp
 0x506F3A: push    esi
 0x506F3B: jmp     short loc_506F40
-0x506F3D: align 10h
 0x506F40: cmp     edi, ecx
 0x506F42: mov     ebp, edi
 0x506F44: jg      short loc_506FAC

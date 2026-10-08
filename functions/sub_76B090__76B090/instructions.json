@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76B090",
-    "line": "sub     esp, 38h",
+    "line": "sub     esp, 38h; Oblivion-authoritative resize/recreate wrapper. Saves the current 0x38-byte presentation block, substitutes requested width/height, and runs full device recreation. Returns 2 for requested parameters, 1 after successfully restoring originals, or 0 if both attempts fail.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x76B0C0",
-    "line": "cmp     eax, offset unk_B4265C",
+    "line": "cmp     eax, offset stru_B4265C",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x76B0D9",
-    "line": "push    38h ; '8'; Size",
+    "line": "push    38h ; '8'; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -199,31 +199,31 @@
   },
   {
     "ea": "0x76B0DF",
-    "line": "push    esi; Src",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76B0E0",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76B0E1",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x76B0E6",
-    "line": "mov     ecx, [esp+4Ch+arg_0]",
+    "line": "mov     ecx, [esp+4Ch+width]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x76B0EA",
-    "line": "mov     edx, [esp+4Ch+arg_4]",
+    "line": "mov     edx, [esp+4Ch+height]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x76B0F8",
-    "line": "call    sub_76A970",
+    "line": "call    NiDX9Renderer_RecreateDevice; Oblivion-authoritative NiDX9 device reset transaction: releases light/index/vertex buffers and RT slots 1-3; invalidates screen RT groups, rendered textures/cubemaps/dynamic textures, shaders and geometry; runs pre-reset callbacks; Reset()s using the default RT group's saved D3DPRESENT_PARAMETERS; increments ResetCounter; rebuilds targets/textures/defaults/shaders/render state; then runs post-reset callbacks. Any failed phase returns false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,13 +277,13 @@
   },
   {
     "ea": "0x76B106",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x76B10B",
-    "line": "push    38h ; '8'; Size",
+    "line": "push    38h ; '8'; byteCount",
     "mnemonic": "push",
     "size": 2
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x76B111",
-    "line": "push    eax; Src",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76B112",
-    "line": "push    esi; Dst",
+    "line": "push    esi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x76B113",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x76B11D",
-    "line": "call    sub_76A970",
+    "line": "call    NiDX9Renderer_RecreateDevice; Oblivion-authoritative NiDX9 device reset transaction: releases light/index/vertex buffers and RT slots 1-3; invalidates screen RT groups, rendered textures/cubemaps/dynamic textures, shaders and geometry; runs pre-reset callbacks; Reset()s using the default RT group's saved D3DPRESENT_PARAMETERS; increments ResetCounter; rebuilds targets/textures/defaults/shaders/render state; then runs post-reset callbacks. Any failed phase returns false.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x76B12B",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },

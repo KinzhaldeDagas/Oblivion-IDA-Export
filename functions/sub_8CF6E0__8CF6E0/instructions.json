@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8CF6E0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: InAir state update. Uses +0x320 fall timer to set/clear flag 0x80, consumes support flag 0x100 for OnGround transition, sets flag 0x400 for short airborne/water-surface transition cases, and applies gravity via +0x328 * dt to velocity +0x2E0.",
     "mnemonic": "push",
     "size": 1
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x8CF711",
-    "line": "jz      short loc_8CF74A",
+    "line": "jz      short loc_8CF74A; InAir landing path: flag 0x100 switches state to OnGround and sets/clears pending fall-impact based on fall timer +0x320.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x8CF78B",
-    "line": "movaps  [esp+0C0h+var_B0], xmm0",
+    "line": "movaps  [esp+0C0h+var_B0], xmm0; InAir copies shape-local offset vector from proxy+0x340/+0x344/+0x348 for water-height/transition tests.",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x8CF794",
-    "line": "call    sub_8AC070",
+    "line": "call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x8CF79D",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x8CF7B9",
-    "line": "fld     dword ptr [esi+318h]",
+    "line": "fld     dword ptr [esi+318h]; InAir reads proxy+0x318 water height; if current position minus shape offset is below water height, it sets flag 0x400 and may zero downward velocity while jumping.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x8CF7CA",
-    "line": "or      dword ptr [esi+1F4h], 400h",
+    "line": "or      dword ptr [esi+1F4h], 400h; InAir sets flag 0x400 for the short airborne transition case or the water-height case; do not treat this flag alone as ledge/ground proof.",
     "mnemonic": "or",
     "size": 10
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x8CF7F5",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -613,7 +613,7 @@
   },
   {
     "ea": "0x8CF855",
-    "line": "call    sub_890720",
+    "line": "call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x8CF91B",
-    "line": "call    sub_91F430",
+    "line": "call    bhkCharacterState_SolveVelocityToTarget; InAir solver setup: response is state-dependent, basis slots use proxy+0x2C0/+0x2B0/+0x2B0, current=proxy+0x2E0, desired local velocity uses horizontal proxy+0x290 only, maxDelta comes from the InAir state object, reference=proxy+0x280.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x8CF9D0",
-    "line": "movaps  [esp+0C0h+var_A0], xmm0",
+    "line": "movaps  [esp+0C0h+var_A0], xmm0; InAir reads runtime up/gravity basis from context+0x20 before applying gravity to velocity.",
     "mnemonic": "movaps",
     "size": 5
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x8CFA1B",
-    "line": "call    sub_890740",
+    "line": "call    sub_890740; Fall timer update: +0x324 always accumulates frame time; +0x320 accumulates only while downward velocity exceeds threshold and flags 0x100/0x200 are clear. Slowfall must suppress +0x320 for softened falls.",
     "mnemonic": "call",
     "size": 5
   },

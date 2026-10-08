@@ -1,36 +1,37 @@
-char __thiscall sub_4E7610(int *this)
+// Verified graph lifecycle dispatcher: if pointArray already exists, resolve deferred cross-cell PGRI links and optionally rebuild the render graph; otherwise find the thread-safe override file, load the PathGrid graph chunks, and on successful load perform the same cross-cell resolution/render update.
+bool __thiscall TESPathGrid_LoadOrResolveGraph(TESPathGrid *this)
 {
   Data *OverrideFile; // eax
-  Data *v4; // eax
+  Data *ThreadSafeFile; // eax
   Data *v5; // edi
-  char v6; // bl
+  bool SerializedGraphChunks; // bl
 
-  if ( *(this + 9) )
+  if ( this->pointArray ) /*0x4e7613*/
   {
-    sub_4E6F30(this);
-    if ( byte_B35F84 )
-      sub_4E71A0((TESObjectREFR *)this);
-    return 1;
+    TESPathGrid_ResolveCrossCellLinks(this); /*0x4e7619*/
+    if ( unk_B35F84 ) /*0x4e761e*/
+      TESPathGrid_RebuildRenderedGraph(this); /*0x4e7629*/
+    return 1; /*0x4e762e*/
   }
   else
   {
-    OverrideFile = TESForm_GetOverrideFile((TESForm *)this, 0xFFFFFFFF);
-    v4 = sub_4520F0(OverrideFile);
-    v5 = v4;
-    if ( v4 && TESFile::FindForm(v4, (TESForm *)this) )
+    OverrideFile = TESForm_GetOverrideFile(&this->base, 0xFFFFFFFF); /*0x4e7635*/
+    ThreadSafeFile = TESFile_GetThreadSafeFile(OverrideFile); /*0x4e763c*/
+    v5 = ThreadSafeFile; /*0x4e7641*/
+    if ( ThreadSafeFile && TESFile::FindForm(ThreadSafeFile, &this->base) ) /*0x4e764a*/
     {
-      v6 = sub_4E65B0((int)this, v5);
-      if ( v6 )
+      SerializedGraphChunks = TESPathGrid_LoadSerializedGraphChunks(this, v5); /*0x4e7661*/
+      if ( SerializedGraphChunks ) /*0x4e7665*/
       {
-        sub_4E6F30(this);
-        if ( byte_B35F84 )
-          sub_4E71A0((TESObjectREFR *)this);
+        TESPathGrid_ResolveCrossCellLinks(this); /*0x4e7669*/
+        if ( unk_B35F84 ) /*0x4e766e*/
+          TESPathGrid_RebuildRenderedGraph(this); /*0x4e7679*/
       }
-      return v6;
+      return SerializedGraphChunks; /*0x4e767e*/
     }
     else
     {
-      return 0;
+      return 0; /*0x4e7654*/
     }
   }
 }

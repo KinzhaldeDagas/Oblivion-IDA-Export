@@ -1,4 +1,4 @@
-0x4ED0D0: push    0FFFFFFFFh
+0x4ED0D0: push    0FFFFFFFFh; Verified worker path: obtains the queued/archive file, loads the TerrainLODQuad NIF through NiStream/BSStream, and stores the loaded object in TerrainLODQuadLoadTask.loadedTerrainNode (+0x3C).
 0x4ED0D2: push    offset SEH_4ED0D0
 0x4ED0D7: mov     eax, large fs:0
 0x4ED0DD: push    eax
@@ -49,3 +49,16 @@
 0x4ED19A: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x4ED19F: add     esp, 4A0h
 0x4ED1A5: retn
+0x9B6590: lea     ecx, [ebp-4A0h]; this
+0x9B6596: jmp     ??1BSStream@@UAE@XZ; BSStream::~BSStream(void)
+0x9B659B: mov     edx, [esp+arg_4]
+0x9B659F: lea     eax, [edx-49Ch]
+0x9B65A5: mov     ecx, [edx-4A0h]
+0x9B65AB: xor     ecx, eax
+0x9B65AD: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B65B2: add     eax, 8
+0x9B65B5: mov     ecx, [edx-4]
+0x9B65B8: xor     ecx, eax
+0x9B65BA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B65BF: mov     eax, offset stru_AE1448
+0x9B65C4: jmp     ___CxxFrameHandler3

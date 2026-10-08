@@ -1,19 +1,40 @@
 {
-  "callees_count": 487,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 4,
-  "display_name": "sub_7C9F30",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 221,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x7C9F30",
+      "0x7CB41A"
+    ],
+    [
+      "0x7CB890",
+      "0x7CB8A8"
+    ],
+    [
+      "0x9CE910",
+      "0x9CE933"
+    ]
+  ],
+  "chunks_sha256": "4bcf5b5449ee94db8fbb236e952a18d105f1055a32e2478ba2fe8b6961bbda8e",
+  "comment_regular": "Oblivion ShadowLight render-pass setup. Mode 5 dispatches selectors 6..9, applies the geometry NiAlphaProperty so the original test function/reference are available, disables blending, and mutates the pooled pass bias. Normal caster bias is slope 0/depth 0; shader-property flag 0x80000 selects slope 1 and depth -0.0005.\n\nBase ShadowLight consumer includes concrete cases for refraction selectors 0x160, 0x161, and 0x162, as well as inherited high selectors 0x177..0x179. Selector-only filtering would remove valid ordinary PP-lighting work.",
+  "comment_repeatable": "Base ShadowLight consumer includes concrete cases for refraction selectors 0x160, 0x161, and 0x162, as well as inherited high selectors 0x177..0x179. Selector-only filtering would remove valid ordinary PP-lighting work.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
+  "display_name": "ShadowLightShader__SetupRenderPass",
   "end_ea": "0x7CB41A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7C9F30",
+  "name": "ShadowLightShader__SetupRenderPass",
   "segment": ".text",
   "sha256": "6899008030c2352fe5cc36fd28c6d72424baf73d804ae09fed441bd1b94ed878",
   "size": 5354,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7C9F30",
-  "type": "int __thiscall(Ni2DBuffer **this, _DWORD *, int, int, NiRenderedTexture *, int, int, int)",
-  "xrefs_from_count": 2514,
+  "total_chunk_size": 5413,
+  "type": "int __thiscall(Ni2DBuffer **this, float *, int, int, NiD3DPass *, int, int, int)",
+  "xrefs_from_count": 2534,
   "xrefs_to_count": 6
 }

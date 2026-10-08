@@ -4,8 +4,8 @@
 0x7F4D66: test    edi, edi
 0x7F4D68: jz      short loc_7F4DD3
 0x7F4D6A: call    sub_7F4970
-0x7F4D6F: mov     ecx, eax
-0x7F4D71: call    sub_700900
+0x7F4D6F: mov     ecx, eax; this
+0x7F4D71: call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.
 0x7F4D76: mov     esi, eax
 0x7F4D78: mov     eax, [edi]
 0x7F4D7A: mov     edx, [eax+84h]
@@ -13,15 +13,15 @@
 0x7F4D82: push    esi
 0x7F4D83: mov     ecx, edi
 0x7F4D85: call    edx
-0x7F4D87: push    1
-0x7F4D89: push    0
-0x7F4D8B: push    17h
-0x7F4D8D: push    esi
-0x7F4D8E: call    sub_7B8940
+0x7F4D87: push    1; arg3
+0x7F4D89: push    0; normalMapBypass
+0x7F4D8B: push    17h; shaderId
+0x7F4D8D: push    esi; root
+0x7F4D8E: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x7F4D93: add     esp, 10h
 0x7F4D96: push    4
 0x7F4D98: mov     ecx, esi
-0x7F4D9A: call    NiNode_GetNiPropertyByID
+0x7F4D9A: call    NiNode_GetNiPropertyByID;
 0x7F4D9F: mov     esi, eax
 0x7F4DA1: test    esi, esi
 0x7F4DA3: jz      short loc_7F4DB8

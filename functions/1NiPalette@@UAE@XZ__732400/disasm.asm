@@ -15,7 +15,7 @@
 0x73242E: mov     eax, [esi+14h]
 0x732431: push    eax
 0x732432: mov     [esp+1Ch+var_4], 0
-0x73243A: call    FormHeapFree
+0x73243A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73243F: mov     ecx, [esi+18h]
 0x732442: add     esp, 4
 0x732445: test    ecx, ecx
@@ -35,3 +35,12 @@
 0x732473: pop     esi
 0x732474: add     esp, 10h
 0x732477: retn
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

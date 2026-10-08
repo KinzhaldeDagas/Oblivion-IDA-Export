@@ -1,1 +1,5 @@
-_DBGKM_CREATE_THREAD
+struct _DBGKM_CREATE_THREAD
+{
+ULONG SubSystemKey;
+PVOID StartAddress;
+};

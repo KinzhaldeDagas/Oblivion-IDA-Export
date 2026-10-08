@@ -1,4 +1,4 @@
-0x6D3210: push    0FFFFFFFFh
+0x6D3210: push    0FFFFFFFFh; Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.
 0x6D3212: push    offset SEH_6D3210
 0x6D3217: mov     eax, large fs:0
 0x6D321D: push    eax
@@ -35,7 +35,7 @@
 0x6D3277: push    eax; int
 0x6D3278: push    0; int
 0x6D327A: mov     dword ptr [esp+ebx*4+6Ch+var_38], eax
-0x6D327E: call    sub_6D3210
+0x6D327E: call    NiAnimationKey_CopyRangeRebased; Oblivion generic authored-key range copier. For non-type-4 tracks, counts existing timestamps inclusively in [start,end], allocates through content/type dispatch, type-copies each selected record, and rebases its timestamp to time-start. Does not synthesize boundary samples. For rotation type 4, recursively slices three scalar axes, allocates one 0x4C outer Euler record, and installs the axis results.
 0x6D3283: add     ebx, 1
 0x6D3286: add     esp, 20h
 0x6D3289: cmp     ebx, 3
@@ -47,7 +47,7 @@
 0x6D329C: test    eax, eax
 0x6D329E: mov     [esp+4Ch+var_4], 0
 0x6D32A6: jz      short loc_6D32C7
-0x6D32A8: push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; a5
+0x6D32A8: push    offset Shared_NoOpVirtual_60D0A0; a5
 0x6D32AD: push    offset sub_6BE430; a4
 0x6D32B2: push    1; size
 0x6D32B4: lea     esi, [eax+4]
@@ -81,7 +81,7 @@
 0x6D3305: mov     ecx, [eax]
 0x6D3307: push    edx
 0x6D3308: mov     [esp+70h+var_4], 0FFFFFFFFh
-0x6D3310: call    sub_6D3100
+0x6D3310: call    NiEulerRotKey_SetAxisTracks; Oblivion Euler/type-4 rotation axis ownership installer. Destroys any previous three axes, installs each axis pointer/count/numeric type, clears cached axis cursor/state words, and derives each nonempty axis stride from the scalar key type table.
 0x6D3315: mov     ecx, [esp+4Ch+var_C]
 0x6D3319: mov     large fs:0, ecx
 0x6D3320: pop     ecx
@@ -209,7 +209,7 @@
 0x6D346C: jz      loc_6D3521
 0x6D3472: mov     eax, ds:0B3D358h[esi*4]
 0x6D3479: push    ecx
-0x6D347A: call    eax ; dword_B3D358
+0x6D347A: call    eax ; unk_B3D358
 0x6D347C: mov     ecx, [esp+50h+arg_18]
 0x6D3480: mov     [ecx], eax
 0x6D3482: mov     edx, ds:0B3D530h[esi*4]
@@ -277,3 +277,15 @@
 0x6D353A: pop     ebx
 0x6D353B: add     esp, 38h
 0x6D353E: retn
+0x9C7A20: mov     eax, [ebp+8]
+0x9C7A23: push    eax
+0x9C7A24: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7A29: pop     ecx
+0x9C7A2A: retn
+0x9C7A2B: mov     edx, [esp+arg_4]
+0x9C7A2F: lea     eax, [edx-3Ch]
+0x9C7A32: mov     ecx, [edx-40h]
+0x9C7A35: xor     ecx, eax
+0x9C7A37: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7A3C: mov     eax, offset stru_AEFDF0
+0x9C7A41: jmp     ___CxxFrameHandler3

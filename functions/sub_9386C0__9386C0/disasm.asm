@@ -17,7 +17,6 @@
 0x9386EF: jbe     loc_93889F
 0x9386F5: mov     edi, ebx
 0x9386F7: jmp     short loc_938700
-0x9386F9: align 10h
 0x938700: movzx   eax, byte ptr [edi]
 0x938703: cmp     eax, 2
 0x938706: jg      loc_938790
@@ -226,7 +225,6 @@
 0x9389D6: neg     eax
 0x9389D8: lea     ecx, [ecx+eax*4]
 0x9389DB: jmp     short loc_9389E0
-0x9389DD: align 10h
 0x9389E0: mov     eax, [edi+30h]
 0x9389E3: mov     [esp+140h+var_128], eax
 0x9389E7: fcom    [esp+140h+var_128]
@@ -346,7 +344,7 @@
 0x938B66: push    eax
 0x938B67: push    edx
 0x938B68: lea     ecx, [esp+148h+var_104+4]
-0x938B6C: call    sub_88FE00
+0x938B6C: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x938B71: mov     eax, [esi+10h]
 0x938B74: mov     ecx, [eax]
 0x938B76: movzx   edi, byte ptr [ebx+21h]
@@ -675,7 +673,7 @@
 0x938F9C: mulps   xmm6, [esp+140h+anonymous_2]
 0x938FA1: movaps  xmm2, xmm6
 0x938FA4: movaps  xmm6, xmm1
-0x938FA7: shufps  xmm6, [esp+140h+var_104+4], 0DDh
+0x938FA7: shufps  xmm6, [esp+140h+var_104+4], var_40+1Dh
 0x938FAD: mulps   xmm6, [esp+140h+var_D0]
 0x938FB2: shufps  xmm1, [esp+140h+var_104+4], var_80+8
 0x938FB8: movaps  xmm7, xmm6

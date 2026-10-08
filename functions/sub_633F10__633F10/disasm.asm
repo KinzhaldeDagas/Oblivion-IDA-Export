@@ -7,7 +7,7 @@
 0x633F1F: mov     [esp+28h+var_14], ecx
 0x633F23: jz      loc_634265
 0x633F29: push    esi
-0x633F2A: call    GetExtraDataFollower
+0x633F2A: call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.
 0x633F2F: mov     esi, eax
 0x633F31: cmp     esi, edi
 0x633F33: mov     [esp+2Ch+var_4], esi
@@ -37,11 +37,11 @@
 0x633F7C: push    ebp
 0x633F7D: mov     ebp, [esi+0Ch]
 0x633F80: push    edi; a2
-0x633F81: mov     ecx, offset ActorProcessManager_ptr; this
+0x633F81: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x633F86: mov     [esp+38h+var_1C], ebx
-0x633F8A: call    sub_673A50
+0x633F8A: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x633F8F: mov     ecx, eax; this
-0x633F91: call    sub_7616D0
+0x633F91: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x633F96: fldz
 0x633F98: cmp     ebp, edi
 0x633F9A: fstp    [esp+34h+var_20]
@@ -98,8 +98,8 @@
 0x63403D: test    edi, edi
 0x63403F: mov     ebp, eax
 0x634041: jz      short loc_63404E
-0x634043: mov     ecx, edi
-0x634045: call    sub_567770
+0x634043: mov     ecx, edi; this
+0x634045: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x63404A: test    al, al
 0x63404C: jz      short loc_634054
 0x63404E: test    ebp, ebp
@@ -118,8 +118,8 @@
 0x634071: test    edi, edi
 0x634073: mov     ebp, eax
 0x634075: jz      short loc_634088
-0x634077: mov     ecx, edi
-0x634079: call    sub_567770
+0x634077: mov     ecx, edi; this
+0x634079: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x63407E: test    al, al
 0x634080: jz      short loc_634088
 0x634082: test    ebp, ebp
@@ -139,7 +139,7 @@
 0x6340A0: call    BSSimpleList_PushFront
 0x6340A5: jmp     loc_6341ED
 0x6340AA: mov     ecx, esi; this
-0x6340AC: call    Actor__GetProcessLevel
+0x6340AC: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x6340B1: mov     ecx, eax
 0x6340B3: test    ecx, ecx
 0x6340B5: jz      short loc_63411D
@@ -156,7 +156,7 @@
 0x6340D7: jnz     short loc_634104
 0x6340D9: mov     ebp, [esi+58h]
 0x6340DC: mov     edi, [ebp+0]
-0x6340DF: mov     ecx, offset TimeGlobals
+0x6340DF: mov     ecx, 0B332E0h
 0x6340E4: add     edi, 1Ch
 0x6340E7: call    TimeGlobals_GetGameHour
 0x6340EC: fsub    qword ptr ds:0A2F928h
@@ -189,7 +189,7 @@
 0x63413B: test    al, al
 0x63413D: jz      loc_6341ED
 0x634143: mov     ecx, esi; this
-0x634145: call    Actor__GetProcessLevel
+0x634145: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x63414A: test    eax, eax
 0x63414C: jnz     loc_6341ED
 0x634152: mov     eax, [esi]
@@ -201,7 +201,7 @@
 0x634166: test    ah, 5
 0x634169: jp      short loc_6341E1
 0x63416B: mov     ecx, esi; this
-0x63416D: call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)
+0x63416D: call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.
 0x634172: cmp     eax, 3
 0x634175: jz      short loc_6341E1
 0x634177: mov     eax, [esi]
@@ -257,19 +257,19 @@
 0x634214: jz      short loc_634227
 0x634216: mov     ecx, [esp+34h+var_14]
 0x63421A: push    eax
-0x63421B: call    sub_424D00
+0x63421B: call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.
 0x634220: mov     esi, [esi+4]
 0x634223: test    esi, esi
 0x634225: jnz     short loc_634210
 0x634227: mov     ecx, edi
-0x634229: call    BSSimpleList_Clear
+0x634229: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x63422E: push    edi
-0x63422F: call    FormHeapFree
+0x63422F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634234: add     esp, 4
 0x634237: mov     ecx, ebx
-0x634239: call    BSSimpleList_Clear
+0x634239: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x63423E: push    ebx
-0x63423F: call    FormHeapFree
+0x63423F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x634244: mov     edx, [esp+38h+var_4]
 0x634248: mov     eax, [edx+0Ch]
 0x63424B: add     esp, 4
@@ -280,7 +280,7 @@
 0x634256: cmp     dword ptr [eax], 0
 0x634259: jnz     short loc_634264
 0x63425B: mov     ecx, [esp+2Ch+var_14]
-0x63425F: call    sub_420F00
+0x63425F: call    ExtraDataList_RemoveFollowerExtra; Removes ExtraFollower (type 0x23) when present.
 0x634264: pop     esi
 0x634265: pop     edi
 0x634266: add     esp, 24h

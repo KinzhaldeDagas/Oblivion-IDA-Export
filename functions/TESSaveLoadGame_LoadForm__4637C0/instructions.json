@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x463800",
-    "line": "mov     edi, [esp+14Ch+arg_0]",
+    "line": "mov     edi, [esp+14Ch+form]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x463863",
-    "line": "mov     ecx, offset stru_B33B80",
+    "line": "mov     ecx, offset unk_B33B80",
     "mnemonic": "mov",
     "size": 5
   },
@@ -487,31 +487,31 @@
   },
   {
     "ea": "0x4638DB",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4638DD",
-    "line": "push    1",
+    "line": "push    1; force",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4638DF",
-    "line": "push    eax",
+    "line": "push    eax; formID",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4638E0",
-    "line": "call    sub_452DF0",
+    "line": "call    SaveLoadChangesMap_RemoveChanges;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4638E5",
-    "line": "mov     ecx, offset stru_B33B80; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B33B80; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x463928",
-    "line": "push    eax",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x46392D",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x463930",
-    "line": "call    sub_453530",
+    "line": "call    SaveLoad_AdjustCreatedFormChangeFlags; Verified: created-form predicate at 45353F gates adjustment; RTTI cast TESObjectREFR -> clear bit4/set bit2; RTTI cast TESObjectCELL -> OR6; otherwise preserves flags. Used by LoadForm 463930, LoadGame 465FEE/4664CD and save-side normalization 4535A0. Unknown broader meanings of flag bits outside these form-specific uses.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x46398B",
-    "line": "call    sub_460BC0",
+    "line": "call    sub_460BC0; SavePersistanceFix hook point: TESSaveLoadGame_LoadForm calls sub_460BC0 to apply saved REFR movement before virtual LoadGame handles remaining change flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,7 +925,7 @@
   },
   {
     "ea": "0x4639CD",
-    "line": "mov     [esp+14Ch+var_12C], eax",
+    "line": "mov     [esp+14Ch+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -949,25 +949,25 @@
   },
   {
     "ea": "0x4639DC",
-    "line": "push    32h ; '2'",
+    "line": "push    32h ; '2'; growBy",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4639DE",
-    "line": "push    32h ; '2'",
+    "line": "push    32h ; '2'; capacity",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4639E0",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4639E2",
-    "line": "call    sub_452670",
+    "line": "call    OblivionPostLoadFormArray_Initialize",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,31 +1069,31 @@
   },
   {
     "ea": "0x463A1A",
-    "line": "mov     ecx, [esi+1Ch]",
+    "line": "mov     ecx, [esi+1Ch]; self",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x463A1D",
-    "line": "mov     [esp+14Ch+var_12C], eax",
+    "line": "mov     [esp+14Ch+value], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x463A21",
-    "line": "lea     eax, [esp+14Ch+var_12C]",
+    "line": "lea     eax, [esp+14Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x463A25",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463A26",
-    "line": "call    sub_5A6AB0",
+    "line": "call    NiTLargeArray32_AppendSlot; MEF SAVE PERF PASS2 2026-10-08: PERF-20 second producer: deferred LoadForm lazily creates manager+1C FormAndFlags array via452670(50,50) at4639E2, then appends16-byte record here. Finalizer45FDA0 can consume this queue when no caller array supplied; destroys manager array460331/clears+1C460337. Same fixed-increment cost per accumulation episode; do not assume its size or recurrence equals full-load local queue. Persistent queue writer/reentry contract requires separate sealing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x463A57",
-    "line": "call    sub_452230",
+    "line": "call    sub_452230; EnginePatch v1: save-buffer free hook used to remove tracked record ranges and avoid stale bounds during savegame loading.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x463A60",
-    "line": "mov     [ecx+4], ebx",
+    "line": "mov     [ecx+4], ebx;",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1225,25 +1225,25 @@
   },
   {
     "ea": "0x463A6A",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x463A6C",
-    "line": "push    eax",
+    "line": "push    eax; flags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463A6D",
-    "line": "push    edi",
+    "line": "push    edi; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x463A6E",
-    "line": "call    sub_452D60",
+    "line": "call    ChangesMap_RemoveFormChangeFlags;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x463A76",
-    "line": "mov     ecx, offset stru_B33B80; lpCriticalSection",
+    "line": "mov     ecx, offset unk_B33B80; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1274,6 +1274,102 @@
   {
     "ea": "0x463A82",
     "line": "jmp     loc_4638F8",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE630",
+    "line": "mov     eax, [ebp-12Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE636",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE637",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE63C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE63D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9AE63E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AE642",
+    "line": "lea     eax, [edx-13Ch]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE648",
+    "line": "mov     ecx, [edx-140h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9AE64E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE650",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE655",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE658",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AE65B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AE65D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE662",
+    "line": "mov     eax, offset stru_ADAE2C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AE667",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

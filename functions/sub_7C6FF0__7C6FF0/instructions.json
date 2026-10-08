@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7C6FF0",
-    "line": "push    esi",
+    "line": "push    esi; Find an existing source light; clear receiver associations when source flag +0x18 bit0 is set, otherwise refresh source-derived state.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x7C6FF2",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7C6FF6",
-    "line": "push    edi",
+    "line": "push    edi; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7C6FF9",
-    "line": "call    sub_7C6230",
+    "line": "call    ShadowSceneNode_FindFullLightBySource; Search the native ShadowSceneNode full-light list for a ShadowSceneLight whose backing NiLight identity matches the supplied source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7C7006",
-    "line": "call    sub_7D21F0",
+    "line": "call    ShadowSceneLight_ClearReceiverAssociations; Remove property-side shadow-light links, reset shader-side state, and free this light's object/receiver list associations.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,19 +91,19 @@
   },
   {
     "ea": "0x7C7014",
-    "line": "push    eax",
+    "line": "push    eax; light",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7C7015",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7C7017",
-    "line": "call    sub_7C5F60",
+    "line": "call    ShadowSceneNode_ReconcileSourceLightReceivers; Reconcile one ordinary source light against current scene receivers. Projector-mode lights are skipped; culled sources clear associations, visible sources begin/add/remove receiver reconciliation.",
     "mnemonic": "call",
     "size": 5
   },

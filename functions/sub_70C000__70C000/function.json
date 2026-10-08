@@ -1,19 +1,36 @@
 {
-  "callees_count": 9,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_70C000",
+  "chunks": [
+    [
+      "0x70C000",
+      "0x70C0AF"
+    ],
+    [
+      "0x9BD550",
+      "0x9BD573"
+    ]
+  ],
+  "chunks_sha256": "8b5e12df214cf1f2beef2a69ad3aac5f3a4cd4d0281c408f1e2884b4c12f5682",
+  "comment_regular": "Renderer visible-array submit/flush helper. Begins accumulator work with the camera, submits the visible array, then calls the accumulator flush entry; the per-source shadow producer deliberately gates the first nested flush until +0x21E1 is set.\n\nCULLING audit 2026-09-27 (observed Oblivion behavior): Uses supplied camera to begin accumulator(+0x4C), calls 0x70BF30 on the array, flushes(+0x50), then releases retained accumulator. For callers via 0x70C0B0 this runs after Process has returned; process.Camera is no longer a valid consumer-lifetime source. Existing shadow-ready comments apply to the particular shadow accumulator producer, not all invocations.\n\nCULLING documentation correction 2026-09-27: bounded direct-xref query currently reports caller 0x70C0FC in CullAndRenderScene, after Process returns. Do not infer universal main-view ownership from this observed direct-call chain.\n\nMoonSugarEffect decode: after culling, calls accumulator prepare with camera, renders visible geo list, then flushes accumulator. Confirms sub_70C0B0 is camera->cull->submit boundary.",
+  "comment_repeatable": "Renderer visible-array submit/flush helper. Begins accumulator work with the camera, submits the visible array, then calls the accumulator flush entry; the per-source shadow producer deliberately gates the first nested flush until +0x21E1 is set.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiRenderer_SubmitAndFlushVisibleGeometryArray",
   "end_ea": "0x70C0AF",
+  "evidence_confidence": "Unknown",
   "flags": 20480,
   "has_pseudocode": true,
-  "name": "sub_70C000",
+  "name": "NiRenderer_SubmitAndFlushVisibleGeometryArray",
   "segment": ".text",
   "sha256": "2c04ab2ce7563b1f006f5cb765731a7c561d1dd98e9c790ed4308382d15c6956",
   "size": 175,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70C000",
-  "type": "void __cdecl(NiCamera *a1, _DWORD *a2)",
-  "xrefs_from_count": 71,
+  "total_chunk_size": 210,
+  "type": "void __cdecl(NiCamera *camera, CullingVisibleGeometryArray *visibleArray)",
+  "xrefs_from_count": 82,
   "xrefs_to_count": 1
 }

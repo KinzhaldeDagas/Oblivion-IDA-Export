@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x472030",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; ActorAnimData movement-vector recovery. For an installed TESAnimGroup, samples AccumRoot at current/end times, computes normalized movement delta, stores it back to the TESAnimGroup, and warns when Animate In Place exported zero movement.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x47205D",
-    "line": "mov     ebp, [esp+88h+arg_0]",
+    "line": "mov     ebp, [esp+88h+object]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x472064",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x472066",
-    "line": "call    TESActorBaseData_GetMagicka",
+    "line": "call    Shared_GetWordAtOffset08; TESAnimGroup encoded key accessor: returns 16-bit group key at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x472074",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x47208F",
-    "line": "lea     eax, [esp+88h+arg_0]",
+    "line": "lea     eax, [esp+88h+object]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x472098",
-    "line": "call    sub_470960",
+    "line": "call    ActorAnimData_FindAnimMapEntry; CustomAnimSupport decode: anim-map lookup helper used by playback, validators, and save/load restore to test an encoded group key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4720DF",
-    "line": "mov     esi, [esp+88h+arg_0]",
+    "line": "mov     esi, [esp+88h+object]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x472197",
-    "line": "fstp    [esp+88h+arg_0]",
+    "line": "fstp    [esp+88h+object]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x4721C4",
-    "line": "fld     [esp+88h+arg_0]",
+    "line": "fld     [esp+88h+object]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x472202",
-    "line": "lea     ecx, [esp+8Ch+var_58]",
+    "line": "lea     ecx, [esp+8Ch+position]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x472226",
-    "line": "fstp    [esp+8Ch+var_58]",
+    "line": "fstp    [esp+8Ch+position.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x47222E",
-    "line": "fstp    [esp+8Ch+var_54]",
+    "line": "fstp    [esp+8Ch+position.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -913,13 +913,13 @@
   },
   {
     "ea": "0x472236",
-    "line": "fstp    [esp+8Ch+var_50]",
+    "line": "fstp    [esp+8Ch+position.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x47223A",
-    "line": "fld     [esp+8Ch+arg_0]",
+    "line": "fld     [esp+8Ch+object]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -931,13 +931,13 @@
   },
   {
     "ea": "0x472245",
-    "line": "fstp    [esp+8Ch+arg_0]",
+    "line": "fstp    [esp+8Ch+object]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x47224C",
-    "line": "fld     [esp+8Ch+arg_0]",
+    "line": "fld     [esp+8Ch+object]",
     "mnemonic": "fld",
     "size": 7
   },
@@ -955,25 +955,25 @@
   },
   {
     "ea": "0x47225B",
-    "line": "lea     eax, [esp+88h+var_58]",
+    "line": "lea     eax, [esp+88h+position]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x47225F",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x472260",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x472262",
-    "line": "call    sub_4BEF50",
+    "line": "call    PathGraphNode_SetPosition; Verified shared graph-node position setter: writes XYZ into this+0x14; called by both TESRoad and TESPathGrid record loaders.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x472293",
-    "line": "call    sub_51AA00",
+    "line": "call    AnimKey_GetGroupID; Final name: AnimKey_GetGroupID. Returns low native group byte from encoded key.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x4722A5",
-    "line": "call    sub_51AED0",
+    "line": "call    TESAnimGroup_GetMovementMagnitude; TESAnimGroup movement magnitude. Computes sqrt(x*x + y*y + z*z) from movement vector floats; used by Animate In Place warning path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x4722C0",
-    "line": "call    TESAnimGroup_GetAnimationGroup",
+    "line": "call    TESAnimGroup_GetAnimationGroup; TESAnimGroup native group id accessor: byte at TESAnimGroup +0x08.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x4722D2",
-    "line": "call    sub_51AC60",
+    "line": "call    TESAnimGroup_GetWeaponPrefix; Anim key weapon-prefix extractor. Returns the weapon prefix nibble from key word bits 0x0F00.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x4722E1",
-    "line": "call    sub_51AC50",
+    "line": "call    TESAnimGroup_GetMovementPrefix; Anim key movement-prefix extractor. Returns the high nibble of key word bits 0xF000.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1294,5 +1294,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9AEC80",
+    "line": "lea     ecx, [ebp-6Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEC83",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEC88",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9AEC8C",
+    "line": "lea     eax, [edx-78h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEC8F",
+    "line": "mov     ecx, [edx-7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9AEC92",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9AEC94",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEC99",
+    "line": "mov     eax, offset stru_ADB384",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9AEC9E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

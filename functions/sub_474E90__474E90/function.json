@@ -1,19 +1,32 @@
 {
-  "callees_count": 29,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x474E90",
+      "0x475019"
+    ]
+  ],
+  "chunks_sha256": "fd835d07615154d6ce22779cce18bc8d9535ade87132c18a5e6c2bc70b6dc6e7",
+  "comment_regular": "Reconnects a loaded AnimIdle KF/sequence to ActorAnimData, restores nested sequence state, and preserves the idle phase needed by queued-idle processing.",
+  "comment_repeatable": "Reconnects a loaded AnimIdle KF/sequence to ActorAnimData, restores nested sequence state, and preserves the idle phase needed by queued-idle processing.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_474E90",
+  "display_name": "AnimIdle_RestoreLoadedKFState",
   "end_ea": "0x475019",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_474E90",
+  "name": "AnimIdle_RestoreLoadedKFState",
   "segment": ".text",
   "sha256": "fd835d07615154d6ce22779cce18bc8d9535ade87132c18a5e6c2bc70b6dc6e7",
   "size": 393,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x474E90",
-  "type": "void __userpurge(Ni2DBuffer **Dst@<ecx>, double st5_0@<st2>, double st6_0@<st1>, double@<st0>, float, AnimSequenceSingle *)",
+  "total_chunk_size": 393,
+  "type": "void __thiscall(Ni2DBuffer **Dst, float, AnimSequenceSingle *)",
   "xrefs_from_count": 156,
   "xrefs_to_count": 1
 }

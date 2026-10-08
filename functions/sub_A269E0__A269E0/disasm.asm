@@ -1,5 +1,5 @@
 0xA269E0: push    esi
-0xA269E1: mov     esi, dword_B3F984
+0xA269E1: mov     esi, dword ptr unk_B3F984
 0xA269E7: test    esi, esi
 0xA269E9: jz      short loc_A26A07
 0xA269EB: lea     eax, [esi+4]

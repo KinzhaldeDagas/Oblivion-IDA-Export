@@ -15,7 +15,7 @@
 0x6E16C7: mov     edi, ecx
 0x6E16C9: mov     ebx, [esp+30h+arg_0]
 0x6E16CD: push    ebx
-0x6E16CE: call    sub_715E70
+0x6E16CE: call    NiTimeController_LinkObject; Resolves streamed next-controller and target links. Next +0x34 is refcounted; target +0x30 is non-owning. For streams older than 0x0A000110, propagates the controller manager-controlled state to the linked target property flags.
 0x6E16D3: cmp     dword ptr [ebx+0D8h], 4010003h
 0x6E16DD: jnb     loc_6E1876
 0x6E16E3: mov     esi, ds:0B3E040h
@@ -29,7 +29,6 @@
 0x6E1702: mov     [esp+30h+var_18], edi
 0x6E1706: jmp     short loc_6E1714
 0x6E1708: jmp     short loc_6E1710
-0x6E170A: align 10h
 0x6E1710: mov     ebx, [esp+30h+arg_0]
 0x6E1714: mov     eax, [esi+14h]
 0x6E1717: mov     edi, [eax+ebp*4]
@@ -49,7 +48,7 @@
 0x6E173E: mov     esi, eax
 0x6E1740: push    edi
 0x6E1741: mov     [esp+34h+var_4], 0FFFFFFFFh
-0x6E1749: call    FormHeapFree
+0x6E1749: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E174E: mov     ecx, ds:0B3E040h
 0x6E1754: mov     edx, [ecx+4]
 0x6E1757: mov     eax, [edx+ebp*4]
@@ -100,7 +99,7 @@
 0x6E17D5: mov     ecx, esi
 0x6E17D7: call    sub_6D83A0
 0x6E17DC: push    edi
-0x6E17DD: call    FormHeapFree
+0x6E17DD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E17E2: add     esp, 4
 0x6E17E5: test    ebx, ebx
 0x6E17E7: jnz     short loc_6E17B1
@@ -125,21 +124,21 @@
 0x6E1823: lea     eax, [esi+30h]
 0x6E1826: push    edx
 0x6E1827: mov     dword ptr [eax], offset ??_7?$NiTArray@PAD@@6B@; const NiTArray<char *>::`vftable'
-0x6E182D: call    FormHeapFree
+0x6E182D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E1832: mov     eax, [esi+24h]
 0x6E1835: push    eax
 0x6E1836: mov     dword ptr [esi+20h], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'
-0x6E183D: call    FormHeapFree
+0x6E183D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E1842: mov     ecx, [esi+14h]
 0x6E1845: push    ecx
 0x6E1846: mov     dword ptr [esi+10h], offset ??_7?$NiTArray@PAD@@6B@; const NiTArray<char *>::`vftable'
-0x6E184D: call    FormHeapFree
+0x6E184D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E1852: mov     edx, [esi+4]
 0x6E1855: push    edx
 0x6E1856: mov     dword ptr [esi], offset ??_7?$NiTArray@I@@6B@; const NiTArray<uint>::`vftable'
-0x6E185C: call    FormHeapFree
+0x6E185C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E1861: push    esi
-0x6E1862: call    FormHeapFree
+0x6E1862: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6E1867: add     esp, 14h
 0x6E186A: mov     dword ptr ds:0B3E040h, 0
 0x6E1874: jmp     short loc_6E18B8
@@ -175,3 +174,15 @@
 0x6E18C7: pop     ebx
 0x6E18C8: add     esp, 1Ch
 0x6E18CB: retn    4
+0x9C33E0: mov     eax, [ebp-10h]
+0x9C33E3: push    eax
+0x9C33E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C33E9: pop     ecx
+0x9C33EA: retn
+0x9C33EB: mov     edx, [esp+arg_4]
+0x9C33EF: lea     eax, [edx-20h]
+0x9C33F2: mov     ecx, [edx-24h]
+0x9C33F5: xor     ecx, eax
+0x9C33F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C33FC: mov     eax, offset stru_AEC000
+0x9C3401: jmp     ___CxxFrameHandler3

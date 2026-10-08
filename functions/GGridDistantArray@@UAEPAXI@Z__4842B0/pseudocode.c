@@ -1,7 +1,7 @@
-int **__thiscall GridDistantArray::`scalar deleting destructor'(int **this, char a2)
+char **__thiscall GridDistantArray::`scalar deleting destructor'(char **this, char a2)
 {
-  GridDistantArray::~GridDistantArray(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  GridDistantArray::~GridDistantArray(this); /*0x4842b3*/
+  if ( (a2 & 1) != 0 ) /*0x4842bd*/
+    FormHeapFree((unsigned int)this); /*0x4842c0*/
+  return this; /*0x4842ca*/
 }

@@ -1,4 +1,4 @@
-0x5E6B40: cmp     dword ptr [ecx+58h], 0
+0x5E6B40: cmp     dword ptr [ecx+58h], 0; 3DTheft 2026-05-17: returns true when the actor's current package type is 0x12 (Dialogue). AddScriptPackage uses this as a pre-handoff gate.
 0x5E6B44: jz      short loc_5E6B60
 0x5E6B46: mov     ecx, [ecx+58h]
 0x5E6B49: mov     eax, [ecx]

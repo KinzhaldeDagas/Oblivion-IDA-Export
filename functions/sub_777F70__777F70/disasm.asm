@@ -1,4 +1,4 @@
-0x777F70: push    esi
+0x777F70: push    esi; Pass225/226: Forces NiGeometryBufferData stream count; screen-texture render path forces exactly one stream.
 0x777F71: push    edi
 0x777F72: mov     edi, [esp+8+streamCount]
 0x777F76: mov     esi, ecx
@@ -32,17 +32,17 @@
 0x777FBF: mov     [esp+10h+streamCount], ebx
 0x777FC3: jnb     short loc_77803D
 0x777FC5: lea     eax, ds:0[edi*4]
-0x777FCC: push    eax; Size
+0x777FCC: push    eax; byteCount
 0x777FCD: mov     eax, [esi+24h]
-0x777FD0: push    eax; Src
-0x777FD1: push    ebp; Dst
-0x777FD2: call    _memcpy
+0x777FD0: push    eax; source
+0x777FD1: push    ebp; destination
+0x777FD2: call    _memcpy;
 0x777FD7: mov     ecx, [esi+20h]
 0x777FDA: lea     eax, ds:0[edi*4]
-0x777FE1: push    eax; Size
-0x777FE2: push    ecx; Src
-0x777FE3: push    ebx; Dst
-0x777FE4: call    _memcpy
+0x777FE1: push    eax; byteCount
+0x777FE2: push    ecx; source
+0x777FE3: push    ebx; destination
+0x777FE4: call    _memcpy;
 0x777FE9: add     esp, 18h
 0x777FEC: cmp     dword ptr [esi+4], 0
 0x777FF0: jz      short loc_778018
@@ -62,10 +62,10 @@
 0x778014: mov     ebx, [esp+10h+streamCount]
 0x778018: mov     eax, [esi+24h]
 0x77801B: push    eax
-0x77801C: call    FormHeapFree
+0x77801C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x778021: mov     ecx, [esi+20h]
 0x778024: push    ecx
-0x778025: call    FormHeapFree
+0x778025: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77802A: add     esp, 8
 0x77802D: mov     [esi+24h], ebp
 0x778030: pop     ebp
@@ -77,18 +77,18 @@
 0x77803A: retn    4
 0x77803D: mov     edx, [esi+24h]
 0x778040: lea     ecx, ds:0[eax*4]
-0x778047: push    ecx; Size
-0x778048: push    edx; Src
-0x778049: push    ebp; Dst
-0x77804A: call    _memcpy
+0x778047: push    ecx; byteCount
+0x778048: push    edx; source
+0x778049: push    ebp; destination
+0x77804A: call    _memcpy;
 0x77804F: mov     eax, [esi+1Ch]
 0x778052: mov     ecx, [esi+20h]
 0x778055: add     eax, eax
 0x778057: add     eax, eax
-0x778059: push    eax; Size
-0x77805A: push    ecx; Src
-0x77805B: push    ebx; Dst
-0x77805C: call    _memcpy
+0x778059: push    eax; byteCount
+0x77805A: push    ecx; source
+0x77805B: push    ebx; destination
+0x77805C: call    _memcpy;
 0x778061: mov     eax, [esi+1Ch]
 0x778064: mov     edx, edi
 0x778066: sub     edx, eax

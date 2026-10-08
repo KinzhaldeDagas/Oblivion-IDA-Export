@@ -10,10 +10,10 @@
 0x724288: push    ebx
 0x724289: lea     ebx, [esi+0E8h]
 0x72428F: and     eax, 0FFFFFF01h
-0x724294: push    eax; char
+0x724294: push    eax; updateProperties
 0x724295: push    ecx
-0x724296: fstp    [esp+10h+var_10]; float
-0x724299: call    sub_47C930
+0x724296: fstp    [esp+10h+applicationTime]; applicationTime
+0x724299: call    NiAVObject_UpdatePropertiesAndControllers; Update one NiAVObject's property controllers and attached NiTimeController chain. If requested, walk the property list at NiAVObject+0x9C and invoke property virtual +0x50 when its controller pointer is non-null. Always walk NiObjectNET.controller at object+0x0C through NiTimeController.next at +0x34 and invoke controller virtual Update +0x54 with applicationTime. No Active-bit prefilter occurs here: NiTimeController.flags+0x08 bit 3 only affects time-cache logic inside the controller. External Crossbow consequence after this Oblivion decode: temporarily clearing the base Active bit inside an already-entered morph hook will not by itself stop the next scene traversal, but pointer discovery still cannot make a graph that is not traversed dispatch Update.
 0x72429E: mov     edx, [esi]
 0x7242A0: mov     eax, [edx+74h]
 0x7242A3: mov     ecx, esi
@@ -29,7 +29,7 @@
 0x7242BF: fld     [esp+0Ch+arg_0]
 0x7242C3: push    ecx
 0x7242C4: mov     ecx, edi
-0x7242C6: fstp    [esp+10h+var_10]; float
+0x7242C6: fstp    [esp+10h+applicationTime]; float
 0x7242C9: call    sub_709E30
 0x7242CE: mov     edx, [esi+0E0h]
 0x7242D4: push    ebx
@@ -52,6 +52,6 @@
 0x724301: retn    4
 0x724304: push    ecx
 0x724305: fstp    [esp+8+var_8]; float
-0x724308: call    sub_70A190
+0x724308: call    sub_70A190; NiNode selected downward: flags+18 choose controllers/world update; child flags bit1 and bit4 choose synchronous vfunc+64/+68 at 70A215/70A210. Child bounds merge before RET 4. No queue/dispatch in this body. Full-call observer may fence same-thread descendants, not asynchronous work.
 0x72430D: pop     esi
 0x72430E: retn    4

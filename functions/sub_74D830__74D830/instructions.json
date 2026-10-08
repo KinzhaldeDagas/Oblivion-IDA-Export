@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x74D834",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+element]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x74D860",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x74D862",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x74D86B",
-    "line": "mov     [esp+10h+arg_0], esi",
+    "line": "mov     [esp+10h+element], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -163,31 +163,31 @@
   },
   {
     "ea": "0x74D87B",
-    "line": "lea     eax, [esp+10h+arg_0]",
+    "line": "lea     eax, [esp+10h+element]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x74D87F",
-    "line": "push    eax",
+    "line": "push    eax; element",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74D880",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x74D881",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x74D883",
-    "line": "call    sub_4B34E0",
+    "line": "call    NiTObjectArray_SetAt",
     "mnemonic": "call",
     "size": 5
   },

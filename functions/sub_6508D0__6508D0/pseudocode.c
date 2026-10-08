@@ -1,16 +1,17 @@
-int __thiscall sub_6508D0(_DWORD *this, _DWORD *a2)
+// High/MiddleHigh process vtable +0x124. Returns cached BackWeapon for 2H blade, 2H blunt, staff, and bow; SideWeapon otherwise. This accessor is adjacent to, but not called by, the native Arrow:0 clone/attach block.
+NiNode *__thiscall MiddleHighProcess_GetBackOrSideWeaponNode(MiddleHighProcess *this, ActorAnimData *animData)
 {
-  int v2; // eax
-  int v3; // eax
+  EntryData *equippedWeaponData; // eax
+  int vtbl_low; // eax
 
-  if ( !a2 )
-    return *(this + 0x42);
-  v2 = *(this + 0x39);
-  if ( !v2 )
-    return *(this + 0x42);
-  v3 = *(char *)(*(_DWORD *)(v2 + 8) + 0x90);
-  if ( v3 == 1 || v3 > 2 && v3 <= 5 )
-    return sub_477EC0(a2, 4);
+  if ( !animData ) /*0x6508d8*/
+    return (NiNode *)this->backOrSideWeaponAttachNode; /*0x6508d8*/
+  equippedWeaponData = this->equippedWeaponData; /*0x6508da*/
+  if ( !equippedWeaponData ) /*0x6508e2*/
+    return (NiNode *)this->backOrSideWeaponAttachNode; /*0x650917*/
+  vtbl_low = SLOBYTE(equippedWeaponData->type[6].vtbl); /*0x6508e7*/
+  if ( vtbl_low == 1 || vtbl_low > 2 && vtbl_low <= 5 ) /*0x6508fb*/
+    return ActorSkinInfo_GetCachedNode(animData, 4); /*0x650912*/
   else
-    return sub_477EC0(a2, 5);
+    return ActorSkinInfo_GetCachedNode(animData, 5); /*0x650905*/
 }

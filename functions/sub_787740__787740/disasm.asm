@@ -1,4 +1,4 @@
-0x787740: mov     ecx, [esp+arg_0]
+0x787740: mov     ecx, [esp+arg_0]; Oblivion collision-vector allocator: checks count*0x1C for overflow, throws std::bad_alloc on overflow, and allocates through FormHeap.
 0x787744: sub     esp, 0Ch
 0x787747: test    ecx, ecx
 0x787749: ja      short loc_787767

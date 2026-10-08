@@ -1,1 +1,1 @@
-HKEY
+typedef HKEY__ *HKEY;

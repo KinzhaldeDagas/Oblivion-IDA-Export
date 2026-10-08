@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4F0620",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x4F0623",
-    "line": "mov     ecx, [ebx+7Ch]",
+    "line": "mov     ecx, [ebx+7Ch]; worldspace",
     "mnemonic": "mov",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x4F062B",
-    "line": "jmp     sub_4F0620",
+    "line": "jmp     TESWorldSpace_CollectPersistentCellReferences; Verified: climbs the supplied WorldSpace chain to its root, allocates an 8-byte BSSimpleList head, copies refs from root.persistentCell, then copies refs from handler worldspaces whose parentWorldspace equals that root. It does not recurse through arbitrary descendants.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x4F0633",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Verified: allocates an 8-byte list head for persistent-cell reference aggregation.",
     "mnemonic": "call",
     "size": 5
   },

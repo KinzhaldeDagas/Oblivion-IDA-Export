@@ -1,1 +1,9 @@
-DIEFFECTINFOW
+struct DIEFFECTINFOW
+{
+DWORD dwSize;
+GUID guid;
+DWORD dwEffType;
+DWORD dwStaticParams;
+DWORD dwDynamicParams;
+WCHAR tszName[260];
+};

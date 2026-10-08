@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x483630",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified cell-grid lookup first removes stale DistantLOD/tree-batch references for the requested packed cell coordinates, then returns the current GridDistantArray cell slot.",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,19 +79,19 @@
   },
   {
     "ea": "0x483653",
-    "line": "push    ecx",
+    "line": "push    ecx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x483654",
-    "line": "push    edx",
+    "line": "push    edx; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x483655",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },

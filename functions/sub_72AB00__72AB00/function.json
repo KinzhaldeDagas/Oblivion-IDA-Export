@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
-  "callers_count": 3,
-  "comment_regular": "",
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x72AB00",
+      "0x72AB6A"
+    ]
+  ],
+  "chunks_sha256": "64121a391a0ab62e7928273387208e8054f068fa0b7c53cf9007eb5390e3a9cc",
+  "comment_regular": "\nVerified 2026-10-07: constructs NiTriShapeDynamicData, allocation5C, vtableA80274. Total vertices+08 and total triangles+40 are separate from active vertices+58 and active triangles+5A. Distant cache builder7B2FDB passes full vertex capacity and zero initial active triangles. Companion geometry must use this dynamic class to honor shader3 updates.\n[v142 runtime corroboration 2026-10-07] Archived SpeedTreeOBSE log SHA256 02fdd51caa8c585b2dddf5d473c1709cf87323e6e4b3b7965465aa648370179b: all 76 registered distant tree batches reached ready using the A80274/5C dynamic-data contract; 32 logged companion Render calls returned. This confirms the previous static-data rejection was corrected in this session. Visual view changes are user-confirmed; horizontal appearance and smooth distance/angle transitions remain UNVERIFIED.\n[v142 visual acceptance update 2026-10-07] Supersedes only the earlier pending visual acceptance statements: the human tester now confirms overhead canopy appearance, near/far transitions with fading, and smooth blending between adjacent directional views during a slow orbit. Combined with archived v142 runtime evidence, the required directional plus horizontal billboard goal is accepted. This is human visual evidence, not an automated pixel test. New adapter scene unload/reload and queued-face destruction remain UNVERIFIED; no new runtime session or destruction coverage is claimed. Audit: SpeedTreeOBSE/out/billboard360_distant_v142/runtime_rotation_analysis.json.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "sub_72AB00",
   "end_ea": "0x72AB6A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_72AB00",
   "segment": ".text",
   "sha256": "64121a391a0ab62e7928273387208e8054f068fa0b7c53cf9007eb5390e3a9cc",
   "size": 106,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x72AB00",
-  "type": "NiTriShapeData *__thiscall(NiTriShapeData *this, UInt16, int, int, int, int, char, __int16, UInt16, UInt16 *, __int16, UInt16)",
+  "total_chunk_size": 106,
+  "type": "NiTriShapeData *__thiscall(NiTriShapeData *this, UInt16, NiPoint3 *, NiPoint3 *, NiColorAlpha *, void *, char, __int16, UInt16, UInt16 *, UInt16, UInt16)",
   "xrefs_from_count": 40,
   "xrefs_to_count": 4
 }

@@ -6,26 +6,26 @@ int __usercall sub_6F7750@<eax>(int this@<ecx>, int a2@<edi>)
   int result; // eax
   FILE *v6; // eax
   int v7; // eax
-  unsigned int v8; // edi
-  _DWORD *v9; // eax
-  _DWORD *v10; // ebx
-  _DWORD *v11; // ecx
-  _DWORD *v12; // ecx
-  int v13; // edx
-  _DWORD *v14; // ecx
+  unsigned int capacity; // edi
+  OB_stStringStorage16_010201A0 *heapData; // eax
+  OB_stStringStorage16_010201A0 *p_storage; // ebx
+  OB_stStringStorage16_010201A0 *v11; // ecx
+  OB_stStringStorage16_010201A0 *v12; // ecx
+  unsigned int size; // edx
+  OB_stStringStorage16_010201A0 *v14; // ecx
   int v15; // ebp
-  _DWORD *v16; // esi
-  _DWORD *v17; // ecx
-  _DWORD *v18; // ecx
+  OB_stStringStorage16_010201A0 *v16; // esi
+  OB_stStringStorage16_010201A0 *v17; // ecx
+  OB_stStringStorage16_010201A0 *v18; // ecx
   int v19; // eax
   _DWORD *v20; // eax
   int v21; // esi
   unsigned int v22; // edx
-  _DWORD *v23; // eax
-  _DWORD *v24; // esi
-  _DWORD *v25; // ecx
-  _DWORD *v26; // ecx
-  int v27; // edi
+  OB_stStringStorage16_010201A0 *v23; // eax
+  OB_stStringStorage16_010201A0 *v24; // esi
+  OB_stStringStorage16_010201A0 *v25; // ecx
+  OB_stStringStorage16_010201A0 *v26; // ecx
+  unsigned int v27; // edi
   _DWORD *v28; // eax
   int v29; // eax
   int i; // esi
@@ -39,199 +39,196 @@ int __usercall sub_6F7750@<eax>(int this@<ecx>, int a2@<edi>)
   unsigned __int8 *v38; // [esp+26h] [ebp-40h] BYREF
   int v39; // [esp+2Ah] [ebp-3Ch] BYREF
   int v40; // [esp+32h] [ebp-34h] BYREF
-  unsigned int v41; // [esp+3Ah] [ebp-2Ch] BYREF
-  _DWORD v42[4]; // [esp+3Eh] [ebp-28h] BYREF
-  int v43; // [esp+4Eh] [ebp-18h]
-  unsigned int v44; // [esp+52h] [ebp-14h]
-  int v45; // [esp+62h] [ebp-4h]
+  OB_stString28_010201A0 v41; // [esp+3Ah] [ebp-2Ch] BYREF
+  int v42; // [esp+62h] [ebp-4h]
 
-  v2 = **(_DWORD **)(this + 0x20);
-  v37 = this;
-  if ( v2 && **(_DWORD **)(this + 0x20) < (unsigned int)(**(_DWORD **)(this + 0x20) + **(_DWORD **)(this + 0x30)) )
+  v2 = **(_DWORD **)(this + 0x20); /*0x6f7785*/
+  v37 = this; /*0x6f778b*/
+  if ( v2 && **(_DWORD **)(this + 0x20) < (unsigned int)(**(_DWORD **)(this + 0x20) + **(_DWORD **)(this + 0x30)) ) /*0x6f779f*/
   {
-    --**(_DWORD **)(this + 0x30);
-    v3 = *(_DWORD **)(this + 0x20);
-    v4 = (unsigned __int8 *)(*v3)++;
-    return *v4;
+    --**(_DWORD **)(this + 0x30); /*0x6f77a4*/
+    v3 = *(_DWORD **)(this + 0x20); /*0x6f77a7*/
+    v4 = (unsigned __int8 *)(*v3)++; /*0x6f77aa*/
+    return *v4; /*0x6f77b4*/
   }
-  v6 = *(FILE **)(this + 0x4C);
-  if ( !v6 )
-    return 0xFFFFFFFF;
-  if ( !*(_DWORD *)(this + 0x3C) )
+  v6 = *(FILE **)(this + 0x4C); /*0x6f77b9*/
+  if ( !v6 ) /*0x6f77be*/
+    return 0xFFFFFFFF; /*0x6f77be*/
+  if ( !*(_DWORD *)(this + 0x3C) ) /*0x6f77c4*/
   {
-    result = fgetc(*(FILE **)(this + 0x4C));
-    if ( result != 0xFFFFFFFF )
-      return (unsigned __int8)result;
-    return 0xFFFFFFFF;
+    result = fgetc(*(FILE **)(this + 0x4C)); /*0x6f77ca*/
+    if ( result != 0xFFFFFFFF ) /*0x6f77d5*/
+      return (unsigned __int8)result; /*0x6f77de*/
+    return 0xFFFFFFFF; /*0x6f77d5*/
   }
-  v44 = 0xF;
-  v43 = 0;
-  LOBYTE(v42[0]) = 0;
-  v45 = 0;
-  v7 = fgetc(v6);
-  if ( v7 == 0xFFFFFFFF )
+  v41.capacity = 0xF; /*0x6f77e3*/
+  v41.size = 0; /*0x6f77eb*/
+  v41.storage.inlineData[0] = 0; /*0x6f77ef*/
+  v42 = 0; /*0x6f77f4*/
+  v7 = fgetc(v6); /*0x6f77f8*/
+  if ( v7 == 0xFFFFFFFF ) /*0x6f7803*/
   {
 LABEL_61:
-    sub_79AB00(&v41);
-    return 0xFFFFFFFF;
+    OB_stString28_Dtor_010201A0(&v41); /*0x6f7a22*/
+    return 0xFFFFFFFF; /*0x6f7a4c*/
   }
-  while ( 1 )
+  while ( 1 ) /*0x6f7810*/
   {
-    sub_6EDAA0(&v41, a2, 1u, v7);
-    v8 = v44;
-    v9 = (_DWORD *)v42[0];
-    if ( v44 < 0x10 )
+    sub_6EDAA0(&v41, a2, 1u, v7); /*0x6f7810*/
+    capacity = v41.capacity; /*0x6f7815*/
+    heapData = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f781c*/
+    if ( v41.capacity < 0x10 ) /*0x6f7820*/
     {
-      v10 = v42;
+      p_storage = &v41.storage; /*0x6f7972*/
     }
     else
     {
-      v10 = (_DWORD *)v42[0];
-      if ( !v42[0] )
-        goto LABEL_17;
+      p_storage = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f7828*/
+      if ( !v41.storage.heapData ) /*0x6f782a*/
+        goto LABEL_17; /*0x6f782a*/
     }
-    v11 = (_DWORD *)v42[0];
-    if ( v44 < 0x10 )
-      v11 = v42;
-    if ( v11 > v10 )
-      goto LABEL_17;
-    v12 = (_DWORD *)v42[0];
-    if ( v44 < 0x10 )
-      v12 = v42;
-    v13 = v43;
-    if ( v10 > (_DWORD *)((char *)v12 + v43) )
+    v11 = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f782f*/
+    if ( v41.capacity < 0x10 ) /*0x6f7831*/
+      v11 = &v41.storage; /*0x6f7833*/
+    if ( v11 > p_storage ) /*0x6f7839*/
+      goto LABEL_17; /*0x6f7839*/
+    v12 = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f783e*/
+    if ( v41.capacity < 0x10 ) /*0x6f7840*/
+      v12 = &v41.storage; /*0x6f7842*/
+    size = v41.size; /*0x6f7846*/
+    if ( p_storage > (OB_stStringStorage16_010201A0 *)&v12->inlineData[v41.size] ) /*0x6f784e*/
     {
 LABEL_17:
-      _invalid_parameter_noinfo();
-      v8 = v44;
-      v13 = v43;
-      v9 = (_DWORD *)v42[0];
+      _invalid_parameter_noinfo(); /*0x6f7850*/
+      capacity = v41.capacity; /*0x6f7855*/
+      size = v41.size; /*0x6f7859*/
+      heapData = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f785d*/
     }
-    if ( v34 != (rsize_t *)0xFFFFFFCA )
+    if ( v34 != (rsize_t *)0xFFFFFFCA ) /*0x6f7868*/
     {
-      v14 = v9;
-      if ( v8 < 0x10 )
-        v14 = v42;
-      if ( v10 >= (_DWORD *)((char *)v14 + v13) )
+      v14 = heapData; /*0x6f786d*/
+      if ( capacity < 0x10 ) /*0x6f786f*/
+        v14 = &v41.storage; /*0x6f7871*/
+      if ( p_storage >= (OB_stStringStorage16_010201A0 *)&v14->inlineData[size] ) /*0x6f7879*/
       {
-        _invalid_parameter_noinfo();
-        v8 = v44;
-        v13 = v43;
-        v9 = (_DWORD *)v42[0];
+        _invalid_parameter_noinfo(); /*0x6f787b*/
+        capacity = v41.capacity; /*0x6f7880*/
+        size = v41.size; /*0x6f7884*/
+        heapData = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f7888*/
       }
     }
-    v15 = v13;
-    if ( v8 < 0x10 )
+    v15 = size; /*0x6f788f*/
+    if ( capacity < 0x10 ) /*0x6f7891*/
     {
-      v16 = v42;
+      v16 = &v41.storage; /*0x6f797b*/
     }
     else
     {
-      v16 = v9;
-      if ( !v9 )
-        goto LABEL_31;
+      v16 = heapData; /*0x6f7899*/
+      if ( !heapData ) /*0x6f789b*/
+        goto LABEL_31; /*0x6f789b*/
     }
-    v17 = v9;
-    if ( v8 < 0x10 )
-      v17 = v42;
-    if ( v17 > v16 )
-      goto LABEL_31;
-    v18 = v9;
-    if ( v8 < 0x10 )
-      v18 = v42;
-    if ( v16 > (_DWORD *)((char *)v18 + v13) )
+    v17 = heapData; /*0x6f78a0*/
+    if ( capacity < 0x10 ) /*0x6f78a2*/
+      v17 = &v41.storage; /*0x6f78a4*/
+    if ( v17 > v16 ) /*0x6f78aa*/
+      goto LABEL_31; /*0x6f78aa*/
+    v18 = heapData; /*0x6f78af*/
+    if ( capacity < 0x10 ) /*0x6f78b1*/
+      v18 = &v41.storage; /*0x6f78b3*/
+    if ( v16 > (OB_stStringStorage16_010201A0 *)&v18->inlineData[size] ) /*0x6f78bb*/
     {
 LABEL_31:
-      _invalid_parameter_noinfo();
-      v8 = v44;
-      v13 = v43;
-      v9 = (_DWORD *)v42[0];
+      _invalid_parameter_noinfo(); /*0x6f78bd*/
+      capacity = v41.capacity; /*0x6f78c2*/
+      size = v41.size; /*0x6f78c6*/
+      heapData = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f78ca*/
     }
-    if ( v34 != (rsize_t *)0xFFFFFFCA )
+    if ( v34 != (rsize_t *)0xFFFFFFCA ) /*0x6f78d5*/
     {
-      if ( v8 < 0x10 )
-        v9 = v42;
-      if ( v16 >= (_DWORD *)((char *)v9 + v13) )
-        _invalid_parameter_noinfo();
+      if ( capacity < 0x10 ) /*0x6f78da*/
+        heapData = &v41.storage; /*0x6f78dc*/
+      if ( v16 >= (OB_stStringStorage16_010201A0 *)&heapData->inlineData[size] ) /*0x6f78e4*/
+        _invalid_parameter_noinfo(); /*0x6f78e6*/
     }
-    a2 = v37;
-    v19 = (*(int (__thiscall **)(_DWORD, int, _DWORD *, int, int *, unsigned __int8 *, int *, unsigned __int8 **))(**(_DWORD **)(v37 + 0x3C) + 0x10))(
+    a2 = v37; /*0x6f78eb*/
+    v19 = (*(int (__thiscall **)(_DWORD, int, OB_stStringStorage16_010201A0 *, char *, int *, unsigned __int8 *, int *, unsigned __int8 **))(**(_DWORD **)(v37 + 0x3C) + 0x10))( /*0x6f7913*/
             *(_DWORD *)(v37 + 0x3C),
             v37 + 0x44,
             v16,
-            (int)v10 + v15,
+            &p_storage->inlineData[v15],
             &v36,
             &Dst,
             &v36,
             &v38);
-    if ( v19 < 0 )
-      goto LABEL_61;
-    if ( v19 <= 1 )
-      break;
-    if ( v19 != 3 )
-      goto LABEL_61;
-    if ( v43 )
+    if ( v19 < 0 ) /*0x6f7917*/
+      goto LABEL_61; /*0x6f7917*/
+    if ( v19 <= 1 ) /*0x6f7920*/
+      break; /*0x6f7920*/
+    if ( v19 != 3 ) /*0x6f7925*/
+      goto LABEL_61; /*0x6f7925*/
+    if ( v41.size ) /*0x6f7930*/
     {
-      v20 = sub_6F75E0(&v41, &v40);
-      HIDWORD(v33) = std::_String_const_iterator<char,std::char_traits<char>,std::allocator<char>>::operator*(v20);
-      LODWORD(v33) = 1;
-      memcpy_s(&Dst, v33, (const void *)1, v34[0]);
-      v21 = Dst;
-      sub_79AB00(&v41);
-      return v21;
+      v20 = sub_6F75E0(&v41.allocatorState, &v40); /*0x6f7941*/
+      HIDWORD(v33) = std::_String_const_iterator<char,std::char_traits<char>,std::allocator<char>>::operator*(v20); /*0x6f794d*/
+      LODWORD(v33) = 1; /*0x6f7952*/
+      memcpy_s(&Dst, v33, (const void *)1, v34[0]); /*0x6f7955*/
+      v21 = Dst; /*0x6f795a*/
+      OB_stString28_Dtor_010201A0(&v41); /*0x6f7966*/
+      return v21; /*0x6f796d*/
     }
 LABEL_60:
-    v7 = fgetc(*(FILE **)(a2 + 0x4C));
-    if ( v7 == 0xFFFFFFFF )
-      goto LABEL_61;
+    v7 = fgetc(*(FILE **)(a2 + 0x4C)); /*0x6f7a0d*/
+    if ( v7 == 0xFFFFFFFF ) /*0x6f7a1c*/
+      goto LABEL_61; /*0x6f7a1c*/
   }
-  if ( v38 == &Dst )
+  if ( v38 == &Dst ) /*0x6f798c*/
   {
-    v22 = v44;
-    v23 = (_DWORD *)v42[0];
-    if ( v44 >= 0x10 )
+    v22 = v41.capacity; /*0x6f7992*/
+    v23 = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f7999*/
+    if ( v41.capacity >= 0x10 ) /*0x6f799d*/
     {
-      v24 = (_DWORD *)v42[0];
-      if ( v42[0] )
-        goto LABEL_47;
-      goto LABEL_53;
+      v24 = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f79a5*/
+      if ( v41.storage.heapData ) /*0x6f79a7*/
+        goto LABEL_47; /*0x6f79a7*/
+      goto LABEL_53; /*0x6f79a7*/
     }
-    v24 = v42;
+    v24 = &v41.storage; /*0x6f7a4d*/
 LABEL_47:
-    v25 = (_DWORD *)v42[0];
-    if ( v44 < 0x10 )
-      v25 = v42;
-    if ( v25 > v24 )
-      goto LABEL_53;
-    v26 = (_DWORD *)v42[0];
-    if ( v44 < 0x10 )
-      v26 = v42;
-    if ( v24 > (_DWORD *)((char *)v26 + v43) )
+    v25 = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f79a9*/
+    if ( v41.capacity < 0x10 ) /*0x6f79ae*/
+      v25 = &v41.storage; /*0x6f79b0*/
+    if ( v25 > v24 ) /*0x6f79b6*/
+      goto LABEL_53; /*0x6f79b6*/
+    v26 = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f79bb*/
+    if ( v41.capacity < 0x10 ) /*0x6f79bd*/
+      v26 = &v41.storage; /*0x6f79bf*/
+    if ( v24 > (OB_stStringStorage16_010201A0 *)&v26->inlineData[v41.size] ) /*0x6f79cb*/
     {
 LABEL_53:
-      _invalid_parameter_noinfo();
-      v22 = v44;
-      v23 = (_DWORD *)v42[0];
+      _invalid_parameter_noinfo(); /*0x6f79cd*/
+      v22 = v41.capacity; /*0x6f79d2*/
+      v23 = (OB_stStringStorage16_010201A0 *)v41.storage.heapData; /*0x6f79d6*/
     }
-    if ( v34 != (rsize_t *)0xFFFFFFCA )
+    if ( v34 != (rsize_t *)0xFFFFFFCA ) /*0x6f79e1*/
     {
-      if ( v22 < 0x10 )
-        v23 = v42;
-      if ( v24 >= (_DWORD *)((char *)v23 + v43) )
-        _invalid_parameter_noinfo();
+      if ( v22 < 0x10 ) /*0x6f79e6*/
+        v23 = &v41.storage; /*0x6f79e8*/
+      if ( v24 >= (OB_stStringStorage16_010201A0 *)&v23->inlineData[v41.size] ) /*0x6f79f4*/
+        _invalid_parameter_noinfo(); /*0x6f79f6*/
     }
-    sub_4134E0(&v41, v15, 0, v36 - (_DWORD)v24);
-    goto LABEL_60;
+    sub_4134E0(&v41, v15, 0, v36 - (_DWORD)v24); /*0x6f7a08*/
+    goto LABEL_60; /*0x6f7a08*/
   }
-  v27 = v43;
-  v28 = sub_6F75E0(&v41, &v39);
-  v29 = std::_String_const_iterator<char,std::char_traits<char>,std::allocator<char>>::operator*(v28);
-  for ( i = v27 - v36 + v29; i > 0; --i )
+  v27 = v41.size; /*0x6f7a56*/
+  v28 = sub_6F75E0(&v41.allocatorState, &v39); /*0x6f7a63*/
+  v29 = std::_String_const_iterator<char,std::char_traits<char>,std::allocator<char>>::operator*(v28); /*0x6f7a6a*/
+  for ( i = v27 - v36 + v29; i > 0; --i ) /*0x6f7a75*/
   {
-    v31 = *(char *)(i + v36 - 1);
-    ungetc(v31, *(FILE **)(v37 + 0x4C));
+    v31 = *(char *)(i + v36 - 1); /*0x6f7a86*/
+    ungetc(v31, *(FILE **)(v37 + 0x4C)); /*0x6f7a90*/
   }
-  v32 = Dst;
-  sub_79AB00(&v41);
-  return v32;
+  v32 = Dst; /*0x6f7a9c*/
+  OB_stString28_Dtor_010201A0(&v41); /*0x6f7aa5*/
+  return v32; /*0x6f7a2e*/
 }

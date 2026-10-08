@@ -1,4 +1,4 @@
-0x76C3B0: mov     edx, [esp+a1]
+0x76C3B0: mov     edx, [esp+a1]; DX10OBSE runtime log pass 2026-05-24: D3D9 texture formats 0x17 R5G6B5 and 0x1A A4R4G4B4 appeared as high-volume mirror failures on the active D3D10 runtime. Plugin now treats legacy packed color texture/surface mirrors as RGBA8 upload targets and expands D3D9 shadow data during UpdateSubresource instead of relying on B5/B4 DXGI formats.
 0x76C3B4: cmp     edx, 31545844h
 0x76C3BA: push    esi
 0x76C3BB: push    edi

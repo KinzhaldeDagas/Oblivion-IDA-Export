@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6C4060",
-    "line": "fld     [esp+arg_14]",
+    "line": "fld     [esp+arg_14]; Morph transition wrapper used by ActorAnimData_PlaySequence only after Oblivion confirms matching nonzero TESAnimGroup morph keys and equal controlled-block counts. Delegates to the sequence morph implementation at 0x6C9E00.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6C4088",
-    "line": "call    sub_6C9E00",
+    "line": "call    sub_6C9E00; Internal sequence morph implementation. Activates the source against the destination, marks destination transition state and source state 6 (morph source), and records morph timing/weight fields. ActorAnimData reaches this only through the guarded 0x6C4060 wrapper.",
     "mnemonic": "call",
     "size": 5
   },

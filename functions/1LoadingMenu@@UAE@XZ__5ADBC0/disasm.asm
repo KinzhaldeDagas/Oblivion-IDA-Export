@@ -31,7 +31,7 @@
 0x5ADC20: mov     eax, [esi+50h]
 0x5ADC23: mov     edi, [eax+4]
 0x5ADC26: push    eax
-0x5ADC27: call    FormHeapFree
+0x5ADC27: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5ADC2C: add     esp, 4
 0x5ADC2F: cmp     edi, ebx
 0x5ADC31: mov     [esi+50h], edi
@@ -39,7 +39,7 @@
 0x5ADC36: mov     [esi+4Ch], ebx
 0x5ADC39: mov     eax, [esi+54h]
 0x5ADC3C: push    eax
-0x5ADC3D: call    FormHeapFree
+0x5ADC3D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5ADC42: mov     eax, ds:0B33398h
 0x5ADC47: mov     ds:0B3A6D3h, bl
 0x5ADC4D: mov     ecx, [eax+24h]
@@ -58,10 +58,10 @@
 0x5ADC6F: jnz     short loc_5ADC76
 0x5ADC71: call    sub_6A9C00
 0x5ADC76: push    1
-0x5ADC78: call    nullsub_returnTrue_0arg
+0x5ADC78: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5ADC7D: mov     ebx, ds:0B3F928h
 0x5ADC83: add     esp, 4
-0x5ADC86: call    InitBSShaderAccumulator
+0x5ADC86: call    BSShaderAccumulator_GetOrCreateGlobal
 0x5ADC8B: mov     edi, [ebx+8]
 0x5ADC8E: mov     ebp, eax
 0x5ADC90: cmp     edi, ebp
@@ -88,7 +88,7 @@
 0x5ADCBF: call    dword ptr ds:0A28078h
 0x5ADCC5: mov     ecx, esi; this
 0x5ADCC7: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x5ADCCF: call    ??1Menu@@UAE@XZ; Menu::~Menu(void)
+0x5ADCCF: call    ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
 0x5ADCD4: mov     ecx, dword ptr [esp+24h+var_C]
 0x5ADCD8: mov     large fs:0, ecx
 0x5ADCDF: pop     ecx
@@ -98,3 +98,12 @@
 0x5ADCE3: pop     ebx
 0x5ADCE4: add     esp, 10h
 0x5ADCE7: retn
+0x9C0620: mov     ecx, [ebp-10h]; this
+0x9C0623: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C0628: mov     edx, [esp+arg_4]
+0x9C062C: lea     eax, [edx-14h]
+0x9C062F: mov     ecx, [edx-18h]
+0x9C0632: xor     ecx, eax
+0x9C0634: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0639: mov     eax, offset stru_AE98A8
+0x9C063E: jmp     ___CxxFrameHandler3

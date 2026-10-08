@@ -1,18 +1,31 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7EE720",
+      "0x7EE73B"
+    ]
+  ],
+  "chunks_sha256": "e854661b9d5058c6b399a2e2ceba2598e8d4d6fc74ec55376a12de542aa518cb",
+  "comment_regular": "Remove the paired ShadowSceneLight association from BSShaderProperty+0x6C.",
+  "comment_repeatable": "Remove the paired ShadowSceneLight association from BSShaderProperty+0x6C.\n\nMEF PERF 2026-10-07 PASS2: PERF-13 property side: removes this light from property+6C by payload scan through776690 then clears property+24. Cost is separate from the two receiver-list comparison formulas; neither skip property cleanup nor claim its scan was included in those counts.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7EE720",
+  "display_name": "BSShaderProperty_RemoveShadowLight",
   "end_ea": "0x7EE73B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7EE720",
+  "name": "BSShaderProperty_RemoveShadowLight",
   "segment": ".text",
   "sha256": "e854661b9d5058c6b399a2e2ceba2598e8d4d6fc74ec55376a12de542aa518cb",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7EE720",
+  "total_chunk_size": 27,
   "type": "void *__thiscall(_DWORD *this, int)",
   "xrefs_from_count": 9,
   "xrefs_to_count": 2

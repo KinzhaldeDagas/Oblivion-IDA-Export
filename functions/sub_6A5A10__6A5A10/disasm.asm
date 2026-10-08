@@ -65,10 +65,10 @@
 0x6A5AD3: mov     [esp+74h+var_58], edx
 0x6A5AD7: push    ecx
 0x6A5AD8: fld     [esp+78h+var_58]
-0x6A5ADC: lea     ecx, [esp+78h+var_48]
+0x6A5ADC: lea     ecx, [esp+78h+var_48]; this
 0x6A5AE0: mov     [esp+78h+var_60], eax
-0x6A5AE4: fstp    [esp+78h+var_78]; float
-0x6A5AE7: call    NiMatrix33_InitRotationTransform
+0x6A5AE4: fstp    [esp+78h+angleZ]; angleZ
+0x6A5AE7: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x6A5AEC: lea     eax, [esp+74h+var_24]
 0x6A5AF0: push    eax
 0x6A5AF1: lea     ecx, [esp+78h+var_48]
@@ -79,10 +79,10 @@
 0x6A5B03: push    edx
 0x6A5B04: lea     eax, [esp+7Ch+var_54]
 0x6A5B08: push    eax
-0x6A5B09: call    sub_710250
+0x6A5B09: call    NiPoint3_MultiplyMatrix3
 0x6A5B0E: add     esp, 0Ch
 0x6A5B11: lea     ecx, [esp+74h+var_54]
-0x6A5B15: call    sub_43F350
+0x6A5B15: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x6A5B1A: fstp    st
 0x6A5B1C: fld     [esp+74h+var_54]
 0x6A5B20: pop     edi

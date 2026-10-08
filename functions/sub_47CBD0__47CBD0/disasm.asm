@@ -28,7 +28,7 @@
 0x47CC1C: call    eax
 0x47CC1E: test    eax, eax
 0x47CC20: jz      short loc_47CC30
-0x47CC22: cmp     eax, offset dword_B3FAB0
+0x47CC22: cmp     eax, offset parent
 0x47CC27: jz      short loc_47CC51
 0x47CC29: mov     eax, [eax+4]
 0x47CC2C: test    eax, eax

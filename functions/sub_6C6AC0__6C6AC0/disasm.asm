@@ -20,7 +20,7 @@
 0x6C6AEB: lea     eax, [esp+18h+var_4]
 0x6C6AEF: push    eax
 0x6C6AF0: call    edx
-0x6C6AF2: mov     eax, dword ptr [esp+14h+var_4]
+0x6C6AF2: mov     eax, [esp+14h+var_4]
 0x6C6AF6: test    eax, eax
 0x6C6AF8: jz      short loc_6C6B18
 0x6C6AFA: mov     esi, eax

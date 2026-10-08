@@ -1,1 +1,4 @@
-SC_HANDLE__
+struct SC_HANDLE__
+{
+int unused;
+};

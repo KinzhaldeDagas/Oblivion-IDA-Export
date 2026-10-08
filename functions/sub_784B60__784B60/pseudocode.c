@@ -1,12 +1,13 @@
-void __thiscall sub_784B60(unsigned int *this)
+// stBezierSpline/profile destructor helper: frees nested profile/vector storage. Used when branch/frond profile pointers are replaced or destroyed.
+void __thiscall OB_StBezierSpline_Dtor_010201A0(OB_stBezierSpline_010201A0 *this)
 {
-  sub_784A20(this + 0x13);
-  sub_784A20(this + 0xF);
-  if ( *(this + 0xC) )
-    FormHeapFree(*(this + 0xC));
-  *(this + 0xC) = 0;
-  *(this + 0xD) = 0;
-  *(this + 0xE) = 0;
-  sub_784A20(this + 7);
-  sub_784A20(this + 3);
+  OB_stVector24_Destroy_010201A0((OB_stVector24_010201A0 *)&this->splinePoints); /*0x784b94*/
+  OB_stVector24_Destroy_010201A0((OB_stVector24_010201A0 *)&this->evenlySpacedPoints); /*0x784ba1*/
+  if ( this->controlPointTangentLengths.begin ) /*0x784ba6*/
+    FormHeapFree((unsigned int)this->controlPointTangentLengths.begin); /*0x784bb0*/
+  this->controlPointTangentLengths.begin = 0; /*0x784bbb*/
+  this->controlPointTangentLengths.end = 0; /*0x784bbe*/
+  this->controlPointTangentLengths.capacity = 0; /*0x784bc1*/
+  OB_stVector24_Destroy_010201A0((OB_stVector24_010201A0 *)&this->controlPointTangents); /*0x784bc8*/
+  OB_stVector24_Destroy_010201A0((OB_stVector24_010201A0 *)&this->controlPoints); /*0x784bd8*/
 }

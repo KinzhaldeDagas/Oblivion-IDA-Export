@@ -1,4 +1,4 @@
-0x768890: push    ebx
+0x768890: push    ebx; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.
 0x768891: push    edi
 0x768892: mov     edi, [esp+8+arg_0]
 0x768896: mov     eax, [edi+0B4h]
@@ -34,7 +34,7 @@
 0x7688E0: jnz     short loc_7688F8
 0x7688E2: mov     eax, [edi+0BCh]
 0x7688E8: push    eax
-0x7688E9: push    offset NiD3DShaderInterfaceString
+0x7688E9: push    0B42858h
 0x7688EE: call    NiRTTI_Cast
 0x7688F3: add     esp, 8
 0x7688F6: mov     esi, eax

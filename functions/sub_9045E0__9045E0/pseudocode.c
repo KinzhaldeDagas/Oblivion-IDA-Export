@@ -15,36 +15,36 @@ int __cdecl sub_9045E0(__m128 **a1, _DWORD *a2, _DWORD *a3, int a4)
   _DWORD v17[4]; // [esp+10h] [ebp-50h] BYREF
   __m128 v18[4]; // [esp+20h] [ebp-40h] BYREF
 
-  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer;
-  v5 = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v5 + 0x1A4) < *(_DWORD *)(v5 + 0x1A8) )
+  ThreadLocalStoragePointer = NtCurrentTeb()->ThreadLocalStoragePointer; /*0x9045f0*/
+  v5 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x9045f7*/
+  if ( *(_DWORD *)(v5 + 0x1A4) < *(_DWORD *)(v5 + 0x1A8) ) /*0x904608*/
   {
-    v6 = ThreadLocalStoragePointer[TlsIndex];
-    v7 = *(_DWORD **)(v5 + 0x1A4);
-    *v7 = "TtTransform";
-    v8 = __rdtsc();
-    v7[1] = v8;
-    *(_DWORD *)(v6 + 0x1A4) = v7 + 3;
+    v6 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x90460a*/
+    v7 = *(_DWORD **)(v5 + 0x1A4); /*0x90460c*/
+    *v7 = "TtTransform"; /*0x904612*/
+    v8 = __rdtsc(); /*0x904618*/
+    v7[1] = v8; /*0x904622*/
+    *(_DWORD *)(v6 + 0x1A4) = v7 + 3; /*0x904628*/
   }
-  v9 = *a1;
-  sub_8B1F70(v18, a1[2], *a1 + 2);
-  v17[3] = a1;
-  v17[2] = v18;
-  v10 = v9->m128_i32[3];
-  v17[1] = a1[1];
-  v17[0] = v10;
-  v11 = (*(int (__thiscall **)(__int32))(*(_DWORD *)v10 + 8))(v10);
-  v12 = *(unsigned __int8 *)(*a3 + 0x20 * v11 + (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*a2 + 8))(*a2) + 0x190);
-  (*(void (__cdecl **)(_DWORD *, _DWORD *, _DWORD *, int))(*a3 + 0x14 * v12 + 0x998))(v17, a2, a3, a4);
-  LODWORD(v13) = ThreadLocalStoragePointer[TlsIndex];
-  if ( *(_DWORD *)(v13 + 0x1A4) < *(_DWORD *)(v13 + 0x1A8) )
+  v9 = *a1; /*0x904631*/
+  sub_8B1F70(v18, a1[2], *a1 + 2); /*0x90463f*/
+  v17[3] = a1; /*0x904644*/
+  v17[2] = v18; /*0x90464c*/
+  v10 = v9->m128_i32[3]; /*0x904650*/
+  v17[1] = a1[1]; /*0x904656*/
+  v17[0] = v10; /*0x90465a*/
+  v11 = (*(int (__thiscall **)(__int32))(*(_DWORD *)v10 + 8))(v10); /*0x90466a*/
+  v12 = *(unsigned __int8 *)(*a3 + 0x20 * v11 + (*(int (__thiscall **)(_DWORD))(*(_DWORD *)*a2 + 8))(*a2) + 0x190); /*0x904679*/
+  (*(void (__cdecl **)(_DWORD *, _DWORD *, _DWORD *, int))(*a3 + 0x14 * v12 + 0x998))(v17, a2, a3, a4); /*0x90468f*/
+  LODWORD(v13) = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x90469c*/
+  if ( *(_DWORD *)(v13 + 0x1A4) < *(_DWORD *)(v13 + 0x1A8) ) /*0x9046b0*/
   {
-    v14 = ThreadLocalStoragePointer[TlsIndex];
-    v15 = *(_DWORD **)(v13 + 0x1A4);
-    *v15 = "Et";
-    v13 = __rdtsc();
-    v15[1] = v13;
-    *(_DWORD *)(v14 + 0x1A4) = v15 + 3;
+    v14 = ThreadLocalStoragePointer[MEMORY[0xBA9DE4]]; /*0x9046b2*/
+    v15 = *(_DWORD **)(v13 + 0x1A4); /*0x9046b4*/
+    *v15 = "Et"; /*0x9046ba*/
+    v13 = __rdtsc(); /*0x9046c0*/
+    v15[1] = v13; /*0x9046ca*/
+    *(_DWORD *)(v14 + 0x1A4) = v15 + 3; /*0x9046d0*/
   }
-  return v13;
+  return v13; /*0x9046d6*/
 }

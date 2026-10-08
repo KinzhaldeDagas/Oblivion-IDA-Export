@@ -11,11 +11,11 @@
 0x458EE9: jnz     short loc_458F01
 0x458EEB: test    ebx, ebx
 0x458EED: jz      short loc_458EF8
-0x458EEF: push    0; a2
-0x458EF1: call    Player_GetAnimData
+0x458EEF: push    0; firstPerson
+0x458EF1: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x458EF6: jmp     short loc_458F0D
-0x458EF8: push    1; a2
-0x458EFA: call    Player_GetAnimData
+0x458EF8: push    1; firstPerson
+0x458EFA: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x458EFF: jmp     short loc_458F0D
 0x458F01: mov     eax, [esi]
 0x458F03: mov     edx, [eax+164h]
@@ -71,7 +71,7 @@
 0x458FA2: jz      short loc_458FAE
 0x458FA4: mov     edx, [esp+1Ch+arg_0]
 0x458FA8: push    edx; int
-0x458FA9: call    sub_475590
+0x458FA9: call    ActorAnimData_LoadState; ActorAnimData load-state routine. Active slots restore from encoded key plus one selector byte. Selector 0xFE is intercepted as the null-sequence marker; all other selectors enter the common map-entry selector virtual and then consume or skip the timing block according to restore success.
 0x458FAE: movzx   eax, bx
 0x458FB1: lea     ecx, [eax+ebp+2]
 0x458FB5: cmp     ecx, [edi+14h]
@@ -88,11 +88,11 @@
 0x458FD7: mov     eax, [esp+1Ch+var_C]
 0x458FDB: test    eax, eax
 0x458FDD: jz      short loc_458FF2
-0x458FDF: mov     ecx, [esp+1Ch+arg_4]
+0x458FDF: mov     ecx, [esp+1Ch+arg_4]; this
 0x458FE3: sub     al, 5
 0x458FE5: movsx   edx, al
-0x458FE8: push    edx
-0x458FE9: call    sub_4706E0
+0x458FE8: push    edx; slotSelector
+0x458FE9: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x458FEE: mov     [esp+1Ch+var_C], eax
 0x458FF2: mov     ecx, [esp+1Ch+var_C]
 0x458FF6: mov     eax, [esi]

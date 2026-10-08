@@ -1,19 +1,36 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 25,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 9,
+  "chunks": [
+    [
+      "0x4114E0",
+      "0x411727"
+    ],
+    [
+      "0x9AAD00",
+      "0x9AAD52"
+    ]
+  ],
+  "chunks_sha256": "93f152419f98e30d21d5404efb3f18de51db4ac34f21b1cf72734e490faf0fd4",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Focused layout decode: constructs SceneGraph camera at +0xDC and allocates base NiCullingProcess size 0x90, passing NULL VisibleGeo at 0x411576, storing result at +0xE4. Native world frustum culling is already active; optional visible arrays must be demonstrated, not assumed.\n\nMoonSugarEffect decode: SceneGraph constructor creates camera at +0xDC and cullingProcess at +0xE4; world scenegraph uses these in NiRenderer_Render.",
+  "comment_repeatable": "MoonSugarEffect decode: SceneGraph constructor creates camera at +0xDC and cullingProcess at +0xE4; world scenegraph uses these in NiRenderer_Render.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
   "display_name": "SceneGraph::SceneGraph(void)",
   "end_ea": "0x411727",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0SceneGraph@@QAE@XZ",
   "segment": ".text",
   "sha256": "08815ec5e9cc217aca2d08ca522b6c1aa01f49518df8df3658fbbbb1a6526656",
   "size": 583,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4114E0",
+  "total_chunk_size": 665,
   "type": "SceneGraph *__thiscall(SceneGraph *this, const char *ArgList, UInt8, Ni2DBuffer *)",
-  "xrefs_from_count": 213,
+  "xrefs_from_count": 242,
   "xrefs_to_count": 4
 }

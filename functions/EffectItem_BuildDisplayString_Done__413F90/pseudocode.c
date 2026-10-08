@@ -8,5 +8,5 @@ int __userpurge EffectItem_BuildDisplayString_::Done@<eax>(
         int a6,
         int a7)
 {
-  return a1;
+  return a1; /*0x413fb6*/
 }

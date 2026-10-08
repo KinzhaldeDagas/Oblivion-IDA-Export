@@ -1,1 +1,1 @@
-SpellPurchaseMenu
+struct SpellPurchaseMenu;

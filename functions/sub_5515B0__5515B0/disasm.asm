@@ -13,7 +13,7 @@
 0x5515CB: lea     eax, [esp+24h+var_C]
 0x5515CF: mov     large fs:0, eax
 0x5515D5: mov     ebp, ecx
-0x5515D7: push    offset stru_B39C00; lpCriticalSection
+0x5515D7: push    offset unk_B39C00; lpCriticalSection
 0x5515DC: call    dword ptr ds:0A2806Ch
 0x5515E2: call    dword ptr ds:0A2808Ch
 0x5515E8: add     dword ptr ds:0B39C7Ch, 1
@@ -34,10 +34,10 @@
 0x55161A: call    dword ptr ds:0A280D0h
 0x551620: mov     edi, [esp+24h+arg_4]
 0x551624: lea     edx, [esi+8]
-0x551627: push    edx
-0x551628: mov     ecx, edi
+0x551627: push    edx; incoming
+0x551628: mov     ecx, edi; this
 0x55162A: mov     [esi+0Ch], eax
-0x55162D: call    sub_55E2A0
+0x55162D: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x551632: push    esi
 0x551633: mov     ecx, ebp
 0x551635: call    sub_5506B0
@@ -50,7 +50,7 @@
 0x55164C: sub     dword ptr ds:0B39C7Ch, 1
 0x551653: jnz     short loc_55165B
 0x551655: mov     ds:0B39C78h, edi
-0x55165B: push    offset stru_B39C00; lpCriticalSection
+0x55165B: push    offset unk_B39C00; lpCriticalSection
 0x551660: call    dword ptr ds:0A28074h
 0x551666: cmp     esi, edi
 0x551668: mov     [esp+24h+var_4], 0FFFFFFFFh
@@ -75,3 +75,12 @@
 0x55169B: pop     ebx
 0x55169C: add     esp, 10h
 0x55169F: retn    8
+0x9C7C90: lea     ecx, [ebp-10h]; slot
+0x9C7C93: jmp     NiPointerSlot_Release
+0x9C7C98: mov     edx, [esp+arg_4]
+0x9C7C9C: lea     eax, [edx-14h]
+0x9C7C9F: mov     ecx, [edx-18h]
+0x9C7CA2: xor     ecx, eax
+0x9C7CA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7CA9: mov     eax, offset stru_AF0030
+0x9C7CAE: jmp     ___CxxFrameHandler3

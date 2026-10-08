@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
-  "callers_count": 52,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 94,
+  "chunks": [
+    [
+      "0x4DB6B0",
+      "0x4DB752"
+    ]
+  ],
+  "chunks_sha256": "b613f1673ff85f38280650e9ccbe63c96ae2f4173d7545e87f2cbc94a668f70a",
+  "comment_regular": "Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
+  "comment_repeatable": "Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESObjectREFR_GetOwner",
   "end_ea": "0x4DB752",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESObjectREFR_GetOwner",
   "segment": ".text",
   "sha256": "b613f1673ff85f38280650e9ccbe63c96ae2f4173d7545e87f2cbc94a668f70a",
   "size": 162,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DB6B0",
-  "type": "BSExtraDataVtbl *__thiscall(TESObjectREFR *this)",
+  "total_chunk_size": 162,
+  "type": "TESForm *__thiscall(TESObjectREFR *reference)",
   "xrefs_from_count": 77,
   "xrefs_to_count": 94
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EA3A0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+ownerMap]; Verified TESTerrainLODQuadRoot constructor: stores its owner map at +4 and initializes the 0x60-byte quad-data object at +0; caller stores signed quadX/quadY at +8/+0xA.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x4EA3AA",
-    "line": "call    sub_4E9F50",
+    "line": "call    TESTerrainLODQuadRoot_InitializeQuadData; Verified root-data initializer allocates a 0x60-byte TESTerrainLODQuad object, initializes its root pointer and fields, and stores it in TESTerrainLODQuadRoot.quadData.",
     "mnemonic": "call",
     "size": 5
   },

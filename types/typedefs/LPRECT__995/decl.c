@@ -1,1 +1,1 @@
-LPRECT
+typedef tagRECT *LPRECT;

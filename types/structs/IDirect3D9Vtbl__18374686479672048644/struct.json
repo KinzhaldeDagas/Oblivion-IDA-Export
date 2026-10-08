@@ -1,112 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirect3D9Vtbl",
+  "definition": "struct IDirect3D9Vtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirect3D9 *This, const IID *const riid, void **ppvObj);\nULONG (__stdcall *AddRef)(IDirect3D9 *This);\nULONG (__stdcall *Release)(IDirect3D9 *This);\nHRESULT (__stdcall *RegisterSoftwareDevice)(IDirect3D9 *This, void *pInitializeFunction);\nUINT (__stdcall *GetAdapterCount)(IDirect3D9 *This);\nHRESULT (__stdcall *GetAdapterIdentifier)(IDirect3D9 *This, UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier);\nUINT (__stdcall *GetAdapterModeCount)(IDirect3D9 *This, UINT Adapter, D3DFORMAT Format);\nHRESULT (__stdcall *EnumAdapterModes)(IDirect3D9 *This, UINT Adapter, D3DFORMAT Format, UINT Mode, D3DDISPLAYMODE *pMode);\nHRESULT (__stdcall *GetAdapterDisplayMode)(IDirect3D9 *This, UINT Adapter, D3DDISPLAYMODE *pMode);\nHRESULT (__stdcall *CheckDeviceType)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DevType, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat, BOOL bWindowed);\nHRESULT (__stdcall *CheckDeviceFormat)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, DWORD Usage, D3DRESOURCETYPE RType, D3DFORMAT CheckFormat); ///< External bridge source note, 2026-10-08 stage-owned-capability-receipts, UNBUILT/UNRUN/UNDEPLOYED: repeated owned DEFAULT/MANAGED TextureCreationContext format queries now have an optional bounded exact-receipt cache (256 format entries) scoped to the retained TextureFactoryDevice publication. Key includes native device, already-retained IDirect3D9 interface address, adapter ordinal/device type/current display format, usage, resource type and requested format. Only raw S_OK/D3DOK_NOAUTOGEN results are retained; failure/transient/capacity/absent-cache cases keep the existing native query path. Current display is still observed each call; no extra QueryInterface. Publication clear/replacement atomically revokes held old caches; caller freshness checks require current native/publication identity and no release/reset pending. Native calls and freshness callbacks run outside cache locks; optional cache allocation failure is ignored. Describe and per-call modern PlanAllocation and final factory publication check remain. CPU-only SYSTEMMEM/SCRATCH resources bypass cache to preserve their recovery lifetime. This is external source knowledge, not new Oblivion binary behavior or runtime/performance evidence. Source/tests kept separate from installed V266 while manual game run is active.\n                                                                                                                                                                                   ///< \n                                                                                                                                                                                   ///< Validation update 2026-10-08 stage-owned-capability-receipts (external renderer source/host evidence; UNDEPLOYED): after the game exited, Release renderer build passed; d3d9_capability_receipts passed543 checks, owned_capability_receipts_warp passed46 and owned_texture_factories_warp passed5382 with native allocator calls0 (1932 reference cases,456 successes,565 descriptors,3 explicit exclusions). Actual public fixture verifies two exact repeated format requests require one native CheckDeviceFormat, warmed public/worker/recording factories use the receipt, requested/base AUTOGEN responses remain separate, descriptor rejection and current DX11 PlanAllocation still execute, and optional-cache/retirement/Reset/recovery/replacement paths preserve qualification. The CPU check covers exact keys, raw positives, retrying negative/transient results, capacity/absence fallback, reentrancy and concurrent revocation. No cache game runtime/timing/FPS claim; deployed V266 PID18308 did NOT include this code. Successes remain cached for unchanged relevant source. Evidence: stage-owned-capability-receipts/grouped-build.log, grouped-tests.log, grouped-LastTest.log, source-manifest.json and result.md.\nHRESULT (__stdcall *CheckDeviceMultiSampleType)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat, BOOL Windowed, D3DMULTISAMPLE_TYPE MultiSampleType, DWORD *pQualityLevels); ///< External bridge source note, 2026-10-08 stage-owned-capability-receipts, UNBUILT/UNRUN/UNDEPLOYED: optional factory-publication-scoped 64-entry sample receipt cache keys native device/IDirect3D9 interface identity, adapter/device type/current display format, requested format, raw Windowed BOOL and sample type. Only S_OK plus the exact returned quality-level count is cached; failures retain fresh native result/output behavior. Current implicit presentation parameters are still read for every RT/depth query. Reset paths reaching backend retirement (including the owned DEFAULT-resource blocked failure), backend retirement/recovery, native adoption and shutdown clear/replace and revoke the shared publication; stale held caches cannot publish/replay after revocation. Pure early admission rejection performs no native/backend reset and keeps its unchanged publication. Exact final typed creation and DX11 allocation admission remain active. CPU/bridge tests are prepared but no build/probe/test/runtime claim is made; installed V266 is unchanged. This records external renderer implementation, not a decoded Oblivion implementation of the COM method.\n                                                                                                                                                                                                            ///< \n                                                                                                                                                                                                            ///< Validation update 2026-10-08 stage-owned-capability-receipts (external renderer evidence; UNDEPLOYED): Release renderer and CPU543/publicWARP46/factory5382 checks passed after the game exited. Public fixture confirmed repeated exact sample requests use one native CheckDeviceMultiSampleType while preserving the exact quality count; CPU coverage distinguishes windowed/sample/format/identity keys, retains only S_OK samples, retries failure results without changing outputs, and rejects stale retained cache after lifecycle revocation. Public Reset failure/recovery, modern-only recovery, native replacement and retirement during a native query passed. Describe and current DX11 allocation checks remain mandatory; native allocator trap count0 in the affected full factory regression. This is component/public-fixture native-query reduction, not game/timing/FPS evidence. Existing V266 installation is unchanged; its earlier game log is not cache evidence. Receipts: stage-owned-capability-receipts/grouped-LastTest.log and result.md.\nHRESULT (__stdcall *CheckDepthStencilMatch)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, D3DFORMAT RenderTargetFormat, D3DFORMAT DepthStencilFormat);\nHRESULT (__stdcall *CheckDeviceFormatConversion)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SourceFormat, D3DFORMAT TargetFormat);\nHRESULT (__stdcall *GetDeviceCaps)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 *pCaps);\nHMONITOR (__stdcall *GetAdapterMonitor)(IDirect3D9 *This, UINT Adapter);\nHRESULT (__stdcall *CreateDevice)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS *pPresentationParameters, IDirect3DDevice9 **ppReturnedDeviceInterface); ///< External renderer implementation note, 2026-10-08 V266 candidate (source review; validation pending): audit found StoreD3D9Device discarded InstallDeviceMethodHooks failure while CreateDeviceHookImpl still adopted the device. Candidate refuses InstallDeviceMethodHooks=0 before native allocation; preflights all device routes on the newly created native device before releasing an existing modern backend; rejects/nulls/releases an incomplete candidate. Exact stored identity and installation success are checked again before ownership preparations. Failed preflight can leave safe foreign-dispatch hooks in shared native tables; this does NOT roll all table patches back or remove native device/bootstrap allocation. This is external bridge implementation, not a new Oblivion binary inference. Evidence: analysis/dx11_completion/stage-v266-backend-candidate.\n                                                                                                                                                                                                                                ///< \n                                                                                                                                                                                                                                ///< Validation update 2026-10-08 (external V266 bridge evidence): Release renderer build passed. device_metadata_bridge_warp passed 62 checks, including disabled-method-routing native allocation count 0 and one actual native candidate rejected after injected dispatch conflict while retaining the previous ownership epoch/backend and verified rendered pixels. required_shadow_startup passed 38 CPU installer/factory-ABI checks. The failed preflight is not a rollback of every shared vtable patch; later unrelated preparation failures remain outside its preservation guarantee. Actual Oblivion deployment/runtime acceptance remains pending. Receipts: stage-v266-backend-candidate/LastTest.log and tests.log.\n}\n",
   "id": 18374686479672048644,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, const IID *const riid, void **ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3D9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirect3D9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RegisterSoftwareDevice",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, void *pInitializeFunction)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAdapterCount",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "UINT (__stdcall *)(IDirect3D9 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAdapterIdentifier",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, DWORD Flags, D3DADAPTER_IDENTIFIER9 *pIdentifier)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAdapterModeCount",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "UINT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DFORMAT Format)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumAdapterModes",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DFORMAT Format, UINT Mode, D3DDISPLAYMODE *pMode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAdapterDisplayMode",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDISPLAYMODE *pMode)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CheckDeviceType",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DevType, D3DFORMAT AdapterFormat, D3DFORMAT BackBufferFormat, BOOL bWindowed)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "External bridge source note, 2026-10-08 stage-owned-capability-receipts, UNBUILT/UNRUN/UNDEPLOYED: repeated owned DEFAULT/MANAGED TextureCreationContext format queries now have an optional bounded exact-receipt cache (256 format entries) scoped to the retained TextureFactoryDevice publication. Key includes native device, already-retained IDirect3D9 interface address, adapter ordinal/device type/current display format, usage, resource type and requested format. Only raw S_OK/D3DOK_NOAUTOGEN results are retained; failure/transient/capacity/absent-cache cases keep the existing native query path. Current display is still observed each call; no extra QueryInterface. Publication clear/replacement atomically revokes held old caches; caller freshness checks require current native/publication identity and no release/reset pending. Native calls and freshness callbacks run outside cache locks; optional cache allocation failure is ignored. Describe and per-call modern PlanAllocation and final factory publication check remain. CPU-only SYSTEMMEM/SCRATCH resources bypass cache to preserve their recovery lifetime. This is external source knowledge, not new Oblivion binary behavior or runtime/performance evidence. Source/tests kept separate from installed V266 while manual game run is active.\n\nValidation update 2026-10-08 stage-owned-capability-receipts (external renderer source/host evidence; UNDEPLOYED): after the game exited, Release renderer build passed; d3d9_capability_receipts passed543 checks, owned_capability_receipts_warp passed46 and owned_texture_factories_warp passed5382 with native allocator calls0 (1932 reference cases,456 successes,565 descriptors,3 explicit exclusions). Actual public fixture verifies two exact repeated format requests require one native CheckDeviceFormat, warmed public/worker/recording factories use the receipt, requested/base AUTOGEN responses remain separate, descriptor rejection and current DX11 PlanAllocation still execute, and optional-cache/retirement/Reset/recovery/replacement paths preserve qualification. The CPU check covers exact keys, raw positives, retrying negative/transient results, capacity/absence fallback, reentrancy and concurrent revocation. No cache game runtime/timing/FPS claim; deployed V266 PID18308 did NOT include this code. Successes remain cached for unchanged relevant source. Evidence: stage-owned-capability-receipts/grouped-build.log, grouped-tests.log, grouped-LastTest.log, source-manifest.json and result.md.",
       "name": "CheckDeviceFormat",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, DWORD Usage, D3DRESOURCETYPE RType, D3DFORMAT CheckFormat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "External bridge source note, 2026-10-08 stage-owned-capability-receipts, UNBUILT/UNRUN/UNDEPLOYED: optional factory-publication-scoped 64-entry sample receipt cache keys native device/IDirect3D9 interface identity, adapter/device type/current display format, requested format, raw Windowed BOOL and sample type. Only S_OK plus the exact returned quality-level count is cached; failures retain fresh native result/output behavior. Current implicit presentation parameters are still read for every RT/depth query. Reset paths reaching backend retirement (including the owned DEFAULT-resource blocked failure), backend retirement/recovery, native adoption and shutdown clear/replace and revoke the shared publication; stale held caches cannot publish/replay after revocation. Pure early admission rejection performs no native/backend reset and keeps its unchanged publication. Exact final typed creation and DX11 allocation admission remain active. CPU/bridge tests are prepared but no build/probe/test/runtime claim is made; installed V266 is unchanged. This records external renderer implementation, not a decoded Oblivion implementation of the COM method.\n\nValidation update 2026-10-08 stage-owned-capability-receipts (external renderer evidence; UNDEPLOYED): Release renderer and CPU543/publicWARP46/factory5382 checks passed after the game exited. Public fixture confirmed repeated exact sample requests use one native CheckDeviceMultiSampleType while preserving the exact quality count; CPU coverage distinguishes windowed/sample/format/identity keys, retains only S_OK samples, retries failure results without changing outputs, and rejects stale retained cache after lifecycle revocation. Public Reset failure/recovery, modern-only recovery, native replacement and retirement during a native query passed. Describe and current DX11 allocation checks remain mandatory; native allocator trap count0 in the affected full factory regression. This is component/public-fixture native-query reduction, not game/timing/FPS evidence. Existing V266 installation is unchanged; its earlier game log is not cache evidence. Receipts: stage-owned-capability-receipts/grouped-LastTest.log and result.md.",
       "name": "CheckDeviceMultiSampleType",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SurfaceFormat, BOOL Windowed, D3DMULTISAMPLE_TYPE MultiSampleType, DWORD *pQualityLevels)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CheckDepthStencilMatch",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT AdapterFormat, D3DFORMAT RenderTargetFormat, D3DFORMAT DepthStencilFormat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CheckDeviceFormatConversion",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DFORMAT SourceFormat, D3DFORMAT TargetFormat)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDeviceCaps",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, D3DCAPS9 *pCaps)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAdapterMonitor",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HMONITOR (__stdcall *)(IDirect3D9 *This, UINT Adapter)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "External renderer implementation note, 2026-10-08 V266 candidate (source review; validation pending): audit found StoreD3D9Device discarded InstallDeviceMethodHooks failure while CreateDeviceHookImpl still adopted the device. Candidate refuses InstallDeviceMethodHooks=0 before native allocation; preflights all device routes on the newly created native device before releasing an existing modern backend; rejects/nulls/releases an incomplete candidate. Exact stored identity and installation success are checked again before ownership preparations. Failed preflight can leave safe foreign-dispatch hooks in shared native tables; this does NOT roll all table patches back or remove native device/bootstrap allocation. This is external bridge implementation, not a new Oblivion binary inference. Evidence: analysis/dx11_completion/stage-v266-backend-candidate.\n\nValidation update 2026-10-08 (external V266 bridge evidence): Release renderer build passed. device_metadata_bridge_warp passed 62 checks, including disabled-method-routing native allocation count 0 and one actual native candidate rejected after injected dispatch conflict while retaining the previous ownership epoch/backend and verified rendered pixels. required_shadow_startup passed 38 CPU installer/factory-ABI checks. The failed preflight is not a rollback of every shared vtable patch; later unrelated preparation failures remain outside its preservation guarantee. Actual Oblivion deployment/runtime acceptance remains pending. Receipts: stage-v266-backend-candidate/LastTest.log and tests.log.",
       "name": "CreateDevice",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirect3D9 *This, UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS *pPresentationParameters, IDirect3DDevice9 **ppReturnedDeviceInterface)"
     }
   ],
   "name": "IDirect3D9Vtbl",
+  "ordinal": 9169,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 68
 }

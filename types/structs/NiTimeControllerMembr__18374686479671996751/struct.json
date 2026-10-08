@@ -1,112 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiTimeControllerMembr",
+  "definition": "struct NiTimeControllerMembr\n{\nNiRefObjectMembr super;\nUInt16 flags; ///< NiTimeController flag word at object +0x08. Native bits: 0 APP_INIT timing; 1-2 cycle mode; 3 Active; 4 playback backwards; 5 interpolator/manager-controlled. This is distinct from NiGeomMorpherController.morphFlags at object +0x3C.\nUInt8 pad00A[2];\nfloat m_fFrequency;\nfloat m_fPhase;\nfloat m_fLoKeyTime;\nfloat m_fHiKeyTime;\nfloat m_fStartTime;\nfloat m_fLastTime;\nfloat scaledTimeAccumulator; ///< Runtime accumulator updated by ComputeScaledTime: delta application time * frequency, then phase is added separately. Not serialized.\nfloat cachedScaledTime; ///< Cached controller/scaled time consumed by interpolators. NiTimeController_IsUpdateUnchanged normally refreshes it before controller sampling. Not serialized.\nUInt8 computeScaledTimeOnUpdate; ///< When nonzero, IsUpdateUnchanged computes and caches scaled time after an application-time change; constructor default is 1. When zero it forces an update without recomputing this cache.\nUInt8 pad02D[3];\nNiNode *m_pTarget;\nNiObject *next;\nUInt8 forceUpdate; ///< Forces IsUpdateUnchanged to report changed once; cleared when observed. Constructor default is 0.\nUInt8 unk039[3];\n}\n",
   "id": 18374686479671996751,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "NiRefObjectMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "NiTimeController flag word at object +0x08. Native bits: 0 APP_INIT timing; 1-2 cycle mode; 3 Active; 4 playback backwards; 5 interpolator/manager-controlled. This is distinct from NiGeomMorpherController.morphFlags at object +0x3C.",
       "name": "flags",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "pad00A",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 2
+      "size": 2,
+      "type": "UInt8[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "m_fFrequency",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "m_fPhase",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "m_fLoKeyTime",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "m_fHiKeyTime",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000510.",
       "name": "m_fStartTime",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000511.",
       "name": "m_fLastTime",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "float"
     },
     {
-      "name": "unk024",
+      "annotation_confidence": "Unknown",
+      "comment": "Runtime accumulator updated by ComputeScaledTime: delta application time * frequency, then phase is added separately. Not serialized.",
+      "name": "scaledTimeAccumulator",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
-      "name": "unk028",
+      "annotation_confidence": "Unknown",
+      "comment": "Cached controller/scaled time consumed by interpolators. NiTimeController_IsUpdateUnchanged normally refreshes it before controller sampling. Not serialized.",
+      "name": "cachedScaledTime",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
-      "name": "unk02C",
+      "annotation_confidence": "Unknown",
+      "comment": "When nonzero, IsUpdateUnchanged computes and caches scaled time after an application-time change; constructor default is 1. When zero it forces an update without recomputing this cache.",
+      "name": "computeScaledTimeOnUpdate",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000515.",
       "name": "pad02D",
       "offset": 41,
       "offset_hex": "0x29",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000516.",
       "name": "m_pTarget",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "NiNode *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000517.",
       "name": "next",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "NiObject *"
     },
     {
-      "name": "unk038",
+      "annotation_confidence": "Unknown",
+      "comment": "Forces IsUpdateUnchanged to report changed once; cleared when observed. Constructor default is 0.",
+      "name": "forceUpdate",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 1
+      "size": 1,
+      "type": "UInt8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u000519.",
       "name": "unk039",
       "offset": 53,
       "offset_hex": "0x35",
-      "size": 3
+      "size": 3,
+      "type": "UInt8[3]"
     }
   ],
   "name": "NiTimeControllerMembr",
+  "ordinal": 9443,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 56
 }

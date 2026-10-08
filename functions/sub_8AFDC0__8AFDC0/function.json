@@ -1,19 +1,36 @@
 {
-  "callees_count": 18,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 11,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_8AFDC0",
+  "chunks": [
+    [
+      "0x8AFDC0",
+      "0x8AFF9F"
+    ],
+    [
+      "0x9D6D40",
+      "0x9D6D95"
+    ]
+  ],
+  "chunks_sha256": "97c5757ef290c586900e3d868331d174ba30735c21258ce12b0d60e9b399703c",
+  "comment_regular": "[Collision research 2026-10-07] Native trunk factory descriptor:8A5790 init,filter40009 at+0/+20,shape+4/+24,mass+B0=0,friction+BC=A3F424,motion+D0=7,material9;ctor533290 wrapper1C. Captured by native instruction emulation in out/collision_full_v144/native_body_oracle.json. Extra solid-body prototype discarded after user clarified existing authored tree contact works. v144 does not add extra solids.\n\nVerified: constructs a vertical Havok capsule shape from trunkLength and radius, using trunkLength for endpoint height and radius for capsule radius, then wraps it in the Havok shape container. Called by BSTreeModel_CreateGeometry and CreateArt; it is Oblivion's helper and should not be replaced with Fallout's CreateTree implementation.",
+  "comment_repeatable": "Verified: constructs a vertical Havok capsule shape from trunkLength and radius, using trunkLength for endpoint height and radius for capsule radius, then wraps it in the Havok shape container. Called by BSTreeModel_CreateGeometry and CreateArt; it is Oblivion's helper and should not be replaced with Fallout's CreateTree implementation.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 12,
+  "display_name": "BSTreeModel_CreateTrunkCapsuleShape",
   "end_ea": "0x8AFF9F",
+  "evidence_confidence": "Unknown",
   "flags": 23568,
   "has_pseudocode": true,
-  "name": "sub_8AFDC0",
+  "name": "BSTreeModel_CreateTrunkCapsuleShape",
   "segment": ".text",
   "sha256": "96fec797f12b0157f6b12ab0da67b9a5b3debfb14d6b94aba3acc52ff674cc47",
   "size": 479,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x8AFDC0",
-  "type": "bhkRefObject *__cdecl(float, float)",
-  "xrefs_from_count": 148,
+  "total_chunk_size": 564,
+  "type": "bhkRefObject *__cdecl(float trunkLength, float radius)",
+  "xrefs_from_count": 185,
   "xrefs_to_count": 2
 }

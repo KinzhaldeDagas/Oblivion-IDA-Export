@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x68DEB0",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Verified active-effect list save layout: TESSaveLoadGame_UseSaveGameBlocks controls whether the list emits a BLOK header and reserves/backpatches a block size. The list always reserves and patches a UInt16 effect count. Per-effect records separately use the save version threshold 0x2A to include a UInt16 record-size field.",
     "mnemonic": "sub",
     "size": 3
   },

@@ -58,3 +58,12 @@
 0x62520C: pop     esi
 0x62520D: add     esp, 10h
 0x625210: retn
+0x9C32A0: mov     ecx, [ebp-10h]; int
+0x9C32A3: jmp     sub_5F13D0
+0x9C32A8: mov     edx, [esp+arg_4]
+0x9C32AC: lea     eax, [edx-8]
+0x9C32AF: mov     ecx, [edx-0Ch]
+0x9C32B2: xor     ecx, eax
+0x9C32B4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C32B9: mov     eax, offset stru_AEBED8
+0x9C32BE: jmp     ___CxxFrameHandler3

@@ -1,59 +1,51 @@
-char __userpurge sub_614C30@<al>(double st7_0@<st0>, int a2@<esi>, int *a3)
+void __userpurge sub_614C30(double st7_0@<st0>, int *source)
 {
-  TESSaveLoad *v3; // ecx
-  _WORD *v4; // ebp
-  char result; // al
-  int *v6; // edi
-  int v7; // esi
-  int *v8; // ecx
-  void *v9; // ecx
-  bool v10; // zf
-  size_t v11; // [esp-8h] [ebp-18h]
-  size_t v12; // [esp-4h] [ebp-14h]
+  TESSaveLoadGame_SerializationView *v3; // ecx
+  unsigned __int8 *bufferCursor; // ebp
+  int *v5; // edi
+  int v6; // esi
+  int *v7; // ecx
+  void *v8; // ecx
+  bool v9; // zf
   int Src; // [esp+8h] [ebp-8h] BYREF
-  int FormID; // [esp+Ch] [ebp-4h] BYREF
+  unsigned int FormID; // [esp+Ch] [ebp-4h] BYREF
 
-  v3 = SaveLoad_CurrentSavegame;
-  LODWORD(v12) = 2;
-  Src = 0;
-  v4 = (_WORD *)v3->unk000[5];
-  result = (unsigned __int8)SaveLoad_SaveData((int)v3, &Src, v12);
-  v6 = a3;
-  if ( a3 )
+  v3 = g_TESSaveLoadGame; /*0x614c33*/
+  Src = 0; /*0x614c41*/
+  bufferCursor = v3->bufferCursor; /*0x614c49*/
+  SaveLoad_SaveData(v3, &Src, 2u); /*0x614c4d*/
+  v5 = source; /*0x614c52*/
+  if ( source ) /*0x614c58*/
   {
-    HIDWORD(v11) = a2;
-    while ( v6[1] || *v6 )
+    while ( v5[1] || *v5 ) /*0x614c69*/
     {
-      v7 = *v6;
-      if ( *v6 )
+      v6 = *v5; /*0x614c6b*/
+      if ( *v5 ) /*0x614c6b*/
       {
-        LODWORD(v11) = 1;
-        LOBYTE(a3) = *(_DWORD *)(v7 + 4) != 0;
-        SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &a3, v11);
-        v8 = *(int **)(v7 + 4);
-        if ( v8 )
-          SaveGame(v8, st7_0);
-        v9 = *(void **)v7;
-        v10 = *(_DWORD *)v7 == 0;
-        FormID = 0;
-        if ( !v10 )
-          FormID = MagicItem_GetFormID(v9);
-        result = SaveLoad_SaveFormID(SaveLoad_CurrentSavegame, (int)&FormID, 4u);
+        LOBYTE(source) = *(_DWORD *)(v6 + 4) != 0; /*0x614c7e*/
+        SaveLoad_SaveData(g_TESSaveLoadGame, &source, 1u); /*0x614c89*/
+        v7 = *(int **)(v6 + 4); /*0x614c8e*/
+        if ( v7 ) /*0x614c93*/
+          SaveGame(v7, st7_0); /*0x614c95*/
+        v8 = *(void **)v6; /*0x614c9a*/
+        v9 = *(_DWORD *)v6 == 0; /*0x614c9c*/
+        FormID = 0; /*0x614c9e*/
+        if ( !v9 ) /*0x614ca6*/
+          FormID = MagicItem_GetFormID(v8); /*0x614cad*/
+        SaveLoad_SaveFormID(g_TESSaveLoadGame, &FormID, 4u); /*0x614cbe*/
       }
-      ++Src;
-      v6 = (int *)v6[1];
-      if ( !v6 )
+      ++Src; /*0x614cc3*/
+      v5 = (int *)v5[1]; /*0x614cc8*/
+      if ( !v5 ) /*0x614ccd*/
       {
-        *v4 = Src;
-        return result;
+        *(_WORD *)bufferCursor = Src; /*0x614cd6*/
+        return; /*0x614cde*/
       }
     }
-    *v4 = Src;
+    *(_WORD *)bufferCursor = Src; /*0x614ce8*/
   }
   else
   {
-    result = Src;
-    *v4 = Src;
+    *(_WORD *)bufferCursor = Src; /*0x614cf9*/
   }
-  return result;
 }

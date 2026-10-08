@@ -21,7 +21,7 @@
 0x503108: push    edx; a3
 0x503109: push    eax; a2
 0x50310A: push    ecx; a1
-0x50310B: call    Script_ExtractArgs
+0x50310B: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x503110: add     esp, 24h
 0x503113: test    al, al
 0x503115: jnz     short loc_50311C
@@ -35,7 +35,7 @@
 0x503129: push    eax
 0x50312A: push    ecx
 0x50312B: push    esi
-0x50312C: call    sub_4F6D70
+0x50312C: call    GetInCell_Eval; Shared GetInCell/GetInCellParam evaluator (553 and 4 vanilla core-root CTDAs, respectively). Param1 must be a Cell form. If param2 is a reference in Oblivion form-type range 0x31..0x33, test that reference; otherwise use the condition subject. Resolve its cell and compare editor-name strings case-insensitively over the requested Cell name length (a prefix comparison), not FormID pointer identity. GetInCellParam can run without a subject because it has an explicit ObjectReferenceID param2. Fallout analogue x4y6:0x823B6270 uses the same name comparison but recognizes reference type range 0x3A..0x40 or 0x69.
 0x503131: add     esp, 10h
 0x503134: pop     esi
 0x503135: add     esp, 8

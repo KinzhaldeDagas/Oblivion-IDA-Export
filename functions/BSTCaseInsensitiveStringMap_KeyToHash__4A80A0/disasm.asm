@@ -28,7 +28,6 @@
 0x4A80E2: mov     [ebp+var_C], eax
 0x4A80E5: mov     [ebp+var_8], ebx
 0x4A80E8: jmp     short loc_4A80F3
-0x4A80EA: align 10h
 0x4A80F0: mov     eax, [ebp+var_C]
 0x4A80F3: movsx   eax, byte ptr [eax+edi]
 0x4A80F7: push    eax; C

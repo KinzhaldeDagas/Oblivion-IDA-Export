@@ -8,7 +8,7 @@
 0x734E24: mov     [edi+168h], eax
 0x734E2A: mov     eax, [edi+16Ch]
 0x734E30: push    eax
-0x734E31: call    FormHeapFree
+0x734E31: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x734E36: mov     eax, [edi+168h]
 0x734E3C: xor     ecx, ecx
 0x734E3E: mov     edx, 4
@@ -28,7 +28,7 @@
 0x734E6E: mov     [edi+160h], eax
 0x734E74: mov     eax, [edi+164h]
 0x734E7A: push    eax
-0x734E7B: call    FormHeapFree
+0x734E7B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x734E80: mov     ecx, [edi+160h]
 0x734E86: push    ecx; Size
 0x734E87: call    FormHeapAlloc

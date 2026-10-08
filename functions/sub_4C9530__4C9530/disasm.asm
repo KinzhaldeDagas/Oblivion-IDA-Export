@@ -12,18 +12,18 @@
 0x4C955A: push    offset aSLandscapeS; "%s\\Landscape\\%s"
 0x4C955F: push    eax
 0x4C9560: call    __sprintf
-0x4C9565: lea     ecx, [esp+21Ch+var_108]
+0x4C9565: lea     ecx, [esp+21Ch+path]
 0x4C956C: push    ecx; int
 0x4C956D: lea     edx, [esp+220h+Str1]
 0x4C9571: push    edx; Str1
-0x4C9572: call    sub_47D8F0
+0x4C9572: call    sub_47D8F0; SpeedTreeOBSE 2026-07-14: normalizes texture palette keys in a fixed 256-byte local buffer. Plugin loader inputs are therefore capped at 255 characters.
 0x4C9577: mov     ecx, ds:0B33A1Ch
 0x4C957D: add     esp, 18h
-0x4C9580: push    0
-0x4C9582: push    5
-0x4C9584: lea     eax, [esp+214h+var_108]
-0x4C958B: push    eax
-0x4C958C: call    sub_43B0D0
+0x4C9580: push    0; parent
+0x4C9582: push    5; priority
+0x4C9584: lea     eax, [esp+214h+path]
+0x4C958B: push    eax; path
+0x4C958C: call    QueuedTexture_QueueOrAttachPath; Verified neighboring subsystem: landscape texture loading builds Textures\\Landscape\\<name>, normalizes the path, and uses the same QueuedTexture_QueueOrAttachPath helper with priority 5 and no parent.
 0x4C9591: mov     ecx, [esp+20Ch+var_4]
 0x4C9598: xor     ecx, esp
 0x4C959A: call    @__security_check_cookie@4; __security_check_cookie(x)

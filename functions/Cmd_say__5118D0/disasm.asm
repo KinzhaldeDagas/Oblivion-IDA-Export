@@ -4,7 +4,7 @@
 0x5118D6: push    ebp
 0x5118D7: push    edi
 0x5118D8: mov     edi, [esp+2Ch+a4]
-0x5118DC: mov     ebp, dword ptr [esp+2Ch+arg_18]
+0x5118DC: mov     ebp, [esp+2Ch+arg_18]
 0x5118E0: lea     eax, [esp+2Ch+var_14]
 0x5118E4: fstp    qword ptr [ebp+0]
 0x5118E7: push    eax
@@ -30,12 +30,12 @@
 0x511919: xor     ebx, ebx
 0x51191B: push    eax; a2
 0x51191C: push    ecx; a1
-0x51191D: mov     dword ptr [esp+5Ch+arg_18], ebx
+0x51191D: mov     [esp+5Ch+arg_18], ebx
 0x511921: mov     [esp+5Ch+var_18], ebx
 0x511925: mov     [esp+5Ch+a2], ebx
 0x511929: mov     [esp+5Ch+var_1C], ebx
 0x51192D: mov     [esp+5Ch+var_14], ebx
-0x511931: call    Script_ExtractArgs
+0x511931: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x511936: add     esp, 30h
 0x511939: test    al, al
 0x51193B: jnz     short loc_511944
@@ -45,14 +45,14 @@
 0x511940: add     esp, 20h
 0x511943: retn
 0x511944: cmp     [esp+2Ch+var_1C], ebx
-0x511948: mov     [esp+2Ch+var_10], bl
+0x511948: mov     byte ptr [esp+2Ch+var_10], bl
 0x51194C: mov     byte ptr [esp+2Ch+var_8], bl
 0x511950: mov     byte ptr [esp+2Ch+var_C], bl
 0x511954: jz      short loc_51195B
 0x511956: mov     byte ptr [esp+2Ch+var_8], 1
 0x51195B: cmp     [esp+2Ch+var_18], ebx
 0x51195F: jle     short loc_511966
-0x511961: mov     [esp+2Ch+var_10], 1
+0x511961: mov     byte ptr [esp+2Ch+var_10], 1
 0x511966: cmp     [esp+2Ch+var_14], ebx
 0x51196A: jle     short loc_511971
 0x51196C: mov     byte ptr [esp+2Ch+var_C], 1
@@ -70,7 +70,7 @@
 0x511991: mov     [esp+30h+var_4], edx
 0x511995: mov     dword ptr ds:0B36798h, 7FFFFFFFh
 0x51199F: jz      loc_511A3B
-0x5119A5: cmp     dword ptr [esp+30h+arg_18], ebx
+0x5119A5: cmp     [esp+30h+arg_18], ebx
 0x5119A9: jz      loc_511A3B
 0x5119AF: mov     ecx, [esi+58h]
 0x5119B2: cmp     ecx, ebx
@@ -89,14 +89,14 @@
 0x5119DA: mov     edx, [eax+484h]
 0x5119E0: push    edi
 0x5119E1: call    edx
-0x5119E3: mov     edx, dword ptr [esp+30h+var_10]
+0x5119E3: mov     edx, [esp+30h+var_10]
 0x5119E7: mov     ecx, [esi+58h]
 0x5119EA: mov     eax, [ecx]
 0x5119EC: mov     eax, [eax+1A4h]
 0x5119F2: push    ebx
 0x5119F3: push    ebx
 0x5119F4: push    edx
-0x5119F5: mov     edx, dword ptr [esp+3Ch+arg_18]
+0x5119F5: mov     edx, [esp+3Ch+arg_18]
 0x5119F9: push    edx
 0x5119FA: push    esi
 0x5119FB: call    eax
@@ -134,7 +134,7 @@
 0x511A4E: mov     ecx, [esp+38h+a2]
 0x511A52: add     esp, 8
 0x511A55: mov     esi, eax
-0x511A57: push    ecx; a2
+0x511A57: push    ecx; baseForm
 0x511A58: mov     ecx, esi; this
 0x511A5A: call    TESObjectREFR_SetBaseForm
 0x511A5F: mov     eax, [esp+30h+var_C]
@@ -143,7 +143,7 @@
 0x511A69: mov     edx, [edx+0DCh]
 0x511A6F: push    1
 0x511A71: push    eax
-0x511A72: mov     eax, dword ptr [esp+38h+arg_18]
+0x511A72: mov     eax, [esp+38h+arg_18]
 0x511A76: push    ecx
 0x511A77: push    esi
 0x511A78: push    eax

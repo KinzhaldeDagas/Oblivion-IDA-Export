@@ -11,7 +11,7 @@
 0x7E59D9: lea     eax, [esp+1Ch+var_C]
 0x7E59DD: mov     large fs:0, eax
 0x7E59E3: mov     ebx, ecx
-0x7E59E5: mov     esi, [esp+1Ch+arg_0]
+0x7E59E5: mov     esi, [esp+1Ch+element]
 0x7E59E9: test    esi, esi
 0x7E59EB: jz      loc_7E5B38
 0x7E59F1: mov     eax, [esi]
@@ -21,7 +21,7 @@
 0x7E59FA: test    eax, eax
 0x7E59FC: jz      short loc_7E5A0E
 0x7E59FE: mov     edi, edi
-0x7E5A00: cmp     eax, offset dword_B3FD54
+0x7E5A00: cmp     eax, offset stru_B3FD54
 0x7E5A05: jz      short loc_7E5A5C
 0x7E5A07: mov     eax, [eax+4]
 0x7E5A0A: test    eax, eax
@@ -51,7 +51,7 @@
 0x7E5A57: jmp     loc_7E5B22
 0x7E5A5C: push    4
 0x7E5A5E: mov     ecx, esi
-0x7E5A60: call    NiNode_GetNiPropertyByID
+0x7E5A60: call    NiNode_GetNiPropertyByID;
 0x7E5A65: test    eax, eax
 0x7E5A67: jz      loc_7E5B38
 0x7E5A6D: mov     edx, [eax]
@@ -61,7 +61,7 @@
 0x7E5A76: test    eax, eax
 0x7E5A78: jz      loc_7E5B38
 0x7E5A7E: mov     edi, edi
-0x7E5A80: cmp     eax, offset dword_B4618C
+0x7E5A80: cmp     eax, offset NiRTTI_BSShaderLightingProperty; Oblivion NiRTTI_BSShaderLightingProperty: native name 'BSShaderLightingProperty'; parent NiRTTI_BSShaderProperty (B46000). Corrected from the oversized OB_ShaderConstantStorage array into an independent eight-byte NiRTTI object.
 0x7E5A85: jz      short loc_7E5AA3
 0x7E5A87: mov     eax, [eax+4]
 0x7E5A8A: test    eax, eax
@@ -76,23 +76,23 @@
 0x7E5AA0: retn    4
 0x7E5AA3: push    2
 0x7E5AA5: mov     ecx, esi
-0x7E5AA7: call    NiNode_GetNiPropertyByID
+0x7E5AA7: call    NiNode_GetNiPropertyByID;
 0x7E5AAC: test    eax, eax
 0x7E5AAE: jz      short loc_7E5AC1
-0x7E5AB0: push    offset dword_B3FA90
+0x7E5AB0: push    offset stru_B3FA90
 0x7E5AB5: lea     ecx, [eax+28h]
 0x7E5AB8: call    sub_8AA350
 0x7E5ABD: test    al, al
 0x7E5ABF: jnz     short loc_7E5B38
 0x7E5AC1: lea     edi, [esi+4]
 0x7E5AC4: push    edi; lpAddend
-0x7E5AC5: mov     [esp+20h+arg_0], esi
+0x7E5AC5: mov     [esp+20h+element], esi
 0x7E5AC9: call    dword ptr ds:0A28078h
-0x7E5ACF: lea     ecx, [esp+1Ch+arg_0]
-0x7E5AD3: push    ecx
-0x7E5AD4: lea     ecx, [ebx+110h]
+0x7E5ACF: lea     ecx, [esp+1Ch+element]
+0x7E5AD3: push    ecx; element
+0x7E5AD4: lea     ecx, [ebx+110h]; self
 0x7E5ADA: mov     [esp+20h+var_4], 0
-0x7E5AE2: call    NiTArray_AddItem
+0x7E5AE2: call    NiTObjectArray_AddFirstEmpty
 0x7E5AE7: push    edi; lpAddend
 0x7E5AE8: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x7E5AF0: call    dword ptr ds:0A2807Ch
@@ -128,3 +128,12 @@
 0x7E5B46: pop     ebx
 0x7E5B47: add     esp, 0Ch
 0x7E5B4A: retn    4
+0x9A9F20: lea     ecx, [ebp+4]; slot
+0x9A9F23: jmp     NiPointerSlot_Release
+0x9A9F28: mov     edx, [esp+arg_4]
+0x9A9F2C: lea     eax, [edx-0Ch]
+0x9A9F2F: mov     ecx, [edx-10h]
+0x9A9F32: xor     ecx, eax
+0x9A9F34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9A9F39: mov     eax, offset stru_AD6FAC
+0x9A9F3E: jmp     ___CxxFrameHandler3

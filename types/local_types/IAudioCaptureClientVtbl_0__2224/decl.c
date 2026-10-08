@@ -1,1 +1,1 @@
-IAudioCaptureClientVtbl_0
+typedef IAudioCaptureClientVtbl IAudioCaptureClientVtbl_0;

@@ -1,4 +1,4 @@
-0x8D0050: push    ebp
+0x8D0050: push    ebp; Projectile-like character state update. Uses the shared velocity solver only under controller flag 0x100; not a Climbing/actor movement state.
 0x8D0051: mov     ebp, esp
 0x8D0053: and     esp, 0FFFFFFF0h
 0x8D0056: sub     esp, 0C8h
@@ -19,7 +19,7 @@
 0x8D0087: fstp    dword ptr [esi+2E8h]
 0x8D008D: mov     ecx, esi
 0x8D008F: mov     dword ptr [esi+2A0h], 2
-0x8D0099: call    sub_890720
+0x8D0099: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8D009E: mov     eax, [esi+1ECh]
 0x8D00A4: mov     ecx, [esi+1E8h]
 0x8D00AA: push    eax
@@ -85,7 +85,7 @@
 0x8D01B9: fstp    [esp+0D4h+var_30]
 0x8D01C0: push    ecx
 0x8D01C1: movaps  [esp+0D8h+var_20], xmm0
-0x8D01C9: call    sub_91F430
+0x8D01C9: call    bhkCharacterState_SolveVelocityToTarget; Projectile-like state solver setup: only runs when flag 0x100 is set, basis slots use proxy+0x2C0/+0x2B0/+0x230, desired local velocity comes from proxy+0x290 with vertical preserved only under flag 0x800, maxDelta=500, reference=proxy+0x280.
 0x8D01CE: mov     edx, [esi+1F4h]
 0x8D01D4: shr     edx, 0Bh
 0x8D01D7: add     esp, 8
@@ -122,7 +122,7 @@
 0x8D0244: addps   xmm2, xmm0
 0x8D0247: movaps  xmmword ptr [edi], xmm2
 0x8D024A: mov     ecx, esi
-0x8D024C: call    sub_890970
+0x8D024C: call    sub_890970; Transient velocity-add channel: when proxy+0x300 timer is positive, adds timer * proxy+0x2F0 vector to velocity unless gravity-suppress flags 0x1800 are set. Setter not confirmed in current movement slice.
 0x8D0251: mov     eax, [esi+2A0h]
 0x8D0257: cmp     eax, 0Bh
 0x8D025A: jz      short loc_8D0275
@@ -133,7 +133,7 @@
 0x8D026A: test    al, 1
 0x8D026C: jz      short loc_8D0275
 0x8D026E: mov     ecx, esi
-0x8D0270: call    sub_890720
+0x8D0270: call    sub_890720; MorrowindMovements: commits pending state at proxy+0x2A0 into hkCharacterContext state slot proxy+0x1EC, then resets pending state to sentinel 0x0B. Use +0x1EC as active state when +0x2A0 is sentinel.
 0x8D0275: mov     ecx, [esp+0D0h+var_4]
 0x8D027C: pop     edi
 0x8D027D: pop     esi

@@ -27,3 +27,12 @@
 0x6FE7C2: pop     esi
 0x6FE7C3: add     esp, 10h
 0x6FE7C6: retn
+0x9C9290: mov     ecx, [ebp-10h]; this
+0x9C9293: jmp     j_??1NiPSysFieldModifier@@UAE@XZ; NiPSysFieldModifier::~NiPSysFieldModifier(void)
+0x9C9298: mov     edx, [esp+arg_4]
+0x9C929C: lea     eax, [edx-8]
+0x9C929F: mov     ecx, [edx-0Ch]
+0x9C92A2: xor     ecx, eax
+0x9C92A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C92A9: mov     eax, offset stru_AF1B9C
+0x9C92AE: jmp     ___CxxFrameHandler3

@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x76CE58",
-    "line": "push    offset sub_A26DC0; void (__cdecl *)()",
+    "line": "push    offset NiD3DPassArray_DestroyEmptySentinel; void (__cdecl *)()",
     "mnemonic": "push",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x76CE73",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+index]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x76CE79",
-    "line": "mov     edi, [esp+0Ch+arg_4]",
+    "line": "mov     edi, [esp+0Ch+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x76CECF",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },

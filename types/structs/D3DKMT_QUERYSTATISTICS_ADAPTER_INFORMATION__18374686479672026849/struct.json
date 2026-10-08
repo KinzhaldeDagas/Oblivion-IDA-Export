@@ -1,112 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_D3DKMT_QUERYSTATISTICS_ADAPTER_INFORMATION",
+  "definition": "struct _D3DKMT_QUERYSTATISTICS_ADAPTER_INFORMATION\n{\nULONG NbSegments;\nULONG NodeCount;\nULONG VidPnSourceCount;\nULONG VSyncEnabled;\nULONG TdrDetectedCount;\n__declspec(align(8)) LONGLONG ZeroLengthDmaBuffers;\nULONGLONG RestartedPeriod;\nD3DKMT_QUERYSTATSTICS_REFERENCE_DMA_BUFFER ReferenceDmaBuffer;\nD3DKMT_QUERYSTATSTICS_RENAMING Renaming;\nD3DKMT_QUERYSTATSTICS_PREPRATION Preparation;\nD3DKMT_QUERYSTATSTICS_PAGING_FAULT PagingFault;\nD3DKMT_QUERYSTATSTICS_PAGING_TRANSFER PagingTransfer;\nD3DKMT_QUERYSTATSTICS_SWIZZLING_RANGE SwizzlingRange;\nD3DKMT_QUERYSTATSTICS_LOCKS Locks;\nD3DKMT_QUERYSTATSTICS_ALLOCATIONS Allocations;\nD3DKMT_QUERYSTATSTICS_TERMINATIONS Terminations;\nULONG64 Reserved[8];\n}\n",
   "id": 18374686479672026849,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NbSegments",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "NodeCount",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VidPnSourceCount",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "VSyncEnabled",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "TdrDetectedCount",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ZeroLengthDmaBuffers",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RestartedPeriod",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 8
+      "size": 8,
+      "type": "ULONGLONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ReferenceDmaBuffer",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 56
+      "size": 56,
+      "type": "D3DKMT_QUERYSTATSTICS_REFERENCE_DMA_BUFFER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Renaming",
       "offset": 96,
       "offset_hex": "0x60",
-      "size": 36
+      "size": 36,
+      "type": "D3DKMT_QUERYSTATSTICS_RENAMING"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Preparation",
       "offset": 136,
       "offset_hex": "0x88",
-      "size": 32
+      "size": 32,
+      "type": "D3DKMT_QUERYSTATSTICS_PREPRATION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PagingFault",
       "offset": 168,
-      "offset_hex": "0xa8",
-      "size": 264
+      "offset_hex": "0xA8",
+      "size": 264,
+      "type": "D3DKMT_QUERYSTATSTICS_PAGING_FAULT"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "PagingTransfer",
       "offset": 432,
-      "offset_hex": "0x1b0",
-      "size": 64
+      "offset_hex": "0x1B0",
+      "size": 64,
+      "type": "D3DKMT_QUERYSTATSTICS_PAGING_TRANSFER"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SwizzlingRange",
       "offset": 496,
-      "offset_hex": "0x1f0",
-      "size": 8
+      "offset_hex": "0x1F0",
+      "size": 8,
+      "type": "D3DKMT_QUERYSTATSTICS_SWIZZLING_RANGE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Locks",
       "offset": 504,
-      "offset_hex": "0x1f8",
-      "size": 28
+      "offset_hex": "0x1F8",
+      "size": 28,
+      "type": "D3DKMT_QUERYSTATSTICS_LOCKS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Allocations",
       "offset": 536,
       "offset_hex": "0x218",
-      "size": 112
+      "size": 112,
+      "type": "D3DKMT_QUERYSTATSTICS_ALLOCATIONS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Terminations",
       "offset": 648,
       "offset_hex": "0x288",
-      "size": 64
+      "size": 64,
+      "type": "D3DKMT_QUERYSTATSTICS_TERMINATIONS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Reserved",
       "offset": 712,
-      "offset_hex": "0x2c8",
-      "size": 64
+      "offset_hex": "0x2C8",
+      "size": 64,
+      "type": "ULONG64[8]"
     }
   ],
   "name": "_D3DKMT_QUERYSTATISTICS_ADAPTER_INFORMATION",
+  "ordinal": 1253,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 776
 }

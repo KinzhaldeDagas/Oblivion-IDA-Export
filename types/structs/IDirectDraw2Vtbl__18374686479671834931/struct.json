@@ -1,154 +1,243 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "IDirectDraw2Vtbl",
+  "definition": "struct IDirectDraw2Vtbl\n{\nHRESULT (__stdcall *QueryInterface)(IDirectDraw2 *This, const IID *const riid, LPVOID *ppvObj) __offset(OFF64|AUTO);\nULONG (__stdcall *AddRef)(IDirectDraw2 *This) __offset(OFF64|AUTO);\nULONG (__stdcall *Release)(IDirectDraw2 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Compact)(IDirectDraw2 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *CreateClipper)(IDirectDraw2 *This, DWORD, LPDIRECTDRAWCLIPPER *, IUnknown *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *CreatePalette)(IDirectDraw2 *This, DWORD, LPPALETTEENTRY, LPDIRECTDRAWPALETTE *, IUnknown *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *CreateSurface)(IDirectDraw2 *This, LPDDSURFACEDESC, LPDIRECTDRAWSURFACE *, IUnknown *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *DuplicateSurface)(IDirectDraw2 *This, LPDIRECTDRAWSURFACE, LPDIRECTDRAWSURFACE *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *EnumDisplayModes)(IDirectDraw2 *This, DWORD, LPDDSURFACEDESC, LPVOID, LPDDENUMMODESCALLBACK) __offset(OFF64|AUTO);\nHRESULT (__stdcall *EnumSurfaces)(IDirectDraw2 *This, DWORD, LPDDSURFACEDESC, LPVOID, LPDDENUMSURFACESCALLBACK) __offset(OFF64|AUTO);\nHRESULT (__stdcall *FlipToGDISurface)(IDirectDraw2 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetCaps)(IDirectDraw2 *This, LPDDCAPS, LPDDCAPS) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetDisplayMode)(IDirectDraw2 *This, LPDDSURFACEDESC) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetFourCCCodes)(IDirectDraw2 *This, LPDWORD, LPDWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetGDISurface)(IDirectDraw2 *This, LPDIRECTDRAWSURFACE *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetMonitorFrequency)(IDirectDraw2 *This, LPDWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetScanLine)(IDirectDraw2 *This, LPDWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetVerticalBlankStatus)(IDirectDraw2 *This, LPBOOL) __offset(OFF64|AUTO);\nHRESULT (__stdcall *Initialize)(IDirectDraw2 *This, GUID *) __offset(OFF64|AUTO);\nHRESULT (__stdcall *RestoreDisplayMode)(IDirectDraw2 *This) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetCooperativeLevel)(IDirectDraw2 *This, HWND, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *SetDisplayMode)(IDirectDraw2 *This, DWORD, DWORD, DWORD, DWORD, DWORD) __offset(OFF64|AUTO);\nHRESULT (__stdcall *WaitForVerticalBlank)(IDirectDraw2 *This, DWORD, HANDLE) __offset(OFF64|AUTO);\nHRESULT (__stdcall *GetAvailableVidMem)(IDirectDraw2 *This, LPDDSCAPS, LPDWORD, LPDWORD) __offset(OFF64|AUTO);\n}\n",
   "id": 18374686479671834931,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "QueryInterface",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, const IID *const riid, LPVOID *ppvObj)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "AddRef",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirectDraw2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Release",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "ULONG (__stdcall *)(IDirectDraw2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Compact",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateClipper",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, DWORD, LPDIRECTDRAWCLIPPER *, IUnknown *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreatePalette",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, DWORD, LPPALETTEENTRY, LPDIRECTDRAWPALETTE *, IUnknown *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateSurface",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDDSURFACEDESC, LPDIRECTDRAWSURFACE *, IUnknown *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "DuplicateSurface",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDIRECTDRAWSURFACE, LPDIRECTDRAWSURFACE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumDisplayModes",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, DWORD, LPDDSURFACEDESC, LPVOID, LPDDENUMMODESCALLBACK)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "EnumSurfaces",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, DWORD, LPDDSURFACEDESC, LPVOID, LPDDENUMSURFACESCALLBACK)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "FlipToGDISurface",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetCaps",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDDCAPS, LPDDCAPS)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetDisplayMode",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDDSURFACEDESC)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetFourCCCodes",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDWORD, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetGDISurface",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDIRECTDRAWSURFACE *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetMonitorFrequency",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetScanLine",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetVerticalBlankStatus",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPBOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Initialize",
       "offset": 72,
       "offset_hex": "0x48",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, GUID *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "RestoreDisplayMode",
       "offset": 76,
-      "offset_hex": "0x4c",
-      "size": 4
+      "offset_hex": "0x4C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetCooperativeLevel",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, HWND, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SetDisplayMode",
       "offset": 84,
       "offset_hex": "0x54",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, DWORD, DWORD, DWORD, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "WaitForVerticalBlank",
       "offset": 88,
       "offset_hex": "0x58",
-      "size": 4
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, DWORD, HANDLE)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "GetAvailableVidMem",
       "offset": 92,
-      "offset_hex": "0x5c",
-      "size": 4
+      "offset_hex": "0x5C",
+      "size": 4,
+      "type": "HRESULT (__stdcall *)(IDirectDraw2 *This, LPDDSCAPS, LPDWORD, LPDWORD)"
     }
   ],
   "name": "IDirectDraw2Vtbl",
+  "ordinal": 4104,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 96
 }

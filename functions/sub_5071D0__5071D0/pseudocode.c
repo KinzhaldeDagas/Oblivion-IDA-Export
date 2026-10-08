@@ -13,11 +13,20 @@ void __usercall sub_5071D0(
 {
   UInt16 v11[2]; // [esp+14h] [ebp-204h] BYREF
 
-  if ( Script_ExtractArgs(a1, a5, a11, a4, a7, a8, l, v11) )
+  if ( Script_ExtractArgs(a1, a5, a11, a4, a7, a8, l, v11) ) /*0x50722d*/
   {
-    if ( SaveLoad_CurrentSavegame[5].unk030[0] )
-      ShowUIMessageBox(sOk, (char)v11, st5_0, a2, a3, (const char *)v11, (int)sub_65DC00, 1, (const char *)sOk, 0);
+    if ( *(_DWORD *)&g_TESSaveLoadGame[3].unknown1C[0xC] ) /*0x507257*/
+      ShowUIMessageBox( /*0x507275*/
+        (char *)MEMORY[0xB38CF0].value,
+        st5_0,
+        a2,
+        a3,
+        (char *)v11,
+        (int)sub_65DC00,
+        1,
+        (char *)MEMORY[0xB38CF0].value,
+        0);
     else
-      ShowUIMessageBox((int)v11, (char)v11, st5_0, a2, a3, (const char *)v11, (int)sub_662ED0, 1, (const char *)sOk, 0);
+      ShowUIMessageBox((char *)v11, st5_0, a2, a3, (char *)v11, (int)sub_662ED0, 1, (char *)MEMORY[0xB38CF0].value, 0); /*0x507289*/
   }
 }

@@ -1,1 +1,1 @@
-ExtraSeenData
+struct ExtraSeenData;

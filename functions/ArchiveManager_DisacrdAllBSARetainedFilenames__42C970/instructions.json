@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x42C970",
-    "line": "push    ecx",
+    "line": "push    ecx; MEF PERF 2026-09-07: Reachability qualification for PERF-1: WinMain calls this retained-name discard pass at40EB72. It applies INI/header retention policy and can call42C0D0 with keepOffsets=false, clearing cached bit20h and both filename owners. Thus streaming with neither table retained is an intentional reachable configuration, not just a hypothetical branch.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42C971",
-    "line": "mov     eax, ArchiveList",
+    "line": "mov     eax, ds:0B338E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x42C9C6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x42C9D9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x42CA14",
-    "line": "mov     eax, iRetainFilenameOffsetTable_Archive",
+    "line": "mov     eax, iRetainFilenameOffsetTable_Archive; MEF PERF 2026-09-07: PERF-1 retention gate: selectorB04448 is1 in this IDB; selector1 follows archive header+160h bit20h, selector0 disables retained offsets, other nonzero retains them. Per-instance live/header values and actual runtime frequency were not measured. No proposed global INI change.",
     "mnemonic": "mov",
     "size": 5
   },

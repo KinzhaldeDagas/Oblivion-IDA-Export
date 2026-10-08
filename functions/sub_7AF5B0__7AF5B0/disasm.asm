@@ -1,4 +1,4 @@
-0x7AF5B0: sub     esp, 18h
+0x7AF5B0: sub     esp, 18h; MoonSugarEffect decode: viewport-aware image-space shader render helper; computes source/default target ratios, binds source texture, starts target/default with kClear_BACKBUFFER, SetupScreenSpaceCamera(viewport), draws quad, then pops RT stack.
 0x7AF5B3: push    ebx
 0x7AF5B4: push    ebp
 0x7AF5B5: mov     ebx, ecx
@@ -141,12 +141,12 @@
 0x7AF74F: fstp    [esp+28h+var_8]
 0x7AF753: push    eax; a2
 0x7AF754: mov     ecx, ebx; this
-0x7AF756: call    sub_802890
+0x7AF756: call    sub_802890; MoonSugarEffect decode: stores source BSRenderedTexture in BSImageSpaceShader +0x7C with refcounting; render pass then samples this as primary scene texture.
 0x7AF75B: mov     ecx, [esp+28h+arg_8]
 0x7AF75F: mov     ecx, [ecx]
 0x7AF761: cmp     ecx, ebp
 0x7AF763: jz      short loc_7AF76C
-0x7AF765: call    BSRenderedTexture__UseTextureToRender
+0x7AF765: call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.
 0x7AF76A: jmp     short loc_7AF779
 0x7AF76C: mov     ecx, ds:0B3F928h
 0x7AF772: mov     edx, [ecx]
@@ -155,7 +155,7 @@
 0x7AF779: mov     edi, 1
 0x7AF77E: push    edi; clearFlags
 0x7AF77F: push    eax; a1
-0x7AF780: call    StartUsingRenderTarget
+0x7AF780: call    NiRenderer_PushAndBeginRenderTargetGroup; Begin a render-target-group stack entry: resolve null to the default group, end any currently ready group, begin the requested group, then strong-own it on the ten-entry global stack.
 0x7AF785: mov     ecx, ds:0B3F928h
 0x7AF78B: add     esp, 8
 0x7AF78E: cmp     [ecx+200h], edi
@@ -172,8 +172,8 @@
 0x7AF7B6: mov     ecx, ds:0B3F928h
 0x7AF7BC: push    ecx
 0x7AF7BD: mov     ecx, [esp+2Ch+arg_0]; this
-0x7AF7C1: call    sub_709C60
-0x7AF7C6: call    sub_7D7110
+0x7AF7C1: call    sub_709C60; MoonSugarEffect decode: NiScreenElements render thunk. Callers push NiDX9Renderer on the stack, then this thunk jumps to object vtable +0x84.
+0x7AF7C6: call    NiRenderer_PopRenderTargetGroupAndRestore; Pop the current render-target group, then resume the preceding stack entry (or the default group) with kClear_NONE.
 0x7AF7CB: mov     esi, [ebx+0C0h]
 0x7AF7D1: cmp     esi, ebp
 0x7AF7D3: jz      short loc_7AF7F6

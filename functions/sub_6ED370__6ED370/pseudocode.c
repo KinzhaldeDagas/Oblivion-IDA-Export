@@ -1,31 +1,38 @@
-char __thiscall sub_6ED370(float *this, int a2)
+char __thiscall sub_6ED370(NiTriBasedGeomData *this, int a2)
 {
-  int v4; // ecx
-  int v5; // ecx
+  float z; // ecx
+  float Radius; // ecx
 
-  if ( !(unsigned __int8)sub_89D6F0(a2) )
-    return 0;
-  if ( *(float *)(a2 + 0xC) == *(this + 3) && *(float *)(a2 + 0x10) == *(this + 4) )
-    return 1;
-  v4 = *((_DWORD *)this + 5);
-  if ( v4 )
+  if ( !sub_89D6F0(this, a2) ) /*0x6ed380*/
+    return 0; /*0x6ed380*/
+  if ( *(float *)(a2 + 0xC) == this->members.super.m_kBound.Center.x /*0x6ed39e*/
+    && *(float *)(a2 + 0x10) == this->members.super.m_kBound.Center.y )
   {
-    if ( !*(_DWORD *)(a2 + 0x14)
-      || !(*(unsigned __int8 (__thiscall **)(int, _DWORD))(*(_DWORD *)v4 + 0x2C))(v4, *(_DWORD *)(a2 + 0x14)) )
-    {
-      return 0;
-    }
-    goto LABEL_11;
+    return 1; /*0x6ed3a4*/
   }
-  if ( !*(_DWORD *)(a2 + 0x14) )
+  z = this->members.super.m_kBound.Center.z; /*0x6ed3a7*/
+  if ( z != 0.0 ) /*0x6ed3ac*/
+  {
+    if ( !*(_DWORD *)(a2 + 0x14) /*0x6ed3cb*/
+      || !(*(unsigned __int8 (__thiscall **)(float, _DWORD))(*(_DWORD *)LODWORD(z) + 0x2C))(
+            COERCE_FLOAT(LODWORD(z)),
+            *(_DWORD *)(a2 + 0x14)) )
+    {
+      return 0; /*0x6ed3cf*/
+    }
+    goto LABEL_11; /*0x6ed3cf*/
+  }
+  if ( !*(_DWORD *)(a2 + 0x14) ) /*0x6ed3b8*/
   {
 LABEL_11:
-    v5 = *((_DWORD *)this + 6);
-    if ( v5 )
+    Radius = this->members.super.m_kBound.Radius; /*0x6ed3d1*/
+    if ( Radius != 0.0 ) /*0x6ed3d6*/
     {
-      if ( *(_DWORD *)(a2 + 0x18) )
-        (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)v5 + 0x2C))(v5, *(_DWORD *)(a2 + 0x18));
+      if ( *(_DWORD *)(a2 + 0x18) ) /*0x6ed3d8*/
+        (*(void (__thiscall **)(float, _DWORD))(*(_DWORD *)LODWORD(Radius) + 0x2C))( /*0x6ed3f5*/
+          COERCE_FLOAT(LODWORD(Radius)),
+          *(_DWORD *)(a2 + 0x18));
     }
   }
-  return 0;
+  return 0; /*0x6ed3a0*/
 }

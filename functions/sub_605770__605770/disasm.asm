@@ -1,5 +1,5 @@
 0x605770: sub     esp, 3Ch
-0x605773: push    esi
+0x605773: push    esi; float
 0x605774: mov     esi, ecx
 0x605776: mov     eax, [esi+8]
 0x605779: shr     eax, 0Bh
@@ -11,10 +11,10 @@
 0x605794: call    sub_45A500
 0x605799: test    al, al
 0x60579B: jnz     loc_60583E
-0x6057A1: mov     ecx, offset ActorProcessManager_ptr
+0x6057A1: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x6057A6: call    sub_673B00
-0x6057AB: fstp    dword ptr [esp+40h+var_3C]
-0x6057AF: fld     dword ptr [esp+40h+var_3C]
+0x6057AB: fstp    [esp+40h+var_3C]
+0x6057AF: fld     [esp+40h+var_3C]
 0x6057B3: fld     st
 0x6057B5: fsub    dword ptr [esi+0BCh]
 0x6057BB: fstp    [esp+40h+arg_0]
@@ -53,22 +53,22 @@
 0x60581D: fld     [esp+40h+arg_0]
 0x605821: push    ecx
 0x605822: lea     ecx, [esi+68h]; this
-0x605825: fstp    dword ptr [esp+44h+var_44]
-0x605828: call    MagicTarget_ProcessEffects
-0x60582D: fld     dword ptr [esp+40h+var_3C]
+0x605825: fstp    [esp+44h+deltaTime]; deltaTime
+0x605828: call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.
+0x60582D: fld     [esp+40h+var_3C]
 0x605831: fstp    dword ptr [esi+0BCh]
 0x605837: pop     esi
 0x605838: add     esp, 3Ch
 0x60583B: retn    4
 0x60583E: mov     ecx, [esi+58h]
 0x605841: test    ecx, ecx
-0x605843: push    ebx
+0x605843: push    ebx; float
 0x605844: push    edi
 0x605845: jz      short loc_6058BB
 0x605847: mov     edx, [ecx]
 0x605849: mov     eax, [edx+34h]
 0x60584C: call    eax
-0x60584E: mov     ecx, offset TimeGlobals
+0x60584E: mov     ecx, 0B332E0h
 0x605853: mov     edi, eax
 0x605855: call    TimeGlobals_GetGameDay
 0x60585A: movsx   ecx, al
@@ -76,14 +76,14 @@
 0x60585F: jz      short loc_6058B4
 0x605861: cmp     byte ptr [esi+0FDh], 0
 0x605868: jnz     short loc_6058AB
-0x60586A: mov     ecx, offset TimeGlobals
+0x60586A: mov     ecx, 0B332E0h
 0x60586F: call    TimeGlobals_GetGameDayOfWeek
 0x605874: cmp     eax, ds:0B37D80h
 0x60587A: jz      short loc_605884
 0x60587C: cmp     eax, ds:0B37D88h
 0x605882: jnz     short loc_6058AB
 0x605884: lea     ecx, [esi+44h]
-0x605887: call    sub_420680
+0x605887: call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.
 0x60588C: mov     edi, eax
 0x60588E: test    edi, edi
 0x605890: jz      short loc_6058AB
@@ -121,7 +121,7 @@
 0x6058ED: call    sub_5F0410
 0x6058F2: mov     edx, [esi]
 0x6058F4: mov     eax, [edx+198h]
-0x6058FA: push    0
+0x6058FA: push    0; float
 0x6058FC: mov     ecx, esi
 0x6058FE: call    eax
 0x605900: test    al, al
@@ -138,16 +138,16 @@
 0x605937: call    eax
 0x605939: test    eax, eax
 0x60593B: jz      short loc_605969
-0x60593D: mov     ecx, esi
-0x60593F: call    sub_5E0380
+0x60593D: mov     ecx, esi; this
+0x60593F: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x605944: test    eax, eax
 0x605946: jz      short loc_605962
-0x605948: mov     ecx, esi
-0x60594A: call    sub_5E0380
+0x605948: mov     ecx, esi; this
+0x60594A: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60594F: cmp     byte ptr [eax+20h], 18h
 0x605953: jz      short loc_605969
-0x605955: mov     ecx, esi
-0x605957: call    sub_5E0380
+0x605955: mov     ecx, esi; this
+0x605957: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x60595C: cmp     byte ptr [eax+20h], 1Eh
 0x605960: jz      short loc_605969
 0x605962: mov     ecx, esi; this
@@ -163,7 +163,7 @@
 0x605980: mov     edx, [ecx]
 0x605982: mov     eax, [edx+34h]
 0x605985: call    eax
-0x605987: mov     ecx, offset TimeGlobals
+0x605987: mov     ecx, 0B332E0h
 0x60598C: mov     bl, al
 0x60598E: call    TimeGlobals_GetGameDay
 0x605993: cmp     al, bl
@@ -179,10 +179,10 @@
 0x6059AF: cmp     ds:0B3BDA4h, al
 0x6059B5: jnz     short loc_6059CA
 0x6059B7: mov     ecx, [esi+58h]
-0x6059BA: mov     ecx, [ecx+8]
+0x6059BA: mov     ecx, [ecx+8]; this
 0x6059BD: test    ecx, ecx
 0x6059BF: jz      short loc_605A0B
-0x6059C1: call    sub_567770
+0x6059C1: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x6059C6: test    al, al
 0x6059C8: jz      short loc_605A0B
 0x6059CA: mov     ecx, [esi+58h]
@@ -212,11 +212,11 @@
 0x605A05: mov     eax, [edx+10h]
 0x605A08: push    esi
 0x605A09: call    eax
-0x605A0B: mov     ecx, offset TimeGlobals
+0x605A0B: mov     ecx, 0B332E0h
 0x605A10: call    TimeGlobals_GetGameDay
 0x605A15: lea     ecx, [esi+44h]
 0x605A18: push    eax
-0x605A19: call    sub_420050
+0x605A19: call    ExtraDataList_PruneRunOncePackages; Prunes ExtraRunOncePacks entries that do not match the requested state byte or whose package scheduling data has expired/passed its threshold.
 0x605A1E: jmp     loc_605B58
 0x605A23: mov     edx, [esi]
 0x605A25: mov     eax, [edx+198h]
@@ -258,7 +258,7 @@
 0x605A9E: jz      loc_605B58
 0x605AA4: push    0; a2
 0x605AA6: mov     ecx, esi; this
-0x605AA8: call    TESObjectREFR_GetParentCell
+0x605AA8: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x605AAD: mov     ecx, ds:0B333A0h
 0x605AB3: push    eax; a1
 0x605AB4: call    TESObjectCELL_IsProcessLevel?LowHigh
@@ -280,37 +280,37 @@
 0x605AEE: mov     edi, ds:0B35C1Ch
 0x605AF4: call    eax
 0x605AF6: test    edi, edi
-0x605AF8: mov     dword ptr [esp+48h+var_3C], edi
-0x605AFC: fild    dword ptr [esp+48h+var_3C]
+0x605AF8: mov     [esp+48h+var_3C], edi
+0x605AFC: fild    [esp+48h+var_3C]
 0x605B00: jge     short loc_605B08
 0x605B02: fadd    dword ptr ds:0A2FC78h
 0x605B08: faddp   st(1), st
-0x605B0A: mov     ecx, offset TimeGlobals
-0x605B0F: fstp    [esp+48h+var_30]
+0x605B0A: mov     ecx, 0B332E0h
+0x605B0F: fstp    qword ptr [esp+48h+var_30]; float
 0x605B13: call    TimeGlobals_GetGameDaysPassed
 0x605B18: test    eax, eax
-0x605B1A: mov     dword ptr [esp+48h+var_3C], eax
-0x605B1E: fild    dword ptr [esp+48h+var_3C]
+0x605B1A: mov     [esp+48h+var_3C], eax
+0x605B1E: fild    [esp+48h+var_3C]
 0x605B22: jge     short loc_605B2A
 0x605B24: fadd    dword ptr ds:0A2FC78h
 0x605B2A: fmul    qword ptr ds:0A2F920h
-0x605B30: mov     ecx, offset TimeGlobals
-0x605B35: fstp    [esp+48h+var_3C]
+0x605B30: mov     ecx, 0B332E0h
+0x605B35: fstp    qword ptr [esp+48h+var_3C]; float
 0x605B39: call    TimeGlobals_GetGameHour
-0x605B3E: fadd    [esp+48h+var_3C]
-0x605B42: fcomp   [esp+48h+var_30]
+0x605B3E: fadd    qword ptr [esp+48h+var_3C]
+0x605B42: fcomp   qword ptr [esp+48h+var_30]
 0x605B46: fnstsw  ax
 0x605B48: test    ah, 41h
 0x605B4B: jnz     short loc_605B58
 0x605B4D: push    esi
-0x605B4E: mov     ecx, offset ActorProcessManager_ptr
+0x605B4E: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x605B53: call    sub_6748B0
 0x605B58: mov     ecx, ds:0B33B00h
 0x605B5E: call    sub_45A500
 0x605B63: test    al, al
 0x605B65: jnz     short loc_605B81
 0x605B67: mov     edi, [esi]
-0x605B69: mov     ecx, offset ActorProcessManager_ptr
+0x605B69: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x605B6E: call    sub_673B00
 0x605B73: mov     edx, [edi+368h]
 0x605B79: push    ecx
@@ -346,7 +346,7 @@
 0x605BD7: xor     bl, bl
 0x605BD9: push    1; newDeadState
 0x605BDB: mov     ecx, esi; this
-0x605BDD: call    Actor_HandleDeathSTate????
+0x605BDD: call    Actor_HandleDeathState
 0x605BE2: mov     eax, [esi]
 0x605BE4: mov     edx, [eax+1C8h]
 0x605BEA: mov     ecx, esi
@@ -358,35 +358,35 @@
 0x605BF6: mov     edx, [eax+1E0h]
 0x605BFC: call    edx
 0x605BFE: push    ecx
-0x605BFF: lea     ecx, [esp+4Ch+var_24]
-0x605C03: fstp    [esp+4Ch+a2+4]; float
-0x605C06: call    NiMatrix33_InitRotationTransform
+0x605BFF: lea     ecx, [esp+4Ch+var_24]; this
+0x605C03: fstp    [esp+4Ch+a2+4]; angleZ
+0x605C06: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x605C0B: fldz
-0x605C0D: fst     dword ptr [esp+48h+var_30]
+0x605C0D: fst     [esp+48h+var_30]
 0x605C11: lea     eax, [esp+48h+var_30]
 0x605C15: fld1
 0x605C17: push    eax
 0x605C18: lea     ecx, [esp+4Ch+var_3C]
-0x605C1C: fstp    dword ptr [esp+4Ch+var_30+4]
+0x605C1C: fstp    [esp+4Ch+var_30+4]
 0x605C20: push    ecx
 0x605C21: lea     ecx, [esp+50h+var_24]
 0x605C25: fstp    [esp+50h+var_28]
 0x605C29: call    sub_7101F0
 0x605C2E: mov     edx, [eax]
 0x605C30: fldz
-0x605C32: mov     dword ptr [esp+48h+var_30], edx
+0x605C32: mov     [esp+48h+var_30], edx
 0x605C36: mov     ecx, [eax+4]
 0x605C39: push    0; int
 0x605C3B: push    ecx
 0x605C3C: fstp    [esp+50h+a2]; float
-0x605C3F: mov     dword ptr [esp+50h+var_30+4], ecx
+0x605C3F: mov     [esp+50h+var_30+4], ecx
 0x605C43: mov     edx, [eax+8]
 0x605C46: push    1; int
 0x605C48: lea     eax, [esp+54h+var_30]
 0x605C4C: push    eax; int
 0x605C4D: push    edi; int
 0x605C4E: mov     [esp+5Ch+var_28], edx
-0x605C52: call    sub_8AB440
+0x605C52: call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.
 0x605C57: mov     ecx, [esi+58h]
 0x605C5A: mov     edx, [ecx]
 0x605C5C: mov     eax, [edx+20h]
@@ -400,11 +400,11 @@
 0x605C75: jz      loc_605CFF
 0x605C7B: mov     edx, [esi]
 0x605C7D: mov     eax, [edx+164h]
-0x605C83: push    20h ; ' '
+0x605C83: push    20h ; ' '; encodedKey
 0x605C85: mov     ecx, esi
 0x605C87: call    eax
-0x605C89: mov     ecx, eax
-0x605C8B: call    sub_470D00
+0x605C89: mov     ecx, eax; this
+0x605C8B: call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.
 0x605C90: test    al, al
 0x605C92: jz      short loc_605CFF
 0x605C94: mov     edx, [esi]
@@ -413,11 +413,11 @@
 0x605C9E: call    eax
 0x605CA0: fldz
 0x605CA2: push    ecx
-0x605CA3: fstp    [esp+4Ch+a2+4]; float
+0x605CA3: fstp    [esp+4Ch+a2+4]; easeOutTime
 0x605CA6: mov     edi, eax
-0x605CA8: push    5; int
-0x605CAA: mov     ecx, edi
-0x605CAC: call    sub_470FC0
+0x605CA8: push    5; slot
+0x605CAA: mov     ecx, edi; this
+0x605CAC: call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.
 0x605CB1: fldz
 0x605CB3: push    0FFFFFFFFh
 0x605CB5: push    ecx
@@ -426,10 +426,10 @@
 0x605CBB: push    20h ; ' '
 0x605CBD: push    0
 0x605CBF: mov     ecx, edi
-0x605CC1: call    sub_474AB0
-0x605CC6: push    0
-0x605CC8: mov     ecx, edi
-0x605CCA: call    sub_4706E0
+0x605CC1: call    ActorAnimData_RestorePlaySavedSlot; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.
+0x605CC6: push    0; slotSelector
+0x605CC8: mov     ecx, edi; this
+0x605CCA: call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].
 0x605CCF: test    eax, eax
 0x605CD1: jz      short loc_605CF8
 0x605CD3: fld     dword ptr [eax+30h]
@@ -437,14 +437,14 @@
 0x605CD9: fstp    dword ptr [eax+48h]
 0x605CDC: mov     ecx, edi; this
 0x605CDE: fld     dword ptr [eax+30h]
-0x605CE1: fstp    [esp+50h+a2+4]; float
+0x605CE1: fstp    [esp+50h+a2+4]; explicitTimeOrMinusOne
 0x605CE5: fldz
-0x605CE7: fstp    [esp+50h+a2]; float
-0x605CEA: push    esi; int
-0x605CEB: call    sub_476D10
+0x605CE7: fstp    [esp+50h+a2]; deltaTime
+0x605CEA: push    esi; ownerActor
+0x605CEB: call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller; supports broad scheduler classification.
 0x605CF0: push    esi; a2
 0x605CF1: mov     ecx, edi; this
-0x605CF3: call    sub_474510
+0x605CF3: call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.
 0x605CF8: mov     ecx, esi
 0x605CFA: call    sub_5F5D10
 0x605CFF: mov     byte ptr [esi+0C0h], 0
@@ -474,7 +474,7 @@
 0x605D4A: test    eax, eax
 0x605D4C: jz      short loc_605DA9
 0x605D4E: mov     ecx, esi; this
-0x605D50: call    TESObjectREFR_GetParentCell
+0x605D50: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x605D55: mov     edx, [esi]
 0x605D57: mov     edi, eax
 0x605D59: mov     eax, [edx+174h]
@@ -482,14 +482,14 @@
 0x605D61: call    eax
 0x605D63: test    edi, edi
 0x605D65: mov     ecx, [eax]
-0x605D67: mov     dword ptr [esp+48h+var_30], ecx
+0x605D67: mov     [esp+48h+var_30], ecx
 0x605D6B: mov     edx, [eax+4]
-0x605D6E: mov     dword ptr [esp+48h+var_30+4], edx
+0x605D6E: mov     [esp+48h+var_30+4], edx
 0x605D72: mov     eax, [eax+8]
 0x605D75: mov     [esp+48h+var_28], eax
 0x605D79: jz      short loc_605DA9
 0x605D7B: mov     ecx, edi; this
-0x605D7D: call    TESObjectCELL_IsInterior
+0x605D7D: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x605D82: test    al, al
 0x605D84: jnz     short loc_605DA9
 0x605D86: lea     ecx, [esp+48h+var_30]

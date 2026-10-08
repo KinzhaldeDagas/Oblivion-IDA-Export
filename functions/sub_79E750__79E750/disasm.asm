@@ -1,21 +1,21 @@
-0x79E750: push    ecx
-0x79E751: mov     ecx, [esp+4+arg_8]
-0x79E755: mov     edx, [esp+4+arg_8]
+0x79E750: push    ecx; OBLIVION AUTHORITY (2026-08-30): Adapter for backward ownership-moving of inner vector<float> elements.
+0x79E751: mov     ecx, [esp+4+destinationEnd]
+0x79E755: mov     edx, [esp+4+destinationEnd]
 0x79E759: push    ebx
-0x79E75A: mov     ebx, [esp+8+arg_0]
+0x79E75A: mov     ebx, [esp+8+first]
 0x79E75E: push    esi
-0x79E75F: mov     esi, [esp+0Ch+arg_4]
+0x79E75F: mov     esi, [esp+0Ch+last]
 0x79E763: push    edi
-0x79E764: mov     edi, [esp+10h+arg_8]
+0x79E764: mov     edi, [esp+10h+destinationEnd]
 0x79E768: mov     byte ptr [esp+10h+var_4], 0
 0x79E76D: mov     eax, [esp+10h+var_4]
 0x79E771: push    eax
 0x79E772: push    ecx
 0x79E773: push    edx
-0x79E774: push    edi
-0x79E775: push    esi
-0x79E776: push    ebx
-0x79E777: call    sub_79C080
+0x79E774: push    edi; destinationEnd
+0x79E775: push    esi; last
+0x79E776: push    ebx; first
+0x79E777: call    OB_stVector_stVectorFloat_MoveAssignRangeBackward_010201A0; OBLIVION AUTHORITY (2026-08-30): Backward move-assignment for inner vector<float> owners. Transfers ownership by swapping begin/end/capacity fields from the source tail into the destination tail and returns the new destination start.
 0x79E77C: sub     esi, ebx
 0x79E77E: add     esp, 18h
 0x79E781: sar     esi, 4

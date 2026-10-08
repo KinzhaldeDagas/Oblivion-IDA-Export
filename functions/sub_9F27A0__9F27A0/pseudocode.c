@@ -1,8 +1,5 @@
 int sub_9F27A0()
 {
-  GameSetting_ConstrAndReg(
-    &dword_B38C70,
-    (int)"sMoveMarkerQuestion",
-    (int)"Do you want to move your marker or remove it?");
-  return atexit(sub_A22000);
+  GameSetting_ConstrAndReg(&stru_B38C70, "sMoveMarkerQuestion", "Do you want to move your marker or remove it?"); /*0x9f27af*/
+  return atexit(sub_A22000); /*0x9f27bf*/
 }

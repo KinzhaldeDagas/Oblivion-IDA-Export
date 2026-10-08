@@ -56,7 +56,7 @@
 0x4F648C: push    esi; int
 0x4F648D: push    0; int
 0x4F648F: mov     ecx, edi; int
-0x4F6491: call    Actor_GetDetectionLevel
+0x4F6491: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x4F6496: mov     ebx, eax
 0x4F6498: test    ebx, ebx
 0x4F649A: jle     short loc_4F64A4
@@ -69,7 +69,7 @@
 0x4F64AF: push    0
 0x4F64B1: push    esi
 0x4F64B2: call    eax
-0x4F64B4: call    Double_To_SInt32
+0x4F64B4: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x4F64B9: jmp     short loc_4F64BF
 0x4F64BB: mov     eax, [esp+10h+var_4]
 0x4F64BF: cmp     byte ptr ds:0B361ACh, 0

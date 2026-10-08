@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x533A54",
-    "line": "call    sub_532090",
+    "line": "call    bhkSphereShape_CtorRadius; TES4 authoritative: constructs a bhkSphereShape; if the third byte arg is true, radius is converted from TES/world units to Havok units with hkFactor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,13 +205,13 @@
   },
   {
     "ea": "0x533A5F",
-    "line": "lea     ecx, [esp+84h+var_70]",
+    "line": "lea     ecx, [esp+84h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x533A63",
-    "line": "call    sub_532250",
+    "line": "call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x533A7E",
-    "line": "mov     [esp+84h+var_70], eax",
+    "line": "mov     [esp+84h+info.collisionFilter], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x533A87",
-    "line": "mov     [esp+84h+var_6C], ecx",
+    "line": "mov     [esp+84h+info.shape], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x533A8D",
-    "line": "mov     [esp+84h+var_6C], edi",
+    "line": "mov     [esp+84h+info.shape], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,55 +295,55 @@
   },
   {
     "ea": "0x533A95",
-    "line": "fst     [esp+88h+var_4C]",
+    "line": "fst     [esp+88h+info.transform+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533A99",
-    "line": "fst     [esp+88h+var_48]",
+    "line": "fst     [esp+88h+info.transform+8]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533A9D",
-    "line": "fst     [esp+88h+var_44]",
+    "line": "fst     [esp+88h+info.transform+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AA1",
-    "line": "fst     [esp+88h+var_40]",
+    "line": "fst     [esp+88h+info.transform+10h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AA5",
-    "line": "fst     [esp+88h+var_38]",
+    "line": "fst     [esp+88h+info.transform+18h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AA9",
-    "line": "fst     [esp+88h+var_34]",
+    "line": "fst     [esp+88h+info.transform+1Ch]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AAD",
-    "line": "fst     [esp+88h+var_30]",
+    "line": "fst     [esp+88h+info.transform+20h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AB1",
-    "line": "fst     [esp+88h+var_2C]",
+    "line": "fst     [esp+88h+info.transform+24h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AB5",
-    "line": "fst     [esp+88h+var_24]",
+    "line": "fst     [esp+88h+info.transform+2Ch]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -355,43 +355,43 @@
   },
   {
     "ea": "0x533ABB",
-    "line": "fst     [esp+88h+var_50]",
+    "line": "fst     [esp+88h+info.transform]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533ABF",
-    "line": "fst     [esp+88h+var_3C]",
+    "line": "fst     [esp+88h+info.transform+14h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AC3",
-    "line": "fstp    [esp+88h+var_28]",
+    "line": "fstp    [esp+88h+info.transform+28h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x533AC7",
-    "line": "fst     [esp+88h+var_20]",
+    "line": "fst     [esp+88h+info.transform+30h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533ACB",
-    "line": "fst     [esp+88h+var_1C]",
+    "line": "fst     [esp+88h+info.transform+34h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533ACF",
-    "line": "fst     [esp+88h+var_18]",
+    "line": "fst     [esp+88h+info.transform+38h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x533AD3",
-    "line": "fstp    [esp+88h+var_14]",
+    "line": "fstp    [esp+88h+info.transform+3Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -433,25 +433,25 @@
   },
   {
     "ea": "0x533AEF",
-    "line": "lea     edx, [esp+84h+var_70]",
+    "line": "lea     edx, [esp+84h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x533AF3",
-    "line": "push    edx",
+    "line": "push    edx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x533AF4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x533AF6",
-    "line": "call    sub_531FC0",
+    "line": "call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,7 +625,7 @@
   },
   {
     "ea": "0x533B49",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x533B54",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x533B5F",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x533B6A",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x533B75",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x533B80",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -775,7 +775,7 @@
   },
   {
     "ea": "0x533B8E",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x533B99",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x533BA4",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x533BAF",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x533BBA",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -895,7 +895,7 @@
   },
   {
     "ea": "0x533BC5",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x533BD3",
-    "line": "call    sub_8A7F20",
+    "line": "call    bhkCollisionLayer_SetInteraction; Sets symmetric collision-layer interaction bit in global layer matrix at 0xBA7DB0. 0x69A490 temporarily configures layer 0x1C ray probes with this helper.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x533BD8",
-    "line": "mov     eax, [esp+90h+var_5C]",
+    "line": "mov     eax, [esp+90h+info.propertyCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x533C0E",
-    "line": "mov     edx, [esp+84h+var_64]",
+    "line": "mov     edx, [esp+84h+info.propertyData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1108,5 +1108,119 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B9410",
+    "line": "mov     eax, [ebp+var_74]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9413",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B9414",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B9419",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B941A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B941B",
+    "line": "lea     ecx, [ebp+info]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B941E",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B9423",
+    "line": "mov     eax, [ebp+var_74]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9426",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B9427",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B942C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B942D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B942E",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B9432",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9435",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B9438",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B943A",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B943F",
+    "line": "mov     eax, offset stru_AE37AC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B9444",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

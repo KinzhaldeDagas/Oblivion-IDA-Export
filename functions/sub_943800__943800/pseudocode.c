@@ -1,14 +1,14 @@
 _DWORD *__thiscall sub_943800(_DWORD *this, int a2)
 {
-  sub_943890(this + 1, a2);
-  sub_9438E0(this + 6, a2);
-  *(this + 0xD) = 0x3E4CCCCD;
-  *(this + 0xC) = 0x3F000000;
-  *(this + 0xE) = 0x3F800000;
-  *(this + 0x14) = 4;
-  *(this + 0x10) = 0x3E4CCCCD;
-  *(this + 0x11) = 0x3E4CCCCD;
-  *(this + 0x12) = 0x3D4CCCCD;
-  *(this + 0x13) = 0;
-  return this;
+  sub_943890(this + 1, a2); /*0x94380c*/
+  sub_9438E0(this + 6, a2); /*0x943815*/
+  *(this + 0xD) = 0x3E4CCCCD; /*0x94381f*/
+  *(this + 0xC) = 0x3F000000; /*0x943822*/
+  *(this + 0xE) = 0x3F800000; /*0x943829*/
+  *(this + 0x14) = 4; /*0x943830*/
+  *(this + 0x10) = 0x3E4CCCCD; /*0x943837*/
+  *(this + 0x11) = 0x3E4CCCCD; /*0x94383a*/
+  *(this + 0x12) = 0x3D4CCCCD; /*0x94383d*/
+  *(this + 0x13) = 0; /*0x943845*/
+  return this; /*0x943844*/
 }

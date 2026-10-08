@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x750BF2",
-    "line": "lea     edi, [esp+1B0h+var_9C]",
+    "line": "lea     edi, [esp+1B0h+local]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x750C0F",
-    "line": "lea     ecx, [esp+1B0h+var_34]",
+    "line": "lea     ecx, [esp+1B0h+parent]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -157,61 +157,61 @@
   },
   {
     "ea": "0x750C1E",
-    "line": "call    sub_718A80",
+    "line": "call    sub_718A80;",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x750C23",
-    "line": "lea     edx, [esp+1B0h+var_9C]",
+    "line": "lea     edx, [esp+1B0h+local]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x750C2A",
-    "line": "push    edx",
+    "line": "push    edx; local",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x750C2B",
-    "line": "lea     eax, [esp+1B4h+var_D0]",
+    "line": "lea     eax, [esp+1B4h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x750C32",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x750C33",
-    "line": "lea     ecx, [esp+1B8h+var_34]",
+    "line": "lea     ecx, [esp+1B8h+parent]; parent",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x750C3A",
-    "line": "call    sub_53D7A0",
+    "line": "call    NiTransform_Compose; Composes parent and local NiTransform into out: out.scale=parent.scale*local.scale; out.rot=parent.rot*local.rot; out.pos=parent.pos + parent.scale*(parent.rot*local.pos). Returns out.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x750C3F",
-    "line": "mov     ecx, dword ptr [esp+1B0h+var_AC]",
+    "line": "mov     ecx, [esp+1B0h+out.pos.x]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x750C46",
-    "line": "mov     edx, dword ptr [esp+1B0h+var_AC+4]",
+    "line": "mov     edx, [esp+1B0h+out.pos.y]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x750C4D",
-    "line": "mov     eax, [esp+1B0h+var_A4]",
+    "line": "mov     eax, [esp+1B0h+out.pos.z]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x750C68",
-    "line": "lea     ecx, [esp+1B8h+var_D0]",
+    "line": "lea     ecx, [esp+1B8h+out]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x750C90",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +595,7 @@
   },
   {
     "ea": "0x750D3D",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x750E3C",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x750FC6",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2245,7 +2245,7 @@
   },
   {
     "ea": "0x751157",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },

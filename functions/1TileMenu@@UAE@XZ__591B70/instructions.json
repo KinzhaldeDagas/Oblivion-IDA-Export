@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x591B70",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified lifecycle from UpdateMenuFades 0x584255: clears Menu_OpenMenuArray[classID-0x3E9], calls Menu_SetTileMenu(menu,NULL), then invokes Menu deleting destructor with flag 1. This establishes ownership: TileMenu root owns the Menu during teardown.",
     "mnemonic": "push",
     "size": 2
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x591BF2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x591BF4",
-    "line": "call    sub_58DA70",
+    "line": "call    Tile__Release; Verified: marks subtree release-in-progress (+5), clears matching interface active/drag references, marks released (+4), detaches parent, destroys each Value, detaches model, then deletes children. Native loop at 0x58DA90 advances child iterator EDX before call; pseudocode may omit this advance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -304,5 +304,59 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9BFBF0",
+    "line": "mov     ecx, [ebp-10h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFBF3",
+    "line": "jmp     ??1TileRect@@UAE@XZ; TileRect::~TileRect(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFBF8",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BFBFC",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFBFF",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BFC02",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BFC04",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFC09",
+    "line": "mov     eax, offset stru_AE9058",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BFC0E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

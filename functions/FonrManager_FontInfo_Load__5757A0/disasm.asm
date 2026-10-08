@@ -12,7 +12,7 @@
 0x5757BD: mov     large fs:0, eax
 0x5757C3: mov     esi, ecx
 0x5757C5: mov     [esp+1Ch+var_10], esi
-0x5757C9: push    offset sub_7016A0; a5
+0x5757C9: push    offset NiPointerSlot_Release; a5
 0x5757CE: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x5757D3: push    8; size
 0x5757D5: push    4; a2
@@ -52,7 +52,7 @@
 0x57583F: mov     [esi+8], ecx
 0x575842: jz      short loc_57584B
 0x575844: mov     ecx, esi
-0x575846: call    sub_5744E0
+0x575846: call    FontInfo_Load
 0x57584B: mov     eax, esi
 0x57584D: mov     ecx, [esp+1Ch+var_C]
 0x575851: mov     large fs:0, ecx
@@ -61,3 +61,18 @@
 0x57585A: pop     esi
 0x57585B: add     esp, 10h
 0x57585E: retn    0Ch
+0x9BE350: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9BE355: push    8; int
+0x9BE357: push    4; unsigned int
+0x9BE359: mov     eax, [ebp-10h]
+0x9BE35C: add     eax, 0Ch
+0x9BE35F: push    eax; void *
+0x9BE360: call    $LN21
+0x9BE365: retn
+0x9BE366: mov     edx, [esp+arg_4]
+0x9BE36A: lea     eax, [edx-0Ch]
+0x9BE36D: mov     ecx, [edx-10h]
+0x9BE370: xor     ecx, eax
+0x9BE372: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE377: mov     eax, offset stru_AE7AD0
+0x9BE37C: jmp     ___CxxFrameHandler3

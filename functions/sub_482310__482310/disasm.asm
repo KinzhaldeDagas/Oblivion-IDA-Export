@@ -39,7 +39,7 @@
 0x482370: pop     esi
 0x482371: mov     eax, ds:0B333A0h
 0x482376: mov     ecx, [eax+54h]
-0x482379: call    WaterSurfaceLoop
+0x482379: call    WaterSurfaceLoop; Pass202/205: WaterSurfaceLoop. Native producer for persistent water height/depth target and updater of WaterShaderProperty pass-data fields for water grid cells.
 0x48237E: mov     byte ptr [ebx+20h], 1
 0x482382: pop     ebp
 0x482383: pop     ebx

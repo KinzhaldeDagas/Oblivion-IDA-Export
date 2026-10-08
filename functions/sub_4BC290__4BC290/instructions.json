@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BC290",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified: reads TESSubSpace dimensions at +0x24/+0x26/+0x28 and multiplies each by 0.5 to return the three local-space half-extents.",
     "mnemonic": "push",
     "size": 1
   },
@@ -31,13 +31,13 @@
   },
   {
     "ea": "0x4BC2A0",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+outHalfExtents]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BC2A4",
-    "line": "mov     [esp+4+arg_0], edx",
+    "line": "mov     [esp+4+outHalfExtents], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x4BC2B7",
-    "line": "fild    [esp+4+arg_0]",
+    "line": "fild    [esp+4+outHalfExtents]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x4BC2BB",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+outHalfExtents], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4BC2C4",
-    "line": "fild    [esp+4+arg_0]",
+    "line": "fild    [esp+4+outHalfExtents]",
     "mnemonic": "fild",
     "size": 4
   },

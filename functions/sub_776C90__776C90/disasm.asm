@@ -1,14 +1,14 @@
-0x776C90: push    ecx
-0x776C91: mov     eax, [esp+4+arg_0]
+0x776C90: push    ecx; MoonSugarEffect decode: VB lock helper. Locks D3D VB, caches original bytes in a staging buffer, and returns a writable pointer; unlock is handled by packers when they own the lock.
+0x776C91: mov     eax, [esp+4+buffer]
 0x776C95: push    ebp
-0x776C96: mov     ebp, [esp+8+arg_C]
+0x776C96: mov     ebp, [esp+8+flags]
 0x776C9A: push    esi
 0x776C9B: push    edi
 0x776C9C: mov     edi, [esp+10h+Size]
 0x776CA0: push    ebp
 0x776CA1: lea     edx, [esp+14h+Src]
 0x776CA5: push    edx
-0x776CA6: mov     edx, [esp+18h+arg_4]
+0x776CA6: mov     edx, [esp+18h+offsetBytes]
 0x776CAA: push    edi
 0x776CAB: mov     esi, ecx
 0x776CAD: mov     ecx, [eax]
@@ -40,7 +40,7 @@
 0x776CF4: jnb     short loc_776D0E
 0x776CF6: mov     edx, [esi+40h]
 0x776CF9: push    edx
-0x776CFA: call    FormHeapFree
+0x776CFA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x776CFF: push    edi; Size
 0x776D00: call    FormHeapAlloc
 0x776D05: add     esp, 8
@@ -50,10 +50,10 @@
 0x776D14: jnz     short loc_776D28
 0x776D16: mov     eax, [esp+10h+Src]
 0x776D1A: mov     ecx, [esi+40h]
-0x776D1D: push    edi; Size
-0x776D1E: push    eax; Src
-0x776D1F: push    ecx; Dst
-0x776D20: call    _memcpy
+0x776D1D: push    edi; byteCount
+0x776D1E: push    eax; source
+0x776D1F: push    ecx; destination
+0x776D20: call    _memcpy;
 0x776D25: add     esp, 0Ch
 0x776D28: mov     eax, [esi+40h]
 0x776D2B: pop     edi

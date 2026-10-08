@@ -56,3 +56,24 @@
 0x4B6CA8: pop     ebx
 0x4B6CA9: add     esp, 10h
 0x4B6CAC: retn
+0x9B3B40: mov     ecx, [ebp-10h]
+0x9B3B43: jmp     TESObject_destr
+0x9B3B48: mov     ecx, [ebp-10h]
+0x9B3B4B: add     ecx, 24h ; '$'
+0x9B3B4E: jmp     TESContainer_destr
+0x9B3B53: mov     ecx, [ebp-10h]
+0x9B3B56: add     ecx, 34h ; '4'
+0x9B3B59: jmp     TESFullName_Initialize
+0x9B3B5E: mov     ecx, [ebp-10h]
+0x9B3B61: add     ecx, 40h ; '@'; this
+0x9B3B64: jmp     ??1TESModel@@UAE@XZ; TESModel::~TESModel(void)
+0x9B3B69: mov     ecx, [ebp-10h]
+0x9B3B6C: add     ecx, 64h ; 'd'
+0x9B3B6F: jmp     TESWeightForm_destr
+0x9B3B74: mov     edx, [esp+arg_4]
+0x9B3B78: lea     eax, [edx-14h]
+0x9B3B7B: mov     ecx, [edx-18h]
+0x9B3B7E: xor     ecx, eax
+0x9B3B80: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B3B85: mov     eax, offset stru_ADF4C4
+0x9B3B8A: jmp     ___CxxFrameHandler3

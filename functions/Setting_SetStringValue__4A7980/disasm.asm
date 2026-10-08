@@ -8,3 +8,4 @@
 0x4A7993: test    eax, eax
 0x4A7995: push    ebx
 0x4A7996: jz      short loc_4A79B0
+0x4A79B0: xor     ebx, ebx

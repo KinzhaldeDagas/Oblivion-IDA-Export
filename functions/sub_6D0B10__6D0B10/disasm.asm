@@ -1,7 +1,7 @@
-0x6D0B10: movzx   eax, [esp+arg_4]
+0x6D0B10: movzx   eax, [esp+index]; Refcount-aware replacement of interpolators[index]: releases the old NiInterpolator, stores the new pointer, and acquires it. Semantically void; prior EAX/LONG output was refcount/index residue.
 0x6D0B15: mov     ecx, [ecx+54h]
 0x6D0B18: push    ebx
-0x6D0B19: mov     ebx, [esp+4+arg_0]
+0x6D0B19: mov     ebx, [esp+4+interpolator]
 0x6D0B1D: push    esi
 0x6D0B1E: mov     esi, [ecx+eax*4]
 0x6D0B21: cmp     esi, ebx

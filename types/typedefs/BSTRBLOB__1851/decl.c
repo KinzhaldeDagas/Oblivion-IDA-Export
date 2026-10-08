@@ -1,1 +1,1 @@
-BSTRBLOB
+typedef tagBSTRBLOB BSTRBLOB;

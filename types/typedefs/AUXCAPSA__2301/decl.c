@@ -1,1 +1,1 @@
-AUXCAPSA
+typedef tagAUXCAPSA AUXCAPSA;

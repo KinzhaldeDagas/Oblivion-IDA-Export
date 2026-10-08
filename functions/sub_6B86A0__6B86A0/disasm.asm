@@ -1,9 +1,9 @@
-0x6B86A0: push    esi
+0x6B86A0: push    esi; Serialized MenuTopic size: display string plus flags and owner quest/topic/info FormIDs; observed directly in Oblivion. Fallout symbol was used only to corroborate this method name.
 0x6B86A1: push    edi
 0x6B86A2: mov     edi, ecx
 0x6B86A4: mov     ecx, ds:0B33B00h
 0x6B86AA: xor     esi, esi
-0x6B86AC: call    sub_45A170
+0x6B86AC: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6B86B1: test    al, al
 0x6B86B3: jz      short loc_6B86BA
 0x6B86B5: mov     esi, 6
@@ -24,7 +24,7 @@
 0x6B86E4: jz      short loc_6B8726
 0x6B86E6: mov     ecx, [edi]
 0x6B86E8: push    ecx; a1
-0x6B86E9: call    TESForm_LookupByFormID
+0x6B86E9: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6B86EE: mov     edx, [edi+5]
 0x6B86F1: add     esp, 4
 0x6B86F4: push    offset a_DialogueMenut; ".\\Dialogue\\MenuTopic.cpp"

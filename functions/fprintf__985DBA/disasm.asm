@@ -110,3 +110,7 @@
 0x985EE7: add     esp, 1Ch
 0x985EEA: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x985EF1: call    _fprintf___$LN18
+0x985EFF: push    [ebp+File]
+0x985F02: call    __unlock_file
+0x985F07: pop     ecx
+0x985F08: retn

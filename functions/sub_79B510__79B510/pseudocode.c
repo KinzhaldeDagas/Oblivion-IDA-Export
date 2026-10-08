@@ -1,22 +1,26 @@
-float *__cdecl sub_79B510(int a1, int a2, float *a3)
+// Overlap-safe backward copy-assignment for 0x2C-byte SFrondTexture records; deep-assigns filename plus the four scalar floats and returns destination begin.
+OB_SFrondTexture_010201A0 *__cdecl OB_SFrondTexture_CopyAssignRangeBackward_010201A0(
+        const OB_SFrondTexture_010201A0 *first,
+        const OB_SFrondTexture_010201A0 *last,
+        OB_SFrondTexture_010201A0 *destinationLast)
 {
-  int v3; // esi
-  float *v4; // edi
+  OB_SFrondTexture_010201A0 *v3; // esi
+  OB_SFrondTexture_010201A0 *v4; // edi
 
-  v3 = a2;
-  if ( a1 == a2 )
-    return a3;
-  v4 = a3;
-  do
+  v3 = (OB_SFrondTexture_010201A0 *)last; /*0x79b516*/
+  if ( first == last ) /*0x79b51c*/
+    return destinationLast; /*0x79b557*/
+  v4 = destinationLast; /*0x79b51f*/
+  do /*0x79b54f*/
   {
-    v3 -= 0x2C;
-    v4 += 0xFFFFFFF5;
-    sub_414420((int)v4, (_DWORD *)v3, 0, 0xFFFFFFFF);
-    v4[7] = *(float *)(v3 + 0x1C);
-    v4[8] = *(float *)(v3 + 0x20);
-    v4[9] = *(float *)(v3 + 0x24);
-    v4[0xA] = *(float *)(v3 + 0x28);
+    v3 += 0xFFFFFFFF; /*0x79b527*/
+    v4 += 0xFFFFFFFF; /*0x79b52a*/
+    OB_stString28_AssignSubstring_010201A0((int)v4, v3, 0, 0xFFFFFFFF); /*0x79b530*/
+    v4->aspectRatio = v3->aspectRatio; /*0x79b53a*/
+    v4->sizeScale = v3->sizeScale; /*0x79b540*/
+    v4->minAngleOffset = v3->minAngleOffset; /*0x79b546*/
+    v4->maxAngleOffset = v3->maxAngleOffset; /*0x79b54c*/
   }
-  while ( v3 != a1 );
-  return v4;
+  while ( v3 != first ); /*0x79b54f*/
+  return v4; /*0x79b554*/
 }

@@ -16,7 +16,6 @@
 0x9428C7: push    ebp
 0x9428C8: lea     ebp, [ebx+8]
 0x9428CB: jmp     short loc_9428D0
-0x9428CD: align 10h
 0x9428D0: mov     edx, [esp+1Ch+arg_4]
 0x9428D4: push    ebx; int
 0x9428D5: lea     ecx, [esp+20h+var_C]

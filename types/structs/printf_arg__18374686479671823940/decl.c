@@ -1,1 +1,1 @@
-printf_arg
+typedef _printf_arg printf_arg;

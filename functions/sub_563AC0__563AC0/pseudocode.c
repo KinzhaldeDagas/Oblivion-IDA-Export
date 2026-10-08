@@ -1,4 +1,4 @@
-char *sub_563AC0()
+NiRTTI *sub_563AC0()
 {
-  return dword_BA7FEC;
+  return &stru_BA7FEC; /*0x563ac5*/
 }

@@ -1,0 +1,99 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TESConnectedPoint",
+  "definition": "struct TESConnectedPoint\n{\nfloat totalEstimateCost; ///< Verified A* F estimate = G+H; AStarNodeList selects the lowest F.\nfloat pathCost; ///< Verified G/path cost accumulated from start to node.\nfloat heuristicCost; ///< Verified H/heuristic: Euclidean distance from this node to target.\nTESConnectedPoint *predecessor; ///< Verified predecessor TESConnectedPoint*; assigned during edge relaxation and followed to emit route nodes.\nchar stateFlags; ///< Verified PathGraphNodeFlags: 0x01 discovered; 0x02 closed; 0x08 below-water; 0x10 actor underwater cache; 0x20 PathGrid linked-points-disabled; 0x40 SubSpace membership.\nunsigned __int8 unknown11[3];\nNiPoint3 position; ///< Verified NiPoint3 position used by graph costs and ROAD PGRP/RGRP serialization.\nBSSimpleList_VoidPtr connections; ///< Verified outgoing adjacency list of TESConnectedPoint pointers.\n}\n",
+  "id": 18374686479672087149,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified A* F estimate = G+H; AStarNodeList selects the lowest F.",
+      "name": "totalEstimateCost",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified G/path cost accumulated from start to node.",
+      "name": "pathCost",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified H/heuristic: Euclidean distance from this node to target.",
+      "name": "heuristicCost",
+      "offset": 8,
+      "offset_hex": "0x8",
+      "size": 4,
+      "type": "float"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified predecessor TESConnectedPoint*; assigned during edge relaxation and followed to emit route nodes.",
+      "name": "predecessor",
+      "offset": 12,
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "TESConnectedPoint *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified PathGraphNodeFlags: 0x01 discovered; 0x02 closed; 0x08 below-water; 0x10 actor underwater cache; 0x20 PathGrid linked-points-disabled; 0x40 SubSpace membership.",
+      "name": "stateFlags",
+      "offset": 16,
+      "offset_hex": "0x10",
+      "size": 1,
+      "type": "char"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "unknown11",
+      "offset": 17,
+      "offset_hex": "0x11",
+      "size": 3,
+      "type": "unsigned __int8[3]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified NiPoint3 position used by graph costs and ROAD PGRP/RGRP serialization.",
+      "name": "position",
+      "offset": 20,
+      "offset_hex": "0x14",
+      "size": 12,
+      "type": "NiPoint3"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified outgoing adjacency list of TESConnectedPoint pointers.",
+      "name": "connections",
+      "offset": 32,
+      "offset_hex": "0x20",
+      "size": 8,
+      "type": "BSSimpleList_VoidPtr"
+    }
+  ],
+  "name": "TESConnectedPoint",
+  "ordinal": 10118,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 40
+}

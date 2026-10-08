@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7016A0",
-    "line": "push    esi",
+    "line": "push    esi; MEF PERF 2026-10-08: PERF-17 slot destructor: reads pointer from slot, decrements payload+4 and invokes deleting destructor only on zero count. Generic pointer-slot release, not specifically NiD3DVertexShader; prototype corrected to void** slot. Required for native array-header destruction compatibility.",
     "mnemonic": "push",
     "size": 1
   },

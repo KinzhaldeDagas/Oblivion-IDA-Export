@@ -1,1 +1,1 @@
-GLcharARB
+typedef char GLcharARB;

@@ -1,1 +1,1 @@
-ExtraEnableStateChildren
+struct ExtraEnableStateChildren;

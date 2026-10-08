@@ -1,4 +1,4 @@
-0x45FC60: push    ecx
+0x45FC60: push    ecx; [Verified] TESSaveLoadGame_LoadTempEffectsList version-gates the Temp Effects List chunk and calls ActorProcessManager_LoadTempEffects for save versions >=0x5E; earlier versions skip the chunk body.
 0x45FC61: mov     eax, ds:0B33B00h
 0x45FC66: mov     [esp+4+var_4], 0
 0x45FC6D: mov     al, [eax+7Ch]
@@ -9,8 +9,8 @@
 0x45FC7B: cmp     al, 27h ; '''
 0x45FC7D: push    edi; ArgList
 0x45FC7E: mov     edi, [esp+0Ch+arg_0]
-0x45FC82: jb      short loc_45FCA3
-0x45FC84: mov     eax, [edi+4]
+0x45FC82: jb      short loc_45FCA3; MEF v58 NOTE: snapshot stream keeps native callback430050 and RTTI, clones16 BSFile virtual entries and replaces dtor/seek/size/read only. Original vtable restores before releasing snapshot bytes/context and invoking native scalar destructor430A90. PERF4 recognizes exact owned snapshot identity and captured size, avoiding a regression to repeated load-side fixed growth.
+0x45FC84: mov     eax, [edi+4]; MEF v58 SR1 framing: for supported versions5E..7D temp-effects trailer is DWORD length plus payload, between change-record loop and the recorded ID-array offset. Validator requires exact trailer end==ID start; ID arrays are two DWORD counts plus DWORD values. Earlier versions differ and remain outside snapshot admission.
 0x45FC87: push    1
 0x45FC89: lea     ecx, [esp+10h+arg_0]
 0x45FC8D: push    ecx
@@ -21,7 +21,7 @@
 0x45FC96: mov     [esp+20h+arg_0], 1
 0x45FC9E: call    eax
 0x45FCA0: add     esp, 14h
-0x45FCA3: mov     ecx, ds:0B33B00h
+0x45FCA3: mov     ecx, ds:0B33B00h; MEF v58 NOTE: snapshot stream keeps native callback430050 and RTTI, clones16 BSFile virtual entries and replaces dtor/seek/size/read only. Original vtable restores before releasing snapshot bytes/context and invoking native scalar destructor430A90. PERF4 recognizes exact owned snapshot identity and captured size, avoiding a regression to repeated load-side fixed growth.
 0x45FCA9: cmp     byte ptr [ecx+7Ch], 27h ; '''
 0x45FCAD: jnb     short loc_45FCD6
 0x45FCAF: mov     ecx, [edi+4]
@@ -72,8 +72,8 @@
 0x45FD39: mov     [esp+24h+arg_0], 1
 0x45FD41: call    eax
 0x45FD43: add     esp, 14h
-0x45FD46: mov     ecx, offset ActorProcessManager_ptr
-0x45FD4B: call    sub_679850
+0x45FD46: mov     ecx, (offset qword_B3BB2C+1D4h); self
+0x45FD4B: call    ActorProcessManager_LoadTempEffects; Verified call-chain anchor: TESSaveLoadGame_LoadGame invokes ActorProcessManager_LoadTempEffects after loading the Temp Effects List buffer when save version is at least 0x5E.
 0x45FD50: mov     ecx, ds:0B33B00h
 0x45FD56: cmp     byte ptr [ecx+7Ch], 5Eh ; '^'
 0x45FD5A: mov     eax, [esp+10h+var_4]

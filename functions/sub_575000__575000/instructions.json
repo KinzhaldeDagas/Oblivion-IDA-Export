@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x57509C",
-    "line": "fild    [esp+48h+arg_18]",
+    "line": "fild    [esp+48h+texture]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -355,13 +355,13 @@
   },
   {
     "ea": "0x5750BA",
-    "line": "fstp    [esp+44h+arg_18]",
+    "line": "fstp    [esp+44h+texture]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5750BE",
-    "line": "fld     [esp+44h+arg_18]",
+    "line": "fld     [esp+44h+texture]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -481,13 +481,13 @@
   },
   {
     "ea": "0x575100",
-    "line": "fstp    [esp+44h+arg_18]",
+    "line": "fstp    [esp+44h+texture]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x575104",
-    "line": "fld     [esp+44h+arg_18]",
+    "line": "fld     [esp+44h+texture]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x575245",
-    "line": "mov     [esp+44h+arg_18], 0",
+    "line": "mov     [esp+44h+texture], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x575275",
-    "line": "mov     edx, [esp+44h+arg_18]",
+    "line": "mov     edx, [esp+44h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x575295",
-    "line": "add     [esp+44h+arg_18], 1",
+    "line": "add     [esp+44h+texture], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "ea": "0x5752A4",
-    "line": "mov     [esp+44h+arg_18], edx",
+    "line": "mov     [esp+44h+texture], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x5752B9",
-    "line": "mov     [esp+48h+arg_18], esp",
+    "line": "mov     [esp+48h+texture], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x575301",
-    "line": "mov     [esp+60h+arg_18], eax",
+    "line": "mov     [esp+60h+texture], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1513,7 +1513,7 @@
   },
   {
     "ea": "0x575332",
-    "line": "cmp     [esp+44h+arg_18], 0",
+    "line": "cmp     [esp+44h+texture], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x575351",
-    "line": "mov     ecx, [esp+44h+arg_18]",
+    "line": "mov     ecx, [esp+44h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1705,7 +1705,7 @@
   },
   {
     "ea": "0x5753A5",
-    "line": "mov     ecx, [esp+44h+arg_18]",
+    "line": "mov     ecx, [esp+44h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1807,7 +1807,7 @@
   },
   {
     "ea": "0x5753DF",
-    "line": "mov     ecx, [esp+44h+arg_18]",
+    "line": "mov     ecx, [esp+44h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x575413",
-    "line": "mov     ecx, [esp+44h+arg_18]",
+    "line": "mov     ecx, [esp+44h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2515,19 +2515,19 @@
   },
   {
     "ea": "0x57557B",
-    "line": "mov     edx, [esp+44h+arg_18]",
+    "line": "mov     edx, [esp+44h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x57557F",
-    "line": "push    edx",
+    "line": "push    edx; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x575580",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2539,25 +2539,25 @@
   },
   {
     "ea": "0x575587",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x57558C",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x57558E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x575590",
-    "line": "call    sub_405870",
+    "line": "call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2575,7 +2575,7 @@
   },
   {
     "ea": "0x575598",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2587,7 +2587,7 @@
   },
   {
     "ea": "0x57559F",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2605,7 +2605,7 @@
   },
   {
     "ea": "0x5755A9",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2674,5 +2674,161 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9BE2D0",
+    "line": "lea     ecx, [ebp+4]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE2D3",
+    "line": "jmp     BSStringT_Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE2D8",
+    "line": "mov     eax, [ebp-2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE2DB",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE2DC",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE2E1",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE2E2",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE2E3",
+    "line": "mov     ecx, [ebp+1Ch]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE2E6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE2EB",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE2EE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE2EF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE2F4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE2F5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE2F6",
+    "line": "mov     eax, [ebp+0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE2F9",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE2FA",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE2FF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE300",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BE301",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BE305",
+    "line": "lea     eax, [edx-34h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE308",
+    "line": "mov     ecx, [edx-38h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BE30B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BE30D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE312",
+    "line": "mov     eax, offset stru_AE7A50",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BE317",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

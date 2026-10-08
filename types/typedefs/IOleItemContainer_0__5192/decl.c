@@ -1,1 +1,1 @@
-IOleItemContainer_0
+typedef IOleItemContainer IOleItemContainer_0;

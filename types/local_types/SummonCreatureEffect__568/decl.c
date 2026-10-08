@@ -1,1 +1,1 @@
-SummonCreatureEffect
+struct SummonCreatureEffect;

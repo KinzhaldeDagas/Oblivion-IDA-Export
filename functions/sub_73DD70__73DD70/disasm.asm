@@ -1,4 +1,4 @@
-0x73DD70: push    0FFFFFFFFh
+0x73DD70: push    0FFFFFFFFh; Pass226: NiScreenTexture record capacity helper; reallocates/copies 0x1C-byte records. Stock xrefs are load/copy only and do not set +0x18.
 0x73DD72: push    offset ??0bhkNiTriStripsShape@@QAE@XZ_SEH
 0x73DD77: mov     eax, large fs:0
 0x73DD7D: push    eax
@@ -60,7 +60,7 @@
 0x73DE12: mov     edi, [esp+24h+var_10]
 0x73DE16: mov     eax, [ebp+0]
 0x73DE19: push    eax
-0x73DE1A: call    FormHeapFree
+0x73DE1A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x73DE1F: add     esp, 4
 0x73DE22: mov     [ebp+0], edi
 0x73DE25: mov     [ebp+4], esi
@@ -73,3 +73,15 @@
 0x73DE37: pop     ebx
 0x73DE38: add     esp, 10h
 0x73DE3B: retn    4
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

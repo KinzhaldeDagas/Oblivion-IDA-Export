@@ -1,4 +1,4 @@
-0x50E340: sub     esp, 0Ch
+0x50E340: sub     esp, 0Ch; MoonSugarEffect decode: SetActorRefraction command; actor/process path uses refraction plus chameleon transparency ownership.
 0x50E343: mov     ecx, [esp+0Ch+l]
 0x50E347: fldz
 0x50E349: mov     edx, [esp+0Ch+arg_10]
@@ -18,7 +18,7 @@
 0x50E36E: push    ecx; a3
 0x50E36F: push    edx; a2
 0x50E370: push    eax; a1
-0x50E371: call    Script_ExtractArgs
+0x50E371: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x50E376: add     esp, 20h
 0x50E379: test    al, al
 0x50E37B: jnz     short loc_50E382
@@ -89,14 +89,14 @@
 0x50E449: mov     ecx, esi
 0x50E44B: call    eax
 0x50E44D: sub     esp, 8
-0x50E450: fstp    [esp+14h+var_10]; float
+0x50E450: fstp    [esp+14h+b]; float
 0x50E454: fldz
-0x50E456: fstp    [esp+14h+var_14]; float
+0x50E456: fstp    [esp+14h+a]; float
 0x50E459: call    Min_Float
-0x50E45E: fstp    [esp+14h+var_10]; float
+0x50E45E: fstp    [esp+14h+b]; b
 0x50E462: fld1
-0x50E464: fstp    [esp+14h+var_14]; float
-0x50E467: call    sub_4AC760
+0x50E464: fstp    [esp+14h+a]; a
+0x50E467: call    Float_Min; Returns min(a,b) as a single-precision float. Native callers push two floats, clean 8 bytes, and consume ST0 as float; prior double return was an x87 decompiler artifact.
 0x50E46C: fstp    dword ptr [esp+14h]
 0x50E470: fldz
 0x50E472: add     esp, 8
@@ -111,14 +111,14 @@
 0x50E48C: fld1
 0x50E48E: mov     eax, [edx+324h]
 0x50E494: push    ecx
-0x50E495: fstp    [esp+10h+var_10]
+0x50E495: fstp    [esp+10h+b]
 0x50E498: mov     ecx, esi
 0x50E49A: call    eax
 0x50E49C: fld     dword ptr ds:0A757CCh
 0x50E4A2: mov     edx, [esi]
 0x50E4A4: mov     eax, [edx+270h]
 0x50E4AA: push    ecx
-0x50E4AB: fstp    [esp+10h+var_10]
+0x50E4AB: fstp    [esp+10h+b]
 0x50E4AE: push    1
 0x50E4B0: mov     ecx, esi
 0x50E4B2: call    eax
@@ -133,7 +133,7 @@
 0x50E4C9: mov     eax, [edx+324h]
 0x50E4CF: fstp    st
 0x50E4D1: fld1
-0x50E4D3: fstp    [esp+10h+var_10]
+0x50E4D3: fstp    [esp+10h+b]
 0x50E4D6: call    eax
 0x50E4D8: fld     dword ptr [esp+0Ch]
 0x50E4DC: fdiv    qword ptr ds:0A309F0h
@@ -142,9 +142,9 @@
 0x50E4E7: fsubrp  st(1), st
 0x50E4E9: fstp    [esp+18h+a1]
 0x50E4ED: fld     [esp+18h+a1]
-0x50E4F1: fstp    [esp+18h+var_10]; float
+0x50E4F1: fstp    [esp+18h+b]; float
 0x50E4F5: fld1
-0x50E4F7: fstp    [esp+18h+var_14]; float
+0x50E4F7: fstp    [esp+18h+a]; float
 0x50E4FB: fldz
 0x50E4FD: fstp    [esp+18h+var_1C+4]; float
 0x50E500: call    Magic_GetChameleonMaxRefraction
@@ -159,7 +159,7 @@
 0x50E51D: fld     [esp+20h+a1]
 0x50E521: mov     eax, [edx+270h]
 0x50E527: add     esp, 10h
-0x50E52A: fstp    [esp+10h+var_10]
+0x50E52A: fstp    [esp+10h+b]
 0x50E52D: push    1
 0x50E52F: mov     ecx, esi
 0x50E531: call    eax
@@ -171,12 +171,12 @@
 0x50E540: mov     eax, [edx+270h]
 0x50E546: jnz     short loc_50E553
 0x50E548: fstp    st(1)
-0x50E54A: fstp    [esp+10h+var_10]
+0x50E54A: fstp    [esp+10h+b]
 0x50E54D: push    1
 0x50E54F: call    eax
 0x50E551: jmp     short loc_50E563
 0x50E553: fstp    st
-0x50E555: fstp    [esp+10h+var_10]
+0x50E555: fstp    [esp+10h+b]
 0x50E558: push    0
 0x50E55A: call    eax
 0x50E55C: mov     ecx, esi; a1

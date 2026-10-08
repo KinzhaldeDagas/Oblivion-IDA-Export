@@ -1,6 +1,6 @@
-0x72A0F0: sub     esp, 24h
+0x72A0F0: sub     esp, 24h; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x72A0F3: push    ebx
-0x72A0F4: mov     ebx, [esp+28h+arg_0]
+0x72A0F4: mov     ebx, [esp+28h+vertexCount]
 0x72A0F8: test    ebx, ebx
 0x72A0FA: push    ebp
 0x72A0FB: mov     ebp, ecx
@@ -19,7 +19,7 @@
 0x72A123: retn    8
 0x72A126: push    esi
 0x72A127: push    edi
-0x72A128: mov     edi, [esp+34h+arg_4]
+0x72A128: mov     edi, [esp+34h+vertices]
 0x72A12C: mov     eax, [edi]
 0x72A12E: mov     ecx, [edi+4]
 0x72A131: mov     edx, [edi+8]
@@ -233,7 +233,6 @@
 0x72A392: lea     ecx, [edi+ecx*4+8]
 0x72A396: sub     edx, esi
 0x72A398: jmp     short loc_72A3A0
-0x72A39A: align 10h
 0x72A3A0: fld     dword ptr [ecx-8]
 0x72A3A3: fld     [esp+34h+var_18]
 0x72A3A7: fcomp   st(1)
@@ -284,7 +283,7 @@
 0x72A423: sub     edx, 1
 0x72A426: jnz     loc_72A3A0
 0x72A42C: fld     [esp+34h+var_24]
-0x72A430: xor     esi, esi
+0x72A430: xor     esi, esi; Set sphere center to the midpoint of component-wise vertex minima and maxima.
 0x72A432: cmp     ebx, 4
 0x72A435: fadd    [esp+34h+var_18]
 0x72A439: fstp    [esp+34h+var_C]
@@ -311,7 +310,7 @@
 0x72A487: mov     ecx, [esp+34h+var_10]
 0x72A48B: fldz
 0x72A48D: mov     [ebp+8], ecx
-0x72A490: fstp    [esp+34h+arg_0]
+0x72A490: fstp    [esp+34h+vertexCount]
 0x72A494: jl      loc_72A617
 0x72A49A: fld     dword ptr [ebp+0]
 0x72A49D: lea     edx, [ebx-4]
@@ -341,14 +340,14 @@
 0x72A4E7: faddp   st(2), st
 0x72A4E9: fmul    st, st
 0x72A4EB: faddp   st(1), st
-0x72A4ED: fstp    [esp+34h+arg_4]
-0x72A4F1: fld     [esp+34h+arg_4]
-0x72A4F5: fld     [esp+34h+arg_0]
+0x72A4ED: fstp    [esp+34h+vertices]
+0x72A4F1: fld     [esp+34h+vertices]
+0x72A4F5: fld     [esp+34h+vertexCount]
 0x72A4F9: fcomp   st(1)
 0x72A4FB: fnstsw  ax
 0x72A4FD: test    ah, 5
 0x72A500: jp      short loc_72A508
-0x72A502: fstp    [esp+34h+arg_0]
+0x72A502: fstp    [esp+34h+vertexCount]
 0x72A506: jmp     short loc_72A50A
 0x72A508: fstp    st
 0x72A50A: fld     dword ptr [ecx-8]
@@ -371,14 +370,14 @@
 0x72A53A: faddp   st(2), st
 0x72A53C: fmul    st, st
 0x72A53E: faddp   st(1), st
-0x72A540: fstp    [esp+34h+arg_4]
-0x72A544: fld     [esp+34h+arg_4]
-0x72A548: fld     [esp+34h+arg_0]
+0x72A540: fstp    [esp+34h+vertices]
+0x72A544: fld     [esp+34h+vertices]
+0x72A548: fld     [esp+34h+vertexCount]
 0x72A54C: fcomp   st(1)
 0x72A54E: fnstsw  ax
 0x72A550: test    ah, 5
 0x72A553: jp      short loc_72A55B
-0x72A555: fstp    [esp+34h+arg_0]
+0x72A555: fstp    [esp+34h+vertexCount]
 0x72A559: jmp     short loc_72A55D
 0x72A55B: fstp    st
 0x72A55D: fld     dword ptr [ecx+4]
@@ -401,14 +400,14 @@
 0x72A58E: faddp   st(2), st
 0x72A590: fmul    st, st
 0x72A592: faddp   st(1), st
-0x72A594: fstp    [esp+34h+arg_4]
-0x72A598: fld     [esp+34h+arg_4]
-0x72A59C: fld     [esp+34h+arg_0]
+0x72A594: fstp    [esp+34h+vertices]
+0x72A598: fld     [esp+34h+vertices]
+0x72A59C: fld     [esp+34h+vertexCount]
 0x72A5A0: fcomp   st(1)
 0x72A5A2: fnstsw  ax
 0x72A5A4: test    ah, 5
 0x72A5A7: jp      short loc_72A5AF
-0x72A5A9: fstp    [esp+34h+arg_0]
+0x72A5A9: fstp    [esp+34h+vertexCount]
 0x72A5AD: jmp     short loc_72A5B1
 0x72A5AF: fstp    st
 0x72A5B1: fld     dword ptr [ecx+10h]
@@ -431,14 +430,14 @@
 0x72A5E2: faddp   st(2), st
 0x72A5E4: fmul    st, st
 0x72A5E6: faddp   st(1), st
-0x72A5E8: fstp    [esp+34h+arg_4]
-0x72A5EC: fld     [esp+34h+arg_4]
-0x72A5F0: fld     [esp+34h+arg_0]
+0x72A5E8: fstp    [esp+34h+vertices]
+0x72A5EC: fld     [esp+34h+vertices]
+0x72A5F0: fld     [esp+34h+vertexCount]
 0x72A5F4: fcomp   st(1)
 0x72A5F6: fnstsw  ax
 0x72A5F8: test    ah, 5
 0x72A5FB: jp      short loc_72A603
-0x72A5FD: fstp    [esp+34h+arg_0]
+0x72A5FD: fstp    [esp+34h+vertexCount]
 0x72A601: jmp     short loc_72A605
 0x72A603: fstp    st
 0x72A605: add     ecx, 30h ; '0'
@@ -476,14 +475,14 @@
 0x72A65F: faddp   st(2), st
 0x72A661: fmul    st, st
 0x72A663: faddp   st(1), st
-0x72A665: fstp    [esp+34h+arg_4]
-0x72A669: fld     [esp+34h+arg_4]
-0x72A66D: fld     [esp+34h+arg_0]
+0x72A665: fstp    [esp+34h+vertices]
+0x72A669: fld     [esp+34h+vertices]
+0x72A66D: fld     [esp+34h+vertexCount]
 0x72A671: fcomp   st(1)
 0x72A673: fnstsw  ax
 0x72A675: test    ah, 5
 0x72A678: jp      short loc_72A680
-0x72A67A: fstp    [esp+34h+arg_0]
+0x72A67A: fstp    [esp+34h+vertexCount]
 0x72A67E: jmp     short loc_72A682
 0x72A680: fstp    st
 0x72A682: add     ecx, 0Ch
@@ -492,10 +491,10 @@
 0x72A68A: fstp    st(2)
 0x72A68C: fstp    st
 0x72A68E: fstp    st
-0x72A690: fld     [esp+34h+arg_0]
+0x72A690: fld     [esp+34h+vertexCount]
 0x72A694: call    __CIsqrt
-0x72A699: fstp    [esp+34h+arg_0]
-0x72A69D: fld     [esp+34h+arg_0]
+0x72A699: fstp    [esp+34h+vertexCount]; Set radius to the maximum Euclidean distance from the computed center.
+0x72A69D: fld     [esp+34h+vertexCount]
 0x72A6A1: pop     edi
 0x72A6A2: pop     esi
 0x72A6A3: fstp    dword ptr [ebp+0Ch]

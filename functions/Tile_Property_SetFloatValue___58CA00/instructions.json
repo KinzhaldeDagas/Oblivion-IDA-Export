@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x58CA0A",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x58CA2E",
-    "line": "fld     [esp+4+arg_0]",
+    "line": "fld     [esp+4+value]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x58CA32",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -109,25 +109,25 @@
   },
   {
     "ea": "0x58CA37",
-    "line": "call    sub_588930",
+    "line": "call    Tile__Value__ClearActions; Verified: unlinks and frees action nodes reachable through Value +0x10 sentinel; also removes crosslinks at action +0x10/+0x14. Called before CalculateValue by numeric setter.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58CA3C",
-    "line": "push    1",
+    "line": "push    1; forceUpdate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58CA3E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58CA40",
-    "line": "call    DoActionEnumeration",
+    "line": "call    Tile__Value__CalculateValue; Verified: numeric setter invokes CalculateValue with the same Value receiver and force=true. Dependency updates occur synchronously; no extra tile-wide call is needed for propagation.",
     "mnemonic": "call",
     "size": 5
   },

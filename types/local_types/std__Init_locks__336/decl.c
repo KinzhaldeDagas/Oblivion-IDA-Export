@@ -1,1 +1,1 @@
-std::_Init_locks
+struct std::_Init_locks;

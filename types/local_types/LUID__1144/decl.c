@@ -1,1 +1,5 @@
-_LUID
+struct _LUID
+{
+DWORD LowPart;
+LONG HighPart;
+};

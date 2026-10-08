@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7802D9",
-    "line": "push    offset NiRefObject_objcount; lpAddend",
+    "line": "push    0B3FD64h; lpAddend",
     "mnemonic": "push",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x780310",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x78046F",
-    "line": "mov     [esi+5Ch], edx",
+    "line": "mov     [esi+5Ch], edx; NiD3DRenderState alpha-function table entry 4 is D3DCMP_GREATER (5). Tree cutout flags 0x12EC select this entry.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1171,7 +1171,7 @@
   },
   {
     "ea": "0x7805F5",
-    "line": "push    offset word_B427E0",
+    "line": "push    offset unk_B427E0",
     "mnemonic": "push",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x78066B",
-    "line": "call    __memset",
+    "line": "call    __memset; Sampler enum-to-cache initialization. All entries start 0xFFFF; later writes map only D3DSAMP_ADDRESSU(1)->0, ADDRESSV(2)->1, MAGFILTER(5)->2, MINFILTER(6)->3, MIPFILTER(7)->4. MIPMAPLODBIAS(8), MAXMIPLEVEL(9), MAXANISOTROPY(10), and SRGBTEXTURE(11) remain untracked.",
     "mnemonic": "call",
     "size": 5
   },

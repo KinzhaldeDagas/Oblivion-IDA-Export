@@ -73,7 +73,7 @@
 0x92C32C: push    edx
 0x92C32D: call    sub_92B640
 0x92C332: add     esp, 10h
-0x92C335: lea     eax, [esp+50h]
+0x92C335: lea     eax, [esp+10A0h+var_1050]
 0x92C339: push    eax
 0x92C33A: lea     ecx, [esp+10A4h+var_1034+4]
 0x92C33E: push    ecx
@@ -144,7 +144,7 @@
 0x92C428: add     esp, 8
 0x92C42B: mov     ecx, [esi+4]
 0x92C42E: mov     edi, [esi]
-0x92C430: movaps  xmm0, xmmword ptr [esp+50h]
+0x92C430: movaps  xmm0, [esp+10A0h+var_1050]
 0x92C435: mov     eax, ecx
 0x92C437: shl     eax, 4
 0x92C43A: add     eax, edi
@@ -162,7 +162,7 @@
 0x92C45A: add     esp, 8
 0x92C45D: mov     ecx, [esi+4]
 0x92C460: mov     ebx, [esi]
-0x92C462: movaps  xmm0, [esp+10A0h+var_1034+4]
+0x92C462: movaps  xmm0, xmmword ptr [esp+10A0h+var_1034+4]
 0x92C467: mov     eax, ecx
 0x92C469: shl     eax, 4
 0x92C46C: add     eax, ebx
@@ -232,7 +232,7 @@
 0x92C54B: call    sub_92C020
 0x92C550: mov     eax, [esp+10E8h+var_1040]
 0x92C557: mov     ecx, [esp+10E8h+var_1038]
-0x92C55E: lea     edx, [esp+98h]
+0x92C55E: lea     edx, [esp+10E8h+var_1050]
 0x92C565: mov     [esp+10E8h+var_1068], edx
 0x92C56C: add     esp, 48h
 0x92C56F: lea     edx, [esp+10A0h+var_1064+4]
@@ -256,7 +256,7 @@
 0x92C5A0: call    sub_92C020
 0x92C5A5: mov     ecx, [esp+10C4h+var_1038]
 0x92C5AC: mov     eax, [esp+10C4h+var_103C]
-0x92C5B3: lea     edx, [esp+74h]
+0x92C5B3: lea     edx, [esp+10C4h+var_1050]
 0x92C5B7: mov     [esp+10C4h+var_1068], edx
 0x92C5BB: lea     edx, [esp+10C4h+var_1064+4]
 0x92C5BF: push    edx

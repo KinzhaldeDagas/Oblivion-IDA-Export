@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EDD30",
-    "line": "sub     esp, 18h",
+    "line": "sub     esp, 18h; Control value = projectionOffset + first element of basis * parameters.matrix[2*matrixChannel]. Record is this+0x25C + fanIndex*0x80 + controlIndex*0x40 + matrixChannel*0x20; layout FaceGenFanProjectionRecord (0x20 bytes). Returns zero when initialized byte is false. Signed upper-bound checks only; negative indices are not rejected. Assertion helper logs and returns, so oversized indices are not stopped either. Caller misuse impact unproven.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x6EDD35",
-    "line": "mov     ebp, [esp+20h+arg_0]",
+    "line": "mov     ebp, [esp+20h+fanIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x6EDD42",
-    "line": "push    0BBh ; '»'; int",
+    "line": "push    0BBh ; '»'; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x6EDD4C",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6EDD54",
-    "line": "mov     ebx, [esp+28h+arg_4]",
+    "line": "mov     ebx, [esp+28h+controlIndex]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6EDD5D",
-    "line": "push    0BCh ; '¼'; int",
+    "line": "push    0BCh ; '¼'; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6EDD67",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x6EDD6F",
-    "line": "mov     esi, [esp+28h+arg_8]",
+    "line": "mov     esi, [esp+28h+matrixChannel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x6EDD78",
-    "line": "push    0BDh ; '½'; int",
+    "line": "push    0BDh ; '½'; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x6EDD82",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x6EDDA7",
-    "line": "add     edx, [esp+28h+arg_C]",
+    "line": "add     edx, [esp+28h+parameters]",
     "mnemonic": "add",
     "size": 4
   },
@@ -259,37 +259,37 @@
   },
   {
     "ea": "0x6EDDB0",
-    "line": "push    edx",
+    "line": "push    edx; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDDB1",
-    "line": "lea     eax, [esp+2Ch+var_18]",
+    "line": "lea     eax, [esp+2Ch+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EDDB5",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EDDB6",
-    "line": "lea     ecx, [edi+25Ch]",
+    "line": "lea     ecx, [edi+25Ch]; this",
     "mnemonic": "lea",
     "size": 6
   },
   {
     "ea": "0x6EDDBC",
-    "line": "call    sub_5523C0",
+    "line": "call    FaceGenMatrix_Multiply; Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EDDC1",
-    "line": "mov     esi, eax",
+    "line": "mov     esi, eax; Authoritative channel mapping: controls project parameters.matrix[2 * matrixChannel], so channels 0/1 are geometry matrix 0 and texture matrix 2.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x6EDDDC",
-    "line": "mov     eax, [esp+28h+var_C]",
+    "line": "mov     eax, [esp+28h+out.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x6EDDE4",
-    "line": "fstp    [esp+28h+arg_0]",
+    "line": "fstp    [esp+28h+fanIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x6EDDEB",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x6EDDF3",
-    "line": "fld     dword ptr [edi+278h]",
+    "line": "fld     dword ptr [edi+278h]; Loads selected record projectionOffset at record+0x1C (FanControls+0x278 plus index strides), then adds projected basis product. This identifies the file scalar read by the CTL loader.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x6EDDFA",
-    "line": "fadd    [esp+24h+arg_0]",
+    "line": "fadd    [esp+24h+fanIndex]",
     "mnemonic": "fadd",
     "size": 4
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x6EDE01",
-    "line": "fstp    [esp+18h+arg_0]",
+    "line": "fstp    [esp+18h+fanIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6EDE05",
-    "line": "fld     [esp+18h+arg_0]",
+    "line": "fld     [esp+18h+fanIndex]",
     "mnemonic": "fld",
     "size": 4
   },

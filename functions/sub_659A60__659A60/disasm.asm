@@ -17,7 +17,7 @@
 0x659A8D: call    edx
 0x659A8F: push    eax
 0x659A90: push    esi
-0x659A91: mov     ecx, offset ActorProcessManager_ptr
+0x659A91: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x659A96: call    sub_674550
 0x659A9B: push    2ECh; Size
 0x659AA0: call    FormHeapAlloc
@@ -27,7 +27,7 @@
 0x659AAE: mov     [esp+1Ch+var_4], 0
 0x659AB6: jz      short loc_659AC3
 0x659AB8: mov     ecx, eax; this
-0x659ABA: call    ??0HighProcess@@QAE@XZ; HighProcess::HighProcess(void)
+0x659ABA: call    ??0HighProcess@@QAE@XZ; HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.
 0x659ABF: mov     edi, eax
 0x659AC1: jmp     short loc_659AC5
 0x659AC3: xor     edi, edi
@@ -45,14 +45,14 @@
 0x659AE3: mov     edx, [eax]
 0x659AE5: push    1
 0x659AE7: call    edx
-0x659AE9: push    0
-0x659AEB: push    0
-0x659AED: push    0
-0x659AEF: push    0
-0x659AF1: push    esi
-0x659AF2: mov     ecx, offset ActorProcessManager_ptr
+0x659AE9: push    0; relativeTo
+0x659AEB: push    0; insertRelative
+0x659AED: push    0; append
+0x659AEF: push    0; processLevel
+0x659AF1: push    esi; object
+0x659AF2: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x659AF7: mov     [esi+58h], edi
-0x659AFA: call    sub_673A90
+0x659AFA: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x659AFF: mov     eax, [esi]
 0x659B01: mov     edx, [eax+178h]
 0x659B07: push    0
@@ -70,3 +70,15 @@
 0x659B26: pop     esi
 0x659B27: add     esp, 10h
 0x659B2A: retn
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

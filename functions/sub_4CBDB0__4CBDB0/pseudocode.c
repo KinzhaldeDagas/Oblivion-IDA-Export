@@ -1,38 +1,39 @@
-void __thiscall sub_4CBDB0(TESObjectCELL *this, _DWORD *a2)
+// Verified: scans cell object references, filters out references with deleted/disabled flags, then collects door references whose ExtraTeleport exists or whose TESObjectDOOR.randomTeleport list is nonempty. This list feeds teleport-link processing.
+void __thiscall TESObjectCELL_CollectDoorsForTeleportProcessing(TESObjectCELL *this, BSSimpleList_VoidPtr *outDoors)
 {
   ObjectListEntry *p_objectList; // edi
   TESObjectREFR *refr; // esi
   TESForm::FormFlags flags; // eax
   int v6; // eax
-  TESForm *v7; // ebp
+  TESObjectDOOR *v7; // ebp
 
-  if ( a2 )
+  if ( outDoors ) /*0x4cbdb8*/
   {
-    sub_496EA0((char *)&stru_B35C80, this);
-    p_objectList = &this->members.objectList;
-    if ( this != (TESObjectCELL *)0xFFFFFFB8 )
+    sub_496EA0((char *)&unk_B35C80, this); /*0x4cbdc5*/
+    p_objectList = &this->members.objectList; /*0x4cbdca*/
+    if ( this != (TESObjectCELL *)0xFFFFFFB8 ) /*0x4cbdcf*/
     {
-      do
+      do /*0x4cbe3a*/
       {
-        refr = p_objectList->refr;
-        if ( p_objectList->refr )
+        refr = p_objectList->refr; /*0x4cbdd3*/
+        if ( p_objectList->refr ) /*0x4cbdd3*/
         {
-          flags = refr->member.super.flags;
-          if ( (flags & 0x800) == 0 && (flags & 0x20) == 0 )
+          flags = refr->member.super.flags; /*0x4cbdd9*/
+          if ( (flags & 0x800) == 0 && (flags & 0x20) == 0 ) /*0x4cbdeb*/
           {
-            v6 = (int)refr->vtbl->GetBaseForm(p_objectList->refr);
-            if ( *(_BYTE *)(v6 + 4) == 0x18 && v6 != TESDataHandler_g_PrisonMarker )
+            v6 = (int)refr->vtbl->GetBaseForm(p_objectList->refr); /*0x4cbdf7*/
+            if ( *(_BYTE *)(v6 + 4) == 0x18 && v6 != MEMORY[0xB35EBC] ) /*0x4cbe05*/
             {
-              v7 = refr->vtbl->GetBaseForm(refr);
-              if ( GetTeleportExtraData(refr) || sub_4B78E0(v7) )
-                BSSimpleList_PushFront(a2, (int)refr);
+              v7 = (TESObjectDOOR *)refr->vtbl->GetBaseForm(refr); /*0x4cbe15*/
+              if ( TESObjectREFR_GetTeleportData(refr) || TESObjectDOOR_HasRandomTeleportSpaces(v7) ) /*0x4cbe22*/
+                BSSimpleList_PushFront(outDoors, (int)refr); /*0x4cbe30*/
             }
           }
         }
-        p_objectList = p_objectList->next;
+        p_objectList = p_objectList->next; /*0x4cbe35*/
       }
-      while ( p_objectList );
+      while ( p_objectList ); /*0x4cbe3a*/
     }
-    sub_496F50(&stru_B35C80, this);
+    sub_496F50(&unk_B35C80, this); /*0x4cbe44*/
   }
 }

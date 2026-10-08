@@ -32,7 +32,7 @@
 0x438797: test    eax, eax
 0x438799: jz      short loc_4387EC
 0x43879B: push    eax
-0x43879C: push    offset dword_BA7A20
+0x43879C: push    0BA7A20h
 0x4387A1: call    NiRTTI_Cast
 0x4387A6: mov     ebx, eax
 0x4387A8: add     esp, 8
@@ -69,3 +69,15 @@
 0x438803: pop     ebx
 0x438804: add     esp, 1Ch
 0x438807: retn    4
+0x9AC6D0: mov     eax, [ebp-1Ch]
+0x9AC6D3: push    eax
+0x9AC6D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC6D9: pop     ecx
+0x9AC6DA: retn
+0x9AC6DB: mov     edx, [esp+arg_4]
+0x9AC6DF: lea     eax, [edx-20h]
+0x9AC6E2: mov     ecx, [edx-24h]
+0x9AC6E5: xor     ecx, eax
+0x9AC6E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC6EC: mov     eax, offset stru_AD93A0
+0x9AC6F1: jmp     ___CxxFrameHandler3

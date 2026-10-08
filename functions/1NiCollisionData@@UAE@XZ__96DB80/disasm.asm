@@ -3,10 +3,10 @@
 0x96DB83: mov     eax, [esi+40h]
 0x96DB86: push    eax
 0x96DB87: mov     dword ptr [esi], offset ??_7NiCollisionData@@6B@; const NiCollisionData::`vftable'
-0x96DB8D: call    FormHeapFree
+0x96DB8D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x96DB92: mov     ecx, [esi+44h]
 0x96DB95: push    ecx
-0x96DB96: call    FormHeapFree
+0x96DB96: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x96DB9B: mov     ecx, [esi+2Ch]
 0x96DB9E: add     esp, 8
 0x96DBA1: test    ecx, ecx

@@ -1,1 +1,1 @@
-BSFaceGenKeyframe
+struct BSFaceGenKeyframe;

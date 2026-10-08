@@ -1,11 +1,11 @@
-0x62A9C0: sub     esp, 12Ch
+0x62A9C0: sub     esp, 12Ch; 3DTheft decode 2026-05-18: HighProcess vtable +0x1A4 SayTopic implementation. Uses Actor+0xE4 or process+0x258 as dialogue target, creates TESTopic dialogue info, calls Actor::InitDialogue, sets dialogue timer/state fields (0x21C/0x228/0x278/0x22C), and may turn/target actor; it does not call Actor_AddPackage or EvaluatePackage.
 0x62A9C6: mov     eax, ds:0B30AACh
 0x62A9CB: xor     eax, esp
 0x62A9CD: mov     [esp+12Ch+var_4], eax
 0x62A9D4: push    ebx
 0x62A9D5: mov     ebx, [esp+130h+arg_4]
 0x62A9DC: push    ebp
-0x62A9DD: mov     ebp, [esp+134h+arg_0]
+0x62A9DD: mov     ebp, [esp+134h+speaker]
 0x62A9E4: push    esi
 0x62A9E5: push    edi
 0x62A9E6: mov     edi, [ebp+0E4h]
@@ -29,10 +29,10 @@
 0x62AA3A: mov     ebx, [esi+250h]
 0x62AA40: test    ebx, ebx
 0x62AA42: jz      short loc_62AA5E
-0x62AA44: mov     ecx, ebx
-0x62AA46: call    sub_6B81D0
+0x62AA44: mov     ecx, ebx; this
+0x62AA46: call    DialogueItem__Destroy
 0x62AA4B: push    ebx
-0x62AA4C: call    FormHeapFree
+0x62AA4C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62AA51: add     esp, 4
 0x62AA54: mov     dword ptr [esi+250h], 0
 0x62AA5E: fldz
@@ -63,7 +63,7 @@
 0x62AAB3: mov     ecx, [esp+13Ch+var_124]
 0x62AAB7: mov     edx, ds:0B152B0h[ecx*4]
 0x62AABE: cmp     dword ptr [edx+eax*4], 1
-0x62AAC2: jnz     short loc_62AACB
+0x62AAC2: jnz     short loc_62AACB; 3DTheft decode: dialogue update resolves the active procedure by indexing ProcedureRows[package->procedureArrayIndex][process->GetCurrentPackProcedure()]. GetCurrentPackProcedure is a row slot.
 0x62AAC4: mov     ecx, ebp
 0x62AAC6: call    sub_5E02B0
 0x62AACB: cmp     dword ptr [esi+34h], 0
@@ -107,7 +107,7 @@
 0x62AB44: call    sub_4121A0
 0x62AB49: lea     ecx, [esp+13Ch+var_114]
 0x62AB4D: push    ecx
-0x62AB4E: call    sub_683CB0
+0x62AB4E: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x62AB53: fstp    [esp+140h+var_124]
 0x62AB57: fldz
 0x62AB59: add     esp, 4
@@ -150,7 +150,7 @@
 0x62ABD3: jmp     loc_62AF85
 0x62ABD8: push    30h ; '0'
 0x62ABDA: mov     ecx, ebp
-0x62ABDC: call    sub_5E05F0
+0x62ABDC: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62ABE1: jmp     loc_62AF85
 0x62ABE6: cmp     byte ptr [esi+2B8h], 0
 0x62ABED: jz      short loc_62AC01
@@ -161,20 +161,20 @@
 0x62AC09: jz      loc_62AD17
 0x62AC0F: cmp     dword ptr [esi+2B4h], 0
 0x62AC16: jnz     loc_62AD17
-0x62AC1C: push    0
-0x62AC1E: push    0
-0x62AC20: push    edi
-0x62AC21: push    ebp
-0x62AC22: mov     ecx, ebx
-0x62AC24: call    TESTopic__CreateDialogueInfo
+0x62AC1C: push    0; conversation
+0x62AC1E: push    0; previousTopic
+0x62AC20: push    edi; target
+0x62AC21: push    ebp; speaker
+0x62AC22: mov     ecx, ebx; this
+0x62AC24: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x62AC29: mov     ebx, [esi+250h]
 0x62AC2F: test    ebx, ebx
 0x62AC31: mov     [esp+13Ch+var_128], eax
 0x62AC35: jz      short loc_62AC55
-0x62AC37: mov     ecx, ebx
-0x62AC39: call    sub_6B81D0
+0x62AC37: mov     ecx, ebx; this
+0x62AC39: call    DialogueItem__Destroy
 0x62AC3E: push    ebx
-0x62AC3F: call    FormHeapFree
+0x62AC3F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62AC44: mov     eax, [esp+140h+var_128]
 0x62AC48: add     esp, 4
 0x62AC4B: mov     dword ptr [esi+250h], 0
@@ -194,11 +194,11 @@
 0x62AC83: push    ebp
 0x62AC84: call    eax
 0x62AC86: mov     eax, [esp+13Ch+var_128]
-0x62AC8A: mov     ecx, eax
+0x62AC8A: mov     ecx, eax; this
 0x62AC8C: mov     byte ptr [esi+228h], 1
-0x62AC93: call    sub_6B7BA0
-0x62AC98: mov     ecx, [esp+13Ch+var_128]
-0x62AC9C: call    sub_6B7C20
+0x62AC93: call    DialogueItem__FirstResponse
+0x62AC98: mov     ecx, [esp+13Ch+var_128]; this
+0x62AC9C: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x62ACA1: test    eax, eax
 0x62ACA3: jz      short loc_62ACF8
 0x62ACA5: mov     ecx, [eax+8]
@@ -228,7 +228,7 @@
 0x62ACF2: mov     [esi+278h], dl
 0x62ACF8: test    edi, edi
 0x62ACFA: jz      loc_62B049
-0x62AD00: mov     ecx, offset flt_B36AE8
+0x62AD00: mov     ecx, offset unk_B36AE8
 0x62AD05: call    GameSetting_GetSafeFloatPointer
 0x62AD0A: fld     dword ptr [eax]
 0x62AD0C: fstp    dword ptr [esi+22Ch]
@@ -239,30 +239,30 @@
 0x62AD21: call    edx
 0x62AD23: cmp     [esp+13Ch+arg_10], 0
 0x62AD2B: jnz     short loc_62AD6E
-0x62AD2D: mov     ecx, [esi+250h]
+0x62AD2D: mov     ecx, [esi+250h]; this
 0x62AD33: test    ecx, ecx
 0x62AD35: mov     dword ptr [esp+13Ch+var_120], ecx
 0x62AD39: jz      short loc_62AD57
-0x62AD3B: call    sub_6B81D0
+0x62AD3B: call    DialogueItem__Destroy
 0x62AD40: mov     eax, dword ptr [esp+13Ch+var_120]
 0x62AD44: push    eax
-0x62AD45: call    FormHeapFree
+0x62AD45: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62AD4A: add     esp, 4
 0x62AD4D: mov     dword ptr [esi+250h], 0
-0x62AD57: push    0
-0x62AD59: push    0
-0x62AD5B: push    edi
-0x62AD5C: push    ebp
-0x62AD5D: mov     ecx, ebx
-0x62AD5F: call    TESTopic__CreateDialogueInfo
+0x62AD57: push    0; conversation
+0x62AD59: push    0; previousTopic
+0x62AD5B: push    edi; target
+0x62AD5C: push    ebp; speaker
+0x62AD5D: mov     ecx, ebx; this
+0x62AD5F: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x62AD64: mov     ebx, eax
 0x62AD66: mov     [esi+250h], ebx
 0x62AD6C: jmp     short loc_62AD74
 0x62AD6E: mov     ebx, [esi+250h]
-0x62AD74: mov     ecx, [esi+250h]; int
+0x62AD74: mov     ecx, [esi+250h]; this
 0x62AD7A: test    ecx, ecx
 0x62AD7C: jz      short loc_62AD83
-0x62AD7E: call    sub_6B7C30
+0x62AD7E: call    DialogueItem__RunResult; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.
 0x62AD83: test    ebx, ebx
 0x62AD85: jz      loc_62B049
 0x62AD8B: test    edi, edi
@@ -277,10 +277,10 @@
 0x62ADA5: push    ebp
 0x62ADA6: mov     ecx, edi
 0x62ADA8: call    eax
-0x62ADAA: mov     ecx, ebx
-0x62ADAC: call    sub_6B7BA0
-0x62ADB1: mov     ecx, ebx
-0x62ADB3: call    sub_6B7C20
+0x62ADAA: mov     ecx, ebx; this
+0x62ADAC: call    DialogueItem__FirstResponse
+0x62ADB1: mov     ecx, ebx; this
+0x62ADB3: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x62ADB8: mov     edi, eax
 0x62ADBA: test    edi, edi
 0x62ADBC: jz      loc_62B049
@@ -302,7 +302,7 @@
 0x62ADF0: push    ebx
 0x62ADF1: push    eax
 0x62ADF2: mov     ecx, ebp
-0x62ADF4: call    Actor__InitDialogue
+0x62ADF4: call    Actor__InitDialogue; 3DTheft decode 2026-05-18: SayTopic response path calls Actor::InitDialogue with selected response text/info and process unk220, then records dialogue state/timer.
 0x62ADF9: fstp    dword ptr [esi+21Ch]
 0x62ADFF: mov     edx, [esi]
 0x62AE01: mov     eax, [edx+48h]
@@ -406,7 +406,7 @@
 0x62AF40: test    eax, eax
 0x62AF42: jnz     short loc_62AF63
 0x62AF44: test    ebx, ebx
-0x62AF46: jz      short loc_62AF63
+0x62AF46: jz      short loc_62AF63; 3DTheft decode 2026-05-18: after SayTopic dialogue setup, non-null target leads to process target vfunc +0x484 and vfunc +0x54C set; this is target/facing dialogue state, not Follow path setup.
 0x62AF48: mov     edx, [esi]
 0x62AF4A: mov     eax, [edx+484h]
 0x62AF50: push    ebx
@@ -428,19 +428,19 @@
 0x62AF8A: jz      loc_62B049
 0x62AF90: cmp     byte ptr [esi+2B8h], 0
 0x62AF97: jnz     loc_62B049
-0x62AF9D: mov     ecx, [esi+220h]
+0x62AF9D: mov     ecx, [esi+220h]; this
 0x62AFA3: test    ecx, ecx
 0x62AFA5: jz      short loc_62AFB4
-0x62AFA7: call    sub_6B7260
+0x62AFA7: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x62AFAC: test    al, al
 0x62AFAE: jnz     loc_62B049
 0x62AFB4: mov     edi, [esi+250h]
 0x62AFBA: test    edi, edi
 0x62AFBC: jz      short loc_62AFCE
-0x62AFBE: mov     ecx, edi
-0x62AFC0: call    sub_6B81D0
+0x62AFBE: mov     ecx, edi; this
+0x62AFC0: call    DialogueItem__Destroy
 0x62AFC5: push    edi
-0x62AFC6: call    FormHeapFree
+0x62AFC6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x62AFCB: add     esp, 4
 0x62AFCE: mov     edx, [esi]
 0x62AFD0: xor     eax, eax
@@ -479,7 +479,7 @@
 0x62B03E: call    eax
 0x62B040: push    30h ; '0'
 0x62B042: mov     ecx, ebp
-0x62B044: call    sub_5E05F0
+0x62B044: call    sub_5E05F0; 3DTheft decode: Actor_ClearMovementFlag wrapper calls process vfunc +0x2C4 with enabled=false.
 0x62B049: mov     ecx, [esp+13Ch+var_4]
 0x62B050: pop     edi
 0x62B051: pop     esi

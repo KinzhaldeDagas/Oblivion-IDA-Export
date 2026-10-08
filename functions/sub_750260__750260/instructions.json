@@ -277,19 +277,19 @@
   },
   {
     "ea": "0x7502DF",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7502E1",
-    "line": "fstp    [esp+5Ch+var_5C]; float",
+    "line": "fstp    [esp+5Ch+applicationTime]; applicationTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x7502E4",
-    "line": "call    sub_6C36B0",
+    "line": "call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.",
     "mnemonic": "call",
     "size": 5
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x75030F",
-    "line": "push    offset dword_B3EA50",
+    "line": "push    offset stru_B3EA50",
     "mnemonic": "push",
     "size": 5
   },
@@ -403,7 +403,7 @@
   },
   {
     "ea": "0x750329",
-    "line": "call    sub_6CD0F0",
+    "line": "call    NiBlendInterpolator_RecomputeNormalizedWeights; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x75038E",
-    "line": "push    offset dword_B3CF5C",
+    "line": "push    offset stru_B3CF5C",
     "mnemonic": "push",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x7503A4",
-    "line": "call    sub_6CD0F0",
+    "line": "call    NiBlendInterpolator_RecomputeNormalizedWeights; Oblivion: when blend flag bit 2 marks weights dirty, recomputes item+8 normalized weights across 0x18-byte records. Handles one/two/many active items, priority groups, base*ease weights, optional threshold/renormalization, and highest-only flag bit 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x75062C",
-    "line": "fst     [esp+6Ch+var_5C]; float",
+    "line": "fst     [esp+6Ch+applicationTime]; float",
     "mnemonic": "fst",
     "size": 4
   },

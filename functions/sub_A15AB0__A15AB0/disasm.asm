@@ -6,7 +6,7 @@
 0xA15AC0: push    0
 0xA15AC2: push    0
 0xA15AC4: push    50h ; 'P'
-0xA15AC6: push    offset dword_BA94C0
+0xA15AC6: push    offset unk_BA94C0
 0xA15ACB: push    offset aHkworldobject; "hkWorldObject"
 0xA15AD0: mov     ecx, offset unk_BA9560
 0xA15AD5: call    sub_90D190

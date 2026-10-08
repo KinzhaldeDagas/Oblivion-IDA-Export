@@ -1,19 +1,32 @@
 {
-  "callees_count": 33,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x453250",
+      "0x4533CF"
+    ]
+  ],
+  "chunks_sha256": "5e1ae84da99ff66a4b320ae7aff72577270a0b1dc95324db42694ffecfa63d49",
+  "comment_regular": "MEF v56 lifetime wrapper invalidates/suspends indices across owner teardown, including clearing/freeing+74/+78 arrays. Finally restores suspension even on SEH unwind. Auxiliary tables own only private key/index storage, not engine objects. No coherence claim for arbitrary external raw memory writes outside the decoded interfaces.",
+  "comment_repeatable": "Verified: TES_destr calls at 4468F5 then frees the manager allocation at 4468FB. Destroys ChangesMap and all reference-map objects through scalar-deleting vtables, frees the remap table and buffer, resets/frees both ID arrays, and releases deferred form/list state. Constructor-to-manager-destructor lifecycle established. Fallout has analogous named map clear/destructor paths, but no layout was copied.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_453250",
+  "display_name": "TESSaveLoadGame_DestroyOwnedState",
   "end_ea": "0x4533CF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_453250",
+  "name": "TESSaveLoadGame_DestroyOwnedState",
   "segment": ".text",
   "sha256": "5e1ae84da99ff66a4b320ae7aff72577270a0b1dc95324db42694ffecfa63d49",
   "size": 383,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x453250",
-  "type": "void __thiscall(void (__stdcall ****this)(signed int))",
+  "total_chunk_size": 383,
+  "type": "void __thiscall(TESSaveLoadGame_SerializationView *self)",
   "xrefs_from_count": 195,
   "xrefs_to_count": 1
 }

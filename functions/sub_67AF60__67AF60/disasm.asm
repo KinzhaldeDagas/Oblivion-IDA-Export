@@ -73,3 +73,27 @@
 0x67B079: pop     ebx
 0x67B07A: add     esp, 14h
 0x67B07D: retn
+0x9C4920: mov     ecx, [ebp-14h]
+0x9C4923: jmp     BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x9C4928: mov     ecx, [ebp-14h]
+0x9C492B: add     ecx, 0Ch
+0x9C492E: jmp     BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x9C4933: mov     ecx, [ebp-14h]
+0x9C4936: add     ecx, 18h
+0x9C4939: jmp     BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x9C493E: mov     ecx, [ebp-14h]
+0x9C4941: add     ecx, 40h ; '@'; slot
+0x9C4944: jmp     NiPointerSlot_Release
+0x9C4949: mov     ecx, [ebp-14h]
+0x9C494C: add     ecx, 48h ; 'H'; slot
+0x9C494F: jmp     NiPointerSlot_Release
+0x9C4954: mov     ecx, [ebp-14h]
+0x9C4957: add     ecx, 68h ; 'h'
+0x9C495A: jmp     BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
+0x9C495F: mov     edx, [esp+arg_4]
+0x9C4963: lea     eax, [edx-10h]
+0x9C4966: mov     ecx, [edx-14h]
+0x9C4969: xor     ecx, eax
+0x9C496B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4970: mov     eax, offset stru_AED260
+0x9C4975: jmp     ___CxxFrameHandler3

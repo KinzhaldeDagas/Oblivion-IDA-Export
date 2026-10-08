@@ -37,7 +37,7 @@
 0x9A1EC8: push    1
 0x9A1ECA: mov     ecx, edi
 0x9A1ECC: call    eax
-0x9A1ECE: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x9A1ECE: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x9A1ED3: push    4; int
 0x9A1ED5: push    4; unsigned int
 0x9A1ED7: lea     ecx, [esi+8]
@@ -54,3 +54,23 @@
 0x9A1F01: pop     esi
 0x9A1F02: add     esp, 10h
 0x9A1F05: retn
+0x9D7D60: mov     ecx, [ebp-10h]
+0x9D7D63: jmp     NiRefObject_destr
+0x9D7D68: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9D7D6D: push    4; int
+0x9D7D6F: push    4; unsigned int
+0x9D7D71: mov     eax, [ebp-10h]
+0x9D7D74: add     eax, 8
+0x9D7D77: push    eax; void *
+0x9D7D78: call    $LN21
+0x9D7D7D: retn
+0x9D7D7E: mov     ecx, [ebp-10h]
+0x9D7D81: add     ecx, 1Ch; slot
+0x9D7D84: jmp     NiPointerSlot_Release
+0x9D7D89: mov     edx, [esp+arg_4]
+0x9D7D8D: lea     eax, [edx-0Ch]
+0x9D7D90: mov     ecx, [edx-10h]
+0x9D7D93: xor     ecx, eax
+0x9D7D95: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7D9A: mov     eax, offset stru_B0025C
+0x9D7D9F: jmp     ___CxxFrameHandler3

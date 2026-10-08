@@ -1,5 +1,7 @@
-int __thiscall start_10_::__tan_default(void *this, char a2)
+int __thiscall start_10_::__tan_default(void *this, int a2, int a3)
 {
-  unknown_libname_160(this);
-  return start_1();
+  char v3; // zf
+
+  unknown_libname_160((int)this, &a2); /*0x983b43*/
+  return start_1(v3, a2, a3);
 }

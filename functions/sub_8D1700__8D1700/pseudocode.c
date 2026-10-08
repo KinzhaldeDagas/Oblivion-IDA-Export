@@ -36,95 +36,95 @@ void __cdecl sub_8D1700(__m128 *a1, __m128 *a2, __m128 *a3, __m128 *a4, int a5)
   float v38; // [esp+1Ch] [ebp-4h]
   float v39; // [esp+1Ch] [ebp-4h]
 
-  v5 = *a3;
-  v6 = *a4;
-  v7 = _mm_sub_ps(*a2, *a3);
-  v8 = _mm_mul_ps(v7, v7);
-  v9 = _mm_sub_ps(*a4, *a3);
-  v33 = _mm_shuffle_ps(v8, v8, 0xAA).m128_f32[0] + (float)(_mm_shuffle_ps(v8, v8, 0x55).m128_f32[0] + v8.m128_f32[0]);
-  v10 = _mm_mul_ps(v9, v9);
-  v36 = _mm_shuffle_ps(v10, v10, 0xAA).m128_f32[0]
+  v5 = *a3; /*0x8d170f*/
+  v6 = *a4; /*0x8d1718*/
+  v7 = _mm_sub_ps(*a2, *a3); /*0x8d171e*/
+  v8 = _mm_mul_ps(v7, v7); /*0x8d1724*/
+  v9 = _mm_sub_ps(*a4, *a3); /*0x8d1740*/
+  v33 = _mm_shuffle_ps(v8, v8, 0xAA).m128_f32[0] + (float)(_mm_shuffle_ps(v8, v8, 0x55).m128_f32[0] + v8.m128_f32[0]); /*0x8d1747*/
+  v10 = _mm_mul_ps(v9, v9); /*0x8d174e*/
+  v36 = _mm_shuffle_ps(v10, v10, 0xAA).m128_f32[0] /*0x8d176b*/
       + (float)(_mm_shuffle_ps(v10, v10, 0x55).m128_f32[0] + v10.m128_f32[0]);
-  v11 = _mm_mul_ps(v9, v7);
-  v34 = _mm_shuffle_ps(v11, v11, 0xAA).m128_f32[0]
+  v11 = _mm_mul_ps(v9, v7); /*0x8d177a*/
+  v34 = _mm_shuffle_ps(v11, v11, 0xAA).m128_f32[0] /*0x8d1797*/
       + (float)(_mm_shuffle_ps(v11, v11, 0x55).m128_f32[0] + v11.m128_f32[0]);
-  v12 = v36 * v33 - v34 * v34;
-  v37 = v12;
-  if ( v12 <= *(float *)&SrcStr )
+  v12 = v36 * v33 - v34 * v34; /*0x8d17a3*/
+  v37 = v12; /*0x8d17a5*/
+  if ( v12 <= *(float *)&SrcStr ) /*0x8d17b4*/
   {
-    v20 = _mm_sub_ps(*a2, v6);
-    v21 = _mm_mul_ps(v20, v20);
-    v35 = _mm_shuffle_ps(v21, v21, 0xAA).m128_f32[0]
+    v20 = _mm_sub_ps(*a2, v6); /*0x8d186a*/
+    v21 = _mm_mul_ps(v20, v20); /*0x8d1874*/
+    v35 = _mm_shuffle_ps(v21, v21, 0xAA).m128_f32[0] /*0x8d1896*/
         + (float)(_mm_shuffle_ps(v21, v21, 0x55).m128_f32[0] + v21.m128_f32[0]);
-    v22 = v35;
-    if ( v33 < (double)v36 )
+    v22 = v35; /*0x8d189a*/
+    if ( v33 < (double)v36 ) /*0x8d189e*/
     {
-      if ( v22 < v36 )
+      if ( v22 < v36 ) /*0x8d1980*/
       {
-        v31 = _mm_mul_ps(_mm_sub_ps(*a1, v5), v9);
-        v32 = (float)(_mm_shuffle_ps(v31, v31, 0xAA).m128_f32[0]
+        v31 = _mm_mul_ps(_mm_sub_ps(*a1, v5), v9); /*0x8d19dc*/
+        v32 = (float)(_mm_shuffle_ps(v31, v31, 0xAA).m128_f32[0] /*0x8d1a01*/
                     + (float)(_mm_shuffle_ps(v31, v31, 0x55).m128_f32[0] + v31.m128_f32[0]))
             / v36;
-        *(_DWORD *)a5 = 0;
-        *(float *)(a5 + 8) = v32;
-        *(float *)(a5 + 4) = fConstant_1 - v32;
+        *(_DWORD *)a5 = 0; /*0x8d1a08*/
+        *(float *)(a5 + 8) = v32; /*0x8d1a0e*/
+        *(float *)(a5 + 4) = fConstant_1 - v32; /*0x8d1a19*/
       }
       else
       {
-        v29 = _mm_mul_ps(_mm_sub_ps(*a1, v6), v20);
-        v30 = (float)(_mm_shuffle_ps(v29, v29, 0xAA).m128_f32[0]
+        v29 = _mm_mul_ps(_mm_sub_ps(*a1, v6), v20); /*0x8d198b*/
+        v30 = (float)(_mm_shuffle_ps(v29, v29, 0xAA).m128_f32[0] /*0x8d19b0*/
                     + (float)(_mm_shuffle_ps(v29, v29, 0x55).m128_f32[0] + v29.m128_f32[0]))
             / v35;
-        *(_DWORD *)(a5 + 4) = 0;
-        *(float *)a5 = v30;
-        *(float *)(a5 + 8) = fConstant_1 - v30;
+        *(_DWORD *)(a5 + 4) = 0; /*0x8d19b7*/
+        *(float *)a5 = v30; /*0x8d19c0*/
+        *(float *)(a5 + 8) = fConstant_1 - v30; /*0x8d19ca*/
       }
     }
-    else if ( v22 < v33 )
+    else if ( v22 < v33 ) /*0x8d18ad*/
     {
-      v27 = _mm_mul_ps(_mm_sub_ps(*a1, v5), v7);
-      v28 = (float)(_mm_shuffle_ps(v27, v27, 0xAA).m128_f32[0]
+      v27 = _mm_mul_ps(_mm_sub_ps(*a1, v5), v7); /*0x8d192f*/
+      v28 = (float)(_mm_shuffle_ps(v27, v27, 0xAA).m128_f32[0] /*0x8d1954*/
                   + (float)(_mm_shuffle_ps(v27, v27, 0x55).m128_f32[0] + v27.m128_f32[0]))
           / v33;
-      *(_DWORD *)(a5 + 8) = 0;
-      *(float *)a5 = v28;
-      *(float *)(a5 + 4) = fConstant_1 - v28;
+      *(_DWORD *)(a5 + 8) = 0; /*0x8d195b*/
+      *(float *)a5 = v28; /*0x8d1964*/
+      *(float *)(a5 + 4) = fConstant_1 - v28; /*0x8d196e*/
     }
     else
     {
-      v23 = v35 < (double)*(float *)&SrcStr;
-      v24 = v35 == *(float *)&SrcStr;
-      *(_DWORD *)(a5 + 4) = 0;
-      if ( v23 || v24 )
+      v23 = v35 < (double)*(float *)&SrcStr; /*0x8d18b6*/
+      v24 = v35 == *(float *)&SrcStr; /*0x8d18b6*/
+      *(_DWORD *)(a5 + 4) = 0; /*0x8d18bc*/
+      if ( v23 || v24 ) /*0x8d18c5*/
       {
-        *(_DWORD *)a5 = 0;
-        *(_DWORD *)(a5 + 8) = 0;
+        *(_DWORD *)a5 = 0; /*0x8d1915*/
+        *(_DWORD *)(a5 + 8) = 0; /*0x8d191b*/
       }
       else
       {
-        v25 = _mm_mul_ps(_mm_sub_ps(*a1, *a4), v20);
-        v26 = (float)(_mm_shuffle_ps(v25, v25, 0xAA).m128_f32[0]
+        v25 = _mm_mul_ps(_mm_sub_ps(*a1, *a4), v20); /*0x8d18d9*/
+        v26 = (float)(_mm_shuffle_ps(v25, v25, 0xAA).m128_f32[0] /*0x8d18fe*/
                     + (float)(_mm_shuffle_ps(v25, v25, 0x55).m128_f32[0] + v25.m128_f32[0]))
             / v35;
-        *(float *)a5 = v26;
-        *(float *)(a5 + 8) = fConstant_1 - v26;
+        *(float *)a5 = v26; /*0x8d1902*/
+        *(float *)(a5 + 8) = fConstant_1 - v26; /*0x8d190c*/
       }
     }
   }
   else
   {
-    v13 = fConstant_1 / v37;
-    v14 = _mm_sub_ps(v5, *a1);
-    v15 = _mm_mul_ps(v14, v7);
-    v16 = _mm_shuffle_ps(v15, v15, 0x55).m128_f32[0] + v15.m128_f32[0];
-    v17 = _mm_shuffle_ps(v15, v15, 0xAA).m128_f32[0];
-    v18 = _mm_mul_ps(v14, v9);
-    v38 = _mm_shuffle_ps(v18, v18, 0xAA).m128_f32[0]
+    v13 = fConstant_1 / v37; /*0x8d17c3*/
+    v14 = _mm_sub_ps(v5, *a1); /*0x8d17ca*/
+    v15 = _mm_mul_ps(v14, v7); /*0x8d17d0*/
+    v16 = _mm_shuffle_ps(v15, v15, 0x55).m128_f32[0] + v15.m128_f32[0]; /*0x8d17da*/
+    v17 = _mm_shuffle_ps(v15, v15, 0xAA).m128_f32[0]; /*0x8d17e4*/
+    v18 = _mm_mul_ps(v14, v9); /*0x8d17e8*/
+    v38 = _mm_shuffle_ps(v18, v18, 0xAA).m128_f32[0] /*0x8d1809*/
         + (float)(_mm_shuffle_ps(v18, v18, 0x55).m128_f32[0] + v18.m128_f32[0]);
-    v19 = v38 * v34 - (float)(v17 + v16) * v36;
-    v39 = v34 * (float)(v17 + v16) - v38 * v33;
-    *(float *)a5 = v19 * v13;
-    *(float *)(a5 + 4) = (v37 - v19 - v39) * v13;
-    *(float *)(a5 + 8) = v39 * v13;
+    v19 = v38 * v34 - (float)(v17 + v16) * v36; /*0x8d1828*/
+    v39 = v34 * (float)(v17 + v16) - v38 * v33; /*0x8d183c*/
+    *(float *)a5 = v19 * v13; /*0x8d1844*/
+    *(float *)(a5 + 4) = (v37 - v19 - v39) * v13; /*0x8d1852*/
+    *(float *)(a5 + 8) = v39 * v13; /*0x8d185d*/
   }
 }

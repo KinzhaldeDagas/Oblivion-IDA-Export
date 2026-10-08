@@ -1,20 +1,20 @@
-float *sub_88ED20()
+NiObject *sub_88ED20()
 {
-  float *v0; // eax
-  float *v1; // esi
+  NiObject *v0; // eax
+  NiObject *v1; // esi
 
-  v0 = (float *)FormHeapAlloc(0x28u);
-  v1 = v0;
-  if ( !v0 )
-    return 0;
-  sub_897600(v0);
-  *(_DWORD *)v1 = &bhkBlendCollisionObject::`vftable';
-  ++dword_BA7A1C;
-  v1[5] = 0.0;
-  *((_WORD *)v1 + 6) &= ~0x100u;
-  v1[6] = 1.0;
-  *((_DWORD *)v1 + 7) = 8;
-  v1[8] = 0.0;
-  v1[9] = 0.0;
-  return v1;
+  v0 = (NiObject *)FormHeapAlloc(0x28u); /*0x88ed44*/
+  v1 = v0; /*0x88ed49*/
+  if ( !v0 ) /*0x88ed5c*/
+    return 0; /*0x88edaa*/
+  sub_897600(v0); /*0x88ed60*/
+  v1->__vftable = (NiObjectVtbl *)&bhkBlendCollisionObject::`vftable'; /*0x88ed67*/
+  ++unk_BA7A1C; /*0x88ed6d*/
+  *(float *)&v1[2].members.m_uiRefCount = 0.0; /*0x88ed74*/
+  LOWORD(v1[1].members.m_uiRefCount) &= ~0x100u; /*0x88ed79*/
+  *(float *)&v1[3].__vftable = 1.0; /*0x88ed7f*/
+  v1[3].members.m_uiRefCount = 8; /*0x88ed82*/
+  v1[4].__vftable = 0; /*0x88ed89*/
+  v1[4].members.m_uiRefCount = 0; /*0x88ed90*/
+  return v1; /*0x88ed99*/
 }

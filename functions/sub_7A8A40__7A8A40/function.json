@@ -1,19 +1,36 @@
 {
-  "callees_count": 36,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A8A40",
+  "chunks": [
+    [
+      "0x7A8A40",
+      "0x7A8C96"
+    ],
+    [
+      "0x9CCEC0",
+      "0x9CCEDB"
+    ]
+  ],
+  "chunks_sha256": "de36160ad5b1e5c9bb76ae7db01971e497e69d953d266f1796a065c087863188",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Core fill-insert for the 0x10-byte vector<CLeafLodEngine::SLodEntry>; handles capacity growth, relocation, and repeated 8-byte pair insertion.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Core fill-insert for the 0x10-byte vector<CLeafLodEngine::SLodEntry>; handles capacity growth, relocation, and repeated 8-byte pair insertion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "OB_stVectorLeafLodEntry_InsertFill_010201A0",
   "end_ea": "0x7A8C96",
+  "evidence_confidence": "Unknown",
   "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_7A8A40",
+  "name": "OB_stVectorLeafLodEntry_InsertFill_010201A0",
   "segment": ".text",
   "sha256": "02bc529a33c6a379a38809dd9cb901e731b0c882f42cf1716f3a3e18aed5c3cb",
   "size": 598,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A8A40",
-  "type": "_DWORD *__thiscall(unsigned int *this, int, char *, unsigned int, int *)",
-  "xrefs_from_count": 261,
+  "total_chunk_size": 625,
+  "type": "void __thiscall(OB_stVectorLeafLodEntry_010201A0 *this, OB_stVectorLeafLodEntry_010201A0 *positionOwner, OB_CLeafLodEngine_SLodEntry_010201A0 *position, unsigned int count, const OB_CLeafLodEngine_SLodEntry_010201A0 *value)",
+  "xrefs_from_count": 272,
   "xrefs_to_count": 1
 }

@@ -11,8 +11,8 @@
 0x7C3AD0: jb      short loc_7C3AC5
 0x7C3AD2: xor     eax, eax
 0x7C3AD4: cmp     dword ptr ds:0B2CBD0h, 0
-0x7C3ADB: mov     [esp+1Ch+var_14], eax
-0x7C3ADF: mov     [esp+1Ch+var_1C], 0
+0x7C3ADB: mov     [esp+1Ch+position], eax
+0x7C3ADF: mov     [esp+1Ch+valueOut], 0
 0x7C3AE6: jbe     loc_7C3C04
 0x7C3AEC: test    eax, eax
 0x7C3AEE: jz      loc_7C3C04
@@ -21,16 +21,15 @@
 0x7C3AF6: push    esi
 0x7C3AF7: push    edi
 0x7C3AF8: jmp     short loc_7C3B00
-0x7C3AFA: align 10h
-0x7C3B00: lea     eax, [esp+2Ch+var_1C]
-0x7C3B04: push    eax
-0x7C3B05: lea     ecx, [esp+30h+var_4]
-0x7C3B09: push    ecx
-0x7C3B0A: lea     edx, [esp+34h+var_14]
-0x7C3B0E: push    edx
-0x7C3B0F: mov     ecx, offset off_B2CBC4
-0x7C3B14: call    sub_452600
-0x7C3B19: mov     ebp, [esp+2Ch+var_1C]
+0x7C3B00: lea     eax, [esp+2Ch+valueOut]
+0x7C3B04: push    eax; valueOut
+0x7C3B05: lea     ecx, [esp+30h+keyOut]
+0x7C3B09: push    ecx; keyOut
+0x7C3B0A: lea     edx, [esp+34h+position]
+0x7C3B0E: push    edx; position
+0x7C3B0F: mov     ecx, offset stru_B2CBC4; self
+0x7C3B14: call    NiTMap_U32Pointer_GetNextEntry
+0x7C3B19: mov     ebp, [esp+2Ch+valueOut]
 0x7C3B1D: test    ebp, ebp
 0x7C3B1F: jz      loc_7C3BF5
 0x7C3B25: mov     ecx, [ebp+24h]
@@ -43,7 +42,7 @@
 0x7C3B3B: mov     ebx, [ecx+8]
 0x7C3B3E: test    ebx, ebx
 0x7C3B40: lea     eax, [ecx+8]
-0x7C3B43: mov     [esp+2Ch+var_4], ecx
+0x7C3B43: mov     [esp+2Ch+keyOut], ecx
 0x7C3B47: mov     ecx, [ecx]
 0x7C3B49: mov     [esp+2Ch+var_18], ecx
 0x7C3B4D: jz      loc_7C3BEA
@@ -75,29 +74,29 @@
 0x7C3BA1: jnz     short loc_7C3B93
 0x7C3BA3: xor     esi, esi
 0x7C3BA5: test    esi, esi
-0x7C3BA7: mov     [esp+2Ch+var_C], esi
+0x7C3BA7: mov     [esp+2Ch+node], esi
 0x7C3BAB: jz      short loc_7C3BB9
-0x7C3BAD: lea     eax, [esp+2Ch+var_C]
-0x7C3BB1: push    eax
-0x7C3BB2: mov     ecx, ebp
-0x7C3BB4: call    sub_7AA860
+0x7C3BAD: lea     eax, [esp+2Ch+node]
+0x7C3BB1: push    eax; node
+0x7C3BB2: mov     ecx, ebp; list
+0x7C3BB4: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x7C3BB9: add     edi, 1
 0x7C3BBC: cmp     edi, [esp+2Ch+var_8]
 0x7C3BC0: jl      short loc_7C3B85
-0x7C3BC2: mov     ebp, [esp+2Ch+var_1C]
-0x7C3BC6: lea     ecx, [esp+2Ch+var_4]
-0x7C3BCA: push    ecx
-0x7C3BCB: lea     ecx, [ebp+20h]
-0x7C3BCE: call    sub_7AA860
+0x7C3BC2: mov     ebp, [esp+2Ch+valueOut]
+0x7C3BC6: lea     ecx, [esp+2Ch+keyOut]
+0x7C3BCA: push    ecx; node
+0x7C3BCB: lea     ecx, [ebp+20h]; list
+0x7C3BCE: call    NiTPointerList_RemoveNode; [Verified] Generic NiTPointerList node-removal helper. Unlinks the supplied node, updates head/tail and neighboring links, invokes the list's FreeNode vfunc, decrements item count, and returns the removed node's data pointer.
 0x7C3BD3: mov     ecx, ebx
 0x7C3BD5: call    sub_812D60
 0x7C3BDA: push    ebx
-0x7C3BDB: call    FormHeapFree
+0x7C3BDB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7C3BE0: add     esp, 4
 0x7C3BE3: sub     dword ptr ds:0B43348h, 1
 0x7C3BEA: cmp     [esp+2Ch+var_18], 0
 0x7C3BEF: jnz     loc_7C3B37
-0x7C3BF5: cmp     [esp+2Ch+var_14], 0
+0x7C3BF5: cmp     [esp+2Ch+position], 0
 0x7C3BFA: jnz     loc_7C3B00
 0x7C3C00: pop     edi
 0x7C3C01: pop     esi

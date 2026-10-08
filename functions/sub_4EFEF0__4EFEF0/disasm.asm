@@ -1,16 +1,16 @@
-0x4EFEF0: push    ebx
+0x4EFEF0: push    ebx; Verified: external cell registration separates one quest-item exterior cell into persistentCell; normal exterior cells are stored in cellMap under packed signed X/Y.
 0x4EFEF1: push    esi
 0x4EFEF2: mov     esi, [esp+8+a3]
 0x4EFEF6: test    esi, esi
 0x4EFEF8: mov     ebx, ecx
 0x4EFEFA: jz      loc_4EFFB8
 0x4EFF00: mov     ecx, esi; this
-0x4EFF02: call    TESObjectCELL_IsInterior
+0x4EFF02: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x4EFF07: test    al, al
 0x4EFF09: jnz     loc_4EFFB8
 0x4EFF0F: push    edi
 0x4EFF10: mov     ecx, esi; this
-0x4EFF12: call    TESForm_GetQuestItem
+0x4EFF12: call    TESForm_GetQuestItem; TESForm_GetQuestItem: returns TESForm flags bit 0x400. Plugin IsStealableForm uses this, so quest items are skipped before RemoveItem.
 0x4EFF17: test    al, al
 0x4EFF19: jz      short loc_4EFF34
 0x4EFF1B: cmp     dword ptr [ebx+34h], 0

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x437BB0",
-    "line": "push    esi",
+    "line": "push    esi; Verified AttachDistant3DTask worker-to-main-thread commit. If task state is not canceled, the reference exists, and it has no NiNode, transfers the stored distant3DNode to the reference, runs the cell/reference 3D attachment path, and sets the distant-3D state bit. Otherwise releases the pending node.",
     "mnemonic": "push",
     "size": 1
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x437BB9",
-    "line": "mov     ecx, [esi+18h]",
+    "line": "mov     ecx, [esi+18h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x437BC9",
-    "line": "push    eax",
+    "line": "push    eax; node",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x437BCA",
-    "line": "call    sub_4D7D10",
+    "line": "call    MobileObject_SetNiNode; Verified MobileObject node setter: invokes the reference's pre-node-update virtual, releases any old NiNode reference, stores the new node in TESObjectREFR+0x40, and AddRefs it. Used by both normal Set3D and the queued distant-tree attach path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x437BD6",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x437BE0",
-    "line": "mov     ecx, TES; ecx0",
+    "line": "mov     ecx, ds:0B333A0h; ecx0",
     "mnemonic": "mov",
     "size": 6
   },
@@ -127,19 +127,19 @@
   },
   {
     "ea": "0x437BEB",
-    "line": "mov     ecx, [esi+18h]",
+    "line": "mov     ecx, [esi+18h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x437BEE",
-    "line": "push    1",
+    "line": "push    1; enabled",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x437BF0",
-    "line": "call    sub_4D7010",
+    "line": "call    TESObjectREFR_SetTemp3DFlag; Verified: AttachDistant3DTask_Run sets bit 0x80000 only after transferring the queued NiNode to the reference and refreshing cell attachment. Probable role is HasTemp3D, matching Fallout's named setter.",
     "mnemonic": "call",
     "size": 5
   },

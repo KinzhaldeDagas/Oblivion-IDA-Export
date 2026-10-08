@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4D06C0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Cell canopy shadow capture path; sets SpeedTree singleton +0x23, updates wind/time via 0x55FA50, renders shadow texture, then restores state.",
     "mnemonic": "push",
     "size": 2
   },
@@ -997,7 +997,7 @@
   },
   {
     "ea": "0x4D0908",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1033,31 +1033,31 @@
   },
   {
     "ea": "0x4D0917",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D091C",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D091E",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D0923",
-    "line": "push    1; float",
+    "line": "push    1; skipTimeAndWindUpdate",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D0925",
-    "line": "push    ebx; int",
+    "line": "push    ebx; camera",
     "mnemonic": "push",
     "size": 1
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x4D092A",
-    "line": "call    sub_55FA50",
+    "line": "call    BSTreeManager_Update; Verified cross-version update divergence: Fallout obtains tree material tint from D3DX atmosphere shader defines[8..10] and writes NiMaterialProperty.emissive RGB. Oblivion instead calls Sky_GetFogProperty and copies dwords at returned-object +0x20/+0x24/+0x28 into three material color triplets. Both refresh manager material state each non-skipped update; the exact Oblivion color channels represented by the three triplets remain Candidate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x4D0A5D",
-    "line": "call    sub_4D0190",
+    "line": "call    sub_4D0190; MoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,31 +1921,31 @@
   },
   {
     "ea": "0x4D0B20",
-    "line": "push    ecx; float",
+    "line": "push    ecx; skipTimeAndWindUpdate",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D0B21",
-    "line": "push    eax; int",
+    "line": "push    eax; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D0B22",
-    "line": "call    sub_55FA50",
+    "line": "call    BSTreeManager_Update; Verified cross-version update divergence: Fallout obtains tree material tint from D3DX atmosphere shader defines[8..10] and writes NiMaterialProperty.emissive RGB. Oblivion instead calls Sky_GetFogProperty and copies dwords at returned-object +0x20/+0x24/+0x28 into three material color triplets. Both refresh manager material state each non-skipped update; the exact Oblivion color channels represented by the three triplets remain Candidate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D0B27",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4D0B29",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2470,5 +2470,185 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B5430",
+    "line": "mov     eax, [ebp-5Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5433",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5436",
+    "line": "jz      locret_9B5448",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B543C",
+    "line": "and     dword ptr [ebp-5Ch], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5440",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5443",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5448",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5449",
+    "line": "mov     eax, [ebp-74h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B544C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B544D",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5452",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5453",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5454",
+    "line": "lea     ecx, [ebp-74h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5457",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B545C",
+    "line": "mov     eax, [ebp-58h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B545F",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5460",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5465",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5466",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B5467",
+    "line": "lea     ecx, [ebp-58h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B546A",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B546F",
+    "line": "lea     ecx, [ebp-60h]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9B5472",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5477",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B547B",
+    "line": "lea     eax, [edx-94h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5481",
+    "line": "mov     ecx, [edx-98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5487",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B5489",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B548E",
+    "line": "mov     eax, offset stru_AE0570",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5493",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

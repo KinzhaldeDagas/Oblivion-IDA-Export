@@ -1,1 +1,1 @@
-JOYINFO
+typedef joyinfo_tag JOYINFO;

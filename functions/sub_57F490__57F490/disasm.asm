@@ -126,7 +126,7 @@
 0x57F618: push    ecx
 0x57F619: mov     ecx, [edx+24h]; this
 0x57F61C: fstp    [esp+24h+a2]; a2
-0x57F61F: call    NiAVObject_UpdateNiAVObject
+0x57F61F: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x57F624: fild    dword ptr ds:0B06C4Ch
 0x57F62A: fstp    [esp+1Ch+var_18]
 0x57F62E: fld     [esp+1Ch+var_18]
@@ -228,9 +228,9 @@
 0x57F775: and     word ptr [eax+18h], 0FFFEh
 0x57F77B: push    ecx
 0x57F77C: mov     ecx, [esi+1Ch]; this
-0x57F77F: fstp    [esp+20h+var_20]; a3
-0x57F782: push    0FA1h; a2
-0x57F787: call    Tile_SetFloat
+0x57F77F: fstp    [esp+20h+var_20]; value
+0x57F782: push    0FA1h; propertyCode
+0x57F787: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x57F78C: pop     esi
 0x57F78D: add     esp, 18h
 0x57F790: retn    8

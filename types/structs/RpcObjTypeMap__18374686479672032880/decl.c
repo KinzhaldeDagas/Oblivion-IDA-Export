@@ -1,1 +1,1 @@
-RpcObjTypeMap
+typedef _RpcObjTypeMap RpcObjTypeMap;

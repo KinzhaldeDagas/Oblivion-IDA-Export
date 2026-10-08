@@ -1,22 +1,23 @@
-BSExtraData *__thiscall sub_41EAF0(ExtraDataList *this, int a2)
+// Verified ExtraLock lifecycle setter: if type 0x31 exists, frees its old ExtraLockData payload and replaces it; otherwise allocates a 16-byte ExtraLock wrapper, constructs it with the supplied 12-byte ExtraLockData*, and adds it to ExtraDataList.
+ExtraLock *__thiscall ExtraDataList_SetLock(ExtraDataList *this, ExtraLockData *lockData)
 {
-  void *ExtraData; // esi
-  _BYTE *v4; // eax
+  ExtraLock *ExtraData; // esi
+  ExtraLock *v4; // eax
 
-  ExtraData = BaseExtraList_GetExtraData(this, kExtraData_Lock);
-  if ( ExtraData )
+  ExtraData = (ExtraLock *)BaseExtraList_GetExtraData(this, kExtraData_Lock); /*0x41eb1c*/
+  if ( ExtraData ) /*0x41eb20*/
   {
-    FormHeapFree(*((_DWORD *)ExtraData + 3));
-    *((_DWORD *)ExtraData + 3) = a2;
+    FormHeapFree((unsigned int)ExtraData->lockData); /*0x41eb26*/
+    ExtraData->lockData = lockData; /*0x41eb32*/
   }
   else
   {
-    v4 = (_BYTE *)FormHeapAlloc(0x10u);
-    if ( v4 )
-      ExtraData = sub_429A80(v4, a2);
+    v4 = (ExtraLock *)FormHeapAlloc(0x10u); /*0x41eb39*/
+    if ( v4 ) /*0x41eb4f*/
+      ExtraData = ExtraLock_ctor(v4, lockData); /*0x41eb5d*/
     else
-      ExtraData = 0;
-    BaseExtraList_AddExtra(this, (BSExtraData *)ExtraData);
+      ExtraData = 0; /*0x41eb61*/
+    BaseExtraList_AddExtra(this, &ExtraData->super); /*0x41eb6e*/
   }
-  return (BSExtraData *)ExtraData;
+  return ExtraData; /*0x41eb75*/
 }

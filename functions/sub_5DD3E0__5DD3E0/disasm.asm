@@ -1,5 +1,5 @@
-0x5DD3E0: push    404h
-0x5DD3E5: call    Menu_GetOpenMenuTile
+0x5DD3E0: push    404h; TrainingMenu button handler entry. The first 15 bytes include a rel32 call at +5 to Menu_GetOpenMenuTile (0x589B70); any relocated gateway must re-encode that call and jump back to 0x5DD3EF rather than byte-copying its displacement.
+0x5DD3E5: call    Menu_GetOpenMenuTile; Rel32 CALL to Menu_GetOpenMenuTile (0x589B70) inside the 15-byte TrainingMenu_HandleButton prologue. Any entry trampoline that steals these bytes must relocate/re-encode this CALL; a raw memcpy trampoline changes the destination.
 0x5DD3EA: add     esp, 4
 0x5DD3ED: test    eax, eax
 0x5DD3EF: jz      locret_5DD4AD
@@ -26,9 +26,9 @@
 0x5DD43A: cmp     [esi+5Ch], eax
 0x5DD43D: jg      short loc_5DD479
 0x5DD43F: mov     eax, [esi+58h]
-0x5DD442: mov     ecx, ds:0B333C4h
-0x5DD448: push    eax
-0x5DD449: call    sub_66A3D0
+0x5DD442: mov     ecx, ds:0B333C4h; this
+0x5DD448: push    eax; skill
+0x5DD449: call    Player_TrainSkill; Train exactly one level in the stored native skill. Player_TrainSkill delegates to the shared skill-level routine, so major/non-major accounting is identical to an ordinary level increase.
 0x5DD44E: mov     ecx, ds:0B333C4h
 0x5DD454: add     ecx, 44h ; 'D'; this
 0x5DD457: call    ExtraDataList_GetContainerChanges
@@ -38,8 +38,8 @@
 0x5DD467: push    ecx
 0x5DD468: push    edx
 0x5DD469: mov     ecx, eax
-0x5DD46B: call    sub_491700
-0x5DD470: call    sub_5DD340
+0x5DD46B: call    sub_491700; Remove the training price from the player's container after the skill increase succeeds.
+0x5DD470: call    TrainingMenu_Close; Native TrainingMenu close routine.
 0x5DD475: pop     esi
 0x5DD476: retn    8
 0x5DD479: mov     eax, ds:0B38CF0h
@@ -58,6 +58,6 @@
 0x5DD49D: push    2; int
 0x5DD49F: call    sub_57DE50
 0x5DD4A4: add     esp, 4
-0x5DD4A7: call    sub_5DD340
+0x5DD4A7: call    TrainingMenu_Close; Native TrainingMenu close routine.
 0x5DD4AC: pop     esi
 0x5DD4AD: retn    8

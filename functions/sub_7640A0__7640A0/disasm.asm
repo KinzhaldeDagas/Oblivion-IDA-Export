@@ -7,6 +7,6 @@
 0x7640B2: push    ecx; int
 0x7640B3: push    eax; int
 0x7640B4: push    edx; int
-0x7640B5: call    sub_761AE0
+0x7640B5: call    sub_761AE0; MoonSugarEffect decode: builds a camera-relative D3D world matrix from NiTransform using column/row layout used for non-skinned world constants; translation subtracts CameraWorldTranslate/flt_B3F930/flt_B3F934.
 0x7640BA: add     esp, 10h
 0x7640BD: retn

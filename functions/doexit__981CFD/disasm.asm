@@ -43,3 +43,11 @@
 0x981D8A: pop     ecx
 0x981D8B: mov     [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
 0x981D92: call    _doexit___$LN15_0
+0x981DB3: xor     esi, esi
+0x981DB5: inc     esi
+0x981DB6: cmp     [ebp+arg_8], 0
+0x981DBA: jz      short _doexit___$LN14_0
+0x981DBC: push    8
+0x981DBE: call    __unlock
+0x981DC3: pop     ecx
+0x981DC4: retn

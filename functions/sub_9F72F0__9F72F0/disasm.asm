@@ -1,7 +1,7 @@
 0x9F72F0: push    offset aSkinShadeDarkL; "Skin shade dark/light"
 0x9F72F5: push    offset aSskinshade; "sSkinshade"
-0x9F72FA: mov     ecx, offset dword_B39230
-0x9F72FF: call    GameSetting_ConstrAndReg
+0x9F72FA: mov     ecx, offset stru_B39230; self
+0x9F72FF: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F7304: push    offset sub_A22B80; void (__cdecl *)()
 0x9F7309: call    _atexit
 0x9F730E: pop     ecx

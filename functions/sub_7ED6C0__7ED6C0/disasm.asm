@@ -1,4 +1,4 @@
-0x7ED6C0: mov     eax, [esp+arg_0]
+0x7ED6C0: mov     eax, [esp+lightSlot];
 0x7ED6C4: sub     esp, 2Ch
 0x7ED6C7: cmp     eax, 8
 0x7ED6CA: push    ebx
@@ -6,7 +6,7 @@
 0x7ED6CC: push    esi
 0x7ED6CD: push    edi
 0x7ED6CE: jge     loc_7EDCC4
-0x7ED6D4: mov     ebp, [esp+3Ch+arg_4]
+0x7ED6D4: mov     ebp, [esp+3Ch+shadowSceneLight]
 0x7ED6D8: test    ebp, ebp
 0x7ED6DA: jnz     short loc_7ED715
 0x7ED6DC: mov     ecx, ds:0B25AD0h
@@ -14,7 +14,7 @@
 0x7ED6E8: add     eax, 1
 0x7ED6EB: movzx   eax, ax
 0x7ED6EE: shl     eax, 4
-0x7ED6F1: add     eax, offset dword_B46498
+0x7ED6F1: add     eax, offset flt_B46498
 0x7ED6F6: mov     [eax], ecx
 0x7ED6F8: mov     ecx, ds:0B25AD8h
 0x7ED6FE: mov     [eax+4], edx
@@ -30,7 +30,7 @@
 0x7ED715: lea     eax, [esp+3Ch+var_28]
 0x7ED719: push    eax
 0x7ED71A: mov     ecx, ebp
-0x7ED71C: call    sub_405AD0
+0x7ED71C: call    ShadowSceneLight_GetLightRef
 0x7ED721: mov     esi, [eax]
 0x7ED723: mov     eax, [esp+3Ch+var_28]
 0x7ED727: test    eax, eax
@@ -45,11 +45,11 @@
 0x7ED73D: jz      short loc_7ED749
 0x7ED73F: mov     edx, [edi]
 0x7ED741: mov     eax, [edx]
-0x7ED743: push    1
+0x7ED743: push    1; w
 0x7ED745: mov     ecx, edi
 0x7ED747: call    eax
-0x7ED749: mov     bl, [ebp+0FCh]
-0x7ED74F: fld     [esp+3Ch+arg_8]
+0x7ED749: mov     bl, [ebp+0FCh]; ShadowSceneLight+0xFC is the proven backingIsNiPointLight classification byte written by ShadowSceneLight_SetBackingLight at 0x7D3468. Zero selects directional vector+ambient path; nonzero selects point position/attenuation path.
+0x7ED74F: fld     [esp+3Ch+dimmer]
 0x7ED753: test    bl, bl
 0x7ED755: fld1
 0x7ED757: jnz     loc_7ED8FC
@@ -64,7 +64,7 @@
 0x7ED77B: lea     ecx, [esp+3Ch+var_10]
 0x7ED77F: mov     [esp+3Ch+var_C], edx
 0x7ED783: mov     [esp+3Ch+var_8], eax
-0x7ED787: call    sub_43F350
+0x7ED787: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7ED78C: fstp    st
 0x7ED78E: fld     [esp+3Ch+var_10]
 0x7ED792: sub     esp, 10h
@@ -84,19 +84,19 @@
 0x7ED7C1: fstp    [esp+4Ch+var_14]
 0x7ED7C5: mov     edx, [esp+4Ch+var_14]
 0x7ED7C9: mov     [eax+0Ch], edx
-0x7ED7CC: mov     eax, [esp+4Ch+arg_0]
+0x7ED7CC: mov     eax, [esp+4Ch+lightSlot]
 0x7ED7D0: add     eax, 11h
-0x7ED7D3: push    eax
-0x7ED7D4: call    sub_7ECAE0
-0x7ED7D9: fld     [esp+50h+arg_8]
+0x7ED7D3: push    eax; slot
+0x7ED7D4: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
+0x7ED7D9: fld     [esp+50h+dimmer]
 0x7ED7DD: add     esp, 14h
 0x7ED7E0: cmp     byte ptr ds:0B42EA7h, 0
 0x7ED7E7: jz      short loc_7ED805
 0x7ED7E9: push    esi
 0x7ED7EA: fstp    st
-0x7ED7EC: push    offset dword_B40224
+0x7ED7EC: push    offset stru_B40224
 0x7ED7F1: call    NiRTTI__IsObjectOfRTTIType
-0x7ED7F6: fld     [esp+44h+arg_8]
+0x7ED7F6: fld     [esp+44h+dimmer]
 0x7ED7FA: add     esp, 8
 0x7ED7FD: test    al, al
 0x7ED7FF: jz      loc_7EDA20
@@ -196,10 +196,10 @@
 0x7ED954: mov     edx, [esp+4Ch+var_14]
 0x7ED958: mov     [eax+8], ecx
 0x7ED95B: mov     [eax+0Ch], edx
-0x7ED95E: mov     eax, [esp+4Ch+arg_0]
+0x7ED95E: mov     eax, [esp+4Ch+lightSlot]
 0x7ED962: add     eax, 9
-0x7ED965: push    eax
-0x7ED966: call    sub_7ECAE0
+0x7ED965: push    eax; slot
+0x7ED966: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x7ED96B: add     esp, 14h
 0x7ED96E: jmp     loc_7EDA22
 0x7ED973: fcom    st(4)
@@ -242,7 +242,7 @@
 0x7ED9DB: fstp    [esp+3Ch+var_10]
 0x7ED9DF: mov     ecx, [esp+3Ch+var_10]
 0x7ED9E3: fld     [esp+3Ch+var_1C]
-0x7ED9E7: mov     ds:0B46498h, ecx
+0x7ED9E7: mov     ds:0B46498h, ecx; Directional-light path writes shared AmbientColor c5 RGB. Leaf pixel shader later multiplies sampled RGB by VS-computed lighting; black c5 plus zero diffuse produces black RGB with alpha intact.
 0x7ED9ED: fstp    [esp+3Ch+var_C]
 0x7ED9F1: mov     edx, [esp+3Ch+var_C]
 0x7ED9F5: fld     [esp+3Ch+var_18]
@@ -351,13 +351,13 @@
 0x7EDB73: mov     ecx, ds:0B42EB8h
 0x7EDB79: mov     ecx, [ecx]
 0x7EDB7B: push    4
-0x7EDB7D: call    NiNode_GetNiPropertyByID
+0x7EDB7D: call    NiNode_GetNiPropertyByID;
 0x7EDB82: test    eax, eax
 0x7EDB84: jz      short loc_7EDBFD
 0x7EDB86: mov     edx, ds:0B42EB8h
 0x7EDB8C: mov     ecx, [edx]
 0x7EDB8E: push    4
-0x7EDB90: call    NiNode_GetNiPropertyByID
+0x7EDB90: call    NiNode_GetNiPropertyByID;
 0x7EDB95: mov     edx, [eax]
 0x7EDB97: mov     ecx, eax
 0x7EDB99: mov     eax, [edx+54h]
@@ -367,7 +367,7 @@
 0x7EDBA3: mov     ecx, ds:0B42EB8h
 0x7EDBA9: mov     ecx, [ecx]
 0x7EDBAB: push    4
-0x7EDBAD: call    NiNode_GetNiPropertyByID
+0x7EDBAD: call    NiNode_GetNiPropertyByID;
 0x7EDBB2: mov     edx, [eax]
 0x7EDBB4: mov     ecx, eax
 0x7EDBB6: mov     eax, [edx+54h]
@@ -377,7 +377,7 @@
 0x7EDBC0: mov     ecx, ds:0B42EB8h
 0x7EDBC6: mov     ecx, [ecx]
 0x7EDBC8: push    4
-0x7EDBCA: call    NiNode_GetNiPropertyByID
+0x7EDBCA: call    NiNode_GetNiPropertyByID;
 0x7EDBCF: test    eax, eax
 0x7EDBD1: jz      short loc_7EDBFD
 0x7EDBD3: fld     dword ptr [eax+9Ch]
@@ -391,7 +391,7 @@
 0x7EDBF1: fstp    [esp+3Ch+var_1C]
 0x7EDBF5: fmul    [esp+3Ch+var_18]
 0x7EDBF9: fstp    [esp+3Ch+var_18]
-0x7EDBFD: mov     ecx, [esp+3Ch+arg_0]
+0x7EDBFD: mov     ecx, [esp+3Ch+lightSlot]
 0x7EDC01: fld     [esp+3Ch+var_20]
 0x7EDC05: lea     edx, [ecx+1]
 0x7EDC08: fstp    [esp+3Ch+var_10]
@@ -401,7 +401,7 @@
 0x7EDC17: fstp    [esp+3Ch+var_C]
 0x7EDC1B: fld     [esp+3Ch+var_18]
 0x7EDC1F: shl     eax, 4
-0x7EDC22: add     eax, offset dword_B46498
+0x7EDC22: add     eax, offset flt_B46498; Writes shared light color slot (slot0 -> leaf c6; slot1 -> c7). This is the material/light-constant route capable of blackening a correctly colored texture.
 0x7EDC27: fstp    [esp+3Ch+var_8]
 0x7EDC2B: test    bl, bl
 0x7EDC2D: fld     [esp+3Ch+var_24]
@@ -431,7 +431,7 @@
 0x7EDC86: mov     edx, [esp+3Ch+var_10]
 0x7EDC8A: fstp    [esp+3Ch+var_4]
 0x7EDC8E: shl     eax, 4
-0x7EDC91: add     eax, offset dword_B46498
+0x7EDC91: add     eax, offset flt_B46498
 0x7EDC96: mov     [eax], edx
 0x7EDC98: mov     edx, [esp+3Ch+var_C]
 0x7EDC9C: mov     [eax+4], edx

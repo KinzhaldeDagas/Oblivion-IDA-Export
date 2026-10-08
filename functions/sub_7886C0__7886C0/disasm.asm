@@ -1,4 +1,4 @@
-0x7886C0: mov     ax, [esp+arg_0]
+0x7886C0: mov     ax, [esp+lodLevel]; Oblivion CIndexedGeometry::GetNumStrips: rejects negative LODs, checked-indexes perLodStrips, and returns the selected inner ushort-pointer-vector size. RT4.1 exposes the same accessor contract.
 0x7886C5: cmp     ax, 0FFFFh
 0x7886C9: push    edi
 0x7886CA: mov     edi, ecx

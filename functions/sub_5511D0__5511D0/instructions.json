@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5511D0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -82,12 +82,6 @@
     "line": "jmp     short loc_5511F0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x5511ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x5511F0",

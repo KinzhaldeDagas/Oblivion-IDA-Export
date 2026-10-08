@@ -3,7 +3,7 @@
 0x700165: push    edi
 0x700166: push    esi
 0x700167: mov     edi, ecx
-0x700169: call    nullsub_returnvVoid_1arg
+0x700169: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x70016E: cmp     dword ptr [esi+0D8h], 500000Bh
 0x700178: jnb     short loc_7001AF
 0x70017A: mov     esi, [edi+10h]
@@ -13,13 +13,13 @@
 0x700188: push    ebx
 0x700189: lea     esp, [esp+0]
 0x700190: mov     ecx, esi
-0x700192: call    sub_452A60
+0x700192: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x700197: mov     ecx, esi
 0x700199: mov     ebx, eax
 0x70019B: call    sub_733830
 0x7001A0: push    esi
 0x7001A1: mov     ecx, edi
-0x7001A3: call    NiNode_AddNiExtraData
+0x7001A3: call    NiObjectNET_AddExtraData; Pass269 ABI and ownership proof: NiObjectNET::AddExtraData consumes one stack argument with RET 4 and also expects owning object in ECX/EBX at this build's callsites. The plugin wrapper must not execute caller-side ADD ESP,4.
 0x7001A8: test    ebx, ebx
 0x7001AA: mov     esi, ebx
 0x7001AC: jnz     short loc_700190
@@ -35,7 +35,7 @@
 0x7001C4: mov     edx, [ecx]
 0x7001C6: mov     eax, [edx+4]
 0x7001C9: call    eax
-0x7001CB: cmp     eax, offset dword_B3FFA8
+0x7001CB: cmp     eax, offset stru_B3FFA8
 0x7001D0: setz    al
 0x7001D3: test    al, al
 0x7001D5: jz      short loc_7001E2

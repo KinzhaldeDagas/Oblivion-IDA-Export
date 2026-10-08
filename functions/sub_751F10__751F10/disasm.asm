@@ -53,7 +53,7 @@
 0x751FDD: lea     edx, [esp+210h+var_1DC]
 0x751FE1: push    edx
 0x751FE2: lea     ecx, [esp+214h+var_108]
-0x751FE9: call    sub_53D4B0
+0x751FE9: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x751FEE: mov     ecx, [eax]
 0x751FF0: mov     [esp+20Ch+var_1D0], ecx
 0x751FF4: mov     edx, [eax+4]
@@ -77,16 +77,16 @@
 0x752032: mov     ecx, 0Dh
 0x752037: lea     edi, [esp+20Ch+var_A0]
 0x75203E: rep movsd
-0x752040: lea     ecx, [esp+20Ch+var_D4]
+0x752040: lea     ecx, [esp+20Ch+out]
 0x752047: push    ecx
 0x752048: lea     ecx, [esp+210h+var_A0]
-0x75204F: call    sub_718A80
+0x75204F: call    sub_718A80;
 0x752054: lea     edx, [esp+20Ch+var_1D0]
 0x752058: push    edx
 0x752059: lea     eax, [esp+210h+var_1DC]
 0x75205D: push    eax
-0x75205E: lea     ecx, [esp+214h+var_D4]
-0x752065: call    sub_53D4B0
+0x75205E: lea     ecx, [esp+214h+out]
+0x752065: call    NiTransform_TransformPoint; ODismemberment: __thiscall NiTransform point transform helper. Plugin hit capture must pass transform in ECX; cdecl here crashes on actor hits.
 0x75206A: mov     ecx, [eax]
 0x75206C: mov     [esp+20Ch+var_1D0], ecx
 0x752070: mov     edx, [eax+4]
@@ -96,7 +96,7 @@
 0x75207E: push    ecx
 0x75207F: lea     edx, [esp+210h+var_1DC]
 0x752083: push    edx
-0x752084: lea     ecx, [esp+214h+var_D4]
+0x752084: lea     ecx, [esp+214h+out]
 0x75208B: mov     [esp+214h+var_1C8], eax
 0x75208F: call    sub_7101F0
 0x752094: mov     ecx, [eax]
@@ -311,19 +311,19 @@
 0x752399: fstp    [esp+218h+var_218]; float
 0x75239C: push    ecx; int
 0x75239D: lea     ecx, [esp+21Ch+var_12C]
-0x7523A4: call    sub_710190
+0x7523A4: call    NiMatrix3_ScaleTo
 0x7523A9: push    eax
 0x7523AA: lea     edx, [esp+218h+var_A0]
 0x7523B1: push    edx
 0x7523B2: lea     ecx, [esp+21Ch+var_150]
 0x7523B9: call    sub_70FFC0
-0x7523BE: push    eax
-0x7523BF: lea     eax, [esp+218h+var_D4]
-0x7523C6: push    eax
-0x7523C7: lea     ecx, [esp+21Ch+var_12C]
-0x7523CE: call    NiMAtrix33_Multiply
+0x7523BE: push    eax; right
+0x7523BF: lea     eax, [esp+218h+out]
+0x7523C6: push    eax; out
+0x7523C7: lea     ecx, [esp+21Ch+var_12C]; this
+0x7523CE: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x7523D3: mov     ecx, eax
-0x7523D5: call    sub_710190
+0x7523D5: call    NiMatrix3_ScaleTo
 0x7523DA: push    eax
 0x7523DB: lea     ecx, [esp+210h+var_108]
 0x7523E2: push    ecx
@@ -345,7 +345,7 @@
 0x75241A: fld     [esp+210h+var_1B4]
 0x75241E: lea     edx, [esp+210h+var_108]
 0x752425: fld     st
-0x752427: lea     eax, [esp+210h+var_D4]
+0x752427: lea     eax, [esp+210h+out]
 0x75242E: fld1
 0x752430: fdivrp  st(1), st
 0x752432: fstp    [esp+210h+var_1FC]
@@ -364,19 +364,19 @@
 0x752456: fld     [esp+218h+var_1FC]
 0x75245A: fstp    [esp+218h+var_218]; float
 0x75245D: push    eax; int
-0x75245E: call    sub_710190
+0x75245E: call    NiMatrix3_ScaleTo
 0x752463: push    eax
 0x752464: lea     ecx, [esp+218h+var_A0]
 0x75246B: push    ecx
 0x75246C: lea     ecx, [esp+21Ch+var_150]
 0x752473: call    sub_710030
-0x752478: push    eax
+0x752478: push    eax; right
 0x752479: lea     edx, [esp+218h+var_6C]
-0x752480: push    edx
-0x752481: lea     ecx, [esp+21Ch+var_12C]
-0x752488: call    NiMAtrix33_Multiply
+0x752480: push    edx; out
+0x752481: lea     ecx, [esp+21Ch+var_12C]; this
+0x752488: call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.
 0x75248D: mov     ecx, eax
-0x75248F: call    sub_710190
+0x75248F: call    NiMatrix3_ScaleTo
 0x752494: push    eax
 0x752495: lea     eax, [esp+210h+var_24]
 0x75249C: push    eax
@@ -424,7 +424,7 @@
 0x752532: fstp    [esp+210h+var_210]; float
 0x752535: push    ecx; int
 0x752536: lea     ecx, [esp+214h+var_150]
-0x75253D: call    sub_710190
+0x75253D: call    NiMatrix3_ScaleTo
 0x752542: lea     edx, [esp+20Ch+var_1A4]
 0x752546: push    edx
 0x752547: lea     eax, [esp+210h+var_1DC]

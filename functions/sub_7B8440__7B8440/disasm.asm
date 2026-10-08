@@ -3,7 +3,7 @@
 0x7B8442: mov     edi, [esp+8+arg_0]
 0x7B8446: push    4
 0x7B8448: mov     ecx, edi
-0x7B844A: call    NiNode_GetNiPropertyByID
+0x7B844A: call    NiNode_GetNiPropertyByID;
 0x7B844F: mov     esi, eax
 0x7B8451: test    esi, esi
 0x7B8453: jz      short loc_7B848C

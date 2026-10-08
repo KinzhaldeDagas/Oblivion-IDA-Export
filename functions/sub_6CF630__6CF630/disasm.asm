@@ -1,4 +1,4 @@
-0x6CF630: sub     esp, 40h
+0x6CF630: sub     esp, 40h; Oblivion: single-active-item accumulated-transform path. Prepares the selected item's accumulation state, evaluates/composes its cached transform relative to the item reference, and returns the composed transform when valid.
 0x6CF633: push    ebx
 0x6CF634: mov     ebx, ecx
 0x6CF636: test    byte ptr [ebx+0Ch], 1
@@ -24,12 +24,12 @@
 0x6CF66A: push    eax; int
 0x6CF66B: push    ecx
 0x6CF66C: fstp    [esp+58h+var_58]; float
-0x6CF66F: call    sub_6CEE20
+0x6CF66F: call    NiBlendAccumTransformInterpolator_UpdateSelectedItem; Oblivion: updates the selected accumulation item (+0x0F) at a requested time. On backward/wrapped time it samples the interpolator range endpoints and composes the wrap delta into the per-item 0x68-byte state and blend cache before sampling the requested time.
 0x6CF674: cmp     byte ptr [ebx+54h], 0
 0x6CF678: jnz     short loc_6CF68C
 0x6CF67A: lea     ebp, [ebx+30h]
 0x6CF67D: mov     ecx, ebp
-0x6CF67F: call    sub_6CBC10
+0x6CF67F: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CF684: test    al, al
 0x6CF686: jz      loc_6CF726
 0x6CF68C: mov     eax, ds:0B24268h
@@ -57,7 +57,7 @@
 0x6CF6ED: call    sub_6CB4D0
 0x6CF6F2: lea     ebp, [ebx+30h]
 0x6CF6F5: mov     ecx, ebp
-0x6CF6F7: call    sub_6CBC10
+0x6CF6F7: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CF6FC: test    al, al
 0x6CF6FE: jz      short loc_6CF706
 0x6CF700: lea     esi, [esp+50h+var_40]
@@ -74,7 +74,7 @@
 0x6CF720: rep movsd
 0x6CF722: mov     byte ptr [ebx+54h], 0
 0x6CF726: mov     ecx, ebp
-0x6CF728: call    sub_6CBC10
+0x6CF728: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6CF72D: test    al, al
 0x6CF72F: jz      short loc_6CF73D
 0x6CF731: pop     edi

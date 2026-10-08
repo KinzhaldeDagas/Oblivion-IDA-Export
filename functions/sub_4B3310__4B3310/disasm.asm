@@ -1,10 +1,10 @@
-0x4B3310: sub     esp, 10Ch
+0x4B3310: sub     esp, 10Ch; Probable: obtains or loads reference-specific model data for a TESBoundObject/TESObjectREFR pair. Direct code checks model path, scale, loaded-state reference count and loader data before falling back to ModelLoader_LoadModelData.
 0x4B3316: mov     eax, ds:0B30AACh
 0x4B331B: xor     eax, esp
 0x4B331D: mov     [esp+10Ch+var_4], eax
 0x4B3324: push    ebx
 0x4B3325: push    esi
-0x4B3326: mov     esi, [esp+114h+arg_0]
+0x4B3326: mov     esi, [esp+114h+reference]
 0x4B332D: push    edi
 0x4B332E: mov     edi, ecx
 0x4B3330: push    esi
@@ -38,12 +38,12 @@
 0x4B3380: fnstsw  ax
 0x4B3382: test    ah, 44h
 0x4B3385: jnp     short loc_4B33C2
-0x4B3387: lea     eax, [esp+118h+var_108]
-0x4B338B: push    eax
-0x4B338C: push    esi
-0x4B338D: mov     ecx, edi
-0x4B338F: call    sub_4B2B00
-0x4B3394: lea     ecx, [esp+118h+var_108]
+0x4B3387: lea     eax, [esp+118h+outPath]
+0x4B338B: push    eax; outPath
+0x4B338C: push    esi; reference
+0x4B338D: mov     ecx, edi; this
+0x4B338F: call    TESBoundObject_BuildReferenceModelPath; Verified: chooses reference-specific model path if available, otherwise the form model path, then appends scale percent (GetScale()*100) to create the per-reference model-loader key.
+0x4B3394: lea     ecx, [esp+118h+outPath]
 0x4B3398: push    ecx
 0x4B3399: mov     ecx, ds:0B33A1Ch
 0x4B339F: call    ModelLoader_IsModelLoaded??
@@ -58,15 +58,15 @@
 0x4B33BE: test    eax, eax
 0x4B33C0: jnz     short loc_4B33DF
 0x4B33C2: push    1
-0x4B33C4: push    edi
-0x4B33C5: call    sub_4A2A30
+0x4B33C4: push    edi; form
+0x4B33C5: call    TESForm_GetLODMult; Verified control flow: returns 2 for form-type bytes {0x13,0x14,0x15,0x16,0x19,0x1B,0x21,0x22,0x26,0x27,0x28,0x2A}, 3 for {0x23,0x24}, otherwise 1. Probable semantic name TESForm_GetLODMult is supported by the direct queued-tree argument use and Fallout's named TES::GetLODMult; individual type-group meanings are not decoded here.
 0x4B33CA: mov     ecx, ds:0B33A1Ch
 0x4B33D0: add     esp, 4
 0x4B33D3: push    eax
 0x4B33D4: mov     eax, [esp+120h+var_10C]
 0x4B33D8: push    eax
 0x4B33D9: push    ebx
-0x4B33DA: call    sub_439EB0
+0x4B33DA: call    ModelLoader_LoadModelData; ODismemberment: shared ModelLoader-backed NIF/model data load used by BSTempEffectParticle before clone/cached-instance selection.
 0x4B33DF: mov     ecx, [esp+118h+var_4]
 0x4B33E6: pop     edi
 0x4B33E7: pop     esi

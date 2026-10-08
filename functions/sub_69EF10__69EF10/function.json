@@ -1,19 +1,32 @@
 {
-  "callees_count": 16,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_69EF10",
+  "chunks": [
+    [
+      "0x69EF10",
+      "0x69F05A"
+    ]
+  ],
+  "chunks_sha256": "d638a91728062b4e193d4431f02111ccb534ade28ef6b7eacc8c6cf50b68ab18",
+  "comment_regular": "Verified MagicModelHitEffect +0x84 PostLink callback uses owner ActiveEffect and target linkContext to restore model/target state, then calls Update and returns its bool result. ActiveEffect_Base_PostLink ignores that return and registers the object with ActorProcessManager.",
+  "comment_repeatable": "Verified MagicModelHitEffect +0x84 PostLink callback uses owner ActiveEffect and target linkContext to restore model/target state, then calls Update and returns its bool result. ActiveEffect_Base_PostLink ignores that return and registers the object with ActorProcessManager.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "MagicModelHitEffect_PostLink",
   "end_ea": "0x69F05A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_69EF10",
+  "name": "MagicModelHitEffect_PostLink",
   "segment": ".text",
   "sha256": "d638a91728062b4e193d4431f02111ccb534ade28ef6b7eacc8c6cf50b68ab18",
   "size": 330,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x69EF10",
-  "type": "int __thiscall(void *this, int Dst, int, float)",
+  "total_chunk_size": 330,
+  "type": "bool __thiscall(MagicHitEffect *this, ActiveEffect *ownerActiveEffect, TESObjectREFR *linkContext, void *fallbackData)",
   "xrefs_from_count": 131,
   "xrefs_to_count": 1
 }

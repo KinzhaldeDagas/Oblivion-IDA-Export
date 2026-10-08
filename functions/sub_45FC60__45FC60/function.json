@@ -1,19 +1,32 @@
 {
-  "callees_count": 14,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x45FC60",
+      "0x45FD96"
+    ]
+  ],
+  "chunks_sha256": "155b88fe51db54f0e09478a5da869a58b6ce1527ea936489f600a421ba23fc04",
+  "comment_regular": "[Verified] TESSaveLoadGame_LoadTempEffectsList version-gates the Temp Effects List chunk and calls ActorProcessManager_LoadTempEffects for save versions >=0x5E; earlier versions skip the chunk body.",
+  "comment_repeatable": "[Verified] TESSaveLoadGame_LoadTempEffectsList version-gates the Temp Effects List chunk and calls ActorProcessManager_LoadTempEffects for save versions >=0x5E; earlier versions skip the chunk body.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_45FC60",
+  "display_name": "TESSaveLoadGame_LoadTempEffectsList",
   "end_ea": "0x45FD96",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_45FC60",
+  "name": "TESSaveLoadGame_LoadTempEffectsList",
   "segment": ".text",
   "sha256": "155b88fe51db54f0e09478a5da869a58b6ce1527ea936489f600a421ba23fc04",
   "size": 310,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x45FC60",
-  "type": "unsigned __int8 __userpurge@<al>(int@<ecx>, int@<ebp>, int@<edi>, int)",
+  "total_chunk_size": 310,
+  "type": "unsigned __int8 __userpurge@<al>(int@<ecx>, char@<bpl>, int@<edi>, int)",
   "xrefs_from_count": 117,
   "xrefs_to_count": 1
 }

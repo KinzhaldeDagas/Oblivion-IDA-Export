@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4BD380",
+  "chunks": [
+    [
+      "0x4BD380",
+      "0x4BD427"
+    ],
+    [
+      "0x9B4320",
+      "0x9B4343"
+    ]
+  ],
+  "chunks_sha256": "72467ca57f884842a23149f918215d4b79260694b6ba311a06eeeeac13994aca",
+  "comment_regular": "Verified per-cell cancellation path: looks up the packed cell label in g_DistantLODLoaderTasksByCell, cancels the referenced task through generic IOTask cancellation, then releases the lookup reference. GridDistantArray_UnloadCell calls this before clearing the cell slot.",
+  "comment_repeatable": "Verified per-cell cancellation path: looks up the packed cell label in g_DistantLODLoaderTasksByCell, cancels the referenced task through generic IOTask cancellation, then releases the lookup reference. GridDistantArray_UnloadCell calls this before clearing the cell slot.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "DistantLODLoaderTaskMap_CancelForCell",
   "end_ea": "0x4BD427",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BD380",
+  "name": "DistantLODLoaderTaskMap_CancelForCell",
   "segment": ".text",
   "sha256": "7abc31b255035183b2d381abd84af74bc7d9f87634de4472fb991e8f533a210d",
   "size": 167,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BD380",
-  "type": "void __thiscall(void *this, __int16, volatile LONG *)",
-  "xrefs_from_count": 60,
+  "total_chunk_size": 202,
+  "type": "void __thiscall(LockFreeMap *this, __int16 groupX, unsigned int groupY)",
+  "xrefs_from_count": 71,
   "xrefs_to_count": 1
 }

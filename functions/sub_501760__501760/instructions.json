@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x501760",
-    "line": "push    ecx",
+    "line": "push    ecx; [Controller decode 2026-07-09] SetSize execute callback. Parses target size and updates actor character-controller target size.",
     "mnemonic": "push",
     "size": 1
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x50178F",
-    "line": "call    Script_ExtractArgs",
+    "line": "call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x5017BB",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x5017CE",
-    "line": "call    sub_894BD0",
+    "line": "call    bhkCharacterController_SetTargetSize",
     "mnemonic": "call",
     "size": 5
   },

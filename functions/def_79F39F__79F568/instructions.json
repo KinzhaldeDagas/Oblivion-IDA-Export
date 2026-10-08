@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x79F568",
-    "line": "push    eax; jumptable 0079F39F default case",
+    "line": "push    eax; Malformed nested frond-texture token edge. Hex-Rays renders this shared exception path as JUMPOUT; it is not an unresolved vector-control-flow edge and does not alter the normal token 14001 termination path.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x79F56E",
-    "line": "lea     esi, [esp+8+arg_A4]",
+    "line": "lea     esi, [esp+8+result]; result",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x79F575",
-    "line": "call    sub_7A54A0",
+    "line": "call    OB_IdvFormatString_010201A0; Oblivion binary evidence: IdvFormatString. Formats variadic arguments with vsprintf into a 1024-byte stack buffer, constructs the hidden-result 28-byte SSO string, assigns strlen(buffer) bytes, and returns the result pointer in EAX. SpeedTreeRT 4.1 IdvGlobals.h:77-93 corroborates the name and fixed buffer only after observation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -31,19 +31,19 @@
   },
   {
     "ea": "0x79F57D",
-    "line": "push    ebx",
+    "line": "push    ebx; appendSystemError",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F57E",
-    "line": "push    eax",
+    "line": "push    eax; details",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79F57F",
-    "line": "lea     ecx, [esp+8+arg_54]",
+    "line": "lea     ecx, [esp+8+arg_54]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x79F58B",
-    "line": "call    sub_789190",
+    "line": "call    OB_IdvFileError_Ctor_010201A0; Oblivion IdvFileError constructor: builds details + ' [' + optional strerror(errno) + ']', constructs the binary runtime_error base, then installs IdvFileError vftable. RT4.1 corroborates the message expression but its st_string inheritance is not used for this older binary layout.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x863720",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Allocates a 0x108-byte Lighting30ShaderProperty, initializes its BSShaderPPLightingProperty base and derived fields, then copies clone state from the source property.",
     "mnemonic": "push",
     "size": 2
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x863766",
-    "line": "call    ??0BSShaderPPLightingProperty@@QAE@XZ; BSShaderPPLightingProperty::BSShaderPPLightingProperty(void)",
+    "line": "call    ??0BSShaderPPLightingProperty@@QAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty constructor initializes the reference-counted TextureEffectData slot at this+0xE0 (DWORD index 0x38) to null. TextureEffectProperty_SetData replaces that same offset; BSShaderPPLightingProperty destructor releases and clears it before chaining to BSShaderLightingProperty. Fallout's typed property layout calls the member spTexEffectData at the same +0xE0 offset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x86376D",
-    "line": "mov     dword ptr [esi], offset ??_7Lighting30ShaderProperty@@6B@; const Lighting30ShaderProperty::`vftable'",
+    "line": "mov     dword ptr [esi], offset Lighting30ShaderProperty_vftable; Clone creation route: store exact Lighting30ShaderProperty vptr A9576C after base construction.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -193,25 +193,25 @@
   },
   {
     "ea": "0x863799",
-    "line": "mov     eax, [esp+1Ch+arg_0]",
+    "line": "mov     eax, [esp+1Ch+cloningProcess]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x86379D",
-    "line": "push    eax",
+    "line": "push    eax; cloningProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x86379E",
-    "line": "push    esi",
+    "line": "push    esi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x86379F",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x8637A9",
-    "line": "call    sub_863540",
+    "line": "call    Lighting30ShaderProperty__CopyToMembers; Copies the inherited BSShaderPPLightingProperty state into the clone destination, then copies Lighting30's four floats at +0xF0..+0xFC and refcount-assigns the derived texture/object at +0x104.",
     "mnemonic": "call",
     "size": 5
   },
@@ -274,5 +274,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CA7E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA7EF",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F2",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA7F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7FC",
+    "line": "mov     eax, offset stru_AF2E8C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA801",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

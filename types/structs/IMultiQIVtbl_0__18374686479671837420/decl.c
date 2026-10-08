@@ -1,1 +1,1 @@
-IMultiQIVtbl_0
+typedef IMultiQIVtbl IMultiQIVtbl_0;

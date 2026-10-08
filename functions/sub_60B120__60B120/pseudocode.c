@@ -1,444 +1,502 @@
-void __thiscall sub_60B120(ArrowProjectile *this, int *arg0, float *arg4, TESChildCELL *arg8, int a5)
+// Resolve a non-Actor TESObjectREFR impact from world position/normal and the contacted Havok collision object. Builds state-1 attachment data, ray-resolves material/subshape, applies retained AMMO enchantment, poison, then bow enchantment through the shooter's MagicCaster, restores prior caster state, emits hit events, applies impulse, and selects attached or free-impact state.
+void __thiscall ArrowProjectile_HandleReferenceImpact(
+        ArrowProjectile *this,
+        const NiPoint3 *impactPosition,
+        const NiPoint3 *impactNormal,
+        TESObjectREFR *struckReference,
+        void *collisionObject)
 {
   ArrowProjectile_CollisionData *v6; // eax
-  ArrowProjectile_CollisionData *unk05C; // eax
-  ArrowProjectile_CollisionData *v8; // eax
-  float *v9; // eax
+  float *v7; // eax
   bhkCharacterProxy *CharProxy; // eax
-  char *v11; // eax
-  float *v12; // eax
-  __int128 v13; // xmm0
-  double v14; // st6
+  char *v9; // eax
+  char *LinearVelocityPtr; // eax
+  __int128 v11; // xmm0
+  double v12; // st6
   NiNode *(__thiscall *GetNiNode)(TESObjectREFR *); // edx
   double speed; // st7
-  int v17; // eax
-  NiTransform *v18; // eax
-  float *v19; // ecx
-  NiNode *(__thiscall *v20)(TESObjectREFR *); // edx
-  int v21; // eax
-  TESChildCELL *v22; // esi
+  int v15; // eax
+  NiTransform *v16; // eax
+  float *v17; // ecx
+  NiNode *(__thiscall *v18)(TESObjectREFR *); // edx
+  int v19; // eax
+  TESChildCELL *v20; // esi
   Actor *shooter; // ecx
-  Actor *v24; // edi
-  int v25; // eax
-  TESForm *v26; // eax
-  Atmosphere *v27; // eax
-  NiAVObject *v28; // eax
-  ArrowProjectile_CollisionData *v29; // eax
-  int v30; // eax
+  Actor *v22; // edi
+  int v23; // eax
+  TESForm *v24; // eax
+  Atmosphere *v25; // eax
+  NiAVObject *v26; // eax
+  ArrowProjectile_CollisionData *unk05C; // eax
+  _DWORD *BhkCollisionObjectRecursive; // eax
+  int v29; // eax
+  int *v30; // eax
   int v31; // eax
-  int *v32; // eax
+  float *v32; // esi
   int v33; // eax
-  float *v34; // esi
-  int v35; // eax
-  __m128 *v36; // eax
-  float v37; // edi
-  int v38; // eax
-  ArrowProjectile_CollisionData *v39; // eax
-  double v40; // st7
-  double v41; // st5
-  double v42; // st6
-  double v43; // st7
-  const char *v44; // edi
-  TESObjectCELL *ParentCell; // eax
-  TESObjectCELL *v46; // eax
-  float *v47; // eax
-  Actor *v48; // ecx
-  int v49; // eax
+  __m128 *v34; // eax
+  float v35; // edi
+  int v36; // eax
+  ArrowProjectile_CollisionData *v37; // eax
+  double v38; // st7
+  double v39; // st5
+  double v40; // st6
+  double v41; // st7
+  const char *v42; // edi
+  TESObjectCELL *DwordAtOffset40; // eax
+  UInt32 v44; // eax
+  float *v45; // eax
+  Actor *v46; // ecx
+  int v47; // eax
   MagicCaster *p_magicCaster; // ecx
   EnchantmentItem *arrowEnch; // eax
   void (__thiscall **p_SetCastingTarget)(MagicCaster *, MagicTarget *); // edi
-  int v53; // eax
-  TESForm *v54; // eax
+  int v51; // eax
+  TESForm *v52; // eax
   AlchemyItem *poison; // edx
-  void (__thiscall **v56)(MagicCaster *, MagicTarget *); // edi
-  int v57; // eax
-  TESForm *v58; // eax
+  void (__thiscall **v54)(MagicCaster *, MagicTarget *); // edi
+  int v55; // eax
+  TESForm *v56; // eax
   EnchantmentItem *bowEnch; // edx
-  void (__thiscall **v60)(MagicCaster *, MagicTarget *); // edi
-  int v61; // eax
-  TESForm *v62; // eax
-  TESChildCELL *v63; // edi
-  TESObjectCELL *v64; // eax
-  int v65; // eax
-  _DWORD *v66; // ecx
+  void (__thiscall **v58)(MagicCaster *, MagicTarget *); // edi
+  int v59; // eax
+  TESForm *v60; // eax
+  TESChildCELL *v61; // edi
+  TESObjectCELL *v62; // eax
+  int v63; // eax
+  _DWORD *v64; // ecx
   NiTransform *p_m_worldTransform; // edi
-  NiTransform *v68; // eax
-  int v69; // eax
+  NiTransform *v66; // eax
+  int v67; // eax
   float x; // esi
   float y; // eax
   float z; // edx
-  float v73; // [esp+0h] [ebp-260h]
-  int v74; // [esp+4h] [ebp-25Ch]
-  int v75; // [esp+18h] [ebp-248h]
-  UInt32 v76; // [esp+1Ch] [ebp-244h]
-  const char *v77; // [esp+20h] [ebp-240h]
-  int v78; // [esp+24h] [ebp-23Ch]
+  float v71; // [esp+0h] [ebp-260h]
+  int v72; // [esp+4h] [ebp-25Ch]
+  float *a2; // [esp+24h] [ebp-23Ch]
   float *a2a; // [esp+24h] [ebp-23Ch]
   signed int a2b; // [esp+24h] [ebp-23Ch]
-  float v81; // [esp+48h] [ebp-218h]
-  float v82; // [esp+48h] [ebp-218h]
+  int v76; // [esp+2Ch] [ebp-234h]
+  int v77; // [esp+30h] [ebp-230h]
+  int v78; // [esp+34h] [ebp-22Ch]
+  int v79; // [esp+38h] [ebp-228h]
+  int v80; // [esp+3Ch] [ebp-224h]
+  int v81; // [esp+40h] [ebp-220h]
+  int v82; // [esp+44h] [ebp-21Ch]
   float v83; // [esp+48h] [ebp-218h]
-  float v84; // [esp+4Ch] [ebp-214h]
-  _DWORD *v85; // [esp+4Ch] [ebp-214h]
-  float v86; // [esp+50h] [ebp-210h]
-  NiAVObject *v87; // [esp+50h] [ebp-210h]
-  float v88; // [esp+54h] [ebp-20Ch]
-  void *v89; // [esp+54h] [ebp-20Ch]
-  MagicTarget *v90; // [esp+54h] [ebp-20Ch]
+  float v84; // [esp+48h] [ebp-218h]
+  float v85; // [esp+48h] [ebp-218h]
+  float collisionObjectb; // [esp+4Ch] [ebp-214h]
+  _DWORD *collisionObjecta; // [esp+4Ch] [ebp-214h]
+  float v88; // [esp+50h] [ebp-210h]
+  NiAVObject *v89; // [esp+50h] [ebp-210h]
+  float v90; // [esp+54h] [ebp-20Ch]
+  void *v91; // [esp+54h] [ebp-20Ch]
+  MagicTarget *v92; // [esp+54h] [ebp-20Ch]
   NiPoint3 a3; // [esp+58h] [ebp-208h] BYREF
-  float v92; // [esp+64h] [ebp-1FCh]
-  TESChildCELL *v93; // [esp+68h] [ebp-1F8h]
-  int v94; // [esp+6Ch] [ebp-1F4h]
-  float *v95; // [esp+70h] [ebp-1F0h]
+  float v94; // [esp+64h] [ebp-1FCh]
+  TESChildCELL *v95; // [esp+68h] [ebp-1F8h]
+  int v96; // [esp+6Ch] [ebp-1F4h]
+  const NiPoint3 *v97; // [esp+70h] [ebp-1F0h]
   NiPoint3 a4; // [esp+74h] [ebp-1ECh] BYREF
-  int v97; // [esp+80h] [ebp-1E0h] BYREF
-  NiTransform a2; // [esp+84h] [ebp-1DCh] BYREF
-  unsigned int v99; // [esp+C0h] [ebp-1A0h]
-  float v100; // [esp+C4h] [ebp-19Ch]
-  __m128 v101; // [esp+D0h] [ebp-190h] BYREF
-  __m128 v102; // [esp+E0h] [ebp-180h] BYREF
-  int v103; // [esp+F0h] [ebp-170h]
-  int v104; // [esp+F4h] [ebp-16Ch]
-  __m128 v105[4]; // [esp+100h] [ebp-160h] BYREF
-  __m128 v106[3]; // [esp+140h] [ebp-120h] BYREF
-  __m128 v107; // [esp+170h] [ebp-F0h] BYREF
-  __m128 v108[4]; // [esp+180h] [ebp-E0h] BYREF
-  __m128 v109[4]; // [esp+1C0h] [ebp-A0h] BYREF
-  __m128 v110[4]; // [esp+200h] [ebp-60h] BYREF
-  unsigned int v111; // [esp+25Ch] [ebp-4h]
-  NiPoint3 v112; // 0:^10.12
+  int v99; // [esp+80h] [ebp-1E0h] BYREF
+  NiTransform normalZ; // [esp+84h] [ebp-1DCh] BYREF
+  unsigned int v101; // [esp+C0h] [ebp-1A0h]
+  float v102; // [esp+C4h] [ebp-19Ch]
+  __m128 v103; // [esp+D0h] [ebp-190h] BYREF
+  __m128 v104; // [esp+E0h] [ebp-180h] BYREF
+  int v105; // [esp+F0h] [ebp-170h]
+  int v106; // [esp+F4h] [ebp-16Ch]
+  __m128 v107[4]; // [esp+100h] [ebp-160h] BYREF
+  __m128 v108[3]; // [esp+140h] [ebp-120h] BYREF
+  __m128 v109; // [esp+170h] [ebp-F0h] BYREF
+  __m128 v110[4]; // [esp+180h] [ebp-E0h] BYREF
+  __m128 v111[4]; // [esp+1C0h] [ebp-A0h] BYREF
+  __m128 v112[4]; // [esp+200h] [ebp-60h] BYREF
+  unsigned int v113; // [esp+25Ch] [ebp-4h]
+  NiPoint3 v114; // 0:^10.12
+  NiPoint3 v115; // 0:^1C.12
 
-  v95 = arg4;
-  v93 = arg8;
-  v6 = (ArrowProjectile_CollisionData *)FormHeapAlloc(0x54u);
-  this->unk05C = v6;
-  LODWORD(v6->unk00[0]) = 1;
-  this->unk05C->unk2C[0] = 0.0;
-  this->unk05C->ninode = 0;
-  unk05C = this->unk05C;
-  unk05C->unk00[4] = *arg4;
-  unk05C->unk00[5] = arg4[1];
-  unk05C->unk00[6] = arg4[2];
-  v8 = this->unk05C;
-  LODWORD(v8->unk00[1]) = *arg0;
-  LODWORD(v8->unk00[2]) = arg0[1];
-  LODWORD(v8->unk00[3]) = arg0[2];
-  qmemcpy(&this->unk05C->unk2C[1], &stru_B26AF0[0xA].unk2C, 0x24u);
-  v9 = &this->unk05C->unk00[7];
-  *v9 = Vector3_InitValue_;
-  v9[1] = *(&Vector3_InitValue_ + 1);
-  v9[2] = dword_B3F9B0;
-  if ( MobileObject_GetCharProxy(&this->super) )
+  v97 = impactNormal; /*0x60b174*/
+  v95 = (TESChildCELL *)struckReference; /*0x60b178*/
+  v6 = (ArrowProjectile_CollisionData *)FormHeapAlloc(0x54u); /*0x60b180*/
+  this->unk05C = v6; /*0x60b185*/
+  LODWORD(v6->unk00[0]) = 1;                    // Resolved non-Actor TESObjectREFR impact initializes collision record state 1. /*0x60b188*/
+  this->unk05C->unk2C[0] = 0.0; /*0x60b193*/
+  this->unk05C->ninode = 0; /*0x60b199*/
+  *(NiPoint3 *)&this->unk05C->unk00[4] = *impactNormal; /*0x60b1a1*/
+  *(NiPoint3 *)&this->unk05C->unk00[1] = *impactPosition; /*0x60b1b8*/
+  qmemcpy(&this->unk05C->unk2C[1], &stru_B26AF0[0xA].unk2C, 0x24u); /*0x60b1da*/
+  v7 = &this->unk05C->unk00[7]; /*0x60b1e5*/
+  *v7 = g_zeroNiPoint3.x; /*0x60b1e8*/
+  v7[1] = g_zeroNiPoint3.y; /*0x60b1f0*/
+  v7[2] = g_zeroNiPoint3.z; /*0x60b1fe*/
+  if ( MobileObject_GetCharProxy(&this->super) ) /*0x60b201*/
   {
-    CharProxy = MobileObject_GetCharProxy(&this->super);
-    if ( CharProxy && (v11 = *((char **)CharProxy + 2)) != 0 )
-      v12 = (float *)sub_8AC0A0(v11);
+    CharProxy = MobileObject_GetCharProxy(&this->super); /*0x60b210*/
+    if ( CharProxy && (v9 = *((char **)CharProxy + 2)) != 0 ) /*0x60b21e*/
+      LinearVelocityPtr = bhkWorldObject_GetLinearVelocityPtr(v9); /*0x60b222*/
     else
-      v12 = (float *)&stru_BA7A40;
-    v13 = *(_OWORD *)v12;
-    a2.rot.data[2][1] = *v12;
-    v14 = flt_A7DEB4;
-    *(_OWORD *)&a2.rot.data[1][0] = v13;
-    if ( -v14 == a2.rot.data[2][1] )
+      LinearVelocityPtr = (char *)&OB_ShaderConstantStorage_010201A0[0x1870B]; /*0x60b229*/
+    v11 = *(_OWORD *)LinearVelocityPtr; /*0x60b22e*/
+    normalZ.rot.data[2][1] = *(float *)LinearVelocityPtr; /*0x60b231*/
+    v12 = flt_A7DEB4; /*0x60b23b*/
+    *(_OWORD *)&normalZ.rot.data[1][0] = v11; /*0x60b241*/
+    if ( -v12 == normalZ.rot.data[2][1] ) /*0x60b24f*/
     {
-      if ( this->super.vtbl->super.GetNiNode(this) )
+      if ( this->super.vtbl->super.GetNiNode(this) ) /*0x60b25f*/
       {
-        GetNiNode = this->super.vtbl->super.GetNiNode;
-        speed = this->speed;
-        v86 = speed * *(float *)&dword_B258DC;
-        v92 = speed * *(float *)&qword_B258E0;
-        v84 = speed * *((float *)&qword_B258E0 + 1);
-        a3.x = v86;
-        a3.y = v92;
-        a3.z = v84;
-        v17 = (int)GetNiNode((TESObjectREFR *)this);
-        v18 = sub_7101F0((NiTransform *)(v17 + 0x64), &a2, &a3);
-        v19 = &this->unk05C->unk00[7];
-        *v19 = v18->rot.data[0][0];
-        v19[1] = v18->rot.data[0][1];
-        v19[2] = v18->rot.data[0][2];
+        GetNiNode = this->super.vtbl->super.GetNiNode; /*0x60b272*/
+        speed = this->speed; /*0x60b278*/
+        v88 = speed * stru_B258DC.x; /*0x60b286*/
+        v94 = speed * stru_B258DC.y; /*0x60b292*/
+        collisionObjectb = speed * stru_B258DC.z; /*0x60b29c*/
+        a3.x = v88; /*0x60b2a4*/
+        a3.y = v94; /*0x60b2ac*/
+        a3.z = collisionObjectb; /*0x60b2b4*/
+        v15 = (int)GetNiNode((TESObjectREFR *)this); /*0x60b2b8*/
+        v16 = sub_7101F0((NiTransform *)(v15 + 0x64), &normalZ, &a3); /*0x60b2c7*/
+        v17 = &this->unk05C->unk00[7]; /*0x60b2d1*/
+        *v17 = v16->rot.data[0][0]; /*0x60b2d4*/
+        v17[1] = v16->rot.data[0][1]; /*0x60b2d9*/
+        v17[2] = v16->rot.data[0][2]; /*0x60b2df*/
       }
     }
     else
     {
-      sub_43F3E0(&this->unk05C->unk00[7], (__m128 *)a2.rot.data[1]);
+      HavokVector_ToWorldVector(&this->unk05C->unk00[7], (__m128 *)normalZ.rot.data[1]); /*0x60b2f0*/
     }
   }
-  v20 = this->super.vtbl->super.GetNiNode;
-  this->unk060 = 1;
-  v85 = 0;
-  v21 = (int)v20((TESObjectREFR *)this);
-  v22 = v93;
-  v87 = (NiAVObject *)v21;
-  if ( v93 && v21 )
+  v18 = this->super.vtbl->super.GetNiNode; /*0x60b2fa*/
+  this->unk060 = 1; /*0x60b302*/
+  collisionObjecta = 0; /*0x60b309*/
+  v19 = (int)v18((TESObjectREFR *)this); /*0x60b311*/
+  v20 = v95;                                    // RealArenaTraining fidelity pass: ESI is loaded from the hit-ref argument/local used for both arrow event paths. /*0x60b313*/
+  v89 = (NiAVObject *)v19; /*0x60b319*/
+  if ( v95 && v19 ) /*0x60b325*/
   {
-    shooter = this->shooter;
-    if ( shooter )
+    shooter = this->shooter; /*0x60b32b*/
+    if ( shooter ) /*0x60b330*/
     {
-      if ( shooter->vtbl->GetCombatController(shooter) )
+      if ( shooter->vtbl->GetCombatController(shooter) ) /*0x60b33a*/
       {
-        v24 = this->shooter;
-        v78 = (*((int (__thiscall **)(TESChildCELL *))v22->vtbl + 0x5D))(v22);
-        v25 = (int)v24->vtbl->GetCombatController(v24);
-        sub_618120(v25, (char)v24, v78, 0.0);
+        v22 = this->shooter; /*0x60b348*/
+        a2 = (float *)(*((int (__thiscall **)(TESChildCELL *))v20->vtbl + 0x5D))(v20); /*0x60b351*/
+        v23 = (int)v22->vtbl->GetCombatController(v22); /*0x60b35c*/
+        sub_618120(v23, (char)v22, a2, 0.0); /*0x60b360*/
       }
     }
-    this->unk05C->ninode = (NiNode *)v22;
-    a2a = &this->unk05C->ninode->members.super.m_localTransform.rot.data[1][2];
-    v26 = this->super.vtbl->super.GetBaseForm(this);
-    Script_AddEventToExtraScript(v26, a2a, 0x100);
-    if ( a5 )
+    this->unk05C->ninode = (NiNode *)v20; /*0x60b368*/
+    a2a = &this->unk05C->ninode->members.super.m_localTransform.rot.data[1][2]; /*0x60b37b*/
+    v24 = this->super.vtbl->super.GetBaseForm(this); /*0x60b384*/
+    Script_AddEventToExtraScript(v24, a2a, 0x100);// RealArenaTraining fidelity pass: first arrow Script_AddEventToExtraScript in sub_60B120; EBX is ArrowProjectile and ESI remains hit ref. /*0x60b387*/
+    if ( collisionObject ) /*0x60b395*/
     {
-      v27 = (Atmosphere *)sub_47FA60(*(int **)(a5 + 8));
-      if ( v27 )
+      v25 = (Atmosphere *)sub_47FA60(*((int **)collisionObject + 2)); /*0x60b39b*/
+      if ( v25 ) /*0x60b3a5*/
       {
-        v28 = sub_452A60(v27);
-        if ( v28 )
+        v26 = Shared_GetPointerAtOffset08(v25); /*0x60b3a9*/
+        if ( v26 ) /*0x60b3b0*/
         {
-          LODWORD(this->unk05C->unk2C[0]) = v28;
-          v85 = (_DWORD *)a5;
+          LODWORD(this->unk05C->unk2C[0]) = v26; /*0x60b3b5*/
+          collisionObjecta = collisionObject; /*0x60b3b8*/
         }
       }
     }
-    v29 = this->unk05C;
-    if ( !LODWORD(v29->unk2C[0]) )
+    unk05C = this->unk05C; /*0x60b3bc*/
+    if ( !LODWORD(unk05C->unk2C[0]) ) /*0x60b3bf*/
     {
-      LODWORD(v29->unk2C[0]) = (TESChildCELL)v22[0xF].vtbl;
-      v30 = sub_480340(LODWORD(this->unk05C->unk2C[0]));
-      if ( !v30 )
+      LODWORD(unk05C->unk2C[0]) = (TESChildCELL)v20[0xF].vtbl; /*0x60b3c8*/
+      BhkCollisionObjectRecursive = NiAVObject_FindBhkCollisionObjectRecursive((NiAVObject *)LODWORD(this->unk05C->unk2C[0])); /*0x60b3d2*/
+      if ( !BhkCollisionObjectRecursive ) /*0x60b3de*/
       {
 LABEL_33:
-        FormHeapFree((unsigned int)this->unk05C);
-        this->unk05C = 0;
-        this->unk060 = 0;
-        return;
+        FormHeapFree((unsigned int)this->unk05C); /*0x60b545*/
+        this->unk05C = 0; /*0x60b551*/
+        this->unk060 = 0; /*0x60b554*/
+        return; /*0x60b557*/
       }
-      v85 = *(_DWORD **)(v30 + 0x10);
+      collisionObjecta = (_DWORD *)BhkCollisionObjectRecursive[4]; /*0x60b3e3*/
     }
-    if ( v85 && (v31 = v85[2]) != 0 && (v32 = (int *)(v31 + 0x14)) != 0 && (v33 = *v32) != 0 )
-      v34 = *(float **)(v33 + 8);
+    if ( collisionObjecta && (v29 = collisionObjecta[2]) != 0 && (v30 = (int *)(v29 + 0x14)) != 0 && (v31 = *v30) != 0 ) /*0x60b3ff*/
+      v32 = *(float **)(v31 + 8); /*0x60b401*/
     else
-      v34 = 0;
-    if ( v85 )
-      v35 = v85[2];
+      v32 = 0; /*0x60b41d*/
+    if ( collisionObjecta ) /*0x60b421*/
+      v33 = collisionObjecta[2]; /*0x60b423*/
     else
-      v35 = 0;
-    v36 = *(__m128 **)(v35 + 0x50);
-    v105[0] = v36[1];
-    v105[1] = v36[2];
-    v105[2] = v36[3];
-    v105[3] = v36[4];
-    sub_5398E0((int)v109, (float *)&v87->members.m_worldTransform);
-    sub_8B1FF0(v108, v105, v109);
-    v100 = 1.0;
-    a2.rot.data[1][0] = 0.0;
-    a2.rot.data[1][1] = flt_A6F3E0;
-    v103 = 0;
-    v104 = 0;
-    a2.rot.data[1][2] = 0.0;
-    v99 = 0xFFFFFFFF;
-    a2.rot.data[2][0] = 0.0;
-    a2.rot.data[2][1] = 0.0;
-    a2.rot.data[2][2] = flt_A6F3DC;
-    a2.pos.x = 0.0;
-    a2.pos.y = 0.0;
-    sub_88FCC0(&v101, v108, (__m128 *)a2.rot.data[1]);
-    sub_88FCC0(&v102, v108, (__m128 *)&a2.rot.data[2][1]);
-    sub_6077F0(v34, (int)&v101, (int)&a2.pos.z);
-    if ( v100 >= 1.0 )
-      goto LABEL_33;
-    v37 = v34[4];
-    v92 = v37;
-    if ( v99 != 0xFFFFFFFF )
+      v33 = 0; /*0x60b428*/
+    v34 = *(__m128 **)(v33 + 0x50); /*0x60b42a*/
+    v107[0] = v34[1]; /*0x60b431*/
+    v107[1] = v34[2]; /*0x60b43d*/
+    v107[2] = v34[3]; /*0x60b449*/
+    v107[3] = v34[4]; /*0x60b465*/
+    sub_5398E0((int)v111, (float *)&v89->members.m_worldTransform); /*0x60b46d*/
+    sub_8B1FF0(v110, v107, v111); /*0x60b48c*/
+    v102 = 1.0; /*0x60b493*/
+    normalZ.rot.data[1][0] = 0.0; /*0x60b4a1*/
+    normalZ.rot.data[1][1] = flt_A6F3E0; /*0x60b4b4*/
+    v105 = 0; /*0x60b4c0*/
+    v106 = 0; /*0x60b4c7*/
+    normalZ.rot.data[1][2] = 0.0; /*0x60b4ce*/
+    v101 = 0xFFFFFFFF; /*0x60b4d2*/
+    normalZ.rot.data[2][0] = 0.0; /*0x60b4dd*/
+    normalZ.rot.data[2][1] = 0.0; /*0x60b4e1*/
+    normalZ.rot.data[2][2] = flt_A6F3DC; /*0x60b4eb*/
+    normalZ.pos.x = 0.0; /*0x60b4f2*/
+    normalZ.pos.y = 0.0; /*0x60b4f9*/
+    hkTransform_TransformPosition(&v103, v110, (__m128 *)normalZ.rot.data[1]); /*0x60b500*/
+    hkTransform_TransformPosition(&v104, v110, (__m128 *)&normalZ.rot.data[2][1]); /*0x60b519*/
+    sub_6077F0(v32, (int)&v103, (int)&normalZ.pos.z); /*0x60b530*/
+    if ( v102 >= 1.0 ) /*0x60b543*/
+      goto LABEL_33; /*0x60b543*/
+    v35 = v32[4]; /*0x60b564*/
+    v94 = v35; /*0x60b567*/
+    if ( v101 != 0xFFFFFFFF ) /*0x60b56b*/
     {
-      v38 = (*(int (__thiscall **)(float *))(*(_DWORD *)v34 + 0x88))(v34);
-      if ( v38 )
+      v36 = (*(int (__thiscall **)(float *))(*(_DWORD *)v32 + 0x88))(v32); /*0x60b577*/
+      if ( v36 ) /*0x60b57b*/
       {
-        v92 = COERCE_FLOAT((*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v38 + 0x9C))(v38, v99));
-        v37 = v92;
+        v94 = COERCE_FLOAT((*(int (__thiscall **)(int, unsigned int))(*(_DWORD *)v36 + 0x9C))(v36, v101)); /*0x60b591*/
+        v35 = v94; /*0x60b595*/
       }
       else
       {
-        PrintError("The arrow raycast has returned a sub-shape key, but the shape was unable to find a shape collection");
+        PrintError("The arrow raycast has returned a sub-shape key, but the shape was unable to find a shape collection"); /*0x60b59e*/
       }
     }
-    v39 = this->unk05C;
-    v40 = v39->unk00[8];
-    v39 = (ArrowProjectile_CollisionData *)((char *)v39 + 0x1C);
-    v41 = v39->unk00[0] * v39->unk00[0];
-    v42 = v39->unk00[2] * v39->unk00[2];
-    v81 = v40 * v40 + v41 + v42;
-    v82 = sqrt(v81);
-    sub_609D50(this, v41, v82, v82, *arg0, arg0[1], arg0[2], (int)v85, SLOBYTE(v37));
-    v88 = -this->unk088;
-    v83 = -this->unk08C;
-    *(float *)&v94 = -this->unk090;
-    a3.x = v88;
-    a3.y = v83;
-    a3.z = *(float *)&v94;
-    sub_43F350(&a3.x);
-    a3.x = a3.x + *v95;
-    a3.y = v95[1] + a3.y;
-    a3.z = v95[2] + a3.z;
-    v43 = sub_43F350(&a3.x);
-    v44 = (const char *)sub_5361B0(SLODWORD(v37));
-    if ( v44 )
+    v37 = this->unk05C; /*0x60b5a6*/
+    v38 = v37->unk00[8]; /*0x60b5a9*/
+    v37 = (ArrowProjectile_CollisionData *)((char *)v37 + 0x1C); /*0x60b5ac*/
+    v39 = v37->unk00[0] * v37->unk00[0]; /*0x60b5bc*/
+    v40 = v37->unk00[2] * v37->unk00[2]; /*0x60b5c0*/
+    v83 = v38 * v38 + v39 + v40; /*0x60b5c4*/
+    v84 = sqrt(v83); /*0x60b5d1*/
+    sub_609D50( /*0x60b606*/
+      this,
+      v39,
+      v84,
+      v84,
+      LODWORD(impactPosition->x),
+      LODWORD(impactPosition->y),
+      LODWORD(impactPosition->z),
+      (int)collisionObjecta,
+      SLOBYTE(v35));
+    v90 = -this->unk088; /*0x60b617*/
+    v85 = -this->unk08C; /*0x60b623*/
+    *(float *)&v96 = -this->unk090; /*0x60b62f*/
+    a3.x = v90; /*0x60b637*/
+    a3.y = v85; /*0x60b63f*/
+    a3.z = *(float *)&v96; /*0x60b647*/
+    Vector3_NormalizeInPlace(&a3.x); /*0x60b64b*/
+    a3.x = a3.x + v97->x; /*0x60b660*/
+    a3.y = v97->y + a3.y; /*0x60b66b*/
+    a3.z = v97->z + a3.z; /*0x60b676*/
+    v41 = Vector3_NormalizeInPlace(&a3.x); /*0x60b67a*/
+    v42 = (const char *)ImpactMaterial_GetHitParticlePath(SLODWORD(v35)); /*0x60b687*/
+    if ( v42 ) /*0x60b68e*/
     {
-      TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-      a2b = sub_4C9BE0((TESObjectREFR *)this);
-      ParentCell = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-      *(float *)&v94 = COERCE_FLOAT(sub_441800(ParentCell, a2b, 3u));
-      v89 = (void *)FormHeapAlloc(0x20u);
-      v111 = 0;
-      if ( v89 )
+      Shared_GetDwordAtOffset40(this); /*0x60b696*/
+      a2b = sub_4C9BE0((TESObjectREFR *)this); /*0x60b6a6*/
+      DwordAtOffset40 = (TESObjectCELL *)Shared_GetDwordAtOffset40(this); /*0x60b6a9*/
+      *(float *)&v96 = COERCE_FLOAT(sub_441800(DwordAtOffset40, a2b, 3u)); /*0x60b6b7*/
+      v91 = (void *)FormHeapAlloc(0x20u); /*0x60b6c3*/
+      v113 = 0; /*0x60b6c9*/
+      if ( v91 ) /*0x60b6d4*/
       {
-        v43 = flt_A31E2C;
-        v75 = *arg0;
-        v76 = arg0[1];
-        v77 = (const char *)arg0[2];
-        v112 = a3;
-        v74 = v94;
-        v73 = flt_A31E2C;
-        v46 = TESObjectREFR_GetParentCell((TESObjectREFR *)this);
-        v47 = sub_5713F0(
-                v89,
-                (int)v46,
-                v73,
-                v74,
+        v41 = flt_A31E2C; /*0x60b6e8*/
+        v115 = *impactPosition; /*0x60b6ee*/
+        v114 = a3; /*0x60b706*/
+        v72 = v96; /*0x60b714*/
+        v71 = flt_A31E2C; /*0x60b71b*/
+        v44 = Shared_GetDwordAtOffset40(this); /*0x60b71e*/
+        v45 = BSTempEffectParticle_Constructor( /*0x60b728*/
+                v91,
                 v44,
-                v112.x,
-                v112.y,
-                SLODWORD(v112.z),
-                *(float *)&v75,
-                v76,
-                v77,
+                v71,
+                v72,
+                v42,
+                v114.x,
+                v114.y,
+                SLODWORD(v114.z),
+                v115.x,
+                LODWORD(v115.y),
+                (const char *)LODWORD(v115.z),
                 1.0,
                 0);
       }
       else
       {
-        v47 = 0;
+        v45 = 0; /*0x60b72f*/
       }
-      v111 = 0xFFFFFFFF;
-      sub_678D30((int *)&ActorProcessManager_ptr, (volatile LONG *)v47);
+      v113 = 0xFFFFFFFF; /*0x60b737*/
+      ActorProcessManager_RegisterTempEffect((int *)&qword_B3BB2C[0x75], (volatile LONG *)v45); /*0x60b742*/
     }
-    v48 = this->shooter;
-    if ( v48 )
+    v46 = this->shooter;                        // Temporarily save shooter MagicCaster active item and target before applying projectile-retained effects; both are restored after AMMO enchantment, poison, and bow enchantment processing. /*0x60b747*/
+    if ( v46 ) /*0x60b74c*/
     {
-      *(float *)&v49 = COERCE_FLOAT((int)v48->members.magicCaster.vtbl->GetActiveMagicItem(&v48->members.magicCaster));
-      p_magicCaster = &this->shooter->members.magicCaster;
-      v94 = v49;
-      v90 = (MagicTarget *)((int (__thiscall *)(MagicCaster *))p_magicCaster->vtbl->GetCastingTarget)(p_magicCaster);
-      arrowEnch = this->arrowEnch;
-      if ( arrowEnch )
+      *(float *)&v47 = COERCE_FLOAT((int)v46->members.magicCaster.vtbl->GetActiveMagicItem(&v46->members.magicCaster)); /*0x60b75b*/
+      p_magicCaster = &this->shooter->members.magicCaster; /*0x60b760*/
+      v96 = v47; /*0x60b763*/
+      v92 = (MagicTarget *)((int (__thiscall *)(MagicCaster *))p_magicCaster->vtbl->GetCastingTarget)(p_magicCaster); /*0x60b76e*/
+      arrowEnch = this->arrowEnch;              // Apply ArrowProjectile+0x7C AMMO EnchantmentItem retained from the AMMO base form. /*0x60b772*/
+      if ( arrowEnch ) /*0x60b777*/
       {
-        this->shooter->members.magicCaster.vtbl->SetActiveMagicItem(
+        this->shooter->members.magicCaster.vtbl->SetActiveMagicItem( /*0x60b789*/
           &this->shooter->members.magicCaster,
           (EnchantmentItem *)((char *)arrowEnch + 0x18));
-        p_SetCastingTarget = &this->shooter->members.magicCaster.vtbl->SetCastingTarget;
-        v53 = (*((int (__thiscall **)(TESChildCELL *))v93->vtbl + 0x49))(v93);
-        (*p_SetCastingTarget)(&this->shooter->members.magicCaster, (MagicTarget *)v53);
-        v54 = this->super.vtbl->super.GetBaseForm(this);
-        MagicCaster_UseActiveMagicItem(&this->shooter->members.magicCaster.vtbl, v41, v43, v42, (int)v54);
+        p_SetCastingTarget = &this->shooter->members.magicCaster.vtbl->SetCastingTarget; /*0x60b79d*/
+        v51 = (*((int (__thiscall **)(TESChildCELL *))v95->vtbl + 0x49))(v95); /*0x60b7a0*/
+        (*p_SetCastingTarget)(&this->shooter->members.magicCaster, (MagicTarget *)v51); /*0x60b7ab*/
+        v52 = this->super.vtbl->super.GetBaseForm(this); /*0x60b7b7*/
+        MagicCaster_UseActiveMagicItem( /*0x60b7c0*/
+          &this->shooter->members.magicCaster.vtbl,
+          v39,
+          v41,
+          v40,
+          (int)v52,
+          v76,
+          v77,
+          v78,
+          v79,
+          v80,
+          v81,
+          v82,
+          SLODWORD(v85),
+          (int)collisionObjecta,
+          (int)v89,
+          (int)v92);                            // Non-Actor reference impact invokes shooter MagicCaster with projectile-held AMMO enchantment.
       }
-      poison = this->poison;
-      if ( poison )
+      poison = this->poison;                    // Apply ArrowProjectile+0x84 AlchemyItem poison retained from the equipped weapon; poison was already removed from that weapon at release. /*0x60b7c5*/
+      if ( poison ) /*0x60b7cd*/
       {
-        this->shooter->members.magicCaster.vtbl->SetActiveMagicItem(
+        this->shooter->members.magicCaster.vtbl->SetActiveMagicItem( /*0x60b7de*/
           &this->shooter->members.magicCaster,
           (AlchemyItem *)((char *)poison + 0x24));
-        v56 = &this->shooter->members.magicCaster.vtbl->SetCastingTarget;
-        v57 = (*((int (__thiscall **)(TESChildCELL *))v93->vtbl + 0x49))(v93);
-        (*v56)(&this->shooter->members.magicCaster, (MagicTarget *)v57);
-        v58 = this->super.vtbl->super.GetBaseForm(this);
-        MagicCaster_UseActiveMagicItem(&this->shooter->members.magicCaster.vtbl, v41, v43, v42, (int)v58);
+        v54 = &this->shooter->members.magicCaster.vtbl->SetCastingTarget; /*0x60b7f2*/
+        v55 = (*((int (__thiscall **)(TESChildCELL *))v95->vtbl + 0x49))(v95); /*0x60b7f5*/
+        (*v54)(&this->shooter->members.magicCaster, (MagicTarget *)v55); /*0x60b800*/
+        v56 = this->super.vtbl->super.GetBaseForm(this); /*0x60b80c*/
+        MagicCaster_UseActiveMagicItem( /*0x60b815*/
+          &this->shooter->members.magicCaster.vtbl,
+          v39,
+          v41,
+          v40,
+          (int)v56,
+          v76,
+          v77,
+          v78,
+          v79,
+          v80,
+          v81,
+          v82,
+          SLODWORD(v85),
+          (int)collisionObjecta,
+          (int)v89,
+          (int)v92);                            // Non-Actor reference impact invokes shooter MagicCaster with projectile-held poison.
       }
-      bowEnch = this->bowEnch;
-      if ( bowEnch )
+      bowEnch = this->bowEnch;                  // Apply ArrowProjectile+0x80 bow EnchantmentItem retained only after successful release-time charge payment. /*0x60b81a*/
+      if ( bowEnch ) /*0x60b822*/
       {
-        this->shooter->members.magicCaster.vtbl->SetActiveMagicItem(
+        this->shooter->members.magicCaster.vtbl->SetActiveMagicItem( /*0x60b833*/
           &this->shooter->members.magicCaster,
           (EnchantmentItem *)((char *)bowEnch + 0x18));
-        v60 = &this->shooter->members.magicCaster.vtbl->SetCastingTarget;
-        v61 = (*((int (__thiscall **)(TESChildCELL *))v93->vtbl + 0x49))(v93);
-        (*v60)(&this->shooter->members.magicCaster, (MagicTarget *)v61);
-        v62 = this->super.vtbl->super.GetBaseForm(this);
-        MagicCaster_UseActiveMagicItem(&this->shooter->members.magicCaster.vtbl, v41, v43, v42, (int)v62);
+        v58 = &this->shooter->members.magicCaster.vtbl->SetCastingTarget; /*0x60b847*/
+        v59 = (*((int (__thiscall **)(TESChildCELL *))v95->vtbl + 0x49))(v95); /*0x60b84a*/
+        (*v58)(&this->shooter->members.magicCaster, (MagicTarget *)v59);// Non-Actor reference impact invokes shooter MagicCaster with projectile-held bow enchantment. /*0x60b855*/
+        v60 = this->super.vtbl->super.GetBaseForm(this); /*0x60b861*/
+        MagicCaster_UseActiveMagicItem( /*0x60b86a*/
+          &this->shooter->members.magicCaster.vtbl,
+          v39,
+          v41,
+          v40,
+          (int)v60,
+          v76,
+          v77,
+          v78,
+          v79,
+          v80,
+          v81,
+          v82,
+          SLODWORD(v85),
+          (int)collisionObjecta,
+          (int)v89,
+          (int)v92);
       }
-      this->shooter->members.magicCaster.vtbl->SetActiveMagicItem(&this->shooter->members.magicCaster, (MagicItem *)v94);
-      this->shooter->members.magicCaster.vtbl->SetCastingTarget(&this->shooter->members.magicCaster, v90);
+      this->shooter->members.magicCaster.vtbl->SetActiveMagicItem(&this->shooter->members.magicCaster, (MagicItem *)v96); /*0x60b87f*/
+      this->shooter->members.magicCaster.vtbl->SetCastingTarget(&this->shooter->members.magicCaster, v92); /*0x60b892*/
     }
-    v63 = v93;
-    v64 = TESObjectREFR_GetParentCell((TESObjectREFR *)v93);
-    if ( v64 && (sub_4440C0(v64), v65) )
-      v66 = *(_DWORD **)(v65 + 0x24);
+    v61 = v95;                                  // RealArenaTraining fidelity pass: EDI is reloaded from the same hit-ref local before the static object event. /*0x60b894*/
+    v62 = (TESObjectCELL *)Shared_GetDwordAtOffset40(v95); /*0x60b89a*/
+    if ( v62 && (sub_4440C0(v62), v63) ) /*0x60b8ac*/
+      v64 = *(_DWORD **)(v63 + 0x24); /*0x60b8ae*/
     else
-      v66 = 0;
-    if ( v66 )
+      v64 = 0; /*0x60b8b3*/
+    if ( v64 ) /*0x60b8b7*/
     {
-      if ( sub_536AE0(v66, (int)v63) )
+      if ( sub_536AE0(v64, (int)v61) ) /*0x60b8ba*/
       {
-        if ( v63 != (TESChildCELL *)0xFFFFFFBC )
-          Script_AddEventToExtraScript(v63, &v63[0x11], 0x10000000);
+        if ( v61 != (TESChildCELL *)0xFFFFFFBC ) /*0x60b8c8*/
+          Script_AddEventToExtraScript(v61, &v61[0x11], 0x10000000);// RealArenaTraining fidelity pass: second arrow event in the same collision function; EBX is the same ArrowProjectile and EDI is the same hit ref, so plugin suppresses duplicate training by arrow+target identity rather than time. /*0x60b8d1*/
       }
     }
-    if ( this->arrowEnch )
-      this->unk060 = 3;
-    p_m_worldTransform = &v87->members.m_worldTransform;
-    v68 = sub_7101F0(&v87->members.m_worldTransform, &a2, (NiPoint3 *)&dword_B258DC);
-    sub_6088F0(
-      (float *)this,
-      *(float *)arg0,
-      *((float *)arg0 + 1),
-      *((float *)arg0 + 2),
-      v68->rot.data[0][0],
-      v68->rot.data[0][1],
-      v68->rot.data[0][2],
-      v85);
-    switch ( LODWORD(v92) )
+    if ( this->arrowEnch ) /*0x60b8d9*/
+      this->unk060 = 3; /*0x60b8df*/
+    p_m_worldTransform = &v89->members.m_worldTransform; /*0x60b8f3*/
+    v66 = sub_7101F0(&v89->members.m_worldTransform, &normalZ, &stru_B258DC); /*0x60b8f9*/
+    ArrowProjectile_ApplyImpactImpulseToCollision( /*0x60b92f*/
+      this,
+      impactPosition->x,
+      impactPosition->y,
+      impactPosition->z,
+      v66->rot.data[0][0],
+      v66->rot.data[0][1],
+      v66->rot.data[0][2],
+      collisionObjecta);
+    switch ( LODWORD(v94) ) /*0x60b944*/
     {
-      case 0:
-      case 3:
-      case 5:
-      case 0xA:
-      case 0xB:
-      case 0xD:
-      case 0xF:
-      case 0x12:
-      case 0x14:
-      case 0x19:
-      case 0x1A:
-      case 0x1C:
-      case 0x1E:
+      case 0: /*0x60b944*/
+      case 3: /*0x60b944*/
+      case 5: /*0x60b944*/
+      case 0xA: /*0x60b944*/
+      case 0xB: /*0x60b944*/
+      case 0xD: /*0x60b944*/
+      case 0xF: /*0x60b944*/
+      case 0x12: /*0x60b944*/
+      case 0x14: /*0x60b944*/
+      case 0x19: /*0x60b944*/
+      case 0x1A: /*0x60b944*/
+      case 0x1C: /*0x60b944*/
+      case 0x1E: /*0x60b944*/
         goto LABEL_66;
       default:
-        v69 = *sub_497340(v85, &v97) & 0x3F;
-        if ( v69 && (v69 <= 3 || v69 > 6) )
+        v67 = *sub_497340(collisionObjecta, &v99) & 0x3F; /*0x60b965*/
+        if ( v67 && (v67 <= 3 || v67 > 6) ) /*0x60b976*/
         {
-          a4.x = 0.0;
-          a4.y = v100 * dbl_A687B0 - dbl_A3F428;
-          a4.z = 0.0;
-          a4.y = a4.y + dbl_A2F910;
-          sub_53D4B0(p_m_worldTransform, &a3.x, &a4);
-          x = a3.x;
-          TESObjectREFR_SetPosition((TESObjectREFR *)this, a3.x, a3.y, a3.z);
-          y = a3.y;
-          z = a3.z;
-          v87->members.m_localTransform.pos.x = x;
-          v87->members.m_localTransform.pos.y = y;
-          v87->members.m_localTransform.pos.z = z;
-          NiAVObject_UpdateNiAVObject(v87, 0.0, 0);
-          sub_5398E0((int)v110, (float *)p_m_worldTransform);
-          sub_8B1FF0(v106, v105, v110);
-          sub_43F3E0(&this->unk05C->unk00[1], &v107);
-          sub_607740((int)&this->unk05C->unk2C[1], v106);
+          a4.x = 0.0; /*0x60b982*/
+          a4.y = v102 * dbl_A687B0 - dbl_A3F428; /*0x60b9a1*/
+          a4.z = 0.0; /*0x60b9a5*/
+          a4.y = a4.y + dbl_A2F910; /*0x60b9b3*/
+          NiTransform_TransformPoint(p_m_worldTransform, &a3.x, &a4); /*0x60b9b7*/
+          x = a3.x; /*0x60b9bc*/
+          TESObjectREFR_SetPosition((TESObjectREFR *)this, a3.x, a3.y, a3.z); /*0x60b9d7*/
+          y = a3.y; /*0x60b9e2*/
+          z = a3.z; /*0x60b9e6*/
+          v89->members.m_localTransform.pos.x = x; /*0x60b9ec*/
+          v89->members.m_localTransform.pos.y = y; /*0x60b9f0*/
+          v89->members.m_localTransform.pos.z = z; /*0x60b9f6*/
+          NiAVObject_UpdateNiAVObject(v89, 0.0, 0); /*0x60b9f9*/
+          sub_5398E0((int)v112, (float *)p_m_worldTransform); /*0x60ba07*/
+          sub_8B1FF0(v108, v107, v112); /*0x60ba26*/
+          HavokVector_ToWorldVector(&this->unk05C->unk00[1], &v109); /*0x60ba3a*/
+          sub_607740((int)&this->unk05C->unk2C[1], v108); /*0x60ba4e*/
         }
         else
         {
 LABEL_66:
-          sub_608DA0(&this->super, (int)arg0, (int)v95);
+          ArrowProjectile_SetFreeImpactState3(&this->super, (int)impactPosition, (int)v97); /*0x60ba58*/
         }
-        break;
+        break; /*0x60ba56*/
     }
   }
 }

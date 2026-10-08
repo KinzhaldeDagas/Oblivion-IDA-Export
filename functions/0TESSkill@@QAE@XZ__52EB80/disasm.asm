@@ -33,9 +33,9 @@
 0x52EBF7: add     edi, 8
 0x52EBFA: sub     ebx, 1
 0x52EBFD: jns     short loc_52EBF0
-0x52EBFF: mov     ecx, esi
+0x52EBFF: mov     ecx, esi; this
 0x52EC01: mov     byte ptr [esi+4], 0Bh
-0x52EC05: call    TESSkill_ClearTESSkill
+0x52EC05: call    TESSkill_ClearDataAndComponents; Reset TESSkill native data: actorValue=0xFFFFFFFF, governingAttribute=0, specialization=0, and both useValues=1.0; then clear descriptions/components.
 0x52EC0A: mov     ecx, esi; this
 0x52EC0C: call    j_TESForm_InitializeComponents
 0x52EC11: mov     eax, esi
@@ -47,3 +47,15 @@
 0x52EC21: pop     ebx
 0x52EC22: add     esp, 10h
 0x52EC25: retn
+0x9B8AA0: mov     ecx, [ebp-10h]; this
+0x9B8AA3: jmp     TESForm_destr
+0x9B8AA8: mov     ecx, [ebp-10h]
+0x9B8AAB: add     ecx, 20h ; ' '; void *
+0x9B8AAE: jmp     TESTexture_destr
+0x9B8AB3: mov     edx, [esp+arg_4]
+0x9B8AB7: lea     eax, [edx-10h]
+0x9B8ABA: mov     ecx, [edx-14h]
+0x9B8ABD: xor     ecx, eax
+0x9B8ABF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B8AC4: mov     eax, offset stru_AE2F60
+0x9B8AC9: jmp     ___CxxFrameHandler3

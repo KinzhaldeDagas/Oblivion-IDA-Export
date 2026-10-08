@@ -2,7 +2,7 @@
 0x98BF86: cmp     eax, 0FFFFFFFFh
 0x98BF89: jz      short loc_98BFA1
 0x98BF8B: push    eax
-0x98BF8C: push    dword_BA9E24
+0x98BF8C: push    dword_BA9E10+14h
 0x98BF92: call    __decode_pointer
 0x98BF97: pop     ecx
 0x98BF98: call    eax

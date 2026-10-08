@@ -1,4 +1,4 @@
-0x6D74D0: push    ebp
+0x6D74D0: push    ebp; Order-sensitive equality: requires base equality, identical count, and every corresponding 0x08-byte key to have exactly equal float time and case-sensitive text.
 0x6D74D1: mov     ebp, [esp+4+a2]
 0x6D74D5: test    ebp, ebp
 0x6D74D7: push    esi
@@ -32,7 +32,7 @@
 0x6D7510: lea     eax, [esi+ebp]
 0x6D7513: push    eax
 0x6D7514: mov     ecx, esi
-0x6D7516: call    sub_6D73F0
+0x6D7516: call    NiTextKey_IsDifferent; Returns different when float timestamps differ or case-sensitive strcmp of text differs; returns equal only when both match exactly.
 0x6D751B: test    al, al
 0x6D751D: jnz     short loc_6D7532
 0x6D751F: add     edi, 1

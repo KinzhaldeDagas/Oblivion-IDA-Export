@@ -25,13 +25,13 @@
 0x94EA52: lea     eax, [esp+0E4h+var_80]
 0x94EA56: lea     ecx, [esi+50h]
 0x94EA59: push    eax
-0x94EA5A: call    sub_88FCC0
+0x94EA5A: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94EA5F: lea     edx, [ebx+10h]
 0x94EA62: push    edx
 0x94EA63: lea     eax, [esp+0E4h+var_40]
 0x94EA6A: lea     ecx, [esi+40h]
 0x94EA6D: push    eax
-0x94EA6E: call    sub_88FCC0
+0x94EA6E: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94EA73: mov     ecx, [ebp+arg_8]
 0x94EA76: push    ecx
 0x94EA77: mov     ecx, esi
@@ -55,7 +55,7 @@
 0x94EAA5: lea     eax, [esi+90h]
 0x94EAAB: push    eax
 0x94EAAC: lea     ecx, [esp+0E8h+var_90]
-0x94EAB0: call    sub_88FE00
+0x94EAB0: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94EAB5: fld     dword ptr [esi]
 0x94EAB7: fmul    dword ptr ds:0A45E4Ch
 0x94EABD: movaps  xmm2, [esp+0E0h+var_90]
@@ -95,7 +95,7 @@
 0x94EB3A: push    eax
 0x94EB3B: lea     ecx, [esp+0E8h+var_B0]
 0x94EB3F: mov     dword ptr [esp+0E8h+var_D0+0Ch], edx
-0x94EB43: call    sub_88FE00
+0x94EB43: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94EB48: fld     dword ptr [esi]
 0x94EB4A: mov     ecx, dword ptr [esp+0E0h+var_D0+0Ch]
 0x94EB4E: fmul    dword ptr ds:0A2FAACh
@@ -179,7 +179,7 @@
 0x94EC62: lea     eax, [esi+90h]
 0x94EC68: push    eax
 0x94EC69: lea     ecx, [esp+0E8h+var_B0]
-0x94EC6D: call    sub_88FE00
+0x94EC6D: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94EC72: fld     dword ptr [esi]
 0x94EC74: fmul    dword ptr ds:0A45E4Ch
 0x94EC7A: movaps  xmm2, [esp+0E0h+var_B0]
@@ -215,7 +215,7 @@
 0x94ECE1: lea     ecx, [esi+60h]
 0x94ECE4: push    ecx
 0x94ECE5: lea     ecx, [esp+0E8h+var_B0]
-0x94ECE9: call    sub_88FE00
+0x94ECE9: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94ECEE: fld     dword ptr [esi]
 0x94ECF0: fmul    dword ptr ds:0A45E4Ch
 0x94ECF6: movaps  xmm2, [esp+0E0h+var_B0]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 69,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_78A390",
+  "chunks": [
+    [
+      "0x78A390",
+      "0x78A733"
+    ]
+  ],
+  "chunks_sha256": "009cb2cd3c37b704b2f063e98e9c4db5912a3be21dfcf89f5533305d8f310496",
+  "comment_regular": "CSpeedTreeRT frond geometry export/update reached from GetGeometry bit 0x02 only. Current Oblivion database has no direct caller except the dispatcher and no stock GetGeometry caller passes bit 0x02.\n\n[2026-10-02 implementation correction] Verified exports: SGeometry+0x50 packed uint32 colors (N*4 bytes), +0x54 float3 normals (N*12), +0x68 float2 shadow UVs, +0x6C sole primary wind weights, +0x70 primary matrix bytes. Writes at 0x78A3F5, 0x78A463, 0x78A557, 0x78A594, 0x78A5D4 establish roles. SpeedTreeOBSE bridge formerly read +0x50 as normal fallback and +0x68 as secondary wind; corrected to typed normal source and zero absent secondary channel. RT4.1 SpeedTreeRT.cpp GetFrondGeometry exports separate second wind arrays and per-layer UV arrays; that later representation is not Oblivion ABI.\n\n[2026-10-02 packet bounds pass] Verified vertex count derives from XYZ floats / 3; normals/binormals/tangents are 3N floats, UV layers 2N, packed colors N DWORDs, wind N floats and N bytes. Native trusted export does not certify foreign/malformed vector extents. SpeedTreeOBSE ready-lane reconstruction now rejects partial tuples, undersized nonempty attributes, mismatched strip tables, and invalid native vector ranges. RT4.1 uses paired strip-info entries (GetNumStrips = size/2), unlike Oblivion separate nested vectors; no later container layout imported.\n\n[2026-10-03 frond completion] Billboard fade is independent of frond strip count: transition count = CTreeEngine+0xC0 leaf count +1; call 0x787220 with current instance/base LOD, radius RT+1C, factor+28, exponent+20 and target alpha+44. High index=count-2 selects highAlpha; count-1 selects alpha255 and selector-1; other indices use target. Plugin runtime sync now applies this fade to its tracked live frond child. LOD mesh replacement remains unfinished.\n[2026-10-03 export ownership] Plugin now keeps exports per (RT+0x30 shared-reference allocation identity, requested selector), with no ring eviction and final-count-one retirement. Valid empty topology is stored distinctly from failed capture. All representable nonnegative short selectors are enumerated; explicit selector requests can still receive a final -1 selector from billboard-fade output, so the separately verified ready-lane export supplies persistent geometry/empty certificates. Do not infer empty from missing or unreadable arrays.\n\n[2026-10-03 supplemental fade separation] Stock packet+74 remains billboard-transition alpha. Later75003 is instead a per-vertex last-use-LOD fade distance. Plugin derives hints from completed native strip membership: last referencing LOD wins, hint=1-(lod+1)/lodCount except finalLOD -> -1. Hints are retained per shared family, copied into private STSP.z, and per-node normalized LOD/distance/enable are supplied through redirected c10.yzw. Billboard alpha-reference/hide behavior remains separate.\n\n[2026-10-03 transition scope] Restored frond billboard alpha continues to use the verified native leaf-LOD-based resolver contract. Later75003 guide fading is separate. Later75005 billboard-view transition must not be substituted for native RT+28 leafTransitionFactor; the old branch-only experiment has been removed.\n\nOblivion frond export mirrors the 0x3C branch output layout and independently publishes diffuse UVs, projected-shadow UVs, and one wind weight/index stream.\n\n[2026-10-03 live export evidence] Manual test logged public GetGeometry mask02 caches for finalized native fronds. Coconut630verts; Curly810; King625; Ponytail blade896 with1792shadowUV floats; Fern200; Pear234; Banana475; Bamboo450. Runtime generated attachments use requested/exported selectors0/1/3/5. Ponytail diffuse files unavailable so blade capture does not prove visible blade rendering. No normal maps authored on rendered test assets; missing shadow texture files prevent layered-material acceptance.",
+  "comment_repeatable": "Oblivion frond export mirrors the 0x3C branch output layout and independently publishes diffuse UVs, projected-shadow UVs, and one wind weight/index stream.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "CSpeedTreeRT__GetFrondGeometry",
   "end_ea": "0x78A733",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78A390",
+  "name": "CSpeedTreeRT__GetFrondGeometry",
   "segment": ".text",
   "sha256": "009cb2cd3c37b704b2f063e98e9c4db5912a3be21dfcf89f5533305d8f310496",
   "size": 931,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78A390",
-  "type": "int __userpurge@<eax>(float *this@<ecx>, int@<edi>, unsigned int Src, rsize_t MaxCount)",
+  "total_chunk_size": 931,
+  "type": "void __thiscall(OB_CSpeedTreeRT_010201A0 *this, OB_SpeedTreeGeometryOutput_010201A0 *geometry, __int16 lodLevel)",
   "xrefs_from_count": 356,
   "xrefs_to_count": 1
 }

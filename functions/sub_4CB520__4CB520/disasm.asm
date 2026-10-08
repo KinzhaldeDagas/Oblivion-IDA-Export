@@ -6,7 +6,7 @@
 0x4CB52A: jz      short loc_4CB581
 0x4CB52C: push    esi
 0x4CB52D: push    ebx; a2
-0x4CB52E: mov     ecx, offset stru_B35C80; this
+0x4CB52E: mov     ecx, offset unk_B35C80; this
 0x4CB533: call    sub_496EA0
 0x4CB538: lea     esi, [ebx+48h]
 0x4CB53B: test    esi, esi
@@ -33,7 +33,7 @@
 0x4CB572: jnz     short loc_4CB540
 0x4CB574: pop     edi
 0x4CB575: push    ebx; a2
-0x4CB576: mov     ecx, offset stru_B35C80; this
+0x4CB576: mov     ecx, offset unk_B35C80; this
 0x4CB57B: call    sub_496F50
 0x4CB580: pop     esi
 0x4CB581: pop     ebp

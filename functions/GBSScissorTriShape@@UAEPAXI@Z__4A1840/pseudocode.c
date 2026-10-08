@@ -1,8 +1,8 @@
-BSScissorTriShape *__thiscall BSScissorTriShape::`scalar deleting destructor'(BSScissorTriShape *this, char a2)
+NiAVObject *__thiscall BSScissorTriShape::`scalar deleting destructor'(NiAVObject *this, char a2)
 {
-  *(_DWORD *)this = &BSScissorTriShape::`vftable';
-  TallGrassTriShape::~TallGrassTriShape(this);
-  if ( (a2 & 1) != 0 )
-    FormHeapFree((unsigned int)this);
-  return this;
+  this->vtbl = (NiAVObjectVtbl *)&BSScissorTriShape::`vftable'; /*0x4a1843*/
+  TallGrassTriShape::~TallGrassTriShape(this); /*0x4a1849*/
+  if ( (a2 & 1) != 0 ) /*0x4a1853*/
+    FormHeapFree((unsigned int)this); /*0x4a1856*/
+  return this; /*0x4a1860*/
 }

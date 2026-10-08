@@ -1,3 +1,4 @@
+// PlayGroup script command path. Actors use Actor_LoadAnimGroup_ + ActorAnimData_PlayAnimGroup; non-actors play a sequence directly from NiControllerManager.
 char __usercall Cmd_PlayGroup@<al>(
         int ebp0@<ebp>,
         int a2@<esi>,
@@ -11,136 +12,139 @@ char __usercall Cmd_PlayGroup@<al>(
         UInt32 *a3)
 {
   char result; // al
-  TESObjectREFR *v11; // eax
-  PlayerCharacter *v12; // esi
-  _DWORD *v13; // eax
-  int v14; // eax
+  Actor *v11; // eax
+  Actor *v12; // esi
+  unsigned int v13; // eax
+  ActorAnimData *v14; // eax
   ActorAnimData *v15; // eax
-  PowerListEntry *v16; // eax
-  int v17; // eax
-  int v18; // eax
-  int v19; // ebx
-  int v20; // eax
+  BSAnimGroupSequence *NormalizedSequenceSlot; // eax
+  NiNode *v17; // eax
+  NiNode *v18; // eax
+  NiNode *v19; // ebx
+  NiAVObject *ChildAtIndex; // eax
   NiObject *v21; // esi
-  int v22; // ebp
+  NiControllerSequence *SequenceByName; // ebp
   unsigned int v23; // ebx
-  int v24; // ebp
+  const char **v24; // ebp
   char *Name; // eax
-  _DWORD *v26; // [esp+8h] [ebp-28h]
-  char *v27; // [esp+8h] [ebp-28h]
-  char *v28; // [esp+8h] [ebp-28h]
-  int v29; // [esp+Ch] [ebp-24h]
-  void *refID; // [esp+Ch] [ebp-24h]
-  void *v31; // [esp+Ch] [ebp-24h]
-  void *v32; // [esp+Ch] [ebp-24h]
-  int v33; // [esp+20h] [ebp-10h]
+  unsigned int easeInTime; // [esp+8h] [ebp-28h]
+  char *easeInTimea; // [esp+8h] [ebp-28h]
+  char *easeInTimeb; // [esp+8h] [ebp-28h]
+  unsigned int v29; // [esp+Ch] [ebp-24h]
+  UInt32 refID; // [esp+Ch] [ebp-24h]
+  UInt32 v31; // [esp+Ch] [ebp-24h]
+  UInt32 v32; // [esp+Ch] [ebp-24h]
+  unsigned int groupID; // [esp+20h] [ebp-10h]
   UInt16 v34[2]; // [esp+24h] [ebp-Ch] BYREF
   float v35[2]; // [esp+28h] [ebp-8h] BYREF
 
-  v35[0] = 0.0;
-  result = Script_ExtractArgs(a1, a4, a3, a5, a6, a7, l, v34, v35);
+  v35[0] = 0.0; /*0x5107d1*/
+  result = Script_ExtractArgs(a1, a4, a3, a5, a6, a7, l, v34, v35); /*0x5107d9*/
   if ( result )
   {
     if ( a5 )
     {
-      ((void (__thiscall *)(TESObjectREFR *, int, int, int))a5->vtbl->super.MarkAsModified)(a5, 0x2000000, a2, ebp0);
+      ((void (__thiscall *)(TESObjectREFR *, int, int, int))a5->vtbl->super.MarkAsModified)(a5, 0x2000000, a2, ebp0); /*0x510800*/
       if ( a5->vtbl->GetAnimData(a5) && a5->vtbl->IsActor(a5) )
       {
-        v11 = (TESObjectREFR *)OblivionDynamicCast(
-                                 a5,
-                                 0,
-                                 (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
-                                 &Actor `RTTI Type Descriptor',
-                                 0);
-        v29 = *(_DWORD *)v34;
-        v12 = (PlayerCharacter *)v11;
-        LOWORD(v13) = Actor_LoadAnimGroup_(v11, v33, 0, 0);
-        v26 = v13;
-        v14 = (int)a5->vtbl->GetAnimData(a5);
-        ActorAnimData_PlayAnimGroup(v14, v26, v29, 0xFFFFFFFF);
-        if ( v33 )
+        v11 = (Actor *)OblivionDynamicCast( /*0x510839*/
+                         a5,
+                         0,
+                         (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
+                         &Actor `RTTI Type Descriptor',
+                         0);
+        v29 = *(_DWORD *)v34; /*0x51084b*/
+        v12 = v11; /*0x51084e*/
+        LOWORD(v13) = Actor_LoadAnimGroup_(v11, groupID, 0, 0); /*0x510855*/
+        easeInTime = v13; /*0x51085c*/
+        v14 = a5->vtbl->GetAnimData(a5); /*0x510865*/
+        ActorAnimData_PlayAnimGroup(v14, easeInTime, v29, 0xFFFFFFFF); /*0x510869*/
+        if ( groupID ) /*0x510873*/
         {
-          v15 = a5->vtbl->GetAnimData(a5);
-          v16 = sub_4706E0(v15, 0);
-          HighPRocess_DoAction_____(v12, 0xC, (int)v16);
+          v15 = a5->vtbl->GetAnimData(a5); /*0x510881*/
+          NormalizedSequenceSlot = ActorAnimData_GetNormalizedSequenceSlot(v15, 0); /*0x510885*/
+          Actor_SetCurrentActionWithBowVisualCleanup(v12, (ActorCurrentAction)0xCu, NormalizedSequenceSlot); /*0x51088f*/
         }
-        else if ( Actor_GetCurrentAction(v12) == 0xC )
+        else if ( Actor_GetCurrentAction(v12) == 0xC ) /*0x5108a3*/
         {
-          HighPRocess_DoAction_____(v12, 0xFFFFFFFF, 0);
+          Actor_SetCurrentActionWithBowVisualCleanup(v12, kActorCurrentAction_None, 0); /*0x5108af*/
         }
       }
-      else if ( v33 != 0xFF )
+      else if ( groupID != 0xFF )
       {
-        v17 = (int)a5->vtbl->GetNiNode(a5);
+        v17 = a5->vtbl->GetNiNode(a5); /*0x5108d2*/
         if ( v17
-          && (v18 = (*(int (__thiscall **)(int))(*(_DWORD *)v17 + 8))(v17), (v19 = v18) != 0)
-          && sub_405790(v18, 0)
-          && *(_DWORD *)(sub_405790(v19, 0) + 0xC) )
+          && (v18 = (NiNode *)v17->vtbl->super.super.Unk_02((NiObject *)v17), (v19 = v18) != 0)
+          && NiNode_GetChildAtIndex(v18, 0)
+          && NiNode_GetChildAtIndex(v19, 0)->members.super.m_controller )
         {
-          v20 = sub_405790(v19, 0);
-          v21 = NiRTTI_Cast(&stru_B3CAC0, *(NiObject **)(v20 + 0xC));
-          if ( v21 || (v21 = NiRTTI_Cast(&stru_B3CAC0, *(NiObject **)(v19 + 0xC))) != 0 )
+          ChildAtIndex = NiNode_GetChildAtIndex(v19, 0); /*0x510917*/
+          v21 = NiRTTI_Cast((BSStringT *)&stru_B3CAC0, (NiObject *)ChildAtIndex->members.super.m_controller); /*0x51092a*/
+          if ( v21
+            || (v21 = NiRTTI_Cast((BSStringT *)&stru_B3CAC0, (NiObject *)v19->members.super.super.m_controller)) != 0 )
           {
-            v22 = sub_4715A0(v21, *(_DWORD *)(0x24 * v33 + 0xB102E0));
-            v35[0] = *(float *)&v22;
-            if ( v22 )
+            SequenceByName = NiControllerManager_FindSequenceByName( /*0x510964*/
+                               (NiControllerManager *)v21,
+                               *(const char **)(0x24 * groupID + 0xB102E0));
+            LODWORD(v35[0]) = SequenceByName; /*0x510968*/
+            if ( SequenceByName )
             {
-              v23 = 0;
-              if ( HIWORD(v21[8].members.m_uiRefCount) )
+              v23 = 0; /*0x510972*/
+              if ( HIWORD(v21[8].members.m_uiRefCount) ) /*0x510974*/
               {
-                do
+                do /*0x5109b5*/
                 {
-                  v24 = *((_DWORD *)&v21[8].__vftable->super.Destructor + v23);
-                  if ( _strcmp(*(char **)(v24 + 8), *(char **)animGroupInfos_ptr) )
-                    sub_6C9CB0(v24, 0.0, 0);
-                  ++v23;
+                  v24 = *((const char ***)&v21[8].__vftable->super.Destructor + v23); /*0x510983*/
+                  if ( CRT_StricmpLocaleDispatch(v24[2], *(const char **)animGroupInfos_ptr) ) /*0x510991*/
+                    NiControllerSequence_Deactivate((NiControllerSequence *)v24, 0.0, 0); /*0x5109a7*/
+                  ++v23; /*0x5109b0*/
                 }
-                while ( v23 < HIWORD(v21[8].members.m_uiRefCount) );
-                v22 = LODWORD(v35[0]);
+                while ( v23 < HIWORD(v21[8].members.m_uiRefCount) ); /*0x5109b5*/
+                SequenceByName = (NiControllerSequence *)LODWORD(v35[0]); /*0x5109b7*/
               }
-              if ( *(_DWORD *)v34 )
+              if ( *(_DWORD *)v34 ) /*0x5109c4*/
               {
-                v35[0] = (double)*(int *)v34 * dbl_A2FC80;
-                sub_6C5C70(v21, v22, 0.0, v35[0], 0, 0);
+                v35[0] = (double)*(int *)v34 * dbl_A2FC80; /*0x5109d5*/
+                NiControllerManager_BlendFromPose((int **)v21, SequenceByName, 0.0, v35[0], 0, 0); /*0x5109e7*/
               }
               else
               {
-                sub_470B20((_DWORD *)v22, 0, 0, 1.0, 0.0, 0);
+                BSAnimGroupSequence_Activate(SequenceByName, 0, 0, 1.0, 0.0, 0); /*0x510a01*/
               }
-              *(float *)(v22 + 0x48) = -flt_A7DEB4;
-              LOWORD(v21[1].__vftable) |= 8u;
+              *((float *)SequenceByName + 0x12) = -flt_A7DEB4; /*0x510a0e*/
+              LOWORD(v21[1].__vftable) |= 8u; /*0x510a11*/
             }
             else
             {
-              refID = (void *)a5->member.super.refID;
-              Name = TESObjectREFR_GetName(a5);
+              refID = a5->member.super.refID; /*0x510a1b*/
+              Name = TESObjectREFR_GetName(a5); /*0x510a1e*/
               PrintError(
                 "PlayGroup Error: Sequence '%s' not found for '%s' (%08X).",
-                *(const char **)(0x24 * v33 + 0xB102E0),
+                *(const char **)(0x24 * groupID + 0xB102E0),
                 Name,
                 refID);
             }
           }
           else
           {
-            v31 = (void *)a5->member.super.refID;
-            v27 = TESObjectREFR_GetName(a5);
-            PrintError("PlayGroup Error: No NiControllerManager found for '%s' (%08X).", v27, v31);
+            v31 = a5->member.super.refID; /*0x510a45*/
+            easeInTimea = TESObjectREFR_GetName(a5); /*0x510a4d*/
+            PrintError("PlayGroup Error: No NiControllerManager found for '%s' (%08X).", easeInTimea, v31);
           }
         }
         else
         {
-          v32 = (void *)a5->member.super.refID;
-          v28 = TESObjectREFR_GetName(a5);
-          PrintError("PlayGroup Error: No 3d or controllers found for '%s' (%08X).", v28, v32);
+          v32 = a5->member.super.refID; /*0x510a58*/
+          easeInTimeb = TESObjectREFR_GetName(a5); /*0x510a60*/
+          PrintError("PlayGroup Error: No 3d or controllers found for '%s' (%08X).", easeInTimeb, v32);
         }
       }
-      return Cmd_PlayGroup_::SetFromActiveFile((int)a5);
+      return Cmd_PlayGroup_::SetFromActiveFile((int)a5); /*0x510894*/
     }
     else
     {
-      return Cmd_PlayGroup_::Return_1();
+      return Cmd_PlayGroup_::Return_1(); /*0x5107ec*/
     }
   }
-  return result;
+  return result; /*0x5107e5*/
 }

@@ -18,7 +18,7 @@
 0x42FD80: test    [esp+8+arg_0], 1
 0x42FD85: jz      short loc_42FD90
 0x42FD87: push    esi
-0x42FD88: call    FormHeapFree
+0x42FD88: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42FD8D: add     esp, 4
 0x42FD90: pop     edi
 0x42FD91: mov     eax, esi

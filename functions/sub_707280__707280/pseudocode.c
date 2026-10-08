@@ -3,9 +3,9 @@ char *__thiscall sub_707280(float *this, char *ArgList)
   unsigned int v3; // kr00_4
   char *v4; // ebx
 
-  v3 = strlen(ArgList);
-  v4 = (char *)FormHeapAlloc(v3 + 0x40);
-  sub_6C5D40(
+  v3 = strlen(ArgList); /*0x70728c*/
+  v4 = (char *)FormHeapAlloc(v3 + 0x40); /*0x7072ae*/
+  sub_6C5D40( /*0x7072c4*/
     (va_list)(v3 + 0x40),
     v4,
     __PAIR64__("%s = (%g,%g,%g)", v3 + 0x40),
@@ -13,5 +13,5 @@ char *__thiscall sub_707280(float *this, char *ArgList)
     *this,
     *(this + 1),
     *(this + 2));
-  return v4;
+  return v4; /*0x7072cc*/
 }

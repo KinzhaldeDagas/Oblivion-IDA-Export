@@ -1,19 +1,32 @@
 {
-  "callees_count": 20,
-  "callers_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 12,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x463D70",
+      "0x463EBA"
+    ]
+  ],
+  "chunks_sha256": "874d4041cbc0bfb283388108a6726c2b5ba7cf25b2d1df0593e818f6f969c071",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_463D70",
+  "comment_repeatable": " Verified: keyed lookup of ChangeData by reference FormID. If flags bit 1 is set, copies a 36-byte initial-reference record from savedFormBuffer+4, resolves the two embedded FormIDs, creates the reference, and calls LoadForm unless RTTI identifies MagicProjectile (which it immediately deletes). Otherwise negative flags select the 44-byte moved-reference record; resolves primary/fallback location IDs, reconstructs from source-location override files, loads, then removes the reference ID from manager deferred list. Probable Fallout homolog BGSSaveLoadReferencesMap::LoadChangedReference at 825F9840; both classify a saved ref, consume its change-map buffer, create/move and load it. Verified divergence: Oblivion uses 36/44-byte records and FormID table; Fallout uses compact initial-data structs and BGS numeric ID indices. Verified: created data copy size 0x24; source is owned ChangeData buffer after 4-byte header. Payload structure attached as OblivionCreatedReferenceInitialData. Verified flag classification: Chan",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 11,
+  "display_name": "TESSaveLoadGame_RestoreChangedReference",
   "end_ea": "0x463EBA",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_463D70",
+  "name": "TESSaveLoadGame_RestoreChangedReference",
   "segment": ".text",
   "sha256": "874d4041cbc0bfb283388108a6726c2b5ba7cf25b2d1df0593e818f6f969c071",
   "size": 330,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x463D70",
-  "type": "void __userpurge(char *@<ecx>, double@<st2>, double@<st1>, double@<st0>, int)",
-  "xrefs_from_count": 138,
+  "total_chunk_size": 330,
+  "type": "void __userpurge(TESSaveLoadGame_SerializationView *self@<ecx>, double arg2@<st2>, double arg3@<st1>, double arg4@<st0>, unsigned int referenceID)",
+  "xrefs_from_count": 146,
   "xrefs_to_count": 2
 }

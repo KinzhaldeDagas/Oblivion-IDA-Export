@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x605773",
-    "line": "push    esi",
+    "line": "push    esi; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x6057A1",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x6057AB",
-    "line": "fstp    dword ptr [esp+40h+var_3C]",
+    "line": "fstp    [esp+40h+var_3C]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6057AF",
-    "line": "fld     dword ptr [esp+40h+var_3C]",
+    "line": "fld     [esp+40h+var_3C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x605825",
-    "line": "fstp    dword ptr [esp+44h+var_44]",
+    "line": "fstp    [esp+44h+deltaTime]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x605828",
-    "line": "call    MagicTarget_ProcessEffects",
+    "line": "call    MagicTarget_ProcessEffects; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x60582D",
-    "line": "fld     dword ptr [esp+40h+var_3C]",
+    "line": "fld     [esp+40h+var_3C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -385,7 +385,7 @@
   },
   {
     "ea": "0x605843",
-    "line": "push    ebx",
+    "line": "push    ebx; float",
     "mnemonic": "push",
     "size": 1
   },
@@ -421,7 +421,7 @@
   },
   {
     "ea": "0x60584E",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x60586A",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x605887",
-    "line": "call    sub_420680",
+    "line": "call    ExtraDataList_GetMerchantContainer; Returns the reference stored in ExtraMerchantContainer type 0x44.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x6058FA",
-    "line": "push    0",
+    "line": "push    0; float",
     "mnemonic": "push",
     "size": 2
   },
@@ -841,13 +841,13 @@
   },
   {
     "ea": "0x60593D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60593F",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -865,13 +865,13 @@
   },
   {
     "ea": "0x605948",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x60594A",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -889,13 +889,13 @@
   },
   {
     "ea": "0x605955",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x605957",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x605987",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x6059BA",
-    "line": "mov     ecx, [ecx+8]",
+    "line": "mov     ecx, [ecx+8]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "ea": "0x6059C1",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1285,7 +1285,7 @@
   },
   {
     "ea": "0x605A0B",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x605A19",
-    "line": "call    sub_420050",
+    "line": "call    ExtraDataList_PruneRunOncePackages; Prunes ExtraRunOncePacks entries that do not match the requested state byte or whose package scheduling data has expired/passed its threshold.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1561,7 +1561,7 @@
   },
   {
     "ea": "0x605AA8",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,13 +1693,13 @@
   },
   {
     "ea": "0x605AF8",
-    "line": "mov     dword ptr [esp+48h+var_3C], edi",
+    "line": "mov     [esp+48h+var_3C], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x605AFC",
-    "line": "fild    dword ptr [esp+48h+var_3C]",
+    "line": "fild    [esp+48h+var_3C]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1723,13 +1723,13 @@
   },
   {
     "ea": "0x605B0A",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x605B0F",
-    "line": "fstp    [esp+48h+var_30]",
+    "line": "fstp    qword ptr [esp+48h+var_30]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1747,13 +1747,13 @@
   },
   {
     "ea": "0x605B1A",
-    "line": "mov     dword ptr [esp+48h+var_3C], eax",
+    "line": "mov     [esp+48h+var_3C], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x605B1E",
-    "line": "fild    dword ptr [esp+48h+var_3C]",
+    "line": "fild    [esp+48h+var_3C]",
     "mnemonic": "fild",
     "size": 4
   },
@@ -1777,13 +1777,13 @@
   },
   {
     "ea": "0x605B30",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x605B35",
-    "line": "fstp    [esp+48h+var_3C]",
+    "line": "fstp    qword ptr [esp+48h+var_3C]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1795,13 +1795,13 @@
   },
   {
     "ea": "0x605B3E",
-    "line": "fadd    [esp+48h+var_3C]",
+    "line": "fadd    qword ptr [esp+48h+var_3C]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x605B42",
-    "line": "fcomp   [esp+48h+var_30]",
+    "line": "fcomp   qword ptr [esp+48h+var_30]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x605B4E",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1873,7 +1873,7 @@
   },
   {
     "ea": "0x605B69",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x605BDD",
-    "line": "call    Actor_HandleDeathSTate????",
+    "line": "call    Actor_HandleDeathState",
     "mnemonic": "call",
     "size": 5
   },
@@ -2161,19 +2161,19 @@
   },
   {
     "ea": "0x605BFF",
-    "line": "lea     ecx, [esp+4Ch+var_24]",
+    "line": "lea     ecx, [esp+4Ch+var_24]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x605C03",
-    "line": "fstp    [esp+4Ch+a2+4]; float",
+    "line": "fstp    [esp+4Ch+a2+4]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x605C06",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x605C0D",
-    "line": "fst     dword ptr [esp+48h+var_30]",
+    "line": "fst     [esp+48h+var_30]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x605C1C",
-    "line": "fstp    dword ptr [esp+4Ch+var_30+4]",
+    "line": "fstp    [esp+4Ch+var_30+4]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x605C32",
-    "line": "mov     dword ptr [esp+48h+var_30], edx",
+    "line": "mov     [esp+48h+var_30], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x605C3F",
-    "line": "mov     dword ptr [esp+50h+var_30+4], ecx",
+    "line": "mov     [esp+50h+var_30+4], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2329,7 +2329,7 @@
   },
   {
     "ea": "0x605C52",
-    "line": "call    sub_8AB440",
+    "line": "call    sub_8AB440; ODismemberment: recursive post-death Havok force/blend helper. Finds bhkBlendCollisionObject, bhkBlendController, bhkForceController, and bhkConstraint objects; suitable only for existing collision-enabled subtrees, not arbitrary detached art.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2413,7 +2413,7 @@
   },
   {
     "ea": "0x605C83",
-    "line": "push    20h ; ' '",
+    "line": "push    20h ; ' '; encodedKey",
     "mnemonic": "push",
     "size": 2
   },
@@ -2431,13 +2431,13 @@
   },
   {
     "ea": "0x605C89",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x605C8B",
-    "line": "call    sub_470D00",
+    "line": "call    ActorAnimData_HasAnimKey; Returns whether ActorAnimData +0x9C contains an entry for the encoded animation key. Presence test only; it does not select or play a sequence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2491,7 +2491,7 @@
   },
   {
     "ea": "0x605CA3",
-    "line": "fstp    [esp+4Ch+a2+4]; float",
+    "line": "fstp    [esp+4Ch+a2+4]; easeOutTime",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -2503,19 +2503,19 @@
   },
   {
     "ea": "0x605CA8",
-    "line": "push    5; int",
+    "line": "push    5; slot",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x605CAA",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x605CAC",
-    "line": "call    sub_470FC0",
+    "line": "call    ActorAnimData_ClearSlot; Stops and clears an ActorAnimData slot with the supplied ease-out time. Alias semantics are expansive: argument 5 recursively clears slots 4,0,1,2 then 3 (all five); argument 6 clears slots 1,2 then 3. For the final slot it deactivates attached/base sequences, deactivates manager transition-source sequences when state is 5, nulls +0xA0, sets active key +0x3C and queued key +0x70 to 0x00FF, and action state +0x48 to -1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2569,25 +2569,25 @@
   },
   {
     "ea": "0x605CC1",
-    "line": "call    sub_474AB0",
+    "line": "call    ActorAnimData_RestorePlaySavedSlot; Restores one saved active slot by resolving the encoded key in +0x9C, selecting its sequence entry, replaying it, and restoring the saved slot clock/state.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x605CC6",
-    "line": "push    0",
+    "line": "push    0; slotSelector",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x605CC8",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x605CCA",
-    "line": "call    sub_4706E0",
+    "line": "call    ActorAnimData_GetNormalizedSequenceSlot; ActorAnimData sequence-slot normalizer. Encoded slot 5 maps to base slot 0 and encoded slot 6 maps to base slot 3; otherwise returns animSequences[slot].",
     "mnemonic": "call",
     "size": 5
   },
@@ -2635,7 +2635,7 @@
   },
   {
     "ea": "0x605CE1",
-    "line": "fstp    [esp+50h+a2+4]; float",
+    "line": "fstp    [esp+50h+a2+4]; explicitTimeOrMinusOne",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2647,19 +2647,19 @@
   },
   {
     "ea": "0x605CE7",
-    "line": "fstp    [esp+50h+a2]; float",
+    "line": "fstp    [esp+50h+a2]; deltaTime",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x605CEA",
-    "line": "push    esi; int",
+    "line": "push    esi; ownerActor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x605CEB",
-    "line": "call    sub_476D10",
+    "line": "call    ActorAnimData_Update; CustomAnimSupport evidence: observed ActorAnimData update caller; supports broad scheduler classification.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2677,7 +2677,7 @@
   },
   {
     "ea": "0x605CF3",
-    "line": "call    sub_474510",
+    "line": "call    ActorAnimData_ApplyToActor; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x605D50",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2905,7 +2905,7 @@
   },
   {
     "ea": "0x605D67",
-    "line": "mov     dword ptr [esp+48h+var_30], ecx",
+    "line": "mov     [esp+48h+var_30], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2917,7 +2917,7 @@
   },
   {
     "ea": "0x605D6E",
-    "line": "mov     dword ptr [esp+48h+var_30+4], edx",
+    "line": "mov     [esp+48h+var_30+4], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2947,7 +2947,7 @@
   },
   {
     "ea": "0x605D7D",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },

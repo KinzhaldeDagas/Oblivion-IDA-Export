@@ -7,8 +7,8 @@ void __userpurge MagicItemObject_LoadForm_::ChunkLoopContinue(
 {
   UInt32 ChunkType; // eax
 
-  if ( TESFile_GetNextChunk(a2) && (ChunkType = TESFile_GetChunkType(a2), (*(_DWORD *)(a3 - 8) = ChunkType) != 0) )
-    MagicItemObject_LoadForm_::ChunkLoopBody(a3, a1, a4);
+  if ( TESFile_GetNextChunk(a2) && (ChunkType = TESFile_GetChunkType(a2), (*(_DWORD *)(a3 - 8) = ChunkType) != 0) ) /*0x41b70a*/
+    MagicItemObject_LoadForm_::ChunkLoopBody(a3, a1, a4, (int)a2, a5); /*0x41b70a*/
   else
-    MagicItemObject_LoadForm_::ChunkLoopExit(a1, a3, a5);
+    MagicItemObject_LoadForm_::ChunkLoopExit(a1, a3, a5); /*0x41b70b*/
 }

@@ -1,10 +1,10 @@
-0x7C83B0: push    ebx
+0x7C83B0: push    ebx; Pass231: BSFogProperty debug/text dump; prints fog start at +0x2C and fog end at +0x30 after base NiFogProperty dump.
 0x7C83B1: push    esi
 0x7C83B2: mov     esi, [esp+8+arg_0]
 0x7C83B6: push    edi
 0x7C83B7: push    esi
 0x7C83B8: mov     ebx, ecx
-0x7C83BA: call    sub_7411F0
+0x7C83BA: call    sub_7411F0; Pass231: Base NiFogProperty dump confirms flags/function +0x18, depth +0x1C, color +0x20/+0x24/+0x28.
 0x7C83BF: mov     eax, ds:0B43484h
 0x7C83C4: push    eax; ArgList
 0x7C83C5: call    TESOutput_PrintString

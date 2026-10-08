@@ -14,7 +14,6 @@
 0x8F6045: push    ebp
 0x8F6046: push    edi
 0x8F6047: jmp     short loc_8F6050
-0x8F6049: align 10h
 0x8F6050: mov     eax, [esp+1030h+arg_0]
 0x8F6057: mov     ebp, [eax+ebx*4]
 0x8F605A: xor     ecx, ecx

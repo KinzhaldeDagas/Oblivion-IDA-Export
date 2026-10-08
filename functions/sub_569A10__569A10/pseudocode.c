@@ -1,4 +1,4 @@
 bool __thiscall sub_569A10(_BYTE *this)
 {
-  return *this > 3;
+  return *this > 3; /*0x569a16*/
 }

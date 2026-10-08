@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7D5F80",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Searches a refcounted pointer list by payload identity, removes the first matching node through RemovePosition, and returns a strong reference. Used for active/full shadow lights and receiver geometry removal.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x7D5FB2",
-    "line": "mov     ebp, [esp+28h+arg_4]",
+    "line": "mov     ebp, [esp+28h+payload]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7D5FB6",
-    "line": "jz      short loc_7D5FD0",
+    "line": "jz      short loc_7D5FD0; MEF PERF 2026-10-07: Verified fallback semantics: no matching list node sets position null, then7D5FF4 selects original requested payload pointer as return source; result can still be a strong reference to the requested payload. A nonnull output does not prove removal succeeded. Preserve this in any compatibility fallback.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -130,12 +130,6 @@
     "line": "jmp     short loc_7D5FC0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7D5FBD",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x7D5FC0",
@@ -181,7 +175,7 @@
   },
   {
     "ea": "0x7D5FD0",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; MEF PERF 2026-10-07: Verified fallback semantics: no matching list node sets position null, then7D5FF4 selects original requested payload pointer as return source; result can still be a strong reference to the requested payload. A nonnull output does not prove removal succeeded. Preserve this in any compatibility fallback.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -193,7 +187,7 @@
   },
   {
     "ea": "0x7D5FD4",
-    "line": "mov     [esp+28h+arg_4], eax",
+    "line": "mov     [esp+28h+payload], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -205,13 +199,13 @@
   },
   {
     "ea": "0x7D5FDA",
-    "line": "lea     eax, [esp+28h+arg_4]",
+    "line": "lea     eax, [esp+28h+payload]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7D5FDE",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
@@ -223,13 +217,13 @@
   },
   {
     "ea": "0x7D5FE3",
-    "line": "push    edx",
+    "line": "push    edx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7D5FE4",
-    "line": "call    sub_7C17D0",
+    "line": "call    NiTRefPointerList__RemovePosition; Generic refcounted NiT pointer-list RemovePosition helper handling head, tail and middle nodes while returning a strong payload reference and preserving list links/count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +271,7 @@
   },
   {
     "ea": "0x7D5FFA",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -496,5 +490,89 @@
     "line": "retn    8",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CEC10",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC13",
+    "line": "and     eax, 2",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC16",
+    "line": "jz      locret_9CEC28",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEC1C",
+    "line": "and     dword ptr [ebp-14h], 0FFFFFFFDh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEC20",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC23",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC28",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEC29",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEC2D",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC30",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEC33",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEC35",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC3A",
+    "line": "mov     eax, offset stru_AF7AA4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEC3F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

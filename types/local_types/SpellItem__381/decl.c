@@ -1,1 +1,1 @@
-SpellItem
+struct SpellItem;

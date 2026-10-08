@@ -1,4 +1,4 @@
-0x6D68F0: push    0FFFFFFFFh
+0x6D68F0: push    0FFFFFFFFh; Oblivion NiTransformInterpolator clone factory. Allocates a 0x38-byte default object then delegates base/cached-transform/data/cursor copying to NiTransformInterpolator_CopyMembers.
 0x6D68F2: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x6D68F7: mov     eax, large fs:0
 0x6D68FD: push    eax
@@ -29,3 +29,15 @@
 0x6D6945: mov     ecx, ds:0B24264h
 0x6D694B: mov     [esi+10h], ecx
 0x6D694E: mov     edx, ds:0B24268h
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

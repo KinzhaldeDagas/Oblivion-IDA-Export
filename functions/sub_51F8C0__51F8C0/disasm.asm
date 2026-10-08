@@ -20,9 +20,8 @@
 0x51F8F2: push    ebx
 0x51F8F3: mov     ecx, esi
 0x51F8F5: mov     [ebp+var_14], edi
-0x51F8F8: call    TESFile_InitializeFormFromRecord
+0x51F8F8: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x51F8FD: jmp     short loc_51F903
-0x51F8FF: align 10h
 0x51F900: mov     edi, [ebp+var_14]
 0x51F903: mov     ecx, esi
 0x51F905: call    TESFile_GetChunkType
@@ -42,7 +41,7 @@
 0x51F943: push    200h; a4
 0x51F948: push    edi; Dst
 0x51F949: mov     ecx, esi; a1
-0x51F94B: call    TESFile_GetChunkData
+0x51F94B: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51F950: mov     eax, [ebx]
 0x51F952: mov     edx, [eax+0D8h]
 0x51F958: push    edi
@@ -54,20 +53,20 @@
 0x51F967: push    eax; Dst
 0x51F968: push    esi; a2
 0x51F969: mov     ecx, ebx; this
-0x51F96B: call    TESForm_LoadGenericComponents
+0x51F96B: call    TESForm_LoadGenericComponents; Generic fixed-prefix/component DATA overlay. Copies min(chunk_length,fixed_prefix_size), then updates later components only when their starting offset is below chunk_length; omitted suffix components retain prior in-memory values.
 0x51F970: jmp     def_51F9F6; jumptable 0051F9F6 default case, cases 1296125514-1296125516,1296125518-1296125521,1296125523-1296125527
 0x51F975: test    ebx, ebx
 0x51F977: jz      short loc_51F98B
 0x51F979: lea     eax, [ebx+18h]
 0x51F97C: push    esi
 0x51F97D: push    eax
-0x51F97E: call    TESFullname_Load
+0x51F97E: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51F983: add     esp, 8
 0x51F986: jmp     def_51F9F6; jumptable 0051F9F6 default case, cases 1296125514-1296125516,1296125518-1296125521,1296125523-1296125527
 0x51F98B: xor     eax, eax
 0x51F98D: push    esi
 0x51F98E: push    eax
-0x51F98F: call    TESFullname_Load
+0x51F98F: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x51F994: add     esp, 8
 0x51F997: jmp     def_51F9F6; jumptable 0051F9F6 default case, cases 1296125514-1296125516,1296125518-1296125521,1296125523-1296125527
 0x51F99C: cmp     eax, 4D414E43h
@@ -75,7 +74,7 @@
 0x51F9A7: lea     ecx, [ebx+38h]
 0x51F9AA: push    ecx
 0x51F9AB: mov     ecx, esi
-0x51F9AD: call    TESFile_GetChunkData4
+0x51F9AD: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x51F9B2: jmp     def_51F9F6; jumptable 0051F9F6 default case, cases 1296125514-1296125516,1296125518-1296125521,1296125523-1296125527
 0x51F9B7: test    edi, edi
 0x51F9B9: jz      def_51F9F6; jumptable 0051F9F6 default case, cases 1296125514-1296125516,1296125518-1296125521,1296125523-1296125527
@@ -85,7 +84,7 @@
 0x51F9CC: push    0; a4
 0x51F9CE: push    edi; Dst
 0x51F9CF: mov     ecx, esi; a1
-0x51F9D1: call    TESFile_GetChunkData
+0x51F9D1: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51F9D6: mov     ecx, [ebp+var_14]
 0x51F9D9: add     ecx, 8
 0x51F9DC: jmp     loc_51FA9A
@@ -101,7 +100,7 @@
 0x51FA09: push    8; a4
 0x51FA0B: push    edi; Dst
 0x51FA0C: mov     ecx, esi; a1
-0x51FA0E: call    TESFile_GetChunkData
+0x51FA0E: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51FA13: push    edi
 0x51FA14: lea     ecx, [ebx+28h]
 0x51FA17: call    BSSimpleList_PushBack
@@ -131,7 +130,7 @@
 0x51FA6A: push    0; a4
 0x51FA6C: push    edi; Dst
 0x51FA6D: mov     ecx, esi; a1
-0x51FA6F: call    TESFile_GetChunkData
+0x51FA6F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51FA74: mov     ecx, [ebp+var_14]
 0x51FA77: jmp     short loc_51FA9A
 0x51FA79: test    edi, edi; jumptable 0051F9F6 case 1296125513
@@ -142,7 +141,7 @@
 0x51FA8A: push    0; a4
 0x51FA8C: push    edi; Dst
 0x51FA8D: mov     ecx, esi; a1
-0x51FA8F: call    TESFile_GetChunkData
+0x51FA8F: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x51FA94: mov     ecx, [ebp+var_14]
 0x51FA97: add     ecx, 14h; this
 0x51FA9A: push    0; a3
@@ -166,3 +165,18 @@
 0x51FACE: mov     esp, ebp
 0x51FAD0: pop     ebp
 0x51FAD1: retn    4
+0x9B7BF0: mov     eax, [ebp+var_14]
+0x9B7BF3: push    eax
+0x9B7BF4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B7BF9: pop     ecx
+0x9B7BFA: retn
+0x9B7BFB: mov     edx, [esp-4+arg_4]
+0x9B7BFF: lea     eax, [edx+0Ch]
+0x9B7C02: mov     ecx, [edx-18h]
+0x9B7C05: xor     ecx, eax
+0x9B7C07: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7C0C: mov     ecx, [edx-4]
+0x9B7C0F: xor     ecx, eax
+0x9B7C11: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7C16: mov     eax, offset stru_AE24FC
+0x9B7C1B: jmp     ___CxxFrameHandler3

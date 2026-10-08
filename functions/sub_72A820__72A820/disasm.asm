@@ -1,8 +1,8 @@
 0x72A820: sub     esp, 18h
 0x72A823: push    ebx
-0x72A824: mov     ebx, [esp+1Ch+arg_0]
+0x72A824: mov     ebx, [esp+1Ch+input]
 0x72A828: push    esi
-0x72A829: mov     esi, [esp+20h+arg_4]
+0x72A829: mov     esi, [esp+20h+transform]
 0x72A82D: push    edi
 0x72A82E: push    ebx
 0x72A82F: lea     eax, [esp+28h+var_C]
@@ -11,9 +11,9 @@
 0x72A836: mov     ecx, esi
 0x72A838: call    sub_7101F0
 0x72A83D: fld     dword ptr [esi+30h]
-0x72A840: fstp    [esp+24h+arg_0]
+0x72A840: fstp    [esp+24h+input]
 0x72A844: fld     dword ptr [eax]
-0x72A846: fld     [esp+24h+arg_0]
+0x72A846: fld     [esp+24h+input]
 0x72A84A: fld     st
 0x72A84C: fmulp   st(2), st
 0x72A84E: fxch    st(1)

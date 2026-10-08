@@ -74,12 +74,12 @@
 0x42CBA7: pop     ebp
 0x42CBA8: jz      short loc_42CBBD
 0x42CBAA: push    eax
-0x42CBAB: call    FormHeapFree
+0x42CBAB: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x42CBB0: add     esp, 4
 0x42CBB3: mov     dword ptr [esi+198h], 0
 0x42CBBD: movzx   ecx, byte ptr [esp+0Ch+var_4+3]
 0x42CBC2: push    ecx; Size
-0x42CBC3: call    FormHeapAlloc
+0x42CBC3: call    FormHeapAlloc; MEF v39 verified archive folder-name fix: allocate length+1 with zero sentinel. On OOM leave archive +0x198 null, return an unowned static empty string through epilogue 0x42CBEE, and remove pending size arg.
 0x42CBC8: movzx   ecx, byte ptr [esp+10h+var_4+3]
 0x42CBCD: push    ebx
 0x42CBCE: lea     edx, [esp+14h+arg_0]

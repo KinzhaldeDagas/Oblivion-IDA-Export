@@ -1,4 +1,4 @@
-0x7736F0: mov     eax, [esp+arg_0]
+0x7736F0: mov     eax, [esp+hresult]; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x7736F4: cmp     eax, 88760818h
 0x7736F9: ja      short loc_773741
 0x7736FB: jz      short loc_77373B

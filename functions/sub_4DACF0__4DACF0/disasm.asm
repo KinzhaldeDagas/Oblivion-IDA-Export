@@ -8,7 +8,7 @@
 0x4DACFF: mov     edi, [eax+0Ch]
 0x4DAD02: mov     ecx, ebp
 0x4DAD04: mov     [esp+2Ch+arg_4], edi
-0x4DAD08: call    sub_452A60
+0x4DAD08: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x4DAD0D: cmp     ebp, [edi+10h]
 0x4DAD10: mov     ebx, eax
 0x4DAD12: jz      short loc_4DAD37
@@ -38,7 +38,7 @@
 0x4DAD55: test    eax, eax
 0x4DAD57: jz      short loc_4DAD72
 0x4DAD59: lea     esp, [esp+0]
-0x4DAD60: cmp     eax, offset dword_B35288
+0x4DAD60: cmp     eax, 0B35288h
 0x4DAD65: jz      loc_4DAE4F
 0x4DAD6B: mov     eax, [eax+4]
 0x4DAD6E: test    eax, eax
@@ -47,7 +47,7 @@
 0x4DAD75: test    eax, eax
 0x4DAD77: jz      loc_4DAE4F
 0x4DAD7D: push    eax
-0x4DAD7E: push    offset dword_BA7D84
+0x4DAD7E: push    offset stru_BA7D84
 0x4DAD83: call    NiRTTI_Cast
 0x4DAD88: mov     esi, eax
 0x4DAD8A: add     esp, 8
@@ -59,19 +59,19 @@
 0x4DAD9E: push    eax
 0x4DAD9F: mov     ecx, esi
 0x4DADA1: call    sub_4D6900
-0x4DADA6: lea     ecx, [esp+2Ch+var_10]
+0x4DADA6: lea     ecx, [esp+2Ch+source]
 0x4DADAA: push    ecx
 0x4DADAB: mov     ecx, esi
 0x4DADAD: call    sub_4D6950
-0x4DADB2: mov     ecx, ds:0B33B00h
-0x4DADB8: push    0Ch; Size
+0x4DADB2: mov     ecx, ds:0B33B00h; self
+0x4DADB8: push    0Ch; byteCount
 0x4DADBA: lea     edx, [esp+30h+Src]
-0x4DADBE: push    edx; Src
+0x4DADBE: push    edx; source
 0x4DADBF: call    SaveLoad_SaveData
-0x4DADC4: mov     ecx, ds:0B33B00h
-0x4DADCA: push    10h; Size
-0x4DADCC: lea     eax, [esp+30h+var_10]
-0x4DADD0: push    eax; Src
+0x4DADC4: mov     ecx, ds:0B33B00h; self
+0x4DADCA: push    10h; byteCount
+0x4DADCC: lea     eax, [esp+30h+source]
+0x4DADD0: push    eax; source
 0x4DADD1: call    SaveLoad_SaveData
 0x4DADD6: mov     ecx, [esi+8]
 0x4DADD9: test    ecx, ecx
@@ -86,10 +86,10 @@
 0x4DADF1: test    byte ptr [edi], 4
 0x4DADF4: mov     byte ptr [esp+2Ch+arg_4], al
 0x4DADF8: jz      short loc_4DAE0C
-0x4DADFA: mov     ecx, ds:0B33B00h
-0x4DAE00: push    1; Size
+0x4DADFA: mov     ecx, ds:0B33B00h; self
+0x4DAE00: push    1; byteCount
 0x4DAE02: lea     eax, [esp+30h+arg_4]
-0x4DAE06: push    eax; Src
+0x4DAE06: push    eax; source
 0x4DAE07: call    SaveLoad_SaveData
 0x4DAE0C: cmp     byte ptr [esp+2Ch+arg_4], 0
 0x4DAE11: jz      short loc_4DAE4F
@@ -97,19 +97,19 @@
 0x4DAE17: push    ecx
 0x4DAE18: mov     ecx, esi
 0x4DAE1A: call    sub_4D98E0
-0x4DAE1F: lea     edx, [esp+2Ch+var_10]
+0x4DAE1F: lea     edx, [esp+2Ch+source]
 0x4DAE23: push    edx
 0x4DAE24: mov     ecx, esi
 0x4DAE26: call    sub_4D9920
-0x4DAE2B: mov     ecx, ds:0B33B00h
-0x4DAE31: push    0Ch; Size
+0x4DAE2B: mov     ecx, ds:0B33B00h; self
+0x4DAE31: push    0Ch; byteCount
 0x4DAE33: lea     eax, [esp+30h+Src]
-0x4DAE37: push    eax; Src
+0x4DAE37: push    eax; source
 0x4DAE38: call    SaveLoad_SaveData
-0x4DAE3D: push    0Ch; Size
-0x4DAE3F: lea     ecx, [esp+30h+var_10]
-0x4DAE43: push    ecx; Src
-0x4DAE44: mov     ecx, ds:0B33B00h
+0x4DAE3D: push    0Ch; byteCount
+0x4DAE3F: lea     ecx, [esp+30h+source]
+0x4DAE43: push    ecx; source
+0x4DAE44: mov     ecx, ds:0B33B00h; self
 0x4DAE4A: call    SaveLoad_SaveData
 0x4DAE4F: pop     edi
 0x4DAE50: pop     esi

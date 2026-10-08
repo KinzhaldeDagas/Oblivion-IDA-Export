@@ -1,19 +1,36 @@
 {
-  "callees_count": 87,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 32,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7A3C80",
+  "chunks": [
+    [
+      "0x7A3C80",
+      "0x7A4189"
+    ],
+    [
+      "0x9CC9D0",
+      "0x9CCA03"
+    ]
+  ],
+  "chunks_sha256": "e75b188ce8b5ed20b6a07cd1dee7604624415c513e2b6d7ae19385b778968a92",
+  "comment_regular": "Source-match: CTreeEngine::BuildBranchLods. Builds a flat branch list, ranks by volume with large-branch retention and fuzziness, then emits branch LOD strips through CBranch::ComputeLod.",
+  "comment_repeatable": "Flattens branch tree, ranks by volume/large-branch retention/fuzziness, then emits branch LOD strips through OB_CBranch_ComputeLod_010201A0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 51,
+  "display_name": "OB_CTreeEngine_BuildBranchLods_010201A0",
   "end_ea": "0x7A4189",
+  "evidence_confidence": "Unknown",
   "flags": 23552,
   "has_pseudocode": true,
-  "name": "sub_7A3C80",
+  "name": "OB_CTreeEngine_BuildBranchLods_010201A0",
   "segment": ".text",
   "sha256": "b3399f8db5298fa7aae31ae9758b337e48ad517e4368408d680d1e7a9c72bdad",
   "size": 1289,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7A3C80",
-  "type": "void __thiscall(float *this)",
-  "xrefs_from_count": 502,
+  "total_chunk_size": 1340,
+  "type": "void __thiscall(OB_CTreeEngine_010201A0 *this)",
+  "xrefs_from_count": 567,
   "xrefs_to_count": 1
 }

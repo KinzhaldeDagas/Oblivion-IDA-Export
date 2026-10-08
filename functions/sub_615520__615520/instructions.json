@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x615520",
-    "line": "fldz",
+    "line": "fldz; Caches desired combat distance based on active combat mode and ranged/melee data.",
     "mnemonic": "fldz",
     "size": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x615528",
-    "line": "fcom    dword ptr [esi+188h]",
+    "line": "fcom    dword ptr [esi+188h]; CombatController+0x188 caches desired combat distance. Negative means invalid; mode changes reset it. Modes 2/4 cache the optimal ranged bound computed from projectile/spell limits and combat-style multipliers.",
     "mnemonic": "fcom",
     "size": 6
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x615545",
-    "line": "fst     [esp+10h+var_C]",
+    "line": "fst     [esp+10h+outOptimalDistance]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x615593",
-    "line": "fstp    [esp+14h+var_8]",
+    "line": "fstp    qword ptr [esp+14h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x6155A3",
-    "line": "fmul    [esp+14h+var_8]",
+    "line": "fmul    qword ptr [esp+14h+outMaximumDistance]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x6155A8",
-    "line": "fstp    [esp+10h+var_C]",
+    "line": "fstp    [esp+10h+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6155AC",
-    "line": "fld     [esp+10h+var_C]",
+    "line": "fld     [esp+10h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x6155CC",
-    "line": "fstp    [esp+14h+var_8]",
+    "line": "fstp    qword ptr [esp+14h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6155DC",
-    "line": "fmul    [esp+14h+var_8]",
+    "line": "fmul    qword ptr [esp+14h+outMaximumDistance]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -385,13 +385,13 @@
   },
   {
     "ea": "0x6155E1",
-    "line": "fstp    [esp+10h+var_C]",
+    "line": "fstp    [esp+10h+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6155E5",
-    "line": "fld     [esp+10h+var_C]",
+    "line": "fld     [esp+10h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x6155F6",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x615601",
-    "line": "call    sub_612D60",
+    "line": "call    CombatController_GetEquippedWeaponForm",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x61561E",
-    "line": "fstp    [esp+14h+var_C]",
+    "line": "fstp    [esp+14h+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -523,13 +523,13 @@
   },
   {
     "ea": "0x61562C",
-    "line": "fstp    [esp+14h+var_8]",
+    "line": "fstp    qword ptr [esp+14h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x615630",
-    "line": "fld     [esp+14h+var_C]",
+    "line": "fld     [esp+14h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x615635",
-    "line": "fstp    [esp+18h+var_18]; float",
+    "line": "fstp    [esp+18h+baseDistance]; baseDistance",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x615638",
-    "line": "call    Calc_GetCombatDistance",
+    "line": "call    Calc_GetCombatDistance; Converts a base reach/distance value to world combat distance using the Oblivion combat-distance game-setting multiplier.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x61563D",
-    "line": "fmul    [esp+18h+var_8]",
+    "line": "fmul    qword ptr [esp+18h+outMaximumDistance]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -571,13 +571,13 @@
   },
   {
     "ea": "0x615645",
-    "line": "fstp    [esp+10h+var_C]",
+    "line": "fstp    [esp+10h+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x615649",
-    "line": "fld     [esp+10h+var_C]",
+    "line": "fld     [esp+10h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -607,61 +607,61 @@
   },
   {
     "ea": "0x615658",
-    "line": "lea     ecx, [esp+14h+var_8]; jumptable 0061557B cases 2,4",
+    "line": "lea     ecx, [esp+14h+outMaximumDistance]; jumptable 0061557B cases 2,4",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x61565C",
-    "line": "fst     [esp+14h+var_C]",
+    "line": "fst     [esp+14h+outOptimalDistance]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x615660",
-    "line": "push    ecx",
+    "line": "push    ecx; outMaximumDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x615661",
-    "line": "fstp    dword ptr [esp+18h+var_8]",
+    "line": "fstp    [esp+18h+outMaximumDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x615665",
-    "line": "lea     edx, [esp+18h+var_C]",
+    "line": "lea     edx, [esp+18h+outOptimalDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x615669",
-    "line": "push    edx",
+    "line": "push    edx; outOptimalDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x61566A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x61566C",
-    "line": "call    sub_6142D0",
+    "line": "call    CombatController_GetRangedDistanceBounds; Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x615671",
-    "line": "fld     [esp+14h+var_C]",
+    "line": "fld     [esp+14h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x615675",
-    "line": "fstp    [esp+14h+var_C]",
+    "line": "fstp    [esp+14h+outOptimalDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x61567A",
-    "line": "fld     [esp+10h+var_C]",
+    "line": "fld     [esp+10h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x61568C",
-    "line": "fld     [esp+10h+var_C]",
+    "line": "fld     [esp+10h+outOptimalDistance]",
     "mnemonic": "fld",
     "size": 4
   },

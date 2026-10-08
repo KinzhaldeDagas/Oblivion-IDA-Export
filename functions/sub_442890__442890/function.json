@@ -1,19 +1,36 @@
 {
-  "callees_count": 23,
-  "callers_count": 20,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_442890",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
+  "callers_count": 29,
+  "chunks": [
+    [
+      "0x442890",
+      "0x442A24"
+    ],
+    [
+      "0x9AD120",
+      "0x9AD15C"
+    ]
+  ],
+  "chunks_sha256": "6300d2a710d44770113d2ed6b0c4774664acc2595d3d2dc19d6d845f2d7545f1",
+  "comment_regular": "\n\n[2026-10-03 texture ownership/discovery] Verified successful returned out slot owns a reference: cache-hit and load paths increment for the output while releasing local temporaries. Plugin transfers that reference to per-family/material storage and releases it if insertion fails; final shared-owner retirement releases cached texture references. No extra AddRef is required for successful ownership transfer into the cache.\n\nTES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.\n[2026-10-05 Bamboo material investigation] v120 branch map-bank bridge accepts nonnull texture object without renderer-resource verification, logs Bamboobark01.png. DDS alias absent on disk at inspection; source-faithful DDS staged/installed separately. Frond Bamboo01/02 DDS already present with green RGB and matching shader-pass texture pointers. White-material causal attribution to PNG/placeholder remains INFERRED, not proven by object pointer. Saved frame683-modern shows white stems plus some green foliage; native companion frame is black and is not a visual reference.",
+  "comment_repeatable": "TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.\n\n[2026-10-03 v106 optional-material resolution] Verified ordinary missing-file path writes NULL at 0x442953 when abNoFileOK is true; fresh-load failure can also return NULL. Native palette only stores successful images (0x4429B6), so absent images are queried again on subsequent calls. Plugin v106 caches completed optional-map NULL results by shared tree family/material through final owner retirement; native faults remain retryable. This is plugin policy, not native negative caching. Do not interpret a normal NULL return as proving specifically file absence versus decode/allocation failure.\n[v110 caller change] Nonnull owned output is not automatically accepted by frond material discovery. Rejected replacement/unsupported and deferred outputs release exactly the returned reference; accepted output transfers ownership to family cache. Deferred result propagates retryable status and does not create a negative optional-map entry. Automatic scene refresh is a separate integration step.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_TES_LoadOrFindSourceTexture_010201A0",
   "end_ea": "0x442A24",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_442890",
+  "name": "OB_TES_LoadOrFindSourceTexture_010201A0",
   "segment": ".text",
   "sha256": "9418b690ae597eb9db04b23ee43669a7748ea8a529fd9fe511b3cdf9f0a4ed6c",
   "size": 404,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x442890",
-  "type": "UInt32 *__stdcall(UInt32 *, char *ArgList, char, char)",
-  "xrefs_from_count": 160,
+  "total_chunk_size": 464,
+  "type": "NiSourceTexture **__stdcall(NiSourceTexture **outTexture, char *path, bool allowMissing, bool searchArchives)",
+  "xrefs_from_count": 178,
   "xrefs_to_count": 29
 }

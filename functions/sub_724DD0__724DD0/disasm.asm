@@ -22,10 +22,10 @@
 0x724E0A: mov     edx, [esi+24h]
 0x724E0D: mov     eax, [edi+24h]
 0x724E10: shl     ecx, 4
-0x724E13: push    ecx; Size
-0x724E14: push    edx; Src
-0x724E15: push    eax; Dst
-0x724E16: call    _memcpy
+0x724E13: push    ecx; byteCount
+0x724E14: push    edx; source
+0x724E15: push    eax; destination
+0x724E16: call    _memcpy;
 0x724E1B: add     esp, 0Ch
 0x724E1E: pop     edi
 0x724E1F: pop     esi

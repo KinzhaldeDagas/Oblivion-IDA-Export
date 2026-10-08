@@ -1,1 +1,1 @@
-BSStream
+struct BSStream;

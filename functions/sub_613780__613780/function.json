@@ -1,19 +1,32 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 6,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x613780",
+      "0x61380A"
+    ]
+  ],
+  "chunks_sha256": "e8d7a070cd48dd33488c4d84b2babf4f1ab65985ee9f2adb401e8039019527e5",
+  "comment_regular": "Returns the combat actor's weapon-skill level as an integer. Actor paths read the relevant actor value; creature fallback converts its floating calculation to SInt32 before returning EAX.",
+  "comment_repeatable": "Returns the combat actor's weapon-skill level as an integer. Actor paths read the relevant actor value; creature fallback converts its floating calculation to SInt32 before returning EAX.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_613780",
+  "display_name": "CombatController_GetWeaponSkillLevel",
   "end_ea": "0x61380A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_613780",
+  "name": "CombatController_GetWeaponSkillLevel",
   "segment": ".text",
   "sha256": "e8d7a070cd48dd33488c4d84b2babf4f1ab65985ee9f2adb401e8039019527e5",
   "size": 138,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x613780",
-  "type": "double __thiscall(void **this)",
+  "total_chunk_size": 138,
+  "type": "int __thiscall(void *this)",
   "xrefs_from_count": 66,
   "xrefs_to_count": 3
 }

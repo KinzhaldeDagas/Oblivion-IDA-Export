@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7F13B0",
+      "0x7F1404"
+    ]
+  ],
+  "chunks_sha256": "1e3605d6718d7565eb5c1589edbc040d4b0aa6a33bccff873c08634638ad450c",
+  "comment_regular": "\n\n[v151 normal-card integration] Verified actual leaf shader virtual+2C entry is7F13B0 (A92844+2C), not internal helper7F0BC0. Resets pass queue through+80, calls helper with seven stack arguments, appends native pass+394. Plugin private copy of43-entry leaf shader vtable wraps this entry to bind paired normal texture stage1 after native setup; native type9/property layout retained. Offscreen native-bytecode comparison passed514 draws; native scene execution remains UNVERIFIED.\n\nSpeedTreeLeafShader render/setup virtual: calls vtable +0x80 pre-pass, then leaf setup 0x7F0BC0, appends pass +0x394 to the current pass list.\nSpeedTreeOBSE v167 VERIFIED seven-stack-argument leaf setup ABI reused by isolated wind shader vtable. Native pass reset/append remains; plugin binds normal texture stage1 only for normal material mode. Plain path retains native pixel programs; RGB and normal modes retain existing plugin pixel formulas.",
+  "comment_repeatable": "SpeedTreeLeafShader render/setup virtual: calls vtable +0x80 pre-pass, then leaf setup 0x7F0BC0, appends pass +0x394 to the current pass list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7F13B0",
+  "display_name": "OB_SpeedTreeLeafShader_BuildDrawPass_010201A0",
   "end_ea": "0x7F1404",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7F13B0",
+  "name": "OB_SpeedTreeLeafShader_BuildDrawPass_010201A0",
   "segment": ".text",
   "sha256": "1e3605d6718d7565eb5c1589edbc040d4b0aa6a33bccff873c08634638ad450c",
   "size": 84,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7F13B0",
-  "type": "int __thiscall(void *this, float, int, int, _DWORD *, int, int, int)",
+  "total_chunk_size": 84,
+  "type": "int __thiscall(void *self, void *geometry, void *skin, void *rendererData, void *propertyArray, void *effects, void *world, void *bound)",
   "xrefs_from_count": 32,
   "xrefs_to_count": 1
 }

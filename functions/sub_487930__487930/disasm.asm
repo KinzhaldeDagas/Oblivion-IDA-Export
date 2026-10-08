@@ -42,7 +42,7 @@
 0x4879A9: mov     edi, [eax+4]
 0x4879AC: test    edi, edi
 0x4879AE: jz      short loc_487A2E
-0x4879B0: mov     eax, [esp+14h+arg_0]
+0x4879B0: mov     eax, [esp+14h+form]
 0x4879B4: test    eax, eax
 0x4879B6: jz      short loc_4879BE
 0x4879B8: cmp     edi, eax
@@ -57,11 +57,11 @@
 0x4879CD: add     esp, 8
 0x4879D0: test    al, al
 0x4879D2: jz      short loc_487A2E
-0x4879D4: push    0
-0x4879D6: push    1
-0x4879D8: push    edi
-0x4879D9: mov     ecx, ebp
-0x4879DB: call    ContainerExtraData_GetEntryForForm
+0x4879D4: push    0; referenceFormIDOrZero
+0x4879D6: push    1; unusedAlwaysOne
+0x4879D8: push    edi; form
+0x4879D9: mov     ecx, ebp; this
+0x4879DB: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x4879E0: mov     esi, eax
 0x4879E2: test    esi, esi
 0x4879E4: jz      loc_487AAB
@@ -95,14 +95,14 @@
 0x487A39: mov     edi, [esp+14h+arg_8]
 0x487A3D: cmp     [esp+14h+var_4], edi
 0x487A41: jge     loc_487B51
-0x487A47: mov     eax, [esp+14h+arg_0]
+0x487A47: mov     eax, [esp+14h+form]
 0x487A4B: test    eax, eax
 0x487A4D: jz      loc_487ADE
-0x487A53: push    0
-0x487A55: push    1
-0x487A57: push    eax
-0x487A58: mov     ecx, ebp
-0x487A5A: call    ContainerExtraData_GetEntryForForm
+0x487A53: push    0; referenceFormIDOrZero
+0x487A55: push    1; unusedAlwaysOne
+0x487A57: push    eax; form
+0x487A58: mov     ecx, ebp; this
+0x487A5A: call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.
 0x487A5F: mov     esi, eax
 0x487A61: test    esi, esi
 0x487A63: jz      loc_487B16

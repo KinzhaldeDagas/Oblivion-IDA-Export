@@ -1,1 +1,4 @@
-HCOLORSPACE__
+struct HCOLORSPACE__
+{
+int unused;
+};

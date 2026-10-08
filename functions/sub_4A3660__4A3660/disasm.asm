@@ -29,3 +29,12 @@
 0x4A36BD: pop     esi
 0x4A36BE: add     esp, 10h
 0x4A36C1: retn    4
+0x9B2890: mov     ecx, [ebp-10h]
+0x9B2893: jmp     TESRegionData_SetBaseVTable
+0x9B2898: mov     edx, [esp+arg_4]
+0x9B289C: lea     eax, [edx-0Ch]
+0x9B289F: mov     ecx, [edx-10h]
+0x9B28A2: xor     ecx, eax
+0x9B28A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B28A9: mov     eax, offset stru_ADE820
+0x9B28AE: jmp     ___CxxFrameHandler3

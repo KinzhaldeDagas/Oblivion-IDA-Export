@@ -1,4 +1,4 @@
-void *sub_7331C0()
+NiRTTI *sub_7331C0()
 {
-  return &unk_B40118;
+  return &stru_B40118; /*0x7331c5*/
 }

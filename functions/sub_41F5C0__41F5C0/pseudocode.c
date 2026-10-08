@@ -1,4 +1,5 @@
-void __thiscall sub_41F5C0(_DWORD *this)
+// Remove spell-effect attached-light extra-data type 0x49 from this reference extra-data list.
+int __thiscall ExtraDataList_RemoveSpellEffectLight(ExtraDataList *self)
 {
-  BaseExtraList_RemoveExtraByType(this, 0x49u);
+  return BaseExtraList_RemoveExtraByType(self, 0x49u); /*0x41f5c7*/
 }

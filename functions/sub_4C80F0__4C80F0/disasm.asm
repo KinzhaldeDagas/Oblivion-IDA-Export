@@ -20,7 +20,6 @@
 0x4C8122: xor     esi, esi
 0x4C8124: xor     edi, edi
 0x4C8126: jmp     short loc_4C8130
-0x4C8128: align 10h
 0x4C8130: lea     ecx, [esi+1]
 0x4C8133: lea     edx, [ecx-12h]
 0x4C8136: cmp     edx, 0FFh

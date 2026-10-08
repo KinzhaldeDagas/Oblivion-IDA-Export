@@ -96,12 +96,6 @@
     "size": 2
   },
   {
-    "ea": "0x5B085D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
-  },
-  {
     "ea": "0x5B0860",
     "line": "cmp     byte ptr [esi+14h], 1",
     "mnemonic": "cmp",
@@ -565,7 +559,7 @@
   },
   {
     "ea": "0x5B0954",
-    "line": "mov     ecx, [esi+20h]",
+    "line": "mov     ecx, [esi+20h]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -589,7 +583,7 @@
   },
   {
     "ea": "0x5B095D",
-    "line": "call    sub_6B7260",
+    "line": "call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,4 @@
-HBITMAP__
+struct HBITMAP__
+{
+int unused;
+};

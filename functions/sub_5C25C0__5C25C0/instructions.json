@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5C2600",
-    "line": "cmp     ds:dword_B3B44C[eax], 0",
+    "line": "cmp     dword ptr ds:unk_B3B44C[eax], 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x5C2612",
-    "line": "mov     eax, ds:dword_B3B444[eax]",
+    "line": "mov     eax, dword ptr ds:unk_B3B444[eax]",
     "mnemonic": "mov",
     "size": 6
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x5C265D",
-    "line": "cmp     ds:dword_B3B44C[eax], ebx",
+    "line": "cmp     dword ptr ds:unk_B3B44C[eax], ebx",
     "mnemonic": "cmp",
     "size": 6
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x5C2680",
-    "line": "add     ecx, offset quickKeyList_ptr",
+    "line": "add     ecx, 0B3B440h",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x5C2686",
-    "line": "call    NiTPointerList__FreeAllNodes",
+    "line": "call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x5C269A",
-    "line": "add     ecx, offset quickKeyList_ptr",
+    "line": "add     ecx, 0B3B440h",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x5C26A0",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },

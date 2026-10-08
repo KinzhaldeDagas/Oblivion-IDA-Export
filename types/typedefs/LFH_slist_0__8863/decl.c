@@ -1,1 +1,1 @@
-LFH_slist_0
+typedef LFH_slist LFH_slist_0;

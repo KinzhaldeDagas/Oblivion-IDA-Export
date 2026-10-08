@@ -1,4 +1,4 @@
-0x894940: push    esi
+0x894940: push    esi; [Controller decode 2026-07-09] Sets active bhk character-controller shape type and rebuilds/reinstalls the active shape when available.
 0x894941: push    edi
 0x894942: mov     edi, [esp+8+arg_0]
 0x894946: mov     esi, ecx
@@ -18,9 +18,9 @@
 0x894976: test    ecx, ecx
 0x894978: mov     [esi+36Ch], edi
 0x89497E: jz      short loc_894987
-0x894980: call    sub_8AC070
+0x894980: call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.
 0x894985: jmp     short loc_89498C
-0x894987: mov     eax, offset stru_BA7A40
+0x894987: mov     eax, offset unk_BA7A40
 0x89498C: push    eax
 0x89498D: mov     ecx, esi
 0x89498F: call    sub_890BA0

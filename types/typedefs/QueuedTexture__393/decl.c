@@ -1,1 +1,1 @@
-QueuedTexture
+struct QueuedTexture;

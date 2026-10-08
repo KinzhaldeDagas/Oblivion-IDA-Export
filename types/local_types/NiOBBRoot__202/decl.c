@@ -1,1 +1,1 @@
-NiOBBRoot
+struct NiOBBRoot;

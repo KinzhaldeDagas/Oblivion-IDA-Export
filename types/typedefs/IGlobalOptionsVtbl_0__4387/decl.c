@@ -1,1 +1,1 @@
-IGlobalOptionsVtbl_0
+typedef IGlobalOptionsVtbl IGlobalOptionsVtbl_0;

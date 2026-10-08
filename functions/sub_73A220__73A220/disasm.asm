@@ -1,4 +1,4 @@
-0x73A220: push    0FFFFFFFFh
+0x73A220: push    0FFFFFFFFh; Pass226/227: NiScreenSpaceCamera copy/clone path; copies texture array pointers, not screen-texture records.
 0x73A222: push    offset SEH_73A220
 0x73A227: mov     eax, large fs:0
 0x73A22D: push    eax
@@ -28,7 +28,6 @@
 0x73A27B: cmp     [ebp+12Eh], bx
 0x73A282: jbe     loc_73A353
 0x73A288: jmp     short loc_73A290
-0x73A28A: align 10h
 0x73A290: mov     eax, [ebp+128h]
 0x73A296: mov     esi, [eax+ebx*4]
 0x73A299: test    esi, esi
@@ -104,7 +103,6 @@
 0x73A37A: cmp     [ebp+13Eh], bx
 0x73A381: jbe     loc_73A484
 0x73A387: jmp     short loc_73A390
-0x73A389: align 10h
 0x73A390: mov     eax, [ebp+138h]
 0x73A396: mov     esi, [eax+ebx*4]
 0x73A399: test    esi, esi
@@ -135,7 +133,7 @@
 0x73A3E1: mov     ecx, [esp+2Ch+arg_0]
 0x73A3E5: push    ebx
 0x73A3E6: mov     byte ptr [esp+30h+var_4], 4
-0x73A3EB: call    sub_7395A0
+0x73A3EB: call    sub_7395A0; Pass226/227: NiScreenSpaceCamera texture-array element setter; AddRefs/Releases NiScreenTexture pointers and updates array counts only.
 0x73A3F0: test    edi, edi
 0x73A3F2: mov     byte ptr [esp+28h+var_4], 3
 0x73A3F7: jz      short loc_73A44E
@@ -164,7 +162,7 @@
 0x73A442: push    eax
 0x73A443: push    ebx
 0x73A444: mov     byte ptr [esp+30h+var_4], 5
-0x73A449: call    sub_7395A0
+0x73A449: call    sub_7395A0; Pass226/227: NiScreenSpaceCamera texture-array element setter; AddRefs/Releases NiScreenTexture pointers and updates array counts only.
 0x73A44E: test    esi, esi
 0x73A450: mov     [esp+28h+var_4], 0FFFFFFFFh
 0x73A458: jz      short loc_73A472
@@ -191,3 +189,22 @@
 0x73A493: pop     ebx
 0x73A494: add     esp, 14h
 0x73A497: retn    8
+0x9CAC40: lea     ecx, [ebp-10h]; slot
+0x9CAC43: jmp     NiPointerSlot_Release
+0x9CAC48: lea     ecx, [ebp-14h]; slot
+0x9CAC4B: jmp     NiPointerSlot_Release
+0x9CAC50: lea     ecx, [ebp-10h]; slot
+0x9CAC53: jmp     NiPointerSlot_Release
+0x9CAC58: lea     ecx, [ebp-14h]; slot
+0x9CAC5B: jmp     NiPointerSlot_Release
+0x9CAC60: lea     ecx, [ebp-14h]; slot
+0x9CAC63: jmp     NiPointerSlot_Release
+0x9CAC68: lea     ecx, [ebp-14h]; slot
+0x9CAC6B: jmp     NiPointerSlot_Release
+0x9CAC70: mov     edx, [esp+arg_4]
+0x9CAC74: lea     eax, [edx-18h]
+0x9CAC77: mov     ecx, [edx-1Ch]
+0x9CAC7A: xor     ecx, eax
+0x9CAC7C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAC81: mov     eax, offset stru_AF326C
+0x9CAC86: jmp     ___CxxFrameHandler3

@@ -239,10 +239,10 @@
 0x576DCF: movzx   edx, word ptr [eax+8]
 0x576DD3: mov     ecx, [eax+1Ch]
 0x576DD6: movzx   edx, dx
-0x576DD9: push    ecx
-0x576DDA: push    edx
-0x576DDB: lea     ecx, [eax+0Ch]
-0x576DDE: call    sub_72A0F0
+0x576DD9: push    ecx; vertices
+0x576DDA: push    edx; vertexCount
+0x576DDB: lea     ecx, [eax+0Ch]; self
+0x576DDE: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x576DE3: mov     eax, ds:0B3F9A8h
 0x576DE8: mov     [esi+54h], eax
 0x576DEB: mov     ecx, ds:0B3F9ACh
@@ -250,7 +250,7 @@
 0x576DF4: mov     edx, ds:0B3F9B0h
 0x576DFA: mov     ecx, esi; this
 0x576DFC: mov     [esi+5Ch], edx
-0x576DFF: call    NiAVObject_InitializePropertyState
+0x576DFF: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x576E04: mov     ecx, esi
 0x576E06: call    NiNode_UpdateDynamicEffectState
 0x576E0B: fldz
@@ -258,7 +258,7 @@
 0x576E0F: push    ecx
 0x576E10: mov     ecx, esi; this
 0x576E12: fstp    [esp+94h+a2]; a2
-0x576E15: call    NiAVObject_UpdateNiAVObject
+0x576E15: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x576E1A: mov     eax, [edi]
 0x576E1C: mov     edx, [eax+84h]
 0x576E22: push    1
@@ -271,7 +271,6 @@
 0x576E31: cmp     [esp+8Ch+var_38], ebx
 0x576E35: jz      loc_576ED7
 0x576E3B: jmp     short loc_576E40
-0x576E3D: align 10h
 0x576E40: mov     eax, [esp+8Ch+var_40]
 0x576E44: mov     ecx, [eax]
 0x576E46: cmp     ecx, ebx
@@ -290,11 +289,11 @@
 0x576E6D: mov     eax, [esi+0B4h]
 0x576E73: mov     ecx, [eax+1Ch]
 0x576E76: movzx   edx, word ptr [eax+8]
-0x576E7A: push    ecx
+0x576E7A: push    ecx; vertices
 0x576E7B: movzx   ecx, dx
-0x576E7E: push    ecx
-0x576E7F: lea     ecx, [eax+0Ch]
-0x576E82: call    sub_72A0F0
+0x576E7E: push    ecx; vertexCount
+0x576E7F: lea     ecx, [eax+0Ch]; self
+0x576E82: call    NiSphere_ComputeFromVertices; Local bounding sphere for contiguous NiPoint3 array: midpoint of component minima/maxima; radius=max vertex distance to midpoint; zero-count case clears sphere. Writes sphere only, not NiAVObject world bounds or renderer dirty flags. Prettier Faces invokes after morph on direct CPU vertex data; propagation of world bounds remains a separate runtime verification requirement.
 0x576E87: mov     edx, ds:0B3F9A8h
 0x576E8D: mov     [esi+54h], edx
 0x576E90: mov     eax, ds:0B3F9ACh
@@ -302,7 +301,7 @@
 0x576E98: mov     ecx, ds:0B3F9B0h
 0x576E9E: mov     [esi+5Ch], ecx
 0x576EA1: mov     ecx, esi; this
-0x576EA3: call    NiAVObject_InitializePropertyState
+0x576EA3: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x576EA8: mov     ecx, esi
 0x576EAA: call    NiNode_UpdateDynamicEffectState
 0x576EAF: fldz
@@ -310,7 +309,7 @@
 0x576EB3: push    ecx
 0x576EB4: mov     ecx, esi; this
 0x576EB6: fstp    [esp+94h+a2]; a2
-0x576EB9: call    NiAVObject_UpdateNiAVObject
+0x576EB9: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x576EBE: mov     edx, [edi]
 0x576EC0: mov     eax, [edx+84h]
 0x576EC6: push    1
@@ -342,3 +341,18 @@
 0x576F1A: pop     ebx
 0x576F1B: add     esp, 78h
 0x576F1E: retn    8
+0x573850: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$DFALL@PAVNiTriShape@@@@PAVNiTriShape@@@@6B@; const NiTListBase<DFALL<NiTriShape *>,NiTriShape *>::`vftable'
+0x573856: retn
+0x9BE420: lea     ecx, [ebp-44h]
+0x9BE423: jmp     j_??1?$NiTList@PAVNiTriShape@@@@UAE@XZ; NiTList<NiTriShape *>::~NiTList<NiTriShape *>(void)
+0x9BE428: mov     ecx, [ebp-70h]; void *
+0x9BE42B: jmp     BSStringT_Clear
+0x9BE430: lea     ecx, [ebp-44h]
+0x9BE433: jmp     loc_573850
+0x9BE438: mov     edx, [esp+arg_4]
+0x9BE43C: lea     eax, [edx-7Ch]
+0x9BE43F: mov     ecx, [edx-80h]
+0x9BE442: xor     ecx, eax
+0x9BE444: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BE449: mov     eax, offset stru_AE7B8C
+0x9BE44E: jmp     ___CxxFrameHandler3

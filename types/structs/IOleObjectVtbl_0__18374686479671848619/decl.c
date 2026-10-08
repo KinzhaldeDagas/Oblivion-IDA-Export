@@ -1,1 +1,1 @@
-IOleObjectVtbl_0
+typedef IOleObjectVtbl IOleObjectVtbl_0;

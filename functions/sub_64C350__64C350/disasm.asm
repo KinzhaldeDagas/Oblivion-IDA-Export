@@ -75,7 +75,7 @@
 0x64C419: call    OblivionDynamicCast
 0x64C41E: mov     edx, [edi+2Ch]
 0x64C421: mov     ecx, [eax+58h]
-0x64C424: mov     ecx, [ecx+8]
+0x64C424: mov     ecx, [ecx+8]; self
 0x64C427: add     esp, 14h
 0x64C42A: cmp     edx, ds:0B333C4h
 0x64C430: jz      short loc_64C45D
@@ -83,7 +83,7 @@
 0x64C434: jz      short loc_64C445
 0x64C436: cmp     byte ptr [ecx+20h], 1
 0x64C43A: jz      short loc_64C45D
-0x64C43C: call    sub_5660A0
+0x64C43C: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x64C441: test    al, al
 0x64C443: jnz     short loc_64C45D
 0x64C445: mov     eax, [edi]
@@ -146,7 +146,7 @@
 0x64C4EE: mov     edx, [esp+54h+var_1C]
 0x64C4F2: mov     [esp+54h+var_18], eax
 0x64C4F6: mov     [esp+54h+var_10], edx
-0x64C4FA: call    sub_452A60
+0x64C4FA: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64C4FF: test    eax, eax
 0x64C501: mov     [esp+54h+var_44], eax
 0x64C505: jg      short loc_64C50F
@@ -157,9 +157,9 @@
 0x64C51A: fild    [esp+54h+var_44]
 0x64C51E: jmp     short loc_64C544
 0x64C520: mov     ecx, esi; this
-0x64C522: call    TESObjectREFR_GetParentCell
+0x64C522: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x64C527: mov     ecx, eax; this
-0x64C529: call    TESObjectCELL_IsInterior
+0x64C529: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x64C52E: test    al, al
 0x64C530: jz      short loc_64C53A
 0x64C532: fld     dword ptr ds:0B36AA0h
@@ -196,12 +196,12 @@
 0x64C5A0: test    ebx, ebx
 0x64C5A2: mov     [esp+54h+var_40], 0
 0x64C5AA: jz      short loc_64C5C5
-0x64C5AC: mov     ecx, ebx
-0x64C5AE: call    ExtraDataList_GetReferencePointer
+0x64C5AC: mov     ecx, ebx; this
+0x64C5AE: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x64C5B3: test    eax, eax
 0x64C5B5: jz      short loc_64C5C5
-0x64C5B7: mov     ecx, ebx
-0x64C5B9: call    ExtraDataList_GetReferencePointer
+0x64C5B7: mov     ecx, ebx; this
+0x64C5B9: call    ExtraDataList_GetReferencePointer; Return the TESObjectREFR payload from ExtraReferencePointer type 0x22, or null. Provenance only: callers still select EntryData by exact TESForm first.
 0x64C5BE: mov     edx, [eax+0Ch]
 0x64C5C1: mov     [esp+54h+var_40], edx
 0x64C5C5: mov     ecx, [ebp+24h]
@@ -221,7 +221,7 @@
 0x64C5ED: mov     ecx, [ebp+28h]
 0x64C5F0: mov     ebp, [eax+8]
 0x64C5F3: push    edx
-0x64C5F4: call    sub_452A60
+0x64C5F4: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64C5F9: push    eax
 0x64C5FA: mov     eax, [esp+5Ch+arg_0]
 0x64C5FE: push    ebx
@@ -292,7 +292,7 @@
 0x64C6C6: push    eax
 0x64C6C7: mov     ecx, ebp
 0x64C6C9: mov     [esp+5Ch+var_40+4], edx
-0x64C6CD: call    sub_452A60
+0x64C6CD: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x64C6D2: mov     ecx, [esp+5Ch+arg_0]
 0x64C6D6: mov     edx, [esp+5Ch+var_40+4]
 0x64C6DA: push    eax
@@ -305,7 +305,7 @@
 0x64C6EB: mov     ecx, ebx
 0x64C6ED: call    ContainerEntryExtraData_DestroyDataTable
 0x64C6F2: push    ebx
-0x64C6F3: call    FormHeapFree
+0x64C6F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x64C6F8: add     esp, 4
 0x64C6FB: jmp     loc_64C3AF
 0x64C700: fld     [esp+54h+var_18]
@@ -352,8 +352,8 @@
 0x64C77C: mov     edx, [ecx]
 0x64C77E: mov     eax, [edx+184h]
 0x64C784: call    eax
-0x64C786: mov     ecx, eax
-0x64C788: call    sub_5660A0
+0x64C786: mov     ecx, eax; self
+0x64C788: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x64C78D: test    al, al
 0x64C78F: jz      loc_64C3BE
 0x64C795: mov     ecx, [ebx+58h]
@@ -375,7 +375,7 @@
 0x64C7C5: mov     ecx, ebx
 0x64C7C7: call    eax
 0x64C7C9: mov     ecx, ebx
-0x64C7CB: call    sub_5E05B0
+0x64C7CB: call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.
 0x64C7D0: test    al, al
 0x64C7D2: jz      short loc_64C7DB
 0x64C7D4: mov     ecx, ebx
@@ -498,14 +498,14 @@
 0x64C93B: jnp     short loc_64C962
 0x64C93D: cmp     ebx, ds:0B333C4h
 0x64C943: jz      short loc_64C992
-0x64C945: mov     ecx, ebx
-0x64C947: call    sub_5E0380
+0x64C945: mov     ecx, ebx; this
+0x64C947: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x64C94C: test    eax, eax
 0x64C94E: jz      short loc_64C992
-0x64C950: mov     ecx, ebx
-0x64C952: call    sub_5E0380
-0x64C957: mov     ecx, eax
-0x64C959: call    sub_567770
+0x64C950: mov     ecx, ebx; this
+0x64C952: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
+0x64C957: mov     ecx, eax; this
+0x64C959: call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.
 0x64C95E: test    al, al
 0x64C960: jz      short loc_64C992
 0x64C962: cmp     byte ptr [edi+0D0h], 0
@@ -586,9 +586,9 @@
 0x64CA37: cmp     byte ptr [edi+0D0h], 0
 0x64CA3E: jnz     loc_64CAFB
 0x64CA44: push    3Ah ; ':'; a1
-0x64CA46: call    TESForm_LookupByFormID
+0x64CA46: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x64CA4B: add     esp, 4
-0x64CA4E: mov     ecx, offset TimeGlobals
+0x64CA4E: mov     ecx, 0B332E0h
 0x64CA53: mov     ebx, eax
 0x64CA55: call    TimeGlobals_GetGameHour
 0x64CA5A: fstp    [esp+54h+arg_0]

@@ -8,7 +8,7 @@
 0x67BFE1: mov     ecx, esi
 0x67BFE3: call    sub_67B5F0
 0x67BFE8: push    esi
-0x67BFE9: call    FormHeapFree
+0x67BFE9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67BFEE: add     esp, 4
 0x67BFF1: pop     esi
 0x67BFF2: retn    4

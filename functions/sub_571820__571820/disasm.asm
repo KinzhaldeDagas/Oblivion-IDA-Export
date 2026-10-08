@@ -5,7 +5,7 @@
 0x571826: push    edi
 0x571827: push    3
 0x571829: mov     esi, ecx
-0x57182B: call    nullsub_returnTrue_0arg
+0x57182B: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x571830: mov     ebp, ds:0A2807Ch
 0x571836: add     esp, 4
 0x571839: add     esi, 0Ch
@@ -63,7 +63,7 @@
 0x5718B8: fstp    dword ptr [esi-8]
 0x5718BB: mov     ecx, [esi+4]
 0x5718BE: push    ecx
-0x5718BF: call    FormHeapFree
+0x5718BF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5718C4: fld     dword ptr ds:0A30634h
 0x5718CA: mov     [esi+4], ebx
 0x5718CD: mov     [esi+0Ah], bx
@@ -74,7 +74,7 @@
 0x5718DE: sub     [esp+18h+var_8], 1
 0x5718E3: jnz     loc_571846
 0x5718E9: push    2
-0x5718EB: call    nullsub_returnTrue_0arg
+0x5718EB: call    Cmd_AddAchievement_PC_ReturnTrueNoOp; Verified shared return-true stub. In the BSPackedAdditionalGeometryData vtable at 0xA45F1C it occupies virtual +0x4C; this class-specific use is part of the Probable packed-geometry discriminator in BSTempEffectGeometryDecal_Initialize. Other xrefs use the same return-true stub for unrelated purposes.
 0x5718F0: add     esp, 4
 0x5718F3: pop     edi
 0x5718F4: pop     esi

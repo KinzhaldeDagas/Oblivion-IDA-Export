@@ -1,10 +1,10 @@
-0x7D9890: push    ebx
+0x7D9890: push    ebx; Verified (Oblivion): BSShaderPPLightingProperty_GetViewerStrings exports property+0xE0 as "spTexEffectData" and reads the current-fill color at +0x0C..+0x18, current-edge color at +0x1C..+0x28, and edge falloff at +0x54. Viewer labels duplicate R for the third color component; probable blue-channel typo, corroborated by the RGBA grouping and Fallout's NiColorA layout.
 0x7D9891: push    esi
-0x7D9892: mov     esi, [esp+8+arg_0]
+0x7D9892: mov     esi, [esp+8+viewerStrings]
 0x7D9896: push    edi
 0x7D9897: push    esi
 0x7D9898: mov     edi, ecx
-0x7D989A: call    sub_7EE5D0
+0x7D989A: call    sub_7EE5D0; BloodOnDeath decode 2026-05-30: shader-property diagnostic dump; no spawn, lifetime, or projection cap is enforced here.
 0x7D989F: mov     eax, ds:0B45DA8h
 0x7D98A4: push    eax; ArgList
 0x7D98A5: call    TESOutput_PrintString
@@ -12,14 +12,14 @@
 0x7D98AE: movzx   ecx, word ptr [esi+8]
 0x7D98B2: add     esp, 4
 0x7D98B5: cmp     ebx, ecx
-0x7D98B7: mov     [esp+0Ch+arg_0], eax
+0x7D98B7: mov     [esp+0Ch+viewerStrings], eax
 0x7D98BB: jb      short loc_7D98CB
 0x7D98BD: movzx   edx, word ptr [esi+0Eh]
 0x7D98C1: add     edx, ebx
 0x7D98C3: push    edx
 0x7D98C4: mov     ecx, esi
 0x7D98C6: call    NiTArray_SetSize
-0x7D98CB: lea     eax, [esp+0Ch+arg_0]
+0x7D98CB: lea     eax, [esp+0Ch+viewerStrings]
 0x7D98CF: push    eax
 0x7D98D0: push    ebx
 0x7D98D1: mov     ecx, esi
@@ -33,14 +33,14 @@
 0x7D98F1: movzx   ecx, word ptr [esi+8]
 0x7D98F5: add     esp, 8
 0x7D98F8: cmp     ebx, ecx
-0x7D98FA: mov     [esp+0Ch+arg_0], eax
+0x7D98FA: mov     [esp+0Ch+viewerStrings], eax
 0x7D98FE: jb      short loc_7D990E
 0x7D9900: movzx   edx, word ptr [esi+0Eh]
 0x7D9904: add     edx, ebx
 0x7D9906: push    edx
 0x7D9907: mov     ecx, esi
 0x7D9909: call    NiTArray_SetSize
-0x7D990E: lea     eax, [esp+0Ch+arg_0]
+0x7D990E: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9912: push    eax
 0x7D9913: push    ebx
 0x7D9914: mov     ecx, esi
@@ -61,14 +61,14 @@
 0x7D994C: movzx   edx, word ptr [esi+8]
 0x7D9950: add     esp, 8
 0x7D9953: cmp     ebx, edx
-0x7D9955: mov     [esp+0Ch+arg_0], eax
+0x7D9955: mov     [esp+0Ch+viewerStrings], eax
 0x7D9959: jb      short loc_7D9969
 0x7D995B: movzx   eax, word ptr [esi+0Eh]
 0x7D995F: add     eax, ebx
 0x7D9961: push    eax
 0x7D9962: mov     ecx, esi
 0x7D9964: call    NiTArray_SetSize
-0x7D9969: lea     ecx, [esp+0Ch+arg_0]
+0x7D9969: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D996D: push    ecx
 0x7D996E: jmp     short loc_7D99A9
 0x7D9970: mov     edx, [edi+0BCh]
@@ -77,7 +77,7 @@
 0x7D9979: push    offset aBaseDiff; "base diff"
 0x7D997E: call    TESOutput_PrintLabeledPointer
 0x7D9983: movzx   ebx, word ptr [esi+0Ah]
-0x7D9987: mov     [esp+14h+arg_0], eax
+0x7D9987: mov     [esp+14h+viewerStrings], eax
 0x7D998B: movzx   eax, word ptr [esi+8]
 0x7D998F: add     esp, 8
 0x7D9992: cmp     ebx, eax
@@ -87,7 +87,7 @@
 0x7D999C: push    ecx
 0x7D999D: mov     ecx, esi
 0x7D999F: call    NiTArray_SetSize
-0x7D99A4: lea     edx, [esp+0Ch+arg_0]
+0x7D99A4: lea     edx, [esp+0Ch+viewerStrings]
 0x7D99A8: push    edx
 0x7D99A9: push    ebx
 0x7D99AA: mov     ecx, esi
@@ -106,14 +106,14 @@
 0x7D99D5: movzx   ecx, word ptr [esi+8]
 0x7D99D9: add     esp, 8
 0x7D99DC: cmp     ebx, ecx
-0x7D99DE: mov     [esp+0Ch+arg_0], eax
+0x7D99DE: mov     [esp+0Ch+viewerStrings], eax
 0x7D99E2: jb      short loc_7D99F2
 0x7D99E4: movzx   edx, word ptr [esi+0Eh]
 0x7D99E8: add     edx, ebx
 0x7D99EA: push    edx
 0x7D99EB: mov     ecx, esi
 0x7D99ED: call    NiTArray_SetSize
-0x7D99F2: lea     eax, [esp+0Ch+arg_0]
+0x7D99F2: lea     eax, [esp+0Ch+viewerStrings]
 0x7D99F6: push    eax
 0x7D99F7: jmp     short loc_7D9A32
 0x7D99F9: mov     ecx, [edi+0C0h]
@@ -125,14 +125,14 @@
 0x7D9A10: movzx   edx, word ptr [esi+8]
 0x7D9A14: add     esp, 8
 0x7D9A17: cmp     ebx, edx
-0x7D9A19: mov     [esp+0Ch+arg_0], eax
+0x7D9A19: mov     [esp+0Ch+viewerStrings], eax
 0x7D9A1D: jb      short loc_7D9A2D
 0x7D9A1F: movzx   eax, word ptr [esi+0Eh]
 0x7D9A23: add     eax, ebx
 0x7D9A25: push    eax
 0x7D9A26: mov     ecx, esi
 0x7D9A28: call    NiTArray_SetSize
-0x7D9A2D: lea     ecx, [esp+0Ch+arg_0]
+0x7D9A2D: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9A31: push    ecx
 0x7D9A32: push    ebx
 0x7D9A33: mov     ecx, esi
@@ -149,9 +149,9 @@
 0x7D9A54: push    eax; int
 0x7D9A55: push    offset aMultiDiff; "multi diff"
 0x7D9A5A: call    TESOutput_PrintLabeledString
-0x7D9A5F: mov     [esp+14h+arg_0], eax
+0x7D9A5F: mov     [esp+14h+viewerStrings], eax
 0x7D9A63: add     esp, 8
-0x7D9A66: lea     eax, [esp+0Ch+arg_0]
+0x7D9A66: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9A6A: push    eax
 0x7D9A6B: jmp     short loc_7D9A8D
 0x7D9A6D: mov     ecx, [edi+0BCh]
@@ -160,8 +160,8 @@
 0x7D9A77: push    offset aMultiDiff; "multi diff"
 0x7D9A7C: call    TESOutput_PrintLabeledPointer
 0x7D9A81: add     esp, 8
-0x7D9A84: lea     edx, [esp+0Ch+arg_0]
-0x7D9A88: mov     [esp+0Ch+arg_0], eax
+0x7D9A84: lea     edx, [esp+0Ch+viewerStrings]
+0x7D9A88: mov     [esp+0Ch+viewerStrings], eax
 0x7D9A8C: push    edx
 0x7D9A8D: mov     ecx, esi
 0x7D9A8F: call    NiTArray_Add
@@ -178,10 +178,10 @@
 0x7D9AB3: push    offset aMultiNormal; "multi normal"
 0x7D9AB8: call    TESOutput_PrintLabeledString
 0x7D9ABD: add     esp, 8
-0x7D9AC0: lea     ecx, [esp+0Ch+arg_0]
+0x7D9AC0: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9AC4: push    ecx
 0x7D9AC5: mov     ecx, esi
-0x7D9AC7: mov     [esp+10h+arg_0], eax
+0x7D9AC7: mov     [esp+10h+viewerStrings], eax
 0x7D9ACB: call    NiTArray_Add
 0x7D9AD0: jmp     loc_7D9D19
 0x7D9AD5: mov     edx, [edi+0C0h]
@@ -189,9 +189,9 @@
 0x7D9ADE: push    eax; int
 0x7D9ADF: push    offset aMultiNormal; "multi normal"
 0x7D9AE4: call    TESOutput_PrintLabeledPointer
-0x7D9AE9: mov     [esp+14h+arg_0], eax
+0x7D9AE9: mov     [esp+14h+viewerStrings], eax
 0x7D9AED: add     esp, 8
-0x7D9AF0: lea     eax, [esp+0Ch+arg_0]
+0x7D9AF0: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9AF4: push    eax
 0x7D9AF5: mov     ecx, esi
 0x7D9AF7: call    NiTArray_Add
@@ -203,14 +203,14 @@
 0x7D9B11: movzx   ecx, word ptr [esi+8]
 0x7D9B15: add     esp, 8
 0x7D9B18: cmp     ebx, ecx
-0x7D9B1A: mov     [esp+0Ch+arg_0], eax
+0x7D9B1A: mov     [esp+0Ch+viewerStrings], eax
 0x7D9B1E: jb      short loc_7D9B2E
 0x7D9B20: movzx   edx, word ptr [esi+0Eh]
 0x7D9B24: add     edx, ebx
 0x7D9B26: push    edx
 0x7D9B27: mov     ecx, esi
 0x7D9B29: call    NiTArray_SetSize
-0x7D9B2E: lea     eax, [esp+0Ch+arg_0]
+0x7D9B2E: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9B32: push    eax
 0x7D9B33: push    ebx
 0x7D9B34: mov     ecx, esi
@@ -223,7 +223,7 @@
 0x7D9B51: movzx   edx, word ptr [esi+8]
 0x7D9B55: add     esp, 8
 0x7D9B58: cmp     ebx, edx
-0x7D9B5A: mov     [esp+0Ch+arg_0], eax
+0x7D9B5A: mov     [esp+0Ch+viewerStrings], eax
 0x7D9B5E: jb      short loc_7D9B6E
 0x7D9B60: movzx   eax, word ptr [esi+0Eh]
 0x7D9B64: add     eax, ebx
@@ -231,7 +231,7 @@
 0x7D9B67: mov     ecx, esi
 0x7D9B69: call    NiTArray_SetSize
 0x7D9B6E: push    ebp
-0x7D9B6F: lea     ecx, [esp+10h+arg_0]
+0x7D9B6F: lea     ecx, [esp+10h+viewerStrings]
 0x7D9B73: push    ecx
 0x7D9B74: push    ebx
 0x7D9B75: mov     ecx, esi
@@ -252,7 +252,7 @@
 0x7D9BA3: push    offset aBaseTex; "base tex"
 0x7D9BA8: call    TESOutput_PrintLabeledString
 0x7D9BAD: movzx   ebx, word ptr [esi+0Ah]
-0x7D9BB1: mov     [esp+18h+arg_0], eax
+0x7D9BB1: mov     [esp+18h+viewerStrings], eax
 0x7D9BB5: movzx   eax, word ptr [esi+8]
 0x7D9BB9: add     esp, 8
 0x7D9BBC: cmp     ebx, eax
@@ -262,7 +262,7 @@
 0x7D9BC6: push    ecx
 0x7D9BC7: mov     ecx, esi
 0x7D9BC9: call    NiTArray_SetSize
-0x7D9BCE: lea     edx, [esp+10h+arg_0]
+0x7D9BCE: lea     edx, [esp+10h+viewerStrings]
 0x7D9BD2: push    edx
 0x7D9BD3: jmp     short loc_7D9C0E
 0x7D9BD5: mov     eax, [edi+0BCh]
@@ -274,14 +274,14 @@
 0x7D9BEC: movzx   ecx, word ptr [esi+8]
 0x7D9BF0: add     esp, 8
 0x7D9BF3: cmp     ebx, ecx
-0x7D9BF5: mov     [esp+10h+arg_0], eax
+0x7D9BF5: mov     [esp+10h+viewerStrings], eax
 0x7D9BF9: jb      short loc_7D9C09
 0x7D9BFB: movzx   edx, word ptr [esi+0Eh]
 0x7D9BFF: add     edx, ebx
 0x7D9C01: push    edx
 0x7D9C02: mov     ecx, esi
 0x7D9C04: call    NiTArray_SetSize
-0x7D9C09: lea     eax, [esp+10h+arg_0]
+0x7D9C09: lea     eax, [esp+10h+viewerStrings]
 0x7D9C0D: push    eax
 0x7D9C0E: push    ebx
 0x7D9C0F: mov     ecx, esi
@@ -299,7 +299,7 @@
 0x7D9C31: push    offset aNormalMap; " normal map"
 0x7D9C36: call    TESOutput_PrintLabeledString
 0x7D9C3B: add     esp, 8
-0x7D9C3E: lea     edx, [esp+10h+arg_0]
+0x7D9C3E: lea     edx, [esp+10h+viewerStrings]
 0x7D9C42: push    edx
 0x7D9C43: jmp     short loc_7D9C61
 0x7D9C45: mov     eax, [edi+0C0h]
@@ -308,10 +308,10 @@
 0x7D9C4F: push    offset aNormalMap; " normal map"
 0x7D9C54: call    TESOutput_PrintLabeledPointer
 0x7D9C59: add     esp, 8
-0x7D9C5C: lea     ecx, [esp+10h+arg_0]
+0x7D9C5C: lea     ecx, [esp+10h+viewerStrings]
 0x7D9C60: push    ecx
 0x7D9C61: mov     ecx, esi
-0x7D9C63: mov     [esp+14h+arg_0], eax
+0x7D9C63: mov     [esp+14h+viewerStrings], eax
 0x7D9C67: call    NiTArray_Add
 0x7D9C6C: mov     edx, [edi+0D0h]
 0x7D9C72: cmp     byte ptr [edx+ebp], 0
@@ -320,7 +320,7 @@
 0x7D9C7A: push    offset aSpecular_1; " specular"
 0x7D9C7F: call    TESOutput_PrintLabeledBool
 0x7D9C84: movzx   ebx, word ptr [esi+0Ah]
-0x7D9C88: mov     [esp+18h+arg_0], eax
+0x7D9C88: mov     [esp+18h+viewerStrings], eax
 0x7D9C8C: movzx   eax, word ptr [esi+8]
 0x7D9C90: add     esp, 8
 0x7D9C93: cmp     ebx, eax
@@ -330,7 +330,7 @@
 0x7D9C9D: push    ecx
 0x7D9C9E: mov     ecx, esi
 0x7D9CA0: call    NiTArray_SetSize
-0x7D9CA5: lea     edx, [esp+10h+arg_0]
+0x7D9CA5: lea     edx, [esp+10h+viewerStrings]
 0x7D9CA9: push    edx
 0x7D9CAA: push    ebx
 0x7D9CAB: mov     ecx, esi
@@ -348,8 +348,8 @@
 0x7D9CCD: push    offset aGlowMap_0; " glow map"
 0x7D9CD2: call    TESOutput_PrintLabeledString
 0x7D9CD7: add     esp, 8
-0x7D9CDA: lea     ecx, [esp+10h+arg_0]
-0x7D9CDE: mov     [esp+10h+arg_0], eax
+0x7D9CDA: lea     ecx, [esp+10h+viewerStrings]
+0x7D9CDE: mov     [esp+10h+viewerStrings], eax
 0x7D9CE2: push    ecx
 0x7D9CE3: jmp     short loc_7D9D05
 0x7D9CE5: mov     edx, [edi+0C4h]
@@ -357,9 +357,9 @@
 0x7D9CEE: push    eax; int
 0x7D9CEF: push    offset aGlowMap_0; " glow map"
 0x7D9CF4: call    TESOutput_PrintLabeledPointer
-0x7D9CF9: mov     [esp+18h+arg_0], eax
+0x7D9CF9: mov     [esp+18h+viewerStrings], eax
 0x7D9CFD: add     esp, 8
-0x7D9D00: lea     eax, [esp+10h+arg_0]
+0x7D9D00: lea     eax, [esp+10h+viewerStrings]
 0x7D9D04: push    eax
 0x7D9D05: mov     ecx, esi
 0x7D9D07: call    NiTArray_Add
@@ -383,14 +383,14 @@
 0x7D9D45: movzx   ecx, word ptr [esi+8]
 0x7D9D49: add     esp, 8
 0x7D9D4C: cmp     ebx, ecx
-0x7D9D4E: mov     [esp+0Ch+arg_0], eax
+0x7D9D4E: mov     [esp+0Ch+viewerStrings], eax
 0x7D9D52: jb      short loc_7D9D62
 0x7D9D54: movzx   edx, word ptr [esi+0Eh]
 0x7D9D58: add     edx, ebx
 0x7D9D5A: push    edx
 0x7D9D5B: mov     ecx, esi
 0x7D9D5D: call    NiTArray_SetSize
-0x7D9D62: lea     eax, [esp+0Ch+arg_0]
+0x7D9D62: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9D66: push    eax
 0x7D9D67: jmp     short loc_7D9DA2
 0x7D9D69: mov     ecx, [edi+0C4h]
@@ -402,14 +402,14 @@
 0x7D9D80: movzx   edx, word ptr [esi+8]
 0x7D9D84: add     esp, 8
 0x7D9D87: cmp     ebx, edx
-0x7D9D89: mov     [esp+0Ch+arg_0], eax
+0x7D9D89: mov     [esp+0Ch+viewerStrings], eax
 0x7D9D8D: jb      short loc_7D9D9D
 0x7D9D8F: movzx   eax, word ptr [esi+0Eh]
 0x7D9D93: add     eax, ebx
 0x7D9D95: push    eax
 0x7D9D96: mov     ecx, esi
 0x7D9D98: call    NiTArray_SetSize
-0x7D9D9D: lea     ecx, [esp+0Ch+arg_0]
+0x7D9D9D: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9DA1: push    ecx
 0x7D9DA2: push    ebx
 0x7D9DA3: mov     ecx, esi
@@ -427,14 +427,14 @@
 0x7D9DC7: movzx   ecx, word ptr [esi+8]
 0x7D9DCB: add     esp, 8
 0x7D9DCE: cmp     ebx, ecx
-0x7D9DD0: mov     [esp+0Ch+arg_0], eax
+0x7D9DD0: mov     [esp+0Ch+viewerStrings], eax
 0x7D9DD4: jb      short loc_7D9DE4
 0x7D9DD6: movzx   edx, word ptr [esi+0Eh]
 0x7D9DDA: add     edx, ebx
 0x7D9DDC: push    edx
 0x7D9DDD: mov     ecx, esi
 0x7D9DDF: call    NiTArray_SetSize
-0x7D9DE4: lea     eax, [esp+0Ch+arg_0]
+0x7D9DE4: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9DE8: push    eax
 0x7D9DE9: push    ebx
 0x7D9DEA: mov     ecx, esi
@@ -445,20 +445,20 @@
 0x7D9DFB: fld     dword ptr [edi+0E8h]
 0x7D9E01: push    ecx
 0x7D9E02: fstp    [esp+10h+var_10]; float
-0x7D9E05: push    offset aRefractionPowe; "refraction power"
+0x7D9E05: push    offset aRefractionPowe; MoonSugarEffect decode: TES output path reports shader-property refraction power when refraction flag 0x8000 is set.
 0x7D9E0A: call    TESOutput_PrintLabeledFloat
 0x7D9E0F: movzx   ebx, word ptr [esi+0Ah]
 0x7D9E13: movzx   ecx, word ptr [esi+8]
 0x7D9E17: add     esp, 8
 0x7D9E1A: cmp     ebx, ecx
-0x7D9E1C: mov     [esp+0Ch+arg_0], eax
+0x7D9E1C: mov     [esp+0Ch+viewerStrings], eax
 0x7D9E20: jb      short loc_7D9E30
 0x7D9E22: movzx   edx, word ptr [esi+0Eh]
 0x7D9E26: add     edx, ebx
 0x7D9E28: push    edx
 0x7D9E29: mov     ecx, esi
 0x7D9E2B: call    NiTArray_SetSize
-0x7D9E30: lea     eax, [esp+0Ch+arg_0]
+0x7D9E30: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9E34: push    eax
 0x7D9E35: jmp     loc_7D9EBE
 0x7D9E3A: test    eax, 10000h
@@ -472,34 +472,34 @@
 0x7D9E5D: movzx   ecx, word ptr [esi+8]
 0x7D9E61: add     esp, 8
 0x7D9E64: cmp     ebx, ecx
-0x7D9E66: mov     [esp+0Ch+arg_0], eax
+0x7D9E66: mov     [esp+0Ch+viewerStrings], eax
 0x7D9E6A: jb      short loc_7D9E7A
 0x7D9E6C: movzx   edx, word ptr [esi+0Eh]
 0x7D9E70: add     edx, ebx
 0x7D9E72: push    edx
 0x7D9E73: mov     ecx, esi
 0x7D9E75: call    NiTArray_SetSize
-0x7D9E7A: lea     eax, [esp+0Ch+arg_0]
+0x7D9E7A: lea     eax, [esp+0Ch+viewerStrings]
 0x7D9E7E: push    eax
 0x7D9E7F: push    ebx
 0x7D9E80: mov     ecx, esi
 0x7D9E82: call    NiTArray_SetAt; Actually first arg is a generic NiTArray
 0x7D9E87: mov     ecx, [edi+0ECh]
 0x7D9E8D: push    ecx; int
-0x7D9E8E: push    offset aRefractionPeri; "refraction period"
+0x7D9E8E: push    offset aRefractionPeri; MoonSugarEffect decode: TES output path reports refraction period when fire/refraction flag 0x10000 is set.
 0x7D9E93: call    TESOutput_PrintLabeledSignedInt
 0x7D9E98: movzx   ebx, word ptr [esi+0Ah]
 0x7D9E9C: movzx   edx, word ptr [esi+8]
 0x7D9EA0: add     esp, 8
 0x7D9EA3: cmp     ebx, edx
-0x7D9EA5: mov     [esp+0Ch+arg_0], eax
+0x7D9EA5: mov     [esp+0Ch+viewerStrings], eax
 0x7D9EA9: jb      short loc_7D9EB9
 0x7D9EAB: movzx   eax, word ptr [esi+0Eh]
 0x7D9EAF: add     eax, ebx
 0x7D9EB1: push    eax
 0x7D9EB2: mov     ecx, esi
 0x7D9EB4: call    NiTArray_SetSize
-0x7D9EB9: lea     ecx, [esp+0Ch+arg_0]
+0x7D9EB9: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9EBD: push    ecx
 0x7D9EBE: push    ebx
 0x7D9EBF: mov     ecx, esi
@@ -515,14 +515,14 @@
 0x7D9EE4: movzx   edx, word ptr [esi+8]
 0x7D9EE8: add     esp, 8
 0x7D9EEB: cmp     ebx, edx
-0x7D9EED: mov     [esp+0Ch+arg_0], eax
+0x7D9EED: mov     [esp+0Ch+viewerStrings], eax
 0x7D9EF1: jb      short loc_7D9F01
 0x7D9EF3: movzx   eax, word ptr [esi+0Eh]
 0x7D9EF7: add     eax, ebx
 0x7D9EF9: push    eax
 0x7D9EFA: mov     ecx, esi
 0x7D9EFC: call    NiTArray_SetSize
-0x7D9F01: lea     ecx, [esp+0Ch+arg_0]
+0x7D9F01: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9F05: push    ecx
 0x7D9F06: push    ebx
 0x7D9F07: mov     ecx, esi
@@ -538,14 +538,14 @@
 0x7D9F2F: movzx   edx, word ptr [esi+8]
 0x7D9F33: add     esp, 8
 0x7D9F36: cmp     ebx, edx
-0x7D9F38: mov     [esp+0Ch+arg_0], eax
+0x7D9F38: mov     [esp+0Ch+viewerStrings], eax
 0x7D9F3C: jb      short loc_7D9F4C
 0x7D9F3E: movzx   eax, word ptr [esi+0Eh]
 0x7D9F42: add     eax, ebx
 0x7D9F44: push    eax
 0x7D9F45: mov     ecx, esi
 0x7D9F47: call    NiTArray_SetSize
-0x7D9F4C: lea     ecx, [esp+0Ch+arg_0]
+0x7D9F4C: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9F50: push    ecx
 0x7D9F51: push    ebx
 0x7D9F52: mov     ecx, esi
@@ -560,14 +560,14 @@
 0x7D9F76: movzx   edx, word ptr [esi+8]
 0x7D9F7A: add     esp, 8
 0x7D9F7D: cmp     ebx, edx
-0x7D9F7F: mov     [esp+0Ch+arg_0], eax
+0x7D9F7F: mov     [esp+0Ch+viewerStrings], eax
 0x7D9F83: jb      short loc_7D9F93
 0x7D9F85: movzx   eax, word ptr [esi+0Eh]
 0x7D9F89: add     eax, ebx
 0x7D9F8B: push    eax
 0x7D9F8C: mov     ecx, esi
 0x7D9F8E: call    NiTArray_SetSize
-0x7D9F93: lea     ecx, [esp+0Ch+arg_0]
+0x7D9F93: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9F97: push    ecx
 0x7D9F98: push    ebx
 0x7D9F99: mov     ecx, esi
@@ -582,14 +582,14 @@
 0x7D9FBB: movzx   edx, word ptr [esi+8]
 0x7D9FBF: add     esp, 8
 0x7D9FC2: cmp     ebx, edx
-0x7D9FC4: mov     [esp+0Ch+arg_0], eax
+0x7D9FC4: mov     [esp+0Ch+viewerStrings], eax
 0x7D9FC8: jb      short loc_7D9FD8
 0x7D9FCA: movzx   eax, word ptr [esi+0Eh]
 0x7D9FCE: add     eax, ebx
 0x7D9FD0: push    eax
 0x7D9FD1: mov     ecx, esi
 0x7D9FD3: call    NiTArray_SetSize
-0x7D9FD8: lea     ecx, [esp+0Ch+arg_0]
+0x7D9FD8: lea     ecx, [esp+0Ch+viewerStrings]
 0x7D9FDC: push    ecx
 0x7D9FDD: push    ebx
 0x7D9FDE: mov     ecx, esi
@@ -604,14 +604,14 @@
 0x7DA000: movzx   edx, word ptr [esi+8]
 0x7DA004: add     esp, 8
 0x7DA007: cmp     ebx, edx
-0x7DA009: mov     [esp+0Ch+arg_0], eax
+0x7DA009: mov     [esp+0Ch+viewerStrings], eax
 0x7DA00D: jb      short loc_7DA01D
 0x7DA00F: movzx   eax, word ptr [esi+0Eh]
 0x7DA013: add     eax, ebx
 0x7DA015: push    eax
 0x7DA016: mov     ecx, esi
 0x7DA018: call    NiTArray_SetSize
-0x7DA01D: lea     ecx, [esp+0Ch+arg_0]
+0x7DA01D: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA021: push    ecx
 0x7DA022: push    ebx
 0x7DA023: mov     ecx, esi
@@ -621,19 +621,19 @@
 0x7DA033: push    ecx
 0x7DA034: fstp    [esp+10h+var_10]; float
 0x7DA037: push    offset aFillColorR; "Fill Color R"
-0x7DA03C: call    TESOutput_PrintLabeledFloat
+0x7DA03C: call    TESOutput_PrintLabeledFloat; Verified (Oblivion): viewer exports the third current-fill color component at TextureEffectData+0x14 but labels it "Fill Color R", duplicating the red label already used for +0x0C. Probable: +0x14 is blue, based on the grouped four-float color layout, packed RGB initialization, and Fallout's NiColorA CurrentFillColor field.
 0x7DA041: movzx   ebx, word ptr [esi+0Ah]
 0x7DA045: movzx   edx, word ptr [esi+8]
 0x7DA049: add     esp, 8
 0x7DA04C: cmp     ebx, edx
-0x7DA04E: mov     [esp+0Ch+arg_0], eax
+0x7DA04E: mov     [esp+0Ch+viewerStrings], eax
 0x7DA052: jb      short loc_7DA062
 0x7DA054: movzx   eax, word ptr [esi+0Eh]
 0x7DA058: add     eax, ebx
 0x7DA05A: push    eax
 0x7DA05B: mov     ecx, esi
 0x7DA05D: call    NiTArray_SetSize
-0x7DA062: lea     ecx, [esp+0Ch+arg_0]
+0x7DA062: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA066: push    ecx
 0x7DA067: push    ebx
 0x7DA068: mov     ecx, esi
@@ -648,14 +648,14 @@
 0x7DA08A: movzx   edx, word ptr [esi+8]
 0x7DA08E: add     esp, 8
 0x7DA091: cmp     ebx, edx
-0x7DA093: mov     [esp+0Ch+arg_0], eax
+0x7DA093: mov     [esp+0Ch+viewerStrings], eax
 0x7DA097: jb      short loc_7DA0A7
 0x7DA099: movzx   eax, word ptr [esi+0Eh]
 0x7DA09D: add     eax, ebx
 0x7DA09F: push    eax
 0x7DA0A0: mov     ecx, esi
 0x7DA0A2: call    NiTArray_SetSize
-0x7DA0A7: lea     ecx, [esp+0Ch+arg_0]
+0x7DA0A7: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA0AB: push    ecx
 0x7DA0AC: push    ebx
 0x7DA0AD: mov     ecx, esi
@@ -670,14 +670,14 @@
 0x7DA0CF: movzx   edx, word ptr [esi+8]
 0x7DA0D3: add     esp, 8
 0x7DA0D6: cmp     ebx, edx
-0x7DA0D8: mov     [esp+0Ch+arg_0], eax
+0x7DA0D8: mov     [esp+0Ch+viewerStrings], eax
 0x7DA0DC: jb      short loc_7DA0EC
 0x7DA0DE: movzx   eax, word ptr [esi+0Eh]
 0x7DA0E2: add     eax, ebx
 0x7DA0E4: push    eax
 0x7DA0E5: mov     ecx, esi
 0x7DA0E7: call    NiTArray_SetSize
-0x7DA0EC: lea     ecx, [esp+0Ch+arg_0]
+0x7DA0EC: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA0F0: push    ecx
 0x7DA0F1: push    ebx
 0x7DA0F2: mov     ecx, esi
@@ -692,14 +692,14 @@
 0x7DA114: movzx   edx, word ptr [esi+8]
 0x7DA118: add     esp, 8
 0x7DA11B: cmp     ebx, edx
-0x7DA11D: mov     [esp+0Ch+arg_0], eax
+0x7DA11D: mov     [esp+0Ch+viewerStrings], eax
 0x7DA121: jb      short loc_7DA131
 0x7DA123: movzx   eax, word ptr [esi+0Eh]
 0x7DA127: add     eax, ebx
 0x7DA129: push    eax
 0x7DA12A: mov     ecx, esi
 0x7DA12C: call    NiTArray_SetSize
-0x7DA131: lea     ecx, [esp+0Ch+arg_0]
+0x7DA131: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA135: push    ecx
 0x7DA136: push    ebx
 0x7DA137: mov     ecx, esi
@@ -709,19 +709,19 @@
 0x7DA147: push    ecx
 0x7DA148: fstp    [esp+10h+var_10]; float
 0x7DA14B: push    offset aEdgeColorR; "Edge Color R"
-0x7DA150: call    TESOutput_PrintLabeledFloat
+0x7DA150: call    TESOutput_PrintLabeledFloat; Verified (Oblivion): viewer exports the third current-edge color component at TextureEffectData+0x24 but labels it "Edge Color R", duplicating the red label already used for +0x1C. Probable: +0x24 is blue, based on the grouped four-float color layout, packed RGB initialization, and Fallout's NiColorA CurrentRimColor field. Fallout names this color group Rim; Oblivion's source data calls it Edge.
 0x7DA155: movzx   ebx, word ptr [esi+0Ah]
 0x7DA159: movzx   edx, word ptr [esi+8]
 0x7DA15D: add     esp, 8
 0x7DA160: cmp     ebx, edx
-0x7DA162: mov     [esp+0Ch+arg_0], eax
+0x7DA162: mov     [esp+0Ch+viewerStrings], eax
 0x7DA166: jb      short loc_7DA176
 0x7DA168: movzx   eax, word ptr [esi+0Eh]
 0x7DA16C: add     eax, ebx
 0x7DA16E: push    eax
 0x7DA16F: mov     ecx, esi
 0x7DA171: call    NiTArray_SetSize
-0x7DA176: lea     ecx, [esp+0Ch+arg_0]
+0x7DA176: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA17A: push    ecx
 0x7DA17B: push    ebx
 0x7DA17C: mov     ecx, esi
@@ -736,14 +736,14 @@
 0x7DA19E: movzx   edx, word ptr [esi+8]
 0x7DA1A2: add     esp, 8
 0x7DA1A5: cmp     ebx, edx
-0x7DA1A7: mov     [esp+0Ch+arg_0], eax
+0x7DA1A7: mov     [esp+0Ch+viewerStrings], eax
 0x7DA1AB: jb      short loc_7DA1BB
 0x7DA1AD: movzx   eax, word ptr [esi+0Eh]
 0x7DA1B1: add     eax, ebx
 0x7DA1B3: push    eax
 0x7DA1B4: mov     ecx, esi
 0x7DA1B6: call    NiTArray_SetSize
-0x7DA1BB: lea     ecx, [esp+0Ch+arg_0]
+0x7DA1BB: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA1BF: push    ecx
 0x7DA1C0: push    ebx
 0x7DA1C1: mov     ecx, esi
@@ -758,14 +758,14 @@
 0x7DA1E3: movzx   edx, word ptr [esi+8]
 0x7DA1E7: add     esp, 8
 0x7DA1EA: cmp     edi, edx
-0x7DA1EC: mov     [esp+0Ch+arg_0], eax
+0x7DA1EC: mov     [esp+0Ch+viewerStrings], eax
 0x7DA1F0: jb      short loc_7DA200
 0x7DA1F2: movzx   eax, word ptr [esi+0Eh]
 0x7DA1F6: add     eax, edi
 0x7DA1F8: push    eax
 0x7DA1F9: mov     ecx, esi
 0x7DA1FB: call    NiTArray_SetSize
-0x7DA200: lea     ecx, [esp+0Ch+arg_0]
+0x7DA200: lea     ecx, [esp+0Ch+viewerStrings]
 0x7DA204: push    ecx
 0x7DA205: push    edi
 0x7DA206: mov     ecx, esi

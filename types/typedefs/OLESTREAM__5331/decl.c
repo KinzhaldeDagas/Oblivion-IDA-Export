@@ -1,1 +1,4 @@
-_OLESTREAM
+struct _OLESTREAM
+{
+LPOLESTREAMVTBL lpstbl;
+};

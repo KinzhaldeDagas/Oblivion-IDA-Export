@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x684F7B",
-    "line": "mov     edi, [esp+174h+arg_0]",
+    "line": "mov     edi, [esp+174h+actor]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x684FBA",
-    "line": "mov     ecx, [esp+174h+var_160]; void *",
+    "line": "mov     ecx, [esp+174h+var_160]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x684FC4",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x684FCA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x684FDE",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x684FE5",
-    "line": "mov     [esp+174h+var_158], edx",
+    "line": "mov     [esp+174h+start.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x684FEC",
-    "line": "mov     [esp+174h+var_154], ecx",
+    "line": "mov     [esp+174h+start.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,19 +307,19 @@
   },
   {
     "ea": "0x684FF3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x684FF5",
-    "line": "mov     [esp+174h+var_150], edx",
+    "line": "mov     [esp+174h+start.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x684FF9",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x685000",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,7 +343,7 @@
   },
   {
     "ea": "0x685007",
-    "line": "mov     [esp+174h+var_14C], ecx",
+    "line": "mov     [esp+174h+end.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x68500E",
-    "line": "mov     [esp+174h+var_148], edx",
+    "line": "mov     [esp+174h+end.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x685015",
-    "line": "mov     [esp+174h+var_144], eax",
+    "line": "mov     [esp+174h+end.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x685031",
-    "line": "mov     [esp+174h+var_158], ecx",
+    "line": "mov     [esp+174h+start.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x68503A",
-    "line": "lea     ecx, [esp+178h+var_158]",
+    "line": "lea     ecx, [esp+178h+start]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x68503E",
-    "line": "mov     [esp+178h+var_154], edx",
+    "line": "mov     [esp+178h+start.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x685048",
-    "line": "mov     [esp+17Ch+var_150], eax",
+    "line": "mov     [esp+17Ch+start.z], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x685051",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x685053",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +505,7 @@
   },
   {
     "ea": "0x68505A",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x685061",
-    "line": "mov     [esp+174h+var_14C], edx",
+    "line": "mov     [esp+174h+end.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x685068",
-    "line": "mov     [esp+174h+var_148], ecx",
+    "line": "mov     [esp+174h+end.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,7 +541,7 @@
   },
   {
     "ea": "0x68506F",
-    "line": "mov     [esp+174h+var_144], edx",
+    "line": "mov     [esp+174h+end.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x6850BD",
-    "line": "lea     ecx, [esp+174h+var_140]",
+    "line": "lea     ecx, [esp+174h+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -697,43 +697,43 @@
   },
   {
     "ea": "0x6850C9",
-    "line": "push    0; float",
+    "line": "push    0; extraCost",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6850CB",
-    "line": "push    edi; int",
+    "line": "push    edi; actor",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6850CC",
-    "line": "lea     eax, [esp+17Ch+var_14C]",
+    "line": "lea     eax, [esp+17Ch+end]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6850D0",
-    "line": "push    eax; int",
+    "line": "push    eax; end",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6850D1",
-    "line": "lea     ecx, [esp+180h+var_158]",
+    "line": "lea     ecx, [esp+180h+start]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6850D5",
-    "line": "push    ecx; int",
+    "line": "push    ecx; start",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6850D6",
-    "line": "lea     ecx, [esp+184h+var_140]",
+    "line": "lea     ecx, [esp+184h+segmentQuery]; segmentQuery",
     "mnemonic": "lea",
     "size": 4
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x6850E9",
-    "line": "call    sub_67EB60",
+    "line": "call    ConnectedPointGraph_CanTraverseSegment; Verified shared graph route test used from actor package, combat, PathGrid selection, and fast-travel surface construction. It accepts a valid direct segment; if straight-segment validation fails, it invokes actor-aware connected-point A*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x6850EF",
-    "line": "lea     ecx, [esp+178h+var_140]",
+    "line": "lea     ecx, [esp+178h+segmentQuery]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x685100",
-    "line": "lea     ecx, [esp+174h+var_140]; void *",
+    "line": "lea     ecx, [esp+174h+segmentQuery]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x68510F",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -880,5 +880,83 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C4E90",
+    "line": "lea     ecx, [ebp-140h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4E96",
+    "line": "jmp     Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4E9B",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C4E9F",
+    "line": "lea     eax, [edx-164h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4EA5",
+    "line": "mov     ecx, [edx-168h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C4EAB",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4EAD",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4EB2",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4EB5",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C4EB8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C4EBA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4EBF",
+    "line": "mov     eax, offset stru_AED738",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C4EC4",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

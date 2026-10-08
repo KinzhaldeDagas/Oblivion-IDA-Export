@@ -1,1 +1,1 @@
-PDWORD
+typedef unsigned int *PDWORD;

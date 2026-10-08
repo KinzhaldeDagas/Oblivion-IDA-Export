@@ -14,14 +14,14 @@
 0x90FB7D: push    eax
 0x90FB7E: push    ecx
 0x90FB7F: lea     ecx, [esp+78h+var_40]
-0x90FB83: call    sub_88FCC0
+0x90FB83: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x90FB88: mov     eax, [ebx+50h]
 0x90FB8B: lea     edx, [esi+40h]
 0x90FB8E: push    edx
 0x90FB8F: add     eax, 10h
 0x90FB92: push    eax
 0x90FB93: lea     ecx, [esp+78h+var_50]
-0x90FB97: call    sub_88FCC0
+0x90FB97: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x90FB9C: movaps  xmm0, [esp+70h+var_40]
 0x90FBA1: movaps  xmm1, [esp+70h+var_50]
 0x90FBA6: subps   xmm1, xmm0
@@ -75,13 +75,13 @@
 0x90FC56: lea     eax, [esp+74h+var_40]
 0x90FC5A: push    eax
 0x90FC5B: mov     ecx, edi
-0x90FC5D: call    sub_8ABCE0
+0x90FC5D: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x90FC62: lea     ecx, [esp+70h+var_10]
 0x90FC66: push    ecx
 0x90FC67: lea     edx, [esp+74h+var_50]
 0x90FC6B: push    edx
 0x90FC6C: mov     ecx, ebx
-0x90FC6E: call    sub_8ABCE0
+0x90FC6E: call    sub_8ABCE0; TES4 authoritative: resolves a contact point through the hit collidable/entity transform to compare contact positions between manifold entries.
 0x90FC73: fld     [esp+70h+var_58]
 0x90FC77: fsub    dword ptr [esi+50h]
 0x90FC7A: movaps  xmm0, [esp+70h+var_20]

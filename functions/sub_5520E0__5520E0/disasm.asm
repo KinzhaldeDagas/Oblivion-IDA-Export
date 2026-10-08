@@ -1,6 +1,6 @@
-0x5520E0: push    esi
+0x5520E0: push    esi; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.
 0x5520E1: push    edi
-0x5520E2: mov     edi, [esp+8+arg_0]
+0x5520E2: mov     edi, [esp+8+source]
 0x5520E6: mov     esi, ecx
 0x5520E8: cmp     esi, edi
 0x5520EA: jz      short loc_552155
@@ -17,7 +17,7 @@
 0x552102: push    ecx; int
 0x552103: mov     ecx, ebx; int
 0x552105: mov     [esi+4], eax
-0x552108: call    sub_527160
+0x552108: call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.
 0x55210D: mov     eax, [edi+0Ch]
 0x552110: test    eax, eax
 0x552112: jz      short loc_55211E
@@ -40,10 +40,10 @@
 0x552142: mov     eax, [ebx+4]
 0x552145: add     edx, edx
 0x552147: add     edx, edx
-0x552149: push    edx; Size
-0x55214A: push    edi; Src
-0x55214B: push    eax; Dst
-0x55214C: call    _memcpy
+0x552149: push    edx; byteCount
+0x55214A: push    edi; source
+0x55214B: push    eax; destination
+0x55214C: call    _memcpy;
 0x552151: add     esp, 0Ch
 0x552154: pop     ebx
 0x552155: pop     edi

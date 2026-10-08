@@ -1,4 +1,4 @@
-0x8939B0: push    ebp
+0x8939B0: push    ebp; TES4 authoritative: updates smoothed support slope/tilt at proxy+0x32C by sampling the two cached capsule endpoints and dividing height delta by capsule height +0x3A4.
 0x8939B1: mov     ebp, esp
 0x8939B3: and     esp, 0FFFFFFF0h
 0x8939B6: sub     esp, 7Ch
@@ -21,7 +21,7 @@
 0x8939F8: lea     ecx, [esp+80h+var_50]
 0x8939FC: push    ecx
 0x8939FD: mov     ecx, [esi+364h]
-0x893A03: call    sub_6848D0
+0x893A03: call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.
 0x893A08: fld     dword ptr [esi+240h]
 0x893A0E: fstp    [esp+80h+var_78]
 0x893A12: fld     dword ptr [esi+244h]
@@ -35,7 +35,7 @@
 0x893A31: push    edx
 0x893A32: push    0
 0x893A34: mov     ecx, esi
-0x893A36: call    sub_8915F0
+0x893A36: call    bhkCharacterProxy_RaycastCapsuleEndpointDown; If endpoint 0 height cache is sentinel, raycast downward from cached capsule endpoint 0.
 0x893A3B: movaps  xmm0, [esp+80h+var_60]
 0x893A40: shufps  xmm0, xmm0, 0AAh ; 'ª'
 0x893A44: movss   [esp+80h+var_70], xmm0
@@ -50,7 +50,7 @@
 0x893A67: push    eax
 0x893A68: push    1
 0x893A6A: mov     ecx, esi
-0x893A6C: call    sub_8915F0
+0x893A6C: call    bhkCharacterProxy_RaycastCapsuleEndpointDown; If endpoint 1 height cache is sentinel, raycast downward from cached capsule endpoint 1.
 0x893A71: movaps  xmm0, [esp+80h+var_60]
 0x893A76: shufps  xmm0, xmm0, 0AAh ; 'ª'
 0x893A7A: movss   [esp+80h+var_70], xmm0
@@ -69,10 +69,10 @@
 0x893AA5: jnp     short loc_893B1B
 0x893AA7: fstp    st(1)
 0x893AA9: fdiv    dword ptr [esi+3A4h]
-0x893AAF: fstp    [esp+80h+var_78]
+0x893AAF: fstp    [esp+80h+var_78]; Support slope ratio = endpoint height delta / capsule height +0x3A4.
 0x893AB3: fld     [esp+80h+var_78]
 0x893AB7: call    __CIatan
-0x893ABC: fstp    [esp+80h+var_78]
+0x893ABC: fstp    [esp+80h+var_78]; Convert support slope ratio to angle via atan before clamping.
 0x893AC0: fld     [esp+80h+var_78]
 0x893AC4: fstp    [esp+80h+var_74]
 0x893AC8: fldz
@@ -125,7 +125,7 @@
 0x893B59: fstp    st
 0x893B5B: fmul    dword ptr [esi+330h]
 0x893B61: fadd    dword ptr [esi+32Ch]
-0x893B67: fstp    dword ptr [esi+32Ch]
+0x893B67: fstp    dword ptr [esi+32Ch]; Smooth proxy+0x32C toward clamped support slope angle using response factor +0x330.
 0x893B6D: pop     esi
 0x893B6E: mov     ecx, [esp+7Ch+var_4]
 0x893B72: xor     ecx, esp

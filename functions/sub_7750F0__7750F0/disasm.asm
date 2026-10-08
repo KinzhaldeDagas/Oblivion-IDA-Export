@@ -1,5 +1,5 @@
-0x7750F0: sub     esp, 10h
-0x7750F3: mov     edx, [esp+10h+arg_0]
+0x7750F0: sub     esp, 10h; Choose the supported depth/stencil candidate nearest the requested depth-bit and stencil-bit counts for the render-target format.
+0x7750F3: mov     edx, [esp+10h+stencilBits]
 0x7750F7: push    ebx
 0x7750F8: push    esi
 0x7750F9: lea     eax, [esp+18h+var_10]
@@ -20,53 +20,53 @@
 0x775122: mov     [esp+20h+var_4], ebx
 0x775126: mov     [esp+20h+var_8], ebx
 0x77512A: mov     [esp+20h+var_10], eax
-0x77512E: xor     edi, edi
+0x77512E: xor     edi, edi; Scan the nine native D3D depth/stencil candidates and retain the closest supported depth/stencil bit-count match.
 0x775130: mov     ecx, [esp+20h+var_10]
 0x775134: cmp     [ecx], bl
 0x775136: jz      loc_7751B9
-0x77513C: mov     esi, ds:dword_B29944[edi]
-0x775142: lea     edx, [esp+20h+arg_0]
-0x775146: push    edx
-0x775147: lea     eax, [esp+24h+var_C]
-0x77514B: push    eax
-0x77514C: push    esi
-0x77514D: mov     [esp+2Ch+var_C], ebx
-0x775151: mov     [esp+2Ch+arg_0], ebx
-0x775155: call    sub_774AE0
-0x77515A: mov     ecx, [esp+2Ch+var_C]
+0x77513C: mov     esi, ds:D3DDepthStencilFormatCandidates[edi]
+0x775142: lea     edx, [esp+20h+stencilBits]
+0x775146: push    edx; stencilBits
+0x775147: lea     eax, [esp+24h+depthBits]
+0x77514B: push    eax; depthBits
+0x77514C: push    esi; format
+0x77514D: mov     [esp+2Ch+depthBits], ebx
+0x775151: mov     [esp+2Ch+stencilBits], ebx
+0x775155: call    D3DDepthStencilFormat_GetBitCounts; Map D3D depth/stencil formats to their depth-bit and stencil-bit counts for compatibility ranking.
+0x77515A: mov     ecx, [esp+2Ch+depthBits]
 0x77515E: mov     ebx, [esp+2Ch+arg_4]
 0x775162: mov     eax, ecx
 0x775164: sub     eax, ebx
 0x775166: cdq
 0x775167: xor     eax, edx
 0x775169: sub     eax, edx
-0x77516B: mov     [esp+2Ch+var_C], eax
+0x77516B: mov     [esp+2Ch+depthBits], eax
 0x77516F: mov     eax, ebp
 0x775171: sub     eax, ebx
 0x775173: cdq
 0x775174: xor     eax, edx
 0x775176: sub     eax, edx
-0x775178: mov     edx, [esp+2Ch+var_C]
+0x775178: mov     edx, [esp+2Ch+depthBits]
 0x77517C: add     esp, 0Ch
 0x77517F: cmp     eax, edx
 0x775181: jl      short loc_7751B7
 0x775183: mov     ebx, [esp+20h+arg_8]
-0x775187: mov     eax, [esp+20h+arg_0]
+0x775187: mov     eax, [esp+20h+stencilBits]
 0x77518B: sub     eax, ebx
 0x77518D: cdq
 0x77518E: xor     eax, edx
 0x775190: sub     eax, edx
-0x775192: mov     [esp+20h+var_C], eax
+0x775192: mov     [esp+20h+depthBits], eax
 0x775196: mov     eax, [esp+20h+var_8]
 0x77519A: sub     eax, ebx
 0x77519C: cdq
 0x77519D: xor     eax, edx
 0x77519F: sub     eax, edx
-0x7751A1: mov     edx, [esp+20h+var_C]
+0x7751A1: mov     edx, [esp+20h+depthBits]
 0x7751A5: cmp     eax, edx
 0x7751A7: jl      short loc_7751B7
 0x7751A9: mov     ebp, ecx
-0x7751AB: mov     ecx, [esp+20h+arg_0]
+0x7751AB: mov     ecx, [esp+20h+stencilBits]
 0x7751AF: mov     [esp+20h+var_8], ecx
 0x7751B3: mov     [esp+20h+var_4], esi
 0x7751B7: xor     ebx, ebx

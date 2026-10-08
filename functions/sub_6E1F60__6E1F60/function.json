@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
-  "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_6E1F60",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 6,
+  "chunks": [
+    [
+      "0x6E1F60",
+      "0x6E1FBB"
+    ]
+  ],
+  "chunks_sha256": "3547aca9334c6e2525b1f829cb9e74bd2ec1826959aec2ea039aa9fb5ebd4b6c",
+  "comment_regular": "Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.",
+  "comment_repeatable": "Oblivion NiTransformData scale-key ownership setter. Destroys previous keys +0x28 through the destructor table indexed by type +0x18, then installs count +0x0C, pointer +0x28, type +0x18, and table-derived stride +0x1E. Null pointer or zero count clears the channel fields.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "NiTransformData_SetScaleKeys",
   "end_ea": "0x6E1FBB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6E1F60",
+  "name": "NiTransformData_SetScaleKeys",
   "segment": ".text",
   "sha256": "3547aca9334c6e2525b1f829cb9e74bd2ec1826959aec2ea039aa9fb5ebd4b6c",
   "size": 91,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6E1F60",
+  "total_chunk_size": 91,
   "type": "char __thiscall(_DWORD *this, int, int, int)",
   "xrefs_from_count": 36,
   "xrefs_to_count": 6

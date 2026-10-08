@@ -11,8 +11,8 @@ bool __usercall sub_40FCA0@<al>(int a1@<edi>, _DWORD *a2@<esi>, int a3)
   int v12; // [esp+1Ch] [ebp-8h] BYREF
   int v13; // [esp+20h] [ebp-4h] BYREF
 
-  v3 = 1;
-  BinkDoFrame(v5);
+  v3 = 1; /*0x40fcaa*/
+  BinkDoFrame(v5); /*0x40fcaf*/
   if ( sub_40F880(a2, &v13, &v12, &v11, &v10, &v9, &v8) )
   {
     do
@@ -29,11 +29,11 @@ bool __usercall sub_40FCA0@<al>(int a1@<edi>, _DWORD *a2@<esi>, int a3)
              v9,
              v8,
              (a3 != 0 ? 0x80000000 : 0) | 3);
-      (*(void (__cdecl **)(_DWORD, _DWORD))(**(_DWORD **)(a2[0x10] + 4 * a2[5] - 4) + 0x50))(
+      (*(void (__cdecl **)(_DWORD, _DWORD))(**(_DWORD **)(a2[0x10] + 4 * a2[5] - 4) + 0x50))( /*0x40fd32*/
         *(_DWORD *)(a2[0x10] + 4 * a2[5] - 4),
         0);
     }
     while ( sub_40F880(a2, &v11, &v10, &v9, &v8, &v7, &v6) );
   }
-  return v3 != 0;
+  return v3 != 0; /*0x40fd61*/
 }

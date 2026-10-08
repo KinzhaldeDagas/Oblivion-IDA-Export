@@ -1,7 +1,7 @@
 0x980DCA: push    ebx
 0x980DCB: push    esi
 0x980DCC: push    edi
-0x980DCD: mov     ebx, offset Target
+0x980DCD: mov     ebx, (offset byte_BA9BB4+0E4h)
 0x980DD2: push    0; Value
 0x980DD4: push    ebx; Target
 0x980DD5: call    dword ptr ds:0A28188h
@@ -19,7 +19,7 @@
 0x980DF5: mov     esi, edi
 0x980DF7: jnz     short loc_980DE1
 0x980DF9: add     ebx, 4
-0x980DFC: cmp     ebx, offset dword_BA9D90
+0x980DFC: cmp     ebx, (offset byte_BA9BB4+1DCh)
 0x980E02: jl      short loc_980DD2
 0x980E04: pop     edi
 0x980E05: pop     esi

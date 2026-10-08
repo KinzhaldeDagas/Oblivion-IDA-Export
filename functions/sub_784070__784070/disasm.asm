@@ -1,4 +1,4 @@
-0x784070: mov     eax, [esp+arg_0]
+0x784070: mov     eax, [esp+node]; Oblivion 1.2.0.416: follows cache-tree left links to the leftmost non-nil node.
 0x784074: mov     ecx, [eax]
 0x784076: cmp     byte ptr [ecx+2Dh], 0
 0x78407A: jnz     short locret_78408A

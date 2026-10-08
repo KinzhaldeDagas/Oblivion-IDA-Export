@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FB470",
-    "line": "push    ebx",
+    "line": "push    ebx; Lighting30 vtable +0x28 geometry-state preparation. In render mode 5 it applies NiAlphaProperty test enable bit 0x200, test-function bits 10..12, and reference byte +0x1A; disables alpha blending; uses GREATER/ref 128 for blend-only fallback; then applies native stencil/cull and wireframe/fill properties.",
     "mnemonic": "push",
     "size": 1
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x7FB5B0",
-    "line": "jmp     loc_7FB678",
+    "line": "jmp     loc_7FB678; Lighting30 blend-only mode-5 fallback writes alpha reference 128.",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x7FB605",
-    "line": "jnz     short loc_7FB61B",
+    "line": "jnz     short loc_7FB61B; Mode-5 Lighting30 alpha path applies NiAlphaProperty: test bit 0x200, function bits 10..12, reference byte +0x1A, and blend state.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7FB61B",
-    "line": "mov     ecx, [esi+18h]",
+    "line": "mov     ecx, [esi+18h]; Mode-5 Lighting30 alpha path applies NiAlphaProperty: test bit 0x200, function bits 10..12, reference byte +0x1A, and blend state.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x7FB63A",
-    "line": "call    eax",
+    "line": "call    eax; Disable D3DRS_ALPHABLENDENABLE for the mode-5 caster after property application.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x7FB657",
-    "line": "call    eax",
+    "line": "call    eax; Lighting30 blend-only mode-5 fallback enables alpha test.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7FB667",
-    "line": "call    eax",
+    "line": "call    eax; Lighting30 blend-only mode-5 fallback selects D3DCMP_GREATER.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1135,7 +1135,7 @@
   },
   {
     "ea": "0x7FB678",
-    "line": "push    18h",
+    "line": "push    18h; Lighting30 blend-only mode-5 fallback writes alpha reference 128.",
     "mnemonic": "push",
     "size": 2
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7FB68C",
-    "line": "push    eax",
+    "line": "push    eax; Apply NiStencilProperty; pass-local STENCILENABLE is later forced off, while property-driven D3DRS_CULLMODE remains.",
     "mnemonic": "push",
     "size": 1
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x7FB69B",
-    "line": "call    eax",
+    "line": "call    eax; Apply NiWireframeProperty so caster fill mode follows the geometry property state.",
     "mnemonic": "call",
     "size": 2
   },

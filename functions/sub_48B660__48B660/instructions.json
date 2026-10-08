@@ -49,13 +49,13 @@
   },
   {
     "ea": "0x48B67A",
-    "line": "mov     [esp+1Ch+var_10], 0",
+    "line": "mov     [esp+1Ch+form], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x48B682",
-    "line": "mov     dword ptr [esp+1Ch+var_8], 0",
+    "line": "mov     [esp+1Ch+item], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x48B6B2",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x48B6BA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x48B6C6",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -268,12 +268,6 @@
     "line": "jmp     short loc_48B6F0",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x48B6ED",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x48B6F0",
@@ -388,12 +382,6 @@
     "line": "jmp     short loc_48B730",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x48B72D",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 3
   },
   {
     "ea": "0x48B730",
@@ -541,13 +529,13 @@
   },
   {
     "ea": "0x48B762",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B764",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -565,13 +553,13 @@
   },
   {
     "ea": "0x48B76D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B76F",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,13 +613,13 @@
   },
   {
     "ea": "0x48B784",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B786",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -649,13 +637,13 @@
   },
   {
     "ea": "0x48B78F",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B791",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,19 +721,19 @@
   },
   {
     "ea": "0x48B7B2",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48B7B6",
-    "line": "push    ebx",
+    "line": "push    ebx; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48B7B7",
-    "line": "call    TESActorBase_GetEquippableItemRating",
+    "line": "call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -799,7 +787,7 @@
   },
   {
     "ea": "0x48B7D5",
-    "line": "mov     [esp+24h+var_10], ebx",
+    "line": "mov     [esp+24h+form], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -979,13 +967,13 @@
   },
   {
     "ea": "0x48B830",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B832",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,13 +991,13 @@
   },
   {
     "ea": "0x48B83B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B83D",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1063,13 +1051,13 @@
   },
   {
     "ea": "0x48B852",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B854",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1087,13 +1075,13 @@
   },
   {
     "ea": "0x48B85D",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B85F",
-    "line": "call    ExtraDataList_GetOwner",
+    "line": "call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1207,19 +1195,19 @@
   },
   {
     "ea": "0x48B894",
-    "line": "mov     ecx, [esp+24h+arg_0]",
+    "line": "mov     ecx, [esp+24h+arg_0]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48B898",
-    "line": "push    ebp",
+    "line": "push    ebp; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48B899",
-    "line": "call    TESActorBase_GetEquippableItemRating",
+    "line": "call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1273,7 +1261,7 @@
   },
   {
     "ea": "0x48B8B7",
-    "line": "mov     dword ptr [esp+24h+var_8], ebp",
+    "line": "mov     [esp+24h+item], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1309,7 +1297,7 @@
   },
   {
     "ea": "0x48B8CA",
-    "line": "mov     edi, dword ptr [esp+24h+var_8]",
+    "line": "mov     edi, [esp+24h+item]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1327,7 +1315,7 @@
   },
   {
     "ea": "0x48B8D2",
-    "line": "mov     ebx, [esp+24h+var_10]",
+    "line": "mov     ebx, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1351,49 +1339,49 @@
   },
   {
     "ea": "0x48B8DE",
-    "line": "push    edi",
+    "line": "push    edi; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48B8DF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B8E1",
-    "line": "call    TESActorBase_GetEquippableItemRating",
+    "line": "call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x48B8E6",
-    "line": "fstp    [esp+24h+var_8]",
+    "line": "fstp    qword ptr [esp+24h+item]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x48B8EA",
-    "line": "push    ebx",
+    "line": "push    ebx; item",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48B8EB",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B8ED",
-    "line": "call    TESActorBase_GetEquippableItemRating",
+    "line": "call    TESActorBase_GetEquippableItemRating; Return the base actor's floating equipment desirability/rating for the supplied item. Native return type is float, not double. External ThrowingWeapon damage-doubling/ranged-multiplier and mode 1->2 conversion remain plugin policy; they are not behavior performed by this native evaluator.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x48B8F2",
-    "line": "fcomp   [esp+24h+var_8]",
+    "line": "fcomp   qword ptr [esp+24h+item]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -1417,7 +1405,7 @@
   },
   {
     "ea": "0x48B8FD",
-    "line": "mov     [esp+24h+var_10], edi",
+    "line": "mov     [esp+24h+form], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1429,43 +1417,43 @@
   },
   {
     "ea": "0x48B905",
-    "line": "mov     ecx, [esp+24h+var_10]",
+    "line": "mov     ecx, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x48B909",
-    "line": "push    0",
+    "line": "push    0; referenceFormIDOrZero",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48B90B",
-    "line": "push    1",
+    "line": "push    1; unusedAlwaysOne",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x48B90D",
-    "line": "push    ecx",
+    "line": "push    ecx; form",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x48B90E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x48B910",
-    "line": "call    ContainerExtraData_GetEntryForForm",
+    "line": "call    ContainerExtraData_GetEntryForForm; Find EntryData for an exact TESForm in ExtraContainerChanges. Native ABI is three stack arguments and retn 0x0C. The middle Boolean is not read; callers conventionally pass true. If referenceFormIDOrZero is nonzero, require an extend-data list whose ExtraReferencePointer target has that form ID; otherwise return the form entry directly.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x48B915",
-    "line": "mov     ebx, [esp+24h+var_10]",
+    "line": "mov     ebx, [esp+24h+form]",
     "mnemonic": "mov",
     "size": 4
   },

@@ -8,15 +8,15 @@
 0x4246FF: jz      short loc_42475E
 0x424701: mov     ecx, [esi+0Ch]
 0x424704: push    1
-0x424706: call    sub_566830
-0x42470B: mov     ecx, SaveLoad_CurrentSavegame
+0x424706: call    sub_566830; 3DTheft decode: dynamic package marker only sets packageFlags bit 0x800 when TESDataHandler_IsFormIDCreated_(formID) returns true. Do not force 0x800 on arbitrary heap packages before Actor_AddPackage_.
+0x42470B: mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.
 0x424711: call    sub_45A500
 0x424716: test    al, al
 0x424718: jz      short loc_42473D
 0x42471A: mov     eax, [esi+0Ch]
-0x42471D: mov     ecx, SaveLoad_CurrentSavegame
-0x424723: push    eax
-0x424724: call    sub_45C7A0
+0x42471D: mov     ecx, g_TESSaveLoadGame; self
+0x424723: push    eax; form
+0x424724: call    TESSaveLoadGame_DeleteForm
 0x424729: push    1
 0x42472B: push    esi
 0x42472C: mov     ecx, edi

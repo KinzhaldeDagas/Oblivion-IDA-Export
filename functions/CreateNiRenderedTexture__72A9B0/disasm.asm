@@ -1,4 +1,4 @@
-0x72A9B0: push    0FFFFFFFFh
+0x72A9B0: push    0FFFFFFFFh; DX10OBSE resource decode: creates NiRenderedTexture and asks the renderer to create its render-data texture; native render targets can later be sampled through the same stage/sampler SetTexture route.
 0x72A9B2: push    offset SEH_71BE30
 0x72A9B7: mov     eax, large fs:0
 0x72A9BD: push    eax
@@ -106,3 +106,15 @@
 0x72AAD6: pop     ebx
 0x72AAD7: add     esp, 0Ch
 0x72AADA: retn
+0x9CA5A0: mov     eax, [ebp+0Ch]
+0x9CA5A3: push    eax
+0x9CA5A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA5A9: pop     ecx
+0x9CA5AA: retn
+0x9CA5AB: mov     edx, [esp+quadY]
+0x9CA5AF: lea     eax, [edx-10h]
+0x9CA5B2: mov     ecx, [edx-14h]
+0x9CA5B5: xor     ecx, eax
+0x9CA5B7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA5BC: mov     eax, offset stru_AF2C94
+0x9CA5C1: jmp     ___CxxFrameHandler3

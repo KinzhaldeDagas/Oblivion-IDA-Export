@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6600B0",
-    "line": "cmp     byte ptr [ecx+588h], 0",
+    "line": "cmp     byte ptr [ecx+588h], 0; Return the player's currently active ActorSkinInfo: third-person +0x104 when +0x588 is set; otherwise first-person +0x5C8 when nonnull, falling back to +0x104. ActorSkinInfo owns equipped model pointers; it is not ActorAnimData.",
     "mnemonic": "cmp",
     "size": 7
   },

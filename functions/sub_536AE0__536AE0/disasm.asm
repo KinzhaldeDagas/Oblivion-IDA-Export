@@ -3,7 +3,6 @@
 0x536AE5: jz      short loc_536AFC
 0x536AE7: mov     ecx, [esp+arg_0]
 0x536AEB: jmp     short loc_536AF0
-0x536AED: align 10h
 0x536AF0: cmp     [eax+0Ch], ecx
 0x536AF3: jz      short loc_536B01
 0x536AF5: mov     eax, [eax+4]

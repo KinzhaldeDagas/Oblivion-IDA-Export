@@ -1,112 +1,180 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "dibdrv_physdev",
+  "definition": "struct dibdrv_physdev\n{\ngdi_physdev dev;\ndib_info dib;\ndib_brush_0 brush;\nHRGN clip;\nRECT *bounds;\ncached_font *font;\nDWORD pen_style;\nDWORD pen_endcap;\nDWORD pen_join;\nBOOL pen_uses_region;\nBOOL pen_is_ext;\nint pen_width;\ndib_brush_0 pen_brush;\ndash_pattern pen_pattern;\ndash_pos dash_pos;\nrop_mask dash_masks[2];\nBOOL (*pen_lines)(dibdrv_physdev *, int, POINT *, BOOL, HRGN);\n}\n",
   "id": 18374686479672026428,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dev",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "gdi_physdev"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dib",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 100
+      "offset_hex": "0xC",
+      "size": 100,
+      "type": "dib_info"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "brush",
       "offset": 112,
       "offset_hex": "0x70",
-      "size": 160
+      "size": 160,
+      "type": "dib_brush_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "clip",
       "offset": 272,
       "offset_hex": "0x110",
-      "size": 4
+      "size": 4,
+      "type": "HRGN"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "bounds",
       "offset": 276,
       "offset_hex": "0x114",
-      "size": 4
+      "size": 4,
+      "type": "RECT *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "font",
       "offset": 280,
       "offset_hex": "0x118",
-      "size": 4
+      "size": 4,
+      "type": "cached_font *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_style",
       "offset": 284,
-      "offset_hex": "0x11c",
-      "size": 4
+      "offset_hex": "0x11C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_endcap",
       "offset": 288,
       "offset_hex": "0x120",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_join",
       "offset": 292,
       "offset_hex": "0x124",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_uses_region",
       "offset": 296,
       "offset_hex": "0x128",
-      "size": 4
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_is_ext",
       "offset": 300,
-      "offset_hex": "0x12c",
-      "size": 4
+      "offset_hex": "0x12C",
+      "size": 4,
+      "type": "BOOL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_width",
       "offset": 304,
       "offset_hex": "0x130",
-      "size": 4
+      "size": 4,
+      "type": "int"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_brush",
       "offset": 312,
       "offset_hex": "0x138",
-      "size": 160
+      "size": 160,
+      "type": "dib_brush_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_pattern",
       "offset": 472,
-      "offset_hex": "0x1d8",
-      "size": 72
+      "offset_hex": "0x1D8",
+      "size": 72,
+      "type": "dash_pattern"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dash_pos",
       "offset": 544,
       "offset_hex": "0x220",
-      "size": 12
+      "size": 12,
+      "type": "dash_pos"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "dash_masks",
       "offset": 556,
-      "offset_hex": "0x22c",
-      "size": 16
+      "offset_hex": "0x22C",
+      "size": 16,
+      "type": "rop_mask[2]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pen_lines",
       "offset": 572,
-      "offset_hex": "0x23c",
-      "size": 4
+      "offset_hex": "0x23C",
+      "size": 4,
+      "type": "BOOL (*)(dibdrv_physdev *, int, POINT *, BOOL, HRGN)"
     }
   ],
   "name": "dibdrv_physdev",
+  "ordinal": 1048,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 576
 }

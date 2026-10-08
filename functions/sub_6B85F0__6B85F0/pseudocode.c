@@ -1,18 +1,18 @@
-BOOL __thiscall sub_6B85F0(void *this)
+bool __thiscall MenuTopicManager::NextTopic(MenuTopicManagerView *this)
 {
-  _DWORD *v1; // eax
-  BOOL result; // eax
+  MenuTopicNode *next; // eax
+  bool result; // al
 
-  result = 0;
-  if ( *(_DWORD *)this )
+  result = 0; /*0x6b8604*/
+  if ( this->currentTopicNode ) /*0x6b85f0*/
   {
-    v1 = *(_DWORD **)(*(_DWORD *)this + 4);
-    *(_DWORD *)this = v1;
-    if ( v1 )
+    next = this->currentTopicNode->next; /*0x6b85f6*/
+    this->currentTopicNode = next; /*0x6b85fb*/
+    if ( next ) /*0x6b85fd*/
     {
-      if ( *v1 )
-        return 1;
+      if ( next->item ) /*0x6b85ff*/
+        return 1; /*0x6b85f4*/
     }
   }
-  return result;
+  return result; /*0x6b8609*/
 }

@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x723020",
+      "0x72304D"
+    ]
+  ],
+  "chunks_sha256": "618b6fe2d029ec05a969f34e56fd7c845c130c4e963775a0ff1a0037d24451cf",
+  "comment_regular": "Copies NiGeometry-specific members into a clone, including geometry data, then delegates the NiAVObject/base-member copy.",
+  "comment_repeatable": "Copies NiGeometry-specific members into a clone, including geometry data, then delegates the NiAVObject/base-member copy.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_723020",
+  "display_name": "NiGeometry_CopyMembersForClone",
   "end_ea": "0x72304D",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_723020",
+  "name": "NiGeometry_CopyMembersForClone",
   "segment": ".text",
   "sha256": "618b6fe2d029ec05a969f34e56fd7c845c130c4e963775a0ff1a0037d24451cf",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x723020",
-  "type": "void __thiscall(char **this, NiGeometry *a2, _DWORD **a3)",
+  "total_chunk_size": 45,
+  "type": "void __thiscall(NiGeometry *this, NiGeometry *dest, void *cloningProcess)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 3
 }

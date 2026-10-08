@@ -1,8 +1,8 @@
 void __usercall StatsMenu_MiscTab_HandleClick(
         _DWORD *this@<ecx>,
-        double st5_0@<st2>,
-        double st6_0@<st1>,
         double st7_0@<st0>,
+        int a3,
+        int a4,
         int a5,
         int a6,
         int a7,
@@ -12,11 +12,9 @@ void __usercall StatsMenu_MiscTab_HandleClick(
         int a11,
         int a12,
         int a13,
-        int a14,
-        int a15,
-        int a16)
+        int a14)
 {
-  char *v17; // edi
+  char *value; // edi
   int GameDaysPassed; // eax
   int v19; // edi
   int v20; // ebx
@@ -32,61 +30,61 @@ void __usercall StatsMenu_MiscTab_HandleClick(
   int v30; // [esp+3Ch] [ebp-8h]
   int v31; // [esp+40h] [ebp-4h]
 
-  Tile_GetFloat((_DWORD *)*(this + 0x14), 0xFB5);
-  Double_To_SInt32(st7_0);
-  sub_5893F0((_DWORD *)*(this + 0x13));
-  v17 = (char *)dword_B383E8;
-  GameDaysPassed = TimeGlobals_GetGameDaysPassed(&TimeGlobals);
-  sub_5DA8C0((int)this, st5_0, st6_0, st7_0, v17, GameDaysPassed, 0);
-  v19 = 0;
-  v26 = 0;
-  v20 = 0;
-  v27 = 0;
-  sub_52A8A0(&v27, 0, 0, 1);
-  if ( v27 )
+  Tile_GetFloat((_DWORD *)*(this + 0x14), 0xFB5); /*0x5da941*/
+  Double_To_SInt32(st7_0); /*0x5da946*/
+  sub_5893F0((_DWORD *)*(this + 0x13)); /*0x5da952*/
+  value = (char *)stru_B383E8.value; /*0x5da957*/
+  GameDaysPassed = TimeGlobals_GetGameDaysPassed(&MEMORY[0xB332E0]); /*0x5da965*/
+  sub_5DA8C0((int)this, value, GameDaysPassed, 0); /*0x5da96e*/
+  v19 = 0; /*0x5da97b*/
+  v26 = 0; /*0x5da97e*/
+  v20 = 0; /*0x5da982*/
+  v27 = 0; /*0x5da984*/
+  sub_52A8A0(&v27, 0, 0, 1); /*0x5da98c*/
+  if ( v27 ) /*0x5da998*/
   {
-    v21 = &v27;
-    do
+    v21 = &v27; /*0x5da9a0*/
+    do /*0x5da9ac*/
     {
-      v21 = *((__int64 **)v21 + 1);
-      ++v19;
+      v21 = *((__int64 **)v21 + 1); /*0x5da9a4*/
+      ++v19; /*0x5da9a7*/
     }
-    while ( v21 );
-    v26 = v19;
+    while ( v21 ); /*0x5da9ac*/
+    v26 = v19; /*0x5da9ae*/
   }
-  sub_52A8A0(&v27, 0, 1, 1);
-  v22 = HIDWORD(v27);
-  if ( v27 )
+  sub_52A8A0(&v27, 0, 1, 1); /*0x5da9bc*/
+  v22 = HIDWORD(v27); /*0x5da9c1*/
+  if ( v27 ) /*0x5da9ca*/
   {
-    v23 = &v27;
-    do
+    v23 = &v27; /*0x5da9d2*/
+    do /*0x5da9de*/
     {
-      v23 = *((__int64 **)v23 + 1);
-      ++v20;
+      v23 = *((__int64 **)v23 + 1); /*0x5da9d6*/
+      ++v20; /*0x5da9d9*/
     }
-    while ( v23 );
-    if ( HIDWORD(v27) )
+    while ( v23 ); /*0x5da9de*/
+    if ( HIDWORD(v27) ) /*0x5da9e2*/
     {
-      do
+      do /*0x5da9f8*/
       {
-        v24 = *(_DWORD *)(v22 + 4);
-        FormHeapFree(v22);
-        v22 = v24;
-        HIDWORD(v27) = v24;
+        v24 = *(_DWORD *)(v22 + 4); /*0x5da9e4*/
+        FormHeapFree(v22); /*0x5da9e8*/
+        v22 = v24; /*0x5da9f2*/
+        HIDWORD(v27) = v24; /*0x5da9f4*/
       }
-      while ( v24 );
-      v19 = v26;
+      while ( v24 ); /*0x5da9f8*/
+      v19 = v26; /*0x5da9fa*/
     }
   }
-  v25 = (char *)sMiscActiveQuests;
-  LODWORD(v27) = 0;
-  sub_5DA8C0((int)this, st5_0, st6_0, st7_0, v25, v19, 1);
-  sub_5DA8C0((int)this, st5_0, st6_0, st7_0, (char *)sMiscQuestsCompleted, v20, 2);
-  sub_5DA8C0((int)this, st5_0, st6_0, st7_0, (char *)sMiscSkillAdvances, TESDataHandler_g_PlayerRef->miscStats[2], 4);
-  sub_5DA8C0((int)this, st5_0, st6_0, st7_0, (char *)sMiscTrainingSessions, TESDataHandler_g_PlayerRef->miscStats[3], 5);
-  v28 = 0;
-  v29 = 0;
-  v30 = 0;
-  v31 = 0;
-  StatsMenu_MiscTab_HandleClick_::CalcSkillMasteryCounts(0, 6, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
+  v25 = (char *)MEMORY[0xB38540].value; /*0x5daa07*/
+  LODWORD(v27) = 0; /*0x5daa0a*/
+  sub_5DA8C0((int)this, v25, v19, 1); /*0x5daa0e*/
+  sub_5DA8C0((int)this, (char *)MEMORY[0xB38548].value, v20, 2); /*0x5daa1e*/
+  sub_5DA8C0((int)this, (char *)MEMORY[0xB384C0].value, reference->miscStats[2], 4); /*0x5daa3a*/
+  sub_5DA8C0((int)this, (char *)MEMORY[0xB384B8].value, reference->miscStats[3], 5); /*0x5daa56*/
+  v28 = 0; /*0x5daa64*/
+  v29 = 0; /*0x5daa68*/
+  v30 = 0; /*0x5daa6c*/
+  v31 = 0; /*0x5daa70*/
+  StatsMenu_MiscTab_HandleClick_::CalcSkillMasteryCounts(0, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); /*0x5daa75*/
 }

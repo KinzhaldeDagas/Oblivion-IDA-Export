@@ -60,7 +60,6 @@
 0x72677F: movzx   ecx, [esp+120h+arg_10]
 0x726787: mov     [esp+120h+var_104], ecx
 0x72678B: jmp     short loc_726795
-0x72678D: align 10h
 0x726790: mov     ebp, 4
 0x726795: mov     eax, [esi+21Ch]
 0x72679B: push    1

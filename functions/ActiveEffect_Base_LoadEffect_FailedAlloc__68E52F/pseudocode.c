@@ -1,4 +1,4 @@
-int __usercall ActiveEffect_Base_LoadEffect_::FailedAlloc@<eax>(
+int __userpurge ActiveEffect_Base_LoadEffect_::FailedAlloc@<eax>(
         _DWORD *a1@<ebx>,
         int a2@<ebp>,
         int a3,

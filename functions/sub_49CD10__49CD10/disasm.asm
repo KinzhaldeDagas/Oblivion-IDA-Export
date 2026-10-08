@@ -174,7 +174,7 @@
 0x49CF4F: mov     ds:0B45E3Ch, ecx
 0x49CF55: fdivp   st(1), st
 0x49CF57: mov     ds:0B45E40h, edx
-0x49CF5D: call    Double_To_SInt32
+0x49CF5D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x49CF62: mov     [esp+38h+var_24], eax
 0x49CF66: fild    [esp+38h+var_24]
 0x49CF6A: mov     al, ds:0B07058h
@@ -197,3 +197,38 @@
 0x49CFA4: pop     ebx
 0x49CFA5: add     esp, 24h
 0x49CFA8: retn
+0x9B19E0: mov     ecx, [ebp-24h]; slot
+0x9B19E3: jmp     NiPointerSlot_Release
+0x9B19E8: mov     ecx, [ebp-24h]
+0x9B19EB: add     ecx, 4; slot
+0x9B19EE: jmp     NiPointerSlot_Release
+0x9B19F3: mov     ecx, [ebp-24h]
+0x9B19F6: add     ecx, 8; slot
+0x9B19F9: jmp     NiPointerSlot_Release
+0x9B19FE: mov     ecx, [ebp-24h]
+0x9B1A01: add     ecx, 0Ch; slot
+0x9B1A04: jmp     NiPointerSlot_Release
+0x9B1A09: mov     ecx, [ebp-24h]
+0x9B1A0C: add     ecx, 10h; slot
+0x9B1A0F: jmp     NiPointerSlot_Release
+0x9B1A14: mov     ecx, [ebp-24h]
+0x9B1A17: add     ecx, 14h; slot
+0x9B1A1A: jmp     NiPointerSlot_Release
+0x9B1A1F: mov     ecx, [ebp-24h]
+0x9B1A22: add     ecx, 30h ; '0'
+0x9B1A25: jmp     j_??1?$NiTPointerList@PAVWadingWaterData@@@@UAE@XZ; NiTPointerList<WadingWaterData *>::~NiTPointerList<WadingWaterData *>(void)
+0x9B1A2A: mov     ecx, [ebp-24h]
+0x9B1A2D: add     ecx, 48h ; 'H'; slot
+0x9B1A30: jmp     NiPointerSlot_Release
+0x9B1A35: mov     eax, [ebp-20h]
+0x9B1A38: push    eax
+0x9B1A39: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B1A3E: pop     ecx
+0x9B1A3F: retn
+0x9B1A40: mov     edx, [esp+arg_4]
+0x9B1A44: lea     eax, [edx-28h]
+0x9B1A47: mov     ecx, [edx-2Ch]
+0x9B1A4A: xor     ecx, eax
+0x9B1A4C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B1A51: mov     eax, offset stru_ADDB18
+0x9B1A56: jmp     ___CxxFrameHandler3

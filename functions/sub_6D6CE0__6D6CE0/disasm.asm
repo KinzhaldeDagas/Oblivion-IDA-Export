@@ -19,8 +19,8 @@
 0x6D6D19: jmp     short loc_6D6D49
 0x6D6D1B: fld     [esp+34h+arg_0]
 0x6D6D1F: push    ecx
-0x6D6D20: fstp    [esp+38h+var_38]; float
-0x6D6D23: call    sub_6C36B0
+0x6D6D20: fstp    [esp+38h+applicationTime]; applicationTime
+0x6D6D23: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x6D6D28: test    al, al
 0x6D6D2A: jz      short loc_6D6D49
 0x6D6D2C: mov     ecx, [esi+3Ch]
@@ -57,7 +57,7 @@
 0x6D6D8C: push    48h ; 'H'; Size
 0x6D6D8E: call    FormHeapAlloc
 0x6D6D93: add     esp, 4
-0x6D6D96: mov     [esp+40h+var_38], eax
+0x6D6D96: mov     [esp+40h+applicationTime], eax
 0x6D6D9A: test    eax, eax
 0x6D6D9C: mov     [esp+40h+var_10], 0
 0x6D6DA4: jz      short loc_6D6DE6
@@ -93,9 +93,9 @@
 0x6D6E03: mov     eax, [ecx]; jumptable 006D6DFC case 0
 0x6D6E05: fld     [esp+40h+var_8]
 0x6D6E09: mov     edx, [ecx+4]
-0x6D6E0C: mov     [esp+40h+var_38], eax
-0x6D6E10: fstp    [esp+40h+var_38]
-0x6D6E14: lea     eax, [esp+40h+var_38]
+0x6D6E0C: mov     [esp+40h+applicationTime], eax
+0x6D6E10: fstp    [esp+40h+applicationTime]
+0x6D6E14: lea     eax, [esp+40h+applicationTime]
 0x6D6E18: push    eax
 0x6D6E19: mov     [esp+44h+var_34], edx
 0x6D6E1D: call    sub_6D6A40
@@ -108,8 +108,8 @@
 0x6D6E35: mov     edx, [ecx]; jumptable 006D6DFC case 1
 0x6D6E37: fld     [esp+40h+var_8]
 0x6D6E3B: mov     eax, [ecx+4]
-0x6D6E3E: mov     [esp+40h+var_38], edx
-0x6D6E42: lea     edx, [esp+40h+var_38]
+0x6D6E3E: mov     [esp+40h+applicationTime], edx
+0x6D6E42: lea     edx, [esp+40h+applicationTime]
 0x6D6E46: mov     [esp+40h+var_34], eax
 0x6D6E4A: fstp    [esp+40h+var_34]
 0x6D6E4E: push    edx
@@ -133,18 +133,30 @@
 0x6D6E87: mov     eax, [ecx+0Ch]; jumptable 006D6DFC case 3
 0x6D6E8A: fld     [esp+40h+var_8]
 0x6D6E8E: mov     edx, [ecx+10h]
-0x6D6E91: mov     [esp+40h+var_38], eax
-0x6D6E95: fstp    [esp+40h+var_38]
-0x6D6E99: lea     eax, [esp+40h+var_38]
+0x6D6E91: mov     [esp+40h+applicationTime], eax
+0x6D6E95: fstp    [esp+40h+applicationTime]
+0x6D6E99: lea     eax, [esp+40h+applicationTime]
 0x6D6E9D: mov     [esp+40h+var_34], edx
 0x6D6EA1: push    eax
 0x6D6EA2: jmp     short loc_6D6EBF
 0x6D6EA4: mov     edx, [ecx+0Ch]; jumptable 006D6DFC case 4
 0x6D6EA7: fld     [esp+40h+var_8]
 0x6D6EAB: mov     eax, [ecx+10h]
-0x6D6EAE: mov     [esp+40h+var_38], edx
-0x6D6EB2: lea     edx, [esp+40h+var_38]
+0x6D6EAE: mov     [esp+40h+applicationTime], edx
+0x6D6EB2: lea     edx, [esp+40h+applicationTime]
 0x6D6EB6: mov     [esp+40h+var_34], eax
 0x6D6EBA: fstp    [esp+40h+var_34]
 0x6D6EBE: push    edx
 0x6D6EBF: call    sub_6D6AD0
+0x9C7B40: mov     eax, [ebp-2Ch]
+0x9C7B43: push    eax
+0x9C7B44: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7B49: pop     ecx
+0x9C7B4A: retn
+0x9C7B4B: mov     edx, [esp+arg_4]
+0x9C7B4F: lea     eax, [edx-24h]
+0x9C7B52: mov     ecx, [edx-28h]
+0x9C7B55: xor     ecx, eax
+0x9C7B57: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7B5C: mov     eax, offset stru_AEFF04
+0x9C7B61: jmp     ___CxxFrameHandler3

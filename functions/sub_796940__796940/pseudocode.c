@@ -1,8 +1,18 @@
-int __cdecl sub_796940(char *a1, char *a2, int a3)
+// OBLIVION AUTHORITY (2026-08-30): Backward move-assignment of vector<unsigned short> owners, implemented by swapping pointer triplets from the range end toward destinationEnd.
+OB_stVectorUShort_010201A0 *__cdecl OB_stVector_stVectorUShort_MoveAssignRangeBackward_010201A0(
+        OB_stVectorUShort_010201A0 *first,
+        OB_stVectorUShort_010201A0 *last,
+        OB_stVectorUShort_010201A0 *destinationEnd)
 {
-  char *i; // esi
+  OB_stVectorUShort_010201A0 *i; // esi
 
-  for ( i = a2; i != a1; sub_795630(&i[a3 - (_DWORD)a2], a3 - 0x10 * ((a2 - a1) >> 4), i) )
-    i += 0xFFFFFFF0;
-  return a3 - 0x10 * ((a2 - a1) >> 4);
+  for ( i = last; /*0x796947*/
+        i != first;
+        OB_stVectorUShort_Swap_010201A0(
+          (OB_stVectorUShort_010201A0 *)((char *)i + (char *)destinationEnd - (char *)last),
+          i) )
+  {
+    i += 0xFFFFFFFF; /*0x796964*/
+  }
+  return &destinationEnd[-(last - first)]; /*0x796974*/
 }

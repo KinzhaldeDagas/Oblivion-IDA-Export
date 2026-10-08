@@ -1,1 +1,1 @@
-WNDPROC
+typedef LRESULT (__stdcall *WNDPROC)(HWND, UINT, WPARAM, LPARAM);

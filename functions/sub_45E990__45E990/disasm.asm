@@ -14,11 +14,11 @@
 0x45E9B1: mov     ecx, [eax]
 0x45E9B3: mov     edx, [eax+4]
 0x45E9B6: mov     eax, [eax+8]
-0x45E9B9: mov     [esp+34h+var_24], ecx
+0x45E9B9: mov     dword ptr [esp+34h+var_24], ecx
 0x45E9BD: mov     ecx, [esi+20h]
 0x45E9C0: mov     [esp+34h+var_C], ecx
 0x45E9C4: lea     ecx, [esp+34h+var_24]
-0x45E9C8: mov     [esp+34h+var_20], edx
+0x45E9C8: mov     dword ptr [esp+34h+var_24+4], edx
 0x45E9CC: mov     edx, [esi+24h]
 0x45E9CF: mov     [esp+34h+var_1C], eax
 0x45E9D3: mov     eax, [esi+28h]
@@ -72,15 +72,15 @@
 0x45EA64: call    TESObjectREFR_SetPosition
 0x45EA69: mov     edx, [esi]
 0x45EA6B: mov     edx, [edx+0F0h]
-0x45EA71: lea     eax, [esp+30h+var_14]
+0x45EA71: lea     eax, [esp+30h+a3+4]
 0x45EA75: push    eax
 0x45EA76: mov     ecx, esi
 0x45EA78: call    edx
 0x45EA7A: fld     dword ptr [eax+8]
 0x45EA7D: push    ecx
-0x45EA7E: mov     ecx, esi
-0x45EA80: fstp    [esp+34h+var_34]; float
-0x45EA83: call    sub_4D8A10
+0x45EA7E: mov     ecx, esi; this
+0x45EA80: fstp    [esp+34h+radians]; radians
+0x45EA83: call    TESObjectREFR_SetRotationZ; TES4 authoritative: write reference rotation Z at TESObjectREFR+0x28, then notify the reference through virtual slot +0x40 with change mask 4.
 0x45EA88: push    ebx; int
 0x45EA89: push    edi; int
 0x45EA8A: push    esi; Concurrency::details::SchedulerBase *
@@ -105,8 +105,8 @@
 0x45EAC9: push    ecx; a4
 0x45EACA: mov     ecx, esi
 0x45EACC: call    edx
-0x45EACE: mov     ecx, [esp+34h+var_24]
-0x45EAD2: mov     edx, [esp+34h+var_20]
+0x45EACE: mov     ecx, dword ptr [esp+34h+var_24]
+0x45EAD2: mov     edx, dword ptr [esp+34h+var_24+4]
 0x45EAD6: sub     esp, 0Ch
 0x45EAD9: mov     eax, esp
 0x45EADB: mov     [eax], ecx
@@ -115,8 +115,8 @@
 0x45EAE4: mov     [eax+8], ecx
 0x45EAE7: mov     ecx, esi; this
 0x45EAE9: call    TESObjectREFR_SetPosition
-0x45EAEE: mov     edx, [esp+34h+a3]
-0x45EAF2: mov     ecx, [esp+34h+var_14]
+0x45EAEE: mov     edx, dword ptr [esp+34h+a3]
+0x45EAF2: mov     ecx, dword ptr [esp+34h+a3+4]
 0x45EAF6: sub     esp, 0Ch
 0x45EAF9: mov     eax, esp
 0x45EAFB: mov     [eax], edx
@@ -155,25 +155,25 @@
 0x45EB60: add     esp, 0Ch
 0x45EB63: jmp     loc_45EBF8
 0x45EB68: mov     ecx, esi; this
-0x45EB6A: call    TESObjectREFR_GetParentCell
+0x45EB6A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45EB6F: test    eax, eax
 0x45EB71: jz      short loc_45EBD2
 0x45EB73: mov     ecx, esi; this
-0x45EB75: call    TESObjectREFR_GetParentCell
+0x45EB75: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45EB7A: mov     ecx, eax
 0x45EB7C: call    sub_4AF170
 0x45EB81: test    eax, eax
 0x45EB83: jz      short loc_45EBD2
 0x45EB85: mov     ecx, esi; this
-0x45EB87: call    TESObjectREFR_GetParentCell
+0x45EB87: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45EB8C: mov     ecx, eax
 0x45EB8E: call    sub_4AF170
 0x45EB93: mov     ecx, eax
 0x45EB95: call    sub_4E5A10
 0x45EB9A: test    eax, eax
 0x45EB9C: jz      short loc_45EBD2
-0x45EB9E: mov     ecx, eax
-0x45EBA0: call    sub_4BEF40
+0x45EB9E: mov     ecx, eax; this
+0x45EBA0: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x45EBA5: mov     ecx, [eax]
 0x45EBA7: mov     edx, [eax+4]
 0x45EBAA: mov     eax, [eax+8]

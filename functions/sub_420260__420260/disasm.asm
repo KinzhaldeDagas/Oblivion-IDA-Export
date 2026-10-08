@@ -1,4 +1,4 @@
-0x420260: push    3Fh ; '?'; a2
+0x420260: push    3Fh ; '?'; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x420262: call    BaseExtraList_GetExtraData
 0x420267: test    eax, eax
 0x420269: jz      short loc_42026F

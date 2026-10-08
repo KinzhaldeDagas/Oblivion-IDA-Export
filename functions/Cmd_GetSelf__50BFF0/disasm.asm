@@ -8,7 +8,7 @@
 0x50C000: mov     [esp+8+arg_18], 0
 0x50C008: jz      short loc_50C047
 0x50C00A: mov     ecx, esi; this
-0x50C00C: call    TESObjectREFR_IsPersistent?
+0x50C00C: call    TESObjectREFR_IsPersistent
 0x50C011: test    al, al
 0x50C013: jnz     short loc_50C032
 0x50C015: mov     eax, [esi]

@@ -1,1 +1,4 @@
-BSTask
+struct BSTask
+{
+void *vtbl;
+};

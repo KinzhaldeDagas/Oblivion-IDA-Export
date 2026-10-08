@@ -1,1 +1,1 @@
-GeometryDecalShader
+struct GeometryDecalShader;

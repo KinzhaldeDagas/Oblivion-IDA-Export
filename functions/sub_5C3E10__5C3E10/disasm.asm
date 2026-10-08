@@ -19,7 +19,7 @@
 0x5C3E47: call    edx
 0x5C3E49: mov     esi, eax
 0x5C3E4B: xor     ebx, ebx
-0x5C3E4D: mov     [esp+3Ch+var_20], esi
+0x5C3E4D: mov     [esp+3Ch+texture], esi
 0x5C3E51: mov     [esp+3Ch+var_28], ebx
 0x5C3E55: mov     [esp+3Ch+var_4], ebx
 0x5C3E59: mov     [esp+3Ch+var_24], ebx
@@ -53,7 +53,7 @@
 0x5C3EBA: mov     esi, [esi+4]
 0x5C3EBD: cmp     esi, ebx
 0x5C3EBF: jnz     short loc_5C3E90
-0x5C3EC1: mov     ebp, [esp+3Ch+var_20]
+0x5C3EC1: mov     ebp, [esp+3Ch+texture]
 0x5C3EC5: mov     eax, [ebp+0E8h]
 0x5C3ECB: mov     esi, [eax+0A8h]
 0x5C3ED1: cmp     esi, ebx
@@ -69,7 +69,7 @@
 0x5C3EF3: mov     ecx, esp; this
 0x5C3EF5: mov     [esp+4Ch+var_18], esp
 0x5C3EF9: push    ebx; a3
-0x5C3EFA: push    eax; a2
+0x5C3EFA: push    eax; categoryName
 0x5C3EFB: mov     [ecx], ebx
 0x5C3EFD: mov     [ecx+4], bx
 0x5C3F01: mov     [ecx+6], bx
@@ -77,7 +77,7 @@
 0x5C3F0A: mov     eax, ds:0B38F70h
 0x5C3F0F: sub     esp, 8
 0x5C3F12: mov     ecx, esp; this
-0x5C3F14: mov     [esp+54h+var_1C], esp
+0x5C3F14: mov     [esp+54h+slot], esp
 0x5C3F18: push    ebx; a3
 0x5C3F19: push    eax; a2
 0x5C3F1A: mov     byte ptr [esp+5Ch+var_4], 3
@@ -85,9 +85,9 @@
 0x5C3F21: mov     [ecx+4], bx
 0x5C3F25: mov     [ecx+6], bx
 0x5C3F29: call    BSStringT_Set
-0x5C3F2E: mov     ecx, edi
+0x5C3F2E: mov     ecx, edi; this
 0x5C3F30: mov     byte ptr [esp+54h+var_4], 1
-0x5C3F35: call    sub_5C3440
+0x5C3F35: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C3F3A: mov     ecx, eax
 0x5C3F3C: call    Tile_SetString
 0x5C3F41: mov     [ebp+1D0h], esi
@@ -98,7 +98,7 @@
 0x5C3F56: call    eax
 0x5C3F58: movzx   eax, word ptr [eax+0B6h]
 0x5C3F5F: test    eax, eax
-0x5C3F61: mov     [esp+3Ch+var_1C], eax
+0x5C3F61: mov     [esp+3Ch+slot], eax
 0x5C3F65: jbe     loc_5C4254
 0x5C3F6B: mov     ecx, ds:0B333C4h
 0x5C3F71: mov     edx, [ecx]
@@ -124,9 +124,9 @@
 0x5C3FB7: push    0FB4h
 0x5C3FBC: sub     esp, 8
 0x5C3FBF: mov     ecx, esp; this
-0x5C3FC1: mov     [esp+4Ch+var_1C], esp
+0x5C3FC1: mov     [esp+4Ch+slot], esp
 0x5C3FC5: push    ebx; a3
-0x5C3FC6: push    eax; a2
+0x5C3FC6: push    eax; categoryName
 0x5C3FC7: mov     [ecx], ebx
 0x5C3FC9: mov     [ecx+4], bx
 0x5C3FCD: mov     [ecx+6], bx
@@ -142,12 +142,12 @@
 0x5C3FED: mov     [ecx+4], bx
 0x5C3FF1: mov     [ecx+6], bx
 0x5C3FF5: call    BSStringT_Set
-0x5C3FFA: mov     ecx, edi
+0x5C3FFA: mov     ecx, edi; this
 0x5C3FFC: mov     byte ptr [esp+54h+var_4], 1
-0x5C4001: call    sub_5C3440
+0x5C4001: call    RaceSexMenu_FindControlTile; Consume category/control strings, resolve a category tile, then recursively find the control. The category result is passed to Tile_FindDescendantByName without a null check.
 0x5C4006: mov     ecx, eax
 0x5C4008: call    Tile_SetString
-0x5C400D: mov     eax, [esp+3Ch+var_20]
+0x5C400D: mov     eax, [esp+3Ch+texture]
 0x5C4011: mov     [eax+1D0h], esi
 0x5C4017: jmp     loc_5C3F47
 0x5C401C: mov     edx, [eax+0B0h]
@@ -217,7 +217,7 @@
 0x5C40CA: push    esi; lpAddend
 0x5C40CB: call    dword ptr ds:0A28078h
 0x5C40D1: add     ebx, 1
-0x5C40D4: cmp     ebx, [esp+3Ch+var_1C]
+0x5C40D4: cmp     ebx, [esp+3Ch+slot]
 0x5C40D8: jb      loc_5C3F6B
 0x5C40DE: mov     edi, [esp+3Ch+var_28]
 0x5C40E2: test    edi, edi
@@ -229,7 +229,7 @@
 0x5C40F8: mov     dword ptr [esp+3Ch+ArgList], esi
 0x5C40FC: mov     word ptr [esp+3Ch+var_10], si
 0x5C4101: mov     word ptr [esp+3Ch+var_10+2], si
-0x5C4106: mov     ecx, [esp+3Ch+var_20]
+0x5C4106: mov     ecx, [esp+3Ch+texture]
 0x5C410A: mov     eax, [ecx+1D0h]
 0x5C4110: cmp     eax, esi
 0x5C4112: mov     byte ptr [esp+3Ch+var_4], 4
@@ -251,14 +251,14 @@
 0x5C4144: call    BSStringT_Static_Format
 0x5C4149: add     esp, 8
 0x5C414C: mov     ebp, dword ptr [esp+3Ch+ArgList]
-0x5C4150: push    esi; char
-0x5C4151: push    esi; char
-0x5C4152: push    ebp; ArgList
-0x5C4153: lea     ecx, [esp+48h+var_20]
-0x5C4157: push    ecx; int
+0x5C4150: push    esi; searchArchives
+0x5C4151: push    esi; allowMissing
+0x5C4152: push    ebp; path
+0x5C4153: lea     ecx, [esp+48h+texture]
+0x5C4157: push    ecx; outTexture
 0x5C4158: mov     ecx, ds:0B333A0h
-0x5C415E: call    sub_442890
-0x5C4163: mov     eax, [esp+3Ch+var_20]
+0x5C415E: call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.
+0x5C4163: mov     eax, [esp+3Ch+texture]
 0x5C4167: test    eax, eax
 0x5C4169: mov     bl, 5
 0x5C416B: mov     byte ptr [esp+3Ch+var_4], bl
@@ -275,50 +275,50 @@
 0x5C4193: mov     esi, eax
 0x5C4195: jmp     short loc_5C4199
 0x5C4197: xor     esi, esi
-0x5C4199: mov     edx, [esp+3Ch+var_20]
-0x5C419D: push    edx
-0x5C419E: mov     ecx, esi
+0x5C4199: mov     edx, [esp+3Ch+texture]
+0x5C419D: push    edx; texture
+0x5C419E: mov     ecx, esi; this
 0x5C41A0: mov     byte ptr [esp+40h+var_4], bl
-0x5C41A4: call    NiTexturingProperty__SetUnk08
-0x5C41A9: push    3
-0x5C41AB: mov     ecx, esi
-0x5C41AD: call    sub_405870
+0x5C41A4: call    OB_NiTexturingProperty_SetBaseTexture_010201A0
+0x5C41A9: push    3; value
+0x5C41AB: mov     ecx, esi; this
+0x5C41AD: call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.
 0x5C41B2: push    2; a2
 0x5C41B4: mov     ecx, esi; this
-0x5C41B6: call    sub_405900
+0x5C41B6: call    NiTexturingProperty_SetBaseMapFilterMode
 0x5C41BB: mov     edi, [esp+3Ch+var_28]
 0x5C41BF: push    6
 0x5C41C1: mov     ecx, edi
-0x5C41C3: call    NiNode_GetNiPropertyByID
+0x5C41C3: call    NiNode_GetNiPropertyByID;
 0x5C41C8: test    eax, eax
 0x5C41CA: jz      short loc_5C41E3
 0x5C41CC: push    6
-0x5C41CE: lea     eax, [esp+40h+var_1C]
+0x5C41CE: lea     eax, [esp+40h+slot]
 0x5C41D2: push    eax
 0x5C41D3: mov     ecx, edi
 0x5C41D5: call    sub_708560
-0x5C41DA: lea     ecx, [esp+3Ch+var_1C]; this
-0x5C41DE: call    sub_7016A0
+0x5C41DA: lea     ecx, [esp+3Ch+slot]; slot
+0x5C41DE: call    NiPointerSlot_Release
 0x5C41E3: push    esi; a2
 0x5C41E4: mov     ecx, edi; this
-0x5C41E6: call    sub_405680
+0x5C41E6: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x5C41EB: mov     edi, [esp+3Ch+var_24]
 0x5C41EF: push    6
 0x5C41F1: mov     ecx, edi
-0x5C41F3: call    NiNode_GetNiPropertyByID
+0x5C41F3: call    NiNode_GetNiPropertyByID;
 0x5C41F8: test    eax, eax
 0x5C41FA: jz      short loc_5C4213
 0x5C41FC: push    6
-0x5C41FE: lea     ecx, [esp+40h+var_1C]
+0x5C41FE: lea     ecx, [esp+40h+slot]
 0x5C4202: push    ecx
 0x5C4203: mov     ecx, edi
 0x5C4205: call    sub_708560
-0x5C420A: lea     ecx, [esp+3Ch+var_1C]; this
-0x5C420E: call    sub_7016A0
+0x5C420A: lea     ecx, [esp+3Ch+slot]; slot
+0x5C420E: call    NiPointerSlot_Release
 0x5C4213: push    esi; a2
 0x5C4214: mov     ecx, edi; this
-0x5C4216: call    sub_405680
-0x5C421B: mov     eax, [esp+3Ch+var_20]
+0x5C4216: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
+0x5C421B: mov     eax, [esp+3Ch+texture]
 0x5C421F: test    eax, eax
 0x5C4221: mov     byte ptr [esp+3Ch+var_4], 4
 0x5C4226: jz      short loc_5C4246
@@ -337,7 +337,7 @@
 0x5C4244: call    eax
 0x5C4246: push    ebp
 0x5C4247: mov     byte ptr [esp+40h+var_4], 1
-0x5C424C: call    FormHeapFree
+0x5C424C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5C4251: add     esp, 4
 0x5C4254: mov     esi, [esp+3Ch+var_24]
 0x5C4258: mov     edi, [esp+3Ch+var_28]
@@ -353,11 +353,11 @@
 0x5C427A: call    eax
 0x5C427C: test    eax, eax
 0x5C427E: jz      short loc_5C428F
-0x5C4280: push    1
-0x5C4282: push    1
-0x5C4284: push    1
-0x5C4286: push    eax
-0x5C4287: call    sub_7B8940
+0x5C4280: push    1; arg3
+0x5C4282: push    1; normalMapBypass
+0x5C4284: push    1; shaderId
+0x5C4286: push    eax; root
+0x5C4287: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x5C428C: add     esp, 10h
 0x5C428F: mov     ecx, ds:0B333C4h
 0x5C4295: mov     edx, [ecx]
@@ -371,11 +371,11 @@
 0x5C42AD: call    eax
 0x5C42AF: test    eax, eax
 0x5C42B1: jz      short loc_5C42C2
-0x5C42B3: push    1
-0x5C42B5: push    1
-0x5C42B7: push    1
-0x5C42B9: push    eax
-0x5C42BA: call    sub_7B8940
+0x5C42B3: push    1; arg3
+0x5C42B5: push    1; normalMapBypass
+0x5C42B7: push    1; shaderId
+0x5C42B9: push    eax; root
+0x5C42BA: call    BSShaderManager_AssignShadersRecursive; Generic recursive shader assignment wrapper around 0x7B7FC0. In decoded TES4 tree code it is used for branch shader id 4 and simple/default id 1; no stock call with frond shader id 5 was found in this pass.
 0x5C42BF: add     esp, 10h
 0x5C42C2: test    esi, esi
 0x5C42C4: mov     byte ptr [esp+3Ch+var_4], 0
@@ -423,3 +423,27 @@
 0x5C432E: pop     ebx
 0x5C432F: add     esp, 28h
 0x5C4332: retn
+0x9C1080: lea     ecx, [ebp-28h]; slot
+0x9C1083: jmp     NiPointerSlot_Release
+0x9C1088: lea     ecx, [ebp-24h]; slot
+0x9C108B: jmp     NiPointerSlot_Release
+0x9C1090: mov     ecx, [ebp-18h]; void *
+0x9C1093: jmp     BSStringT_Clear
+0x9C1098: mov     ecx, [ebp-1Ch]; void *
+0x9C109B: jmp     BSStringT_Clear
+0x9C10A0: lea     ecx, [ebp-14h]; void *
+0x9C10A3: jmp     BSStringT_Clear
+0x9C10A8: lea     ecx, [ebp-20h]; slot
+0x9C10AB: jmp     NiPointerSlot_Release
+0x9C10B0: mov     eax, [ebp-18h]
+0x9C10B3: push    eax
+0x9C10B4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C10B9: pop     ecx
+0x9C10BA: retn
+0x9C10BB: mov     edx, [esp+arg_4]
+0x9C10BF: lea     eax, [edx-2Ch]
+0x9C10C2: mov     ecx, [edx-30h]
+0x9C10C5: xor     ecx, eax
+0x9C10C7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C10CC: mov     eax, offset stru_AEA1A4
+0x9C10D1: jmp     ___CxxFrameHandler3

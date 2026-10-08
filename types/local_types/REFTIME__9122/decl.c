@@ -1,1 +1,1 @@
-REFTIME
+typedef double REFTIME;

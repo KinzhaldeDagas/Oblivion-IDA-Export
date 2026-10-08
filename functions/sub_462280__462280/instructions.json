@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x46238E",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1345,13 +1345,13 @@
   },
   {
     "ea": "0x462526",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x46252B",
-    "line": "call    sub_677010",
+    "line": "call    ActorProcessManager_GetCrimeSaveSize",
     "mnemonic": "call",
     "size": 5
   },
@@ -1609,13 +1609,13 @@
   },
   {
     "ea": "0x4625B1",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h); self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x4625B6",
-    "line": "call    sub_677060",
+    "line": "call    ActorProcessManager_SaveCrimes",
     "mnemonic": "call",
     "size": 5
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x4625FA",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2011,7 +2011,7 @@
   },
   {
     "ea": "0x462685",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },

@@ -1,4 +1,4 @@
-0x9F8E10: mov     ecx, offset stru_B39D00; lpCriticalSection
+0x9F8E10: mov     ecx, offset unk_B39D00; lpCriticalSection
 0x9F8E15: call    NiInitalizeCriticalSection
 0x9F8E1A: push    offset sub_A232E0; void (__cdecl *)()
 0x9F8E1F: call    _atexit

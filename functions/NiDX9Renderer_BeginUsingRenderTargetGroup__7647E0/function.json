@@ -1,19 +1,32 @@
 {
-  "callees_count": 32,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 6,
+  "chunks": [
+    [
+      "0x7647E0",
+      "0x764A1F"
+    ]
+  ],
+  "chunks_sha256": "bb988b3fee392773aff3c35dd5f6af75fda4c423833e0ff6089c830da4184f2e",
+  "comment_regular": "NiDX9Renderer render-target-group bind. Binds color and depth/stencil surfaces, records the current group, and performs the requested clear; kClear_ALL therefore clears shadow color/depth/stencil after the producer sets white clear color.\n\nBind a NiRenderTargetGroup: unset MRT slots 1-3, bind each group color surface and its depth/stencil surface, atomically rebind the prior group on failure, record the new current group, then execute the requested clear.",
+  "comment_repeatable": "Bind a NiRenderTargetGroup: unset MRT slots 1-3, bind each group color surface and its depth/stencil surface, atomically rebind the prior group on failure, record the new current group, then execute the requested clear.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 9,
   "display_name": "NiDX9Renderer::BeginUsingRenderTargetGroup",
   "end_ea": "0x764A1F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "NiDX9Renderer::BeginUsingRenderTargetGroup",
   "segment": ".text",
   "sha256": "bb988b3fee392773aff3c35dd5f6af75fda4c423833e0ff6089c830da4184f2e",
   "size": 575,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7647E0",
-  "type": "char __thiscall(NiDX9Renderer *this, NiRenderTargetGroup *a2, int a3)",
+  "total_chunk_size": 575,
+  "type": "bool __thiscall(NiDX9Renderer *this, NiRenderTargetGroup *group, unsigned int clearFlags)",
   "xrefs_from_count": 239,
   "xrefs_to_count": 1
 }

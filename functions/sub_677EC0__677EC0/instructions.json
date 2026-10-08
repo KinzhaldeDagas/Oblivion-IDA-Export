@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x677EC0",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; ActorProcessManager high/process list update used during fast-travel time simulation.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x677ED4",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x677F66",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x677FCD",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x678025",
-    "line": "call    sub_5F2530",
+    "line": "call    sub_5F2530; Fast-travel loop player AV update: clamps/restores health toward base+modifier over travel time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x678038",
-    "line": "call    sub_5F25F0",
+    "line": "call    sub_5F25F0; Fast-travel loop player AV update: magicka regeneration/active magic adjustment over travel time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x678049",
-    "line": "call    sub_5F2720",
+    "line": "call    sub_5F2720; Fast-travel loop player AV update: fatigue regeneration over travel time.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x678050",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x678076",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x6780D5",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x678109",
-    "line": "mov     ecx, offset flt_B36CD8",
+    "line": "mov     ecx, offset g_GameSettingStringPointers_B36CD8",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x678127",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1333,7 +1333,7 @@
   },
   {
     "ea": "0x678182",
-    "line": "call    GetExtraDataFollower",
+    "line": "call    ExtraDataList_GetFollowerExtra; Returns ExtraFollower (type 0x23) itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1735,7 +1735,7 @@
   },
   {
     "ea": "0x67824C",
-    "line": "call    Actor__GetProcessLevel",
+    "line": "call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x67827F",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2053,7 +2053,7 @@
   },
   {
     "ea": "0x6782EA",
-    "line": "call    sub_424D00",
+    "line": "call    sub_424D00; 3DTheft decode: Remove/unlink follower actor pointer from target ExtraFollower list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2083,7 +2083,7 @@
   },
   {
     "ea": "0x6782F8",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x6782FE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x678308",
-    "line": "call    BSSimpleList_Clear",
+    "line": "call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2125,7 +2125,7 @@
   },
   {
     "ea": "0x67830E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x678328",
-    "line": "call    sub_420F00",
+    "line": "call    ExtraDataList_RemoveFollowerExtra; Removes ExtraFollower (type 0x23) when present.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2233,7 +2233,7 @@
   },
   {
     "ea": "0x678345",
-    "line": "call    sub_7616D0",
+    "line": "call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.",
     "mnemonic": "call",
     "size": 5
   },

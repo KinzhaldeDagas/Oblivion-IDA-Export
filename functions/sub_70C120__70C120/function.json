@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 9,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x70C120",
+      "0x70C16C"
+    ]
+  ],
+  "chunks_sha256": "d9abf41378d38045322d76bf476c7aaf290c0bb292033c6a94a42ef63bbc5edc",
+  "comment_regular": "\nGPU static-world lifecycle audit 2026-09-27: this method writes this object worldTransform (+64) and then invokes collision virtual +50. Its own-object transform event is distinct from ancestor topology dependencies. Do not consider a cached transform refreshed until a completed, writer-excluded snapshot includes subsequent bounds/collision effects.\n\nNiAVObject/NiNode virtual +0x74. Updates this->worldTransform at +0x64. With a parent, composes parent world with this local via 0x53D7A0; without a parent, copies local directly. Then notifies an attached collision object through virtual +0x50. Return register contents are incidental; native callers use no return value.",
+  "comment_repeatable": "NiAVObject/NiNode virtual +0x74. Updates this->worldTransform at +0x64. With a parent, composes parent world with this local via 0x53D7A0; without a parent, copies local directly. Then notifies an attached collision object through virtual +0x50. Return register contents are incidental; native callers use no return value.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_70C120",
+  "display_name": "NiAVObject_UpdateWorldTransform",
   "end_ea": "0x70C16C",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_70C120",
+  "name": "NiAVObject_UpdateWorldTransform",
   "segment": ".text",
   "sha256": "d9abf41378d38045322d76bf476c7aaf290c0bb292033c6a94a42ef63bbc5edc",
   "size": 76,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x70C120",
-  "type": "NiNode *__thiscall(NiCamera *this)",
+  "total_chunk_size": 76,
+  "type": "void __thiscall(NiAVObject *this)",
   "xrefs_from_count": 33,
   "xrefs_to_count": 37
 }

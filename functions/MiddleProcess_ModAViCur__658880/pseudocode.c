@@ -1,7 +1,8 @@
-int __thiscall MiddleProcess_ModAViCur(_DWORD *this, int a2, int a3, signed int a4)
+// Verified: integer current-value delta goes to inherited LowProcess +0x70 with allowPositive=0.
+void __thiscall MiddleProcess_ModAViCur(MiddleLowProcess *self, int context, int actorValue, int delta)
 {
-  int v5; // [esp+0h] [ebp-8h]
+  float deltaa; // [esp+0h] [ebp-8h]
 
-  *(float *)&v5 = (float)a4;
-  return AVCollection_ModAVLimited(this + 0x1C, a3, v5, 0);
+  deltaa = (float)delta; /*0x65888b*/
+  AVCollection_AdjustValue(&self->avDamageModifiers, actorValue, deltaa, 0); /*0x658892*/
 }

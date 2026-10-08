@@ -5,20 +5,20 @@ unsigned int __usercall _ftol2@<eax>(double a1@<st0>)
   float v3; // [esp+0h] [ebp-20h]
   int v4; // [esp+18h] [ebp-8h]
 
-  *(float *)&v4 = a1;
-  v1 = v4;
-  result = (__int64)a1;
-  if ( result || (v1 = (unsigned __int64)(__int64)a1 >> 0x20, (v1 & 0x7FFFFFFF) != 0) )
+  *(float *)&v4 = a1; /*0x982901*/
+  v1 = v4; /*0x98290d*/
+  result = (__int64)a1; /*0x982911*/
+  if ( result || (v1 = (unsigned __int64)(__int64)a1 >> 0x20, (v1 & 0x7FFFFFFF) != 0) ) /*0x98295f*/
   {
-    if ( v1 >= 0 )
+    if ( v1 >= 0 ) /*0x98291d*/
     {
-      v3 = a1 - (double)(__int64)a1;
-      result -= __CFADD__(LODWORD(v3), 0x7FFFFFFF);
+      v3 = a1 - (double)(__int64)a1; /*0x98291f*/
+      result -= __CFADD__(LODWORD(v3), 0x7FFFFFFF); /*0x982949*/
     }
     else
     {
-      return (__PAIR64__(result, -(float)(a1 - (double)(__int64)a1)) + 0x7FFFFFFF) >> 0x20;
+      return (__PAIR64__(result, -(float)(a1 - (double)(__int64)a1)) + 0x7FFFFFFF) >> 0x20; /*0x982931*/
     }
   }
-  return result;
+  return result; /*0x982969*/
 }

@@ -1,19 +1,19 @@
-NiAVObject *__stdcall sub_719BE0(int a1)
+NiGeometry *__thiscall sub_719BE0(NiGeometry *this, void *a2)
 {
-  NiAVObject *v1; // eax
-  NiAVObject *v2; // esi
+  NiAVObject *v3; // eax
+  NiGeometry *v4; // esi
 
-  v1 = (NiAVObject *)FormHeapAlloc(0xC0u);
-  v2 = v1;
-  if ( v1 )
+  v3 = (NiAVObject *)FormHeapAlloc(0xC0u); /*0x719c0a*/
+  v4 = (NiGeometry *)v3; /*0x719c0f*/
+  if ( v3 ) /*0x719c22*/
   {
-    sub_7226C0(v1);
-    v2->vtbl = (NiAVObjectVtbl *)&NiTriStrips::`vftable';
+    sub_7226C0(v3); /*0x719c26*/
+    v4->__vftable = (NiGeometryVtbl *)&NiTriStrips::`vftable'; /*0x719c2b*/
   }
   else
   {
-    v2 = 0;
+    v4 = 0; /*0x719c33*/
   }
-  sub_722700(v2, a1);
-  return v2;
+  j_NiGeometry_CopyMembersForClone(this, v4, a2); /*0x719c45*/
+  return v4; /*0x719c4c*/
 }

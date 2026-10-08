@@ -1,11 +1,11 @@
-0x6610F0: push    ecx
+0x6610F0: push    ecx; Computes the versioned PlayerCharacter modified-form save size. Skill persistence includes fixed native arrays plus a variable-length list of eight-byte attribute-bonus buckets in save versions >=0x58.
 0x6610F1: push    ebp
 0x6610F2: push    esi
 0x6610F3: mov     ebp, ecx
 0x6610F5: mov     ecx, ds:0B33B00h
 0x6610FB: push    edi
 0x6610FC: xor     esi, esi
-0x6610FE: call    sub_45A170
+0x6610FE: call    TESSaveLoadGame_UseSaveGameBlocks
 0x661103: test    al, al
 0x661105: jz      short loc_66110C
 0x661107: mov     esi, 6
@@ -24,7 +24,7 @@
 0x66113E: jz      short loc_66117C
 0x661140: mov     eax, [esi]
 0x661142: push    eax; a1
-0x661143: call    TESForm_LookupByFormID
+0x661143: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x661148: mov     ecx, [esi+5]
 0x66114B: mov     edx, [eax]
 0x66114D: add     esp, 4
@@ -59,7 +59,7 @@
 0x6611A9: mov     [esp+10h+arg_0], ecx
 0x6611AD: mov     ecx, ds:0B33B00h
 0x6611B3: mov     word ptr [esp+10h+var_4], di
-0x6611B8: call    sub_45A170
+0x6611B8: call    TESSaveLoadGame_UseSaveGameBlocks
 0x6611BD: test    al, al
 0x6611BF: mov     eax, [esp+10h+var_4]
 0x6611C3: jz      short loc_6611CF
@@ -71,7 +71,7 @@
 0x6611D7: mov     edx, [ebp+5CCh]
 0x6611DD: push    edx
 0x6611DE: push    ebp
-0x6611DF: call    sub_473BF0
+0x6611DF: call    Actor_GetAnimationSaveStateSize; Returns the serialized actor-animation block size including its 2-byte length prefix. Null animation data or actors excluded by virtual predicate +0x198 serialize only the zero-length prefix.
 0x6611E4: add     esp, 8
 0x6611E7: add     di, ax
 0x6611EA: mov     word ptr [esp+10h+var_4], di
@@ -178,7 +178,7 @@
 0x661329: jb      short loc_66134B
 0x66132B: add     eax, 2
 0x66132E: xor     edx, edx
-0x661330: mov     ecx, offset dword_B3BB44
+0x661330: mov     ecx, (offset qword_B3BB2C+18h)
 0x661335: cmp     dword ptr [ecx], 0
 0x661338: jz      short loc_66133D
 0x66133A: add     edx, 1
@@ -199,7 +199,7 @@
 0x66136B: mov     edx, [esp+1Ch+var_4]
 0x66136F: add     esp, 8
 0x661372: cmp     bl, 58h ; 'X'
-0x661375: jb      short loc_66139B
+0x661375: jb      short loc_66139B; For save versions >=0x58, reserve four bytes for the attribute-bucket count and eight bytes for every non-null queued bucket. Older versions reserve one eight-byte bucket.
 0x661377: mov     eax, [ebp+5B4h]
 0x66137D: add     edx, 4
 0x661380: test    eax, eax
@@ -268,7 +268,7 @@
 0x661432: add     si, cx
 0x661435: cmp     byte ptr [edx+7Ch], 2Ch ; ','
 0x661439: mov     word ptr [esp+10h+var_4], si
-0x66143E: jb      short loc_661488
+0x66143E: jb      short loc_661488; Reserve a class FormID and, only when the player's base class is the distinguished custom-class form, reserve the full TESClass save payload containing the fixed seven major skills.
 0x661440: push    0; a2
 0x661442: mov     ecx, ebp; this
 0x661444: call    Actor_GetActorBaseForm
@@ -282,8 +282,8 @@
 0x661467: jz      short loc_661483
 0x661469: cmp     esi, eax
 0x66146B: jnz     short loc_661483
-0x66146D: mov     ecx, esi
-0x66146F: call    sub_51C360
+0x66146D: mov     ecx, esi; this
+0x66146F: call    TESClass_GetSaveGameSize; Returns save-game payload size for the fixed 0x34-byte TESClass DATA block plus length-prefixed name and icon strings.
 0x661474: mov     si, word ptr [esp+10h+var_4]
 0x661479: add     si, ax
 0x66147C: mov     word ptr [esp+10h+var_4], si
@@ -306,7 +306,7 @@
 0x6614BE: jz      short loc_66150B
 0x6614C0: mov     ecx, [edi]
 0x6614C2: push    ecx; a1
-0x6614C3: call    TESForm_LookupByFormID
+0x6614C3: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x6614C8: mov     edx, [edi+5]
 0x6614CB: add     esp, 4
 0x6614CE: push    offset a_AiPlayerchara; ".\\AI\\PlayerCharacter.cpp"

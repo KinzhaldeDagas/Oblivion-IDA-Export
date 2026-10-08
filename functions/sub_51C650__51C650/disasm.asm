@@ -1,4 +1,4 @@
-0x51C650: push    esi
+0x51C650: push    esi; Verified TESCreature override for blood-particle virtual +0x40: NoBloodSpray returns NULL; otherwise reads bloodSpray TESModel path and falls back to base sBloodParticleDefault when null or empty.
 0x51C651: mov     esi, ecx
 0x51C653: mov     eax, [esi]
 0x51C655: mov     edx, [eax+28h]
@@ -16,9 +16,9 @@
 0x51C676: cmp     byte ptr [eax], 0
 0x51C679: jnz     short loc_51C686
 0x51C67B: pop     edi
-0x51C67C: mov     ecx, esi
+0x51C67C: mov     ecx, esi; self
 0x51C67E: pop     esi
-0x51C67F: jmp     TESActorBaseData_GetBloodParticlePath
+0x51C67F: jmp     TESActorBaseData_GetBloodParticlePath; Verified base TESActorBaseData implementation for blood-particle virtual +0x40: returns current sBloodParticleDefault string-setting pointer.
 0x51C684: mov     eax, edi
 0x51C686: pop     edi
 0x51C687: pop     esi

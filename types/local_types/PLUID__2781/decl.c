@@ -1,1 +1,1 @@
-PLUID
+typedef _LUID *PLUID;

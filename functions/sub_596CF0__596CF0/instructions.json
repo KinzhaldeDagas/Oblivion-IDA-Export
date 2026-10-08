@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x596CF0",
-    "line": "push    ecx",
+    "line": "push    ecx; Refreshes ClassMenu details from the displayed TESClass. Loops exactly seven majorSkills entries and writes seven names plus seven actor values to tile traits; specialization and two attributes are written separately.",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x596D07",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x596D08",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -97,19 +97,19 @@
   },
   {
     "ea": "0x596D14",
-    "line": "call    sub_51BF00",
+    "line": "call    TESClass_GetMajorSkillAV; Class menu renders exactly seven major skill names in stored slot order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x596D19",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x596D1A",
-    "line": "call    sub_52E800",
+    "line": "call    ActorValue_GetSkillNameChecked; Oblivion-native checked skill-name lookup. Accepts only the 21 skill actor values (0x0C..0x20) before indexing the skill-name table.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,13 +157,13 @@
   },
   {
     "ea": "0x596D33",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x596D34",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x596D3A",
-    "line": "call    sub_51BF00",
+    "line": "call    TESClass_GetMajorSkillAV; Class menu also writes each stored major SkillActorValue to its corresponding tile value.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x596D4C",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x596D4F",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; propertyCode",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x596D50",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -253,19 +253,19 @@
   },
   {
     "ea": "0x596D62",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x596D67",
-    "line": "push    eax",
+    "line": "push    eax; specialization",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x596D68",
-    "line": "call    sub_52E7E0",
+    "line": "call    ActorValue_GetSpecializationName; Oblivion-native specialization display helper: returns the localized name for specialization IDs 0..2 (Combat, Magic, Stealth); invalid IDs return the fallback string.",
     "mnemonic": "call",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x596D82",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -343,19 +343,19 @@
   },
   {
     "ea": "0x596D92",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x596D95",
-    "line": "push    0FC0h; a2",
+    "line": "push    0FC0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x596D9A",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,25 +367,25 @@
   },
   {
     "ea": "0x596DA2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x596DA4",
-    "line": "call    ValueModifierEffect_GetAV",
+    "line": "call    Shared_GetDwordAtOffset38; Linker-folded Oblivion accessor: returns the dword at this+0x38. In TESClass auto-stat calls this is primaryAttribute1; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x596DA9",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x596DAA",
-    "line": "call    sub_51BE50",
+    "line": "call    ActorValue_GetAttributeNameChecked; Oblivion-native checked attribute-name lookup. Validates an attribute actor value before returning its localized display name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,13 +427,13 @@
   },
   {
     "ea": "0x596DC2",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x596DC4",
-    "line": "call    ValueModifierEffect_GetAV",
+    "line": "call    Shared_GetDwordAtOffset38; Linker-folded Oblivion accessor: returns the dword at this+0x38. In TESClass auto-stat calls this is primaryAttribute1; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -463,19 +463,19 @@
   },
   {
     "ea": "0x596DD4",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x596DD7",
-    "line": "push    0FC1h; a2",
+    "line": "push    0FC1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x596DDC",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,19 +493,19 @@
   },
   {
     "ea": "0x596DE6",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x596DEB",
-    "line": "push    eax",
+    "line": "push    eax; actorValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x596DEC",
-    "line": "call    sub_51BE50",
+    "line": "call    ActorValue_GetAttributeNameChecked; Oblivion-native checked attribute-name lookup. Validates an attribute actor value before returning its localized display name.",
     "mnemonic": "call",
     "size": 5
   },
@@ -553,7 +553,7 @@
   },
   {
     "ea": "0x596E06",
-    "line": "call    TESObjectREFR_GetNiNode",
+    "line": "call    Shared_GetDwordAtOffset3C; Linker-folded Oblivion accessor: returns the dword at this+0x3C. In TESClass auto-stat calls this is primaryAttribute2; other call contexts may represent unrelated fields.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,19 +583,19 @@
   },
   {
     "ea": "0x596E16",
-    "line": "fstp    [esp+18h+a2]; a3",
+    "line": "fstp    [esp+18h+a2]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x596E19",
-    "line": "push    0FC2h; a2",
+    "line": "push    0FC2h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x596E1E",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -769,19 +769,19 @@
   },
   {
     "ea": "0x596E79",
-    "line": "fstp    [esp+14h+var_14]; a3",
+    "line": "fstp    [esp+14h+var_14]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x596E7C",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x596E81",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -901,19 +901,19 @@
   },
   {
     "ea": "0x596ECB",
-    "line": "fstp    [esp+14h+var_14]; a3",
+    "line": "fstp    [esp+14h+var_14]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x596ECE",
-    "line": "push    0FB0h; a2",
+    "line": "push    0FB0h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x596ED3",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },

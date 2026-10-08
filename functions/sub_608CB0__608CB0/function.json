@@ -1,18 +1,31 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x608CB0",
+      "0x608D97"
+    ]
+  ],
+  "chunks_sha256": "96e2fedc043ff50354f12c7fb64069e42ccf9c1c75622e1df061c93f2f9588bb",
+  "comment_regular": "Initializes the generated projectile root's LOCAL transform only: scale=1, translation=reference position, rotation from yawZ/pitchX/rollY. ORs collision-filter bit 0x4000, invokes the collision body callback, then recursively ensures alpha properties. It does not update the node world transform.",
+  "comment_repeatable": "Initializes the generated projectile root's LOCAL transform only: scale=1, translation=reference position, rotation from yawZ/pitchX/rollY. ORs collision-filter bit 0x4000, invokes the collision body callback, then recursively ensures alpha properties. It does not update the node world transform.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_608CB0",
+  "display_name": "ArrowProjectile_InitializeNodeLocalTransformAndCollision",
   "end_ea": "0x608D97",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_608CB0",
+  "name": "ArrowProjectile_InitializeNodeLocalTransformAndCollision",
   "segment": ".text",
   "sha256": "96e2fedc043ff50354f12c7fb64069e42ccf9c1c75622e1df061c93f2f9588bb",
   "size": 231,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x608CB0",
+  "total_chunk_size": 231,
   "type": "void __thiscall(ArrowProjectile *this)",
   "xrefs_from_count": 91,
   "xrefs_to_count": 1

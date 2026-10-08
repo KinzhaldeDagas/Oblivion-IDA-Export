@@ -751,7 +751,7 @@
   },
   {
     "ea": "0x916605",
-    "line": "call    sub_8B1B00",
+    "line": "call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -787,7 +787,7 @@
   },
   {
     "ea": "0x916616",
-    "line": "call    sub_8B1B00",
+    "line": "call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1312,12 +1312,6 @@
     "line": "jmp     short loc_916750",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x916748",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x916750",

@@ -17,9 +17,9 @@
 0x693E02: test    esi, esi
 0x693E04: mov     [esp+18h+var_4], 0
 0x693E0C: jz      short loc_693E41
-0x693E0E: mov     eax, [esp+18h+arg_8]
-0x693E12: mov     ecx, [esp+18h+arg_4]
-0x693E16: mov     edx, [esp+18h+arg_0]
+0x693E0E: mov     eax, [esp+18h+effectItem]
+0x693E12: mov     ecx, [esp+18h+magicItem]
+0x693E16: mov     edx, [esp+18h+caster]
 0x693E1A: push    eax; int
 0x693E1B: push    ecx; int
 0x693E1C: push    edx; int
@@ -41,3 +41,15 @@
 0x693E4F: pop     esi
 0x693E50: add     esp, 10h
 0x693E53: retn
+0x9D62E0: mov     eax, [ebp-10h]
+0x9D62E3: push    eax
+0x9D62E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D62E9: pop     ecx
+0x9D62EA: retn
+0x9D62EB: mov     edx, [esp+arg_4]
+0x9D62EF: lea     eax, [edx-8]
+0x9D62F2: mov     ecx, [edx-0Ch]
+0x9D62F5: xor     ecx, eax
+0x9D62F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62FC: mov     eax, offset stru_AFE21C
+0x9D6301: jmp     ___CxxFrameHandler3

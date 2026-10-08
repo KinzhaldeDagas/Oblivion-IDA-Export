@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x62A350",
-    "line": "sub     esp, 40h",
+    "line": "sub     esp, 40h; RadiantAI: action code 18 from Alarm row. Handles alarm/spectator-distance path; package Alarm does not use action code 8.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x62A377",
-    "line": "lea     eax, [esp+50h+var_30]",
+    "line": "lea     eax, [esp+50h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -121,25 +121,25 @@
   },
   {
     "ea": "0x62A38F",
-    "line": "lea     ecx, [esp+50h+var_30]",
+    "line": "lea     ecx, [esp+50h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x62A393",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62A394",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62A396",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x62A3A1",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x62A3CB",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x62A457",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x62A47B",
-    "line": "fld     [esp+60h+var_30]",
+    "line": "fld     [esp+60h+pointXYZ]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -799,13 +799,13 @@
   },
   {
     "ea": "0x62A50A",
-    "line": "push    eax",
+    "line": "push    eax; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62A50B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x62A511",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x62A578",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1069,7 +1069,7 @@
   },
   {
     "ea": "0x62A595",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,25 +1111,25 @@
   },
   {
     "ea": "0x62A5A9",
-    "line": "lea     ecx, [esp+50h+var_30]",
+    "line": "lea     ecx, [esp+50h+pointXYZ]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x62A5AD",
-    "line": "push    ecx",
+    "line": "push    ecx; pointXYZ",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x62A5AE",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x62A5B0",
-    "line": "call    sub_4D7E30",
+    "line": "call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1393,7 +1393,7 @@
   },
   {
     "ea": "0x62A624",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x62A637",
-    "line": "mov     ecx, offset dword_B3BDB0",
+    "line": "mov     ecx, (offset qword_B3BB2C+284h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x62A643",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },

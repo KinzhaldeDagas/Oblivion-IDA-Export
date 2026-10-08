@@ -1,51 +1,63 @@
-char *__thiscall sub_6EF4B0(char **this, unsigned int a2, int a3)
+// Oblivion body: resizes a byte vector; erases a checked suffix when shrinking and delegates to byte insert-fill with the supplied byte when growing.
+void __thiscall OB_stVectorByte_ResizeFill_010201A0(
+        OB_stVectorByte_010201A0 *this,
+        unsigned int newSize,
+        unsigned __int8 fillValue)
 {
-  char *result; // eax
-  unsigned int v5; // ecx
-  int v6; // ebx
-  char *v7; // ebp
-  char *v8; // ebp
-  unsigned int v9; // ebx
-  char *v10; // edi
-  bool v11; // cc
-  int v12[2]; // [esp+10h] [ebp-8h] BYREF
+  int v3; // ebx
+  unsigned __int8 *begin; // eax
+  unsigned __int8 *v6; // ecx
+  unsigned __int8 *v7; // ebx
+  unsigned __int8 *v8; // ebp
+  unsigned __int8 *end; // ebp
+  unsigned __int8 *v10; // ebx
+  unsigned __int8 *v11; // edi
+  bool v12; // cc
+  OB_stVectorByteIterator_010201A0 result; // [esp+10h] [ebp-8h] BYREF
 
-  result = *(this + 1);
-  if ( result )
-    v5 = *(this + 2) - result;
+  begin = this->begin; /*0x6ef4b8*/
+  if ( begin ) /*0x6ef4be*/
+    v6 = (unsigned __int8 *)(this->end - begin); /*0x6ef4c7*/
   else
-    v5 = 0;
-  if ( v5 >= a2 )
+    v6 = 0; /*0x6ef4c0*/
+  if ( (unsigned int)v6 >= newSize ) /*0x6ef4cf*/
   {
-    if ( result )
+    if ( begin ) /*0x6ef507*/
     {
-      v8 = *(this + 2);
-      if ( a2 < v8 - result )
+      end = this->end; /*0x6ef509*/
+      if ( newSize < end - begin ) /*0x6ef512*/
       {
-        if ( result > v8 )
-          _invalid_parameter_noinfo();
-        v9 = (unsigned int)*(this + 1);
-        if ( v9 > (unsigned int)*(this + 2) )
-          _invalid_parameter_noinfo();
-        v10 = (char *)(v9 + a2);
-        v11 = v9 + a2 <= (unsigned int)*(this + 2);
-        v12[1] = v9;
-        if ( !v11 || v10 < *(this + 1) )
-          _invalid_parameter_noinfo();
-        return (char *)sub_788B10(this, (int)v12, (int)this, v10, (int)this, v8);
+        if ( begin > end ) /*0x6ef516*/
+          _invalid_parameter_noinfo(v3, newSize, (int)this); /*0x6ef518*/
+        v10 = this->begin; /*0x6ef51d*/
+        if ( v10 > this->end ) /*0x6ef523*/
+          _invalid_parameter_noinfo((int)v10, newSize, (int)this); /*0x6ef525*/
+        v11 = &v10[newSize]; /*0x6ef52a*/
+        v12 = &v10[newSize] <= this->end; /*0x6ef52c*/
+        result.current = v10; /*0x6ef52f*/
+        if ( !v12 || v11 < this->begin ) /*0x6ef538*/
+          _invalid_parameter_noinfo((int)v10, (int)v11, (int)this); /*0x6ef53a*/
+        OB_stVectorByte_EraseRange_010201A0( /*0x6ef54a*/
+          this,
+          &result,
+          (OB_stVectorByteIterator_010201A0)__PAIR64__((unsigned int)v11, (unsigned int)this),
+          (OB_stVectorByteIterator_010201A0)__PAIR64__((unsigned int)end, (unsigned int)this));
       }
     }
   }
   else
   {
-    if ( result )
-      v6 = *(this + 2) - result;
+    if ( begin ) /*0x6ef4d3*/
+      v7 = (unsigned __int8 *)(this->end - begin); /*0x6ef4dc*/
     else
-      v6 = 0;
-    v7 = *(this + 2);
-    if ( result > v7 )
-      _invalid_parameter_noinfo();
-    return sub_6EF2F0(this, a2 - v6, (int)this, v7, a2 - v6, &a3);
+      v7 = 0; /*0x6ef4d5*/
+    v8 = this->end; /*0x6ef4de*/
+    if ( begin > v8 ) /*0x6ef4e3*/
+      _invalid_parameter_noinfo((int)v7, newSize, (int)this); /*0x6ef4e5*/
+    OB_stVectorByte_InsertFill_010201A0( /*0x6ef4f6*/
+      this,
+      (OB_stVectorByteIterator_010201A0)__PAIR64__((unsigned int)v8, (unsigned int)this),
+      newSize - (_DWORD)v7,
+      &fillValue);
   }
-  return result;
 }

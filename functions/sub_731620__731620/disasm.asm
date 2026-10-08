@@ -1,4 +1,4 @@
-0x731620: push    0FFFFFFFFh
+0x731620: push    0FFFFFFFFh; Fog property propagation decode: NiPropertyState copy constructor preserves all ten slots, including inherited fog slot +0x0C.
 0x731622: push    offset ??1NiPropertyState@@UAE@XZ_SEH
 0x731627: mov     eax, large fs:0
 0x73162D: push    eax
@@ -15,11 +15,11 @@
 0x731645: mov     esi, ecx
 0x731647: mov     [esp+24h+var_10], esi
 0x73164B: xor     edi, edi
-0x73164D: push    offset NiRefObject_objcount; lpAddend
+0x73164D: push    0B3FD64h; lpAddend
 0x731652: mov     dword ptr [esi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x731658: mov     [esi+4], edi
 0x73165B: call    dword ptr ds:0A28078h
-0x731661: push    offset sub_7016A0; a5
+0x731661: push    offset NiPointerSlot_Release; a5
 0x731666: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x73166B: push    0Ah; size
 0x73166D: mov     [esp+30h+var_4], edi
@@ -32,7 +32,7 @@
 0x731686: mov     byte ptr [esp+24h+var_4], 1
 0x73168B: sub     ebp, esi
 0x73168D: mov     [esp+24h+arg_0], 0Ah
-0x731695: mov     ebx, [edi]
+0x731695: mov     ebx, [edi]; Fog property propagation decode: copy loop includes fog slot +0x0C, so child/geometry state copies retain inherited B333E4 until overridden.
 0x731697: cmp     ebx, [edi+ebp]
 0x73169A: jz      short loc_7316CF
 0x73169C: test    ebx, ebx
@@ -69,3 +69,20 @@
 0x7316EA: pop     ebx
 0x7316EB: add     esp, 10h
 0x7316EE: retn    4
+0x9CA810: mov     ecx, [ebp-10h]
+0x9CA813: jmp     NiRefObject_destr
+0x9CA818: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x9CA81D: push    0Ah; int
+0x9CA81F: push    4; unsigned int
+0x9CA821: mov     eax, [ebp-10h]
+0x9CA824: add     eax, 8
+0x9CA827: push    eax; void *
+0x9CA828: call    $LN21
+0x9CA82D: retn
+0x9CA82E: mov     edx, [esp+arg_4]
+0x9CA832: lea     eax, [edx-14h]
+0x9CA835: mov     ecx, [edx-18h]
+0x9CA838: xor     ecx, eax
+0x9CA83A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA83F: mov     eax, offset stru_AF2EC0
+0x9CA844: jmp     ___CxxFrameHandler3

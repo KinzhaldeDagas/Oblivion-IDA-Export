@@ -1,1 +1,1 @@
-HDPA
+typedef _DPA *HDPA;

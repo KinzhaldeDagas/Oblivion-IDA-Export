@@ -42,7 +42,7 @@
 0x48771D: retn    4
 0x487720: push    0
 0x487722: mov     ecx, esi
-0x487724: call    sub_41F370
+0x487724: call    ExtraDataList_SetCannotWear; Adds or removes marker extra ExtraCannotWear type 0x47 according to the requested state.
 0x487729: mov     eax, [ebx+4]
 0x48772C: mov     ecx, [esp+18h+arg_0]
 0x487730: mov     edx, [ecx]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4EECE0",
-    "line": "push    esi",
+    "line": "push    esi; Verified: performs weighted TESWeather selection using each entry's selectionWeight, random roll modulo sum, and cumulative ranges. First zero-weight entry may be chosen because of the initial 0xFFFFFFFF accumulator; later zero-weight entries are skipped.",
     "mnemonic": "push",
     "size": 1
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4EECF0",
-    "line": "mov     ecx, [eax]",
+    "line": "mov     ecx, [eax]; Exterior fog source: first pass walks weather/weight list entries.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x4EECF6",
-    "line": "mov     ecx, [ecx+4]",
+    "line": "mov     ecx, [ecx+4]; Exterior fog source: add entry weight into total weather selection weight.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x4EED0C",
-    "line": "call    GetRandomLargeInteger?",
+    "line": "call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x4EED13",
-    "line": "div     edi",
+    "line": "div     edi; Exterior fog source: random roll modulo total weather weight.",
     "mnemonic": "div",
     "size": 2
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x4EED20",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; Exterior fog source: second pass walks list to find the selected weighted bucket.",
     "mnemonic": "mov",
     "size": 2
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x4EED45",
-    "line": "retn",
+    "line": "retn; Exterior fog source: return selected TESWeather pointer, or null if list/weights failed.",
     "mnemonic": "retn",
     "size": 1
   },

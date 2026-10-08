@@ -1,4 +1,4 @@
-0x6D6810: push    esi
+0x6D6810: push    esi; Oblivion NiTransformInterpolator stream registration. After successful base registration, recursively registers nonnull NiTransformData +0x2C through its virtual +0x24.
 0x6D6811: push    edi
 0x6D6812: mov     edi, [esp+8+arg_0]
 0x6D6816: push    edi

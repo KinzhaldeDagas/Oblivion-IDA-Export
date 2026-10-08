@@ -559,25 +559,25 @@
   },
   {
     "ea": "0x42CF89",
-    "line": "lea     eax, [esp+130h+Dir]",
+    "line": "lea     eax, [esp+130h+Dir]; MEF v39 caller proof: Archive_ContainsFolder passes Archive_LoadFolderNames result directly to strcmp without null check.",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x42CF8D",
-    "line": "push    eax; Str2",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42CF8E",
-    "line": "push    esi; Str1",
+    "line": "push    esi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x42CF8F",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },

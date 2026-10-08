@@ -1,21 +1,21 @@
-NiGeometry *__thiscall sub_73D920(char **this, _DWORD **a2)
+NiNode *__thiscall sub_73D920(NiNodeVtbl **this, _DWORD **cloningProcess)
 {
   NiNode *v3; // eax
-  NiGeometry *v4; // esi
+  NiNode *v4; // esi
 
-  v3 = (NiNode *)FormHeapAlloc(0xE0u);
-  v4 = (NiGeometry *)v3;
-  if ( v3 )
+  v3 = (NiNode *)FormHeapAlloc(0xE0u); /*0x73d94a*/
+  v4 = v3; /*0x73d94f*/
+  if ( v3 ) /*0x73d962*/
   {
-    NiNode::NiNode(v3, 0);
-    v4->__vftable = (NiGeometryVtbl *)&NiSortAdjustNode::`vftable';
-    v4[1].member.super.m_parent = 0;
+    NiNode::NiNode(v3, 0); /*0x73d968*/
+    v4->vtbl = (NiNodeVtbl *)&NiSortAdjustNode::`vftable'; /*0x73d96d*/
+    v4[1].vtbl = 0; /*0x73d973*/
   }
   else
   {
-    v4 = 0;
+    v4 = 0; /*0x73d97f*/
   }
-  sub_70AC60(this, v4, a2);
-  v4[1].member.super.m_parent = (NiNode *)*(this + 0x37);
-  return v4;
+  OB_NiNode_CopyMembersForClone(this, v4, cloningProcess); /*0x73d991*/
+  v4[1].vtbl = *(this + 0x37); /*0x73d99c*/
+  return v4; /*0x73d9a4*/
 }

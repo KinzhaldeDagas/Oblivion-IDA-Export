@@ -1,10 +1,10 @@
 0x607E90: push    esi
 0x607E91: push    edi
 0x607E92: push    0; a2
-0x607E94: mov     ecx, offset ActorProcessManager_ptr; this
-0x607E99: call    sub_673A50
+0x607E94: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x607E99: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x607E9E: mov     ecx, eax; this
-0x607EA0: call    sub_7616D0
+0x607EA0: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x607EA5: mov     edi, eax
 0x607EA7: test    edi, edi
 0x607EA9: mov     esi, edi
@@ -49,10 +49,10 @@
 0x607F10: jnz     short loc_607EB2
 0x607F12: pop     ebx
 0x607F13: push    1; a2
-0x607F15: mov     ecx, offset ActorProcessManager_ptr; this
-0x607F1A: call    sub_673A50
+0x607F15: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x607F1A: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x607F1F: mov     ecx, eax; this
-0x607F21: call    sub_7616D0
+0x607F21: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x607F26: mov     edi, eax
 0x607F28: test    edi, edi
 0x607F2A: mov     esi, edi

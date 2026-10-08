@@ -28,7 +28,7 @@
 0x5E6211: mov     ecx, esi
 0x5E6213: call    edx
 0x5E6215: mov     ecx, eax
-0x5E6217: call    sub_6135F0
+0x5E6217: call    CombatController_GetCurrentTarget
 0x5E621C: test    eax, eax
 0x5E621E: jz      loc_5E6524
 0x5E6224: mov     eax, [esi]
@@ -36,7 +36,7 @@
 0x5E622C: mov     ecx, esi
 0x5E622E: call    edx
 0x5E6230: mov     ecx, eax
-0x5E6232: call    sub_6135F0
+0x5E6232: call    CombatController_GetCurrentTarget
 0x5E6237: mov     ecx, ds:0B333C4h
 0x5E623D: cmp     eax, ecx
 0x5E623F: jnz     short loc_5E624E
@@ -63,7 +63,7 @@
 0x5E627A: mov     ecx, esi
 0x5E627C: call    edx
 0x5E627E: mov     ecx, eax
-0x5E6280: call    sub_6135F0
+0x5E6280: call    CombatController_GetCurrentTarget
 0x5E6285: test    eax, eax
 0x5E6287: jz      short loc_5E62E1
 0x5E6289: mov     eax, [esi]
@@ -71,7 +71,7 @@
 0x5E6291: mov     ecx, esi
 0x5E6293: call    edx
 0x5E6295: mov     ecx, eax
-0x5E6297: call    sub_6135F0
+0x5E6297: call    CombatController_GetCurrentTarget
 0x5E629C: cmp     [eax+58h], ebx
 0x5E629F: jz      short loc_5E62E1
 0x5E62A1: mov     eax, [esi]
@@ -79,7 +79,7 @@
 0x5E62A9: mov     ecx, esi
 0x5E62AB: call    edx
 0x5E62AD: mov     ecx, eax
-0x5E62AF: call    sub_6135F0
+0x5E62AF: call    CombatController_GetCurrentTarget
 0x5E62B4: mov     ecx, [eax+58h]
 0x5E62B7: mov     eax, [ecx]
 0x5E62B9: mov     edx, [eax+8]
@@ -90,7 +90,7 @@
 0x5E62C8: mov     ecx, esi
 0x5E62CA: call    edx
 0x5E62CC: mov     ecx, eax
-0x5E62CE: call    sub_6135F0
+0x5E62CE: call    CombatController_GetCurrentTarget
 0x5E62D3: mov     edx, [eax]
 0x5E62D5: mov     ecx, eax
 0x5E62D7: mov     eax, [edx+154h]
@@ -101,7 +101,7 @@
 0x5E62E9: mov     ecx, esi
 0x5E62EB: call    eax
 0x5E62ED: mov     ecx, eax
-0x5E62EF: call    sub_6135F0
+0x5E62EF: call    CombatController_GetCurrentTarget
 0x5E62F4: test    eax, eax
 0x5E62F6: jz      loc_5E64FE
 0x5E62FC: mov     edx, [esi]
@@ -109,7 +109,7 @@
 0x5E6304: mov     ecx, esi
 0x5E6306: call    eax
 0x5E6308: mov     ecx, eax
-0x5E630A: call    sub_6135F0
+0x5E630A: call    CombatController_GetCurrentTarget
 0x5E630F: mov     edx, [eax]
 0x5E6311: mov     ecx, eax
 0x5E6313: mov     eax, [edx+198h]
@@ -122,7 +122,7 @@
 0x5E632D: mov     ecx, esi
 0x5E632F: call    eax
 0x5E6331: mov     ecx, eax
-0x5E6333: call    sub_6135F0
+0x5E6333: call    CombatController_GetCurrentTarget
 0x5E6338: mov     ecx, [eax+8]
 0x5E633B: shr     ecx, 0Bh
 0x5E633E: test    cl, 1
@@ -132,7 +132,7 @@
 0x5E634F: mov     ecx, esi
 0x5E6351: call    eax
 0x5E6353: mov     ecx, eax
-0x5E6355: call    sub_6135F0
+0x5E6355: call    CombatController_GetCurrentTarget
 0x5E635A: mov     ecx, [eax+8]
 0x5E635D: shr     ecx, 5
 0x5E6360: test    cl, 1
@@ -166,7 +166,7 @@
 0x5E63C0: add     edi, 48Ch
 0x5E63C6: call    eax
 0x5E63C8: mov     ecx, eax
-0x5E63CA: call    sub_6135F0
+0x5E63CA: call    CombatController_GetCurrentTarget
 0x5E63CF: mov     edx, [edi]
 0x5E63D1: push    eax
 0x5E63D2: mov     ecx, ebx
@@ -218,7 +218,7 @@
 0x5E645B: mov     ecx, esi
 0x5E645D: call    eax
 0x5E645F: mov     ecx, eax
-0x5E6461: call    sub_6135F0
+0x5E6461: call    CombatController_GetCurrentTarget
 0x5E6466: test    eax, eax
 0x5E6468: jz      short loc_5E643B
 0x5E646A: mov     edx, [esi]
@@ -226,7 +226,7 @@
 0x5E6472: mov     ecx, esi
 0x5E6474: call    eax
 0x5E6476: mov     ecx, eax
-0x5E6478: call    sub_6135F0
+0x5E6478: call    CombatController_GetCurrentTarget
 0x5E647D: mov     ecx, [eax+58h]
 0x5E6480: mov     edx, [ecx]
 0x5E6482: mov     eax, [edx+8]
@@ -256,20 +256,20 @@
 0x5E64C2: mov     eax, [edx+20h]
 0x5E64C5: call    eax
 0x5E64C7: mov     ecx, esi; this
-0x5E64C9: call    Actor__GetProcessLevel
+0x5E64C9: call    Actor__GetProcessLevel; Return Actor/MobileObject process level through process vslot +0x08; if MobileObject+0x58 is null, return -1. ActorProcessManager_AddMobileObject calls this directly before insertion.
 0x5E64CE: cmp     eax, 1
 0x5E64D1: jnz     loc_5E643B
 0x5E64D7: push    eax
 0x5E64D8: push    esi
-0x5E64D9: mov     ecx, offset ActorProcessManager_ptr
+0x5E64D9: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x5E64DE: call    sub_674550
-0x5E64E3: push    0
-0x5E64E5: push    0
-0x5E64E7: push    1
-0x5E64E9: push    1
-0x5E64EB: push    esi
-0x5E64EC: mov     ecx, offset ActorProcessManager_ptr
-0x5E64F1: call    sub_673A90
+0x5E64E3: push    0; relativeTo
+0x5E64E5: push    0; insertRelative
+0x5E64E7: push    1; append
+0x5E64E9: push    1; processLevel
+0x5E64EB: push    esi; object
+0x5E64EC: mov     ecx, (offset qword_B3BB2C+1D4h); this
+0x5E64F1: call    ActorProcessManager_AddMobileObject; Generic ActorProcessManager insertion. Selects process-level collection 0..3, silently returns if object->GetProcessLevel() does not match, then inserts with ordering controls. Returns void; there is no insertion-success result. Used for actors, load/resurrection paths, and projectiles.
 0x5E64F6: pop     edi
 0x5E64F7: pop     ebp
 0x5E64F8: pop     ebx
@@ -281,7 +281,7 @@
 0x5E6506: mov     ecx, esi
 0x5E6508: call    edx
 0x5E650A: mov     ecx, eax
-0x5E650C: call    sub_6135F0
+0x5E650C: call    CombatController_GetCurrentTarget
 0x5E6511: push    eax
 0x5E6512: mov     eax, [edi+340h]
 0x5E6518: mov     ecx, esi
@@ -303,7 +303,7 @@
 0x5E6540: mov     ecx, esi
 0x5E6542: call    eax
 0x5E6544: mov     ecx, eax
-0x5E6546: call    sub_6135F0
+0x5E6546: call    CombatController_GetCurrentTarget
 0x5E654B: test    eax, eax
 0x5E654D: jnz     loc_5E643E
 0x5E6553: mov     edx, [esi]

@@ -1,7 +1,7 @@
 0x4DB760: push    ebx
 0x4DB761: push    esi
 0x4DB762: mov     esi, ecx
-0x4DB764: call    TESObjectREFR_GetOwner
+0x4DB764: call    TESObjectREFR_GetOwner; Verified owner-resolution order: return this reference's direct XOWN; for non-actors only, try a linked door's XOWN; if still absent, inherit the parent cell's direct owner except for furniture, doors, and activators. Actors never inherit linked-door/cell ownership. Fallout's analogous GetOwner includes an encounter-zone-owner fallback before parent-cell handling; Oblivion's body has no such branch.
 0x4DB769: xor     bl, bl
 0x4DB76B: test    eax, eax
 0x4DB76D: jz      short loc_4DB791

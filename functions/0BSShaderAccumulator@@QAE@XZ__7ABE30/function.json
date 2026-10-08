@@ -1,19 +1,40 @@
 {
-  "callees_count": 28,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 14,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 14,
+  "chunks": [
+    [
+      "0x7ABE30",
+      "0x7AC2A8"
+    ],
+    [
+      "0x7A9B00",
+      "0x7A9B07"
+    ],
+    [
+      "0x9CD260",
+      "0x9CD36F"
+    ]
+  ],
+  "chunks_sha256": "4f9ddd7392420d808f173e2168b80ac36d73ca1db47a3a580e2485d0f6392559",
+  "comment_regular": "BSShaderAccumulator constructor. Constructs 0x1A3 selector-indexed BSTPersistentList<...,BSShaderProperty::RenderPass *> elements at this+0x104 with stride 0x14, covering selectors 0x000..0x1A2. Bucket(selector) = this + 0x104 + 0x14*uint16(selector).",
+  "comment_repeatable": "BSShaderAccumulator constructor. Constructs 0x1A3 selector-indexed BSTPersistentList<...,BSShaderProperty::RenderPass *> elements at this+0x104 with stride 0x14, covering selectors 0x000..0x1A2. Bucket(selector) = this + 0x104 + 0x14*uint16(selector).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 16,
   "display_name": "BSShaderAccumulator::BSShaderAccumulator(void)",
   "end_ea": "0x7AC2A8",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0BSShaderAccumulator@@QAE@XZ",
   "segment": ".text",
   "sha256": "6bc05d55d9be025fa15805ce73a1ae62f06235045d10ce8e23b2610f9be99369",
   "size": 1144,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7ABE30",
+  "total_chunk_size": 1422,
   "type": "BSShaderAccumulator *__thiscall(BSShaderAccumulator *__hidden this)",
-  "xrefs_from_count": 330,
+  "xrefs_from_count": 402,
   "xrefs_to_count": 1
 }

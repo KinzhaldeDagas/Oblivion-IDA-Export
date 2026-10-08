@@ -1,1 +1,1 @@
-GLenum
+typedef unsigned int GLenum;

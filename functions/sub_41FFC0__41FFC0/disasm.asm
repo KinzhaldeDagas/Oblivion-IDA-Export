@@ -1,4 +1,4 @@
-0x41FFC0: push    0FFFFFFFFh
+0x41FFC0: push    0FFFFFFFFh; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x41FFC2: push    offset SEH_8C8970
 0x41FFC7: mov     eax, large fs:0
 0x41FFCD: push    eax
@@ -45,3 +45,15 @@
 0x420043: pop     esi
 0x420044: add     esp, 10h
 0x420047: retn    8
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

@@ -104,11 +104,11 @@
 0x4369D7: mov     edx, [edx+90h]
 0x4369DD: push    esi
 0x4369DE: push    0
-0x4369E0: lea     eax, [esp+14Ch+var_124]
+0x4369E0: lea     eax, [esp+14Ch+slot]
 0x4369E4: push    eax
 0x4369E5: call    edx
-0x4369E7: lea     ecx, [esp+144h+var_124]; this
-0x4369EB: call    sub_7016A0
+0x4369E7: lea     ecx, [esp+144h+slot]; slot
+0x4369EB: call    NiPointerSlot_Release
 0x4369F0: jmp     loc_436AFE
 0x4369F5: push    esi; a2
 0x4369F6: lea     ecx, [ebp+8]; this
@@ -117,10 +117,9 @@
 0x436A03: xor     esi, esi
 0x436A05: xor     ebp, ebp
 0x436A07: cmp     [edi+210h], esi
-0x436A0D: mov     [esp+144h+var_124], esi
+0x436A0D: mov     [esp+144h+slot], esi
 0x436A11: jbe     loc_436C84
 0x436A17: jmp     short loc_436A22
-0x436A19: align 10h
 0x436A20: mov     edi, eax
 0x436A22: mov     eax, [edi+208h]
 0x436A28: mov     edi, [eax+esi*4]
@@ -183,12 +182,12 @@
 0x436AD3: push    1
 0x436AD5: mov     ecx, esi
 0x436AD7: call    edx
-0x436AD9: mov     esi, [esp+144h+var_124]
+0x436AD9: mov     esi, [esp+144h+slot]
 0x436ADD: mov     bl, 1
 0x436ADF: mov     eax, [esp+144h+var_11C]
 0x436AE3: add     esi, 1
 0x436AE6: cmp     esi, [eax+210h]
-0x436AEC: mov     [esp+144h+var_124], esi
+0x436AEC: mov     [esp+144h+slot], esi
 0x436AF0: jb      loc_436A20
 0x436AF6: test    bl, bl
 0x436AF8: jz      loc_436C84
@@ -232,11 +231,11 @@
 0x436B7B: push    9
 0x436B7D: mov     byte ptr [esp+148h+var_130+3], dl
 0x436B81: xor     bl, bl
-0x436B83: call    NiNode_GetNiPropertyByID
+0x436B83: call    NiNode_GetNiPropertyByID;
 0x436B88: test    eax, eax
 0x436B8A: jz      short loc_436BD3
 0x436B8C: mov     ax, [eax+18h]
-0x436B90: mov     ecx, dword_B3F998
+0x436B90: mov     ecx, dword ptr unk_B3F998
 0x436B96: cmp     ax, [ecx+18h]
 0x436B9A: jnz     short loc_436BD3
 0x436B9C: mov     ecx, [edi+8]
@@ -263,11 +262,11 @@
 0x436BD1: mov     bl, 1
 0x436BD3: mov     ecx, [edi+8]
 0x436BD6: push    7
-0x436BD8: call    NiNode_GetNiPropertyByID
+0x436BD8: call    NiNode_GetNiPropertyByID;
 0x436BDD: test    eax, eax
 0x436BDF: jz      short loc_436C28
 0x436BE1: mov     ax, [eax+18h]
-0x436BE5: mov     ecx, dword_B3F980
+0x436BE5: mov     ecx, dword ptr unk_B3F980
 0x436BEB: cmp     ax, [ecx+18h]
 0x436BEF: jnz     short loc_436C28
 0x436BF1: mov     ecx, [edi+8]
@@ -315,11 +314,11 @@
 0x436C6B: mov     bDisableWarning_MESSAGES, al
 0x436C70: jz      short loc_436C84
 0x436C72: mov     ecx, [edi+8]
-0x436C75: push    1
-0x436C77: push    0
-0x436C79: push    1
-0x436C7B: push    ecx
-0x436C7C: call    sub_7B8940
+0x436C75: push    1; arg3
+0x436C77: push    0; normalMapBypass
+0x436C79: push    1; shaderId
+0x436C7B: push    ecx; root
+0x436C7C: call    BSShaderManager_AssignShadersRecursive; Generic loaded-model preparation assigns shaders recursively with shaderId=1 and normalMapBypass=0. A missing derived normal can therefore leave cloned projectile geometry shaderless.
 0x436C81: add     esp, 10h
 0x436C84: mov     ecx, dword ptr [esp+144h+var_C]
 0x436C8B: mov     large fs:0, ecx
@@ -333,3 +332,24 @@
 0x436CA0: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x436CA5: add     esp, 130h
 0x436CAB: retn    0Ch
+0x9AC2D0: mov     eax, [ebp-128h]
+0x9AC2D6: push    eax
+0x9AC2D7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC2DC: pop     ecx
+0x9AC2DD: retn
+0x9AC2DE: mov     eax, [ebp-118h]
+0x9AC2E4: push    eax
+0x9AC2E5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AC2EA: pop     ecx
+0x9AC2EB: retn
+0x9AC2EC: mov     edx, [esp+arg_4]
+0x9AC2F0: lea     eax, [edx-134h]
+0x9AC2F6: mov     ecx, [edx-138h]
+0x9AC2FC: xor     ecx, eax
+0x9AC2FE: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC303: add     eax, 10h
+0x9AC306: mov     ecx, [edx-4]
+0x9AC309: xor     ecx, eax
+0x9AC30B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AC310: mov     eax, offset stru_AD8FD4
+0x9AC315: jmp     ___CxxFrameHandler3

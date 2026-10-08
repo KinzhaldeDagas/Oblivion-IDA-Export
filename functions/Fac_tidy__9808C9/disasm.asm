@@ -14,7 +14,7 @@
 0x9808E7: mov     ds:0BA9B54h, eax
 0x9808EC: call    ??1_Fac_node@std@@QAE@XZ
 0x9808F1: push    esi
-0x9808F2: call    FormHeapFree
+0x9808F2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9808F7: mov     eax, ds:0BA9B54h
 0x9808FC: test    eax, eax
 0x9808FE: pop     ecx

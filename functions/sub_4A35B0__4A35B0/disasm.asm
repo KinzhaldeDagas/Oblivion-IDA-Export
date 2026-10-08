@@ -1,4 +1,4 @@
-0x4A35B0: mov     eax, [esp+arg_0]
+0x4A35B0: mov     eax, [esp+data]; Verified: reads region-data base header fields from RDAT payload; pair with SaveHeader for exact serialization layout.
 0x4A35B4: test    eax, eax
 0x4A35B6: jnz     short loc_4A35BD
 0x4A35B8: xor     al, al

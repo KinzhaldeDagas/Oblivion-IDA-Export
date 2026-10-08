@@ -1,1 +1,1 @@
-IMMDeviceEnumerator_0
+typedef IMMDeviceEnumerator IMMDeviceEnumerator_0;

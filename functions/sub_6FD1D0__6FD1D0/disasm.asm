@@ -155,15 +155,15 @@
 0x6FD404: cmp     eax, ebx
 0x6FD406: mov     [esp+2Ch+var_4], 1
 0x6FD40E: jz      short loc_6FD423
-0x6FD410: push    ebp
-0x6FD411: push    ebx
-0x6FD412: push    ebx
-0x6FD413: push    ebx
-0x6FD414: push    esi
-0x6FD415: push    edi
-0x6FD416: push    6
-0x6FD418: mov     ecx, eax
-0x6FD41A: call    sub_7177E0
+0x6FD410: push    ebp; lineFlags
+0x6FD411: push    ebx; arg7
+0x6FD412: push    ebx; arg6
+0x6FD413: push    ebx; arg5
+0x6FD414: push    esi; colors
+0x6FD415: push    edi; vertices
+0x6FD416: push    6; vertexCount
+0x6FD418: mov     ecx, eax; this
+0x6FD41A: call    NiLines_ctorWithGeometryData; Verified NiLines constructor wrapper: create NiGeometryData via NiLinesData_ctor, initialize NiGeometry, then install NiLines vtable.
 0x6FD41F: mov     ebp, eax
 0x6FD421: jmp     short loc_6FD425
 0x6FD423: xor     ebp, ebp
@@ -209,7 +209,7 @@
 0x6FD4BE: push    esi; a2
 0x6FD4BF: mov     ecx, ebp; this
 0x6FD4C1: mov     [esp+30h+var_4], 3
-0x6FD4C9: call    sub_405680
+0x6FD4C9: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x6FD4CE: lea     edx, [esi+4]
 0x6FD4D1: push    edx; lpAddend
 0x6FD4D2: mov     [esp+30h+var_4], 0FFFFFFFFh
@@ -231,3 +231,27 @@
 0x6FD4FF: pop     ebx
 0x6FD500: add     esp, 18h
 0x6FD503: retn
+0x9C9240: mov     eax, [ebp+4]
+0x9C9243: push    eax
+0x9C9244: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C9249: pop     ecx
+0x9C924A: retn
+0x9C924B: mov     eax, [ebp+4]
+0x9C924E: push    eax
+0x9C924F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C9254: pop     ecx
+0x9C9255: retn
+0x9C9256: mov     eax, [ebp+4]
+0x9C9259: push    eax
+0x9C925A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C925F: pop     ecx
+0x9C9260: retn
+0x9C9261: lea     ecx, [ebp+4]; slot
+0x9C9264: jmp     NiPointerSlot_Release
+0x9C9269: mov     edx, [esp+arg_4]
+0x9C926D: lea     eax, [edx-1Ch]
+0x9C9270: mov     ecx, [edx-20h]
+0x9C9273: xor     ecx, eax
+0x9C9275: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C927A: mov     eax, offset stru_AF1B68
+0x9C927F: jmp     ___CxxFrameHandler3

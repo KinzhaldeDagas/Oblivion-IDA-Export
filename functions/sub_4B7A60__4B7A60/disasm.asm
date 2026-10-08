@@ -1,4 +1,4 @@
-0x4B7A60: sub     esp, 8
+0x4B7A60: sub     esp, 8; Verified TESObjectDOOR copy routine: RTTI-casts sourceForm to TESObjectDOOR, clears the destination's randomTeleport list, allocates new list nodes while copying each TESForm* entry, then copies doorFlags, animSounds[0..2], and form components. The function is referenced by the TESObjectDOOR vtable entry at 0xA44B08 (slot +0xB4 from the vtable at 0xA44A54), confirming its virtual copy-hook role. Original authoring/loading of list entries remains Unknown.
 0x4B7A63: mov     eax, [esp+8+a2]
 0x4B7A67: push    esi
 0x4B7A68: push    edi
@@ -17,8 +17,8 @@
 0x4B7A8E: jz      loc_4B7B36
 0x4B7A94: push    ebx
 0x4B7A95: push    ebp
-0x4B7A96: mov     ecx, esi
-0x4B7A98: call    sub_4B7900
+0x4B7A96: mov     ecx, esi; this
+0x4B7A98: call    TESObjectDOOR_ClearRandomTeleportSpaceList; Verified clears TESObjectDOOR.randomTeleport: frees each allocated successor node, then clears the inline first-space pointer. Called before copying door data.
 0x4B7A9D: lea     ebx, [edi+68h]
 0x4B7AA0: test    ebx, ebx
 0x4B7AA2: lea     ebp, [esi+68h]

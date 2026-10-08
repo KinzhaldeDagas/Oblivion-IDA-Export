@@ -1,9 +1,7 @@
-int __thiscall sub_530410(_BYTE *this, int a2)
+// Clears TESTopicInfo runtime spoken state when kTopicInfoModified_Spoken is being reverted/cleared.
+void __thiscall TESTopicInfo::ClearModifiedSpokenState(OblivionTopicInfo *this, TopicInfoModifiedFlags modifiedFlags)
 {
-  int result; // eax
-
-  result = nullsub_returnvVoid_1arg(a2);
-  if ( (a2 & 0x10000000) != 0 )
-    *(this + 0x22) = 0;
-  return result;
+  nullsub_returnvVoid_1arg(modifiedFlags); /*0x530419*/
+  if ( (modifiedFlags & 0x10000000) != 0 )      // Only modified flag 0x10000000 affects the TESTopicInfo-specific runtime state in this clear hook. /*0x530424*/
+    this->spoken = 0;                           // Clear OblivionTopicInfo.spoken at +0x22, making a SayOnce INFO eligible again if all other conditions pass. /*0x530426*/
 }

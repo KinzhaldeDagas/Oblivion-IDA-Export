@@ -51,7 +51,7 @@
 0x8E7A98: shufps  xmm2, xmm0, 0
 0x8E7A9C: mulps   xmm2, xmm1
 0x8E7A9F: movaps  [esp+34h+var_20], xmm2
-0x8E7AA4: call    sub_8B1DD0
+0x8E7AA4: call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.
 0x8E7AA9: movaps  xmm1, xmmword ptr [esi+10h]
 0x8E7AAD: movaps  xmm0, [esp+30h+var_10]
 0x8E7AB2: movaps  xmm3, xmmword ptr ds:0A6DFE0h

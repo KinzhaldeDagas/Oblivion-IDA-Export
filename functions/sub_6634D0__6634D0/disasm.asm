@@ -1,8 +1,8 @@
 0x6634D0: push    esi
-0x6634D1: call    TESObjectREFR__GetNiNode
+0x6634D1: call    TESObjectREFR__GetNiNode; ODismemberment: TESObjectREFR::GetNiNode; runtime primitive starts from actor 3D and toggles prepared ODISMEMBER_* nodes.
 0x6634D6: push    offset off_A3FA90
 0x6634DB: mov     ecx, eax
-0x6634DD: call    NiObjectNET_GetExtraData
+0x6634DD: call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.
 0x6634E2: mov     esi, eax
 0x6634E4: test    esi, esi
 0x6634E6: jz      short loc_663516
@@ -12,7 +12,7 @@
 0x6634EF: call    edx
 0x6634F1: test    eax, eax
 0x6634F3: jz      short loc_663503
-0x6634F5: cmp     eax, offset dword_B35294
+0x6634F5: cmp     eax, 0B35294h
 0x6634FA: jz      short loc_663512
 0x6634FC: mov     eax, [eax+4]
 0x6634FF: test    eax, eax

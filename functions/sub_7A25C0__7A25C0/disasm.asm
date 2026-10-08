@@ -1,4 +1,4 @@
-0x7A25C0: mov     eax, [esp+arg_4]
+0x7A25C0: mov     eax, [esp+last]; Oblivion binary evidence: compiler-folded trivial four-byte uninitialized_copy. Computes the source byte span, memmoves it to destination, and returns destination + copied bytes. Shared by multiple vector<T> specializations; OB_stVector4 is deliberately element-neutral.
 0x7A25C4: mov     ecx, [esp+Src]
 0x7A25C8: mov     edx, [esp+Dst]
 0x7A25CC: sub     eax, ecx

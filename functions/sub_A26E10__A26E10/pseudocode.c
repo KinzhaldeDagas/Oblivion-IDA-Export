@@ -1,4 +1,4 @@
 void __cdecl sub_A26E10()
 {
-  TESTexture::ClearComponentReferences(&unk_B4295D);
+  Shared_NoOpVirtual_60D0A0(&stru_B4295D); /*0xa26e15*/
 }

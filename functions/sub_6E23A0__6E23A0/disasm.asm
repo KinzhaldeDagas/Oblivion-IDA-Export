@@ -1,4 +1,4 @@
-0x6E23A0: push    ecx
+0x6E23A0: push    ecx; Oblivion NiTransformData binary save. Writes rotation, translation, then scale counts; for each nonempty channel writes numeric type and dispatches the channel/type-specific key-array serializer with its pointer and UInt16 count.
 0x6E23A1: push    ebx
 0x6E23A2: push    ebp
 0x6E23A3: push    esi
@@ -6,7 +6,7 @@
 0x6E23A5: mov     edi, [esp+14h+arg_0]
 0x6E23A9: push    edi
 0x6E23AA: mov     esi, ecx
-0x6E23AC: call    nullsub_returnvVoid_1arg
+0x6E23AC: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6E23B1: movzx   eax, word ptr [esi+8]
 0x6E23B5: push    1
 0x6E23B7: lea     ecx, [esp+18h+var_4]
@@ -43,7 +43,7 @@
 0x6E240C: mov     [esp+30h+arg_0], eax
 0x6E2410: mov     eax, ds:0B3D5F0h[ecx*4]
 0x6E2417: push    edi
-0x6E2418: call    eax ; dword_B3D5F0
+0x6E2418: call    eax ; unk_B3D5F0
 0x6E241A: add     esp, 20h
 0x6E241D: movzx   ecx, word ptr [esi+0Ah]
 0x6E2421: mov     eax, [edi+220h]
@@ -80,7 +80,7 @@
 0x6E2473: mov     [esp+30h+arg_0], eax
 0x6E2477: mov     eax, ds:0B3D5D8h[ecx*4]
 0x6E247E: push    edi
-0x6E247F: call    eax ; dword_B3D5D8
+0x6E247F: call    eax ; unk_B3D5D8
 0x6E2481: add     esp, 20h
 0x6E2484: movzx   ecx, word ptr [esi+0Ch]
 0x6E2488: mov     eax, [edi+220h]
@@ -117,7 +117,7 @@
 0x6E24DA: mov     [esp+30h+arg_0], eax
 0x6E24DE: mov     eax, ds:0B3D5C0h[ecx*4]
 0x6E24E5: push    edi
-0x6E24E6: call    eax ; dword_B3D5C0
+0x6E24E6: call    eax ; unk_B3D5C0
 0x6E24E8: add     esp, 20h
 0x6E24EB: pop     edi
 0x6E24EC: pop     esi

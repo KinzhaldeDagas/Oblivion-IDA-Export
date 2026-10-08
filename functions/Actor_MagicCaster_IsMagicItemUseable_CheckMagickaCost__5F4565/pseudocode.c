@@ -1,6 +1,6 @@
 int __usercall Actor_MagicCaster_IsMagicItemUseable_::CheckMagickaCost@<eax>(
         int a1@<ebx>,
-        int a2@<ebp>,
+        PlayerCharacter *a2@<ebp>,
         int a3@<edi>,
         int *a4@<esi>,
         double a5@<st0>,
@@ -21,24 +21,24 @@ int __usercall Actor_MagicCaster_IsMagicItemUseable_::CheckMagickaCost@<eax>(
   double v18; // st6
   int v20; // [esp+20h] [ebp+1Ch]
 
-  v15 = **(void (__thiscall ***)(int))(a3 + 0xC);
-  v16 = a3 + 0xC;
-  v15(v16);
-  *(float *)&v20 = a5;
-  if ( (_BYTE)BaseCalcAVi )
+  v15 = **(void (__thiscall ***)(int))(a3 + 0xC); /*0x5f4568*/
+  v16 = a3 + 0xC; /*0x5f456a*/
+  v15(v16); /*0x5f4570*/
+  *(float *)&v20 = a5; /*0x5f4572*/
+  if ( (_BYTE)BaseCalcAVi ) /*0x5f457f*/
   {
-    BaseCalcAVi = Actor_GetBaseCalcAVi(a4, a1, v16, (int)a4, 9);
-    v17 = (double)BaseCalcAVi;
+    BaseCalcAVi = Actor_GetBaseCalcAVi(a4, a1, v16, (int)a4, 9); /*0x5f4586*/
+    v17 = (double)BaseCalcAVi; /*0x5f458a*/
   }
   else
   {
-    a14 = (*(int (__thiscall **)(int *, int))(*a4 + 0x284))(a4, 9);
-    v17 = (double)a14;
+    a14 = (*(int (__thiscall **)(int *, int))(*a4 + 0x284))(a4, 9); /*0x5f459a*/
+    v17 = (double)a14; /*0x5f459e*/
   }
-  v18 = *(float *)&v20;
-  LOBYTE(v20) = 1;
-  if ( v18 > v17 )
-    LOBYTE(v20) = 0;
+  v18 = *(float *)&v20; /*0x5f45a2*/
+  LOBYTE(v20) = 1; /*0x5f45a6*/
+  if ( v18 > v17 ) /*0x5f45b2*/
+    LOBYTE(v20) = 0; /*0x5f45b4*/
   return Actor_MagicCaster_IsMagicItemUseable_::CheckMasteryLevel(
            a1,
            a2,

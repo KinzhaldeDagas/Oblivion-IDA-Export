@@ -1,1 +1,1 @@
-WeaponObject
+struct WeaponObject;

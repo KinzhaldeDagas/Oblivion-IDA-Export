@@ -10,7 +10,7 @@
 0x46A7C4: push    ecx; Src
 0x46A7C5: push    4D414E45h; int
 0x46A7CA: mov     [esp+14h+Src], eax
-0x46A7CE: call    TESForm_PutFormRecordChunkData
+0x46A7CE: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x46A7D3: add     esp, 0Ch
 0x46A7D6: movzx   eax, word ptr [esi+8]
 0x46A7DA: test    ax, ax
@@ -22,7 +22,7 @@
 0x46A7E9: push    eax; Src
 0x46A7EA: push    4D414E41h; int
 0x46A7EF: mov     [esp+10h+Src], edx
-0x46A7F3: call    TESForm_PutFormRecordChunkData
+0x46A7F3: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x46A7F8: add     esp, 0Ch
 0x46A7FB: pop     ecx
 0x46A7FC: retn

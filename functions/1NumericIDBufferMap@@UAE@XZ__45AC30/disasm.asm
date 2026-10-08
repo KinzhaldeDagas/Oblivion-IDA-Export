@@ -1,4 +1,4 @@
-0x45AC30: push    0FFFFFFFFh
+0x45AC30: push    0FFFFFFFFh; MEF v57 IMPLEMENTED 2026-10-08: PERF-11 dtor entry invalidates map generation BEFORE freeing callbacks. Replay preserves original SEH handler9AE298. Auxiliary failures use original checked map helper; required nodeOOM remains reported to blob owner.
 0x45AC32: push    offset ??1NumericIDBufferMap@@UAE@XZ_SEH
 0x45AC37: mov     eax, large fs:0
 0x45AC3D: push    eax
@@ -11,7 +11,7 @@
 0x45AC4E: mov     large fs:0, eax
 0x45AC54: mov     esi, ecx
 0x45AC56: mov     [esp+24h+var_14], esi
-0x45AC5A: mov     dword ptr [esi], offset ??_7NumericIDBufferMap@@6B@; const NumericIDBufferMap::`vftable'
+0x45AC5A: mov     dword ptr [esi], offset ??_7NumericIDBufferMap@@6B@; MEF PERF 2026-10-02 PASS2: Verified dispatch for save blob maps: +4=6A9060 unsigned key%bucketCount; +8=763E80 exact key equality; +C=67F130 writes node key+4/value+8; +10=68F970 no-op cleanup; +14=4F0F60 pooled node allocation. This resolves generic SetAt virtual behavior, not a blanket type assignment to all NiTMaps.
 0x45AC60: xor     eax, eax
 0x45AC62: cmp     [esi+4], eax
 0x45AC65: mov     [esp+24h+var_4], 0
@@ -26,25 +26,25 @@
 0x45AC82: jb      short loc_45AC74
 0x45AC84: xor     eax, eax
 0x45AC86: test    eax, eax
-0x45AC88: mov     [esp+24h+var_18], eax
+0x45AC88: mov     [esp+24h+position], eax
 0x45AC8C: jz      short loc_45ACC8
 0x45AC8E: mov     edi, edi
-0x45AC90: lea     eax, [esp+24h+var_1C]
-0x45AC94: push    eax
-0x45AC95: lea     ecx, [esp+28h+var_10]
-0x45AC99: push    ecx
-0x45AC9A: lea     edx, [esp+2Ch+var_18]
-0x45AC9E: push    edx
-0x45AC9F: mov     ecx, esi
-0x45ACA1: mov     [esp+30h+var_1C], 0
-0x45ACA9: call    sub_452600
-0x45ACAE: mov     eax, [esp+24h+var_1C]
+0x45AC90: lea     eax, [esp+24h+valueOut]
+0x45AC94: push    eax; valueOut
+0x45AC95: lea     ecx, [esp+28h+keyOut]
+0x45AC99: push    ecx; keyOut
+0x45AC9A: lea     edx, [esp+2Ch+position]
+0x45AC9E: push    edx; position
+0x45AC9F: mov     ecx, esi; self
+0x45ACA1: mov     [esp+30h+valueOut], 0
+0x45ACA9: call    NiTMap_U32Pointer_GetNextEntry
+0x45ACAE: mov     eax, [esp+24h+valueOut]
 0x45ACB2: test    eax, eax
 0x45ACB4: jz      short loc_45ACC1
 0x45ACB6: push    eax; void *
 0x45ACB7: mov     ecx, offset FormHeap
 0x45ACBC: call    MemoryHeap_Free_checked
-0x45ACC1: cmp     [esp+24h+var_18], 0
+0x45ACC1: cmp     [esp+24h+position], 0
 0x45ACC6: jnz     short loc_45AC90
 0x45ACC8: mov     ecx, esi
 0x45ACCA: call    NiTMap_Clear
@@ -59,3 +59,12 @@
 0x45ACEE: retn
 0x45ACEF: mov     eax, [edx+eax*4]
 0x45ACF2: jmp     short loc_45AC86
+0x9AE290: mov     ecx, [ebp-14h]
+0x9AE293: jmp     ??1?$NiTPointerMap@IPAX@@UAE@XZ; NiTPointerMap<uint,void *>::~NiTPointerMap<uint,void *>(void)
+0x9AE298: mov     edx, [esp+arg_4]
+0x9AE29C: lea     eax, [edx-14h]
+0x9AE29F: mov     ecx, [edx-18h]
+0x9AE2A2: xor     ecx, eax
+0x9AE2A4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AE2A9: mov     eax, offset stru_ADAB3C
+0x9AE2AE: jmp     ___CxxFrameHandler3

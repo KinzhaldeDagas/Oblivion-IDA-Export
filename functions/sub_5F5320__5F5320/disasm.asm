@@ -1,4 +1,4 @@
-0x5F5320: push    0FFFFFFFFh
+0x5F5320: push    0FFFFFFFFh; 3DTheft decode: Actor flee entry point. Builds/updates a FleePackage for source ref, records previous package state when needed, resolves flee destination, calls Actor_AddPackage_, then asks process to move toward the computed flee point.
 0x5F5322: push    offset SEH_5F5320
 0x5F5327: mov     eax, large fs:0
 0x5F532D: push    eax
@@ -59,7 +59,7 @@
 0x5F53D4: push    0
 0x5F53D6: push    edx
 0x5F53D7: mov     ecx, eax; this
-0x5F53D9: call    ??0FleePackage@@QAE@XZ; FleePackage::FleePackage(void)
+0x5F53D9: call    ??0FleePackage@@QAE@XZ; 3DTheft decode: Actor flee path allocates FleePackage(0x68) with flee source ref and no explicit cell/ref override.
 0x5F53DE: mov     edi, eax
 0x5F53E0: jmp     short loc_5F53E4
 0x5F53E2: xor     edi, edi
@@ -69,10 +69,10 @@
 0x5F53EC: mov     [esp+40h+var_4], 0FFFFFFFFh
 0x5F53F4: call    edx
 0x5F53F6: mov     eax, [esi+58h]
-0x5F53F9: mov     ecx, [eax+8]
+0x5F53F9: mov     ecx, [eax+8]; self
 0x5F53FC: test    ecx, ecx
 0x5F53FE: jz      short loc_5F5448
-0x5F5400: call    sub_5660A0
+0x5F5400: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x5F5405: test    al, al
 0x5F5407: jnz     short loc_5F5448
 0x5F5409: mov     ecx, [esi+58h]
@@ -137,7 +137,7 @@
 0x5F54A4: push    0
 0x5F54A6: call    edx
 0x5F54A8: mov     ecx, eax
-0x5F54AA: call    sub_41A610
+0x5F54AA: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x5F54AF: push    0Ch; Size
 0x5F54B1: call    FormHeapAlloc
 0x5F54B6: add     esp, 4
@@ -152,7 +152,7 @@
 0x5F54D4: xor     ebx, ebx
 0x5F54D6: mov     ecx, esi; this
 0x5F54D8: mov     [esp+40h+var_4], 0FFFFFFFFh
-0x5F54E0: call    TESObjectREFR_GetParentCell
+0x5F54E0: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F54E5: mov     ecx, esi; this
 0x5F54E7: mov     [esp+40h+var_28], eax
 0x5F54EB: call    TESObjectREFR_GetWorldSpace
@@ -169,7 +169,7 @@
 0x5F550D: push    ebx
 0x5F550E: mov     ecx, edi
 0x5F5510: mov     byte ptr [edi+3Ch], 0
-0x5F5514: call    TESPackage_SetLocation
+0x5F5514: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x5F5519: jmp     loc_5F564A
 0x5F551E: mov     ebp, [esp+40h+arg_C]
 0x5F5522: test    ebp, ebp
@@ -183,17 +183,17 @@
 0x5F5537: push    ebx
 0x5F5538: mov     ecx, edi
 0x5F553A: mov     byte ptr [edi+3Ch], 0
-0x5F553E: call    TESPackage_SetLocation
+0x5F553E: call    TESPackage_SetLocation; 3DTheft decode: TESPackage_SetLocation allocates package->location when needed and copies a 0x0C LocationData record; null source clears location data.
 0x5F5543: jmp     loc_5F564A
 0x5F5548: mov     ecx, esi; this
 0x5F554A: mov     byte ptr [esp+40h+arg_10], 0
-0x5F554F: call    TESObjectREFR_GetParentCell
+0x5F554F: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F5554: test    eax, eax
 0x5F5556: jz      short loc_5F556F
 0x5F5558: mov     ecx, esi; this
-0x5F555A: call    TESObjectREFR_GetParentCell
+0x5F555A: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F555F: mov     ecx, eax; this
-0x5F5561: call    TESObjectCELL_IsInterior
+0x5F5561: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x5F5566: test    al, al
 0x5F5568: jz      short loc_5F556F
 0x5F556A: mov     byte ptr [esp+40h+arg_10], 1
@@ -225,7 +225,7 @@
 0x5F55BF: mov     eax, [ecx]
 0x5F55C1: mov     edx, [eax+0A0h]
 0x5F55C7: push    ecx
-0x5F55C8: fstp    [esp+44h+var_44]
+0x5F55C8: fstp    dword ptr [esp+44h+var_44]
 0x5F55CB: mov     byte ptr [esp+44h+arg_C], 1
 0x5F55D0: call    edx
 0x5F55D2: cmp     byte ptr [esp+40h+arg_10], 0
@@ -261,7 +261,7 @@
 0x5F562C: mov     ecx, ebp; this
 0x5F562E: mov     [esp+40h+var_20], edx
 0x5F5632: mov     [esp+40h+var_1C], eax
-0x5F5636: call    TESObjectREFR_GetParentCell
+0x5F5636: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x5F563B: mov     ecx, ebp; this
 0x5F563D: mov     [esp+40h+var_28], eax
 0x5F5641: call    TESObjectREFR_GetWorldSpace
@@ -271,7 +271,7 @@
 0x5F564E: mov     ecx, ebx
 0x5F5650: call    TESPackage_LocationData_destr
 0x5F5655: push    ebx
-0x5F5656: call    FormHeapFree
+0x5F5656: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F565B: add     esp, 4
 0x5F565E: mov     ecx, [esi+58h]
 0x5F5661: cmp     dword ptr [ecx+8], 0
@@ -311,7 +311,7 @@
 0x5F56BE: push    eax; a3
 0x5F56BF: push    edi; a2
 0x5F56C0: mov     ecx, esi; this
-0x5F56C2: call    Actor_AddPackage?
+0x5F56C2: call    Actor_AddPackage?; 3DTheft decode: Actor flee path attaches the generated FleePackage through Actor_AddPackage_(actor, package, setCurrent, 1). Prefer this entry point over manually constructing a getaway flee package.
 0x5F56C7: mov     eax, [esp+40h+var_2C]
 0x5F56CB: mov     cl, byte ptr [esp+40h+arg_8]
 0x5F56CF: mov     ebx, [esp+40h+var_24]
@@ -323,7 +323,7 @@
 0x5F56DE: mov     [eax], ebx
 0x5F56E0: mov     ebx, [esp+54h+var_20]
 0x5F56E4: mov     [edi+64h], cl
-0x5F56E7: mov     dword ptr [edi+18h], 13h
+0x5F56E7: mov     dword ptr [edi+18h], 13h; 3DTheft decode: Actor flee path forces procedureArrayIndex=0x13 after attaching the flee package.
 0x5F56EE: mov     ecx, [esi+58h]
 0x5F56F1: mov     edx, [ecx]
 0x5F56F3: mov     edx, [edx+3DCh]
@@ -331,7 +331,7 @@
 0x5F56FC: mov     ebx, [esp+54h+var_1C]
 0x5F5700: push    esi
 0x5F5701: mov     [eax+8], ebx
-0x5F5704: call    edx
+0x5F5704: call    edx; 3DTheft decode: after package attachment, Actor flee hands computed flee coordinates/cell/worldspace to the process movement function.
 0x5F5706: test    al, al
 0x5F5708: jz      short loc_5F5717
 0x5F570A: fld     dword ptr [edi+4Ch]
@@ -347,3 +347,20 @@
 0x5F5726: pop     ebx
 0x5F5727: add     esp, 2Ch
 0x5F572A: retn    14h
+0x9C2900: mov     eax, [ebp-28h]
+0x9C2903: push    eax
+0x9C2904: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2909: pop     ecx
+0x9C290A: retn
+0x9C290B: mov     eax, [ebp-28h]
+0x9C290E: push    eax
+0x9C290F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C2914: pop     ecx
+0x9C2915: retn
+0x9C2916: mov     edx, [esp+arg_4]
+0x9C291A: lea     eax, [edx-30h]
+0x9C291D: mov     ecx, [edx-34h]
+0x9C2920: xor     ecx, eax
+0x9C2922: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2927: mov     eax, offset stru_AEB6F0
+0x9C292C: jmp     ___CxxFrameHandler3

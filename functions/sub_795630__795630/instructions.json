@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x795630",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; OBLIVION AUTHORITY (2026-08-30): Swaps two vector<unsigned short> owners via a temporary deep copy and copy assignments; exception cleanup frees the temporary buffer.",
     "mnemonic": "push",
     "size": 2
   },
@@ -79,37 +79,37 @@
   },
   {
     "ea": "0x795657",
-    "line": "push    esi",
+    "line": "push    esi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795658",
-    "line": "lea     ecx, [esp+2Ch+var_1C]",
+    "line": "lea     ecx, [esp+2Ch+source]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x79565C",
-    "line": "call    sub_795480",
+    "line": "call    OB_stVectorUShort_CopyCtor_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy constructor for vector<unsigned short>; allocates exact source size and copies its 2-byte elements.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x795661",
-    "line": "mov     edi, [esp+28h+arg_0]",
+    "line": "mov     edi, [esp+28h+other]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x795665",
-    "line": "push    edi",
+    "line": "push    edi; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x795666",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -121,37 +121,37 @@
   },
   {
     "ea": "0x795670",
-    "line": "call    sub_795510",
+    "line": "call    OB_stVectorUShort_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned short>, with self/empty/reuse/reallocate paths and exact end repair.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x795675",
-    "line": "lea     eax, [esp+28h+var_1C]",
+    "line": "lea     eax, [esp+28h+source]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x795679",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x79567A",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x79567C",
-    "line": "call    sub_795510",
+    "line": "call    OB_stVectorUShort_CopyAssign_010201A0; OBLIVION AUTHORITY (2026-08-30): Deep copy assignment for vector<unsigned short>, with self/empty/reuse/reallocate paths and exact end repair.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x795681",
-    "line": "mov     eax, [esp+28h+var_18]",
+    "line": "mov     eax, [esp+28h+source.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x79568A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -226,5 +226,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CBD60",
+    "line": "lea     ecx, [ebp-1Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD63",
+    "line": "jmp     OB_stVector4_DestroyThiscall_010201A0; OBLIVION AUTHORITY (2026-08-30): Compiler-folded thiscall destructor for a 0x10-byte std::vector owner. Frees begin when non-null and clears begin/end/capacity; xrefs prove use beyond any single SpeedTree specialization.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBD68",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CBD6C",
+    "line": "lea     eax, [edx-18h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD6F",
+    "line": "mov     ecx, [edx-1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CBD72",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CBD74",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBD79",
+    "line": "mov     eax, offset stru_AF4CA0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CBD7E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -19,7 +19,7 @@
 0x6E337D: mov     ecx, [esi+10h]
 0x6E3380: mov     ecx, ds:0B3D2C8h[ecx*4]
 0x6E3387: push    eax
-0x6E3388: call    ecx ; dword_B3D2C8
+0x6E3388: call    ecx ; unk_B3D2C8
 0x6E338A: add     esp, 4
 0x6E338D: mov     ecx, esi
 0x6E338F: mov     [esp+18h+var_4], 0FFFFFFFFh
@@ -30,3 +30,12 @@
 0x6E33A8: pop     esi
 0x6E33A9: add     esp, 10h
 0x6E33AC: retn
+0x9CFDD0: mov     ecx, [ebp-10h]
+0x9CFDD3: jmp     NiRefObject_destr
+0x9CFDD8: mov     edx, [esp+arg_4]
+0x9CFDDC: lea     eax, [edx-8]
+0x9CFDDF: mov     ecx, [edx-0Ch]
+0x9CFDE2: xor     ecx, eax
+0x9CFDE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CFDE9: mov     eax, offset stru_AF88CC
+0x9CFDEE: jmp     ___CxxFrameHandler3

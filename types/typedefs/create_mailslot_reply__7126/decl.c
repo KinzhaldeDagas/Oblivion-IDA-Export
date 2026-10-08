@@ -1,1 +1,6 @@
-create_mailslot_reply
+struct create_mailslot_reply
+{
+reply_header __header;
+obj_handle_t handle;
+char __pad_12[4];
+};

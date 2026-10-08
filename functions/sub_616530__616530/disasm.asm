@@ -17,11 +17,11 @@
 0x61655D: jz      loc_6167D5
 0x616563: mov     eax, ds:0B3B914h
 0x616568: cmp     eax, ds:0B14B94h
-0x61656E: mov     esi, [esp+2Ch+arg_4]
+0x61656E: mov     esi, [esp+2Ch+speaker]
 0x616572: jle     loc_616606
 0x616578: test    esi, esi
 0x61657A: jz      loc_616606
-0x616580: mov     ecx, [esp+2Ch+arg_8]
+0x616580: mov     ecx, [esp+2Ch+target]
 0x616584: test    ecx, ecx
 0x616586: jz      short loc_616591
 0x616588: call    Actor_IsPlayer
@@ -65,18 +65,18 @@
 0x6165FB: fnstsw  ax
 0x6165FD: test    ah, 41h
 0x616600: jz      loc_6167D5
-0x616606: mov     ecx, [esp+2Ch+arg_C]
-0x61660A: push    ecx
-0x61660B: push    2
-0x61660D: call    TESTopic__GEtTopic
+0x616606: mov     ecx, [esp+2Ch+index]
+0x61660A: push    ecx; index
+0x61660B: push    2; topicType
+0x61660D: call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.
 0x616612: mov     ebx, eax
 0x616614: add     esp, 8
 0x616617: test    ebx, ebx
 0x616619: jz      loc_6167D5
-0x61661F: mov     ecx, [ebp+0]
+0x61661F: mov     ecx, [ebp+0]; this
 0x616622: test    ecx, ecx
 0x616624: jz      short loc_61668A
-0x616626: call    sub_6B7260
+0x616626: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x61662B: test    al, al
 0x61662D: jz      short loc_61663A
 0x61662F: cmp     [esp+2Ch+arg_10], 0
@@ -105,13 +105,13 @@
 0x616673: mov     ecx, edi; this
 0x616675: call    sub_6B73E0
 0x61667A: push    edi
-0x61667B: call    FormHeapFree
+0x61667B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x616680: add     esp, 4
 0x616683: mov     dword ptr [ebp+0], 0
 0x61668A: mov     ecx, esi; this
 0x61668C: call    Actor_IsCreature
 0x616691: test    al, al
-0x616693: push    0; int
+0x616693: push    0; conversation
 0x616695: jz      loc_61676C
 0x61669B: mov     edx, [esi]
 0x61669D: mov     eax, [edx+170h]
@@ -123,7 +123,7 @@
 0x6166B3: push    eax; void *
 0x6166B4: call    OblivionDynamicCast
 0x6166B9: mov     edi, eax
-0x6166BB: mov     eax, [esp+40h+arg_C]
+0x6166BB: mov     eax, [esp+40h+index]
 0x6166BF: add     esp, 14h
 0x6166C2: sub     eax, 1
 0x6166C5: jz      short loc_6166DC
@@ -182,21 +182,21 @@
 0x616767: pop     ebx
 0x616768: add     esp, 18h
 0x61676B: retn
-0x61676C: mov     edx, [esp+30h+arg_8]
-0x616770: push    ebx
-0x616771: push    edx
-0x616772: push    esi
-0x616773: mov     ecx, ebx
-0x616775: call    TESTopic__CreateDialogueInfo
+0x61676C: mov     edx, [esp+30h+target]
+0x616770: push    ebx; previousTopic
+0x616771: push    edx; target
+0x616772: push    esi; speaker
+0x616773: mov     ecx, ebx; this
+0x616775: call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.
 0x61677A: mov     ebx, eax
 0x61677C: test    ebx, ebx
 0x61677E: jz      short loc_6167D5
-0x616780: mov     ecx, ebx
-0x616782: call    sub_6B7BA0
+0x616780: mov     ecx, ebx; this
+0x616782: call    DialogueItem__FirstResponse
 0x616787: test    al, al
 0x616789: jz      short loc_6167C5
-0x61678B: mov     ecx, ebx
-0x61678D: call    sub_6B7C20
+0x61678B: mov     ecx, ebx; this
+0x61678D: call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.
 0x616792: mov     edi, eax
 0x616794: test    edi, edi
 0x616796: jz      short loc_6167C5
@@ -217,12 +217,12 @@
 0x6167B5: mov     ecx, esi
 0x6167B7: call    Actor__InitDialogue
 0x6167BC: fstp    st
-0x6167BE: mov     ecx, ebx; int
-0x6167C0: call    sub_6B7C30
-0x6167C5: mov     ecx, ebx
-0x6167C7: call    sub_6B81D0
+0x6167BE: mov     ecx, ebx; this
+0x6167C0: call    DialogueItem__RunResult; Deferred ambient INFO commit. When INFO exists and ImmediateResult is clear, expose addedTopics and then run the result on DialogueItem.speaker at response-list exhaustion. Goodbye and RunForRumors are ignored; interruption before exhaustion drops this deferred commit.
+0x6167C5: mov     ecx, ebx; this
+0x6167C7: call    DialogueItem__Destroy
 0x6167CC: push    ebx
-0x6167CD: call    FormHeapFree
+0x6167CD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6167D2: add     esp, 4
 0x6167D5: mov     ecx, [esp+2Ch+var_C]
 0x6167D9: mov     large fs:0, ecx
@@ -233,3 +233,12 @@
 0x6167E4: pop     ebx
 0x6167E5: add     esp, 18h
 0x6167E8: retn
+0x9C2A40: lea     ecx, [ebp-14h]; void *
+0x9C2A43: jmp     BSStringT_Clear
+0x9C2A48: mov     edx, [esp+arg_4]
+0x9C2A4C: lea     eax, [edx-1Ch]
+0x9C2A4F: mov     ecx, [edx-20h]
+0x9C2A52: xor     ecx, eax
+0x9C2A54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2A59: mov     eax, offset stru_AEB7F4
+0x9C2A5E: jmp     ___CxxFrameHandler3

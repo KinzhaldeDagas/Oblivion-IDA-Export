@@ -16,7 +16,7 @@
 0x6818FB: test    esi, esi
 0x6818FD: jz      loc_681A40
 0x681903: mov     ecx, esi; this
-0x681905: call    MobileObject_GetCharProxy
+0x681905: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x68190A: test    eax, eax
 0x68190C: jz      loc_681A40
 0x681912: mov     eax, [eax+368h]
@@ -71,7 +71,7 @@
 0x6819B9: push    eax
 0x6819BA: lea     ecx, [esp+68h+var_48]
 0x6819BE: push    ecx
-0x6819BF: call    sub_43F3E0
+0x6819BF: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x6819C4: mov     edx, [esp+6Ch+var_48]
 0x6819C8: mov     eax, [esp+6Ch+var_44]
 0x6819CC: mov     ecx, [esp+6Ch+var_40]
@@ -95,7 +95,7 @@
 0x681A04: mov     ecx, ebp
 0x681A06: call    eax
 0x681A08: mov     ecx, ebx; this
-0x681A0A: call    NiAVObject_InitializePropertyState
+0x681A0A: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x681A0F: mov     ecx, ebx
 0x681A11: call    NiNode_UpdateDynamicEffectState
 0x681A16: fldz
@@ -103,7 +103,7 @@
 0x681A1A: push    ecx
 0x681A1B: mov     ecx, ebx; this
 0x681A1D: fstp    [esp+6Ch+a2]; a2
-0x681A20: call    NiAVObject_UpdateNiAVObject
+0x681A20: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x681A25: mov     ebx, [esp+64h+var_50]
 0x681A29: mov     ecx, [esp+64h+arg_0]
 0x681A2D: add     ecx, 1
@@ -119,3 +119,15 @@
 0x681A4F: pop     ebx
 0x681A50: add     esp, 50h
 0x681A53: retn
+0x9C4C40: mov     eax, [ebp-4Ch]
+0x9C4C43: push    eax
+0x9C4C44: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C4C49: pop     ecx
+0x9C4C4A: retn
+0x9C4C4B: mov     edx, [esp+arg_4]
+0x9C4C4F: lea     eax, [edx-54h]
+0x9C4C52: mov     ecx, [edx-58h]
+0x9C4C55: xor     ecx, eax
+0x9C4C57: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C4C5C: mov     eax, offset stru_AED528
+0x9C4C61: jmp     ___CxxFrameHandler3

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x67F340",
-    "line": "sub     esp, 14h",
+    "line": "sub     esp, 14h; Verified unlink path for a door reference whose ExtraTeleport is being removed: locate its AStarWorldNode by reciprocal space pair and endpoint refs, remove it from both inner lists, remove/free empty inner maps and outer entries, unlink it from LowPathSearchGlobals.allAStarWorldNodes, release its state slot, and free the node. Called from RemoveExtraTeleportFromDoorRef and ExtraData cleanup.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x67F358",
-    "line": "mov     ecx, offset g_pathingMutex",
+    "line": "mov     ecx, 0B3BE80h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x67F362",
-    "line": "mov     ebp, [esp+1Ch+arg_0]",
+    "line": "mov     ebp, [esp+1Ch+doorReference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x67F371",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,13 +109,13 @@
   },
   {
     "ea": "0x67F380",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F382",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
@@ -139,13 +139,13 @@
   },
   {
     "ea": "0x67F390",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F392",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x67F399",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -169,19 +169,19 @@
   },
   {
     "ea": "0x67F39F",
-    "line": "call    sub_42B410",
+    "line": "call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x67F3A4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F3A6",
-    "line": "call    sub_4D8AF0",
+    "line": "call    TESObjectREFR_GetSpatialContainerAtPosition; Verified return semantics: for a reference with a parent cell, returns the smallest containing TESSubSpace when the base form is not TESSubSpace and one contains its position; otherwise falls back to that interior cell. For exterior references it resolves the parent cell's WorldSpace and returns the smallest containing TESSubSpace when applicable, otherwise the WorldSpace. A TESSubSpace base skips the containment lookup and still falls back to its parent cell/WorldSpace. Null is returned when no parent container exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -385,19 +385,19 @@
   },
   {
     "ea": "0x67F41F",
-    "line": "mov     ecx, [esi]",
+    "line": "mov     ecx, [esi]; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F421",
-    "line": "push    ebp",
+    "line": "push    ebp; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x67F422",
-    "line": "call    sub_680410",
+    "line": "call    AStarWorldNode_ContainsReference; Verified endpoint predicate: returns true when the supplied TESObjectREFR equals either referenceA or referenceB in the AStarWorldNode.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x67F437",
-    "line": "mov     ecx, offset g_pathingMutex; lpCriticalSection",
+    "line": "mov     ecx, 0B3BE80h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x67F45B",
-    "line": "call    sub_67F100",
+    "line": "call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x67F470",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x67F533",
-    "line": "mov     ecx, offset g_pathingMutex; lpCriticalSection",
+    "line": "mov     ecx, 0B3BE80h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x67F551",
-    "line": "call    sub_67F100",
+    "line": "call    BSSimpleList_PopHeadWithoutPayloadFree; Verified generic BSSimpleList head removal helper: advances the inline first-node header to its successor and frees the detached list node; if there is no successor, clears the head data pointer.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x67F562",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1153,7 +1153,7 @@
   },
   {
     "ea": "0x67F59B",
-    "line": "mov     ecx, offset dword_B3BE18",
+    "line": "mov     ecx, 0B3BE18h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -1165,13 +1165,13 @@
   },
   {
     "ea": "0x67F5A5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67F5A7",
-    "line": "call    sub_680340",
+    "line": "call    AStarWorldNode_ReleaseSearchStateSlot; Verified: clears allocation flag 0x04 for this AStarWorldNode's table slot and rewinds LowPathSearchGlobals.nextFreeStateIndex when the released slot is lower.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x67F5AD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x67F5B8",
-    "line": "mov     ecx, offset g_pathingMutex; lpCriticalSection",
+    "line": "mov     ecx, 0B3BE80h; lpCriticalSection",
     "mnemonic": "mov",
     "size": 5
   },

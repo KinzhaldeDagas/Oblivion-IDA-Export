@@ -3,7 +3,7 @@
 0x75F6D5: push    edi
 0x75F6D6: push    esi
 0x75F6D7: mov     edi, ecx
-0x75F6D9: call    sub_75E480
+0x75F6D9: call    j_NiSingleInterpController_LinkObject
 0x75F6DE: cmp     dword ptr [esi+0D8h], 0A010068h
 0x75F6E8: jnb     short loc_75F722
 0x75F6EA: mov     ecx, esi

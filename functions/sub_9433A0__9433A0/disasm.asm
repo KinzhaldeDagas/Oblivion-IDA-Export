@@ -10,7 +10,6 @@
 0x9433B3: push    esi
 0x9433B4: mov     esi, [esp+0Ch+arg_0]
 0x9433B8: jmp     short loc_9433C0
-0x9433BA: align 10h
 0x9433C0: mov     [esi], eax
 0x9433C2: mov     dword ptr [esi+4], 0
 0x9433C9: mov     ecx, [edi+8]

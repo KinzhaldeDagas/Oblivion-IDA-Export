@@ -27,7 +27,7 @@
 0x753C26: test    eax, eax
 0x753C28: jz      short loc_753C3E
 0x753C2A: lea     ebx, [ebx+0]
-0x753C30: cmp     eax, offset dword_B40BCC
+0x753C30: cmp     eax, offset stru_B40BCC
 0x753C35: jz      short loc_753C47
 0x753C37: mov     eax, [eax+4]
 0x753C3A: test    eax, eax
@@ -59,9 +59,9 @@
 0x753C7D: jp      short loc_753C82
 0x753C7F: fst     dword ptr [edi+20h]
 0x753C82: push    ecx
-0x753C83: mov     ecx, edi
-0x753C85: fstp    [esp+18h+var_18]; float
-0x753C88: call    sub_6C36B0
+0x753C83: mov     ecx, edi; this
+0x753C85: fstp    [esp+18h+applicationTime]; applicationTime
+0x753C88: call    NiTimeController_IsUpdateUnchanged; Return true only when an active NiTimeController can reuse its previous interpolation result. Active bit is NiTimeController.flags +0x08 bit 3. On an application-time change, computeScaledTimeOnUpdate +0x2C normally calls virtual ComputeScaledTime and refreshes cachedScaledTime +0x28; forceUpdate +0x38 forces one changed result and is cleared. If +0x2C is zero, report changed without recomputing +0x28.
 0x753C8D: fldz
 0x753C8F: cmp     dword ptr [edi+30h], 0
 0x753C93: fst     dword ptr [edi+18h]
@@ -74,7 +74,7 @@
 0x753CA6: mov     edx, [ecx]
 0x753CA8: mov     eax, [edx+98h]
 0x753CAE: push    ecx
-0x753CAF: fstp    [esp+18h+var_18]
+0x753CAF: fstp    [esp+18h+applicationTime]
 0x753CB2: call    eax
 0x753CB4: pop     edi
 0x753CB5: pop     esi

@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "WPRINTF_DATA",
+  "definition": "union WPRINTF_DATA\n{\nWCHAR_0 wchar_view;\nCHAR char_view;\nLPCSTR lpcstr_view __offset(OFF64|AUTO);\nLPCWSTR lpcwstr_view __offset(OFF64|AUTO);\nLONGLONG int_view;\n}\n",
   "id": 18374686479671833476,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "wchar_view",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 2
+      "size": 2,
+      "type": "WCHAR_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "char_view",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "CHAR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpcstr_view",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPCSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lpcwstr_view",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "int_view",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "LONGLONG"
     }
   ],
   "name": "WPRINTF_DATA",
+  "ordinal": 3740,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 8
 }

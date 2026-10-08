@@ -2,7 +2,7 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_Next@<eax>(
         int a1@<edi>,
         double a2@<st2>,
         double a3@<st1>,
-        char *a4@<ebx>,
+        BSExtraDataVtbl *a4@<ebx>,
         int a5@<ebp>,
         double a6@<st0>,
         int a7,
@@ -13,7 +13,7 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_Next@<eax>(
         int a12,
         int a13,
         int a14,
-        int a15,
+        _DWORD *a15,
         int a16,
         int a17,
         int a18,
@@ -64,11 +64,12 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_Next@<eax>(
         int a63)
 {
   int a64; // [esp+E8h] [ebp+E8h]
-  int v65; // [esp+28h] [ebp+28h]
+  int a65; // [esp+ECh] [ebp+ECh]
+  int v66; // [esp+28h] [ebp+28h]
 
-  v65 = a16 - 1;
-  if ( v65 )
-    return TESContainer_CopyContentsToRef_::AddExtraScriptLoop(
+  v66 = a16 - 1; /*0x46a1dd*/
+  if ( v66 ) /*0x46a1e2*/
+    return TESContainer_CopyContentsToRef_::AddExtraScriptLoop( /*0x46a1e2*/
              a4,
              a5,
              a2,
@@ -83,8 +84,8 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_Next@<eax>(
              a12,
              a13,
              a14,
-             a15,
-             v65,
+             (int)a15,
+             v66,
              a17,
              a18,
              a19,
@@ -133,7 +134,7 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_Next@<eax>(
              a62,
              a63);
   else
-    return TESContainer_CopyContentsToRef_::ContentLoop_Next(
+    return TESContainer_CopyContentsToRef_::ContentLoop_Next( /*0x46a1ec*/
              a13,
              a1,
              a2,
@@ -195,5 +196,6 @@ int __userpurge TESContainer_CopyContentsToRef_::AddExtraScriptLoop_Next@<eax>(
              a61,
              a62,
              a63,
-             a64);
+             a64,
+             a65);
 }

@@ -1,29 +1,30 @@
-signed int __thiscall TESDataHandler_Clear(_BYTE *this)
+// Verified reader of activeFileState.retainActiveFile (+0xCD1): when zero, cleanup destroys and clears the stored active TESFile; when set, that file is retained. The only direct writer located so far is constructor initialization to zero; runtime setter remains Unknown.
+int __thiscall TESDataHandler_Clear(TESDataHandler *self)
 {
   unsigned int i; // eax
   TES *v3; // ecx
   int v4; // edi
-  _DWORD *v5; // ebp
-  int j; // edi
-  _DWORD *v7; // eax
-  int k; // edi
-  _DWORD *v9; // eax
-  int m; // edi
-  _DWORD *v11; // eax
-  int n; // edi
-  _DWORD *v13; // eax
-  int ii; // edi
-  _DWORD *v15; // eax
-  int jj; // edi
-  _DWORD *v17; // eax
-  int kk; // edi
-  _DWORD *v19; // eax
-  int mm; // edi
-  _DWORD *v21; // eax
-  int nn; // edi
-  _DWORD *v23; // eax
-  int i1; // edi
-  _DWORD *v25; // eax
+  UInt8 *v5; // ebp
+  TESForm *j; // edi
+  OblivionTESFormListNode *next; // eax
+  TESForm *k; // edi
+  OblivionTESFormListNode *v9; // eax
+  TESForm *m; // edi
+  OblivionTESFormListNode *v11; // eax
+  TESForm *n; // edi
+  OblivionTESFormListNode *v13; // eax
+  TESForm *ii; // edi
+  OblivionTESFormListNode *v15; // eax
+  TESForm *jj; // edi
+  OblivionTESFormListNode *v17; // eax
+  TESForm *kk; // edi
+  OblivionTESFormListNode *v19; // eax
+  TESForm *mm; // edi
+  OblivionTESFormListNode *v21; // eax
+  TESGlobal *nn; // edi
+  OblivionTESGlobalListNode *v23; // eax
+  TESForm *i1; // edi
+  OblivionTESFormListNode *v25; // eax
   int i2; // edi
   _DWORD *v27; // eax
   int v28; // ebp
@@ -33,604 +34,607 @@ signed int __thiscall TESDataHandler_Clear(_BYTE *this)
   int v32; // eax
   bool v33; // zf
   _DWORD *v34; // eax
-  int i4; // edi
-  _DWORD *v36; // eax
-  int i5; // edi
-  _DWORD *v38; // eax
-  int i6; // edi
-  _DWORD *v40; // eax
-  int i7; // edi
-  _DWORD *v42; // eax
-  int i8; // edi
-  _DWORD *v44; // eax
-  int i9; // edi
-  _DWORD *v46; // eax
-  int i10; // edi
-  _DWORD *v48; // eax
-  int i11; // edi
-  _DWORD *v50; // eax
-  int i12; // edi
-  _DWORD *v52; // eax
-  int i13; // edi
-  _DWORD *v54; // eax
-  int i14; // edi
-  _DWORD *v56; // eax
-  int i15; // edi
-  _DWORD *v58; // eax
+  TESForm *i4; // edi
+  OblivionTESFormListNode *v36; // eax
+  TESForm *i5; // edi
+  OblivionTESFormListNode *v38; // eax
+  TESForm *i6; // edi
+  OblivionTESFormListNode *v40; // eax
+  TESForm *i7; // edi
+  OblivionTESFormListNode *v42; // eax
+  TESForm *i8; // edi
+  OblivionTESFormListNode *v44; // eax
+  TESForm *i9; // edi
+  OblivionTESFormListNode *v46; // eax
+  TESForm *i10; // edi
+  OblivionTESFormListNode *v48; // eax
+  TESForm *i11; // edi
+  OblivionTESFormListNode *v50; // eax
+  TESForm *i12; // edi
+  OblivionTESFormListNode *v52; // eax
+  TESForm *i13; // edi
+  OblivionTESFormListNode *v54; // eax
+  TESForm *i14; // edi
+  OblivionTESFormListNode *v56; // eax
+  TESForm *i15; // edi
+  OblivionTESFormListNode *v58; // eax
   OSGlobals *v59; // eax
-  unsigned int v60; // ecx
+  unsigned int bucketCount; // ecx
   int v61; // eax
-  int v62; // edx
-  _DWORD *v63; // eax
-  _DWORD *v64; // ebx
-  int v65; // eax
-  int v66; // edi
+  MEF_U32PointerMapEntry32 **buckets; // edx
+  MEF_U32PointerMapEntry32 *v63; // eax
+  MEF_U32PointerMapEntry32 *v64; // ebx
+  unsigned int key; // eax
+  unsigned __int8 *value; // edi
   unsigned int v67; // eax
   char *name; // ebp
   const char *v69; // ebx
   const char *v70; // eax
   int v71; // ebx
   unsigned int v72; // eax
-  _DWORD *v73; // ecx
+  UInt8 *v73; // ecx
   _DWORD *v74; // ecx
   unsigned int v75; // edi
   unsigned int v77; // [esp+62h] [ebp-24h]
   char v78; // [esp+78h] [ebp-Eh]
   char v79; // [esp+79h] [ebp-Dh]
-  _DWORD *v80; // [esp+7Ah] [ebp-Ch]
+  MEF_U32PointerMapEntry32 *v80; // [esp+7Ah] [ebp-Ch]
   int v81; // [esp+7Eh] [ebp-8h]
   int a2; // [esp+82h] [ebp-4h]
 
-  *(this + 0xCD4) = 1;
-  sub_447D00(this);
-  for ( i = 0; i < dword_B06158; ++i )
-    *(_DWORD *)(dword_B06150 + 4 * i) = 0;
-  v3 = TES;
-  dword_B06158 = 0;
-  dword_B0615C = 0;
-  sub_442630(v3, 0, 0);
-  TES->currentWorldSpace = 0;
-  v4 = 0;
-  v5 = this + 0x104;
-  do
+  self->activeFileState.unknownAfterActiveFileState[2] = 1; /*0x4492e9*/
+  sub_447D00(self); /*0x4492f0*/
+  for ( i = 0; i < TESForm_ActiveFileFormList.usedEnd; ++i ) /*0x4492f9*/
+    TESForm_ActiveFileFormList.data[i] = 0; /*0x449307*/
+  v3 = MEMORY[0xB333A0]; /*0x449315*/
+  TESForm_ActiveFileFormList.usedEnd = 0; /*0x44931d*/
+  TESForm_ActiveFileFormList.occupiedCount = 0; /*0x449323*/
+  sub_442630(v3, 0, 0); /*0x449329*/
+  MEMORY[0xB333A0]->currentWorldSpace = 0; /*0x449334*/
+  v4 = 0; /*0x449337*/
+  v5 = &self->activeFileState.unknownBeforeActiveFileState[0x44]; /*0x449339*/
+  do /*0x449357*/
   {
-    TESSkill_ClearTESSkill((int)(v5 + 0xFFFFFFF5));
-    *v5 = v4 + 0xC;
-    ++v4;
-    v5 += 0x18;
+    TESSkill_ClearDataAndComponents((TESSkill *)(v5 + 0xFFFFFFD4)); /*0x449343*/
+    *(_DWORD *)v5 = v4 + 0xC; /*0x44934b*/
+    ++v4; /*0x44934e*/
+    v5 += 0x60; /*0x449351*/
   }
-  while ( v4 < 0x15 );
-  for ( j = *((_DWORD *)this + 0x19); j; j = *((_DWORD *)this + 0x19) )
+  while ( v4 < 0x15 ); /*0x449357*/
+  for ( j = self->scriptList.item; j; j = self->scriptList.item ) /*0x44935e*/
   {
-    v7 = *((_DWORD **)this + 0x1A);
-    if ( v7 )
+    next = self->scriptList.next; /*0x449360*/
+    if ( next ) /*0x449365*/
     {
-      *((_DWORD *)this + 0x1A) = v7[1];
-      *((_DWORD *)this + 0x19) = *v7;
-      FormHeapFree((unsigned int)v7);
+      self->scriptList.next = next->next; /*0x44936a*/
+      self->scriptList.item = next->item; /*0x449370*/
+      FormHeapFree((unsigned int)next); /*0x449373*/
     }
     else
     {
-      *((_DWORD *)this + 0x19) = 0;
+      self->scriptList.item = 0; /*0x44937d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)j + 0x10))(j, 1);
+    j->vtbl->Destroy(j, 1); /*0x44938d*/
   }
-  for ( k = *((_DWORD *)this + 0xD); k; k = *((_DWORD *)this + 0xD) )
+  for ( k = self->hairList.item; k; k = self->hairList.item ) /*0x44939b*/
   {
-    v9 = *((_DWORD **)this + 0xE);
-    if ( v9 )
+    v9 = self->hairList.next; /*0x4493a0*/
+    if ( v9 ) /*0x4493a5*/
     {
-      *((_DWORD *)this + 0xE) = v9[1];
-      *((_DWORD *)this + 0xD) = *v9;
-      FormHeapFree((unsigned int)v9);
+      self->hairList.next = v9->next; /*0x4493aa*/
+      self->hairList.item = v9->item; /*0x4493b0*/
+      FormHeapFree((unsigned int)v9); /*0x4493b3*/
     }
     else
     {
-      *((_DWORD *)this + 0xD) = 0;
+      self->hairList.item = 0; /*0x4493bd*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)k + 0x10))(k, 1);
+    k->vtbl->Destroy(k, 1); /*0x4493cd*/
   }
-  for ( m = *((_DWORD *)this + 0xF); m; m = *((_DWORD *)this + 0xF) )
+  for ( m = self->eyeList.item; m; m = self->eyeList.item ) /*0x4493db*/
   {
-    v11 = *((_DWORD **)this + 0x10);
-    if ( v11 )
+    v11 = self->eyeList.next; /*0x4493e0*/
+    if ( v11 ) /*0x4493e5*/
     {
-      *((_DWORD *)this + 0x10) = v11[1];
-      *((_DWORD *)this + 0xF) = *v11;
-      FormHeapFree((unsigned int)v11);
+      self->eyeList.next = v11->next; /*0x4493ea*/
+      self->eyeList.item = v11->item; /*0x4493f0*/
+      FormHeapFree((unsigned int)v11); /*0x4493f3*/
     }
     else
     {
-      *((_DWORD *)this + 0xF) = 0;
+      self->eyeList.item = 0; /*0x4493fd*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)m + 0x10))(m, 1);
+    m->vtbl->Destroy(m, 1); /*0x44940d*/
   }
-  for ( n = *((_DWORD *)this + 0x23); n; n = *((_DWORD *)this + 0x23) )
+  for ( n = self->birthsignList.item; n; n = self->birthsignList.item ) /*0x44941e*/
   {
-    v13 = *((_DWORD **)this + 0x24);
-    if ( v13 )
+    v13 = self->birthsignList.next; /*0x449420*/
+    if ( v13 ) /*0x449428*/
     {
-      *((_DWORD *)this + 0x24) = v13[1];
-      *((_DWORD *)this + 0x23) = *v13;
-      FormHeapFree((unsigned int)v13);
+      self->birthsignList.next = v13->next; /*0x44942d*/
+      self->birthsignList.item = v13->item; /*0x449436*/
+      FormHeapFree((unsigned int)v13); /*0x44943c*/
     }
     else
     {
-      *((_DWORD *)this + 0x23) = 0;
+      self->birthsignList.item = 0; /*0x449446*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)n + 0x10))(n, 1);
+    n->vtbl->Destroy(n, 1); /*0x449459*/
   }
-  for ( ii = *((_DWORD *)this + 5); ii; ii = *((_DWORD *)this + 5) )
+  for ( ii = self->climateList.item; ii; ii = self->climateList.item ) /*0x44946a*/
   {
-    v15 = *((_DWORD **)this + 6);
-    if ( v15 )
+    v15 = self->climateList.next; /*0x449470*/
+    if ( v15 ) /*0x449475*/
     {
-      *((_DWORD *)this + 6) = v15[1];
-      *((_DWORD *)this + 5) = *v15;
-      FormHeapFree((unsigned int)v15);
+      self->climateList.next = v15->next; /*0x44947a*/
+      self->climateList.item = v15->item; /*0x449480*/
+      FormHeapFree((unsigned int)v15); /*0x449483*/
     }
     else
     {
-      *((_DWORD *)this + 5) = 0;
+      self->climateList.item = 0; /*0x44948d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)ii + 0x10))(ii, 1);
+    ii->vtbl->Destroy(ii, 1); /*0x44949d*/
   }
-  for ( jj = *((_DWORD *)this + 7); jj; jj = *((_DWORD *)this + 7) )
+  for ( jj = self->weatherList.item; jj; jj = self->weatherList.item ) /*0x4494ab*/
   {
-    v17 = *((_DWORD **)this + 8);
-    if ( v17 )
+    v17 = self->weatherList.next; /*0x4494b0*/
+    if ( v17 ) /*0x4494b5*/
     {
-      *((_DWORD *)this + 8) = v17[1];
-      *((_DWORD *)this + 7) = *v17;
-      FormHeapFree((unsigned int)v17);
+      self->weatherList.next = v17->next; /*0x4494ba*/
+      self->weatherList.item = v17->item; /*0x4494c0*/
+      FormHeapFree((unsigned int)v17); /*0x4494c3*/
     }
     else
     {
-      *((_DWORD *)this + 7) = 0;
+      self->weatherList.item = 0; /*0x4494cd*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)jj + 0x10))(jj, 1);
+    jj->vtbl->Destroy(jj, 1); /*0x4494dd*/
   }
-  for ( kk = *((_DWORD *)this + 0x15); kk; kk = *((_DWORD *)this + 0x15) )
+  for ( kk = self->classList.item; kk; kk = self->classList.item ) /*0x4494eb*/
   {
-    v19 = *((_DWORD **)this + 0x16);
-    if ( v19 )
+    v19 = self->classList.next; /*0x4494f0*/
+    if ( v19 ) /*0x4494f5*/
     {
-      *((_DWORD *)this + 0x16) = v19[1];
-      *((_DWORD *)this + 0x15) = *v19;
-      FormHeapFree((unsigned int)v19);
+      self->classList.next = v19->next; /*0x4494fa*/
+      self->classList.item = v19->item; /*0x449500*/
+      FormHeapFree((unsigned int)v19); /*0x449503*/
     }
     else
     {
-      *((_DWORD *)this + 0x15) = 0;
+      self->classList.item = 0; /*0x44950d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)kk + 0x10))(kk, 1);
+    kk->vtbl->Destroy(kk, 1); /*0x44951d*/
   }
-  for ( mm = *((_DWORD *)this + 0x17); mm; mm = *((_DWORD *)this + 0x17) )
+  for ( mm = self->factionList.item; mm; mm = self->factionList.item ) /*0x44952b*/
   {
-    v21 = *((_DWORD **)this + 0x18);
-    if ( v21 )
+    v21 = self->factionList.next; /*0x449530*/
+    if ( v21 ) /*0x449535*/
     {
-      *((_DWORD *)this + 0x18) = v21[1];
-      *((_DWORD *)this + 0x17) = *v21;
-      FormHeapFree((unsigned int)v21);
+      self->factionList.next = v21->next; /*0x44953a*/
+      self->factionList.item = v21->item; /*0x449540*/
+      FormHeapFree((unsigned int)v21); /*0x449543*/
     }
     else
     {
-      *((_DWORD *)this + 0x17) = 0;
+      self->factionList.item = 0; /*0x44954d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)mm + 0x10))(mm, 1);
+    mm->vtbl->Destroy(mm, 1); /*0x44955d*/
   }
-  for ( nn = *((_DWORD *)this + 0x1D); nn; nn = *((_DWORD *)this + 0x1D) )
+  for ( nn = self->listGlobals.item; nn; nn = self->listGlobals.item ) /*0x44956b*/
   {
-    v23 = *((_DWORD **)this + 0x1E);
-    if ( v23 )
+    v23 = self->listGlobals.next; /*0x449570*/
+    if ( v23 ) /*0x449575*/
     {
-      *((_DWORD *)this + 0x1E) = v23[1];
-      *((_DWORD *)this + 0x1D) = *v23;
-      FormHeapFree((unsigned int)v23);
+      self->listGlobals.next = v23->next; /*0x44957a*/
+      self->listGlobals.item = v23->item; /*0x449580*/
+      FormHeapFree((unsigned int)v23); /*0x449583*/
     }
     else
     {
-      *((_DWORD *)this + 0x1D) = 0;
+      self->listGlobals.item = 0; /*0x44958d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)nn + 0x10))(nn, 1);
+    nn->vtbl->Destroy((TESForm *)nn, 1); /*0x44959d*/
   }
-  for ( i1 = *((_DWORD *)this + 0x21); i1; i1 = *((_DWORD *)this + 0x21) )
+  for ( i1 = self->questList.item; i1; i1 = self->questList.item ) /*0x4495ae*/
   {
-    v25 = *((_DWORD **)this + 0x22);
-    if ( v25 )
+    v25 = self->questList.next; /*0x4495b0*/
+    if ( v25 ) /*0x4495b8*/
     {
-      *((_DWORD *)this + 0x22) = v25[1];
-      *((_DWORD *)this + 0x21) = *v25;
-      FormHeapFree((unsigned int)v25);
+      self->questList.next = v25->next; /*0x4495bd*/
+      self->questList.item = v25->item; /*0x4495c6*/
+      FormHeapFree((unsigned int)v25); /*0x4495cc*/
     }
     else
     {
-      *((_DWORD *)this + 0x21) = 0;
+      self->questList.item = 0; /*0x4495d6*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i1 + 0x10))(i1, 1);
+    i1->vtbl->Destroy(i1, 1); /*0x4495e9*/
   }
-  for ( i2 = *((_DWORD *)this + 0x1F); i2; i2 = *((_DWORD *)this + 0x1F) )
+  for ( i2 = *(_DWORD *)self->unknown7C; i2; i2 = *(_DWORD *)self->unknown7C ) /*0x4495fa*/
   {
-    v27 = *((_DWORD **)this + 0x20);
-    if ( v27 )
+    v27 = *(_DWORD **)&self->unknown7C[4]; /*0x449600*/
+    if ( v27 ) /*0x449608*/
     {
-      *((_DWORD *)this + 0x20) = v27[1];
-      *((_DWORD *)this + 0x1F) = *v27;
-      FormHeapFree((unsigned int)v27);
+      *(_DWORD *)&self->unknown7C[4] = v27[1]; /*0x44960d*/
+      *(_DWORD *)self->unknown7C = *v27; /*0x449616*/
+      FormHeapFree((unsigned int)v27); /*0x449619*/
     }
     else
     {
-      *((_DWORD *)this + 0x1F) = 0;
+      *(_DWORD *)self->unknown7C = 0; /*0x449623*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i2 + 0x10))(i2, 1);
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)i2 + 0x10))(i2, 1); /*0x449633*/
   }
-  sub_52ED10();
-  TES->currentExteriorCell = 0;
-  v28 = *((_DWORD *)this + 0x33);
-  for ( i3 = 0; i3 < v28; ++i3 )
+  ClearStockDialogueTopicPointers();            // TESDataHandler clear invalidates every stock registry runtime TESTopic pointer without changing the fixed FormID/name table. /*0x44963c*/
+  MEMORY[0xB333A0]->currentExteriorCell = 0; /*0x449646*/
+  v28 = *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0xC]; /*0x449649*/
+  for ( i3 = 0; i3 < v28; ++i3 ) /*0x449653*/
   {
-    v30 = *(_DWORD *)(*((_DWORD *)this + 0x31) + 4 * i3);
-    if ( v30 )
-      (*(void (__thiscall **)(int, int))(*(_DWORD *)v30 + 0x10))(v30, 1);
+    v30 = *(_DWORD *)(*(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[4] + 4 * i3); /*0x44965b*/
+    if ( v30 ) /*0x449660*/
+      (*(void (__thiscall **)(int, int))(*(_DWORD *)v30 + 0x10))(v30, 1); /*0x449669*/
   }
-  if ( *((_DWORD *)this + 0x32) )
+  if ( *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[8] ) /*0x449675*/
   {
-    if ( *((_DWORD *)this + 0x33) )
+    if ( *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0xC] ) /*0x44967d*/
     {
-      v31 = 0;
-      do
+      v31 = 0; /*0x449685*/
+      do /*0x4496af*/
       {
-        v32 = *((_DWORD *)this + 0x31);
-        v33 = *(_DWORD *)(v32 + 4 * v31) == 0;
-        v34 = (_DWORD *)(v32 + 4 * v31);
-        if ( !v33 )
+        v32 = *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[4]; /*0x449690*/
+        v33 = *(_DWORD *)(v32 + 4 * v31) == 0; /*0x449696*/
+        v34 = (_DWORD *)(v32 + 4 * v31); /*0x449699*/
+        if ( !v33 ) /*0x44969c*/
         {
-          *v34 = 0;
-          --*((_DWORD *)this + 0x34);
+          *v34 = 0; /*0x44969e*/
+          --*(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x10]; /*0x4496a0*/
         }
-        ++v31;
+        ++v31; /*0x4496a6*/
       }
-      while ( v31 < *((_DWORD *)this + 0x33) );
-      *((_DWORD *)this + 0x33) = 0;
+      while ( v31 < *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0xC] ); /*0x4496af*/
+      *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0xC] = 0; /*0x4496b1*/
     }
-    v77 = *((_DWORD *)this + 0x31);
-    *((_DWORD *)this + 0x32) = 0;
-    *((_DWORD *)this + 0x31) = 0;
-    FormHeapFree(v77);
+    v77 = *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[4]; /*0x4496bd*/
+    *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[8] = 0; /*0x4496be*/
+    *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[4] = 0; /*0x4496c4*/
+    FormHeapFree(v77); /*0x4496ca*/
   }
-  for ( i4 = *((_DWORD *)this + 3); i4; i4 = *((_DWORD *)this + 3) )
+  for ( i4 = self->worldspaceList.item; i4; i4 = self->worldspaceList.item ) /*0x4496d7*/
   {
-    v36 = *((_DWORD **)this + 4);
-    if ( v36 )
+    v36 = self->worldspaceList.next; /*0x4496e0*/
+    if ( v36 ) /*0x4496e5*/
     {
-      *((_DWORD *)this + 4) = v36[1];
-      *((_DWORD *)this + 3) = *v36;
-      FormHeapFree((unsigned int)v36);
+      self->worldspaceList.next = v36->next; /*0x4496ea*/
+      self->worldspaceList.item = v36->item; /*0x4496f0*/
+      FormHeapFree((unsigned int)v36); /*0x4496f3*/
     }
     else
     {
-      *((_DWORD *)this + 3) = 0;
+      self->worldspaceList.item = 0; /*0x4496fd*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i4 + 0x10))(i4, 1);
+    i4->vtbl->Destroy(i4, 1); /*0x44970d*/
   }
-  for ( i5 = *((_DWORD *)this + 0x1B); i5; i5 = *((_DWORD *)this + 0x1B) )
+  for ( i5 = self->soundList.item; i5; i5 = self->soundList.item ) /*0x44971b*/
   {
-    v38 = *((_DWORD **)this + 0x1C);
-    if ( v38 )
+    v38 = self->soundList.next; /*0x449720*/
+    if ( v38 ) /*0x449725*/
     {
-      *((_DWORD *)this + 0x1C) = v38[1];
-      *((_DWORD *)this + 0x1B) = *v38;
-      FormHeapFree((unsigned int)v38);
+      self->soundList.next = v38->next; /*0x44972a*/
+      self->soundList.item = v38->item; /*0x449730*/
+      FormHeapFree((unsigned int)v38); /*0x449733*/
     }
     else
     {
-      *((_DWORD *)this + 0x1B) = 0;
+      self->soundList.item = 0; /*0x44973d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i5 + 0x10))(i5, 1);
+    i5->vtbl->Destroy(i5, 1); /*0x44974d*/
   }
-  for ( i6 = *((_DWORD *)this + 0x13); i6; i6 = *((_DWORD *)this + 0x13) )
+  for ( i6 = self->landTextureList.item; i6; i6 = self->landTextureList.item ) /*0x44975b*/
   {
-    v40 = *((_DWORD **)this + 0x14);
-    if ( v40 )
+    v40 = self->landTextureList.next; /*0x449760*/
+    if ( v40 ) /*0x449765*/
     {
-      *((_DWORD *)this + 0x14) = v40[1];
-      *((_DWORD *)this + 0x13) = *v40;
-      FormHeapFree((unsigned int)v40);
+      self->landTextureList.next = v40->next; /*0x44976a*/
+      self->landTextureList.item = v40->item; /*0x449770*/
+      FormHeapFree((unsigned int)v40); /*0x449773*/
     }
     else
     {
-      *((_DWORD *)this + 0x13) = 0;
+      self->landTextureList.item = 0; /*0x44977d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i6 + 0x10))(i6, 1);
+    i6->vtbl->Destroy(i6, 1); /*0x44978d*/
   }
-  if ( TESDataHandler_g_PlayerRef )
-    TESDataHandler_g_PlayerRef->vtbl->super.super.super.super.Destroy((TESForm *)TESDataHandler_g_PlayerRef, 1);
-  TESDataHandler_g_PlayerRef = 0;
-  for ( i7 = *((_DWORD *)this + 0x11); i7; i7 = *((_DWORD *)this + 0x11) )
+  if ( reference ) /*0x449796*/
+    reference->vtbl->super.super.super.super.Destroy((TESForm *)reference, 1); /*0x4497a7*/
+  reference = 0; /*0x4497a9*/
+  for ( i7 = self->raceList.item; i7; i7 = self->raceList.item ) /*0x4497b4*/
   {
-    v42 = *((_DWORD **)this + 0x12);
-    if ( v42 )
+    v42 = self->raceList.next; /*0x4497b6*/
+    if ( v42 ) /*0x4497bb*/
     {
-      *((_DWORD *)this + 0x12) = v42[1];
-      *((_DWORD *)this + 0x11) = *v42;
-      FormHeapFree((unsigned int)v42);
+      self->raceList.next = v42->next; /*0x4497c0*/
+      self->raceList.item = v42->item; /*0x4497c6*/
+      FormHeapFree((unsigned int)v42); /*0x4497c9*/
     }
     else
     {
-      *((_DWORD *)this + 0x11) = 0;
+      self->raceList.item = 0; /*0x4497d3*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i7 + 0x10))(i7, 1);
+    i7->vtbl->Destroy(i7, 1); /*0x4497e3*/
   }
-  TESDataHandler_g_VampireRace = 0;
-  TESObjectListHead_Clear(*(_DWORD **)this);
-  for ( i8 = *((_DWORD *)this + 0xB); i8; i8 = *((_DWORD *)this + 0xB) )
+  MEMORY[0xB36308] = 0; /*0x4497ec*/
+  TESObjectListHead_Clear(self->objectList); /*0x4497f4*/
+  for ( i8 = self->spellList.item; i8; i8 = self->spellList.item ) /*0x4497fe*/
   {
-    v44 = *((_DWORD **)this + 0xC);
-    if ( v44 )
+    v44 = self->spellList.next; /*0x449800*/
+    if ( v44 ) /*0x449805*/
     {
-      *((_DWORD *)this + 0xC) = v44[1];
-      *((_DWORD *)this + 0xB) = *v44;
-      FormHeapFree((unsigned int)v44);
+      self->spellList.next = v44->next; /*0x44980a*/
+      self->spellList.item = v44->item; /*0x449810*/
+      FormHeapFree((unsigned int)v44); /*0x449813*/
     }
     else
     {
-      *((_DWORD *)this + 0xB) = 0;
+      self->spellList.item = 0; /*0x44981d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i8 + 0x10))(i8, 1);
+    i8->vtbl->Destroy(i8, 1); /*0x44982d*/
   }
-  for ( i9 = *((_DWORD *)this + 9); i9; i9 = *((_DWORD *)this + 9) )
+  for ( i9 = self->enchantmentList.item; i9; i9 = self->enchantmentList.item ) /*0x44983b*/
   {
-    v46 = *((_DWORD **)this + 0xA);
-    if ( v46 )
+    v46 = self->enchantmentList.next; /*0x449840*/
+    if ( v46 ) /*0x449845*/
     {
-      *((_DWORD *)this + 0xA) = v46[1];
-      *((_DWORD *)this + 9) = *v46;
-      FormHeapFree((unsigned int)v46);
+      self->enchantmentList.next = v46->next; /*0x44984a*/
+      self->enchantmentList.item = v46->item; /*0x449850*/
+      FormHeapFree((unsigned int)v46); /*0x449853*/
     }
     else
     {
-      *((_DWORD *)this + 9) = 0;
+      self->enchantmentList.item = 0; /*0x44985d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i9 + 0x10))(i9, 1);
+    i9->vtbl->Destroy(i9, 1); /*0x44986d*/
   }
-  for ( i10 = *((_DWORD *)this + 1); i10; i10 = *((_DWORD *)this + 1) )
+  for ( i10 = self->packageList.item; i10; i10 = self->packageList.item ) /*0x44987b*/
   {
-    v48 = *((_DWORD **)this + 2);
-    if ( v48 )
+    v48 = self->packageList.next; /*0x449880*/
+    if ( v48 ) /*0x449885*/
     {
-      *((_DWORD *)this + 2) = v48[1];
-      *((_DWORD *)this + 1) = *v48;
-      FormHeapFree((unsigned int)v48);
+      self->packageList.next = v48->next; /*0x44988a*/
+      self->packageList.item = v48->item; /*0x449890*/
+      FormHeapFree((unsigned int)v48); /*0x449893*/
     }
     else
     {
-      *((_DWORD *)this + 1) = 0;
+      self->packageList.item = 0; /*0x44989d*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i10 + 0x10))(i10, 1);
+    i10->vtbl->Destroy(i10, 1); /*0x4498ad*/
   }
-  for ( i11 = *((_DWORD *)this + 0x25); i11; i11 = *((_DWORD *)this + 0x25) )
+  for ( i11 = self->combatStyleList.item; i11; i11 = self->combatStyleList.item ) /*0x4498be*/
   {
-    v50 = *((_DWORD **)this + 0x26);
-    if ( v50 )
+    v50 = self->combatStyleList.next; /*0x4498c0*/
+    if ( v50 ) /*0x4498c8*/
     {
-      *((_DWORD *)this + 0x26) = v50[1];
-      *((_DWORD *)this + 0x25) = *v50;
-      FormHeapFree((unsigned int)v50);
+      self->combatStyleList.next = v50->next; /*0x4498cd*/
+      self->combatStyleList.item = v50->item; /*0x4498d6*/
+      FormHeapFree((unsigned int)v50); /*0x4498dc*/
     }
     else
     {
-      *((_DWORD *)this + 0x25) = 0;
+      self->combatStyleList.item = 0; /*0x4498e6*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i11 + 0x10))(i11, 1);
+    i11->vtbl->Destroy(i11, 1); /*0x4498f9*/
   }
-  for ( i12 = *((_DWORD *)this + 0x27); i12; i12 = *((_DWORD *)this + 0x27) )
+  for ( i12 = self->loadScreenList.item; i12; i12 = self->loadScreenList.item ) /*0x44990d*/
   {
-    v52 = *((_DWORD **)this + 0x28);
-    if ( v52 )
+    v52 = self->loadScreenList.next; /*0x449910*/
+    if ( v52 ) /*0x449918*/
     {
-      *((_DWORD *)this + 0x28) = v52[1];
-      *((_DWORD *)this + 0x27) = *v52;
-      FormHeapFree((unsigned int)v52);
+      self->loadScreenList.next = v52->next; /*0x44991d*/
+      self->loadScreenList.item = v52->item; /*0x449926*/
+      FormHeapFree((unsigned int)v52); /*0x44992c*/
     }
     else
     {
-      *((_DWORD *)this + 0x27) = 0;
+      self->loadScreenList.item = 0; /*0x449936*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i12 + 0x10))(i12, 1);
+    i12->vtbl->Destroy(i12, 1); /*0x449949*/
   }
-  for ( i13 = *((_DWORD *)this + 0x29); i13; i13 = *((_DWORD *)this + 0x29) )
+  for ( i13 = self->waterList.item; i13; i13 = self->waterList.item ) /*0x44995d*/
   {
-    v54 = *((_DWORD **)this + 0x2A);
-    if ( v54 )
+    v54 = self->waterList.next; /*0x449960*/
+    if ( v54 ) /*0x449968*/
     {
-      *((_DWORD *)this + 0x2A) = v54[1];
-      *((_DWORD *)this + 0x29) = *v54;
-      FormHeapFree((unsigned int)v54);
+      self->waterList.next = v54->next; /*0x44996d*/
+      self->waterList.item = v54->item; /*0x449976*/
+      FormHeapFree((unsigned int)v54); /*0x44997c*/
     }
     else
     {
-      *((_DWORD *)this + 0x29) = 0;
+      self->waterList.item = 0; /*0x449986*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i13 + 0x10))(i13, 1);
+    i13->vtbl->Destroy(i13, 1); /*0x449999*/
   }
-  TESDataHandler_g_DefaultWater = 0;
-  for ( i14 = *((_DWORD *)this + 0x2D); i14; i14 = *((_DWORD *)this + 0x2D) )
+  MEMORY[0xB360AC] = 0; /*0x4499a5*/
+  for ( i14 = self->animationObjectList.item; i14; i14 = self->animationObjectList.item ) /*0x4499b3*/
   {
-    v56 = *((_DWORD **)this + 0x2E);
-    if ( v56 )
+    v56 = self->animationObjectList.next; /*0x4499b5*/
+    if ( v56 ) /*0x4499bd*/
     {
-      *((_DWORD *)this + 0x2E) = v56[1];
-      *((_DWORD *)this + 0x2D) = *v56;
-      FormHeapFree((unsigned int)v56);
+      self->animationObjectList.next = v56->next; /*0x4499c2*/
+      self->animationObjectList.item = v56->item; /*0x4499cb*/
+      FormHeapFree((unsigned int)v56); /*0x4499d1*/
     }
     else
     {
-      *((_DWORD *)this + 0x2D) = 0;
+      self->animationObjectList.item = 0; /*0x4499db*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i14 + 0x10))(i14, 1);
+    i14->vtbl->Destroy(i14, 1); /*0x4499ee*/
   }
-  for ( i15 = *((_DWORD *)this + 0x2B); i15; i15 = *((_DWORD *)this + 0x2B) )
+  for ( i15 = self->effectShaderList.item; i15; i15 = self->effectShaderList.item ) /*0x449a02*/
   {
-    v58 = *((_DWORD **)this + 0x2C);
-    if ( v58 )
+    v58 = self->effectShaderList.next; /*0x449a04*/
+    if ( v58 ) /*0x449a0c*/
     {
-      *((_DWORD *)this + 0x2C) = v58[1];
-      *((_DWORD *)this + 0x2B) = *v58;
-      FormHeapFree((unsigned int)v58);
+      self->effectShaderList.next = v58->next; /*0x449a11*/
+      self->effectShaderList.item = v58->item; /*0x449a1a*/
+      FormHeapFree((unsigned int)v58); /*0x449a20*/
     }
     else
     {
-      *((_DWORD *)this + 0x2B) = 0;
+      self->effectShaderList.item = 0; /*0x449a2a*/
     }
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)i15 + 0x10))(i15, 1);
+    i15->vtbl->Destroy(i15, 1); /*0x449a3d*/
   }
-  sub_4A6380(*((_DWORD **)this + 0x2F));
-  if ( ContainerExtraData_TempObjectREFR_ )
-    (*((void (__thiscall **)(TESChildCELL *, int))ContainerExtraData_TempObjectREFR_->vtbl + 4))(
-      ContainerExtraData_TempObjectREFR_,
+  TESRegionList_Clear(self->regionListOwner); /*0x449a4f*/
+  if ( *(_DWORD *)&MEMORY[0xB33E90][0x598] ) /*0x449a54*/
+    (*(void (__thiscall **)(_DWORD, int))(**(_DWORD **)&MEMORY[0xB33E90][0x598] + 0x10))( /*0x449a65*/
+      *(_DWORD *)&MEMORY[0xB33E90][0x598],
       1);
-  v59 = OSGlobals;
-  v33 = OSGlobals == 0;
-  ContainerExtraData_TempObjectREFR_ = 0;
-  if ( v33 || !v59->unk04 )
-    sub_5217E0((_DWORD *)g_idleAnimationMap);
+  v59 = MEMORY[0xB33398]; /*0x449a67*/
+  v33 = MEMORY[0xB33398] == 0; /*0x449a6c*/
+  *(_DWORD *)&MEMORY[0xB33E90][0x598] = 0; /*0x449a6e*/
+  if ( v33 || !v59->unk04 ) /*0x449a76*/
+    sub_5217E0((NiTMap_TESCELL *)dword_B361CC[0x3D]); /*0x449a8e*/
   else
-    sub_5210A0((_DWORD *)g_idleAnimationMap);
-  v60 = dword_B06140;
-  v79 = bDisableWarning_MESSAGES;
-  v61 = 0;
-  bDisableWarning_MESSAGES = 1;
-  v78 = 0;
-  if ( v60 )
+    sub_5210A0((NiTMap_TESCELL *)dword_B361CC[0x3D]); /*0x449a81*/
+  bucketCount = TESForm_FormIDMap.bucketCount; /*0x449a98*/
+  v79 = bDisableWarning_MESSAGES; /*0x449a9e*/
+  v61 = 0; /*0x449aa2*/
+  bDisableWarning_MESSAGES = 1; /*0x449aa6*/
+  v78 = 0; /*0x449aad*/
+  if ( bucketCount ) /*0x449ab1*/
   {
-    v62 = dword_B06144;
-    while ( !*(_DWORD *)(v62 + 4 * v61) )
+    buckets = TESForm_FormIDMap.buckets; /*0x449ab3*/
+    while ( !buckets[v61] ) /*0x449ac3*/
     {
-      if ( ++v61 >= v60 )
-        goto LABEL_144;
+      if ( ++v61 >= bucketCount ) /*0x449ace*/
+        goto LABEL_144; /*0x449ace*/
     }
-    v63 = *(_DWORD **)(v62 + 4 * v61);
+    v63 = buckets[v61]; /*0x449b68*/
   }
   else
   {
 LABEL_144:
-    v63 = 0;
+    v63 = 0; /*0x449ad0*/
   }
-  v64 = v63;
-  while ( v64 )
+  v64 = v63; /*0x449ad6*/
+  while ( v64 ) /*0x449ad8*/
   {
-    v65 = v64[1];
-    v66 = v64[2];
-    v64 = (_DWORD *)*v64;
-    a2 = v65;
-    if ( !v64 )
+    key = v64->key; /*0x449ae0*/
+    value = (unsigned __int8 *)v64->value; /*0x449ae3*/
+    v64 = v64->next; /*0x449ae6*/
+    a2 = key; /*0x449aea*/
+    if ( !v64 ) /*0x449aee*/
     {
-      v67 = (*(int (__thiscall **)(_DWORD *, int))(TESForm_FormIDMap + 4))(&TESForm_FormIDMap, v65) + 1;
-      if ( v67 < dword_B06140 )
+      v67 = (*((int (__thiscall **)(MEF_U32PointerMapLayout32 *, unsigned int))TESForm_FormIDMap.vtable + 1))( /*0x449b07*/
+              &TESForm_FormIDMap,
+              key)
+          + 1;
+      if ( v67 < TESForm_FormIDMap.bucketCount ) /*0x449b0c*/
       {
-        while ( !*(_DWORD *)(dword_B06144 + 4 * v67) )
+        while ( !TESForm_FormIDMap.buckets[v67] ) /*0x449b19*/
         {
-          if ( ++v67 >= dword_B06140 )
-            goto LABEL_150;
+          if ( ++v67 >= TESForm_FormIDMap.bucketCount ) /*0x449b20*/
+            goto LABEL_150; /*0x449b20*/
         }
-        v64 = *(_DWORD **)(dword_B06144 + 4 * v67);
-        v80 = v64;
-        goto LABEL_152;
+        v64 = TESForm_FormIDMap.buckets[v67]; /*0x449b70*/
+        v80 = v64; /*0x449b72*/
+        goto LABEL_152; /*0x449b76*/
       }
 LABEL_150:
-      v64 = 0;
+      v64 = 0; /*0x449b22*/
     }
-    v80 = v64;
+    v80 = v64; /*0x449b24*/
 LABEL_152:
-    if ( v66 )
+    if ( value ) /*0x449b2a*/
     {
-      if ( *(_BYTE *)(v66 + 4) == 3 )
+      if ( value[4] == 3 ) /*0x449b37*/
       {
-        if ( v66 != 0xFFFFFFF0 )
+        if ( value != (unsigned __int8 *)0xFFFFFFF0 ) /*0x449bd4*/
         {
-          if ( *(_DWORD *)(v66 + 0x14) )
+          if ( *((_DWORD *)value + 5) ) /*0x449bd6*/
           {
-            do
+            do /*0x449bf4*/
             {
-              v71 = *(_DWORD *)(*(_DWORD *)(v66 + 0x14) + 4);
-              FormHeapFree(*(_DWORD *)(v66 + 0x14));
-              *(_DWORD *)(v66 + 0x14) = v71;
+              v71 = *(_DWORD *)(*((_DWORD *)value + 5) + 4); /*0x449be3*/
+              FormHeapFree(*((_DWORD *)value + 5)); /*0x449be7*/
+              *((_DWORD *)value + 5) = v71; /*0x449bf1*/
             }
-            while ( v71 );
+            while ( v71 ); /*0x449bf4*/
           }
-          v64 = v80;
-          *(_DWORD *)(v66 + 0x10) = 0;
+          v64 = v80; /*0x449bf6*/
+          *((_DWORD *)value + 4) = 0; /*0x449bfa*/
         }
-        TESForm_SetFormID((TESForm *)v66, 0, 1);
+        TESForm_SetFormID((TESForm *)value, 0, 1); /*0x449c07*/
       }
-      else if ( *(unsigned __int8 *)(v66 + 4) <= 0xAu || *(unsigned __int8 *)(v66 + 4) > 0xCu )
+      else if ( value[4] <= 0xAu || value[4] > 0xCu ) /*0x449b45*/
       {
-        if ( TESForm_GetOverrideFile((TESForm *)v66, 0xFFFFFFFF) )
-          name = TESForm_GetOverrideFile((TESForm *)v66, 0xFFFFFFFF)->name;
+        if ( TESForm_GetOverrideFile((TESForm *)value, 0xFFFFFFFF) ) /*0x449b4f*/
+          name = TESForm_GetOverrideFile((TESForm *)value, 0xFFFFFFFF)->name; /*0x449b63*/
         else
-          name = "UNKNOWN";
-        v69 = *(const char **)(0xC * *(unsigned __int8 *)(v66 + 4) + 0xB05E04);
-        v81 = *(_DWORD *)(v66 + 0xC);
-        v70 = (const char *)(*(int (__thiscall **)(int))(*(_DWORD *)v66 + 0xD4))(v66);
-        PrintError("Form '%s' (%08X) of type %s in file '%s' was not freed.", v70, v81, v69, name);
-        NiTMap_SetAt(&TESForm_FormIDMap, a2, 0);
-        v64 = v80;
-        v78 = 1;
+          name = "UNKNOWN"; /*0x449b78*/
+        v69 = *(const char **)(0xC * value[4] + 0xB05E04); /*0x449b89*/
+        v81 = *((_DWORD *)value + 3); /*0x449b90*/
+        v70 = (const char *)(*(int (__thiscall **)(unsigned __int8 *))(*(_DWORD *)value + 0xD4))(value); /*0x449b9c*/
+        PrintError("Form '%s' (%08X) of type %s in file '%s' was not freed.", v70, v81, v69, name); /*0x449bab*/
+        NiTMap_SetAt(&TESForm_FormIDMap, a2, 0); /*0x449bbf*/
+        v64 = v80; /*0x449bc4*/
+        v78 = 1; /*0x449bc8*/
       }
     }
   }
-  bDisableWarning_MESSAGES = v79;
-  if ( v78 )
-    PrintError("Forms were leaked during ClearData. Check Warnings file for more info.");
-  v72 = 0;
-  if ( *((_DWORD *)this + 0x234) )
+  bDisableWarning_MESSAGES = v79; /*0x449c16*/
+  if ( v78 ) /*0x449c24*/
+    PrintError("Forms were leaked during ClearData. Check Warnings file for more info."); /*0x449c2b*/
+  v72 = 0; /*0x449c33*/
+  if ( *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x810] ) /*0x449c35*/
   {
-    v73 = this + 0x8D4;
-    do
+    v73 = &self->activeFileState.unknownBeforeActiveFileState[0x814]; /*0x449c3d*/
+    do /*0x449c51*/
     {
-      *v73 = 0;
-      ++v72;
-      ++v73;
+      *(_DWORD *)v73 = 0; /*0x449c43*/
+      ++v72; /*0x449c45*/
+      v73 += 4; /*0x449c48*/
     }
-    while ( v72 < *((_DWORD *)this + 0x234) );
+    while ( v72 < *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x810] ); /*0x449c51*/
   }
-  v33 = *(this + 0xCD1) == 0;
-  *((_DWORD *)this + 0x234) = 0;
-  if ( v33 )
+  v33 = self->activeFileState.retainActiveFile == 0; /*0x449c53*/
+  *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x810] = 0; /*0x449c5a*/
+  if ( v33 ) /*0x449c60*/
   {
-    v74 = *((_DWORD **)this + 0x231);
-    if ( v74 )
+    v74 = *(_DWORD **)&self->activeFileState.unknownBeforeActiveFileState[0x804]; /*0x449c62*/
+    if ( v74 ) /*0x449c6a*/
     {
-      if ( !*(this + 0xCD0) )
-        TESFile_SetIsActive(v74, 0);
-      v75 = *((_DWORD *)this + 0x231);
-      if ( v75 )
+      if ( !self->activeFileState.unknownBeforeActiveFileState[0xC10] ) /*0x449c6c*/
+        TESFile_SetIsActive(v74, 0); /*0x449c76*/
+      v75 = *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x804]; /*0x449c7b*/
+      if ( v75 ) /*0x449c83*/
       {
-        TESFile_destr(*((CHAR **)this + 0x231));
-        FormHeapFree(v75);
+        TESFile_destr(*(CHAR **)&self->activeFileState.unknownBeforeActiveFileState[0x804]); /*0x449c87*/
+        FormHeapFree(v75); /*0x449c8d*/
       }
-      *((_DWORD *)this + 0x231) = 0;
-      *((_DWORD *)this + 0x230) = 0x800;
+      *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x804] = 0; /*0x449c95*/
+      *(_DWORD *)&self->activeFileState.unknownBeforeActiveFileState[0x800] = 0x800; /*0x449c9b*/
     }
   }
-  TESDataHandler_g_DoorMarker = 0;
-  TESDataHandler_g_MapMarker = 0;
-  TESDataHandler_g_XMarker = 0;
-  TESDataHandler_g_XMarkerHeading = 0;
-  TESDataHandler_g_TravelMarker = 0;
-  TESDataHandler_g_NorthMarker = 0;
-  TESDataHandler_g_PrisonMarker = 0;
-  TESDataHandler_g_TempleMarker = 0;
-  TESDataHandler_g_DivineMarker = 0;
-  TESDataHandler_g_Lockpick = 0;
-  TESDataHandler_g_SkeletonKey = 0;
-  TESDataHandler_g_RepairHammer = 0;
-  TESDataHandler_g_HorseMarker = 0;
-  TESDataHandler_g_WelkyndStone = 0;
-  TESDataHandler_g_BlackSoulGem = 0;
-  TESDataHandler_g_AzuraStone = 0;
-  TESDataHandler_g_VarlaStone = 0;
-  *(this + 0xCD4) = 0;
-  return 1;
+  MEMORY[0xB35EA4] = 0; /*0x449ca6*/
+  MEMORY[0xB35EA8] = 0; /*0x449cac*/
+  MEMORY[0xB35EAC] = 0; /*0x449cb2*/
+  MEMORY[0xB35EB0] = 0; /*0x449cb8*/
+  MEMORY[0xB35EB4] = 0; /*0x449cbe*/
+  MEMORY[0xB35EB8] = 0; /*0x449cc4*/
+  MEMORY[0xB35EBC] = 0; /*0x449cca*/
+  MEMORY[0xB35EC0] = 0; /*0x449cd0*/
+  MEMORY[0xB35EC4] = 0; /*0x449cd6*/
+  MEMORY[0xB35EC8] = 0; /*0x449cdc*/
+  MEMORY[0xB35ECC] = 0; /*0x449ce2*/
+  MEMORY[0xB35ED0] = 0; /*0x449ce8*/
+  MEMORY[0xB35ED4] = 0; /*0x449cee*/
+  MEMORY[0xB35ED8] = 0; /*0x449cf4*/
+  MEMORY[0xB35EE0] = 0; /*0x449cfa*/
+  MEMORY[0xB35EE4] = 0; /*0x449d00*/
+  MEMORY[0xB35EDC] = 0; /*0x449d06*/
+  self->activeFileState.unknownAfterActiveFileState[2] = 0; /*0x449d0c*/
+  return 1; /*0x449ca5*/
 }

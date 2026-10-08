@@ -9,8 +9,8 @@
 0x6B7D05: jnz     short loc_6B7D0C
 0x6B7D07: cmp     dword ptr [esi], 0
 0x6B7D0A: jz      short loc_6B7D1F
-0x6B7D0C: mov     ecx, [esi]
-0x6B7D0E: call    sub_6B8460
+0x6B7D0C: mov     ecx, [esi]; this
+0x6B7D0E: call    DialogueResponse__GetSaveSize
 0x6B7D13: mov     esi, [esi+4]
 0x6B7D16: add     word ptr [esp+8+var_4], ax
 0x6B7D1B: test    esi, esi

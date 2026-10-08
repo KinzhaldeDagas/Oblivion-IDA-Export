@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x896000",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: main bhkCharacterProxy/controller integration step. Dispatches current/previous character state through sub_8BA170(stateTable,stateId)->vtable+0x18. Good high-level hook boundary for movement disciplines.",
     "mnemonic": "push",
     "size": 1
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x89605D",
-    "line": "lea     ebx, [edi+10h]",
+    "line": "lea     ebx, [edi+10h]; Controller update reads desired movement vector from arg+0x10 and dt from arg+0. This is the MobileObject::Move stack packet, not a persistent proxy field.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -181,13 +181,13 @@
   },
   {
     "ea": "0x896066",
-    "line": "fstp    [esp+144h+var_144]; float",
+    "line": "fstp    [esp+144h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x896069",
-    "line": "push    offset Vector3_InitValue?; int",
+    "line": "push    offset g_zeroNiPoint3; int",
     "mnemonic": "push",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x896080",
-    "line": "shr     ecx, 13h",
+    "line": "shr     ecx, 13h; Caches whether controller flag 0x80000 was set at update entry; that chooses the single-step integrate path at 0x896828 versus iterative movement/contact update.",
     "mnemonic": "shr",
     "size": 3
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x896086",
-    "line": "mov     [esp+14Ch+var_11D], cl",
+    "line": "mov     [esp+14Ch+var_11D], cl; Caches controller flag 0x80000 for this update. When set, update takes the single-step state/integration path instead of the iterative support/manifold loop.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x8960C2",
-    "line": "jnz     short loc_8960C9",
+    "line": "jnz     short loc_8960C9; Flag 0x80000 forces v103/single-step behavior; it prevents dt subdivision even for larger movement packets.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -679,19 +679,19 @@
   },
   {
     "ea": "0x8961A7",
-    "line": "lea     ecx, [esp+144h+var_40]",
+    "line": "lea     ecx, [esp+144h+var_40]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x8961AE",
-    "line": "fstp    [esp+144h+var_144]; float",
+    "line": "fstp    [esp+144h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x8961B1",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x8961DF",
-    "line": "call    sub_5E1500",
+    "line": "call    sub_5E1500; TES4 authoritative: reads proxy position via 0x891440 and converts Havok units back to TES/world units via 0x43F3E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,7 +859,7 @@
   },
   {
     "ea": "0x89620B",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -883,7 +883,7 @@
   },
   {
     "ea": "0x89621D",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x896240",
-    "line": "jnz     short loc_896274",
+    "line": "jnz     short loc_896274; Substep decision: v122 is collapsed to one update when v106 is true, computed single-step gate v103 is true, or the computed step count is <= 1.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x896262",
-    "line": "fstp    [esp+144h+var_144]; float",
+    "line": "fstp    [esp+144h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1069,13 +1069,13 @@
   },
   {
     "ea": "0x896283",
-    "line": "fstp    [esp+144h+var_144]; float",
+    "line": "fstp    [esp+144h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x896286",
-    "line": "call    sub_894C70",
+    "line": "call    bhkCharacterController_UpdateSizeTransition",
     "mnemonic": "call",
     "size": 5
   },
@@ -1129,7 +1129,7 @@
   },
   {
     "ea": "0x8962B7",
-    "line": "fstp    [esp+148h+var_144]; float",
+    "line": "fstp    [esp+148h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1189,7 +1189,7 @@
   },
   {
     "ea": "0x8962D7",
-    "line": "fstp    [esp+144h+var_144]; float",
+    "line": "fstp    [esp+144h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x8962E2",
-    "line": "call    sub_8B1B00",
+    "line": "call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x896303",
-    "line": "mov     [esp+140h+a2], ecx",
+    "line": "mov     [esp+140h+a2], ecx; Copies desired movement vector from update packet +0x10/+0x14/+0x18 into a temp before dt scaling. For ordinary non-swim states Z is cleared at 0x89632F.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x896315",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x89632B",
-    "line": "jnz     short loc_896333",
+    "line": "jnz     short loc_896333; TES4 authoritative: desired Z is preserved only for state 5 Swimming or proxy special flag 0x800; ordinary movement zeroes desired Z at 0x89632F.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x89632F",
-    "line": "fstp    [esp+140h+a2+8]",
+    "line": "fstp    [esp+140h+a2+8]; Ordinary non-swim movement forces desired Z to 0 before desired velocity is stored on proxy+0x290.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x896371",
-    "line": "fstp    dword ptr [esi+290h]",
+    "line": "fstp    dword ptr [esi+290h]; TES4 authoritative: desired movement X is divided by frame dt and multiplied by hkFactor before storage at proxy+0x290; hook-time vector length is already skill/input scaled.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x89637D",
-    "line": "fstp    dword ptr [esi+294h]",
+    "line": "fstp    dword ptr [esi+294h]; Desired movement Y -> proxy+0x294 in Havok/controller velocity units.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1483,13 +1483,13 @@
   },
   {
     "ea": "0x896387",
-    "line": "fstp    dword ptr [esi+298h]",
+    "line": "fstp    dword ptr [esi+298h]; Desired movement Z -> proxy+0x298 after non-swim zeroing; do not expect vertical climb input here for ordinary movement.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x89638D",
-    "line": "call    sub_8903D0",
+    "line": "call    sub_8903D0; MorrowindMovements candidate pre-state hook: desired movement has just been converted into proxy+0x290/+0x294/+0x298 in Havok/controller velocity units; state dispatch has not run yet. Scaling here lets vanilla OnGround/InAir solvers consume the adjusted desired vector instead of post-editing solved velocity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1591,7 +1591,7 @@
   },
   {
     "ea": "0x8963CC",
-    "line": "fstp    [esp+144h+var_144]; float",
+    "line": "fstp    [esp+144h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x8963D0",
-    "line": "call    sub_8B1B00",
+    "line": "call    hkQuaternion_SetAxisAngleScaled; Builds a quaternion from an axis vector and scaled angle: vector part = axis*sin(angleScale), w = cos(angleScale). Used by 0x896000 while refreshing movement basis.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x8964CD",
-    "line": "fstp    dword ptr [esi+348h]",
+    "line": "fstp    dword ptr [esi+348h]; Per-frame refresh: proxy+0x348 working shape vertical offset = persistent proxy+0x314 before movement state dispatch.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1999,7 +1999,7 @@
   },
   {
     "ea": "0x8964DB",
-    "line": "call    sub_4D6830",
+    "line": "call    hkQuaternion_Normalize; Normalizes a quaternion/vector with reciprocal sqrt refinement. Used before converting movement input orientation to basis vectors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2089,7 +2089,7 @@
   },
   {
     "ea": "0x896522",
-    "line": "call    sub_6848D0",
+    "line": "call    bhkRefObject_CopyHavokObjectTransform; Copies low-level Havok object transform rows/columns from wrapper hkObject+0x70 into caller transform output.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,7 +2113,7 @@
   },
   {
     "ea": "0x896536",
-    "line": "call    sub_8B1DD0",
+    "line": "call    hkMatrix3_SetFromQuaternion; Converts a quaternion into a 3x3 basis matrix. 0x896000 uses this during per-frame movement basis refresh.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x8965B0",
-    "line": "movaps  [esp+144h+var_40], xmm0",
+    "line": "movaps  xmmword ptr [esp+144h+var_40.data], xmm0",
     "mnemonic": "movaps",
     "size": 8
   },
@@ -2353,7 +2353,7 @@
   },
   {
     "ea": "0x8965DF",
-    "line": "movaps  [esp+144h+var_30], xmm0",
+    "line": "movaps  xmmword ptr [esp+144h+var_40.data+10h], xmm0",
     "mnemonic": "movaps",
     "size": 8
   },
@@ -2377,13 +2377,13 @@
   },
   {
     "ea": "0x8965FD",
-    "line": "movaps  [esp+144h+var_20], xmm0",
+    "line": "movaps  xmmword ptr [esp+144h+var_40.data+20h], xmm0",
     "mnemonic": "movaps",
     "size": 8
   },
   {
     "ea": "0x896605",
-    "line": "call    sub_8D2C20",
+    "line": "call    hkMatrix3_MultiplyInPlace; Multiplies a 3x3 basis matrix in place by another basis matrix through 0x8D2AB0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2425,7 +2425,7 @@
   },
   {
     "ea": "0x896617",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -2461,7 +2461,7 @@
   },
   {
     "ea": "0x89662D",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x896759",
-    "line": "movaps  xmmword ptr [esi+2C0h], xmm0",
+    "line": "movaps  xmmword ptr [esi+2C0h], xmm0; Refreshes proxy+0x2C0 with the per-frame movement/orientation basis derived from transform, up vector, and input rotation. This feeds the shared state velocity solver.",
     "mnemonic": "movaps",
     "size": 7
   },
@@ -2953,7 +2953,7 @@
   },
   {
     "ea": "0x896775",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2965,7 +2965,7 @@
   },
   {
     "ea": "0x89677C",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3085,7 +3085,7 @@
   },
   {
     "ea": "0x8967D6",
-    "line": "call    sub_8BA170",
+    "line": "call    sub_8BA170; State object lookup for current state id before first dispatch; update call follows at 0x8967E3.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x8967E5",
-    "line": "mov     ecx, [edi+1A4h]",
+    "line": "mov     ecx, [edi+1A4h]; TES4 authoritative hook site: first-path post-state/pre-writeback. Stolen instruction is 6-byte mov ecx,[edi+1A4h]; trampoline returns to 0x8967EB after helper. Use ESI as proxy/controller.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3205,7 +3205,7 @@
   },
   {
     "ea": "0x896817",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; Writes proxy velocity +0x2E0 back to collision object after state update. Slowfall velocity edits must occur before this write.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3229,13 +3229,13 @@
   },
   {
     "ea": "0x896825",
-    "line": "fstp    [esp+144h+var_144]",
+    "line": "fstp    [esp+144h+angleZ]",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x896828",
-    "line": "call    sub_894E80",
+    "line": "call    bhkCharacterController_IntegratePositionFromVelocity; Only xref to 0x894E80. This single-step path writes velocity to the collision object, then integrates position once through the optional swept-hit listener path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3301,7 +3301,7 @@
   },
   {
     "ea": "0x89685A",
-    "line": "call    sub_8AC0A0",
+    "line": "call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3313,7 +3313,7 @@
   },
   {
     "ea": "0x896861",
-    "line": "mov     eax, offset stru_BA7A40",
+    "line": "mov     eax, offset unk_BA7A40",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3349,7 +3349,7 @@
   },
   {
     "ea": "0x89687D",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3397,7 +3397,7 @@
   },
   {
     "ea": "0x8968A5",
-    "line": "call    sub_891780",
+    "line": "call    bhkCharacterProxy_UpdateCapsuleProbePoints; TES4 authoritative: recomputes two controller capsule probe/end points at proxy+0x380 and proxy+0x390 from Havok object transform+0x70, capsule height +0x3A4, radius +0x3A0, and vertical base offset +0x248.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3427,7 +3427,7 @@
   },
   {
     "ea": "0x8968B3",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -3463,7 +3463,7 @@
   },
   {
     "ea": "0x8968C9",
-    "line": "call    sub_8AE890",
+    "line": "call    bhkCharacterProxy_CheckSupportWithCollector; MorrowindMovements telemetry source: support check writes status/normal/reference data to output block proxy+0x260.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3475,7 +3475,7 @@
   },
   {
     "ea": "0x8968D0",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -3487,7 +3487,7 @@
   },
   {
     "ea": "0x8968DF",
-    "line": "cmp     dword ptr [esi+260h], 2",
+    "line": "cmp     dword ptr [esi+260h], 2; MorrowindMovements telemetry source: proxy+0x260 == 2 is accepted support candidate, gated by byte proxy+0x250.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -3499,7 +3499,7 @@
   },
   {
     "ea": "0x8968E8",
-    "line": "cmp     byte ptr [esi+250h], 0",
+    "line": "cmp     byte ptr [esi+250h], 0; Support status 2 only contributes to grounding when byte proxy+0x250 is clear.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -4003,7 +4003,7 @@
   },
   {
     "ea": "0x896A0C",
-    "line": "or      dword ptr [esi+1F4h], 100h",
+    "line": "or      dword ptr [esi+1F4h], 100h; MorrowindMovements telemetry source: accepted support sets controller flag 0x100, later consumed by InAir as landing/OnGround transition.",
     "mnemonic": "or",
     "size": 10
   },
@@ -4015,7 +4015,7 @@
   },
   {
     "ea": "0x896A18",
-    "line": "and     dword ptr [esi+1F4h], 0FFFFFEFFh",
+    "line": "and     dword ptr [esi+1F4h], 0FFFFFEFFh; Clears controller flag 0x100 when no accepted support is present.",
     "mnemonic": "and",
     "size": 10
   },
@@ -4099,7 +4099,7 @@
   },
   {
     "ea": "0x896A59",
-    "line": "call    sub_8BA170",
+    "line": "call    sub_8BA170; State object lookup for iterative dispatch; update call follows at 0x896A66.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4135,7 +4135,7 @@
   },
   {
     "ea": "0x896A68",
-    "line": "mov     ecx, [ebx+1A4h]",
+    "line": "mov     ecx, [ebx+1A4h]; TES4 authoritative hook site: iterative post-state/pre-writeback. Stolen instruction is 6-byte mov ecx,[ebx+1A4h]; trampoline returns to 0x896A6E after helper. Use ESI as proxy/controller; EBX is profiling context here.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4195,7 +4195,7 @@
   },
   {
     "ea": "0x896A92",
-    "line": "mov     ecx, [esi+8]; this",
+    "line": "mov     ecx, [esi+8]; Iterative/contact path velocity writeback after state dispatch and hook window; later code may still refresh contacts or zero velocity if cached contacts are unchanged.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4225,7 +4225,7 @@
   },
   {
     "ea": "0x896AA0",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; Writes proxy velocity +0x2E0 back to collision object after iterative state update. Slowfall velocity edits must occur before this write.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4237,7 +4237,7 @@
   },
   {
     "ea": "0x896AAA",
-    "line": "mov     [esp+140h+var_12E], 1",
+    "line": "mov     [esp+140h+var_12E], 1; After 0x896A68 hook and 0x8AC0B0 velocity writeback, vanilla decides whether to update contact manifold or treat contacts as unchanged.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -4255,7 +4255,7 @@
   },
   {
     "ea": "0x896ABB",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4279,7 +4279,7 @@
   },
   {
     "ea": "0x896ACD",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4303,7 +4303,7 @@
   },
   {
     "ea": "0x896AE1",
-    "line": "xor     edi, edi",
+    "line": "xor     edi, edi; Fast unchanged-contact path compares cached contacts against live manifold before deciding whether to rerun manifold update.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -4333,7 +4333,7 @@
   },
   {
     "ea": "0x896AF2",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4363,7 +4363,7 @@
   },
   {
     "ea": "0x896B06",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4447,7 +4447,7 @@
   },
   {
     "ea": "0x896B3A",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4537,7 +4537,7 @@
   },
   {
     "ea": "0x896B75",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4585,7 +4585,7 @@
   },
   {
     "ea": "0x896B91",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4609,7 +4609,7 @@
   },
   {
     "ea": "0x896B9F",
-    "line": "jz      short loc_896BA6",
+    "line": "jz      short loc_896BA6; Cached/live contact comparison checks point vector and normal vector deltas, then collidable references at +0x20/+0x28.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -4681,13 +4681,13 @@
   },
   {
     "ea": "0x896BCE",
-    "line": "push    ecx",
+    "line": "push    ecx; moveInfo",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x896BCF",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -4717,7 +4717,7 @@
   },
   {
     "ea": "0x896BDE",
-    "line": "call    sub_8902B0",
+    "line": "call    bhkCharacterController_UpdateCollisionManifold; Refreshes live/cached contact manifold via 0x8902B0 when movement/contact state changed or requires update.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4759,7 +4759,7 @@
   },
   {
     "ea": "0x896C01",
-    "line": "movaps  xmmword ptr [eax], xmm0",
+    "line": "movaps  xmmword ptr [eax], xmm0; Unchanged-contact branch zeros proxy velocity and writes it to the low-level collision object; plugin repair hook at 0x896C0C must restore active discipline velocity if needed.",
     "mnemonic": "movaps",
     "size": 3
   },
@@ -4777,7 +4777,7 @@
   },
   {
     "ea": "0x896C07",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; Writes zeroed velocity back to collision object after unchanged-contact branch.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4813,7 +4813,7 @@
   },
   {
     "ea": "0x896C2B",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -4843,7 +4843,7 @@
   },
   {
     "ea": "0x896C3B",
-    "line": "call    sub_8AC070",
+    "line": "call    bhkCollisionWrapper_GetPositionPtr; Returns low-level Havok object position pointer: *(wrapper+0x30 + 0x1C) + 0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4987,7 +4987,7 @@
   },
   {
     "ea": "0x896C9D",
-    "line": "call    sub_8AC080",
+    "line": "call    bhkCollisionWrapper_SetPositionAdjusted; Writes low-level Havok object position via 0x8ABAC0 with wrapper vertical/shape adjustment from +0x58/+0x5C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5071,7 +5071,7 @@
   },
   {
     "ea": "0x896CD3",
-    "line": "call    sub_89F570",
+    "line": "call    bhkRefObject_UpdateHavokObject",
     "mnemonic": "call",
     "size": 5
   },
@@ -5107,7 +5107,7 @@
   },
   {
     "ea": "0x896CF3",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5119,7 +5119,7 @@
   },
   {
     "ea": "0x896CFC",
-    "line": "jle     short loc_896D05",
+    "line": "jle     short loc_896D05; TES4 authoritative: clamp live contact count to at most 5 before copying into proxy cached contact array (+0x3BC/+0x3C0/+0x3C4).",
     "mnemonic": "jle",
     "size": 2
   },
@@ -5143,7 +5143,7 @@
   },
   {
     "ea": "0x896D07",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5185,7 +5185,7 @@
   },
   {
     "ea": "0x896D25",
-    "line": "lea     ebx, [esi+3BCh]",
+    "line": "lea     ebx, [esi+3BCh]; TES4 authoritative: v72 points to proxy cached contact array header at dword index 0xEF (+0x3BC). Entries copied from live contact header are 0x30 bytes.",
     "mnemonic": "lea",
     "size": 6
   },
@@ -5227,7 +5227,7 @@
   },
   {
     "ea": "0x896D40",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5263,7 +5263,7 @@
   },
   {
     "ea": "0x896D51",
-    "line": "movaps  xmmword ptr [ecx], xmm0",
+    "line": "movaps  xmmword ptr [ecx], xmm0; Copies a live 0x30-byte manifold contact into proxy cached-contact storage.",
     "mnemonic": "movaps",
     "size": 3
   },
@@ -5335,7 +5335,7 @@
   },
   {
     "ea": "0x896D76",
-    "line": "call    sub_8ABDB0",
+    "line": "call    sub_8ABDB0; TES4 authoritative: returns collision wrapper contact header at this+0x74. Header layout observed as +0 entries pointer, +4 count, +8 capacity/flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5443,7 +5443,7 @@
   },
   {
     "ea": "0x896DAE",
-    "line": "movaps  xmmword ptr [eax], xmm0",
+    "line": "movaps  xmmword ptr [eax], xmm0; Appends a live 0x30-byte manifold contact into proxy cached-contact storage when live count exceeds existing cached count.",
     "mnemonic": "movaps",
     "size": 3
   },
@@ -5563,7 +5563,7 @@
   },
   {
     "ea": "0x896DF3",
-    "line": "call    sub_8939B0",
+    "line": "call    bhkCharacterProxy_UpdateCapsuleSupportSlope; TES4 authoritative: support-slope update runs after controller iteration/contact cache copy. It samples capsule endpoint down-rays; it is not a ledge-transition decision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5701,7 +5701,7 @@
   },
   {
     "ea": "0x896E46",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5881,7 +5881,7 @@
   },
   {
     "ea": "0x896EAA",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5941,7 +5941,7 @@
   },
   {
     "ea": "0x896ECC",
-    "line": "fstp    [esp+150h+var_144]; float",
+    "line": "fstp    [esp+150h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -6025,7 +6025,7 @@
   },
   {
     "ea": "0x896EFE",
-    "line": "call    sub_8AC0C0",
+    "line": "call    bhkCollisionWrapper_GetHavokObject; bhk collision wrapper accessor: returns stored low-level Havok object pointer at wrapper+0x30.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6139,7 +6139,7 @@
   },
   {
     "ea": "0x896F34",
-    "line": "fstp    [esp+144h+var_144]",
+    "line": "fstp    [esp+144h+angleZ]",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -6199,7 +6199,7 @@
   },
   {
     "ea": "0x896F4B",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -6331,7 +6331,7 @@
   },
   {
     "ea": "0x896F9D",
-    "line": "fcom    dword ptr [esi+300h]",
+    "line": "fcom    dword ptr [esi+300h]; Movement tick decays proxy+0x300 by frame dt after state update; when it expires, zeroes +0x300 and clears +0x2F0.",
     "mnemonic": "fcom",
     "size": 6
   },

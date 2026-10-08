@@ -32,3 +32,14 @@
 0x54EA62: pop     esi
 0x54EA63: add     esp, 10h
 0x54EA66: retn    8
+0x54E550: mov     dword ptr [ecx], offset ??_7BSFaceGenKeyframe@@6B@; const BSFaceGenKeyframe::`vftable'
+0x54E556: retn
+0x9BBB20: mov     ecx, [ebp-10h]
+0x9BBB23: jmp     loc_54E550
+0x9BBB28: mov     edx, [esp+arg_4]
+0x9BBB2C: lea     eax, [edx-8]
+0x9BBB2F: mov     ecx, [edx-0Ch]
+0x9BBB32: xor     ecx, eax
+0x9BBB34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BBB39: mov     eax, offset stru_AE586C
+0x9BBB3E: jmp     ___CxxFrameHandler3

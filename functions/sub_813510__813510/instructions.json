@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x813510",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Mode-0 BSCubeMapCamera renderer. Iterates all six faces, selects the per-face surface, skips faces masked by ShadowSceneLight+0x118, and in render mode 5 draws the current light's category/object list.",
     "mnemonic": "push",
     "size": 2
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x813589",
-    "line": "jnz     short loc_8135C6",
+    "line": "jnz     short loc_8135C6; In render mode 5, read the current ShadowSceneLight face/status mask at camera+0x144->+0x118 and use the native shadow clear color.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x81359E",
-    "line": "fst     [esp+0F0h+var_B8]",
+    "line": "fst     [esp+0ECh+var_B4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x8135A2",
-    "line": "fst     [esp+0F0h+var_B4]",
+    "line": "fst     [esp+0ECh+var_B0]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x8135A6",
-    "line": "mov     [esp+0F0h+var_D0], ecx",
+    "line": "mov     [esp+0ECh+var_CC], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x8135B0",
-    "line": "fstp    [esp+0F0h+var_B0]",
+    "line": "fstp    [esp+0ECh+var_AC]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -259,13 +259,13 @@
   },
   {
     "ea": "0x8135B6",
-    "line": "lea     eax, [esp+0F0h+var_B8]",
+    "line": "lea     eax, [esp+0ECh+var_B4]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8135BA",
-    "line": "fstp    [esp+0F0h+var_AC]",
+    "line": "fstp    [esp+0ECh+var_A8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -295,25 +295,25 @@
   },
   {
     "ea": "0x8135C6",
-    "line": "mov     [esp+0F4h+var_D8], edi",
+    "line": "mov     [esp+0ECh+var_D0], edi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8135CA",
-    "line": "push    edi",
+    "line": "push    edi; faceIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8135CB",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8135CD",
-    "line": "call    sub_812EF0",
+    "line": "call    BSCubeMapCamera_OrientFace; Orient the cube camera for the current face index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x8135DC",
-    "line": "mov     esi, [esp+0F4h+var_D0]",
+    "line": "mov     esi, [esp+0ECh+var_C8]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,25 +361,25 @@
   },
   {
     "ea": "0x8135E7",
-    "line": "or      dword ptr [esp+0F4h+var_E0], 1",
+    "line": "or      [esp+0ECh+var_D8], 1",
     "mnemonic": "or",
     "size": 5
   },
   {
     "ea": "0x8135EC",
-    "line": "mov     [esp+0F4h+var_D0], esi",
+    "line": "mov     [esp+0ECh+var_C8], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8135F0",
-    "line": "lea     eax, [esp+0F4h+var_D0]",
+    "line": "lea     eax, [esp+0ECh+var_C8]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8135F4",
-    "line": "test    [esp+0F4h+var_E0], 1",
+    "line": "test    byte ptr [esp+0ECh+var_D8], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x8135FD",
-    "line": "and     dword ptr [esp+0F4h+var_E0], 0FFFFFFFEh",
+    "line": "and     [esp+0ECh+var_D8], 0FFFFFFFEh",
     "mnemonic": "and",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x81361E",
-    "line": "mov     [ebx+40h], edi",
+    "line": "mov     [ebx+40h], edi; Select the current face index in the active cube render surface.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x81366F",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Resolve BSCubeMapCamera+0x140 to the active render-target group for this face.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x813677",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Begin one render scene for the current cube face with kClear_ALL.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x813684",
-    "line": "ja      short def_813686",
+    "line": "ja      short def_813686; jumptable 00813686 default case",
     "mnemonic": "ja",
     "size": 2
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x813692",
-    "line": "jmp     short def_813686",
+    "line": "jmp     short def_813686; jumptable 00813686 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -721,7 +721,7 @@
   },
   {
     "ea": "0x813699",
-    "line": "jmp     short def_813686",
+    "line": "jmp     short def_813686; jumptable 00813686 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x8136A0",
-    "line": "jmp     short def_813686",
+    "line": "jmp     short def_813686; jumptable 00813686 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x8136A7",
-    "line": "jmp     short def_813686",
+    "line": "jmp     short def_813686; jumptable 00813686 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x8136AE",
-    "line": "jmp     short def_813686",
+    "line": "jmp     short def_813686; jumptable 00813686 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -765,6 +765,1308 @@
     "ea": "0x8136B0",
     "line": "mov     eax, 10h; jumptable 00813686 case 4",
     "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8136B5",
+    "line": "and     eax, [esp+0ECh+var_CC]; jumptable 00813686 default case",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x8136B9",
+    "line": "test    ax, ax",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x8136BC",
+    "line": "jnz     loc_813880; Skip drawing this face when its bit is set in the ShadowSceneLight+0x118 failure/status mask.",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x8136C2",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x8136C4",
+    "line": "push    1; a3",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x8136C6",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8136C7",
+    "line": "fstp    [esp+0F4h+a2]; a2",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x8136CA",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8136CC",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8136D1",
+    "line": "cmp     word ptr ds:0B42EACh, 5",
+    "mnemonic": "cmp",
+    "size": 8
+  },
+  {
+    "ea": "0x8136D9",
+    "line": "jz      loc_8138C1",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x8136DF",
+    "line": "cmp     dword ptr [ebp+148h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x8136E6",
+    "line": "jz      loc_813880",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x8136EC",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8136F1",
+    "line": "mov     esi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8136F3",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8136F5",
+    "line": "mov     [esp+0ECh+var_A4], esi",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8136F9",
+    "line": "jz      short loc_813701",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8136FB",
+    "line": "lea     ecx, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x8136FE",
+    "line": "push    ecx; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8136FF",
+    "line": "call    ebx ; InterlockedIncrement",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x813701",
+    "line": "cmp     dword ptr [esi+4], 1",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x813705",
+    "line": "lea     eax, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x813708",
+    "line": "mov     [esp+0ECh+var_4], 0",
+    "mnemonic": "mov",
+    "size": 11
+  },
+  {
+    "ea": "0x813713",
+    "line": "jnz     short loc_813718",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x813715",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x813716",
+    "line": "call    ebx ; InterlockedIncrement",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x813718",
+    "line": "mov     edx, ds:0B3F928h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x81371E",
+    "line": "mov     ebx, [edx+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x813721",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813723",
+    "line": "mov     [esp+0ECh+var_A0], ebx",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x813727",
+    "line": "jz      short loc_813733",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x813729",
+    "line": "lea     eax, [ebx+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x81372C",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x81372D",
+    "line": "call    dword ptr ds:0A28078h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x813733",
+    "line": "mov     eax, ds:0B3F928h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x813738",
+    "line": "mov     edi, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x81373B",
+    "line": "add     eax, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x81373E",
+    "line": "cmp     edi, esi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x813740",
+    "line": "mov     byte ptr [esp+0ECh+var_4], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x813748",
+    "line": "mov     [esp+0ECh+var_D4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x81374C",
+    "line": "jz      short loc_81377E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x81374E",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813750",
+    "line": "jz      short loc_81376E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x813752",
+    "line": "lea     ecx, [edi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x813755",
+    "line": "push    ecx; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x813756",
+    "line": "call    dword ptr ds:0A2807Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x81375C",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x81375E",
+    "line": "jnz     short loc_81376E",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x813760",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813762",
+    "line": "jz      short loc_81376E",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x813764",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813766",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813768",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x81376A",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81376C",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x81376E",
+    "line": "mov     ecx, [esp+0ECh+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x813772",
+    "line": "lea     eax, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x813775",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x813776",
+    "line": "mov     [ecx], esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813778",
+    "line": "call    dword ptr ds:0A28078h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x81377E",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813780",
+    "line": "mov     eax, [edx+4Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x813783",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x813784",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813786",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x813788",
+    "line": "push    0; visibleArray",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x81378A",
+    "line": "lea     ecx, [esp+0F0h+cullingProcess]; self",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x81378E",
+    "line": "mov     byte ptr [esi+21E0h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x813795",
+    "line": "call    NiCullingProcess_NiCullingProcess; Oblivion NiCullingProcess constructor: initializes append mode, visible-geometry storage, camera state, and culling-plane state.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x81379A",
+    "line": "lea     ecx, [ebp+0ECh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x8137A0",
+    "line": "push    ecx; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8137A1",
+    "line": "lea     ecx, [esp+0F0h+cullingProcess]; this",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8137A5",
+    "line": "mov     byte ptr [esp+0F0h+var_4], 2",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x8137AD",
+    "line": "mov     [esp+0F0h+cullingProcess.Camera], ebp",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8137B1",
+    "line": "call    NiCullingProcess__SetFrustum; Oblivion NiCullingProcess::SetFrustum copies the camera frustum, rebuilds six culling planes, and sets the active-plane mask to 0x3F.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8137B6",
+    "line": "mov     eax, [ebp+148h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8137BC",
+    "line": "push    0; visibleArray",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x8137BE",
+    "line": "lea     edx, [esp+0F0h+cullingProcess]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8137C2",
+    "line": "push    edx; cullingProcess",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8137C3",
+    "line": "push    eax; sceneRoot",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8137C4",
+    "line": "push    ebp; camera",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8137C5",
+    "line": "call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8137CA",
+    "line": "mov     byte ptr [esi+21E1h], 1",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x8137D1",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8137D3",
+    "line": "mov     edx, [eax+50h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8137D6",
+    "line": "add     esp, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8137D9",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x8137DB",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x8137DD",
+    "line": "mov     eax, ds:0B3F928h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x8137E2",
+    "line": "mov     edi, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8137E5",
+    "line": "add     eax, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8137E8",
+    "line": "cmp     edi, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8137EA",
+    "line": "mov     [esp+0ECh+var_D4], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x8137EE",
+    "line": "jz      short loc_813824",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8137F0",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8137F2",
+    "line": "jz      short loc_813810",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8137F4",
+    "line": "lea     eax, [edi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x8137F7",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8137F8",
+    "line": "call    dword ptr ds:0A2807Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x8137FE",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813800",
+    "line": "jnz     short loc_813810",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x813802",
+    "line": "test    edi, edi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813804",
+    "line": "jz      short loc_813810",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x813806",
+    "line": "mov     edx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813808",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81380A",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x81380C",
+    "line": "mov     ecx, edi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81380E",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x813810",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813812",
+    "line": "mov     ecx, [esp+0ECh+var_D4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x813816",
+    "line": "mov     [ecx], ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813818",
+    "line": "jz      short loc_813824",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x81381A",
+    "line": "lea     edx, [ebx+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x81381D",
+    "line": "push    edx; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x81381E",
+    "line": "call    dword ptr ds:0A28078h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x813824",
+    "line": "lea     ecx, [esp+0ECh+cullingProcess]; this",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x813828",
+    "line": "mov     byte ptr [esp+0ECh+var_4], 1",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x813830",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x813835",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813837",
+    "line": "mov     byte ptr [esp+0ECh+var_4], 0",
+    "mnemonic": "mov",
+    "size": 8
+  },
+  {
+    "ea": "0x81383F",
+    "line": "jz      short loc_813859",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x813841",
+    "line": "lea     eax, [ebx+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x813844",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x813845",
+    "line": "call    dword ptr ds:0A2807Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x81384B",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x81384D",
+    "line": "jnz     short loc_813859",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x81384F",
+    "line": "mov     edx, [ebx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813851",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813853",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x813855",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813857",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x813859",
+    "line": "lea     eax, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x81385C",
+    "line": "push    eax; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x81385D",
+    "line": "mov     [esp+0F0h+var_4], 0FFFFFFFFh",
+    "mnemonic": "mov",
+    "size": 11
+  },
+  {
+    "ea": "0x813868",
+    "line": "call    dword ptr ds:0A2807Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x81386E",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813870",
+    "line": "jnz     short loc_81387C",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x813872",
+    "line": "mov     edx, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813874",
+    "line": "mov     eax, [edx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813876",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x813878",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81387A",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x81387C",
+    "line": "mov     edi, [esp+0ECh+var_D0]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x813880",
+    "line": "call    NiRenderer_EndScene; End the current cube-face render scene.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x813885",
+    "line": "add     edi, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x813888",
+    "line": "cmp     edi, 6",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x81388B",
+    "line": "mov     [esp+0ECh+var_D0], edi",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x81388F",
+    "line": "jl      loc_8135CA; Loop until all six cube faces have been processed, then restore the saved clear color.",
+    "mnemonic": "jl",
+    "size": 6
+  },
+  {
+    "ea": "0x813895",
+    "line": "mov     ecx, ds:0B43104h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x81389B",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81389D",
+    "line": "mov     edx, [edx+60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x8138A0",
+    "line": "lea     eax, [esp+0ECh+var_C4]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x8138A4",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8138A5",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x8138A7",
+    "line": "mov     ecx, dword ptr [esp+0ECh+var_C]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x8138AE",
+    "line": "mov     large fs:0, ecx",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x8138B5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8138B6",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8138B7",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8138B8",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8138B9",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x8138BA",
+    "line": "add     esp, 0D8h",
+    "mnemonic": "add",
+    "size": 6
+  },
+  {
+    "ea": "0x8138C0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x8138C1",
+    "line": "mov     eax, [ebp+144h]; Mode-5 face rendering requires BSCubeMapCamera+0x144 currentShadowLight.",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8138C7",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8138C9",
+    "line": "jz      short loc_813880",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8138CB",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x8138CD",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8138CE",
+    "line": "fstp    [esp+0F0h+propertyDimmer]; propertyDimmer",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x8138D1",
+    "line": "push    eax; shadowSceneLight",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8138D2",
+    "line": "push    0; lightSlot",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x8138D4",
+    "line": "call    OB_BSShader_DispatchLightConstantUpdate_010201A0; Upload the current ShadowSceneLight to the native shader-light constant path before category/object-list drawing.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x8138D9",
+    "line": "mov     ecx, [ebp+144h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8138DF",
+    "line": "mov     ebx, [ecx+114h]; Synchronize BSCubeMapCamera+0x140 to currentShadowLight+0x114 before object-list rendering.",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8138E5",
+    "line": "mov     esi, [ebp+140h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x8138EB",
+    "line": "add     esp, 0Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x8138EE",
+    "line": "cmp     esi, ebx",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x8138F0",
+    "line": "jz      short loc_813926",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8138F2",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x8138F4",
+    "line": "jz      short loc_813912",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x8138F6",
+    "line": "lea     edx, [esi+4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x8138F9",
+    "line": "push    edx; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x8138FA",
+    "line": "call    dword ptr ds:0A2807Ch",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x813900",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813902",
+    "line": "jnz     short loc_813912",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x813904",
+    "line": "test    esi, esi",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813906",
+    "line": "jz      short loc_813912",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x813908",
+    "line": "mov     eax, [esi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81390A",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81390C",
+    "line": "push    1",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x81390E",
+    "line": "mov     ecx, esi",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x813910",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x813912",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x813914",
+    "line": "mov     [ebp+140h], ebx",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x81391A",
+    "line": "jz      short loc_813926",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x81391C",
+    "line": "add     ebx, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x81391F",
+    "line": "push    ebx; lpAddend",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x813920",
+    "line": "call    dword ptr ds:0A28078h",
+    "mnemonic": "call",
+    "size": 6
+  },
+  {
+    "ea": "0x813926",
+    "line": "mov     eax, [ebp+144h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x81392C",
+    "line": "push    eax; a2",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x81392D",
+    "line": "mov     ecx, ebp; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x81392F",
+    "line": "call    RenderShadowCategoryObjectListOffscreen; Render the current ShadowSceneLight's engine-owned +0xE8 category/object list through the offscreen culling/accumulator helper.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x813934",
+    "line": "jmp     loc_813880",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1280",
+    "line": "lea     ecx, [ebp-0A4h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1286",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D128B",
+    "line": "lea     ecx, [ebp-0A0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1291",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1296",
+    "line": "lea     ecx, [ebp-9Ch]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D129C",
+    "line": "jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D12A1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D12A5",
+    "line": "lea     eax, [edx-0DCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D12AB",
+    "line": "mov     ecx, [edx-0E0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D12B1",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D12B3",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D12B8",
+    "line": "mov     eax, offset stru_AF9964",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D12BD",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

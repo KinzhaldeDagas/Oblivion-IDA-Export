@@ -78,7 +78,7 @@
 0x4FC46B: fstp    st
 0x4FC46D: push    edx
 0x4FC46E: lea     ecx, [esp+248h+var_208]
-0x4FC472: call    sub_6AA320
+0x4FC472: call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.
 0x4FC477: jmp     short loc_4FC4EE
 0x4FC479: cmp     ecx, ebx
 0x4FC47B: jz      short loc_4FC4EC
@@ -118,7 +118,7 @@
 0x4FC4DF: push    edx
 0x4FC4E0: push    ecx
 0x4FC4E1: lea     ecx, [esp+24Ch+var_208]
-0x4FC4E5: call    sub_589640
+0x4FC4E5: call    NiTPointerList__InsertBeforePosition
 0x4FC4EA: jmp     short loc_4FC4EE
 0x4FC4EC: fstp    st
 0x4FC4EE: mov     edi, [edi+4]
@@ -227,7 +227,7 @@
 0x4FC65B: test    ebx, ebx
 0x4FC65D: jnz     loc_4FC5B0
 0x4FC663: lea     ecx, [esp+244h+var_208]
-0x4FC667: call    NiTPointerList__FreeAllNodes
+0x4FC667: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x4FC66C: mov     edx, [esp+244h+var_1E4]
 0x4FC670: mov     eax, [esp+244h+var_210]
 0x4FC674: mov     ecx, [esp+244h+var_1E0]
@@ -249,3 +249,16 @@
 0x4FC6B4: mov     esp, ebp
 0x4FC6B6: pop     ebp
 0x4FC6B7: retn
+0x9B6C00: lea     ecx, [ebp+var_208]
+0x9B6C06: jmp     j_??1?$NiTPointerList@PAVScript@@@@UAE@XZ; NiTPointerList<Script *>::~NiTPointerList<Script *>(void)
+0x9B6C0B: mov     edx, [esp-4+arg_4]
+0x9B6C0F: lea     eax, [edx-234h]
+0x9B6C15: mov     ecx, [edx-238h]
+0x9B6C1B: xor     ecx, eax
+0x9B6C1D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6C22: add     eax, 0Ch
+0x9B6C25: mov     ecx, [edx-38h]
+0x9B6C28: xor     ecx, eax
+0x9B6C2A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B6C2F: mov     eax, offset stru_AE197C
+0x9B6C34: jmp     ___CxxFrameHandler3

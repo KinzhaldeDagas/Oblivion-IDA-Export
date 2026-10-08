@@ -37,7 +37,7 @@
 0x4E0EB4: mov     [esp+30h+var_1C], offset ??_7?$NiTPointerMap@PAVTESObjectREFR@@_N@@6B@; const NiTPointerMap<TESObjectREFR *,bool>::`vftable'
 0x4E0EBC: lea     ecx, [edi+44h]
 0x4E0EBF: mov     [esp+30h+var_4], ebx
-0x4E0EC3: call    sub_420260
+0x4E0EC3: call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x4E0EC8: mov     esi, eax
 0x4E0ECA: cmp     esi, ebx
 0x4E0ECC: jz      loc_4E0F52
@@ -56,10 +56,10 @@
 0x4E0EF4: test    al, 1
 0x4E0EF6: lea     ecx, [esi+44h]
 0x4E0EF9: jz      short loc_4E0F04
-0x4E0EFB: call    sub_420260
+0x4E0EFB: call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x4E0F00: mov     esi, eax
 0x4E0F02: jmp     short loc_4E0F31
-0x4E0F04: call    sub_420260
+0x4E0F04: call    ExtraDataList_GetEnableStateParent; Returns the parent TESObjectREFR stored in ExtraEnableStateParent type 0x3F.
 0x4E0F09: cmp     eax, ebx
 0x4E0F0B: jz      short loc_4E0F2F
 0x4E0F0D: push    ebx; int
@@ -67,7 +67,7 @@
 0x4E0F13: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4E0F18: push    ebx; int
 0x4E0F19: push    eax; a1
-0x4E0F1A: call    TESForm_LookupByFormID
+0x4E0F1A: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4E0F1F: add     esp, 4
 0x4E0F22: push    eax; void *
 0x4E0F23: call    OblivionDynamicCast
@@ -76,16 +76,16 @@
 0x4E0F2D: jmp     short loc_4E0F31
 0x4E0F2F: xor     esi, esi
 0x4E0F31: cmp     esi, ebx
-0x4E0F33: mov     [esp+30h+var_1D], bl
+0x4E0F33: mov     [esp+30h+valueOut], bl
 0x4E0F37: jz      short loc_4E0F52
-0x4E0F39: lea     ecx, [esp+30h+var_1D]
-0x4E0F3D: push    ecx
-0x4E0F3E: push    esi
-0x4E0F3F: lea     ecx, [esp+38h+var_1C]
-0x4E0F43: call    sub_4D6760
+0x4E0F39: lea     ecx, [esp+30h+valueOut]
+0x4E0F3D: push    ecx; valueOut
+0x4E0F3E: push    esi; key
+0x4E0F3F: lea     ecx, [esp+38h+var_1C]; this
+0x4E0F43: call    NiTMap_TryGetAtByteValue; Verified generic NiTMap lookup helper: hashes the UInt32 key through the map vtable, walks the bucket chain using the map's key comparator, returns false when absent, and on a match writes the low byte of the entry data field to valueOut and returns true. Callers use it for byte/boolean-valued maps, including PlayerCharacter_GetLastSpaceForDoor and cell/worldspace visited or filter maps; this helper does not establish the full map value width.
 0x4E0F48: test    al, al
 0x4E0F4A: jz      short loc_4E0ED2
-0x4E0F4C: cmp     [esp+30h+var_1D], bl
+0x4E0F4C: cmp     [esp+30h+valueOut], bl
 0x4E0F50: jz      short loc_4E0ED2
 0x4E0F52: lea     ecx, [esp+30h+var_1C]
 0x4E0F56: mov     [esp+30h+var_4], 0FFFFFFFFh
@@ -99,3 +99,12 @@
 0x4E0F75: pop     ebx
 0x4E0F76: add     esp, 20h
 0x4E0F79: retn
+0x9B5B20: lea     ecx, [ebp-1Ch]
+0x9B5B23: jmp     ??1?$NiTPointerMap@PAVTESObjectREFR@@_N@@UAE@XZ; NiTPointerMap<TESObjectREFR *,bool>::~NiTPointerMap<TESObjectREFR *,bool>(void)
+0x9B5B28: mov     edx, [esp+arg_4]
+0x9B5B2C: lea     eax, [edx-20h]
+0x9B5B2F: mov     ecx, [edx-24h]
+0x9B5B32: xor     ecx, eax
+0x9B5B34: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5B39: mov     eax, offset stru_AE0B20
+0x9B5B3E: jmp     ___CxxFrameHandler3

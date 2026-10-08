@@ -6,7 +6,7 @@
 0x68630B: mov     esi, ecx
 0x68630D: jz      loc_686444
 0x686313: mov     ecx, ebx; this
-0x686315: call    MobileObject_GetCharProxy
+0x686315: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x68631A: test    eax, eax
 0x68631C: jz      loc_686444
 0x686322: fld     dword ptr ds:0A2FF44h
@@ -35,14 +35,14 @@
 0x686369: mov     ecx, ebx
 0x68636B: mov     [esp+2Ch+var_18], eax
 0x68636F: mov     [esp+2Ch+var_10], edx
-0x686373: call    sub_5E0660
+0x686373: call    Actor_GetScaledCollisionHeight; Returns (localBoundMax.z - localBoundMin.z) * reference scale.
 0x686378: fmul    qword ptr ds:0A2FAA0h
-0x68637E: lea     ecx, [esi+14h]
+0x68637E: lea     ecx, [esi+14h]; this
 0x686381: xor     ebp, ebp
 0x686383: fadd    [esp+2Ch+var_10]
 0x686387: mov     [esp+2Ch+var_1C], ecx
 0x68638B: fstp    [esp+2Ch+var_10]
-0x68638F: call    sub_42B410
+0x68638F: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x686394: mov     edi, eax
 0x686396: test    edi, edi
 0x686398: jz      loc_686442
@@ -52,17 +52,17 @@
 0x6863A7: test    esi, esi
 0x6863A9: jz      loc_686442
 0x6863AF: mov     ecx, esi
-0x6863B1: call    sub_6899C0
+0x6863B1: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x6863B6: mov     ecx, [eax]
-0x6863B8: mov     [esp+2Ch+var_C], ecx
+0x6863B8: mov     [esp+2Ch+pointXYZ], ecx
 0x6863BC: mov     edx, [eax+4]
-0x6863BF: lea     ecx, [esp+2Ch+var_C]
+0x6863BF: lea     ecx, [esp+2Ch+pointXYZ]
 0x6863C3: mov     [esp+2Ch+var_8], edx
 0x6863C7: mov     eax, [eax+8]
-0x6863CA: push    ecx
-0x6863CB: mov     ecx, ebx
+0x6863CA: push    ecx; pointXYZ
+0x6863CB: mov     ecx, ebx; this
 0x6863CD: mov     [esp+30h+var_4], eax
-0x6863D1: call    sub_4D7E30
+0x6863D1: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x6863D6: fstp    [esp+2Ch+arg_0]
 0x6863DA: fld     [esp+2Ch+arg_0]
 0x6863DE: fcomp   qword ptr ds:0A6E6F8h
@@ -78,7 +78,7 @@
 0x686400: fnstsw  ax
 0x686402: test    ah, 5
 0x686405: jnp     short loc_68641D
-0x686407: lea     edx, [esp+2Ch+var_C]
+0x686407: lea     edx, [esp+2Ch+pointXYZ]
 0x68640B: push    edx
 0x68640C: lea     eax, [esp+30h+var_18]
 0x686410: push    eax

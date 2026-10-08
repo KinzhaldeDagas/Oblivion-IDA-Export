@@ -45,7 +45,7 @@
 0x8C9A1A: push    edx
 0x8C9A1B: lea     eax, [esp+0C0h+var_70]
 0x8C9A1F: push    eax
-0x8C9A20: call    sub_43F3E0
+0x8C9A20: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8C9A25: push    0DCh ; 'Ü'; Size
 0x8C9A2A: call    FormHeapAlloc
 0x8C9A2F: add     esp, 14h
@@ -109,3 +109,19 @@
 0x8C9AE9: mov     esp, ebp
 0x8C9AEB: pop     ebp
 0x8C9AEC: retn    4
+0x9D7A30: mov     eax, [ebp+var_98]
+0x9D7A36: push    eax
+0x9D7A37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D7A3C: pop     ecx
+0x9D7A3D: retn
+0x9D7A3E: mov     edx, [esp-4+arg_4]
+0x9D7A42: lea     eax, [edx-0A4h]
+0x9D7A48: mov     ecx, [edx-0A8h]
+0x9D7A4E: xor     ecx, eax
+0x9D7A50: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7A55: add     eax, 0Ch
+0x9D7A58: mov     ecx, [edx-8]
+0x9D7A5B: xor     ecx, eax
+0x9D7A5D: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7A62: mov     eax, offset stru_AFF598
+0x9D7A67: jmp     ___CxxFrameHandler3

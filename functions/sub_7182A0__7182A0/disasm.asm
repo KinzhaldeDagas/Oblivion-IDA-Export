@@ -1,5 +1,5 @@
 0x7182A0: push    ebx
-0x7182A1: mov     ebx, dword ptr [esp+4+ArgList]
+0x7182A1: mov     ebx, [esp+4+ArgList]
 0x7182A5: push    esi
 0x7182A6: mov     eax, ebx
 0x7182A8: push    edi

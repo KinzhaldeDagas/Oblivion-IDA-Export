@@ -1,9 +1,9 @@
 0x5474A0: push    ecx
-0x5474A1: mov     eax, [esp+4+arg_4]
-0x5474A5: mov     ecx, [esp+4+arg_0]
-0x5474A9: push    eax
-0x5474AA: push    ecx
-0x5474AB: call    Calc_LuckModifiedSkill
+0x5474A1: mov     eax, [esp+4+luckValue]
+0x5474A5: mov     ecx, [esp+4+skillValue]
+0x5474A9: push    eax; luckValue
+0x5474AA: push    ecx; skillValue
+0x5474AB: call    Calc_LuckModifiedSkill; Block damage reduction uses Calc_LuckModifiedSkill before the formula. AVU replacement must keep fractional skill and the vanilla lower floor while allowing values above 100 to feed the extended formula.
 0x5474B0: fstp    [esp+0Ch+var_4]
 0x5474B4: fld     [esp+0Ch+var_4]
 0x5474B8: add     esp, 8

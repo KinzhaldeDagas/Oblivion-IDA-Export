@@ -1,4 +1,4 @@
-void *sub_8B8310()
+NiRTTI *sub_8B8310()
 {
-  return &unk_BA8000;
+  return &MEMORY[0xBA8000]; /*0x8b8315*/
 }

@@ -15,9 +15,9 @@
 0x6458C8: push    esi; int
 0x6458C9: mov     esi, [esp+0Ch+arg_0]
 0x6458CD: mov     ecx, esi
-0x6458CF: call    Actor_GetBaseClass
+0x6458CF: call    Actor_GetBaseClass; Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 0x6458D4: mov     ecx, eax
-0x6458D6: call    TESClass__IsGuardClass
+0x6458D6: call    TESClass__IsGuardClass; TESClass::IsGuardClass reads classFlags at +0x60 bit 1.
 0x6458DB: test    al, al
 0x6458DD: jnz     loc_6459AF
 0x6458E3: push    ebx
@@ -139,7 +139,7 @@
 0x645A13: cmp     edi, eax
 0x645A15: jnz     loc_645992
 0x645A1B: mov     ecx, esi; int
-0x645A1D: call    sub_5EAE70
+0x645A1D: call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.
 0x645A22: pop     esi
 0x645A23: pop     edi
 0x645A24: pop     ebp

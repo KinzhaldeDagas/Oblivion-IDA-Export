@@ -1,4 +1,4 @@
-0x9E8360: fld     ds:flt_A3D65C
+0x9E8360: fld     ds:kHeadBodyNormalMatchRadius
 0x9E8366: push    ecx
 0x9E8367: fstp    [esp+4+var_4]; float
 0x9E836A: push    offset aFdyingtimer; "fDyingTimer"

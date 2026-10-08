@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 11,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
+  "chunks": [
+    [
+      "0x628EE0",
+      "0x629212"
+    ],
+    [
+      "0x9C36A0",
+      "0x9C36D1"
+    ]
+  ],
+  "chunks_sha256": "447d33b51e6850a8d441ba33e3f6b98092824e85a186c3cf0729dbd8c42cf442",
+  "comment_regular": "HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
+  "comment_repeatable": "HighProcess constructor: derives from MiddleHighProcess, then installs HighProcess vtable and initializes movementFlags at +0x1FC to 0. Confirms movement flag storage is HighProcess-only.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
   "display_name": "HighProcess::HighProcess(void)",
   "end_ea": "0x629212",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "??0HighProcess@@QAE@XZ",
   "segment": ".text",
   "sha256": "1c2bf4ad703d1acbca41460809325bd791c1b7c2d57593c421a5a64ac9ed7ca8",
   "size": 818,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x628EE0",
+  "total_chunk_size": 867,
   "type": "HighProcess *__thiscall(HighProcess *this)",
-  "xrefs_from_count": 186,
+  "xrefs_from_count": 200,
   "xrefs_to_count": 11
 }

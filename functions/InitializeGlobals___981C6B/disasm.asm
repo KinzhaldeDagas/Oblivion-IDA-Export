@@ -1,11 +1,11 @@
-0x981C6B: cmp     dword ptr ds:0AA3E84h, 0
+0x981C6B: cmp     dword ptr ds:0AA3E84h, 0; Verified (Oblivion CRT): CRT_InitializeGlobals runs _initterm_e and then iterates function pointers in g_CppGlobalInitializersBegin..End before later startup. The inspected initializer ranges contain no direct pointers to ActiveEffect_Register_*_Factory or ActiveEffectCreatorMap_GlobalCtor; invocation of those routines is Unknown.
 0x981C72: jz      short loc_981C8E
 0x981C74: push    offset off_AA3E84
 0x981C79: call    __IsNonwritableInCurrentImage
 0x981C7E: test    eax, eax
 0x981C80: pop     ecx
 0x981C81: jz      short loc_981C8E
-0x981C83: push    [esp+arg_0]
+0x981C83: push    [esp+initializeCRTGlobals]
 0x981C87: call    dword ptr ds:0AA3E84h
 0x981C8D: pop     ecx
 0x981C8E: call    __initp_misc_cfltcvt_tab
@@ -20,9 +20,9 @@
 0x981CA9: push    edi
 0x981CAA: push    offset sub_98D7E1; void (__cdecl *)()
 0x981CAF: call    _atexit
-0x981CB4: mov     esi, offset unk_A283D0
+0x981CB4: mov     esi, offset g_CppGlobalInitializersBegin
 0x981CB9: mov     eax, esi
-0x981CBB: mov     edi, offset unk_A2F77C
+0x981CBB: mov     edi, offset g_CppGlobalInitializersEnd
 0x981CC0: cmp     eax, edi
 0x981CC2: pop     ecx
 0x981CC3: jnb     short loc_981CD4

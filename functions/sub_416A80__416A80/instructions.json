@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x416A80",
-    "line": "mov     ecx, SaveLoad_CurrentSavegame",
+    "line": "mov     ecx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x416A8A",
-    "line": "call    sub_45A170",
+    "line": "call    TESSaveLoadGame_UseSaveGameBlocks",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x416A98",
-    "line": "mov     ecx, dword_B3350C",
+    "line": "mov     ecx, dword ptr unk_B3350C",
     "mnemonic": "mov",
     "size": 6
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x416AA7",
-    "line": "mov     edx, dword_B33510",
+    "line": "mov     edx, dword ptr unk_B33510",
     "mnemonic": "mov",
     "size": 6
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x416AD9",
-    "line": "mov     edx, EffectSettingCollection",
+    "line": "mov     edx, ds:0B33508h",
     "mnemonic": "mov",
     "size": 6
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x416AE3",
-    "line": "mov     ecx, offset EffectSettingCollection",
+    "line": "mov     ecx, 0B33508h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x416AEA",
-    "line": "mov     edx, dword_B3350C",
+    "line": "mov     edx, dword ptr unk_B3350C",
     "mnemonic": "mov",
     "size": 6
   },
@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x416AF7",
-    "line": "mov     esi, dword_B33510",
+    "line": "mov     esi, dword ptr unk_B33510",
     "mnemonic": "mov",
     "size": 6
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x416B30",
-    "line": "mov     edx, SaveLoad_CurrentSavegame",
+    "line": "mov     edx, g_TESSaveLoadGame; Verified: g_TESSaveLoadGame singleton points to this partially recovered 136-byte serialization view. +0 ChangesMap, +4 alternate ChangesMap, +8 interior map, +C exterior references map, +10 exterior cell map, +14 cursor, +18 flags, +74 irefTable, +78 worldspaceIDArray, +7C currentVersion, +7D encoding flag, +80/+84 active form headers. Remaining embedded fields retain Unknown names.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -415,7 +415,7 @@
   },
   {
     "ea": "0x416B43",
-    "line": "call    TESForm_LookupByFormID",
+    "line": "call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.",
     "mnemonic": "call",
     "size": 5
   },

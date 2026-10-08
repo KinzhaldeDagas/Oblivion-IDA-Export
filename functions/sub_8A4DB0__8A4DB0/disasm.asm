@@ -26,7 +26,7 @@
 0x8A4DE8: mov     ecx, esi
 0x8A4DEA: call    eax
 0x8A4DEC: push    edi
-0x8A4DED: call    FormHeapFree
+0x8A4DED: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8A4DF2: add     esp, 4
 0x8A4DF5: test    ebp, ebp
 0x8A4DF7: mov     [ebx+4], ebp

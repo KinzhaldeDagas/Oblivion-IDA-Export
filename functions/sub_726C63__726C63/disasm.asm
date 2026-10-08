@@ -82,7 +82,6 @@
 0x726D5B: cmp     [esp+arg_14], edi
 0x726D5F: jbe     loc_726E59
 0x726D65: jmp     short loc_726D70
-0x726D67: align 10h
 0x726D70: mov     eax, [ebx+21Ch]
 0x726D76: push    1
 0x726D78: lea     edx, [esp+4+arg_1C]

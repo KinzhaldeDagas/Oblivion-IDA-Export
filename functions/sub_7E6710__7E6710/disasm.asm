@@ -1,4 +1,4 @@
-0x7E6710: sub     esp, 0CCh
+0x7E6710: sub     esp, 0CCh; MoonSugarEffect decode: TallGrassShader transform slot (+0x34). Calls sub_765480 with passed NiTransform, computes inverse/local wind or shadow constants, then falls through to base sub_779710. Transform-copy wobble reaches this but per-vertex grass motion is shader-owned.
 0x7E6716: push    ebx
 0x7E6717: push    ebp
 0x7E6718: push    esi
@@ -8,7 +8,7 @@
 0x7E6723: mov     ecx, [ebp+14h]
 0x7E6726: push    0
 0x7E6728: push    esi
-0x7E6729: call    sub_765480
+0x7E6729: call    NiDX9Renderer_SetModelTransform; MoonSugar build 39: common non-skinned transform upload has many shader-family xrefs (generic, water, grass, precipitation, SpeedTree, LOD, GeometryDecal, Lighting30). Do not globally detour for Moon Sugar; use scoped caller/hook windows.
 0x7E672E: fld     dword ptr [esi+30h]
 0x7E6731: fmul    dword ptr [esi]
 0x7E6733: mov     eax, ds:0B42E90h
@@ -105,7 +105,7 @@
 0x7E6877: lea     ecx, [esp+0DCh+var_98]
 0x7E687B: push    ecx
 0x7E687C: mov     ecx, [eax+118h]
-0x7E6882: call    sub_405AD0
+0x7E6882: call    ShadowSceneLight_GetLightRef
 0x7E6887: mov     edi, [eax]
 0x7E6889: mov     eax, [esp+0DCh+var_98]
 0x7E688D: test    eax, eax
@@ -132,7 +132,7 @@
 0x7E68D1: lea     ecx, [esp+0DCh+var_A4]
 0x7E68D5: mov     [esp+0DCh+var_A0], edx
 0x7E68D9: mov     [esp+0DCh+var_9C], eax
-0x7E68DD: call    sub_43F350
+0x7E68DD: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x7E68E2: fstp    st
 0x7E68E4: mov     ecx, [edi+0E0h]
 0x7E68EA: mov     edx, [edi+0E4h]
@@ -206,8 +206,8 @@
 0x7E6A0C: jmp     short loc_7E6A3B
 0x7E6A0E: cmp     byte ptr ds:0B43344h, 0
 0x7E6A15: jz      short loc_7E6A3B
-0x7E6A17: mov     ecx, ebx
-0x7E6A19: call    sub_7ED600
+0x7E6A17: mov     ecx, ebx; this
+0x7E6A19: call    BSShaderLightingProperty__CountFrustumVisibleEnabledLights; Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.
 0x7E6A1E: test    ax, ax
 0x7E6A21: jbe     short loc_7E6A3B
 0x7E6A23: fld     dword ptr [esi+30h]
@@ -235,7 +235,7 @@
 0x7E6A72: push    edx; a3
 0x7E6A73: push    eax; a2
 0x7E6A74: mov     ecx, ebp; this
-0x7E6A76: call    sub_779710
+0x7E6A76: call    sub_779710; MoonSugar build 39: base shader +0x34 transform slot branches skinned partition to CalculateBoneMatrixes/sub_765560, otherwise pass-0 non-skinned to sub_765480. Confirms hardware skin needs separate post-flush hook.
 0x7E6A7B: pop     edi
 0x7E6A7C: pop     esi
 0x7E6A7D: pop     ebp

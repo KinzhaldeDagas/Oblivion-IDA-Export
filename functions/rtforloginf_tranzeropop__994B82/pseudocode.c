@@ -1,4 +1,4 @@
-int __usercall rtforloginf_::tranzeropop@<eax>(double a1@<st0>)
+void rtforloginf_::tranzeropop()
 {
-  return rtforloginf_::tranzeronpop(a1);
+  rtforloginf_::tranzeronpop(); /*0x994b83*/
 }

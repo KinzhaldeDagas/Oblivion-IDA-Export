@@ -13,7 +13,7 @@
 0x611BF3: cmp     byte ptr [eax+610h], 0
 0x611BFA: jnz     short loc_611C76
 0x611BFC: mov     ecx, esi
-0x611BFE: call    sub_5E0F50
+0x611BFE: call    Actor_GetEffectiveCombatStyle; Resolves actor/mount combat style and falls back to DefaultCombatStyle when the base style is null.
 0x611C03: mov     edx, [eax]
 0x611C05: mov     ecx, eax
 0x611C07: mov     eax, [edx+16Ch]

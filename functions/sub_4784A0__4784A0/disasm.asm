@@ -24,7 +24,6 @@
 0x4784E3: test    cx, cx
 0x4784E6: jbe     short loc_478522
 0x4784E8: jmp     short loc_4784F0
-0x4784EA: align 10h
 0x4784F0: mov     eax, [ebp+4]
 0x4784F3: movzx   ecx, di
 0x4784F6: mov     edx, [eax+ecx*4]
@@ -35,10 +34,10 @@
 0x478503: jz      short loc_478519
 0x478505: movzx   ecx, bx
 0x478508: cmp     [eax+ecx*4], edx
-0x47850B: lea     ecx, [eax+ecx*4]
+0x47850B: lea     ecx, [eax+ecx*4]; this
 0x47850E: jz      short loc_478516
-0x478510: push    esi
-0x478511: call    sub_55E2A0
+0x478510: push    esi; incoming
+0x478511: call    OB_NiSmartPointer_Assign_010201A0; SpeedTreeOBSE 2026-07-14: smart-pointer assignment releases the old reference before storing/AddRefing the new one. Transaction rollback snapshots must hold their own AddRef.
 0x478516: add     ebx, 1
 0x478519: add     edi, 1
 0x47851C: cmp     di, [ebp+0Ah]
@@ -71,7 +70,7 @@
 0x47856E: cmp     eax, edi
 0x478570: mov     [esp+28h+var_4], edi
 0x478574: jz      short loc_47858E
-0x478576: push    offset sub_7016A0; a5
+0x478576: push    offset NiPointerSlot_Release; a5
 0x47857B: push    offset ?_Release@_NonReentrantLock@details@Concurrency@@QAEXXZ; a4
 0x478580: push    esi; size
 0x478581: lea     edi, [eax+4]
@@ -127,14 +126,14 @@
 0x478612: test    ebx, ebx
 0x478614: jz      short loc_478633
 0x478616: mov     ecx, [ebx-4]
-0x478619: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x478619: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x47861E: lea     esi, [ebx-4]
 0x478621: push    ecx; int
 0x478622: push    4; unsigned int
 0x478624: push    ebx; void *
 0x478625: call    $LN21
 0x47862A: push    esi
-0x47862B: call    FormHeapFree
+0x47862B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x478630: add     esp, 4
 0x478633: mov     ecx, [esp+28h+var_C]
 0x478637: mov     large fs:0, ecx
@@ -145,3 +144,15 @@
 0x478642: pop     ebx
 0x478643: add     esp, 14h
 0x478646: retn
+0x9AFAA0: mov     eax, [ebp-10h]
+0x9AFAA3: push    eax
+0x9AFAA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AFAA9: pop     ecx
+0x9AFAAA: retn
+0x9AFAAB: mov     edx, [esp+arg_4]
+0x9AFAAF: lea     eax, [edx-18h]
+0x9AFAB2: mov     ecx, [edx-1Ch]
+0x9AFAB5: xor     ecx, eax
+0x9AFAB7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AFABC: mov     eax, offset stru_ADBFB0
+0x9AFAC1: jmp     ___CxxFrameHandler3

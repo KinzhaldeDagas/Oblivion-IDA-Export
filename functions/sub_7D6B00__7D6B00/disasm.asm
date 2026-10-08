@@ -1,4 +1,4 @@
-0x7D6B00: push    esi
+0x7D6B00: push    esi; Locked target-group end wrapper: run EndUsingRenderTargetGroup, release the renderer lock, and clear IsReady. It does not itself bind another target.
 0x7D6B01: mov     esi, ecx
 0x7D6B03: cmp     dword ptr [esi+200h], 1
 0x7D6B0A: jz      short loc_7D6B15

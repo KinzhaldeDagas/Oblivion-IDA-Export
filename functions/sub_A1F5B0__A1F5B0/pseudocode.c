@@ -1,4 +1,4 @@
 void __cdecl sub_A1F5B0()
 {
-  GameSetting_destr((int *)&fTrainingCostMult);
+  GameSetting_destr((int *)&g_fTrainingCostMult); /*0xa1f5b5*/
 }

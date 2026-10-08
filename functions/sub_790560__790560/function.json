@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x790560",
+      "0x79059F"
+    ]
+  ],
+  "chunks_sha256": "53b33f0c4471bc60ccb0ade2e6865f79e0f31396e99177df29662def0909f581",
+  "comment_regular": "Builds the fuzzy-volume heap for a CBranch pointer range from the bottom non-leaf upward by repeated adjust-heap calls.",
+  "comment_repeatable": "Builds the fuzzy-volume heap for a CBranch pointer range from the bottom non-leaf upward by repeated adjust-heap calls.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_790560",
+  "display_name": "OB_BranchPtrVector_MakeHeapByFuzzyVolume_010201A0",
   "end_ea": "0x79059F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_790560",
+  "name": "OB_BranchPtrVector_MakeHeapByFuzzyVolume_010201A0",
   "segment": ".text",
   "sha256": "53b33f0c4471bc60ccb0ade2e6865f79e0f31396e99177df29662def0909f581",
   "size": 63,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x790560",
-  "type": "void __cdecl(int, int)",
+  "total_chunk_size": 63,
+  "type": "void __cdecl(OB_CBranch_010201A0 **begin, OB_CBranch_010201A0 **end)",
   "xrefs_from_count": 34,
   "xrefs_to_count": 1
 }

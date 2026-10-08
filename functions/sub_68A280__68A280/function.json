@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 7,
   "callers_count": 4,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_68A280",
+  "chunks": [
+    [
+      "0x68A280",
+      "0x68A300"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "0615ac6e9851574bf4aa0eb8669639673b5fd1df903f4b54ee9e5a65e9b8864b",
+  "comment_regular": "Verified appends the final destination as a kind-1 TravelPathNode with its own copied NiPoint3 payload, even if low-path A* produced no reference nodes.",
+  "comment_repeatable": "Verified appends the final destination as a kind-1 TravelPathNode with its own copied NiPoint3 payload, even if low-path A* produced no reference nodes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "TravelPath_AppendDestinationPosition",
   "end_ea": "0x68A300",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_68A280",
+  "name": "TravelPath_AppendDestinationPosition",
   "segment": ".text",
   "sha256": "6ee56af65c6ed0fcf87190e7815a3074f00c9f3f225bdb524068bb162c20f70d",
   "size": 128,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68A280",
-  "type": "void __thiscall(_DWORD *this, _DWORD *)",
-  "xrefs_from_count": 48,
+  "total_chunk_size": 166,
+  "type": "void __thiscall(TravelPath *this, const NiPoint3 *position)",
+  "xrefs_from_count": 62,
   "xrefs_to_count": 4
 }

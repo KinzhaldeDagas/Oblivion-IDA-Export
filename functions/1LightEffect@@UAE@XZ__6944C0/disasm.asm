@@ -30,7 +30,7 @@
 0x694512: call    eax
 0x694514: mov     ecx, edi; this
 0x694516: mov     [esp+1Ch+var_4], 0FFFFFFFFh
-0x69451E: call    ??1ActiveEffect@@UAE@XZ; ActiveEffect::~ActiveEffect(void)
+0x69451E: call    ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
 0x694523: mov     ecx, dword ptr [esp+1Ch+var_C]
 0x694527: mov     large fs:0, ecx
 0x69452E: pop     ecx
@@ -38,3 +38,12 @@
 0x694530: pop     esi
 0x694531: add     esp, 10h
 0x694534: retn
+0x9C57E0: mov     ecx, [ebp-10h]; this
+0x9C57E3: jmp     ??1ActiveEffect@@UAE@XZ; Verified ActiveEffect destructor detaches each associated MagicHitEffect by setting bFinished and ownerActiveEffect=null, clears/frees only the HitEffectNode list, and relies on the ActorProcessManager reference added during PostLink to own the BSTempEffect object's later update/removal.
+0x9C57E8: mov     edx, [esp+arg_4]
+0x9C57EC: lea     eax, [edx-0Ch]
+0x9C57EF: mov     ecx, [edx-10h]
+0x9C57F2: xor     ecx, eax
+0x9C57F4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C57F9: mov     eax, offset stru_AEDF6C
+0x9C57FE: jmp     ___CxxFrameHandler3

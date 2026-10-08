@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$62E07578A93D0E9BDE5303CD2DF1DDCE",
+  "definition": "union $62E07578A93D0E9BDE5303CD2DF1DDCE\n{\nDBGKM_EXCEPTION Exception;\nDBGUI_CREATE_THREAD CreateThread;\nDBGUI_CREATE_PROCESS CreateProcessInfo;\nDBGKM_EXIT_THREAD ExitThread;\nDBGKM_EXIT_PROCESS ExitProcess;\nDBGKM_LOAD_DLL LoadDll;\nDBGKM_UNLOAD_DLL UnloadDll;\n}\n",
   "id": 18374686479671875028,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "Exception",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 152
+      "size": 152,
+      "type": "DBGKM_EXCEPTION"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateThread",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 12
+      "size": 12,
+      "type": "DBGUI_CREATE_THREAD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "CreateProcessInfo",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 36
+      "size": 36,
+      "type": "DBGUI_CREATE_PROCESS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ExitThread",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DBGKM_EXIT_THREAD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "ExitProcess",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DBGKM_EXIT_PROCESS"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "LoadDll",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 20
+      "size": 20,
+      "type": "DBGKM_LOAD_DLL"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "UnloadDll",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DBGKM_UNLOAD_DLL"
     }
   ],
   "name": "$62E07578A93D0E9BDE5303CD2DF1DDCE",
+  "ordinal": 8474,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 152
 }

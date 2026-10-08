@@ -1,9 +1,9 @@
 0x619E2E: test    bl, bl; jumptable 00619DD6 default case
 0x619E30: jnz     short loc_619E58
 0x619E32: fld     [esp+arg_18]
-0x619E36: mov     ecx, ebp
+0x619E36: mov     ecx, ebp; this
 0x619E38: fstp    [esp+arg_C]
-0x619E3C: call    sub_615520
+0x619E3C: call    CombatController_GetDesiredCombatDistance; Caches desired combat distance based on active combat mode and ranged/melee data.
 0x619E41: fcomp   [esp+arg_C]
 0x619E45: fnstsw  ax
 0x619E47: test    ah, 5
@@ -40,7 +40,7 @@
 0x619EAA: fstp    [esp+18h+var_18]; float
 0x619EAD: call    sub_547910
 0x619EB2: add     esp, 14h
-0x619EB5: call    Double_To_SInt32
+0x619EB5: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x619EBA: cmp     byte ptr [esp+4+arg_18], 0
 0x619EBF: mov     [edi+4], eax
 0x619EC2: jz      short loc_619EE4
@@ -50,16 +50,16 @@
 0x619ED1: call    GameSetting_GetSafeFloatPointer
 0x619ED6: fild    [esp+4+arg_18]
 0x619EDA: fmul    dword ptr [eax]
-0x619EDC: call    Double_To_SInt32
+0x619EDC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x619EE1: mov     [edi+4], eax
 0x619EE4: mov     ecx, ebp
-0x619EE6: call    sub_6135F0
+0x619EE6: call    CombatController_GetCurrentTarget
 0x619EEB: cmp     eax, esi
 0x619EED: jnz     short loc_619F6E
 0x619EEF: push    1
 0x619EF1: push    0Ch
 0x619EF3: push    esi
-0x619EF4: mov     ecx, offset ActorProcessManager_ptr
+0x619EF4: mov     ecx, (offset qword_B3BB2C+1D4h)
 0x619EF9: call    sub_6758E0
 0x619EFE: mov     esi, eax
 0x619F00: test    esi, esi
@@ -68,9 +68,9 @@
 0x619F06: call    BSSimpleList_Count
 0x619F0B: mov     ecx, esi
 0x619F0D: mov     edi, eax
-0x619F0F: call    BSSimpleList_Clear
+0x619F0F: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x619F14: push    esi
-0x619F15: call    FormHeapFree
+0x619F15: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x619F1A: add     esp, 4
 0x619F1D: cmp     edi, 2
 0x619F20: jle     short loc_619F6E
@@ -103,7 +103,7 @@
 0x619F73: pop     ebx
 0x619F74: jz      short loc_619F7D
 0x619F76: mov     ecx, ebp
-0x619F78: call    sub_619C90
+0x619F78: call    CombatController_UpdateTargetRetentionAndSort
 0x619F7D: pop     edi
 0x619F7E: pop     esi
 0x619F7F: pop     ebp

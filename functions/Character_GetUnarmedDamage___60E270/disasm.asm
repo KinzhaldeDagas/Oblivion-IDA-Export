@@ -10,7 +10,7 @@
 0x60E289: push    ecx; int
 0x60E28A: push    0
 0x60E28C: mov     ecx, esi; this
-0x60E28E: call    Actor_GetFatigueFraction
+0x60E28E: call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.
 0x60E293: mov     edx, [esi]
 0x60E295: mov     eax, [edx+284h]
 0x60E29B: push    ecx
@@ -36,4 +36,4 @@
 0x60E2CD: add     esp, 1Ch
 0x60E2D0: pop     esi
 0x60E2D1: add     esp, 8
-0x60E2D4: jmp     Double_To_SInt32
+0x60E2D4: jmp     Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.

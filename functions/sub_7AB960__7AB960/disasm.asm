@@ -21,9 +21,9 @@
 0x7AB99A: mov     ebp, eax
 0x7AB99C: jmp     short loc_7AB9A0
 0x7AB99E: xor     ebp, ebp
-0x7AB9A0: mov     ecx, ebp
+0x7AB9A0: mov     ecx, ebp; this
 0x7AB9A2: mov     [esp+20h+var_10], ebp
-0x7AB9A6: call    sub_7A9C30
+0x7AB9A6: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Release only a BSTPersistentList's already-free node chain at +0x0C to the global NiTList node pool, then clear that free-chain pointer and terminate the active tail link. It never destroys active or free-node RenderPass payload pointers.
 0x7AB9AB: mov     eax, [ebp+4]
 0x7AB9AE: mov     [ebp+0Ch], eax
 0x7AB9B1: mov     [ebp+4], edi
@@ -99,7 +99,7 @@
 0x7ABA72: lea     edx, [esp+20h+var_10]
 0x7ABA76: push    edx
 0x7ABA77: lea     ecx, [ebx+4Ch]
-0x7ABA7A: call    sub_5B1E20
+0x7ABA7A: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x7ABA7F: pop     esi
 0x7ABA80: mov     [ebx+60h], ebp
 0x7ABA83: pop     ebp

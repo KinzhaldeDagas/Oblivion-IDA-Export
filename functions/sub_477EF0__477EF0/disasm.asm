@@ -1,4 +1,4 @@
-0x477EF0: push    0FFFFFFFFh
+0x477EF0: push    0FFFFFFFFh; Clears a ref-counted NiT object-pointer array: releases every non-null element, nulls entries, and resets end/count words to zero. At bow release it is invoked on ArrowBone+0xAC, thereby releasing all ArrowBone children including the held Arrow:0 clone.
 0x477EF2: push    offset SEH_88E880
 0x477EF7: mov     eax, large fs:0
 0x477EFD: push    eax
@@ -54,3 +54,12 @@
 0x477F86: pop     ebx
 0x477F87: add     esp, 10h
 0x477F8A: retn
+0x9C7C90: lea     ecx, [ebp-10h]; slot
+0x9C7C93: jmp     NiPointerSlot_Release
+0x9C7C98: mov     edx, [esp+arg_4]
+0x9C7C9C: lea     eax, [edx-14h]
+0x9C7C9F: mov     ecx, [edx-18h]
+0x9C7CA2: xor     ecx, eax
+0x9C7CA4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7CA9: mov     eax, offset stru_AF0030
+0x9C7CAE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-0x41ED50: push    0FFFFFFFFh
+0x41ED50: push    0FFFFFFFFh; ExtraUses singleton setter always creates/updates and narrows to u8; no removal sentinel. Repeated XUSE retains node position and replaces the byte.
 0x41ED52: push    offset SEH_8C62B0
 0x41ED57: mov     eax, large fs:0
 0x41ED5D: push    eax
@@ -45,3 +45,15 @@
 0x41EDDF: pop     esi
 0x41EDE0: add     esp, 10h
 0x41EDE3: retn    4
+0x9D62E0: mov     eax, [ebp-10h]
+0x9D62E3: push    eax
+0x9D62E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D62E9: pop     ecx
+0x9D62EA: retn
+0x9D62EB: mov     edx, [esp+arg_4]
+0x9D62EF: lea     eax, [edx-8]
+0x9D62F2: mov     ecx, [edx-0Ch]
+0x9D62F5: xor     ecx, eax
+0x9D62F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D62FC: mov     eax, offset stru_AFE21C
+0x9D6301: jmp     ___CxxFrameHandler3

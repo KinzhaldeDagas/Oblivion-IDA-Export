@@ -1,27 +1,31 @@
-int __cdecl sub_79BB20(int a1, int a2, int a3)
+// Rotates the SFrondGuide range [first,middle) with [middle,last). Uses a greatest-common-divisor cycle decomposition and deep guide movement so embedded vertex-vector ownership remains valid.
+void __cdecl OB_SFrondGuide_RotateRange_010201A0(
+        OB_SFrondGuide_010201A0 *first,
+        OB_SFrondGuide_010201A0 *middle,
+        OB_SFrondGuide_010201A0 *last)
 {
   int v3; // ebx
-  int result; // eax
+  int v4; // eax
   int v5; // edi
   int v6; // edx
   int v7; // esi
-  int v8; // ebp
-  int v9; // edi
+  float *p_radius; // ebp
+  float *v9; // edi
   char v10; // cl
   int v11; // edx
   int v12; // eax
   double v13; // st7
   double v14; // st7
-  int v15; // eax
-  int v16; // esi
+  OB_SFrondGuide_010201A0 *v15; // eax
+  OB_SFrondGuide_010201A0 *v16; // esi
   int v17; // eax
   char v18; // al
   int v19; // ecx
   int v20; // edx
   double v21; // st7
-  char *v22; // eax
+  void *begin; // eax
   double v23; // st7
-  char *v24[4]; // [esp+18h] [ebp-3Ch] BYREF
+  OB_stVector16_010201A0 source; // [esp+18h] [ebp-3Ch] BYREF
   float v25; // [esp+28h] [ebp-2Ch]
   float v26; // [esp+2Ch] [ebp-28h]
   char v27; // [esp+30h] [ebp-24h]
@@ -31,91 +35,90 @@ int __cdecl sub_79BB20(int a1, int a2, int a3)
   int v31; // [esp+40h] [ebp-14h]
   int v32; // [esp+44h] [ebp-10h]
   unsigned int v33; // [esp+50h] [ebp-4h]
-  int v34; // [esp+5Ch] [ebp+8h]
+  OB_SFrondGuide_010201A0 *middlea; // [esp+5Ch] [ebp+8h]
 
-  v3 = (a2 - a1) / 0x30;
-  result = (a3 - a1) / 0x30;
-  v34 = result;
-  v5 = v3;
-  if ( v3 )
+  v3 = middle - first; /*0x79bb66*/
+  v4 = last - first; /*0x79bb7b*/
+  middlea = (OB_SFrondGuide_010201A0 *)v4; /*0x79bb7d*/
+  v5 = v3; /*0x79bb81*/
+  if ( v3 ) /*0x79bb83*/
   {
-    do
+    do /*0x79bb94*/
     {
-      v6 = result % v5;
-      v34 = v5;
-      result = v5;
-      v5 = v6;
+      v6 = v4 % v5; /*0x79bb86*/
+      middlea = (OB_SFrondGuide_010201A0 *)v5; /*0x79bb88*/
+      v4 = v5; /*0x79bb8c*/
+      v5 = v6; /*0x79bb92*/
     }
-    while ( v6 );
+    while ( v6 ); /*0x79bb94*/
   }
-  if ( result < (a3 - a1) / 0x30 && result > 0 )
+  if ( v4 < last - first && v4 > 0 ) /*0x79bba0*/
   {
-    v7 = 0x30 * v3;
-    v8 = 0x30 * result + a1 + 0x14;
-    while ( 1 )
+    v7 = 0xC * v3; /*0x79bba9*/
+    p_radius = &first[v4].radius; /*0x79bbb6*/
+    while ( 1 ) /*0x79bbc4*/
     {
-      v9 = v8 - 0x14;
-      sub_79AD70(v24, v8 - 0x14);
-      v10 = *(_BYTE *)(v8 + 4);
-      v25 = *(float *)(v8 - 4);
-      v11 = *(_DWORD *)(v8 + 0x14);
-      v12 = *(_DWORD *)(v8 + 0x18);
-      v26 = *(float *)v8;
-      v13 = *(float *)(v8 + 8);
-      v27 = v10;
-      v28 = v13;
-      v31 = v11;
-      v14 = *(float *)(v8 + 0xC);
-      v32 = v12;
-      v29 = v14;
-      v30 = *(float *)(v8 + 0x10);
-      v15 = v7 + v8 - 0x14;
-      v16 = a1;
-      v33 = 0;
-      if ( v15 != a3 )
-        v16 = v15;
-      while ( v16 != v8 - 0x14 )
+      v9 = p_radius + 0xFFFFFFFB; /*0x79bbc4*/
+      OB_stVector_SFrondVertex_CopyCtor_010201A0(&source, (const OB_stVector16_010201A0 *)(p_radius + 0xFFFFFFFB)); /*0x79bbcc*/
+      v10 = *((_BYTE *)p_radius + 4); /*0x79bbd4*/
+      v25 = p_radius[0xFFFFFFFF]; /*0x79bbd7*/
+      v11 = *((_DWORD *)p_radius + 5); /*0x79bbde*/
+      v12 = *((_DWORD *)p_radius + 6); /*0x79bbe1*/
+      v26 = *p_radius; /*0x79bbe4*/
+      v13 = p_radius[2]; /*0x79bbe8*/
+      v27 = v10; /*0x79bbeb*/
+      v28 = v13; /*0x79bbef*/
+      v31 = v11; /*0x79bbf3*/
+      v14 = p_radius[3]; /*0x79bbf7*/
+      v32 = v12; /*0x79bbfa*/
+      v29 = v14; /*0x79bbfe*/
+      v30 = p_radius[4]; /*0x79bc05*/
+      v15 = (OB_SFrondGuide_010201A0 *)&p_radius[v7 - 5]; /*0x79bc09*/
+      v16 = first; /*0x79bc11*/
+      v33 = 0; /*0x79bc15*/
+      if ( v15 != last ) /*0x79bc1d*/
+        v16 = v15; /*0x79bc1f*/
+      while ( v16 != (OB_SFrondGuide_010201A0 *)(p_radius + 0xFFFFFFFB) ) /*0x79bc26*/
       {
-        sub_79B160((char **)v9, (char **)v16);
-        *(float *)(v9 + 0x10) = *(float *)(v16 + 0x10);
-        *(float *)(v9 + 0x14) = *(float *)(v16 + 0x14);
-        *(_BYTE *)(v9 + 0x18) = *(_BYTE *)(v16 + 0x18);
-        *(float *)(v9 + 0x1C) = *(float *)(v16 + 0x1C);
-        *(float *)(v9 + 0x20) = *(float *)(v16 + 0x20);
-        *(float *)(v9 + 0x24) = *(float *)(v16 + 0x24);
-        *(_DWORD *)(v9 + 0x28) = *(_DWORD *)(v16 + 0x28);
-        *(_DWORD *)(v9 + 0x2C) = *(_DWORD *)(v16 + 0x2C);
-        v17 = (a3 - v16) / 0x30;
-        v9 = v16;
-        if ( v3 >= v17 )
-          v16 = a1 + 0x30 * (v3 - v17);
+        OB_stVector_SFrondVertex_CopyAssign_010201A0((OB_stVector16_010201A0 *)v9, (const OB_stVector16_010201A0 *)v16); /*0x79bc2b*/
+        v9[4] = v16->guideLength; /*0x79bc33*/
+        v9[5] = v16->radius; /*0x79bc39*/
+        *((_BYTE *)v9 + 0x18) = v16->frondMapIndex; /*0x79bc3f*/
+        v9[7] = v16->offsetAngle; /*0x79bc45*/
+        v9[8] = v16->surfaceArea; /*0x79bc4b*/
+        v9[9] = v16->fuzzySurfaceArea; /*0x79bc51*/
+        v9[0xA] = *(float *)&v16->sharedVertexStartIndex; /*0x79bc57*/
+        v9[0xB] = *(float *)&v16->verticesPerGuideVertex; /*0x79bc5d*/
+        v17 = last - v16; /*0x79bc75*/
+        v9 = (float *)v16; /*0x79bc79*/
+        if ( v3 >= v17 ) /*0x79bc7b*/
+          v16 = &first[v3 - v17]; /*0x79bc8d*/
         else
-          v16 += 0x30 * v3;
+          v16 += v3; /*0x79bc7d*/
       }
-      sub_79B160((char **)v9, v24);
-      v18 = v27;
-      *(float *)(v9 + 0x10) = v25;
-      v19 = v31;
-      v20 = v32;
-      *(float *)(v9 + 0x14) = v26;
-      v21 = v28;
-      *(_BYTE *)(v9 + 0x18) = v18;
-      v22 = v24[1];
-      *(float *)(v9 + 0x1C) = v21;
-      *(float *)(v9 + 0x20) = v29;
-      *(_DWORD *)(v9 + 0x28) = v19;
-      v23 = v30;
-      *(_DWORD *)(v9 + 0x2C) = v20;
-      *(float *)(v9 + 0x24) = v23;
-      v33 = 0xFFFFFFFF;
-      if ( v22 )
-        FormHeapFree((unsigned int)v22);
-      result = v34 - 1;
-      v8 -= 0x30;
-      if ( --v34 <= 0 )
-        break;
-      v7 = 0x30 * v3;
+      OB_stVector_SFrondVertex_CopyAssign_010201A0((OB_stVector16_010201A0 *)v9, &source); /*0x79bc9f*/
+      v18 = v27; /*0x79bca8*/
+      v9[4] = v25; /*0x79bcac*/
+      v19 = v31; /*0x79bcb3*/
+      v20 = v32; /*0x79bcb7*/
+      v9[5] = v26; /*0x79bcbb*/
+      v21 = v28; /*0x79bcbe*/
+      *((_BYTE *)v9 + 0x18) = v18; /*0x79bcc2*/
+      begin = source.begin; /*0x79bcc5*/
+      v9[7] = v21; /*0x79bcc9*/
+      v9[8] = v29; /*0x79bcd2*/
+      *((_DWORD *)v9 + 0xA) = v19; /*0x79bcd5*/
+      v23 = v30; /*0x79bcd8*/
+      *((_DWORD *)v9 + 0xB) = v20; /*0x79bcdc*/
+      v9[9] = v23; /*0x79bcdf*/
+      v33 = 0xFFFFFFFF; /*0x79bce2*/
+      if ( begin ) /*0x79bcea*/
+        FormHeapFree((unsigned int)begin); /*0x79bced*/
+      p_radius += 0xFFFFFFF4; /*0x79bcfc*/
+      middlea = (OB_SFrondGuide_010201A0 *)((char *)middlea + 0xFFFFFFFF); /*0x79bd01*/
+      if ( (int)middlea <= 0 ) /*0x79bd05*/
+        break; /*0x79bd05*/
+      v7 = 0xC * v3; /*0x79bbc0*/
     }
   }
-  return result;
 }

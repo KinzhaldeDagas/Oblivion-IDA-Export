@@ -1,19 +1,32 @@
 {
-  "callees_count": 41,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x5418F0",
+      "0x541DCD"
+    ]
+  ],
+  "chunks_sha256": "fe297e97f6ad8a7e93791e4a9df50f112e221b3bc13fa0770f3341edab7a9f8f",
+  "comment_regular": "Oblivion Sky color synthesis. Interior mode reads TESObjectCELL lighting colors; exterior modes blend current/next TESWeather colors, update Sky color vectors, and publish the active fog color. Fallout was consulted afterward and corroborates the conventional Sky::UpdateColors label.",
+  "comment_repeatable": "Oblivion Sky color synthesis. Interior mode reads TESObjectCELL lighting colors; exterior modes blend current/next TESWeather colors, update Sky color vectors, and publish the active fog color. Fallout was consulted afterward and corroborates the conventional Sky::UpdateColors label.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_5418F0",
+  "display_name": "Sky__UpdateColors",
   "end_ea": "0x541DCD",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5418F0",
+  "name": "Sky__UpdateColors",
   "segment": ".text",
   "sha256": "fe297e97f6ad8a7e93791e4a9df50f112e221b3bc13fa0770f3341edab7a9f8f",
   "size": 1245,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5418F0",
-  "type": "UInt32 __thiscall(Sky *this)",
+  "total_chunk_size": 1245,
+  "type": "void __thiscall(Sky *this)",
   "xrefs_from_count": 379,
   "xrefs_to_count": 2
 }

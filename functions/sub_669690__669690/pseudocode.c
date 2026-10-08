@@ -1,56 +1,50 @@
-TESTopic *__thiscall sub_669690(PlayerCharacter *a1, TESTopic *a5, char a6, char a7)
+// Adds one topic to PlayerCharacter.knownTopics. Duplicate suppression is by exact TESTopic pointer; successful new entries are pushed to the head, optional notification is suppressed when DialogMenu is active, and optional immediate sorting is case-insensitive by display name.
+bool __thiscall PlayerCharacter::AddKnownTopic(
+        PlayerCharacter *this,
+        TESTopic *topic,
+        bool sortImmediately,
+        bool notifyPlayer)
 {
-  TESTopic *result; // eax
-  tListTopic *p_unk5E4; // edi
+  tListTopic *p_knownTopicFirst; // edi
+  TESTopic **v6; // eax
   char *m_data; // eax
-  char *v7; // esi
+  char *v8; // esi
   BSStringT string; // [esp+14h] [ebp-14h] BYREF
-  unsigned int v9; // [esp+24h] [ebp-4h]
+  unsigned int v10; // [esp+24h] [ebp-4h]
 
-  if ( a5 )
+  if ( !topic ) /*0x6696be*/
+    return 0; /*0x6696c0*/
+  p_knownTopicFirst = (tListTopic *)&this->knownTopicFirst; /*0x6696d7*/
+  v6 = &this->knownTopicFirst; /*0x6696dd*/
+  if ( this != (PlayerCharacter *)0xFFFFFA1C ) /*0x6696e1*/
   {
-    p_unk5E4 = (tListTopic *)&a1->unk5E4;
-    result = (TESTopic *)&a1->unk5E4;
-    if ( a1 != (PlayerCharacter *)0xFFFFFA1C )
+    do /*0x6696f2*/
     {
-      do
-      {
-        if ( !result->vtbl )
-          break;
-        if ( (TESTopic *)result->vtbl == a5 )
-          goto LABEL_2;
-        result = *(TESTopic **)&result->super.type;
-      }
-      while ( result );
+      if ( !*v6 ) /*0x6696e3*/
+        break; /*0x6696e7*/
+      if ( *v6 == topic ) /*0x6696eb*/
+        return 0;                               // Known-topic duplicate test compares TESTopic pointer identity only. Same display text/editor ID in another TESTopic object is not treated as the same known topic. /*0x6696eb*/
+      v6 = (TESTopic **)v6[1]; /*0x6696ed*/
     }
-    BSSimpleList_PushFront(p_unk5E4, (int)a5);
-    if ( a7 )
-    {
-      result = (TESTopic *)sub_578FE0();
-      if ( result != (TESTopic *)0x3F1 )
-      {
-        string.m_data = 0;
-        string.m_dataLen = 0;
-        string.m_bufLen = 0;
-        m_data = a5->fullname.name.m_data;
-        v9 = 0;
-        if ( !m_data )
-          m_data = EmptyString;
-        BSStringT_Static_Format(&string, "%s: %s", *(const char **)sTopicAddedText, m_data);
-        v7 = string.m_data;
-        GameUI_QueueMessage(string.m_data, 0, 1u, flt_A31C80);
-        v9 = 0xFFFFFFFF;
-        FormHeapFree((unsigned int)v7);
-      }
-    }
-    if ( a6 )
-      result = (TESTopic *)sub_52F6D0(p_unk5E4);
-    LOBYTE(result) = 1;
+    while ( v6 ); /*0x6696f2*/
   }
-  else
+  BSSimpleList_PushFront(p_knownTopicFirst, (int)topic);// A new known topic is pushed to the list head before any sorting. Batch AddKnownTopics defers sorting until its loop completes. /*0x6696f7*/
+  if ( notifyPlayer && sub_578FE0() != 0x3F1 )  // When notifyPlayer is requested, suppress the 'New topic: <name>' message while DialogMenu (menu ID 0x3F1) is topmost; the topic is still learned.
   {
-LABEL_2:
-    LOBYTE(result) = 0;
+    string.m_data = 0;                          // The 'New topic' notification is skipped while menu ID 0x3F1 (DialogMenu) is topmost, but AddKnownTopic still inserts the topic. /*0x66970e*/
+    string.m_dataLen = 0; /*0x669712*/
+    string.m_bufLen = 0; /*0x669717*/
+    m_data = topic->fullname.name.m_data; /*0x66971c*/
+    v10 = 0; /*0x669721*/
+    if ( !m_data ) /*0x669725*/
+      m_data = EmptyString; /*0x669727*/
+    BSStringT_Static_Format(&string, "%s: %s", *(const char **)MEMORY[0xB382E0], m_data);
+    v8 = string.m_data; /*0x669748*/
+    GameUI_QueueMessage(string.m_data, 0, 1u, flt_A31C80); /*0x669757*/
+    v10 = 0xFFFFFFFF; /*0x66975d*/
+    FormHeapFree((unsigned int)v8); /*0x669765*/
   }
-  return result;
+  if ( sortImmediately )                        // When requested, sort the player's known-topic list case-insensitively by topic display name after insertion. /*0x669771*/
+    SortTopicListByDisplayName(p_knownTopicFirst); /*0x669774*/
+  return 1; /*0x6696c2*/
 }

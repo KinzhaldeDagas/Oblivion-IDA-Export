@@ -1,8 +1,8 @@
-0x677C70: push    ecx
+0x677C70: push    ecx; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x677C71: mov     eax, [ecx]
 0x677C73: test    eax, eax
 0x677C75: push    esi
-0x677C76: mov     esi, [esp+8+arg_0]
+0x677C76: mov     esi, [esp+8+outData]
 0x677C7A: mov     [esp+8+var_4], 0
 0x677C82: mov     [esi], eax
 0x677C84: jz      short loc_677C90

@@ -13,7 +13,7 @@
 0x4A70CF: mov     edx, [eax]
 0x4A70D1: push    eax
 0x4A70D2: mov     [esi], edx
-0x4A70D4: call    FormHeapFree
+0x4A70D4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A70D9: add     esp, 4
 0x4A70DC: jmp     short loc_4A70E4
 0x4A70DE: mov     dword ptr [esi], 0
@@ -23,7 +23,7 @@
 0x4A70EC: cmp     byte ptr [esi+0Ch], 0
 0x4A70F0: jz      short loc_4A70FB
 0x4A70F2: push    edi
-0x4A70F3: call    FormHeapFree
+0x4A70F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4A70F8: add     esp, 4
 0x4A70FB: cmp     dword ptr [esi+24h], 0
 0x4A70FF: ja      short loc_4A70C0

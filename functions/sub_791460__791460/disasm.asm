@@ -1,7 +1,7 @@
-0x791460: push    ecx
+0x791460: push    ecx; Checked one-element insertion wrapper for the 0x0C-byte branch-child vector. Captures the logical index, calls InsertFill(count=1), then rebuilds the checked owner/current iterator against the possibly relocated buffer.
 0x791461: push    ebx
 0x791462: push    ebp
-0x791463: mov     ebp, [esp+0Ch+arg_8]
+0x791463: mov     ebp, [esp+0Ch+position]
 0x791467: push    esi
 0x791468: mov     esi, ecx
 0x79146A: push    edi
@@ -18,13 +18,13 @@
 0x791484: shr     eax, 1Fh
 0x791487: add     eax, edx
 0x791489: jnz     short loc_791493
-0x79148B: mov     ebx, [esp+14h+arg_4]
+0x79148B: mov     ebx, [esp+14h+iteratorOwner]
 0x79148F: xor     edi, edi
 0x791491: jmp     short loc_7914C1
 0x791493: cmp     edi, ebx
 0x791495: jbe     short loc_79149C
 0x791497: call    __invalid_parameter_noinfo
-0x79149C: mov     ebx, [esp+14h+arg_4]
+0x79149C: mov     ebx, [esp+14h+iteratorOwner]
 0x7914A0: test    ebx, ebx
 0x7914A2: jz      short loc_7914A8
 0x7914A4: cmp     ebx, esi
@@ -38,13 +38,13 @@
 0x7914BA: mov     edi, edx
 0x7914BC: shr     edi, 1Fh
 0x7914BF: add     edi, edx
-0x7914C1: mov     ecx, [esp+14h+arg_C]
-0x7914C5: push    ecx
-0x7914C6: push    1
-0x7914C8: push    ebp
-0x7914C9: push    ebx
-0x7914CA: mov     ecx, esi
-0x7914CC: call    sub_790E90
+0x7914C1: mov     ecx, [esp+14h+value]
+0x7914C5: push    ecx; value
+0x7914C6: push    1; count
+0x7914C8: push    ebp; position
+0x7914C9: push    ebx; iteratorOwner
+0x7914CA: mov     ecx, esi; this
+0x7914CC: call    OB_stVectorBranchChildRef_InsertFill_010201A0; Fixed-stride 0x0C vector insert/fill machinery for OB_CBranchChildRef records. Handles overlap, capacity growth, reallocation, and count copies; the observed wrapper at 0x791460 always requests count=1.
 0x7914D1: mov     ebx, [esi+4]
 0x7914D4: cmp     ebx, [esi+8]
 0x7914D7: jbe     short loc_7914DE
@@ -52,12 +52,12 @@
 0x7914DE: lea     edx, [edi+edi*2]
 0x7914E1: lea     edi, [ebx+edx*4]
 0x7914E4: cmp     edi, [esi+8]
-0x7914E7: mov     [esp+14h+arg_8], ebx
+0x7914E7: mov     [esp+14h+position], ebx
 0x7914EB: ja      short loc_7914F2
 0x7914ED: cmp     edi, [esi+4]
 0x7914F0: jnb     short loc_7914F7
 0x7914F2: call    __invalid_parameter_noinfo
-0x7914F7: mov     eax, [esp+14h+arg_0]
+0x7914F7: mov     eax, [esp+14h+result]
 0x7914FB: mov     [eax+4], edi
 0x7914FE: pop     edi
 0x7914FF: mov     [eax], esi

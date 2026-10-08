@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x739A05",
-    "line": "mov     esi, [esp+2Ch+arg_0]",
+    "line": "mov     esi, [esp+2Ch+stream]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x739A0B",
-    "line": "push    esi",
+    "line": "push    esi; stream",
     "mnemonic": "push",
     "size": 1
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x739A10",
-    "line": "call    sub_7201B0",
+    "line": "call    NiTriShapeData_Save; Save NiTriShapeData triangle indices and serialize each shared-normal entry as a UInt16 count followed by that entry's UInt16 vertex indices.",
     "mnemonic": "call",
     "size": 5
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x739A1A",
-    "line": "lea     ecx, [esp+30h+arg_0]",
+    "line": "lea     ecx, [esp+30h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x739A34",
-    "line": "mov     [esp+40h+arg_0], 1",
+    "line": "mov     [esp+40h+stream], 1",
     "mnemonic": "mov",
     "size": 8
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x739A4A",
-    "line": "lea     edx, [esp+44h+arg_0]",
+    "line": "lea     edx, [esp+44h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x739A5E",
-    "line": "mov     [esp+54h+arg_0], 4",
+    "line": "mov     [esp+54h+stream], 4",
     "mnemonic": "mov",
     "size": 8
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x739AA4",
-    "line": "lea     ecx, [esp+38h+arg_0]",
+    "line": "lea     ecx, [esp+38h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -355,7 +355,7 @@
   },
   {
     "ea": "0x739AB4",
-    "line": "mov     [esp+48h+arg_0], 2",
+    "line": "mov     [esp+48h+stream], 2",
     "mnemonic": "mov",
     "size": 8
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x739AEE",
-    "line": "mov     byte ptr [esp+3Ch+arg_0], cl",
+    "line": "mov     byte ptr [esp+3Ch+stream], cl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x739B01",
-    "line": "lea     ecx, [esp+40h+arg_0]",
+    "line": "lea     ecx, [esp+40h+stream]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x739B14",
-    "line": "cmp     byte ptr [esp+34h+arg_0], 0",
+    "line": "cmp     byte ptr [esp+34h+stream], 0",
     "mnemonic": "cmp",
     "size": 5
   },

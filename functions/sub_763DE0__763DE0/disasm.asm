@@ -1,4 +1,4 @@
-0x763DE0: mov     eax, ds:0B42160h
+0x763DE0: mov     eax, ds:0B42160h; Oblivion-authoritative: lazily creates IDirect3D9, constructs the global NiTArray<NiDX9AdapterDesc*> wrapper, populates one descriptor per adapter, then releases the temporary IDirect3D9 reference.
 0x763DE5: test    eax, eax
 0x763DE7: jnz     locret_763E71
 0x763DED: mov     eax, ds:0B42158h
@@ -17,7 +17,7 @@
 0x763E1D: jz      short loc_763E6C
 0x763E1F: push    esi
 0x763E20: push    20h ; ' '
-0x763E22: call    eax ; dword_B42158
+0x763E22: call    eax ; g_Direct3DCreate9
 0x763E24: mov     esi, eax
 0x763E26: test    esi, esi
 0x763E28: jz      short loc_763E6B
@@ -29,7 +29,7 @@
 0x763E38: push    offset off_B28E00
 0x763E3D: push    esi
 0x763E3E: mov     ecx, eax
-0x763E40: call    sub_775DF0
+0x763E40: call    NiDX9AdapterDescArray_Construct
 0x763E45: mov     ds:0B42160h, eax
 0x763E4A: mov     eax, [esi]
 0x763E4C: mov     ecx, [eax+8]

@@ -360,10 +360,10 @@
 0x47E745: fldz
 0x47E747: fst     [esp+50h+var_4]
 0x47E74B: fstp    [esp+50h+var_10]
-0x47E74F: call    sub_43F350
+0x47E74F: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x47E754: fstp    st
 0x47E756: lea     ecx, [esp+50h+var_18]
-0x47E75A: call    sub_43F350
+0x47E75A: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x47E75F: fstp    st
 0x47E761: fld     [esp+50h+var_18]
 0x47E765: lea     ecx, [esp+50h+var_30]
@@ -375,7 +375,7 @@
 0x47E77D: fld     [esp+50h+var_10]
 0x47E781: fadd    [esp+50h+var_4]
 0x47E785: fstp    [esp+50h+var_28]
-0x47E789: call    sub_404C90
+0x47E789: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x47E78E: fcomp   dword ptr ds:0A2F948h
 0x47E794: fnstsw  ax
 0x47E796: test    ah, 41h
@@ -426,10 +426,10 @@
 0x47E81E: fld     [esp+50h+var_1C]
 0x47E822: fsub    dword ptr [esi+8]
 0x47E825: fstp    [esp+50h+var_10]
-0x47E829: call    sub_404C90
+0x47E829: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x47E82E: lea     ecx, [esp+50h+var_18]
 0x47E832: fstp    [esp+50h+arg_0]
-0x47E836: call    sub_404C90
+0x47E836: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x47E83B: fld     [esp+50h+arg_0]
 0x47E83F: fcompp
 0x47E841: fnstsw  ax

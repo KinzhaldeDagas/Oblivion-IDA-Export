@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5477F0",
-    "line": "push    ecx",
+    "line": "push    ecx; Returns the Oblivion sneak-attack damage multiplier. Weapon types -1, 0, and 2 use the melee mastery settings; type 5 uses Marksman mastery settings; unsupported types remain 1.0. Mastery indices 0..4 select Novice through Master game settings.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x5477F3",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+weaponType]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x547813",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+masteryLevel]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -106,5 +106,431 @@
     "line": "jmp     ds:jpt_547822[ecx*4]; switch jump",
     "mnemonic": "jmp",
     "size": 7
+  },
+  {
+    "ea": "0x54782D",
+    "line": "test    al, al; jumptable 00547822 case 0",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x54782F",
+    "line": "jz      short loc_547845",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x547831",
+    "line": "mov     ecx, (offset flt_B37328+10h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x547836",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x54783B",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x54783D",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x547840",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x547843",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x547844",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x547845",
+    "line": "mov     ecx, (offset flt_B37328+18h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x54784A",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x54784F",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x547851",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x547854",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x547857",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x547858",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x547859",
+    "line": "test    al, al; jumptable 00547822 case 1",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x54785B",
+    "line": "jz      short loc_547871",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x54785D",
+    "line": "mov     ecx, (offset flt_B37328+20h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x547862",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x547867",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x547869",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x54786C",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x54786F",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x547870",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x547871",
+    "line": "mov     ecx, (offset flt_B37328+28h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x547876",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x54787B",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x54787D",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x547880",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x547883",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x547884",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x547885",
+    "line": "test    al, al; jumptable 00547822 case 2",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x547887",
+    "line": "jz      short loc_54789D",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x547889",
+    "line": "mov     ecx, (offset flt_B37328+30h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x54788E",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x547893",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x547895",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x547898",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x54789B",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x54789C",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x54789D",
+    "line": "mov     ecx, (offset flt_B37328+38h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5478A2",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5478A7",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x5478A9",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5478AC",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x5478AF",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5478B0",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x5478B1",
+    "line": "test    al, al; jumptable 00547822 case 3",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5478B3",
+    "line": "jz      short loc_5478C9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x5478B5",
+    "line": "mov     ecx, (offset flt_B37328+40h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5478BA",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5478BF",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x5478C1",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5478C4",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x5478C7",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5478C8",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x5478C9",
+    "line": "mov     ecx, (offset flt_B37328+48h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5478CE",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5478D3",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x5478D5",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x5478D8",
+    "line": "fld     [esp+4+var_4]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x5478DB",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x5478DC",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x5478DD",
+    "line": "test    al, al; jumptable 00547822 case 4",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x5478DF",
+    "line": "mov     ecx, (offset flt_B37328+50h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5478E4",
+    "line": "jnz     short loc_5478EB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x5478E6",
+    "line": "mov     ecx, (offset flt_B37328+58h)",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x5478EB",
+    "line": "call    GameSetting_GetSafeFloatPointer",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x5478F0",
+    "line": "fld     dword ptr [eax]",
+    "mnemonic": "fld",
+    "size": 2
+  },
+  {
+    "ea": "0x5478F2",
+    "line": "fstp    [esp+4+var_4]",
+    "mnemonic": "fstp",
+    "size": 3
   }
 ]

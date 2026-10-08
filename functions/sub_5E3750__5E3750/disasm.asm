@@ -1,4 +1,4 @@
-0x5E3750: sub     esp, 10h
+0x5E3750: sub     esp, 10h; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.
 0x5E3753: push    esi
 0x5E3754: mov     esi, ecx
 0x5E3756: mov     eax, [esi]
@@ -70,7 +70,7 @@
 0x5E381C: fild    [esp+28h+var_4]
 0x5E3820: push    ecx
 0x5E3821: fstp    [esp+2Ch+var_2C]; float
-0x5E3824: call    Calc_RunSpeed
+0x5E3824: call    Calc_RunSpeed; TES4 authoritative: Calc_RunSpeed. Starts from Calc_WalkSpeed, then applies fMoveRunAthleticsMult * Athletics * 0.01 + fMoveRunMult. Selected by sub_5E65B0 when process movement flag 0x200 is set.
 0x5E3829: add     esp, 18h
 0x5E382C: fstp    [esp+14h+var_C]
 0x5E3830: cmp     dword ptr [esi+58h], 0
@@ -108,7 +108,7 @@
 0x5E38A2: cmp     dword ptr [edi+58h], 0
 0x5E38A6: jz      short loc_5E3911
 0x5E38A8: mov     ecx, edi
-0x5E38AA: call    sub_5E3750
+0x5E38AA: call    Actor_CalcFastTravelSpeed; Run-speed branch used by sub_5E65B0 when process flag 0x200 is set and swim/fly are absent. Calls Calc_RunSpeed, then may clamp to package target actor's run speed minus close-distance margin.
 0x5E38AF: fstp    [esp+18h+var_10]
 0x5E38B3: fldz
 0x5E38B5: fcomp   [esp+18h+var_10]

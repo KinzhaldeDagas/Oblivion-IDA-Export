@@ -1,14 +1,15 @@
-int __thiscall sub_78EB70(unsigned int *this)
+// CTreeFileAccess::ParseUInt/ParseLong-style read. Reads the low 4-byte unsigned value and advances by 8 because local SaveLong pads longs with 4 future-expansion bytes.
+int __thiscall OB_CTreeFileAccess_ReadPaddedDword_010201A0(OB_CTreeFileAccess_010201A0 *this)
 {
-  int v2; // ecx
-  unsigned int v3; // edi
+  int byteBufferBegin; // ecx
+  unsigned int cursorOffset; // edi
   int v4; // eax
 
-  v2 = *(this + 2);
-  v3 = *this;
-  if ( !v2 || v3 >= *(this + 3) - v2 )
-    _invalid_parameter_noinfo();
-  v4 = *(this + 2);
-  *this += 8;
-  return *(_DWORD *)(v3 + v4);
+  byteBufferBegin = this->byteBufferBegin; /*0x78eb73*/
+  cursorOffset = this->cursorOffset; /*0x78eb79*/
+  if ( !byteBufferBegin || cursorOffset >= this->byteBufferEnd - byteBufferBegin ) /*0x78eb84*/
+    _invalid_parameter_noinfo(); /*0x78eb86*/
+  v4 = this->byteBufferBegin; /*0x78eb8b*/
+  this->cursorOffset += 8; /*0x78eb8e*/
+  return *(_DWORD *)(cursorOffset + v4); /*0x78eb95*/
 }

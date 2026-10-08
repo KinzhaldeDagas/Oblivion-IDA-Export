@@ -1,19 +1,36 @@
 {
-  "callees_count": 12,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_41E9C0",
+  "chunks": [
+    [
+      "0x41E9C0",
+      "0x41EA64"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "2576792c568996ea8caf228c23c05d863a2a2672ff328ba87687ce8d6ed5d691",
+  "comment_regular": "Replaces or creates ExtraAnim. Existing ActorAnimData is disposed and freed before the new animation pointer is installed.",
+  "comment_repeatable": "Replaces or creates ExtraAnim. Existing ActorAnimData is disposed and freed before the new animation pointer is installed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "ExtraDataList_SetAnimation",
   "end_ea": "0x41EA64",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_41E9C0",
+  "name": "ExtraDataList_SetAnimation",
   "segment": ".text",
   "sha256": "063139d4505e056998a5b87e4a6be2a20d44b46b17184e2f5ef2a6e61e4e4d1d",
   "size": 164,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x41E9C0",
+  "total_chunk_size": 202,
   "type": "BSExtraData *__thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 65,
+  "xrefs_from_count": 79,
   "xrefs_to_count": 1
 }

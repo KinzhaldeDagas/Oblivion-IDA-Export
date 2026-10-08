@@ -1,4 +1,4 @@
-0x564080: push    ebp
+0x564080: push    ebp; bhkBoxShape setup helper. Copies caller-provided extents into a temporary vector and invokes the box shape virtual setter; 0x565510 passes half-extents, not full SpeedTree box dimensions.
 0x564081: mov     ebp, esp
 0x564083: and     esp, 0FFFFFFF0h
 0x564086: sub     esp, 2Ch

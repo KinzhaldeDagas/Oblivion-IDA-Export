@@ -2,7 +2,7 @@
 0x993B99: mov     ebp, esp
 0x993B9B: sub     esp, 28h
 0x993B9E: xor     eax, eax
-0x993BA0: cmp     dword_BAA648, eax
+0x993BA0: cmp     dword_BA9E10+838h, eax
 0x993BA6: push    ebx
 0x993BA7: mov     ebx, [ebp+arg_4]
 0x993BAA: push    esi
@@ -18,7 +18,7 @@
 0x993BC4: mov     byte ptr [ebp+var_8+6], al
 0x993BC7: mov     byte ptr [ebp+var_8+7], al
 0x993BCA: jz      short loc_993BDA
-0x993BCC: push    dword_BAAA98
+0x993BCC: push    dword ptr unk_BAAA98
 0x993BD2: call    __decode_pointer
 0x993BD7: pop     ecx
 0x993BD8: jmp     short loc_993BDF

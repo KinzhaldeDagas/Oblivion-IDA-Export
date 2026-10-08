@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4AC740",
+      "0x4AC755"
+    ]
+  ],
+  "chunks_sha256": "a5e1a55d1312e0b0c6b7df18163e9a90a51cc05c1503e29afdbc97ee7bd1bbad",
+  "comment_regular": "Verified (Oblivion): removes the exact ParticleShaderProperty instance from the attached actor scenegraph before releasing the retained reference.",
+  "comment_repeatable": "Verified (Oblivion): removes the exact ParticleShaderProperty instance from the attached actor scenegraph before releasing the retained reference.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_4AC740",
+  "display_name": "NiProperty_DetachFromActorScenegraphs",
   "end_ea": "0x4AC755",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4AC740",
+  "name": "NiProperty_DetachFromActorScenegraphs",
   "segment": ".text",
   "sha256": "a5e1a55d1312e0b0c6b7df18163e9a90a51cc05c1503e29afdbc97ee7bd1bbad",
   "size": 21,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4AC740",
-  "type": "void __stdcall(volatile LONG *, int)",
+  "total_chunk_size": 21,
+  "type": "void __stdcall(void *rootNode, ParticleShaderProperty *property)",
   "xrefs_from_count": 7,
   "xrefs_to_count": 3
 }

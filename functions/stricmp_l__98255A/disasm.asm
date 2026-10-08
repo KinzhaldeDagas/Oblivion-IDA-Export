@@ -1,4 +1,4 @@
-0x98255A: push    ebp
+0x98255A: push    ebp; MEF PERF 2026-09-07: PERF-2 nondefault-locale branch obtains locale state; active locale calls _tolower_l for each byte of both strings, otherwise ASCII comparison. A temporary dedup index must use compatible normalization/equality, or use original comparison fallback; never silently assume ASCII or case-sensitive equality across locale changes.
 0x98255B: mov     ebp, esp
 0x98255D: sub     esp, 10h
 0x982560: push    ebx

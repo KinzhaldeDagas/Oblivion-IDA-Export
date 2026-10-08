@@ -1,4 +1,4 @@
-void *sub_571CD0()
+NiRTTI *sub_571CD0()
 {
-  return &unk_B3A6A8;
+  return &stru_B3A6A8; /*0x571cd5*/
 }

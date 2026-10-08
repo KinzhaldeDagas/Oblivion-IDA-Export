@@ -22,7 +22,7 @@
 0x77DF11: mov     dword ptr [eax+ebx*4], 0
 0x77DF18: push    esi
 0x77DF19: mov     dword ptr [esi+8], 0
-0x77DF20: call    FormHeapFree
+0x77DF20: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x77DF25: add     esp, 4
 0x77DF28: pop     esi
 0x77DF29: pop     edi

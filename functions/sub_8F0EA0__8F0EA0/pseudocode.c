@@ -2,8 +2,8 @@ __int16 __userpurge sub_8F0EA0@<ax>(int a1@<ebx>, int a2, char *a3, unsigned int
 {
   __int16 result; // ax
 
-  result = (__int16)a3;
-  if ( a3 )
-    return sub_8B18C0(a1, a3, 0, a4);
-  return result;
+  result = (__int16)a3; /*0x8f0ea0*/
+  if ( a3 ) /*0x8f0ea6*/
+    return sub_8B18C0(a1, a3, 0, a4); /*0x8f0eb0*/
+  return result; /*0x8f0eb8*/
 }

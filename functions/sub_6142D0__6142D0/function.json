@@ -1,19 +1,32 @@
 {
-  "callees_count": 31,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 10,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6142D0",
+      "0x6144CB"
+    ]
+  ],
+  "chunks_sha256": "8d7ae965494cd02d200fdcde153a1fcdd6df8c2b1234c4a40e0e76647ee597e4",
+  "comment_regular": "Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).",
+  "comment_repeatable": "Combines projectile/spell bounds with TESCombatStyle optimal/max range multipliers (SDK +0x6C/+0x70).",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6142D0",
+  "display_name": "CombatController_GetRangedDistanceBounds",
   "end_ea": "0x6144CB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6142D0",
+  "name": "CombatController_GetRangedDistanceBounds",
   "segment": ".text",
   "sha256": "8d7ae965494cd02d200fdcde153a1fcdd6df8c2b1234c4a40e0e76647ee597e4",
   "size": 507,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6142D0",
-  "type": "void __thiscall(_DWORD *this, float, float)",
+  "total_chunk_size": 507,
+  "type": "void __thiscall(void *this, float *outOptimalDistance, float *outMaximumDistance)",
   "xrefs_from_count": 194,
   "xrefs_to_count": 6
 }

@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x8A4749",
-    "line": "mov     [esp+18h+var_4], ebx",
+    "line": "mov     [esp+18h+outData], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -67,25 +67,25 @@
   },
   {
     "ea": "0x8A4756",
-    "line": "lea     eax, [esp+18h+var_4]",
+    "line": "lea     eax, [esp+18h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8A475A",
-    "line": "push    eax",
+    "line": "push    eax; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8A475B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8A475D",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x8A4779",
-    "line": "mov     esi, [esp+18h+var_4]",
+    "line": "mov     esi, [esp+18h+outData]",
     "mnemonic": "mov",
     "size": 4
   },

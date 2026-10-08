@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x519C30",
+      "0x519C48"
+    ]
+  ],
+  "chunks_sha256": "bed0d6a2e64a433f65defd5e4b3640afdebff99a5aae8ae0c2efad2051f41210",
+  "comment_regular": "Verified preload reset link: changeMask0x10000000 clears collection at complete TESActorBase +0xD0, retaining permanent magicka/fatigue allocations with zero values. Paired with load serializer 0x51A6F0 and AVCollection_Load 0x65CBB0.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "TESActorBase_PreLoadModified",
   "end_ea": "0x519C48",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESActorBase_PreLoadModified",
   "segment": ".text",
   "sha256": "bed0d6a2e64a433f65defd5e4b3640afdebff99a5aae8ae0c2efad2051f41210",
   "size": 24,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x519C30",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 24,
+  "type": "void __thiscall(TESActorBase *self, unsigned int changeMask)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 3
 }

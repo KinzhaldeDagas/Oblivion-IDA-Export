@@ -1,4 +1,4 @@
-0x6D5FE0: push    0FFFFFFFFh
+0x6D5FE0: push    0FFFFFFFFh; Clones the interpolator, replaces cloned authored data with NiTransformData_CloneTimeRange(start,end), resets all three key cursors, and balances the temporary data reference.
 0x6D5FE2: push    offset SEH_6D5FE0
 0x6D5FE7: mov     eax, large fs:0
 0x6D5FED: push    eax
@@ -16,7 +16,7 @@
 0x6D600C: fstp    [esp+24h+var_20]
 0x6D6010: fld     [esp+24h+arg_0]
 0x6D6014: fstp    [esp+24h+var_24]
-0x6D6017: call    sub_6EBA60
+0x6D6017: call    NiInterpolator_CloneTimeRange; Default range clone: clone through the NiObject pointer map, then invoke the clone's post-clone/collapse virtual. Subclasses override when authored data must be sliced.
 0x6D601C: mov     ecx, [edi+2Ch]
 0x6D601F: xor     ebx, ebx
 0x6D6021: cmp     ecx, ebx
@@ -29,7 +29,7 @@
 0x6D6036: fld     [esp+24h+arg_0]
 0x6D603A: fstp    [esp+24h+var_24]; float
 0x6D603D: push    eax; int
-0x6D603E: call    sub_6E1FC0
+0x6D603E: call    NiTransformData_CloneTimeRange; Oblivion NiTransformData time-range clone. Creates the destination through the native clone path, slices each nonempty channel to [start,end] through the generic key-range copier (content selectors rotation=2, translation=1, scale=0), then transfers each produced array through the matching ownership setter.
 0x6D6043: mov     ecx, [esp+1Ch+arg_4]
 0x6D6047: push    ecx
 0x6D6048: mov     ecx, esi
@@ -63,3 +63,12 @@
 0x6D609B: pop     ebx
 0x6D609C: add     esp, 0Ch
 0x6D609F: retn    8
+0x9C7B10: lea     ecx, [ebp+8]; slot
+0x9C7B13: jmp     NiPointerSlot_Release
+0x9C7B18: mov     edx, [esp+arg_4]
+0x9C7B1C: lea     eax, [edx-0Ch]
+0x9C7B1F: mov     ecx, [edx-10h]
+0x9C7B22: xor     ecx, eax
+0x9C7B24: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7B29: mov     eax, offset stru_AEFED8
+0x9C7B2E: jmp     ___CxxFrameHandler3

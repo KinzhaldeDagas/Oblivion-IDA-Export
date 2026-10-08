@@ -12,13 +12,13 @@
 0x5A93D1: push    0
 0x5A93D3: push    3F5h
 0x5A93D8: mov     esi, eax
-0x5A93DA: call    sub_5790E0
+0x5A93DA: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5A93DF: add     esp, 8
 0x5A93E2: test    al, al
 0x5A93E4: jnz     loc_5A95B7
 0x5A93EA: push    0
 0x5A93EC: push    3EFh
-0x5A93F1: call    sub_5790E0
+0x5A93F1: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5A93F6: add     esp, 8
 0x5A93F9: test    al, al
 0x5A93FB: jnz     loc_5A95B7
@@ -33,7 +33,7 @@
 0x5A941B: jz      short loc_5A9424
 0x5A941D: mov     ecx, edi
 0x5A941F: call    Tile_GetParentMenu
-0x5A9424: call    InterfaceManager_IsMenuMode
+0x5A9424: call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.
 0x5A9429: test    al, al
 0x5A942B: jz      short loc_5A944A
 0x5A942D: test    edi, edi
@@ -59,9 +59,9 @@
 0x5A946C: fld1
 0x5A946E: push    ecx
 0x5A946F: mov     ecx, [ebx+28h]; this
-0x5A9472: fstp    [esp+14h+var_14]; a3
-0x5A9475: push    0FA1h; a2
-0x5A947A: call    Tile_SetFloat
+0x5A9472: fstp    [esp+14h+var_14]; value
+0x5A9475: push    0FA1h; propertyCode
+0x5A947A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A947F: fldz
 0x5A9481: mov     al, [esi+38h]
 0x5A9484: cmp     al, 2
@@ -79,14 +79,14 @@
 0x5A94A9: jmp     short loc_5A9506
 0x5A94AB: cmp     al, 3
 0x5A94AD: jnz     short loc_5A94D6
-0x5A94AF: mov     ecx, [esi+40h]
+0x5A94AF: mov     ecx, [esi+40h]; this
 0x5A94B2: fstp    st
 0x5A94B4: test    ecx, ecx
 0x5A94B6: jz      short loc_5A94C1
-0x5A94B8: call    sub_6B7260
+0x5A94B8: call    SoundHandle__IsPlaying; Tests whether the engine sound handle stored in *this is still active in the Oblivion audio manager. Dialogue menus and DialoguePackage HighProcess playback use it as the speech-completion gate.
 0x5A94BD: test    al, al
 0x5A94BF: jnz     short loc_5A9506
-0x5A94C1: mov     ecx, offset unk_B3B3D0
+0x5A94C1: mov     ecx, (offset dword_B3B0B4+31Ch)
 0x5A94C6: call    GameSetting_GetSafeFloatPointer
 0x5A94CB: fld     dword ptr [eax]
 0x5A94CD: fstp    dword ptr [esi+3Ch]
@@ -110,7 +110,7 @@
 0x5A9504: fstp    st
 0x5A9506: push    0
 0x5A9508: push    40Ch
-0x5A950D: call    sub_5790E0
+0x5A950D: call    InterfaceManager_IsMenuVisibleByID; CustomAnimSupport evidence: player node/control-state check used by install/defer and playback paths.
 0x5A9512: add     esp, 8
 0x5A9515: test    al, al
 0x5A9517: jnz     loc_5A95A3
@@ -122,9 +122,9 @@
 0x5A952F: fld     dword ptr ds:0A379B4h
 0x5A9535: push    ecx
 0x5A9536: mov     ecx, [ebx+34h]; this
-0x5A9539: fstp    [esp+14h+var_14]; a3
-0x5A953C: push    0FA1h; a2
-0x5A9541: call    Tile_SetFloat
+0x5A9539: fstp    [esp+14h+var_14]; value
+0x5A953C: push    0FA1h; propertyCode
+0x5A9541: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A9546: test    esi, esi
 0x5A9548: jz      short loc_5A95B6
 0x5A954A: lea     ebx, [ebx+0]
@@ -164,9 +164,9 @@
 0x5A95A3: fld1
 0x5A95A5: push    ecx
 0x5A95A6: mov     ecx, [ebx+34h]; this
-0x5A95A9: fstp    [esp+14h+var_14]; a3
-0x5A95AC: push    0FA1h; a2
-0x5A95B1: call    Tile_SetFloat
+0x5A95A9: fstp    [esp+14h+var_14]; value
+0x5A95AC: push    0FA1h; propertyCode
+0x5A95B1: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A95B6: pop     edi
 0x5A95B7: pop     esi
 0x5A95B8: pop     ebx

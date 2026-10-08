@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x636D79",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -67,7 +67,7 @@
   },
   {
     "ea": "0x636D92",
-    "line": "call    sub_565DF0",
+    "line": "call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.",
     "mnemonic": "call",
     "size": 5
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x636DAE",
-    "line": "mov     ecx, offset TimeGlobals",
+    "line": "mov     ecx, 0B332E0h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x636DBD",
-    "line": "call    sub_41FFC0",
+    "line": "call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x636DE5",
-    "line": "push    offset sub_645A30; a6",
+    "line": "push    offset TESObjectREFR_SetOwnedDoorLockedForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x636E0C",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x636E3E",
-    "line": "push    offset sub_645AF0; a6",
+    "line": "push    offset TESObjectREFR_ClearOwnedDoorLockForActor; a6",
     "mnemonic": "push",
     "size": 5
   },
@@ -481,7 +481,7 @@
   },
   {
     "ea": "0x636E65",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,13 +1213,13 @@
   },
   {
     "ea": "0x636FAE",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x636FB0",
-    "line": "call    TESHealthForm_GetHealth",
+    "line": "call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.",
     "mnemonic": "call",
     "size": 5
   },

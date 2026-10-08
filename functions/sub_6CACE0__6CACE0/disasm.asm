@@ -15,7 +15,7 @@
 0x6CAD07: mov     edi, ecx
 0x6CAD09: mov     esi, [esp+44h+arg_0]
 0x6CAD0D: push    esi
-0x6CAD0E: call    nullsub_returnvVoid_1arg
+0x6CAD0E: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x6CAD13: cmp     dword ptr [esi+0D8h], 0A010068h
 0x6CAD1D: jnb     loc_6CB076
 0x6CAD23: fld     dword ptr ds:0A7DEB4h
@@ -31,7 +31,6 @@
 0x6CAD42: mov     edx, [edi+14h]
 0x6CAD45: add     edx, 4
 0x6CAD48: jmp     short loc_6CAD50
-0x6CAD4A: align 10h
 0x6CAD50: mov     ecx, [edx]
 0x6CAD52: fld     dword ptr [ecx+14h]
 0x6CAD55: fstp    [esp+44h+arg_0]
@@ -276,10 +275,9 @@
 0x6CB024: test    edi, edi
 0x6CB026: jbe     short loc_6CB043
 0x6CB028: jmp     short loc_6CB030
-0x6CB02A: align 10h
 0x6CB030: mov     eax, [ebx+esi*4]
 0x6CB033: push    eax
-0x6CB034: call    FormHeapFree
+0x6CB034: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CB039: add     esi, 1
 0x6CB03C: add     esp, 4
 0x6CB03F: cmp     esi, edi
@@ -290,16 +288,16 @@
 0x6CB04E: jz      short loc_6CB06D
 0x6CB050: mov     ecx, [eax-4]
 0x6CB053: lea     esi, [eax-4]
-0x6CB056: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x6CB056: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x6CB05B: push    ecx; int
 0x6CB05C: push    4; unsigned int
 0x6CB05E: push    eax; void *
 0x6CB05F: call    $LN21
 0x6CB064: push    esi
-0x6CB065: call    FormHeapFree
+0x6CB065: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CB06A: add     esp, 4
 0x6CB06D: push    ebx
-0x6CB06E: call    FormHeapFree
+0x6CB06E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6CB073: add     esp, 4
 0x6CB076: mov     ecx, dword ptr [esp+44h+var_C]
 0x6CB07A: mov     large fs:0, ecx
@@ -310,3 +308,39 @@
 0x6CB085: pop     ebx
 0x6CB086: add     esp, 30h
 0x6CB089: retn    4
+0x452A90: mov     eax, [ecx+4]
+0x452A93: push    eax
+0x452A94: mov     dword ptr [ecx], offset ??_7?$NiTArray@PAD@@6B@; const NiTArray<char *>::`vftable'
+0x452A9A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x452A9F: pop     ecx
+0x452AA0: retn
+0x6C7E60: mov     eax, [ecx+4]
+0x6C7E63: test    eax, eax
+0x6C7E65: mov     dword ptr [ecx], offset ??_7?$NiTArray@V?$NiPointer@VNiInterpController@@@@@@6B@; const NiTArray<NiPointer<NiInterpController>>::`vftable'
+0x6C7E6B: jz      short locret_6C7E8C
+0x6C7E6D: mov     ecx, [eax-4]
+0x6C7E70: push    esi
+0x6C7E71: lea     esi, [eax-4]
+0x6C7E74: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x6C7E79: push    ecx; int
+0x6C7E7A: push    4; unsigned int
+0x6C7E7C: push    eax; void *
+0x6C7E7D: call    $LN21
+0x6C7E82: push    esi
+0x6C7E83: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x6C7E88: add     esp, 4
+0x6C7E8B: pop     esi
+0x6C7E8C: retn
+0x9C7770: lea     ecx, [ebp-2Ch]
+0x9C7773: jmp     loc_452A90
+0x9C7778: lea     ecx, [ebp-1Ch]
+0x9C777B: jmp     loc_6C7E60
+0x9C7780: lea     ecx, [ebp-30h]; slot
+0x9C7783: jmp     NiPointerSlot_Release
+0x9C7788: mov     edx, [esp+arg_4]
+0x9C778C: lea     eax, [edx-34h]
+0x9C778F: mov     ecx, [edx-38h]
+0x9C7792: xor     ecx, eax
+0x9C7794: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7799: mov     eax, offset stru_AEFB94
+0x9C779E: jmp     ___CxxFrameHandler3

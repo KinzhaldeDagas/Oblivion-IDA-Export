@@ -1,1 +1,1 @@
-IContinue_0
+typedef IContinue IContinue_0;

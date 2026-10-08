@@ -1,1 +1,1 @@
-ILockBytesVtbl_0
+typedef ILockBytesVtbl ILockBytesVtbl_0;

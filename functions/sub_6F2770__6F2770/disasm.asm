@@ -14,7 +14,7 @@
 0x6F278E: sub     edx, ebx
 0x6F2790: sar     edx, 2
 0x6F2793: jnz     short loc_6F27A3
-0x6F2795: call    sub_784A70
+0x6F2795: call    OB_stVector4_Clear_010201A0; OBLIVION AUTHORITY (2026-08-30): clear() wrapper for a trivial 4-byte-element vector; validates begin/end and erases the full range while retaining capacity.
 0x6F279A: pop     ebp
 0x6F279B: pop     ebx
 0x6F279C: pop     edi
@@ -31,10 +31,10 @@
 0x6F27B3: sar     ecx, 2
 0x6F27B6: cmp     edx, ecx
 0x6F27B8: ja      short loc_6F27FA
-0x6F27BA: push    eax; Dst
-0x6F27BB: push    ebp; int
-0x6F27BC: push    ebx; Src
-0x6F27BD: call    sub_790420
+0x6F27BA: push    eax; destination
+0x6F27BB: push    ebp; last
+0x6F27BC: push    ebx; first
+0x6F27BD: call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.
 0x6F27C2: mov     eax, [edi+4]
 0x6F27C5: add     esp, 0Ch
 0x6F27C8: test    eax, eax
@@ -78,19 +78,19 @@
 0x6F2819: sub     ecx, eax
 0x6F281B: sar     ecx, 2
 0x6F281E: mov     edx, ebx
-0x6F2820: push    eax; Dst
+0x6F2820: push    eax; destination
 0x6F2821: lea     ebx, [edx+ecx*4]
-0x6F2824: push    ebx; int
-0x6F2825: push    edx; Src
-0x6F2826: call    sub_790420
+0x6F2824: push    ebx; last
+0x6F2825: push    edx; first
+0x6F2826: call    OB_stVector4_CopyRange_010201A0; OBLIVION AUTHORITY (2026-08-30): Copies the half-open range of trivial 4-byte elements into initialized destination storage and returns destination plus the element count.
 0x6F282B: mov     edx, [esi+8]
 0x6F282E: mov     eax, [edi+8]
 0x6F2831: add     esp, 0Ch
-0x6F2834: push    edx; Dst
-0x6F2835: push    eax; int
-0x6F2836: push    ebx; Src
+0x6F2834: push    edx; destination
+0x6F2835: push    eax; last
+0x6F2836: push    ebx; first
 0x6F2837: mov     ecx, esi
-0x6F2839: call    sub_7A25C0
+0x6F2839: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x6F283E: pop     ebp
 0x6F283F: pop     ebx
 0x6F2840: mov     [esi+8], eax
@@ -101,7 +101,7 @@
 0x6F284A: test    eax, eax
 0x6F284C: jz      short loc_6F2857
 0x6F284E: push    eax
-0x6F284F: call    FormHeapFree
+0x6F284F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6F2854: add     esp, 4
 0x6F2857: mov     ecx, [edi+4]
 0x6F285A: test    ecx, ecx
@@ -119,11 +119,11 @@
 0x6F2876: mov     ecx, [esi+4]
 0x6F2879: mov     edx, [edi+8]
 0x6F287C: mov     eax, [edi+4]
-0x6F287F: push    ecx; Dst
-0x6F2880: push    edx; int
-0x6F2881: push    eax; Src
+0x6F287F: push    ecx; destination
+0x6F2880: push    edx; last
+0x6F2881: push    eax; first
 0x6F2882: mov     ecx, esi
-0x6F2884: call    sub_7A25C0
+0x6F2884: call    OB_stVector4_UninitializedCopyRange_010201A0
 0x6F2889: mov     [esi+8], eax
 0x6F288C: pop     ebp
 0x6F288D: pop     ebx

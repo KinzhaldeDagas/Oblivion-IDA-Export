@@ -1,6 +1,6 @@
-0x567C00: push    esi
+0x567C00: push    esi; RadiantAI: package day-of-week test used by central package chooser. Supports specific day and combined day masks/cases before month/day/hour condition checks.
 0x567C01: mov     esi, ecx
-0x567C03: mov     ecx, offset TimeGlobals
+0x567C03: mov     ecx, 0B332E0h
 0x567C08: call    TimeGlobals_GetGameDayOfWeek
 0x567C0D: cmp     [esp+4+arg_0], 0
 0x567C12: jz      short loc_567C1A

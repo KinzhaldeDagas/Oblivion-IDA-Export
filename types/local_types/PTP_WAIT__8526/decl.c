@@ -1,1 +1,1 @@
-PTP_WAIT
+typedef _TP_WAIT *PTP_WAIT;

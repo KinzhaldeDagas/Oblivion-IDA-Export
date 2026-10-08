@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
+  "chunks": [
+    [
+      "0x588B20",
+      "0x588B4B"
+    ]
+  ],
+  "chunks_sha256": "23d14b258964c5f6bc7a71e3a0fe4ae29aba9f646d39ef69ff596599558c8a39",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "Verified: sets Tile byte +5 recursively for unreleased/non-releasing descendants. Value calculation tests owner +5 to suppress evaluation during teardown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_588B20",
+  "display_name": "Tile::MarkSubtreeReleasing",
   "end_ea": "0x588B4B",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_588B20",
+  "name": "Tile::MarkSubtreeReleasing",
   "segment": ".text",
   "sha256": "23d14b258964c5f6bc7a71e3a0fe4ae29aba9f646d39ef69ff596599558c8a39",
   "size": 43,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x588B20",
-  "type": "int __thiscall(int this)",
+  "total_chunk_size": 43,
+  "type": "void __thiscall(Tile *this)",
   "xrefs_from_count": 21,
   "xrefs_to_count": 2
 }

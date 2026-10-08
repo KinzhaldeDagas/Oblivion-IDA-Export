@@ -1,19 +1,36 @@
 {
-  "callees_count": 48,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 35,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "BSTreeModel::MakeBase",
+  "chunks": [
+    [
+      "0x560600",
+      "0x56091E"
+    ],
+    [
+      "0x9BCFB0",
+      "0x9BCFF7"
+    ]
+  ],
+  "chunks_sha256": "b3580f2fcb435c03d692e2005afbe3099e04f20e981f85f66a2dfc5df865f724",
+  "comment_regular": "\n\n[2026-10-03 final-capture boundary] Sole direct native CSpeedTreeRT::Compute call560888 (target78CCA0) returns before model postbuild5608C3 and before DeleteTransientData/DeleteFrondGeometry. Plugin final-export capture is placed at this return boundary. Native initializer already sets branch/frond/leaf wind method0 (GPU) and lighting method0 (dynamic) before ApplyBaseObject and Compute; no speculative method replacement was added.\n[RT4.1 parity v147 2026-10-08] Verified560814 pushes0 then560818 calls SetLeafLightingMethod. This is the host requesting dynamic lighting, not a malformed SPT. v147 capture wrapper remembers parsed static method before preserving original request. It does not activate static rendering. Full static entry/selection and RGB transport remain required.\n\nOBLIVION AUTHORITY 2026-08-27: BSTreeModel initialization order after LoadTree: force dynamic leaf-lighting method at 0x560818, exactly one virtual ApplyBaseObject dispatch at 0x560879, Compute immediately after return at 0x560888, then render-resource/postbuild dispatch at 0x5608C3 only after Compute success.",
+  "comment_repeatable": "OBLIVION AUTHORITY 2026-08-27: BSTreeModel initialization order after LoadTree: force dynamic leaf-lighting method at 0x560818, exactly one virtual ApplyBaseObject dispatch at 0x560879, Compute immediately after return at 0x560888, then render-resource/postbuild dispatch at 0x5608C3 only after Compute success.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "BSTreeModel_InitFromBase",
   "end_ea": "0x56091E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "BSTreeModel::MakeBase",
+  "name": "BSTreeModel_InitFromBase",
   "segment": ".text",
   "sha256": "2dcde0765314279eec4decca93669d1821fe54b0e54b9350f5cb6498a22429ee",
   "size": 798,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x560600",
-  "type": "char __thiscall(float *this, int, int)",
-  "xrefs_from_count": 284,
+  "total_chunk_size": 869,
+  "type": "bool __thiscall(BSTreeModel_OblivionLayout_058 *this, TESObjectTREE_OblivionLayout_080_NiTArrayVerified *tree, unsigned int seed)",
+  "xrefs_from_count": 307,
   "xrefs_to_count": 1
 }

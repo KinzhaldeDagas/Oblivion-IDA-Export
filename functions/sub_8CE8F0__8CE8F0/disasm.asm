@@ -1,4 +1,4 @@
-0x8CE8F0: fld     dword ptr ds:0A99DCCh
+0x8CE8F0: fld     dword ptr ds:0A99DCCh; TES4 authoritative: cleans persistent collector/manifold state. Entries marked 1 are removed by swap-with-last; others are marked stale for the next pass.
 0x8CE8F6: push    ebx
 0x8CE8F7: push    esi
 0x8CE8F8: mov     esi, ecx
@@ -13,7 +13,6 @@
 0x8CE90F: cmp     [esi+1B4h], ebx
 0x8CE915: jle     short loc_8CE97A
 0x8CE917: jmp     short loc_8CE926
-0x8CE919: align 10h
 0x8CE920: mov     ecx, ds:0BA7A50h
 0x8CE926: mov     eax, [esi+1A4h]
 0x8CE92C: mov     edx, [eax+edi*4]
@@ -38,7 +37,7 @@
 0x8CE95E: mov     eax, [esi+1BCh]
 0x8CE964: add     eax, ebx
 0x8CE966: push    eax
-0x8CE967: call    ecx ; dword_BA7A50
+0x8CE967: call    ecx ; unk_BA7A50
 0x8CE969: add     esp, 8
 0x8CE96C: add     edi, 1
 0x8CE96F: add     ebx, 30h ; '0'
@@ -53,7 +52,7 @@
 0x8CE990: mov     ecx, [esi+1B0h]
 0x8CE996: cmp     dword ptr [ecx+ebx*4], 1
 0x8CE99A: lea     eax, [ecx+ebx*4]
-0x8CE99D: jnz     loc_8CEA2E
+0x8CE99D: jnz     loc_8CEA2E; State marker value 1 means remove this persistent contact entry during cleanup.
 0x8CE9A3: mov     edx, [esi+1A4h]
 0x8CE9A9: mov     ecx, [edx+ebx*4]
 0x8CE9AC: call    sub_8BC730
@@ -87,7 +86,7 @@
 0x8CEA26: mov     ecx, [eax+ecx*4]
 0x8CEA29: mov     [eax+ebx*4], ecx
 0x8CEA2C: jmp     short loc_8CEA34
-0x8CEA2E: mov     dword ptr [eax], 1
+0x8CEA2E: mov     dword ptr [eax], 1; Non-removed entries are marked 1 so a later cleanup pass can remove them if not refreshed.
 0x8CEA34: sub     ebx, 1
 0x8CEA37: sub     edi, 30h ; '0'
 0x8CEA3A: test    ebx, ebx

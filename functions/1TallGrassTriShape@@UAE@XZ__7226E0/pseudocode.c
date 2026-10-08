@@ -1,5 +1,5 @@
-void __thiscall TallGrassTriShape::~TallGrassTriShape(NiParticles *this)
+void __thiscall TallGrassTriShape::~TallGrassTriShape(NiAVObject *this)
 {
-  *(_DWORD *)this = &NiTriBasedGeom::`vftable';
-  NiParticles::~NiParticles(this);
+  this->vtbl = (NiAVObjectVtbl *)&NiTriBasedGeom::`vftable'; /*0x7226e0*/
+  NiParticles::~NiParticles(this); /*0x7226e6*/
 }

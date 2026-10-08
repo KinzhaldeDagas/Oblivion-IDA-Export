@@ -1,1 +1,1 @@
-IShellServiceVtbl_0
+typedef IShellServiceVtbl IShellServiceVtbl_0;

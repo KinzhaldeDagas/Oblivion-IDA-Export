@@ -1,1 +1,1 @@
-PIIDLookup
+typedef IIDLookupRtn *PIIDLookup;

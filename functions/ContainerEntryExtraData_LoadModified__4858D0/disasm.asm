@@ -15,16 +15,16 @@
 0x4858F7: mov     ebx, ecx
 0x4858F9: mov     ecx, ds:0B33B00h
 0x4858FF: xor     edi, edi
-0x485901: mov     [esp+34h+var_20], edi
+0x485901: mov     [esp+34h+destination], edi
 0x485905: xor     ebp, ebp
-0x485907: call    sub_45A170
+0x485907: call    TESSaveLoadGame_UseSaveGameBlocks
 0x48590C: test    al, al
 0x48590E: jz      loc_4859AD
-0x485914: mov     ecx, ds:0B33B00h
-0x48591A: push    4; Size
+0x485914: mov     ecx, ds:0B33B00h; self
+0x48591A: push    4; byteCount
 0x48591C: lea     eax, [esp+38h+Dst]
-0x485920: push    eax; Dst
-0x485921: call    SaveLoad_LoadData
+0x485920: push    eax; destination
+0x485921: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x485926: cmp     [esp+34h+Dst], 4B4F4C42h
 0x48592E: jz      short loc_485998
 0x485930: mov     eax, ds:0B33B00h
@@ -33,7 +33,7 @@
 0x48593D: jz      short loc_48597C
 0x48593F: mov     ecx, [esi]
 0x485941: push    ecx; a1
-0x485942: call    TESForm_LookupByFormID
+0x485942: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x485947: mov     edx, [esi+5]
 0x48594A: movzx   ecx, byte ptr [esi+9]
 0x48594E: add     esp, 4
@@ -59,63 +59,63 @@
 0x48598B: push    offset aLoadgameBuff_0; "LoadGame Buffer error: Block Header is "...
 0x485990: call    PrintError
 0x485995: add     esp, 10h
-0x485998: mov     ecx, ds:0B33B00h
+0x485998: mov     ecx, ds:0B33B00h; self
 0x48599E: mov     ebp, [ecx+14h]
-0x4859A1: push    2; Size
-0x4859A3: lea     eax, [esp+38h+var_20]
-0x4859A7: push    eax; Dst
-0x4859A8: call    SaveLoad_LoadData
-0x4859AD: push    4; Size
+0x4859A1: push    2; byteCount
+0x4859A3: lea     eax, [esp+38h+destination]
+0x4859A7: push    eax; destination
+0x4859A8: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
+0x4859AD: push    4; byteCount
 0x4859AF: lea     ecx, [esp+38h+var_14]
-0x4859B3: push    ecx; Dst
-0x4859B4: mov     ecx, ds:0B33B00h
-0x4859BA: call    SaveLoad_LoadFormID
-0x4859BF: mov     ecx, ds:0B33B00h
-0x4859C5: push    4; Size
+0x4859B3: push    ecx; destination
+0x4859B4: mov     ecx, ds:0B33B00h; self
+0x4859BA: call    SaveLoad_LoadFormID; EnginePatch v2: byte-checked SaveLoad_LoadFormID hook. Bounded save-buffer copy, then preserves original iref-to-formID translation behavior.
+0x4859BF: mov     ecx, ds:0B33B00h; self
+0x4859C5: push    4; byteCount
 0x4859C7: lea     edx, [ebx+4]
-0x4859CA: push    edx; Dst
-0x4859CB: call    SaveLoad_LoadData
+0x4859CA: push    edx; destination
+0x4859CB: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x4859D0: mov     eax, [esp+3Ch+a1]
 0x4859D4: push    edi; int
 0x4859D5: push    offset ??_R0?AVTESBoundObject@@@8; struct TypeDescriptor *
 0x4859DA: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x4859DF: push    edi; int
 0x4859E0: push    eax; a1
-0x4859E1: call    TESForm_LookupByFormID
+0x4859E1: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x4859E6: add     esp, 4
 0x4859E9: push    eax; void *
 0x4859EA: call    OblivionDynamicCast
 0x4859EF: add     esp, 14h
-0x4859F2: push    4; Size
+0x4859F2: push    4; byteCount
 0x4859F4: lea     ecx, [esp+40h+var_24]
 0x4859F8: mov     [ebx+8], eax
 0x4859FB: mov     [ebx], edi
-0x4859FD: push    ecx; Dst
-0x4859FE: mov     ecx, ds:0B33B00h
-0x485A04: call    SaveLoad_LoadData
-0x485A09: cmp     dword ptr [esp+3Ch+var_24], edi
+0x4859FD: push    ecx; destination
+0x4859FE: mov     ecx, ds:0B33B00h; self
+0x485A04: call    SaveLoad_LoadData; EngineIssues review: ContainerEntryExtraData_LoadModified reads a 32-bit nested extra-list count from save data.
+0x485A09: cmp     [esp+3Ch+var_24], edi; EnginePatch v3: ContainerEntryExtraData nested extra-list count is clamped before repeated ExtraDataList allocation/loading.
 0x485A0D: jz      short loc_485A77
 0x485A0F: push    8; Size
 0x485A11: call    FormHeapAlloc
 0x485A16: add     esp, 4
 0x485A19: cmp     eax, edi
-0x485A1B: jz      short loc_485A24
+0x485A1B: jz      short loc_485A24; EnginePatch patchability note: if the BSSimpleList root allocation fails, the following positive-count loop uses a null list root. Non-crash patch is possible, but cursor-faithful discard needs format-aware handling.
 0x485A1D: mov     [eax], edi
 0x485A1F: mov     [eax+4], edi
 0x485A22: jmp     short loc_485A26
 0x485A24: xor     eax, eax
-0x485A26: cmp     dword ptr [esp+3Ch+var_24], edi
+0x485A26: cmp     [esp+3Ch+var_24], edi
 0x485A2A: mov     [ebx], eax
 0x485A2C: jle     short loc_485A77
 0x485A2E: mov     edi, edi
-0x485A30: push    14h; Size
+0x485A30: push    14h; EngineIssues review: ContainerEntryExtraData_LoadModified allocation loop creates ExtraDataList objects and recursively loads nested extra data from save-controlled count.
 0x485A32: call    FormHeapAlloc
 0x485A37: add     esp, 4
 0x485A3A: mov     [esp+3Ch+Dst], eax
 0x485A3E: xor     esi, esi
 0x485A40: cmp     eax, esi
 0x485A42: mov     [esp+3Ch+var_C], esi
-0x485A46: jz      short loc_485A51
+0x485A46: jz      short loc_485A51; EnginePatch patchability note: if ExtraDataList allocation fails, original calls ExtraDataList_LoadModified with ecx=0. Avoiding the crash without desync requires consuming the nested serialized entry correctly.
 0x485A48: mov     ecx, eax
 0x485A4A: call    ExtraDataList_constr
 0x485A4F: mov     esi, eax
@@ -129,10 +129,10 @@
 0x485A68: push    esi
 0x485A69: call    BSSimpleList_PushBack
 0x485A6E: add     edi, 1
-0x485A71: cmp     edi, dword ptr [esp+3Ch+var_24]
+0x485A71: cmp     edi, [esp+3Ch+var_24]
 0x485A75: jl      short loc_485A30
 0x485A77: mov     ecx, ds:0B33B00h
-0x485A7D: call    sub_45A170
+0x485A7D: call    TESSaveLoadGame_UseSaveGameBlocks
 0x485A82: test    al, al
 0x485A84: jz      loc_485BA1
 0x485A8A: mov     ecx, ds:0B33B00h
@@ -142,7 +142,7 @@
 0x485A9B: jz      loc_485B57
 0x485AA1: mov     edx, [edi]
 0x485AA3: push    edx; a1
-0x485AA4: call    TESForm_LookupByFormID
+0x485AA4: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x485AA9: mov     ecx, eax
 0x485AAB: movzx   eax, word ptr [esp+40h+anonymous_0]
 0x485AB0: add     eax, ebp
@@ -239,3 +239,15 @@
 0x485BB0: pop     ebx
 0x485BB1: add     esp, 20h
 0x485BB4: retn
+0x9C6FC0: mov     eax, [ebp-10h]
+0x9C6FC3: push    eax
+0x9C6FC4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C6FC9: pop     ecx
+0x9C6FCA: retn
+0x9C6FCB: mov     edx, [esp+arg_4]
+0x9C6FCF: lea     eax, [edx-24h]
+0x9C6FD2: mov     ecx, [edx-28h]
+0x9C6FD5: xor     ecx, eax
+0x9C6FD7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6FDC: mov     eax, offset stru_AEF44C
+0x9C6FE1: jmp     ___CxxFrameHandler3

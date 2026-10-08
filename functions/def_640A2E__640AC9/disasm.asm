@@ -10,7 +10,7 @@
 0x640AE8: mov     ecx, edi
 0x640AEA: call    edx
 0x640AEC: mov     ecx, eax
-0x640AEE: call    sub_6135F0
+0x640AEE: call    CombatController_GetCurrentTarget
 0x640AF3: mov     ebx, eax
 0x640AF5: mov     eax, [edi]
 0x640AF7: mov     edx, [eax+330h]
@@ -30,7 +30,7 @@
 0x640B22: jnz     short loc_640B76
 0x640B24: mov     eax, [esp+arg_C]
 0x640B28: fld     dword ptr [eax+1B8h]
-0x640B2E: mov     ecx, offset fFightAbleToDetectTimer
+0x640B2E: mov     ecx, (offset flt_B36778+108h)
 0x640B33: fadd    dword ptr ds:0B33E9Ch
 0x640B39: fstp    [esp+arg_28]
 0x640B3D: fld     [esp+arg_28]
@@ -127,7 +127,7 @@
 0x640C62: test    al, al
 0x640C64: jz      short loc_640C98
 0x640C66: mov     ecx, edi; this
-0x640C68: call    sub_5E6C60
+0x640C68: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x640C6D: test    al, al
 0x640C6F: jz      short loc_640C98
 0x640C71: cmp     esi, ds:0B333C4h
@@ -211,7 +211,7 @@
 0x640D55: jz      short loc_640DB1
 0x640D57: push    eax
 0x640D58: push    0Ch
-0x640D5A: mov     ecx, offset dword_B3BDB0
+0x640D5A: mov     ecx, (offset qword_B3BB2C+284h)
 0x640D5F: call    sub_67CF50
 0x640D64: mov     ebp, eax
 0x640D66: test    ebp, ebp
@@ -234,12 +234,12 @@
 0x640D92: jnz     short loc_640D70
 0x640D94: jmp     short loc_640DA1
 0x640D96: mov     eax, [eax]
-0x640D98: mov     byte ptr [esp+34h+var_1C], 1
+0x640D98: mov     [esp+34h+var_1C], 1
 0x640D9D: mov     [esp+34h+var_20], eax
 0x640DA1: mov     ecx, ebx
-0x640DA3: call    BSSimpleList_Clear
+0x640DA3: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x640DA8: push    ebx
-0x640DA9: call    FormHeapFree
+0x640DA9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x640DAE: add     esp, 4
 0x640DB1: mov     ecx, [esi+58h]
 0x640DB4: test    ecx, ecx
@@ -273,12 +273,12 @@
 0x640E04: jnz     short loc_640E0A
 0x640E06: mov     edi, ebx
 0x640E08: mov     ebx, eax
-0x640E0A: cmp     byte ptr [esp+34h+var_1C], 0
+0x640E0A: cmp     [esp+34h+var_1C], 0
 0x640E0F: jz      short loc_640E53
 0x640E11: cmp     [esp+34h+var_20], 0
 0x640E16: jz      short loc_640E53
 0x640E18: mov     ecx, edi; this
-0x640E1A: call    sub_5E6C60
+0x640E1A: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x640E1F: test    al, al
 0x640E21: jz      short loc_640E53
 0x640E23: mov     ecx, [esp+34h+var_20]
@@ -352,22 +352,22 @@
 0x640EDF: mov     ecx, offset unk_B36C48
 0x640EE4: call    GameSetting_GetSafeFloatPointer
 0x640EE9: fld     dword ptr [eax]
-0x640EEB: call    Double_To_SInt32
+0x640EEB: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x640EF0: mov     ecx, esi; this
 0x640EF2: mov     [esp+68h+aggressionStat], eax
-0x640EF6: call    TESObjectREFR_GetParentCell
+0x640EF6: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x640EFB: test    eax, eax
 0x640EFD: jz      short loc_640F26
 0x640EFF: mov     ecx, esi; this
-0x640F01: call    TESObjectREFR_GetParentCell
+0x640F01: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x640F06: mov     ecx, eax; this
-0x640F08: call    TESObjectCELL_IsInterior
+0x640F08: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x640F0D: test    al, al
 0x640F0F: jz      short loc_640F26
 0x640F11: mov     ecx, offset unk_B36C50
 0x640F16: call    GameSetting_GetSafeFloatPointer
 0x640F1B: fld     dword ptr [eax]
-0x640F1D: call    Double_To_SInt32
+0x640F1D: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x640F22: mov     [esp+68h+aggressionStat], eax
 0x640F26: mov     edx, [ebp+0]
 0x640F29: mov     eax, [edx+334h]
@@ -440,7 +440,7 @@
 0x640FE1: cmp     [esp+6Ch+var_40], 0
 0x640FE6: jle     short loc_641047
 0x640FE8: mov     ecx, ebp; this
-0x640FEA: call    sub_5E6C60
+0x640FEA: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x640FEF: push    0; a2
 0x640FF1: mov     ecx, ebp; this
 0x640FF3: call    Actor_GetActorBaseForm
@@ -452,7 +452,7 @@
 0x641006: mov     byte ptr [esp+6Ch+var_40], 1
 0x64100B: jmp     short loc_641021
 0x64100D: push    esi
-0x64100E: mov     ecx, offset dword_B3BDB0
+0x64100E: mov     ecx, (offset qword_B3BB2C+284h)
 0x641013: call    sub_67CB50
 0x641018: test    al, al
 0x64101A: setz    cl
@@ -474,7 +474,7 @@
 0x641040: call    edx
 0x641042: jmp     loc_6411AD
 0x641047: mov     ecx, ebp; this
-0x641049: call    sub_5E6C60
+0x641049: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x64104E: test    al, al
 0x641050: jz      short loc_6410C9
 0x641052: mov     ecx, esi; this
@@ -520,7 +520,7 @@
 0x6410C2: call    edx
 0x6410C4: jmp     loc_6411AD
 0x6410C9: mov     ecx, ebp; this
-0x6410CB: call    sub_5E6C60
+0x6410CB: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x6410D0: test    al, al
 0x6410D2: jnz     loc_6411AD
 0x6410D8: cmp     [esp+74h+var_48], 0
@@ -536,7 +536,7 @@
 0x6410FB: mov     ecx, esi
 0x6410FD: call    edx
 0x6410FF: mov     ecx, eax
-0x641101: call    sub_6135F0
+0x641101: call    CombatController_GetCurrentTarget
 0x641106: mov     edi, eax
 0x641108: jmp     short loc_64110E
 0x64110A: mov     edi, [esp+74h+var_50]
@@ -551,7 +551,7 @@
 0x641124: test    al, al
 0x641126: jnz     loc_6411AD
 0x64112C: mov     ecx, ebp; this
-0x64112E: call    sub_5E6C60
+0x64112E: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x641133: push    0; a2
 0x641135: mov     ecx, ebp; this
 0x641137: call    Actor_GetActorBaseForm
@@ -573,7 +573,7 @@
 0x641168: mov     byte ptr [esp+74h+var_48], 0
 0x64116D: jmp     short loc_641183
 0x64116F: push    esi
-0x641170: mov     ecx, offset dword_B3BDB0
+0x641170: mov     ecx, (offset qword_B3BB2C+284h)
 0x641175: call    sub_67CB50
 0x64117A: test    al, al
 0x64117C: setz    al

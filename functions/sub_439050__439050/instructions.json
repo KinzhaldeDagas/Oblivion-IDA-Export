@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x439050",
-    "line": "push    ebp",
+    "line": "push    ebp; OBLIVION AUTHORITY (2026-08-30): Checked erase-range core for vectors of trivial 4-byte elements. Validates iterator owners, shifts the suffix with memmove_s, updates end, and returns the resulting iterator; directly clears CIndexedGeometry triangle totals.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x439051",
-    "line": "mov     ebp, [esp+4+arg_4]",
+    "line": "mov     ebp, [esp+4+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x43905D",
-    "line": "cmp     ebp, [esp+0Ch+arg_C]",
+    "line": "cmp     ebp, [esp+0Ch+lastOwner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x43909B",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

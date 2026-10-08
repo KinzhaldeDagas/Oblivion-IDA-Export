@@ -1,55 +1,55 @@
-__int16 __thiscall sub_69EE30(NiObject **this, int a2, int Src)
+// Verified (Oblivion): model save receives owner ActiveEffect* and target TESObjectREFR*, writes base data, then a 16-bit length and serialized NiStreamable model resource payload. Fallout instead serializes controller-manager save data.
+void __thiscall MagicModelHitEffect_SaveExtraData(
+        MagicModelHitEffect *this,
+        ActiveEffect *ownerActiveEffect,
+        TESObjectREFR *targetReference)
 {
-  _DWORD *v4; // edi
-  NiObject *m_uiRefCount; // esi
+  TESObjectREFR *vtbl; // edi
+  NiObject *modelRoot_30; // esi
   NiObject *v7; // ebx
-  __int16 result; // ax
-  int v9; // ecx
-  _DWORD *v10; // eax
-  int v11; // eax
-  size_t v12; // [esp+0h] [ebp-14h]
-  float v13; // [esp+18h] [ebp+4h]
+  int v8; // ecx
+  _DWORD *v9; // eax
+  int v10; // eax
+  float contextA; // [esp+18h] [ebp+4h]
 
-  v4 = (_DWORD *)Src;
-  sub_69DBB0((int)this, a2, Src);
-  m_uiRefCount = *(this + 0xC);
-  v7 = 0;
-  if ( m_uiRefCount )
+  vtbl = targetReference; /*0x69ee38*/
+  MagicHitEffect_SaveExtraData(&this->super, ownerActiveEffect, targetReference); /*0x69ee40*/
+  modelRoot_30 = (NiObject *)this->modelRoot_30; /*0x69ee45*/
+  v7 = 0; /*0x69ee48*/
+  if ( modelRoot_30 ) /*0x69ee4c*/
   {
-    m_uiRefCount = (NiObject *)m_uiRefCount[1].members.m_uiRefCount;
-    v7 = NiRTTI_Cast(&stru_B3CAC0, m_uiRefCount);
+    modelRoot_30 = (NiObject *)modelRoot_30[1].members.m_uiRefCount; /*0x69ee4e*/
+    v7 = NiRTTI_Cast((BSStringT *)&stru_B3CAC0, modelRoot_30); /*0x69ee5f*/
   }
-  Src = 0;
-  if ( v7 )
-    Src = (unsigned __int16)sub_4DA760((int)v7);
-  LODWORD(v12) = 2;
-  result = (unsigned __int16)SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &Src, v12);
-  if ( (_WORD)Src )
+  targetReference = 0; /*0x69ee63*/
+  if ( v7 ) /*0x69ee6b*/
+    targetReference = (TESObjectREFR *)(unsigned __int16)sub_4DA760((int)v7); /*0x69ee79*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &targetReference, 2u); /*0x69ee8a*/
+  if ( (_WORD)targetReference ) /*0x69ee95*/
   {
-    v13 = flt_A30634;
-    if ( v4 )
+    contextA = kTerrainLODQuadRayDirectionZ; /*0x69ee9f*/
+    if ( vtbl ) /*0x69eea3*/
     {
-      if ( (*(unsigned __int8 (__thiscall **)(_DWORD *))(*v4 + 0x190))(v4) )
+      if ( vtbl->vtbl->IsActor(vtbl) ) /*0x69eeaf*/
       {
-        if ( a2 )
+        if ( ownerActiveEffect ) /*0x69eeb7*/
         {
-          v4 = (_DWORD *)v4[0x16];
-          v10 = OblivionDynamicCast(
-                  v4,
-                  0,
-                  (struct _s_RTTICompleteObjectLocator *)&BaseProcess `RTTI Type Descriptor',
-                  &MiddleHighProcess `RTTI Type Descriptor',
-                  0);
-          if ( v10 )
+          vtbl = (TESObjectREFR *)vtbl[1].vtbl; /*0x69eeb9*/
+          v9 = OblivionDynamicCast( /*0x69eecb*/
+                 vtbl,
+                 0,
+                 (struct _s_RTTICompleteObjectLocator *)&BaseProcess `RTTI Type Descriptor',
+                 &MiddleHighProcess `RTTI Type Descriptor',
+                 0);
+          if ( v9 ) /*0x69eed5*/
           {
-            v11 = v10[0x5F];
-            if ( v11 )
-              v13 = *(float *)(v11 + 0x94);
+            v10 = v9[0x5F]; /*0x69eed7*/
+            if ( v10 ) /*0x69eedf*/
+              contextA = *(float *)(v10 + 0x94); /*0x69eee7*/
           }
         }
       }
     }
-    return sub_4DA7F0(v9, (int)v4, (int)m_uiRefCount, (int)v7, v13);
+    sub_4DA7F0(v8, (int)vtbl, (int)modelRoot_30, (int)v7, contextA); /*0x69eef4*/
   }
-  return result;
 }

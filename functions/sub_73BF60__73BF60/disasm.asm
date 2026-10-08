@@ -13,9 +13,9 @@
 0x73BF88: test    al, al
 0x73BF8A: jz      short loc_73C005
 0x73BF8C: lea     ecx, [esi+100h]
-0x73BF92: push    ecx
-0x73BF93: lea     ecx, [edi+100h]
-0x73BF99: call    sub_8AA390
+0x73BF92: push    ecx; other
+0x73BF93: lea     ecx, [edi+100h]; this
+0x73BF99: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x73BF9E: test    al, al
 0x73BFA0: jnz     short loc_73C005
 0x73BFA2: mov     edx, [edi+140h]

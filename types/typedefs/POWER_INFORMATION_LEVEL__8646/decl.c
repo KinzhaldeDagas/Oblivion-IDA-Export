@@ -1,1 +1,26 @@
-_POWER_INFORMATION_LEVEL
+enum _POWER_INFORMATION_LEVEL : __int32
+{
+SystemPowerPolicyAc = 0x0,
+SystemPowerPolicyDc = 0x1,
+VerifySystemPolicyAc = 0x2,
+VerifySystemPolicyDc = 0x3,
+SystemPowerCapabilities = 0x4,
+SystemBatteryState = 0x5,
+SystemPowerStateHandler = 0x6,
+ProcessorStateHandler = 0x7,
+SystemPowerPolicyCurrent = 0x8,
+AdministratorPowerPolicy = 0x9,
+SystemReserveHiberFile = 0xA,
+ProcessorInformation = 0xB,
+SystemPowerInformation = 0xC,
+ProcessorStateHandler2 = 0xD,
+LastWakeTime = 0xE,
+LastSleepTime = 0xF,
+SystemExecutionState = 0x10,
+SystemPowerStateNotifyHandler = 0x11,
+ProcessorPowerPolicyAc = 0x12,
+ProcessorPowerPolicyDc = 0x13,
+VerifyProcessorPowerPolicyAc = 0x14,
+VerifyProcessorPowerPolicyDc = 0x15,
+ProcessorPowerPolicyCurrent = 0x16,
+};

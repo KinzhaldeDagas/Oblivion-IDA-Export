@@ -1,23 +1,29 @@
 BSExtraData *__thiscall sub_4847F0(ExtraDataList ***this)
 {
-  ExtraDataList **v2; // edi
-  BSExtraData *i; // ebx
+  int *v2; // edi
+  BSExtraData *LeveledItem; // ebx
   ExtraDataList *v4; // esi
 
-  v2 = *this;
-  for ( i = 0; v2; v2 = (ExtraDataList **)v2[1] )
+  v2 = (int *)*this; /*0x4847f5*/
+  LeveledItem = 0; /*0x4847f8*/
+  if ( *this ) /*0x4847f5*/
   {
-    v4 = *v2;
-    if ( !*v2 )
-      break;
-    if ( sub_41E850(*v2) )
+    do /*0x48483b*/
     {
-      i = sub_41E850(v4);
-      BaseExtraList_RemoveExtraByPtr(v4, (int)i, 0);
-      if ( !v4->members.m_data )
-        BSSimpleList_Remove(*this, (int)v4);
-      v2 = *this;
+      v4 = (ExtraDataList *)*v2; /*0x484800*/
+      if ( !*v2 ) /*0x484800*/
+        break; /*0x484804*/
+      if ( ExtraDataList_GetLeveledItem((ExtraDataList *)*v2) ) /*0x484808*/
+      {
+        LeveledItem = ExtraDataList_GetLeveledItem(v4); /*0x484818*/
+        BaseExtraList_RemoveExtraByPtr(v4, (int)LeveledItem, 0); /*0x48481f*/
+        if ( !v4->members.m_data ) /*0x484824*/
+          BSSimpleList_Remove((int *)*this, (int)v4); /*0x48482e*/
+        v2 = (int *)*this; /*0x484833*/
+      }
+      v2 = (int *)v2[1]; /*0x484836*/
     }
+    while ( v2 ); /*0x48483b*/
   }
-  return i;
+  return LeveledItem; /*0x48483e*/
 }

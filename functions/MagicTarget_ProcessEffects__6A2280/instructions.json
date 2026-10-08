@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A2280",
-    "line": "push    ecx",
+    "line": "push    ecx; Verified active-effect manager: obtains the target's active-effect list, checks target parent/node/cell/process conditions, then enters the list loop. Each eligible ActiveEffect goes through ActiveEffect_Base_ProcessEffect; removed effects are unlinked and destroyed by their virtual destructor. Actor_ProcessMagicEffect calls this manager each actor process tick.",
     "mnemonic": "push",
     "size": 1
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x6A22DA",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,19 +265,19 @@
   },
   {
     "ea": "0x6A22F2",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A22F7",
-    "line": "mov     ecx, eax; this",
+    "line": "mov     ecx, eax; object",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6A22F9",
-    "line": "call    TESObjectCELL_GetNiNode?",
+    "line": "call    GetObjectPointerAt_054; Verified machine behavior is a raw pointer load from object+0x54. Cell-side callsites use TESObjectCELL+0x54 as NiNode*. TravelPath_AddRoadSegmentsForPath passes a TESWorldSpace, for which +0x54 is the owned TESRoad*. Keep the return interpretation dependent on the receiver type.",
     "mnemonic": "call",
     "size": 5
   },

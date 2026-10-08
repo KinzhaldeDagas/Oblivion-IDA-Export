@@ -1,1 +1,1 @@
-IEnumStringVtbl_0
+typedef IEnumStringVtbl IEnumStringVtbl_0;

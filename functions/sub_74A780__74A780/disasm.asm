@@ -56,9 +56,9 @@
 0x74A7F5: jnz     short loc_74A7EA
 0x74A7F7: jmp     short loc_74A7D3
 0x74A7F9: add     ebx, 78h ; 'x'
-0x74A7FC: push    ebx
-0x74A7FD: lea     ecx, [edi+78h]
-0x74A800: call    sub_8AA390
+0x74A7FC: push    ebx; other
+0x74A7FD: lea     ecx, [edi+78h]; this
+0x74A800: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x74A805: pop     esi
 0x74A806: pop     ebp
 0x74A807: test    al, al

@@ -1,1 +1,1 @@
-SkyShaderProperty
+struct SkyShaderProperty;

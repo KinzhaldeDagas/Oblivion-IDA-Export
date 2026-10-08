@@ -108,7 +108,7 @@
 0x7C50A4: fstp    [esp+28h+var_18]
 0x7C50A8: fld     [esp+28h+var_18]
 0x7C50AC: fld     st
-0x7C50AE: call    Double_To_SInt32
+0x7C50AE: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x7C50B3: mov     [esp+28h+var_18], eax
 0x7C50B7: fild    [esp+28h+var_18]
 0x7C50BB: fstp    [esp+28h+var_18]
@@ -153,7 +153,7 @@
 0x7C513E: lea     ecx, [esp+28h+arg_1C]
 0x7C5142: push    ecx
 0x7C5143: push    eax
-0x7C5144: mov     ecx, offset off_B2CBC4
+0x7C5144: mov     ecx, offset stru_B2CBC4
 0x7C5149: mov     [esp+30h+arg_1C], edi
 0x7C514D: call    NiTMap_GetAt
 0x7C5152: mov     esi, [esp+28h+arg_1C]
@@ -175,7 +175,7 @@
 0x7C5178: lea     ecx, [esp+28h+arg_0]
 0x7C517C: push    ecx
 0x7C517D: lea     ecx, [esi+34h]
-0x7C5180: call    sub_5B1E20
+0x7C5180: call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.
 0x7C5185: pop     edi
 0x7C5186: pop     esi
 0x7C5187: pop     ebp

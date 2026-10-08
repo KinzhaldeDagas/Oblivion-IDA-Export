@@ -3,7 +3,7 @@
 0x60D783: mov     eax, [esi+8]
 0x60D786: test    eax, eax
 0x60D788: jz      short loc_60D801
-0x60D78A: mov     ecx, [esp+4+arg_0]
+0x60D78A: mov     ecx, [esp+4+changeMask]
 0x60D78E: test    ecx, 20000h
 0x60D794: jz      short loc_60D7E3
 0x60D796: test    ecx, 10000h
@@ -13,7 +13,7 @@
 0x60D7A5: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *
 0x60D7AA: push    0; int
 0x60D7AC: push    eax; a1
-0x60D7AD: call    TESForm_LookupByFormID
+0x60D7AD: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x60D7B2: add     esp, 4
 0x60D7B5: push    eax; void *
 0x60D7B6: call    OblivionDynamicCast
@@ -35,7 +35,7 @@
 0x60D7E8: jz      short loc_60D801
 0x60D7EA: mov     eax, [eax+18h]
 0x60D7ED: push    eax
-0x60D7EE: call    sub_673980
+0x60D7EE: call    sub_673980; 3DTheft: returns package procedure row length for procedureArrayIndex. Rows used here include Follow row 7 and Flee row 0x13.
 0x60D7F3: add     esp, 4
 0x60D7F6: cmp     [esi+4], eax
 0x60D7F9: jl      short loc_60D801

@@ -1,4 +1,4 @@
-0x803790: push    esi
+0x803790: push    esi; ImprovedShaders hook target: AddImageSpaceShader(this=list, arg0=BSImageSpaceShader*). Hook calls native trampoline, then appends paired HDR(0x08)/Blur-Bloom(0x07) shader if absent.
 0x803791: mov     esi, ecx
 0x803793: mov     eax, [esi]
 0x803795: mov     edx, [eax+4]

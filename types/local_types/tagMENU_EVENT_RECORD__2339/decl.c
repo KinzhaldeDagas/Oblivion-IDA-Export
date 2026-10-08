@@ -1,1 +1,4 @@
-tagMENU_EVENT_RECORD
+struct tagMENU_EVENT_RECORD
+{
+UINT dwCommandId;
+};

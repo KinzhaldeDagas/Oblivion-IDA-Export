@@ -1,9 +1,9 @@
 0x470780: push    ecx
-0x470781: mov     ecx, ds:0B33B00h
-0x470787: push    2; Size
+0x470781: mov     ecx, ds:0B33B00h; self
+0x470787: push    2; byteCount
 0x470789: lea     eax, [esp+8+Dst]
-0x47078D: push    eax; Dst
-0x47078E: call    SaveLoad_LoadData
+0x47078D: push    eax; destination
+0x47078E: call    SaveLoad_LoadData; OBMEFix fidelity baseline: SaveLoad_LoadData advances TESSaveLoadGame::bufferOffset at +0x14; OBMEFix uses this for OBME dummy conversion headers and restores the cursor after peeking.
 0x470793: mov     eax, [esp+4+Dst]
 0x470796: test    ax, ax
 0x470799: jz      short loc_4707AC
@@ -11,6 +11,6 @@
 0x47079F: push    eax
 0x4707A0: push    ecx
 0x4707A1: mov     ecx, ds:0B33B00h
-0x4707A7: call    sub_458E50
+0x4707A7: call    SaveLoad_QueueAnimationBlob; MEF v27 verification: raw blob helper consumes UInt16 payload from SaveLoad+0x14. Guarded null-key/null-map replacements must discard the payload before skipping map insertion to preserve stream alignment.
 0x4707AC: pop     ecx
 0x4707AD: retn

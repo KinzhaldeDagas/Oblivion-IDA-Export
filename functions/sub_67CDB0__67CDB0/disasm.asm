@@ -12,7 +12,7 @@
 0x67CDCD: add     esp, 4
 0x67CDD0: mov     ecx, ebp; this
 0x67CDD2: mov     ebx, eax
-0x67CDD4: call    sub_5E6C60
+0x67CDD4: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x67CDD9: test    al, al
 0x67CDDB: mov     eax, ds:0B333C4h
 0x67CDE0: jz      short loc_67CE07
@@ -109,7 +109,7 @@
 0x67CEEA: pop     ecx
 0x67CEEB: retn    0Ch
 0x67CEEE: push    ebx
-0x67CEEF: call    FormHeapFree
+0x67CEEF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67CEF4: add     esp, 4
 0x67CEF7: pop     ebx
 0x67CEF8: pop     esi

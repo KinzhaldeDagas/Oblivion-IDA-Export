@@ -1,1 +1,47 @@
-IImageList2Vtbl
+struct IImageList2Vtbl
+{
+HRESULT_1 (*QueryInterface)(IImageList2_0 *, const IID *const, void **);
+ULONG (*AddRef)(IImageList2_0 *);
+ULONG (*Release)(IImageList2_0 *);
+HRESULT_1 (*Add)(IImageList2_0 *, HBITMAP, HBITMAP, int *);
+HRESULT_1 (*ReplaceIcon)(IImageList2_0 *, int, HICON, int *);
+HRESULT_1 (*SetOverlayImage)(IImageList2_0 *, int, int);
+HRESULT_1 (*Replace)(IImageList2_0 *, int, HBITMAP, HBITMAP);
+HRESULT_1 (*AddMasked)(IImageList2_0 *, HBITMAP, COLORREF, int *);
+HRESULT_1 (*Draw)(IImageList2_0 *, IMAGELISTDRAWPARAMS *);
+HRESULT_1 (*Remove)(IImageList2_0 *, int);
+HRESULT_1 (*GetIcon)(IImageList2_0 *, int, UINT, HICON *);
+HRESULT_1 (*GetImageInfo)(IImageList2_0 *, int, IMAGEINFO *);
+HRESULT_1 (*Copy)(IImageList2_0 *, int, IUnknown_0 *, int, UINT);
+HRESULT_1 (*Merge)(IImageList2_0 *, int, IUnknown_0 *, int, int, int, const IID *const, PVOID *);
+HRESULT_1 (*Clone)(IImageList2_0 *, const IID *const, PVOID *);
+HRESULT_1 (*GetImageRect)(IImageList2_0 *, int, RECT *);
+HRESULT_1 (*GetIconSize)(IImageList2_0 *, int *, int *);
+HRESULT_1 (*SetIconSize)(IImageList2_0 *, int, int);
+HRESULT_1 (*GetImageCount)(IImageList2_0 *, int *);
+HRESULT_1 (*SetImageCount)(IImageList2_0 *, UINT);
+HRESULT_1 (*SetBkColor)(IImageList2_0 *, COLORREF, COLORREF *);
+HRESULT_1 (*GetBkColor)(IImageList2_0 *, COLORREF *);
+HRESULT_1 (*BeginDrag)(IImageList2_0 *, int, int, int);
+HRESULT_1 (*EndDrag)(IImageList2_0 *);
+HRESULT_1 (*DragEnter)(IImageList2_0 *, HWND, int, int);
+HRESULT_1 (*DragLeave)(IImageList2_0 *, HWND);
+HRESULT_1 (*DragMove)(IImageList2_0 *, int, int);
+HRESULT_1 (*SetDragCursorImage)(IImageList2_0 *, IUnknown_0 *, int, int, int);
+HRESULT_1 (*DragShowNolock)(IImageList2_0 *, BOOL);
+HRESULT_1 (*GetDragImage)(IImageList2_0 *, POINT *, POINT *, const IID *const, PVOID *);
+HRESULT_1 (*GetItemFlags)(IImageList2_0 *, int, DWORD *);
+HRESULT_1 (*GetOverlayImage)(IImageList2_0 *, int, int *);
+HRESULT_1 (*Resize)(IImageList2_0 *, INT, INT);
+HRESULT_1 (*GetOriginalSize)(IImageList2_0 *, INT, DWORD, INT *, INT *);
+HRESULT_1 (*SetOriginalSize)(IImageList2_0 *, INT, INT, INT);
+HRESULT_1 (*SetCallback)(IImageList2_0 *, IUnknown_0 *);
+HRESULT_1 (*GetCallback)(IImageList2_0 *, const IID *const, void **);
+HRESULT_1 (*ForceImagePresent)(IImageList2_0 *, INT, DWORD);
+HRESULT_1 (*DiscardImages)(IImageList2_0 *, INT, INT, DWORD);
+HRESULT_1 (*PreloadImages)(IImageList2_0 *, IMAGELISTDRAWPARAMS *);
+HRESULT_1 (*GetStatistics)(IImageList2_0 *, IMAGELISTSTATS *);
+HRESULT_1 (*Initialize)(IImageList2_0 *, INT, INT, UINT, INT, INT);
+HRESULT_1 (*Replace2)(IImageList2_0 *, INT, HBITMAP, HBITMAP, IUnknown_0 *, DWORD);
+HRESULT_1 (*ReplaceFromImageList)(IImageList2_0 *, INT, IImageList_0 *, INT, IUnknown_0 *, DWORD);
+};

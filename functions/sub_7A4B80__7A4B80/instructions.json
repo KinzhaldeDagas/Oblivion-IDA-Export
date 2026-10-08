@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A4B80",
-    "line": "push    ebx",
+    "line": "push    ebx; Checked leaf-texture vector erase: shifts the tail by deep assignment, destroys the vacated suffix, updates end, and returns {owner,current}.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x7A4B82",
-    "line": "mov     ebp, [esp+8+arg_4]",
+    "line": "mov     ebp, [esp+8+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7A4B8D",
-    "line": "cmp     ebp, [esp+0Ch+arg_C]",
+    "line": "cmp     ebp, [esp+0Ch+lastOwner]",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x7A4B98",
-    "line": "mov     ebx, [esp+0Ch+arg_8]",
+    "line": "mov     ebx, [esp+0Ch+first]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7A4B9C",
-    "line": "mov     ecx, [esp+0Ch+arg_10]",
+    "line": "mov     ecx, [esp+0Ch+last]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,13 +97,13 @@
   },
   {
     "ea": "0x7A4BA8",
-    "line": "mov     byte ptr [esp+10h+arg_4], 0",
+    "line": "mov     byte ptr [esp+10h+firstOwner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7A4BAD",
-    "line": "mov     edx, [esp+10h+arg_4]",
+    "line": "mov     edx, [esp+10h+firstOwner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7A4BB2",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x7A4BB7",
-    "line": "mov     edx, [esp+18h+arg_0]",
+    "line": "mov     edx, [esp+18h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,25 +139,25 @@
   },
   {
     "ea": "0x7A4BBC",
-    "line": "push    ebx",
+    "line": "push    ebx; destinationFirst",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4BBD",
-    "line": "push    eax",
+    "line": "push    eax; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4BBE",
-    "line": "push    ecx",
+    "line": "push    ecx; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4BBF",
-    "line": "call    sub_7A3B80",
+    "line": "call    OB_SIdvLeafTexture_CopyAssignRangeForward_010201A0; Forward deep-copy assignment over existing 0x54-byte SIdvLeafTexture records; returns the destination end.",
     "mnemonic": "call",
     "size": 5
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x7A4BC9",
-    "line": "mov     eax, [esp+28h+arg_0]",
+    "line": "mov     eax, [esp+28h+result]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x7A4BCF",
-    "line": "push    ecx",
+    "line": "push    ecx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4BD0",
-    "line": "push    edi",
+    "line": "push    edi; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A4BD1",
-    "line": "call    sub_7A36B0",
+    "line": "call    OB_SIdvLeafTexture_DestroyRange_010201A0; Destroys [first,last) compact SIdvLeafTexture records at 0x54 stride, releasing each owned filename.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7A4BDD",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+result]",
     "mnemonic": "mov",
     "size": 4
   },

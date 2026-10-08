@@ -1,8 +1,9 @@
-int __thiscall ActorAnimData_GetSomethingFromField8Value(_DWORD *this, int a2)
+// Reads the per-slot action/state dword at ActorAnimData +0x48 + 4*normalizedSlot. Native aliases slot 5 to slot 0 and slot 6 to slot 3.
+int __thiscall ActorAnimData_GetSlotActionState(ActorAnimData *this, int slot)
 {
-  if ( a2 == 5 )
-    return *(this + 0x12);
-  if ( a2 == 6 )
-    return *(this + 0x15);
-  return *(this + a2 + 0x12);
+  if ( slot == 5 ) /*0x470759*/
+    return this->unk48State[0]; /*0x47076e*/
+  if ( slot == 6 ) /*0x47075e*/
+    return this->unk48State[3]; /*0x470765*/
+  return this->unk48State[slot]; /*0x470769*/
 }

@@ -47,7 +47,7 @@
 0x6FBD1F: mov     ebx, eax
 0x6FBD21: mov     eax, [esp+28h+arg_0]
 0x6FBD25: fld     dword ptr [eax]
-0x6FBD27: mov     esi, [esp+28h+arg_4]
+0x6FBD27: mov     esi, [esp+28h+colors]
 0x6FBD2B: fmul    dword ptr ds:0B3F4C8h
 0x6FBD31: add     esp, 4
 0x6FBD34: test    esi, esi
@@ -163,7 +163,7 @@
 0x6FBEBD: jmp     short loc_6FBEC1
 0x6FBEBF: xor     eax, eax
 0x6FBEC1: test    eax, eax
-0x6FBEC3: mov     [esp+24h+arg_4], eax
+0x6FBEC3: mov     [esp+24h+colors], eax
 0x6FBEC7: jz      loc_6FBF84
 0x6FBECD: mov     ecx, [esi]
 0x6FBECF: mov     [eax], ecx
@@ -244,18 +244,18 @@
 0x6FBFAE: cmp     eax, esi
 0x6FBFB0: mov     [esp+24h+var_4], esi
 0x6FBFB4: jz      short loc_6FBFCE
-0x6FBFB6: mov     ecx, [esp+24h+arg_4]
-0x6FBFBA: push    ebp
-0x6FBFBB: push    0Ch
-0x6FBFBD: push    esi
-0x6FBFBE: push    esi
-0x6FBFBF: push    esi
-0x6FBFC0: push    ecx
-0x6FBFC1: push    esi
-0x6FBFC2: push    ebx
-0x6FBFC3: push    8
-0x6FBFC5: mov     ecx, eax
-0x6FBFC7: call    sub_7174B0
+0x6FBFB6: mov     ecx, [esp+24h+colors]
+0x6FBFBA: push    ebp; triangleIndices
+0x6FBFBB: push    0Ch; triangleCount
+0x6FBFBD: push    esi; dataFlags
+0x6FBFBE: push    esi; hasVertexColors
+0x6FBFBF: push    esi; textureCoordinates
+0x6FBFC0: push    ecx; colors
+0x6FBFC1: push    esi; normals
+0x6FBFC2: push    ebx; vertices
+0x6FBFC3: push    8; vertexCount
+0x6FBFC5: mov     ecx, eax; this
+0x6FBFC7: call    NiTriShape_ctorWithGeometryData; Verified NiTriShape constructor wrapper: allocate/init NiTriShapeData from caller-supplied vertices, colors and triangle-index buffer; initialize NiTriBasedGeom and install NiTriShape vtable.
 0x6FBFCC: mov     esi, eax
 0x6FBFCE: mov     edx, [esi]
 0x6FBFD0: mov     eax, [edx+90h]
@@ -272,5 +272,17 @@
 0x6FBFF3: pop     ebx
 0x6FBFF4: add     esp, 10h
 0x6FBFF7: retn
-0x6FBFF8: mov     [esp+24h+arg_4], 0
+0x6FBFF8: mov     [esp+24h+colors], 0
 0x6FC000: jmp     short loc_6FBF84
+0x9CAD70: mov     eax, [ebp-10h]
+0x9CAD73: push    eax
+0x9CAD74: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CAD79: pop     ecx
+0x9CAD7A: retn
+0x9CAD7B: mov     edx, [esp+arg_4]
+0x9CAD7F: lea     eax, [edx-14h]
+0x9CAD82: mov     ecx, [edx-18h]
+0x9CAD85: xor     ecx, eax
+0x9CAD87: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAD8C: mov     eax, offset stru_AF3390
+0x9CAD91: jmp     ___CxxFrameHandler3

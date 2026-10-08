@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9A2130",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Creates an empty NiRenderTargetGroup with a requested color-target count. Rejects null renderer, counts above renderer capability, and counts above Oblivion's hard MRT limit of four.",
     "mnemonic": "push",
     "size": 2
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x9A2151",
-    "line": "mov     ecx, [esp+14h+arg_4]",
+    "line": "mov     ecx, [esp+14h+renderer]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x9A218D",
-    "line": "mov     [esp+14h+arg_4], eax",
+    "line": "mov     [esp+14h+renderer], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -310,5 +310,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D7DB0",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7DB3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D7DB4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7DB9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D7DBA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D7DBB",
+    "line": "mov     edx, [esp+renderer]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D7DBF",
+    "line": "lea     eax, [edx-4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7DC2",
+    "line": "mov     ecx, [edx-8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D7DC5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D7DC7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7DCC",
+    "line": "mov     eax, offset stru_B00288",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D7DD1",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

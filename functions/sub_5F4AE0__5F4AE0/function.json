@@ -1,19 +1,32 @@
 {
-  "callees_count": 60,
-  "callers_count": 23,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_5F4AE0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 23,
+  "callers_count": 34,
+  "chunks": [
+    [
+      "0x5F4AE0",
+      "0x5F4E06"
+    ]
+  ],
+  "chunks_sha256": "b431709f36039d2fe6ccd71675c90f537a7789297c8fe67b6c7ef3b66dab9392",
+  "comment_regular": "Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
+  "comment_repeatable": "Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Actor_UpdateBlockingState",
   "end_ea": "0x5F4E06",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_5F4AE0",
+  "name": "Actor_UpdateBlockingState",
   "segment": ".text",
   "sha256": "b431709f36039d2fe6ccd71675c90f537a7789297c8fe67b6c7ef3b66dab9392",
   "size": 806,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x5F4AE0",
-  "type": "char __userpurge@<al>(Actor *this@<ecx>, double st5_0@<st2>, double a3@<st1>, double a4@<st0>, char a5)",
+  "total_chunk_size": 806,
+  "type": "char __thiscall(Actor *this, char shouldBlock)",
   "xrefs_from_count": 344,
   "xrefs_to_count": 34
 }

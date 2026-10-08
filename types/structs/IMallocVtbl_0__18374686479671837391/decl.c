@@ -1,1 +1,1 @@
-IMallocVtbl_0
+typedef IMallocVtbl IMallocVtbl_0;

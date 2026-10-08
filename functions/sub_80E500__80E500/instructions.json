@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x80E500",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass230: SpeedTree frond vertex map uses shared FogParam/ShadowVolumeFatness 0x00B46638 and FogColor/ShadowVolumeExtrudeDistance 0x00B46648.",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x80E597",
-    "line": "push    offset dword_B46498",
+    "line": "push    offset flt_B46498",
     "mnemonic": "push",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x80E5C0",
-    "line": "push    offset dword_B464A8",
+    "line": "push    (offset flt_B464A0+8)",
     "mnemonic": "push",
     "size": 5
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x80E5E9",
-    "line": "push    offset unk_B464B8",
+    "line": "push    (offset flt_B464A0+18h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x80E668",
-    "line": "push    offset flt_B465A8",
+    "line": "push    (offset flt_B464A0+108h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x80E691",
-    "line": "push    offset dword_B46638",
+    "line": "push    offset flt_B46638",
     "mnemonic": "push",
     "size": 5
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x80E6AF",
-    "line": "call    edx",
+    "line": "call    edx; Fog constant-map decode: SpeedTree frond vertex map declares FogParam | ShadowVolumeFatness at vs c14 from shared B46638.",
     "mnemonic": "call",
     "size": 2
   },
@@ -907,7 +907,7 @@
   },
   {
     "ea": "0x80E6BA",
-    "line": "push    offset dword_B46648",
+    "line": "push    (offset flt_B46638+10h)",
     "mnemonic": "push",
     "size": 5
   },
@@ -961,7 +961,7 @@
   },
   {
     "ea": "0x80E6D8",
-    "line": "call    edx",
+    "line": "call    edx; Fog constant-map decode: SpeedTree frond vertex map declares FogColor | ShadowVolumeExtrudeDistance at vs c15 from shared B46648.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x80E6EC",
-    "line": "push    offset flt_B42EA8",
+    "line": "push    (offset OB_RendererGlobalState_010201A0.pad_00D+2)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1069,19 +1069,19 @@
   },
   {
     "ea": "0x80E70E",
-    "line": "push    11h",
+    "line": "push    11h; baseRegister",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x80E710",
-    "line": "push    eax",
+    "line": "push    eax; constantMap",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x80E711",
-    "line": "call    sub_7F16F0",
+    "line": "call    OB_SpeedTreeShader_RegisterTreeAndWindConstants_010201A0; Registers SpeedTree shader constants: TreeData at base register and WindMatrices at base+1 (16 float4 registers).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1132,5 +1132,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9CA7E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CA7EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CA7EF",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F2",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CA7F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CA7F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA7FC",
+    "line": "mov     eax, offset stru_AF2E8C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CA801",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

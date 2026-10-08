@@ -53,7 +53,7 @@
 0x4C0135: test    eax, eax
 0x4C0137: jz      short loc_4C0144
 0x4C0139: mov     ecx, eax; this
-0x4C013B: call    TESObjectREFR_IsPersistent?
+0x4C013B: call    TESObjectREFR_IsPersistent
 0x4C0140: test    al, al
 0x4C0142: jz      short loc_4C0115
 0x4C0144: pop     ebp

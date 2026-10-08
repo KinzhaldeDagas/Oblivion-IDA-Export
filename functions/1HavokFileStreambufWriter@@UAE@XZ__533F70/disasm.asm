@@ -29,3 +29,12 @@
 0x533FCD: pop     esi
 0x533FCE: add     esp, 10h
 0x533FD1: retn
+0x9B90B0: mov     ecx, [ebp-10h]
+0x9B90B3: jmp     sub_4BFC40
+0x9B90B8: mov     edx, [esp+arg_4]
+0x9B90BC: lea     eax, [edx-8]
+0x9B90BF: mov     ecx, [edx-0Ch]
+0x9B90C2: xor     ecx, eax
+0x9B90C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B90C9: mov     eax, offset stru_AE349C
+0x9B90CE: jmp     ___CxxFrameHandler3

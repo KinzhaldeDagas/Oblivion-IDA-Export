@@ -222,3 +222,36 @@
 0x7C8B16: pop     ebx
 0x7C8B17: add     esp, 10h
 0x7C8B1A: retn    10h
+0x9D0530: mov     ecx, [ebp-10h]; this
+0x9D0533: jmp     ??1BSShader@@UAE@XZ;
+0x9D0538: mov     ecx, [ebp-10h]
+0x9D053B: add     ecx, 7Ch ; '|'; slot
+0x9D053E: jmp     NiPointerSlot_Release
+0x9D0543: mov     ecx, [ebp-10h]
+0x9D0546: add     ecx, 80h ; '€'; slot
+0x9D054C: jmp     NiPointerSlot_Release
+0x9D0551: mov     ecx, [ebp-10h]
+0x9D0554: add     ecx, 84h ; '„'; slot
+0x9D055A: jmp     NiPointerSlot_Release
+0x9D055F: mov     ecx, [ebp-10h]
+0x9D0562: add     ecx, 88h ; 'ˆ'; slot
+0x9D0568: jmp     NiPointerSlot_Release
+0x9D056D: mov     ecx, [ebp-10h]
+0x9D0570: add     ecx, 8Ch ; 'Œ'; slot
+0x9D0576: jmp     NiPointerSlot_Release
+0x9D057B: mov     ecx, [ebp-10h]
+0x9D057E: add     ecx, 90h; slot
+0x9D0584: jmp     NiPointerSlot_Release
+0x9D0589: mov     ecx, [ebp-10h]
+0x9D058C: add     ecx, 94h ; '”'; slot
+0x9D0592: jmp     NiPointerSlot_Release
+0x9D0597: mov     ecx, [ebp-10h]
+0x9D059A: add     ecx, 98h ; '˜'; slot
+0x9D05A0: jmp     NiPointerSlot_Release
+0x9D05A5: mov     edx, [esp+arg_4]
+0x9D05A9: lea     eax, [edx-14h]
+0x9D05AC: mov     ecx, [edx-18h]
+0x9D05AF: xor     ecx, eax
+0x9D05B1: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D05B6: mov     eax, offset stru_AF8ED8
+0x9D05BB: jmp     ___CxxFrameHandler3

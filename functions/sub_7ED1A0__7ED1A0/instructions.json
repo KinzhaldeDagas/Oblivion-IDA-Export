@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7ED1A0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Begins Oblivion BSShaderLightingProperty non-shadow-light iteration. Skips lights with frustum-cull value 0xFF or a disabled backing NiLight flag and stores the next list cursor in the property.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x7ED1E2",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7ED249",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },

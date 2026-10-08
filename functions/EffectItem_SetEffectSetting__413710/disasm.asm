@@ -19,3 +19,12 @@
 0x413742: jnz     short EffectItem_SetEffectSetting___CleanupExtraSCIT
 0x413744: cmp     dword ptr [ebp+98h], 46464553h
 0x41374E: jnz     short EffectItem_SetEffectSetting___CleanupExtraSCIT
+0x9B5BD0: lea     ecx, [ebp-14h]; void *
+0x9B5BD3: jmp     BSStringT_Clear
+0x9B5BD8: mov     edx, [esp+arg_4]
+0x9B5BDC: lea     eax, [edx-18h]
+0x9B5BDF: mov     ecx, [edx-1Ch]
+0x9B5BE2: xor     ecx, eax
+0x9B5BE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B5BE9: mov     eax, offset stru_AE0BB4
+0x9B5BEE: jmp     ___CxxFrameHandler3

@@ -1,4 +1,4 @@
-BSStringT *sub_55AE60()
+NiRTTI *sub_55AE60()
 {
-  return &stru_B39DA0;
+  return &stru_B39DA0; /*0x55ae65*/
 }

@@ -51,9 +51,9 @@
 0x4B728E: cmp     [esi], edi
 0x4B7290: jz      short loc_4B72A6
 0x4B7292: mov     edx, [esi]
-0x4B7294: push    edx
-0x4B7295: mov     ecx, ebx
-0x4B7297: call    sub_446C30
+0x4B7294: push    edx; item
+0x4B7295: mov     ecx, ebx; this
+0x4B7297: call    BSSimpleList__Contains; Generic BSSimpleList membership test. Dialogue menu code uses it to avoid duplicate MenuTopics; social AI uses it for the recent-conversation target cooldown list.
 0x4B729C: test    al, al
 0x4B729E: jz      short loc_4B72AE
 0x4B72A0: mov     esi, edi

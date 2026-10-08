@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x471340",
-    "line": "push    esi",
+    "line": "push    esi; Destroys the UInt16-to-AnimSequenceBase map contents, then frees its bucket array. Does not free the map object itself.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x471352",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

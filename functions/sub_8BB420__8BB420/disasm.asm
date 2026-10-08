@@ -6,7 +6,7 @@
 0x8BB42D: cmp     esi, ebp
 0x8BB42F: mov     eax, 80000000h
 0x8BB434: push    edi
-0x8BB435: mov     edi, offset dword_BA8188
+0x8BB435: mov     edi, offset unk_BA8188
 0x8BB43A: mov     [esp+18h+var_C], ebp
 0x8BB43E: mov     [esp+18h+var_8], ebp
 0x8BB442: mov     [esp+18h+var_4], eax

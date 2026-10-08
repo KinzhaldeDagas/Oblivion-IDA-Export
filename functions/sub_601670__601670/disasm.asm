@@ -7,12 +7,12 @@
 0x601679: mov     [esp+24h+var_14], ecx
 0x60167D: xor     ebx, ebx
 0x60167F: push    ebp; a2
-0x601680: mov     ecx, offset ActorProcessManager_ptr; this
+0x601680: mov     ecx, (offset qword_B3BB2C+1D4h); this
 0x601685: mov     [esp+28h+var_8], ebx
 0x601689: mov     [esp+28h+var_4], ebp
-0x60168D: call    sub_673A50
+0x60168D: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x601692: mov     ecx, eax; this
-0x601694: call    sub_7616D0
+0x601694: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x601699: mov     esi, eax
 0x60169B: test    esi, esi
 0x60169D: jz      short loc_6016F6
@@ -66,7 +66,6 @@
 0x601723: fstp    [esp+24h+var_10]
 0x601727: lea     esi, [esp+24h+var_8]
 0x60172B: jmp     short loc_601730
-0x60172D: align 10h
 0x601730: cmp     dword ptr [esi+4], 0
 0x601734: jnz     short loc_60173B
 0x601736: cmp     dword ptr [esi], 0
@@ -93,7 +92,7 @@
 0x60176F: jz      short loc_601783
 0x601771: mov     esi, [ebp+4]
 0x601774: push    ebp
-0x601775: call    FormHeapFree
+0x601775: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x60177A: add     esp, 4
 0x60177D: test    esi, esi
 0x60177F: mov     ebp, esi

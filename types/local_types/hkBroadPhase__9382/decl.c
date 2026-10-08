@@ -1,1 +1,1 @@
-hkBroadPhase
+struct hkBroadPhase;

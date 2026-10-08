@@ -1,1 +1,4 @@
-HMMIO__
+struct HMMIO__
+{
+int unused;
+};

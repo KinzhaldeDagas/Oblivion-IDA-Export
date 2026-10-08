@@ -32,7 +32,7 @@
 0x74A04B: test    [esp+10h+arg_0], 1
 0x74A050: jz      short loc_74A05B
 0x74A052: push    ebx
-0x74A053: call    FormHeapFree
+0x74A053: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x74A058: add     esp, 4
 0x74A05B: pop     ebp
 0x74A05C: mov     eax, ebx
@@ -58,7 +58,7 @@
 0x74A086: test    [esp+8+arg_0], 1
 0x74A08B: jz      short loc_74A096
 0x74A08D: push    edi
-0x74A08E: call    FormHeapFree
+0x74A08E: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x74A093: add     esp, 4
 0x74A096: mov     eax, edi
 0x74A098: pop     edi

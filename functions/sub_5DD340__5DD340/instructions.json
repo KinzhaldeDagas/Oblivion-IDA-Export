@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5DD340",
-    "line": "push    esi; a3",
+    "line": "push    esi; Native TrainingMenu close routine.",
     "mnemonic": "push",
     "size": 1
   },
@@ -91,13 +91,13 @@
   },
   {
     "ea": "0x5DD36D",
-    "line": "fstp    [esp+0Ch+var_C]; a3",
+    "line": "fstp    [esp+0Ch+var_C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DD370",
-    "line": "push    1772h; a2",
+    "line": "push    1772h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5DD377",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x5DD37E",
-    "line": "call    sub_584740",
+    "line": "call    Menu__StartFadeOut; Verified: matches Fallout Menu::StartFadeOut 0x827E2E60: visibility check, duration fallback, NewTimer, state=2, modal stack/focus updates, UpdateAllTimers. Previous alias Menu_RequestClose describes purpose; exact inherited semantic name is StartFadeOut.",
     "mnemonic": "call",
     "size": 5
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x5DD3BC",
-    "line": "fstp    [esp+0Ch+var_C]; a3",
+    "line": "fstp    [esp+0Ch+var_C]; value",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x5DD3BF",
-    "line": "push    0FA1h; a2",
+    "line": "push    0FA1h; propertyCode",
     "mnemonic": "push",
     "size": 5
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x5DD3C6",
-    "line": "call    Tile_SetFloat",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,6 +295,426 @@
   },
   {
     "ea": "0x5DD3DD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x59E100",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E101",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E102",
+    "line": "push    esi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E103",
+    "line": "push    0Dh; index",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59E105",
+    "line": "push    5; topicType",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59E107",
+    "line": "mov     esi, ecx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E109",
+    "line": "call    TESTopic__GetTopic; Direct fixed-registry lookup: bounds-checks index against g_dialogueTopicBucketCounts[topicType], then returns g_dialogueTopicBuckets[topicType][index].topic. This is not an EDID/name search.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E10E",
+    "line": "mov     ecx, ds:0B333C4h",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59E114",
+    "line": "mov     edx, [esi+60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59E117",
+    "line": "add     esp, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59E11A",
+    "line": "push    0; conversation",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59E11C",
+    "line": "push    0; previousTopic",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x59E11E",
+    "line": "push    ecx; target",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E11F",
+    "line": "push    edx; speaker",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E120",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E122",
+    "line": "call    TESTopic__CreateDialogueItem; Selects a matching TESTopicInfo and wraps it as a 0x1C DialogueItem containing response list/cursor, INFO, topic, owner quest, and speaker.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E127",
+    "line": "mov     ebx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E129",
+    "line": "test    ebx, ebx",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59E12B",
+    "line": "jz      loc_59E1CB",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x59E131",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E133",
+    "line": "call    DialogueItem__FirstResponse",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E138",
+    "line": "test    al, al",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x59E13A",
+    "line": "jz      short loc_59E1BB",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x59E13C",
+    "line": "push    edi",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E13D",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E13F",
+    "line": "call    DialogueListCursor__GetCurrent; Compiler-folded cursor getter shared by DialogueItem.response list and Conversation.item list because both begin with the same head/next/cursor layout.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E144",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x59E146",
+    "line": "mov     ecx, [esi+60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59E149",
+    "line": "mov     edi, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E14B",
+    "line": "mov     eax, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E14D",
+    "line": "mov     edx, [eax+304h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x59E153",
+    "line": "push    edi; a3",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E154",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E155",
+    "line": "fstp    [esp+18h+var_18]; a3",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59E158",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x59E15A",
+    "line": "fld     dword ptr ds:0A379B4h",
+    "mnemonic": "fld",
+    "size": 6
+  },
+  {
+    "ea": "0x59E160",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x59E162",
+    "line": "fstp    dword ptr [esi+84h]",
+    "mnemonic": "fstp",
+    "size": 6
+  },
+  {
+    "ea": "0x59E168",
+    "line": "mov     dword ptr [esi+80h], 2",
+    "mnemonic": "mov",
+    "size": 10
+  },
+  {
+    "ea": "0x59E172",
+    "line": "cmp     ds:0B13200h, al",
+    "mnemonic": "cmp",
+    "size": 6
+  },
+  {
+    "ea": "0x59E178",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E179",
+    "line": "mov     ecx, [esi+2Ch]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59E17C",
+    "line": "setnz   al",
+    "mnemonic": "setnz",
+    "size": 3
+  },
+  {
+    "ea": "0x59E17F",
+    "line": "add     eax, 1",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59E182",
+    "line": "mov     [esp+1Ch+var_C], eax",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x59E186",
+    "line": "fild    [esp+1Ch+var_C]",
+    "mnemonic": "fild",
+    "size": 4
+  },
+  {
+    "ea": "0x59E18A",
+    "line": "fstp    [esp+1Ch+value]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59E18D",
+    "line": "push    0FA1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59E192",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E197",
+    "line": "mov     ecx, [edi]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E199",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E19A",
+    "line": "mov     ecx, [esi+2Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59E19D",
+    "line": "push    0FDEh",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59E1A2",
+    "line": "call    Tile_SetString",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E1A7",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x59E1A9",
+    "line": "push    ecx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E1AA",
+    "line": "fstp    [esp+1Ch+value]; value",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x59E1AD",
+    "line": "mov     ecx, [esi+3Ch]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x59E1B0",
+    "line": "push    0FA1h; propertyCode",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x59E1B5",
+    "line": "call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E1BA",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59E1BB",
+    "line": "mov     ecx, ebx; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x59E1BD",
+    "line": "call    DialogueItem__Destroy",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E1C2",
+    "line": "push    ebx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x59E1C3",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x59E1C8",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x59E1CB",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59E1CC",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59E1CD",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x59E1CE",
     "line": "retn",
     "mnemonic": "retn",
     "size": 1

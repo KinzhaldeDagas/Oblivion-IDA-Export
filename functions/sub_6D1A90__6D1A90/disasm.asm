@@ -3,7 +3,7 @@
 0x6D1A95: push    edi
 0x6D1A96: push    ebp
 0x6D1A97: mov     edi, ecx
-0x6D1A99: call    sub_6C3680
+0x6D1A99: call    NiTransformController_RegisterStreamables; Oblivion NiTransformController stream-registration thunk to the generic single-interpolator controller registration path.
 0x6D1A9E: test    al, al
 0x6D1AA0: jnz     short loc_6D1AA7
 0x6D1AA2: pop     edi

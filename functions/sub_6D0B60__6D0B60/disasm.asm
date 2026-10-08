@@ -1,4 +1,4 @@
-0x6D0B60: sub     esp, 8
+0x6D0B60: sub     esp, 8; Samples every morph-target interpolator and writes the resulting floats into morphWeights (+0x40; data +0x44, size +0x4A). Although the ABI consumes one float stack argument (retn 4), the native body does not read it: interpolation uses the controller's cached time at NiTimeController +0x28. Callers pass that same cached value. This is controller time, not a direct morph weight.
 0x6D0B63: push    ebx
 0x6D0B64: push    esi
 0x6D0B65: mov     esi, ecx
@@ -9,7 +9,6 @@
 0x6D0B70: test    ebx, ebx
 0x6D0B72: jbe     loc_6D0C1C
 0x6D0B78: jmp     short loc_6D0B80
-0x6D0B7A: align 10h
 0x6D0B80: mov     edx, [esi]
 0x6D0B82: mov     eax, [edx+80h]
 0x6D0B88: push    edi

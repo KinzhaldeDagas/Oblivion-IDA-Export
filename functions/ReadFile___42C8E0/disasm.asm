@@ -1,9 +1,9 @@
-0x42C8E0: push    ecx
-0x42C8E1: mov     edx, [esp+4+arg_4]
+0x42C8E0: push    ecx; MEF PLAN 2026-09-07: Assembly-proven Archive_ReadBytes ABI: ECX=stream owner, stack(destination,count), RET8; forwards five cdecl callback args(owner,destination,count,&componentSize=1,componentCount=1) through owner+4. Fourth arg is not bytes-read output. Leaves callback EAX as return; exact-count validation is viable for cached construction.
+0x42C8E1: mov     edx, [esp+4+byteCount]
 0x42C8E5: push    1
 0x42C8E7: lea     eax, [esp+8+var_4]
 0x42C8EB: push    eax
-0x42C8EC: mov     eax, [esp+0Ch+arg_0]
+0x42C8EC: mov     eax, [esp+0Ch+destination]
 0x42C8F0: push    edx
 0x42C8F1: push    eax
 0x42C8F2: push    ecx

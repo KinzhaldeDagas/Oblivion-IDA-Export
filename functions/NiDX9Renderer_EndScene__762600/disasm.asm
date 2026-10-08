@@ -1,6 +1,6 @@
-0x762600: push    esi
+0x762600: push    esi; DeferredRendering implementation: EndScene is the opt-in full-screen lighting resolve point because IDA shows native drawing is complete before the D3D EndScene call. Resolve remains disabled by default until G-buffer material replacement is exact-gated.
 0x762601: mov     esi, ecx
-0x762603: cmp     byte ptr [esi+6F0h], 0
+0x762603: cmp     byte ptr [esi+6F0h], 0; DeferredRendering: EndScene checks NiDX9Renderer lostDevice byte at +0x6F0, then calls IDirect3DDevice9::EndScene through device at +0x280.
 0x76260A: jnz     short loc_762630
 0x76260C: mov     eax, [esi+280h]
 0x762612: mov     ecx, [eax]

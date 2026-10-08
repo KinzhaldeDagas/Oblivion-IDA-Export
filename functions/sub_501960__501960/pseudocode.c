@@ -1,6 +1,6 @@
 bool __usercall sub_501960@<al>(
-        double st5_0@<st2>,
-        double a2@<st1>,
+        double st6_0@<st1>,
+        double a2@<st0>,
         ParamInfo *a1,
         UInt8 *arg4,
         TESObjectREFR *a4,
@@ -11,22 +11,22 @@ bool __usercall sub_501960@<al>(
         UInt32 *a3)
 {
   bool result; // al
-  int *v11; // eax
-  UInt16 v12[2]; // [esp+8h] [ebp-4h] BYREF
+  Actor *v12; // eax
+  UInt16 v13[2]; // [esp+8h] [ebp-4h] BYREF
 
-  *(_DWORD *)v12 = 0;
-  result = Script_ExtractArgs(a1, arg4, a3, a4, a6, a7, l, v12);
-  if ( result )
+  *(_DWORD *)v13 = 0; /*0x50198a*/
+  result = Script_ExtractArgs(a1, arg4, a3, a4, a6, a7, l, v13); /*0x501992*/
+  if ( result ) /*0x50199c*/
   {
-    v11 = (int *)OblivionDynamicCast(
-                   a4,
-                   0,
-                   (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
-                   &Actor `RTTI Type Descriptor',
-                   0);
-    if ( v11 )
-      Actor_Kill(v11, st5_0, a2, 0.0, *(const char **)v12, COERCE_INT(0.0));
-    return 1;
+    v12 = (Actor *)OblivionDynamicCast( /*0x5019b0*/
+                     a4,
+                     0,
+                     (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
+                     &Actor `RTTI Type Descriptor',
+                     0);
+    if ( v12 ) /*0x5019ba*/
+      Actor_Kill(v12, 0.0, st6_0, a2, *(Actor **)v13, COERCE_INT(0.0)); /*0x5019c9*/
+    return 1; /*0x5019ce*/
   }
-  return result;
+  return result; /*0x5019a0*/
 }

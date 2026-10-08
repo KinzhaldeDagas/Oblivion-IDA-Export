@@ -1,4 +1,7 @@
-BSStringT *sub_A10D90()
+NiRTTI *sub_A10D90()
 {
-  return sub_70E220(&stru_B42D68, "DistantLODShaderProperty", (int)dword_B4618C);
+  return NiRTTI_Constructor( /*0xa10da4*/
+           &stru_B42D68,
+           "DistantLODShaderProperty",
+           (NiRTTI *)&OB_ShaderConstantStorage_010201A0[0xDE]);
 }

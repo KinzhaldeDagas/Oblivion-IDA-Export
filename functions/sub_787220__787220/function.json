@@ -1,19 +1,32 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 6,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x787220",
+      "0x7873F4"
+    ]
+  ],
+  "chunks_sha256": "0d3d8278a99f2bf3bbca43a7b85fdc09bdeeb7a04fb51d9ec5385c58110881c5",
+  "comment_regular": "2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.",
+  "comment_repeatable": "2026-05-26 SpeedTreeOBSE: shared stock LOD fade/index resolver. Plugin calls it unmodified for candidate 75002 transition-radius and 75005 transition-factor comparisons; optional writes are limited to caller-side SGeometry+0x38 under explicit INI gates. Not patched.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_787220",
+  "display_name": "CSpeedTreeRT__GetTransitionValues",
   "end_ea": "0x7873F4",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_787220",
+  "name": "CSpeedTreeRT__GetTransitionValues",
   "segment": ".text",
   "sha256": "0d3d8278a99f2bf3bbca43a7b85fdc09bdeeb7a04fb51d9ec5385c58110881c5",
   "size": 468,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x787220",
-  "type": "float *__cdecl(float, unsigned __int16, float, float, float, float, float *, float *, __int16 *, _WORD *)",
+  "total_chunk_size": 468,
+  "type": "void __cdecl(float lodLevel, unsigned __int16 lodCount, float overlapRadius, float transitionFactor, float curveExponent, float targetAlpha, float *highAlpha, float *lowAlpha, __int16 *highLod, unsigned __int16 *lowLod)",
   "xrefs_from_count": 159,
   "xrefs_to_count": 6
 }

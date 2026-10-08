@@ -90,12 +90,12 @@
 0x45ED82: mov     eax, [ecx]
 0x45ED84: mov     edx, [eax+6Ch]
 0x45ED87: call    edx
-0x45ED89: mov     ecx, [esi+0ACh]
-0x45ED8F: lea     eax, [esp+1Ch+var_8]
-0x45ED93: push    eax
-0x45ED94: push    edi
-0x45ED95: mov     [esp+24h+var_8], ebp
-0x45ED99: call    sub_446C50
+0x45ED89: mov     ecx, [esi+0ACh]; self
+0x45ED8F: lea     eax, [esp+1Ch+value]
+0x45ED93: push    eax; value
+0x45ED94: push    edi; index
+0x45ED95: mov     [esp+24h+value], ebp
+0x45ED99: call    NiTLargeArray32_SetSlot
 0x45ED9E: mov     ecx, [esi+0ACh]
 0x45EDA4: add     edi, 1
 0x45EDA7: cmp     edi, [ecx+0Ch]
@@ -181,7 +181,7 @@
 0x45EE9B: cmp     edi, ebp
 0x45EE9D: jnz     short loc_45EE77
 0x45EE9F: mov     ecx, ds:0B333C4h; this
-0x45EEA5: call    TESObjectREFR_GetParentCell
+0x45EEA5: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x45EEAA: mov     ecx, ds:0B333C4h; this
 0x45EEB0: push    ebp; a2
 0x45EEB1: mov     edi, eax

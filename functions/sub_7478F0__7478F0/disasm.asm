@@ -11,7 +11,7 @@
 0x74790C: push    esi; Dst
 0x74790D: call    _strncpy_s
 0x747912: push    esi
-0x747913: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x747913: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x747918: add     esp, 14h
 0x74791B: pop     esi
 0x74791C: retn    4

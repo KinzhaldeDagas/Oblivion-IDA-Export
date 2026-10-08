@@ -1,4 +1,4 @@
-0x663920: cmp     dword ptr ds:0B3B7D0h, 0
+0x663920: cmp     dword ptr ds:0B3B7D0h, 0; For the actor's currently equipped AMMO, removes all matching transferred ArrowProjectile references (+0x95 transfer marker) by calling cleanup with INT_MAX and immediate-destroy flags.
 0x663927: push    edi
 0x663928: mov     edi, ecx
 0x66392A: jle     short loc_66396F
@@ -21,12 +21,12 @@
 0x663954: mov     eax, [eax+8]
 0x663957: test    eax, eax
 0x663959: jz      short loc_66396E
-0x66395B: push    1
-0x66395D: push    1
-0x66395F: push    edi
-0x663960: push    7FFFFFFFh
-0x663965: push    eax
-0x663966: call    sub_607F90
+0x66395B: push    1; requireInventoryTransfer
+0x66395D: push    1; destroyImmediately
+0x66395F: push    edi; target
+0x663960: push    7FFFFFFFh; maximumMatches
+0x663965: push    eax; baseForm
+0x663966: call    ArrowProjectile_CleanupMatchingByBaseAndTarget; Remove all matching +0x95 transferred projectile refs for this actor and currently equipped AMMO form; max count is INT_MAX, immediate-destroy mode enabled.
 0x66396B: add     esp, 14h
 0x66396E: pop     esi
 0x66396F: pop     edi

@@ -10,6 +10,6 @@
 0x6A879A: mov     ecx, esi
 0x6A879C: fstp    [esp+8+var_8]
 0x6A879F: push    edi
-0x6A87A0: call    ValueModifierEffect_ModifyAV
+0x6A87A0: call    ValueModifierEffect_ModifyAV; OBMEFix 2026-05-30: vanilla ValueModifierEffect::ApplyToActor clamps negative DamageAV_F so non-fatigue actor values cannot be driven below zero. OBME's replacement helper omits this clamp; OBMEFix restores it for OBME-origin PlayerCharacter::DamageAV_F calls.
 0x6A87A5: cmp     dword ptr [esi+38h], 5
 0x6A87A9: jnz     short ValueModifierEffect_Apply___Wrapup

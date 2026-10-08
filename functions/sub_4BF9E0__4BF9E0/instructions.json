@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x4BF9E0",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Computes and normalizes the cross product of two NiPoint3 vectors, returning zero for near-degenerate input. ShadowSceneLight uses it to construct an orthonormal shadow-camera basis.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x4BF9E3",
-    "line": "mov     eax, [esp+0Ch+arg_4]",
+    "line": "mov     eax, [esp+0Ch+rhs]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,13 +187,13 @@
   },
   {
     "ea": "0x4BFA33",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+rhs]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4BFA37",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+rhs]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -205,19 +205,19 @@
   },
   {
     "ea": "0x4BFA40",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+rhs]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4BFA44",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+rhs]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4BFA48",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+rhs]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x4BFA52",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+rhs]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4BFA5F",
-    "line": "mov     eax, [esp+0Ch+arg_0]",
+    "line": "mov     eax, [esp+0Ch+out]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,13 +283,13 @@
   },
   {
     "ea": "0x4BFA69",
-    "line": "fstp    [esp+0Ch+arg_4]",
+    "line": "fstp    [esp+0Ch+rhs]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4BFA6D",
-    "line": "fld     [esp+0Ch+arg_4]",
+    "line": "fld     [esp+0Ch+rhs]",
     "mnemonic": "fld",
     "size": 4
   },

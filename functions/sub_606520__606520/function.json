@@ -1,19 +1,32 @@
 {
-  "callees_count": 42,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 25,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x606520",
+      "0x606859"
+    ]
+  ],
+  "chunks_sha256": "7c0e6c2d748e0c15fec24840515d6af72a1929bf18a0b4ef9ddef9391e8d0cc7",
+  "comment_regular": "Verified 2026-10-04 crime-record family: manager6770F0 allocates30 bytes, calls605E50 then606520; manager677010 calls6061F0;677240 calls6071A0. Embedded witness list at1C, not AlarmPackage crimes pointer at3C. Probable Fallout Crime family; Oblivion allocation, field reads/writes, calls and RTTI fixups establish local identity.\nVerified clarification: prior EngineFix comments calling this AlarmPackage loader refer to the shared source filename. This body loads a30-byte Crime record; AlarmPackage_LoadGame is606E10. Existing patch-address comments retained. Five stale FormID RET8 deltas corrected so loaded IDs map to intended fields.\nVerified paired wire reader. FormID calls cleaned up RET8 deltas at606655/60666E/606687/6066A0/6066D6; subsequent InitLoadGame resolves pointer fields and removes missing witnesses. Full witness objects are not owned by Crime.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 12,
-  "display_name": "sub_606520",
+  "display_name": "Crime_LoadGame",
   "end_ea": "0x606859",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_606520",
+  "name": "Crime_LoadGame",
   "segment": ".text",
   "sha256": "7c0e6c2d748e0c15fec24840515d6af72a1929bf18a0b4ef9ddef9391e8d0cc7",
   "size": 825,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x606520",
-  "type": "void __thiscall(_DWORD *this)",
+  "total_chunk_size": 825,
+  "type": "void __thiscall(Crime *self)",
   "xrefs_from_count": 314,
   "xrefs_to_count": 1
 }

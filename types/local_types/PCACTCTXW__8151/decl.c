@@ -1,1 +1,1 @@
-PCACTCTXW
+typedef const ACTCTXW *PCACTCTXW;

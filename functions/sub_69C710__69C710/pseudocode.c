@@ -1,69 +1,50 @@
-void __userpurge sub_69C710(TESObjectREFR *a1@<ecx>, double a2@<st0>, int a3@<ebp>, TESForm Src)
+void __userpurge sub_69C710(TESObjectREFR *a1@<ecx>, double a2@<st0>, TESForm Src)
 {
   TESObjectCELL *parentCell; // eax
-  TESSaveLoad *v6; // edx
-  _WORD *v7; // ebp
+  TESSaveLoadGame_SerializationView *v6; // edx
+  unsigned __int8 *bufferCursor; // ebp
   int *i; // edi
   TESForm::ModReferenceList *next; // eax
-  size_t v10; // [esp-8h] [ebp-1Ch]
-  size_t v11; // [esp-8h] [ebp-1Ch]
-  size_t v12; // [esp-8h] [ebp-1Ch]
-  size_t v13; // [esp-4h] [ebp-18h]
-  size_t v14; // [esp-4h] [ebp-18h]
-  size_t v15; // [esp-4h] [ebp-18h]
-  size_t v16; // [esp-4h] [ebp-18h]
-  size_t v17; // [esp-4h] [ebp-18h]
-  size_t v18; // [esp-4h] [ebp-18h]
-  int v19; // [esp+Ch] [ebp-8h] BYREF
-  int v20; // [esp+10h] [ebp-4h] BYREF
+  int source; // [esp+Ch] [ebp-8h] BYREF
+  unsigned int v11; // [esp+10h] [ebp-4h] BYREF
 
-  sub_69F770(a1, a2, (int)Src.vtbl);
-  LODWORD(v13) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)&a1[1].member.rot.y, v13);
-  LODWORD(v14) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)&a1[1].member, v14);
-  LODWORD(v15) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)&a1[1].member.rot.z, v15);
-  LODWORD(v16) = 4;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &a1[1].member.pos[1], v16);
-  LODWORD(v17) = 4;
-  TESForm_SaveDataToCurrentSaveGame((TESForm *)&a1[1].member.pos[2], v17);
-  if ( LODWORD(a1[1].member.pos[1]) == 1 )
+  sub_69F770(a1, a2, (int)Src.vtbl); /*0x69c71d*/
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, &a1[1].member.rot.y, 4u); /*0x69c72a*/
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, &a1[1].member, 4u); /*0x69c737*/
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, &a1[1].member.rot.z, 4u); /*0x69c747*/
+  SaveLoad_SaveData(g_TESSaveLoadGame, &a1[1].member.pos[1], 4u); /*0x69c75b*/
+  TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, &a1[1].member.pos[2], 4u); /*0x69c76b*/
+  if ( LODWORD(a1[1].member.pos[1]) == 1 ) /*0x69c775*/
   {
-    parentCell = a1[1].member.parentCell;
-    *(float *)&Src.vtbl = 0.0;
-    if ( parentCell )
-      Src.vtbl = (TESFormVtbl *)parentCell->members.super.modlist.data;
-    LODWORD(v18) = 4;
-    TESForm_SaveDataToCurrentSaveGame(&Src, v18);
+    parentCell = a1[1].member.parentCell; /*0x69c779*/
+    *(float *)&Src.vtbl = 0.0; /*0x69c781*/
+    if ( parentCell ) /*0x69c785*/
+      Src.vtbl = (TESFormVtbl *)parentCell->members.super.modlist.data; /*0x69c78a*/
+    TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, &Src, 4u); /*0x69c797*/
   }
-  if ( LOBYTE(SaveLoad_CurrentSavegame[1].createdObjectList.next) >= 0x71u )
+  if ( g_TESSaveLoadGame->currentVersion >= 0x71u ) /*0x69c7a5*/
   {
-    HIDWORD(v10) = a3;
-    LODWORD(v10) = 4;
-    TESForm_SaveDataToCurrentSaveGame((TESForm *)a1[1].member.pos, v10);
-    v6 = SaveLoad_CurrentSavegame;
-    LODWORD(v11) = 2;
-    v19 = 0;
-    v7 = (_WORD *)v6->unk000[5];
-    TESForm_SaveDataToCurrentSaveGame((TESForm *)&v19, v11);
-    for ( i = (int *)a1[1].member.niNode; i; i = (int *)i[2] )
+    TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, a1[1].member.pos, 4u); /*0x69c7b7*/
+    v6 = g_TESSaveLoadGame; /*0x69c7bc*/
+    source = 0; /*0x69c7c8*/
+    bufferCursor = v6->bufferCursor; /*0x69c7cc*/
+    TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, &source, 2u); /*0x69c7d2*/
+    for ( i = (int *)a1[1].member.niNode; i; i = (int *)i[2] ) /*0x69c7df*/
     {
-      v20 = 0;
-      if ( *i )
-        v20 = *(_DWORD *)(*i + 0xC);
-      TESForm_SaveFormIDToCurrentSaveGame((int)&v20, 4u);
-      next = a1[1].member.super.modlist.next;
-      LOBYTE(Src.vtbl) = 0;
-      if ( next )
+      v11 = 0; /*0x69c7e1*/
+      if ( *i ) /*0x69c7e5*/
+        v11 = *(_DWORD *)(*i + 0xC); /*0x69c7ee*/
+      TESForm_SaveFormIDToCurrentSaveGame((TESForm *)a1, &v11, 4u); /*0x69c7fb*/
+      next = a1[1].member.super.modlist.next; /*0x69c800*/
+      LOBYTE(Src.vtbl) = 0; /*0x69c805*/
+      if ( next ) /*0x69c809*/
       {
-        if ( i[1] )
-          LOBYTE(Src.vtbl) = EffectItemList_GetIndexOfItem(&next[1].next, i[1]);
+        if ( i[1] ) /*0x69c80b*/
+          LOBYTE(Src.vtbl) = EffectItemList_GetIndexOfItem(&next[1].next, i[1]); /*0x69c81b*/
       }
-      LODWORD(v12) = 1;
-      TESForm_SaveDataToCurrentSaveGame(&Src, v12);
-      ++v19;
+      TESForm_SaveDataToCurrentSaveGame((TESForm *)a1, &Src, 1u); /*0x69c828*/
+      ++source; /*0x69c82d*/
     }
-    *v7 = v19;
+    *(_WORD *)bufferCursor = source; /*0x69c83e*/
   }
 }

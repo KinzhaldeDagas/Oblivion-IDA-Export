@@ -1,1 +1,1 @@
-COMSTAT
+typedef tagCOMSTAT COMSTAT;

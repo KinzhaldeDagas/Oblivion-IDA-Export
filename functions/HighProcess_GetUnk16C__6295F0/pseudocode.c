@@ -1,4 +1,4 @@
 UInt8 __thiscall HighProcess::GetUnk16C(HighProcess *this)
 {
-  return this->unk16C;
+  return this->unk16C; /*0x6295f6*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x813960",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; BSCubeMapCamera mode-3 alternate six-face renderer. ShadowPass special-light dispatch uses mode 0, not this image-space path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -331,19 +331,19 @@
   },
   {
     "ea": "0x813A3D",
-    "line": "push    ebx",
+    "line": "push    ebx; faceIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x813A3E",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x813A40",
-    "line": "call    sub_812EF0",
+    "line": "call    BSCubeMapCamera_OrientFace; Orient the BSCubeMapCamera for one of six cube faces using the native axis vectors at 0x00B258D0..0x00B258F0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x813AE2",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x813AEA",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x813B0B",
-    "line": "mov     ecx, offset dword_B474EC; this",
+    "line": "mov     ecx, (offset flt_B474CC+20h); this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x813B23",
-    "line": "mov     ecx, offset dword_B474EC; this",
+    "line": "mov     ecx, (offset flt_B474CC+20h); this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x813B3A",
-    "line": "mov     ecx, offset dword_B474EC; this",
+    "line": "mov     ecx, (offset flt_B474CC+20h); this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x813B52",
-    "line": "mov     ecx, offset dword_B474EC; this",
+    "line": "mov     ecx, (offset flt_B474CC+20h); this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -901,7 +901,7 @@
   },
   {
     "ea": "0x813B71",
-    "line": "mov     ecx, offset dword_B474EC; this",
+    "line": "mov     ecx, (offset flt_B474CC+20h); this",
     "mnemonic": "mov",
     "size": 5
   },
@@ -915,6 +915,84 @@
     "ea": "0x813B7B",
     "line": "mov     eax, 10h",
     "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D12D0",
+    "line": "lea     ecx, [ebp-140h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D12D6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D12DB",
+    "line": "lea     ecx, [ebp-0A0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D12E1",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D12E6",
+    "line": "lea     ecx, [ebp-9Ch]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D12EC",
+    "line": "jmp     ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D12F1",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D12F5",
+    "line": "lea     eax, [edx-148h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9D12FB",
+    "line": "mov     ecx, [edx-14Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9D1301",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D1303",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D1308",
+    "line": "mov     eax, offset stru_AF99A0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D130D",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
     "size": 5
   }
 ]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4A0920",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Retail BSFadeNode OnVisible entry. Uses the current culling camera and category/visibility state to decide whether and how to traverse children.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x4A0953",
-    "line": "mov     eax, [ebp+0Ch]",
+    "line": "mov     eax, [ebp+0Ch]; BSFadeNode visibility calculations read the current NiCullingProcess camera.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x4A0967",
-    "line": "movzx   edi, byte ptr [esi+0ECh]",
+    "line": "movzx   edi, byte ptr [esi+0ECh]; Read BSFadeNode category byte +0xEC for native OnVisible dispatch.",
     "mnemonic": "movzx",
     "size": 7
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x4A09A4",
-    "line": "fstp    [esp+30h+var_10]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x4A09B1",
-    "line": "push    ebp; jumptable 004A09AA case 7",
+    "line": "push    ebp; Retail category 7 branch enters ordinary NiNode OnVisible child traversal.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4A09B2",
-    "line": "call    NiNode__OnVisible",
+    "line": "call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x4A0A39",
-    "line": "fld     [esp+30h+var_10]",
+    "line": "fld     [esp+30h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -487,13 +487,13 @@
   },
   {
     "ea": "0x4A0A4D",
-    "line": "fstp    [esp+30h+var_10]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4A0A51",
-    "line": "fld     [esp+30h+var_10]",
+    "line": "fld     [esp+30h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -505,19 +505,19 @@
   },
   {
     "ea": "0x4A0A5A",
-    "line": "fstp    [esp+30h+var_10]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4A0A5E",
-    "line": "fld     [esp+30h+var_10]",
+    "line": "fld     [esp+30h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x4A0A62",
-    "line": "fstp    [esp+30h+var_10]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x4A0A6D",
-    "line": "fld     [esp+30h+var_10]",
+    "line": "fld     [esp+30h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x4A0A9C",
-    "line": "fstp    [esp+30h+var_10]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x4A0AA6",
-    "line": "fld     [esp+30h+var_10]",
+    "line": "fld     [esp+30h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x4A0AB7",
-    "line": "jp      short loc_4A0AD8",
+    "line": "jp      short loc_4A0AD8; When camera-scaled surface distance exceeds BSFadeNode far threshold +0xE4, alpha becomes zero and OnVisible can return before child traversal.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x4A0AF3",
-    "line": "fstp    [esp+30h+var_10]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x4A0AFF",
-    "line": "fdivr   [esp+30h+var_10]",
+    "line": "fdivr   [esp+30h+slot]",
     "mnemonic": "fdivr",
     "size": 4
   },
@@ -1015,7 +1015,7 @@
   },
   {
     "ea": "0x4A0B65",
-    "line": "call    NiObjectNET_GetExtraData",
+    "line": "call    NiObjectNET_GetExtraData; NiObjectNET::GetExtraData(name), native RET 4 behavior. Player shadow BBX lookups remain native after Pass247 rollback.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1039,13 +1039,13 @@
   },
   {
     "ea": "0x4A0B71",
-    "line": "fstp    [esp+30h+var_10]",
+    "line": "fstp    [esp+30h+slot]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4A0B75",
-    "line": "fld     [esp+30h+var_10]",
+    "line": "fld     [esp+30h+slot]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x4A0B97",
-    "line": "push    offset dword_B42CEC",
+    "line": "push    offset stru_B42CEC",
     "mnemonic": "push",
     "size": 5
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x4A0BDC",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1267,7 +1267,7 @@
   },
   {
     "ea": "0x4A0BEB",
-    "line": "lea     edx, [esp+34h+var_10]",
+    "line": "lea     edx, [esp+34h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1291,13 +1291,13 @@
   },
   {
     "ea": "0x4A0BF7",
-    "line": "lea     ecx, [esp+30h+var_10]; this",
+    "line": "lea     ecx, [esp+30h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4A0BFB",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x4A0C02",
-    "line": "lea     eax, [esp+34h+var_10]",
+    "line": "lea     eax, [esp+34h+slot]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x4A0C0E",
-    "line": "lea     ecx, [esp+30h+var_10]; this",
+    "line": "lea     ecx, [esp+30h+slot]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4A0C12",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x4A0C19",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x4A0C52",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1519,13 +1519,13 @@
   },
   {
     "ea": "0x4A0C68",
-    "line": "lea     ecx, [esp+30h+var_14]; this",
+    "line": "lea     ecx, [esp+30h+var_14]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4A0C6C",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1549,7 +1549,7 @@
   },
   {
     "ea": "0x4A0C7A",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1573,7 +1573,7 @@
   },
   {
     "ea": "0x4A0C89",
-    "line": "mov     [esp+30h+var_10], eax",
+    "line": "mov     [esp+30h+slot], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x4A0CBA",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x4A0CC1",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x4A0CCC",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x4A0CED",
-    "line": "call    NiNode__OnVisible",
+    "line": "call    NiNode__OnVisible; Retail NiNode OnVisible entry; visible nonempty child arrays recurse through ordinary child traversal.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1834,5 +1834,77 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C33E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C33E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C33E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C33E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C33EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C33EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C33EF",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C33F2",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C33F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C33F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C33FC",
+    "line": "mov     eax, offset stru_AEC000",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C3401",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

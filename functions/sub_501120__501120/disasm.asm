@@ -14,7 +14,7 @@
 0x501149: cmp     byte ptr ds:0B361ACh, 0
 0x501150: jz      short loc_501176
 0x501152: test    cl, cl
-0x501154: mov     ecx, offset aOn_0
+0x501154: mov     ecx, offset aOn_0; "On"
 0x501159: jnz     short loc_501160
 0x50115B: mov     ecx, offset aOff
 0x501160: push    ecx

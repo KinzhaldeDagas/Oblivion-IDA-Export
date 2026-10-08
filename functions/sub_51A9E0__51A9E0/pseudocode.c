@@ -1,4 +1,5 @@
-unsigned int __cdecl sub_51A9E0(unsigned int a1)
+// Final name: AnimKey_GetWeaponPrefix. Returns (encoded key >> 8) & 0xF.
+unsigned int __cdecl AnimKey_GetWeaponPrefix(unsigned int a1)
 {
-  return (a1 >> 8) & 0xF;
+  return (a1 >> 8) & 0xF; /*0x51a9ea*/
 }

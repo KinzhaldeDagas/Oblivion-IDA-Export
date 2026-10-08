@@ -1,4 +1,4 @@
-0x69B26B: mov     edx, [esi]
+0x69B26B: mov     edx, [esi]; UCWUS pipeline note: effect-loop enchantment filter calls EnchantmentItem_EffectAllowedFromEnch. Keep this intact; UCWUS 0x00010009 moves selected item/spell/token charge state into a native session via bridge commands instead of bypassing the filter.
 0x69B26D: mov     eax, [edx+30h]
 0x69B270: mov     ecx, esi
 0x69B272: call    eax
@@ -16,7 +16,7 @@
 0x69B28F: push    eax
 0x69B290: push    0
 0x69B292: push    ecx
-0x69B293: call    EnchantmentItem_EffectAllowedFromEnch??
+0x69B293: call    EnchantmentItem_EffectAllowedFromEnch??; UCWUS decode note: EnchantmentItem_EffectAllowedFromEnch applies global object/effect flag rules for weapon/apparel enchantment effects. UCWUS should not bypass this wholesale; the faithful path is a targeted apparel-cast branch patch plus plugin session/suppression commands.
 0x69B298: add     esp, 10h
 0x69B29B: test    al, al
 0x69B29D: jz      MagicCaster_ApplyActiveMagicItem___EffectLoop_Next

@@ -1,4 +1,7 @@
-void __stdcall sub_7A0FB0(_DWORD *a1, _DWORD *a2)
+// Outer guide-LOD vector destroy-range thunk.
+void __stdcall OB_stVector_stVector_SFrondGuide_DestroyRangeThunk_010201A0(
+        OB_stVector_SFrondGuide_010201A0 *first,
+        OB_stVector_SFrondGuide_010201A0 *last)
 {
-  sub_7A0CD0(a1, a2);
+  OB_stVector_stVector_SFrondGuide_DestroyRange_010201A0(first, last); /*0x7a0fc0*/
 }

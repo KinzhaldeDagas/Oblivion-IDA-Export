@@ -1,1 +1,1 @@
-IEnumContextProps_0
+typedef IEnumContextProps IEnumContextProps_0;

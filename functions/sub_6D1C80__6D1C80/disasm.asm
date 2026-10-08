@@ -6,7 +6,7 @@
 0x6D1C8B: push    eax
 0x6D1C8C: push    ebx
 0x6D1C8D: mov     edi, ecx
-0x6D1C8F: call    sub_6ECB60
+0x6D1C8F: call    j_NiSingleInterpController_CopyMembers
 0x6D1C94: mov     ecx, [edi+54h]
 0x6D1C97: mov     [ebx+54h], ecx
 0x6D1C9A: movzx   eax, word ptr [edi+4Ah]

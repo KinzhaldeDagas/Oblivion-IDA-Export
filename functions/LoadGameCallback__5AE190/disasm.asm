@@ -1,6 +1,6 @@
 0x5AE190: push    ebx
 0x5AE191: push    esi
-0x5AE192: call    sub_578D70
+0x5AE192: call    InterfaceManager_ConsumeMessageButton
 0x5AE197: push    40Eh
 0x5AE19C: mov     bl, al
 0x5AE19E: call    Menu_GetOpenMenuTile
@@ -14,12 +14,12 @@
 0x5AE1B6: test    eax, eax
 0x5AE1B8: jnz     short loc_5AE1D6
 0x5AE1BA: push    eax
-0x5AE1BB: push    offset EmptyString
-0x5AE1C0: push    eax
-0x5AE1C1: push    eax
+0x5AE1BB: push    offset EmptyString; firstButton
+0x5AE1C0: push    eax; baseButtonIndex
+0x5AE1C1: push    eax; callback
 0x5AE1C2: mov     [esi+64h], al
 0x5AE1C5: mov     eax, ds:0B38748h
-0x5AE1CA: push    eax
+0x5AE1CA: push    eax; message
 0x5AE1CB: call    ShowUIMessageBox
 0x5AE1D0: add     esp, 14h
 0x5AE1D3: pop     esi
@@ -28,10 +28,10 @@
 0x5AE1D6: cmp     bl, 2
 0x5AE1D9: jz      short loc_5AE1FF
 0x5AE1DB: mov     ecx, ds:0B33B00h
-0x5AE1E1: push    0
+0x5AE1E1: push    0; ContinueFromLastSave decode: load-menu callback sets ecx=SaveLoad_CurrentSavegame, pushes (0, selected save stem, 0), calls TESSaveLoadGame_LoadGame. Oblivion behavior authoritative.
 0x5AE1E3: push    0
 0x5AE1E5: push    eax
-0x5AE1E6: call    TESSaveLoadGame_LoadGame
+0x5AE1E6: call    TESSaveLoadGame_LoadGame;  Verified map lifecycle: allocates incomingChangesMap at +4, stores save records there, reconciles pre-load currentChangesMap at +0 after form loading, then swaps in incoming map via 464440. The map roles are based on direct stores/lookups and final pointer assignments.
 0x5AE1EB: test    al, al
 0x5AE1ED: jz      short loc_5AE1FF
 0x5AE1EF: mov     ecx, ds:0B33B00h

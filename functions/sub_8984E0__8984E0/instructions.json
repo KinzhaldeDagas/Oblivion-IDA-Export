@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x898536",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x898550",
-    "line": "mov     ecx, [esp+0A0h+var_84]",
+    "line": "mov     ecx, [esp+0A0h+var_84]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,19 +199,19 @@
   },
   {
     "ea": "0x898558",
-    "line": "lea     edx, [esp+0A0h+var_78]",
+    "line": "lea     edx, [esp+0A0h+outData]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x89855C",
-    "line": "push    edx",
+    "line": "push    edx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x89855D",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x898579",
-    "line": "mov     esi, [esp+0A0h+var_78]",
+    "line": "mov     esi, [esp+0A0h+outData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,19 +379,19 @@
   },
   {
     "ea": "0x8985AE",
-    "line": "push    ecx",
+    "line": "push    ecx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8985AF",
-    "line": "mov     ecx, [esp+0A4h+var_84]",
+    "line": "mov     ecx, [esp+0A4h+var_84]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x8985B3",
-    "line": "call    sub_677C70",
+    "line": "call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x898701",
-    "line": "call    sub_88FE00",
+    "line": "call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.",
     "mnemonic": "call",
     "size": 5
   },

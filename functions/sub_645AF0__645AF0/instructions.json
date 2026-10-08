@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x645AF0",
-    "line": "push    ebx",
+    "line": "push    ebx; Verified body: same door/actor and ownership checks as TESObjectREFR_SetOwnedDoorLockedForActor, then clears the locked bit on this/linked door and marks linked owner cells unlocked. Probable role: inverse callback used by actor package/cell spatial queries; callers include EvaluatePackage and process movement paths.",
     "mnemonic": "push",
     "size": 1
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x645B14",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+otherEndpoint]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x645B3A",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x645B45",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; linkedDoor",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x645B47",
-    "line": "call    sub_42B470",
+    "line": "call    TeleportData_GetLinkedDoorWorldspace; Verified: given the linked-door reference slot from TeleportData, resolves its loaded parent cell or child cell and returns that cell's worldspace; returns null when the linked reference or its cell is unavailable.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x645B52",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x645B5D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x645B64",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -265,25 +265,25 @@
   },
   {
     "ea": "0x645B76",
-    "line": "push    eax",
+    "line": "push    eax; useFactionOwnership",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x645B77",
-    "line": "push    ebx",
+    "line": "push    ebx; actorReference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x645B78",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; reference",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x645B7A",
-    "line": "call    TESOBjectREFR_IsOwnedBy",
+    "line": "call    TESObjectREFR_IsOwnedBy; Verified ownership predicate and flag meaning: resolve the effective owner; accept exact equality with the actor's template/base form. When the owner differs, a nonzero ownership-global value can permit the access. With useFactionOwnership=true, a Faction owner is instead checked against the actor base's faction rank and the reference's effective required rank; callers passing false skip that faction-rank path. Direct callers include many `true` paths and ContainerExtraData_RemoveForm's item-sweep call with false. Fallout's TESObjectREFR::IsAnOwner/DoorLock::IsAnOwner also expose a `useFaction` boolean, but its implementation uses actor faction membership and has different rank/global handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -301,13 +301,13 @@
   },
   {
     "ea": "0x645B83",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x645B85",
-    "line": "call    sub_4D7740",
+    "line": "call    TESObjectREFR_GetEffectiveDoorLock; Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -325,13 +325,13 @@
   },
   {
     "ea": "0x645B8E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x645B90",
-    "line": "call    sub_4DBEA0",
+    "line": "call    TESObjectREFR_ClearLockedFlagOnSelfOrLinkedDoor; Verified inverse lock-state helper: if this reference has an ExtraLock wrapper, clears its locked bit; otherwise follows the linked-door reference and clears that wrapper's locked bit. It then marks the owning reference or linked door modified with mask 0x40.",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,25 +349,25 @@
   },
   {
     "ea": "0x645B99",
-    "line": "push    1",
+    "line": "push    1; unlocked",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x645B9B",
-    "line": "push    esi",
+    "line": "push    esi; otherEndpoint",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x645B9C",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; linkedDoorSlot",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x645B9E",
-    "line": "call    sub_42B5F0",
+    "line": "call    TESObjectREFR_PropagateLockStateToLinkedDoorCells; Verified crime/security path: after clearing the door's locked bit, updates the linked-door owner cells with unlocked=true.",
     "mnemonic": "call",
     "size": 5
   },

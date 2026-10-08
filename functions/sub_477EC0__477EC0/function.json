@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 0,
-  "callers_count": 12,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "callers_count": 16,
+  "chunks": [
+    [
+      "0x477EC0",
+      "0x477ECB"
+    ]
+  ],
+  "chunks_sha256": "2f26e3f6a1567d4d38cb5295924b886c3ead8d0a0b245919b3cba8323b87b2f1",
+  "comment_regular": "Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
+  "comment_repeatable": "Returns ActorSkinInfo cached node at +8+nodeIndex*8. Index 6 is QuiverNode at +0x38, the native Arrow:0 clone source.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_477EC0",
+  "display_name": "ActorSkinInfo_GetCachedNode",
   "end_ea": "0x477ECB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_477EC0",
+  "name": "ActorSkinInfo_GetCachedNode",
   "segment": ".text",
   "sha256": "2f26e3f6a1567d4d38cb5295924b886c3ead8d0a0b245919b3cba8323b87b2f1",
   "size": 11,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x477EC0",
-  "type": "int __thiscall(_DWORD *this, int)",
+  "total_chunk_size": 11,
+  "type": "NiNode *__thiscall(ActorSkinInfo *this, unsigned int nodeIndex)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 16
 }

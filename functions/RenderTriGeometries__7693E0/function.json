@@ -1,18 +1,31 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7693E0",
+      "0x7694E6"
+    ]
+  ],
+  "chunks_sha256": "df289a9c3070f9d47ea5e195dd58fa345652120d8f0f116194a1f5bd233763fb",
+  "comment_regular": "Oblivion NiDX9Renderer triangle-geometry submission boundary. Copies world transform/bound, resolves hardware skinning, and routes to the native skinned or non-skinned shader/pass loop that issues the final DX9 draw.\n\nCULLING standalone pipeline audit 2026-09-27: both NiDX9Renderer vtable 0xA88EA4 slots +0x160 (TriShape) and +0x164 (TriStrips) resolve to this SAME implementation. It skips lost-device/zero-vertex cases, copies world transform and bound, resolves hardware skinning, updates a geometry group and dispatches skinned/non-skinned shader loops. Entry is not a final draw count and the two virtual slots must not be mistaken for two independent implementations.\n\nSpeedTreeOBSE v160: draw wrapper checks renderer lostDevice byte6F0 and delegates directly to native rendering while set. This function confirms native lost-device draws are skipped. No plugin static resource/packing failure is latched during that transient path; actual in-game reset coverage is UNVERIFIED.\n\nOblivion NiDX9Renderer triangle-geometry submission boundary. Copies world transform/bound, resolves hardware skinning, and routes to the native skinned or non-skinned shader/pass loop that issues the final DX9 draw.",
+  "comment_repeatable": "Oblivion NiDX9Renderer triangle-geometry submission boundary. Copies world transform/bound, resolves hardware skinning, and routes to the native skinned or non-skinned shader/pass loop that issues the final DX9 draw.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "RenderTriGeometries",
+  "display_name": "NiDX9Renderer_RenderTriGeometries",
   "end_ea": "0x7694E6",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "RenderTriGeometries",
+  "name": "NiDX9Renderer_RenderTriGeometries",
   "segment": ".text",
   "sha256": "df289a9c3070f9d47ea5e195dd58fa345652120d8f0f116194a1f5bd233763fb",
   "size": 262,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7693E0",
+  "total_chunk_size": 262,
   "type": "void __thiscall(NiDX9Renderer *a1, NiGeometry *a5)",
   "xrefs_from_count": 104,
   "xrefs_to_count": 2

@@ -57,7 +57,7 @@
 0x441A74: mov     ds:0B2E2F8h, eax
 0x441A79: mov     dword ptr ds:0BA7A88h, offset sub_4E2160
 0x441A83: fstp    dword ptr ds:0B2E784h
-0x441A89: mov     dword ptr ds:0BA7A84h, offset ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x441A89: mov     dword ptr ds:0BA7A84h, offset Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x441A93: call    FormHeapAlloc
 0x441A98: add     esp, 10h
 0x441A9B: mov     [esp+24h+var_10], eax
@@ -92,7 +92,7 @@
 0x441AF0: mov     byte ptr [esp+24h+var_4], 2
 0x441AF5: call    eax
 0x441AF7: call    sub_4BE8A0
-0x441AFC: call    sub_4BDCD0
+0x441AFC: call    DistantLODLoaderTaskMap_EnsureCreated; Verified lazy singleton initializer: allocates 0x1C bytes for the lock-free cell-task map and constructs it with two interfaces, 37 buckets, and 0x0C-byte entries; stores the pointer in g_DistantLODLoaderTasksByCell.
 0x441B01: push    3Ch ; '<'; Size
 0x441B03: call    FormHeapAlloc
 0x441B08: add     esp, 4
@@ -126,8 +126,8 @@
 0x441B6A: cmp     eax, ebx
 0x441B6C: mov     byte ptr [esp+24h+var_4], 7
 0x441B71: jz      short loc_441B7C
-0x441B73: mov     ecx, eax
-0x441B75: call    TESDataHandler_constr
+0x441B73: mov     ecx, eax; self
+0x441B75: call    TESDataHandler_constr; Verified constructor store: [TESDataHandler+0xCD1] (activeFileState.retainActiveFile) is initialized to zero at 0x446EF4. A whole-code scan for the direct x86 displacement found this as the only store to +0xCD1; the other direct references are reads in Clear, LoadFormRecord, and LoadFiles. No direct nonzero writer has been identified; any alias/indirect setter remains Unknown.
 0x441B7A: jmp     short loc_441B7E
 0x441B7C: xor     eax, eax
 0x441B7E: mov     ecx, [esp+24h+lpString2]
@@ -143,8 +143,8 @@
 0x441BA5: cmp     eax, ebx
 0x441BA7: mov     byte ptr [esp+24h+var_4], 8
 0x441BAC: jz      short loc_441BB7
-0x441BAE: mov     ecx, eax
-0x441BB0: call    sub_45B300
+0x441BAE: mov     ecx, eax; self
+0x441BB0: call    TESSaveLoadGame_Initialize; Verified: TES_constr calls this initializer. Constructs the currentChangesMap at manager+0 and the interior/exterior maps; incomingChangesMap at +4 is populated per LoadGame and promoted by TESSaveLoadGame_ReconcileExistingChanges.
 0x441BB5: jmp     short loc_441BB9
 0x441BB7: xor     eax, eax
 0x441BB9: mov     ds:0B33B00h, eax
@@ -236,9 +236,9 @@
 0x441CCE: mov     ecx, [esp+24h+arg_C]
 0x441CD2: mov     [esi+5Ch], ecx
 0x441CD5: call    Sky__GetSunDirectionalLight
-0x441CDA: mov     ecx, [esi+5Ch]
+0x441CDA: mov     ecx, [esi+5Ch]; this
 0x441CDD: mov     [esi+18h], eax
-0x441CE0: call    sub_53FB50
+0x441CE0: call    Sky_GetFogProperty; Verified by disassembly and the TES constructor callsite: this helper reads Sky+0x20, then returns the pointer at atmosphere+0x0C; TES_constr stores it in TES::fogProperty. BSTreeManager_Update consumes fields at returned-object offsets +0x20/+0x24/+0x28. Identifying those values specifically as fog-derived tree-light colors is Probable; the underlying structure's member names remain unresolved.
 0x441CE5: mov     [esi+1Ch], eax
 0x441CE8: mov     [esi+69h], bl
 0x441CEB: mov     [esi+74h], ebx
@@ -267,3 +267,54 @@
 0x441D45: pop     ebx
 0x441D46: add     esp, 14h
 0x441D49: retn    10h
+0x9AD080: mov     ecx, [ebp-14h]
+0x9AD083: add     ecx, 94h ; '”'; slot
+0x9AD089: jmp     NiPointerSlot_Release
+0x9AD08E: mov     ecx, [ebp-14h]
+0x9AD091: add     ecx, 98h ; '˜'; slot
+0x9AD097: jmp     NiPointerSlot_Release
+0x9AD09C: mov     ecx, [ebp-14h]
+0x9AD09F: add     ecx, 9Ch ; 'œ'; slot
+0x9AD0A5: jmp     NiPointerSlot_Release
+0x9AD0AA: mov     eax, [ebp-10h]
+0x9AD0AD: push    eax
+0x9AD0AE: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD0B3: pop     ecx
+0x9AD0B4: retn
+0x9AD0B5: mov     eax, [ebp-10h]
+0x9AD0B8: push    eax
+0x9AD0B9: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD0BE: pop     ecx
+0x9AD0BF: retn
+0x9AD0C0: mov     eax, [ebp-10h]
+0x9AD0C3: push    eax
+0x9AD0C4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD0C9: pop     ecx
+0x9AD0CA: retn
+0x9AD0CB: mov     eax, [ebp-10h]
+0x9AD0CE: push    eax
+0x9AD0CF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD0D4: pop     ecx
+0x9AD0D5: retn
+0x9AD0D6: mov     eax, [ebp-10h]
+0x9AD0D9: push    eax
+0x9AD0DA: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD0DF: pop     ecx
+0x9AD0E0: retn
+0x9AD0E1: mov     eax, [ebp+4]
+0x9AD0E4: push    eax
+0x9AD0E5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD0EA: pop     ecx
+0x9AD0EB: retn
+0x9AD0EC: mov     eax, [ebp+4]
+0x9AD0EF: push    eax
+0x9AD0F0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9AD0F5: pop     ecx
+0x9AD0F6: retn
+0x9AD0F7: mov     edx, [esp+arg_4]
+0x9AD0FB: lea     eax, [edx-14h]
+0x9AD0FE: mov     ecx, [edx-18h]
+0x9AD101: xor     ecx, eax
+0x9AD103: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9AD108: mov     eax, offset stru_AD9CA0
+0x9AD10D: jmp     ___CxxFrameHandler3

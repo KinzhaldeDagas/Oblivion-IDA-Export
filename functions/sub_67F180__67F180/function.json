@@ -1,19 +1,32 @@
 {
-  "callees_count": 38,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 9,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x67F180",
+      "0x67F337"
+    ]
+  ],
+  "chunks_sha256": "3e72a53530e461a3cef0c47691df0d692e4ce6ff4033ee767602cf3b3d8925c5",
+  "comment_regular": "Verified reset/teardown: release all AStarWorldNode state slots and allocations from LowPathSearchGlobals.allAStarWorldNodes, clear each node list, destroy inner/outer map instances, free the search-state table, and null doorLinkMap. Save/load reconciliation calls this then TravelPath_EnsureDoorLinkMapInitialized; WinMain also participates in this subsystem lifecycle.",
+  "comment_repeatable": "Verified reset/teardown: release all AStarWorldNode state slots and allocations from LowPathSearchGlobals.allAStarWorldNodes, clear each node list, destroy inner/outer map instances, free the search-state table, and null doorLinkMap. Save/load reconciliation calls this then TravelPath_EnsureDoorLinkMapInitialized; WinMain also participates in this subsystem lifecycle.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_67F180",
+  "display_name": "TravelPath_ClearAllDoorLinkMaps",
   "end_ea": "0x67F337",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67F180",
+  "name": "TravelPath_ClearAllDoorLinkMaps",
   "segment": ".text",
   "sha256": "3e72a53530e461a3cef0c47691df0d692e4ce6ff4033ee767602cf3b3d8925c5",
   "size": 439,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67F180",
-  "type": "void()",
+  "total_chunk_size": 439,
+  "type": "void __cdecl()",
   "xrefs_from_count": 184,
   "xrefs_to_count": 2
 }

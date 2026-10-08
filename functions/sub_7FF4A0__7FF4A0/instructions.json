@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7FF4A0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Lighting30 consumer resets the queue then resolves only its own selector domain. Normal Lighting30 refraction 0x156..0x158 is valid; 0x160..0x162 and 0x177..0x17A resolve no pass, but neither family is stock-produced by exact Lighting30's +0x5C builder.",
     "mnemonic": "push",
     "size": 2
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7FF4D5",
-    "line": "call    edx",
+    "line": "call    edx; Lighting30 vtable +0x80 = NiD3DShader_ResetPassQueue. Releases prior Passes and CurrentPass, then zeros PassCount/CurrentPassIndex before resolving this geometry's selector.",
     "mnemonic": "call",
     "size": 2
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x7FF50D",
-    "line": "mov     [esp+54h+var_40], eax",
+    "line": "mov     [esp+54h+property], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x7FF51E",
-    "line": "call    sub_7FF080",
+    "line": "call    Lighting30Shader_BuildMode5ShadowPass; Render-mode-5 call into Lighting30Shader_BuildMode5ShadowPass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x7FF535",
-    "line": "mov     [esp+58h+var_28], eax",
+    "line": "mov     [esp+58h+var_28.x], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FF539",
-    "line": "mov     eax, [esp+58h+var_40]",
+    "line": "mov     eax, [esp+58h+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -337,7 +337,7 @@
   },
   {
     "ea": "0x7FF53E",
-    "line": "mov     [esp+5Ch+var_24], ecx",
+    "line": "mov     [esp+5Ch+var_28.y], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,31 +361,31 @@
   },
   {
     "ea": "0x7FF549",
-    "line": "mov     [esp+60h+var_20], edx",
+    "line": "mov     [esp+60h+var_28.z], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FF54D",
-    "line": "call    sub_7FAB60",
+    "line": "call    Lighting30Shader_UpdateSpecialTimeEmission; Pass238: Lighting30 helper is not the alternate explicit fog writer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FF552",
-    "line": "push    offset dword_B3FA90",
+    "line": "push    offset stru_B3FA90; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x7FF557",
-    "line": "lea     ecx, [esp+58h+var_28]",
+    "line": "lea     ecx, [esp+58h+var_28]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7FF55B",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Lighting30 compares material+40 emission RGB with B3FA90. Equal values skip the emission block entirely, leaving c4 untouched. Nonzero/different emission is multiplied by selected HDR exposure before either glow output c4 or non-glow addition to ambient c0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,13 +445,13 @@
   },
   {
     "ea": "0x7FF57E",
-    "line": "fstp    [esp+54h+var_38]",
+    "line": "fstp    [esp+54h+variant]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7FF582",
-    "line": "fld     [esp+54h+var_38]",
+    "line": "fld     [esp+54h+variant]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -463,13 +463,13 @@
   },
   {
     "ea": "0x7FF588",
-    "line": "fmul    [esp+54h+var_28]",
+    "line": "fmul    [esp+54h+var_28.x]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x7FF58C",
-    "line": "fstp    [esp+54h+var_28]",
+    "line": "fstp    [esp+54h+var_28.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -481,31 +481,31 @@
   },
   {
     "ea": "0x7FF592",
-    "line": "fmul    [esp+54h+var_24]",
+    "line": "fmul    [esp+54h+var_28.y]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x7FF596",
-    "line": "fstp    [esp+54h+var_24]",
+    "line": "fstp    [esp+54h+var_28.y]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7FF59A",
-    "line": "fmul    [esp+54h+var_20]",
+    "line": "fmul    [esp+54h+var_28.z]",
     "mnemonic": "fmul",
     "size": 4
   },
   {
     "ea": "0x7FF59E",
-    "line": "fstp    [esp+54h+var_20]",
+    "line": "fstp    [esp+54h+var_28.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7FF5A2",
-    "line": "mov     edi, [esp+54h+var_40]",
+    "line": "mov     edi, [esp+54h+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7FF5B2",
-    "line": "call    eax",
+    "line": "call    eax; Glow test calls shader-property virtual+90 with index0. Exact getter7D7810 returns property+C4 array[index]. Nonnull slot0 routes active emission to c4 (RGB upper-clamped only when HDR is off; w=0). Null routes emission into c0, preserving c0.w and upper-clamping the sum only when HDR is off.",
     "mnemonic": "call",
     "size": 2
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7FF5C3",
-    "line": "fld     [esp+54h+var_28]",
+    "line": "fld     [esp+54h+var_28.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x7FF5F2",
-    "line": "fld     [esp+54h+var_24]",
+    "line": "fld     [esp+54h+var_28.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -637,7 +637,7 @@
   },
   {
     "ea": "0x7FF5FE",
-    "line": "fld     [esp+54h+var_20]",
+    "line": "fld     [esp+54h+var_28.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -811,7 +811,7 @@
   },
   {
     "ea": "0x7FF662",
-    "line": "mov     eax, ds:0B42F40h",
+    "line": "mov     eax, ds:0B42F40h; PS c5 Lighting30 toggles derive from DWORD B42F40 bits0/1/2 and bit3 AND shader-property+1C bit0.14E/14F later override c5.w, so ordinary12D..146 capture must remain distinct.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x7FF68B",
-    "line": "fcom    [esp+54h+var_28]",
+    "line": "fcom    [esp+54h+var_28.x]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -895,13 +895,13 @@
   },
   {
     "ea": "0x7FF696",
-    "line": "fst     [esp+54h+var_28]",
+    "line": "fst     [esp+54h+var_28.x]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7FF69A",
-    "line": "fcom    [esp+54h+var_24]",
+    "line": "fcom    [esp+54h+var_28.y]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x7FF6A5",
-    "line": "fst     [esp+54h+var_24]",
+    "line": "fst     [esp+54h+var_28.y]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7FF6A9",
-    "line": "fcom    [esp+54h+var_20]",
+    "line": "fcom    [esp+54h+var_28.z]",
     "mnemonic": "fcom",
     "size": 4
   },
@@ -955,13 +955,13 @@
   },
   {
     "ea": "0x7FF6B4",
-    "line": "fst     [esp+54h+var_20]",
+    "line": "fst     [esp+54h+var_28.z]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7FF6B8",
-    "line": "fld     [esp+54h+var_28]",
+    "line": "fld     [esp+54h+var_28.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x7FF6C4",
-    "line": "fld     [esp+54h+var_24]",
+    "line": "fld     [esp+54h+var_28.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x7FF6D5",
-    "line": "fld     [esp+54h+var_20]",
+    "line": "fld     [esp+54h+var_28.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1063,7 +1063,7 @@
   },
   {
     "ea": "0x7FF701",
-    "line": "mov     edi, [esp+54h+var_40]",
+    "line": "mov     edi, [esp+54h+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x7FF70E",
-    "line": "mov     byte ptr [esp+54h+var_38], cl",
+    "line": "mov     byte ptr [esp+54h+variant], cl",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x7FF714",
-    "line": "fst     dword ptr ds:0B46FC8h",
+    "line": "fst     dword ptr ds:0B46FC8h; Pixel c5.x (ToggleADTS.x) from global shader mask bit 1.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x7FF72A",
-    "line": "fst     dword ptr ds:0B46FCCh",
+    "line": "fst     dword ptr ds:0B46FCCh; Pixel c5.y (ToggleADTS.y) from global shader mask bit 2.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x7FF740",
-    "line": "fst     dword ptr ds:0B46FD0h",
+    "line": "fst     dword ptr ds:0B46FD0h; Pixel c5.z (ToggleADTS.z) from global shader mask bit 4.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -1225,7 +1225,7 @@
   },
   {
     "ea": "0x7FF756",
-    "line": "fst     dword ptr ds:0B46FD4h",
+    "line": "fst     dword ptr ds:0B46FD4h; Pixel c5.w general path: global mask bit 3 and property flags+0x1C bit 0.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x7FF776",
-    "line": "jnz     short loc_7FF78B",
+    "line": "jnz     short loc_7FF78B; Selectors 0x14E/0x14F override pixel c5.w: property flag 0x800 gives 0, otherwise 1. Selectors 0x150/0x151 retain the general path.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -1465,7 +1465,7 @@
   },
   {
     "ea": "0x7FF7F6",
-    "line": "fst     dword ptr ds:0B46FD8h",
+    "line": "fst     dword ptr ds:0B46FD8h; For ordinary selector<147: PS c6.x=1; c6.y=0 if entry byte count is0, else low16(min(entryCount,signed B2DCFC)-1); c6.z=NiMaterialProperty+4C glossiness; c6.w=(geometryData+24 !=0). A zero/invalid maximum can wrap to65535; GPU ordinary profile limits max to1..20 and verifies actual words.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x7FF820",
-    "line": "mov     eax, [esp+54h+arg_0]",
+    "line": "mov     eax, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1660,12 +1660,6 @@
     "line": "jmp     short loc_7FF880",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x7FF873",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
   },
   {
     "ea": "0x7FF880",
@@ -1837,7 +1831,7 @@
   },
   {
     "ea": "0x7FF902",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1849,7 +1843,7 @@
   },
   {
     "ea": "0x7FF906",
-    "line": "call    sub_7ED5D0",
+    "line": "call    OB_BSShaderProperty_CountPassListEntriesWithMarker_010201A0; OBLIVION AUTHORITY (2026-08-24): Generic pass-list marker counter used by the SpeedTree leaf program selector. Walks property+0x70 entries and counts nonnull shader objects whose word at +0x118 is not 0x00FF. It does not test ShadowSceneLight disabled byte +0xF4. Result selects point-light shader program bit; it is not a leaf layer/card/LOD index.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2113,7 +2107,7 @@
   },
   {
     "ea": "0x7FF9D3",
-    "line": "lea     eax, [ebp-14Eh]",
+    "line": "lea     eax, [ebp-14Eh]; Lighting30 native-shadow selector family test: 0x14E..0x151 receives the 0x0B state-width path.",
     "mnemonic": "lea",
     "size": 6
   },
@@ -2203,7 +2197,7 @@
   },
   {
     "ea": "0x7FFA0C",
-    "line": "push    offset dword_B46939",
+    "line": "push    offset unk_B46939",
     "mnemonic": "push",
     "size": 5
   },
@@ -2299,37 +2293,37 @@
   },
   {
     "ea": "0x7FFA44",
-    "line": "mov     ecx, [esp+54h+var_38]",
+    "line": "mov     ecx, [esp+54h+variant]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FFA48",
-    "line": "push    ecx",
+    "line": "push    ecx; variant",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FFA49",
-    "line": "push    edi",
+    "line": "push    edi; property",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FFA4A",
-    "line": "push    ebp",
+    "line": "push    ebp; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7FFA4B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7FFA4D",
-    "line": "call    sub_862B40",
+    "line": "call    Lighting30Shader_ResolveSelectorStages; Resolve selector to a concrete pooled NiD3DPass. Only selectors through 0x15F are accepted; 0x177..0x17A return null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2347,7 +2341,7 @@
   },
   {
     "ea": "0x7FFA56",
-    "line": "jz      loc_8000D7",
+    "line": "jz      loc_8000D7; Null resolved pass branches directly to the setup exit. No pass-array insertion and no PassCount increment occur.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -2365,13 +2359,13 @@
   },
   {
     "ea": "0x7FFA65",
-    "line": "ja      short loc_7FFA75",
+    "line": "ja      short loc_7FFA75; Fog render consumer decode: Lighting30 selector range 0x15E..0x15F dispatches to TexEffect alternate payload writer 0x7FEE40.",
     "mnemonic": "ja",
     "size": 2
   },
   {
     "ea": "0x7FFA67",
-    "line": "mov     edx, [esp+54h+arg_0]",
+    "line": "mov     edx, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2401,13 +2395,13 @@
   },
   {
     "ea": "0x7FFA70",
-    "line": "call    sub_7FEE40",
+    "line": "call    sub_7FEE40; Fog render consumer decode: calls 0x7FEE40 to populate TexEffect alternate constants including FogParam/FogColor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FFA75",
-    "line": "test    byte ptr [edi+1Ch], 2",
+    "line": "test    byte ptr [edi+1Ch], 2; Current effective property bit1 selects +90 skinned or +8C rigid declaration; +24 still belongs to preceding geometry until assignment.",
     "mnemonic": "test",
     "size": 4
   },
@@ -2431,7 +2425,7 @@
   },
   {
     "ea": "0x7FFA83",
-    "line": "mov     ebp, [ebx+90h]",
+    "line": "mov     ebp, [ebx+90h]; Select shader+0x90: eight-element skinned declaration with BLENDWEIGHT/BLENDINDICES.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2443,7 +2437,7 @@
   },
   {
     "ea": "0x7FFA8B",
-    "line": "mov     ebp, [ebx+8Ch]",
+    "line": "mov     ebp, [ebx+8Ch]; Select shader+0x8C: six-element non-skinned object declaration.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2551,7 +2545,7 @@
   },
   {
     "ea": "0x7FFAB3",
-    "line": "mov     [ebx+24h], ebp",
+    "line": "mov     [ebx+24h], ebp; Publish selected NiDX9ShaderDeclaration into active shader+24 after old-owner release; retain new owner follows.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2581,7 +2575,7 @@
   },
   {
     "ea": "0x7FFAC2",
-    "line": "cmp     byte ptr ds:0B46973h, 0",
+    "line": "cmp     byte ptr ds:0B46973h, 0; Selector-mask-controlled fog producer: when enabled, populate Lighting30 vertex c15/c16.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2599,7 +2593,7 @@
   },
   {
     "ea": "0x7FFAD3",
-    "line": "mov     ecx, [ecx+0Ch]",
+    "line": "mov     ecx, [ecx+0Ch]; Fog render consumer decode: Lighting30 non-mode path loads active fog property from render/property state +0x0C.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2743,7 +2737,7 @@
   },
   {
     "ea": "0x7FFB1C",
-    "line": "fstp    [esp+54h+var_1C]",
+    "line": "fstp    [esp+54h+var_1C]; Fog render consumer decode: Lighting30 non-mode zero/invalid fog range fallback writes default grouped FogParam/FogColor.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2755,7 +2749,7 @@
   },
   {
     "ea": "0x7FFB24",
-    "line": "mov     ds:0B46DB8h, edx",
+    "line": "mov     ds:0B46DB8h, edx; Fallback VS c15.x uses Oblivion default at A93350 when the fog range is absent/invalid.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -2845,7 +2839,7 @@
   },
   {
     "ea": "0x7FFB68",
-    "line": "mov     ds:0B46DC8h, eax",
+    "line": "mov     ds:0B46DC8h, eax; Fallback VS c16 begins with the native default fog-color tuple at B25AD0.",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2911,13 +2905,13 @@
   },
   {
     "ea": "0x7FFB97",
-    "line": "mov     [esp+54h+var_28], edx",
+    "line": "mov     [esp+54h+var_28.x], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FFB9B",
-    "line": "mov     [esp+54h+var_24], eax",
+    "line": "mov     [esp+54h+var_28.y], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2941,7 +2935,7 @@
   },
   {
     "ea": "0x7FFBAB",
-    "line": "mov     [esp+54h+var_20], ecx",
+    "line": "mov     [esp+54h+var_28.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2965,7 +2959,7 @@
   },
   {
     "ea": "0x7FFBB9",
-    "line": "mov     ds:0B46DB8h, edx",
+    "line": "mov     ds:0B46DB8h, edx; Write VS c15 FogParam = (fogEnd, fogEnd-fogStart, 1, 0).",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3007,7 +3001,7 @@
   },
   {
     "ea": "0x7FFBD8",
-    "line": "fld     [esp+54h+var_28]",
+    "line": "fld     [esp+54h+var_28.x]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3031,7 +3025,7 @@
   },
   {
     "ea": "0x7FFBEA",
-    "line": "fld     [esp+54h+var_24]",
+    "line": "fld     [esp+54h+var_28.y]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3049,13 +3043,13 @@
   },
   {
     "ea": "0x7FFBF6",
-    "line": "mov     ds:0B46DC8h, eax",
+    "line": "mov     ds:0B46DC8h, eax; Write VS c16 FogColor = (fog.r, fog.g, fog.b, 1).",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x7FFBFB",
-    "line": "fld     [esp+54h+var_20]",
+    "line": "fld     [esp+54h+var_28.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3127,7 +3121,7 @@
   },
   {
     "ea": "0x7FFC31",
-    "line": "fstp    [esp+54h+var_1C]",
+    "line": "fstp    [esp+54h+var_1C]; Fog render consumer decode: Lighting30 non-mode null-property fallback writes default grouped FogParam/FogColor.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3427,7 +3421,7 @@
   },
   {
     "ea": "0x7FFD03",
-    "line": "mov     eax, [esp+54h+var_40]",
+    "line": "mov     eax, [esp+54h+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3463,7 +3457,7 @@
   },
   {
     "ea": "0x7FFD1D",
-    "line": "mov     ecx, [esp+54h+var_40]",
+    "line": "mov     ecx, [esp+54h+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3553,7 +3547,7 @@
   },
   {
     "ea": "0x7FFD52",
-    "line": "fst     dword ptr ds:0B46FA8h",
+    "line": "fst     dword ptr ds:0B46FA8h; Ordinary selectors12D..146 set PS c3.x to min(material+50,1.0), with no lower clamp. PS c3.yzw retain B25AE4/B25AE8/B25AEC defaults (all1 in this image).147..14D have separate alpha behavior and are excluded from the ordinary profile.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -3619,7 +3613,7 @@
   },
   {
     "ea": "0x7FFD7B",
-    "line": "mov     ecx, [esp+54h+var_40]",
+    "line": "mov     ecx, [esp+54h+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3799,7 +3793,7 @@
   },
   {
     "ea": "0x7FFDC8",
-    "line": "mov     edi, [esp+54h+var_40]",
+    "line": "mov     edi, [esp+54h+property]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4039,7 +4033,7 @@
   },
   {
     "ea": "0x7FFE31",
-    "line": "mov     ecx, ds:0B25AD0h",
+    "line": "mov     ecx, ds:0B25AD0h; Reset pixel c7 to (0,0,0,1). Stock Oblivion SM3023 does not reference c7.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4075,7 +4069,7 @@
   },
   {
     "ea": "0x7FFE54",
-    "line": "mov     ecx, [esp+54h+var_40]",
+    "line": "mov     ecx, [esp+54h+property]; self",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4093,7 +4087,7 @@
   },
   {
     "ea": "0x7FFE63",
-    "line": "call    sub_7ED5C0",
+    "line": "call    BSShaderProperty_GetShadowLightCount; The SimpleShadow consumer runs only when BSShaderProperty contains at least one native shadow light.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4111,7 +4105,7 @@
   },
   {
     "ea": "0x7FFE71",
-    "line": "mov     edx, ds:0B42E90h",
+    "line": "mov     edx, ds:0B42E90h; SimpleShadow setup binds only the source R32F texture/stage state; it does not switch render target or depth surface, so receiver composition uses the accumulator's inherited active surfaces.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4153,7 +4147,7 @@
   },
   {
     "ea": "0x7FFE91",
-    "line": "mov     al, [ebp+0F4h]",
+    "line": "mov     al, [ebp+0F4h]; Current ShadowSceneLight +0xF4 selects the normal mapped path: it requires +0x114 BSRenderedTexture. Otherwise +0x120 can admit the override path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4183,7 +4177,7 @@
   },
   {
     "ea": "0x7FFEA4",
-    "line": "cmp     byte ptr [ebp+120h], 0",
+    "line": "cmp     byte ptr [ebp+120h], 0; ShadowSceneLight +0x120 is the alternate/override admission byte when +0xF4 is clear or no +0x114 map is present.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -4195,7 +4189,7 @@
   },
   {
     "ea": "0x7FFEB1",
-    "line": "cmp     byte ptr [edi+8], 0",
+    "line": "cmp     byte ptr [edi+8], 0; Require the current shadow-light render context state byte at +0x08 to be nonzero.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -4219,7 +4213,7 @@
   },
   {
     "ea": "0x7FFEBF",
-    "line": "call    sub_405A80",
+    "line": "call    BSShaderManager_IsShadowMappingReady; [Verified] Returns true only when BSShaderPackageVersion (RendererGlobalState+0xAF) >= 3 and BSShaderFeatureMask (RendererGlobalState+0xA7) contains native shadow-map bit 0x10. The version comparison independently corroborates the selector field read by GetShaderProgramPackageIndex.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4237,7 +4231,7 @@
   },
   {
     "ea": "0x7FFEC8",
-    "line": "fld1",
+    "line": "fld1; Mapped shadow readiness success writes pixel c7.y=1; stock SM3023 does not consume c7.",
     "mnemonic": "fld1",
     "size": 2
   },
@@ -4249,7 +4243,7 @@
   },
   {
     "ea": "0x7FFED0",
-    "line": "mov     ecx, [esi+24h]",
+    "line": "mov     ecx, [esi+24h]; Select NiD3DPass texture-stage array entry 2, the SM3023 shadow-map sampler stage.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -4261,7 +4255,7 @@
   },
   {
     "ea": "0x7FFED6",
-    "line": "mov     ecx, [ebp+114h]; this",
+    "line": "mov     ecx, [ebp+114h]; Fetch the current ShadowSceneLight +0x114 BSRenderedTexture inner texture for selector 0x14E..0x151.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -4273,7 +4267,7 @@
   },
   {
     "ea": "0x7FFEE1",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -4285,43 +4279,43 @@
   },
   {
     "ea": "0x7FFEE4",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Bind the current shadow render target to Lighting30 texture stage 2 with reference transfer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FFEE9",
-    "line": "push    1",
+    "line": "push    1; filterPreset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FFEEB",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7FFEED",
-    "line": "call    sub_771640",
+    "line": "call    NiD3DTextureStage_ApplyFilterPreset; Apply native texture-filter preset 1 to the shadow-map stage.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FFEF2",
-    "line": "push    0",
+    "line": "push    0; preset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x7FFEF4",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7FFEF6",
-    "line": "call    sub_7715E0",
+    "line": "call    NiD3DTextureStage_ApplyAddressModePreset; Apply native texture-address preset 0 (ADDRESSU/ADDRESSV table entry 0) to the shadow-map stage.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4351,7 +4345,7 @@
   },
   {
     "ea": "0x7FFF0C",
-    "line": "fld     dword ptr [ecx+128h]",
+    "line": "fld     dword ptr [ecx+128h]; Write ShadowSceneLight+0x128 falloff exponent to pixel c7.z.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -4381,7 +4375,7 @@
   },
   {
     "ea": "0x7FFF1C",
-    "line": "fst     dword ptr ds:0B46FF4h",
+    "line": "fst     dword ptr ds:0B46FF4h; ShadowSceneLight+0x120 selects pixel c7.w: set => 0, clear => 1.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -4399,7 +4393,7 @@
   },
   {
     "ea": "0x7FFF28",
-    "line": "fstp    dword ptr ds:0B46FF0h",
+    "line": "fstp    dword ptr ds:0B46FF0h; Pixel c7.z backing slot (global 0x477); shared native setup value, unused by stock SM3023.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -4417,7 +4411,7 @@
   },
   {
     "ea": "0x7FFF32",
-    "line": "fst     dword ptr ds:0B46FF4h",
+    "line": "fst     dword ptr ds:0B46FF4h; Pixel c7.w backing slot (global 0x478); shared native setup value, unused by stock SM3023.",
     "mnemonic": "fst",
     "size": 6
   },
@@ -4483,7 +4477,7 @@
   },
   {
     "ea": "0x7FFF58",
-    "line": "mov     eax, [esp+54h+arg_0]",
+    "line": "mov     eax, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4501,7 +4495,7 @@
   },
   {
     "ea": "0x7FFF65",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4543,7 +4537,7 @@
   },
   {
     "ea": "0x7FFF83",
-    "line": "fld     [esp+54h+arg_0]",
+    "line": "fld     [esp+54h+value]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4579,13 +4573,13 @@
   },
   {
     "ea": "0x7FFFA1",
-    "line": "mov     edx, [esp+54h+var_40]",
+    "line": "mov     edx, [esp+54h+property]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7FFFA5",
-    "line": "test    dword ptr [edx+1Ch], 80000h",
+    "line": "test    dword ptr [edx+1Ch], 80000h; Lighting30 shader-property flag 0x80000 selects mode-5 caster bias slope 1.0 / depth +0.0005.",
     "mnemonic": "test",
     "size": 7
   },
@@ -4609,7 +4603,7 @@
   },
   {
     "ea": "0x7FFFB4",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4621,7 +4615,7 @@
   },
   {
     "ea": "0x7FFFBA",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4633,7 +4627,7 @@
   },
   {
     "ea": "0x7FFFC2",
-    "line": "mov     eax, [esp+54h+arg_0]",
+    "line": "mov     eax, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4663,13 +4657,13 @@
   },
   {
     "ea": "0x7FFFD1",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Write D3DRS_SLOPESCALEDEPTHBIAS=1.0 for the Lighting30 flag-0x80000 caster path.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7FFFD6",
-    "line": "fld     dword ptr ds:0A77830h",
+    "line": "fld     dword ptr ds:0A77830h; Load Lighting30 mode-5 flag-0x80000 D3DRS_DEPTHBIAS=+0.0005.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -4681,7 +4675,7 @@
   },
   {
     "ea": "0x7FFFE0",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4693,7 +4687,7 @@
   },
   {
     "ea": "0x7FFFE6",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4705,7 +4699,7 @@
   },
   {
     "ea": "0x7FFFEE",
-    "line": "mov     ecx, [esp+54h+arg_0]",
+    "line": "mov     ecx, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4735,7 +4729,7 @@
   },
   {
     "ea": "0x800000",
-    "line": "fstp    st",
+    "line": "fstp    st; When flag 0x00080000 is clear, detect the exact selector 0x14E..0x151 family for its native depth-bias policy.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -4747,7 +4741,7 @@
   },
   {
     "ea": "0x800005",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4771,7 +4765,7 @@
   },
   {
     "ea": "0x800011",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4783,7 +4777,7 @@
   },
   {
     "ea": "0x800019",
-    "line": "mov     edx, [esp+54h+arg_0]",
+    "line": "mov     edx, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4813,13 +4807,13 @@
   },
   {
     "ea": "0x800028",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Selectors 0x14E..0x151: D3DRS_SLOPESCALEDEPTHBIAS (175) = 0.0.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x80002D",
-    "line": "fld     dword ptr ds:0A906F4h",
+    "line": "fld     dword ptr ds:0A906F4h; Selectors 0x14E..0x151: D3DRS_DEPTHBIAS (195) = -0.0001.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -4831,7 +4825,7 @@
   },
   {
     "ea": "0x800037",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4843,7 +4837,7 @@
   },
   {
     "ea": "0x80003D",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4855,7 +4849,7 @@
   },
   {
     "ea": "0x800045",
-    "line": "mov     eax, [esp+54h+arg_0]",
+    "line": "mov     eax, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4891,7 +4885,7 @@
   },
   {
     "ea": "0x800054",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4903,7 +4897,7 @@
   },
   {
     "ea": "0x80005C",
-    "line": "mov     ecx, [esp+54h+arg_0]",
+    "line": "mov     ecx, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4933,7 +4927,7 @@
   },
   {
     "ea": "0x80006B",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Selectors 0x154/0x155 without flag 0x80000 explicitly use slope-scale depth bias 0.0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4951,7 +4945,7 @@
   },
   {
     "ea": "0x800076",
-    "line": "fstp    [esp+54h+arg_0]",
+    "line": "fstp    [esp+54h+value]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -4963,7 +4957,7 @@
   },
   {
     "ea": "0x80007C",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4975,7 +4969,7 @@
   },
   {
     "ea": "0x800084",
-    "line": "mov     edx, [esp+54h+arg_0]",
+    "line": "mov     edx, [esp+54h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4999,13 +4993,13 @@
   },
   {
     "ea": "0x80008E",
-    "line": "push    0C3h ; 'Ã'",
+    "line": "push    0C3h ; 'Ã'; Selectors 0x154/0x155 without flag 0x80000 use depth bias 0.0; flag 0x80000 uses +0.0005.",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x800093",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5023,7 +5017,7 @@
   },
   {
     "ea": "0x8000A0",
-    "line": "mov     [esp+54h+arg_0], esi",
+    "line": "mov     [esp+54h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5041,25 +5035,25 @@
   },
   {
     "ea": "0x8000AB",
-    "line": "lea     eax, [esp+54h+arg_0]",
+    "line": "lea     eax, [esp+54h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8000AF",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8000B0",
-    "line": "push    ecx",
+    "line": "push    ecx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8000B1",
-    "line": "lea     ecx, [edi+40h]",
+    "line": "lea     ecx, [edi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -5071,7 +5065,7 @@
   },
   {
     "ea": "0x8000BC",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Valid selector only: insert the resolved NiD3DPass into the shader pass array.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5107,19 +5101,19 @@
   },
   {
     "ea": "0x8000CF",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8000D4",
-    "line": "add     [edi+38h], ebx",
+    "line": "add     [edi+38h], ebx; Valid selector only: increment PassCount after the resolved pass has been queued.",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x8000D7",
-    "line": "xor     eax, eax",
+    "line": "xor     eax, eax; Null-selector exit returns with the queue cleared and PassCount zero; renderer BeginPassLoop will suppress drawing.",
     "mnemonic": "xor",
     "size": 2
   },
@@ -5176,5 +5170,59 @@
     "line": "retn    1Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D0640",
+    "line": "lea     ecx, [ebp+4]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0643",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0648",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D064C",
+    "line": "lea     eax, [edx-44h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D064F",
+    "line": "mov     ecx, [edx-48h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D0652",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D0654",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D0659",
+    "line": "mov     eax, offset stru_AF8FBC",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D065E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

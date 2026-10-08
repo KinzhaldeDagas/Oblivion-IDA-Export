@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x57F170",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; MoonSugarEffect decode: MiscPass constructs a temporary BSCullingProcess with the source scenegraph cullingProcess->VisibleGeo. This confirms visible arrays are opt-in/inherited state, not guaranteed for the normal world path.",
     "mnemonic": "push",
     "size": 2
   },
@@ -115,19 +115,19 @@
   },
   {
     "ea": "0x57F1B3",
-    "line": "push    eax; a2",
+    "line": "push    eax; visibleArray",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F1B4",
-    "line": "lea     ecx, [esp+0C8h+anonymous_0]; this",
+    "line": "lea     ecx, [esp+0C8h+anonymous_0]; self",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x57F1B8",
-    "line": "call    NiCullingProcess_NiCullingProcess",
+    "line": "call    NiCullingProcess_NiCullingProcess; MEF PERF 2026-10-07: Verified culling lifetime refinement: constructor argument is loaded from existing process+8 at57F1AA. Temporary BSCullingProcess does not imply a newly allocated visible geometry array; it shares that pointer. No per-frame array allocation inferred.",
     "mnemonic": "call",
     "size": 5
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x57F1C7",
-    "line": "mov     [esp+0C4h+anonymous_0.unk90], bl",
+    "line": "mov     [esp+0C4h+anonymous_0.useFrustumCull], bl; CULLING audit 2026-09-27: zeroes BYTE +0x90 on the temporary BSCullingProcess, disabling its native frustum branch.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x57F1F6",
-    "line": "call    InitBSShaderAccumulator",
+    "line": "call    BSShaderAccumulator_GetOrCreateGlobal",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x57F225",
-    "line": "call    BSRenderedTexture__UseTextureToRender",
+    "line": "call    BSRenderedTexture__UseTextureToRender; Oblivion BSRenderedTexture helper selects the render-target group associated with its inner rendered texture.",
     "mnemonic": "call",
     "size": 5
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x57F22D",
-    "line": "call    NiRenderer_BeginScene",
+    "line": "call    NiRenderer_BeginScene; Oblivion BeginScene wrapper used by per-source shadow rendering: establish SceneState2 only when no scene state is active, then push/begin the supplied target group with requested clear flags.",
     "mnemonic": "call",
     "size": 5
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x57F23F",
-    "line": "call    NiRenderer_BeginScene1",
+    "line": "call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x57F2A0",
-    "line": "mov     al, [eax+1B0h]",
+    "line": "mov     al, [eax+1B0h]; 3DTheft decode 2026-05-16: MiscPass services pending manager byte +0x1B0 via SubmitSignalTask before culling, then waits on the manager fence.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x57F2AA",
-    "line": "call    sub_701AD0",
+    "line": "call    NiParallelUpdateTaskManager_SubmitSignalTask; 3DTheft decode 2026-05-16: if manager exists, calls manager vfunc +0x60 with args (1, manager+0x19C, 0, 0), then clears byte +0x1B0. manager+0x19C is the observed embedded signal-task argument.",
     "mnemonic": "call",
     "size": 5
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x57F2B1",
-    "line": "call    sub_404D60",
+    "line": "call    NiParallelUpdateTaskManager_WaitForSignal; [Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,31 +547,31 @@
   },
   {
     "ea": "0x57F2BF",
-    "line": "push    ebx",
+    "line": "push    ebx; visibleArray",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F2C0",
-    "line": "push    esi",
+    "line": "push    esi; cullingProcess",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F2C1",
-    "line": "push    ebp",
+    "line": "push    ebp; sceneRoot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F2C2",
-    "line": "push    eax",
+    "line": "push    eax; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F2C3",
-    "line": "call    sub_70C0B0",
+    "line": "call    NiRenderer_CullAndRenderScene; Renderer camera-cull-submit boundary. Installs camera matrices, culls the scene root into the visible array, then submits that visible array through the current renderer accumulator.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x57F2D4",
-    "line": "lea     esi, [eax+190h]",
+    "line": "lea     esi, [eax+190h]; 3DTheft decode 2026-05-16: after culling, increments manager +0x190 and releases semaphore at +0x198.",
     "mnemonic": "lea",
     "size": 6
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x57F2FB",
-    "line": "call    NiRenderer_EndScene",
+    "line": "call    NiRenderer_EndScene; Oblivion EndScene wrapper: drain the complete render-target stack, end the active group, and end the D3D scene only when this wrapper owned SceneState2.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x57F303",
-    "line": "call    NiRenderer_BeginScene1",
+    "line": "call    NiRenderer_BeginScene1; Oblivion BeginScene internal path: establishes SceneState1 when required and starts the supplied or default render-target group.",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x57F30A",
-    "line": "call    GetShaderDefinition",
+    "line": "call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.",
     "mnemonic": "call",
     "size": 5
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x57F316",
-    "line": "call    sub_7B4900",
+    "line": "call    sub_7B4900; MoonSugarEffect decode: thin wrapper around sub_803570; applies one BSShader through global imageSpaceShaderList fullscreen quad, used by menu/water/canopy/misc paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -967,7 +967,7 @@
   },
   {
     "ea": "0x57F38D",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1003,7 +1003,7 @@
   },
   {
     "ea": "0x57F3A0",
-    "line": "call    SetCameraViewProj",
+    "line": "call    SetCameraViewProj; MoonSugarEffect build 16: after temporary camera sway is restored, plugin calls SetCameraViewProj(g_Renderer, restoredCamera) to reset renderer camera globals/view/projection/viewport to the original camera state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x57F3CD",
-    "line": "mov     cl, [eax+1B0h]",
+    "line": "mov     cl, [eax+1B0h]; 3DTheft decode 2026-05-16: second MiscPass culling boundary repeats pending-signal service and short wait before NiCullingProcess::Process.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x57F3D7",
-    "line": "call    sub_701AD0",
+    "line": "call    NiParallelUpdateTaskManager_SubmitSignalTask; 3DTheft decode 2026-05-16: if manager exists, calls manager vfunc +0x60 with args (1, manager+0x19C, 0, 0), then clears byte +0x1B0. manager+0x19C is the observed embedded signal-task argument.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x57F3DE",
-    "line": "call    sub_404D60",
+    "line": "call    NiParallelUpdateTaskManager_WaitForSignal; [Verified] On semaphore timeout or pending-count boundary, sets bNiParallelWaitFallback_0B3F944 and waits indefinitely on g_NiParallelUpdateTaskManager's semaphore. BSTECreateTask_Run observes the byte and skips the wrapped Initialize call while fallback wait is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1141,31 +1141,31 @@
   },
   {
     "ea": "0x57F3EC",
-    "line": "push    ebx; a4",
+    "line": "push    ebx; visibleArray",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F3ED",
-    "line": "push    esi; a3",
+    "line": "push    esi; root",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F3EE",
-    "line": "push    eax; a2",
+    "line": "push    eax; camera",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x57F3EF",
-    "line": "lea     ecx, [esp+0D0h+anonymous_0]; this",
+    "line": "lea     ecx, [esp+0D0h+anonymous_0]; self",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x57F3F3",
-    "line": "call    NiCullingProcess__Process",
+    "line": "call    NiCullingProcess__Process; CULLING audit 2026-09-27: direct base Process call on temporary BSCullingProcess. Does not dispatch through Process vtable; exact-world-owner plugin scope does not cover this temporary process. Preserve separate-view semantics.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1195,7 +1195,7 @@
   },
   {
     "ea": "0x57F407",
-    "line": "lea     esi, [eax+190h]",
+    "line": "lea     esi, [eax+190h]; 3DTheft decode 2026-05-16: second MiscPass culling boundary releases manager semaphore by incrementing +0x190 and ReleaseSemaphore(+0x198).",
     "mnemonic": "lea",
     "size": 6
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x57F464",
-    "line": "call    ??1BSCullingProcess@@UAE@XZ; BSCullingProcess::~BSCullingProcess(void)",
+    "line": "call    ??1BSCullingProcess@@UAE@XZ; Oblivion BSCullingProcess destructor restores its base culling-process state; no separate visible-array allocation is released here.",
     "mnemonic": "call",
     "size": 5
   },

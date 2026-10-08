@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x722B30",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Pass222: NiGeometry override path; clones incoming NiPropertyState and stores result at NiGeometry +0xAC.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x722B64",
-    "line": "call    sub_7077D0",
+    "line": "call    sub_7077D0; Fog property propagation decode: NiGeometry override merges local properties through 0x7077D0; geometry-local fog can override inherited slot +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x722BA3",
-    "line": "mov     [edi+0ACh], eax",
+    "line": "mov     [edi+0ACh], eax; Fog property propagation decode: stores final NiGeometry +0xAC property state; shader writers read fog from this state's +0x0C slot when present.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -436,5 +436,59 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CF800",
+    "line": "lea     ecx, [ebp+4]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF803",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF808",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CF80C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF80F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CF812",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CF814",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF819",
+    "line": "mov     eax, offset stru_AF8414",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CF81E",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

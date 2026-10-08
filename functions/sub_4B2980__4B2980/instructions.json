@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4B2980",
-    "line": "push    esi",
+    "line": "push    esi; Verified direct path for type 0x1E tree forms: obtains BSTreeManager and calls BSTreeManager_CreateTreeForReference, stores the returned node through tree-form vtable +0x120, and writes the node model's seed back to a reference when present.",
     "mnemonic": "push",
     "size": 1
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x4B2994",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B2996",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4B299B",
-    "line": "mov     ebx, [esp+10h+arg_0]",
+    "line": "mov     ebx, [esp+10h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -103,25 +103,25 @@
   },
   {
     "ea": "0x4B29A6",
-    "line": "push    edi",
+    "line": "push    edi; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B29A7",
-    "line": "push    ebx",
+    "line": "push    ebx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B29A8",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4B29AA",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x4B29B2",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B29B4",
-    "line": "call    sub_55F800",
+    "line": "call    BSTreeManager_CreateTreeForReference; Verified synchronous tree-node path for TESObjectTREE type 0x1E: calls BSTreeManager_CreateTreeForReference, then invokes the tree-form vtable setter at +0x120 with the returned node. This shares the same create-or-consume-pending path as the queued worker.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,19 +271,19 @@
   },
   {
     "ea": "0x4B29EF",
-    "line": "push    eax",
+    "line": "push    eax; seedValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4B29F0",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4B29F2",
-    "line": "call    sub_4D7880",
+    "line": "call    TESObjectREFR_SetTreeSeedByValue; Verified: after creation, reads the returned BSTreeModel.seed at +0x48 and stores that seed by value on the TESObjectREFR. This preserves the selected randomized tree seed on the reference.",
     "mnemonic": "call",
     "size": 5
   },

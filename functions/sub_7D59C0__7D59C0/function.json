@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7D59C0",
+      "0x7D59DB"
+    ]
+  ],
+  "chunks_sha256": "32d56f5645b5a0caffe791411836d56e8d7e7a6eff1e66e21c964894d896341b",
+  "comment_regular": "ShadowSceneLight render dispatcher. +0xF5 zero selects the normal per-source projected shadow map; nonzero selects the special cube/object-list path.\n\nDispatch on ShadowSceneLight+0xF5: zero -> normal per-source projected map at 0x007D46C0; nonzero -> special cube/object-list path at 0x007D4570. No persistent direct native producer for +0xF5 is proven.",
+  "comment_repeatable": "ShadowSceneLight render dispatcher. +0xF5 zero selects the normal per-source projected shadow map; nonzero selects the special cube/object-list path.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7D59C0",
+  "display_name": "ShadowSceneLight_DispatchRender",
   "end_ea": "0x7D59DB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7D59C0",
+  "name": "ShadowSceneLight_DispatchRender",
   "segment": ".text",
   "sha256": "32d56f5645b5a0caffe791411836d56e8d7e7a6eff1e66e21c964894d896341b",
   "size": 27,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7D59C0",
+  "total_chunk_size": 27,
   "type": "void __thiscall(_BYTE *this, NiCamera *, int)",
   "xrefs_from_count": 8,
   "xrefs_to_count": 1

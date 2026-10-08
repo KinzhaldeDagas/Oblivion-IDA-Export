@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x65FF10",
+      "0x65FF38"
+    ]
+  ],
+  "chunks_sha256": "2dae83478bd3faf707cb955876de9a60d8addd9974ead6da11a7d8e3d5756ab0",
+  "comment_regular": "PlayerCharacter vtable +0x2C4 override. In god mode returns false without changing the equipped item; otherwise forwards EntryData, float damage, and suppression flag to Actor_DamageEquippedItem.",
+  "comment_repeatable": "PlayerCharacter vtable +0x2C4 override. In god mode returns false without changing the equipped item; otherwise forwards EntryData, float damage, and suppression flag to Actor_DamageEquippedItem.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "PlayerCharacter_DamageEquippedItem?",
+  "display_name": "PlayerCharacter_DamageEquippedItem",
   "end_ea": "0x65FF38",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "PlayerCharacter_DamageEquippedItem?",
+  "name": "PlayerCharacter_DamageEquippedItem",
   "segment": ".text",
   "sha256": "2dae83478bd3faf707cb955876de9a60d8addd9974ead6da11a7d8e3d5756ab0",
   "size": 40,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65FF10",
-  "type": "void __userpurge(PlayerCharacter *@<ecx>, int@<ebx>, int@<ebp>, void **, int, int)",
+  "total_chunk_size": 40,
+  "type": "bool __thiscall(PlayerCharacter *this, EntryData *entry, float damage, bool suppressArmorSkillModifiers)",
   "xrefs_from_count": 13,
   "xrefs_to_count": 1
 }

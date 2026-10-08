@@ -1,50 +1,50 @@
-char *__thiscall sub_8828C0(_DWORD *this, const char *a2, char a3, const char *a4)
+char *__thiscall sub_8828C0(_DWORD *this, char *sourcePath, char loadFromCache, const char *a4)
 {
   char *result; // eax
   int *v6; // eax
-  int (__thiscall ***v7)(_DWORD, int); // ebp
+  NiSourceTexture *v7; // ebp
   int *v8; // eax
-  char *(__thiscall ***v9)(_DWORD, int); // esi
-  int v10; // [esp+14h] [ebp-11Ch] BYREF
-  int v11; // [esp+18h] [ebp-118h] BYREF
+  NiSourceTexture *v9; // esi
+  NiSourceTexture *v10; // [esp+14h] [ebp-11Ch] BYREF
+  NiSourceTexture *outTexture; // [esp+18h] [ebp-118h] BYREF
   char Src[260]; // [esp+1Ch] [ebp-114h] BYREF
   int v13; // [esp+12Ch] [ebp-4h]
 
-  sub_7D8160((int **)this, a2, a3, a4);
-  result = sub_7B4160(Src, a2, (int)&off_A7D0E4);
-  if ( Src[0] )
+  sub_7D8160((int **)this, sourcePath, loadFromCache, a4); /*0x882915*/
+  result = BuildTextureVariantPath(Src, sourcePath, (const char *)&off_A7D0E4); /*0x882925*/
+  if ( Src[0] ) /*0x882932*/
   {
-    v6 = sub_7B8200(&v11, Src, a3, 1);
-    v13 = 0;
-    sub_55E2A0(this + 0x5A, v6);
-    result = (char *)v11;
-    v13 = 0xFFFFFFFF;
-    if ( v11 )
+    v6 = (int *)NiSourceTexture_LoadChecked(&outTexture, Src, loadFromCache, 1); /*0x882941*/
+    v13 = 0; /*0x882950*/
+    OB_NiSmartPointer_Assign_010201A0(this + 0x5A, v6); /*0x88295b*/
+    result = (char *)outTexture; /*0x882960*/
+    v13 = 0xFFFFFFFF; /*0x882966*/
+    if ( outTexture ) /*0x882971*/
     {
-      v7 = (int (__thiscall ***)(_DWORD, int))v11;
-      result = (char *)InterlockedDecrement((volatile LONG *)(v11 + 4));
-      if ( !result )
-        result = (char *)(**v7)(v7, 1);
+      v7 = outTexture; /*0x882973*/
+      result = (char *)InterlockedDecrement((volatile LONG *)&outTexture->members); /*0x882979*/
+      if ( !result ) /*0x882981*/
+        result = (char *)((int (__thiscall *)(NiSourceTexture *, int))v7->vtbl->super.super.super.Destructor)(v7, 1); /*0x882990*/
     }
   }
-  if ( ShaderPackage >= 2 )
+  if ( *(int *)OB_RendererGlobalState_010201A0.shaderPackageVersion_le >= 2 ) /*0x882999*/
   {
-    result = sub_7B4160(Src, a2, (int)&off_A7D0E8);
-    if ( Src[0] )
+    result = BuildTextureVariantPath(Src, sourcePath, (const char *)&suffix); /*0x8829a6*/
+    if ( Src[0] ) /*0x8829b3*/
     {
-      v8 = sub_7B8200(&v10, Src, a3, 1);
-      v13 = 1;
-      sub_55E2A0(this + 0x5B, v8);
-      result = (char *)v10;
-      v13 = 0xFFFFFFFF;
-      if ( v10 )
+      v8 = (int *)NiSourceTexture_LoadChecked(&v10, Src, loadFromCache, 1); /*0x8829c2*/
+      v13 = 1; /*0x8829d1*/
+      OB_NiSmartPointer_Assign_010201A0(this + 0x5B, v8); /*0x8829dc*/
+      result = (char *)v10; /*0x8829e1*/
+      v13 = 0xFFFFFFFF; /*0x8829e7*/
+      if ( v10 ) /*0x8829f2*/
       {
-        v9 = (char *(__thiscall ***)(_DWORD, int))v10;
-        result = (char *)InterlockedDecrement((volatile LONG *)(v10 + 4));
-        if ( !result )
-          return (**v9)(v9, 1);
+        v9 = v10; /*0x8829f4*/
+        result = (char *)InterlockedDecrement((volatile LONG *)&v10->members); /*0x8829fa*/
+        if ( !result ) /*0x882a02*/
+          return ((char *(__thiscall *)(NiSourceTexture *, int))v9->vtbl->super.super.super.Destructor)(v9, 1); /*0x882a10*/
       }
     }
   }
-  return result;
+  return result; /*0x882a12*/
 }

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0xA24B20",
-    "line": "push    offset unk_B140B0",
+    "line": "push    offset fXenonMenuStickSpeedPlayerRotMod; [Controller decode 2026-07-10] atexit cleanup for registered Xenon-era Controls INI setting.",
     "mnemonic": "push",
     "size": 5
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0xA24B2F",
-    "line": "mov     eax, off_B140B4; \"fXenonMenuStickSpeedPlayerRotMod:Contro\"...",
+    "line": "mov     eax, fXenonMenuStickSpeedPlayerRotModSettingName",
     "mnemonic": "mov",
     "size": 5
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0xA24B3E",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

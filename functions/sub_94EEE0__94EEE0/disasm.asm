@@ -26,13 +26,13 @@
 0x94EF26: lea     eax, [esp+0E4h+var_80]
 0x94EF2A: lea     ecx, [esi+50h]
 0x94EF2D: push    eax
-0x94EF2E: call    sub_88FCC0
+0x94EF2E: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94EF33: lea     edx, [ebx+10h]
 0x94EF36: push    edx
 0x94EF37: lea     eax, [esp+0E4h+var_40]
 0x94EF3E: lea     ecx, [esi+40h]
 0x94EF41: push    eax
-0x94EF42: call    sub_88FCC0
+0x94EF42: call    hkTransform_TransformPosition; TES4 authoritative: transforms a local position by a Havok transform/matrix at a2: basis columns * local vector + translation.
 0x94EF47: mov     ecx, [ebp+arg_8]
 0x94EF4A: push    ecx
 0x94EF4B: mov     ecx, esi
@@ -46,13 +46,13 @@
 0x94EF61: lea     eax, [esi+90h]
 0x94EF67: push    eax
 0x94EF68: lea     ecx, [esp+0E8h+var_A0]
-0x94EF6C: call    sub_88FE00
+0x94EF6C: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94EF71: lea     edx, [ebx+80h]
 0x94EF77: push    edx
 0x94EF78: lea     eax, [esi+90h]
 0x94EF7E: push    eax
 0x94EF7F: lea     ecx, [esp+0E8h+var_90]
-0x94EF83: call    sub_88FE00
+0x94EF83: call    hkBasis_TransformVector; TES4 authoritative: basis transform helper, computes world vector from basis columns and local vector without translation.
 0x94EF88: mov     eax, [ebp+arg_8]
 0x94EF8B: mov     edx, [edi]
 0x94EF8D: push    eax
@@ -65,7 +65,7 @@
 0x94EF9D: call    dword ptr [edx+1Ch]
 0x94EFA0: mov     eax, [ebx+94h]
 0x94EFA6: cmp     eax, 7F7FFFFFh
-0x94EFAB: movaps  xmm2, xmmword ptr [esp+0E0h+var_A0]
+0x94EFAB: movaps  xmm2, [esp+0E0h+var_A0]
 0x94EFB0: movaps  xmm1, xmmword ptr [esi+50h]
 0x94EFB4: jz      short loc_94F022
 0x94EFB6: mov     edx, [ebx+90h]
@@ -136,7 +136,7 @@
 0x94F091: mov     eax, dword ptr [esp+0E0h+var_D0+8]
 0x94F095: fmul    dword ptr ds:0A3D65Ch
 0x94F09B: mov     edx, [eax+90h]
-0x94F0A1: movaps  xmm1, xmmword ptr [esp+0E0h+var_A0]
+0x94F0A1: movaps  xmm1, [esp+0E0h+var_A0]
 0x94F0A6: mov     ecx, [eax+94h]
 0x94F0AC: mov     ebx, [ebp+arg_8]
 0x94F0AF: mov     eax, [edi]
@@ -154,7 +154,7 @@
 0x94F0DF: movaps  xmm3, xmm1
 0x94F0E2: shufps  xmm3, xmm1, 0
 0x94F0E6: addps   xmm0, xmm2
-0x94F0E9: movaps  xmm2, xmmword ptr [esp+0E0h+var_90]
+0x94F0E9: movaps  xmm2, [esp+0E0h+var_90]
 0x94F0EE: mulps   xmm3, xmm2
 0x94F0F1: movaps  xmm1, xmm0
 0x94F0F4: addps   xmm1, xmm3
@@ -177,7 +177,7 @@
 0x94F12A: fld     dword ptr [esi]
 0x94F12C: fmul    dword ptr ds:0A3D65Ch
 0x94F132: mov     eax, dword ptr [esp+0E0h+var_D0+0Ch]
-0x94F136: movaps  xmm1, xmmword ptr [esp+0E0h+var_A0]
+0x94F136: movaps  xmm1, [esp+0E0h+var_A0]
 0x94F13B: mov     edx, [edi]
 0x94F13D: mov     dword ptr [esp+0E0h+var_D0+8], eax
 0x94F141: movss   xmm0, dword ptr [esp+0E0h+var_D0+8]
@@ -193,7 +193,7 @@
 0x94F16B: movaps  xmm3, xmm1
 0x94F16E: shufps  xmm3, xmm1, 0
 0x94F172: addps   xmm0, xmm2
-0x94F175: movaps  xmm2, xmmword ptr [esp+0E0h+var_90]
+0x94F175: movaps  xmm2, [esp+0E0h+var_90]
 0x94F17A: mulps   xmm3, xmm2
 0x94F17D: movaps  xmm1, xmm0
 0x94F180: addps   xmm1, xmm3

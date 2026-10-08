@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BC710",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+arg_0]; Verified virtual compare routine returns bool; returns mismatch for non-TESSubSpace input or inherited component differences, then compares the three dimension fields for inequality.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x4BC76E",
-    "line": "fstp    [esp+20h+var_18]",
+    "line": "fstp    [esp+20h+other.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4BC77E",
-    "line": "fstp    [esp+20h+var_14]",
+    "line": "fstp    [esp+20h+other.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -241,19 +241,19 @@
   },
   {
     "ea": "0x4BC78A",
-    "line": "lea     ecx, [esp+20h+var_18]",
+    "line": "lea     ecx, [esp+20h+other]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4BC78E",
-    "line": "fstp    [esp+20h+var_10]",
+    "line": "fstp    [esp+20h+other.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4BC792",
-    "line": "push    ecx",
+    "line": "push    ecx; other",
     "mnemonic": "push",
     "size": 1
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x4BC79B",
-    "line": "lea     ecx, [esp+24h+var_C]",
+    "line": "lea     ecx, [esp+24h+var_C]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4BC79F",
-    "line": "fstp    [esp+24h+var_C]",
+    "line": "fstp    [esp+24h+var_C.x]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x4BC7AB",
-    "line": "fstp    [esp+24h+var_8]",
+    "line": "fstp    [esp+24h+var_C.y]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -307,13 +307,13 @@
   },
   {
     "ea": "0x4BC7B3",
-    "line": "fstp    [esp+24h+var_4]",
+    "line": "fstp    [esp+24h+var_C.z]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x4BC7B7",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },

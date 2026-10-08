@@ -223,7 +223,6 @@
 0x9242E1: jle     short loc_9242FF
 0x9242E3: mov     edx, [esp+450h+var_414]
 0x9242E7: jmp     short loc_9242F0
-0x9242E9: align 10h
 0x9242F0: mov     dword ptr [edx+eax*4], 0
 0x9242F7: mov     esi, [ecx+18h]
 0x9242FA: inc     eax

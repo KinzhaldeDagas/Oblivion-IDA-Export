@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 5,
+  "chunks": [
+    [
+      "0x803790",
+      "0x8037CF"
+    ]
+  ],
+  "chunks_sha256": "cc57fd80582f7bd23ee9abb8b70bb6dd071eb32395186d331d2c37685e6e8016",
+  "comment_regular": "ImprovedShaders hook target: AddImageSpaceShader(this=list, arg0=BSImageSpaceShader*). Hook calls native trampoline, then appends paired HDR(0x08)/Blur-Bloom(0x07) shader if absent.",
+  "comment_repeatable": "ImprovedShaders hook target: AddImageSpaceShader(this=list, arg0=BSImageSpaceShader*). Hook calls native trampoline, then appends paired HDR(0x08)/Blur-Bloom(0x07) shader if absent.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "AddImageSpaceShader",
   "end_ea": "0x8037CF",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "AddImageSpaceShader",
   "segment": ".text",
   "sha256": "cc57fd80582f7bd23ee9abb8b70bb6dd071eb32395186d331d2c37685e6e8016",
   "size": 63,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x803790",
+  "total_chunk_size": 63,
   "type": "NiPointerList_Node_BSImageSpaceShader *__thiscall(NiTPointerList__BSImageSpaceShader *this, BSShader *)",
   "xrefs_from_count": 22,
   "xrefs_to_count": 5

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6A33F0",
-    "line": "push    esi",
+    "line": "push    esi; Verified scalar deleting destructor calls NonActorMagicTarget::~NonActorMagicTarget and frees the 0x20-byte allocation with FormHeapFree only when the low bit of freeMemory is set. The destructor itself does not clear the EffectNode chain.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x6A33F3",
-    "line": "call    ??1NonActorMagicTarget@@UAE@XZ; NonActorMagicTarget::~NonActorMagicTarget(void)",
+    "line": "call    ??1NonActorMagicTarget@@UAE@XZ; Verified Oblivion NonActorMagicTarget destructor runs MagicTarget_destr on subobject +0x0C and restores the BSExtraData vtable; no list removal appears in this function. Fallout's corresponding destructor explicitly removes all active-effect list entries first. This is a lifecycle difference; list ownership/cleanup responsibility in Oblivion remains Unknown pending all caller paths.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6A33F8",
-    "line": "test    byte ptr [esp+4+arg_0], 1",
+    "line": "test    [esp+4+freeMemory], 1",
     "mnemonic": "test",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x6A3400",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

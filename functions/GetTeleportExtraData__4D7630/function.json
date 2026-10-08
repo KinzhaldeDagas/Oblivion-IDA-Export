@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
-  "callers_count": 61,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 90,
+  "chunks": [
+    [
+      "0x4D7630",
+      "0x4D7638"
+    ]
+  ],
+  "chunks_sha256": "26523168c19d75cae6510c8d41f592a62de67a6fed23f1bc8b386de6f79c631b",
+  "comment_regular": "Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
+  "comment_repeatable": "Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "GetTeleportExtraData",
+  "display_name": "TESObjectREFR_GetTeleportData",
   "end_ea": "0x4D7638",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "GetTeleportExtraData",
+  "name": "TESObjectREFR_GetTeleportData",
   "segment": ".text",
   "sha256": "26523168c19d75cae6510c8d41f592a62de67a6fed23f1bc8b386de6f79c631b",
   "size": 8,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4D7630",
-  "type": "ExtraTeleport *__thiscall(_BYTE *this)",
+  "total_chunk_size": 8,
+  "type": "TeleportData *__thiscall(TESObjectREFR *this)",
   "xrefs_from_count": 2,
   "xrefs_to_count": 90
 }

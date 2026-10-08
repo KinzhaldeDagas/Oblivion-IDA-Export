@@ -31,8 +31,8 @@
 0x4DB40F: jnz     short loc_4DB3ED; jumptable 004DB3E6 cases 4-6,16-18,52,59
 0x4DB411: cmp     al, 18h
 0x4DB413: jnz     short loc_4DB42C
-0x4DB415: mov     ecx, esi
-0x4DB417: call    sub_4B78E0
+0x4DB415: mov     ecx, esi; this
+0x4DB417: call    TESObjectDOOR_HasRandomTeleportSpaces; Verified mechanics: returns true iff either pointer in the 8-byte TESObjectDOOR.randomTeleport BSSimpleList head is nonzero. Probable domain meaning: the door has at least one random-teleport destination space, supported by the membership and destination-selection callers.
 0x4DB41C: test    al, al
 0x4DB41E: jnz     short loc_4DB3ED; jumptable 004DB3E6 cases 4-6,16-18,52,59
 0x4DB420: lea     ecx, [edi+44h]; this

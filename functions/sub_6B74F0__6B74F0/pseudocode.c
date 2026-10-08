@@ -1,24 +1,25 @@
-_DWORD *__thiscall sub_6B74F0(_DWORD *this, int a2)
+// Compiler-folded cursor setter shared by Conversation::SetCurrentItem and DialogueItem::SetCurrentResponse; both containers start with the same head/next/current-node layout.
+DialogueListNodeView *__thiscall DialogueListCursor::SetCurrent(DialogueListCursorView *this, void *item)
 {
-  _DWORD *result; // eax
-  int v3; // edx
+  DialogueListNodeView *result; // eax
+  struct DialogueListNodeView *next; // edx
 
-  result = this;
-  if ( this )
+  result = (DialogueListNodeView *)this; /*0x6b74f2*/
+  if ( this ) /*0x6b74f4*/
   {
-    do
+    do /*0x6b7500*/
     {
-      v3 = result[1];
-      if ( !v3 && !*result )
-        break;
-      if ( a2 == *result )
+      next = result->next; /*0x6b7500*/
+      if ( !next && !result->item ) /*0x6b7507*/
+        break; /*0x6b7507*/
+      if ( item == result->item ) /*0x6b750d*/
       {
-        *(this + 2) = result;
-        return result;
+        this->currentNode = result; /*0x6b7519*/
+        return result; /*0x6b7519*/
       }
-      result = (_DWORD *)result[1];
+      result = result->next; /*0x6b750f*/
     }
-    while ( v3 );
+    while ( next ); /*0x6b7500*/
   }
-  return result;
+  return result; /*0x6b7516*/
 }

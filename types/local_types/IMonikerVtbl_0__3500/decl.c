@@ -1,1 +1,1 @@
-IMonikerVtbl_0
+typedef IMonikerVtbl IMonikerVtbl_0;

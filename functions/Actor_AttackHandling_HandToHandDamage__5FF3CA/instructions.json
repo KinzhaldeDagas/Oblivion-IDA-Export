@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x5FF3E3",
-    "line": "call    Actor_GetFatigueFraction",
+    "line": "call    Actor_GetFatigueFraction; SmartAI v0.3 evidence: current fatigue / calculated base fatigue; returns 1.0 when base is zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x5FF44D",
-    "line": "call    Calc_PowerAttackBonus",
+    "line": "call    Calc_PowerAttackBonus; Sidecar decode: Calc_PowerAttackBonus derives mastery from skill and gates standing/sidestep/backward/forward AttackPower groups. BladeSkillsRestored substitutes only skill level after consuming the exact 0x5FF4A2 -> 0x5FF4E6 per-thread token; unmatched or overflowed contexts use native skill.",
     "mnemonic": "call",
     "size": 5
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5FF45F",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },

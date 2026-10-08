@@ -1,1 +1,1 @@
-hkAvoidBox
+struct hkAvoidBox;

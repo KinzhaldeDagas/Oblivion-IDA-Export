@@ -1,1 +1,1 @@
-ORPCTHAT
+typedef tagORPCTHAT ORPCTHAT;

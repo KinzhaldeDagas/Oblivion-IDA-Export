@@ -1,1 +1,1 @@
-threadmbcinfo
+typedef threadmbcinfostruct threadmbcinfo;

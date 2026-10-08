@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7A0B00",
-    "line": "push    esi",
+    "line": "push    esi; stdcall cleanup thunk for one st_vector<SFrondGuide> element; used by exception unwind in the outer guide-LOD vector helpers.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0B01",
-    "line": "mov     esi, [esp+4+arg_0]",
+    "line": "mov     esi, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -31,7 +31,7 @@
   },
   {
     "ea": "0x7A0B0C",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,19 +55,19 @@
   },
   {
     "ea": "0x7A0B15",
-    "line": "push    edx",
+    "line": "push    edx; last",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0B16",
-    "line": "push    eax",
+    "line": "push    eax; first",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7A0B17",
-    "line": "call    sub_79E150",
+    "line": "call    OB_SFrondGuide_DestroyRange_010201A0; Destroys every compact SFrondGuide in [first,last), freeing each embedded SFrondVertex vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x7A0B20",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

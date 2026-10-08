@@ -10,7 +10,7 @@ int __userpurge TESLeveledList_SimpleCalcLeveledForm_::SetReturnValues@<eax>(
         _DWORD *a9,
         _WORD *a10)
 {
-  *a9 = a2;
-  *a10 = a1;
+  *a9 = a2; /*0x46cdc5*/
+  *a10 = a1; /*0x46cdc7*/
   return TESLeveledList_SimpleCalcLeveledForm_::Done_(a3, a4, a5, a6);
 }

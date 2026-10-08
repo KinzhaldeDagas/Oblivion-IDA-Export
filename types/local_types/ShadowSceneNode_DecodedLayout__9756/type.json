@@ -1,0 +1,213 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "ShadowSceneNode_DecodedLayout",
+  "definition": "struct ShadowSceneNode_DecodedLayout\n{\nunsigned __int8 base_000[228];\nvoid *fullListVtable_E4;\nvoid *fullListHead_E8; ///< Head of the native full source-light list. Exterior grid activation populates this through per-reference ExtraLight registration, then walks it to reconcile receivers; it is not a loaded-static caster list.\nvoid *fullListTail_EC;\nunsigned int fullListCount_F0; ///< Count of native full source-light entries.\nvoid *activeListVtable_F4;\nvoid *activeListHead_F8; ///< Head of the native active/ranked shadow-light list; distinct from full source-light registration.\nvoid *activeListTail_FC;\nunsigned int activeListCount_100;\nvoid *activeIterationCursor_104;\nvoid *partitionAnchorA_108;\nvoid *partitionAnchorB_10C;\nvoid *persistentLightA_110;\nvoid *persistentLightB_114;\nvoid *lightLevelReference_118;\nunsigned int registrationIndex_11C;\nvoid *cubeRenderTarget_120;\nvoid *cubeCamera_124;\nunsigned int cubeFaceIndex_128;\nunsigned __int8 state_12C;\nunsigned __int8 reservedTail_12D[3];\n}\n",
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "base_000",
+      "offset_bits": 0,
+      "offset_bytes": 0,
+      "size_bits": 1824,
+      "type": "unsigned __int8[228]"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "fullListVtable_E4",
+      "offset_bits": 1824,
+      "offset_bytes": 228,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Head of the native full source-light list. Exterior grid activation populates this through per-reference ExtraLight registration, then walks it to reconcile receivers; it is not a loaded-static caster list.",
+      "name": "fullListHead_E8",
+      "offset_bits": 1856,
+      "offset_bytes": 232,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "fullListTail_EC",
+      "offset_bits": 1888,
+      "offset_bytes": 236,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Count of native full source-light entries.",
+      "name": "fullListCount_F0",
+      "offset_bits": 1920,
+      "offset_bytes": 240,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "activeListVtable_F4",
+      "offset_bits": 1952,
+      "offset_bytes": 244,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Head of the native active/ranked shadow-light list; distinct from full source-light registration.",
+      "name": "activeListHead_F8",
+      "offset_bits": 1984,
+      "offset_bytes": 248,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "activeListTail_FC",
+      "offset_bits": 2016,
+      "offset_bytes": 252,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "activeListCount_100",
+      "offset_bits": 2048,
+      "offset_bytes": 256,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "activeIterationCursor_104",
+      "offset_bits": 2080,
+      "offset_bytes": 260,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "partitionAnchorA_108",
+      "offset_bits": 2112,
+      "offset_bytes": 264,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "partitionAnchorB_10C",
+      "offset_bits": 2144,
+      "offset_bytes": 268,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "persistentLightA_110",
+      "offset_bits": 2176,
+      "offset_bytes": 272,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "persistentLightB_114",
+      "offset_bits": 2208,
+      "offset_bytes": 276,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "lightLevelReference_118",
+      "offset_bits": 2240,
+      "offset_bytes": 280,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "registrationIndex_11C",
+      "offset_bits": 2272,
+      "offset_bytes": 284,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cubeRenderTarget_120",
+      "offset_bits": 2304,
+      "offset_bytes": 288,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cubeCamera_124",
+      "offset_bits": 2336,
+      "offset_bytes": 292,
+      "size_bits": 32,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "cubeFaceIndex_128",
+      "offset_bits": 2368,
+      "offset_bytes": 296,
+      "size_bits": 32,
+      "type": "unsigned int"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "state_12C",
+      "offset_bits": 2400,
+      "offset_bytes": 300,
+      "size_bits": 8,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "reservedTail_12D",
+      "offset_bits": 2408,
+      "offset_bytes": 301,
+      "size_bits": 24,
+      "type": "unsigned __int8[3]"
+    }
+  ],
+  "name": "ShadowSceneNode_DecodedLayout",
+  "ordinal": 9756,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 304
+}

@@ -1,1 +1,1 @@
-HavokFileStreambufReader
+struct HavokFileStreambufReader;

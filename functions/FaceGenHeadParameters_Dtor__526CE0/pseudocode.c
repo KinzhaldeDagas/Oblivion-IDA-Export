@@ -1,27 +1,28 @@
-void __thiscall FaceGenHeadParameters_Dtor(unsigned int *this)
+// Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.
+void __thiscall FaceGenRenderState_Destruct(FaceGenRenderState *this)
 {
-  int *v2; // eax
+  char *data; // eax
   unsigned int v3; // edi
-  unsigned int v4; // [esp-Ch] [ebp-28h]
-  unsigned int v5; // [esp-8h] [ebp-24h]
-  unsigned int v6; // [esp-4h] [ebp-20h]
+  void **v4; // [esp-Ch] [ebp-28h]
+  void **v5; // [esp-8h] [ebp-24h]
+  void **v6; // [esp-4h] [ebp-20h]
 
-  v2 = (int *)*(this + 0x2A);
-  *(this + 0x29) = (unsigned int)&NiTArray<NiPointer<NiTexture>>::`vftable';
-  if ( v2 )
+  data = (char *)this->textureOverrides.data; /*0x526d09*/
+  this->textureOverrides.vtable = &NiTArray<NiPointer<NiTexture>>::`vftable'; /*0x526d19*/
+  if ( data ) /*0x526d23*/
   {
-    v3 = (unsigned int)(v2 + 0xFFFFFFFF);
-    _LN21(v2, 4u, v2[0xFFFFFFFF], (void (__thiscall *)(void *))sub_7016A0);
-    FormHeapFree(v3);
+    v3 = (unsigned int)(data + 0xFFFFFFFC); /*0x526d28*/
+    _LN21(data, 4u, *((_DWORD *)data + 0xFFFFFFFF), (void (__thiscall *)(void *))NiPointerSlot_Release); /*0x526d34*/
+    FormHeapFree(v3); /*0x526d3a*/
   }
-  v6 = *(this + 0x26);
-  *(this + 0x25) = (unsigned int)&NiTArray<char const *>::`vftable';
-  FormHeapFree(v6);
-  v5 = *(this + 0x22);
-  *(this + 0x21) = (unsigned int)&NiTArray<TESTexture *>::`vftable';
-  FormHeapFree(v5);
-  v4 = *(this + 0x1E);
-  *(this + 0x1D) = (unsigned int)&NiTArray<TESModel *>::`vftable';
-  FormHeapFree(v4);
-  _LN21(this, 0x18u, 4, (void (__thiscall *)(void *))sub_43ACE0);
+  v6 = this->nodeNames.data; /*0x526d48*/
+  this->nodeNames.vtable = &NiTArray<char const *>::`vftable'; /*0x526d49*/
+  FormHeapFree((unsigned int)v6); /*0x526d53*/
+  v5 = this->headTextures.data; /*0x526d5e*/
+  this->headTextures.vtable = &NiTArray<TESTexture *>::`vftable'; /*0x526d5f*/
+  FormHeapFree((unsigned int)v5); /*0x526d69*/
+  v4 = this->headModels.data; /*0x526d71*/
+  this->headModels.vtable = &NiTArray<TESModel *>::`vftable'; /*0x526d72*/
+  FormHeapFree((unsigned int)v4); /*0x526d79*/
+  _LN21((char *)this, 0x18u, 4, (void (__thiscall *)(void *))FaceGenMatrix_Destruct); /*0x526d93*/
 }

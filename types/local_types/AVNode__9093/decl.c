@@ -1,1 +1,5 @@
-AVNode
+struct AVNode
+{
+AVEntry *entry;
+AVNode *next;
+};

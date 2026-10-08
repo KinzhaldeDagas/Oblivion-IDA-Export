@@ -14,7 +14,6 @@
 0x93D9F5: xor     edi, edi
 0x93D9F7: fstp    [esp+130h+var_118]
 0x93D9FB: jmp     short loc_93DA00
-0x93D9FD: align 10h
 0x93DA00: fld     [ebp+arg_14]
 0x93DA03: fcomp   dword ptr [esi]
 0x93DA05: fnstsw  ax

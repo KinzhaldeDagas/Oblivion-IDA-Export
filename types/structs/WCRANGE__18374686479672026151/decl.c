@@ -1,1 +1,1 @@
-WCRANGE
+typedef tagWCRANGE WCRANGE;

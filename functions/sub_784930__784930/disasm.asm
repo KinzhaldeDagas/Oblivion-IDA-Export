@@ -1,19 +1,19 @@
-0x784930: push    ecx
+0x784930: push    ecx; Oblivion-authoritative lower_bound for the spline cache's 28-byte small-string key. Walks the red-black tree from head->parent/root and returns the first node whose key is not less than the requested key, or head.
 0x784931: mov     eax, [ecx+4]
 0x784934: push    esi
 0x784935: mov     esi, [eax+4]
 0x784938: cmp     byte ptr [esi+2Dh], 0
 0x78493C: mov     [esp+8+var_4], eax
 0x784940: jnz     short loc_7849B7
-0x784942: mov     eax, [esp+8+arg_0]
+0x784942: mov     eax, [esp+8+key]
 0x784946: mov     ecx, [eax+18h]
 0x784949: push    ebx
 0x78494A: mov     ebx, [eax+14h]
 0x78494D: push    ebp
 0x78494E: push    edi
-0x78494F: mov     [esp+14h+arg_0], ecx
+0x78494F: mov     [esp+14h+key], ecx
 0x784953: lea     ebp, [eax+4]
-0x784956: cmp     [esp+14h+arg_0], 10h
+0x784956: cmp     [esp+14h+key], 10h
 0x78495B: jb      short loc_784962
 0x78495D: mov     edx, [ebp+0]
 0x784960: jmp     short loc_784964

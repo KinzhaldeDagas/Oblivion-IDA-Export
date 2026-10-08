@@ -1,4 +1,4 @@
-0x54F7A0: push    esi
+0x54F7A0: push    esi; Bounds-checked float-vector element access. Returns begin + index*4; begin is vector+4 (FaceGenMatrix+0x0C).
 0x54F7A1: mov     esi, ecx
 0x54F7A3: mov     ecx, [esi+4]
 0x54F7A6: test    ecx, ecx

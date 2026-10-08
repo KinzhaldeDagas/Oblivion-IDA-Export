@@ -1,19 +1,32 @@
 {
-  "callees_count": 35,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 19,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_7868F0",
+  "chunks": [
+    [
+      "0x7868F0",
+      "0x786AEC"
+    ]
+  ],
+  "chunks_sha256": "be2b5065318888711093c345eddc5197b925db2f04cf88bece73381fc6608c67",
+  "comment_regular": "Hinted unique insertion for the spline-cache map. Validates the {owner,node} hint and adjacent key ordering; inserts directly when legal, otherwise falls back to the ordinary unique-insert search.",
+  "comment_repeatable": "Hinted unique insertion for the spline-cache map. Validates the {owner,node} hint and adjacent key ordering; inserts directly when legal, otherwise falls back to the ordinary unique-insert search.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "OB_stBezierSplineCacheMap_InsertHint_010201A0",
   "end_ea": "0x786AEC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7868F0",
+  "name": "OB_stBezierSplineCacheMap_InsertHint_010201A0",
   "segment": ".text",
   "sha256": "be2b5065318888711093c345eddc5197b925db2f04cf88bece73381fc6608c67",
   "size": 508,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7868F0",
-  "type": "int __thiscall(int this, int, int *, int, _DWORD *)",
-  "xrefs_from_count": 237,
+  "total_chunk_size": 508,
+  "type": "OB_stBezierSplineCacheIterator_010201A0 *__thiscall(OB_stBezierSplineCacheMap_010201A0 *this, OB_stBezierSplineCacheIterator_010201A0 *result, OB_stBezierSplineCacheMap_010201A0 *hintOwner, OB_stBezierSplineCacheNode_010201A0 *hintNode, const OB_stBezierSplineCachePair_010201A0 *value)",
+  "xrefs_from_count": 241,
   "xrefs_to_count": 1
 }

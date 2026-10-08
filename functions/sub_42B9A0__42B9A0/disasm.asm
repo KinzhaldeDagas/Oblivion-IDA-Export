@@ -1,4 +1,4 @@
-0x42B9A0: mov     edx, [ecx]
+0x42B9A0: mov     edx, [ecx]; XTEL writer: if linkedDoor is non-null, writes exact 28 bytes as linked door FormID plus six floats; if null, emits nothing.
 0x42B9A2: sub     esp, 1Ch
 0x42B9A5: test    edx, edx
 0x42B9A7: jz      short loc_42BA0A
@@ -28,7 +28,7 @@
 0x42B9F5: push    4C455458h; int
 0x42B9FA: mov     [esp+28h+var_8], edx
 0x42B9FE: mov     [esp+28h+var_4], eax
-0x42BA02: call    TESForm_PutFormRecordChunkData
+0x42BA02: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x42BA07: add     esp, 0Ch
 0x42BA0A: add     esp, 1Ch
 0x42BA0D: retn

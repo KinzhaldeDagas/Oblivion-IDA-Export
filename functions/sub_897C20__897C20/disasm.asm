@@ -47,7 +47,7 @@
 0x897CDE: add     esp, 4
 0x897CE1: mov     al, [esi+0Ch]
 0x897CE4: shr     al, 4
-0x897CE7: cmp     byte ptr [esp+2Ch+arg_0], 0
+0x897CE7: cmp     byte ptr [esp+2Ch+slot], 0
 0x897CEC: jz      loc_89805C
 0x897CF2: test    al, 1
 0x897CF4: jnz     loc_8981F0
@@ -67,7 +67,7 @@
 0x897D1D: cmp     al, 11h
 0x897D1F: jz      loc_8981F0
 0x897D25: mov     ecx, esi
-0x897D27: call    sub_452A60
+0x897D27: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x897D2C: mov     esi, eax
 0x897D2E: cmp     esi, edi
 0x897D30: jz      short loc_897D41
@@ -82,7 +82,7 @@
 0x897D44: push    0DCh ; 'Ü'; Size
 0x897D49: call    FormHeapAlloc
 0x897D4E: add     esp, 4
-0x897D51: mov     [esp+2Ch+arg_0], eax
+0x897D51: mov     [esp+2Ch+slot], eax
 0x897D55: test    eax, eax
 0x897D57: mov     [esp+2Ch+var_4], 0
 0x897D5F: jz      short loc_897D6E
@@ -100,17 +100,17 @@
 0x897D86: jz      short loc_897DCD
 0x897D88: fld     dword ptr [edi+94h]
 0x897D8E: push    1
-0x897D90: fstp    [esp+30h+arg_0]
+0x897D90: fstp    [esp+30h+slot]
 0x897D94: push    esi
-0x897D95: fld     [esp+34h+arg_0]
+0x897D95: fld     [esp+34h+slot]
 0x897D99: mov     ecx, edi
 0x897D9B: fld1
 0x897D9D: fdivrp  st(1), st
-0x897D9F: fstp    [esp+34h+arg_0]
-0x897DA3: fld     [esp+34h+arg_0]
+0x897D9F: fstp    [esp+34h+slot]
+0x897DA3: fld     [esp+34h+slot]
 0x897DA7: fabs
-0x897DA9: fstp    [esp+34h+arg_0]
-0x897DAD: fld     [esp+34h+arg_0]
+0x897DA9: fstp    [esp+34h+slot]
+0x897DAD: fld     [esp+34h+slot]
 0x897DB1: fstp    dword ptr [esi+60h]
 0x897DB4: mov     edx, [edi]
 0x897DB6: mov     eax, [edx+84h]
@@ -120,7 +120,7 @@
 0x897DC2: push    ecx
 0x897DC3: mov     ecx, esi; this
 0x897DC5: fstp    [esp+34h+a2]; a2
-0x897DC8: call    NiAVObject_UpdateNiAVObject
+0x897DC8: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x897DCD: mov     edx, [ebp+0]
 0x897DD0: mov     eax, [edx+88h]
 0x897DD6: push    esi
@@ -143,7 +143,7 @@
 0x897E10: push    1Ch; Size
 0x897E12: call    FormHeapAlloc
 0x897E17: add     esp, 4
-0x897E1A: mov     [esp+2Ch+arg_0], eax
+0x897E1A: mov     [esp+2Ch+slot], eax
 0x897E1E: test    eax, eax
 0x897E20: mov     byte ptr [esp+2Ch+var_4], bl
 0x897E24: jz      short loc_897E2F
@@ -164,7 +164,7 @@
 0x897E60: push    1Ch; Size
 0x897E62: call    FormHeapAlloc
 0x897E67: add     esp, 4
-0x897E6A: mov     [esp+2Ch+arg_0], eax
+0x897E6A: mov     [esp+2Ch+slot], eax
 0x897E6E: test    eax, eax
 0x897E70: mov     byte ptr [esp+2Ch+var_4], 3
 0x897E75: jz      short loc_897E80
@@ -185,7 +185,7 @@
 0x897EAB: mov     esi, 1
 0x897EB0: push    ebx
 0x897EB1: mov     ecx, ebp
-0x897EB3: call    NiNode_GetNiPropertyByID
+0x897EB3: call    NiNode_GetNiPropertyByID;
 0x897EB8: test    eax, eax
 0x897EBA: jnz     loc_897F7F
 0x897EC0: cmp     ds:0BA7B8Ch, eax
@@ -193,7 +193,7 @@
 0x897ECC: push    5Ch ; '\'; Size
 0x897ECE: call    FormHeapAlloc
 0x897ED3: add     esp, 4
-0x897ED6: mov     [esp+2Ch+arg_0], eax
+0x897ED6: mov     [esp+2Ch+slot], eax
 0x897EDA: test    eax, eax
 0x897EDC: mov     byte ptr [esp+2Ch+var_4], 4
 0x897EE1: jz      short loc_897EEC
@@ -235,13 +235,13 @@
 0x897F72: mov     eax, ds:0BA7B8Ch
 0x897F77: push    eax; a2
 0x897F78: mov     ecx, ebp; this
-0x897F7A: call    sub_405680
+0x897F7A: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x897F7F: cmp     dword ptr ds:0BA7B88h, 0
 0x897F86: jnz     short loc_897FC3
 0x897F88: push    1Ch; Size
 0x897F8A: call    FormHeapAlloc
 0x897F8F: add     esp, 4
-0x897F92: mov     [esp+2Ch+arg_0], eax
+0x897F92: mov     [esp+2Ch+slot], eax
 0x897F96: test    eax, eax
 0x897F98: mov     byte ptr [esp+2Ch+var_4], 5
 0x897F9D: jz      short loc_897FA8
@@ -258,17 +258,17 @@
 0x897FC3: mov     ecx, ds:0BA7B94h
 0x897FC9: push    ecx; a2
 0x897FCA: mov     ecx, ebp; this
-0x897FCC: call    sub_405680
+0x897FCC: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x897FD1: mov     edx, ds:0BA7B90h
 0x897FD7: push    edx; a2
 0x897FD8: mov     ecx, ebp; this
-0x897FDA: call    sub_405680
+0x897FDA: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x897FDF: mov     eax, ds:0BA7B88h
 0x897FE4: push    eax; a2
 0x897FE5: mov     ecx, ebp; this
-0x897FE7: call    sub_405680
+0x897FE7: call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.
 0x897FEC: mov     ecx, ebp; this
-0x897FEE: call    NiAVObject_InitializePropertyState
+0x897FEE: call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.
 0x897FF3: mov     ecx, ebp
 0x897FF5: call    NiNode_UpdateDynamicEffectState
 0x897FFA: fldz
@@ -276,12 +276,12 @@
 0x897FFE: push    ecx
 0x897FFF: mov     ecx, ebp; this
 0x898001: fstp    [esp+34h+a2]; a2
-0x898004: call    NiAVObject_UpdateNiAVObject
+0x898004: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x898009: mov     eax, ds:0BA7A84h
 0x89800E: test    eax, eax
 0x898010: jz      short loc_89803D
 0x898012: push    ebp; _DWORD
-0x898013: call    eax ; dword_BA7A84
+0x898013: call    eax ; unk_BA7A84
 0x898015: add     esp, 4
 0x898018: jmp     short loc_89803D
 0x89801A: test    edi, edi
@@ -291,22 +291,22 @@
 0x898022: mov     edx, [edi]
 0x898024: mov     edx, [edx+88h]
 0x89802A: push    esi
-0x89802B: lea     eax, [esp+30h+arg_0]
+0x89802B: lea     eax, [esp+30h+slot]
 0x89802F: push    eax
 0x898030: mov     ecx, edi
 0x898032: call    edx
-0x898034: lea     ecx, [esp+2Ch+arg_0]; this
-0x898038: call    sub_7016A0
+0x898034: lea     ecx, [esp+2Ch+slot]; slot
+0x898038: call    NiPointerSlot_Release
 0x89803D: mov     eax, [esp+2Ch+var_18]
 0x898041: or      word ptr [eax+0Ch], 10h
-0x898046: lea     ecx, [esp+2Ch+var_14]; this
+0x898046: lea     ecx, [esp+2Ch+var_14]; slot
 0x89804A: mov     [esp+2Ch+var_4], 0FFFFFFFFh
-0x898052: call    sub_7016A0
+0x898052: call    NiPointerSlot_Release
 0x898057: jmp     loc_8981F0
 0x89805C: test    al, 1
 0x89805E: jz      loc_8981F0
 0x898064: mov     ecx, esi
-0x898066: call    sub_452A60
+0x898066: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x89806B: mov     esi, eax
 0x89806D: cmp     esi, edi
 0x89806F: jz      short loc_898080
@@ -324,15 +324,15 @@
 0x89808D: movzx   eax, word ptr [ebp+0B6h]
 0x898094: cmp     eax, edi
 0x898096: mov     [esp+2Ch+var_10], eax
-0x89809A: mov     [esp+2Ch+arg_0], edi
+0x89809A: mov     [esp+2Ch+slot], edi
 0x89809E: jbe     loc_8981E6
 0x8980A4: mov     edi, ds:0A2807Ch
 0x8980AA: xor     ebx, ebx
 0x8980AC: movzx   ecx, word ptr [ebp+0B6h]
-0x8980B3: cmp     ecx, [esp+2Ch+arg_0]
+0x8980B3: cmp     ecx, [esp+2Ch+slot]
 0x8980B7: jbe     loc_8981D1
 0x8980BD: mov     edx, [ebp+0B0h]
-0x8980C3: mov     eax, [esp+2Ch+arg_0]
+0x8980C3: mov     eax, [esp+2Ch+slot]
 0x8980C7: mov     ecx, [edx+eax*4]
 0x8980CA: cmp     ecx, ebx
 0x8980CC: jz      loc_8981D1
@@ -435,10 +435,10 @@
 0x8981C7: mov     ecx, esi
 0x8981C9: call    edx
 0x8981CB: mov     ds:0BA7B88h, ebx
-0x8981D1: mov     eax, [esp+2Ch+arg_0]
+0x8981D1: mov     eax, [esp+2Ch+slot]
 0x8981D5: add     eax, 1
 0x8981D8: cmp     eax, [esp+2Ch+var_10]
-0x8981DC: mov     [esp+2Ch+arg_0], eax
+0x8981DC: mov     [esp+2Ch+slot], eax
 0x8981E0: jb      loc_8980AC
 0x8981E6: mov     eax, [esp+2Ch+var_18]
 0x8981EA: and     word ptr [eax+0Ch], 0FFEFh
@@ -451,3 +451,37 @@
 0x8981FF: pop     ebx
 0x898200: add     esp, 18h
 0x898203: retn    4
+0x9D67A0: mov     eax, [ebp+4]
+0x9D67A3: push    eax
+0x9D67A4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D67A9: pop     ecx
+0x9D67AA: retn
+0x9D67AB: lea     ecx, [ebp-14h]; slot
+0x9D67AE: jmp     NiPointerSlot_Release
+0x9D67B3: mov     eax, [ebp+4]
+0x9D67B6: push    eax
+0x9D67B7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D67BC: pop     ecx
+0x9D67BD: retn
+0x9D67BE: mov     eax, [ebp+4]
+0x9D67C1: push    eax
+0x9D67C2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D67C7: pop     ecx
+0x9D67C8: retn
+0x9D67C9: mov     eax, [ebp+4]
+0x9D67CC: push    eax
+0x9D67CD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D67D2: pop     ecx
+0x9D67D3: retn
+0x9D67D4: mov     eax, [ebp+4]
+0x9D67D7: push    eax
+0x9D67D8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9D67DD: pop     ecx
+0x9D67DE: retn
+0x9D67DF: mov     edx, [esp+arg_4]
+0x9D67E3: lea     eax, [edx-1Ch]
+0x9D67E6: mov     ecx, [edx-20h]
+0x9D67E9: xor     ecx, eax
+0x9D67EB: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D67F0: mov     eax, offset stru_AFE588
+0x9D67F5: jmp     ___CxxFrameHandler3

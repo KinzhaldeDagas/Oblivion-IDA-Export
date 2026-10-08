@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7693E0",
-    "line": "sub     esp, 4Ch",
+    "line": "sub     esp, 4Ch; Oblivion NiDX9Renderer triangle-geometry submission boundary. Copies world transform/bound, resolves hardware skinning, and routes to the native skinned or non-skinned shader/pass loop that issues the final DX9 draw.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x76944D",
-    "line": "call    sub_768890",
+    "line": "call    sub_768890; MoonSugarEffect decode: hardware/software skinning gate. Considers BuffData, skinData, hardware partition data, renderer flags, mixed vertex processing, and shader interface capability before choosing skinned path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x7694A2",
-    "line": "call    NiGeometryGroup__AddGeometryDataToGroup",
+    "line": "call    NiGeometryGroup__AddGeometryDataToGroup; MoonSugarEffect decode: NiGeometryGroup::AddGeometryDataToGroup. For hardware-skinned geometry, adds each partition object when the partition is compatible; for non-skinned geometry it only calls AddObject when BuffData is missing. Existing BuffData returns false, so this is packing/registration ownership rather than draw ownership.",
     "mnemonic": "call",
     "size": 5
   },
@@ -445,7 +445,7 @@
   },
   {
     "ea": "0x7694BD",
-    "line": "call    sub_767520",
+    "line": "call    NiDX9Renderer_RenderGeometrySkinned; Oblivion hardware-skinned geometry submission. After preflight and vtable +0x2C pass setup, it processes skin partitions and issues DrawIndexedPrimitive only when vtable +0x48 BeginPassLoop returns nonzero. A zero-pass invalid Lighting30 selector skips all pass and partition draws but still calls vtable +0x44 shader-finish cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x7694D7",
-    "line": "call    sub_7672F0",
+    "line": "call    NiDX9Renderer_RenderGeometryNonSkinned; MoonSugarEffect decode/implementation: direct RenderTriGeometries non-skinned call to sub_7672F0. Plugin patches this 5-byte call with a wrapper that preserves thiscall+retn18 behavior, copies arg4 NiTransform, applies subtle active Moon Sugar rigid object wobble, skips skinned/null/exact NiScreenElements, then calls original 0x007672F0.",
     "mnemonic": "call",
     "size": 5
   },

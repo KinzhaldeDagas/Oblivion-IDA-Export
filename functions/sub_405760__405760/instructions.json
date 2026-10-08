@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x405760",
-    "line": "push    ecx",
+    "line": "push    ecx; Return a strong reference to NiGeometry+0xAC NiPropertyState; this is property state, not a RenderPass bundle.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x405761",
-    "line": "mov     eax, [ecx+0ACh]",
+    "line": "mov     eax, [ecx+0ACh]; NiGeometry+0xAC is its strong-owned NiPropertyState pointer.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x40576A",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x405776",
-    "line": "mov     [esi], eax",
+    "line": "mov     [esi], eax; Publish the NiPropertyState pointer through the output NiPointer before incrementing its reference count.",
     "mnemonic": "mov",
     "size": 2
   },

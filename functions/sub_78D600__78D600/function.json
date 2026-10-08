@@ -1,19 +1,36 @@
 {
-  "callees_count": 7,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_78D600",
+  "chunks": [
+    [
+      "0x78D600",
+      "0x78D692"
+    ],
+    [
+      "0x9CB940",
+      "0x9CB966"
+    ]
+  ],
+  "chunks_sha256": "58768d258c10fcd7435e51af8d5f4380f7514b03b5c87861aa2f07f1fda8706b",
+  "comment_regular": "CTreeFileAccess-style memory reader constructor. Copies supplied SPT bytes into an owned byte vector; cursor starts at byte offset 0.",
+  "comment_repeatable": "CTreeFileAccess-style memory reader constructor. Copies supplied SPT bytes into an owned byte vector; cursor starts at byte offset 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "OB_CTreeFileAccess_ctor_copy_010201A0",
   "end_ea": "0x78D692",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_78D600",
+  "name": "OB_CTreeFileAccess_ctor_copy_010201A0",
   "segment": ".text",
   "sha256": "c87c2686e79764fca64c000a77b36cf8180e4f9550251c9756348892e5f5032c",
   "size": 146,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x78D600",
-  "type": "char **__thiscall(char **this, int, int)",
-  "xrefs_from_count": 61,
+  "total_chunk_size": 184,
+  "type": "OB_CTreeFileAccess_010201A0 *__thiscall(OB_CTreeFileAccess_010201A0 *this, const unsigned __int8 *buffer, int bufferSize)",
+  "xrefs_from_count": 73,
   "xrefs_to_count": 1
 }

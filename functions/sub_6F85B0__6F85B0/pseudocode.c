@@ -1,10 +1,13 @@
-std::exception *__thiscall sub_6F85B0(std::exception *this, struct std::exception *a2)
+// Oblivion runtime_error copy constructor: copies the std::exception base, installs runtime_error vftable, initializes the embedded 28-byte SSO string, and copies the source message.
+OB_std_runtime_error_010201A0 *__thiscall OB_std_runtime_error_CopyCtor_010201A0(
+        OB_std_runtime_error_010201A0 *this,
+        const OB_std_runtime_error_010201A0 *source)
 {
-  std::exception::exception(this, a2);
-  *(_DWORD *)this = &std::runtime_error::`vftable';
-  *((_DWORD *)this + 9) = 0xF;
-  *((_DWORD *)this + 8) = 0;
-  *((_BYTE *)this + 0x10) = 0;
-  sub_414420((int)this + 0xC, (_DWORD *)a2 + 3, 0, 0xFFFFFFFF);
-  return this;
+  std::exception::exception((std::exception *)this, (const struct std::exception *)source); /*0x6f85de*/
+  *(_DWORD *)this->exceptionBase = &std::runtime_error::`vftable'; /*0x6f85ea*/
+  this->message.capacity = 0xF; /*0x6f85f4*/
+  this->message.size = 0; /*0x6f85fb*/
+  this->message.storage.inlineData[0] = 0; /*0x6f8603*/
+  OB_stString28_AssignSubstring_010201A0(&this->message, &source->message, 0, 0xFFFFFFFF); /*0x6f8606*/
+  return this; /*0x6f860d*/
 }

@@ -1,4 +1,4 @@
-void *sub_6D1B80()
+NiRTTI *sub_6D1B80()
 {
-  return &unk_B3CE84;
+  return &stru_B3CE84; /*0x6d1b85*/
 }

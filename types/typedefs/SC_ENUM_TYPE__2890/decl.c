@@ -1,1 +1,4 @@
-SC_ENUM_TYPE
+enum SC_ENUM_TYPE : __int32
+{
+SC_ENUM_PROCESS_INFO = 0x0,
+};

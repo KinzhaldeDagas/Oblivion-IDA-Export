@@ -29,7 +29,7 @@
 0x511AF5: mov     [esp+40h+var_C], ebx
 0x511AF9: mov     [esp+40h+var_8], ebx
 0x511AFD: mov     byte ptr [esp+40h+var_4], bl
-0x511B01: call    Script_ExtractArgs
+0x511B01: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x511B06: add     esp, 28h
 0x511B09: test    al, al
 0x511B0B: jnz     short loc_511B13

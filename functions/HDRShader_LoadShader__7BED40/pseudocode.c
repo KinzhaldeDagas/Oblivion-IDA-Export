@@ -54,123 +54,123 @@ NiD3DShaderProgram *__thiscall HDRShader::LoadShader(HDRShader *this)
   char v53[260]; // [esp+4D8h] [ebp-20Ch] BYREF
   char FileName[260]; // [esp+5DCh] [ebp-108h] BYREF
 
-  FullPath = "imagespace\\2x\\v\\HDRbase.v.hlsl";
-  memset(v52, 0, 0x48);
-  v52[0x12] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl";
-  memset(&v52[0x13], 0, 0x48);
-  v52[0x25] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl";
-  memset(&v52[0x26], 0, 0x48);
-  v52[0x38] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl";
-  memset(&v52[0x39], 0, 0x48);
-  v52[0x4B] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl";
-  v52[0x4C] = (int)"TEX2";
-  memset(&v52[0x4D], 0, 0x44);
-  v52[0x5E] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl";
-  memset(&v52[0x5F], 0, 0x48);
-  v52[0x71] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl";
-  memset(&v52[0x72], 0, 0x48);
-  v52[0x84] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl";
-  memset(&v52[0x85], 0, 0x48);
-  v9 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v10 = (int)"TEXTAP";
-  v11 = (NiD3DShaderProgram **)&a16;
-  v12 = 0;
-  _memset(v13, 0, sizeof(v13));
-  v14 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v15 = "TEXTAP";
-  v16 = "9";
-  v17 = 0;
-  _memset(v18, 0, sizeof(v18));
-  v19 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v20 = "TEXTAP";
-  v21 = &a15;
-  v22 = 0;
-  _memset(v23, 0, sizeof(v23));
-  v24 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v25 = 0;
-  _memset(v26, 0, sizeof(v26));
-  v27 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v28 = "SHBLEND";
-  v29 = 0;
-  v30 = "TONEMAP";
-  v31 = 0;
-  v32 = "SWFILTER";
-  v33 = 0;
-  v34 = 0;
-  _memset(v35, 0, sizeof(v35));
-  v36 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v37 = "BRIGHTFILTER";
-  v38 = 0;
-  v39 = 0;
-  _memset(v40, 0, sizeof(v40));
-  v41 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v42 = "ADAPT";
-  v43 = 0;
-  v44 = 0;
-  _memset(v45, 0, sizeof(v45));
-  v46 = "imagespace\\2x\\p\\HDRblur.p.hlsl";
-  v47 = "LUMCLAMP";
-  v48 = 0;
-  v49 = 0;
-  _memset(v50, 0, sizeof(v50));
-  for ( i = 0; i < 8; ++i )
+  FullPath = "imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7bed6c*/
+  memset(v52, 0, 0x48); /*0x7bed73*/
+  v52[0x12] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7bed8a*/
+  memset(&v52[0x13], 0, 0x48); /*0x7bed91*/
+  v52[0x25] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7beda8*/
+  memset(&v52[0x26], 0, 0x48); /*0x7bedaf*/
+  v52[0x38] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7bedc6*/
+  memset(&v52[0x39], 0, 0x48); /*0x7bedcd*/
+  v52[0x4B] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7bede4*/
+  v52[0x4C] = (int)"TEX2"; /*0x7bedeb*/
+  memset(&v52[0x4D], 0, 0x44); /*0x7bedf6*/
+  v52[0x5E] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7bee14*/
+  memset(&v52[0x5F], 0, 0x48); /*0x7bee1b*/
+  v52[0x71] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7bee35*/
+  memset(&v52[0x72], 0, 0x48); /*0x7bee3c*/
+  v52[0x84] = (int)"imagespace\\2x\\v\\HDRbase.v.hlsl"; /*0x7bee53*/
+  memset(&v52[0x85], 0, 0x48); /*0x7bee5a*/
+  v9 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7bee78*/
+  v10 = (int)"TEXTAP"; /*0x7bee7c*/
+  v11 = (NiD3DShaderProgram **)&a16; /*0x7bee80*/
+  v12 = 0; /*0x7bee88*/
+  _memset((int)v13, 0, sizeof(v13)); /*0x7bee8c*/
+  v14 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7bee91*/
+  v15 = "TEXTAP"; /*0x7bee98*/
+  v16 = "9"; /*0x7bee9f*/
+  v17 = 0; /*0x7beeaa*/
+  _memset((int)v18, 0, sizeof(v18)); /*0x7beebc*/
+  v19 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7beecc*/
+  v20 = "TEXTAP"; /*0x7beed3*/
+  v21 = &a15; /*0x7beeda*/
+  v22 = 0; /*0x7beee5*/
+  _memset((int)v23, 0, sizeof(v23)); /*0x7beeec*/
+  v24 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7beefc*/
+  v25 = 0; /*0x7bef03*/
+  _memset((int)v26, 0, sizeof(v26)); /*0x7bef0a*/
+  v27 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7bef1d*/
+  v28 = "SHBLEND"; /*0x7bef24*/
+  v29 = 0; /*0x7bef2f*/
+  v30 = "TONEMAP"; /*0x7bef36*/
+  v31 = 0; /*0x7bef41*/
+  v32 = "SWFILTER"; /*0x7bef48*/
+  v33 = 0; /*0x7bef53*/
+  v34 = 0; /*0x7bef5a*/
+  _memset((int)v35, 0, sizeof(v35)); /*0x7bef61*/
+  v36 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7bef71*/
+  v37 = "BRIGHTFILTER"; /*0x7bef78*/
+  v38 = 0; /*0x7bef83*/
+  v39 = 0; /*0x7bef8a*/
+  _memset((int)v40, 0, sizeof(v40)); /*0x7bef91*/
+  v41 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7befa1*/
+  v42 = "ADAPT"; /*0x7befa8*/
+  v43 = 0; /*0x7befb3*/
+  v44 = 0; /*0x7befba*/
+  _memset((int)v45, 0, sizeof(v45)); /*0x7befc1*/
+  v46 = "imagespace\\2x\\p\\HDRblur.p.hlsl"; /*0x7befd1*/
+  v47 = "LUMCLAMP"; /*0x7befd8*/
+  v48 = 0; /*0x7befe3*/
+  v49 = 0; /*0x7befea*/
+  _memset((int)v50, 0, sizeof(v50)); /*0x7beff1*/
+  for ( i = 0; i < 8; ++i ) /*0x7beff9*/
   {
-    v3 = 0x13 * i;
-    result = (NiD3DShaderProgram *)v52[0x13 * i - 1];
-    if ( result )
+    v3 = 0x13 * i; /*0x7bf002*/
+    result = (NiD3DShaderProgram *)v52[0x13 * i - 1]; /*0x7bf005*/
+    if ( result ) /*0x7bf012*/
     {
-      sub_801030((char *)result, (int)FileName);
-      _sprintf(v53, "HDR%03i.vso", i);
-      result = CreateVertexShader(FileName, &v52[v3], "vs_1_1", v53, 0, 0);
-      v5 = (volatile LONG *)this->Vertex[i];
-      v8 = result;
-      if ( v5 != (volatile LONG *)result )
+      sub_801030((char *)result, (int)FileName); /*0x7bf021*/
+      _sprintf(v53, "HDR%03i.vso", i); /*0x7bf034*/
+      result = CreateVertexShader(FileName, &v52[v3], "vs_1_1", v53, 0, 0); /*0x7bf05d*/
+      v5 = (volatile LONG *)this->Vertex[i]; /*0x7bf062*/
+      v8 = result; /*0x7bf06b*/
+      if ( v5 != (volatile LONG *)result ) /*0x7bf06f*/
       {
-        if ( v5 )
+        if ( v5 ) /*0x7bf073*/
         {
-          if ( !InterlockedDecrement(v5 + 1) )
-            (**(void (__thiscall ***)(volatile LONG *, int))v5)(v5, 1);
-          result = v8;
+          if ( !InterlockedDecrement(v5 + 1) ) /*0x7bf079*/
+            (**(void (__thiscall ***)(volatile LONG *, int))v5)(v5, 1); /*0x7bf08f*/
+          result = v8; /*0x7bf091*/
         }
-        this->Vertex[i] = result;
-        if ( result )
-          result = (NiD3DShaderProgram *)InterlockedIncrement((volatile LONG *)result + 1);
+        this->Vertex[i] = result; /*0x7bf097*/
+        if ( result ) /*0x7bf09e*/
+          result = (NiD3DShaderProgram *)InterlockedIncrement((volatile LONG *)result + 1); /*0x7bf0a4*/
       }
-      v3 = 0x13 * i;
+      v3 = 0x13 * i; /*0x7bf0aa*/
     }
-    if ( (&v9)[v3] )
+    if ( (&v9)[v3] ) /*0x7bf0ae*/
     {
-      LOWORD(v8) = 0x34;
-      if ( i )
+      LOWORD(v8) = 0x34; /*0x7bf0ba*/
+      if ( i ) /*0x7bf0c1*/
       {
-        if ( i == 4 )
-        {
-          if ( byte_B43071 )
-            v32 = 0;
+        if ( i == 4 ) /*0x7bf0d8*/
+        {                                       // [Verified] HDRShader::LoadShader uses the FP16ARGB filtering capability at RendererGlobalState+0x1D8 to change the SWFILTER configuration for HDR pixel-program index 4.
+          if ( OB_RendererGlobalState_010201A0.bFP16ARGBFiltering ) /*0x7bf0da*/
+            v32 = 0; /*0x7bf0e2*/
         }
       }
-      else if ( byte_B43071 )
+      else if ( OB_RendererGlobalState_010201A0.bFP16ARGBFiltering )// [Verified] HDRShader::LoadShader uses the FP16ARGB filtering capability at RendererGlobalState+0x1D8 to choose an alternate configuration for HDR pixel-program index 0 before CreatePixelShader. /*0x7bf0c3*/
       {
-        v11 = &v8;
+        v11 = &v8; /*0x7bf0cf*/
       }
-      sub_801030((&v9)[v3], (int)FileName);
-      _sprintf(v53, "HDR%03i.pso", i);
-      result = CreatePixelShader(FileName, (int *)((char *)&v10 + v3 * 4), "ps_2_0", v53, 0, 0);
-      v6 = (volatile LONG *)this->Pixel[i];
-      v7 = result;
-      if ( v6 != (volatile LONG *)result )
+      sub_801030((&v9)[v3], (int)FileName); /*0x7bf0f6*/
+      _sprintf(v53, "HDR%03i.pso", i); /*0x7bf109*/
+      result = CreatePixelShader(FileName, (int *)((char *)&v10 + v3 * 4), "ps_2_0", v53, 0, 0); /*0x7bf12f*/
+      v6 = (volatile LONG *)this->Pixel[i]; /*0x7bf134*/
+      v7 = result; /*0x7bf13d*/
+      if ( v6 != (volatile LONG *)result ) /*0x7bf141*/
       {
-        if ( v6 )
+        if ( v6 ) /*0x7bf145*/
         {
-          if ( !InterlockedDecrement(v6 + 1) )
-            (**(void (__thiscall ***)(volatile LONG *, int))v6)(v6, 1);
-          result = v7;
+          if ( !InterlockedDecrement(v6 + 1) ) /*0x7bf14b*/
+            (**(void (__thiscall ***)(volatile LONG *, int))v6)(v6, 1); /*0x7bf161*/
+          result = v7; /*0x7bf163*/
         }
-        this->Pixel[i] = result;
-        if ( result )
-          result = (NiD3DShaderProgram *)InterlockedIncrement((volatile LONG *)result + 1);
+        this->Pixel[i] = result; /*0x7bf169*/
+        if ( result ) /*0x7bf170*/
+          result = (NiD3DShaderProgram *)InterlockedIncrement((volatile LONG *)result + 1); /*0x7bf176*/
       }
     }
   }
-  return result;
+  return result; /*0x7bf188*/
 }

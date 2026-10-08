@@ -11,24 +11,24 @@
 0x8507B9: lea     eax, [esp+1Ch+var_C]
 0x8507BD: mov     large fs:0, eax
 0x8507C3: mov     esi, ecx
-0x8507C5: mov     eax, [esp+1Ch+arg_8]
+0x8507C5: mov     eax, [esp+1Ch+value]
 0x8507C9: mov     eax, [eax+0Ch]
 0x8507CC: push    eax
 0x8507CD: call    sub_848E50
 0x8507D2: mov     eax, ds:0B45BE8h
 0x8507D7: test    eax, eax
 0x8507D9: mov     edi, eax
-0x8507DB: mov     [esp+1Ch+arg_8], edi
+0x8507DB: mov     [esp+1Ch+value], edi
 0x8507DF: mov     ebx, 1
 0x8507E4: jz      short loc_8507E9
 0x8507E6: add     [eax+60h], ebx
 0x8507E9: mov     edx, [esi+38h]
-0x8507EC: lea     ecx, [esp+1Ch+arg_8]
-0x8507F0: push    ecx
-0x8507F1: push    edx
-0x8507F2: lea     ecx, [esi+40h]
+0x8507EC: lea     ecx, [esp+1Ch+value]
+0x8507F0: push    ecx; value
+0x8507F1: push    edx; index
+0x8507F2: lea     ecx, [esi+40h]; this
 0x8507F5: mov     [esp+24h+var_4], 0
-0x8507FD: call    sub_76CE40
+0x8507FD: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x850802: or      eax, 0FFFFFFFFh
 0x850805: test    edi, edi
 0x850807: mov     [esp+1Ch+var_4], eax
@@ -36,7 +36,7 @@
 0x85080D: add     [edi+60h], eax
 0x850810: jnz     short loc_850819
 0x850812: mov     ecx, edi
-0x850814: call    sub_7604D0
+0x850814: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x850819: add     [esi+38h], ebx
 0x85081C: mov     ecx, [esp+1Ch+var_C]
 0x850820: mov     large fs:0, ecx
@@ -46,3 +46,12 @@
 0x85082A: pop     ebx
 0x85082B: add     esp, 0Ch
 0x85082E: retn    10h
+0x9D3450: lea     ecx, [ebp+0Ch]; void *
+0x9D3453: jmp     sub_4027D0
+0x9D3458: mov     edx, [esp+arg_4]
+0x9D345C: lea     eax, [edx-0Ch]
+0x9D345F: mov     ecx, [edx-10h]
+0x9D3462: xor     ecx, eax
+0x9D3464: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3469: mov     eax, offset stru_AFB870
+0x9D346E: jmp     ___CxxFrameHandler3

@@ -1,1 +1,1 @@
-ISurrogate_0
+typedef ISurrogate ISurrogate_0;

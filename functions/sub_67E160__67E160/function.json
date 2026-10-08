@@ -1,19 +1,32 @@
 {
-  "callees_count": 39,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_67E160",
+  "chunks": [
+    [
+      "0x67E160",
+      "0x67E3C3"
+    ]
+  ],
+  "chunks_sha256": "45bc8c3d9a7b1d4fd7488a7007671d844c85bde5dd319f6d0e3c0c4db7b656f1",
+  "comment_regular": "Verified direct-segment test used before actor-aware A*. It locates PathGrid nodes near both endpoints, rejects/defers segments based on distance, water-state mismatch and actor collision-height checks, and reports whether graph fallback should be attempted. Exact meaning of several geometric thresholds remains Unknown.",
+  "comment_repeatable": "Verified direct-segment test used before actor-aware A*. It locates PathGrid nodes near both endpoints, rejects/defers segments based on distance, water-state mismatch and actor collision-height checks, and reports whether graph fallback should be attempted. Exact meaning of several geometric thresholds remains Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ConnectedPointGraph_TestStraightSegment",
   "end_ea": "0x67E3C3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_67E160",
+  "name": "ConnectedPointGraph_TestStraightSegment",
   "segment": ".text",
   "sha256": "45bc8c3d9a7b1d4fd7488a7007671d844c85bde5dd319f6d0e3c0c4db7b656f1",
   "size": 611,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x67E160",
-  "type": "char __thiscall(float *this, TESObjectREFR *, float)",
+  "total_chunk_size": 611,
+  "type": "bool __thiscall(float *segmentQuery, TESObjectREFR *actor, bool strictMode)",
   "xrefs_from_count": 249,
   "xrefs_to_count": 1
 }

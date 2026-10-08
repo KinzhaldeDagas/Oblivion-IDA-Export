@@ -1,1 +1,1 @@
-QueuedTreeBillboard
+struct QueuedTreeBillboard;

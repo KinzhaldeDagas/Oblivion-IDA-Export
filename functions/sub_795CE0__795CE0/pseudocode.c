@@ -1,8 +1,20 @@
-int __cdecl sub_795CE0(int a1, int a2, int a3)
+// OBLIVION AUTHORITY (2026-08-30): Copy-assigns a range of vector<unsigned short*> owners using the structurally shared 4-byte-element vector assignment.
+OB_stVectorUShortPtr_010201A0 *__cdecl OB_stVector_stVectorUShortPtr_CopyAssignRange_010201A0(
+        const OB_stVectorUShortPtr_010201A0 *first,
+        const OB_stVectorUShortPtr_010201A0 *last,
+        OB_stVectorUShortPtr_010201A0 *destination)
 {
-  int i; // esi
+  const OB_stVector4_010201A0 *v3; // esi
 
-  for ( i = a1; i != a2; i += 0x10 )
-    sub_79B2F0((_DWORD *)(i + a3 - a1), i);
-  return a3 + 0x10 * ((a2 - a1) >> 4);
+  v3 = (const OB_stVector4_010201A0 *)first; /*0x795ceb*/
+  if ( first != last ) /*0x795cfe*/
+  {
+    do /*0x795d10*/
+    {
+      OB_stVector4_CopyAssign_010201A0((OB_stVector4_010201A0 *)((char *)v3 + (char *)destination - (char *)first), v3); /*0x795d06*/
+      ++v3; /*0x795d0b*/
+    }
+    while ( v3 != (const OB_stVector4_010201A0 *)last ); /*0x795d10*/
+  }
+  return &destination[last - first]; /*0x795d14*/
 }

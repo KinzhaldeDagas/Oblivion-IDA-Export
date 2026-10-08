@@ -2,7 +2,7 @@
 0x74E984: push    esi
 0x74E985: push    eax
 0x74E986: mov     esi, ecx
-0x74E988: call    sub_722B30
+0x74E988: call    NiGeometry_UpdatePropertiesDownward; Pass222: NiGeometry override path; clones incoming NiPropertyState and stores result at NiGeometry +0xAC.
 0x74E98D: mov     ecx, [esi+0B4h]
 0x74E993: mov     ecx, [ecx+68h]
 0x74E996: mov     eax, [esi+0ACh]

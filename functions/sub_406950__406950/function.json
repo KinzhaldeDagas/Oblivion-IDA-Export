@@ -1,19 +1,36 @@
 {
-  "callees_count": 162,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 103,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 72,
+  "chunks": [
+    [
+      "0x406950",
+      "0x4073CC"
+    ],
+    [
+      "0x9A9F90",
+      "0x9AA087"
+    ]
+  ],
+  "chunks_sha256": "2aca32d5a43fcb04a109914989365f5bdb1ae0e2491bd38ac382a257bfe0965f",
+  "comment_regular": "Retail world-scene construction: creates the world SceneGraph/ShadowSceneNode state consumed by NiRenderer_Render and ShadowPass.",
+  "comment_repeatable": "Retail world-scene construction: creates the world SceneGraph/ShadowSceneNode state consumed by NiRenderer_Render and ShadowPass.\nVerified world-root ownership for DX11 lifetime work, 2026-10-01: B333CC is an owning SceneGraph reference, not merely a borrowed render pointer. Initialization at 4069AA..4069ED compares old/new, releases old +4 (destroy-on-zero), assigns B333CC at4069E1, and increments the new +4 at4069ED. Teardown at40C3CC..40C3F9 decrements +4/destroys-on-zero before clearing the global. A separately proved primary-world promotion interval may therefore retain the current positive node reference by CAS and defer Release to a safe Present boundary. Root retention preserves attached descendants but does not retain detached/replaced geometry, property objects or buffer metadata; those still need separate ownership/writer closure.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 129,
   "display_name": "sub_406950",
   "end_ea": "0x4073CC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "sub_406950",
   "segment": ".text",
   "sha256": "2219a48c3675111fc6378882f6b4499d7fbd52b050b8d09ce283b45bf164844c",
   "size": 2684,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x406950",
+  "total_chunk_size": 2931,
   "type": "int __cdecl()",
-  "xrefs_from_count": 1046,
+  "xrefs_from_count": 1166,
   "xrefs_to_count": 1
 }

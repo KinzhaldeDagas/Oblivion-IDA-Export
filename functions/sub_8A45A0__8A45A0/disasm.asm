@@ -23,10 +23,10 @@
 0x8A45E9: lea     esp, [esp+0]
 0x8A45F0: test    edi, edi
 0x8A45F2: jz      short loc_8A460E
-0x8A45F4: lea     ecx, [esp+2Ch+var_14]
-0x8A45F8: push    ecx
-0x8A45F9: mov     ecx, edi
-0x8A45FB: call    sub_677C70
+0x8A45F4: lea     ecx, [esp+2Ch+outData]
+0x8A45F8: push    ecx; outData
+0x8A45F9: mov     ecx, edi; this
+0x8A45FB: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A4600: or      [esp+2Ch+var_18], 1
 0x8A4605: cmp     dword ptr [eax], 0
 0x8A4608: jz      short loc_8A460E
@@ -35,7 +35,7 @@
 0x8A460E: xor     bl, bl
 0x8A4610: test    byte ptr [esp+2Ch+var_18], 1
 0x8A4615: jz      short loc_8A4640
-0x8A4617: mov     esi, [esp+2Ch+var_14]
+0x8A4617: mov     esi, [esp+2Ch+outData]
 0x8A461B: and     [esp+2Ch+var_18], 0FFFFFFFEh
 0x8A4620: test    esi, esi
 0x8A4622: jz      short loc_8A4640
@@ -54,9 +54,9 @@
 0x8A4640: test    bl, bl
 0x8A4642: jz      short loc_8A469C
 0x8A4644: lea     eax, [esp+2Ch+var_10]
-0x8A4648: push    eax
-0x8A4649: mov     ecx, edi
-0x8A464B: call    sub_677C70
+0x8A4648: push    eax; outData
+0x8A4649: mov     ecx, edi; this
+0x8A464B: call    NodeVoid_GetDataAddRef; Verified (Oblivion): returns the NodeVoid::data pointer through outData and increments its NiRefObject reference count when non-null. ActorProcessManager temp-effect iterators use this helper to hold each effect while inspecting it, then release that temporary reference.
 0x8A4650: mov     ecx, [eax]
 0x8A4652: mov     edx, [ecx]
 0x8A4654: mov     eax, [esp+2Ch+arg_0]
@@ -92,3 +92,12 @@
 0x8A46AE: pop     ebx
 0x8A46AF: add     esp, 1Ch
 0x8A46B2: retn    4
+0x9D6B00: lea     ecx, [ebp-10h]; slot
+0x9D6B03: jmp     NiPointerSlot_Release
+0x9D6B08: mov     edx, [esp+arg_4]
+0x9D6B0C: lea     eax, [edx-1Ch]
+0x9D6B0F: mov     ecx, [edx-20h]
+0x9D6B12: xor     ecx, eax
+0x9D6B14: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D6B19: mov     eax, offset stru_AFE864
+0x9D6B1E: jmp     ___CxxFrameHandler3

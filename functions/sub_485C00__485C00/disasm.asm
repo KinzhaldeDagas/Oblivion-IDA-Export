@@ -11,12 +11,12 @@
 0x485C0F: mov     esi, [eax]
 0x485C11: test    esi, esi
 0x485C13: jz      short loc_485C68
-0x485C15: mov     ecx, esi
-0x485C17: call    ExtraDataList_GetOwner
+0x485C15: mov     ecx, esi; this
+0x485C17: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x485C1C: test    eax, eax
 0x485C1E: jz      short loc_485C68
-0x485C20: mov     ecx, esi
-0x485C22: call    ExtraDataList_GetOwner
+0x485C20: mov     ecx, esi; this
+0x485C22: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x485C27: test    eax, eax
 0x485C29: jz      short loc_485C68
 0x485C2B: mov     eax, [edi]
@@ -25,12 +25,12 @@
 0x485C31: mov     esi, [eax]
 0x485C33: test    esi, esi
 0x485C35: jz      short loc_485C4D
-0x485C37: mov     ecx, esi
-0x485C39: call    ExtraDataList_GetOwner
+0x485C37: mov     ecx, esi; this
+0x485C39: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x485C3E: test    eax, eax
 0x485C40: jz      short loc_485C4D
-0x485C42: mov     ecx, esi
-0x485C44: call    ExtraDataList_GetOwner
+0x485C42: mov     ecx, esi; this
+0x485C44: call    ExtraDataList_GetOwner; Verified accessor: returns the owner TESForm pointer stored in the ExtraOwnership payload identified by kExtraData_Ownership, or null when absent. RTTI callers confirm TESNPC/TESFaction owner forms.
 0x485C49: mov     esi, eax
 0x485C4B: jmp     short loc_485C4F
 0x485C4D: xor     esi, esi

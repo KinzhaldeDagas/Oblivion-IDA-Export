@@ -1,19 +1,36 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 5,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x58CE30",
+      "0x58CEA3"
+    ],
+    [
+      "0x9CA7E0",
+      "0x9CA806"
+    ]
+  ],
+  "chunks_sha256": "f9c9b55e29bfa44c376869712297cc6fe7a0a8aa9c9644f24408d014319b1567",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_58CE30",
+  "comment_repeatable": "Verified: allocates0x1C template, Initialize(name,storage), appends to embedded subtemplate list, returns template. Used by AddPair when name lookup fails. Fallout named analogue0x827DED28 allocates0x14 template.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Tile::BuildStorage::NewSubTemplate",
   "end_ea": "0x58CEA3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_58CE30",
+  "name": "Tile::BuildStorage::NewSubTemplate",
   "segment": ".text",
   "sha256": "498084fdfad60e537707c91bc57f31c25f2b17b9e9a8451e6425b94faafe3a38",
   "size": 115,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x58CE30",
-  "type": "int __thiscall(_DWORD *this, char *)",
-  "xrefs_from_count": 43,
+  "total_chunk_size": 153,
+  "type": "OblivionTileTemplate *__thiscall(OblivionTileBuildStorage *this, const char *name)",
+  "xrefs_from_count": 57,
   "xrefs_to_count": 1
 }

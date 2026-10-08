@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x4D0CA0",
-    "line": "lea     ecx, [esp+0F0h+var_78]",
+    "line": "lea     ecx, [esp+0F0h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4D0CBA",
-    "line": "fstp    [esp+0F0h+var_E8]; float",
+    "line": "fstp    [esp+0F0h+angleZ]; float",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1093,55 +1093,55 @@
   },
   {
     "ea": "0x4D0EA9",
-    "line": "lea     ecx, [esp+0E8h+var_54]",
+    "line": "lea     ecx, [esp+0E8h+var_54]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4D0EB0",
-    "line": "fstp    [esp+0E8h+var_E8]; float",
+    "line": "fstp    [esp+0E8h+angleZ]; angleZ",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x4D0EB3",
-    "line": "call    NiMatrix33_InitRotationTransform",
+    "line": "call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4D0EB8",
-    "line": "lea     ecx, [esp+0E4h+var_78]",
+    "line": "lea     ecx, [esp+0E4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4D0EBC",
-    "line": "push    ecx",
+    "line": "push    ecx; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D0EBD",
-    "line": "lea     edx, [esp+0E8h+var_30]",
+    "line": "lea     edx, [esp+0E8h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4D0EC4",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4D0EC5",
-    "line": "lea     ecx, [esp+0ECh+var_54]",
+    "line": "lea     ecx, [esp+0ECh+var_54]; this",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x4D0ECC",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x4D0ED8",
-    "line": "lea     edi, [esp+0E4h+var_78]",
+    "line": "lea     edi, [esp+0E4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x4D0EEE",
-    "line": "lea     esi, [esp+0E4h+var_78]",
+    "line": "lea     esi, [esp+0E4h+right]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x4D0F12",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x4D0F20",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1651,7 +1651,7 @@
   },
   {
     "ea": "0x4D0FE0",
-    "line": "call    sub_4D0190",
+    "line": "call    sub_4D0190; MoonSugarEffect decode: canopy/shadow offscreen path constructs culling process with null VisibleGeo and renders through sub_70C0B0 into StartUsingRenderTarget targets, so it uses accumulator-direct culling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2332,5 +2332,185 @@
     "line": "retn    0Ch",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B54A0",
+    "line": "mov     eax, [ebp-0B0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B54A6",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B54A7",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B54AC",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B54AD",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B54AE",
+    "line": "lea     ecx, [ebp-0B0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B54B4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B54B9",
+    "line": "mov     eax, [ebp-9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B54BF",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B54C0",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B54C5",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B54C6",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B54C7",
+    "line": "lea     ecx, [ebp-9Ch]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B54CD",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B54D2",
+    "line": "lea     ecx, [ebp-0A0h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B54D8",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B54DD",
+    "line": "mov     eax, [ebp-98h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B54E3",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B54E6",
+    "line": "jz      locret_9B54FB",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B54EC",
+    "line": "and     dword ptr [ebp-98h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B54F3",
+    "line": "mov     ecx, [ebp+4]; slot",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B54F6",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B54FB",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B54FC",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B5500",
+    "line": "lea     eax, [edx-0D4h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B5506",
+    "line": "mov     ecx, [edx-0D8h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B550C",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B550E",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5513",
+    "line": "mov     eax, offset stru_AE05C4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B5518",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

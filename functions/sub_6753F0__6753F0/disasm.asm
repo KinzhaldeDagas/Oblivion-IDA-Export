@@ -20,7 +20,7 @@
 0x67541E: mov     ebx, ebp
 0x675420: mov     esi, [esp+34h+arg_0]
 0x675424: mov     ecx, esi; this
-0x675426: call    TESObjectREFR_GetParentCell
+0x675426: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67542B: mov     ecx, esi; this
 0x67542D: mov     [esp+34h+var_14], eax
 0x675431: call    TESObjectREFR_GetWorldSpace
@@ -48,9 +48,9 @@
 0x67547D: jnz     short loc_675492
 0x67547F: push    ebp; a2
 0x675480: mov     ecx, edi; this
-0x675482: call    sub_673A50
+0x675482: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x675487: mov     ecx, eax; this
-0x675489: call    sub_7616D0
+0x675489: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x67548E: mov     edi, eax
 0x675490: jmp     short loc_6754B8
 0x675492: cmp     esi, 1
@@ -63,9 +63,9 @@
 0x6754A0: jmp     short loc_6754A4
 0x6754A2: push    3; a2
 0x6754A4: mov     ecx, edi; this
-0x6754A6: call    sub_673A50
+0x6754A6: call    ActorProcessManager_GetListHead; ActorProcessManager list selector: level 0 -> manager+0x68 (HighProcess actors), level 1 -> manager+0x00 (MiddleHigh), level 2 -> manager+0x0C (MiddleLow), level 3 -> manager+0x18 (Low).
 0x6754AB: mov     ecx, eax; this
-0x6754AD: call    sub_7616D0
+0x6754AD: call    ActorList_ReturnHead; Identity helper used before actor list iteration; callers then treat the returned pointer as tList node {Actor* item, Node* next}.
 0x6754B2: mov     [esp+34h+var_24], eax
 0x6754B6: mov     edi, eax
 0x6754B8: cmp     edi, ebp
@@ -88,7 +88,7 @@
 0x6754EB: mov     [esp+34h+var_C], ebp
 0x6754EF: jz      loc_67570D
 0x6754F5: mov     ecx, esi; this
-0x6754F7: call    TESObjectREFR_GetParentCell
+0x6754F7: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x6754FC: mov     ebp, eax
 0x6754FE: mov     ecx, esi; this
 0x675500: mov     [esp+34h+var_10], ebp
@@ -102,13 +102,13 @@
 0x675519: test    al, al
 0x67551B: jnz     loc_6756DC
 0x675521: mov     ecx, esi; this
-0x675523: call    sub_5E6C60
+0x675523: call    Actor_IsGuardClass; Actor_IsGuardClass: true only for NPCs whose base TESClass is a guard class. StartCombat uses this to decide alarm/guard handling.
 0x675528: test    al, al
 0x67552A: jz      loc_6756DC
 0x675530: test    ebp, ebp
 0x675532: jz      short loc_675545
 0x675534: mov     ecx, ebp; this
-0x675536: call    TESObjectCELL_IsInterior
+0x675536: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x67553B: test    al, al
 0x67553D: jz      short loc_675545
 0x67553F: cmp     ebp, [esp+34h+var_14]
@@ -118,13 +118,13 @@
 0x67554F: test    ebp, ebp
 0x675551: jz      short loc_67555E
 0x675553: mov     ecx, ebp; this
-0x675555: call    TESObjectCELL_IsInterior
+0x675555: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x67555A: test    al, al
 0x67555C: jz      short loc_675577
 0x67555E: mov     ecx, [esp+34h+var_14]; this
 0x675562: test    ecx, ecx
 0x675564: jz      loc_6755FF
-0x67556A: call    TESObjectCELL_IsInterior
+0x67556A: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x67556F: test    al, al
 0x675571: jnz     loc_6755FF
 0x675577: mov     edi, [esp+34h+arg_0]
@@ -178,22 +178,21 @@
 0x675603: test    ebx, ebx
 0x675605: jz      loc_6756D8
 0x67560B: jmp     short loc_675610
-0x67560D: align 10h
 0x675610: mov     ecx, [ebx]; this
 0x675612: test    ecx, ecx
 0x675614: jz      loc_6756D8
-0x67561A: call    GetTeleportExtraData
+0x67561A: call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.
 0x67561F: test    eax, eax
 0x675621: jz      short loc_67567B
-0x675623: mov     ecx, eax
-0x675625: call    sub_42B410
+0x675623: mov     ecx, eax; this
+0x675625: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x67562A: mov     edi, eax
 0x67562C: mov     ecx, edi; this
-0x67562E: call    TESObjectREFR_GetParentCell
+0x67562E: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x675633: cmp     eax, ebp
 0x675635: jz      short loc_67565A
 0x675637: mov     ecx, edi; this
-0x675639: call    TESObjectREFR_GetParentCell
+0x675639: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x67563E: test    eax, eax
 0x675640: jnz     short loc_67567B
 0x675642: mov     ecx, edi; this

@@ -1,12 +1,13 @@
-EntryData *__thiscall Actor_GetEquippedWeaponData(HighProcess *this, char a2)
+// Returns HighProcess equippedWeaponData directly, or only when its instance data is marked Worn when requireWorn is nonzero.
+EntryData *__thiscall HighProcess_GetEquippedWeaponData(HighProcess *this, char requireWorn)
 {
   EntryData *equippedWeaponData; // ecx
 
-  if ( !a2 )
-    return this->equippedWeaponData;
-  equippedWeaponData = this->equippedWeaponData;
-  if ( equippedWeaponData && (unsigned __int8)ContainerEntryExtraData_HasWorn(equippedWeaponData, 0) )
-    return this->equippedWeaponData;
+  if ( !requireWorn ) /*0x64b248*/
+    return this->equippedWeaponData; /*0x64b248*/
+  equippedWeaponData = this->equippedWeaponData; /*0x64b254*/
+  if ( equippedWeaponData && (unsigned __int8)ContainerEntryExtraData_HasWorn(equippedWeaponData, 0) ) /*0x64b260*/
+    return this->equippedWeaponData; /*0x64b24a*/
   else
-    return 0;
+    return 0; /*0x64b269*/
 }

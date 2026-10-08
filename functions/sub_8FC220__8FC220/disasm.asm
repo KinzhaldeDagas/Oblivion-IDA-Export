@@ -40,7 +40,6 @@
 0x8FC2A4: sub     eax, ecx
 0x8FC2A6: mov     edx, 2
 0x8FC2AB: jmp     short loc_8FC2B0
-0x8FC2AD: align 10h
 0x8FC2B0: movaps  xmm0, xmmword ptr [ecx]
 0x8FC2B3: movaps  xmm5, xmm0
 0x8FC2B6: shufps  xmm5, xmm0, 0AAh ; 'ª'

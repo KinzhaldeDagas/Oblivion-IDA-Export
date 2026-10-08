@@ -1,44 +1,47 @@
-float *__thiscall sub_7A3700(float *this, int a2)
+// CTreeEngine constructor for stock compact 0x110-byte object. Initializes branch weight level at +0xF0 and stock wind info; no floor-info fields or cluster first-branch-level storage are present.
+OB_CTreeEngine_010201A0 *__thiscall OB_CTreeEngine_ctor_010201A0(
+        OB_CTreeEngine_010201A0 *this,
+        OB_CIndexedGeometry_010201A0 *branchGeometry)
 {
   double v3; // st7
   float v5; // [esp+10h] [ebp-10h]
-  float v6; // [esp+24h] [ebp+4h]
+  float branchGeometrya; // [esp+24h] [ebp+4h]
 
-  sub_78ECF0(this);
-  *(this + 4) = 1.0;
-  *(this + 5) = 1.0;
-  *(this + 6) = flt_A30634;
-  *(_DWORD *)this = &CTreeEngine::`vftable';
-  *(this + 7) = 0.0;
-  sub_78EAF0(this + 8);
-  *((_BYTE *)this + 0x21) = 1;
-  sub_7A8620((int)(this + 9));
-  *(this + 0x16) = 0.0;
-  *(this + 0x17) = 0.0;
-  *(this + 0x19) = 0.0;
-  *(this + 0x1A) = 0.0;
-  *(this + 0x1B) = 0.0;
-  *((_DWORD *)this + 0x1C) = 6;
-  *(this + 0x1E) = 0.0;
-  *(this + 0x1F) = 0.0;
-  *(this + 0x20) = 0.0;
-  sub_7A5B10(this + 0x21);
-  *(this + 0x37) = flt_A3D65C;
-  *(this + 0x38) = 1.0;
-  v3 = flt_A3744C;
-  *(this + 0x35) = 0.0;
-  *(this + 0x39) = v3;
-  *((_BYTE *)this + 0xD8) = 0;
-  *((_DWORD *)this + 0x3C) = 1;
-  *(this + 0x3A) = 0.0;
-  *(this + 0x3B) = flt_A43328;
-  sub_7A8480(this + 0x3D);
-  *(this + 0x43) = flt_A41304;
-  *((_DWORD *)this + 0x17) = a2;
-  v5 = *(this + 0x3E) + *(this + 0x3E);
-  v6 = *(this + 0x3D) * dbl_A73DD8;
-  *(this + 0x40) = -v6;
-  *(this + 0x41) = v6;
-  *(this + 0x42) = v5;
-  return this;
+  OB_CIdvCamera_ctor_010201A0((float *)this); /*0x7a372a*/
+  this->billboardSize = 1.0; /*0x7a3731*/
+  this->currentLod = 1.0; /*0x7a3736*/
+  this->overrideTreeSize = kTerrainLODQuadRayDirectionZ; /*0x7a3746*/
+  this->vftable = &CTreeEngine::`vftable'; /*0x7a3749*/
+  this->overrideTreeVariance = 0.0; /*0x7a3751*/
+  OB_stRandom_ctor_010201A0(&this->randomPlaceholderByte); /*0x7a3754*/
+  this->transientDataIntact = 1; /*0x7a3761*/
+  OB_SIdvTreeInfo_ctor_010201A0((int)this->branchTextureFilenameSmallString); /*0x7a3765*/
+  this->trunkBranch = 0; /*0x7a376a*/
+  this->branchGeometry = 0; /*0x7a376d*/
+  this->branchInfoVector.begin = 0; /*0x7a3770*/
+  this->branchInfoVector.end = 0; /*0x7a3773*/
+  this->branchInfoVector.capacityEnd = 0; /*0x7a3776*/
+  this->branchLodCount = 6; /*0x7a3779*/
+  this->generatedBillboardLeaves.begin = 0; /*0x7a3780*/
+  this->generatedBillboardLeaves.end = 0; /*0x7a3783*/
+  this->generatedBillboardLeaves.capacityEnd = 0; /*0x7a3786*/
+  OB_SIdvLeafInfo_ctor_010201A0(&this->leafInfo); /*0x7a3797*/
+  this->minBranchVolumePercent = kHeadBodyNormalMatchRadius; /*0x7a37a2*/
+  this->maxBranchVolumePercent = 1.0; /*0x7a37b2*/
+  v3 = flt_A3744C; /*0x7a37bd*/
+  this->leafLodVectors = 0; /*0x7a37c3*/
+  this->leafReductionPercent = v3; /*0x7a37c9*/
+  this->parsedLeafLodFlag = 0; /*0x7a37cf*/
+  this->branchWindWeightLevel = 1; /*0x7a37d7*/
+  this->branchReductionFuzziness = 0.0; /*0x7a37e1*/
+  this->largeBranchPercent = flt_A43328; /*0x7a37ed*/
+  OB_SIdvWindInfo_ctor_010201A0(&this->embeddedWindInfo); /*0x7a37f3*/
+  this->embeddedWindInfo.strength = flt_A41304; /*0x7a3802*/
+  this->branchGeometry = branchGeometry; /*0x7a3808*/
+  v5 = this->embeddedWindInfo.leafFactors.y + this->embeddedWindInfo.leafFactors.y; /*0x7a3815*/
+  branchGeometrya = this->embeddedWindInfo.leafFactors.x * dbl_A73DD8; /*0x7a3821*/
+  this->embeddedWindInfo.leafOscillation.x = -branchGeometrya; /*0x7a382d*/
+  this->embeddedWindInfo.leafOscillation.y = branchGeometrya; /*0x7a3833*/
+  this->embeddedWindInfo.leafOscillation.z = v5; /*0x7a383d*/
+  return this; /*0x7a3843*/
 }

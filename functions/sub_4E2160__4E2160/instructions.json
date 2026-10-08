@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x4E216F",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x4E217B",
-    "line": "call    sub_4DC270",
+    "line": "call    sub_4DC270; NiAVObject -> owning TES reference resolver. Walks up NiNode parents and extra data to recover TESObjectREFR/Player. Climb probe can use this on TES::CastRay return to reject self and dynamic actors.",
     "mnemonic": "call",
     "size": 5
   },
@@ -433,7 +433,7 @@
   },
   {
     "ea": "0x4E2262",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x4E227D",
-    "line": "call    sub_441800",
+    "line": "call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).",
     "mnemonic": "call",
     "size": 5
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x4E2290",
-    "line": "mov     [esp+80h+var_10], ecx",
+    "line": "mov     [esp+80h+var_10.x], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4E2297",
-    "line": "mov     [esp+80h+var_C], edx",
+    "line": "mov     [esp+80h+var_10.y], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -541,19 +541,19 @@
   },
   {
     "ea": "0x4E229E",
-    "line": "mov     [esp+80h+var_8], ecx",
+    "line": "mov     [esp+80h+var_10.z], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E22A2",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3; other",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x4E22A7",
-    "line": "lea     ecx, [esp+84h+var_10]",
+    "line": "lea     ecx, [esp+84h+var_10]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -565,7 +565,7 @@
   },
   {
     "ea": "0x4E22B2",
-    "line": "call    sub_8AA390",
+    "line": "call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.",
     "mnemonic": "call",
     "size": 5
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x4E22BF",
-    "line": "fld     [esp+80h+var_8]",
+    "line": "fld     [esp+80h+var_10.z]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x4E241F",
-    "line": "call    NiAVObject_UpdateNiAVObject",
+    "line": "call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x4E2570",
-    "line": "call    sub_41E650",
+    "line": "call    ExtraDataList_GetLight; Returns the REFR_LIGHT payload from ExtraLight type 0x30; heavily used by TESObjectREF lighting and equipped-light paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1933,7 +1933,7 @@
   },
   {
     "ea": "0x4E257F",
-    "line": "push    eax",
+    "line": "push    eax; backingLight",
     "mnemonic": "push",
     "size": 1
   },
@@ -1957,13 +1957,13 @@
   },
   {
     "ea": "0x4E258A",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4E258C",
-    "line": "call    sub_7C7DC0",
+    "line": "call    ShadowSceneNode_RemoveFullLightBySource; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.",
     "mnemonic": "call",
     "size": 5
   },

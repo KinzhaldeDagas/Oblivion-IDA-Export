@@ -1,4 +1,4 @@
-0x4F4CE0: fldz
+0x4F4CE0: fldz; GetIsID_Eval (index 72 / opcode 0x1048): ObjectID ParamInfo is a TESForm pointer. The parameter must pass TESForm::IsActor (base implementation at 0x69D990 returns false); then the function pointer-compares it with the subject reference's BaseForm. No editor-ID/name comparison occurs.
 0x4F4CE2: push    ebx
 0x4F4CE3: mov     ebx, [esp+4+arg_C]
 0x4F4CE7: fstp    qword ptr [ebx]

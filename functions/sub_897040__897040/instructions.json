@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x897040",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: applies character controller construction info, including proxy+0x248 vertical/base offset, world metadata, initial state, movement scalar, gravity, and owner/listener setup.",
     "mnemonic": "push",
     "size": 1
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x897088",
-    "line": "fstp    [esp+88h+var_74]",
+    "line": "fstp    [esp+88h+var_74]; cinfo+0x98 * cinfo+0x94 becomes proxy+0x248 vertical/base offset before shape construction.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -157,25 +157,25 @@
   },
   {
     "ea": "0x897090",
-    "line": "fstp    dword ptr [edi+248h]",
+    "line": "fstp    dword ptr [edi+248h]; Stores proxy+0x248 vertical/base offset from construction info scale fields; this is used by capsule probe endpoint z adjustment, not water height.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x897096",
-    "line": "call    sub_895190",
+    "line": "call    bhkCharacterController_BuildCharacterShapesFromCinfo; TES4 authoritative: builds/updates controller collision shapes and derived geometry fields from construction info; not a per-frame climb API.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x89709B",
-    "line": "lea     ecx, [esp+84h+var_70]",
+    "line": "lea     ecx, [esp+84h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x89709F",
-    "line": "call    sub_532250",
+    "line": "call    OB_bhkShapePhantomCinfo_InitIdentity_010201A0; 2026-05-18 73000 consumer decode: initializes bhkSimpleShapePhantom cinfo, including identity transform at +0x20 and shape pointer slot at +0x04. Stock 0x565510 installs one shape pointer and attaches the phantom to the target NiAVObject.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x8970B0",
-    "line": "mov     [esp+84h+var_70], eax",
+    "line": "mov     [esp+84h+info.collisionFilter], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -229,7 +229,7 @@
   },
   {
     "ea": "0x8970C0",
-    "line": "mov     [esp+84h+var_6C], ecx",
+    "line": "mov     [esp+84h+info.shape], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x8970C6",
-    "line": "mov     [esp+84h+var_6C], ebx",
+    "line": "mov     [esp+84h+info.shape], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -289,25 +289,25 @@
   },
   {
     "ea": "0x8970E4",
-    "line": "lea     edx, [esp+84h+var_70]",
+    "line": "lea     edx, [esp+84h+info]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x8970E8",
-    "line": "push    edx",
+    "line": "push    edx; info",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x8970E9",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8970EB",
-    "line": "call    sub_531FC0",
+    "line": "call    OB_bhkSimpleShapePhantom_CtorFromCinfo_010201A0; Constructs bhkSimpleShapePhantom wrapper and calls 0x8AF1A0 to create/attach the low-level Havok phantom object from cinfo.",
     "mnemonic": "call",
     "size": 5
   },
@@ -607,7 +607,7 @@
   },
   {
     "ea": "0x89717F",
-    "line": "mov     [edi+2A0h], eax",
+    "line": "mov     [edi+2A0h], eax; cinfo+0x88 becomes initial/current controller state id at proxy+0x2A0.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x897188",
-    "line": "fstp    dword ptr [edi+310h]",
+    "line": "fstp    dword ptr [edi+310h]; cinfo+0x7C becomes proxy+0x310 jump/fall scalar.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x897194",
-    "line": "fstp    dword ptr [edi+328h]",
+    "line": "fstp    dword ptr [edi+328h]; cinfo+0x80 becomes proxy+0x328 gravity/frame-scale field.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x8971A0",
-    "line": "mov     [edi+3B0h], eax",
+    "line": "mov     [edi+3B0h], eax; cinfo+0xA0 is copied to proxy+0x3B0; high-level role unresolved.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x8971CF",
-    "line": "mov     eax, [esp+84h+var_5C]",
+    "line": "mov     eax, [esp+84h+info.propertyCapacityFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -805,7 +805,7 @@
   },
   {
     "ea": "0x897202",
-    "line": "mov     edx, [esp+84h+var_64]",
+    "line": "mov     edx, [esp+84h+info.propertyData]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -910,5 +910,89 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D6680",
+    "line": "lea     ecx, [ebp+info]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D6683",
+    "line": "jmp     sub_8A5090",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6688",
+    "line": "mov     eax, [ebp+var_74]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D668B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D668C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6691",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6692",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D6693",
+    "line": "mov     edx, [esp-4+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D6697",
+    "line": "lea     eax, [edx-74h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D669A",
+    "line": "mov     ecx, [edx-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D669D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D669F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66A4",
+    "line": "mov     eax, offset stru_AFE4A0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D66A9",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

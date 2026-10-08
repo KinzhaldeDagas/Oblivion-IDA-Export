@@ -26,7 +26,7 @@
 0x5C11B3: jl      short loc_5C1190
 0x5C11B5: fld     dword ptr ds:0B38BB0h
 0x5C11BB: fmul    qword ptr ds:0A2FC70h
-0x5C11C1: call    Double_To_SInt32
+0x5C11C1: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x5C11C6: xor     ecx, ecx
 0x5C11C8: cmp     esi, eax
 0x5C11CA: setnl   cl

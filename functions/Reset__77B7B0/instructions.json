@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x77B7B0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Reset tracked DX9 render state and common Gamebryo defaults, including blend/test, depth, cull, fill, fog, and texture state caches.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x77B8BD",
-    "line": "call    edx",
+    "line": "call    edx; Fog decode: Reset disables fixed-function fog with D3DRS_FOGENABLE=0; shader paths upload their own fog constants.",
     "mnemonic": "call",
     "size": 2
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x77B8EA",
-    "line": "call    edx",
+    "line": "call    edx; Fog decode: Reset sets fixed-function vertex fog mode default.",
     "mnemonic": "call",
     "size": 2
   },
@@ -871,7 +871,7 @@
   },
   {
     "ea": "0x77B8F9",
-    "line": "call    edx",
+    "line": "call    edx; Fog decode: Reset disables fixed-function range fog.",
     "mnemonic": "call",
     "size": 2
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x77B908",
-    "line": "call    edx",
+    "line": "call    edx; Fog decode: Reset initializes fixed-function D3DRS_FOGCOLOR to 0.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1057,7 +1057,7 @@
   },
   {
     "ea": "0x77B946",
-    "line": "mov     [esi+8Ch], eax",
+    "line": "mov     [esi+8Ch], eax; Fog decode: Reset copies default fog color R from B3FA90 into renderer current fog color cache.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1075,7 +1075,7 @@
   },
   {
     "ea": "0x77B957",
-    "line": "mov     [esi+90h], ecx",
+    "line": "mov     [esi+90h], ecx; Fog decode: Reset copies default fog color G from B3FA94 into renderer current fog color cache.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x77B96C",
-    "line": "mov     [esi+94h], edx",
+    "line": "mov     [esi+94h], edx; Fog decode: Reset copies default fog color B from B3FA98 into renderer current fog color cache.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1315,7 +1315,7 @@
   },
   {
     "ea": "0x77B9FF",
-    "line": "mov     [esi+98h], ecx",
+    "line": "mov     [esi+98h], ecx; Fog decode: packs cached current fog color; fixed-function/cache boundary, not world shader fog source.",
     "mnemonic": "mov",
     "size": 6
   },

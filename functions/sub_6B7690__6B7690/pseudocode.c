@@ -1,107 +1,107 @@
-void __thiscall sub_6B7690(const char ****this)
+// Conversation serialization writes UInt16 item count, every DialogueItem, and a UInt16 index for the list-internal current-item cursor. This is distinct from DialoguePackage's external currentItem/currentResponse indices.
+void __thiscall Conversation::SaveGame(ConversationView *this)
 {
-  bool v2; // zf
-  TESSaveLoad *v4; // ecx
-  UInt32 v5; // eax
+  bool v1; // zf
+  TESSaveLoad *v3; // ecx
+  UInt32 v4; // eax
+  TESSaveLoad *v5; // ecx
   TESSaveLoad *v6; // ecx
   TESSaveLoad *v7; // ecx
-  TESSaveLoad *v8; // ecx
-  _WORD *v9; // ebp
-  int v10; // edx
-  const char ****i; // esi
-  int *v12; // eax
-  UInt32 *v13; // edi
-  UInt32 v14; // esi
-  TESForm *v15; // eax
-  const char *v16; // eax
-  _WORD *v17; // edi
-  unsigned int v18; // esi
-  int v19; // [esp-Ch] [ebp-30h]
-  int v20; // [esp-8h] [ebp-2Ch]
+  _WORD *v8; // ebp
+  ConversationView *i; // esi
+  DialogueItemNode *currentItemNode; // eax
+  UInt32 *v11; // edi
+  UInt32 v12; // esi
+  TESForm *v13; // eax
+  const char *v14; // eax
+  _WORD *v15; // edi
+  unsigned int v16; // esi
+  int v17; // [esp-Ch] [ebp-30h]
+  int v18; // [esp-8h] [ebp-2Ch]
+  size_t v19; // [esp-4h] [ebp-28h]
+  size_t v20; // [esp-4h] [ebp-28h]
   size_t v21; // [esp-4h] [ebp-28h]
-  size_t v22; // [esp-4h] [ebp-28h]
-  size_t v23; // [esp-4h] [ebp-28h]
-  const char *v24; // [esp-4h] [ebp-28h]
-  int v25; // [esp+Ch] [ebp-18h] BYREF
-  UInt32 v26; // [esp+10h] [ebp-14h]
-  unsigned int v27; // [esp+14h] [ebp-10h] BYREF
-  UInt32 v28; // [esp+18h] [ebp-Ch]
+  const char *v22; // [esp-4h] [ebp-28h]
+  int v23; // [esp+Ch] [ebp-18h] BYREF
+  UInt32 v24; // [esp+10h] [ebp-14h]
+  unsigned int DialogueItemIndex; // [esp+14h] [ebp-10h] BYREF
+  UInt32 v26; // [esp+18h] [ebp-Ch]
   int Src; // [esp+1Ch] [ebp-8h] BYREF
-  int v30; // [esp+20h] [ebp-4h] BYREF
+  int v28; // [esp+20h] [ebp-4h] BYREF
 
-  v2 = Global_DebugSaveBuffer == 0;
-  v4 = SaveLoad_CurrentSavegame;
-  v30 = 0;
-  v5 = v4->unk000[5];
-  v28 = 0;
-  v26 = v5;
-  if ( !v2 )
-    v26 = v5;
-  if ( sub_45A170() )
+  v1 = Global_DebugSaveBuffer == 0; /*0x6b7693*/
+  v3 = g_TESSaveLoadGame; /*0x6b769f*/
+  v28 = 0; /*0x6b76a5*/
+  v4 = v3->unk000[5]; /*0x6b76ad*/
+  v26 = 0; /*0x6b76b0*/
+  v24 = v4; /*0x6b76b8*/
+  if ( !v1 ) /*0x6b76bc*/
+    v24 = v4; /*0x6b76be*/
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x6b76c2*/
   {
-    v6 = SaveLoad_CurrentSavegame;
-    LODWORD(v21) = 4;
-    Src = 0x4B4F4C42;
-    SaveLoad_SaveData((int)v6, &Src, v21);
-    v7 = SaveLoad_CurrentSavegame;
-    LODWORD(v22) = 2;
-    v28 = SaveLoad_CurrentSavegame->unk000[5];
-    SaveLoad_SaveData((int)v7, &v30, v22);
+    v5 = g_TESSaveLoadGame; /*0x6b76cb*/
+    LODWORD(v19) = 4; /*0x6b76d1*/
+    Src = 0x4B4F4C42; /*0x6b76d8*/
+    SaveLoad_SaveData((int)v5, &Src, v19); /*0x6b76e0*/
+    v6 = g_TESSaveLoadGame; /*0x6b76e5*/
+    LODWORD(v20) = 2; /*0x6b76ee*/
+    v26 = g_TESSaveLoadGame->unk000[5]; /*0x6b76f5*/
+    SaveLoad_SaveData((int)v6, &v28, v20); /*0x6b76f9*/
   }
-  v8 = SaveLoad_CurrentSavegame;
-  LODWORD(v21) = 2;
-  v25 = 0;
-  v9 = (_WORD *)v8->unk000[5];
-  SaveLoad_SaveData((int)v8, &v25, v21);
-  for ( i = this; i; i = (const char ****)i[1] )
+  v7 = g_TESSaveLoadGame; /*0x6b76fe*/
+  LODWORD(v19) = 2; /*0x6b7704*/
+  v23 = 0; /*0x6b770a*/
+  v8 = (_WORD *)v7->unk000[5]; /*0x6b7712*/
+  SaveLoad_SaveData((int)v7, &v23, v19); /*0x6b7716*/
+  for ( i = this; i; i = (ConversationView *)i->nextItemNode ) /*0x6b771f*/
   {
-    if ( !i[1] && !*i )
-      break;
-    sub_6B7D30(*i);
-    ++v25;
+    if ( !i->nextItemNode && !i->firstItem ) /*0x6b7727*/
+      break; /*0x6b772a*/
+    DialogueItem::SaveGame(i->firstItem); /*0x6b772e*/
+    ++v23; /*0x6b7733*/
   }
-  *v9 = v25;
-  v12 = (int *)*(this + 2);
-  v27 = 0xFFFFFFFF;
-  if ( v12 )
-    v27 = (unsigned __int16)sub_6B7520(this, v10, *v12);
-  LODWORD(v23) = 2;
-  SaveLoad_SaveData((int)SaveLoad_CurrentSavegame, &v27, v23);
+  *v8 = v23; /*0x6b7744*/
+  currentItemNode = this->currentItemNode; /*0x6b7748*/
+  DialogueItemIndex = 0xFFFFFFFF; /*0x6b774d*/
+  if ( currentItemNode ) /*0x6b7755*/
+    DialogueItemIndex = (unsigned __int16)Conversation::GetDialogueItemIndex(this, currentItemNode->item); /*0x6b7764*/
+  LODWORD(v21) = 2; /*0x6b776e*/
+  SaveLoad_SaveData((int)g_TESSaveLoadGame, &DialogueItemIndex, v21); /*0x6b7775*/
   if ( Global_DebugSaveBuffer )
   {
-    v13 = (UInt32 *)SaveLoad_CurrentSavegame[1].unk030[1];
-    v14 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v13 )
+    v11 = (UInt32 *)g_TESSaveLoadGame[1].unk030[1]; /*0x6b7788*/
+    v12 = g_TESSaveLoadGame->unk000[5]; /*0x6b7790*/
+    if ( v11 )
     {
-      v15 = TESForm_LookupByFormID(*v13);
-      v16 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v15->vtbl->GetEditorName)(
-                            v15,
-                            *(UInt32 *)((char *)v13 + 5),
+      v13 = TESForm_LookupByFormID(*v11); /*0x6b7798*/
+      v14 = (const char *)((int (__thiscall *)(TESForm *, _DWORD, int, const char *))v13->vtbl->GetEditorName)( /*0x6b77b8*/
+                            v13,
+                            *(UInt32 *)((char *)v11 + 5),
                             0xDF,
                             ".\\Dialogue\\Conversation.cpp");
       sub_40FEC0(
         "SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-        v14 - v26,
-        *v13,
-        v16,
-        v19,
-        v20,
-        v24);
+        v12 - v24,
+        *v11,
+        v14,
+        v17,
+        v18,
+        v22);
     }
     else
     {
-      sub_40FEC0("SaveGame(): %-5i ending at line %i in file %s", v14 - v26, 0xDF, ".\\Dialogue\\Conversation.cpp");
+      sub_40FEC0("SaveGame(): %-5i ending at line %i in file %s", v12 - v24, 0xDF, ".\\Dialogue\\Conversation.cpp");
     }
   }
-  if ( sub_45A170() )
+  if ( TESSaveLoadGame_UseSaveGameBlocks() ) /*0x6b77f4*/
   {
-    v17 = (_WORD *)v28;
-    v18 = SaveLoad_CurrentSavegame->unk000[5];
-    if ( v18 > v28 + 0xFFFF )
-      PrintError(
+    v15 = (_WORD *)v26; /*0x6b7803*/
+    v16 = g_TESSaveLoadGame->unk000[5]; /*0x6b7807*/
+    if ( v16 > v26 + 0xFFFF ) /*0x6b7812*/
+      PrintError( /*0x6b7823*/
         "Save Game Block in file %s on line %i is greater than maximum short size",
         ".\\Dialogue\\Conversation.cpp",
         0xDF);
-    *v17 = v18 - (_WORD)v17;
+    *v15 = v16 - (_WORD)v15; /*0x6b782d*/
   }
 }

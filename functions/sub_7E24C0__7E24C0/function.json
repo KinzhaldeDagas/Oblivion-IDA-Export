@@ -1,18 +1,31 @@
 {
-  "callees_count": 32,
-  "callers_count": 13,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x7E24C0",
+      "0x7E2646"
+    ]
+  ],
+  "chunks_sha256": "a97ec3a8c59f562d84e775746b411b2ec953243f4a209d437f20735f7c14d7c7",
+  "comment_regular": "Owner-side cleanup for all four BSShaderProperty RenderPass lists at +0x28/+0x38/+0x48/+0x58. For every node it unlinks the node, releases the node through the list allocator, destroys the payload's owned light array, and frees the 0x10-byte RenderPass. This is the ordinary payload owner; accumulator selector buckets do not perform this destruction.\n\nClear all BSShaderProperty-owned RenderPass lists and destroy their embedded pass records; shared shader-property cleanup, not SpeedTree-only.",
+  "comment_repeatable": "Owner-side cleanup for all four BSShaderProperty RenderPass lists at +0x28/+0x38/+0x48/+0x58. For every node it unlinks the node, releases the node through the list allocator, destroys the payload's owned light array, and frees the 0x10-byte RenderPass. This is the ordinary payload owner; accumulator selector buckets do not perform this destruction.\n\nMEF PERF 2026-10-07 PASS5: Performance negative result: property-owner cleanup visits each of four lists and repeatedly unlinks HEAD, destroys owned light arrays and payloads. Linear cleanup by itself is not redundant churn; rebuild frequency and invalidation necessity must be established before proposing pass reuse.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7E24C0",
+  "display_name": "BSShaderProperty_ClearRenderPassLists",
   "end_ea": "0x7E2646",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E24C0",
+  "name": "BSShaderProperty_ClearRenderPassLists",
   "segment": ".text",
   "sha256": "a97ec3a8c59f562d84e775746b411b2ec953243f4a209d437f20735f7c14d7c7",
   "size": 390,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E24C0",
+  "total_chunk_size": 390,
   "type": "void __thiscall(BSShaderProperty *this)",
   "xrefs_from_count": 178,
   "xrefs_to_count": 14

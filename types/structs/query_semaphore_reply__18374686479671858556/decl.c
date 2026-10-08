@@ -1,1 +1,6 @@
-query_semaphore_reply
+struct query_semaphore_reply
+{
+reply_header __header;
+unsigned int current;
+unsigned int max;
+};

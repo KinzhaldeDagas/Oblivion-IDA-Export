@@ -1,19 +1,32 @@
 {
-  "callees_count": 3,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 2,
+  "chunks": [
+    [
+      "0x447440",
+      "0x447482"
+    ]
+  ],
+  "chunks_sha256": "fca097c33c564914cc1db353eaf33104ef16b9c3dc792b7f728969b54f838b39",
+  "comment_regular": "Looks up a form by runtime FormID and dynamic-casts TESForm to TESTopic. Used here only for the HELLO and GOODBYE conversation roots.",
+  "comment_repeatable": "Looks up a form by runtime FormID and dynamic-casts TESForm to TESTopic. Used here only for the HELLO and GOODBYE conversation roots.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_447440",
+  "display_name": "LookupTopicByFormID",
   "end_ea": "0x447482",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_447440",
+  "name": "LookupTopicByFormID",
   "segment": ".text",
   "sha256": "fca097c33c564914cc1db353eaf33104ef16b9c3dc792b7f728969b54f838b39",
   "size": 66,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x447440",
-  "type": "void *__stdcall(void *)",
+  "total_chunk_size": 66,
+  "type": "TESTopic *__stdcall(UInt32 formID)",
   "xrefs_from_count": 25,
   "xrefs_to_count": 2
 }

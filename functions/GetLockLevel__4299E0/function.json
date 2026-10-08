@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 8,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 14,
+  "chunks": [
+    [
+      "0x4299E0",
+      "0x429A2A"
+    ]
+  ],
+  "chunks_sha256": "269ccc7271f44089d52ce68106161f32d13fb1d8a04cbd6f6b855ed041966105",
+  "comment_regular": "Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
+  "comment_repeatable": "Verified numeric lock magnitude to LOCK_LEVEL mapper. Thresholds are iLockLevelMaxVeryEasy, iLockLevelMaxEasy, iLockLevelMaxAverage, iLockLevelMaxHard, and iLockLevelMaxVeryHard; outputs 0..5 map through LockLevelNames to VeryEasy, Easy, Average, Hard, VeryHard, Impossible. Fallout independently uses the matching LOCK_LEVEL names, but this mapping is directly established by Oblivion code and data.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 10,
   "display_name": "GetLockLevel",
   "end_ea": "0x429A2A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "GetLockLevel",
   "segment": ".text",
   "sha256": "269ccc7271f44089d52ce68106161f32d13fb1d8a04cbd6f6b855ed041966105",
   "size": 74,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4299E0",
-  "type": "int __cdecl(int)",
-  "xrefs_from_count": 27,
+  "total_chunk_size": 74,
+  "type": "LOCK_LEVEL __cdecl(int numericLockMagnitude)",
+  "xrefs_from_count": 32,
   "xrefs_to_count": 14
 }

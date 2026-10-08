@@ -1,52 +1,90 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TeleportData",
+  "definition": "struct TeleportData\n{\nTESObjectREFR *linkedDoor; ///< Verified TESObjectREFR* to the paired door. LinkDoors writes reciprocal references in the two TeleportData records.\nfloat x; ///< Verified destination marker xyz written by TeleportData::SetTeleportPosition. When no random marker exists, LinkDoors derives a fallback position from the linked door transform.\nfloat y;\nfloat z;\nfloat xRot; ///< Verified teleport orientation x rotation copied from a marker or door-relative fallback.\nfloat yRot; ///< Verified teleport orientation y rotation copied from a marker or door-relative fallback.\nfloat zRot; ///< Verified teleport orientation z rotation copied from a marker or door-relative fallback.\n}\n",
   "id": 18374686479672049369,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified TESObjectREFR* to the paired door. LinkDoors writes reciprocal references in the two TeleportData records.",
       "name": "linkedDoor",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "TESObjectREFR *"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified destination marker xyz written by TeleportData::SetTeleportPosition. When no random marker exists, LinkDoors derives a fallback position from the linked door transform.",
       "name": "x",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "y",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "z",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified teleport orientation x rotation copied from a marker or door-relative fallback.",
       "name": "xRot",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified teleport orientation y rotation copied from a marker or door-relative fallback.",
       "name": "yRot",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "float"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified teleport orientation z rotation copied from a marker or door-relative fallback.",
       "name": "zRot",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "float"
     }
   ],
   "name": "TeleportData",
+  "ordinal": 9469,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 28
 }

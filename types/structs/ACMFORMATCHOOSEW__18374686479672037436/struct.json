@@ -1,106 +1,171 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "_ACMFORMATCHOOSEW",
+  "definition": "struct __unaligned __declspec(align(4)) _ACMFORMATCHOOSEW\n{\nDWORD cbStruct;\nDWORD fdwStyle;\nHWND hwndOwner;\nPWAVEFORMATEX pwfx;\nDWORD cbwfx;\nLPCWSTR pszTitle;\nWCHAR_0 szFormatTag[48];\nWCHAR_0 szFormat[128];\nLPWSTR pszName;\nDWORD cchName;\nDWORD fdwEnum;\nLPWAVEFORMATEX pwfxEnum;\nHINSTANCE hInstance;\nLPCWSTR pszTemplateName;\nLPARAM_0 lCustData;\nACMFORMATCHOOSEHOOKPROCW pfnHook;\n}\n",
   "id": 18374686479672037436,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbStruct",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fdwStyle",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hwndOwner",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "HWND"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pwfx",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "PWAVEFORMATEX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cbwfx",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszTitle",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szFormatTag",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 96
+      "size": 96,
+      "type": "WCHAR_0[48]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "szFormat",
       "offset": 120,
       "offset_hex": "0x78",
-      "size": 256
+      "size": 256,
+      "type": "WCHAR_0[128]"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszName",
       "offset": 376,
       "offset_hex": "0x178",
-      "size": 4
+      "size": 4,
+      "type": "LPWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "cchName",
       "offset": 380,
-      "offset_hex": "0x17c",
-      "size": 4
+      "offset_hex": "0x17C",
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "fdwEnum",
       "offset": 384,
       "offset_hex": "0x180",
-      "size": 4
+      "size": 4,
+      "type": "DWORD"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pwfxEnum",
       "offset": 388,
       "offset_hex": "0x184",
-      "size": 4
+      "size": 4,
+      "type": "LPWAVEFORMATEX"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "hInstance",
       "offset": 392,
       "offset_hex": "0x188",
-      "size": 4
+      "size": 4,
+      "type": "HINSTANCE"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pszTemplateName",
       "offset": 396,
-      "offset_hex": "0x18c",
-      "size": 4
+      "offset_hex": "0x18C",
+      "size": 4,
+      "type": "LPCWSTR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "lCustData",
       "offset": 400,
       "offset_hex": "0x190",
-      "size": 8
+      "size": 8,
+      "type": "LPARAM_0"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pfnHook",
       "offset": 408,
       "offset_hex": "0x198",
-      "size": 4
+      "size": 4,
+      "type": "ACMFORMATCHOOSEHOOKPROCW"
     }
   ],
   "name": "_ACMFORMATCHOOSEW",
+  "ordinal": 4956,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 412
 }

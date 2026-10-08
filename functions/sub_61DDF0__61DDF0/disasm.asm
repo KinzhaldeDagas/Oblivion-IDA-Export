@@ -1,4 +1,4 @@
-0x61DDF0: fldz
+0x61DDF0: fldz; Computes aim pitch/yaw to target. In ranged weapon/spell modes uses projectile speed/gravity and motion lead; writes pitch through out pointer and returns yaw normalized to roughly [-pi,pi].
 0x61DDF2: mov     eax, [esp+arg_8]
 0x61DDF6: sub     esp, 14h
 0x61DDF9: fstp    dword ptr [eax]
@@ -67,21 +67,21 @@
 0x61DEB4: mov     eax, [eax+80h]
 0x61DEBA: test    eax, eax
 0x61DEBC: jz      short loc_61DED0
-0x61DEBE: mov     ecx, [eax]
-0x61DEC0: push    2
-0x61DEC2: call    MagicItem_GetFXEffect
+0x61DEBE: mov     ecx, [eax]; magicItem
+0x61DEC0: push    2; effectIndex
+0x61DEC2: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x61DEC7: test    eax, eax
 0x61DEC9: jz      short loc_61DED0
 0x61DECB: fld     dword ptr [eax+74h]
 0x61DECE: jmp     short loc_61DED2
 0x61DED0: fld1
-0x61DED2: mov     ecx, offset flt_B37EE8
+0x61DED2: mov     ecx, (offset flt_B37ED0+18h)
 0x61DED7: fstp    [esp+24h+arg_0]
 0x61DEDB: call    GameSetting_GetSafeFloatPointer
 0x61DEE0: fld     [esp+24h+arg_0]
 0x61DEE4: fmul    dword ptr [eax]
 0x61DEE6: mov     bl, 1
-0x61DEE8: fstp    dword ptr [esp+24h+var_18+4]
+0x61DEE8: fstp    dword ptr [esp+24h+var_18+4]; Ranged spell projectile speed = strongest target FX EffectSetting.projSpeed * live fMagicProjectileBaseSpeed (default 1000).
 0x61DEEC: fldz
 0x61DEEE: fstp    [esp+24h+arg_0]
 0x61DEF2: test    edi, edi
@@ -103,15 +103,15 @@
 0x61DF1D: xor     eax, eax
 0x61DF1F: test    eax, eax
 0x61DF21: jz      short loc_61DF36
-0x61DF23: push    2
-0x61DF25: lea     ecx, [eax+18h]
-0x61DF28: call    MagicItem_GetFXEffect
+0x61DF23: push    2; effectIndex
+0x61DF25: lea     ecx, [eax+18h]; magicItem
+0x61DF28: call    MagicItem_GetFXEffect; Verified (Oblivion): MagicItem_GetFXEffect returns the effect's EffectSetting pointer; MagicShaderHitEffect constructors/PostLink dereference its +0x78 EffectSetting::effectShader field.
 0x61DF2D: test    eax, eax
 0x61DF2F: jz      short loc_61DF36
 0x61DF31: fld     dword ptr [eax+74h]
 0x61DF34: jmp     short loc_61DF38
 0x61DF36: fld1
-0x61DF38: mov     ecx, offset flt_B37EE8
+0x61DF38: mov     ecx, (offset flt_B37ED0+18h)
 0x61DF3D: fstp    [esp+24h+arg_0]
 0x61DF41: call    GameSetting_GetSafeFloatPointer
 0x61DF46: fld     [esp+24h+arg_0]
@@ -137,14 +137,14 @@
 0x61DF7E: fld     dword ptr [eax+7Ch]
 0x61DF81: jmp     short loc_61DF85
 0x61DF83: fld1
-0x61DF85: mov     ecx, offset flt_B37040
+0x61DF85: mov     ecx, (offset g_GameSettingStringPointers_B36CD8+368h)
 0x61DF8A: fstp    [esp+24h+arg_0]
 0x61DF8E: call    GameSetting_GetSafeFloatPointer
 0x61DF93: fld     dword ptr [eax]
 0x61DF95: fmul    [esp+24h+arg_0]
 0x61DF99: push    esi
-0x61DF9A: fstp    dword ptr [esp+28h+var_18+4]
-0x61DF9E: call    sub_608280
+0x61DF9A: fstp    dword ptr [esp+28h+var_18+4]; Ordinary arrow projectile speed = live fArrowSpeedMult (default 1500) * equipped TESAmmo.speed.
+0x61DF9E: call    Actor_CalculateArrowGravity
 0x61DFA3: fstp    [esp+28h+arg_0]
 0x61DFA7: add     esp, 4
 0x61DFAA: jmp     short loc_61DFB0
@@ -162,7 +162,7 @@
 0x61DFCF: push    edx; int
 0x61DFD0: push    esi; int
 0x61DFD1: push    eax; int
-0x61DFD2: call    sub_6199F0
+0x61DFD2: call    Combat_CalculatePredictedAimAngles
 0x61DFD7: fld     [esp+3Ch+var_4]
 0x61DFDB: mov     ecx, [esp+3Ch+arg_8]
 0x61DFDF: fstp    [esp+3Ch+arg_0]
@@ -182,7 +182,7 @@
 0x61E002: call    eax
 0x61E004: mov     ecx, [esp+24h+arg_4]
 0x61E008: mov     edx, [ecx]
-0x61E00A: mov     edi, eax
+0x61E00A: mov     edi, eax; Non-predictive fallback subtracts target GetPos from shooter GetPos, normalizes the 3D vector, then derives heading relative to shooter rotation.
 0x61E00C: mov     eax, [edx+174h]
 0x61E012: call    eax
 0x61E014: fld     dword ptr [eax+4]
@@ -199,11 +199,11 @@
 0x61E038: fstp    [esp+24h+var_8]
 0x61E03C: fld     [esp+24h+arg_0]
 0x61E040: fstp    [esp+24h+var_4]
-0x61E044: call    sub_43F350
+0x61E044: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x61E049: lea     ecx, [esp+24h+var_C]
 0x61E04D: fstp    st
 0x61E04F: push    ecx
-0x61E050: call    sub_683CB0
+0x61E050: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x61E055: fstp    [esp+28h+arg_8]
 0x61E059: mov     edx, [esi]
 0x61E05B: fld     [esp+28h+arg_8]

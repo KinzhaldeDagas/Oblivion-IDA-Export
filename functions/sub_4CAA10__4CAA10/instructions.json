@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4CAA10",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -19,19 +19,19 @@
   },
   {
     "ea": "0x4CAA17",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4CAA18",
-    "line": "lea     ecx, [esi+28h]",
+    "line": "lea     ecx, [esi+28h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x4CAA1B",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },

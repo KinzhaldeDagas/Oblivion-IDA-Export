@@ -1,85 +1,82 @@
-int __cdecl ActiveEffect_Base_CreateDynamic(
-        int a1,
-        int a2,
-        int *a3,
-        int a4,
-        int a5,
-        int a6,
-        int a7,
-        int a8,
-        int a9,
-        int a10,
-        int a11,
-        int a12,
-        int a13,
-        int a14,
-        int a15,
-        int a16,
-        int a17,
-        int a18,
-        int a19,
-        int a20,
-        int a21,
-        int a22,
-        int a23,
-        int a24,
-        int (__cdecl *a25)(int, int),
-        int a26)
+// Verified (Oblivion): reads EffectItem.setting.effectCode; SEFF creates ScriptEffect directly, otherwise looks up the ActiveEffectFactoryCode map and calls its factory. If no factory is registered, it uses the built-in switch fallback.
+ActiveEffect *__cdecl ActiveEffect_Base_CreateDynamic(
+        MagicCaster *caster,
+        MagicItem *magicItem,
+        EffectItem *effectItem,
+        TESBoundObject *sourceObject)
 {
-  if ( *(_DWORD *)(a3[7] + 0x98) == 0x46464553 )
-    return ActiveEffect_Base_CreateDynamic_::MakeScriptEffect(
-             a1,
-             a2,
-             a3,
-             a4,
-             a5,
-             a6,
-             a7,
-             a8,
-             a9,
-             a10,
-             a11,
-             a12,
-             a13,
-             a14,
-             a15,
-             a16,
-             a17,
-             a18,
-             a19,
-             a20,
-             a21,
-             a22,
-             a23,
-             a24,
-             a25);
+  int v5; // [esp+6Ch] [ebp+14h]
+  int v6; // [esp+70h] [ebp+18h]
+  int v7; // [esp+74h] [ebp+1Ch]
+  int v8; // [esp+78h] [ebp+20h]
+  int v9; // [esp+7Ch] [ebp+24h]
+  int v10; // [esp+80h] [ebp+28h]
+  int v11; // [esp+84h] [ebp+2Ch]
+  int v12; // [esp+88h] [ebp+30h]
+  int v13; // [esp+8Ch] [ebp+34h]
+  int v14; // [esp+90h] [ebp+38h]
+  int v15; // [esp+94h] [ebp+3Ch]
+  int v16; // [esp+98h] [ebp+40h]
+  int v17; // [esp+9Ch] [ebp+44h]
+  int v18; // [esp+A0h] [ebp+48h]
+  int v19; // [esp+A4h] [ebp+4Ch]
+  int v20; // [esp+A8h] [ebp+50h]
+  int v21; // [esp+ACh] [ebp+54h]
+  int v22; // [esp+B0h] [ebp+58h]
+  int v23; // [esp+B4h] [ebp+5Ch]
+  int v24; // [esp+B8h] [ebp+60h]
+  int (__cdecl *v25)(int, int); // [esp+BCh] [ebp+64h]
+  int v26; // [esp+C0h] [ebp+68h]
+
+  if ( effectItem->setting->effectCode == 0x46464553 ) /*0x68ea85*/
+    return (ActiveEffect *)ActiveEffect_Base_CreateDynamic_::MakeScriptEffect( /*0x68ea86*/
+                             (int)effectItem,
+                             (int)caster,
+                             (int)magicItem,
+                             (int)effectItem,
+                             (int)sourceObject,
+                             v5,
+                             v6,
+                             v7,
+                             v8,
+                             v9,
+                             v10,
+                             v11,
+                             v12,
+                             v13,
+                             v14,
+                             v15,
+                             v16,
+                             v17,
+                             v18,
+                             v19);
   else
-    return ActiveEffect_Base_CreateDynamic_::NotScriptEffect(
-             a3,
-             a1,
-             a2,
-             (int)a3,
-             a4,
-             a5,
-             a6,
-             a7,
-             a8,
-             a9,
-             a10,
-             a11,
-             a12,
-             a13,
-             a14,
-             a15,
-             a16,
-             a17,
-             a18,
-             a19,
-             a20,
-             a21,
-             a22,
-             a23,
-             a24,
-             a25,
-             a26);
+    return (ActiveEffect *)ActiveEffect_Base_CreateDynamic_::NotScriptEffect( /*0x68ea85*/
+                             (int *)effectItem,
+                             (int)caster,
+                             (int)magicItem,
+                             (int)effectItem,
+                             (int)sourceObject,
+                             v5,
+                             v6,
+                             v7,
+                             v8,
+                             v9,
+                             v10,
+                             v11,
+                             v12,
+                             v13,
+                             v14,
+                             v15,
+                             v16,
+                             v17,
+                             v18,
+                             v19,
+                             v20,
+                             v21,
+                             v22,
+                             v23,
+                             v24,
+                             v25,
+                             v26);              // CreateDynamic special-cases EffectSetting.effectCode == 'SEFF' from effectItem->setting +0x98 and allocates ScriptEffect before the normal creator-map/switch path.
 }

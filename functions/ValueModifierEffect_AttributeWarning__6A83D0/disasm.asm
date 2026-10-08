@@ -51,7 +51,7 @@
 0x6A846F: mov     esi, ds:0B38D28h
 0x6A8475: push    ecx
 0x6A8476: push    eax
-0x6A8477: call    ActorValue_GetName
+0x6A8477: call    ActorValue_GetName; Return the localized actor-value display name through g_actorValueNameSettings. Native skills occupy the contiguous SkillActorValue range 0x0C..0x20.
 0x6A847C: add     esp, 4
 0x6A847F: push    eax
 0x6A8480: push    esi

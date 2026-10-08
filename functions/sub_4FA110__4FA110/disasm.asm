@@ -1,8 +1,8 @@
-0x4FA110: push    esi
+0x4FA110: push    esi; ScriptEventList::GetVariableValue scans `m_vars` for Var.id == variableID and returns Var.data. A single global last-list/last-ID/Var cache accelerates repeated CTDA and script lookups; a cache miss with no variable logs an error and returns 0.
 0x4FA111: xor     esi, esi
 0x4FA113: cmp     ds:0B361BCh, ecx
 0x4FA119: push    edi
-0x4FA11A: mov     edi, dword ptr [esp+8+ArgList]
+0x4FA11A: mov     edi, [esp+8+ArgList]
 0x4FA11E: jnz     short loc_4FA132
 0x4FA120: cmp     ds:0B09E20h, edi
 0x4FA126: jnz     short loc_4FA132

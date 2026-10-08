@@ -1,4 +1,4 @@
-0x4B7120: push    ecx
+0x4B7120: push    ecx; Verified TESObjectDOOR save-record vtable hook (slot +0x24 at 0xA44A78): writes standard door chunks, FNAM doorFlags, then emits one TNAM chunk (code 0x4D414E54) per randomTeleport list entry using each linked TESForm.refID.
 0x4B7121: push    esi
 0x4B7122: push    edi
 0x4B7123: mov     edi, ecx
@@ -21,7 +21,7 @@
 0x4B7161: push    ecx; Src
 0x4B7162: push    4D414E53h; int
 0x4B7167: mov     [esp+18h+Src], eax
-0x4B716B: call    TESForm_PutFormRecordChunkData
+0x4B716B: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4B7170: add     esp, 0Ch
 0x4B7173: mov     eax, [edi+5Ch]
 0x4B7176: test    eax, eax
@@ -32,7 +32,7 @@
 0x4B7183: push    eax; Src
 0x4B7184: push    4D414E41h; int
 0x4B7189: mov     [esp+18h+Src], edx
-0x4B718D: call    TESForm_PutFormRecordChunkData
+0x4B718D: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4B7192: add     esp, 0Ch
 0x4B7195: mov     eax, [edi+60h]
 0x4B7198: test    eax, eax
@@ -43,13 +43,13 @@
 0x4B71A5: push    edx; Src
 0x4B71A6: push    4D414E42h; int
 0x4B71AB: mov     [esp+18h+Src], ecx
-0x4B71AF: call    TESForm_PutFormRecordChunkData
+0x4B71AF: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4B71B4: add     esp, 0Ch
 0x4B71B7: push    1; Size
 0x4B71B9: lea     eax, [edi+64h]
 0x4B71BC: push    eax; Src
 0x4B71BD: push    4D414E46h; int
-0x4B71C2: call    TESForm_PutFormRecordChunkData
+0x4B71C2: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4B71C7: lea     esi, [edi+68h]
 0x4B71CA: add     esp, 0Ch
 0x4B71CD: test    esi, esi
@@ -63,9 +63,9 @@
 0x4B71E1: push    4; Size
 0x4B71E3: lea     eax, [esp+10h+Src]
 0x4B71E7: push    eax; Src
-0x4B71E8: push    4D414E54h; int
+0x4B71E8: push    4D414E54h; Verified TNAM serialization: reads refID at +0x0C from each randomTeleport list TESForm and writes the 4-byte ID into one TNAM record chunk.
 0x4B71ED: mov     [esp+18h+Src], edx
-0x4B71F1: call    TESForm_PutFormRecordChunkData
+0x4B71F1: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4B71F6: mov     esi, [esi+4]
 0x4B71F9: add     esp, 0Ch
 0x4B71FC: test    esi, esi

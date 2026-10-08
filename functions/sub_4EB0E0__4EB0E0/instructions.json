@@ -61,13 +61,13 @@
   },
   {
     "ea": "0x4EB107",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; worldspace",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EB109",
-    "line": "call    sub_4EF7E0",
+    "line": "call    TESWorldSpace_GetRootTerrainLODQuadMap; Verified: climbs parentWorldspace to the root TESWorldSpace and returns its embedded terrainLODQuadRoots map at +0x38.",
     "mnemonic": "call",
     "size": 5
   },
@@ -193,19 +193,19 @@
   },
   {
     "ea": "0x4EB157",
-    "line": "push    eax",
+    "line": "push    eax; worldspace",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4EB158",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; gridDistantArray",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4EB15A",
-    "line": "call    sub_483D60",
+    "line": "call    DistantLOD_UpdateExteriorGrid; Verified mode routing: WorldSpace mask bit 0x1 is the tree channel and is gated by bDisplayLODTrees; bit 0x2 is the building/object channel and is gated by bDisplayLODBuildings plus the per-cell LOD map. Local state value 4 is an internal combined-update state that can downgrade to 1 or 2; it is not the .cmp LandLOD mask bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x4EB168",
-    "line": "call    sub_49E280",
+    "line": "call    sub_49E280; Pass205/206: LODWaterRoot jump-table loop creates four generated child quads under 0x00B35234 and reaches shared child-creation tail.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x4EB17F",
-    "line": "push    0",
+    "line": "push    0; a4",
     "mnemonic": "push",
     "size": 2
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4EB194",
-    "line": "call    sub_4EA6E0",
+    "line": "call    DistantLOD_UpdateLandLODAtPosition; Verified position-triggered LandLOD refresh wrapper: resolves current WorldSpace, climbs parentWorldspace to the root, obtains root terrainLODQuadRoots via TESWorldSpace_GetRootTerrainLODQuadMap, and delegates to DistantLOD_UpdateLandLODMap.",
     "mnemonic": "call",
     "size": 5
   },

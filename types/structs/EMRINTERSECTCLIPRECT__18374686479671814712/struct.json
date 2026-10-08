@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "EMRINTERSECTCLIPRECT",
+  "definition": "typedef EMREXCLUDECLIPRECT EMRINTERSECTCLIPRECT\n",
   "id": 18374686479671814712,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "emr",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 8
+      "size": 8,
+      "type": "EMR"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "rclClip",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 16
+      "size": 16,
+      "type": "RECTL"
     }
   ],
   "name": "EMRINTERSECTCLIPRECT",
+  "ordinal": 1341,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 24
 }

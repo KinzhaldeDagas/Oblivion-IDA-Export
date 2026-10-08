@@ -1,1 +1,1 @@
-0x4E9050: jmp     sub_4E8C20
+0x4E9050: jmp     TESRoad_ClearConnectedPointMap; Verified: TESRoad destructor helper traverses its 37-bucket map of BSSimpleList<TESConnectedPoint*> values, calls the per-entry cleanup routine for each point, frees each list node and list header, clears the map, and zeros TESRoad+0x18. Exact TESConnectedPoint layout/cleanup semantics remain Unknown.

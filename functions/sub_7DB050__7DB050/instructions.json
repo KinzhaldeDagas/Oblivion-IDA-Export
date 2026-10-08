@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7DB050",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; [Verified] Initializes a NiTStringPointerMap<ShaderBufferEntry*> with 0x25 buckets and, for a positive package index, formats shaderpackage%03i.sdp. Oblivion then loads that SDP record map for shader creation. [Verified cross-build divergence] Fallout Renderer::Init exposes bCreateShaderPackage and forwards it to BSShaderManager::bCreateNewShaderPackage, while its HLSL creator resolves source files and compiles them; the current Fallout IDB does not establish a same-name Oblivion-style SDP map.",
     "mnemonic": "push",
     "size": 2
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x7DB0D2",
-    "line": "mov     eax, [esp+80h+arg_0]",
+    "line": "mov     eax, [esp+80h+packageIndex]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -496,5 +496,89 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CEFC0",
+    "line": "mov     ecx, [ebp-78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEFC3",
+    "line": "add     ecx, 8",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEFC6",
+    "line": "jmp     j_??1?$NiTStringPointerMap@PAVShaderBufferEntry@@@@UAE@XZ; NiTStringPointerMap<ShaderBufferEntry *>::~NiTStringPointerMap<ShaderBufferEntry *>(void)",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEFCB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEFCF",
+    "line": "lea     eax, [edx-70h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEFD2",
+    "line": "mov     ecx, [edx-74h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEFD5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEFD7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEFDC",
+    "line": "add     eax, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEFDF",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEFE2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEFE4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEFE9",
+    "line": "mov     eax, offset stru_AF7D70",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEFEE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

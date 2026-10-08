@@ -45,7 +45,7 @@
 0x4FF546: mov     ecx, [esi+418h]
 0x4FF54C: push    esi
 0x4FF54D: mov     [edi+14h], ecx
-0x4FF550: call    FormHeapFree
+0x4FF550: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FF555: add     esp, 4
 0x4FF558: mov     eax, 0FFFFh
 0x4FF55D: jmp     loc_4FF62A
@@ -79,7 +79,7 @@
 0x4FF5C0: push    edi; int
 0x4FF5C1: call    sub_4FCE30
 0x4FF5C6: push    esi
-0x4FF5C7: call    FormHeapFree
+0x4FF5C7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FF5CC: add     esp, 10h
 0x4FF5CF: jmp     short loc_4FF624
 0x4FF5D1: mov     ecx, [esp+440h+var_22C]
@@ -101,7 +101,7 @@
 0x4FF613: call    sub_4FCE30
 0x4FF618: add     esp, 0Ch
 0x4FF61B: push    esi
-0x4FF61C: call    FormHeapFree
+0x4FF61C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FF621: add     esp, 4
 0x4FF624: mov     eax, 0FFFFh
 0x4FF629: pop     ebp
@@ -168,6 +168,6 @@
 0x4FF6F5: call    sub_4FCE30
 0x4FF6FA: push    esi
 0x4FF6FB: mov     dword ptr [edi+14h], 1
-0x4FF702: call    FormHeapFree
+0x4FF702: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x4FF707: add     esp, 0Ch
 0x4FF70A: jmp     loc_4FF624

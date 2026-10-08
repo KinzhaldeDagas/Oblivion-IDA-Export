@@ -46,3 +46,12 @@
 0x7377F7: pop     ebx
 0x7377F8: add     esp, 10h
 0x7377FB: retn
+0x9CAAC0: mov     ecx, [ebp-10h]
+0x9CAAC3: jmp     loc_733860
+0x9CAAC8: mov     edx, [esp+arg_4]
+0x9CAACC: lea     eax, [edx-14h]
+0x9CAACF: mov     ecx, [edx-18h]
+0x9CAAD2: xor     ecx, eax
+0x9CAAD4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CAAD9: mov     eax, offset stru_AF311C
+0x9CAADE: jmp     ___CxxFrameHandler3

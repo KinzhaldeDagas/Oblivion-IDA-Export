@@ -1,5 +1,5 @@
-0x4D8760: push    ebp
-0x4D8761: mov     ebp, [esp+4+arg_0]
+0x4D8760: push    ebp; Removes an inventory item/count, optionally transferring it to destination or placing it at destinationPosition/destinationRotation. Native thiscall has ten stack arguments.
+0x4D8761: mov     ebp, [esp+4+item]
 0x4D8765: push    esi
 0x4D8766: push    edi
 0x4D8767: xor     edi, edi
@@ -16,7 +16,7 @@
 0x4D877D: mov     ebx, eax
 0x4D877F: test    ebx, ebx
 0x4D8781: jz      short loc_4D87CE
-0x4D8783: mov     edi, [esp+10h+arg_4]
+0x4D8783: mov     edi, [esp+10h+extraList]
 0x4D8787: push    4
 0x4D8789: push    edi
 0x4D878A: push    esi
@@ -24,21 +24,21 @@
 0x4D8790: push    ebx
 0x4D8791: push    esi; a1
 0x4D8792: call    ContainerExtraData_GetContainerExtraDataForRef
-0x4D8797: mov     ecx, [esp+24h+arg_24]
-0x4D879B: mov     edx, [esp+24h+arg_20]
+0x4D8797: mov     ecx, dword ptr [esp+24h+arg9]
+0x4D879B: mov     edx, dword ptr [esp+24h+arg8]
 0x4D879F: add     esp, 14h
 0x4D87A2: push    ecx
-0x4D87A3: mov     ecx, [esp+14h+arg_1C]
+0x4D87A3: mov     ecx, [esp+14h+destinationRotation]
 0x4D87A7: push    edx
-0x4D87A8: mov     edx, [esp+18h+arg_18]
+0x4D87A8: mov     edx, [esp+18h+destinationPosition]
 0x4D87AC: push    ecx
-0x4D87AD: mov     ecx, [esp+1Ch+arg_14]
+0x4D87AD: mov     ecx, [esp+1Ch+destination]
 0x4D87B1: push    edx
-0x4D87B2: mov     edx, [esp+20h+arg_10]
+0x4D87B2: mov     edx, [esp+20h+arg4]
 0x4D87B6: push    ecx
-0x4D87B7: mov     ecx, [esp+24h+arg_8]
+0x4D87B7: mov     ecx, [esp+24h+count]
 0x4D87BB: push    edx
-0x4D87BC: mov     edx, [esp+28h+arg_C]
+0x4D87BC: mov     edx, [esp+28h+arg3]
 0x4D87C0: push    edi
 0x4D87C1: push    ecx
 0x4D87C2: push    edx

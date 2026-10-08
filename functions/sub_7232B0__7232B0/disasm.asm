@@ -25,7 +25,7 @@
 0x723300: call    TESEnchantableForm_GetCastingType
 0x723305: push    eax
 0x723306: mov     ecx, esi
-0x723308: call    sub_452A60
+0x723308: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x72330D: push    eax
 0x72330E: push    edi
 0x72330F: call    sub_7383F0
@@ -50,3 +50,12 @@
 0x723348: pop     esi
 0x723349: add     esp, 0Ch
 0x72334C: retn    4
+0x9C9BA0: lea     ecx, [ebp+4]; slot
+0x9C9BA3: jmp     NiPointerSlot_Release
+0x9C9BA8: mov     edx, [esp+arg_4]
+0x9C9BAC: lea     eax, [edx-8]
+0x9C9BAF: mov     ecx, [edx-0Ch]
+0x9C9BB2: xor     ecx, eax
+0x9C9BB4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C9BB9: mov     eax, offset stru_AF23BC
+0x9C9BBE: jmp     ___CxxFrameHandler3

@@ -1,20 +1,20 @@
-NiTimeController *__stdcall sub_756910(int a1)
+NiTimeController *__thiscall sub_756910(const char **this, _DWORD **a2)
 {
-  NiTimeController *v1; // eax
-  NiTimeController *v2; // esi
+  NiTimeController *v3; // eax
+  NiTimeController *v4; // esi
 
-  v1 = (NiTimeController *)FormHeapAlloc(0x48u);
-  v2 = v1;
-  if ( v1 )
+  v3 = (NiTimeController *)FormHeapAlloc(0x48u); /*0x756916*/
+  v4 = v3; /*0x75691b*/
+  if ( v3 ) /*0x756922*/
   {
-    sub_75F510(v1);
-    v2->vtbl = (NiTimeControllerVtbl *)&NiPSysInitialRotSpeedVarCtlr::`vftable';
-    sub_75F5A0(v2, a1);
-    return v2;
+    sub_75F510(v3); /*0x756926*/
+    v4->vtbl = (NiTimeControllerVtbl *)&NiPSysInitialRotSpeedVarCtlr::`vftable'; /*0x756933*/
+    sub_75F5A0(this, (int)v4, a2); /*0x756939*/
+    return v4; /*0x75693f*/
   }
   else
   {
-    sub_75F5A0(0, a1);
-    return 0;
+    sub_75F5A0(this, 0, a2); /*0x75694f*/
+    return 0; /*0x756955*/
   }
 }

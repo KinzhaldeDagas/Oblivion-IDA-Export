@@ -15,21 +15,21 @@ bool __cdecl sub_5087C0(
   UInt16 v12[2]; // [esp+4h] [ebp-8h] BYREF
   float v13; // [esp+8h] [ebp-4h]
 
-  *(_DWORD *)v12 = 0;
-  v11 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v12, &v11);
-  if ( result )
+  *(_DWORD *)v12 = 0; /*0x5087ef*/
+  v11 = 0; /*0x5087f7*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v12, &v11); /*0x5087ff*/
+  if ( result ) /*0x508809*/
   {
-    CastingType = TESEnchantableForm_GetCastingType(&TES->sky->atmosphere->__vftbl);
-    if ( CastingType )
+    CastingType = TESEnchantableForm_GetCastingType(&MEMORY[0xB333A0]->sky->atmosphere->__vftbl); /*0x50881a*/
+    if ( CastingType ) /*0x508821*/
     {
-      v10 = !*(_DWORD *)v12 && !v11;
-      TES->sky->atmosphere->unk18 = v10;
-      v13 = (float)v11;
-      *(float *)(CastingType + 0x2C) = (float)*(int *)v12;
-      *(float *)(CastingType + 0x30) = v13;
+      v10 = !*(_DWORD *)v12 && !v11; /*0x508834*/
+      MEMORY[0xB333A0]->sky->atmosphere->unk18 = v10; /*0x508842*/
+      v13 = (float)v11; /*0x508848*/
+      *(float *)(CastingType + 0x2C) = (float)*(int *)v12; /*0x508850*/
+      *(float *)(CastingType + 0x30) = v13; /*0x508857*/
     }
-    return 1;
+    return 1; /*0x50885a*/
   }
-  return result;
+  return result; /*0x50880b*/
 }

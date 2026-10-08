@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
+  "chunks": [
+    [
+      "0x428CC0",
+      "0x428D96"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "6822502c16b1f2a422ea202f7dcc3fe061e1ef925b2de8424c319d57c2a0df2c",
   "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_428CC0",
+  "comment_repeatable": "Replace or create kExtraData_Light (type 0x30) with the shared {strong NiLight*, target dimmer} payload. Existing payload ownership is released before replacement.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "ExtraDataList_SetExtraLightPayload",
   "end_ea": "0x428D96",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_428CC0",
+  "name": "ExtraDataList_SetExtraLightPayload",
   "segment": ".text",
   "sha256": "a3bedef60a34d697164656247268cb6891c20490a5c3158a88369b14ecc8b892",
   "size": 214,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x428CC0",
-  "type": "BSExtraData *__thiscall(ExtraDataList *this, BSExtraDataVtbl *)",
-  "xrefs_from_count": 91,
+  "total_chunk_size": 252,
+  "type": "BSExtraData *__thiscall(ExtraDataList *self, AttachedLightPayload_Decoded *payload)",
+  "xrefs_from_count": 105,
   "xrefs_to_count": 1
 }

@@ -1,1 +1,1 @@
-LPLVITEMW
+typedef tagLVITEMW *LPLVITEMW;

@@ -1,5 +1,5 @@
 int sub_A12060()
 {
-  InitializeCriticalSection(&stru_BA7980);
-  return atexit(sub_A27A30);
+  InitializeCriticalSection(&unk_BA7980); /*0xa12065*/
+  return atexit(sub_A27A30); /*0xa12076*/
 }

@@ -6,7 +6,7 @@
 0x66FD98: call    sub_579870
 0x66FD9D: mov     esi, [esp+24h+arg_4]
 0x66FDA1: test    esi, esi
-0x66FDA3: mov     edi, dword ptr [esp+24h+ArgList]
+0x66FDA3: mov     edi, [esp+24h+ArgList]
 0x66FDA7: jnz     short loc_66FDB7
 0x66FDA9: mov     ecx, ds:0B33A98h
 0x66FDAF: push    edi
@@ -28,21 +28,21 @@
 0x66FDE2: push    ecx
 0x66FDE3: mov     ecx, ds:0B33A98h
 0x66FDE9: push    edi
-0x66FDEA: mov     dword ptr [esp+30h+ArgList], esi
+0x66FDEA: mov     [esp+30h+ArgList], esi
 0x66FDEE: mov     [esp+30h+arg_4], esi
 0x66FDF2: call    sub_4478B0
 0x66FDF7: test    eax, eax
 0x66FDF9: jz      loc_66FEFF
 0x66FDFF: mov     edx, [esp+24h+arg_4]
-0x66FE03: mov     ecx, dword ptr [esp+24h+ArgList]
+0x66FE03: mov     ecx, [esp+24h+ArgList]
 0x66FE07: push    edx; int
 0x66FE08: push    ecx; ArgList
 0x66FE09: mov     ecx, eax
-0x66FE0B: call    sub_4F1630
+0x66FE0B: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x66FE10: mov     esi, eax
 0x66FE12: jmp     short loc_66FE43
 0x66FE14: mov     ecx, esi; this
-0x66FE16: call    TESObjectCELL_IsInterior
+0x66FE16: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66FE1B: test    al, al
 0x66FE1D: jnz     short loc_66FE43
 0x66FE1F: mov     ecx, esi; this
@@ -57,7 +57,7 @@
 0x66FE36: call    TESObjectCELL_GetXCoordinate
 0x66FE3B: push    eax; ArgList
 0x66FE3C: mov     ecx, edi
-0x66FE3E: call    sub_4F1630
+0x66FE3E: call    TESWorldSpace_LoadExteriorCellAtCoord; Verified: exterior-cell loader checks cellMap first, searches master files using cellOffsetsArray fast path or GRUP/CELL fallback, creates a missing TESObjectCELL, post-fixes it, then attaches worldspace-indexed references.
 0x66FE43: test    esi, esi
 0x66FE45: jz      loc_66FEFF
 0x66FE4B: mov     edx, ds:0B3F9A8h
@@ -91,9 +91,9 @@
 0x66FEA8: mov     [eax+4], ecx
 0x66FEAB: mov     ecx, ebx; int
 0x66FEAD: mov     [eax+8], edx
-0x66FEB0: call    sub_66EAF0
+0x66FEB0: call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.
 0x66FEB5: mov     ecx, esi; this
-0x66FEB7: call    TESObjectCELL_IsInterior
+0x66FEB7: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x66FEBC: test    al, al
 0x66FEBE: jnz     short loc_66FEFF
 0x66FEC0: lea     eax, [esp+24h+arg_4]

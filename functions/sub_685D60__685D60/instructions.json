@@ -138,12 +138,6 @@
     "size": 2
   },
   {
-    "ea": "0x685DA9",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x685DB0",
     "line": "cmp     [esp+18h+var_5], 0",
     "mnemonic": "cmp",
@@ -271,7 +265,7 @@
   },
   {
     "ea": "0x685DF2",
-    "line": "call    sub_6899C0",
+    "line": "call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,13 +481,13 @@
   },
   {
     "ea": "0x685E53",
-    "line": "lea     ecx, [edi+4]; void *",
+    "line": "lea     ecx, [edi+4]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x685E56",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -505,7 +499,7 @@
   },
   {
     "ea": "0x685E5C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +571,7 @@
   },
   {
     "ea": "0x685E7C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,13 +595,13 @@
   },
   {
     "ea": "0x685E8D",
-    "line": "lea     ecx, [edi+4]; void *",
+    "line": "lea     ecx, [edi+4]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x685E90",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -619,7 +613,7 @@
   },
   {
     "ea": "0x685E96",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-ahkCharacterProxy
+struct ahkCharacterProxy;

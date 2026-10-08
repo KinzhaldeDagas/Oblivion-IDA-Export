@@ -1,10 +1,9 @@
 0x95F770: push    esi
 0x95F771: push    edi
-0x95F772: mov     edi, dword ptr [esp+8+ArgList]
+0x95F772: mov     edi, [esp+8+ArgList]
 0x95F776: mov     eax, edi
 0x95F778: lea     edx, [eax+1]
 0x95F77B: jmp     short loc_95F780
-0x95F77D: align 10h
 0x95F780: mov     cl, [eax]
 0x95F782: add     eax, 1
 0x95F785: test    cl, cl
@@ -17,7 +16,7 @@
 0x95F795: push    offset aSHalfspace_bv; "%s = HALFSPACE_BV"
 0x95F79A: push    esi; SizeInBytes
 0x95F79B: push    eax; DstBuf
-0x95F79C: mov     dword ptr [esp+1Ch+ArgList], eax
+0x95F79C: mov     [esp+1Ch+ArgList], eax
 0x95F7A0: call    sub_6C5D40
 0x95F7A5: mov     esi, [esp+1Ch+arg_4]
 0x95F7A9: movzx   edi, word ptr [esi+0Ah]

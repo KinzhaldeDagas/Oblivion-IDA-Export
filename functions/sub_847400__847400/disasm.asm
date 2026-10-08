@@ -16,7 +16,7 @@
 0x84742B: mov     eax, ds:0B42EB8h
 0x847430: fld1
 0x847432: movzx   esi, byte ptr [eax+9]
-0x847436: mov     edi, [esp+3Ch+arg_C]
+0x847436: mov     edi, [esp+3Ch+z]
 0x84743A: mov     eax, [edi+0C8h]
 0x847440: movzx   eax, byte ptr [eax+esi]
 0x847444: mov     ecx, ds:0B25AD0h
@@ -24,11 +24,11 @@
 0x847450: mov     ebx, ds:0B45B6Ch
 0x847456: mov     [esp+3Ch+var_1C], ecx
 0x84745A: mov     ecx, ds:0B25AD4h
-0x847460: mov     [esp+3Ch+arg_C], eax
+0x847460: mov     [esp+3Ch+z], eax
 0x847464: fstp    [esp+3Ch+var_1C]
 0x847468: mov     ebp, [esp+3Ch+var_1C]
 0x84746C: sub     esp, 10h
-0x84746F: fild    [esp+4Ch+arg_C]
+0x84746F: fild    [esp+4Ch+z]
 0x847473: mov     eax, esp
 0x847475: mov     [eax], ebp
 0x847477: mov     [esp+4Ch+var_14], edx
@@ -37,9 +37,9 @@
 0x847484: fstp    [esp+4Ch+var_14]
 0x847488: mov     ecx, [esp+4Ch+var_14]
 0x84748C: mov     [eax+8], ecx
-0x84748F: push    1Fh
+0x84748F: push    1Fh; slot
 0x847491: mov     [eax+0Ch], edx
-0x847494: call    sub_7ECAE0
+0x847494: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x847499: mov     edx, [ebx+24h]
 0x84749C: mov     ebp, [edx]
 0x84749E: mov     eax, [edi]
@@ -47,7 +47,7 @@
 0x8474A6: add     esp, 14h
 0x8474A9: push    esi
 0x8474AA: mov     ecx, edi
-0x8474AC: mov     [esp+40h+arg_C], ebp
+0x8474AC: mov     [esp+40h+z], ebp
 0x8474B0: call    edx
 0x8474B2: mov     ebp, [ebp+4]
 0x8474B5: cmp     ebp, eax
@@ -69,13 +69,13 @@
 0x8474DC: call    eax
 0x8474DE: mov     eax, [esp+3Ch+var_24]
 0x8474E2: test    eax, eax
-0x8474E4: mov     ecx, [esp+3Ch+arg_C]
+0x8474E4: mov     ecx, [esp+3Ch+z]
 0x8474E8: mov     [ecx+4], eax
 0x8474EB: jz      short loc_8474F7
 0x8474ED: add     eax, 4
 0x8474F0: push    eax; lpAddend
 0x8474F1: call    dword ptr ds:0A28078h
-0x8474F7: mov     edx, [esp+3Ch+arg_C]
+0x8474F7: mov     edx, [esp+3Ch+z]
 0x8474FB: mov     ecx, [esp+3Ch+var_28]
 0x8474FF: push    edi
 0x847500: push    edx
@@ -85,7 +85,7 @@
 0x84750C: mov     ecx, [esp+3Ch+var_28]
 0x847510: push    esi
 0x847511: push    edi
-0x847512: mov     [esp+44h+arg_C], ebp
+0x847512: mov     [esp+44h+z], ebp
 0x847516: call    sub_848FD0
 0x84751B: mov     ebp, [ebp+4]
 0x84751E: cmp     ebp, eax
@@ -107,16 +107,16 @@
 0x847545: call    eax
 0x847547: mov     eax, [esp+3Ch+var_24]
 0x84754B: test    eax, eax
-0x84754D: mov     ecx, [esp+3Ch+arg_C]
+0x84754D: mov     ecx, [esp+3Ch+z]
 0x847551: mov     [ecx+4], eax
 0x847554: jz      short loc_847560
 0x847556: add     eax, 4
 0x847559: push    eax; lpAddend
 0x84755A: call    dword ptr ds:0A28078h
-0x847560: mov     edx, [esp+3Ch+arg_C]
-0x847564: push    edi
+0x847560: mov     edx, [esp+3Ch+z]
+0x847564: push    edi; w
 0x847565: mov     edi, [esp+40h+var_28]
-0x847569: push    edx
+0x847569: push    edx; z
 0x84756A: mov     ecx, edi
 0x84756C: call    sub_848FA0
 0x847571: fldz
@@ -143,9 +143,9 @@
 0x8475AB: fstp    st
 0x8475AD: jmp     short loc_8475B1
 0x8475AF: fstp    st(1)
-0x8475B1: fstp    [esp+3Ch+arg_C]
+0x8475B1: fstp    [esp+3Ch+z]
 0x8475B5: sub     esp, 10h
-0x8475B8: fld     [esp+4Ch+arg_C]
+0x8475B8: fld     [esp+4Ch+z]
 0x8475BC: mov     eax, esp
 0x8475BE: fstp    [esp+4Ch+var_1C]
 0x8475C2: mov     ecx, [esp+4Ch+var_1C]
@@ -161,9 +161,9 @@
 0x8475E7: mov     [eax+8], ecx
 0x8475EA: fstp    [esp+4Ch+var_10]
 0x8475EE: mov     edx, [esp+4Ch+var_10]
-0x8475F2: push    2
+0x8475F2: push    2; slot
 0x8475F4: mov     [eax+0Ch], edx
-0x8475F7: call    sub_7ECAE0
+0x8475F7: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x8475FC: add     esp, 14h
 0x8475FF: cmp     esi, 8
 0x847602: jnz     short loc_84760E
@@ -191,9 +191,9 @@
 0x84763B: fstp    [esp+3Ch+var_20]
 0x84763F: jmp     short loc_847643
 0x847641: fstp    st(1)
-0x847643: fstp    [esp+3Ch+arg_C]
+0x847643: fstp    [esp+3Ch+z]
 0x847647: sub     esp, 10h
-0x84764A: fld     [esp+4Ch+arg_C]
+0x84764A: fld     [esp+4Ch+z]
 0x84764E: mov     eax, esp
 0x847650: fstp    [esp+4Ch+var_1C]
 0x847654: mov     ecx, [esp+4Ch+var_1C]
@@ -209,28 +209,28 @@
 0x847679: mov     [eax+8], ecx
 0x84767C: fstp    [esp+4Ch+var_10]
 0x847680: mov     edx, [esp+4Ch+var_10]
-0x847684: push    3
+0x847684: push    3; slot
 0x847686: mov     [eax+0Ch], edx
-0x847689: call    sub_7ECAE0
+0x847689: call    OB_BSShader_SetSharedFloat4Constant_010201A0; Shader global table helper: store four dwords at dword_B46498 + 0x10 * index.
 0x84768E: add     esp, 14h
-0x847691: cmp     byte ptr [esp+3Ch+arg_10], 0
+0x847691: cmp     byte ptr [esp+3Ch+value], 0
 0x847696: jz      short loc_8476D3
 0x847698: mov     esi, 1
 0x84769D: add     [ebx+60h], esi
-0x8476A0: mov     [esp+3Ch+arg_10], ebx
+0x8476A0: mov     [esp+3Ch+value], ebx
 0x8476A4: mov     ecx, [edi+38h]
-0x8476A7: lea     eax, [esp+3Ch+arg_10]
-0x8476AB: push    eax
-0x8476AC: push    ecx
-0x8476AD: lea     ecx, [edi+40h]
+0x8476A7: lea     eax, [esp+3Ch+value]
+0x8476AB: push    eax; value
+0x8476AC: push    ecx; index
+0x8476AD: lea     ecx, [edi+40h]; this
 0x8476B0: mov     [esp+44h+var_4], 0
-0x8476B8: call    sub_76CE40
+0x8476B8: call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.
 0x8476BD: or      eax, 0FFFFFFFFh
 0x8476C0: add     [ebx+60h], eax
 0x8476C3: mov     [esp+3Ch+var_4], eax
 0x8476C7: jnz     short loc_8476D0
 0x8476C9: mov     ecx, ebx
-0x8476CB: call    sub_7604D0
+0x8476CB: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8476D0: add     [edi+38h], esi
 0x8476D3: mov     ecx, dword ptr [esp+3Ch+var_C]
 0x8476D7: mov     large fs:0, ecx
@@ -241,3 +241,12 @@
 0x8476E2: pop     ebx
 0x8476E3: add     esp, 28h
 0x8476E6: retn    14h
+0x9D3330: lea     ecx, [ebp+14h]; void *
+0x9D3333: jmp     sub_4027D0
+0x9D3338: mov     edx, [esp+arg_4]
+0x9D333C: lea     eax, [edx-2Ch]
+0x9D333F: mov     ecx, [edx-30h]
+0x9D3342: xor     ecx, eax
+0x9D3344: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D3349: mov     eax, offset stru_AFB768
+0x9D334E: jmp     ___CxxFrameHandler3

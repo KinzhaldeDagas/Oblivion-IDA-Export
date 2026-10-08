@@ -1,4 +1,4 @@
-0x6258D0: push    esi
+0x6258D0: push    esi; BloodOnDeath decode 2026-05-26: vanilla creature/dismember helper resolves named Bip01 limb bones through the actor animation node manager. Confirmed anchors: Bip01 L UpperArm, Bip01 R UpperArm, Bip01 Head; use named Bip01 runtime bones for per-limb death blood.
 0x6258D1: push    edi
 0x6258D2: push    0; int
 0x6258D4: push    offset ??_R0?AVTESCreature@@@8; struct TypeDescriptor *

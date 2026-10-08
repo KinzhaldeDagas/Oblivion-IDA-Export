@@ -1,33 +1,31 @@
-double __userpurge sub_682450@<st0>(double result@<st0>, int a2)
+void __stdcall sub_682450(int a1)
 {
-  _DWORD *v2; // eax
-  _DWORD *v3; // eax
+  TravelPath *v2; // eax
+  TravelPath *v3; // eax
   char v4; // al
 
-  if ( a2 )
+  if ( a1 ) /*0x682477*/
   {
-    if ( *(_DWORD *)(a2 + 0x20) != 2 )
+    if ( *(_DWORD *)(a1 + 0x20) != 2 ) /*0x68247d*/
     {
-      if ( !*(_DWORD *)(a2 + 8) )
+      if ( !*(_DWORD *)(a1 + 8) ) /*0x68247f*/
       {
-        v2 = (_DWORD *)FormHeapAlloc(0x14u);
-        if ( v2 )
-          v3 = sub_68A9F0(v2);
+        v2 = (TravelPath *)FormHeapAlloc(0x14u); /*0x682487*/
+        if ( v2 ) /*0x68249d*/
+          v3 = PathLow_ctor(v2); /*0x6824a1*/
         else
-          v3 = 0;
-        *(_DWORD *)(a2 + 8) = v3;
+          v3 = 0; /*0x6824a8*/
+        *(_DWORD *)(a1 + 8) = v3; /*0x6824b2*/
       }
-      result = sub_68B030(
-                 (int *)*(_DWORD *)(a2 + 8),
-                 result,
-                 (_DWORD *)*(_DWORD *)(a2 + 4),
-                 (float *)(a2 + 0x14),
-                 (_BYTE *)*(_DWORD *)(a2 + 0xC),
-                 (_DWORD *)*(_DWORD *)(a2 + 0x10));
-      if ( !v4 )
-        *(_BYTE *)(a2 + 0x24) = 0;
-      *(_DWORD *)(a2 + 0x20) = 2;
+      TravelPath_BuildToDestination( /*0x6824c8*/
+        *(TravelPath **)(a1 + 8),
+        *(TESObjectREFR **)(a1 + 4),
+        (const NiPoint3 *)(a1 + 0x14),
+        *(TESObjectCELL **)(a1 + 0xC),
+        *(TESWorldSpace **)(a1 + 0x10));
+      if ( !v4 ) /*0x6824cf*/
+        *(_BYTE *)(a1 + 0x24) = 0; /*0x6824d1*/
+      *(_DWORD *)(a1 + 0x20) = 2; /*0x6824d4*/
     }
   }
-  return result;
 }

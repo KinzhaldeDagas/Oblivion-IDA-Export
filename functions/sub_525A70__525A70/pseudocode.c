@@ -1,394 +1,400 @@
-char __userpurge sub_525A70@<al>(int a1@<ecx>, double st7_0@<st0>, TESChildCELL *a3, int *a4)
+// Reconcile an NPC's cached biped/skinned FaceGen nodes with an actor instance. When both cached nodes are absent, synchronously calls TESRace_CreateFaceGenNodes; the Race/Sex refresh deliberately clears both nodes to force this branch.
+double __userpurge TESNPC_ReconcileFaceGenNodesForActor@<st0>(
+        int a1@<ecx>,
+        double st7_0@<st0>,
+        TESChildCELL *a3,
+        ActorAnimData *a4)
 {
   int v4; // ebx
-  int v5; // eax
-  NiDX92DBufferData *v6; // ebp
+  NiDX92DBufferData *v5; // ebp
   void *vtbl; // ecx
-  int v8; // esi
-  ActorAnimData *(__thiscall *v9)(TESObjectREFR *); // edx
-  Ni2DBuffer *v10; // edx
-  Ni2DBuffer *v11; // eax
-  int v12; // ecx
-  void *v13; // ecx
+  NiNode *CachedNode; // esi
+  int (__thiscall *v8)(TESChildCELL *); // edx
+  Ni2DBuffer *v9; // edx
+  Ni2DBuffer *v10; // eax
+  int v11; // ecx
+  void *v12; // ecx
   unsigned int vftable_high; // ebp
-  unsigned int v15; // edi
-  int v16; // eax
-  void **v17; // esi
-  _DWORD *v18; // eax
-  BSFaceGenAnimationData *v19; // eax
-  int v20; // eax
-  Ni2DBuffer **v21; // esi
-  Ni2DBuffer *v22; // ecx
-  unsigned int v23; // ecx
-  unsigned int v24; // eax
+  unsigned int v14; // edi
+  NiAVObject *ChildAtIndex; // eax
+  void **v16; // esi
+  _DWORD *v17; // eax
+  BSFaceGenAnimationData *v18; // eax
+  int v19; // eax
+  Ni2DBuffer **v20; // esi
+  Ni2DBuffer *v21; // ecx
+  unsigned int v22; // ecx
+  char *v23; // eax
+  NiAVObject *v24; // eax
   int v25; // eax
-  int v26; // eax
-  NiNode **v27; // esi
-  NiNode *v28; // eax
-  int v29; // eax
-  int v30; // edi
-  _DWORD *v31; // eax
-  _DWORD *v32; // eax
-  int v33; // eax
-  int v34; // ebp
-  unsigned int v35; // ecx
-  NiNode *v36; // edi
-  unsigned int v37; // eax
-  BSFaceGenAnimationData *v38; // eax
-  Ni2DBuffer *v39; // ecx
-  _DWORD *v40; // eax
-  int *v41; // ecx
+  NiNode **v26; // esi
+  NiNode *v27; // eax
+  NiObject *v28; // eax
+  NiObject *v29; // edi
+  NiObject *v30; // eax
+  NiObject *v31; // eax
+  int v32; // eax
+  int v33; // ebp
+  unsigned int v34; // ecx
+  NiNode *v35; // edi
+  unsigned int v36; // eax
+  BSFaceGenAnimationData *v37; // eax
+  Ni2DBuffer *v38; // ecx
+  _DWORD *v39; // eax
+  TESRace *v40; // ecx
+  int v41; // eax
   int v42; // eax
-  int v43; // eax
-  Ni2DBuffer *v44; // eax
-  int v45; // ecx
-  Ni2DBuffer *v46; // eax
-  int v47; // eax
-  Ni2DBuffer *v48; // eax
-  void (__thiscall **v49)(Ni2DBuffer *, float *); // esi
-  float *v50; // eax
-  NiAVObject *v51; // esi
-  int v52; // ecx
-  int v53; // eax
-  const char *v54; // eax
+  Ni2DBuffer *v43; // eax
+  int v44; // ecx
+  Ni2DBuffer *v45; // eax
+  int v46; // eax
+  Ni2DBuffer *v47; // eax
+  void (__thiscall **v48)(Ni2DBuffer *, float *); // esi
+  float *v49; // eax
+  NiAVObject *v50; // esi
+  int v51; // ecx
+  int v52; // eax
+  const char *v53; // eax
+  Ni2DBuffer *v54; // [esp+6Ch] [ebp-A0h]
+  Ni2DBuffer *v55; // [esp+6Ch] [ebp-A0h]
   Ni2DBuffer *v56; // [esp+6Ch] [ebp-A0h]
   Ni2DBuffer *v57; // [esp+6Ch] [ebp-A0h]
-  Ni2DBuffer *v58; // [esp+6Ch] [ebp-A0h]
-  Ni2DBuffer *v59; // [esp+6Ch] [ebp-A0h]
-  int v60; // [esp+6Ch] [ebp-A0h]
+  int v58; // [esp+6Ch] [ebp-A0h]
   Ni2DBuffer *a2; // [esp+84h] [ebp-88h] BYREF
-  Ni2DBuffer *v62; // [esp+88h] [ebp-84h] BYREF
-  UInt32 v63; // [esp+8Ch] [ebp-80h] BYREF
-  NiAVObject *v64; // [esp+90h] [ebp-7Ch]
-  int v65; // [esp+94h] [ebp-78h]
-  int v66; // [esp+98h] [ebp-74h]
-  UInt32 v67; // [esp+9Ch] [ebp-70h] BYREF
-  unsigned int i; // [esp+A0h] [ebp-6Ch] BYREF
-  BSFaceGenAnimationData *v69; // [esp+A4h] [ebp-68h]
-  int v70; // [esp+A8h] [ebp-64h] BYREF
-  int v71; // [esp+ACh] [ebp-60h] BYREF
-  unsigned int v72; // [esp+B0h] [ebp-5Ch]
-  int v73; // [esp+B4h] [ebp-58h]
-  int (__stdcall ***v74[9])(signed int); // [esp+B8h] [ebp-54h] BYREF
-  float v75[9]; // [esp+DCh] [ebp-30h] BYREF
-  unsigned int v76; // [esp+108h] [ebp-4h]
+  Ni2DBuffer *v60; // [esp+88h] [ebp-84h] BYREF
+  UInt32 v61; // [esp+8Ch] [ebp-80h] BYREF
+  NiAVObject *v62; // [esp+90h] [ebp-7Ch]
+  int v63; // [esp+94h] [ebp-78h]
+  int v64; // [esp+98h] [ebp-74h]
+  UInt32 v65; // [esp+9Ch] [ebp-70h] BYREF
+  void *slot; // [esp+A0h] [ebp-6Ch] BYREF
+  BSFaceGenAnimationData *v67; // [esp+A4h] [ebp-68h]
+  void *v68; // [esp+A8h] [ebp-64h] BYREF
+  void *v69; // [esp+ACh] [ebp-60h] BYREF
+  unsigned int v70; // [esp+B0h] [ebp-5Ch]
+  NiNode *v71; // [esp+B4h] [ebp-58h]
+  int (__stdcall ***v72[9])(signed int); // [esp+B8h] [ebp-54h] BYREF
+  float v73[9]; // [esp+DCh] [ebp-30h] BYREF
+  unsigned int v74; // [esp+108h] [ebp-4h]
 
-  v4 = a1;
-  v65 = a1;
-  v5 = sub_553600();
-  if ( v5 )
+  v4 = a1; /*0x525a9a*/
+  v63 = a1; /*0x525a9c*/
+  if ( FaceGenManager_GetSingleton() ) /*0x525aa0*/
   {
-    v5 = *a4;
-    if ( *a4 )
+    if ( a4->unk00 ) /*0x525ab4*/
     {
-      if ( useFaceGenHeads )
+      if ( useFaceGenHeads ) /*0x525ac0*/
       {
-        v6 = (NiDX92DBufferData *)a3;
-        if ( a3 != (TESChildCELL *)TESDataHandler_g_PlayerRef
-          || (LOBYTE(v5) = sub_65D770(TESDataHandler_g_PlayerRef, (int)a4), !(_BYTE)v5) )
+        v5 = (NiDX92DBufferData *)a3; /*0x525ad3*/
+        if ( a3 != (TESChildCELL *)reference || !sub_65D770(reference, (int)a4) ) /*0x525adf*/
         {
-          vtbl = a3[0xF].vtbl;
-          v64 = 0;
-          if ( vtbl )
-            v64 = (NiAVObject *)(*(int (__thiscall **)(void *))(*(_DWORD *)vtbl + 8))(vtbl);
-          v8 = sub_477EC0(a4, 0);
-          v9 = *((ActorAnimData *(__thiscall **)(TESObjectREFR *))a3->vtbl + 0x59);
-          v73 = v8;
-          v66 = 0;
-          if ( v9((TESObjectREFR *)a3) )
+          vtbl = a3[0xF].vtbl; /*0x525aec*/
+          v62 = 0; /*0x525af1*/
+          if ( vtbl ) /*0x525af5*/
+            v62 = (NiAVObject *)(*(int (__thiscall **)(void *))(*(_DWORD *)vtbl + 8))(vtbl); /*0x525afe*/
+          CachedNode = ActorSkinInfo_GetCachedNode((ActorSkinInfo *)a4, 0); /*0x525b0a*/
+          v8 = *((int (__thiscall **)(TESChildCELL *))a3->vtbl + 0x59); /*0x525b0f*/
+          v71 = CachedNode; /*0x525b17*/
+          v64 = 0; /*0x525b1b*/
+          if ( v8(a3) ) /*0x525b1f*/
           {
-            if ( *(_DWORD *)((*((int (__thiscall **)(TESChildCELL *))a3->vtbl + 0x59))(a3) + 0x98) )
-              v66 = *(_DWORD *)(*(_DWORD *)((*((int (__thiscall **)(TESChildCELL *))a3->vtbl + 0x59))(a3) + 0x98) + 0x7C);
+            if ( *(_DWORD *)((*((int (__thiscall **)(TESChildCELL *))a3->vtbl + 0x59))(a3) + 0x98) ) /*0x525b32*/
+              v64 = *(_DWORD *)(*(_DWORD *)((*((int (__thiscall **)(TESChildCELL *))a3->vtbl + 0x59))(a3) + 0x98) + 0x7C); /*0x525b50*/
           }
-          if ( !v8 || !v64 )
+          if ( CachedNode && v62 ) /*0x525b60*/
           {
-            LOBYTE(v5) = PrintError(
-                           "Cannot create a head for an NPC (%d) that does not have a biped-head node.",
-                           *(_DWORD *)(v4 + 0xC));
-            return v5;
-          }
-          if ( (*((int (__thiscall **)(TESChildCELL *, int))a3->vtbl + 0x4C))(a3, v8)
-            || (*((int (__thiscall **)(TESChildCELL *, int))a3->vtbl + 0x4D))(a3, v8) )
-          {
-            goto LABEL_79;
-          }
-          a2 = 0;
-          v62 = 0;
-          v69 = 0;
-          v63 = 0;
-          v76 = 0;
-          v67 = 0;
-          v11 = *(Ni2DBuffer **)(v4 + 0x1D4);
-          LOBYTE(v76) = 1;
-          if ( v11 )
-          {
-            v12 = *(_DWORD *)(v4 + 0x1D8);
-            if ( v12 && *(_DWORD *)(v12 + 4) <= 1u )
+            if ( (*((int (__usercall **)@<eax>(TESChildCELL *@<ecx>, NiNode *, double@<st0>))a3->vtbl + 0x4C))( /*0x525b88*/
+                   a3,
+                   CachedNode,
+                   st7_0)
+              || (*((int (__thiscall **)(TESChildCELL *, NiNode *))a3->vtbl + 0x4D))(a3, CachedNode) )
             {
-              a2 = v11;
+              goto LABEL_79; /*0x525b8c*/
+            }
+            a2 = 0; /*0x525b92*/
+            v60 = 0; /*0x525b96*/
+            v67 = 0; /*0x525b9a*/
+            v61 = 0; /*0x525b9e*/
+            v74 = 0; /*0x525ba2*/
+            v65 = 0; /*0x525ba9*/
+            v10 = *(Ni2DBuffer **)(v4 + 0x1D4); /*0x525bad*/
+            LOBYTE(v74) = 1; /*0x525bb5*/
+            if ( v10 ) /*0x525bbd*/
+            {
+              v11 = *(_DWORD *)(v4 + 0x1D8); /*0x525bc3*/
+              if ( v11 && *(_DWORD *)(v11 + 4) <= 1u ) /*0x525bd1*/
+              {
+                a2 = v10; /*0x525bd3*/
+              }
+              else
+              {
+                st7_0 = 1.0; /*0x525bd9*/
+                sub_478C80((NiTPointerMap<NiObject *,NiObject *> **)v72, 1.0); /*0x525be3*/
+                v12 = *(void **)(v4 + 0x1D4); /*0x525be8*/
+                LOBYTE(v74) = 2; /*0x525bf3*/
+                a2 = (Ni2DBuffer *)sub_700610(v12, (int)v72); /*0x525c04*/
+                LOBYTE(v74) = 1; /*0x525c08*/
+                sub_4781A0(v72); /*0x525c10*/
+              }
+              vftable_high = HIWORD(a2[9].__vftable); /*0x525c19*/
+              v14 = 0; /*0x525c20*/
+              if ( HIWORD(a2[9].__vftable) ) /*0x525c19*/
+              {
+                do /*0x525ca8*/
+                {
+                  ChildAtIndex = NiNode_GetChildAtIndex((NiNode *)a2, v14); /*0x525c31*/
+                  if ( ChildAtIndex ) /*0x525c38*/
+                  {
+                    v16 = (void **)ChildAtIndex->vtbl->super.Unk_04((NiObject *)ChildAtIndex); /*0x525c43*/
+                    if ( v16 ) /*0x525c47*/
+                    {
+                      if ( *(Ni2DBuffer **)(v63 + 0x1D4) != a2 ) /*0x525c58*/
+                      {
+                        v54 = (Ni2DBuffer *)*sub_700790(v16[0x2D], (int *)&slot); /*0x525c6c*/
+                        LOBYTE(v74) = 3; /*0x525c71*/
+                        NiSmartPointer_Set__((Ni2DBuffer **)&v61, v54); /*0x525c78*/
+                        LOBYTE(v74) = 1; /*0x525c81*/
+                        NiPointerSlot_Release(&slot); /*0x525c89*/
+                        if ( v61 ) /*0x525c94*/
+                          (*((void (__thiscall **)(void **, UInt32))*v16 + 0x23))(v16, v61); /*0x525ca1*/
+                      }
+                    }
+                  }
+                  ++v14; /*0x525ca3*/
+                }
+                while ( v14 < vftable_high ); /*0x525ca8*/
+                v4 = v63; /*0x525caa*/
+              }
+              if ( *(Ni2DBuffer **)(v4 + 0x1D4) != a2 ) /*0x525cb8*/
+              {
+                v17 = (_DWORD *)(*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2); /*0x525cc2*/
+                v18 = sub_54D2C0(v17, st7_0); /*0x525cc6*/
+                v67 = v18; /*0x525ccd*/
+                if ( v18 ) /*0x525cd1*/
+                  (*((void (__thiscall **)(Ni2DBuffer *, BSFaceGenAnimationData *))a2->__vftable + 0x28))(a2, v18); /*0x525ce0*/
+              }
+              v5 = (NiDX92DBufferData *)a3; /*0x525ce2*/
+            }
+            v19 = *(_DWORD *)(v4 + 0x1D8); /*0x525ce9*/
+            v20 = (Ni2DBuffer **)(v4 + 0x1D8); /*0x525cf1*/
+            if ( !v19 ) /*0x525cf7*/
+              goto LABEL_59; /*0x525cf7*/
+            if ( *(_DWORD *)(v19 + 4) > 1u ) /*0x525d01*/
+            {
+              st7_0 = 1.0; /*0x525d09*/
+              sub_478C80((NiTPointerMap<NiObject *,NiObject *> **)v72, 1.0); /*0x525d13*/
+              v21 = *v20; /*0x525d18*/
+              LOBYTE(v74) = 4; /*0x525d1f*/
+              v60 = (Ni2DBuffer *)sub_700610(v21, (int)v72); /*0x525d30*/
+              LOBYTE(v74) = 1; /*0x525d34*/
+              sub_4781A0(v72); /*0x525d3c*/
             }
             else
             {
-              st7_0 = 1.0;
-              sub_478C80((NiTPointerMap<NiObject *,NiObject *> **)v74, 1.0);
-              v13 = *(void **)(v4 + 0x1D4);
-              LOBYTE(v76) = 2;
-              a2 = (Ni2DBuffer *)sub_700610(v13, (int)v74);
-              LOBYTE(v76) = 1;
-              sub_4781A0(v74);
+              v60 = *(Ni2DBuffer **)(v4 + 0x1D8); /*0x525d03*/
             }
-            vftable_high = HIWORD(a2[9].__vftable);
-            v15 = 0;
-            if ( HIWORD(a2[9].__vftable) )
+            v22 = HIWORD(v60[9].__vftable); /*0x525d45*/
+            v23 = 0; /*0x525d4c*/
+            v70 = v22; /*0x525d50*/
+            for ( slot = 0; (unsigned int)slot < v70; slot = (char *)slot + 1 ) /*0x525d58*/
             {
-              do
+              v24 = NiNode_GetChildAtIndex((NiNode *)v60, (unsigned int)v23); /*0x525d63*/
+              if ( v24 ) /*0x525d6a*/
               {
-                v16 = sub_405790((int)a2, v15);
-                if ( v16 )
+                v25 = v24->vtbl->super.Unk_04((NiObject *)v24); /*0x525d77*/
+                v26 = (NiNode **)v25; /*0x525d79*/
+                if ( v25 ) /*0x525d7d*/
                 {
-                  v17 = (void **)(*(int (__thiscall **)(int))(*(_DWORD *)v16 + 0x10))(v16);
-                  if ( v17 )
+                  if ( *(Ni2DBuffer **)(v4 + 0x1D8) != v60 ) /*0x525d8d*/
                   {
-                    if ( *(Ni2DBuffer **)(v65 + 0x1D4) != a2 )
-                    {
-                      v56 = (Ni2DBuffer *)*sub_700790(v17[0x2D], (int *)&i);
-                      LOBYTE(v76) = 3;
-                      NiSmartPointer_Set__((Ni2DBuffer **)&v63, v56);
-                      LOBYTE(v76) = 1;
-                      sub_7016A0((NiD3DVertexShader *)&i);
-                      if ( v63 )
-                        (*((void (__thiscall **)(void **, UInt32))*v17 + 0x23))(v17, v63);
-                    }
+                    v55 = (Ni2DBuffer *)*sub_700790(*(void **)(v25 + 0xB4), (int *)&v68); /*0x525da1*/
+                    LOBYTE(v74) = 5; /*0x525da6*/
+                    NiSmartPointer_Set__((Ni2DBuffer **)&v61, v55); /*0x525dae*/
+                    LOBYTE(v74) = 1; /*0x525db7*/
+                    NiPointerSlot_Release(&v68); /*0x525dbf*/
+                    if ( v61 ) /*0x525dca*/
+                      ((void (__thiscall *)(NiNode **, UInt32))LODWORD((*v26)->members.super.m_worldTransform.pos.y))( /*0x525dd7*/
+                        v26,
+                        v61);
                   }
-                }
-                ++v15;
-              }
-              while ( v15 < vftable_high );
-              v4 = v65;
-            }
-            if ( *(Ni2DBuffer **)(v4 + 0x1D4) != a2 )
-            {
-              v18 = (_DWORD *)(*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2);
-              v19 = sub_54D2C0(v18, st7_0);
-              v69 = v19;
-              if ( v19 )
-                (*((void (__thiscall **)(Ni2DBuffer *, BSFaceGenAnimationData *))a2->__vftable + 0x28))(a2, v19);
-            }
-            v6 = (NiDX92DBufferData *)a3;
-          }
-          v20 = *(_DWORD *)(v4 + 0x1D8);
-          v21 = (Ni2DBuffer **)(v4 + 0x1D8);
-          if ( !v20 )
-            goto LABEL_59;
-          if ( *(_DWORD *)(v20 + 4) > 1u )
-          {
-            st7_0 = 1.0;
-            sub_478C80((NiTPointerMap<NiObject *,NiObject *> **)v74, 1.0);
-            v22 = *v21;
-            LOBYTE(v76) = 4;
-            v62 = (Ni2DBuffer *)sub_700610(v22, (int)v74);
-            LOBYTE(v76) = 1;
-            sub_4781A0(v74);
-          }
-          else
-          {
-            v62 = *(Ni2DBuffer **)(v4 + 0x1D8);
-          }
-          v23 = HIWORD(v62[9].__vftable);
-          v24 = 0;
-          v72 = v23;
-          for ( i = 0; i < v72; ++i )
-          {
-            v25 = sub_405790((int)v62, v24);
-            if ( v25 )
-            {
-              v26 = (*(int (__thiscall **)(int))(*(_DWORD *)v25 + 0x10))(v25);
-              v27 = (NiNode **)v26;
-              if ( v26 )
-              {
-                if ( *(Ni2DBuffer **)(v4 + 0x1D8) != v62 )
-                {
-                  v57 = (Ni2DBuffer *)*sub_700790(*(void **)(v26 + 0xB4), &v70);
-                  LOBYTE(v76) = 5;
-                  NiSmartPointer_Set__((Ni2DBuffer **)&v63, v57);
-                  LOBYTE(v76) = 1;
-                  sub_7016A0((NiD3DVertexShader *)&v70);
-                  if ( v63 )
-                    ((void (__thiscall *)(NiNode **, UInt32))LODWORD((*v27)->members.super.m_worldTransform.pos.y))(
-                      v27,
-                      v63);
-                }
-                v28 = v27[0x2E];
-                if ( v28 )
-                {
-                  if ( v28->members.super.super.m_controller )
+                  v27 = v26[0x2E]; /*0x525dd9*/
+                  if ( v27 ) /*0x525de1*/
                   {
-                    v29 = sub_550790((int)v27);
-                    v30 = v29;
-                    if ( v29
-                      && (*(int (__thiscall **)(int))(*(_DWORD *)v29 + 0x54))(v29)
-                      && (v31 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v30 + 0x54))(v30), sub_523D60(v31)) )
+                    if ( v27->members.super.super.m_controller ) /*0x525de7*/
                     {
-                      v32 = (_DWORD *)(*(int (__thiscall **)(int))(*(_DWORD *)v30 + 0x54))(v30);
-                      v33 = sub_523D60(v32);
-                      v34 = *(_DWORD *)(v33 + 0x14);
-                      v35 = *(_DWORD *)(*(_DWORD *)(v33 + 8) + 0x40);
-                      v36 = v27[0x2E];
-                      v37 = 0;
-                      if ( v35 )
+                      v28 = sub_550790((int)v26); /*0x525df2*/
+                      v29 = v28; /*0x525df7*/
+                      if ( v28 /*0x525e20*/
+                        && v28->__vftable[1].Unk_02(v28)
+                        && (v30 = v29->__vftable[1].Unk_02(v29), sub_523D60(v30)) )
                       {
-                        do
+                        v31 = v29->__vftable[1].Unk_02(v29); /*0x525e34*/
+                        v32 = sub_523D60(v31); /*0x525e38*/
+                        v33 = *(_DWORD *)(v32 + 0x14); /*0x525e3d*/
+                        v34 = *(_DWORD *)(*(_DWORD *)(v32 + 8) + 0x40); /*0x525e43*/
+                        v35 = v26[0x2E]; /*0x525e46*/
+                        v36 = 0; /*0x525e4c*/
+                        if ( v34 ) /*0x525e50*/
                         {
-                          *(_DWORD *)(*(_DWORD *)&v36->members.super.super.m_extraDataListLen + 4 * v37) = *(_DWORD *)(v34 + 4 * v37);
-                          ++v37;
+                          do /*0x525e61*/
+                          {
+                            *(_DWORD *)(*(_DWORD *)&v35->members.super.super.m_extraDataListLen + 4 * v36) = *(_DWORD *)(v33 + 4 * v36); /*0x525e59*/
+                            ++v36; /*0x525e5c*/
+                          }
+                          while ( v36 < v34 ); /*0x525e61*/
+                          v4 = v63; /*0x525e63*/
                         }
-                        while ( v37 < v35 );
-                        v4 = v65;
+                        v5 = (NiDX92DBufferData *)a3; /*0x525e67*/
                       }
-                      v6 = (NiDX92DBufferData *)a3;
+                      else
+                      {
+                        v53 = (const char *)(*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v4 + 0xD4))( /*0x5261ee*/
+                                              v4,
+                                              *(_DWORD *)(v4 + 0xC));
+                        PrintError("Could not correctly handle skinning for duplicate NPC \"%s\" (%08X).", v53, v58); /*0x5261f6*/
+                      }
+                      v56 = (Ni2DBuffer *)*sub_700790(v26[0x2E]->members.super.super.m_controller, (int *)&v69); /*0x525e85*/
+                      LOBYTE(v74) = 6; /*0x525e8a*/
+                      NiSmartPointer_Set__((Ni2DBuffer **)&v65, v56); /*0x525e92*/
+                      LOBYTE(v74) = 1; /*0x525e9b*/
+                      NiPointerSlot_Release(&v69); /*0x525ea3*/
+                      if ( v65 ) /*0x525eae*/
+                        sub_478300(v26[0x2E], (NiTimeController *)v65); /*0x525eb9*/
                     }
-                    else
-                    {
-                      v54 = (const char *)(*(int (__thiscall **)(int, _DWORD))(*(_DWORD *)v4 + 0xD4))(
-                                            v4,
-                                            *(_DWORD *)(v4 + 0xC));
-                      PrintError("Could not correctly handle skinning for duplicate NPC \"%s\" (%08X).", v54, v60);
-                    }
-                    v58 = (Ni2DBuffer *)*sub_700790(v27[0x2E]->members.super.super.m_controller, &v71);
-                    LOBYTE(v76) = 6;
-                    NiSmartPointer_Set__((Ni2DBuffer **)&v67, v58);
-                    LOBYTE(v76) = 1;
-                    sub_7016A0((NiD3DVertexShader *)&v71);
-                    if ( v67 )
-                      sub_478300(v27[0x2E], (NiTimeController *)v67);
                   }
                 }
               }
+              v23 = (char *)slot + 1; /*0x525ec2*/
             }
-            v24 = i + 1;
-          }
-          v10 = v62;
-          v21 = (Ni2DBuffer **)(v4 + 0x1D8);
-          if ( *(Ni2DBuffer **)(v4 + 0x1D8) == v62 )
-            goto LABEL_59;
-          v38 = v69;
-          v39 = v62;
-          if ( !v69 )
-          {
-            v40 = (_DWORD *)(*((int (**)(void))v62->__vftable + 0x27))();
-            v38 = sub_54D2C0(v40, st7_0);
-            if ( !v38 )
+            v9 = v60; /*0x525ed3*/
+            v20 = (Ni2DBuffer **)(v4 + 0x1D8); /*0x525edd*/
+            if ( *(Ni2DBuffer **)(v4 + 0x1D8) == v60 ) /*0x525ee3*/
+              goto LABEL_59; /*0x525ee3*/
+            v37 = v67; /*0x525ee5*/
+            v38 = v60; /*0x525eeb*/
+            if ( !v67 ) /*0x525eed*/
             {
+              v39 = (_DWORD *)(*((int (**)(void))v60->__vftable + 0x27))(); /*0x525ef7*/
+              v37 = sub_54D2C0(v39, st7_0); /*0x525efb*/
+              if ( !v37 ) /*0x525f02*/
+              {                                 // Both cached TESNPC FaceGen nodes were cleared by RaceSexMenu_RefreshPlayerFace; proceed to native node reconstruction when the race is available.
 LABEL_59:
-              if ( !*(_DWORD *)(v4 + 0x1D4) && !*v21 )
-              {
-                v41 = *(int **)(v4 + 0xE8);
-                if ( v41 )
+                if ( !*(_DWORD *)(v4 + 0x1D4) && !*v20 ) /*0x525f22*/
                 {
-                  sub_52DED0(v41, (int *)&a2, (int *)&v62, v4, 0, 0);
-                  v59 = a2;
-                  *(_WORD *)(v4 + 0x1E0) = *(_WORD *)(*(_DWORD *)(v4 + 0xE8) + 0x2FC);
-                  NiSmartPointer_Set__((Ni2DBuffer **)(v4 + 0x1D4), v59);
-                  NiSmartPointer_Set__(v21, v62);
+                  v40 = *(TESRace **)(v4 + 0xE8); /*0x525f27*/
+                  if ( v40 ) /*0x525f2f*/
+                  {
+                    TESRace_CreateFaceGenNodes(v40, (NiObjectNET **)&a2, (NiObjectNET **)&v60, (TESNPC *)v4, 0, 0);// Reconstruct the biped/skinned FaceGen nodes. TESRace_CreateFaceGenNodes reaches BSFaceGen_BuildHeadGeometryNodes and therefore the bFixFaceNormals normal-stitch gate. /*0x525f40*/
+                    v57 = a2; /*0x525f56*/
+                    *(_WORD *)(v4 + 0x1E0) = *(_WORD *)(*(_DWORD *)(v4 + 0xE8) + 0x2FC); /*0x525f59*/
+                    NiSmartPointer_Set__((Ni2DBuffer **)(v4 + 0x1D4), v57); /*0x525f60*/
+                    NiSmartPointer_Set__(v20, v60); /*0x525f6c*/
+                  }
                 }
-              }
-              if ( a2 )
-                goto LABEL_85;
-              if ( v62 )
-              {
+                if ( a2 ) /*0x525f76*/
+                  goto LABEL_84; /*0x525f76*/
+                if ( v60 ) /*0x525f7d*/
+                {
 LABEL_71:
-                LOBYTE(v10) = a2 == 0;
-                qmemcpy(v75, &stru_B26AF0[0xA].unk2C, sizeof(v75));
-                v47 = (*((int (__thiscall **)(Ni2DBuffer *, Ni2DBuffer *))v62->__vftable + 0x2C))(v62, v10);
-                LOBYTE(v47) = a2 == 0;
-                (*((void (__thiscall **)(Ni2DBuffer *, int))v62->__vftable + 0x2E))(v62, v47);
-                v48 = v62;
-                *(float *)&v62[4].members.super.m_uiRefCount = Vector3_InitValue_;
-                v48 = (Ni2DBuffer *)((char *)v48 + 0x54);
-                v48->members.super.m_uiRefCount = *(UInt32 *)(&Vector3_InitValue_ + 1);
-                *(float *)&v48->members.width = dword_B3F9B0;
-                v49 = (void (__thiscall **)(Ni2DBuffer *, float *))((char *)v62->__vftable + 0xA8);
-                v50 = sub_4D7C50(v6, (float *)v74, v75, 1);
-                (*v49)(v62, v50);
-                v51 = v64;
-                ((void (__thiscall *)(NiAVObject *, Ni2DBuffer *, int))v64->vtbl[1].super.super.Destructor)(v64, v62, 1);
-                v52 = v66;
-                v62[0xD].members.data = v6;
-                sub_7165B0(v62, v52);
-                (*((void (__thiscall **)(Ni2DBuffer *, NiAVObject *, int))v62->__vftable + 0x31))(v62, v51, 1);
-                v46 = v62;
+                  LOBYTE(v9) = a2 == 0; /*0x526091*/
+                  qmemcpy(v73, &stru_B26AF0[0xA].unk2C, sizeof(v73)); /*0x5260a7*/
+                  v46 = (*((int (__thiscall **)(Ni2DBuffer *, Ni2DBuffer *))v60->__vftable + 0x2C))(v60, v9); /*0x5260b6*/
+                  LOBYTE(v46) = a2 == 0; /*0x5260c9*/
+                  (*((void (__thiscall **)(Ni2DBuffer *, int))v60->__vftable + 0x2E))(v60, v46); /*0x5260cd*/
+                  v47 = v60; /*0x5260cf*/
+                  v60[4].members.super.m_uiRefCount = LODWORD(g_zeroNiPoint3.x); /*0x5260d9*/
+                  v47 = (Ni2DBuffer *)((char *)v47 + 0x54); /*0x5260e2*/
+                  v47->members.super.m_uiRefCount = LODWORD(g_zeroNiPoint3.y); /*0x5260e5*/
+                  v47->members.width = LODWORD(g_zeroNiPoint3.z); /*0x5260ee*/
+                  v48 = (void (__thiscall **)(Ni2DBuffer *, float *))((char *)v60->__vftable + 0xA8); /*0x526105*/
+                  v49 = sub_4D7C50(v5, (float *)v72, v73, 1); /*0x52610b*/
+                  (*v48)(v60, v49); /*0x526117*/
+                  v50 = v62; /*0x526119*/
+                  ((void (__thiscall *)(NiAVObject *, Ni2DBuffer *, int))v62->vtbl[1].super.super.Destructor)( /*0x52612e*/
+                    v62,
+                    v60,
+                    1);
+                  v51 = v64; /*0x526134*/
+                  v60[0xD].members.data = v5; /*0x526138*/
+                  sub_7165B0(v60, v51); /*0x526144*/
+                  (*((void (__thiscall **)(Ni2DBuffer *, NiAVObject *, int))v60->__vftable + 0x31))(v60, v50, 1); /*0x52615b*/
+                  v45 = v60; /*0x52615d*/
 LABEL_72:
-                if ( a2 )
-                {
-                  v53 = (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2);
-                  if ( v53 )
+                  if ( a2 ) /*0x526167*/
                   {
+                    v52 = (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2); /*0x526171*/
+                    if ( v52 ) /*0x526175*/
+                    {
 LABEL_77:
-                    (*(void (__thiscall **)(int, _DWORD, int, int, int, int, _DWORD))(*(_DWORD *)v53 + 0x78))(
-                      v53,
-                      0.0,
-                      1,
-                      1,
-                      1,
-                      1,
-                      0);
+                      (*(void (__thiscall **)(int, _DWORD, int, int, int, int, _DWORD))(*(_DWORD *)v52 + 0x78))( /*0x52618f*/
+                        v52,
+                        0.0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        0);
 LABEL_78:
-                    LOBYTE(v76) = 0;
-                    sub_7016A0((NiD3DVertexShader *)&v67);
-                    v76 = 0xFFFFFFFF;
-                    sub_7016A0((NiD3DVertexShader *)&v63);
+                      LOBYTE(v74) = 0; /*0x5261a8*/
+                      NiPointerSlot_Release((void **)&v65); /*0x5261b4*/
+                      v74 = 0xFFFFFFFF; /*0x5261bd*/
+                      NiPointerSlot_Release((void **)&v61); /*0x5261c8*/
 LABEL_79:
-                    LOBYTE(v5) = NiAVObject_UpdateNiAVObject(v64, 0.0, 0);
-                    return v5;
+                      NiAVObject_UpdateNiAVObject(v62, 0.0, 0); /*0x5261cd*/
+                      return 0.0; /*0x5261de*/
+                    }
+                    v45 = v60; /*0x526177*/
                   }
-                  v46 = v62;
+                  if ( !v45 ) /*0x52617d*/
+                    goto LABEL_78; /*0x52617d*/
+                  v52 = (*((int (__thiscall **)(Ni2DBuffer *))v45->__vftable + 0x27))(v45); /*0x526189*/
+                  if ( !v52 ) /*0x52618d*/
+                    goto LABEL_78; /*0x52618d*/
+                  goto LABEL_77; /*0x52618d*/
                 }
-                if ( !v46 )
-                  goto LABEL_78;
-                v53 = (*((int (__thiscall **)(Ni2DBuffer *))v46->__vftable + 0x27))(v46);
-                if ( !v53 )
-                  goto LABEL_78;
-                goto LABEL_77;
-              }
-              PrintError("Cannot create a head for an NPC (%d) (no race or bad race data).", *(_DWORD *)(v4 + 0xC));
-              if ( a2 )
-              {
-LABEL_85:
-                if ( (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2) )
+                PrintError("Cannot create a head for an NPC (%d) (no race or bad race data).", *(_DWORD *)(v4 + 0xC)); /*0x525f8c*/
+                if ( a2 ) /*0x525f99*/
                 {
-                  if ( TESObjectREFR_GetHealth((TESChildCELL *)v6) <= *(float *)&SrcStr )
+LABEL_84:
+                  if ( (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2) ) /*0x525fab*/
                   {
-                    v42 = (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2);
-                    (*(void (__thiscall **)(int, int, int))(*(_DWORD *)v42 + 0x9C))(v42, 1, 1);
-                    v43 = (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2);
-                    (*(void (__thiscall **)(int, int))(*(_DWORD *)v43 + 0x94))(v43, 1);
+                    if ( TESObjectREFR_GetHealth((TESChildCELL *)v5) <= *(float *)&SrcStr ) /*0x525fc3*/
+                    {
+                      v41 = (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2); /*0x525fd1*/
+                      (*(void (__thiscall **)(int, int, int))(*(_DWORD *)v41 + 0x9C))(v41, 1, 1); /*0x525fe1*/
+                      v42 = (*((int (__thiscall **)(Ni2DBuffer *))a2->__vftable + 0x27))(a2); /*0x525fef*/
+                      (*(void (__thiscall **)(int, int))(*(_DWORD *)v42 + 0x94))(v42, 1); /*0x525ffd*/
+                    }
                   }
+                  (*((void (__thiscall **)(Ni2DBuffer *, int))a2->__vftable + 0x2C))(a2, 1); /*0x52600d*/
+                  (*((void (__thiscall **)(Ni2DBuffer *, int))a2->__vftable + 0x2E))(a2, 1); /*0x52601d*/
+                  v43 = a2; /*0x52601f*/
+                  a2[4].members.super.m_uiRefCount = LODWORD(g_zeroNiPoint3.x); /*0x526029*/
+                  v43 = (Ni2DBuffer *)((char *)v43 + 0x54); /*0x526032*/
+                  v43->members.super.m_uiRefCount = LODWORD(g_zeroNiPoint3.y); /*0x526035*/
+                  v43->members.width = LODWORD(g_zeroNiPoint3.z); /*0x52603e*/
+                  qmemcpy(&a2[2].members.width, &stru_B26AF0[0xA].unk2C, 0x24u); /*0x526052*/
+                  ((void (__thiscall *)(NiNode *, Ni2DBuffer *, int))v71->vtbl->AddObject)(v71, a2, 1); /*0x526067*/
+                  v44 = v64; /*0x52606d*/
+                  a2[0xD].members.data = v5; /*0x526071*/
+                  sub_7165B0(a2, v44); /*0x52607d*/
                 }
-                (*((void (__thiscall **)(Ni2DBuffer *, int))a2->__vftable + 0x2C))(a2, 1);
-                (*((void (__thiscall **)(Ni2DBuffer *, int))a2->__vftable + 0x2E))(a2, 1);
-                v44 = a2;
-                *(float *)&a2[4].members.super.m_uiRefCount = Vector3_InitValue_;
-                v44 = (Ni2DBuffer *)((char *)v44 + 0x54);
-                v44->members.super.m_uiRefCount = *(UInt32 *)(&Vector3_InitValue_ + 1);
-                *(float *)&v44->members.width = dword_B3F9B0;
-                qmemcpy(&a2[2].members.width, &stru_B26AF0[0xA].unk2C, 0x24u);
-                (*(void (__thiscall **)(int, Ni2DBuffer *, int))(*(_DWORD *)v73 + 0x84))(v73, a2, 1);
-                v45 = v66;
-                a2[0xD].members.data = v6;
-                sub_7165B0(a2, v45);
+                v45 = v60; /*0x526085*/
+                if ( !v60 ) /*0x52608b*/
+                  goto LABEL_72; /*0x52608b*/
+                goto LABEL_71; /*0x52608b*/
               }
-              v46 = v62;
-              if ( !v62 )
-                goto LABEL_72;
-              goto LABEL_71;
+              v38 = v60; /*0x525f04*/
             }
-            v39 = v62;
+            (*((void (__thiscall **)(Ni2DBuffer *, BSFaceGenAnimationData *))v38->__vftable + 0x28))(v38, v37); /*0x525f11*/
+            goto LABEL_59; /*0x525f11*/
           }
-          (*((void (__thiscall **)(Ni2DBuffer *, BSFaceGenAnimationData *))v39->__vftable + 0x28))(v39, v38);
-          goto LABEL_59;
+          PrintError( /*0x52620c*/
+            "Cannot create a head for an NPC (%d) that does not have a biped-head node.",
+            *(_DWORD *)(v4 + 0xC));
         }
       }
     }
   }
-  return v5;
+  return st7_0; /*0x526214*/
 }

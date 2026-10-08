@@ -25,14 +25,14 @@
 0x781F10: mov     [esi+28h], ebp
 0x781F13: mov     edx, [edi]
 0x781F15: mov     edx, [edx+28h]
-0x781F18: lea     ecx, [esp+28h+var_10]
+0x781F18: lea     ecx, [esp+28h+bytecode]
 0x781F1C: push    ecx
 0x781F1D: mov     ecx, [esp+2Ch+arg_0]
 0x781F21: push    eax
 0x781F22: push    ecx
 0x781F23: mov     ecx, edi
 0x781F25: mov     [esp+34h+var_C], ebp
-0x781F29: mov     [esp+34h+var_10], ebp
+0x781F29: mov     [esp+34h+bytecode], ebp
 0x781F2D: mov     [esp+34h+var_8], ebp
 0x781F31: mov     [esp+34h+var_4], ebp
 0x781F35: call    edx
@@ -49,11 +49,11 @@
 0x781F49: pop     ebp
 0x781F4A: add     esp, 10h
 0x781F4D: retn    14h
-0x781F50: mov     eax, [esp+1Ch+var_10]
+0x781F50: mov     eax, [esp+1Ch+bytecode]
 0x781F54: push    ebx
-0x781F55: push    eax
+0x781F55: push    eax; bytecode
 0x781F56: mov     ecx, edi
-0x781F58: call    sub_783C30
+0x781F58: call    NiDX9Renderer__CreatePixelShader; Calls IDirect3DDevice9::CreatePixelShader for compiled DWORD bytecode and reports a failed HRESULT.
 0x781F5D: mov     ebx, eax
 0x781F5F: cmp     ebx, ebp
 0x781F61: jnz     short loc_781F8E
@@ -87,7 +87,7 @@
 0x781FA1: push    ebp
 0x781FA2: mov     ecx, esi
 0x781FA4: call    edx
-0x781FA6: mov     ecx, [esp+20h+var_10]
+0x781FA6: mov     ecx, [esp+20h+bytecode]
 0x781FAA: mov     eax, [esi]
 0x781FAC: mov     edx, [esp+20h+var_C]
 0x781FB0: mov     eax, [eax+1Ch]

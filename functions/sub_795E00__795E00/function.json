@@ -1,19 +1,36 @@
 {
-  "callees_count": 13,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_795E00",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x795E00",
+      "0x795ECC"
+    ],
+    [
+      "0x9CBE20",
+      "0x9CBE54"
+    ]
+  ],
+  "chunks_sha256": "0394160ce469702ecf6d853da0c0aa77eec771748b172baace6ad2612293172b",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move for vector<unsigned short> owners. Constructs empty destinations then swaps their buffers with sources, leaving sources empty; normal return is at 0x795EA8.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Exception-safe uninitialized move for vector<unsigned short> owners. Constructs empty destinations then swaps their buffers with sources, leaving sources empty; normal return is at 0x795EA8.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 5,
+  "display_name": "OB_stVector_stVectorUShort_UninitializedMoveRange_010201A0",
   "end_ea": "0x795ECC",
-  "flags": 21521,
+  "evidence_confidence": "Unknown",
+  "flags": 21520,
   "has_pseudocode": true,
-  "name": "sub_795E00",
+  "name": "OB_stVector_stVectorUShort_UninitializedMoveRange_010201A0",
   "segment": ".text",
   "sha256": "a6ddb893963d0141948edc356edc9fa7f9d7011784ea48b3bfbe688e6a785631",
   "size": 204,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x795E00",
-  "type": "void __cdecl __noreturn(_DWORD *, _DWORD *, _DWORD *)",
-  "xrefs_from_count": 87,
+  "total_chunk_size": 256,
+  "type": "OB_stVectorUShort_010201A0 *__cdecl(OB_stVectorUShort_010201A0 *first, OB_stVectorUShort_010201A0 *last, OB_stVectorUShort_010201A0 *destination)",
+  "xrefs_from_count": 109,
   "xrefs_to_count": 3
 }

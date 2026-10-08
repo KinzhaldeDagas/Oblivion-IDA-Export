@@ -5,35 +5,35 @@ unsigned int __thiscall sub_65DDC0(unsigned int *this, unsigned int *a2, _DWORD 
   unsigned int v7; // edx
   unsigned int *v8; // ecx
 
-  result = *a2;
-  *a3 = *(_DWORD *)(*a2 + 4);
-  *a4 = *(_BYTE *)(result + 8);
-  if ( *(_DWORD *)result )
+  result = *a2; /*0x65ddca*/
+  *a3 = *(_DWORD *)(*a2 + 4); /*0x65ddd1*/
+  *a4 = *(_BYTE *)(result + 8); /*0x65ddda*/
+  if ( *(_DWORD *)result ) /*0x65dddc*/
   {
-    *a2 = *(_DWORD *)result;
+    *a2 = *(_DWORD *)result; /*0x65dde2*/
   }
   else
   {
-    v6 = (*(int (__thiscall **)(unsigned int *, _DWORD))(*this + 4))(this, *(_DWORD *)(result + 4));
-    v7 = *(this + 1);
-    result = v6 + 1;
-    if ( result >= v7 )
+    v6 = (*(int (__thiscall **)(unsigned int *, _DWORD))(*this + 4))(this, *(_DWORD *)(result + 4)); /*0x65ddf4*/
+    v7 = *(this + 1); /*0x65ddf6*/
+    result = v6 + 1; /*0x65ddf9*/
+    if ( result >= v7 ) /*0x65ddfe*/
     {
 LABEL_7:
-      *a2 = 0;
+      *a2 = 0; /*0x65de16*/
     }
     else
     {
-      v8 = (unsigned int *)(*(this + 2) + 4 * result);
-      while ( !*v8 )
+      v8 = (unsigned int *)(*(this + 2) + 4 * result); /*0x65de03*/
+      while ( !*v8 ) /*0x65de0a*/
       {
-        ++result;
-        ++v8;
-        if ( result >= v7 )
-          goto LABEL_7;
+        ++result; /*0x65de0c*/
+        ++v8; /*0x65de0f*/
+        if ( result >= v7 ) /*0x65de14*/
+          goto LABEL_7; /*0x65de14*/
       }
-      *a2 = *v8;
+      *a2 = *v8; /*0x65de21*/
     }
   }
-  return result;
+  return result; /*0x65dde4*/
 }

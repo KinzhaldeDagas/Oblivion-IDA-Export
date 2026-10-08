@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7DA220",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Shared PP-lighting geometry/material setup. Oblivion parses NiProperty ID 2 name tokens here: exact 'Refract' sets passInfo 0x8000; exact 'RefractF' sets 0x10000, invalidates the cached pass key, enables refraction state, and clears conflicting alpha flag 1. Shared wrapper ownership proves Lighting30 and Hair inherit this parser.",
     "mnemonic": "push",
     "size": 2
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x7DA25B",
-    "line": "mov     ebp, [esp+420h+arg_0]",
+    "line": "mov     ebp, [esp+420h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7DA262",
-    "line": "lea     eax, [esp+420h+var_3FC]",
+    "line": "lea     eax, [esp+420h+output]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x7DA268",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DA269",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -139,7 +139,7 @@
   },
   {
     "ea": "0x7DA26F",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x7DA276",
-    "line": "mov     eax, [esp+420h+var_3FC]",
+    "line": "mov     eax, [esp+420h+output]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7DA2A6",
-    "line": "call    NiAVObject_InitializePropertyState",
+    "line": "call    NiAVObject_InitializePropertyState; Pass205: NiAVObject_InitializePropertyState obtains parent/root state and calls virtual UpdatePropertiesDownward to propagate local properties.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x7DA2AF",
-    "line": "push    ecx",
+    "line": "push    ecx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DA2B0",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7DA2B2",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x7DA311",
-    "line": "cmp     eax, offset dword_B3FD98",
+    "line": "cmp     eax, offset stru_B3FD98",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x7DA349",
-    "line": "lea     ecx, [esp+420h+var_400]; this",
+    "line": "lea     ecx, [esp+420h+var_400]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7DA34D",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1255,7 +1255,7 @@
   },
   {
     "ea": "0x7DA4AB",
-    "line": "call    eax ; dword_B42E8C",
+    "line": "call    eax ; unk_B42E8C",
     "mnemonic": "call",
     "size": 2
   },
@@ -1297,7 +1297,7 @@
   },
   {
     "ea": "0x7DA4BF",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,13 +1351,13 @@
   },
   {
     "ea": "0x7DA4E0",
-    "line": "push    ebp; Str1",
+    "line": "push    ebp; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DA4E1",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1387,13 +1387,13 @@
   },
   {
     "ea": "0x7DA4F2",
-    "line": "push    ebp; Str1",
+    "line": "push    ebp; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DA4F3",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1459,13 +1459,13 @@
   },
   {
     "ea": "0x7DA51B",
-    "line": "push    ebp; Str1",
+    "line": "push    ebp; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DA51C",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x7DA53F",
-    "line": "call    __strnicmp",
+    "line": "call    __strnicmp; Enter Oblivion's native Refract/RefractF material-name token parser.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1717,13 +1717,13 @@
   },
   {
     "ea": "0x7DA59A",
-    "line": "push    edi; Str1",
+    "line": "push    edi; left",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7DA59B",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1741,7 +1741,7 @@
   },
   {
     "ea": "0x7DA5A7",
-    "line": "push    edi; Str1",
+    "line": "push    edi; left",
     "mnemonic": "push",
     "size": 1
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x7DA5AB",
-    "line": "call    __strcmp",
+    "line": "call    CRT_StricmpLocaleDispatch",
     "mnemonic": "call",
     "size": 5
   },
@@ -1801,7 +1801,7 @@
   },
   {
     "ea": "0x7DA5C0",
-    "line": "or      dword ptr [esi+1Ch], 10000h",
+    "line": "or      dword ptr [esi+1Ch], 10000h; Exact 'RefractF' token selects the periodic/fire refraction flag path.",
     "mnemonic": "or",
     "size": 7
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x7DA5CD",
-    "line": "or      dword ptr [esi+1Ch], 10000h",
+    "line": "or      dword ptr [esi+1Ch], 10000h; Set BSShaderProperty passInfo bit 0x10000 = RefractF.",
     "mnemonic": "or",
     "size": 7
   },
@@ -1837,7 +1837,7 @@
   },
   {
     "ea": "0x7DA5D6",
-    "line": "or      dword ptr [esi+1Ch], 8000h",
+    "line": "or      dword ptr [esi+1Ch], 8000h; Set BSShaderProperty passInfo bit 0x8000 = Refract.",
     "mnemonic": "or",
     "size": 7
   },
@@ -1867,7 +1867,7 @@
   },
   {
     "ea": "0x7DA5F1",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1897,7 +1897,7 @@
   },
   {
     "ea": "0x7DA601",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1993,7 +1993,7 @@
   },
   {
     "ea": "0x7DA639",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -2059,13 +2059,13 @@
   },
   {
     "ea": "0x7DA65D",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7DA65F",
-    "line": "call    sub_47F920",
+    "line": "call    NiAlphaProperty_ctor; Constructs a 0x1C NiAlphaProperty over NiObjectNET: installs NiAlphaProperty vtable, initializes flags to 0x00EC and threshold byte to 0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2095,7 +2095,7 @@
   },
   {
     "ea": "0x7DA678",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2137,7 +2137,7 @@
   },
   {
     "ea": "0x7DA698",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2149,13 +2149,13 @@
   },
   {
     "ea": "0x7DA6A2",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7DA6A4",
-    "line": "call    sub_700900",
+    "line": "call    NiObject_CloneWithPointerMap; Clones a loaded NiObject with a temporary pointer map and runs clone post-processing; the returned scene object is distinct from its source.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2203,7 +2203,7 @@
   },
   {
     "ea": "0x7DA6B8",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x7DA72C",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -3091,7 +3091,7 @@
   },
   {
     "ea": "0x7DA894",
-    "line": "push    offset dword_B3F95C",
+    "line": "push    offset stru_B3F95C",
     "mnemonic": "push",
     "size": 5
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x7DA8A9",
-    "line": "mov     ecx, [eax+24h]",
+    "line": "mov     ecx, [eax+24h]; Checks referenced texture runtime GetLevelCount() and clears the slot if <=1. This validation belongs to the 0x7DA220 branch/PPLighting method, not the leaf property override.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3367,7 +3367,7 @@
   },
   {
     "ea": "0x7DA91A",
-    "line": "mov     dword ptr [ebx], 0",
+    "line": "mov     dword ptr [ebx], 0; Clears the offending texture reference after the <=1-level validation failure.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -3451,7 +3451,7 @@
   },
   {
     "ea": "0x7DA944",
-    "line": "push    offset dword_B3F95C",
+    "line": "push    offset stru_B3F95C",
     "mnemonic": "push",
     "size": 5
   },
@@ -3637,7 +3637,7 @@
   },
   {
     "ea": "0x7DA9A0",
-    "line": "push    offset dword_B3F95C",
+    "line": "push    offset stru_B3F95C",
     "mnemonic": "push",
     "size": 5
   },
@@ -4045,7 +4045,7 @@
   },
   {
     "ea": "0x7DAA5C",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4177,7 +4177,7 @@
   },
   {
     "ea": "0x7DAA9B",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -4237,7 +4237,7 @@
   },
   {
     "ea": "0x7DAAB9",
-    "line": "jbe     short loc_7DAAC1",
+    "line": "jbe     short loc_7DAAC1; Verified (Oblivion): SetupGeometry sets BSShaderProperty::passInfo bit 0x02 when the NiAVObject has a non-null m_controller (or the bit was already set), otherwise clears it. ShadowLight pass construction forwards this bit to choose selector 0x18C versus 0x18D. Probable: BSSM_TEXEFFECT_S is the controller/animated-geometry variant; the suffix's exact expansion remains Unknown.",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -4348,5 +4348,101 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9CEF50",
+    "line": "mov     eax, [ebp-400h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEF56",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEF57",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEF5C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEF5D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9CEF5E",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9CEF62",
+    "line": "lea     eax, [edx-410h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEF68",
+    "line": "mov     ecx, [edx-414h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9CEF6E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEF70",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEF75",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEF78",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9CEF7B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9CEF7D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEF82",
+    "line": "mov     eax, offset stru_AF7D18",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9CEF87",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

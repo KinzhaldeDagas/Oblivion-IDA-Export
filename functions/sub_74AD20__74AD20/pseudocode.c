@@ -1,4 +1,4 @@
-char *sub_74AD20()
+NiRTTI *sub_74AD20()
 {
-  return dword_B408C8;
+  return &stru_B408C8; /*0x74ad25*/
 }

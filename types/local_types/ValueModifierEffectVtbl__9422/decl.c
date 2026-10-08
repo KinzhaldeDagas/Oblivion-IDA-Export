@@ -1,1 +1,4 @@
-ValueModifierEffectVtbl
+struct ValueModifierEffectVtbl
+{
+ActiveEffectVtbl super;
+};

@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x77A0B0",
+      "0x77A0E7"
+    ]
+  ],
+  "chunks_sha256": "6afca0d964700ac97d71a9b2192683e269333dc7674a2c8081decc5bf4e744c8",
+  "comment_regular": "Oblivion NiD3DShader vtable +0x48 pass-loop begin. Sets CurrentPassIndex=0, refcounts Passes[0] into CurrentPass, and returns PassCount. After ResetPassQueue and a null selector resolution, Passes[0] and CurrentPass are null and the returned zero is the renderer's no-draw guard.\n\nMoonSugarEffect decode: NiD3DShader vtable +0x48 pass-loop begin. Selects pass 0, refcounts CurrentPass, and returns pass count.",
+  "comment_repeatable": "Oblivion NiD3DShader vtable +0x48 pass-loop begin. Sets CurrentPassIndex=0, refcounts Passes[0] into CurrentPass, and returns PassCount. After ResetPassQueue and a null selector resolution, Passes[0] and CurrentPass are null and the returned zero is the renderer's no-draw guard.\nDX11 refresh audit: shader+44 is Passes.data, +34 current index, +3C current pass. This transient pass-loop selection is not an owner-stable material source between geometries.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77A0B0",
+  "display_name": "NiD3DShader_BeginPassLoop",
   "end_ea": "0x77A0E7",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77A0B0",
+  "name": "NiD3DShader_BeginPassLoop",
   "segment": ".text",
   "sha256": "6afca0d964700ac97d71a9b2192683e269333dc7674a2c8081decc5bf4e744c8",
   "size": 55,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77A0B0",
+  "total_chunk_size": 55,
   "type": "UInt32 __thiscall(NiD3DShader *this)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 32

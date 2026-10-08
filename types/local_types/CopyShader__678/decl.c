@@ -1,1 +1,1 @@
-CopyShader
+struct CopyShader;

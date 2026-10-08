@@ -1,4 +1,4 @@
-0x403B80: push    ebx
+0x403B80: push    ebx; [Controller decode 2026-07-09] Minimal rebind checks: forbids reserved inputs such as Escape, Grave/console, and PrintScreen before writing a binding.
 0x403B81: mov     bl, [esp+4+newButton]
 0x403B85: push    esi
 0x403B86: mov     esi, dword ptr [esp+8+whichScheme]

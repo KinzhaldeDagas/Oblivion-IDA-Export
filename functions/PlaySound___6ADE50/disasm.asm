@@ -34,7 +34,7 @@
 0x6ADED0: mov     ecx, ds:0B33A98h
 0x6ADED6: push    eax
 0x6ADED7: mov     [esp+134h+var_118], 0
-0x6ADEDF: call    sub_447490
+0x6ADEDF: call    SoundMap_ResolveAnimSoundNote; Animation Sound: note resolver. Looks up the note token in global sound map off_B06164 and accepts only entries whose form/type byte is 0x0A; returns the sound entry or 0.
 0x6ADEE4: mov     ebp, eax
 0x6ADEE6: test    ebp, ebp
 0x6ADEE8: jz      loc_6AE070
@@ -170,3 +170,24 @@
 0x6AE08E: call    @__security_check_cookie@4; __security_check_cookie(x)
 0x6AE093: add     esp, 11Ch
 0x6AE099: retn    0Ch
+0x9C6500: mov     eax, [ebp-11Ch]
+0x9C6506: push    eax
+0x9C6507: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C650C: pop     ecx
+0x9C650D: retn
+0x9C650E: mov     eax, [ebp-11Ch]
+0x9C6514: push    eax
+0x9C6515: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C651A: pop     ecx
+0x9C651B: retn
+0x9C651C: mov     edx, [esp+arg_4]
+0x9C6520: lea     eax, [edx-120h]
+0x9C6526: mov     ecx, [edx-124h]
+0x9C652C: xor     ecx, eax
+0x9C652E: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6533: add     eax, 10h
+0x9C6536: mov     ecx, [edx-4]
+0x9C6539: xor     ecx, eax
+0x9C653B: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C6540: mov     eax, offset stru_AEEA90
+0x9C6545: jmp     ___CxxFrameHandler3

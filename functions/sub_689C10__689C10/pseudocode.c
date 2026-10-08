@@ -1,28 +1,28 @@
 void __thiscall sub_689C10(int *this)
 {
   int *v1; // esi
-  unsigned int v2; // edi
+  TravelPathNode *v2; // edi
   int *v3; // eax
 
-  v1 = this + 1;
-  if ( this != (int *)0xFFFFFFFC && (*(this + 2) || *v1) )
+  v1 = this + 1; /*0x689c11*/
+  if ( this != (int *)0xFFFFFFFC && (*(this + 2) || *v1) ) /*0x689c1e*/
   {
-    v2 = *v1;
-    if ( *v1 )
+    v2 = (TravelPathNode *)*v1; /*0x689c24*/
+    if ( *v1 ) /*0x689c24*/
     {
-      sub_68B1C0(*v1);
-      FormHeapFree(v2);
+      TravelPathNode_FreeOwnedPosition((TravelPathNode *)*v1); /*0x689c2c*/
+      FormHeapFree((unsigned int)v2); /*0x689c32*/
     }
-    v3 = (int *)v1[1];
-    if ( v3 )
+    v3 = (int *)v1[1]; /*0x689c3a*/
+    if ( v3 ) /*0x689c40*/
     {
-      v1[1] = v3[1];
-      *v1 = *v3;
-      FormHeapFree((unsigned int)v3);
+      v1[1] = v3[1]; /*0x689c45*/
+      *v1 = *v3; /*0x689c4b*/
+      FormHeapFree((unsigned int)v3); /*0x689c4d*/
     }
     else
     {
-      *v1 = 0;
+      *v1 = 0; /*0x689c57*/
     }
   }
 }

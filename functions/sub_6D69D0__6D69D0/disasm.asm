@@ -1,4 +1,4 @@
-0x6D69D0: push    ebx
+0x6D69D0: push    ebx; Oblivion NiTransformInterpolator viewer-string output. Appends base/type strings, cached transform details, and recursively appends NiTransformData viewer strings when data +0x2C is nonnull.
 0x6D69D1: push    esi
 0x6D69D2: mov     esi, [esp+8+arg_0]
 0x6D69D6: push    edi

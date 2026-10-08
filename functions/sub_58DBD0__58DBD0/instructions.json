@@ -169,13 +169,13 @@
   },
   {
     "ea": "0x58DC35",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DC37",
-    "line": "call    sub_58CD30",
+    "line": "call    Tile__BuildStorage__Initialize; Verified: BuildStorage0x14 layout: mainTemplate+0,embedded subtemplate list+4/+8,currentTemplate+0xC,ownsSubTemplates+0x10. Creates main template with name main and back-pointer. Fallout0x827DECA0 shares storage offsets but allocates smaller template.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x58DC46",
-    "line": "mov     eax, [esp+10CCh+arg_4]",
+    "line": "mov     eax, [esp+10CCh+buffer]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -241,7 +241,7 @@
   },
   {
     "ea": "0x58DC66",
-    "line": "mov     eax, [esp+10CCh+arg_8]",
+    "line": "mov     eax, [esp+10CCh+length]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x58DC97",
-    "line": "mov     [esp+10CCh+var_1010], 0",
+    "line": "mov     [esp+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x58DC9F",
-    "line": "mov     [esp+10CCh+var_1094], esi",
+    "line": "mov     [esp+10CCh+command], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x58DCAB",
-    "line": "mov     [esp+10CCh+var_10B4], 1",
+    "line": "mov     [esp+10CCh+sourceLine], 1",
     "mnemonic": "mov",
     "size": 8
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x58DCFB",
-    "line": "add     [esp+10CCh+var_10B4], 1",
+    "line": "add     [esp+10CCh+sourceLine], 1",
     "mnemonic": "add",
     "size": 5
   },
@@ -781,7 +781,7 @@
   },
   {
     "ea": "0x58DD9A",
-    "line": "push    0; int",
+    "line": "push    0; preserveStrings",
     "mnemonic": "push",
     "size": 2
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x58DD9E",
-    "line": "mov     eax, [esp+10D0h+var_10B4]",
+    "line": "mov     eax, [esp+10D0h+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -829,13 +829,13 @@
   },
   {
     "ea": "0x58DDAC",
-    "line": "mov     edx, [esp+10D0h+var_10B4]",
+    "line": "mov     edx, [esp+10D0h+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DDB0",
-    "line": "push    edx; int",
+    "line": "push    edx; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
@@ -847,37 +847,37 @@
   },
   {
     "ea": "0x58DDB5",
-    "line": "push    eax; Src",
+    "line": "push    eax; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DDB6",
-    "line": "push    0Ah; int",
+    "line": "push    0Ah; command",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58DDB8",
-    "line": "mov     ecx, [esp+10DCh+var_10A8]",
+    "line": "mov     ecx, [esp+10DCh+var_10A8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DDBC",
-    "line": "call    sub_588A60",
+    "line": "call    Tile__BuildStorage__GetCurrentTemplate; Verified: returns currentTemplate if nonnull, otherwise mainTemplate; matches Fallout named0x827DB050.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58DDC1",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DDC3",
-    "line": "call    sub_58D2F0",
+    "line": "call    Tile__TileTemplate__AddPair; Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x58DDFF",
-    "line": "push    0; int",
+    "line": "push    0; preserveStrings",
     "mnemonic": "push",
     "size": 2
   },
@@ -985,19 +985,19 @@
   },
   {
     "ea": "0x58DE03",
-    "line": "mov     ecx, [esp+10D0h+var_10B4]",
+    "line": "mov     ecx, [esp+10D0h+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DE07",
-    "line": "push    ecx; int",
+    "line": "push    ecx; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DE08",
-    "line": "mov     ecx, [esp+10D4h+var_10A8]",
+    "line": "mov     ecx, [esp+10D4h+var_10A8]; this",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1009,31 +1009,31 @@
   },
   {
     "ea": "0x58DE10",
-    "line": "push    edx; Src",
+    "line": "push    edx; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DE11",
-    "line": "push    0Fh; int",
+    "line": "push    0Fh; command",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58DE13",
-    "line": "call    sub_588A60",
+    "line": "call    Tile__BuildStorage__GetCurrentTemplate; Verified: returns currentTemplate if nonnull, otherwise mainTemplate; matches Fallout named0x827DB050.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58DE18",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DE1A",
-    "line": "call    sub_58D2F0",
+    "line": "call    Tile__TileTemplate__AddPair; Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,13 +1045,13 @@
   },
   {
     "ea": "0x58DE21",
-    "line": "mov     eax, [esp+10D0h+var_10B4]",
+    "line": "mov     eax, [esp+10D0h+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DE25",
-    "line": "push    eax; int",
+    "line": "push    eax; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
@@ -1063,37 +1063,37 @@
   },
   {
     "ea": "0x58DE2A",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DE2B",
-    "line": "mov     ecx, [esp+10D8h+var_10A8]",
+    "line": "mov     ecx, [esp+10D8h+var_10A8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DE2F",
-    "line": "push    0Ah; int",
+    "line": "push    0Ah; command",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58DE31",
-    "line": "call    sub_588A60",
+    "line": "call    Tile__BuildStorage__GetCurrentTemplate; Verified: returns currentTemplate if nonnull, otherwise mainTemplate; matches Fallout named0x827DB050.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58DE36",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DE38",
-    "line": "call    sub_58D2F0",
+    "line": "call    Tile__TileTemplate__AddPair; Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1351,7 +1351,7 @@
   },
   {
     "ea": "0x58DED1",
-    "line": "cmp     [esp+10CCh+var_1010], 0",
+    "line": "cmp     [esp+10CCh+text], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x58DEDF",
-    "line": "lea     eax, [esp+10CCh+var_1010]",
+    "line": "lea     eax, [esp+10CCh+text]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1393,13 +1393,13 @@
   },
   {
     "ea": "0x58DEF1",
-    "line": "mov     [esp+10CCh+var_1094], eax",
+    "line": "mov     [esp+10CCh+command], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DEF5",
-    "line": "mov     [esp+10CCh+var_1010], 0",
+    "line": "mov     [esp+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x58DF0D",
-    "line": "cmp     [esp+10CCh+var_1010], 0",
+    "line": "cmp     [esp+10CCh+text], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1447,7 +1447,7 @@
   },
   {
     "ea": "0x58DF1B",
-    "line": "lea     ecx, [esp+10CCh+var_1010]",
+    "line": "lea     ecx, [esp+10CCh+text]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -1471,13 +1471,13 @@
   },
   {
     "ea": "0x58DF2B",
-    "line": "mov     [esp+10CCh+var_1094], eax",
+    "line": "mov     [esp+10CCh+command], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DF2F",
-    "line": "mov     [esp+10CCh+var_1010], 0",
+    "line": "mov     [esp+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x58DF46",
-    "line": "mov     [esp+esi+10CCh+var_1010], al",
+    "line": "mov     [esp+esi+10CCh+text], al",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x58DF56",
-    "line": "mov     [esp+esi+10CCh+var_1010], 0",
+    "line": "mov     [esp+esi+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x58DFB9",
-    "line": "cmp     [esp+10CCh+var_1010], 0",
+    "line": "cmp     [esp+10CCh+text], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1705,73 +1705,73 @@
   },
   {
     "ea": "0x58DFC7",
-    "line": "mov     eax, [esp+10CCh+var_10B4]",
+    "line": "mov     eax, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DFCB",
-    "line": "mov     edx, [esp+10CCh+var_1094]",
+    "line": "mov     edx, [esp+10CCh+command]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DFCF",
-    "line": "push    0; int",
+    "line": "push    0; preserveStrings",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58DFD1",
-    "line": "push    eax; int",
+    "line": "push    eax; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DFD2",
-    "line": "lea     ecx, [esp+10D4h+var_1010]",
+    "line": "lea     ecx, [esp+10D4h+text]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x58DFD9",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DFDA",
-    "line": "mov     ecx, [esp+10D8h+var_10A8]",
+    "line": "mov     ecx, [esp+10D8h+var_10A8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58DFDE",
-    "line": "push    edx; int",
+    "line": "push    edx; command",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58DFDF",
-    "line": "call    sub_588A60",
+    "line": "call    Tile__BuildStorage__GetCurrentTemplate; Verified: returns currentTemplate if nonnull, otherwise mainTemplate; matches Fallout named0x827DB050.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58DFE4",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58DFE6",
-    "line": "call    sub_58D2F0",
+    "line": "call    Tile__TileTemplate__AddPair; Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58DFEB",
-    "line": "mov     [esp+10CCh+var_1010], 0",
+    "line": "mov     [esp+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1825,7 +1825,7 @@
   },
   {
     "ea": "0x58E011",
-    "line": "cmp     [esp+10CCh+var_1010], 0",
+    "line": "cmp     [esp+10CCh+text], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -1837,67 +1837,67 @@
   },
   {
     "ea": "0x58E01B",
-    "line": "mov     eax, [esp+10CCh+var_10B4]",
+    "line": "mov     eax, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E01F",
-    "line": "mov     edx, [esp+10CCh+var_1094]",
+    "line": "mov     edx, [esp+10CCh+command]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E023",
-    "line": "push    0; int",
+    "line": "push    0; preserveStrings",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58E025",
-    "line": "push    eax; int",
+    "line": "push    eax; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58E026",
-    "line": "lea     ecx, [esp+10D4h+var_1010]",
+    "line": "lea     ecx, [esp+10D4h+text]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x58E02D",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58E02E",
-    "line": "mov     ecx, [esp+10D8h+var_10A8]",
+    "line": "mov     ecx, [esp+10D8h+var_10A8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E032",
-    "line": "push    edx; int",
+    "line": "push    edx; command",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58E033",
-    "line": "call    sub_588A60",
+    "line": "call    Tile__BuildStorage__GetCurrentTemplate; Verified: returns currentTemplate if nonnull, otherwise mainTemplate; matches Fallout named0x827DB050.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58E038",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58E03A",
-    "line": "call    sub_58D2F0",
+    "line": "call    Tile__TileTemplate__AddPair; Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x58E051",
-    "line": "mov     [esp+10CCh+var_1010], 0",
+    "line": "mov     [esp+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -2005,25 +2005,25 @@
   },
   {
     "ea": "0x58E079",
-    "line": "mov     edx, [esp+10CCh+var_10B4]",
+    "line": "mov     edx, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E07D",
-    "line": "mov     ecx, [esp+10CCh+var_10A8]",
+    "line": "mov     ecx, [esp+10CCh+var_10A8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E081",
-    "line": "push    0; int",
+    "line": "push    0; preserveStrings",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58E083",
-    "line": "push    edx; int",
+    "line": "push    edx; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
@@ -2035,31 +2035,31 @@
   },
   {
     "ea": "0x58E088",
-    "line": "push    eax; Src",
+    "line": "push    eax; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58E089",
-    "line": "push    0Fh; int",
+    "line": "push    0Fh; command",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58E08B",
-    "line": "call    sub_588A60",
+    "line": "call    Tile__BuildStorage__GetCurrentTemplate; Verified: returns currentTemplate if nonnull, otherwise mainTemplate; matches Fallout named0x827DB050.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58E090",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58E092",
-    "line": "call    sub_58D2F0",
+    "line": "call    Tile__TileTemplate__AddPair; Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2179,7 +2179,7 @@
   },
   {
     "ea": "0x58E0DF",
-    "line": "cmp     [esp+10CCh+var_1010], 0",
+    "line": "cmp     [esp+10CCh+text], 0",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -2191,7 +2191,7 @@
   },
   {
     "ea": "0x58E0E9",
-    "line": "lea     eax, [esp+10CCh+var_1010]",
+    "line": "lea     eax, [esp+10CCh+text]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2239,7 +2239,7 @@
   },
   {
     "ea": "0x58E101",
-    "line": "cmp     [esp+eax+10CCh+var_1010], 20h ; ' '",
+    "line": "cmp     [esp+eax+10CCh+text], 20h ; ' '",
     "mnemonic": "cmp",
     "size": 8
   },
@@ -2269,7 +2269,7 @@
   },
   {
     "ea": "0x58E118",
-    "line": "mov     al, [esp+10CCh+var_1010]",
+    "line": "mov     al, [esp+10CCh+text]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x58E123",
-    "line": "mov     ecx, [esp+10CCh+var_10B4]",
+    "line": "mov     ecx, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2305,7 +2305,7 @@
   },
   {
     "ea": "0x58E12A",
-    "line": "lea     edx, [esp+10D4h+var_1010]",
+    "line": "lea     edx, [esp+10D4h+text]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -2335,61 +2335,61 @@
   },
   {
     "ea": "0x58E138",
-    "line": "mov     eax, [esp+10CCh+var_10B4]",
+    "line": "mov     eax, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E13C",
-    "line": "push    1; int",
+    "line": "push    1; preserveStrings",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x58E13E",
-    "line": "push    eax; int",
+    "line": "push    eax; sourceLine",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58E13F",
-    "line": "lea     ecx, [esp+10D4h+var_1010]",
+    "line": "lea     ecx, [esp+10D4h+text]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x58E146",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; text",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x58E147",
-    "line": "mov     ecx, [esp+10D8h+var_10A8]",
+    "line": "mov     ecx, [esp+10D8h+var_10A8]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x58E14B",
-    "line": "push    0BB9h; int",
+    "line": "push    0BB9h; command",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x58E150",
-    "line": "call    sub_588A60",
+    "line": "call    Tile__BuildStorage__GetCurrentTemplate; Verified: returns currentTemplate if nonnull, otherwise mainTemplate; matches Fallout named0x827DB050.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x58E155",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x58E157",
-    "line": "call    sub_58D2F0",
+    "line": "call    Tile__TileTemplate__AddPair; Verified 2026-10-07: AddPair role promoted from Probable after inspecting full token-history rewrite. Tracks last three template items. Closing a literal trait/action replaces opener with SetTrait0x32 or LiteralAction0x37, transfers payload, removes temporary item. Closing action preceded by0xBBB/0xBBC folds into ReferenceAction0x3C with selector string, source-trait number and operator argument. Name token0xBBA turns tile opener into BeginTile0x28; type999 enters/exits named-template construction. Fallout0x827DF340 follows analogous folds but different command IDs/pooling. Unknown: malformed-input edge coverage and exact behavior for all user-defined tokens.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2407,7 +2407,7 @@
   },
   {
     "ea": "0x58E160",
-    "line": "mov     [esp+10CCh+var_1010], 0",
+    "line": "mov     [esp+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -2521,7 +2521,7 @@
   },
   {
     "ea": "0x58E1A2",
-    "line": "mov     [esp+esi+10CCh+var_1010], al",
+    "line": "mov     [esp+esi+10CCh+text], al",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2539,7 +2539,7 @@
   },
   {
     "ea": "0x58E1B2",
-    "line": "mov     [esp+esi+10CCh+var_1010], 0",
+    "line": "mov     [esp+esi+10CCh+text], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -2641,7 +2641,7 @@
   },
   {
     "ea": "0x58E1EA",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2671,7 +2671,7 @@
   },
   {
     "ea": "0x58E1FE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2725,7 +2725,7 @@
   },
   {
     "ea": "0x58E216",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2755,7 +2755,7 @@
   },
   {
     "ea": "0x58E22A",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2845,7 +2845,7 @@
   },
   {
     "ea": "0x58E25E",
-    "line": "mov     eax, [esp+10CCh+var_10B4]",
+    "line": "mov     eax, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2911,7 +2911,7 @@
   },
   {
     "ea": "0x58E285",
-    "line": "mov     edx, [esp+10CCh+var_10B4]",
+    "line": "mov     edx, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2977,7 +2977,7 @@
   },
   {
     "ea": "0x58E2AC",
-    "line": "mov     ecx, [esp+10CCh+var_10B4]",
+    "line": "mov     ecx, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3043,7 +3043,7 @@
   },
   {
     "ea": "0x58E2D6",
-    "line": "mov     eax, [esp+10CCh+var_10B4]",
+    "line": "mov     eax, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x58E300",
-    "line": "mov     edx, [esp+10CCh+var_10B4]",
+    "line": "mov     edx, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x58E32A",
-    "line": "mov     ecx, [esp+10CCh+var_10B4]",
+    "line": "mov     ecx, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3241,7 +3241,7 @@
   },
   {
     "ea": "0x58E354",
-    "line": "mov     eax, [esp+10CCh+var_10B4]",
+    "line": "mov     eax, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3307,7 +3307,7 @@
   },
   {
     "ea": "0x58E37E",
-    "line": "mov     edx, [esp+10CCh+var_10B4]",
+    "line": "mov     edx, [esp+10CCh+sourceLine]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3368,6 +3368,102 @@
   {
     "ea": "0x58E3A3",
     "line": "jmp     loc_58E236",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF930",
+    "line": "mov     eax, [ebp-109Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF936",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BF937",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF93C",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BF93D",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BF93E",
+    "line": "mov     edx, [esp+buffer]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BF942",
+    "line": "lea     eax, [edx-10BCh]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF948",
+    "line": "mov     ecx, [edx-10C0h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9BF94E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF950",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF955",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF958",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BF95B",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BF95D",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF962",
+    "line": "mov     eax, offset stru_AE8E08",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BF967",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

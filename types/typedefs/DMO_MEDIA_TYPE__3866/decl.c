@@ -1,1 +1,1 @@
-DMO_MEDIA_TYPE
+typedef _DMOMediaType DMO_MEDIA_TYPE;

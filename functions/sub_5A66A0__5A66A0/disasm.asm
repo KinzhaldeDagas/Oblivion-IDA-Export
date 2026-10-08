@@ -12,7 +12,7 @@
 0x5A66B8: mov     ecx, edi
 0x5A66BA: call    edx
 0x5A66BC: push    eax
-0x5A66BD: call    FormHeapFree
+0x5A66BD: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A66C2: add     esi, 1
 0x5A66C5: add     esp, 4
 0x5A66C8: cmp     esi, [ebx+84h]

@@ -14,7 +14,7 @@
 0x459ABA: push    ecx
 0x459ABB: fstp    [esp+8+var_8]; float
 0x459ABE: push    3; int
-0x459AC0: call    sub_57B950
+0x459AC0: call    sub_57B950; Fast-travel UI/progress update helper called once per simulated travel-time step before relocation.
 0x459AC5: add     esp, 8
 0x459AC8: or      dword ptr [esi+18h], 2000h
 0x459ACF: fld     dword ptr ds:0B33A48h

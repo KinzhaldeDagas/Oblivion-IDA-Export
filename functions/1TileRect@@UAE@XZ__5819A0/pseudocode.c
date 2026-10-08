@@ -1,12 +1,7 @@
-void __usercall TileRect::~TileRect(
-        TileRect *this@<ecx>,
-        char a2@<bpl>,
-        double a3@<st2>,
-        double a4@<st1>,
-        double a5@<st0>)
+void __thiscall TileRect::~TileRect(TileRect *this)
 {
-  *(_DWORD *)this = &TileRect::`vftable';
-  if ( !*((_BYTE *)this + 4) )
-    sub_58DA70((int)this);
-  Tile::~Tile(this, a2, a3, a4, a5);
+  *(_DWORD *)this = &TileRect::`vftable'; /*0x5819c8*/
+  if ( !*((_BYTE *)this + 4) ) /*0x5819ce*/
+    Tile::Release(this); /*0x5819dc*/
+  Tile::~Tile(this); /*0x5819eb*/
 }

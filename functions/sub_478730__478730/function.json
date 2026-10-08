@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_478730",
+  "chunks": [
+    [
+      "0x478730",
+      "0x478774"
+    ]
+  ],
+  "chunks_sha256": "43ffc960e01e5ba2570121ce6c3621bc06881a06b277b17abfe4ce5afdab1ceb",
+  "comment_regular": "Constructs a 0x154-byte ActorSkinInfo: clears exactly 0x154 bytes, stores the owning Actor at byte offset +0x150, and optionally caches exact-name model nodes from rootNode.",
+  "comment_repeatable": "Constructs a 0x154-byte ActorSkinInfo: clears exactly 0x154 bytes, stores the owning Actor at byte offset +0x150, and optionally caches exact-name model nodes from rootNode.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "ActorSkinInfo_ctor",
   "end_ea": "0x478774",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_478730",
+  "name": "ActorSkinInfo_ctor",
   "segment": ".text",
   "sha256": "43ffc960e01e5ba2570121ce6c3621bc06881a06b277b17abfe4ce5afdab1ceb",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x478730",
-  "type": "int *__thiscall(int *this, int, _DWORD *)",
+  "total_chunk_size": 68,
+  "type": "ActorSkinInfo *__thiscall(ActorSkinInfo *this, Actor *owner, NiNode *rootNode)",
   "xrefs_from_count": 26,
   "xrefs_to_count": 3
 }

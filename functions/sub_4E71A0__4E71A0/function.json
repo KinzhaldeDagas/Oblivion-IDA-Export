@@ -1,19 +1,36 @@
 {
-  "callees_count": 48,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 1,
-  "display_name": "sub_4E71A0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 18,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x4E71A0",
+      "0x4E74AC"
+    ],
+    [
+      "0x9B5E30",
+      "0x9B5E61"
+    ]
+  ],
+  "chunks_sha256": "5cdfdf00b31a660ee4d18a2b8eca4948eee06e3bad4cfd12ed649672a86f8681",
+  "comment_regular": "Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.",
+  "comment_repeatable": "Verified rebuilds this PathGrid's render root and point/linked-reference visualization. It owns a NiNode at TESPathGrid+0x1C; each point receives a NiNode renderNode at +0x28 with an octahedron clone; adjacency uses NiLines segments; PGRL-associated references receive a marker/edge overlay from pointsByReference. It then attaches the grid root beneath the shared world ObjectLODRoot. Verified Fallout divergence: Fallout's TESObjectCELL::AttachToWorld adds draw-only navmeshes to NavMeshRender::spRootDrawNode, and TESObjectCELL::Detach removes them. Fallout uses a cell-scoped manager/root path; Oblivion uses per-PathGrid/per-point nodes.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 2,
+  "display_name": "TESPathGrid_RebuildRenderedGraph",
   "end_ea": "0x4E74AC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4E71A0",
+  "name": "TESPathGrid_RebuildRenderedGraph",
   "segment": ".text",
   "sha256": "93332b5188e04dbb109fa0cf14adb8d582339973f24a029056763e4fe1d1baf2",
   "size": 780,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4E71A0",
-  "type": "int __thiscall(TESObjectREFR *this)",
-  "xrefs_from_count": 300,
+  "total_chunk_size": 829,
+  "type": "int __thiscall(TESPathGrid *this)",
+  "xrefs_from_count": 319,
   "xrefs_to_count": 4
 }

@@ -12,9 +12,9 @@ int __userpurge BSSimpleList_InsertSorted_::NodeLoop_Next@<eax>(
 {
   _DWORD *v11; // esi
 
-  v11 = *(_DWORD **)(a1 + 4);
-  if ( v11 )
-    return BSSimpleList_InsertSorted_::NodeLoop(a2, a3, a1, v11, a4, a5, a6, a7, a8, a9, a10);
+  v11 = *(_DWORD **)(a1 + 4); /*0x4166f3*/
+  if ( v11 ) /*0x4166f8*/
+    return BSSimpleList_InsertSorted_::NodeLoop(a2, a3, a1, v11, a4, a5, a6, a7, a8, a9, a10); /*0x4166f8*/
   else
-    return BSSimpleList_InsertSorted_::Done_(a4, a5);
+    return BSSimpleList_InsertSorted_::Done_(a4, a5); /*0x4166f9*/
 }

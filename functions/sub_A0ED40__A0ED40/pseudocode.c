@@ -1,4 +1,4 @@
-BSStringT *sub_A0ED40()
+NiRTTI *sub_A0ED40()
 {
-  return sub_70E220((BSStringT *)dword_B4182C, "NiPSysDragFieldModifier", (int)dword_B41E68);
+  return NiRTTI_Constructor(&stru_B4182C, "NiPSysDragFieldModifier", &stru_B41E68); /*0xa0ed54*/
 }

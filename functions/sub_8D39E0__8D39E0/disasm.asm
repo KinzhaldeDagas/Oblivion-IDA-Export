@@ -50,8 +50,8 @@
 0x8D3A74: subps   xmm0, xmm1
 0x8D3A77: movaps  xmmword ptr [eax+10h], xmm0
 0x8D3A7B: mov     ebx, [ecx+6Ch]
-0x8D3A7E: mov     dword ptr [esp+440h+var_424], ebx
-0x8D3A82: movss   xmm1, dword ptr [esp+440h+var_424]
+0x8D3A7E: mov     [esp+440h+var_424], ebx
+0x8D3A82: movss   xmm1, [esp+440h+var_424]
 0x8D3A88: movaps  xmm2, xmm1
 0x8D3A8B: shufps  xmm2, xmm1, 0
 0x8D3A8F: mulps   xmm2, xmm0
@@ -74,7 +74,7 @@
 0x8D3ACA: mov     ebx, [ecx]
 0x8D3ACC: mov     eax, [ebp+arg_8]
 0x8D3ACF: cmp     ebx, [eax+4]
-0x8D3AD2: mov     dword ptr [esp+440h+var_424], ebx
+0x8D3AD2: mov     [esp+440h+var_424], ebx
 0x8D3AD6: jge     loc_8D3C95
 0x8D3ADC: mov     esi, [ebp+arg_1C]
 0x8D3ADF: lea     ebx, [ebx+ebx*2]
@@ -209,13 +209,13 @@
 0x8D3C67: mov     [eax+8], ecx
 0x8D3C6A: jmp     short loc_8D3C70
 0x8D3C6C: mov     ebx, [esp+440h+var_42C]
-0x8D3C70: mov     ecx, dword ptr [esp+440h+var_424]
+0x8D3C70: mov     ecx, [esp+440h+var_424]
 0x8D3C74: mov     eax, [ebp+arg_8]
 0x8D3C77: mov     edx, [eax+4]
 0x8D3C7A: inc     ecx
 0x8D3C7B: add     ebx, 0Ch
 0x8D3C7E: cmp     ecx, edx
-0x8D3C80: mov     dword ptr [esp+440h+var_424], ecx
+0x8D3C80: mov     [esp+440h+var_424], ecx
 0x8D3C84: mov     [esp+440h+var_42C], ebx
 0x8D3C88: jl      loc_8D3AF0
 0x8D3C8E: mov     edx, [esp+440h+var_428]

@@ -52,7 +52,6 @@
 0x7C75F5: mov     [esp+10h+arg_0], edi
 0x7C75F9: jle     short loc_7C7644
 0x7C75FB: jmp     short loc_7C7600
-0x7C75FD: align 10h
 0x7C7600: movzx   edx, di
 0x7C7603: cmp     edx, ebp
 0x7C7605: jb      short loc_7C760B

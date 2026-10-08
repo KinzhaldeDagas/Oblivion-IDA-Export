@@ -1,21 +1,127 @@
-int __usercall ValueModifierEffect_Apply_::KillOnEnduranceDmg@<eax>(Actor *a1@<edi>, int a2@<esi>, double a3@<st0>)
+int __usercall ValueModifierEffect_Apply_::KillOnEnduranceDmg@<eax>(
+        Actor *a1@<edi>,
+        int a2@<esi>,
+        double a3@<st0>,
+        double a4@<st2>,
+        int a5,
+        int a6,
+        int a7,
+        int a8,
+        int a9,
+        int a10,
+        int a11,
+        int a12,
+        int a13,
+        int a14,
+        int a15,
+        int a16,
+        int a17,
+        int a18,
+        int a19,
+        int a20,
+        int a21,
+        int a22,
+        int a23,
+        int a24,
+        int a25,
+        int a26,
+        int a27,
+        int a28,
+        int a29,
+        int a30,
+        int a31,
+        int a32,
+        int a33,
+        int a34,
+        int a35,
+        int a36,
+        int a37,
+        int a38,
+        int a39,
+        int a40,
+        int a41,
+        int a42,
+        int a43,
+        int a44,
+        int a45,
+        int a46,
+        int a47,
+        int a48,
+        int a49,
+        int a50,
+        int a51,
+        int a52,
+        int a53,
+        int a54,
+        int a55)
 {
-  double v5; // st6
-  MagicCaster *v6; // ecx
+  double v55; // st6
+  MagicCaster *v56; // ecx
   Actor *ParentActor; // eax
 
-  if ( *(float *)(a2 + 0x18) < 0.0 )
+  if ( *(float *)(a2 + 0x18) < 0.0 ) /*0x6a87b5*/
   {
-    v5 = ((double (__usercall *)@<st0>(Actor *@<ecx>, int, double@<st0>))a1->vtbl->GetAV_F)(a1, 8, a3);
-    if ( a3 <= fConstant_1 )
+    v55 = ((double (__thiscall *)(Actor *, int))a1->vtbl->GetAV_F)(a1, 8); /*0x6a87c3*/
+    if ( a3 <= fConstant_1 ) /*0x6a87d0*/
     {
-      v6 = *(MagicCaster **)(a2 + 0x24);
-      if ( v6 )
-        ParentActor = MagicCaster_GetParentActor(v6);
+      v56 = *(MagicCaster **)(a2 + 0x24); /*0x6a87d2*/
+      if ( v56 ) /*0x6a87d7*/
+        ParentActor = MagicCaster_GetParentActor(v56); /*0x6a87d9*/
       else
-        ParentActor = 0;
-      Actor_Kill(a1, 0.0, v5, 0.0, ParentActor, COERCE_INT(0.0));
+        ParentActor = 0; /*0x6a87e0*/
+      Actor_Kill(a1, a4, v55, 0.0, ParentActor, COERCE_INT(0.0)); /*0x6a87eb*/
     }
   }
-  return ValueModifierEffect_Apply_::Wrapup();
+  return ValueModifierEffect_Apply_::Wrapup(
+           a5,
+           a6,
+           a7,
+           a8,
+           a9,
+           a10,
+           a11,
+           a12,
+           a13,
+           a14,
+           a15,
+           a16,
+           a17,
+           a18,
+           a19,
+           a20,
+           a21,
+           a22,
+           a23,
+           a24,
+           a25,
+           a26,
+           a27,
+           a28,
+           a29,
+           a30,
+           a31,
+           a32,
+           a33,
+           a34,
+           a35,
+           a36,
+           a37,
+           a38,
+           a39,
+           a40,
+           a41,
+           a42,
+           a43,
+           a44,
+           a45,
+           a46,
+           a47,
+           a48,
+           a49,
+           a50,
+           a51,
+           a52,
+           a53,
+           a54,
+           a55);
 }

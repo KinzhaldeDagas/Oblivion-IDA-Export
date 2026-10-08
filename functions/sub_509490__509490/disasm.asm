@@ -21,7 +21,7 @@
 0x5094CB: push    eax; a3
 0x5094CC: push    ecx; a2
 0x5094CD: push    edx; a1
-0x5094CE: call    Script_ExtractArgs
+0x5094CE: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5094D3: add     esp, 20h
 0x5094D6: test    al, al
 0x5094D8: jz      short loc_50950F
@@ -41,7 +41,7 @@
 0x5094FF: mov     ecx, esi; this
 0x509501: call    sub_6B73E0
 0x509506: push    esi
-0x509507: call    FormHeapFree
+0x509507: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x50950C: add     esp, 4
 0x50950F: mov     al, 1
 0x509511: pop     esi

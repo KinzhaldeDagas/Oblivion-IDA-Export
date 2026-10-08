@@ -1,6 +1,6 @@
 int __userpurge SummonCreatureEffect_PlaceSummon_::ValidateBaseObject@<eax>(
         int a1@<ebx>,
-        _DWORD *esi0@<esi>,
+        float *esi0@<esi>,
         TESObjectREFR *a3@<ebp>,
         double a4@<st2>,
         double a5@<st1>,
@@ -15,10 +15,10 @@ int __userpurge SummonCreatureEffect_PlaceSummon_::ValidateBaseObject@<eax>(
         int a14,
         int a15)
 {
-  if ( a1 )
-    return SummonCreatureEffect_PlaceSummon_::PlaceRef(a1, a3, esi0, a4, a5, a6);
+  if ( a1 ) /*0x6a5d40*/
+    return SummonCreatureEffect_PlaceSummon_::PlaceRef(a1, a3, esi0, a4, a5, a6); /*0x6a5d40*/
   else
-    return SummonCreatureEffect_PlaceSummon_::Error_BadBaseObject(
+    return SummonCreatureEffect_PlaceSummon_::Error_BadBaseObject( /*0x6a5d41*/
              (int)esi0,
              a6,
              a7,

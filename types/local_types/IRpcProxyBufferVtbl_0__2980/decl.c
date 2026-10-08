@@ -1,1 +1,1 @@
-IRpcProxyBufferVtbl_0
+typedef IRpcProxyBufferVtbl IRpcProxyBufferVtbl_0;

@@ -1,22 +1,45 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "$4423D4037A46AA95D42D71CF77D74EBD",
+  "definition": "union $4423D4037A46AA95D42D71CF77D74EBD\n{\nULONG SharedDataFlags;\n$DB04C2EFA54690E7C0889A7FAF2E0BD1 s2;\n}\n",
   "id": 18374686479672047668,
   "is_union": true,
+  "kind": "union",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "SharedDataFlags",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "s2",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "$DB04C2EFA54690E7C0889A7FAF2E0BD1"
     }
   ],
   "name": "$4423D4037A46AA95D42D71CF77D74EBD",
+  "ordinal": 8839,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": false,
+    "is_union": true,
+    "is_void": false
+  },
   "size": 4
 }

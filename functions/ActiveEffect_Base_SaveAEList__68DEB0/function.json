@@ -1,19 +1,32 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 3,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68DEB0",
+      "0x68DEDD"
+    ]
+  ],
+  "chunks_sha256": "20218fba37dbef3f5f220fad7cb4fa82198c410b6e531a48f5aad174c9f8d70d",
+  "comment_regular": "Verified active-effect list save layout: TESSaveLoadGame_UseSaveGameBlocks controls whether the list emits a BLOK header and reserves/backpatches a block size. The list always reserves and patches a UInt16 effect count. Per-effect records separately use the save version threshold 0x2A to include a UInt16 record-size field.",
+  "comment_repeatable": "Verified active-effect list save layout: TESSaveLoadGame_UseSaveGameBlocks controls whether the list emits a BLOK header and reserves/backpatches a block size. The list always reserves and patches a UInt16 effect count. Per-effect records separately use the save version threshold 0x2A to include a UInt16 record-size field.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_SaveAEList",
   "end_ea": "0x68DEDD",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_SaveAEList",
   "segment": ".text",
   "sha256": "20218fba37dbef3f5f220fad7cb4fa82198c410b6e531a48f5aad174c9f8d70d",
   "size": 45,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68DEB0",
-  "type": "int __cdecl(int, int, int, char, int, int, int, int, int, int)",
+  "total_chunk_size": 45,
+  "type": "int __cdecl(int, int, int, int, int, int, int, int, int, int)",
   "xrefs_from_count": 10,
   "xrefs_to_count": 3
 }

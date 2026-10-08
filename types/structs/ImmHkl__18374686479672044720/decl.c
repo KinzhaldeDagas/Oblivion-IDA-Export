@@ -1,1 +1,1 @@
-ImmHkl
+typedef _tagImmHkl ImmHkl;

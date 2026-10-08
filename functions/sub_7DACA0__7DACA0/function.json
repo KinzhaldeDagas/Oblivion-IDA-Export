@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x7DACA0",
+      "0x7DADB9"
+    ]
+  ],
+  "chunks_sha256": "9be59c0ebdcd324156ebc5ee47a19f9a201c8c9244afaacf7f2898683c653601",
+  "comment_regular": "[Verified] Loads the supplied shader package from Data\\Shaders\\<filename>, validates its header (observed values 0x0C and 0x64), reads the record payload, and inserts entries into the ShaderBufferEntry string map. [Unknown] Internal meaning of package header fields and variant-specific payloads is not established. [Candidate cross-build note] Fallout's observed HLSL creator compiles resolved source files directly; no same-name .sdp load path was located in its IDB, which remains an incomplete search rather than a proven absence.",
+  "comment_repeatable": "[Verified] Loads the supplied shader package from Data\\Shaders\\<filename>, validates its header (observed values 0x0C and 0x64), reads the record payload, and inserts entries into the ShaderBufferEntry string map. [Unknown] Internal meaning of package header fields and variant-specific payloads is not established. [Candidate cross-build note] Fallout's observed HLSL creator compiles resolved source files directly; no same-name .sdp load path was located in its IDB, which remains an incomplete search rather than a proven absence.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_7DACA0",
+  "display_name": "ShaderProgramPackageMap_LoadSdp",
   "end_ea": "0x7DADB9",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7DACA0",
+  "name": "ShaderProgramPackageMap_LoadSdp",
   "segment": ".text",
   "sha256": "9be59c0ebdcd324156ebc5ee47a19f9a201c8c9244afaacf7f2898683c653601",
   "size": 281,
+  "source_annotation_confidence": "Verified",
   "start_ea": "0x7DACA0",
-  "type": "char __thiscall(unsigned int *this, const char *)",
+  "total_chunk_size": 281,
+  "type": "char __thiscall(unsigned int *this, const char *filename)",
   "xrefs_from_count": 106,
   "xrefs_to_count": 1
 }

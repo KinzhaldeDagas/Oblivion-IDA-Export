@@ -1,6 +1,6 @@
-0x612F50: sub     esp, 4Ch
+0x612F50: sub     esp, 4Ch; Three-argument cdecl routine: returns float surface distance from 'from' to 'to'. All 24 callers push exactly from, to, and useActorProjection then reclaim 0x0C. The prior EDI register argument, fourth stack byte, and double return were analysis pollution.
 0x612F53: push    esi
-0x612F54: mov     esi, [esp+50h+arg_4]
+0x612F54: mov     esi, [esp+50h+to]
 0x612F58: test    esi, esi
 0x612F5A: jnz     short loc_612F63
 0x612F5C: fldz
@@ -8,13 +8,13 @@
 0x612F5F: add     esp, 4Ch
 0x612F62: retn
 0x612F63: push    edi
-0x612F64: mov     edi, [esp+54h+arg_0]
+0x612F64: mov     edi, [esp+54h+from]
 0x612F68: push    0
 0x612F6A: push    esi
 0x612F6B: mov     ecx, edi
 0x612F6D: call    TesObjectREF_GetDistance
-0x612F72: fstp    [esp+54h+arg_4]
-0x612F76: fld     [esp+54h+arg_4]
+0x612F72: fstp    [esp+54h+to]
+0x612F76: fld     [esp+54h+to]
 0x612F7A: fcom    qword ptr ds:0A3A5B0h
 0x612F80: fnstsw  ax
 0x612F82: test    ah, 44h
@@ -33,12 +33,12 @@
 0x612FAD: test    al, al
 0x612FAF: jz      loc_61314C
 0x612FB5: push    ebx
-0x612FB6: mov     ecx, edi
-0x612FB8: call    Actor_IsSwimming
+0x612FB6: mov     ecx, edi; this
+0x612FB8: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x612FBD: test    al, al
 0x612FBF: jz      short loc_612FD0
-0x612FC1: mov     ecx, esi
-0x612FC3: call    Actor_IsSwimming
+0x612FC1: mov     ecx, esi; this
+0x612FC3: call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).
 0x612FC8: test    al, al
 0x612FCA: jz      short loc_612FD0
 0x612FCC: mov     bl, 1
@@ -75,7 +75,7 @@
 0x613029: jnz     short loc_613069
 0x61302B: cmp     [esp+50h+arg_C], 0
 0x613030: jz      loc_61314C
-0x613036: mov     ecx, offset fAICombatSlopeDifference
+0x613036: mov     ecx, (offset flt_B37328+8)
 0x61303B: call    GameSetting_GetSafeFloatPointer
 0x613040: fld     [esp+50h+var_18]
 0x613044: fsub    [esp+50h+var_C]
@@ -149,8 +149,8 @@
 0x613119: fldz
 0x61311B: fsubr   st, st
 0x61311D: fstp    [esp+50h+var_24]
-0x613121: call    sub_404C90
-0x613126: fstp    dword ptr [esp+50h+arg_8]
+0x613121: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
+0x613126: fstp    dword ptr [esp+50h+useActorProjection]
 0x61312A: jmp     short loc_61314C
 0x61312C: fstp    st(2)
 0x61312E: fld     dword ptr [esp+50h+var_30+4]
@@ -166,7 +166,7 @@
 0x613146: jmp     short loc_6130FD
 0x613148: fstp    st
 0x61314A: fstp    st
-0x61314C: mov     eax, [esi]
+0x61314C: mov     eax, [esi]; Surface-distance tail reads each reference's boundMax.y via vtable slot 0x57, multiplies by GetScale, integer-converts their sum, and subtracts it from center distance.
 0x61314E: mov     edx, [eax+15Ch]
 0x613154: lea     ecx, [esp+50h+var_8]
 0x613158: push    ecx
@@ -189,19 +189,19 @@
 0x613189: fld     dword ptr [eax+4]
 0x61318C: mov     eax, [edi]
 0x61318E: fstp    [esp+54h+var_30]
-0x613192: fld     [esp+54h+arg_4]
+0x613192: fld     [esp+54h+to]
 0x613196: mov     edx, [eax+0ECh]
 0x61319C: mov     ecx, edi
 0x61319E: fstp    [esp+54h+var_48]
 0x6131A2: call    edx
 0x6131A4: fmul    [esp+54h+var_30]
 0x6131A8: fadd    [esp+54h+var_3C]
-0x6131AC: call    Double_To_SInt32
-0x6131B1: mov     [esp+54h+arg_4], eax
-0x6131B5: fild    [esp+54h+arg_4]
+0x6131AC: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
+0x6131B1: mov     [esp+54h+to], eax
+0x6131B5: fild    [esp+54h+to]
 0x6131B9: fsubr   [esp+54h+var_48]
-0x6131BD: fstp    [esp+54h+arg_4]
-0x6131C1: fld     [esp+54h+arg_4]
+0x6131BD: fstp    [esp+54h+to]
+0x6131C1: fld     [esp+54h+to]
 0x6131C5: pop     edi
 0x6131C6: pop     esi
 0x6131C7: add     esp, 4Ch

@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7AD270",
-    "line": "sub     esp, 7Ch",
+    "line": "sub     esp, 7Ch; BSShaderAccumulator per-geometry accumulation entry (+0x58). Invokes the shader-property pass producer and inserts each RenderPass into bucket 0x14*(selector+0xD); mode 5 bypasses the ordinary receiver eligibility check.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7AD273",
-    "line": "cmp     byte ptr ds:0B42CDAh, 0",
+    "line": "cmp     byte ptr ds:0B42CDAh, 0; FreezeRenderAccumulation entry gate. The debug command changes accumulation/replay control but does not transfer RenderPass ownership.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -25,7 +25,7 @@
   },
   {
     "ea": "0x7AD27C",
-    "line": "mov     esi, [esp+84h+arg_0]",
+    "line": "mov     esi, [esp+84h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x7AD2B0",
-    "line": "cmp     eax, offset dword_B3FCDC",
+    "line": "cmp     eax, offset stru_B3FCDC",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x7AD2C8",
-    "line": "cmp     byte ptr ds:0B42CDAh, 0",
+    "line": "cmp     byte ptr ds:0B42CDAh, 0; Frozen accumulation bypasses the ordinary clear decision and continues through the retained-scene accumulation path.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x7AD2DA",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AD2DC",
-    "line": "call    sub_7AB6F0",
+    "line": "call    BSShaderAccumulator_ClearAccumulatedPasses; Reset transient BSShaderAccumulator storage. Iterates all 0x1A3 selector buckets at this+0x104 with stride 0x14, releases old free nodes, and moves active nodes to local free chains without destroying borrowed RenderPass payloads. Mode-5 flush uses this after drawing only buckets 6..9 and 0x154..0x155, so every other queued selector, including 0x177..0x17A, is discarded without draw. Separate accumulator-owned special pass lists later in this function explicitly call RenderPass_Destroy plus FormHeapFree.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x7AD2EA",
-    "line": "cmp     byte ptr ds:0B42CE8h, 0",
+    "line": "cmp     byte ptr ds:0B42CE8h, 0; If water reflection is active, do not perform AccumulateGeometry's fallback write that marks accumulator+0x2268 pending. The dedicated reflection path has already called BeginAccumulation.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -241,25 +241,25 @@
   },
   {
     "ea": "0x7AD2FB",
-    "line": "lea     eax, [esp+88h+var_6C]",
+    "line": "lea     eax, [esp+88h+payloadAddress]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7AD2FF",
-    "line": "push    eax",
+    "line": "push    eax; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD300",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AD302",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x7AD309",
-    "line": "mov     eax, [esp+88h+var_6C]",
+    "line": "mov     eax, [esp+88h+payloadAddress]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x7AD333",
-    "line": "lea     ecx, [esp+8Ch]",
+    "line": "lea     ecx, [esp+88h+geometry]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x7AD33A",
-    "line": "push    ecx",
+    "line": "push    ecx; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,19 +397,19 @@
   },
   {
     "ea": "0x7AD33D",
-    "line": "call    sub_7ABC40",
+    "line": "call    sub_7ABC40; MoonSugarEffect decode: BSShaderAccumulator immediate geometry bucket allocator. Creates/links a paired NiGeometry list + BSShaderProperty::RenderPass list group under accumulator +0x19 and returns the group for appending.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AD342",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7AD344",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; Insert this geometry RenderPass into BSShaderAccumulator bucket 0x14*(selector+0xD); mode-5 selectors therefore land in buckets 6..9 or 0x154/0x155.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x7AD35B",
-    "line": "mov     edx, [esp+8Ch]",
+    "line": "mov     edx, [esp+88h+geometry]; Load NiGeometry+0xBC active NiD3DShader object. This is the renderer shader instance, not the BSShaderProperty; its vtable +0x1C returns the shader ID (Lighting30 returns 0x1B).",
     "mnemonic": "mov",
     "size": 7
   },
@@ -475,13 +475,13 @@
   },
   {
     "ea": "0x7AD369",
-    "line": "mov     ebp, [edi+18h]",
+    "line": "mov     ebp, [edi+18h]; Load NiPropertyState+0x18 active BSShaderProperty into EBP. Lighting30ShaderProperty reports subtype 10 through vtable +0x54.",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7AD36C",
-    "line": "mov     [esp+90h+var_74], ebp",
+    "line": "mov     [esp+8Ch+var_70], ebp; Save the live BSShaderProperty pointer at raw [ESP+0x1C]. For native Lighting30 objects all constructor/clone routes store exact vptr A9576C.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -559,7 +559,7 @@
   },
   {
     "ea": "0x7AD39F",
-    "line": "cmp     byte ptr [ebx+21E0h], 0",
+    "line": "cmp     byte ptr [ebx+21E0h], 0; Pass330 decode: accumulator+0x21E0 is active in the shadow-map enqueue stage. It classifies the same NiGeometry by property/alpha flags into render buckets; this boundary does not substitute a replacement mesh.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -649,7 +649,7 @@
   },
   {
     "ea": "0x7AD3EA",
-    "line": "mov     eax, [esp+90h]",
+    "line": "mov     eax, [esp+8Ch+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x7AD407",
-    "line": "lea     ecx, [esp+90h]",
+    "line": "lea     ecx, [esp+8Ch+geometry]",
     "mnemonic": "lea",
     "size": 7
   },
@@ -709,7 +709,7 @@
   },
   {
     "ea": "0x7AD415",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -793,7 +793,7 @@
   },
   {
     "ea": "0x7AD43B",
-    "line": "call    eax",
+    "line": "call    eax; Call the NiD3DShader object's vtable +0x1C shader-ID virtual; Lighting30Shader returns 0x1B.",
     "mnemonic": "call",
     "size": 2
   },
@@ -823,7 +823,7 @@
   },
   {
     "ea": "0x7AD447",
-    "line": "call    eax",
+    "line": "call    eax; Call the BSShaderProperty vtable +0x54 subtype virtual; Lighting30ShaderProperty returns 10 via Shared_ReturnInt10.",
     "mnemonic": "call",
     "size": 2
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x7AD469",
-    "line": "lea     eax, [esp+94h+var_74]",
+    "line": "lea     eax, [esp+90h+var_70]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -889,7 +889,7 @@
   },
   {
     "ea": "0x7AD46E",
-    "line": "mov     eax, [esp+98h]",
+    "line": "mov     eax, [esp+94h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x7AD479",
-    "line": "mov     [esp+0A0h+var_74], 0",
+    "line": "mov     [esp+9Ch+var_70], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -955,7 +955,7 @@
   },
   {
     "ea": "0x7AD48F",
-    "line": "mov     [esp+0A0h+var_80], eax",
+    "line": "mov     [esp+8Ch+payloadAddress], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x7AD4A0",
-    "line": "cmp     byte ptr ds:0B42CE8h, 0",
+    "line": "cmp     byte ptr ds:0B42CE8h, 0; SkyShader reflection fast-path gate. Shader ID 0x16 plus SkyShaderProperty subtype 0x0B reaches this loop; water reflection draws only selector 0x17D immediately and does not bucket the other Sky passes.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -991,7 +991,7 @@
   },
   {
     "ea": "0x7AD4A9",
-    "line": "cmp     [eax+4], di",
+    "line": "cmp     [eax+4], di; In water reflection, accept only Sky selector 0x17D from the property-owned list.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1003,13 +1003,13 @@
   },
   {
     "ea": "0x7AD4AF",
-    "line": "push    edi; float",
+    "line": "push    edi; Directly submit the accepted Sky 0x17D RenderPass during water reflection; other Sky selectors advance without queueing.",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD4B0",
-    "line": "push    eax; int",
+    "line": "push    eax; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x7AD4B3",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1045,7 +1045,7 @@
   },
   {
     "ea": "0x7AD4C1",
-    "line": "lea     ecx, [esp+0A0h+var_80]",
+    "line": "lea     ecx, [esp+8Ch+payloadAddress]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1057,19 +1057,19 @@
   },
   {
     "ea": "0x7AD4C8",
-    "line": "push    ecx",
+    "line": "push    ecx; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD4C9",
-    "line": "lea     ecx, [ebx+edx*4]",
+    "line": "lea     ecx, [ebx+edx*4]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7AD4CC",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; Insert this geometry RenderPass into BSShaderAccumulator bucket 0x14*(selector+0xD); mode-5 selectors therefore land in buckets 6..9 or 0x154/0x155.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x7AD4DE",
-    "line": "mov     [esp+0A0h+var_80], eax",
+    "line": "mov     [esp+8Ch+payloadAddress], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1123,7 +1123,7 @@
   },
   {
     "ea": "0x7AD4E4",
-    "line": "mov     esi, [esp+0A0h+var_10]",
+    "line": "mov     esi, [esp+8Ch+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x7AD543",
-    "line": "mov     edi, [esp+90h]",
+    "line": "mov     edi, [esp+8Ch+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1309,7 +1309,7 @@
   },
   {
     "ea": "0x7AD54F",
-    "line": "lea     eax, [esp+94h+var_74]",
+    "line": "lea     eax, [esp+90h+var_70]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x7AD558",
-    "line": "mov     [esp+0A0h+var_74], 0",
+    "line": "mov     [esp+9Ch+var_70], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x7AD56E",
-    "line": "mov     [esp+0A0h+var_80], eax",
+    "line": "mov     [esp+8Ch+payloadAddress], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x7AD57B",
-    "line": "lea     ecx, [esp+0A0h+var_80]",
+    "line": "lea     ecx, [esp+8Ch+payloadAddress]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1417,19 +1417,19 @@
   },
   {
     "ea": "0x7AD582",
-    "line": "push    ecx",
+    "line": "push    ecx; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD583",
-    "line": "lea     ecx, [ebx+edx*4]",
+    "line": "lea     ecx, [ebx+edx*4]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7AD586",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; Insert this geometry RenderPass into BSShaderAccumulator bucket 0x14*(selector+0xD); mode-5 selectors therefore land in buckets 6..9 or 0x154/0x155.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1471,7 +1471,7 @@
   },
   {
     "ea": "0x7AD598",
-    "line": "mov     [esp+0A0h+var_80], eax",
+    "line": "mov     [esp+8Ch+payloadAddress], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1597,7 +1597,7 @@
   },
   {
     "ea": "0x7AD5EE",
-    "line": "lea     eax, [esp+94h+var_78]",
+    "line": "lea     eax, [esp+90h+var_74]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1609,7 +1609,7 @@
   },
   {
     "ea": "0x7AD5F3",
-    "line": "mov     eax, [esp+98h]",
+    "line": "mov     eax, [esp+94h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x7AD5FE",
-    "line": "mov     [esp+0A0h+var_78], 0",
+    "line": "mov     [esp+9Ch+var_74], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1675,7 +1675,7 @@
   },
   {
     "ea": "0x7AD615",
-    "line": "mov     [esp+0A0h+var_80], esi",
+    "line": "mov     [esp+8Ch+payloadAddress], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1693,7 +1693,7 @@
   },
   {
     "ea": "0x7AD624",
-    "line": "mov     eax, [esp+0A0h+var_84]",
+    "line": "mov     eax, [esp+8Ch+var_70]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1747,7 +1747,7 @@
   },
   {
     "ea": "0x7AD641",
-    "line": "lea     edx, [esp+0A0h+var_80]",
+    "line": "lea     edx, [esp+8Ch+payloadAddress]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1765,7 +1765,7 @@
   },
   {
     "ea": "0x7AD64C",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x7AD65A",
-    "line": "mov     eax, [esp+0A0h+var_84]",
+    "line": "mov     eax, [esp+8Ch+var_70]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1927,7 +1927,7 @@
   },
   {
     "ea": "0x7AD6B1",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1969,7 +1969,7 @@
   },
   {
     "ea": "0x7AD6C4",
-    "line": "mov     [esp+0A0h+var_80], esi",
+    "line": "mov     [esp+8Ch+payloadAddress], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1981,7 +1981,7 @@
   },
   {
     "ea": "0x7AD6CE",
-    "line": "mov     esi, [esp+0A0h+var_10]",
+    "line": "mov     esi, [esp+8Ch+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2173,7 +2173,7 @@
   },
   {
     "ea": "0x7AD73F",
-    "line": "lea     eax, [esp+94h+var_74]",
+    "line": "lea     eax, [esp+90h+var_70]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2185,7 +2185,7 @@
   },
   {
     "ea": "0x7AD744",
-    "line": "mov     eax, [esp+98h]",
+    "line": "mov     eax, [esp+94h+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2209,7 +2209,7 @@
   },
   {
     "ea": "0x7AD74F",
-    "line": "mov     [esp+0A0h+var_74], 0",
+    "line": "mov     [esp+9Ch+var_70], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -2251,7 +2251,7 @@
   },
   {
     "ea": "0x7AD766",
-    "line": "mov     [esp+0A0h+var_80], esi",
+    "line": "mov     [esp+8Ch+payloadAddress], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2269,7 +2269,7 @@
   },
   {
     "ea": "0x7AD776",
-    "line": "lea     eax, [esp+0A0h+var_80]",
+    "line": "lea     eax, [esp+8Ch+payloadAddress]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2287,7 +2287,7 @@
   },
   {
     "ea": "0x7AD77D",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x7AD7BC",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2437,7 +2437,7 @@
   },
   {
     "ea": "0x7AD7D3",
-    "line": "mov     [esp+0A0h+var_80], esi",
+    "line": "mov     [esp+8Ch+payloadAddress], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2533,7 +2533,7 @@
   },
   {
     "ea": "0x7AD80C",
-    "line": "mov     esi, [esp+90h]",
+    "line": "mov     esi, [esp+8Ch+geometry]; Reload the function's sole NiGeometry* argument from raw [ESP+0x90] after 0x7C locals and four saved registers. The property pointer remains separately saved at [ESP+0x1C].",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2563,7 +2563,7 @@
   },
   {
     "ea": "0x7AD81E",
-    "line": "mov     [esp+90h+var_5C], edx",
+    "line": "mov     [esp+8Ch+var_58], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2719,7 +2719,7 @@
   },
   {
     "ea": "0x7AD876",
-    "line": "call    sub_7E24C0",
+    "line": "call    BSShaderProperty_ClearRenderPassLists; Owner-side cleanup for all four BSShaderProperty RenderPass lists at +0x28/+0x38/+0x48/+0x58. For every node it unlinks the node, releases the node through the list allocator, destroys the payload's owned light array, and frees the 0x10-byte RenderPass. This is the ordinary payload owner; accumulator selector buckets do not perform this destruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2737,7 +2737,7 @@
   },
   {
     "ea": "0x7AD884",
-    "line": "mov     edx, [edx+5Ch]",
+    "line": "mov     edx, [edx+5Ch]; Load BSShaderProperty virtual +0x5C. Exact Lighting30 resolves to Lighting30ShaderProperty_BuildRenderPasses 0x8637D0; exact Hair to 0x882AE0; the three base/SpeedTree PP-lighting owners to 0x7D85D0.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -2749,7 +2749,7 @@
   },
   {
     "ea": "0x7AD889",
-    "line": "lea     eax, [esp+94h+var_6C]",
+    "line": "lea     eax, [esp+90h+var_68]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -2779,13 +2779,13 @@
   },
   {
     "ea": "0x7AD892",
-    "line": "mov     [esp+0A0h+var_6C], 0",
+    "line": "mov     [esp+9Ch+var_68], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x7AD89A",
-    "line": "call    edx",
+    "line": "call    edx; Accumulator calls the active shader property's virtual +0x5C builder. This is the decisive reachability edge: exact Lighting30 -> 0x8637D0; exact Hair -> 0x882AE0; base and SpeedTree PP-lighting owners -> 0x7D85D0.",
     "mnemonic": "call",
     "size": 2
   },
@@ -2797,7 +2797,7 @@
   },
   {
     "ea": "0x7AD89E",
-    "line": "mov     [esp+0A0h+var_80], eax",
+    "line": "mov     [esp+8Ch+payloadAddress], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2815,7 +2815,7 @@
   },
   {
     "ea": "0x7AD8AC",
-    "line": "mov     [esp+0A0h+var_8D], 0",
+    "line": "mov     [esp+8Ch+var_79], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2827,7 +2827,7 @@
   },
   {
     "ea": "0x7AD8B3",
-    "line": "mov     eax, [esp+0A0h+var_10]",
+    "line": "mov     eax, [esp+8Ch+geometry]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x7AD8C3",
-    "line": "cmp     [esp+0A0h+var_8D], 0",
+    "line": "cmp     [esp+8Ch+var_79], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -2989,7 +2989,7 @@
   },
   {
     "ea": "0x7AD904",
-    "line": "mov     [esp+0A0h+var_88], eax",
+    "line": "mov     [esp+8Ch+var_74], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3001,7 +3001,7 @@
   },
   {
     "ea": "0x7AD90D",
-    "line": "lea     ecx, [esp+0A0h+var_88]",
+    "line": "lea     ecx, [esp+8Ch+var_74]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3019,13 +3019,13 @@
   },
   {
     "ea": "0x7AD915",
-    "line": "call    sub_6AA320",
+    "line": "call    NiTList_AddHead; NiTList AddHead helper. Allocates a node, stores payload at +0x08, installs it as the list head, repairs the previous head/backlink or empty-list tail, and increments count. Repeated per-light calls reverse the source iterator order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AD91A",
-    "line": "mov     [esp+0A0h+var_8D], 1",
+    "line": "mov     [esp+8Ch+var_79], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -3049,7 +3049,7 @@
   },
   {
     "ea": "0x7AD926",
-    "line": "mov     edx, [esp+0A0h+var_80]",
+    "line": "mov     edx, [esp+8Ch+payloadAddress]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3073,7 +3073,7 @@
   },
   {
     "ea": "0x7AD936",
-    "line": "mov     ecx, [esp+0A0h+var_84]",
+    "line": "mov     ecx, [esp+8Ch+var_70]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3109,7 +3109,7 @@
   },
   {
     "ea": "0x7AD94F",
-    "line": "jz      loc_7AD9D2",
+    "line": "jz      loc_7AD9D2; Begin head-to-tail traversal of the returned property RenderPass list.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -3121,7 +3121,7 @@
   },
   {
     "ea": "0x7AD95C",
-    "line": "jz      short loc_7AD9D2",
+    "line": "jz      short loc_7AD9D2; Begin head-to-tail traversal of the returned property RenderPass list.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -3151,7 +3151,7 @@
   },
   {
     "ea": "0x7AD969",
-    "line": "jbe     short loc_7AD9D2",
+    "line": "jbe     short loc_7AD9D2; Begin head-to-tail traversal of the returned property RenderPass list.",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -3175,7 +3175,7 @@
   },
   {
     "ea": "0x7AD978",
-    "line": "mov     [esp+0A0h+var_88], esi",
+    "line": "mov     [esp+8Ch+var_74], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3199,7 +3199,7 @@
   },
   {
     "ea": "0x7AD985",
-    "line": "lea     ecx, [esp+0A0h+var_88]",
+    "line": "lea     ecx, [esp+8Ch+var_74]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -3211,25 +3211,25 @@
   },
   {
     "ea": "0x7AD98C",
-    "line": "push    ecx",
+    "line": "push    ecx; payloadAddress",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD98D",
-    "line": "lea     ecx, [ebx+edx*4]",
+    "line": "lea     ecx, [ebx+edx*4]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7AD990",
-    "line": "call    sub_7ABDE0",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; Insert this geometry RenderPass into BSShaderAccumulator bucket 0x14*(selector+0xD); mode-5 selectors therefore land in buckets 6..9 or 0x154/0x155.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AD995",
-    "line": "jmp     short loc_7AD9D2",
+    "line": "jmp     short loc_7AD9D2; Begin head-to-tail traversal of the returned property RenderPass list.",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -3265,7 +3265,7 @@
   },
   {
     "ea": "0x7AD9A5",
-    "line": "call    sub_7D1320",
+    "line": "call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3343,13 +3343,13 @@
   },
   {
     "ea": "0x7AD9C9",
-    "line": "push    ecx; float",
+    "line": "push    ecx; selector",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7AD9CA",
-    "line": "push    esi; int",
+    "line": "push    esi; entry",
     "mnemonic": "push",
     "size": 1
   },
@@ -3361,13 +3361,13 @@
   },
   {
     "ea": "0x7AD9CD",
-    "line": "call    sub_7A9820",
+    "line": "call    BSShaderAccumulator_DrawRenderPass; Submit one accumulated Oblivion RenderPass. Publishes selector/current entry, dispatches each light pointer, then invokes geometry render virtual +0x84 exactly once. It does not prevalidate the Lighting30 selector; invalid 0x177..0x17A records are suppressed later by SetupRenderPass leaving PassCount zero. Valid SimpleShadow compatibility records each have lightCount=1, so eligible lights remain separate receiver draws.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7AD9D2",
-    "line": "mov     edx, [esp+0A0h+var_80]",
+    "line": "mov     edx, [esp+8Ch+payloadAddress]; Begin head-to-tail traversal of the returned property RenderPass list.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3379,7 +3379,7 @@
   },
   {
     "ea": "0x7AD9D9",
-    "line": "mov     ebp, [eax+8]",
+    "line": "mov     ebp, [eax+8]; Load the current property-owned RenderPass into EBP. From this point EBP no longer holds the property; the original BSShaderProperty remains at raw [ESP+0x1C].",
     "mnemonic": "mov",
     "size": 3
   },
@@ -3403,25 +3403,25 @@
   },
   {
     "ea": "0x7AD9E3",
-    "line": "mov     [esp+0A0h+var_8C], edx",
+    "line": "mov     [esp+8Ch+var_78], edx; Save currentNode->next at raw [ESP+0x14]. EDX retains the same pointer at the pre-queue site and is the one scratch register that must not be clobbered before a filtered jump to 0x7ADA32.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7AD9E7",
-    "line": "mov     [esp+0A0h+var_88], ebp",
+    "line": "mov     [esp+8Ch+var_74], ebp; Mirror the current borrowed RenderPass at raw [ESP+0x18]. The distinct saved-property slot is raw [ESP+0x1C].",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7AD9EB",
-    "line": "jz      loc_7ADF1A",
+    "line": "jz      BSShaderAccumulator_FinishPropertyRenderPassTraversal",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x7AD9F1",
-    "line": "jmp     short loc_7ADA04",
+    "line": "jmp     short BSShaderAccumulator_RenderPassPreQueueFilterSite",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -3432,38 +3432,32 @@
     "size": 2
   },
   {
-    "ea": "0x7AD9F5",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 7
-  },
-  {
     "ea": "0x7ADA00",
-    "line": "mov     edx, [esp+0A0h+var_8C]",
+    "line": "mov     edx, [esp+8Ch+var_78]; Reload EDX from raw [ESP+0x14]; EDX is the next property-list node required by the native no-append advancement block.",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADA04",
-    "line": "cmp     byte ptr ds:0B42CE8h, 0",
+    "line": "cmp     byte ptr ds:0B42CE8h, 0; Previously proposed exact-Lighting30 high-selector pre-queue filter site. The ABI is valid, but the authoritative producer graph now proves exact Lighting30 cannot stock-produce 0x177..0x17A, so this predicate is unreachable defensive code rather than a native-mismatch correction.",
     "mnemonic": "cmp",
     "size": 7
   },
   {
     "ea": "0x7ADA0B",
-    "line": "movzx   esi, word ptr [ebp+4]",
+    "line": "movzx   esi, word ptr [ebp+4]; Original unfiltered continuation. MOVZX overwrites dead ESI with the selector and preserves the ZF replayed by the original B42CE8 compare; the following JZ consumes that ZF. EAX may remain clobbered by the predicate.",
     "mnemonic": "movzx",
     "size": 4
   },
   {
     "ea": "0x7ADA0F",
-    "line": "jz      short loc_7ADA44",
+    "line": "jz      short BSShaderAccumulator_RenderPassClassifier",
     "mnemonic": "jz",
     "size": 2
   },
   {
     "ea": "0x7ADA11",
-    "line": "lea     eax, [esi-168h]",
+    "line": "lea     eax, [esi-168h]; Water-reflection selector suppression: skip 0x168..0x16D and 0x170..0x17A here, retain 0x16E/0x16F, then separately skip 0x17B. Suppression advances through the native no-append block.",
     "mnemonic": "lea",
     "size": 6
   },
@@ -3499,7 +3493,7 @@
   },
   {
     "ea": "0x7ADA29",
-    "line": "jnz     short loc_7ADA32",
+    "line": "jnz     short BSShaderAccumulator_AdvanceWithoutQueueingRenderPass",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -3511,43 +3505,43 @@
   },
   {
     "ea": "0x7ADA30",
-    "line": "jnz     short loc_7ADA44",
+    "line": "jnz     short BSShaderAccumulator_RenderPassClassifier",
     "mnemonic": "jnz",
     "size": 2
   },
   {
     "ea": "0x7ADA32",
-    "line": "test    edx, edx",
+    "line": "test    edx, edx; Native no-append cursor-advance path. It remains an ABI-safe skip successor, but no stock exact-Lighting30 0x177..0x17A record reaches the proposed filter predicate.",
     "mnemonic": "test",
     "size": 2
   },
   {
     "ea": "0x7ADA34",
-    "line": "jz      loc_7ADF1A",
+    "line": "jz      BSShaderAccumulator_FinishPropertyRenderPassTraversal",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x7ADA3A",
-    "line": "mov     ecx, [edx]",
+    "line": "mov     ecx, [edx]; For a skipped record, load nextNode->next into ECX.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x7ADA3C",
-    "line": "lea     eax, [edx+8]",
+    "line": "lea     eax, [edx+8]; Non-null skip successor overwrites EAX with &nextNode->payload before the common cursor update, confirming EAX need not be restored for a filtered record.",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x7ADA3F",
-    "line": "jmp     loc_7ADF08",
+    "line": "jmp     BSShaderAccumulator_LoadNextPropertyRenderPass",
     "mnemonic": "jmp",
     "size": 5
   },
   {
     "ea": "0x7ADA44",
-    "line": "cmp     si, 190h",
+    "line": "cmp     si, 190h; Native RenderPass classifier after the optional B42CE8 skip. All successors overwrite predicate scratch state before consuming it: special selectors overwrite ECX/EAX via property-state setup, while the generic selector path reaches 0x7ADCD8.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -3571,7 +3565,7 @@
   },
   {
     "ea": "0x7ADA52",
-    "line": "lea     edx, [esi-34h]",
+    "line": "lea     edx, [esi-34h]; Generic-range classifier overwrites EDX only after the B42CE8/no-append decision. EDX must therefore be preserved until a filter chooses between 0x7ADA32 and this ordinary path.",
     "mnemonic": "lea",
     "size": 3
   },
@@ -3583,13 +3577,13 @@
   },
   {
     "ea": "0x7ADA59",
-    "line": "ja      def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "ja      BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "ja",
     "size": 6
   },
   {
     "ea": "0x7ADA5F",
-    "line": "mov     eax, [esp+0A0h+var_80]",
+    "line": "mov     eax, [esp+8Ch+payloadAddress]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3601,31 +3595,31 @@
   },
   {
     "ea": "0x7ADA67",
-    "line": "jnz     def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jnz     BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jnz",
     "size": 6
   },
   {
     "ea": "0x7ADA6D",
-    "line": "lea     ecx, [esp+0A0h+var_78]",
+    "line": "lea     ecx, [esp+8Ch+output]; Special-selector path overwrites ECX before its call; ECX is not live from the pre-queue interception site.",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7ADA71",
-    "line": "push    ecx",
+    "line": "push    ecx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7ADA72",
-    "line": "mov     ecx, [ebp+0]",
+    "line": "mov     ecx, [ebp+0]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x7ADA75",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3637,13 +3631,13 @@
   },
   {
     "ea": "0x7ADA7C",
-    "line": "lea     ecx, [esp+0A0h+var_78]; this",
+    "line": "lea     ecx, [esp+8Ch+output]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7ADA80",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -3685,7 +3679,7 @@
   },
   {
     "ea": "0x7ADA9C",
-    "line": "fstp    [esp+0A0h+var_74]",
+    "line": "fstp    [esp+8Ch+var_60]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3709,13 +3703,13 @@
   },
   {
     "ea": "0x7ADAAE",
-    "line": "fstp    [esp+0A0h+var_70]",
+    "line": "fstp    [esp+8Ch+var_5C]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ADAB2",
-    "line": "mov     [esp+0A0h+var_68], edx",
+    "line": "mov     [esp+8Ch+var_54], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3739,7 +3733,7 @@
   },
   {
     "ea": "0x7ADABF",
-    "line": "mov     [esp+0A0h+var_64], ecx",
+    "line": "mov     [esp+8Ch+var_50], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3751,19 +3745,19 @@
   },
   {
     "ea": "0x7ADAC5",
-    "line": "mov     [esp+0A0h+var_44], ecx",
+    "line": "mov     [esp+8Ch+var_30], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADAC9",
-    "line": "fld     [esp+0A0h+var_44]",
+    "line": "fld     [esp+8Ch+var_30]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7ADACD",
-    "line": "fsub    [esp+0A0h+var_68]",
+    "line": "fsub    [esp+8Ch+var_54]",
     "mnemonic": "fsub",
     "size": 4
   },
@@ -3775,7 +3769,7 @@
   },
   {
     "ea": "0x7ADAD4",
-    "line": "mov     [esp+0A0h+var_60], edx",
+    "line": "mov     [esp+8Ch+var_4C], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3787,19 +3781,19 @@
   },
   {
     "ea": "0x7ADADB",
-    "line": "fstp    [esp+0A0h+var_50]",
+    "line": "fstp    [esp+8Ch+var_3C]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ADADF",
-    "line": "mov     [esp+0A0h+var_40], edx",
+    "line": "mov     [esp+8Ch+var_2C], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADAE3",
-    "line": "fld     [esp+0A0h+var_40]",
+    "line": "fld     [esp+8Ch+var_2C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3811,67 +3805,67 @@
   },
   {
     "ea": "0x7ADAEA",
-    "line": "fsub    [esp+0A0h+var_64]",
+    "line": "fsub    [esp+8Ch+var_50]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7ADAEE",
-    "line": "mov     [esp+0A0h+var_3C], ecx",
+    "line": "mov     [esp+8Ch+var_28], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADAF2",
-    "line": "lea     ecx, [esp+0A0h+var_50]",
+    "line": "lea     ecx, [esp+8Ch+var_3C]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x7ADAF6",
-    "line": "mov     [esp+0A0h+var_38], edx",
+    "line": "mov     [esp+8Ch+var_24], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADAFA",
-    "line": "fstp    [esp+0A0h+var_4C]",
+    "line": "fstp    [esp+8Ch+var_38]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ADAFE",
-    "line": "fld     [esp+0A0h+var_3C]",
+    "line": "fld     [esp+8Ch+var_28]",
     "mnemonic": "fld",
     "size": 4
   },
   {
     "ea": "0x7ADB02",
-    "line": "fsub    [esp+0A0h+var_60]",
+    "line": "fsub    [esp+8Ch+var_4C]",
     "mnemonic": "fsub",
     "size": 4
   },
   {
     "ea": "0x7ADB06",
-    "line": "fstp    [esp+0A0h+var_48]",
+    "line": "fstp    [esp+8Ch+var_34]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ADB0A",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7ADB0F",
-    "line": "fadd    [esp+0A0h+var_38]",
+    "line": "fadd    [esp+8Ch+var_24]",
     "mnemonic": "fadd",
     "size": 4
   },
   {
     "ea": "0x7ADB13",
-    "line": "fld     [esp+0A0h+var_74]",
+    "line": "fld     [esp+8Ch+var_60]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3907,7 +3901,7 @@
   },
   {
     "ea": "0x7ADB26",
-    "line": "fld     [esp+0A0h+var_70]",
+    "line": "fld     [esp+8Ch+var_5C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -3925,7 +3919,7 @@
   },
   {
     "ea": "0x7ADB30",
-    "line": "fst     [esp+0A0h+var_34]",
+    "line": "fst     [esp+8Ch+var_20]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -3943,25 +3937,25 @@
   },
   {
     "ea": "0x7ADB39",
-    "line": "mov     [esp+0A0h+var_5C], eax",
+    "line": "mov     [esp+8Ch+var_48], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADB3D",
-    "line": "mov     eax, [esp+0A0h+var_34]",
+    "line": "mov     eax, [esp+8Ch+var_20]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADB41",
-    "line": "fstp    [esp+0A0h+var_30]",
+    "line": "fstp    [esp+8Ch+var_1C]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ADB45",
-    "line": "mov     [esp+0A0h+var_58], ecx",
+    "line": "mov     [esp+8Ch+var_44], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3973,37 +3967,37 @@
   },
   {
     "ea": "0x7ADB4B",
-    "line": "mov     ecx, [esp+0A0h+var_30]",
+    "line": "mov     ecx, [esp+8Ch+var_1C]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADB4F",
-    "line": "fst     [esp+0A0h+var_2C]",
+    "line": "fst     [esp+8Ch+var_18]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7ADB53",
-    "line": "mov     [esp+0A0h+var_54], edx",
+    "line": "mov     [esp+8Ch+var_40], edx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADB57",
-    "line": "mov     edx, [esp+0A0h+var_2C]",
+    "line": "mov     edx, [esp+8Ch+var_18]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADB5B",
-    "line": "fst     [esp+0A0h+var_28]",
+    "line": "fst     [esp+8Ch+var_14]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7ADB5F",
-    "line": "fld     [esp+0A0h+var_5C]",
+    "line": "fld     [esp+8Ch+var_48]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4015,19 +4009,19 @@
   },
   {
     "ea": "0x7ADB68",
-    "line": "mov     eax, [esp+0A0h+var_28]",
+    "line": "mov     eax, [esp+8Ch+var_14]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADB6C",
-    "line": "fstp    [esp+0A0h+var_24]",
+    "line": "fstp    [esp+8Ch+var_10]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7ADB70",
-    "line": "fld     [esp+0A0h+var_58]",
+    "line": "fld     [esp+8Ch+var_44]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4039,19 +4033,19 @@
   },
   {
     "ea": "0x7ADB7A",
-    "line": "mov     ecx, [esp+0A0h+var_24]",
+    "line": "mov     ecx, [esp+8Ch+var_10]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7ADB7E",
-    "line": "fstp    [esp+0A0h+var_20]",
+    "line": "fstp    [esp+8Ch+var_C]",
     "mnemonic": "fstp",
     "size": 7
   },
   {
     "ea": "0x7ADB85",
-    "line": "fld     [esp+0A0h+var_54]",
+    "line": "fld     [esp+8Ch+var_40]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -4063,13 +4057,13 @@
   },
   {
     "ea": "0x7ADB8F",
-    "line": "mov     edx, [esp+0A0h+var_20]",
+    "line": "mov     edx, [esp+8Ch+var_C]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7ADB96",
-    "line": "fstp    [esp+0A0h+var_1C]",
+    "line": "fstp    [esp+8Ch+var_8]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -4081,13 +4075,13 @@
   },
   {
     "ea": "0x7ADBA2",
-    "line": "mov     eax, [esp+0A0h+var_1C]",
+    "line": "mov     eax, [esp+8Ch+var_8]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x7ADBA9",
-    "line": "fstp    [esp+0A0h+var_18]",
+    "line": "fstp    [esp+8Ch+var_4]",
     "mnemonic": "fstp",
     "size": 7
   },
@@ -4099,7 +4093,7 @@
   },
   {
     "ea": "0x7ADBB6",
-    "line": "mov     ecx, [esp+0A0h+var_18]",
+    "line": "mov     ecx, [esp+8Ch+var_4]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -4123,7 +4117,7 @@
   },
   {
     "ea": "0x7ADBCE",
-    "line": "jmp     def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -4177,7 +4171,7 @@
   },
   {
     "ea": "0x7ADBEC",
-    "line": "ja      def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "ja      BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "ja",
     "size": 6
   },
@@ -4195,25 +4189,25 @@
   },
   {
     "ea": "0x7ADBFE",
-    "line": "jmp     def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 5
   },
   {
     "ea": "0x7ADC03",
-    "line": "cmp     [esp+0A0h+var_8C], 0",
+    "line": "cmp     [esp+8Ch+var_78], 0",
     "mnemonic": "cmp",
     "size": 5
   },
   {
     "ea": "0x7ADC08",
-    "line": "jz      loc_7ADF1A",
+    "line": "jz      BSShaderAccumulator_FinishPropertyRenderPassTraversal",
     "mnemonic": "jz",
     "size": 6
   },
   {
     "ea": "0x7ADC0E",
-    "line": "mov     ecx, [esp+0A0h+var_8C]",
+    "line": "mov     ecx, [esp+8Ch+var_78]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4231,7 +4225,7 @@
   },
   {
     "ea": "0x7ADC17",
-    "line": "mov     [esp+0A0h+var_8C], edx",
+    "line": "mov     [esp+8Ch+var_78], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -4285,7 +4279,7 @@
   },
   {
     "ea": "0x7ADC3F",
-    "line": "ja      def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "ja      BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "ja",
     "size": 6
   },
@@ -4303,7 +4297,7 @@
   },
   {
     "ea": "0x7ADC51",
-    "line": "jmp     def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -4315,7 +4309,7 @@
   },
   {
     "ea": "0x7ADC5B",
-    "line": "jmp     def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -4327,7 +4321,7 @@
   },
   {
     "ea": "0x7ADC65",
-    "line": "jmp     def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 5
   },
@@ -4339,7 +4333,7 @@
   },
   {
     "ea": "0x7ADC6F",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4351,7 +4345,7 @@
   },
   {
     "ea": "0x7ADC76",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4363,7 +4357,7 @@
   },
   {
     "ea": "0x7ADC7D",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4375,7 +4369,7 @@
   },
   {
     "ea": "0x7ADC84",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4387,7 +4381,7 @@
   },
   {
     "ea": "0x7ADC8B",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4399,7 +4393,7 @@
   },
   {
     "ea": "0x7ADC92",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4411,7 +4405,7 @@
   },
   {
     "ea": "0x7ADC99",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4423,7 +4417,7 @@
   },
   {
     "ea": "0x7ADCA0",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4435,7 +4429,7 @@
   },
   {
     "ea": "0x7ADCA7",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4447,7 +4441,7 @@
   },
   {
     "ea": "0x7ADCAE",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4459,7 +4453,7 @@
   },
   {
     "ea": "0x7ADCB5",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4471,7 +4465,7 @@
   },
   {
     "ea": "0x7ADCBC",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4483,7 +4477,7 @@
   },
   {
     "ea": "0x7ADCC3",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4495,7 +4489,7 @@
   },
   {
     "ea": "0x7ADCCA",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4507,7 +4501,7 @@
   },
   {
     "ea": "0x7ADCD1",
-    "line": "jmp     short def_7ADBF2; jumptable 007ADBF2 default case",
+    "line": "jmp     short BSShaderAccumulator_ClassifyGenericRenderPass; jumptable 007ADBF2 default case",
     "mnemonic": "jmp",
     "size": 2
   },
@@ -4516,5 +4510,1289 @@
     "line": "mov     esi, 2Eh ; '.'; jumptable 007ADBF2 case 71",
     "mnemonic": "mov",
     "size": 5
+  },
+  {
+    "ea": "0x7ADCD8",
+    "line": "mov     eax, [esp+8Ch+var_58]; Generic RenderPass classifier entry. It overwrites EAX immediately from a stack local and EDI with zero, completing the proof that EAX is dead at 0x7ADA04 for ordinary selectors such as 0x177..0x17A.",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADCDC",
+    "line": "xor     edi, edi",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADCDE",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADCE0",
+    "line": "jz      loc_7ADDE7",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADCE6",
+    "line": "test    byte ptr [eax+18h], 1",
+    "mnemonic": "test",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADCEA",
+    "line": "jz      loc_7ADDE7",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADCF0",
+    "line": "cmp     byte ptr [ebx+21E0h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADCF7",
+    "line": "jz      loc_7ADE41",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADCFD",
+    "line": "mov     eax, [esp+8Ch+var_70]; Reload the same saved BSShaderProperty from raw [ESP+0x1C] later in the generic pass classifier, proving that this slot survives the traversal path.",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADD01",
+    "line": "mov     ecx, [eax+1Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADD04",
+    "line": "test    ecx, 100h",
+    "mnemonic": "test",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADD0A",
+    "line": "ja      short loc_7ADD1C",
+    "mnemonic": "ja",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD0C",
+    "line": "fld1",
+    "mnemonic": "fld1",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD0E",
+    "line": "fcomp   dword ptr [eax+20h]",
+    "mnemonic": "fcomp",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADD11",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD13",
+    "line": "test    ah, 41h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADD16",
+    "line": "jnz     loc_7ADDE7",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADD1C",
+    "line": "cmp     word ptr ds:0B42EACh, 5; Pass331 decode-only: accumulator map mode 5 bypasses fractional-alpha sorting and routes the original pass/geometry into fixed shadow buckets. BSFadeNode fractional opacity does not feather caster coverage in the shadow map.",
+    "mnemonic": "cmp",
+    "size": 8
+  },
+  {
+    "ea": "0x7ADD24",
+    "line": "jz      loc_7ADDE7",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADD2A",
+    "line": "cmp     si, 156h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADD2F",
+    "line": "jb      short loc_7ADD3C",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD31",
+    "line": "cmp     si, 15Ah",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADD36",
+    "line": "jbe     loc_7ADDE7",
+    "mnemonic": "jbe",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADD3C",
+    "line": "cmp     si, 160h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADD41",
+    "line": "jb      short loc_7ADD4E",
+    "mnemonic": "jb",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD43",
+    "line": "cmp     si, 164h",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADD48",
+    "line": "jbe     loc_7ADDE7",
+    "mnemonic": "jbe",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADD4E",
+    "line": "cmp     [ebx+5Ch], edi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADD51",
+    "line": "jle     short loc_7ADD74",
+    "mnemonic": "jle",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD53",
+    "line": "mov     eax, [ebx+60h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADD56",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD58",
+    "line": "jz      short loc_7ADD74",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD5A",
+    "line": "test    ecx, 200h",
+    "mnemonic": "test",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADD60",
+    "line": "jbe     short loc_7ADD74",
+    "mnemonic": "jbe",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD62",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADD63",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADD64",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD66",
+    "line": "call    sub_7AD1C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADD6B",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADD6F",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADD74",
+    "line": "lea     eax, [esp+8Ch+var_74]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADD78",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADD79",
+    "line": "lea     ecx, [ebx+21C0h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADD7F",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADD84",
+    "line": "cmp     byte ptr ds:0B42CE3h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADD8B",
+    "line": "jnz     short loc_7ADDD5",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD8D",
+    "line": "cmp     byte ptr ds:0B42CE1h, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADD94",
+    "line": "jz      short loc_7ADDC0",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADD96",
+    "line": "mov     ecx, [ebp+0]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADD99",
+    "line": "fld     dword ptr [ecx+28h]",
+    "mnemonic": "fld",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADD9C",
+    "line": "fild    dword ptr ds:0B42CE4h",
+    "mnemonic": "fild",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADDA2",
+    "line": "fcompp",
+    "mnemonic": "fcompp",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADDA4",
+    "line": "fnstsw  ax",
+    "mnemonic": "fnstsw",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADDA6",
+    "line": "test    ah, 41h",
+    "mnemonic": "test",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADDA9",
+    "line": "jnz     short loc_7ADDC0",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADDAB",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADDAC",
+    "line": "lea     ecx, [ebx+2254h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADDB2",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADDB7",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADDBB",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADDC0",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADDC1",
+    "line": "lea     ecx, [ebx+2244h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADDC7",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADDCC",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADDD0",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADDD5",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADDD6",
+    "line": "lea     ecx, [ebx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADDD9",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADDDE",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADDE2",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADDE7",
+    "line": "cmp     byte ptr [ebx+21E0h], 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADDEE",
+    "line": "jz      short loc_7ADE41",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADDF0",
+    "line": "cmp     [esp+8Ch+var_79], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADDF5",
+    "line": "jz      short BSShaderAccumulator_QueueGenericRenderPassBySelector",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADDF7",
+    "line": "mov     eax, [ebx+40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADDFA",
+    "line": "cmp     [eax+8], edi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADDFD",
+    "line": "jz      short BSShaderAccumulator_QueueGenericRenderPassBySelector",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADDFF",
+    "line": "mov     edx, [eax+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADE02",
+    "line": "push    ebp",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADE03",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADE04",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADE06",
+    "line": "call    sub_7AD1C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADE0B",
+    "line": "add     dword ptr ds:0B42CB0h, 10h",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADE12",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE16",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADE1B",
+    "line": "lea     eax, [esp+8Ch+var_74]; Only ordinary generic selector-bucket insertion block. Address formula is this+0x104+0x14*uint16(selector). The pre-queue filter branches away before this block.",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE1F",
+    "line": "push    eax; payloadAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADE20",
+    "line": "movzx   eax, si",
+    "mnemonic": "movzx",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADE23",
+    "line": "add     eax, 0Dh",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADE26",
+    "line": "lea     ecx, [eax+eax*4]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADE29",
+    "line": "lea     ecx, [ebx+ecx*4]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADE2C",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; Append the property-owned RenderPass pointer as a borrowed payload to the direct selector bucket.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADE31",
+    "line": "add     dword ptr ds:0B42CB0h, 10h",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADE38",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE3C",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADE41",
+    "line": "cmp     word ptr ds:0B42EACh, 6",
+    "mnemonic": "cmp",
+    "size": 8
+  },
+  {
+    "ea": "0x7ADE49",
+    "line": "jz      loc_7ADEE8",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADE4F",
+    "line": "cmp     byte ptr ds:0B2BB7Ch, 0",
+    "mnemonic": "cmp",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADE56",
+    "line": "jz      short loc_7ADEA5",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADE58",
+    "line": "movzx   eax, word ptr [ebp+4]",
+    "mnemonic": "movzx",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE5C",
+    "line": "cmp     ax, 195h",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE60",
+    "line": "jnz     short loc_7ADE82",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADE62",
+    "line": "lea     edx, [esp+8Ch+var_74]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE66",
+    "line": "push    edx; payloadAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADE67",
+    "line": "lea     ecx, [ebx+90h]; this",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADE6D",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADE72",
+    "line": "add     dword ptr ds:0B42CB0h, 10h",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADE79",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE7D",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADE82",
+    "line": "cmp     ax, 76h ; 'v'",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE86",
+    "line": "jnz     short loc_7ADEA5",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADE88",
+    "line": "lea     eax, [esp+8Ch+var_74]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADE8C",
+    "line": "push    eax; payloadAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADE8D",
+    "line": "lea     ecx, [ebx+7Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADE90",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADE95",
+    "line": "add     dword ptr ds:0B42CB0h, 10h",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADE9C",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADEA0",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADEA5",
+    "line": "cmp     [ebx+78h], edi",
+    "mnemonic": "cmp",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADEA8",
+    "line": "jnz     short loc_7ADEDB",
+    "mnemonic": "jnz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADEAA",
+    "line": "push    18h; Size",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADEAC",
+    "line": "call    FormHeapAlloc",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADEB1",
+    "line": "add     esp, 4",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADEB4",
+    "line": "cmp     eax, edi",
+    "mnemonic": "cmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADEB6",
+    "line": "jz      short loc_7ADEC9",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADEB8",
+    "line": "mov     dword ptr [eax], offset ??_7?$BSTPersistentList@V?$NiTPointerAllocator@I@@PAVRenderPass@BSShaderProperty@@@@6B@; const BSTPersistentList<NiTPointerAllocator<uint>,BSShaderProperty::RenderPass *>::`vftable'",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADEBE",
+    "line": "mov     [eax+4], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADEC1",
+    "line": "mov     [eax+8], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADEC4",
+    "line": "mov     [eax+0Ch], edi",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADEC7",
+    "line": "jmp     short loc_7ADECB",
+    "mnemonic": "jmp",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADEC9",
+    "line": "xor     eax, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADECB",
+    "line": "fldz",
+    "mnemonic": "fldz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADECD",
+    "line": "mov     [ebx+78h], eax",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADED0",
+    "line": "fstp    dword ptr [eax+14h]",
+    "mnemonic": "fstp",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADED3",
+    "line": "mov     ecx, [ebx+78h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADED6",
+    "line": "call    sub_7AA6C0",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADEDB",
+    "line": "lea     ecx, [esp+8Ch+var_74]",
+    "mnemonic": "lea",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADEDF",
+    "line": "push    ecx; payloadAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADEE0",
+    "line": "mov     ecx, [ebx+78h]; this",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADEE3",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADEE8",
+    "line": "add     dword ptr ds:0B42CB0h, 10h",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADEEF",
+    "line": "cmp     [esp+8Ch+var_78], edi",
+    "mnemonic": "cmp",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADEF3",
+    "line": "jmp     loc_7ADC08",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADEF8",
+    "line": "cmp     [esp+8Ch+var_78], 0",
+    "mnemonic": "cmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADEFD",
+    "line": "jz      short BSShaderAccumulator_FinishPropertyRenderPassTraversal",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADEFF",
+    "line": "mov     ecx, [esp+8Ch+var_78]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADF03",
+    "line": "lea     eax, [ecx+8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADF06",
+    "line": "mov     ecx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF08",
+    "line": "mov     [esp+8Ch+var_78], ecx; Common next-node cursor update: store nextNode->next at raw [ESP+0x14], then load nextNode->payload into EBP at 0x7ADF0C and continue the selector loop.",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADF0C",
+    "line": "mov     ebp, [eax]; Load the next property-owned RenderPass into EBP; [ESP+0x1C] continues to hold the original BSShaderProperty.",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF0E",
+    "line": "test    ebp, ebp",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF10",
+    "line": "mov     [esp+8Ch+var_74], ebp",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x7ADF14",
+    "line": "jnz     loc_7ADA00",
+    "mnemonic": "jnz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADF1A",
+    "line": "mov     ecx, [esp+8Ch+geometry]; Traversal-complete entry, including filtered records whose EDX next pointer was null. It overwrites ECX from the saved geometry and obtains a new EAX from a virtual call; predicate EAX/ECX/ESI values do not survive.",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADF21",
+    "line": "add     dword ptr ds:0B42CD0h, 1",
+    "mnemonic": "add",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADF28",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF2A",
+    "line": "mov     eax, [edx+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADF2D",
+    "line": "call    eax",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF2F",
+    "line": "test    eax, eax",
+    "mnemonic": "test",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF31",
+    "line": "jz      loc_7ADFC4",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADF37",
+    "line": "mov     eax, [eax+0B4h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADF3D",
+    "line": "mov     edx, [eax]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF3F",
+    "line": "mov     ecx, eax",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF41",
+    "line": "jmp     loc_7AD6F5",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADF46",
+    "line": "lea     edx, [esp+8Ch+geometry]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADF4D",
+    "line": "push    edx",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF4E",
+    "line": "lea     ecx, [ebx+2244h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADF54",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADF59",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF5A",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF5B",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF5C",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF5E",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF5F",
+    "line": "add     esp, 7Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADF62",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADF65",
+    "line": "lea     eax, [esp+8Ch+geometry]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADF6C",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF6D",
+    "line": "lea     ecx, [ebx+0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADF70",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADF75",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF76",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF77",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF78",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF7A",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF7B",
+    "line": "add     esp, 7Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADF7E",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADF81",
+    "line": "cmp     word ptr ds:0B42EACh, 6",
+    "mnemonic": "cmp",
+    "size": 8
+  },
+  {
+    "ea": "0x7ADF89",
+    "line": "jz      short loc_7ADFC4",
+    "mnemonic": "jz",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF8B",
+    "line": "lea     ecx, [esp+8Ch+geometry]",
+    "mnemonic": "lea",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADF92",
+    "line": "push    ecx; payloadAddress",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADF93",
+    "line": "mov     ecx, ebx",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF95",
+    "line": "call    sub_7ABC40; MoonSugarEffect decode: BSShaderAccumulator immediate geometry bucket allocator. Creates/links a paired NiGeometry list + BSShaderProperty::RenderPass list group under accumulator +0x19 and returns the group for appending.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADF9A",
+    "line": "mov     ecx, eax; this",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADF9C",
+    "line": "call    BSTPersistentList_AppendTailReusingFreeNode; Insert this geometry RenderPass into BSShaderAccumulator bucket 0x14*(selector+0xD); mode-5 selectors therefore land in buckets 6..9 or 0x154/0x155.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADFA1",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFA2",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFA3",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFA4",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADFA6",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFA7",
+    "line": "add     esp, 7Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADFAA",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADFAD",
+    "line": "mov     ecx, [esp+8Ch+geometry]",
+    "mnemonic": "mov",
+    "size": 7
+  },
+  {
+    "ea": "0x7ADFB4",
+    "line": "mov     edx, [ecx]",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADFB6",
+    "line": "mov     eax, ds:0B3F928h",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x7ADFBB",
+    "line": "mov     edx, [edx+84h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x7ADFC1",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFC2",
+    "line": "call    edx",
+    "mnemonic": "call",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADFC4",
+    "line": "pop     ebp",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFC5",
+    "line": "pop     edi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFC6",
+    "line": "pop     esi",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFC7",
+    "line": "mov     al, 1",
+    "mnemonic": "mov",
+    "size": 2
+  },
+  {
+    "ea": "0x7ADFC9",
+    "line": "pop     ebx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x7ADFCA",
+    "line": "add     esp, 7Ch",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x7ADFCD",
+    "line": "retn    4",
+    "mnemonic": "retn",
+    "size": 3
   }
 ]

@@ -5,7 +5,6 @@
 0x72DE76: mov     esi, [esp+20h+arg_4]
 0x72DE7A: push    edi
 0x72DE7B: jmp     short loc_72DE80
-0x72DE7D: align 10h
 0x72DE80: xor     eax, eax
 0x72DE82: cmp     [esi+8], eax
 0x72DE85: mov     [esp+24h+var_14], 0FFFFFFFFh
@@ -17,7 +16,6 @@
 0x72DE96: pop     ebx
 0x72DE97: add     esp, 14h
 0x72DE9A: retn    8
-0x72DE9D: align 10h
 0x72DEA0: mov     eax, [esp+24h+arg_4]
 0x72DEA4: mov     ecx, [esi]
 0x72DEA6: mov     ebx, [ecx+eax*4]
@@ -66,9 +64,9 @@
 0x72DF2A: jz      short loc_72DF3E
 0x72DF2C: mov     eax, [ebp+0]
 0x72DF2F: push    eax
-0x72DF30: call    FormHeapFree
+0x72DF30: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72DF35: push    ebp
-0x72DF36: call    FormHeapFree
+0x72DF36: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72DF3B: add     esp, 8
 0x72DF3E: add     dword ptr [esi+8], 0FFFFFFFFh
 0x72DF42: mov     ecx, [esi+8]
@@ -94,9 +92,9 @@
 0x72DF77: jz      short loc_72DF8A
 0x72DF79: mov     ecx, [ebx]
 0x72DF7B: push    ecx
-0x72DF7C: call    FormHeapFree
+0x72DF7C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72DF81: push    ebx
-0x72DF82: call    FormHeapFree
+0x72DF82: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x72DF87: add     esp, 8
 0x72DF8A: add     dword ptr [esi+8], 0FFFFFFFFh
 0x72DF8E: mov     ecx, [esi+8]

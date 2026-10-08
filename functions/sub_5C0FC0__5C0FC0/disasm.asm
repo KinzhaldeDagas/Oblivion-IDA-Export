@@ -2,7 +2,7 @@
 0x5C0FC1: push    ebp
 0x5C0FC2: push    esi
 0x5C0FC3: push    edi
-0x5C0FC4: mov     esi, offset quickKeyList_ptr
+0x5C0FC4: mov     esi, 0B3B440h
 0x5C0FC9: mov     ebp, 8
 0x5C0FCE: xor     ebx, ebx
 0x5C0FD0: mov     edi, [esi+4]

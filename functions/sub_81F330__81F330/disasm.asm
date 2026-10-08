@@ -32,7 +32,7 @@
 0x81F38C: jnb     loc_81F459
 0x81F392: lea     eax, [esp+2Ch+var_10]
 0x81F396: push    eax
-0x81F397: call    sub_772630
+0x81F397: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81F39C: add     esp, 4
 0x81F39F: mov     eax, [eax]
 0x81F3A1: test    eax, eax
@@ -49,21 +49,21 @@
 0x81F3C1: add     eax, 5Ch ; '\'
 0x81F3C4: cmp     dword ptr [eax], 0
 0x81F3C7: jnz     short loc_81F3CE
-0x81F3C9: call    sub_772560
+0x81F3C9: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F3CE: push    2
 0x81F3D0: push    ebx
 0x81F3D1: push    0
 0x81F3D3: push    edi
-0x81F3D4: call    sub_801110
+0x81F3D4: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81F3D9: mov     ecx, [esi+14h]
 0x81F3DC: add     esp, 10h
 0x81F3DF: push    edi; a3
 0x81F3E0: push    ecx; a2
 0x81F3E1: mov     ecx, esi; this
-0x81F3E3: call    sub_760010
+0x81F3E3: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81F3E8: lea     edx, [esp+2Ch+var_10]
 0x81F3EC: push    edx
-0x81F3ED: call    sub_772630
+0x81F3ED: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81F3F2: add     esp, 4
 0x81F3F5: mov     ebp, eax
 0x81F3F7: cmp     edi, [ebp+0]
@@ -74,7 +74,7 @@
 0x81F405: add     dword ptr [edi+5Ch], 0FFFFFFFFh
 0x81F409: jnz     short loc_81F412
 0x81F40B: mov     ecx, edi
-0x81F40D: call    sub_772560
+0x81F40D: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F412: mov     edi, [ebp+0]
 0x81F415: test    edi, edi
 0x81F417: mov     [esp+2Ch+var_18], edi
@@ -89,18 +89,18 @@
 0x81F433: add     eax, 5Ch ; '\'
 0x81F436: cmp     dword ptr [eax], 0
 0x81F439: jnz     short loc_81F440
-0x81F43B: call    sub_772560
+0x81F43B: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F440: push    2
 0x81F442: push    ebx
 0x81F443: push    ebx
 0x81F444: push    edi
-0x81F445: call    sub_801110
+0x81F445: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81F44A: mov     eax, [esi+14h]
 0x81F44D: add     esp, 10h
 0x81F450: push    edi; a3
 0x81F451: push    eax; a2
 0x81F452: mov     ecx, esi; this
-0x81F454: call    sub_760010
+0x81F454: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81F459: mov     eax, ds:0B452F4h
 0x81F45E: mov     ebp, [esi+58h]
 0x81F461: cmp     ebp, eax
@@ -153,58 +153,58 @@
 0x81F4D3: call    dword ptr ds:0A28078h
 0x81F4D9: cmp     dword ptr [esi+30h], 0
 0x81F4DD: jnz     short loc_81F4E7
-0x81F4DF: call    sub_772DF0
+0x81F4DF: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F4E4: mov     [esi+30h], eax
 0x81F4E7: mov     ecx, [esi+30h]
 0x81F4EA: push    0
 0x81F4EC: push    0
 0x81F4EE: push    1Bh
-0x81F4F0: call    sub_772CD0
+0x81F4F0: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F4F5: cmp     dword ptr [esi+30h], 0
 0x81F4F9: jnz     short loc_81F503
-0x81F4FB: call    sub_772DF0
+0x81F4FB: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F500: mov     [esi+30h], eax
 0x81F503: mov     ecx, [esi+30h]
 0x81F506: push    0
 0x81F508: push    0
 0x81F50A: push    0Fh
-0x81F50C: call    sub_772CD0
+0x81F50C: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F511: cmp     dword ptr [esi+30h], 0
 0x81F515: jnz     short loc_81F51F
-0x81F517: call    sub_772DF0
+0x81F517: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F51C: mov     [esi+30h], eax
 0x81F51F: mov     ecx, [esi+30h]
 0x81F522: push    0
 0x81F524: push    1
 0x81F526: push    7
-0x81F528: call    sub_772CD0
+0x81F528: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F52D: cmp     dword ptr [esi+30h], 0
 0x81F531: jnz     short loc_81F53B
-0x81F533: call    sub_772DF0
+0x81F533: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F538: mov     [esi+30h], eax
 0x81F53B: mov     ecx, [esi+30h]
 0x81F53E: push    0
 0x81F540: push    4
 0x81F542: push    17h
-0x81F544: call    sub_772CD0
+0x81F544: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F549: cmp     dword ptr [esi+30h], 0
 0x81F54D: jnz     short loc_81F557
-0x81F54F: call    sub_772DF0
+0x81F54F: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F554: mov     [esi+30h], eax
 0x81F557: mov     ecx, [esi+30h]
 0x81F55A: push    0
 0x81F55C: push    1
 0x81F55E: push    0Eh
-0x81F560: call    sub_772CD0
+0x81F560: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F565: cmp     dword ptr [esi+30h], 0
 0x81F569: jnz     short loc_81F573
-0x81F56B: call    sub_772DF0
+0x81F56B: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F570: mov     [esi+30h], eax
 0x81F573: mov     ecx, [esi+30h]
 0x81F576: push    0
 0x81F578: push    0
 0x81F57A: push    34h ; '4'
-0x81F57C: call    sub_772CD0
+0x81F57C: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F581: or      ebx, 0FFFFFFFFh
 0x81F584: cmp     esi, ds:0B45B58h
 0x81F58A: mov     dword ptr ds:0B43C40h, 82h ; '‚'
@@ -215,7 +215,7 @@
 0x81F5B4: add     [esi+60h], ebx
 0x81F5B7: jnz     short loc_81F5C0
 0x81F5B9: mov     ecx, esi
-0x81F5BB: call    sub_7604D0
+0x81F5BB: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x81F5C0: mov     esi, ds:0B45B58h
 0x81F5C6: test    esi, esi
 0x81F5C8: mov     [esp+2Ch+var_14], esi
@@ -226,7 +226,7 @@
 0x81F5D8: jnb     loc_81F6C2
 0x81F5DE: lea     ecx, [esp+2Ch+var_10]
 0x81F5E2: push    ecx
-0x81F5E3: call    sub_772630
+0x81F5E3: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81F5E8: add     esp, 4
 0x81F5EB: mov     ebp, eax
 0x81F5ED: cmp     edi, [ebp+0]
@@ -237,7 +237,7 @@
 0x81F5FB: add     [edi+5Ch], ebx
 0x81F5FE: jnz     short loc_81F607
 0x81F600: mov     ecx, edi
-0x81F602: call    sub_772560
+0x81F602: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F607: mov     edi, [ebp+0]
 0x81F60A: test    edi, edi
 0x81F60C: mov     [esp+2Ch+var_18], edi
@@ -252,21 +252,21 @@
 0x81F628: add     eax, 5Ch ; '\'
 0x81F62B: cmp     dword ptr [eax], 0
 0x81F62E: jnz     short loc_81F635
-0x81F630: call    sub_772560
+0x81F630: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F635: push    2
 0x81F637: push    1
 0x81F639: push    0
 0x81F63B: push    edi
-0x81F63C: call    sub_801110
+0x81F63C: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81F641: mov     edx, [esi+14h]
 0x81F644: add     esp, 10h
 0x81F647: push    edi; a3
 0x81F648: push    edx; a2
 0x81F649: mov     ecx, esi; this
-0x81F64B: call    sub_760010
+0x81F64B: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81F650: lea     eax, [esp+2Ch+var_10]
 0x81F654: push    eax
-0x81F655: call    sub_772630
+0x81F655: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81F65A: add     esp, 4
 0x81F65D: mov     ebp, eax
 0x81F65F: cmp     edi, [ebp+0]
@@ -277,7 +277,7 @@
 0x81F66D: add     [edi+5Ch], ebx
 0x81F670: jnz     short loc_81F679
 0x81F672: mov     ecx, edi
-0x81F674: call    sub_772560
+0x81F674: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F679: mov     edi, [ebp+0]
 0x81F67C: test    edi, edi
 0x81F67E: mov     [esp+2Ch+var_18], edi
@@ -292,18 +292,18 @@
 0x81F69A: add     eax, 5Ch ; '\'
 0x81F69D: cmp     dword ptr [eax], 0
 0x81F6A0: jnz     short loc_81F6A7
-0x81F6A2: call    sub_772560
+0x81F6A2: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F6A7: push    2
 0x81F6A9: push    1
 0x81F6AB: push    1
 0x81F6AD: push    edi
-0x81F6AE: call    sub_801110
+0x81F6AE: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81F6B3: mov     ecx, [esi+14h]
 0x81F6B6: add     esp, 10h
 0x81F6B9: push    edi; a3
 0x81F6BA: push    ecx; a2
 0x81F6BB: mov     ecx, esi; this
-0x81F6BD: call    sub_760010
+0x81F6BD: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81F6C2: mov     eax, ds:0B452F8h
 0x81F6C7: mov     ebp, [esi+58h]
 0x81F6CA: cmp     ebp, eax
@@ -356,94 +356,94 @@
 0x81F73C: call    dword ptr ds:0A28078h
 0x81F742: cmp     dword ptr [esi+30h], 0
 0x81F746: jnz     short loc_81F750
-0x81F748: call    sub_772DF0
+0x81F748: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F74D: mov     [esi+30h], eax
 0x81F750: mov     ecx, [esi+30h]
 0x81F753: push    0
 0x81F755: push    1
 0x81F757: push    1Bh
-0x81F759: call    sub_772CD0
+0x81F759: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F75E: cmp     dword ptr [esi+30h], 0
 0x81F762: jnz     short loc_81F76C
-0x81F764: call    sub_772DF0
+0x81F764: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F769: mov     [esi+30h], eax
 0x81F76C: mov     ecx, [esi+30h]
 0x81F76F: push    0
 0x81F771: push    5
 0x81F773: push    13h
-0x81F775: call    sub_772CD0
+0x81F775: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F77A: cmp     dword ptr [esi+30h], 0
 0x81F77E: jnz     short loc_81F788
-0x81F780: call    sub_772DF0
+0x81F780: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F785: mov     [esi+30h], eax
 0x81F788: mov     ecx, [esi+30h]
 0x81F78B: push    0
 0x81F78D: push    6
 0x81F78F: push    14h
-0x81F791: call    sub_772CD0
+0x81F791: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F796: cmp     dword ptr [esi+30h], 0
 0x81F79A: jnz     short loc_81F7A4
-0x81F79C: call    sub_772DF0
+0x81F79C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F7A1: mov     [esi+30h], eax
 0x81F7A4: mov     ecx, [esi+30h]
 0x81F7A7: push    0
 0x81F7A9: push    1
 0x81F7AB: push    0Fh
-0x81F7AD: call    sub_772CD0
+0x81F7AD: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F7B2: cmp     dword ptr [esi+30h], 0
 0x81F7B6: jnz     short loc_81F7C0
-0x81F7B8: call    sub_772DF0
+0x81F7B8: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F7BD: mov     [esi+30h], eax
 0x81F7C0: mov     ecx, [esi+30h]
 0x81F7C3: push    0
 0x81F7C5: push    5
 0x81F7C7: push    19h
-0x81F7C9: call    sub_772CD0
+0x81F7C9: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F7CE: cmp     dword ptr [esi+30h], 0
 0x81F7D2: jnz     short loc_81F7DC
-0x81F7D4: call    sub_772DF0
+0x81F7D4: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F7D9: mov     [esi+30h], eax
 0x81F7DC: mov     ecx, [esi+30h]
 0x81F7DF: push    0
 0x81F7E1: push    0
 0x81F7E3: push    18h
-0x81F7E5: call    sub_772CD0
+0x81F7E5: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F7EA: cmp     dword ptr [esi+30h], 0
 0x81F7EE: jnz     short loc_81F7F8
-0x81F7F0: call    sub_772DF0
+0x81F7F0: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F7F5: mov     [esi+30h], eax
 0x81F7F8: mov     ecx, [esi+30h]
 0x81F7FB: push    0
 0x81F7FD: push    1
 0x81F7FF: push    7
-0x81F801: call    sub_772CD0
+0x81F801: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F806: cmp     dword ptr [esi+30h], 0
 0x81F80A: jnz     short loc_81F814
-0x81F80C: call    sub_772DF0
+0x81F80C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F811: mov     [esi+30h], eax
 0x81F814: mov     ecx, [esi+30h]
 0x81F817: push    0
 0x81F819: push    4
 0x81F81B: push    17h
-0x81F81D: call    sub_772CD0
+0x81F81D: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F822: cmp     dword ptr [esi+30h], 0
 0x81F826: jnz     short loc_81F830
-0x81F828: call    sub_772DF0
+0x81F828: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F82D: mov     [esi+30h], eax
 0x81F830: mov     ecx, [esi+30h]
 0x81F833: push    0
 0x81F835: push    0
 0x81F837: push    0Eh
-0x81F839: call    sub_772CD0
+0x81F839: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F83E: cmp     dword ptr [esi+30h], 0
 0x81F842: jnz     short loc_81F84C
-0x81F844: call    sub_772DF0
+0x81F844: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81F849: mov     [esi+30h], eax
 0x81F84C: mov     ecx, [esi+30h]
 0x81F84F: push    0
 0x81F851: push    0
 0x81F853: push    34h ; '4'
-0x81F855: call    sub_772CD0
+0x81F855: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81F85A: or      ebx, 0FFFFFFFFh
 0x81F85D: cmp     esi, ds:0B45B54h
 0x81F863: mov     dword ptr ds:0B440D8h, 82h ; '‚'
@@ -454,7 +454,7 @@
 0x81F88D: add     [esi+60h], ebx
 0x81F890: jnz     short loc_81F899
 0x81F892: mov     ecx, esi
-0x81F894: call    sub_7604D0
+0x81F894: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x81F899: mov     esi, ds:0B45B54h
 0x81F89F: test    esi, esi
 0x81F8A1: mov     [esp+2Ch+var_14], esi
@@ -464,7 +464,7 @@
 0x81F8AF: jnb     loc_81F999
 0x81F8B5: lea     ecx, [esp+2Ch+var_10]
 0x81F8B9: push    ecx
-0x81F8BA: call    sub_772630
+0x81F8BA: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81F8BF: add     esp, 4
 0x81F8C2: mov     ebp, eax
 0x81F8C4: cmp     edi, [ebp+0]
@@ -475,7 +475,7 @@
 0x81F8D2: add     [edi+5Ch], ebx
 0x81F8D5: jnz     short loc_81F8DE
 0x81F8D7: mov     ecx, edi
-0x81F8D9: call    sub_772560
+0x81F8D9: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F8DE: mov     edi, [ebp+0]
 0x81F8E1: test    edi, edi
 0x81F8E3: mov     [esp+2Ch+var_18], edi
@@ -490,21 +490,21 @@
 0x81F8FF: add     eax, 5Ch ; '\'
 0x81F902: cmp     dword ptr [eax], 0
 0x81F905: jnz     short loc_81F90C
-0x81F907: call    sub_772560
+0x81F907: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F90C: push    2
 0x81F90E: push    1
 0x81F910: push    0
 0x81F912: push    edi
-0x81F913: call    sub_801110
+0x81F913: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81F918: mov     edx, [esi+14h]
 0x81F91B: add     esp, 10h
 0x81F91E: push    edi; a3
 0x81F91F: push    edx; a2
 0x81F920: mov     ecx, esi; this
-0x81F922: call    sub_760010
+0x81F922: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81F927: lea     eax, [esp+2Ch+var_10]
 0x81F92B: push    eax
-0x81F92C: call    sub_772630
+0x81F92C: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81F931: add     esp, 4
 0x81F934: mov     ebp, eax
 0x81F936: cmp     edi, [ebp+0]
@@ -515,7 +515,7 @@
 0x81F944: add     [edi+5Ch], ebx
 0x81F947: jnz     short loc_81F950
 0x81F949: mov     ecx, edi
-0x81F94B: call    sub_772560
+0x81F94B: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F950: mov     edi, [ebp+0]
 0x81F953: test    edi, edi
 0x81F955: mov     [esp+2Ch+var_18], edi
@@ -530,18 +530,18 @@
 0x81F971: add     eax, 5Ch ; '\'
 0x81F974: cmp     dword ptr [eax], 0
 0x81F977: jnz     short loc_81F97E
-0x81F979: call    sub_772560
+0x81F979: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81F97E: push    2
 0x81F980: push    1
 0x81F982: push    1
 0x81F984: push    edi
-0x81F985: call    sub_801110
+0x81F985: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81F98A: mov     ecx, [esi+14h]
 0x81F98D: add     esp, 10h
 0x81F990: push    edi; a3
 0x81F991: push    ecx; a2
 0x81F992: mov     ecx, esi; this
-0x81F994: call    sub_760010
+0x81F994: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81F999: mov     eax, ds:0B452FCh
 0x81F99E: mov     ebp, [esi+58h]
 0x81F9A1: cmp     ebp, eax
@@ -594,94 +594,94 @@
 0x81FA13: call    dword ptr ds:0A28078h
 0x81FA19: cmp     dword ptr [esi+30h], 0
 0x81FA1D: jnz     short loc_81FA27
-0x81FA1F: call    sub_772DF0
+0x81FA1F: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FA24: mov     [esi+30h], eax
 0x81FA27: mov     ecx, [esi+30h]
 0x81FA2A: push    0
 0x81FA2C: push    1
 0x81FA2E: push    1Bh
-0x81FA30: call    sub_772CD0
+0x81FA30: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FA35: cmp     dword ptr [esi+30h], 0
 0x81FA39: jnz     short loc_81FA43
-0x81FA3B: call    sub_772DF0
+0x81FA3B: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FA40: mov     [esi+30h], eax
 0x81FA43: mov     ecx, [esi+30h]
 0x81FA46: push    0
 0x81FA48: push    5
 0x81FA4A: push    13h
-0x81FA4C: call    sub_772CD0
+0x81FA4C: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FA51: cmp     dword ptr [esi+30h], 0
 0x81FA55: jnz     short loc_81FA5F
-0x81FA57: call    sub_772DF0
+0x81FA57: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FA5C: mov     [esi+30h], eax
 0x81FA5F: mov     ecx, [esi+30h]
 0x81FA62: push    0
 0x81FA64: push    2
 0x81FA66: push    14h
-0x81FA68: call    sub_772CD0
+0x81FA68: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FA6D: cmp     dword ptr [esi+30h], 0
 0x81FA71: jnz     short loc_81FA7B
-0x81FA73: call    sub_772DF0
+0x81FA73: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FA78: mov     [esi+30h], eax
 0x81FA7B: mov     ecx, [esi+30h]
 0x81FA7E: push    0
 0x81FA80: push    1
 0x81FA82: push    0Fh
-0x81FA84: call    sub_772CD0
+0x81FA84: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FA89: cmp     dword ptr [esi+30h], 0
 0x81FA8D: jnz     short loc_81FA97
-0x81FA8F: call    sub_772DF0
+0x81FA8F: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FA94: mov     [esi+30h], eax
 0x81FA97: mov     ecx, [esi+30h]
 0x81FA9A: push    0
 0x81FA9C: push    5
 0x81FA9E: push    19h
-0x81FAA0: call    sub_772CD0
+0x81FAA0: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FAA5: cmp     dword ptr [esi+30h], 0
 0x81FAA9: jnz     short loc_81FAB3
-0x81FAAB: call    sub_772DF0
+0x81FAAB: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FAB0: mov     [esi+30h], eax
 0x81FAB3: mov     ecx, [esi+30h]
 0x81FAB6: push    0
 0x81FAB8: push    0
 0x81FABA: push    18h
-0x81FABC: call    sub_772CD0
+0x81FABC: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FAC1: cmp     dword ptr [esi+30h], 0
 0x81FAC5: jnz     short loc_81FACF
-0x81FAC7: call    sub_772DF0
+0x81FAC7: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FACC: mov     [esi+30h], eax
 0x81FACF: mov     ecx, [esi+30h]
 0x81FAD2: push    0
 0x81FAD4: push    1
 0x81FAD6: push    7
-0x81FAD8: call    sub_772CD0
+0x81FAD8: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FADD: cmp     dword ptr [esi+30h], 0
 0x81FAE1: jnz     short loc_81FAEB
-0x81FAE3: call    sub_772DF0
+0x81FAE3: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FAE8: mov     [esi+30h], eax
 0x81FAEB: mov     ecx, [esi+30h]
 0x81FAEE: push    0
 0x81FAF0: push    4
 0x81FAF2: push    17h
-0x81FAF4: call    sub_772CD0
+0x81FAF4: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FAF9: cmp     dword ptr [esi+30h], 0
 0x81FAFD: jnz     short loc_81FB07
-0x81FAFF: call    sub_772DF0
+0x81FAFF: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FB04: mov     [esi+30h], eax
 0x81FB07: mov     ecx, [esi+30h]
 0x81FB0A: push    0
 0x81FB0C: push    0
 0x81FB0E: push    0Eh
-0x81FB10: call    sub_772CD0
+0x81FB10: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FB15: cmp     dword ptr [esi+30h], 0
 0x81FB19: jnz     short loc_81FB23
-0x81FB1B: call    sub_772DF0
+0x81FB1B: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FB20: mov     [esi+30h], eax
 0x81FB23: mov     ecx, [esi+30h]
 0x81FB26: push    0
 0x81FB28: push    0
 0x81FB2A: push    34h ; '4'
-0x81FB2C: call    sub_772CD0
+0x81FB2C: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FB31: or      ebx, 0FFFFFFFFh
 0x81FB34: cmp     esi, ds:0B45B60h
 0x81FB3A: mov     dword ptr ds:0B440D4h, 2
@@ -690,7 +690,7 @@
 0x81FB50: add     [esi+60h], ebx
 0x81FB53: jnz     short loc_81FB5C
 0x81FB55: mov     ecx, esi
-0x81FB57: call    sub_7604D0
+0x81FB57: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x81FB5C: mov     esi, ds:0B45B60h
 0x81FB62: test    esi, esi
 0x81FB64: mov     [esp+2Ch+var_14], esi
@@ -701,7 +701,7 @@
 0x81FB74: jnb     loc_81FC5E
 0x81FB7A: lea     ecx, [esp+2Ch+var_10]
 0x81FB7E: push    ecx
-0x81FB7F: call    sub_772630
+0x81FB7F: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81FB84: add     esp, 4
 0x81FB87: mov     ebp, eax
 0x81FB89: cmp     edi, [ebp+0]
@@ -712,7 +712,7 @@
 0x81FB97: add     [edi+5Ch], ebx
 0x81FB9A: jnz     short loc_81FBA3
 0x81FB9C: mov     ecx, edi
-0x81FB9E: call    sub_772560
+0x81FB9E: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FBA3: mov     edi, [ebp+0]
 0x81FBA6: test    edi, edi
 0x81FBA8: mov     [esp+2Ch+var_18], edi
@@ -727,21 +727,21 @@
 0x81FBC4: add     eax, 5Ch ; '\'
 0x81FBC7: cmp     dword ptr [eax], 0
 0x81FBCA: jnz     short loc_81FBD1
-0x81FBCC: call    sub_772560
+0x81FBCC: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FBD1: push    2
 0x81FBD3: push    1
 0x81FBD5: push    0
 0x81FBD7: push    edi
-0x81FBD8: call    sub_801110
+0x81FBD8: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81FBDD: mov     edx, [esi+14h]
 0x81FBE0: add     esp, 10h
 0x81FBE3: push    edi; a3
 0x81FBE4: push    edx; a2
 0x81FBE5: mov     ecx, esi; this
-0x81FBE7: call    sub_760010
+0x81FBE7: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81FBEC: lea     eax, [esp+2Ch+var_10]
 0x81FBF0: push    eax
-0x81FBF1: call    sub_772630
+0x81FBF1: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81FBF6: add     esp, 4
 0x81FBF9: mov     ebp, eax
 0x81FBFB: cmp     edi, [ebp+0]
@@ -752,7 +752,7 @@
 0x81FC09: add     [edi+5Ch], ebx
 0x81FC0C: jnz     short loc_81FC15
 0x81FC0E: mov     ecx, edi
-0x81FC10: call    sub_772560
+0x81FC10: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FC15: mov     edi, [ebp+0]
 0x81FC18: test    edi, edi
 0x81FC1A: mov     [esp+2Ch+var_18], edi
@@ -767,18 +767,18 @@
 0x81FC36: add     eax, 5Ch ; '\'
 0x81FC39: cmp     dword ptr [eax], 0
 0x81FC3C: jnz     short loc_81FC43
-0x81FC3E: call    sub_772560
+0x81FC3E: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FC43: push    2
 0x81FC45: push    1
 0x81FC47: push    1
 0x81FC49: push    edi
-0x81FC4A: call    sub_801110
+0x81FC4A: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81FC4F: mov     ecx, [esi+14h]
 0x81FC52: add     esp, 10h
 0x81FC55: push    edi; a3
 0x81FC56: push    ecx; a2
 0x81FC57: mov     ecx, esi; this
-0x81FC59: call    sub_760010
+0x81FC59: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81FC5E: mov     eax, ds:0B452FCh
 0x81FC63: mov     ebp, [esi+58h]
 0x81FC66: cmp     ebp, eax
@@ -831,95 +831,95 @@
 0x81FCD8: call    dword ptr ds:0A28078h
 0x81FCDE: cmp     dword ptr [esi+30h], 0
 0x81FCE2: jnz     short loc_81FCEC
-0x81FCE4: call    sub_772DF0
+0x81FCE4: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FCE9: mov     [esi+30h], eax
 0x81FCEC: mov     ecx, [esi+30h]
 0x81FCEF: push    0
 0x81FCF1: push    1
 0x81FCF3: push    1Bh
-0x81FCF5: call    sub_772CD0
+0x81FCF5: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FCFA: cmp     dword ptr [esi+30h], 0
 0x81FCFE: jnz     short loc_81FD08
-0x81FD00: call    sub_772DF0
+0x81FD00: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FD05: mov     [esi+30h], eax
 0x81FD08: mov     ecx, [esi+30h]
 0x81FD0B: push    0
 0x81FD0D: push    5
 0x81FD0F: push    13h
-0x81FD11: call    sub_772CD0
+0x81FD11: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FD16: cmp     dword ptr [esi+30h], 0
 0x81FD1A: jnz     short loc_81FD24
-0x81FD1C: call    sub_772DF0
+0x81FD1C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FD21: mov     [esi+30h], eax
 0x81FD24: mov     ecx, [esi+30h]
 0x81FD27: push    0
 0x81FD29: mov     ebp, 2
 0x81FD2E: push    ebp
 0x81FD2F: push    14h
-0x81FD31: call    sub_772CD0
+0x81FD31: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FD36: cmp     dword ptr [esi+30h], 0
 0x81FD3A: jnz     short loc_81FD44
-0x81FD3C: call    sub_772DF0
+0x81FD3C: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FD41: mov     [esi+30h], eax
 0x81FD44: mov     ecx, [esi+30h]
 0x81FD47: push    0
 0x81FD49: push    1
 0x81FD4B: push    0Fh
-0x81FD4D: call    sub_772CD0
+0x81FD4D: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FD52: cmp     dword ptr [esi+30h], 0
 0x81FD56: jnz     short loc_81FD60
-0x81FD58: call    sub_772DF0
+0x81FD58: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FD5D: mov     [esi+30h], eax
 0x81FD60: mov     ecx, [esi+30h]
 0x81FD63: push    0
 0x81FD65: push    5
 0x81FD67: push    19h
-0x81FD69: call    sub_772CD0
+0x81FD69: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FD6E: cmp     dword ptr [esi+30h], 0
 0x81FD72: jnz     short loc_81FD7C
-0x81FD74: call    sub_772DF0
+0x81FD74: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FD79: mov     [esi+30h], eax
 0x81FD7C: mov     ecx, [esi+30h]
 0x81FD7F: push    0
 0x81FD81: push    0
 0x81FD83: push    18h
-0x81FD85: call    sub_772CD0
+0x81FD85: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FD8A: cmp     dword ptr [esi+30h], 0
 0x81FD8E: jnz     short loc_81FD98
-0x81FD90: call    sub_772DF0
+0x81FD90: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FD95: mov     [esi+30h], eax
 0x81FD98: mov     ecx, [esi+30h]
 0x81FD9B: push    0
 0x81FD9D: push    1
 0x81FD9F: push    7
-0x81FDA1: call    sub_772CD0
+0x81FDA1: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FDA6: cmp     dword ptr [esi+30h], 0
 0x81FDAA: jnz     short loc_81FDB4
-0x81FDAC: call    sub_772DF0
+0x81FDAC: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FDB1: mov     [esi+30h], eax
 0x81FDB4: mov     ecx, [esi+30h]
 0x81FDB7: push    0
 0x81FDB9: push    4
 0x81FDBB: push    17h
-0x81FDBD: call    sub_772CD0
+0x81FDBD: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FDC2: cmp     dword ptr [esi+30h], 0
 0x81FDC6: jnz     short loc_81FDD0
-0x81FDC8: call    sub_772DF0
+0x81FDC8: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FDCD: mov     [esi+30h], eax
 0x81FDD0: mov     ecx, [esi+30h]
 0x81FDD3: push    0
 0x81FDD5: push    0
 0x81FDD7: push    0Eh
-0x81FDD9: call    sub_772CD0
+0x81FDD9: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FDDE: cmp     dword ptr [esi+30h], 0
 0x81FDE2: jnz     short loc_81FDEC
-0x81FDE4: call    sub_772DF0
+0x81FDE4: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FDE9: mov     [esi+30h], eax
 0x81FDEC: mov     ecx, [esi+30h]
 0x81FDEF: push    0
 0x81FDF1: push    0
 0x81FDF3: push    34h ; '4'
-0x81FDF5: call    sub_772CD0
+0x81FDF5: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FDFA: or      ebx, 0FFFFFFFFh
 0x81FDFD: cmp     esi, ds:0B45B40h
 0x81FE03: mov     ds:0B440E0h, ebp
@@ -928,7 +928,7 @@
 0x81FE15: add     [esi+60h], ebx
 0x81FE18: jnz     short loc_81FE21
 0x81FE1A: mov     ecx, esi
-0x81FE1C: call    sub_7604D0
+0x81FE1C: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x81FE21: mov     esi, ds:0B45B40h
 0x81FE27: test    esi, esi
 0x81FE29: mov     [esp+2Ch+var_14], esi
@@ -938,7 +938,7 @@
 0x81FE36: jnb     loc_81FF20
 0x81FE3C: lea     ecx, [esp+2Ch+var_10]
 0x81FE40: push    ecx
-0x81FE41: call    sub_772630
+0x81FE41: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81FE46: add     esp, 4
 0x81FE49: mov     ebp, eax
 0x81FE4B: cmp     edi, [ebp+0]
@@ -949,7 +949,7 @@
 0x81FE59: add     [edi+5Ch], ebx
 0x81FE5C: jnz     short loc_81FE65
 0x81FE5E: mov     ecx, edi
-0x81FE60: call    sub_772560
+0x81FE60: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FE65: mov     edi, [ebp+0]
 0x81FE68: test    edi, edi
 0x81FE6A: mov     [esp+2Ch+var_18], edi
@@ -964,21 +964,21 @@
 0x81FE86: add     eax, 5Ch ; '\'
 0x81FE89: cmp     dword ptr [eax], 0
 0x81FE8C: jnz     short loc_81FE93
-0x81FE8E: call    sub_772560
+0x81FE8E: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FE93: push    2
 0x81FE95: push    1
 0x81FE97: push    0
 0x81FE99: push    edi
-0x81FE9A: call    sub_801110
+0x81FE9A: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81FE9F: mov     edx, [esi+14h]
 0x81FEA2: add     esp, 10h
 0x81FEA5: push    edi; a3
 0x81FEA6: push    edx; a2
 0x81FEA7: mov     ecx, esi; this
-0x81FEA9: call    sub_760010
+0x81FEA9: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81FEAE: lea     eax, [esp+2Ch+var_10]
 0x81FEB2: push    eax
-0x81FEB3: call    sub_772630
+0x81FEB3: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x81FEB8: add     esp, 4
 0x81FEBB: mov     ebp, eax
 0x81FEBD: cmp     edi, [ebp+0]
@@ -989,7 +989,7 @@
 0x81FECB: add     [edi+5Ch], ebx
 0x81FECE: jnz     short loc_81FED7
 0x81FED0: mov     ecx, edi
-0x81FED2: call    sub_772560
+0x81FED2: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FED7: mov     edi, [ebp+0]
 0x81FEDA: test    edi, edi
 0x81FEDC: mov     [esp+2Ch+var_18], edi
@@ -1004,18 +1004,18 @@
 0x81FEF8: add     eax, 5Ch ; '\'
 0x81FEFB: cmp     dword ptr [eax], 0
 0x81FEFE: jnz     short loc_81FF05
-0x81FF00: call    sub_772560
+0x81FF00: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x81FF05: push    2
 0x81FF07: push    1
 0x81FF09: push    1
 0x81FF0B: push    edi
-0x81FF0C: call    sub_801110
+0x81FF0C: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x81FF11: mov     ecx, [esi+14h]
 0x81FF14: add     esp, 10h
 0x81FF17: push    edi; a3
 0x81FF18: push    ecx; a2
 0x81FF19: mov     ecx, esi; this
-0x81FF1B: call    sub_760010
+0x81FF1B: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x81FF20: mov     eax, ds:0B45300h
 0x81FF25: mov     ebp, [esi+58h]
 0x81FF28: cmp     ebp, eax
@@ -1068,94 +1068,94 @@
 0x81FF9A: call    dword ptr ds:0A28078h
 0x81FFA0: cmp     dword ptr [esi+30h], 0
 0x81FFA4: jnz     short loc_81FFAE
-0x81FFA6: call    sub_772DF0
+0x81FFA6: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FFAB: mov     [esi+30h], eax
 0x81FFAE: mov     ecx, [esi+30h]
 0x81FFB1: push    0
 0x81FFB3: push    1
 0x81FFB5: push    1Bh
-0x81FFB7: call    sub_772CD0
+0x81FFB7: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FFBC: cmp     dword ptr [esi+30h], 0
 0x81FFC0: jnz     short loc_81FFCA
-0x81FFC2: call    sub_772DF0
+0x81FFC2: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FFC7: mov     [esi+30h], eax
 0x81FFCA: mov     ecx, [esi+30h]
 0x81FFCD: push    0
 0x81FFCF: push    5
 0x81FFD1: push    13h
-0x81FFD3: call    sub_772CD0
+0x81FFD3: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FFD8: cmp     dword ptr [esi+30h], 0
 0x81FFDC: jnz     short loc_81FFE6
-0x81FFDE: call    sub_772DF0
+0x81FFDE: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FFE3: mov     [esi+30h], eax
 0x81FFE6: mov     ecx, [esi+30h]
 0x81FFE9: push    0
 0x81FFEB: push    2
 0x81FFED: push    14h
-0x81FFEF: call    sub_772CD0
+0x81FFEF: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x81FFF4: cmp     dword ptr [esi+30h], 0
 0x81FFF8: jnz     short loc_820002
-0x81FFFA: call    sub_772DF0
+0x81FFFA: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x81FFFF: mov     [esi+30h], eax
 0x820002: mov     ecx, [esi+30h]
 0x820005: push    0
 0x820007: push    1
 0x820009: push    0Fh
-0x82000B: call    sub_772CD0
+0x82000B: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x820010: cmp     dword ptr [esi+30h], 0
 0x820014: jnz     short loc_82001E
-0x820016: call    sub_772DF0
+0x820016: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x82001B: mov     [esi+30h], eax
 0x82001E: mov     ecx, [esi+30h]
 0x820021: push    0
 0x820023: push    5
 0x820025: push    19h
-0x820027: call    sub_772CD0
+0x820027: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x82002C: cmp     dword ptr [esi+30h], 0
 0x820030: jnz     short loc_82003A
-0x820032: call    sub_772DF0
+0x820032: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x820037: mov     [esi+30h], eax
 0x82003A: mov     ecx, [esi+30h]
 0x82003D: push    0
 0x82003F: push    0
 0x820041: push    18h
-0x820043: call    sub_772CD0
+0x820043: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x820048: cmp     dword ptr [esi+30h], 0
 0x82004C: jnz     short loc_820056
-0x82004E: call    sub_772DF0
+0x82004E: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x820053: mov     [esi+30h], eax
 0x820056: mov     ecx, [esi+30h]
 0x820059: push    0
 0x82005B: push    1
 0x82005D: push    7
-0x82005F: call    sub_772CD0
+0x82005F: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x820064: cmp     dword ptr [esi+30h], 0
 0x820068: jnz     short loc_820072
-0x82006A: call    sub_772DF0
+0x82006A: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x82006F: mov     [esi+30h], eax
 0x820072: mov     ecx, [esi+30h]
 0x820075: push    0
 0x820077: push    4
 0x820079: push    17h
-0x82007B: call    sub_772CD0
+0x82007B: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x820080: cmp     dword ptr [esi+30h], 0
 0x820084: jnz     short loc_82008E
-0x820086: call    sub_772DF0
+0x820086: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x82008B: mov     [esi+30h], eax
 0x82008E: mov     ecx, [esi+30h]
 0x820091: push    0
 0x820093: push    0
 0x820095: push    0Eh
-0x820097: call    sub_772CD0
+0x820097: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x82009C: cmp     dword ptr [esi+30h], 0
 0x8200A0: jnz     short loc_8200AA
-0x8200A2: call    sub_772DF0
+0x8200A2: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8200A7: mov     [esi+30h], eax
 0x8200AA: mov     ecx, [esi+30h]
 0x8200AD: push    0
 0x8200AF: push    0
 0x8200B1: push    34h ; '4'
-0x8200B3: call    sub_772CD0
+0x8200B3: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x8200B8: or      ebx, 0FFFFFFFFh
 0x8200BB: cmp     esi, ds:0B45B64h
 0x8200C1: mov     dword ptr ds:0B440C0h, 802h
@@ -1164,7 +1164,7 @@
 0x8200D7: add     [esi+60h], ebx
 0x8200DA: jnz     short loc_8200E3
 0x8200DC: mov     ecx, esi
-0x8200DE: call    sub_7604D0
+0x8200DE: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8200E3: mov     esi, ds:0B45B64h
 0x8200E9: test    esi, esi
 0x8200EB: mov     [esp+2Ch+var_14], esi
@@ -1174,7 +1174,7 @@
 0x8200F9: jnb     loc_8201E3
 0x8200FF: lea     ecx, [esp+2Ch+var_10]
 0x820103: push    ecx
-0x820104: call    sub_772630
+0x820104: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x820109: add     esp, 4
 0x82010C: mov     ebp, eax
 0x82010E: cmp     edi, [ebp+0]
@@ -1185,7 +1185,7 @@
 0x82011C: add     [edi+5Ch], ebx
 0x82011F: jnz     short loc_820128
 0x820121: mov     ecx, edi
-0x820123: call    sub_772560
+0x820123: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x820128: mov     edi, [ebp+0]
 0x82012B: test    edi, edi
 0x82012D: mov     [esp+2Ch+var_18], edi
@@ -1200,21 +1200,21 @@
 0x820149: add     eax, 5Ch ; '\'
 0x82014C: cmp     dword ptr [eax], 0
 0x82014F: jnz     short loc_820156
-0x820151: call    sub_772560
+0x820151: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x820156: push    2
 0x820158: push    1
 0x82015A: push    0
 0x82015C: push    edi
-0x82015D: call    sub_801110
+0x82015D: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x820162: mov     edx, [esi+14h]
 0x820165: add     esp, 10h
 0x820168: push    edi; a3
 0x820169: push    edx; a2
 0x82016A: mov     ecx, esi; this
-0x82016C: call    sub_760010
+0x82016C: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x820171: lea     eax, [esp+2Ch+var_10]
 0x820175: push    eax
-0x820176: call    sub_772630
+0x820176: call    NiD3DTextureStagePool_Acquire; Acquire a renderer-owned NiD3DTextureStage from the global texture-stage pool and return it with a reference.
 0x82017B: add     esp, 4
 0x82017E: mov     ebp, eax
 0x820180: cmp     edi, [ebp+0]
@@ -1225,7 +1225,7 @@
 0x82018E: add     [edi+5Ch], ebx
 0x820191: jnz     short loc_82019A
 0x820193: mov     ecx, edi
-0x820195: call    sub_772560
+0x820195: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x82019A: mov     edi, [ebp+0]
 0x82019D: test    edi, edi
 0x82019F: mov     [esp+2Ch+var_18], edi
@@ -1240,18 +1240,18 @@
 0x8201BB: add     eax, 5Ch ; '\'
 0x8201BE: cmp     dword ptr [eax], 0
 0x8201C1: jnz     short loc_8201C8
-0x8201C3: call    sub_772560
+0x8201C3: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x8201C8: push    2
 0x8201CA: push    1
 0x8201CC: push    1
 0x8201CE: push    edi
-0x8201CF: call    sub_801110
+0x8201CF: call    BSShader_ConfigureTextureStageSampler; Configure a shader texture stage for pixel-shader use: select the supplied texcoord index, disable fixed-function color/alpha ops and texture transform, set U/V address mode, set MAG/MIN/MIP filters, then apply the native filter preset. Mode-5 casters pass texcoord 0, WRAP, and linear filtering.
 0x8201D4: mov     ecx, [esi+14h]
 0x8201D7: add     esp, 10h
 0x8201DA: push    edi; a3
 0x8201DB: push    ecx; a2
 0x8201DC: mov     ecx, esi; this
-0x8201DE: call    sub_760010
+0x8201DE: call    NiD3DPass_SetTextureStage; Attach or replace a NiD3DTextureStage at a pass stage index while maintaining stage count, current-stage bookkeeping, and references.
 0x8201E3: mov     eax, ds:0B45304h
 0x8201E8: mov     ebp, [esi+58h]
 0x8201EB: cmp     ebp, eax
@@ -1304,94 +1304,94 @@
 0x82025D: call    dword ptr ds:0A28078h
 0x820263: cmp     dword ptr [esi+30h], 0
 0x820267: jnz     short loc_820271
-0x820269: call    sub_772DF0
+0x820269: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x82026E: mov     [esi+30h], eax
 0x820271: mov     ecx, [esi+30h]
 0x820274: push    0
 0x820276: push    1
 0x820278: push    1Bh
-0x82027A: call    sub_772CD0
+0x82027A: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x82027F: cmp     dword ptr [esi+30h], 0
 0x820283: jnz     short loc_82028D
-0x820285: call    sub_772DF0
+0x820285: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x82028A: mov     [esi+30h], eax
 0x82028D: mov     ecx, [esi+30h]
 0x820290: push    0
 0x820292: push    5
 0x820294: push    13h
-0x820296: call    sub_772CD0
+0x820296: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x82029B: cmp     dword ptr [esi+30h], 0
 0x82029F: jnz     short loc_8202A9
-0x8202A1: call    sub_772DF0
+0x8202A1: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8202A6: mov     [esi+30h], eax
 0x8202A9: mov     ecx, [esi+30h]
 0x8202AC: push    0
 0x8202AE: push    2
 0x8202B0: push    14h
-0x8202B2: call    sub_772CD0
+0x8202B2: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x8202B7: cmp     dword ptr [esi+30h], 0
 0x8202BB: jnz     short loc_8202C5
-0x8202BD: call    sub_772DF0
+0x8202BD: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8202C2: mov     [esi+30h], eax
 0x8202C5: mov     ecx, [esi+30h]
 0x8202C8: push    0
 0x8202CA: push    1
 0x8202CC: push    0Fh
-0x8202CE: call    sub_772CD0
+0x8202CE: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x8202D3: cmp     dword ptr [esi+30h], 0
 0x8202D7: jnz     short loc_8202E1
-0x8202D9: call    sub_772DF0
+0x8202D9: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8202DE: mov     [esi+30h], eax
 0x8202E1: mov     ecx, [esi+30h]
 0x8202E4: push    0
 0x8202E6: push    5
 0x8202E8: push    19h
-0x8202EA: call    sub_772CD0
+0x8202EA: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x8202EF: cmp     dword ptr [esi+30h], 0
 0x8202F3: jnz     short loc_8202FD
-0x8202F5: call    sub_772DF0
+0x8202F5: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x8202FA: mov     [esi+30h], eax
 0x8202FD: mov     ecx, [esi+30h]
 0x820300: push    0
 0x820302: push    0
 0x820304: push    18h
-0x820306: call    sub_772CD0
+0x820306: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x82030B: cmp     dword ptr [esi+30h], 0
 0x82030F: jnz     short loc_820319
-0x820311: call    sub_772DF0
+0x820311: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x820316: mov     [esi+30h], eax
 0x820319: mov     ecx, [esi+30h]
 0x82031C: push    0
 0x82031E: push    1
 0x820320: push    7
-0x820322: call    sub_772CD0
+0x820322: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x820327: cmp     dword ptr [esi+30h], 0
 0x82032B: jnz     short loc_820335
-0x82032D: call    sub_772DF0
+0x82032D: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x820332: mov     [esi+30h], eax
 0x820335: mov     ecx, [esi+30h]
 0x820338: push    0
 0x82033A: push    4
 0x82033C: push    17h
-0x82033E: call    sub_772CD0
+0x82033E: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x820343: cmp     dword ptr [esi+30h], 0
 0x820347: jnz     short loc_820351
-0x820349: call    sub_772DF0
+0x820349: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x82034E: mov     [esi+30h], eax
 0x820351: mov     ecx, [esi+30h]
 0x820354: push    0
 0x820356: push    0
 0x820358: push    0Eh
-0x82035A: call    sub_772CD0
+0x82035A: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x82035F: cmp     dword ptr [esi+30h], 0
 0x820363: jnz     short loc_82036D
-0x820365: call    sub_772DF0
+0x820365: call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.
 0x82036A: mov     [esi+30h], eax
 0x82036D: mov     ecx, [esi+30h]
 0x820370: push    0
 0x820372: push    0
 0x820374: push    34h ; '4'
-0x820376: call    sub_772CD0
+0x820376: call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.
 0x82037B: or      ebx, 0FFFFFFFFh
 0x82037E: test    edi, edi
 0x820380: mov     dword ptr ds:0B440E4h, 802h
@@ -1401,12 +1401,12 @@
 0x82039B: add     [edi+5Ch], ebx
 0x82039E: jnz     short loc_8203A7
 0x8203A0: mov     ecx, edi
-0x8203A2: call    sub_772560
+0x8203A2: call    sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
 0x8203A7: add     [esi+60h], ebx
 0x8203AA: mov     [esp+2Ch+var_4], ebx
 0x8203AE: jnz     short loc_8203B7
 0x8203B0: mov     ecx, esi
-0x8203B2: call    sub_7604D0
+0x8203B2: call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.
 0x8203B7: mov     ecx, dword ptr [esp+2Ch+var_C]
 0x8203BB: mov     large fs:0, ecx
 0x8203C2: pop     ecx
@@ -1416,3 +1416,45 @@
 0x8203C6: pop     ebx
 0x8203C7: add     esp, 18h
 0x8203CA: retn
+0x75FA70: mov     ecx, [ecx]
+0x75FA72: test    ecx, ecx
+0x75FA74: jz      short locret_75FA81
+0x75FA76: add     dword ptr [ecx+5Ch], 0FFFFFFFFh
+0x75FA7A: jnz     short locret_75FA81
+0x75FA7C: jmp     sub_772560; MoonSugarEffect decode: releases or frees NiD3DTextureStage; pool-owned stages return to dword_B4275C after texture/state cleanup.
+0x75FA81: retn
+0x9D19B0: lea     ecx, [ebp-14h]; void *
+0x9D19B3: jmp     sub_4027D0
+0x9D19B8: lea     ecx, [ebp-18h]
+0x9D19BB: jmp     loc_75FA70
+0x9D19C0: lea     ecx, [ebp-10h]
+0x9D19C3: jmp     loc_75FA70
+0x9D19C8: lea     ecx, [ebp-10h]
+0x9D19CB: jmp     loc_75FA70
+0x9D19D0: lea     ecx, [ebp-10h]
+0x9D19D3: jmp     loc_75FA70
+0x9D19D8: lea     ecx, [ebp-10h]
+0x9D19DB: jmp     loc_75FA70
+0x9D19E0: lea     ecx, [ebp-10h]
+0x9D19E3: jmp     loc_75FA70
+0x9D19E8: lea     ecx, [ebp-10h]
+0x9D19EB: jmp     loc_75FA70
+0x9D19F0: lea     ecx, [ebp-10h]
+0x9D19F3: jmp     loc_75FA70
+0x9D19F8: lea     ecx, [ebp-10h]
+0x9D19FB: jmp     loc_75FA70
+0x9D1A00: lea     ecx, [ebp-10h]
+0x9D1A03: jmp     loc_75FA70
+0x9D1A08: lea     ecx, [ebp-10h]
+0x9D1A0B: jmp     loc_75FA70
+0x9D1A10: lea     ecx, [ebp-10h]
+0x9D1A13: jmp     loc_75FA70
+0x9D1A18: lea     ecx, [ebp-10h]
+0x9D1A1B: jmp     loc_75FA70
+0x9D1A20: mov     edx, [esp+arg_4]
+0x9D1A24: lea     eax, [edx-1Ch]
+0x9D1A27: mov     ecx, [edx-20h]
+0x9D1A2A: xor     ecx, eax
+0x9D1A2C: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D1A31: mov     eax, offset stru_AFA038
+0x9D1A36: jmp     ___CxxFrameHandler3

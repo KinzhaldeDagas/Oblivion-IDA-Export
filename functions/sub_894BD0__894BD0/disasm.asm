@@ -1,4 +1,4 @@
-0x894BD0: push    esi
+0x894BD0: push    esi; [Controller decode 2026-07-09] Sets bhkCharacterController target size. Clamps oversized values, treats <=0 as default size, starts transition.
 0x894BD1: mov     esi, ecx
 0x894BD3: test    byte ptr [esi+1F4h], 1
 0x894BDA: jnz     loc_894C61
@@ -33,7 +33,7 @@
 0x894C3A: mov     eax, [esi+36Ch]
 0x894C40: push    0
 0x894C42: mov     [esi+370h], eax
-0x894C48: call    sub_894940
+0x894C48: call    bhkCharacterController_SetShapeType
 0x894C4D: fld     [esp+4+arg_0]
 0x894C51: mov     dword ptr [esi+3ACh], 2
 0x894C5B: fstp    dword ptr [esi+3A8h]

@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 2,
-  "comment_regular": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
+  "callers_count": 3,
+  "chunks": [
+    [
+      "0x65CB00",
+      "0x65CB7A"
+    ]
+  ],
+  "chunks_sha256": "aa98a3e157b7998bd796966e08e38e9e1dd85cf5852b3d1477723a786a59e9c5",
+  "comment_regular": "Verified: formerly AVCollection_ModAV; assigns absolute value, DOES NOT add delta. Existing node is removed on zero; missing nonzero value allocates/inserts entry. Probable homolog Fallout SetModifier 0x826B7398; Fallout zero-retention flag differs.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "AVCollection_ModAV",
+  "display_name": "AVCollection_SetValue",
   "end_ea": "0x65CB7A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "AVCollection_ModAV",
+  "name": "AVCollection_SetValue",
   "segment": ".text",
   "sha256": "aa98a3e157b7998bd796966e08e38e9e1dd85cf5852b3d1477723a786a59e9c5",
   "size": 122,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x65CB00",
-  "type": "void __thiscall(unsigned int **this, int, float)",
+  "total_chunk_size": 122,
+  "type": "void __thiscall(AVCollection *self, int actorValue, float value)",
   "xrefs_from_count": 57,
   "xrefs_to_count": 3
 }

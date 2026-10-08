@@ -1,10 +1,10 @@
-0x78F720: cmp     dword ptr [ecx+18h], 0
+0x78F720: cmp     dword ptr [ecx+18h], 0; CBranch::FillBranch. Finds parent vertex segment whose running-length interval contains child growth distance and returns segment index plus interpolation percent.
 0x78F724: jz      short locret_78F78E
 0x78F726: cmp     dword ptr [ecx+1Ch], 2
 0x78F72A: jl      short locret_78F78E
-0x78F72C: fld     [esp+arg_4]
+0x78F72C: fld     [esp+childDistanceAlongBranch]
 0x78F730: push    ebx
-0x78F731: mov     ebx, [esp+4+arg_0]
+0x78F731: mov     ebx, [esp+4+outPlacement]
 0x78F735: push    esi
 0x78F736: mov     dword ptr [ebx], 0
 0x78F73C: mov     esi, [ecx+1Ch]

@@ -1,4 +1,4 @@
-0x6BE490: push    ebx
+0x6BE490: push    ebx; Oblivion rotation type-4 nested cleanup. Iterates exactly three scalar-axis subtracks in the outer rotation record, destroys each nonnull axis key array through its numeric-type destructor, then clears that axis pointer, count, and type fields.
 0x6BE491: push    esi
 0x6BE492: push    edi
 0x6BE493: lea     esi, [ecx+30h]
@@ -11,7 +11,7 @@
 0x6BE4A6: mov     ecx, [esi-10h]
 0x6BE4A9: mov     edx, ds:0B3D2C8h[ecx*4]
 0x6BE4B0: push    eax
-0x6BE4B1: call    edx ; dword_B3D2C8
+0x6BE4B1: call    edx ; unk_B3D2C8
 0x6BE4B3: add     esp, 4
 0x6BE4B6: mov     [esi], edi
 0x6BE4B8: mov     [esi-1Ch], edi

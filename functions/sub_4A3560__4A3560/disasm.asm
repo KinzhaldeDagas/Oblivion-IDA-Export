@@ -1,4 +1,4 @@
-0x4A3560: sub     esp, 8
+0x4A3560: sub     esp, 8; Verified: serializes region-data type/override/priority base header into RDAT.
 0x4A3563: xor     eax, eax
 0x4A3565: push    esi
 0x4A3566: mov     esi, ecx
@@ -16,7 +16,7 @@
 0x4A3588: push    54414452h; int
 0x4A358D: mov     byte ptr [esp+18h+var_4], al
 0x4A3591: mov     byte ptr [esp+18h+var_4+1], cl
-0x4A3595: call    TESForm_PutFormRecordChunkData
+0x4A3595: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x4A359A: add     esp, 0Ch
 0x4A359D: pop     esi
 0x4A359E: add     esp, 8

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x882AE0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Exact Hair vtable +0x5C builder. Ordinary Hair emits 0xE0/0xE1. Only ImageSpaceEffectEnabled plus Refract/RefractF delegates to the base +0x5C builder; class 1 then emits refraction 0x160..0x162 and other class-1 passes, while class >=2 emits 0x160..0x162 and returns. Hair cannot reach 0x177..0x17A.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x882B09",
-    "line": "cmp     byte ptr ds:0B42F3Eh, 0",
+    "line": "cmp     byte ptr ds:0B42F3Eh, 0; Hair conditional fallback gate 1/3: renderer global B42F3E (OB_RendererGlobalState_010201A0+0xA5) must be nonzero. WinMain copies bDoImageSpaceEffect into this byte at 0x40E8CB.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x882B12",
-    "line": "mov     eax, [esi+1Ch]",
+    "line": "mov     eax, [esi+1Ch]; Hair conditional fallback gate 2/3: HairShaderProperty flags at this+0x1C must contain 0x8000 or 0x10000; otherwise the local Hair E0/E1 producer remains active.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -133,19 +133,19 @@
   },
   {
     "ea": "0x882B23",
-    "line": "mov     eax, [esp+4Ch+arg_C]",
+    "line": "mov     eax, [esp+4Ch+emitMode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x882B27",
-    "line": "mov     ecx, [esp+4Ch+arg_8]",
+    "line": "mov     ecx, [esp+4Ch+passCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x882B2B",
-    "line": "mov     edx, [esp+4Ch+arg_4]",
+    "line": "mov     edx, [esp+4Ch+renderFlags]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x882B30",
-    "line": "mov     eax, [esp+50h+arg_0]",
+    "line": "mov     eax, [esp+50h+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x882B39",
-    "line": "call    sub_7D85D0",
+    "line": "call    BSShaderPPLightingProperty_BuildRenderPasses; Flagged Hair fallback call into base +0x5C. The required Refract/RefractF bit remains set and forces the class>=2 +0x9C early refraction return; class 1 uses +0x98, which has no high-selector construction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -217,7 +217,7 @@
   },
   {
     "ea": "0x882B50",
-    "line": "or      edi, [esp+4Ch+arg_4]",
+    "line": "or      edi, [esp+4Ch+renderFlags]",
     "mnemonic": "or",
     "size": 4
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x882B68",
-    "line": "mov     eax, [esp+4Ch+arg_0]",
+    "line": "mov     eax, [esp+4Ch+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -325,7 +325,7 @@
   },
   {
     "ea": "0x882B8C",
-    "line": "mov     ebx, [esp+4Ch+arg_C]",
+    "line": "mov     ebx, [esp+4Ch+emitMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -361,7 +361,7 @@
   },
   {
     "ea": "0x882B9F",
-    "line": "call    sub_7E24C0",
+    "line": "call    BSShaderProperty_ClearRenderPassLists; Owner-side cleanup for all four BSShaderProperty RenderPass lists at +0x28/+0x38/+0x48/+0x58. For every node it unlinks the node, releases the node through the list allocator, destroys the payload's owned light array, and frees the 0x10-byte RenderPass. This is the ordinary payload owner; accumulator selector buckets do not perform this destruction.",
     "mnemonic": "call",
     "size": 5
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x882BA9",
-    "line": "mov     edx, [esp+4Ch+arg_8]",
+    "line": "mov     edx, [esp+4Ch+passCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -433,13 +433,13 @@
   },
   {
     "ea": "0x882BCA",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x882BCC",
-    "line": "call    sub_7ED600",
+    "line": "call    BSShaderLightingProperty__CountFrustumVisibleEnabledLights; Counts list entries with a non-null ShadowSceneLight, frustumCull != 0xFF, and byte +0xF4 == 0. Unlike GetFirst/NextActiveLight, this counter does not test the backing NiLight AppCulled bit.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +499,7 @@
   },
   {
     "ea": "0x882BEE",
-    "line": "mov     [esp+4Ch+arg_C], eax",
+    "line": "mov     [esp+4Ch+emitMode], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x882BFA",
-    "line": "mov     ecx, [esp+4Ch+arg_0]",
+    "line": "mov     ecx, [esp+4Ch+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -535,37 +535,37 @@
   },
   {
     "ea": "0x882BFF",
-    "line": "push    1",
+    "line": "push    1; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x882C01",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x882C03",
-    "line": "push    0E0h ; 'à'",
+    "line": "push    0E0h ; 'à'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x882C08",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882C09",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882C0A",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,7 +589,7 @@
   },
   {
     "ea": "0x882C16",
-    "line": "lea     edx, [esp+4Ch+arg_4]",
+    "line": "lea     edx, [esp+4Ch+renderFlags]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -613,13 +613,13 @@
   },
   {
     "ea": "0x882C26",
-    "line": "mov     [esp+50h+arg_4], eax",
+    "line": "mov     [esp+50h+renderFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x882C2A",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,13 +643,13 @@
   },
   {
     "ea": "0x882C3E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x882C40",
-    "line": "call    sub_7ED2A0",
+    "line": "call    BSShaderLightingProperty__GetFirstActiveLight; Seeds the embedded light-list cursor from property +0x70 and returns the first usable ShadowSceneLight. Oblivion rejects frustumCull == 0xFF, backing-light AppCulled, and light byte +0xF4 == 1. Fallout was consulted afterward only for the conventional GetFirstActiveLight label; its later implementation lacks Oblivion's +0xF4 rejection.",
     "mnemonic": "call",
     "size": 5
   },
@@ -661,7 +661,7 @@
   },
   {
     "ea": "0x882C47",
-    "line": "lea     eax, [esp+4Ch+arg_4]",
+    "line": "lea     eax, [esp+4Ch+renderFlags]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x882C4E",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x882C6B",
-    "line": "lea     ecx, [esp+4Ch+arg_4]; this",
+    "line": "lea     ecx, [esp+4Ch+renderFlags]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x882C77",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -757,7 +757,7 @@
   },
   {
     "ea": "0x882C89",
-    "line": "mov     eax, [esp+4Ch+arg_0]",
+    "line": "mov     eax, [esp+4Ch+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -799,7 +799,7 @@
   },
   {
     "ea": "0x882CA1",
-    "line": "lea     eax, [esp+4Ch+arg_4]",
+    "line": "lea     eax, [esp+4Ch+renderFlags]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -829,7 +829,7 @@
   },
   {
     "ea": "0x882CB0",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
@@ -841,13 +841,13 @@
   },
   {
     "ea": "0x882CB7",
-    "line": "lea     ecx, [esp+4Ch+arg_4]; this",
+    "line": "lea     ecx, [esp+4Ch+renderFlags]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x882CBB",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x882D06",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1099,7 +1099,7 @@
   },
   {
     "ea": "0x882D64",
-    "line": "call    sub_404C90",
+    "line": "call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1201,7 +1201,7 @@
   },
   {
     "ea": "0x882DA6",
-    "line": "fstp    [esp+4Ch+arg_4]",
+    "line": "fstp    [esp+4Ch+renderFlags]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x882DAE",
-    "line": "fld     [esp+4Ch+arg_4]",
+    "line": "fld     [esp+4Ch+renderFlags]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1321,13 +1321,13 @@
   },
   {
     "ea": "0x882DE3",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x882DE5",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1405,7 +1405,7 @@
   },
   {
     "ea": "0x882E1B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1429,7 +1429,7 @@
   },
   {
     "ea": "0x882E24",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1507,7 +1507,7 @@
   },
   {
     "ea": "0x882E51",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x882E5A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1537,7 +1537,7 @@
   },
   {
     "ea": "0x882E5E",
-    "line": "call    sub_7ED4B0",
+    "line": "call    BSShaderLightingProperty__GetNextActiveLight; Advances the embedded cursor at property +0x7C and returns the next usable ShadowSceneLight under Oblivion's three gates: frustumCull != 0xFF, backing NiLight not AppCulled, and byte +0xF4 != 1. Fallout corroborates the method label but not the extra Oblivion gate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x882E91",
-    "line": "cmp     byte ptr [esp+4Ch+arg_C], 1",
+    "line": "cmp     byte ptr [esp+4Ch+emitMode], 1",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x882EA2",
-    "line": "mov     [esp+4Ch+arg_4], eax",
+    "line": "mov     [esp+4Ch+renderFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1687,7 +1687,7 @@
   },
   {
     "ea": "0x882EB6",
-    "line": "mov     edx, [esp+4Ch+arg_0]",
+    "line": "mov     edx, [esp+4Ch+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1711,37 +1711,37 @@
   },
   {
     "ea": "0x882EBD",
-    "line": "push    3",
+    "line": "push    3; lightCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x882EBF",
-    "line": "push    1",
+    "line": "push    1; byte6",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x882EC1",
-    "line": "push    0E1h ; 'á'",
+    "line": "push    0E1h ; 'á'; selector",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x882EC6",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882EC7",
-    "line": "push    eax",
+    "line": "push    eax; outPass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882EC8",
-    "line": "call    sub_7E2370",
+    "line": "call    RenderPass_Construct; Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1765,13 +1765,13 @@
   },
   {
     "ea": "0x882ED4",
-    "line": "mov     [esp+4Ch+arg_4], eax",
+    "line": "mov     [esp+4Ch+renderFlags], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x882ED8",
-    "line": "lea     eax, [esp+4Ch+arg_4]",
+    "line": "lea     eax, [esp+4Ch+renderFlags]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -1795,13 +1795,13 @@
   },
   {
     "ea": "0x882EE8",
-    "line": "call    sub_5B1E20",
+    "line": "call    NiTPointerList__AddTail; Generic NiTPointerList tail insertion: allocates a node through the list's allocator vfunc, links it after end, updates start/end, and increments numItems.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x882EED",
-    "line": "mov     ebx, [esp+4Ch+arg_C]",
+    "line": "mov     ebx, [esp+4Ch+emitMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1813,13 +1813,13 @@
   },
   {
     "ea": "0x882EF3",
-    "line": "mov     ebx, [esp+4Ch+arg_C]",
+    "line": "mov     ebx, [esp+4Ch+emitMode]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x882EF7",
-    "line": "mov     eax, [esp+4Ch+arg_8]",
+    "line": "mov     eax, [esp+4Ch+passCount]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x882F1F",
-    "line": "mov     ebp, [esp+4Ch+arg_0]",
+    "line": "mov     ebp, [esp+4Ch+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1903,7 +1903,7 @@
   },
   {
     "ea": "0x882F27",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },
@@ -1927,25 +1927,25 @@
   },
   {
     "ea": "0x882F32",
-    "line": "lea     ecx, [esp+4Ch+arg_4]",
+    "line": "lea     ecx, [esp+4Ch+renderFlags]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x882F36",
-    "line": "push    ecx",
+    "line": "push    ecx; output",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882F37",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x882F39",
-    "line": "call    sub_405760",
+    "line": "call    NiGeometry_GetPropertyState; Returns a strong reference to NiGeometry+0xAC NiPropertyState through the output pointer. The active BSShaderProperty is propertyState+0x18; AccumulateGeometry uses that property as the owner and producer of the RenderPass list.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1963,13 +1963,13 @@
   },
   {
     "ea": "0x882F43",
-    "line": "lea     ecx, [esp+4Ch+arg_4]; this",
+    "line": "lea     ecx, [esp+4Ch+renderFlags]; slot",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x882F47",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x882F5A",
-    "line": "mov     byte ptr [esp+4Ch+arg_C], 1",
+    "line": "mov     byte ptr [esp+4Ch+emitMode], 1",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2017,7 +2017,7 @@
   },
   {
     "ea": "0x882F61",
-    "line": "mov     byte ptr [esp+4Ch+arg_C], 0",
+    "line": "mov     byte ptr [esp+4Ch+emitMode], 0",
     "mnemonic": "mov",
     "size": 5
   },
@@ -2029,7 +2029,7 @@
   },
   {
     "ea": "0x882F6D",
-    "line": "mov     ecx, [esp+4Ch+arg_C]",
+    "line": "mov     ecx, [esp+4Ch+emitMode]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2065,7 +2065,7 @@
   },
   {
     "ea": "0x882F79",
-    "line": "call    sub_85AAC0",
+    "line": "call    BSShaderLightingProperty_AppendMode5CasterPass; Shared Oblivion mode-5 caster-pass allocator. Maps rigid/opaque to selector 6, rigid/alpha-test to 7, skinned/opaque to 8, and skinned/alpha-test to 9. Every RenderPass carries the current ShadowSceneLight as its sole light.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2083,67 +2083,67 @@
   },
   {
     "ea": "0x882F87",
-    "line": "mov     ecx, [esp+4Ch+arg_8]",
+    "line": "mov     ecx, [esp+4Ch+passCount]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x882F8B",
-    "line": "mov     edx, [esp+4Ch+arg_0]",
+    "line": "mov     edx, [esp+4Ch+vtable]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x882F8F",
-    "line": "push    0",
+    "line": "push    0; bPassInfoBit2",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x882F91",
-    "line": "lea     eax, [esp+50h+arg_C]",
+    "line": "lea     eax, [esp+50h+emitMode]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x882F95",
-    "line": "push    eax",
+    "line": "push    eax; passFlags",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882F96",
-    "line": "push    ebx",
+    "line": "push    ebx; renderStateClass",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882F97",
-    "line": "push    ecx",
+    "line": "push    ecx; passCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882F98",
-    "line": "push    edx",
+    "line": "push    edx; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x882F99",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x882F9B",
-    "line": "mov     byte ptr [esp+60h+arg_C], 1",
+    "line": "mov     byte ptr [esp+60h+emitMode], 1",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x882FA0",
-    "line": "call    sub_854B70",
+    "line": "call    BSShaderProperty_AppendTextureEffectPass; Verified (Oblivion): shared by PP-lighting class-1 and Hair pass builders. When renderStateClass's low byte is 1, constructs and appends a 0x10-byte RenderPass: passInfo bit 0x02 clear selects 0x18C, set selects 0x18D; otherwise it increments passCount and clears the pending pass flag. BSShaderProperty_GetRenderPassName maps these to \"BSSM_TEXEFFECT\" and \"BSSM_TEXEFFECT_S\". The PP-lighting caller invokes it only when TextureEffectData at +0xE0 is non-null. Fallout's AddTextureEffectPass_1x uses separate IDs 0x2E9/0x2EA and a direct abSkinned input; numeric pass IDs differ across versions.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2206,5 +2206,107 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D5810",
+    "line": "mov     eax, [ebp+10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5813",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D5814",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5819",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D581A",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D581B",
+    "line": "mov     eax, [ebp+8]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D581E",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D581F",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5824",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D5825",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D5826",
+    "line": "mov     edx, [esp+renderFlags]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D582A",
+    "line": "lea     eax, [edx-3Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D582D",
+    "line": "mov     ecx, [edx-40h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D5830",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D5832",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D5837",
+    "line": "mov     eax, offset stru_AFD83C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D583C",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

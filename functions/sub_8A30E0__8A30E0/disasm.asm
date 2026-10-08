@@ -24,7 +24,7 @@
 0x8A311C: push    eax
 0x8A311D: lea     ecx, [esp+44h+var_2C]
 0x8A3121: push    ecx
-0x8A3122: call    sub_43F3E0
+0x8A3122: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x8A3127: fld     dword ptr ds:0A5977Ch
 0x8A312D: add     esp, 4
 0x8A3130: fstp    [esp+44h+var_44]; float

@@ -7,7 +7,7 @@
 0x72F75B: mov     ebp, ecx
 0x72F75D: push    esi
 0x72F75E: mov     [esp+24h+var_4], ebp
-0x72F762: call    nullsub_returnvVoid_1arg
+0x72F762: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x72F767: push    esi
 0x72F768: lea     ecx, [ebp+0Ch]
 0x72F76B: call    sub_718BB0

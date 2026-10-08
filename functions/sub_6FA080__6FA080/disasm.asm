@@ -51,7 +51,6 @@
 0x6FA106: mov     eax, edx
 0x6FA108: lea     edi, [eax+1]
 0x6FA10B: jmp     short loc_6FA110
-0x6FA10D: align 10h
 0x6FA110: mov     cl, [eax]
 0x6FA112: add     eax, 1
 0x6FA115: cmp     cl, bl
@@ -65,12 +64,12 @@
 0x6FA126: call    sub_6FA040
 0x6FA12B: add     [esi+4], eax
 0x6FA12E: add     esp, 8
-0x6FA131: mov     ebp, offset byte_B25374
+0x6FA131: mov     ebp, offset left
 0x6FA136: xor     edi, edi
 0x6FA138: mov     ecx, [esp+10h+Str2]
-0x6FA13C: push    ecx; Str2
-0x6FA13D: push    ebp; Str1
-0x6FA13E: call    __strcmp
+0x6FA13C: push    ecx; right
+0x6FA13D: push    ebp; left
+0x6FA13E: call    CRT_StricmpLocaleDispatch
 0x6FA143: add     esp, 8
 0x6FA146: test    eax, eax
 0x6FA148: jz      short loc_6FA15D

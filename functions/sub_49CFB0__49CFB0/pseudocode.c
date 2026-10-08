@@ -1,68 +1,68 @@
 void __thiscall sub_49CFB0(int *this)
 {
-  LONG (__stdcall *v5)(volatile LONG *); // ebp
-  NiNode *v6; // esi
+  LONG (__stdcall *v2)(volatile LONG *); // ebp
+  void (__thiscall ***v3)(_DWORD, int); // esi
+  int v4; // esi
+  int v5; // esi
+  int v6; // esi
   int v7; // esi
   int v8; // esi
   int v9; // esi
-  int v10; // esi
-  int v11; // esi
-  int v12; // esi
-  int v13; // edi
+  int v10; // edi
 
-  WaterManager::Destroy_((WaterManager *)this, (int *)1);
-  v5 = InterlockedDecrement;
-  if ( LodWaterRoot )
+  WaterManager::Destroy_((WaterManager *)this, (int *)1); /*0x49cfe4*/
+  v2 = InterlockedDecrement; /*0x49cff0*/
+  if ( *(_DWORD *)&MEMORY[0xB33E90][0x13A4] ) /*0x49cfe9*/
   {
-    v6 = LodWaterRoot;
-    if ( !v5((volatile LONG *)&LodWaterRoot->members) )
+    v3 = *(void (__thiscall ****)(_DWORD, int))&MEMORY[0xB33E90][0x13A4]; /*0x49cff8*/
+    if ( !v2((volatile LONG *)(*(_DWORD *)&MEMORY[0xB33E90][0x13A4] + 4)) ) /*0x49cffe*/
     {
-      if ( v6 )
-        v6->vtbl->super.super.super.Destructor((NiRefObject *)v6, 1);
+      if ( v3 ) /*0x49d006*/
+        (**v3)(v3, 1); /*0x49d010*/
     }
-    LodWaterRoot = 0;
+    *(_DWORD *)&MEMORY[0xB33E90][0x13A4] = 0; /*0x49d012*/
   }
-  v7 = this[0x12];
-  if ( v7 )
+  v4 = *(this + 0x12); /*0x49d01c*/
+  if ( v4 ) /*0x49d026*/
   {
-    if ( !v5((volatile LONG *)(v7 + 4)) )
-      (**(void (__thiscall ***)(int, int))v7)(v7, 1);
+    if ( !v2((volatile LONG *)(v4 + 4)) ) /*0x49d02c*/
+      (**(void (__thiscall ***)(int, int))v4)(v4, 1); /*0x49d03e*/
   }
-  NiTPointerList<WadingWaterData *>::~NiTPointerList<WadingWaterData *>((NiTPointerList__BSImageSpaceShader *)(this + 0xC));
-  v8 = this[5];
-  if ( v8 )
+  NiTPointerList<WadingWaterData *>::~NiTPointerList<WadingWaterData *>((NiTPointerList__BSImageSpaceShader *)(this + 0xC)); /*0x49d048*/
+  v5 = *(this + 5); /*0x49d04d*/
+  if ( v5 ) /*0x49d057*/
   {
-    if ( !v5((volatile LONG *)(v8 + 4)) )
-      (**(void (__thiscall ***)(int, int))v8)(v8, 1);
+    if ( !v2((volatile LONG *)(v5 + 4)) ) /*0x49d05d*/
+      (**(void (__thiscall ***)(int, int))v5)(v5, 1); /*0x49d06f*/
   }
-  v9 = this[4];
-  if ( v9 )
+  v6 = *(this + 4); /*0x49d071*/
+  if ( v6 ) /*0x49d07b*/
   {
-    if ( !v5((volatile LONG *)(v9 + 4)) )
-      (**(void (__thiscall ***)(int, int))v9)(v9, 1);
+    if ( !v2((volatile LONG *)(v6 + 4)) ) /*0x49d081*/
+      (**(void (__thiscall ***)(int, int))v6)(v6, 1); /*0x49d093*/
   }
-  v10 = this[3];
-  if ( v10 )
+  v7 = *(this + 3); /*0x49d095*/
+  if ( v7 ) /*0x49d09f*/
   {
-    if ( !v5((volatile LONG *)(v10 + 4)) )
-      (**(void (__thiscall ***)(int, int))v10)(v10, 1);
+    if ( !v2((volatile LONG *)(v7 + 4)) ) /*0x49d0a5*/
+      (**(void (__thiscall ***)(int, int))v7)(v7, 1); /*0x49d0b7*/
   }
-  v11 = this[2];
-  if ( v11 )
+  v8 = *(this + 2); /*0x49d0b9*/
+  if ( v8 ) /*0x49d0c3*/
   {
-    if ( !v5((volatile LONG *)(v11 + 4)) )
-      (**(void (__thiscall ***)(int, int))v11)(v11, 1);
+    if ( !v2((volatile LONG *)(v8 + 4)) ) /*0x49d0c9*/
+      (**(void (__thiscall ***)(int, int))v8)(v8, 1); /*0x49d0db*/
   }
-  v12 = this[1];
-  if ( v12 )
+  v9 = *(this + 1); /*0x49d0dd*/
+  if ( v9 ) /*0x49d0e7*/
   {
-    if ( !v5((volatile LONG *)(v12 + 4)) )
-      (**(void (__thiscall ***)(int, int))v12)(v12, 1);
+    if ( !v2((volatile LONG *)(v9 + 4)) ) /*0x49d0ed*/
+      (**(void (__thiscall ***)(int, int))v9)(v9, 1); /*0x49d0ff*/
   }
-  v13 = *this;
-  if ( v13 )
+  v10 = *this; /*0x49d101*/
+  if ( v10 ) /*0x49d10d*/
   {
-    if ( !v5((volatile LONG *)(v13 + 4)) )
-      (**(void (__thiscall ***)(int, int))v13)(v13, 1);
+    if ( !v2((volatile LONG *)(v10 + 4)) ) /*0x49d113*/
+      (**(void (__thiscall ***)(int, int))v10)(v10, 1); /*0x49d125*/
   }
 }

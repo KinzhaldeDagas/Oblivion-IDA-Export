@@ -55,7 +55,7 @@
 0x67CFDD: mov     ecx, esi
 0x67CFDF: call    sub_67B5F0
 0x67CFE4: push    esi
-0x67CFE5: call    FormHeapFree
+0x67CFE5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x67CFEA: add     esp, 4
 0x67CFED: test    bl, bl
 0x67CFEF: jz      short loc_67D026

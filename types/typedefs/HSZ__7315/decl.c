@@ -1,1 +1,1 @@
-HSZ
+typedef HSZ__ *HSZ;

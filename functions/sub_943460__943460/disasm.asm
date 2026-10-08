@@ -40,7 +40,7 @@
 0x9434D1: push    ecx
 0x9434D2: xorps   xmm1, xmm0
 0x9434D5: mov     ecx, esi
-0x9434D7: movaps  [esp+234h+var_21C+0Ch], xmm1
+0x9434D7: movaps  xmmword ptr [esp+234h+var_21C+0Ch], xmm1
 0x9434DC: call    dword ptr [eax+10h]
 0x9434DF: fchs
 0x9434E1: jmp     short loc_9434F1

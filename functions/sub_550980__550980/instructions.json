@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x550980",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Applies FaceGenRenderState/TESNPC hair length to a FaceGenHair geometry. Resolves BSFaceGenMorphDataHair, locks the vertex stream, restores base hair vertices, invokes the hair morph-data vfunc with the scalar weight, then unlocks.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x550984",
-    "line": "mov     esi, [esp+10h+arg_0]",
+    "line": "mov     esi, [esp+10h+hairGeometry]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x550992",
-    "line": "fcomp   [esp+10h+arg_4]",
+    "line": "fcomp   [esp+10h+hairLength]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x55099B",
-    "line": "jz      loc_550A29",
+    "line": "jz      loc_550A29; Native negative-length test uses x87 FCOMP followed by test AH,0x41 / JZ skip; unordered NaN sets C0 and C3, so comparison does not take skip and NaN can reach BSFaceGenMorphDataHair vertex deformation at 0x550A1B. +Inf also passes. PF 1.19.14 rejects nonfinite hairLength during randomized refresh; no evidence normal RNG/UI produces it.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x5509A2",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5509A3",
-    "line": "call    sub_550850",
+    "line": "call    NiGeometry_GetFaceGenHairMorphData; Resolve BSFaceGenMorphDataHair attached to a FaceGenHair geometry through its FaceGen model extra data.",
     "mnemonic": "call",
     "size": 5
   },
@@ -103,19 +103,19 @@
   },
   {
     "ea": "0x5509B1",
-    "line": "mov     ecx, [esi+0B4h]",
+    "line": "mov     ecx, [esi+0B4h]; Native hair morph dereferences hairGeometry->geomData (+0xB4) for NiGeometryData_LockVertexStream after confirming hairMorphData, without checking geomData nonnull. If malformed FaceGenHair geometry retains morph extra data but has null geomData, lock dereferences null. PF 1.19.14 rejects this state only during randomized character refresh. Trigger reachability with shipped assets unproven.",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5509B7",
-    "line": "push    1",
+    "line": "push    1; writeAccess",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x5509B9",
-    "line": "call    sub_728AB0",
+    "line": "call    NiGeometryData_LockVertexStream; Lock the geometry vertex stream for writing. The hair path requests positions only.",
     "mnemonic": "call",
     "size": 5
   },
@@ -133,67 +133,67 @@
   },
   {
     "ea": "0x5509C2",
-    "line": "mov     ecx, [esi+0B4h]",
+    "line": "mov     ecx, [esi+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x5509C8",
-    "line": "lea     eax, [esp+14h+var_C]",
+    "line": "lea     eax, [esp+14h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5509CC",
-    "line": "push    eax",
+    "line": "push    eax; outVertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5509CD",
-    "line": "mov     [esp+18h+var_C], 0",
+    "line": "mov     [esp+18h+outVertices.data], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5509D5",
-    "line": "mov     [esp+18h+var_8], 0",
+    "line": "mov     [esp+18h+outVertices.stride], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x5509DD",
-    "line": "mov     [esp+18h+var_4], 0",
+    "line": "mov     [esp+18h+outVertices.unknown08], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x5509E2",
-    "line": "call    sub_728B60",
+    "line": "call    NiGeometryData_GetLockedVertexStream; Resolve the writable vertex pointer and stride into a 12-byte NiStridedVertexStream descriptor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5509E7",
-    "line": "lea     ecx, [esp+14h+var_C]",
+    "line": "lea     ecx, [esp+14h+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x5509EB",
-    "line": "push    ecx",
+    "line": "push    ecx; vertices",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5509EC",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5509ED",
-    "line": "call    sub_5508F0",
+    "line": "call    NiGeometry_RestoreFaceGenBaseVertices; Restore authored base hair positions into the locked stream before applying the length morph; marks only the vertex-position channel dirty.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x5509F5",
-    "line": "cmp     [esp+14h+var_C], 0",
+    "line": "cmp     [esp+14h+outVertices.data], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x550A02",
-    "line": "fld     [esp+14h+arg_4]",
+    "line": "fld     [esp+14h+hairLength]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -265,7 +265,7 @@
   },
   {
     "ea": "0x550A14",
-    "line": "lea     eax, [esp+1Ch+var_C]",
+    "line": "lea     eax, [esp+1Ch+outVertices]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -283,19 +283,19 @@
   },
   {
     "ea": "0x550A1B",
-    "line": "call    edx",
+    "line": "call    edx; Calls hair morph-data vfunc with raw hairLength. Native path checks only negative values, not finite or upper bound; nonfinite values can propagate into vertex positions. PF 1.19.14 filters nonfinite input during randomized character refresh without changing valid >1 modded lengths.",
     "mnemonic": "call",
     "size": 2
   },
   {
     "ea": "0x550A1D",
-    "line": "mov     ecx, [esi+0B4h]",
+    "line": "mov     ecx, [esi+0B4h]; self",
     "mnemonic": "mov",
     "size": 6
   },
   {
     "ea": "0x550A23",
-    "line": "call    sub_728B20",
+    "line": "call    NiGeometryData_UnlockVertexStream; Verified existing Prettier Faces repair boundary: native hair morph unlocks after position changes, without local sphere or normal recomputation. Plugin rebuild is restricted to direct CPU vertex storage, skips additional geometry, and skips normal rebuilding for NBT data. Runtime visual correctness still requires in-game testing.",
     "mnemonic": "call",
     "size": 5
   },

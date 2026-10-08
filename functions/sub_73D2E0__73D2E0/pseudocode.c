@@ -1,5 +1,5 @@
 // attributes: thunk
-int __stdcall sub_73D2E0(int a1)
+_DWORD *__thiscall sub_73D2E0(unsigned __int16 *this, _DWORD *a2)
 {
-  return sub_742280(a1);
+  return sub_742280(this, a2);
 }

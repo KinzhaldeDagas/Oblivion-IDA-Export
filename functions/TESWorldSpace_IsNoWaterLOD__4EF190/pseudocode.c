@@ -1,4 +1,4 @@
 UInt8 __thiscall TESWorldSpace::IsNoWaterLOD(TESWorldSpace *this)
 {
-  return (this->worldFlags & kFlag_NoLODWater) != 0;
+  return (this->worldFlags & kFlag_NoLODWater) != 0; /*0x4ef198*/
 }

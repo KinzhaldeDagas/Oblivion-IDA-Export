@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x848950",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified (Oblivion): shared by ShadowLight, Skin, and Hair setup for selector 0x18E. It binds the effect texture and render-state fields; NiD3DShader_SetupShaderPrograms applies the active shader's owned fill/rim/fVars/U/V maps afterward.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x848976",
-    "line": "mov     eax, [esp+20h+arg_C]",
+    "line": "mov     eax, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x84899D",
-    "line": "push    eax; a2",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x8489A0",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8489A5",
-    "line": "mov     edx, [esp+20h+arg_C]",
+    "line": "mov     edx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x8489C8",
-    "line": "push    ecx; a2",
+    "line": "push    ecx; texture",
     "mnemonic": "push",
     "size": 1
   },
@@ -259,31 +259,31 @@
   },
   {
     "ea": "0x8489CB",
-    "line": "call    sub_76C910",
+    "line": "call    NiD3DTextureStage_SetTexture; Replace NiD3DTextureStage::Texture at +0x04 with reference-count transfer. Lighting30 uses this to bind BSRenderedTexture::GetInnerTexture(current ShadowSceneLight +0x114) to the SimpleShadow pass.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8489D0",
-    "line": "push    3",
+    "line": "push    3; preset",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x8489D2",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x8489D4",
-    "line": "call    sub_7715E0",
+    "line": "call    NiD3DTextureStage_ApplyAddressModePreset; Apply one native address-preset row to a NiD3DTextureStage: D3DSAMP_ADDRESSU (1) and D3DSAMP_ADDRESSV (2). Lighting30 SimpleShadow uses preset 0 = CLAMP/CLAMP.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x8489D9",
-    "line": "mov     edx, [esp+20h+arg_C]",
+    "line": "mov     edx, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -331,7 +331,7 @@
   },
   {
     "ea": "0x8489EF",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x8489FF",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -391,7 +391,7 @@
   },
   {
     "ea": "0x848A0D",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x848A1D",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x848A2B",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -487,7 +487,7 @@
   },
   {
     "ea": "0x848A3E",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -511,7 +511,7 @@
   },
   {
     "ea": "0x848A4C",
-    "line": "call    sub_772DF0",
+    "line": "call    NiD3DRenderStateGroupPool_Acquire; Acquire a pooled NiD3DRenderStateGroup for a pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -547,31 +547,31 @@
   },
   {
     "ea": "0x848A5C",
-    "line": "call    sub_772CD0",
+    "line": "call    NiD3DRenderStateGroup_SetRenderState; Insert or update one D3D render-state id/value pair in a NiD3DRenderStateGroup.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x848A61",
-    "line": "mov     eax, [esp+20h+arg_C]",
+    "line": "mov     eax, [esp+20h+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x848A65",
-    "line": "mov     ecx, [esp+20h+arg_0]",
+    "line": "mov     ecx, [esp+20h+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x848A69",
-    "line": "push    eax",
+    "line": "push    eax; shaderProperty",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x848A6A",
-    "line": "push    ecx",
+    "line": "push    ecx; geometry",
     "mnemonic": "push",
     "size": 1
   },
@@ -583,7 +583,7 @@
   },
   {
     "ea": "0x848A6D",
-    "line": "call    sub_7D1C90",
+    "line": "call    BSShaderProperty_SetupTextureEffectConstants; Verified (Oblivion): shared by all four 1x/2x texture-effect pass handlers used from ShadowLight, Skin, and Hair shader setup. Reads TextureEffectData from shaderProperty+0xE0, copies current fill/edge RGBA into ShadowLight shader-map backing, copies U/V offsets and edge exponent, writes the second fVars component as 1.0, then updates separate per-geometry property-state constants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -601,7 +601,7 @@
   },
   {
     "ea": "0x848A7A",
-    "line": "mov     [esp+20h+arg_C], esi",
+    "line": "mov     [esp+20h+value], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -613,25 +613,25 @@
   },
   {
     "ea": "0x848A81",
-    "line": "lea     edx, [esp+20h+arg_C]",
+    "line": "lea     edx, [esp+20h+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x848A85",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x848A86",
-    "line": "push    eax",
+    "line": "push    eax; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x848A87",
-    "line": "lea     ecx, [edi+40h]",
+    "line": "lea     ecx, [edi+40h]; this",
     "mnemonic": "lea",
     "size": 3
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x848A92",
-    "line": "call    sub_76CE40",
+    "line": "call    NiTArray_NiD3DPass_SetAt; Oblivion render decode: refcounted NiTArray<NiD3DPass*>::SetAt used by Lighting30Shader_SetupRenderPass. Replaces the indexed pass pointer, updates end/numObjs, and AddRef/Releases the stored pass.",
     "mnemonic": "call",
     "size": 5
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x848AA5",
-    "line": "call    sub_7604D0",
+    "line": "call    NiD3DPass_ReleaseToPool; Release a renderer-owned NiD3DPass: release attached resources and return the pass object to the global pool when its reference count reaches zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -742,5 +742,59 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9D3390",
+    "line": "lea     ecx, [ebp+10h]; void *",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D3393",
+    "line": "jmp     sub_4027D0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9D3398",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D339C",
+    "line": "lea     eax, [edx-10h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D339F",
+    "line": "mov     ecx, [edx-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D33A2",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D33A4",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D33A9",
+    "line": "mov     eax, offset stru_AFB7C0",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D33AE",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

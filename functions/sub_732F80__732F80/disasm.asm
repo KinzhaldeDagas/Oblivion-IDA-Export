@@ -1,9 +1,9 @@
-0x732F80: sub     esp, 34h
+0x732F80: sub     esp, 34h; NiTriStripsData normal rebuild: alternating strip winding, degenerate-triangle skipping, face-direction accumulation, vertex normalization and dirtyFlags |= 2. Confirms Prettier Faces virtual UpdateNormals handles strip dirty state. NBT allocator clears tangent/binormal planes too, so plugin excludes that format.
 0x732F83: push    ebp
 0x732F84: push    esi
-0x732F85: push    1
+0x732F85: push    1; clearStorage
 0x732F87: mov     ebp, ecx
-0x732F89: call    sub_728280
+0x732F89: call    NiGeometryData_AllocateAndClearNormals; Allocate and zero normal storage before walking triangle strips.
 0x732F8E: mov     esi, [ebp+4Ch]
 0x732F91: xor     eax, eax
 0x732F93: cmp     [ebp+44h], ax
@@ -13,7 +13,6 @@
 0x732FA5: push    ebx
 0x732FA6: push    edi
 0x732FA7: jmp     short loc_732FB4
-0x732FA9: align 10h
 0x732FB0: mov     esi, [esp+44h+var_30]
 0x732FB4: mov     ecx, [ebp+48h]
 0x732FB7: movzx   edi, ax
@@ -41,7 +40,7 @@
 0x73300B: cmp     dx, bx
 0x73300E: jz      loc_733149
 0x733014: cmp     bx, cx
-0x733017: jz      loc_733149
+0x733017: jz      loc_733149; Ignore degenerate strip triangles, honoring alternating strip winding for valid faces.
 0x73301D: mov     eax, [ebp+1Ch]
 0x733020: movzx   esi, dx
 0x733023: movzx   edi, cx
@@ -103,7 +102,7 @@
 0x7330C7: fmulp   st(2), st
 0x7330C9: fsubrp  st(1), st
 0x7330CB: fstp    [esp+48h+var_1C]
-0x7330CF: call    sub_4BFAA0
+0x7330CF: call    NiPoint3_NormalizeApproximateInPlace
 0x7330D4: mov     eax, [ebp+20h]
 0x7330D7: fld     dword ptr [eax+edi]
 0x7330DA: add     esp, 4
@@ -170,9 +169,9 @@
 0x73318D: push    0Ch
 0x73318F: push    eax
 0x733190: push    ecx
-0x733191: call    sub_725890
+0x733191: call    NiPoint3_NormalizeStridedArray; Normalize every accumulated strip vertex normal with 12-byte stride.
 0x733196: add     esp, 0Ch
-0x733199: or      word ptr [ebp+2Eh], 2
+0x733199: or      word ptr [ebp+2Eh], 2; Mark the normal channel dirty (bit 1).
 0x73319E: pop     esi
 0x73319F: pop     ebp
 0x7331A0: add     esp, 34h

@@ -12,13 +12,13 @@ bool __cdecl sub_50D740(
   UInt16 v9[2]; // [esp+0h] [ebp-8h] BYREF
   int v10; // [esp+4h] [ebp-4h] BYREF
 
-  *(_DWORD *)v9 = 0;
-  v10 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9, &v10);
-  if ( result )
+  *(_DWORD *)v9 = 0; /*0x50d749*/
+  v10 = 0; /*0x50d74c*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v9, &v10); /*0x50d779*/
+  if ( result ) /*0x50d783*/
   {
-    TESDataHandler_g_PlayerRef->miscStats[*(_DWORD *)v9] += v10;
-    return 1;
+    reference->miscStats[*(_DWORD *)v9] += v10; /*0x50d795*/
+    return 1; /*0x50d79c*/
   }
-  return result;
+  return result; /*0x50d785*/
 }

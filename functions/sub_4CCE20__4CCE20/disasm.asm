@@ -9,8 +9,8 @@
 0x4CCE3C: fldz
 0x4CCE3E: fstp    [esp+34h+var_34]
 0x4CCE41: jz      short loc_4CCE4E
-0x4CCE43: add     ecx, 28h ; '('
-0x4CCE46: call    sub_420C40
+0x4CCE43: add     ecx, 28h ; '('; this
+0x4CCE46: call    ExtraDataList_GetNorthRotation; Returns ExtraNorthRotation's float payload (type 0x4C), or 0.0.
 0x4CCE4B: fstp    [esp+34h+var_34]
 0x4CCE4E: fld     [esp+34h+arg_8]
 0x4CCE52: fmul    [esp+34h+var_34]
@@ -29,16 +29,16 @@
 0x4CCE76: lea     edi, [esp+3Ch+var_24]
 0x4CCE7A: rep movsd
 0x4CCE7C: push    ecx
-0x4CCE7D: lea     ecx, [esp+40h+var_24]
-0x4CCE81: fstp    [esp+40h+var_40]; float
-0x4CCE84: call    NiMatrix33_InitRotationTransform
+0x4CCE7D: lea     ecx, [esp+40h+var_24]; this
+0x4CCE81: fstp    [esp+40h+angleZ]; angleZ
+0x4CCE84: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x4CCE89: mov     ecx, [esp+3Ch+arg_0]
 0x4CCE8D: lea     eax, [esp+3Ch+var_24]
 0x4CCE91: push    eax
 0x4CCE92: push    ecx
 0x4CCE93: lea     edx, [esp+44h+var_30]
 0x4CCE97: push    edx
-0x4CCE98: call    sub_710250
+0x4CCE98: call    NiPoint3_MultiplyMatrix3
 0x4CCE9D: add     esp, 0Ch
 0x4CCEA0: pop     edi
 0x4CCEA1: pop     esi

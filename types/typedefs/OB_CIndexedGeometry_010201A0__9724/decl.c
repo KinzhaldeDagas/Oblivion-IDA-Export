@@ -1,0 +1,34 @@
+struct OB_CIndexedGeometry_010201A0
+{
+unsigned __int8 retainTexcoords;
+unsigned __int8 pad_01[3];
+OB_CWindEngine_010201A0 *windEngine;
+unsigned __int8 vertexWeighting;
+unsigned __int8 manualLighting;
+unsigned __int8 pad_0A[2];
+unsigned __int8 *vertexWindComputed;
+unsigned __int16 vertexSize;
+unsigned __int8 valid;
+unsigned __int8 pad_13;
+int windMethod;
+unsigned __int8 reserved_18[8];
+unsigned __int16 numDiscreteLodLevels;
+unsigned __int16 currentVertexWriteCounter;
+unsigned __int16 activeLodLevel;
+unsigned __int16 currentStripCounter;
+OB_stVectorUInt32_010201A0 perLodTriangleCounts;
+OB_stVector_stVectorUShort_010201A0 perLodStripLengths;
+OB_stVector_stVectorUShortPtr_010201A0 perLodStrips;
+OB_stVectorUInt32_010201A0 packedColors;
+OB_stVectorFloat_010201A0 vertexCoords;
+OB_stVectorFloat_010201A0 originalVertexCoords;
+OB_stVectorFloat_010201A0 vertexNormals;
+OB_stVectorFloat_010201A0 vertexBinormals;
+OB_stVectorFloat_010201A0 vertexTangents;
+OB_stVectorFloat_010201A0 diffuseTexcoords;
+OB_stVectorFloat_010201A0 retainedDiffuseTexcoords;
+OB_stVectorByte_010201A0 retainedMapIndices;
+OB_stVectorFloat_010201A0 shadowTexcoords;
+OB_stVectorFloat_010201A0 primaryWindWeights;
+OB_stVectorByte_010201A0 primaryWindMatrixIndices;
+};

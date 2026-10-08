@@ -1,1 +1,30 @@
-NiSurfaceData
+struct __declspec(align(4)) NiSurfaceData
+{
+UInt8 unk00;
+UInt8 unk01;
+UInt16 pad02;
+UInt32 unk04;
+UInt32 unk08;
+D3DFORMAT format;
+UInt32 unk10;
+UInt32 unk14;
+UInt32 unk18;
+UInt8 unk1C;
+UInt8 unk1D;
+UInt16 pad1E;
+UInt32 unk20;
+UInt32 unk24;
+UInt8 unk28;
+UInt8 unk29;
+UInt16 pad2A;
+UInt32 unk2C;
+UInt32 unk30;
+UInt8 unk34;
+UInt8 unk35;
+UInt16 pad36;
+UInt32 unk38;
+UInt32 unk3C;
+UInt8 unk40;
+UInt8 unk41;
+UInt16 pad42;
+};

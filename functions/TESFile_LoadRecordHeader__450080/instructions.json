@@ -277,7 +277,7 @@
   },
   {
     "ea": "0x4500FB",
-    "line": "call    TESFile_GetMasterByIndex",
+    "line": "call    TESFile_GetMasterByIndex; Oblivion record-header FormID resolution indexes masters with HIBYTE(FormID)+1. A duplicated MAST filename still has a distinct slot, but BuildLoadedMasterArray may put the same first-matched TESFile pointer in each duplicate slot.",
     "mnemonic": "call",
     "size": 5
   },

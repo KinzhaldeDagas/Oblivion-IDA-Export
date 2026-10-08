@@ -1,19 +1,32 @@
 {
-  "callees_count": 19,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x404B00",
+      "0x404C53"
+    ]
+  ],
+  "chunks_sha256": "3c42db178eaf3c88ed714ce0dbde55ca8f411471df105c880f317a2032c497f3",
+  "comment_regular": "Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.\nVerified aPortable 2026-10-08: stdcall basePath and filename are concatenated into char[260], fopen r, # comments skipped, matching TESFile marked active. Fallout Main::LoadPluginsFromFile 8260A658 is a semantic homolog (same comment/line/TESFile activation loop), but PPC console path treatment differs; Oblivion concatenation remains authoritative.",
+  "comment_repeatable": "Reads a text plugin list at basePath + listFile; skips # comments, obtains each TESFile by line, and marks it loaded. Caller falls back to Oblivion.esm when no file is loaded.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 3,
-  "display_name": "sub_404B00",
+  "display_name": "TESDataHandler_LoadPluginsFromFile",
   "end_ea": "0x404C53",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_404B00",
+  "name": "TESDataHandler_LoadPluginsFromFile",
   "segment": ".text",
   "sha256": "3c42db178eaf3c88ed714ce0dbde55ca8f411471df105c880f317a2032c497f3",
   "size": 339,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x404B00",
-  "type": "char __stdcall(const char *, const char *)",
+  "total_chunk_size": 339,
+  "type": "bool __stdcall(const char *basePath, const char *filename)",
   "xrefs_from_count": 122,
   "xrefs_to_count": 1
 }

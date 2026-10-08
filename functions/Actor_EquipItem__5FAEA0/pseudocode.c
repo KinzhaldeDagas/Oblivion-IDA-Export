@@ -1,5 +1,6 @@
+// UCWUS pipeline note: Actor equip path is not currently hooked by UCWUS.dll. Bridge replacement scripts own equip selection/token setup through OBSE commands.
 void __userpurge Actor_EquipItem(
-        PlayerCharacter *a1@<ecx>,
+        TESObjectREFR *a1@<ecx>,
         unsigned __int16 *ebp0@<ebp>,
         double st5_0@<st2>,
         double st6_0@<st1>,
@@ -10,7 +11,7 @@ void __userpurge Actor_EquipItem(
         double a9@<st5>,
         double a10@<st6>,
         TESForm *a2,
-        signed int a12,
+        signed int maximumMatches,
         ExtraDataList **a13,
         int a14,
         int a15,
@@ -27,7 +28,7 @@ void __userpurge Actor_EquipItem(
         int a26)
 {
   ExtraContainerChanges_Data *ContainerExtraDataForRef; // eax
-  Sky *ItemCount; // ebx
+  TESHealthForm *ItemCount; // ebx
   unsigned __int16 *v30; // ebp
   TESForm::FormType type; // al
   signed int v33; // ecx
@@ -41,7 +42,7 @@ void __userpurge Actor_EquipItem(
   _DWORD *v43; // eax
   double v44; // st7
   int v45; // eax
-  Sky *v46; // eax
+  TESHealthForm *v46; // eax
   float *v47; // ecx
   double AVModifierf; // st7
   int v50; // eax
@@ -73,85 +74,85 @@ void __userpurge Actor_EquipItem(
   char v76; // [esp+50h] [ebp-14h]
   TESForm *a2b; // [esp+68h] [ebp+4h]
   TESForm *a2a; // [esp+68h] [ebp+4h]
-  int BaseCalcAVi; // [esp+6Ch] [ebp+8h]
-  int v82; // [esp+6Ch] [ebp+8h]
+  int maximumMatchesa; // [esp+6Ch] [ebp+8h]
+  int maximumMatchesb; // [esp+6Ch] [ebp+8h]
 
-  v75 = 0;
-  if ( a2->member.type != kFormType_Ammo )
-    goto LABEL_11;
-  if ( ((unsigned __int8 (__thiscall *)(TESForm *))a2->vtbl->Unk_1E)(a2) )
+  v75 = 0; /*0x5faed1*/
+  if ( a2->member.type != kFormType_Ammo ) /*0x5faed6*/
+    goto LABEL_11; /*0x5faed6*/
+  if ( ((unsigned __int8 (__thiscall *)(TESForm *))a2->vtbl->Unk_1E)(a2) ) /*0x5faee3*/
   {
-    Script_AddEventToExtraScript(a1, a13, 2);
-    Script_AddEventToExtraScript(a2, &a1->super.super.super.super.baseExtraList, 2);
-    if ( a1 == TESDataHandler_g_PlayerRef )
+    Script_AddEventToExtraScript(a1, a13, 2); /*0x5faef1*/
+    Script_AddEventToExtraScript(a2, &a1->member.baseExtraList, 2); /*0x5faefd*/
+    if ( a1 == (TESObjectREFR *)reference ) /*0x5faf0b*/
     {
-      __asm { fld     dword ptr ds:0A30634h }
+      __asm { fld     dword ptr ds:0A30634h } /*0x5faf11*/
       __asm { fstp    [esp+30h+duration]; duration }
-      GameUI_QueueMessage((const char *)dword_B38570, 0, 1u, duration);
+      GameUI_QueueMessage(stru_B38570.value, 0, 1u, duration); /*0x5faf26*/
     }
-    return;
+    return; /*0x5faf2e*/
   }
-  if ( a1->super.super.super.process
-    && ((int (__thiscall *)(LowProcess *))a1->super.super.super.process->GetCurrentAction)(a1->super.super.super.process) == 5 )
+  if ( a1[1].vtbl /*0x5faf49*/
+    && (*((int (__thiscall **)(TESObjectREFRVtbl *))a1[1].vtbl->super.super.InitializeComponent + 0xB4))(a1[1].vtbl) == 5 )
   {
-    if ( a1 == TESDataHandler_g_PlayerRef )
+    if ( a1 == (TESObjectREFR *)reference ) /*0x5faf51*/
     {
-      __asm { fld     dword ptr ds:0A30634h }
+      __asm { fld     dword ptr ds:0A30634h } /*0x5faf57*/
       __asm { fstp    [esp+30h+duration]; duration }
-      GameUI_QueueMessage((const char *)dword_B38A30, 0, 1u, durationa);
+      GameUI_QueueMessage(stru_B38A30.value, 0, 1u, durationa); /*0x5faf6b*/
     }
   }
   else
   {
 LABEL_11:
-    if ( a13 && sub_41DF40(a13) && !(_BYTE)a15 )
+    if ( a13 && sub_41DF40(a13) && !(_BYTE)a15 ) /*0x5faf8e*/
     {
 LABEL_12:
-      if ( a1 == TESDataHandler_g_PlayerRef )
+      if ( a1 == (TESObjectREFR *)reference ) /*0x5faf96*/
       {
-        __asm { fld     dword ptr ds:0A30634h }
+        __asm { fld     dword ptr ds:0A30634h } /*0x5faf9c*/
         __asm { fstp    [esp+30h+duration]; duration }
-        GameUI_QueueMessage((const char *)dword_B38A30, 0, 1u, durationb);
+        GameUI_QueueMessage(stru_B38A30.value, 0, 1u, durationb); /*0x5fafb1*/
       }
     }
     else
     {
-      if ( a1->vtbl->super.super.super.GetBaseForm((TESObjectREFR *)a1) )
-        ((int (__thiscall *)(PlayerCharacter *))a1->vtbl->super.super.super.IsActor)(a1);
-      ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef((TESObjectREFR *)a1);
-      ItemCount = (Sky *)ContainerExtraData_GetItemCount(ContainerExtraDataForRef, a2);
-      v30 = (unsigned __int16 *)sub_4691B0((TESObjectARMO *)a2);
-      if ( (int)ItemCount > 0 )
+      if ( a1->vtbl->GetBaseForm(a1) ) /*0x5fafc8*/
+        ((int (__thiscall *)(TESObjectREFR *))a1->vtbl->IsActor)(a1); /*0x5fafda*/
+      ContainerExtraDataForRef = ContainerExtraData_GetContainerExtraDataForRef(a1); /*0x5fafe9*/
+      ItemCount = (TESHealthForm *)ContainerExtraData_GetItemCount(ContainerExtraDataForRef, a2); /*0x5faffa*/
+      v30 = (unsigned __int16 *)sub_4691B0((TESObjectARMO *)a2); /*0x5fb006*/
+      if ( (int)ItemCount > 0 ) /*0x5fb008*/
       {
-        if ( a12 <= 0 )
+        if ( maximumMatches <= 0 ) /*0x5fb013*/
         {
-          type = a2->member.type;
-          if ( type == kFormType_Ammo || a2 == (TESForm *)TESDataHandler_g_RepairHammer || type == kFormType_SoulGem )
-            a12 = (signed int)ItemCount;
+          type = a2->member.type; /*0x5fb015*/
+          if ( type == kFormType_Ammo || a2 == (TESForm *)MEMORY[0xB35ED0] || type == kFormType_SoulGem ) /*0x5fb026*/
+            maximumMatches = (signed int)ItemCount; /*0x5fb028*/
         }
-        if ( a13 && (_EAX = BaseExtraList_GetExtraData((ExtraDataList *)a13, kExtraData_Health)) != 0 )
+        if ( a13 && (_EAX = BaseExtraList_GetExtraData((ExtraDataList *)a13, kExtraData_Health)) != 0 ) /*0x5fb040*/
         {
-          __asm { fld     dword ptr [eax+0Ch] }
+          __asm { fld     dword ptr [eax+0Ch] } /*0x5fb042*/
         }
         else
         {
-          a2b = (TESForm *)TESHealthForm_GetHealthForForm(a2);
-          __asm { fild    [esp+2Ch+a2] }
-          if ( (int)a2b < 0 )
-            __asm { fadd    dword ptr ds:0A2FC78h }
+          a2b = (TESForm *)TESHealthForm_GetHealthForForm(a2); /*0x5fb052*/
+          __asm { fild    [esp+2Ch+a2] } /*0x5fb056*/
+          if ( (int)a2b < 0 ) /*0x5fb05a*/
+            __asm { fadd    dword ptr ds:0A2FC78h } /*0x5fb05c*/
         }
-        __asm { fstp    [esp+2Ch+a2] }
-        v76 = 0;
-        switch ( a2->member.type )
+        __asm { fstp    [esp+2Ch+a2] } /*0x5fb066*/
+        v76 = 0; /*0x5fb070*/
+        switch ( a2->member.type ) /*0x5fb082*/
         {
-          case kFormType_Apparatus:
-            if ( a1 != TESDataHandler_g_PlayerRef )
-              goto LABEL_106;
-            if ( !PlayerCharacter_IsPlayerInCombat(TESDataHandler_g_PlayerRef, 0) || dword_B38A98 )
+          case kFormType_Apparatus: /*0x5fb082*/
+            if ( a1 != (TESObjectREFR *)reference ) /*0x5fb39a*/
+              goto LABEL_106; /*0x5fb39a*/
+            if ( !PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)reference, 0) || stru_B38A98.value ) /*0x5fb3ab*/
             {
-              Actor_EquipItem_::Player_EquipItem_Apparatus(
+              Actor_EquipItem_::Player_EquipItem_Apparatus( /*0x5fb3a9*/
                 (int)a2a,
-                a12,
+                maximumMatches,
                 (int)a13,
                 a14,
                 a15,
@@ -169,292 +170,268 @@ LABEL_12:
             }
             else
             {
-              __asm { fld     dword ptr ds:0A30634h }
+              __asm { fld     dword ptr ds:0A30634h } /*0x5fb3b4*/
               __asm { fstp    [esp+30h+duration]; duration }
-              GameUI_QueueMessage((const char *)dword_B38A60, 0, 1u, durationg);
+              GameUI_QueueMessage(stru_B38A60.value, 0, 1u, durationg); /*0x5fb3c9*/
             }
-            return;
-          case kFormType_Armor:
-            if ( !TESBipedModelForm_CoversSlot(v30, 0xD, 0) )
-              goto LABEL_43;
-            __asm
+            return; /*0x5fb3d1*/
+          case kFormType_Armor: /*0x5fb082*/
+            if ( !TESBipedModelForm_CoversSlot(v30, 0xD, 0) ) /*0x5fb131*/
+              goto LABEL_43; /*0x5fb131*/
+            __asm /*0x5fb13a*/
             {
               fldz
               fcomp   [esp+2Ch+a2]
               fnstsw  ax
             }
-            if ( (_AX & 0x100) != 0 )
+            if ( (_AX & 0x100) != 0 ) /*0x5fb145*/
             {
 LABEL_43:
-              a1->vtbl->super.Unk_B0((Actor *)a1);
-              goto Actor_EquipItem___Player_EquipItem_TESObjectLIGH;
+              a1->vtbl[1].Unk_46(a1); /*0x5fb18c*/
+              goto Actor_EquipItem___Player_EquipItem_TESObjectLIGH; /*0x5fb18c*/
             }
-            if ( a1 == TESDataHandler_g_PlayerRef )
+            if ( a1 == (TESObjectREFR *)reference ) /*0x5fb14d*/
             {
-              if ( InterfaceManager_IsMenuMode() )
+              if ( InterfaceManager_IsMenuMode() ) /*0x5fb153*/
               {
-                __asm { fld     dword ptr ds:0A30634h }
+                __asm { fld     dword ptr ds:0A30634h } /*0x5fb160*/
                 __asm { fstp    [esp+30h+duration]; duration }
-                GameUI_QueueMessage((const char *)dword_B38558, 0, 1u, durationd);
+                GameUI_QueueMessage(stru_B38558.value, 0, 1u, durationd); /*0x5fb175*/
               }
             }
-            return;
-          case kFormType_Book:
-            if ( a1 != TESDataHandler_g_PlayerRef )
-              goto LABEL_106;
-            if ( !PlayerCharacter_IsPlayerInCombat(TESDataHandler_g_PlayerRef, 0) || InterfaceManager_IsMenuMode() )
+            return; /*0x5fb17d*/
+          case kFormType_Book: /*0x5fb082*/
+            if ( a1 != (TESObjectREFR *)reference ) /*0x5fb4a7*/
+              goto LABEL_106; /*0x5fb4a7*/
+            if ( !PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)reference, 0) || InterfaceManager_IsMenuMode() ) /*0x5fb4b8*/
             {
-              ((void (__thiscall *)(TESForm *, _DWORD, PlayerCharacter *, _DWORD, _DWORD, int))a2->vtbl->Unk_33)(
+              ((void (__thiscall *)(TESForm *, _DWORD, TESObjectREFR *, _DWORD, _DWORD, int))a2->vtbl->Unk_33)( /*0x5fb4f5*/
                 a2,
                 0,
                 a1,
                 0,
                 0,
                 1);
-              goto LABEL_106;
+              goto LABEL_106; /*0x5fb4f7*/
             }
-            __asm { fld     dword ptr ds:0A30634h }
+            __asm { fld     dword ptr ds:0A30634h } /*0x5fb4c1*/
             __asm { fstp    [esp+30h+duration]; duration }
-            GameUI_QueueMessage((const char *)dword_B38A68, 0, 1u, durationh);
-            return;
-          case kFormType_Clothing:
+            GameUI_QueueMessage(stru_B38A68.value, 0, 1u, durationh); /*0x5fb4d5*/
+            return; /*0x5fb4dd*/
+          case kFormType_Clothing: /*0x5fb082*/
             goto Actor_EquipItem___Player_EquipItem_TESObjectCLOT;
-          case kFormType_Ingredient:
-            v41 = Script_AddEventToExtraScript(a1, a13, 2);
-            if ( ((unsigned __int8 (__thiscall *)(TESForm *))a2->vtbl->Unk_1E)(a2) )
+          case kFormType_Ingredient: /*0x5fb082*/
+            v41 = Script_AddEventToExtraScript(a1, a13, 2); /*0x5fb2c5*/
+            if ( ((unsigned __int8 (__thiscall *)(TESForm *))a2->vtbl->Unk_1E)(a2) ) /*0x5fb2d4*/
             {
-              if ( a1 == TESDataHandler_g_PlayerRef )
+              if ( a1 == (TESObjectREFR *)reference ) /*0x5fb304*/
               {
-                __asm { fld     dword ptr ds:0A30634h }
+                __asm { fld     dword ptr ds:0A30634h } /*0x5fb30a*/
                 __asm { fstp    [esp+30h+duration]; duration }
-                GameUI_QueueMessage((const char *)sNoEatQuestItem, 0, 1u, durationf);
+                GameUI_QueueMessage(MEMORY[0xB394C0].value, 0, 1u, durationf); /*0x5fb31f*/
               }
             }
             else
             {
-              Actor_EquipIngredient_(a1, st5_0, st6_0, v41, a2, (BaseExtraList *)a13, a1 != TESDataHandler_g_PlayerRef);
-              sub_5E99C0((TESObjectREFR *)a1, a2, 1, 1);
+              Actor_EquipIngredient_( /*0x5fb2e8*/
+                (PlayerCharacter *)a1,
+                st5_0,
+                st6_0,
+                v41,
+                a2,
+                (BaseExtraList *)a13,
+                a1 != (TESObjectREFR *)reference);
+              sub_5E99C0(a1, (TESKey *)a2, 1, 1); /*0x5fb2f4*/
             }
-            return;
-          case kFormType_Light:
+            return; /*0x5fb2f9*/
+          case kFormType_Light: /*0x5fb082*/
 Actor_EquipItem___Player_EquipItem_TESObjectLIGH:
-            if ( a2->member.type == kFormType_Light )
+            if ( a2->member.type == kFormType_Light ) /*0x5fb192*/
             {
-              v36 = sub_447490("ITMTorchHeldEquip");
-              if ( v36 )
+              v36 = SoundMap_ResolveAnimSoundNote("ITMTorchHeldEquip"); /*0x5fb1a4*/
+              if ( v36 ) /*0x5fb1a8*/
               {
-                if ( a1 == TESDataHandler_g_PlayerRef && InterfaceManager_IsMenuMode() )
-                  v37 = (_DWORD *)sub_65AC50(a1, *(_DWORD *)(v36 + 0xC), 0, 0x121, 1);
+                if ( a1 == (TESObjectREFR *)reference && InterfaceManager_IsMenuMode() ) /*0x5fb1b2*/
+                  v37 = (_DWORD *)sub_65AC50(a1, *(_DWORD *)(v36 + 0xC), 0, 0x121, 1); /*0x5fb1c2*/
                 else
-                  v37 = (_DWORD *)sub_65AC50(a1, *(_DWORD *)(v36 + 0xC), 0, 0x102, 1);
-                v38 = (unsigned int)v37;
-                if ( v37 )
+                  v37 = (_DWORD *)sub_65AC50(a1, *(_DWORD *)(v36 + 0xC), 0, 0x102, 1); /*0x5fb1d3*/
+                v38 = (unsigned int)v37; /*0x5fb1d8*/
+                if ( v37 ) /*0x5fb1dc*/
                 {
-                  sub_6B73E0(v37);
-                  FormHeapFree(v38);
+                  sub_6B73E0(v37); /*0x5fb1e0*/
+                  FormHeapFree(v38); /*0x5fb1e6*/
                 }
               }
             }
 Actor_EquipItem___Player_EquipItem_TESObjectCLOT:
-            ItemCount = (Sky *)a13;
-            if ( sub_5E3DE0((TESObjectREFR *)a1, a2, (int)a13) )
+            ItemCount = (TESHealthForm *)a13; /*0x5fb1ee*/
+            if ( sub_5E3DE0(a1, a2, (int)a13) ) /*0x5fb1f6*/
             {
-              v39 = a12;
-              if ( a12 > 1 )
+              v39 = maximumMatches; /*0x5fb1ff*/
+              if ( maximumMatches > 1 ) /*0x5fb206*/
               {
-                v39 = 1;
-                a12 = 1;
+                v39 = 1; /*0x5fb208*/
+                maximumMatches = 1; /*0x5fb20d*/
               }
-              sub_5F3140(
-                (TESObjectREFR *)a1,
-                st7_0,
-                st5_0,
-                st6_0,
-                (unsigned __int16 *)a2,
-                (ExtraDataList *)v39,
-                a13,
-                a15,
-                v74);
-              if ( v40 )
+              sub_5F3140(a1, st7_0, st5_0, st6_0, (unsigned __int16 *)a2, (ExtraDataList *)v39, a13, a15, v74); /*0x5fb21b*/
+              if ( v40 ) /*0x5fb222*/
               {
-                if ( a1 != TESDataHandler_g_PlayerRef || (_BYTE)a14 )
-                  sub_5E48D0(a1, a2, (int)a13);
+                if ( a1 != (TESObjectREFR *)reference || (_BYTE)a14 ) /*0x5fb237*/
+                  sub_5E48D0(a1, a2, (int)a13); /*0x5fb24d*/
                 else
-                  sub_662C10(TESDataHandler_g_PlayerRef, a2, (int)a13);
+                  sub_662C10(reference, a2, (int)a13); /*0x5fb23d*/
               }
-              goto LABEL_106;
+              goto LABEL_106; /*0x5fb242*/
             }
-            if ( a1 != TESDataHandler_g_PlayerRef )
-              goto LABEL_106;
-            __asm { fld     dword ptr ds:0A30634h }
+            if ( a1 != (TESObjectREFR *)reference ) /*0x5fb25d*/
+              goto LABEL_106; /*0x5fb25d*/
+            __asm { fld     dword ptr ds:0A30634h } /*0x5fb263*/
             __asm { fstp    [esp+30h+duration]; duration }
-            GameUI_QueueMessage((const char *)dword_B38A80, 0, 1u, duratione);
-            return;
-          case kFormType_Weapon:
-            if ( a1->vtbl->super.GetMountedHorse((Actor *)a1)
-              && a1->vtbl->super.super.super.GetSleepState((TESObjectREFR *)a1) )
+            GameUI_QueueMessage(stru_B38A80.value, 0, 1u, duratione); /*0x5fb278*/
+            return; /*0x5fb280*/
+          case kFormType_Weapon: /*0x5fb082*/
+            if ( ((int (__thiscall *)(TESObjectREFR *))a1->vtbl[2].super.Unk_0C)(a1) && a1->vtbl->GetSleepState(a1) ) /*0x5fb0a3*/
+              goto LABEL_12; /*0x5fb0a7*/
+            v33 = maximumMatches; /*0x5fb0ad*/
+            if ( maximumMatches > 1 ) /*0x5fb0b4*/
             {
-              goto LABEL_12;
+              v33 = 1; /*0x5fb0b6*/
+              maximumMatches = 1; /*0x5fb0bb*/
             }
-            v33 = a12;
-            if ( a12 > 1 )
-            {
-              v33 = 1;
-              a12 = 1;
-            }
-            __asm
+            __asm /*0x5fb0bf*/
             {
               fldz
               fcomp   [esp+2Ch+a2]
               fnstsw  ax
             }
-            if ( __SETP__(HIBYTE(_AX) & 5, 0) )
+            if ( __SETP__(HIBYTE(_AX) & 5, 0) ) /*0x5fb0ca*/
             {
-              if ( a1 == TESDataHandler_g_PlayerRef )
+              if ( a1 == (TESObjectREFR *)reference ) /*0x5fb0e7*/
               {
-                if ( InterfaceManager_IsMenuMode() )
+                if ( InterfaceManager_IsMenuMode() ) /*0x5fb0e9*/
                 {
-                  __asm { fld     dword ptr ds:0A30634h }
+                  __asm { fld     dword ptr ds:0A30634h } /*0x5fb0f2*/
                   __asm { fstp    [esp+30h+duration]; duration }
-                  GameUI_QueueMessage((const char *)dword_B38558, 0, 1u, durationc);
+                  GameUI_QueueMessage(stru_B38558.value, 0, 1u, durationc); /*0x5fb107*/
                 }
               }
             }
             else
             {
-              sub_5F3140(
-                (TESObjectREFR *)a1,
-                st7_0,
-                st5_0,
-                st6_0,
-                (unsigned __int16 *)a2,
-                (ExtraDataList *)v33,
-                a13,
-                a15,
-                v74);
+              sub_5F3140(a1, st7_0, st5_0, st6_0, (unsigned __int16 *)a2, (ExtraDataList *)v33, a13, a15, v74); /*0x5fb0da*/
             }
-            sub_65DD20(TESDataHandler_g_PlayerRef);
-            a1->vtbl->super.Unk_B0((Actor *)a1);
-            goto LABEL_106;
-          case kFormType_Ammo:
-            ItemCount = (Sky *)a12;
-            sub_5F3140(
-              (TESObjectREFR *)a1,
-              st7_0,
-              st5_0,
-              st6_0,
-              (unsigned __int16 *)a2,
-              (ExtraDataList *)a12,
-              a13,
-              a15,
-              v74);
-            if ( dword_B3B7D0 > 0 )
-              sub_607F90(a2, a12, a1, 1, 1);
-            goto LABEL_106;
-          case kFormType_SoulGem:
-            if ( a1 != TESDataHandler_g_PlayerRef )
-              goto LABEL_106;
-            if ( PlayerCharacter_IsPlayerInCombat(TESDataHandler_g_PlayerRef, 0) && !dword_B38A88 )
-              goto LABEL_93;
-            if ( !LOBYTE(a2[4].member.modlist.data) && (!a13 || !ExtraDataList_GetExtraSoul((ExtraDataList *)a13)) )
+            sub_65DD20(reference); /*0x5fb115*/
+            a1->vtbl[1].Unk_46(a1); /*0x5fb124*/
+            goto LABEL_106; /*0x5fb126*/
+          case kFormType_Ammo: /*0x5fb082*/
+            ItemCount = (TESHealthForm *)maximumMatches; /*0x5fb28d*/
+            sub_5F3140(a1, st7_0, st5_0, st6_0, (unsigned __int16 *)a2, (ExtraDataList *)maximumMatches, a13, a15, v74); /*0x5fb297*/
+            if ( g_liveArrowProjectileCount > 0 ) /*0x5fb2a3*/
+              ArrowProjectile_CleanupMatchingByBaseAndTarget(a2, maximumMatches, a1, 1, 1); /*0x5fb2b0*/
+            goto LABEL_106; /*0x5fb2b8*/
+          case kFormType_SoulGem: /*0x5fb082*/
+            if ( a1 != (TESObjectREFR *)reference ) /*0x5fb5a1*/
+              goto LABEL_106; /*0x5fb5a1*/
+            if ( PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)reference, 0) && !stru_B38A88.value ) /*0x5fb5b2*/
+              goto LABEL_93; /*0x5fb5b9*/
+            if ( !LOBYTE(a2[4].member.modlist.data) && (!a13 || !ExtraDataList_GetExtraSoul((ExtraDataList *)a13)) ) /*0x5fb5eb*/
             {
-              __asm { fld     dword ptr ds:0A30634h }
+              __asm { fld     dword ptr ds:0A30634h } /*0x5fb5f4*/
               __asm { fstp    [esp+30h+duration]; duration }
-              GameUI_QueueMessage((const char *)dword_B38870, 0, 1u, durationl);
-              return;
+              GameUI_QueueMessage(stru_B38870.value, 0, 1u, durationl); /*0x5fb608*/
+              return; /*0x5fb610*/
             }
-            sub_57CC00((char)v30, st5_0, st6_0, st7_0);
-            v43 = (_DWORD *)FormHeapAlloc(0xCu);
-            if ( v43 )
-              ItemCount = (Sky *)ContainerEntryExtraData_constr(v43, (int)a2, 0);
+            sub_57CC00((char)v30, st5_0, st6_0, st7_0, st0_0, a10, a9, st3_0); /*0x5fb615*/
+            v43 = (_DWORD *)FormHeapAlloc(0xCu); /*0x5fb61c*/
+            if ( v43 ) /*0x5fb632*/
+              ItemCount = (TESHealthForm *)ContainerEntryExtraData_constr(v43, (int)a2, 0); /*0x5fb63e*/
             else
-              ItemCount = 0;
-            LOBYTE(v30) = (_BYTE)a13;
-            BSSimpleList_PushFront(ItemCount->vtbl, (int)a13);
-            if ( a13 )
+              ItemCount = 0; /*0x5fb642*/
+            LOBYTE(v30) = (_BYTE)a13; /*0x5fb644*/
+            BSSimpleList_PushFront(&ItemCount->vtbl->InitializeComponent, (int)a13); /*0x5fb653*/
+            if ( a13 ) /*0x5fb65a*/
             {
-              durationm = ExtraDataList_GetExtraCount((ExtraDataList *)a13);
-              sub_60D020(ItemCount, durationm);
-            }
-            else
-            {
-              sub_60D020(ItemCount, a12);
-            }
-            sub_5CFB50((char)a2, st5_0, st7_0, st6_0, ItemCount);
-            goto LABEL_106;
-          case kFormType_AlchemyItem:
-            v76 = 1;
-            if ( (unsigned __int8)EffectItemList_AllEffectsHostile(&a2[2].vtbl) )
-            {
-              if ( a1 != TESDataHandler_g_PlayerRef )
-                goto LABEL_106;
-              sub_66A490(TESDataHandler_g_PlayerRef, st5_0, st6_0, st7_0, a2);
+              durationm = ExtraDataList_GetExtraCount((ExtraDataList *)a13); /*0x5fb66d*/
+              Shared_SetDwordAtOffset04(ItemCount, durationm); /*0x5fb670*/
             }
             else
             {
-              v42 = Script_AddEventToExtraScript(a1, a13, 2);
-              if ( Actor_ConsumePotion_(
-                     a1,
+              Shared_SetDwordAtOffset04(ItemCount, maximumMatches); /*0x5fb661*/
+            }
+            sub_5CFB50((char)a2, st5_0, st7_0, st6_0, ItemCount); /*0x5fb676*/
+            goto LABEL_106; /*0x5fb67e*/
+          case kFormType_AlchemyItem: /*0x5fb082*/
+            v76 = 1; /*0x5fb32f*/
+            if ( EffectItemList_AllEffectsHostile(&a2[2].vtbl) ) /*0x5fb334*/
+            {
+              if ( a1 != (TESObjectREFR *)reference ) /*0x5fb345*/
+                goto LABEL_106; /*0x5fb345*/
+              sub_66A490(reference, st5_0, st6_0, st7_0, a2); /*0x5fb34c*/
+            }
+            else
+            {
+              v42 = Script_AddEventToExtraScript(a1, a13, 2); /*0x5fb35e*/
+              if ( Actor_ConsumePotion_( /*0x5fb374*/
+                     (PlayerCharacter *)a1,
                      (char)v30,
                      st5_0,
                      st6_0,
                      v42,
                      a2,
                      (BaseExtraList *)a13,
-                     a1 != TESDataHandler_g_PlayerRef) )
+                     a1 != (TESObjectREFR *)reference) )
               {
-                sub_5E99C0((TESObjectREFR *)a1, a2, 1, 1);
+                sub_5E99C0(a1, (TESKey *)a2, 1, 1); /*0x5fb388*/
               }
             }
-            return;
-          case kFormType_SigilStone:
-            if ( a1 != TESDataHandler_g_PlayerRef )
-              goto LABEL_106;
-            if ( PlayerCharacter_IsPlayerInCombat(TESDataHandler_g_PlayerRef, 0) && !InterfaceManager_IsMenuMode() )
+            return; /*0x5fb351*/
+          case kFormType_SigilStone: /*0x5fb082*/
+            if ( a1 != (TESObjectREFR *)reference ) /*0x5fb504*/
+              goto LABEL_106; /*0x5fb504*/
+            if ( PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)reference, 0) && !InterfaceManager_IsMenuMode() ) /*0x5fb515*/
             {
-              __asm { fld     dword ptr ds:0A30634h }
+              __asm { fld     dword ptr ds:0A30634h } /*0x5fb51e*/
               __asm { fstp    [esp+30h+duration]; duration }
-              GameUI_QueueMessage((const char *)dword_B38A68, 0, 1u, durationi);
-              return;
+              GameUI_QueueMessage(stru_B38A68.value, 0, 1u, durationi); /*0x5fb533*/
+              return; /*0x5fb53b*/
             }
-            if ( TESDataHandler_g_PlayerRef->vtbl->super.GetMountedHorse(TESDataHandler_g_PlayerRef)
-              && a1->vtbl->super.super.super.GetSleepState((TESObjectREFR *)a1) )
+            if ( reference->vtbl->super.GetMountedHorse(reference) && a1->vtbl->GetSleepState(a1) ) /*0x5fb55e*/
             {
-              __asm { fld     dword ptr ds:0A30634h }
+              __asm { fld     dword ptr ds:0A30634h } /*0x5fb564*/
               __asm { fstp    [esp+30h+duration]; duration }
-              GameUI_QueueMessage((const char *)TESObjectREFR, 0, 1u, durationj);
-              return;
+              GameUI_QueueMessage(MEMORY[0xB38A40].value, 0, 1u, durationj); /*0x5fb579*/
+              return; /*0x5fb581*/
             }
-            sub_57CC00((char)v30, st5_0, st6_0, st7_0);
-            sub_5D5200(st5_0, st7_0, st6_0, (int)a2);
+            sub_57CC00((char)v30, st5_0, st6_0, st7_0, st0_0, a10, a9, st3_0); /*0x5fb586*/
+            sub_5D5200(st5_0, st7_0, st6_0, (int)a2); /*0x5fb58c*/
 LABEL_106:
-            if ( a2 != (TESForm *)TESDataHandler_g_RepairHammer || a1 != TESDataHandler_g_PlayerRef )
-              goto LABEL_112;
-            if ( PlayerCharacter_IsPlayerInCombat(TESDataHandler_g_PlayerRef, 0) && !dword_B38A90 )
+            if ( a2 != (TESForm *)MEMORY[0xB35ED0] || a1 != (TESObjectREFR *)reference ) /*0x5fb695*/
+              goto LABEL_112; /*0x5fb695*/
+            if ( PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)reference, 0) && !stru_B38A90.value ) /*0x5fb6a2*/
             {
-              __asm { fld     dword ptr ds:0A30634h }
+              __asm { fld     dword ptr ds:0A30634h } /*0x5fb6ab*/
               __asm { fstp    [esp+30h+duration]; duration }
-              GameUI_QueueMessage((const char *)dword_B38A78, 0, 1u, durationn);
-              return;
+              GameUI_QueueMessage(stru_B38A78.value, 0, 1u, durationn); /*0x5fb6bf*/
+              return; /*0x5fb6c7*/
             }
-            v75 = 0;
-            sub_57CC00((char)v30, st5_0, st6_0, st7_0);
-            sub_5D2070(st7_0, st6_0, 1, a12, 0, 0);
+            v75 = 0; /*0x5fb6cc*/
+            sub_57CC00((char)v30, st5_0, st6_0, st7_0, st0_0, a10, a9, st3_0); /*0x5fb6d1*/
+            RepairMenu_Create(st7_0, st5_0, 1, maximumMatches, 0, 0); /*0x5fb6e1*/
 LABEL_112:
-            if ( a2 == (TESForm *)TESDataHandler_g_VarlaStone && a1 == TESDataHandler_g_PlayerRef )
+            if ( a2 == (TESForm *)MEMORY[0xB35EDC] && a1 == (TESObjectREFR *)reference ) /*0x5fb6fd*/
             {
-              if ( PlayerCharacter_IsPlayerInCombat(TESDataHandler_g_PlayerRef, 0) && !dword_B38A88 )
+              if ( PlayerCharacter_IsPlayerInCombat((TESObjectREFR ***)reference, 0) && !stru_B38A88.value ) /*0x5fb715*/
               {
 LABEL_93:
-                __asm { fld     dword ptr ds:0A30634h }
+                __asm { fld     dword ptr ds:0A30634h } /*0x5fb5bb*/
                 __asm { fstp    [esp+30h+duration]; duration }
-                GameUI_QueueMessage((const char *)dword_B38A70, 0, 1u, durationk);
-                return;
+                GameUI_QueueMessage(stru_B38A70.value, 0, 1u, durationk); /*0x5fb5d0*/
+                return; /*0x5fb5d8*/
               }
-              v75 = 0;
-              if ( sub_5E0860((TESObjectREFR *)a1) )
+              v75 = 0; /*0x5fb71d*/
+              if ( sub_5E0860(a1) ) /*0x5fb722*/
               {
-                v44 = ((double (__thiscall *)(PlayerCharacter *, TESForm *, ExtraDataList **, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int, _DWORD))a1->vtbl->super.super.super.RemoveItem)(
+                v44 = ((double (__thiscall *)(TESObjectREFR *, TESForm *, ExtraDataList **, int, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, int, _DWORD))a1->vtbl->RemoveItem)( /*0x5fb74b*/
                         a1,
                         a2,
                         a13,
@@ -466,53 +443,53 @@ LABEL_93:
                         0,
                         1,
                         0);
-                __asm { fld     dword ptr ds:0A379B4h }
+                __asm { fld     dword ptr ds:0A379B4h } /*0x5fb74d*/
                 __asm { fstp    [esp+38h+var_38]; float }
-                QueueUIMessage((char)v30, v44, st6_0, (const char *)dword_B38890, v53, 0, 0);
-                v45 = sub_447490("ITMWelkyndStoneUse");
-                if ( v45 )
+                QueueUIMessage(v44, st6_0, (char *)stru_B38890.value, v53, 0, 0); /*0x5fb761*/
+                v45 = SoundMap_ResolveAnimSoundNote("ITMWelkyndStoneUse"); /*0x5fb774*/
+                if ( v45 ) /*0x5fb77b*/
                 {
-                  v46 = (Sky *)sub_65AC50(a1, *(_DWORD *)(v45 + 0xC), 0, 1, 1);
-                  ItemCount = v46;
-                  if ( v46 )
+                  v46 = (TESHealthForm *)sub_65AC50(a1, *(_DWORD *)(v45 + 0xC), 0, 1, 1); /*0x5fb789*/
+                  ItemCount = v46; /*0x5fb78e*/
+                  if ( v46 ) /*0x5fb792*/
                   {
-                    sub_6B73E0(v46);
-                    FormHeapFree((unsigned int)ItemCount);
+                    sub_6B73E0(v46); /*0x5fb796*/
+                    FormHeapFree((unsigned int)ItemCount); /*0x5fb79c*/
                   }
                 }
               }
               else
               {
-                __asm { fld     dword ptr ds:0A30634h }
+                __asm { fld     dword ptr ds:0A30634h } /*0x5fb7a6*/
                 __asm { fstp    [esp+38h+var_38]; float }
-                QueueUIMessage((char)v30, st7_0, st6_0, (const char *)dword_B38878, v54, 0, 0);
+                QueueUIMessage(st7_0, st6_0, (char *)stru_B38878.value, v54, 0, 0); /*0x5fb7b9*/
               }
             }
-            v47 = (float *)TESDataHandler_g_PlayerRef;
-            if ( a2 == (TESForm *)TESDataHandler_g_WelkyndStone && a1 == (PlayerCharacter *)v47 )
+            v47 = (float *)reference; /*0x5fb7c7*/
+            if ( a2 == (TESForm *)MEMORY[0xB35ED8] && a1 == (TESObjectREFR *)v47 ) /*0x5fb7d5*/
             {
-              AVModifierf = Player_GetAVModifierf(v47, 0, 9);
-              __asm { fstp    [esp+2Ch+arg_C] }
-              a1->vtbl->super.GetAV_F((Actor *)a1, kActorVal_Magicka);
-              __asm { fstp    [esp+2Ch+var_14] }
-              BaseCalcAVi = Actor_GetBaseCalcAVi((int *)a1, (int)ItemCount, (int)a2, (int)a1, 9);
-              __asm
+              AVModifierf = Player_GetAVModifierf(v47, 0, 9); /*0x5fb7df*/
+              __asm { fstp    [esp+2Ch+arg_C] } /*0x5fb7e4*/
+              ((void (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_38)(a1, 9); /*0x5fb7f4*/
+              __asm { fstp    [esp+2Ch+var_14] } /*0x5fb7f6*/
+              maximumMatchesa = Actor_GetBaseCalcAVi((int *)a1, (int)ItemCount, (int)a2, (int)a1, 9); /*0x5fb803*/
+              __asm /*0x5fb807*/
               {
-                fild    [esp+2Ch+arg_4]
+                fild    [esp+2Ch+maximumMatches]
                 fadd    [esp+2Ch+arg_C]
                 fcomp   [esp+2Ch+var_14]
                 fnstsw  ax
               }
-              if ( (_AX & 0x4100) != 0 )
+              if ( (_AX & 0x4100) != 0 ) /*0x5fb818*/
               {
-                __asm { fld     dword ptr ds:0A30634h }
+                __asm { fld     dword ptr ds:0A30634h } /*0x5fb905*/
                 __asm { fstp    [esp+30h+duration]; duration }
-                GameUI_QueueMessage((const char *)dword_B38E98, 0, 1u, durationo);
+                GameUI_QueueMessage(stru_B38E98.value, 0, 1u, durationo); /*0x5fb91a*/
               }
               else
               {
-                v82 = Actor_GetBaseCalcAVi((int *)a1, (int)ItemCount, (int)a2, (int)a1, 9);
-                __asm { fild    [esp+2Ch+arg_4] }
+                maximumMatchesb = Actor_GetBaseCalcAVi((int *)a1, (int)ItemCount, (int)a2, (int)a1, 9); /*0x5fb829*/
+                __asm { fild    [esp+2Ch+maximumMatches] } /*0x5fb82d*/
                 __asm
                 {
                   fadd    [esp+30h+arg_C]
@@ -520,73 +497,58 @@ LABEL_93:
                   fld     [esp+30h+arg_C]
                   fstp    [esp+30h+var_14]
                 }
-                a1->vtbl->super.GetAV_F((Actor *)a1, kActorVal_Magicka);
-                __asm { fsubr   [esp+2Ch+var_14] }
+                ((void (__thiscall *)(TESObjectREFR *, int))a1->vtbl[1].Unk_38)(a1, 9); /*0x5fb84b*/
+                __asm { fsubr   [esp+2Ch+var_14] } /*0x5fb84d*/
                 __asm
                 {
                   fstp    [esp+34h+arg_C]
                   fld     [esp+34h+arg_C]
                 }
                 __asm { fstp    [esp+34h+var_34] }
-                ((void (__thiscall *)(PlayerCharacter *, int, _DWORD, _DWORD))a1->vtbl->super.DamageAV_F)(
-                  a1,
-                  9,
-                  LODWORD(v56),
-                  0);
-                if ( TESDataHandler_g_PlayerRef == a1 )
+                ((void (__thiscall *)(TESObjectREFR *, int, _DWORD, _DWORD))a1->vtbl[1].Unk_3F)(a1, 9, LODWORD(v56), 0); /*0x5fb86b*/
+                if ( reference == (PlayerCharacter *)a1 ) /*0x5fb873*/
                 {
-                  __asm { fld     dword ptr ds:0A30634h }
+                  __asm { fld     dword ptr ds:0A30634h } /*0x5fb875*/
                   __asm { fstp    [esp+38h+var_38]; float }
-                  QueueUIMessage((char)v30, AVModifierf, st6_0, (const char *)dword_B38888, v55, 0, 0);
+                  QueueUIMessage(AVModifierf, st6_0, (char *)stru_B38888.value, v55, 0, 0); /*0x5fb88a*/
                 }
-                v50 = sub_447490("ITMWelkyndStoneUse");
-                if ( v50 )
+                v50 = SoundMap_ResolveAnimSoundNote("ITMWelkyndStoneUse"); /*0x5fb89d*/
+                if ( v50 ) /*0x5fb8a4*/
                 {
-                  v51 = (_DWORD *)sub_65AC50(a1, *(_DWORD *)(v50 + 0xC), 0, 1, 1);
-                  v52 = (unsigned int)v51;
-                  if ( v51 )
+                  v51 = (_DWORD *)sub_65AC50(a1, *(_DWORD *)(v50 + 0xC), 0, 1, 1); /*0x5fb8b2*/
+                  v52 = (unsigned int)v51; /*0x5fb8b7*/
+                  if ( v51 ) /*0x5fb8bb*/
                   {
-                    sub_6B73E0(v51);
-                    FormHeapFree(v52);
+                    sub_6B73E0(v51); /*0x5fb8bf*/
+                    FormHeapFree(v52); /*0x5fb8c5*/
                   }
                 }
-                Script_AddEventToExtraScript(a1, a13, 2);
-                a1->vtbl->super.super.super.RemoveItem(
-                  (TESObjectREFR *)a1,
-                  a2,
-                  (BaseExtraList *)a13,
-                  1,
-                  0,
-                  0,
-                  0,
-                  0,
-                  0,
-                  1,
-                  0);
-                sub_5C1900();
+                Script_AddEventToExtraScript(a1, a13, 2); /*0x5fb8d5*/
+                a1->vtbl->RemoveItem(a1, a2, (BaseExtraList *)a13, 1, 0, 0, 0, 0, 0, 1, 0); /*0x5fb8f9*/
+                PlayerCharacter_ReconcileHotkeysAfterInventoryRemoval(); /*0x5fb8fb*/
               }
-              return;
+              return; /*0x5fb900*/
             }
-            if ( !v75 )
-              goto LABEL_134;
-            if ( a1 == (PlayerCharacter *)v47 )
+            if ( !v75 ) /*0x5fb929*/
+              goto LABEL_134; /*0x5fb929*/
+            if ( a1 == (TESObjectREFR *)v47 ) /*0x5fb92d*/
             {
-              __asm { fld     dword ptr ds:0A30634h }
+              __asm { fld     dword ptr ds:0A30634h } /*0x5fb92f*/
               __asm { fstp    [esp+30h+duration]; duration }
-              GameUI_QueueMessage((const char *)dword_B38A30, 0, 1u, durationp);
+              GameUI_QueueMessage(stru_B38A30.value, 0, 1u, durationp); /*0x5fb944*/
 LABEL_134:
-              if ( a1 == TESDataHandler_g_PlayerRef )
-                sub_5E99C0((TESObjectREFR *)a1, a2, 1, v76);
+              if ( a1 == (TESObjectREFR *)reference ) /*0x5fb952*/
+                sub_5E99C0(a1, (TESKey *)a2, 1, v76); /*0x5fb95e*/
             }
-            if ( !sub_45A500(SaveLoad_CurrentSavegame) )
+            if ( !sub_45A500(g_TESSaveLoadGame) ) /*0x5fb969*/
             {
-              Script_AddEventToExtraScript(a1, a13, 2);
-              Script_AddEventToExtraScript(a2, &a1->super.super.super.super.baseExtraList, 2);
+              Script_AddEventToExtraScript(a1, a13, 2); /*0x5fb97a*/
+              Script_AddEventToExtraScript(a2, &a1->member.baseExtraList, 2); /*0x5fb986*/
             }
-            break;
+            break; /*0x5fb986*/
           default:
-            v75 = 1;
-            goto LABEL_106;
+            v75 = 1; /*0x5fb680*/
+            goto LABEL_106; /*0x5fb680*/
         }
       }
     }

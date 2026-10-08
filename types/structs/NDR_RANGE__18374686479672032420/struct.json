@@ -1,34 +1,63 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NDR_RANGE",
+  "definition": "struct __unaligned __declspec(align(2)) NDR_RANGE\n{\nunsigned __int8 type;\nunsigned __int8 flags_type;\nULONG low_value;\nULONG high_value;\n}\n",
   "id": 18374686479672032420,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "type",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "flags_type",
       "offset": 1,
       "offset_hex": "0x1",
-      "size": 1
+      "size": 1,
+      "type": "unsigned __int8"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "low_value",
       "offset": 2,
       "offset_hex": "0x2",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "high_value",
       "offset": 6,
       "offset_hex": "0x6",
-      "size": 4
+      "size": 4,
+      "type": "ULONG"
     }
   ],
   "name": "NDR_RANGE",
+  "ordinal": 3123,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 10
 }

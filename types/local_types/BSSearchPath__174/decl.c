@@ -1,1 +1,1 @@
-BSSearchPath
+struct BSSearchPath;

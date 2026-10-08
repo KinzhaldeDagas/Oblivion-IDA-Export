@@ -1,118 +1,189 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "primitive_funcs",
+  "definition": "struct primitive_funcs\n{\nvoid (*solid_rects)(const dib_info *, int, const RECT *, DWORD, DWORD);\nvoid (*solid_line)(const dib_info *, const POINT *, const line_params *, DWORD, DWORD);\nvoid (*pattern_rects)(const dib_info *, int, const RECT *, const POINT *, const dib_info *, const rop_mask_bits *);\nvoid (*copy_rect)(const dib_info *, const RECT *, const dib_info *, const POINT *, int, int);\nvoid (*blend_rects)(const dib_info *, int, const RECT *, const dib_info *, const POINT *, BLENDFUNCTION);\nBOOL (*gradient_rect)(const dib_info *, const RECT *, const TRIVERTEX *, int);\nvoid (*mask_rect)(const dib_info *, const RECT *, const dib_info *, const POINT *, int);\nvoid (*draw_glyph)(const dib_info *, const RECT *, const dib_info *, const POINT *, DWORD, const intensity_range *);\nvoid (*draw_subpixel_glyph)(const dib_info *, const RECT *, const dib_info *, const POINT *, DWORD, const font_gamma_ramp *);\nDWORD (*get_pixel)(const dib_info *, int, int);\nDWORD (*colorref_to_pixel)(const dib_info *, COLORREF);\nCOLORREF (*pixel_to_colorref)(const dib_info *, DWORD);\nvoid (*convert_to)(dib_info *, const dib_info *, const RECT *, BOOL);\nvoid (*create_rop_masks)(const dib_info *, const BYTE *, const rop_mask *, const rop_mask *, rop_mask_bits *);\nvoid (*create_dither_masks)(const dib_info *, int, COLORREF, rop_mask_bits *);\nvoid (*stretch_row)(const dib_info *, const POINT *, const dib_info *, const POINT *, const stretch_params *, int, BOOL);\nvoid (*shrink_row)(const dib_info *, const POINT *, const dib_info *, const POINT *, const stretch_params *, int, BOOL);\nvoid (*halftone)(const dib_info *, const bitblt_coords *, const dib_info *, const bitblt_coords *);\n}\n",
   "id": 18374686479672026397,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "solid_rects",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, int, const RECT *, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "solid_line",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, const POINT *, const line_params *, DWORD, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pattern_rects",
       "offset": 8,
       "offset_hex": "0x8",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, int, const RECT *, const POINT *, const dib_info *, const rop_mask_bits *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "copy_rect",
       "offset": 12,
-      "offset_hex": "0xc",
-      "size": 4
+      "offset_hex": "0xC",
+      "size": 4,
+      "type": "void (*)(const dib_info *, const RECT *, const dib_info *, const POINT *, int, int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "blend_rects",
       "offset": 16,
       "offset_hex": "0x10",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, int, const RECT *, const dib_info *, const POINT *, BLENDFUNCTION)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "gradient_rect",
       "offset": 20,
       "offset_hex": "0x14",
-      "size": 4
+      "size": 4,
+      "type": "BOOL (*)(const dib_info *, const RECT *, const TRIVERTEX *, int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "mask_rect",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, const RECT *, const dib_info *, const POINT *, int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "draw_glyph",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 4
+      "offset_hex": "0x1C",
+      "size": 4,
+      "type": "void (*)(const dib_info *, const RECT *, const dib_info *, const POINT *, DWORD, const intensity_range *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "draw_subpixel_glyph",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, const RECT *, const dib_info *, const POINT *, DWORD, const font_gamma_ramp *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "get_pixel",
       "offset": 36,
       "offset_hex": "0x24",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (*)(const dib_info *, int, int)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "colorref_to_pixel",
       "offset": 40,
       "offset_hex": "0x28",
-      "size": 4
+      "size": 4,
+      "type": "DWORD (*)(const dib_info *, COLORREF)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "pixel_to_colorref",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "COLORREF (*)(const dib_info *, DWORD)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "convert_to",
       "offset": 48,
       "offset_hex": "0x30",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(dib_info *, const dib_info *, const RECT *, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_rop_masks",
       "offset": 52,
       "offset_hex": "0x34",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, const BYTE *, const rop_mask *, const rop_mask *, rop_mask_bits *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "create_dither_masks",
       "offset": 56,
       "offset_hex": "0x38",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, int, COLORREF, rop_mask_bits *)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "stretch_row",
       "offset": 60,
-      "offset_hex": "0x3c",
-      "size": 4
+      "offset_hex": "0x3C",
+      "size": 4,
+      "type": "void (*)(const dib_info *, const POINT *, const dib_info *, const POINT *, const stretch_params *, int, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "shrink_row",
       "offset": 64,
       "offset_hex": "0x40",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, const POINT *, const dib_info *, const POINT *, const stretch_params *, int, BOOL)"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "",
       "name": "halftone",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 4
+      "size": 4,
+      "type": "void (*)(const dib_info *, const bitblt_coords *, const dib_info *, const bitblt_coords *)"
     }
   ],
   "name": "primitive_funcs",
+  "ordinal": 1039,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 72
 }

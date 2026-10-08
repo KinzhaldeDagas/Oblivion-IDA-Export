@@ -5,21 +5,21 @@
 0x67DE99: test    edi, edi
 0x67DE9B: mov     esi, ecx
 0x67DE9D: jz      loc_67DFED
-0x67DEA3: mov     ecx, edi
-0x67DEA5: call    sub_42B410
+0x67DEA3: mov     ecx, edi; this
+0x67DEA5: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x67DEAA: test    eax, eax
 0x67DEAC: jz      loc_67DFED
 0x67DEB2: mov     eax, ds:0B333A0h
 0x67DEB7: cmp     dword ptr [eax+34h], 0
 0x67DEBB: jnz     loc_67DFED
-0x67DEC1: mov     ecx, [esi+24h]
+0x67DEC1: mov     ecx, [esi+24h]; this
 0x67DEC4: test    ecx, ecx
 0x67DEC6: jnz     short loc_67DF17
 0x67DEC8: mov     [esp+38h+arg_0], ecx
 0x67DECC: lea     ecx, [esp+38h+arg_0]
 0x67DED0: push    ecx
-0x67DED1: mov     ecx, edi
-0x67DED3: call    TESHealthForm_GetHealth
+0x67DED1: mov     ecx, edi; this
+0x67DED3: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x67DED8: push    eax
 0x67DED9: mov     ecx, edi
 0x67DEDB: call    sub_68BF60
@@ -28,7 +28,7 @@
 0x67DEE4: mov     ecx, [esp+38h+arg_0]
 0x67DEE8: test    ecx, ecx
 0x67DEEA: jz      short loc_67DF07
-0x67DEEC: call    sub_6899C0
+0x67DEEC: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x67DEF1: mov     edx, [eax]
 0x67DEF3: mov     [esp+38h+var_30], edx
 0x67DEF7: mov     ecx, [eax+4]
@@ -36,12 +36,12 @@
 0x67DEFE: mov     edx, [eax+8]
 0x67DF01: mov     [esp+38h+var_28], edx
 0x67DF05: jmp     short loc_67DF30
-0x67DF07: mov     ecx, edi
-0x67DF09: call    sub_42B410
+0x67DF07: mov     ecx, edi; this
+0x67DF09: call    TeleportData_GetLinkedDoor; Verified TeleportData_GetLinkedDoor returns TeleportData.linkedDoor from offset +0. This operates on TeleportData, which is the payload pointer stored at ExtraTeleport+0x0C, not on the ExtraTeleport object itself.
 0x67DF0E: mov     ecx, eax
-0x67DF10: call    sub_6899C0
+0x67DF10: call    EmbeddedList_GetHead; ExtraTeleport_GetPosition-style accessor: returns ExtraTeleport+4, the stored xyz marker position used by TravelPath distance/teleport resolution.
 0x67DF15: jmp     short loc_67DF1C
-0x67DF17: call    sub_4BEF40
+0x67DF17: call    PathGraphNode_GetPosition; Verified shared graph-node position accessor: returns this+0x14, used by TESConnectedPoint and TESPathGridPoint distance, serialization, and route-generation code.
 0x67DF1C: mov     ecx, [eax]
 0x67DF1E: mov     [esp+38h+var_30], ecx
 0x67DF22: mov     edx, [eax+4]
@@ -71,9 +71,9 @@
 0x67DF70: fld     dword ptr [esi+8]
 0x67DF73: fsub    [esp+38h+var_28]
 0x67DF77: fstp    [esp+38h+var_1C]
-0x67DF7B: call    sub_43F350
+0x67DF7B: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x67DF80: fstp    st
-0x67DF82: mov     ecx, edi
+0x67DF82: mov     ecx, edi; this
 0x67DF84: fld     [esp+38h+var_28]
 0x67DF88: fst     [esp+38h+var_10]
 0x67DF8C: fld     [esp+38h+var_18]
@@ -102,7 +102,7 @@
 0x67DFCC: fstp    [esp+38h+var_20]
 0x67DFD0: fsubp   st(1), st
 0x67DFD2: fstp    [esp+38h+var_1C]
-0x67DFD6: call    TESHealthForm_GetHealth
+0x67DFD6: call    TESHealthForm_GetHealth; TESHealthForm scalar getter: returns the unsigned health value stored at TESHealthForm+0x4.
 0x67DFDB: push    eax
 0x67DFDC: lea     eax, [esp+3Ch+var_C]
 0x67DFE0: push    eax

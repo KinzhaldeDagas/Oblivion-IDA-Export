@@ -1,4 +1,4 @@
-0x55ED30: push    0FFFFFFFFh
+0x55ED30: push    0FFFFFFFFh; Verified one-slot base model cache. For each TESObjectTREE, compares requested seed against BSTreeModel.seed at +0x48; same seed returns the cached model, different seed replaces the only slot. Cache operation is protected by g_BSTreeManager_TreeCriticalSection.
 0x55ED32: push    offset SEH_55ED30
 0x55ED37: mov     eax, large fs:0
 0x55ED3D: push    eax
@@ -15,24 +15,24 @@
 0x55ED55: mov     esi, ecx
 0x55ED57: xor     edi, edi
 0x55ED59: push    offset unk_A2F830; lpCriticalSection
-0x55ED5E: mov     ecx, offset stru_B39E80
+0x55ED5E: mov     ecx, offset g_BSTreeManager_TreeCriticalSection
 0x55ED63: mov     [esp+28h+var_4], edi
 0x55ED67: mov     [esp+28h+var_10], edi
-0x55ED6B: call    NiEnterCriticalSection
-0x55ED70: mov     ebx, [esp+24h+arg_0]
+0x55ED6B: call    NiEnterCriticalSection; Verified: serializes the one-slot TESObjectTREE* -> BSTreeModel* seed cache with the tree critical section. Cache hits compare requested seed with BSTreeModel.seed (+0x48); a miss replaces the lone cached model. Fallout has matching one-entry-per-tree cache behavior, but its BSTreeModel and BSTreeManager layouts differ; do not transplant offsets.
+0x55ED70: mov     ebx, [esp+24h+treeObject]
 0x55ED74: mov     [ebx], edi
-0x55ED76: mov     eax, [esp+24h+arg_4]
+0x55ED76: mov     eax, [esp+24h+seed]
 0x55ED7A: cmp     eax, edi
 0x55ED7C: mov     [esp+24h+var_4], edi
 0x55ED80: mov     [esp+24h+var_10], 1
 0x55ED88: jz      loc_55EEE1
-0x55ED8E: push    eax
-0x55ED8F: mov     ecx, esi
-0x55ED91: call    sub_55EC20
-0x55ED96: mov     ecx, [esp+24h+arg_8]
+0x55ED8E: push    eax; tree
+0x55ED8F: mov     ecx, esi; this
+0x55ED91: call    BSTreeManager_GetModelArray; Verified BSTreeManager.modelCacheByTree at +0: lazily creates a 37-bucket NiTPointerMap<TESObjectTREE*, NiPointer<BSTreeModel>*> and gives each tree form a one-element smart-pointer array.
+0x55ED96: mov     ecx, [esp+24h+modelOut]
 0x55ED9A: or      edx, 0FFFFFFFFh
 0x55ED9D: mov     ebp, eax
-0x55ED9F: mov     [esp+24h+arg_4], edx
+0x55ED9F: mov     [esp+24h+seed], edx
 0x55EDA3: xor     eax, eax
 0x55EDA5: mov     esi, [ebp+eax*4+0]
 0x55EDA9: cmp     esi, edi
@@ -63,7 +63,7 @@
 0x55EDE4: mov     esi, [ebx]
 0x55EDE6: test    esi, esi
 0x55EDE8: jnz     loc_55EEE1
-0x55EDEE: cmp     [esp+24h+arg_4], esi
+0x55EDEE: cmp     [esp+24h+seed], esi
 0x55EDF2: jge     short loc_55EE3F
 0x55EDF4: cmp     esi, [ebp+0]
 0x55EDF7: jz      loc_55EEE1
@@ -84,9 +84,9 @@
 0x55EE1D: mov     eax, [ebp+0]
 0x55EE20: mov     [ebx], eax
 0x55EE22: jmp     loc_55EED3
-0x55EE27: cmp     [esp+24h+arg_4], edx
+0x55EE27: cmp     [esp+24h+seed], edx
 0x55EE2B: jnz     short loc_55EE31
-0x55EE2D: mov     [esp+24h+arg_4], eax
+0x55EE2D: mov     [esp+24h+seed], eax
 0x55EE31: add     eax, 1
 0x55EE34: cmp     eax, 1
 0x55EE37: jl      loc_55EDA5
@@ -94,12 +94,12 @@
 0x55EE3F: push    58h ; 'X'; Size
 0x55EE41: call    FormHeapAlloc
 0x55EE46: add     esp, 4
-0x55EE49: mov     [esp+24h+arg_8], eax
+0x55EE49: mov     [esp+24h+modelOut], eax
 0x55EE4D: test    eax, eax
 0x55EE4F: mov     [esp+24h+var_4], 1
 0x55EE57: jz      short loc_55EE64
 0x55EE59: mov     ecx, eax; this
-0x55EE5B: call    ??0BSTreeModel@@QAE@XZ; BSTreeModel::BSTreeModel(void)
+0x55EE5B: call    BSTreeModel_ctor; Verified current STBB layout view: BSTreeModel_OblivionLayout_058_STBBVerified refines model+0x1C to NiTriShape* billboardShape_STBB. This supersedes the earlier partial +0x1C NiStream view; the ctor initializes the shape pointer null.
 0x55EE60: mov     edi, eax
 0x55EE62: jmp     short loc_55EE66
 0x55EE64: xor     edi, edi
@@ -127,7 +127,7 @@
 0x55EE97: add     edi, 4
 0x55EE9A: push    edi; lpAddend
 0x55EE9B: call    dword ptr ds:0A28078h
-0x55EEA1: mov     edi, [esp+24h+arg_4]
+0x55EEA1: mov     edi, [esp+24h+seed]
 0x55EEA5: mov     esi, [ebp+edi*4+0]
 0x55EEA9: cmp     esi, [ebx]
 0x55EEAB: jz      short loc_55EEE1
@@ -152,7 +152,7 @@
 0x55EED7: add     eax, 4
 0x55EEDA: push    eax; lpAddend
 0x55EEDB: call    dword ptr ds:0A28078h
-0x55EEE1: mov     ecx, offset stru_B39E80; lpCriticalSection
+0x55EEE1: mov     ecx, offset g_BSTreeManager_TreeCriticalSection; lpCriticalSection
 0x55EEE6: call    NiLeaveCriticalSection_0
 0x55EEEB: mov     eax, ebx
 0x55EEED: mov     ecx, [esp+24h+var_C]
@@ -164,3 +164,22 @@
 0x55EEFC: pop     ebx
 0x55EEFD: add     esp, 10h
 0x55EF00: retn    0Ch
+0x9BCC10: mov     eax, [ebp-10h]
+0x9BCC13: and     eax, 1
+0x9BCC16: jz      locret_9BCC28
+0x9BCC1C: and     dword ptr [ebp-10h], 0FFFFFFFEh
+0x9BCC20: mov     ecx, [ebp+4]; slot
+0x9BCC23: jmp     NiPointerSlot_Release
+0x9BCC28: retn
+0x9BCC29: mov     eax, [ebp+0Ch]
+0x9BCC2C: push    eax
+0x9BCC2D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9BCC32: pop     ecx
+0x9BCC33: retn
+0x9BCC34: mov     edx, [esp+seed]
+0x9BCC38: lea     eax, [edx-14h]
+0x9BCC3B: mov     ecx, [edx-18h]
+0x9BCC3E: xor     ecx, eax
+0x9BCC40: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BCC45: mov     eax, offset stru_AE6780
+0x9BCC4A: jmp     ___CxxFrameHandler3

@@ -13,18 +13,18 @@ bool __cdecl sub_50BE80(
   UInt16 v10[2]; // [esp+0h] [ebp-8h] BYREF
   int v11; // [esp+4h] [ebp-4h] BYREF
 
-  *(_DWORD *)v10 = 0;
-  v11 = 0;
-  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v10, &v11);
-  if ( result )
+  *(_DWORD *)v10 = 0; /*0x50beb0*/
+  v11 = 0; /*0x50beb8*/
+  result = Script_ExtractArgs(a1, a2, a3, a4, argC, a5, l, v10, &v11); /*0x50bec0*/
+  if ( result ) /*0x50beca*/
   {
-    v9 = *(_DWORD *)v10;
-    if ( v11 )
-      *(_BYTE *)(*(_DWORD *)v10 + 0x34) |= 0x20u;
+    v9 = *(_DWORD *)v10; /*0x50beda*/
+    if ( v11 ) /*0x50bedc*/
+      *(_BYTE *)(*(_DWORD *)v10 + 0x34) |= 0x20u; /*0x50bede*/
     else
-      *(_BYTE *)(*(_DWORD *)v10 + 0x34) &= ~0x20u;
-    (*(void (__thiscall **)(int, int))(*(_DWORD *)v9 + 0x40))(v9, 4);
-    return 1;
+      *(_BYTE *)(*(_DWORD *)v10 + 0x34) &= ~0x20u; /*0x50beef*/
+    (*(void (__thiscall **)(int, int))(*(_DWORD *)v9 + 0x40))(v9, 4); /*0x50bee7*/
+    return 1; /*0x50bee9*/
   }
-  return result;
+  return result; /*0x50becc*/
 }

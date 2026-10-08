@@ -1,18 +1,31 @@
 {
-  "callees_count": 13,
-  "callers_count": 18,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 95,
+  "chunks": [
+    [
+      "0x403520",
+      "0x4035C5"
+    ]
+  ],
+  "chunks_sha256": "c9efee77eb9527c74b06c45e4e90f2b70a07d81910c13e671a4f0baed06816e2",
+  "comment_regular": "[Controller decode 2026-07-09] Logical control query. For controlId < 29, scans keyboard, mouse, and first joystick binding blocks only. Special controls: 29 Escape, 30 Grave/console, 31 SysRq/PrintScreen; these are keyboard-only edge checks.\n\n[Controller decode 2026-07-09] Central decoded PC controller/joystick/IsXBox summary is stored in IDB netnode \"$ ControllerStuff\"; full external doc is C:\\src\\OblivionIDA\\ControllerStuff.md.\n\n[Controller decode 2026-07-09] Controller decode completion estimate stored in IDB netnode \"$ ControllerStuff\" sup 200. Current overall decoded PC Controller/IsXBox/Joystick knowledge is about 92%.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1065; metadata at sup 999; completion estimate at sup 200.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1067; metadata at sup 999; completion estimate at sup 200.\n\nTES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.\n\n[Controller decode 2026-07-09] Logical control query. For controlId < 29, scans keyboard, mouse, and first joystick binding blocks only. Special controls: 29 Escape, 30 Grave/console, 31 SysRq/PrintScreen; these are keyboard-only edge checks.\n\n[Controller decode 2026-07-09] Central decoded PC controller/joystick/IsXBox summary is stored in IDB netnode \"$ ControllerStuff\"; full external doc is C:\\src\\OblivionIDA\\ControllerStuff.md.\n\n[Controller decode 2026-07-09] Controller decode completion estimate stored in IDB netnode \"$ ControllerStuff\" sup 200. Current overall decoded PC Controller/IsXBox/Joystick knowledge is about 92%.\n\n[Controller decode 2026-07-09] Full ControllerStuff.md is embedded in IDB netnode \"$ ControllerStuff\" sup 1000..1065; metadata at sup 999; completion es",
+  "comment_repeatable": "TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "InputGlobals::QueryControlState",
   "end_ea": "0x4035C5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "InputGlobals::QueryControlState",
   "segment": ".text",
   "sha256": "c9efee77eb9527c74b06c45e4e90f2b70a07d81910c13e671a4f0baed06816e2",
   "size": 165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x403520",
+  "total_chunk_size": 165,
   "type": "signed int __thiscall(InputGlobal *this, signed int a2, int a3)",
   "xrefs_from_count": 70,
   "xrefs_to_count": 95

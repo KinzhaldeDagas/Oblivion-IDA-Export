@@ -50,7 +50,7 @@
 0x5015CA: call    Interface_ConsolePrint
 0x5015CF: add     esp, 4
 0x5015D2: xor     esi, esi
-0x5015D4: mov     edi, ds:Script_CommandList?.helpText[esi]
+0x5015D4: mov     edi, ds:Script_CommandList.helpText[esi]
 0x5015DA: test    edi, edi
 0x5015DC: jz      short loc_50163A
 0x5015DE: mov     eax, edi
@@ -61,7 +61,7 @@
 0x5015EA: jnz     short loc_5015E3
 0x5015EC: sub     eax, edx
 0x5015EE: jz      short loc_50163A
-0x5015F0: mov     edx, ds:Script_CommandList?.shortName[esi]
+0x5015F0: mov     edx, ds:Script_CommandList.shortName[esi]
 0x5015F6: test    edx, edx
 0x5015F8: jz      short loc_501625
 0x5015FA: mov     eax, edx
@@ -75,13 +75,13 @@
 0x50160B: jz      short loc_501625
 0x50160D: push    edi
 0x50160E: push    edx
-0x50160F: mov     edx, dword ptr ds:Script_CommandList?.longName[esi]
+0x50160F: mov     edx, dword ptr ds:Script_CommandList.longName[esi]
 0x501615: push    edx
 0x501616: push    offset aSSS_5; "%s (%s) -> %s"
 0x50161B: call    Interface_ConsolePrint
 0x501620: add     esp, 10h
 0x501623: jmp     short loc_50163A
-0x501625: mov     eax, dword ptr ds:Script_CommandList?.longName[esi]
+0x501625: mov     eax, dword ptr ds:Script_CommandList.longName[esi]
 0x50162B: push    edi
 0x50162C: push    eax
 0x50162D: push    offset aSS_9; "%s -> %s"

@@ -1,49 +1,47 @@
-_DWORD *__thiscall sub_8AA710(_DWORD *this, unsigned int a2, int a3)
+_DWORD *__thiscall sub_8AA710(_DWORD *this, unsigned int a2, NiPoint3 *a3)
 {
   double v3; // st7
   bool v6; // al
   int v7; // edx
-  float *v8; // ecx
+  NiPoint3 *v8; // ecx
   _DWORD *result; // eax
-  float v10; // [esp+4h] [ebp-Ch] BYREF
-  float v11; // [esp+8h] [ebp-8h]
-  float v12; // [esp+Ch] [ebp-4h]
-  float v13; // [esp+14h] [ebp+4h]
+  NiPoint3 other; // [esp+4h] [ebp-Ch] BYREF
+  float v11; // [esp+14h] [ebp+4h]
 
-  v10 = flt_A30634;
-  v3 = 0.0 / fCostant_100;
-  if ( a2 < *(this + 3) )
+  other.x = kTerrainLODQuadRayDirectionZ; /*0x8aa71e*/
+  v3 = 0.0 / fCostant_100; /*0x8aa725*/
+  if ( a2 < *(this + 3) ) /*0x8aa735*/
   {
-    v13 = v3;
-    v12 = v13;
-    v11 = v13;
-    v6 = sub_8AA390((float *)a3, &v10);
-    v7 = *(this + 1);
-    v10 = flt_A30634;
-    v12 = v13;
-    v8 = (float *)(v7 + 0xC * a2);
-    v11 = v13;
-    if ( v6 )
+    v11 = v3; /*0x8aa75f*/
+    other.z = v11; /*0x8aa76c*/
+    other.y = v11; /*0x8aa776*/
+    v6 = NiPoint3__NotEqual(a3, &other); /*0x8aa77a*/
+    v7 = *(this + 1); /*0x8aa785*/
+    other.x = kTerrainLODQuadRayDirectionZ; /*0x8aa788*/
+    other.z = v11; /*0x8aa795*/
+    v8 = (NiPoint3 *)(v7 + 0xC * a2); /*0x8aa7a1*/
+    other.y = v11; /*0x8aa7a4*/
+    if ( v6 ) /*0x8aa7a9*/
     {
-      if ( sub_8AA350(v8, &v10) )
-        ++*(this + 4);
+      if ( sub_8AA350(&v8->x, &other.x) ) /*0x8aa7ab*/
+        ++*(this + 4); /*0x8aa7b4*/
     }
-    else if ( sub_8AA390(v8, &v10) )
+    else if ( NiPoint3__NotEqual(v8, &other) ) /*0x8aa7ba*/
     {
-      --*(this + 4);
+      --*(this + 4); /*0x8aa7c3*/
     }
   }
   else
   {
-    v12 = v3;
-    v11 = v12;
-    *(this + 3) = a2 + 1;
-    if ( sub_8AA390((float *)a3, &v10) )
-      ++*(this + 4);
+    other.z = v3; /*0x8aa737*/
+    other.y = other.z; /*0x8aa747*/
+    *(this + 3) = a2 + 1; /*0x8aa74d*/
+    if ( NiPoint3__NotEqual(a3, &other) ) /*0x8aa750*/
+      ++*(this + 4); /*0x8aa759*/
   }
-  result = (_DWORD *)(*(this + 1) + 0xC * a2);
-  *result = *(_DWORD *)a3;
-  result[1] = *(_DWORD *)(a3 + 4);
-  result[2] = *(_DWORD *)(a3 + 8);
-  return result;
+  result = (_DWORD *)(*(this + 1) + 0xC * a2); /*0x8aa7cf*/
+  *result = LODWORD(a3->x); /*0x8aa7d2*/
+  result[1] = LODWORD(a3->y); /*0x8aa7d8*/
+  result[2] = LODWORD(a3->z); /*0x8aa7df*/
+  return result; /*0x8aa7e2*/
 }

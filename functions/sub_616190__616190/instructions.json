@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x616190",
-    "line": "sub     esp, 0Ch",
+    "line": "sub     esp, 0Ch; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x616249",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Allocates a fresh 0x14-byte TargetInfo from FormHeap; address reuse makes pointer-only sidecar identity unsafe.",
     "mnemonic": "call",
     "size": 5
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x616267",
-    "line": "push    offset sub_614190",
+    "line": "push    offset CombatTargetInfo_ComparePriorityDescending",
     "mnemonic": "push",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x6162A5",
-    "line": "call    TeSPackage_TargetData_SetTargetREFR",
+    "line": "call    TeSPackage_TargetData_SetTargetREFR; 3DTheft decode: TargetData_SetTargetREFR only writes the reference field when targetType is 0 (reference target). It does not set count.",
     "mnemonic": "call",
     "size": 5
   },
@@ -577,7 +577,7 @@
   },
   {
     "ea": "0x6162BF",
-    "line": "call    sub_624030",
+    "line": "call    CombatController_RefreshTacticalState; Refreshes detection/allies tactical state; allied controllers in active modes 2 (ranged weapon) and 4 (ranged spell) are counted as ranged roles.",
     "mnemonic": "call",
     "size": 5
   },

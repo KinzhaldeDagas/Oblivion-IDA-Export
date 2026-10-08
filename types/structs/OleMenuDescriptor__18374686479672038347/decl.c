@@ -1,1 +1,1 @@
-OleMenuDescriptor
+typedef tagOleMenuDescriptor OleMenuDescriptor;

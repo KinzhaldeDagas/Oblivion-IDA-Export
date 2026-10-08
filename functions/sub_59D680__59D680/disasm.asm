@@ -19,9 +19,9 @@
 0x59D6AD: mov     ebx, eax
 0x59D6AF: call    InterfaceManager_GetDepth
 0x59D6B4: fstp    [esp+1Ch+var_10]
-0x59D6B8: mov     ecx, [ebx+68h]; TileWindow *
+0x59D6B8: mov     ecx, [ebx+68h]; this
 0x59D6BB: push    offset aDataMenusOpt_8; "Data\\Menus\\Options\\credits_menu.xml"
-0x59D6C0: call    Menu_LoadXML
+0x59D6C0: call    Tile__ReadFile; Verified: SDK ReadXML entry. Builds named tree under receiver via 0x590330, connects/evaluates traits via 0x58CF40, registers subtemplates with owning Menu, frees build storage, refreshes returned subtree via 0x58FBA0. Returns first created tile. Fallout analogue 0x827E2588; cache/cleanup differs.
 0x59D6C5: mov     edi, eax
 0x59D6C7: mov     ecx, edi
 0x59D6C9: call    Tile_GetParentMenu
@@ -66,16 +66,16 @@
 0x59D740: cmp     byte ptr ds:0B3B290h, 0
 0x59D747: jz      short loc_59D7A5
 0x59D749: push    offset aBackground; "background"
-0x59D74E: mov     ecx, edi
-0x59D750: call    sub_589930
+0x59D74E: mov     ecx, edi; this
+0x59D750: call    Tile_FindDescendantByName
 0x59D755: test    eax, eax
 0x59D757: jz      short loc_59D76B
 0x59D759: fldz
 0x59D75B: push    ecx
-0x59D75C: fstp    [esp+20h+var_20]; a3
+0x59D75C: fstp    [esp+20h+var_20]; value
 0x59D75F: mov     ecx, eax; this
-0x59D761: push    0FA7h; a2
-0x59D766: call    Tile_SetFloat
+0x59D761: push    0FA7h; propertyCode
+0x59D766: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59D76B: push    414h
 0x59D770: call    Menu_GetOpenMenuTile
 0x59D775: add     esp, 4
@@ -110,10 +110,10 @@
 0x59D7D5: jp      short loc_59D7EB
 0x59D7D7: fld     [esp+1Ch+var_10]
 0x59D7DB: push    ecx
-0x59D7DC: fstp    [esp+20h+var_20]; a3
-0x59D7DF: push    0FABh; a2
+0x59D7DC: fstp    [esp+20h+var_20]; value
+0x59D7DF: push    0FABh; propertyCode
 0x59D7E4: mov     ecx, edi; this
-0x59D7E6: call    Tile_SetFloat
+0x59D7E6: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59D7EB: xor     ecx, ecx
 0x59D7ED: cmp     byte ptr [ebx+8], 1
 0x59D7F1: setnz   cl
@@ -121,9 +121,9 @@
 0x59D7F8: fild    [esp+1Ch+var_10]
 0x59D7FC: push    ecx
 0x59D7FD: mov     ecx, edi; this
-0x59D7FF: fstp    [esp+20h+var_20]; a3
-0x59D802: push    0FAEh; a2
-0x59D807: call    Tile_SetFloat
+0x59D7FF: fstp    [esp+20h+var_20]; value
+0x59D802: push    0FAEh; propertyCode
+0x59D807: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x59D80C: mov     ecx, esi
 0x59D80E: call    sub_59D030
 0x59D813: fild    dword ptr ds:0B06C50h
@@ -149,7 +149,7 @@
 0x59D859: mov     [ecx+58h], eax
 0x59D85C: fstp    [esp+24h+a2]; a2
 0x59D85F: mov     [ecx+5Ch], edx
-0x59D862: call    NiAVObject_UpdateNiAVObject
+0x59D862: call    NiAVObject_UpdateNiAVObject; NiAVObject update entry used by ActorAnimData_Update. Dispatches virtual slot +0x60 (UpdateDownwardPass) with time and the property/controller-update flag, then asks the parent through virtual +0x94 to recompute bounds upward. For a NiNode root these resolve to NiNode_UpdateDownwardPass and NiNode_UpdateParentWorldBounds.
 0x59D867: pop     edi
 0x59D868: pop     esi
 0x59D869: mov     al, 1

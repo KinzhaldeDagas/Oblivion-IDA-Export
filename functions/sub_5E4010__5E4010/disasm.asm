@@ -33,10 +33,10 @@
 0x5E4063: fstp    dword ptr [esp+10h+arg_0]
 0x5E4067: add     esp, 4
 0x5E406A: fld     dword ptr [esp+0Ch+arg_0]
-0x5E406E: mov     ecx, esi
+0x5E406E: mov     ecx, esi; this
 0x5E4070: fchs
-0x5E4072: fstp    [esp+0Ch+var_C]; float
-0x5E4075: call    Actor_ModFatigue?
+0x5E4072: fstp    [esp+0Ch+delta]; delta
+0x5E4075: call    Actor_ApplyNegativeFatigueDeltaClamped; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.
 0x5E407A: pop     esi
 0x5E407B: pop     ecx
 0x5E407C: retn    4

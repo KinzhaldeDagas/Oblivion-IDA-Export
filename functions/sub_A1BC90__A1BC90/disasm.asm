@@ -1,5 +1,5 @@
-0xA1BC90: push    esi
-0xA1BC91: mov     esi, dword_B35F88
+0xA1BC90: push    esi; Verified module cleanup wrapper decrements/releases g_PathGridDebugRenderRoot if present.
+0xA1BC91: mov     esi, g_PathGridDebugRenderRoot
 0xA1BC97: test    esi, esi
 0xA1BC99: jz      short loc_A1BCB7
 0xA1BC9B: lea     eax, [esi+4]

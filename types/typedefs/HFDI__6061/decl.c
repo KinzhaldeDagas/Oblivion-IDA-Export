@@ -1,1 +1,1 @@
-HFDI
+typedef void *HFDI;

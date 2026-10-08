@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6806B0",
-    "line": "push    edi",
+    "line": "push    edi; Verified state slot 0x04 marks an allocated table slot. The next-free cursor is a 16-bit index; 0xFFFF is reserved as exhausted/unavailable. Capacity starts at 500 and grows by 100, capped at 65535 entries.",
     "mnemonic": "push",
     "size": 1
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x6806CC",
-    "line": "push    1F4h",
+    "line": "push    1F4h; newCapacity",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6806D1",
-    "line": "call    sub_680620",
+    "line": "call    TravelPath_ResizeSearchStateTable; Verified reallocation helper: grows the table to the requested capacity, allocates and zeroes capacity*0x10 bytes, copies old entries, frees the old allocation, and records the new capacity.",
     "mnemonic": "call",
     "size": 5
   },
@@ -235,13 +235,13 @@
   },
   {
     "ea": "0x68073F",
-    "line": "push    eax",
+    "line": "push    eax; newCapacity",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x680740",
-    "line": "call    sub_680620",
+    "line": "call    TravelPath_ResizeSearchStateTable; Verified reallocation helper: grows the table to the requested capacity, allocates and zeroes capacity*0x10 bytes, copies old entries, frees the old allocation, and records the new capacity.",
     "mnemonic": "call",
     "size": 5
   },

@@ -1,1 +1,1 @@
-IPersistPropertyBag_0
+typedef IPersistPropertyBag IPersistPropertyBag_0;

@@ -1,9 +1,9 @@
-0x79AA10: mov     edx, [esp+arg_4]
+0x79AA10: mov     edx, [esp+count]; Low-level uninitialized_fill_n for trivial 0x38-byte SFrondVertex records. Oblivion call sites pass three effective operands plus three checked-iterator/debug operands that this body does not consume.
 0x79AA14: test    edx, edx
 0x79AA16: jbe     short locret_79AA3F
-0x79AA18: mov     eax, [esp+arg_0]
+0x79AA18: mov     eax, [esp+destination]
 0x79AA1C: push    ebx
-0x79AA1D: mov     ebx, [esp+4+arg_8]
+0x79AA1D: mov     ebx, [esp+4+value]
 0x79AA21: push    esi
 0x79AA22: push    edi
 0x79AA23: test    eax, eax

@@ -1,4 +1,4 @@
-0x60BF70: push    esi
+0x60BF70: push    esi; Post-load resolver for an embedded arrow projectile. Stores a pending load context when collision attachment cannot yet be resolved, otherwise reconstructs the saved collision-object association.
 0x60BF71: mov     esi, ecx
 0x60BF73: and     dword ptr [esi+8], 0FFDFFFFFh
 0x60BF7A: push    edi
@@ -64,20 +64,20 @@
 0x60C019: pop     edi
 0x60C01A: pop     esi
 0x60C01B: retn    8
-0x60C01E: mov     ecx, [esp+8+arg_0]
+0x60C01E: mov     ecx, [esp+8+postLoadContext]; this
 0x60C022: pop     edi
-0x60C023: mov     byte ptr [esi+94h], 1
-0x60C02A: mov     [esi+98h], ecx
+0x60C023: mov     byte ptr [esi+94h], 1; ArrowProjectile +0x94 = embedded-collision post-load fixup pending. Set when PostLoad runs before the projectile NiNode/collision link is resolvable; +0x98 retains the retry context.
+0x60C02A: mov     [esi+98h], ecx; ArrowProjectile +0x98 retains the PostLoad link context while +0x94 is pending; lifecycle update passes it back to vtable slot +0x5C for a deferred retry.
 0x60C030: pop     esi
 0x60C031: retn    8
 0x60C034: fld1
 0x60C036: mov     edx, [esi+78h]
 0x60C039: push    ecx
-0x60C03A: fstp    [esp+0Ch+var_C]; float
-0x60C03D: push    edx; int
-0x60C03E: call    sub_60A230
-0x60C043: mov     eax, [esp+8+arg_4]
-0x60C047: mov     ecx, [esp+8+arg_0]
+0x60C03A: fstp    [esp+0Ch+attackStrength]; attackStrength
+0x60C03D: push    edx; shooter
+0x60C03E: call    ArrowProjectile_EnsureCharacterProxy; Ensures a high-process ArrowProjectile owns a sphere-based bhk character proxy. Builds projectile collision layer 6 independently of the visible NIF, derives gravity/collision metadata from shooter and attack strength, attaches the projectile NiNode, and initializes water-height/filter state.
+0x60C043: mov     eax, [esp+8+arg1]
+0x60C047: mov     ecx, [esp+8+postLoadContext]
 0x60C04B: push    eax; int
 0x60C04C: push    ecx; int
 0x60C04D: mov     ecx, esi; int
@@ -103,9 +103,9 @@
 0x60C091: cmp     ecx, edi
 0x60C093: setz    cl
 0x60C096: cmp     eax, edi
-0x60C098: mov     byte ptr [esp+10h+arg_0], cl
+0x60C098: mov     byte ptr [esp+10h+postLoadContext], cl
 0x60C09C: jz      short loc_60C10E
-0x60C09E: mov     edi, [esp+10h+arg_0]
+0x60C09E: mov     edi, [esp+10h+postLoadContext]
 0x60C0A2: mov     eax, [eax+3Ch]
 0x60C0A5: push    1
 0x60C0A7: push    edi
@@ -143,7 +143,7 @@
 0x60C0FB: test    eax, eax
 0x60C0FD: jz      short loc_60C10C
 0x60C0FF: mov     ecx, eax
-0x60C101: call    sub_452A60
+0x60C101: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x60C106: mov     edx, [esi+5Ch]
 0x60C109: mov     [edx+2Ch], eax
 0x60C10C: xor     edi, edi

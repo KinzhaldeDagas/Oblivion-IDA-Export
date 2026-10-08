@@ -1,1 +1,1 @@
-CATID
+typedef GUID CATID;

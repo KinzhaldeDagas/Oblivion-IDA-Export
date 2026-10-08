@@ -1,5 +1,5 @@
 // attributes: thunk
 void __stdcall sub_5D0370(int a1, int a2)
 {
-  sub_57BD80();
+  sub_57BD80(); /*0x5d0370*/
 }

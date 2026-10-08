@@ -1,4 +1,4 @@
 BOOL __thiscall sub_5E13A0(_DWORD **this)
 {
-  return *(this + 0x16) && ((*(int (__thiscall **)(_DWORD))(**(this + 0x16) + 0x2C0))(*(this + 0x16)) & 0xA01) == 0x201;
+  return *(this + 0x16) && ((*(int (__thiscall **)(_DWORD))(**(this + 0x16) + 0x2C0))(*(this + 0x16)) & 0xA01) == 0x201; /*0x5e13c2*/
 }

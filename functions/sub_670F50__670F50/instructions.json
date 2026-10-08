@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x670F5C",
-    "line": "call    sub_420190",
+    "line": "call    ExtraDataList_GetOblivionEntry; Returns ExtraOblivionEntry type 0x3E itself, or null.",
     "mnemonic": "call",
     "size": 5
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x670F78",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -103,13 +103,13 @@
   },
   {
     "ea": "0x670F82",
-    "line": "mov     ecx, [esi+18h]",
+    "line": "mov     ecx, [esi+18h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x670F85",
-    "line": "call    sub_4D76F0",
+    "line": "call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.",
     "mnemonic": "call",
     "size": 5
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x670FEA",
-    "line": "call    sub_683CB0",
+    "line": "call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x671031",
-    "line": "call    sub_66F370",
+    "line": "call    PlayerCharacter_RelocateToFastTravelTarget; Direct relocation helper call through PlayerCharacter vtable method using an extra-data target reference. This bypasses PlayerCharacter_FastTravelCore/Sky fast-travel flag path.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x67104A",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x671057",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x67108F",
-    "line": "call    sub_66EAF0",
+    "line": "call    PlayerCharacter_ChangeCellAndPosition; World/cell transition path used by fast travel relocation after cell resolution. Leaves normal exterior refresh/SpeedTree/weather side effects intact.",
     "mnemonic": "call",
     "size": 5
   },

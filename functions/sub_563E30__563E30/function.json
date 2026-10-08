@@ -1,18 +1,31 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x563E30",
+      "0x563E74"
+    ]
+  ],
+  "chunks_sha256": "88be2be0f9554e4d66956a02f632f81162f5455b225df156af3b66ea94524ffa",
+  "comment_regular": "\n[2026-10-06 directional billboard] Verified: 255 hides node+0xE8; otherwise clears AppCulled and writes NiAlphaProperty+0x1A. Fallout 0x8246E428 corroborates byte threshold semantics.\n\nBSTreeNode billboard alpha/visibility setter. 0xFF hides billboard shape; otherwise shows it and writes alpha-property byte.",
+  "comment_repeatable": "BSTreeNode billboard alpha/visibility setter. 0xFF hides billboard shape; otherwise shows it and writes alpha-property byte.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_563E30",
+  "display_name": "OB_BSTreeNode_SetVisibilityOnBillboard_010201A0",
   "end_ea": "0x563E74",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_563E30",
+  "name": "OB_BSTreeNode_SetVisibilityOnBillboard_010201A0",
   "segment": ".text",
   "sha256": "88be2be0f9554e4d66956a02f632f81162f5455b225df156af3b66ea94524ffa",
   "size": 68,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x563E30",
+  "total_chunk_size": 68,
   "type": "char __thiscall(_DWORD *this, char)",
   "xrefs_from_count": 24,
   "xrefs_to_count": 1

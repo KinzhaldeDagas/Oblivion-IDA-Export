@@ -47,7 +47,7 @@
 0x5F7B0C: fld     dword ptr [esi+34h]
 0x5F7B0F: fsub    dword ptr [edi+34h]
 0x5F7B12: fstp    [esp+18h+var_4]
-0x5F7B16: call    sub_43F350
+0x5F7B16: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x5F7B1B: mov     ecx, [edi+58h]
 0x5F7B1E: fstp    [esp+18h+var_10]
 0x5F7B22: mov     edx, [ecx]
@@ -90,7 +90,7 @@
 0x5F7B96: jnz     short loc_5F7B68
 0x5F7B98: lea     ecx, [esp+18h+var_C]
 0x5F7B9C: push    ecx
-0x5F7B9D: call    sub_683CB0
+0x5F7B9D: call    Vector3_CalculateHeadingRadiansXY; Returns heading in the XY plane from a normalized vector, normalized to [0,2pi).
 0x5F7BA2: fstp    [esp+1Ch+arg_0]
 0x5F7BA6: fld     [esp+1Ch+arg_0]
 0x5F7BAA: add     esp, 4
@@ -183,7 +183,7 @@
 0x5F7CBB: push    esi; int
 0x5F7CBC: push    0; int
 0x5F7CBE: mov     ecx, edi; int
-0x5F7CC0: call    Actor_GetDetectionLevel
+0x5F7CC0: call    Actor_GetDetectionLevelAgainstActor; Oblivion authoritative detection pipeline. Computes this detector's level against a target actor: obtains cached/physical LOS and distance, target light, boot weight, movement/running/sneak/combat/underwater/exterior state, Luck-modified Sneak values, detector Blindness AV 0x2D, target Chameleon AV 0x2E, and target Invisibility AV 0x2F; then calls Calc_DetectionLevel and updates the detector's process entry. Positive means detected. Fallout only corroborates the GetDetectionLevelAgainstActor terminology.
 0x5F7CC5: test    eax, eax
 0x5F7CC7: jle     loc_5F7B68
 0x5F7CCD: cmp     esi, ds:0B333C4h

@@ -1,14 +1,14 @@
-0x79B700: push    ebx
-0x79B701: mov     ebx, [esp+4+arg_4]
+0x79B700: push    ebx; Forward copy-assignment of initialized compact 0x30-byte SFrondGuide records. Deep-assigns each embedded SFrondVertex vector, then copies the eight scalar fields.
+0x79B701: mov     ebx, [esp+4+last]
 0x79B705: push    esi
-0x79B706: mov     esi, [esp+8+arg_0]
+0x79B706: mov     esi, [esp+8+source]
 0x79B70A: cmp     esi, ebx
 0x79B70C: jz      short loc_79B75B
 0x79B70E: push    edi
 0x79B70F: mov     edi, [esp+0Ch+arg_8]
-0x79B713: push    esi
-0x79B714: mov     ecx, edi
-0x79B716: call    sub_79B160
+0x79B713: push    esi; source
+0x79B714: mov     ecx, edi; this
+0x79B716: call    OB_stVector_SFrondVertex_CopyAssign_010201A0; Oblivion-authoritative copy assignment for the SFrondGuide vertex vector at +0x00. Reuses existing 0x38-byte-element capacity when possible, otherwise frees/reserves and deep-copies the source range.
 0x79B71B: fld     dword ptr [esi+10h]
 0x79B71E: fstp    dword ptr [edi+10h]
 0x79B721: add     esi, 30h ; '0'

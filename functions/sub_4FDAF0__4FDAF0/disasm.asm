@@ -27,7 +27,6 @@
 0x4FDB4D: mov     [esp+65Ch+var_64C], ecx
 0x4FDB51: jz      loc_4FDDB6
 0x4FDB57: jmp     short loc_4FDB60
-0x4FDB59: align 10h
 0x4FDB60: movsx   edx, byte ptr [ebx+ecx]
 0x4FDB64: push    edx; C
 0x4FDB65: call    _isalpha
@@ -143,13 +142,13 @@
 0x4FDD14: jz      loc_4FDDEF
 0x4FDD1A: mov     ebp, [esp+65Ch+Size]
 0x4FDD21: mov     [edi+esi], bp
-0x4FDD25: push    ebp; Size
+0x4FDD25: push    ebp; byteCount
 0x4FDD26: lea     edx, [esp+660h+Src]
 0x4FDD2D: add     esi, 2
-0x4FDD30: push    edx; Src
+0x4FDD30: push    edx; source
 0x4FDD31: lea     eax, [edi+esi]
-0x4FDD34: push    eax; Dst
-0x4FDD35: call    _memcpy
+0x4FDD34: push    eax; destination
+0x4FDD35: call    _memcpy;
 0x4FDD3A: mov     ecx, [esp+668h+var_218]
 0x4FDD41: add     [esp+668h+var_64C], ecx
 0x4FDD45: mov     ebx, [esp+668h+var_644]

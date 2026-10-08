@@ -24,11 +24,11 @@
 0x657D13: test    al, 1
 0x657D15: jnz     loc_65848B
 0x657D1B: mov     ecx, edi; this
-0x657D1D: call    TESObjectREFR_GetParentCell
+0x657D1D: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x657D22: test    eax, eax
 0x657D24: jz      loc_65848B
 0x657D2A: mov     ecx, edi; this
-0x657D2C: call    TESObjectREFR_GetParentCell
+0x657D2C: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x657D31: cmp     byte ptr [eax+26h], 3
 0x657D35: jnz     loc_65848B
 0x657D3B: push    ebx
@@ -320,13 +320,13 @@
 0x658098: call    eax
 0x65809A: test    byte ptr [ebp+1Eh], 1
 0x65809E: jnz     loc_658166
-0x6580A4: mov     ecx, edi
-0x6580A6: call    sub_5E0380
+0x6580A4: mov     ecx, edi; this
+0x6580A6: call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.
 0x6580AB: cmp     byte ptr [eax+20h], 1
 0x6580AF: jnz     short loc_6580FA
 0x6580B1: mov     ecx, [esi+8]
 0x6580B4: mov     ecx, [ecx+28h]
-0x6580B7: call    sub_452A60
+0x6580B7: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6580BC: mov     edx, [esi+2Ch]
 0x6580BF: mov     [esp+278h+var_264], eax
 0x6580C3: fild    [esp+278h+var_264]
@@ -348,22 +348,22 @@
 0x6580F3: call    edx
 0x6580F5: jmp     def_657E7F; jumptable 00657E7F default case, cases 1,11,16,18-21,24,25,31,33,34,38,39,42
 0x6580FA: mov     ecx, [ebp+28h]
-0x6580FD: call    sub_452A60
+0x6580FD: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x658102: test    eax, eax
 0x658104: mov     [esp+278h+var_268], eax
 0x658108: jg      short loc_658112
 0x65810A: mov     [esp+278h+var_268], 0C8h ; 'È'
 0x658112: mov     ecx, edi; this
-0x658114: call    TESObjectREFR_GetParentCell
+0x658114: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x658119: mov     ecx, eax; this
-0x65811B: call    TESObjectCELL_IsInterior
+0x65811B: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x658120: test    al, al
 0x658122: jz      short loc_658132
-0x658124: mov     ecx, offset flt_B36AA0
+0x658124: mov     ecx, (offset flt_B36A88+18h)
 0x658129: call    GameSetting_GetSafeFloatPointer
 0x65812E: fld     dword ptr [eax]
 0x658130: jmp     short loc_658142
-0x658132: mov     ecx, offset flt_B36A98
+0x658132: mov     ecx, (offset flt_B36A88+10h)
 0x658137: call    GameSetting_GetSafeFloatPointer
 0x65813C: fild    [esp+278h+var_268]
 0x658140: fmul    dword ptr [eax]
@@ -496,7 +496,7 @@
 0x6582D7: push    edi
 0x6582D8: mov     ecx, esi
 0x6582DA: call    edx
-0x6582DC: mov     al, [ebp+20h]; jumptable 00657E7F case 44
+0x6582DC: mov     al, [ebp+20h]; 3DTheft decode 2026-05-17: alternate DONE handler queues package done event/cleanup; this is package completion, distinct from AddScriptPackage's earlier dialogue-gate skip.
 0x6582DF: cmp     al, 3
 0x6582E1: jz      loc_658477
 0x6582E7: cmp     al, 4
@@ -524,15 +524,15 @@
 0x658325: call    Script_AddEventToExtraScript
 0x65832A: add     esp, 0Ch
 0x65832D: mov     ecx, ebp
-0x65832F: call    sub_565DF0
+0x65832F: call    sub_565DF0; RadiantAI: package flag helper used by chooser skip logic; tests TESPackage flag 0x0400.
 0x658334: test    al, al
 0x658336: jz      short loc_65834B
-0x658338: mov     ecx, offset TimeGlobals
+0x658338: mov     ecx, 0B332E0h
 0x65833D: call    TimeGlobals_GetGameDay
 0x658342: mov     ecx, ebx
 0x658344: push    eax
 0x658345: push    ebp
-0x658346: call    sub_41FFC0
+0x658346: call    ExtraDataList_SetRunOnceExtraPackage; Ensures ExtraRunOncePacks exists, then adds or updates a package record with the supplied package and state byte.
 0x65834B: call    sub_579440
 0x658350: cmp     eax, edi
 0x658352: jnz     short loc_6583B1
@@ -577,8 +577,8 @@
 0x6583D0: call    eax
 0x6583D2: mov     [esi+0C0h], ebx
 0x6583D8: jmp     short loc_65841D
-0x6583DA: mov     ecx, [esi+8]
-0x6583DD: call    sub_5660A0
+0x6583DA: mov     ecx, [esi+8]; self
+0x6583DD: call    TESPackage_IsRuntimePackage; 3DTheft: returns packageFlags bit 0x800 (runtime/dynamic package marker).
 0x6583E2: test    al, al
 0x6583E4: jz      short loc_65841D
 0x6583E6: mov     edx, [edi]
@@ -605,7 +605,7 @@
 0x658420: cmp     eax, ebx
 0x658422: jz      short loc_65842D
 0x658424: push    eax
-0x658425: call    FormHeapFree
+0x658425: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65842A: add     esp, 4
 0x65842D: lea     ebp, [esi+3Ch]
 0x658430: mov     ecx, ebp
@@ -618,7 +618,7 @@
 0x658443: test    ebx, ebx
 0x658445: jz      short loc_658450
 0x658447: push    ebx
-0x658448: call    FormHeapFree
+0x658448: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x65844D: add     esp, 4
 0x658450: push    ebx
 0x658451: mov     ecx, ebp
@@ -629,7 +629,7 @@
 0x658461: jz      short loc_658440
 0x658463: lea     ecx, [esi+4Ch]
 0x658466: mov     dword ptr [esi+30h], 0
-0x65846D: call    BSSimpleList_Clear
+0x65846D: call    BSSimpleList_Clear; Verified generic BSSimpleList_Clear frees every successor node and zeros the root data pointer. It does not invoke element destructors; ActiveEffect::~ActiveEffect first detaches hit-effect objects, then uses this helper and frees the head.
 0x658472: jmp     def_657E7F; jumptable 00657E7F default case, cases 1,11,16,18-21,24,25,31,33,34,38,39,42
 0x658477: mov     edx, [esi]
 0x658479: mov     eax, [edx+188h]

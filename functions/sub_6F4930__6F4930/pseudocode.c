@@ -1,69 +1,63 @@
 void __thiscall sub_6F4930(
-        char **this,
+        OB_stString28_010201A0 *this,
         unsigned int a2,
-        int a3,
-        unsigned int a4,
+        OB_stString28_010201A0 a3,
+        int a4,
         int a5,
-        int a6,
+        unsigned int a6,
         int a7,
-        int a8,
-        unsigned int a9,
-        int a10,
-        int a11,
-        unsigned int a12,
-        int a13,
-        int a14)
+        int a8)
 {
-  unsigned int v15; // ecx
-  unsigned int v16; // eax
-  int v17; // edi
-  char *v18; // ebp
-  char *v19; // edi
-  unsigned int v20; // ebp
-  char *v21; // ebx
-  bool v22; // cc
-  _DWORD v23[5]; // [esp+14h] [ebp-14h] BYREF
+  char *heapData; // ecx
+  unsigned int v10; // eax
+  int v11; // edi
+  OB_stString28_010201A0 *v12; // ebp
+  OB_stString28_010201A0 *v13; // edi
+  unsigned int v14; // ebp
+  OB_stString28_010201A0 *v15; // ebx
+  bool v16; // cc
+  _DWORD v17[5]; // [esp+14h] [ebp-14h] BYREF
 
-  v15 = (unsigned int)*(this + 1);
-  v23[4] = 0;
-  if ( v15 )
-    v16 = (int)&(*(this + 2))[-v15] / 0x30;
+  heapData = this->storage.heapData; /*0x6f4959*/
+  v17[4] = 0; /*0x6f4960*/
+  if ( heapData ) /*0x6f4964*/
+    v10 = (*((_DWORD *)&this->storage.heapData + 1) - (int)heapData) / 0x30; /*0x6f497e*/
   else
-    v16 = 0;
-  if ( v16 < a2 )
+    v10 = 0; /*0x6f4966*/
+  if ( v10 < a2 ) /*0x6f4986*/
   {
-    if ( v15 )
-      v17 = (int)&(*(this + 2))[-v15] / 0x30;
+    if ( heapData ) /*0x6f498a*/
+      v11 = (*((_DWORD *)&this->storage.heapData + 1) - (int)heapData) / 0x30; /*0x6f49a4*/
     else
-      v17 = 0;
-    v18 = *(this + 2);
-    if ( v15 > (unsigned int)v18 )
-      _invalid_parameter_noinfo();
-    sub_6F44D0(this, (int)this, v18, a2 - v17, &a3);
+      v11 = 0; /*0x6f498c*/
+    v12 = *((OB_stString28_010201A0 **)&this->storage.heapData + 1); /*0x6f49a6*/
+    if ( heapData > (char *)v12 ) /*0x6f49ab*/
+      _invalid_parameter_noinfo(); /*0x6f49ad*/
+    sub_6F44D0(this, (int)this, v12, a2 - v11, &a3); /*0x6f49be*/
   }
-  if ( v15 )
+  if ( heapData ) /*0x6f49c7*/
   {
-    v19 = *(this + 2);
-    if ( a2 < (int)&v19[-v15] / 0x30 )
+    v13 = *((OB_stString28_010201A0 **)&this->storage.heapData + 1); /*0x6f49c9*/
+    if ( a2 < ((char *)v13 - heapData) / 0x30 ) /*0x6f49e3*/
     {
-      if ( v15 > (unsigned int)v19 )
-        _invalid_parameter_noinfo();
-      v20 = (unsigned int)*(this + 1);
-      if ( v20 > (unsigned int)*(this + 2) )
-        _invalid_parameter_noinfo();
-      v21 = (char *)(0x30 * a2 + v20);
-      v22 = v21 <= *(this + 2);
-      v23[1] = v20;
-      if ( !v22 || v21 < *(this + 1) )
-        _invalid_parameter_noinfo();
-      sub_6F3830(this, v23, (int)this, v21, (int)this, v19);
+      if ( heapData > (char *)v13 ) /*0x6f49e7*/
+        _invalid_parameter_noinfo(); /*0x6f49e9*/
+      v14 = (unsigned int)this->storage.heapData; /*0x6f49ee*/
+      if ( v14 > *((_DWORD *)&this->storage.heapData + 1) ) /*0x6f49f4*/
+        _invalid_parameter_noinfo(); /*0x6f49f6*/
+      v15 = (OB_stString28_010201A0 *)(0x30 * a2 + v14); /*0x6f4a01*/
+      v16 = (unsigned int)v15 <= *((_DWORD *)&this->storage.heapData + 1); /*0x6f4a04*/
+      v17[1] = v14; /*0x6f4a07*/
+      if ( !v16 || (char *)v15 < this->storage.heapData ) /*0x6f4a10*/
+        _invalid_parameter_noinfo(); /*0x6f4a12*/
+      sub_6F3830((char **)this, v17, (int)this, v15, (int)this, v13); /*0x6f4a22*/
     }
   }
-  if ( a12 )
-    FormHeapFree(a12);
-  a12 = 0;
-  a13 = 0;
-  a14 = 0;
-  if ( a9 >= 0x10 )
-    FormHeapFree(a4);
+  if ( a6 ) /*0x6f4a2f*/
+    FormHeapFree(a6); /*0x6f4a32*/
+  a6 = 0; /*0x6f4a3f*/
+  a7 = 0; /*0x6f4a43*/
+  a8 = 0; /*0x6f4a47*/
+  if ( a3.capacity >= 0x10 ) /*0x6f4a4b*/
+    FormHeapFree((unsigned int)a3.storage.heapData); /*0x6f4a52*/
 }

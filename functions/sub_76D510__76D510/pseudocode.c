@@ -1,7 +1,8 @@
-bool __thiscall sub_76D510(char **this)
+// Return whether this depth/stencil buffer's surface format advertises a stencil component; used to gate D3DCLEAR_STENCIL.
+bool __thiscall NiDX92DBufferData_HasStencilComponent(NiDX92DBufferData *this)
 {
-  char *v2; // ecx
+  NiSurfaceData *SurfaceData; // ecx
 
-  v2 = *(this + 4);
-  return v2 && *(this + 3) && sub_71B4A0(v2, 0x12) != 0;
+  SurfaceData = this->member.SurfaceData; /*0x76d512*/
+  return SurfaceData && this->member.Surface && sub_71B4A0((char *)SurfaceData, 0x12) != 0; /*0x76d52b*/
 }

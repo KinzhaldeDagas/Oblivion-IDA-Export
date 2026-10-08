@@ -1,49 +1,53 @@
-double __thiscall sub_606140(int this)
+// Verified: gold-cost switch: theft uses value-derived multiplier, horse stealing uses fixed setting; other categories use corresponding iCrimeGold* values. Rejoined shared/default return6061CA (local jumps, shared stack, RET0). Oblivion setting literals independently establish category enum.
+float __thiscall Crime_GetGoldValue(Crime *self)
 {
-  int v1; // eax
-  double result; // st7
-  int v3; // [esp+0h] [ebp-4h]
+  unsigned int Value; // eax
+  double v2; // st7
   float v4; // [esp+0h] [ebp-4h]
-  float v5; // [esp+0h] [ebp-4h]
+  int v5; // [esp+0h] [ebp-4h]
   float v6; // [esp+0h] [ebp-4h]
   float v7; // [esp+0h] [ebp-4h]
   float v8; // [esp+0h] [ebp-4h]
+  float v9; // [esp+0h] [ebp-4h]
+  float v10; // [esp+0h] [ebp-4h]
 
-  switch ( *(_DWORD *)(this + 4) )
+  v4 = 0.0; /*0x606149*/
+  switch ( self->category ) /*0x60614e*/
   {
-    case 0:
-      if ( *(_DWORD *)(this + 0x14) )
-        sub_470520(*(void **)(this + 0x14));
+    case kCrime_Theft: /*0x60614e*/
+      if ( self->object14 ) /*0x606155*/
+        Value = TESForm_GetValue((TESForm *)self->object14); /*0x606162*/
       else
-        v1 = *(_DWORD *)(this + 0x18);
-      v3 = v1;
-      if ( !v1 )
-        v3 = 1;
-      v4 = (double)v3 * flt_B37698;
-      result = v4;
-      break;
-    case 1:
-      v8 = (float)dword_B376A0;
-      result = v8;
-      break;
-    case 2:
-      result = (double)dword_B376A8;
-      def_60614E(result);
-      break;
-    case 3:
-      v5 = (float)iCrimeGoldAttack;
-      result = v5;
-      break;
-    case 4:
-      v7 = (float)dword_B37690;
-      result = v7;
-      break;
-    case 5:
-      v6 = (float)dword_B376B0;
-      result = v6;
-      break;
+        Value = self->value18; /*0x60615c*/
+      v5 = Value; /*0x60616c*/
+      if ( !Value ) /*0x60616f*/
+        v5 = 1; /*0x606171*/
+      v6 = (double)v5 * g_fCrimeGoldSteal_Value; /*0x606181*/
+      v2 = v6; /*0x606184*/
+      break; /*0x606188*/
+    case kCrime_Pickpocket: /*0x60614e*/
+      v10 = (float)(int)g_iCrimeGoldPickpocket_Value.value; /*0x6061b9*/
+      v2 = v10; /*0x6061bc*/
+      break; /*0x6061c0*/
+    case kCrime_Trespass: /*0x60614e*/
+      v4 = (float)(int)g_iCrimeGoldTresspass_Value.value; /*0x6061c7*/
+      goto LABEL_13; /*0x6061c7*/
+    case kCrime_Attack: /*0x60614e*/
+      v7 = (float)(int)g_iCrimeGoldAttack_Value.value; /*0x60618f*/
+      v2 = v7; /*0x606192*/
+      break; /*0x606196*/
+    case kCrime_Murder: /*0x60614e*/
+      v9 = (float)(int)g_iCrimeGoldMurder_Value.value; /*0x6061ab*/
+      v2 = v9; /*0x6061ae*/
+      break; /*0x6061b2*/
+    case kCrime_StealHorse: /*0x60614e*/
+      v8 = (float)(int)g_iCrimeGoldStealHorse_Value.value; /*0x60619d*/
+      v2 = v8; /*0x6061a0*/
+      break; /*0x6061a4*/
     default:
-      JUMPOUT(0x6061CA);
+LABEL_13:
+      v2 = v4; /*0x6061ca*/
+      break; /*0x6061ca*/
   }
-  return result;
+  return v2; /*0x606188*/
 }

@@ -78,7 +78,6 @@
 0x92E96E: mov     [esp+90h+var_84], ebx
 0x92E972: jle     loc_92EA35
 0x92E978: jmp     short loc_92E980
-0x92E97A: align 10h
 0x92E980: mov     eax, [edi]
 0x92E982: fld     dword ptr [eax+ebx]
 0x92E985: mov     ecx, ds:0BA7A40h
@@ -111,7 +110,7 @@
 0x92E9E6: mov     [esp+94h+var_44], 0
 0x92E9EE: mov     [esp+94h+var_3C], eax
 0x92E9F2: mov     [esp+94h+var_34], 0
-0x92E9FA: call    sub_8D2C20
+0x92E9FA: call    hkMatrix3_MultiplyInPlace; Multiplies a 3x3 basis matrix in place by another basis matrix through 0x8D2AB0.
 0x92E9FF: fld     [esp+90h+var_40]
 0x92EA03: mov     eax, [edi]
 0x92EA05: fld     [esp+90h+var_50]

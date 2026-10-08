@@ -1,18 +1,31 @@
 {
-  "callees_count": 20,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x49CBF0",
+      "0x49CCD5"
+    ]
+  ],
+  "chunks_sha256": "072d64e2a6f06f9419e56d3d62efaa4379f2ea2319133a1c373e7eeecdcc4d55",
+  "comment_regular": "CULLING audit 2026-09-27 (observed Oblivion behavior): Reflection override applies native reflection-category filtering, optional additional plane test, then base NiCullingProcess culling. CULLING leaves this ProcessCull slot native and uses the water Process hook only to suspend an outer suppression scope. Do not apply main-camera geometry decisions globally to reflected contributions.",
   "comment_repeatable": "",
-  "data_refs_count": 1,
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
   "display_name": "TESWaterCullingProcess_ReflectionCull",
   "end_ea": "0x49CCD5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
   "name": "TESWaterCullingProcess_ReflectionCull",
   "segment": ".text",
   "sha256": "072d64e2a6f06f9419e56d3d62efaa4379f2ea2319133a1c373e7eeecdcc4d55",
   "size": 229,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x49CBF0",
+  "total_chunk_size": 229,
   "type": "void __thiscall(TESWaterCulling *this, NiAVObject *)",
   "xrefs_from_count": 107,
   "xrefs_to_count": 1

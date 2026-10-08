@@ -81,9 +81,9 @@
 0x9A99D9: jns     short loc_9A99B0
 0x9A99DB: mov     ecx, [esp+14h+var_4]
 0x9A99DF: push    ecx
-0x9A99E0: call    FormHeapFree
+0x9A99E0: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x9A99E5: add     esp, 4
-0x9A99E8: push    offset NiRefObject_objcount; lpAddend
+0x9A99E8: push    0B3FD64h; lpAddend
 0x9A99ED: mov     dword ptr [edi], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x9A99F3: call    ds:InterlockedDecrement
 0x9A99F9: pop     edi

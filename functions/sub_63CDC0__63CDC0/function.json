@@ -1,18 +1,31 @@
 {
-  "callees_count": 34,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x63CDC0",
+      "0x63CFA1"
+    ]
+  ],
+  "chunks_sha256": "d9268864c06cfe5b16a5743b1928d9f37f5706e974f40233137a2abf84d2ae33",
+  "comment_regular": "HighProcess vtable+0x318, resolved from 0xA71814. If +0x16C and actor has 3D: removes shadow receivers, calls 0x4E1580, re-adds shadow state, calls TESNPC_RefreshFaceGenForActor3D for NPC actor, performs further actor/render updates, clears +0x16C. Missing NiNode leaves flag pending. Broader than head-only refresh. Decompiler register/x87 arguments remain unreliable; no ABI correction inferred yet. Does not prove a vanilla LoadGame bug.",
+  "comment_repeatable": "HighProcess vtable+0x318, resolved from 0xA71814. If +0x16C and actor has 3D: removes shadow receivers, calls 0x4E1580, re-adds shadow state, calls TESNPC_RefreshFaceGenForActor3D for NPC actor, performs further actor/render updates, clears +0x16C. Missing NiNode leaves flag pending. Broader than head-only refresh. Decompiler register/x87 arguments remain unreliable; no ABI correction inferred yet. Does not prove a vanilla LoadGame bug.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_63CDC0",
+  "display_name": "HighProcess_RefreshActorAppearanceIfPending",
   "end_ea": "0x63CFA1",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_63CDC0",
+  "name": "HighProcess_RefreshActorAppearanceIfPending",
   "segment": ".text",
   "sha256": "d9268864c06cfe5b16a5743b1928d9f37f5706e974f40233137a2abf84d2ae33",
   "size": 481,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x63CDC0",
+  "total_chunk_size": 481,
   "type": "void __userpurge(HighProcess *ecx0@<ecx>, int@<ebx>, int@<edi>, int@<esi>, double@<st2>, double refractionAmount@<st1>, double@<st0>, Actor *, HighProcess *)",
   "xrefs_from_count": 192,
   "xrefs_to_count": 1

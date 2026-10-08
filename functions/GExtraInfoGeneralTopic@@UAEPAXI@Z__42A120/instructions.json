@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x42A123",
-    "line": "call    ??1ExtraInfoGeneralTopic@@UAE@XZ; ExtraInfoGeneralTopic::~ExtraInfoGeneralTopic(void)",
+    "line": "call    ExtraInfoGeneralTopic__Destructor; ExtraInfoGeneralTopic destructor clears the cached MenuTopic's isInfoGeneralTopic ownership marker, destroys its responses/display name, then frees the MenuTopic allocation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x42A130",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },

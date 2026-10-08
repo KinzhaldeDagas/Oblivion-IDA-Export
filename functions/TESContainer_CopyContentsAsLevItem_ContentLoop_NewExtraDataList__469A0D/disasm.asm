@@ -25,8 +25,8 @@
 0x469A5A: call    ExtraDataList_SetExtraCount
 0x469A5F: mov     edx, [edi]
 0x469A61: mov     eax, [edi+4]
-0x469A64: mov     ecx, [esp+arg_28]
-0x469A68: push    edx
-0x469A69: push    esi
-0x469A6A: push    eax
-0x469A6B: call    ContainerExtraData_AddItem
+0x469A64: mov     ecx, [esp+arg_28]; this
+0x469A68: push    edx; count
+0x469A69: push    esi; extraList
+0x469A6A: push    eax; item
+0x469A6B: call    ContainerExtraData_AddItem; Canonical form-based container add: item, optional instance ExtraDataList, and signed count. All four external callers enter only at this head; the formerly split interior blocks are one logical routine ending in retn 0x0C. A proxy-to-source conversion hook here covers actor-hit/form adds but not ordinary world-reference pickup.

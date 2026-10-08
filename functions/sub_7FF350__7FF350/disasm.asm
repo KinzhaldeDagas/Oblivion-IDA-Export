@@ -1,4 +1,4 @@
-0x7FF350: push    0FFFFFFFFh
+0x7FF350: push    0FFFFFFFFh; Ensures a NiNode uses BSShaderPPLightingProperty for Lighting30 rendering: accepts an existing property of shader type 0xA, otherwise removes the incompatible property, creates/attaches a PPLighting property, sets it up, and validates renderer data.
 0x7FF352: push    offset ??0bhkBallAndSocketConstraint@@QAE@XZ_SEH
 0x7FF357: mov     eax, large fs:0
 0x7FF35D: push    eax
@@ -14,7 +14,7 @@
 0x7FF374: mov     edi, [esp+20h+arg_0]
 0x7FF378: push    4
 0x7FF37A: mov     ecx, edi
-0x7FF37C: call    NiNode_GetNiPropertyByID
+0x7FF37C: call    NiNode_GetNiPropertyByID;
 0x7FF381: test    eax, eax
 0x7FF383: mov     ebp, ds:0A2807Ch
 0x7FF389: jz      short loc_7FF3D6
@@ -27,7 +27,7 @@
 0x7FF399: setz    cl
 0x7FF39C: mov     eax, ecx
 0x7FF39E: test    eax, eax
-0x7FF3A0: jnz     loc_7FF47B
+0x7FF3A0: jnz     loc_7FF47B; Accept an existing shader property when virtual +0x54 returns subtype 10. The complete 17-vtable native census proves this is retail-class-unique to Lighting30ShaderProperty.
 0x7FF3A6: push    4
 0x7FF3A8: lea     edx, [esp+24h+arg_0]
 0x7FF3AC: push    edx
@@ -50,26 +50,26 @@
 0x7FF3D2: mov     ecx, esi
 0x7FF3D4: call    edx
 0x7FF3D6: push    108h; Size
-0x7FF3DB: call    FormHeapAlloc
+0x7FF3DB: call    FormHeapAlloc; Allocate exactly 0x108 bytes for a newly required Lighting30ShaderProperty.
 0x7FF3E0: add     esp, 4
 0x7FF3E3: mov     [esp+20h+var_10], eax
 0x7FF3E7: test    eax, eax
 0x7FF3E9: mov     [esp+20h+var_4], 0
 0x7FF3F1: jz      short loc_7FF3FE
-0x7FF3F3: mov     ecx, eax
-0x7FF3F5: call    sub_863430
-0x7FF3FA: mov     esi, eax
+0x7FF3F3: mov     ecx, eax; this
+0x7FF3F5: call    Lighting30ShaderProperty_Constructor; Constructs an exact 0x108-byte Oblivion Lighting30ShaderProperty after the BSShaderPPLightingProperty base constructor. Stores Lighting30ShaderProperty_vftable (A9576C) at object+0 and zero-initializes derived fields through +0x104.
+0x7FF3FA: mov     esi, eax; Construct the exact Oblivion Lighting30ShaderProperty; its constructor stores vptr A9576C.
 0x7FF3FC: jmp     short loc_7FF400
 0x7FF3FE: xor     esi, esi
 0x7FF400: push    esi; a2
 0x7FF401: mov     ecx, edi; this
 0x7FF403: mov     [esp+24h+var_4], 0FFFFFFFFh
-0x7FF40B: call    sub_405680
+0x7FF40B: call    sub_405680; Attach the newly constructed exact Lighting30ShaderProperty to the NiNode.
 0x7FF410: mov     eax, [esi]
 0x7FF412: mov     edx, [eax+58h]
 0x7FF415: push    edi
 0x7FF416: mov     ecx, esi
-0x7FF418: call    edx
+0x7FF418: call    edx; Run exact property virtual +0x58 geometry setup after attachment.
 0x7FF41A: test    al, al
 0x7FF41C: jnz     short loc_7FF469
 0x7FF41E: push    esi
@@ -104,7 +104,7 @@
 0x7FF46B: mov     eax, [edx+8Ch]
 0x7FF471: push    0
 0x7FF473: mov     ecx, esi
-0x7FF475: call    eax
+0x7FF475: call    eax; Validate renderer data through exact property virtual +0x8C; return success only for a nonzero result.
 0x7FF477: test    eax, eax
 0x7FF479: jz      short loc_7FF452
 0x7FF47B: mov     al, 1
@@ -116,3 +116,15 @@
 0x7FF48B: pop     ebp
 0x7FF48C: add     esp, 10h
 0x7FF48F: retn    4
+0x9CA420: mov     eax, [ebp-10h]
+0x9CA423: push    eax
+0x9CA424: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA429: pop     ecx
+0x9CA42A: retn
+0x9CA42B: mov     edx, [esp+arg_4]
+0x9CA42F: lea     eax, [edx-10h]
+0x9CA432: mov     ecx, [edx-14h]
+0x9CA435: xor     ecx, eax
+0x9CA437: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA43C: mov     eax, offset stru_AF2B24
+0x9CA441: jmp     ___CxxFrameHandler3

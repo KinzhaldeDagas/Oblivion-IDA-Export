@@ -19,7 +19,7 @@
 0x49CC1D: call    eax
 0x49CC1F: test    eax, eax
 0x49CC21: jz      short loc_49CC31
-0x49CC23: cmp     eax, offset dword_B35ACC
+0x49CC23: cmp     eax, offset stru_B35ACC
 0x49CC28: jz      short loc_49CC41
 0x49CC2A: mov     eax, [eax+4]
 0x49CC2D: test    eax, eax
@@ -72,14 +72,14 @@
 0x49CCA9: cmp     byte ptr ds:0B3521Ch, 0; jumptable 0049CC69 default case, cases 26,29,32,37,41
 0x49CCB0: jnz     short loc_49CCC6
 0x49CCB2: lea     edx, [ebp+90h]
-0x49CCB8: push    edx; a2
-0x49CCB9: lea     ecx, [ebx+20h]; this
-0x49CCBC: call    sub_47DA70
+0x49CCB8: push    edx; plane
+0x49CCB9: lea     ecx, [ebx+20h]; self
+0x49CCBC: call    NiBound_ClassifyAgainstPlane
 0x49CCC1: cmp     eax, 2
 0x49CCC4: jz      short loc_49CCCE
-0x49CCC6: push    ebx; a2
-0x49CCC7: mov     ecx, ebp; this
-0x49CCC9: call    NiCullingProcess_Culling?
+0x49CCC6: push    ebx; object
+0x49CCC7: mov     ecx, ebp; self
+0x49CCC9: call    NiCullingProcess_CullBoundAndDispatch; Oblivion NiCullingProcess process-cull entry for native scene traversal.
 0x49CCCE: pop     edi
 0x49CCCF: pop     esi
 0x49CCD0: pop     ebp

@@ -4,7 +4,6 @@
 0x8B18F6: mov     eax, edi
 0x8B18F8: lea     edx, [eax+1]
 0x8B18FB: jmp     short loc_8B1900
-0x8B18FD: align 10h
 0x8B1900: mov     cl, [eax]
 0x8B1902: inc     eax
 0x8B1903: test    cl, cl

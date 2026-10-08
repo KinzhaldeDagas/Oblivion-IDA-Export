@@ -91,7 +91,6 @@
 0x8D5C4D: mov     [esp+20h+arg_0], 0
 0x8D5C55: jle     loc_8D5D28
 0x8D5C5B: jmp     short loc_8D5C60
-0x8D5C5D: align 10h
 0x8D5C60: mov     eax, [esi+38h]
 0x8D5C63: mov     ecx, [esp+20h+arg_0]
 0x8D5C67: mov     ebp, [eax+ecx*4]

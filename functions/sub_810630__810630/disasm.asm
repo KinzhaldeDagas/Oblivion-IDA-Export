@@ -1,4 +1,4 @@
-0x810630: sub     esp, 670h
+0x810630: sub     esp, 670h; SpeedTreeBranchShader 1x pixel program loader: fills ten STB1 ps_1_3 slots at +0x10C..+0x133, including SPECMULT define derived from flt_B2C2BC for specular variants.
 0x810636: mov     eax, ds:0B30AACh
 0x81063B: xor     eax, esp
 0x81063D: mov     [esp+670h+var_4], eax
@@ -113,7 +113,6 @@
 0x81084D: mov     [esp+680h+var_66C], esi
 0x810851: add     ebp, 10Ch
 0x810857: jmp     short loc_810860
-0x810859: align 10h
 0x810860: mov     eax, [esi]
 0x810862: cmp     eax, ebx
 0x810864: jz      loc_8108EE
@@ -137,7 +136,7 @@
 0x8108A1: lea     ecx, [esp+694h+FileName]
 0x8108A8: push    ecx; lpFileName
 0x8108A9: mov     ecx, [esp+698h+var_668]
-0x8108AD: call    CreatePixelShader
+0x8108AD: call    CreatePixelShader; Oblivion authoritative PS loader: reads native D3D9 shader package/cache bytecode before IDirect3DDevice9::CreatePixelShader. DirectX10OBSE hashes/dumps/disassembles this bytecode and can generate fail-closed SM4 companions, including SM3 _pp/_sat opcodes, if/else/endif, ddx/ddy, dp2add, texkill, and MRT oC outputs.
 0x8108B2: mov     esi, [ebp+0]
 0x8108B5: mov     edi, eax
 0x8108B7: cmp     esi, edi

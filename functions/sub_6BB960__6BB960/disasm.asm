@@ -34,8 +34,8 @@
 0x6BB9BC: cmp     eax, edi
 0x6BB9BE: mov     [esp+28h+var_4], edi
 0x6BB9C2: jz      short loc_6BB9E2
-0x6BB9C4: push    offset ?ClearComponentReferences@TESTexture@@UAEXXZ?; a5
-0x6BB9C9: push    offset sub_7616D0; a4
+0x6BB9C4: push    offset Shared_NoOpVirtual_60D0A0; a5
+0x6BB9C9: push    offset ActorList_ReturnHead; a4
 0x6BB9CE: push    ebp; size
 0x6BB9CF: lea     esi, [eax+4]
 0x6BB9D2: push    10h; a2
@@ -52,7 +52,6 @@
 0x6BB9F4: mov     edi, [esp+28h+arg_0]
 0x6BB9F8: add     esi, 0Ch
 0x6BB9FB: jmp     short loc_6BBA00
-0x6BB9FD: align 10h
 0x6BBA00: push    edi
 0x6BBA01: lea     ecx, [esi-0Ch]
 0x6BBA04: call    sub_6BB5E0
@@ -101,3 +100,15 @@
 0x6BBA72: pop     ebx
 0x6BBA73: add     esp, 14h
 0x6BBA76: retn
+0x9C1FE0: mov     eax, [ebp+8]
+0x9C1FE3: push    eax
+0x9C1FE4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C1FE9: pop     ecx
+0x9C1FEA: retn
+0x9C1FEB: mov     edx, [esp+arg_4]
+0x9C1FEF: lea     eax, [edx-18h]
+0x9C1FF2: mov     ecx, [edx-1Ch]
+0x9C1FF5: xor     ecx, eax
+0x9C1FF7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C1FFC: mov     eax, offset stru_AEAF5C
+0x9C2001: jmp     ___CxxFrameHandler3

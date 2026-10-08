@@ -16,12 +16,12 @@
 0x45C7C7: push    offset aDeleteformWasC; "DeleteForm() was called, but the game i"...
 0x45C7CC: call    PrintError
 0x45C7D1: add     esp, 4
-0x45C7D4: mov     esi, [esp+8+arg_0]
+0x45C7D4: mov     esi, [esp+8+form]
 0x45C7D8: mov     ecx, [esi+0Ch]
-0x45C7DB: push    1
-0x45C7DD: push    ecx
-0x45C7DE: mov     ecx, [edi]
-0x45C7E0: call    sub_452DF0
+0x45C7DB: push    1; force
+0x45C7DD: push    ecx; formID
+0x45C7DE: mov     ecx, [edi]; self
+0x45C7E0: call    SaveLoadChangesMap_RemoveChanges;
 0x45C7E5: push    0; int
 0x45C7E7: push    offset ??_R0?AVTESObjectCELL@@@8; struct TypeDescriptor *
 0x45C7EC: push    offset ??_R0?AVTESForm@@@8; struct _s_RTTICompleteObjectLocator *

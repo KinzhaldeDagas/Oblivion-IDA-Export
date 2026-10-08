@@ -1,18 +1,31 @@
 {
-  "callees_count": 3,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x52EC30",
+      "0x52EC59"
+    ]
+  ],
+  "chunks_sha256": "b4ade713476c3a8fecf14640194f338d94306f2f9ee057e865fd55adb6c77a9b",
+  "comment_regular": "Runtime TESTopic XIDX writer initializes/finalizes a DIAL record chunk and emits four bytes from the field at TESTopic+0x30 under XIDX. This confirms XIDX is a persisted raw U32 field in Oblivion.",
+  "comment_repeatable": "Runtime TESTopic XIDX writer initializes/finalizes a DIAL record chunk and emits four bytes from the field at TESTopic+0x30 under XIDX. This confirms XIDX is a persisted raw U32 field in Oblivion.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_52EC30",
+  "display_name": "TESTopic_SaveXidxRecord",
   "end_ea": "0x52EC59",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_52EC30",
+  "name": "TESTopic_SaveXidxRecord",
   "segment": ".text",
   "sha256": "b4ade713476c3a8fecf14640194f338d94306f2f9ee057e865fd55adb6c77a9b",
   "size": 41,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52EC30",
+  "total_chunk_size": 41,
   "type": "UInt32 __usercall@<eax>(TESForm *this@<ecx>, char@<bpl>)",
   "xrefs_from_count": 15,
   "xrefs_to_count": 1

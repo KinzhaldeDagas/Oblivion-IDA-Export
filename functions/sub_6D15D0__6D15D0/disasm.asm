@@ -6,7 +6,7 @@
 0x6D15D8: push    edi
 0x6D15D9: push    ebp
 0x6D15DA: mov     esi, ecx
-0x6D15DC: call    sub_754E90
+0x6D15DC: call    j_NiTimeController_LinkObject
 0x6D15E1: mov     ecx, ebp
 0x6D15E3: call    sub_7124A0
 0x6D15E8: mov     edi, [esi+50h]
@@ -62,7 +62,7 @@
 0x6D166B: add     ecx, ebx
 0x6D166D: jmp     short loc_6D1671
 0x6D166F: xor     ecx, ecx
-0x6D1671: call    sub_452A60
+0x6D1671: call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.
 0x6D1676: mov     edx, [esi]
 0x6D1678: push    edi
 0x6D1679: push    eax

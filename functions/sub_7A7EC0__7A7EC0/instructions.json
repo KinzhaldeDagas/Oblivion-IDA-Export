@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x7A7EC0",
-    "line": "push    ecx",
+    "line": "push    ecx; OBLIVION AUTHORITY (2026-08-24): CBillboardLeaf::GetColor decodes packed +0x14 R/G/B bytes to float channels by dividing by 255. Used by lower-LOD pair averaging at 0x7A91A8/0x7A91AA.",
     "mnemonic": "push",
     "size": 1
   },
@@ -19,7 +19,7 @@
   },
   {
     "ea": "0x7A7EC8",
-    "line": "mov     eax, [esp+4+arg_0]",
+    "line": "mov     eax, [esp+4+outRgb]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -43,7 +43,7 @@
   },
   {
     "ea": "0x7A7ED9",
-    "line": "mov     [esp+4+arg_0], edx",
+    "line": "mov     [esp+4+outRgb], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -73,13 +73,13 @@
   },
   {
     "ea": "0x7A7EE7",
-    "line": "fild    [esp+4+arg_0]",
+    "line": "fild    [esp+4+outRgb]",
     "mnemonic": "fild",
     "size": 4
   },
   {
     "ea": "0x7A7EEB",
-    "line": "mov     [esp+4+arg_0], ecx",
+    "line": "mov     [esp+4+outRgb], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x7A7EF4",
-    "line": "fild    [esp+4+arg_0]",
+    "line": "fild    [esp+4+outRgb]",
     "mnemonic": "fild",
     "size": 4
   },

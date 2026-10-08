@@ -4,7 +4,6 @@
 0x46E657: test    esi, esi
 0x46E659: jz      short loc_46E69C
 0x46E65B: jmp     short loc_46E660
-0x46E65D: align 10h
 0x46E660: mov     eax, [esi]
 0x46E662: test    eax, eax
 0x46E664: jz      short loc_46E69C
@@ -21,7 +20,7 @@
 0x46E680: push    4D414E58h; int
 0x46E685: mov     [esp+18h+Src], ecx
 0x46E689: mov     [esp+18h+var_4], edx
-0x46E68D: call    TESForm_PutFormRecordChunkData
+0x46E68D: call    TESForm_PutFormRecordChunkData; Verified helper contract: writes the 4-byte chunk code, 16-bit size, then memcpy-copies the supplied payload bytes unchanged. FormID conversion must therefore be performed by the caller; ExtraDataList_Save's XOWN branch supplies ownerForm->refID.
 0x46E692: add     esp, 0Ch
 0x46E695: mov     esi, [esi+4]
 0x46E698: test    esi, esi

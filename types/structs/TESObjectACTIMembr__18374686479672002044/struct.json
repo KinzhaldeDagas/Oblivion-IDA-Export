@@ -1,40 +1,72 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "TESObjectACTIMembr",
+  "definition": "struct TESObjectACTIMembr\n{\nTESBoundObjectMembr super;\nTESFullName fullName;\nTESModel model;\nTESScriptableForm scriptable;\nTESSound *loopSound;\n}\n",
   "id": 18374686479672002044,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "super",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 32
+      "size": 32,
+      "type": "TESBoundObjectMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "fullName",
       "offset": 32,
       "offset_hex": "0x20",
-      "size": 12
+      "size": 12,
+      "type": "TESFullName"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "model",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 24
+      "offset_hex": "0x2C",
+      "size": 24,
+      "type": "TESModel"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "scriptable",
       "offset": 68,
       "offset_hex": "0x44",
-      "size": 12
+      "size": 12,
+      "type": "TESScriptableForm"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00059.",
       "name": "loopSound",
       "offset": 80,
       "offset_hex": "0x50",
-      "size": 4
+      "size": 4,
+      "type": "TESSound *"
     }
   ],
   "name": "TESObjectACTIMembr",
+  "ordinal": 9662,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 84
 }

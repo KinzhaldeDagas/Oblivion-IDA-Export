@@ -9,10 +9,10 @@
 0x7E6AA6: mov     eax, [ebx+158h]
 0x7E6AAC: mov     ecx, edi
 0x7E6AAE: shl     ecx, 4
-0x7E6AB1: push    ecx; Size
-0x7E6AB2: push    edx; Src
-0x7E6AB3: push    eax; Dst
-0x7E6AB4: call    _memcpy
+0x7E6AB1: push    ecx; byteCount
+0x7E6AB2: push    edx; source
+0x7E6AB3: push    eax; destination
+0x7E6AB4: call    _memcpy;
 0x7E6AB9: movzx   eax, word ptr [esi+0Eh]
 0x7E6ABD: mov     ecx, [esi]
 0x7E6ABF: mov     ecx, [ecx+0B4h]

@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x43B780",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; QueuedTreeModel allocation wrapper. Allocates 0x40-byte entry, calls 0x4376A0, attaches queued children, then schedules via vtable slot +0x20.",
     "mnemonic": "push",
     "size": 2
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x43B7B6",
-    "line": "call    FormHeapAlloc",
+    "line": "call    FormHeapAlloc; Verified: queued tree model task allocation is 0x40 bytes and uses the local QueuedTreeModel_OblivionLayout. Fallout's task implementation follows the same scheduling role but its layout is PPC-specific and must not share Oblivion offsets.",
     "mnemonic": "call",
     "size": 5
   },
@@ -121,61 +121,61 @@
   },
   {
     "ea": "0x43B7CE",
-    "line": "mov     ecx, [esp+1Ch+arg_14]",
+    "line": "mov     ecx, [esp+1Ch+unknownArg]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x43B7D2",
-    "line": "mov     edx, [esp+1Ch+arg_C]",
+    "line": "mov     edx, dword ptr [esp+1Ch+priority]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x43B7D6",
-    "line": "push    ecx",
+    "line": "push    ecx; lodMultiplier",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43B7D7",
-    "line": "mov     ecx, [esp+20h+arg_8]",
+    "line": "mov     ecx, [esp+20h+tree]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x43B7DB",
-    "line": "push    edx",
+    "line": "push    edx; priority",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43B7DC",
-    "line": "mov     edx, [esp+24h+arg_4]",
+    "line": "mov     edx, [esp+24h+reference]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x43B7E0",
-    "line": "push    ecx",
+    "line": "push    ecx; tree",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43B7E1",
-    "line": "push    edx",
+    "line": "push    edx; reference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x43B7E2",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x43B7E4",
-    "line": "call    sub_4376A0",
+    "line": "call    QueuedTreeModel_ctor; Verified 0x40-byte QueuedTreeModel constructor layout: +0x2C TESModel component, +0x30 lodMultiplier, +0x34 task flags, +0x38 TESObjectREFR, and +0x3C TESObjectTREE. Bytes +0x35..+0x37 remain Unknown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -199,7 +199,7 @@
   },
   {
     "ea": "0x43B7EF",
-    "line": "mov     esi, [esp+1Ch+arg_0]",
+    "line": "mov     esi, [esp+1Ch+outTask]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x43B801",
-    "line": "mov     eax, [esp+1Ch+arg_10]",
+    "line": "mov     eax, [esp+1Ch+parent]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -334,5 +334,119 @@
     "line": "retn    18h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9ACAF0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACAF3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACAF4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACAF9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACAFA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACAFB",
+    "line": "mov     eax, [ebp-14h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACAFE",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACB01",
+    "line": "jz      locret_9ACB13",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9ACB07",
+    "line": "and     dword ptr [ebp-14h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 4
+  },
+  {
+    "ea": "0x9ACB0B",
+    "line": "mov     ecx, [ebp+4]; void *",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACB0E",
+    "line": "jmp     sub_4BDDC0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACB13",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9ACB14",
+    "line": "mov     edx, [esp+reference]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9ACB18",
+    "line": "lea     eax, [edx-0Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACB1B",
+    "line": "mov     ecx, [edx-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9ACB1E",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9ACB20",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACB25",
+    "line": "mov     eax, offset stru_AD9758",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9ACB2A",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

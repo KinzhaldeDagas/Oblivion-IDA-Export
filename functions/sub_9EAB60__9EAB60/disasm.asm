@@ -1,4 +1,4 @@
-0x9EAB60: fld     ds:flt_A3D65C
+0x9EAB60: fld     ds:kHeadBodyNormalMatchRadius
 0x9EAB66: push    ecx
 0x9EAB67: fstp    [esp+4+var_4]; float
 0x9EAB6A: push    offset aFactorarmordes; "fActorArmorDesirabilityDamageMult"

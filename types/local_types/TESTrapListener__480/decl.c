@@ -1,1 +1,1 @@
-TESTrapListener
+struct TESTrapListener;

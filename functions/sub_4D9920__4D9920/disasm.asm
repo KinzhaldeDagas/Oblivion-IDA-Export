@@ -11,7 +11,7 @@
 0x4D9939: call    sub_4D68A0
 0x4D993E: add     esp, 8
 0x4D9941: retn    4
-0x4D9944: mov     eax, offset stru_BA7A40
+0x4D9944: mov     eax, offset unk_BA7A40
 0x4D9949: push    eax
 0x4D994A: mov     eax, [esp+4+arg_0]
 0x4D994E: push    eax

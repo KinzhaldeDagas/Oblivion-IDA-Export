@@ -1,7 +1,7 @@
-0x788630: mov     edx, [esp+arg_0]
-0x788634: mov     eax, [esp+arg_8]
+0x788630: mov     edx, [esp+first]; Oblivion collision-vector uninitialized copy: copies [first,last) as 28-byte records into destination and returns the advanced destination.
+0x788634: mov     eax, [esp+destination]
 0x788638: push    ebx
-0x788639: mov     ebx, [esp+4+arg_4]
+0x788639: mov     ebx, [esp+4+last]
 0x78863D: cmp     edx, ebx
 0x78863F: jz      short loc_78865E
 0x788641: push    esi

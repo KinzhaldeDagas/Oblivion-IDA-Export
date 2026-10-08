@@ -1,36 +1,39 @@
-void __thiscall sub_58BC20(_DWORD *this)
+// Verified: walks typed template item list, frees item BSStringT buffer and each item; removes list nodes and decrements count. Mirrors role of Fallout TileTemplate::Clear, but no pooling established here.
+void __thiscall Tile::TileTemplate::Clear(OblivionTileTemplate *this)
 {
-  _DWORD *v2; // esi
-  int *v3; // eax
-  int v4; // ecx
+  OblivionTileTemplateItemList *p_items; // esi
+  OblivionTileTemplateItemNode *head; // eax
+  OblivionTileTemplateItemNode *next; // ecx
   bool v5; // zf
-  unsigned int v6; // edi
+  unsigned int item; // edi
 
-  if ( *(this + 6) )
+  if ( this->items.count ) /*0x58bc26*/
   {
-    v2 = this + 3;
-    do
+    p_items = &this->items; /*0x58bc2d*/
+    do /*0x58bc76*/
     {
-      v3 = (int *)*(this + 4);
-      v4 = *v3;
-      v5 = *v3 == 0;
-      *(this + 4) = *v3;
-      if ( v5 )
-        *(this + 5) = 0;
+      head = this->items.head; /*0x58bc30*/
+      next = head->next; /*0x58bc33*/
+      v5 = head->next == 0; /*0x58bc35*/
+      this->items.head = head->next; /*0x58bc37*/
+      if ( v5 ) /*0x58bc3a*/
+        this->items.tail = 0; /*0x58bc41*/
       else
-        *(_DWORD *)(v4 + 4) = 0;
-      v6 = v3[2];
-      (*(void (__thiscall **)(_DWORD *, int *))(*v2 + 8))(this + 3, v3);
-      --*(this + 6);
-      if ( v6 )
+        next->previous = 0; /*0x58bc3c*/
+      item = (unsigned int)head->item; /*0x58bc46*/
+      (*((void (__thiscall **)(OblivionTileTemplateItemList *, OblivionTileTemplateItemNode *))p_items->vtable + 2))( /*0x58bc4f*/
+        &this->items,
+        head);
+      --this->items.count; /*0x58bc51*/
+      if ( item ) /*0x58bc57*/
       {
-        FormHeapFree(*(_DWORD *)(v6 + 8));
-        *(_DWORD *)(v6 + 8) = 0;
-        *(_WORD *)(v6 + 0xE) = 0;
-        *(_WORD *)(v6 + 0xC) = 0;
-        FormHeapFree(v6);
+        FormHeapFree(*(_DWORD *)(item + 8)); /*0x58bc5d*/
+        *(_DWORD *)(item + 8) = 0; /*0x58bc63*/
+        *(_WORD *)(item + 0xE) = 0; /*0x58bc66*/
+        *(_WORD *)(item + 0xC) = 0; /*0x58bc6a*/
+        FormHeapFree(item); /*0x58bc6e*/
       }
     }
-    while ( *(this + 6) );
+    while ( this->items.count ); /*0x58bc76*/
   }
 }

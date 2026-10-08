@@ -1,1 +1,1 @@
-HIC
+typedef HIC__ *HIC;

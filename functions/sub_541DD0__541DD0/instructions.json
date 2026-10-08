@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x541DD0",
-    "line": "sub     esp, 30h",
+    "line": "sub     esp, 30h; Oblivion Sky fog synthesis. Selects underwater/water, exterior weather, or interior-cell fog distances and colors, updates sky/sun presentation, and optionally clamps the far plane. Fallout corroborates the conventional Sky::UpdateFog label only after the Oblivion behavior was established.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -37,13 +37,13 @@
   },
   {
     "ea": "0x541DDF",
-    "line": "jbe     loc_541F77",
+    "line": "jbe     loc_541F77; Fog water decode: enter water/underwater Sky fog branch when Flags0FC bit 2 was set by normal sky update water-height test.",
     "mnemonic": "jbe",
     "size": 6
   },
   {
     "ea": "0x541DE5",
-    "line": "call    sub_4994C0",
+    "line": "call    sub_4994C0; Fog water decode: select current water fog source record via 0x4994C0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -85,7 +85,7 @@
   },
   {
     "ea": "0x541DFA",
-    "line": "fstp    dword ptr [esi+0C8h]",
+    "line": "fstp    dword ptr [esi+0C8h]; Fog water decode: Sky+0x0C8 fogStart = selected water source record field [0x18].",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x541E03",
-    "line": "fstp    dword ptr [esi+0CCh]",
+    "line": "fstp    dword ptr [esi+0CCh]; Fog water decode: Sky+0x0CC fogEnd = selected water source record field [0x19].",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x541E29",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Fog water decode: reads player/current parent cell before water-height depth calculation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -181,7 +181,7 @@
   },
   {
     "ea": "0x541E41",
-    "line": "fstp    [esp+40h+var_30]",
+    "line": "fstp    [esp+40h+var_30]; Fog water decode: depth blend factor = (cell water height - active scene height) * unk_B36670, later clamped to max 1.0.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -295,7 +295,7 @@
   },
   {
     "ea": "0x541E73",
-    "line": "mov     [esp+44h+var_20], ecx",
+    "line": "mov     [esp+44h+var_20], ecx; Fog water decode: first packed RGB water fog color = source record field [0x1A].",
     "mnemonic": "mov",
     "size": 4
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x541E7A",
-    "line": "fstp    [esp+44h+var_10]",
+    "line": "fstp    [esp+44h+var_10]; Fog water decode: first water fog color weight = 1 - depthBlend.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -319,13 +319,13 @@
   },
   {
     "ea": "0x541E80",
-    "line": "mov     [esp+44h+var_1C], edx",
+    "line": "mov     [esp+44h+var_1C], edx; Fog water decode: second packed RGB water fog color = source record field [0x1B].",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x541E84",
-    "line": "fstp    [esp+44h+var_C]",
+    "line": "fstp    [esp+44h+var_C]; Fog water decode: second water fog color weight = depthBlend.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x541E9F",
-    "line": "call    sub_5400E0",
+    "line": "call    sub_5400E0; Fog water decode: blend packed water RGB colors into Sky+0x48/+0x4C/+0x50 using 0x5400E0.",
     "mnemonic": "call",
     "size": 5
   },
@@ -427,7 +427,7 @@
   },
   {
     "ea": "0x541EBD",
-    "line": "fstp    dword ptr [edi]",
+    "line": "fstp    dword ptr [edi]; Fog water decode: in exterior/weather sky modes, multiply water fog RGB by existing Sky color/tint vector at +0x6C/+0x70/+0x74.",
     "mnemonic": "fstp",
     "size": 2
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x541EE0",
-    "line": "jp      short loc_541EE6",
+    "line": "jp      short loc_541EE6; Fog water decode: compare depthBlend against flt_A3D65C to choose underwater sky visibility flag state.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -547,7 +547,7 @@
   },
   {
     "ea": "0x541EFA",
-    "line": "jz      short loc_541F02",
+    "line": "jz      short loc_541F02; Fog water decode: toggles clouds node m_flags bit 0 for underwater sky visibility.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x541F1D",
-    "line": "call    sub_452A60",
+    "line": "call    Shared_GetPointerAtOffset08; Returns Mesh from metadata object found by 0x8AFCE0; part of ray hit -> NiAVObject resolution.",
     "mnemonic": "call",
     "size": 5
   },
@@ -631,7 +631,7 @@
   },
   {
     "ea": "0x541F24",
-    "line": "jz      short loc_541F2C",
+    "line": "jz      short loc_541F2C; Fog water decode: toggles atmosphere mesh m_flags bit 0 for underwater sky visibility.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -673,7 +673,7 @@
   },
   {
     "ea": "0x541F38",
-    "line": "jz      short loc_541F40",
+    "line": "jz      short loc_541F40; Fog water decode: toggles sun billboard m_flags bit 0 for underwater sky visibility.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x541F4C",
-    "line": "jz      short loc_541F54",
+    "line": "jz      short loc_541F54; Fog water decode: toggles sun glare billboard m_flags bit 0 for underwater sky visibility.",
     "mnemonic": "jz",
     "size": 2
   },
@@ -745,7 +745,7 @@
   },
   {
     "ea": "0x541F5A",
-    "line": "mov     esi, [esi+4]",
+    "line": "mov     esi, [esi+4]; Fog water decode: toggles sky root m_flags bit 0, then water branch returns before weather/interior fog and far-plane clamp.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -841,7 +841,7 @@
   },
   {
     "ea": "0x541F77",
-    "line": "cmp     dword ptr [esi+10h], 0",
+    "line": "cmp     dword ptr [esi+10h], 0; Exterior fog decode: enters normal weather-fog branch when Sky::firstWeather is present.",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x541F81",
-    "line": "mov     eax, [esi+0DCh]",
+    "line": "mov     eax, [esi+0DCh]; Exterior fog decode: reads Sky::unk0DC mode for weather fog; modes 2 and 3 are the exterior/weather path.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -877,7 +877,7 @@
   },
   {
     "ea": "0x541F8F",
-    "line": "jnz     loc_54211C",
+    "line": "jnz     loc_54211C; Exterior fog decode: guard for Sky exterior/weather modes 2 or 3 before TESWeather fog blending.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -889,13 +889,13 @@
   },
   {
     "ea": "0x541F97",
-    "line": "call    sub_53FC10",
+    "line": "call    sub_53FC10; Exterior fog day/night helper: computes adjusted sunrise blend start from climate sunrise minus transition padding.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541F9C",
-    "line": "fstp    [esp+3Ch+var_2C]",
+    "line": "fstp    [esp+3Ch+var_2C]; Fog time-boundary decode: exterior distance update consumes adjusted sunrise blend-start from 0x53FC10.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -907,13 +907,13 @@
   },
   {
     "ea": "0x541FA2",
-    "line": "call    sub_499180",
+    "line": "call    sub_499180; Exterior fog day/night helper: climate day boundary byte (+0x51) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541FA7",
-    "line": "fstp    [esp+3Ch+var_30]",
+    "line": "fstp    [esp+3Ch+var_30]; Fog time-boundary decode: exterior distance update consumes normalized climate day boundary from 0x499180.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -925,13 +925,13 @@
   },
   {
     "ea": "0x541FAD",
-    "line": "call    sub_4991C0",
+    "line": "call    sub_4991C0; Exterior fog day/night helper: climate sunset boundary byte (+0x52) cached as normalized time for weather fog interpolation.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541FB2",
-    "line": "fstp    [esp+3Ch+var_28]",
+    "line": "fstp    [esp+3Ch+var_28]; Fog time-boundary decode: exterior distance update consumes normalized climate sunset boundary from 0x4991C0.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -943,13 +943,13 @@
   },
   {
     "ea": "0x541FB8",
-    "line": "call    sub_53FC90",
+    "line": "call    sub_53FC90; Exterior fog day/night helper: computes adjusted sunset/night blend end from climate night plus transition padding.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x541FBD",
-    "line": "fstp    [esp+3Ch+var_24]",
+    "line": "fstp    [esp+3Ch+var_24]; Fog time-boundary decode: exterior distance update consumes adjusted sunset/night blend-end from 0x53FC90.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1051,7 +1051,7 @@
   },
   {
     "ea": "0x541FF3",
-    "line": "fdivrp  st(1), st",
+    "line": "fdivrp  st(1), st; Fog weather-field decode: sunrise transition computes dayWeight from current time between adjusted sunrise blend-start and climate day boundary.",
     "mnemonic": "fdivrp",
     "size": 2
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x542051",
-    "line": "fdivrp  st(1), st",
+    "line": "fdivrp  st(1), st; Fog weather-field decode: sunset transition computes dayWeight decreasing from climate sunset boundary to adjusted sunset blend-end.",
     "mnemonic": "fdivrp",
     "size": 2
   },
@@ -1273,13 +1273,13 @@
   },
   {
     "ea": "0x542059",
-    "line": "fldz",
+    "line": "fldz; Fog weather-field decode: outside day window, dayWeight = 0 so TESWeather night fog fields dominate.",
     "mnemonic": "fldz",
     "size": 2
   },
   {
     "ea": "0x54205B",
-    "line": "mov     eax, [esi+10h]",
+    "line": "mov     eax, [esi+10h]; Exterior fog decode: firstWeather pointer; TESWeather fog fields are +0x58/+0x5C day near/far and +0x60/+0x64 night near/far.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1291,7 +1291,7 @@
   },
   {
     "ea": "0x542062",
-    "line": "fld     [esp+3Ch+var_30]",
+    "line": "fld     [esp+3Ch+var_30]; Fog weather-field decode: dayWeight used for TESWeather day near/far fields +0x58/+0x5C.",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x542070",
-    "line": "fstp    [esp+3Ch+var_24]",
+    "line": "fstp    [esp+3Ch+var_24]; Fog weather-field decode: nightWeight = 1 - dayWeight used for TESWeather night near/far fields +0x60/+0x64.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1381,7 +1381,7 @@
   },
   {
     "ea": "0x542088",
-    "line": "fstp    dword ptr [esi+0C8h]",
+    "line": "fstp    dword ptr [esi+0C8h]; Exterior fog decode: writes Sky+0x0C8 fogStart = lerp(nightNear +0x60, dayNear +0x58, dayWeight) from firstWeather.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1393,13 +1393,13 @@
   },
   {
     "ea": "0x542091",
-    "line": "fmul    st, st(1)",
+    "line": "fmul    st, st(1); Fog weather-field decode: night fogFar component = TESWeather +0x64 * nightWeight.",
     "mnemonic": "fmul",
     "size": 2
   },
   {
     "ea": "0x542093",
-    "line": "fld     dword ptr [eax+5Ch]",
+    "line": "fld     dword ptr [eax+5Ch]; Fog weather-field decode: day fogFar component reads TESWeather +0x5C before dayWeight blend.",
     "mnemonic": "fld",
     "size": 3
   },
@@ -1429,13 +1429,13 @@
   },
   {
     "ea": "0x54209F",
-    "line": "fstp    dword ptr [esi+0CCh]",
+    "line": "fstp    dword ptr [esi+0CCh]; Exterior fog decode: writes Sky+0x0CC fogEnd = lerp(nightFar +0x64, dayFar +0x5C, dayWeight) from firstWeather.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x5420A5",
-    "line": "jz      loc_5421E6",
+    "line": "jz      loc_5421E6; Exterior fog decode: if secondWeather exists, blend first-weather fog against second-weather fog using Sky::weatherPercent.",
     "mnemonic": "jz",
     "size": 6
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x5420DD",
-    "line": "fstp    dword ptr [esi+0C8h]",
+    "line": "fstp    dword ptr [esi+0C8h]; Exterior fog decode: transition blend for Sky+0x0C8 fogStart; first-weather contribution weighted by weatherPercent, second by 1-weatherPercent.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1615,7 +1615,7 @@
   },
   {
     "ea": "0x542111",
-    "line": "fstp    dword ptr [esi+0CCh]",
+    "line": "fstp    dword ptr [esi+0CCh]; Exterior fog decode: transition blend for Sky+0x0CC fogEnd; first-weather contribution weighted by weatherPercent, second by 1-weatherPercent.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1633,7 +1633,7 @@
   },
   {
     "ea": "0x542123",
-    "line": "jnz     loc_5421D2",
+    "line": "jnz     loc_5421D2; Fog interior decode: enter interior distance branch when Sky::unk0DC == 1.",
     "mnemonic": "jnz",
     "size": 6
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x542136",
-    "line": "mov     ecx, [eax+34h]",
+    "line": "mov     ecx, [eax+34h]; Fog interior decode: fetch TES::currentInteriorCell before reading LightingData fog distances.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -1675,13 +1675,13 @@
   },
   {
     "ea": "0x542141",
-    "line": "call    sub_4C9A40",
+    "line": "call    sub_4C9A40; Fog interior decode: reads TESObjectCELL::LightingData fogFar at lighting+0x10 when cell lighting is valid.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x542146",
-    "line": "fstp    [esp+3Ch+var_30]",
+    "line": "fstp    [esp+3Ch+var_30]; Fog interior decode: read cell fogFar via 0x4C9A40.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x54216E",
-    "line": "mov     edx, ds:0B333A0h",
+    "line": "mov     edx, ds:0B333A0h; Fog interior decode: read cell fogNear via 0x4C9A20.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -1783,7 +1783,7 @@
   },
   {
     "ea": "0x542177",
-    "line": "call    sub_4C9A20",
+    "line": "call    sub_4C9A20; Fog interior decode: reads TESObjectCELL::LightingData fogNear at lighting+0x0C when cell lighting is valid.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1831,7 +1831,7 @@
   },
   {
     "ea": "0x54218F",
-    "line": "jnp     short loc_5421AA",
+    "line": "jnp     short loc_5421AA; Fog interior decode: validate fogNear; non-positive near falls back to derived start distance.",
     "mnemonic": "jnp",
     "size": 2
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x54219C",
-    "line": "jp      short loc_5421C2",
+    "line": "jp      short loc_5421C2; Fog interior decode: if fogFar >= fogNear, use cell fogNear directly as fogStart.",
     "mnemonic": "jp",
     "size": 2
   },
@@ -1885,7 +1885,7 @@
   },
   {
     "ea": "0x5421A4",
-    "line": "fstp    [esp+3Ch+var_30]",
+    "line": "fstp    [esp+3Ch+var_30]; Fog interior decode: clamp invalid or over-limit fogFar to default flt_A3F4F0.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1921,7 +1921,7 @@
   },
   {
     "ea": "0x5421B8",
-    "line": "fstp    [esp+3Ch+var_2C]",
+    "line": "fstp    [esp+3Ch+var_2C]; Fog interior decode: derived fallback fogStart = fogFar * dbl_A56EA0 when fogNear is invalid or beyond fogFar.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -1939,7 +1939,7 @@
   },
   {
     "ea": "0x5421C2",
-    "line": "fxch    st(1)",
+    "line": "fxch    st(1); Fog interior decode: write Sky+0x0C8 fogStart from cell fogNear or derived fallback.",
     "mnemonic": "fxch",
     "size": 2
   },
@@ -1951,7 +1951,7 @@
   },
   {
     "ea": "0x5421CA",
-    "line": "fstp    dword ptr [esi+0CCh]",
+    "line": "fstp    dword ptr [esi+0CCh]; Fog interior decode: write Sky+0x0CC fogEnd from clamped cell fogFar.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x5421D2",
-    "line": "fld     dword ptr ds:0A3F4F0h",
+    "line": "fld     dword ptr ds:0A3F4F0h; Fog default decode: default Sky fogStart/fogEnd to flt_A3F4F0 when water, weather, and interior branches do not produce values.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x5421EC",
-    "line": "call    sub_4E9F40",
+    "line": "call    sub_4E9F40; Fog decode: far-plane clamp gate. When 0x4E9F40 is false, non-water fogStart/fogEnd are remapped to active GetFarPlane output.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2029,13 +2029,13 @@
   },
   {
     "ea": "0x5421FF",
-    "line": "call    GetFarPlane",
+    "line": "call    GetFarPlane; Fog interior decode: GetFarPlane uses TESObjectCELL::LightingData fogClipDistance (+0x20) for interior mode 1 when available.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x542204",
-    "line": "fstp    [esp+3Ch+var_24]",
+    "line": "fstp    [esp+3Ch+var_24]; Fog decode: reads active GetFarPlane result; for interior mode 1 this can use cell fogClipDistance.",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -2167,13 +2167,13 @@
   },
   {
     "ea": "0x54224B",
-    "line": "fstp    dword ptr [esi+0C8h]",
+    "line": "fstp    dword ptr [esi+0C8h]; Fog decode: final clamped Sky+0x0C8 fogStart, preserving fog curve against NearDistance and active FarPlane.",
     "mnemonic": "fstp",
     "size": 6
   },
   {
     "ea": "0x542251",
-    "line": "fstp    dword ptr [esi+0CCh]",
+    "line": "fstp    dword ptr [esi+0CCh]; Fog decode: final clamped Sky+0x0CC fogEnd = active FarPlane.",
     "mnemonic": "fstp",
     "size": 6
   },

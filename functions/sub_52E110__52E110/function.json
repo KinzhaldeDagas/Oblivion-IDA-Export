@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x52E110",
+      "0x52E144"
+    ]
+  ],
+  "chunks_sha256": "b48cd57549cec69e4a3975056264d9e3c0fe863074cd2233bd2c67143cf6b0e9",
+  "comment_regular": "Copy the complete 16-byte TRDT payload and deep-copy responseText into the destination TESResponse. This is the ownership boundary between the global shared INFO response cache and each caller's temporary list.",
+  "comment_repeatable": "Copy the complete 16-byte TRDT payload and deep-copy responseText into the destination TESResponse. This is the ownership boundary between the global shared INFO response cache and each caller's temporary list.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_52E110",
+  "display_name": "TESResponse::CopyFrom",
   "end_ea": "0x52E144",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_52E110",
+  "name": "TESResponse::CopyFrom",
   "segment": ".text",
   "sha256": "b48cd57549cec69e4a3975056264d9e3c0fe863074cd2233bd2c67143cf6b0e9",
   "size": 52,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x52E110",
-  "type": "BOOL __thiscall(BSStringT *this, char **)",
+  "total_chunk_size": 52,
+  "type": "bool __thiscall(TESResponse *this, const TESResponse *source)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

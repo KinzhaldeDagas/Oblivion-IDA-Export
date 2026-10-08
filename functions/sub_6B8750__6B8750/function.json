@@ -1,19 +1,32 @@
 {
-  "callees_count": 27,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 16,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6B8750",
+      "0x6B8941"
+    ]
+  ],
+  "chunks_sha256": "f9e1a0a35d645b41942c05e5b15bf30ef0f29106faafcf8f807316cb24ab8b59",
+  "comment_regular": "OFE cache persistence verification 2026-10-02: 6B8750 serializes hasLinkedTopics, isInfoGeneralTopic (+20), infoNotSpoken (+21), and ownerQuest/topic/INFO through native SaveFormID. 6B8950 restores flags and resolves all three identities via native save-load fixup. Thus a routed Rumors cache can retain its actual custom topic at +24 and native InfoGeneral role marker without new savegame fields. DialogueResponse lists are reconstructed later by 425970; validate worldspace before using that cache.\n\nSerialize MenuTopic display string, hasLinkedTopics, isInfoGeneralTopic, infoNotSpoken, and ownerQuest/topic/INFO FormIDs. DialogueResponse nodes and cursors are runtime-only.",
+  "comment_repeatable": "Serialize MenuTopic display string, hasLinkedTopics, isInfoGeneralTopic, infoNotSpoken, and ownerQuest/topic/INFO FormIDs. DialogueResponse nodes and cursors are runtime-only.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 6,
-  "display_name": "sub_6B8750",
+  "display_name": "MenuTopic::SaveGame",
   "end_ea": "0x6B8941",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6B8750",
+  "name": "MenuTopic::SaveGame",
   "segment": ".text",
   "sha256": "f9e1a0a35d645b41942c05e5b15bf30ef0f29106faafcf8f807316cb24ab8b59",
   "size": 497,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6B8750",
-  "type": "char __thiscall(const char **this)",
+  "total_chunk_size": 497,
+  "type": "void __thiscall(MenuTopicView *this)",
   "xrefs_from_count": 187,
   "xrefs_to_count": 1
 }

@@ -1,4 +1,4 @@
-0x420380: push    3Fh ; '?'; a2
+0x420380: push    3Fh ; '?'; Replaces the complete ExtraEnableStateParent flags byte.
 0x420382: call    BaseExtraList_GetExtraData
 0x420387: test    eax, eax
 0x420389: jz      short locret_420392

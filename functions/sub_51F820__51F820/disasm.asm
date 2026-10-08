@@ -45,3 +45,18 @@
 0x51F8B7: pop     ebx
 0x51F8B8: add     esp, 10h
 0x51F8BB: retn
+0x9B7BB0: mov     ecx, [ebp-10h]; this
+0x9B7BB3: jmp     TESForm_destr
+0x9B7BB8: mov     ecx, [ebp-10h]
+0x9B7BBB: add     ecx, 18h
+0x9B7BBE: jmp     TESFullName_Initialize
+0x9B7BC3: mov     ecx, [ebp-10h]
+0x9B7BC6: add     ecx, 24h ; '$'
+0x9B7BC9: jmp     sub_46E5C0
+0x9B7BCE: mov     edx, [esp+arg_4]
+0x9B7BD2: lea     eax, [edx-10h]
+0x9B7BD5: mov     ecx, [edx-14h]
+0x9B7BD8: xor     ecx, eax
+0x9B7BDA: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7BDF: mov     eax, offset stru_AE24D0
+0x9B7BE4: jmp     ___CxxFrameHandler3

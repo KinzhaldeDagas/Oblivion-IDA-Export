@@ -17,51 +17,51 @@ __m128 *__thiscall sub_929310(__m128 *this, int a2, __m128 *a3)
   float v18; // [esp+Ch] [ebp-14h]
   __m128 v19; // [esp+10h] [ebp-10h] BYREF
 
-  (*(void (__thiscall **)(__m128 *, int, __m128 *))(this->m128_i32[0] + 0x10))(this, a2, &v19);
-  v4 = _mm_mul_ps(v19, (__m128)xmmword_B2F0A0);
-  if ( (float)(_mm_shuffle_ps(v4, v4, 0xAA).m128_f32[0]
+  (*(void (__thiscall **)(__m128 *, int, __m128 *))(this->m128_i32[0] + 0x10))(this, a2, &v19); /*0x929329*/
+  v4 = _mm_mul_ps(v19, (__m128)xmmword_B2F0A0); /*0x92933b*/
+  if ( (float)(_mm_shuffle_ps(v4, v4, 0xAA).m128_f32[0] /*0x92936b*/
              + (float)(_mm_shuffle_ps(v4, v4, 0x55).m128_f32[0] + v4.m128_f32[0])) >= (double)flt_A52A74 )
   {
-    v6 = 0;
-    v7 = fabs(v19.m128_f32[0]);
-    v8 = 1;
-    v9 = fabs(v19.m128_f32[1]);
-    v10 = 2;
-    v18 = fabs(v19.m128_f32[2]);
-    if ( v9 < v7 )
+    v6 = 0; /*0x9293a2*/
+    v7 = fabs(v19.m128_f32[0]); /*0x9293a4*/
+    v8 = 1; /*0x9293a6*/
+    v9 = fabs(v19.m128_f32[1]); /*0x9293af*/
+    v10 = 2; /*0x9293b1*/
+    v18 = fabs(v19.m128_f32[2]); /*0x9293c0*/
+    if ( v9 < v7 ) /*0x9293cb*/
     {
-      v8 = 0;
-      v17 = v9;
-      v7 = v17;
-      v6 = 1;
+      v8 = 0; /*0x9293cf*/
+      v17 = v9; /*0x9293b6*/
+      v7 = v17; /*0x9293d1*/
+      v6 = 1; /*0x9293d5*/
     }
-    if ( v18 < v7 )
+    if ( v18 < v7 ) /*0x9293e7*/
     {
-      v10 = v6;
-      v6 = 2;
+      v10 = v6; /*0x9293e9*/
+      v6 = 2; /*0x9293eb*/
     }
-    result = a3;
-    a3->m128_i32[v6] = 0;
-    v11 = v19.m128_i32[v10];
-    a3->m128_i32[3] = 0;
-    a3->m128_i32[v8] = v11;
-    a3->m128_f32[v10] = -v19.m128_f32[v8];
+    result = a3; /*0x9293f0*/
+    a3->m128_i32[v6] = 0; /*0x9293f3*/
+    v11 = v19.m128_i32[v10]; /*0x9293fa*/
+    a3->m128_i32[3] = 0; /*0x9293fe*/
+    a3->m128_i32[v8] = v11; /*0x929405*/
+    a3->m128_f32[v10] = -v19.m128_f32[v8]; /*0x92940e*/
   }
   else
   {
-    result = a3;
-    *a3 = _mm_sub_ps(
+    result = a3; /*0x929371*/
+    *a3 = _mm_sub_ps( /*0x929399*/
             _mm_mul_ps(_mm_shuffle_ps(v19, v19, 0xC9), _mm_shuffle_ps(*(this + 1), *(this + 1), 0xD2)),
             _mm_mul_ps(_mm_shuffle_ps(v19, v19, 0xD2), _mm_shuffle_ps(*(this + 1), *(this + 1), 0xC9)));
   }
-  v12 = *result;
-  v13 = _mm_mul_ps(v12, v12);
-  v14 = _mm_shuffle_ps(v13, v13, 0x55).m128_f32[0] + v13.m128_f32[0];
-  v15 = _mm_shuffle_ps(v13, v13, 0xAA).m128_f32[0];
-  v19.m128_f32[0] = 1.0 / fsqrt(v15 + v14);
-  v16 = (__m128)0x3F000000u;
-  v16.m128_f32[0] = (float)(0.5 * v19.m128_f32[0])
+  v12 = *result; /*0x929411*/
+  v13 = _mm_mul_ps(v12, v12); /*0x929417*/
+  v14 = _mm_shuffle_ps(v13, v13, 0x55).m128_f32[0] + v13.m128_f32[0]; /*0x929421*/
+  v15 = _mm_shuffle_ps(v13, v13, 0xAA).m128_f32[0]; /*0x929428*/
+  v19.m128_f32[0] = 1.0 / fsqrt(v15 + v14); /*0x92943c*/
+  v16 = (__m128)0x3F000000u; /*0x929469*/
+  v16.m128_f32[0] = (float)(0.5 * v19.m128_f32[0]) /*0x929473*/
                   * (float)(3.0 - (float)((float)((float)(v15 + v14) * v19.m128_f32[0]) * v19.m128_f32[0]));
-  *result = _mm_mul_ps(_mm_shuffle_ps(v16, v16, 0), v12);
-  return result;
+  *result = _mm_mul_ps(_mm_shuffle_ps(v16, v16, 0), v12); /*0x929481*/
+  return result; /*0x929484*/
 }

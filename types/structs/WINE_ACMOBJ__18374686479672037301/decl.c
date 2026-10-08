@@ -1,1 +1,5 @@
-_WINE_ACMOBJ
+struct _WINE_ACMOBJ
+{
+DWORD dwType;
+PWINE_ACMDRIVERID pACMDriverID;
+};

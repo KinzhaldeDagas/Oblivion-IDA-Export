@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4E9150",
-    "line": "sub     esp, 24h",
+    "line": "sub     esp, 24h; Verified: this is a TESRoad method; the TravelPath caller obtains it from TESWorldSpace+0x54. Searches the road's per-cell connected-point map starting at the endpoint's cell, expands through neighboring cell buckets, and returns a nearest point from the first populated ring (bounded by 20 expansion steps). dbl_A3A5B0 is only an FLT_MAX sentinel. The separate fRoadPointReachDistance setting (default 500) is not used as this search's threshold.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -79,7 +79,7 @@
   },
   {
     "ea": "0x4E9176",
-    "line": "mov     edi, [esp+34h+arg_0]",
+    "line": "mov     edi, [esp+34h+position]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x4E918D",
-    "line": "fistp   [esp+34h+var_10]",
+    "line": "fistp   dword ptr [esp+34h+group_x]",
     "mnemonic": "fistp",
     "size": 4
   },
@@ -127,7 +127,7 @@
   },
   {
     "ea": "0x4E9194",
-    "line": "mov     ebp, [esp+34h+var_10]",
+    "line": "mov     ebp, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -151,7 +151,7 @@
   },
   {
     "ea": "0x4E91A3",
-    "line": "fistp   [esp+34h+var_10]",
+    "line": "fistp   dword ptr [esp+34h+group_x]",
     "mnemonic": "fistp",
     "size": 4
   },
@@ -163,13 +163,13 @@
   },
   {
     "ea": "0x4E91AD",
-    "line": "mov     ebx, [esp+34h+var_10]",
+    "line": "mov     ebx, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E91B1",
-    "line": "fstp    [esp+34h+var_20]",
+    "line": "fstp    [esp+34h+outDistance]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -181,19 +181,19 @@
   },
   {
     "ea": "0x4E91B8",
-    "line": "push    ebx",
+    "line": "push    ebx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E91B9",
-    "line": "push    ebp",
+    "line": "push    ebp; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E91BA",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x4E91C2",
-    "line": "lea     ecx, [esp+34h+var_10]",
+    "line": "lea     ecx, [esp+34h+group_x]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -235,7 +235,7 @@
   },
   {
     "ea": "0x4E91CD",
-    "line": "mov     [esp+3Ch+var_10], 0",
+    "line": "mov     dword ptr [esp+3Ch+group_x], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -247,7 +247,7 @@
   },
   {
     "ea": "0x4E91DA",
-    "line": "mov     eax, [esp+34h+var_10]",
+    "line": "mov     eax, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -259,31 +259,31 @@
   },
   {
     "ea": "0x4E91E2",
-    "line": "lea     edx, [esp+34h+var_20]",
+    "line": "lea     edx, [esp+34h+outDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E91E6",
-    "line": "push    edx",
+    "line": "push    edx; outDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E91E7",
-    "line": "push    eax",
+    "line": "push    eax; points",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E91E8",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E91E9",
-    "line": "call    sub_4E8DB0",
+    "line": "call    TESRoad_FindNearestConnectedPoint; Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
     "mnemonic": "call",
     "size": 5
   },
@@ -307,7 +307,7 @@
   },
   {
     "ea": "0x4E91F4",
-    "line": "fld     [esp+34h+var_20]",
+    "line": "fld     [esp+34h+outDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -352,12 +352,6 @@
     "line": "jmp     short loc_4E9212",
     "mnemonic": "jmp",
     "size": 2
-  },
-  {
-    "ea": "0x4E920F",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 1
   },
   {
     "ea": "0x4E9210",
@@ -463,7 +457,7 @@
   },
   {
     "ea": "0x4E924A",
-    "line": "mov     [esp+34h+var_8], ecx",
+    "line": "mov     [esp+34h+points], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -475,19 +469,19 @@
   },
   {
     "ea": "0x4E9250",
-    "line": "push    ebx",
+    "line": "push    ebx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9251",
-    "line": "push    ebp",
+    "line": "push    ebp; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9252",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -499,7 +493,7 @@
   },
   {
     "ea": "0x4E925A",
-    "line": "lea     edx, [esp+34h+var_10]",
+    "line": "lea     edx, [esp+34h+group_x]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -523,7 +517,7 @@
   },
   {
     "ea": "0x4E9262",
-    "line": "mov     [esp+3Ch+var_10], 0",
+    "line": "mov     dword ptr [esp+3Ch+group_x], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -535,25 +529,25 @@
   },
   {
     "ea": "0x4E926F",
-    "line": "mov     ecx, [esp+34h+var_10]",
+    "line": "mov     ecx, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9273",
-    "line": "lea     eax, [esp+34h+var_20]",
+    "line": "lea     eax, [esp+34h+outDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9277",
-    "line": "push    eax",
+    "line": "push    eax; outDistance",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9278",
-    "line": "push    ecx",
+    "line": "push    ecx; points",
     "mnemonic": "push",
     "size": 1
   },
@@ -565,13 +559,13 @@
   },
   {
     "ea": "0x4E927D",
-    "line": "push    edi",
+    "line": "push    edi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E927E",
-    "line": "call    sub_4E8DB0",
+    "line": "call    TESRoad_FindNearestConnectedPoint; Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,7 +589,7 @@
   },
   {
     "ea": "0x4E9289",
-    "line": "fld     [esp+34h+var_20]",
+    "line": "fld     [esp+34h+outDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -661,7 +655,7 @@
   },
   {
     "ea": "0x4E92A9",
-    "line": "sub     [esp+34h+var_8], 1",
+    "line": "sub     [esp+34h+points], 1",
     "mnemonic": "sub",
     "size": 5
   },
@@ -679,7 +673,7 @@
   },
   {
     "ea": "0x4E92B4",
-    "line": "mov     [esp+34h+var_10], ebp",
+    "line": "mov     dword ptr [esp+34h+group_x], ebp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -696,32 +690,26 @@
     "size": 2
   },
   {
-    "ea": "0x4E92BE",
-    "line": "align 10h",
-    "mnemonic": null,
-    "size": 2
-  },
-  {
     "ea": "0x4E92C0",
-    "line": "mov     ebp, [esp+34h+var_10]",
+    "line": "mov     ebp, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E92C4",
-    "line": "push    ebx",
+    "line": "push    ebx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E92C5",
-    "line": "push    ebp",
+    "line": "push    ebp; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E92C6",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +751,7 @@
   },
   {
     "ea": "0x4E92D8",
-    "line": "mov     [esp+38h+var_8], 0",
+    "line": "mov     [esp+38h+points], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -889,31 +877,31 @@
   },
   {
     "ea": "0x4E930D",
-    "line": "mov     [esp+34h+var_8], eax",
+    "line": "mov     [esp+34h+points], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9311",
-    "line": "mov     edx, [esp+34h+var_8]",
+    "line": "mov     edx, [esp+34h+points]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9315",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9319",
-    "line": "lea     ecx, [esp+34h+var_20]",
+    "line": "lea     ecx, [esp+34h+outDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E931D",
-    "line": "push    ecx",
+    "line": "push    ecx; outDistance",
     "mnemonic": "push",
     "size": 1
   },
@@ -925,19 +913,19 @@
   },
   {
     "ea": "0x4E9322",
-    "line": "push    edx",
+    "line": "push    edx; points",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9323",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9324",
-    "line": "call    sub_4E8DB0",
+    "line": "call    TESRoad_FindNearestConnectedPoint; Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
     "mnemonic": "call",
     "size": 5
   },
@@ -961,7 +949,7 @@
   },
   {
     "ea": "0x4E932F",
-    "line": "fld     [esp+34h+var_20]",
+    "line": "fld     [esp+34h+outDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1045,31 +1033,31 @@
   },
   {
     "ea": "0x4E935E",
-    "line": "mov     [esp+34h+var_8], ecx",
+    "line": "mov     [esp+34h+points], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9362",
-    "line": "mov     edx, [esp+34h+var_10]",
+    "line": "mov     edx, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9366",
-    "line": "push    ebx",
+    "line": "push    ebx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9367",
-    "line": "push    edx",
+    "line": "push    edx; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9368",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,19 +1237,19 @@
   },
   {
     "ea": "0x4E93B5",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E93B9",
-    "line": "lea     ecx, [esp+34h+var_20]",
+    "line": "lea     ecx, [esp+34h+outDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E93BD",
-    "line": "push    ecx",
+    "line": "push    ecx; outDistance",
     "mnemonic": "push",
     "size": 1
   },
@@ -1273,19 +1261,19 @@
   },
   {
     "ea": "0x4E93C2",
-    "line": "push    edx",
+    "line": "push    edx; points",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E93C3",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E93C4",
-    "line": "call    sub_4E8DB0",
+    "line": "call    TESRoad_FindNearestConnectedPoint; Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1309,7 +1297,7 @@
   },
   {
     "ea": "0x4E93CF",
-    "line": "fld     [esp+34h+var_20]",
+    "line": "fld     [esp+34h+outDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1375,13 +1363,13 @@
   },
   {
     "ea": "0x4E93F1",
-    "line": "sub     [esp+34h+var_10], eax",
+    "line": "sub     dword ptr [esp+34h+group_x], eax",
     "mnemonic": "sub",
     "size": 4
   },
   {
     "ea": "0x4E93F5",
-    "line": "sub     [esp+34h+var_8], eax",
+    "line": "sub     [esp+34h+points], eax",
     "mnemonic": "sub",
     "size": 4
   },
@@ -1399,31 +1387,31 @@
   },
   {
     "ea": "0x4E9403",
-    "line": "mov     [esp+34h+var_8], ecx",
+    "line": "mov     [esp+34h+points], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E9407",
-    "line": "mov     edx, [esp+34h+var_10]",
+    "line": "mov     edx, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E940B",
-    "line": "push    ebx",
+    "line": "push    ebx; group_y",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E940C",
-    "line": "push    edx",
+    "line": "push    edx; group_x",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E940D",
-    "line": "call    sub_4EF1D0",
+    "line": "call    TESObjectCELL_PackExteriorGroupLabel; Verified exact key encoding used by the DistantLOD cell model map: packed label = (signed cellX << 16) | unsigned cellY.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1597,19 +1585,19 @@
   },
   {
     "ea": "0x4E9458",
-    "line": "mov     eax, [esp+34h+arg_0]",
+    "line": "mov     eax, [esp+34h+position]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E945C",
-    "line": "lea     ecx, [esp+34h+var_20]",
+    "line": "lea     ecx, [esp+34h+outDistance]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4E9460",
-    "line": "push    ecx",
+    "line": "push    ecx; outDistance",
     "mnemonic": "push",
     "size": 1
   },
@@ -1621,19 +1609,19 @@
   },
   {
     "ea": "0x4E9465",
-    "line": "push    edx",
+    "line": "push    edx; points",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9466",
-    "line": "push    eax",
+    "line": "push    eax; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4E9467",
-    "line": "call    sub_4E8DB0",
+    "line": "call    TESRoad_FindNearestConnectedPoint; Verified: scans one TESConnectedPoint list, computes Euclidean distance from each node's NiPoint3 at +0x14, returns the nearest node, and writes the distance. TESRoad_FindNearestConnectedPointInNearbyCells performs the separate cross-cell search/cutoff.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1657,7 +1645,7 @@
   },
   {
     "ea": "0x4E9472",
-    "line": "fld     [esp+34h+var_20]",
+    "line": "fld     [esp+34h+outDistance]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1723,7 +1711,7 @@
   },
   {
     "ea": "0x4E9492",
-    "line": "sub     [esp+34h+var_8], 1",
+    "line": "sub     [esp+34h+points], 1",
     "mnemonic": "sub",
     "size": 5
   },
@@ -1735,13 +1723,13 @@
   },
   {
     "ea": "0x4E949D",
-    "line": "mov     ebp, [esp+34h+var_10]",
+    "line": "mov     ebp, dword ptr [esp+34h+group_x]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4E94A1",
-    "line": "mov     edi, [esp+34h+arg_0]",
+    "line": "mov     edi, [esp+34h+position]",
     "mnemonic": "mov",
     "size": 4
   },

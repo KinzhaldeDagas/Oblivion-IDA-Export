@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x9F22F0",
-    "line": "push    offset aFastTravelIsCu; \"Fast travel is currently unavaliable fr\"...",
+    "line": "push    offset aFastTravelIsCu; Static GameSetting constructor only; not the runtime validation callback.",
     "mnemonic": "push",
     "size": 5
   },
@@ -13,13 +13,13 @@
   },
   {
     "ea": "0x9F22FA",
-    "line": "mov     ecx, offset dword_B38B48",
+    "line": "mov     ecx, offset stru_B38B48; self",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x9F22FF",
-    "line": "call    GameSetting_ConstrAndReg",
+    "line": "call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.",
     "mnemonic": "call",
     "size": 5
   },

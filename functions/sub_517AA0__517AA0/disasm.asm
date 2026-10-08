@@ -43,3 +43,13 @@
 0x517B15: pop     ebx
 0x517B16: add     esp, 10h
 0x517B19: retn    4
+0x9B73D0: mov     ecx, [ebp-10h]
+0x9B73D3: add     ecx, 18h; void *
+0x9B73D6: jmp     BSStringT_Clear
+0x9B73DB: mov     edx, [esp+arg_4]
+0x9B73DF: lea     eax, [edx-10h]
+0x9B73E2: mov     ecx, [edx-14h]
+0x9B73E5: xor     ecx, eax
+0x9B73E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B73EC: mov     eax, offset stru_AE1FBC
+0x9B73F1: jmp     ___CxxFrameHandler3

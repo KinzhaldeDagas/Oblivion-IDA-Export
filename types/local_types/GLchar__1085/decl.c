@@ -1,1 +1,1 @@
-GLchar
+typedef char GLchar;

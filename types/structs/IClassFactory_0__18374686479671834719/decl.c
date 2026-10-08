@@ -1,1 +1,1 @@
-IClassFactory_0
+typedef IClassFactory IClassFactory_0;

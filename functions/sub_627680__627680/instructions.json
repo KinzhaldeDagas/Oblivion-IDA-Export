@@ -223,19 +223,19 @@
   },
   {
     "ea": "0x6276EE",
-    "line": "push    eax",
+    "line": "push    eax; owner",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6276EF",
-    "line": "lea     ecx, [esi+44h]",
+    "line": "lea     ecx, [esi+44h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6276F2",
-    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership",
+    "line": "call    ExtraDataList__SetOrRemoveExtraOwnership; Verified XOWN mutator: update ExtraOwnership.ownerForm when owner is nonnull; remove the XOWN extra when null; otherwise allocate a 16-byte ExtraOwnership payload and add it to the list. During plugin load the initial dword is a FormID temporarily held in the same union slot; ExtraDataList_ResolveLoadedFormIDs converts it to TESForm*. TESObjectCELL_LinkForm removes direct XOWN, XRNK, and XGLB from an exterior cell when an owner exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -535,7 +535,7 @@
   },
   {
     "ea": "0x62778B",
-    "line": "call    TESObjectREFR_IsPersistent?",
+    "line": "call    TESObjectREFR_IsPersistent",
     "mnemonic": "call",
     "size": 5
   },
@@ -697,7 +697,7 @@
   },
   {
     "ea": "0x6277D7",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -763,7 +763,7 @@
   },
   {
     "ea": "0x627802",
-    "line": "mov     ecx, [ebx+5Ch]",
+    "line": "mov     ecx, [ebx+5Ch]; this",
     "mnemonic": "mov",
     "size": 3
   },
@@ -949,7 +949,7 @@
   },
   {
     "ea": "0x627870",
-    "line": "fstp    [esp+40h+var_2C]",
+    "line": "fstp    dword ptr [esp+40h+var_2C]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -967,13 +967,13 @@
   },
   {
     "ea": "0x62787C",
-    "line": "fstp    [esp+40h+var_28]",
+    "line": "fstp    dword ptr [esp+40h+var_2C+4]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x627880",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1021,7 +1021,7 @@
   },
   {
     "ea": "0x627899",
-    "line": "fld     [esp+40h+var_2C]",
+    "line": "fld     dword ptr [esp+40h+var_2C]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -1039,7 +1039,7 @@
   },
   {
     "ea": "0x6278A3",
-    "line": "fmul    [esp+40h+var_28]",
+    "line": "fmul    dword ptr [esp+40h+var_2C+4]",
     "mnemonic": "fmul",
     "size": 4
   },
@@ -1117,7 +1117,7 @@
   },
   {
     "ea": "0x6278D5",
-    "line": "mov     [esp+40h+var_2C], edx",
+    "line": "mov     dword ptr [esp+40h+var_2C], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1141,13 +1141,13 @@
   },
   {
     "ea": "0x6278E5",
-    "line": "mov     [esp+40h+var_28], eax",
+    "line": "mov     dword ptr [esp+40h+var_2C+4], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6278E9",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1159,7 +1159,7 @@
   },
   {
     "ea": "0x6278F2",
-    "line": "mov     edx, [esp+40h+var_2C]",
+    "line": "mov     edx, dword ptr [esp+40h+var_2C]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1207,7 +1207,7 @@
   },
   {
     "ea": "0x627904",
-    "line": "mov     ecx, [esp+5Ch+var_28]",
+    "line": "mov     ecx, dword ptr [esp+5Ch+var_2C+4]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1243,7 +1243,7 @@
   },
   {
     "ea": "0x627915",
-    "line": "call    sub_5E2E20",
+    "line": "call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x62794D",
-    "line": "call    sub_4D76F0",
+    "line": "call    TESObjectREFR_GetLinkedTeleportMarkerPosition; Verified linked-door marker resolver: read this door's TeleportData, follow its linkedDoor pointer, fetch the linked door's TeleportData, then return a pointer to that record's xyz fields at +4. Return g_zeroNiPoint3 when the source data or linked-door target is missing.",
     "mnemonic": "call",
     "size": 5
   },

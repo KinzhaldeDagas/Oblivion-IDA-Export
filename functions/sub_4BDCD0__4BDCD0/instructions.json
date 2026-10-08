@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BDCD0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified lazy singleton initializer: allocates 0x1C bytes for the lock-free cell-task map and constructs it with two interfaces, 37 buckets, and 0x0C-byte entries; stores the pointer in g_DistantLODLoaderTasksByCell.",
     "mnemonic": "push",
     "size": 2
   },
@@ -127,31 +127,31 @@
   },
   {
     "ea": "0x4BDD17",
-    "line": "push    0Ch",
+    "line": "push    0Ch; itemSize",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4BDD19",
-    "line": "push    25h ; '%'",
+    "line": "push    25h ; '%'; bucketCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4BDD1B",
-    "line": "push    2",
+    "line": "push    2; interfaceCount",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4BDD1D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BDD1F",
-    "line": "call    sub_4BD050",
+    "line": "call    DistantLODLoaderTaskMap_ctor; Verified specialized map constructor from its vtable assignment: LockFreeMap<unsigned int, NiPointer<DistantLODLoaderTask>>. DistantLODLoaderTaskMap_EnsureCreated invokes it with interfaceCount 2, 37 buckets, and entry size 0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -208,5 +208,77 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9D62E0",
+    "line": "mov     eax, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62E3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62E4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62E9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9D62EB",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9D62EF",
+    "line": "lea     eax, [edx-8]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F2",
+    "line": "mov     ecx, [edx-0Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9D62F5",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9D62F7",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9D62FC",
+    "line": "mov     eax, offset stru_AFE21C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9D6301",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

@@ -1,18 +1,31 @@
 {
-  "callees_count": 5,
-  "callers_count": 7,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x959EC0",
+      "0x959F00"
+    ]
+  ],
+  "chunks_sha256": "b189e214fbd9c8503a7d9fae3687ce80c0e663f3f76a72a3466c92dcbfe2292f",
+  "comment_regular": "Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
+  "comment_repeatable": "Verified NiPick context destructor: clears/releases hit records, frees the record-pointer array, and releases its retained root object.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
-  "display_name": "sub_959EC0",
+  "display_name": "NiPickContext_dtor",
   "end_ea": "0x959F00",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_959EC0",
+  "name": "NiPickContext_dtor",
   "segment": ".text",
   "sha256": "b189e214fbd9c8503a7d9fae3687ce80c0e663f3f76a72a3466c92dcbfe2292f",
   "size": 64,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x959EC0",
+  "total_chunk_size": 64,
   "type": "void __thiscall(_WORD *this)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 12

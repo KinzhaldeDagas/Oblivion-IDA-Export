@@ -1,18 +1,31 @@
 {
-  "callees_count": 46,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 8,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x6CBEE0",
+      "0x6CC39F"
+    ]
+  ],
+  "chunks_sha256": "54f029c8e5206aa0b639d2573c9ee6a83598db67c6e2821c8f85edd76a92f7de",
+  "comment_regular": "Oblivion: evaluates multiple 0x18-byte blend items using item+8 normalized weight. Translation, rotation, and scale validity are tracked independently; missing channels reduce only that channel's weight. Quaternions are hemisphere-corrected before weighted summation and normalized afterward.",
+  "comment_repeatable": "Oblivion: evaluates multiple 0x18-byte blend items using item+8 normalized weight. Translation, rotation, and scale validity are tracked independently; missing channels reduce only that channel's weight. Quaternions are hemisphere-corrected before weighted summation and normalized afterward.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_6CBEE0",
+  "display_name": "NiBlendTransformInterpolator_UpdateMultiple",
   "end_ea": "0x6CC39F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_6CBEE0",
+  "name": "NiBlendTransformInterpolator_UpdateMultiple",
   "segment": ".text",
   "sha256": "54f029c8e5206aa0b639d2573c9ee6a83598db67c6e2821c8f85edd76a92f7de",
   "size": 1215,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x6CBEE0",
+  "total_chunk_size": 1215,
   "type": "bool __thiscall(_DWORD *this, float, int, int)",
   "xrefs_from_count": 398,
   "xrefs_to_count": 1

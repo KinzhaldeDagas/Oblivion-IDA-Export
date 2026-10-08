@@ -7,7 +7,7 @@
   },
   {
     "ea": "0x9A9741",
-    "line": "mov     ebx, [esp+4+arg_0]",
+    "line": "mov     ebx, [esp+4+value]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -139,37 +139,37 @@
   },
   {
     "ea": "0x9A977C",
-    "line": "lea     edx, [esp+0Ch+arg_0]",
+    "line": "lea     edx, [esp+0Ch+value]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x9A9780",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A9781",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A9782",
-    "line": "lea     ecx, [esi+0Ch]",
+    "line": "lea     ecx, [esi+0Ch]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x9A9785",
-    "line": "mov     [esp+14h+arg_0], 0",
+    "line": "mov     [esp+14h+value], 0",
     "mnemonic": "mov",
     "size": 8
   },
   {
     "ea": "0x9A978D",
-    "line": "call    sub_9A9670",
+    "line": "call    NiTArray_ConstantMapEntry_SetAt; Verified companion to SortByEnabled: array this is map+0C, base pointer this+4, end this+0A and live count this+0C. SetAt updates occupancy/end as needed and assigns the pointer with NiPointer decrement/destructor/increment behavior. The caller retains its current entry while exchanging two positions; model array order without executing native refcounts under metadata gates.",
     "mnemonic": "call",
     "size": 5
   },

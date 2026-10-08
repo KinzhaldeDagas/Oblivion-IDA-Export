@@ -1,4 +1,4 @@
-BSStringT *sub_A12840()
+NiRTTI *sub_A12840()
 {
-  return sub_70E220(&stru_BA80BC, "bhkRagdollConstraint", (int)&stru_BA7D50);
+  return NiRTTI_Constructor(&stru_BA80BC, "bhkRagdollConstraint", &MEMORY[0xBA7D50]); /*0xa12854*/
 }

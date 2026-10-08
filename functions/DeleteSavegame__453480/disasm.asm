@@ -9,7 +9,7 @@
 0x453491: push    3
 0x453493: push    eax
 0x453494: push    edi
-0x453495: call    Savegame_Rename
+0x453495: call    TESSaveLoadGame_ResolveSaveFile
 0x45349A: mov     esi, eax
 0x45349C: test    esi, esi
 0x45349E: jnz     short loc_4534A2

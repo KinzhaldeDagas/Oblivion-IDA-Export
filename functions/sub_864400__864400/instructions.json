@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x864400",
-    "line": "push    ebx",
+    "line": "push    ebx; Shared Lighting30/Hair SetupGeometry wrapper. Calls the native PP-lighting parser at 0x7DA220, then removes NiProperty ID 7. This proves both exact classes inherit Refract/RefractF name decoding.",
     "mnemonic": "push",
     "size": 1
   },
@@ -13,19 +13,19 @@
   },
   {
     "ea": "0x864402",
-    "line": "mov     esi, [esp+8+arg_0]",
+    "line": "mov     esi, [esp+8+geometry]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x864406",
-    "line": "push    esi",
+    "line": "push    esi; geometry",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x864407",
-    "line": "call    sub_7DA220",
+    "line": "call    BSShaderPPLightingProperty_SetupGeometry; Shared PP-lighting geometry/material setup. Oblivion parses NiProperty ID 2 name tokens here: exact 'Refract' sets passInfo 0x8000; exact 'RefractF' sets 0x10000, invalidates the cached pass key, enables refraction state, and clears conflicting alpha flag 1. Shared wrapper ownership proves Lighting30 and Hair inherit this parser.",
     "mnemonic": "call",
     "size": 5
   },
@@ -49,7 +49,7 @@
   },
   {
     "ea": "0x864412",
-    "line": "call    NiNode_GetNiPropertyByID",
+    "line": "call    NiNode_GetNiPropertyByID;",
     "mnemonic": "call",
     "size": 5
   },

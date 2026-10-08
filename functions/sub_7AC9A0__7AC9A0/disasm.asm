@@ -1,32 +1,32 @@
-0x7AC9A0: sub     esp, 0Ch
-0x7AC9A3: cmp     byte ptr ds:0B42CE8h, 0
+0x7AC9A0: sub     esp, 0Ch; MoonSugarEffect decode: BSShaderAccumulator flush for one shader/pass bucket. Normalizes some IDs, refreshes native shader constants, sorts the bucket, then emits RenderPass nodes through sub_7A9820 or native special list dispatch.
+0x7AC9A3: cmp     byte ptr ds:0B42CE8h, 0; Water-reflection bucket-flush gate. When active, remap the material activation/draw selector but continue indexing the accumulator list by the original passBucket.
 0x7AC9AA: push    ebx
 0x7AC9AB: push    ebp
 0x7AC9AC: push    esi
 0x7AC9AD: push    edi
-0x7AC9AE: mov     edi, [esp+1Ch+arg_0]
+0x7AC9AE: mov     edi, [esp+1Ch+passBucket]
 0x7AC9B2: mov     [esp+1Ch+var_C], ecx
 0x7AC9B6: movzx   esi, di
 0x7AC9B9: jz      short loc_7AC9D4
-0x7AC9BB: cmp     edi, 49h ; 'I'
+0x7AC9BB: cmp     edi, 49h ; 'I'; During water reflection, selector 0x49 activates/draws as 0x48 while its nodes remain in original bucket 0x49.
 0x7AC9BE: jnz     short loc_7AC9C7
 0x7AC9C0: mov     edi, 48h ; 'H'
 0x7AC9C5: jmp     short loc_7AC9D4
-0x7AC9C7: cmp     edi, 16Fh
+0x7AC9C7: cmp     edi, 16Fh; During water reflection, selector 0x16F activates/draws as 0x16E while its nodes remain in original bucket 0x16F.
 0x7AC9CD: jnz     short loc_7AC9D4
 0x7AC9CF: mov     edi, 16Eh
 0x7AC9D4: push    1; a1
-0x7AC9D6: call    GetShaderDefinition
+0x7AC9D6: call    GetShaderDefinition; DeferredRendering HDR+Bloom dependency: shader definition IDs 0x07=Blur/Bloom, 0x08=HDR, 0x0C=Copy fallback. Oblivion behavior observed here; both post-processes are forced by list composition, not Fallout naming.
 0x7AC9DB: mov     ebp, [eax+4]
 0x7AC9DE: mov     ecx, [esp+20h+var_C]
 0x7AC9E2: add     eax, 4
 0x7AC9E5: movzx   eax, si
-0x7AC9E8: mov     [esp+20h+arg_0], eax
+0x7AC9E8: mov     [esp+20h+passBucket], eax
 0x7AC9EC: lea     eax, [eax+eax*4]
 0x7AC9EF: lea     ebx, [ecx+eax*4]
 0x7AC9F2: add     esp, 4
-0x7AC9F5: cmp     dword ptr [ebx+114h], 0
-0x7AC9FC: jbe     loc_7ACF2B
+0x7AC9F5: cmp     dword ptr [ebx+114h], 0; Test bucket count at (this+0x104+0x14*passBucket)+0x10; an empty filtered bucket returns without shader activation or draw.
+0x7AC9FC: jbe     BSShaderAccumulator_FlushPassBucketReturn
 0x7ACA02: mov     edx, [ebx+108h]
 0x7ACA08: mov     eax, [edx+8]
 0x7ACA0B: mov     ecx, [eax]
@@ -48,11 +48,11 @@
 0x7ACA3A: call    eax
 0x7ACA3C: cmp     eax, 5
 0x7ACA3F: jg      short loc_7ACA7A
-0x7ACA41: mov     ecx, [esp+1Ch+arg_4]
+0x7ACA41: mov     ecx, [esp+1Ch+specialMode]
 0x7ACA45: push    ecx
 0x7ACA46: push    edi
 0x7ACA47: mov     [esp+24h+var_8], esi
-0x7ACA4B: call    sub_7D1320
+0x7ACA4B: call    sub_7D1320; MoonSugarEffect decode: native shader-id selector for standard shader property families. Updates program/pass render-state choices and constants for hardcoded IDs before object render.
 0x7ACA50: mov     ecx, [esi+30h]
 0x7ACA53: mov     edx, [ecx]
 0x7ACA55: mov     eax, [edx+48h]
@@ -76,11 +76,11 @@
 0x7ACA81: call    eax
 0x7ACA83: cmp     eax, 1Bh
 0x7ACA86: jnz     short loc_7ACAAE
-0x7ACA88: mov     ecx, [esp+1Ch+arg_4]
+0x7ACA88: mov     ecx, [esp+1Ch+specialMode]
 0x7ACA8C: push    ecx
 0x7ACA8D: push    edi
 0x7ACA8E: mov     [esp+24h+var_4], esi
-0x7ACA92: call    sub_7FD260
+0x7ACA92: call    Lighting30Shader_SelectRenderPass; Oblivion Lighting30 selector activation. Selectors outside 0x15E/0x15F restore the main constant maps, derive row selector-0x12A, rewrite automatic vertex/pixel-constant enable flags from B46988/B46A60, and apply a route render-state group. SimpleShadow selectors 0x14E..0x151 use valid rows and route group 7. Stock one-light selectors 0x177..0x17A are not rejected here: they derive rows 0x4D..0x50 and use the generic route-group-0 path. The later per-geometry resolver is the actual validity gate; every later selector activation deterministically rewrites these flags before its draw.
 0x7ACA97: mov     ecx, [esi+30h]
 0x7ACA9A: mov     edx, [ecx]
 0x7ACA9C: mov     eax, [edx+48h]
@@ -166,17 +166,17 @@
 0x7ACC39: jz      short loc_7ACCB5
 0x7ACC3B: cmp     edi, 0Eh
 0x7ACC3E: jnz     short loc_7ACC73
-0x7ACC40: mov     eax, [esp+1Ch+arg_0]
+0x7ACC40: mov     eax, [esp+1Ch+passBucket]
 0x7ACC44: mov     edi, [esp+1Ch+var_C]
 0x7ACC48: lea     ecx, [eax+eax*4+41h]
 0x7ACC4C: lea     esi, [edi+ecx*4]
-0x7ACC4F: push    offset sub_7AA390
-0x7ACC54: mov     ecx, esi
-0x7ACC56: call    sub_7AA550
+0x7ACC4F: push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare
+0x7ACC54: mov     ecx, esi; self
+0x7ACC56: call    BSTPersistentRenderPassList_StableMergeSort; MEF PERF 2026-10-07 PASS5: PERF-15 alternate callers: FlushPassBucket sort sites7ACC56/7ACC95/7ACCCB/7ACCFD/7ACD2F all pass geometry-data comparator7AA390, under optimized selector/type branches. They do NOT sort by selector just because each bucket has one selector. Equal selectors alone do not justify skipping those sorts.
 0x7ACC5B: mov     ecx, [edi+2264h]
 0x7ACC61: push    0Eh
 0x7ACC63: push    esi
-0x7ACC64: call    sub_7F86C0
+0x7ACC64: call    sub_7F86C0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).
 0x7ACC69: pop     edi
 0x7ACC6A: pop     esi
 0x7ACC6B: pop     ebp
@@ -185,64 +185,64 @@
 0x7ACC70: retn    8
 0x7ACC73: cmp     edi, 17Bh
 0x7ACC79: jnz     loc_7ACD4B
-0x7ACC7F: mov     eax, [esp+1Ch+arg_0]
+0x7ACC7F: mov     eax, [esp+1Ch+passBucket]
 0x7ACC83: mov     edi, [esp+1Ch+var_C]
 0x7ACC87: lea     edx, [eax+eax*4+41h]
 0x7ACC8B: lea     esi, [edi+edx*4]
-0x7ACC8E: push    offset sub_7AA390
-0x7ACC93: mov     ecx, esi
-0x7ACC95: call    sub_7AA550
+0x7ACC8E: push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare
+0x7ACC93: mov     ecx, esi; self
+0x7ACC95: call    BSTPersistentRenderPassList_StableMergeSort
 0x7ACC9A: mov     ecx, [edi+2264h]
 0x7ACCA0: push    17Bh
 0x7ACCA5: push    esi
-0x7ACCA6: call    sub_7F8DB0
+0x7ACCA6: call    sub_7F8DB0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).
 0x7ACCAB: pop     edi
 0x7ACCAC: pop     esi
 0x7ACCAD: pop     ebp
 0x7ACCAE: pop     ebx
 0x7ACCAF: add     esp, 0Ch
 0x7ACCB2: retn    8
-0x7ACCB5: mov     eax, [esp+1Ch+arg_0]
+0x7ACCB5: mov     eax, [esp+1Ch+passBucket]
 0x7ACCB9: mov     ebx, [esp+1Ch+var_C]
 0x7ACCBD: lea     eax, [eax+eax*4+41h]
 0x7ACCC1: lea     esi, [ebx+eax*4]
-0x7ACCC4: push    offset sub_7AA390
-0x7ACCC9: mov     ecx, esi
-0x7ACCCB: call    sub_7AA550
+0x7ACCC4: push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare
+0x7ACCC9: mov     ecx, esi; self
+0x7ACCCB: call    BSTPersistentRenderPassList_StableMergeSort
 0x7ACCD0: mov     ecx, [ebx+2264h]
 0x7ACCD6: push    edi
 0x7ACCD7: push    esi
-0x7ACCD8: call    sub_7F7EE0
+0x7ACCD8: call    sub_7F7EE0; Pass205: Object-batch render path calls shader virtual +0x2C with NiPropertyState returned by sub_405760(geometry).
 0x7ACCDD: pop     edi
 0x7ACCDE: pop     esi
 0x7ACCDF: pop     ebp
 0x7ACCE0: pop     ebx
 0x7ACCE1: add     esp, 0Ch
 0x7ACCE4: retn    8
-0x7ACCE7: mov     eax, [esp+1Ch+arg_0]
+0x7ACCE7: mov     eax, [esp+1Ch+passBucket]
 0x7ACCEB: mov     ebx, [esp+1Ch+var_C]
 0x7ACCEF: lea     ecx, [eax+eax*4+41h]
 0x7ACCF3: lea     esi, [ebx+ecx*4]
-0x7ACCF6: push    offset sub_7AA390
-0x7ACCFB: mov     ecx, esi
-0x7ACCFD: call    sub_7AA550
+0x7ACCF6: push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare
+0x7ACCFB: mov     ecx, esi; self
+0x7ACCFD: call    BSTPersistentRenderPassList_StableMergeSort
 0x7ACD02: mov     ecx, [ebx+2264h]
 0x7ACD08: push    edi
 0x7ACD09: push    esi
-0x7ACD0A: call    sub_7F7680
+0x7ACD0A: call    sub_7F7680; Special TallGrass selector-0x197 submission path; distinct from generic RenderPass draw at 0x007A9820.
 0x7ACD0F: pop     edi
 0x7ACD10: pop     esi
 0x7ACD11: pop     ebp
 0x7ACD12: pop     ebx
 0x7ACD13: add     esp, 0Ch
 0x7ACD16: retn    8
-0x7ACD19: mov     eax, [esp+1Ch+arg_0]
+0x7ACD19: mov     eax, [esp+1Ch+passBucket]
 0x7ACD1D: mov     ebx, [esp+1Ch+var_C]
 0x7ACD21: lea     edx, [eax+eax*4+41h]
 0x7ACD25: lea     esi, [ebx+edx*4]
-0x7ACD28: push    offset sub_7AA390
-0x7ACD2D: mov     ecx, esi
-0x7ACD2F: call    sub_7AA550
+0x7ACD28: push    offset RenderPassNode_CompareGeometryDataAddressAscending; compare
+0x7ACD2D: mov     ecx, esi; self
+0x7ACD2F: call    BSTPersistentRenderPassList_StableMergeSort
 0x7ACD34: mov     ecx, [ebx+2264h]
 0x7ACD3A: push    edi
 0x7ACD3B: push    esi
@@ -254,11 +254,11 @@
 0x7ACD45: add     esp, 0Ch
 0x7ACD48: retn    8
 0x7ACD4B: cmp     byte ptr ds:0B42E97h, 0
-0x7ACD52: mov     eax, [ebx+108h]
+0x7ACD52: mov     eax, [ebx+108h]; Load the selector bucket head node; its +0x08 payload is drawn first and its +0x00 link begins the remaining head-to-tail walk.
 0x7ACD58: mov     esi, [eax+8]
 0x7ACD5B: lea     ecx, [eax+8]
 0x7ACD5E: mov     eax, [eax]
-0x7ACD60: mov     [esp+1Ch+arg_4], eax
+0x7ACD60: mov     [esp+1Ch+specialMode], eax
 0x7ACD64: jz      short loc_7ACD8C
 0x7ACD66: mov     ecx, [esp+1Ch+var_C]
 0x7ACD6A: mov     eax, [ecx+21F0h]
@@ -283,9 +283,9 @@
 0x7ACDA2: cmp     edx, 2
 0x7ACDA5: ja      short loc_7ACDB9
 0x7ACDA7: mov     ecx, [esp+1Ch+var_C]
-0x7ACDAB: push    esi
-0x7ACDAC: add     ecx, 2200h
-0x7ACDB2: call    sub_7ABDE0
+0x7ACDAB: push    esi; payloadAddress
+0x7ACDAC: add     ecx, 2200h; this
+0x7ACDB2: call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.
 0x7ACDB7: jmp     short loc_7ACDE9
 0x7ACDB9: mov     ebp, [esp+1Ch+var_C]
 0x7ACDBD: cmp     byte ptr [ebp+21E2h], 0
@@ -294,13 +294,13 @@
 0x7ACDCB: jnz     short loc_7ACDD4
 0x7ACDCD: cmp     [esp+1Ch+var_4], 0
 0x7ACDD2: jz      short loc_7ACDE0
-0x7ACDD4: push    esi
-0x7ACDD5: lea     ecx, [ebp+2214h]
-0x7ACDDB: call    sub_7ABDE0
-0x7ACDE0: push    edi; float
-0x7ACDE1: push    esi; int
+0x7ACDD4: push    esi; payloadAddress
+0x7ACDD5: lea     ecx, [ebp+2214h]; this
+0x7ACDDB: call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.
+0x7ACDE0: push    edi; selector
+0x7ACDE1: push    esi; entry
 0x7ACDE2: mov     ecx, ebp
-0x7ACDE4: call    sub_7A9820
+0x7ACDE4: call    BSShaderAccumulator_DrawRenderPass; Generic first-node submission for ordinary selector buckets, including 0x177..0x17A; uses the activation selector already selected for this bucket.
 0x7ACDE9: add     dword ptr ds:0B42CBCh, 1
 0x7ACDF0: mov     eax, [esi]
 0x7ACDF2: mov     ecx, [eax+0B4h]
@@ -308,7 +308,7 @@
 0x7ACDFA: mov     eax, [edx+5Ch]
 0x7ACDFD: call    eax
 0x7ACDFF: movzx   eax, ax
-0x7ACE02: movzx   ecx, ax; void *
+0x7ACE02: movzx   ecx, ax; this
 0x7ACE05: add     ds:0B42CB4h, ecx
 0x7ACE0B: cmp     [esp+1Ch+var_8], 0
 0x7ACE10: jz      short loc_7ACE1A
@@ -318,18 +318,18 @@
 0x7ACE1A: cmp     [esp+1Ch+var_4], 0
 0x7ACE1F: jz      short loc_7ACE2A
 0x7ACE21: push    edi
-0x7ACE22: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x7ACE22: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x7ACE27: add     esp, 4
-0x7ACE2A: cmp     [esp+1Ch+arg_4], 0
+0x7ACE2A: cmp     [esp+1Ch+specialMode], 0
 0x7ACE2F: mov     ebx, [esp+1Ch+var_C]
-0x7ACE33: jz      loc_7ACEFF
+0x7ACE33: jz      loc_7ACEFF; Continue through successive bucket nodes in stored next-link order.
 0x7ACE39: lea     esp, [esp+0]
 0x7ACE40: cmp     byte ptr ds:0B42E97h, 0
-0x7ACE47: mov     ecx, [esp+1Ch+arg_4]
+0x7ACE47: mov     ecx, [esp+1Ch+specialMode]
 0x7ACE4B: mov     edx, [ecx]
 0x7ACE4D: mov     ebp, [ecx+8]
 0x7ACE50: lea     eax, [ecx+8]
-0x7ACE53: mov     [esp+1Ch+arg_4], edx
+0x7ACE53: mov     [esp+1Ch+specialMode], edx
 0x7ACE57: jz      short loc_7ACE7C
 0x7ACE59: mov     eax, [ebx+21F0h]
 0x7ACE5F: test    eax, eax
@@ -352,9 +352,9 @@
 0x7ACE8C: lea     eax, [edi-156h]
 0x7ACE92: cmp     eax, 2
 0x7ACE95: ja      short loc_7ACEA5
-0x7ACE97: push    ebp
-0x7ACE98: lea     ecx, [ebx+2200h]
-0x7ACE9E: call    sub_7ABDE0
+0x7ACE97: push    ebp; payloadAddress
+0x7ACE98: lea     ecx, [ebx+2200h]; this
+0x7ACE9E: call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.
 0x7ACEA3: jmp     short loc_7ACED1
 0x7ACEA5: cmp     byte ptr [ebx+21E2h], 0
 0x7ACEAC: jz      short loc_7ACEC8
@@ -362,13 +362,13 @@
 0x7ACEB3: jnz     short loc_7ACEBC
 0x7ACEB5: cmp     [esp+1Ch+var_4], 0
 0x7ACEBA: jz      short loc_7ACEC8
-0x7ACEBC: push    ebp
-0x7ACEBD: lea     ecx, [ebx+2214h]
-0x7ACEC3: call    sub_7ABDE0
-0x7ACEC8: push    edi; float
-0x7ACEC9: push    ebp; int
+0x7ACEBC: push    ebp; payloadAddress
+0x7ACEBD: lea     ecx, [ebx+2214h]; this
+0x7ACEC3: call    BSTPersistentList_AppendTailReusingFreeNode; BSTPersistentList tail append. Reuses a local free node or acquires one, stores the caller's payload pointer verbatim at node+0x08, links at tail, and increments count. For accumulator RenderPass buckets this creates a non-owning pointer borrow; it does not copy, retain, or destroy the RenderPass.
+0x7ACEC8: push    edi; selector
+0x7ACEC9: push    ebp; entry
 0x7ACECA: mov     ecx, ebx
-0x7ACECC: call    sub_7A9820
+0x7ACECC: call    BSShaderAccumulator_DrawRenderPass; Generic subsequent-node submission for the same selector bucket, including 0x177..0x17A.
 0x7ACED1: add     dword ptr ds:0B42CBCh, 1
 0x7ACED8: mov     ecx, [ebp+0]
 0x7ACEDB: mov     ecx, [ecx+0B4h]
@@ -378,17 +378,17 @@
 0x7ACEE8: movzx   eax, ax
 0x7ACEEB: movzx   ecx, ax
 0x7ACEEE: add     ds:0B42CB4h, ecx
-0x7ACEF4: cmp     [esp+1Ch+arg_4], 0
+0x7ACEF4: cmp     [esp+1Ch+specialMode], 0
 0x7ACEF9: jnz     loc_7ACE40
-0x7ACEFF: cmp     byte ptr ds:0B42CDAh, 0
-0x7ACF06: jnz     short loc_7ACF2B
-0x7ACF08: mov     eax, [esp+1Ch+arg_0]
+0x7ACEFF: cmp     byte ptr ds:0B42CDAh, 0; When FreezeRenderAccumulation is set, skip bucket-node recycling and retain the active borrowed RenderPass nodes for replay.
+0x7ACF06: jnz     short BSShaderAccumulator_FlushPassBucketReturn
+0x7ACF08: mov     eax, [esp+1Ch+passBucket]; Non-frozen cleanup address for the original passBucket. Release the prior free chain, move active nodes to the bucket free chain, then clear head/tail/count.
 0x7ACF0C: lea     edx, [eax+eax*4+41h]
 0x7ACF10: lea     esi, [ebx+edx*4]
-0x7ACF13: mov     ecx, esi
-0x7ACF15: call    sub_7A9C30
+0x7ACF13: mov     ecx, esi; this
+0x7ACF15: call    BSTPersistentList_ReleaseFreeNodesToGlobalPool; Non-frozen flush first returns the bucket's old free-node chain to the global pool; it does not destroy RenderPass payloads.
 0x7ACF1A: mov     eax, [esi+4]
-0x7ACF1D: mov     [esi+0Ch], eax
+0x7ACF1D: mov     [esi+0Ch], eax; Move the just-flushed active nodes to this bucket's free list, then clear head/tail/count. Borrowed RenderPass payloads remain property-owned.
 0x7ACF20: xor     eax, eax
 0x7ACF22: mov     [esi+4], eax
 0x7ACF25: mov     [esi+8], eax

@@ -25,7 +25,6 @@
 0x917238: push    ebx
 0x917239: xor     ebx, ebx
 0x91723B: jmp     short loc_917240
-0x91723D: align 10h
 0x917240: mov     esi, [edi+30h]
 0x917243: mov     eax, ecx
 0x917245: cdq

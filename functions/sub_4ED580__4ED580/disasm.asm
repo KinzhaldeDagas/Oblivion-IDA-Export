@@ -1,5 +1,5 @@
 0x4ED580: fld     dword ptr ds:0A2FAACh
-0x4ED586: mov     dword ptr [ecx+2Ch], offset sub_808000
+0x4ED586: mov     dword ptr [ecx+2Ch], (offset loc_807FFE+2)
 0x4ED58D: fst     dword ptr [ecx]
 0x4ED58F: mov     dword ptr [ecx+30h], 190000h
 0x4ED596: fld     dword ptr ds:0A430CCh

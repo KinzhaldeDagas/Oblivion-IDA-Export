@@ -17,7 +17,7 @@
 0x88F1D4: jnz     short loc_88F1D8
 0x88F1D6: mov     eax, esi
 0x88F1D8: push    eax
-0x88F1D9: call    sub_497420
+0x88F1D9: call    NiAVObject_GetBhkBlendCollisionObject; ODismemberment: authoritative blend-collision getter. Reuses NiAVObject_GetBhkCollisionObject and accepts objects whose class chain includes bhkBlendCollisionObject.
 0x88F1DE: add     esp, 4
 0x88F1E1: test    eax, eax
 0x88F1E3: jz      short loc_88F1EC

@@ -1,4 +1,4 @@
-0x40C220: push    esi
+0x40C220: push    esi;
 0x40C221: push    edi
 0x40C222: mov     edi, ecx
 0x40C224: movzx   ecx, word ptr [edi+0AA2h]
@@ -8,7 +8,6 @@
 0x40C231: mov     eax, [edi+0A9Ch]
 0x40C237: mov     edx, [esp+8+arg_0]
 0x40C23B: jmp     short loc_40C240
-0x40C23D: align 10h
 0x40C240: cmp     [eax], edx
 0x40C242: jz      short loc_40C255
 0x40C244: add     esi, 1

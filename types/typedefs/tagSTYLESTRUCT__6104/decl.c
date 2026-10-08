@@ -1,1 +1,5 @@
-tagSTYLESTRUCT
+struct tagSTYLESTRUCT
+{
+DWORD styleOld;
+DWORD styleNew;
+};

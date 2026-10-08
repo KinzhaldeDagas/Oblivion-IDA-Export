@@ -32,7 +32,7 @@
 0x70A3B4: fstp    st
 0x70A3B6: push    ecx
 0x70A3B7: lea     ecx, [esi+20h]
-0x70A3BA: call    sub_72A6B0
+0x70A3BA: call    NiSphere_Merge; Merges a source NiSphere into the destination sphere. Preserves a containing destination, copies a containing source, otherwise computes the minimal enclosing center/radius. NiNode_UpdateDownwardPass uses it to aggregate nonempty child world bounds.
 0x70A3BF: fldz
 0x70A3C1: movzx   eax, word ptr [esi+0B6h]
 0x70A3C8: add     edi, 1

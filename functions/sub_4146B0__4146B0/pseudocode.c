@@ -1,7 +1,4 @@
-_DWORD *__thiscall sub_4146B0(_DWORD *this, char *Src)
+OB_stString28_010201A0 *__thiscall sub_4146B0(OB_stString28_010201A0 *this, char *Src)
 {
-  rsize_t v3; // [esp-4h] [ebp-Ch]
-
-  LODWORD(v3) = strlen(Src);
-  return sub_414500(this, (int)(Src + 1), Src, v3);
+  return OB_stString28_AssignBytes_010201A0(this, Src, strlen(Src)); /*0x4146d2*/
 }

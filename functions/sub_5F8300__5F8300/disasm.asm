@@ -1,4 +1,4 @@
-0x5F8300: push    0FFFFFFFFh
+0x5F8300: push    0FFFFFFFFh; Recomputes Quiver Arrow:0/ArrowN visibility from the current equipped-AMMO inventory count. animData selects the perspective/cache and quiverNode may supply an already resolved node.
 0x5F8302: push    offset SEH_616530
 0x5F8307: mov     eax, large fs:0
 0x5F830D: push    eax
@@ -37,17 +37,17 @@
 0x5F8369: jz      short loc_5F8377
 0x5F836B: push    edi; a2
 0x5F836C: mov     ecx, eax; this
-0x5F836E: call    ContainerExtraData_GetItemCount
+0x5F836E: call    ContainerExtraData_GetItemCount; ContainerChanges item-count logic: start with the base TESContainer count (made absolute), find matching EntryData, then combine countDelta. If the base count and delta are both 0 but an EntryData exists, return 1; the GetItemCount evaluator takes the final absolute value.
 0x5F8373: mov     [esp+2Ch+var_18], eax
 0x5F8377: mov     ecx, [esi+58h]
 0x5F837A: mov     eax, [ecx]
-0x5F837C: mov     ebp, [esp+2Ch+arg_0]
+0x5F837C: mov     ebp, [esp+2Ch+animData]
 0x5F8380: mov     edx, [eax+128h]
 0x5F8386: push    ebp
 0x5F8387: call    edx
 0x5F8389: test    eax, eax
 0x5F838B: jz      loc_5F843E
-0x5F8391: mov     edi, [esp+2Ch+arg_4]
+0x5F8391: mov     edi, [esp+2Ch+quiverNode]
 0x5F8395: cmp     edi, ebx
 0x5F8397: jnz     short loc_5F83AB
 0x5F8399: mov     esi, [esi+58h]
@@ -64,7 +64,7 @@
 0x5F83B7: call    edx
 0x5F83B9: cmp     eax, ebx
 0x5F83BB: jz      short loc_5F83C3
-0x5F83BD: and     word ptr [eax+18h], 0FFFEh
+0x5F83BD: and     word ptr [eax+18h], 0FFFEh; Always clear hidden bit 0 on Quiver/Arrow:0 before rebuilding the visible-count mask.
 0x5F83C3: mov     esi, 1
 0x5F83C8: cmp     esi, ds:0B35588h
 0x5F83CE: jge     short loc_5F843E
@@ -87,13 +87,13 @@
 0x5F8403: cmp     eax, ebx
 0x5F8405: jz      short loc_5F841A
 0x5F8407: cmp     esi, [esp+2Ch+var_18]
-0x5F840B: jl      short loc_5F8414
+0x5F840B: jl      short loc_5F8414; For ArrowN indices 1..iMaxArrowsInQuiver-1: visible when N < current AMMO count, hidden otherwise.
 0x5F840D: or      word ptr [eax+18h], 1
 0x5F8412: jmp     short loc_5F841A
 0x5F8414: and     word ptr [eax+18h], 0FFFEh
 0x5F841A: push    ebp
 0x5F841B: mov     [esp+30h+var_4], 0FFFFFFFFh
-0x5F8423: call    FormHeapFree
+0x5F8423: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5F8428: add     esp, 4
 0x5F842B: mov     [esp+2Ch+var_14], ebx
 0x5F842F: mov     [esp+2Ch+var_E], bx
@@ -109,3 +109,12 @@
 0x5F844D: pop     ebx
 0x5F844E: add     esp, 18h
 0x5F8451: retn    8
+0x9C2A40: lea     ecx, [ebp-14h]; void *
+0x9C2A43: jmp     BSStringT_Clear
+0x9C2A48: mov     edx, [esp+arg_4]
+0x9C2A4C: lea     eax, [edx-1Ch]
+0x9C2A4F: mov     ecx, [edx-20h]
+0x9C2A52: xor     ecx, eax
+0x9C2A54: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C2A59: mov     eax, offset stru_AEB7F4
+0x9C2A5E: jmp     ___CxxFrameHandler3

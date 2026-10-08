@@ -1,1 +1,1 @@
-LPCRECT
+typedef const RECT *LPCRECT;

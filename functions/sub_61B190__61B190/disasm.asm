@@ -49,7 +49,7 @@
 0x61B20A: push    0
 0x61B20C: push    esi
 0x61B20D: mov     ecx, edi
-0x61B20F: call    sub_616DB0
+0x61B20F: call    CombatController_CategorizeAvailableMagicItem
 0x61B214: mov     eax, [esi]
 0x61B216: mov     edx, [eax+18h]
 0x61B219: mov     ecx, esi
@@ -59,7 +59,7 @@
 0x61B222: push    0
 0x61B224: push    esi
 0x61B225: mov     ecx, edi
-0x61B227: call    sub_616DB0
+0x61B227: call    CombatController_CategorizeAvailableMagicItem
 0x61B22C: mov     ebx, [ebx+4]
 0x61B22F: test    ebx, ebx
 0x61B231: jnz     short loc_61B1C0
@@ -68,7 +68,7 @@
 0x61B23B: test    al, al
 0x61B23D: jz      loc_61B31E
 0x61B243: push    0; Seed
-0x61B245: call    GetRandomLargeInteger?
+0x61B245: call    Game_RandomLargeInteger; Engine RNG: optional explicit seed, otherwise lazy time seed once, then return MSVC rand() in [0,32767]. FaceGen consumes three separate endpoint-inclusive draws for age, relative sex morph, and hair length.
 0x61B24A: cdq
 0x61B24B: mov     ecx, 64h ; 'd'
 0x61B250: idiv    ecx
@@ -132,7 +132,7 @@
 0x61B2F1: push    0
 0x61B2F3: push    esi
 0x61B2F4: mov     ecx, edi
-0x61B2F6: call    sub_616DB0
+0x61B2F6: call    CombatController_CategorizeAvailableMagicItem
 0x61B2FB: mov     edx, [esi]
 0x61B2FD: mov     eax, [edx+18h]
 0x61B300: mov     ecx, esi
@@ -142,7 +142,7 @@
 0x61B309: push    0
 0x61B30B: push    esi
 0x61B30C: mov     ecx, edi
-0x61B30E: call    sub_616DB0
+0x61B30E: call    CombatController_CategorizeAvailableMagicItem
 0x61B313: mov     ebp, [ebp+4]
 0x61B316: test    ebp, ebp
 0x61B318: jnz     loc_61B281
@@ -184,7 +184,7 @@
 0x61B373: push    0
 0x61B375: push    esi
 0x61B376: mov     ecx, edi
-0x61B378: call    sub_616DB0
+0x61B378: call    CombatController_CategorizeAvailableMagicItem
 0x61B37D: mov     ebx, [ebx+4]
 0x61B380: test    ebx, ebx
 0x61B382: jnz     short loc_61B337
@@ -222,11 +222,11 @@
 0x61B3E0: add     eax, 24h ; '$'
 0x61B3E3: push    eax
 0x61B3E4: mov     ecx, edi
-0x61B3E6: call    sub_616DB0
+0x61B3E6: call    CombatController_CategorizeAvailableMagicItem
 0x61B3EB: mov     ecx, esi; jumptable 0061B3BD default case, cases 20,22-39
 0x61B3ED: call    ContainerEntryExtraData_DestroyDataTable
 0x61B3F2: push    esi
-0x61B3F3: call    FormHeapFree
+0x61B3F3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x61B3F8: add     esp, 4
 0x61B3FB: add     ebx, 1
 0x61B3FE: cmp     ebx, ebp
@@ -236,31 +236,31 @@
 0x61B40A: jz      short loc_61B415
 0x61B40C: mov     ecx, [eax]
 0x61B40E: push    0
-0x61B410: call    sub_41A610
+0x61B410: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x61B415: mov     eax, [edi+9Ch]
 0x61B41B: test    eax, eax
 0x61B41D: jz      short loc_61B428
 0x61B41F: mov     ecx, [eax]
 0x61B421: push    0
-0x61B423: call    sub_41A610
+0x61B423: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x61B428: mov     eax, [edi+90h]
 0x61B42E: test    eax, eax
 0x61B430: jz      short loc_61B43B
 0x61B432: mov     ecx, [eax]
 0x61B434: push    0
-0x61B436: call    sub_41A610
+0x61B436: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x61B43B: mov     eax, [edi+94h]
 0x61B441: test    eax, eax
 0x61B443: jz      short loc_61B44E
 0x61B445: mov     ecx, [eax]
 0x61B447: push    0
-0x61B449: call    sub_41A610
+0x61B449: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x61B44E: mov     eax, [edi+98h]
 0x61B454: test    eax, eax
 0x61B456: jz      loc_61B518
 0x61B45C: mov     ecx, [eax]
 0x61B45E: push    0
-0x61B460: call    sub_41A610
+0x61B460: call    MagicItem_LoadVFXModels; MagicItem VFX model preload path. Walks spell art and effect-item VFX model references and asks the model loader to load/cache required art resources.
 0x61B465: mov     eax, [edi+98h]
 0x61B46B: cmp     dword ptr [eax], 0
 0x61B46E: jz      loc_61B518
@@ -303,11 +303,11 @@
 0x61B4E7: add     eax, 18h
 0x61B4EA: push    eax
 0x61B4EB: mov     ecx, edi
-0x61B4ED: call    sub_616DB0
+0x61B4ED: call    CombatController_CategorizeAvailableMagicItem
 0x61B4F2: jmp     loc_61B3FB
 0x61B4F7: xor     ecx, ecx
 0x61B4F9: push    ecx; a1
-0x61B4FA: call    TESForm_LookupByFormID
+0x61B4FA: call    TESForm_LookupByFormID; OBMEFix correction 2026-05-30: authoritative TESForm lookup by resolved FormID. OBMEFix uses this only in the active-effect load-salvage predicate to resolve vanilla-format saved magic-item FormID/effect index records and confirm SEFF before dropping a non-actor duration record.
 0x61B4FF: add     esp, 4
 0x61B502: mov     [edi+0A8h], eax
 0x61B508: mov     esi, [esi+8]

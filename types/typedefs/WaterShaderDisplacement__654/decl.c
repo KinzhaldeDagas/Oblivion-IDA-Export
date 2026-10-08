@@ -1,1 +1,1 @@
-WaterShaderDisplacement
+struct WaterShaderDisplacement;

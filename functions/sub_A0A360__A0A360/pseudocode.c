@@ -1,4 +1,4 @@
-BSStringT *sub_A0A360()
+NiRTTI *sub_A0A360()
 {
-  return sub_70E220((BSStringT *)dword_B3FFA8, "NiVertWeightsExtraData", (int)dword_B3FD44);
+  return NiRTTI_Constructor(&stru_B3FFA8, "NiVertWeightsExtraData", &stru_B3FD44); /*0xa0a374*/
 }

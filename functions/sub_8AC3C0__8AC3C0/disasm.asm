@@ -1,4 +1,4 @@
-0x8AC3C0: push    ebp
+0x8AC3C0: push    ebp; TES4 authoritative: converts a 0x40-byte manifold/contact surface into a support surface constraint when its dot against the up/support basis is between 0.01 and the proxy slope limit.
 0x8AC3C1: mov     ebp, esp
 0x8AC3C3: and     esp, 0FFFFFFF0h
 0x8AC3C6: sub     esp, 18h
@@ -18,7 +18,7 @@
 0x8AC3ED: shufps  xmm2, xmm0, 0AAh ; 'ª'
 0x8AC3F1: lea     ecx, [esp+20h+var_14]
 0x8AC3F5: addss   xmm2, xmm1
-0x8AC3F9: movss   dword ptr [ecx], xmm2
+0x8AC3F9: movss   dword ptr [ecx], xmm2; Computes dot(candidate surface vector, up/support basis) for support-surface filtering.
 0x8AC3FD: fld     [esp+20h+var_14]
 0x8AC401: fcomp   dword ptr ds:0A34BA0h
 0x8AC407: fnstsw  ax
@@ -28,7 +28,7 @@
 0x8AC416: fcomp   [ebp+arg_0]
 0x8AC419: fnstsw  ax
 0x8AC41B: test    ah, 5
-0x8AC41E: jp      loc_8AC51D
+0x8AC41E: jp      loc_8AC51D; Rejects surfaces with dot <= 0.01 or dot >= proxy slope limit; accepted surfaces are projected into the horizontal/support plane.
 0x8AC424: mov     edx, [edi+8]
 0x8AC427: mov     eax, [edi+4]
 0x8AC42A: and     edx, 3FFFFFFFh
@@ -68,7 +68,7 @@
 0x8AC499: movaps  xmm1, xmmword ptr [ebx]
 0x8AC49C: mulps   xmm2, xmm1
 0x8AC49F: movaps  xmm1, xmmword ptr [eax]
-0x8AC4A2: addps   xmm1, xmm2
+0x8AC4A2: addps   xmm1, xmm2; Removes the up/support-basis component from the surface vector before normalizing it for the support constraint.
 0x8AC4A5: movaps  xmm0, xmm1
 0x8AC4A8: mulps   xmm0, xmm1
 0x8AC4AB: movaps  xmm2, xmm0
@@ -94,7 +94,7 @@
 0x8AC508: movaps  xmm2, xmm0
 0x8AC50B: shufps  xmm2, xmm0, 0
 0x8AC50F: mulps   xmm2, xmm1
-0x8AC512: movaps  xmmword ptr [eax], xmm2
+0x8AC512: movaps  xmmword ptr [eax], xmm2; Stores normalized projected support constraint vector in the 0x40-byte surface entry.
 0x8AC515: mov     al, 1
 0x8AC517: pop     esi
 0x8AC518: pop     ebx

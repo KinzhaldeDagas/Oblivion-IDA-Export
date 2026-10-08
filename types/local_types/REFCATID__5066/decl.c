@@ -1,1 +1,1 @@
-REFCATID
+typedef const GUID *REFCATID;

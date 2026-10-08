@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6B8CF0",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Builds runtime DialogueResponses from a cloned TESResponse list. Each TESResponse is reconstructed from the authoritative INFO record's 16-byte TRDT followed by NAM1 text. Empty text is skipped; INFOGENERAL/Rumors keeps only the first non-empty response.",
     "mnemonic": "push",
     "size": 2
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6B8D1B",
-    "line": "mov     [esp+30h+var_14], ebx",
+    "line": "mov     [esp+30h+responseList], ebx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -109,19 +109,19 @@
   },
   {
     "ea": "0x6B8D23",
-    "line": "mov     ecx, [ebp+18h]",
+    "line": "mov     ecx, [ebp+18h]; this",
     "mnemonic": "mov",
     "size": 3
   },
   {
     "ea": "0x6B8D26",
-    "line": "lea     eax, [esp+30h+var_14]",
+    "line": "lea     eax, [esp+30h+responseList]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6B8D2A",
-    "line": "push    eax",
+    "line": "push    eax; outResponses",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x6B8D2F",
-    "line": "call    sub_531270",
+    "line": "call    TESTopicInfo__CollectResponses; Clone the INFO's shared cached TESResponse stream into a temporary response list before creating MenuTopic-owned DialogueResponse records; the temporary clones are cleared after the MenuTopic responses have copied their data.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6B8D34",
-    "line": "lea     edi, [esp+30h+var_14]",
+    "line": "lea     edi, [esp+30h+responseList]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -289,7 +289,7 @@
   },
   {
     "ea": "0x6B8D7D",
-    "line": "jnz     short loc_6B8DC8",
+    "line": "jnz     short loc_6B8DC8; INFOGENERAL specialization: once one non-empty DialogueResponse has been appended, all later TESResponses are ignored. Ordinary GREETING/TOPIC entries retain every non-empty response.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x6B8D9E",
-    "line": "push    esi; a6",
+    "line": "push    esi; responseData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8D9F",
-    "line": "push    ecx; a5",
+    "line": "push    ecx; speaker",
     "mnemonic": "push",
     "size": 1
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x6B8DA4",
-    "line": "push    edx; a4",
+    "line": "push    edx; info",
     "mnemonic": "push",
     "size": 1
   },
@@ -379,13 +379,13 @@
   },
   {
     "ea": "0x6B8DA9",
-    "line": "push    ecx; a3",
+    "line": "push    ecx; topic",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6B8DAA",
-    "line": "push    edx; a2",
+    "line": "push    edx; ownerQuest",
     "mnemonic": "push",
     "size": 1
   },
@@ -397,7 +397,7 @@
   },
   {
     "ea": "0x6B8DAD",
-    "line": "call    sub_6B83B0",
+    "line": "call    DialogueResponse__DialogueResponse; DialogueResponse constructor (0x18 bytes): owns copied display text at +0x00, copies only the first 8 bytes of TESResponse.TRDT to +0x08 (not a BSString), and owns the generated voice path at +0x10.",
     "mnemonic": "call",
     "size": 5
   },
@@ -457,7 +457,7 @@
   },
   {
     "ea": "0x6B8DD0",
-    "line": "lea     ecx, [esp+30h+var_14]",
+    "line": "lea     ecx, [esp+30h+responseList]; this",
     "mnemonic": "lea",
     "size": 4
   },
@@ -469,7 +469,7 @@
   },
   {
     "ea": "0x6B8DDC",
-    "line": "call    sub_5308E0",
+    "line": "call    TESResponseList__Clear; Destroy every TESResponse and responseText owned by this list. CollectResponses creates a clone first, so this cleanup releases the caller's temporary snapshot without clearing the shared global cache.",
     "mnemonic": "call",
     "size": 5
   },
@@ -526,5 +526,89 @@
     "line": "retn    10h",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C6F60",
+    "line": "lea     ecx, [ebp-14h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F63",
+    "line": "jmp     j_TESResponseList__Clear",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F68",
+    "line": "mov     eax, [ebp-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F6B",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6F6C",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F71",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6F72",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C6F73",
+    "line": "mov     edx, [esp+a3]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C6F77",
+    "line": "lea     eax, [edx-20h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F7A",
+    "line": "mov     ecx, [edx-24h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C6F7D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C6F7F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F84",
+    "line": "mov     eax, offset stru_AEF3F4",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C6F89",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

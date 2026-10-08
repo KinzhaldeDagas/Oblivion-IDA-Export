@@ -30,7 +30,6 @@
 0x5375C7: test    ecx, ecx
 0x5375C9: jz      short loc_5375DC
 0x5375CB: jmp     short loc_5375D0
-0x5375CD: align 10h
 0x5375D0: cmp     [ecx+0Ch], eax
 0x5375D3: jz      short loc_5375DC
 0x5375D5: mov     ecx, [ecx+4]

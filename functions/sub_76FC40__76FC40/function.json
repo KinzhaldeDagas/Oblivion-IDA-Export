@@ -1,19 +1,32 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x76FC40",
+      "0x76FCE5"
+    ]
+  ],
+  "chunks_sha256": "579b15def6c342f270b691b706bbb6b4d379ba934b9d64cb14c992aaf17a9470",
+  "comment_regular": "Oblivion raw NiDX9 declaration-element writer. Validates stream and element indexes, stores the source descriptor, D3D declaration type, usage, usage index, and method in a 0x1C-byte record, marks the declaration dirty at +0x28, and releases the cached IDirect3DVertexDeclaration9 at +0x30.\n\nMoonSugarEffect decode: raw declaration element setter. Element record is 0x1C bytes; stream and slot are checked, semantic/type/usage/method fields are stored, declaration dirty byte +0x28 is set, cached D3D declaration +0x30 is released.",
+  "comment_repeatable": "Oblivion raw NiDX9 declaration-element writer. Validates stream and element indexes, stores the source descriptor, D3D declaration type, usage, usage index, and method in a 0x1C-byte record, marks the declaration dirty at +0x28, and releases the cached IDirect3DVertexDeclaration9 at +0x30.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_76FC40",
+  "display_name": "NiDX9ShaderDeclaration_SetRawElement",
   "end_ea": "0x76FCE5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_76FC40",
+  "name": "NiDX9ShaderDeclaration_SetRawElement",
   "segment": ".text",
   "sha256": "579b15def6c342f270b691b706bbb6b4d379ba934b9d64cb14c992aaf17a9470",
   "size": 165,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x76FC40",
-  "type": "char __thiscall(int this, unsigned int, unsigned int, int, int, int, int, int, int)",
+  "total_chunk_size": 165,
+  "type": "char __thiscall(NiDX9ShaderDeclaration *this, unsigned int streamIndex, unsigned int elementIndex, int sourceIndex, int sourceDescriptor, int declarationType, int usage, int usageIndex, int method)",
   "xrefs_from_count": 68,
   "xrefs_to_count": 1
 }

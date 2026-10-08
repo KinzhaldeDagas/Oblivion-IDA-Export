@@ -67,7 +67,6 @@
 0x8CB970: jmp     short loc_8CB980
 0x8CB972: mov     ecx, [esp+14h+arg_0]
 0x8CB976: jmp     short loc_8CB980
-0x8CB978: align 10h
 0x8CB980: mov     ecx, [ecx+74h]
 0x8CB983: mov     ebx, [ecx+ebp*4]
 0x8CB986: cmp     word ptr [ebx+4], 0

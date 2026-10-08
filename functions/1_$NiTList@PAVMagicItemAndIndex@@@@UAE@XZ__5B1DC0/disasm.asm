@@ -13,7 +13,7 @@
 0x5B1DE4: mov     [esp+18h+var_10], esi
 0x5B1DE8: mov     dword ptr [esi], offset ??_7?$NiTPointerListBase@V?$DFALL@PAVMagicItemAndIndex@@@@PAVMagicItemAndIndex@@@@6B@; const NiTPointerListBase<DFALL<MagicItemAndIndex *>,MagicItemAndIndex *>::`vftable'
 0x5B1DEE: mov     [esp+18h+var_4], 0
-0x5B1DF6: call    NiTPointerList__FreeAllNodes
+0x5B1DF6: call    NiTPointerList__FreeAllNodes; Free every active NiTPointerList node through the list's FreeNode virtual and clear head/tail/count. The generic list helper does not destroy payload objects; owner code must do that separately when required.
 0x5B1DFB: mov     dword ptr [esi], offset ??_7?$NiTListBase@V?$DFALL@PAVMagicItemAndIndex@@@@PAVMagicItemAndIndex@@@@6B@; const NiTListBase<DFALL<MagicItemAndIndex *>,MagicItemAndIndex *>::`vftable'
 0x5B1E01: mov     ecx, [esp+18h+var_C]
 0x5B1E05: mov     large fs:0, ecx
@@ -21,3 +21,14 @@
 0x5B1E0D: pop     esi
 0x5B1E0E: add     esp, 10h
 0x5B1E11: retn
+0x5B1510: mov     dword ptr [ecx], offset ??_7?$NiTListBase@V?$DFALL@PAVMagicItemAndIndex@@@@PAVMagicItemAndIndex@@@@6B@; const NiTListBase<DFALL<MagicItemAndIndex *>,MagicItemAndIndex *>::`vftable'
+0x5B1516: retn
+0x9C0870: mov     ecx, [ebp-10h]
+0x9C0873: jmp     loc_5B1510
+0x9C0878: mov     edx, [esp+arg_4]
+0x9C087C: lea     eax, [edx-8]
+0x9C087F: mov     ecx, [edx-0Ch]
+0x9C0882: xor     ecx, eax
+0x9C0884: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0889: mov     eax, offset stru_AE9AC0
+0x9C088E: jmp     ___CxxFrameHandler3

@@ -14,8 +14,8 @@ void __usercall EffectItem_BuildDisplayString_::FeetMagnitude(
         int a13,
         char a14)
 {
-  if ( *(int *)(a1 + 0x58) >= 0 )
-    EffectItem_BuildDisplayString_::PointsMagnitude();
+  if ( *(int *)(a1 + 0x58) >= 0 ) /*0x413dfb*/
+    EffectItem_BuildDisplayString_::PointsMagnitude(); /*0x413dfb*/
   else
-    EffectItem_BuildDisplayString_::ConcatMagnitude(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+    EffectItem_BuildDisplayString_::ConcatMagnitude(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14); /*0x413e0e*/
 }

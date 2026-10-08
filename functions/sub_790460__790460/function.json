@@ -1,19 +1,32 @@
 {
-  "callees_count": 2,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x790460",
+      "0x79048A"
+    ]
+  ],
+  "chunks_sha256": "8195e490ed61b9cd2217768fed630903b1aa2bc7e2d58b301acb5beebf180cf3",
+  "comment_regular": "Copies one 0x0C-byte OB_CBranchChildRef value into every record in [first,last) and returns last. Used by both in-place child-vector insert/fill bodies.",
+  "comment_repeatable": "Copies one 0x0C-byte OB_CBranchChildRef value into every record in [first,last) and returns last. Used by both in-place child-vector insert/fill bodies.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_790460",
+  "display_name": "OB_stVectorBranchChildRef_FillRange_010201A0",
   "end_ea": "0x79048A",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_790460",
+  "name": "OB_stVectorBranchChildRef_FillRange_010201A0",
   "segment": ".text",
   "sha256": "8195e490ed61b9cd2217768fed630903b1aa2bc7e2d58b301acb5beebf180cf3",
   "size": 42,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x790460",
-  "type": "_DWORD *__cdecl(_DWORD *, _DWORD *, _DWORD *)",
+  "total_chunk_size": 42,
+  "type": "OB_CBranchChildRef_010201A0 *__cdecl(OB_CBranchChildRef_010201A0 *first, OB_CBranchChildRef_010201A0 *last, const OB_CBranchChildRef_010201A0 *value)",
   "xrefs_from_count": 18,
   "xrefs_to_count": 4
 }

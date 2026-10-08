@@ -1,19 +1,36 @@
 {
-  "callees_count": 10,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 5,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_543D30",
+  "chunks": [
+    [
+      "0x543D30",
+      "0x543DFB"
+    ],
+    [
+      "0x9CA420",
+      "0x9CA446"
+    ]
+  ],
+  "chunks_sha256": "e29e0169645bb90b6929e8fed33d8970ad883222f9970a5842c684d2e6da9c69",
+  "comment_regular": "Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.",
+  "comment_repeatable": "Allocates a NiNode, stores it as the sky-object root with refcount ownership, sets flags 0x2 and 0x20, and attaches it to the supplied parent through virtual slot +0x84.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "SkyObject__CreateRootNodeAndAttach",
   "end_ea": "0x543DFB",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_543D30",
+  "name": "SkyObject__CreateRootNodeAndAttach",
   "segment": ".text",
   "sha256": "f18cc81b3afba363338873ea71c88434f3ec42d362f93ec6960563ef243c8e81",
   "size": 203,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x543D30",
+  "total_chunk_size": 241,
   "type": "int __thiscall(Sky *this, int a2)",
-  "xrefs_from_count": 78,
+  "xrefs_from_count": 92,
   "xrefs_to_count": 8
 }

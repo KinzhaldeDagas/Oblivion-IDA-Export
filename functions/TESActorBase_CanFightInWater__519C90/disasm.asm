@@ -7,3 +7,9 @@
 0x519CA0: jnz     short loc_519CAB
 0x519CA2: test    byte ptr [ecx+28h], 1
 0x519CA6: jnz     short loc_519CAB
+0x519CAB: cmp     al, 24h ; '$'
+0x519CAD: jnz     short TESActorBase_CanFightInWater___Return_1
+0x519CAF: mov     eax, [ecx+28h]
+0x519CB2: shr     eax, 12h
+0x519CB5: test    al, 1
+0x519CB7: jnz     short TESActorBase_CanFightInWater___Return_0

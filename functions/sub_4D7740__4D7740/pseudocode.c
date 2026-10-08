@@ -1,26 +1,27 @@
-BSExtraData *__thiscall sub_4D7740(TESObjectREFR *this)
+// Verified: returns this reference's ExtraLockData* payload when present; otherwise, if its ExtraTeleport has a linked door, returns that linked reference's ExtraLockData* payload; null when neither exists. Directly supported by ExtraDataList_GetLock, ExtraDataList_GetTeleport, and TeleportData_GetLinkedDoor.
+ExtraLockData *__thiscall TESObjectREFR_GetEffectiveDoorLock(TESObjectREFR *this)
 {
   ExtraDataList *p_baseExtraList; // esi
-  BSExtraData *result; // eax
-  BSExtraData *Teleport; // eax
-  BSExtraData *v4; // esi
-  BSExtraDataVtbl *v5; // eax
+  ExtraLockData *result; // eax
+  TeleportData *Teleport; // eax
+  TeleportData *v4; // esi
+  TESObjectREFR *LinkedDoor; // eax
 
-  p_baseExtraList = &this->member.baseExtraList;
-  result = (BSExtraData *)sub_41E690(&this->member.baseExtraList);
-  if ( !result )
+  p_baseExtraList = &this->member.baseExtraList; /*0x4d7741*/
+  result = ExtraDataList_GetLock(&this->member.baseExtraList); /*0x4d7747*/
+  if ( !result ) /*0x4d7750*/
   {
-    Teleport = (BSExtraData *)ExtraDataList_GetTeleport(p_baseExtraList);
-    v4 = Teleport;
-    if ( Teleport && sub_42B410(Teleport) )
+    Teleport = ExtraDataList_GetTeleport(p_baseExtraList); /*0x4d7754*/
+    v4 = Teleport; /*0x4d7759*/
+    if ( Teleport && TeleportData_GetLinkedDoor(Teleport) ) /*0x4d7761*/
     {
-      v5 = sub_42B410(v4);
-      return (BSExtraData *)sub_41E690((ExtraDataList *)&v5[8].CompareTo);
+      LinkedDoor = TeleportData_GetLinkedDoor(v4); /*0x4d776c*/
+      return ExtraDataList_GetLock(&LinkedDoor->member.baseExtraList); /*0x4d7776*/
     }
     else
     {
-      return 0;
+      return 0; /*0x4d777b*/
     }
   }
-  return result;
+  return result; /*0x4d7771*/
 }

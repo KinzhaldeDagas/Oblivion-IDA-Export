@@ -1,4 +1,4 @@
-0x4B4D90: push    ebp
+0x4B4D90: push    ebp; Oblivion ARMO stream loader. It iterates every serialized chunk; duplicate SCRI/BMDT/DATA chunks are not first-selected.
 0x4B4D91: mov     ebp, esp
 0x4B4D93: sub     esp, 18h
 0x4B4D96: mov     eax, ds:0B30AACh
@@ -17,7 +17,7 @@
 0x4B4DB5: jmp     loc_4B5125
 0x4B4DBA: push    edi
 0x4B4DBB: mov     ecx, esi
-0x4B4DBD: call    TESFile_InitializeFormFromRecord
+0x4B4DBD: call    TESFile_InitializeFormFromRecord; Initializes only TESForm header state (type, flags, FormID, source file). It does not reset derived-form component fields before a loader replays subrecords.
 0x4B4DC2: xor     ebx, ebx
 0x4B4DC4: push    ebx; a2
 0x4B4DC5: mov     ecx, edi; this
@@ -27,7 +27,6 @@
 0x4B4DD3: cmp     eax, ebx
 0x4B4DD5: jz      loc_4B5123
 0x4B4DDB: jmp     short loc_4B4DE0
-0x4B4DDD: align 10h
 0x4B4DE0: cmp     eax, 49524353h
 0x4B4DE5: jg      loc_4B4FD2
 0x4B4DEB: jz      loc_4B4FB0
@@ -47,7 +46,7 @@
 0x4B4E2E: push    0; a4
 0x4B4E30: push    ebx; Dst
 0x4B4E31: mov     ecx, esi; a1
-0x4B4E33: call    TESFile_GetChunkData
+0x4B4E33: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B4E38: push    0; a3
 0x4B4E3A: push    ebx; a2
 0x4B4E3B: lea     ecx, [edi+0DCh]; this
@@ -59,7 +58,7 @@
 0x4B4E58: push    0; a4
 0x4B4E5A: push    ebx; Dst
 0x4B4E5B: mov     ecx, esi; a1
-0x4B4E5D: call    TESFile_GetChunkData
+0x4B4E5D: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B4E62: mov     eax, [edi+9Ch]
 0x4B4E68: mov     edx, [eax+18h]
 0x4B4E6B: lea     ecx, [edi+9Ch]
@@ -72,7 +71,7 @@
 0x4B4E86: push    0; a4
 0x4B4E88: push    ebx; Dst
 0x4B4E89: mov     ecx, esi; a1
-0x4B4E8B: call    TESFile_GetChunkData
+0x4B4E8B: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B4E90: mov     eax, [edi+84h]
 0x4B4E96: mov     edx, [eax+18h]
 0x4B4E99: lea     ecx, [edi+84h]
@@ -88,7 +87,7 @@
 0x4B4EC1: push    eax; Dst
 0x4B4EC2: push    esi; a2
 0x4B4EC3: mov     ecx, edi; this
-0x4B4EC5: call    TESForm_LoadGenericComponents
+0x4B4EC5: call    TESForm_LoadGenericComponents; Each ARMO DATA occurrence calls TESForm_LoadGenericComponents with fixed prefix size 2. Repeated DATA chunks overlay the current component state in stream order.
 0x4B4ECA: jmp     loc_4B5107
 0x4B4ECF: mov     eax, [esi+254h]
 0x4B4ED5: call    __alloca?
@@ -96,7 +95,7 @@
 0x4B4EDC: push    0; a4
 0x4B4EDE: push    ebx; Dst
 0x4B4EDF: mov     ecx, esi; a1
-0x4B4EE1: call    TESFile_GetChunkData
+0x4B4EE1: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B4EE6: mov     edx, [edi+0B4h]
 0x4B4EEC: mov     eax, [edx+18h]
 0x4B4EEF: lea     ecx, [edi+0B4h]
@@ -106,7 +105,7 @@
 0x4B4EFD: lea     ecx, [ebp+var_14]
 0x4B4F00: push    ecx
 0x4B4F01: mov     ecx, esi
-0x4B4F03: call    TESFile_GetChunkData4
+0x4B4F03: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B4F08: fld     [ebp+var_14]
 0x4B4F0B: fstp    dword ptr [edi+0A8h]
 0x4B4F11: jmp     loc_4B5107
@@ -120,21 +119,21 @@
 0x4B4F31: lea     edx, [ebp+var_C]
 0x4B4F34: push    edx
 0x4B4F35: mov     ecx, esi
-0x4B4F37: call    TESFile_GetChunkData4
+0x4B4F37: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B4F3C: fld     [ebp+var_C]
 0x4B4F3F: fstp    dword ptr [edi+0C0h]
 0x4B4F45: jmp     loc_4B5107
 0x4B4F4A: lea     eax, [ebp+var_10]
 0x4B4F4D: push    eax
 0x4B4F4E: mov     ecx, esi
-0x4B4F50: call    TESFile_GetChunkData4
+0x4B4F50: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B4F55: fld     [ebp+var_10]
 0x4B4F58: fstp    dword ptr [edi+90h]
 0x4B4F5E: jmp     loc_4B5107
 0x4B4F63: lea     ecx, [ebp+var_18]
 0x4B4F66: push    ecx
 0x4B4F67: mov     ecx, esi
-0x4B4F69: call    TESFile_GetChunkData4
+0x4B4F69: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B4F6E: fld     [ebp+var_18]
 0x4B4F71: fstp    dword ptr [edi+78h]
 0x4B4F74: jmp     loc_4B5107
@@ -146,7 +145,7 @@
 0x4B4F91: push    200h; a4
 0x4B4F96: push    ebx; Dst
 0x4B4F97: mov     ecx, esi; a1
-0x4B4F99: call    TESFile_GetChunkData
+0x4B4F99: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B4F9E: mov     edx, [edi]
 0x4B4FA0: mov     eax, [edx+0D8h]
 0x4B4FA6: push    ebx
@@ -156,12 +155,12 @@
 0x4B4FB0: lea     ecx, [ebp+var_8]
 0x4B4FB3: push    ecx
 0x4B4FB4: mov     ecx, esi
-0x4B4FB6: mov     [ebp+var_8], ebx
-0x4B4FB9: call    TESFile_GetChunkData4
+0x4B4FB6: mov     [ebp+var_8], ebx; Each SCRI occurrence zero-initializes a local u32 before reading, then overwrites ARMO script FormID at +0x34. Last serialized SCRI wins.
+0x4B4FB9: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B4FBE: mov     edx, [ebp+var_8]
 0x4B4FC1: push    edi
 0x4B4FC2: lea     ecx, [edi+30h]
-0x4B4FC5: mov     [edi+34h], edx
+0x4B4FC5: mov     [edi+34h], edx; Overwrite ARMO script FormID with this SCRI; then relink scriptable component.
 0x4B4FC8: call    TESScriptableForm_Link
 0x4B4FCD: jmp     loc_4B5107
 0x4B4FD2: cmp     eax, 54324F4Dh
@@ -179,12 +178,12 @@
 0x4B5002: lea     eax, [edi+24h]
 0x4B5005: push    esi
 0x4B5006: push    eax
-0x4B5007: call    TESFullname_Load
+0x4B5007: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4B500C: jmp     loc_4B5104
 0x4B5011: xor     eax, eax
 0x4B5013: push    esi
 0x4B5014: push    eax
-0x4B5015: call    TESFullname_Load
+0x4B5015: call    TESFullname_Load; FULL loader used by XMRK: empty payload frees/clears the string. Nonempty payload is copied with max=0 into the exact temporary and passed to BSStringT_Set/strlen; a missing terminal NUL can scan past the chunk allocation.
 0x4B501A: jmp     loc_4B5104
 0x4B501F: mov     eax, [esi+254h]
 0x4B5025: call    __alloca?
@@ -192,7 +191,7 @@
 0x4B502C: push    0; a4
 0x4B502E: push    ebx; Dst
 0x4B502F: mov     ecx, esi; a1
-0x4B5031: call    TESFile_GetChunkData
+0x4B5031: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B5036: mov     eax, [edi+6Ch]
 0x4B5039: mov     edx, [eax+18h]
 0x4B503C: lea     ecx, [edi+6Ch]
@@ -217,7 +216,7 @@
 0x4B5081: push    0; a4
 0x4B5083: push    ebx; Dst
 0x4B5084: mov     ecx, esi; a1
-0x4B5086: call    TESFile_GetChunkData
+0x4B5086: call    TESFile_GetChunkData; Bounded GetChunkData semantics for DIAL/DATA maxSize=1: size zero leaves destination unchanged; size one copies the byte; size greater than one writes destination[0]=0 and copies zero payload bytes. TESCS peer is TESFile_ReadCurrentChunkData 0x4879D0.
 0x4B508B: push    0; a3
 0x4B508D: push    ebx; a2
 0x4B508E: lea     ecx, [edi+0D0h]; this
@@ -227,7 +226,7 @@
 0x4B509E: push    edx
 0x4B509F: mov     ecx, esi
 0x4B50A1: mov     [ebp+var_8], ebx
-0x4B50A4: call    TESFile_GetChunkData4
+0x4B50A4: call    TESFile_GetChunkData4; 0x4510E0: UInt32 wrapper used by WRLD CNAM0x4F20D2, NAM2 0x4F1FBF, WNAM0x4F2135, SNAM0x4F2104. Delegates to0x450C20 max4; overlong payload gives3 source bytes plus zero, not all4 source bytes.
 0x4B50A9: mov     eax, [ebp+var_8]
 0x4B50AC: mov     [edi+40h], eax
 0x4B50AF: jmp     short loc_4B5107
@@ -252,14 +251,14 @@
 0x4B50E6: lea     ecx, [edi+68h]
 0x4B50E9: push    ecx; Dst
 0x4B50EA: mov     ecx, esi; a1
-0x4B50EC: call    TESFile_GetChunkData
+0x4B50EC: call    TESFile_GetChunkData; Each BMDT occurrence copies four bytes directly to ARMO+0x68. Last serialized BMDT wins.
 0x4B50F1: jmp     short loc_4B5107
 0x4B50F3: cmp     eax, 54444F4Dh
 0x4B50F8: jnz     short loc_4B5107
 0x4B50FA: lea     edx, [edi+6Ch]
 0x4B50FD: push    esi
 0x4B50FE: push    edx
-0x4B50FF: call    sub_46D940
+0x4B50FF: call    TESModel_LoadTextureHashSubrecord
 0x4B5104: add     esp, 8
 0x4B5107: mov     ecx, esi
 0x4B5109: call    TESFile_GetNextChunk

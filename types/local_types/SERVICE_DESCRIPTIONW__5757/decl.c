@@ -1,1 +1,4 @@
-_SERVICE_DESCRIPTIONW
+struct _SERVICE_DESCRIPTIONW
+{
+LPWSTR lpDescription;
+};

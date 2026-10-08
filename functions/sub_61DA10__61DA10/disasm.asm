@@ -16,7 +16,7 @@
 0x61DA32: jbe     short loc_61DA79
 0x61DA34: push    ebx
 0x61DA35: mov     ecx, esi
-0x61DA37: call    sub_6135F0
+0x61DA37: call    CombatController_GetCurrentTarget
 0x61DA3C: mov     edi, [esi+40h]
 0x61DA3F: test    edi, edi
 0x61DA41: mov     ebx, eax
@@ -25,11 +25,10 @@
 0x61DA47: test    eax, eax
 0x61DA49: jz      short loc_61DA60
 0x61DA4B: jmp     short loc_61DA50
-0x61DA4D: align 10h
 0x61DA50: mov     eax, [eax]
 0x61DA52: push    eax
 0x61DA53: mov     ecx, esi
-0x61DA55: call    sub_6162D0
+0x61DA55: call    CombatController_RemoveTarget
 0x61DA5A: mov     eax, [edi]
 0x61DA5C: test    eax, eax
 0x61DA5E: jnz     short loc_61DA50
@@ -41,7 +40,7 @@
 0x61DA6E: push    0; float
 0x61DA70: push    0; char
 0x61DA72: push    ebx; int
-0x61DA73: call    sub_616190
+0x61DA73: call    CombatController_TryAddTarget; Allocates 0x14-byte TargetInfo: Actor* +0, priority +4, flags byte +8, incoming health damage +0xC, outgoing fatigue-like damage +0x10.
 0x61DA78: pop     ebx
 0x61DA79: cmp     dword ptr [esi+6Ch], 7
 0x61DA7D: jnz     short loc_61DAA5

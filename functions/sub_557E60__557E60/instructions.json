@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x557E60",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Negative compatibility finding: nonzero maxBasisShapes is clamped to FaceGenEgtBasisBank_GetCount before basis iteration; zero selects min(bankCount,30). Thus PF requesting 50 during randomized refresh does not alone overrun a smaller EGT bank. Precheck separately errors if model basis records exceed matrix 2/3 rows. No bound bug from the raised limit proven.",
     "mnemonic": "push",
     "size": 2
   },
@@ -121,7 +121,7 @@
   },
   {
     "ea": "0x557E9C",
-    "line": "mov     ebx, [esp+70h+arg_4]",
+    "line": "mov     ebx, [esp+70h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -283,7 +283,7 @@
   },
   {
     "ea": "0x557EE2",
-    "line": "mov     ebx, [esp+70h+arg_0]",
+    "line": "mov     ebx, [esp+70h+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x557EEA",
-    "line": "call    sub_5538D0",
+    "line": "call    FaceGenManager_GetDefaultHeadParameters; Returns the FaceGen manager's default head-parameter block at manager+0x08, initializing the manager on demand.",
     "mnemonic": "call",
     "size": 5
   },
@@ -403,13 +403,13 @@
   },
   {
     "ea": "0x557F20",
-    "line": "push    esi; Src",
+    "line": "push    esi; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x557F21",
-    "line": "call    sub_557C80",
+    "line": "call    BSFaceGenEgtData_CreateFromFile; Allocate and construct a BSFaceGen EGT data object from the named asset.",
     "mnemonic": "call",
     "size": 5
   },
@@ -589,19 +589,19 @@
   },
   {
     "ea": "0x557F7F",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x557F81",
-    "line": "lea     ecx, [eax+4]",
+    "line": "lea     ecx, [eax+4]; self",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x557F84",
-    "line": "call    sub_556320",
+    "line": "call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -625,19 +625,19 @@
   },
   {
     "ea": "0x557F92",
-    "line": "push    0",
+    "line": "push    0; index",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x557F94",
-    "line": "add     ecx, 4",
+    "line": "add     ecx, 4; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x557F97",
-    "line": "call    sub_556320",
+    "line": "call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -691,7 +691,7 @@
   },
   {
     "ea": "0x557FB1",
-    "line": "add     ebx, 30h ; '0'",
+    "line": "add     ebx, 30h ; '0'; EGT texture generation begins at FaceGen matrix 2 and validates/consumes matrices 2 and 3 as texture-coordinate banks.",
     "mnemonic": "add",
     "size": 3
   },
@@ -769,7 +769,7 @@
   },
   {
     "ea": "0x557FD2",
-    "line": "jb      short loc_558016",
+    "line": "jb      short loc_558016; Validate that FaceGen texture matrix 2/3 contains coordinates for the complete corresponding EGT basis bank, not merely the later default render limit.",
     "mnemonic": "jb",
     "size": 2
   },
@@ -853,7 +853,7 @@
   },
   {
     "ea": "0x557FFE",
-    "line": "mov     [esp+70h+arg_0], eax",
+    "line": "mov     [esp+70h+parameters], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -931,7 +931,7 @@
   },
   {
     "ea": "0x55802C",
-    "line": "lea     ecx, [esp+70h+var_5C]; this",
+    "line": "lea     ecx, [esp+70h+var_5C]; slot",
     "mnemonic": "lea",
     "size": 4
   },
@@ -943,7 +943,7 @@
   },
   {
     "ea": "0x558038",
-    "line": "call    sub_7016A0",
+    "line": "call    NiPointerSlot_Release",
     "mnemonic": "call",
     "size": 5
   },
@@ -1213,7 +1213,7 @@
   },
   {
     "ea": "0x5580BA",
-    "line": "mov     esi, [esp+80h+arg_8]",
+    "line": "mov     esi, [esp+80h+maxBasisShapes]; A nonzero maxBasisShapes is clipped only to the loaded bank count. Zero selects the stock default path, which caps the bank at 30.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1261,7 +1261,7 @@
   },
   {
     "ea": "0x5580D5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1273,7 +1273,7 @@
   },
   {
     "ea": "0x5580DB",
-    "line": "call    sub_556300",
+    "line": "call    FaceGenEgtBasisBank_GetCount; Return the number of 64-byte basis records in one loaded EGT bank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1291,13 +1291,13 @@
   },
   {
     "ea": "0x5580E4",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5580E6",
-    "line": "call    sub_556300",
+    "line": "call    FaceGenEgtBasisBank_GetCount; Return the number of 64-byte basis records in one loaded EGT bank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1333,13 +1333,13 @@
   },
   {
     "ea": "0x5580F9",
-    "line": "add     ecx, 4",
+    "line": "add     ecx, 4; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x5580FC",
-    "line": "call    sub_556300",
+    "line": "call    FaceGenEgtBasisBank_GetCount; Return the number of 64-byte basis records in one loaded EGT bank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1363,7 +1363,7 @@
   },
   {
     "ea": "0x55810A",
-    "line": "jbe     short loc_558115",
+    "line": "jbe     short loc_558115; Stock zero-limit generation truncates the EGT bank to 30. All 20 vanilla FREGT003 assets in Oblivion - Meshes.bsa declare 50 bank-0 bases, leaving 20 valid bases unused.",
     "mnemonic": "jbe",
     "size": 2
   },
@@ -1387,7 +1387,7 @@
   },
   {
     "ea": "0x558117",
-    "line": "mov     [esp+70h+arg_0], 0",
+    "line": "mov     [esp+70h+parameters], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1399,7 +1399,7 @@
   },
   {
     "ea": "0x558125",
-    "line": "mov     [esp+70h+arg_8], 0",
+    "line": "mov     [esp+70h+maxBasisShapes], 0",
     "mnemonic": "mov",
     "size": 8
   },
@@ -1435,7 +1435,7 @@
   },
   {
     "ea": "0x55813D",
-    "line": "mov     ebp, [esp+70h+arg_0]",
+    "line": "mov     ebp, [esp+70h+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1501,7 +1501,7 @@
   },
   {
     "ea": "0x55815C",
-    "line": "mov     edx, [esp+70h+arg_8]",
+    "line": "mov     edx, [esp+70h+maxBasisShapes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1519,7 +1519,7 @@
   },
   {
     "ea": "0x558166",
-    "line": "push    462h; int",
+    "line": "push    462h; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -1531,7 +1531,7 @@
   },
   {
     "ea": "0x558170",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1627,7 +1627,7 @@
   },
   {
     "ea": "0x5581A0",
-    "line": "mov     eax, [esp+70h+arg_8]",
+    "line": "mov     eax, [esp+70h+maxBasisShapes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1645,7 +1645,7 @@
   },
   {
     "ea": "0x5581AA",
-    "line": "push    463h; int",
+    "line": "push    463h; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -1657,7 +1657,7 @@
   },
   {
     "ea": "0x5581B4",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1759,7 +1759,7 @@
   },
   {
     "ea": "0x5581EB",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,7 +1771,7 @@
   },
   {
     "ea": "0x5581F2",
-    "line": "mov     [esp+70h+var_34], eax",
+    "line": "mov     [esp+70h+var_34], eax; Quantize the FaceGen coordinate to signed fixed point using scale 256.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1801,25 +1801,25 @@
   },
   {
     "ea": "0x558206",
-    "line": "mov     ebx, [esp+70h+arg_0]",
+    "line": "mov     ebx, [esp+70h+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55820A",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55820B",
-    "line": "add     ecx, 4",
+    "line": "add     ecx, 4; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x55820E",
-    "line": "call    sub_556320",
+    "line": "call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1843,19 +1843,19 @@
   },
   {
     "ea": "0x55821C",
-    "line": "push    ebx",
+    "line": "push    ebx; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x55821D",
-    "line": "add     ecx, 4",
+    "line": "add     ecx, 4; self",
     "mnemonic": "add",
     "size": 3
   },
   {
     "ea": "0x558220",
-    "line": "call    sub_556320",
+    "line": "call    FaceGenEgtBasisBank_GetAt; Bounds-check and return a pointer to one 64-byte basis record in a loaded EGT bank.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1963,7 +1963,7 @@
   },
   {
     "ea": "0x55825C",
-    "line": "cmp     [esp+70h+arg_0], eax",
+    "line": "cmp     [esp+70h+parameters], eax",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -1987,7 +1987,7 @@
   },
   {
     "ea": "0x55826A",
-    "line": "mov     eax, [esp+70h+arg_8]",
+    "line": "mov     eax, [esp+70h+maxBasisShapes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2005,7 +2005,7 @@
   },
   {
     "ea": "0x558277",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Quantize each EGT basis weight with the same scale 256 before multiplying it by the FaceGen coordinate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2077,7 +2077,7 @@
   },
   {
     "ea": "0x55829B",
-    "line": "cmp     [esp+70h+arg_0], ecx",
+    "line": "cmp     [esp+70h+parameters], ecx",
     "mnemonic": "cmp",
     "size": 4
   },
@@ -2101,7 +2101,7 @@
   },
   {
     "ea": "0x5582A9",
-    "line": "add     esi, [esp+70h+arg_8]",
+    "line": "add     esi, [esp+70h+maxBasisShapes]",
     "mnemonic": "add",
     "size": 4
   },
@@ -2257,7 +2257,7 @@
   },
   {
     "ea": "0x5582FD",
-    "line": "add     [ecx], ebx",
+    "line": "add     [ecx], ebx; Accumulate each signed EGT RGB delta into a 16.16 fixed-point work buffer.",
     "mnemonic": "add",
     "size": 2
   },
@@ -2359,13 +2359,13 @@
   },
   {
     "ea": "0x558337",
-    "line": "mov     eax, [esp+70h+arg_0]",
+    "line": "mov     eax, [esp+70h+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x55833B",
-    "line": "add     [esp+70h+arg_8], 40h ; '@'",
+    "line": "add     [esp+70h+maxBasisShapes], 40h ; '@'",
     "mnemonic": "add",
     "size": 5
   },
@@ -2383,7 +2383,7 @@
   },
   {
     "ea": "0x558347",
-    "line": "mov     [esp+70h+arg_0], eax",
+    "line": "mov     [esp+70h+parameters], eax",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2395,7 +2395,7 @@
   },
   {
     "ea": "0x558351",
-    "line": "fld     qword ptr ds:0A64AA0h",
+    "line": "fld     qword ptr ds:0A64AA0h; Convert accumulated RGB deltas back to float with scale 1/65536.",
     "mnemonic": "fld",
     "size": 6
   },
@@ -2563,7 +2563,7 @@
   },
   {
     "ea": "0x5583B4",
-    "line": "mov     [esp+70h+arg_8], edx",
+    "line": "mov     [esp+70h+maxBasisShapes], edx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2581,7 +2581,7 @@
   },
   {
     "ea": "0x5583BF",
-    "line": "mov     [esp+70h+arg_0], ecx",
+    "line": "mov     [esp+70h+parameters], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2611,13 +2611,13 @@
   },
   {
     "ea": "0x5583CE",
-    "line": "mov     ecx, [esp+70h+arg_0]",
+    "line": "mov     ecx, [esp+70h+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5583D2",
-    "line": "mov     eax, [esp+70h+arg_8]",
+    "line": "mov     eax, [esp+70h+maxBasisShapes]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2869,13 +2869,13 @@
   },
   {
     "ea": "0x55844B",
-    "line": "add     [esp+70h+arg_0], ecx",
+    "line": "add     [esp+70h+parameters], ecx",
     "mnemonic": "add",
     "size": 4
   },
   {
     "ea": "0x55844F",
-    "line": "add     [esp+70h+arg_8], edx",
+    "line": "add     [esp+70h+maxBasisShapes], edx",
     "mnemonic": "add",
     "size": 4
   },
@@ -2935,7 +2935,7 @@
   },
   {
     "ea": "0x558473",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3007,13 +3007,13 @@
   },
   {
     "ea": "0x5584A6",
-    "line": "call    sub_54DA40",
+    "line": "call    sub_54DA40; Convert/clamp the generated FaceGen image using -255, +255, and 0.5 conversion constants, then return the texture.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5584AB",
-    "line": "mov     ebp, [esp+70h+arg_4]",
+    "line": "mov     ebp, [esp+70h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3266,6 +3266,102 @@
   {
     "ea": "0x55851A",
     "line": "jmp     loc_55803F",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6E0",
+    "line": "lea     ecx, [ebp-5Ch]; slot",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6E3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6E8",
+    "line": "lea     ecx, [ebp-24h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6EB",
+    "line": "jmp     sub_5563B0",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6F0",
+    "line": "mov     eax, [ebp+4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC6F3",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC6F4",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC6F9",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC6FA",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9BC6FB",
+    "line": "mov     edx, [esp+outTexture]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9BC6FF",
+    "line": "lea     eax, [edx-60h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC702",
+    "line": "mov     ecx, [edx-64h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9BC705",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9BC707",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC70C",
+    "line": "mov     eax, offset stru_AE633C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9BC711",
+    "line": "jmp     ___CxxFrameHandler3",
     "mnemonic": "jmp",
     "size": 5
   }

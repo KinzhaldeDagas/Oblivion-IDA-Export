@@ -21,7 +21,7 @@
 0x547AD6: fmul    [esp+4+arg_C]
 0x547ADA: fstp    [esp+4+arg_0]
 0x547ADE: fmul    [esp+4+arg_0]
-0x547AE2: call    Double_To_SInt32
+0x547AE2: call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.
 0x547AE7: mov     ecx, 64h ; 'd'
 0x547AEC: sub     ecx, esi
 0x547AEE: cmp     eax, ecx

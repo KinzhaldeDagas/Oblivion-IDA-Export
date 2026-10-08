@@ -1,46 +1,81 @@
 {
-  "backend": "idc_idautils_fallback",
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
   "decl": "NiTexturingProperty",
+  "definition": "struct NiTexturingProperty\n{\nvoid **vtbl;\nNiObjectNETMembr super;\nUInt16 unk018;\nUInt16 unk01A;\nNiTArray_NiTexturingPropertyMap unk01C;\nUInt32 unk02C;\n}\n",
   "id": 18374686479671989474,
   "is_union": false,
+  "kind": "struct",
   "members": [
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00053.",
       "name": "vtbl",
       "offset": 0,
       "offset_hex": "0x0",
-      "size": 4
+      "size": 4,
+      "type": "void **"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00054.",
       "name": "super",
       "offset": 4,
       "offset_hex": "0x4",
-      "size": 20
+      "size": 20,
+      "type": "NiObjectNETMembr"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00055.",
       "name": "unk018",
       "offset": 24,
       "offset_hex": "0x18",
-      "size": 2
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00056.",
       "name": "unk01A",
       "offset": 26,
-      "offset_hex": "0x1a",
-      "size": 2
+      "offset_hex": "0x1A",
+      "size": 2,
+      "type": "UInt16"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00057.",
       "name": "unk01C",
       "offset": 28,
-      "offset_hex": "0x1c",
-      "size": 16
+      "offset_hex": "0x1C",
+      "size": 16,
+      "type": "NiTArray_NiTexturingPropertyMap"
     },
     {
+      "annotation_confidence": "Unknown",
+      "comment": "\u00058.",
       "name": "unk02C",
       "offset": 44,
-      "offset_hex": "0x2c",
-      "size": 4
+      "offset_hex": "0x2C",
+      "size": 4,
+      "type": "UInt32"
     }
   ],
   "name": "NiTexturingProperty",
+  "ordinal": 599,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
   "size": 48
 }

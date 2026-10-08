@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
-  "callers_count": 10,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 12,
+  "chunks": [
+    [
+      "0x794FC0",
+      "0x794FF5"
+    ]
+  ],
+  "chunks_sha256": "68db860a213a435e51064cbbb0222b4e4cdc009e623a859905346712197013fe",
+  "comment_regular": "OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.",
+  "comment_repeatable": "OBLIVION AUTHORITY (2026-08-30): Destroys each 0x10-byte vector owner in [first,last), freeing its owned buffer and clearing the pointer triplet.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_794FC0",
+  "display_name": "OB_stVector4_DestroyRange_010201A0",
   "end_ea": "0x794FF5",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_794FC0",
+  "name": "OB_stVector4_DestroyRange_010201A0",
   "segment": ".text",
   "sha256": "68db860a213a435e51064cbbb0222b4e4cdc009e623a859905346712197013fe",
   "size": 53,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x794FC0",
-  "type": "void __cdecl(_DWORD *, _DWORD *)",
+  "total_chunk_size": 53,
+  "type": "void __cdecl(OB_stVector4_010201A0 *first, OB_stVector4_010201A0 *last)",
   "xrefs_from_count": 27,
   "xrefs_to_count": 12
 }

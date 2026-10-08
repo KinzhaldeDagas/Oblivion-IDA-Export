@@ -1,1 +1,4 @@
-_DBGKM_UNLOAD_DLL
+struct _DBGKM_UNLOAD_DLL
+{
+PVOID BaseAddress;
+};

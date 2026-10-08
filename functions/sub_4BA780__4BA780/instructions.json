@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x4BA780",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; Verified Oblivion rendering path is a flat billboard DDS attached to STBB NiTriShape and NiBillboardNode. Fallout's QueuedTreeBillboard::CreateBillboard builds the engine's BSTreeModel distant geometry and inserts it through DistantLODShaderProperty::AddDistantLOD; same queued asset workflow, different renderer integration.",
     "mnemonic": "push",
     "size": 2
   },
@@ -241,13 +241,13 @@
   },
   {
     "ea": "0x4BA7FD",
-    "line": "push    eax",
+    "line": "push    eax; outPath",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA7FE",
-    "line": "call    sub_4B9C40",
+    "line": "call    OB_TESObjectTREE_BuildBillboardTexturePath_010201A0; Verified from byte construction and referenced model getter: emits 'Textures\\\\Trees\\\\Billboards\\\\' + model path basename through first dot + '.dds'. If model path has no dot, suffix isn't appended; path truncation/long-path handling not established.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,13 +271,13 @@
   },
   {
     "ea": "0x4BA80D",
-    "line": "push    esi; char",
+    "line": "push    esi; searchArchives",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA80E",
-    "line": "push    esi; char",
+    "line": "push    esi; allowMissing",
     "mnemonic": "push",
     "size": 1
   },
@@ -289,31 +289,31 @@
   },
   {
     "ea": "0x4BA813",
-    "line": "push    edx; ArgList",
+    "line": "push    edx; path",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA814",
-    "line": "lea     eax, [esp+144h+var_118]",
+    "line": "lea     eax, [esp+144h+outTexture]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x4BA818",
-    "line": "push    eax; int",
+    "line": "push    eax; outTexture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA819",
-    "line": "call    sub_442890",
+    "line": "call    OB_TES_LoadOrFindSourceTexture_010201A0; TES texture cache/load helper: checks the global texture map, optionally verifies file existence via FileFinder, loads NiSourceTexture by filename, caches it, and returns a refcounted texture pointer.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BA81E",
-    "line": "mov     esi, [esp+138h+var_124]",
+    "line": "mov     esi, [esp+138h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -349,13 +349,13 @@
   },
   {
     "ea": "0x4BA832",
-    "line": "mov     [esp+138h+var_124], esi",
+    "line": "mov     [esp+138h+texture], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BA836",
-    "line": "lea     eax, [esp+138h+var_124]",
+    "line": "lea     eax, [esp+138h+texture]",
     "mnemonic": "lea",
     "size": 4
   },
@@ -379,7 +379,7 @@
   },
   {
     "ea": "0x4BA843",
-    "line": "mov     [esp+138h+var_124], edi",
+    "line": "mov     [esp+138h+texture], edi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -529,7 +529,7 @@
   },
   {
     "ea": "0x4BA893",
-    "line": "mov     esi, [esp+138h+var_118]",
+    "line": "mov     esi, [esp+138h+outTexture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -631,13 +631,13 @@
   },
   {
     "ea": "0x4BA8BF",
-    "line": "mov     ecx, [esp+138h+arg_0]",
+    "line": "mov     ecx, dword ptr [esp+138h+distantPlane]",
     "mnemonic": "mov",
     "size": 7
   },
   {
     "ea": "0x4BA8C6",
-    "line": "push    ecx",
+    "line": "push    ecx; distantPlane",
     "mnemonic": "push",
     "size": 1
   },
@@ -649,19 +649,19 @@
   },
   {
     "ea": "0x4BA8CB",
-    "line": "push    edx",
+    "line": "push    edx; outData",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA8CC",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BA8CE",
-    "line": "call    sub_4BA3C0",
+    "line": "call    TESObjectTREE_BuildBillboardQuadData; Verified Oblivion geometry use: reads float at TESObjectTREE+0x7C, defaults local height to 1400 when <=0, uses half that value as horizontal half-width, and full value as vertical extent. Fallout's directly named BillboardSize.y uses the same 1400 fallback and square-plane construction. This supports (Probable) +0x7C = BillboardSize.y; +0x78 is paired as BillboardSize.x via identical 200 threshold predicate.",
     "mnemonic": "call",
     "size": 5
   },
@@ -727,7 +727,7 @@
   },
   {
     "ea": "0x4BA8FD",
-    "line": "push    ebp; a2",
+    "line": "push    ebp; data",
     "mnemonic": "push",
     "size": 1
   },
@@ -739,7 +739,7 @@
   },
   {
     "ea": "0x4BA900",
-    "line": "call    NiTriShape_NiTriShape",
+    "line": "call    OB_NiTriShape_ctorWithData_010201A0",
     "mnemonic": "call",
     "size": 5
   },
@@ -859,19 +859,19 @@
   },
   {
     "ea": "0x4BA945",
-    "line": "mov     eax, [esp+138h+var_124]",
+    "line": "mov     eax, [esp+138h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x4BA949",
-    "line": "push    eax",
+    "line": "push    eax; texture",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x4BA94A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -883,25 +883,25 @@
   },
   {
     "ea": "0x4BA953",
-    "line": "call    NiTexturingProperty__SetUnk08",
+    "line": "call    OB_NiTexturingProperty_SetBaseTexture_010201A0",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BA958",
-    "line": "push    0",
+    "line": "push    0; value",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4BA95A",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x4BA95C",
-    "line": "call    sub_405870",
+    "line": "call    OB_NiTexturingProperty_SetClampMode_010201A0; NiTexturingProperty map flag helper: ensures map slot 0 exists and writes arg-derived bits into map Unk04 bits 0xC000. 0x560AC0 calls it with 0 for billboard texture property state.",
     "mnemonic": "call",
     "size": 5
   },
@@ -919,19 +919,19 @@
   },
   {
     "ea": "0x4BA964",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x4BA969",
-    "line": "push    1",
+    "line": "push    1; createIfMissing",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x4BA96B",
-    "line": "call    sub_55F7E0",
+    "line": "call    BSTreeManager_GetInstance; Returns SpeedTree singleton dword_B39E04, creating it on demand when caller passes true.",
     "mnemonic": "call",
     "size": 5
   },
@@ -979,7 +979,7 @@
   },
   {
     "ea": "0x4BA97F",
-    "line": "call    sub_405680",
+    "line": "call    sub_405680; Fog decode: attaches a NiProperty to a node/property-state chain; 0x406D3C uses this to attach active global B333E4 BSFogProperty as property type 1.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1249,7 +1249,7 @@
   },
   {
     "ea": "0x4BAA25",
-    "line": "mov     edi, [esp+138h+var_124]",
+    "line": "mov     edi, [esp+138h+texture]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1396,5 +1396,227 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9B3EB0",
+    "line": "mov     eax, [ebp-120h]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3EB6",
+    "line": "and     eax, 1",
+    "mnemonic": "and",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3EB9",
+    "line": "jz      locret_9B3ED1",
+    "mnemonic": "jz",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3EBF",
+    "line": "and     dword ptr [ebp-120h], 0FFFFFFFEh",
+    "mnemonic": "and",
+    "size": 7
+  },
+  {
+    "ea": "0x9B3EC6",
+    "line": "lea     ecx, [ebp-118h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3ECC",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3ED1",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3ED2",
+    "line": "lea     ecx, [ebp-124h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3ED8",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3EDD",
+    "line": "lea     ecx, [ebp-120h]; slot",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3EE3",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3EE8",
+    "line": "mov     eax, [ebp-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3EEE",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3EEF",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3EF4",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3EF5",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3EF6",
+    "line": "mov     eax, [ebp-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3EFC",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3EFD",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F02",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F03",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F04",
+    "line": "mov     eax, [ebp-11Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3F0A",
+    "line": "push    eax",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F0B",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F10",
+    "line": "pop     ecx",
+    "mnemonic": "pop",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F11",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9B3F12",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9B3F16",
+    "line": "lea     eax, [edx-128h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3F1C",
+    "line": "mov     ecx, [edx-12Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9B3F22",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3F24",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F29",
+    "line": "add     eax, 10h",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3F2C",
+    "line": "mov     ecx, [edx-4]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9B3F2F",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9B3F31",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F36",
+    "line": "mov     eax, offset stru_ADF72C",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9B3F3B",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

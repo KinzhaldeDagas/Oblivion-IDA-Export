@@ -11,34 +11,34 @@ bool __thiscall sub_6B7050(int this)
   float v10; // [esp+4h] [ebp-8h]
   float v11; // [esp+4h] [ebp-8h]
 
-  sky = TES->sky;
-  if ( sky )
+  sky = MEMORY[0xB333A0]->sky; /*0x6b7055*/
+  if ( sky ) /*0x6b705e*/
   {
-    v2 = *(_DWORD *)(this + 0x34);
-    if ( v2 )
+    v2 = *(_DWORD *)(this + 0x34); /*0x6b7064*/
+    if ( v2 ) /*0x6b7069*/
     {
-      firstWeather = sky->firstWeather;
-      if ( firstWeather )
+      firstWeather = sky->firstWeather; /*0x6b706b*/
+      if ( firstWeather ) /*0x6b7070*/
       {
-        if ( ((unsigned __int8)v2 & *((_BYTE *)firstWeather + 0x53)) == 0 )
-          return 0;
+        if ( ((unsigned __int8)v2 & *((_BYTE *)firstWeather + 0x53)) == 0 ) /*0x6b7075*/
+          return 0; /*0x6b7075*/
       }
     }
-    v10 = *(float *)(this + 0x30) - *(float *)(this + 0x2C);
-    v11 = fabs(v10);
-    if ( v11 >= (double)flt_A771F0 )
+    v10 = *(float *)(this + 0x30) - *(float *)(this + 0x2C); /*0x6b708b*/
+    v11 = fabs(v10); /*0x6b7095*/
+    if ( v11 >= (double)flt_A771F0 ) /*0x6b70a8*/
     {
-      v4 = *(float *)(this + 0x2C);
-      v5 = *(float *)(this + 0x30);
-      v6 = v5 < v4;
-      v7 = v5 == v4;
-      unk0D0 = sky->unk0D0;
-      if ( v6 || v7 || *(float *)(this + 0x2C) <= unk0D0 && *(float *)(this + 0x30) >= unk0D0 )
-        return *(float *)(this + 0x30) >= (double)*(float *)(this + 0x2C)
+      v4 = *(float *)(this + 0x2C); /*0x6b70aa*/
+      v5 = *(float *)(this + 0x30); /*0x6b70ad*/
+      v6 = v5 < v4; /*0x6b70b0*/
+      v7 = v5 == v4; /*0x6b70b0*/
+      unk0D0 = sky->unk0D0; /*0x6b70b4*/
+      if ( v6 || v7 || *(float *)(this + 0x2C) <= unk0D0 && *(float *)(this + 0x30) >= unk0D0 ) /*0x6b70d3*/
+        return *(float *)(this + 0x30) >= (double)*(float *)(this + 0x2C) /*0x6b70fa*/
             || *(float *)(this + 0x2C) <= unk0D0
             || *(float *)(this + 0x30) >= unk0D0;
-      return 0;
+      return 0; /*0x6b710b*/
     }
   }
-  return 1;
+  return 1; /*0x6b70fe*/
 }

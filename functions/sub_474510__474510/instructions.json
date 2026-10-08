@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x474510",
-    "line": "mov     eax, [esp+a2]",
+    "line": "mov     eax, [esp+a2]; Applies actor-dependent scene/node state through 0x471C00 and then calls ActorAnimData::ApplyActorAnimData. Called during NiNode generation, animation updates, body toggles, resurrection/fast travel, and first-person transitions.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x47451F",
-    "line": "call    ActorAnimData__ApplyActorAnimData",
+    "line": "call    ActorAnimData__ApplyActorAnimData; ActorAnimData apply/setup path. Binds animation data to actor/node state and installs the initial model/sequence mapping used by runtime playback.",
     "mnemonic": "call",
     "size": 5
   },

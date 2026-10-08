@@ -1,7 +1,7 @@
 int __usercall EffectItem_BuildDisplayString_::AppendArea@<eax>(
         BSStringT *a1@<edi>,
         _DWORD *a2@<esi>,
-        int a3,
+        int a3@<ebx>,
         int a4,
         int a5,
         int a6,
@@ -10,7 +10,7 @@ int __usercall EffectItem_BuildDisplayString_::AppendArea@<eax>(
         int a9,
         int a10,
         int a11,
-        int a12,
+        char a12,
         int a13,
         int a14,
         int a15,
@@ -42,19 +42,21 @@ int __usercall EffectItem_BuildDisplayString_::AppendArea@<eax>(
         int a41,
         int a42,
         int a43,
-        char a44,
-        char a45,
-        char a46)
+        int a44,
+        int a45,
+        char a46,
+        char a47)
 {
   int Area; // eax
-  const char *v48; // [esp-4h] [ebp-4h]
+  const char *value; // [esp-4h] [ebp-4h]
 
-  v48 = (const char *)sMagicEffectItemFeet;
-  Area = EffectItem_GetArea(a2);
-  _sprintf((char *)&a11, " %s %d %s", (const char *)sMagicEffectItemIn, Area, v48);
-  BSStringT_Append(a1, (char *)&a11);
+  value = MEMORY[0xB334A0].value; /*0x413e99*/
+  Area = EffectItem_GetArea(a2); /*0x413e9c*/
+  _sprintf(&a12, " %s %d %s", MEMORY[0xB33470].value, Area, value); /*0x413eb3*/
+  BSStringT_Append(a1, &a12); /*0x413ec2*/
   return EffectItem_BuildDisplayString_::CheckDuration(
            a3,
+           (int)a2,
            a4,
            a5,
            a6,
@@ -95,5 +97,8 @@ int __usercall EffectItem_BuildDisplayString_::AppendArea@<eax>(
            a41,
            a42,
            a43,
-           a44);
+           a44,
+           a45,
+           a46,
+           a47);
 }

@@ -89,7 +89,7 @@
 0x53AF36: call    eax
 0x53AF38: mov     [esi+0Ch], ebp
 0x53AF3B: mov     eax, esi
-0x53AF3D: mov     byte ptr [esi+18h], 1
+0x53AF3D: mov     byte ptr [esi+18h], 1; Fog property decode: Atmosphere constructor defaults unk18=1, enabling start/end property copies and camera far-plane synchronization in 0x53B0E0.
 0x53AF41: mov     ecx, dword ptr [esp+24h+var_C]
 0x53AF45: mov     large fs:0, ecx
 0x53AF4C: pop     ecx
@@ -99,3 +99,24 @@
 0x53AF50: pop     ebx
 0x53AF51: add     esp, 10h
 0x53AF54: retn
+0x9BA1F0: mov     ecx, [ebp-10h]; this
+0x9BA1F3: jmp     ??1SkyObject@@UAE@XZ; SkyObject::~SkyObject(void)
+0x9BA1F8: mov     ecx, [ebp-10h]
+0x9BA1FB: add     ecx, 8; slot
+0x9BA1FE: jmp     NiPointerSlot_Release
+0x9BA203: mov     ecx, [ebp-10h]
+0x9BA206: add     ecx, 0Ch; slot
+0x9BA209: jmp     NiPointerSlot_Release
+0x9BA20E: mov     ecx, [ebp-10h]
+0x9BA211: add     ecx, 10h; slot
+0x9BA214: jmp     NiPointerSlot_Release
+0x9BA219: mov     ecx, [ebp-10h]
+0x9BA21C: add     ecx, 14h; slot
+0x9BA21F: jmp     NiPointerSlot_Release
+0x9BA224: mov     edx, [esp+arg_4]
+0x9BA228: lea     eax, [edx-14h]
+0x9BA22B: mov     ecx, [edx-18h]
+0x9BA22E: xor     ecx, eax
+0x9BA230: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BA235: mov     eax, offset stru_AE4408
+0x9BA23A: jmp     ___CxxFrameHandler3

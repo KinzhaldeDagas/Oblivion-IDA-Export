@@ -1,4 +1,4 @@
-0x784840: push    30h ; '0'; Size
+0x784840: push    30h ; '0'; Allocates the 0x30-byte cache-map head/sentinel node from FormHeap. Initializes links to null, color=black (1), and isNil=0; global init converts it into the self-linked nil sentinel.
 0x784842: call    FormHeapAlloc
 0x784847: add     esp, 4
 0x78484A: test    eax, eax

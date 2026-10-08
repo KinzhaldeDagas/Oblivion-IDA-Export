@@ -42,7 +42,6 @@
 0x777D03: mov     ebx, eax
 0x777D05: jz      loc_777DBC
 0x777D0B: jmp     short loc_777D10
-0x777D0D: align 10h
 0x777D10: mov     eax, [ebx]
 0x777D12: test    eax, eax
 0x777D14: mov     edx, [ebx+8]
@@ -92,14 +91,14 @@
 0x777D87: mov     ecx, esi
 0x777D89: call    sub_77D1D0
 0x777D8E: push    esi
-0x777D8F: call    FormHeapFree
+0x777D8F: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x777D94: add     esp, 4
 0x777D97: add     edi, 4
 0x777D9A: sub     ebp, 1
 0x777D9D: jnz     short loc_777D70
 0x777D9F: mov     ecx, [esp+20h+var_8]
 0x777DA3: push    ecx
-0x777DA4: call    FormHeapFree
+0x777DA4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x777DA9: mov     esi, [esp+24h+var_10]
 0x777DAD: mov     ebp, [esp+24h+var_4]
 0x777DB1: add     esp, 4
@@ -127,7 +126,7 @@
 0x777DF9: mov     ecx, [ebp+40h]
 0x777DFC: push    ecx
 0x777DFD: mov     dword ptr [ebp+8], 0
-0x777E04: call    FormHeapFree
+0x777E04: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x777E09: add     esp, 4
 0x777E0C: lea     edx, [ebp+80h]
 0x777E12: push    edx; lpCriticalSection
@@ -140,7 +139,7 @@
 0x777E2E: call    NiTMap_Clear
 0x777E33: mov     eax, [ebx+8]
 0x777E36: push    eax
-0x777E37: call    FormHeapFree
+0x777E37: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x777E3C: add     esp, 4
 0x777E3F: mov     ecx, edi
 0x777E41: mov     dword ptr [edi], offset ??_7?$NiTPointerMap@IPAVNiDX9VBInfo@NiDX9VertexBufferManager@@@@6B@; const NiTPointerMap<uint,NiDX9VertexBufferManager::NiDX9VBInfo *>::`vftable'
@@ -150,7 +149,7 @@
 0x777E54: call    NiTMap_Clear
 0x777E59: mov     ecx, [edi+8]
 0x777E5C: push    ecx
-0x777E5D: call    FormHeapFree
+0x777E5D: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x777E62: add     esp, 4
 0x777E65: mov     ecx, esi
 0x777E67: mov     dword ptr [esi], offset ??_7?$NiTPointerMap@IPAVNiDX9VBInfo@NiDX9VertexBufferManager@@@@6B@; const NiTPointerMap<uint,NiDX9VertexBufferManager::NiDX9VBInfo *>::`vftable'
@@ -160,9 +159,9 @@
 0x777E7A: call    NiTMap_Clear
 0x777E7F: mov     edx, [esi+8]
 0x777E82: push    edx
-0x777E83: call    FormHeapFree
+0x777E83: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x777E88: add     esp, 4
-0x777E8B: push    offset NiRefObject_objcount; lpAddend
+0x777E8B: push    0B3FD64h; lpAddend
 0x777E90: mov     dword ptr [ebp+0], offset ??_7NiRefObject@@6B@; const NiRefObject::`vftable'
 0x777E97: call    dword ptr ds:0A2807Ch
 0x777E9D: pop     edi

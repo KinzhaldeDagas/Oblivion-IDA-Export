@@ -17,11 +17,11 @@
 0x5132B2: push    eax
 0x5132B3: lea     eax, [esp+344h+var_C]
 0x5132BA: mov     large fs:0, eax
-0x5132C0: mov     esi, [ebp+18h]
-0x5132C3: mov     edx, [ebp+arg_C]
+0x5132C0: mov     esi, dword ptr [ebp+arg_C+4]
+0x5132C3: mov     edx, dword ptr [ebp+arg_C]
 0x5132C6: mov     ecx, [ebp+a4]
-0x5132C9: mov     eax, [ebp+a1]
-0x5132CC: mov     edi, [ebp+0Ch]
+0x5132C9: mov     eax, dword ptr [ebp+a1]
+0x5132CC: mov     edi, dword ptr [ebp+a1+4]
 0x5132CF: mov     [esp+344h+var_304], esi
 0x5132D3: mov     esi, [ebp+arg_14]
 0x5132D6: lea     ebx, [esp+344h+Format]
@@ -40,7 +40,7 @@
 0x5132F4: mov     [esp+364h+var_2EC], eax
 0x5132F8: mov     [esp+364h+var_2FC], ecx
 0x5132FC: mov     [esp+364h+var_2F0], edx
-0x513300: call    Script_ExtractArgs
+0x513300: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x513305: add     esp, 20h
 0x513308: test    al, al
 0x51330A: jz      loc_5135DA
@@ -131,7 +131,6 @@
 0x513451: mov     byte ptr [esp+344h+var_4], 1
 0x513459: jle     short loc_5134AF
 0x51345B: jmp     short loc_513460
-0x51345D: align 10h
 0x513460: mov     edx, [esp+344h+l]
 0x513464: mov     eax, [esp+344h+var_304]
 0x513468: lea     ecx, [esp+344h+Format]
@@ -146,7 +145,7 @@
 0x513480: push    esi; a3
 0x513481: push    edi; a2
 0x513482: push    eax; a1
-0x513483: call    Script_ExtractArgs
+0x513483: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x513488: add     esp, 20h
 0x51348B: test    al, al
 0x51348D: jz      short loc_5134E6
@@ -227,7 +226,7 @@
 0x513598: mov     byte ptr [esp+354h+var_4], 0
 0x5135A0: call    $LN21
 0x5135A5: push    esi
-0x5135A6: call    FormHeapFree
+0x5135A6: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5135AB: add     esp, 4
 0x5135AE: mov     al, 1
 0x5135B0: jmp     short loc_5135DC
@@ -240,7 +239,7 @@
 0x5135C8: call    $LN21
 0x5135CD: mov     edx, [esp+344h+var_2F8]
 0x5135D1: push    edx
-0x5135D2: call    FormHeapFree
+0x5135D2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5135D7: add     esp, 4
 0x5135DA: xor     al, al
 0x5135DC: mov     ecx, [esp+344h+var_C]
@@ -255,3 +254,23 @@
 0x5135FC: mov     esp, ebp
 0x5135FE: pop     ebp
 0x5135FF: retn
+0x9B7030: lea     ecx, [ebp+var_2F8]; void *
+0x9B7036: jmp     BSStringT_Clear
+0x9B703B: push    offset BSStringT_Clear; void (__thiscall *)(void *)
+0x9B7040: push    0Ah; int
+0x9B7042: push    8; unsigned int
+0x9B7044: lea     eax, [ebp+var_2E8]
+0x9B704A: push    eax; void *
+0x9B704B: call    $LN21
+0x9B7050: retn
+0x9B7051: mov     edx, dword ptr [esp-4+a1+4]
+0x9B7055: lea     eax, [edx-334h]
+0x9B705B: mov     ecx, [edx-338h]
+0x9B7061: xor     ecx, eax
+0x9B7063: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7068: add     eax, 0Ch
+0x9B706B: mov     ecx, [edx-38h]
+0x9B706E: xor     ecx, eax
+0x9B7070: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B7075: mov     eax, offset stru_AE1D04
+0x9B707A: jmp     ___CxxFrameHandler3

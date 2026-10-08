@@ -1,1 +1,5 @@
-tagCBT_CREATEWNDW
+struct tagCBT_CREATEWNDW
+{
+CREATESTRUCTW *lpcs;
+HWND hwndInsertAfter;
+};

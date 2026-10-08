@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x6A072B",
-    "line": "call    MagicHitEffect_constr",
+    "line": "call    MagicHitEffect_constr; Verified MagicHitEffect constructor starts from the 24-byte BSTempEffect base, nulls ownerActiveEffect (+0x18) and targetReference (+0x1C), zeros elapsedSeconds (+0x20) and bFinished (+0x24), establishing a 40-byte base layout.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x6A0732",
-    "line": "mov     dword ptr [esi], offset ??_7MagicShaderHitEffect@@6B@; const MagicShaderHitEffect::`vftable'",
+    "line": "mov     dword ptr [esi], offset ??_7MagicShaderHitEffect@@6B@; Verified (Oblivion): constructor initializes a 0x4C-byte shader hit effect. +0x28 is bWeaponEnchantment_28, set true by Process_UpdateWeaponEnchantmentShader after resolving an equipped enchantment's EffectSetting.enchantEffect. +0x30 TESBoundObject*, +0x34 TESEffectShader*, +0x38 visual elapsed timer, +0x3C ParticleShaderProperty*, +0x40 NiNode*, +0x44 perspective state, and +0x48 TextureEffectData* are supported by field use/construction/destruction.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x6A07C1",
-    "line": "mov     dword ptr [esi+2Ch], 0FFFFFFFFh",
+    "line": "mov     dword ptr [esi+2Ch], 0FFFFFFFFh; Verified (Oblivion): shader field +0x2C is initialized to 0xFFFFFFFF and serialized as a raw dword for save version >= 0x37; semantic meaning remains Unknown.",
     "mnemonic": "mov",
     "size": 7
   },
@@ -475,7 +475,7 @@
   },
   {
     "ea": "0x6A07CB",
-    "line": "mov     [esi+44h], bl",
+    "line": "mov     [esi+44h], bl; Verified (Oblivion): shader byte +0x44 initializes to zero and is later read/written during player perspective restoration; meaning is Probable perspective-state byte.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -538,5 +538,113 @@
     "line": "retn",
     "mnemonic": "retn",
     "size": 1
+  },
+  {
+    "ea": "0x9C5ED0",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5ED3",
+    "line": "jmp     MagicHitEffect_destr",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5ED8",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EDB",
+    "line": "add     ecx, 3Ch ; '<'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EDE",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EE3",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EE6",
+    "line": "add     ecx, 40h ; '@'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EE9",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EEE",
+    "line": "mov     ecx, [ebp-10h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EF1",
+    "line": "add     ecx, 48h ; 'H'; slot",
+    "mnemonic": "add",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5EF4",
+    "line": "jmp     NiPointerSlot_Release",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5EF9",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C5EFD",
+    "line": "lea     eax, [edx-14h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5F00",
+    "line": "mov     ecx, [edx-18h]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C5F03",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C5F05",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5F0A",
+    "line": "mov     eax, offset stru_AEE584",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C5F0F",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

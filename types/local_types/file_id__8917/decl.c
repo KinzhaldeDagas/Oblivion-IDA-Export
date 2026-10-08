@@ -1,1 +1,4 @@
-file_id
+struct file_id
+{
+BYTE ObjectId[16];
+};

@@ -16,6 +16,6 @@
 0x6A2AC8: call    Interface_ConsolePrint
 0x6A2ACD: mov     ecx, dword ptr [esp+10h+arg_14]
 0x6A2AD1: push    ecx
-0x6A2AD2: call    FormHeapFree
+0x6A2AD2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x6A2AD7: add     esp, 14h
 0x6A2ADA: jmp     MagicTarget_AddEffect___Return_0

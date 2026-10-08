@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x78D550",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Appends one compact 0x1C stock collision record to the collision vector; vector stride proves no in-record 4.1 supplemental rotation fields.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -193,13 +193,13 @@
   },
   {
     "ea": "0x78D59B",
-    "line": "mov     ecx, [esp+14h+arg_0]",
+    "line": "mov     ecx, [esp+14h+record]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78D59F",
-    "line": "mov     edx, [esp+14h+arg_0]",
+    "line": "mov     edx, [esp+14h+record]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -211,13 +211,13 @@
   },
   {
     "ea": "0x78D5A6",
-    "line": "mov     byte ptr [esp+14h+var_8], 0",
+    "line": "mov     byte ptr [esp+14h+result.owner], 0",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x78D5AB",
-    "line": "mov     eax, [esp+14h+var_8]",
+    "line": "mov     eax, [esp+14h+result.owner]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -241,25 +241,25 @@
   },
   {
     "ea": "0x78D5B2",
-    "line": "push    edx",
+    "line": "push    edx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D5B3",
-    "line": "push    1",
+    "line": "push    1; count",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x78D5B5",
-    "line": "push    edi",
+    "line": "push    edi; destination",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D5B6",
-    "line": "call    sub_788AE0",
+    "line": "call    OB_stVector_CollisionObject_UninitializedFillN_010201A0; Oblivion collision-vector uninitialized fill-N primitive: constructs count trivial 28-byte records by copying the supplied value and returns one-past-last.",
     "mnemonic": "call",
     "size": 5
   },
@@ -337,13 +337,13 @@
   },
   {
     "ea": "0x78D5D9",
-    "line": "mov     eax, [esp+14h+arg_0]",
+    "line": "mov     eax, [esp+14h+record]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x78D5DD",
-    "line": "push    eax",
+    "line": "push    eax; value",
     "mnemonic": "push",
     "size": 1
   },
@@ -355,31 +355,31 @@
   },
   {
     "ea": "0x78D5DF",
-    "line": "push    esi",
+    "line": "push    esi; position",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D5E0",
-    "line": "lea     ecx, [esp+20h+var_8]",
+    "line": "lea     ecx, [esp+20h+result]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x78D5E4",
-    "line": "push    ecx",
+    "line": "push    ecx; result",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x78D5E5",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x78D5E7",
-    "line": "call    sub_78C8F0",
+    "line": "call    OB_stVector_CollisionObject_InsertOne_010201A0; Oblivion collision-vector insert-one wrapper: converts the checked iterator to a 0x1C-record index, delegates to collision insert-fill(count=1), and returns the relocated iterator.",
     "mnemonic": "call",
     "size": 5
   },

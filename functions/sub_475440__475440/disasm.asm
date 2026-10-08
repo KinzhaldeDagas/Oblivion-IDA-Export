@@ -1,4 +1,4 @@
-0x475440: push    ebx
+0x475440: push    ebx; Owns current/queued idle retirement and promotion across ActorAnimData +0xCC/+0xD0/+0xD4/+0xD8. Depending on caller flags, stops a still-active sequence, moves stale holders into the two cleanup slots, destroys them when no slot is available or forced, or promotes queued +0xD0 into current +0xCC.
 0x475441: mov     bl, [esp+4+arg_4]
 0x475445: push    ebp
 0x475446: push    esi
@@ -26,7 +26,7 @@
 0x475484: jnz     short loc_47548E
 0x475486: push    ecx
 0x475487: mov     ecx, esi
-0x475489: call    sub_4733A0
+0x475489: call    ActorAnimData_StopSlotWithBlendNote; Calculates native stop ease-out from the current physical slot's TESAnimGroup Blend byte at +0x21 unless ActorAnimData +0xC4 forces zero, then passes the original slot argument to ActorAnimData_ClearSlot. Thus aliases 5/6 retain ClearSlot's multi-slot expansion.
 0x47548E: cmp     dword ptr [esi+0D4h], 0
 0x475495: jnz     short loc_4754A7
 0x475497: mov     eax, [edi]
@@ -41,7 +41,7 @@
 0x4754BE: jmp     short loc_4754C8
 0x4754C0: push    edi
 0x4754C1: mov     ecx, esi
-0x4754C3: call    sub_472ED0
+0x4754C3: call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.
 0x4754C8: cmp     [esp+10h+arg_0], 0
 0x4754CD: jz      loc_47556A
 0x4754D3: mov     edx, [esi+0D0h]
@@ -66,7 +66,7 @@
 0x475511: jnz     short loc_47551B
 0x475513: push    eax
 0x475514: mov     ecx, esi
-0x475516: call    sub_4733A0
+0x475516: call    ActorAnimData_StopSlotWithBlendNote; Calculates native stop ease-out from the current physical slot's TESAnimGroup Blend byte at +0x21 unless ActorAnimData +0xC4 forces zero, then passes the original slot argument to ActorAnimData_ClearSlot. Thus aliases 5/6 retain ClearSlot's multi-slot expansion.
 0x47551B: cmp     dword ptr [esi+0D4h], 0
 0x475522: jnz     short loc_47553B
 0x475524: mov     edx, [ebp+0]
@@ -89,7 +89,7 @@
 0x475558: retn    8
 0x47555B: push    ebp
 0x47555C: mov     ecx, esi
-0x47555E: call    sub_472ED0
+0x47555E: call    AnimIdle_DestroyAndRelease; Destroys one ActorAnimData-owned AnimIdle slot. Resolves the idle KF encoded key from KFModel +0x08, removes the matching sequence from the controller manager/map entry where appropriate, runs AnimIdle_CleanupLoadedResources, frees the 0x2C-byte holder, nulls the caller slot, and balances native references.
 0x475563: pop     edi
 0x475564: pop     esi
 0x475565: pop     ebp

@@ -1,18 +1,31 @@
 {
-  "callees_count": 1,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 0,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x68EDA0",
+      "0x68EDB6"
+    ]
+  ],
+  "chunks_sha256": "b9cbb3693cb74ec2a9cc81680bcf78df0e2801c7334d0cb7907a21fdb0c67f40",
+  "comment_regular": "Verified per-effect load version dispatch: before save version 0x2A reads the legacy MagicItem/index header; version 0x2A and later reads a record-size field before the same source lookup and effect-item selection.",
+  "comment_repeatable": "Verified per-effect load version dispatch: before save version 0x2A reads the legacy MagicItem/index header; version 0x2A and later reads a record-size field before the same source lookup and effect-item selection.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
   "display_name": "ActiveEffect_Base_Load",
   "end_ea": "0x68EDB6",
+  "evidence_confidence": "Unknown",
   "flags": 5120,
   "has_pseudocode": true,
   "name": "ActiveEffect_Base_Load",
   "segment": ".text",
   "sha256": "b9cbb3693cb74ec2a9cc81680bcf78df0e2801c7334d0cb7907a21fdb0c67f40",
   "size": 22,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x68EDA0",
+  "total_chunk_size": 22,
   "type": "int __cdecl(int, char)",
   "xrefs_from_count": 6,
   "xrefs_to_count": 1

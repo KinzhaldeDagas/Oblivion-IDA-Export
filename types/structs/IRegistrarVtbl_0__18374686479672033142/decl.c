@@ -1,1 +1,1 @@
-IRegistrarVtbl_0
+typedef IRegistrarVtbl IRegistrarVtbl_0;

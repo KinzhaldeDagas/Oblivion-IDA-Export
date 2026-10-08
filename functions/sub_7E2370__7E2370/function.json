@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
-  "callers_count": 46,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 1,
+  "callers_count": 338,
+  "chunks": [
+    [
+      "0x7E2370",
+      "0x7E23F2"
+    ]
+  ],
+  "chunks_sha256": "ef11bf41c58730b6c9194b26a4390268720cf2c1cc99ce7bf51793d0db401bc9",
+  "comment_regular": "Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.\n\nConstruct a 0x10-byte RenderPass record: selector +0x04, byte +0x06, light count +0x08, light-array pointer +0x0C. Census of 338 direct refs / 46 caller functions found no immediate 0x14E..0x151 producer.\nDX11 V180 slot ordering: varargs copied unchanged in increasing index order to the raw light-pointer array at +0x0C, with count byte+0x08. Additive emitters 859160/859430 therefore expose zero-prefix 2/3 point slots; do not compact null/unqualified slots or infer order from light colors.",
+  "comment_repeatable": "Construct a 0x10-byte RenderPass. Stores the geometry/object pointer raw at +0x00, selector at +0x04, bytes at +0x06/+0x07, lightCount at +0x08, and allocates an owned 4*lightCount light-pointer array at +0x0C. Geometry and light objects are not reference-counted; only the pointer array is owned.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_7E2370",
+  "display_name": "RenderPass_Construct",
   "end_ea": "0x7E23F2",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_7E2370",
+  "name": "RenderPass_Construct",
   "segment": ".text",
   "sha256": "ef11bf41c58730b6c9194b26a4390268720cf2c1cc99ce7bf51793d0db401bc9",
   "size": 130,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x7E2370",
-  "type": "int __cdecl(int, int, __int16, char, unsigned __int8, int)",
+  "total_chunk_size": 130,
+  "type": "RenderPass_DecodedLayout *(RenderPass_DecodedLayout *outPass, void *geometry, unsigned __int16 selector, unsigned __int8 byte6, unsigned __int8 lightCount, ...)",
   "xrefs_from_count": 52,
   "xrefs_to_count": 338
 }

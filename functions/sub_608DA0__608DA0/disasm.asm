@@ -1,4 +1,4 @@
-0x608DA0: push    ebp
+0x608DA0: push    ebp; Convert to free-impact state 3 without changing TESObjectREFR.baseForm or attaching source-WEAP identity.
 0x608DA1: mov     ebp, esp
 0x608DA3: and     esp, 0FFFFFFF0h
 0x608DA6: sub     esp, 34h
@@ -14,9 +14,9 @@
 0x608DBE: cmp     esi, edi
 0x608DC0: jz      short loc_608E36
 0x608DC2: mov     edi, [ebp+arg_4]
-0x608DC5: push    offset Vector3_InitValue?
-0x608DCA: mov     ecx, edi
-0x608DCC: call    sub_8AA390
+0x608DC5: push    offset g_zeroNiPoint3; other
+0x608DCA: mov     ecx, edi; this
+0x608DCC: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x608DD1: test    al, al
 0x608DD3: jz      short loc_608DE6
 0x608DD5: mov     eax, [edi]
@@ -26,9 +26,9 @@
 0x608DE0: mov     edx, [edi+8]
 0x608DE3: mov     [esi+18h], edx
 0x608DE6: mov     esi, [ebp+arg_0]
-0x608DE9: push    offset Vector3_InitValue?
-0x608DEE: mov     ecx, esi
-0x608DF0: call    sub_8AA390
+0x608DE9: push    offset g_zeroNiPoint3; other
+0x608DEE: mov     ecx, esi; this
+0x608DF0: call    NiPoint3__NotEqual; Exact component-wise NiPoint3 inequality test; returns true when any of x/y/z differs.
 0x608DF5: test    al, al
 0x608DF7: jz      short loc_608E0F
 0x608DF9: mov     eax, [ebx+5Ch]
@@ -40,7 +40,7 @@
 0x608E09: mov     ecx, [esi+8]
 0x608E0C: mov     [eax+8], ecx
 0x608E0F: mov     edx, [ebx+5Ch]
-0x608E12: mov     dword ptr [edx], 3
+0x608E12: mov     dword ptr [edx], 3; Convert an existing collision record to state 3 using supplied world impact point/normal; target reference is not required.
 0x608E18: mov     eax, [ebx+5Ch]
 0x608E1B: mov     dword ptr [eax+28h], 0
 0x608E22: pop     edi
@@ -55,7 +55,7 @@
 0x608E36: push    54h ; 'T'; Size
 0x608E38: call    FormHeapAlloc
 0x608E3D: mov     [ebx+5Ch], eax
-0x608E40: mov     dword ptr [eax], 3
+0x608E40: mov     dword ptr [eax], 3; Create state 3 record for a free/unattached impact, storing point, normal, transform and velocity.
 0x608E46: mov     ecx, [ebx+5Ch]
 0x608E49: mov     [ecx+2Ch], edi
 0x608E4C: mov     edx, [ebx+5Ch]
@@ -93,20 +93,20 @@
 0x608EB5: add     esp, 4
 0x608EB8: mov     ecx, ebx; this
 0x608EBA: mov     [eax+8], edx
-0x608EBD: call    MobileObject_GetCharProxy
+0x608EBD: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x608EC2: test    eax, eax
 0x608EC4: jz      loc_608F98
 0x608ECA: mov     ecx, ebx; this
-0x608ECC: call    MobileObject_GetCharProxy
+0x608ECC: call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.
 0x608ED1: test    eax, eax
 0x608ED3: jz      short loc_608EE5
 0x608ED5: mov     eax, [eax+8]
 0x608ED8: test    eax, eax
 0x608EDA: jz      short loc_608EE5
 0x608EDC: mov     ecx, eax
-0x608EDE: call    sub_8AC0A0
+0x608EDE: call    bhkWorldObject_GetLinearVelocityPtr; TES4 authoritative: returns pointer to bhk collision object's velocity vector at object+0x10. 0x896000 copies this into proxy +0x2E0 before state update.
 0x608EE3: jmp     short loc_608EEA
-0x608EE5: mov     eax, offset stru_BA7A40
+0x608EE5: mov     eax, offset unk_BA7A40
 0x608EEA: movaps  xmm0, xmmword ptr [eax]
 0x608EED: movss   [esp+40h+var_30], xmm0
 0x608EF3: fld     [esp+40h+var_30]
@@ -160,12 +160,12 @@
 0x608F8B: push    ecx
 0x608F8C: add     edx, 1Ch
 0x608F8F: push    edx
-0x608F90: call    sub_43F3E0
+0x608F90: call    HavokVector_ToWorldVector; TES4 authoritative: converts Havok-unit vector to TES/world units using dbl_A372E0 (inverse hkFactor).
 0x608F95: add     esp, 8
 0x608F98: mov     ecx, [esp+40h+var_4]
 0x608F9C: pop     edi
 0x608F9D: pop     esi
-0x608F9E: mov     dword ptr [ebx+60h], 1
+0x608F9E: mov     dword ptr [ebx+60h], 1; Creating free-impact collision data sets ArrowProjectile lifecycle +0x60 to state 1 (pending collision-state resolution). CollisionData discriminator is independently set to 3.
 0x608FA5: pop     ebx
 0x608FA6: xor     ecx, esp
 0x608FA8: call    @__security_check_cookie@4; __security_check_cookie(x)

@@ -2,11 +2,11 @@ int __cdecl sub_913280(int a1)
 {
   int result; // eax
 
-  result = a1;
-  if ( a1 )
+  result = a1; /*0x913280*/
+  if ( a1 ) /*0x913286*/
   {
-    *(_WORD *)(a1 + 6) = 1;
-    *(_DWORD *)a1 = &off_A9CD6C;
+    *(_WORD *)(a1 + 6) = 1; /*0x913288*/
+    *(_DWORD *)a1 = &off_A9CD6C; /*0x91328e*/
   }
-  return result;
+  return result; /*0x913294*/
 }

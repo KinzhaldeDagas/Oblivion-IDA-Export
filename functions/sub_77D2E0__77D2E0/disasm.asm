@@ -3,7 +3,6 @@
 0x77D2E5: jz      short locret_77D325
 0x77D2E7: mov     edx, [esp+arg_0]
 0x77D2EB: jmp     short loc_77D2F0
-0x77D2ED: align 10h
 0x77D2F0: cmp     eax, edx
 0x77D2F2: jz      short loc_77D2FE
 0x77D2F4: mov     eax, [eax+3Ch]

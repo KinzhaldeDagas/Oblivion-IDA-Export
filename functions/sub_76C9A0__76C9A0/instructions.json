@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x76C9A0",
-    "line": "push    ebx",
+    "line": "push    ebx; Pass324: generic NiD3DShader setup consumes a5 renderer propertyState and immediately calls UpdateRenderState(a5). CD crash at 0x00780848 proves a5 was null; no call-edge to the native shadow-map renderer/projector boundary.",
     "mnemonic": "push",
     "size": 1
   },
@@ -61,7 +61,7 @@
   },
   {
     "ea": "0x76C9B4",
-    "line": "mov     eax, [edi+24h]",
+    "line": "mov     eax, [edi+24h]; NiD3DShader setup receives the forwarded renderer propertyState argument and passes it directly to NiDX9RenderState::UpdateRenderState.",
     "mnemonic": "mov",
     "size": 3
   },
@@ -193,7 +193,7 @@
   },
   {
     "ea": "0x76C9EC",
-    "line": "call    sub_77A150",
+    "line": "call    sub_77A150; MoonSugarEffect decode: NiD3DShader vtable +0x28 begin/check. Requires IsRenderSet, updates render state/light manager, applies shader render-state group.",
     "mnemonic": "call",
     "size": 5
   },

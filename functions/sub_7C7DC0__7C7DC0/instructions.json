@@ -1,13 +1,13 @@
 [
   {
     "ea": "0x7C7DC0",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Find a native full-list ShadowSceneLight whose backing NiLight identity equals the supplied source, then remove that entry.",
     "mnemonic": "sub",
     "size": 3
   },
   {
     "ea": "0x7C7DC3",
-    "line": "cmp     [esp+8+arg_0], 0",
+    "line": "cmp     [esp+8+backingLight], 0",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -121,13 +121,13 @@
   },
   {
     "ea": "0x7C7DF4",
-    "line": "call    sub_405AD0",
+    "line": "call    ShadowSceneLight_GetLightRef",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x7C7DF9",
-    "line": "mov     ecx, [esp+18h+arg_0]",
+    "line": "mov     ecx, [esp+18h+backingLight]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -313,7 +313,7 @@
   },
   {
     "ea": "0x7C7E3F",
-    "line": "call    sub_7C77C0",
+    "line": "call    ShadowSceneNode_RemoveFullLight; Remove the matching full-list ShadowSceneLight after backing-source identity comparison.",
     "mnemonic": "call",
     "size": 5
   },

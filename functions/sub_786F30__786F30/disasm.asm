@@ -1,4 +1,4 @@
-0x786F30: fld     dword ptr ds:0A30634h
+0x786F30: fld     dword ptr ds:0A30634h; Oblivion 1.2.0.416: initializes the compact 0x3C-byte leaf output record: active=false, scalar=-1.0f, discreteLodLevel=-1, leafCount=0, and all eleven pointer slots null. RT4.1 SGeometry::SLeaf corroborates the LOD/count/pointer roles but has a larger virtual layout and 1.0 rock/rustle scalars; Oblivion is authoritative.
 0x786F36: mov     eax, ecx
 0x786F38: xor     ecx, ecx
 0x786F3A: fstp    dword ptr [eax+4]

@@ -1,6 +1,6 @@
 0x5B1F20: push    esi
 0x5B1F21: mov     esi, ecx
-0x5B1F23: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5B1F23: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5B1F28: fldz
 0x5B1F2A: xor     eax, eax
 0x5B1F2C: mov     dword ptr [esi], offset ??_7MagicMenu@@6B@; const MagicMenu::`vftable'

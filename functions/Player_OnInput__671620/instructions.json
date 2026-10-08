@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x671620",
-    "line": "push    ebp",
+    "line": "push    ebp; Player input update. Native ABI is PlayerCharacter in ECX plus one float deltaTime stack argument.",
     "mnemonic": "push",
     "size": 1
   },
@@ -133,7 +133,7 @@
   },
   {
     "ea": "0x671669",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x671688",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -505,13 +505,13 @@
   },
   {
     "ea": "0x671734",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
   {
     "ea": "0x671739",
-    "line": "call    sub_67A230",
+    "line": "call    ProcessLists_SortActorDistanceCandidatesAndTrim; MEF LARGE PERF 2026-09-08: PERF-7 cadence qualification: player+618 countdown gates sort-and-trim67A230. On expiry resets fromB36CE0; otherwise subtracts frame deltaB33E9C. Initializer9E8590 registers fSortActorDistanceListTimer default3.0. This is periodic, not an unconditional per-frame sort.",
     "mnemonic": "call",
     "size": 5
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x671791",
-    "line": "call    sub_66FF10",
+    "line": "call    PlayerCharacter_ProcessQueuedWorldspaceMove; Early Player_OnInput queued-worldspace move path gated by PlayerCharacter+0x71F. It can run before the internal 0x672F08 call-site and is followed by an early ActivateRef return if PlayerCharacter+0x5C4 is set.",
     "mnemonic": "call",
     "size": 5
   },
@@ -667,7 +667,7 @@
   },
   {
     "ea": "0x6717A0",
-    "line": "push    1",
+    "line": "push    1; Early Player_OnInput ActivateRef return path. An internal 0x672F08 call-site hook will not run on this frame; a vtable post-wrapper around Player_OnInput will still run after this return.",
     "mnemonic": "push",
     "size": 2
   },
@@ -817,7 +817,7 @@
   },
   {
     "ea": "0x6717E7",
-    "line": "mov     eax, [edx+36Ch]",
+    "line": "mov     eax, [edx+36Ch]; TES4 authoritative: Player_OnInput reads process GetSitSleepState (+0x36C). If state == 4 and GetMountedHorse succeeds, player movement flags are taken from the horse process.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -847,7 +847,7 @@
   },
   {
     "ea": "0x6717F6",
-    "line": "mov     eax, [edx+380h]",
+    "line": "mov     eax, [edx+380h]; TES4 authoritative: Player_OnInput Actor vtable +0x380 GetMountedHorse. Mounted player input switches to the horse process for movement flags.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -937,7 +937,7 @@
   },
   {
     "ea": "0x671821",
-    "line": "call    Actor_IsSneaking",
+    "line": "call    Actor_IsSneaking; 3DTheft decode: Actor_IsSneaking returns true when process movement flags include 0x400 and do not include swimming flag 0x800.",
     "mnemonic": "call",
     "size": 5
   },
@@ -973,7 +973,7 @@
   },
   {
     "ea": "0x671830",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1093,7 +1093,7 @@
   },
   {
     "ea": "0x671875",
-    "line": "call    eax",
+    "line": "call    eax; Periodic on-foot sneaking award: Sneak (0x1F), useValue0, identity scale (0.0). Mounted state is excluded before this call.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1141,13 +1141,13 @@
   },
   {
     "ea": "0x67189B",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x67189D",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; Return true only when Actor.process exists and its movement-state flags contain 0x800 (Swimming).",
     "mnemonic": "call",
     "size": 5
   },
@@ -1183,7 +1183,7 @@
   },
   {
     "ea": "0x6718AC",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1279,7 +1279,7 @@
   },
   {
     "ea": "0x6718D8",
-    "line": "call    eax",
+    "line": "call    eax; Periodic swimming award: Athletics (0x0D), useValue1, identity scale (0.0).",
     "mnemonic": "call",
     "size": 2
   },
@@ -1357,7 +1357,7 @@
   },
   {
     "ea": "0x671906",
-    "line": "call    sub_5E05B0",
+    "line": "call    sub_5E05B0; Checks process movement flags low nibble via vfunc +0x2C0. Player input uses this alongside swimming/sneaking skill progression; useful as a broad movement-mode guard.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1453,7 +1453,7 @@
   },
   {
     "ea": "0x671931",
-    "line": "call    eax",
+    "line": "call    eax; Periodic on-foot movement-flag 0x200 award: Athletics (0x0D), useValue0, identity scale (0.0). Mounted state is excluded before this call.",
     "mnemonic": "call",
     "size": 2
   },
@@ -1603,7 +1603,7 @@
   },
   {
     "ea": "0x671989",
-    "line": "call    InputGlobals__GetJoystickAxisMovement",
+    "line": "call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 horizontal-look axis selected by iJoystickLookLeftRight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1621,13 +1621,13 @@
   },
   {
     "ea": "0x671996",
-    "line": "fmul    dword ptr ds:0B14F08h",
+    "line": "fmul    dword ptr ds:0B14F08h; [Controller decode 2026-07-09] Player_OnInput: scales horizontal joystick look by fJoystickLookLRMult.",
     "mnemonic": "fmul",
     "size": 6
   },
   {
     "ea": "0x67199C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1669,7 +1669,7 @@
   },
   {
     "ea": "0x6719B4",
-    "line": "call    InputGlobals__GetJoystickAxisMovement",
+    "line": "call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 vertical-look axis selected by iJoystickLookUpDown.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1687,13 +1687,13 @@
   },
   {
     "ea": "0x6719C1",
-    "line": "fmul    dword ptr ds:0B14F00h",
+    "line": "fmul    dword ptr ds:0B14F00h; [Controller decode 2026-07-09] Player_OnInput: scales vertical joystick look by fJoystickLookUDMult.",
     "mnemonic": "fmul",
     "size": 6
   },
   {
     "ea": "0x6719C7",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1753,7 +1753,7 @@
   },
   {
     "ea": "0x6719EB",
-    "line": "cmp     byte ptr ds:0B14F38h, 0",
+    "line": "cmp     byte ptr ds:0B14F38h, 0; [Controller decode 2026-07-09] Player_OnInput: applies bInvertYValues to combined mouse/joystick vertical look.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -2275,13 +2275,13 @@
   },
   {
     "ea": "0x671B27",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x671B29",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x671B6A",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "ea": "0x671C36",
-    "line": "call    sub_5ACE20",
+    "line": "call    LevelUpMenu_Open",
     "mnemonic": "call",
     "size": 5
   },
@@ -2833,7 +2833,7 @@
   },
   {
     "ea": "0x671C7F",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2857,7 +2857,7 @@
   },
   {
     "ea": "0x671C8E",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3349,7 +3349,7 @@
   },
   {
     "ea": "0x671DC8",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -3397,7 +3397,7 @@
   },
   {
     "ea": "0x671DE6",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -3541,7 +3541,7 @@
   },
   {
     "ea": "0x671E2C",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3601,7 +3601,7 @@
   },
   {
     "ea": "0x671E4B",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3703,7 +3703,7 @@
   },
   {
     "ea": "0x671E79",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3757,7 +3757,7 @@
   },
   {
     "ea": "0x671E98",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3823,7 +3823,7 @@
   },
   {
     "ea": "0x671EC0",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3859,7 +3859,7 @@
   },
   {
     "ea": "0x671ECE",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3895,7 +3895,7 @@
   },
   {
     "ea": "0x671EDC",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3931,7 +3931,7 @@
   },
   {
     "ea": "0x671EEA",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4021,7 +4021,7 @@
   },
   {
     "ea": "0x671F19",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4159,7 +4159,7 @@
   },
   {
     "ea": "0x671F56",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4183,7 +4183,7 @@
   },
   {
     "ea": "0x671F62",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4495,7 +4495,7 @@
   },
   {
     "ea": "0x67202A",
-    "line": "call    sub_43F350",
+    "line": "call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4573,7 +4573,7 @@
   },
   {
     "ea": "0x672061",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -4597,7 +4597,7 @@
   },
   {
     "ea": "0x67206A",
-    "line": "call    sub_66DFD0",
+    "line": "call    Player_UpdateGrabObjectAttackControl",
     "mnemonic": "call",
     "size": 5
   },
@@ -4651,7 +4651,7 @@
   },
   {
     "ea": "0x672089",
-    "line": "call    InputGlobals__GetJoystickAxisMovement",
+    "line": "call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 strafe axis selected by iJoystickMoveLeftRight.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4669,13 +4669,13 @@
   },
   {
     "ea": "0x672096",
-    "line": "fmul    dword ptr ds:0B14EF8h",
+    "line": "fmul    dword ptr ds:0B14EF8h; [Controller decode 2026-07-09] Player_OnInput: scales strafe joystick axis by fJoystickMoveLRMult.",
     "mnemonic": "fmul",
     "size": 6
   },
   {
     "ea": "0x67209C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4711,7 +4711,7 @@
   },
   {
     "ea": "0x6720AD",
-    "line": "call    InputGlobals__GetJoystickAxisMovement",
+    "line": "call    InputGlobals__GetJoystickAxisMovement; [Controller decode 2026-07-09] Player_OnInput: reads joystick 0 forward/back axis selected by iJoystickMoveFrontBack.",
     "mnemonic": "call",
     "size": 5
   },
@@ -4729,19 +4729,19 @@
   },
   {
     "ea": "0x6720BA",
-    "line": "fmul    dword ptr ds:0B14EF0h",
+    "line": "fmul    dword ptr ds:0B14EF0h; [Controller decode 2026-07-09] Player_OnInput: scales forward/back joystick axis by fJoystickMoveFBMult.",
     "mnemonic": "fmul",
     "size": 6
   },
   {
     "ea": "0x6720C0",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6720C5",
-    "line": "test    esi, esi",
+    "line": "test    esi, esi; [Controller decode 2026-07-09] Player_OnInput: synthesizes left/right movement control presses from signed strafe axis.",
     "mnemonic": "test",
     "size": 2
   },
@@ -5041,7 +5041,7 @@
   },
   {
     "ea": "0x67215A",
-    "line": "mov     eax, [esp+0A0h+var_68]",
+    "line": "mov     eax, [esp+0A0h+var_68]; [Controller decode 2026-07-09] Player_OnInput: synthesizes forward/back movement control presses from signed forward/back axis.",
     "mnemonic": "mov",
     "size": 4
   },
@@ -5257,7 +5257,7 @@
   },
   {
     "ea": "0x6721CC",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5293,7 +5293,7 @@
   },
   {
     "ea": "0x6721DA",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5323,7 +5323,7 @@
   },
   {
     "ea": "0x6721E7",
-    "line": "call    InputGlobals__SendControlPress",
+    "line": "call    InputGlobals__SendControlPress; TES4 authoritative: AlwaysRun/run-control path sets movement flag 0x200 before directional movement bits are assembled.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5353,7 +5353,7 @@
   },
   {
     "ea": "0x6721FC",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5389,7 +5389,7 @@
   },
   {
     "ea": "0x67220A",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5431,13 +5431,13 @@
   },
   {
     "ea": "0x672223",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; TES4 authoritative: Player_OnInput calls sub_5E65B0, then multiplies the result by analog input magnitude flt_B14E58 before directional movement vectors are assembled.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672225",
-    "line": "call    sub_5E65B0",
+    "line": "call    sub_5E65B0; Authoritative actor movement speed selector: process flags +0x2C0 choose run (0x200), swim (0x800), fly-speed (0x2000); when those are absent it falls through to ordinary walk speed. AI callers may supply a movement vector without direction bits.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5623,7 +5623,7 @@
   },
   {
     "ea": "0x67229B",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5659,7 +5659,7 @@
   },
   {
     "ea": "0x6722A8",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: logical control 0 contributes movement bit 0x1 and adds one direction vector into the movement intent.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5749,7 +5749,7 @@
   },
   {
     "ea": "0x6722E0",
-    "line": "or      eax, 100h",
+    "line": "or      eax, 100h; TES4 authoritative: Player_OnInput sets movement flag 0x100 for directional input only when run flag 0x200 is not set, then ORs forward bit 0x1.",
     "mnemonic": "or",
     "size": 5
   },
@@ -5785,7 +5785,7 @@
   },
   {
     "ea": "0x6722F2",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5821,7 +5821,7 @@
   },
   {
     "ea": "0x672300",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: logical control 1 contributes movement bit 0x2 and subtracts the same direction vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5947,7 +5947,7 @@
   },
   {
     "ea": "0x67234A",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -5983,7 +5983,7 @@
   },
   {
     "ea": "0x672358",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: logical control 2 contributes movement bit 0x4 and subtracts the strafe direction vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6109,7 +6109,7 @@
   },
   {
     "ea": "0x6723A2",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6145,7 +6145,7 @@
   },
   {
     "ea": "0x6723B0",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: logical control 3 contributes movement bit 0x8 and adds the strafe direction vector.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6313,7 +6313,7 @@
   },
   {
     "ea": "0x672419",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -6535,7 +6535,7 @@
   },
   {
     "ea": "0x67249D",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -6775,7 +6775,7 @@
   },
   {
     "ea": "0x67252C",
-    "line": "call    eax",
+    "line": "call    eax; TES4 authoritative: writes assembled player movement/action bitmask v232 to process vfunc +0x2C4/Unk_B1 before ordinary jump handling.",
     "mnemonic": "call",
     "size": 2
   },
@@ -6799,7 +6799,7 @@
   },
   {
     "ea": "0x67253A",
-    "line": "jnz     short loc_672581",
+    "line": "jnz     short loc_672581; TES4 authoritative: queued-object/player movement path only allows immediate jump when movement bit 0x1 is set and bits 0x3E are clear.",
     "mnemonic": "jnz",
     "size": 2
   },
@@ -6823,7 +6823,7 @@
   },
   {
     "ea": "0x672542",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6883,7 +6883,7 @@
   },
   {
     "ea": "0x67255D",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -6943,13 +6943,13 @@
   },
   {
     "ea": "0x672581",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672583",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7051,7 +7051,7 @@
   },
   {
     "ea": "0x6725BA",
-    "line": "mov     eax, [edx+19Ch]",
+    "line": "mov     eax, [edx+19Ch]; TES4 authoritative: Player action gate calls TESObjectREFR vtable +0x19C GetKnockedState; nonzero suppresses normal action handling.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -7105,7 +7105,7 @@
   },
   {
     "ea": "0x6725E1",
-    "line": "mov     eax, [edx+1A0h]",
+    "line": "mov     eax, [edx+1A0h]; TES4 authoritative: Player action gate calls TESObjectREFR vtable +0x1A0 HasFatigue; true suppresses normal action handling.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -7141,7 +7141,7 @@
   },
   {
     "ea": "0x6725F5",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7165,7 +7165,7 @@
   },
   {
     "ea": "0x672604",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7195,7 +7195,7 @@
   },
   {
     "ea": "0x672617",
-    "line": "mov     eax, [edx+36Ch]",
+    "line": "mov     eax, [edx+36Ch]; TES4 authoritative: Player action gate calls process GetSitSleepState (+0x36C); any nonzero sit/sleep state suppresses ordinary action handling.",
     "mnemonic": "mov",
     "size": 6
   },
@@ -7309,13 +7309,13 @@
   },
   {
     "ea": "0x672662",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672664",
-    "line": "call    Actor_ProcessControlAttack",
+    "line": "call    PlayerCharacter_ProcessAttackControl; Sole direct caller: Player_OnInput invokes PlayerCharacter_ProcessAttackControl with ECX=PlayerCharacter, pushes no arguments, and consumes only AL.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7381,7 +7381,7 @@
   },
   {
     "ea": "0x67268C",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7417,7 +7417,7 @@
   },
   {
     "ea": "0x67269A",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7489,7 +7489,7 @@
   },
   {
     "ea": "0x6726CC",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7591,7 +7591,7 @@
   },
   {
     "ea": "0x672715",
-    "line": "mov     ecx, offset flt_B370A0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3C8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7675,7 +7675,7 @@
   },
   {
     "ea": "0x67274B",
-    "line": "mov     ecx, offset flt_B370A8",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D0h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7717,7 +7717,7 @@
   },
   {
     "ea": "0x672769",
-    "line": "mov     ecx, offset flt_B370B0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7759,7 +7759,7 @@
   },
   {
     "ea": "0x672788",
-    "line": "mov     ecx, offset flt_B370B0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7807,7 +7807,7 @@
   },
   {
     "ea": "0x6727A3",
-    "line": "mov     ecx, offset flt_B370B0",
+    "line": "mov     ecx, (offset g_GameSettingStringPointers_B36CD8+3D8h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -7909,7 +7909,7 @@
   },
   {
     "ea": "0x6727E3",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -7945,7 +7945,7 @@
   },
   {
     "ea": "0x6727F1",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8005,19 +8005,19 @@
   },
   {
     "ea": "0x672813",
-    "line": "push    0; float",
+    "line": "push    0; shouldBlock",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x672815",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672817",
-    "line": "call    sub_5F4AE0",
+    "line": "call    Actor_UpdateBlockingState; Starts or stops the actor blocking animation/current-action state and mirrors the result to CombatController byte +0x49. Native ABI is Actor in ECX plus one shouldBlock byte.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8107,7 +8107,7 @@
   },
   {
     "ea": "0x67284B",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8143,7 +8143,7 @@
   },
   {
     "ea": "0x672859",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8167,7 +8167,7 @@
   },
   {
     "ea": "0x672868",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8191,7 +8191,7 @@
   },
   {
     "ea": "0x672878",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8215,7 +8215,7 @@
   },
   {
     "ea": "0x672888",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8239,7 +8239,7 @@
   },
   {
     "ea": "0x672898",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8557,7 +8557,7 @@
   },
   {
     "ea": "0x672947",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative player jump gate: requires logical control 0xD just pressed (QueryControlState mode 1). Continuous climbing should not rely only on this one-frame edge.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8623,7 +8623,7 @@
   },
   {
     "ea": "0x672970",
-    "line": "push    3",
+    "line": "push    3; slot",
     "mnemonic": "push",
     "size": 2
   },
@@ -8641,13 +8641,13 @@
   },
   {
     "ea": "0x672976",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672978",
-    "line": "call    ActorAnimData_GetAnimGroupFromField8Value",
+    "line": "call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8659,7 +8659,7 @@
   },
   {
     "ea": "0x67297E",
-    "line": "call    sub_51ACC0",
+    "line": "call    AnimGroup_UsesPowerOrCastNoteTemplate; Returns true when the encoded key is not group 0xFF and its fixed group record uses note-template class 5. In Oblivion's 43 records that is AttackPower..AttackRightPower plus CastSelf/Touch/Target and their Alt variants.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8689,7 +8689,7 @@
   },
   {
     "ea": "0x672990",
-    "line": "call    Actor_GetCurrentAction",
+    "line": "call    Actor_GetCurrentAction; Actor_GetCurrentAction: returns process vfunc +0x2D0, or -1 when no process. Useful conservative gate for climb/slowfall activation.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8713,7 +8713,7 @@
   },
   {
     "ea": "0x6729A0",
-    "line": "call    sub_5E5640",
+    "line": "call    Actor_IsCurrentActionInRange2To5; Process vfunc +0x2D0 in range 2..5 guard used by Player_OnInput jump gate with Acrobatics mastery. Treat as an action/movement lock signal when deciding climb eligibility.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8731,19 +8731,19 @@
   },
   {
     "ea": "0x6729A9",
-    "line": "push    1Ah",
+    "line": "push    1Ah; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6729AB",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6729AD",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8755,7 +8755,7 @@
   },
   {
     "ea": "0x6729B4",
-    "line": "jle     loc_672B94",
+    "line": "jle     loc_672B94; TES4 authoritative player jump rejection: blocks jump for anim-group type 5, current action 9, or action range 2..5 when Acrobatics mastery for AV 0x1A is <= 0.",
     "mnemonic": "jle",
     "size": 6
   },
@@ -8767,7 +8767,7 @@
   },
   {
     "ea": "0x6729BC",
-    "line": "call    sub_5EC180",
+    "line": "call    MobileObject_IsJumpSuppressedByFallAnimOrInAir; Returns true for swimming/falling style animation groups 0x28..0x2A, or if current character state id == 2 InAir. Player jump path uses this to suppress normal jump handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8785,13 +8785,13 @@
   },
   {
     "ea": "0x6729C5",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6729C7",
-    "line": "call    Actor_IsSwimming",
+    "line": "call    Actor_IsSwimming; TES4 authoritative player jump setup: sub_5EC180 (jump/fall anim or char state InAir) and Actor_IsSwimming both clear v244, suppressing normal jump/fatigue handling.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8845,7 +8845,7 @@
   },
   {
     "ea": "0x6729E5",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8863,13 +8863,13 @@
   },
   {
     "ea": "0x6729EE",
-    "line": "setnz   byte ptr [esp+0A0h+var_48+3]",
+    "line": "setnz   byte ptr [esp+0A0h+var_48+3]; TES4 authoritative: logical control 6 held is tested on the jump/block branch; control 6 is the block path in nearby code.",
     "mnemonic": "setnz",
     "size": 5
   },
   {
     "ea": "0x6729F3",
-    "line": "call    Actor_IsBlocking",
+    "line": "call    Actor_IsBlocking; TES4 authoritative: Actor_IsBlocking checks current action 6. Script-driven Climbing should reject this unless a block-climb interaction is explicitly designed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8893,7 +8893,7 @@
   },
   {
     "ea": "0x672A03",
-    "line": "call    sub_579540",
+    "line": "call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8911,19 +8911,19 @@
   },
   {
     "ea": "0x672A0C",
-    "line": "push    1Ah",
+    "line": "push    1Ah; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x672A0E",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672A10",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8935,7 +8935,7 @@
   },
   {
     "ea": "0x672A18",
-    "line": "jl      short loc_672A4F",
+    "line": "jl      short loc_672A4F; TES4 authoritative: while control 6 is held, advanced Acrobatics dodge/jump path is allowed only when menu/cursor helper 0x579540 is false and mastery >= 2.",
     "mnemonic": "jl",
     "size": 2
   },
@@ -8971,7 +8971,7 @@
   },
   {
     "ea": "0x672A28",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -8983,7 +8983,7 @@
   },
   {
     "ea": "0x672A33",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9019,7 +9019,7 @@
   },
   {
     "ea": "0x672A43",
-    "line": "call    sub_5F5050",
+    "line": "call    sub_5F5050; TES4 authoritative: player Acrobatics dodge-style action. Chooses anim group 0xB..0xE from movement flags and starts current action 9.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9055,7 +9055,7 @@
   },
   {
     "ea": "0x672A58",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9121,7 +9121,7 @@
   },
   {
     "ea": "0x672A7B",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9175,7 +9175,7 @@
   },
   {
     "ea": "0x672A99",
-    "line": "test    eax, eax",
+    "line": "test    eax, eax; TES4 authoritative: actual player Jump virtual call after the input/action gates. This ultimately reaches actor jump setup at 0x65AB40 for ordinary jumps.",
     "mnemonic": "test",
     "size": 2
   },
@@ -9229,7 +9229,7 @@
   },
   {
     "ea": "0x672ABB",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9307,7 +9307,7 @@
   },
   {
     "ea": "0x672AE2",
-    "line": "call    eax",
+    "line": "call    eax; Jump input award: Acrobatics (0x1A), useValue0, identity scale (0.0).",
     "mnemonic": "call",
     "size": 2
   },
@@ -9433,19 +9433,19 @@
   },
   {
     "ea": "0x672B2C",
-    "line": "push    1Ah",
+    "line": "push    1Ah; actorValue",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x672B2E",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672B30",
-    "line": "call    Actor_GetSkillMasteryLevel",
+    "line": "call    Actor_GetSkillMasteryLevel; Oblivion skill-mastery accessor. Accept only native skill AVs 0x0C..0x20, compute the actor's base calculated skill, and map it through the five configurable mastery thresholds.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9463,7 +9463,7 @@
   },
   {
     "ea": "0x672B3A",
-    "line": "mov     ecx, offset fPerkJumpFatigueExpertMult",
+    "line": "mov     ecx, 0B37510h",
     "mnemonic": "mov",
     "size": 5
   },
@@ -9499,7 +9499,7 @@
   },
   {
     "ea": "0x672B50",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9583,19 +9583,19 @@
   },
   {
     "ea": "0x672B77",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672B79",
-    "line": "fstp    [esp+0A4h+duration]; float",
+    "line": "fstp    [esp+0A4h+duration]; delta",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x672B7C",
-    "line": "call    Actor_ModFatigue?",
+    "line": "call    Actor_ApplyNegativeFatigueDeltaClamped; Applies only a negative Fatigue delta. Requires the actor AV path, reads Fatigue AV 0x0A, clamps damage so Fatigue cannot fall below zero, then calls the actor DamageAV float virtual. Nonnegative deltas and actors with no positive Fatigue are ignored.",
     "mnemonic": "call",
     "size": 5
   },
@@ -9607,7 +9607,7 @@
   },
   {
     "ea": "0x672B86",
-    "line": "call    sub_5C1F70",
+    "line": "call    Input_ProcessQuickSlotHotkeys",
     "mnemonic": "call",
     "size": 5
   },
@@ -9631,7 +9631,7 @@
   },
   {
     "ea": "0x672B94",
-    "line": "call    sub_5C1F70",
+    "line": "call    Input_ProcessQuickSlotHotkeys",
     "mnemonic": "call",
     "size": 5
   },
@@ -9715,7 +9715,7 @@
   },
   {
     "ea": "0x672BC1",
-    "line": "call    sub_5C1F70",
+    "line": "call    Input_ProcessQuickSlotHotkeys",
     "mnemonic": "call",
     "size": 5
   },
@@ -9763,7 +9763,7 @@
   },
   {
     "ea": "0x672BDC",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10081,7 +10081,7 @@
   },
   {
     "ea": "0x672C8F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10207,7 +10207,7 @@
   },
   {
     "ea": "0x672CD1",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -10303,7 +10303,7 @@
   },
   {
     "ea": "0x672D07",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10315,7 +10315,7 @@
   },
   {
     "ea": "0x672D12",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10339,7 +10339,7 @@
   },
   {
     "ea": "0x672D22",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10351,7 +10351,7 @@
   },
   {
     "ea": "0x672D2D",
-    "line": "call    sub_88D370",
+    "line": "call    hkCharacterContext_GetStateId; hkCharacterContext state id accessor used by controller update; proxy+0x1E0 context stores current state id at +0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10375,7 +10375,7 @@
   },
   {
     "ea": "0x672D3D",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10453,7 +10453,7 @@
   },
   {
     "ea": "0x672D63",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -10687,7 +10687,7 @@
   },
   {
     "ea": "0x672DDD",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -10741,13 +10741,13 @@
   },
   {
     "ea": "0x672DFE",
-    "line": "fstp    [esp+0A8h+duration]; int",
+    "line": "fstp    [esp+0A8h+duration]; arg1",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x672E02",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -10759,13 +10759,13 @@
   },
   {
     "ea": "0x672E0A",
-    "line": "fstp    [esp+0A8h+anonymous_0+4]; float",
+    "line": "fstp    [esp+0A8h+arg0+4]; arg0",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x672E0D",
-    "line": "call    Actor_ProcessAction",
+    "line": "call    Actor_ProcessAction; Player input path pushes the live actor pointer immediately before Actor_ProcessAction; the callee has only two float stack arguments and receives Actor* in ECX.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10885,7 +10885,7 @@
   },
   {
     "ea": "0x672E59",
-    "line": "call    MobileObject_GetCharProxy",
+    "line": "call    MobileObject_GetCharProxy; TES4 authoritative: MobileObject_GetCharProxy uses process vfunc GetCharProxy and releases the smart pointer wrapper. Use to confirm recovered owner maps back to the same proxy.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10927,7 +10927,7 @@
   },
   {
     "ea": "0x672E6B",
-    "line": "call    sub_452A10",
+    "line": "call    sub_452A10; TES4 authoritative: converts TES/world NiPoint3 into Havok units with hkFactor, then writes proxy position through 0x891560.",
     "mnemonic": "call",
     "size": 5
   },
@@ -10951,7 +10951,7 @@
   },
   {
     "ea": "0x672E77",
-    "line": "push    offset stru_BA7A40; a2",
+    "line": "push    offset unk_BA7A40; a2",
     "mnemonic": "push",
     "size": 5
   },
@@ -10963,7 +10963,7 @@
   },
   {
     "ea": "0x672E7E",
-    "line": "call    sub_8AC0B0",
+    "line": "call    sub_8AC0B0; TES4 authoritative: writes proxy velocity vector back into bhk collision object+0x10. Climbing/Slowfall velocity edits must happen before these calls or must write both proxy+0x2E0 and object+0x10 after the fact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11059,7 +11059,7 @@
   },
   {
     "ea": "0x672EB1",
-    "line": "fmul    [ebp+arg_0]",
+    "line": "fmul    [ebp+deltaTime]",
     "mnemonic": "fmul",
     "size": 3
   },
@@ -11131,13 +11131,13 @@
   },
   {
     "ea": "0x672ED8",
-    "line": "mov     ecx, ebx; void *",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672EDA",
-    "line": "call    ?ClearComponentReferences@TESTexture@@UAEXXZ?",
+    "line": "call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11221,19 +11221,19 @@
   },
   {
     "ea": "0x672F06",
-    "line": "mov     ecx, ebx; int",
+    "line": "mov     ecx, ebx; Per-frame Player_OnInput point immediately before queued player moves are processed. EBX is PlayerCharacter; ECX is loaded from EBX for PlayerCharacter_ProcessQueuedMoveIfAllowed.",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x672F08",
-    "line": "call    sub_6714E0",
+    "line": "call    PlayerCharacter_ProcessQueuedMoveIfAllowed; Narrow next-frame scheduler call-site. Patch the original 5-byte call to a wrapper that calls 0x6714E0, then processes pending encounter while EBX is still PlayerCharacter. Earlier than a vtable post-wrapper, but misses Player_OnInput early-return paths.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x672F0D",
-    "line": "cmp     dword ptr [esp+0A0h+var_38+4], 0",
+    "line": "cmp     dword ptr [esp+0A0h+var_38+4], 0; Return point after queued-move processing in Player_OnInput. For encounter scheduling this is after vanilla move/teleport queues have settled; patching here directly must preserve flags for the following cmp/jcc sequence.",
     "mnemonic": "cmp",
     "size": 5
   },
@@ -11293,7 +11293,7 @@
   },
   {
     "ea": "0x672F2D",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11341,7 +11341,7 @@
   },
   {
     "ea": "0x672F47",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11389,7 +11389,7 @@
   },
   {
     "ea": "0x672F61",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11425,7 +11425,7 @@
   },
   {
     "ea": "0x672F73",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11461,7 +11461,7 @@
   },
   {
     "ea": "0x672F86",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11683,7 +11683,7 @@
   },
   {
     "ea": "0x673020",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; Player_OnInput uses InterfaceManager_IsMenuMode later for input handling. A 0x672F08 scheduler runs before this check, so the plugin handler should call 0x578F60 itself if it must avoid spawning while a menu remains open.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11809,7 +11809,7 @@
   },
   {
     "ea": "0x67306D",
-    "line": "fadd    [ebp+arg_0]",
+    "line": "fadd    [ebp+deltaTime]",
     "mnemonic": "fadd",
     "size": 3
   },
@@ -11839,7 +11839,7 @@
   },
   {
     "ea": "0x67307C",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11857,7 +11857,7 @@
   },
   {
     "ea": "0x673089",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11935,7 +11935,7 @@
   },
   {
     "ea": "0x6730C0",
-    "line": "call    sub_579540",
+    "line": "call    sub_579540; Interface/menu cursor state helper used by Player_OnInput jump/acrobatic branch. Player-only climb activation should avoid triggering while this UI mode is active.",
     "mnemonic": "call",
     "size": 5
   },
@@ -11989,25 +11989,25 @@
   },
   {
     "ea": "0x6730D9",
-    "line": "push    0",
+    "line": "push    0; casterFilterOrNull",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x6730DB",
-    "line": "push    49564E49h",
+    "line": "push    49564E49h; effectCode",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x6730E0",
-    "line": "lea     ecx, [ebx+68h]",
+    "line": "lea     ecx, [ebx+68h]; this",
     "mnemonic": "lea",
     "size": 3
   },
   {
     "ea": "0x6730E3",
-    "line": "call    sub_6A24B0",
+    "line": "call    MagicTarget_RemoveActiveEffectsByCode; Removes every nonterminated active effect whose effectCode matches. If casterFilterOrNull is nonnull, only effects from that caster are removed; null matches all casters. Native ABI is thiscall with two stack args and void return; prior ESI/ST0/userpurge inputs were decompiler artifacts.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12397,7 +12397,7 @@
   },
   {
     "ea": "0x6731A9",
-    "line": "call    GetTeleportExtraData",
+    "line": "call    TESObjectREFR_GetTeleportData; Verified TESObjectREFR_GetTeleportData returns ExtraDataList_GetTeleport from this reference's baseExtraList: the TeleportData* payload stored in ExtraTeleport+0x0C.",
     "mnemonic": "call",
     "size": 5
   },
@@ -12793,7 +12793,7 @@
   },
   {
     "ea": "0x673289",
-    "line": "fmul    [ebp+arg_0]",
+    "line": "fmul    [ebp+deltaTime]",
     "mnemonic": "fmul",
     "size": 3
   },
@@ -12835,7 +12835,7 @@
   },
   {
     "ea": "0x6732A6",
-    "line": "fmul    [ebp+arg_0]",
+    "line": "fmul    [ebp+deltaTime]",
     "mnemonic": "fmul",
     "size": 3
   },
@@ -13003,7 +13003,7 @@
   },
   {
     "ea": "0x673321",
-    "line": "fadd    [ebp+arg_0]",
+    "line": "fadd    [ebp+deltaTime]",
     "mnemonic": "fadd",
     "size": 3
   },
@@ -13087,7 +13087,7 @@
   },
   {
     "ea": "0x673356",
-    "line": "mov     ecx, ebx",
+    "line": "mov     ecx, ebx; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -13099,7 +13099,7 @@
   },
   {
     "ea": "0x67335A",
-    "line": "call    sub_4A9720",
+    "line": "call    Actor_GetAimPitch; Returns Actor rotation X as the native aim-pitch value used by projectile launch, impact, input, dialogue-camera, and magic-projectile paths.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13177,7 +13177,7 @@
   },
   {
     "ea": "0x673392",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -13201,7 +13201,7 @@
   },
   {
     "ea": "0x67339B",
-    "line": "call    sub_671170",
+    "line": "call    Player_ProcessGrabControl",
     "mnemonic": "call",
     "size": 5
   },
@@ -13381,7 +13381,7 @@
   },
   {
     "ea": "0x67340E",
-    "line": "push    offset Vector3_InitValue?",
+    "line": "push    offset g_zeroNiPoint3",
     "mnemonic": "push",
     "size": 5
   },
@@ -13429,7 +13429,7 @@
   },
   {
     "ea": "0x673433",
-    "line": "call    InterfaceManager_IsMenuMode",
+    "line": "call    InterfaceManager_IsMenuMode; InterfaceManager_IsMenuMode. For a next-frame encounter handler, use this as a conservative gate: if true, leave pending encounter queued until menus are closed so spawn/combat starts in world update context.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13561,7 +13561,7 @@
   },
   {
     "ea": "0x67346E",
-    "line": "mov     ecx, offset ActorProcessManager_ptr",
+    "line": "mov     ecx, (offset qword_B3BB2C+1D4h)",
     "mnemonic": "mov",
     "size": 5
   },
@@ -13609,7 +13609,7 @@
   },
   {
     "ea": "0x673488",
-    "line": "call    TESObjectREFR_GetAnimData",
+    "line": "call    TESObjectREFR_GetAnimData; Return active ActorAnimData for an actor reference. For actor/creature refs with process level 0 or 1, return process+0x17C; otherwise tail-call the ExtraAnim lookup on the reference extra list. Exact return type is ActorAnimData*.",
     "mnemonic": "call",
     "size": 5
   },
@@ -13657,7 +13657,7 @@
   },
   {
     "ea": "0x6734AE",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -13681,7 +13681,7 @@
   },
   {
     "ea": "0x6734C0",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -13723,7 +13723,7 @@
   },
   {
     "ea": "0x6734D7",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -13993,7 +13993,7 @@
   },
   {
     "ea": "0x67356C",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -14017,7 +14017,7 @@
   },
   {
     "ea": "0x67357F",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -14035,7 +14035,7 @@
   },
   {
     "ea": "0x67358B",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -14473,7 +14473,7 @@
   },
   {
     "ea": "0x673671",
-    "line": "call    sub_5EAE70",
+    "line": "call    sub_5EAE70; 3DTheft: package reset/cleanup path. For no ExtraPackage case, clears process->editorPackage, resets editorPackProcedure to TRAVEL, then destroys detached dynamic package.",
     "mnemonic": "call",
     "size": 5
   },
@@ -15085,7 +15085,7 @@
   },
   {
     "ea": "0x6737B5",
-    "line": "fld     [ebp+arg_0]",
+    "line": "fld     [ebp+deltaTime]",
     "mnemonic": "fld",
     "size": 3
   },
@@ -15229,7 +15229,7 @@
   },
   {
     "ea": "0x673805",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -15253,7 +15253,7 @@
   },
   {
     "ea": "0x673811",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -15325,7 +15325,7 @@
   },
   {
     "ea": "0x673841",
-    "line": "mov     ecx, offset flt_B36C90",
+    "line": "mov     ecx, offset unk_B36C90",
     "mnemonic": "mov",
     "size": 5
   },
@@ -15499,7 +15499,7 @@
   },
   {
     "ea": "0x6738BA",
-    "line": "call    sub_5AEA60",
+    "line": "call    LoadgameMenu_Open; CharacterSpecificSaves v5 hooks all callers. Its wrapper resets to the character overview, pre-enumerates *g_createdBaseObjList, and prepares exact-name grouping before native menu construction; this covers the native branch that can skip 0x005AEBB6.",
     "mnemonic": "call",
     "size": 5
   },
@@ -15535,7 +15535,7 @@
   },
   {
     "ea": "0x6738CF",
-    "line": "call    ?GetAnonymousScheduleGroup@SchedulerBase@details@Concurrency@@QAEPAVScheduleGroupBase@23@XZ; Concurrency::details::SchedulerBase::GetAnonymousScheduleGroup(void)",
+    "line": "call    Actor__GetDeadState; Exact Actor accessor: returns Actor.members.DeadState at absolute Actor+0xB0. The social-conversation scans reject value 3. This corrects a false Microsoft Concurrency symbol collision.",
     "mnemonic": "call",
     "size": 5
   },
@@ -15721,19 +15721,19 @@
   },
   {
     "ea": "0x673942",
-    "line": "push    1; a3",
+    "line": "push    1; queryMode",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x673944",
-    "line": "push    1Bh; a2",
+    "line": "push    1Bh; controlId",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x673946",
-    "line": "call    InputGlobals__QueryControlState",
+    "line": "call    InputGlobals__QueryControlState; TES4 authoritative: QueryControlState(control, query) checks up to keyboard/mouse/joystick bindings for a logical control. Query modes follow the underlying input helpers: 0 held, 1 pressed this frame, 2 released this frame, 3 changed.",
     "mnemonic": "call",
     "size": 5
   },

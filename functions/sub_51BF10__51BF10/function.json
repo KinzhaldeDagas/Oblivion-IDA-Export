@@ -1,19 +1,32 @@
 {
-  "callees_count": 15,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 2,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x51BF10",
+      "0x51BFDC"
+    ]
+  ],
+  "chunks_sha256": "04221e5bfa0f2bb7c68e44badd151e74158e913c9ba7d419b2b8f8143ddf0acd",
+  "comment_regular": "Compare TESForm components, then compare exactly the fixed 0x34-byte TESClass DATA payload at +0x38. No additional major/minor storage participates.",
+  "comment_repeatable": "Compare TESForm components, then compare exactly the fixed 0x34-byte TESClass DATA payload at +0x38. No additional major/minor storage participates.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 2,
-  "display_name": "sub_51BF10",
+  "display_name": "TESClass_CompareTo",
   "end_ea": "0x51BFDC",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51BF10",
+  "name": "TESClass_CompareTo",
   "segment": ".text",
   "sha256": "04221e5bfa0f2bb7c68e44badd151e74158e913c9ba7d419b2b8f8143ddf0acd",
   "size": 204,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51BF10",
-  "type": "bool __thiscall(TESForm *this, void *)",
+  "total_chunk_size": 204,
+  "type": "bool __thiscall(TESClass *this, TESForm *other)",
   "xrefs_from_count": 96,
   "xrefs_to_count": 1
 }

@@ -13,7 +13,7 @@
 0x5B5F3E: mov     large fs:0, eax
 0x5B5F44: mov     esi, ecx
 0x5B5F46: mov     [esp+20h+var_10], esi
-0x5B5F4A: call    ??0Menu@@QAE@XZ; Menu::Menu(void)
+0x5B5F4A: call    ??0Menu@@QAE@XZ; Verified constructor sets ownsTemplates byte+0x1C=1, template list+8/+0xC empty, templateContextTile+0x10=NULL, fadeState+0x24=4. Other fields retain prior names when semantics not established.
 0x5B5F4F: xor     ebx, ebx
 0x5B5F51: mov     dword ptr [esi], offset ??_7MainMenu@@6B@; const MainMenu::`vftable'
 0x5B5F57: mov     ds:0B3B40Ch, esi
@@ -38,7 +38,7 @@
 0x5B5F98: mov     eax, ds:0B03094h
 0x5B5F9D: push    1
 0x5B5F9F: push    eax
-0x5B5FA0: call    sub_410C40
+0x5B5FA0: call    sub_410C40; MenuPlease: patched call to sub_410C40 so MainMenu constructor does not start sMainMenuMovie / Map loop.bik.
 0x5B5FA5: add     esp, 8
 0x5B5FA8: mov     ds:0B3B408h, al
 0x5B5FAD: mov     ecx, ds:0B33398h
@@ -74,3 +74,12 @@
 0x5B600B: retn
 0x5B600C: mov     ds:0B3B408h, bl
 0x5B6012: jmp     short loc_5B5F98
+0x9C0AD0: mov     ecx, [ebp-10h]; this
+0x9C0AD3: jmp     ??1Menu@@UAE@XZ; Verified template ownership: Menu+0x1C byte gates freeing registered template objects; linked list nodes +8/+0xC always removed. Updated MenuMembr preserves size0x24; with vtable Menu total0x28. ReadFile0x5904EF sets Menu ownsTemplates=1 and BuildStorage ownsSubTemplates=0.
+0x9C0AD8: mov     edx, [esp+arg_4]
+0x9C0ADC: lea     eax, [edx-10h]
+0x9C0ADF: mov     ecx, [edx-14h]
+0x9C0AE2: xor     ecx, eax
+0x9C0AE4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C0AE9: mov     eax, offset stru_AE9C90
+0x9C0AEE: jmp     ___CxxFrameHandler3

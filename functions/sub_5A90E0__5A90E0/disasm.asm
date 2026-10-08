@@ -20,9 +20,9 @@
 0x5A9116: mov     ecx, [edi]
 0x5A9118: test    ecx, ecx
 0x5A911A: jz      short loc_5A9128
-0x5A911C: push    eax; Str2
-0x5A911D: push    ecx; Str1
-0x5A911E: call    __strcmp
+0x5A911C: push    eax; right
+0x5A911D: push    ecx; left
+0x5A911E: call    CRT_StricmpLocaleDispatch
 0x5A9123: add     esp, 8
 0x5A9126: jmp     short loc_5A9135
 0x5A9128: xor     ecx, ecx
@@ -46,16 +46,16 @@
 0x5A9152: call    Tile_SetString
 0x5A9157: fld1
 0x5A9159: push    ecx
-0x5A915A: fstp    [esp+14h+a2]; a3
+0x5A915A: fstp    [esp+14h+a2]; value
 0x5A915D: mov     ecx, [esi+34h]; this
-0x5A9160: push    0FB0h; a2
-0x5A9165: call    Tile_SetFloat
+0x5A9160: push    0FB0h; propertyCode
+0x5A9165: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A916A: fld1
 0x5A916C: push    ecx
-0x5A916D: fstp    [esp+14h+a2]; a3
+0x5A916D: fstp    [esp+14h+a2]; value
 0x5A9170: mov     ecx, [esi+34h]; this
-0x5A9173: push    0FA1h; a2
-0x5A9178: call    Tile_SetFloat
+0x5A9173: push    0FA1h; propertyCode
+0x5A9178: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A917D: push    edi
 0x5A917E: mov     ecx, ebp
 0x5A9180: call    BSSimpleList_Remove
@@ -64,7 +64,7 @@
 0x5A9189: mov     ecx, edi
 0x5A918B: call    sub_5A9060
 0x5A9190: push    edi
-0x5A9191: call    FormHeapFree
+0x5A9191: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A9196: add     esp, 4
 0x5A9199: cmp     dword ptr [ebp+4], 0
 0x5A919D: jnz     short loc_5A91A9
@@ -81,9 +81,9 @@
 0x5A91C3: fld     dword ptr ds:0A379B4h
 0x5A91C9: push    ecx
 0x5A91CA: mov     ecx, [esi+34h]; this
-0x5A91CD: fstp    [esp+14h+a2]; a3
-0x5A91D0: push    0FA1h; a2
-0x5A91D5: call    Tile_SetFloat
+0x5A91CD: fstp    [esp+14h+a2]; value
+0x5A91D0: push    0FA1h; propertyCode
+0x5A91D5: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A91DA: mov     edx, [ebp+0]
 0x5A91DD: mov     eax, [edx+10h]
 0x5A91E0: mov     ecx, [esi+34h]
@@ -111,14 +111,14 @@
 0x5A921F: push    0
 0x5A9221: push    ecx
 0x5A9222: mov     ecx, ds:0B333C4h
-0x5A9228: call    sub_65A970
+0x5A9228: call    TESObjectREFR_PlayResolvedAnimSoundNote; Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
 0x5A922D: mov     edi, eax
 0x5A922F: test    edi, edi
 0x5A9231: jz      short loc_5A9243
 0x5A9233: mov     ecx, edi; this
 0x5A9235: call    sub_6B73E0
 0x5A923A: push    edi
-0x5A923B: call    FormHeapFree
+0x5A923B: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x5A9240: add     esp, 4
 0x5A9243: mov     ecx, [ebp+0]
 0x5A9246: cmp     dword ptr [ecx+10h], 0
@@ -126,18 +126,18 @@
 0x5A924B: mov     ecx, [esi+34h]; this
 0x5A924E: jnz     short loc_5A9264
 0x5A9250: fld1
-0x5A9252: fstp    [esp+14h+a2]; a3
-0x5A9255: push    0FB0h; a2
-0x5A925A: call    Tile_SetFloat
+0x5A9252: fstp    [esp+14h+a2]; value
+0x5A9255: push    0FB0h; propertyCode
+0x5A925A: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A925F: pop     edi
 0x5A9260: pop     ebx
 0x5A9261: pop     esi
 0x5A9262: pop     ebp
 0x5A9263: retn
 0x5A9264: fld     dword ptr ds:0A379B4h
-0x5A926A: fstp    [esp+14h+a2]; a3
-0x5A926D: push    0FB0h; a2
-0x5A9272: call    Tile_SetFloat
+0x5A926A: fstp    [esp+14h+a2]; value
+0x5A926D: push    0FB0h; propertyCode
+0x5A9272: call    Tile_SetFloat; Set or create a numeric Tile property. A missing property is handled, but a null Tile is dereferenced by Tile_GetPropertyByCode_.
 0x5A9277: pop     edi
 0x5A9278: pop     ebx
 0x5A9279: pop     esi

@@ -1,4 +1,4 @@
-0x4F5D80: fldz
+0x4F5D80: fldz; AchievementsNative decode: stock IsXBox eval stores 0.0 into result on PC; MGPostQuestScript gates addachievement 40 behind isxbox == 1.
 0x4F5D82: mov     eax, [esp+arg_C]
 0x4F5D86: fst     qword ptr [eax]
 0x4F5D88: cmp     byte ptr ds:0B361ACh, 0

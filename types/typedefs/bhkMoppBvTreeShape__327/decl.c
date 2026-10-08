@@ -1,1 +1,1 @@
-bhkMoppBvTreeShape
+struct bhkMoppBvTreeShape;

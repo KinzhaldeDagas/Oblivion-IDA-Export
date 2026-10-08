@@ -1,31 +1,30 @@
-void __thiscall sub_65A970(void *this, _BYTE *a2, char a3, int a4, char a5)
+// Reference animation sound-note playback. Resolves a Sound: note token through SoundMap_ResolveAnimSoundNote, plays it, positions it on the reference when requested, and applies volume/loop flags.
+void __thiscall TESObjectREFR_PlayResolvedAnimSoundNote(void *this, _BYTE *a2, char a3, int a4, char a5)
 {
-  _DWORD **sound; // edi
+  int *sound; // edi
   int v7; // eax
-  int *v8; // eax
-  int *v9; // esi
-  float *v10; // eax
+  int *v8; // esi
+  float *v9; // eax
 
-  sound = (_DWORD **)OSGlobals->sound;
-  if ( sound )
+  sound = (int *)MEMORY[0xB33398]->sound; /*0x65a97b*/
+  if ( sound ) /*0x65a984*/
   {
-    if ( (*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x154))(this) )
+    if ( (*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x154))(this) ) /*0x65a993*/
     {
-      v7 = sub_447490(a2);
-      if ( v7 )
+      v7 = SoundMap_ResolveAnimSoundNote(a2); /*0x65a9a8*/
+      if ( v7 ) /*0x65a9af*/
       {
-        OSGLobals_PlaySound(*(_DWORD *)(v7 + 0xC), a4, a5);
-        v9 = v8;
-        if ( v8 )
+        v8 = OSGLobals_PlaySound(sound, *(void **)(v7 + 0xC), a4, a5); /*0x65a9cb*/
+        if ( v8 ) /*0x65a9cf*/
         {
-          if ( (a4 & 2) != 0 )
+          if ( (a4 & 2) != 0 ) /*0x65a9d4*/
           {
-            v10 = (float *)(*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x174))(this);
-            sub_6B7360(v9, *v10, v10[1], v10[2]);
-            sub_6AC3E0(sound, *v9, (LONG)this);
+            v9 = (float *)(*(int (__thiscall **)(void *))(*(_DWORD *)this + 0x174))(this); /*0x65a9e1*/
+            sub_6B7360(v8, *v9, v9[1], v9[2]); /*0x65aa13*/
+            sub_6AC3E0((_DWORD **)sound, *v8, (LONG)this); /*0x65aa1e*/
           }
-          sub_6B7280(v9, 1.0);
-          sub_6B7190(v9, a3);
+          sub_6B7280(v8, 1.0); /*0x65aa2b*/
+          sub_6B7190(v8, a3); /*0x65aa37*/
         }
       }
     }

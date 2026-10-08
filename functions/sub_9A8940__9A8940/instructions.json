@@ -253,7 +253,7 @@
   },
   {
     "ea": "0x9A89BE",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -277,19 +277,19 @@
   },
   {
     "ea": "0x9A89CD",
-    "line": "push    ebx; Size",
+    "line": "push    ebx; byteCount",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A89CE",
-    "line": "push    ecx; Src",
+    "line": "push    ecx; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x9A89CF",
-    "line": "push    eax; Dst",
+    "line": "push    eax; destination",
     "mnemonic": "push",
     "size": 1
   },
@@ -301,7 +301,7 @@
   },
   {
     "ea": "0x9A89D3",
-    "line": "call    _memcpy",
+    "line": "call    _memcpy;",
     "mnemonic": "call",
     "size": 5
   },
@@ -451,7 +451,7 @@
   },
   {
     "ea": "0x9A8A0E",
-    "line": "cmp     byte_B4295B, 0",
+    "line": "cmp     g_D3DXParameterDispatchInitialized, 0",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -463,7 +463,7 @@
   },
   {
     "ea": "0x9A8A17",
-    "line": "call    sub_783C70",
+    "line": "call    NiD3DHLSLShader__InitializeParameterClassTables; Initializes the HLSL/D3DX parameter-class dispatch lookup once (observed identity mapping for supported class codes) and sets the ready flag.",
     "mnemonic": "call",
     "size": 5
   },
@@ -493,7 +493,7 @@
   },
   {
     "ea": "0x9A8A2B",
-    "line": "mov     ecx, dword_B428D8[edi*4]",
+    "line": "mov     ecx, g_D3DXParameterClassDispatch[edi*4]",
     "mnemonic": "mov",
     "size": 7
   },

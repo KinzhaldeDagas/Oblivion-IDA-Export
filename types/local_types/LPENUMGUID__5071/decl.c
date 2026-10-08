@@ -1,1 +1,1 @@
-LPENUMGUID
+typedef IEnumGUID_0 *LPENUMGUID;

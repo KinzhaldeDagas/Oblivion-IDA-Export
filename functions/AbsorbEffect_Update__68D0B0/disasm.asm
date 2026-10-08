@@ -82,4 +82,4 @@
 0x68D18A: jp      short AbsorbEffect_Update___ApplyToCaster
 0x68D18C: push    0
 0x68D18E: mov     ecx, esi
-0x68D190: call    ActiveEffect_Base_Remove
+0x68D190: call    ActiveEffect_Base_Remove; Verified termination API: sets bTerminated=1. When its flush flag is true, immediately invokes ActiveEffect_Base_ProcessEffect to run termination cleanup.

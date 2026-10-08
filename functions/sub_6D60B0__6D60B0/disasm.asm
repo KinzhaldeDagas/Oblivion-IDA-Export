@@ -1,4 +1,4 @@
-0x6D60B0: sub     esp, 18h
+0x6D60B0: sub     esp, 18h; NiTransformInterpolator virtual transform update (+0x4C). Returns cached 0x20-byte transform when time equals +0x08; otherwise evaluates translation, rotation, and scale tracks from data +0x2C, maintaining key cursors at +0x30/+0x32/+0x34, updates cached transform +0x0C, copies it to the caller, and caches time only when the transform is valid.
 0x6D60B3: push    ebx
 0x6D60B4: mov     ebx, ecx
 0x6D60B6: fld     dword ptr [ebx+8]
@@ -18,7 +18,7 @@
 0x6D60D7: mov     ecx, 8
 0x6D60DC: rep movsd
 0x6D60DE: mov     ecx, eax
-0x6D60E0: call    sub_6CBC10
+0x6D60E0: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6D60E5: pop     edi
 0x6D60E6: test    al, al
 0x6D60E8: pop     esi
@@ -49,7 +49,7 @@
 0x6D6125: lea     eax, [esp+3Ch+var_10]
 0x6D6129: fstp    [esp+3Ch+var_3C]; float
 0x6D612C: push    eax; int
-0x6D612D: call    sub_6BBBA0
+0x6D612D: call    NiPosKey_EvaluateTrack; Oblivion 3-component position/vector key-track evaluator. One key or sentinel time returns key value at +4. Otherwise cursor-assisted bracket search uses the supplied byte stride, normalized segment time selects the interpolation-type dispatch table, and the lower-key cursor is written back.
 0x6D6132: add     esp, 1Ch
 0x6D6135: push    eax
 0x6D6136: lea     ecx, [ebx+0Ch]
@@ -80,7 +80,7 @@
 0x6D617D: lea     edx, [esp+3Ch+var_10]
 0x6D6181: fstp    [esp+3Ch+var_3C]; float
 0x6D6184: push    edx; int
-0x6D6185: call    sub_6BCF70
+0x6D6185: call    NiRotKey_EvaluateTrack; Oblivion quaternion rotation key-track evaluator. One key/sentinel time normally returns key quaternion at +4; interpolation type 4 uses its dedicated evaluator even for that case. Otherwise performs cursor-assisted timestamp bracketing, normalized segment-time evaluation through the rotation dispatch table, and writes back the lower-key cursor.
 0x6D618A: add     esp, 1Ch
 0x6D618D: push    eax
 0x6D618E: lea     ecx, [ebx+0Ch]
@@ -109,7 +109,7 @@
 0x6D61D3: push    eax; int
 0x6D61D4: push    ecx
 0x6D61D5: fstp    [esp+3Ch+var_3C]; float
-0x6D61D8: call    sub_6BB270
+0x6D61D8: call    NiFloatKey_EvaluateTrack; Oblivion scalar key-track evaluator. Returns the sole/first value for one key or sentinel time; otherwise resumes from the caller cursor, rewinds to key 0 when sample time precedes it, finds the bracketing timestamps using the supplied key stride, computes normalized segment time, dispatches by interpolation type, and stores the lower-key cursor.
 0x6D61DD: add     esp, 14h
 0x6D61E0: lea     ecx, [ebx+0Ch]
 0x6D61E3: fstp    [esp+28h+var_28]; float
@@ -124,7 +124,7 @@
 0x6D6201: mov     ecx, 8
 0x6D6206: rep movsd
 0x6D6208: mov     ecx, eax
-0x6D620A: call    sub_6CBC10
+0x6D620A: call    NiTransform_IsInvalid; Oblivion 0x20-byte transform invalid test: true only when translation.x, quaternion marker component at +0x10, and scale at +0x1C all equal the invalid float sentinel.
 0x6D620F: test    al, al
 0x6D6211: jz      short loc_6D621E
 0x6D6213: pop     edi

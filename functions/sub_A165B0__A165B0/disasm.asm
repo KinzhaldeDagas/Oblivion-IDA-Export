@@ -1,5 +1,5 @@
 0xA165B0: push    esi
-0xA165B1: mov     esi, dword_B333D8
+0xA165B1: mov     esi, dword ptr root
 0xA165B7: test    esi, esi
 0xA165B9: jz      short loc_A165D7
 0xA165BB: lea     eax, [esi+4]

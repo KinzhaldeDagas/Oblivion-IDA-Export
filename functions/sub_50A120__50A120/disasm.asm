@@ -1,4 +1,4 @@
-0x50A120: fldz
+0x50A120: fldz; ScriptEffectUpdate begin-block callback: returns 1.0 when the running Script has BYTE1(info.type) set, the same script-effect type gate used before m_scriptEffectInfo allocation.
 0x50A122: mov     eax, [esp+arg_10]
 0x50A126: test    eax, eax
 0x50A128: mov     ecx, [esp+arg_18]

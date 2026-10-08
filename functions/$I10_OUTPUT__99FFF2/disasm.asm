@@ -13,7 +13,7 @@
 0x9A000E: movsd
 0x9A000F: movsd
 0x9A0010: movsw
-0x9A0012: mov     edx, [ebp+var_8]
+0x9A0012: mov     edx, dword ptr [ebp+var_C+4]
 0x9A0015: mov     ecx, edx
 0x9A0017: mov     eax, 8000h
 0x9A001C: and     ecx, eax
@@ -39,7 +39,7 @@
 0x9A006A: jmp     short loc_9A0070
 0x9A006C: mov     byte ptr [ebx+2], 20h ; ' '
 0x9A0070: test    dx, dx
-0x9A0073: mov     esi, [ebp+var_C]
+0x9A0073: mov     esi, dword ptr [ebp+var_C]
 0x9A0076: mov     edi, [ebp+var_10]
 0x9A0079: jnz     short loc_9A00A9
 0x9A007B: test    esi, esi
@@ -139,8 +139,8 @@
 0x9A0187: sub     ecx, 60h ; '`'
 0x9A018A: cmp     ebx, eax
 0x9A018C: mov     word ptr [ebp+var_16], dx
-0x9A0190: mov     [ebp+var_1A], esi
-0x9A0193: mov     [ebp+var_20+2], edi
+0x9A0190: mov     dword ptr [ebp+var_20+6], esi
+0x9A0193: mov     dword ptr [ebp+var_20+2], edi
 0x9A0196: mov     word ptr [ebp+var_20], ax
 0x9A019A: mov     [ebp+var_68], ecx
 0x9A019D: jz      loc_9A0451
@@ -181,8 +181,8 @@
 0x9A0205: and     edi, esi
 0x9A0207: mov     [ebp+var_48], eax
 0x9A020A: mov     [ebp+var_10], eax
-0x9A020D: mov     [ebp+var_C], eax
-0x9A0210: mov     [ebp+var_8], eax
+0x9A020D: mov     dword ptr [ebp+var_C], eax
+0x9A0210: mov     dword ptr [ebp+var_C+4], eax
 0x9A0213: and     ecx, 8000h
 0x9A0219: cmp     dx, si
 0x9A021C: lea     eax, [edi+edx]
@@ -195,19 +195,19 @@
 0x9A023B: cmp     ax, 3FBFh
 0x9A023F: ja      short loc_9A0251
 0x9A0241: xor     eax, eax
-0x9A0243: mov     [ebp+var_1A+2], eax
+0x9A0243: mov     dword ptr [ebp+var_20+8], eax
 0x9A0246: mov     [ebp-1Ch], eax
-0x9A0249: mov     [ebp+var_20], eax
+0x9A0249: mov     dword ptr [ebp+var_20], eax
 0x9A024C: jmp     loc_9A0447
 0x9A0251: xor     esi, esi
 0x9A0253: cmp     dx, si
 0x9A0256: jnz     short loc_9A0275
 0x9A0258: inc     eax
-0x9A0259: test    [ebp+var_1A+2], 7FFFFFFFh
+0x9A0259: test    dword ptr [ebp+var_20+8], 7FFFFFFFh
 0x9A0260: jnz     short loc_9A0275
 0x9A0262: cmp     [ebp-1Ch], esi
 0x9A0265: jnz     short loc_9A0275
-0x9A0267: cmp     [ebp+var_20], esi
+0x9A0267: cmp     dword ptr [ebp+var_20], esi
 0x9A026A: jnz     short loc_9A0275
 0x9A026C: mov     word ptr [ebp+var_16], si
 0x9A0270: jmp     loc_9A0447
@@ -221,9 +221,9 @@
 0x9A028A: jnz     short loc_9A029E
 0x9A028C: cmp     [edx], esi
 0x9A028E: jnz     short loc_9A029E
-0x9A0290: mov     [ebp+var_1A+2], esi
+0x9A0290: mov     dword ptr [ebp+var_20+8], esi
 0x9A0293: mov     [ebp-1Ch], esi
-0x9A0296: mov     [ebp+var_20], esi
+0x9A0296: mov     dword ptr [ebp+var_20], esi
 0x9A0299: jmp     loc_9A0447
 0x9A029E: lea     edi, [ebp+var_C]
 0x9A02A1: mov     [ebp+var_5C], esi
@@ -273,23 +273,23 @@
 0x9A0326: add     eax, 0C002h
 0x9A032B: test    ax, ax
 0x9A032E: jle     short loc_9A036B
-0x9A0330: test    [ebp+var_8], 80000000h
+0x9A0330: test    dword ptr [ebp+var_C+4], 80000000h
 0x9A0337: jnz     short loc_9A0366
 0x9A0339: mov     edx, [ebp+var_10]
-0x9A033C: mov     edi, [ebp+var_C]
-0x9A033F: mov     esi, [ebp+var_C]
+0x9A033C: mov     edi, dword ptr [ebp+var_C]
+0x9A033F: mov     esi, dword ptr [ebp+var_C]
 0x9A0342: shl     [ebp+var_10], 1
 0x9A0345: shr     edx, 1Fh
 0x9A0348: add     edi, edi
 0x9A034A: or      edi, edx
-0x9A034C: mov     edx, [ebp+var_8]
+0x9A034C: mov     edx, dword ptr [ebp+var_C+4]
 0x9A034F: shr     esi, 1Fh
 0x9A0352: add     edx, edx
 0x9A0354: or      edx, esi
 0x9A0356: add     eax, 0FFFFh
 0x9A035B: test    ax, ax
-0x9A035E: mov     [ebp+var_C], edi
-0x9A0361: mov     [ebp+var_8], edx
+0x9A035E: mov     dword ptr [ebp+var_C], edi
+0x9A0361: mov     dword ptr [ebp+var_C+4], edx
 0x9A0364: jg      short loc_9A0330
 0x9A0366: test    ax, ax
 0x9A0369: jg      short loc_9A03BD
@@ -304,10 +304,10 @@
 0x9A0381: test    byte ptr [ebp+var_10], 1
 0x9A0385: jz      short loc_9A038A
 0x9A0387: inc     [ebp+var_48]
-0x9A038A: mov     edx, [ebp+var_8]
-0x9A038D: mov     edi, [ebp+var_C]
-0x9A0390: mov     esi, [ebp+var_C]
-0x9A0393: shr     [ebp+var_8], 1
+0x9A038A: mov     edx, dword ptr [ebp+var_C+4]
+0x9A038D: mov     edi, dword ptr [ebp+var_C]
+0x9A0390: mov     esi, dword ptr [ebp+var_C]
+0x9A0393: shr     dword ptr [ebp+var_C+4], 1
 0x9A0396: shl     edx, 1Fh
 0x9A0399: shr     edi, 1
 0x9A039B: or      edi, edx
@@ -316,7 +316,7 @@
 0x9A03A3: shr     edx, 1
 0x9A03A5: or      edx, esi
 0x9A03A7: dec     [ebp+var_44]
-0x9A03AA: mov     [ebp+var_C], edi
+0x9A03AA: mov     dword ptr [ebp+var_C], edi
 0x9A03AD: mov     [ebp+var_10], edx
 0x9A03B0: jnz     short loc_9A0381
 0x9A03B2: cmp     [ebp+var_48], 0
@@ -331,28 +331,28 @@
 0x9A03D6: cmp     [ebp+var_10+2], 0FFFFFFFFh
 0x9A03DA: jnz     short loc_9A0406
 0x9A03DC: and     [ebp+var_10+2], 0
-0x9A03E0: cmp     [ebp+var_C+2], 0FFFFFFFFh
+0x9A03E0: cmp     dword ptr [ebp+var_C+2], 0FFFFFFFFh
 0x9A03E4: jnz     short loc_9A0401
-0x9A03E6: and     [ebp+var_C+2], 0
-0x9A03EA: cmp     word ptr [ebp+var_8+2], 0FFFFh
+0x9A03E6: and     dword ptr [ebp+var_C+2], 0
+0x9A03EA: cmp     word ptr [ebp+var_C+6], 0FFFFh
 0x9A03F0: jnz     short loc_9A03FB
-0x9A03F2: mov     word ptr [ebp+var_8+2], 8000h
+0x9A03F2: mov     word ptr [ebp+var_C+6], 8000h
 0x9A03F8: inc     eax
 0x9A03F9: jmp     short loc_9A0409
-0x9A03FB: inc     word ptr [ebp+var_8+2]
+0x9A03FB: inc     word ptr [ebp+var_C+6]
 0x9A03FF: jmp     short loc_9A0409
-0x9A0401: inc     [ebp+var_C+2]
+0x9A0401: inc     dword ptr [ebp+var_C+2]
 0x9A0404: jmp     short loc_9A0409
 0x9A0406: inc     [ebp+var_10+2]
 0x9A0409: cmp     ax, 7FFFh
 0x9A040D: jnb     short loc_9A042B
 0x9A040F: mov     dx, word ptr [ebp+var_10+2]
 0x9A0413: mov     word ptr [ebp+var_20], dx
-0x9A0417: mov     edx, [ebp+var_C]
-0x9A041A: mov     [ebp+var_20+2], edx
-0x9A041D: mov     edx, [ebp+var_8]
+0x9A0417: mov     edx, dword ptr [ebp+var_C]
+0x9A041A: mov     dword ptr [ebp+var_20+2], edx
+0x9A041D: mov     edx, dword ptr [ebp+var_C+4]
 0x9A0420: or      eax, ecx
-0x9A0422: mov     [ebp+var_1A], edx
+0x9A0422: mov     dword ptr [ebp+var_20+6], edx
 0x9A0425: mov     word ptr [ebp+var_16], ax
 0x9A0429: jmp     short loc_9A0447
 0x9A042B: neg     cx
@@ -360,12 +360,12 @@
 0x9A0430: and     dword ptr [ebp-1Ch], 0
 0x9A0434: and     ecx, 80000000h
 0x9A043A: add     ecx, 7FFF8000h
-0x9A0440: and     [ebp+var_20], 0
-0x9A0444: mov     [ebp+var_1A+2], ecx
+0x9A0440: and     dword ptr [ebp+var_20], 0
+0x9A0444: mov     dword ptr [ebp+var_20+8], ecx
 0x9A0447: test    ebx, ebx
 0x9A0449: jnz     loc_9A01BA
 0x9A044F: xor     eax, eax
-0x9A0451: mov     ecx, [ebp+var_1A+2]
+0x9A0451: mov     ecx, dword ptr [ebp+var_20+8]
 0x9A0454: shr     ecx, 10h
 0x9A0457: cmp     cx, 3FFFh
 0x9A045C: mov     ebx, 7FFFh
@@ -382,8 +382,8 @@
 0x9A0481: lea     edi, [esi+edx]
 0x9A0484: mov     [ebp+var_58], eax
 0x9A0487: mov     [ebp+var_10], eax
-0x9A048A: mov     [ebp+var_C], eax
-0x9A048D: mov     [ebp+var_8], eax
+0x9A048A: mov     dword ptr [ebp+var_C], eax
+0x9A048D: mov     dword ptr [ebp+var_C+4], eax
 0x9A0490: movzx   edi, di
 0x9A0493: jnb     loc_9A0697
 0x9A0499: cmp     si, bx
@@ -392,16 +392,16 @@
 0x9A04A7: ja      loc_9A0697
 0x9A04AD: cmp     di, 3FBFh
 0x9A04B2: ja      short loc_9A04BC
-0x9A04B4: mov     [ebp+var_1A+2], eax
+0x9A04B4: mov     dword ptr [ebp+var_20+8], eax
 0x9A04B7: jmp     loc_9A06AB
 0x9A04BC: cmp     dx, ax
 0x9A04BF: jnz     short loc_9A04DE
 0x9A04C1: inc     edi
-0x9A04C2: test    [ebp+var_1A+2], 7FFFFFFFh
+0x9A04C2: test    dword ptr [ebp+var_20+8], 7FFFFFFFh
 0x9A04C9: jnz     short loc_9A04DE
 0x9A04CB: cmp     [ebp-1Ch], eax
 0x9A04CE: jnz     short loc_9A04DE
-0x9A04D0: cmp     [ebp+var_20], eax
+0x9A04D0: cmp     dword ptr [ebp+var_20], eax
 0x9A04D3: jnz     short loc_9A04DE
 0x9A04D5: mov     word ptr [ebp+var_16], ax
 0x9A04D9: jmp     loc_9A06B1
@@ -459,23 +459,23 @@
 0x9A057A: xor     eax, eax
 0x9A057C: cmp     di, ax
 0x9A057F: jle     short loc_9A05BD
-0x9A0581: test    [ebp+var_8], 80000000h
+0x9A0581: test    dword ptr [ebp+var_C+4], 80000000h
 0x9A0588: jnz     short loc_9A05B8
 0x9A058A: mov     edx, [ebp+var_10]
-0x9A058D: mov     ebx, [ebp+var_C]
-0x9A0590: mov     esi, [ebp+var_C]
+0x9A058D: mov     ebx, dword ptr [ebp+var_C]
+0x9A0590: mov     esi, dword ptr [ebp+var_C]
 0x9A0593: shl     [ebp+var_10], 1
 0x9A0596: shr     edx, 1Fh
 0x9A0599: add     ebx, ebx
 0x9A059B: or      ebx, edx
-0x9A059D: mov     edx, [ebp+var_8]
+0x9A059D: mov     edx, dword ptr [ebp+var_C+4]
 0x9A05A0: shr     esi, 1Fh
 0x9A05A3: add     edx, edx
 0x9A05A5: or      edx, esi
 0x9A05A7: add     edi, 0FFFFh
 0x9A05AD: cmp     di, ax
-0x9A05B0: mov     [ebp+var_C], ebx
-0x9A05B3: mov     [ebp+var_8], edx
+0x9A05B0: mov     dword ptr [ebp+var_C], ebx
+0x9A05B3: mov     dword ptr [ebp+var_C+4], edx
 0x9A05B6: jg      short loc_9A0581
 0x9A05B8: cmp     di, ax
 0x9A05BB: jg      short loc_9A060C
@@ -489,10 +489,10 @@
 0x9A05D1: test    byte ptr [ebp+var_10], 1
 0x9A05D5: jz      short loc_9A05DA
 0x9A05D7: inc     [ebp+var_58]
-0x9A05DA: mov     edx, [ebp+var_8]
-0x9A05DD: mov     ebx, [ebp+var_C]
-0x9A05E0: mov     esi, [ebp+var_C]
-0x9A05E3: shr     [ebp+var_8], 1
+0x9A05DA: mov     edx, dword ptr [ebp+var_C+4]
+0x9A05DD: mov     ebx, dword ptr [ebp+var_C]
+0x9A05E0: mov     esi, dword ptr [ebp+var_C]
+0x9A05E3: shr     dword ptr [ebp+var_C+4], 1
 0x9A05E6: shl     edx, 1Fh
 0x9A05E9: shr     ebx, 1
 0x9A05EB: or      ebx, edx
@@ -501,7 +501,7 @@
 0x9A05F3: shr     edx, 1
 0x9A05F5: or      edx, esi
 0x9A05F7: dec     eax
-0x9A05F8: mov     [ebp+var_C], ebx
+0x9A05F8: mov     dword ptr [ebp+var_C], ebx
 0x9A05FB: mov     [ebp+var_10], edx
 0x9A05FE: jnz     short loc_9A05D1
 0x9A0600: xor     eax, eax
@@ -516,47 +516,47 @@
 0x9A0623: jnz     short loc_9A0656
 0x9A0625: cmp     [ebp+var_10+2], 0FFFFFFFFh
 0x9A0629: jnz     short loc_9A0653
-0x9A062B: cmp     [ebp+var_C+2], 0FFFFFFFFh
+0x9A062B: cmp     dword ptr [ebp+var_C+2], 0FFFFFFFFh
 0x9A062F: mov     [ebp+var_10+2], eax
 0x9A0632: jnz     short loc_9A064E
-0x9A0634: cmp     word ptr [ebp+var_8+2], 0FFFFh
-0x9A063A: mov     [ebp+var_C+2], eax
+0x9A0634: cmp     word ptr [ebp+var_C+6], 0FFFFh
+0x9A063A: mov     dword ptr [ebp+var_C+2], eax
 0x9A063D: jnz     short loc_9A0648
-0x9A063F: mov     word ptr [ebp+var_8+2], 8000h
+0x9A063F: mov     word ptr [ebp+var_C+6], 8000h
 0x9A0645: inc     edi
 0x9A0646: jmp     short loc_9A0656
-0x9A0648: inc     word ptr [ebp+var_8+2]
+0x9A0648: inc     word ptr [ebp+var_C+6]
 0x9A064C: jmp     short loc_9A0656
-0x9A064E: inc     [ebp+var_C+2]
+0x9A064E: inc     dword ptr [ebp+var_C+2]
 0x9A0651: jmp     short loc_9A0656
 0x9A0653: inc     [ebp+var_10+2]
 0x9A0656: cmp     di, 7FFFh
 0x9A065B: jb      short loc_9A067B
 0x9A065D: neg     cx
 0x9A0660: mov     [ebp-1Ch], eax
-0x9A0663: mov     [ebp+var_20], eax
+0x9A0663: mov     dword ptr [ebp+var_20], eax
 0x9A0666: sbb     ecx, ecx
 0x9A0668: and     ecx, 80000000h
 0x9A066E: add     ecx, 7FFF8000h
-0x9A0674: mov     [ebp+var_1A+2], ecx
+0x9A0674: mov     dword ptr [ebp+var_20+8], ecx
 0x9A0677: xor     eax, eax
 0x9A0679: jmp     short loc_9A06B1
 0x9A067B: mov     ax, word ptr [ebp+var_10+2]
 0x9A067F: mov     word ptr [ebp+var_20], ax
-0x9A0683: mov     eax, [ebp+var_C]
-0x9A0686: mov     [ebp+var_20+2], eax
-0x9A0689: mov     eax, [ebp+var_8]
+0x9A0683: mov     eax, dword ptr [ebp+var_C]
+0x9A0686: mov     dword ptr [ebp+var_20+2], eax
+0x9A0689: mov     eax, dword ptr [ebp+var_C+4]
 0x9A068C: or      edi, ecx
-0x9A068E: mov     [ebp+var_1A], eax
+0x9A068E: mov     dword ptr [ebp+var_20+6], eax
 0x9A0691: mov     word ptr [ebp+var_16], di
 0x9A0695: jmp     short loc_9A0677
 0x9A0697: neg     cx
 0x9A069A: sbb     ecx, ecx
 0x9A069C: and     ecx, 80000000h
 0x9A06A2: add     ecx, 7FFF8000h
-0x9A06A8: mov     [ebp+var_1A+2], ecx
+0x9A06A8: mov     dword ptr [ebp+var_20+8], ecx
 0x9A06AB: mov     [ebp-1Ch], eax
-0x9A06AE: mov     [ebp+var_20], eax
+0x9A06AE: mov     dword ptr [ebp+var_20], eax
 0x9A06B1: test    [ebp+arg_10], 1
 0x9A06B5: mov     edx, [ebp+var_60]
 0x9A06B8: mov     ecx, [ebp+var_4C]
@@ -582,47 +582,47 @@
 0x9A06F5: cmp     [ebp+arg_C], ecx
 0x9A06F8: jle     short loc_9A06FD
 0x9A06FA: mov     [ebp+arg_C], ecx
-0x9A06FD: mov     esi, [ebp+var_1A+2]
+0x9A06FD: mov     esi, dword ptr [ebp+var_20+8]
 0x9A0700: shr     esi, 10h
 0x9A0703: push    8
 0x9A0705: sub     esi, 3FFEh
 0x9A070B: mov     word ptr [ebp+var_16], ax
 0x9A070F: pop     ebx
-0x9A0710: mov     eax, [ebp+var_20]
+0x9A0710: mov     eax, dword ptr [ebp+var_20]
 0x9A0713: mov     edi, [ebp-1Ch]
 0x9A0716: mov     ecx, [ebp-1Ch]
-0x9A0719: shl     [ebp+var_20], 1
+0x9A0719: shl     dword ptr [ebp+var_20], 1
 0x9A071C: shr     eax, 1Fh
 0x9A071F: add     edi, edi
 0x9A0721: or      edi, eax
-0x9A0723: mov     eax, [ebp+var_1A+2]
+0x9A0723: mov     eax, dword ptr [ebp+var_20+8]
 0x9A0726: shr     ecx, 1Fh
 0x9A0729: add     eax, eax
 0x9A072B: or      eax, ecx
 0x9A072D: dec     ebx
 0x9A072E: mov     [ebp-1Ch], edi
-0x9A0731: mov     [ebp+var_1A+2], eax
+0x9A0731: mov     dword ptr [ebp+var_20+8], eax
 0x9A0734: jnz     short loc_9A0710
 0x9A0736: test    esi, esi
 0x9A0738: jge     short loc_9A076C
 0x9A073A: neg     esi
 0x9A073C: and     esi, 0FFh
 0x9A0742: jle     short loc_9A076C
-0x9A0744: mov     eax, [ebp+var_1A+2]
+0x9A0744: mov     eax, dword ptr [ebp+var_20+8]
 0x9A0747: mov     edi, [ebp-1Ch]
 0x9A074A: mov     ecx, [ebp-1Ch]
-0x9A074D: shr     [ebp+var_1A+2], 1
+0x9A074D: shr     dword ptr [ebp+var_20+8], 1
 0x9A0750: shl     eax, 1Fh
 0x9A0753: shr     edi, 1
 0x9A0755: or      edi, eax
-0x9A0757: mov     eax, [ebp+var_20]
+0x9A0757: mov     eax, dword ptr [ebp+var_20]
 0x9A075A: shl     ecx, 1Fh
 0x9A075D: shr     eax, 1
 0x9A075F: or      eax, ecx
 0x9A0761: dec     esi
 0x9A0762: test    esi, esi
 0x9A0764: mov     [ebp-1Ch], edi
-0x9A0767: mov     [ebp+var_20], eax
+0x9A0767: mov     dword ptr [ebp+var_20], eax
 0x9A076A: jg      short loc_9A0744
 0x9A076C: mov     eax, [ebp+arg_C]
 0x9A076F: inc     eax
@@ -631,20 +631,20 @@
 0x9A0775: mov     [ebp+var_40], ebx
 0x9A0778: mov     [ebp+var_4C], eax
 0x9A077B: jle     loc_9A0836
-0x9A0781: mov     edx, [ebp+var_20]
+0x9A0781: mov     edx, dword ptr [ebp+var_20]
 0x9A0784: mov     eax, [ebp-1Ch]
 0x9A0787: lea     esi, [ebp+var_20]
 0x9A078A: lea     edi, [ebp+var_3C]
 0x9A078D: movsd
 0x9A078E: movsd
 0x9A078F: movsd
-0x9A0790: shl     [ebp+var_20], 1
-0x9A0793: mov     edi, [ebp+var_20]
-0x9A0796: shl     [ebp+var_20], 1
+0x9A0790: shl     dword ptr [ebp+var_20], 1
+0x9A0793: mov     edi, dword ptr [ebp+var_20]
+0x9A0796: shl     dword ptr [ebp+var_20], 1
 0x9A0799: shr     edx, 1Fh
 0x9A079C: lea     ecx, [eax+eax]
 0x9A079F: or      ecx, edx
-0x9A07A1: mov     edx, [ebp+var_1A+2]
+0x9A07A1: mov     edx, dword ptr [ebp+var_20+8]
 0x9A07A4: mov     esi, eax
 0x9A07A6: shr     esi, 1Fh
 0x9A07A9: add     edx, edx
@@ -656,7 +656,7 @@
 0x9A07B8: mov     edx, [ebp+var_3C]
 0x9A07BB: shr     edi, 1Fh
 0x9A07BE: or      ecx, eax
-0x9A07C0: mov     eax, [ebp+var_20]
+0x9A07C0: mov     eax, dword ptr [ebp+var_20]
 0x9A07C3: or      esi, edi
 0x9A07C5: lea     edi, [edx+eax]
 0x9A07C8: cmp     edi, eax
@@ -688,9 +688,9 @@
 0x9A0800: add     ecx, ecx
 0x9A0802: or      ecx, edx
 0x9A0804: lea     esi, [edi+edi]
-0x9A0807: mov     [ebp+var_20], esi
+0x9A0807: mov     dword ptr [ebp+var_20], esi
 0x9A080A: mov     esi, [ebp+var_44]
-0x9A080D: mov     [ebp+var_1A+2], ecx
+0x9A080D: mov     dword ptr [ebp+var_20+8], ecx
 0x9A0810: shr     ecx, 18h
 0x9A0813: add     esi, esi
 0x9A0815: add     cl, 30h ; '0'
